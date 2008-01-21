@@ -24,6 +24,11 @@ public:
 	* Returns the time in seconds from start until this call.
 	*/
 	virtual double GetElapsed() const = 0;
+
+	/**
+	* Returns the timer resolution in seconds.
+	*/
+	virtual double GetTimerResolution() const = 0;
 };
 
 

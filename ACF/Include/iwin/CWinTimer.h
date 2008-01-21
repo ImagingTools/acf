@@ -11,20 +11,20 @@ namespace iwin
 
 class CWinTimer: public isys::ITimer
 {
-
 public:
 	CWinTimer();
 
-	bool isVaild() const;
+	bool IsVaild() const;
 
 	// reimplemented (isys::ITimer)
 	virtual void Start();
 	virtual double GetElapsed() const;
+	virtual double GetTimerResolution() const;
 
 protected:
 	long long m_startCounter;
 	long long m_timerFrequence;
-	bool m_valid;
+	bool m_isValid;
 };
 
 

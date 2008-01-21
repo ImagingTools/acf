@@ -32,16 +32,16 @@ public:
 	static isys::ISystem* GetDefaultSystemPtr();
 
 protected:
-	static void SetDefaultSystemPtr(ISystem* systemPtr);
+	static void SetDefaultSystemPtr(isys::ISystem* systemPtr);
 
 protected:
-	static ISystem* s_defaultSystemPtr;
+	static isys::ISystem* s_defaultSystemPtr;
 };
 
 
 // public static members
 
-inline ISystem* ISystem::GetDefaultSystemPtr()
+inline isys::ISystem* ISystem::GetDefaultSystemPtr()
 {
 	return s_defaultSystemPtr;
 }
@@ -49,7 +49,7 @@ inline ISystem* ISystem::GetDefaultSystemPtr()
 
 // protected static members
 
-inline void ISystem::SetDefaultSystemPtr(ISystem* systemPtr)
+inline void ISystem::SetDefaultSystemPtr(isys::ISystem* systemPtr)
 {
 	s_defaultSystemPtr = systemPtr;
 }

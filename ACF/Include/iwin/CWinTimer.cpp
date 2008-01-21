@@ -12,11 +12,17 @@ CWinTimer::CWinTimer()
 {
 	m_startCounter = 0;
 
-	m_valid = ::QueryPerformanceFrequency((LARGE_INTEGER*)&m_timerFrequence) != 0;
+	m_isValid = (::QueryPerformanceFrequency((LARGE_INTEGER*)&m_timerFrequence) != 0);
 
-	if (m_valid){
+	if (m_isValid){
 		Start();
 	}
+}
+
+
+bool CWinTimer::IsVaild() const
+{
+	return m_isValid;
 }
 
 
@@ -35,6 +41,13 @@ double CWinTimer::GetElapsed() const
 
 	return (endCounter - m_startCounter) / (double)(m_timerFrequence);
 }
+
+
+double CWinTimer::GetTimerResolution() const
+{
+	return 1.0 / (double)(m_timerFrequence);
+}
+
 
 
 } // namespace iwin
