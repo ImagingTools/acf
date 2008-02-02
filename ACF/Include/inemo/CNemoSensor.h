@@ -23,8 +23,6 @@ class CNemoSensor: public acf::ModelTemplate<acf::NamedTemplate<inemo::INemoSens
 {
 public:
 	CNemoSensor();
-
-	
 };
 
 

@@ -55,8 +55,6 @@ public:
 	* Returns the fourth level sensor location.
 	*/
 	virtual std::string GetFourthLevelLocation() const = 0;
-
-		
 };
 
 

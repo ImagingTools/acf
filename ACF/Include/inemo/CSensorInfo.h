@@ -12,7 +12,7 @@ namespace inemo
 /**
 	\ingroup inemo
 
-	Implementation of sensor specification data record
+	Implementation of sensor info data record.
 */
 class CSensorInfo: public acf::Model
 {
