@@ -3,10 +3,10 @@
 #include "QtAcf/QtAcf.h"
 
 
-#include "iqtstd/CTabContainerGuiComp.h"
+#include "iqt/CTabContainerGuiComp.h"
 
 
-namespace iqtstd
+namespace iqt
 {
 
 
@@ -48,5 +48,4 @@ void CTabContainerGuiComp::destroyGui()
 }
 
 
-
-} // namespace iqtstd
+} // namespace iqt

@@ -1,8 +1,8 @@
-#include "QtNemoPackage.h"
+#include "CQtNemoPackage.h"
 
 
 
-QtNemoPackage::QtNemoPackage()
+CQtNemoPackage::CQtNemoPackage()
 	:acf::ComponentLibrary()
 {
 	acf::ComponentLibraryInfo info;
@@ -11,4 +11,4 @@ QtNemoPackage::QtNemoPackage()
 }
 
 
-EXPORT_COMPONENT_LIBRARY(acf::QtNemoPackage);
+EXPORT_COMPONENT_LIBRARY(CQtNemoPackage);

@@ -1,8 +1,8 @@
-#ifndef iqtstd_CTabContainerGuiComp_h_included
-#define iqtstd_CTabContainerGuiComp_h_included
+#ifndef iqt_CTabContainerGuiComp_h_included
+#define iqt_CTabContainerGuiComp_h_included
 
 
-#include "iqtstd.h"
+#include "iqt.h"
 
 
 #include <QTabWidget>
@@ -13,7 +13,7 @@
 #include "Comp/Attribute.h"
 
 
-namespace iqtstd
+namespace iqt
 {
 
 
@@ -35,8 +35,8 @@ protected:
 };
 
 
-} // namespace iqtstd
+} // namespace iqt
 
 
-#endif // !iqtstd_CTabContainerGuiComp_h_included
+#endif // !iqt_CTabContainerGuiComp_h_included
 

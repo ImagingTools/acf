@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="iqtstd"
+	Name="iqt"
 	ProjectGUID="{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}"
 	Keyword="Qt4VSv1.0">
 	<Platforms>
@@ -93,14 +93,14 @@
 			<File
 				RelativePath="..\CTabContainerGuiComp.cpp">
 			</File>
-			<File
-				RelativePath="..\CTabContainerGuiComp.h">
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath="..\CTabContainerGuiComp.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
