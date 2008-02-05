@@ -6,8 +6,6 @@
 
 #include "imeas/CMeasurementRange.h"
 
-#include "Persist/SerializableInterface.h"
-
 #include "Base/NamedInterface.h"
 
 
@@ -23,9 +21,19 @@ class CSensorSpecification;
 	Common interface of a NEMO sensor.
 	This interface provides access to the meta data of the sensor.
 */
-class INemoSensor: virtual public acf::SerializableInterface, virtual public acf::NamedInterface
+class INemoSensor: virtual public acf::NamedInterface
 {
 public:
+
+	enum SensorState
+	{
+		StateOK = 0,
+		StateWarning = 1,
+		StateError = 2,
+		StateUnknown = 3
+	};
+
+
 	/**
 	* Returns the sensor specification data.
 	*/
@@ -35,6 +43,16 @@ public:
 	* Returns the sensor measurment range.
 	*/
 	virtual const imeas::CMeasurementRange& GetMeasurementRange() const = 0;
+
+	/**
+	* Returns the current sensor state.
+	*/
+	virtual int GetState() const = 0;
+
+	/**
+	* Returns the current predicted sensor state.
+	*/
+	virtual int GetPredictedState() const = 0;
 
 	/**
 	* Returns the first level sensor location.

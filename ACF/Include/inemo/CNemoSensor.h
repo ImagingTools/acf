@@ -9,20 +9,45 @@
 
 #include "Base/NamedTemplate.h"
 
+#include "inemo/CSensorSpecification.h"
+
 
 namespace inemo
 {
+
+
+class INemoSystemModel;
 
 
 /**
 	\ingroup inemo
 
 	Common implementation of a NEMO sensor.
+	Sensors are created and managed by system model.
+	\sa inemo::INemoSystemModel
 */
 class CNemoSensor: public acf::ModelTemplate<acf::NamedTemplate<inemo::INemoSensor> >
 {
 public:
-	CNemoSensor();
+	CNemoSensor(const inemo::INemoSystemModel* systemModelPtr);
+
+	// reimplemented (inemo::INemoSensor)
+	virtual const CSensorSpecification& GetSensorSpecification() const;
+	virtual const imeas::CMeasurementRange& GetMeasurementRange() const;
+	virtual int GetState() const;
+	virtual int GetPredictedState() const;
+	virtual std::string GetFirstLevelLocation() const;
+	virtual std::string GetSecondLevelLocation() const;
+	virtual std::string GetThirdLevelLocation() const;
+	virtual std::string GetFourthLevelLocation() const;
+
+protected:
+	const inemo::INemoSystemModel* m_systemModelPtr;
+
+	CSensorSpecification m_specification;
+	imeas::CMeasurementRange  m_range;
+	int m_state;
+	int m_predictedState;
 };
 
 

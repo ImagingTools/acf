@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="istd"
-	ProjectGUID="{126B67F7-B779-4A80-A651-1111D5EDF583}"
-	SccProjectName="&quot;$/develop/modules/iwin&quot;, XRAAAAAA"
+	Name="imeas"
+	ProjectGUID="{621B67F7-B779-3A80-B651-1111D5EDF583}"
+	SccProjectName=""
 	SccLocalPath="..\iwin">
 	<Platforms>
 		<Platform
@@ -122,47 +122,17 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
-				RelativePath="..\CStaticServicesProvider.cpp">
-			</File>
-			<File
-				RelativePath="..\CString.cpp">
-			</File>
-			<File
-				RelativePath="..\istd.cpp">
+				RelativePath="..\CMeasurementRange.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
 			<File
-				RelativePath="..\CStaticServicesProvider.h">
+				RelativePath="..\CMeasurementRange.h">
 			</File>
 			<File
-				RelativePath="..\CString.h">
-			</File>
-			<File
-				RelativePath="..\IFactory.h">
-			</File>
-			<File
-				RelativePath="..\IPolymorphic.h">
-			</File>
-			<File
-				RelativePath="..\IServicesProvider.h">
-			</File>
-			<File
-				RelativePath="..\istd.h">
-			</File>
-			<File
-				RelativePath="..\ITrace.h">
-			</File>
-			<File
-				RelativePath="..\TFactory.h">
-			</File>
-			<File
-				RelativePath="..\TIObjectFactory.h">
-			</File>
-			<File
-				RelativePath="..\TObjectFactory.h">
+				RelativePath="..\imeas.h">
 			</File>
 		</Filter>
 	</Files>

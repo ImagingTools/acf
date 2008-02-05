@@ -37,6 +37,7 @@ protected:
 	acf::MultipleComponentDependency<acf::QtGuiInterface> m_slaveGuisCompIfPtr;
 	acf::ComponentDependency<acf::QtIconProviderInterface> m_iconsProviderCompIfPtr;
 	acf::StringListAttribute m_tabNamesAttr;
+	acf::IntAttribute m_iconSizeAttr;
 };
 
 

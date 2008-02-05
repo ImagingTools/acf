@@ -111,6 +111,9 @@
 				RelativePath="..\CNemoSensor.cpp">
 			</File>
 			<File
+				RelativePath="..\CNemoSystemModelComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CSensorInfo.cpp">
 			</File>
 			<File
@@ -125,6 +128,9 @@
 				RelativePath="..\CNemoSensor.h">
 			</File>
 			<File
+				RelativePath="..\CNemoSystemModelComp.h">
+			</File>
+			<File
 				RelativePath="..\CSensorInfo.h">
 			</File>
 			<File
@@ -134,7 +140,16 @@
 				RelativePath="..\inemo.h">
 			</File>
 			<File
+				RelativePath="..\INemoDatabaseAccessor.h">
+			</File>
+			<File
+				RelativePath="..\INemoDatabaseObserver.h">
+			</File>
+			<File
 				RelativePath="..\INemoSensor.h">
+			</File>
+			<File
+				RelativePath="..\INemoSystemModel.h">
 			</File>
 		</Filter>
 		<Filter

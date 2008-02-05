@@ -5,12 +5,7 @@
 /**
 \defgroup istd
 \ingroup ACF
-@{
-*/
 
-/** 
-@} 
-*/
 
 
 /**

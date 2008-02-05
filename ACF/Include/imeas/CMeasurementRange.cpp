@@ -1,7 +1,7 @@
 #include "imeas\CMeasurementRange.h"
 
 
-namespace inemo
+namespace imeas
 {
 
 

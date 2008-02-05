@@ -10,6 +10,13 @@
 @} 
 */
 
+/**
+	\brief This namespace contains the Qt based classes and components for the NEMO product.
+*/
+namespace iqtnemo
+{
+
+}
 
 
 #endif // !iqtnemo_h_included
