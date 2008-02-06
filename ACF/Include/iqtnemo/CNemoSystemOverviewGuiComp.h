@@ -17,19 +17,24 @@
 #include "generatedfiles/ui_CNemoSystemOverviewGuiComp.h"
 
 #include "inemo/INemoSystemModel.h"
+#include "iqtnemo/INemoSensorSelectionListener.h"
 
 
 namespace iqtnemo
 {
 
 
-class CNemoSystemOverviewGuiComp: public acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> >
+class CNemoSystemOverviewGuiComp:	public acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> >,
+									public iqtnemo::INemoSensorSelectionListener
 {
 public:
 	typedef acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> > BaseClass;
 
 	CNemoSystemOverviewGuiComp();
 	virtual ~CNemoSystemOverviewGuiComp();
+
+	// reimplemented (iqtnemo::INemoSensorSelectionListener)
+	virtual void OnSensorSelected(inemo::INemoSensor* selectedSensorPtr);
 
 	// reimplemented (acf::ObserverInterface)
 	virtual bool onAttached(acf::ModelInterface* modelPtr);
@@ -50,6 +55,9 @@ protected:
 	acf::ComponentDependency<acf::QtGuiInterface> m_systemOverviewGuiIfPtr;
 	acf::ComponentDependency<acf::QtGuiInterface> m_sensorDataGuiIfPtr;
 	acf::ComponentDependency<acf::ObserverInterface> m_sensorsObserverIfPtr;
+	acf::MultipleComponentDependency<acf::ObserverInterface> m_sensorObserversIfPtr;
+
+	inemo::INemoSensor* m_selectedSensorPtr;
 };
 
 

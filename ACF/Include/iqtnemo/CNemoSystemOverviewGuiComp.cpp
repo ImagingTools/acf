@@ -2,6 +2,7 @@
 
 
 #include "inemo/INemoSensors.h"
+#include "inemo/INemoSensor.h"
 
 #include "iqtnemo/CNemoSystemOverviewGuiComp.h"
 
@@ -15,15 +16,55 @@ CNemoSystemOverviewGuiComp::CNemoSystemOverviewGuiComp()
 	m_sensorListGuiIfPtr(this, "SensorListGui"),
 	m_systemOverviewGuiIfPtr(this, "SystemOverviewGui"),
 	m_sensorDataGuiIfPtr(this, "SensorInfoGui"),
-	m_sensorsObserverIfPtr(this, "SensorListObserver")
+	m_sensorsObserverIfPtr(this, "SensorListObserver"),
+	m_sensorObserversIfPtr(this, "SensorObservers"),
+	m_selectedSensorPtr(NULL)
 {
-
+	registerInterface<iqtnemo::INemoSensorSelectionListener>(this);
 }
 
 
 CNemoSystemOverviewGuiComp::~CNemoSystemOverviewGuiComp()
 {
 
+}
+
+
+// reimplemented (iqtnemo::INemoSensorSelectionListener)
+
+void CNemoSystemOverviewGuiComp::OnSensorSelected(inemo::INemoSensor* selectedSensorPtr)
+{
+	if (m_selectedSensorPtr == selectedSensorPtr){
+		return;
+	}
+
+	// detach old model from connected observers:
+	acf::ModelInterface* selectedModelPtr = dynamic_cast<acf::ModelInterface*>(m_selectedSensorPtr);
+	if (selectedModelPtr != NULL){
+		for (int observerIndex = 0; observerIndex < m_sensorObserversIfPtr.dependencyCount(); observerIndex++){
+			if (m_sensorObserversIfPtr.isValid(observerIndex)){
+				acf::ObserverInterface* observerPtr = m_sensorObserversIfPtr.interfacePtr(observerIndex);
+				if (observerPtr != NULL && selectedModelPtr->isAttached(*observerPtr)){
+					selectedModelPtr->detachObserver(observerPtr);
+				}
+			}
+		}
+	}
+
+	// attach new selected model to registered observers:
+	selectedModelPtr = dynamic_cast<acf::ModelInterface*>(selectedSensorPtr);
+	if (selectedModelPtr != NULL){
+		for (int observerIndex = 0; observerIndex < m_sensorObserversIfPtr.dependencyCount(); observerIndex++){
+			if (m_sensorObserversIfPtr.isValid(observerIndex)){
+				acf::ObserverInterface* observerPtr = m_sensorObserversIfPtr.interfacePtr(observerIndex);
+				if (observerPtr != NULL && !selectedModelPtr->isAttached(*observerPtr)){
+					selectedModelPtr->attachObserver(observerPtr);
+				}
+			}
+		}
+	}
+
+	m_selectedSensorPtr = selectedSensorPtr;
 }
 
 
@@ -67,6 +108,7 @@ void CNemoSystemOverviewGuiComp::updateEditor()
 void CNemoSystemOverviewGuiComp::updateModel()
 {
 }
+
 
 // reimplemented (acf::QtAbstractGuiComponent)
 
