@@ -16,11 +16,10 @@ CNemoSystemModelComp::CNemoSystemModelComp()
 	BaseClass3(),
 	m_databaseAccessorIfPtr(this, "DatabaseAccessor")
 {
-	m_sensorFactory.registerFactory(this, "Sensor");
-
-	registerItemFactory(&m_sensorFactory);
-
 	registerInterface<acf::ModelInterface>(this);
+
+	m_sensorFactory.registerFactory(this, "Sensor");
+	registerItemFactory(&m_sensorFactory);
 }
 
 
@@ -28,12 +27,16 @@ CNemoSystemModelComp::CNemoSystemModelComp()
 
 int CNemoSystemModelComp::GetSensorCount() const
 {
+	(const_cast<CNemoSystemModelComp*>(this))->GetFromDatabase();
+
 	return BaseClass2::itemCount();
 }
 
 
 inemo::INemoSensor& CNemoSystemModelComp::GetSensor(int sensorIndex) const
 {
+	(const_cast<CNemoSystemModelComp*>(this))->GetFromDatabase();
+
 	static inemo::CNemoSensor emptySensor(this);
 
 	assert(sensorIndex >= 0);
@@ -68,7 +71,9 @@ inemo::INemoSensor* CNemoSystemModelComp::createObject()
 bool CNemoSystemModelComp::onInitialize(acf::ComponentManagerInterface* managerPtr)
 {
 	if (BaseClass3::onInitialize(managerPtr)){
-		GetFromDatabase();
+		if (m_databaseAccessorIfPtr.isValid()){
+			m_databaseAccessorIfPtr->RegisterConsumer(this);
+		}
 
 		return true;
 	}
@@ -92,12 +97,11 @@ void CNemoSystemModelComp::GetFromDatabase()
 
 			sensorPtr->setName(m_databaseAccessorIfPtr->GetSensorName(sensorIndex));
 			
-			connectModel(modelPtr);			
+			// insert model into hierarchical structure:
+			addChildModel(modelPtr);			
 		}
 	}
 }
-
-
 
 
 } // namespace inemo

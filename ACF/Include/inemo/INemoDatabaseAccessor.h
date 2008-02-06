@@ -8,6 +8,8 @@
 
 #include "Base/WideString.h"
 
+#include "Model/ModelInterface.h"
+
 
 namespace inemo
 {
@@ -23,6 +25,7 @@ class INemoSystemModel;
 class INemoDatabaseAccessor: virtual public istd::IPolymorphic
 {
 public:
+	virtual void RegisterConsumer(acf::ModelInterface* consumerPtr) = 0;
 	virtual bool IsDatabaseConnected() const = 0;
 	virtual bool ConnectToDatabase() = 0;
 	virtual bool DisconnectFromDatabase() = 0;

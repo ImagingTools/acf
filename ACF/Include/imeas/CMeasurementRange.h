@@ -15,7 +15,7 @@ namespace imeas
 /**
 	\ingroup imeas
 
-	Implementatiob of a measurement range.
+	Implementation of a measurement range.
 */
 class CMeasurementRange: virtual public istd::IPolymorphic
 {

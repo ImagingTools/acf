@@ -26,5 +26,5 @@ public:
 } // namespace istd
 
 
-#endif // istd_TIObjectFactory_h_included
+#endif // !istd_TIObjectFactory_h_included
 

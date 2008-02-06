@@ -158,7 +158,6 @@ void CNemoSensorTreeGuiComp::ResetView()
 	while (SensorList->topLevelItemCount()){
 		SensorList->takeTopLevelItem(0);
 	}
-
 }
 
 

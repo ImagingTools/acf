@@ -22,6 +22,12 @@ CNemoDatabaseAccessorComp::CNemoDatabaseAccessorComp()
 
 // reimplemented (acf::INemoDatabaseAccessor)
 
+void CNemoDatabaseAccessorComp::RegisterConsumer(acf::ModelInterface* consumerPtr)
+{
+	m_modelConsumers.insert(consumerPtr);
+}
+
+
 bool CNemoDatabaseAccessorComp::IsDatabaseConnected() const
 {
 	return m_tableModelPtr != NULL;
@@ -92,10 +98,9 @@ bool CNemoDatabaseAccessorComp::onInitialize(acf::ComponentManagerInterface* man
 		if (db.open()){
 			m_tableModelPtr = new QSqlTableModel(this, db);
 			m_tableModelPtr->setTable("nemo.sensors");
-			m_tableModelPtr->select();
-
-			QString error = db.lastError().text();
-			qDebug(error);
+	
+			connect(&m_checkModelTimer, SIGNAL(timeout()), this, SLOT(RefreshModel()));
+			m_checkModelTimer.start(1000); 
 		}
 		else{
 			QString error = db.lastError().text();
@@ -107,6 +112,23 @@ bool CNemoDatabaseAccessorComp::onInitialize(acf::ComponentManagerInterface* man
 	}
 
 	return false;
+}
+
+
+
+// private slots
+
+void CNemoDatabaseAccessorComp::RefreshModel()
+{
+	if (m_tableModelPtr != NULL){
+		if (m_tableModelPtr->select()){
+			for (ModelConsumers::iterator index = m_modelConsumers.begin(); index != m_modelConsumers.end(); index++){
+				if (*index != NULL){
+					(*index)->notifyUpdate();
+				}
+			}
+		}
+	}
 }
 
 
