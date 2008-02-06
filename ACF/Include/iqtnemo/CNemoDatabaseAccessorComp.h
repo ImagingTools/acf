@@ -47,6 +47,7 @@ public:
 
 	// reimplemented (acf::ComponentInterface)
 	virtual bool onInitialize(acf::ComponentManagerInterface* managerPtr);
+	virtual void onDeinitialize(acf::ComponentManagerInterface* managerPtr);
 
 private slots:
 	void RefreshModel();
@@ -54,6 +55,7 @@ private slots:
 private:
 	typedef std::set<acf::ModelInterface*> ModelConsumers;
 
+	QSqlDatabase m_database;
 	QSqlTableModel* m_tableModelPtr;
 
 	acf::StringAttribute m_databaseNameAttr;
@@ -64,6 +66,7 @@ private:
 	ModelConsumers m_modelConsumers;
 
 	QTimer m_checkModelTimer;
+
 };
 
 

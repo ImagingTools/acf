@@ -88,22 +88,22 @@ int CNemoDatabaseAccessorComp::GetSensor(int sensorIndex) const
 bool CNemoDatabaseAccessorComp::onInitialize(acf::ComponentManagerInterface* managerPtr)
 {
 	if (BaseClass::onInitialize(managerPtr)){
-		QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+		m_database = QSqlDatabase::addDatabase("QPSQL");
 
-		db.setHostName(acf::qtString(m_hostNameAttr.value()));
-		db.setDatabaseName(acf::qtString(m_databaseNameAttr.value()));
-		db.setUserName(acf::qtString(m_userNameAttr.value()));
-		db.setPassword(acf::qtString(m_passwordAttr.value()));
+		m_database.setHostName(acf::qtString(m_hostNameAttr.value()));
+		m_database.setDatabaseName(acf::qtString(m_databaseNameAttr.value()));
+		m_database.setUserName(acf::qtString(m_userNameAttr.value()));
+		m_database.setPassword(acf::qtString(m_passwordAttr.value()));
 		
-		if (db.open()){
-			m_tableModelPtr = new QSqlTableModel(this, db);
+		if (m_database.open()){
+			m_tableModelPtr = new QSqlTableModel(this, m_database);
 			m_tableModelPtr->setTable("nemo.sensors");
 	
 			connect(&m_checkModelTimer, SIGNAL(timeout()), this, SLOT(RefreshModel()));
 			m_checkModelTimer.start(1000); 
 		}
 		else{
-			QString error = db.lastError().text();
+			QString error = m_database.lastError().text();
 
 			qDebug(error);
 		}
@@ -112,6 +112,14 @@ bool CNemoDatabaseAccessorComp::onInitialize(acf::ComponentManagerInterface* man
 	}
 
 	return false;
+}
+
+
+void CNemoDatabaseAccessorComp::onDeinitialize(acf::ComponentManagerInterface* managerPtr)
+{
+	m_database.close();
+
+	BaseClass::onDeinitialize(managerPtr);
 }
 
 
