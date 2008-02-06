@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="iqtnemo"
-	ProjectGUID="{FB8AA465-6DDD-4E1B-ABF5-19E4BE6CDD59}"
+	Name="iqtdb"
+	ProjectGUID="{FB8AA492-4CFD-4E1B-ABF8-09E4BE6CDD59}"
 	Keyword="Qt4VSv1.0">
 	<Platforms>
 		<Platform
@@ -53,7 +53,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./;../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
 				PreprocessorDefinitions="QtCompLib_DLL_EXPORT;UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
@@ -91,13 +91,10 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\CNemoSensorsModelComp.cpp">
+				RelativePath="..\CDatabaseConnectorComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CNemoSensorTreeGuiComp.cpp">
-			</File>
-			<File
-				RelativePath="..\CNemoSystemOverviewGuiComp.cpp">
+				RelativePath="..\CTableModelCompBase.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -105,7 +102,7 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\CNemoSensorsModelComp.h">
+				RelativePath="..\CDatabaseConnectorComp.h">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -126,13 +123,30 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\CNemoSensorTreeGuiComp.h">
+				RelativePath="..\CTableModelCompBase.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing CTableModelCompBase.h..."
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.\..\..&quot; -I&quot;$(ACFDIR)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CTableModelCompBase.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CTableModelCompBase.cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CTableModelCompBase.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CTableModelCompBase.cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing CTableModelCompBase.h..."
+						CommandLine="$(QTDIR)\bin\moc.exe  -DQtCompLib_DLL_EXPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.\..\..&quot; -I&quot;$(ACFDIR)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CTableModelCompBase.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CTableModelCompBase.cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CTableModelCompBase.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CTableModelCompBase.cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\CNemoSystemOverviewGuiComp.h">
-			</File>
-			<File
-				RelativePath="..\iqtnemo.h">
+				RelativePath="..\iqtdb.h">
 			</File>
 		</Filter>
 		<Filter
@@ -146,87 +160,39 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath=".\generatedfiles\ui_CNemoSensorInfoGuiComp.h">
+				RelativePath=".\GeneratedFiles\Debug\moc_CTableModelCompBase.cpp">
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\generatedfiles\ui_CNemoSensorTreeGuiComp.h">
-			</File>
-			<File
-				RelativePath=".\generatedfiles\ui_CNemoSystemOverviewGuiComp.h">
+				RelativePath=".\GeneratedFiles\Release\moc_CTableModelCompBase.cpp">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			Filter="">
-			<File
-				RelativePath="..\CNemoSensorInfoGuiComp.ui">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui
-"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot;"/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\CNemoSensorTreeGuiComp.ui">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui
-"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot;"/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\CNemoSystemOverviewGuiComp.ui">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot; ../CNemoSystemOverviewGuiComp.ui
-"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot;"/>
-				</FileConfiguration>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

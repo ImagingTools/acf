@@ -6,6 +6,7 @@
 
 
 #include "QtAcf/QtGuiTemplateBasedComponent.h"
+#include "QtAcf/QtAbstractGuiObserverComp.h"
 
 #include "Comp/MultipleComponentDependency.h"
 #include "Comp/Attribute.h"
@@ -15,18 +16,29 @@
 
 #include "generatedfiles/ui_CNemoSystemOverviewGuiComp.h"
 
+#include "inemo/INemoSystemModel.h"
+
 
 namespace iqtnemo
 {
 
 
-class CNemoSystemOverviewGuiComp: public acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> 
+class CNemoSystemOverviewGuiComp: public acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> >
 {
 public:
-	typedef acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> BaseClass;
+	typedef acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSystemOverviewGuiComp> > BaseClass;
 
 	CNemoSystemOverviewGuiComp();
 	virtual ~CNemoSystemOverviewGuiComp();
+
+	// reimplemented (acf::ObserverInterface)
+	virtual bool onAttached(acf::ModelInterface* modelPtr);
+	virtual void onDetached(acf::ModelInterface* modelPtr);
+	virtual void update(acf::ModelInterface* modelPtr);
+
+	// reimplemented (acf::ModelEditorInterface)
+	virtual void updateEditor();
+	virtual void updateModel();
 
 protected:
 	// reimplemented (acf::QtAbstractGuiComponent)
@@ -37,8 +49,7 @@ protected:
 	acf::ComponentDependency<acf::QtGuiInterface> m_sensorListGuiIfPtr;
 	acf::ComponentDependency<acf::QtGuiInterface> m_systemOverviewGuiIfPtr;
 	acf::ComponentDependency<acf::QtGuiInterface> m_sensorDataGuiIfPtr;
-//	acf::ComponentDependency<acf::ObserverInterface> m_sensorDataObserverIfPtr;
-//	acf::ComponentDependency<acf::ObserverInterface> m_systemOverviewObserverIfPtr;
+	acf::ComponentDependency<acf::ObserverInterface> m_sensorsObserverIfPtr;
 };
 
 

@@ -130,13 +130,13 @@ void CNemoSensorTreeGuiComp::initializeGui()
 
 void CNemoSensorTreeGuiComp::UpdateView()
 {
-	inemo::INemoSystemModel* nemoModelPtr = objectPtr();
-	assert(nemoModelPtr != NULL);
+	inemo::INemoSensors* nemoSensorsPtr = objectPtr();
+	assert(nemoSensorsPtr != NULL);
 
-	int sensorCount = nemoModelPtr->GetSensorCount();
+	int sensorCount = nemoSensorsPtr->GetSensorCount();
 
 	for (int sensorIndex = 0; sensorIndex < sensorCount; sensorIndex++){
-		inemo::INemoSensor& sensor = nemoModelPtr->GetSensor(sensorIndex);
+		inemo::INemoSensor& sensor = nemoSensorsPtr->GetSensor(sensorIndex);
 
 		QTreeWidgetItem* sensorItem = new QTreeWidgetItem();
 		sensorItem->setText(0, acf::qtString(sensor.name()));

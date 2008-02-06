@@ -28,6 +28,15 @@ class CNemoSensor: public acf::ModelTemplate<acf::NamedTemplate<inemo::INemoSens
 public:
 	CNemoSensor();
 
+	virtual void SetSensorSpecification(const CSensorSpecification& sensorSpecification);
+	virtual void SetMeasurementRange(const imeas::CMeasurementRange& measurementRange);
+	virtual void SetState(int state);
+	virtual void SetPredictedState(int predictedState);
+	virtual void SetFirstLevelLocation();
+	virtual void SetSecondLevelLocation();
+	virtual void SetThirdLevelLocation();
+	virtual void SetFourthLevelLocation();
+
 	// reimplemented (inemo::INemoSensor)
 	virtual const CSensorSpecification& GetSensorSpecification() const;
 	virtual const imeas::CMeasurementRange& GetMeasurementRange() const;

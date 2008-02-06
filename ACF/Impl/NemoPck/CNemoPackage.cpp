@@ -14,6 +14,7 @@ CNemoPackage::CNemoPackage()
 	setLibraryInfo(info);
 
 	registerComponent<CNemoSystemModelComp>("NemoSystemModel");
+	registerComponent<CNemoSystemModelComp>("NemoSystemModel");
 }
 
 

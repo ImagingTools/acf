@@ -16,7 +16,7 @@
 
 #include "QtCompLib/QtIconProviderInterface.h"
 
-#include "inemo/INemoSystemModel.h"
+#include "inemo/INemoSensors.h"
 
 #include "generatedfiles/ui_CNemoSensorTreeGuiComp.h"
 
@@ -25,10 +25,10 @@ namespace iqtnemo
 {
 
 
-class CNemoSensorTreeGuiComp: public acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSensorTreeGuiComp> >
+class CNemoSensorTreeGuiComp: public acf::QtAbstractGuiObserverComp<inemo::INemoSensors, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSensorTreeGuiComp> >
 {
 public:
-	typedef acf::QtAbstractGuiObserverComp<inemo::INemoSystemModel, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSensorTreeGuiComp> > BaseClass;
+	typedef acf::QtAbstractGuiObserverComp<inemo::INemoSensors, acf::QtGuiTemplateBasedComponent<QWidget, Ui::CNemoSensorTreeGuiComp> > BaseClass;
 
 	CNemoSensorTreeGuiComp();
 

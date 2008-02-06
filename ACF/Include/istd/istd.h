@@ -3,12 +3,9 @@
 
 
 /**
-\defgroup istd
-\ingroup ACF
+	\defgroup istd
+	\ingroup ACF
 
-
-
-/**
 	Contains the standard, system indenendent primitives and basic implementations.
 */
 namespace istd

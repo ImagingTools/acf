@@ -1,6 +1,8 @@
 #include "QtAcf/QtAcf.h"
 
 
+#include "inemo/INemoSensors.h"
+
 #include "iqtnemo/CNemoSystemOverviewGuiComp.h"
 
 
@@ -10,9 +12,10 @@ namespace iqtnemo
 
 CNemoSystemOverviewGuiComp::CNemoSystemOverviewGuiComp()
 	:BaseClass(), 
-	m_sensorListGuiIfPtr(this, "SensorTreeGui"),
+	m_sensorListGuiIfPtr(this, "SensorListGui"),
 	m_systemOverviewGuiIfPtr(this, "SystemOverviewGui"),
-	m_sensorDataGuiIfPtr(this, "SensorInfoGui")
+	m_sensorDataGuiIfPtr(this, "SensorInfoGui"),
+	m_sensorsObserverIfPtr(this, "SensorListObserver")
 {
 
 }
@@ -23,6 +26,47 @@ CNemoSystemOverviewGuiComp::~CNemoSystemOverviewGuiComp()
 
 }
 
+
+// reimplemented (acf::ObserverInterface)
+
+bool CNemoSystemOverviewGuiComp::onAttached(acf::ModelInterface* modelPtr)
+{
+	if (BaseClass::onAttached(modelPtr)){
+		if (m_sensorsObserverIfPtr.isValid()){
+			inemo::INemoSensors* sensorsModelPtr = m_objectPtr->GetNemoSensorsModel();
+			if (sensorsModelPtr != NULL){
+				sensorsModelPtr->attachObserver(m_sensorsObserverIfPtr.getInterface());
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
+void CNemoSystemOverviewGuiComp::onDetached(acf::ModelInterface* modelPtr)
+{
+	BaseClass::onDetached(modelPtr);
+}
+
+
+void CNemoSystemOverviewGuiComp::update(acf::ModelInterface* modelPtr)
+{
+}
+
+
+// reimplemented (acf::ModelEditorInterface)
+
+void CNemoSystemOverviewGuiComp::updateEditor()
+{
+}
+
+
+void CNemoSystemOverviewGuiComp::updateModel()
+{
+}
 
 // reimplemented (acf::QtAbstractGuiComponent)
 

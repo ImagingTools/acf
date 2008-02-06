@@ -11,6 +11,54 @@ CNemoSensor::CNemoSensor()
 }
 
 
+void CNemoSensor::SetSensorSpecification(const CSensorSpecification& sensorSpecification)
+{
+
+}
+
+
+void CNemoSensor::SetMeasurementRange(const imeas::CMeasurementRange& measurementRange)
+{
+
+}
+
+
+void CNemoSensor::SetState(int state)
+{
+
+}
+
+
+void CNemoSensor::SetPredictedState(int predictedState)
+{
+
+}
+
+
+void CNemoSensor::SetFirstLevelLocation()
+{
+
+}
+
+
+void CNemoSensor::SetSecondLevelLocation()
+{
+
+}
+
+
+void CNemoSensor::SetThirdLevelLocation()
+{
+
+}
+
+
+void CNemoSensor::SetFourthLevelLocation()
+{
+
+}
+
+
 // reimplemented (inemo::INemoSensor)
 
 const CSensorSpecification& CNemoSensor::GetSensorSpecification() const
