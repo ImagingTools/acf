@@ -5,10 +5,8 @@ namespace inemo
 {
 
 
-CNemoSensor::CNemoSensor(const inemo::INemoSystemModel* systemModelPtr)
+CNemoSensor::CNemoSensor()
 {
-	m_systemModelPtr = systemModelPtr;
-
 	m_state = StateUnknown;
 }
 

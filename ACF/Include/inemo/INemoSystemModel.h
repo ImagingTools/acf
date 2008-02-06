@@ -15,7 +15,7 @@ namespace inemo
 {
 
 
-class INemoSensor;
+class INemoSensors;
 
 /**
 	\ingroup inemo
@@ -24,18 +24,10 @@ class INemoSensor;
 	The system model reflects all changes in the nemo database.
 	All NEMO view components are direct or indirect observers of this model.
 */
-class INemoSystemModel: virtual public acf::SerializableInterface, virtual public acf::ModelInterface
+class INemoSystemModel: virtual public acf::ModelInterface
 {
 public:
-	/**
-	* Returns the number of sensors in the database.
-	*/
-	virtual int GetSensorCount() const = 0;
-
-	/**
-	* Returns the sensor with index \c sensorIndex.
-	*/
-	virtual inemo::INemoSensor& GetSensor(int sensorIndex) const = 0;
+	virtual inemo::INemoSensors* GetNemoSensorsModel() const = 0;
 };
 
 

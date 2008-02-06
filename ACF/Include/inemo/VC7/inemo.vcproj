@@ -149,6 +149,9 @@
 				RelativePath="..\INemoSensor.h">
 			</File>
 			<File
+				RelativePath="..\INemoSensors.h">
+			</File>
+			<File
 				RelativePath="..\INemoSystemModel.h">
 			</File>
 		</Filter>

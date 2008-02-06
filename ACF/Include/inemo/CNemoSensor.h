@@ -16,9 +16,6 @@ namespace inemo
 {
 
 
-class INemoSystemModel;
-
-
 /**
 	\ingroup inemo
 
@@ -29,7 +26,7 @@ class INemoSystemModel;
 class CNemoSensor: public acf::ModelTemplate<acf::NamedTemplate<inemo::INemoSensor> >
 {
 public:
-	CNemoSensor(const inemo::INemoSystemModel* systemModelPtr);
+	CNemoSensor();
 
 	// reimplemented (inemo::INemoSensor)
 	virtual const CSensorSpecification& GetSensorSpecification() const;
@@ -42,8 +39,6 @@ public:
 	virtual std::string GetFourthLevelLocation() const;
 
 protected:
-	const inemo::INemoSystemModel* m_systemModelPtr;
-
 	CSensorSpecification m_specification;
 	imeas::CMeasurementRange  m_range;
 	int m_state;

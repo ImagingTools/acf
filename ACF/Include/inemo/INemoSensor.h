@@ -24,7 +24,6 @@ class CSensorSpecification;
 class INemoSensor: virtual public acf::NamedInterface
 {
 public:
-
 	enum SensorState
 	{
 		StateOK = 0,

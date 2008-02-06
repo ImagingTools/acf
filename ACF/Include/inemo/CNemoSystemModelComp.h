@@ -33,36 +33,21 @@ class INemoDatabaseAccessor;
 	Standard implementation of NEMO data model.
 */
 class CNemoSystemModelComp: public acf::Component,
-							public acf::HierarchicalModelTemplate<inemo::INemoSystemModel>,
-							protected acf::FactorisableContainerTemplate<inemo::INemoSensor>,
-							protected acf::ObjectFactoryInterface<inemo::INemoSensor>
+							public acf::HierarchicalModelTemplate<inemo::INemoSystemModel>
 {
 public:
-	typedef acf::HierarchicalModelTemplate<inemo::INemoSystemModel> BaseClass;
-	typedef acf::FactorisableContainerTemplate<inemo::INemoSensor> BaseClass2;
-	typedef acf::Component BaseClass3;
+	typedef acf::Component BaseClass;
 
 	CNemoSystemModelComp();
 
 	// reimplemented (inemo::INemoSystemModel)
-	virtual int GetSensorCount() const;
-	virtual inemo::INemoSensor& GetSensor(int sensorIndex) const;
-
-	// reimplemented (acf::ObserverInterface)
-	virtual void update(acf::ModelInterface* object);
-
-	// reimplemented (acf::ObjectFactoryInterface)
-	virtual inemo::INemoSensor* createObject();
+	virtual inemo::INemoSensors* GetNemoSensorsModel() const;
 
 	// reimplemented (acf::ComponentInterface)
 	virtual bool onInitialize(acf::ComponentManagerInterface* managerPtr);
 
-protected:
-	void GetFromDatabase();
-
 private:
-	acf::ComponentDependency<inemo::INemoDatabaseAccessor> m_databaseAccessorIfPtr;
-	acf::FactoryTemplate<inemo::INemoSensor> m_sensorFactory;
+	acf::ComponentDependency<inemo::INemoSensors> m_sensorsModelIfPtr;
 };
 
 
