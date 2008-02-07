@@ -11,6 +11,12 @@ CNemoSensor::CNemoSensor()
 }
 
 
+void CNemoSensor::SetMeasurementData(const acf::Sequence& sequence)
+{
+	m_measurementData = sequence;
+}
+
+
 void CNemoSensor::SetSensorSpecification(const CSensorSpecification& sensorSpecification)
 {
 
@@ -60,6 +66,12 @@ void CNemoSensor::SetFourthLevelLocation()
 
 
 // reimplemented (inemo::INemoSensor)
+
+const acf::SequenceInterface& CNemoSensor::GetMeasurementData() const
+{
+	return m_measurementData;
+}
+
 
 const CSensorSpecification& CNemoSensor::GetSensorSpecification() const
 {

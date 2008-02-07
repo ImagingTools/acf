@@ -15,7 +15,7 @@ CNemoSystemOverviewGuiComp::CNemoSystemOverviewGuiComp()
 	:BaseClass(), 
 	m_sensorListGuiIfPtr(this, "SensorListGui"),
 	m_systemOverviewGuiIfPtr(this, "SystemOverviewGui"),
-	m_sensorDataGuiIfPtr(this, "SensorInfoGui"),
+	m_sensorDataGuiIfPtr(this, "SensorDataGui"),
 	m_sensorsObserverIfPtr(this, "SensorListObserver"),
 	m_sensorObserversIfPtr(this, "SensorObservers"),
 	m_selectedSensorPtr(NULL)
@@ -59,6 +59,8 @@ void CNemoSystemOverviewGuiComp::OnSensorSelected(inemo::INemoSensor* selectedSe
 				acf::ObserverInterface* observerPtr = m_sensorObserversIfPtr.interfacePtr(observerIndex);
 				if (observerPtr != NULL && !selectedModelPtr->isAttached(*observerPtr)){
 					selectedModelPtr->attachObserver(observerPtr);
+
+					selectedModelPtr->notifyUpdate();
 				}
 			}
 		}

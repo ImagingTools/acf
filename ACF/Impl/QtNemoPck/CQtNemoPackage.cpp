@@ -3,6 +3,7 @@
 #include "iqtnemo/CNemoSystemOverviewGuiComp.h"
 #include "iqtnemo/CNemoSensorTreeGuiComp.h"
 #include "iqtnemo/CNemoSensorsModelComp.h"
+#include "iqtnemo/CNemoSensorPlotGuiComp.h"
 
 
 CQtNemoPackage::CQtNemoPackage()
@@ -17,6 +18,7 @@ CQtNemoPackage::CQtNemoPackage()
 	registerComponent<CNemoSystemOverviewGuiComp>("NemoSystemOverviewGui");
 	registerComponent<CNemoSensorTreeGuiComp>("NemoSensorTreeGui");
 	registerComponent<CNemoSensorsModelComp>("NemoSensorsModel");
+	registerComponent<CNemoSensorPlotGuiComp>("NemoSensorPlotGui");
 }
 
 

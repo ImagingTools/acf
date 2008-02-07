@@ -1,6 +1,10 @@
-#include "QtAcf/QtAcf.h"
-
 #include "iqtnemo/CNemoSensorsModelComp.h"
+
+
+#include <QSqlTableModel>
+
+
+#include "QtAcf/QtAcf.h"
 
 
 namespace iqtnemo
@@ -46,7 +50,6 @@ bool CNemoSensorsModelComp::IsModelChanged() const
 		return true;
 	}
 	else{
-		
 	}
 	
 	return false;
@@ -64,6 +67,23 @@ void CNemoSensorsModelComp::SynchronizeModelWithTable()
 
 			inemo::CNemoSensor* sensor = new inemo::CNemoSensor;
 			sensor->setName(acf::acfString(sensorRecord.value("name").toString()));
+
+			// set measurement data:
+			int sensorId = sensorRecord.value("sensor").toInt();
+			QString measurementTableName = QString("nemo.sensor%1").arg(sensorId, 5, 10, QLatin1Char('0'));
+			QSqlTableModel measurementTable(this, m_tableModelPtr->database());
+			measurementTable.setTable(measurementTableName);
+			if (measurementTable.select()){
+				acf::Sequence sequence;
+				for (int row = 0; row < measurementTable.rowCount(); row++){
+					QSqlRecord rowRecord = measurementTable.record(row);
+					float x = row;
+					float y = rowRecord.value("value").toDouble();
+					sequence.addPoint(x, y);
+				}
+
+				sensor->SetMeasurementData(sequence);
+			}
 
 			m_sensors.push_back(sensor);
 		}

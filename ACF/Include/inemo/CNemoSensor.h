@@ -8,6 +8,7 @@
 #include "Model/ModelTemplate.h"
 
 #include "Base/NamedTemplate.h"
+#include "Base/Sequence.h"
 
 #include "inemo/CSensorSpecification.h"
 
@@ -28,6 +29,7 @@ class CNemoSensor: public acf::ModelTemplate<acf::NamedTemplate<inemo::INemoSens
 public:
 	CNemoSensor();
 
+	void SetMeasurementData(const acf::Sequence& sequence);
 	virtual void SetSensorSpecification(const CSensorSpecification& sensorSpecification);
 	virtual void SetMeasurementRange(const imeas::CMeasurementRange& measurementRange);
 	virtual void SetState(int state);
@@ -38,6 +40,7 @@ public:
 	virtual void SetFourthLevelLocation();
 
 	// reimplemented (inemo::INemoSensor)
+	const acf::SequenceInterface& CNemoSensor::GetMeasurementData() const;
 	virtual const CSensorSpecification& GetSensorSpecification() const;
 	virtual const imeas::CMeasurementRange& GetMeasurementRange() const;
 	virtual int GetState() const;
@@ -48,6 +51,7 @@ public:
 	virtual std::string GetFourthLevelLocation() const;
 
 protected:
+	acf::Sequence m_measurementData;
 	CSensorSpecification m_specification;
 	imeas::CMeasurementRange  m_range;
 	int m_state;

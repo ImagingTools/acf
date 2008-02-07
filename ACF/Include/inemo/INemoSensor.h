@@ -7,6 +7,7 @@
 #include "imeas/CMeasurementRange.h"
 
 #include "Base/NamedInterface.h"
+#include "Base/SequenceInterface.h"
 
 
 namespace inemo
@@ -32,6 +33,10 @@ public:
 		StateUnknown = 3
 	};
 
+	/**
+	* Returns the sensor measurement data.
+	*/
+	virtual const acf::SequenceInterface& GetMeasurementData() const = 0;
 
 	/**
 	* Returns the sensor specification data.
