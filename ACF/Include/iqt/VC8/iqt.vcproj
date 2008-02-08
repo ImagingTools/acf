@@ -16,8 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory=".\.\@temporary/QtCompLib/release"
+			OutputDirectory="$(ACFDIR)\Lib\$(ConfigurationName)VC8"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			>
 			<Tool
@@ -73,8 +73,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="$(ACFDIR)\Lib\$(ConfigurationName)VC8"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			>
 			<Tool
@@ -140,7 +140,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CTabContainerGuiComp.cpp"
+				RelativePath="..\CXmlReadArchive.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CXmlWriteArchive.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\iqt.cpp"
 				>
 			</File>
 		</Filter>
@@ -150,7 +158,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CTabContainerGuiComp.h"
+				RelativePath="..\CXmlReadArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CXmlWriteArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\iqt.h"
 				>
 			</File>
 		</Filter>
@@ -165,10 +181,6 @@
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
-			>
-		</Filter>
-		<Filter
-			Name="Forms"
 			>
 		</Filter>
 	</Files>

@@ -66,7 +66,7 @@ public:
 		If skipping of tag contains is supported, this will skip to the end of tag while archive reading.
 		Otherwise you have to read contains of archive completely. \sa IsTagSkippingSupported.
 	*/
-	virtual bool EndTag(const CArchiveTag& tag)  = 0;
+	virtual bool EndTag(const CArchiveTag& tag) = 0;
 
 	/**
 		Process primitive type.

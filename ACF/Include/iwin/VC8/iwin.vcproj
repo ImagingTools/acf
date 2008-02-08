@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="iwin"
 	ProjectGUID="{633B67F7-B154-4A80-A651-1111D5EDF583}"
+	RootNamespace="iwin"
 	>
 	<Platforms>
 		<Platform
@@ -15,8 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\./@temporary/release"
-			IntermediateDirectory="./iwin/ReleaseVC8"
+			OutputDirectory="$(ACFDIR)\Lib\$(ConfigurationName)VC8"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -89,8 +90,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
-			IntermediateDirectory=".\Debug"
+			OutputDirectory="$(ACFDIR)\Lib\$(ConfigurationName)VC8"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"

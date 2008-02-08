@@ -8,6 +8,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "isys", "..\..\..\Include\is
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iser", "..\..\..\Include\iser\VC8\iser.vcproj", "{0935A895-45FD-4996-A109-79440B8A4F46}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iqt", "..\..\..\Include\iqt\VC8\iqt.vcproj", "{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -30,6 +32,10 @@ Global
 		{0935A895-45FD-4996-A109-79440B8A4F46}.Debug|Win32.Build.0 = Debug|Win32
 		{0935A895-45FD-4996-A109-79440B8A4F46}.Release|Win32.ActiveCfg = Release|Win32
 		{0935A895-45FD-4996-A109-79440B8A4F46}.Release|Win32.Build.0 = Release|Win32
+		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}.Debug|Win32.Build.0 = Debug|Win32
+		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}.Release|Win32.ActiveCfg = Release|Win32
+		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
