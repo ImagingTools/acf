@@ -13,11 +13,11 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
-			IntermediateDirectory=".\.\@temporary/QtCompLib/release"
+			IntermediateDirectory="Release"
 			ConfigurationType="4">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
+				AdditionalIncludeDirectories="./;../../../Include;&quot;$(ACFDIR_OLD)\Include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Release;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;..\..\..\ExtLib\Qwt\Include"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
@@ -53,7 +53,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./;../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;..\..\..\ExtLib\Qwt\Include"
+				AdditionalIncludeDirectories="./;../../../Include;&quot;$(ACFDIR_OLD)\Include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;..\..\..\ExtLib\Qwt\Include"
 				PreprocessorDefinitions="QtCompLib_DLL_EXPORT;UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
@@ -114,7 +114,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CNemoSensorPlotGuiComp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.\..\..&quot; -I&quot;$(ACFDIR)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CNemoSensorPlotGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorPlotGuiComp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\..\..\..\ExtLib\Qwt\Include&quot; &quot;..\CNemoSensorPlotGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorPlotGuiComp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CNemoSensorPlotGuiComp.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorPlotGuiComp.cpp&quot;"/>
@@ -124,7 +124,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CNemoSensorPlotGuiComp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DQtCompLib_DLL_EXPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\..\..\..\ExtLib\Qwt\Include&quot; &quot;..\CNemoSensorPlotGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorPlotGuiComp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DQtCompLib_DLL_EXPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\..\..\..\ExtLib\Qwt\Include&quot; &quot;..\CNemoSensorPlotGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorPlotGuiComp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CNemoSensorPlotGuiComp.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorPlotGuiComp.cpp&quot;"/>
@@ -158,7 +158,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CNemoSensorTreeGuiComp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.\..\..&quot; -I&quot;$(ACFDIR)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CNemoSensorTreeGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorTreeGuiComp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\..\..\..\ExtLib\Qwt\Include&quot; &quot;..\CNemoSensorTreeGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorTreeGuiComp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CNemoSensorTreeGuiComp.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorTreeGuiComp.cpp&quot;"/>
@@ -168,7 +168,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CNemoSensorTreeGuiComp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DQtCompLib_DLL_EXPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\..\..\..\ExtLib\Qwt\Include&quot; &quot;..\CNemoSensorTreeGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorTreeGuiComp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DQtCompLib_DLL_EXPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -I&quot;.&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\..\..\..\ExtLib\Qwt\Include&quot; &quot;..\CNemoSensorTreeGuiComp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorTreeGuiComp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CNemoSensorTreeGuiComp.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CNemoSensorTreeGuiComp.cpp&quot;"/>
@@ -195,6 +195,15 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
+				RelativePath=".\generatedfiles\Release\moc_CNemoSensorPlotGuiComp.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\generatedfiles\Debug\moc_CNemoSensorPlotGuiComp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
@@ -211,12 +220,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\generatedfiles\Release\moc_CNemoSensorPlotGuiComp.cpp">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
+				RelativePath=".\generatedfiles\Release\moc_CNemoSensorTreeGuiComp.cpp">
 				<FileConfiguration
 					Name="Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -228,25 +232,6 @@
 				RelativePath=".\generatedfiles\Debug\moc_CNemoSensorTreeGuiComp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\generatedfiles\Release\moc_CNemoSensorTreeGuiComp.cpp">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCLCompilerTool"/>
@@ -275,8 +260,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -298,8 +282,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot; ../CNemoSensorPlotGuiComp.ui"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -308,7 +291,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot; ../CNemoSensorPlotGuiComp.ui"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot; ../CNemoSensorPlotGuiComp.ui
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -320,8 +304,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -343,8 +326,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot; &quot;$(InputFileName)&quot;
-"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot; ../CNemoSystemOverviewGuiComp.ui"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot;"/>
 				</FileConfiguration>

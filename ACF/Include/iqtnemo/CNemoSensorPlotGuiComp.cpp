@@ -134,9 +134,9 @@ void CNemoSensorPlotGuiComp::initializeGui()
 
 		QColor c(Qt::blue);
 		QColor c2(Qt::darkBlue);
-        c.setAlpha(50);
+        c.setAlpha(30);
         m_plotCurve.setPen(c2);
-//		m_plotCurve.setBrush(c);
+		m_plotCurve.setBrush(c);
 		m_plotCurve.setRenderHint(QwtPlotItem::RenderAntialiased);
 /*
 		QwtScaleWidget* scaleWidget = (QwtScaleWidget *)m_plotPtr->axisWidget(QwtPlot::yLeft);
