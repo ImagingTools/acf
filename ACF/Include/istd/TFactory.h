@@ -26,6 +26,9 @@ class TFactory: virtual public istd::IFactory
 public:
 	typedef istd::TIObjectFactory<ObjectClass> FactoryClass;
 
+	/**
+		Registers object factory \c factoryPtr that will be mapped to the ID \c key.
+	*/
 	void RegisterFactory(FactoryClass* factoryPtr, const std::string& key);
 
 	// reimplemented (istd::IFactory)

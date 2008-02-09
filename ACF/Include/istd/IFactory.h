@@ -17,7 +17,7 @@ namespace istd
 
 
 /**
-	Common interface for a factory implentation.	
+	Common interface for a factory implementation.	
 */
 class IFactory: virtual public istd::IPolymorphic  
 {
@@ -25,12 +25,12 @@ public:
 	typedef std::vector<std::string> KeyList;
 
 	/**
-	* Returns all posible keys for this factory
+		Returns all posible keys for this factory.
 	*/
 	virtual KeyList GetKeys() const = 0;
 
 	/**
-	* Create an instance of the object, mapped to the key \c key
+		Create an instance of the object, mapped to the key \c key.
 	*/
 	virtual istd::IPolymorphic* CreateInstance(const std::string& key) = 0;
 };

@@ -13,12 +13,15 @@ namespace istd
 
 
 /**
-	Template based factory interface.
+	Template based object factory interface.
 */
 template <class ObjectClass>
 class TIObjectFactory: public istd::IPolymorphic
 {
 public:
+	/**
+		Creates an object instance.
+	*/
 	virtual ObjectClass* CreateObject() = 0;
 };
 
