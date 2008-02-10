@@ -11,78 +11,67 @@ CNemoSensor::CNemoSensor()
 }
 
 
-void CNemoSensor::SetMeasurementData(const acf::Sequence& sequence)
+void CNemoSensor::SetSpecification(const inemo::CNemoSensorSpecification& specification)
 {
-	m_measurementData = sequence;
+	m_specification = specification;
 }
 
 
-void CNemoSensor::SetSensorSpecification(const CSensorSpecification& sensorSpecification)
+void CNemoSensor::SetInfo(const inemo::CNemoSensorInfo& info)
 {
+	m_info = info;
+}
 
+
+void CNemoSensor::SetData(const inemo::CNemoSensorData& data)
+{
+	m_data = data;
 }
 
 
 void CNemoSensor::SetMeasurementRange(const imeas::CMeasurementRange& measurementRange)
 {
-
+	m_measurementRange = measurementRange;
 }
 
 
 void CNemoSensor::SetState(int state)
 {
-
+	m_state = state;
 }
 
 
 void CNemoSensor::SetPredictedState(int predictedState)
 {
-
-}
-
-
-void CNemoSensor::SetFirstLevelLocation()
-{
-
-}
-
-
-void CNemoSensor::SetSecondLevelLocation()
-{
-
-}
-
-
-void CNemoSensor::SetThirdLevelLocation()
-{
-
-}
-
-
-void CNemoSensor::SetFourthLevelLocation()
-{
-
+	m_predictedState = predictedState;
 }
 
 
 // reimplemented (inemo::INemoSensor)
 
-const acf::SequenceInterface& CNemoSensor::GetMeasurementData() const
-{
-	return m_measurementData;
-}
-
-
-const CSensorSpecification& CNemoSensor::GetSensorSpecification() const
+const INemoSensorSpecification& CNemoSensor::GetSpecification() const
 {
 	return m_specification;
 }
 
 
+const inemo::INemoSensorInfo& CNemoSensor::GetInfo() const
+{
+	return m_info;
+}
+
+
+const inemo::INemoSensorData& CNemoSensor::GetData() const
+{
+	return m_data;
+}
+
+
 const imeas::CMeasurementRange& CNemoSensor::GetMeasurementRange() const
 {
-	return m_range;
+	return m_measurementRange;
 }
+
 
 int CNemoSensor::GetState() const
 {
@@ -93,30 +82,6 @@ int CNemoSensor::GetState() const
 int CNemoSensor::GetPredictedState() const
 {
 	return m_predictedState;
-}
-
-
-
-std::string CNemoSensor::GetFirstLevelLocation() const
-{
-	return std::string();
-}
-
-std::string CNemoSensor::GetSecondLevelLocation() const
-{
-	return std::string();
-}
-
-
-std::string CNemoSensor::GetThirdLevelLocation() const
-{
-	return std::string();
-}
-
-
-std::string CNemoSensor::GetFourthLevelLocation() const
-{
-	return std::string();
 }
 
 

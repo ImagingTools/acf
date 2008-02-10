@@ -44,6 +44,9 @@ public:
 	virtual int GetSensorCount() const;
 	virtual inemo::INemoSensor& GetSensor(int sensorIndex) const;
 
+	// reimplemented (acf::ModelInterface)
+	virtual void notifyUpdate(int updateFlags = 0, acf::PolymorphicInterface* objectPtr = NULL);
+
 protected:
 	// reimplemented (iqtdb::CTableModelCompBase)
 	virtual bool IsModelChanged() const;

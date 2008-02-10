@@ -14,7 +14,9 @@ namespace inemo
 {
 
 
-class CSensorSpecification;
+class INemoSensorSpecification;
+class INemoSensorInfo;
+class INemoSensorData;
 
 /**
 	\ingroup inemo
@@ -34,14 +36,19 @@ public:
 	};
 
 	/**
-	* Returns the sensor measurement data.
-	*/
-	virtual const acf::SequenceInterface& GetMeasurementData() const = 0;
-
-	/**
 	* Returns the sensor specification data.
 	*/
-	virtual const CSensorSpecification& GetSensorSpecification() const = 0;
+	virtual const inemo::INemoSensorSpecification& GetSpecification() const = 0;
+
+	/**
+	* Returns the additional information about the sensor.
+	*/
+	virtual const inemo::INemoSensorInfo& GetInfo() const = 0;
+
+	/**
+	* Returns the measurement data of the sensor.
+	*/
+	virtual const inemo::INemoSensorData& GetData() const = 0;
 
 	/**
 	* Returns the sensor measurment range.
@@ -57,26 +64,6 @@ public:
 	* Returns the current predicted sensor state.
 	*/
 	virtual int GetPredictedState() const = 0;
-
-	/**
-	* Returns the first level sensor location.
-	*/
-	virtual std::string GetFirstLevelLocation() const = 0;
-
-	/**
-	* Returns the second level sensor location.
-	*/
-	virtual std::string GetSecondLevelLocation() const = 0;
-
-	/**
-	* Returns the third level sensor location.
-	*/
-	virtual std::string GetThirdLevelLocation() const = 0;
-
-	/**
-	* Returns the fourth level sensor location.
-	*/
-	virtual std::string GetFourthLevelLocation() const = 0;
 };
 
 

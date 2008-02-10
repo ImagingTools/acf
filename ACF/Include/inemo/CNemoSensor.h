@@ -3,12 +3,19 @@
 
 
 #include "inemo/inemo.h"
-#include "inemo/INemoSensor.h"
+
 
 #include "Base/NamedTemplate.h"
 #include "Base/Sequence.h"
 
-#include "inemo/CSensorSpecification.h"
+#include "Model/ModelTemplate.h"
+
+#include "imeas/CMeasurementRange.h"
+
+#include "inemo/INemoSensor.h"
+#include "inemo/CNemoSensorSpecification.h"
+#include "inemo/CNemoSensorInfo.h"
+#include "inemo/CNemoSensorData.h"
 
 
 namespace inemo
@@ -27,31 +34,26 @@ class CNemoSensor: public acf::NamedTemplate<inemo::INemoSensor>
 public:
 	CNemoSensor();
 
-	void SetMeasurementData(const acf::Sequence& sequence);
-	virtual void SetSensorSpecification(const CSensorSpecification& sensorSpecification);
+	virtual void SetSpecification(const inemo::CNemoSensorSpecification& specification);
+	virtual void SetInfo(const inemo::CNemoSensorInfo& info);
+	virtual void SetData(const inemo::CNemoSensorData& data);
 	virtual void SetMeasurementRange(const imeas::CMeasurementRange& measurementRange);
 	virtual void SetState(int state);
 	virtual void SetPredictedState(int predictedState);
-	virtual void SetFirstLevelLocation();
-	virtual void SetSecondLevelLocation();
-	virtual void SetThirdLevelLocation();
-	virtual void SetFourthLevelLocation();
 
 	// reimplemented (inemo::INemoSensor)
-	const acf::SequenceInterface& CNemoSensor::GetMeasurementData() const;
-	virtual const CSensorSpecification& GetSensorSpecification() const;
+	virtual const inemo::INemoSensorSpecification& GetSpecification() const;
+	virtual const inemo::INemoSensorInfo& GetInfo() const;
+	virtual const inemo::INemoSensorData& GetData() const;
 	virtual const imeas::CMeasurementRange& GetMeasurementRange() const;
 	virtual int GetState() const;
 	virtual int GetPredictedState() const;
-	virtual std::string GetFirstLevelLocation() const;
-	virtual std::string GetSecondLevelLocation() const;
-	virtual std::string GetThirdLevelLocation() const;
-	virtual std::string GetFourthLevelLocation() const;
 
 protected:
-	acf::Sequence m_measurementData;
-	CSensorSpecification m_specification;
-	imeas::CMeasurementRange  m_range;
+	inemo::CNemoSensorSpecification m_specification;
+	inemo::CNemoSensorInfo m_info;
+	inemo::CNemoSensorData m_data;
+	imeas::CMeasurementRange  m_measurementRange;
 	int m_state;
 	int m_predictedState;
 };

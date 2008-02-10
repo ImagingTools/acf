@@ -1,11 +1,11 @@
-#ifndef CMeasurementRange_included
-#define CMeasurementRange_included
+#ifndef imeas_CMeasurementRange_included
+#define imeas_CMeasurementRange_included
 
 
 #include "imeas/imeas.h"
 
 
-#include "istd/IPolymorphic.h"
+#include "istd/CRange.h"
 
 
 namespace imeas
@@ -17,36 +17,34 @@ namespace imeas
 
 	Implementation of a measurement range.
 */
-class CMeasurementRange: virtual public istd::IPolymorphic
+class CMeasurementRange
 {
 public:
 	CMeasurementRange();
 
-	virtual bool IsValid() const;
+	bool IsValid() const;
 
-	virtual void SetLowerErrorLimit(double lowerErrorLimit);
-	virtual void SetUpperErrorLimit(double upperErrorLimit);
-	virtual void SetLowerWarningLimit(double lowerWarningLimit);
-	virtual void SetUpperWarningLimit(double upperWarningLimit);
+	void SetLowerErrorLimit(double lowerErrorLimit);
+	void SetUpperErrorLimit(double upperErrorLimit);
+	void SetLowerWarningLimit(double lowerWarningLimit);
+	void SetUpperWarningLimit(double upperWarningLimit);
 
-	virtual double GetLowerErrorLimit() const;
-	virtual double GetUpperErrorLimit() const;
-	virtual double GetLowerWarningLimit() const;
-	virtual double GetUpperWarningLimit() const;
+	double GetLowerErrorLimit() const;
+	double GetUpperErrorLimit() const;
+	double GetLowerWarningLimit() const;
+	double GetUpperWarningLimit() const;
 
-	virtual bool IsOk(double value) const;
-	virtual bool IsWarning(double value) const;
-	virtual bool IsError(double value) const;
+	bool IsOk(double value) const;
+	bool IsWarning(double value) const;
+	bool IsError(double value) const;
 
 private:
-	double m_lowerErrorLimit;
-	double m_upperErrorLimit;
-	double m_lowerWarningLimit;
-	double m_upperWarningLimit;
+	istd::CRange m_warningRange;
+	istd::CRange m_errorRange;
 };
 
 
 } // namespace imeas
 
 
-#endif // !CMeasurementRange_included
+#endif // !imeas_CMeasurementRange_included

@@ -30,7 +30,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_2" >
+    <widget class="QFrame" name="FilterFrame" >
      <property name="sizePolicy" >
       <sizepolicy>
        <hsizetype>5</hsizetype>
@@ -53,40 +53,92 @@
        <number>6</number>
       </property>
       <item>
-       <widget class="QLabel" name="label" >
+       <widget class="QCheckBox" name="UseFilterCheckBox" >
         <property name="sizePolicy" >
          <sizepolicy>
           <hsizetype>4</hsizetype>
-          <vsizetype>5</vsizetype>
+          <vsizetype>0</vsizetype>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="text" >
-         <string>From</string>
+         <string>Use Filter</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QDateTimeEdit" name="FromTime" />
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>5</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <widget class="QFrame" name="TimeFilterFrame" >
+        <property name="frameShape" >
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="text" >
-         <string>Untill</string>
+        <property name="frameShadow" >
+         <enum>QFrame::Raised</enum>
         </property>
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="FromLabel" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>5</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>From</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateTimeEdit" name="FromTime" />
+         </item>
+         <item>
+          <widget class="QLabel" name="UntilLabel" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>4</hsizetype>
+             <vsizetype>5</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text" >
+            <string>Untill</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateTimeEdit" name="UntillTime" />
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QDateTimeEdit" name="UntillTime" />
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType" >
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -94,5 +146,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>UseFilterCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>TimeFilterFrame</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>49</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>118</x>
+     <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -11,7 +11,7 @@
 
 #include "Base/SequenceInterface.h"
 
-#include "inemo/INemoSensor.h"
+#include "inemo/INemoSensorData.h"
 
 
 namespace iqtnemo
@@ -138,18 +138,7 @@ void CNemoSensorPlotGuiComp::initializeGui()
         m_plotCurve.setPen(c2);
 		m_plotCurve.setBrush(c);
 		m_plotCurve.setRenderHint(QwtPlotItem::RenderAntialiased);
-/*
-		QwtScaleWidget* scaleWidget = (QwtScaleWidget *)m_plotPtr->axisWidget(QwtPlot::yLeft);
-		scaleWidget->setMargin(128);
 
-		QwtLinearColorMap colorMap(Qt::darkGreen, Qt::red);
-		colorMap.addColorStop(0.2, Qt::yellow);
-		colorMap.addColorStop(0.3, Qt::green);
-		colorMap.addColorStop(0.7, Qt::green);
-		colorMap.addColorStop(0.8, Qt::yellow);
-		scaleWidget->setColorBarEnabled(true);
-		scaleWidget->setColorMap(QwtDoubleInterval(0, 1), colorMap);
-*/
 		m_plotCurve.attach(m_plotPtr);
 		gridPtr->attach(m_plotPtr);
 
@@ -171,7 +160,7 @@ void CNemoSensorPlotGuiComp::UpdateView()
 		return;
 	}
 
-	const acf::SequenceInterface& measurementData = m_objectPtr->GetMeasurementData();
+	const acf::SequenceInterface& measurementData = m_objectPtr->GetData().GetMeasurementData();
 	int sequenceSize = measurementData.count();
 	if (sequenceSize > 0){
 		double* xData = new double [sequenceSize];

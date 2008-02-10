@@ -7,69 +7,60 @@ namespace imeas
 
 CMeasurementRange::CMeasurementRange()
 {
-	m_lowerErrorLimit = 0.0;
-	m_upperErrorLimit = 0.0;
-	m_lowerWarningLimit = 0.0;
-	m_upperWarningLimit = 0.0;
 }
 
 
 bool CMeasurementRange::IsValid() const
 {
-	bool retVal = m_lowerErrorLimit <= m_upperErrorLimit;
-	retVal = retVal && (m_lowerWarningLimit <= m_upperWarningLimit);
-	retVal = retVal && (m_upperWarningLimit <= m_upperErrorLimit);
-	retVal = retVal && (m_lowerWarningLimit >= m_lowerErrorLimit);
-
-	return retVal;
+	return m_warningRange.IsValid() && m_errorRange.IsValid();
 }
 
 
 void CMeasurementRange::SetLowerErrorLimit(double lowerErrorLimit)
 {
-	m_lowerErrorLimit = lowerErrorLimit;
+	m_errorRange.SetBottomValue(lowerErrorLimit);
 }
 
 
 void CMeasurementRange::SetUpperErrorLimit(double upperErrorLimit)
 {
-	m_upperErrorLimit = upperErrorLimit;
+	m_errorRange.SetTopValue(upperErrorLimit);
 }
 
 
 void CMeasurementRange::SetLowerWarningLimit(double lowerWarningLimit)
 {
-	m_lowerWarningLimit = lowerWarningLimit;
+	m_warningRange.SetBottomValue(lowerWarningLimit);
 }
 
 
 void CMeasurementRange::SetUpperWarningLimit(double upperWarningLimit)
 {
-	m_upperWarningLimit = upperWarningLimit;
+	m_warningRange.SetTopValue(upperWarningLimit);
 }
 
 
 double CMeasurementRange::GetLowerErrorLimit() const
 {
-	return m_lowerErrorLimit;
+	return m_errorRange.GetBottomValue();
 }
 
 
 double CMeasurementRange::GetUpperErrorLimit() const
 {
-	return m_upperErrorLimit;
+	return m_errorRange.GetTopValue();
 }
 
 
 double CMeasurementRange::GetLowerWarningLimit() const
 {
-	return m_lowerWarningLimit;
+	return m_warningRange.GetBottomValue();
 }
 
 
 double CMeasurementRange::GetUpperWarningLimit() const
 {
-	return m_upperWarningLimit;
+	return m_warningRange.GetTopValue();
 }
 
 
@@ -77,7 +68,7 @@ bool CMeasurementRange::IsOk(double value) const
 {
 	I_ASSERT(IsValid());
 
-	return ((value - m_lowerWarningLimit) > I_EPSYLON) && ((m_upperWarningLimit - value) > I_EPSYLON);
+	return m_warningRange.IsInside(value) && m_errorRange.IsInside(value);
 }
 
 
@@ -85,7 +76,7 @@ bool CMeasurementRange::IsWarning(double value) const
 {
 	I_ASSERT(IsValid());
 
-	return !IsOk(value) && !IsError(value);
+	return m_warningRange.IsInside(value);
 }
 
 
@@ -93,7 +84,7 @@ bool CMeasurementRange::IsError(double value) const
 {
 	I_ASSERT(IsValid());
 
-	return ((value - m_lowerErrorLimit) < I_EPSYLON) && ((value - m_upperErrorLimit) > I_EPSYLON);
+	return (!IsOk(value) && !IsWarning(value));
 }
 
 

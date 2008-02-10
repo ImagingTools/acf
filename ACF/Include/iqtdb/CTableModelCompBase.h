@@ -40,6 +40,7 @@ class CTableModelCompBase:	public QObject,
 	Q_OBJECT
 public:
 	typedef acf::Component BaseClass;
+	typedef acf::Model BaseClass2;
 
 	CTableModelCompBase();
 

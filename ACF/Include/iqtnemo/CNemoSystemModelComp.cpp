@@ -37,6 +37,13 @@ inemo::INemoSensor& CNemoSystemModelComp::GetSensor(int sensorIndex) const
 	return sensor; 
 }
 
+// reimplemented (acf::ModelInterface)
+
+void CNemoSystemModelComp::notifyUpdate(int updateFlags, acf::PolymorphicInterface* objectPtr)
+{
+	BaseClass2::notifyUpdate(updateFlags, objectPtr); 
+}
+
 
 // protected methods
 
@@ -74,15 +81,26 @@ void CNemoSystemModelComp::SynchronizeModelWithTable()
 			QSqlTableModel measurementTable(this, m_tableModelPtr->database());
 			measurementTable.setTable(measurementTableName);
 			if (measurementTable.select()){
-				acf::Sequence sequence;
+				acf::Sequence measuredData;
+				acf::Sequence predictedDataA;
+				acf::Sequence predictedDataB;
 				for (int row = 0; row < measurementTable.rowCount(); row++){
 					QSqlRecord rowRecord = measurementTable.record(row);
 					float x = row;
-					float y = rowRecord.value("value").toDouble();
-					sequence.addPoint(x, y);
+					float value = rowRecord.value("value").toDouble();
+					float predicedValueA = rowRecord.value("predicta").toDouble();
+					float predicedValueB = rowRecord.value("predicta").toDouble();
+					measuredData.addPoint(x, value);
+					predictedDataA.addPoint(x, predicedValueA);
+					predictedDataB.addPoint(x, predicedValueB);
 				}
 
-				sensor->SetMeasurementData(sequence);
+				inemo::CNemoSensorData sensorData;
+				sensorData.SetMeasurementData(measuredData);
+				sensorData.SetPredictedDataA(predictedDataA);
+				sensorData.SetPredictedDataB(predictedDataB);
+
+				sensor->SetData(sensorData);
 			}
 
 			m_sensors.push_back(sensor);
