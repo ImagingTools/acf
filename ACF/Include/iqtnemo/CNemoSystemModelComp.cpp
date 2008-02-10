@@ -1,4 +1,4 @@
-#include "iqtnemo/CNemoSensorsModelComp.h"
+#include "iqtnemo/CNemoSystemModelComp.h"
 
 
 #include <QSqlTableModel>
@@ -11,24 +11,24 @@ namespace iqtnemo
 {
 
 
-CNemoSensorsModelComp::CNemoSensorsModelComp()
+CNemoSystemModelComp::CNemoSystemModelComp()
 	:BaseClass()
 {
-	registerInterface<inemo::INemoSensors>(this);
+	registerInterface<inemo::INemoSystemModel>(this);
 }
 
 
-// reimplemented (acf::INemoSensors)
+// reimplemented (acf::INemoSystemModel)
 
-int CNemoSensorsModelComp::GetSensorCount() const
+int CNemoSystemModelComp::GetSensorCount() const
 {
 	return int(m_sensors.size());
 }
 
 
-inemo::INemoSensor& CNemoSensorsModelComp::GetSensor(int sensorIndex) const
+inemo::INemoSensor& CNemoSystemModelComp::GetSensor(int sensorIndex) const
 {
-	static inemo::CNemoSensor sensor;
+	static acf::ModelTemplate<inemo::CNemoSensor> sensor;
 
 	if (sensorIndex < GetSensorCount() && sensorIndex >= 0){
 		return *m_sensors.at(sensorIndex);
@@ -42,7 +42,7 @@ inemo::INemoSensor& CNemoSensorsModelComp::GetSensor(int sensorIndex) const
 
 // reimplemented (iqtdb::CTableModelCompBase)
 	
-bool CNemoSensorsModelComp::IsModelChanged() const
+bool CNemoSystemModelComp::IsModelChanged() const
 {
 	I_ASSERT(m_tableModelPtr != NULL);
 	
@@ -56,7 +56,7 @@ bool CNemoSensorsModelComp::IsModelChanged() const
 }
 
 
-void CNemoSensorsModelComp::SynchronizeModelWithTable()
+void CNemoSystemModelComp::SynchronizeModelWithTable()
 {
 	if (m_tableModelPtr != NULL){
 		m_sensors.reset();
@@ -65,7 +65,7 @@ void CNemoSensorsModelComp::SynchronizeModelWithTable()
 		for (int rowIndex = 0; rowIndex < rowCount; rowIndex++){
 			QSqlRecord sensorRecord = m_tableModelPtr->record(rowIndex);
 
-			inemo::CNemoSensor* sensor = new inemo::CNemoSensor;
+			inemo::CNemoSensor* sensor = new acf::ModelTemplate<inemo::CNemoSensor>;
 			sensor->setName(acf::acfString(sensorRecord.value("name").toString()));
 
 			// set measurement data:

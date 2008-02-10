@@ -1,7 +1,6 @@
 #include "QtAcf/QtAcf.h"
 
 
-#include "inemo/INemoSensors.h"
 #include "inemo/INemoSensor.h"
 
 #include "iqtnemo/CNemoSystemOverviewGuiComp.h"
@@ -16,7 +15,7 @@ CNemoSystemOverviewGuiComp::CNemoSystemOverviewGuiComp()
 	m_sensorListGuiIfPtr(this, "SensorListGui"),
 	m_systemOverviewGuiIfPtr(this, "SystemOverviewGui"),
 	m_sensorDataGuiIfPtr(this, "SensorDataGui"),
-	m_sensorsObserverIfPtr(this, "SensorListObserver"),
+	m_sensorListObserverIfPtr(this, "SensorListObserver"),
 	m_sensorObserversIfPtr(this, "SensorObservers"),
 	m_selectedSensorPtr(NULL)
 {
@@ -26,7 +25,6 @@ CNemoSystemOverviewGuiComp::CNemoSystemOverviewGuiComp()
 
 CNemoSystemOverviewGuiComp::~CNemoSystemOverviewGuiComp()
 {
-
 }
 
 
@@ -75,11 +73,8 @@ void CNemoSystemOverviewGuiComp::OnSensorSelected(inemo::INemoSensor* selectedSe
 bool CNemoSystemOverviewGuiComp::onAttached(acf::ModelInterface* modelPtr)
 {
 	if (BaseClass::onAttached(modelPtr)){
-		if (m_sensorsObserverIfPtr.isValid()){
-			acf::ModelInterface* sensorsModelPtr = dynamic_cast<acf::ModelInterface*>(m_objectPtr->GetNemoSensorsModel());
-			if (sensorsModelPtr != NULL){
-				sensorsModelPtr->attachObserver(m_sensorsObserverIfPtr.getInterface());
-			}
+		if (m_sensorListObserverIfPtr.isValid()){
+			modelPtr->attachObserver(m_sensorListObserverIfPtr.getInterface());
 		}
 
 		return true;
@@ -92,6 +87,10 @@ bool CNemoSystemOverviewGuiComp::onAttached(acf::ModelInterface* modelPtr)
 void CNemoSystemOverviewGuiComp::onDetached(acf::ModelInterface* modelPtr)
 {
 	BaseClass::onDetached(modelPtr);
+
+	if (m_sensorListObserverIfPtr.isValid() && modelPtr->isAttached(*m_sensorListObserverIfPtr.getInterface())){
+		modelPtr->detachObserver(m_sensorListObserverIfPtr.getInterface());
+	}
 }
 
 

@@ -16,11 +16,10 @@
 #include "Comp/Attribute.h"
 #include "Comp/MultipleAttribute.h"
 
+#include "Model/Model.h"
+
 
 #include "idb/IDatabaseConnector.h"
-
-#include "inemo/INemoSensors.h"
-#include "inemo/CNemoSensor.h"
 
 
 namespace iqtdb

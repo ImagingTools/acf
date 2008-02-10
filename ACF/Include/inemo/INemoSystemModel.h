@@ -11,7 +11,7 @@ namespace inemo
 {
 
 
-class INemoSensors;
+class INemoSensor;
 
 /**
 	\ingroup inemo
@@ -23,7 +23,8 @@ class INemoSensors;
 class INemoSystemModel: virtual public acf::PolymorphicInterface
 {
 public:
-	virtual inemo::INemoSensors* GetNemoSensorsModel() const = 0;
+	virtual int GetSensorCount() const = 0;
+	virtual inemo::INemoSensor& GetSensor(int index) const = 0;
 };
 
 

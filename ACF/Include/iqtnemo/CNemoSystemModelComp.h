@@ -1,5 +1,5 @@
-#ifndef iqtnemo_CNemoSensorsModelComp_h_included
-#define iqtnemo_CNemoSensorsModelComp_h_included
+#ifndef iqtnemo_CNemoSystemModelComp_h_included
+#define iqtnemo_CNemoSystemModelComp_h_included
 
 
 #include "iqtnemo.h"
@@ -16,11 +16,11 @@
 #include "Comp/Attribute.h"
 #include "Comp/MultipleAttribute.h"
 
-#include "Model/ModelTemplate.h"
+#include "Model/HierarchicalModelTemplate.h"
 
 #include "idb/IDatabaseConnector.h"
 
-#include "inemo/INemoSensors.h"
+#include "inemo/INemoSystemModel.h"
 #include "inemo/CNemoSensor.h"
 
 #include "iqtdb/CTableModelCompBase.h"
@@ -33,14 +33,14 @@ namespace iqtnemo
 /**
 	Implementation of the model wrapper for the SENSORS table.
 */
-class CNemoSensorsModelComp: public iqtdb::CTableModelCompBase, public inemo::INemoSensors
+class CNemoSystemModelComp: public acf::HierarchicalModelTemplate<inemo::INemoSystemModel>, public iqtdb::CTableModelCompBase
 {
 public:
 	typedef iqtdb::CTableModelCompBase BaseClass;
 
-	CNemoSensorsModelComp();
+	CNemoSystemModelComp();
 
-	// reimplemented (acf::INemoSensors)
+	// reimplemented (acf::INemoSystemModel)
 	virtual int GetSensorCount() const;
 	virtual inemo::INemoSensor& GetSensor(int sensorIndex) const;
 
@@ -59,5 +59,5 @@ private:
 } // namespace iqtnemo
 
 
-#endif // !iqtnemo_CNemoSensorsModelComp_h_included
+#endif // !iqtnemo_CNemoSystemModelComp_h_included
 

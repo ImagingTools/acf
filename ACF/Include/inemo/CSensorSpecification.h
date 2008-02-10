@@ -2,7 +2,7 @@
 #define inemo_CSensorSpecification_included
 
 
-#include "Model/Model.h"
+#include "Base/PolymorphicInterface.h"
 
 
 namespace inemo
@@ -14,11 +14,9 @@ namespace inemo
 
 	Implementation of sensor specification data record.
 */
-class CSensorSpecification: public acf::Model
+class CSensorSpecification: public acf::PolymorphicInterface
 {
 public:
-	typedef acf::Model BaseClass;
-
 	CSensorSpecification();
 };
 

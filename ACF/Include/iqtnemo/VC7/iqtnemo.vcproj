@@ -94,10 +94,10 @@
 				RelativePath="..\CNemoSensorPlotGuiComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CNemoSensorsModelComp.cpp">
+				RelativePath="..\CNemoSensorTreeGuiComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CNemoSensorTreeGuiComp.cpp">
+				RelativePath="..\CNemoSystemModelComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CNemoSystemOverviewGuiComp.cpp">
@@ -131,27 +131,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\CNemoSensorsModelComp.h">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description=""
-						CommandLine=""
-						AdditionalDependencies=""
-						Outputs=""/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description=""
-						CommandLine=""
-						AdditionalDependencies=""
-						Outputs=""/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath="..\CNemoSensorTreeGuiComp.h">
 				<FileConfiguration
 					Name="Release|Win32">
@@ -175,6 +154,9 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\CNemoSystemModelComp.h">
+			</File>
+			<File
 				RelativePath="..\CNemoSystemOverviewGuiComp.h">
 			</File>
 			<File
@@ -195,15 +177,6 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath=".\generatedfiles\Release\moc_CNemoSensorPlotGuiComp.cpp">
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\generatedfiles\Debug\moc_CNemoSensorPlotGuiComp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
@@ -220,7 +193,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\generatedfiles\Release\moc_CNemoSensorTreeGuiComp.cpp">
+				RelativePath=".\generatedfiles\Release\moc_CNemoSensorPlotGuiComp.cpp">
 				<FileConfiguration
 					Name="Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -232,6 +205,15 @@
 				RelativePath=".\generatedfiles\Debug\moc_CNemoSensorTreeGuiComp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\Release\moc_CNemoSensorTreeGuiComp.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
 						Name="VCCLCompilerTool"/>
@@ -260,7 +242,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorInfoGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -282,7 +265,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot; ../CNemoSensorPlotGuiComp.ui"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot; ../CNemoSensorPlotGuiComp.ui
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorPlotGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -304,7 +288,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot; ../CNemoSensorTreeGuiComp.ui
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSensorTreeGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -326,7 +311,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot; ../CNemoSystemOverviewGuiComp.ui"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot; ../CNemoSystemOverviewGuiComp.ui
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CNemoSystemOverviewGuiComp.h&quot;"/>
 				</FileConfiguration>

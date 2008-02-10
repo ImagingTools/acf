@@ -2,6 +2,9 @@
 #define istd_included
 
 
+#include <limits>
+
+
 /**
 	\defgroup istd
 	\ingroup ACF
@@ -44,6 +47,18 @@ typedef unsigned int I_DWORD;
 typedef signed int I_SDWORD;
 typedef unsigned long long I_QWORD;
 typedef signed long long I_SQWORD;
+
+
+/**
+	Some very small number.
+*/
+#define I_EPSYLON std::numeric_limits<double>::epsilon()
+
+
+/**
+	Infinite value.
+*/
+#define I_INFINITY std::numeric_limits<double>::infinity()
 
 
 #ifdef _DEBUG

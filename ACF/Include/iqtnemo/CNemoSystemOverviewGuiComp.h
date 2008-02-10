@@ -54,7 +54,7 @@ protected:
 	acf::ComponentDependency<acf::QtGuiInterface> m_sensorListGuiIfPtr;
 	acf::ComponentDependency<acf::QtGuiInterface> m_systemOverviewGuiIfPtr;
 	acf::ComponentDependency<acf::QtGuiInterface> m_sensorDataGuiIfPtr;
-	acf::ComponentDependency<acf::ObserverInterface> m_sensorsObserverIfPtr;
+	acf::ComponentDependency<acf::ObserverInterface> m_sensorListObserverIfPtr;
 	acf::MultipleComponentDependency<acf::ObserverInterface> m_sensorObserversIfPtr;
 
 	inemo::INemoSensor* m_selectedSensorPtr;

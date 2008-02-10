@@ -5,8 +5,6 @@
 #include "inemo/inemo.h"
 #include "inemo/INemoSensor.h"
 
-#include "Model/ModelTemplate.h"
-
 #include "Base/NamedTemplate.h"
 #include "Base/Sequence.h"
 
@@ -24,7 +22,7 @@ namespace inemo
 	Sensors are created and managed by system model.
 	\sa inemo::INemoSystemModel
 */
-class CNemoSensor: public acf::ModelTemplate<acf::NamedTemplate<inemo::INemoSensor> >
+class CNemoSensor: public acf::NamedTemplate<inemo::INemoSensor>
 {
 public:
 	CNemoSensor();
