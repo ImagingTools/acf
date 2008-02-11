@@ -16,7 +16,7 @@ class IArchive;
 /**
 	Common class for all classes which objects can be archived or restored from archive.
  */
-class ISerializable: virtual public IPolymorphic
+class ISerializable: virtual public istd::IPolymorphic
 {
 public:
 	/**	Load or store state of this object as a archive stream.

@@ -48,6 +48,7 @@ typedef signed int I_SDWORD;
 typedef unsigned long long I_QWORD;
 typedef signed long long I_SQWORD;
 
+static const double I_EPSILON = 1.0e-8;
 
 /**
 	Some very small number.
