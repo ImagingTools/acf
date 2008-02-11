@@ -48,7 +48,6 @@ protected:
 template <class ObjectClass>
 void TFactory<ObjectClass>::RegisterFactory(FactoryClass* factoryPtr, const std::string& key)
 {
-
 	if (key.empty()){
 		return;
 	}
