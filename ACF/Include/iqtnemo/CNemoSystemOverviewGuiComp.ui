@@ -347,7 +347,7 @@
                <string/>
               </property>
               <property name="pixmap" >
-               <pixmap>../../../Products/Algorithmica/Nemo/Install/Resources/Icons/statistic_32.png</pixmap>
+               <pixmap>../../../Products/Algorithmica/Nemo/Install/Resources/Icons/SystemOverview.png</pixmap>
               </property>
              </widget>
             </item>
@@ -445,7 +445,7 @@
                <string/>
               </property>
               <property name="pixmap" >
-               <pixmap>../../../Products/Algorithmica/Nemo/Install/Resources/Icons/statistic_32.png</pixmap>
+               <pixmap>../../../Products/Algorithmica/Nemo/Install/Resources/Icons/DetailPlot.png</pixmap>
               </property>
              </widget>
             </item>
