@@ -176,6 +176,10 @@
 				RelativePath="..\CLab.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CRgb.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -187,6 +191,10 @@
 			</File>
 			<File
 				RelativePath="..\CLab.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRgb.h"
 				>
 			</File>
 			<File

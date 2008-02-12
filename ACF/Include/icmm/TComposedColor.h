@@ -4,7 +4,7 @@
 
 #include "math.h"
 
-#include "imath/CDouble.h"
+#include "imath/TIValueManip.h"
 
 #include "icmm/icmm.h"
 
@@ -45,33 +45,17 @@ public:
 
 	/**
 		Get color after components value rounding with specified precision.
+		\param	manipulator	manipulator object used to round single components.
+		\param	result		result object.
 	*/
-	void GetRounded(TComposedColor<Count>& result, int precision = 4);
+	void GetRounded(const imath::IDoubleManip& manipulator, TComposedColor<Count>& result);
 
 	/**
 		Check if two values are equal after rounding.
+		\param	color		second color to comparision.
+		\param	manipulator	value manipulator used to round single components.
 	*/
-	bool IsRoundedEqual(const TComposedColor<Count>& color, int precision = 4) const;
-
-	/**
-		Get color after components value rounding down with specified precision.
-	*/
-	void GetRoundedDown(TComposedColor<Count>& result, int precision = 4);
-
-	/**
-		Check if two values are equal after rounding down.
-	*/
-	bool IsRoundedDownEqual(const TComposedColor<Count>& color, int precision = 4) const;
-
-	/**
-		Get color after components value rounding up with specified precision.
-	*/
-	void GetRoundedUp(TComposedColor<Count>& result, int precision = 4);
-
-	/**
-		Check if two values are equal after rounding up.
-	*/
-	bool IsRoundedUpEqual(const TComposedColor<Count>& color, int precision = 4) const;
+	bool IsRoundedEqual(const TComposedColor<Count>& color, const imath::IDoubleManip& manipulator) const;
 
 	/**
 		Allows to compare two colors with tolerance.
@@ -393,63 +377,19 @@ inline const TComposedColor<Count>& TComposedColor<Count>::operator/=(double val
 // public normal methods
 
 template <int Count>
-void TComposedColor<Count>::GetRounded(TComposedColor<Count>& result, int precision)
+void TComposedColor<Count>::GetRounded(const imath::IDoubleManip& manipulator, TComposedColor<Count>& result)
 {
 	for (int i = 0; i < Count; ++i){
-		result.m_components[i] = imath::CDouble::GetRounded(m_components[i], precision);
+		result.m_components[i] = manipulator.GetRounded(m_components[i]);
 	}
 }
 
 
 template <int Count>
-bool TComposedColor<Count>::IsRoundedEqual(const TComposedColor<Count>& color, int precision) const
+bool TComposedColor<Count>::IsRoundedEqual(const TComposedColor<Count>& color, const imath::IDoubleManip& manipulator) const
 {
 	for (int i = 0; i < Count; ++i){
-		if (!imath::CDouble::IsRoundedEqual(m_components[i], color.m_components[i], precision)){
-			return false;
-		}
-	}
-
-	return true;
-}
-
-
-template <int Count>
-void TComposedColor<Count>::GetRoundedDown(TComposedColor<Count>& result, int precision)
-{
-	for (int i = 0; i < Count; ++i){
-		result.m_components[i] = imath::CDouble::GetRoundedDown(m_components[i], precision);
-	}
-}
-
-
-template <int Count>
-bool TComposedColor<Count>::IsRoundedDownEqual(const TComposedColor<Count>& color, int precision) const
-{
-	for (int i = 0; i < Count; ++i){
-		if (!imath::CDouble::IsRoundedDownEqual(m_components[i], color.m_components[i], precision)){
-			return false;
-		}
-	}
-
-	return true;
-}
-
-
-template <int Count>
-void TComposedColor<Count>::GetRoundedUp(TComposedColor<Count>& result, int precision)
-{
-	for (int i = 0; i < Count; ++i){
-		result.m_components[i] = imath::CDouble::GetRoundedUp(m_components[i], precision);
-	}
-}
-
-
-template <int Count>
-bool TComposedColor<Count>::IsRoundedUpEqual(const TComposedColor<Count>& color, int precision) const
-{
-	for (int i = 0; i < Count; ++i){
-		if (!imath::CDouble::IsRoundedUpEqual(m_components[i], color.m_components[i], precision)){
+		if (!manipulator.IsEqual(m_components[i], color.m_components[i])){
 			return false;
 		}
 	}
