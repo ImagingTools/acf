@@ -125,6 +125,9 @@
 			<File
 				RelativePath="..\CLab.cpp">
 			</File>
+			<File
+				RelativePath="..\CRgb.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -142,6 +145,9 @@
 				RelativePath="..\TComposedColor.h">
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\CRgb.h">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
