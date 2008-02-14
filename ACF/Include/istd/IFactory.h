@@ -22,7 +22,7 @@ namespace istd
 class IFactory: virtual public istd::IPolymorphic  
 {
 public:
-	typedef std::vector<std::string> KeyList;
+	typedef ::std::vector<std::string> KeyList;
 
 	/**
 		Returns all posible keys for this factory.

@@ -26,6 +26,11 @@ public:
 		Register service for specified ID.
 	*/
 	static bool RegisterService(const type_info& serviceId, void* servicePtr);
+	/**
+		Register service for specified ID.
+	*/
+	template <class Service>
+	static bool RegisterService(Service* servicePtr);
 	static void* GetService(const type_info& serviceId);
 	static IServicesProvider& GetProviderInstance();
 
@@ -50,6 +55,17 @@ private:
 	static const IServicesProvider* m_parentPtr;
 };
 
+
+// public template methods
+
+template <class Service>
+bool CStaticServicesProvider::RegisterService(Service* servicePtr)
+{
+	return RegisterService(typeid(Service), servicePtr);
+}
+
+
+// public template functions
 
 template <typename Service>
 typename Service* GetService()

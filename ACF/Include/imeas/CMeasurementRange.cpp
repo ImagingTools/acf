@@ -89,3 +89,5 @@ bool CMeasurementRange::IsError(double value) const
 
 
 } // namespace imeas
+
+

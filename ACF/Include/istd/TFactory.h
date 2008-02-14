@@ -33,7 +33,7 @@ public:
 
 	// reimplemented (istd::IFactory)
 	virtual KeyList GetKeys() const;
-	virtual istd::PolymorphicInterface* CreateInstance(const std::string& key);
+	virtual istd::IPolymorphic* CreateInstance(const std::string& key);
 
 protected:
 	typedef std::pair<FactoryClass*, int> FactoryItem;
@@ -42,7 +42,6 @@ protected:
 
 	FactoryMap m_factoryMap;
 };
-
 
 
 template <class ObjectClass>
@@ -77,7 +76,7 @@ typename TFactory<ObjectClass>::KeyList TFactory<ObjectClass>::GetKeys() const
 
 
 template <class ObjectClass>
-istd::PolymorphicInterface* TFactory<ObjectClass>::CreateInstance(const std::string& key)
+istd::IPolymorphic* TFactory<ObjectClass>::CreateInstance(const std::string& key)
 {
 	FactoryMap::iterator foundIter = m_factoryMap.find(key);
 	if (foundIter != m_factoryMap.end()){
@@ -92,4 +91,5 @@ istd::PolymorphicInterface* TFactory<ObjectClass>::CreateInstance(const std::str
 
 
 #endif // !istd_TFactory_h_included
+
 
