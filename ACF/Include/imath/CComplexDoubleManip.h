@@ -5,6 +5,8 @@
 #include <math.h>
 #include <limits>
 
+#include "istd/CRange.h"
+
 #include "imath/CFixedPointManip.h"
 
 
@@ -21,13 +23,12 @@ public:
 				int precision = 1,
 				RoundingType roundingType = RT_NORMAL,
 				double scaleFactor = 1.0,
-				double minValue = ::std::numeric_limits<double>::min(),
-				double maxValue = ::std::numeric_limits<double>::max());
+				const istd::CRange& range = istd::CRange(
+							::std::numeric_limits<double>::min(),
+							::std::numeric_limits<double>::max()));
 
-	double GetMinValue() const;
-	void SetMinValue(double value);
-	double GetMaxValue() const;
-	void SetMaxValue(double value);
+	const istd::CRange& GetRange() const;
+	void SetRange(const istd::CRange& range);
 	double GetScaleFactor() const;
 	void SetScaleFactor(double value);
 
@@ -43,8 +44,7 @@ protected:
 	virtual I_SDWORD GetInternalValue(double value) const;
 
 private:
-	double m_minValue;
-	double m_maxValue;
+	istd::CRange m_range;
 	double m_scaleFactor;
 
 	int m_scaledPrecision;
@@ -53,27 +53,15 @@ private:
 
 // inline methods
 
-inline double CComplexDoubleManip::GetMinValue() const
+inline const istd::CRange& CComplexDoubleManip::GetRange() const
 {
-	return m_minValue;
+	return m_range;
 }
 
 
-inline void CComplexDoubleManip::SetMinValue(double value)
+inline void CComplexDoubleManip::SetRange(const istd::CRange& range)
 {
-	m_minValue = value;
-}
-
-
-inline double CComplexDoubleManip::GetMaxValue() const
-{
-	return m_maxValue;
-}
-
-
-inline void CComplexDoubleManip::SetMaxValue(double value)
-{
-	m_maxValue = value;
+	m_range = range;
 }
 
 

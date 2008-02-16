@@ -37,27 +37,27 @@ void CNemoSensorInfo::SetFourthLevelLocation()
 
 // reimplemented (inemo::INemoSensorInfo)
 
-std::string CNemoSensorInfo::GetFirstLevelLocation() const
+::std::string CNemoSensorInfo::GetFirstLevelLocation() const
 {
-	return std::string();
+	return ::std::string();
 }
 
 
-std::string CNemoSensorInfo::GetSecondLevelLocation() const
+::std::string CNemoSensorInfo::GetSecondLevelLocation() const
 {
-	return std::string();
+	return ::std::string();
 }
 
 
-std::string CNemoSensorInfo::GetThirdLevelLocation() const
+::std::string CNemoSensorInfo::GetThirdLevelLocation() const
 {
-	return std::string();
+	return ::std::string();
 }
 
 
-std::string CNemoSensorInfo::GetFourthLevelLocation() const
+::std::string CNemoSensorInfo::GetFourthLevelLocation() const
 {
-	return std::string();
+	return ::std::string();
 }
 
 

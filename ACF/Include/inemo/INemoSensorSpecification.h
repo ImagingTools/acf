@@ -30,7 +30,7 @@ public:
 	/**
 		Returns the measurement unit of the sensor.
 	*/
-	virtual std::string GetUnit() const = 0;
+	virtual ::std::string GetUnit() const = 0;
 
 	/**
 		Returns the measurement type of the sensor.

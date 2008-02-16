@@ -170,7 +170,7 @@ bool CXmlWriteArchive::Process(double& value)
 }
 
 
-bool CXmlWriteArchive::Process(std::string& value)
+bool CXmlWriteArchive::Process(::std::string& value)
 {
 	return PushTextNode(QString::fromStdString(value));
 }

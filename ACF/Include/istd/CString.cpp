@@ -33,7 +33,7 @@ CString::CString(const char* str)
 	wchar_t* wideStringBuffer = new wchar_t[length];
 	memset(wideStringBuffer, 0, length * sizeof(wchar_t));
 	mbstowcs(wideStringBuffer, str, length);
-	*this = std::wstring(wideStringBuffer);
+	*this = ::std::wstring(wideStringBuffer);
 
 	delete [] wideStringBuffer;
 }
@@ -45,20 +45,20 @@ CString::CString(const CString& str)
 }
 
 
-CString::CString(const std::string& str)
+CString::CString(const ::std::string& str)
 {
 	*this = CString(str.c_str());
 }
 
 
-CString::CString(const std::wstring& wideString)
+CString::CString(const ::std::wstring& wideString)
 	:BaseClass(wideString)
 {
 
 }
 
 
-const std::string& CString::ToString() const
+const ::std::string& CString::ToString() const
 {
 	if ((m_stdString.empty() && !empty()) || m_isModified){
 		ConvertToChar();
@@ -82,9 +82,9 @@ void CString::Reset()
 	
 bool CString::operator == (const CString& other) const
 {
-	const std::wstring& thisRef = *this;
+	const ::std::wstring& thisRef = *this;
 
-	return thisRef == (static_cast<const std::wstring&>(other));
+	return thisRef == (static_cast<const ::std::wstring&>(other));
 }
 
 
@@ -102,7 +102,7 @@ bool CString::operator == (const wchar_t *s) const
 }
 
 
-bool CString::operator == (const std::string& s) const
+bool CString::operator == (const ::std::string& s) const
 {
 	CString ss(s);
 	return *this == ss;
@@ -127,7 +127,7 @@ bool CString::operator != (const CString& s) const
 }
 
 
-bool CString::operator != (const std::string& s) const
+bool CString::operator != (const ::std::string& s) const
 {
 	return !operator ==(s);
 }
@@ -168,7 +168,7 @@ CString& CString::operator = (const CString& s)
 }
 
 
-CString& CString::operator = (const std::string& s)
+CString& CString::operator = (const ::std::string& s)
 {
 	CString ss(s);
 	
@@ -190,7 +190,7 @@ CString CString::ToUpper() const
 {
 	CString upperString;
 	for (CString::const_iterator iter = begin(); iter != end();iter++){
-		upperString.push_back(std::toupper(*iter, std::locale()));
+		upperString.push_back(::std::toupper(*iter, ::std::locale()));
 	}
 
 	return upperString;
@@ -201,7 +201,7 @@ CString CString::ToLower() const
 {
 	CString lowerString;
 	for(CString::const_iterator iter = begin(); iter != end();iter++){
-		lowerString.push_back(std::toupper(*iter, std::locale()));
+		lowerString.push_back(::std::toupper(*iter, ::std::locale()));
 	}
 
 	return lowerString;
@@ -215,7 +215,7 @@ void CString::Copy(const CString& str)
 	clear();
 	resize(str.size());
 
-	std::copy(str.begin(), str.end(), begin());
+	::std::copy(str.begin(), str.end(), begin());
 
 	ConvertToChar();
 }
@@ -226,7 +226,7 @@ void CString::ConvertToChar() const
 	int length  = wcslen(c_str())+1;
 	char* newAsciiBuffer = new char[length];
 	wcstombs(newAsciiBuffer,c_str(), length);
-	m_stdString = std::string(newAsciiBuffer);
+	m_stdString = ::std::string(newAsciiBuffer);
 
 	delete [] newAsciiBuffer;
 }

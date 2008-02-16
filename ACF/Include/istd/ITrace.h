@@ -18,7 +18,7 @@ namespace istd
 /**
 	Provide system logging.
 */
-class ITrace: public IPolymorphic
+class ITrace: virtual public IPolymorphic
 {
 public:
 	/**

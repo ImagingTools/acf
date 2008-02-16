@@ -18,7 +18,7 @@ istd::CRange CNemoSensorSpecification::GetRange() const
 	return m_range;
 }
 
-std::string CNemoSensorSpecification::GetUnit() const
+::std::string CNemoSensorSpecification::GetUnit() const
 {
 	return m_unit;
 }

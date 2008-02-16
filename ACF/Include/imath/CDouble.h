@@ -53,7 +53,7 @@ public:
 	/**
 		Check if two values are similiar with specified tolerance.
 	*/
-	bool IsSimiliar(const CDouble& value, double tolerance = I_EPSILON) const;
+	bool IsSimiliar(const CDouble& value, double tolerance = I_BIG_EPSILON) const;
 
 	bool Serialize(iser::IArchive& archive);
 
@@ -86,7 +86,7 @@ public:
 	static bool IsRoundedDownEqual(double value1, double value2, int precision = 2);
 	static double GetRoundedUp(double value, int precision = 2);
 	static bool IsRoundedUpEqual(double value1, double value2, int precision = 2);
-	static bool IsSimiliar(double value1, double value2, double tolerance = I_EPSILON);
+	static bool IsSimiliar(double value1, double value2, double tolerance = I_BIG_EPSILON);
 
 private:
 	double m_value;

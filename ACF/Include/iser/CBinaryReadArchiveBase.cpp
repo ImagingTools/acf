@@ -99,7 +99,7 @@ bool CBinaryReadArchiveBase::Process(double& value)
 }
 
 
-bool CBinaryReadArchiveBase::Process(std::string& value)
+bool CBinaryReadArchiveBase::Process(::std::string& value)
 {			
 	int stringLength;
 
@@ -115,7 +115,7 @@ bool CBinaryReadArchiveBase::Process(std::string& value)
 		retVal = ProcessData(&buffer[0], stringLength * sizeof(char));	
 
 		if (retVal){
-			value = std::string(&buffer[0]);
+			value = ::std::string(&buffer[0]);
 		}
 	}
 	

@@ -25,10 +25,10 @@ public:
 	virtual void SetFourthLevelLocation();
 
 	// reimplemented (inemo::INemoSensorInfo)
-	virtual std::string GetFirstLevelLocation() const;
-	virtual std::string GetSecondLevelLocation() const;
-	virtual std::string GetThirdLevelLocation() const;
-	virtual std::string GetFourthLevelLocation() const;
+	virtual ::std::string GetFirstLevelLocation() const;
+	virtual ::std::string GetSecondLevelLocation() const;
+	virtual ::std::string GetThirdLevelLocation() const;
+	virtual ::std::string GetFourthLevelLocation() const;
 };
 
 

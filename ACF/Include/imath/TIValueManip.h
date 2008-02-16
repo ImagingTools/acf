@@ -18,7 +18,7 @@ namespace imath
  *		data type.
  */
 template <class ValueType>
-class TIValueManip: public istd::IPolymorphic
+class TIValueManip: virtual public istd::IPolymorphic
 {
 public:
 	/**

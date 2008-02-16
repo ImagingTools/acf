@@ -28,22 +28,22 @@ public:
 	/**
 	* Returns the first level sensor location.
 	*/
-	virtual std::string GetFirstLevelLocation() const = 0;
+	virtual ::std::string GetFirstLevelLocation() const = 0;
 
 	/**
 	* Returns the second level sensor location.
 	*/
-	virtual std::string GetSecondLevelLocation() const = 0;
+	virtual ::std::string GetSecondLevelLocation() const = 0;
 
 	/**
 	* Returns the third level sensor location.
 	*/
-	virtual std::string GetThirdLevelLocation() const = 0;
+	virtual ::std::string GetThirdLevelLocation() const = 0;
 
 	/**
 	* Returns the fourth level sensor location.
 	*/
-	virtual std::string GetFourthLevelLocation() const = 0;
+	virtual ::std::string GetFourthLevelLocation() const = 0;
 
 };
 

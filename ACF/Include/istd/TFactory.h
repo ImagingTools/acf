@@ -29,23 +29,23 @@ public:
 	/**
 		Registers object factory \c factoryPtr that will be mapped to the ID \c key.
 	*/
-	void RegisterFactory(FactoryClass* factoryPtr, const std::string& key);
+	void RegisterFactory(FactoryClass* factoryPtr, const ::std::string& key);
 
 	// reimplemented (istd::IFactory)
 	virtual KeyList GetKeys() const;
-	virtual istd::IPolymorphic* CreateInstance(const std::string& key);
+	virtual istd::IPolymorphic* CreateInstance(const ::std::string& key);
 
 protected:
-	typedef std::pair<FactoryClass*, int> FactoryItem;
+	typedef ::std::pair<FactoryClass*, int> FactoryItem;
 
-	typedef std::map<std::string, FactoryItem> FactoryMap;
+	typedef ::std::map<::std::string, FactoryItem> FactoryMap;
 
 	FactoryMap m_factoryMap;
 };
 
 
 template <class ObjectClass>
-void TFactory<ObjectClass>::RegisterFactory(FactoryClass* factoryPtr, const std::string& key)
+void TFactory<ObjectClass>::RegisterFactory(FactoryClass* factoryPtr, const ::std::string& key)
 {
 	if (key.empty()){
 		return;
@@ -55,7 +55,7 @@ void TFactory<ObjectClass>::RegisterFactory(FactoryClass* factoryPtr, const std:
 		return;
 	}
 
-	m_factoryMap[key] = std::make_pair(factoryPtr, int(m_factoryMap.size()));
+	m_factoryMap[key] = ::std::make_pair(factoryPtr, int(m_factoryMap.size()));
 }
 
 	
@@ -76,7 +76,7 @@ typename TFactory<ObjectClass>::KeyList TFactory<ObjectClass>::GetKeys() const
 
 
 template <class ObjectClass>
-istd::IPolymorphic* TFactory<ObjectClass>::CreateInstance(const std::string& key)
+istd::IPolymorphic* TFactory<ObjectClass>::CreateInstance(const ::std::string& key)
 {
 	FactoryMap::iterator foundIter = m_factoryMap.find(key);
 	if (foundIter != m_factoryMap.end()){

@@ -9,9 +9,8 @@ CComplexDoubleManip::CComplexDoubleManip(
 			int precision,
 			RoundingType roundingType,
 			double scaleFactor,
-			double minValue,
-			double maxValue)
-:	BaseClass(precision, roundingType)
+			const istd::CRange& range)
+:	BaseClass(precision, roundingType), m_scaleFactor(scaleFactor), m_range(range)
 {
 }
 
@@ -42,13 +41,7 @@ bool CComplexDoubleManip::GetParsed(const ::std::string& text, double& result) c
 
 I_SDWORD CComplexDoubleManip::GetInternalValue(double value) const
 {
-	if (value < m_minValue){
-		value = m_minValue;
-	}
-
-	if (value > m_maxValue){
-		value = m_maxValue;
-	}
+	value = m_range.GetNearestInRange(value);
 
 	return BaseClass::GetInternalValue(value);
 }

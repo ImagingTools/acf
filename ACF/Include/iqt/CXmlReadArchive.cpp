@@ -246,7 +246,7 @@ bool CXmlReadArchive::Process(double& value)
 }
 
 
-bool CXmlReadArchive::Process(std::string& value)
+bool CXmlReadArchive::Process(::std::string& value)
 {
 	QString text = PullTextNode();
 

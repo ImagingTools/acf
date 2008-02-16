@@ -41,7 +41,7 @@ protected:
 	};
 
 private:
-	std::ifstream m_stream;
+	::std::ifstream m_stream;
 
 	bool m_supportTagSkipping;
 

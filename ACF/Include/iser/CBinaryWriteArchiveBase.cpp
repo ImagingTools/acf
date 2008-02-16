@@ -98,7 +98,7 @@ bool CBinaryWriteArchiveBase::Process(double& value)
 }
 
 
-bool CBinaryWriteArchiveBase::Process(std::string& value)
+bool CBinaryWriteArchiveBase::Process(::std::string& value)
 {			
 	int size = value.size() * sizeof(char);
 

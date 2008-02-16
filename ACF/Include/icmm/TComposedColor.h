@@ -60,7 +60,7 @@ public:
 	/**
 		Allows to compare two colors with tolerance.
 	*/
-	bool IsSimilar(const TComposedColor<Count>& color, double tolerance = I_EPSILON) const;
+	bool IsSimilar(const TComposedColor<Count>& color, double tolerance = I_BIG_EPSILON) const;
 
 	/**
 		Check if this color value is normalized.

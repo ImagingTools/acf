@@ -48,18 +48,18 @@ typedef signed int I_SDWORD;
 typedef unsigned long long I_QWORD;
 typedef signed long long I_SQWORD;
 
-static const double I_EPSILON = 1.0e-8;
+static const double I_BIG_EPSILON = 1.0e-8;
 
 /**
 	Some very small number.
 */
-#define I_EPSYLON std::numeric_limits<double>::epsilon()
+#define I_EPSILON ::std::numeric_limits<double>::epsilon()
 
 
 /**
 	Infinite value.
 */
-#define I_INFINITY std::numeric_limits<double>::infinity()
+#define I_INFINITY ::std::numeric_limits<double>::infinity()
 
 
 #ifdef _DEBUG

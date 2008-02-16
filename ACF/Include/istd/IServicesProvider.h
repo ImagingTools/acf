@@ -15,7 +15,7 @@ namespace istd
 /**
 Allow access to service implementation.
  */
-class IServicesProvider: public IPolymorphic
+class IServicesProvider: virtual public IPolymorphic
 {
 public:
 	/**
