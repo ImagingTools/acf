@@ -75,7 +75,41 @@ void CNemoSystemModelComp::SynchronizeModelWithTable()
 			inemo::CNemoSensor* sensor = new acf::ModelTemplate<inemo::CNemoSensor>;
 			sensor->setName(acf::acfString(sensorRecord.value("name").toString()));
 
-			// set measurement data:
+			double bottomError = sensorRecord.value("lowred").toDouble();
+			double topError = sensorRecord.value("highred").toDouble();
+			double bottomWarning = sensorRecord.value("lowyellow").toDouble();
+			double topWarning = sensorRecord.value("highyellow").toDouble();
+
+			imeas::CMeasurementRange measurementRange;
+
+			measurementRange.SetLowerErrorLimit(bottomError);
+			measurementRange.SetUpperErrorLimit(topError);
+			measurementRange.SetLowerWarningLimit(bottomWarning);
+			measurementRange.SetUpperWarningLimit(topWarning);
+
+			sensor->SetMeasurementRange(measurementRange);
+
+			// Set sensor specification:
+			int modelId = sensorRecord.value("sensor").toInt();
+
+			QSqlTableModel specificationTable(this, m_tableModelPtr->database());
+			specificationTable.setTable("nemo.models");
+			if (specificationTable.select()){
+				for (int row = 0; row < specificationTable.rowCount(); row++){
+					QSqlRecord rowRecord = specificationTable.record(row);
+					int id = rowRecord.value("id").toInt();
+
+					if (id == modelId){
+						inemo::CNemoSensorSpecification specification;
+						istd::CRange range(rowRecord.value("low").toDouble(), rowRecord.value("high").toDouble());
+						specification.SetRange(range);
+						sensor->SetSpecification(specification);
+						break;
+					}
+				}
+			}
+
+			// Set measurement data:
 			int sensorId = sensorRecord.value("sensor").toInt();
 			QString measurementTableName = QString("nemo.sensor%1").arg(sensorId, 5, 10, QLatin1Char('0'));
 			QSqlTableModel measurementTable(this, m_tableModelPtr->database());

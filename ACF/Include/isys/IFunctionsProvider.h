@@ -32,9 +32,7 @@ public:
 };
 
 
-
 } // namespace isys
-
 
 
 #endif //!INCLUDED_isys_IFunctionsProvider_h

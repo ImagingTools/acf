@@ -53,8 +53,26 @@ private:
 	virtual void ResetView();
 
 private:
+	class CBackgroundItem: public QwtPlotItem
+	{
+	public:
+		CBackgroundItem();
+
+		void SetMeasurementRange(const imeas::CMeasurementRange& measurementRange, const istd::CRange& sensorRange);
+
+		// reimplemented (QwtPlotItem)
+		virtual int rtti() const;
+		virtual void draw(QPainter *painter, const QwtScaleMap &, const QwtScaleMap &yMap, const QRect &rect) const;
+
+	private:
+		imeas::CMeasurementRange m_measurementRange;
+		istd::CRange m_sensorRange;
+	};
+
 	QwtPlot* m_plotPtr;
 	QwtPlotCurve m_plotCurve;
+	
+	CBackgroundItem m_background;
 };
 
 

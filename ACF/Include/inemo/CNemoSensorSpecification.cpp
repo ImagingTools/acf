@@ -11,6 +11,24 @@ CNemoSensorSpecification::CNemoSensorSpecification()
 }
 
 
+void CNemoSensorSpecification::SetRange(const istd::CRange& range)
+{
+	m_range = range;
+}
+
+
+void CNemoSensorSpecification::SetUnit(const ::std::string& unit)
+{
+	m_unit = unit;
+}
+
+
+void CNemoSensorSpecification::SetType(int type)
+{
+	m_type = type;
+}
+
+
 // reimplemented (inemo::INemoSensorSpecification)
 
 istd::CRange CNemoSensorSpecification::GetRange() const

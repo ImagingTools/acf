@@ -12,64 +12,11 @@
 #include "Base/SequenceInterface.h"
 
 #include "inemo/INemoSensorData.h"
+#include "inemo/INemoSensorSpecification.h"
 
 
 namespace iqtnemo
 {
-
-
-class Background: public QwtPlotItem
-{
-public:
-    Background()
-    {
-        setZ(0.0);
-    }
-
-    virtual int rtti() const
-    {
-        return QwtPlotItem::Rtti_PlotUserItem;
-    }
-
-    virtual void draw(QPainter *painter,
-        const QwtScaleMap &, const QwtScaleMap &yMap,
-        const QRect &rect) const
-    {
-        QColor c(Qt::red);
-        QRect r = rect;
-
-		c.setAlpha(70);
-		r.setBottom(yMap.transform(90));
-        r.setTop(yMap.transform(100));
-        painter->fillRect(r, c);
-
-        QColor c2(Qt::yellow);
-		c2.setAlpha(70);
-		r.setBottom(yMap.transform(70));
-        r.setTop(yMap.transform(90));
-        painter->fillRect(r, c2);
-
-		QColor c3(Qt::green);
-		c3.setAlpha(70);
-		r.setBottom(yMap.transform(70));
-        r.setTop(yMap.transform(30));
-        painter->fillRect(r, c3);
-
-		r.setBottom(yMap.transform(30));
-        r.setTop(yMap.transform(10));
-        painter->fillRect(r, c2);
-
-		r.setBottom(yMap.transform(10));
-        r.setTop(yMap.transform(0));
-        painter->fillRect(r, c);
-	}
-};
-
-
-CNemoSensorPlotGuiComp::CNemoSensorPlotGuiComp()
-	:BaseClass()
-{
-}
 
 
 // reimplemented (acf::ObserverInterface)
@@ -129,12 +76,11 @@ void CNemoSensorPlotGuiComp::initializeGui()
 		m_plotPtr->setCanvasLineWidth(0);
 		m_plotPtr->setAxisScale(QwtPlot::yLeft, 0, 100);
 		m_plotPtr->plotLayout()->setAlignCanvasToScales(true);
-		Background* background = new Background();
-		background->attach(m_plotPtr);
+		m_background.attach(m_plotPtr);
 
-		QColor c(Qt::blue);
+		QColor c(Qt::white);
 		QColor c2(Qt::darkBlue);
-        c.setAlpha(30);
+        c.setAlpha(128);
         m_plotCurve.setPen(c2);
 		m_plotCurve.setBrush(c);
 		m_plotCurve.setRenderHint(QwtPlotItem::RenderAntialiased);
@@ -148,7 +94,6 @@ void CNemoSensorPlotGuiComp::initializeGui()
 
 		layoutPtr->addWidget(m_plotPtr);
 	}
-
 }
 
 
@@ -159,6 +104,11 @@ void CNemoSensorPlotGuiComp::UpdateView()
 	if (m_objectPtr == NULL){
 		return;
 	}
+
+	istd::CRange sensorRange = m_objectPtr->GetSpecification().GetRange();
+
+	m_background.SetMeasurementRange(m_objectPtr->GetMeasurementRange(), sensorRange);
+	m_plotPtr->setAxisScale(QwtPlot::yLeft, sensorRange.GetBottomValue(), sensorRange.GetTopValue());
 
 	const acf::SequenceInterface& measurementData = m_objectPtr->GetData().GetMeasurementData();
 	int sequenceSize = measurementData.count();
@@ -185,6 +135,72 @@ void CNemoSensorPlotGuiComp::ResetView()
 	m_plotCurve.setData(NULL, NULL, 0);
 
 	m_plotPtr->replot();
+}
+
+
+// public methods of embedded class CBackgound
+
+CNemoSensorPlotGuiComp::CBackgroundItem::CBackgroundItem()
+{
+	setZ(0.0);
+}
+
+
+void CNemoSensorPlotGuiComp::CBackgroundItem::SetMeasurementRange(const imeas::CMeasurementRange& measurementRange, const istd::CRange& sensorRange)
+{
+	m_measurementRange = measurementRange;
+
+	m_sensorRange = sensorRange;
+}
+
+
+int CNemoSensorPlotGuiComp::CBackgroundItem::rtti() const
+{
+	return QwtPlotItem::Rtti_PlotUserItem;
+}
+
+
+// reimplemented (QwtPlotItem)
+
+void CNemoSensorPlotGuiComp::CBackgroundItem::draw(QPainter *painter, const QwtScaleMap &, const QwtScaleMap &yMap, const QRect &rect) const
+{
+	if (m_measurementRange.IsValid()){
+		
+	}
+	
+	QColor c(Qt::red);
+	QRect r = rect;
+
+	c.setAlpha(192);
+	r.setBottom(yMap.transform(m_sensorRange.GetBottomValue()));
+	r.setTop(yMap.transform(m_measurementRange.GetLowerErrorLimit()));
+	painter->fillRect(r, c);
+
+	QColor c2(Qt::yellow);
+	c2.setAlpha(192);
+	r.setBottom(yMap.transform(m_measurementRange.GetLowerErrorLimit()));
+	r.setTop(yMap.transform(m_measurementRange.GetLowerWarningLimit()));
+	painter->fillRect(r, c2);
+
+	QColor c3(Qt::green);
+	c3.setAlpha(192);
+	r.setBottom(yMap.transform(m_measurementRange.GetLowerWarningLimit()));
+	r.setTop(yMap.transform(m_measurementRange.GetUpperWarningLimit()));
+	painter->fillRect(r, c3);
+
+	r.setBottom(yMap.transform(m_measurementRange.GetUpperWarningLimit()));
+	r.setTop(yMap.transform(m_measurementRange.GetUpperErrorLimit()));
+	painter->fillRect(r, c2);
+
+	r.setBottom(yMap.transform(m_measurementRange.GetUpperErrorLimit()));
+	r.setTop(yMap.transform(m_sensorRange.GetTopValue()));
+	painter->fillRect(r, c);
+}
+
+
+CNemoSensorPlotGuiComp::CNemoSensorPlotGuiComp()
+	:BaseClass()
+{
 }
 
 

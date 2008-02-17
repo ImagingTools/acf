@@ -21,7 +21,7 @@ class TEnableableBase: virtual public BaseClass
 public:
 	TEnableableBase();
 
-	// pseudo-reimplemented (ibase::IEnableable)
+	// pseudo-reimplemented (istd::IEnableable)
 	virtual bool IsEnabled() const;
 	virtual bool IsEnablingAllowed() const;
 	virtual void SetEnabled(bool isEnabled = true);
@@ -45,7 +45,7 @@ TEnableableBase::Enableable()
 }
 
 
-// pseudo-reimplemented (ibase::IEnableable)
+// pseudo-reimplemented (istd::IEnableable)
 
 bool TEnableableBase::IsEnabled() const
 {

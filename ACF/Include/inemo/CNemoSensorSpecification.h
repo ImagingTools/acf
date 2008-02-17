@@ -19,6 +19,10 @@ class CNemoSensorSpecification: public inemo::INemoSensorSpecification
 public:
 	CNemoSensorSpecification();
 
+	virtual void SetRange(const istd::CRange& range);
+	virtual void SetUnit(const ::std::string& unit);
+	virtual void SetType(int type);
+
 	// reimplemented (inemo::INemoSensorSpecification)
 	virtual istd::CRange GetRange() const;
 	virtual ::std::string GetUnit() const;
