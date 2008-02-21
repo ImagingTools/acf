@@ -1,14 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IcmDll", "IcmDll.vcproj", "{8EC463A6-A9FB-4B43-9AF4-19F3979FC827}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E310E201-5DDC-4CCE-B49D-453D855166E6} = {E310E201-5DDC-4CCE-B49D-453D855166E6}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProfileEditor", "..\..\..\CP0405\App\APP ProfileEditor\CP_ProfileEditor.vcproj", "{E310E201-5DDC-4CCE-B49D-453D855166E6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IcmDll", "..\IcmDll\VC7\IcmDll.vcproj", "{8EC463A6-A9FB-4B43-9AF4-19F3979FC827}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RegisterCmm", "..\..\RegisterCmm\RegisterCmm.vcproj", "{2FEDCF45-77BE-4D63-982F-46659DAFE036}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RegisterCmm", "..\RegisterCmm\VC7\RegisterCmm.vcproj", "{2FEDCF45-77BE-4D63-982F-46659DAFE036}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -22,10 +17,6 @@ Global
 		{8EC463A6-A9FB-4B43-9AF4-19F3979FC827}.Debug.Build.0 = Debug|Win32
 		{8EC463A6-A9FB-4B43-9AF4-19F3979FC827}.Release.ActiveCfg = Release|Win32
 		{8EC463A6-A9FB-4B43-9AF4-19F3979FC827}.Release.Build.0 = Release|Win32
-		{E310E201-5DDC-4CCE-B49D-453D855166E6}.Debug.ActiveCfg = Debug_4_5|Win32
-		{E310E201-5DDC-4CCE-B49D-453D855166E6}.Debug.Build.0 = Debug_4_5|Win32
-		{E310E201-5DDC-4CCE-B49D-453D855166E6}.Release.ActiveCfg = Release_4_5|Win32
-		{E310E201-5DDC-4CCE-B49D-453D855166E6}.Release.Build.0 = Release_4_5|Win32
 		{2FEDCF45-77BE-4D63-982F-46659DAFE036}.Debug.ActiveCfg = Debug|Win32
 		{2FEDCF45-77BE-4D63-982F-46659DAFE036}.Debug.Build.0 = Debug|Win32
 		{2FEDCF45-77BE-4D63-982F-46659DAFE036}.Release.ActiveCfg = Release|Win32

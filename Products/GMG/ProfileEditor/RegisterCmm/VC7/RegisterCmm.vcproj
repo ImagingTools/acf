@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Mscms.lib ACFWinPck.lib"
+				AdditionalDependencies="Mscms.lib ACF_StdPck.lib iwin.lib "
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(ACFDIR)\Lib\$(ConfigurationName)VC7"
 				GenerateDebugInformation="TRUE"
@@ -88,7 +88,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Mscms.lib ACFWinPck.lib"
+				AdditionalDependencies="Mscms.lib ACF_StdPck.lib iwin.lib "
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(ACFDIR)\Lib\$(ConfigurationName)VC7"
 				GenerateDebugInformation="TRUE"
@@ -131,13 +131,13 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath=".\RegisterCmm.cpp">
+				RelativePath="..\RegisterCmm.cpp">
 			</File>
 			<File
-				RelativePath=".\RegisterCmmDlg.cpp">
+				RelativePath="..\RegisterCmmDlg.cpp">
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp">
+				RelativePath="..\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
@@ -157,16 +157,16 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath=".\RegisterCmm.h">
+				RelativePath="..\RegisterCmm.h">
 			</File>
 			<File
-				RelativePath=".\RegisterCmmDlg.h">
+				RelativePath="..\RegisterCmmDlg.h">
 			</File>
 			<File
-				RelativePath=".\Resource.h">
+				RelativePath="..\resource.h">
 			</File>
 			<File
-				RelativePath=".\stdafx.h">
+				RelativePath="..\stdafx.h">
 			</File>
 		</Filter>
 		<Filter
@@ -174,18 +174,15 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
 			<File
-				RelativePath=".\res\RegisterCmm.ico">
+				RelativePath="..\res\RegisterCmm.ico">
 			</File>
 			<File
-				RelativePath=".\RegisterCmm.rc">
+				RelativePath="..\RegisterCmm.rc">
 			</File>
 			<File
-				RelativePath=".\res\RegisterCmm.rc2">
+				RelativePath="..\res\RegisterCmm.rc2">
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\ReadMe.txt">
-		</File>
 	</Files>
 	<Globals>
 		<Global
