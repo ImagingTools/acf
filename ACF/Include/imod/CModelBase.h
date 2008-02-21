@@ -48,7 +48,7 @@ protected:
 		Notifies all observers about begin of changes in the data model.
 		For updating control you can use some specified flags \c updateFlags
 		and for additional data transfer \c udpateParamsPtr.
-		\sa NotifyBeforeUpdate()
+		\sa NotifyAfterUpdate()
 	*/
 	virtual void NotifyBeforeUpdate(int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
 
@@ -56,7 +56,7 @@ protected:
 		Notifies all observers that the changes are finished.
 		For updating control you can use some specified flags \c updateFlags
 		and for additional data transfer \c udpateParamsPtr.
-		\sa NotifyAfterUpdate()
+		\sa NotifyBeforeUpdate()
 	*/
 	virtual void NotifyAfterUpdate(int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
 
