@@ -1,6 +1,6 @@
 var variableExt = "envVariable"
-var variableExp = new RegExp(".*\." + variableExt);
-var scriptExp = new RegExp(".*\.autoregister\.js");
+var variableExp = new RegExp(".*\." + variableExt + "$");
+var scriptExp = new RegExp(".*\.autoregister\.js$");
 var registryPath = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\";
 
 
