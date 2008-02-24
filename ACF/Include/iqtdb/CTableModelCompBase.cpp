@@ -1,6 +1,6 @@
-#include "QtAcf/QtAcf.h"
-
 #include "iqtdb/CTableModelCompBase.h"
+
+#include "iqt/iqt.h"
 
 
 namespace iqtdb
@@ -28,8 +28,8 @@ bool CTableModelCompBase::onInitialize(acf::ComponentManagerInterface* managerPt
 		if (!m_databaseConnectorIfPtr->IsDatabaseConnected()){
 			if (m_databaseConnectorIfPtr->ConnectToDatabase()){
 				m_tableModelPtr = new QSqlRelationalTableModel(this);
-				m_schemaName = acf::qtString(m_schemaNameAttr.value());
-				m_tableName = acf::qtString(m_tableNameAttr.value());
+				m_schemaName = iqt::GetQString(m_schemaNameAttr.value());
+				m_tableName = iqt::GetQString(m_tableNameAttr.value());
 
 				QString tableName = m_tableName;
 				if (!m_schemaName.isEmpty()){

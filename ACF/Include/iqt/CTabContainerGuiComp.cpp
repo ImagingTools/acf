@@ -2,9 +2,6 @@
 
 #include <QGridLayout>
 
-#include "QtAcf/QtAcf.h"
-
-
 #include "iqt/CTabContainerGuiComp.h"
 
 
@@ -41,7 +38,7 @@ void CTabContainerGuiComp::initializeGui()
 
 		int tabCount = m_tabNamesAttr.count();
 		for (int tabIndex = 0; tabIndex < tabCount; tabIndex++){
-			QString tabName = acf::qtString(m_tabNamesAttr.value(tabIndex));
+			QString tabName = iqt::GetQString(m_tabNamesAttr.value(tabIndex));
 
 			QWidget* tab = new QWidget(m_widget);
 			int addTabIndex = m_widget->addTab(tab, tabName);

@@ -27,6 +27,8 @@ namespace iqt
 
 extern QString GetQString(const istd::CString& string);
 extern istd::CString GetCString(const QString& string);
+extern QStringList GetQStringList(const istd::CStringList& stringList);
+extern istd::CStringList GetCStringList(const QStringList& stringList);
 
 
 } // namespace iqt

@@ -71,7 +71,7 @@ private:
 };
 
 
-typedef ::std::vector<CString> StringList;
+typedef ::std::vector<istd::CString> CStringList;
 
 
 #define W(string) istd::CString(string)

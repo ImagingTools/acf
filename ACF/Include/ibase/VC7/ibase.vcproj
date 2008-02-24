@@ -127,7 +127,16 @@
 				RelativePath="..\ibase.h">
 			</File>
 			<File
+				RelativePath="..\INamedObject.h">
+			</File>
+			<File
+				RelativePath="..\IObject.h">
+			</File>
+			<File
 				RelativePath="..\TEnableableBase.h">
+			</File>
+			<File
+				RelativePath="..\THierarchicalBase.h">
 			</File>
 			<File
 				RelativePath="..\TNamedBase.h">

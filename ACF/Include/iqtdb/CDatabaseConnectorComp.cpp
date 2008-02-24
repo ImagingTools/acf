@@ -1,6 +1,6 @@
-#include "QtAcf/QtAcf.h"
-
 #include "iqtdb/CDatabaseConnectorComp.h"
+
+#include "iqt/iqt.h"
 
 
 namespace iqtdb
@@ -46,12 +46,12 @@ bool CDatabaseConnectorComp::DisconnectFromDatabase()
 bool CDatabaseConnectorComp::onInitialize(acf::ComponentManagerInterface* managerPtr)
 {
 	if (BaseClass::onInitialize(managerPtr)){
-		m_database = QSqlDatabase::addDatabase(acf::qtString(m_databaseDriverNameAttr.value()));
+		m_database = QSqlDatabase::addDatabase(iqt::GetQString(m_databaseDriverNameAttr.value()));
 
-		m_database.setHostName(acf::qtString(m_hostNameAttr.value()));
-		m_database.setDatabaseName(acf::qtString(m_databaseNameAttr.value()));
-		m_database.setUserName(acf::qtString(m_userNameAttr.value()));
-		m_database.setPassword(acf::qtString(m_passwordAttr.value()));
+		m_database.setHostName(iqt::GetQString(m_hostNameAttr.value()));
+		m_database.setDatabaseName(iqt::GetQString(m_databaseNameAttr.value()));
+		m_database.setUserName(iqt::GetQString(m_userNameAttr.value()));
+		m_database.setPassword(iqt::GetQString(m_passwordAttr.value()));
 
 		return true;
 	}

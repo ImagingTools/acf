@@ -55,13 +55,13 @@ protected:
 
 // public methods
 
-void IChangeable::BeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+inline void IChangeable::BeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	OnBeginChanges(changeFlags, changeParamsPtr);
 }
 
 
-void IChangeable::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+inline void IChangeable::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	OnEndChanges(changeFlags, changeParamsPtr);
 }
@@ -69,13 +69,13 @@ void IChangeable::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPt
 
 // protected methods
 
-void IChangeable::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+inline void IChangeable::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 
 }
 
 
-void IChangeable::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+inline void IChangeable::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 
 }
