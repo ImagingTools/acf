@@ -29,14 +29,14 @@ public:
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
-	virtual void OnDetached(imod::IModel* modelPtr);
+	virtual bool OnDetached(imod::IModel* modelPtr);
 
 	// reimplemented (imod::IModelEditor)
 	virtual bool IsModelChangeable() const;
 
 protected:
 	// reimplemented (TSingleModelObserverBase<InterfaceClass>)
-	virtual void Update(imod::IModel* modelPtr, int updateFlags = 0, imod::IPolymorphic* updateParamsPtr = NULL);
+	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
 
 	bool m_ignoreUpdates;
 };
@@ -49,7 +49,7 @@ TModelEditorBase<InterfaceClass>::TModelEditorBase()
 }
 
 
-// reimplemented (IObserver)
+// reimplemented (imod::IObserver)
 
 template <class InterfaceClass>
 bool TModelEditorBase<InterfaceClass>::OnAttached(imod::IModel* modelPtr)
@@ -65,11 +65,11 @@ bool TModelEditorBase<InterfaceClass>::OnAttached(imod::IModel* modelPtr)
 
 
 template <class InterfaceClass>
-void TModelEditorBase<InterfaceClass>::OnDetached(imod::IModel* modelPtr)
+bool TModelEditorBase<InterfaceClass>::OnDetached(imod::IModel* modelPtr)
 {
-	BaseClass::OnDetached(modelPtr);
-
 	UpdateEditor();
+
+	return BaseClass::OnDetached(modelPtr);
 }
 
 
@@ -87,7 +87,7 @@ bool TModelEditorBase<InterfaceClass>::IsModelChangeable() const
 // reimplemented (TSingleModelObserverBase<InterfaceClass>)
 
 template <class InterfaceClass>
-void TModelEditorBase<InterfaceClass>::Update(imod::IModel* modelPtr, int updateFlags, imod::IPolymorphic* updateParamsPtr)
+void TModelEditorBase<InterfaceClass>::OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	if (m_modelPtr == modelPtr && m_modelPtr != NULL){
 		if (!m_ignoreUpdates){

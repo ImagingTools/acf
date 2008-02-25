@@ -16,10 +16,11 @@
 #include "Comp/Attribute.h"
 #include "Comp/MultipleAttribute.h"
 
-#include "Model/Model.h"
 
-
+#include "istd/IChangeable.h"
 #include "idb/IDatabaseConnector.h"
+
+#include "imod/IModel.h"
 
 
 namespace iqtdb
@@ -35,12 +36,12 @@ namespace iqtdb
 */
 class CTableModelCompBase:	public QObject,
 							public acf::Component,
-							public acf::Model
+							public istd::IChangeable,
+							public imod::IModel
 {
 	Q_OBJECT
 public:
 	typedef acf::Component BaseClass;
-	typedef acf::Model BaseClass2;
 
 	CTableModelCompBase();
 

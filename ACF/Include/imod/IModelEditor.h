@@ -2,7 +2,7 @@
 #define imod_IModelEditor_included
 
 
-#include "imod/imod.h
+#include "imod/imod.h"
 
 
 #include "imod/IObserver.h"

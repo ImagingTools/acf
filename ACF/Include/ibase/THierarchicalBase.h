@@ -4,6 +4,8 @@
 
 #include "ibase/ibase.h"
 
+#include "istd/IHierarchical.h"
+
 
 namespace ibase
 {
@@ -43,12 +45,14 @@ protected:
 
 // public methods
 
+template <class BaseClass>
 THierarchicalBase<BaseClass>::THierarchicalBase()
 {
 	m_parentPtr = NULL;
 }
 
 
+template <class BaseClass>
 void THierarchicalBase<BaseClass>::SetParentPtr(istd::IHierarchical* parentPtr)
 {
 	m_parentPtr = parentPtr;

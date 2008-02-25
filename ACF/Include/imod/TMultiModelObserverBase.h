@@ -7,14 +7,12 @@
 
 #include <vector>
 
+#include "imod/IModel.h"
 #include "imod/IObserver.h"
 
 
 namespace imod
 {
-
-
-class IModel;
 
 
 /**
@@ -34,12 +32,14 @@ public:
 	int GetModelCount() const;
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnAttached(IModel* modelPtr);
-	virtual bool OnDetached(IModel* modelPtr);
+	virtual bool OnAttached(imod::IModel* modelPtr);
+	virtual bool OnDetached(imod::IModel* modelPtr);
 	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
 
 protected:
+	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL) = 0;
+
 	typedef std::vector<imod::IModel*> Models;
 
 	Models m_models;
@@ -100,7 +100,7 @@ int TMultiModelObserverBase<ObjectClass>::GetModelCount() const
 // reimplemented (IObserver)
 
 template<class ObjectClass>
-bool TMultiModelObserverBase<ObjectClass>::OnAttached(IModel* modelPtr)
+bool TMultiModelObserverBase<ObjectClass>::OnAttached(imod::IModel* modelPtr)
 {
 	ObjectClass* objectPtr = dynamic_cast<ObjectClass*>(modelPtr);
 	if (objectPtr == NULL){
@@ -139,16 +139,16 @@ bool TMultiModelObserverBase<ObjectClass>::OnDetached(IModel* modelPtr)
 
 
 template<class ObjectClass>
-void TMultiModelObserverBase<ObjectClass>::BeforeUpdate(IModel* objectPtr, int updateFlags, imod::IPolymorphic* updateParamsPtr)
+void TMultiModelObserverBase<ObjectClass>::BeforeUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 
 }
 
 
 template<class ObjectClass>
-void TMultiModelObserverBase<ObjectClass>::AfterUpdate(IModel* objectPtr, int updateFlags, imod::IPolymorphic* updateParamsPtr)
+void TMultiModelObserverBase<ObjectClass>::AfterUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	
+	OnUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 

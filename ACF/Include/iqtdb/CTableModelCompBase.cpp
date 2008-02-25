@@ -2,6 +2,8 @@
 
 #include "iqt/iqt.h"
 
+#include "istd/TChangeNotifier.h"
+
 
 namespace iqtdb
 {
@@ -14,7 +16,7 @@ CTableModelCompBase::CTableModelCompBase()
 	m_schemaNameAttr("", this, "SchemaName"),
 	m_updateIntervallAttr(1, this, "UpdateIntervall")
 {
-	registerInterface<acf::ModelInterface>(this);
+	registerInterface<imod::IModel>(this);
 
 	m_tableModelPtr = NULL;
 }
@@ -82,7 +84,9 @@ void CTableModelCompBase::RefreshModel()
 			if (IsModelChanged()){
 				SynchronizeModelWithTable();
 
-				notifyUpdate();
+				istd::TChangeNotifier<istd::IChangeable> notifier(this);
+
+				notifier.Reset();
 			}
 		}
 	}

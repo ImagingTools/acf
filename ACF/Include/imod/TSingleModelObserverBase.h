@@ -8,13 +8,11 @@
 #include <vector>
 
 #include "imod/IObserver.h" 
+#include "imod/IModel.h" 
 
 
 namespace imod
 {
-
-
-class IModel;
 
 
 /**
@@ -39,7 +37,7 @@ public:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
 
 protected:
-	virtual void Update(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL) = 0;
+	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL) = 0;
 
 	ObjectClass* m_objectPtr;
 	imod::IModel* m_modelPtr;
@@ -126,7 +124,7 @@ void TSingleModelObserverBase<ObjectClass>::BeforeUpdate(imod::IModel* modelPtr,
 template <class ObjectClass> 
 void TSingleModelObserverBase<ObjectClass>::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	Update(modelPtr, updateFlags, updateParamsPtr);
+	OnUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
