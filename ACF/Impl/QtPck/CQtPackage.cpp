@@ -1,6 +1,7 @@
 #include "CQtPackage.h"
 
 #include "iqt/CTabContainerGuiComp.h"
+#include "iqt/CLoginGuiComp.h"
 
 
 CQtPackage::CQtPackage()
@@ -11,6 +12,7 @@ CQtPackage::CQtPackage()
 	setLibraryInfo(info);
 
 	registerComponent<iqt::CTabContainerGuiComp>("TabContainerGui");
+	registerComponent<iqt::CLoginGuiComp>("LoginGui");
 }
 
 

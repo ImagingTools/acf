@@ -26,27 +26,30 @@ bool CTableModelCompBase::onInitialize(acf::ComponentManagerInterface* managerPt
 {
 	if (BaseClass::onInitialize(managerPtr)){
 		if (!m_databaseConnectorIfPtr->IsDatabaseConnected()){
-			if (m_databaseConnectorIfPtr->ConnectToDatabase()){
-				m_tableModelPtr = new QSqlRelationalTableModel(this);
-				m_schemaName = iqt::GetQString(m_schemaNameAttr.value());
-				m_tableName = iqt::GetQString(m_tableNameAttr.value());
+			if (!m_databaseConnectorIfPtr->ConnectToDatabase()){
+				QString error = QSqlDatabase().lastError().text();
 
-				QString tableName = m_tableName;
-				if (!m_schemaName.isEmpty()){
-					tableName = m_schemaName + "." + tableName;
-				}
+				qDebug(error);
 
-				m_tableModelPtr->setTable(tableName);
-		
-				connect(&m_checkModelTimer, SIGNAL(timeout()), this, SLOT(RefreshModel()));
-				m_checkModelTimer.start(m_updateIntervallAttr.value() * 1000); 
+				return false;
 			}
 		}
-		else{
-			QString error = QSqlDatabase().lastError().text();
 
-			qDebug(error);
+		m_tableModelPtr = new QSqlRelationalTableModel(this);
+		m_schemaName = iqt::GetQString(m_schemaNameAttr.value());
+		m_tableName = iqt::GetQString(m_tableNameAttr.value());
+
+		QString tableName = m_tableName;
+		if (!m_schemaName.isEmpty()){
+			tableName = m_schemaName + "." + tableName;
 		}
+
+		m_tableModelPtr->setTable(tableName);
+
+		connect(&m_checkModelTimer, SIGNAL(timeout()), this, SLOT(RefreshModel()));
+		m_checkModelTimer.start(m_updateIntervallAttr.value() * 1000); 
+
+		m_checkModelTimer.singleShot(500, this, SLOT(RefreshModel())); 
 
 		return true;
 	}
@@ -78,10 +81,10 @@ QString CTableModelCompBase::CalculateFullTableName(const QString& tableName) co
 void CTableModelCompBase::RefreshModel()
 {
 	if (m_tableModelPtr != NULL){
-		if (m_tableModelPtr->select()){
-			if (IsModelChanged()){
-				UpdateModel();
-			}
+		m_tableModelPtr->select();
+
+		if (IsModelChanged()){
+			UpdateModel();
 		}
 	}
 }

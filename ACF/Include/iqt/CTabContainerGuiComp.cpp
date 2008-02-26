@@ -1,6 +1,7 @@
 #ifdef OLD_ACF_SUPPORT
 
 #include <QGridLayout>
+#include <QFrame>
 
 #include "iqt/CTabContainerGuiComp.h"
 
@@ -12,17 +13,16 @@ namespace iqt
 CTabContainerGuiComp::CTabContainerGuiComp()
 :	BaseClass(), 
 	m_slaveGuisCompIfPtr(this, "SlaveGuiComponents"),
+	m_cornerGuiCompIfPtr(this, "CornerWidget"),
 	m_tabNamesAttr(this, "TabNames"),
 	m_iconsProviderCompIfPtr(this, "TabIcons"),
 	m_iconSizeAttr(16, this, "IconSize")
 {
-
 }
 
 
 CTabContainerGuiComp::~CTabContainerGuiComp()
 {
-
 }
 
 
@@ -66,13 +66,20 @@ void CTabContainerGuiComp::initializeGui()
 				m_widget->setTabEnabled(addTabIndex, false);
 			}
 		}
+		
+		// setup the corner widget:
+		if (m_cornerGuiCompIfPtr.isValid()){
+			QFrame* cornerFrame = new QFrame(m_widget);
+			m_widget->setCornerWidget(cornerFrame);
+
+			m_cornerGuiCompIfPtr->attachTo(cornerFrame);
+		}
 	}
 }
 
 
 void CTabContainerGuiComp::destroyGui()
 {
-
 }
 
 
