@@ -6,7 +6,7 @@
 
 
 #include "istd/CString.h"
-#include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 
 
 namespace istd
@@ -16,7 +16,7 @@ namespace istd
 /**
 	Interface for a named object
 */
-class INamed: virtual public istd::IPolymorphic  
+class INamed: virtual public istd::IChangeable  
 {
 public:
 	/**

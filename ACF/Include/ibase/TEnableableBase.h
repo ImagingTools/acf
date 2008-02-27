@@ -7,6 +7,8 @@
 
 #include "ibase/ibase.h"
 
+#include "istd/TChangeNotifier.h"
+
 
 namespace ibase
 {
@@ -41,7 +43,7 @@ protected:
 
 // public methods
 
-TEnableableBase::Enableable()
+TEnableableBase::TEnableableBase()
 {
 	m_isEnabled = true;
 }
@@ -64,6 +66,8 @@ bool TEnableableBase::IsEnablingAllowed() const
 void TEnableableBase::SetEnabled(bool isEnabled)
 {
 	if (IsEnablingAllowed()){
+		istd::TChangeNotifier<istd::IChangeable> changePtr(this);
+	
 		m_isEnabled = isEnabled;
 	}
 }

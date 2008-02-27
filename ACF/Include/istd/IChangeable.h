@@ -23,7 +23,7 @@ public:
 	enum UpdateFlags{
 		AcfInternal = 0x1
 	};
-
+	
 	/**
 		Starts the change transaction. 
 		\note Please note that the \c changeFlags and \c changeParamsPtr must not be identical with the

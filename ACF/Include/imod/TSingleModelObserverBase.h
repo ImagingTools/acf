@@ -113,15 +113,11 @@ template <class ObjectClass>
 bool TSingleModelObserverBase<ObjectClass>::OnDetached(imod::IModel* modelPtr)
 {
 	I_ASSERT(modelPtr != NULL);
+	I_ASSERT(m_modelPtr == modelPtr);
 
 	if (m_modelPtr == modelPtr){		
-
-		BeforeUpdate(modelPtr);
-	
 		m_modelPtr = NULL;
 		m_objectPtr = NULL;
-
-		AfterUpdate(NULL);
 
 		return true;
 	}

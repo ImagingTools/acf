@@ -5,7 +5,7 @@
 #include "istd/istd.h"
 
 
-#include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 
 
 namespace istd
@@ -15,7 +15,7 @@ namespace istd
 /**
 	Interface for objects which can be enabled/disabled.	
 */
-class IEnableable: virtual public IPolymorphic  
+class IEnableable: virtual public istd::IChangeable
 {
 public:
 	/**

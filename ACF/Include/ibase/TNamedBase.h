@@ -8,6 +8,8 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
+#include "istd/TChangeNotifier.h"
+
 
 namespace ibase
 {
@@ -48,6 +50,8 @@ const istd::CString& TNamedBase<BaseClass>::GetName() const
 template <class BaseClass>
 void TNamedBase<BaseClass>::SetName(const istd::CString& name)
 {
+	istd::TChangeNotifier<istd::IChangeable> changePtr(this);
+
 	m_name = name;
 }
 

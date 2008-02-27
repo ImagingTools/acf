@@ -227,12 +227,18 @@
 			<File
 				RelativePath="..\CModelBase.cpp">
 			</File>
+			<File
+				RelativePath="..\CModelChangeObserver.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
 			<File
 				RelativePath="..\CModelBase.h">
+			</File>
+			<File
+				RelativePath="..\CModelChangeObserver.h">
 			</File>
 			<File
 				RelativePath="..\imod.h">
