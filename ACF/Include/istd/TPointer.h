@@ -56,6 +56,8 @@ protected:
 	// blocked operators
 	TPointer<Type>& operator=(const TPointer<Type> ptr);
 
+	Type*& GetPtrRef();
+
 private:
 	Type* m_ptr;
 };
@@ -138,18 +140,25 @@ inline TPointer<Type>::TPointer(Type* ptr)
 
 
 template <class Type>
-void TPointer<Type>::SetPtr(Type* ptr)
+inline void TPointer<Type>::SetPtr(Type* ptr)
 {
 	m_ptr = ptr;
 }
 
 
 template <class Type>
-TPointer<Type>& TPointer<Type>::operator=(const TPointer<Type> ptr)
+inline TPointer<Type>& TPointer<Type>::operator=(const TPointer<Type> ptr)
 {
 	m_ptr = ptr.m_ptr;
 	
 	return *this;
+}
+
+
+template <class Type>
+inline Type*& TPointer<Type>::GetPtrRef()
+{
+	return m_ptr;
 }
 
 

@@ -170,6 +170,9 @@
 				RelativePath="..\CTabContainerGuiComp.cpp">
 			</File>
 			<File
+				RelativePath="..\CTreeWidgetFilter.cpp">
+			</File>
+			<File
 				RelativePath="..\CXmlFileReadArchive.cpp">
 			</File>
 			<File
@@ -188,6 +191,9 @@
 			</File>
 			<File
 				RelativePath="..\CTabContainerGuiComp.h">
+			</File>
+			<File
+				RelativePath="..\CTreeWidgetFilter.h">
 			</File>
 			<File
 				RelativePath="..\CXmlFileReadArchive.h">
@@ -223,7 +229,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -232,7 +239,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -241,7 +249,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot;"/>
 				</FileConfiguration>
@@ -250,7 +259,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;.\GeneratedFiles\ui_CLoginGuiComp.h&quot;"/>
 				</FileConfiguration>

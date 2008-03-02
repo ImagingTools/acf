@@ -32,6 +32,9 @@ public:
 	*/
 	void Reset();
 
+	bool operator==(const CMemoryWriteArchive& archive) const;
+	bool operator!=(const CMemoryWriteArchive& archive) const;
+
 	// reimplemented (iser::IArchive)
 	virtual bool ProcessData(void* data, int size);
 	
@@ -42,6 +45,20 @@ protected:
 
 	bool m_serializeHeader;
 };
+
+
+// inline methods
+
+inline bool CMemoryWriteArchive::operator==(const CMemoryWriteArchive& archive) const
+{
+	return m_dataBuffer == archive.m_dataBuffer;
+}
+
+
+inline bool CMemoryWriteArchive::operator!=(const CMemoryWriteArchive& archive) const
+{
+	return m_dataBuffer != archive.m_dataBuffer;
+}
 
 
 } // namespace iser
