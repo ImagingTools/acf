@@ -241,6 +241,12 @@
 				RelativePath="..\CModelChangeObserver.h">
 			</File>
 			<File
+				RelativePath="..\CSingleModelObserverBase.cpp">
+			</File>
+			<File
+				RelativePath="..\CSingleModelObserverBase.h">
+			</File>
+			<File
 				RelativePath="..\imod.h">
 			</File>
 			<File

@@ -8,14 +8,14 @@ namespace imod
 // public methods
 
 CModelChangeObserver::CModelChangeObserver()
-	:m_isDirty(false),
+:	m_isDirty(false),
 	m_modelObserver(*this)
 {
 }
 
 
 CModelChangeObserver::CModelChangeObserver(imod::IModel* modelPtr)
-	:m_isDirty(false),
+:	m_isDirty(false),
 	m_modelObserver(*this)
 {
 	SetModelPtr(modelPtr);
@@ -24,8 +24,12 @@ CModelChangeObserver::CModelChangeObserver(imod::IModel* modelPtr)
 
 void CModelChangeObserver::SetModelPtr(imod::IModel* modelPtr)
 {
-	if (modelPtr != NULL){
-		modelPtr->AttachObserver(&m_modelObserver);
+	if (modelPtr != m_modelObserver.GetModelPtr()){
+		m_modelObserver.EnsureDetached();
+
+		if (modelPtr != NULL){
+			modelPtr->AttachObserver(&m_modelObserver);
+		}
 	}
 }
 

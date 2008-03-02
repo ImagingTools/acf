@@ -20,8 +20,6 @@ namespace imod
 class CModelChangeObserver: virtual public istd::IPolymorphic
 {
 public:
-	friend class Observer;
-
 	CModelChangeObserver();
 	CModelChangeObserver(imod::IModel* modelPtr);
 
@@ -35,7 +33,7 @@ protected:
 	{
 	public:
 		Observer(CModelChangeObserver& parent)
-			:m_parent(parent)
+		:	m_parent(parent)
 		{
 		}
 
@@ -45,8 +43,13 @@ protected:
 			m_parent.SetDirty(true);
 		}
 
+		using CSingleModelObserverBase::EnsureDetached;
+
+	private:
 		CModelChangeObserver& m_parent;
 	};
+
+	friend class Observer;
 
 private:
 	bool m_isDirty;
