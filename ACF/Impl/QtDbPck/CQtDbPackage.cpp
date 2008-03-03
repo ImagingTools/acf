@@ -9,7 +9,7 @@ CQtDbPackage::CQtDbPackage()
 	using namespace iqtdb;
 
 	acf::ComponentLibraryInfo info;
-	info.setLibName("Qt Database");
+	info.SetLibName("Qt Database");
 	SetLibraryInfo(info);
 
 	RegisterComponent<CDatabaseConnectorComp>("DatabaseConnector");

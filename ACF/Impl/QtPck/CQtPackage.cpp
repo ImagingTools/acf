@@ -8,7 +8,7 @@ CQtPackage::CQtPackage()
 :	BaseClass()
 {
 	acf::ComponentLibraryInfo info;
-	info.setLibName("Qt");
+	info.SetLibName("Qt");
 	SetLibraryInfo(info);
 
 	RegisterComponent<iqt::CTabContainerGuiComp>("TabContainerGui");
