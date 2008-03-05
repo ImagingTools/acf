@@ -39,11 +39,11 @@ protected:
 		Create archive for specified path.
 		\param	path		path to registry file without extension.
 	*/
-	virtual iser::IArchive* CreateArchive(const ::std::string& path) const = 0;
+	virtual iser::IArchive* CreateArchive(const istd::CString& path) const = 0;
 
 private:
-	typedef ::std::map<::std::string, istd::TDelPtr<IRegistry> > RegistriesMap;
-	typedef ::std::map<const IRegistry*, ::std::string> InvRegistriesMap;
+	typedef ::std::map<istd::CString, istd::TDelPtr<IRegistry> > RegistriesMap;
+	typedef ::std::map<const IRegistry*, istd::CString> InvRegistriesMap;
 
 	mutable RegistriesMap m_registriesMap;
 	mutable InvRegistriesMap m_invRegistriesMap;

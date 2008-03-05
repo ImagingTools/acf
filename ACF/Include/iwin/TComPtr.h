@@ -168,7 +168,7 @@ bool TComPtr<Type>::CoCreateInstance(REFCLSID rclsid, IUnknown* outerPtr, I_DWOR
 template <class Type>
 TComPtr<Type>& TComPtr<Type>::operator=(const TComPtr& ptr)
 {
-	SetPtr(ptr, true);
+	SetPtr(ptr.GetPtr(), true);
 
 	return *this;
 }

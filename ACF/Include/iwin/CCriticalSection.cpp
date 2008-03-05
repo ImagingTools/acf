@@ -1,4 +1,4 @@
-#include "iwin/CWinCriticalSection.h"
+#include "iwin/CCriticalSection.h"
 
 
 extern "C" BOOL _stdcall TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);	// TODO: try to find other work around
@@ -7,13 +7,13 @@ extern "C" BOOL _stdcall TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSe
 namespace iwin{
 
 
-CWinCriticalSection::CWinCriticalSection()
+CCriticalSection::CCriticalSection()
 {
 	::InitializeCriticalSection(&m_section);
 }
 
 
-CWinCriticalSection::~CWinCriticalSection()
+CCriticalSection::~CCriticalSection()
 {
 	::DeleteCriticalSection(&m_section);
 }
@@ -21,13 +21,13 @@ CWinCriticalSection::~CWinCriticalSection()
 
 // reimplemented (isys::ICriticalSection)
 
-void CWinCriticalSection::Enter()
+void CCriticalSection::Enter()
 {
 	::EnterCriticalSection(&m_section);
 }
 
 
-bool CWinCriticalSection::EnterIfFree()
+bool CCriticalSection::EnterIfFree()
 {
 	BOOL status = ::TryEnterCriticalSection(&m_section);
 
@@ -35,7 +35,7 @@ bool CWinCriticalSection::EnterIfFree()
 }
 
 
-void CWinCriticalSection::Leave()
+void CCriticalSection::Leave()
 {
 	::LeaveCriticalSection(&m_section);
 }

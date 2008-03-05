@@ -21,7 +21,7 @@ public:
 		Get normalized file path.
 		For any path to the same file this function should return the same path.
 	*/
-	virtual ::std::string GetNormalizedPath(const ::std::string& path) const = 0;
+	virtual istd::CString GetNormalizedPath(const istd::CString& path) const = 0;
 };
 
 

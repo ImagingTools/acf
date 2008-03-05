@@ -1,5 +1,5 @@
-#ifndef iwin_CWinTimer_included
-#define iwin_CWinTimer_included
+#ifndef iwin_CTimer_included
+#define iwin_CTimer_included
 
 
 #include "iwin/iwin.h"
@@ -16,10 +16,10 @@ namespace iwin
 
 	An timer implementation for the Windows plattform
 */
-class CWinTimer: public isys::ITimer
+class CTimer: public isys::ITimer
 {
 public:
-	CWinTimer();
+	CTimer();
 
 	bool IsVaild() const;
 
@@ -38,4 +38,4 @@ protected:
 } // namespace iwin
 
 
-#endif // !iwin_CWinTimer_included
+#endif // !iwin_CTimer_included

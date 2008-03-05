@@ -22,7 +22,7 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistry(
 			const ::std::string& factoryId,
 			const IRegistry* contextPtr) const
 {
-	::std::string path;
+	istd::CString path;
 
 	if (contextPtr != NULL){
 		InvRegistriesMap::const_iterator contextIter = m_invRegistriesMap.find(contextPtr);
@@ -30,15 +30,15 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistry(
 		I_ASSERT(contextIter != m_invRegistriesMap.end());
 
 		if (contextIter != m_invRegistriesMap.end()){
-			path = contextIter->second + "/";
+			path = contextIter->second + istd::CString("/");
 		}
 	}
 
 	if (!packageId.empty()){
-		path += packageId + "/";
+		path += istd::CString(packageId) + istd::CString("/");
 	}
 
-	path += factoryId;
+	path += istd::CString(factoryId);
 
 	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
 	if (fileSystemPtr != NULL){

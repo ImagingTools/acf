@@ -264,9 +264,6 @@
 				RelativePath="..\IEnableable.h">
 			</File>
 			<File
-				RelativePath="..\IFactory.h">
-			</File>
-			<File
 				RelativePath="..\IHierarchical.h">
 			</File>
 			<File
@@ -297,19 +294,22 @@
 				RelativePath="..\TChangeNotifier.h">
 			</File>
 			<File
+				RelativePath="..\TComposedFactory.h">
+			</File>
+			<File
 				RelativePath="..\TDelPtr.h">
 			</File>
 			<File
-				RelativePath="..\TFactory.h">
+				RelativePath="..\TIFactory.h">
 			</File>
 			<File
-				RelativePath="..\TIObjectFactory.h">
-			</File>
-			<File
-				RelativePath="..\TObjectFactory.h">
+				RelativePath="..\TOptDelPtr.h">
 			</File>
 			<File
 				RelativePath="..\TPointer.h">
+			</File>
+			<File
+				RelativePath="..\TSingleFactory.h">
 			</File>
 		</Filter>
 	</Files>

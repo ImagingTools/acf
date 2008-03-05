@@ -1,4 +1,4 @@
-#include "iwin/CWinTimer.h"
+#include "iwin/CTimer.h"
 
 
 #include <windows.h>
@@ -8,7 +8,7 @@ namespace iwin
 {
 
 
-CWinTimer::CWinTimer()
+CTimer::CTimer()
 {
 	m_startCounter = 0;
 
@@ -20,7 +20,7 @@ CWinTimer::CWinTimer()
 }
 
 
-bool CWinTimer::IsVaild() const
+bool CTimer::IsVaild() const
 {
 	return m_isValid;
 }
@@ -28,13 +28,13 @@ bool CWinTimer::IsVaild() const
 
 // reimplemented (isys::ITimer)
 
-void CWinTimer::Start()
+void CTimer::Start()
 {
 	::QueryPerformanceCounter((LARGE_INTEGER*)&m_startCounter);
 }
 
 
-double CWinTimer::GetElapsed() const
+double CTimer::GetElapsed() const
 {
 	I_ASSERT(sizeof(long long) == sizeof(LARGE_INTEGER));
 
@@ -45,7 +45,7 @@ double CWinTimer::GetElapsed() const
 }
 
 
-double CWinTimer::GetTimerResolution() const
+double CTimer::GetTimerResolution() const
 {
 	return 1.0 / double(m_timerFrequence);
 }

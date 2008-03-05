@@ -231,6 +231,12 @@
 			Name="Header Files"
 			Filter="*.h, *.hpp">
 			<File
+				RelativePath="..\CCriticalSection.h">
+			</File>
+			<File
+				RelativePath="..\CDllFunctionsProvider.h">
+			</File>
+			<File
 				RelativePath="..\inat.h">
 			</File>
 			<File

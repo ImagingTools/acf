@@ -1,5 +1,5 @@
-#ifndef iwin_CWinCriticalSection_included
-#define iwin_CWinCriticalSection_included
+#ifndef iwin_CCriticalSection_included
+#define iwin_CCriticalSection_included
 
 
 #include <windows.h>
@@ -12,11 +12,11 @@
 namespace iwin{
 
 
-class CWinCriticalSection: public isys::ICriticalSection
+class CCriticalSection: public isys::ICriticalSection
 {
 public:
-	CWinCriticalSection();
-	~CWinCriticalSection();
+	CCriticalSection();
+	~CCriticalSection();
 
 	// reimplemented (isys::ICriticalSection)
 	virtual void Enter();
@@ -31,6 +31,6 @@ private:
 } // namespace iwin
 
 
-#endif // !iwin_CWinCriticalSection_included
+#endif // !iwin_CCriticalSection_included
 
 

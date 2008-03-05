@@ -1,5 +1,5 @@
-#ifndef istd_TDelPtr_included
-#define istd_TDelPtr_included
+#ifndef istd_TOptDelPtr_included
+#define istd_TOptDelPtr_included
 
 
 #include "istd/TPointer.h"
@@ -13,7 +13,7 @@ namespace istd
 	Pointer wrapper providing automatic deleting pointed object during destruction.
 */
 template <class Type, bool DelArray = false>
-class TDelPtr: public TPointer<Type>
+class TOptDelPtr: public TPointer<Type>
 {
 public:
 	typedef TPointer<Type> BaseClass;
@@ -22,20 +22,20 @@ public:
 		Construct and init this pointer.
 		\param	ptr		pointer to object.
 	*/
-	TDelPtr(Type* ptr = NULL);
+	TOptDelPtr(Type* ptr = NULL, bool releaseFlag = false);
 
 	/**
 		Copy constructor.
 		This implementation has no function and is provided only for compatibility with STL.
 		The source pointer must be invalid (NULL).
 	*/
-	TDelPtr(const TDelPtr& ptr);
+	TOptDelPtr(const TOptDelPtr& ptr);
 
 	/**
 		Destructor.
 		It calls Reset() to delete pointed object.
 	 */
-	~TDelPtr();
+	~TOptDelPtr();
 
 	/**
 		Remove object pointed by internal pointer and set this pointer to NULL.
@@ -46,7 +46,7 @@ public:
 		Set new value of internal pointer.
 		If internal pointer wasn't NULL, it will be deleted.
 	 */
-	void SetPtr(Type* ptr);
+	void SetPtr(Type* ptr, bool releaseFlag = false);
 
 	/**
 		Reset internal pointer value without deleting instance and return previos value.
@@ -56,20 +56,20 @@ public:
 		Take internal pointer over.
 		It set pointer from other object and detach it from them.
 	*/
-	void TakeOver(TDelPtr& sourcePtr);
+	void TakeOver(TOptDelPtr& sourcePtr);
 
 	/**
 		Assign operator.
 		This implementation has no function and is provided only for compatibility with STL.
 		The source pointer must be invalid (NULL).
 	*/
-	TDelPtr& operator=(const TDelPtr& ptr);
+	TOptDelPtr& operator=(const TOptDelPtr& ptr);
 	/**
 		Assign operator.
 		It removes refererenced object before new is assigned.
 		\param	ptr		pointer to object.
 	*/
-	TDelPtr& operator=(Type* ptr);
+	TOptDelPtr& operator=(Type* ptr);
 
 protected:
 	/**
@@ -77,50 +77,55 @@ protected:
 		Warning: internal pointer will be not changed.
 	*/
 	virtual void Detach();
+
+private:
+	bool m_releaseFlag;
 };
 
 
 // inline methods
 
 template <class Type, bool DelArray>
-inline TDelPtr<Type, DelArray>::TDelPtr(Type* ptr)
-:	BaseClass(ptr)
+inline TOptDelPtr<Type, DelArray>::TOptDelPtr(Type* ptr, bool releaseFlag)
+:	BaseClass(ptr), m_releaseFlag(releaseFlag)
 {
 }
 
 
 template <class Type, bool DelArray>
-inline TDelPtr<Type, DelArray>::TDelPtr(const TDelPtr<Type, DelArray>& ptr)
+inline TOptDelPtr<Type, DelArray>::TOptDelPtr(const TOptDelPtr<Type, DelArray>& ptr)
 {
 	I_ASSERT(ptr.GetPtr() == NULL);
 }
 
 
 template <class Type, bool DelArray>
-inline TDelPtr<Type, DelArray>::~TDelPtr()
+inline TOptDelPtr<Type, DelArray>::~TOptDelPtr()
 {
 	Detach();
 }
 
 
 template <class Type, bool DelArray>
-inline void TDelPtr<Type, DelArray>::Reset()
+inline void TOptDelPtr<Type, DelArray>::Reset()
 {
 	SetPtr(NULL);
 }
 
 
 template <class Type, bool DelArray>
-inline void TDelPtr<Type, DelArray>::SetPtr(Type* ptr)
+inline void TOptDelPtr<Type, DelArray>::SetPtr(Type* ptr, bool releaseFlag)
 {
 	Detach();
 
 	BaseClass::SetPtr(ptr);
+
+	m_releaseFlag = releaseFlag;
 }
 
 
 template <class Type, bool DelArray>
-inline typename Type* TDelPtr<Type, DelArray>::PopPtr()
+inline typename Type* TOptDelPtr<Type, DelArray>::PopPtr()
 {
 	Type* slavePtr = BaseClass::GetPtr();
 	BaseClass::SetPtr(NULL);
@@ -130,7 +135,7 @@ inline typename Type* TDelPtr<Type, DelArray>::PopPtr()
 
 
 template <class Type, bool DelArray>
-void TDelPtr<Type, DelArray>::TakeOver(TDelPtr& sourcePtr)
+void TOptDelPtr<Type, DelArray>::TakeOver(TOptDelPtr& sourcePtr)
 {
 	SetPtr(sourcePtr.PopPtr());
 }
@@ -139,7 +144,7 @@ void TDelPtr<Type, DelArray>::TakeOver(TDelPtr& sourcePtr)
 // public methods
 
 template <class Type, bool DelArray>
-TDelPtr<Type, DelArray>& TDelPtr<Type, DelArray>::operator=(const TDelPtr& ptr)
+TOptDelPtr<Type, DelArray>& TOptDelPtr<Type, DelArray>::operator=(const TOptDelPtr& ptr)
 {
 	I_ASSERT(ptr.GetPtr() == NULL);
 
@@ -150,7 +155,7 @@ TDelPtr<Type, DelArray>& TDelPtr<Type, DelArray>::operator=(const TDelPtr& ptr)
 
 
 template <class Type, bool DelArray>
-TDelPtr<Type, DelArray>& TDelPtr<Type, DelArray>::operator=(Type* ptr)
+TOptDelPtr<Type, DelArray>& TOptDelPtr<Type, DelArray>::operator=(Type* ptr)
 {
 	Detach();
 
@@ -163,18 +168,20 @@ TDelPtr<Type, DelArray>& TDelPtr<Type, DelArray>::operator=(Type* ptr)
 // protected methods
 
 template <class Type, bool DelArray>
-void TDelPtr<Type, DelArray>::Detach()
+void TOptDelPtr<Type, DelArray>::Detach()
 {
-	Type* ptr = BaseClass::GetPtr();
-	if (ptr == NULL){
-		return;
-	}
+	if (m_releaseFlag){
+		Type* ptr = BaseClass::GetPtr();
+		if (ptr == NULL){
+			return;
+		}
 
-	if (DelArray){
-		delete[] ptr;
-	}
-	else{
-		delete ptr;
+		if (DelArray){
+			delete[] ptr;
+		}
+		else{
+			delete ptr;
+		}
 	}
 }
 
@@ -182,6 +189,6 @@ void TDelPtr<Type, DelArray>::Detach()
 } // namespace istd
 
 
-#endif // !istd_TDelPtr_included
+#endif // !istd_TOptDelPtr_included
 
 

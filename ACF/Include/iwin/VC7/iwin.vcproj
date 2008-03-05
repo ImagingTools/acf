@@ -123,26 +123,26 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
+				RelativePath="..\CCriticalSection.cpp">
+			</File>
+			<File
 				RelativePath="..\CDllFunctionsProvider.cpp">
 			</File>
 			<File
-				RelativePath="..\CWinCriticalSection.cpp">
-			</File>
-			<File
-				RelativePath="..\CWinTimer.cpp">
+				RelativePath="..\CTimer.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
 			<File
+				RelativePath="..\CCriticalSection.h">
+			</File>
+			<File
 				RelativePath="..\CDllFunctionsProvider.h">
 			</File>
 			<File
-				RelativePath="..\CWinCriticalSection.h">
-			</File>
-			<File
-				RelativePath="..\CWinTimer.h">
+				RelativePath="..\CTimer.h">
 			</File>
 			<File
 				RelativePath="..\iwin.h">
