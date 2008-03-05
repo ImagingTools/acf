@@ -76,7 +76,7 @@ protected:
 		Remove referenced object.
 		Warning: internal pointer will be not changed.
 	*/
-	virtual void Detach();
+	void Detach();
 };
 
 
