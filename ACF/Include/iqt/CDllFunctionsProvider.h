@@ -1,18 +1,17 @@
-#ifndef iwin_CDllFunctionsProvider_included
-#define iwin_CDllFunctionsProvider_included
+#ifndef iqt_CDllFunctionsProvider_included
+#define iqt_CDllFunctionsProvider_included
 
 
-#include "iwin/iwin.h"
-
-
-#include <windows.h>
-
-#include "isys/IFunctionsProvider.h"
+#include "iqt/iqt.h"
 
 #include "istd/CString.h"
 
+#include "isys/IFunctionsProvider.h"
 
-namespace iwin
+#include <QLibrary>
+
+
+namespace iqt
 {
 
 
@@ -38,13 +37,13 @@ public:
 	virtual void* GetFunction(const ::std::string& id) const;
 
 private:
-	HINSTANCE m_handler;
+	mutable QLibrary m_library;
 };
 
 
-} // namespace iwin
+} // namespace iqt
 
 
-#endif // !iwin_CDllFunctionsProvider_included
+#endif // !iqt_CDllFunctionsProvider_included
 
 

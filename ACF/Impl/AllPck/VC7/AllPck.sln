@@ -119,6 +119,20 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inat", "..\..\..\Include\in
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Acf", "..\..\AcfExe\VC7\Acf.vcproj", "{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\..\CompositorExe\VC7\Compositor.vcproj", "{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(Qt) = preSolution
 		Integration = True
@@ -258,6 +272,22 @@ Global
 		{91007D75-2F2B-4B26-A1BB-260181E8DAF3}.NemoRelease.Build.0 = NemoRelease|Win32
 		{91007D75-2F2B-4B26-A1BB-260181E8DAF3}.Release.ActiveCfg = Release|Win32
 		{91007D75-2F2B-4B26-A1BB-260181E8DAF3}.Release.Build.0 = Release|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.Debug.ActiveCfg = Debug|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.Debug.Build.0 = Debug|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.NemoDebug.ActiveCfg = Debug|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.NemoDebug.Build.0 = Debug|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.NemoRelease.ActiveCfg = Release|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.NemoRelease.Build.0 = Release|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.Release.ActiveCfg = Release|Win32
+		{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}.Release.Build.0 = Release|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.Debug.ActiveCfg = Debug|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.Debug.Build.0 = Debug|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.NemoDebug.ActiveCfg = Debug|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.NemoDebug.Build.0 = Debug|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.NemoRelease.ActiveCfg = Release|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.NemoRelease.Build.0 = Release|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.Release.ActiveCfg = Release|Win32
+		{6BD89B26-013F-4F41-87B7-14D632CCFEFF}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

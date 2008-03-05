@@ -7,6 +7,10 @@
 
 #ifdef _WIN32
 #include "iwin/CDllFunctionsProvider.h"
+#else
+#ifdef QT_CORE_LIB
+#include "iqt/CDllFunctionsProvider.h"
+#endif
 #elif
 #error Operating system not supported
 #endif

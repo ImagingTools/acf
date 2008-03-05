@@ -1,14 +1,14 @@
-#include "iwin/CDllFunctionsProvider.h"
+#include "iqt/CDllFunctionsProvider.h"
 
 
-namespace iwin
+namespace iqt
 {
 
 
 CDllFunctionsProvider::CDllFunctionsProvider(const istd::CString& dllPath)
 {
-	if (!dllPath.empty()){
-		m_handler = ::LoadLibraryW(dllPath.c_str());
+	if (!dllPath.IsEmpty()){
+		m_library.setFileName(iqt::GetQString(dllPath));
 	}
 }
 
@@ -21,11 +21,7 @@ CDllFunctionsProvider::~CDllFunctionsProvider()
 
 void CDllFunctionsProvider::Reset()
 {
-	if (m_handler != NULL){
-		::FreeLibrary(m_handler);
-	}
-
-	m_handler = NULL;
+	m_library.unload();
 }
 
 
@@ -33,7 +29,9 @@ bool CDllFunctionsProvider::OpenDll(const istd::CString& dllPath)
 {
 	Reset();
 
-	m_handler = ::LoadLibraryW(dllPath.c_str());
+	m_library.setFileName(iqt::GetQString(dllPath));
+
+	m_library.load();
 
 	return IsValid();
 }
@@ -43,21 +41,20 @@ bool CDllFunctionsProvider::OpenDll(const istd::CString& dllPath)
 
 bool CDllFunctionsProvider::IsValid() const
 {
-	return m_handler != NULL;
+	return m_library.isLoaded();
 }
 
 
 void* CDllFunctionsProvider::GetFunction(const ::std::string& id) const
 {
 	if (IsValid()){
-		return ::GetProcAddress(m_handler, id.c_str());
+		return m_library.resolve(id.c_str());
 	}
-	else{
-		return NULL;
-	}
+
+	return NULL;
 }
 
 
-} // namespace iwin
+} // namespace iqt
 
 
