@@ -261,7 +261,6 @@ bool CXmlFileReadArchive::Process(::std::string& value)
 {
 	QString text = PullTextNode();
 
-	bool retVal;
 	value = text.toStdString();
 
 	return true;
