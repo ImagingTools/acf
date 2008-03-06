@@ -60,7 +60,7 @@ CModelChangeObserver::Observer::Observer(imod::CModelChangeObserver& parent)
 
 // reimplemented (TSingleModelObserverBase)
 
-void CModelChangeObserver::Observer::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CModelChangeObserver::Observer::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_parent.SetDirty(true);
 }

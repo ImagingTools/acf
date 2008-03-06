@@ -20,7 +20,11 @@ public:
 
 protected:
 	// reimplemented (iser::CXmlReadArchiveBase)
-	virtual bool ReadToDelimeter(const ::std::string& delimeters, ::std::string& result, bool skipDelimeter = true, char* foundDelimeter = NULL);
+	virtual bool ReadToDelimeter(
+				const ::std::string& delimeters,
+				::std::string& result,
+				bool skipDelimeter = true,
+				char* foundDelimeterPtr = NULL);
 
 private:
 	::std::ifstream m_stream;

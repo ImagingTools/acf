@@ -12,6 +12,14 @@ namespace icomp
 class CXmlRegistriesManager: public CFileRegistriesManagerBase
 {
 protected:
+	typedef CFileRegistriesManagerBase BaseClass;
+
+	/**
+		Constructor.
+		\param	factoryPtr	pointer to main static info object used to factorize real components.
+	*/
+	CXmlRegistriesManager(const IComponentStaticInfo* factoryPtr);
+
 	virtual iser::IArchive* CreateArchive(const istd::CString& path) const;
 };
 

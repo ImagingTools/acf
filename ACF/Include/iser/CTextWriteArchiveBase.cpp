@@ -102,7 +102,9 @@ bool CTextWriteArchiveBase::ProcessData(void* dataPtr, int size)
 
 	stream << ::std::endl;
 
-	return Process(::std::string(stream.str()));
+	::std::string str(stream.str());
+
+	return Process(str);
 }
 
 

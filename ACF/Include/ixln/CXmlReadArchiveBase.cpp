@@ -124,7 +124,12 @@ bool CXmlReadArchiveBase::EndTag(const iser::CArchiveTag& /*tag*/)
 bool CXmlReadArchiveBase::Process(::std::string& data)
 {
     istd::CString text;
-    bool retval = Process(text);
+    bool retVal = Process(text);
+
+	if (!retVal){
+		return false;
+	}
+
     char* transcodedText = xercesc::XMLString::transcode(text.c_str());
 
 	data = text.ToString();

@@ -10,15 +10,13 @@
 
 #include "iser/IArchive.h"
 
+#include "icomp/IRegistry.h"
 #include "icomp/IRegistriesManager.h"
 #include "icomp/IComponentStaticInfo.h"
 
 
 namespace icomp
 {
-
-
-class IRegistry;
 
 
 class CFileRegistriesManagerBase: virtual public IRegistriesManager

@@ -56,7 +56,7 @@ bool CPackagesLoader::RegisterPackagesDir(const istd::CString& directory, bool b
 				++iter){
 		istd::CString filePath = GetCString(packagesDir.absoluteFilePath(*iter));
 
-		retVal = RegisterPackageFile(filePath) && retVal;
+		retVal = RegisterPackageFile(filePath, beQuiet) && retVal;
 	}
 
 	return retVal;
@@ -71,7 +71,7 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 
 	iser::CArchiveTag packageDirsTag("PackageDirs", "List of package directories", true);
 	iser::CArchiveTag dirPathTag("Dir", "List of package directories", true);
-	int dirsCount;
+	int dirsCount = 0;
 	retVal = retVal && archive.BeginMultiTag(packageDirsTag, dirPathTag, dirsCount);
 
 	if (!retVal){
@@ -93,7 +93,7 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 
 	iser::CArchiveTag packageFilesTag("PackageFiles", "List of package files", true);
 	iser::CArchiveTag filePathTag("FilePath", "Path of single file", true);
-	int filesCount;
+	int filesCount = 0;
 	retVal = retVal && archive.BeginMultiTag(packageFilesTag, filePathTag, filesCount);
 
 	if (!retVal){

@@ -1,6 +1,9 @@
 #include "imod/CMultiModelObserverBase.h"
 
 
+#include <algorithm>
+
+
 namespace imod
 {
 
@@ -52,20 +55,18 @@ bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
 
 bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
 {
-	for (Models::iterator index = m_models.begin(); index != m_models.end(); index++){
-		IModel* modelPtr = *index;
-		if (modelPtr == modelPtr){
-			m_models.erase(index);
-			
-			return true;
-		}
+	Models::iterator iter = ::std::find(m_models.begin(), m_models.end(), modelPtr);
+	if (iter != m_models.end()){
+		m_models.erase(iter);
+		
+		return true;
 	}
 
 	return false;
 }
 
 
-void CMultiModelObserverBase::BeforeUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CMultiModelObserverBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	I_ASSERT(IsModelObserved(modelPtr));
 }

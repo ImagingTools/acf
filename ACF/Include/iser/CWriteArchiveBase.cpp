@@ -22,7 +22,7 @@ I_DWORD CWriteArchiveBase::GetVersion(int versionId) const
 		return m_versionInfoPtr->GetVersion(versionId);
 	}
 
-	return IVersionInfo::UnknownVersion;
+	return I_DWORD(IVersionInfo::UnknownVersion);
 }
 
 

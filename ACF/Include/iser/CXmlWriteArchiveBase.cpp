@@ -22,7 +22,7 @@ bool CXmlWriteArchiveBase::BeginTag(const CArchiveTag& tag)
 }
 
 
-bool CXmlWriteArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& subTag, int& count)
+bool CXmlWriteArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& /*subTag*/, int& count)
 {
 	::std::ostrstream stream;
 	stream << count << ::std::ends;
@@ -64,7 +64,9 @@ bool CXmlWriteArchiveBase::Process(::std::string& value)
 
 bool CXmlWriteArchiveBase::Process(istd::CString& value)
 {
-	return Process(::std::string(value.ToString()));
+	::std::string str(value.ToString());
+
+	return Process(str);
 }
 
 

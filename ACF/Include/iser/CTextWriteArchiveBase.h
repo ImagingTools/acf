@@ -54,7 +54,9 @@ bool CTextWriteArchiveBase::ProcessInternal(const Type& value)
 
 	stream << value << ::std::ends;
 
-	retVal = retVal && Process(::std::string(stream.str()));
+	::std::string str(stream.str());
+
+	retVal = retVal && Process(str);
 
 	return retVal;
 }

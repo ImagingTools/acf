@@ -60,13 +60,19 @@ bool CSingleModelObserverBase::OnDetached(imod::IModel* modelPtr)
 }
 
 
-void CSingleModelObserverBase::BeforeUpdate(imod::IModel* modelPtr, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CSingleModelObserverBase::BeforeUpdate(
+			imod::IModel* I_IF_DEBUG(modelPtr),
+			int /*updateFlags*/,
+			istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	I_ASSERT(m_modelPtr == modelPtr);
 }
 
 
-void CSingleModelObserverBase::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CSingleModelObserverBase::AfterUpdate(
+			imod::IModel* I_IF_DEBUG(modelPtr),
+			int updateFlags,
+			istd::IPolymorphic* updateParamsPtr)
 {
 	I_ASSERT(m_modelPtr == modelPtr);
 
@@ -86,7 +92,7 @@ void CSingleModelObserverBase::EnsureDetached()
 }
 
 
-void CSingleModelObserverBase::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CSingleModelObserverBase::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 }
 

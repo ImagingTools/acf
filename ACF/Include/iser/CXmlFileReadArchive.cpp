@@ -22,7 +22,11 @@ CXmlFileReadArchive::CXmlFileReadArchive(const istd::CString& fileName, bool ser
 
 // reimplemented (iser::CXmlReadArchiveBase)
 
-bool CXmlFileReadArchive::ReadToDelimeter(const ::std::string& delimeters, ::std::string& result, bool skipDelimeter, char* foundDelimeter)
+bool CXmlFileReadArchive::ReadToDelimeter(
+			const ::std::string& delimeters,
+			::std::string& result,
+			bool skipDelimeter,
+			char* foundDelimeterPtr)
 {
 	int cutFromPos = -1;
 	int cutToPos = -1;
@@ -34,7 +38,8 @@ bool CXmlFileReadArchive::ReadToDelimeter(const ::std::string& delimeters, ::std
 	}
 
 	while (!m_stream.fail()){
-		if (delimeters.find(m_lastReadChar) != ::std::string::npos){
+		::std::string::size_type foundPosition = delimeters.find(m_lastReadChar);
+		if (foundPosition != ::std::string::npos){
 			if (cutFromPos < 0){
 				cutFromPos = 0;
 			}
@@ -46,6 +51,10 @@ bool CXmlFileReadArchive::ReadToDelimeter(const ::std::string& delimeters, ::std
 			result = readString.substr(cutFromPos, cutToPos - cutFromPos);
 
 			m_useLastReadChar = !skipDelimeter;
+
+			if (foundDelimeterPtr != NULL){
+				*foundDelimeterPtr = delimeters.at(foundPosition);
+			}
 
 			return true;
 		}

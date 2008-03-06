@@ -25,7 +25,7 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 }
 
 
-bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& subTag, int& count)
+bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& /*subTag*/, int& count)
 {
 	bool retVal = true;
 

@@ -99,7 +99,9 @@ bool CXmlWriteArchiveBase::EndTag(const iser::CArchiveTag& /*tag*/)
 
 bool CXmlWriteArchiveBase::Process(::std::string& data)
 {
-	return Process(istd::CString(data));
+	istd::CString str(data);
+
+	return Process(str);
 }
 
 

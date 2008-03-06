@@ -15,7 +15,8 @@ CFileXmlReadArchive::CFileXmlReadArchive(const ::std::string& fileName, bool ser
 	m_fileName = tmpData;
 	xercesc::XMLString::release(&tmpData);
 
-	Init(xercesc::LocalFileInputSource(m_fileName.c_str()));
+	xercesc::LocalFileInputSource inputSource(m_fileName.c_str());
+	Init(inputSource);
 
 	if (serializeHeader){
 		SerializeAcfHeader();

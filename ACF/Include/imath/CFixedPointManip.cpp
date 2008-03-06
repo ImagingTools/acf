@@ -49,7 +49,7 @@ bool CFixedPointManip::GetParsed(const ::std::string& text, double& result) cons
 
 // protected methods
 
-::std::string CFixedPointManip::GetString(const double& value, int precision) const
+::std::string CFixedPointManip::GetString(const double& value, int /*precision*/) const
 {
 	typedef ::std::vector<char> CharacterList;
 	CharacterList rotatedString;

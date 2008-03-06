@@ -90,7 +90,7 @@ inline TDelPtr<Type, DelArray>::TDelPtr(Type* ptr)
 
 
 template <class Type, bool DelArray>
-inline TDelPtr<Type, DelArray>::TDelPtr(const TDelPtr<Type, DelArray>& ptr)
+inline TDelPtr<Type, DelArray>::TDelPtr(const TDelPtr<Type, DelArray>& I_IF_DEBUG(ptr))
 {
 	I_ASSERT(ptr.GetPtr() == NULL);
 }
@@ -139,7 +139,7 @@ void TDelPtr<Type, DelArray>::TakeOver(TDelPtr& sourcePtr)
 // public methods
 
 template <class Type, bool DelArray>
-TDelPtr<Type, DelArray>& TDelPtr<Type, DelArray>::operator=(const TDelPtr& ptr)
+TDelPtr<Type, DelArray>& TDelPtr<Type, DelArray>::operator=(const TDelPtr& I_IF_DEBUG(ptr))
 {
 	I_ASSERT(ptr.GetPtr() == NULL);
 

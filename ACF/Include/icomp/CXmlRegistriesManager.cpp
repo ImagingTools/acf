@@ -8,6 +8,12 @@ namespace icomp
 {
 
 
+CXmlRegistriesManager::CXmlRegistriesManager(const IComponentStaticInfo* factoryPtr)
+:	BaseClass(factoryPtr)
+{
+}
+
+
 iser::IArchive* CXmlRegistriesManager::CreateArchive(const istd::CString& path) const
 {
 	return new iser::CXmlFileReadArchive(path);

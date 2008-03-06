@@ -25,7 +25,7 @@ bool CReadArchiveBase::SerializeAcfHeader()
 {
 	bool retVal = BeginTag(s_headerTag);
 
-	int versionIdsCount;
+	int versionIdsCount = 0;
 	retVal = retVal && BeginMultiTag(s_versionInfosTag, s_versionInfoTag, versionIdsCount);
 
 	if (retVal){
@@ -33,12 +33,12 @@ bool CReadArchiveBase::SerializeAcfHeader()
 			retVal = retVal && BeginTag(s_versionInfoTag);
 
 			retVal = retVal && BeginTag(s_versionIdTag);
-			int id;
+			int id = 0;
 			retVal = retVal && Process(id);
 			retVal = retVal && EndTag(s_versionIdTag);
 
 			retVal = retVal && BeginTag(s_versionNumberTag);
-			I_DWORD version;
+			I_DWORD version = 0;
 			retVal = retVal && Process(version);
 			retVal = retVal && EndTag(s_versionNumberTag);
 

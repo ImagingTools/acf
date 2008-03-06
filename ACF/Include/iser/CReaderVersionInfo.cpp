@@ -75,7 +75,7 @@ const CReaderVersionInfo::VersionIdElement& CReaderVersionInfo::GetVersionIdElem
 
 // static attributes
 
-CReaderVersionInfo::VersionIdElement CReaderVersionInfo::s_element(UnknownVersion, "");
+CReaderVersionInfo::VersionIdElement CReaderVersionInfo::s_element(I_DWORD(UnknownVersion), "");
 
 
 } // namespace iser

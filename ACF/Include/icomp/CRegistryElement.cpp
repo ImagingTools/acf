@@ -200,9 +200,13 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 					retVal = retVal && archive.BeginTag(attributeTag);
 
 					retVal = retVal && archive.BeginTag(isEnabledTag);
-					bool isEnabled;
+					bool isEnabled = true;
 					retVal = retVal && archive.Process(isEnabled);
 					retVal = retVal && archive.EndTag(isEnabledTag);
+
+					if (!retVal){
+						return false;
+					}
 
 					AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, isEnabled);
 

@@ -94,7 +94,7 @@ bool CXmlFileWriteArchive::BeginMultiTag(const iser::CArchiveTag& tag, const ise
 }
 
 
-bool CXmlFileWriteArchive::EndTag(const iser::CArchiveTag& tag)
+bool CXmlFileWriteArchive::EndTag(const iser::CArchiveTag& /*tag*/)
 {
 	m_currentParent = m_currentParent.parentNode().toElement();
 

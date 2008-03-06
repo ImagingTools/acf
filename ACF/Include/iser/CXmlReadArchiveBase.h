@@ -36,7 +36,11 @@ protected:
 		\param	skipDelimeter	if it is true, delimeter will be not parsed by next call of this method.
 		\param	foundDelimeter	optional found delimeter will be returned in this character (it means 1 byte, it is not C string).
 	*/
-	virtual bool ReadToDelimeter(const ::std::string& delimeters, ::std::string& result, bool skipDelimeter = true, char* foundDelimeter = NULL) = 0;
+	virtual bool ReadToDelimeter(
+				const ::std::string& delimeters,
+				::std::string& result,
+				bool skipDelimeter = true,
+				char* foundDelimeterPtr = NULL) = 0;
 
 private:
 	iser::CArchiveTag m_rootTag;

@@ -69,15 +69,13 @@ inline void IChangeable::EndChanges(int changeFlags, istd::IPolymorphic* changeP
 
 // protected methods
 
-inline void IChangeable::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+inline void IChangeable::OnBeginChanges(int /*changeFlags*/, istd::IPolymorphic* /*changeParamsPtr*/)
 {
-
 }
 
 
-inline void IChangeable::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+inline void IChangeable::OnEndChanges(int /*changeFlags*/, istd::IPolymorphic* /*changeParamsPtr*/)
 {
-
 }
 
 

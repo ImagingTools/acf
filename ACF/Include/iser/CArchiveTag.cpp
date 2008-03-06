@@ -22,7 +22,7 @@ CArchiveTag::CArchiveTag(
 	for (int i = 0; i < idSize; ++i){
 		int character = m_id[i];
 		int character2 = character * character;
-		m_binaryId += (character << i) ^ (character * character >> i);
+		m_binaryId += (character << i) ^ (character2 >> i);
 	}
 }
 

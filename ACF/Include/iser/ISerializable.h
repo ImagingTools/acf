@@ -36,7 +36,7 @@ public:
 
 // inline methods
 
-inline I_DWORD ISerializable::GetMinimalVersion(int versionId) const
+inline I_DWORD ISerializable::GetMinimalVersion(int /*versionId*/) const
 {
 	return 0;
 }

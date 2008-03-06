@@ -186,7 +186,7 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.Process(elementId);
 			retVal = retVal && archive.EndTag(elementIdTag);
 
-			int elementType;
+			int elementType = ET_NONE;
 			retVal = retVal && archive.BeginTag(elementTypeTag);
 			retVal = retVal && archive.Process(elementType);
 			retVal = retVal && archive.EndTag(elementTypeTag);
@@ -201,20 +201,22 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.Process(factoryId);
 			retVal = retVal && archive.EndTag(factoryIdTag);
 
-			ElementInfo* newInfoPtr = InsertElementInfo(elementId, elementType, packageId, factoryId, false);
-			if (newInfoPtr == NULL){
-				return false;
-			}
-
 			retVal = retVal && archive.BeginTag(elementTag);
 
-			bool isValid;
-			retVal = retVal && archive.BeginTag(isValidTag);
-			retVal = retVal && archive.Process(isValid);
-			retVal = retVal && archive.EndTag(isValidTag);
+			if (elementType != ET_NONE){
+				ElementInfo* newInfoPtr = InsertElementInfo(elementId, elementType, packageId, factoryId, false);
+				if (newInfoPtr == NULL){
+					return false;
+				}
 
-			if (isValid && newInfoPtr->elementPtr.IsValid()){
-				retVal = retVal && newInfoPtr->elementPtr->Serialize(archive);
+				bool isValid = false;
+				retVal = retVal && archive.BeginTag(isValidTag);
+				retVal = retVal && archive.Process(isValid);
+				retVal = retVal && archive.EndTag(isValidTag);
+
+				if (isValid && newInfoPtr->elementPtr.IsValid()){
+					retVal = retVal && newInfoPtr->elementPtr->Serialize(archive);
+				}
 			}
 
 			retVal = retVal && archive.EndTag(elementTag);

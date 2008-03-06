@@ -28,6 +28,7 @@ public:
 	*/
 	enum ElementType
 	{
+		ET_NONE,
 		ET_COMPONENT,	///<	Normal component loaded from dynamic link library.
 		ET_COMPOSITION	///<	Composition of components used as single component.
 	};

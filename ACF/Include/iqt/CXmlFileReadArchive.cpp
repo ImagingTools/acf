@@ -105,7 +105,7 @@ bool CXmlFileReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, const iser
 }
 
 
-bool CXmlFileReadArchive::EndTag(const iser::CArchiveTag& tag)
+bool CXmlFileReadArchive::EndTag(const iser::CArchiveTag& /*tag*/)
 {
 	m_currentNode = m_currentNode.parentNode();
 

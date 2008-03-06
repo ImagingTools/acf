@@ -355,7 +355,7 @@ bool TCascadedMap<Key, Value>::InsertLocal(const KeyType& key, const ValueType& 
 	int newIndex = int(m_pairList.size());
 	m_positionsMap[key] = newIndex;
 
-	m_pairList.push_back(Pair(key, ValueType()));
+	m_pairList.push_back(Pair(key, value));
 
 	return true;
 }
