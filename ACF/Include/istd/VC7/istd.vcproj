@@ -311,6 +311,9 @@
 				RelativePath="..\TPointer.h">
 			</File>
 			<File
+				RelativePath="..\TPointerVector.h">
+			</File>
+			<File
 				RelativePath="..\TSingleFactory.h">
 			</File>
 		</Filter>
