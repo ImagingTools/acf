@@ -176,6 +176,9 @@
 				RelativePath="..\CDllFunctionsProvider.cpp">
 			</File>
 			<File
+				RelativePath="..\CGuiComponentBase.cpp">
+			</File>
+			<File
 				RelativePath="..\CLoginGuiComp.cpp">
 			</File>
 			<File
@@ -208,6 +211,45 @@
 				RelativePath="..\CDllFunctionsProvider.h">
 			</File>
 			<File
+				RelativePath="..\CGuiComponentBase.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description=""
+						CommandLine=""
+						AdditionalDependencies=""
+						Outputs=""/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description=""
+						CommandLine=""
+						AdditionalDependencies=""
+						Outputs=""/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description=""
+						CommandLine=""
+						AdditionalDependencies=""
+						Outputs=""/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description=""
+						CommandLine=""
+						AdditionalDependencies=""
+						Outputs=""/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\CLoginGuiComp.h">
 			</File>
 			<File
@@ -226,7 +268,13 @@
 				RelativePath="..\CXmlFileWriteArchive.h">
 			</File>
 			<File
+				RelativePath="..\IGuiObject.h">
+			</File>
+			<File
 				RelativePath="..\iqt.h">
+			</File>
+			<File
+				RelativePath="..\TGuiComponentBase.h">
 			</File>
 		</Filter>
 		<Filter
