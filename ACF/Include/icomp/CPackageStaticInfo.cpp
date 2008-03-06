@@ -5,12 +5,6 @@ namespace icomp
 {
 
 
-bool CPackageStaticInfo::RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
-{
-	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
-}
-
-
 // reimplemented (icomp::IPackageStaticInfo)
 
 IComponent* CPackageStaticInfo::CreateComponent(const IComponentContext* /*contextPtr*/) const
@@ -38,6 +32,24 @@ const CPackageStaticInfo::AttributeInfos& CPackageStaticInfo::GetAttributeInfos(
 const CPackageStaticInfo::SubcomponentInfos& CPackageStaticInfo::GetSubcomponentInfos() const
 {
 	return m_subcomponentInfos;
+}
+
+
+bool CPackageStaticInfo::RegisterInterfaceExtractor(const ::std::string& /*interfaceId*/, InterfaceExtractorPtr /*extractorPtr*/)
+{
+	return false;
+}
+
+
+bool CPackageStaticInfo::RegisterAttributeInfo(const ::std::string& /*attributeId*/, const IAttributeStaticInfo* /*attributeInfoPtr*/)
+{
+	return false;
+}
+
+
+bool CPackageStaticInfo::RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
+{
+	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
 }
 
 

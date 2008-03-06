@@ -47,27 +47,6 @@ TComponentStaticInfo<Component>::TComponentStaticInfo(IComponentStaticInfo* base
 }
 
 
-template <class Component>
-bool TComponentStaticInfo<Component>::RegisterInterfaceExtractor(const ::std::string& interfaceId, InterfaceExtractorPtr extractorPtr)
-{
-	return m_interfaceExtractors.InsertLocal(interfaceId, extractorPtr);
-}
-
-
-template <class Component>
-bool TComponentStaticInfo<Component>::RegisterAttributeInfo(const ::std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
-{
-	return m_attributeInfos.InsertLocal(attributeId, attributeInfoPtr);
-}
-
-
-template <class Component>
-bool TComponentStaticInfo<Component>::RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
-{
-	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
-}
-
-
 //	reimplemented (icomp::IComponentStaticInfo)
 
 template <class Component>
@@ -95,6 +74,27 @@ template <class Component>
 const IComponentStaticInfo::SubcomponentInfos& TComponentStaticInfo<Component>::GetSubcomponentInfos() const
 {
 	return m_subcomponentInfos;
+}
+
+
+template <class Component>
+bool TComponentStaticInfo<Component>::RegisterInterfaceExtractor(const ::std::string& interfaceId, InterfaceExtractorPtr extractorPtr)
+{
+	return m_interfaceExtractors.InsertLocal(interfaceId, extractorPtr);
+}
+
+
+template <class Component>
+bool TComponentStaticInfo<Component>::RegisterAttributeInfo(const ::std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
+{
+	return m_attributeInfos.InsertLocal(attributeId, attributeInfoPtr);
+}
+
+
+template <class Component>
+bool TComponentStaticInfo<Component>::RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
+{
+	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
 }
 
 

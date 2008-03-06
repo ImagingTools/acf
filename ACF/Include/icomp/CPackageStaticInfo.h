@@ -16,13 +16,14 @@ namespace icomp
 class CPackageStaticInfo: virtual public IComponentStaticInfo
 {
 public:
-	bool RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
-
 	// reimplemented (icomp::CPackageStaticInfo)
 	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const;
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
 	virtual const AttributeInfos& GetAttributeInfos() const;
 	virtual const SubcomponentInfos& GetSubcomponentInfos() const;
+	virtual bool RegisterInterfaceExtractor(const ::std::string& interfaceId, InterfaceExtractorPtr extractorPtr);
+	virtual bool RegisterAttributeInfo(const ::std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
+	virtual bool RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
 
 protected:
 	void ResetSubcomponentList();
