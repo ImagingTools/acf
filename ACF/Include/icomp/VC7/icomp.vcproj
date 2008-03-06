@@ -144,6 +144,9 @@
 				RelativePath="..\CPackageStaticInfo.cpp">
 			</File>
 			<File
+				RelativePath="..\CReferenceAttribute.cpp">
+			</File>
+			<File
 				RelativePath="..\CRegistry.cpp">
 			</File>
 			<File
@@ -173,6 +176,9 @@
 			</File>
 			<File
 				RelativePath="..\CPackageStaticInfo.h">
+			</File>
+			<File
+				RelativePath="..\CReferenceAttribute.h">
 			</File>
 			<File
 				RelativePath="..\CRegistry.h">
@@ -221,6 +227,9 @@
 			</File>
 			<File
 				RelativePath="..\TReferencePtr.h">
+			</File>
+			<File
+				RelativePath="..\TSimComponentWrap.h">
 			</File>
 			<File
 				RelativePath="..\TSimpleAttribute.h">
