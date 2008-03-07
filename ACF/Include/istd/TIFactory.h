@@ -23,7 +23,7 @@ template <class InterfaceType>
 class TIFactory: virtual public istd::IPolymorphic  
 {
 public:
-	typedef ::std::set<::std::string> KeyList;
+	typedef ::std::set< ::std::string> KeyList;
 
 	/**
 		Returns all posible keys for this factory.

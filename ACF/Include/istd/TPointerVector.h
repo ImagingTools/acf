@@ -36,6 +36,7 @@ class TPointerVector
 public:
 	~TPointerVector();
 
+	int GetCount() const;
 	void Reset();
 	PointerType* GetAt(int index);
 	const PointerType* GetAt(int index) const;
@@ -54,6 +55,13 @@ template <typename PointerType, class DeleteAdapter>
 TPointerVector<PointerType, DeleteAdapter>::~TPointerVector()
 {
 	Reset();
+}
+
+
+template <typename PointerType, class DeleteAdapter>
+int TPointerVector<PointerType, DeleteAdapter>::GetCount() const
+{
+	return int(m_elements.size());
 }
 
 

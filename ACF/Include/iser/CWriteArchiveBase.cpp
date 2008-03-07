@@ -69,7 +69,7 @@ bool CWriteArchiveBase::SerializeAcfHeader()
 		retVal = retVal && EndTag(s_versionNumberTag);
 
 		retVal = retVal && BeginTag(s_versionDescriptionTag);
-		::std::string& description = const_cast<::std::string&>(m_versionInfoPtr->GetVersionIdDescription(id));
+		::std::string& description = const_cast< ::std::string&>(m_versionInfoPtr->GetVersionIdDescription(id));
 		retVal = retVal && Process(description);
 		retVal = retVal && EndTag(s_versionDescriptionTag);
 

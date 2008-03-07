@@ -38,7 +38,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	typedef ::std::map<::std::string, ElementInfo> ElementsMap;
+	typedef ::std::map< ::std::string, ElementInfo> ElementsMap;
 
 	ElementsMap m_elementInfos;
 	InterfaceInfos m_interfaceInfos;

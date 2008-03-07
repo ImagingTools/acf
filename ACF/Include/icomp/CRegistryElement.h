@@ -43,7 +43,7 @@ protected:
 private:
 	const IComponentStaticInfo& m_staticInfo;
 
-	typedef ::std::map<::std::string, AttributeInfo> AttributeInfoMap;
+	typedef ::std::map< ::std::string, AttributeInfo> AttributeInfoMap;
 	AttributeInfoMap m_attributeInfos;
 };
 

@@ -144,7 +144,7 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(elementDescriptionTag);
 
 			retVal = retVal && archive.BeginTag(elementIdTag);
-			retVal = retVal && archive.Process(const_cast<::std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< ::std::string&>(iter->first));
 			retVal = retVal && archive.EndTag(elementIdTag);
 
 			retVal = retVal && archive.BeginTag(elementTypeTag);

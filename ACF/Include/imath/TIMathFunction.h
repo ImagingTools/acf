@@ -2,6 +2,9 @@
 #define imat_TIMathFunction_included
 
 
+#include "istd/IPolymorphic.h"
+
+
 namespace imath
 {
 

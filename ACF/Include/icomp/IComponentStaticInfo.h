@@ -28,9 +28,9 @@ class IComponentStaticInfo: virtual public istd::IPolymorphic
 public:
 	typedef void* (*InterfaceExtractorPtr)(IComponent* componentPtr);
 
-	typedef istd::TCascadedMap<::std::string, InterfaceExtractorPtr> InterfaceExtractors;
-	typedef istd::TCascadedMap<::std::string, const IAttributeStaticInfo*> AttributeInfos;
-	typedef istd::TCascadedMap<::std::string, const IComponentStaticInfo*> SubcomponentInfos;
+	typedef istd::TCascadedMap< ::std::string, InterfaceExtractorPtr> InterfaceExtractors;
+	typedef istd::TCascadedMap< ::std::string, const IAttributeStaticInfo*> AttributeInfos;
+	typedef istd::TCascadedMap< ::std::string, const IComponentStaticInfo*> SubcomponentInfos;
 
 	/**
 		Create component instance.

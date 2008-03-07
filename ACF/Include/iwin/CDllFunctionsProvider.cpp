@@ -33,7 +33,7 @@ bool CDllFunctionsProvider::OpenDll(const istd::CString& dllPath)
 {
 	Reset();
 
-	m_handler = ::LoadLibraryW(dllPath.c_str());
+	m_handler = ::LoadLibrary(dllPath.ToString().c_str());
 
 	return IsValid();
 }

@@ -20,7 +20,7 @@ namespace icomp
 class IRegistry: virtual public iser::ISerializable
 {
 public:
-	typedef ::std::set<::std::string> Ids;
+	typedef ::std::set< ::std::string> Ids;
 	typedef istd::TDelPtr<IRegistryElement> ElementPtr;
 
 	/**
@@ -53,11 +53,11 @@ public:
 		::std::string subId;
 	};
 
-	typedef ::std::map<::std::string, InterfaceInfo> InterfaceInfos;
+	typedef ::std::map< ::std::string, InterfaceInfo> InterfaceInfos;
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/
-	typedef ::std::map<::std::string, ::std::string> SubcomponentMap;
+	typedef ::std::map< ::std::string, ::std::string> SubcomponentMap;
 
 	/**
 		Get ID list of existing elements.

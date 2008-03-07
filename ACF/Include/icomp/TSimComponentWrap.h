@@ -21,7 +21,7 @@ protected:
 	virtual IComponent* GetSubcomponent(const ::std::string& componentId) const;
 
 private:
-	typedef ::std::map<::std::string, IComponent*> ComponentMap;
+	typedef ::std::map< ::std::string, IComponent*> ComponentMap;
 	ComponentMap m_componentMap;
 };
 

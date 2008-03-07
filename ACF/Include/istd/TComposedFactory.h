@@ -34,7 +34,7 @@ public:
 
 protected:
 	typedef istd::ToptDelPtr<FactoryClass> FactoryPtr;
-	typedef ::std::list<::std::string, FactoryPtr> FactoryList;
+	typedef ::std::list< ::std::string, FactoryPtr> FactoryList;
 
 	FactoryList m_factoryList;
 };

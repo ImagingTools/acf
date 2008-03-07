@@ -26,7 +26,7 @@ class IComponentStaticInfo;
 class IRegistryElement: virtual public iser::ISerializable
 {
 public:
-	typedef ::std::set<::std::string> Ids;
+	typedef ::std::set< ::std::string> Ids;
 	typedef istd::TDelPtr<iser::ISerializable> AttributePtr;
 
 	/**
