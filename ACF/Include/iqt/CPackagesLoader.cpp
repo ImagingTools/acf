@@ -8,21 +8,18 @@
 
 #include "iser/CXmlFileReadArchive.h"
 
-#include "iqt/CDllFunctionsProvider.h"
+#include "icomp/export.h"
 
 
 namespace iqt
 {
 
 
-typedef icomp::IComponentStaticInfo* (*GetInfoFunc)();
-
-
 bool CPackagesLoader::RegisterPackageFile(const istd::CString& file, bool beQuiet)
 {
-	CDllFunctionsProvider provider(file);
+	CDllFunctionsProvider& provider = GetProviderRef(file, beQuiet);
 	if (provider.IsValid()){
-		GetInfoFunc getInfoPtr = (GetInfoFunc)provider.GetFunction("GetInfo");
+		icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)provider.GetFunction(I_PACKAGE_EXPORT_FUNCTION_NAME);
 		if (getInfoPtr != NULL){
 			icomp::IComponentStaticInfo* infoPtr = getInfoPtr();
 			if (infoPtr != NULL){
@@ -30,13 +27,6 @@ bool CPackagesLoader::RegisterPackageFile(const istd::CString& file, bool beQuie
 				return RegisterSubcomponentInfo(fileInfo.baseName().toStdString(), infoPtr);
 			}
 		}
-	}
-
-	if (!beQuiet){
-		QMessageBox::warning(
-					NULL,
-					QObject::tr("Error"),
-					QObject::tr("Cannot register components from registry\n%1").arg(GetQString(file)));
 	}
 
 	return false;
@@ -114,6 +104,35 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 	retVal = retVal && archive.EndTag(packageFilesTag);
 
 	return false;
+}
+
+
+// protected methods
+
+CDllFunctionsProvider& CPackagesLoader::GetProviderRef(const istd::CString& file, bool beQuiet)
+{
+	QFileInfo fileInfo(GetQString(file));
+	QString absolutePath = fileInfo.absoluteFilePath();
+
+	DllCacheMap::iterator iter = m_dllCacheMap.find(absolutePath);
+	if (iter != m_dllCacheMap.end()){
+		I_ASSERT(iter->second.IsValid());
+
+		return *iter->second;
+	}
+
+	FunctionsProviderPtr& providerPtr = m_dllCacheMap[absolutePath];
+	providerPtr.SetPtr(new CDllFunctionsProvider(GetCString(absolutePath)));
+	I_ASSERT(providerPtr.IsValid());
+
+	if (!providerPtr->IsValid() && !beQuiet){
+		QMessageBox::warning(
+					NULL,
+					QObject::tr("Error"),
+					QObject::tr("Cannot register components from registry\n%1").arg(GetQString(file)));
+	}
+
+	return *providerPtr;
 }
 
 

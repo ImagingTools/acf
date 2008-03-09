@@ -11,7 +11,7 @@ namespace icomp
 
 class CXmlRegistriesManager: public CFileRegistriesManagerBase
 {
-protected:
+public:
 	typedef CFileRegistriesManagerBase BaseClass;
 
 	/**
@@ -20,6 +20,8 @@ protected:
 	*/
 	CXmlRegistriesManager(const IComponentStaticInfo* factoryPtr);
 
+protected:
+	// reimplemented (icomp::CFileRegistriesManagerBase)
 	virtual iser::IArchive* CreateArchive(const istd::CString& path) const;
 };
 

@@ -15,6 +15,36 @@ namespace icomp
 {
 
 
+const IRegistry* CFileRegistriesManagerBase::GetRegistryFromFile(const istd::CString& path) const
+{
+	istd::CString correctedPath = path;
+
+	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
+	if (fileSystemPtr != NULL){
+		correctedPath = fileSystemPtr->GetNormalizedPath(correctedPath);
+	}
+
+	RegistriesMap::const_iterator iter = m_registriesMap.find(correctedPath);
+
+	if (iter != m_registriesMap.end()){
+		return iter->second.GetPtr();
+	}
+
+	istd::TDelPtr<IRegistry>& mapValue = m_registriesMap[correctedPath];
+	iser::IArchive* archivePtr = CreateArchive(correctedPath);
+	if (archivePtr != NULL){
+		istd::TDelPtr<IRegistry> newRegistryPtr(new CRegistry(&m_componentsFactory));
+		if (newRegistryPtr->Serialize(*archivePtr)){
+			mapValue.TakeOver(newRegistryPtr);
+
+			return mapValue.GetPtr();
+		}
+	}
+
+	return NULL;
+}
+
+
 // reimplemented (icomp::IRegistriesManager)
 
 const IRegistry* CFileRegistriesManagerBase::GetRegistry(
@@ -40,29 +70,7 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistry(
 
 	path += istd::CString(factoryId);
 
-	isys::IFileSystem* fileSystemPtr = istd::GetService<isys::IFileSystem>();
-	if (fileSystemPtr != NULL){
-		path = fileSystemPtr->GetNormalizedPath(path);
-	}
-
-	RegistriesMap::const_iterator iter = m_registriesMap.find(path);
-
-	if (iter != m_registriesMap.end()){
-		return iter->second.GetPtr();
-	}
-
-	istd::TDelPtr<IRegistry>& mapValue = m_registriesMap[path];
-	iser::IArchive* archivePtr = CreateArchive(path);
-	if (archivePtr != NULL){
-		istd::TDelPtr<IRegistry> newRegistryPtr(new CRegistry(&m_componentsFactory));
-		if (newRegistryPtr->Serialize(*archivePtr)){
-			mapValue.TakeOver(newRegistryPtr);
-
-			return mapValue.GetPtr();
-		}
-	}
-
-	return NULL;
+	return GetRegistryFromFile(path);
 }
 
 

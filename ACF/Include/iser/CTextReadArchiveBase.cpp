@@ -12,7 +12,15 @@ namespace iser
 
 bool CTextReadArchiveBase::Process(bool& value)
 {
-	return ProcessInternal(value);
+	::std::string elementText;
+
+	if (Process(elementText)){
+		value = (elementText == "true");
+
+		return true;
+	}
+
+	return false;
 }
 
 

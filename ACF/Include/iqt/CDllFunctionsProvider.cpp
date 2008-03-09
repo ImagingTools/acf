@@ -8,7 +8,7 @@ namespace iqt
 CDllFunctionsProvider::CDllFunctionsProvider(const istd::CString& dllPath)
 {
 	if (!dllPath.IsEmpty()){
-		m_library.setFileName(iqt::GetQString(dllPath));
+		OpenDll(dllPath);
 	}
 }
 

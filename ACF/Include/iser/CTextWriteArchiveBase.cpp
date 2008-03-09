@@ -10,7 +10,9 @@ namespace iser
 
 bool CTextWriteArchiveBase::Process(bool& value)
 {
-	return ProcessInternal(value);
+	::std::string elementText = value? "true": "false";
+
+	return Process(elementText);
 }
 
 

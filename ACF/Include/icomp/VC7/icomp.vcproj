@@ -190,6 +190,9 @@
 				RelativePath="..\CXmlRegistriesManager.h">
 			</File>
 			<File
+				RelativePath="..\export.h">
+			</File>
+			<File
 				RelativePath="..\IAttributeStaticInfo.h">
 			</File>
 			<File
@@ -218,6 +221,9 @@
 			</File>
 			<File
 				RelativePath="..\TAttributeStaticInfo.h">
+			</File>
+			<File
+				RelativePath="..\TComponentRegistrator.h">
 			</File>
 			<File
 				RelativePath="..\TComponentStaticInfo.h">

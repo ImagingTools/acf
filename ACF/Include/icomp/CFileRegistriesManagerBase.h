@@ -22,6 +22,8 @@ namespace icomp
 class CFileRegistriesManagerBase: virtual public IRegistriesManager
 {
 public:
+	const IRegistry* GetRegistryFromFile(const istd::CString& path) const;
+
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const IRegistry* GetRegistry(const ::std::string& packageId, const ::std::string& factoryId, const IRegistry* contextPtr) const;
 

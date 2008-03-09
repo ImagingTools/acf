@@ -1,19 +1,9 @@
-#ifndef CQtPackage_included
-#define CQtPackage_included
+#include "icomp/export.h"
+
+#include "iqt/CLoginGuiComp.h"
 
 
-#include "Comp/ComponentLibrary.h"
-
-
-class CQtPackage: public acf::ComponentLibrary
-{
-public:
-	typedef acf::ComponentLibrary BaseClass;
-
-	CQtPackage();
-};
-
-
-#endif // !CQtPackage_included
+I_EXPORT_PACKAGE("Qt", "Standard Qt package", "Qt Standard");
+I_EXPORT_COMPONENT(iqt::CLoginGuiComp, "LoginGui", "Gui used to user login", "User Login Qt");
 
 

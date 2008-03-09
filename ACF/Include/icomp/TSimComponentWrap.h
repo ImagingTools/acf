@@ -100,10 +100,13 @@ const IComponentContext* TSimComponentWrap<Base>::GetParentContext() const
 
 
 template <class Base>
-const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr = NULL) const
+const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr) const
 {
 	const AttributeInfo* infoPtr = GetAttributeInfo(attributeId);
 	if (infoPtr != NULL){
+		if (realContextPtr != NULL){
+			*realContextPtr = this;
+		}
 		return infoPtr->attributePtr.GetPtr();
 	}
 

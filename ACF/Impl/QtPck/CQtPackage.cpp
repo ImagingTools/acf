@@ -1,26 +1,9 @@
-#ifdef OLD_ACF_SUPPORT
+#include "icomp/export.h"
 
-#include "CQtPackage.h"
-
-#include "iqt/CTabContainerGuiComp.h"
 #include "iqt/CLoginGuiComp.h"
 
 
-CQtPackage::CQtPackage()
-:	BaseClass()
-{
-	acf::ComponentLibraryInfo info;
-	info.SetLibName("Qt");
-	SetLibraryInfo(info);
-
-	RegisterComponent<iqt::CTabContainerGuiComp>("TabContainerGui");
-	RegisterComponent<iqt::CLoginGuiComp>("LoginGui");
-}
-
-
-EXPORT_COMPONENT_LIBRARY(CQtPackage);
-
-
-#endif // OLD_ACF_SUPPORT
+I_EXPORT_PACKAGE("Qt", "Standard Qt package", "Qt Standard");
+I_EXPORT_COMPONENT(iqt::CLoginGuiComp, LoginGui, "Gui used to user login", "User Login Qt");
 
 

@@ -46,7 +46,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		return NULL;
 	}
 
-	IRegistryElement* registryPtr = NULL;
+	istd::TDelPtr<IRegistryElement> registryPtr;
 
 	switch (elementType){
 	case IRegistry::ET_COMPONENT:
@@ -61,7 +61,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 				if (componentInfoPtr2 != NULL){
 					I_ASSERT(*componentInfoPtr2 != NULL);
 
-					registryPtr = new CRegistryElement(*componentInfoPtr2);
+					registryPtr.SetPtr(new CRegistryElement(*componentInfoPtr2));
 				}
 			}
 		}
@@ -71,7 +71,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		I_CRITICAL();		// TODO: implement creation of registry element for compositions.
 	}
 
-	if (ensureElementCreated && (registryPtr == NULL)){
+	if (ensureElementCreated && !registryPtr.IsValid()){
 		return NULL;
 	}
 
@@ -79,7 +79,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 	newElement.elementType = elementType;
 	newElement.packageId = packageId;
 	newElement.factoryId = factoryId;
-	newElement.elementPtr.SetPtr(registryPtr);
+	newElement.elementPtr.TakeOver(registryPtr);
 
 	return &newElement;
 }

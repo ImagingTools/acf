@@ -23,21 +23,21 @@ protected:
 };
 
 
-// protected methods
-
-template <class Interface>
-void* TInterfaceRegistrator<Interface>::InterfaceExtractor(IComponent* componentPtr)
-{
-	return dynamic_cast<Interface>(componentPtr);
-}
-
-
 // public methods
 
 template <class Interface>
 TInterfaceRegistrator<Interface>::TInterfaceRegistrator(icomp::IComponentStaticInfo& staticInfo)
 {
 	staticInfo.RegisterInterfaceExtractor(typeid(Interface).name(), TInterfaceRegistrator<Interface>::InterfaceExtractor);
+}
+
+
+// protected methods
+
+template <class Interface>
+void* TInterfaceRegistrator<Interface>::InterfaceExtractor(IComponent* componentPtr)
+{
+	return dynamic_cast<Interface>(componentPtr);
 }
 
 
