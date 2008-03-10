@@ -69,6 +69,8 @@ TSmartPtr<PointerType>::TSmartPtr()
 template <typename PointerType>
 TSmartPtr<PointerType>::TSmartPtr(PointerType* pointer)
 {
+	m_counter = NULL;
+
 	SetPtr(pointer);
 }
 
