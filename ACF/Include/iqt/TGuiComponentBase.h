@@ -18,9 +18,8 @@ class TGuiComponentBase: public CGuiComponentBase
 {
 public:
 	typedef CGuiComponentBase BaseClass;
-	I_COMPONENT(TGuiComponentBase);
 
-	TGuiComponentBase(const icomp::IComponentContext* contextPtr);
+	TGuiComponentBase();
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
@@ -30,10 +29,8 @@ public:
 // public methods
 
 template <class WidgetType>
-TGuiComponentBase<WidgetType>::TGuiComponentBase(const icomp::IComponentContext* contextPtr)
-:	BaseClass(contextPtr)
+TGuiComponentBase<WidgetType>::TGuiComponentBase()
 {
-	I_REGISTER_INTERFACE(IGuiObject);
 }
 
 

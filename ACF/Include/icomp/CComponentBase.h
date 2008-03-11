@@ -26,16 +26,23 @@ public:
 		Create component and assign it to specific context.
 		\param	contextPtr	pointer to context of this component. It cannot be NULL.
 	*/
-	CComponentBase(const IComponentContext* contextPtr);
+	CComponentBase();
 
 	// reimplemented (icomp::IComponent)
 	virtual void* GetInterface(const type_info& interfaceType, const ::std::string& subId = "");
-	virtual const IComponentContext& GetComponentContext() const;
+	virtual const IComponentContext* GetComponentContext() const;
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
-	static icomp::IComponentStaticInfo& GetStaticInfo();
+	// static methods
+	static icomp::IComponentStaticInfo& InitStaticInfo(CComponentBase* componentPtr);
+
+protected:
+	// reimplemented (icomp::IComponent)
+	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr);
 
 private:
-	const IComponentContext& m_context;
+	const IComponentContext* m_contextPtr;
 };
 
 
@@ -46,17 +53,17 @@ private:
 	General ACF component declaration.
 	It should be placed in class declaration as first line.
 */
-#define I_COMPONENT(ComponentType)\
-	static icomp::IComponentStaticInfo& GetStaticInfo()\
+#define I_BEGIN_COMPONENT(ComponentType)\
+	static const icomp::IComponentStaticInfo& InitStaticInfo(ComponentType* componentPtr)\
 	{\
-		static icomp::TComponentStaticInfo<ComponentType> staticInfo(&BaseClass::GetStaticInfo());\
+		static icomp::TComponentStaticInfo<ComponentType> staticInfo(&BaseClass::InitStaticInfo(componentPtr));
+
+#define I_END_COMPONENT\
 		return staticInfo;\
 	}
 
 #define I_REGISTER_INTERFACE(InterfaceType)\
-	{\
-		static icomp::TInterfaceRegistrator<InterfaceType> staticRegistrator(GetStaticInfo());\
-	}\
+	static icomp::TInterfaceRegistrator<InterfaceType> staticRegistrator##__LINE__(staticInfo);
 
 #define I_ATTR(attrType, member)\
 	typedef attrType member##_Type;\
@@ -79,10 +86,10 @@ private:
 	icomp::TMultiFactoryPtr<interfaceType> member;
 
 #define I_ASSIGN(member, id, description, defaultValue, isObligatory)\
-	{\
-		static member##_Type def(defaultValue);\
-		static icomp::TAttributeStaticInfo<member##_Type> info(GetStaticInfo(), id, description, NULL, isObligatory);\
-		member.Init(this, info);\
+	static member##_Type member##_Def(defaultValue);\
+	static icomp::TAttributeStaticInfo<member##_Type> member##_Info(staticInfo, id, description, &member##_Def, isObligatory);\
+	if (componentPtr != NULL){\
+		componentPtr->member.Init(componentPtr, member##_Info);\
 	}
 
 

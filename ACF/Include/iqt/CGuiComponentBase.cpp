@@ -9,8 +9,8 @@ namespace iqt
 {
 
 
-CGuiComponentBase::CGuiComponentBase(const icomp::IComponentContext* contextPtr)
-:	BaseClass(contextPtr), m_widgetPtr(NULL)
+CGuiComponentBase::CGuiComponentBase()
+:	m_widgetPtr(NULL)
 {
 }
 

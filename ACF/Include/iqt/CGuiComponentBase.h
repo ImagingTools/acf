@@ -19,7 +19,7 @@ class CGuiComponentBase:
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	CGuiComponentBase(const icomp::IComponentContext* contextPtr);
+	CGuiComponentBase();
 
 	// reimplemented (iqt::IGuiObject)
 	virtual bool IsGuiCreated() const;

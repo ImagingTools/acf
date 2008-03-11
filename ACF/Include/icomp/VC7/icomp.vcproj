@@ -229,6 +229,9 @@
 				RelativePath="..\TComponentStaticInfo.h">
 			</File>
 			<File
+				RelativePath="..\TComponentWrap.h">
+			</File>
+			<File
 				RelativePath="..\TInterfaceRegistrator.h">
 			</File>
 			<File

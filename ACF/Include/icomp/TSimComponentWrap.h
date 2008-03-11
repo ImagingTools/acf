@@ -6,6 +6,7 @@
 
 #include "icomp/IComponent.h"
 #include "icomp/IComponentContext.h"
+#include "icomp/TComponentWrap.h"
 #include "icomp/CRegistryElement.h"
 
 
@@ -13,15 +14,25 @@ namespace icomp
 {
 
 
+/**
+	Simulation wrapper of component.
+	It allows to use components directly from static linked libraries, without component framework.
+*/
 template <class Base>
-class TSimComponentWrap: public Base, protected CRegistryElement, protected IComponentContext
+class TSimComponentWrap: public TComponentWrap<Base>, protected CRegistryElement, protected IComponentContext
 {
 public:
-	typedef Base BaseClass;
+	typedef TComponentWrap<Base> BaseClass;
 
 	TSimComponentWrap();
 
+	/**
+		Set named reference to some component.
+	*/
 	bool SetRef(const ::std::string& referenceId, IComponent* componentPtr);
+	/**
+		Set named attribute.
+	*/
 	bool SetAttr(const ::std::string& attributeId, iser::ISerializable* attributePtr);
 
 protected:
@@ -42,7 +53,7 @@ private:
 template <class Base>
 TSimComponentWrap<Base>::TSimComponentWrap()
 :	BaseClass(this),
-	CRegistryElement(&GetStaticInfo())
+	CRegistryElement(&InitStaticInfo(this))
 {
 }
 

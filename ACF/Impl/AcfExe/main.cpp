@@ -4,6 +4,7 @@
 
 #include "ibase/IApplication.h"
 
+#include "icomp/TComponentWrap.h"
 #include "icomp/CXmlRegistriesManager.h"
 #include "icomp/CCompositeComponentContext.h"
 #include "icomp/CCompositeComponent.h"
@@ -84,7 +85,7 @@ int main(int argc, char *argv[])
 	icomp::CRegistryElement dummyElement(&loader);
 
 	icomp::CCompositeComponentContext compositeContext(&dummyElement, registryPtr, &registriesManager);
-	icomp::CCompositeComponent composite(&compositeContext);
+	icomp::TComponentWrap<icomp::CCompositeComponent> composite(&compositeContext);
 
 	ibase::IApplication* applicationPtr = (ibase::IApplication*)composite.GetInterface(typeid(ibase::IApplication), componentId);
 	if (applicationPtr == NULL){

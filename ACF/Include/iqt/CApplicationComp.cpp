@@ -8,15 +8,6 @@ namespace iqt
 {
 
 
-CApplicationComp::CApplicationComp(const icomp::IComponentContext* contextPtr)
-:	BaseClass(contextPtr)
-{
-	I_REGISTER_INTERFACE(ibase::IApplication);
-	I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", "MainGui", true);
-	I_ASSIGN(m_splashScreenCompPtr, "SplashScreen", "Splash screen shown before application is started", "SplashScreen", false);
-}
-
-
 // reimplemented (ibase::IApplication)
 
 int CApplicationComp::Execute(int argc, char** argv)

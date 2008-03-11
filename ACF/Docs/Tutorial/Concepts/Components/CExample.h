@@ -29,7 +29,15 @@ class CExample: public icomp::CComponentBase, public ITestInterface
 {
 	typedef CComponentBase BaseClass;
 
-	I_COMPONENT(CExample);
+	// initialize all component attributes and references
+	I_BEGIN_COMPONENT(CExample)
+		I_ASSIGN(m_value, "Value", "Test of attribute", 0, false)
+		I_ASSIGN(m_valueList, "ValueList", "Test of attribute list", , false)
+		I_ASSIGN(m_cloneableRef, "Cloneable", "Test of reference", "Cloneable", false)
+		I_ASSIGN(m_cloneableListRef, "CloneableList", "Test of reference list", , false)
+		I_ASSIGN(m_cloneableFact, "CloneableFactory", "Test of factory", "CloneableFactory", false)
+		I_ASSIGN(m_cloneableListFact, "CloneableFactoryList", "Test of factory list", , false)
+	I_END_COMPONENT
 
 public:
 	CExample(const icomp::IComponentContext* contextPtr);

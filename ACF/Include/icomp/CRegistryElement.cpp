@@ -50,7 +50,7 @@ IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const ::s
 
 	AttributeInfo& info = m_attributeInfos[attributeId];
 
-	info.attributePtr = AttributePtr(attributePtr);
+	info.attributePtr.SetPtr(attributePtr);
 
 	return &info;
 }
@@ -116,7 +116,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag attributeIdTag("Id", "Attribute ID");
 	static iser::CArchiveTag attributeTypeTag("Type", "Type of attribute");
 	static iser::CArchiveTag exportIdTag("ExportId", "ID used for export");
-	static iser::CArchiveTag attributeTag("Attribute", "ID used for export");
+	static iser::CArchiveTag dataTag("Data", "ID used for export");
 	static iser::CArchiveTag isEnabledTag("IsEnabled", "Is attribute enabled");
 
 	bool retVal = true;
@@ -155,7 +155,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.Process(info.exportId);
 			retVal = retVal && archive.EndTag(exportIdTag);
 
-			retVal = retVal && archive.BeginTag(attributeTag);
+			retVal = retVal && archive.BeginTag(dataTag);
 
 			bool isEnabled = info.attributePtr.IsValid();
 			retVal = retVal && archive.BeginTag(isEnabledTag);
@@ -166,7 +166,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 				retVal = retVal && info.attributePtr->Serialize(archive);
 			}
 
-			retVal = retVal && archive.EndTag(attributeTag);
+			retVal = retVal && archive.EndTag(dataTag);
 
 			retVal = retVal && archive.EndTag(attributeInfoTag);
 		}
@@ -197,7 +197,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 					retVal = retVal && archive.Process(exportId);
 					retVal = retVal && archive.EndTag(exportIdTag);
 
-					retVal = retVal && archive.BeginTag(attributeTag);
+					retVal = retVal && archive.BeginTag(dataTag);
 
 					retVal = retVal && archive.BeginTag(isEnabledTag);
 					bool isEnabled = true;
@@ -221,7 +221,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 						retVal = retVal && infoPtr->attributePtr->Serialize(archive);
 					}
 
-					retVal = retVal && archive.EndTag(attributeTag);
+					retVal = retVal && archive.EndTag(dataTag);
 				}
 			}
 

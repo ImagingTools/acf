@@ -135,7 +135,7 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 	static iser::CArchiveTag packageIdTag("PackageId", "ID of package");
 	static iser::CArchiveTag componentIdTag("ComponentId", "ID of factory");
 	static iser::CArchiveTag dataTag("Data", "Data of single element", true);
-	static iser::CArchiveTag isValidTag("IsValid", "It is true if this element is valid");
+	static iser::CArchiveTag isEnabledTag("IsEnabled", "It is true if this element is valid");
 
 	bool isStoring = archive.IsStoring();
 
@@ -171,12 +171,12 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 
 			retVal = retVal && archive.BeginTag(dataTag);
 
-			bool isValid = element.elementPtr.IsValid();
-			retVal = retVal && archive.BeginTag(isValidTag);
-			retVal = retVal && archive.Process(isValid);
-			retVal = retVal && archive.EndTag(isValidTag);
+			bool isEnabled = element.elementPtr.IsValid();
+			retVal = retVal && archive.BeginTag(isEnabledTag);
+			retVal = retVal && archive.Process(isEnabled);
+			retVal = retVal && archive.EndTag(isEnabledTag);
 
-			if (isValid){
+			if (isEnabled){
 				retVal = retVal && element.elementPtr->Serialize(archive);
 			}
 
@@ -219,12 +219,12 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 					return false;
 				}
 
-				bool isValid = false;
-				retVal = retVal && archive.BeginTag(isValidTag);
-				retVal = retVal && archive.Process(isValid);
-				retVal = retVal && archive.EndTag(isValidTag);
+				bool isEnabled = false;
+				retVal = retVal && archive.BeginTag(isEnabledTag);
+				retVal = retVal && archive.Process(isEnabled);
+				retVal = retVal && archive.EndTag(isEnabledTag);
 
-				if (isValid && newInfoPtr->elementPtr.IsValid()){
+				if (isEnabled && newInfoPtr->elementPtr.IsValid()){
 					retVal = retVal && newInfoPtr->elementPtr->Serialize(archive);
 				}
 			}

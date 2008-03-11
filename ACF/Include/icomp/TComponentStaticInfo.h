@@ -3,6 +3,7 @@
 
 
 #include "icomp/IComponentStaticInfo.h"
+#include "icomp/TComponentWrap.h"
 
 
 namespace icomp
@@ -52,7 +53,9 @@ TComponentStaticInfo<Component>::TComponentStaticInfo(IComponentStaticInfo* base
 template <class Component>
 IComponent* TComponentStaticInfo<Component>::CreateComponent(const IComponentContext* contextPtr) const
 {
-	return new Component(contextPtr);
+	TComponentWrap<Component>* componentPtr = new TComponentWrap<Component>(contextPtr);
+
+	return componentPtr;
 }
 
 

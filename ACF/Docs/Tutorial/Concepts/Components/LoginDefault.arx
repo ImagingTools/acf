@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<Acf>
+	<AcfHeader>
+		<VersionInfos count="0">
+		</VersionInfos>
+	</AcfHeader>
+
+	<ElementsList count="2">
+		<Element>
+			<Id>
+				Application
+			</Id>
+			<Type>
+				1
+			</Type>
+			<PackageId>
+				QtPck
+			</PackageId>
+			<ComponentId>
+				GuiApplication
+			</ComponentId>
+			<Data>
+				<IsEnabled>
+					true
+				</IsEnabled>
+				<AttributeInfoMap count = "0">
+				</AttributeInfoMap>
+			</Data>
+		</Element>
+		<Element>
+			<Id>
+				MainGui
+			</Id>
+			<Type>
+				1
+			</Type>
+			<PackageId>
+				QtPck
+			</PackageId>
+			<ComponentId>
+				LoginGui
+			</ComponentId>
+			<Data>
+				<IsEnabled>
+					true
+				</IsEnabled>
+				<AttributeInfoMap count = "0">
+				</AttributeInfoMap>
+			</Data>
+		</Element>
+	</ElementsList>
+
+	<ExportedInterfaces count="1">
+		<Interface>
+			<InterfaceId>
+				class ibase::IApplication
+			</InterfaceId>
+			<ComponentId>
+				Application
+			</ComponentId>
+		</Interface>
+	</ExportedInterfaces>
+
+	<ExportedComponents count="0">
+	</ExportedComponents>
+</Acf>

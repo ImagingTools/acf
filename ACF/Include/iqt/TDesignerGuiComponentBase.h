@@ -18,9 +18,9 @@ class TDesignerGuiComponentBase: public TGuiComponentBase<WidgetType>, public UI
 {
 public:
 	typedef TGuiComponentBase<WidgetType> BaseClass;
-	I_COMPONENT(TDesignerGuiComponentBase);
-
-	TDesignerGuiComponentBase(const icomp::IComponentContext* contextPtr);
+	I_BEGIN_COMPONENT(TDesignerGuiComponentBase)
+		I_REGISTER_INTERFACE(IGuiObject)
+	I_END_COMPONENT
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
@@ -32,14 +32,6 @@ protected:
 
 
 // public methods
-
-template <class UI, class WidgetType>
-TDesignerGuiComponentBase<UI, WidgetType>::TDesignerGuiComponentBase(const icomp::IComponentContext* contextPtr)
-:	BaseClass(contextPtr)
-{
-	I_REGISTER_INTERFACE(IGuiObject);
-}
-
 
 // reimplemented (iqt::CGuiComponentBase)
 

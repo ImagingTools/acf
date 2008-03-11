@@ -2,6 +2,7 @@
 
 
 #include "icomp/IRegistryElement.h"
+#include "icomp/IComponentStaticInfo.h"
 
 
 namespace icomp
@@ -48,6 +49,24 @@ const iser::ISerializable* CComponentContext::GetAttribute(const ::std::string& 
 			}
 
 			return infoPtr->attributePtr.GetPtr();
+		}
+	}
+
+	const IComponentStaticInfo& componentInfo = m_registryElement.GetComponentStaticInfo();
+	const IComponentStaticInfo::AttributeInfos& attributeInfos = componentInfo.GetAttributeInfos();
+	const IComponentStaticInfo::AttributeInfos::ValueType* attributePtr2 = attributeInfos.FindElement(attributeId);
+	if (attributePtr2 != NULL){
+		I_ASSERT(*attributePtr2 != NULL);
+
+		if ((*attributePtr2)->IsObligatory()){
+			const iser::ISerializable* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
+			if (defaultAttributePtr != NULL){
+				if (realContextPtr != NULL){
+					*realContextPtr = this;
+				}
+
+				return defaultAttributePtr;
+			}
 		}
 	}
 

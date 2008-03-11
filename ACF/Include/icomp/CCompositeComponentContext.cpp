@@ -5,6 +5,7 @@
 #include "icomp/IRegistryElement.h"
 #include "icomp/IRegistriesManager.h"
 #include "icomp/IComponentStaticInfo.h"
+#include "icomp/TComponentWrap.h"
 #include "icomp/CCompositeComponent.h"
 
 
@@ -58,16 +59,17 @@ IComponent* CCompositeComponentContext::GetSubcomponent(const ::std::string& com
 				{
 					const IRegistry* subRegistryPtr = m_registriesManager.GetRegistry(elementInfoPtr->packageId, elementInfoPtr->componentId, &m_registry);
 					if (subRegistryPtr != NULL){
-						CCompositeComponentContext* newInfoPtr = new CCompositeComponentContext(
+						CCompositeComponentContext* contextPtr = new CCompositeComponentContext(
 									&registryElement,
 									subRegistryPtr,
 									&m_registriesManager,
 									this);
+						if (contextPtr != NULL){
+							componentInfo.contextPtr.SetPtr(contextPtr);
 
-						componentInfo.contextPtr.SetPtr(newInfoPtr);
+							TComponentWrap<CCompositeComponent>* componentPtr = new TComponentWrap<CCompositeComponent>(contextPtr);
 
-						if (componentInfo.contextPtr.IsValid()){
-							componentInfo.componentPtr.SetPtr(new CCompositeComponent(newInfoPtr));
+							componentInfo.componentPtr.SetPtr(componentPtr);
 						}
 					}
 				}

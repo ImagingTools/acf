@@ -15,9 +15,6 @@ class CLoginGuiComp: public TDesignerGuiComponentBase<Ui::CLoginGuiComp, QWidget
 {
 public:
 	typedef TDesignerGuiComponentBase<Ui::CLoginGuiComp, QWidget> BaseClass;
-	I_COMPONENT(CLoginGuiComp);
-
-	CLoginGuiComp(const icomp::IComponentContext* contextPtr);
 
 protected:
 	// reimplemented (iqt::CGuiComponentBase)

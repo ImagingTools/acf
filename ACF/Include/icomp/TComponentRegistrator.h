@@ -27,7 +27,7 @@ public:
 template <class Component>
 TComponentRegistrator<Component>::TComponentRegistrator(const ::std::string& componentId, icomp::IComponentStaticInfo& staticInfo)
 {
-	staticInfo.RegisterSubcomponentInfo(componentId, &Component::GetStaticInfo());
+	staticInfo.RegisterSubcomponentInfo(componentId, &Component::InitStaticInfo(NULL));
 }
 
 

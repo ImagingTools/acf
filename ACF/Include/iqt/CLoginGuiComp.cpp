@@ -7,12 +7,6 @@ namespace iqt
 {
 
 
-CLoginGuiComp::CLoginGuiComp(const icomp::IComponentContext* contextPtr)
-:	BaseClass(contextPtr)
-{
-}
-
-
 // protected methods
 
 // reimplemented (iqt::CGuiComponentBase)

@@ -66,9 +66,11 @@ bool TAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttribute
 	I_ASSERT(ownerPtr != NULL);
 
 	const ::std::string& attributeId = staticInfo.GetAttributeId();
-	const IComponentContext& componentContext = ownerPtr->GetComponentContext();
-	const iser::ISerializable* attributePtr = componentContext.GetAttribute(attributeId, realContextPtr);
-	m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
+	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
+	if (componentContextPtr != NULL){
+		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, realContextPtr);
+		m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
+	}
 
 	return (m_attributePtr != NULL);
 }

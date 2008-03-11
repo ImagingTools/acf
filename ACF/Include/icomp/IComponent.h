@@ -31,7 +31,28 @@ public:
 		Get access to component context describing all application-specified
 		component information loaded from components registry.
 	*/
-	virtual const IComponentContext& GetComponentContext() const = 0;
+	virtual const IComponentContext* GetComponentContext() const = 0;
+
+	/**
+		Called after component is created.
+		This is main method used to construct component object.
+		Between calling of OnComponentCreated() and OnComponentDestroyed() component context is always valid.
+	*/
+	virtual void OnComponentCreated() = 0;
+	/**
+		Called before component is destroyed.
+		This is main method used to destruct component object.
+	*/
+	virtual void OnComponentDestroyed() = 0;
+
+protected:
+	/**
+		Set component context of this component.
+		\param	contextPtr	new value of component context.
+							It can be also NULL.
+							Please avoid to use this method, it is designed for internal use only.
+	*/
+	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr) = 0;
 };
 
 

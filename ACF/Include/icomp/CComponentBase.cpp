@@ -10,10 +10,9 @@ namespace icomp
 {
 
 
-CComponentBase::CComponentBase(const IComponentContext* contextPtr)
-:	m_context(*contextPtr)
+CComponentBase::CComponentBase()
+:	m_contextPtr(NULL)
 {
-	I_ASSERT(contextPtr != NULL);
 }
 
 
@@ -21,37 +20,59 @@ CComponentBase::CComponentBase(const IComponentContext* contextPtr)
 
 void* CComponentBase::GetInterface(const type_info& interfaceType, const ::std::string& /*subId*/)
 {
-	const IRegistryElement& registryElement = m_context.GetRegistryElement();
+	if (m_contextPtr != NULL){
+		const IRegistryElement& registryElement = m_contextPtr->GetRegistryElement();
 
-	const IComponentStaticInfo& staticInfo = registryElement.GetComponentStaticInfo();
+		const IComponentStaticInfo& staticInfo = registryElement.GetComponentStaticInfo();
 
-	const IComponentStaticInfo::InterfaceExtractors& extractors = staticInfo.GetInterfaceExtractors();
+		const IComponentStaticInfo::InterfaceExtractors& extractors = staticInfo.GetInterfaceExtractors();
 
-	int index = extractors.FindIndex(interfaceType.name());
+		int index = extractors.FindIndex(interfaceType.name());
 
-	if (index >= 0){
-		IComponentStaticInfo::InterfaceExtractorPtr extractorPtr = extractors.GetValueAt(index);
+		if (index >= 0){
+			IComponentStaticInfo::InterfaceExtractorPtr extractorPtr = extractors.GetValueAt(index);
 
-		return extractorPtr(this);
+			return extractorPtr(this);
+		}
 	}
 
 	return NULL;
 }
 
 
-const IComponentContext& CComponentBase::GetComponentContext() const
+const IComponentContext* CComponentBase::GetComponentContext() const
 {
-	return m_context;
+	return m_contextPtr;
+}
+
+
+void CComponentBase::OnComponentCreated()
+{
+	I_ASSERT(m_contextPtr != NULL);
+}
+
+
+void CComponentBase::OnComponentDestroyed()
+{
+	I_ASSERT(m_contextPtr != NULL);
 }
 
 
 // static methods
 
-icomp::IComponentStaticInfo& CComponentBase::GetStaticInfo()
+icomp::IComponentStaticInfo& CComponentBase::InitStaticInfo(CComponentBase* /*componentPtr*/)
 {
 	static CPackageStaticInfo emptyInfo;
 
 	return emptyInfo;
+}
+
+
+// protected methods
+
+void CComponentBase::SetComponentContext(const icomp::IComponentContext* contextPtr)
+{
+	m_contextPtr = contextPtr;
 }
 
 
