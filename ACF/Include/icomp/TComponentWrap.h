@@ -53,7 +53,10 @@ void TComponentWrap<Component>::SetComponentContext(const IComponentContext* con
 template <class Component>
 TComponentWrap<Component>::~TComponentWrap()
 {
-	OnComponentDestroyed();
+	const IComponentContext* contextPtr = GetComponentContext();
+	if (contextPtr != NULL){
+		OnComponentDestroyed();
+	}
 
 	SetComponentContext(NULL);
 }

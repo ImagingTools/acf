@@ -285,6 +285,9 @@
 				RelativePath="..\ITrace.h">
 			</File>
 			<File
+				RelativePath="..\TArray.h">
+			</File>
+			<File
 				RelativePath="..\TCascadedMap.h">
 			</File>
 			<File
@@ -307,6 +310,9 @@
 			</File>
 			<File
 				RelativePath="..\TIFactory.h">
+			</File>
+			<File
+				RelativePath="..\TIndex.h">
 			</File>
 			<File
 				RelativePath="..\TOptDelPtr.h">
