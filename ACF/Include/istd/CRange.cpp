@@ -80,12 +80,25 @@ double CRange::GetNearestInRange(double value) const
 	return value;
 }
 
-	
+
+double CRange::GetClipped(double value) const
+{
+	if (!IsInside(value)){
+		double distanceMin = fabs(value - m_minValue);
+		double distanceMax = fabs(value - m_maxValue);
+
+		return distanceMin < distanceMax ? m_minValue : m_maxValue;
+	}
+
+	return value;
+}
+
+
 double CRange::GetMappedTo(double inputValue, const istd::CRange& otherRange) const
 {
 	I_ASSERT(IsInside(inputValue));
 
-	return otherRange.GetMinValue() + inputValue * (otherRange.GetLength() / GetLength());
+	return otherRange.GetMinValue() + (inputValue - GetMinValue()) * (otherRange.GetLength() / GetLength());
 }
 
 

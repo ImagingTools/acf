@@ -94,6 +94,11 @@ public:
 	double GetNearestInRange(double value) const;
 
 	/**
+		Get value clipped to the range.
+	*/
+	double GetClipped(double value) const;
+
+	/**
 		Returns the value, that corresponds the input value \c inputValue in the other range \c otherRange.
 		\note \c inputValue must be in current range.
 	*/
