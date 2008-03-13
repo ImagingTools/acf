@@ -180,6 +180,15 @@
 				RelativePath="..\CDllFunctionsProvider.cpp">
 			</File>
 			<File
+				RelativePath="..\CFileDialogSerializerComp.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\CGuiComponentBase.cpp">
 			</File>
 			<File
@@ -231,6 +240,9 @@
 			</File>
 			<File
 				RelativePath="..\CDllFunctionsProvider.h">
+			</File>
+			<File
+				RelativePath="..\CFileDialogSerializerComp.h">
 			</File>
 			<File
 				RelativePath="..\CGuiComponentBase.h">

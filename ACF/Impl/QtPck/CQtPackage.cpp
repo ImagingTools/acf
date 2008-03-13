@@ -6,6 +6,7 @@
 
 // TODO: Uncomment, if missing feautres implemented
 //#include "iqt/CIconProviderComp.h" 
+//#include "iqt/CFileDialogSerializerComp.h"
 
 I_EXPORT_PACKAGE("Qt", "Standard Qt package", "Qt Standard");
 I_EXPORT_COMPONENT(iqt::CLoginGuiComp, LoginGui, "Gui used to user login", "User Login Qt GUI");
@@ -14,3 +15,4 @@ I_EXPORT_COMPONENT(iqt::CSplashScreenGuiComp, SplashScreen, "Splash screen", "Sp
 
 // TODO: Uncomment wenn missing feautres implemented
 //I_EXPORT_COMPONENT(iqt::CIconProviderComp, IconProvider, "Icon provider", "Icons Qt GUI"); 
+//I_EXPORT_COMPONENT(iqt::CFileDialogSerializerComp, FileDialogSerializer, "File dialog serializer", "File Serialization Qt"); 

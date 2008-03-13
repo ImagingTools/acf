@@ -20,8 +20,8 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 	I_BEGIN_COMPONENT(CIconProviderComp)
 		I_REGISTER_INTERFACE(iqt::IIconProvider)
-		I_ASSIGN(m_iconFilesAttr, "IconFiles", "Names of the icon files", ".", true)
-		I_ASSIGN(m_iconPathAttr, "IconsPath", "Path to the icon files", ".", true)
+		I_ASSIGN(m_iconFilesAttrPtr, "IconFiles", "Names of the icon files", ".", true)
+		I_ASSIGN(m_iconPathAttrPtr, "IconsPath", "Path to the icon files", ".", true)
 	I_END_COMPONENT
 
 	// reimplemented (iqt::IIconProvider)
@@ -29,8 +29,8 @@ public:
 	virtual QIcon GetIcon(int index) const;
 
 private:
-	I_MULTIATTR(icomp::CStringAttribute, m_iconFilesAttr);
-	I_ATTR(icomp::CStringAttribute, m_iconPathAttr);
+	I_MULTIATTR(icomp::CStringAttribute, m_iconFilesAttrPtr);
+	I_ATTR(icomp::CStringAttribute, m_iconPathAttrPtr);
 };
 
 
