@@ -49,39 +49,39 @@ inline int TIndex<Dimensions>::GetDimensionsCount() const
 
 
 template <int Dimensions>
-inline int GetAt(int index) const
+inline int TIndex<Dimensions>::GetAt(int index) const
 {
-	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < Dimensions);
 
-	return m_elements[elementIndex];
+	return m_elements[index];
 }
 
 
 template <int Dimensions>
-inline void TIndex<Dimensions>::SetAt(const TIndex<Dimensions>& index, const Element& value)
+inline void TIndex<Dimensions>::SetAt(int index, int value)
 {
-	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < Dimensions);
 
-	m_elements[elementIndex] = value;
+	m_elements[index] = value;
 }
 
 
 template <int Dimensions>
-inline const Element& TIndex<Dimensions>::operator[](const TIndex<Dimensions>& index) const
+inline int TIndex<Dimensions>::operator[](int index) const
 {
 	return GetAt(index);
 }
 
 
 template <int Dimensions>
-inline Element& TIndex<Dimensions>::operator[](const TIndex<Dimensions>& index)
+inline int& TIndex<Dimensions>::operator[](int index)
 {
-	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < Dimensions);
 
-	return m_elements[elementIndex];
+	return m_elements[index];
 }
 
 
@@ -91,14 +91,14 @@ template <int Dimensions>
 TIndex<Dimensions>::TIndex()
 {
 	for (int i = 0; i < Dimensions; ++i){
-		m_sizes[i] = 0;
+		m_elements[i] = 0;
 	}
 }
 
 
 template <int Dimensions>
 TIndex<Dimensions>::TIndex(const TIndex& array)
-:	m_sizes(array.m_sizes), m_elements(array.m_elements)
+:	m_elements(array.m_elements)
 {
 }
 
