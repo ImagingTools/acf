@@ -207,6 +207,9 @@
 				RelativePath="..\CPackagesLoader.cpp">
 			</File>
 			<File
+				RelativePath="..\CSignalBlocker.cpp">
+			</File>
+			<File
 				RelativePath="..\CSplashScreenGuiComp.cpp">
 			</File>
 			<File
@@ -293,6 +296,9 @@
 				RelativePath="..\CPackagesLoader.h">
 			</File>
 			<File
+				RelativePath="..\CSignalBlocker.h">
+			</File>
+			<File
 				RelativePath="..\CSplashScreenGuiComp.h">
 			</File>
 			<File
@@ -311,13 +317,28 @@
 				RelativePath="..\CXmlFileWriteArchive.h">
 			</File>
 			<File
+				RelativePath="..\IActionProvider.h">
+			</File>
+			<File
+				RelativePath="..\IDockManager.h">
+			</File>
+			<File
 				RelativePath="..\IGuiObject.h">
 			</File>
 			<File
 				RelativePath="..\IIconProvider.h">
 			</File>
 			<File
+				RelativePath="..\IMainWindowComponent.h">
+			</File>
+			<File
 				RelativePath="..\iqt.h">
+			</File>
+			<File
+				RelativePath="..\IToolBarManager.h">
+			</File>
+			<File
+				RelativePath="..\ITranslationManager.h">
 			</File>
 			<File
 				RelativePath="..\TGuiComponentBase.h">
