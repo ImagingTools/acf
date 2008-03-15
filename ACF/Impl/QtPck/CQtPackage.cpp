@@ -1,3 +1,4 @@
+#ifndef OLD_ACF_SUPPORT
 #include "icomp/export.h"
 
 #include "iqt/CLoginGuiComp.h"
@@ -16,3 +17,27 @@ I_EXPORT_COMPONENT(iqt::CSplashScreenGuiComp, SplashScreen, "Splash screen", "Sp
 // TODO: Uncomment wenn missing feautres implemented
 //I_EXPORT_COMPONENT(iqt::CIconProviderComp, IconProvider, "Icon provider", "Icons Qt GUI"); 
 //I_EXPORT_COMPONENT(iqt::CFileDialogSerializerComp, FileDialogSerializer, "File dialog serializer", "File Serialization Qt"); 
+
+#else OLD_ACF_SUPPORT
+
+#include "CQtPackage.h"
+
+#include "iqt/CTabContainerGuiComp.h"
+#include "iqt/CLoginGuiComp.h"
+
+
+CQtPackage::CQtPackage()
+:	BaseClass()
+{
+	acf::ComponentLibraryInfo info;
+	info.SetLibName("Qt");
+	SetLibraryInfo(info);
+
+	RegisterComponent<iqt::CTabContainerGuiComp>("TabContainerGui");
+	RegisterComponent<iqt::CLoginGuiComp>("LoginGui");
+}
+
+
+EXPORT_COMPONENT_LIBRARY(CQtPackage);
+
+#endif // OLD_ACF_SUPPORT
