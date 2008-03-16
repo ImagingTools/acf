@@ -89,6 +89,10 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// static methods
+
+	int GetDimensionsCount();
+
 protected:
 	/**
 		Sort fulcrums in this collection.
@@ -124,6 +128,15 @@ template <class Element, int Dimensions>
 inline istd::TIndex<Dimensions> TFulcrumGridFunctionBase<Element, Dimensions>::GetGridSize() const
 {
 	return m_fulcrum.GetSizes();
+}
+
+
+// static inline methods
+
+template <class Element, int Dimensions>
+inline int TFulcrumGridFunctionBase<Element, Dimensions>::GetDimensionsCount()
+{
+	return Dimensions;
 }
 
 

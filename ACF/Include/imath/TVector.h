@@ -28,11 +28,6 @@ public:
 	TVector(const TVector<Size>& vector);
 
 	/**
-		Get number of components.
-	*/
-	int GetElementsCount() const;
-
-	/**
 		Get element at specified index.
 	*/
 	double GetElement(int index) const;
@@ -132,6 +127,14 @@ public:
 	double operator[](int index) const;
 	double& operator[](int index);
 
+	// static methods
+
+	/**
+		Get number of elements.
+	*/
+	static int GetElementsCount();
+
+
 protected:
     double m_elements[Size];
 };
@@ -155,13 +158,6 @@ inline TVector<Size>::TVector(const TVector<Size>& vector)
 
 
 // inline methods
-
-template <int Size>
-inline int TVector<Size>::GetElementsCount() const
-{
-	return Size;
-}
-
 
 template <int Size>
 inline double TVector<Size>::GetElement(int index) const
@@ -411,6 +407,15 @@ double& TVector<Size>::operator[](int index)
 	I_ASSERT(index < Size);
 
 	return m_elements[index];
+}
+
+
+// static inline methods
+
+template <int Size>
+inline int TVector<Size>::GetElementsCount()
+{
+	return Size;
 }
 
 
