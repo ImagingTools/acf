@@ -252,6 +252,9 @@
 			Name="Header Files"
 			Filter="*.h, *.hpp">
 			<File
+				RelativePath="..\CBitStream.h">
+			</File>
+			<File
 				RelativePath="..\CChangeDelegator.h">
 			</File>
 			<File
@@ -330,9 +333,6 @@
 				RelativePath="..\TSingleFactory.h">
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\CBitStream.h">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
