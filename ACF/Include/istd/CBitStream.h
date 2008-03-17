@@ -54,7 +54,7 @@ public:
 	/**
 		Returns \c true if the end of stream is reached.
 	*/
-	bool IsEOS() const;
+	bool IsEos() const;
 
 private:
 	typedef std::vector<I_BYTE> StreamData;

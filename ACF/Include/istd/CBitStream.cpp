@@ -34,7 +34,7 @@ void CBitStream::ResetPosition()
 
 I_DWORD CBitStream::GetValue(int bits)
 {
-	if (IsEOS()){
+	if (IsEos()){
 		return 0;
 	}
 
@@ -65,7 +65,7 @@ void CBitStream::PushBack(I_DWORD word, int bits)
 }
 
 
-bool CBitStream::IsEOS() const
+bool CBitStream::IsEos() const
 {
 	int bytePosition = (m_bitPosition % 8) + m_bitPosition / 8;
 
