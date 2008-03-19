@@ -34,7 +34,7 @@ protected:
 	/**
 		Serialize state of enable flag.
 	*/
-	virtual bool SerializeState(iser::IArchive& archive);
+	virtual bool SerializeEnabled(iser::IArchive& archive);
 
 private:
 	bool m_isEnabled;
@@ -80,7 +80,7 @@ void TEnableableWrap<Base>::SetEnabled(bool isEnabled)
 // protected methods
 
 template <class Base>
-bool TEnableableWrap<Base>::SerializeState(iser::IArchive& archive)
+bool TEnableableWrap<Base>::SerializeEnabled(iser::IArchive& archive)
 {
 	static iser::CArchiveTag enabledTag("IsEnabled", "Object enabled state");
 

@@ -233,6 +233,9 @@
 				RelativePath="..\CChangeDelegator.cpp">
 			</File>
 			<File
+				RelativePath="..\CRandomNumber.cpp">
+			</File>
+			<File
 				RelativePath="..\CRange.cpp">
 			</File>
 			<File
@@ -250,6 +253,9 @@
 			Filter="*.h, *.hpp">
 			<File
 				RelativePath="..\CChangeDelegator.h">
+			</File>
+			<File
+				RelativePath="..\CRandomNumber.h">
 			</File>
 			<File
 				RelativePath="..\CRange.h">
