@@ -39,6 +39,22 @@ CMemoryReadArchive::CMemoryReadArchive(
 }
 
 
+void CMemoryReadArchive::ResetPosition()
+{
+	m_readPosition = 0;
+
+	if (m_bufferSize > 0){
+		m_isValid = true;
+	}
+}
+
+
+bool CMemoryReadArchive::IsValid() const
+{
+	return m_isValid;
+}
+
+
 // reimplemented (iser::IArchive)
 
 bool CMemoryReadArchive::ProcessData(void* data, int size)

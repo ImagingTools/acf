@@ -27,6 +27,17 @@ public:
 				const CMemoryWriteArchive& writeArchive,
 				bool serializeHeader = true);
 
+	/**
+		Seeks internal cursor to the begin of data.
+	*/
+	virtual void ResetPosition();
+
+	/**
+		Returns \c true if the archive is in valid state 
+		and internal position cursor has not reached end of archive data
+	*/
+	virtual bool IsValid() const;
+
 	// reimplemented (iser::IArchive)
 	virtual bool ProcessData(void* data, int size);
 	

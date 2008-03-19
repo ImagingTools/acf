@@ -146,6 +146,14 @@ public:
 		\param	size	size of memory block in bytes.
 	*/
 	virtual bool ProcessData(void* dataPtr, int size) = 0;
+
+	/**
+		Process binary data block.
+		\param	dataPtr	pointer to memory block.
+		\param	bitsCount	number of bits.
+		\param	bytesCount	size of memory block in bytes.
+	*/
+	virtual bool ProcessBits(void* dataPtr, int bitsCount, int bytesCount) = 0;
 };
 
 

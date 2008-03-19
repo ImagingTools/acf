@@ -136,6 +136,12 @@
 				RelativePath="..\CBinaryWriteArchiveBase.cpp">
 			</File>
 			<File
+				RelativePath="..\CBitMemoryReadArchive.cpp">
+			</File>
+			<File
+				RelativePath="..\CBitMemoryWriteArchive.cpp">
+			</File>
+			<File
 				RelativePath="..\CFileReadArchive.cpp">
 			</File>
 			<File
@@ -195,6 +201,12 @@
 			</File>
 			<File
 				RelativePath="..\CBinaryWriteArchiveBase.h">
+			</File>
+			<File
+				RelativePath="..\CBitMemoryReadArchive.h">
+			</File>
+			<File
+				RelativePath="..\CBitMemoryWriteArchive.h">
 			</File>
 			<File
 				RelativePath="..\CFileReadArchive.h">

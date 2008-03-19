@@ -15,6 +15,7 @@ public:
 	// reimplemented (iser::IArchive)
 	virtual bool IsStoring() const;
 	virtual I_DWORD GetVersion(int versionId = IVersionInfo::UserVersionId) const;
+	virtual bool ProcessBits(void* dataPtr, int bitsCount, int bytesCount);
 
 protected:
 	/**

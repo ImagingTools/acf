@@ -19,6 +19,20 @@ I_DWORD CReadArchiveBase::GetVersion(int versionId) const
 }
 
 
+bool CReadArchiveBase::ProcessBits(void* dataPtr, int bitsCount, int bytesCount)
+{
+	if (bytesCount == sizeof(I_DWORD)){
+		I_DWORD mask = (1 << bitsCount) - 1;
+		I_DWORD word = *((I_DWORD*)dataPtr);
+		I_DWORD result = word & mask;
+
+		return Process(result);
+	}
+
+	return false;
+}
+
+
 // protected methods
 
 bool CReadArchiveBase::SerializeAcfHeader()

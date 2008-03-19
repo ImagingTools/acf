@@ -230,9 +230,6 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
-				RelativePath="..\CBitStream.cpp">
-			</File>
-			<File
 				RelativePath="..\CChangeDelegator.cpp">
 			</File>
 			<File
@@ -251,9 +248,6 @@
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
-			<File
-				RelativePath="..\CBitStream.h">
-			</File>
 			<File
 				RelativePath="..\CChangeDelegator.h">
 			</File>
