@@ -16,18 +16,33 @@ template <int Dimensions>
 class TIndex
 {
 public:
+	typedef int IndexType;
+	typedef int* Iterator;
+
+	enum
+	{
+		DIMENSIONS = Dimensions
+	};
+
 	/**
 		Default constructor without member initialization.
 	*/
 	TIndex();
+
 	/**
 		Constructor initializing all member to specified value.
 	*/
 	explicit TIndex(int value);
+
 	/**
 		Copy constructor.
 	*/
 	TIndex(const TIndex& array);
+
+	/**
+		Set all components to 0.
+	*/
+	void Reset();
 
 	/**
 		Get number of dimensions of this array.
@@ -47,7 +62,7 @@ public:
 	/**
 		Set all components to specified value.
 	*/
-	void SetAllElements(int value);
+	void SetAllTo(int value);
 
 	/**
 		Check if index is inside boundaries.
@@ -66,6 +81,9 @@ public:
 		\return	false, if decrease wasn't possible (e.g. overflow).
 	*/
 	bool Decrease(const TIndex& boundaries);
+
+	Iterator Begin() const;
+	Iterator End() const;
 
 	int operator[](int index) const;
 	int& operator[](int index);
@@ -88,6 +106,13 @@ inline int TIndex<Dimensions>::GetDimensionsCount() const
 
 
 template <int Dimensions>
+void TIndex<Dimensions>::Reset()
+{
+	SetAllTo(0);
+}
+
+
+template <int Dimensions>
 inline int TIndex<Dimensions>::GetAt(int index) const
 {
 	I_ASSERT(index >= 0);
@@ -104,6 +129,20 @@ inline void TIndex<Dimensions>::SetAt(int index, int value)
 	I_ASSERT(index < Dimensions);
 
 	m_elements[index] = value;
+}
+
+
+template <int Dimensions>
+inline typename TIndex<Dimensions>::Iterator TIndex<Dimensions>::Begin() const
+{
+	return (Iterator)&m_elements[0];
+}
+
+
+template <int Dimensions>
+inline typename TIndex<Dimensions>::Iterator TIndex<Dimensions>::End() const
+{
+	return (Iterator)&m_elements[Dimensions];
 }
 
 
@@ -149,7 +188,7 @@ bool TIndex<Dimensions>::operator!=(const TIndex& index) const
 template <int Dimensions>
 TIndex<Dimensions>::TIndex(int value)
 {
-	SetAllElements(value);
+	SetAllTo(value);
 }
 
 
@@ -172,7 +211,7 @@ TIndex<Dimensions>::TIndex(const TIndex& array)
 
 
 template <int Dimensions>
-void TIndex<Dimensions>::SetAllElements(int value)
+void TIndex<Dimensions>::SetAllTo(int value)
 {
 	for (int i = 0; i < Dimensions; ++i){
 		m_elements[i] = value;
@@ -211,7 +250,7 @@ bool TIndex<Dimensions>::Increase(const TIndex& boundaries)
 		}
 	}
 
-	SetAllElements(0);
+	SetAllTo(0);
 
 	return false;
 }

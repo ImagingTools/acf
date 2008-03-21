@@ -15,104 +15,76 @@ namespace imath
 /**
 	Spline interpolation function using polynomial 3 degree segments.
 	To reduce number of coefficients only precalculated derrivative values for each fulcrum will be stored.
+	\param	Argument	function argument type.
+	\param	Result		function result type.
+	\param	Fulcrums	array type used to stored fulcrums. \sa imath::TFulcrumGridFunctionBase.
+	\param	Degree		type of object storing index of derivative degree.
+						It should implement operator[] to access drivative degree for specified dimension.
 */
-template <class Element, int Dimensions, class Fulcrum = Element, int DerivativesCount = Dimensions>
-class TSplineGridFunctionBase: public TFulcrumGridFunctionBase<Element, Dimensions>
+template <class Argument, class Result, class Fulcrums, class Degree>
+class TSplineGridFunctionBase: public TFulcrumGridFunctionBase<Argument, Result, Fulcrums>
 {
 public:
-	typedef TFulcrumGridFunctionBase<Element, Dimensions> BaseClass;
+	typedef TFulcrumGridFunctionBase<Argument, Result, Fulcrums> BaseClass;
 
-	// reimplemented (imath::TIMathFunction<imath::TVector<Dimensions>, Element>)
-	virtual bool GetValueAt(const imath::TVector<Dimensions>& argument, Element& result) const;
-	virtual Element GetValueAt(const imath::TVector<Dimensions>& argument) const;
+	typedef Degree DerivativeDegree;
+
+	// reimplemented (imath::TIMathFunction<Argument, Result>)
+	virtual bool GetValueAt(const Argument& argument, Result& result) const;
+	virtual Result GetValueAt(const Argument& argument) const;
 
 protected:
-	typedef imath::TVector<DerivativesCount, Element> Derivatives;
-	typedef istd::TArray<Derivatives, Dimensions> DerivativesGrid;
-
 	/**
-		Calculate interpolated value at specified recursion level.
-		\param	argument	position, where interpolation should be calculated.
-		\param	index		multidimensional index pointing at cuboid element in fulcrum grid.
-		\param	sizes		size fulcrum grid.
-		\param	dimension	working dimension and recursion level.
-		\param	result		returned object.
-	*/
-	void CalcRecursiveValueAt(
-				const TVector<Dimensions>& argument,
-				istd::TIndex<Dimensions>& index,
-				const istd::TIndex<Dimensions>& sizes,
-				int dimension,
-				Element& result) const;
-
-	/**
-		Calculate interpolated derivative at specified recursion level.
+		Calculate interpolated value or derivative at specified recursion level.
 		\param	argument			position, where interpolation should be calculated.
-		\param	index				multidimensional index pointing at cuboid element in fulcrum grid.
 		\param	sizes				size fulcrum grid.
-		\param	derivativeDimension	dimension index of requested derivative.
 		\param	dimension			working dimension and recursion level.
+		\param	index				multidimensional index pointing at cuboid element in fulcrum grid.
+									For the sake of performance it is internal modified,
+									but original state is reverted before this method returns.
+		\param	degree				derivative degree will be taken.
+									For the sake of performance it is internal modified,
+									but original state is reverted before this method returns.
 		\param	result				returned object.
 	*/
-	void CalcRecursiveDerivativeAt(
-				const TVector<Dimensions>& argument,
-				istd::TIndex<Dimensions>& index,
-				const istd::TIndex<Dimensions>& sizes,
-				int derivativeDimension,
+	void CalcRecursiveValueAt(
+				const Argument& argument,
 				int dimension,
-				Element& result) const;
-
-	const DerivativesGrid& GetDerivativesGrid() const;
-	DerivativesGrid& GetDerivativesGrid();
-
-	// reimplemented (istd::TCachedUpdateManagerWrap)
-	virtual bool CalculateCache(int changeFlags);
+				const FulcrumSizes& sizes,
+				FulcrumIndex& index,
+				DerivativeDegree& degree,
+				Result& result) const;
 
 	// static methods
 	static double GetValueKernelAt(double alpha);
 	static double GetDerivativeKernelAt(double alpha);
 
 	// abstract methods
+	/**
+		Get derivative of specified degree at specified index position.
+	*/
+	virtual const ResultType& GetFulcrumDerivativeAtIndex(
+				const FulcrumIndex& index,
+				const DerivativeDegree& degree) const = 0;
 
 	/**
-		Calc values of derrivatives after fulcrum grid changes.
+		Check, if this or higher degree derrivatives are supported.
 	*/
-	virtual void CalcDerivativesGrid(DerivativesGrid& result) = 0;
-
-private:
-	DerivativesGrid m_derrivativesGrid;
+	virtual bool IsDerivativeDegreeSupported(const DerivativeDegree& degree) const = 0;
 };
-
-
-// protected inline methods
-
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-inline typename const TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::DerivativesGrid&
-			TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::GetDerivativesGrid() const
-{
-	return m_derrivativesGrid;
-}
-
-
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-inline typename TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::DerivativesGrid&
-			TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::GetDerivativesGrid()
-{
-	return m_derrivativesGrid;
-}
 
 
 // static protected inline methods
 
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-inline double TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::GetValueKernelAt(double alpha)
+template <class Argument, class Result, class Fulcrums, class Degree>
+inline double TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueKernelAt(double alpha)
 {
 	return 2 * alpha * alpha * alpha - 3 * alpha * alpha + 1;
 }
 
 
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-inline double TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::GetDerivativeKernelAt(double alpha)
+template <class Argument, class Result, class Fulcrums, class Degree>
+inline double TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetDerivativeKernelAt(double alpha)
 {
 	return alpha * alpha * alpha - 2 * alpha * alpha + alpha;
 }
@@ -120,15 +92,18 @@ inline double TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesC
 
 // public methods
 
-// reimplemented (imath::TIMathFunction<imath::TVector<Dimensions>, Element>)
+// reimplemented (imath::TIMathFunction<Argument, Result>)
 
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-bool TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::GetValueAt(const imath::TVector<Dimensions>& argument, Element& result) const
+template <class Argument, class Result, class Fulcrums, class Degree>
+bool TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueAt(const Argument& argument, Result& result) const
 {
 	if (EnsureCacheValid()){
-		istd::TIndex<Dimensions> index = FindIndices(argument);
+		FulcrumIndex index = FindIndices(argument);
 
-		CalcRecursiveValueAt(argument, index, GetGridSize(), Dimensions - 1, result);
+		Degree degree;
+		degree.Reset();
+
+		CalcRecursiveValueAt(argument, GetDimensionsCount() - 1, GetGridSize(), index, degree, result);
 
 		return true;
 	}
@@ -138,8 +113,8 @@ bool TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::Ge
 }
 
 
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-typename Element TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::GetValueAt(const imath::TVector<Dimensions>& argument) const
+template <class Argument, class Result, class Fulcrums, class Degree>
+typename Result TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueAt(const Argument& argument) const
 {
 	ResultType retVal;
 
@@ -151,71 +126,17 @@ typename Element TSplineGridFunctionBase<Element, Dimensions, Fulcrum, Derivativ
 
 // protected methods
 
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-void TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::CalcRecursiveDerivativeAt(
-			const TVector<Dimensions>& argument,
-			istd::TIndex<Dimensions>& index,
-			const istd::TIndex<Dimensions>& sizes,
-			int derivativeDimension,
+template <class Argument, class Result, class Fulcrums, class Degree>
+void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveValueAt(
+			const Argument& argument,
 			int dimension,
-			Element& result) const
+			const FulcrumSizes& sizes,
+			FulcrumIndex& index,
+			DerivativeDegree& degree,
+			Result& result) const
 {
 	if (dimension < 0){
-		result = m_derrivativesGrid[index][derivativeDimension];
-
-		return;
-	}
-
-	int& indexElement = index[dimension];
-
-	if (indexElement < 0){
-		I_ASSERT(indexElement == -1);
-
-		++indexElement;
-		CalcRecursiveDerivativeAt(argument, index, sizes, derivativeDimension, dimension - 1, result);
-		--indexElement;
-	}
-	else if (indexElement >= sizes[dimension] - 1){
-		I_ASSERT(indexElement == sizes[dimension] - 1);
-
-		CalcRecursiveDerivativeAt(argument, index, sizes, derivativeDimension, dimension - 1, result);
-	}
-	else{
-		Element firstDerivative;
-		CalcRecursiveDerivativeAt(argument, index, sizes, dimension, dimension - 1, firstDerivative);
-
-		++indexElement;
-
-		Element secondDerivative;
-		CalcRecursiveDerivativeAt(argument, index, sizes, dimension, dimension - 1, secondDerivative);
-
-		--indexElement;
-
-		double firstPosition = GetLayerPosition(dimension, indexElement);
-		double secondPosition = GetLayerPosition(dimension, indexElement + 1);
-		double layersDistance = secondPosition - firstPosition;
-		I_ASSERT(layersDistance >= 0);
-		I_ASSERT(argument[dimension] >= firstPosition);
-		I_ASSERT(argument[dimension] <= secondPosition);
-
-		double alpha = (argument[dimension] - firstPosition) / layersDistance;
-		
-		result =	firstDerivative * (GetValueKernelAt(alpha) * layersDistance) +
-					secondDerivative * (GetValueKernelAt(1.0 - alpha) * layersDistance);
-	}
-}
-
-
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-void TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::CalcRecursiveValueAt(
-			const TVector<Dimensions>& argument,
-			istd::TIndex<Dimensions>& index,
-			const istd::TIndex<Dimensions>& sizes,
-			int dimension,
-			Element& result) const
-{
-	if (dimension < 0){
-		result = GetFulcrumAtIndex(index);
+		result = GetFulcrumDerivativeAtIndex(index, degree);
 
 		return;
 	}
@@ -227,73 +148,81 @@ void TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::Ca
 		I_ASSERT(indexElement == -1);
 
 		++indexElement;
-		CalcRecursiveValueAt(argument, index, sizes, dimension - 1, result);
+		CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, result);
 		--indexElement;
 	}
 	else if (indexElement >= sizes[dimension] - 1){
 		// element out of boundaries at this dimension
 		I_ASSERT(indexElement == sizes[dimension] - 1);
 
-		CalcRecursiveValueAt(argument, index, sizes, dimension - 1, result);
+		CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, result);
 	}
 	else{
-		Element firstValue;
-		CalcRecursiveValueAt(argument, index, sizes, dimension - 1, firstValue);
-
-		++indexElement;
-
-		Element secondValue;
-		CalcRecursiveValueAt(argument, index, sizes, dimension - 1, secondValue);
-
-		--indexElement;
-
 		double firstPosition = GetLayerPosition(dimension, indexElement);
 		double secondPosition = GetLayerPosition(dimension, indexElement + 1);
 		double layersDistance = secondPosition - firstPosition;
 		I_ASSERT(layersDistance >= 0);
 		I_ASSERT(argument[dimension] >= firstPosition);
 		I_ASSERT(argument[dimension] <= secondPosition);
+		I_ASSERT(degree[dimension] == 0);
+
+		++degree[dimension];
+		bool useDerivative = IsDerivativeDegreeSupported(degree);
+		--degree[dimension];
 
 		double alpha = (argument[dimension] - firstPosition) / layersDistance;
 
-		if (dimension < DerivativesCount){
-			// use derrivative information
-			Element firstDerivative;
-			CalcRecursiveDerivativeAt(argument, index, sizes, dimension, dimension - 1, firstDerivative);
+		double firstValueFactor = useDerivative? GetValueKernelAt(alpha): (1 - alpha);	// use linear interpolation if no derivative is available
+
+		Result firstValue = 0;
+		if (firstValueFactor > I_EPSILON){
+			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, firstValue);
+		}
+
+		++indexElement;
+
+		double secondValueFactor = useDerivative? GetValueKernelAt(1.0 - alpha): alpha;	// use linear interpolation if no derivative is available
+
+		Result secondValue = 0;
+		if (secondValueFactor > I_EPSILON){
+			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, secondValue);
+		}
+
+		--indexElement;
+
+		if (useDerivative){
+			++degree[dimension];
+
+			double firstDerivativeFactor = GetDerivativeKernelAt(alpha) * layersDistance;
+
+			Result firstDerivative = 0;
+			if (firstDerivativeFactor > I_EPSILON){
+				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, firstDerivative);
+			}
 
 			++indexElement;
 
-			Element secondDerivative;
-			CalcRecursiveDerivativeAt(argument, index, sizes, dimension, dimension - 1, secondDerivative);
+			double secondDerivativeFactor = GetDerivativeKernelAt(1.0 - alpha) * layersDistance;
+
+			Result secondDerivative = 0;
+			if (secondDerivativeFactor > I_EPSILON){
+				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, secondDerivative);
+			}
 
 			--indexElement;
 
-			result =	firstValue * GetValueKernelAt(alpha) +
-						secondValue * GetValueKernelAt(1.0 - alpha) +
-						firstDerivative * (GetDerivativeKernelAt(alpha) * layersDistance) +
-						secondDerivative * (GetDerivativeKernelAt(1.0 - alpha) * layersDistance);
+			--degree[dimension];
+
+			result =	firstValue * firstValueFactor +
+						secondValue * secondValueFactor +
+						firstDerivative * firstDerivativeFactor +
+						secondDerivative * secondDerivativeFactor;
 		}
 		else{
-			// derrivative information is not available for this dimension
-			result =	firstValue * (1.0 - alpha) +
-						secondValue * alpha;
+			result =	firstValue * firstValueFactor +
+						secondValue * secondValueFactor;
 		}
 	}
-}
-
-
-// reimplemented (istd::TCachedUpdateManagerWrap)
-
-template <class Element, int Dimensions, class Fulcrum, int DerivativesCount>
-bool TSplineGridFunctionBase<Element, Dimensions, Fulcrum, DerivativesCount>::CalculateCache(int changeFlags)
-{
-	bool retVal = BaseClass::CalculateCache(changeFlags);
-
-	m_derrivativesGrid.SetSizes(GetGridSize());
-
-	CalcDerivativesGrid(m_derrivativesGrid);
-
-	return retVal;
 }
 
 

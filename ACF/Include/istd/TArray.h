@@ -18,7 +18,11 @@ template <class Element, int Dimensions>
 class TArray
 {
 public:
-	class Iterator: public istd::TIndex<Dimensions>
+	typedef TIndex<Dimensions> IndexType;
+	typedef TIndex<Dimensions> SizesType;
+	typedef Element ElementType;
+
+	class Iterator: public TIndex<Dimensions>
 	{
 	public:
 		typedef TIndex<Dimensions> BaseClass;
@@ -67,12 +71,12 @@ public:
 	/**
 		Get list of all sizes.
 	*/
-	const TIndex<Dimensions>& GetSizes() const;
+	const SizesType& GetSizes() const;
 
 	/**
 		Set list of all sizes.
 	*/
-	void SetSizes(const TIndex<Dimensions>& sizes);
+	void SetSizes(const SizesType& sizes);
 
 	/**
 		Get size of array for specified dimension.
@@ -88,25 +92,25 @@ public:
 	/**
 		Get element stored at specified index.
 	*/
-	const Element& GetAt(const TIndex<Dimensions>& index) const;
+	const Element& GetAt(const IndexType& index) const;
 
 	/**
 		Set element at specified index.
 	*/
-	void SetAt(const TIndex<Dimensions>& index, const Element& value);
+	void SetAt(const IndexType& index, const Element& value);
 
 	// iterator support
 	Iterator Begin() const;
 	const Iterator& End() const;
 
-	const Element& operator[](const TIndex<Dimensions>& index) const;
-	Element& operator[](const TIndex<Dimensions>& index);
+	const Element& operator[](const IndexType& index) const;
+	Element& operator[](const IndexType& index);
 
 protected:
 	/**
 		Get index of element in one dimensional array.
 	*/
-	int GetElementIndex(const TIndex<Dimensions>& index) const;
+	int GetElementIndex(const IndexType& index) const;
 	/**
 		Update size of elements to size changes.
 	*/
@@ -116,7 +120,7 @@ private:
 	typedef ::std::vector<Element> Elements;
 	Elements m_elements;
 
-	TIndex<Dimensions> m_sizes;
+	SizesType m_sizes;
 
 	static Iterator s_endIterator;
 };
@@ -132,7 +136,7 @@ inline int TArray<Element, Dimensions>::GetDimensionsCount() const
 
 
 template <class Element, int Dimensions>
-inline const TIndex<Dimensions>& TArray<Element, Dimensions>::GetSizes() const
+inline typename const TArray<Element, Dimensions>::SizesType& TArray<Element, Dimensions>::GetSizes() const
 {
 	return m_sizes;
 }
@@ -149,7 +153,7 @@ inline int TArray<Element, Dimensions>::GetSize(int dimension) const
 
 
 template <class Element, int Dimensions>
-inline typename const Element& TArray<Element, Dimensions>::GetAt(const TIndex<Dimensions>& index) const
+inline typename const Element& TArray<Element, Dimensions>::GetAt(const IndexType& index) const
 {
 	I_ASSERT(index.IsInside(m_sizes));
 
@@ -161,7 +165,7 @@ inline typename const Element& TArray<Element, Dimensions>::GetAt(const TIndex<D
 
 
 template <class Element, int Dimensions>
-inline void TArray<Element, Dimensions>::SetAt(const TIndex<Dimensions>& index, const Element& value)
+inline void TArray<Element, Dimensions>::SetAt(const IndexType& index, const Element& value)
 {
 	I_ASSERT(index.IsInside(m_sizes));
 
@@ -189,14 +193,14 @@ typename const TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions
 
 
 template <class Element, int Dimensions>
-inline const Element& TArray<Element, Dimensions>::operator[](const TIndex<Dimensions>& index) const
+inline const Element& TArray<Element, Dimensions>::operator[](const IndexType& index) const
 {
 	return GetAt(index);
 }
 
 
 template <class Element, int Dimensions>
-inline Element& TArray<Element, Dimensions>::operator[](const TIndex<Dimensions>& index)
+inline Element& TArray<Element, Dimensions>::operator[](const IndexType& index)
 {
 	int elementIndex = GetElementIndex(index);
 	I_ASSERT(elementIndex < int(m_elements.size()));
@@ -208,7 +212,7 @@ inline Element& TArray<Element, Dimensions>::operator[](const TIndex<Dimensions>
 // inline protected methods
 
 template <class Element, int Dimensions>
-inline int TArray<Element, Dimensions>::GetElementIndex(const TIndex<Dimensions>& index) const
+inline int TArray<Element, Dimensions>::GetElementIndex(const IndexType& index) const
 {
 	int elementIndex = 0;
 	int cumulatedSizes = 1;
@@ -246,14 +250,14 @@ TArray<Element, Dimensions>::TArray(const TArray& array)
 template <class Element, int Dimensions>
 void TArray<Element, Dimensions>::Reset()
 {
-	m_sizes = TIndex<Dimensions>(0);
+	m_sizes.Reset();
 
 	m_elements.clear();
 }
 
 
 template <class Element, int Dimensions>
-void TArray<Element, Dimensions>::SetSizes(const TIndex<Dimensions>& sizes)
+void TArray<Element, Dimensions>::SetSizes(const SizesType& sizes)
 {
 	m_sizes = sizes;
 
