@@ -135,6 +135,9 @@
 			<File
 				RelativePath="..\CRgb.cpp">
 			</File>
+			<File
+				RelativePath="..\CVarColor.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -150,6 +153,9 @@
 			</File>
 			<File
 				RelativePath="..\CRgb.h">
+			</File>
+			<File
+				RelativePath="..\CVarColor.h">
 			</File>
 			<File
 				RelativePath="..\icmm.h">

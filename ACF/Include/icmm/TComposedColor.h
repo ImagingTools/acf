@@ -305,7 +305,7 @@ void TComposedColor<Size>::GetNormalized(TComposedColor<Size>& result) const
 {
 	result = *this;
 
-	retVal.Normalize();
+	result.Normalize();
 }
 
 

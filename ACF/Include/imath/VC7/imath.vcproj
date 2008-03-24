@@ -164,6 +164,9 @@
 				RelativePath="..\TSplineGridFunctionBase.h">
 			</File>
 			<File
+				RelativePath="..\TVarVector.h">
+			</File>
+			<File
 				RelativePath="..\TVector.h">
 			</File>
 		</Filter>

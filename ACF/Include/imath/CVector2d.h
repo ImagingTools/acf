@@ -2,15 +2,12 @@
 #define i2d_CVector2d_included
 
 
-
 #include <math.h>
 
 #include "imath/TVector.h"
 
 
-
 namespace imath{
-
 
 
 class CVector2d: public TVector<2>
