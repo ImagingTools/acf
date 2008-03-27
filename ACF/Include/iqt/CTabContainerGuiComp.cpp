@@ -16,7 +16,9 @@ CTabContainerGuiComp::CTabContainerGuiComp()
 	m_cornerGuiCompIfPtr(this, "CornerWidget"),
 	m_tabNamesAttr(this, "TabNames"),
 	m_iconsProviderCompIfPtr(this, "TabIcons"),
-	m_iconSizeAttr(16, this, "IconSize")
+	m_iconSizeAttr(16, this, "IconSize"),
+	m_useTriangularTabsAttr(false, this, "UseTriangularTabs"),
+	m_tabOrientationAttr(0, this, "TabOrientation")
 {
 }
 
@@ -31,6 +33,12 @@ CTabContainerGuiComp::~CTabContainerGuiComp()
 void CTabContainerGuiComp::initializeGui()
 {
 	if (m_widget != NULL){
+		if (m_useTriangularTabsAttr.GetValue()){
+			m_widget->setTabShape(QTabWidget::Triangular);
+		}
+
+		m_widget->setTabPosition(QTabWidget::TabPosition(m_tabOrientationAttr.GetValue()));
+
 		QSize iconSize = QSize(m_iconSizeAttr.GetValue(), m_iconSizeAttr.GetValue());
 		if (!iconSize.isNull() && iconSize.isValid() && !iconSize.isEmpty()){
 			m_widget->setIconSize(iconSize);

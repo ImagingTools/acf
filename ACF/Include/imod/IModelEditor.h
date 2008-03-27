@@ -30,6 +30,11 @@ public:
 	virtual void UpdateModel() = 0;
 
 	/**
+		Resets the editor view.
+	*/
+	virtual void ResetEditor() = 0;
+
+	/**
 		Returns \c true if the model data can be changed.
 	*/
 	virtual bool IsModelChangeable() const = 0;

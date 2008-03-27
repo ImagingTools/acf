@@ -119,10 +119,16 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			<File
+				RelativePath="..\CMessage.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
+			<File
+				RelativePath="..\CMessage.h">
+			</File>
 			<File
 				RelativePath="..\IApplication.h">
 			</File>
@@ -131,6 +137,12 @@
 			</File>
 			<File
 				RelativePath="..\ibase.h">
+			</File>
+			<File
+				RelativePath="..\IMessage.h">
+			</File>
+			<File
+				RelativePath="..\IMessageManager.h">
 			</File>
 			<File
 				RelativePath="..\INamedObject.h">
@@ -143,6 +155,9 @@
 			</File>
 			<File
 				RelativePath="..\THierarchicalBase.h">
+			</File>
+			<File
+				RelativePath="..\TMessageManagerBase.h">
 			</File>
 			<File
 				RelativePath="..\TNamedBase.h">

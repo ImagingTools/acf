@@ -24,6 +24,7 @@ I_EXPORT_COMPONENT(iqt::CSplashScreenGuiComp, SplashScreen, "Splash screen", "Sp
 
 #include "iqt/CTabContainerGuiComp.h"
 #include "iqt/CLoginGuiComp.h"
+#include "iqt/CLogGuiComp.h"
 
 
 CQtPackage::CQtPackage()
@@ -35,6 +36,7 @@ CQtPackage::CQtPackage()
 
 	RegisterComponent<iqt::CTabContainerGuiComp>("TabContainerGui");
 	RegisterComponent<iqt::CLoginGuiComp>("LoginGui");
+	RegisterComponent<iqt::CLogGuiComp>("LogGui");
 }
 
 

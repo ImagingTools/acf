@@ -8,6 +8,7 @@
 #include <string>
 #include <xstring>
 #include <vector>
+#include <sstream>
 
 
 namespace istd
@@ -60,6 +61,9 @@ public:
 
 	CString ToUpper() const;
 	CString ToLower() const;
+	
+	template <typename NumberType>
+	static CString FromNumber(NumberType number);
 
 protected:
 	void Copy(const CString& other);
@@ -69,6 +73,18 @@ private:
 	mutable ::std::string m_stdString;
 	mutable bool m_isModified;
 };
+
+
+// public static methods
+
+template <typename NumberType>
+CString CString::FromNumber(NumberType number)
+{
+	std::ostringstream stringStream;
+	stringStream << number << std::ends;
+
+	return stringStream.str();
+}
 
 
 typedef ::std::vector<istd::CString> CStringList;

@@ -39,6 +39,8 @@ protected:
 	acf::ComponentDependency<acf::QtGuiInterface> m_cornerGuiCompIfPtr;
 	acf::StringListAttribute m_tabNamesAttr;
 	acf::IntAttribute m_iconSizeAttr;
+	acf::BoolAttribute m_useTriangularTabsAttr;
+	acf::IntAttribute m_tabOrientationAttr;
 };
 
 

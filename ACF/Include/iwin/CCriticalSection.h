@@ -9,7 +9,8 @@
 #include "iwin/iwin.h"
 
 
-namespace iwin{
+namespace iwin
+{
 
 
 class CCriticalSection: virtual public isys::ICriticalSection

@@ -4,7 +4,8 @@
 extern "C" BOOL _stdcall TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);	// TODO: try to find other work around
 
 
-namespace iwin{
+namespace iwin
+{
 
 
 CCriticalSection::CCriticalSection()

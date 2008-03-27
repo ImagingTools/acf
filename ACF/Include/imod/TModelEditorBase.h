@@ -32,6 +32,7 @@ public:
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
 	// reimplemented (imod::IModelEditor)
+	virtual void ResetEditor();
 	virtual bool IsModelChangeable() const;
 
 protected:
@@ -54,26 +55,33 @@ TModelEditorBase<InterfaceClass>::TModelEditorBase()
 template <class InterfaceClass>
 bool TModelEditorBase<InterfaceClass>::OnAttached(imod::IModel* modelPtr)
 {
-	if (BaseClass::OnAttached(modelPtr)){
-		UpdateEditor();
+	ResetEditor();
 
-		return true;
-	}
-
-	return false;
+	return BaseClass::OnAttached(modelPtr);
 }
 
 
 template <class InterfaceClass>
 bool TModelEditorBase<InterfaceClass>::OnDetached(imod::IModel* modelPtr)
 {
-	UpdateEditor();
+	I_ASSERT(modelPtr != NULL);
 
+	if (IsModelChangeable()){
+		UpdateModel();
+	}
+	
+	ResetEditor();
+	
 	return BaseClass::OnDetached(modelPtr);
 }
 
 
 // reimplemented (imod::IModelEditor)
+
+template <class InterfaceClass>
+void TModelEditorBase<InterfaceClass>::ResetEditor()
+{
+}
 
 template <class InterfaceClass>
 bool TModelEditorBase<InterfaceClass>::IsModelChangeable() const
@@ -106,3 +114,4 @@ void TModelEditorBase<InterfaceClass>::OnUpdate(int updateFlags, istd::IPolymorp
 
 
 #endif // !imod_TModelEditorBase_included
+

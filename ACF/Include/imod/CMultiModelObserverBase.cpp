@@ -98,6 +98,11 @@ void CMultiModelObserverBase::EnsureDetached()
 }
 
 
+void CMultiModelObserverBase::OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+}
+
+
 // private methods:
 
 bool CMultiModelObserverBase::IsModelObserved(const imod::IModel* modelPtr) const
