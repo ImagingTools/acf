@@ -245,6 +245,9 @@
 				RelativePath="..\CString.cpp">
 			</File>
 			<File
+				RelativePath="..\CVarIndex.cpp">
+			</File>
+			<File
 				RelativePath="..\istd.cpp">
 			</File>
 		</Filter>
@@ -265,6 +268,9 @@
 			</File>
 			<File
 				RelativePath="..\CString.h">
+			</File>
+			<File
+				RelativePath="..\CVarIndex.h">
 			</File>
 			<File
 				RelativePath="..\IChangeable.h">
@@ -334,6 +340,9 @@
 			</File>
 			<File
 				RelativePath="..\TUpdateManagerWrap.h">
+			</File>
+			<File
+				RelativePath="..\TVarArray.h">
 			</File>
 		</Filter>
 	</Files>

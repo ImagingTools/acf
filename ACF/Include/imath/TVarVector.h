@@ -26,6 +26,11 @@ public:
 	TVarVector();
 
 	/**
+		Create vector and initialize number of components.
+	*/
+	explicit TVarVector(int componentsCount);
+
+	/**
 		Copy constructor.
 	 */
 	TVarVector(const TVarVector<Element>& vector);
@@ -156,6 +161,13 @@ protected:
 
 template <class Element>
 inline TVarVector<Element>::TVarVector()
+{
+}
+
+
+template <class Element>
+inline TVarVector<Element>::TVarVector(int componentsCount)
+:	m_elements(componentsCount)
 {
 }
 

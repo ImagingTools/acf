@@ -10,7 +10,7 @@ namespace istd
 
 
 /**
-	Multidimensional index used to addressing array.
+	Multidimensional index used to addressing fixed-size array.
 */
 template <int Dimensions>
 class TIndex
@@ -40,14 +40,29 @@ public:
 	TIndex(const TIndex& array);
 
 	/**
-		Set all components to 0.
+		Reset this object.
+		For this (fixed-size) implementation, it does the same as clear.
+		\sa Clear()
 	*/
 	void Reset();
+
+	/**
+		Set all components to 0.
+	*/
+	void Clear();
 
 	/**
 		Get number of dimensions of this array.
 	*/
 	int GetDimensionsCount() const;
+
+	/**
+		Set number of dimensions of this array.
+		It is provided to allows template implementations to use fixed-size or variable arrays.
+		For the sake of fixed numbers of dimensions in this implementation this method do nothing,
+		but if you try set other dimension count, assertion error will be thrown.
+	*/
+	void SetDimensionsCount(int count) const;
 
 	/**
 		Get element stored at specified index.
@@ -106,7 +121,21 @@ inline int TIndex<Dimensions>::GetDimensionsCount() const
 
 
 template <int Dimensions>
+inline void TIndex<Dimensions>::SetDimensionsCount(int count) const
+{
+	I_ASSERT(count == GetDimensionsCount());
+}
+
+
+template <int Dimensions>
 void TIndex<Dimensions>::Reset()
+{
+	Clear();
+}
+
+
+template <int Dimensions>
+void TIndex<Dimensions>::Clear()
 {
 	SetAllTo(0);
 }

@@ -1,5 +1,5 @@
-#ifndef istd_TArray_included
-#define istd_TArray_included
+#ifndef istd_TVarArray_included
+#define istd_TVarArray_included
 
 
 #include <vector>
@@ -14,12 +14,12 @@ namespace istd
 /**
 	Multidimensional array with fixed number of dimensions.
 */
-template <class Element, int Dimensions>
-class TArray
+template <class Element = double>
+class TVarArray
 {
 public:
-	typedef TIndex<Dimensions> IndexType;
-	typedef TIndex<Dimensions> SizesType;
+	typedef CVarIndex IndexType;
+	typedef CVarIndex<Dimensions> SizesType;
 	typedef Element ElementType;
 
 	class Iterator: public TIndex<Dimensions>
@@ -46,17 +46,17 @@ public:
 		bool operator==(const Iterator& iterator) const;
 		bool operator!=(const Iterator& iterator) const;
 
-		friend class TArray<Element, Dimensions>;
+		friend class TVarArray<Element>;
 
 	protected:
-		Iterator(TArray* arrayPtr);
+		Iterator(TVarArray* arrayPtr);
 
 	private:
-		TArray* m_arrayPtr;
+		TVarArray* m_arrayPtr;
 	};
 
-	TArray();
-	TArray(const TArray& array);
+	TVarArray();
+	TVarArray(const TVarArray& array);
 
 	/**
 		Removes all elements and set all sizes to 1.
@@ -128,22 +128,22 @@ private:
 
 // inline methods
 
-template <class Element, int Dimensions>
-inline int TArray<Element, Dimensions>::GetDimensionsCount() const
+template <class Element>
+inline int TVarArray<Element>::GetDimensionsCount() const
 {
 	return Dimensions;
 }
 
 
-template <class Element, int Dimensions>
-inline typename const TArray<Element, Dimensions>::SizesType& TArray<Element, Dimensions>::GetSizes() const
+template <class Element>
+inline typename const TVarArray<Element>::SizesType& TVarArray<Element>::GetSizes() const
 {
 	return m_sizes;
 }
 
 
-template <class Element, int Dimensions>
-inline int TArray<Element, Dimensions>::GetSize(int dimension) const
+template <class Element>
+inline int TVarArray<Element>::GetSize(int dimension) const
 {
 	I_ASSERT(dimension >= 0);
 	I_ASSERT(dimension < Dimensions);
@@ -152,8 +152,8 @@ inline int TArray<Element, Dimensions>::GetSize(int dimension) const
 }
 
 
-template <class Element, int Dimensions>
-inline typename const Element& TArray<Element, Dimensions>::GetAt(const IndexType& index) const
+template <class Element>
+inline typename const Element& TVarArray<Element>::GetAt(const IndexType& index) const
 {
 	I_ASSERT(index.IsInside(m_sizes));
 
@@ -164,8 +164,8 @@ inline typename const Element& TArray<Element, Dimensions>::GetAt(const IndexTyp
 }
 
 
-template <class Element, int Dimensions>
-inline void TArray<Element, Dimensions>::SetAt(const IndexType& index, const Element& value)
+template <class Element>
+inline void TVarArray<Element>::SetAt(const IndexType& index, const Element& value)
 {
 	I_ASSERT(index.IsInside(m_sizes));
 
@@ -178,29 +178,29 @@ inline void TArray<Element, Dimensions>::SetAt(const IndexType& index, const Ele
 
 // iterator support
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::Begin() const
+template <class Element>
+typename TVarArray<Element>::Iterator TVarArray<Element>::Begin() const
 {
-	return Iterator(const_cast<TArray<Element, Dimensions>*>(this));
+	return Iterator(const_cast<TVarArray<Element>*>(this));
 }
 
 
-template <class Element, int Dimensions>
-typename const TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::End() const
+template <class Element>
+typename const TVarArray<Element>::Iterator& TVarArray<Element>::End() const
 {
 	return s_endIterator;
 }
 
 
-template <class Element, int Dimensions>
-inline const Element& TArray<Element, Dimensions>::operator[](const IndexType& index) const
+template <class Element>
+inline const Element& TVarArray<Element>::operator[](const IndexType& index) const
 {
 	return GetAt(index);
 }
 
 
-template <class Element, int Dimensions>
-inline Element& TArray<Element, Dimensions>::operator[](const IndexType& index)
+template <class Element>
+inline Element& TVarArray<Element>::operator[](const IndexType& index)
 {
 	int elementIndex = GetElementIndex(index);
 	I_ASSERT(elementIndex < int(m_elements.size()));
@@ -211,8 +211,8 @@ inline Element& TArray<Element, Dimensions>::operator[](const IndexType& index)
 
 // inline protected methods
 
-template <class Element, int Dimensions>
-inline int TArray<Element, Dimensions>::GetElementIndex(const IndexType& index) const
+template <class Element>
+inline int TVarArray<Element>::GetElementIndex(const IndexType& index) const
 {
 	int elementIndex = 0;
 	int cumulatedSizes = 1;
@@ -231,8 +231,8 @@ inline int TArray<Element, Dimensions>::GetElementIndex(const IndexType& index) 
 
 // public methods
 
-template <class Element, int Dimensions>
-TArray<Element, Dimensions>::TArray()
+template <class Element>
+TVarArray<Element>::TVarArray()
 {
 	for (int i = 0; i < Dimensions; ++i){
 		m_sizes[i] = 0;
@@ -240,15 +240,15 @@ TArray<Element, Dimensions>::TArray()
 }
 
 
-template <class Element, int Dimensions>
-TArray<Element, Dimensions>::TArray(const TArray& array)
+template <class Element>
+TVarArray<Element>::TVarArray(const TVarArray& array)
 :	m_sizes(array.m_sizes), m_elements(array.m_elements)
 {
 }
 
 
-template <class Element, int Dimensions>
-void TArray<Element, Dimensions>::Reset()
+template <class Element>
+void TVarArray<Element>::Reset()
 {
 	m_sizes.Reset();
 
@@ -256,8 +256,8 @@ void TArray<Element, Dimensions>::Reset()
 }
 
 
-template <class Element, int Dimensions>
-void TArray<Element, Dimensions>::SetSizes(const SizesType& sizes)
+template <class Element>
+void TVarArray<Element>::SetSizes(const SizesType& sizes)
 {
 	m_sizes = sizes;
 
@@ -265,8 +265,8 @@ void TArray<Element, Dimensions>::SetSizes(const SizesType& sizes)
 }
 
 
-template <class Element, int Dimensions>
-void TArray<Element, Dimensions>::SetSize(int dimension, int size)
+template <class Element>
+void TVarArray<Element>::SetSize(int dimension, int size)
 {
 	I_ASSERT(dimension >= 0);
 	I_ASSERT(dimension < Dimensions);
@@ -279,8 +279,8 @@ void TArray<Element, Dimensions>::SetSize(int dimension, int size)
 
 // protected methods
 
-template <class Element, int Dimensions>
-void TArray<Element, Dimensions>::UpdateElementsSize()
+template <class Element>
+void TVarArray<Element>::UpdateElementsSize()
 {
 	int cumulatedSizes = 1;
 	for (int i = 0; i < Dimensions; ++i){
@@ -293,21 +293,21 @@ void TArray<Element, Dimensions>::UpdateElementsSize()
 
 // static attributes
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::s_endIterator(NULL);
+template <class Element>
+typename TVarArray<Element>::Iterator TVarArray<Element>::s_endIterator(NULL);
 
 
 // public methods of embedded class Iterator
 
-template <class Element, int Dimensions>
-TArray<Element, Dimensions>::Iterator::Iterator(const Iterator& iterator)
+template <class Element>
+TVarArray<Element>::Iterator::Iterator(const Iterator& iterator)
 :	BaseClass(iterator), m_arrayPtr(iterator.m_arrayPtr)
 {
 }
 
 
-template <class Element, int Dimensions>
-const Element& TArray<Element, Dimensions>::Iterator::operator*() const
+template <class Element>
+const Element& TVarArray<Element>::Iterator::operator*() const
 {
 	I_ASSERT(m_arrayPtr != NULL);
 	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
@@ -316,8 +316,8 @@ const Element& TArray<Element, Dimensions>::Iterator::operator*() const
 }
 
 
-template <class Element, int Dimensions>
-typename Element& TArray<Element, Dimensions>::Iterator::operator*()
+template <class Element>
+typename Element& TVarArray<Element>::Iterator::operator*()
 {
 	I_ASSERT(m_arrayPtr != NULL);
 	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
@@ -326,8 +326,8 @@ typename Element& TArray<Element, Dimensions>::Iterator::operator*()
 }
 
 
-template <class Element, int Dimensions>
-const Element* TArray<Element, Dimensions>::Iterator::operator->() const
+template <class Element>
+const Element* TVarArray<Element>::Iterator::operator->() const
 {
 	I_ASSERT(m_arrayPtr != NULL);
 	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
@@ -336,8 +336,8 @@ const Element* TArray<Element, Dimensions>::Iterator::operator->() const
 }
 
 
-template <class Element, int Dimensions>
-Element* TArray<Element, Dimensions>::Iterator::operator->()
+template <class Element>
+Element* TVarArray<Element>::Iterator::operator->()
 {
 	I_ASSERT(m_arrayPtr != NULL);
 	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
@@ -346,8 +346,8 @@ Element* TArray<Element, Dimensions>::Iterator::operator->()
 }
 
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Iterator::operator++()
+template <class Element>
+typename TVarArray<Element>::Iterator& TVarArray<Element>::Iterator::operator++()
 {
 	if ((m_arrayPtr != NULL) && !Increase(m_arrayPtr->GetSizes())){
 		m_arrayPtr = NULL;
@@ -357,8 +357,8 @@ typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Ite
 }
 
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::Iterator::operator++(int)
+template <class Element>
+typename TVarArray<Element>::Iterator TVarArray<Element>::Iterator::operator++(int)
 {
 	Iterator retVal = *this;
 
@@ -370,8 +370,8 @@ typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::Iter
 }
 
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Iterator::operator--()
+template <class Element>
+typename TVarArray<Element>::Iterator& TVarArray<Element>::Iterator::operator--()
 {
 	if ((m_arrayPtr != NULL) && !Decrease(m_arrayPtr->GetSizes())){
 		m_arrayPtr = NULL;
@@ -381,8 +381,8 @@ typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Ite
 }
 
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::Iterator::operator--(int)
+template <class Element>
+typename TVarArray<Element>::Iterator TVarArray<Element>::Iterator::operator--(int)
 {
 	Iterator retVal = *this;
 
@@ -394,8 +394,8 @@ typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::Iter
 }
 
 
-template <class Element, int Dimensions>
-typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Iterator::operator=(const Iterator& iterator)
+template <class Element>
+typename TVarArray<Element>::Iterator& TVarArray<Element>::Iterator::operator=(const Iterator& iterator)
 {
 	BaseClass::operator=(iterator);
 
@@ -403,8 +403,8 @@ typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Ite
 }
 
 
-template <class Element, int Dimensions>
-bool TArray<Element, Dimensions>::Iterator::operator==(const Iterator& iterator) const
+template <class Element>
+bool TVarArray<Element>::Iterator::operator==(const Iterator& iterator) const
 {
 	if ((m_arrayPtr != NULL) && (iterator.m_arrayPtr != NULL)){
 		return (m_arrayPtr == iterator.m_arrayPtr) && (BaseClass::operator==(iterator));
@@ -414,8 +414,8 @@ bool TArray<Element, Dimensions>::Iterator::operator==(const Iterator& iterator)
 }
 
 
-template <class Element, int Dimensions>
-bool TArray<Element, Dimensions>::Iterator::operator!=(const Iterator& iterator) const
+template <class Element>
+bool TVarArray<Element>::Iterator::operator!=(const Iterator& iterator) const
 {
 	return !operator==(iterator);
 }
@@ -423,16 +423,18 @@ bool TArray<Element, Dimensions>::Iterator::operator!=(const Iterator& iterator)
 
 // protected methods of emedded class Iterator
 
-template <class Element, int Dimensions>
-TArray<Element, Dimensions>::Iterator::Iterator(TArray* arrayPtr)
+template <class Element>
+TVarArray<Element>::Iterator::Iterator(TVarArray* arrayPtr)
 :	BaseClass(0), m_arrayPtr(arrayPtr)
 {
 }
+
+typedef TVarArray<> CVarArray;
 
 
 } // namespace istd
 
 
-#endif // !istd_TArray_included
+#endif // !istd_TVarArray_included
 
 

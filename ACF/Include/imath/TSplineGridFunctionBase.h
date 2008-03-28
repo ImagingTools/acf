@@ -174,18 +174,24 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 		double firstValueFactor = useDerivative? GetValueKernelAt(alpha): (1 - alpha);	// use linear interpolation if no derivative is available
 
-		Result firstValue = 0;
+		Result firstValue;
 		if (firstValueFactor > I_EPSILON){
 			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, firstValue);
+		}
+		else{
+			firstValue.Clear();
 		}
 
 		++indexElement;
 
 		double secondValueFactor = useDerivative? GetValueKernelAt(1.0 - alpha): alpha;	// use linear interpolation if no derivative is available
 
-		Result secondValue = 0;
+		Result secondValue;
 		if (secondValueFactor > I_EPSILON){
 			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, secondValue);
+		}
+		else{
+			secondValue.Clear();
 		}
 
 		--indexElement;
@@ -195,18 +201,24 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 			double firstDerivativeFactor = GetDerivativeKernelAt(alpha) * layersDistance;
 
-			Result firstDerivative = 0;
+			Result firstDerivative;
 			if (firstDerivativeFactor > I_EPSILON){
 				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, firstDerivative);
+			}
+			else{
+				firstDerivative.Clear();
 			}
 
 			++indexElement;
 
 			double secondDerivativeFactor = GetDerivativeKernelAt(1.0 - alpha) * layersDistance;
 
-			Result secondDerivative = 0;
+			Result secondDerivative;
 			if (secondDerivativeFactor > I_EPSILON){
 				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, secondDerivative);
+			}
+			else{
+				secondDerivative.Clear();
 			}
 
 			--indexElement;

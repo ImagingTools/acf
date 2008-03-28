@@ -4,6 +4,8 @@
 
 #include "math.h"
 
+#include "iser/ISerializable.h"
+
 #include "imath/TIValueManip.h"
 #include "imath/TVarVector.h"
 
@@ -15,12 +17,16 @@ namespace icmm
 
 
 /**
-	Generic color implementation.
+	Generic color implementation with components number set at construction time.
 */
-class CVarColor: public imath::TVarVector<>
+class CVarColor: public imath::TVarVector<>, iser::ISerializable
 {
 public:
 	typedef imath::TVarVector<> BaseClass;
+
+	CVarColor();
+	explicit CVarColor(int componentsCount);
+	CVarColor(const CVarColor& color);
 
 	/**
 		Get color after components value rounding with specified precision.
@@ -77,6 +83,12 @@ public:
 
 	const CVarColor& operator*=(double value);
 	const CVarColor& operator/=(double value);
+
+	// reimplemented (iser::ISerializable)
+	bool Serialize(iser::IArchive& archive);
+
+private:
+	bool m_isSizeKnown;
 };
 
 
@@ -106,17 +118,9 @@ inline bool CVarColor::IsNormalized() const
 
 inline CVarColor CVarColor::operator+(const CVarColor& color) const
 {
-	I_ASSERT(GetElementsCount() == color.GetElementsCount());
+	CVarColor retVal(*this);
 
-	CVarColor retVal;
-
-	int elementsCount = GetElementsCount();
-
-	retVal.SetElementsCount(elementsCount);
-
-	for (int i = 0; i < elementsCount; ++i){
-		retVal.m_elements[i] = m_elements[i] + color.m_elements[i];
-	}
+	retVal += color;
 
 	return retVal;
 }
@@ -124,17 +128,9 @@ inline CVarColor CVarColor::operator+(const CVarColor& color) const
 
 inline CVarColor CVarColor::operator-(const CVarColor& color) const
 {
-	I_ASSERT(GetElementsCount() == color.GetElementsCount());
+	CVarColor retVal(*this);
 
-	CVarColor retVal;
-
-	int elementsCount = GetElementsCount();
-
-	retVal.SetElementsCount(elementsCount);
-
-	for (int i = 0; i < elementsCount; ++i){
-		retVal.m_elements[i] = m_elements[i] - color.m_elements[i];
-	}
+	retVal -= color;
 
 	return retVal;
 }
@@ -142,17 +138,9 @@ inline CVarColor CVarColor::operator-(const CVarColor& color) const
 
 inline CVarColor CVarColor::operator*(const CVarColor& color) const
 {
-	I_ASSERT(GetElementsCount() == color.GetElementsCount());
+	CVarColor retVal(*this);
 
-	CVarColor retVal;
-
-	int elementsCount = GetElementsCount();
-
-	retVal.SetElementsCount(elementsCount);
-
-	for (int i = 0; i < elementsCount; ++i){
-		retVal.m_elements[i] = m_elements[i] * color.m_elements[i];
-	}
+	retVal *= color;
 
 	return retVal;
 }
@@ -160,17 +148,9 @@ inline CVarColor CVarColor::operator*(const CVarColor& color) const
 
 inline CVarColor CVarColor::operator/(const CVarColor& color) const
 {
-	I_ASSERT(GetElementsCount() == color.GetElementsCount());
+	CVarColor retVal(*this);
 
-	CVarColor retVal;
-
-	int elementsCount = GetElementsCount();
-
-	retVal.SetElementsCount(elementsCount);
-
-	for (int i = 0; i < elementsCount; ++i){
-		retVal.m_elements[i] = m_elements[i] / color.m_elements[i];
-	}
+	retVal /= color;
 
 	return retVal;
 }
@@ -178,11 +158,9 @@ inline CVarColor CVarColor::operator/(const CVarColor& color) const
 
 inline CVarColor CVarColor::operator*(double value) const
 {
-	CVarColor retVal;
-
 	int elementsCount = GetElementsCount();
 
-	retVal.SetElementsCount(elementsCount);
+	CVarColor retVal(elementsCount);
 
 	for (int i = 0; i < elementsCount; ++i){
 		retVal.m_elements[i] = m_elements[i] * value;
@@ -194,73 +172,15 @@ inline CVarColor CVarColor::operator*(double value) const
 
 inline CVarColor CVarColor::operator/(double value) const
 {
-	CVarColor retVal;
-
 	int elementsCount = GetElementsCount();
 
-	retVal.SetElementsCount(elementsCount);
+	CVarColor retVal(elementsCount);
 
 	for (int i = 0; i < elementsCount; ++i){
 		retVal.m_elements[i] = m_elements[i] / value;
 	}
 
 	return retVal;
-}
-
-
-inline const CVarColor& CVarColor::operator=(const CVarColor& color)
-{
-	int elementsCount = color.GetElementsCount();
-
-	SetElementsCount(elementsCount);
-
-	for (int i = 0; i < elementsCount; ++i){
-		m_elements[i] = color.m_elements[i];
-	}
-
-	return *this;
-}
-
-
-inline const CVarColor& CVarColor::operator+=(const CVarColor& color)
-{
-	BaseClass::operator+=(color);
-
-	return *this;
-}
-
-
-inline const CVarColor& CVarColor::operator-=(const CVarColor& color)
-{
-	BaseClass::operator-=(color);
-
-	return *this;
-}
-
-
-inline const CVarColor& CVarColor::operator*=(const CVarColor& color)
-{
-	I_ASSERT(GetElementsCount() == color.GetElementsCount());
-
-	int elementsCount = GetElementsCount();
-	for (int i = 0; i < elementsCount; ++i){
-		m_elements[i] *= color.m_elements[i];
-	}
-
-	return *this;
-}
-
-
-inline const CVarColor& CVarColor::operator/=(const CVarColor& color)
-{
-	I_ASSERT(GetElementsCount() == color.GetElementsCount());
-
-	int elementsCount = GetElementsCount();
-	for (int i = 0; i < elementsCount; ++i){
-		m_elements[i] /= color.m_elements[i];
-	}
-
-	return *this;
 }
 
 
