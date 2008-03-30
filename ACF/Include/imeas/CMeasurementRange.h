@@ -38,6 +38,9 @@ public:
 	bool IsWarning(double value) const;
 	bool IsError(double value) const;
 
+	bool operator == (const CMeasurementRange& otherRange) const;
+	bool operator != (const CMeasurementRange& otherRange) const;
+
 private:
 	istd::CRange m_warningRange;
 	istd::CRange m_errorRange;

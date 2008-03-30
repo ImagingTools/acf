@@ -88,6 +88,19 @@ bool CMeasurementRange::IsError(double value) const
 }
 
 
+bool CMeasurementRange::operator == (const CMeasurementRange& otherRange) const
+{
+	return (m_warningRange == otherRange.m_warningRange) && (m_errorRange == otherRange.m_errorRange);
+}
+
+
+bool CMeasurementRange::operator != (const CMeasurementRange& otherRange) const
+{
+	return !operator == (otherRange);
+}
+
+
+
 } // namespace imeas
 
 
