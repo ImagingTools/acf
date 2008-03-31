@@ -24,9 +24,30 @@ class CVarColor: public imath::TVarVector<>, iser::ISerializable
 public:
 	typedef imath::TVarVector<> BaseClass;
 
+	/**
+		Default constructor.
+		It set number of elements to 0.
+	*/
 	CVarColor();
-	explicit CVarColor(int componentsCount);
+
+	/**
+		Constructor with explicit initialization of number of elements.
+	*/
+	explicit CVarColor(int componentsCount, double value = 0);
+
+	/**
+		Copy constructor.
+	*/
 	CVarColor(const CVarColor& color);
+
+	/**
+		Template conversion constructor.
+	*/
+	template <int Size>
+	CVarColor(const imath::TVector<Size>& vector)
+	:	BaseClass(vector)
+	{
+	}
 
 	/**
 		Get color after components value rounding with specified precision.

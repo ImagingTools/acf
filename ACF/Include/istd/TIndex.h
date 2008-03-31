@@ -52,6 +52,12 @@ public:
 	void Clear();
 
 	/**
+		Check, if number dimensions is fixed.
+		It is provided for template implementations. It returns always true.
+	*/
+	bool IsDimensionsCountFixed() const;
+
+	/**
 		Get number of dimensions of this array.
 	*/
 	int GetDimensionsCount() const;
@@ -59,10 +65,10 @@ public:
 	/**
 		Set number of dimensions of this array.
 		It is provided to allows template implementations to use fixed-size or variable arrays.
-		For the sake of fixed numbers of dimensions in this implementation this method do nothing,
-		but if you try set other dimension count, assertion error will be thrown.
+		\param	count	number of dimensions will be set.
+		\return			true, if number of set dimensions equals template parameter or false if isn't.
 	*/
-	void SetDimensionsCount(int count) const;
+	bool SetDimensionsCount(int count) const;
 
 	/**
 		Get element stored at specified index.
@@ -114,6 +120,13 @@ private:
 // inline methods
 
 template <int Dimensions>
+inline bool TIndex<Dimensions>::IsDimensionsCountFixed() const
+{
+	return true;
+}
+
+
+template <int Dimensions>
 inline int TIndex<Dimensions>::GetDimensionsCount() const
 {
 	return Dimensions;
@@ -121,9 +134,9 @@ inline int TIndex<Dimensions>::GetDimensionsCount() const
 
 
 template <int Dimensions>
-inline void TIndex<Dimensions>::SetDimensionsCount(int count) const
+inline bool TIndex<Dimensions>::SetDimensionsCount(int count) const
 {
-	I_ASSERT(count == GetDimensionsCount());
+	return (count == GetDimensionsCount());
 }
 
 

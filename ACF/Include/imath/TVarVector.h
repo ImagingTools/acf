@@ -6,7 +6,7 @@
 
 #include "iser/IArchive.h"
 
-#include "imath/imath.h"
+#include "imath/TVector.h"
 
 
 namespace imath{
@@ -28,12 +28,22 @@ public:
 	/**
 		Create vector and initialize number of components.
 	*/
-	explicit TVarVector(int componentsCount);
+	explicit TVarVector(int componentsCount, const Element& value = Element());
 
 	/**
 		Copy constructor.
 	 */
 	TVarVector(const TVarVector<Element>& vector);
+
+	template <int Size>
+	TVarVector(const TVector<Size, Element>& vector)
+	{
+		m_elements.resize(Size);
+
+		for (int i = 0; i < Size; ++i){
+			m_elements[i] = vector[i];
+		}
+	}
 
 	/**
 		Get number of elements.
@@ -43,7 +53,7 @@ public:
 	/**
 		Set number of elements.
 	*/
-	void SetElementsCount(int size);
+	void SetElementsCount(int size, const Element& value = Element());
 
 	/**
 		Get element at specified i.
@@ -69,6 +79,13 @@ public:
 		Set all coordinates to zero.
 	*/
 	void Clear();
+
+	/**
+		Set elemenents from other vector without resizing.
+		\param	vector			source of element values will be copied.
+		\param	expansionValue	if actual vector has more elements than \c vector, rest will be replaced with this value.
+	*/
+	void SetElementsFrom(const TVarVector& vector, const Element& expansionValue = Element());
 
 	/**
 		Translate the point.
@@ -166,8 +183,8 @@ inline TVarVector<Element>::TVarVector()
 
 
 template <class Element>
-inline TVarVector<Element>::TVarVector(int componentsCount)
-:	m_elements(componentsCount)
+inline TVarVector<Element>::TVarVector(int componentsCount, const Element& value)
+:	m_elements(componentsCount, value)
 {
 }
 
@@ -189,11 +206,11 @@ inline int TVarVector<Element>::GetElementsCount() const
 
 
 template <class Element>
-void TVarVector<Element>::SetElementsCount(int size)
+inline void TVarVector<Element>::SetElementsCount(int size, const Element& value = Element())
 {
 	I_ASSERT(size >= 0);
 
-	m_elements.resize(size);
+	m_elements.resize(size, value);
 }
 
 
@@ -248,14 +265,14 @@ inline void TVarVector<Element>::Translate(const TVarVector<Element>& vector)
 
 
 template <class Element>
-TVarVector<Element> TVarVector<Element>::GetTranslated(const TVarVector<Element>& vector)
+inline TVarVector<Element> TVarVector<Element>::GetTranslated(const TVarVector<Element>& vector)
 {
 	return *this + vector;
 }
 
 
 template <class Element>
-void TVarVector<Element>::GetTranslated(const TVarVector<Element>& vector, TVarVector<Element>& result)
+inline void TVarVector<Element>::GetTranslated(const TVarVector<Element>& vector, TVarVector<Element>& result)
 {
 	result = *this + vector;
 }
@@ -505,6 +522,22 @@ Element& TVarVector<Element>::operator[](int i)
 
 
 // public methods
+
+template <class Element>
+void TVarVector<Element>::SetElementsFrom(const TVarVector& vector, const Element& expansionValue)
+{
+	int elementsCount = GetElementsCount();
+	int minElements = ::std::min(elementsCount, vector.GetElementsCount());
+
+	for (int i = 0; i < minElements; ++i){
+		SetElement(i, vector[i]);
+	}
+
+	for (int i = minElements; i < elementsCount; ++i){
+		SetElement(i, expansionValue);
+	}
+}
+
 
 template <class Element>
 bool TVarVector<Element>::Normalize(Element length)

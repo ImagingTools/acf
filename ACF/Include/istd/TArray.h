@@ -64,9 +64,23 @@ public:
 	void Reset();
 
 	/**
+		Check, if number dimensions is fixed.
+		It is provided for template implementations. It returns always true.
+	*/
+	bool IsDimensionsCountFixed() const;
+
+	/**
 		Get number of dimensions of this array.
 	*/
 	int GetDimensionsCount() const;
+
+	/**
+		Set number of dimensions of this array.
+		This is only dummy method, to provide methods compatibility with template implementations.
+		\param	count	number of dimensions will be set.
+		\return			true, if number of set dimensions equals template parameter or false if isn't.
+	*/
+	bool SetDimensionsCount(int count);
 
 	/**
 		Get list of all sizes.
@@ -129,9 +143,23 @@ private:
 // inline methods
 
 template <class Element, int Dimensions>
+inline bool TArray<Element, Dimensions>::IsDimensionsCountFixed() const
+{
+	return true;
+}
+
+
+template <class Element, int Dimensions>
 inline int TArray<Element, Dimensions>::GetDimensionsCount() const
 {
 	return Dimensions;
+}
+
+
+template <class Element, int Dimensions>
+inline bool TArray<Element, Dimensions>::SetDimensionsCount(int count)
+{
+	return (count == GetDimensionsCount());
 }
 
 

@@ -132,30 +132,34 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 			int dimension,
 			const FulcrumSizes& sizes,
 			FulcrumIndex& index,
-			DerivativeDegree& degree,
+			DerivativeDegree& derivativeDegree,
 			Result& result) const
 {
+	I_ASSERT(dimension < GetDimensionsCount());
+	I_ASSERT(sizes.GetDimensionsCount() == GetDimensionsCount());
+	I_ASSERT(index.GetDimensionsCount() == GetDimensionsCount());
+
 	if (dimension < 0){
-		result = GetFulcrumDerivativeAtIndex(index, degree);
+		result = GetFulcrumDerivativeAtIndex(index, derivativeDegree);
 
 		return;
 	}
 
 	int& indexElement = index[dimension];
 
-	if (indexElement < 0){
+	if (indexElement >= sizes[dimension] - 1){
+		// element out of boundaries at this dimension
+		I_ASSERT(indexElement == sizes[dimension] - 1);
+
+		CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, result);
+	}
+	else if (indexElement < 0){
 		// element out of boundaries at this dimension
 		I_ASSERT(indexElement == -1);
 
 		++indexElement;
-		CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, result);
+		CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, result);
 		--indexElement;
-	}
-	else if (indexElement >= sizes[dimension] - 1){
-		// element out of boundaries at this dimension
-		I_ASSERT(indexElement == sizes[dimension] - 1);
-
-		CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, result);
 	}
 	else{
 		double firstPosition = GetLayerPosition(dimension, indexElement);
@@ -164,11 +168,11 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 		I_ASSERT(layersDistance >= 0);
 		I_ASSERT(argument[dimension] >= firstPosition);
 		I_ASSERT(argument[dimension] <= secondPosition);
-		I_ASSERT(degree[dimension] == 0);
+		I_ASSERT(derivativeDegree[dimension] == 0);
 
-		++degree[dimension];
-		bool useDerivative = IsDerivativeDegreeSupported(degree);
-		--degree[dimension];
+		++derivativeDegree[dimension];
+		bool useDerivative = IsDerivativeDegreeSupported(derivativeDegree);
+		--derivativeDegree[dimension];
 
 		double alpha = (argument[dimension] - firstPosition) / layersDistance;
 
@@ -176,7 +180,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 		Result firstValue;
 		if (firstValueFactor > I_EPSILON){
-			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, firstValue);
+			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, firstValue);
 		}
 		else{
 			firstValue.Clear();
@@ -188,7 +192,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 		Result secondValue;
 		if (secondValueFactor > I_EPSILON){
-			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, secondValue);
+			CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, secondValue);
 		}
 		else{
 			secondValue.Clear();
@@ -197,13 +201,13 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 		--indexElement;
 
 		if (useDerivative){
-			++degree[dimension];
+			++derivativeDegree[dimension];
 
 			double firstDerivativeFactor = GetDerivativeKernelAt(alpha) * layersDistance;
 
 			Result firstDerivative;
 			if (firstDerivativeFactor > I_EPSILON){
-				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, firstDerivative);
+				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, firstDerivative);
 			}
 			else{
 				firstDerivative.Clear();
@@ -215,7 +219,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 			Result secondDerivative;
 			if (secondDerivativeFactor > I_EPSILON){
-				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, degree, secondDerivative);
+				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, secondDerivative);
 			}
 			else{
 				secondDerivative.Clear();
@@ -223,7 +227,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 			--indexElement;
 
-			--degree[dimension];
+			--derivativeDegree[dimension];
 
 			result =	firstValue * firstValueFactor +
 						secondValue * secondValueFactor +

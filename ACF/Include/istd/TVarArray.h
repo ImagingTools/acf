@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "istd/TIndex.h"
+#include "istd/CVarIndex.h"
 
 
 namespace istd
@@ -19,13 +19,13 @@ class TVarArray
 {
 public:
 	typedef CVarIndex IndexType;
-	typedef CVarIndex<Dimensions> SizesType;
+	typedef CVarIndex SizesType;
 	typedef Element ElementType;
 
-	class Iterator: public TIndex<Dimensions>
+	class Iterator: public CVarIndex
 	{
 	public:
-		typedef TIndex<Dimensions> BaseClass;
+		typedef CVarIndex BaseClass;
 
 		Iterator(const Iterator& iterator);
 
@@ -64,9 +64,22 @@ public:
 	void Reset();
 
 	/**
+		Check, if number dimensions is fixed.
+		It is provided for template implementations. It returns always false.
+	*/
+	bool IsDimensionsCountFixed() const;
+
+	/**
 		Get number of dimensions of this array.
 	*/
 	int GetDimensionsCount() const;
+
+	/**
+		Set number of dimensions of this array.
+		\param	count	number of dimensions will be set.
+		\return			always true.
+	*/
+	bool SetDimensionsCount(int count);
 
 	/**
 		Get list of all sizes.
@@ -129,9 +142,27 @@ private:
 // inline methods
 
 template <class Element>
+inline bool TVarArray<Element>::IsDimensionsCountFixed() const
+{
+	return false;
+}
+
+
+template <class Element>
 inline int TVarArray<Element>::GetDimensionsCount() const
 {
-	return Dimensions;
+	return m_sizes.GetDimensionsCount();
+}
+
+
+template <class Element>
+inline bool TVarArray<Element>::SetDimensionsCount(int count)
+{
+	bool retVal = m_sizes.SetDimensionsCount(count);
+
+	UpdateElementsSize();
+
+	return retVal;
 }
 
 
@@ -146,7 +177,7 @@ template <class Element>
 inline int TVarArray<Element>::GetSize(int dimension) const
 {
 	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < Dimensions);
+	I_ASSERT(dimension < m_sizes.GetDimensionsCount());
 
 	return m_sizes[dimension];
 }
@@ -214,9 +245,14 @@ inline Element& TVarArray<Element>::operator[](const IndexType& index)
 template <class Element>
 inline int TVarArray<Element>::GetElementIndex(const IndexType& index) const
 {
+	int indexDimensionsCount = m_sizes.GetDimensionsCount();
+	int dimensionsCount = m_sizes.GetDimensionsCount();
+
+	int minDimensionsCount = ::std::min(indexDimensionsCount, dimensionsCount);
+
 	int elementIndex = 0;
 	int cumulatedSizes = 1;
-	for (int i = 0; i < Dimensions; ++i){
+	for (int i = 0; i < minDimensionsCount; ++i){
 		I_ASSERT(index[i] >= 0);
 		I_ASSERT(index[i] < m_sizes[i]);
 
@@ -234,9 +270,6 @@ inline int TVarArray<Element>::GetElementIndex(const IndexType& index) const
 template <class Element>
 TVarArray<Element>::TVarArray()
 {
-	for (int i = 0; i < Dimensions; ++i){
-		m_sizes[i] = 0;
-	}
 }
 
 
@@ -269,7 +302,7 @@ template <class Element>
 void TVarArray<Element>::SetSize(int dimension, int size)
 {
 	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < Dimensions);
+	I_ASSERT(dimension < m_sizes.GetDimensionsCount());
 
 	m_sizes[dimension] = size;
 
@@ -282,8 +315,9 @@ void TVarArray<Element>::SetSize(int dimension, int size)
 template <class Element>
 void TVarArray<Element>::UpdateElementsSize()
 {
+	int dimensionsCount = m_sizes.GetDimensionsCount();
 	int cumulatedSizes = 1;
-	for (int i = 0; i < Dimensions; ++i){
+	for (int i = 0; i < dimensionsCount; ++i){
 		cumulatedSizes *= m_sizes[i];
 	}
 

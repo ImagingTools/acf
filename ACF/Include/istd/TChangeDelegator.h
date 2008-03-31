@@ -16,11 +16,11 @@ namespace istd
 	Binder of some istd::IChangeable implementation and changing delegator.
 	\sa CChangeDelegator
 */
-template <class BaseClass>
-class TChangeDelegator: public istd::TChangeBinder<BaseClass, CChangeDelegator>
+template <class Base>
+class TChangeDelegator: public istd::TChangeBinder<Base, CChangeDelegator>
 {
 public:
-	typedef CChangeDelegator BaseClass2;
+	typedef istd::TChangeBinder<Base, CChangeDelegator> BaseClass;
 
 	TChangeDelegator();
 	explicit TChangeDelegator(istd::IChangeable* slavePtr);
@@ -29,16 +29,16 @@ public:
 
 // public methods
 
-template <class BaseClass>
-TChangeDelegator<BaseClass>::TChangeDelegator()
+template <class Base>
+TChangeDelegator<Base>::TChangeDelegator()
 {
 }
 
 
-template <class BaseClass>
-TChangeDelegator<BaseClass>::TChangeDelegator(IChangeable* slavePtr)
-:	BaseClass2(slavePtr)
+template <class Base>
+TChangeDelegator<Base>::TChangeDelegator(IChangeable* slavePtr)
 {
+	SetSlavePtr(slavePtr);
 }
 
 

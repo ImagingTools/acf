@@ -41,10 +41,6 @@ public:
 	typedef typename Fulcrums::IndexType FulcrumIndex;
 	typedef typename Fulcrums::SizesType FulcrumSizes;
 
-	enum{
-		DIMENSIONS = FulcrumSizes::DIMENSIONS
-	};
-
 	enum ChangeFlags
 	{
 		CF_SORT_LAYERS = 0x4000
@@ -64,6 +60,13 @@ public:
 		Get number of dimensions.
 	*/
 	int GetDimensionsCount() const;
+
+	/**
+		Set number of dimensions.
+		Please note, that depending on used array type for grid representation not all values must be supported.
+		\return	true, if number of dimension was set or false, elsewhere.
+	*/
+	virtual bool SetDimensionsCount(int count);
 
 	/**
 		Get number of fulcrum points used in this function.
@@ -164,6 +167,19 @@ template <class Argument, class Result, class Fulcrums>
 inline int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetDimensionsCount() const
 {
 	return m_fulcrums.GetDimensionsCount();
+}
+
+
+template <class Argument, class Result, class Fulcrums>
+inline bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetDimensionsCount(int count)
+{
+	if (m_fulcrums.SetDimensionsCount(count)){
+		m_layers.resize(count);
+
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -271,7 +287,7 @@ template <class Argument, class Result, class Fulcrums>
 int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::InsertLayer(int dimension, double position)
 {
 	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < DIMENSIONS);
+	I_ASSERT(dimension < m_fulcrums.GetDimensionsCount());
 
 	Fulcrums newFulcrums = m_fulcrums;
 
@@ -340,7 +356,7 @@ template <class Argument, class Result, class Fulcrums>
 void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::RemoveLayer(int dimension, int layerIndex)
 {
 	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < DIMENSIONS);
+	I_ASSERT(dimension < GetDimensionsCount());
 	I_ASSERT(m_fulcrums.GetSize(dimension) > 0);
 
 	Fulcrums newFulcrums = m_fulcrums;
@@ -372,19 +388,29 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 {
 	bool retVal = true;
 
-	iser::CArchiveTag axesTag("Axes", "List of axes of fulcrum grid");
-	iser::CArchiveTag positionsTag("Positions", "List of layer positions of fulcrum grid");
+	iser::CArchiveTag gridTag("Grid", "Description of fulcrums grid");
+	iser::CArchiveTag positionsTag("Positions", "List of positions at single axis of fulcrum grid");
 	iser::CArchiveTag positionTag("Position", "Single layer position");
 	iser::CArchiveTag fulcrumsTag("Fulcrums", "List of fulcrums");
-	iser::CArchiveTag fulcrumTag("Fulcrums", "Single fulcrum");
+	iser::CArchiveTag fulcrumTag("Fulcrum", "Single fulcrum");
 
 	bool isStoring = archive.IsStoring();
 
+	int dimensionsCount = m_fulcrums.GetDimensionsCount();
+	I_ASSERT(dimensionsCount == int(m_layers.size()));
+
+	retVal = retVal && archive.BeginMultiTag(gridTag, positionsTag, dimensionsCount);
+
+	if (!isStoring && (dimensionsCount != m_fulcrums.GetDimensionsCount())){
+		if (!SetDimensionsCount(dimensionsCount)){
+			return false;
+		}
+	}
+
 	FulcrumSizes sizes = m_fulcrums.GetSizes();
+	I_ASSERT(sizes.GetDimensionsCount() >= dimensionsCount);
 
-	retVal = retVal && archive.BeginTag(axesTag);
-
-	for (int dimensionIndex = 0; dimensionIndex < DIMENSIONS; ++dimensionIndex){
+	for (int dimensionIndex = 0; dimensionIndex < dimensionsCount; ++dimensionIndex){
 		LayerPositions& positions = m_layers[dimensionIndex];
 
 		int& positionsCount = sizes[dimensionIndex];
@@ -411,7 +437,7 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 		retVal = retVal && archive.BeginTag(positionsTag);
 	}
 
-	retVal = retVal && archive.EndTag(axesTag);
+	retVal = retVal && archive.EndTag(gridTag);
 
 	retVal = retVal && archive.BeginTag(fulcrumsTag);
 
@@ -447,8 +473,8 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 template <class Argument, class Result, class Fulcrums>
 void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SortFulcrums()
 {
-	for (int i = 0; i < DIMENSIONS; ++i){
-		LayerPositions& positions = m_layers[i];
+	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
+		LayerPositions& positions = *iter;
 
 		::std::sort(positions.begin(), positions.end());
 	}
@@ -459,7 +485,7 @@ template <class Argument, class Result, class Fulcrums>
 int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::FindIndex(int dimension, double value) const
 {
 	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < DIMENSIONS);
+	I_ASSERT(dimension < GetDimensionsCount());
 
 	EnsureCacheValid();
 
@@ -489,7 +515,9 @@ typename TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::FulcrumIndex
 {
 	FulcrumIndex retVal;
 
-	for (int i = 0; i < DIMENSIONS; ++i){
+	int dimensionsCount = GetDimensionsCount();
+
+	for (int i = 0; i < dimensionsCount; ++i){
 		retVal[i] = FindIndex(i, argument[i]);
 	}
 

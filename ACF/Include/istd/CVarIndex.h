@@ -28,7 +28,7 @@ public:
 	/**
 		Constructor initializing all member to specified value.
 	*/
-	explicit CVarIndex(int value);
+	explicit CVarIndex(int size, int value = 0);
 
 	/**
 		Copy constructor.
@@ -53,6 +53,12 @@ public:
 	void Clear();
 
 	/**
+		Check, if number dimensions is fixed.
+		It is provided for template implementations. It returns always false.
+	*/
+	bool IsDimensionsCountFixed() const;
+
+	/**
 		Get number of dimensions of this index.
 	*/
 	int GetDimensionsCount() const;
@@ -60,10 +66,10 @@ public:
 	/**
 		Set number of dimensions of this index.
 		It is provided to allows template implementations to use fixed-size or variable arrays.
-		For the sake of fixed numbers of dimensions in this implementation this method do nothing,
-		but if you try set other dimension count, assertion error will be thrown.
+		\param	count	number of dimensions will be set.
+		\return			always true.
 	*/
-	void SetDimensionsCount(int count) const;
+	bool SetDimensionsCount(int count) const;
 
 	/**
 		Get element stored at specified index.
@@ -114,15 +120,21 @@ private:
 
 // inline methods
 
+inline bool CVarIndex::IsDimensionsCountFixed() const
+{
+	return false;
+}
+
+
 inline int CVarIndex::GetDimensionsCount() const
 {
 	return int(m_elements.size());
 }
 
 
-inline void CVarIndex::SetDimensionsCount(int count) const
+inline bool CVarIndex::SetDimensionsCount(int count) const
 {
-	I_ASSERT(count == GetDimensionsCount());
+	return (count == GetDimensionsCount());
 }
 
 

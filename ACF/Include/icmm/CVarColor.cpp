@@ -13,8 +13,8 @@ CVarColor::CVarColor()
 }
 
 
-CVarColor::CVarColor(int componentsCount)
-:	BaseClass(componentsCount)
+CVarColor::CVarColor(int componentsCount, double value)
+:	BaseClass(componentsCount, value)
 {
 }
 

@@ -7,8 +7,8 @@ namespace istd
 
 // public methods
 
-CVarIndex::CVarIndex(int value)
-:	m_elements(value)
+CVarIndex::CVarIndex(int size, int value)
+:	m_elements(size)
 {
 	SetAllTo(value);
 }
