@@ -98,7 +98,7 @@ void CMultiModelObserverBase::EnsureDetached()
 }
 
 
-void CMultiModelObserverBase::OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CMultiModelObserverBase::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 }
 
