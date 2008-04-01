@@ -125,6 +125,9 @@
 				RelativePath="..\CDateTimeBase.cpp">
 			</File>
 			<File
+				RelativePath="..\CLock.cpp">
+			</File>
+			<File
 				RelativePath="..\CSimpleDateTime.cpp">
 			</File>
 		</Filter>
@@ -133,6 +136,9 @@
 			Filter="*.h, *.hpp">
 			<File
 				RelativePath="..\CDateTimeBase.h">
+			</File>
+			<File
+				RelativePath="..\CLock.h">
 			</File>
 			<File
 				RelativePath="..\CSectionBlocker.h">
