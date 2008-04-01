@@ -4,32 +4,19 @@
 
 #include <fstream>
 
-#include "iser/CXmlReadArchiveBase.h"
+#include "iser/TXmlStreamReadArchiveBase.h"
 
 
 namespace iser
 {
 
 
-class CXmlFileReadArchive: public CXmlReadArchiveBase
+class CXmlFileReadArchive: public TXmlStreamReadArchiveBase<std::ifstream> 
 {
 public:
-	typedef CXmlReadArchiveBase BaseClass;
+	typedef TXmlStreamReadArchiveBase<std::ifstream> BaseClass;
 
 	CXmlFileReadArchive(const istd::CString& fileName, bool serializeHeader = true, const iser::CArchiveTag& rootTag = s_acfRootTag);
-
-protected:
-	// reimplemented (iser::CXmlReadArchiveBase)
-	virtual bool ReadToDelimeter(
-				const ::std::string& delimeters,
-				::std::string& result,
-				bool skipDelimeter = true,
-				char* foundDelimeterPtr = NULL);
-
-private:
-	::std::ifstream m_stream;
-	char m_lastReadChar;
-	bool m_useLastReadChar;
 };
 
 

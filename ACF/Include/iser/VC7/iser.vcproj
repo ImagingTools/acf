@@ -184,6 +184,12 @@
 				RelativePath="..\CXmlReadArchiveBase.cpp">
 			</File>
 			<File
+				RelativePath="..\CXmlStringReadArchive.cpp">
+			</File>
+			<File
+				RelativePath="..\CXmlStringWriteArchive.cpp">
+			</File>
+			<File
 				RelativePath="..\CXmlWriteArchiveBase.cpp">
 			</File>
 		</Filter>
@@ -251,6 +257,12 @@
 				RelativePath="..\CXmlReadArchiveBase.h">
 			</File>
 			<File
+				RelativePath="..\CXmlStringReadArchive.h">
+			</File>
+			<File
+				RelativePath="..\CXmlStringWriteArchive.h">
+			</File>
+			<File
 				RelativePath="..\CXmlWriteArchiveBase.h">
 			</File>
 			<File
@@ -267,6 +279,12 @@
 			</File>
 			<File
 				RelativePath="..\IVersionInfo.h">
+			</File>
+			<File
+				RelativePath="..\TXmlStreamReadArchiveBase.h">
+			</File>
+			<File
+				RelativePath="..\TXmlStreamWriteArchiveBase.h">
 			</File>
 		</Filter>
 	</Files>

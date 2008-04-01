@@ -63,7 +63,7 @@ public:
 
 protected:
 	// reimplemented (acf::QtAbstractGuiComponent)
-	virtual void initializeGui();
+	virtual void OnGuiCreated();
 };
 
 

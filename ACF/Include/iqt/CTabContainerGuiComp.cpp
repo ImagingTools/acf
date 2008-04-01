@@ -30,7 +30,7 @@ CTabContainerGuiComp::~CTabContainerGuiComp()
 
 // reimplemented (acf::QtAbstractGuiComponent)
 
-void CTabContainerGuiComp::initializeGui()
+void CTabContainerGuiComp::OnGuiCreated()
 {
 	if (m_widget != NULL){
 		if (m_useTriangularTabsAttr.GetValue()){
@@ -53,9 +53,9 @@ void CTabContainerGuiComp::initializeGui()
 			
 			bool isAttached = false;
 			if (tabIndex < m_slaveGuisCompIfPtr.dependencyCount()){
-				acf::QtGuiInterface* guiPtr = m_slaveGuisCompIfPtr.GetInterfacePtr(tabIndex);
+				iqt::IGuiObject* guiPtr = m_slaveGuisCompIfPtr.GetInterfacePtr(tabIndex);
 				if (guiPtr != NULL){
-					guiPtr->attachTo(tab);
+					guiPtr->AttachTo(tab);
 
 					isAttached = true;
 				}
@@ -80,13 +80,13 @@ void CTabContainerGuiComp::initializeGui()
 			QFrame* cornerFrame = new QFrame(m_widget);
 			m_widget->setCornerWidget(cornerFrame);
 
-			m_cornerGuiCompIfPtr->attachTo(cornerFrame);
+			m_cornerGuiCompIfPtr->AttachTo(cornerFrame);
 		}
 	}
 }
 
 
-void CTabContainerGuiComp::destroyGui()
+void CTabContainerGuiComp::OnGuiDestroyed()
 {
 }
 

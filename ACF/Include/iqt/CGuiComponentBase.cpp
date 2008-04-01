@@ -17,6 +17,50 @@ CGuiComponentBase::CGuiComponentBase()
 
 // reimplemented (iqt::IGuiObject)
 
+void CGuiComponentBase::AttachTo(QWidget* parentWidgetPtr, int layoutMargin)
+{
+	I_ASSERT(m_widgetPtr != NULL);
+
+	// TODO: implement right hide/show logic to prevent the "flickering" after widget creation.
+
+	if (m_widgetPtr != NULL){
+		bool parentCreated = parentWidgetPtr->testAttribute(Qt::WA_WState_Created);
+		bool thisCreated = m_widgetPtr->testAttribute(Qt::WA_WState_Created);
+		bool thisHidden = m_widgetPtr->isHidden();
+
+		QLayout* parentLayoutPtr = parentWidgetPtr->layout();
+		if (parentLayoutPtr == NULL){
+			parentLayoutPtr = new QGridLayout(parentWidgetPtr);
+		}
+
+		if (layoutMargin >= 0){
+			parentLayoutPtr->setMargin(layoutMargin);
+		}
+
+		if (thisHidden && parentCreated && thisCreated){
+			m_widgetPtr->setVisible(true);
+		}
+
+		parentLayoutPtr->addWidget(m_widgetPtr);
+	}
+}
+
+
+void CGuiComponentBase::DetachFrom(QWidget* parentWidgetPtr)
+{
+	I_ASSERT(m_widgetPtr != NULL);
+
+	if (m_widgetPtr != NULL){
+		QLayout* parentLayoutPtr = parentWidgetPtr->layout();
+		if (parentLayoutPtr != NULL){
+			parentLayoutPtr->removeWidget(m_widgetPtr);
+			
+			m_widgetPtr->setHidden(true);
+		}
+	}
+}
+
+
 bool CGuiComponentBase::IsGuiCreated() const
 {
 	return (m_widgetPtr != NULL);

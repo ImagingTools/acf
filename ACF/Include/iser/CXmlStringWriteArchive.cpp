@@ -1,18 +1,18 @@
-#include "iser/CXmlFileWriteArchive.h"
+#include "iser/CXmlStringWriteArchive.h"
 
 
 namespace iser
 {
 
 
-CXmlFileWriteArchive::CXmlFileWriteArchive(
-			const istd::CString& fileName,
+CXmlStringWriteArchive::CXmlStringWriteArchive(
+			const std::string& inputString,
 			const IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, rootTag)
 {
-	m_stream.open(fileName.ToString().c_str(), ::std::fstream::out);
+	m_stream.str(inputString);
 
 	SerializeXmlHeader();
 

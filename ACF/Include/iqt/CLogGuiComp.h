@@ -53,7 +53,7 @@ public:
 
 protected:
 	// reimplemented (QtAbstractGuiComponent)
-	virtual void initializeGui();
+	virtual void OnGuiCreated();
 
 protected slots:
 	void OnAddMessage(ibase::IMessage* messagePtr);

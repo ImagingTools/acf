@@ -18,13 +18,12 @@ namespace iqt
 CLogGuiComp::CLogGuiComp()
 {
 	RegisterInterface<IMessageManager>(this);
-	RegisterInterface<QtGuiInterface>(this);
 }
 
 
-void CLogGuiComp::initializeGui()
+void CLogGuiComp::OnGuiCreated()
 {
-	BaseClass::initializeGui();
+	BaseClass::OnGuiCreated();
 
 	connect(this, SIGNAL(EmitAddMessage(ibase::IMessage*)), this, SLOT(OnAddMessage(ibase::IMessage*)), Qt::QueuedConnection);
 	connect(ClearButton, SIGNAL(clicked()), this, SLOT(OnClear()));

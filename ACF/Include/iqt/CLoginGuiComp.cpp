@@ -49,7 +49,7 @@ CLoginGuiComp::~CLoginGuiComp()
 
 // reimplemented (acf::QtAbstractGuiComponent)
 
-void CLoginGuiComp::initializeGui()
+void CLoginGuiComp::OnGuiCreated()
 {
 
 }

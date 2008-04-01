@@ -6,7 +6,7 @@ namespace iser
 
 
 CXmlFileReadArchive::CXmlFileReadArchive(const istd::CString& fileName, bool serializeHeader, const iser::CArchiveTag& rootTag)
-:	BaseClass(rootTag), m_useLastReadChar(false)
+:	BaseClass(rootTag)
 {
 	m_stream.open(fileName.ToString().c_str(), ::std::fstream::in);
 
@@ -15,70 +15,6 @@ CXmlFileReadArchive::CXmlFileReadArchive(const istd::CString& fileName, bool ser
 	if (serializeHeader){
 		SerializeAcfHeader();
 	}
-}
-
-
-// protected methods
-
-// reimplemented (iser::CXmlReadArchiveBase)
-
-bool CXmlFileReadArchive::ReadToDelimeter(
-			const ::std::string& delimeters,
-			::std::string& result,
-			bool skipDelimeter,
-			char* foundDelimeterPtr)
-{
-	int cutFromPos = -2;
-	int cutToPos = -2;
-
-	::std::string readString;
-
-	if (!m_useLastReadChar){
-		m_stream.get(m_lastReadChar);
-	}
-
-	while (!m_stream.fail()){
-		::std::string::size_type foundPosition = delimeters.find(m_lastReadChar);
-		if (foundPosition != ::std::string::npos){
-			m_useLastReadChar = !skipDelimeter;
-
-			if (cutFromPos < 0){
-				if (cutToPos < 0){
-					result = "";
-
-					return true;
-				}
-
-				cutFromPos = 0;
-			}
-
-			if (cutToPos < 0){
-				cutToPos = int(readString.size());
-			}
-
-			result = readString.substr(cutFromPos, cutToPos - cutFromPos);
-
-			if (foundDelimeterPtr != NULL){
-				*foundDelimeterPtr = delimeters.at(foundPosition);
-			}
-
-			return true;
-		}
-
-		readString += m_lastReadChar;
-
-		if (!isspace(m_lastReadChar) && !iscntrl(m_lastReadChar)){
-			cutToPos = int(readString.size());
-
-			if (cutFromPos < 0){
-				cutFromPos = cutToPos - 1;
-			}
-		}
-
-		m_stream.get(m_lastReadChar);
-	}
-
-	return false;
 }
 
 
