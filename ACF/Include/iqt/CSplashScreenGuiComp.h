@@ -6,7 +6,7 @@
 
 #include "ibase/IApplicationInfo.h"
 
-#include "icomp/TSimpleAttribute.h"
+#include "icomp/TSingleAttribute.h"
 
 #include "iqt/TDesignerGuiComponentBase.h"
 
@@ -35,11 +35,11 @@ public:
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
-	I_ATTR(icomp::CStringAttribute, m_imagePathAttrPtr);
-	I_ATTR(icomp::CStringAttribute, m_productTypeAttrPtr);
-	I_ATTR(icomp::CBoolAttribute, m_showAcfVersionAttrPtr);
-	I_ATTR(icomp::CBoolAttribute, m_showProductVersionAttrPtr);
-	I_ATTR(icomp::CStringAttribute, m_copyrightTextAttrPtr);
+	I_ATTR(istd::CString, m_imagePathAttrPtr);
+	I_ATTR(istd::CString, m_productTypeAttrPtr);
+	I_ATTR(bool, m_showAcfVersionAttrPtr);
+	I_ATTR(bool, m_showProductVersionAttrPtr);
+	I_ATTR(istd::CString, m_copyrightTextAttrPtr);
 };
 
 

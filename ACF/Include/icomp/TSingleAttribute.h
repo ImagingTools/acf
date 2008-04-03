@@ -19,12 +19,12 @@ namespace icomp
 	Template implementation of single component attribute.
 */
 template <typename ValueType> 
-class TSimpleAttribute: virtual public iser::ISerializable
+class TSingleAttribute: virtual public iser::ISerializable
 {
 public:
-	TSimpleAttribute();
-	explicit TSimpleAttribute(const ValueType& value);
-	TSimpleAttribute(const TSimpleAttribute& attribute);
+	TSingleAttribute();
+	explicit TSingleAttribute(const ValueType& value);
+	TSingleAttribute(const TSingleAttribute& attribute);
 
 	virtual const ValueType& GetValue() const;
 	virtual void SetValue(const ValueType& value);
@@ -40,34 +40,34 @@ protected:
 // public methods
 
 template <typename ValueType> 
-TSimpleAttribute<ValueType>::TSimpleAttribute()
+TSingleAttribute<ValueType>::TSingleAttribute()
 {
 }
 
 
 template <typename ValueType> 
-TSimpleAttribute<ValueType>::TSimpleAttribute(const ValueType& value)
+TSingleAttribute<ValueType>::TSingleAttribute(const ValueType& value)
 :	m_value(value)
 {
 }
 
 
 template <typename ValueType> 
-TSimpleAttribute<ValueType>::TSimpleAttribute(const TSimpleAttribute& attribute)
+TSingleAttribute<ValueType>::TSingleAttribute(const TSingleAttribute& attribute)
 :	m_value(attribute.GetValue())
 {
 }
 
 
 template <typename ValueType> 
-const ValueType& TSimpleAttribute<ValueType>::GetValue() const
+const ValueType& TSingleAttribute<ValueType>::GetValue() const
 {
 	return m_value;
 }
 
 
 template <typename ValueType> 
-void TSimpleAttribute<ValueType>::SetValue(const ValueType& value)
+void TSingleAttribute<ValueType>::SetValue(const ValueType& value)
 {
 	m_value = value;
 }
@@ -76,7 +76,7 @@ void TSimpleAttribute<ValueType>::SetValue(const ValueType& value)
 // reimplemented (ISerializable)
 
 template <typename ValueType> 
-bool TSimpleAttribute<ValueType>::Serialize(iser::IArchive& archive)
+bool TSingleAttribute<ValueType>::Serialize(iser::IArchive& archive)
 {
 	bool result = true;
 
@@ -89,12 +89,6 @@ bool TSimpleAttribute<ValueType>::Serialize(iser::IArchive& archive)
 
 	return result;
 }
-
-
-typedef TSimpleAttribute<int> CIntAttribute;
-typedef TSimpleAttribute<bool> CBoolAttribute;
-typedef TSimpleAttribute<double> CDoubleAttribute;
-typedef TSimpleAttribute<istd::CString> CStringAttribute;
 
 
 } // namespace icomp

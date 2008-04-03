@@ -30,7 +30,7 @@ public:
 
 private:
 	I_MULTIATTR(icomp::CStringAttribute, m_iconFilesAttrPtr);
-	I_ATTR(icomp::CStringAttribute, m_iconPathAttrPtr);
+	I_ATTR(istd::CString, m_iconPathAttrPtr);
 };
 
 

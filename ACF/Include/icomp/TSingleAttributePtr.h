@@ -14,12 +14,12 @@ namespace icomp
 	Don't use direct this class, use macros I_ATTR and I_ASSIGN instead.
 */
 template <class Attribute>
-class TAttributePtr
+class TSingleAttributePtr
 {
 public:
 	typedef Attribute AttributeType;
 
-	TAttributePtr();
+	TSingleAttributePtr();
 
 	bool Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
 
@@ -54,14 +54,14 @@ private:
 // public methods
 
 template <class Attribute>
-TAttributePtr<Attribute>::TAttributePtr()
+TSingleAttributePtr<Attribute>::TSingleAttributePtr()
 :	m_attributePtr(NULL)
 {
 }
 
 
 template <class Attribute>
-bool TAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
+bool TSingleAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
 {
 	I_ASSERT(ownerPtr != NULL);
 
@@ -77,28 +77,28 @@ bool TAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttribute
 
 
 template <class Attribute>
-bool TAttributePtr<Attribute>::IsValid() const
+bool TSingleAttributePtr<Attribute>::IsValid() const
 {
 	return (m_attributePtr != NULL);
 }
 
 
 template <class Attribute>
-const Attribute* TAttributePtr<Attribute>::GetAttributePtr() const
+const Attribute* TSingleAttributePtr<Attribute>::GetAttributePtr() const
 {
 	return m_attributePtr;
 }
 
 
 template <class Attribute>
-const Attribute* TAttributePtr<Attribute>::operator->() const
+const Attribute* TSingleAttributePtr<Attribute>::operator->() const
 {
 	return m_attributePtr;
 }
 
 
 template <class Attribute>
-const Attribute& TAttributePtr<Attribute>::operator*() const
+const Attribute& TSingleAttributePtr<Attribute>::operator*() const
 {
 	I_ASSERT(m_attributePtr != NULL);	// operator* was called for invalid object, or no IsValid() check was called.
 
@@ -109,7 +109,7 @@ const Attribute& TAttributePtr<Attribute>::operator*() const
 // protected methods
 
 template <class Attribute>
-void TAttributePtr<Attribute>::SetAttribute(const Attribute* m_attributePtr)
+void TSingleAttributePtr<Attribute>::SetAttribute(const Attribute* m_attributePtr)
 {
 	m_attributePtr = attributePtr;
 }

@@ -3,7 +3,7 @@
 
 
 #include "icomp/IComponentContext.h"
-#include "icomp/TAttributePtr.h"
+#include "icomp/TSingleAttributePtr.h"
 #include "icomp/CReferenceAttribute.h"
 
 
@@ -16,10 +16,10 @@ namespace icomp
 	Don't use direct this class, use macros I_REF and I_ASSIGN instead.
 */
 template <class Interface>
-class TReferencePtr: public TAttributePtr<CReferenceAttribute>
+class TReferencePtr: public TSingleAttributePtr<CReferenceAttribute>
 {
 public:
-	typedef TAttributePtr<CReferenceAttribute> BaseClass;
+	typedef TSingleAttributePtr<CReferenceAttribute> BaseClass;
 	typedef Interface InterfaceType;
 
 	TReferencePtr();

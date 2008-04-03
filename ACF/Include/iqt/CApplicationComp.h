@@ -4,7 +4,7 @@
 
 #include "ibase/IApplication.h"
 
-#include "icomp/TSimpleAttribute.h"
+#include "icomp/TSingleAttribute.h"
 #include "icomp/CComponentBase.h"
 
 #include "iqt/IGuiObject.h"
@@ -34,7 +34,7 @@ public:
 private:
 	I_REF(IGuiObject, m_mainGuiCompPtr);
 	I_REF(IGuiObject, m_splashScreenCompPtr);
-	I_ATTR(icomp::CDoubleAttribute, m_splashTimeAttrPtr);
+	I_ATTR(double, m_splashTimeAttrPtr);
 };
 
 

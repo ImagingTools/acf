@@ -217,9 +217,6 @@
 				RelativePath="..\IRegistryElement.h">
 			</File>
 			<File
-				RelativePath="..\TAttributePtr.h">
-			</File>
-			<File
 				RelativePath="..\TAttributeStaticInfo.h">
 			</File>
 			<File
@@ -241,7 +238,10 @@
 				RelativePath="..\TSimComponentWrap.h">
 			</File>
 			<File
-				RelativePath="..\TSimpleAttribute.h">
+				RelativePath="..\TSingleAttribute.h">
+			</File>
+			<File
+				RelativePath="..\TSingleAttributePtr.h">
 			</File>
 		</Filter>
 	</Files>

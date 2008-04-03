@@ -2,7 +2,10 @@
 #define icomp_TSimComponentWrap_included
 
 
+// STL includes
 #include <map>
+
+#include "istd/CString.h"
 
 #include "icomp/IComponent.h"
 #include "icomp/IComponentContext.h"
@@ -44,12 +47,32 @@ public:
 	bool SetAttr(const std::string& attributeId, iser::ISerializable* attributePtr);
 
 	/**
+		Set instance of \c bool attribute.
+	*/
+	void SetBoolAttr(const std::string& attributeId, bool value);
+
+	/**
+		Set instance of \c int attribute.
+	*/
+	void SetIntAttr(const std::string& attributeId, int value);
+
+	/**
+		Set instance of \c double attribute.
+	*/
+	void SetDoubleAttr(const std::string& attributeId, double value);
+
+	/**
+		Set instance of \c istd::CString attribute.
+	*/
+	void SetStringAttr(const std::string& attributeId, const istd::CString& value);
+
+	/**
 		Set instance of simple attribute.
 	*/
 	template <class Attribute>
-	bool SetSimpleAttr(const std::string& attributeId, const Attribute& attribute)
+	bool SetSingleAttr(const std::string& attributeId, const Attribute& attribute)
 	{
-		return SetAttr(attributeId, new TSimpleAttribute<Attribute>(attribute));
+		return SetAttr(attributeId, new TSingleAttribute<Attribute>(attribute));
 	}
 
 protected:
@@ -114,6 +137,34 @@ bool TSimComponentWrap<Base>::SetAttr(const std::string& attributeId, iser::ISer
 	}
 
 	return false;
+}
+
+
+template <class Base>
+void TSimComponentWrap<Base>::SetBoolAttr(const std::string& attributeId, bool value)
+{
+	SetSingleAttr<bool>(attributeId, value);
+}
+
+
+template <class Base>
+void TSimComponentWrap<Base>::SetIntAttr(const std::string& attributeId, int value)
+{
+	SetSingleAttr<int>(attributeId, value);
+}
+
+
+template <class Base>
+void TSimComponentWrap<Base>::SetDoubleAttr(const std::string& attributeId, double value)
+{
+	SetSingleAttr<double>(attributeId, value);
+}
+
+
+template <class Base>
+void TSimComponentWrap<Base>::SetStringAttr(const std::string& attributeId, const istd::CString& value)
+{
+	SetSingleAttr<istd::CString>(attributeId, value);
 }
 
 

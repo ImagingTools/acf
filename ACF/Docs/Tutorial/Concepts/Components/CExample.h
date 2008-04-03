@@ -46,11 +46,11 @@ private:
 	/**
 		Normal attribute.
 	*/
-	I_ATTR(CIntAttr, m_value);
+	I_ATTR(int, m_value);
 	/**
 		Set of attributes.
 	*/
-	I_MULTIATTR(CIntAttr, m_valueList);
+	I_MULTIATTR(int, m_valueList);
 	/**
 		Normal reference to other component.
 	*/

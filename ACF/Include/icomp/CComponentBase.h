@@ -5,7 +5,8 @@
 #include "icomp/IComponent.h"
 #include "icomp/IComponentStaticInfo.h"
 #include "icomp/TInterfaceRegistrator.h"
-#include "icomp/TAttributePtr.h"
+#include "icomp/TSingleAttributePtr.h"
+#include "icomp/TSingleAttribute.h"
 #include "icomp/TAttributeStaticInfo.h"
 #include "icomp/TReferencePtr.h"
 //#include "icomp/TMultiReferencePtr.h"
@@ -65,9 +66,17 @@ private:
 #define I_REGISTER_INTERFACE(InterfaceType)\
 	static icomp::TInterfaceRegistrator<InterfaceType> staticRegistrator##__LINE__(staticInfo);
 
+#define I_USER_ATTR(attrType, member)\
+	typedef icomp::TSingleAttributePtr<attrType>::AttributeType member##_Type;\
+	icomp::TSingleAttributePtr<attrType> member;
+
 #define I_ATTR(attrType, member)\
-	typedef attrType member##_Type;\
-	icomp::TAttributePtr<attrType> member;
+	typedef icomp::TSingleAttributePtr< icomp::TSingleAttribute<attrType> >::AttributeType member##_Type;\
+	icomp::TSingleAttributePtr< icomp::TSingleAttribute<attrType> > member;
+
+#define I_MULTI_ATTR(attrType, member)\
+	typedef icomp::TSingleAttributePtr< icomp::TMultiAttribute<attrType> >::AttributeType member##_Type;\
+	icomp::TMultiAttributePtr< icomp::TMultiAttribute<attrType> > member;
 
 #define I_REF(interfaceType, member)\
 	typedef icomp::TReferencePtr<interfaceType>::AttributeType member##_Type;\

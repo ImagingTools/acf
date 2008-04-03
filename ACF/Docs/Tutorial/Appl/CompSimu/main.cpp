@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
 	icomp::TSimComponentWrap<iqt::CSplashScreenGuiComp> splashScreenGui;
-	splashScreenGui.SetSimpleAttr("ImagePath", istd::CString("C:\\Work\\Projects\\QUISS\\Projects\\TCVision\\Install\\ToInstall\\QUISS\\Resources\\TCVision.l\\Splash.jpg"));
+	splashScreenGui.SetStringAttr("ImagePath", "C:\\Work\\Projects\\QUISS\\Projects\\TCVision\\Install\\ToInstall\\QUISS\\Resources\\TCVision.l\\Splash.jpg");
 	splashScreenGui.InitComponent();
 
 	icomp::TSimComponentWrap<iqt::CLoginGuiComp> loginGui;
