@@ -31,7 +31,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	int SubstractMask(int category);
+	static int SubstractMask(int category);
 
 protected:
 	int m_maxCategory;
@@ -157,7 +157,7 @@ bool TMessageManagerBase<BaseClass>::Serialize(iser::IArchive& archive)
 }
 
 
-// protected methods
+// protected static methods
 
 template <class BaseClass>
 int TMessageManagerBase<BaseClass>::SubstractMask(int category)
