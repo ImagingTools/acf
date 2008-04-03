@@ -9,7 +9,7 @@ namespace ixln
 
 
 CFileXmlWriteArchive::CFileXmlWriteArchive(
-					const ::std::string& fileName,
+					const std::string& fileName,
 					const iser::IVersionInfo* versionInfoPtr,
 					bool serializeHeader)
 :	BaseClass(versionInfoPtr)

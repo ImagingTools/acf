@@ -10,8 +10,8 @@ namespace iser
 
 
 CArchiveTag::CArchiveTag(
-				const ::std::string& id,
-				const ::std::string& comment,
+				const std::string& id,
+				const std::string& comment,
 				bool isTagSkippingUsed)
 	:	m_id(id),
 		m_comment(comment),
@@ -28,7 +28,7 @@ CArchiveTag::CArchiveTag(
 
 
 
-const ::std::string& CArchiveTag::GetId() const
+const std::string& CArchiveTag::GetId() const
 {
 	return m_id;
 }
@@ -42,7 +42,7 @@ I_DWORD CArchiveTag::GetBinaryId() const
 
 
 
-const ::std::string& CArchiveTag::GetComment() const
+const std::string& CArchiveTag::GetComment() const
 {
 	return m_comment;
 }

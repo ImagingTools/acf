@@ -7,7 +7,7 @@
 
 #include "iqt/CApplicationComp.h"
 #include "iqt/CSplashScreenGuiComp.h"
-#include "iqt/CLoginGuiComp.h"
+#include "iqt/CLogGuiComp.h"
 
 
 int main(int argc, char *argv[])
@@ -15,13 +15,13 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<iqt::CSplashScreenGuiComp> splashScreenComp;
 	splashScreenComp.InitComponent();
 
-	icomp::TSimComponentWrap<iqt::CLoginGuiComp> loginGui;
-	loginGui.InitComponent();
+	icomp::TSimComponentWrap<iqt::CLogGuiComp> logGui;
+	logGui.InitComponent();
 
 	icomp::TSimComponentWrap<iqt::CApplicationComp> appComp;
 	appComp.SetRef("SplashScreen", &splashScreenComp);
-	appComp.SetRef("MainGui", &loginGui);
+	appComp.SetRef("MainGui", &logGui);
 	appComp.InitComponent();
-	
+
 	return appComp.Execute(argc, argv);
 }

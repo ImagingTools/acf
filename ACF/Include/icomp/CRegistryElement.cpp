@@ -19,7 +19,7 @@ CRegistryElement::CRegistryElement(const IComponentStaticInfo* infoPtr)
 }
 
 
-IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const ::std::string& attributeId)
+IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const std::string& attributeId)
 {
 	AttributeInfoMap::iterator iter = m_attributeInfos.find(attributeId);
 	if (iter != m_attributeInfos.end()){
@@ -32,7 +32,7 @@ IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const ::std:
 
 // reimplemented (icomp::IRegistryElement)
 
-IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const ::std::string& attributeId, bool createAttribute)
+IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const std::string& attributeId, bool createAttribute)
 {
 	if (m_attributeInfos.find(attributeId) != m_attributeInfos.end()){
 		return NULL;
@@ -56,7 +56,7 @@ IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const ::s
 }
 
 
-iser::ISerializable* CRegistryElement::CreateAttribute(const ::std::string& attributeId) const
+iser::ISerializable* CRegistryElement::CreateAttribute(const std::string& attributeId) const
 {
 	const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
 	if (staticInfoPtr == NULL){
@@ -67,7 +67,7 @@ iser::ISerializable* CRegistryElement::CreateAttribute(const ::std::string& attr
 }
 
 
-bool CRegistryElement::RemoveAttribute(const ::std::string& attributeId)
+bool CRegistryElement::RemoveAttribute(const std::string& attributeId)
 {
 	return m_attributeInfos.erase(attributeId) > 0;
 }
@@ -95,7 +95,7 @@ IRegistryElement::Ids CRegistryElement::GetAttributeIds() const
 }
 
 
-const IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const ::std::string& attributeId) const
+const IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const std::string& attributeId) const
 {
 	AttributeInfoMap::const_iterator iter = m_attributeInfos.find(attributeId);
 
@@ -135,7 +135,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(attributeInfoTag);
 
 			retVal = retVal && archive.BeginTag(attributeIdTag);
-			::std::string attributeId = iter->first;
+			std::string attributeId = iter->first;
 			retVal = retVal && archive.Process(attributeId);
 			retVal = retVal && archive.EndTag(attributeIdTag);
 
@@ -145,7 +145,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			}
 
 			retVal = retVal && archive.BeginTag(attributeTypeTag);
-			::std::string attributeType = staticInfoPtr->GetAttributeType().name();
+			std::string attributeType = staticInfoPtr->GetAttributeType().name();
 			retVal = retVal && archive.Process(attributeType);
 			retVal = retVal && archive.EndTag(attributeTypeTag);
 
@@ -176,7 +176,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(attributeInfoTag);
 
 			retVal = retVal && archive.BeginTag(attributeIdTag);
-			::std::string attributeId;
+			std::string attributeId;
 			retVal = retVal && archive.Process(attributeId);
 			retVal = retVal && archive.EndTag(attributeIdTag);
 
@@ -187,13 +187,13 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
 			if (staticInfoPtr != NULL){
 				retVal = retVal && archive.BeginTag(attributeTypeTag);
-				::std::string attributeType;
+				std::string attributeType;
 				retVal = retVal && archive.Process(attributeType);
 				retVal = retVal && archive.EndTag(attributeTypeTag);
 
 				if (attributeType == staticInfoPtr->GetAttributeType().name()){
 					retVal = retVal && archive.BeginTag(exportIdTag);
-					::std::string exportId;
+					std::string exportId;
 					retVal = retVal && archive.Process(exportId);
 					retVal = retVal && archive.EndTag(exportIdTag);
 
@@ -237,7 +237,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 // protected methods
 
-const IAttributeStaticInfo* CRegistryElement::GetAttributeStaticInfo(const ::std::string& attributeId) const
+const IAttributeStaticInfo* CRegistryElement::GetAttributeStaticInfo(const std::string& attributeId) const
 {
 	const IComponentStaticInfo::AttributeInfos& infos = m_staticInfo.GetAttributeInfos();
 

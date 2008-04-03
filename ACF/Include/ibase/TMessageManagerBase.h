@@ -31,6 +31,9 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
+	int SubstractMask(int category);
+
+protected:
 	int m_maxCategory;
 
 	istd::TPointerVector<ibase::IMessage> m_messages;
@@ -106,7 +109,7 @@ void TMessageManagerBase<BaseClass>::AddMessage(ibase::IMessage* messagePtr)
 	m_messages.PushBack(messagePtr);
 
 	if (messagePtr->GetCategory() > m_maxCategory){
-		m_maxCategory = messagePtr->GetCategory() & ~ibase::IMessage::Debug;
+		m_maxCategory = SubstractMask(messagePtr->GetCategory());
 	}
 }
 
@@ -151,6 +154,19 @@ bool TMessageManagerBase<BaseClass>::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(messagesTag);
 
 	return retVal;
+}
+
+
+// protected methods
+
+template <class BaseClass>
+int TMessageManagerBase<BaseClass>::SubstractMask(int category)
+{
+	category = category & ~ibase::IMessage::DebugMask;
+	category = category & ~ibase::IMessage::SystemMask;
+	category = category & ~ibase::IMessage::UserMask;
+
+	return category;
 }
 
 

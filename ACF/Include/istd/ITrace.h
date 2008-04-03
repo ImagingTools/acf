@@ -31,20 +31,20 @@ public:
 	*/
 	virtual void LogMessage(
 				TraceLevel level,
-				const ::std::string& groupId,
+				const std::string& groupId,
 				const CString& message,
-				const ::std::string& fileName = "",
+				const std::string& fileName = "",
 				int line = -1) const = 0;
 	/**
 	Check if traceing of this element is enabled.
 	This must be checked before LogMessage will be called.
 	*/
-	virtual bool IsTraceEnabled(TraceLevel level, const ::std::string& groupId) const = 0;
+	virtual bool IsTraceEnabled(TraceLevel level, const std::string& groupId) const = 0;
 	/**
 	Register ID of group.
 	It is used to create list of possible groups.
 	*/
-	virtual void RegisterGroupId(const ::std::string& groupId) = 0;
+	virtual void RegisterGroupId(const std::string& groupId) = 0;
 };
 
 

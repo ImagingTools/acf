@@ -41,9 +41,9 @@ bool CDateTimeBase::SerializeComponents(iser::IArchive& archive, TimeComponent f
 
 // reimplemented (isys::IDateTime)
 
-::std::string CDateTimeBase::ToString(int fromComponent, int toComponent) const
+std::string CDateTimeBase::ToString(int fromComponent, int toComponent) const
 {
-	::std::ostrstream stream;
+	std::ostrstream stream;
 
 	for (int i = fromComponent; i <= toComponent; ++i){
 		stream << GetComponent(i);
@@ -61,15 +61,15 @@ bool CDateTimeBase::SerializeComponents(iser::IArchive& archive, TimeComponent f
 		}
 	}
 
-	stream << ::std::ends;
+	stream << std::ends;
 
 	return stream.str();
 }
 
 
-bool CDateTimeBase::FromString(const ::std::string& text, int fromComponent, int toComponent)
+bool CDateTimeBase::FromString(const std::string& text, int fromComponent, int toComponent)
 {
-	::std::istrstream stream(text.c_str(), int(text.size()));
+	std::istrstream stream(text.c_str(), int(text.size()));
 
 	for (int i = fromComponent; i <= toComponent; ++i){
 		int value;
@@ -78,7 +78,7 @@ bool CDateTimeBase::FromString(const ::std::string& text, int fromComponent, int
 		SetComponent(i, value);
 
 		if (i < toComponent){
-			::std::string dummy;
+			std::string dummy;
 			stream >> dummy;
 		}
 	}

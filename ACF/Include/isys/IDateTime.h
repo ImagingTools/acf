@@ -59,12 +59,12 @@ public:
 	/**
 		Returns the datetime object as a string.
 	*/
-	virtual ::std::string ToString(int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND) const = 0;
+	virtual std::string ToString(int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND) const = 0;
 
 	/**
 		Creates a datetime object from a string.
 	*/
-	virtual bool FromString(const ::std::string& dateTime, int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND) = 0;
+	virtual bool FromString(const std::string& dateTime, int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND) = 0;
 };
 
 

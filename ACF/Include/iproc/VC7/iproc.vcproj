@@ -2,11 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="Compositor"
-	ProjectGUID="{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
-	RootNamespace="Compositor"
-	SccProjectName=""
-	SccLocalPath="">
+	Name="iproc"
+	ProjectGUID="{9BA2C3D2-9483-483F-9019-8C6B027C58C6}">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
@@ -14,31 +11,29 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="$(ACFDIR)\Lib\$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;.."
+				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib iqt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"/>
+				Name="VCLibrarianTool"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
@@ -62,39 +57,34 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="$(ACFDIR)\Lib\$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;.."
+				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib iqt.lib"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
-				GenerateDebugInformation="TRUE"/>
+				Name="VCLibrarianTool"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
@@ -118,8 +108,6 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
@@ -131,17 +119,16 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
-			<File
-				RelativePath="..\Main.cpp">
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
-		</Filter>
-		<Filter
-			Name="Forms"
-			Filter="">
+			<File
+				RelativePath="..\IProgressEventHandler.h">
+			</File>
+			<File
+				RelativePath="..\IProgressInfo.h">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

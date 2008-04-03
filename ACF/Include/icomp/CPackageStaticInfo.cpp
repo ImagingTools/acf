@@ -35,19 +35,19 @@ const CPackageStaticInfo::SubcomponentInfos& CPackageStaticInfo::GetSubcomponent
 }
 
 
-bool CPackageStaticInfo::RegisterInterfaceExtractor(const ::std::string& /*interfaceId*/, InterfaceExtractorPtr /*extractorPtr*/)
+bool CPackageStaticInfo::RegisterInterfaceExtractor(const std::string& /*interfaceId*/, InterfaceExtractorPtr /*extractorPtr*/)
 {
 	return false;
 }
 
 
-bool CPackageStaticInfo::RegisterAttributeInfo(const ::std::string& /*attributeId*/, const IAttributeStaticInfo* /*attributeInfoPtr*/)
+bool CPackageStaticInfo::RegisterAttributeInfo(const std::string& /*attributeId*/, const IAttributeStaticInfo* /*attributeInfoPtr*/)
 {
 	return false;
 }
 
 
-bool CPackageStaticInfo::RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
+bool CPackageStaticInfo::RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
 {
 	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
 }

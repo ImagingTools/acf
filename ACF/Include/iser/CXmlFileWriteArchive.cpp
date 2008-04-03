@@ -12,7 +12,7 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 			const iser::CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, rootTag)
 {
-	m_stream.open(fileName.ToString().c_str(), ::std::fstream::out);
+	m_stream.open(fileName.ToString().c_str(), std::fstream::out);
 
 	SerializeXmlHeader();
 

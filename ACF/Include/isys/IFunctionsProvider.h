@@ -29,7 +29,7 @@ public:
 		Return function pointer using its ID.
 	 *		\return	function pointer if success or NULL otherwise.
 	 */
-	virtual void* GetFunction(const ::std::string& id) const = 0;
+	virtual void* GetFunction(const std::string& id) const = 0;
 };
 
 

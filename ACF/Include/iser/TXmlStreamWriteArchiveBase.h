@@ -24,7 +24,7 @@ protected:
 	TXmlStreamWriteArchiveBase(const IVersionInfo* versionInfoPtr, const iser::CArchiveTag& rootTag);
 
 	// reimplemented (iser::CXmlWriteArchiveBase)
-	virtual bool WriteString(const ::std::string& value);
+	virtual bool WriteString(const std::string& value);
 
 protected:
 	StreamClass m_stream;
@@ -52,7 +52,7 @@ TXmlStreamWriteArchiveBase<StreamClass>::TXmlStreamWriteArchiveBase(const IVersi
 // reimplemented (iser::CXmlWriteArchiveBase)
 
 template <class StreamClass>
-bool TXmlStreamWriteArchiveBase<StreamClass>::WriteString(const ::std::string& value)
+bool TXmlStreamWriteArchiveBase<StreamClass>::WriteString(const std::string& value)
 {
 	m_stream << value;
 

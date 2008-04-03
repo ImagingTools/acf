@@ -33,6 +33,9 @@
      <property name="alternatingRowColors" >
       <bool>true</bool>
      </property>
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
      <column>
       <property name="text" >
        <string>Time</string>
@@ -75,11 +78,6 @@
          <string>Critical</string>
         </property>
        </item>
-       <item>
-        <property name="text" >
-         <string>System</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
@@ -98,7 +96,7 @@
      <item>
       <widget class="QPushButton" name="ClearButton" >
        <property name="enabled" >
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="text" >
         <string>Clear</string>
@@ -111,7 +109,7 @@
      <item>
       <widget class="QPushButton" name="ExportButton" >
        <property name="enabled" >
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="text" >
         <string>Export...</string>
@@ -125,8 +123,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="resource.qrc" />
- </resources>
+ <resources/>
  <connections/>
 </ui>

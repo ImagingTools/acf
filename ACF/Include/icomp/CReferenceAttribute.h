@@ -15,28 +15,28 @@ namespace icomp{
 class CReferenceAttribute: public iser::ISerializable
 {
 public:
-	CReferenceAttribute(const ::std::string& componentId = "");
+	CReferenceAttribute(const std::string& componentId = "");
 
-	const ::std::string& GetComponentId() const;
-	void SetComponentId(const ::std::string& componentId);
+	const std::string& GetComponentId() const;
+	void SetComponentId(const std::string& componentId);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	::std::string m_componentId;
+	std::string m_componentId;
 };
 
 
 // inline methods
 
-inline const ::std::string& CReferenceAttribute::GetComponentId() const
+inline const std::string& CReferenceAttribute::GetComponentId() const
 {
 	return m_componentId;
 }
 
 
-inline void CReferenceAttribute::SetComponentId(const ::std::string& componentId)
+inline void CReferenceAttribute::SetComponentId(const std::string& componentId)
 {
 	m_componentId = componentId;
 }

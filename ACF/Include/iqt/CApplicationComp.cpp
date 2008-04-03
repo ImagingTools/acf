@@ -17,7 +17,7 @@ int CApplicationComp::Execute(int argc, char** argv)
 	int retVal = -1;
 
 	if (m_mainGuiCompPtr.IsValid()){
-		::std::string appStyle;
+		std::string appStyle;
 
 		// parse arguments:
 		for (int index = 1; index < argc; index++){

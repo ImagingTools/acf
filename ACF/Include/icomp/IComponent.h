@@ -25,7 +25,7 @@ public:
 	/**
 		Get access to specified component interface.
 	*/
-	virtual void* GetInterface(const type_info& interfaceType, const ::std::string& subId = "") = 0;
+	virtual void* GetInterface(const type_info& interfaceType, const std::string& subId = "") = 0;
 
 	/**
 		Get access to component context describing all application-specified

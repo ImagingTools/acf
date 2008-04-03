@@ -57,13 +57,13 @@ bool CRange::IsRangeInside(const CRange& range) const
 
 CRange CRange::GetIntersection(const CRange& otherRange) const
 {
-	return CRange(::std::max(GetMinValue(), otherRange.GetMinValue()), ::std::min(GetMaxValue(), otherRange.GetMaxValue()));
+	return CRange(std::max(GetMinValue(), otherRange.GetMinValue()), std::min(GetMaxValue(), otherRange.GetMaxValue()));
 }
 
 
 CRange CRange::GetUnion(const CRange& otherRange) const
 {
-	return CRange(::std::min(GetMinValue(), otherRange.GetMinValue()), ::std::max(GetMaxValue(), otherRange.GetMaxValue()));
+	return CRange(std::min(GetMinValue(), otherRange.GetMinValue()), std::max(GetMaxValue(), otherRange.GetMaxValue()));
 }
 
 

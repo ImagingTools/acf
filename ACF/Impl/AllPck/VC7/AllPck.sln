@@ -166,6 +166,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "i2d", "..\..\..\Include\i2d
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iproc", "..\..\..\Include\iproc\VC7\iproc.vcproj", "{9BA2C3D2-9483-483F-9019-8C6B027C58C6}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(Qt) = preSolution
 		Integration = True
@@ -345,6 +352,14 @@ Global
 		{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}.NemoRelease.Build.0 = NemoRelease|Win32
 		{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}.Release.ActiveCfg = Release|Win32
 		{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}.Release.Build.0 = Release|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.Debug.ActiveCfg = Debug|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.Debug.Build.0 = Debug|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.NemoDebug.ActiveCfg = Debug|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.NemoDebug.Build.0 = Debug|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.NemoRelease.ActiveCfg = Release|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.NemoRelease.Build.0 = Release|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.Release.ActiveCfg = Release|Win32
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

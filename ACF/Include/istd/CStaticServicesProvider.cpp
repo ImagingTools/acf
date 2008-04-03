@@ -13,7 +13,7 @@ void CStaticServicesProvider::SetParent(const IServicesProvider* parentPtr)
 
 bool CStaticServicesProvider::RegisterService(const type_info& serviceId, void* servicePtr)
 {
-	::std::pair<Services::iterator, bool> status = m_registeredServices.insert(Services::value_type(&serviceId, servicePtr));
+	std::pair<Services::iterator, bool> status = m_registeredServices.insert(Services::value_type(&serviceId, servicePtr));
 
 	return status.second;
 }

@@ -36,7 +36,7 @@ public:
 		UnknownVersion = 0xffffffff
 	};
 
-	typedef ::std::set<int> VersionIds;
+	typedef std::set<int> VersionIds;
 
 	/**
 		Get version of archived stream for specific versioning type.
@@ -52,7 +52,7 @@ public:
 								For example version number of framework cann differ from application version.
 								@sa VersionId, GetVersion.
 	*/
-	virtual const ::std::string& GetVersionIdDescription(int versionId) const = 0;
+	virtual const std::string& GetVersionIdDescription(int versionId) const = 0;
 
 	/**
 		Get list of version ID's.

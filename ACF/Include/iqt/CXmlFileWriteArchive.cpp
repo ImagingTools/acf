@@ -176,7 +176,7 @@ bool CXmlFileWriteArchive::Process(double& value)
 }
 
 
-bool CXmlFileWriteArchive::Process(::std::string& value)
+bool CXmlFileWriteArchive::Process(std::string& value)
 {
 	return PushTextNode(QString::fromStdString(value));
 }
@@ -190,8 +190,8 @@ bool CXmlFileWriteArchive::Process(istd::CString& value)
 
 bool CXmlFileWriteArchive::ProcessData(void* dataPtr, int size)
 {
-	::std::ostringstream stream;
-	stream << ::std::hex;
+	std::ostringstream stream;
+	stream << std::hex;
 
 	for (int i = 0; i < size; i++){
 		stream << *((I_BYTE*)dataPtr + i);

@@ -5,12 +5,12 @@ namespace iser
 {
 
 
-void CXmlDocumentInfoBase::EncodeXml(const ::std::string& text, ::std::string& xmlText)
+void CXmlDocumentInfoBase::EncodeXml(const std::string& text, std::string& xmlText)
 {
 	xmlText = "";
 
-	::std::string::size_type textLength = int(text.size());
-	for (::std::string::size_type i = 0; i < textLength; ++i){
+	std::string::size_type textLength = int(text.size());
+	for (std::string::size_type i = 0; i < textLength; ++i){
 		char c = text[i];
 		CharToEntityMap::const_iterator iter = s_charToEntityMap.find(c);
 		if (iter != s_charToEntityMap.end()){
@@ -23,19 +23,19 @@ void CXmlDocumentInfoBase::EncodeXml(const ::std::string& text, ::std::string& x
 }
 
 
-void CXmlDocumentInfoBase::DecodeXml(const ::std::string& xmlText, ::std::string& text)
+void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::string& text)
 {
 	text = "";
 
-	::std::string::size_type actPos = 0;
+	std::string::size_type actPos = 0;
 
 	for (;;){
-		::std::string::size_type ampPos = xmlText.find('&', actPos);
-		if (ampPos != ::std::string::npos){
+		std::string::size_type ampPos = xmlText.find('&', actPos);
+		if (ampPos != std::string::npos){
 			text += xmlText.substr(actPos, ampPos - actPos);
 
-			::std::string::size_type semicolonPos = xmlText.find(';', actPos);
-			if (semicolonPos == ::std::string::npos){
+			std::string::size_type semicolonPos = xmlText.find(';', actPos);
+			if (semicolonPos == std::string::npos){
 				return;
 			}
 			EntityToChartMap::const_iterator entityIter = s_entityToChartMap.find(xmlText.substr(ampPos, semicolonPos - ampPos + 1));

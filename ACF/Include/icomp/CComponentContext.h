@@ -29,15 +29,15 @@ public:
 	// reimplemented (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::ISerializable* GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr = NULL) const;
-	virtual IComponent* GetSubcomponent(const ::std::string& componentId) const;
+	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr = NULL) const;
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 
 private:
 	const IComponentContext* m_parentPtr;
 
 	const IRegistryElement& m_registryElement;
 
-	typedef ::std::map< ::std::string, const iser::ISerializable* > AttributeMap;
+	typedef std::map< std::string, const iser::ISerializable* > AttributeMap;
 	AttributeMap m_attributeMap;
 };
 

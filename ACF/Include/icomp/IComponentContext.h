@@ -44,12 +44,12 @@ public:
 		\param	realContextPtr	optional return value. This will be set to pointer pointed at real context where attribute value is defined.
 								Becouse of attribute value delegation this can differ from this object.
 	*/
-	virtual const iser::ISerializable* GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr = NULL) const = 0;
+	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr = NULL) const = 0;
 
 	/**
 		Get access to subcomponent using its ID.
 	*/
-	virtual IComponent* GetSubcomponent(const ::std::string& componentId) const = 0;
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
 };
 
 

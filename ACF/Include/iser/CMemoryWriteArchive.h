@@ -39,7 +39,7 @@ public:
 	virtual bool ProcessData(void* data, int size);
 	
 protected:
-	typedef ::std::vector<unsigned char> DataBuffer;
+	typedef std::vector<unsigned char> DataBuffer;
 
 	DataBuffer m_dataBuffer;
 

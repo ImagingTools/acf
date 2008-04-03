@@ -73,7 +73,33 @@ istd::CString CMessage::GetSource() const
 
 bool CMessage::Serialize(iser::IArchive& archive)
 {
-	return true;
+	int category = m_category;
+
+	static iser::CArchiveTag categoryTag("Category", "Message category");
+	bool retVal = archive.BeginTag(categoryTag);
+	retVal = retVal && archive.Process(category);
+	retVal = retVal && archive.EndTag(categoryTag);
+
+	if (!archive.IsStoring()){
+		m_category = ibase::IMessage::MessageCategory(category);
+	}
+
+	static iser::CArchiveTag textTag("Text", "Message text");
+	retVal = retVal && archive.BeginTag(textTag);
+	retVal = retVal && archive.Process(m_text);
+	retVal = retVal && archive.EndTag(textTag);
+
+	static iser::CArchiveTag sourceTag("Source", "Message source");
+	retVal = retVal && archive.BeginTag(sourceTag);
+	retVal = retVal && archive.Process(m_source);
+	retVal = retVal && archive.EndTag(sourceTag);
+
+	static iser::CArchiveTag timeStampTag("Timestamp", "Message time stamp");
+	retVal = retVal && archive.BeginTag(timeStampTag);
+	retVal = retVal && m_time.Serialize(archive);
+	retVal = retVal && archive.EndTag(timeStampTag);
+
+	return retVal;
 }
 
 

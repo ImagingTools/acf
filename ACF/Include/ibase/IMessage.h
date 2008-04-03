@@ -27,9 +27,9 @@ public:
 		Warning,
 		Error,
 		Critical,
-		Debug = 0xff,
-		System = 0xfff,
-		User = 0xffff
+		DebugMask = 128,
+		SystemMask = 256,
+		UserMask = 512
 	};
 
 	/**

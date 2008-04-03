@@ -20,7 +20,7 @@ namespace icomp
 class IRegistry: virtual public iser::ISerializable
 {
 public:
-	typedef ::std::set< ::std::string> Ids;
+	typedef std::set< std::string> Ids;
 	typedef istd::TDelPtr<IRegistryElement> ElementPtr;
 
 	/**
@@ -40,18 +40,18 @@ public:
 	{
 		ElementPtr elementPtr;		///<	Pointer to registry element
 		int elementType;			///<	Type of element. \sa ElementType
-		::std::string packageId;	///<	ID of package. It can be for example part of dynamic link library storing set of component or folder name with composed components
-		::std::string componentId;	///<	ID of component inside package.
+		std::string packageId;	///<	ID of package. It can be for example part of dynamic link library storing set of component or folder name with composed components
+		std::string componentId;	///<	ID of component inside package.
 	};
 
 	/**
 		Map assigning interface ID to component ID exporting this interface.
 	*/
-	typedef ::std::map< ::std::string, ::std::string> ExportedInterfacesMap;
+	typedef std::map< std::string, std::string> ExportedInterfacesMap;
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/
-	typedef ::std::map< ::std::string, ::std::string> ExportedComponentsMap;
+	typedef std::map< std::string, std::string> ExportedComponentsMap;
 
 	/**
 		Get ID list of existing elements.
@@ -63,21 +63,21 @@ public:
 		\param	attributeId		unique ID of new attribute.
 	*/
 	virtual ElementInfo* InsertElementInfo(
-				const ::std::string& elementId,
+				const std::string& elementId,
 				int elementType,
-				const ::std::string& packageId,
-				const ::std::string& componentId,
+				const std::string& packageId,
+				const std::string& componentId,
 				bool ensureElementCreated = true) = 0;
 
 	/**
 		Get access to stored attribute info structure.
 	*/
-	virtual const ElementInfo* GetElementInfo(const ::std::string& elementId) const = 0;
+	virtual const ElementInfo* GetElementInfo(const std::string& elementId) const = 0;
 
 	/**
 		Removes attribute info structure from this collection.
 	*/
-	virtual bool RemoveElementInfo(const ::std::string& elementId) = 0;
+	virtual bool RemoveElementInfo(const std::string& elementId) = 0;
 
 	/**
 		Get access to information structore of exported interfaces.

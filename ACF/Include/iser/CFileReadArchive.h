@@ -42,11 +42,11 @@ protected:
 	};
 
 private:
-	::std::ifstream m_stream;
+	std::ifstream m_stream;
 
 	bool m_supportTagSkipping;
 
-	typedef ::std::vector<TagStackElement> TagStack;
+	typedef std::vector<TagStackElement> TagStack;
 
 	TagStack m_tagStack;
 };

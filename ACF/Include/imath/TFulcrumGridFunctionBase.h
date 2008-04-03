@@ -145,8 +145,8 @@ protected:
 private:
 	Fulcrums m_fulcrums;
 
-	typedef ::std::vector<double> LayerPositions;
-	typedef ::std::vector<LayerPositions> Layers;
+	typedef std::vector<double> LayerPositions;
+	typedef std::vector<LayerPositions> Layers;
 
 	Layers m_layers;
 };
@@ -476,7 +476,7 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SortFulcrums()
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
 		LayerPositions& positions = *iter;
 
-		::std::sort(positions.begin(), positions.end());
+		std::sort(positions.begin(), positions.end());
 	}
 }
 

@@ -102,7 +102,7 @@ bool CBinaryReadArchiveBase::Process(double& value)
 }
 
 
-bool CBinaryReadArchiveBase::Process(::std::string& value)
+bool CBinaryReadArchiveBase::Process(std::string& value)
 {			
 	int stringLength;
 
@@ -113,12 +113,12 @@ bool CBinaryReadArchiveBase::Process(::std::string& value)
 			return false;
 		}
 
-		::std::vector<char> buffer(stringLength + 1, 0);
+		std::vector<char> buffer(stringLength + 1, 0);
 
 		retVal = ProcessData(&buffer[0], stringLength * sizeof(char));	
 
 		if (retVal){
-			value = ::std::string(&buffer[0]);
+			value = std::string(&buffer[0]);
 		}
 	}
 	
@@ -137,7 +137,7 @@ bool CBinaryReadArchiveBase::Process(istd::CString& value)
 			return false;
 		}
 
-		::std::vector<wchar_t> buffer(stringLength + 1, 0);
+		std::vector<wchar_t> buffer(stringLength + 1, 0);
 
 		retVal = ProcessData(&buffer[0], stringLength * sizeof(wchar_t));	
 

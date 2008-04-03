@@ -11,11 +11,11 @@ void CReaderVersionInfo::Reset()
 }
 
 
-bool CReaderVersionInfo::InsertVersionId(int id, I_DWORD version, const ::std::string& description)
+bool CReaderVersionInfo::InsertVersionId(int id, I_DWORD version, const std::string& description)
 {
 	VersionIdElement element(version, description);
 
-	::std::pair<VersionElements::iterator, bool> status = m_versionIdList.insert(VersionElements::value_type(id, element));
+	std::pair<VersionElements::iterator, bool> status = m_versionIdList.insert(VersionElements::value_type(id, element));
 
 	return status.second;
 }
@@ -37,7 +37,7 @@ I_DWORD CReaderVersionInfo::GetVersion(int versionId) const
 }
 
 
-const ::std::string& CReaderVersionInfo::GetVersionIdDescription(int versionId) const
+const std::string& CReaderVersionInfo::GetVersionIdDescription(int versionId) const
 {
 	const VersionIdElement& element = GetVersionIdElement(versionId);
 

@@ -9,7 +9,7 @@ namespace ixln
 {
 
 
-CFileXmlReadArchive::CFileXmlReadArchive(const ::std::string& fileName, bool serializeHeader)
+CFileXmlReadArchive::CFileXmlReadArchive(const std::string& fileName, bool serializeHeader)
 {
 	wchar_t* tmpData = xercesc::XMLString::transcode(fileName.c_str());
 	m_fileName = tmpData;

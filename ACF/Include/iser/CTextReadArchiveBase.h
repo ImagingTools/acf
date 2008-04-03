@@ -42,10 +42,10 @@ protected:
 template <typename Type>
 bool CTextReadArchiveBase::ProcessInternal(Type& value)
 {
-	::std::string elementText;
+	std::string elementText;
 
 	if (Process(elementText) && !elementText.empty()){
-		::std::istrstream stream(elementText.c_str());
+		std::istrstream stream(elementText.c_str());
 
 		stream >> value;
 

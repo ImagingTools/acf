@@ -35,7 +35,7 @@ bool CXmlReadArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 
     xercesc::DOMNode* foundNode = NULL;
     wchar_t* tagName = xercesc::XMLString::transcode(tag.GetId().c_str());
-    ::std::wstring strTagName = tagName;
+    std::wstring strTagName = tagName;
 
     xercesc::DOMElement* currentElement = NULL;
 	if (m_nodePtr->getNodeType() == xercesc::DOMNode::ELEMENT_NODE) {
@@ -121,7 +121,7 @@ bool CXmlReadArchiveBase::EndTag(const iser::CArchiveTag& /*tag*/)
 }
 
 
-bool CXmlReadArchiveBase::Process(::std::string& data)
+bool CXmlReadArchiveBase::Process(std::string& data)
 {
     istd::CString text;
     bool retVal = Process(text);

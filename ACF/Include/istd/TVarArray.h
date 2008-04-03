@@ -130,7 +130,7 @@ protected:
 	void UpdateElementsSize();
 
 private:
-	typedef ::std::vector<Element> Elements;
+	typedef std::vector<Element> Elements;
 	Elements m_elements;
 
 	SizesType m_sizes;
@@ -248,7 +248,7 @@ inline int TVarArray<Element>::GetElementIndex(const IndexType& index) const
 	int indexDimensionsCount = m_sizes.GetDimensionsCount();
 	int dimensionsCount = m_sizes.GetDimensionsCount();
 
-	int minDimensionsCount = ::std::min(indexDimensionsCount, dimensionsCount);
+	int minDimensionsCount = std::min(indexDimensionsCount, dimensionsCount);
 
 	int elementIndex = 0;
 	int cumulatedSizes = 1;

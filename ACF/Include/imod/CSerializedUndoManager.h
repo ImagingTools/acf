@@ -48,7 +48,7 @@ protected:
 
 private:
 	typedef istd::TDelPtr<iser::CMemoryWriteArchive> UndoArchivePtr;
-	typedef ::std::list<UndoArchivePtr> UndoList;
+	typedef std::list<UndoArchivePtr> UndoList;
 	UndoList m_undoList;
 	UndoList m_redoList;
 

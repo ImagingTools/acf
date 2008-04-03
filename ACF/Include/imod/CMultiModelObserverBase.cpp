@@ -55,7 +55,7 @@ bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
 
 bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
 {
-	Models::iterator iter = ::std::find(m_models.begin(), m_models.end(), modelPtr);
+	Models::iterator iter = std::find(m_models.begin(), m_models.end(), modelPtr);
 	if (iter != m_models.end()){
 		m_models.erase(iter);
 		

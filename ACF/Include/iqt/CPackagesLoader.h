@@ -28,7 +28,7 @@ protected:
 
 private:
 	typedef istd::TDelPtr<CDllFunctionsProvider> FunctionsProviderPtr;
-	typedef ::std::map<QString, FunctionsProviderPtr> DllCacheMap;
+	typedef std::map<QString, FunctionsProviderPtr> DllCacheMap;
 
 	DllCacheMap m_dllCacheMap;
 };

@@ -2,27 +2,19 @@
 #define CLogGuiComp_included
 
 
-#include "iqt/iqt.h"
-
-
-#include <QObject>
 #include <QMutex>
 
 
 #include "ibase/IMessageManager.h"
 #include "ibase/TMessageManagerBase.h"
 
+#include "iser/IFileSerializer.h"
+
 #include "imod/TMultiModelObserverBase.h"
-
-
-#ifdef OLD_ACF_SUPPORT
-
 
 #include "iqt/Generated/ui_CLogGuiComp.h"
 
-#include "QtAcf/QtGuiTemplateBasedComponent.h"
-
-#include "Comp/ComponentDependency.h"
+#include "iqt/TDesignerGuiComponentBase.h"
 
 
 namespace iqt
@@ -30,13 +22,13 @@ namespace iqt
 
 
 class CLogGuiComp:
-	public acf::QtGuiTemplateBasedComponent<QWidget, Ui::CLogGuiComp>,
+	public iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp>,
 	public ibase::TMessageManagerBase<ibase::IMessageManager>
 {
 	Q_OBJECT
 
 public:
-	typedef acf::QtGuiTemplateBasedComponent<QWidget, Ui::CLogGuiComp> BaseClass;
+	typedef iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp> BaseClass;
 	typedef ibase::TMessageManagerBase<ibase::IMessageManager> BaseClass2;
 
 	enum
@@ -46,13 +38,11 @@ public:
 		TextColumn = 2
 	};
 
-	CLogGuiComp();
-
 	// reimplemented (ibase::IMessageManager)
 	virtual void AddMessage(ibase::IMessage* messagePtr);
 
 protected:
-	// reimplemented (QtAbstractGuiComponent)
+	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 
 protected slots:
@@ -64,14 +54,13 @@ signals:
 	void EmitAddMessage(ibase::IMessage* messagePtr);
 
 private:
+	I_REF(iser::IFileSerializer, m_fileSerializerCompPtr);
+
 	QMutex m_lock;
 };
 
 
 } // namespace iqt
-
-
-#endif // OLD_ACF_SUPPORT
 
 
 #endif // CLogGuiComp_included

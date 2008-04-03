@@ -26,7 +26,7 @@ class IComponentStaticInfo;
 class IRegistryElement: virtual public iser::ISerializable
 {
 public:
-	typedef ::std::set< ::std::string> Ids;
+	typedef std::set< std::string> Ids;
 	typedef istd::TDelPtr<iser::ISerializable> AttributePtr;
 
 	/**
@@ -35,7 +35,7 @@ public:
 	struct AttributeInfo
 	{
 		AttributePtr attributePtr;
-		::std::string exportId;
+		std::string exportId;
 	};
 
 	/**
@@ -53,22 +53,22 @@ public:
 		\param	attributeId		unique ID of new attribute.
 		\param	createAttribute	if it is true, new attribute instance will be created.
 	*/
-	virtual AttributeInfo* InsertAttributeInfo(const ::std::string& attributeId, bool createAttribute = true) = 0;
+	virtual AttributeInfo* InsertAttributeInfo(const std::string& attributeId, bool createAttribute = true) = 0;
 
 	/**
 		Create attribute object for specified ID.
 	*/
-	virtual iser::ISerializable* CreateAttribute(const ::std::string& attributeId) const = 0;
+	virtual iser::ISerializable* CreateAttribute(const std::string& attributeId) const = 0;
 
 	/**
 		Get access to stored attribute info structure.
 	*/
-	virtual const AttributeInfo* GetAttributeInfo(const ::std::string& attributeId) const = 0;
+	virtual const AttributeInfo* GetAttributeInfo(const std::string& attributeId) const = 0;
 
 	/**
 		Removes attribute info structure from this collection.
 	*/
-	virtual bool RemoveAttribute(const ::std::string& attributeId) = 0;
+	virtual bool RemoveAttribute(const std::string& attributeId) = 0;
 };
 
 

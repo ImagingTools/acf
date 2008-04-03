@@ -257,7 +257,7 @@ bool CXmlFileReadArchive::Process(double& value)
 }
 
 
-bool CXmlFileReadArchive::Process(::std::string& value)
+bool CXmlFileReadArchive::Process(std::string& value)
 {
 	QString text = PullTextNode();
 
@@ -281,8 +281,8 @@ bool CXmlFileReadArchive::ProcessData(void* dataPtr, int size)
 {
 	QString text = PullTextNode();
 
-	::std::istringstream stream(text.toStdString());
-	stream >> ::std::hex;
+	std::istringstream stream(text.toStdString());
+	stream >> std::hex;
 
 	for (int i = 0; i < size; i++){
 		I_WORD value;

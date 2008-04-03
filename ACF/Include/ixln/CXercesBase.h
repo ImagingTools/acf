@@ -28,7 +28,7 @@ protected:
 	xercesc::DOMDocument* m_documentPtr;
 	xercesc::DOMNode* m_nodePtr;
 
-	static const ::std::wstring s_text;
+	static const std::wstring s_text;
 
 private:
 	static int s_xercescInstanceCount;

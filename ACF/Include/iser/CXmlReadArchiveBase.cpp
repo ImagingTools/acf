@@ -14,7 +14,7 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 {
 	bool retVal = true;
 
-	::std::string tagText;
+	std::string tagText;
 
 	retVal = retVal && ReadToDelimeter("<", tagText);
 	retVal = retVal && ReadToDelimeter(">",  tagText);
@@ -29,7 +29,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 {
 	bool retVal = true;
 
-	::std::string tagText;
+	std::string tagText;
 
 	retVal = retVal && ReadToDelimeter("<", tagText);
 	retVal = retVal && ReadToDelimeter(" ", tagText);
@@ -39,7 +39,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 	retVal = retVal && ReadToDelimeter("\"", tagText);
 	retVal = retVal && ReadToDelimeter("\"", tagText);
 
-	::std::istrstream stream(tagText.c_str());
+	std::istrstream stream(tagText.c_str());
 
 	stream >> count;
 
@@ -51,7 +51,7 @@ bool CXmlReadArchiveBase::EndTag(const CArchiveTag& tag)
 {
 	bool retVal = true;
 
-	::std::string tagText;
+	std::string tagText;
 
 	retVal = retVal && ReadToDelimeter("<", tagText);
 	retVal = retVal && ReadToDelimeter(">", tagText);
@@ -63,9 +63,9 @@ bool CXmlReadArchiveBase::EndTag(const CArchiveTag& tag)
 }
 
 
-bool CXmlReadArchiveBase::Process(::std::string& value)
+bool CXmlReadArchiveBase::Process(std::string& value)
 {
-	::std::string xmlText;
+	std::string xmlText;
 	if (ReadToDelimeter("<", xmlText, false)){
 		DecodeXml(xmlText, value);
 
@@ -79,7 +79,7 @@ bool CXmlReadArchiveBase::Process(::std::string& value)
 
 bool CXmlReadArchiveBase::Process(istd::CString& value)
 {
-	::std::string textValue;
+	std::string textValue;
 	if (ProcessInternal(textValue)){
 		value = textValue;
 
@@ -102,7 +102,7 @@ bool CXmlReadArchiveBase::SerializeXmlHeader()
 {
 	bool retVal = true;
 
-	::std::string tagText;
+	std::string tagText;
 
 	do{
 		retVal = retVal && ReadToDelimeter("<", tagText);

@@ -25,7 +25,7 @@ public:
 	const IRegistry* GetRegistryFromFile(const istd::CString& path) const;
 
 	// reimplemented (icomp::IRegistriesManager)
-	virtual const IRegistry* GetRegistry(const ::std::string& packageId, const ::std::string& componentId, const IRegistry* contextPtr) const;
+	virtual const IRegistry* GetRegistry(const std::string& packageId, const std::string& componentId, const IRegistry* contextPtr) const;
 
 protected:
 	/**
@@ -42,8 +42,8 @@ protected:
 	virtual iser::IArchive* CreateArchive(const istd::CString& path) const = 0;
 
 private:
-	typedef ::std::map<istd::CString, istd::TDelPtr<IRegistry> > RegistriesMap;
-	typedef ::std::map<const IRegistry*, istd::CString> InvRegistriesMap;
+	typedef std::map<istd::CString, istd::TDelPtr<IRegistry> > RegistriesMap;
+	typedef std::map<const IRegistry*, istd::CString> InvRegistriesMap;
 
 	mutable RegistriesMap m_registriesMap;
 	mutable InvRegistriesMap m_invRegistriesMap;

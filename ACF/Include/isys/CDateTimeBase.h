@@ -17,8 +17,8 @@ public:
 	bool SerializeComponents(iser::IArchive& archive, TimeComponent fromComponent, TimeComponent toComponent);
 
 	// reimplemented (isys::IDateTime)
-	virtual ::std::string ToString(int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND) const;
-	virtual bool FromString(const ::std::string& dateTime, int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND);
+	virtual std::string ToString(int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND) const;
+	virtual bool FromString(const std::string& dateTime, int fromComponent = TC_YEAR, int toComponent = TC_MICROSECOND);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

@@ -57,7 +57,7 @@ bool CXmlWriteArchiveBase::BeginTag(const iser::CArchiveTag& tag)
 	m_isFlushed = false;
 
 	if (IsCommentEnabled()){
-		::std::string fullDescription = "Tag comment: " + tag.GetComment();
+		std::string fullDescription = "Tag comment: " + tag.GetComment();
 
 	    wchar_t* tagComment = xercesc::XMLString::transcode(fullDescription.c_str());
 		xercesc::DOMComment* commentElement = m_documentPtr->createComment(tagComment);
@@ -97,7 +97,7 @@ bool CXmlWriteArchiveBase::EndTag(const iser::CArchiveTag& /*tag*/)
 }
 
 
-bool CXmlWriteArchiveBase::Process(::std::string& data)
+bool CXmlWriteArchiveBase::Process(std::string& data)
 {
 	istd::CString str(data);
 

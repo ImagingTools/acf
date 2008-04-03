@@ -12,7 +12,7 @@ namespace iser
 
 bool CTextReadArchiveBase::Process(bool& value)
 {
-	::std::string elementText;
+	std::string elementText;
 
 	if (Process(elementText)){
 		value = (elementText == "true");
@@ -94,13 +94,13 @@ bool CTextReadArchiveBase::ProcessData(void* dataPtr, int size)
 {
 	I_BYTE* data = (I_BYTE*)dataPtr;
 
-	::std::string text;
+	std::string text;
 	bool retVal = Process(text);
 
 	if (retVal){
-		::std::istrstream stream(text.c_str());
+		std::istrstream stream(text.c_str());
 
-		stream >> ::std::hex;
+		stream >> std::hex;
 
 		for (int i = 0; i < size; i++){
 			stream >> data[i];

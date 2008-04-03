@@ -133,7 +133,7 @@ public:
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(::std::string& value) = 0;
+	virtual bool Process(std::string& value) = 0;
 
 	/**
 		Process primitive type.

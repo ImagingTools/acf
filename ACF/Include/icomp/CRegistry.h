@@ -24,13 +24,13 @@ public:
 	// reimplemented (icomp::IRegistry)
 	virtual Ids GetElementIds() const;
 	virtual ElementInfo* InsertElementInfo(
-			const ::std::string& elementId,
+			const std::string& elementId,
 			int elementType,
-			const ::std::string& packageId,
-			const ::std::string& componentId,
+			const std::string& packageId,
+			const std::string& componentId,
 			bool ensureElementCreated = true);
-	virtual const ElementInfo* GetElementInfo(const ::std::string& elementId) const;
-	virtual bool RemoveElementInfo(const ::std::string& elementId);
+	virtual const ElementInfo* GetElementInfo(const std::string& elementId) const;
+	virtual bool RemoveElementInfo(const std::string& elementId);
 	virtual const ExportedInterfacesMap& GetExportedExportedInterfacesMap() const;
 	virtual const ExportedComponentsMap& GetExportedComponentsMap() const;
 
@@ -43,7 +43,7 @@ protected:
 	bool SerializeExportedComponents(iser::IArchive& archive);
 
 private:
-	typedef ::std::map< ::std::string, ElementInfo> ComponentsMap;
+	typedef std::map< std::string, ElementInfo> ComponentsMap;
 
 	ComponentsMap m_componentsMap;
 	ExportedInterfacesMap m_exportedInterfacesMap;

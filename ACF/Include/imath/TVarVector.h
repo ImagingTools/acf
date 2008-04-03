@@ -172,7 +172,7 @@ public:
 	Element& operator[](int i);
 
 protected:
-	typedef ::std::vector<Element> Elements;
+	typedef std::vector<Element> Elements;
 
 	Elements m_elements;
 };
@@ -549,7 +549,7 @@ template <class Element>
 void TVarVector<Element>::SetElementsFrom(const TVarVector& vector, const Element& expansionValue)
 {
 	int elementsCount = GetElementsCount();
-	int minElements = ::std::min(elementsCount, vector.GetElementsCount());
+	int minElements = std::min(elementsCount, vector.GetElementsCount());
 
 	for (int i = 0; i < minElements; ++i){
 		SetElement(i, vector[i]);

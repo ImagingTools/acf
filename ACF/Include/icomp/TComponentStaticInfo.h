@@ -21,9 +21,9 @@ public:
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
 	virtual const AttributeInfos& GetAttributeInfos() const;
 	virtual const SubcomponentInfos& GetSubcomponentInfos() const;
-	virtual bool RegisterInterfaceExtractor(const ::std::string& interfaceId, InterfaceExtractorPtr extractorPtr);
-	virtual bool RegisterAttributeInfo(const ::std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
-	virtual bool RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
+	virtual bool RegisterInterfaceExtractor(const std::string& interfaceId, InterfaceExtractorPtr extractorPtr);
+	virtual bool RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
+	virtual bool RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
 
 private:
 	const IComponentStaticInfo* m_baseComponentPtr;
@@ -81,21 +81,21 @@ const IComponentStaticInfo::SubcomponentInfos& TComponentStaticInfo<Component>::
 
 
 template <class Component>
-bool TComponentStaticInfo<Component>::RegisterInterfaceExtractor(const ::std::string& interfaceId, InterfaceExtractorPtr extractorPtr)
+bool TComponentStaticInfo<Component>::RegisterInterfaceExtractor(const std::string& interfaceId, InterfaceExtractorPtr extractorPtr)
 {
 	return m_interfaceExtractors.InsertLocal(interfaceId, extractorPtr);
 }
 
 
 template <class Component>
-bool TComponentStaticInfo<Component>::RegisterAttributeInfo(const ::std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
+bool TComponentStaticInfo<Component>::RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
 {
 	return m_attributeInfos.InsertLocal(attributeId, attributeInfoPtr);
 }
 
 
 template <class Component>
-bool TComponentStaticInfo<Component>::RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
+bool TComponentStaticInfo<Component>::RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
 {
 	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
 }

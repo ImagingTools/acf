@@ -10,7 +10,7 @@ namespace iser
 
 bool CTextWriteArchiveBase::Process(bool& value)
 {
-	::std::string elementText = value? "true": "false";
+	std::string elementText = value? "true": "false";
 
 	return Process(elementText);
 }
@@ -86,9 +86,9 @@ bool CTextWriteArchiveBase::ProcessData(void* dataPtr, int size)
 {
 	I_BYTE* data = (I_BYTE*)dataPtr;
 
-	::std::ostrstream stream;
+	std::ostrstream stream;
 
-	stream << ::std::hex;
+	stream << std::hex;
 
 	for (int i = 0; i < size; i++){
 		stream << data[i];
@@ -98,13 +98,13 @@ bool CTextWriteArchiveBase::ProcessData(void* dataPtr, int size)
 		}
 
 		if ((i % 32) == 31){
-			stream << ::std::endl;
+			stream << std::endl;
 		}
 	}
 
-	stream << ::std::endl;
+	stream << std::endl;
 
-	::std::string str(stream.str());
+	std::string str(stream.str());
 
 	return Process(str);
 }

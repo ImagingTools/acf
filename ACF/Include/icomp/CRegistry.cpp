@@ -35,10 +35,10 @@ IRegistry::Ids CRegistry::GetElementIds() const
 
 
 IRegistry::ElementInfo* CRegistry::InsertElementInfo(
-			const ::std::string& elementId,
+			const std::string& elementId,
 			int elementType,
-			const ::std::string& packageId,
-			const ::std::string& componentId,
+			const std::string& packageId,
+			const std::string& componentId,
 			bool ensureElementCreated)
 {
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
@@ -85,7 +85,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 }
 
 
-const IRegistry::ElementInfo* CRegistry::GetElementInfo(const ::std::string& elementId) const
+const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& elementId) const
 {
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
 	if (iter != m_componentsMap.end()){
@@ -96,7 +96,7 @@ const IRegistry::ElementInfo* CRegistry::GetElementInfo(const ::std::string& ele
 }
 
 
-bool CRegistry::RemoveElementInfo(const ::std::string& elementId)
+bool CRegistry::RemoveElementInfo(const std::string& elementId)
 {
 	return m_componentsMap.erase(elementId) > 0;
 }
@@ -154,7 +154,7 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(elementTag);
 
 			retVal = retVal && archive.BeginTag(elementIdTag);
-			retVal = retVal && archive.Process(const_cast< ::std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
 			retVal = retVal && archive.EndTag(elementIdTag);
 
 			retVal = retVal && archive.BeginTag(elementTypeTag);
@@ -191,7 +191,7 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 
 			ElementInfo newInfo;
 
-			::std::string elementId;
+			std::string elementId;
 			retVal = retVal && archive.BeginTag(elementIdTag);
 			retVal = retVal && archive.Process(elementId);
 			retVal = retVal && archive.EndTag(elementIdTag);
@@ -201,12 +201,12 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 			retVal = retVal && archive.Process(elementType);
 			retVal = retVal && archive.EndTag(elementTypeTag);
 
-			::std::string packageId;
+			std::string packageId;
 			retVal = retVal && archive.BeginTag(packageIdTag);
 			retVal = retVal && archive.Process(packageId);
 			retVal = retVal && archive.EndTag(packageIdTag);
 
-			::std::string componentId;
+			std::string componentId;
 			retVal = retVal && archive.BeginTag(componentIdTag);
 			retVal = retVal && archive.Process(componentId);
 			retVal = retVal && archive.EndTag(componentIdTag);
@@ -263,7 +263,7 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(interfaceTag);
 
 			retVal = retVal && archive.BeginTag(interfaceIdTag);
-			retVal = retVal && archive.Process(const_cast< ::std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
 			retVal = retVal && archive.EndTag(interfaceIdTag);
 
 			retVal = retVal && archive.BeginTag(componentIdTag);
@@ -277,12 +277,12 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(interfaceTag);
 
-			::std::string interfaceId;
+			std::string interfaceId;
 			retVal = retVal && archive.BeginTag(interfaceIdTag);
 			retVal = retVal && archive.Process(interfaceId);
 			retVal = retVal && archive.EndTag(interfaceIdTag);
 
-			::std::string componentId;
+			std::string componentId;
 			retVal = retVal && archive.BeginTag(componentIdTag);
 			retVal = retVal && archive.Process(componentId);
 			retVal = retVal && archive.EndTag(componentIdTag);
@@ -321,7 +321,7 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(componentTag);
 
 			retVal = retVal && archive.BeginTag(exportedIdTag);
-			retVal = retVal && archive.Process(const_cast< ::std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
 			retVal = retVal && archive.BeginTag(componentIdTag);
@@ -335,12 +335,12 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(componentTag);
 
-			::std::string exportedId;
+			std::string exportedId;
 			retVal = retVal && archive.BeginTag(exportedIdTag);
 			retVal = retVal && archive.Process(exportedId);
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
-			::std::string componentId;
+			std::string componentId;
 			retVal = retVal && archive.BeginTag(componentIdTag);
 			retVal = retVal && archive.Process(componentId);
 			retVal = retVal && archive.EndTag(componentIdTag);

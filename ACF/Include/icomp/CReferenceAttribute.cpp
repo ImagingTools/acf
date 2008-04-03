@@ -8,7 +8,7 @@
 namespace icomp{
 
 
-CReferenceAttribute::CReferenceAttribute(const ::std::string& componentId)
+CReferenceAttribute::CReferenceAttribute(const std::string& componentId)
 :	m_componentId(componentId)
 {
 }

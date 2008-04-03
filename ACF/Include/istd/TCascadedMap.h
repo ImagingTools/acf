@@ -141,9 +141,9 @@ public:
 private:
 	const TCascadedMap<Key, Value>* m_parentPtr;
 
-	typedef ::std::map<KeyType, int> IndicesMap;
-	typedef ::std::pair<KeyType, ValueType> Pair;
-	typedef ::std::vector<Pair> PairList;
+	typedef std::map<KeyType, int> IndicesMap;
+	typedef std::pair<KeyType, ValueType> Pair;
+	typedef std::vector<Pair> PairList;
 
 	mutable IndicesMap m_positionsMap;
 	mutable PairList m_pairList;

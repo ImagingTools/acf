@@ -45,7 +45,7 @@ bool CDllFunctionsProvider::IsValid() const
 }
 
 
-void* CDllFunctionsProvider::GetFunction(const ::std::string& id) const
+void* CDllFunctionsProvider::GetFunction(const std::string& id) const
 {
 	if (IsValid()){
 		return m_library.resolve(id.c_str());

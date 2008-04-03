@@ -20,8 +20,8 @@ protected:
 
 	// reimplemented (iser::CXmlReadArchiveBase)
 	virtual bool ReadToDelimeter(
-				const ::std::string& delimeters,
-				::std::string& result,
+				const std::string& delimeters,
+				std::string& result,
 				bool skipDelimeter = true,
 				char* foundDelimeterPtr = NULL);
 
@@ -45,23 +45,23 @@ TXmlStreamReadArchiveBase<StreamClass>::TXmlStreamReadArchiveBase(const iser::CA
 
 template <class StreamClass>
 bool TXmlStreamReadArchiveBase<StreamClass>::ReadToDelimeter(
-			const ::std::string& delimeters,
-			::std::string& result,
+			const std::string& delimeters,
+			std::string& result,
 			bool skipDelimeter,
 			char* foundDelimeterPtr)
 {
 	int cutFromPos = -2;
 	int cutToPos = -2;
 
-	::std::string readString;
+	std::string readString;
 
 	if (!m_useLastReadChar){
 		m_stream.get(m_lastReadChar);
 	}
 
 	while (!m_stream.fail()){
-		::std::string::size_type foundPosition = delimeters.find(m_lastReadChar);
-		if (foundPosition != ::std::string::npos){
+		std::string::size_type foundPosition = delimeters.find(m_lastReadChar);
+		if (foundPosition != std::string::npos){
 			m_useLastReadChar = !skipDelimeter;
 
 			if (cutFromPos < 0){

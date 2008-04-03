@@ -35,7 +35,7 @@ public:
 		\param	keyId		
 		\return			pointer to created object or NULL if it was not possible to create it or keyId does not exist.
 	*/
-	virtual InterfaceType* CreateInstance(const ::std::string& keyId = "") const = 0;
+	virtual InterfaceType* CreateInstance(const std::string& keyId = "") const = 0;
 };
 
 

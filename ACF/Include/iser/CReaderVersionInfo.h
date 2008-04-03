@@ -15,27 +15,27 @@ class CReaderVersionInfo: virtual public IVersionInfo
 {
 public:
 	void Reset();
-	bool InsertVersionId(int id, I_DWORD version, const ::std::string& description);
+	bool InsertVersionId(int id, I_DWORD version, const std::string& description);
 	bool RemoveVersionId(int id);
 
 	// reimplemented (iser::IVersionInfo)
 	virtual I_DWORD GetVersion(int versionId = IVersionInfo::UserVersionId) const;
-	virtual const ::std::string& GetVersionIdDescription(int versionId) const;
+	virtual const std::string& GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
 
 protected:
 	struct VersionIdElement
 	{
 		I_DWORD version;
-		::std::string description;
+		std::string description;
 
-		VersionIdElement(I_DWORD _version, ::std::string _description):version(_version), description(_description){}
+		VersionIdElement(I_DWORD _version, std::string _description):version(_version), description(_description){}
 	};
 
 	const VersionIdElement& GetVersionIdElement(int versionId) const;
 
 private:
-	typedef ::std::map<int, VersionIdElement> VersionElements;
+	typedef std::map<int, VersionIdElement> VersionElements;
 
 	VersionElements m_versionIdList;
 

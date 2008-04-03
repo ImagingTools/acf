@@ -29,12 +29,12 @@ const IComponentContext* CComponentContext::GetParentContext() const
 }
 
 
-const iser::ISerializable* CComponentContext::GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr) const
+const iser::ISerializable* CComponentContext::GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr) const
 {
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 
 	if (infoPtr  != NULL){
-		const ::std::string& exportId = infoPtr->exportId;
+		const std::string& exportId = infoPtr->exportId;
 		if (!exportId.empty() && (m_parentPtr != NULL)){
 			const iser::ISerializable* parentAttributePtr = m_parentPtr->GetAttribute(exportId, realContextPtr);
 
@@ -74,7 +74,7 @@ const iser::ISerializable* CComponentContext::GetAttribute(const ::std::string& 
 }
 
 
-IComponent* CComponentContext::GetSubcomponent(const ::std::string& /*componentId*/) const
+IComponent* CComponentContext::GetSubcomponent(const std::string& /*componentId*/) const
 {
 	return NULL;	// normal component has no subcomponents
 }

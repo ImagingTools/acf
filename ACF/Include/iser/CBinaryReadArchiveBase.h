@@ -32,7 +32,7 @@ public:
 	virtual bool Process(I_SQWORD& value);
 	virtual bool Process(float& value);
 	virtual bool Process(double& value);
-	virtual bool Process(::std::string& value);
+	virtual bool Process(std::string& value);
 	virtual bool Process(istd::CString& value);
 
 protected:

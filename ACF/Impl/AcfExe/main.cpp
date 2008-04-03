@@ -17,25 +17,25 @@ int main(int argc, char *argv[])
 {
 	iqt::CPackagesLoader loader;
 
-	::std::string registryFile = "default.acfr";
+	std::string registryFile = "default.acfr";
 	bool showApplicationInfo = false;
 	bool useDefaultRegistries = true;
-	::std::string componentId;
+	std::string componentId;
 
 	for (int index = 1; index < argc; index++){
-		::std::string argument = argv[index];
+		std::string argument = argv[index];
 		if (!argument.empty() && (argument[0] == '-')){
-			::std::string option = argument.substr(1);
+			std::string option = argument.substr(1);
 
 			if ((option == "h") || (option == "help")){
-				::std::cout << "Usage";
-				::std::cout << "\tAcf.exe [registryName] {options}      - normal registry start" << ::std::endl;
-				::std::cout << "\t-h or -help              - showing help" << ::std::endl;
-				::std::cout << "\t-id componentId          - specify component ID." << ::std::endl;
-				::std::cout << "\t-packageFile filePath    - append single package file" << ::std::endl;
-				::std::cout << "\t-packageDir directory    - append packages directory" << ::std::endl;
-				::std::cout << "\t-config configFile       - load config file" << ::std::endl;
-				::std::cout << "\t-info                    - application parameter info" << ::std::endl;
+				std::cout << "Usage";
+				std::cout << "\tAcf.exe [registryName] {options}      - normal registry start" << std::endl;
+				std::cout << "\t-h or -help              - showing help" << std::endl;
+				std::cout << "\t-id componentId          - specify component ID." << std::endl;
+				std::cout << "\t-packageFile filePath    - append single package file" << std::endl;
+				std::cout << "\t-packageDir directory    - append packages directory" << std::endl;
+				std::cout << "\t-config configFile       - load config file" << std::endl;
+				std::cout << "\t-info                    - application parameter info" << std::endl;
 
 				return 0;
 			}
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 	icomp::CXmlRegistriesManager registriesManager(&loader);
 	const icomp::IRegistry* registryPtr = registriesManager.GetRegistryFromFile(registryFile.c_str());
 	if (registryPtr == NULL){
-		::std::cout << QString("Registry %1 cannot be loaded").arg(registryFile.c_str()).toStdString() << ::std::endl;
+		std::cout << QString("Registry %1 cannot be loaded").arg(registryFile.c_str()).toStdString() << std::endl;
 
 		return -1;
 	}
@@ -89,13 +89,13 @@ int main(int argc, char *argv[])
 
 	ibase::IApplication* applicationPtr = (ibase::IApplication*)composite.GetInterface(typeid(ibase::IApplication), componentId);
 	if (applicationPtr == NULL){
-		::std::cout << "Application interface cannot be found" << ::std::endl;
+		std::cout << "Application interface cannot be found" << std::endl;
 
 		return -1;
 	}
 
 	if (showApplicationInfo){
-		::std::cout << applicationPtr->GetHelpText().ToString();
+		std::cout << applicationPtr->GetHelpText().ToString();
 
 		return 0;
 	}

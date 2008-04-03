@@ -15,7 +15,7 @@ public:
 	typedef CXmlWriteArchiveBase BaseClass;
 
 	explicit CFileXmlWriteArchive(
-					const ::std::string& fileName,
+					const std::string& fileName,
 					const iser::IVersionInfo* versionInfoPtr = NULL,
 					bool serializeHeader = true);
 private:

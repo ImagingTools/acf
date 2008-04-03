@@ -47,7 +47,7 @@ bool CDllFunctionsProvider::IsValid() const
 }
 
 
-void* CDllFunctionsProvider::GetFunction(const ::std::string& id) const
+void* CDllFunctionsProvider::GetFunction(const std::string& id) const
 {
 	if (IsValid()){
 		return ::GetProcAddress(m_handler, id.c_str());

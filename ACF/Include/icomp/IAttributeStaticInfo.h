@@ -11,7 +11,8 @@
 #include "icomp/icomp.h"
 
 
-namespace icomp{
+namespace icomp
+{
 
 
 class IAttributeStaticInfo: virtual public istd::IPolymorphic
@@ -25,12 +26,12 @@ public:
 	/**
 		Get ID of this attribute.
 	 */
-	virtual const ::std::string& GetAttributeId() const = 0;
+	virtual const std::string& GetAttributeId() const = 0;
 
 	/**
 		Get description of this attribute.
 	 */
-	virtual const ::std::string& GetAttributeDescription() const = 0;
+	virtual const std::string& GetAttributeDescription() const = 0;
 
 	/**
 		Get default attribute value.

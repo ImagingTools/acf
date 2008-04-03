@@ -52,7 +52,7 @@ private:
 	*/
 	CStaticServicesProvider(){}
 
-	typedef ::std::map<const type_info*, void*> Services;
+	typedef std::map<const type_info*, void*> Services;
 
 	static Services m_registeredServices;
 	static Provider m_providerInstance;

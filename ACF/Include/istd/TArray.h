@@ -131,7 +131,7 @@ protected:
 	void UpdateElementsSize();
 
 private:
-	typedef ::std::vector<Element> Elements;
+	typedef std::vector<Element> Elements;
 	Elements m_elements;
 
 	SizesType m_sizes;

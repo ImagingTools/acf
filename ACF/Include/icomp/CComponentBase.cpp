@@ -18,7 +18,7 @@ CComponentBase::CComponentBase()
 
 // reimplemented (icomp::IComponent)
 
-void* CComponentBase::GetInterface(const type_info& interfaceType, const ::std::string& /*subId*/)
+void* CComponentBase::GetInterface(const type_info& interfaceType, const std::string& /*subId*/)
 {
 	if (m_contextPtr != NULL){
 		const IRegistryElement& registryElement = m_contextPtr->GetRegistryElement();

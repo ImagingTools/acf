@@ -31,7 +31,7 @@ public:
 
 	// reimplemented (istd::TIFactory)
 	virtual KeyList GetFactoryKeys() const;
-	virtual InterfaceType* CreateInstance(const ::std::string& keyId = "") const;
+	virtual InterfaceType* CreateInstance(const std::string& keyId = "") const;
 
 protected:
 	typedef istd::TOptDelPtr<FactoryClass> FactoryPtr;

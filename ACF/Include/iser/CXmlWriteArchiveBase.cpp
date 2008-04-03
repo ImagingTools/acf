@@ -24,8 +24,8 @@ bool CXmlWriteArchiveBase::BeginTag(const CArchiveTag& tag)
 
 bool CXmlWriteArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& /*subTag*/, int& count)
 {
-	::std::ostrstream stream;
-	stream << count << ::std::ends;
+	std::ostrstream stream;
+	stream << count << std::ends;
 
 	bool retVal = MakeIndent() && WriteString("<" + tag.GetId() + " count=\"" + stream.str() + "\">\n");
 
@@ -45,7 +45,7 @@ bool CXmlWriteArchiveBase::EndTag(const CArchiveTag& tag)
 }
 
 
-bool CXmlWriteArchiveBase::Process(::std::string& value)
+bool CXmlWriteArchiveBase::Process(std::string& value)
 {
 	bool retVal = true;
 
@@ -56,7 +56,7 @@ bool CXmlWriteArchiveBase::Process(::std::string& value)
 
 	retVal = retVal && MakeIndent();
 
-	::std::string xmlText;
+	std::string xmlText;
 	EncodeXml(value, xmlText);
 
 	retVal = retVal && WriteString(xmlText) && WriteString("\n");
@@ -67,7 +67,7 @@ bool CXmlWriteArchiveBase::Process(::std::string& value)
 
 bool CXmlWriteArchiveBase::Process(istd::CString& value)
 {
-	::std::string str(value.ToString());
+	std::string str(value.ToString());
 
 	return Process(str);
 }
@@ -99,7 +99,7 @@ bool CXmlWriteArchiveBase::Flush()
 
 bool CXmlWriteArchiveBase::MakeIndent()
 {
-	return WriteString(::std::string(m_indent * 2, ' '));
+	return WriteString(std::string(m_indent * 2, ' '));
 }
 
 

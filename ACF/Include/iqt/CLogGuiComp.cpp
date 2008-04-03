@@ -2,23 +2,11 @@
 
 
 #include <QHeaderView>
-#include <QFileDialog>
 #include <QDateTime>
 
 
-#ifdef OLD_ACF_SUPPORT
-
-
-#include "Persist/FileWriteArchive.h"
-
 namespace iqt
 {
-
-	
-CLogGuiComp::CLogGuiComp()
-{
-	RegisterInterface<IMessageManager>(this);
-}
 
 
 void CLogGuiComp::OnGuiCreated()
@@ -31,6 +19,8 @@ void CLogGuiComp::OnGuiCreated()
 
 	LogView->header()->setResizeMode(QHeaderView::Stretch);
 	LogView->header()->hide();
+
+	ExportButton->setEnabled(m_fileSerializerCompPtr.IsValid());
 }
 
 
@@ -59,11 +49,34 @@ void CLogGuiComp::OnAddMessage(ibase::IMessage* messagePtr)
 	QTreeWidgetItem* messageItemPtr = new QTreeWidgetItem();
 
 	QDateTime dateTime;
-	dateTime.fromTime_t(messagePtr->GetTimeStamp().ToCTime());
+	dateTime = QDateTime::fromTime_t(messagePtr->GetTimeStamp().ToCTime());
 
-	messageItemPtr->setText(TimeColumn, dateTime.toString());
+	QString date = dateTime.toString();
+	messageItemPtr->setText(TimeColumn, date);
 	messageItemPtr->setText(TextColumn, iqt::GetQString(messagePtr->GetText()));
 	messageItemPtr->setText(SourceColumn, iqt::GetQString(messagePtr->GetSource()));
+
+	QColor categoryColor(0,0,0,0);
+
+	int category = SubstractMask(messagePtr->GetCategory());
+
+	switch(category){
+		case ibase::IMessage::Warning:
+			categoryColor = QColor(200, 200, 0, 128);
+			break;
+
+		case ibase::IMessage::Error:
+			categoryColor = QColor(255, 0, 0, 128);
+			break;
+
+		case ibase::IMessage::Critical:
+			categoryColor = QColor(255, 0, 0, 255);
+			break;
+	}
+
+	messageItemPtr->setBackgroundColor(TimeColumn, categoryColor);
+	messageItemPtr->setBackgroundColor(SourceColumn, categoryColor);
+	messageItemPtr->setBackgroundColor(TextColumn, categoryColor);
 
 	LogView->addTopLevelItem(messageItemPtr);
 
@@ -85,10 +98,13 @@ void CLogGuiComp::OnClear()
 
 void CLogGuiComp::OnExport()
 {
+	if (m_fileSerializerCompPtr.IsValid()){
+		m_fileSerializerCompPtr->SaveToFile(*this, istd::CString());
+	}
 }
 
 
 } // namespace iqt
 
 
-#endif // OLD_ACF_SUPPORT
+

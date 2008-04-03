@@ -30,7 +30,7 @@ CCompositeComponentContext::CCompositeComponentContext(
 
 // reimplemented (icomp::IComponentContext)
 
-IComponent* CCompositeComponentContext::GetSubcomponent(const ::std::string& componentId) const
+IComponent* CCompositeComponentContext::GetSubcomponent(const std::string& componentId) const
 {
 	ComponentMap::const_iterator iter = m_componentMap.find(componentId);
 	if (iter != m_componentMap.end()){

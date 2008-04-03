@@ -28,14 +28,14 @@ void CFixedPointManip::SetRoundingType(RoundingType roundingType)
 }
 
 
-::std::string CFixedPointManip::GetString(const double& value) const
+std::string CFixedPointManip::GetString(const double& value) const
 {
 	return GetString(value, m_precision);
 }
 
 
 
-bool CFixedPointManip::GetParsed(const ::std::string& text, double& result) const
+bool CFixedPointManip::GetParsed(const std::string& text, double& result) const
 {
 	bool retVal = GetParsedUnrounded(text, result);
 
@@ -49,9 +49,9 @@ bool CFixedPointManip::GetParsed(const ::std::string& text, double& result) cons
 
 // protected methods
 
-::std::string CFixedPointManip::GetString(const double& value, int /*precision*/) const
+std::string CFixedPointManip::GetString(const double& value, int /*precision*/) const
 {
-	typedef ::std::vector<char> CharacterList;
+	typedef std::vector<char> CharacterList;
 	CharacterList rotatedString;
 
 	I_SDWORD intValue = GetInternalValue(value);
@@ -81,7 +81,7 @@ bool CFixedPointManip::GetParsed(const ::std::string& text, double& result) cons
 
 	int stringLength = int(rotatedString.size());
 
-	::std::string retVal(rotatedString.size(), ' ');
+	std::string retVal(rotatedString.size(), ' ');
 
 	for (int i = 0; i < stringLength; ++i){
 		retVal[i] = rotatedString[stringLength - i - 1];
@@ -92,7 +92,7 @@ bool CFixedPointManip::GetParsed(const ::std::string& text, double& result) cons
 
 
 
-bool CFixedPointManip::GetParsedUnrounded(const ::std::string& text, double& result) const
+bool CFixedPointManip::GetParsedUnrounded(const std::string& text, double& result) const
 {
 	double sign = 0.0;
 	double divider = 0.0;

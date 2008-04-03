@@ -28,9 +28,9 @@ class IComponentStaticInfo: virtual public istd::IPolymorphic
 public:
 	typedef void* (*InterfaceExtractorPtr)(IComponent* componentPtr);
 
-	typedef istd::TCascadedMap< ::std::string, InterfaceExtractorPtr> InterfaceExtractors;
-	typedef istd::TCascadedMap< ::std::string, const IAttributeStaticInfo*> AttributeInfos;
-	typedef istd::TCascadedMap< ::std::string, const IComponentStaticInfo*> SubcomponentInfos;
+	typedef istd::TCascadedMap< std::string, InterfaceExtractorPtr> InterfaceExtractors;
+	typedef istd::TCascadedMap< std::string, const IAttributeStaticInfo*> AttributeInfos;
+	typedef istd::TCascadedMap< std::string, const IComponentStaticInfo*> SubcomponentInfos;
 
 	/**
 		Create component instance.
@@ -62,7 +62,7 @@ public:
 		This interface ID is used for static check
 		if this component can be used to resolve reference dependecy of second one.
 	*/
-	virtual bool RegisterInterfaceExtractor(const ::std::string& interfaceId, InterfaceExtractorPtr extractorPtr) = 0;
+	virtual bool RegisterInterfaceExtractor(const std::string& interfaceId, InterfaceExtractorPtr extractorPtr) = 0;
 
 	/**
 		Register static attribute info.
@@ -70,7 +70,7 @@ public:
 		\param	attributeInfoPtr	static attribute info object used to describe attribute type and as factory.
 									It cannot be NULL.
 	*/
-	virtual bool RegisterAttributeInfo(const ::std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr) = 0;
+	virtual bool RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr) = 0;
 
 	/**
 		Register static subcomponent info.
@@ -78,7 +78,7 @@ public:
 		\param	componentInfoPtr	static subcomponent info object used to describe subcomponent type and as factory.
 									It cannot be NULL.
 	*/
-	virtual bool RegisterSubcomponentInfo(const ::std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr) = 0;
+	virtual bool RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr) = 0;
 };
 
 

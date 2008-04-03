@@ -40,7 +40,7 @@ public:
 	const IRegistriesManager& GetRegistriesManager() const;
 
 	// reimplemented (icomp::IComponentContext)
-	virtual IComponent* GetSubcomponent(const ::std::string& componentId) const;
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 
 private:
 	typedef istd::TDelPtr<icomp::IComponent> ComponentPtr;
@@ -52,7 +52,7 @@ private:
 		ContextPtr contextPtr;
 	};
 
-	typedef ::std::map< ::std::string, ComponentInfo > ComponentMap;
+	typedef std::map< std::string, ComponentInfo > ComponentMap;
 
 	mutable ComponentMap m_componentMap;
 

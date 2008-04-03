@@ -18,7 +18,7 @@ class CVarIndex
 {
 public:
 	typedef int IndexType;
-	typedef ::std::vector<int>::iterator Iterator;
+	typedef std::vector<int>::iterator Iterator;
 
 	/**
 		Default constructor without member initialization.
@@ -114,7 +114,7 @@ public:
 	bool operator!=(const CVarIndex& index) const;
 
 private:
-	::std::vector<int> m_elements;
+	std::vector<int> m_elements;
 };
 
 

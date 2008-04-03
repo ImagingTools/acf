@@ -53,13 +53,13 @@ static const double I_BIG_EPSILON = 1.0e-8;
 /**
 	Some very small number.
 */
-#define I_EPSILON ::std::numeric_limits<double>::epsilon()
+#define I_EPSILON std::numeric_limits<double>::epsilon()
 
 
 /**
 	Infinite value.
 */
-#define I_INFINITY ::std::numeric_limits<double>::infinity()
+#define I_INFINITY std::numeric_limits<double>::infinity()
 
 
 #ifdef _DEBUG

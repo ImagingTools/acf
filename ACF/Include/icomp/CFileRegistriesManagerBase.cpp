@@ -48,8 +48,8 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistryFromFile(const istd::CSt
 // reimplemented (icomp::IRegistriesManager)
 
 const IRegistry* CFileRegistriesManagerBase::GetRegistry(
-			const ::std::string& packageId,
-			const ::std::string& componentId,
+			const std::string& packageId,
+			const std::string& componentId,
 			const IRegistry* contextPtr) const
 {
 	istd::CString path;

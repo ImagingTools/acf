@@ -24,8 +24,8 @@ public:
 				RoundingType roundingType = RT_NORMAL,
 				double scaleFactor = 1.0,
 				const istd::CRange& range = istd::CRange(
-							::std::numeric_limits<double>::min(),
-							::std::numeric_limits<double>::max()));
+							std::numeric_limits<double>::min(),
+							std::numeric_limits<double>::max()));
 
 	const istd::CRange& GetRange() const;
 	void SetRange(const istd::CRange& range);
@@ -36,8 +36,8 @@ public:
 	void SetPrecision(int precision);
 
 	// reimplemented (imath::TIValueManip)
-	virtual ::std::string GetString(const double& value) const;
-	virtual bool GetParsed(const ::std::string& text, double& result) const;
+	virtual std::string GetString(const double& value) const;
+	virtual bool GetParsed(const std::string& text, double& result) const;
 
 protected:
 	// reimplemented (imath::TIValueManip)

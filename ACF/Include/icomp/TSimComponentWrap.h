@@ -19,7 +19,7 @@ namespace icomp
 	It allows to use components directly from static linked libraries, without component framework.
 */
 template <class Base>
-class TSimComponentWrap: public TComponentWrap<Base>, protected CRegistryElement, protected IComponentContext
+class TSimComponentWrap: public TComponentWrap<Base>, protected IComponentContext
 {
 public:
 	typedef TComponentWrap<Base> BaseClass;
@@ -34,20 +34,20 @@ public:
 	/**
 		Set named reference to some component.
 	*/
-	bool SetRef(const ::std::string& referenceId, IComponent* componentPtr);
+	bool SetRef(const std::string& referenceId, IComponent* componentPtr);
 
 	/**
 		Set named attribute.
 		\param	attributeId		ID of attribute.
 		\param	attributePtr	pointer to attribute instance. It will be automatically deleted.
 	*/
-	bool SetAttr(const ::std::string& attributeId, iser::ISerializable* attributePtr);
+	bool SetAttr(const std::string& attributeId, iser::ISerializable* attributePtr);
 
 	/**
 		Set instance of simple attribute.
 	*/
 	template <class Attribute>
-	bool SetSimpleAttr(const ::std::string& attributeId, const Attribute& attribute)
+	bool SetSimpleAttr(const std::string& attributeId, const Attribute& attribute)
 	{
 		return SetAttr(attributeId, new TSimpleAttribute<Attribute>(attribute));
 	}
@@ -56,12 +56,14 @@ protected:
 	// reimplemeted (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::ISerializable* GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr = NULL) const;
-	virtual IComponent* GetSubcomponent(const ::std::string& componentId) const;
+	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr = NULL) const;
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 
 private:
-	typedef ::std::map< ::std::string, IComponent*> ComponentMap;
+	typedef std::map< std::string, IComponent*> ComponentMap;
 	ComponentMap m_componentMap;
+	
+	CRegistryElement m_registryElement;
 };
 
 
@@ -69,7 +71,7 @@ private:
 
 template <class Base>
 TSimComponentWrap<Base>::TSimComponentWrap()
-:	CRegistryElement(&InitStaticInfo(this))
+:	m_registryElement(&InitStaticInfo(this))
 {
 }
 
@@ -82,11 +84,11 @@ void TSimComponentWrap<Base>::InitComponent()
 
 
 template <class Base>
-bool TSimComponentWrap<Base>::SetRef(const ::std::string& referenceId, IComponent* componentPtr)
+bool TSimComponentWrap<Base>::SetRef(const std::string& referenceId, IComponent* componentPtr)
 {
 	I_ASSERT(componentPtr != NULL);
 
-	AttributeInfo* infoPtr = InsertAttributeInfo(referenceId, false);
+	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(referenceId, false);
 	if (infoPtr != NULL){
 		infoPtr->attributePtr.SetPtr(new CReferenceAttribute(referenceId));
 
@@ -100,11 +102,11 @@ bool TSimComponentWrap<Base>::SetRef(const ::std::string& referenceId, IComponen
 
 
 template <class Base>
-bool TSimComponentWrap<Base>::SetAttr(const ::std::string& attributeId, iser::ISerializable* attributePtr)
+bool TSimComponentWrap<Base>::SetAttr(const std::string& attributeId, iser::ISerializable* attributePtr)
 {
 	I_ASSERT(attributePtr != NULL);
 
-	AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, false);
+	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
 	if (infoPtr != NULL){
 		infoPtr->attributePtr.SetPtr(attributePtr);
 
@@ -122,7 +124,7 @@ bool TSimComponentWrap<Base>::SetAttr(const ::std::string& attributeId, iser::IS
 template <class Base>
 const IRegistryElement& TSimComponentWrap<Base>::GetRegistryElement() const
 {
-	return *this;
+	return m_registryElement;
 }
 
 
@@ -134,9 +136,9 @@ const IComponentContext* TSimComponentWrap<Base>::GetParentContext() const
 
 
 template <class Base>
-const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr) const
+const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr) const
 {
-	const AttributeInfo* infoPtr = GetAttributeInfo(attributeId);
+	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 	if (infoPtr != NULL){
 		if (realContextPtr != NULL){
 			*realContextPtr = this;
@@ -144,7 +146,7 @@ const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const ::std::st
 		return infoPtr->attributePtr.GetPtr();
 	}
 
-	const IComponentStaticInfo& componentInfo = GetComponentStaticInfo();
+	const IComponentStaticInfo& componentInfo = m_registryElement.GetComponentStaticInfo();
 	const IComponentStaticInfo::AttributeInfos& attributeInfos = componentInfo.GetAttributeInfos();
 	const IComponentStaticInfo::AttributeInfos::ValueType* attributePtr2 = attributeInfos.FindElement(attributeId);
 	if (attributePtr2 != NULL){
@@ -167,7 +169,7 @@ const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const ::std::st
 
 
 template <class Base>
-IComponent* TSimComponentWrap<Base>::GetSubcomponent(const ::std::string& componentId) const
+IComponent* TSimComponentWrap<Base>::GetSubcomponent(const std::string& componentId) const
 {
 	ComponentMap::const_iterator iter = m_componentMap.find(componentId);
 

@@ -34,7 +34,7 @@ public:
 
 	// reimplemented (isys::IFunctionsProvider)
 	virtual bool IsValid() const;
-	virtual void* GetFunction(const ::std::string& id) const;
+	virtual void* GetFunction(const std::string& id) const;
 
 private:
 	mutable QLibrary m_library;

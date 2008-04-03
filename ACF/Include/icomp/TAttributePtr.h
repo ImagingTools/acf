@@ -65,7 +65,7 @@ bool TAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttribute
 {
 	I_ASSERT(ownerPtr != NULL);
 
-	const ::std::string& attributeId = staticInfo.GetAttributeId();
+	const std::string& attributeId = staticInfo.GetAttributeId();
 	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
 	if (componentContextPtr != NULL){
 		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, realContextPtr);

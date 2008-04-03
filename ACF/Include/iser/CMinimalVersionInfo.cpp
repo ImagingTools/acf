@@ -20,7 +20,7 @@ CMinimalVersionInfo::CMinimalVersionInfo(const iser::ISerializable* serializable
 }
 
 
-bool CMinimalVersionInfo::AddId(int versionId, const ::std::string& description)
+bool CMinimalVersionInfo::AddId(int versionId, const std::string& description)
 {
 	Versions::const_iterator iter = m_versions.find(versionId);
 	if (iter != m_versions.end()){
@@ -51,7 +51,7 @@ I_DWORD CMinimalVersionInfo::GetVersion(int versionId) const
 }
 
 
-const ::std::string& CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
+const std::string& CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
 {
 	Versions::const_iterator iter = m_versions.find(versionId);
 	if (m_versions.find(versionId) != m_versions.end()){
@@ -60,7 +60,7 @@ const ::std::string& CMinimalVersionInfo::GetVersionIdDescription(int versionId)
 		return info.description;
 	}
 
-	static ::std::string description("<unregistered>");
+	static std::string description("<unregistered>");
 
 	return description;
 }
