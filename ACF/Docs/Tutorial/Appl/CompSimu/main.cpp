@@ -2,23 +2,26 @@
 
 #include "icomp/TSimComponentWrap.h"
 
+#include "iqt/CApplicationComp.h"
+#include "iqt/CSplashScreenGuiComp.h"
 #include "iqt/CLoginGuiComp.h"
 
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
-	a.setStyle("plastique");
-
-	QWidget mainWidget;
+	icomp::TSimComponentWrap<iqt::CSplashScreenGuiComp> splashScreenGui;
+	splashScreenGui.SetSimpleAttr("ImagePath", istd::CString("C:\\Work\\Projects\\QUISS\\Projects\\TCVision\\Install\\ToInstall\\QUISS\\Resources\\TCVision.l\\Splash.jpg"));
+	splashScreenGui.InitComponent();
 
 	icomp::TSimComponentWrap<iqt::CLoginGuiComp> loginGui;
-	loginGui.CreateGui(&mainWidget);
+	loginGui.InitComponent();
 
-	mainWidget.show();
-	a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
+	icomp::TSimComponentWrap<iqt::CApplicationComp> application;
+	application.SetRef("MainGui", &loginGui);
+	application.SetRef("SplashScreen", &splashScreenGui);
+	application.InitComponent();
 
-	return a.exec();
+	return application.Execute(argc, argv);
 }
 
 

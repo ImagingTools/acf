@@ -27,14 +27,32 @@ public:
 	TSimComponentWrap();
 
 	/**
+		Initialilze component after setting all its attributes and references.
+	*/
+	void InitComponent();
+
+	/**
 		Set named reference to some component.
 	*/
 	bool SetRef(const ::std::string& referenceId, IComponent* componentPtr);
+
 	/**
 		Set named attribute.
+		\param	attributeId		ID of attribute.
+		\param	attributePtr	pointer to attribute instance. It will be automatically deleted.
 	*/
 	bool SetAttr(const ::std::string& attributeId, iser::ISerializable* attributePtr);
 
+	/**
+		Set instance of simple attribute.
+	*/
+	template <class Attribute>
+	bool SetSimpleAttr(const ::std::string& attributeId, const Attribute& attribute)
+	{
+		return SetAttr(attributeId, new TSimpleAttribute<Attribute>(attribute));
+	}
+
+protected:
 	// reimplemeted (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentContext* GetParentContext() const;
@@ -53,6 +71,12 @@ template <class Base>
 TSimComponentWrap<Base>::TSimComponentWrap()
 :	CRegistryElement(&InitStaticInfo(this))
 {
+}
+
+
+template <class Base>
+void TSimComponentWrap<Base>::InitComponent()
+{
 	SetComponentContext(this);
 }
 
@@ -62,9 +86,9 @@ bool TSimComponentWrap<Base>::SetRef(const ::std::string& referenceId, IComponen
 {
 	I_ASSERT(componentPtr != NULL);
 
-	AttributeInfo* infoPtr = GetAttributeInfo(referenceId);
+	AttributeInfo* infoPtr = InsertAttributeInfo(referenceId, false);
 	if (infoPtr != NULL){
-		I_ASSERT(infoPtr->attributePtr.IsValid());
+		infoPtr->attributePtr.SetPtr(new CReferenceAttribute(referenceId));
 
 		m_componentMap[referenceId] = componentPtr;
 
@@ -80,7 +104,7 @@ bool TSimComponentWrap<Base>::SetAttr(const ::std::string& attributeId, iser::IS
 {
 	I_ASSERT(attributePtr != NULL);
 
-	AttributeInfo* infoPtr = GetAttributeInfo(attributeId, false);
+	AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, false);
 	if (infoPtr != NULL){
 		infoPtr->attributePtr.SetPtr(attributePtr);
 
@@ -113,18 +137,29 @@ template <class Base>
 const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const ::std::string& attributeId, const IComponentContext** realContextPtr) const
 {
 	const AttributeInfo* infoPtr = GetAttributeInfo(attributeId);
-
-	if (infoPtr == NULL){
-		infoPtr = (const_cast<TSimComponentWrap<Base>*>(this))->InsertAttributeInfo(attributeId, true);
-	}
-	
 	if (infoPtr != NULL){
 		if (realContextPtr != NULL){
 			*realContextPtr = this;
 		}
-
-			
 		return infoPtr->attributePtr.GetPtr();
+	}
+
+	const IComponentStaticInfo& componentInfo = GetComponentStaticInfo();
+	const IComponentStaticInfo::AttributeInfos& attributeInfos = componentInfo.GetAttributeInfos();
+	const IComponentStaticInfo::AttributeInfos::ValueType* attributePtr2 = attributeInfos.FindElement(attributeId);
+	if (attributePtr2 != NULL){
+		I_ASSERT(*attributePtr2 != NULL);
+
+		if ((*attributePtr2)->IsObligatory()){
+			const iser::ISerializable* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
+			if (defaultAttributePtr != NULL){
+				if (realContextPtr != NULL){
+					*realContextPtr = this;
+				}
+
+				return defaultAttributePtr;
+			}
+		}
 	}
 
 	return NULL;

@@ -12,12 +12,16 @@
 
 int main(int argc, char *argv[])
 {
-	icomp::TSimComponentWrap<iqt::CApplicationComp> appComp;
 	icomp::TSimComponentWrap<iqt::CSplashScreenGuiComp> splashScreenComp;
-	icomp::TSimComponentWrap<iqt::CLoginGuiComp> loginGui;
+	splashScreenComp.InitComponent();
 
+	icomp::TSimComponentWrap<iqt::CLoginGuiComp> loginGui;
+	loginGui.InitComponent();
+
+	icomp::TSimComponentWrap<iqt::CApplicationComp> appComp;
 	appComp.SetRef("SplashScreen", &splashScreenComp);
 	appComp.SetRef("MainGui", &loginGui);
+	appComp.InitComponent();
 	
 	return appComp.Execute(argc, argv);
 }
