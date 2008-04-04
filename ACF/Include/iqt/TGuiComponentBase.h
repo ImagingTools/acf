@@ -21,6 +21,8 @@ public:
 
 	TGuiComponentBase();
 
+	virtual WidgetType* GetQtWidget() const;
+
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
 };
@@ -31,6 +33,13 @@ public:
 template <class WidgetType>
 TGuiComponentBase<WidgetType>::TGuiComponentBase()
 {
+}
+
+
+template <class WidgetType>
+WidgetType* TGuiComponentBase<WidgetType>::GetQtWidget() const
+{
+	return dynamic_cast<WidgetType*>(GetWidget());
 }
 
 

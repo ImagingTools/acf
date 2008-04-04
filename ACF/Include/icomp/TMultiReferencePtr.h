@@ -105,6 +105,8 @@ TMultiReferencePtr<Interface>::TMultiReferencePtr(const TMultiReferencePtr& ptr)
 template <class Interface>
 bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 {
+	bool retVal = false;
+
 	if (!m_isInitialized && (m_realContextPtr != NULL) && BaseClass::IsValid()){
 		const IComponentContext* parentPtr = m_realContextPtr->GetParentContext();
 		if (parentPtr != NULL){
@@ -112,17 +114,23 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 
 			m_components.resize(attributesCount, NULL);
 
+			retVal = true;
+
 			for (int i = 0; i < attributesCount; ++i){
 				const std::string& componentId = BaseClass::operator[](i);
 
 				m_components[i] = dynamic_cast<Interface*>(parentPtr->GetSubcomponent(componentId));
+
+				if (m_components[i] == NULL){
+					retVal = false;
+				}
 			}
 
 			m_isInitialized = true;
 		}
 	}
 
-	return (m_componentPtr != NULL);
+	return retVal;
 }
 
 
