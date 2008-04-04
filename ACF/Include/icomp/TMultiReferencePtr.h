@@ -4,7 +4,7 @@
 
 #include "icomp/IComponentContext.h"
 #include "icomp/TMultiAttributePtr.h"
-#include "icomp/CReferenceAttribute.h"
+#include "icomp/CMultiReferenceAttribute.h"
 
 
 namespace icomp
@@ -16,7 +16,7 @@ namespace icomp
 	Don't use direct this class, use macros \c I_MULTI_REF and \c I_ASSIGN_MULTI_* instead.
 */
 template <class Interface>
-class TMultiReferencePtr: public TMultiAttributePtr<CReferenceAttribute>
+class TMultiReferencePtr: public TMultiAttributePtr<CMultiReferenceAttribute>
 {
 public:
 	typedef TMultiAttributePtr<CReferenceAttribute> BaseClass;

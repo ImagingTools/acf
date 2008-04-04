@@ -183,7 +183,9 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 				
 		ItemClass& containerItem = GetAt(index);
 
+		retVal = retVal && archive.BeginTag(itemTag);
 		retVal = retVal && SerializeItem(containerItem, archive);
+		retVal = retVal && archive.BeginTag(itemTag);
 	}
 
 	retVal = retVal && archive.EndTag(itemsTag);

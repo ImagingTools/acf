@@ -15,7 +15,7 @@ namespace icomp
 /**
 	Special attribute used to store list of referenced component ID's.
 */
-class CMultiReferenceAttribute: TMultiAttribute<std::string>
+class CMultiReferenceAttribute: public TMultiAttribute<std::string>
 {
 public:
 	typedef TMultiAttribute<std::string> BaseClass;

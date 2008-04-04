@@ -62,15 +62,15 @@ static const double I_BIG_EPSILON = 1.0e-8;
 #define I_INFINITY std::numeric_limits<double>::infinity()
 
 
-#ifdef _DEBUG
-
-
 /**
 	Automatic generation of variable names. AUTO_VARNAME2 and AUTO_VARNAME3 are helpers and are not for directly use!
 */
 #define AUTO_VARNAME(var) AUTO_VARNAME2(var, __LINE__)
 #define AUTO_VARNAME2(var, LINE_NUMBER) AUTO_VARNAME3(var, LINE_NUMBER)
 #define AUTO_VARNAME3(var, LINE_NUMBER) var##LINE_NUMBER
+
+
+#ifdef _DEBUG
 
 
 #define I_IF_DEBUG(instructions) instructions

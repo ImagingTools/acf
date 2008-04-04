@@ -58,8 +58,6 @@ bool TSerializableContainer<ItemClass, ContainerClass>::Serialize(iser::IArchive
 	for (int index = 0; index < itemCount; index++){
 		ItemClass& item = m_items.at(index);
 
-		static iser::CArchiveTag itemTag("Item", "Item data");
-
 		bool retVal = archive.BeginTag(itemTag);
 
 		retVal = retVal && SerializeItem(item, archive);
