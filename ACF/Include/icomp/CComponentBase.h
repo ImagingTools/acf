@@ -71,7 +71,7 @@ private:
 	Declaration of supported interfaces.
 */
 #define I_REGISTER_INTERFACE(InterfaceType)\
-	static icomp::TInterfaceRegistrator<InterfaceType> staticRegistrator##__LINE__(staticInfo);
+	static icomp::TInterfaceRegistrator<InterfaceType> AUTO_VARNAME(staticRegistrator)(staticInfo);
 
 /**
 	Declare user type attribute member.

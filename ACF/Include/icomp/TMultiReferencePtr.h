@@ -1,9 +1,9 @@
-#ifndef icomp_CReferencePtr_included
-#define icomp_CReferencePtr_included
+#ifndef icomp_TMultiReferencePtr_included
+#define icomp_TMultiReferencePtr_included
 
 
 #include "icomp/IComponentContext.h"
-#include "icomp/TSingleAttributePtr.h"
+#include "icomp/TMultiAttributePtr.h"
 #include "icomp/CReferenceAttribute.h"
 
 
@@ -45,7 +45,7 @@ protected:
 private:
 	const IComponentContext* m_realContextPtr;
 
-	typedef std::vector<Interface*> Components
+	typedef std::vector<Interface*> Components;
 	mutable Components m_components;
 	mutable bool m_isInitialized;
 };
@@ -77,7 +77,7 @@ bool TMultiReferencePtr<Interface>::IsValid() const
 
 
 template <class Interface>
-typename const Interface* TMultiReferencePtr<Interface>::operator[](int index) const
+typename Interface* TMultiReferencePtr<Interface>::operator[](int index) const
 {
 	I_ASSERT(index >= 0);
 
@@ -129,6 +129,6 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 }//namespace icomp
 
 
-#endif // !icomp_CReferencePtr_included
+#endif // !icomp_TMultiReferencePtr_included
 
 
