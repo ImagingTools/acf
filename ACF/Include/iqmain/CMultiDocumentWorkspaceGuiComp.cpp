@@ -133,7 +133,6 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 		}
 	}
 
-	
 	if (m_scrollingEnabledAttrPtr.IsValid()){
 		QWorkspace* workspacePtr = GetQtWidget();
 	

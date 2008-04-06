@@ -6,6 +6,7 @@
 
 
 #include "istd/IChangeable.h"
+#include "istd/TIFactory.h"
 #include "istd/CString.h"
 
 #include "imod/IModel.h"
@@ -25,9 +26,11 @@ class IDocumentTemplate;
 class IDocument: virtual public istd::IChangeable
 {
 public:
+	typedef istd::TIFactory<idoc::IDocument> IDocumentFactory;
+
 	enum ChangeFlags
 	{
-		TitleChanged
+		TitleChanged = 1
 	};
 
 	virtual istd::CString GetFileName() const = 0;

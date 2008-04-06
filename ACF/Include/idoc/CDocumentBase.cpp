@@ -161,5 +161,11 @@ imod::IObserver* CDocumentBase::GetView(int viewIndex)
 }
 
 
+bool CDocumentBase::HasView(const imod::IObserver* /*viewPtr*/)
+{
+	return false;
+}
+
+
 } // namespace idoc
 

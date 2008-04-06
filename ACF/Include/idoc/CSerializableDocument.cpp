@@ -20,7 +20,9 @@ void CSerializableDocument::SetContent(imod::IModel* modelPtr)
 	
 	I_ASSERT(serializablePtr != NULL);
 
-	modelPtr->AttachObserver(&m_undoManager);
+	if (modelPtr->AttachObserver(&m_undoManager)){
+		m_modelPtr.SetPtr(modelPtr);
+	}
 }
 
 
@@ -28,13 +30,13 @@ void CSerializableDocument::SetContent(imod::IModel* modelPtr)
 
 bool CSerializableDocument::IsModified() const
 {
-
+	return m_undoManager.IsUndoAvailable();
 }
 
 
 imod::IUndoManager* CSerializableDocument::GetUndoManager() const
 {
-	return m_undoManager;
+	return &(const_cast<CSerializableDocument*>(this))->m_undoManager;
 }
 
 

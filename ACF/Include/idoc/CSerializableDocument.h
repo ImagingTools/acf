@@ -4,24 +4,23 @@
 
 #include "imod/CSerializedUndoManager.h"
 
-#include "idoc/CDocument.h"
+#include "idoc/CDocumentBase.h"
 
 
 namespace idoc
 {		
 
 
-class CSerializableDocument: public idoc::CDocument
+class CSerializableDocument: public idoc::CDocumentBase
 {
 public:
-	CSerializableDocument();
-	virtual ~CSerializableDocument();
+	typedef CDocumentBase BaseClass;
 	
 	// reimplemented (idoc::CDocument)
 	virtual void SetContent(imod::IModel* modelPtr);
 
 	// reimplemented (idoc::IDocument)
-	virtual bool IsModified() const = 0;
+	virtual bool IsModified() const;
 	virtual imod::IUndoManager* GetUndoManager() const;
 
 private:

@@ -184,9 +184,7 @@ bool CDocumentManagerBase::OnFileClose()
 		}
 	}
 
-
 	return retVal;
-
 }
 
 
@@ -212,8 +210,8 @@ std::string CDocumentManagerBase::GetTemplateIdFromFile(const istd::CString& fil
 		idoc::IDocumentTemplate* documentTemplatePtr = iter->second;
 		istd::CStringList extensions = documentTemplatePtr->GetFileExtensions();
 		
-		istd::CStringList::iterator found =  find(extensions.begin(), extensions.end(), fileExtension);
-		istd::CStringList::iterator found1 =  find(extensions.begin(), extensions.end(), fileExtensionUpper);
+		istd::CStringList::iterator found =  std::find(extensions.begin(), extensions.end(), fileExtension);
+		istd::CStringList::iterator found1 =  std::find(extensions.begin(), extensions.end(), fileExtensionUpper);
 		if (found != extensions.end() || found1 != extensions.end()){
 			return iter->first;
 		}

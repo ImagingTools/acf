@@ -46,6 +46,7 @@ public:
 	virtual void RemoveView(imod::IObserver* viewPtr);
 	virtual int GetViewCount();
 	virtual imod::IObserver* GetView(int viewIndex);
+	virtual bool HasView(const imod::IObserver* viewPtr);
 
 protected:
 	typedef istd::TDelPtr<imod::IModel> ModelPtr;

@@ -74,6 +74,10 @@ void TDocumentTemplateCompWrap<DocumentTemplateImpl>::OnComponentCreated()
 	if (m_documentFactoryCompPtr.IsValid()){
 		RegisterDocumentFactory(m_documentFactoryCompPtr.GetPtr());
 	}
+
+	if (m_viewFactoryCompPtr.IsValid()){
+		RegisterViewFactory(m_viewFactoryCompPtr.GetPtr());
+	}
 }
 
 

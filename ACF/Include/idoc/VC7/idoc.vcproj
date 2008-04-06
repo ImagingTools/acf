@@ -245,6 +245,9 @@
 				RelativePath="..\CMultiDocumentTemplate.cpp">
 			</File>
 			<File
+				RelativePath="..\CSerializableDocument.cpp">
+			</File>
+			<File
 				RelativePath="..\CSingleDocumentTemplate.cpp">
 			</File>
 		</Filter>
@@ -267,6 +270,9 @@
 				RelativePath="..\CMultiDocumentTemplate.h">
 			</File>
 			<File
+				RelativePath="..\CSerializableDocument.h">
+			</File>
+			<File
 				RelativePath="..\CSingleDocumentTemplate.h">
 			</File>
 			<File
@@ -280,6 +286,12 @@
 			</File>
 			<File
 				RelativePath="..\IDocumentTemplate.h">
+			</File>
+			<File
+				RelativePath="..\TDocumentFactoryComp.h">
+			</File>
+			<File
+				RelativePath="..\TDocumentTemplateCompWrap.h">
 			</File>
 		</Filter>
 	</Files>

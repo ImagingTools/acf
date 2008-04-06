@@ -63,7 +63,7 @@ idoc::IDocument* CDocumentTemplateBase::CreateDocument(const std::string& docume
 		return NULL;
 	}
 
-	idoc::IDocument* documentPtr = m_documentFactoryPtr->CreateInstance(documentTypeId);
+	idoc::IDocument* documentPtr = m_documentFactoryPtr->CreateInstance();
 	if (documentPtr == NULL){
 		return NULL;
 	}

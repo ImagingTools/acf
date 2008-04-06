@@ -176,7 +176,8 @@ bool TSimComponentWrap<Base>::InsertMultiRef(const std::string& referenceId, ICo
 		CMultiReferenceAttribute* multiAttrPtr = dynamic_cast<CMultiReferenceAttribute*>(attributePtr.GetPtr());
 		I_ASSERT(multiAttrPtr != NULL);	// attribute type was correct, casting must be correct
 
-		std::string attributeId = referenceId + '#' + ('0' + multiAttrPtr->GetValuesCount());
+		istd::CString indexString = W("0") + istd::CString::FromNumber(multiAttrPtr->GetValuesCount());
+		std::string attributeId = referenceId + '#' + indexString.ToString();
 
 		multiAttrPtr->InsertValue(attributeId);
 

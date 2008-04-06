@@ -95,7 +95,7 @@ bool TModelEditorBase<InterfaceClass>::IsModelChangeable() const
 // reimplemented (TSingleModelObserverBase<InterfaceClass>)
 
 template <class InterfaceClass>
-void TModelEditorBase<InterfaceClass>::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void TModelEditorBase<InterfaceClass>::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){

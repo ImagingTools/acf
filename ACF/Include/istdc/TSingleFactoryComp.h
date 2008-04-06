@@ -60,12 +60,10 @@ typename istd::TIFactory<InterfaceType>::KeyList TSingleFactoryComp<InterfaceTyp
 template <class InterfaceType, class ImplementationClass>
 InterfaceType* TSingleFactoryComp<InterfaceType, ImplementationClass>::CreateInstance(const std::string& keyId) const
 {
-	if (m_keyAttrPtr.IsValid()){
-		if (keyId.empty() || (keyId == m_keyAttrPtr->GetValue().ToString())){
-			return new ImplementationClass;
-		}
+	if (keyId.empty() || (m_keyAttrPtr.IsValid() && keyId == m_keyAttrPtr->GetValue().ToString())){
+		return new ImplementationClass;
 	}
-
+	
 	return NULL;
 }
 
