@@ -552,7 +552,7 @@ void CMainWindowGuiComp::SetupMenuComponents(QMainWindow& /*mainWindow*/)
 	m_quitAction = new QAction(tr("&Quit"), m_fileMenu);
 	m_fileMenu->addSeparator();
 	m_fileMenu->addAction(m_quitAction);
-	m_quitAction->setIcon(QIcon(QString::fromUtf8(":/Resources/Icons/Exit.png")));
+	m_quitAction->setIcon(QIcon(QString::fromUtf8(":/Resources/Icons/exit.png")));
 	connect(m_quitAction, SIGNAL(activated()), this, SLOT(OnQuit()));
 }
 
@@ -577,7 +577,7 @@ void CMainWindowGuiComp::SetupFileMenu()
 		m_fileMenu->addAction(m_newAction);
 		m_fileMenu->addSeparator();
 		connect(m_newAction, SIGNAL(activated()), this, SLOT(OnNew()));
-		m_newAction->setIcon(QIcon(QString::fromUtf8(":/Resources/Resources/Icons/document_128.png")));
+		m_newAction->setIcon(QIcon(QString::fromUtf8(":/Resources/Icons/document_128.png")));
 		m_newAction->setShortcut(tr("Ctrl+N"));
 		m_standardToolBar->addAction(m_newAction);
 
