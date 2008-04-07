@@ -37,11 +37,17 @@ int main(int argc, char *argv[])
 	// document factory:
 	typedef idoc::TDocumentFactoryComp<idoc::CSerializableDocument> DocumentFactoryComp;
 	icomp::TSimComponentWrap<DocumentFactoryComp> documentFactoryComp;
-	documentFactoryComp.SetRef("ModelFactory", &modelFactoryComp);
-	documentFactoryComp.InitComponent();
 
+	// document template:
 	typedef idoc::TDocumentTemplateCompWrap<idoc::CMultiDocumentTemplate> DocumentTemplateComp;
 	icomp::TSimComponentWrap<DocumentTemplateComp> documentTemplateComp;
+	
+	// init document factory:
+	documentFactoryComp.SetRef("ModelFactory", &modelFactoryComp);
+	documentFactoryComp.SetRef("DocumentTemplate", &documentTemplateComp);
+	documentFactoryComp.InitComponent();
+
+	// init document tempalte:
 	documentTemplateComp.SetRef("DocumentFactory", &documentFactoryComp);
 	documentTemplateComp.SetRef("ViewFactory", &viewFactoryComp);
 	documentTemplateComp.InitComponent();
