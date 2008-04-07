@@ -27,7 +27,7 @@ void CHierarchicalOperator::AddChild(iproc::IOperator* operatorPtr)
 }
 
 
-// reimplemented (ibase::IMessageManager)
+// reimplemented (ibase::IMessageContainer)
 
 int CHierarchicalOperator::GetWorstCategory() const
 {

@@ -23,6 +23,7 @@ class CJob:	public iproc::IJob,
 {	
 public:
 	typedef ibase::TFactorisableContainer<iproc::IOperator> BaseClass;
+	typedef iproc::CHierarchicalOperator BaseClass2;
 
 	CJob();
 	virtual ~CJob();

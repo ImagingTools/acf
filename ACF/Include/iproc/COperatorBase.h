@@ -11,7 +11,7 @@
 #include "ibase/THierarchicalBase.h"
 #include "ibase/TEnableableWrap.h"
 #include "ibase/TNamedBase.h"
-#include "ibase/TMessageManagerBase.h"
+#include "ibase/TMessageContainerBase.h"
 
 
 namespace iproc
@@ -25,7 +25,7 @@ namespace iproc
 	It is advisable to use this implementation by programming of the own operators. 
 */
 
-class COperatorBase:	public ibase::CMessageManager,
+class COperatorBase:	public ibase::CMessageContainer,
 						public ibase::TEnableableWrap<
 								ibase::THierarchicalBase<
 									ibase::TNamedBase<iproc::IOperator> 

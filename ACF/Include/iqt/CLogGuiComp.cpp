@@ -11,7 +11,7 @@ namespace iqt
 
 // public methods
 
-// reimplemented (ibase::IMessageManager)
+// reimplemented (ibase::IMessageContainer)
 
 void CLogGuiComp::AddMessage(ibase::IMessage* messagePtr)
 {

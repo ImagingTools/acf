@@ -144,7 +144,7 @@
 				RelativePath="..\IMessage.h">
 			</File>
 			<File
-				RelativePath="..\IMessageManager.h">
+				RelativePath="..\IMessageContainer.h">
 			</File>
 			<File
 				RelativePath="..\INamedObject.h">
@@ -165,7 +165,7 @@
 				RelativePath="..\THierarchicalBase.h">
 			</File>
 			<File
-				RelativePath="..\TMessageManagerBase.h">
+				RelativePath="..\TMessageContainerBase.h">
 			</File>
 			<File
 				RelativePath="..\TNamedBase.h">

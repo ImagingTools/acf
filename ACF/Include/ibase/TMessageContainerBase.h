@@ -1,5 +1,5 @@
-#ifndef ibase_TMessageManagerBase_included
-#define ibase_TMessageManagerBase_included
+#ifndef ibase_TMessageContainerBase_included
+#define ibase_TMessageContainerBase_included
 
 
 #include "istd/TPointerVector.h"
@@ -8,20 +8,20 @@
 #include "iser/CArchiveTag.h"
 
 #include "ibase/IMessage.h"
-#include "ibase/IMessageManager.h"
+#include "ibase/IMessageContainer.h"
 
 
 namespace ibase
 {		
 
 template <class BaseClass>
-class TMessageManagerBase:	public BaseClass
+class TMessageContainerBase:	public BaseClass
 {
 public:
-	TMessageManagerBase();
-	virtual ~TMessageManagerBase();
+	TMessageContainerBase();
+	virtual ~TMessageContainerBase();
 
-	// pseudo-reimplemented (ibase::IMessageManager)
+	// pseudo-reimplemented (ibase::IMessageContainer)
 	virtual int GetWorstCategory() const;
 	virtual int GetMessageCount(int messageCategory = -1) const;
 	virtual const ibase::IMessage* GetMessageFrom(int index, int messageCategory = -1) const;
@@ -42,30 +42,30 @@ protected:
 
 
 template <class BaseClass>
-TMessageManagerBase<BaseClass>::TMessageManagerBase()
+TMessageContainerBase<BaseClass>::TMessageContainerBase()
 {
 	m_maxCategory = 0;
 }
 
 
 template <class BaseClass>
-TMessageManagerBase<BaseClass>::~TMessageManagerBase()
+TMessageContainerBase<BaseClass>::~TMessageContainerBase()
 {
 	ClearMessages();
 }
 
 
-// pseudo-reimplemented (ibase::IMessageManager)
+// pseudo-reimplemented (ibase::IMessageContainer)
 
 template <class BaseClass>
-int TMessageManagerBase<BaseClass>::GetWorstCategory() const
+int TMessageContainerBase<BaseClass>::GetWorstCategory() const
 {
 	return m_maxCategory;
 }
 
 
 template <class BaseClass>
-int TMessageManagerBase<BaseClass>::GetMessageCount(int messageCategory) const
+int TMessageContainerBase<BaseClass>::GetMessageCount(int messageCategory) const
 {
 	int count = 0;
 	for (int index = 0; index < m_messages.GetCount(); index++){
@@ -82,7 +82,7 @@ int TMessageManagerBase<BaseClass>::GetMessageCount(int messageCategory) const
 
 
 template <class BaseClass>
-const ibase::IMessage* TMessageManagerBase<BaseClass>::GetMessageFrom(int index, int messageCategory) const
+const ibase::IMessage* TMessageContainerBase<BaseClass>::GetMessageFrom(int index, int messageCategory) const
 {
 	int count = 0;
 	for (int messageIndex = 0; messageIndex < m_messages.GetCount(); messageIndex++){
@@ -103,7 +103,7 @@ const ibase::IMessage* TMessageManagerBase<BaseClass>::GetMessageFrom(int index,
 
 
 template <class BaseClass>
-void TMessageManagerBase<BaseClass>::AddMessage(ibase::IMessage* messagePtr)
+void TMessageContainerBase<BaseClass>::AddMessage(ibase::IMessage* messagePtr)
 {
 	I_ASSERT(messagePtr != NULL);
 
@@ -116,7 +116,7 @@ void TMessageManagerBase<BaseClass>::AddMessage(ibase::IMessage* messagePtr)
 
 
 template <class BaseClass>
-void TMessageManagerBase<BaseClass>::ClearMessages()
+void TMessageContainerBase<BaseClass>::ClearMessages()
 {
 	m_messages.Reset();
 
@@ -127,7 +127,7 @@ void TMessageManagerBase<BaseClass>::ClearMessages()
 // reimplemented (iser::ISerializable)
 
 template <class BaseClass>
-bool TMessageManagerBase<BaseClass>::Serialize(iser::IArchive& archive)
+bool TMessageContainerBase<BaseClass>::Serialize(iser::IArchive& archive)
 {
 	if (!archive.IsStoring()){
 		return false;
@@ -161,7 +161,7 @@ bool TMessageManagerBase<BaseClass>::Serialize(iser::IArchive& archive)
 // protected static methods
 
 template <class BaseClass>
-int TMessageManagerBase<BaseClass>::SubstractMask(int category)
+int TMessageContainerBase<BaseClass>::SubstractMask(int category)
 {
 	category = category & ~ibase::IMessage::DebugMask;
 	category = category & ~ibase::IMessage::SystemMask;
@@ -172,11 +172,11 @@ int TMessageManagerBase<BaseClass>::SubstractMask(int category)
 
 
 
-typedef ibase::TMessageManagerBase<ibase::IMessageManager> CMessageManager;
+typedef ibase::TMessageContainerBase<ibase::IMessageContainer> CMessageContainer;
 
 
 } // namespace ibase
 
 
-#endif // !ibase_TMessageManagerBase_included
+#endif // !ibase_TMessageContainerBase_included
 

@@ -10,7 +10,7 @@
 #include "iproc/IProgressInfo.h"
 #include "iproc/IProgressEventHandler.h"
 
-#include "ibase/IMessageManager.h"
+#include "ibase/IMessageContainer.h"
 
 
 namespace iproc

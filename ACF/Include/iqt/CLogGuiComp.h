@@ -5,8 +5,8 @@
 #include <QMutex>
 
 
-#include "ibase/IMessageManager.h"
-#include "ibase/TMessageManagerBase.h"
+#include "ibase/IMessageContainer.h"
+#include "ibase/TMessageContainerBase.h"
 
 #include "iser/IFileSerializer.h"
 
@@ -23,13 +23,13 @@ namespace iqt
 
 class CLogGuiComp:
 	public iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp>,
-	public ibase::CMessageManager
+	public ibase::CMessageContainer
 {
 	Q_OBJECT
 
 public:
 	typedef iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp> BaseClass;
-	typedef ibase::CMessageManager BaseClass2;
+	typedef ibase::CMessageContainer BaseClass2;
 
 	enum
 	{
@@ -38,7 +38,7 @@ public:
 		TextColumn = 2
 	};
 
-	// reimplemented (ibase::IMessageManager)
+	// reimplemented (ibase::IMessageContainer)
 	virtual void AddMessage(ibase::IMessage* messagePtr);
 
 protected:

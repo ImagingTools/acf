@@ -102,11 +102,11 @@ bool CBinaryWriteArchiveBase::Process(double& value)
 
 bool CBinaryWriteArchiveBase::Process(std::string& value)
 {			
-	int size = value.size() * sizeof(char);
+	int stringLength = value.size();
 
-	bool retVal = Process(size);
+	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.c_str(), size);
+	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * sizeof(char));
 
 	return retVal;
 }
@@ -114,11 +114,11 @@ bool CBinaryWriteArchiveBase::Process(std::string& value)
 
 bool CBinaryWriteArchiveBase::Process(istd::CString& value)
 {
-	int size = value.size() * sizeof(wchar_t);
+	int stringLength = value.size();
 
-	bool retVal = Process(size);
+	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.c_str(), size);	
+	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * sizeof(wchar_t));	
 
 	return retVal;
 }

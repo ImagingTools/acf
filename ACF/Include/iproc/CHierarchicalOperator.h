@@ -19,7 +19,7 @@ public:
 
 	virtual void AddChild(iproc::IOperator* operatorPtr);
 
-	// reimplemented (ibase::IMessageManager)
+	// reimplemented (ibase::IMessageContainer)
 	virtual int GetWorstCategory() const;
 
 	// reimplemented (iproc::IOperator)

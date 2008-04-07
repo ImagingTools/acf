@@ -225,15 +225,7 @@ bool TFactorisableContainer<InterfaceClass>::SerializeItem(ItemClass& item, iser
 {
 	iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(item.first.GetPtr());
 	if (serializablePtr != NULL){
-		static iser::CArchiveTag itemTag("Item", "Item data");
-
-		bool retVal = archive.BeginTag(itemTag);
-
-		retVal = retVal && serializablePtr->Serialize(archive);
-
-		retVal = retVal && archive.EndTag(itemTag);
-
-		return retVal;
+		return serializablePtr->Serialize(archive);
 	}
 
 	return false;

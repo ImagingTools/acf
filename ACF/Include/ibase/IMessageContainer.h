@@ -1,5 +1,5 @@
-#ifndef ibase_IMessageManager_included
-#define ibase_IMessageManager_included
+#ifndef ibase_IMessageContainer_included
+#define ibase_IMessageContainer_included
 
 
 #include "ibase/IMessage.h"
@@ -15,7 +15,7 @@ namespace ibase
 
 /**
 */
-class IMessageManager: virtual public iser::ISerializable
+class IMessageContainer: virtual public iser::ISerializable
 {
 public:
 	/**
@@ -53,5 +53,5 @@ public:
 } // namespace ibase
 
 
-#endif // !ibase_IMessageManager_included
+#endif // !ibase_IMessageContainer_included
 

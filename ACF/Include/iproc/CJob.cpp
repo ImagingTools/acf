@@ -77,8 +77,10 @@ bool CJob::Serialize(iser::IArchive& archive)
 
 	bool retVal = archive.BeginTag(jobTag);
 
+	retVal = retVal && SerializeName(archive);
+	
 	retVal = retVal && BaseClass::Serialize(archive);
-
+	
 	retVal = retVal && archive.EndTag(jobTag);
 
 	return retVal;

@@ -6,7 +6,7 @@ namespace iproc
 {
 
 
-const ibase::IMessageManager* CProcessingControllerBase::GetLog() const
+const ibase::IMessageContainer* CProcessingControllerBase::GetLog() const
 {
 	iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetObjectPtr());
 
