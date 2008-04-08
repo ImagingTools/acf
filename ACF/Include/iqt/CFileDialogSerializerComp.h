@@ -26,16 +26,16 @@ public:
 	I_END_COMPONENT
 
 	// reimplemented (iser::IFileSerializer)
-	virtual int LoadFromFile(iser::ISerializable& data, const istd::CString& fileName = istd::CString());
-	virtual int SaveToFile(iser::ISerializable& data, const istd::CString& fileName = istd::CString());
+	virtual int LoadFromFile(iser::ISerializable& data, const istd::CString& filePath = istd::CString()) const;
+	virtual int SaveToFile(const iser::ISerializable& data, const istd::CString& filePath = istd::CString()) const;
 	virtual const istd::CString& GetLastSaveFileName() const;
 	virtual const istd::CString& GetLastOpenFileName() const;
 
 protected:
-	virtual QString GetOpenFileName(const istd::CString& fileName) const;
-	virtual QString GetSaveFileName(const istd::CString& fileName) const;
+	virtual QString GetOpenFileName(const istd::CString& filePath) const;
+	virtual QString GetSaveFileName(const istd::CString& filePath) const;
 
-	iser::IFileSerializer* GetSerializerFor(const QString& fileName) const;
+	iser::IFileSerializer* GetSerializerFor(const QString& filePath) const;
 
 protected:
 	I_MULITREF(iser::IFileSerializer, m_serializersCompPtr);

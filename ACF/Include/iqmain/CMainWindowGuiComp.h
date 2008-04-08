@@ -77,7 +77,7 @@ public:
 
 protected:
 	virtual void OnDocumentCountChanged(int documentCount);
-	virtual void OnActiveDocumentChanged(idoc::IDocument* activeDocumentPtr);
+	virtual void OnActiveDocumentChanged(imod::IModel* activeDocumentPtr);
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -93,8 +93,8 @@ protected slots:
 	void OnOpen();
 	void OnSave();
 	void OnSaveAs();
-	void OnNewDocument(const QString& documentId);
-	void OnOpenDocument(const QString& documentId);
+	void OnNewDocument(const QString& documentTypeId);
+	void OnOpenDocument(const std::string* documentTypeIdPtr = NULL);
 	void OnQuit();
 	void OnUndo();
 	void OnRedo();
@@ -104,7 +104,7 @@ protected slots:
 	void OnLanguageSelected(QAction* a); 
 	void OnStyleSelected(QAction* a);
 
-private:
+protected:
 	void SetupMainWindow(QMainWindow& mainWindow);
 	void CreateMenuComponents(QMainWindow& mainWindow);
 	void SetupMenuComponents(QMainWindow& mainWindow);
@@ -118,7 +118,7 @@ private:
 	bool HasDocumentTemplate() const;
 	void UpdateUndoMenu();
 
-protected:
+private:
 	QMenuBar* m_menuBar;
 	QMenu* m_fileMenu;
 	QMenu* m_editMenu;

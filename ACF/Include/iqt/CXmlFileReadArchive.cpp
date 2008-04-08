@@ -12,21 +12,21 @@ namespace iqt
 
 
 CXmlFileReadArchive::CXmlFileReadArchive(
-			const istd::CString& fileName,
+			const istd::CString& filePath,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	m_serializeHeader(serializeHeader),
 	m_rootTag(rootTag)
 {
-	if (!fileName.IsEmpty()){
-		OpenDocument(fileName);
+	if (!filePath.IsEmpty()){
+		OpenDocument(filePath);
 	}
 }
 
 
-bool CXmlFileReadArchive::OpenDocument(const istd::CString& fileName)
+bool CXmlFileReadArchive::OpenDocument(const istd::CString& filePath)
 {
-	QFile file(iqt::GetQString(fileName));
+	QFile file(iqt::GetQString(filePath));
 	if (!file.open(QIODevice::ReadOnly)){
 		return false;
 	}

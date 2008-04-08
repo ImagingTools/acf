@@ -7,10 +7,8 @@
 #include <QFrame>
 #include <QStyleFactory>
 
-
+#include "imod/IModel.h"
 #include "imod/IObserver.h"
-
-#include "idoc/IDocument.h"
 
 #include "iqmain/CMainWindowGuiComp.h"
 
@@ -154,15 +152,17 @@ void CMainWindowGuiComp::OnDocumentCountChanged(int currentCount)
 }
 
 
-void CMainWindowGuiComp::OnActiveDocumentChanged(idoc::IDocument* activeDocumentPtr)
+void CMainWindowGuiComp::OnActiveDocumentChanged(imod::IModel* /*activeDocumentPtr*/)
 {
+	// TODO: implement new concept of UNDO manager connection.
+/*
 	if (activeDocumentPtr != NULL){
 		m_activeUndoManagerPtr = activeDocumentPtr->GetUndoManager();
 	}
 
 	UpdateUndoMenu();
+*/
 }
-
 
 
 // reimplemented (iqt::TGuiComponentBase)
@@ -266,14 +266,21 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 	if ((updateFlags & idoc::IDocumentManager::DocumentCountChanged) != 0){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
-			OnDocumentCountChanged(documentManagerPtr->GetDocumentCount());
+			OnDocumentCountChanged(documentManagerPtr->GetDocumentsCount());
 		}
 	}
 
 	if ((updateFlags & idoc::IDocumentManager::DocumentActivationChanged) != 0){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
-			OnActiveDocumentChanged(documentManagerPtr->GetActiveDocument());
+			imod::IModel* documentPtr = NULL;
+
+			istd::IPolymorphic* activeViewPtr = documentManagerPtr->GetActiveView();
+			if (activeViewPtr != NULL){
+				documentPtr = documentManagerPtr->GetDocumentFromView(*activeViewPtr);
+			}
+
+			OnActiveDocumentChanged(documentPtr);
 		}
 	}
 }
@@ -292,35 +299,43 @@ void CMainWindowGuiComp::OnFileNewAction(QAction* activeAction)
 void CMainWindowGuiComp::OnFileOpenAction(QAction* activeAction)
 {
 	if (activeAction != NULL){
-		OnOpenDocument(activeAction->text());
+		std::string documentTypeId = activeAction->text().toStdString();
+
+		OnOpenDocument(&documentTypeId);
 	}
 }
 
 
 void CMainWindowGuiComp::OnNew()
 {
-	if (m_documentManagerCompPtr.IsValid() && m_documentManagerCompPtr->GetDocumentIds().size() > 0){
-		istd::CString documentId = m_documentManagerCompPtr->GetDocumentIds().at(0);
+	if (!m_documentManagerCompPtr.IsValid()){
+		return;
+	}
 
-		OnNewDocument(iqt::GetQString(documentId));
+	const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+	if (templatePtr == NULL){
+		return;
+	}
+
+	idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
+	if (!ids.empty()){
+		const std::string& documentTypeId = ids.front();
+
+		OnNewDocument(iqt::GetQString(documentTypeId));
 	}
 }
 
 
 void CMainWindowGuiComp::OnOpen()
 {
-	if (m_documentManagerCompPtr.IsValid() && m_documentManagerCompPtr->GetDocumentIds().size() > 0){
-		istd::CString documentId = m_documentManagerCompPtr->GetDocumentIds().at(0);
-
-		OnOpenDocument(iqt::GetQString(documentId));
-	}
+	OnOpenDocument(NULL);
 }
 
 
 void CMainWindowGuiComp::OnSave()
 {
 	if (m_documentManagerCompPtr.IsValid()){
-		if( !m_documentManagerCompPtr->OnFileSave()){
+		if (!m_documentManagerCompPtr->FileSave()){
 			QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
 		}
 	}
@@ -330,7 +345,7 @@ void CMainWindowGuiComp::OnSave()
 void CMainWindowGuiComp::OnSaveAs()
 {
 	if (m_documentManagerCompPtr.IsValid()){
-		if( !m_documentManagerCompPtr->OnFileSaveAs()){
+		if (!m_documentManagerCompPtr->FileSave(true)){
 			QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
 		}
 	}
@@ -340,7 +355,7 @@ void CMainWindowGuiComp::OnSaveAs()
 void CMainWindowGuiComp::OnNewDocument(const QString& documentFactoryId)
 {
 	if (m_documentManagerCompPtr.IsValid()){
-		idoc::IDocument* document = m_documentManagerCompPtr->OnFileNew(documentFactoryId.toStdString());
+		imod::IModel* document = m_documentManagerCompPtr->FileNew(documentFactoryId.toStdString());
 		if (document == NULL){
 			QMessageBox::warning(GetWidget(), "", tr("Document could not be created"));
 			return;
@@ -349,10 +364,10 @@ void CMainWindowGuiComp::OnNewDocument(const QString& documentFactoryId)
 }
 
 
-void CMainWindowGuiComp::OnOpenDocument(const QString& documentFactoryId)
+void CMainWindowGuiComp::OnOpenDocument(const std::string* documentTypeIdPtr)
 {
 	if (m_documentManagerCompPtr.IsValid()){
-		bool result = m_documentManagerCompPtr->OnFileOpen(iqt::GetCString(documentFactoryId).ToString());
+		bool result = m_documentManagerCompPtr->FileOpen(documentTypeIdPtr);
 		if (!result){
 			QMessageBox::warning(GetWidget(), "", tr("Document could not be opened"));
 			return;
@@ -421,7 +436,7 @@ void CMainWindowGuiComp::OnTileHorizontally()
 		return;
 	}
 
-	int documentCount = m_documentManagerCompPtr->GetDocumentCount();
+	int documentCount = m_documentManagerCompPtr->GetDocumentsCount();
 	if (!documentCount){
 		return;
 	}
@@ -439,7 +454,7 @@ void CMainWindowGuiComp::OnTileHorizontally()
 	int y = 0;
 
 	for (int documentIndex = 0; documentIndex < documentCount; documentIndex++){
-		idoc::IDocument* document = m_documentManagerCompPtr->GetDocument(documentIndex);
+		imod::IModel* document = m_documentManagerCompPtr->GetDocumentFromView(documentIndex);
 		if (document != NULL){
 			QWidget* window = dynamic_cast<QWidget*>(m_documentManagerCompPtr->GetView(*document));
 			if (window != NULL){
@@ -575,19 +590,20 @@ void CMainWindowGuiComp::SetupMenuComponents(QMainWindow& /*mainWindow*/)
 
 void CMainWindowGuiComp::SetupFileMenu()
 {
-	if (!HasDocumentTemplate()){
-		return;
-	}
-
 	I_ASSERT(m_documentManagerCompPtr.IsValid());
 
 	if (!m_documentManagerCompPtr.IsValid()){
 		return;
 	}
 
-	istd::CStringList templateIds = m_documentManagerCompPtr->GetDocumentIds();
+	const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+	if (templatePtr == NULL){
+		return;
+	}
 
-	bool isSingleFileAction = (templateIds.size() == 1);
+	idoc::IDocumentTemplate::Ids documentTypeIds = templatePtr->GetDocumentTypeIds();
+
+	bool isSingleFileAction = (documentTypeIds.size() == 1);
 	if (isSingleFileAction){
 		m_newAction = new QAction(tr("&New"), m_fileMenu);
 		m_fileMenu->addAction(m_newAction);
@@ -622,9 +638,10 @@ void CMainWindowGuiComp::SetupFileMenu()
 
 		m_newMenu->clear();
 		m_openMenu->clear();
-		istd::CStringList mainMenues = m_documentManagerCompPtr->GetDocumentIds();
-		for (int menuIndex = 0; menuIndex < int(mainMenues.size()); menuIndex++){
-			QString actionName = iqt::GetQString(mainMenues.at(menuIndex).c_str());
+
+		int idsCount = int(documentTypeIds.size());
+		for (int menuIndex = 0; menuIndex < idsCount; menuIndex++){
+			QString actionName = QString(documentTypeIds[menuIndex].c_str());
 			QAction* newAction = new QAction(tr(actionName.toAscii()), this);
 			m_fileMenu->addAction(newAction);
 
@@ -772,8 +789,13 @@ bool CMainWindowGuiComp::HasDocumentTemplate() const
 		return false;
 	}
 
-	istd::CStringList templateIds = m_documentManagerCompPtr->GetDocumentIds();
-	if (!templateIds.size()){
+	const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+	if (templatePtr == NULL){
+		return false;
+	}
+
+	idoc::IDocumentTemplate::Ids documentTypeIds = templatePtr->GetDocumentTypeIds();
+	if (!documentTypeIds.size()){
 		return false;
 	}
 
@@ -796,4 +818,5 @@ void CMainWindowGuiComp::UpdateUndoMenu()
 
 
 } // namespace iqmain
+
 

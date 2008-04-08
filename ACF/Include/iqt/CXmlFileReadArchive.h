@@ -20,11 +20,11 @@ class CXmlFileReadArchive: public iser::CReadArchiveBase, public iser::CXmlDocum
 {
 public:
 	CXmlFileReadArchive(
-				const istd::CString& fileName = "",
+				const istd::CString& filePath = "",
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
 
-	bool OpenDocument(const istd::CString& fileName);
+	bool OpenDocument(const istd::CString& filePath);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;

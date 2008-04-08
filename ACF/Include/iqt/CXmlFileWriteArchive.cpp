@@ -12,7 +12,7 @@ namespace iqt
 
 
 CXmlFileWriteArchive::CXmlFileWriteArchive(
-			const istd::CString& fileName,
+			const istd::CString& filePath,
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
@@ -21,8 +21,8 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 	m_rootTag(rootTag),
 	m_isSeparatorNeeded(false)
 {
-	if (!fileName.empty()){
-		OpenDocument(fileName);
+	if (!filePath.empty()){
+		OpenDocument(filePath);
 	}
 }
 
@@ -47,11 +47,11 @@ bool CXmlFileWriteArchive::Flush()
 }
 
 
-bool CXmlFileWriteArchive::OpenDocument(const istd::CString& fileName)
+bool CXmlFileWriteArchive::OpenDocument(const istd::CString& filePath)
 {
 	bool retVal = true;
 
-	m_file.setFileName(iqt::GetQString(fileName));
+	m_file.setFileName(iqt::GetQString(filePath));
 	m_file.open(QIODevice::WriteOnly);
 
 	m_document.clear();

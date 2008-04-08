@@ -15,14 +15,14 @@ class IFileEngine: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		This function loads data \c data from file \c fileName.
+		This function loads data \c data from file \c filePath.
 	*/
-	virtual bool Load(IPolymorphic& data, const istd::CString& fileName) const = 0;
+	virtual bool Load(IPolymorphic& data, const istd::CString& filePath) const = 0;
 
 	/**
-		This function saves data \c data to file \c fileName.
+		This function saves data \c data to file \c filePath.
 	*/
-	virtual bool Save(IPolymorphic& data, const istd::CString& fileName) const = 0;
+	virtual bool Save(IPolymorphic& data, const istd::CString& filePath) const = 0;
 };
 
 

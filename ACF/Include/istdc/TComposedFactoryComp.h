@@ -11,15 +11,14 @@ namespace istdc
 {
 
 
-template <class InterfaceClass>
-class TComposedFactoryComp: public icomp::CComponentBase, public istd::TComposedFactory<InterfaceClass>
+template <class Interface>
+class TComposedFactoryComp: public icomp::CComponentBase, public istd::TComposedFactory<Interface>
 {
 public:
-	typedef istd::TIFactory<InterfaceClass> FactoryInterface;
-	typedef TComposedFactoryComp<InterfaceClass> ComponentClass;
-	typedef icomp::Component BaseClass;
+	typedef icomp::CComponentBase BaseClass;
+	typedef istd::TComposedFactory<Interface> BaseClass2;
 
-	I_BEGIN_COMPONENT(ComponentClass)
+	I_BEGIN_COMPONENT(TComposedFactoryComp)
 		I_REGISTER_INTERFACE(FactoryInterface)
 		I_ASSIGN_MULTI_0(m_slaveFactoriesCompPtr, "SlaveFactories", "Slave factories", false)
 	I_END_COMPONENT
@@ -34,8 +33,8 @@ private:
 
 // reimplemented (icomp::IComponent)
 
-template <class InterfaceClass>
-void TComposedFactoryComp<InterfaceClass>::OnComponentCreated()
+template <class Interface>
+void TComposedFactoryComp<Interface>::OnComponentCreated()
 {
 	if (m_slaveFactoriesCompPtr.IsValid(factoryIndex)){
 		int salveFactoryCount = m_slaveFactoriesCompPtr.GetCount();

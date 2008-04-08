@@ -21,7 +21,7 @@ public:
 	typedef TXmlStreamWriteArchiveBase<std::ofstream> BaseClass;
 
 	CXmlFileWriteArchive(
-				const istd::CString& fileName,
+				const istd::CString& filePath,
 				const IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);

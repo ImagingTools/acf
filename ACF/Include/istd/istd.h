@@ -44,7 +44,7 @@ inline typename const T& Max(const T& value1, const T& value2)
 class CGroupRegistrator
 {
 public:
-	CGroupRegistrator(const char* fileName);
+	CGroupRegistrator(const char* filePath);
 };
 
 

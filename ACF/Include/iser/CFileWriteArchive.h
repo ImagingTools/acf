@@ -18,7 +18,7 @@ public:
 
 	/**
 		Contructor.
-		\param	fileName			name of file.
+		\param	filePath			name of file.
 		\param	supportTagSkipping	if it is true skipping of tags on EndTag is supported.
 									Please note that supporting of tag skipping store additional data in file
 									and it is not compatible with files created without tag skipping.
@@ -26,7 +26,7 @@ public:
 		\param	serializeHeader		if it is true (default) archive header will be serialized.
 	*/
 	CFileWriteArchive(
-					const istd::CString& fileName,
+					const istd::CString& filePath,
 					bool supportTagSkipping = true,
 					const IVersionInfo* versionInfoPtr = NULL,
 					bool serializeHeader = true);

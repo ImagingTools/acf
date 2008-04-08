@@ -23,41 +23,18 @@ void CMultiDocumentWorkspaceGuiComp::OnTryClose(bool* ignoredPtr)
 	CloseAllDocuments();
 
 	if (ignoredPtr != NULL){
-		*ignoredPtr = (GetDocumentCount() > 0);
+		*ignoredPtr = (GetDocumentsCount() > 0);
 	}
 }
 
 
-// reimplemented (idoc::IDocumentManager)
+// reimplemented (icomp::IComponent)
 
-idoc::IDocument* CMultiDocumentWorkspaceGuiComp::OnFileNew(const std::string& documentId)
+void CMultiDocumentWorkspaceGuiComp::OnComponentCreated()
 {
-	idoc::IDocument* document = BaseClass2::OnFileNew(documentId);
-	if (document != NULL){
-		QWidget* widgetPtr = dynamic_cast<QWidget*>(document->GetView(0));
-		QWorkspace* workspacePtr = dynamic_cast<QWorkspace*>(GetWidget());
-		if (widgetPtr != NULL && workspacePtr != NULL){
-			widgetPtr->setParent(workspacePtr);
-			widgetPtr->installEventFilter(this);
-			workspacePtr->addWindow(widgetPtr);
-			widgetPtr->show();
-		}
-	}
+	BaseClass::OnComponentCreated();
 
-	return document;
-}
-
-
-istd::CStringList CMultiDocumentWorkspaceGuiComp::GetDocumentIds() const
-{
-	istd::CStringList documentIds;
-	if (m_documentIdAttrPtr.IsValid()){
-		for (int index = 0; index < m_documentIdAttrPtr.GetCount(); index++){
-			documentIds.push_back(m_documentIdAttrPtr[index]);
-		}
-	}
-
-	return documentIds;
+	SetDocumentTemplate(m_documentTemplateCompPtr.GetPtr());
 }
 
 
@@ -66,9 +43,9 @@ istd::CStringList CMultiDocumentWorkspaceGuiComp::GetDocumentIds() const
 bool CMultiDocumentWorkspaceGuiComp::eventFilter(QObject* obj, QEvent* event)
 {
 	if (event->type() == QEvent::Close){
-		imod::IObserver* viewPtr = dynamic_cast<imod::IObserver*>(obj);
+		istd::IPolymorphic* viewPtr = dynamic_cast<istd::IPolymorphic*>(obj);
 		if (viewPtr != NULL){
-			if (!OnFileClose()){
+			if (!FileClose()){
 				event->ignore();
 			}
 				
@@ -80,41 +57,92 @@ bool CMultiDocumentWorkspaceGuiComp::eventFilter(QObject* obj, QEvent* event)
 }
 
 
-// reimplemented (idoc::CDocumentManagerBase)
-
-istd::CString CMultiDocumentWorkspaceGuiComp::GetSaveFileName(const idoc::IDocumentTemplate& documentTemplate) const
+void CMultiDocumentWorkspaceGuiComp::UpdateAllTitles()
 {
-	QString filter = CreateFileDialogFilter(documentTemplate);
+	std::map<QString, int> nameFrequencies;
 
-	QString fileName = QFileDialog::getSaveFileName(NULL, tr("Save..."), "", filter);
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		const DocumentInfo& info = GetDocumentInfo(i);
 
-	return iqt::GetCString(fileName);
+		QString titleName = QFileInfo(iqt::GetQString(info.filePath)).fileName();
+
+		std::map<QString, int>::iterator freqIter = nameFrequencies.find(titleName);
+		if (freqIter != nameFrequencies.end()){
+			freqIter->second++;
+
+			titleName = tr("%1 <%2>").arg(titleName).arg(freqIter->second + 1);
+		}
+		else{
+			freqIter->second = 0;
+		}
+
+		for (		Views::const_iterator viewIter = info.views.begin();
+					viewIter != info.views.end();
+					++viewIter){
+			const ViewPtr& viewPtr = *viewIter;
+			I_ASSERT(viewPtr.IsValid());
+
+			const iqt::IGuiObject* guiObjectPtr = dynamic_cast<const iqt::IGuiObject*>(viewPtr.GetPtr());
+			if (guiObjectPtr != NULL){
+				QWidget* widgetPtr = guiObjectPtr->GetWidget();
+
+				widgetPtr->setWindowTitle(titleName);
+			}
+		}
+	}
 }
 
 
-istd::CStringList CMultiDocumentWorkspaceGuiComp::GetOpenFileNames(const idoc::IDocumentTemplate& documentTemplate) const
+// reimplemented (idoc::CDocumentManagerBase)
+
+istd::CStringList CMultiDocumentWorkspaceGuiComp::GetOpenFileNames(const std::string* documentTypeIdPtr) const
 {
-	QString filter = CreateFileDialogFilter(documentTemplate);
+	QString filter = CreateFileDialogFilter(documentTypeIdPtr);
 
 	QStringList files = QFileDialog::getOpenFileNames(NULL, tr("Open Files..."), "", filter);
 
 	return iqt::GetCStringList(files);
 }
 
-// reimplemented (imod::CMultiModelObserverBase)
 
-void CMultiDocumentWorkspaceGuiComp::OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+istd::CString CMultiDocumentWorkspaceGuiComp::GetSaveFileName(const std::string& documentTypeId) const
 {
-	idoc::IDocument* documentPtr = dynamic_cast<idoc::IDocument*> (modelPtr);
+	QString filter = CreateFileDialogFilter(&documentTypeId);
 
-	if (documentPtr != NULL && updateFlags == idoc::IDocument::TitleChanged){
-		for (int index = 0; index < documentPtr->GetViewCount(); index++){
-			QWidget* widgetPtr = dynamic_cast<QWidget*>(documentPtr->GetView(index));
-			if (widgetPtr != NULL){
-				widgetPtr->setWindowTitle(iqt::GetQString(documentPtr->GetDocumentTitle()));
-			}
+	QString filePath = QFileDialog::getSaveFileName(NULL, tr("Save..."), "", filter);
+
+	return iqt::GetCString(filePath);
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPtr)
+{
+	iqt::IGuiObject* guiObjectPtr = dynamic_cast<iqt::IGuiObject*>(viewPtr);
+	QWorkspace* workspacePtr = GetQtWidget();
+	if ((guiObjectPtr != NULL) && (workspacePtr != NULL)){
+		if (guiObjectPtr->CreateGui(workspacePtr)){
+			QWidget* widgetPtr = guiObjectPtr->GetWidget();
+			I_ASSERT(widgetPtr != NULL);
+
+			widgetPtr->setParent(workspacePtr);
+			widgetPtr->installEventFilter(this);
+			workspacePtr->addWindow(widgetPtr);
+			widgetPtr->show();
+
+			SetActiveView(viewPtr);
 		}
 	}
+}
+
+
+// reimplemented (imod::CMultiModelObserverBase)
+
+void CMultiDocumentWorkspaceGuiComp::OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	BaseClass2::OnUpdate(modelPtr, updateFlags, updateParamsPtr);
+
+	// TODO: implement support for modify flag.
 }
 
 
@@ -123,15 +151,6 @@ void CMultiDocumentWorkspaceGuiComp::OnUpdate(imod::IModel* modelPtr, int update
 void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 {
 	CreateConnections();
-
-	istd::CStringList documentIds = GetDocumentIds();
-	
-	if (m_documentIdAttrPtr.IsValid()){
-		int count = istd::Min<int>(m_documentTemplatesCompPtr.GetCount(), documentIds.size());
-		for (int index = 0; index < count; index++){
-			RegisterDocumentTemplate(documentIds[index].ToString(), m_documentTemplatesCompPtr[index]);
-		}
-	}
 
 	if (m_scrollingEnabledAttrPtr.IsValid()){
 		QWorkspace* workspacePtr = GetQtWidget();
@@ -147,49 +166,42 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiDestroyed()
 }
 
 
+// reimplemented (istd:IChangeable)
+
+void CMultiDocumentWorkspaceGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+{
+	BaseClass2::OnEndChanges(changeFlags, changeParamsPtr);
+
+}
+
+
 // private methods
 
 void CMultiDocumentWorkspaceGuiComp::CreateConnections()
 {
-	connect(GetWidget(), 
-		SIGNAL(windowActivated(QWidget*)), 
-		this,
-		SLOT(OnWindowActivated(QWidget*)));
+	connect(GetWidget(), SIGNAL(windowActivated(QWidget*)), this, SLOT(OnWindowActivated(QWidget*)));
 }
 
 
-int CMultiDocumentWorkspaceGuiComp::GetDocumentIndex(const imod::IObserver* activeView) const
+QString CMultiDocumentWorkspaceGuiComp::CreateFileDialogFilter(const std::string* documentTypeIdPtr) const
 {
-	if (activeView == NULL){
-		return -1;
-	}
+	QString retVal;
 
-	for (int documentIndex = 0; documentIndex < GetDocumentCount(); documentIndex++){
-		idoc::IDocument* documentPtr = GetDocument(documentIndex);
-		if (documentPtr != NULL){
-			if (documentPtr->HasView(activeView)){
-				return documentIndex;
+	const idoc::IDocumentTemplate* templatePtr = GetDocumentTemplate();
+	if (templatePtr != NULL){
+		istd::CStringList filters = templatePtr->GetFileFilters(documentTypeIdPtr);
+
+		for (		istd::CStringList::iterator iter = filters.begin();
+					iter != filters.end();
+					++iter){
+			if (iter != filters.begin()){
+				retVal += " ";
 			}
+			retVal += iqt::GetQString(*iter);
 		}
 	}
 
-	return -1;
-}
-
-
-QString CMultiDocumentWorkspaceGuiComp::CreateFileDialogFilter(const idoc::IDocumentTemplate& documentTemplate) const
-{
-	QString filter;
-
-	istd::CStringList filters = documentTemplate.GetFileFilters();
-	for (int index = 0; index < int(filters.size()); index++){
-		filter += iqt::GetQString(filters.at(index));
-		if (index < int(filters.size()) - 1){
-			filter += " ";
-		}
-	}
-
-	return filter;
+	return retVal;
 }
 
 
@@ -197,11 +209,21 @@ QString CMultiDocumentWorkspaceGuiComp::CreateFileDialogFilter(const idoc::IDocu
 
 void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QWidget* window)
 {
-	imod::IObserver* activeView = dynamic_cast<imod::IObserver*>(window);
+	int documentInfosCount = GetDocumentsCount();
+	for (int i = 0; i < documentInfosCount; ++i){
+		DocumentInfo& info = GetDocumentInfo(i);
 
-	m_activeIndex = GetDocumentIndex(activeView);
-
-	istd::CChangeNotifier changePtr(this, DocumentActivationChanged);
+		for (		Views::const_iterator viewIter = info.views.begin();
+					viewIter != info.views.end();
+					++viewIter){
+			iqt::IGuiObject* guiObjectPtr = dynamic_cast<iqt::IGuiObject*>(viewIter->GetPtr());
+			if (guiObjectPtr != NULL){
+				if (guiObjectPtr->GetWidget() == window){
+					SetActiveView(guiObjectPtr);
+				}
+			}
+		}
+	}
 }	
 
 

@@ -14,14 +14,12 @@ namespace iqmain
 {
 
 
-class IObserver;
-
-
 /**	
 	This class is a Qt-based workspace implementation of a document manager.
 */
-class CMultiDocumentWorkspaceGuiComp:	public iqt::TGuiComponentBase<QWorkspace>, 
-										public idoc::CDocumentManagerBase
+class CMultiDocumentWorkspaceGuiComp:
+			public iqt::TGuiComponentBase<QWorkspace>, 
+			public idoc::CDocumentManagerBase
 {
 	Q_OBJECT
 
@@ -31,24 +29,29 @@ public:
 
 	I_BEGIN_COMPONENT(CMultiDocumentWorkspaceGuiComp)
 		I_REGISTER_INTERFACE(idoc::IDocumentManager);
-		I_ASSIGN_MULTI_0(m_documentTemplatesCompPtr, "DocumentTemplates", "Document templates", true)
-		I_ASSIGN_MULTI_0(m_documentIdAttrPtr, "DocumentIds", "Document Ids", true)
-		I_ASSIGN(m_scrollingEnabledAttrPtr, "ScrollingWorkspace", "Enable scorilling of workspace area", true, false)
+		I_ASSIGN(m_scrollingEnabledAttrPtr, "ScrollingWorkspace", "Enable scrolling of workspace area", true, false)
+		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate")
 	I_END_COMPONENT
 
 	// reimplemented (iqt::IGuiObject)
 	virtual void OnTryClose(bool* ignoredPtr = NULL);
 
-	// reimplemented (idoc::IDocumentManager)
-	virtual idoc::IDocument* OnFileNew(const std::string& documentId);
-	virtual istd::CStringList GetDocumentIds() const;
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 protected:
 	virtual bool eventFilter(QObject* obj, QEvent* event);
 
+	/**
+		Update titles of views or all views of specified document.
+		\param	optional document object, if you want to update only views of single document.
+	*/
+	void UpdateAllTitles();
+
 	// reimplemented (idoc::CDocumentManagerBase)
-	virtual istd::CString GetSaveFileName(const idoc::IDocumentTemplate& documentTemplate) const;
-	virtual istd::CStringList GetOpenFileNames(const idoc::IDocumentTemplate& documentTemplate) const;
+	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
+	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const;
+	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
 
 	// reimplemented (imod::CMultiModelObserverBase)
 	void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -57,6 +60,9 @@ protected:
 	virtual void OnGuiCreated();	
 	virtual void OnGuiDestroyed();
 
+	// reimplemented (istd:IChangeable)
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
+
 private:
 	/**
 		Creates signal/slot connnections for the implementation.
@@ -64,23 +70,17 @@ private:
 	virtual void CreateConnections();
 
 	/**
-		Returns the document index for the view \c view.
-	*/
-	virtual int GetDocumentIndex(const imod::IObserver* view) const;
-
-	/**
 		Creates the filter for the file selection dialog.
-		The filter corresponds with the file types for \c documentID
+		\param	documentTypeIdPtr	optional ID of document type if only filter for single document type should be created.
 	*/
-	QString CreateFileDialogFilter(const idoc::IDocumentTemplate& documentTemplate) const;
+	QString CreateFileDialogFilter(const std::string* documentTypeIdPtr = NULL) const;
 
 protected slots:
 	void OnWindowActivated(QWidget* window);
 
 protected:
-	I_MULTIREF(idoc::IDocumentTemplate, m_documentTemplatesCompPtr);
-	I_MULTI_ATTR(istd::CString, m_documentIdAttrPtr);
 	I_ATTR(bool, m_scrollingEnabledAttrPtr);
+	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 };
 
 

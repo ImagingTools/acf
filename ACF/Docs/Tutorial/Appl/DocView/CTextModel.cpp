@@ -7,7 +7,7 @@
 
 
 CTextModel::CTextModel()
-	:m_text("Hello World")
+:	m_text("Hello World")
 {
 }
 

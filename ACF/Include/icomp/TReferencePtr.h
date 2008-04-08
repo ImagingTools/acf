@@ -89,7 +89,6 @@ template <class Interface>
 typename Interface* TReferencePtr<Interface>::GetPtr() const
 {
 	EnsureInitialized();
-	I_ASSERT(m_componentPtr != NULL);
 
 	return m_componentPtr;
 }
@@ -98,6 +97,9 @@ typename Interface* TReferencePtr<Interface>::GetPtr() const
 template <class Interface>
 typename Interface* TReferencePtr<Interface>::operator->() const
 {
+	EnsureInitialized();
+	I_ASSERT(m_componentPtr != NULL);
+
 	return GetPtr();
 }
 

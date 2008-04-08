@@ -1,8 +1,11 @@
 #include "imod/TModelWrap.h"
 
-#include "iser/ISerializable.h"
+#include "iser/CXmlFileReadArchive.h"
+#include "iser/CXmlFileWriteArchive.h"
 
 #include "icomp/TSimComponentWrap.h"
+
+#include "idoc/CSerializedDocumentTemplateComp.h"
 
 #include "iqt/CApplicationComp.h"
 
@@ -10,11 +13,7 @@
 #include "iqmain/CMultiDocumentWorkspaceGuiComp.h"
 
 #include "istdc/TSingleFactoryComp.h"
-
-#include "idoc/TDocumentTemplateCompWrap.h"
-#include "idoc/TDocumentFactoryComp.h"
-#include "idoc/CSerializableDocument.h"
-#include "idoc/CMultiDocumentTemplate.h"
+#include "istdc/TFileSerializerComp.h"
 
 #include "CTextEditor.h"
 #include "CTextModel.h"
@@ -34,28 +33,18 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<ViewFactoryComp> viewFactoryComp;
 	viewFactoryComp.InitComponent();
 
-	// document factory:
-	typedef idoc::TDocumentFactoryComp<idoc::CSerializableDocument> DocumentFactoryComp;
-	icomp::TSimComponentWrap<DocumentFactoryComp> documentFactoryComp;
+	typedef istdc::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> SerializerComp;
+	icomp::TSimComponentWrap<SerializerComp> serializerComp;
+	serializerComp.InitComponent();
 
-	// document template:
-	typedef idoc::TDocumentTemplateCompWrap<idoc::CMultiDocumentTemplate> DocumentTemplateComp;
-	icomp::TSimComponentWrap<DocumentTemplateComp> documentTemplateComp;
-	
-	// init document factory:
-	documentFactoryComp.SetRef("ModelFactory", &modelFactoryComp);
-	documentFactoryComp.SetRef("DocumentTemplate", &documentTemplateComp);
-	documentFactoryComp.InitComponent();
-
-	// init document tempalte:
-	documentTemplateComp.SetRef("DocumentFactory", &documentFactoryComp);
+	icomp::TSimComponentWrap<idoc::CSerializedDocumentTemplateComp> documentTemplateComp;
+	documentTemplateComp.SetRef("DocumentFactory", &modelFactoryComp);
 	documentTemplateComp.SetRef("ViewFactory", &viewFactoryComp);
+	documentTemplateComp.SetRef("DocumentSerializer", &serializerComp);
 	documentTemplateComp.InitComponent();
 
 	icomp::TSimComponentWrap<imod::TModelWrap<iqmain::CMultiDocumentWorkspaceGuiComp> > workspaceComp;
-	workspaceComp.InsertMultiRef("DocumentTemplates", &documentTemplateComp);
-	workspaceComp.InsertMultiAttr<istd::CString>("DocumentIds", "Registry");
-
+	workspaceComp.SetRef("DocumentTemplate", &documentTemplateComp);
 	workspaceComp.InitComponent();
 
 	icomp::TSimComponentWrap<iqmain::CMainWindowGuiComp> mainWindowComp;

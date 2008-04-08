@@ -26,16 +26,16 @@ public:
 	};
 
 	/**
-		This function loads data \c data from file \c fileName
+		This function loads data \c data from file \c filePath
 		\returns serialization state. \sa SerializationState
 	*/
-	virtual int LoadFromFile(ISerializable& data, const istd::CString& fileName) const = 0;
+	virtual int LoadFromFile(ISerializable& data, const istd::CString& filePath) const = 0;
 
 	/**
-		This function saves data \c data to file \c fileName
+		This function saves data \c data to file \c filePath
 		\returns serialization state. \sa SerializationState
 	*/
-	virtual int SaveToFile(ISerializable& data, const istd::CString& fileName) const = 0;
+	virtual int SaveToFile(const ISerializable& data, const istd::CString& filePath) const = 0;
 	
 	/**
 		Returns the last saved file name.

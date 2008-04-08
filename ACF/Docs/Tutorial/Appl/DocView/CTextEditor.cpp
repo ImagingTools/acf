@@ -1,37 +1,39 @@
 #include "CTextEditor.h"
 
+
 #include "iqt/CSignalBlocker.h"
-
-
-// public methods
-
-CTextEditor::CTextEditor()
-{
-	connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
-}
-
 
 
 // reimplemented (imod::IModelEditor)
 
 void CTextEditor::UpdateModel()
 {
-	iqt::CSignalBlocker block(this);
+	QTextEdit* textEditPtr = GetQtWidget();
+	if (textEditPtr == NULL){
+		return;
+	}
+
+	iqt::CSignalBlocker block(textEditPtr);
 
 	CTextModel* objectPtr = GetObjectPtr();
 
 	if (objectPtr != NULL ){
-		objectPtr->SetText(iqt::GetCString(toPlainText()));
+		objectPtr->SetText(iqt::GetCString(textEditPtr->toPlainText()));
 	}
 }
 
 
 void CTextEditor::UpdateEditor()
 {
+	QTextEdit* textEditPtr = GetQtWidget();
+	if (textEditPtr == NULL){
+		return;
+	}
+
 	CTextModel* objectPtr = GetObjectPtr();
 
-	if (objectPtr != NULL ){
-		setText(iqt::GetQString(objectPtr->GetText()));
+	if ((objectPtr != NULL) && !textEditPtr->signalsBlocked()){
+		textEditPtr->setText(iqt::GetQString(objectPtr->GetText()));
 	}
 }
 
@@ -42,3 +44,18 @@ void CTextEditor::OnTextChanged()
 {
 	UpdateModel();
 }
+
+
+// reimplemented (iqt::CGuiComponentBase)
+
+void CTextEditor::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	QTextEdit* textEditPtr = GetQtWidget();
+	I_ASSERT(textEditPtr != NULL);
+
+	connect(textEditPtr, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
+}
+
+

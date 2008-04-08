@@ -11,6 +11,9 @@ namespace iqt
 {
 
 
+/**
+	Base class for classes implementing interface iqt::IGuiObject.
+*/
 class CGuiComponentBase:
 			public QObject, 
 			public icomp::CComponentBase,

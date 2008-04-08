@@ -37,10 +37,18 @@ public:
 
 	// operators
 	Type* operator->() const;
-	bool operator==(const TPointer<Type>& ptr);
-	bool operator!=(const TPointer<Type>& ptr);
-	bool operator==(const Type* ptr);
-	bool operator!=(const Type* ptr);
+	bool operator==(const TPointer<Type>& ptr) const;
+	bool operator!=(const TPointer<Type>& ptr) const;
+	bool operator<(const TPointer<Type>& ptr) const;
+	bool operator>(const TPointer<Type>& ptr) const;
+	bool operator<=(const TPointer<Type>& ptr) const;
+	bool operator>=(const TPointer<Type>& ptr) const;
+	bool operator==(const Type* ptr) const;
+	bool operator!=(const Type* ptr) const;
+	bool operator<(const Type* ptr) const;
+	bool operator>(const Type* ptr) const;
+	bool operator<=(const Type* ptr) const;
+	bool operator>=(const Type* ptr) const;
 
 protected:
 	/**
@@ -103,30 +111,86 @@ inline Type* TPointer<Type>::operator->() const
 
 
 template <class Type>
-inline bool TPointer<Type>::operator==(const TPointer<Type>& ptr)
+inline bool TPointer<Type>::operator==(const TPointer<Type>& ptr) const
 {
 	return (m_ptr == ptr.m_ptr);
 }
 
 
 template <class Type>
-inline bool TPointer<Type>::operator!=(const TPointer<Type>& ptr)
+inline bool TPointer<Type>::operator!=(const TPointer<Type>& ptr) const
 {
 	return (m_ptr != ptr.m_ptr);
 }
 
 
 template <class Type>
-inline bool TPointer<Type>::operator==(const Type* ptr)
+inline bool TPointer<Type>::operator<(const TPointer<Type>& ptr) const
+{
+	return m_ptr < ptr.m_ptr;
+}
+
+
+template <class Type>
+inline bool TPointer<Type>::operator>(const TPointer<Type>& ptr) const
+{
+	return m_ptr > ptr.m_ptr;
+}
+
+
+template <class Type>
+inline bool TPointer<Type>::operator<=(const TPointer<Type>& ptr) const
+{
+	return m_ptr <= ptr.m_ptr;
+}
+
+
+template <class Type>
+inline bool TPointer<Type>::operator>=(const TPointer<Type>& ptr) const
+{
+	return m_ptr >= ptr.m_ptr;
+}
+
+
+template <class Type>
+inline bool TPointer<Type>::operator==(const Type* ptr) const
 {
 	return (m_ptr == ptr);
 }
 
 
 template <class Type>
-inline bool TPointer<Type>::operator!=(const Type* ptr)
+inline bool TPointer<Type>::operator!=(const Type* ptr) const
 {
 	return (m_ptr != ptr);
+}
+
+
+template <class Type>
+bool TPointer<Type>::operator<(const Type* ptr) const
+{
+	return (m_ptr < ptr);
+}
+
+
+template <class Type>
+bool TPointer<Type>::operator>(const Type* ptr) const
+{
+	return (m_ptr > ptr);
+}
+
+
+template <class Type>
+bool TPointer<Type>::operator<=(const Type* ptr) const
+{
+	return (m_ptr <= ptr);
+}
+
+
+template <class Type>
+bool TPointer<Type>::operator>=(const Type* ptr) const
+{
+	return (m_ptr >= ptr);
 }
 
 

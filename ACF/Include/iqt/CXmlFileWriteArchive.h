@@ -22,7 +22,7 @@ public:
 	typedef iser::CWriteArchiveBase BaseClass;
 
 	CXmlFileWriteArchive(
-				const istd::CString& fileName = "",
+				const istd::CString& filePath = "",
 				const iser::IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
@@ -30,7 +30,7 @@ public:
 
 	bool Flush();
 
-	bool OpenDocument(const istd::CString& fileName);
+	bool OpenDocument(const istd::CString& filePath);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;

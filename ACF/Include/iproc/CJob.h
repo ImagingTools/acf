@@ -2,8 +2,6 @@
 #define CJob_included
 
 
-#include "istd/TPointerVector.h"
-
 #include "ibase/TFactorisableContainer.h"
 
 #include "iproc/IOperator.h"

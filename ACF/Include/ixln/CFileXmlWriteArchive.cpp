@@ -9,12 +9,12 @@ namespace ixln
 
 
 CFileXmlWriteArchive::CFileXmlWriteArchive(
-					const std::string& fileName,
+					const std::string& filePath,
 					const iser::IVersionInfo* versionInfoPtr,
 					bool serializeHeader)
 :	BaseClass(versionInfoPtr)
 {
-	wchar_t* tmpData = xercesc::XMLString::transcode(fileName.c_str());
+	wchar_t* tmpData = xercesc::XMLString::transcode(filePath.c_str());
 	m_fileName = tmpData;
 	xercesc::XMLString::release(&tmpData);
 

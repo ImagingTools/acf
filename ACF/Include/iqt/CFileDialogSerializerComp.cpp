@@ -11,9 +11,9 @@ namespace iqt
 
 // reimplemented (iser::IFileSerializer)
 
-int CFileDialogSerializerComp::LoadFromFile(iser::ISerializable& data, const istd::CString& fileName)
+int CFileDialogSerializerComp::LoadFromFile(iser::ISerializable& data, const istd::CString& filePath) const
 {
-	QString openFileName = GetOpenFileName(fileName);
+	QString openFileName = GetOpenFileName(filePath);
 	if (openFileName.isEmpty()){
 		return StateAborted;
 	}
@@ -27,9 +27,9 @@ int CFileDialogSerializerComp::LoadFromFile(iser::ISerializable& data, const ist
 }
 
 
-int CFileDialogSerializerComp::SaveToFile(iser::ISerializable& data, const istd::CString& fileName)
+int CFileDialogSerializerComp::SaveToFile(const iser::ISerializable& data, const istd::CString& filePath) const
 {
-	QString saveFileName = getSaveFileName(fileName);
+	QString saveFileName = getSaveFileName(filePath);
 	if (saveFileName.isEmpty()){
 		return StateAborted;
 	}
@@ -57,13 +57,13 @@ const istd::CString& CFileDialogSerializerComp::GetLastOpenFileName() const
 
 // protected methods
 
-QString CFileDialogSerializerComp::GetOpenFileName(const istd::CString& fileName) const
+QString CFileDialogSerializerComp::GetOpenFileName(const istd::CString& filePath) const
 {
 	if (!m_fileFiltersAttrPtr.IsValid()){
 		return QString();
 	}
 
-	QString openFileName = iqt::GetQString(fileName);
+	QString openFileName = iqt::GetQString(filePath);
 	if (openFileName.isEmpty()){
 		QString fileFilter;
 
@@ -86,9 +86,9 @@ QString CFileDialogSerializerComp::GetOpenFileName(const istd::CString& fileName
 }
 
 
-QString CFileDialogSerializerComp::GetSaveFileName(const istd::CString& fileName) const
+QString CFileDialogSerializerComp::GetSaveFileName(const istd::CString& filePath) const
 {
-	QString saveFileName = iqt::GetQString(fileName);
+	QString saveFileName = iqt::GetQString(filePath);
 	if (saveFileName.isEmpty()){
 		QString fileFilter;
 
@@ -114,9 +114,9 @@ QString CFileDialogSerializerComp::GetSaveFileName(const istd::CString& fileName
 }
 
 
-iser::IFileSerializer* CFileDialogSerializerComp::GetSerializerFor(const QString& fileName) const
+iser::IFileSerializer* CFileDialogSerializerComp::GetSerializerFor(const QString& filePath) const
 {
-	QFileInfo fileInfo(fileName);
+	QFileInfo fileInfo(filePath);
 
 	QString fileExtension = QString(".") + fileInfo.suffix();
 

@@ -16,7 +16,7 @@ public:
 
 	/**	Construct archive for specified file.
 	 */
-	explicit CFileXmlReadArchive(const std::string& fileName, bool serializeHeader = true);
+	explicit CFileXmlReadArchive(const std::string& filePath, bool serializeHeader = true);
 
 private:
 	std::wstring m_fileName;

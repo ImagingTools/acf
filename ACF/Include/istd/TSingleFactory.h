@@ -18,15 +18,18 @@ namespace istd
 /**
 	Template based object factory interface.
 */
-template <class InterfaceType, class Implementation>
-class TSingleFactory: virtual public TIFactory<InterfaceType>
+template <class Interface, class Implementation>
+class TSingleFactory: virtual public TIFactory<Interface>
 {
 public:
+	typedef Implementation ImplementationType;
+	typedef TIFactory<InterfaceType> FactoryInterface;
+
 	explicit TSingleFactory(const std::string& keyId);
 
 	// reimplemented (istd::TIFactory)
 	virtual KeyList GetFactoryKeys() const;
-	virtual InterfaceType* CreateInstance(const std::string& keyId = "") const;
+	virtual Interface* CreateInstance(const std::string& keyId = "") const;
 
 private:
 	std::string m_keyId;
@@ -35,8 +38,8 @@ private:
 
 // public methods
 
-template <class InterfaceType, class Implementation>
-TSingleFactory<InterfaceType, Implementation>::TSingleFactory(const std::string& keyId)
+template <class Interface, class Implementation>
+TSingleFactory<Interface, Implementation>::TSingleFactory(const std::string& keyId)
 	:m_keyId(keyId)
 {
 
@@ -45,8 +48,8 @@ TSingleFactory<InterfaceType, Implementation>::TSingleFactory(const std::string&
 
 // reimplemented (istd::IFactory)
 
-template <class InterfaceType, class Implementation>
-typename TIFactory<InterfaceType>::KeyList TSingleFactory<InterfaceType, Implementation>::GetFactoryKeys() const
+template <class Interface, class Implementation>
+typename TIFactory<Interface>::KeyList TSingleFactory<Interface, Implementation>::GetFactoryKeys() const
 {
 	KeyList retVal;
 
@@ -56,8 +59,8 @@ typename TIFactory<InterfaceType>::KeyList TSingleFactory<InterfaceType, Impleme
 }
 
 
-template <class InterfaceType, class Implementation>
-InterfaceType* TSingleFactory<InterfaceType, Implementation>::CreateInstance(const std::string& keyId) const
+template <class Interface, class Implementation>
+Interface* TSingleFactory<Interface, Implementation>::CreateInstance(const std::string& keyId) const
 {
 	if (keyId.empty() || (keyId == m_keyId)){
 		return new Implementation;

@@ -12,10 +12,10 @@ namespace iser
 {
 
 
-CFileReadArchive::CFileReadArchive(const istd::CString& fileName, bool supportTagSkipping, bool serializeHeader)
+CFileReadArchive::CFileReadArchive(const istd::CString& filePath, bool supportTagSkipping, bool serializeHeader)
 :	m_supportTagSkipping(supportTagSkipping)
 {
-	m_stream.open(fileName.ToString().c_str(), std::fstream::in | std::fstream::binary);
+	m_stream.open(filePath.ToString().c_str(), std::fstream::in | std::fstream::binary);
 
 	if (serializeHeader){
 		SerializeAcfHeader();

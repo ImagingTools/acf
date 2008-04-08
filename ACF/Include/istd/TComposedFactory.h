@@ -19,7 +19,7 @@ template <class InterfaceType>
 class TComposedFactory: virtual public TIFactory<InterfaceType>
 {
 public:
-	typedef TIFactory<InterfaceType> FactoryClass;
+	typedef TIFactory<InterfaceType> FactoryInterface;
 
 	/**
 		Registers object factory \c factoryPtr that will be mapped to the \c keyId.

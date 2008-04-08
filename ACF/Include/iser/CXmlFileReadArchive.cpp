@@ -5,10 +5,10 @@ namespace iser
 {
 
 
-CXmlFileReadArchive::CXmlFileReadArchive(const istd::CString& fileName, bool serializeHeader, const iser::CArchiveTag& rootTag)
+CXmlFileReadArchive::CXmlFileReadArchive(const istd::CString& filePath, bool serializeHeader, const iser::CArchiveTag& rootTag)
 :	BaseClass(rootTag)
 {
-	m_stream.open(fileName.ToString().c_str(), std::fstream::in);
+	m_stream.open(filePath.ToString().c_str(), std::fstream::in);
 
 	SerializeXmlHeader();
 

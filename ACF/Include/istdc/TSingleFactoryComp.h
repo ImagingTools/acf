@@ -11,18 +11,16 @@ namespace istdc
 {
 
 
-template <class InterfaceType, class ImplementationClass>
+template <class Interface, class Implementation>
 class TSingleFactoryComp:	public icomp::CComponentBase, 
-							public istd::TSingleFactory<InterfaceType, ImplementationClass>
+							public istd::TSingleFactory<Interface, Implementation>
 {
 public:
-	typedef istd::TIFactory<InterfaceType> BaseInterface;
 	typedef icomp::CComponentBase BaseClass;
-	typedef istd::TSingleFactory<InterfaceType, ImplementationClass> BaseClass2;
-	typedef TSingleFactoryComp<InterfaceType, ImplementationClass> ComponentClass;
+	typedef istd::TSingleFactory<Interface, Implementation> BaseClass2;
 
-	I_BEGIN_COMPONENT(ComponentClass)
-		I_REGISTER_INTERFACE(BaseInterface)
+	I_BEGIN_COMPONENT(TSingleFactoryComp)
+		I_REGISTER_INTERFACE(InterfaceType)
 		I_ASSIGN(m_keyAttrPtr, "FactoryKey", "Factory key", false, "")
 	I_END_COMPONENT
 
@@ -30,22 +28,22 @@ public:
 
 	// reimplemented (istd::TIFactory)
 	KeyList GetFactoryKeys() const;
-	InterfaceType* CreateInstance(const std::string& keyId) const;
+	Interface* CreateInstance(const std::string& keyId) const;
 
 private:
 	I_ATTR(istd::CString, m_keyAttrPtr);
 };
 
 
-template <class InterfaceType, class ImplementationClass>
-TSingleFactoryComp<InterfaceType, ImplementationClass>::TSingleFactoryComp()
+template <class Interface, class Implementation>
+TSingleFactoryComp<Interface, Implementation>::TSingleFactoryComp()
 	:BaseClass2(std::string())
 {
 }
 
 
-template <class InterfaceType, class ImplementationClass>
-typename istd::TIFactory<InterfaceType>::KeyList TSingleFactoryComp<InterfaceType, ImplementationClass>::GetFactoryKeys() const
+template <class Interface, class Implementation>
+typename istd::TIFactory<Interface>::KeyList TSingleFactoryComp<Interface, Implementation>::GetFactoryKeys() const
 {
 	KeyList retVal;
 
@@ -57,11 +55,11 @@ typename istd::TIFactory<InterfaceType>::KeyList TSingleFactoryComp<InterfaceTyp
 }
 
 
-template <class InterfaceType, class ImplementationClass>
-InterfaceType* TSingleFactoryComp<InterfaceType, ImplementationClass>::CreateInstance(const std::string& keyId) const
+template <class Interface, class Implementation>
+Interface* TSingleFactoryComp<Interface, Implementation>::CreateInstance(const std::string& keyId) const
 {
 	if (keyId.empty() || (m_keyAttrPtr.IsValid() && keyId == m_keyAttrPtr->GetValue().ToString())){
-		return new ImplementationClass;
+		return new Implementation;
 	}
 	
 	return NULL;

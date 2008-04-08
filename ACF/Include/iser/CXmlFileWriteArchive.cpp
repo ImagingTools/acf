@@ -6,13 +6,13 @@ namespace iser
 
 
 CXmlFileWriteArchive::CXmlFileWriteArchive(
-			const istd::CString& fileName,
+			const istd::CString& filePath,
 			const IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, rootTag)
 {
-	m_stream.open(fileName.ToString().c_str(), std::fstream::out);
+	m_stream.open(filePath.ToString().c_str(), std::fstream::out);
 
 	SerializeXmlHeader();
 
