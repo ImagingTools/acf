@@ -230,68 +230,35 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
-				RelativePath="..\CDocument.cpp">
-			</File>
-			<File
-				RelativePath="..\CDocumentBase.cpp">
-			</File>
-			<File
 				RelativePath="..\CDocumentManagerBase.cpp">
 			</File>
 			<File
-				RelativePath="..\CDocumentTemplateBase.cpp">
+				RelativePath="..\CSerializedDocumentTemplateComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CMultiDocumentTemplate.cpp">
-			</File>
-			<File
-				RelativePath="..\CSerializableDocument.cpp">
-			</File>
-			<File
-				RelativePath="..\CSingleDocumentTemplate.cpp">
+				RelativePath="..\CSingleDocumentTemplateBase.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="*.h, *.hpp">
 			<File
-				RelativePath="..\CDocument.h">
-			</File>
-			<File
-				RelativePath="..\CDocumentBase.h">
-			</File>
-			<File
 				RelativePath="..\CDocumentManagerBase.h">
 			</File>
 			<File
-				RelativePath="..\CDocumentTemplateBase.h">
+				RelativePath="..\CSerializedDocumentTemplateComp.h">
 			</File>
 			<File
-				RelativePath="..\CMultiDocumentTemplate.h">
-			</File>
-			<File
-				RelativePath="..\CSerializableDocument.h">
-			</File>
-			<File
-				RelativePath="..\CSingleDocumentTemplate.h">
+				RelativePath="..\CSingleDocumentTemplateBase.h">
 			</File>
 			<File
 				RelativePath="..\idoc.h">
-			</File>
-			<File
-				RelativePath="..\IDocument.h">
 			</File>
 			<File
 				RelativePath="..\IDocumentManager.h">
 			</File>
 			<File
 				RelativePath="..\IDocumentTemplate.h">
-			</File>
-			<File
-				RelativePath="..\TDocumentFactoryComp.h">
-			</File>
-			<File
-				RelativePath="..\TDocumentTemplateCompWrap.h">
 			</File>
 		</Filter>
 	</Files>

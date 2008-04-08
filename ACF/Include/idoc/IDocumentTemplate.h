@@ -8,6 +8,7 @@
 #include "istd/TIFactory.h"
 #include "istd/CString.h"
 
+#include "imod/IModel.h"
 #include "imod/IObserver.h"
 
 
@@ -15,43 +16,72 @@ namespace idoc
 {		
 
 
-class IDocument;
-
-
 class IDocumentTemplate: virtual public istd::IPolymorphic
 {
 public:
-	typedef istd::TIFactory<idoc::IDocument> IDocumentFactory;
+	typedef istd::TIFactory<imod::IModel> IDocumentFactory;
 	typedef istd::TIFactory<imod::IObserver> IViewFactory;
-
+	typedef std::vector<std::string> Ids;
 
 	/**
-		Creates a document instance for document.
+		Get list of supported document ID's can be created for specified file.
 	*/
-	virtual idoc::IDocument* CreateDocument() const = 0;
+	virtual Ids GetDocumentTypeIds() const = 0;
+
+	/**
+		Return supported view type IDs for specified document type.
+		\param	documentTypeId	ID of document type.
+	*/
+	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const = 0;
+
+	/**
+		Get list of supported document ID's can be created for specified file.
+	*/
+	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const = 0;
+
+	/**
+		Load document from specified file.
+	*/
+	virtual bool LoadDocumentFromFile(const istd::CString& filePath, imod::IModel& result) const = 0;
+
+	/**
+		Save document to file.
+	*/
+	virtual bool SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const = 0;
+
+	/**
+		Creates a document instance for document type \c documentTypeId.
+	*/
+	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const = 0;
 
 	/**
 		Creates a view instance for document \c document of type \c viewTypeId.
+		\param	documentPtr	pointer to document object.
+		\param	viewTypeId	optional ID specifying view type if more view types are supported.
 	*/
-	virtual imod::IObserver* AddView(idoc::IDocument& document, const std::string& viewTypeId = std::string()) const = 0;
+	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const = 0;
 
 	/**
+		Get list of file filters supported by this document template.
+		\param	documentTypeIdPtr	optional specification of document ID
+								for which list of filters should be returned.
+								If it is NULL, all filters will be returned.
 	*/
-	virtual istd::CStringList GetFileFilters() const = 0;
-
-	/**
-	*/
-	virtual istd::CString GetDefaultDirectory() const = 0;
+	virtual istd::CStringList GetFileFilters(const std::string* documentTypeIdPtr = NULL) const = 0;
 
 	/**
 		Returns registered file extensions for this document template.
+		\param	documentTypeIdPtr	optional specification of document ID
+								for which list of possible extensions should be returned.
+								If it is NULL, all possible extensions will be returned.
 	*/
-	virtual istd::CStringList GetFileExtensions() const = 0;
+	virtual istd::CStringList GetFileExtensions(const std::string* documentTypeIdPtr = NULL) const = 0;
 
 	/**
-		Returns default title for an untitled document.
+		Return default directory for specified document type.
+		\param	sugestedDir	template directory sugested by user.
 	*/
-	virtual istd::CString GetDefaultTitle() const = 0;
+	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const = 0;
 };
 
 
@@ -59,3 +89,5 @@ public:
 
 
 #endif // !idoc_IDocumentTemplate_included
+
+

@@ -2,79 +2,121 @@
 #define idoc_CDocumentManagerBase_included
 
 
+// STL includes
 #include <map>
-
-
-#include "idoc/IDocumentManager.h"
-#include "idoc/IDocument.h"
+#include <list>
 
 #include "istd/TIFactory.h"
 #include "istd/TPointerVector.h"
 #include "istd/TDelPtr.h"
 
 #include "imod/TMultiModelObserverBase.h"
+#include "imod/IModel.h"
+
+#include "idoc/IDocumentManager.h"
 
 
 namespace idoc
-{		
+{
+
+
+class IDocumentTemplate;
 
 
 class CDocumentManagerBase: public idoc::IDocumentManager,
-							public imod::TMultiModelObserverBase<idoc::IDocument>
+							public imod::TMultiModelObserverBase<imod::IModel>
 {
 public:
-	typedef imod::TMultiModelObserverBase<idoc::IDocument> BaseClass;
+	typedef imod::TMultiModelObserverBase<imod::IModel> BaseClass;
 
 	CDocumentManagerBase();
 	virtual ~CDocumentManagerBase();
 
-	virtual idoc::IDocument* OpenDocument(const istd::CString& fileName);
-	void RegisterDocumentTemplate(const std::string& documentId, idoc::IDocumentTemplate* documentTemplate);
+	virtual imod::IModel* OpenDocument(const istd::CString& filePath, bool createView, const std::string& viewTypeId);
+
+	void SetDocumentTemplate(const idoc::IDocumentTemplate* documentTemplatePtr);
 
 	// reimplemented (idoc::IDocumentManager)
-	virtual idoc::IDocument* GetActiveDocument() const;
-	virtual imod::IObserver* GetActiveView() const;
-	virtual idoc::IDocument* GetDocument(int documentIndex) const;
-	virtual int GetDocumentCount() const;
-	virtual idoc::IDocument* OnFileNew(const std::string& documentId);
-	imod::IObserver* OnWindowNew(const std::string& viewTypeId);
-	virtual bool OnFileSave();
-	virtual bool OnFileSaveAs();
-	virtual bool OnFileOpen(const std::string& documentId);
-	virtual bool OnFileClose();
-	virtual istd::CStringList GetDocumentIds() const;
+	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const;
+	virtual int GetDocumentsCount() const;
+	virtual imod::IModel& GetDocumentFromIndex(int index) const;
+	virtual istd::IPolymorphic* GetActiveView() const;
+	virtual void SetActiveView(istd::IPolymorphic* viewPtr);
+	virtual imod::IModel* GetDocumentFromView(const istd::IPolymorphic& view) const;
+	virtual imod::IModel* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "");
+	virtual bool FileOpen(const std::string* documentTypeIdPtr, bool createView = true, const std::string& viewTypeId = "");
+	virtual bool FileSave(bool requestFileName = false);
+	virtual bool FileClose();
 
 protected:
-	std::string GetTemplateIdFromFile(const istd::CString& fileName) const;
+	typedef istd::TDelPtr<imod::IModel> DocumentPtr;
+	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
+	typedef std::list<ViewPtr> Views;
+
+	struct DocumentInfo{
+		DocumentInfo(){}
+		DocumentInfo(const istd::CString& filePath, imod::IModel* documentPtr)
+		{
+			this->filePath = filePath;
+			this->documentPtr.SetPtr(documentPtr);
+		}
+
+		istd::CString filePath;
+		std::string documentTypeId;
+		DocumentPtr documentPtr;
+		Views views;
+	};
+
 	bool CloseDocument(int index);
 	void CloseAllDocuments();
-	void RemoveDocument(IDocument* document);
-	istd::CString CalculateCopyName(const istd::CString& documentTitle) const;
+	void RemoveDocument(imod::IModel* documentPtr);
+
+	DocumentInfo& GetDocumentInfo(int index) const;
+
+	/**
+		Get document info assigned to active view.
+	*/
+	DocumentInfo* GetActiveDocumentInfo() const;
+
+	/**
+		Get document info assigned to active view.
+	*/
+	DocumentInfo* GetViewDocumentInfo(const istd::IPolymorphic& view) const;
+
+	/**
+		Create instance of specified document without attaching to this manager.
+	*/
+	DocumentInfo* CreateDocument(const std::string& documentTypeId, bool createView, const std::string& viewTypeId) const;
+
+	/**
+		Register (attach) created document as new working document.
+	*/
+	bool RegisterDocument(DocumentInfo* documentPtr);
 
 	// abstract methods
 	
 	/**
-		Gets save file name.
-	*/
-	virtual istd::CString GetSaveFileName(const idoc::IDocumentTemplate& documentTemplate) const = 0;
-
-	/**
 		Gets open file names.
 	*/
-	virtual istd::CStringList GetOpenFileNames(const idoc::IDocumentTemplate& documentTemplate) const  = 0;
+	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const  = 0;
+
+	/**
+		Gets save file name.
+	*/
+	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const = 0;
+
+	/**
+		Called during view is registered.
+	*/
+	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr) = 0;
 
 private:
-	idoc::IDocumentTemplate* GetTemplateFromId(const std::string& templateId) const;
+	typedef istd::TPointerVector<DocumentInfo> DocumentInfos;
 
-protected:
-	typedef istd::TPointerVector<idoc::IDocument> Documents;
-	typedef istd::TIFactory<imod::IObserver> IViewFactory;
-	typedef std::map<std::string, IDocumentTemplate*> DocumentTemplateMap;
+	const IDocumentTemplate* m_documentTemplatePtr;
+	DocumentInfos m_documentInfos;
 
-	DocumentTemplateMap m_documentTemplateMap;
-	Documents m_documents;
-	int m_activeIndex;
-	int m_untitledIndex;
+	istd::IPolymorphic* m_activeViewPtr;
 };
 
 

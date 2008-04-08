@@ -7,8 +7,11 @@
 #include "istd/IChangeable.h"
 #include "istd/CString.h"
 
+#include "idoc/IDocumentTemplate.h"
 
-namespace imod{
+
+namespace imod
+{
 	class IModel;
 	class IObserver;
 }
@@ -16,9 +19,6 @@ namespace imod{
 
 namespace idoc
 {		
-
-
-class IDocument;
 
 
 /**
@@ -30,64 +30,66 @@ class IDocumentManager: virtual public istd::IChangeable
 public:
 	enum ChangeFlags
 	{
-		DocumentCreated = 1,
-		DocumentRemoved = 2,
-		DocumentCountChanged = 4,
-		DocumentActivationChanged = 8
+		DocumentRenamed = 0x10,
+		DocumentCreated = 0x20,
+		DocumentRemoved = 0x40,
+		DocumentCountChanged = 0x80,
+		DocumentActivationChanged = 0x100
 	};
 
+	/**
+		Return main document template used by this manager.
+	*/
+	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const = 0;
 
 	/**
-		Returns the active document. 
+		Get number of opened documents.
+	*/
+	virtual int GetDocumentsCount() const = 0;
+
+	/**
+		Get document at specified index.
+	*/
+	virtual imod::IModel& GetDocumentFromIndex(int index) const = 0;
+
+	/**
+		Return the active document. 
 		If no document is active, the function return a \c NULL
 	*/
-	virtual idoc::IDocument* GetActiveDocument() const = 0;
+	virtual istd::IPolymorphic* GetActiveView() const = 0;
 
 	/**
-		Returns the document with the index \c index. 
-		If no document with this index exists, the function return a \c NULL
+		Return the document assigned to view. 
+		\param	viewPtr	pointer to view object.
+		\return			pointer to assigned document, or \c NULL if no document for this view exists.
 	*/
-	virtual idoc::IDocument* GetDocument(int documentIndex) const = 0;
+	virtual imod::IModel* GetDocumentFromView(const istd::IPolymorphic& view) const = 0;
 
 	/**
-		Returns number of documents. 
+		Creates a new document with the document ID \c documentTypeId.
+		\param	documentTypeId	ID of document type.
+		\param	createView		if true, view will be automatically created.
+		\param	viewTypeId		ID of view type, if it will be created.
 	*/
-	virtual int GetDocumentCount() const = 0;
-
-	/**
-		Creates a new document with the document ID \c documentId. 
-	*/
-	virtual idoc::IDocument* OnFileNew(const std::string& documentId) = 0;
-
-	/**
-		Creates a new view for active document.
-	*/
-	virtual imod::IObserver* OnWindowNew(const std::string& viewTypeId) = 0;
-
-	/**
-		Saves active document. 
-	*/
-	virtual bool OnFileSave() = 0;
-
-	/**
-		Saves active document under some user defined name.
-	*/
-	virtual bool OnFileSaveAs() = 0;
+	virtual imod::IModel* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "") = 0;
 
 	/**
 		Opens document(s) from the file list. 
+		\param	documentTypeIdPtr	optional ID of document type. If it null, document type will be found automatically.
+		\param	createView			if true, view will be automatically created.
+		\param	viewTypeId			ID of view type, if it will be created.
 	*/
-	virtual bool OnFileOpen(const std::string& documentId) = 0;
+	virtual bool FileOpen(const std::string* documentTypeIdPtr = NULL, bool createView = true, const std::string& viewTypeId = "") = 0;
 
 	/**
-		Closes current view. 
+		Save active document. 
 	*/
-	virtual bool OnFileClose() = 0;
+	virtual bool FileSave(bool requestFileName = false) = 0;
 
 	/**
-		Returns supported document IDs
+		Close current view. 
 	*/
-	virtual istd::CStringList GetDocumentIds() const = 0;
+	virtual bool FileClose() = 0;
 };
 
 

@@ -1,22 +1,20 @@
 #include "idoc/CDocumentManagerBase.h"
 
 
-#include "imod/IModel.h"
+#include <algorithm>
 
-#include "istd/IChangeable.h"
-#include "istd/IDuplicatable.h"
 #include "istd/TChangeNotifier.h"
 
 #include "idoc/IDocumentTemplate.h"
+
 
 namespace idoc
 {		
 
 
 CDocumentManagerBase::CDocumentManagerBase()
+:	m_activeViewPtr(NULL), m_documentTemplatePtr(NULL)
 {
-	m_activeIndex = -1;
-	m_untitledIndex = 0;
 }
 
 
@@ -25,292 +23,300 @@ CDocumentManagerBase::~CDocumentManagerBase()
 }
 
 
-idoc::IDocument* CDocumentManagerBase::OpenDocument(const istd::CString& fileName)
+imod::IModel* CDocumentManagerBase::OpenDocument(const istd::CString& filePath, bool createView, const std::string& viewTypeId)
 {
-	if (fileName.IsEmpty()){
+	if (filePath.IsEmpty() || (m_documentTemplatePtr == NULL)){
 		return NULL;
 	}
 
-	std::string templateId = GetTemplateIdFromFile(fileName);
-	if (templateId.empty()){
-		return NULL;
-	}
+	IDocumentTemplate::Ids documentIds = m_documentTemplatePtr->GetDocumentTypeIdsForFile(filePath);
 
-	idoc::IDocument* newDocument = OnFileNew(templateId);
-	if (newDocument == NULL){
-		return NULL;
-	}
-	
-	bool retVal = newDocument->Load(fileName);
-	if (retVal){
-		newDocument->SetDocumentTitle(fileName);
+	if (!documentIds.empty()){
+		const std::string& documentTypeId = documentIds.front();
+		istd::TDelPtr<DocumentInfo> infoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
+		if (infoPtr.IsValid()){
+			I_ASSERT(infoPtr->documentPtr.IsValid());
 
-		istd::CChangeNotifier changePtr(this, DocumentCreated, newDocument);
+			istd::CChangeNotifier documentPtr(dynamic_cast<istd::IChangeable*>(infoPtr->documentPtr.GetPtr()));
 
-		changePtr.Reset();
-	}
-	else{
-		RemoveDocument(newDocument);
-	
-		return NULL;
-	}
-		
-	return newDocument;
-}
-
-
-void CDocumentManagerBase::RegisterDocumentTemplate(const std::string& documentId, idoc::IDocumentTemplate* templatePtr)
-{
-	m_documentTemplateMap[documentId] = templatePtr;
-}
-
-
-idoc::IDocument* CDocumentManagerBase::GetActiveDocument() const
-{
-	return GetDocument(m_activeIndex);
-}
-
-
-imod::IObserver* CDocumentManagerBase::GetActiveView() const
-{
-	return NULL;
-}
-
-
-idoc::IDocument* CDocumentManagerBase::GetDocument(int documentIndex) const
-{
-	if (documentIndex < 0 || documentIndex > m_documents.GetCount()){
-		return NULL;
-	}
-
-	return const_cast<idoc::IDocument*>(m_documents.GetAt(documentIndex));
-}
-
-
-int CDocumentManagerBase::GetDocumentCount() const
-{
-	return m_documents.GetCount();
-}
-
-
-idoc::IDocument* CDocumentManagerBase::OnFileNew(const std::string& documentId)
-{
-	DocumentTemplateMap::iterator templateIter = m_documentTemplateMap.find(documentId);
-	if (templateIter == m_documentTemplateMap.end()){
-		return NULL;
-	}
-
-	idoc::IDocumentTemplate* documentTemplatePtr = templateIter->second;
-	I_ASSERT(documentTemplatePtr != NULL);
-
-	idoc::IDocument* newDocumentPtr = documentTemplatePtr->CreateDocument();
-	if (newDocumentPtr != NULL){
-		newDocumentPtr->SetDocumentTitle(documentTemplatePtr->GetDefaultTitle() + istd::CString(" - ") + istd::CString::FromNumber(m_untitledIndex++));
-		
-		m_documents.PushBack(newDocumentPtr);
-	}
-
-	m_activeIndex = m_documents.GetCount() - 1;
-
-	istd::CChangeNotifier changePtr(this, DocumentCountChanged | DocumentCreated);
-	changePtr.Reset();
-
-	return newDocumentPtr;
-}
-
-
-imod::IObserver* CDocumentManagerBase::OnWindowNew(const std::string& viewTypeId)
-{
-	idoc::IDocument* activeDocumentPtr = GetActiveDocument();
-	if (activeDocumentPtr != NULL){
-		idoc::IDocumentTemplate* documentTemplatePtr = activeDocumentPtr->GetTemplate();
-		I_ASSERT(documentTemplatePtr != NULL);
-
-		return documentTemplatePtr->AddView(*activeDocumentPtr, viewTypeId);
+			infoPtr->filePath = filePath;
+			infoPtr->documentTypeId = documentTypeId;
+			if (	m_documentTemplatePtr->LoadDocumentFromFile(filePath, *infoPtr->documentPtr) &&
+					RegisterDocument(infoPtr.GetPtr())){
+				return infoPtr.PopPtr()->documentPtr.GetPtr();
+			}
+		}
 	}
 
 	return NULL;
 }
 
 
-bool CDocumentManagerBase::OnFileSave()
+void CDocumentManagerBase::SetDocumentTemplate(const IDocumentTemplate* documentTemplatePtr)
 {
-	idoc::IDocument* activeDocument = GetActiveDocument();
-
-	if (activeDocument != NULL){
-		istd::CString fileName = activeDocument->GetFileName();
-		if (fileName.IsEmpty()){
-			return OnFileSaveAs();
-		}
-
-		return activeDocument->Save(fileName);
-	}
-
-	return false;
+	m_documentTemplatePtr = documentTemplatePtr;
 }
 
 
-bool CDocumentManagerBase::OnFileSaveAs()
+// reimplemented (idoc::IDocumentManager)
+
+const idoc::IDocumentTemplate* CDocumentManagerBase::GetDocumentTemplate() const
 {
-	idoc::IDocument* activeDocumentPtr = GetActiveDocument();
-	if (activeDocumentPtr != NULL){
-		idoc::IDocumentTemplate* templatePtr = activeDocumentPtr->GetTemplate();
-		I_ASSERT(templatePtr != NULL);
-		istd::CString fileName = GetSaveFileName(*templatePtr);
-		if (fileName.IsEmpty()){
-			return true;
-		}
-
-		bool retVal = activeDocumentPtr->Save(fileName);
-		if (retVal){
-			activeDocumentPtr->SetDocumentTitle(fileName);
-		}
-
-		return retVal;
-	}
-
-	return false;
+	return m_documentTemplatePtr;
 }
 
 
-bool CDocumentManagerBase::OnFileOpen(const std::string& documentId)
+int CDocumentManagerBase::GetDocumentsCount() const
 {
-	idoc::IDocumentTemplate* documentTemplate = GetTemplateFromId(documentId);
-	if (documentTemplate != NULL){
-		bool retVal = true;
-	
-		istd::CStringList files = GetOpenFileNames(*documentTemplate);
-		for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
-			retVal = (OpenDocument(files.at(fileIndex)) != NULL) && retVal;
-		}
-
-		return retVal;
-	}
-
-	return false;
+	return m_documentInfos.GetCount();
 }
 
 
-bool CDocumentManagerBase::OnFileClose()
+imod::IModel& CDocumentManagerBase::GetDocumentFromIndex(int index) const
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < m_documentInfos.GetCount());
+	I_ASSERT(m_documentInfos.GetAt(index) != NULL);
+	I_ASSERT(m_documentInfos.GetAt(index)->documentPtr.IsValid());
+
+	return *(m_documentInfos.GetAt(index)->documentPtr);
+}
+
+
+istd::IPolymorphic* CDocumentManagerBase::GetActiveView() const
+{
+	return m_activeViewPtr;
+}
+
+
+void CDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
+{
+	m_activeViewPtr = viewPtr;
+}
+
+
+imod::IModel* CDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view) const
+{
+	const DocumentInfo* infoPtr = GetViewDocumentInfo(view);
+	if (infoPtr != NULL){
+		I_ASSERT(infoPtr != NULL);
+		I_ASSERT(infoPtr->documentPtr.IsValid());
+
+		return infoPtr->documentPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
+imod::IModel* CDocumentManagerBase::FileNew(const std::string& documentTypeId, bool createView, const std::string& viewTypeId)
+{
+	istd::TDelPtr<DocumentInfo> newInfoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
+	if (newInfoPtr.IsValid() && RegisterDocument(newInfoPtr.GetPtr())){
+		return newInfoPtr.PopPtr()->documentPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
+bool CDocumentManagerBase::FileOpen(const std::string* documentTypeIdPtr, bool createView, const std::string& viewTypeId)
 {
 	bool retVal = true;
 
-	idoc::IDocument* activeDocumentPtr = GetActiveDocument();
-	if (activeDocumentPtr != NULL){
-		imod::IObserver* viewPtr = GetActiveView();
-		activeDocumentPtr->RemoveView(viewPtr);
-
-		if (activeDocumentPtr->GetViewCount() == 0){
-			RemoveDocument(activeDocumentPtr);
-		}
+	istd::CStringList files = GetOpenFileNames(documentTypeIdPtr);
+	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
+		retVal = (OpenDocument(files.at(fileIndex), createView, viewTypeId) != NULL) && retVal;
 	}
 
 	return retVal;
 }
 
 
-istd::CStringList CDocumentManagerBase::GetDocumentIds() const
+bool CDocumentManagerBase::FileSave(bool requestFileName)
 {
-	return istd::CStringList();
+	if (m_documentTemplatePtr == NULL){
+		return false;
+	}
+
+	DocumentInfo* infoPtr = GetActiveDocumentInfo();
+	if (infoPtr == NULL){
+		return false;
+	}
+
+	I_ASSERT(infoPtr->documentPtr.IsValid());
+
+	istd::CString filePath = infoPtr->filePath;
+
+	if (requestFileName || filePath.IsEmpty()){
+		filePath = GetSaveFileName(infoPtr->documentTypeId);
+		if (filePath.IsEmpty()){
+			return true;
+		}
+	}
+
+	if (m_documentTemplatePtr->SaveDocumentToFile(*infoPtr->documentPtr, filePath)){
+		if (infoPtr->filePath != filePath){
+			istd::CChangeNotifier notifierPtr(this);
+
+			infoPtr->filePath = filePath;
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CDocumentManagerBase::FileClose()
+{
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		DocumentInfo& info = GetDocumentInfo(i);
+
+		Views::iterator findIter = std::find(info.views.begin(), info.views.end(), m_activeViewPtr);
+		if (findIter != info.views.end()){
+			istd::CChangeNotifier notifier(this, DocumentRemoved);
+
+			info.views.erase(findIter);	// remove active view
+
+			m_activeViewPtr = NULL;
+
+			if (info.views.empty()){	// last view was removed
+				m_documentInfos.RemoveAt(i);
+			}
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 
 // protected methods
 
-std::string CDocumentManagerBase::GetTemplateIdFromFile(const istd::CString& fileName) const
-{
-	static std::string emptyId;
-
-	int pointPos = fileName.rfind('.');
-
-	istd::CString fileExtension = fileName.substr(pointPos + 1);
-	istd::CString fileExtensionUpper = fileExtension.ToUpper();
-
-	DocumentTemplateMap::const_iterator iter = m_documentTemplateMap.begin();
-	for (;iter != m_documentTemplateMap.end(); iter++){
-		idoc::IDocumentTemplate* documentTemplatePtr = iter->second;
-		istd::CStringList extensions = documentTemplatePtr->GetFileExtensions();
-		
-		istd::CStringList::iterator found =  std::find(extensions.begin(), extensions.end(), fileExtension);
-		istd::CStringList::iterator found1 =  std::find(extensions.begin(), extensions.end(), fileExtensionUpper);
-		if (found != extensions.end() || found1 != extensions.end()){
-			return iter->first;
-		}
-	}
-
-	return emptyId;
-}
-
-
 bool CDocumentManagerBase::CloseDocument(int index)
 {
-	if (index < 0 || index >= m_documents.GetCount()){
+	if ((index < 0) || (index >= m_documentInfos.GetCount())){
 		return false;
 	}
 
-	m_documents.RemoveAt(index);
+	istd::CChangeNotifier notifierPtr(this, DocumentCountChanged | DocumentRemoved);
+
+	m_documentInfos.RemoveAt(index);
 	
-	istd::TChangeNotifier<CDocumentManagerBase> notifier(this, DocumentCountChanged | DocumentRemoved);
-
-	notifier.Reset();
-
 	return true;
 }
 
 
 void CDocumentManagerBase::CloseAllDocuments()
 {
-	bool isDone = false;
+	istd::CChangeNotifier notifierPtr(this, DocumentCountChanged | DocumentRemoved);
 
-	// close all documents
-	while (GetDocumentCount() && !isDone){
-		isDone = false;
-		bool retVal = CloseDocument(0);
-		if (!retVal){
-			isDone = true;
-		}
-	}
+	m_documentInfos.Reset();
 }
 
 
-void CDocumentManagerBase::RemoveDocument(idoc::IDocument* document)
+void CDocumentManagerBase::RemoveDocument(imod::IModel* documentPtr)
 {
-	for(int documentIndex = 0; documentIndex < m_documents.GetCount(); documentIndex++){
-		if (m_documents.GetAt(documentIndex) == document){
+	int documentsCount = GetDocumentsCount();
+	for (int documentIndex = 0; documentIndex < documentsCount; documentIndex++){
+		const DocumentInfo& info = GetDocumentInfo(documentIndex);
+		I_ASSERT(info.documentPtr.IsValid());
+
+		if (info.documentPtr.GetPtr() == documentPtr){
 			CloseDocument(documentIndex);
+
 			break;
 		}
 	}
 }
 
 
-istd::CString CDocumentManagerBase::CalculateCopyName(const istd::CString& documentTitle) const
+CDocumentManagerBase::DocumentInfo& CDocumentManagerBase::GetDocumentInfo(int index) const
 {
-	istd::CString docTitle = documentTitle;
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < GetDocumentsCount());
 
-	for (int documentIndex = 0; documentIndex < GetDocumentCount(); documentIndex++){
-		istd::CString currentDocTitle = GetDocument(documentIndex)->GetDocumentTitle();
+	DocumentInfo* retVal = const_cast<DocumentInfo*>(m_documentInfos.GetAt(index));
+	I_ASSERT(retVal != NULL);
 
-		if (docTitle == currentDocTitle){
-			docTitle += istd::CString("*");
-			
-			CalculateCopyName(docTitle);
-		}
-	}
-
-	return docTitle;
+	return *retVal;
 }
 
-// private methods
 
-idoc::IDocumentTemplate* CDocumentManagerBase::GetTemplateFromId(const std::string& templateId) const
+CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetActiveDocumentInfo() const
 {
-	DocumentTemplateMap::const_iterator templateIter = m_documentTemplateMap.find(templateId);
-	if (templateIter != m_documentTemplateMap.end()){
-		return templateIter->second;
+	const istd::IPolymorphic* viewPtr = GetActiveView();
+	if (viewPtr != NULL){
+		return GetViewDocumentInfo(*viewPtr);
 	}
 
 	return NULL;
+}
+
+
+CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetViewDocumentInfo(const istd::IPolymorphic& view) const
+{
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		DocumentInfo& info = GetDocumentInfo(i);
+
+		Views::iterator findIter = std::find(info.views.begin(), info.views.end(), &view);
+		if (findIter != info.views.end()){
+			return &info;
+		}
+	}
+
+	return NULL;
+}
+
+
+CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::CreateDocument(const std::string& documentTypeId, bool createView, const std::string& viewTypeId) const
+{
+	if (m_documentTemplatePtr != NULL){
+		istd::TDelPtr<DocumentInfo> infoPtr(new DocumentInfo);
+
+		infoPtr->documentPtr.SetPtr(m_documentTemplatePtr->CreateDocument(documentTypeId));
+
+		if (infoPtr->documentPtr.IsValid()){
+			if (createView){
+				istd::IPolymorphic* viewPtr = m_documentTemplatePtr->CreateView(infoPtr->documentPtr.GetPtr(), viewTypeId);
+				if (viewPtr == NULL){
+					return NULL;
+				}
+
+				infoPtr->views.push_back(ViewPtr());
+				infoPtr->views.back().SetPtr(viewPtr);
+			}
+
+			return infoPtr.PopPtr();
+		}
+	}
+
+	return NULL;
+}
+
+
+bool CDocumentManagerBase::RegisterDocument(DocumentInfo* infoPtr)
+{
+	I_ASSERT(infoPtr != NULL);
+
+	istd::CChangeNotifier changePtr(this, DocumentCountChanged | DocumentCreated);
+
+	m_documentInfos.PushBack(infoPtr);
+
+	for (		Views::iterator iter = infoPtr->views.begin();
+				iter != infoPtr->views.end();
+				++iter){
+		I_ASSERT(iter->IsValid());
+
+		OnViewRegistered(iter->GetPtr());
+	}
+
+	return true;
 }
 
 
