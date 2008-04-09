@@ -200,7 +200,7 @@ template <class InterfaceClass>
 InterfaceClass* TFactorisableContainer<InterfaceClass>::CreateElement(const std::string& itemKey)
 {
 	if (m_itemFactoryPtr != NULL){
-		istd::IPolymorphic* polymorphicPtr =  m_itemFactoryPtr->CreateInstance(itemKey);
+		istd::IPolymorphic* polymorphicPtr = m_itemFactoryPtr->CreateInstance(itemKey);
 		if (polymorphicPtr != NULL){
 			InterfaceClass* interfacePtr = dynamic_cast<InterfaceClass*>(polymorphicPtr);
 			if (interfacePtr != NULL){

@@ -50,9 +50,11 @@ const istd::CString& TNamedBase<BaseClass>::GetName() const
 template <class BaseClass>
 void TNamedBase<BaseClass>::SetName(const istd::CString& name)
 {
-	istd::CChangeNotifier changePtr(this);
+	if (m_name != name){
+		istd::CChangeNotifier changePtr(this);
 
-	m_name = name;
+		m_name = name;
+	}
 }
 
 
