@@ -36,15 +36,26 @@ int CMultiModelObserverBase::GetModelCount() const
 }
 
 
-// reimplemented (IObserver)
+// reimplemented (imod::IObserver)
+
+bool CMultiModelObserverBase::IsModelAttached(const imod::IModel* modelPtr) const
+{
+	if (modelPtr == NULL){
+		return !m_models.empty();
+	}
+
+	Models::const_iterator foundIter = std::find(m_models.begin(), m_models.end(), modelPtr);
+
+	return (foundIter != m_models.end());
+}
+
 
 bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
 {
-	// check of model is already model connected:
-	for (Models::iterator index = m_models.begin(); index != m_models.end(); index++){
-		if (modelPtr == *index){
-			return false;
-		}
+	I_ASSERT(modelPtr != NULL);
+
+	if (IsModelAttached(modelPtr)){
+		return false;
 	}
 
 	m_models.push_back(modelPtr);
@@ -68,15 +79,15 @@ bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
 
 void CMultiModelObserverBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	I_ASSERT(IsModelObserved(modelPtr));
+	I_ASSERT(IsModelAttached(modelPtr));
 }
 
 
 void CMultiModelObserverBase::AfterUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(IsModelObserved(modelPtr));
+	I_ASSERT(IsModelAttached(modelPtr));
 
-	if (IsModelObserved(modelPtr)){
+	if (IsModelAttached(modelPtr)){
 		OnUpdate(modelPtr, updateFlags, updateParamsPtr);
 	}
 }
@@ -100,22 +111,6 @@ void CMultiModelObserverBase::EnsureDetached()
 
 void CMultiModelObserverBase::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-}
-
-
-// private methods:
-
-bool CMultiModelObserverBase::IsModelObserved(const imod::IModel* modelPtr) const
-{
-	for (Models::const_iterator index = m_models.begin(); index != m_models.end(); index++){
-		IModel* referenceModelPtr = *index;
-
-		if (referenceModelPtr == modelPtr){
-			return true;
-		}
-	}
-
-	return false;
 }
 
 

@@ -4,14 +4,12 @@
 #include "iqt/CSignalBlocker.h"
 
 
-// reimplemented (imod::IModelEditor)
+// reimplemented (iqt::TGuiModelJoinerWrap)
 
 void CTextEditor::UpdateModel()
 {
 	QTextEdit* textEditPtr = GetQtWidget();
-	if (textEditPtr == NULL){
-		return;
-	}
+	I_ASSERT(textEditPtr != NULL);
 
 	iqt::CSignalBlocker block(textEditPtr);
 
@@ -23,12 +21,10 @@ void CTextEditor::UpdateModel()
 }
 
 
-void CTextEditor::UpdateEditor()
+void CTextEditor::UpdateGui()
 {
 	QTextEdit* textEditPtr = GetQtWidget();
-	if (textEditPtr == NULL){
-		return;
-	}
+	I_ASSERT(textEditPtr != NULL);
 
 	CTextModel* objectPtr = GetObjectPtr();
 

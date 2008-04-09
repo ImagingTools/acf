@@ -168,11 +168,17 @@ bool CGuiComponentBase::eventFilter(QObject* obj, QEvent* event)
 			break;
 
 		case QEvent::Show:
-			OnGuiShown();
+			if (!m_isGuiShown){
+				m_isGuiShown = true;
+				OnGuiShown();
+			}
 			break;
 
 		case QEvent::Hide:
-			OnGuiHidden();
+			if (m_isGuiShown){
+				m_isGuiShown = false;
+				OnGuiHidden();
+			}
 			break;
 
 		case QEvent::LanguageChange:

@@ -25,6 +25,12 @@ class IObserver: virtual public istd::IPolymorphic
 {
 public:
 	/**
+		Check if specified model is attached.
+		\modelPtr	pointer to model object. If this pointer is NULL, any model is meaned.
+		\return	true, if \c modelPtr is attached yet to this observer, false elsewhere.
+	*/
+	virtual bool IsModelAttached(const IModel* modelPtr) const = 0;
+	/**
 		This call back function will be called, if an observable object is about to be attached.
 		This function returns a \c true, if observable object is accepted 
 		by the implementation logic of the observer, otherwise the function 

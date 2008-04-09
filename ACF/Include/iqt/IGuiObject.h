@@ -18,7 +18,7 @@ namespace iqt
 /**
 	Common interface for GUI objects using in component context.
  */
-class IGuiObject: public istd::IPolymorphic
+class IGuiObject: virtual public istd::IPolymorphic
 {
 public:
 	/**

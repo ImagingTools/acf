@@ -407,6 +407,9 @@
 			<File
 				RelativePath="..\TGuiComponentBase.h">
 			</File>
+			<File
+				RelativePath="..\TGuiModelJoinerWrap.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -418,36 +421,6 @@
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
-			<File
-				RelativePath=".\generatedfiles\NemoRelease\moc_CLogGuiComp.cpp">
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath=".\generatedfiles\Debug\moc_CLogGuiComp.cpp">
 				<FileConfiguration
@@ -527,6 +500,36 @@
 					<Tool
 						Name="VCCLCompilerTool"
 						ObjectFile="$(IntDir)/$(InputName)2.obj"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\NemoRelease\moc_CLogGuiComp.cpp">
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
 				</FileConfiguration>
 			</File>
 			<File

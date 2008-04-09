@@ -23,6 +23,10 @@ namespace imod
 template <class BaseClass>
 class TModelWrap: public istd::TUpdateManagerWrap<BaseClass>, public imod::CModelBase
 {
+public:
+	typedef istd::TUpdateManagerWrap<BaseClass> BaseClass;
+	typedef imod::CModelBase BaseClass2;
+
 protected:
 	// pseudo-reimplemented (istd::IChangeable)
 	virtual void OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
@@ -37,6 +41,8 @@ protected:
 template <class BaseClass>
 void TModelWrap<BaseClass>::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
+	BaseClass::OnBeginChanges(changeFlags, changeParamsPtr);
+
 	NotifyBeforeUpdate(changeFlags, changeParamsPtr);
 }
 
@@ -44,6 +50,8 @@ void TModelWrap<BaseClass>::OnBeginChanges(int changeFlags, istd::IPolymorphic* 
 template <class BaseClass>
 void TModelWrap<BaseClass>::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
+	BaseClass::OnEndChanges(changeFlags, changeParamsPtr);
+
 	NotifyAfterUpdate(changeFlags, changeParamsPtr);
 }
 

@@ -5,26 +5,29 @@
 // Qt includes
 #include <QTextEdit>
 
-#include "imod/TModelEditorBase.h"
+#include "imod/TSingleModelObserverBase.h"
 
 #include "iqt/TGuiComponentBase.h"
+#include "iqt/TGuiModelJoinerWrap.h"
 
 #include "CTextModel.h"
 
 
-class CTextEditor:	public iqt::TGuiComponentBase<QTextEdit>, 
-					public imod::TModelEditorBase<CTextModel>
+class CTextEditor: public iqt::TGuiModelJoinerWrap<
+			iqt::TGuiComponentBase<QTextEdit>,
+			imod::TSingleModelObserverBase<CTextModel> >
 {
 
 	Q_OBJECT
 
 public:
-	typedef iqt::TGuiComponentBase<QTextEdit> BaseClass;
-	typedef imod::TModelEditorBase<CTextModel> BaseClass2;
+	typedef iqt::TGuiModelJoinerWrap<
+				iqt::TGuiComponentBase<QTextEdit>,
+				imod::TSingleModelObserverBase<CTextModel> > BaseClass;
 
-	// reimplemented (imod::IModelEditor)
+	// reimplemented (iqt::TGuiModelJoinerWrap)
 	virtual void UpdateModel();
-	virtual void UpdateEditor();
+	virtual void UpdateGui();
 
 protected slots:
 	 void OnTextChanged();

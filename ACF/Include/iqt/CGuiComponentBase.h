@@ -28,6 +28,8 @@ public:
 
 	CGuiComponentBase();
 
+	bool IsGuiShown() const;
+
 	// reimplemented (iqt::IGuiObject)
 	virtual void AttachTo(QWidget* parentWidgetPtr, int layoutMargin = -1);
 	virtual void DetachFrom(QWidget* parentWidgetPtr);
@@ -80,10 +82,19 @@ protected:
 
 private:
 	QWidget* m_widgetPtr;
+	bool m_isGuiShown;
 };
 
 
 // inline methods
+
+inline bool CGuiComponentBase::IsGuiShown() const
+{
+	return m_isGuiShown;
+}
+
+
+// reimplemented (iqt::IGuiObject)
 
 inline QWidget* CGuiComponentBase::GetWidget() const
 {

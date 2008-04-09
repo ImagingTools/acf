@@ -83,6 +83,7 @@ void TModelEditorBase<InterfaceClass>::ResetEditor()
 {
 }
 
+
 template <class InterfaceClass>
 bool TModelEditorBase<InterfaceClass>::IsModelChangeable() const
 {

@@ -71,6 +71,22 @@ public:
 	*/
 	TDelPtr& operator=(Type* ptr);
 
+	/**
+		Set internal pointer using casted pointer of other type.
+		If casting is not possible, parameter object will be removed.
+	*/
+	template <class SourceType>
+	bool SetCastedOrRemove(SourceType* ptr)
+	{
+		Type* castedPtr = dynamic_cast<Type*>(ptr);
+
+		SetPtr(castedPtr);
+
+		if (castedPtr == NULL){
+			delete ptr;
+		}
+	}
+
 protected:
 	/**
 		Remove referenced object.

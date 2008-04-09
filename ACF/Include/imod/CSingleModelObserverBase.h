@@ -31,6 +31,7 @@ public:
 	imod::IModel* GetModelPtr() const;
 
 	// reimplemented (imod::IObserver)
+	virtual bool IsModelAttached(const imod::IModel* modelPtr) const;
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
@@ -59,6 +60,18 @@ private:
 inline imod::IModel* CSingleModelObserverBase::GetModelPtr() const
 {
 	return m_modelPtr;
+}
+
+
+// reimplemented (imod::IObserver)
+
+inline bool CSingleModelObserverBase::IsModelAttached(const imod::IModel* modelPtr) const
+{
+	if (modelPtr == NULL){
+		return m_modelPtr != NULL;
+	}
+
+	return m_modelPtr == modelPtr;
 }
 
 

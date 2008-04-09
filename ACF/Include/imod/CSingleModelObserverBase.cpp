@@ -27,14 +27,6 @@ bool CSingleModelObserverBase::OnAttached(imod::IModel* modelPtr)
 	I_ASSERT(modelPtr != NULL);
 	I_ASSERT(m_modelPtr == NULL);
 
-	if (modelPtr == NULL){
-		return false;
-	}
-
-	if (m_modelPtr != NULL){
-		return false;
-	}
-
 	BeforeUpdate(NULL);
 
 	m_modelPtr = modelPtr;

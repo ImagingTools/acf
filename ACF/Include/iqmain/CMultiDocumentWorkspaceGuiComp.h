@@ -48,6 +48,24 @@ protected:
 	*/
 	void UpdateAllTitles();
 
+	/**
+		Find view object associated with specified Qt widget.
+		\param	widget	Qt widget representing view.
+		\return	associated view or NULL if nothing is found.
+	*/
+	iqt::IGuiObject* GetViewFromWidget(const QWidget& widget) const;
+
+	/**
+		Creates signal/slot connnections for the implementation.
+	*/
+	virtual void CreateConnections();
+
+	/**
+		Creates the filter for the file selection dialog.
+		\param	documentTypeIdPtr	optional ID of document type if only filter for single document type should be created.
+	*/
+	QString CreateFileDialogFilter(const std::string* documentTypeIdPtr = NULL) const;
+
 	// reimplemented (idoc::CDocumentManagerBase)
 	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const;
@@ -63,22 +81,10 @@ protected:
 	// reimplemented (istd:IChangeable)
 	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
-private:
-	/**
-		Creates signal/slot connnections for the implementation.
-	*/
-	virtual void CreateConnections();
-
-	/**
-		Creates the filter for the file selection dialog.
-		\param	documentTypeIdPtr	optional ID of document type if only filter for single document type should be created.
-	*/
-	QString CreateFileDialogFilter(const std::string* documentTypeIdPtr = NULL) const;
-
 protected slots:
 	void OnWindowActivated(QWidget* window);
 
-protected:
+private:
 	I_ATTR(bool, m_scrollingEnabledAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 };
