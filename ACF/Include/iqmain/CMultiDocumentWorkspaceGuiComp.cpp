@@ -74,7 +74,9 @@ void CMultiDocumentWorkspaceGuiComp::UpdateAllTitles()
 	for (int i = 0; i < documentsCount; ++i){
 		const DocumentInfo& info = GetDocumentInfo(i);
 
-		QString titleName = QFileInfo(iqt::GetQString(info.filePath)).fileName();
+		QString titleName = info.filePath.IsEmpty()?
+					tr("<no name>"):
+					QFileInfo(iqt::GetQString(info.filePath)).fileName();
 
 		NameFrequencies::iterator freqIter = nameFrequencies.find(titleName);
 		int& frequency = freqIter.value();

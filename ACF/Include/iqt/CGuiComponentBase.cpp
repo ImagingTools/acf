@@ -10,7 +10,7 @@ namespace iqt
 
 
 CGuiComponentBase::CGuiComponentBase()
-:	m_widgetPtr(NULL)
+:	m_widgetPtr(NULL), m_isGuiShown(false)
 {
 }
 

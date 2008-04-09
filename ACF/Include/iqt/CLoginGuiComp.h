@@ -17,6 +17,9 @@ class CLoginGuiComp: public TDesignerGuiComponentBase<Ui::CLoginGuiComp, QWidget
 public:
 	typedef TDesignerGuiComponentBase<Ui::CLoginGuiComp, QWidget> BaseClass;
 
+	I_BEGIN_COMPONENT(CLoginGuiComp)
+	I_END_COMPONENT
+
 protected:
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
