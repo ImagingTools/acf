@@ -27,14 +27,14 @@ public:
 							It cannot be NULL.
 		\param	releaseFlag	if it is true, factory object will be automatically removed from memory.
 	*/
-	bool RegisterFactory(FactoryClass* factoryPtr, bool releaseFlag = false);
+	bool RegisterFactory(FactoryInterface* factoryPtr, bool releaseFlag = false);
 
 	// reimplemented (istd::TIFactory)
 	virtual KeyList GetFactoryKeys() const;
 	virtual InterfaceType* CreateInstance(const std::string& keyId = "") const;
 
 protected:
-	typedef istd::TOptDelPtr<FactoryClass> FactoryPtr;
+	typedef istd::TOptDelPtr<FactoryInterface> FactoryPtr;
 	typedef std::list<FactoryPtr> FactoryList;
 
 	FactoryList m_factoryList;
@@ -44,7 +44,7 @@ protected:
 // public methods
 
 template <class InterfaceType>
-bool TComposedFactory<InterfaceType>::RegisterFactory(FactoryClass* factoryPtr, bool releaseFlag)
+bool TComposedFactory<InterfaceType>::RegisterFactory(FactoryInterface* factoryPtr, bool releaseFlag)
 {
 	I_ASSERT(factoryPtr != NULL);
 

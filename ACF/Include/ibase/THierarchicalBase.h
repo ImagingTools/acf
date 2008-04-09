@@ -69,7 +69,7 @@ int THierarchicalBase<BaseClass>::GetChildCount() const
 
 
 template <class BaseClass>
-istd::IPolymorphic* THierarchicalBase<BaseClass>::GetChild(int index) const
+istd::IPolymorphic* THierarchicalBase<BaseClass>::GetChild(int /*index*/) const
 {
 	return NULL;
 }

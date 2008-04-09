@@ -210,6 +210,9 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\CFileList.cpp">
+			</File>
+			<File
 				RelativePath="..\CGuiComponentBase.cpp">
 			</File>
 			<File
@@ -267,6 +270,49 @@
 			</File>
 			<File
 				RelativePath="..\CFileDialogSerializerComp.h">
+			</File>
+			<File
+				RelativePath="..\CFileList.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing CFileList.h..."
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CFileList.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CFileList.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing CFileList.h..."
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CFileList.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CFileList.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing CFileList.h..."
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(ACFDIR)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CFileList.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CFileList.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing CFileList.h..."
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(ACFDIR)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CFileList.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CFileList.h"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CFileList.cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CGuiComponentBase.h">
@@ -422,7 +468,33 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath=".\generatedfiles\Debug\moc_CLogGuiComp.cpp">
+				RelativePath=".\generatedfiles\Release\moc_CFileList.cpp">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\Debug\moc_CFileList.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -452,24 +524,93 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\generatedfiles\Release\moc_CLogGuiComp.cpp">
+				RelativePath=".\generatedfiles\NemoDebug\moc_CFileList.cpp">
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)2.obj"/>
+				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
-						Name="VCCLCompilerTool"/>
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)2.obj"/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="NemoDebug|Win32"
-					ExcludedFromBuild="TRUE">
+					Name="NemoDebug|Win32">
 					<Tool
-						Name="VCCLCompilerTool"/>
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)2.obj"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
-						Name="VCCLCompilerTool"/>
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)2.obj"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\NemoRelease\moc_CFileList.cpp">
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\NemoRelease\moc_CLogGuiComp.cpp">
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)3.obj"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -500,6 +641,57 @@
 					<Tool
 						Name="VCCLCompilerTool"
 						ObjectFile="$(IntDir)/$(InputName)2.obj"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\Release\moc_CLogGuiComp.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\Debug\moc_CLogGuiComp.cpp">
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
 				</FileConfiguration>
 			</File>
 			<File

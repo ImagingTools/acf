@@ -205,6 +205,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "idoc", "..\..\..\Include\id
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcfDist", "..\..\AcfDist\VC7\AcfDist.vcproj", "{7CB86E2F-8CFB-402D-B4D1-011210279964}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59} = {FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(Qt) = preSolution
 		Integration = True
@@ -424,6 +432,14 @@ Global
 		{CEB219AC-442A-4B4C-8324-719352C0922B}.NemoRelease.Build.0 = NemoRelease|Win32
 		{CEB219AC-442A-4B4C-8324-719352C0922B}.Release.ActiveCfg = Release|Win32
 		{CEB219AC-442A-4B4C-8324-719352C0922B}.Release.Build.0 = Release|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.Debug.ActiveCfg = Debug|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.Debug.Build.0 = Debug|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.NemoDebug.ActiveCfg = Debug|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.NemoDebug.Build.0 = Debug|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.NemoRelease.ActiveCfg = Release|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.NemoRelease.Build.0 = Release|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.Release.ActiveCfg = Release|Win32
+		{7CB86E2F-8CFB-402D-B4D1-011210279964}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
