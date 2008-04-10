@@ -20,6 +20,7 @@ namespace iqmain
 // public methods
 
 CMainWindowGuiComp::CMainWindowGuiComp()
+	:m_activeUndoManager(*this)
 {
 	m_menuBar = NULL;
 	m_helpMenu = NULL;
@@ -43,8 +44,6 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_quitAction = NULL;
 	m_languageGroup = NULL;
 	m_standardToolBar = NULL;
-
-	m_activeUndoManagerPtr = NULL;
 }
 
 
@@ -152,16 +151,17 @@ void CMainWindowGuiComp::OnDocumentCountChanged(int currentCount)
 }
 
 
-void CMainWindowGuiComp::OnActiveDocumentChanged(imod::IModel* /*activeDocumentPtr*/)
+void CMainWindowGuiComp::OnActiveDocumentChanged(imod::IModel* activeDocumentPtr)
 {
-	// TODO: implement new concept of UNDO manager connection.
-/*
-	if (activeDocumentPtr != NULL){
-		m_activeUndoManagerPtr = activeDocumentPtr->GetUndoManager();
+	idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
+	if (documentManagerPtr != NULL){
+		imod::IModel* activeUndoManagerModelPtr = dynamic_cast<imod::IModel*>(documentManagerPtr->GetUndoManagerForDocument(activeDocumentPtr));
+		if (activeUndoManagerModelPtr != NULL){
+			activeUndoManagerModelPtr->AttachObserver(&m_activeUndoManager);
+		}
 	}
 
 	UpdateUndoMenu();
-*/
 }
 
 
@@ -270,7 +270,7 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 		}
 	}
 
-	if ((updateFlags & idoc::IDocumentManager::DocumentActivationChanged) != 0){
+	if ((updateFlags & idoc::IDocumentManager::ViewActivationChanged) != 0){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
 			imod::IModel* documentPtr = NULL;
@@ -384,9 +384,9 @@ void CMainWindowGuiComp::OnQuit()
 
 void CMainWindowGuiComp::OnUndo()
 {
-	I_ASSERT(m_activeUndoManagerPtr != NULL);
+	I_ASSERT(m_activeUndoManager.GetObjectPtr() != NULL);
 	
-	m_activeUndoManagerPtr->DoUndo();
+	m_activeUndoManager.GetObjectPtr()->DoUndo();
 
 	UpdateUndoMenu();
 }
@@ -394,9 +394,9 @@ void CMainWindowGuiComp::OnUndo()
 
 void CMainWindowGuiComp::OnRedo()
 {
-	I_ASSERT(m_activeUndoManagerPtr != NULL);
+	I_ASSERT(m_activeUndoManager.GetObjectPtr() != NULL);
 
-	m_activeUndoManagerPtr->DoRedo();
+	m_activeUndoManager.GetObjectPtr()->DoRedo();
 	
 	UpdateUndoMenu();
 }
@@ -478,17 +478,17 @@ void CMainWindowGuiComp::OnAbout()
 }
 
 
-void CMainWindowGuiComp::OnLanguageSelected(QAction* a) 
+void CMainWindowGuiComp::OnLanguageSelected(QAction* actionPtr) 
 {
 	if (m_translationManagerCompPtr.IsValid()){
-		m_translationManagerCompPtr->SetSelectedLanguage(a->text());
+		m_translationManagerCompPtr->SetSelectedLanguage(actionPtr->text());
 	}
 }
 
 
-void CMainWindowGuiComp::OnStyleSelected(QAction* a) 
+void CMainWindowGuiComp::OnStyleSelected(QAction* actionPtr) 
 {
-	qApp->setStyle(a->text());
+	qApp->setStyle(actionPtr->text());
 
 	QApplication::setPalette(QApplication::style()->standardPalette());
 }
@@ -674,7 +674,7 @@ void CMainWindowGuiComp::SetupEditMenu()
 
 	m_redoAction = new QAction(tr("&Redo"), m_editMenu);
 	m_redoAction->setShortcut(tr("Ctrl+Y"));
-	connect(m_undoAction, SIGNAL(activated()), this, SLOT(OnRedo()));
+	connect(m_redoAction, SIGNAL(activated()), this, SLOT(OnRedo()));
 	m_redoAction->setIcon(QIcon(QString::fromUtf8(":/Resources/Icons/Redo.png")));
 	
 	m_editMenu->addAction(m_undoAction);
@@ -687,7 +687,6 @@ void CMainWindowGuiComp::SetupEditMenu()
 
 void CMainWindowGuiComp::SetupTranslationMenu()
 {
-	// create translation menu:
 	if (m_translationManagerCompPtr.IsValid()){
 		m_languageGroup = new QActionGroup(this);
 		m_languageGroup->setExclusive(true);
@@ -805,15 +804,43 @@ bool CMainWindowGuiComp::HasDocumentTemplate() const
 
 void CMainWindowGuiComp::UpdateUndoMenu()
 {
-	if (m_activeUndoManagerPtr == NULL){
+	if (m_activeUndoManager.GetObjectPtr() == NULL){
 		m_undoAction->setEnabled(false);
 		m_redoAction->setEnabled(false);
 
 		return;
 	}
 
-	m_undoAction->setEnabled(m_activeUndoManagerPtr->IsUndoAvailable());
-	m_redoAction->setEnabled(m_activeUndoManagerPtr->IsRedoAvailable());
+	m_undoAction->setEnabled(m_activeUndoManager.GetObjectPtr()->IsUndoAvailable());
+	m_redoAction->setEnabled(m_activeUndoManager.GetObjectPtr()->IsRedoAvailable());
+}
+
+
+// public methods of embedded class ActiveUndoManager
+
+CMainWindowGuiComp::ActiveUndoManager::ActiveUndoManager(CMainWindowGuiComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::IObserver)
+
+bool CMainWindowGuiComp::ActiveUndoManager::OnAttached(imod::IModel* modelPtr)
+{
+	EnsureDetached();
+
+	return BaseClass::OnAttached(modelPtr);
+}
+
+
+// protected methods of embedded class ActiveUndoManager
+		
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CMainWindowGuiComp::ActiveUndoManager::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_parent.UpdateUndoMenu();
 }
 
 

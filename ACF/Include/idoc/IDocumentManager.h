@@ -34,13 +34,18 @@ public:
 		DocumentCreated = 0x20,
 		DocumentRemoved = 0x40,
 		DocumentCountChanged = 0x80,
-		DocumentActivationChanged = 0x100
+		ViewActivationChanged = 0x100
 	};
 
 	/**
 		Return main document template used by this manager.
 	*/
 	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const = 0;
+
+	/**
+		Return undo mananger for document \c documenPtr.
+	*/
+	virtual imod::IUndoManager* GetUndoManagerForDocument(imod::IModel* documentPtr) const = 0;
 
 	/**
 		Get number of opened documents.

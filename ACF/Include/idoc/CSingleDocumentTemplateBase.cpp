@@ -13,6 +13,11 @@
 
 #include "idoc/IDocumentManager.h"
 
+#include "iser/ISerializable.h"
+
+#include "imod/CSerializedUndoManager.h"
+#include "imod/TModelWrap.h"
+
 
 namespace idoc
 {		
@@ -118,6 +123,25 @@ istd::IPolymorphic* CSingleDocumentTemplateBase::CreateView(imod::IModel* docume
 		if (viewPtr.IsValid() && documentPtr->AttachObserver(viewPtr.GetPtr())){
 			return viewPtr.PopPtr();
 		}
+	}
+
+	return NULL;
+}
+
+
+imod::IUndoManager* CSingleDocumentTemplateBase::CreateUndoManager(imod::IModel* documentPtr) const
+{
+	iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(documentPtr);
+	if (serializablePtr != NULL){
+		imod::TModelWrap<imod::CSerializedUndoManager>* undoManagerModelPtr = new imod::TModelWrap<imod::CSerializedUndoManager>();
+		bool retVal = documentPtr->AttachObserver(undoManagerModelPtr);
+		if (!retVal){
+			delete undoManagerModelPtr;
+			
+			return NULL;
+		}
+
+		return undoManagerModelPtr;
 	}
 
 	return NULL;

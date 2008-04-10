@@ -244,7 +244,7 @@ void CMultiDocumentWorkspaceGuiComp::OnEndChanges(int changeFlags, istd::IPolymo
 
 void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QWidget* window)
 {
-	iqt::IGuiObject* guiObjectPtr = (window != NULL)? GetViewFromWidget(*window): NULL;
+	iqt::IGuiObject* guiObjectPtr = (window != NULL) ? GetViewFromWidget(*window): NULL;
 
 	SetActiveView(guiObjectPtr);
 }	

@@ -10,6 +10,7 @@
 
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
+#include "imod/IUndoManager.h"
 
 
 namespace idoc
@@ -60,6 +61,12 @@ public:
 		\param	viewTypeId	optional ID specifying view type if more view types are supported.
 	*/
 	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const = 0;
+
+	/**
+		Creates an undo manger for a given document \c documentPtr.
+		\param	documentPtr	pointer to document object.
+	*/
+	virtual imod::IUndoManager* CreateUndoManager(imod::IModel* documentPtr) const = 0;
 
 	/**
 		Get list of file filters supported by this document template.

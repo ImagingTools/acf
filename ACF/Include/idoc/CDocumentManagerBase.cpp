@@ -85,6 +85,21 @@ const idoc::IDocumentTemplate* CDocumentManagerBase::GetDocumentTemplate() const
 }
 
 
+imod::IUndoManager* CDocumentManagerBase::GetUndoManagerForDocument(imod::IModel* documentPtr) const
+{
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		const DocumentInfo& info = GetDocumentInfo(i);
+		
+		if(info.documentPtr == documentPtr){
+			return info.undoManagerPtr.GetPtr();
+		}
+	}
+
+	return NULL;
+}
+
+
 int CDocumentManagerBase::GetDocumentsCount() const
 {
 	return m_documentInfos.GetCount();
@@ -110,7 +125,11 @@ istd::IPolymorphic* CDocumentManagerBase::GetActiveView() const
 
 void CDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
 {
-	m_activeViewPtr = viewPtr;
+	if (m_activeViewPtr != viewPtr){
+		istd::CChangeNotifier changePtr(this, ViewActivationChanged);
+
+		m_activeViewPtr = viewPtr;
+	}
 }
 
 
@@ -322,7 +341,10 @@ CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::CreateDocument(const s
 	if (m_documentTemplatePtr != NULL){
 		istd::TDelPtr<DocumentInfo> infoPtr(new DocumentInfo);
 
-		infoPtr->documentPtr.SetPtr(m_documentTemplatePtr->CreateDocument(documentTypeId));
+		imod::IModel* documentPtr = m_documentTemplatePtr->CreateDocument(documentTypeId);
+
+		infoPtr->documentPtr.SetPtr(documentPtr);
+		infoPtr->undoManagerPtr.SetPtr(m_documentTemplatePtr->CreateUndoManager(documentPtr));
 
 		if (infoPtr->documentPtr.IsValid()){
 			if (createView){

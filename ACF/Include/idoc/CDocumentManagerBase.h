@@ -38,6 +38,7 @@ public:
 
 	// reimplemented (idoc::IDocumentManager)
 	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const;
+	imod::IUndoManager* GetUndoManagerForDocument(imod::IModel* documentPtr) const;
 	virtual int GetDocumentsCount() const;
 	virtual imod::IModel& GetDocumentFromIndex(int index) const;
 	virtual istd::IPolymorphic* GetActiveView() const;
@@ -50,21 +51,25 @@ public:
 
 protected:
 	typedef istd::TDelPtr<imod::IModel> DocumentPtr;
+	typedef istd::TDelPtr<imod::IUndoManager> UndoManagerPtr;
 	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
 	typedef std::list<ViewPtr> Views;
 
-	struct DocumentInfo{
+	struct DocumentInfo
+	{
 		DocumentInfo(){}
-		DocumentInfo(const istd::CString& filePath, imod::IModel* documentPtr)
+		DocumentInfo(const istd::CString& filePath, imod::IModel* documentPtr, imod::IUndoManager* undoManagerPtr)
 		{
 			this->filePath = filePath;
 			this->documentPtr.SetPtr(documentPtr);
+			this->undoManagerPtr.SetPtr(undoManagerPtr);
 		}
 
 		istd::CString filePath;
 		std::string documentTypeId;
 		DocumentPtr documentPtr;
 		Views views;
+		UndoManagerPtr undoManagerPtr;
 	};
 
 	bool CloseDocument(int index);

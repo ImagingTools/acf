@@ -36,6 +36,7 @@ public:
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
 	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const;
 	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const;
+	imod::IUndoManager* CreateUndoManager(imod::IModel* documentPtr) const;
 	virtual istd::CStringList GetFileFilters(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CStringList GetFileExtensions(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;

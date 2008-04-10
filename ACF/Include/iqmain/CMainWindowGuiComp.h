@@ -144,7 +144,25 @@ private:
 	QActionGroup* m_languageGroup;
 	QToolBar* m_standardToolBar;
 
-	imod::IUndoManager* m_activeUndoManagerPtr;
+	class ActiveUndoManager: public imod::TSingleModelObserverBase<imod::IUndoManager>
+	{
+	public:
+		typedef imod::TSingleModelObserverBase<imod::IUndoManager> BaseClass;
+
+		ActiveUndoManager(CMainWindowGuiComp& parent);
+		
+		// reimplemented (imod::IObserver)
+		virtual bool OnAttached(imod::IModel* modelPtr);
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CMainWindowGuiComp& m_parent;
+	};
+
+	ActiveUndoManager m_activeUndoManager;
 
 private:
 	I_REF(iqt::IGuiObject, m_workspaceCompPtr);
