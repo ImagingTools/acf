@@ -16,20 +16,20 @@
 
 // public methods
 
-CDistributeDialog::CDistributeDialog()
+CDistributeDialog::CDistributeDialog(const QString& applicationFileName)
+:	m_applicationFileName(applicationFileName)
 {
 	setupUi(this);
-
-	connect(AcfDirBrowseButton, SIGNAL(clicked()), this, SLOT(OnAcfDirectoryBrowse()));
-	connect(DistributeDirBrowseButton, SIGNAL(clicked()), this, SLOT(OnDistributeDirectoryBrowse()));
-	connect(LicenseFileBrowseButton, SIGNAL(clicked()), this, SLOT(OnLicenseFileBrowse()));
-	connect(ButtonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(OnButtonClicked(QAbstractButton*)));
 
 	QSettings settings;
 
 	AcfDirEdit->setText(settings.value("Files/ACFDirectory", AcfDirEdit->text()).toString());
 	DistributeDirEdit->setText(settings.value("Files/DistributeDirectory", DistributeDirEdit->text()).toString());
 	LicenseFileEdit->setText(settings.value("Files/LicenseFile", LicenseFileEdit->text()).toString());
+	ApplyLicenseCheck->setChecked(settings.value("Options/UseLicense", true).toBool());
+	DistDocCheck->setChecked(settings.value("Options/DistributeDoc", false).toBool());
+	DistTutorialCheck->setChecked(settings.value("Options/DistributeTutorial", false).toBool());
+	DistSourcesCheck->setChecked(settings.value("Options/DistributeSource", false).toBool());
 }
 
 
@@ -40,12 +40,16 @@ CDistributeDialog::~CDistributeDialog()
 	settings.setValue("Files/ACFDirectory", AcfDirEdit->text());
 	settings.setValue("Files/DistributeDirectory", DistributeDirEdit->text());
 	settings.setValue("Files/LicenseFile", LicenseFileEdit->text());
+	settings.setValue("Options/UseLicense", ApplyLicenseCheck->isChecked());
+	settings.setValue("Options/DistributeDoc", DistDocCheck->isChecked());
+	settings.setValue("Options/DistributeTutorial", DistTutorialCheck->isChecked());
+	settings.setValue("Options/DistributeSource", DistSourcesCheck->isChecked());
 }
 
 
 // protected slots
 
-void CDistributeDialog::OnAcfDirectoryBrowse()
+void CDistributeDialog::on_AcfDirBrowseButton_clicked()
 {
 	QString acfDirectory = QFileDialog::getExistingDirectory(this, tr("Open ACF Root Directory"), AcfDirEdit->text());
 
@@ -53,7 +57,7 @@ void CDistributeDialog::OnAcfDirectoryBrowse()
 }
 
 
-void CDistributeDialog::OnDistributeDirectoryBrowse()
+void CDistributeDialog::on_DistributeDirBrowseButton_clicked()
 {
 	QString distributeDirectory = QFileDialog::getExistingDirectory(this, tr("Open Distribute Directory"), DistributeDirEdit->text());
 
@@ -61,7 +65,7 @@ void CDistributeDialog::OnDistributeDirectoryBrowse()
 }
 
 
-void CDistributeDialog::OnLicenseFileBrowse()
+void CDistributeDialog::on_LicenseFileBrowseButton_clicked()
 {
 	QFileInfo fileInfo(DistributeDirEdit->text());
 	QString path = fileInfo.absolutePath();
@@ -71,181 +75,244 @@ void CDistributeDialog::OnLicenseFileBrowse()
 }
 
 
-void CDistributeDialog::OnButtonClicked(QAbstractButton* button)
+void CDistributeDialog::on_ButtonBox_clicked(QAbstractButton* button)
 {
 	if (ButtonBox->buttonRole(button) == QDialogButtonBox::ApplyRole){
 		button->setDisabled(true);
 		QApplication::processEvents();
-		OnApply();
+
+		if (!CopyAllFiles()){
+			QMessageBox::critical(this, tr("Error"), tr("Some files was not copied"));
+		}
+
 		button->setDisabled(false);
 	}
 }
 
 
-void CDistributeDialog::OnApply()
-{	
-	QString distributeDirectory = DistributeDirEdit->text() + "\\ACF";
-	QString  acfDirectory = AcfDirEdit->text() + "\\ACF";
+// protected methods
 
-	QDir inputDirectory(acfDirectory);
-	if (!inputDirectory.exists()){
-		QMessageBox::critical(this, tr("Error"), tr("No valid ACF directory:\n%1").arg(inputDirectory.absolutePath()));
+bool CDistributeDialog::CopyAllFiles()
+{
+	bool retVal = true;
 
-		return;
+	bool areDocsEnabled = DistDocCheck->isChecked();
+	bool areTutorialsEnabled = DistTutorialCheck->isChecked();
+	bool areSourcesEnabled = DistSourcesCheck->isChecked();
+
+	QDir distributeDirectory(DistributeDirEdit->text());
+	QDir acfDirectory(AcfDirEdit->text());
+
+	// copy open sources
+	QStringList openSourcesFilter;
+	openSourcesFilter << "*.h" << "*.js";
+
+	QStringList allSourcesFilter(openSourcesFilter);
+	allSourcesFilter << "*.cpp";
+
+	QStringList resourcesFilter;
+	resourcesFilter << "*.ui" << "*.qrc" << "*.png";
+
+	QStringList specialsFilter;
+	specialsFilter << "*.envVariable";
+	specialsFilter << "GNU.txt";
+
+	QStringList projectsFilter;
+	projectsFilter << "*.vcproj" << "*.sln";
+
+	QStringList libsFilter;
+	libsFilter << "Acf*.lib" << "Acf*.pdb";
+
+	QStringList binsFilter;
+	binsFilter << "*.dll" << "*.exe";
+
+	QStringList docsFilter;
+	docsFilter << "*.html" << "*.htm";
+	docsFilter << "*.bmp" << "*.png" << "*.jpg";
+	docsFilter << "*.doc" << "*.pdf";
+
+	if (areSourcesEnabled){
+		retVal = CopyFileTree(acfDirectory, distributeDirectory, allSourcesFilter, CopySourceFile, 0) && retVal;
+
+		retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Include", allSourcesFilter, CopySourceFile, 1) && retVal;
+		retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Include", projectsFilter + resourcesFilter) && retVal;
+
+		retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Impl", allSourcesFilter, CopySourceFile, 1) && retVal;
+		retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Impl", projectsFilter + resourcesFilter) && retVal;
+	}
+	else{
+		retVal = CopyFileTree(acfDirectory, distributeDirectory, openSourcesFilter, CopySourceFile, 0) && retVal;
+		retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Include", openSourcesFilter, CopySourceFile, 1) && retVal;
 	}
 
-	DistributeDefaults(AcfDirEdit->text(), DistributeDirEdit->text());
+	// copy special files
+	retVal = CopyFileTree(acfDirectory, distributeDirectory, specialsFilter) && retVal;
 
-	DistributeSources(acfDirectory, distributeDirectory);
+	// copy libraries
+	retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Lib", libsFilter, CopyBinFile, 1) && retVal;
 
-	DistributeLibs(acfDirectory, distributeDirectory);
+	// copy bin files
+	retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Bin", binsFilter, CopyBinFile, areTutorialsEnabled? 2: 1) && retVal;
 
-	DistributeBins(acfDirectory, distributeDirectory);
+	if (areDocsEnabled){
+		// copy documentation files
+		if (areTutorialsEnabled){
+			retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Docs/Tutorial", allSourcesFilter, CopySourceFile, 3) && retVal;
+			retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Docs/Tutorial", projectsFilter, CopyBinFile, 3) && retVal;
+		}
+
+		retVal = CopySubFileTree(acfDirectory, distributeDirectory, "Docs", docsFilter, CopyBinFile, 4) && retVal;
+	}
+
+	return retVal;
 }
 
 
-// private methods
-
-void CDistributeDialog::DistributeDefaults(const QString& acfDirectory, const QString& distributeDirectory)
+bool CDistributeDialog::CopySubFileTree(
+			const QDir& inputDir,
+			const QDir& outputDir,
+			const QString& subDir,
+			const QStringList& filters,
+			CopyFileFunc copyFunc,
+			int recursionDepth) const
 {
-	// create list of files:
-	QStringList nameFilters;
-	nameFilters << "*.js" << "*.envVariable" << "GNU.txt";
+	QDir realInputDir(inputDir);
+	QDir realOutputDir(outputDir);
 
-	CopyFiles(acfDirectory, distributeDirectory, nameFilters, "\\Acf", false);
-	CopyFiles(acfDirectory + "\\Acf", distributeDirectory, nameFilters, "\\Acf", false);
+	if (!subDir.isEmpty()){
+		realInputDir = QDir(inputDir.absoluteFilePath(subDir));
+		realOutputDir = QDir(outputDir.absoluteFilePath(subDir));
+	}
+
+	return CopyFileTree(realInputDir, realOutputDir, filters, copyFunc, recursionDepth);
 }
 
 
-void CDistributeDialog::DistributeSources(const QString& acfDirectory, const QString& distributeDirectory)
+bool CDistributeDialog::CheckFileExistTree(
+			const QDir& inputDir,
+			const QStringList& filters,
+			int recursionDepth) const
 {
-	// create list of files:
-	QStringList nameFilters;
-	nameFilters << "*.h";
+	QFileInfoList fileList = inputDir.entryInfoList(filters, QDir::Files | QDir::NoDotAndDotDot);
+	if (!fileList.isEmpty()){
+		return true;
+	}
 
-	QDir inputDirectory(acfDirectory);
-	I_ASSERT(inputDirectory.exists());
+	if (recursionDepth > 0){
+		QFileInfoList dirList = inputDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+		for (		QFileInfoList::const_iterator dirIter = dirList.begin();
+					dirIter != dirList.end();
+					++dirIter){
+			const QFileInfo& fileInfo = *dirIter;
 
-	iqt::CFileList inputFiles;
-	inputFiles.Create(inputDirectory, true, nameFilters);
+			QDir inputSubDir(inputDir.absoluteFilePath(fileInfo.fileName()));
 
-	for (int inputFileIndex = 0; inputFileIndex < inputFiles.count(); inputFileIndex++){
-		QString inputFileName = inputFiles.at(inputFileIndex);
-
-		int includeIndex = inputFileName.indexOf("\\Include");
-		if (includeIndex < 0){
-			continue;
-		}
-
-		QString outputFileSuffix = inputFileName.mid(includeIndex, inputFileName.length()-1);
-
-		QFileInfo fileInfo(inputFileName);
-
-		QFile inputFile(inputFileName);
-		if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-			continue;
-		}
-
-		QString outputFileName = distributeDirectory + outputFileSuffix;
-
-		CopyInputFile(inputFileName, outputFileName);
-
-		QFile outputFile(outputFileName);
-		if (!outputFile.open(QIODevice::WriteOnly  | QIODevice::Text)){
-			continue;
-		}
-
-		QTextStream in(&inputFile);
-		QTextStream out(&outputFile);
-		if (ApplyLicenseCheck->isChecked()){
-			QFile licenseFile(LicenseFileEdit->text());
-			if (ApplyLicenseCheck->isChecked()){
-				licenseFile.open(QIODevice::ReadOnly);
+			if (CheckFileExistTree(inputSubDir, filters, recursionDepth - 1)){
+				return true;
 			}
-
-			QTextStream licenseStream(&licenseFile);
-
-			while (!licenseStream.atEnd()){
-				QString line = licenseStream.readLine();
-				out << line << endl;			
-			}
-
-			licenseFile.close();
 		}
-
-		while (!in.atEnd()) {
-			QString line = in.readLine();
-			out << line << endl;
-		}
-
-		out.flush();
-
-		outputFile.close();
-		inputFile.close();
 	}
+
+	return false;
 }
 
 
-void CDistributeDialog::DistributeLibs(const QString& acfDirectory, const QString& distributeDirectory)
+bool CDistributeDialog::CopyFileTree(
+			const QDir& inputDir,
+			const QDir& outputDir,
+			const QStringList& filters,
+			CopyFileFunc copyFunc,
+			int recursionDepth) const
 {
-	QStringList nameFilters;
-	nameFilters << "*.lib";
+	if (!inputDir.exists()){
+		QMessageBox::critical(const_cast<CDistributeDialog*>(this), tr("Error"), tr("No valid ACF directory:\n%1").arg(inputDir.absolutePath()));
 
-	CopyFiles(acfDirectory, distributeDirectory, nameFilters, "\\Lib");
-}
-
-
-void CDistributeDialog::DistributeBins(const QString& acfDirectory, const QString& distributeDirectory)
-{
-	QStringList nameFilters;
-	nameFilters << "*.dll" << "*.exe";
-
-	CopyFiles(acfDirectory, distributeDirectory, nameFilters, "\\Bin");
-}
-
-
-void CDistributeDialog::CopyFiles(const QString& acfDirectory, const QString& distributeDirectory, const QStringList& nameFilters, const QString& copyDirectory, bool doRecursive)
-{
-	QDir inputDirectory(acfDirectory);
-
-	iqt::CFileList inputFiles;
-	inputFiles.Create(inputDirectory, doRecursive, nameFilters);
-
-	for (int inputFileIndex = 0; inputFileIndex < inputFiles.count(); inputFileIndex++){
-		QString inputFileName = inputFiles.at(inputFileIndex);
-
-		int includeIndex = inputFileName.indexOf(copyDirectory, Qt::CaseInsensitive);
-		if (includeIndex < 0){
-			continue;
-		}
-
-		QString outputFileSuffix = inputFileName.mid(includeIndex, inputFileName.length()-1);
-		outputFileSuffix = outputFileSuffix.replace("\\Acf\\Acf", "\\Acf\\", Qt::CaseInsensitive);
-
-		QFileInfo fileInfo(inputFileName);
-
-		QFile inputFile(inputFileName);
-		if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-			continue;
-		}
-
-		QString outputFileName = distributeDirectory + outputFileSuffix;
-
-		CopyInputFile(inputFileName, outputFileName);
+		return false;
 	}
-}
 
-
-void CDistributeDialog::CopyInputFile(const QString& inputFileName, const QString& outputFileName)
-{
-	QFileInfo fileInfo(outputFileName);
-
-	QString dirPath = fileInfo.absolutePath();
-
-	QDir outputDir(dirPath);
+	outputDir.mkpath(outputDir.absolutePath());
 	if (!outputDir.exists()){
-		outputDir.mkpath(dirPath);
+		return false;
 	}
 
-	QFile::copy(inputFileName, outputFileName);
+	bool retVal = true;
+
+	QFileInfoList fileList = inputDir.entryInfoList(filters, QDir::Files | QDir::NoDotAndDotDot);
+	for (		QFileInfoList::const_iterator fileIter = fileList.begin();
+				fileIter != fileList.end();
+				++fileIter){
+		const QFileInfo& fileInfo = *fileIter;
+
+		QString fileName = fileInfo.fileName();
+		if (fileName.compare(m_applicationFileName, Qt::CaseInsensitive) != 0){
+			QString inputFilePath = inputDir.absoluteFilePath(fileName);
+			QString outputFilePath = outputDir.absoluteFilePath(fileName);
+
+			retVal = (this->*copyFunc)(inputFilePath, outputFilePath) && retVal;
+		}
+	}
+
+	if (recursionDepth > 0){
+		QFileInfoList dirList = inputDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+		for (		QFileInfoList::const_iterator dirIter = dirList.begin();
+					dirIter != dirList.end();
+					++dirIter){
+			const QFileInfo& fileInfo = *dirIter;
+
+			QDir inputSubDir(inputDir.absoluteFilePath(fileInfo.fileName()));
+			QDir outputSubDir(outputDir.absoluteFilePath(fileInfo.fileName()));
+
+			if (CheckFileExistTree(inputSubDir, filters, recursionDepth - 1)){
+				retVal = CopyFileTree(inputSubDir, outputSubDir, filters, copyFunc, recursionDepth - 1) && retVal;
+			}
+		}
+	}
+
+	return retVal;
 }
+
+
+bool CDistributeDialog::CopyBinFile(const QString& inputFileName, const QString& outputFileName) const
+{
+	QFile::remove(outputFileName);
+	return QFile::copy(inputFileName, outputFileName);
+}
+
+
+bool CDistributeDialog::CopySourceFile(const QString& inputFileName, const QString& outputFileName) const
+{
+	if (!ApplyLicenseCheck->isChecked()){
+		return CopyBinFile(inputFileName, outputFileName);
+	}
+
+	QFile inputFile(inputFileName);
+	QFile outputFile(outputFileName);
+	QFile licenseFile(LicenseFileEdit->text());
+	if (		!inputFile.open(QIODevice::ReadOnly | QIODevice::Text) ||
+				!outputFile.open(QIODevice::WriteOnly  | QIODevice::Text) ||
+				!licenseFile.open(QIODevice::ReadOnly)){
+		return false;
+	}
+
+	QTextStream inputStream(&inputFile);
+	QTextStream outputStream(&outputFile);
+	QTextStream licenseStream(&licenseFile);
+
+	while (!licenseStream.atEnd()){
+		QString line = licenseStream.readLine();
+		outputStream << line << endl;			
+	}
+
+	while (!inputStream.atEnd()) {
+		QString line = inputStream.readLine();
+		outputStream << line << endl;
+	}
+
+	licenseFile.close();
+	inputFile.close();
+	outputFile.close();
+
+	return true;
+}
+
+

@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-**	Copyright (c) Kirill Lepski, Witold Gantzke
+**	Copyright (c) Kirill Lepski and Witold Gantzke
 **	All rights reserved.
 **	
 **	Permission is granted to copy, distribute and/or modify this document 

@@ -14,7 +14,10 @@ int main(int argc, char *argv[])
 	QCoreApplication::setOrganizationDomain("imagingtools.de");
 	QCoreApplication::setApplicationName("ACFDist");
 
-	CDistributeDialog mainDlg;
+	QFileInfo applicationInfo(app.applicationFilePath());
+	QString fileName = applicationInfo.fileName();
+
+	CDistributeDialog mainDlg(fileName);
 
 	mainDlg.exec();
 }

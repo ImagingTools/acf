@@ -1,8 +1,6 @@
 #include <QApplication>
 
 
-#include "CCompositorMainWindow.h"
-
 #include "icomp/TSimComponentWrap.h"
 
 #include "iqt/CApplicationComp.h"
