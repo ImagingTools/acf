@@ -4,7 +4,6 @@
 #include "imod/TModelWrap.h"
 
 #include "icomp/TSimComponentWrap.h"
-#include "icomp/TSimComponentModelWrap.h"
 #include "icomp/TSimComponentsFactory.h"
 
 #include "idoc/CSerializedDocumentTemplateComp.h"
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
 	documentTemplateComp.SetRef("DocumentSerializer", &serializerComp);
 	documentTemplateComp.InitComponent();
 
-	icomp::TSimComponentModelWrap<iqmain::CMultiDocumentWorkspaceGuiComp> workspaceComp;
+	icomp::TSimComponentWrap<imod::TModelWrap<iqmain::CMultiDocumentWorkspaceGuiComp> > workspaceComp;
 	workspaceComp.SetRef("DocumentTemplate", &documentTemplateComp);
 	workspaceComp.InitComponent();
 
