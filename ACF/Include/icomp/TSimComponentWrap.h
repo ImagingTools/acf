@@ -5,6 +5,8 @@
 // STL includes
 #include <map>
 
+#include "istd/TIFactory.h"
+#include "istd/TComposedFactory.h"
 #include "istd/CString.h"
 
 #include "icomp/IComponent.h"
@@ -27,12 +29,21 @@ class TSimComponentWrap: public TComponentWrap<Base>, protected IComponentContex
 public:
 	typedef TComponentWrap<Base> BaseClass;
 
+	typedef istd::TIFactory<icomp::IComponent> ComponentsFactory;
+
 	TSimComponentWrap();
 
 	/**
 		Initialilze component after setting all its attributes and references.
 	*/
 	void InitComponent();
+
+	/**
+		Set named attribute.
+		\param	attributeId		ID of attribute.
+		\param	attributePtr	pointer to attribute instance. It will be automatically deleted.
+	*/
+	bool SetAttr(const std::string& attributeId, const iser::ISerializable* attributePtr);
 
 	/**
 		Set named reference to some component.
@@ -45,11 +56,9 @@ public:
 	bool InsertMultiRef(const std::string& referenceId, IComponent* componentPtr);
 
 	/**
-		Set named attribute.
-		\param	attributeId		ID of attribute.
-		\param	attributePtr	pointer to attribute instance. It will be automatically deleted.
+		Set factory of component instance.
 	*/
-	bool SetAttr(const std::string& attributeId, iser::ISerializable* attributePtr);
+	bool SetFactory(const std::string& factoryId, const ComponentsFactory* factoryPtr);
 
 	/**
 		Set instance of \c bool attribute.
@@ -121,11 +130,15 @@ protected:
 	virtual const IComponentContext* GetParentContext() const;
 	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr = NULL) const;
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 
 private:
-	typedef std::map< std::string, IComponent*> ComponentMap;
-	ComponentMap m_componentMap;
-	
+	typedef std::map<std::string, IComponent*> ComponentsMap;
+	ComponentsMap m_componentsMap;
+
+	typedef std::map< std::string, const ComponentsFactory* > FactoriesMap;
+	FactoriesMap m_factoriesMap;
+
 	CRegistryElement m_registryElement;
 };
 
@@ -147,12 +160,28 @@ void TSimComponentWrap<Base>::InitComponent()
 
 
 template <class Base>
+bool TSimComponentWrap<Base>::SetAttr(const std::string& attributeId, const iser::ISerializable* attributePtr)
+{
+	I_ASSERT(attributePtr != NULL);
+
+	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
+	if (infoPtr != NULL){
+		infoPtr->attributePtr.SetPtr(const_cast<iser::ISerializable*>(attributePtr));
+
+		return true;
+	}
+
+	return false;
+}
+
+
+template <class Base>
 bool TSimComponentWrap<Base>::SetRef(const std::string& referenceId, IComponent* componentPtr)
 {
 	I_ASSERT(componentPtr != NULL);
 
 	if (SetAttr(referenceId, new CReferenceAttribute(referenceId))){
-		m_componentMap[referenceId] = componentPtr;
+		m_componentsMap[referenceId] = componentPtr;
 
 		return true;
 	}
@@ -181,7 +210,7 @@ bool TSimComponentWrap<Base>::InsertMultiRef(const std::string& referenceId, ICo
 
 		multiAttrPtr->InsertValue(attributeId);
 
-		m_componentMap[attributeId] = componentPtr;
+		m_componentsMap[attributeId] = componentPtr;
 
 		return true;
 	}
@@ -191,13 +220,12 @@ bool TSimComponentWrap<Base>::InsertMultiRef(const std::string& referenceId, ICo
 
 
 template <class Base>
-bool TSimComponentWrap<Base>::SetAttr(const std::string& attributeId, iser::ISerializable* attributePtr)
+bool TSimComponentWrap<Base>::SetFactory(const std::string& factoryId, const ComponentsFactory* factoryPtr)
 {
-	I_ASSERT(attributePtr != NULL);
+	I_ASSERT(factoryPtr != NULL);
 
-	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
-	if (infoPtr != NULL){
-		infoPtr->attributePtr.SetPtr(attributePtr);
+	if (SetAttr(factoryId, new CFactoryAttribute(factoryId))){
+		m_factoriesMap[factoryId] = factoryPtr;
 
 		return true;
 	}
@@ -303,10 +331,24 @@ const iser::ISerializable* TSimComponentWrap<Base>::GetAttribute(const std::stri
 template <class Base>
 IComponent* TSimComponentWrap<Base>::GetSubcomponent(const std::string& componentId) const
 {
-	ComponentMap::const_iterator iter = m_componentMap.find(componentId);
+	ComponentsMap::const_iterator iter = m_componentsMap.find(componentId);
 
-	if (iter != m_componentMap.end()){
+	if (iter != m_componentsMap.end()){
 		return iter->second;
+	}
+
+	return NULL;
+}
+
+
+template <class Base>
+IComponent* TSimComponentWrap<Base>::CreateSubcomponent(const std::string& componentId) const
+{
+	FactoriesMap::const_iterator iter = m_factoriesMap.find(componentId);
+	if (iter != m_factoriesMap.end()){
+		I_ASSERT(iter->second != NULL);
+
+		return iter->second->CreateInstance();
 	}
 
 	return NULL;

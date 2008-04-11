@@ -59,7 +59,7 @@ bool TComposedFactory<InterfaceType>::RegisterFactory(FactoryInterface* factoryP
 }
 
 	
-// reimplemented (istd::IFactory)
+// reimplemented (istd::TIFactory)
 
 template <class InterfaceType>
 typename TComposedFactory<InterfaceType>::KeyList TComposedFactory<InterfaceType>::GetFactoryKeys() const

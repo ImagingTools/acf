@@ -80,6 +80,12 @@ IComponent* CComponentContext::GetSubcomponent(const std::string& /*componentId*
 }
 
 
+IComponent* CComponentContext::CreateSubcomponent(const std::string& /*componentId*/) const
+{
+	return NULL;	// normal component cannot create subcomponents
+}
+
+
 }//namespace icomp
 
 

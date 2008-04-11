@@ -135,37 +135,63 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp">
 			<File
-				RelativePath="..\CTextEditor.cpp">
+				RelativePath="..\CTextEditorComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CTextModel.cpp">
+				RelativePath="..\CTextModelComp.cpp">
 			</File>
 			<File
 				RelativePath="..\Main.cpp">
 			</File>
-			<File
-				RelativePath=".\generatedfiles\debug\moc_CTextEditor.cpp">
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="*.h, *.hpp">
+			Filter="h">
 			<File
-				RelativePath="..\CTextEditor.h">
+				RelativePath="..\CTextEditorComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputFileName)..."
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CTextEditor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CTextEditor.cpp&quot;
-"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CTextEditor.cpp&quot;"/>
+						Description="Moc&apos;ing $(InputFileName)..."
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\CTextModel.h">
+				RelativePath="..\CTextModelComp.h">
 			</File>
+			<File
+				RelativePath="..\IText.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="qrc;*"
+			ParseFiles="FALSE">
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="moc;h;cpp">
+			<File
+				RelativePath="..\generatedfiles\moc_CTextEditorComp.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Forms"
+			Filter="">
 		</Filter>
 	</Files>
 	<Globals>

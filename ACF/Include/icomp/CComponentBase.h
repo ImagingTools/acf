@@ -11,6 +11,7 @@
 #include "icomp/TMultiAttributePtr.h"
 #include "icomp/TReferencePtr.h"
 #include "icomp/TMultiReferencePtr.h"
+#include "icomp/TFactoryMember.h"
 #include "icomp/TAttributeStaticInfo.h"
 #include "icomp/TComponentStaticInfo.h"
 #include "icomp/TBaseComponentStaticInfo.h"
@@ -127,8 +128,8 @@ private:
 	Declare single factory of components.
 */
 #define I_FACT(interfaceType, member)\
-	typedef icomp::TFactoryPtr<interfaceType>::AttributeType member##_Type;\
-	icomp::TFactoryPtr<interfaceType> member;
+	typedef icomp::TFactoryMember<interfaceType>::AttributeType member##_Type;\
+	icomp::TFactoryMember<interfaceType> member;
 
 /**
 	Declare multiple factory of components.

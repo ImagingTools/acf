@@ -126,7 +126,7 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp">
 			<File
 				RelativePath="..\CComponentBase.cpp">
 			</File>
@@ -160,7 +160,7 @@
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="*.h, *.hpp">
+			Filter="h">
 			<File
 				RelativePath="..\CComponentBase.h">
 			</File>
@@ -172,6 +172,9 @@
 			</File>
 			<File
 				RelativePath="..\CCompositeComponentContext.h">
+			</File>
+			<File
+				RelativePath="..\CFactoryAttribute.h">
 			</File>
 			<File
 				RelativePath="..\CFileRegistriesManagerBase.h">
@@ -237,7 +240,7 @@
 				RelativePath="..\TComponentWrap.h">
 			</File>
 			<File
-				RelativePath="..\TFactoryPtr.h">
+				RelativePath="..\TFactoryMember.h">
 			</File>
 			<File
 				RelativePath="..\TInterfaceRegistrator.h">

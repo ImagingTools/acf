@@ -23,25 +23,6 @@ namespace idoc
 {		
 
 
-CSingleDocumentTemplateBase::CSingleDocumentTemplateBase()
-:	m_documentFactoryPtr(NULL),
-	m_viewFactoryPtr(NULL)
-{
-}
-
-
-void CSingleDocumentTemplateBase::SetDocumentFactory(IDocumentFactory* documentFactoryPtr)
-{
-	m_documentFactoryPtr = documentFactoryPtr;
-}
-
-
-void CSingleDocumentTemplateBase::SetViewFactory(IViewFactory* viewFactoryPtr)
-{	
-	m_viewFactoryPtr = viewFactoryPtr;
-}
-
-
 void CSingleDocumentTemplateBase::SetDocumentTypeId(const std::string& documentTypeId)
 {
 	m_documentTypeId = documentTypeId;
@@ -101,31 +82,6 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(co
 	}
 
 	return GetDocumentTypeIds();
-}
-
-
-imod::IModel* CSingleDocumentTemplateBase::CreateDocument(const std::string& documentTypeId) const
-{
-	if ((m_documentFactoryPtr != NULL) && IsDocumentTypeSupported(documentTypeId)){
-		return m_documentFactoryPtr->CreateInstance();
-	}
-
-	return NULL;
-}
-
-
-istd::IPolymorphic* CSingleDocumentTemplateBase::CreateView(imod::IModel* documentPtr, const std::string& viewTypeId) const
-{
-	I_ASSERT(documentPtr != NULL);
-
-	if ((m_viewFactoryPtr != NULL) && IsViewTypeSupported(viewTypeId)){
-		istd::TDelPtr<imod::IObserver> viewPtr(m_viewFactoryPtr->CreateInstance());
-		if (viewPtr.IsValid() && documentPtr->AttachObserver(viewPtr.GetPtr())){
-			return viewPtr.PopPtr();
-		}
-	}
-
-	return NULL;
 }
 
 

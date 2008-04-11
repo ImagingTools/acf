@@ -33,6 +33,31 @@ bool CSerializedDocumentTemplateComp::SaveDocumentToFile(const imod::IModel& doc
 }
 
 
+imod::IModel* CSerializedDocumentTemplateComp::CreateDocument(const std::string& documentTypeId) const
+{
+	if (m_documentCompFact.IsValid() && IsDocumentTypeSupported(documentTypeId)){
+		return m_documentCompFact.CreateInstance();
+	}
+
+	return NULL;
+}
+
+
+istd::IPolymorphic* CSerializedDocumentTemplateComp::CreateView(imod::IModel* documentPtr, const std::string& viewTypeId) const
+{
+	I_ASSERT(documentPtr != NULL);
+
+	if (m_viewCompFact.IsValid() && IsViewTypeSupported(viewTypeId)){
+		istd::TDelPtr<imod::IObserver> viewPtr(m_viewCompFact.CreateInstance());
+		if (viewPtr.IsValid() && documentPtr->AttachObserver(viewPtr.GetPtr())){
+			return viewPtr.PopPtr();
+		}
+	}
+
+	return NULL;
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CSerializedDocumentTemplateComp::OnComponentCreated()
@@ -58,14 +83,6 @@ void CSerializedDocumentTemplateComp::OnComponentCreated()
 		}
 	}
 	SetFileExtensions(fileExtensions);
-
-	if (m_documentFactoryCompPtr.IsValid()){
-		SetDocumentFactory(m_documentFactoryCompPtr.GetPtr());
-	}
-
-	if (m_viewFactoryCompPtr.IsValid()){
-		SetViewFactory(m_viewFactoryCompPtr.GetPtr());
-	}
 }
 
 

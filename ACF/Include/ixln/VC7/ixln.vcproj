@@ -126,7 +126,7 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp">
 			<File
 				RelativePath="..\CFileXmlReadArchive.cpp">
 			</File>
@@ -145,7 +145,7 @@
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="*.h, *.hpp">
+			Filter="h">
 			<File
 				RelativePath="..\CFileXmlReadArchive.h">
 			</File>

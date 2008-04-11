@@ -1,4 +1,4 @@
-#include "CTextModel.h"
+#include "CTextModelComp.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -6,19 +6,18 @@
 #include "istd/TChangeNotifier.h"
 
 
-CTextModel::CTextModel()
-:	m_text("Hello World")
+CTextModelComp::CTextModelComp()
 {
 }
 
 
-istd::CString CTextModel::GetText() const
+istd::CString CTextModelComp::GetText() const
 {
 	return m_text;
 }
 
 
-void CTextModel::SetText(const istd::CString& text)
+void CTextModelComp::SetText(const istd::CString& text)
 {
 	if (m_text != text){
 		istd::CChangeNotifier changePtr(this);
@@ -28,9 +27,19 @@ void CTextModel::SetText(const istd::CString& text)
 }
 
 
+// reimplemented (icomp::IComponent)
+
+void CTextModelComp::OnComponentCreated()
+{
+	if (m_defaultTextAttrPtr.IsValid()){
+		m_text = *m_defaultTextAttrPtr;
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
-bool CTextModel::Serialize(iser::IArchive& archive)
+bool CTextModelComp::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag textTag("Text", "Text");
 	bool retVal = archive.BeginTag(textTag);

@@ -20,11 +20,6 @@ class IDocumentManager;
 class CSingleDocumentTemplateBase: virtual public idoc::IDocumentTemplate
 {
 public:
-	CSingleDocumentTemplateBase();
-
-	virtual void SetDocumentFactory(IDocumentFactory* documentFactoryPtr);
-	virtual void SetViewFactory(IViewFactory* documentFactoryPtr);
-
 	virtual void SetDocumentTypeId(const std::string& documentTypeId);
 	virtual void SetFileFilters(const istd::CStringList& fileFilters);
 	virtual void SetDefaultDirectory(const istd::CString& defaultDirectory);
@@ -34,8 +29,6 @@ public:
 	virtual Ids GetDocumentTypeIds() const;
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
-	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const;
-	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const;
 	imod::IUndoManager* CreateUndoManager(imod::IModel* documentPtr) const;
 	virtual istd::CStringList GetFileFilters(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CStringList GetFileExtensions(const std::string* documentTypeIdPtr = NULL) const;
@@ -54,9 +47,6 @@ private:
 
 	std::string m_documentTypeId;
 	std::string m_viewTypeId;
-
-	IDocumentFactory* m_documentFactoryPtr;
-	IViewFactory* m_viewFactoryPtr;
 };
 
 

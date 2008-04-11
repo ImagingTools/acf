@@ -82,8 +82,13 @@ public:
 
 		SetPtr(castedPtr);
 
-		if (castedPtr == NULL){
+		if (castedPtr != NULL){
+			return true;
+		}
+		else{
 			delete ptr;
+
+			return false;
 		}
 	}
 

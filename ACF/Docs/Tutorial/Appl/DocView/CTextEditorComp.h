@@ -1,5 +1,5 @@
-#ifndef CTextEditor_included
-#define CTextEditor_included
+#ifndef CTextEditorComp_included
+#define CTextEditorComp_included
 
 
 // Qt includes
@@ -10,12 +10,12 @@
 #include "iqt/TGuiComponentBase.h"
 #include "iqt/TGuiObserverWrap.h"
 
-#include "CTextModel.h"
+#include "IText.h"
 
 
-class CTextEditor: public iqt::TGuiObserverWrap<
+class CTextEditorComp: public iqt::TGuiObserverWrap<
 			iqt::TGuiComponentBase<QTextEdit>,
-			imod::TSingleModelObserverBase<CTextModel> >
+			imod::TSingleModelObserverBase<IText> >
 {
 
 	Q_OBJECT
@@ -23,7 +23,10 @@ class CTextEditor: public iqt::TGuiObserverWrap<
 public:
 	typedef iqt::TGuiObserverWrap<
 				iqt::TGuiComponentBase<QTextEdit>,
-				imod::TSingleModelObserverBase<CTextModel> > BaseClass;
+				imod::TSingleModelObserverBase<IText> > BaseClass;
+
+	I_BEGIN_COMPONENT(CTextEditorComp)
+	I_END_COMPONENT
 
 	// reimplemented (iqt::TGuiObserverWrap)
 	virtual void UpdateModel() const;
@@ -38,4 +41,4 @@ protected:
 };
 
 
-#endif // !CTextEditor_included
+#endif // !CTextEditorComp_included

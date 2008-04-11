@@ -2,8 +2,6 @@
 #define istdc_TFileSerializerComp_included
 
 
-#include "istd/TSingleFactory.h"
-
 #include "icomp/CComponentBase.h"
 
 

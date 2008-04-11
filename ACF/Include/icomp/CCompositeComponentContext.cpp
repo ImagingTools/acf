@@ -32,53 +32,80 @@ CCompositeComponentContext::CCompositeComponentContext(
 
 IComponent* CCompositeComponentContext::GetSubcomponent(const std::string& componentId) const
 {
-	ComponentMap::const_iterator iter = m_componentMap.find(componentId);
-	if (iter != m_componentMap.end()){
-		return iter->second.componentPtr.GetPtr();
+	ComponentInfo& componentInfo = m_componentMap[componentId];
+	if (!componentInfo.isInitialized){
+		CreateSubcomponentInfo(componentId, componentInfo.contextPtr, componentInfo.componentPtr);
+
+		componentInfo.isInitialized = true;
 	}
-	else{
-		ComponentInfo& componentInfo = m_componentMap[componentId];
 
-		const IRegistry::ElementInfo* elementInfoPtr = m_registry.GetElementInfo(componentId);
-		if (elementInfoPtr != NULL && elementInfoPtr->elementPtr.IsValid()){
-			const IRegistryElement& registryElement = *elementInfoPtr->elementPtr;
+	return componentInfo.componentPtr.GetPtr();
+}
 
-			switch (elementInfoPtr->elementType){
-			case IRegistry::ET_COMPONENT:
-				{
-					const IComponentStaticInfo& elementStaticInfo = registryElement.GetComponentStaticInfo();
 
-					componentInfo.contextPtr.SetPtr(new CComponentContext(&registryElement, this));
-					if (componentInfo.contextPtr.IsValid()){
-						componentInfo.componentPtr.SetPtr(elementStaticInfo.CreateComponent(componentInfo.contextPtr.GetPtr()));
-					}
+IComponent* CCompositeComponentContext::CreateSubcomponent(const std::string& componentId) const
+{
+	ComponentPtr retVal;
+
+	ComponentInfo& componentInfo = m_componentMap[componentId];
+
+	CreateSubcomponentInfo(componentId, componentInfo.contextPtr, retVal);
+
+	return retVal.PopPtr();
+}
+
+
+// protected methods
+
+bool CCompositeComponentContext::CreateSubcomponentInfo(
+			const std::string& componentId,
+			ContextPtr& contextPtr,
+			ComponentPtr& componentPtr) const
+{
+	const IRegistry::ElementInfo* elementInfoPtr = m_registry.GetElementInfo(componentId);
+	if (elementInfoPtr != NULL && elementInfoPtr->elementPtr.IsValid()){
+		const IRegistryElement& registryElement = *elementInfoPtr->elementPtr;
+
+		switch (elementInfoPtr->elementType){
+		case IRegistry::ET_COMPONENT:
+			{
+				const IComponentStaticInfo& elementStaticInfo = registryElement.GetComponentStaticInfo();
+
+				if (!contextPtr.IsValid()){
+					contextPtr.SetPtr(new CComponentContext(&registryElement, this));
 				}
-				break;
 
-			case IRegistry::ET_COMPOSITION:
-				{
-					const IRegistry* subRegistryPtr = m_registriesManager.GetRegistry(elementInfoPtr->packageId, elementInfoPtr->componentId, &m_registry);
-					if (subRegistryPtr != NULL){
-						CCompositeComponentContext* contextPtr = new CCompositeComponentContext(
+				if (contextPtr.IsValid()){
+					componentPtr.SetPtr(elementStaticInfo.CreateComponent(contextPtr.GetPtr()));
+				}
+			}
+			break;
+
+		case IRegistry::ET_COMPOSITION:
+			{
+				const IRegistry* subRegistryPtr = m_registriesManager.GetRegistry(elementInfoPtr->packageId, elementInfoPtr->componentId, &m_registry);
+				if (subRegistryPtr != NULL){
+					if (!contextPtr.IsValid()){
+						contextPtr = new CCompositeComponentContext(
 									&registryElement,
 									subRegistryPtr,
 									&m_registriesManager,
 									this);
-						if (contextPtr != NULL){
-							componentInfo.contextPtr.SetPtr(contextPtr);
+					}
 
-							TComponentWrap<CCompositeComponent>* componentPtr = new TComponentWrap<CCompositeComponent>(contextPtr);
+					if (contextPtr.IsValid()){
+						CCompositeComponentContext* compositeContextPtr = dynamic_cast<CCompositeComponentContext*>(contextPtr.GetPtr());
+						I_ASSERT(compositeContextPtr != NULL);
 
-							componentInfo.componentPtr.SetPtr(componentPtr);
-						}
+						componentPtr = new TComponentWrap<CCompositeComponent>(compositeContextPtr);
 					}
 				}
-				break;
 			}
+			break;
 		}
-
-		return componentInfo.componentPtr.GetPtr();
 	}
+
+	return componentPtr.IsValid();
 }
 
 

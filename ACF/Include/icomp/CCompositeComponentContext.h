@@ -41,15 +41,26 @@ public:
 
 	// reimplemented (icomp::IComponentContext)
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 
-private:
+protected:
 	typedef istd::TDelPtr<icomp::IComponent> ComponentPtr;
 	typedef istd::TDelPtr<icomp::IComponentContext> ContextPtr;
 
+	bool CreateSubcomponentInfo(const std::string& componentId, ContextPtr& contextPtr, ComponentPtr& result) const;
+
+private:
 	struct ComponentInfo
 	{
+		ComponentInfo(): isInitialized(false){}
+		ComponentInfo(const ComponentInfo& info)
+		:	componentPtr(info.componentPtr),
+			contextPtr(info.contextPtr),
+			isInitialized(false){}
+
 		ComponentPtr componentPtr;
 		ContextPtr contextPtr;
+		bool isInitialized;
 	};
 
 	typedef std::map< std::string, ComponentInfo > ComponentMap;

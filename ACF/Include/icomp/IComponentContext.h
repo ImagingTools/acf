@@ -50,6 +50,11 @@ public:
 		Get access to subcomponent using its ID.
 	*/
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
+
+	/**
+		Create instance of subcomponent using its ID.
+	*/
+	virtual IComponent* CreateSubcomponent(const std::string& componentId) const = 0;
 };
 
 

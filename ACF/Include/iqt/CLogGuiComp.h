@@ -31,6 +31,9 @@ public:
 	typedef iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp> BaseClass;
 	typedef ibase::CMessageContainer BaseClass2;
 
+	I_BEGIN_COMPONENT(CLogGuiComp)
+	I_END_COMPONENT
+
 	enum
 	{
 		TimeColumn = 0,

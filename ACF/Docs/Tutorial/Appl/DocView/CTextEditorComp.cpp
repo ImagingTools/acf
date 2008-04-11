@@ -1,4 +1,4 @@
-#include "CTextEditor.h"
+#include "CTextEditorComp.h"
 
 
 #include "iqt/CSignalBlocker.h"
@@ -6,14 +6,14 @@
 
 // reimplemented (iqt::TGuiObserverWrap)
 
-void CTextEditor::UpdateModel() const
+void CTextEditorComp::UpdateModel() const
 {
 	QTextEdit* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
 	iqt::CSignalBlocker block(textEditPtr);
 
-	CTextModel* objectPtr = GetObjectPtr();
+	IText* objectPtr = GetObjectPtr();
 
 	if (objectPtr != NULL ){
 		objectPtr->SetText(iqt::GetCString(textEditPtr->toPlainText()));
@@ -21,12 +21,12 @@ void CTextEditor::UpdateModel() const
 }
 
 
-void CTextEditor::UpdateEditor()
+void CTextEditorComp::UpdateEditor()
 {
 	QTextEdit* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
-	CTextModel* objectPtr = GetObjectPtr();
+	IText* objectPtr = GetObjectPtr();
 
 	if ((objectPtr != NULL) && !textEditPtr->signalsBlocked()){
 		textEditPtr->setText(iqt::GetQString(objectPtr->GetText()));
@@ -36,7 +36,7 @@ void CTextEditor::UpdateEditor()
 
 // protected slots
 
-void CTextEditor::OnTextChanged()
+void CTextEditorComp::OnTextChanged()
 {
 	UpdateModel();
 }
@@ -44,7 +44,7 @@ void CTextEditor::OnTextChanged()
 
 // reimplemented (iqt::CGuiComponentBase)
 
-void CTextEditor::OnGuiCreated()
+void CTextEditorComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
