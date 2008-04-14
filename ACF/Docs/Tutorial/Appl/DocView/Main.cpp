@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 	mainWindowComp.InitComponent();
 
 	icomp::TSimComponentWrap<iqt::CSplashScreenGuiComp> splashScreenGui;
-	splashScreenGui.SetStringAttr("ImagePath", "..\\..\\..\\Docs\\Images\\AcfSplashScreen.png");
+	splashScreenGui.SetStringAttr("ImagePath", "../../../Docs/Images/AcfSplashScreen.png");
 	splashScreenGui.SetStringAttr("ProductName", "DocView");
 	splashScreenGui.SetStringAttr("ProductType", "Tutorial");
 	splashScreenGui.InitComponent();

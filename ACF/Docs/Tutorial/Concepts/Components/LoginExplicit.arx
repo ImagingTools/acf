@@ -101,7 +101,7 @@
 				<IsEnabled>
 					true
 				</IsEnabled>
-				<AttributeInfoMap count = "1">
+				<AttributeInfoMap count = "3">
 					<AttributeInfo>
 						<Id>
 							ImagePath
@@ -116,7 +116,43 @@
 								true
 							</IsEnabled>
 							<Value>
-								C:\Work\Projects\QUISS\Projects\TCVision\Install\ToInstall\QUISS\Resources\TCVision.l\Splash.jpg
+								../../Docs/Images/AcfSplashScreen.png
+							</Value>
+						</Data>
+					</AttributeInfo>
+					<AttributeInfo>
+						<Id>
+							ProductName
+						</Id>
+						<Type>
+							class icomp::TSingleAttribute&lt;class istd::CString&gt;
+						</Type>
+						<ExportId>
+						</ExportId>
+						<Data>
+							<IsEnabled>
+								true
+							</IsEnabled>
+							<Value>
+								CompSimu
+							</Value>
+						</Data>
+					</AttributeInfo>
+					<AttributeInfo>
+						<Id>
+							ProductType
+						</Id>
+						<Type>
+							class icomp::TSingleAttribute&lt;class istd::CString&gt;
+						</Type>
+						<ExportId>
+						</ExportId>
+						<Data>
+							<IsEnabled>
+								true
+							</IsEnabled>
+							<Value>
+								Tutorial
 							</Value>
 						</Data>
 					</AttributeInfo>
