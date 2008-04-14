@@ -20,8 +20,6 @@ I_EXPORT_COMPONENT(iqt::CFileDialogSerializerComp, FileDialogSerializer, "File d
 
 #else OLD_ACF_SUPPORT
 
-#include "CQtPackage.h"
-
 #include "iqt/CTabContainerGuiComp.h"
 #include "iqt/CLoginGuiComp.h"
 #include "iqt/CLogGuiComp.h"
