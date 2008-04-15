@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="CompSimu"
+	Name="CompSimu.exe"
 	ProjectGUID="{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}"
 	RootNamespace="CompSimu"
 	SccProjectName=""
@@ -14,7 +14,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7\Tutorial"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC7/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib AcfStd.lib iqt.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"/>
 			<Tool
 				Name="VCMIDLTool"
@@ -72,7 +73,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7\Tutorial"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC7/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -98,6 +99,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib iqt.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				GenerateDebugInformation="TRUE"/>
 			<Tool

@@ -58,6 +58,12 @@ void CComponentBase::OnComponentDestroyed()
 }
 
 
+void CComponentBase::SetComponentContext(const icomp::IComponentContext* contextPtr)
+{
+	m_contextPtr = contextPtr;
+}
+
+
 // static methods
 
 const icomp::IComponentStaticInfo& CComponentBase::InitStaticInfo(CComponentBase* /*componentPtr*/)
@@ -65,14 +71,6 @@ const icomp::IComponentStaticInfo& CComponentBase::InitStaticInfo(CComponentBase
 	static CPackageStaticInfo emptyInfo;
 
 	return emptyInfo;
-}
-
-
-// protected methods
-
-void CComponentBase::SetComponentContext(const icomp::IComponentContext* contextPtr)
-{
-	m_contextPtr = contextPtr;
 }
 
 

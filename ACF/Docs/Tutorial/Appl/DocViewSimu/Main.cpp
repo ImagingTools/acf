@@ -17,8 +17,8 @@
 #include "iqmain/CMainWindowGuiComp.h"
 #include "iqmain/CMultiDocumentWorkspaceGuiComp.h"
 
-#include "CTextEditorComp.h"
-#include "CTextModelComp.h"
+#include "DocView/CTextEditorComp.h"
+#include "DocView/CTextModelComp.h"
 
 
 int main(int argc, char *argv[])

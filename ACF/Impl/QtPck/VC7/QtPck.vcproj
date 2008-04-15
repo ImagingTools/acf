@@ -13,7 +13,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2">
 			<Tool
@@ -31,7 +31,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib iqt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
+				AdditionalDependencies="AcfStd.lib iqt.lib iqmain.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				GenerateDebugInformation="FALSE"
@@ -59,7 +59,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2">
 			<Tool
@@ -80,7 +80,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib iqt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib QtSqld4.lib QtNetworkd4.lib"
+				AdditionalDependencies="AcfStd.lib iqt.lib iqmain.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib QtSqld4.lib QtNetworkd4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				GenerateDebugInformation="TRUE"
@@ -206,6 +206,9 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
 				RelativePath="..\CQtPackage.cpp">
+			</File>
+			<File
+				RelativePath="..\Main.cpp">
 			</File>
 		</Filter>
 		<Filter

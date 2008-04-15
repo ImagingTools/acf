@@ -1,7 +1,9 @@
 #include "istd.h"
 
 
+// STL includes
 #include <assert.h>
+#include <iostream>
 
 #include "istd/ITrace.h"
 #include "istd/CStaticServicesProvider.h"
@@ -64,6 +66,9 @@ void SendTraceMessage(TraceLevel level, const char* groupId, const char* message
 
 	if (tracePtr != NULL){
 		tracePtr->LogMessage(level, groupId, message, fileName, line);
+	}
+	else{
+		std::cerr << level << "\t" << groupId << "\t" << message << " [fileName: " << line << "]" << std::endl;
 	}
 }
 

@@ -2,10 +2,11 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="isys"
-	ProjectGUID="{633B67F7-B154-4A80-A651-0243D5EDF583}"
-	SccProjectName="&quot;$/develop/modules/isys&quot;, XRAAAAAA"
-	SccLocalPath="..\isys">
+	Name="DocViewSimu.exe"
+	ProjectGUID="{5841387C-CE78-44F4-9766-4DBDEC0B60DE}"
+	RootNamespace="DocViewSimu"
+	SccProjectName=""
+	SccLocalPath="">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
@@ -13,16 +14,16 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC7"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC7/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../"
+				AdditionalIncludeDirectories="../..;../../../../../Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
@@ -30,21 +31,24 @@
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="3"
+				WarningLevel="4"
 				SuppressStartupBanner="TRUE"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"/>
+				Name="VCLinkerTool"
+				AdditionalDependencies="QtMain.lib QtCore4.lib QtGui4.lib AcfStd.lib iqt.lib iqmain.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
 				MkTypLibCompatible="TRUE"
 				SuppressStartupBanner="TRUE"
 				TargetEnvironment="1"
-				TypeLibraryName="./isys/ReleaseVC7/isys.tlb"
+				TypeLibraryName="./iwin/ReleaseVC7/iwin.tlb"
 				HeaderFileName=""/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
@@ -60,6 +64,8 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -67,37 +73,42 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC7"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC7/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../"
+				AdditionalIncludeDirectories="../..;../../../../../Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="3"
+				BrowseInformation="1"
+				WarningLevel="4"
 				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"/>
+				Name="VCLinkerTool"
+				AdditionalDependencies="QtMaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib iqt.lib iqmain.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
+				GenerateDebugInformation="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
 				MkTypLibCompatible="TRUE"
 				SuppressStartupBanner="TRUE"
 				TargetEnvironment="1"
-				TypeLibraryName="./isys/DebugVC7/isys.tlb"
+				TypeLibraryName="./iwin/DebugVC7/iwin.tlb"
 				HeaderFileName=""/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
@@ -113,6 +124,8 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -126,45 +139,25 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
-				RelativePath="..\CDateTimeBase.cpp">
-			</File>
-			<File
-				RelativePath="..\CSimpleDateTime.cpp">
+				RelativePath="..\Main.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
-			<File
-				RelativePath="..\CDateTimeBase.h">
-			</File>
-			<File
-				RelativePath="..\CSectionBlocker.h">
-			</File>
-			<File
-				RelativePath="..\CSimpleDateTime.h">
-			</File>
-			<File
-				RelativePath="..\ICriticalSection.h">
-			</File>
-			<File
-				RelativePath="..\IDateTime.h">
-			</File>
-			<File
-				RelativePath="..\IFileSystem.h">
-			</File>
-			<File
-				RelativePath="..\IFunctionsProvider.h">
-			</File>
-			<File
-				RelativePath="..\isys.h">
-			</File>
-			<File
-				RelativePath="..\ISystem.h">
-			</File>
-			<File
-				RelativePath="..\ITimer.h">
-			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="qrc;*"
+			ParseFiles="FALSE">
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="moc;h;cpp">
+		</Filter>
+		<Filter
+			Name="Forms"
+			Filter="">
 		</Filter>
 	</Files>
 	<Globals>

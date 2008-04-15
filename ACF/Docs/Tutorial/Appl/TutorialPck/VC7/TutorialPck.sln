@@ -1,0 +1,65 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompSimu.exe", "..\..\CompSimu\VC7\CompSimu.vcproj", "{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DocView", "..\..\DocView\VC7\DocView.vcproj", "{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DocViewSimu.exe", "..\..\DocViewSimu\VC7\DocViewSimu.vcproj", "{5841387C-CE78-44F4-9766-4DBDEC0B60DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED} = {0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TutorialPck", "TutorialPck.vcproj", "{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED} = {0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		NemoDebug = NemoDebug
+		NemoRelease = NemoRelease
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Debug.ActiveCfg = Debug|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Debug.Build.0 = Debug|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoDebug.ActiveCfg = Debug|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoDebug.Build.0 = Debug|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoRelease.ActiveCfg = Release|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoRelease.Build.0 = Release|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Release.ActiveCfg = Release|Win32
+		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Release.Build.0 = Release|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Debug.ActiveCfg = Debug|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Debug.Build.0 = Debug|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoDebug.ActiveCfg = Debug|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoDebug.Build.0 = Debug|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoRelease.ActiveCfg = Release|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoRelease.Build.0 = Release|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Release.ActiveCfg = Release|Win32
+		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Release.Build.0 = Release|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.Debug.ActiveCfg = Debug|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.Debug.Build.0 = Debug|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.NemoDebug.ActiveCfg = Debug|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.NemoDebug.Build.0 = Debug|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.NemoRelease.ActiveCfg = Release|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.NemoRelease.Build.0 = Release|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.Release.ActiveCfg = Release|Win32
+		{5841387C-CE78-44F4-9766-4DBDEC0B60DE}.Release.Build.0 = Release|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Debug.ActiveCfg = Debug|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Debug.Build.0 = Debug|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.NemoDebug.ActiveCfg = Debug|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.NemoDebug.Build.0 = Debug|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.NemoRelease.ActiveCfg = Release|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.NemoRelease.Build.0 = Release|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Release.ActiveCfg = Release|Win32
+		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

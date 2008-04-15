@@ -44,6 +44,8 @@ IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const std
 		attributePtr = CreateAttribute(attributeId);
 
 		if (attributePtr == NULL){
+			I_TRACE_ONCE(istd::ErrorLevel, "Components", ("Attribute " + attributeId + " cannot be created").c_str());
+
 			return NULL;
 		}
 	}
@@ -60,6 +62,8 @@ iser::ISerializable* CRegistryElement::CreateAttribute(const std::string& attrib
 {
 	const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
 	if (staticInfoPtr == NULL){
+		I_TRACE_ONCE(istd::ErrorLevel, "Components", ("No attribute static info: " + attributeId).c_str());
+
 		return NULL;
 	}
 

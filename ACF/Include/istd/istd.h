@@ -118,20 +118,29 @@ static const double I_BIG_EPSILON = 1.0e-8;
 #if defined(_DEBUG) || defined(I_FORCE_TRACE)
 
 
-#define I_TRACE(level, groupId, message) if (CheckTraceEnabled(level, groupId)){static CGroupRegistrator registrator(groupId); SendTraceMessage(level, groupId, message, __FILE__, __LINE__);}
-#define I_TRACE_INFO(groupId, message) I_TRACE(istd::InfoLevel, groupId, message)
-#define I_TRACE_WARNING(groupId, message) I_TRACE(istd::WarningLevel, groupId, message)
-#define I_TRACE_ERROR(groupId, message) I_TRACE(istd::ErrorLevel, groupId, message)
-#define I_TRACE_CRITICAL(groupId, message) I_TRACE(istd::CriticalLevel, groupId, message)
+/**
+	Send debug information to predefined output.
+	\param	level	one of:
+		\li	istd::InfoLevel	minimal message priority, info only.
+		\li	istd::WarningLevel	warning message priority, should be used for normally but untipical state.
+		\li	istd::ErrorLevel	error message priority, should not happened but e.g. wrong using of parameters can cause it.
+		\li	istd::CriticalLevel	maximal message priority, for application states which should never occured.
+*/
+#define I_TRACE(level, groupId, message) if (istd::CheckTraceEnabled(level, groupId)){static istd::CGroupRegistrator registrator(groupId); istd::SendTraceMessage(level, groupId, message, __FILE__, __LINE__);}
+#define I_TRACE_ONCE(level, groupId, message){\
+	static active = true;\
+	if (active){\
+		I_TRACE(level, groupId, message);\
+		active = false;\
+	}\
+}
 
 
 #else //defined(_DEBUG) || defined(I_FORCE_TRACE)
 
 
-#define I_TRACE_INFO(groupId, message)
-#define I_TRACE_WARNING(groupId, message)
-#define I_TRACE_ERROR(groupId, message)
-#define I_TRACE_CRITICAL(groupId, message)
+#define I_TRACE(level, groupId, message)
+#define I_TRACE_ONCE(level, groupId, message)
 
 
 #endif //defined(_DEBUG) || defined(I_FORCE_TRACE)

@@ -36,6 +36,11 @@ public:
 				const IRegistriesManager* registriesManagerPtr,
 				const CCompositeComponentContext* parentPtr = NULL);
 
+	/*
+		Destructor deinitializing all components.
+	*/
+	virtual ~CCompositeComponentContext();
+
 	const IRegistry& GetRegistry() const;
 	const IRegistriesManager& GetRegistriesManager() const;
 
@@ -69,6 +74,7 @@ private:
 
 	const IRegistry& m_registry;
 	const IRegistriesManager& m_registriesManager;
+	bool m_stopCreating;
 };
 
 

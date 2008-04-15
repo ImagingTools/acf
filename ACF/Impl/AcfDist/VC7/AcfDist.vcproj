@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="AcfDist"
+	Name="AcfDist.exe"
 	ProjectGUID="{7CB86E2F-8CFB-402D-B4D1-011210279964}"
 	RootNamespace="AcfDist"
 	SccProjectName=""
@@ -14,7 +14,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib iqt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				SubSystem="2"/>
 			<Tool
@@ -73,7 +74,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -98,6 +99,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib iqt.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"/>

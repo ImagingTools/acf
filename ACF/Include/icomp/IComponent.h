@@ -45,7 +45,6 @@ public:
 	*/
 	virtual void OnComponentDestroyed() = 0;
 
-protected:
 	/**
 		Set component context of this component.
 		\param	contextPtr	new value of component context.

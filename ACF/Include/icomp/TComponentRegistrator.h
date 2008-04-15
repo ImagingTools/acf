@@ -5,6 +5,7 @@
 #include <string>
 
 #include "icomp/IComponentStaticInfo.h"
+#include "icomp/TBaseComponentStaticInfo.h"
 
 
 namespace icomp
@@ -27,7 +28,9 @@ public:
 template <class Component>
 TComponentRegistrator<Component>::TComponentRegistrator(const std::string& componentId, icomp::IComponentStaticInfo& staticInfo)
 {
-	staticInfo.RegisterSubcomponentInfo(componentId, &Component::InitStaticInfo(NULL));
+	static icomp::TComponentStaticInfo<Component> endComponentInfo(&Component::InitStaticInfo(NULL));
+
+	staticInfo.RegisterSubcomponentInfo(componentId, &endComponentInfo);
 }
 
 

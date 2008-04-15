@@ -19,7 +19,7 @@ public:
 	TComponentWrap(const IComponentContext* contextPtr = NULL);
 	virtual ~TComponentWrap();
 
-protected:
+	// pseudo-reimplemented (icomp::IComponent)
 	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr);
 };
 
@@ -35,21 +35,6 @@ TComponentWrap<Component>::TComponentWrap(const IComponentContext* contextPtr)
 }
 
 
-// protected methods
-
-template <class Component>
-void TComponentWrap<Component>::SetComponentContext(const IComponentContext* contextPtr)
-{
-	Component::SetComponentContext(contextPtr);
-
-	if (contextPtr != NULL){
-		Component::InitStaticInfo(this);
-
-		OnComponentCreated();
-	}
-}
-
-
 template <class Component>
 TComponentWrap<Component>::~TComponentWrap()
 {
@@ -59,6 +44,25 @@ TComponentWrap<Component>::~TComponentWrap()
 	}
 
 	SetComponentContext(NULL);
+}
+
+
+// pseudo-reimplemented (icomp::IComponent)
+
+template <class Component>
+void TComponentWrap<Component>::SetComponentContext(const IComponentContext* contextPtr)
+{
+	if (GetComponentContext() != NULL){
+		OnComponentDestroyed();
+	}
+
+	Component::SetComponentContext(contextPtr);
+
+	if (contextPtr != NULL){
+		Component::InitStaticInfo(this);
+
+		OnComponentCreated();
+	}
 }
 
 

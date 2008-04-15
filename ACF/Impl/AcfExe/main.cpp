@@ -1,6 +1,9 @@
 #include <iostream>
 
 #include <QString>
+#include <QMessageBox>
+#include <QApplication>
+#include <QLabel>
 
 #include "ibase/IApplication.h"
 
@@ -21,6 +24,7 @@ int main(int argc, char *argv[])
 	bool showApplicationInfo = false;
 	bool useDefaultRegistries = true;
 	std::string componentId;
+	bool waitOnEnd = false;
 
 	for (int index = 1; index < argc; index++){
 		std::string argument = argv[index];
@@ -36,6 +40,7 @@ int main(int argc, char *argv[])
 				std::cout << "\t-packageDir directory    - append packages directory" << std::endl;
 				std::cout << "\t-config configFile       - load config file" << std::endl;
 				std::cout << "\t-info                    - application parameter info" << std::endl;
+				std::cout << "\t-wait                    - wait on application end" << std::endl;
 
 				return 0;
 			}
@@ -43,6 +48,9 @@ int main(int argc, char *argv[])
 				showApplicationInfo = true;
 
 				break;
+			}
+			else if (option == "wait"){
+				waitOnEnd = true;
 			}
 			else if (index < argc - 1){
 				if (option == "id"){
@@ -74,32 +82,43 @@ int main(int argc, char *argv[])
 		loader.RegisterPackagesDir("", false);
 	}
 
+	int retVal = 0;
+
 	icomp::CXmlRegistriesManager registriesManager(&loader);
 	const icomp::IRegistry* registryPtr = registriesManager.GetRegistryFromFile(registryFile.c_str());
-	if (registryPtr == NULL){
-		std::cout << QString("Registry %1 cannot be loaded").arg(registryFile.c_str()).toStdString() << std::endl;
+	if (registryPtr != NULL){
+		icomp::CRegistryElement dummyElement(&loader);
 
-		return -1;
-	}
+		icomp::CCompositeComponentContext compositeContext(&dummyElement, registryPtr, &registriesManager);
+		icomp::TComponentWrap<icomp::CCompositeComponent> composite(&compositeContext);
 
-	icomp::CRegistryElement dummyElement(&loader);
+		ibase::IApplication* applicationPtr = composite.GetComponentInterface<ibase::IApplication>(componentId);
+		if (applicationPtr == NULL){
+			std::cout << "Application interface cannot be found" << std::endl;
 
-	icomp::CCompositeComponentContext compositeContext(&dummyElement, registryPtr, &registriesManager);
-	icomp::TComponentWrap<icomp::CCompositeComponent> composite(&compositeContext);
+			retVal = -1;
+		}
+		else if (showApplicationInfo){
+			std::cout << applicationPtr->GetHelpText().ToString();
 
-	ibase::IApplication* applicationPtr = composite.GetComponentInterface<ibase::IApplication>(componentId);
-	if (applicationPtr == NULL){
-		std::cout << "Application interface cannot be found" << std::endl;
-
-		return -1;
-	}
-
-	if (showApplicationInfo){
-		std::cout << applicationPtr->GetHelpText().ToString();
-
-		return 0;
+			retVal = 0;
+		}
+		else{
+			retVal = applicationPtr->Execute(argc, argv);
+		}
 	}
 	else{
-		return applicationPtr->Execute(argc, argv);
+		std::cout << QString("Registry %1 cannot be loaded").arg(registryFile.c_str()).toStdString() << std::endl;
+
+		retVal = -1;
 	}
+
+	if (waitOnEnd){
+		QApplication a(argc, argv);
+
+		QMessageBox::information(NULL, "Wait on end", "Application is finished");
+	}
+
+	return retVal;
 }
+

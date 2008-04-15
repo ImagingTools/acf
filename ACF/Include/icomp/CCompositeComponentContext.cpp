@@ -20,7 +20,8 @@ CCompositeComponentContext::CCompositeComponentContext(
 			const CCompositeComponentContext* parentPtr)
 :	BaseClass(elementPtr, parentPtr),
 	m_registry(*registryPtr),
-	m_registriesManager(*registriesManagerPtr)
+	m_registriesManager(*registriesManagerPtr),
+	m_stopCreating(false)
 {
 	I_ASSERT(registryPtr != NULL);
 
@@ -28,30 +29,63 @@ CCompositeComponentContext::CCompositeComponentContext(
 }
 
 
+CCompositeComponentContext::~CCompositeComponentContext()
+{
+	m_stopCreating = true;
+
+	for (		ComponentMap::iterator iter = m_componentMap.begin();
+				iter != m_componentMap.end();
+				++iter){
+		ComponentInfo& info = iter->second;
+		if (info.componentPtr.IsValid()){
+			info.componentPtr->SetComponentContext(NULL);
+
+			info.isInitialized = false;
+		}
+	}
+}
+
+
 // reimplemented (icomp::IComponentContext)
 
 IComponent* CCompositeComponentContext::GetSubcomponent(const std::string& componentId) const
 {
-	ComponentInfo& componentInfo = m_componentMap[componentId];
-	if (!componentInfo.isInitialized){
-		CreateSubcomponentInfo(componentId, componentInfo.contextPtr, componentInfo.componentPtr);
-
-		componentInfo.isInitialized = true;
+	if (m_stopCreating){
+		ComponentMap::const_iterator iter = m_componentMap.find(componentId);
+		if (iter != m_componentMap.end()){
+			return iter->second.componentPtr.GetPtr();
+		}
+		else{
+			return NULL;
+		}
 	}
+	else{
+		ComponentInfo& componentInfo = m_componentMap[componentId];
+		if (!componentInfo.isInitialized){
+			CreateSubcomponentInfo(componentId, componentInfo.contextPtr, componentInfo.componentPtr);
 
-	return componentInfo.componentPtr.GetPtr();
+			componentInfo.isInitialized = true;
+		}
+
+		return componentInfo.componentPtr.GetPtr();
+	}
 }
 
 
 IComponent* CCompositeComponentContext::CreateSubcomponent(const std::string& componentId) const
 {
-	ComponentPtr retVal;
+	if (m_stopCreating){
+		return NULL;
+	}
+	else{
+		ComponentPtr retVal;
 
-	ComponentInfo& componentInfo = m_componentMap[componentId];
+		ComponentInfo& componentInfo = m_componentMap[componentId];
 
-	CreateSubcomponentInfo(componentId, componentInfo.contextPtr, retVal);
+		CreateSubcomponentInfo(componentId, componentInfo.contextPtr, retVal);
 
-	return retVal.PopPtr();
+		return retVal.PopPtr();
+	}
 }
 
 

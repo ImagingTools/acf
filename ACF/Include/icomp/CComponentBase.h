@@ -36,13 +36,10 @@ public:
 	virtual const IComponentContext* GetComponentContext() const;
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
+	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr);
 
 	// static methods
 	static const icomp::IComponentStaticInfo& InitStaticInfo(CComponentBase* componentPtr);
-
-protected:
-	// reimplemented (icomp::IComponent)
-	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr);
 
 private:
 	const IComponentContext* m_contextPtr;

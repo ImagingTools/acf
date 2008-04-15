@@ -123,7 +123,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inat", "..\..\..\Include\in
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Acf", "..\..\AcfExe\VC7\Acf.vcproj", "{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Acf.exe", "..\..\AcfExe\VC7\Acf.vcproj", "{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}"
 	GlobalSection(Qt) = preSolution
 		Integration = True
 	EndGlobalSection
@@ -131,7 +131,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Acf", "..\..\AcfExe\VC7\Acf
 		{A3BB8D04-552D-4FD4-B799-18187FB17C2C} = {A3BB8D04-552D-4FD4-B799-18187FB17C2C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\..\CompositorExe\VC7\Compositor.vcproj", "{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor.exe", "..\..\CompositorExe\VC7\Compositor.vcproj", "{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
 	GlobalSection(Qt) = preSolution
 		Integration = True
 	EndGlobalSection
@@ -140,16 +140,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\..\Composi
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtPck", "..\..\QtPck\VC7\QtPck.vcproj", "{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}"
-	GlobalSection(Qt) = preSolution
-		Integration = True
-	EndGlobalSection
-	ProjectSection(ProjectDependencies) = postProject
-		{AA94C676-48A9-4FCF-BC0F-96B0E910F463} = {AA94C676-48A9-4FCF-BC0F-96B0E910F463}
-		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59} = {FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}
-		{C30159C1-C8F9-49F4-AE32-C014F87B12BD} = {C30159C1-C8F9-49F4-AE32-C014F87B12BD}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompSimu", "..\..\..\Docs\Tutorial\Appl\CompSimu\VC7\CompSimu.vcproj", "{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}"
 	GlobalSection(Qt) = preSolution
 		Integration = True
 	EndGlobalSection
@@ -169,14 +159,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iproc", "..\..\..\Include\i
 		Integration = True
 	EndGlobalSection
 	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DocView", "..\..\..\Docs\Tutorial\Appl\DocView\VC7\DocView.vcproj", "{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}"
-	GlobalSection(Qt) = preSolution
-		Integration = True
-	EndGlobalSection
-	ProjectSection(ProjectDependencies) = postProject
-		{A3BB8D04-552D-4FD4-B799-18187FB17C2C} = {A3BB8D04-552D-4FD4-B799-18187FB17C2C}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "istdc", "..\..\..\Include\istdc\VC7\istdc.vcproj", "{AD4F093E-141B-490D-AAAF-C02C69F5C524}"
@@ -200,7 +182,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "idoc", "..\..\..\Include\id
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcfDist", "..\..\AcfDist\VC7\AcfDist.vcproj", "{7CB86E2F-8CFB-402D-B4D1-011210279964}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcfDist.exe", "..\..\AcfDist\VC7\AcfDist.vcproj", "{7CB86E2F-8CFB-402D-B4D1-011210279964}"
 	GlobalSection(Qt) = preSolution
 		Integration = True
 	EndGlobalSection
@@ -247,6 +229,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcfQt", "..\..\AcfQt\VC7\Ac
 	ProjectSection(ProjectDependencies) = postProject
 		{BB74CB53-2F9B-44E3-BE32-CBA4E6325C65} = {BB74CB53-2F9B-44E3-BE32-CBA4E6325C65}
 		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59} = {FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasePck", "..\..\BasePck\VC7\BasePck.vcproj", "{030936A8-23C4-45EE-8E3D-196FF4D405C6}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	ProjectSection(ProjectDependencies) = postProject
+		{A3BB8D04-552D-4FD4-B799-18187FB17C2C} = {A3BB8D04-552D-4FD4-B799-18187FB17C2C}
 	EndProjectSection
 EndProject
 Global
@@ -412,14 +402,6 @@ Global
 		{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}.NemoRelease.Build.0 = NemoRelease|Win32
 		{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}.Release.ActiveCfg = Release|Win32
 		{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}.Release.Build.0 = Release|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Debug.ActiveCfg = Debug|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Debug.Build.0 = Debug|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoDebug.ActiveCfg = Debug|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoDebug.Build.0 = Debug|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoRelease.ActiveCfg = Release|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.NemoRelease.Build.0 = Release|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Release.ActiveCfg = Release|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Release.Build.0 = Release|Win32
 		{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}.Debug.ActiveCfg = Debug|Win32
 		{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}.Debug.Build.0 = Debug|Win32
 		{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}.NemoDebug.ActiveCfg = NemoDebug|Win32
@@ -436,14 +418,6 @@ Global
 		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.NemoRelease.Build.0 = Release|Win32
 		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.Release.ActiveCfg = Release|Win32
 		{9BA2C3D2-9483-483F-9019-8C6B027C58C6}.Release.Build.0 = Release|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Debug.ActiveCfg = Debug|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Debug.Build.0 = Debug|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoDebug.ActiveCfg = Debug|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoDebug.Build.0 = Debug|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoRelease.ActiveCfg = Release|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.NemoRelease.Build.0 = Release|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Release.ActiveCfg = Release|Win32
-		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Release.Build.0 = Release|Win32
 		{AD4F093E-141B-490D-AAAF-C02C69F5C524}.Debug.ActiveCfg = Debug|Win32
 		{AD4F093E-141B-490D-AAAF-C02C69F5C524}.Debug.Build.0 = Debug|Win32
 		{AD4F093E-141B-490D-AAAF-C02C69F5C524}.NemoDebug.ActiveCfg = NemoDebug|Win32
@@ -492,6 +466,14 @@ Global
 		{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}.NemoRelease.Build.0 = Release|Win32
 		{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}.Release.ActiveCfg = Release|Win32
 		{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}.Release.Build.0 = Release|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.Debug.ActiveCfg = Debug|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.Debug.Build.0 = Debug|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.NemoDebug.ActiveCfg = Debug|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.NemoDebug.Build.0 = Debug|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.NemoRelease.ActiveCfg = Release|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.NemoRelease.Build.0 = Release|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.Release.ActiveCfg = Release|Win32
+		{030936A8-23C4-45EE-8E3D-196FF4D405C6}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

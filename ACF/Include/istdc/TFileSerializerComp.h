@@ -2,6 +2,8 @@
 #define istdc_TFileSerializerComp_included
 
 
+#include "iser/IFileSerializer.h"
+
 #include "icomp/CComponentBase.h"
 
 

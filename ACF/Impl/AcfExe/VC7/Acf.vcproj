@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="Acf"
+	Name="Acf.exe"
 	ProjectGUID="{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}"
 	SccProjectName=""
 	SccLocalPath="">
@@ -13,7 +13,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -39,6 +39,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib iqt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"/>
 			<Tool
 				Name="VCMIDLTool"
@@ -71,7 +72,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\$(ConfigurationName)VC7"
+			OutputDirectory="../../../Bin/$(ConfigurationName)VC7"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -97,6 +98,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib iqt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				GenerateDebugInformation="TRUE"/>
 			<Tool
