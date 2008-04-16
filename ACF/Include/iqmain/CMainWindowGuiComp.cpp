@@ -139,19 +139,16 @@ void CMainWindowGuiComp::OnComponentDestroyed()
 
 void CMainWindowGuiComp::OnDocumentCountChanged(int currentCount)
 {
+	I_ASSERT(IsModelAttached(NULL));
+
 	if (!IsGuiCreated()){
 		return;
 	}
 
-	bool isActionEnabled = (currentCount != 0);
-
-	m_saveAction->setEnabled(isActionEnabled);
-	m_saveAsAction->setEnabled(isActionEnabled);
-	m_cascadeAction->setEnabled(isActionEnabled);
-
-	m_tileHorizontallyAction->setEnabled(isActionEnabled);
-	m_tileVerticallyAction->setEnabled(isActionEnabled);
-	m_closeAllDocumentsAction->setEnabled(isActionEnabled);
+	m_cascadeAction->setEnabled(currentCount > 1);
+	m_tileHorizontallyAction->setEnabled(currentCount > 1);
+	m_tileVerticallyAction->setEnabled(currentCount > 1);
+	m_closeAllDocumentsAction->setEnabled(currentCount > 0);
 }
 
 
@@ -166,6 +163,15 @@ void CMainWindowGuiComp::OnActiveDocumentChanged(imod::IModel* activeDocumentPtr
 	}
 
 	UpdateUndoMenu();
+
+	if (!IsGuiCreated()){
+		return;
+	}
+
+	bool isDocumentActive = (activeDocumentPtr != NULL);
+
+	m_saveAction->setEnabled(isDocumentActive);
+	m_saveAsAction->setEnabled(isDocumentActive);
 }
 
 
@@ -532,6 +538,7 @@ void CMainWindowGuiComp::CreateMenuComponents(QMainWindow& mainWindow)
 	m_menuBar->addAction(m_fileMenu->menuAction());
 	m_menuBar->addAction(m_editMenu->menuAction());
 	m_menuBar->addAction(m_viewMenu->menuAction());
+	m_menuBar->addAction(m_windowMenu->menuAction());
 	m_menuBar->addAction(m_helpMenu->menuAction());
 	
 	m_standardToolBar = new QToolBar(&mainWindow);
@@ -753,7 +760,10 @@ void CMainWindowGuiComp::SetupWorkspace(QMainWindow& mainWindow)
 		connect(m_closeAllDocumentsAction, SIGNAL(activated()), this, SLOT(OnCloseAllWindows())); 
 		m_closeAllDocumentsAction->setEnabled(false);
 
-		m_menuBar->addAction(m_windowMenu->menuAction());
+		m_windowMenu->setEnabled(true);
+	}
+	else{
+		m_windowMenu->setEnabled(false);
 	}
 }
 
