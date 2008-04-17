@@ -239,13 +239,19 @@ bool CDocumentManagerBase::FileClose()
 
 		Views::iterator findIter = std::find(info.views.begin(), info.views.end(), m_activeViewPtr);
 		if (findIter != info.views.end()){
-			istd::CChangeNotifier notifier(this, DocumentRemoved);
-
 			info.views.erase(findIter);	// remove active view
 
 			m_activeViewPtr = NULL;
 
 			if (info.views.empty()){	// last view was removed
+				int changeFlags = DocumentRemoved | DocumentCountChanged;
+				// if last document was closed, force view activation update:
+				if (m_documentInfos.GetCount() == 1){
+					changeFlags |= ViewActivationChanged;
+				}
+
+				istd::CChangeNotifier notifier(this, changeFlags);
+
 				m_documentInfos.RemoveAt(i);
 			}
 
@@ -259,41 +265,11 @@ bool CDocumentManagerBase::FileClose()
 
 // protected methods
 
-bool CDocumentManagerBase::CloseDocument(int index)
-{
-	if ((index < 0) || (index >= m_documentInfos.GetCount())){
-		return false;
-	}
-
-	istd::CChangeNotifier notifierPtr(this, DocumentCountChanged | DocumentRemoved);
-
-	m_documentInfos.RemoveAt(index);
-	
-	return true;
-}
-
-
 void CDocumentManagerBase::CloseAllDocuments()
 {
 	istd::CChangeNotifier notifierPtr(this, DocumentCountChanged | DocumentRemoved);
 
 	m_documentInfos.Reset();
-}
-
-
-void CDocumentManagerBase::RemoveDocument(imod::IModel* documentPtr)
-{
-	int documentsCount = GetDocumentsCount();
-	for (int documentIndex = 0; documentIndex < documentsCount; documentIndex++){
-		const DocumentInfo& info = GetDocumentInfo(documentIndex);
-		I_ASSERT(info.documentPtr.IsValid());
-
-		if (info.documentPtr.GetPtr() == documentPtr){
-			CloseDocument(documentIndex);
-
-			break;
-		}
-	}
 }
 
 

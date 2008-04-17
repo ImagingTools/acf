@@ -73,9 +73,7 @@ protected:
 		UndoManagerPtr undoManagerPtr;
 	};
 
-	bool CloseDocument(int index);
 	void CloseAllDocuments();
-	void RemoveDocument(imod::IModel* documentPtr);
 
 	DocumentInfo& GetDocumentInfo(int index) const;
 
