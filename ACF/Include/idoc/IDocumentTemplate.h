@@ -72,12 +72,6 @@ public:
 		\param	documentPtr	pointer to document object.
 	*/
 	virtual imod::IUndoManager* CreateUndoManager(imod::IModel* documentPtr) const = 0;
-	/**
-		Get list of menu commands used in global context.
-		This commands will be integrated in global menu system undependent of actual selected view.
-		Please note that non-permanent command elements will be used only if there is used at least one model created by this template.
-	*/
-	virtual const IHierarchicalCommand* GetGlobalMenuCommands() const = 0;
 
 	/**
 		Get list of file filters supported by this document template.

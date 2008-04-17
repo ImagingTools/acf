@@ -58,12 +58,6 @@ istd::IPolymorphic* CSerializedDocumentTemplateComp::CreateView(imod::IModel* do
 }
 
 
-const IHierarchicalCommand* CSerializedDocumentTemplateComp::GetGlobalMenuCommands() const
-{
-	return NULL;
-}
-
-
 // reimplemented (icomp::CComponentBase)
 
 void CSerializedDocumentTemplateComp::OnComponentCreated()

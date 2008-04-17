@@ -12,6 +12,8 @@
 
 #include "idoc/ICommand.h"
 
+#include "iqt/iqt.h"
+
 
 namespace iqt
 {
@@ -28,8 +30,10 @@ public:
 	typedef QAction BaseClass;
 	typedef ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedBase<idoc::IHierarchicalCommand> > > BaseClass2;
 
-	CHierarchicalCommand(const QString& text, QObject* parentPtr, int priority = 100, int staticFlags = CF_ALL_ENABLED);
-	CHierarchicalCommand(const QIcon& icon, const QString& text, QObject* parentPtr, int priority = 100, int staticFlags = CF_ALL_ENABLED);
+	explicit CHierarchicalCommand(const istd::CString& name = "", int priority = 100, int staticFlags = CF_ALL_ENABLED);
+
+	void SetPriority(int priority);
+	void SetStaticFlags(int flags);
 
 	/**
 		Reset list of childs.
@@ -41,6 +45,15 @@ public:
 	*/
 	void InsertChild(CHierarchicalCommand* commandPtr, bool releaseFlag = false);
 
+	/**
+		Joint the second root as links.
+		\param	rootPtr	pointer to root of commands tree. It cannot be NULL.
+	*/
+	void JoinLinkFrom(const idoc::IHierarchicalCommand* rootPtr);
+
+	template <class MenuType>
+	void CreateMenu(MenuType& result) const;
+
 	// reimplemented (idoc::ICommand)
 	virtual int GetPriority() const;
 	virtual int GetStaticFlags() const;
@@ -50,12 +63,58 @@ public:
 	virtual int GetChildsCount() const;
 	virtual idoc::ICommand* GetChild(int index) const;
 
+	// reimplemented (istd::INamed)
+	virtual void SetName(const istd::CString& name);
+
+protected:
+	/**
+		Find the same command in child list.
+		\param	command	command will be used as search template.
+		\return	index of found child or negative value, if no child is found.
+	*/
+	int FindTheSameCommand(const idoc::IHierarchicalCommand& command) const;
+	/**
+		Find index where element with specified priority should be inserted.
+	*/
+	int FindInsertingIndex(int priority) const;
+
 private:
 	int m_priority;
 	int m_staticFlags;
 
-	istd::TOptPointerVector<CHierarchicalCommand> m_childs;
+	typedef istd::TOptPointerVector<CHierarchicalCommand> Childs;
+	Childs m_childs;
 };
+
+
+// public template methods
+
+template <class MenuType>
+void CHierarchicalCommand::CreateMenu(typename MenuType& result) const
+{
+	int childsCount = m_childs.GetCount();
+
+	for (int i = 0; i < childsCount; ++i){
+		const idoc::ICommand* childPtr = m_childs.GetAt(i);
+		I_ASSERT(childPtr != NULL);
+
+		const CHierarchicalCommand* hierarchicalPtr = dynamic_cast<const CHierarchicalCommand*>(childPtr);
+
+		if (hierarchicalPtr != NULL){
+			if (hierarchicalPtr->GetChildsCount() > 0){
+				QMenu* newMenuPtr = new QMenu(&result);
+				newMenuPtr->setTitle(iqt::GetQString(childPtr->GetName()));
+
+				hierarchicalPtr->CreateMenu<QMenu>(*newMenuPtr);
+
+				result.addMenu(newMenuPtr);
+			}
+			else{
+				result.addAction(const_cast<CHierarchicalCommand*>(hierarchicalPtr));
+			}
+		}
+	}
+}
 
 
 } // namespace iqt

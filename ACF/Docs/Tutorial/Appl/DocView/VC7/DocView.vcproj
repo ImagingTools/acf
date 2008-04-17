@@ -162,6 +162,24 @@
 			</File>
 			<File
 				RelativePath="..\CTextModelComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputFileName)..."
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputFileName)..."
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\IText.h">
@@ -177,6 +195,9 @@
 			Filter="moc;h;cpp">
 			<File
 				RelativePath="..\generatedfiles\moc_CTextEditorComp.cpp">
+			</File>
+			<File
+				RelativePath="..\generatedfiles\moc_CTextModelComp.cpp">
 			</File>
 		</Filter>
 		<Filter

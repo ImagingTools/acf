@@ -48,18 +48,59 @@ template <typename Pointer, class AccessAdapter = TDeleteAdapter<Pointer> >
 class TPointerVector
 {
 public:
+	typedef typename AccessAdapter::ElementType ElementType;
+
 	~TPointerVector();
 
+	/**
+		Get number of stored elements.
+	*/
 	int GetCount() const;
+
+	/**
+		Remove all elements.
+	*/
 	void Reset();
+
+	/**
+		Get pointer at specified index.
+	*/
 	Pointer* GetAt(int index) const;
-	void SetAt(int index, typename const AccessAdapter::ElementType& element);
+
+	/**
+		Get element at specified index.
+		Dependent on implementation of \c AccessAdapter it can differ from GetAt().
+	*/
+	const ElementType& GetElementAt(int index) const;
+
+	/**
+		Set element at specified index.
+	*/
+	void SetElementAt(int index, typename const ElementType& element);
+
+	/**
+		Remove element at specified index.
+	*/
 	void RemoveAt(int index);
+
+	/**
+		Pop element at specified index.
+		It does't remove pointed object.
+	*/
 	Pointer* PopAt(int index);
-	void PushBack(typename const AccessAdapter::ElementType& element);
+
+	/**
+		Add new element at the end of collection.
+	*/
+	void PushBack(const ElementType& element);
+
+	/**
+		Insert element at specified position.
+	*/
+	void InsertElementAt(int index, const ElementType& element);
 
 private:
-	typedef std::vector<typename AccessAdapter::ElementType> Elements;
+	typedef std::vector<ElementType> Elements;
 
 	Elements m_elements;
 };
@@ -105,7 +146,17 @@ typename Pointer* TPointerVector<Pointer, AccessAdapter>::GetAt(int index) const
 
 
 template <typename Pointer, class AccessAdapter>
-void TPointerVector<Pointer, AccessAdapter>::SetAt(int index, typename const AccessAdapter::ElementType& element)
+typename const TPointerVector<Pointer, AccessAdapter>::ElementType& TPointerVector<Pointer, AccessAdapter>::GetElementAt(int index) const
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < int(m_elements.size()));
+
+	return m_elements[index];
+}
+
+
+template <typename Pointer, class AccessAdapter>
+void TPointerVector<Pointer, AccessAdapter>::SetElementAt(int index, const ElementType& element)
 {
 	m_elements[index] = element;
 }
@@ -140,9 +191,19 @@ typename Pointer* TPointerVector<Pointer, AccessAdapter>::PopAt(int index)
 
 
 template <typename Pointer, class AccessAdapter>
-void TPointerVector<Pointer, AccessAdapter>::PushBack(typename const AccessAdapter::ElementType& element)
+void TPointerVector<Pointer, AccessAdapter>::PushBack(const ElementType& element)
 {
 	m_elements.push_back(element);
+}
+
+
+template <typename Pointer, class AccessAdapter>
+void TPointerVector<Pointer, AccessAdapter>::InsertElementAt(int index, const ElementType& element)
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index <= GetCount());
+
+	m_elements.insert(m_elements.begin() + index, element);
 }
 
 

@@ -44,6 +44,7 @@ public:
 	virtual istd::IPolymorphic* GetActiveView() const;
 	virtual void SetActiveView(istd::IPolymorphic* viewPtr);
 	virtual imod::IModel* GetDocumentFromView(const istd::IPolymorphic& view) const;
+	virtual std::string GetDocumentTypeId(const imod::IModel& document) const;
 	virtual imod::IModel* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "");
 	virtual bool FileOpen(const std::string* documentTypeIdPtr, bool createView = true, const std::string& viewTypeId = "");
 	virtual bool FileSave(bool requestFileName = false);

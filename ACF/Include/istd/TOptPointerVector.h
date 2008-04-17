@@ -55,6 +55,7 @@ public:
 
 	void SetAt(int index, Pointer* pointer, bool releaseFlag = false);
 	void PushBack(Pointer* pointer, bool releaseFlag = false);
+	void InsertAt(int index, Pointer* pointer, bool releaseFlag = false);
 };
 
 
@@ -67,7 +68,7 @@ void TOptPointerVector<Pointer>::SetAt(int index, Pointer* pointer, bool release
 	element.pointer = pointer;
 	element.releaseFlag = releaseFlag;
 
-	BaseClass::SetAt(index, element);
+	BaseClass::SetElementAt(index, element);
 }
 
 
@@ -79,6 +80,17 @@ void TOptPointerVector<Pointer>::PushBack(Pointer* pointer, bool releaseFlag)
 	element.releaseFlag = releaseFlag;
 
 	BaseClass::PushBack(element);
+}
+
+
+template <typename Pointer>
+void TOptPointerVector<Pointer>::InsertAt(int index, Pointer* pointer, bool releaseFlag)
+{
+	TOptDeleteAdapter<Pointer>::ElementType element;
+	element.pointer = pointer;
+	element.releaseFlag = releaseFlag;
+
+	BaseClass::InsertElementAt(index, element);
 }
 
 

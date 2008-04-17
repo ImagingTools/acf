@@ -10,6 +10,8 @@
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 
+#include "idoc/ICommandsProvider.h"
+
 #include "iqmain/CMainWindowGuiComp.h"
 
 
@@ -20,8 +22,54 @@ namespace iqmain
 // public methods
 
 CMainWindowGuiComp::CMainWindowGuiComp()
-	:m_activeUndoManager(*this)
+:	m_activeUndoManager(*this),
+	m_activeViewPtr(NULL),
+	m_activeDocumentPtr(NULL),
+	m_menuCommands("Global")
 {
+	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
+	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
+	connect(&m_saveCommand, SIGNAL(activated()), this, SLOT(OnSave()));
+	connect(&m_saveAsCommand, SIGNAL(activated()), this, SLOT(OnSaveAs()));
+	connect(&m_quitCommand, SIGNAL(activated()), this, SLOT(OnQuit()));
+	connect(&m_undoCommand, SIGNAL(activated()), this, SLOT(OnUndo()));
+	connect(&m_redoCommand, SIGNAL(activated()), this, SLOT(OnRedo()));
+	connect(&m_fullScreenCommand, SIGNAL(activated()), this, SLOT(OnFullScreen()));
+	connect(&m_cascadeCommand, SIGNAL(activated()), this, SLOT(OnCascade()));
+	connect(&m_tileHorizontallyCommand, SIGNAL(activated()), this, SLOT(OnTileHorizontally()));
+	connect(&m_tileVerticallyCommand, SIGNAL(activated()), this, SLOT(OnTile()));
+	connect(&m_closeAllDocumentsCommand, SIGNAL(activated()), this, SLOT(OnCloseAllWindows()));
+	connect(&m_aboutCommand, SIGNAL(activated()), this, SLOT(OnAbout()));
+
+	m_fileCommand.SetPriority(30);
+	m_fileCommand.InsertChild(&m_newCommand, false);
+	m_fileCommand.InsertChild(&m_openCommand, false);
+	m_fileCommand.InsertChild(&m_saveCommand, false);
+	m_fileCommand.InsertChild(&m_saveAsCommand, false);
+	m_fileCommand.InsertChild(&m_quitCommand, false);
+
+	m_editCommand.SetPriority(60);
+	m_editCommand.InsertChild(&m_undoCommand, false);
+	m_editCommand.InsertChild(&m_redoCommand, false);
+
+	m_viewCommand.SetPriority(90);
+	m_viewCommand.InsertChild(&m_fullScreenCommand, false);
+
+	m_windowCommand.SetPriority(120);
+	m_windowCommand.InsertChild(&m_cascadeCommand, false);
+	m_windowCommand.InsertChild(&m_tileHorizontallyCommand, false);
+	m_windowCommand.InsertChild(&m_tileVerticallyCommand, false);
+	m_windowCommand.InsertChild(&m_closeAllDocumentsCommand, false);
+
+	m_helpCommand.SetPriority(150);
+	m_helpCommand.InsertChild(&m_aboutCommand, false);
+
+	m_fixedCommands.InsertChild(&m_fileCommand, false);
+	m_fixedCommands.InsertChild(&m_editCommand, false);
+	m_fixedCommands.InsertChild(&m_viewCommand, false);
+	m_fixedCommands.InsertChild(&m_windowCommand, false);
+	m_fixedCommands.InsertChild(&m_helpCommand, false);
+	
 	m_menuBar = NULL;
 	m_helpMenu = NULL;
 	m_editMenu = NULL;
@@ -137,7 +185,7 @@ void CMainWindowGuiComp::OnComponentDestroyed()
 
 // protected methods
 
-void CMainWindowGuiComp::OnDocumentCountChanged(int currentCount)
+void CMainWindowGuiComp::OnDocumentCountChanged()
 {
 	I_ASSERT(IsModelAttached(NULL));
 
@@ -145,18 +193,29 @@ void CMainWindowGuiComp::OnDocumentCountChanged(int currentCount)
 		return;
 	}
 
-	m_cascadeAction->setEnabled(currentCount > 1);
-	m_tileHorizontallyAction->setEnabled(currentCount > 1);
-	m_tileVerticallyAction->setEnabled(currentCount > 1);
-	m_closeAllDocumentsAction->setEnabled(currentCount > 0);
+	idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
+	I_ASSERT(documentManagerPtr != NULL);	// Model was attached
+
+	int documentsCount = documentManagerPtr->GetDocumentsCount();
+
+	m_cascadeAction->setEnabled(documentsCount > 1);
+	m_tileHorizontallyAction->setEnabled(documentsCount > 1);
+	m_tileVerticallyAction->setEnabled(documentsCount > 1);
+	m_closeAllDocumentsAction->setEnabled(documentsCount > 0);
 }
 
 
-void CMainWindowGuiComp::OnActiveDocumentChanged(imod::IModel* activeDocumentPtr)
+void CMainWindowGuiComp::OnActiveViewChanged()
+{
+	UpdateMenuActions();
+}
+
+
+void CMainWindowGuiComp::OnActiveDocumentChanged()
 {
 	idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 	if (documentManagerPtr != NULL){
-		imod::IModel* activeUndoManagerModelPtr = dynamic_cast<imod::IModel*>(documentManagerPtr->GetUndoManagerForDocument(activeDocumentPtr));
+		imod::IModel* activeUndoManagerModelPtr = dynamic_cast<imod::IModel*>(documentManagerPtr->GetUndoManagerForDocument(m_activeDocumentPtr));
 		if (activeUndoManagerModelPtr != NULL){
 			activeUndoManagerModelPtr->AttachObserver(&m_activeUndoManager);
 		}
@@ -168,10 +227,12 @@ void CMainWindowGuiComp::OnActiveDocumentChanged(imod::IModel* activeDocumentPtr
 		return;
 	}
 
-	bool isDocumentActive = (activeDocumentPtr != NULL);
+	bool isDocumentActive = (m_activeDocumentPtr != NULL);
 
 	m_saveAction->setEnabled(isDocumentActive);
 	m_saveAsAction->setEnabled(isDocumentActive);
+
+	UpdateMenuActions();
 }
 
 
@@ -192,17 +253,42 @@ void CMainWindowGuiComp::OnRetranslate()
 {
 	I_ASSERT(GetWidget() != NULL);
 
-    GetWidget()->setWindowTitle(tr("MainWindow"));
+	QWidget* parentWidgetPtr = GetWidget()->parentWidget();
+	if (parentWidgetPtr == NULL){
+		parentWidgetPtr = GetWidget();
+	}
+
+	m_fileCommand.SetName(tr("&File").toStdWString());
+	m_editCommand.SetName(tr("&Edit").toStdWString());
+	m_viewCommand.SetName(tr("&View").toStdWString());
+	m_windowCommand.SetName(tr("&Window").toStdWString());
+	m_helpCommand.SetName(tr("&Help").toStdWString());
+	m_newCommand.SetName(tr("&New").toStdWString());
+	m_newCommand.setIcon(GetIcon("document_128.png"));
+	m_openCommand.SetName(tr("&Open...").toStdWString());
+	m_openCommand.setIcon(GetIcon("folder_128.png"));
+	m_saveCommand.SetName(tr("&Save").toStdWString());
+	m_saveCommand.setIcon(GetIcon("diskette_128.png"));
+	m_saveAsCommand.SetName(tr("&Save As...").toStdWString());
+	m_quitCommand.SetName(tr("&Quit").toStdWString());
+	m_quitCommand.setIcon(GetIcon("exit.png"));
+	m_undoCommand.SetName(tr("&Undo").toStdWString());
+	m_redoCommand.SetName(tr("&Redo").toStdWString());
+	m_fullScreenCommand.SetName((parentWidgetPtr->isFullScreen()?
+				tr("Cancel Full Screen"):
+				tr("Show Full Screen")).toStdWString());
+	m_cascadeCommand.SetName(tr("Casca&de").toStdWString());
+	m_tileHorizontallyCommand.SetName(tr("Tile &Horizontaly").toStdWString());
+	m_tileVerticallyCommand.SetName(tr("Tile &Verticaly").toStdWString());
+	m_closeAllDocumentsCommand.SetName(tr("&Close All Documents").toStdWString());
+	m_aboutCommand.SetName(tr("&About...").toStdWString());
+
+	GetWidget()->setWindowTitle(tr("MainWindow"));
     m_helpMenu->setTitle(tr("Help"));
     m_viewMenu->setTitle(tr("&View"));
     m_windowMenu->setTitle(tr("&Window"));
     m_fileMenu->setTitle(tr("&File"));
 	m_editMenu->setTitle(tr("&Edit"));
-
-	QWidget* parentWidgetPtr = GetWidget()->parentWidget();
-	if (parentWidgetPtr == NULL){
-		parentWidgetPtr = GetWidget();
-	}
 
 	if (parentWidgetPtr->isFullScreen()){
 		m_fullScreenAction->setText(tr("Cancel Full Screen"));
@@ -276,7 +362,7 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 	if ((updateFlags & idoc::IDocumentManager::DocumentCountChanged) != 0){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
-			OnDocumentCountChanged(documentManagerPtr->GetDocumentsCount());
+			OnDocumentCountChanged();
 		}
 	}
 
@@ -286,13 +372,34 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 			imod::IModel* documentPtr = NULL;
 
 			istd::IPolymorphic* activeViewPtr = documentManagerPtr->GetActiveView();
+
 			if (activeViewPtr != NULL){
 				documentPtr = documentManagerPtr->GetDocumentFromView(*activeViewPtr);
 			}
 
-			OnActiveDocumentChanged(documentPtr);
+			bool isViewChanged = (activeViewPtr != m_activeViewPtr);
+			bool isDocumentChanged = (documentPtr != m_activeDocumentPtr);
+
+			m_activeViewPtr = activeViewPtr;
+			m_activeDocumentPtr = documentPtr;
+
+			if (isViewChanged){
+				OnActiveViewChanged();
+			}
+
+			if (isDocumentChanged){
+				OnActiveDocumentChanged();
+			}
 		}
 	}
+}
+
+
+// static methods
+
+QIcon CMainWindowGuiComp::GetIcon(const std::string& name)
+{
+	return QIcon((":/Resources/Icons/" + name).c_str());
 }
 
 
@@ -820,6 +927,48 @@ void CMainWindowGuiComp::UpdateUndoMenu()
 
 	m_undoAction->setEnabled(m_activeUndoManager.GetObjectPtr()->IsUndoAvailable());
 	m_redoAction->setEnabled(m_activeUndoManager.GetObjectPtr()->IsRedoAvailable());
+}
+
+
+void CMainWindowGuiComp::UpdateMenuActions()
+{
+	if (m_menuBar == NULL){
+		return;
+	}
+
+	m_menuCommands.ResetChilds();
+
+	m_menuCommands.JoinLinkFrom(&m_fixedCommands);
+
+	if (m_documentManagerCompPtr.IsValid()){
+		const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+		const idoc::ICommandsProvider* templateProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(templatePtr);
+		if (templateProviderPtr != NULL){
+			const idoc::IHierarchicalCommand* commandsPtr = templateProviderPtr->GetCommands();
+			if (commandsPtr != NULL){
+				m_menuCommands.JoinLinkFrom(commandsPtr);
+			}
+		}
+	}
+
+	const idoc::ICommandsProvider* viewProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(m_activeViewPtr);
+	if (viewProviderPtr != NULL){
+		const idoc::IHierarchicalCommand* commandsPtr = viewProviderPtr->GetCommands();
+		if (commandsPtr != NULL){
+			m_menuCommands.JoinLinkFrom(commandsPtr);
+		}
+	}
+
+	const idoc::ICommandsProvider* documentProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(m_activeDocumentPtr);
+	if (documentProviderPtr != NULL){
+		const idoc::IHierarchicalCommand* commandsPtr = documentProviderPtr->GetCommands();
+		if (commandsPtr != NULL){
+			m_menuCommands.JoinLinkFrom(commandsPtr);
+		}
+	}
+
+	m_menuBar->clear();
+	m_menuCommands.CreateMenu(*m_menuBar);
 }
 
 

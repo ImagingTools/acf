@@ -35,7 +35,6 @@ public:
 	virtual bool SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const;
 	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const;
 	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const;
-	virtual const IHierarchicalCommand* GetGlobalMenuCommands() const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

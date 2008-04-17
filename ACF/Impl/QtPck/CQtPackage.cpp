@@ -14,6 +14,15 @@
 #include "iqmain/CMultiDocumentWorkspaceGuiComp.h"
 
 
+static struct StaticInit
+{
+	StaticInit()
+	{
+		Q_INIT_RESOURCE(iqmain);
+	}
+} instance;
+
+
 I_EXPORT_PACKAGE("Qt", "Standard Qt package", "Qt Standard");
 I_EXPORT_COMPONENT(iqt::CLoginGuiComp, LoginGui, "Gui used to user login", "User Login Qt GUI");
 I_EXPORT_COMPONENT(iqt::CApplicationComp, GuiApplication, "Main entry point for window based application", "Application Main Entry Start Begin Qt");

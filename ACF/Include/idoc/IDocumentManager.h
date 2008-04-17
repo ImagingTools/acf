@@ -22,8 +22,7 @@ namespace idoc
 
 
 /**
-\class IDocumentManager 
-\brief ...
+	Provide set of user actions needed to manage documents in MVC (Model View Controller) concept.
 */
 class IDocumentManager: virtual public istd::IChangeable
 {
@@ -69,6 +68,12 @@ public:
 		\return			pointer to assigned document, or \c NULL if no document for this view exists.
 	*/
 	virtual imod::IModel* GetDocumentFromView(const istd::IPolymorphic& view) const = 0;
+
+	/**
+		Get ID of document type managed by this object.
+		\return	ID of document type or empty string if no document is found.
+	*/
+	virtual std::string GetDocumentTypeId(const imod::IModel& document) const = 0;
 
 	/**
 		Creates a new document with the document ID \c documentTypeId.

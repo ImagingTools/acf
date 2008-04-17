@@ -70,6 +70,17 @@ const std::string& CString::ToString() const
 }
 
 
+bool CString::IsEqual(const istd::CString& str, int compareFlags) const
+{
+	if ((compareFlags & CF_CASE_INSENSITIVE) == 0){
+		return *this == str;
+	}
+	else{
+		return ToLower() == str.ToLower();
+	}
+}
+
+
 void CString::Reset()
 {
 	m_stdString.clear();

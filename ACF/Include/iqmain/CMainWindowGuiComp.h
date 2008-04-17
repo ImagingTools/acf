@@ -2,9 +2,7 @@
 #define iqmain_CMainWindowComp_included
 
 
-#include "iqmain/iqmain.h"
-
-
+// Qt includes
 #include <QMainWindow>
 #include <QDockWidget>
 #include <QMenu>
@@ -14,7 +12,6 @@
 #include <QActionGroup>
 #include <QStatusBar>
 #include <QApplication>
-
 
 #include "imod/TSingleModelObserverBase.h"
 #include "imod/IUndoManager.h"
@@ -26,6 +23,7 @@
 #include "iqt/IDockManager.h"
 #include "iqt/ITranslationManager.h"
 #include "iqt/TGuiComponentBase.h"
+#include "iqt/CHierarchicalCommand.h"
 
 #include "iqmain/IWorkspaceController.h"
 
@@ -79,8 +77,9 @@ public:
 	virtual void OnComponentDestroyed();
 
 protected:
-	virtual void OnDocumentCountChanged(int documentCount);
-	virtual void OnActiveDocumentChanged(imod::IModel* activeDocumentPtr);
+	virtual void OnDocumentCountChanged();
+	virtual void OnActiveViewChanged();
+	virtual void OnActiveDocumentChanged();
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -88,6 +87,9 @@ protected:
 
 	// reimplemented (imod::TSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// static methods
+	QIcon GetIcon(const std::string& name);
 
 protected slots:
 	void OnFileNewAction(QAction* action);
@@ -125,6 +127,7 @@ protected:
 	void SetupMainWindowComponents(QMainWindow& mainWindow);
 	bool HasDocumentTemplate() const;
 	void UpdateUndoMenu();
+	void UpdateMenuActions();
 
 private:
 	QMenuBar* m_menuBar;
@@ -152,6 +155,31 @@ private:
 	QActionGroup* m_languageGroup;
 	QToolBar* m_standardToolBar;
 
+	iqt::CHierarchicalCommand m_fileCommand;
+	iqt::CHierarchicalCommand m_editCommand;
+	iqt::CHierarchicalCommand m_viewCommand;
+	iqt::CHierarchicalCommand m_windowCommand;
+	iqt::CHierarchicalCommand m_helpCommand;
+
+	// file menu group
+	iqt::CHierarchicalCommand m_newCommand;
+	iqt::CHierarchicalCommand m_openCommand;
+	iqt::CHierarchicalCommand m_saveCommand;
+	iqt::CHierarchicalCommand m_saveAsCommand;
+	iqt::CHierarchicalCommand m_quitCommand;
+	// edit menu group
+	iqt::CHierarchicalCommand m_undoCommand;
+	iqt::CHierarchicalCommand m_redoCommand;
+	// view menu group
+	iqt::CHierarchicalCommand m_fullScreenCommand;
+	// window menu group
+	iqt::CHierarchicalCommand m_cascadeCommand;
+	iqt::CHierarchicalCommand m_tileHorizontallyCommand;
+	iqt::CHierarchicalCommand m_tileVerticallyCommand;
+	iqt::CHierarchicalCommand m_closeAllDocumentsCommand;
+	// help menu group
+	iqt::CHierarchicalCommand m_aboutCommand;
+
 	class ActiveUndoManager: public imod::TSingleModelObserverBase<imod::IUndoManager>
 	{
 	public:
@@ -172,7 +200,13 @@ private:
 
 	ActiveUndoManager m_activeUndoManager;
 
-private:
+	istd::IPolymorphic* m_activeViewPtr;
+	imod::IModel* m_activeDocumentPtr;
+
+	iqt::CHierarchicalCommand m_fixedCommands;
+
+	iqt::CHierarchicalCommand m_menuCommands;
+
 	I_REF(iqt::IGuiObject, m_workspaceCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(iqmain::IWorkspaceController, m_workspaceControllerCompPtr);

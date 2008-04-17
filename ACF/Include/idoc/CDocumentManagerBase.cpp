@@ -147,6 +147,21 @@ imod::IModel* CDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic
 }
 
 
+std::string CDocumentManagerBase::GetDocumentTypeId(const imod::IModel& document) const
+{
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		DocumentInfo& info = GetDocumentInfo(i);
+
+		if (info.documentPtr == &document){
+			return info.documentTypeId;
+		}
+	}
+
+	return std::string();
+}
+
+
 imod::IModel* CDocumentManagerBase::FileNew(const std::string& documentTypeId, bool createView, const std::string& viewTypeId)
 {
 	istd::TDelPtr<DocumentInfo> newInfoPtr(CreateDocument(documentTypeId, createView, viewTypeId));

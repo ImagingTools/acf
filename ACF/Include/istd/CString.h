@@ -21,6 +21,10 @@ namespace istd
 class CString: public std::wstring
 {
 public:
+	enum CompareFlags{
+		CF_CASE_INSENSITIVE = 0x01
+	};
+
 	typedef std::wstring BaseClass;
 
 	CString();
@@ -39,6 +43,12 @@ public:
 		This function returns standard 8-bit string.
 	*/
 	bool IsEmpty() const;
+
+	/**
+		Compare two strings.
+		\return	true, if this strings are equal.
+	*/
+	bool IsEqual(const istd::CString& str, int compareFlags = 0) const;
 
 	/**
 	This function makes this string empty.
