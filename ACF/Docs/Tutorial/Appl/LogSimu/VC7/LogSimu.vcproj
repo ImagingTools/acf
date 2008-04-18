@@ -2,8 +2,11 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="ibase"
-	ProjectGUID="{C30159C1-C8F9-49F4-AE32-C014F87B12BD}">
+	Name="LogSimu.exe"
+	ProjectGUID="{5841387C-CE78-44F4-9766-4DBDEC0B60DE}"
+	RootNamespace="LogSimu"
+	SccProjectName=""
+	SccLocalPath="">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
@@ -11,31 +14,34 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC7"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC7/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../"
+				AdditionalIncludeDirectories="../..;../../../../../Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="3"
+				WarningLevel="4"
 				SuppressStartupBanner="TRUE"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"/>
+				Name="VCLinkerTool"
+				AdditionalDependencies="QtMain.lib QtCore4.lib QtGui4.lib AcfStd.lib AcfQt.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
@@ -59,36 +65,43 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../Lib/$(ConfigurationName)VC7"
+			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC7/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../"
+				AdditionalIncludeDirectories="../..;../../../../../Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-				WarningLevel="3"
+				BrowseInformation="1"
+				WarningLevel="4"
 				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"/>
+				Name="VCLinkerTool"
+				AdditionalDependencies="QtMaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib AcfQt.lib"
+				OutputFile="$(OutDir)/$(ProjectName)"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
+				GenerateDebugInformation="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
@@ -112,6 +125,8 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
@@ -124,57 +139,52 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
-				RelativePath="..\CMessage.cpp">
+				RelativePath="..\CLogClientGuiComp.cpp">
+			</File>
+			<File
+				RelativePath="..\Main.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
 			<File
-				RelativePath="..\CMessage.h">
+				RelativePath="..\CLogClientGuiComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputFileName)..."
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputFileName)..."
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="qrc;*"
+			ParseFiles="FALSE">
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="moc;h;cpp">
 			<File
-				RelativePath="..\IApplication.h">
+				RelativePath="..\generatedfiles\moc_CLogClientGuiComp.cpp">
 			</File>
-			<File
-				RelativePath="..\IApplicationInfo.h">
-			</File>
-			<File
-				RelativePath="..\ibase.h">
-			</File>
-			<File
-				RelativePath="..\IMessage.h">
-			</File>
-			<File
-				RelativePath="..\IMessageContainer.h">
-			</File>
-			<File
-				RelativePath="..\INamedObject.h">
-			</File>
-			<File
-				RelativePath="..\IObject.h">
-			</File>
-			<File
-				RelativePath="..\TContainer.h">
-			</File>
-			<File
-				RelativePath="..\TEnableableWrap.h">
-			</File>
-			<File
-				RelativePath="..\TFactorisableContainer.h">
-			</File>
-			<File
-				RelativePath="..\THierarchicalBase.h">
-			</File>
-			<File
-				RelativePath="..\TMessageContainerWrap.h">
-			</File>
-			<File
-				RelativePath="..\TNamedBase.h">
-			</File>
-			<File
-				RelativePath="..\TSerializableContainer.h">
-			</File>
+		</Filter>
+		<Filter
+			Name="Forms"
+			Filter="">
 		</Filter>
 	</Files>
 	<Globals>

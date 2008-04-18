@@ -9,8 +9,11 @@ namespace iproc
 const ibase::IMessageContainer* CProcessingControllerBase::GetLog() const
 {
 	iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetObjectPtr());
+	if (operatorPtr != NULL){
+		return &operatorPtr->GetLog();
+	}
 
-	return operatorPtr;
+	return NULL;
 }
 
 

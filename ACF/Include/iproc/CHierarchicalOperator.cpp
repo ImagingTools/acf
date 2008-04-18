@@ -21,32 +21,11 @@ void CHierarchicalOperator::AddChild(iproc::IOperator* operatorPtr)
 	iproc::COperatorBase* operatorImplPtr = dynamic_cast<iproc::COperatorBase*>(operatorPtr);
 	if (operatorImplPtr != NULL){
 		operatorImplPtr->SetParentPtr(this);
+		const ibase::IHierarchicalMessageContainer* logPtr = dynamic_cast<const ibase::IHierarchicalMessageContainer*>(&operatorImplPtr->GetLog());
+		m_log.AddChildContainer(const_cast<ibase::IHierarchicalMessageContainer*>(logPtr));
 	}
 
 	m_childs.push_back(operatorPtr);
-}
-
-
-// reimplemented (ibase::IMessageContainer)
-
-int CHierarchicalOperator::GetWorstCategory() const
-{
-	int category = SubstractMask(m_maxCategory);
-	
-	int childCount = GetChildsCount();
-
-	for (int childIndex = 0; childIndex < childCount; childIndex++){
-		iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetChild(childIndex));
-		
-		if (operatorPtr != NULL){
-			int maxChildCategory = operatorPtr->GetWorstCategory();
-			if (category < maxChildCategory){
-				category = maxChildCategory;
-			}
-		}
-	}
-
-	return category;
 }
 
 

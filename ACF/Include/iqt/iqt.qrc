@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Resources/Icons/diskette_128.png</file>
+    </qresource>
+</RCC>

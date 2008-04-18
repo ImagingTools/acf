@@ -19,9 +19,6 @@ public:
 
 	virtual void AddChild(iproc::IOperator* operatorPtr);
 
-	// reimplemented (ibase::IMessageContainer)
-	virtual int GetWorstCategory() const;
-
 	// reimplemented (iproc::IOperator)
 	virtual bool BeforeProcessing();
 	virtual bool Execute();

@@ -192,7 +192,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CComplexDocumentTemplateComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -201,7 +202,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CComplexDocumentTemplateComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -210,7 +212,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CComplexDocumentTemplateComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -219,7 +222,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CComplexDocumentTemplateComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -231,7 +235,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMainWindowGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -240,7 +245,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMainWindowGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -249,7 +255,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMainWindowGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -258,7 +265,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMainWindowGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -270,7 +278,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -279,7 +288,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -288,7 +298,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -297,7 +308,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles&quot; -I&quot;.\GeneratedFiles\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;..\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -315,22 +327,22 @@
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="FALSE">
 			<File
-				RelativePath=".\resources\icons\add_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\add_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\administrator_128.png">
+				RelativePath=".\resources\icons\add_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\administrator_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\attach_128.png">
+				RelativePath=".\resources\icons\administrator_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\attach_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\attach_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\back_128.png">
@@ -339,16 +351,16 @@
 				RelativePath=".\resources\icons\back_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\book_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\book_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\calculator_128.png">
+				RelativePath=".\resources\icons\book_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\calculator_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\calculator_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\calendar_128.png">
@@ -357,22 +369,22 @@
 				RelativePath=".\resources\icons\calendar_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\camera_128.png">
-			</File>
-			<File
 				RelativePath=".\resources\icons\camera_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\cancel_128.png">
+				RelativePath="..\Resources\Icons\camera_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\cancel_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\chat_128.png">
+				RelativePath=".\resources\icons\cancel_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\chat_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\chat_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\clock_128.png">
@@ -381,16 +393,16 @@
 				RelativePath="..\Resources\Icons\clock_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\close_a_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\close_a_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\close_b_128.png">
+				RelativePath=".\resources\icons\close_a_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\close_b_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\close_b_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\copy_128.png">
@@ -399,22 +411,22 @@
 				RelativePath="..\Resources\Icons\copy_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\delete_128.png">
-			</File>
-			<File
 				RelativePath=".\resources\icons\delete_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\diskette_128.png">
+				RelativePath="..\Resources\Icons\delete_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\diskette_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\document_128.png">
+				RelativePath=".\resources\icons\diskette_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\document_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\document_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\door_128.png">
@@ -423,16 +435,16 @@
 				RelativePath=".\resources\icons\door_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\exit.png">
-			</File>
-			<File
 				RelativePath=".\resources\icons\exit.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\fast_forward_128.png">
+				RelativePath="..\Resources\Icons\exit.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\fast_forward_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\fast_forward_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\first_128.png">
@@ -441,16 +453,16 @@
 				RelativePath="..\Resources\Icons\first_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\folder_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\folder_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\group_128.png">
+				RelativePath=".\resources\icons\folder_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\group_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\group_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\hand_128.png">
@@ -459,16 +471,16 @@
 				RelativePath=".\resources\icons\hand_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\home_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\home_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\info_128.png">
+				RelativePath=".\resources\icons\home_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\info_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\info_128.png">
 			</File>
 			<File
 				RelativePath="..\iqmain.qrc">
@@ -477,7 +489,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;Resources/Icons/add_128.png;Resources/Icons/administrator_128.png;Resources/Icons/attach_128.png;Resources/Icons/back_128.png;Resources/Icons/book_128.png;Resources/Icons/calculator_128.png;Resources/Icons/calendar_128.png;Resources/Icons/camera_128.png;Resources/Icons/cancel_128.png;Resources/Icons/chat_128.png;Resources/Icons/clock_128.png;Resources/Icons/close_a_128.png;Resources/Icons/close_b_128.png;Resources/Icons/copy_128.png;Resources/Icons/delete_128.png;Resources/Icons/diskette_128.png;Resources/Icons/document_128.png;Resources/Icons/door_128.png;Resources/Icons/exit.png;Resources/Icons/fast_forward_128.png;Resources/Icons/first_128.png;Resources/Icons/folder_128.png;Resources/Icons/group_128.png;Resources/Icons/hand_128.png;Resources/Icons/home_128.png;Resources/Icons/info_128.png;Resources/Icons/lamp_128.png;Resources/Icons/last_128.png;Resources/Icons/mail_write_128.png;Resources/Icons/mailbox_search_128.png;Resources/Icons/mailbox_write_128.png;Resources/Icons/mailbox_zoom_128.png;Resources/Icons/next_128.png;Resources/Icons/ok_128.png;Resources/Icons/paste_128.png;Resources/Icons/pause_128.png;Resources/Icons/pen_128.png;Resources/Icons/play_128.png;Resources/Icons/preview_128.png;Resources/Icons/printer_128.png;Resources/Icons/sandglass_128.png;Resources/Icons/scissors_128.png;Resources/Icons/star_128.png;Resources/Icons/statistic_128.png;Resources/Icons/trash_128.png;Resources/Icons/up_128.png;Resources/Icons/user_128.png;Resources/Icons/window_128.png;Resources/Icons/wizard_128.png;Resources/Icons/world_128.png;Resources/Icons/write_128.png;Resources/Icons/zoom_128.png"
 						Outputs="&quot;..\Generated\qrc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -486,7 +499,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;Resources/Icons/add_128.png;Resources/Icons/administrator_128.png;Resources/Icons/attach_128.png;Resources/Icons/back_128.png;Resources/Icons/book_128.png;Resources/Icons/calculator_128.png;Resources/Icons/calendar_128.png;Resources/Icons/camera_128.png;Resources/Icons/cancel_128.png;Resources/Icons/chat_128.png;Resources/Icons/clock_128.png;Resources/Icons/close_a_128.png;Resources/Icons/close_b_128.png;Resources/Icons/copy_128.png;Resources/Icons/delete_128.png;Resources/Icons/diskette_128.png;Resources/Icons/document_128.png;Resources/Icons/door_128.png;Resources/Icons/exit.png;Resources/Icons/fast_forward_128.png;Resources/Icons/first_128.png;Resources/Icons/folder_128.png;Resources/Icons/group_128.png;Resources/Icons/hand_128.png;Resources/Icons/home_128.png;Resources/Icons/info_128.png;Resources/Icons/lamp_128.png;Resources/Icons/last_128.png;Resources/Icons/mail_write_128.png;Resources/Icons/mailbox_search_128.png;Resources/Icons/mailbox_write_128.png;Resources/Icons/mailbox_zoom_128.png;Resources/Icons/next_128.png;Resources/Icons/ok_128.png;Resources/Icons/paste_128.png;Resources/Icons/pause_128.png;Resources/Icons/pen_128.png;Resources/Icons/play_128.png;Resources/Icons/preview_128.png;Resources/Icons/printer_128.png;Resources/Icons/sandglass_128.png;Resources/Icons/scissors_128.png;Resources/Icons/star_128.png;Resources/Icons/statistic_128.png;Resources/Icons/trash_128.png;Resources/Icons/up_128.png;Resources/Icons/user_128.png;Resources/Icons/window_128.png;Resources/Icons/wizard_128.png;Resources/Icons/world_128.png;Resources/Icons/write_128.png;Resources/Icons/zoom_128.png"
 						Outputs="&quot;..\Generated\qrc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -495,7 +509,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;Resources/Icons/add_128.png;Resources/Icons/administrator_128.png;Resources/Icons/attach_128.png;Resources/Icons/back_128.png;Resources/Icons/book_128.png;Resources/Icons/calculator_128.png;Resources/Icons/calendar_128.png;Resources/Icons/camera_128.png;Resources/Icons/cancel_128.png;Resources/Icons/chat_128.png;Resources/Icons/clock_128.png;Resources/Icons/close_a_128.png;Resources/Icons/close_b_128.png;Resources/Icons/copy_128.png;Resources/Icons/delete_128.png;Resources/Icons/diskette_128.png;Resources/Icons/document_128.png;Resources/Icons/door_128.png;Resources/Icons/exit.png;Resources/Icons/fast_forward_128.png;Resources/Icons/first_128.png;Resources/Icons/folder_128.png;Resources/Icons/group_128.png;Resources/Icons/hand_128.png;Resources/Icons/home_128.png;Resources/Icons/info_128.png;Resources/Icons/lamp_128.png;Resources/Icons/last_128.png;Resources/Icons/mail_write_128.png;Resources/Icons/mailbox_search_128.png;Resources/Icons/mailbox_write_128.png;Resources/Icons/mailbox_zoom_128.png;Resources/Icons/next_128.png;Resources/Icons/ok_128.png;Resources/Icons/paste_128.png;Resources/Icons/pause_128.png;Resources/Icons/pen_128.png;Resources/Icons/play_128.png;Resources/Icons/preview_128.png;Resources/Icons/printer_128.png;Resources/Icons/sandglass_128.png;Resources/Icons/scissors_128.png;Resources/Icons/star_128.png;Resources/Icons/statistic_128.png;Resources/Icons/trash_128.png;Resources/Icons/up_128.png;Resources/Icons/user_128.png;Resources/Icons/window_128.png;Resources/Icons/wizard_128.png;Resources/Icons/world_128.png;Resources/Icons/write_128.png;Resources/Icons/zoom_128.png"
 						Outputs="&quot;..\Generated\qrc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -504,28 +519,29 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
+						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;..\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;Resources/Icons/add_128.png;Resources/Icons/administrator_128.png;Resources/Icons/attach_128.png;Resources/Icons/back_128.png;Resources/Icons/book_128.png;Resources/Icons/calculator_128.png;Resources/Icons/calendar_128.png;Resources/Icons/camera_128.png;Resources/Icons/cancel_128.png;Resources/Icons/chat_128.png;Resources/Icons/clock_128.png;Resources/Icons/close_a_128.png;Resources/Icons/close_b_128.png;Resources/Icons/copy_128.png;Resources/Icons/delete_128.png;Resources/Icons/diskette_128.png;Resources/Icons/document_128.png;Resources/Icons/door_128.png;Resources/Icons/exit.png;Resources/Icons/fast_forward_128.png;Resources/Icons/first_128.png;Resources/Icons/folder_128.png;Resources/Icons/group_128.png;Resources/Icons/hand_128.png;Resources/Icons/home_128.png;Resources/Icons/info_128.png;Resources/Icons/lamp_128.png;Resources/Icons/last_128.png;Resources/Icons/mail_write_128.png;Resources/Icons/mailbox_search_128.png;Resources/Icons/mailbox_write_128.png;Resources/Icons/mailbox_zoom_128.png;Resources/Icons/next_128.png;Resources/Icons/ok_128.png;Resources/Icons/paste_128.png;Resources/Icons/pause_128.png;Resources/Icons/pen_128.png;Resources/Icons/play_128.png;Resources/Icons/preview_128.png;Resources/Icons/printer_128.png;Resources/Icons/sandglass_128.png;Resources/Icons/scissors_128.png;Resources/Icons/star_128.png;Resources/Icons/statistic_128.png;Resources/Icons/trash_128.png;Resources/Icons/up_128.png;Resources/Icons/user_128.png;Resources/Icons/window_128.png;Resources/Icons/wizard_128.png;Resources/Icons/world_128.png;Resources/Icons/write_128.png;Resources/Icons/zoom_128.png"
 						Outputs="&quot;..\Generated\qrc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\resources\icons\lamp_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\lamp_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\last_128.png">
+				RelativePath=".\resources\icons\lamp_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\last_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\mail_write_128.png">
+				RelativePath=".\resources\icons\last_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\mail_write_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\mail_write_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\mailbox_search_128.png">
@@ -534,16 +550,16 @@
 				RelativePath="..\Resources\Icons\mailbox_search_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\mailbox_write_128.png">
-			</File>
-			<File
 				RelativePath=".\resources\icons\mailbox_write_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\mailbox_zoom_128.png">
+				RelativePath="..\Resources\Icons\mailbox_write_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\mailbox_zoom_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\mailbox_zoom_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\next_128.png">
@@ -552,22 +568,22 @@
 				RelativePath=".\resources\icons\next_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\ok_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\ok_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\paste_128.png">
+				RelativePath=".\resources\icons\ok_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\paste_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\pause_128.png">
+				RelativePath=".\resources\icons\paste_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\pause_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\pause_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\pen_128.png">
@@ -576,16 +592,16 @@
 				RelativePath=".\resources\icons\pen_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\play_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\play_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\preview_128.png">
+				RelativePath=".\resources\icons\play_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\preview_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\preview_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\printer_128.png">
@@ -594,22 +610,22 @@
 				RelativePath=".\resources\icons\printer_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\sandglass_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\sandglass_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\scissors_128.png">
+				RelativePath=".\resources\icons\sandglass_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\scissors_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\star_128.png">
+				RelativePath="..\Resources\Icons\scissors_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\star_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\star_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\statistic_128.png">
@@ -618,16 +634,16 @@
 				RelativePath=".\resources\icons\statistic_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\trash_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\trash_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\up_128.png">
+				RelativePath=".\resources\icons\trash_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\up_128.png">
+			</File>
+			<File
+				RelativePath=".\resources\icons\up_128.png">
 			</File>
 			<File
 				RelativePath="..\Resources\Icons\user_128.png">
@@ -636,16 +652,16 @@
 				RelativePath=".\resources\icons\user_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\window_128.png">
-			</File>
-			<File
 				RelativePath=".\resources\icons\window_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\wizard_128.png">
+				RelativePath="..\Resources\Icons\window_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\wizard_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\wizard_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\world_128.png">
@@ -654,16 +670,16 @@
 				RelativePath="..\Resources\Icons\world_128.png">
 			</File>
 			<File
-				RelativePath=".\resources\icons\write_128.png">
-			</File>
-			<File
 				RelativePath="..\Resources\Icons\write_128.png">
 			</File>
 			<File
-				RelativePath="..\Resources\Icons\zoom_128.png">
+				RelativePath=".\resources\icons\write_128.png">
 			</File>
 			<File
 				RelativePath=".\resources\icons\zoom_128.png">
+			</File>
+			<File
+				RelativePath="..\Resources\Icons\zoom_128.png">
 			</File>
 		</Filter>
 		<Filter

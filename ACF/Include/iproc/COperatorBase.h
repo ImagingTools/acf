@@ -11,7 +11,7 @@
 #include "ibase/THierarchicalBase.h"
 #include "ibase/TEnableableWrap.h"
 #include "ibase/TNamedBase.h"
-#include "ibase/TMessageContainerBase.h"
+#include "ibase/TMessageContainerWrap.h"
 
 
 namespace iproc
@@ -25,9 +25,7 @@ namespace iproc
 	It is advisable to use this implementation by programming of the own operators. 
 */
 
-class COperatorBase:
-			public ibase::CMessageContainer,
-			public ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedBase<iproc::IOperator> > >
+class COperatorBase: public ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedBase<iproc::IOperator> > >
 {
 public :
 	COperatorBase();
@@ -37,6 +35,7 @@ public :
 	virtual void SetProcessingState(int processingState);
 	virtual void AddError(const istd::CString& description);
 	virtual void AddWarning(const istd::CString& description);
+	virtual const ibase::IMessageContainer& GetLog() const;
 
 	// reimplemented (iproc::IOperator)
 	virtual StateInfo GetProcessingState() const;
@@ -50,8 +49,12 @@ public :
 protected:
 	double m_progress;
 
+	ibase::CMessageContainer m_log;
+
 private:
 	StateInfo m_state;
+
+	// TODO: replace by system independent service
 	mutable iwin::CCriticalSection m_mutex; 
 };
 

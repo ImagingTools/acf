@@ -43,7 +43,7 @@ void COperatorBase::AddError(const istd::CString& description)
 {
 	isys::CSectionBlocker lock(&m_mutex);
 
-	AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
+	m_log.AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
 }
 
 
@@ -51,7 +51,13 @@ void COperatorBase::AddWarning(const istd::CString& description)
 {
 	isys::CSectionBlocker lock(&m_mutex);
 
-	AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
+	m_log.AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
+}
+
+
+const ibase::IMessageContainer& COperatorBase::GetLog() const
+{
+	return m_log;
 }
 
 

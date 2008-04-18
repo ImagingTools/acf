@@ -33,23 +33,23 @@ public:
 	virtual ~TFactorisableContainer();
 
 	/**
-	* Adds the element to container. 
+		Adds the element to container. 
 	*/
 	InterfaceClass* AddElement(const std::string& elementFactoryKey);
 
 	/**
-	* Gets the element with the index \c elementIndex from container. 
-	* You will need this function, because the GetAt() returns the ItemClass instance, what is not usable.
+		Gets the element with the index \c elementIndex from container. 
+		You will need this function, because the GetAt() returns the ItemClass instance, what is not usable.
 	*/
 	InterfaceClass* GetElement(int elementIndex) const;
 
 	/**
-	* Gets the element index from container. 
+		Gets the element index from container. 
 	*/
 	int GetElementIndex(const InterfaceClass& elementRef) const;
 
 	/**
-	* Gets the element key associated with the element the index \c elementIndex from container. 
+		Gets the element key associated with the element the index \c elementIndex from container. 
 	*/
 	std::string GetElementKey(int elementIndex) const;
 

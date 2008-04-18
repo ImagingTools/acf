@@ -36,6 +36,9 @@
      <property name="rootIsDecorated" >
       <bool>false</bool>
      </property>
+     <property name="allColumnsShowFocus" >
+      <bool>true</bool>
+     </property>
      <column>
       <property name="text" >
        <string>Time</string>
@@ -62,22 +65,30 @@
       <number>6</number>
      </property>
      <item>
-      <widget class="QComboBox" name="CategoryCombo" >
-       <item>
-        <property name="text" >
-         <string>Information</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Warning</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Critical</string>
-        </property>
-       </item>
+      <widget class="QLabel" name="Category" >
+       <property name="text" >
+        <string>Message Category</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="CategorySlider" >
+       <property name="maximum" >
+        <number>3</number>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition" >
+        <enum>QSlider::NoTicks</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="CategoryLabel" >
+       <property name="text" >
+        <string/>
+       </property>
       </widget>
      </item>
      <item>
@@ -108,14 +119,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="ExportButton" >
-       <property name="enabled" >
-        <bool>true</bool>
-       </property>
        <property name="text" >
         <string>Export...</string>
        </property>
        <property name="icon" >
-        <iconset/>
+        <iconset resource="iqt.qrc" >:/Resources/Icons/diskette_128.png</iconset>
        </property>
       </widget>
      </item>
@@ -123,6 +131,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="iqt.qrc" />
+ </resources>
  <connections/>
 </ui>

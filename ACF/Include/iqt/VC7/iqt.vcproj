@@ -457,9 +457,6 @@
 				RelativePath="..\CXmlFileWriteArchive.h">
 			</File>
 			<File
-				RelativePath="..\IActionProvider.h">
-			</File>
-			<File
 				RelativePath="..\IDockManager.h">
 			</File>
 			<File
@@ -492,37 +489,57 @@
 			Filter="qrc;*"
 			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
 			ParseFiles="FALSE">
+			<File
+				RelativePath=".\resources\icons\diskette_128.png">
+			</File>
+			<File
+				RelativePath="..\iqt.qrc">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Rcc&apos;ing iqt.qrc..."
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;iqt&quot; -no-compress &quot;..\iqt.qrc&quot; -o .\GeneratedFiles\qrc_iqt.cpp
+"
+						AdditionalDependencies="..\iqt.qrc;Resources/Icons/diskette_128.png"
+						Outputs=".\GeneratedFiles\qrc_iqt.cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Rcc&apos;ing iqt.qrc..."
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;iqt&quot; -no-compress &quot;..\iqt.qrc&quot; -o .\GeneratedFiles\qrc_iqt.cpp
+"
+						AdditionalDependencies="..\iqt.qrc;Resources/Icons/diskette_128.png"
+						Outputs=".\GeneratedFiles\qrc_iqt.cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Rcc&apos;ing iqt.qrc..."
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;iqt&quot; -no-compress &quot;..\iqt.qrc&quot; -o .\GeneratedFiles\qrc_iqt.cpp
+"
+						AdditionalDependencies="..\iqt.qrc;Resources/Icons/diskette_128.png"
+						Outputs=".\GeneratedFiles\qrc_iqt.cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Rcc&apos;ing iqt.qrc..."
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;iqt&quot; -no-compress &quot;..\iqt.qrc&quot; -o .\GeneratedFiles\qrc_iqt.cpp
+"
+						AdditionalDependencies="..\iqt.qrc;Resources/Icons/diskette_128.png"
+						Outputs=".\GeneratedFiles\qrc_iqt.cpp"/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
-			<File
-				RelativePath=".\generatedfiles\Release\moc_CDirList.cpp">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32"
-					ExcludedFromBuild="TRUE">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath=".\generatedfiles\Debug\moc_CDirList.cpp">
 				<FileConfiguration
@@ -614,7 +631,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\generatedfiles\Release\moc_CFileList.cpp">
+				RelativePath=".\generatedfiles\Release\moc_CDirList.cpp">
 				<FileConfiguration
 					Name="Debug|Win32"
 					ExcludedFromBuild="TRUE">
@@ -722,6 +739,27 @@
 					<Tool
 						Name="VCCLCompilerTool"
 						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\Release\moc_CFileList.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -894,6 +932,9 @@
 					<Tool
 						Name="VCCLCompilerTool"/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\generatedfiles\qrc_iqt.cpp">
 			</File>
 			<File
 				RelativePath=".\generatedfiles\ui_CLogGuiComp.h">
