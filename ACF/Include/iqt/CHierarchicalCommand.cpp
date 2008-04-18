@@ -8,10 +8,11 @@ namespace iqt
 CHierarchicalCommand::CHierarchicalCommand(const istd::CString& name, int priority, int staticFlags, int groupId)
 :	BaseClass(iqt::GetQString(name), NULL),
 	m_priority(priority),
-	m_staticFlags(staticFlags),
+	m_staticFlags(0),
 	m_groupId(groupId)
 {
 	BaseClass2::SetName(name);
+	SetStaticFlags(staticFlags);
 }
 
 
@@ -30,6 +31,7 @@ void CHierarchicalCommand::SetGroupId(int groupId)
 void CHierarchicalCommand::SetStaticFlags(int flags)
 {
 	m_staticFlags = flags;
+	setCheckable((flags & CF_ONOFF) != 0);
 }
 
 
@@ -83,6 +85,16 @@ void CHierarchicalCommand::JoinLinkFrom(const idoc::IHierarchicalCommand* rootPt
 			}
 		}
 	}
+}
+
+
+void CHierarchicalCommand::SetVisuals(const QString& name, const QString& shortName, const QString& description, const QIcon& icon)
+{
+	SetName(iqt::GetCString(name));
+	BaseClass::setIconText(shortName);
+	BaseClass::setStatusTip(description);
+	BaseClass::setToolTip(description);
+	BaseClass::setIcon(icon);
 }
 
 

@@ -3,6 +3,7 @@
 
 
 #include <QAction>
+#include <QString>
 
 #include "istd/TOptPointerVector.h"
 
@@ -30,7 +31,7 @@ public:
 	typedef QAction BaseClass;
 	typedef ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedBase<idoc::IHierarchicalCommand> > > BaseClass2;
 
-	explicit CHierarchicalCommand(const istd::CString& name = "", int priority = 100, int staticFlags = CF_ALL_ENABLED, int groupId = GI_NORMAL);
+	explicit CHierarchicalCommand(const istd::CString& name = "", int priority = 100, int staticFlags = CF_GLOBAL_MENU, int groupId = GI_NORMAL);
 
 	void SetPriority(int priority);
 	void SetStaticFlags(int flags);
@@ -51,6 +52,16 @@ public:
 		\param	rootPtr	pointer to root of commands tree. It cannot be NULL.
 	*/
 	void JoinLinkFrom(const idoc::IHierarchicalCommand* rootPtr);
+
+	/**
+		Set all visual elements of this command.
+		This method is designed to use in OnRetranslate() imaplementation and that's why it uses Qt \c QString.
+		\param	name		general name, used in menus.
+		\param	shortName	short version of name used in toolbars.
+		\param	description	description used as tool tip.
+		\param	icon		icon shown in menus and toolbars.
+	*/
+	void SetVisuals(const QString& name, const QString& shortName, const QString& description, const QIcon& icon = QIcon());
 
 	// reimplemented (idoc::ICommand)
 	virtual int GetPriority() const;

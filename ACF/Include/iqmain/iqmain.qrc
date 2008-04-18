@@ -47,11 +47,14 @@
         <file alias = "statistic">Resources/Icons/statistic_128.png</file>
         <file alias = "trash">Resources/Icons/trash_128.png</file>
         <file alias = "up">Resources/Icons/up_128.png</file>
+        <file alias = "down">Resources/Icons/down_128.png</file>
         <file alias = "user">Resources/Icons/user_128.png</file>
         <file alias = "window">Resources/Icons/window_128.png</file>
         <file alias = "wizard">Resources/Icons/wizard_128.png</file>
         <file alias = "world">Resources/Icons/world_128.png</file>
         <file alias = "write">Resources/Icons/write_128.png</file>
         <file alias = "zoom">Resources/Icons/zoom_128.png</file>
+        <file alias = "undo">Resources/Icons/reload_left_128.png</file>
+        <file alias = "redo">Resources/Icons/reload_128.png</file>
     </qresource>
 </RCC>

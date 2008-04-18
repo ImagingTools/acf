@@ -22,7 +22,13 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 :	m_activeUndoManager(*this),
 	m_activeViewPtr(NULL),
 	m_activeDocumentPtr(NULL),
-	m_menuCommands("Global")
+	m_menuCommands("Global"),
+	m_newCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_openCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_saveCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_undoCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_redoCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF)
 {
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
@@ -39,9 +45,13 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	connect(&m_aboutCommand, SIGNAL(activated()), this, SLOT(OnAbout()));
 
 	m_fileCommand.SetPriority(30);
+	m_newCommand.SetGroupId(GI_DOCUMENT);
 	m_fileCommand.InsertChild(&m_newCommand, false);
+	m_openCommand.SetGroupId(GI_DOCUMENT);
 	m_fileCommand.InsertChild(&m_openCommand, false);
+	m_saveCommand.SetGroupId(GI_DOCUMENT);
 	m_fileCommand.InsertChild(&m_saveCommand, false);
+	m_saveAsCommand.SetGroupId(GI_DOCUMENT);
 	m_fileCommand.InsertChild(&m_saveAsCommand, false);
 	m_quitCommand.SetGroupId(GI_APPLICATION);
 	m_fileCommand.InsertChild(&m_quitCommand, false);
@@ -242,6 +252,41 @@ void CMainWindowGuiComp::OnActiveDocumentChanged()
 }
 
 
+int CMainWindowGuiComp::CreateToolbar(const iqt::CHierarchicalCommand& command, QToolBar& result, int prevGroupId) const
+{
+	int childsCount = command.GetChildsCount();
+
+	std::map<int, istd::TPointer<QActionGroup> > groups;
+
+	for (int i = 0; i < childsCount; ++i){
+		iqt::CHierarchicalCommand* hierarchicalPtr = const_cast<iqt::CHierarchicalCommand*>(
+					dynamic_cast<const iqt::CHierarchicalCommand*>(command.GetChild(i)));
+
+		if (hierarchicalPtr != NULL){
+			int groupId = hierarchicalPtr->GetGroupId();
+			int flags = hierarchicalPtr->GetStaticFlags();
+
+			if (hierarchicalPtr->GetChildsCount() > 0){
+				prevGroupId = CreateToolbar(*hierarchicalPtr, result, prevGroupId);
+			}
+			else if ((flags & idoc::ICommand::CF_TOOLBAR) != 0){
+				if ((groupId != prevGroupId) && (prevGroupId != idoc::ICommand::GI_NONE)){
+					result.addSeparator();
+				}
+
+				if (groupId != idoc::ICommand::GI_NONE){
+					prevGroupId = groupId;
+				}
+
+				result.addAction(hierarchicalPtr);
+			}
+		}
+	}
+
+	return prevGroupId;
+}
+
+
 // reimplemented (iqt::TGuiComponentBase)
 
 void CMainWindowGuiComp::OnGuiCreated()
@@ -264,30 +309,31 @@ void CMainWindowGuiComp::OnRetranslate()
 		parentWidgetPtr = GetWidget();
 	}
 
-	m_fileCommand.SetName(tr("&File").toStdWString());
-	m_editCommand.SetName(tr("&Edit").toStdWString());
-	m_viewCommand.SetName(tr("&View").toStdWString());
-	m_windowCommand.SetName(tr("&Window").toStdWString());
-	m_helpCommand.SetName(tr("&Help").toStdWString());
-	m_newCommand.SetName(tr("&New").toStdWString());
-	m_newCommand.setIcon(GetIcon("document"));
-	m_openCommand.SetName(tr("&Open...").toStdWString());
-	m_openCommand.setIcon(GetIcon("folder"));
-	m_saveCommand.SetName(tr("&Save").toStdWString());
-	m_saveCommand.setIcon(GetIcon("diskette"));
-	m_saveAsCommand.SetName(tr("&Save As...").toStdWString());
-	m_quitCommand.SetName(tr("&Quit").toStdWString());
-	m_quitCommand.setIcon(GetIcon("exit"));
-	m_undoCommand.SetName(tr("&Undo").toStdWString());
-	m_redoCommand.SetName(tr("&Redo").toStdWString());
-	m_fullScreenCommand.SetName((parentWidgetPtr->isFullScreen()?
-				tr("Cancel Full Screen"):
-				tr("Show Full Screen")).toStdWString());
-	m_cascadeCommand.SetName(tr("Casca&de").toStdWString());
-	m_tileHorizontallyCommand.SetName(tr("Tile &Horizontaly").toStdWString());
-	m_tileVerticallyCommand.SetName(tr("Tile &Verticaly").toStdWString());
-	m_closeAllDocumentsCommand.SetName(tr("&Close All Documents").toStdWString());
-	m_aboutCommand.SetName(tr("&About...").toStdWString());
+	m_fileCommand.SetName(iqt::GetCString(tr("&File")));
+	m_editCommand.SetName(iqt::GetCString(tr("&Edit")));
+	m_viewCommand.SetName(iqt::GetCString(tr("&View")));
+	m_windowCommand.SetName(iqt::GetCString(tr("&Window")));
+	m_helpCommand.SetName(iqt::GetCString(tr("&Help")));
+
+	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), GetIcon("document"));
+	m_newCommand.setShortcut(tr("Ctrl+N"));
+	m_openCommand.SetVisuals(tr("&Open..."), tr("Open"), tr("Opens document from file"), GetIcon("folder"));
+	m_openCommand.setShortcut(tr("Ctrl+O"));
+	m_saveCommand.SetVisuals(tr("&Save"), tr("Save"), tr("Saves document to actual working file"), GetIcon("diskette"));
+	m_saveCommand.setShortcut(tr("Ctrl+S"));
+	m_saveAsCommand.SetVisuals(tr("&Save As..."), tr("Save As"), tr("Saves document into selected file"));
+	m_quitCommand.SetVisuals(tr("&Quit"), tr("Quit"), tr("Quits this application"), GetIcon("exit"));
+	m_undoCommand.SetVisuals(tr("&Undo"), tr("Undo"), tr("Undo last document changes"), GetIcon("undo"));
+	m_undoCommand.setShortcut(tr("Ctrl+Z"));
+	m_redoCommand.SetVisuals(tr("&Redo"), tr("Redo"), tr("Redo last document changes"), GetIcon("redo"));
+	m_redoCommand.setShortcut(tr("Ctrl+Shift+Z"));
+	m_fullScreenCommand.SetVisuals(tr("&Full Screen"), tr("Full Screen"), tr("Turn full screen mode on/off"));
+	m_fullScreenCommand.setShortcut(tr("F11"));
+	m_cascadeCommand.SetVisuals(tr("Casca&de"), tr("Cascade"), tr("Lays out all document windows in cascaded mode"));
+	m_tileHorizontallyCommand.SetVisuals(tr("Tile &Horizontaly"), tr("Horizontal"), tr("Lays out all document windows horizontaly"));
+	m_tileVerticallyCommand.SetVisuals(tr("Tile &Verticaly"), tr("Vertical"), tr("Lays out all document windows verticaly"));
+	m_closeAllDocumentsCommand.SetVisuals(tr("&Close All Documents"), tr("Close All"), tr("&Closes all opened documents"));
+	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), GetIcon("info"));
 
 	GetWidget()->setWindowTitle(tr("MainWindow"));
     m_helpMenu->setTitle(tr("Help"));
@@ -656,6 +702,9 @@ void CMainWindowGuiComp::CreateMenuComponents(QMainWindow& mainWindow)
 	
 	m_standardToolBar = new QToolBar(&mainWindow);
 	m_standardToolBar->setWindowTitle(tr("Standard"));
+	m_standardToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+	mainWindow.setIconSize(QSize(32, 32));
 }
 
 
@@ -980,6 +1029,9 @@ void CMainWindowGuiComp::UpdateMenuActions()
 
 	m_menuBar->clear();
 	CreateMenu(m_menuCommands, *m_menuBar);
+
+	m_standardToolBar->clear();
+	CreateToolbar(m_menuCommands, *m_standardToolBar);
 }
 
 

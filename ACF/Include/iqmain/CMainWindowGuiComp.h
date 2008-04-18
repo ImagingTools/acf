@@ -91,6 +91,7 @@ protected:
 
 	template <class MenuType>
 	void CreateMenu(const iqt::CHierarchicalCommand& command, MenuType& result) const;
+	int CreateToolbar(const iqt::CHierarchicalCommand& command, QToolBar& result, int prevGroupId = idoc::ICommand::GI_NONE) const;
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -237,11 +238,15 @@ void CMainWindowGuiComp::CreateMenu(const iqt::CHierarchicalCommand& command, ty
 
 	int childsCount = command.GetChildsCount();
 
+	std::map<int, istd::TPointer<QActionGroup> > groups;
+
 	for (int i = 0; i < childsCount; ++i){
-		const iqt::CHierarchicalCommand* hierarchicalPtr = dynamic_cast<const iqt::CHierarchicalCommand*>(command.GetChild(i));
+		iqt::CHierarchicalCommand* hierarchicalPtr = const_cast<iqt::CHierarchicalCommand*>(
+					dynamic_cast<const iqt::CHierarchicalCommand*>(command.GetChild(i)));
 
 		if (hierarchicalPtr != NULL){
 			int groupId = hierarchicalPtr->GetGroupId();
+			int flags = hierarchicalPtr->GetStaticFlags();
 
 			if ((groupId != prevGroupId) && (prevGroupId != idoc::ICommand::GI_NONE)){
 				result.addSeparator();
@@ -259,8 +264,19 @@ void CMainWindowGuiComp::CreateMenu(const iqt::CHierarchicalCommand& command, ty
 
 				result.addMenu(newMenuPtr);
 			}
-			else{
-				result.addAction(const_cast<iqt::CHierarchicalCommand*>(hierarchicalPtr));
+			else if ((flags & idoc::ICommand::CF_GLOBAL_MENU) != 0){
+				if ((flags & idoc::ICommand::CF_EXCLUSIVE) != 0){
+					istd::TPointer<QActionGroup>& groupPtr = groups[hierarchicalPtr->GetGroupId()];
+					if (!groupPtr.IsValid()){
+						groupPtr.SetPtr(new QActionGroup(&result));
+						groupPtr->setExclusive(true);
+					}
+
+					groupPtr->addAction(hierarchicalPtr);
+					hierarchicalPtr->setCheckable(true);
+				}
+
+				result.addAction(hierarchicalPtr);
 			}
 		}
 	}

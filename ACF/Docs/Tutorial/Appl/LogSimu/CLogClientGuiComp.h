@@ -13,7 +13,6 @@
 
 class CLogClientGuiComp: public iqt::TGuiComponentBase<QWidget>
 {
-
 	Q_OBJECT
 
 public:

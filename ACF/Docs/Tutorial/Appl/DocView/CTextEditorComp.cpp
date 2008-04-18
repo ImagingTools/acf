@@ -4,6 +4,22 @@
 #include "iqt/CSignalBlocker.h"
 
 
+CTextEditorComp::CTextEditorComp()
+:	m_editorCommand("&Text"),
+	m_lowercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_uppercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR)
+{
+	m_lowercaseCommand.SetEnabled(false);
+	m_uppercaseCommand.SetEnabled(false);
+	m_editorCommand.InsertChild(&m_lowercaseCommand, false);
+	m_editorCommand.InsertChild(&m_uppercaseCommand, false);
+	m_rootCommand.InsertChild(&m_editorCommand, false);
+
+	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
+	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
+}
+
+
 // reimplemented (iqt::TGuiObserverWrap)
 
 void CTextEditorComp::UpdateModel() const
@@ -34,12 +50,72 @@ void CTextEditorComp::UpdateEditor()
 }
 
 
+// reimplemented (idoc::ICommandsProvider)
+
+const idoc::IHierarchicalCommand* CTextEditorComp::GetCommands() const
+{
+	return &m_rootCommand;
+}
+
+
 // protected slots
+
+void CTextEditorComp::OnSelectionChanged()
+{
+	bool isTextSelected = false;
+
+	QTextEdit* textEditPtr = GetQtWidget();
+	I_ASSERT(textEditPtr != NULL);
+
+	QTextCursor cursor = textEditPtr->textCursor();
+	isTextSelected = cursor.hasSelection();
+
+	m_lowercaseCommand.SetEnabled(isTextSelected);
+	m_uppercaseCommand.SetEnabled(isTextSelected);
+}
+
 
 void CTextEditorComp::OnTextChanged()
 {
 	UpdateModel();
 }
+
+
+void CTextEditorComp::OnToLowercase()
+{
+	QTextEdit* textEditPtr = GetQtWidget();
+	I_ASSERT(textEditPtr != NULL);
+
+	iqt::CSignalBlocker block(textEditPtr);
+
+	QTextCursor cursor = textEditPtr->textCursor();
+	QString selectedText = cursor.selectedText();
+	cursor.removeSelectedText();
+	cursor.insertText(selectedText.toLower());
+
+	OnSelectionChanged();
+	UpdateModel();
+}
+
+
+void CTextEditorComp::OnToUppercase()
+{
+	QTextEdit* textEditPtr = GetQtWidget();
+	I_ASSERT(textEditPtr != NULL);
+
+	iqt::CSignalBlocker block(textEditPtr);
+
+	QTextCursor cursor = textEditPtr->textCursor();
+	QString selectedText = cursor.selectedText();
+	cursor.removeSelectedText();
+	cursor.insertText(selectedText.toUpper());
+
+	OnSelectionChanged();
+	UpdateModel();
+}
+
+
+
 
 
 // reimplemented (iqt::CGuiComponentBase)
@@ -52,6 +128,16 @@ void CTextEditorComp::OnGuiCreated()
 	I_ASSERT(textEditPtr != NULL);
 
 	connect(textEditPtr, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
+	connect(textEditPtr, SIGNAL(selectionChanged()), this, SLOT(OnSelectionChanged()));
+
+	OnRetranslate();
+}
+
+
+void CTextEditorComp::OnRetranslate()
+{
+	m_lowercaseCommand.SetVisuals(tr("To &Lowercase"), tr("Lowercase"), tr("Convert selected block to lowercase characters"), QIcon(":/Icons/down"));
+	m_uppercaseCommand.SetVisuals(tr("To &Uppercase"), tr("Uppercase"), tr("Convert selected block to uppercase characters"), QIcon(":/Icons/up"));
 }
 
 

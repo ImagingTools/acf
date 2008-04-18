@@ -42,7 +42,14 @@ public:
 			Enable to use this command in separated toolbox.
 		*/
 		CF_TOOLBOX = 0x0080,
-		CF_ALL_ENABLED = CF_GLOBAL_MENU | CF_CONTEXT_MENU | CF_TOOLBAR | CF_TOOLBOX
+		/**
+			Inform that this command can be turned on or off (checkable).
+		*/
+		CF_ONOFF = 0x0100,
+		/**
+			Enable exclusive selection of this command with other commands in the same node with the same group ID.
+		*/
+		CF_EXCLUSIVE = 0x0200
 	};
 
 	enum GroupId

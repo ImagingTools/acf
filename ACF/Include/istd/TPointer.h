@@ -17,6 +17,16 @@ class TPointer
 {
 public:
 	/**
+		Construct and assign internal pointer.
+	*/
+	TPointer(Type* ptr = NULL);
+
+	/**
+		Set value of internal stored pointer.
+	 */
+	void SetPtr(Type* ptr);
+
+	/**
 		Set internal pointer value to NULL.
 	*/
 	void Reset();
@@ -51,16 +61,6 @@ public:
 	bool operator>=(const Type* ptr) const;
 
 protected:
-	/**
-		Construct and assign internal pointer.
-	*/
-	TPointer(Type* ptr = NULL);
-
-	/**
-		Set value of internal stored pointer.
-	 */
-	void SetPtr(Type* ptr);
-
 	// blocked operators
 	TPointer<Type>& operator=(const TPointer<Type> ptr);
 
