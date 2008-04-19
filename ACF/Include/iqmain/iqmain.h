@@ -2,28 +2,18 @@
 #define iqmain_included
 
 
-#include <QString>
-
-#include "istd/CString.h"
-
 
 /**
 \defgroup iqmain Qt Document/View
 \ingroup ACF
-@{
-*/
-
-/** 
-@} 
-*/
-
-
-/**
-	This namespace contains Qt class for Document/View implementation.
+	This package contains Qt implementations related to Document/View concept.
+	This package use following ACF packages:
+	\li istd
+	\li iser
+	\li	icmm
 */
 namespace iqmain
 {
-
 
 } // namespace iqmain
 

@@ -1,5 +1,5 @@
-#ifndef ibase_TNamedBase_included
-#define ibase_TNamedBase_included
+#ifndef ibase_TNamedWrap_included
+#define ibase_TNamedWrap_included
 
 
 #include "ibase/ibase.h"
@@ -22,7 +22,7 @@ namespace ibase
 	This class is a pseudo-implementation of istd::INamed interface.
 */
 template <class BaseClass>
-class TNamedBase: virtual public BaseClass
+class TNamedWrap: virtual public BaseClass
 {
 public:
 	// peudeo-reimplemented (istd::INamed)
@@ -41,14 +41,14 @@ protected:
 // peudeo-reimplemented (istd::INamed)
 
 template <class BaseClass>
-const istd::CString& TNamedBase<BaseClass>::GetName() const
+const istd::CString& TNamedWrap<BaseClass>::GetName() const
 {
 	return m_name;
 }
 
 
 template <class BaseClass>
-void TNamedBase<BaseClass>::SetName(const istd::CString& name)
+void TNamedWrap<BaseClass>::SetName(const istd::CString& name)
 {
 	if (m_name != name){
 		istd::CChangeNotifier changePtr(this);
@@ -61,7 +61,7 @@ void TNamedBase<BaseClass>::SetName(const istd::CString& name)
 // protected members
 
 template <class BaseClass>
-bool TNamedBase<BaseClass>::SerializeName(iser::IArchive& archive)
+bool TNamedWrap<BaseClass>::SerializeName(iser::IArchive& archive)
 {
 	static iser::CArchiveTag nameTag("Name", "Object name");
 
@@ -76,4 +76,4 @@ bool TNamedBase<BaseClass>::SerializeName(iser::IArchive& archive)
 } // namespace ibase
 
 
-#endif // ibase_TNamedBase_included
+#endif // ibase_TNamedWrap_included

@@ -181,5 +181,5 @@ void TSmartPtr<PointerType>::Detach()
 } // namespace istd
 
 
-#endif // TSmartPtr_included
+#endif // !TSmartPtr_included
 

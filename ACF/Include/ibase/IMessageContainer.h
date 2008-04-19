@@ -56,13 +56,13 @@ public:
 
 	/**
 		Adds a message item to the container. 
-		Please note, that the message manager takes controll over the message item, 
+		Please note, that the message container takes controll over the message item, 
 		so you cannot destroy this object manually.
 	*/
 	virtual void AddMessage(ibase::IMessage* message) = 0;
 
 	/**
-		Remove all message items from this manager.
+		Remove all message items from container.
 	*/
 	virtual void ClearMessages() = 0;
 };

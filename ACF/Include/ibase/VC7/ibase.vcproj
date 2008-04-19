@@ -170,7 +170,7 @@
 				RelativePath="..\TMessageContainerWrap.h">
 			</File>
 			<File
-				RelativePath="..\TNamedBase.h">
+				RelativePath="..\TNamedWrap.h">
 			</File>
 			<File
 				RelativePath="..\TSerializableContainer.h">

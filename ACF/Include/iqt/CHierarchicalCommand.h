@@ -7,7 +7,7 @@
 
 #include "istd/TOptPointerVector.h"
 
-#include "ibase/TNamedBase.h"
+#include "ibase/TNamedWrap.h"
 #include "ibase/THierarchicalBase.h"
 #include "ibase/TEnableableWrap.h"
 
@@ -25,11 +25,11 @@ namespace iqt
 */
 class CHierarchicalCommand:
 			public QAction,
-			public ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedBase<idoc::IHierarchicalCommand> > >
+			public ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedWrap<idoc::IHierarchicalCommand> > >
 {
 public:
 	typedef QAction BaseClass;
-	typedef ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedBase<idoc::IHierarchicalCommand> > > BaseClass2;
+	typedef ibase::TEnableableWrap< ibase::THierarchicalBase< ibase::TNamedWrap<idoc::IHierarchicalCommand> > > BaseClass2;
 
 	explicit CHierarchicalCommand(const istd::CString& name = "", int priority = 100, int staticFlags = CF_GLOBAL_MENU, int groupId = GI_NORMAL);
 
