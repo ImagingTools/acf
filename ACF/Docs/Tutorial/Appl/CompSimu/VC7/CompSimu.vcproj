@@ -41,7 +41,8 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib AcfStd.lib iqt.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"/>
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
+				SubSystem="2"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
@@ -101,7 +102,8 @@
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib iqt.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
-				GenerateDebugInformation="TRUE"/>
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
