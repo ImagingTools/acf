@@ -235,6 +235,9 @@
 				RelativePath="..\CDocumentManagerBase.cpp">
 			</File>
 			<File
+				RelativePath="..\CDocumentTemplateCompBase.cpp">
+			</File>
+			<File
 				RelativePath="..\CSerializedDocumentTemplateComp.cpp">
 			</File>
 			<File
@@ -246,6 +249,9 @@
 			Filter="h">
 			<File
 				RelativePath="..\CDocumentManagerBase.h">
+			</File>
+			<File
+				RelativePath="..\CDocumentTemplateCompBase.h">
 			</File>
 			<File
 				RelativePath="..\CSerializedDocumentTemplateComp.h">

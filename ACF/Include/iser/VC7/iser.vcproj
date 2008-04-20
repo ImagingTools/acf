@@ -271,9 +271,6 @@
 				RelativePath="..\IArchive.h">
 			</File>
 			<File
-				RelativePath="..\IFileSerializer.h">
-			</File>
-			<File
 				RelativePath="..\iser.h">
 			</File>
 			<File

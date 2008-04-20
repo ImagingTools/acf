@@ -287,6 +287,9 @@
 				RelativePath="..\IEnableable.h">
 			</File>
 			<File
+				RelativePath="..\IFileLoader.h">
+			</File>
+			<File
 				RelativePath="..\INamed.h">
 			</File>
 			<File

@@ -37,7 +37,7 @@ void CLogGuiComp::OnGuiCreated()
 
 	LogView->header()->setResizeMode(QHeaderView::Stretch);
 
-	ExportButton->setVisible(m_fileSerializerCompPtr.IsValid());
+	ExportButton->setVisible(m_fileLoaderCompPtr.IsValid());
 
 	if (m_maxMessageCountAttrPtr.IsValid()){
 		SetMaxMessageCount(m_maxMessageCountAttrPtr->GetValue());
@@ -102,8 +102,8 @@ void CLogGuiComp::OnClear()
 
 void CLogGuiComp::OnExport()
 {
-	if (m_fileSerializerCompPtr.IsValid()){
-		m_fileSerializerCompPtr->SaveToFile(*this, istd::CString());
+	if (m_fileLoaderCompPtr.IsValid()){
+		m_fileLoaderCompPtr->SaveToFile(*this, istd::CString());
 	}
 }
 
