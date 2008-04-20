@@ -1,4 +1,4 @@
-#include "idoc/CDocumentTemplateCompBase.h"
+#include "idoc/CSingleDocumentTemplateComp.h"
 
 
 namespace idoc
@@ -7,7 +7,33 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentTemplate)
 
-imod::IModel* CDocumentTemplateCompBase::CreateDocument(const std::string& documentTypeId) const
+bool CSingleDocumentTemplateComp::LoadDocumentFromFile(const istd::CString& filePath, imod::IModel& result) const
+{
+	istd::IChangeable* changeableDocPtr = dynamic_cast<istd::IChangeable*>(&result);
+
+	if (m_fileLoaderCompPtr.IsValid() && (changeableDocPtr != NULL)){
+		int state = m_fileLoaderCompPtr->LoadFromFile(*changeableDocPtr, filePath);
+		return (state == iser::IFileLoader::StateOk);
+	}
+
+	return false;
+}
+
+
+bool CSingleDocumentTemplateComp::SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const
+{
+	const istd::IChangeable* changeableDocPtr = dynamic_cast<const istd::IChangeable*>(&document);
+
+	if (m_fileLoaderCompPtr.IsValid() && (changeableDocPtr != NULL)){
+		int state = m_fileLoaderCompPtr->SaveToFile(*changeableDocPtr, filePath);
+		return (state == iser::IFileLoader::StateOk);
+	}
+
+	return false;
+}
+
+
+imod::IModel* CSingleDocumentTemplateComp::CreateDocument(const std::string& documentTypeId) const
 {
 	if (m_documentCompFact.IsValid() && IsDocumentTypeSupported(documentTypeId)){
 		return m_documentCompFact.CreateInstance();
@@ -17,7 +43,7 @@ imod::IModel* CDocumentTemplateCompBase::CreateDocument(const std::string& docum
 }
 
 
-istd::IPolymorphic* CDocumentTemplateCompBase::CreateView(imod::IModel* documentPtr, const std::string& viewTypeId) const
+istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(imod::IModel* documentPtr, const std::string& viewTypeId) const
 {
 	I_ASSERT(documentPtr != NULL);
 
@@ -34,7 +60,7 @@ istd::IPolymorphic* CDocumentTemplateCompBase::CreateView(imod::IModel* document
 
 // reimplemented (icomp::CComponentBase)
 
-void CDocumentTemplateCompBase::OnComponentCreated()
+void CSingleDocumentTemplateComp::OnComponentCreated()
 {
 	I_ASSERT(m_documentTypeIdAttrPtr.IsValid());
 	SetDocumentTypeId((*m_documentTypeIdAttrPtr).ToString());

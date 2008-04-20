@@ -272,7 +272,7 @@
 				<AttributeInfoMap count = "3">
 					<AttributeInfo>
 						<Id>
-							DocumentSerializer
+							DocumentLoader
 						</Id>
 						<Type>
 							class icomp::CReferenceAttribute
@@ -284,7 +284,7 @@
 								true
 							</IsEnabled>
 							<Value>
-								DocumentSerializer
+								DocumentLoader
 							</Value>
 						</Data>
 					</AttributeInfo>
@@ -329,7 +329,7 @@
 		</Element>
 		<Element>
 			<Id>
-				DocumentSerializer
+				DocumentLoader
 			</Id>
 			<Type>
 				1

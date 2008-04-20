@@ -1,11 +1,11 @@
-#ifndef iqmain_CComplexDocumentTemplateComp_included
-#define iqmain_CComplexDocumentTemplateComp_included
+#ifndef iqmain_CExtendedDocumentTemplateComp_included
+#define iqmain_CExtendedDocumentTemplateComp_included
 
 
 #include <QObject>
 
 #include "idoc/ICommandsProvider.h"
-#include "idoc/CSerializedDocumentTemplateComp.h"
+#include "idoc/CSingleDocumentTemplateComp.h"
 
 #include "iqt/IGuiObject.h"
 #include "iqt/CHierarchicalCommand.h"
@@ -18,21 +18,21 @@ namespace iqmain
 
 
 /**
-	Extension of \c idoc::CSerializedDocumentTemplateComp providing additional Qt-specified functionality.
+	Extension of \c idoc::CSingleDocumentTemplateComp providing additional Qt-specified functionality.
 */
-class CComplexDocumentTemplateComp:
+class CExtendedDocumentTemplateComp:
 			public QObject,
-			public idoc::CSerializedDocumentTemplateComp,
+			public idoc::CSingleDocumentTemplateComp,
 			virtual public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef idoc::CSerializedDocumentTemplateComp BaseClass;
+	typedef idoc::CSingleDocumentTemplateComp BaseClass;
 
-	CComplexDocumentTemplateComp();
+	CExtendedDocumentTemplateComp();
 
-	I_BEGIN_COMPONENT(CComplexDocumentTemplateComp)
+	I_BEGIN_COMPONENT(CExtendedDocumentTemplateComp)
 		I_ASSIGN(m_aboutCommandTextAttrPtr, "AboutCommandText", "Text used in about menu", true, "Document");
 		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "GUI used inside about dialog box", false, "AboutGui");
 	I_END_COMPONENT
@@ -58,6 +58,6 @@ private:
 } // namespace iqmain
 
 
-#endif // !iqmain_CComplexDocumentTemplateComp_included
+#endif // !iqmain_CExtendedDocumentTemplateComp_included
 
 

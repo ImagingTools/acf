@@ -235,13 +235,10 @@
 				RelativePath="..\CDocumentManagerBase.cpp">
 			</File>
 			<File
-				RelativePath="..\CDocumentTemplateCompBase.cpp">
-			</File>
-			<File
-				RelativePath="..\CSerializedDocumentTemplateComp.cpp">
-			</File>
-			<File
 				RelativePath="..\CSingleDocumentTemplateBase.cpp">
+			</File>
+			<File
+				RelativePath="..\CSingleDocumentTemplateComp.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -251,13 +248,10 @@
 				RelativePath="..\CDocumentManagerBase.h">
 			</File>
 			<File
-				RelativePath="..\CDocumentTemplateCompBase.h">
-			</File>
-			<File
-				RelativePath="..\CSerializedDocumentTemplateComp.h">
-			</File>
-			<File
 				RelativePath="..\CSingleDocumentTemplateBase.h">
+			</File>
+			<File
+				RelativePath="..\CSingleDocumentTemplateComp.h">
 			</File>
 			<File
 				RelativePath="..\ICommand.h">

@@ -3,6 +3,7 @@
 
 #include "icomp/export.h"
 #include "icomp/TModelCompWrap.h"
+#include "icomp/TMakeComponentWrap.h"
 
 #include "iqt/CLoginGuiComp.h"
 #include "iqt/CApplicationComp.h"
@@ -10,6 +11,7 @@
 #include "iqt/CLogGuiComp.h"
 #include "iqt/CIconProviderComp.h" 
 #include "iqt/CFileDialogSerializerComp.h"
+#include "iqt/CBitmap.h"
 
 #include "iqmain/CMainWindowGuiComp.h"
 #include "iqmain/CMultiDocumentWorkspaceGuiComp.h"
@@ -33,6 +35,7 @@ I_EXPORT_COMPONENT(iqt::CIconProviderComp, IconProvider, "Icon provider", "Icons
 I_EXPORT_COMPONENT(iqt::CFileDialogSerializerComp, FileDialogSerializer, "File dialog serializer", "File Serialization Serializer Dialog GUI Qt"); 
 I_EXPORT_COMPONENT(iqmain::CMainWindowGuiComp, MainWindowGui, "Main Qt application window", "Main Window Start Begin GUI Qt");
 I_EXPORT_COMPONENT(icomp::TModelCompWrap<iqmain::CMultiDocumentWorkspaceGuiComp>, MultiDocWorkspace, "Multi document workspace", "Workspace Document Model View Observer MVC GUI Qt");
+I_EXPORT_COMPONENT(icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmap> >, Bitmap, "QImage based bitmap implementation", "QImage Bitmap Qt");
 
 
 #else OLD_ACF_SUPPORT

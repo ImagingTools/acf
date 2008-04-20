@@ -11,7 +11,7 @@
 #include "iqt/CApplicationComp.h"
 #include "iqt/CSplashScreenGuiComp.h"
 
-#include "iqmain/CComplexDocumentTemplateComp.h"
+#include "iqmain/CExtendedDocumentTemplateComp.h"
 #include "iqmain/CMainWindowGuiComp.h"
 #include "iqmain/CMultiDocumentWorkspaceGuiComp.h"
 
@@ -42,11 +42,11 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<SerializerComp> serializerComp;
 	serializerComp.InitComponent();
 
-	icomp::TSimComponentWrap<iqmain::CComplexDocumentTemplateComp> documentTemplateComp;
+	icomp::TSimComponentWrap<iqmain::CExtendedDocumentTemplateComp> documentTemplateComp;
 	documentTemplateComp.SetRef("AboutGui", &splashScreenGui);
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);
 	documentTemplateComp.SetFactory("ViewFactory", &viewFactoryComp);
-	documentTemplateComp.SetRef("DocumentSerializer", &serializerComp);
+	documentTemplateComp.SetRef("DocumentLoader", &serializerComp);
 	documentTemplateComp.InitComponent();
 
 	icomp::TSimComponentWrap<icomp::TModelCompWrap<iqmain::CMultiDocumentWorkspaceGuiComp> > workspaceComp;

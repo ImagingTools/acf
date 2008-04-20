@@ -1,4 +1,4 @@
-#include "iqmain/CComplexDocumentTemplateComp.h"
+#include "iqmain/CExtendedDocumentTemplateComp.h"
 
 
 #include <QMessageBox>
@@ -8,7 +8,7 @@ namespace iqmain
 {
 
 
-CComplexDocumentTemplateComp::CComplexDocumentTemplateComp()
+CExtendedDocumentTemplateComp::CExtendedDocumentTemplateComp()
 :	m_globalMenuCommands("Global", NULL)
 {
 	m_globalMenuCommands.SetEnabled(false);
@@ -17,7 +17,7 @@ CComplexDocumentTemplateComp::CComplexDocumentTemplateComp()
 
 // reimplemented (idoc::ICommandsProvider)
 
-const idoc::IHierarchicalCommand* CComplexDocumentTemplateComp::GetCommands() const
+const idoc::IHierarchicalCommand* CExtendedDocumentTemplateComp::GetCommands() const
 {
 	return &m_globalMenuCommands;
 }
@@ -25,7 +25,7 @@ const idoc::IHierarchicalCommand* CComplexDocumentTemplateComp::GetCommands() co
 
 // reimplemented (icomp::CComponentBase)
 
-void CComplexDocumentTemplateComp::OnComponentCreated()
+void CExtendedDocumentTemplateComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -46,7 +46,7 @@ void CComplexDocumentTemplateComp::OnComponentCreated()
 
 // protected slots
 
-void CComplexDocumentTemplateComp::OnAboutCommand()
+void CExtendedDocumentTemplateComp::OnAboutCommand()
 {
 	I_ASSERT(m_aboutGuiCompPtr.IsValid());
 

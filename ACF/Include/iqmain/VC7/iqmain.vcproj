@@ -172,7 +172,7 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\CComplexDocumentTemplateComp.cpp">
+				RelativePath="..\CExtendedDocumentTemplateComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CMainWindowGuiComp.cpp">
@@ -186,14 +186,13 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\CComplexDocumentTemplateComp.h">
+				RelativePath="..\CExtendedDocumentTemplateComp.h">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
-"
+						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -202,8 +201,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
-"
+						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -212,8 +210,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
-"
+						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -222,8 +219,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
-"
+						CommandLine="$(QTDIR)\bin\moc.exe  -o &quot;..\Generated\moc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;..\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -544,7 +540,7 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath="..\generated\moc_CComplexDocumentTemplateComp.cpp">
+				RelativePath="..\generated\moc_CExtendedDocumentTemplateComp.cpp">
 			</File>
 			<File
 				RelativePath="..\generated\moc_CMainWindowGuiComp.cpp">

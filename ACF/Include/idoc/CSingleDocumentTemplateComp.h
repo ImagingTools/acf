@@ -1,6 +1,8 @@
-#ifndef idoc_CDocumentTemplateCompBase_included
-#define idoc_CDocumentTemplateCompBase_included
+#ifndef idoc_CSingleDocumentTemplateComp_included
+#define idoc_CSingleDocumentTemplateComp_included
 
+
+#include "iser/IFileLoader.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -11,13 +13,13 @@ namespace idoc
 {		
 
 
-class CDocumentTemplateCompBase: public icomp::CComponentBase, public CSingleDocumentTemplateBase
+class CSingleDocumentTemplateComp: public icomp::CComponentBase, public CSingleDocumentTemplateBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef CSingleDocumentTemplateBase BaseClass2;
 	
-	I_BEGIN_BASE_COMPONENT(CDocumentTemplateCompBase)
+	I_BEGIN_COMPONENT(CSingleDocumentTemplateComp)
 		I_REGISTER_INTERFACE(idoc::IDocumentTemplate)
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of supported document", true, "Default");
 		I_ASSIGN_MULTI_1(m_fileFiltersAttrPtr, "FileFilter", "File filter for this document", true, "Document Files (*.*)")
@@ -25,9 +27,12 @@ public:
 		I_ASSIGN_MULTI_1(m_fileExtensionsAttrPtr, "FileExtensions", "The list of possible file extensions for the document", true, "*.*")
 		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")
 		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory")
+		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
 	I_END_COMPONENT
 
 	// reimplemented (idoc::IDocumentTemplate)
+	virtual bool LoadDocumentFromFile(const istd::CString& filePath, imod::IModel& result) const;
+	virtual bool SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const;
 	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const;
 	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const;
 
@@ -41,11 +46,12 @@ private:
 	I_MULTIATTR(istd::CString, m_fileExtensionsAttrPtr);
 	I_FACT(imod::IModel, m_documentCompFact);
 	I_FACT(imod::IObserver, m_viewCompFact);
+	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 };
 
 
 } // namespace idoc
 
 
-#endif // !idoc_CDocumentTemplateCompBase_included
+#endif // !idoc_CSingleDocumentTemplateComp_included
 
