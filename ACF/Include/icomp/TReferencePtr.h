@@ -45,7 +45,7 @@ public:
 	/**
 		Access to object pointed by internal pointer.
 	*/
-	const Interface& operator*() const;
+	Interface& operator*() const;
 
 protected:
 	TReferencePtr(const TReferencePtr& ptr);
@@ -106,7 +106,7 @@ typename Interface* TReferencePtr<Interface>::operator->() const
 
 
 template <class Interface>
-typename const Interface& TReferencePtr<Interface>::operator*() const
+typename Interface& TReferencePtr<Interface>::operator*() const
 {
 	EnsureInitialized();
 	I_ASSERT(m_componentPtr != NULL);

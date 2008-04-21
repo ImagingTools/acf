@@ -33,6 +33,7 @@ public:
 	CExtendedDocumentTemplateComp();
 
 	I_BEGIN_COMPONENT(CExtendedDocumentTemplateComp)
+		I_REGISTER_INTERFACE(idoc::ICommandsProvider)
 		I_ASSIGN(m_aboutCommandTextAttrPtr, "AboutCommandText", "Text used in about menu", true, "Document");
 		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "GUI used inside about dialog box", false, "AboutGui");
 	I_END_COMPONENT
