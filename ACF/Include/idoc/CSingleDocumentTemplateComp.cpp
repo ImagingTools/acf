@@ -7,33 +7,18 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentTemplate)
 
-bool CSingleDocumentTemplateComp::LoadDocumentFromFile(const istd::CString& filePath, imod::IModel& result) const
+iser::IFileLoader* CSingleDocumentTemplateComp::GetFileLoader(const std::string& documentTypeId, bool /*forSaving*/) const
 {
-	istd::IChangeable* changeableDocPtr = dynamic_cast<istd::IChangeable*>(&result);
-
-	if (m_fileLoaderCompPtr.IsValid() && (changeableDocPtr != NULL)){
-		int state = m_fileLoaderCompPtr->LoadFromFile(*changeableDocPtr, filePath);
-		return (state == iser::IFileLoader::StateOk);
+	if (IsDocumentTypeSupported(documentTypeId)){
+		return m_fileLoaderCompPtr.GetPtr();
 	}
-
-	return false;
+	else{
+		return NULL;
+	}
 }
 
 
-bool CSingleDocumentTemplateComp::SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const
-{
-	const istd::IChangeable* changeableDocPtr = dynamic_cast<const istd::IChangeable*>(&document);
-
-	if (m_fileLoaderCompPtr.IsValid() && (changeableDocPtr != NULL)){
-		int state = m_fileLoaderCompPtr->SaveToFile(*changeableDocPtr, filePath);
-		return (state == iser::IFileLoader::StateOk);
-	}
-
-	return false;
-}
-
-
-imod::IModel* CSingleDocumentTemplateComp::CreateDocument(const std::string& documentTypeId) const
+istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(const std::string& documentTypeId) const
 {
 	if (m_documentCompFact.IsValid() && IsDocumentTypeSupported(documentTypeId)){
 		return m_documentCompFact.CreateInstance();
@@ -43,13 +28,21 @@ imod::IModel* CSingleDocumentTemplateComp::CreateDocument(const std::string& doc
 }
 
 
-istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(imod::IModel* documentPtr, const std::string& viewTypeId) const
+istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
+			const std::string& documentTypeId,
+			istd::IChangeable* documentPtr,
+			const std::string& viewTypeId) const
 {
 	I_ASSERT(documentPtr != NULL);
 
-	if (m_viewCompFact.IsValid() && IsViewTypeSupported(viewTypeId)){
+	imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(documentPtr);
+
+	if (		(modelPtr != NULL) &&
+				m_viewCompFact.IsValid() &&
+				IsDocumentTypeSupported(documentTypeId) &&
+				IsViewTypeSupported(viewTypeId)){
 		istd::TDelPtr<imod::IObserver> viewPtr(m_viewCompFact.CreateInstance());
-		if (viewPtr.IsValid() && documentPtr->AttachObserver(viewPtr.GetPtr())){
+		if (viewPtr.IsValid() && modelPtr->AttachObserver(viewPtr.GetPtr())){
 			return viewPtr.PopPtr();
 		}
 	}

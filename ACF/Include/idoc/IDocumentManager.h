@@ -10,13 +10,6 @@
 #include "idoc/IDocumentTemplate.h"
 
 
-namespace imod
-{
-	class IModel;
-	class IObserver;
-}
-
-
 namespace idoc
 {
 
@@ -44,7 +37,7 @@ public:
 	/**
 		Return undo mananger for document \c documenPtr.
 	*/
-	virtual imod::IUndoManager* GetUndoManagerForDocument(imod::IModel* documentPtr) const = 0;
+	virtual imod::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const = 0;
 
 	/**
 		Get number of opened documents.
@@ -54,7 +47,7 @@ public:
 	/**
 		Get document at specified index.
 	*/
-	virtual imod::IModel& GetDocumentFromIndex(int index) const = 0;
+	virtual istd::IChangeable& GetDocumentFromIndex(int index) const = 0;
 
 	/**
 		Return the active document. 
@@ -67,13 +60,13 @@ public:
 		\param	viewPtr	pointer to view object.
 		\return			pointer to assigned document, or \c NULL if no document for this view exists.
 	*/
-	virtual imod::IModel* GetDocumentFromView(const istd::IPolymorphic& view) const = 0;
+	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view) const = 0;
 
 	/**
 		Get ID of document type managed by this object.
 		\return	ID of document type or empty string if no document is found.
 	*/
-	virtual std::string GetDocumentTypeId(const imod::IModel& document) const = 0;
+	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const = 0;
 
 	/**
 		Creates a new document with the document ID \c documentTypeId.
@@ -81,7 +74,7 @@ public:
 		\param	createView		if true, view will be automatically created.
 		\param	viewTypeId		ID of view type, if it will be created.
 	*/
-	virtual imod::IModel* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "") = 0;
+	virtual istd::IChangeable* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "") = 0;
 
 	/**
 		Opens document(s) from the file list. 

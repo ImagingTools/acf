@@ -213,7 +213,7 @@ private:
 	ActiveUndoManager m_activeUndoManager;
 
 	istd::IPolymorphic* m_activeViewPtr;
-	imod::IModel* m_activeDocumentPtr;
+	istd::IChangeable* m_activeDocumentPtr;
 
 	iqt::CHierarchicalCommand m_fixedCommands;
 

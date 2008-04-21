@@ -4,6 +4,8 @@
 
 #include "iser/IFileLoader.h"
 
+#include "imod/IModel.h"
+
 #include "icomp/CComponentBase.h"
 
 #include "idoc/CSingleDocumentTemplateBase.h"
@@ -26,15 +28,18 @@ public:
 		I_ASSIGN(m_defaultDirectoryAttrPtr, "DefaultDirectory", "Default file directory for open file dialog", true, ".")
 		I_ASSIGN_MULTI_1(m_fileExtensionsAttrPtr, "FileExtensions", "The list of possible file extensions for the document", true, "*.*")
 		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")
+		I_ASSIGN(m_modelCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")
 		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory")
 		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
 	I_END_COMPONENT
 
 	// reimplemented (idoc::IDocumentTemplate)
-	virtual bool LoadDocumentFromFile(const istd::CString& filePath, imod::IModel& result) const;
-	virtual bool SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const;
-	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const;
-	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const;
+	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId, bool forSaving = false) const;
+	virtual istd::IChangeable* CreateDocument(const std::string& documentTypeId) const;
+	virtual istd::IPolymorphic* CreateView(
+				const std::string& documentTypeId,
+				istd::IChangeable* documentPtr,
+				const std::string& viewTypeId = std::string()) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -44,7 +49,8 @@ private:
 	I_MULTIATTR(istd::CString, m_fileFiltersAttrPtr);
 	I_ATTR(istd::CString, m_defaultDirectoryAttrPtr);
 	I_MULTIATTR(istd::CString, m_fileExtensionsAttrPtr);
-	I_FACT(imod::IModel, m_documentCompFact);
+	I_FACT(istd::IChangeable, m_documentCompFact);
+	I_FACT(imod::IModel, m_modelCompFact);
 	I_FACT(imod::IObserver, m_viewCompFact);
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 };

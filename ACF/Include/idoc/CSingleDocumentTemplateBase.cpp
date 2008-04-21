@@ -85,19 +85,18 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(co
 }
 
 
-imod::IUndoManager* CSingleDocumentTemplateBase::CreateUndoManager(imod::IModel* documentPtr) const
+imod::IUndoManager* CSingleDocumentTemplateBase::CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const
 {
-	iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(documentPtr);
-	if (serializablePtr != NULL){
-		imod::TModelWrap<imod::CSerializedUndoManager>* undoManagerModelPtr = new imod::TModelWrap<imod::CSerializedUndoManager>();
-		bool retVal = documentPtr->AttachObserver(undoManagerModelPtr);
-		if (!retVal){
-			delete undoManagerModelPtr;
-			
-			return NULL;
+	if (IsDocumentTypeSupported(documentTypeId)){
+		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(documentPtr);
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(documentPtr);
+		if ((serializablePtr != NULL) && (modelPtr != NULL)){
+			istd::TDelPtr<imod::TModelWrap<imod::CSerializedUndoManager> > undoManagerModelPtr(new imod::TModelWrap<imod::CSerializedUndoManager>);
+			if (		undoManagerModelPtr.IsValid() &&
+						modelPtr->AttachObserver(undoManagerModelPtr.GetPtr())){
+				return undoManagerModelPtr.PopPtr();
+			}
 		}
-
-		return undoManagerModelPtr;
 	}
 
 	return NULL;

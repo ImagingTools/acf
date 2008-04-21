@@ -5,10 +5,12 @@
 #include "idoc/idoc.h"
 
 
+#include "istd/IChangeable.h"
 #include "istd/TIFactory.h"
 #include "istd/CString.h"
 
-#include "imod/IModel.h"
+#include "iser/IFileLoader.h"
+
 #include "imod/IObserver.h"
 #include "imod/IUndoManager.h"
 
@@ -25,8 +27,6 @@ namespace idoc
 class IDocumentTemplate: virtual public istd::IPolymorphic
 {
 public:
-	typedef istd::TIFactory<imod::IModel> IDocumentFactory;
-	typedef istd::TIFactory<imod::IObserver> IViewFactory;
 	typedef std::vector<std::string> Ids;
 
 	/**
@@ -46,32 +46,32 @@ public:
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const = 0;
 
 	/**
-		Load document from specified file.
+		Get file loader/saver for spacified document ID.
+		\param	documentTypeId	type ID of document will be loaded/saved.
+		\param	forSaving		if it is true, document saving is meant, elsewhere document loading.
 	*/
-	virtual bool LoadDocumentFromFile(const istd::CString& filePath, imod::IModel& result) const = 0;
-
-	/**
-		Save document to file.
-	*/
-	virtual bool SaveDocumentToFile(const imod::IModel& document, const istd::CString& filePath) const = 0;
+	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId, bool forSaving = false) const = 0;
 
 	/**
 		Creates a document instance for document type \c documentTypeId.
 	*/
-	virtual imod::IModel* CreateDocument(const std::string& documentTypeId) const = 0;
+	virtual istd::IChangeable* CreateDocument(const std::string& documentTypeId) const = 0;
 
 	/**
 		Creates a view instance for document \c document of type \c viewTypeId.
 		\param	documentPtr	pointer to document object.
 		\param	viewTypeId	optional ID specifying view type if more view types are supported.
 	*/
-	virtual istd::IPolymorphic* CreateView(imod::IModel* documentPtr, const std::string& viewTypeId = std::string()) const = 0;
+	virtual istd::IPolymorphic* CreateView(
+				const std::string& documentTypeId,
+				istd::IChangeable* documentPtr,
+				const std::string& viewTypeId = std::string()) const = 0;
 
 	/**
 		Creates an undo manger for a given document \c documentPtr.
 		\param	documentPtr	pointer to document object.
 	*/
-	virtual imod::IUndoManager* CreateUndoManager(imod::IModel* documentPtr) const = 0;
+	virtual imod::IUndoManager* CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const = 0;
 
 	/**
 		Get list of file filters supported by this document template.

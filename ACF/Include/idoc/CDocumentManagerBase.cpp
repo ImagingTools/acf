@@ -20,12 +20,7 @@ CDocumentManagerBase::CDocumentManagerBase()
 }
 
 
-CDocumentManagerBase::~CDocumentManagerBase()
-{
-}
-
-
-imod::IModel* CDocumentManagerBase::OpenDocument(const istd::CString& filePath, bool createView, const std::string& viewTypeId)
+istd::IChangeable* CDocumentManagerBase::OpenDocument(const istd::CString& filePath, bool createView, const std::string& viewTypeId)
 {
 	if (filePath.IsEmpty() || (m_documentTemplatePtr == NULL)){
 		return NULL;
@@ -36,7 +31,10 @@ imod::IModel* CDocumentManagerBase::OpenDocument(const istd::CString& filePath, 
 		I_ASSERT(existingInfoPtr->documentPtr.IsValid());
 
 		if (createView){
-			istd::IPolymorphic* viewPtr = m_documentTemplatePtr->CreateView(existingInfoPtr->documentPtr.GetPtr(), viewTypeId);
+			istd::IPolymorphic* viewPtr = m_documentTemplatePtr->CreateView(
+						existingInfoPtr->documentTypeId,
+						existingInfoPtr->documentPtr.GetPtr(),
+						viewTypeId);
 			if (viewPtr != NULL){
 				existingInfoPtr->views.push_back(ViewPtr());
 				existingInfoPtr->views.back().SetPtr(viewPtr);
@@ -60,8 +58,10 @@ imod::IModel* CDocumentManagerBase::OpenDocument(const istd::CString& filePath, 
 
 			infoPtr->filePath = filePath;
 			infoPtr->documentTypeId = documentTypeId;
-			if (	m_documentTemplatePtr->LoadDocumentFromFile(filePath, *infoPtr->documentPtr) &&
-					RegisterDocument(infoPtr.GetPtr())){
+			iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(documentTypeId);
+			if (		(loaderPtr != NULL) &&
+						(loaderPtr->LoadFromFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk) &&
+						RegisterDocument(infoPtr.GetPtr())){
 				return infoPtr.PopPtr()->documentPtr.GetPtr();
 			}
 		}
@@ -85,7 +85,7 @@ const idoc::IDocumentTemplate* CDocumentManagerBase::GetDocumentTemplate() const
 }
 
 
-imod::IUndoManager* CDocumentManagerBase::GetUndoManagerForDocument(imod::IModel* documentPtr) const
+imod::IUndoManager* CDocumentManagerBase::GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const
 {
 	int documentsCount = GetDocumentsCount();
 	for (int i = 0; i < documentsCount; ++i){
@@ -106,7 +106,7 @@ int CDocumentManagerBase::GetDocumentsCount() const
 }
 
 
-imod::IModel& CDocumentManagerBase::GetDocumentFromIndex(int index) const
+istd::IChangeable& CDocumentManagerBase::GetDocumentFromIndex(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < m_documentInfos.GetCount());
@@ -133,7 +133,7 @@ void CDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
 }
 
 
-imod::IModel* CDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view) const
+istd::IChangeable* CDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view) const
 {
 	const DocumentInfo* infoPtr = GetDocumenttInfoFromView(view);
 	if (infoPtr != NULL){
@@ -147,7 +147,7 @@ imod::IModel* CDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic
 }
 
 
-std::string CDocumentManagerBase::GetDocumentTypeId(const imod::IModel& document) const
+std::string CDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable& document) const
 {
 	int documentsCount = GetDocumentsCount();
 	for (int i = 0; i < documentsCount; ++i){
@@ -162,7 +162,7 @@ std::string CDocumentManagerBase::GetDocumentTypeId(const imod::IModel& document
 }
 
 
-imod::IModel* CDocumentManagerBase::FileNew(const std::string& documentTypeId, bool createView, const std::string& viewTypeId)
+istd::IChangeable* CDocumentManagerBase::FileNew(const std::string& documentTypeId, bool createView, const std::string& viewTypeId)
 {
 	istd::TDelPtr<DocumentInfo> newInfoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
 	if (newInfoPtr.IsValid() && RegisterDocument(newInfoPtr.GetPtr())){
@@ -217,7 +217,8 @@ bool CDocumentManagerBase::FileSave(bool requestFileName)
 		}
 	}
 
-	if (m_documentTemplatePtr->SaveDocumentToFile(*infoPtr->documentPtr, filePath)){
+	const iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(infoPtr->documentTypeId);
+	if (loaderPtr && loaderPtr->SaveToFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk){
 		if (infoPtr->filePath != filePath){
 			istd::CChangeNotifier notifierPtr(this);
 
@@ -332,14 +333,17 @@ CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::CreateDocument(const s
 	if (m_documentTemplatePtr != NULL){
 		istd::TDelPtr<DocumentInfo> infoPtr(new DocumentInfo);
 
-		imod::IModel* documentPtr = m_documentTemplatePtr->CreateDocument(documentTypeId);
+		istd::IChangeable* documentPtr = m_documentTemplatePtr->CreateDocument(documentTypeId);
 
 		infoPtr->documentPtr.SetPtr(documentPtr);
-		infoPtr->undoManagerPtr.SetPtr(m_documentTemplatePtr->CreateUndoManager(documentPtr));
+		infoPtr->undoManagerPtr.SetPtr(m_documentTemplatePtr->CreateUndoManager(documentTypeId, documentPtr));
 
 		if (infoPtr->documentPtr.IsValid()){
 			if (createView){
-				istd::IPolymorphic* viewPtr = m_documentTemplatePtr->CreateView(infoPtr->documentPtr.GetPtr(), viewTypeId);
+				istd::IPolymorphic* viewPtr = m_documentTemplatePtr->CreateView(
+							documentTypeId,
+							infoPtr->documentPtr.GetPtr(),
+							viewTypeId);
 				if (viewPtr == NULL){
 					return NULL;
 				}

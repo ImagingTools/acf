@@ -421,7 +421,7 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 	if ((updateFlags & idoc::IDocumentManager::ViewActivationChanged) != 0){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
-			imod::IModel* documentPtr = NULL;
+			istd::IChangeable* documentPtr = NULL;
 
 			istd::IPolymorphic* activeViewPtr = documentManagerPtr->GetActiveView();
 
@@ -524,8 +524,8 @@ void CMainWindowGuiComp::OnSaveAs()
 void CMainWindowGuiComp::OnNewDocument(const QString& documentFactoryId)
 {
 	if (m_documentManagerCompPtr.IsValid()){
-		imod::IModel* document = m_documentManagerCompPtr->FileNew(documentFactoryId.toStdString());
-		if (document == NULL){
+		istd::IChangeable* documentPtr = m_documentManagerCompPtr->FileNew(documentFactoryId.toStdString());
+		if (documentPtr == NULL){
 			QMessageBox::warning(GetWidget(), "", tr("Document could not be created"));
 			return;
 		}

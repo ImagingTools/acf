@@ -30,28 +30,27 @@ public:
 	typedef imod::TMultiModelObserverBase<imod::IModel> BaseClass;
 
 	CDocumentManagerBase();
-	virtual ~CDocumentManagerBase();
 
-	virtual imod::IModel* OpenDocument(const istd::CString& filePath, bool createView, const std::string& viewTypeId);
+	virtual istd::IChangeable* OpenDocument(const istd::CString& filePath, bool createView, const std::string& viewTypeId);
 
 	void SetDocumentTemplate(const idoc::IDocumentTemplate* documentTemplatePtr);
 
 	// reimplemented (idoc::IDocumentManager)
 	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const;
-	imod::IUndoManager* GetUndoManagerForDocument(imod::IModel* documentPtr) const;
+	imod::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const;
 	virtual int GetDocumentsCount() const;
-	virtual imod::IModel& GetDocumentFromIndex(int index) const;
+	virtual istd::IChangeable& GetDocumentFromIndex(int index) const;
 	virtual istd::IPolymorphic* GetActiveView() const;
 	virtual void SetActiveView(istd::IPolymorphic* viewPtr);
-	virtual imod::IModel* GetDocumentFromView(const istd::IPolymorphic& view) const;
-	virtual std::string GetDocumentTypeId(const imod::IModel& document) const;
-	virtual imod::IModel* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "");
+	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view) const;
+	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const;
+	virtual istd::IChangeable* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "");
 	virtual bool FileOpen(const std::string* documentTypeIdPtr, bool createView = true, const std::string& viewTypeId = "");
 	virtual bool FileSave(bool requestFileName = false);
 	virtual bool FileClose();
 
 protected:
-	typedef istd::TDelPtr<imod::IModel> DocumentPtr;
+	typedef istd::TDelPtr<istd::IChangeable> DocumentPtr;
 	typedef istd::TDelPtr<imod::IUndoManager> UndoManagerPtr;
 	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
 	typedef std::list<ViewPtr> Views;
@@ -59,7 +58,7 @@ protected:
 	struct DocumentInfo
 	{
 		DocumentInfo(){}
-		DocumentInfo(const istd::CString& filePath, imod::IModel* documentPtr, imod::IUndoManager* undoManagerPtr)
+		DocumentInfo(const istd::CString& filePath, istd::IChangeable* documentPtr, imod::IUndoManager* undoManagerPtr)
 		{
 			this->filePath = filePath;
 			this->documentPtr.SetPtr(documentPtr);

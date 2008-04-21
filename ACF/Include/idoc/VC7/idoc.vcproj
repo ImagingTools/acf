@@ -232,6 +232,9 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CCompositeDocumentTemplateComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CDocumentManagerBase.cpp">
 			</File>
 			<File
@@ -244,6 +247,9 @@
 		<Filter
 			Name="Header Files"
 			Filter="h">
+			<File
+				RelativePath="..\CCompositeDocumentTemplateComp.h">
+			</File>
 			<File
 				RelativePath="..\CDocumentManagerBase.h">
 			</File>
