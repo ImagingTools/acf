@@ -35,7 +35,8 @@ I_EXPORT_COMPONENT(iqt::CIconProviderComp, IconProvider, "Icon provider", "Icons
 I_EXPORT_COMPONENT(iqt::CFileDialogSerializerComp, FileDialogSerializer, "File dialog serializer", "File Serialization Serializer Dialog GUI Qt"); 
 I_EXPORT_COMPONENT(iqmain::CMainWindowGuiComp, MainWindowGui, "Main Qt application window", "Main Window Start Begin GUI Qt");
 I_EXPORT_COMPONENT(icomp::TModelCompWrap<iqmain::CMultiDocumentWorkspaceGuiComp>, MultiDocWorkspace, "Multi document workspace", "Workspace Document Model View Observer MVC GUI Qt");
-I_EXPORT_COMPONENT(icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmap> >, Bitmap, "QImage based bitmap implementation", "QImage Bitmap Qt");
+typedef icomp::TMakeComponentWrap<iimg::IBitmap, iqt::CBitmap> CBitmapComp;
+I_EXPORT_COMPONENT(icomp::TModelCompWrap<CBitmapComp>, Bitmap, "QImage based bitmap implementation", "QImage Bitmap Qt");
 
 
 #else OLD_ACF_SUPPORT

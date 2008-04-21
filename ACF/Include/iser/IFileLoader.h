@@ -54,18 +54,18 @@ public:
 		\returns serialization state. \sa SerializationState
 	*/
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const = 0;
-	
-	/**
-		Returns the last saved file name.
-		\returns serialization state. \sa SerializationState
-	*/
-	virtual const istd::CString& GetLastSaveFileName() const = 0;
 
 	/**
 		Returns the last opened file name.
 		\returns serialization state. \sa SerializationState
 	*/
-	virtual const istd::CString& GetLastOpenFileName() const = 0;
+	virtual const istd::CString& GetLastLoadFileName() const = 0;
+
+	/**
+		Returns the last saved file name.
+		\returns serialization state. \sa SerializationState
+	*/
+	virtual const istd::CString& GetLastSaveFileName() const = 0;
 };
 
 

@@ -22,7 +22,7 @@ public:
 	I_BEGIN_COMPONENT(CSingleDocumentTemplateComp)
 		I_REGISTER_INTERFACE(idoc::IDocumentTemplate)
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of supported document", true, "Default");
-		I_ASSIGN_MULTI_1(m_fileFiltersAttrPtr, "FileFilter", "File filter for this document", true, "Document Files (*.*)")
+		I_ASSIGN_MULTI_1(m_fileFiltersAttrPtr, "FileFilters", "File filters for this document", true, "Document Files (*.*)")
 		I_ASSIGN(m_defaultDirectoryAttrPtr, "DefaultDirectory", "Default file directory for open file dialog", true, ".")
 		I_ASSIGN_MULTI_1(m_fileExtensionsAttrPtr, "FileExtensions", "The list of possible file extensions for the document", true, "*.*")
 		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")

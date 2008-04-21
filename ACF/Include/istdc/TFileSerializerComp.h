@@ -30,8 +30,8 @@ public:
 				bool forSaving = true) const;
 	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+	virtual const istd::CString& GetLastLoadFileName() const;
 	virtual const istd::CString& GetLastSaveFileName() const;
-	virtual const istd::CString& GetLastOpenFileName() const;
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
@@ -102,7 +102,7 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(const istd::IChan
 
 
 template <class ReadArchive, class WriteArchive>
-const istd::CString& TFileSerializerComp<ReadArchive, WriteArchive>::GetLastSaveFileName() const
+const istd::CString& TFileSerializerComp<ReadArchive, WriteArchive>::GetLastLoadFileName() const
 {
 	static istd::CString emptyPath;
 
@@ -111,7 +111,7 @@ const istd::CString& TFileSerializerComp<ReadArchive, WriteArchive>::GetLastSave
 
 
 template <class ReadArchive, class WriteArchive>
-const istd::CString& TFileSerializerComp<ReadArchive, WriteArchive>::GetLastOpenFileName() const
+const istd::CString& TFileSerializerComp<ReadArchive, WriteArchive>::GetLastSaveFileName() const
 {
 	static istd::CString emptyPath;
 

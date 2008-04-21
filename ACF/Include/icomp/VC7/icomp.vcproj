@@ -255,6 +255,9 @@
 				RelativePath="..\TInterfaceRegistrator.h">
 			</File>
 			<File
+				RelativePath="..\TMakeComponentWrap.h">
+			</File>
+			<File
 				RelativePath="..\TModelCompWrap.h">
 			</File>
 			<File

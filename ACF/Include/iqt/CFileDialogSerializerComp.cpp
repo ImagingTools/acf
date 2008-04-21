@@ -71,15 +71,15 @@ int CFileDialogSerializerComp::SaveToFile(const istd::IChangeable& data, const i
 }
 
 
-const istd::CString& CFileDialogSerializerComp::GetLastSaveFileName() const
+const istd::CString& CFileDialogSerializerComp::GetLastLoadFileName() const
 {
-	return m_lastSaveFileName;
+	return m_lastOpenFileName;
 }
 
 
-const istd::CString& CFileDialogSerializerComp::GetLastOpenFileName() const
+const istd::CString& CFileDialogSerializerComp::GetLastSaveFileName() const
 {
-	return m_lastOpenFileName;
+	return m_lastSaveFileName;
 }
 
 
