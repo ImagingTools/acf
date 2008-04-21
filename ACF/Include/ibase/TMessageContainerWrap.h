@@ -44,13 +44,13 @@ protected:
 	static int SubstractMask(int category);
 
 protected:
+	typedef istd::TPointerVector<ibase::IMessage> MessageList;
+	MessageList m_messages;
+
 	int m_maxCategory;
 
 private:
-	typedef istd::TPointerVector<ibase::IMessage> MessageList;
 	typedef std::vector<ibase::IHierarchicalMessageContainer*> Childs;
-
-	MessageList m_messages;
 	Childs m_childContainers;
 
 	int m_maxMessageCount;
