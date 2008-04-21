@@ -8,7 +8,6 @@
 
 #include "iqt/CApplicationComp.h"
 #include "iqt/CSplashScreenGuiComp.h"
-#include "iqt/CFileDialogSerializerComp.h"
 #include "iqt/CBitmapLoaderComp.h"
 
 #include "iqmain/CExtendedDocumentTemplateComp.h"
@@ -39,16 +38,15 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<iqt::CBitmapLoaderComp> bitmapLoaderComp;
 	bitmapLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<iqt::CFileDialogSerializerComp> fileSerializerComp;
-	fileSerializerComp.InsertMultiAttr("FileFilters", istd::CString("Image Files (*.bmp *.png"));
-	fileSerializerComp.InsertMultiRef("Serializers", &bitmapLoaderComp);
-	fileSerializerComp.InitComponent();
-
 	icomp::TSimComponentWrap<iqmain::CExtendedDocumentTemplateComp> documentTemplateComp;
 	documentTemplateComp.SetRef("AboutGui", &splashScreenGui);
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);
 	documentTemplateComp.SetFactory("ViewFactory", &viewFactoryComp);
-	documentTemplateComp.SetRef("DocumentLoader", &fileSerializerComp);
+	documentTemplateComp.SetRef("DocumentLoader", &bitmapLoaderComp);
+	documentTemplateComp.InsertMultiAttr("FileFilters", istd::CString("Bitmap files (*.bmp;*.png;*.jpg)"));
+	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("bmp"));
+	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("png"));
+	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("jpg"));
 	documentTemplateComp.InitComponent();
 
 	icomp::TSimComponentWrap<icomp::TModelCompWrap<iqmain::CMultiDocumentWorkspaceGuiComp> > workspaceComp;

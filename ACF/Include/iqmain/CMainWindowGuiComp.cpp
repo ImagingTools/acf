@@ -85,32 +85,7 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_fixedCommands.InsertChild(&m_helpCommand, false);
 	
 	m_menuBar = NULL;
-	m_helpMenu = NULL;
-	m_editMenu = NULL;
-	m_viewMenu = NULL;
-	m_windowMenu = NULL;
-	m_fileMenu = NULL;
-	m_cascadeAction = NULL;
-	m_tileHorizontallyAction = NULL;
-	m_tileVerticallyAction = NULL;
-	m_fullScreenAction = NULL;
-	m_closeAllDocumentsAction = NULL;
-	m_aboutAction = NULL;
-
-	m_newMenu = NULL;
-	m_openMenu = NULL;
-	m_newAction = NULL;
-	m_openAction = NULL;
-	m_saveAction = NULL;
-	m_saveAsAction = NULL;
-	m_quitAction = NULL;
-	m_languageGroup = NULL;
 	m_standardToolBar = NULL;
-}
-
-
-CMainWindowGuiComp::~CMainWindowGuiComp()
-{
 }
 
 
@@ -206,11 +181,6 @@ void CMainWindowGuiComp::OnDocumentCountChanged()
 
 	int documentsCount = documentManagerPtr->GetDocumentsCount();
 
-	m_cascadeAction->setEnabled(documentsCount > 1);
-	m_tileHorizontallyAction->setEnabled(documentsCount > 1);
-	m_tileVerticallyAction->setEnabled(documentsCount > 1);
-	m_closeAllDocumentsAction->setEnabled(documentsCount > 0);
-
 	m_cascadeCommand.SetEnabled(documentsCount > 1);
 	m_tileHorizontallyCommand.SetEnabled(documentsCount > 1);
 	m_tileVerticallyCommand.SetEnabled(documentsCount > 1);
@@ -241,9 +211,6 @@ void CMainWindowGuiComp::OnActiveDocumentChanged()
 	}
 
 	bool isDocumentActive = (m_activeDocumentPtr != NULL);
-
-	m_saveAction->setEnabled(isDocumentActive);
-	m_saveAsAction->setEnabled(isDocumentActive);
 
 	m_saveCommand.SetEnabled(isDocumentActive);
 	m_saveAsCommand.SetEnabled(isDocumentActive);
@@ -300,6 +267,13 @@ void CMainWindowGuiComp::OnGuiCreated()
 }
 
 
+void CMainWindowGuiComp::OnGuiDestroyed()
+{
+	m_menuBar = NULL;
+	m_standardToolBar = NULL;
+}
+
+
 void CMainWindowGuiComp::OnRetranslate()
 {
 	I_ASSERT(GetWidget() != NULL);
@@ -334,76 +308,6 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_tileVerticallyCommand.SetVisuals(tr("Tile &Verticaly"), tr("Vertical"), tr("Lays out all document windows verticaly"));
 	m_closeAllDocumentsCommand.SetVisuals(tr("&Close All Documents"), tr("Close All"), tr("&Closes all opened documents"));
 	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), GetIcon("info"));
-
-	GetWidget()->setWindowTitle(tr("MainWindow"));
-    m_helpMenu->setTitle(tr("Help"));
-    m_viewMenu->setTitle(tr("&View"));
-    m_windowMenu->setTitle(tr("&Window"));
-    m_fileMenu->setTitle(tr("&File"));
-	m_editMenu->setTitle(tr("&Edit"));
-
-	if (parentWidgetPtr->isFullScreen()){
-		m_fullScreenAction->setText(tr("Cancel Full Screen"));
-	}
-	else{
-		m_fullScreenAction->setText(tr("Show Full Screen"));
-	}
-
-	if (m_saveAction != NULL){
-		m_saveAction->setText(tr("&Save"));
-	}
-
-	if (m_saveAsAction != NULL){
-		m_saveAsAction->setText(tr("&Save As..."));
-	}
-
-	if (m_cascadeAction != NULL){
-		m_cascadeAction->setText(tr("Casca&de"));
-	}
-
-	if (m_tileHorizontallyAction != NULL){
-		m_tileHorizontallyAction->setText(tr("Tile &Horizontaly"));
-	}
-
-	if (m_tileVerticallyAction != NULL){
-		m_tileVerticallyAction->setText(tr("Tile &Verticaly"));
-	}
-
-	if (m_closeAllDocumentsAction != NULL){
-		m_closeAllDocumentsAction->setText(tr("&Close All Documents"));
-	}
-
-	if (m_aboutAction != NULL){
-		m_aboutAction->setText(tr("&About..."));
-	}
-
-	if (m_newAction != NULL){
-		m_newAction->setText(tr("&New"));
-	}
-
-	if (m_openAction != NULL){
-		m_openAction ->setText(tr("&Open..."));
-	}
-
-	if (m_newMenu != NULL){
-		m_newMenu->setTitle(tr("&New"));
-	}
-
-	if (m_openMenu != NULL){
-		m_openMenu ->setTitle(tr("&Open"));
-	}
-
-	if (m_quitAction != NULL){
-		m_quitAction ->setText(tr("&Quit"));
-	}
-
-	if (m_undoAction != NULL){
-		m_undoAction->setText(tr("&Undo"));
-	}
-
-	if (m_redoAction != NULL){
-		m_redoAction->setText(tr("&Redo"));
-	}
 }
 
 
@@ -461,16 +365,6 @@ void CMainWindowGuiComp::OnFileNewAction(QAction* activeAction)
 {
 	if (activeAction != NULL){
 		OnNewDocument(activeAction->text());
-	}
-}
-
-
-void CMainWindowGuiComp::OnFileOpenAction(QAction* activeAction)
-{
-	if (activeAction != NULL){
-		std::string documentTypeId = activeAction->text().toStdString();
-
-		OnOpenDocument(&documentTypeId);
 	}
 }
 
@@ -586,13 +480,11 @@ void CMainWindowGuiComp::OnFullScreen()
 		return;
 	}
 
-	if(parentWidgetPtr->isFullScreen()){
-		m_fullScreenAction->setText(tr("Show Full Screen"));
+	if (parentWidgetPtr->isFullScreen()){
 		parentWidgetPtr->showMaximized();
 		mainWidgetPtr->statusBar()->show();
 	}
 	else{
-		m_fullScreenAction->setText(tr("Cancel Full Screen"));
 		mainWidgetPtr->statusBar()->hide();
 		parentWidgetPtr->showFullScreen();
 	}
@@ -601,7 +493,7 @@ void CMainWindowGuiComp::OnFullScreen()
 
 void CMainWindowGuiComp::OnAbout()
 {
-
+	// TODO: implement about for MVC.
 }
 
 
@@ -661,235 +553,13 @@ void CMainWindowGuiComp::SetupMainWindow(QMainWindow& mainWindow)
 		mainWindow.setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
 	}
 
-	SetupStatusBar(mainWindow);
-
-	CreateMenuComponents(mainWindow);
-
-	SetupMenuComponents(mainWindow);
-
-	SetupTranslationMenu();
-
-	SetupStyleMenu();
-
-	SetupWorkspace(mainWindow);
-
-	SetupMainWindowComponents(mainWindow);
-
-	OnRetranslate();
-
-	// TODO: Get desktop resolution and calculate the right initial size of the main window.
-	QSize size(800, 600);
-	size = size.expandedTo(mainWindow.minimumSizeHint());
-	mainWindow.resize(size);
-}
-
-
-void CMainWindowGuiComp::CreateMenuComponents(QMainWindow& mainWindow)
-{
-	m_menuBar = new QMenuBar();
+	m_menuBar = new QMenuBar(&mainWindow);
 	m_menuBar->setGeometry(QRect(0, 0, 625, 45));
-	m_helpMenu = new QMenu(m_menuBar);
-	m_viewMenu = new QMenu(m_menuBar);
-	m_windowMenu = new QMenu(m_menuBar);
-	m_fileMenu = new QMenu(m_menuBar);
-	m_editMenu = new QMenu(m_menuBar);
 
-	m_menuBar->addAction(m_fileMenu->menuAction());
-	m_menuBar->addAction(m_editMenu->menuAction());
-	m_menuBar->addAction(m_viewMenu->menuAction());
-	m_menuBar->addAction(m_windowMenu->menuAction());
-	m_menuBar->addAction(m_helpMenu->menuAction());
-	
 	m_standardToolBar = new QToolBar(&mainWindow);
 	m_standardToolBar->setWindowTitle(tr("Standard"));
 	m_standardToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
-	mainWindow.setIconSize(QSize(32, 32));
-}
-
-
-void CMainWindowGuiComp::SetupMenuComponents(QMainWindow& /*mainWindow*/)
-{
-	SetupFileMenu();
-
-	SetupEditMenu();
-
-	m_aboutAction = new QAction(tr("&About..."), m_helpMenu);
-	m_helpMenu->addAction(m_aboutAction);
-	connect(m_aboutAction, SIGNAL(activated()), this, SLOT(OnAbout()));
-
-	m_fullScreenAction = new QAction(tr("&Show Full Screen"), m_viewMenu);
-	m_viewMenu->addAction(m_fullScreenAction);
-	connect(m_fullScreenAction, SIGNAL(activated()), this, SLOT(OnFullScreen()));
-
-	m_quitAction = new QAction(tr("&Quit"), m_fileMenu);
-	m_fileMenu->addSeparator();
-	m_fileMenu->addAction(m_quitAction);
-	m_quitAction->setIcon(QIcon(":/Icons/exit"));
-	connect(m_quitAction, SIGNAL(activated()), this, SLOT(OnQuit()));
-}
-
-
-void CMainWindowGuiComp::SetupFileMenu()
-{
-	I_ASSERT(m_documentManagerCompPtr.IsValid());
-
-	if (!m_documentManagerCompPtr.IsValid()){
-		return;
-	}
-
-	const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
-	if (templatePtr == NULL){
-		return;
-	}
-
-	idoc::IDocumentTemplate::Ids documentTypeIds = templatePtr->GetDocumentTypeIds();
-
-	bool isSingleFileAction = (documentTypeIds.size() == 1);
-	if (isSingleFileAction){
-		m_newAction = new QAction(tr("&New"), m_fileMenu);
-		m_fileMenu->addAction(m_newAction);
-		m_fileMenu->addSeparator();
-		connect(m_newAction, SIGNAL(activated()), this, SLOT(OnNew()));
-		m_newAction->setIcon(QIcon(":/Icons/document"));
-		m_newAction->setShortcut(tr("Ctrl+N"));
-		m_standardToolBar->addAction(m_newAction);
-
-		m_openAction = new QAction(tr("&Open..."), m_fileMenu);
-		m_fileMenu->addAction(m_openAction);
-		m_fileMenu->addSeparator();
-		connect(m_openAction, SIGNAL(activated()), this, SLOT(OnOpen()));
-		m_openAction->setIcon(QIcon(":/Icons/folder"));
-		m_openAction->setShortcut(tr("Ctrl+O"));
-		m_standardToolBar->addAction(m_openAction);
-	}
-	else{
-		m_newMenu = new QMenu(tr("&New"), m_fileMenu);
-		m_fileMenu->addAction(m_newMenu->menuAction());
-		m_fileMenu->addSeparator();
-		connect(m_newMenu, SIGNAL(triggered(QAction*)), this, SLOT(OnFileNewAction(QAction*)));
-		m_newMenu->setIcon(QIcon(":/Icons/document"));
-		m_standardToolBar->addAction(m_newMenu->menuAction());
-
-		m_openMenu = new QMenu(tr("&Open"), m_fileMenu);
-		m_fileMenu->addAction(m_openMenu->menuAction());
-		m_fileMenu->addSeparator();
-		connect(m_openMenu, SIGNAL(triggered(QAction*)), this, SLOT(OnFileOpenAction(QAction*)));
-		m_openMenu->setIcon(QIcon(":/Icons/folder"));
-		m_standardToolBar->addAction(m_openMenu->menuAction());
-
-		m_newMenu->clear();
-		m_openMenu->clear();
-
-		int idsCount = int(documentTypeIds.size());
-		for (int menuIndex = 0; menuIndex < idsCount; menuIndex++){
-			QString actionName = QString(documentTypeIds[menuIndex].c_str());
-			QAction* newAction = new QAction(tr(actionName.toAscii()), this);
-			m_fileMenu->addAction(newAction);
-
-			QAction* openAction = new QAction(tr(actionName.toAscii()), this);
-			m_openMenu->addAction(openAction);
-		}
-	}
-
-	m_saveAction = new QAction(tr("&Save"), m_fileMenu);
-	m_fileMenu->addAction(m_saveAction);
-	connect(m_saveAction, SIGNAL(activated()), this, SLOT(OnSave()));
-	m_saveAction->setEnabled(false);
-	m_saveAction->setIcon(QIcon(":/Icons/diskette"));
-	m_saveAction->setShortcut(tr("Ctrl+S"));
-	m_standardToolBar->addAction(m_saveAction);
-
-	m_saveAsAction = new QAction(tr("&Save As..."), m_fileMenu);
-	m_fileMenu->addAction(m_saveAsAction);
-	connect(m_saveAsAction, SIGNAL(activated()), this, SLOT(OnSaveAs()));
-	m_saveAsAction->setEnabled(false);
-}
-
-
-void CMainWindowGuiComp::SetupEditMenu()
-{
-	m_undoAction = new QAction(tr("&Undo"), m_editMenu);
-	m_undoAction->setShortcut(tr("Ctrl+Z"));
-	connect(m_undoAction, SIGNAL(activated()), this, SLOT(OnUndo()));
-	m_undoAction->setIcon(QIcon(":/Icons/Undo"));
-
-	m_redoAction = new QAction(tr("&Redo"), m_editMenu);
-	m_redoAction->setShortcut(tr("Ctrl+Y"));
-	connect(m_redoAction, SIGNAL(activated()), this, SLOT(OnRedo()));
-	m_redoAction->setIcon(QIcon(":/Icons/Redo"));
-	
-	m_editMenu->addAction(m_undoAction);
-	m_editMenu->addAction(m_redoAction);
-	m_editMenu->addSeparator();
-
-	UpdateUndoMenu();
-}
-
-
-void CMainWindowGuiComp::SetupTranslationMenu()
-{
-	if (m_translationManagerCompPtr.IsValid()){
-		m_languageGroup = new QActionGroup(this);
-		m_languageGroup->setExclusive(true);
-
-		for (int langIndex = 0; langIndex < m_translationManagerCompPtr->GetLanguageCount(); langIndex++){
-			QString languageId = m_translationManagerCompPtr->GetLanguageId(langIndex);
-			QAction* langAction = new QAction(languageId, m_languageGroup);
-			langAction->setCheckable(true);
-			langAction->setIcon(m_translationManagerCompPtr->GetLanguageIcon(langIndex));
-			m_languageGroup->addAction(langAction);
-			if (languageId == m_translationManagerCompPtr->GetSelectedLanguageId()){
-				langAction->setChecked(true);
-			}
-		}
-
-		m_viewMenu->addSeparator();
-		m_viewMenu->addActions(m_languageGroup->actions());
-		connect( m_languageGroup, SIGNAL(selected(QAction*)), this, SLOT(OnLanguageSelected(QAction *)));
-		m_viewMenu->addSeparator();
-	}
-}
-
-
-void CMainWindowGuiComp::SetupStyleMenu()
-{
-	QMenu* styleMenu = new QMenu(tr("&Styles"), m_viewMenu);
-	m_viewMenu->addAction(styleMenu->menuAction());
-
-	QActionGroup* styleActionGroup = new QActionGroup(this);
-	styleActionGroup->setExclusive(true);
-
-	QStringList styleList = QStyleFactory::keys();
-	QString currentStyle = qApp->style()->objectName();
-	for (int styleIndex = 0; styleIndex < styleList.count(); styleIndex++){
-		QAction* styleAction = new QAction(styleList.at(styleIndex), styleActionGroup);
-		styleAction->setCheckable(true);
-		styleActionGroup->addAction(styleAction);
-		if (currentStyle.toLower() == styleList.at(styleIndex).toLower()){
-			styleAction->setChecked(true);
-		}
-	}
-
-	styleMenu->addActions(styleActionGroup->actions());
-	connect(styleActionGroup, SIGNAL(selected(QAction*)), this, SLOT(OnStyleSelected(QAction *)));
-}
-
-
-void CMainWindowGuiComp::SetupStatusBar(QMainWindow& mainWindow)
-{
-	QStatusBar* statusBar = mainWindow.statusBar();
-	if (statusBar != NULL){
-		QFrame* framePtr = new QFrame(statusBar);
-		framePtr->setFrameShadow(QFrame::Plain);
-		framePtr->setLineWidth(1);
-		statusBar->addPermanentWidget(framePtr, 100);	
-	}
-}
-
-
-void CMainWindowGuiComp::SetupWorkspace(QMainWindow& mainWindow)
-{
 	if (m_workspaceCompPtr.IsValid()){
 		m_workspaceCompPtr->CreateGui(NULL);
 		QWidget* workspacePtr = m_workspaceCompPtr->GetWidget();
@@ -898,35 +568,16 @@ void CMainWindowGuiComp::SetupWorkspace(QMainWindow& mainWindow)
 		}
 	}
 
+	SetupMainWindowComponents(mainWindow);
 
-	if (m_workspaceControllerCompPtr.IsValid()){
-		m_cascadeAction = new QAction(tr("Casca&de"), m_windowMenu);
-		m_windowMenu->addAction(m_cascadeAction);
-		connect(m_cascadeAction , SIGNAL(activated()), this, SLOT(OnCascade()) ); 
-		m_cascadeAction->setEnabled(false);
+	OnRetranslate();
 
-		m_tileHorizontallyAction = new QAction(tr("Tile &Horizontaly"), m_windowMenu);
-		m_windowMenu->addAction(m_tileHorizontallyAction);
-		connect(m_tileHorizontallyAction, SIGNAL(activated()), this, SLOT(OnTileHorizontally()) ); 
-		m_tileHorizontallyAction->setEnabled(false);
+	UpdateMenuActions();
 
-		m_tileVerticallyAction = new QAction(tr("Tile &Verticaly"), m_windowMenu);
-		m_windowMenu->addAction(m_tileVerticallyAction);
-		connect(m_tileVerticallyAction, SIGNAL(activated()), this, SLOT(OnTile()) ); 
-		m_tileVerticallyAction->setEnabled(false);
-
-		m_windowMenu->addSeparator();
-
-		m_closeAllDocumentsAction = new QAction(tr("&Close All Documents"), m_windowMenu);
-		m_windowMenu->addAction(m_closeAllDocumentsAction);
-		connect(m_closeAllDocumentsAction, SIGNAL(activated()), this, SLOT(OnCloseAllWindows())); 
-		m_closeAllDocumentsAction->setEnabled(false);
-
-		m_windowMenu->setEnabled(true);
-	}
-	else{
-		m_windowMenu->setEnabled(false);
-	}
+	// TODO: Get desktop resolution and calculate the right initial size of the main window.
+	QSize size(800, 600);
+	size = size.expandedTo(mainWindow.minimumSizeHint());
+	mainWindow.resize(size);
 }
 
 
@@ -981,9 +632,6 @@ void CMainWindowGuiComp::UpdateUndoMenu()
 		isUndoAvailable = undoManagerPtr->IsUndoAvailable();
 		isRedoAvailable = undoManagerPtr->IsRedoAvailable();
 	}
-
-	m_undoAction->setEnabled(isUndoAvailable);
-	m_redoAction->setEnabled(isRedoAvailable);
 
 	m_undoCommand.SetEnabled(isUndoAvailable);
 	m_redoCommand.SetEnabled(isRedoAvailable);

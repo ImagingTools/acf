@@ -40,6 +40,9 @@ public:
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
+	// reimplemented (idoc::IDocumentTemplate)
+	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 

@@ -49,7 +49,7 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::IsOperationSupported(
 			bool /*forLoading*/,
 			bool /*forSaving*/) const
 {
-	if ((dataObjectPtr != NULL) && (dynamic_cast<const iser::ISerializable*>(dataObjectPtr) != NULL)){
+	if ((dataObjectPtr != NULL) && (dynamic_cast<const iser::ISerializable*>(dataObjectPtr) == NULL)){
 		return false;
 	}
 

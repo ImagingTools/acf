@@ -65,7 +65,6 @@ public:
 	};
 
 	CMainWindowGuiComp();
-	virtual ~CMainWindowGuiComp();
 
 	// reimplemented (iqt::IGuiObject)
 	virtual void OnTryClose(bool* ignoredPtr = NULL);
@@ -95,6 +94,7 @@ protected:
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 	virtual void OnRetranslate();
 
 	// reimplemented (imod::TSingleModelObserverBase)
@@ -105,7 +105,6 @@ protected:
 
 protected slots:
 	void OnFileNewAction(QAction* action);
-	void OnFileOpenAction(QAction* action);
 	void OnNew();
 	void OnOpen();
 	void OnSave();
@@ -128,14 +127,8 @@ protected slots:
 
 protected:
 	void SetupMainWindow(QMainWindow& mainWindow);
-	void CreateMenuComponents(QMainWindow& mainWindow);
-	void SetupMenuComponents(QMainWindow& mainWindow);
 	void SetupFileMenu();
 	void SetupEditMenu();
-	void SetupTranslationMenu();
-	void SetupStyleMenu();
-	void SetupStatusBar(QMainWindow& mainWindow);
-	void SetupWorkspace(QMainWindow& mainWindow);
 	void SetupMainWindowComponents(QMainWindow& mainWindow);
 	bool HasDocumentTemplate() const;
 	void UpdateUndoMenu();
@@ -143,28 +136,6 @@ protected:
 
 private:
 	QMenuBar* m_menuBar;
-	QMenu* m_fileMenu;
-	QMenu* m_editMenu;
-	QMenu* m_viewMenu;
-	QMenu* m_windowMenu;
-	QMenu* m_helpMenu;
-	QAction* m_cascadeAction;
-	QAction* m_tileHorizontallyAction;
-	QAction* m_tileVerticallyAction;
-	QAction* m_fullScreenAction;
-	QAction* m_closeAllDocumentsAction;
-	QAction* m_aboutAction;
-
-	QMenu* m_newMenu;
-	QMenu* m_openMenu;
-	QAction* m_newAction;
-	QAction* m_openAction;
-	QAction* m_saveAction;
-	QAction* m_saveAsAction;
-	QAction* m_quitAction;
-	QAction* m_undoAction;
-	QAction* m_redoAction;
-	QActionGroup* m_languageGroup;
 	QToolBar* m_standardToolBar;
 
 	iqt::CHierarchicalCommand m_fileCommand;

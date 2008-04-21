@@ -50,17 +50,26 @@ bool CSimComponentContextBase::InsertMultiRef(const std::string& referenceId, IC
 {
 	I_ASSERT(IsAttributeTypeCorrect(referenceId, typeid(CMultiReferenceAttribute)));
 
-	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(referenceId, false);
-	if (infoPtr != NULL){
-		IRegistryElement::AttributePtr& attributePtr = infoPtr->attributePtr;
-		if (!attributePtr.IsValid()){
-			attributePtr.SetPtr(new CMultiReferenceAttribute);
+	CMultiReferenceAttribute* multiAttrPtr = NULL;
+
+	const IRegistryElement::AttributeInfo* existingInfoPtr = m_registryElement.GetAttributeInfo(referenceId);
+	if (existingInfoPtr != NULL){
+		multiAttrPtr = dynamic_cast<CMultiReferenceAttribute*>(existingInfoPtr->attributePtr.GetPtr());
+	}
+	else{
+		IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(referenceId, false);
+		if (newInfoPtr != NULL){
+			IRegistryElement::AttributePtr& attributePtr = newInfoPtr->attributePtr;
+			if (!attributePtr.IsValid()){
+				attributePtr.SetPtr(new CMultiReferenceAttribute);
+			}
+
+			multiAttrPtr = dynamic_cast<CMultiReferenceAttribute*>(attributePtr.GetPtr());
 		}
+	}
 
-		CMultiReferenceAttribute* multiAttrPtr = dynamic_cast<CMultiReferenceAttribute*>(attributePtr.GetPtr());
-		I_ASSERT(multiAttrPtr != NULL);	// attribute type was correct, casting must be correct
-
-		istd::CString indexString = W("0") + istd::CString::FromNumber(multiAttrPtr->GetValuesCount());
+	if (multiAttrPtr != NULL){
+		istd::CString indexString = istd::CString::FromNumber(multiAttrPtr->GetValuesCount());
 		std::string attributeId = referenceId + '#' + indexString.ToString();
 
 		multiAttrPtr->InsertValue(attributeId);

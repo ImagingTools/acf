@@ -209,7 +209,7 @@ QString CMultiDocumentWorkspaceGuiComp::CreateFileDialogFilter(const std::string
 					iter != filters.end();
 					++iter){
 			if (iter != filters.begin()){
-				retVal += " ";
+				retVal += "\n";
 			}
 			retVal += iqt::GetQString(*iter);
 		}

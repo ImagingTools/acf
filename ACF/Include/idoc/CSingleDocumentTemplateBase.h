@@ -23,6 +23,7 @@ class IDocumentManager;
 class CSingleDocumentTemplateBase: virtual public idoc::IDocumentTemplate
 {
 public:
+	const std::string& GetDocumentTypeId() const;
 	virtual void SetDocumentTypeId(const std::string& documentTypeId);
 	virtual void SetFileFilters(const istd::CStringList& fileFilters);
 	virtual void SetDefaultDirectory(const istd::CString& defaultDirectory);
@@ -51,6 +52,14 @@ private:
 	std::string m_documentTypeId;
 	std::string m_viewTypeId;
 };
+
+
+// inline methods
+
+inline const std::string& CSingleDocumentTemplateBase::GetDocumentTypeId() const
+{
+	return m_documentTypeId;
+}
 
 
 // inline protected methods

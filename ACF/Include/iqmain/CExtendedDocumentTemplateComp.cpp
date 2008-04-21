@@ -2,6 +2,7 @@
 
 
 #include <QMessageBox>
+#include <QFileInfo>
 
 
 namespace iqmain
@@ -20,6 +21,26 @@ CExtendedDocumentTemplateComp::CExtendedDocumentTemplateComp()
 const idoc::IHierarchicalCommand* CExtendedDocumentTemplateComp::GetCommands() const
 {
 	return &m_globalMenuCommands;
+}
+
+
+// reimplemented (idoc::IDocumentTemplate)
+
+idoc::IDocumentTemplate::Ids CExtendedDocumentTemplateComp::GetDocumentTypeIdsForFile(const istd::CString& filePath) const
+{
+	QFileInfo info(iqt::GetQString(filePath));
+	istd::CString extension = iqt::GetCString(info.suffix());
+
+	istd::CStringList extensions = GetFileExtensions();
+	for (		istd::CStringList::const_iterator iter = extensions.begin();
+				iter != extensions.end();
+				++iter){
+		if (*iter == extension){
+			return GetDocumentTypeIds();
+		}
+	}
+
+	return idoc::IDocumentTemplate::Ids();
 }
 
 

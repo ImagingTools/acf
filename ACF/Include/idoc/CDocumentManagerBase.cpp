@@ -218,7 +218,7 @@ bool CDocumentManagerBase::FileSave(bool requestFileName)
 	}
 
 	const iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(infoPtr->documentTypeId);
-	if (loaderPtr && loaderPtr->SaveToFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk){
+	if ((loaderPtr != NULL) && loaderPtr->SaveToFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk){
 		if (infoPtr->filePath != filePath){
 			istd::CChangeNotifier notifierPtr(this);
 

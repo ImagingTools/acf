@@ -88,16 +88,25 @@ public:
 	{
 		I_ASSERT(IsAttributeTypeCorrect(attributeId, typeid(TMultiAttribute< Attribute >)));
 
-		IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
-		if (infoPtr != NULL){
-			IRegistryElement::AttributePtr& attributePtr = infoPtr->attributePtr;
-			if (!attributePtr.IsValid()){
-				attributePtr.SetPtr(new TMultiAttribute< Attribute >);
+		TMultiAttribute<Attribute>* multiAttrPtr = NULL;
+
+		const IRegistryElement::AttributeInfo* existingInfoPtr = m_registryElement.GetAttributeInfo(attributeId);
+		if (existingInfoPtr != NULL){
+			multiAttrPtr = dynamic_cast<TMultiAttribute<Attribute>*>(existingInfoPtr->attributePtr.GetPtr());
+		}
+		else{
+			IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
+			if (newInfoPtr != NULL){
+				IRegistryElement::AttributePtr& attributePtr = newInfoPtr->attributePtr;
+				if (!attributePtr.IsValid()){
+					attributePtr.SetPtr(new TMultiAttribute<Attribute>);
+				}
+
+				multiAttrPtr = dynamic_cast<TMultiAttribute<Attribute>*>(attributePtr.GetPtr());
 			}
+		}
 
-			TMultiAttribute< Attribute >* multiAttrPtr = dynamic_cast<TMultiAttribute< Attribute >*>(attributePtr.GetPtr());
-			I_ASSERT(multiAttrPtr != NULL);	// attribute type was correct, casting must be correct
-
+		if (multiAttrPtr != NULL){
 			multiAttrPtr->InsertValue(attribute);
 
 			return true;

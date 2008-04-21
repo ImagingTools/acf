@@ -14,7 +14,10 @@ IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetDocumentTypeIds() cons
 	for (		IdToTemplateMap::const_iterator iter = m_idToTemplateMap.begin();
 				iter != m_idToTemplateMap.end();
 				++iter){
-		retVal.push_back(iter->first);
+		const std::string& documentTypeId = iter->first;
+		if (!documentTypeId.empty()){
+			retVal.push_back(iter->first);
+		}
 	}
 
 	return retVal;
