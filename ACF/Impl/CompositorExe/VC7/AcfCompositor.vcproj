@@ -18,7 +18,7 @@
 			ConfigurationType="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include/iqt/VC7/generatedfiles;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;.\GeneratedFiles"
+				AdditionalIncludeDirectories="../../../Include/iqt/VC7/Generated;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;$(InputDir)\Generated"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../Include/iqt/VC7/generatedfiles;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;.\GeneratedFiles"
+				AdditionalIncludeDirectories="../../../Include/iqt/VC7/Generated;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;$(InputDir)\Generated"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
@@ -107,7 +107,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../Include/iqt/VC7/generatedfiles;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;.\GeneratedFiles"
+				AdditionalIncludeDirectories="../../../Include/iqt/VC7/Generated;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;$(InputDir)\Generated"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
@@ -151,7 +151,7 @@
 			ConfigurationType="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include/iqt/VC7/generatedfiles;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;.\GeneratedFiles"
+				AdditionalIncludeDirectories="../../../Include/iqt/VC7/Generated;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;;$(InputDir)\Generated"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
@@ -247,40 +247,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CComponentView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CComponentView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CComponentView.h&quot; -o &quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CComponentView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CComponentView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CComponentView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CComponentView.h&quot; -o &quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CComponentView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CComponentView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CComponentView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CComponentView.h&quot; -o &quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CComponentView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CComponentView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CComponentView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CComponentView.h&quot; -o &quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CComponentView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CComponentView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CComponentView.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -290,40 +290,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorApp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorApp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorApp.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorApp.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorApp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorApp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorApp.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorApp.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorApp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorApp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorApp.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorApp.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorApp.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorApp.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorApp.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorApp.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorApp.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorApp.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -333,40 +333,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorAttributeEditor.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorAttributeEditor.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorAttributeEditor.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorAttributeEditor.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorAttributeEditor.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorAttributeEditor.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorAttributeEditor.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorAttributeEditor.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorAttributeEditor.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorAttributeEditor.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorAttributeEditor.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -376,40 +376,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorMainWindow.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorMainWindow.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorMainWindow.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorMainWindow.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorMainWindow.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorMainWindow.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorMainWindow.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorMainWindow.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorMainWindow.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorMainWindow.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorMainWindow.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -419,40 +419,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorWorkspace.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorWorkspace.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorWorkspace.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorWorkspace.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorWorkspace.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorWorkspace.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CCompositorWorkspace.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CCompositorWorkspace.h&quot; -o &quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CCompositorWorkspace.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CCompositorWorkspace.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CCompositorWorkspace.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -462,40 +462,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CPackageOverview.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CPackageOverview.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CPackageOverview.h&quot; -o &quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CPackageOverview.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CPackageOverview.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CPackageOverview.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CPackageOverview.h&quot; -o &quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CPackageOverview.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CPackageOverview.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CPackageOverview.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CPackageOverview.h&quot; -o &quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CPackageOverview.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CPackageOverview.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CPackageOverview.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CPackageOverview.h&quot; -o &quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CPackageOverview.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CPackageOverview.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CPackageOverview.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -505,40 +505,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CRegistryView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CRegistryView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CRegistryView.h&quot; -o &quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CRegistryView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CRegistryView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CRegistryView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CRegistryView.h&quot; -o &quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CRegistryView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CRegistryView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CRegistryView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CRegistryView.h&quot; -o &quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CRegistryView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CRegistryView.h..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\generatedfiles&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\CRegistryView.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -DQT_QT3SUPPORT_LIB -DQT3_SUPPORT -DQTACF_DLL_EXPORT -I&quot;.\..\..\..\Include\iqt\VC7\Generated&quot; -I&quot;.\..\..\..\Include&quot; -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\Qt3Support&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CRegistryView.h&quot; -o &quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CRegistryView.h"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_CRegistryView.cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_CRegistryView.cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 		</Filter>
@@ -556,7 +556,7 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CComponentView.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CComponentView.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -586,7 +586,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CComponentView.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CComponentView.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -616,7 +616,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CComponentView.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CComponentView.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -646,7 +646,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CComponentView.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CComponentView.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -672,7 +672,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CCompositorApp.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CCompositorApp.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -698,7 +698,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CCompositorApp.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CCompositorApp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -728,7 +728,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CCompositorApp.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CCompositorApp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -758,7 +758,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CCompositorApp.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CCompositorApp.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -788,7 +788,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CCompositorAttributeEditor.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CCompositorAttributeEditor.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -818,7 +818,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CCompositorAttributeEditor.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CCompositorAttributeEditor.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -848,7 +848,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CCompositorAttributeEditor.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CCompositorAttributeEditor.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -878,7 +878,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CCompositorAttributeEditor.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CCompositorAttributeEditor.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -904,7 +904,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CCompositorMainWindow.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CCompositorMainWindow.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -930,7 +930,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CCompositorMainWindow.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CCompositorMainWindow.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -960,7 +960,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CCompositorMainWindow.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CCompositorMainWindow.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -990,7 +990,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CCompositorMainWindow.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CCompositorMainWindow.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1020,7 +1020,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CCompositorWorkspace.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CCompositorWorkspace.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1050,7 +1050,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CCompositorWorkspace.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CCompositorWorkspace.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1080,7 +1080,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CCompositorWorkspace.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CCompositorWorkspace.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1110,7 +1110,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CCompositorWorkspace.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CCompositorWorkspace.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -1136,7 +1136,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CPackageOverview.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CPackageOverview.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -1162,7 +1162,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CPackageOverview.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CPackageOverview.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1192,7 +1192,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CPackageOverview.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CPackageOverview.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1222,7 +1222,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CPackageOverview.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CPackageOverview.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1252,7 +1252,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_CRegistryView.cpp">
+				RelativePath="$(InputDir)\Generated\Debug\moc_CRegistryView.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1282,7 +1282,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoDebug\moc_CRegistryView.cpp">
+				RelativePath="$(InputDir)\Generated\NemoDebug\moc_CRegistryView.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1312,7 +1312,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\NemoRelease\moc_CRegistryView.cpp">
+				RelativePath="$(InputDir)\Generated\NemoRelease\moc_CRegistryView.cpp">
 				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
@@ -1342,7 +1342,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_CRegistryView.cpp">
+				RelativePath="$(InputDir)\Generated\Release\moc_CRegistryView.cpp">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -1378,40 +1378,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorAttributeEditor.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorAttributeEditor.h&quot;"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -1421,40 +1421,40 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoDebug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\GeneratedFiles\ui_CCompositorMainWindow.h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_CCompositorMainWindow.h&quot;"/>
 				</FileConfiguration>
 			</File>
 		</Filter>
@@ -1462,12 +1462,12 @@
 	<Globals>
 		<Global
 			Name="MocDir"
-			Value=".\GeneratedFiles\$(ConfigurationName)"/>
+			Value="$(InputDir)\Generated"/>
 		<Global
 			Name="QtVersion"
 			Value="4.2.3"/>
 		<Global
 			Name="UicDir"
-			Value=".\GeneratedFiles"/>
+			Value="$(InputDir)\Generated"/>
 	</Globals>
 </VisualStudioProject>

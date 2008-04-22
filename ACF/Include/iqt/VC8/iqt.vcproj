@@ -37,7 +37,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;$(InputDir)\Generated;$(InputDir)\Generated\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
@@ -95,7 +95,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;.\GeneratedFiles;.\GeneratedFiles\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/include&quot;;&quot;$(QTDIR)\include&quot;;$(InputDir)\Generated;$(InputDir)\Generated\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
 				PreprocessorDefinitions="QtCompLib_DLL_EXPORT;UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
@@ -187,7 +187,7 @@
 	<Globals>
 		<Global
 			Name="MocDir"
-			Value=".\GeneratedFiles\$(ConfigurationName)"
+			Value="$(InputDir)\Generated"
 		/>
 		<Global
 			Name="QtVersion"
@@ -195,7 +195,7 @@
 		/>
 		<Global
 			Name="UicDir"
-			Value=".\GeneratedFiles"
+			Value="$(InputDir)\Generated"
 		/>
 	</Globals>
 </VisualStudioProject>

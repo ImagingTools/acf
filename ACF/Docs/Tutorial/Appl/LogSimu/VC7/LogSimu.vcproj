@@ -157,20 +157,20 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe $(InputPath) -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 		</Filter>
@@ -183,7 +183,7 @@
 			Name="Generated Files"
 			Filter="moc;h;cpp">
 			<File
-				RelativePath="..\generatedfiles\moc_CLogClientGuiComp.cpp">
+				RelativePath="..\generated\moc_CLogClientGuiComp.cpp">
 			</File>
 		</Filter>
 		<Filter

@@ -13,7 +13,8 @@
 #include "imod/TSingleModelObserverBase.h"
 #include "imod/TModelWrap.h"
 
-#include "iqt/TDesignerGuiComponentBase.h"
+#include "iqt/TDesignerGuiCompBase.h"
+
 #include "iqt/Generated/ui_CLogGuiComp.h"
 
 
@@ -22,13 +23,13 @@ namespace iqt
 
 
 class CLogGuiComp:
-	public iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp>, 
+	public iqt::TDesignerGuiCompBase<Ui::CLogGuiComp>, 
 	public imod::TModelWrap<ibase::CMessageContainer>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiComponentBase<Ui::CLogGuiComp> BaseClass;
+	typedef iqt::TDesignerGuiCompBase<Ui::CLogGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CLogGuiComp)
 		I_REGISTER_INTERFACE(ibase::IMessageContainer)

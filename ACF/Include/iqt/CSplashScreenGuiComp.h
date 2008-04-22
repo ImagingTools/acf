@@ -8,7 +8,7 @@
 
 #include "icomp/TSingleAttribute.h"
 
-#include "iqt/TDesignerGuiComponentBase.h"
+#include "iqt/TDesignerGuiCompBase.h"
 
 #include "iqt/Generated/ui_CSplashScreenGuiComp.h"
 
@@ -17,10 +17,10 @@ namespace iqt
 {
 
 
-class CSplashScreenGuiComp: public TDesignerGuiComponentBase<Ui::CSplashScreenGuiComp, QSplashScreen>
+class CSplashScreenGuiComp: public TDesignerGuiCompBase<Ui::CSplashScreenGuiComp, QSplashScreen>
 {
 public:
-	typedef TDesignerGuiComponentBase<Ui::CSplashScreenGuiComp, QSplashScreen> BaseClass;
+	typedef TDesignerGuiCompBase<Ui::CSplashScreenGuiComp, QSplashScreen> BaseClass;
 
 	I_BEGIN_COMPONENT(CSplashScreenGuiComp)
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Version management for application", false, "Application")

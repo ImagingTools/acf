@@ -11,10 +11,11 @@ namespace iqt
 {
 
 
-/**	Base class for all Qt GUI componentes.
+/**
+	Base class for all Qt GUI componentes.
  */
 template <class UI, class WidgetType = QWidget>
-class TDesignerGuiComponentBase: public TGuiComponentBase<WidgetType>, public UI
+class TDesignerGuiCompBase: public TGuiComponentBase<WidgetType>, public UI
 {
 public:
 	typedef TGuiComponentBase<WidgetType> BaseClass;
@@ -33,7 +34,7 @@ protected:
 // reimplemented (iqt::CGuiComponentBase)
 
 template <class UI, class WidgetType>
-QWidget* TDesignerGuiComponentBase<UI, WidgetType>::InitWidgetToParent(QWidget* parentPtr)
+QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* parentPtr)
 {
 	I_ASSERT(!IsGuiCreated());
 
@@ -90,7 +91,7 @@ QWidget* TDesignerGuiComponentBase<UI, WidgetType>::InitWidgetToParent(QWidget* 
 // reimplemented (iqt::CGuiComponentBase)
 
 template <class UI, class WidgetType>
-void TDesignerGuiComponentBase<UI, WidgetType>::OnRetranslate()
+void TDesignerGuiCompBase<UI, WidgetType>::OnRetranslate()
 {
 	QWidget* widgetPtr = GetWidget();
 

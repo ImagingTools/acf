@@ -133,12 +133,12 @@
 	<Globals>
 		<Global
 			Name="MocDir"
-			Value=".\GeneratedFiles\$(ConfigurationName)"/>
+			Value="$(InputDir)\Generated"/>
 		<Global
 			Name="QtVersion"
 			Value="4.2.3"/>
 		<Global
 			Name="UicDir"
-			Value=".\GeneratedFiles"/>
+			Value="$(InputDir)\Generated"/>
 	</Globals>
 </VisualStudioProject>

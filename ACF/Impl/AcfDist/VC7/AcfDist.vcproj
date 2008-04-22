@@ -156,20 +156,20 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Mocing $(InputFileName)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\$(InputFileName)&quot; -o &quot;.\GeneratedFiles\moc_$(InputName).cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\$(InputFileName)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;$(InputFileName).h"
-						Outputs="&quot;.\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Mocing $(InputFileName)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;.\GeneratedFiles&quot; &quot;..\$(InputFileName)&quot; -o &quot;.\GeneratedFiles\moc_$(InputName).cpp&quot;
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\$(InputFileName)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;../$(InputFileName).h"
-						Outputs="&quot;.\GeneratedFiles\moc_$(InputName).cpp&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
 			</File>
 		</Filter>
@@ -183,20 +183,20 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;..\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;..\Generated\ui_$(InputName).h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;..\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;..\Generated\ui_$(InputName).h&quot;"/>
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>
 			</File>
 		</Filter>
@@ -205,10 +205,10 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath=".\generatedfiles\moc_CDistributeDialog.cpp">
+				RelativePath="..\generated\moc_CDistributeDialog.cpp">
 			</File>
 			<File
-				RelativePath=".\generatedfiles\qrc_AcfDist.cpp">
+				RelativePath="..\generated\qrc_AcfDist.cpp">
 			</File>
 			<File
 				RelativePath="..\generated\ui_CDistributeDialog.h">
@@ -226,20 +226,20 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing AcfDist.qrc..."
-						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;AcfDist&quot; -no-compress &quot;..\AcfDist.qrc&quot; -o .\GeneratedFiles\qrc_AcfDist.cpp
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;AcfDist&quot; -no-compress &quot;..\AcfDist.qrc&quot; -o $(InputDir)\Generated\qrc_AcfDist.cpp
 "
 						AdditionalDependencies="..\AcfDist.qrc;Resources/Icons/Logo.png"
-						Outputs=".\GeneratedFiles\qrc_AcfDist.cpp"/>
+						Outputs="$(InputDir)\Generated\qrc_AcfDist.cpp"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing AcfDist.qrc..."
-						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;AcfDist&quot; -no-compress &quot;..\AcfDist.qrc&quot; -o .\GeneratedFiles\qrc_AcfDist.cpp
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;AcfDist&quot; -no-compress &quot;..\AcfDist.qrc&quot; -o $(InputDir)\Generated\qrc_AcfDist.cpp
 "
 						AdditionalDependencies="..\AcfDist.qrc;Resources/Icons/Logo.png"
-						Outputs=".\GeneratedFiles\qrc_AcfDist.cpp"/>
+						Outputs="$(InputDir)\Generated\qrc_AcfDist.cpp"/>
 				</FileConfiguration>
 			</File>
 		</Filter>
