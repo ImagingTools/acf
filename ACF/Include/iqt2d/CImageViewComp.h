@@ -86,7 +86,6 @@ protected:
 
 private:
 	void InvalidateScene();
-	void CreateBackgroundPixmap();
 	void CreateContextMenu();
 	void ScaleView(double scaleFactor);
 
@@ -94,7 +93,6 @@ private:
 	QGraphicsScene* m_scenePtr;
 	CImageItem m_imageItem;
 	
-	QPixmap m_backgroundPixmap;
 	FitMode m_fitMode;
 
 	bool m_isFullScreenMode;

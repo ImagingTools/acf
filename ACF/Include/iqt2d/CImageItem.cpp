@@ -15,8 +15,8 @@ namespace iqt2d
 
 CImageItem::CImageItem() 
 {
-	addToGroup(&m_imageItem);
 	addToGroup(&m_frameItem);
+	addToGroup(&m_imageItem);
 }
 
 
@@ -52,36 +52,15 @@ void CImageItem::ImageItem::SetImage(const QImage& image)
 	setRect(0, 0, image.width(), image.height());
 	m_pixmap = QPixmap::fromImage(image, Qt::AutoColor);
 
-	setZValue(0);
+	setZValue(1);
 
 	update();
 }
 
 // protected methods of embedded class ImageItem
 
-void CImageItem::ImageItem::CreateBackgroundPixmap()
-{
-	m_backgroundPixmap = QPixmap(16,16);
-		
-	QPainter p(&m_backgroundPixmap);
-	p.fillRect(0, 0, 8, 8, QBrush(qRgb(200,200,200)));
-	p.fillRect(0, 8, 8, 8, QBrush(Qt::white));
-	p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
-	p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
-}
-
-
-
 void CImageItem::ImageItem::paint(QPainter* p, const QStyleOptionGraphicsItem* option, QWidget* /*widget*/)
 {
-	if (m_backgroundPixmap.isNull()){
-		CreateBackgroundPixmap();
-	}
-
-	QBrush backgroundBrush(m_backgroundPixmap);
-
-	p->fillRect(option->exposedRect, backgroundBrush);
-
 	p->drawPixmap(option->exposedRect, m_pixmap, option->exposedRect);
 }
 
@@ -98,12 +77,29 @@ int CImageItem::ImageItem::GetHeight() const
 }
 
 
+// protected methods of embedded class ImageFrame
+
+// reimplemented (QGraphicsItem)
+
 void CImageItem::ImageFrame::paint(QPainter* p, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
 {
 	QGraphicsScene* scenePtr = scene();
 	if (scenePtr == NULL){
 		return;
 	}
+
+	if (m_backgroundPixmap.isNull()){
+		CreateBackgroundPixmap();
+	}
+
+	p->save();
+	QRectF sceneRect = scenePtr->sceneRect();
+	sceneRect.setWidth(sceneRect.width() * p->matrix().m11());
+	sceneRect.setHeight(sceneRect.height() * p->matrix().m11());
+
+	p->scale(1.0 / p->matrix().m11(), 1.0 / p->matrix().m11());
+	p->drawTiledPixmap(sceneRect, m_backgroundPixmap);
+	p->restore();
 	
 	QList<QGraphicsView*> parentViews = scenePtr->views();
 	if (parentViews.count() == 0){
@@ -112,7 +108,7 @@ void CImageItem::ImageFrame::paint(QPainter* p, const QStyleOptionGraphicsItem* 
 
 	QGraphicsView* viewPtr = parentViews.at(0);
 	
-	QRectF sceneRect = scenePtr->sceneRect();
+	sceneRect = scenePtr->sceneRect();
 	QRectF viewRect = viewPtr->rect();
 
 	if (viewRect.contains(sceneRect)){
@@ -123,5 +119,20 @@ void CImageItem::ImageFrame::paint(QPainter* p, const QStyleOptionGraphicsItem* 
 }
 
 
+// private methods of embedded class ImageFrame
+
+void CImageItem::ImageFrame::CreateBackgroundPixmap()
+{
+	m_backgroundPixmap = QPixmap(16, 16);
+		
+	QPainter p(&m_backgroundPixmap);
+	p.fillRect(0, 0, 8, 8, QBrush(qRgb(200,200,200)));
+	p.fillRect(0, 8, 8, 8, QBrush(Qt::white));
+	p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
+	p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
+}
+
+
 } // namespace iqt2d
+
 

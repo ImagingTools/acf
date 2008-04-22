@@ -29,23 +29,24 @@ protected:
 		int GetHeight() const;
 
 	protected:
-		void CreateBackgroundPixmap();
-
 		// reimplemented (QGraphicsRectItem)
 		virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
 	private:
 		QPixmap m_pixmap;
-		QPixmap m_backgroundPixmap;
 	};
 
 	class ImageFrame: public QGraphicsRectItem
 	{
 	protected:
+		// reimplemented (QGraphicsRectItem)
 		virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
-	};
 
-private:
+	private:
+		void CreateBackgroundPixmap();
+
+		QPixmap m_backgroundPixmap;
+	};
 
 private:
 	ImageItem m_imageItem;

@@ -137,6 +137,8 @@ void CImageViewComp::OnFitToView()
 		return;
 	}
 
+//	viewPtr->fitInView(&m_imageItem, Qt::KeepAspectRatio);
+
 	double scaleX = viewPtr->width()  / (double)(m_imageItem.GetWidth());
 	double scaleY = viewPtr->height() / (double)(m_imageItem.GetHeight());
 	
@@ -190,7 +192,6 @@ const idoc::IHierarchicalCommand* CImageViewComp::GetCommands() const
 {
 	return &m_editorCommand;
 }
-
 
 
 // protected methods
@@ -266,6 +267,7 @@ void CImageViewComp::OnGuiCreated()
 	viewPtr->setScene(m_scenePtr);
 	viewPtr->setMouseTracking(true);
 	viewPtr->setDragMode(QGraphicsView::ScrollHandDrag);
+//	viewPtr->setCacheMode(QGraphicsView::CacheBackground);
 
 	m_scenePtr->addItem(&m_imageItem);
 
@@ -329,18 +331,6 @@ void CImageViewComp::InvalidateScene()
 	}
 	
 	viewPtr->centerOn(&m_imageItem);
-}
-
-
-void CImageViewComp::CreateBackgroundPixmap()
-{
-	m_backgroundPixmap = QPixmap(16,16);
-		
-	QPainter p(&m_backgroundPixmap);
-	p.fillRect(0, 0, 8, 8, QBrush(qRgb(200,200,200)));
-	p.fillRect(0, 8, 8, 8, QBrush(Qt::white));
-	p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
-	p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
 }
 
 
