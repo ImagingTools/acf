@@ -53,6 +53,8 @@ CWriteArchiveBase::CWriteArchiveBase(const IVersionInfo* versionInfoPtr)
 
 bool CWriteArchiveBase::SerializeAcfHeader()
 {
+	I_ASSERT(IsStoring());
+
 	bool retVal = BeginTag(s_headerTag);
 
 	IVersionInfo::VersionIds ids;
@@ -83,7 +85,7 @@ bool CWriteArchiveBase::SerializeAcfHeader()
 		retVal = retVal && EndTag(s_versionNumberTag);
 
 		retVal = retVal && BeginTag(s_versionDescriptionTag);
-		istd::CString& description = const_cast<istd::CString&>(m_versionInfoPtr->GetVersionIdDescription(id));
+		istd::CString description = m_versionInfoPtr->GetVersionIdDescription(id);
 		retVal = retVal && Process(description);
 		retVal = retVal && EndTag(s_versionDescriptionTag);
 

@@ -37,7 +37,7 @@ I_DWORD CReaderVersionInfo::GetVersion(int versionId) const
 }
 
 
-const istd::CString& CReaderVersionInfo::GetVersionIdDescription(int versionId) const
+istd::CString CReaderVersionInfo::GetVersionIdDescription(int versionId) const
 {
 	const VersionIdElement& element = GetVersionIdElement(versionId);
 

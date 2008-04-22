@@ -32,7 +32,7 @@ public:
 
 	// reimplemented (iser::IVersionInfo)
 	virtual I_DWORD GetVersion(int versionId) const;
-	virtual const istd::CString& GetVersionIdDescription(int versionId) const;
+	virtual istd::CString GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
 
 private:

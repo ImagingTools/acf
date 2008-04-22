@@ -26,14 +26,12 @@ void CSplashScreenGuiComp::OnGuiShown()
 	if (!acfVersionText.empty()){
 		AcfVersionLabel->setText(iqt::GetQString(acfVersionText));
 	}
-	AcfVersionDescriptionLabel->setVisible(!acfVersionText.empty());
-	AcfVersionLabel->setVisible(!acfVersionText.empty());
+	AcfVersionFrame->setVisible(!acfVersionText.empty());
 
 	if (!productVersionText.empty()){
 		VersionLabel->setText(iqt::GetQString(productVersionText));
 	}
-	VersionDescriptionLabel->setVisible(!productVersionText.empty());
-	VersionLabel->setVisible(!productVersionText.empty());
+	VersionFrame->setVisible(!productVersionText.empty());
 
 	if (m_productTypeAttrPtr.IsValid()){
 		ProductTypeLabel->setText(iqt::GetQString(*m_productTypeAttrPtr));

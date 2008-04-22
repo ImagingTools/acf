@@ -53,7 +53,7 @@ public:
 								For example version number of framework cann differ from application version.
 								@sa VersionId, GetVersion.
 	*/
-	virtual const istd::CString& GetVersionIdDescription(int versionId) const = 0;
+	virtual istd::CString GetVersionIdDescription(int versionId) const = 0;
 
 	/**
 		Get list of version ID's.

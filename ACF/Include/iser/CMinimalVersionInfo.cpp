@@ -51,7 +51,7 @@ I_DWORD CMinimalVersionInfo::GetVersion(int versionId) const
 }
 
 
-const istd::CString& CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
+istd::CString CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
 {
 	Versions::const_iterator iter = m_versions.find(versionId);
 	if (m_versions.find(versionId) != m_versions.end()){

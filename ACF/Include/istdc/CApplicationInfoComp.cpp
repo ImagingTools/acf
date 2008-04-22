@@ -23,7 +23,7 @@ istd::CString CApplicationInfoComp::GetApplicationPath() const
 
 istd::CString CApplicationInfoComp::EncodeVersionName(I_DWORD version, int /*versionId*/) const
 {
-	return istd::CString::FromNumber(version);
+	return istd::CString("(") + istd::CString::FromNumber(version) + ")";
 }
 
 
@@ -46,7 +46,7 @@ I_DWORD CApplicationInfoComp::GetVersion(int versionId) const
 }
 
 
-const istd::CString& CApplicationInfoComp::GetVersionIdDescription(int versionId) const
+istd::CString CApplicationInfoComp::GetVersionIdDescription(int versionId) const
 {
 	if (versionId < m_userVersionIdDescriptionsAttrPtr.GetCount()){
 		return m_userVersionIdDescriptionsAttrPtr[versionId];
