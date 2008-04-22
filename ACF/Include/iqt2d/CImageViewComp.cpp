@@ -205,7 +205,7 @@ void CImageViewComp::OnResize(QResizeEvent* /*event*/)
 
 void CImageViewComp::OnWheelEvent(QGraphicsSceneWheelEvent* event)
 {
-	ScaleView(pow((double)2, -event->delta() / 240.0));
+	ScaleView(pow((double)2, event->delta() / 240.0));
 }
 
 
@@ -273,9 +273,8 @@ void CImageViewComp::OnGuiCreated()
 	m_scenePtr->installEventFilter(this);
 
 	CreateContextMenu();
-	CreateBackgroundPixmap();
-
-	viewPtr->setBackgroundBrush(QBrush(m_backgroundPixmap));
+	
+	m_scenePtr->setBackgroundBrush(QBrush(Qt::lightGray));
 }
 
 

@@ -11,10 +11,12 @@ namespace iqt2d
 {
 
 
+// public methods
+
 CImageItem::CImageItem() 
 {
 	addToGroup(&m_imageItem);
-//	addToGroup(&m_frameItem);
+	addToGroup(&m_frameItem);
 }
 
 
@@ -43,6 +45,8 @@ int CImageItem::GetHeight() const
 }
 
 
+// public methods of embedded class ImageItem
+
 void CImageItem::ImageItem::SetImage(const QImage& image)
 {
 	setRect(0, 0, image.width(), image.height());
@@ -53,9 +57,31 @@ void CImageItem::ImageItem::SetImage(const QImage& image)
 	update();
 }
 
+// protected methods of embedded class ImageItem
+
+void CImageItem::ImageItem::CreateBackgroundPixmap()
+{
+	m_backgroundPixmap = QPixmap(16,16);
+		
+	QPainter p(&m_backgroundPixmap);
+	p.fillRect(0, 0, 8, 8, QBrush(qRgb(200,200,200)));
+	p.fillRect(0, 8, 8, 8, QBrush(Qt::white));
+	p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
+	p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
+}
+
+
 
 void CImageItem::ImageItem::paint(QPainter* p, const QStyleOptionGraphicsItem* option, QWidget* /*widget*/)
 {
+	if (m_backgroundPixmap.isNull()){
+		CreateBackgroundPixmap();
+	}
+
+	QBrush backgroundBrush(m_backgroundPixmap);
+
+	p->fillRect(option->exposedRect, backgroundBrush);
+
 	p->drawPixmap(option->exposedRect, m_pixmap, option->exposedRect);
 }
 
