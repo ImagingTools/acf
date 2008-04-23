@@ -38,12 +38,19 @@ public:
 
 	I_BEGIN_COMPONENT(CImageViewComp)
 		I_REGISTER_INTERFACE(imod::IObserver)
+		I_ASSIGN(m_allowWidgetResizeAttrPtr, "AllowWidgetResize", "Allow resize of QWidet object (should be disabled if this GUI size is managed by layout)", true, false)
 	I_END_COMPONENT
 
 	enum FitMode{
 		NoFit,
 		ScaleToFit
 	};
+
+	CImageViewComp();
+	virtual ~CImageViewComp();
+
+	void SetFitMode(FitMode fitMode);
+	void SetFullScreenMode(bool isFullScreen);
 
 	// reimplemented (iqt::TGuiObserverWrap)
 	virtual void UpdateModel() const;
@@ -52,11 +59,8 @@ public:
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
-	CImageViewComp();
-	virtual ~CImageViewComp();
-
-	void SetFitMode(FitMode fitMode);
-	void SetFullScreenMode(bool isFullScreen);
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 public slots:
 	void SetZoom(double scaleFactor);
@@ -99,6 +103,8 @@ private:
 	bool m_isZoomIgnored;
 
 	iqt::CHierarchicalCommand m_editorCommand;
+
+	I_ATTR(bool, m_allowWidgetResizeAttrPtr);
 };
 
 

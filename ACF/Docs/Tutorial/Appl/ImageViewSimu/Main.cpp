@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentsFactory<QtPck::Bitmap> modelFactoryComp;
 	icomp::TSimComponentsFactory<QtPck::ImageView> viewFactoryComp;
+	viewFactoryComp.SetBoolAttr("AllowWidgetResize", true);
 
 	icomp::TSimComponentWrap<QtPck::BitmapLoader> bitmapLoaderComp;
 	bitmapLoaderComp.InitComponent();

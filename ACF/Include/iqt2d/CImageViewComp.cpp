@@ -24,8 +24,6 @@ CImageViewComp::CImageViewComp()
 	m_scenePtr = new QGraphicsScene;
 
 	m_scenePtr->setFocus();
-
-	CreateContextMenu();
 }
 
 
@@ -59,6 +57,14 @@ void CImageViewComp::SetFitMode(FitMode mode)
 void CImageViewComp::SetFullScreenMode(bool fullScreenMode)
 {
 	m_isFullScreenMode = fullScreenMode;
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CImageViewComp::OnComponentCreated()
+{
+	CreateContextMenu();
 }
 
 
@@ -341,9 +347,12 @@ void CImageViewComp::CreateContextMenu()
 	connect(fitToViewCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToView()));
 	imageMenuPtr->InsertChild(fitToViewCommandPtr, true);
 
-	iqt::CHierarchicalCommand* fitToImageCommandPtr = new iqt::CHierarchicalCommand("&Fit View To Image");
-	connect(fitToImageCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToImage()));
-	imageMenuPtr->InsertChild(fitToImageCommandPtr, true);
+	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
+	if (*m_allowWidgetResizeAttrPtr){
+		iqt::CHierarchicalCommand* fitToImageCommandPtr = new iqt::CHierarchicalCommand("&Fit View To Image");
+		connect(fitToImageCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToImage()));
+		imageMenuPtr->InsertChild(fitToImageCommandPtr, true);
+	}
 
 	m_editorCommand.InsertChild(imageMenuPtr, true);
 }
