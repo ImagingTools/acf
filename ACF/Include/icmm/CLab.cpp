@@ -8,6 +8,8 @@ namespace icmm
 {
 
 
+// public methods
+
 bool CLab::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;

@@ -8,6 +8,8 @@ namespace icmm
 {
 
 
+// public methods
+
 CVarColor::CVarColor()
 {
 }

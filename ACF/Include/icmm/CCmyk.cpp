@@ -8,6 +8,8 @@ namespace icmm
 {
 
 
+// public methods
+
 bool CCmyk::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;

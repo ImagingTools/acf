@@ -132,10 +132,25 @@
 				RelativePath="..\CCmyk.cpp">
 			</File>
 			<File
+				RelativePath="..\CCmykToRgbTransformation.cpp">
+			</File>
+			<File
+				RelativePath="..\CColorTransformationProvider.cpp">
+			</File>
+			<File
+				RelativePath="..\CHsv.cpp">
+			</File>
+			<File
+				RelativePath="..\CHsvToRgbTransformation.cpp">
+			</File>
+			<File
 				RelativePath="..\CLab.cpp">
 			</File>
 			<File
 				RelativePath="..\CRgb.cpp">
+			</File>
+			<File
+				RelativePath="..\CRgbToCmykTransformation.cpp">
 			</File>
 			<File
 				RelativePath="..\CVarColor.cpp">
@@ -151,16 +166,34 @@
 				RelativePath="..\CCmyk.h">
 			</File>
 			<File
+				RelativePath="..\CCmykToRgbTransformation.h">
+			</File>
+			<File
+				RelativePath="..\CColorTransformationProvider.h">
+			</File>
+			<File
+				RelativePath="..\CHsv.h">
+			</File>
+			<File
+				RelativePath="..\CHsvToRgbTransformation.h">
+			</File>
+			<File
 				RelativePath="..\CLab.h">
 			</File>
 			<File
 				RelativePath="..\CRgb.h">
 			</File>
 			<File
+				RelativePath="..\CRgbToCmykTransformation.h">
+			</File>
+			<File
 				RelativePath="..\CVarColor.h">
 			</File>
 			<File
 				RelativePath="..\icmm.h">
+			</File>
+			<File
+				RelativePath="..\IColorTransformation.h">
 			</File>
 			<File
 				RelativePath="..\TComposedColor.h">

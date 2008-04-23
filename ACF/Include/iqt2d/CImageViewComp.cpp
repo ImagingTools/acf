@@ -60,14 +60,6 @@ void CImageViewComp::SetFullScreenMode(bool fullScreenMode)
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CImageViewComp::OnComponentCreated()
-{
-	CreateContextMenu();
-}
-
-
 // public slots
 
 void CImageViewComp::SetZoom(double scaleFactor)
@@ -144,8 +136,6 @@ void CImageViewComp::OnFitToView()
 		return;
 	}
 
-//	viewPtr->fitInView(&m_imageItem, Qt::KeepAspectRatio);
-
 	double scaleX = viewPtr->width()  / (double)(m_imageItem.GetWidth());
 	double scaleY = viewPtr->height() / (double)(m_imageItem.GetHeight());
 	
@@ -198,6 +188,14 @@ void CImageViewComp::UpdateEditor()
 const idoc::IHierarchicalCommand* CImageViewComp::GetCommands() const
 {
 	return &m_editorCommand;
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CImageViewComp::OnComponentCreated()
+{
+	CreateContextMenu();
 }
 
 
@@ -274,7 +272,7 @@ void CImageViewComp::OnGuiCreated()
 	viewPtr->setScene(m_scenePtr);
 	viewPtr->setMouseTracking(true);
 	viewPtr->setDragMode(QGraphicsView::ScrollHandDrag);
-//	viewPtr->setCacheMode(QGraphicsView::CacheBackground);
+	viewPtr->setCacheMode(QGraphicsView::CacheBackground);
 
 	m_scenePtr->addItem(&m_imageItem);
 
@@ -358,7 +356,6 @@ void CImageViewComp::CreateContextMenu()
 }
 
 
-
 void CImageViewComp::ScaleView(double scaleFactor)
 {
 	QGraphicsView* viewPtr = GetQtWidget();
@@ -378,3 +375,4 @@ void CImageViewComp::ScaleView(double scaleFactor)
 
 
 } // namespace iqt2d
+

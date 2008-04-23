@@ -71,9 +71,6 @@ public slots:
 	void OnFitToView();
 	void OnFitToImage();
 	
-signals:
-	void zoomChanged(double);
-	
 protected:
 	virtual void OnResize(QResizeEvent* event);
 	virtual void OnWheelEvent(QGraphicsSceneWheelEvent* event);
@@ -92,6 +89,9 @@ private:
 	void InvalidateScene();
 	void CreateContextMenu();
 	void ScaleView(double scaleFactor);
+
+signals:
+	void zoomChanged(double);
 
 private:
 	QGraphicsScene* m_scenePtr;
