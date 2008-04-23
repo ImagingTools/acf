@@ -107,7 +107,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "istdc", "..\..\..\Include\i
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iqmain", "..\..\..\Include\iqmain\VC7\iqmain.vcproj", "{BB74CB53-2F9B-44E3-BE32-CBA4E6325C65}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iqtdoc", "..\..\..\Include\iqtdoc\VC7\iqtdoc.vcproj", "{BB74CB53-2F9B-44E3-BE32-CBA4E6325C65}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
