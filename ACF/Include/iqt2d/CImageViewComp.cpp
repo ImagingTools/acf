@@ -19,7 +19,8 @@ namespace iqt2d
 
 CImageViewComp::CImageViewComp()
 	:m_isFullScreenMode(true),
-	m_isZoomIgnored(false)
+	m_isZoomIgnored(false),
+	m_fitToViewCommand("&Fit Image To View")
 {
 	m_scenePtr = new QGraphicsScene;
 
@@ -52,8 +53,6 @@ void CImageViewComp::SetFitMode(FitMode mode)
 		viewPtr->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	}
 }
-
-
 void CImageViewComp::SetFullScreenMode(bool fullScreenMode)
 {
 	m_isFullScreenMode = fullScreenMode;
@@ -88,7 +87,6 @@ void CImageViewComp::SetZoom(double scaleFactor)
 	emit zoomChanged(scaleFactor);
 
 	m_isZoomIgnored = false;
-
 }
 
 
@@ -136,7 +134,7 @@ void CImageViewComp::OnFitToView()
 		return;
 	}
 
-	double scaleX = viewPtr->width()  / (double)(m_imageItem.GetWidth());
+	double scaleX = viewPtr->width() / (double)(m_imageItem.GetWidth());
 	double scaleY = viewPtr->height() / (double)(m_imageItem.GetHeight());
 	
 	double newScale = (scaleX >=scaleY) ? scaleY : scaleX;
@@ -165,6 +163,19 @@ void CImageViewComp::OnFitToImage()
 void CImageViewComp::OnResetScale()
 {
 	SetZoom(1.0);
+}
+
+
+void CImageViewComp::OnAutoFit(bool isAutoScale)
+{
+	if (isAutoScale){
+		SetFitMode(ScaleToFit);
+	}
+	else{
+		SetFitMode(NoFit);
+	}
+
+	m_fitToViewCommand.setEnabled(!isAutoScale);
 }
 
 
@@ -348,9 +359,13 @@ void CImageViewComp::CreateContextMenu()
 {
 	iqt::CHierarchicalCommand* imageMenuPtr = new iqt::CHierarchicalCommand("&Image");
 
-	iqt::CHierarchicalCommand* fitToViewCommandPtr = new iqt::CHierarchicalCommand("&Fit Image To View");
-	connect(fitToViewCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToView()));
-	imageMenuPtr->InsertChild(fitToViewCommandPtr, true);
+	iqt::CHierarchicalCommand* autoFitToViewCommandPtr = new iqt::CHierarchicalCommand("&Auto Fit");
+	autoFitToViewCommandPtr->SetStaticFlags(iqt::CHierarchicalCommand::CF_ONOFF | iqt::CHierarchicalCommand::CF_GLOBAL_MENU);
+	connect(autoFitToViewCommandPtr, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
+	imageMenuPtr->InsertChild(autoFitToViewCommandPtr, true);
+
+	connect(&m_fitToViewCommand, SIGNAL( activated()), this, SLOT(OnFitToView()));
+	imageMenuPtr->InsertChild(&m_fitToViewCommand);
 
 	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
 	if (*m_allowWidgetResizeAttrPtr){

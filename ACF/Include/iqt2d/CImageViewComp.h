@@ -71,6 +71,7 @@ public slots:
 	void OnFitToView();
 	void OnFitToImage();
 	void OnResetScale();
+	void OnAutoFit(bool isAutoScale);
 	
 protected:
 	virtual void OnResize(QResizeEvent* event);
@@ -104,6 +105,7 @@ private:
 	bool m_isZoomIgnored;
 
 	iqt::CHierarchicalCommand m_editorCommand;
+	iqt::CHierarchicalCommand m_fitToViewCommand;
 
 	I_ATTR(bool, m_allowWidgetResizeAttrPtr);
 };
