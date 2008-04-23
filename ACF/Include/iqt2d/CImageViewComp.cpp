@@ -24,13 +24,14 @@ CImageViewComp::CImageViewComp()
 	m_scenePtr = new QGraphicsScene;
 
 	m_scenePtr->setFocus();
+
+	CreateContextMenu();
 }
 
 
 CImageViewComp::~CImageViewComp() 
 {
 }
-
 
 
 void CImageViewComp::SetFitMode(FitMode mode)
@@ -273,8 +274,6 @@ void CImageViewComp::OnGuiCreated()
 
 	viewPtr->installEventFilter(this);
 	m_scenePtr->installEventFilter(this);
-
-	CreateContextMenu();
 	
 	m_scenePtr->setBackgroundBrush(QBrush(Qt::lightGray));
 }
