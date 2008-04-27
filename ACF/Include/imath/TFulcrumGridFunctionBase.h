@@ -396,6 +396,8 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 
 	bool isStoring = archive.IsStoring();
 
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	int dimensionsCount = m_fulcrums.GetDimensionsCount();
 	I_ASSERT(dimensionsCount == int(m_layers.size()));
 

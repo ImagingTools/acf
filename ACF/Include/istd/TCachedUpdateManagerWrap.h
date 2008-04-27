@@ -83,7 +83,7 @@ inline bool TCachedUpdateManagerWrap<Base>::CalculateCache(int /*changeFlags*/)
 
 template <class Base>
 TCachedUpdateManagerWrap<Base>::TCachedUpdateManagerWrap()
-:	m_isCacheValid(true), m_cumulatedFlags(0)
+:	m_isCacheValid(false), m_cumulatedFlags(0)
 {
 }
 
