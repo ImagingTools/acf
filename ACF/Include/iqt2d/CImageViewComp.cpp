@@ -194,7 +194,7 @@ void CImageViewComp::UpdateEditor()
 		iqt::CBitmap* bitmapPtr = dynamic_cast<iqt::CBitmap*>(GetObjectPtr());
 
 		if (bitmapPtr != NULL){
-			m_imageItem.SetImage(*bitmapPtr);
+			m_imageItem.SetImage(bitmapPtr->GetQImage());
 
 			InvalidateScene();
 		}

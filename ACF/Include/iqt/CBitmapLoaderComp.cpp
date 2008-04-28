@@ -2,12 +2,13 @@
 
 
 // Qt includes
-#include <QImage>
 #include <QFileInfo>
 #include <QByteArray>
 #include <QImageReader>
 
 #include "istd/TChangeNotifier.h"
+
+#include "iqt/CBitmap.h"
 
 
 namespace iqt
@@ -22,7 +23,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 			bool forLoading,
 			bool forSaving) const
 {
-	if ((dataObjectPtr != NULL) && (dynamic_cast<const QImage*>(dataObjectPtr) == NULL)){
+	if ((dataObjectPtr != NULL) && (dynamic_cast<const CBitmap*>(dataObjectPtr) == NULL)){
 		return false;
 	}
 
@@ -45,13 +46,15 @@ bool CBitmapLoaderComp::IsOperationSupported(
 
 int CBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
 {
-	QImage* imagePtr = dynamic_cast<QImage*>(&data);
+	CBitmap* bitmapPtr = dynamic_cast<CBitmap*>(&data);
 
-	if (imagePtr != NULL){
+	if (bitmapPtr != NULL){
 		istd::CChangeNotifier notifier(&data);
 
-		if (imagePtr->load(iqt::GetQString(filePath))){
+		QImage image;
+		if (image.load(iqt::GetQString(filePath))){
 			m_lastLoadFileName = filePath;
+			bitmapPtr->CopyImageFrom(image);
 
 			return StateOk;
 		}
@@ -63,12 +66,15 @@ int CBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString
 
 int CBitmapLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
 {
-	const QImage* imagePtr = dynamic_cast<const QImage*>(&data);
+	const CBitmap* bitmapPtr = dynamic_cast<const CBitmap*>(&data);
 
-	if ((imagePtr != NULL) && imagePtr->save(iqt::GetQString(filePath))){
-		m_lastSaveFileName = filePath;
+	if (bitmapPtr != NULL){
+		const QImage& image = bitmapPtr->GetQImage();
+		if (image.save(iqt::GetQString(filePath))){
+			m_lastSaveFileName = filePath;
 
-		return StateOk;
+			return StateOk;
+		}
 	}
 
 	return StateFailed;

@@ -17,8 +17,22 @@ CBitmap::CBitmap()
 
 
 CBitmap::CBitmap(const CBitmap& bitmap)
-:	BaseClass(bitmap)
+:	BaseClass(bitmap), m_image(bitmap.m_image)
 {
+}
+
+
+const QImage& CBitmap::GetQImage() const
+{
+	return m_image;
+}
+
+
+bool CBitmap::CopyImageFrom(const QImage& image)
+{
+	m_externalBuffer.Reset();
+
+	return SetQImage(image);
 }
 
 
@@ -45,7 +59,7 @@ bool CBitmap::CreateBitmap(const istd::CIndex2d& size, void* dataPtr, bool relea
 	if (imageFormat != QImage::Format_Invalid){
 		QImage image((I_BYTE*)dataPtr, size.GetX(), size.GetY(), imageFormat);
 		if ((linesDifference != 0) && (linesDifference != image.scanLine(1) - image.scanLine(0))){
-			return false;
+			return false;	// requested format doesnt fit to internal Qt bitmap representation
 		}
 
 		m_externalBuffer.SetPtr((I_BYTE*)dataPtr, releaseFlag);
@@ -59,7 +73,7 @@ bool CBitmap::CreateBitmap(const istd::CIndex2d& size, void* dataPtr, bool relea
 
 int CBitmap::GetLinesDifference() const
 {
-	return scanLine(1) - scanLine(0);
+	return m_image.scanLine(1) - m_image.scanLine(0);
 }
 
 
@@ -74,7 +88,7 @@ const void* CBitmap::GetLinePtr(int positionY) const
 	I_ASSERT(positionY >= 0);
 	I_ASSERT(positionY < GetImageSize().GetY());
 
-	return scanLine(positionY);
+	return m_image.scanLine(positionY);
 }
 
 
@@ -83,7 +97,7 @@ void* CBitmap::GetLinePtr(int positionY)
 	I_ASSERT(positionY >= 0);
 	I_ASSERT(positionY < GetImageSize().GetY());
 
-	return scanLine(positionY);
+	return m_image.scanLine(positionY);
 }
 
 
@@ -91,13 +105,13 @@ void* CBitmap::GetLinePtr(int positionY)
 
 istd::CIndex2d CBitmap::GetImageSize() const
 {
-	return GetCIndex2d(size());
+	return GetCIndex2d(m_image.size());
 }
 
 
 int CBitmap::GetComponentsCount() const
 {
-	switch (BaseClass::format()){
+	switch (m_image.format()){
 	case QImage::Format_Indexed8:
 		return 1;
 
@@ -118,7 +132,7 @@ bool CBitmap::CopyImageFrom(const IRasterImage& image)
 	if (bitmapPtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
-		BaseClass::operator=(*bitmapPtr);
+		m_image = bitmapPtr->GetQImage();
 
 		return true;
 	}
@@ -151,19 +165,25 @@ QImage::Format CBitmap::CalcQtFormat(int pixelBitsCount, int componentsCount) co
 
 bool CBitmap::SetQImage(const QImage& image)
 {
-	BaseClass::operator=(image);
+	m_image = image;
 
-	if (image.format() == QImage::Format_Indexed8){
+	if (m_image.format() == QImage::Format_Indexed8){
 		QVector<QRgb> colorTable(256);
 
 		for (int colorIndex = 0; colorIndex < 256; ++colorIndex){
 			colorTable[colorIndex] = ::qRgb(colorIndex, colorIndex, colorIndex);
 		}
 
-		BaseClass::setColorTable(colorTable);
+		m_image.setColorTable(colorTable);
 	}
 
 	return true;
+}
+
+
+QImage& CBitmap::GetQImageRef()
+{
+	return m_image;
 }
 
 

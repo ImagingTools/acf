@@ -19,14 +19,16 @@ namespace iqt
 /**
 	Bitmap implementation based on Qt QImage.
 */
-class CBitmap: public QImage, public iimg::CBitmapBase
+class CBitmap: public iimg::CBitmapBase
 {
 public:
-	typedef QImage BaseClass;
-	typedef iimg::CBitmapBase BaseClass2;
+	typedef iimg::CBitmapBase BaseClass;
 
 	CBitmap();
 	CBitmap(const CBitmap& bitmap);
+
+	virtual const QImage& GetQImage() const;
+	virtual bool CopyImageFrom(const QImage& image);
 
 	// reimplemented (iimg::IBitmap)
 	virtual bool CreateBitmap(const istd::CIndex2d& size, int pixelBitsCount = 8, int componentsCount = 1);
@@ -45,8 +47,11 @@ protected:
 	QImage::Format CalcQtFormat(int pixelBitsCount, int componentsCount) const;
 	bool SetQImage(const QImage& image);
 
+	virtual QImage& GetQImageRef();
+
 private:
 	istd::TOptDelPtr<I_BYTE, true> m_externalBuffer;
+	QImage m_image;
 };
 
 
