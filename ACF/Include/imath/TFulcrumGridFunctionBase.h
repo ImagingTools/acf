@@ -255,6 +255,8 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetFulcrumPosition(co
 	int layersCount = int(m_layers.size());
 	I_ASSERT(layersCount <= index.GetDimensionsCount());
 
+	result.SetElementsCount(layersCount);
+
 	for (int i = 0; i < layersCount; ++i){
 		const LayerPositions& positions = m_layers[i];
 
