@@ -86,7 +86,8 @@ inline double TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetVa
 template <class Argument, class Result, class Fulcrums, class Degree>
 inline double TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetDerivativeKernelAt(double alpha)
 {
-	return alpha * alpha * alpha - 2 * alpha * alpha + alpha;
+	double beta = 1 - alpha;
+	return alpha * beta * beta;
 }
 
 
@@ -219,10 +220,10 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 			++indexElement;
 
-			double secondDerivativeFactor = GetDerivativeKernelAt(1.0 - alpha) * layersDistance;
+			double secondDerivativeFactor = -GetDerivativeKernelAt(1.0 - alpha) * layersDistance;
 
 			Result secondDerivative;
-			if (secondDerivativeFactor > I_EPSILON){
+			if (secondDerivativeFactor < -I_EPSILON){
 				CalcRecursiveValueAt(argument, dimension - 1, sizes, index, derivativeDegree, secondDerivative);
 			}
 			else{
