@@ -9,6 +9,7 @@
 
 #include "imath/TIValueManip.h"
 #include "imath/TVector.h"
+#include "imath/TVarVector.h"
 
 #include "icmm/icmm.h"
 
@@ -25,6 +26,10 @@ class TComposedColor: public imath::TVector<Size>, public iser::ISerializable
 {
 public:
 	typedef imath::TVector<Size> BaseClass;
+
+	TComposedColor();
+	TComposedColor(const BaseClass& value);
+	explicit TComposedColor(const imath::TVarVector<double>& vector);
 
 	/**
 		Get color after components value rounding with specified precision.
@@ -88,6 +93,33 @@ public:
 
 
 // inline methods
+
+template <int Size>
+inline TComposedColor<Size>::TComposedColor()
+{
+}
+
+
+template <int Size>
+inline TComposedColor<Size>::TComposedColor(const BaseClass& value)
+:	BaseClass(value)
+{
+}
+
+
+template <int Size>
+inline TComposedColor<Size>::TComposedColor(const imath::TVarVector<double>& vector)
+{
+	int commonSize = istd::Min(vector.GetElementsCount(), Size);
+	for (int copyIndex = 0; copyIndex < commonSize; ++copyIndex){
+		m_elements[copyIndex] = vector[copyIndex];
+	}
+
+	for (int resetIndex = commonSize; resetIndex < Size; ++resetIndex){
+		m_elements[resetIndex] = 0.0;
+	}
+}
+
 
 template <int Size>
 inline bool TComposedColor<Size>::IsSimilar(const TComposedColor<Size>& color, double tolerance) const

@@ -113,6 +113,10 @@ public:
 
 	bool operator==(const TVector<Size, Element>& vector) const;
 	bool operator!=(const TVector<Size, Element>& vector) const;
+	bool operator<(const TVector<Size, Element>& vector) const;
+	bool operator>(const TVector<Size, Element>& vector) const;
+	bool operator<=(const TVector<Size, Element>& vector) const;
+	bool operator>=(const TVector<Size, Element>& vector) const;
 
 	TVector<Size, Element> operator-() const;
 
@@ -287,6 +291,70 @@ template <int Size, class Element>
 inline bool TVector<Size, Element>::operator!=(const TVector<Size, Element>& vector) const
 {
 	return !operator==(vector);
+}
+
+
+template <int Size, class Element>
+bool TVector<Size, Element>::operator<(const TVector<Size, Element>& vector) const
+{
+	for (int i = 0; i < Size; ++i){
+		if (m_elements[i] > vector.m_elements[i]){
+			return false;
+		}
+		else if (m_elements[i] < vector.m_elements[i]){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+template <int Size, class Element>
+bool TVector<Size, Element>::operator>(const TVector<Size, Element>& vector) const
+{
+	for (int i = 0; i < Size; ++i){
+		if (m_elements[i] > vector.m_elements[i]){
+			return true;
+		}
+		else if (m_elements[i] < vector.m_elements[i]){
+			return false;
+		}
+	}
+
+	return false;
+}
+
+
+template <int Size, class Element>
+bool TVector<Size, Element>::operator<=(const TVector<Size, Element>& vector) const
+{
+	for (int i = 0; i < Size; ++i){
+		if (m_elements[i] > vector.m_elements[i]){
+			return false;
+		}
+		else if (m_elements[i] < vector.m_elements[i]){
+			return true;
+		}
+	}
+
+	return true;
+}
+
+
+template <int Size, class Element>
+bool TVector<Size, Element>::operator>=(const TVector<Size, Element>& vector) const
+{
+	for (int i = 0; i < Size; ++i){
+		if (m_elements[i] > vector.m_elements[i]){
+			return true;
+		}
+		else if (m_elements[i] < vector.m_elements[i]){
+			return false;
+		}
+	}
+
+	return true;
 }
 
 

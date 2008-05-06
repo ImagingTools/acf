@@ -15,10 +15,13 @@ namespace istd
 	Binder of two istd::IChangeable implementations
 	\sa CChangeDelegator
 */
-template <class BaseClass, class BaseClass2>
-class TChangeBinder: public BaseClass, public BaseClass2
+template <class Base, class Base2>
+class TChangeBinder: public Base, public Base2
 {
 public:
+	typedef Base BaseClass;
+	typedef Base2 BaseClass2;
+
 	// pseudo-reimplemented (istd::IChangeable)
 	virtual void BeginChanges(int changeFlags = 0, istd::IPolymorphic* changeParamsPtr = NULL);
 	virtual void EndChanges(int changeFlags = 0, istd::IPolymorphic* changeParamsPtr = NULL);
@@ -27,19 +30,19 @@ public:
 
 // pseudo-reimplemented (istd::IChangeable)
 
-template <class BaseClass, class BaseClass2>
-void TChangeBinder<BaseClass, BaseClass2>::BeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+template <class Base, class Base2>
+void TChangeBinder<Base, Base2>::BeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
-	BaseClass::BeginChanges(changeFlags, changeParamsPtr);
-	BaseClass2::BeginChanges(changeFlags, changeParamsPtr);
+	Base::BeginChanges(changeFlags, changeParamsPtr);
+	Base2::BeginChanges(changeFlags, changeParamsPtr);
 }
 
 
-template <class BaseClass, class BaseClass2>
-void TChangeBinder<BaseClass, BaseClass2>::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+template <class Base, class Base2>
+void TChangeBinder<Base, Base2>::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
-	BaseClass::EndChanges(changeFlags, changeParamsPtr);
-	BaseClass2::EndChanges(changeFlags, changeParamsPtr);
+	Base::EndChanges(changeFlags, changeParamsPtr);
+	Base2::EndChanges(changeFlags, changeParamsPtr);
 }
 
 

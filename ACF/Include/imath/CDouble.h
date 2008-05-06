@@ -16,11 +16,13 @@ namespace imath
 /**
 	Simple wrapper of real value represented as double type.
 */
-class CDouble: public imath::TVector<1>
+class CDouble: public TVector<1>
 {
 public:
+	typedef TVector<1> BaseClass;
+
 	CDouble(double value = 0.0);
-	CDouble(const CDouble& value);
+	CDouble(const BaseClass& value);
 
 	/**
 		Get rounded value.
@@ -95,6 +97,12 @@ public:
 inline CDouble::CDouble(double value)
 {
 	SetElement(0, value);
+}
+
+
+inline CDouble::CDouble(const TVector<1>& value)
+:	BaseClass(value)
+{
 }
 
 
