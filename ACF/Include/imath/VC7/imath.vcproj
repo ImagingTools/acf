@@ -158,6 +158,9 @@
 				RelativePath="..\imath.h">
 			</File>
 			<File
+				RelativePath="..\TFastVector.h">
+			</File>
+			<File
 				RelativePath="..\TFulcrumGridFunctionBase.h">
 			</File>
 			<File

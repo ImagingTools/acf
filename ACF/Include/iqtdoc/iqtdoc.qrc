@@ -1,6 +1,18 @@
 <RCC>
     <qresource prefix="/Icons" >
 		<file alias = "acfLogo">../../Docs/Images/Logo/Logo_64x64.png</file>
+
+        <file alias = "new">Resources/Icons/document_128.png</file>
+        <file alias = "open">Resources/Icons/folder_128.png</file>
+        <file alias = "save">Resources/Icons/diskette_128.png</file>
+        <file alias = "exit">Resources/Icons/exit.png</file>
+
+        <file alias = "undo">Resources/Icons/reload_left_128.png</file>
+        <file alias = "redo">Resources/Icons/reload_128.png</file>
+        <file alias = "about">Resources/Icons/info_128.png</file>
+
+        <file alias = "snap">Resources/Icons/camera_128.png</file>
+
         <file alias = "add">Resources/Icons/add_128.png</file>
         <file alias = "administrator">Resources/Icons/administrator_128.png</file>
         <file alias = "attach">Resources/Icons/attach_128.png</file>
@@ -8,7 +20,6 @@
         <file alias = "book">Resources/Icons/book_128.png</file>
         <file alias = "calculator">Resources/Icons/calculator_128.png</file>
         <file alias = "calendar">Resources/Icons/calendar_128.png</file>
-        <file alias = "camera">Resources/Icons/camera_128.png</file>
         <file alias = "cancel">Resources/Icons/cancel_128.png</file>
         <file alias = "chat">Resources/Icons/chat_128.png</file>
         <file alias = "clock">Resources/Icons/clock_128.png</file>
@@ -16,17 +27,12 @@
         <file alias = "close_b">Resources/Icons/close_b_128.png</file>
         <file alias = "copy">Resources/Icons/copy_128.png</file>
         <file alias = "delete">Resources/Icons/delete_128.png</file>
-        <file alias = "diskette">Resources/Icons/diskette_128.png</file>
-        <file alias = "document">Resources/Icons/document_128.png</file>
         <file alias = "door">Resources/Icons/door_128.png</file>
-        <file alias = "exit">Resources/Icons/exit.png</file>
         <file alias = "fast_forward">Resources/Icons/fast_forward_128.png</file>
         <file alias = "first">Resources/Icons/first_128.png</file>
-        <file alias = "folder">Resources/Icons/folder_128.png</file>
         <file alias = "group">Resources/Icons/group_128.png</file>
         <file alias = "hand">Resources/Icons/hand_128.png</file>
         <file alias = "home">Resources/Icons/home_128.png</file>
-        <file alias = "info">Resources/Icons/info_128.png</file>
         <file alias = "lamp">Resources/Icons/lamp_128.png</file>
         <file alias = "last">Resources/Icons/last_128.png</file>
         <file alias = "mail_write">Resources/Icons/mail_write_128.png</file>
@@ -54,7 +60,5 @@
         <file alias = "world">Resources/Icons/world_128.png</file>
         <file alias = "write">Resources/Icons/write_128.png</file>
         <file alias = "zoom">Resources/Icons/zoom_128.png</file>
-        <file alias = "undo">Resources/Icons/reload_left_128.png</file>
-        <file alias = "redo">Resources/Icons/reload_128.png</file>
     </qresource>
 </RCC>

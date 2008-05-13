@@ -40,6 +40,7 @@ public:
 	{
 		m_elements.resize(Size);
 
+
 		for (int i = 0; i < Size; ++i){
 			m_elements[i] = vector[i];
 		}

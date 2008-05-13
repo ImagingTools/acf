@@ -118,10 +118,10 @@ int CBitmapLoaderComp::DoSyncProcess(const iproc::IParamsSet* paramsPtr, const i
 	ParamsInfo& info = m_dirInfos[loaderParamsPtr];
 	if (info.files.isEmpty()){
 		if (loaderParamsPtr != NULL){
-			info.directory = iqt::GetQString(*m_defaultDirAttrPtr);
+			info.directory = iqt::GetQString(loaderParamsPtr->GetDirectory());
 		}
 		else{
-			info.directory = iqt::GetQString(loaderParamsPtr->GetDirectory());
+			info.directory = iqt::GetQString(*m_defaultDirAttrPtr);
 		}
 	}
 
@@ -170,6 +170,14 @@ int CBitmapLoaderComp::DoSyncProcess(const iproc::IParamsSet* paramsPtr, const i
 istd::CIndex2d CBitmapLoaderComp::GetBitmapSize(const iproc::IParamsSet* /*paramsPtr*/) const
 {
 	return istd::CIndex2d(-1, -1);	// unknown size
+}
+
+
+// public methods of embedded class ParamsInfo
+
+CBitmapLoaderComp::ParamsInfo::ParamsInfo()
+{
+	filesIter = files.end();
 }
 
 

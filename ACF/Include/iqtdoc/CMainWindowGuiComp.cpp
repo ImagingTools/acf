@@ -471,11 +471,11 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_windowCommand.SetName(iqt::GetCString(tr("&Window")));
 	m_helpCommand.SetName(iqt::GetCString(tr("&Help")));
 
-	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), GetIcon("document"));
+	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), GetIcon("new"));
 	m_newCommand.setShortcut(tr("Ctrl+N"));
-	m_openCommand.SetVisuals(tr("&Open..."), tr("Open"), tr("Opens document from file"), GetIcon("folder"));
+	m_openCommand.SetVisuals(tr("&Open..."), tr("Open"), tr("Opens document from file"), GetIcon("open"));
 	m_openCommand.setShortcut(tr("Ctrl+O"));
-	m_saveCommand.SetVisuals(tr("&Save"), tr("Save"), tr("Saves document to actual working file"), GetIcon("diskette"));
+	m_saveCommand.SetVisuals(tr("&Save"), tr("Save"), tr("Saves document to actual working file"), GetIcon("save"));
 	m_saveCommand.setShortcut(tr("Ctrl+S"));
 	m_saveAsCommand.SetVisuals(tr("&Save As..."), tr("Save As"), tr("Saves document into selected file"));
 	m_quitCommand.SetVisuals(tr("&Quit"), tr("Quit"), tr("Quits this application"), GetIcon("exit"));

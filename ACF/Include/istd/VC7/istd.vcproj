@@ -236,6 +236,9 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CBitManip.cpp">
+			</File>
+			<File
 				RelativePath="..\CChangeDelegator.cpp">
 			</File>
 			<File
@@ -261,7 +264,13 @@
 			Name="Header Files"
 			Filter="h">
 			<File
+				RelativePath="..\CBitManip.h">
+			</File>
+			<File
 				RelativePath="..\CChangeDelegator.h">
+			</File>
+			<File
+				RelativePath="..\CFastBinaryIndex.h">
 			</File>
 			<File
 				RelativePath="..\CIndex2d.h">

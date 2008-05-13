@@ -9,11 +9,13 @@
 #include "imath/imath.h"
 
 
-namespace imath{
+namespace imath
+{
 
 
-/**	Simple implementation of fixed-size vector.
- */
+/**
+	Implementation of fixed-size mathematical vector with specified type of elements.
+*/
 template <int Size, class Element = double>
 class TVector
 {

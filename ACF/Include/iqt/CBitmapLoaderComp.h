@@ -65,6 +65,8 @@ public:
 protected:
 	struct ParamsInfo
 	{
+		ParamsInfo();
+
 		QStringList files;
 		QStringList::Iterator filesIter;
 		QDir directory;

@@ -32,7 +32,7 @@ void CVarColor::GetRounded(const imath::IDoubleManip& manipulator, CVarColor& re
 	result.SetElementsCount(elementsCount);
 
 	for (int i = 0; i < elementsCount; ++i){
-		result.m_elements[i] = manipulator.GetRounded(m_elements[i]);
+		result[i] = manipulator.GetRounded(GetElement(i));
 	}
 }
 
@@ -41,7 +41,7 @@ bool CVarColor::IsRoundedEqual(const CVarColor& color, const imath::IDoubleManip
 {
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
-		if (!manipulator.IsEqual(m_elements[i], color.m_elements[i])){
+		if (!manipulator.IsEqual(GetElement(i), color[i])){
 			return false;
 		}
 	}
@@ -54,12 +54,12 @@ void CVarColor::Normalize()
 {
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
-		if (m_elements[i] < 0.0){
-			m_elements[i] = 0.0;
+		if (GetElement(i) < 0.0){
+			SetElement(i, 0.0);
 		}
 
-		if (m_elements[i] > 1.0){
-			m_elements[i] = 1.0;
+		if (GetElement(i) > 1.0){
+			SetElement(i, 1.0);
 		}
 	}
 }
@@ -80,7 +80,7 @@ const CVarColor& CVarColor::operator=(const CVarColor& color)
 	SetElementsCount(elementsCount);
 
 	for (int i = 0; i < elementsCount; ++i){
-		m_elements[i] = color.m_elements[i];
+		SetElement(i, color[i]);
 	}
 
 	return *this;
@@ -149,12 +149,14 @@ bool CVarColor::Serialize(iser::IArchive& archive)
 	}
 
 	if (!archive.IsStoring()){
-		m_elements.resize(elementsCount);
+		if (!SetElementsCount(elementsCount)){
+			return false;
+		}
 	}
 
     for (int i = 0; i < elementsCount; ++i){
 		retVal = retVal && archive.BeginTag(componentTag);
-		retVal = retVal && archive.Process(m_elements[i]);
+		retVal = retVal && archive.Process(operator[](i));
 		retVal = retVal && archive.EndTag(componentTag);
 	}
 

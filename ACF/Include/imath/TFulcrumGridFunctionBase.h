@@ -373,7 +373,7 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::RemoveLayer(int dimen
 				++destIter){
 		FulcrumIndex sourceIndex = destIter;
 		if (destIter[dimension] >= layerIndex){
-			sourceIndex[dimension]++;
+			sourceIndex.IncreaseAt(dimension);
 		}
 
 		*destIter = m_fulcrums[sourceIndex];

@@ -175,9 +175,11 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 		I_ASSERT(argument[dimension] <= secondPosition);
 		I_ASSERT(derivativeDegree[dimension] == 0);
 
-		++derivativeDegree[dimension];
-		bool useDerivative = IsDerivativeDegreeSupported(derivativeDegree);
-		--derivativeDegree[dimension];
+		bool useDerivative = false;
+		if (derivativeDegree.IncreaseAt(dimension)){
+			useDerivative = IsDerivativeDegreeSupported(derivativeDegree);
+			derivativeDegree.DecreaseAt(dimension);
+		}
 
 		double alpha = (argument[dimension] - firstPosition) / layersDistance;
 
@@ -206,7 +208,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 		--indexElement;
 
 		if (useDerivative){
-			++derivativeDegree[dimension];
+			derivativeDegree.IncreaseAt(dimension);
 
 			double firstDerivativeFactor = GetDerivativeKernelAt(alpha) * layersDistance;
 
@@ -232,7 +234,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CalcRecursiveV
 
 			--indexElement;
 
-			--derivativeDegree[dimension];
+			derivativeDegree.DecreaseAt(dimension);
 
 			result =	firstValue * firstValueFactor +
 						secondValue * secondValueFactor +

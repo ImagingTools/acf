@@ -87,6 +87,20 @@ public:
 	void SetAllTo(int value);
 
 	/**
+		Increase single component at specified position.
+		\param	index	index of component should be increased. It must be valid.
+		\return			true if success. It is provided for template implementations. In this case it returns always true.
+	*/
+	bool IncreaseAt(int index);
+
+	/**
+		Decrease single component at specified position.
+		\param	index	index of component should be increased. It must be valid.
+		\return			true if success. It is provided for template implementations. In this case it returns always true.
+	*/
+	bool DecreaseAt(int index);
+
+	/**
 		Check if index is inside boundaries.
 		Index is inside boundaries, if all its components are smaller than according boundary components.
 	*/
@@ -179,6 +193,28 @@ inline void CVarIndex::SetAt(int index, int value)
 	I_ASSERT(index < int(m_elements.size()));
 
 	m_elements[index] = value;
+}
+
+
+inline bool CVarIndex::IncreaseAt(int index)
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < int(m_elements.size()));
+
+	++m_elements[index];
+
+	return true;
+}
+
+
+inline bool CVarIndex::DecreaseAt(int index)
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < int(m_elements.size()));
+
+	--m_elements[index];
+
+	return true;
 }
 
 

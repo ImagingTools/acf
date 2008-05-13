@@ -23,6 +23,8 @@ template <class Base, class Input, class Output>
 class TSyncProcessorWrap: public Base
 {
 public:
+	TSyncProcessorWrap();
+
 	// pseudo-reimplemented (iproc::TIAssyncProcessor)
 	virtual int GetProcessorState(const IParamsSet* paramsPtr) const;
 	virtual void ResetAllTasks();
@@ -59,6 +61,13 @@ private:
 
 
 // public methods
+
+template <class Base, class Input, class Output>
+TSyncProcessorWrap<Base, Input, Output>::TSyncProcessorWrap()
+:	m_nextTaskId(0)
+{
+}
+
 
 // pseudo-reimplemented (iproc::TIAssyncProcessor)
 

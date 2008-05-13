@@ -2,6 +2,10 @@
 #define iimg_included
 
 
+#include "icmm/icmm.h"
+#include "iproc/iproc.h"
+
+
 /**
 	\defgroup image Image definition and processing
 	\ingroup ACF
@@ -11,6 +15,7 @@
 	\li istd
 	\li iser
 	\li	icmm
+	\li	iproc
 */
 namespace iimg
 {
