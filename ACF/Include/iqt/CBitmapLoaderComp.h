@@ -2,7 +2,16 @@
 #define iqt_CBitmapLoaderComp_included
 
 
+// Qt includes
+#include <QDir>
+#include <QStringList>
+
 #include "iser/IFileLoader.h"
+
+#include "iproc/TSyncProcessorWrap.h"
+
+#include "icam/IBitmapAcquisition.h"
+#include "icam/IFileBitmapAcquisitionParams.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -13,14 +22,25 @@ namespace iqt
 {
 
 
-class CBitmapLoaderComp: public icomp::CComponentBase, virtual public iser::IFileLoader
+/**
+	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c icam::IBitmapAcquisition.
+*/
+class CBitmapLoaderComp: public icomp::CComponentBase,
+			virtual public iser::IFileLoader,
+			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition, icam::IBitmapAcquisition::InputType, icam::IBitmapAcquisition::OutputType>
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapLoaderComp)
 		I_REGISTER_INTERFACE(iser::IFileLoader)
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)
+		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".")
+		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition")
+		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10)
 	I_END_COMPONENT
+
+	CBitmapLoaderComp();
 
 	virtual void SetLastLoadFileName(const istd::CString& fileName);
 	virtual void SetLastSaveFileName(const istd::CString& fileName);
@@ -36,9 +56,33 @@ public:
 	virtual const istd::CString& GetLastLoadFileName() const;
 	virtual const istd::CString& GetLastSaveFileName() const;
 
+	// reimplemented (iproc::TSyncProcessorWrap<isys::ITimer, iimg::IBitmap>)
+	virtual int DoSyncProcess(const iproc::IParamsSet* paramsPtr, const isys::ITimer* inputPtr, iimg::IBitmap* outputPtr);
+
+	// reimplemented (icam::IBitmapAcquisition)
+	virtual istd::CIndex2d GetBitmapSize(const iproc::IParamsSet* paramsPtr) const;
+
+protected:
+	struct ParamsInfo
+	{
+		QStringList files;
+		QStringList::Iterator filesIter;
+		QDir directory;
+		I_DWORD idStamp;
+	};
+
 private:
+	typedef ::std::map<const icam::IFileBitmapAcquisitionParams*, ParamsInfo> DirInfos;
+	DirInfos m_dirInfos;
+
+	I_DWORD m_lastIdStamp;
+
 	istd::CString m_lastLoadFileName;
 	istd::CString m_lastSaveFileName;
+
+	I_ATTR(istd::CString, m_defaultDirAttrPtr);
+	I_ATTR(istd::CString, m_parameterIdAttrPtr);
+	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 };
 
 

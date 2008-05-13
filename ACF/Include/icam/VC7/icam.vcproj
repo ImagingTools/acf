@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="iproc"
-	ProjectGUID="{9BA2C3D2-9483-483F-9019-8C6B027C58C6}">
+	Name="icam"
+	ProjectGUID="{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
@@ -128,71 +128,23 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
-				RelativePath="..\CHierarchicalOperator.cpp">
-			</File>
-			<File
-				RelativePath="..\CJob.cpp">
-			</File>
-			<File
-				RelativePath="..\COperatorBase.cpp">
-			</File>
-			<File
-				RelativePath="..\CProcessingControllerBase.cpp">
-			</File>
-			<File
-				RelativePath="..\CProcessingElementBase.cpp">
+				RelativePath="..\CFileBitmapAcquisitionParams.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
 			<File
-				RelativePath="..\CHierarchicalOperator.h">
+				RelativePath="..\CFileBitmapAcquisitionParams.h">
 			</File>
 			<File
-				RelativePath="..\CJob.h">
+				RelativePath="..\IBitmapAcquisition.h">
 			</File>
 			<File
-				RelativePath="..\COperatorBase.h">
+				RelativePath="..\icam.h">
 			</File>
 			<File
-				RelativePath="..\CProcessingControllerBase.h">
-			</File>
-			<File
-				RelativePath="..\CProcessingElementBase.h">
-			</File>
-			<File
-				RelativePath="..\IJob.h">
-			</File>
-			<File
-				RelativePath="..\IOperator.h">
-			</File>
-			<File
-				RelativePath="..\IOperatorManager.h">
-			</File>
-			<File
-				RelativePath="..\IParamsSet.h">
-			</File>
-			<File
-				RelativePath="..\iproc.h">
-			</File>
-			<File
-				RelativePath="..\IProcessingController.h">
-			</File>
-			<File
-				RelativePath="..\IProcessingEventHandler.h">
-			</File>
-			<File
-				RelativePath="..\IProgressEventHandler.h">
-			</File>
-			<File
-				RelativePath="..\IProgressInfo.h">
-			</File>
-			<File
-				RelativePath="..\TIAssyncProcessor.h">
-			</File>
-			<File
-				RelativePath="..\TSyncProcessorWrap.h">
+				RelativePath="..\IFileBitmapAcquisitionParams.h">
 			</File>
 		</Filter>
 	</Files>

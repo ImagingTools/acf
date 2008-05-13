@@ -38,7 +38,7 @@ public:
 		Get version of archived stream for specific versioning type.
 		\param	versionId	versioning type. It allows you to distinguish different version aspects.
 							For example version number of framework cann differ from application version.
-		@sa VersionId.
+		\sa VersionId.
 	 */
 	virtual I_DWORD GetVersion(int versionId = IVersionInfo::UserVersionId) const = 0;
 

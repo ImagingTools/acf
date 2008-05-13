@@ -175,6 +175,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "isvn", "..\..\..\Include\is
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icam", "..\..\..\Include\icam\VC7\icam.vcproj", "{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -431,6 +435,14 @@ Global
 		{0D703E92-06CF-45F0-AB74-3691C4C160C5}.NemoRelease.Build.0 = Release|Win32
 		{0D703E92-06CF-45F0-AB74-3691C4C160C5}.Release.ActiveCfg = Release|Win32
 		{0D703E92-06CF-45F0-AB74-3691C4C160C5}.Release.Build.0 = Release|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.Debug.ActiveCfg = Debug|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.Debug.Build.0 = Debug|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.NemoDebug.ActiveCfg = Debug|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.NemoDebug.Build.0 = Debug|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.NemoRelease.ActiveCfg = Release|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.NemoRelease.Build.0 = Release|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.Release.ActiveCfg = Release|Win32
+		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

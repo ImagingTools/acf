@@ -43,7 +43,7 @@ public:
 		Get version of archived stream for specific versioning type.
 		\param	versionId	versioning type. It allows you to distinguish different version aspects.
 								For example version number of framework cann differ from application version.
-								@sa VersionId.
+								\sa VersionId.
 	 */
 	virtual I_DWORD GetVersion(int versionId = UserVersionId) const = 0;
 
@@ -51,7 +51,7 @@ public:
 		Get description of version ID.
 		\param	versionId	versioning type. It allows you to distinguish different version aspects.
 							For example version number of framework cann differ from application version.
-							@sa VersionId, GetVersion.
+							\sa VersionId, GetVersion.
 	*/
 	virtual istd::CString GetVersionIdDescription(int versionId) const = 0;
 

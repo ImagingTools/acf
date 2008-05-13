@@ -13,6 +13,8 @@ namespace istdc
 
 const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::string& id) const
 {
+	I_ASSERT(m_slaveParamsCompPtr.IsValid());	// isObligatory was set to true
+
 	ParamsMap::const_iterator iter = m_paramsMap.find(id);
 	if (iter != m_paramsMap.end()){
 		return iter->second;
@@ -20,11 +22,12 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::strin
 
 	int slavesCount = m_slaveParamsCompPtr.GetCount();
 	for (int i = 0; i < slavesCount; ++i){
-		I_ASSERT(m_slaveParamsCompPtr.IsValid(i));	// isObligatory was set to true
-
-		const iser::ISerializable* paramPtr = m_slaveParamsCompPtr[i]->GetParameter(id);
-		if (paramPtr != NULL){
-			return paramPtr;
+		const iproc::IParamsSet* slavePtr = m_slaveParamsCompPtr[i];
+		if (slavePtr != NULL){
+			const iser::ISerializable* paramPtr = slavePtr->GetParameter(id);
+			if (paramPtr != NULL){
+				return paramPtr;
+			}
 		}
 	}
 
@@ -140,13 +143,16 @@ I_DWORD CComposedParamsSetComp::GetMinimalVersion(int versionId) const
 
 void CComposedParamsSetComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	int setsCount = istd::Min(m_parametersCompPtr.GetCount(), m_parametersIdAttrPtr.GetCount());
 
 	for (int i = 0; i < setsCount; ++i){
-		I_ASSERT(m_parametersCompPtr.IsValid(factoryIndex));	// isObligatory was set to true
-		I_ASSERT(m_parametersIdAttrPtr.IsValid(factoryIndex));	// isObligatory was set to true
-
-		m_paramsMap[m_parametersIdAttrPtr[i].ToString()] = m_parametersCompPtr[i];
+		iser::ISerializable* paramPtr = m_parametersCompPtr[i];
+		std::string id = m_parametersIdAttrPtr[i].ToString();
+		if (!id.empty() && (paramPtr != NULL)){
+			m_paramsMap[id] = paramPtr;
+		}
 	}
 }
 
