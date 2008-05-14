@@ -46,6 +46,12 @@ public:
 	bool IsValid() const;
 
 	/**
+		Check if this index interpreted as size is empty.
+		It means, it returns true, is some of components is less or equal 0.
+	*/
+	bool IsSizeEmpty() const;
+
+	/**
 		Reset this object.
 		For this (fixed-size) implementation, it does the same as clear.
 		\sa Clear()
@@ -178,6 +184,19 @@ inline bool TIndex<Dimensions>::IsValid() const
 	}
 
 	return true;
+}
+
+
+template <int Dimensions>
+inline bool TIndex<Dimensions>::IsSizeEmpty() const
+{
+	for (int i = 0; i < Dimensions; ++i){
+		if (m_elements[i] <= 0){
+			return true;
+		}
+	}
+
+	return false;
 }
 
 

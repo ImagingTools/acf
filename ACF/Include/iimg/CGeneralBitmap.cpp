@@ -107,6 +107,16 @@ void* CGeneralBitmap::GetLinePtr(int positionY)
 
 // reimplemented (iimg::IRasterImage)
 
+void CGeneralBitmap::ResetImage()
+{
+	m_size.Reset();
+	m_buffer.Reset();
+	m_linesDifference = 0;
+	m_pixelBitsCount = 0;
+	m_componentsCount = 0;
+}
+
+
 istd::CIndex2d CGeneralBitmap::GetImageSize() const
 {
 	return m_size;

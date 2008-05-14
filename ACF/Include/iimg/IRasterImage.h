@@ -26,6 +26,12 @@ public:
 	virtual bool IsEmpty() const = 0;
 
 	/**
+		Reset this image.
+		After this operation image is set to initial state.
+	*/
+	virtual void ResetImage() = 0;
+
+	/**
 		Get size of this raster image.
 	*/
 	virtual istd::CIndex2d GetImageSize() const = 0;

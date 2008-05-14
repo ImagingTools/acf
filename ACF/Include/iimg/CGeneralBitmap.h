@@ -25,6 +25,7 @@ public:
 	virtual void* GetLinePtr(int positionY);
 
 	// reimplemented (iimg::IRasterImage)
+	virtual void ResetImage();
 	virtual istd::CIndex2d GetImageSize() const;
 	virtual int GetComponentsCount() const;
 	virtual bool CopyImageFrom(const IRasterImage& image);

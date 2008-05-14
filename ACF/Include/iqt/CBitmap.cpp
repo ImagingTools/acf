@@ -105,6 +105,13 @@ void* CBitmap::GetLinePtr(int positionY)
 
 // reimplemented (iimg::IRasterImage)
 
+void CBitmap::ResetImage()
+{
+	m_image = QImage();
+	m_externalBuffer.Reset();
+}
+
+
 istd::CIndex2d CBitmap::GetImageSize() const
 {
 	return GetCIndex2d(m_image.size());
