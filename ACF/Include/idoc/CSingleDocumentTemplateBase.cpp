@@ -23,6 +23,12 @@ namespace idoc
 {		
 
 
+void CSingleDocumentTemplateBase::SetSupportedFeatures(int featureFlags)
+{
+	m_supportedFeatures = featureFlags;
+}
+
+
 void CSingleDocumentTemplateBase::SetDocumentTypeId(const std::string& documentTypeId)
 {
 	m_documentTypeId = documentTypeId;
@@ -48,6 +54,12 @@ void CSingleDocumentTemplateBase::SetFileExtensions(const istd::CStringList& fil
 
 
 // reimplemented (idoc::IDocumentTemplate)
+
+bool CSingleDocumentTemplateBase::IsFeatureSupported(int featureFlags) const
+{
+	return ((m_supportedFeatures & featureFlags) != 0);
+}
+
 
 IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIds() const
 {

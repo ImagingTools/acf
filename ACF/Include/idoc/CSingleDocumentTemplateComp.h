@@ -31,6 +31,8 @@ public:
 		I_ASSIGN(m_modelCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")
 		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory")
 		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
+		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", false, true);
+		I_ASSIGN(m_isEditSupportedAttrPtr, "IsEditSupported", "Template supports the edit operation", false, true);
 	I_END_COMPONENT
 
 	// reimplemented (idoc::IDocumentTemplate)
@@ -45,6 +47,8 @@ public:
 	virtual void OnComponentCreated();
 
 private:
+	I_ATTR(bool, m_isNewSupportedAttrPtr);
+	I_ATTR(bool, m_isEditSupportedAttrPtr);
 	I_ATTR(istd::CString, m_documentTypeIdAttrPtr);
 	I_MULTIATTR(istd::CString, m_fileFiltersAttrPtr);
 	I_ATTR(istd::CString, m_defaultDirectoryAttrPtr);
@@ -53,6 +57,8 @@ private:
 	I_FACT(imod::IModel, m_modelCompFact);
 	I_FACT(imod::IObserver, m_viewCompFact);
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
+
+	int m_featureFlags;
 };
 
 

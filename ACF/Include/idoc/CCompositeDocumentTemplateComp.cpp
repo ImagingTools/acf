@@ -7,6 +7,12 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentTemplate)
 
+bool CCompositeDocumentTemplateComp::IsFeatureSupported(int featureFlags) const
+{
+	return ((m_featureFlags & featureFlags) != 0);
+}
+
+
 IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetDocumentTypeIds() const
 {
 	Ids retVal;
@@ -223,6 +229,15 @@ void CCompositeDocumentTemplateComp::OnComponentCreated()
 				m_idToTemplateMap[documentTypeId] = slavePtr;
 			}
 		}
+	}
+
+	m_featureFlags = 0;
+	if (m_isNewSupportedAttrPtr.IsValid() && m_isNewSupportedAttrPtr->GetValue()){
+		m_featureFlags |= idoc::IDocumentTemplate::New;
+	}
+
+	if (m_isEditSupportedAttrPtr.IsValid() && m_isEditSupportedAttrPtr->GetValue()){
+		m_featureFlags |= idoc::IDocumentTemplate::Edit;
 	}
 }
 

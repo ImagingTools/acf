@@ -47,5 +47,5 @@ public:
 } // namespace iqt
 
 
-#endif // !iqt_IToolBarManager_h_included
+#endif // !iqt_IToolBarManager_included
 

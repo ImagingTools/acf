@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);
 	documentTemplateComp.SetFactory("ViewFactory", &viewFactoryComp);
 	documentTemplateComp.SetRef("DocumentLoader", &serializerComp);
+	documentTemplateComp.SetBoolAttr("IsEditSupported", true);
+	documentTemplateComp.SetBoolAttr("IsNewSupported", true);
 	documentTemplateComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::MultiDocWorkspaceGui> workspaceComp;

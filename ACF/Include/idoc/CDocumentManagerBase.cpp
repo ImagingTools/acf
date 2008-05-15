@@ -26,7 +26,7 @@ istd::IChangeable* CDocumentManagerBase::OpenDocument(const istd::CString& fileP
 		return NULL;
 	}
 
-	DocumentInfo* existingInfoPtr = GetDocumenttInfoFromPath(filePath);
+	DocumentInfo* existingInfoPtr = GetDocumentInfoFromPath(filePath);
 	if (existingInfoPtr != NULL){
 		I_ASSERT(existingInfoPtr->documentPtr.IsValid());
 
@@ -135,7 +135,7 @@ void CDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
 
 istd::IChangeable* CDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view) const
 {
-	const DocumentInfo* infoPtr = GetDocumenttInfoFromView(view);
+	const DocumentInfo* infoPtr = GetDocumentInfoFromView(view);
 	if (infoPtr != NULL){
 		I_ASSERT(infoPtr != NULL);
 		I_ASSERT(infoPtr->documentPtr.IsValid());
@@ -290,14 +290,14 @@ CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetActiveDocumentInfo(
 {
 	const istd::IPolymorphic* viewPtr = GetActiveView();
 	if (viewPtr != NULL){
-		return GetDocumenttInfoFromView(*viewPtr);
+		return GetDocumentInfoFromView(*viewPtr);
 	}
 
 	return NULL;
 }
 
 
-CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetDocumenttInfoFromView(const istd::IPolymorphic& view) const
+CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetDocumentInfoFromView(const istd::IPolymorphic& view) const
 {
 	int documentsCount = GetDocumentsCount();
 	for (int i = 0; i < documentsCount; ++i){
@@ -313,7 +313,7 @@ CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetDocumenttInfoFromVi
 }
 
 
-CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetDocumenttInfoFromPath(const istd::CString& filePath) const
+CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetDocumentInfoFromPath(const istd::CString& filePath) const
 {
 	int documentsCount = GetDocumentsCount();
 	for (int i = 0; i < documentsCount; ++i){

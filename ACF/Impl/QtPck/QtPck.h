@@ -13,6 +13,7 @@
 #include "iqt/CFileDialogSerializerComp.h"
 #include "iqt/CBitmap.h"
 #include "iqt/CBitmapLoaderComp.h"
+#include "iqt/CDockWidgetGuiComp.h"
 
 #include "iqt2d/CImageViewComp.h"
 
@@ -40,6 +41,7 @@ typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWo
 typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iimg::IBitmap, iqt::CBitmap> > Bitmap;
 typedef iqt2d::CImageViewComp ImageView;
 typedef iqt::CBitmapLoaderComp BitmapLoader;
+typedef iqt::CDockWidgetGuiComp DockWidgetGui;
 
 
 } // namespace QtPck

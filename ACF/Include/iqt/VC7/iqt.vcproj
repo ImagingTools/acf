@@ -199,6 +199,9 @@
 				RelativePath="..\CDllFunctionsProvider.cpp">
 			</File>
 			<File
+				RelativePath="..\CDockWidgetGuiComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CFileDialogSerializerComp.cpp">
 			</File>
 			<File
@@ -314,6 +317,45 @@
 			</File>
 			<File
 				RelativePath="..\CDllFunctionsProvider.h">
+			</File>
+			<File
+				RelativePath="..\CDockWidgetGuiComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CFileDialogSerializerComp.h">
@@ -702,6 +744,9 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
 				RelativePath="..\generated\moc_CDirList.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\moc_CDockWidgetGuiComp.cpp">
 			</File>
 			<File
 				RelativePath="..\generated\moc_CHierarchicalCommand.cpp">

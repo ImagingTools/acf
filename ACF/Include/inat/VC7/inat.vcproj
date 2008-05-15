@@ -4,8 +4,7 @@
 	Version="7.10"
 	Name="inat"
 	ProjectGUID="{91007D75-2F2B-4B26-A1BB-260181E8DAF3}"
-	SccProjectName="&quot;$/develop/modules/iwin&quot;, XRAAAAAA"
-	SccLocalPath="..\iwin">
+	>
 	<Platforms>
 		<Platform
 			Name="Win32"/>

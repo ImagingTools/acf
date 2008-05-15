@@ -24,6 +24,15 @@ public:
 	typedef istd::TDelPtr<IRegistryElement> ElementPtr;
 
 	/**
+		Change flags.
+	*/
+	enum ChangeFlags
+	{
+		CF_COMPONENT_ADDED = 0x1,
+		CF_COMPONENT_REMOVED = 0x2
+	};
+
+	/**
 		Type of element.
 	*/
 	enum ElementType

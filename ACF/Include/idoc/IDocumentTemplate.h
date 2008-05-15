@@ -30,6 +30,32 @@ public:
 	typedef std::vector<std::string> Ids;
 
 	/**
+		Enumeration for supported types of operation with the document.
+	*/
+	enum SupportedFeatures
+	{
+		/**
+			Document can be created.
+		*/
+		New = 0x0001,
+
+		/**
+			Document is editable.
+		*/
+		Edit = 0x0010,
+
+		/**
+			All features are supported.
+		*/
+		Default = 0xffff
+	};
+
+	/**
+		Return \c true, if the feature(s) is supported by this document template.
+	*/
+	virtual bool IsFeatureSupported(int featureFlags) const = 0;
+
+	/**
 		Get list of supported document ID's can be created for specified file.
 	*/
 	virtual Ids GetDocumentTypeIds() const = 0;

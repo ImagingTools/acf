@@ -102,7 +102,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib iqt.lib"
+				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib AcfStd.lib iqt.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
 				GenerateDebugInformation="TRUE"
@@ -144,16 +144,202 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CAttributeEditorComp.cpp">
+			</File>
+			<File
+				RelativePath="..\CComponentConnector.cpp">
+			</File>
+			<File
+				RelativePath="..\CComponentView.cpp">
+			</File>
+			<File
+				RelativePath="..\CPackageOverviewComp.cpp">
+			</File>
+			<File
+				RelativePath="..\CRegistryModelComp.cpp">
+			</File>
+			<File
+				RelativePath="..\CRegistryViewComp.cpp">
+			</File>
+			<File
 				RelativePath="..\Main.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
+			<File
+				RelativePath="..\CAttributeEditorComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CComponentConnector.h">
+			</File>
+			<File
+				RelativePath="..\CComponentView.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CPackageOverviewComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CRegistryModelComp.h">
+			</File>
+			<File
+				RelativePath="..\CRegistryViewComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			Filter="">
+			<File
+				RelativePath="..\CAttributeEditorComp.ui">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="Generated Files"
+			Filter="">
+			<File
+				RelativePath="..\generated\moc_CAttributeEditorComp.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\moc_CComponentView.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\moc_CPackageOverviewComp.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\moc_CRegistryViewComp.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\qrc_Compositor.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\ui_CAttributeEditorComp.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resources"
+			Filter="">
+			<File
+				RelativePath="..\Compositor.qrc">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Rcc&apos;ing $(InputName).qrc..."
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;$(InputName)&quot; -no-compress &quot;..\$(InputName).qrc&quot; -o $(InputDir)\Generated\qrc_$(InputName).cpp"
+						AdditionalDependencies="..\$(InputName).qrc;"
+						Outputs="$(InputDir)\Generated\qrc_$(InputName).cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Rcc&apos;ing $(InputName).qrc..."
+						CommandLine="$(QTDIR)\bin\rcc.exe -name &quot;$(InputName)&quot; -no-compress &quot;..\$(InputName).qrc&quot; -o $(InputDir)\Generated\qrc_$(InputName).cpp"
+						AdditionalDependencies="..\$(InputName).qrc;"
+						Outputs="$(InputDir)\Generated\qrc_$(InputName).cpp"/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

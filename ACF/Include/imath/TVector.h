@@ -175,14 +175,14 @@ inline TVector<Size, Element>::TVector(const TVector<Size, Element>& vector)
 // inline methods
 
 template <int Size, class Element>
-inline typename const Element& TVector<Size, Element>::GetElement(int i) const
+inline const Element& TVector<Size, Element>::GetElement(int i) const
 {
 	return operator[](i);
 }
 
 
 template <int Size, class Element>
-inline typename Element& TVector<Size, Element>::GetElementRef(int i)
+inline Element& TVector<Size, Element>::GetElementRef(int i)
 {
 	return operator[](i);
 }

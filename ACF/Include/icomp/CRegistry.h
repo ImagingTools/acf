@@ -18,8 +18,20 @@ public:
 	/**
 		Constructor.
 		\param	factoryPtr	pointer to main static info object used to factorize real components.
+		\sa SetComponentStaticInfo()
 	*/
-	CRegistry(const IComponentStaticInfo* factoryPtr);
+	CRegistry(const IComponentStaticInfo* factoryPtr = NULL);
+
+	/**
+		Return \c true, if the registry can be used.
+	*/
+	virtual bool IsValid() const;
+
+	/**
+		Set component factory. Only, if a component factory was set, the registry object becomes a valid state and can be used.
+		\sa IsValid()
+	*/
+	virtual void SetComponentStaticInfo(const IComponentStaticInfo* factoryPtr);
 
 	// reimplemented (icomp::IRegistry)
 	virtual Ids GetElementIds() const;
@@ -49,7 +61,7 @@ private:
 	ExportedInterfacesMap m_exportedInterfacesMap;
 	ExportedComponentsMap m_exportedComponentsMap;
 
-	const IComponentStaticInfo& m_componentsFactory;
+	const IComponentStaticInfo* m_componentsFactoryPtr;
 };
 
 

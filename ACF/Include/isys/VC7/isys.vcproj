@@ -4,8 +4,7 @@
 	Version="7.10"
 	Name="isys"
 	ProjectGUID="{633B67F7-B154-4A80-A651-0243D5EDF583}"
-	SccProjectName="&quot;$/develop/modules/isys&quot;, XRAAAAAA"
-	SccLocalPath="..\isys">
+	>
 	<Platforms>
 		<Platform
 			Name="Win32"/>

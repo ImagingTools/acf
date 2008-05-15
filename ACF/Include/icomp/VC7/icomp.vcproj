@@ -3,9 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="icomp"
-	ProjectGUID="{F3A159CA-14B5-4800-8039-0157CF31EA27}"
-	SccProjectName="&quot;$/develop/modules/iwin&quot;, XRAAAAAA"
-	SccLocalPath="..\iwin">
+	ProjectGUID="{F3A159CA-14B5-4800-8039-0157CF31EA27}">
 	<Platforms>
 		<Platform
 			Name="Win32"/>

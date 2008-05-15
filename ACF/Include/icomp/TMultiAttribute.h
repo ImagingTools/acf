@@ -17,7 +17,7 @@ namespace icomp
 
 
 /**
-	Template implementation of single component attribute.
+	Template implementation of multiple component attribute.
 	\internal
 	Don't use direct this class, use macros I_MULTIATTR and I_ASSIGN instead.
 */
@@ -148,9 +148,15 @@ bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)
 }
 
 
+typedef TMultiAttribute<double> CMultiDoubleAttribute;
+typedef TMultiAttribute<bool> CMultiBoolAttribute;
+typedef TMultiAttribute<int> CMultiIntAttribute;
+typedef TMultiAttribute<istd::CString> CMultiStringAttribute;
+
+
 } // namespace icomp
 
 
-#endif // icomp_TMultiAttribute_included
+#endif // !icomp_TMultiAttribute_included
 
 

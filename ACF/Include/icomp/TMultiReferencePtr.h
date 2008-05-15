@@ -126,11 +126,11 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 				}
 			}
 
-			m_isInitialized = true;
+			m_isInitialized = retVal;
 		}
 	}
 
-	return retVal;
+	return m_isInitialized;
 }
 
 

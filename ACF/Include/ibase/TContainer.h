@@ -1,5 +1,5 @@
-#ifndef ibase_TContainer_h_included
-#define ibase_TContainer_h_included
+#ifndef ibase_TContainer_included
+#define ibase_TContainer_included
 
 
 #include <vector>
@@ -162,4 +162,4 @@ bool TContainer<ItemClass, ContainerClass>::IsIndexValid(int index) const
 } // namespace ibase
 
 
-#endif // ibase_TContainer_h_included
+#endif // ibase_TContainer_included

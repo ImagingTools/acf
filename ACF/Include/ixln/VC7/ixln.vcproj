@@ -4,8 +4,7 @@
 	Version="7.10"
 	Name="ixln"
 	ProjectGUID="{D5379D78-3D01-491F-B477-EC8F2A35ED2E}"
-	SccProjectName="&quot;$/develop/modules/iwin&quot;, XRAAAAAA"
-	SccLocalPath="..\iwin">
+	>
 	<Platforms>
 		<Platform
 			Name="Win32"/>

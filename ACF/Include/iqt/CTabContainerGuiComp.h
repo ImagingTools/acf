@@ -37,7 +37,7 @@ protected:
 	acf::MultipleComponentDependency<iqt::IGuiObject> m_slaveGuisCompIfPtr;
 	acf::ComponentDependency<acf::QtIconProviderInterface> m_iconsProviderCompIfPtr;
 	acf::ComponentDependency<iqt::IGuiObject> m_cornerGuiCompIfPtr;
-	acf::StringListAttribute m_tabNamesAttr;
+	icomp::TMultiAttribute<istd::CString> m_tabNamesAttr;
 	acf::IntAttribute m_iconSizeAttr;
 	acf::BoolAttribute m_useTriangularTabsAttr;
 	acf::IntAttribute m_tabOrientationAttr;

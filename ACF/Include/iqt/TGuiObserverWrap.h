@@ -3,6 +3,7 @@
 
 
 #include "imod/IModelEditor.h"
+#include "imod/IModel.h"
 
 
 namespace iqt

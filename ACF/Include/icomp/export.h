@@ -20,9 +20,13 @@ namespace icomp
 	#endif
 #endif
 
-
-#define I_PACKAGE_EXPORT_FUNCTION GetPackageInfo
-#define I_PACKAGE_EXPORT_FUNCTION_NAME "GetPackageInfo"
+#ifdef _DEBUG
+	#define I_PACKAGE_EXPORT_FUNCTION GetPackageInfoDebug
+	#define I_PACKAGE_EXPORT_FUNCTION_NAME "GetPackageInfoDebug"
+#else
+	#define I_PACKAGE_EXPORT_FUNCTION GetPackageInfo
+	#define I_PACKAGE_EXPORT_FUNCTION_NAME "GetPackageInfo"
+#endif
 
 #define I_EXPORT_PACKAGE(name, description, keywords) \
 	static icomp::CPackageStaticInfo packageInfo;\

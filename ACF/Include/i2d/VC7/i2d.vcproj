@@ -4,8 +4,7 @@
 	Version="7.10"
 	Name="i2d"
 	ProjectGUID="{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}"
-	SccProjectName="&quot;$/develop/modules/iwin&quot;, XRAAAAAA"
-	SccLocalPath="..\iwin">
+	>
 	<Platforms>
 		<Platform
 			Name="Win32"/>

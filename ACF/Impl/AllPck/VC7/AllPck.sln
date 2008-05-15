@@ -85,6 +85,15 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor.exe", "..\..\CompositorExe\VC7\Compositor.vcproj", "{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A3BB8D04-552D-4FD4-B799-18187FB17C2C} = {A3BB8D04-552D-4FD4-B799-18187FB17C2C}
+		{AD4F093E-141B-490D-AAAF-C02C69F5C524} = {AD4F093E-141B-490D-AAAF-C02C69F5C524}
+		{BB74CB53-2F9B-44E3-BE32-CBA4E6325C65} = {BB74CB53-2F9B-44E3-BE32-CBA4E6325C65}
+		{F9F47984-52CC-4D6B-9079-FC7DD1009C6E} = {F9F47984-52CC-4D6B-9079-FC7DD1009C6E}
+		{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59} = {FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}
+		{CEB219AC-442A-4B4C-8324-719352C0922B} = {CEB219AC-442A-4B4C-8324-719352C0922B}
+		{C30159C1-C8F9-49F4-AE32-C014F87B12BD} = {C30159C1-C8F9-49F4-AE32-C014F87B12BD}
+		{F3A159CA-14B5-4800-8039-0157CF31EA27} = {F3A159CA-14B5-4800-8039-0157CF31EA27}
+		{6DFD9DED-F84C-43C5-953A-9713464D7D15} = {6DFD9DED-F84C-43C5-953A-9713464D7D15}
+		{126B67F7-B779-4A80-A651-1111D5EDF583} = {126B67F7-B779-4A80-A651-1111D5EDF583}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtPck", "..\..\QtPck\VC7\QtPck.vcproj", "{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}"
@@ -180,6 +189,49 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icam", "..\..\..\Include\ic
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 8
+		SccProjectUniqueName0 = ..\\..\\..\\Include\\iwin\\VC7\\iwin.vcproj
+		SccProjectName0 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath0 = ..\\..\\..\\Include\\iwin\\iwin
+		SccProvider0 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection0 = ..\\VC7\\
+		SccProjectUniqueName1 = ..\\..\\..\\Include\\istd\\VC7\\istd.vcproj
+		SccProjectName1 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath1 = ..\\..\\..\\Include\\istd\\iwin
+		SccProvider1 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection1 = ..\\VC7\\
+		SccProjectUniqueName2 = ..\\..\\..\\Include\\isys\\VC7\\isys.vcproj
+		SccProjectName2 = \u0022$/develop/modules/isys\u0022,\u0020XRAAAAAA
+		SccLocalPath2 = ..\\..\\..\\Include\\isys\\isys
+		SccProvider2 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection2 = ..\\VC7\\
+		SccProjectUniqueName3 = ..\\..\\..\\Include\\idb\\VC7\\idb.vcproj
+		SccProjectName3 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath3 = ..\\..\\..\\Include\\idb\\iwin
+		SccProvider3 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection3 = ..\\VC7\\
+		SccProjectUniqueName4 = ..\\..\\..\\Include\\icomp\\VC7\\icomp.vcproj
+		SccProjectName4 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath4 = ..\\..\\..\\Include\\icomp\\iwin
+		SccProvider4 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection4 = ..\\VC7\\
+		SccProjectUniqueName5 = ..\\..\\..\\Include\\ixln\\VC7\\ixln.vcproj
+		SccProjectName5 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath5 = ..\\..\\..\\Include\\ixln\\iwin
+		SccProvider5 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection5 = ..\\VC7\\
+		SccProjectUniqueName6 = ..\\..\\..\\Include\\inat\\VC7\\inat.vcproj
+		SccProjectName6 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath6 = ..\\..\\..\\Include\\inat\\iwin
+		SccProvider6 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection6 = ..\\VC7\\
+		SccProjectUniqueName7 = ..\\..\\..\\Include\\i2d\\VC7\\i2d.vcproj
+		SccProjectName7 = \u0022$/develop/modules/iwin\u0022,\u0020XRAAAAAA
+		SccLocalPath7 = ..\\..\\..\\Include\\i2d\\iwin
+		SccProvider7 = MSSCCI:Team\u0020Foundation\u0020Server\u0020MSSCCI\u0020Provider
+		SccProjectFilePathRelativizedFromConnection7 = ..\\VC7\\
+	EndGlobalSection
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
 		NemoDebug = NemoDebug

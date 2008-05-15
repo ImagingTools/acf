@@ -84,12 +84,12 @@ protected:
 	/**
 		Get document info assigned to specified view.
 	*/
-	DocumentInfo* GetDocumenttInfoFromView(const istd::IPolymorphic& view) const;
+	DocumentInfo* GetDocumentInfoFromView(const istd::IPolymorphic& view) const;
 
 	/**
 		Get document info assigned to specified file.
 	*/
-	DocumentInfo* GetDocumenttInfoFromPath(const istd::CString& filePath) const;
+	DocumentInfo* GetDocumentInfoFromPath(const istd::CString& filePath) const;
 
 	/**
 		Create instance of specified document without attaching to this manager.

@@ -7,6 +7,8 @@
 
 #include "icomp/IRegistryElement.h"
 
+#include "imod/TModelWrap.h"
+
 
 namespace icomp
 {
@@ -15,7 +17,7 @@ namespace icomp
 class IAttributeStaticInfo;
 
 
-class CRegistryElement: virtual public IRegistryElement
+class CRegistryElement: public imod::TModelWrap<IRegistryElement>
 {
 public:
 	/**

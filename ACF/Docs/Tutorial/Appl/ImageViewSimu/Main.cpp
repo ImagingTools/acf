@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
 	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("bmp"));
 	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("png"));
 	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("jpg"));
+	documentTemplateComp.SetBoolAttr("IsEditSupported", false);
+	documentTemplateComp.SetBoolAttr("IsNewSupported", false);
 	documentTemplateComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::MultiDocWorkspaceGui> workspaceComp;

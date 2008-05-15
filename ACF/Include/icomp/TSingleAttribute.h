@@ -94,9 +94,15 @@ bool TSingleAttribute<Value>::Serialize(iser::IArchive& archive)
 }
 
 
+typedef TSingleAttribute<double> CDoubleAttribute;
+typedef TSingleAttribute<bool> CBoolAttribute;
+typedef TSingleAttribute<int> CIntAttribute;
+typedef TSingleAttribute<istd::CString> CStringAttribute;
+
+
 } // namespace icomp
 
 
-#endif // icomp_TSingleAttribute_included
+#endif // !icomp_TSingleAttribute_included
 
 

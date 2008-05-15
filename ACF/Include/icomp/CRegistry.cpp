@@ -7,15 +7,30 @@
 #include "icomp/IComponentStaticInfo.h"
 #include "icomp/CRegistryElement.h"
 
+#include "istd/TChangeNotifier.h"
+
 
 namespace icomp
 {
 
 
 CRegistry::CRegistry(const IComponentStaticInfo* factoryPtr)
-:	m_componentsFactory(*factoryPtr)
+:	m_componentsFactoryPtr(factoryPtr)
+{
+}
+
+
+bool CRegistry::IsValid() const
+{
+	return (m_componentsFactoryPtr != NULL);
+}
+
+
+void CRegistry::SetComponentStaticInfo(const IComponentStaticInfo* factoryPtr)
 {
 	I_ASSERT(factoryPtr != NULL);
+
+	m_componentsFactoryPtr = factoryPtr;
 }
 
 
@@ -25,7 +40,7 @@ IRegistry::Ids CRegistry::GetElementIds() const
 {
 	Ids retVal;
 	for (		ComponentsMap::const_iterator iter = m_componentsMap.begin();
-				iter != m_componentsMap.begin();
+				iter != m_componentsMap.end();
 				++iter){
 		retVal.insert(iter->first);
 	}
@@ -41,6 +56,10 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 			const std::string& componentId,
 			bool ensureElementCreated)
 {
+	if (!IsValid()){
+		return NULL;
+	}
+
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
 	if (iter != m_componentsMap.end()){
 		return NULL;
@@ -51,7 +70,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 	switch (elementType){
 	case IRegistry::ET_COMPONENT:
 		{
-			const IComponentStaticInfo::SubcomponentInfos& subInfos = m_componentsFactory.GetSubcomponentInfos();
+			const IComponentStaticInfo::SubcomponentInfos& subInfos = m_componentsFactoryPtr->GetSubcomponentInfos();
 			const IComponentStaticInfo::SubcomponentInfos::ValueType* packageInfoPtr2 = subInfos.FindElement(packageId);
 			if (packageInfoPtr2 != NULL){
 				I_ASSERT(*packageInfoPtr2 != NULL);
@@ -74,6 +93,9 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 	if (ensureElementCreated && !registryPtr.IsValid()){
 		return NULL;
 	}
+
+
+	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_ADDED);
 
 	ElementInfo& newElement = m_componentsMap[elementId];
 	newElement.elementType = elementType;
@@ -98,7 +120,13 @@ const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& eleme
 
 bool CRegistry::RemoveElementInfo(const std::string& elementId)
 {
-	return m_componentsMap.erase(elementId) > 0;
+	if(m_componentsMap.erase(elementId) <= 0){
+		return false;
+	}
+
+	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_REMOVED);
+
+	return true;
 }
 
 
@@ -118,9 +146,16 @@ const IRegistry::ExportedComponentsMap& CRegistry::GetExportedComponentsMap() co
 
 bool CRegistry::Serialize(iser::IArchive& archive)
 {
-	return		SerializeComponents(archive) &&
-				SerializeExportedInterfaces(archive) &&
-				SerializeExportedComponents(archive);
+
+	bool retVal =	SerializeComponents(archive) &&
+					SerializeExportedInterfaces(archive) &&
+					SerializeExportedComponents(archive);
+
+	if (!archive.IsStoring() && retVal){
+		istd::CChangeNotifier changePtr(this);
+	}
+
+	return retVal;
 }
 
 

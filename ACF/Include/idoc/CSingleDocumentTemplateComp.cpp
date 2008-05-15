@@ -76,6 +76,17 @@ void CSingleDocumentTemplateComp::OnComponentCreated()
 		}
 	}
 	SetFileExtensions(fileExtensions);
+
+	int featureFlags = 0;
+	if (m_isNewSupportedAttrPtr.IsValid() && m_isNewSupportedAttrPtr->GetValue()){
+		featureFlags |= idoc::IDocumentTemplate::New;
+	}
+
+	if (m_isEditSupportedAttrPtr.IsValid() && m_isEditSupportedAttrPtr->GetValue()){
+		featureFlags |= idoc::IDocumentTemplate::Edit;
+	}
+
+	SetSupportedFeatures(featureFlags);
 }
 
 

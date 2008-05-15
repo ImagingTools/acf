@@ -86,16 +86,16 @@ void CMainWindowGuiComp::RemoveToolBar(QToolBar* /*widgetPtr*/)
 }
 
 
-// reimplemented (QtDockManagerInterface)
+// reimplemented (IDockManager)
 
-void CMainWindowGuiComp::AddDockWidget(int flags, QDockWidget* widget)
+void CMainWindowGuiComp::AddDockWidget(int flags, QDockWidget* dockWidgetPtr)
 {
-	QMainWindow* mainWindowPtr = dynamic_cast<QMainWindow*>(GetWidget());
+	QMainWindow* mainWindowPtr = GetQtWidget();
 	I_ASSERT(mainWindowPtr != NULL);
 
-	widget->show();
+	dockWidgetPtr->show();
 
-	mainWindowPtr->addDockWidget((Qt::DockWidgetArea)flags, widget);
+	mainWindowPtr->addDockWidget((Qt::DockWidgetArea)flags, dockWidgetPtr);
 }
 
 
@@ -113,12 +113,14 @@ void CMainWindowGuiComp::OnComponentCreated()
 	if (m_documentManagerModelCompPtr.IsValid()){
 		m_documentManagerModelCompPtr->AttachObserver(this);
 	}
-
+	
+	const idoc::IDocumentTemplate* templatePtr = NULL;
+	
 	if (m_documentManagerCompPtr.IsValid()){
-		const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+		templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
 		if (templatePtr != NULL){
 			idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
-			if (!ids.empty()){
+			if (!ids.empty() && templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::New)){
 				m_newCommand.SetGroupId(GI_DOCUMENT);
 				m_fileCommand.InsertChild(&m_newCommand, false);
 
@@ -169,8 +171,14 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_helpCommand.SetPriority(150);
 		m_helpCommand.InsertChild(&m_aboutCommand, false);
 
+		// fill menu bar with main commands
+
 		m_fixedCommands.InsertChild(&m_fileCommand, false);
-		m_fixedCommands.InsertChild(&m_editCommand, false);
+		
+		if (templatePtr != NULL && templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::Edit)){
+			m_fixedCommands.InsertChild(&m_editCommand, false);
+		}
+
 		m_fixedCommands.InsertChild(&m_viewCommand, false);
 		m_fixedCommands.InsertChild(&m_windowCommand, false);
 		m_fixedCommands.InsertChild(&m_helpCommand, false);
@@ -340,7 +348,8 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 		for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
 			if (m_mainWindowComponentsPtr.IsValid()){
 				iqt::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
-				if (mainWindowComponentPtr != NULL){
+				iqt::IGuiObject* guiPtr =  dynamic_cast<iqt::IGuiObject*>(mainWindowComponentPtr);
+				if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
 					mainWindowComponentPtr->AddToMainWindow(mainWindow);
 				}
 			}

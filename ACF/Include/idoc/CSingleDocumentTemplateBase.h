@@ -24,12 +24,14 @@ class CSingleDocumentTemplateBase: virtual public idoc::IDocumentTemplate
 {
 public:
 	const std::string& GetDocumentTypeId() const;
+	virtual void SetSupportedFeatures(int featureFlags);
 	virtual void SetDocumentTypeId(const std::string& documentTypeId);
 	virtual void SetFileFilters(const istd::CStringList& fileFilters);
 	virtual void SetDefaultDirectory(const istd::CString& defaultDirectory);
 	virtual void SetFileExtensions(const istd::CStringList& fileExtensions);
 
 	// reimplemented (idoc::IDocumentTemplate)
+	virtual bool IsFeatureSupported(int featureFlags) const;
 	virtual Ids GetDocumentTypeIds() const;
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
@@ -51,6 +53,8 @@ private:
 
 	std::string m_documentTypeId;
 	std::string m_viewTypeId;
+
+	int m_supportedFeatures;
 };
 
 
