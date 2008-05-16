@@ -103,7 +103,7 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 
 	retVal = retVal && archive.EndTag(packageFilesTag);
 
-	return false;
+	return retVal;
 }
 
 

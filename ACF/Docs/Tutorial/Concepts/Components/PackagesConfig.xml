@@ -4,18 +4,15 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PackageDirs count="4">
+  <PackageDirs count="3">
     <Dir>
-		C:\Work\Packages
+		C:/Work/Packages
     </Dir>
     <Dir>
-      D:/Development/Acf/ACF/Bin/debugVC7
+      .
     </Dir>
     <Dir>
-      D:/Development/Acf/ACF/Bin/releaseVC7
-    </Dir>
-    <Dir>
-      D:\Development\Acf\ACF\Bin\debugvc7\tutorial
+      ./Tutorial
     </Dir>
   </PackageDirs>
   <PackageFiles count="0">

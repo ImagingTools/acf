@@ -18,6 +18,8 @@
 
 int main(int argc, char *argv[])
 {
+	QApplication::setStyle("plastique");
+
 	iqt::CPackagesLoader loader;
 
 	std::string registryFile = "default.acfr";
@@ -79,7 +81,9 @@ int main(int argc, char *argv[])
 	}
 
 	if (useDefaultRegistries){
-		loader.RegisterPackagesDir("", false);
+		if (!loader.LoadConfigFile("./PackagesConfig.xml")){
+			loader.RegisterPackagesDir(".", false);
+		}
 	}
 
 	int retVal = 0;

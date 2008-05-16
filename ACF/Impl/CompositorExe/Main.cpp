@@ -1,3 +1,6 @@
+#include <QMessageBox>
+#include <QApplication>
+
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
 
@@ -36,10 +39,56 @@ int main(int argc, char *argv[])
 	splashScreenGui.InitComponent();
 
 	icomp::TSimComponentWrap<icomp::TMakeComponentWrap<icomp::IComponentStaticInfo, iqt::CPackagesLoader> > packagesLoaderComp;
-	// register default package path
-	packagesLoaderComp.RegisterPackagesDir(".");
-	packagesLoaderComp.LoadConfigFile("./PackagesConfig.xml");
 	packagesLoaderComp.InitComponent();
+
+	std::string registryFile;
+	bool useDefaultRegistries = true;
+	for (int index = 1; index < argc; index++){
+		std::string argument = argv[index];
+		if (!argument.empty() && (argument[0] == '-')){
+			std::string option = argument.substr(1);
+
+			if ((option == "h") || (option == "help")){
+				QMessageBox::information(NULL, QObject::tr("Parameter help"), QObject::tr(
+							"Usage"
+							"\tCompositor.exe [registryName] {options}      - registry editor"
+							"\t-h or -help              - showing this help"
+							"\t-packageFile filePath    - append single package file"
+							"\t-packageDir directory    - append packages directory"
+							"\t-config configFile       - load config file"));
+
+				return 0;
+			}
+			else if (index < argc - 1){
+				if (option == "packageFile"){
+					packagesLoaderComp.RegisterPackageFile(argv[++index], false);
+
+					useDefaultRegistries = false;
+				}
+				else if (option == "packageDir"){
+					packagesLoaderComp.RegisterPackagesDir(argv[++index], false);
+
+					useDefaultRegistries = false;
+				}
+				else if (option == "config"){
+					packagesLoaderComp.LoadConfigFile(argv[++index]);
+
+					useDefaultRegistries = false;
+				}
+			}
+		}
+		else if (index == 1){
+			registryFile = argument;
+		}
+	}
+
+
+	// register default package path
+	if (useDefaultRegistries){
+		if (!packagesLoaderComp.LoadConfigFile("./PackagesConfig.xml")){
+			packagesLoaderComp.RegisterPackagesDir(".", false);
+		}
+	}
 
 	// attribute editor:
 	icomp::TSimComponentWrap<CAttributeEditorComp> attributeEditorComp;
@@ -70,6 +119,15 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<QtPck::MultiDocWorkspaceGui> workspaceComp;
 	workspaceComp.SetRef("DocumentTemplate", &documentTemplateComp);
 	workspaceComp.InitComponent();
+
+	if (!registryFile.empty()){
+		if (!workspaceComp.OpenDocument(registryFile, true, "")){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Cannot load registry\n%1").arg(registryFile.c_str()));
+		}
+	}
 
 	icomp::TSimComponentWrap<CPackageOverviewComp> packageOverviewComp;
 	packageOverviewComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
