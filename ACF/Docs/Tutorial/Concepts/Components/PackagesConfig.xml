@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="0">
+    </VersionInfos>
+  </AcfHeader>
+  <PackageDirs count="4">
+    <Dir>
+		C:\Work\Packages
+    </Dir>
+    <Dir>
+      D:/Development/Acf/ACF/Bin/debugVC7
+    </Dir>
+    <Dir>
+      D:/Development/Acf/ACF/Bin/releaseVC7
+    </Dir>
+    <Dir>
+      D:\Development\Acf\ACF\Bin\debugvc7\tutorial
+    </Dir>
+  </PackageDirs>
+  <PackageFiles count="0">
+  </PackageFiles>
+</Acf>
