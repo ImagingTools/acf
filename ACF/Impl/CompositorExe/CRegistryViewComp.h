@@ -48,9 +48,6 @@ public:
 
 	void OnAddComponent(const CStaticComponentInfo& componentInfo);
 	void OnAddComponent(const CStaticComponentInfo& componentInfo, const QString& componentRole);
-	CComponentView* CreateComponentView(const icomp::IRegistry::ElementInfo& componentRef, const QString& role);
-
-	icomp::IRegistryElement* GetSelectedComponent() const;
 
 	QStringList GetComponentsForDependency(const QString& dependecySource) const;
 
@@ -67,9 +64,6 @@ public:
 	// reimplemented (icomp::IComponent)
 	virtual void OnGuiCreated();
 
-signals:
-	void viewChanged(CRegistryViewComp*);
-
 public slots:
 	void SetCenterOn(const QString& componentRole);
 	void UpdateConnections();
@@ -79,9 +73,10 @@ protected slots:
 	void OnExportChanged(CComponentView* view, bool export);
 	void OnRemoveComponent();
 
-protected:
-	void ScaleView(qreal scaleFactor);
+private:
+	void ScaleView(double scaleFactor);
 	void CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId);
+	CComponentView* CreateComponentView(const icomp::IRegistry::ElementInfo& componentRef, const QString& role);
 
 	virtual void OnWheelEvent(QWheelEvent *event);
 	virtual void OnDragEnterEvent(QDragEnterEvent *event);

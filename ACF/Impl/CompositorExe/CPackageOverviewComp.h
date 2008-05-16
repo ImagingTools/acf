@@ -71,6 +71,9 @@ private:
 	QTreeWidgetItem* m_rootLocalItem;
 	QTreeWidgetItem* m_rootComposedItem;
 	CStaticComponentInfo* m_selectedComponentInfoPtr;
+
+	static QString s_closedIcon;
+	static QString s_openIcon;
 };
 
 

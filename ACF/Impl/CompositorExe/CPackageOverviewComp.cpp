@@ -69,10 +69,10 @@ void CPackageOverviewComp::HighlightComponents(const QString& interfaceId)
 		QTreeWidgetItem* parentItem = (*treeIter)->parent();
 		if (parentItem != NULL){
 			if (parentItem->isExpanded()){
-				parentItem->setIcon(0, QIcon(QString::fromUtf8(":/Resources/Icons/dirclosed-16.png")));
+				parentItem->setIcon(0, QIcon(s_closedIcon));
 			}
 			else{			
-				parentItem->setIcon(0, QIcon(QString::fromUtf8(":/Resources/Icons/diropen-16.png")));
+				parentItem->setIcon(0, QIcon(s_openIcon));
 			}
 		}
 
@@ -115,7 +115,7 @@ void CPackageOverviewComp::OnItemSelected()
 void CPackageOverviewComp::OnItemCollapsed(QTreeWidgetItem* item)
 {
 	if (item != NULL && item->childCount() > 0){
-		item->setIcon(0, QIcon(QString::fromUtf8(":/Resources/Icons/dirclosed-16.png")));
+		item->setIcon(0, QIcon(s_closedIcon));
 	}
 }
 
@@ -123,7 +123,7 @@ void CPackageOverviewComp::OnItemCollapsed(QTreeWidgetItem* item)
 void CPackageOverviewComp::OnItemExpanded(QTreeWidgetItem* item)
 {
 	if (item != NULL && item->childCount() > 0){
-		item->setIcon(0, QIcon(QString::fromUtf8(":/Resources/Icons/diropen-16.png")));
+		item->setIcon(0, QIcon(s_openIcon));
 	}
 }
 
@@ -257,3 +257,9 @@ void CPackageOverviewComp::OnGuiCreated()
 
 	GenerateComponentTree();
 }
+
+
+// private static members
+
+QString CPackageOverviewComp::s_closedIcon = ":/Resources/Icons/dirclosed-16.png";
+QString CPackageOverviewComp::s_openIcon = ":/Resources/Icons/diropen-16.png";

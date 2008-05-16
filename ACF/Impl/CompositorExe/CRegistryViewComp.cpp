@@ -48,38 +48,6 @@ void CRegistryViewComp::OnAddComponent(const CStaticComponentInfo& componentInfo
 }
 
 
-CComponentView* CRegistryViewComp::CreateComponentView(const icomp::IRegistry::ElementInfo& componentRef, const QString& role)
-{
-	CComponentView* componentViewPtr = new CComponentView(componentRef, role, &m_compositeItem, m_scenePtr);
-
-	connect(componentViewPtr, 
-		SIGNAL(selectionChanged(CComponentView*, bool)),
-		this,
-		SLOT(OnComponentViewSelected(CComponentView*, bool)));
-
-	connect(componentViewPtr, 
-		SIGNAL(exportChanged(CComponentView*, bool)),
-		this,
-		SLOT(OnExportChanged(CComponentView*, bool)));
-
-	componentViewPtr->setZValue(m_scenePtr->items().count());
-
-	m_compositeItem.setRect(m_compositeItem.childrenBoundingRect().adjusted(-25,-25,25,25));
-
-	return componentViewPtr;
-}
-
-
-icomp::IRegistryElement* CRegistryViewComp::GetSelectedComponent() const
-{
-	if (m_selectedComponentPtr != NULL){
-		return m_selectedComponentPtr->GetComponent()->elementPtr.GetPtr();
-	}
-
-	return NULL;
-}
-
-
 QStringList CRegistryViewComp::GetComponentsForDependency(const QString& dependecySource) const
 {
 	istd::CStringList components;// = m_composite.componentsForDependency(dependecySource.toStdWString());
@@ -148,8 +116,6 @@ bool CRegistryViewComp::Serialize(iser::IArchive& archive)
 	m_compositeItem.setRect(m_compositeItem.childrenBoundingRect().adjusted(-25,-25,25,25));
 
 	UpdateConnections();
-
-	emit viewChanged(this);
 */
 	return result;
 }
@@ -307,27 +273,9 @@ void CRegistryViewComp::OnRemoveComponent()
 }
 
 
-// protected members
+// private members
 
-void CRegistryViewComp::CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId)
-{
-	QList<QGraphicsItem*> items = m_compositeItem.children();
-	foreach(QGraphicsItem* item, items){
-		CComponentView* referenceViewPtr = dynamic_cast<CComponentView*>(item);
-		if (referenceViewPtr != NULL && referenceViewPtr->GetComponentName() == referenceComponentId.c_str()){
-			CComponentConnector* connector = new CComponentConnector(NULL, NULL);
-			connector->setParentItem(&m_compositeItem);
-			connector->SetSourceComponent(&sourceView);
-			connector->SetDestinationComponent(referenceViewPtr);
-
-			m_scenePtr->addItem(connector);
-			connector->Adjust();
-		}
-	}
-}
-
-
-void CRegistryViewComp::ScaleView(qreal scaleFactor)
+void CRegistryViewComp::ScaleView(double scaleFactor)
 {
 	QGraphicsView* viewPtr = GetQtWidget();
 	if (viewPtr != NULL){
@@ -349,6 +297,45 @@ void CRegistryViewComp::ScaleView(qreal scaleFactor)
 	}
 }
 
+
+void CRegistryViewComp::CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId)
+{
+	QList<QGraphicsItem*> items = m_compositeItem.children();
+	foreach(QGraphicsItem* item, items){
+		CComponentView* referenceViewPtr = dynamic_cast<CComponentView*>(item);
+		if (referenceViewPtr != NULL && referenceViewPtr->GetComponentName() == referenceComponentId.c_str()){
+			CComponentConnector* connector = new CComponentConnector(NULL, NULL);
+			connector->setParentItem(&m_compositeItem);
+			connector->SetSourceComponent(&sourceView);
+			connector->SetDestinationComponent(referenceViewPtr);
+
+			m_scenePtr->addItem(connector);
+			connector->Adjust();
+		}
+	}
+}
+
+
+CComponentView* CRegistryViewComp::CreateComponentView(const icomp::IRegistry::ElementInfo& componentRef, const QString& role)
+{
+	CComponentView* componentViewPtr = new CComponentView(componentRef, role, &m_compositeItem, m_scenePtr);
+
+	connect(componentViewPtr, 
+		SIGNAL(selectionChanged(CComponentView*, bool)),
+		this,
+		SLOT(OnComponentViewSelected(CComponentView*, bool)));
+
+	connect(componentViewPtr, 
+		SIGNAL(exportChanged(CComponentView*, bool)),
+		this,
+		SLOT(OnExportChanged(CComponentView*, bool)));
+
+	componentViewPtr->setZValue(m_scenePtr->items().count());
+
+	m_compositeItem.setRect(m_compositeItem.childrenBoundingRect().adjusted(-25,-25,25,25));
+
+	return componentViewPtr;
+}
 
 void CRegistryViewComp::UpdateConnections()
 {
