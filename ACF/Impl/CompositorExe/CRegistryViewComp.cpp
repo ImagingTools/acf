@@ -109,9 +109,6 @@ void CRegistryViewComp::OnGuiCreated()
 	I_ASSERT(m_scenePtr != NULL);
 
 	iqt::CHierarchicalCommand* registryMenuPtr = new iqt::CHierarchicalCommand("&Registry");
-	iqt::CHierarchicalCommand* addComponentCommandPtr = new iqt::CHierarchicalCommand("&Add Component");
-	connect(addComponentCommandPtr, SIGNAL( activated()), this, SLOT(OnAddComponent()));
-	registryMenuPtr->InsertChild(addComponentCommandPtr, true);
 	iqt::CHierarchicalCommand* removeComponentCommandPtr = new iqt::CHierarchicalCommand("&Remove Component");
 	connect(removeComponentCommandPtr, SIGNAL( activated()), this, SLOT(OnRemoveComponent()));
 	registryMenuPtr->InsertChild(removeComponentCommandPtr, true);
@@ -213,12 +210,19 @@ void CRegistryViewComp::OnRemoveComponent()
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
 		if (m_selectedComponentPtr != NULL){
+			const CComponentView::ComponentData* elementInfoPtr = m_selectedComponentPtr->GetComponent();
+			if (elementInfoPtr != NULL){
+				imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfoPtr->elementPtr.GetPtr());
+				if (registryElementModelPtr != NULL){
+					registryElementModelPtr->DetachAllObservers();
+				}	
+			}
+			registryPtr->RemoveElementInfo(m_selectedComponentPtr->GetComponentName().toStdString());
+
 			m_selectedComponentPtr->RemoveAllConnectors();
 			m_scenePtr->removeItem(m_selectedComponentPtr);
-			m_selectedComponentPtr->setParentItem(NULL);
-			if (m_selectedComponentPtr->GetComponent() != NULL){
-				registryPtr->RemoveElementInfo(m_selectedComponentPtr->GetComponentName().toStdString());
-			}
+	
+			m_selectedComponentPtr = NULL;
 		}
 	}
 }
