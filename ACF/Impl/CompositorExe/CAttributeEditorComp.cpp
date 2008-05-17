@@ -20,6 +20,8 @@ CAttributeEditorComp::CAttributeEditorComp()
 	m_attributeTypesMap[typeid(icomp::CMultiStringAttribute).name()] = tr("String list");
 	m_attributeTypesMap[typeid(icomp::CReferenceAttribute).name()] = tr("Reference");
 	m_attributeTypesMap[typeid(icomp::CMultiReferenceAttribute).name()] = tr("Multiple reference");
+	m_attributeTypesMap[typeid(icomp::CFactoryAttribute).name()] = tr("Factory");
+	m_attributeTypesMap[typeid(icomp::CMultiFactoryAttribute).name()] = tr("Multiple factory");
 }
 
 
@@ -105,24 +107,32 @@ void CAttributeEditorComp::UpdateEditor()
 			attributeItemPtr->setFlags(attributeItemPtr->flags() | Qt::ItemIsUserCheckable);
 			attributeItemPtr->setCheckState(ValueColumn, boolAttribute->GetValue() ? Qt::Checked : Qt::Unchecked);
 			attributeItemPtr->setData(ValueColumn, AttributeMining, Attribute);
+
+			continue;
 		}
 
 		const icomp::CDoubleAttribute* doubleAttribute = dynamic_cast<const icomp::CDoubleAttribute*>(attributePtr);
 		if (doubleAttribute != NULL){
 			attributeItemPtr->setText(ValueColumn, QString("%1").arg(doubleAttribute->GetValue()));
 			attributeItemPtr->setData(ValueColumn, AttributeMining, Attribute);
+
+			continue;
 		}
 
 		const icomp::CIntAttribute* intAttribute = dynamic_cast<const icomp::CIntAttribute*>(attributePtr);
 		if (intAttribute != NULL){
 			attributeItemPtr->setText(ValueColumn, QString("%1").arg(intAttribute->GetValue()));
 			attributeItemPtr->setData(ValueColumn, AttributeMining, Attribute);
+
+			continue;
 		}
 
 		const icomp::CStringAttribute* stringAttribute = dynamic_cast<const icomp::CStringAttribute*>(attributePtr);
 		if (stringAttribute != NULL){
 			attributeItemPtr->setText(ValueColumn, iqt::GetQString(stringAttribute->GetValue()));
 			attributeItemPtr->setData(ValueColumn, AttributeMining, Attribute);		
+
+			continue;
 		}
 
 		const icomp::TMultiAttribute<istd::CString>* stringListAttribute = dynamic_cast<const icomp::TMultiAttribute<istd::CString>*>(attributePtr);
@@ -135,6 +145,8 @@ void CAttributeEditorComp::UpdateEditor()
 				
 			attributeItemPtr->setText(ValueColumn, stringList);
 			attributeItemPtr->setData(ValueColumn, AttributeMining, MultipleAttribute);		
+
+			continue;
 		}
 
 		const icomp::CMultiIntAttribute* intListAttribute = dynamic_cast<const icomp::CMultiIntAttribute*>(attributePtr);
@@ -147,6 +159,8 @@ void CAttributeEditorComp::UpdateEditor()
 
 			attributeItemPtr->setText(ValueColumn, stringList);
 			attributeItemPtr->setData(ValueColumn, AttributeMining, MultipleAttribute);		
+
+			continue;
 		}
 
 		const icomp::CMultiDoubleAttribute* doubleListAttribute = dynamic_cast<const icomp::CMultiDoubleAttribute*>(attributePtr);
@@ -159,6 +173,8 @@ void CAttributeEditorComp::UpdateEditor()
 
 			attributeItemPtr->setText(ValueColumn, stringList);
 			attributeItemPtr->setData(ValueColumn, AttributeMining, MultipleAttribute);		
+
+			continue;
 		}
 
 		const icomp::CReferenceAttribute* referencePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributePtr);
@@ -166,6 +182,8 @@ void CAttributeEditorComp::UpdateEditor()
 			attributeItemPtr->setText(ValueColumn, iqt::GetQString(referencePtr->GetValue()));
 			attributeItemPtr->setData(ValueColumn, AttributeId, attributeName);
 			attributeItemPtr->setData(ValueColumn, AttributeMining, Dependency);
+
+			continue;
 		}
 			
 		const icomp::CMultiReferenceAttribute* multiReferencePtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(attributePtr);
@@ -178,6 +196,31 @@ void CAttributeEditorComp::UpdateEditor()
 
 			attributeItemPtr->setText(ValueColumn, dependecyString);
 			attributeItemPtr->setData(ValueColumn, AttributeMining, MultipleDependency);
+
+			continue;
+		}
+
+		const icomp::CFactoryAttribute* factoryPtr = dynamic_cast<const icomp::CFactoryAttribute*>(attributePtr);
+		if (factoryPtr != NULL){		
+			attributeItemPtr->setText(ValueColumn, iqt::GetQString(factoryPtr->GetValue()));
+			attributeItemPtr->setData(ValueColumn, AttributeId, attributeName);
+			attributeItemPtr->setData(ValueColumn, AttributeMining, Dependency);
+
+			continue;
+		}
+			
+		const icomp::CMultiFactoryAttribute* multiFactoryPtr = dynamic_cast<const icomp::CMultiFactoryAttribute*>(attributePtr);
+		if (multiFactoryPtr != NULL){
+			QString dependecyString;
+			for (int dependencyIndex = 0; dependencyIndex < multiFactoryPtr->GetValuesCount(); dependencyIndex++){
+				QString dependencyName = iqt::GetQString(multiFactoryPtr->GetValueAt(dependencyIndex));
+				dependecyString += dependencyName  + ";";
+			}
+
+			attributeItemPtr->setText(ValueColumn, dependecyString);
+			attributeItemPtr->setData(ValueColumn, AttributeMining, MultipleDependency);
+
+			continue;
 		}
 	}
 

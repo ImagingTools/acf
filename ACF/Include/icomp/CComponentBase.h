@@ -12,6 +12,7 @@
 #include "icomp/TReferencePtr.h"
 #include "icomp/TMultiReferencePtr.h"
 #include "icomp/TFactoryMember.h"
+#include "icomp/TMultiFactoryMember.h"
 #include "icomp/TAttributeStaticInfo.h"
 #include "icomp/TComponentStaticInfo.h"
 #include "icomp/TBaseComponentStaticInfo.h"
@@ -22,6 +23,10 @@ namespace icomp
 {
 
 
+/**
+	Base class for component implementation.
+	This class is compatible with the macros defined in this file \c (CComponentBase.h).
+*/
 class CComponentBase: virtual public IComponent
 {
 public:
@@ -145,8 +150,8 @@ private:
 	Declare multiple factory of components.
 */
 #define I_MULTIFACT(interfaceType, member)\
-	typedef icomp::TMultiFactoryPtr<interfaceType>::AttributeType member##_Type;\
-	icomp::TMultiFactoryPtr<interfaceType> member;
+	typedef icomp::TMultiFactoryMember<interfaceType>::AttributeType member##_Type;\
+	icomp::TMultiFactoryMember<interfaceType> member;
 
 /**
 	Used to assign value for single parameter (attribute, reference or factory).

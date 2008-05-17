@@ -182,6 +182,9 @@
 				RelativePath="..\CFileRegistriesManagerBase.h">
 			</File>
 			<File
+				RelativePath="..\CMultiFactoryAttribute.h">
+			</File>
+			<File
 				RelativePath="..\CMultiReferenceAttribute.h">
 			</File>
 			<File
@@ -266,10 +269,16 @@
 				RelativePath="..\TMultiAttributePtr.h">
 			</File>
 			<File
+				RelativePath="..\TMultiFactoryMember.h">
+			</File>
+			<File
 				RelativePath="..\TMultiReferencePtr.h">
 			</File>
 			<File
 				RelativePath="..\TReferencePtr.h">
+			</File>
+			<File
+				RelativePath="..\TSelectableAttribute.h">
 			</File>
 			<File
 				RelativePath="..\TSimComponentsFactory.h">

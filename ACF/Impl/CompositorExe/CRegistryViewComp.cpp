@@ -354,19 +354,36 @@ void CRegistryViewComp::UpdateConnections()
 
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = componentDataPtr->elementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr != NULL){
-				const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributeInfoPtr->attributePtr.GetPtr());
+				iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
+				const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
 				if (referenceAttributePtr != NULL){		
-					const std::string& referenceComponentId = referenceAttributePtr->GetValue();
+					const std::string& componentId = referenceAttributePtr->GetValue();
 				
-					CreateConnector(*componentItemPtr, referenceComponentId);
+					CreateConnector(*componentItemPtr, componentId);
 				}
 	
-				const icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<icomp::CMultiReferenceAttribute*>(attributeInfoPtr->attributePtr.GetPtr());
+				const icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr);
 				if (multiReferenceAttributePtr != NULL){
 					for (int referenceIndex = 0; referenceIndex < multiReferenceAttributePtr->GetValuesCount(); referenceIndex++){
-						const std::string& referenceComponentId = multiReferenceAttributePtr->GetValueAt(referenceIndex);
+						const std::string& componentId = multiReferenceAttributePtr->GetValueAt(referenceIndex);
 						
-						CreateConnector(*componentItemPtr, referenceComponentId);
+						CreateConnector(*componentItemPtr, componentId);
+					}
+				}
+
+				const icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<icomp::CFactoryAttribute*>(attributePtr);
+				if (factoryAttributePtr != NULL){		
+					const std::string& componentId = factoryAttributePtr->GetValue();
+				
+					CreateConnector(*componentItemPtr, componentId);
+				}
+	
+				const icomp::CMultiFactoryAttribute* multiFactoryAttributePtr = dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr);
+				if (multiFactoryAttributePtr != NULL){
+					for (int referenceIndex = 0; referenceIndex < multiFactoryAttributePtr->GetValuesCount(); referenceIndex++){
+						const std::string& componentId = multiFactoryAttributePtr->GetValueAt(referenceIndex);
+						
+						CreateConnector(*componentItemPtr, componentId);
 					}
 				}
 			}
