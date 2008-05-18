@@ -19,21 +19,23 @@ class CComponentView: public QObject, public QGraphicsRectItem
 	Q_OBJECT
 
 public:
-	typedef icomp::IRegistry::ElementInfo ComponentData;
-
-	CComponentView( const ComponentData& componentRef, 
-					const QString& componentName, 
-					QGraphicsItem* parent = NULL, 
-					QGraphicsScene * scene = NULL);
+	CComponentView( 
+				const icomp::IRegistry* registryPtr,
+				const icomp::IRegistry::ElementInfo* elementInfoPtr, 
+				const QString& componentName, 
+				QGraphicsItem* parent = NULL, 
+				QGraphicsScene * scene = NULL);
 
 	virtual ~CComponentView();
 
-	const ComponentData* GetComponent() const;
+	const icomp::IRegistry::ElementInfo& GetElementInfo() const;
 	QString GetComponentName() const;
 
 	void AddConnector(CComponentConnector* connector);
 	void RemoveConnector(const CComponentConnector* connector);
 	void RemoveAllConnectors();
+
+	QRectF GetInnerRect() const;
 
 protected slots:
 	void OnExportChanged(bool state);
@@ -45,8 +47,9 @@ signals:
 	void positionChanged(CComponentView*, const QPoint& point);
 
 protected:
-	QRectF GetInnerRect() const;
-	QRect CalculateRect() const; 
+	QRect CalculateRect() const;
+
+	void CalcExportedInteraces();
 
 	// reimplemented QGraphicsRectItem
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
@@ -54,7 +57,8 @@ protected:
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
 
 private:
-	const ComponentData& m_componentRef;
+	const icomp::IRegistry& m_registry;
+	const icomp::IRegistry::ElementInfo& m_elementInfo;
 	QString m_componentName;
 	QMenu* m_contextMenu;
 
@@ -66,6 +70,8 @@ private:
 	const int m_gridSize;
 
 	QList<CComponentConnector*> m_connectors;
+
+	QStringList m_exportedInterfacesList;
 };
 
 

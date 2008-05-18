@@ -18,7 +18,7 @@ void* CCompositeComponent::GetInterface(const type_info& interfaceType, const st
 		const IRegistry& registry = contextPtr->GetRegistry();
 
 		if (subId.empty()){
-			const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedExportedInterfacesMap();
+			const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
 			IRegistry::ExportedInterfacesMap::const_iterator iter = interfaceInfos.find(interfaceType.name());
 			if (iter != interfaceInfos.end()){
 				std::string componentId;

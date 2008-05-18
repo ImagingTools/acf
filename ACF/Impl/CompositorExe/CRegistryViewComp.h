@@ -73,7 +73,10 @@ private:
 	void ResetScene();
 	void ScaleView(double scaleFactor);
 	void CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId);
-	CComponentView* CreateComponentView(const icomp::IRegistry::ElementInfo& componentRef, const QString& role);
+	CComponentView* CreateComponentView(
+				const icomp::IRegistry* registryPtr,
+				const icomp::IRegistry::ElementInfo* elementInfoPtr,
+				const std::string& role);
 
 	virtual void OnWheelEvent(QWheelEvent *event);
 	virtual void OnDragEnterEvent(QDragEnterEvent *event);

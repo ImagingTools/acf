@@ -1,12 +1,13 @@
 #include <QPainter>
 #include <math.h>
 
+
+#include "imath/CVector2d.h"
+
+#include "iqt/iqt.h"
+
 #include "CComponentView.h"
 #include "CComponentConnector.h"
-
-
-static const double Pi = 3.1415926;
-static double TwoPi = 2.0 * Pi;
 
 
 // public methods
@@ -15,8 +16,7 @@ CComponentConnector::CComponentConnector(CComponentView* sourceComponent,
 										 CComponentView* destComponent,
 										 QGraphicsItem *parent, 
 										 QGraphicsScene *scene)
-	:BaseClass(parent, scene),
-	m_arrowSize(10)
+:	BaseClass(parent, scene)
 {
 	setAcceptedMouseButtons(0);
 
@@ -87,46 +87,81 @@ void CComponentConnector::Adjust()
 
 	prepareGeometryChange();
 
-	QPointF srcCenter = mapFromItem(m_sourceComponent, m_sourceComponent->rect().center());
-	QPointF srcBottomLeft = mapFromItem(m_sourceComponent, m_sourceComponent->rect().bottomLeft());
-	QPointF srcTopRight = mapFromItem(m_sourceComponent, m_sourceComponent->rect().topRight());
-	QPointF destCenter = mapFromItem(m_destComponent, m_destComponent->rect().center());
-	QPointF destBottomLeft = mapFromItem(m_destComponent, m_destComponent->rect().bottomLeft());
-	QPointF destTopRight = mapFromItem(m_destComponent, m_destComponent->rect().topRight());
+	QRectF sourceRect = mapFromItem(m_sourceComponent, m_sourceComponent->GetInnerRect()).boundingRect();
+	QRectF destRect = mapFromItem(m_destComponent, m_destComponent->GetInnerRect()).boundingRect();
 
-	m_sourcePoint = srcCenter;
-	m_destPoint = destCenter;
+	double middleX = ((sourceRect.right() - destRect.left()) < (destRect.right() - sourceRect.left()))?
+				(sourceRect.right() + destRect.left()) * 0.5:
+				(destRect.right() + sourceRect.left()) * 0.5;
+	double middleY = ((sourceRect.bottom() - destRect.top()) < (destRect.bottom() - sourceRect.top()))?
+				(sourceRect.bottom() + destRect.top()) * 0.5:
+				(destRect.bottom() + sourceRect.top()) * 0.5;
 
-	QPointF diffPoint = destCenter - srcCenter;
-	if (diffPoint.y() > 0){
-		m_sourcePoint.ry() = srcBottomLeft.y();
+	m_connectionLine.clear();
+	if (sourceRect.right() < destRect.left()){
+		m_touchPoint.setX(sourceRect.right());
+
+		if (sourceRect.bottom() < destRect.top()){
+			m_touchPoint.setY(sourceRect.top() * 0.25 + sourceRect.bottom() * 0.75);
+
+			m_connectionLine.push_back(QPointF(sourceRect.right() + GP_OFFSET, sourceRect.top() * 0.25 + sourceRect.bottom() * 0.75));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.75 + destRect.right() * 0.25, sourceRect.top() * 0.25 + sourceRect.bottom() * 0.75));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.75 + destRect.right() * 0.25, destRect.top()));
+		}
+		else if (sourceRect.top() > destRect.bottom()){
+			m_touchPoint.setY(sourceRect.top() * 0.75 + sourceRect.bottom() * 0.25);
+
+			m_connectionLine.push_back(QPointF(sourceRect.right() + GP_OFFSET, sourceRect.top() * 0.75 + sourceRect.bottom() * 0.25));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.75 + destRect.right() * 0.25, sourceRect.top() * 0.75 + sourceRect.bottom() * 0.25));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.75 + destRect.right() * 0.25, destRect.bottom()));
+		}
+		else{
+			m_touchPoint.setY(middleY);
+
+			m_connectionLine.push_back(QPointF(sourceRect.right() + GP_OFFSET, middleY));
+			m_connectionLine.push_back(QPointF(destRect.left(), middleY));
+		}
 	}
-	else if (diffPoint.y() < 0){
-		m_sourcePoint.ry() = srcTopRight.y();
+	else if (sourceRect.left() > destRect.right()){
+		m_touchPoint.setX(sourceRect.left());
+
+		if (sourceRect.bottom() < destRect.top()){
+			m_touchPoint.setY(sourceRect.top() * 0.25 + sourceRect.bottom() * 0.75);
+
+			m_connectionLine.push_back(QPointF(sourceRect.left() - GP_OFFSET, sourceRect.top() * 0.25 + sourceRect.bottom() * 0.75));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.25 + destRect.right() * 0.75, sourceRect.top() * 0.25 + sourceRect.bottom() * 0.75));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.25 + destRect.right() * 0.75, destRect.top()));
+		}
+		else if (sourceRect.top() > destRect.bottom()){
+			m_touchPoint.setY(sourceRect.top() * 0.75 + sourceRect.bottom() * 0.25);
+
+			m_connectionLine.push_back(QPointF(sourceRect.left() - GP_OFFSET, sourceRect.top() * 0.75 + sourceRect.bottom() * 0.25));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.25 + destRect.right() * 0.75, sourceRect.top() * 0.75 + sourceRect.bottom() * 0.25));
+			m_connectionLine.push_back(QPointF(destRect.left() * 0.25 + destRect.right() * 0.75, destRect.bottom()));
+		}
+		else{
+			m_touchPoint.setY(middleY);
+
+			m_connectionLine.push_back(QPointF(sourceRect.left() - GP_OFFSET, middleY));
+			m_connectionLine.push_back(QPointF(destRect.right(), middleY));
+		}
 	}
 	else{
-		if (diffPoint.x() < 0){
-			m_sourcePoint.rx() = srcBottomLeft.x();
-		}
+		m_touchPoint.setX(middleX);
+		if (sourceRect.bottom() < destRect.top()){
+			m_touchPoint.setY(sourceRect.bottom());
 
-		if (diffPoint.x() > 0){
-			m_sourcePoint.rx() = srcTopRight.x();
+			m_connectionLine.push_back(QPointF(middleX, sourceRect.bottom() + GP_OFFSET));
+			m_connectionLine.push_back(QPointF(middleX, destRect.top()));
 		}
-	}
+		else if (sourceRect.top() > destRect.bottom()){
+			m_touchPoint.setY(sourceRect.top());
 
-	if (diffPoint.x() > 0){
-		m_destPoint.rx() = destBottomLeft.x();
-	}
-	else if (diffPoint.x() < 0){
-		m_destPoint.rx() = destTopRight.x();
-	}
-	else{
-		if (diffPoint.y() > 0){
-			m_destPoint.ry() = destTopRight.y();
+			m_connectionLine.push_back(QPointF(middleX, sourceRect.top() - GP_OFFSET));
+			m_connectionLine.push_back(QPointF(middleX, destRect.bottom()));
 		}
-
-		if (diffPoint.y() < 0){
-			m_destPoint.ry() = destBottomLeft.y();
+		else{
+			m_touchPoint.setY(middleY);
 		}
 	}
 
@@ -159,64 +194,33 @@ QPainterPath CComponentConnector::shape() const
 
 QRectF CComponentConnector::boundingRect() const
 {
-	if (m_destComponent == NULL || m_sourceComponent == NULL){
+	if ((m_destComponent == NULL) || (m_sourceComponent == NULL) || (m_connectionLine.size() < 2)){
 		return QRectF();
 	}
 
 	double penWidth = 1.0;
-	double extra = (penWidth + m_arrowSize) / 2.0;
+	double extra = (penWidth + GP_RADIUS2) / 2.0;
 
-	return QRectF(m_sourcePoint, QSizeF(m_destPoint.x() - m_sourcePoint.x(),
-		m_destPoint.y() - m_sourcePoint.y()))
-		.normalized()
-		.adjusted(-extra, -extra, extra, extra);
+	QRectF rect = m_connectionLine.boundingRect();
+	rect.unite(QRectF(m_touchPoint, QSize(1, 1)));
+
+	return rect.adjusted(-extra, -extra, extra, extra);
 }
 
 
 void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
-	if (m_destComponent == NULL || m_sourceComponent == NULL || m_sourcePoint == m_destPoint){
+	if (		(m_destComponent == NULL) ||
+				(m_sourceComponent == NULL) ||
+				(m_connectionLine.size() < 2) ||
+				(m_connectionLine[0] == m_connectionLine[1])){
 		return;
 	}
 
-	const int diameter = 32;
-	const int offset = 25;
-	const int radius = diameter / 2;
-	const int diameter2 = 16;
-	const int radius2 = diameter2 / 2;
-
-	QLineF horizontalLine1(m_destPoint.x(), m_destPoint.y(), m_sourcePoint.x(), m_destPoint.y());
-	QLineF vericalLine1(m_sourcePoint.x(), m_sourcePoint.y(), m_sourcePoint.x(), m_destPoint.y());
-	double angle = 0;
-	if (vericalLine1.p1().x() == vericalLine1.p2().x()){
-		if (vericalLine1.p1().y() > vericalLine1.p2().y()){
-			angle = Pi / 2.0;
-		}
-		else{
-			angle = Pi + Pi / 2.0;
-		}
-	}
-
-	if (vericalLine1.p1().y() == vericalLine1.p2().y()){
-		if (vericalLine1.p1().x() > vericalLine1.p2().x()){
-			angle = 0;
-		}
-		else{
-			angle = Pi;
-		}
-	}
-
-	int degree = 90 + angle * 180 / Pi;
-	QPointF arcPosition(m_sourcePoint.x() - radius + offset * cos(angle), 
-		m_sourcePoint.y() - radius - offset*sin(angle));
-	QPointF chordPosition(m_sourcePoint.x() - radius2 + offset * cos(angle), 
-		m_sourcePoint.y() - radius2 - offset * sin(angle));
-
-	QPoint arrowOffset(45 * cos(angle), -45 * sin(angle));
-	QPointF sourceArrowP1 = arrowOffset + m_sourcePoint + QPointF(sin(angle + Pi / 3) * m_arrowSize,
-		cos(angle + Pi / 3) * m_arrowSize);
-	QPointF sourceArrowP2 = arrowOffset + m_sourcePoint + QPointF(sin(angle + Pi - Pi / 3) * m_arrowSize,
-		cos(angle + Pi - Pi / 3) * m_arrowSize);   
+	const QPointF& circlePoint = m_connectionLine.first();
+	imath::CVector2d circleDirection(circlePoint.x() - m_touchPoint.x(), circlePoint.y() - m_touchPoint.y());
+	int degree = 360 - circleDirection.GetAngle() * 180 / I_PI;
+	circleDirection.Normalize(GP_OFFSET - GP_RADIUS2);
 
 	// drawing:
 	painter->save();
@@ -225,38 +229,25 @@ void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsIte
 	QColor color = isSelected() ? Qt::red : Qt::darkBlue;
 	QPen pen(color, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 	painter->setPen(pen);
-	if (m_destPoint.y() == m_sourcePoint.y()){
-		painter->drawLine(horizontalLine1);
-		vericalLine1 = horizontalLine1;
-	}
-	else if(m_destPoint.x() == m_sourcePoint.x()){
-		painter->drawLine(vericalLine1);
-	}
-	else{
-		painter->drawLine(horizontalLine1);
-		painter->drawLine(vericalLine1);
-	}
+	painter->drawPolyline(m_connectionLine);
 	
 	painter->save();
 	painter->setRenderHints(QPainter::Antialiasing, true);
 	
-	painter->drawArc(arcPosition.x(), arcPosition.y(), diameter, diameter, degree * 16 - 15 * 16, 5760 / 2 + 2 * 15 * 16); 
-	painter->setBrush(color);
-	painter->drawChord(chordPosition.x(), chordPosition.y(), diameter2, diameter2, 0, 5760); 
-
-	painter->restore();
-	 
-	// Draw the arrows if there's enough room
-	painter->setRenderHints(QPainter::Antialiasing, true);
-	painter->setBrush(color);
-	painter->drawPolygon(QPolygonF() << m_sourcePoint + arrowOffset << sourceArrowP1 << sourceArrowP2);
-
-	painter->restore();
+	painter->drawLine(m_touchPoint, m_touchPoint + iqt::GetQPointF(circleDirection));
+	QRectF circleRect2(circlePoint.x() - GP_RADIUS2, circlePoint.y() - GP_RADIUS2, GP_RADIUS2 * 2, GP_RADIUS2 * 2);
+	painter->drawArc(circleRect2, (degree + 45) * 16, 270 * 16);
 
 	painter->save();
-		painter->setPen(QPen(Qt::red, 1));
-		painter->drawPoint(m_sourcePoint.x() + (offset-radius+radius2) * cos(angle), m_sourcePoint.y() - (offset-radius+radius2)*sin(angle));
-		painter->drawPoint(m_sourcePoint.x() + (offset-radius) * cos(angle), m_sourcePoint.y() - (offset-radius)*sin(angle));
+
+	painter->setBrush(color);
+	QRectF circleRect(circlePoint.x() - GP_RADIUS, circlePoint.y() - GP_RADIUS, GP_RADIUS * 2, GP_RADIUS * 2);
+	painter->drawEllipse(circleRect);
+
+	painter->restore();
+
+	painter->restore();
+
 	painter->restore();
 }
 
@@ -275,3 +266,5 @@ void CComponentConnector::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
 
 	update();
 }
+
+

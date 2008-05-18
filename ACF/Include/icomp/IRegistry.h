@@ -49,7 +49,7 @@ public:
 	{
 		ElementPtr elementPtr;		///<	Pointer to registry element
 		int elementType;			///<	Type of element. \sa ElementType
-		std::string packageId;	///<	ID of package. It can be for example part of dynamic link library storing set of component or folder name with composed components
+		std::string packageId;		///<	ID of package. It can be for example part of dynamic link library storing set of component or folder name with composed components
 		std::string componentId;	///<	ID of component inside package.
 	};
 
@@ -91,7 +91,7 @@ public:
 	/**
 		Get access to information structore of exported interfaces.
 	*/
-	virtual const ExportedInterfacesMap& GetExportedExportedInterfacesMap() const = 0;
+	virtual const ExportedInterfacesMap& GetExportedInterfacesMap() const = 0;
 
 	/**
 		Get access to map used to convert exported sub-components to internal sub-component ID's.

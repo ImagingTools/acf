@@ -130,7 +130,7 @@ bool CRegistry::RemoveElementInfo(const std::string& elementId)
 }
 
 
-const IRegistry::ExportedInterfacesMap& CRegistry::GetExportedExportedInterfacesMap() const
+const IRegistry::ExportedInterfacesMap& CRegistry::GetExportedInterfacesMap() const
 {
 	return m_exportedInterfacesMap;
 }

@@ -10,6 +10,8 @@
 #include "istd/CString.h"
 #include "istd/CIndex2d.h"
 
+#include "imath/CVector2d.h"
+
 
 /**
 \defgroup iqt Qt Basics
@@ -37,6 +39,8 @@ extern QSize GetQSize(const istd::CIndex2d& size);
 extern istd::CIndex2d GetCIndex2d(const QSize& size);
 extern QPoint GetQPoint(const istd::CIndex2d& position);
 extern istd::CIndex2d GetCIndex2d(const QPoint& position);
+extern QPointF GetQPointF(const imath::CVector2d& position);
+extern imath::CVector2d GetCIndex2d(const QPointF& position);
 
 
 } // namespace iqt

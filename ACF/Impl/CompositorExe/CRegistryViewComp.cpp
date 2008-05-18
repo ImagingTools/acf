@@ -81,7 +81,7 @@ void CRegistryViewComp::UpdateEditor()
 			const std::string& elementId = *index;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
 			if (elementInfoPtr != NULL){
-				CComponentView* viewPtr = CreateComponentView(*elementInfoPtr, iqt::GetQString(elementId));
+				CComponentView* viewPtr = CreateComponentView(registryPtr, elementInfoPtr, elementId);
 
 				IRegistryGeometryProvider* geomeometryProviderPtr = dynamic_cast<IRegistryGeometryProvider*>(registryPtr);
 				if (geomeometryProviderPtr != NULL){			
@@ -157,27 +157,25 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 {
 	// detach last model from its observers:
 	if (m_selectedComponentPtr != NULL){
-		const CComponentView::ComponentData* elementInfoPtr = m_selectedComponentPtr->GetComponent();
-		if (elementInfoPtr != NULL){
-			imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfoPtr->elementPtr.GetPtr());
-			if (registryElementModelPtr != NULL){
-				registryElementModelPtr->DetachAllObservers();
-			}
+		const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
+
+		imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfo.elementPtr.GetPtr());
+		if (registryElementModelPtr != NULL){
+			registryElementModelPtr->DetachAllObservers();
 		}
 	}
 
 	if (isSelected){
 		m_selectedComponentPtr = viewPtr;
 		if (viewPtr != NULL && m_registryElementObserversCompPtr.IsValid()){
-			const CComponentView::ComponentData* elementInfoPtr = m_selectedComponentPtr->GetComponent();
-			if (elementInfoPtr != NULL){
-				for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
-					imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
-					if (observerPtr != NULL){
-						imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfoPtr->elementPtr.GetPtr());
-						if (registryElementModelPtr != NULL){
-							registryElementModelPtr->AttachObserver(observerPtr);
-						}
+			const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
+
+			for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
+				imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
+				if (observerPtr != NULL){
+					imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfo.elementPtr.GetPtr());
+					if (registryElementModelPtr != NULL){
+						registryElementModelPtr->AttachObserver(observerPtr);
 					}
 				}
 			}
@@ -210,13 +208,13 @@ void CRegistryViewComp::OnRemoveComponent()
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
 		if (m_selectedComponentPtr != NULL){
-			const CComponentView::ComponentData* elementInfoPtr = m_selectedComponentPtr->GetComponent();
-			if (elementInfoPtr != NULL){
-				imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfoPtr->elementPtr.GetPtr());
-				if (registryElementModelPtr != NULL){
-					registryElementModelPtr->DetachAllObservers();
-				}	
-			}
+			const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
+
+			imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfo.elementPtr.GetPtr());
+			if (registryElementModelPtr != NULL){
+				registryElementModelPtr->DetachAllObservers();
+			}	
+
 			registryPtr->RemoveElementInfo(m_selectedComponentPtr->GetComponentName().toStdString());
 
 			m_selectedComponentPtr->RemoveAllConnectors();
@@ -281,9 +279,12 @@ void CRegistryViewComp::CreateConnector(CComponentView& sourceView, const std::s
 }
 
 
-CComponentView* CRegistryViewComp::CreateComponentView(const icomp::IRegistry::ElementInfo& componentRef, const QString& role)
+CComponentView* CRegistryViewComp::CreateComponentView(
+			const icomp::IRegistry* registryPtr,
+			const icomp::IRegistry::ElementInfo* elementInfoPtr,
+			const std::string& role)
 {
-	CComponentView* componentViewPtr = new CComponentView(componentRef, role, &m_compositeItem, m_scenePtr);
+	CComponentView* componentViewPtr = new CComponentView(registryPtr, elementInfoPtr, role.c_str(), &m_compositeItem, m_scenePtr);
 
 	connect(componentViewPtr, 
 		SIGNAL(selectionChanged(CComponentView*, bool)),
@@ -341,19 +342,16 @@ void CRegistryViewComp::UpdateConnectors()
 		if (componentItemPtr == NULL){
 			continue;
 		}
-		const CComponentView::ComponentData* componentDataPtr = componentItemPtr->GetComponent();
-		if (componentDataPtr == NULL){
-			continue;
-		}
+		const icomp::IRegistry::ElementInfo& elementInfo = componentItemPtr->GetElementInfo();
 
-		icomp::IRegistryElement::Ids attributeIds = componentDataPtr->elementPtr->GetAttributeIds();
+		icomp::IRegistryElement::Ids attributeIds = elementInfo.elementPtr->GetAttributeIds();
 
 		for (		icomp::IRegistryElement::Ids::const_iterator index = attributeIds.begin(); 
 					index != attributeIds.end(); 
 					index++){
 			std::string attributeId = *index;
 
-			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = componentDataPtr->elementPtr->GetAttributeInfo(attributeId);
+			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementInfo.elementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr != NULL){
 				iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
 				const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);

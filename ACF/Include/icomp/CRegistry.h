@@ -43,7 +43,7 @@ public:
 			bool ensureElementCreated = true);
 	virtual const ElementInfo* GetElementInfo(const std::string& elementId) const;
 	virtual bool RemoveElementInfo(const std::string& elementId);
-	virtual const ExportedInterfacesMap& GetExportedExportedInterfacesMap() const;
+	virtual const ExportedInterfacesMap& GetExportedInterfacesMap() const;
 	virtual const ExportedComponentsMap& GetExportedComponentsMap() const;
 
 	// reimplemented (iser::ISerializable)

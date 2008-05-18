@@ -22,18 +22,24 @@
 #include "iqt/iqt.h"
 
 
-CComponentView::CComponentView(const ComponentData& componentRef, 
-							   const QString& componentName,
-							   QGraphicsItem* parent, 
-							   QGraphicsScene* scene) 
-	:QGraphicsRectItem(parent, scene),
-	m_componentRef(componentRef),
+CComponentView::CComponentView(
+			const icomp::IRegistry* registryPtr,
+			const icomp::IRegistry::ElementInfo* elementInfoPtr, 
+			const QString& componentName,
+			QGraphicsItem* parent, 
+			QGraphicsScene* scene) 
+:	QGraphicsRectItem(parent, scene),
+	m_registry(*registryPtr),
+	m_elementInfo(*elementInfoPtr),
 	m_componentName(componentName),
 	m_componentLabelFontSize(14),
 	m_componentIdFontSize(10),
 	m_gridSize(25)
 
 {
+	I_ASSERT(registryPtr != NULL);
+	I_ASSERT(elementInfoPtr != NULL);
+
 	m_contextMenu = new QMenu();
 	m_contextMenu->setTitle(tr("Component settings"));
 
@@ -45,6 +51,8 @@ CComponentView::CComponentView(const ComponentData& componentRef,
 	connect(renameAction, SIGNAL( activated()), this, SLOT(OnRename()));
 
 //	m_contextMenu->actions().at(0)->setChecked(exported);
+
+	CalcExportedInteraces();
 
 	setRect(CalculateRect());
 
@@ -69,9 +77,9 @@ CComponentView::~CComponentView()
 }
 
 
-const CComponentView::ComponentData* CComponentView::GetComponent() const
+const icomp::IRegistry::ElementInfo& CComponentView::GetElementInfo() const
 {
-	return &m_componentRef;
+	return m_elementInfo;
 }
 
 
@@ -127,6 +135,15 @@ void CComponentView::RemoveAllConnectors()
 }
 
 
+QRectF CComponentView::GetInnerRect()const
+{
+	QRectF mainRect = rect();
+	mainRect.adjust(0,0,-10,-10);
+
+	return mainRect;
+}
+
+
 // protected slots:
 
 void CComponentView::OnExportChanged(bool state)
@@ -143,14 +160,6 @@ void CComponentView::OnRename()
 
 
 // protected members
-
-QRectF CComponentView::GetInnerRect()const
-{
-	QRectF mainRect = rect();
-
-	return mainRect;
-}
-
 
 QRect CComponentView::CalculateRect() const
 {
@@ -170,18 +179,35 @@ QRect CComponentView::CalculateRect() const
 	m_componentIdHeight = fontInfo2.height() + 10;
 
 	height += m_componentIdHeight;
-	QString componentPath = QString(m_componentRef.packageId.c_str()) + QString(".") + m_componentRef.componentId.c_str();
+	QString componentPath = QString(m_elementInfo.packageId.c_str()) + QString(".") + m_elementInfo.componentId.c_str();
 
 	width = qMax(width, fontInfo2.width(componentPath) + 20);
 
-/*	if (m_isExported){
-		width += m_gridSize + m_gridSize;
-	}
-*/
+	width += 2 * m_gridSize * m_exportedInterfacesList.size();
+
 	width += (m_gridSize - (width % m_gridSize));
 	height += (m_gridSize - (height % m_gridSize));
 
 	return QRect(rect().left(), rect().top(), width, height);
+}
+
+
+void CComponentView::CalcExportedInteraces()
+{
+	using icomp::IRegistry::ExportedInterfacesMap::const_iterator;
+
+	std::string componentId = m_componentName.toStdString();
+
+	m_exportedInterfacesList.clear();
+
+	const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = m_registry.GetExportedInterfacesMap();
+	for (		const_iterator iter = interfacesMap.begin();
+				iter != interfacesMap.end();
+				++iter){
+		if (iter->second == componentId){
+			m_exportedInterfacesList.push_back(iter->first.c_str());
+		}
+	}
 }
 
 
@@ -203,19 +229,19 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 	shadowRect.adjust(10,10,10,10);
 	
 	if (isSelected()){
-		painter->fillRect(shadowRect, Qt::darkYellow);
+		painter->fillRect(shadowRect, QColor(10, 242, 126, 50));
 		painter->setPen(Qt::blue);
-		painter->fillRect(mainRect, QBrush(QColor(235,255,160,255)));
+		painter->fillRect(mainRect, QColor(10, 242, 126, 255));
 	}
 	else{
-		painter->fillRect(shadowRect, Qt::darkGray);
-		painter->fillRect(mainRect, QBrush(QColor(255,255,255,255)));
+		painter->fillRect(shadowRect, QColor(0, 0, 0, 30));
+		painter->fillRect(mainRect, Qt::white);
 		painter->setPen(Qt::black);
 	}
 
 	painter->drawRect(mainRect);
 
-/*	if (m_isExported){
+	if (!m_exportedInterfacesList.empty()){
 		painter->save();
 		QRectF exportRect = mainRect.adjusted(mainRect.width()-45,20, -20, 45-mainRect.height());
 		painter->fillRect(exportRect, QBrush(Qt::magenta));
@@ -236,7 +262,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 
 		painter->restore();
 	}
-*/
+
 	mainRect.adjust(10, 10, 0, -5);
 	mainRect.setHeight(m_componentLabelHeight);
 	painter->save();
@@ -256,7 +282,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 
 	painter->drawText(	mainRect, 
 						Qt::AlignLeft | Qt::TextSingleLine, 
-						QString(m_componentRef.packageId.c_str()) + QString(".") + m_componentRef.componentId.c_str());
+						QString(m_elementInfo.packageId.c_str()) + QString(".") + m_elementInfo.componentId.c_str());
 	
 	painter->restore();
 }
@@ -280,10 +306,10 @@ QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& v
 			break;
 
 		case QGraphicsItem::ItemPositionChange:
-			QPointF myCurrentPosition = pos();
+			QSizeF size = CalculateRect().size();
 			QPoint newPos = value.toPoint();
-			newPos.rx() = newPos.rx() - (newPos.rx() % m_gridSize);
-			newPos.ry() = newPos.ry() - (newPos.ry() % m_gridSize);
+			newPos.setX(::floor((newPos.x() + size.width()) / m_gridSize) * m_gridSize - size.width());
+			newPos.setY(::floor((newPos.y() + size.height()) / m_gridSize) * m_gridSize - size.height());
 
 			foreach (CComponentConnector* connector, m_connectors){
 				connector->Adjust();
@@ -302,3 +328,5 @@ QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& v
 
 	return QGraphicsRectItem::itemChange(change, value);
 }
+
+

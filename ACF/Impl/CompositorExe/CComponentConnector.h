@@ -13,8 +13,11 @@ class CComponentConnector: public QGraphicsItem
 public:
 	typedef QGraphicsItem BaseClass;
 
-    enum { 
-		Type = UserType + 2 
+	enum GeometricParams
+	{
+		GP_RADIUS = 4,
+		GP_RADIUS2 = 8,
+		GP_OFFSET = 12
 	};
 
     CComponentConnector(CComponentView *sourceComponent, CComponentView *destComponent, QGraphicsItem *parent = NULL, QGraphicsScene *scene = NULL);
@@ -42,9 +45,9 @@ protected:
 private:
     CComponentView* m_sourceComponent;
 	CComponentView* m_destComponent;
-    QPointF m_sourcePoint;
-    QPointF m_destPoint;
-    qreal m_arrowSize;
+
+	QPolygonF m_connectionLine;
+	QPointF m_touchPoint;
 };
 
 

@@ -30,5 +30,8 @@ namespace imath
 } // namespace imath
 
 
+static const double I_PI = 3.1415926;
+
+
 #endif // !imath_included
 
