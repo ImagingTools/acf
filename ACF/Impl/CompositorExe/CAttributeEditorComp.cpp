@@ -133,7 +133,7 @@ void CAttributeEditorComp::UpdateEditor()
 			continue;
 		}
 
-		const icomp::TMultiAttribute<istd::CString>* stringListAttribute = dynamic_cast<const icomp::TMultiAttribute<istd::CString>*>(attributePtr);
+		const icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<const icomp::CMultiStringAttribute*>(attributePtr);
 		if (stringListAttribute != NULL){
 			QString stringList;
 
@@ -286,7 +286,7 @@ void CAttributeEditorComp::OnGuiCreated()
 
 	AttributeTree->header()->setStretchLastSection(true);
 
-	AttributeTree->setItemDelegate(new AttributeItemDelegate(this));
+	AttributeTree->setItemDelegate(new AttributeItemDelegate(*this));
 
 	connect(AttributeTree, 
 		SIGNAL(itemSelectionChanged()), 
@@ -301,16 +301,10 @@ void CAttributeEditorComp::OnGuiCreated()
 
 // members of nested class AttributeItemDelegate
 
-CAttributeEditorComp::AttributeItemDelegate::AttributeItemDelegate(CAttributeEditorComp* parent)
-	:QItemDelegate()
+CAttributeEditorComp::AttributeItemDelegate::AttributeItemDelegate(CAttributeEditorComp& parent)
+	:QItemDelegate(),
+	m_parent(parent)
 {
-	m_parent = parent;
-}
-
-
-const icomp::IRegistryElement::AttributeInfo* CAttributeEditorComp::AttributeItemDelegate::GetAttribute(const QString& attributeName) const
-{
-	return m_parent->GetRegistryAttribute(attributeName);
 }
 
 
@@ -334,16 +328,11 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 
 	int propertyMining = index.data(AttributeMining).toInt();
 
-	if (index.column() == ValueColumn && propertyMining == Dependency){
+	if (index.column() == ValueColumn && (propertyMining == Dependency || propertyMining == MultipleDependency)){
 		QComboBox* combo = new QComboBox(parent);
 		combo->setEditable(true);
 		return combo;
 	} 
-	else if(propertyMining == MultipleDependency){
-		QComboBox* combo = new QComboBox(parent);
-		combo->setEditable(true);
-		return combo;
-	}
 	else if (propertyMining == SelectableAttribute){
 		QComboBox* combo = new QComboBox(parent);
 		return combo;
@@ -355,18 +344,24 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 
 void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index ) const
 {
-/*	QComboBox* combo = dynamic_cast<QComboBox*>(editor);
-	QString dependecySource = index.data(AttributeId).toString();
-	QString componentName = m_parent->m_componentViewPtr->selectedComponentName();
-	dependecySource = componentName + "."  + dependecySource;
-
+	QComboBox* combo = dynamic_cast<QComboBox*>(editor);
 	QString attributeName = index.data(AttributeId).toString();
-	acf::ComponentAttributeInterface* attributePtr = GetAttribute(attributeName);
+	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeName);
+	if (attributeInfoPtr == NULL){
+		editor->setProperty("text", QVariant(index.data()));
+		return;
+	}
+
+	iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
+	if (attributePtr == NULL){
+		return;
+	}
 
 	int propertyMining = index.data(AttributeMining).toInt();
 
 	if (index.column() == ValueColumn && combo != NULL && propertyMining == Dependency){
-		combo->addItems(m_parent->m_componentViewPtr->componentsForDependency(dependecySource));
+		//TODO: Get list of valid components for this reference
+//		combo->addItems(m_parent.m_componentViewPtr->componentsForDependency(dependecySource));
 		return;
 	}
 	else if (index.column() == ValueColumn && propertyMining == Attribute){
@@ -382,7 +377,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 			editor->setProperty("text", QVariant(value));
 		}
 
-		icomp::TSingleAttribute* boolAttribute = dynamic_cast<icomp::TSingleAttribute*>(attributePtr);
+		icomp::CBoolAttribute* boolAttribute = dynamic_cast<icomp::CBoolAttribute*>(attributePtr);
 		if (boolAttribute != NULL){
 			bool value = boolAttribute->GetValue();
 			editor->setProperty("text", QVariant(value));
@@ -394,12 +389,11 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 			editor->setProperty("text", QVariant(iqt::GetQString(value)));
 		}
 
-		icomp::TMultiAttribute<istd::CString>* stringListAttribute = dynamic_cast<icomp::TMultiAttribute<istd::CString>*>(attributePtr);
+		icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<icomp::CMultiStringAttribute*>(attributePtr);
 		if (stringListAttribute != NULL){
-			QStringList value = iqt::GetQStringList(stringListAttribute->GetValueList());
 			QString outputValue;
-			for (int index = 0; index < value.count(); index++){
-				outputValue += value.at(index) + ";";
+			for (int index = 0; index < stringListAttribute->GetValuesCount(); index++){
+				outputValue += iqt::GetQString(stringListAttribute->GetValueAt(index)) + ";";
 			}
 
 			editor->setProperty("text", QVariant(outputValue));
@@ -407,10 +401,9 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 
 		icomp::CMultiIntAttribute* intListAttribute = dynamic_cast<icomp::CMultiIntAttribute*>(attributePtr);
 		if (intListAttribute != NULL){
-			std::vector<int> list = intListAttribute->GetValueList();
 			QString outputValue;
-			for (int index = 0; index < int(list.size()); index++){
-				outputValue += QString("%1").arg(list.at(index)) + ";";
+			for (int index = 0; index < intListAttribute->GetValuesCount(); index++){
+				outputValue += QString("%1").arg(intListAttribute->GetValueAt(index)) + ";";
 			}
 
 			editor->setProperty("text", QVariant(outputValue));
@@ -418,10 +411,9 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 
 		icomp::CMultiDoubleAttribute* doubleListAttribute = dynamic_cast<icomp::CMultiDoubleAttribute*>(attributePtr);
 		if (doubleListAttribute != NULL){
-			std::vector<double> list = doubleListAttribute->GetValueList();
 			QString outputValue;
-			for (int index = 0; index < int(list.size()); index++){
-				outputValue += QString("%1").arg(list.at(index)) + ";";
+			for (int index = 0; index < doubleListAttribute->GetValuesCount(); index++){
+				outputValue += QString("%1").arg(doubleListAttribute->GetValueAt(index)) + ";";
 			}
 
 			editor->setProperty("text", QVariant(outputValue));
@@ -430,33 +422,32 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 		return;
 	}
 	else if(index.column() == ValueColumn && propertyMining == MultipleDependency){
-		QStringList components = m_parent->m_componentViewPtr->componentsForDependency(dependecySource);
-		combo->addItems(m_parent->m_componentViewPtr->componentsForDependency(dependecySource));
-		combo->lineEdit()->setText(index.data().toString());
+//		QStringList components = m_parent.m_componentViewPtr->componentsForDependency(dependecySource);
+//		combo->addItems(m_parent.m_componentViewPtr->componentsForDependency(dependecySource));
+//		combo->lineEdit()->setText(index.data().toString());
 
 		return;
 	}	
-	else if(index.column() == ValueColumn && propertyMining == SelectableAttribute && combo != NULL){
-		acf::SelectableStringListAttribute* stringListAttribute = dynamic_cast<acf::SelectableStringListAttribute*>(attributePtr);
-		if (stringListAttribute != NULL){
-			QStringList value = iqt::GetQStringList(stringListAttribute->GetValueList());
-			QString outputValue;
-			for (int index = 0; index < value.count(); index++){
-				combo->addItem(value.at(index));
-			}
-		}
 
-		return;
-	}
-*/
 	QItemDelegate::setEditorData(editor, index);
 }
 
 
 void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-/*	QString attributeName = index.data(AttributeId).toString();
-	acf::ComponentAttributeInterface* attributePtr = GetAttribute(attributeName);
+	icomp::IRegistryElement* elementPtr = m_parent.GetObjectPtr();
+	I_ASSERT(elementPtr != NULL);
+
+	QString attributeName = index.data(AttributeId).toString();
+	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeName);
+	if (attributeInfoPtr == NULL){
+		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeName.toStdString());
+	}
+
+	iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
+	if (attributePtr == NULL){
+		return;
+	}
 
 	int propertyMining = index.data(AttributeMining).toInt();
 	
@@ -464,40 +455,30 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 	if (index.column() == ValueColumn && propertyMining == Dependency){
 		QComboBox* combo = dynamic_cast<QComboBox*>(editor);
 		I_ASSERT(combo != NULL);
-		QString dependecyTarget = combo->currentText();
+		QString referenceValue = combo->currentText();
 
-		acf::ComponentDependencyAttribute* dependencyAttribute = 
-			dynamic_cast<acf::ComponentDependencyAttribute*>(attributePtr);
-		if (dependencyAttribute != NULL){
-			dependencyAttribute->SetDependencyName(iqt::GetCString(dependecyTarget));
+		icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
+		if (referenceAttributePtr != NULL){
+			referenceAttributePtr->SetValue(referenceValue.toStdString());
 		}
-
-		m_parent->emitUpdateView();
-
-		return;
 	}
-
 	// set multiple dependency data
-	if (index.column() == ValueColumn && propertyMining == MultipleDependency){
+	else if (index.column() == ValueColumn && propertyMining == MultipleDependency){
 		QComboBox* combo = dynamic_cast<QComboBox*>(editor);
 		I_ASSERT(combo != NULL);
 		QString string = combo->lineEdit()->text();
-		QStringList dependecyTarget = string.split(';',QString::SkipEmptyParts); 
+		QStringList references = string.split(';',QString::SkipEmptyParts); 
 
-		acf::MultipleComponentDependencyAttribute* dependencyAttribute = 
-			dynamic_cast<acf::MultipleComponentDependencyAttribute*>(attributePtr);
-
-		if (dependencyAttribute != NULL){
-			dependencyAttribute->SetDependencyNames(iqt::GetCStringList(dependecyTarget));
+		icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr);
+		if (multiReferenceAttributePtr != NULL){
+			multiReferenceAttributePtr->Reset();
+			for (int index = 0; index < references.count(); index++){
+				multiReferenceAttributePtr->InsertValue(references.at(index).toStdString());
+			}
 		}
-
-		m_parent->emitUpdateView();
-
-		return;
 	}
-
 	// set attribute data:
-	if (index.column() == ValueColumn && propertyMining == Attribute || propertyMining == MultipleAttribute){	
+	else if (index.column() == ValueColumn && propertyMining == Attribute || propertyMining == MultipleAttribute){	
 		icomp::CIntAttribute* intAttribute = dynamic_cast<icomp::CIntAttribute*>(attributePtr);
 		if (intAttribute != NULL){
 			intAttribute->SetValue(editor->property("text").toInt());
@@ -508,7 +489,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 			doubleAttribute->SetValue(editor->property("text").toDouble());
 		}
 
-		icomp::TSingleAttribute* boolAttribute = dynamic_cast<icomp::TSingleAttribute*>(attributePtr);
+		icomp::CBoolAttribute* boolAttribute = dynamic_cast<icomp::CBoolAttribute*>(attributePtr);
 		if (boolAttribute != NULL){
 			boolAttribute->SetValue(editor->property("text").toBool());
 		}
@@ -519,51 +500,42 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 			stringAttribute->SetValue(iqt::GetCString(newValue));
 		}
 
-		icomp::TMultiAttribute<istd::CString>* stringListAttribute = dynamic_cast<icomp::TMultiAttribute<istd::CString>*>(attributePtr);
+		icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<icomp::CMultiStringAttribute*>(attributePtr);
 		if (stringListAttribute != NULL){
 			QString newValue = editor->property("text").toString();
 			QStringList values = newValue.split(';', QString::SkipEmptyParts);
-			stringListAttribute->SetValueList(iqt::GetCStringList(values));
+
+			stringListAttribute->Reset();
+			for (int index = 0; index < values.count(); index++){
+				stringListAttribute->InsertValue(values.at(index).toStdString());
+			}
 		}
 
 		icomp::CMultiIntAttribute* intListAttribute = dynamic_cast<icomp::CMultiIntAttribute*>(attributePtr);
 		if (intListAttribute != NULL){
-			QString newValue = editor->property("text").toString();
-			QStringList values = newValue.split(';', QString::SkipEmptyParts);
-			std::vector<int> list;
-			foreach(QString stringValue, values){
-				list.push_back(stringValue.toInt());
-			}
+			QString valueString = editor->property("text").toString();
+			QStringList values = valueString.split(';', QString::SkipEmptyParts);
 
-			intListAttribute->SetValueList(list);
+			intListAttribute->Reset();
+			for (int index = 0; index < values.count(); index++){
+				intListAttribute->InsertValue(values.at(index).toInt());
+			}
 		}
 
 		icomp::CMultiDoubleAttribute* doubleListAttribute = dynamic_cast<icomp::CMultiDoubleAttribute*>(attributePtr);
 		if (doubleListAttribute != NULL){
-			QString newValue = editor->property("text").toString();
-			QStringList values = newValue.split(';', QString::SkipEmptyParts);
-			std::vector<double> list;
-			foreach(QString stringValue, values){
-				list.push_back(stringValue.toDouble());
-			}
+			QString valueString = editor->property("text").toString();
+			QStringList values = valueString.split(';', QString::SkipEmptyParts);
 
-			doubleListAttribute->SetValueList(list);
-		}
-
-	}
-
-	if (index.column() == ValueColumn && propertyMining == SelectableAttribute){
-		acf::SelectableStringListAttribute* stringListAttribute = dynamic_cast<acf::SelectableStringListAttribute*>(attributePtr);
-		if (stringListAttribute != NULL){
-			QComboBox* combo = dynamic_cast<QComboBox*>(editor);
-			if (combo != NULL){
-				stringListAttribute->SetSelected(combo->currentIndex());
+			intListAttribute->Reset();
+			for (int index = 0; index < values.count(); index++){
+				doubleListAttribute->InsertValue(values.at(index).toDouble());
 			}
 		}
 	}
 
-	m_parent->emitUpdateView();
-*/
+	istd::TChangeNotifier<icomp::IRegistryElement> changePtr(elementPtr);
+
 	QItemDelegate::setModelData(editor, model, index);
 }
 

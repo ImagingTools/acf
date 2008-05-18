@@ -20,8 +20,12 @@ public:
 		GP_OFFSET = 12
 	};
 
-    CComponentConnector(CComponentView *sourceComponent, CComponentView *destComponent, QGraphicsItem *parent = NULL, QGraphicsScene *scene = NULL);
-    virtual ~CComponentConnector();
+    CComponentConnector(	CComponentView *sourceComponent, 
+							CComponentView *destComponent, 
+							QGraphicsItem *parent = NULL, 
+							QGraphicsScene *scene = NULL);
+    
+	virtual ~CComponentConnector();
 
     CComponentView* GetSourceComponent() const;
     void SetSourceComponent(CComponentView* sourceComponent);

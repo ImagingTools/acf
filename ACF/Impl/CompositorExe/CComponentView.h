@@ -51,7 +51,7 @@ protected:
 
 	void CalcExportedInteraces();
 
-	// reimplemented QGraphicsRectItem
+	// reimplemented (QGraphicsRectItem)
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);

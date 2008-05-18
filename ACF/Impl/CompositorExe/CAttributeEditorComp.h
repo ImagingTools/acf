@@ -76,9 +76,7 @@ private:
 	class AttributeItemDelegate: public QItemDelegate
 	{
 	public:
-		AttributeItemDelegate(CAttributeEditorComp* parent);
-
-		const icomp::IRegistryElement::AttributeInfo* GetAttribute(const QString& propertyName) const;
+		AttributeItemDelegate(CAttributeEditorComp& parent);
 		
 		// reimplemented (QItemDelegate)
 		virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -87,7 +85,7 @@ private:
 		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
 		virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 	private:
-		CAttributeEditorComp* m_parent;
+		CAttributeEditorComp& m_parent;
 	};
 
 	typedef std::map<std::string, QString> AttributeTypesMap;
@@ -98,3 +96,4 @@ private:
 
 
 #endif // !CAttributeEditorComp_included
+
