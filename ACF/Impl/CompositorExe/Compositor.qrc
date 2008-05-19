@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/" >
+        <file>Resources/Icons/delete_64.png</file>
         <file>Resources/Icons/dirclosed-16.png</file>
         <file>Resources/Icons/diropen-16.png</file>
         <file>Resources/Icons/folder_64.png</file>
@@ -8,7 +9,5 @@
         <file>Resources/Icons/player_pause.png</file>
         <file>Resources/Icons/player_play.png</file>
         <file>Resources/Icons/player_stop.png</file>
-        <file>Resources/Icons/folder_64.png</file>
-        <file>Resources/Icons/ok_64.png</file>
     </qresource>
 </RCC>

@@ -119,6 +119,7 @@ private:
 	CComponentView* m_selectedComponentPtr;
 
 	iqt::CHierarchicalCommand m_registryCommand;
+	iqt::CHierarchicalCommand m_removeComponentCommand;
 };
 
 

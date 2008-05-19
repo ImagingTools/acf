@@ -16,7 +16,8 @@
 
 
 CRegistryViewComp::CRegistryViewComp()
-	:m_selectedComponentPtr(NULL)
+	:m_selectedComponentPtr(NULL),
+	m_removeComponentCommand("&Remove Component", 100, idoc::IHierarchicalCommand::CF_GLOBAL_MENU | idoc::IHierarchicalCommand::CF_TOOLBAR)
 {
 	m_scenePtr = new CRegistryScene(*this);
 
@@ -110,10 +111,16 @@ void CRegistryViewComp::OnGuiCreated()
 	I_ASSERT(m_scenePtr != NULL);
 
 	iqt::CHierarchicalCommand* registryMenuPtr = new iqt::CHierarchicalCommand("&Registry");
-	iqt::CHierarchicalCommand* removeComponentCommandPtr = new iqt::CHierarchicalCommand("&Remove Component");
-	connect(removeComponentCommandPtr, SIGNAL( activated()), this, SLOT(OnRemoveComponent()));
-	registryMenuPtr->InsertChild(removeComponentCommandPtr, true);
-	iqt::CHierarchicalCommand* exportToCodeCommandPtr = new iqt::CHierarchicalCommand("&Export to code");
+
+	m_removeComponentCommand.SetVisuals(tr("&Remove Component"), 
+										tr("&Remove Component"), 
+										tr("Remove the selected component from the registry"),
+										QIcon(":/Resources/Icons/delete_64.png"));
+	m_removeComponentCommand.setEnabled(false);
+	connect(&m_removeComponentCommand, SIGNAL( activated()), this, SLOT(OnRemoveComponent()));
+	registryMenuPtr->InsertChild(&m_removeComponentCommand, false);
+
+	iqt::CHierarchicalCommand* exportToCodeCommandPtr = new iqt::CHierarchicalCommand("&Export To Code");
 	connect(exportToCodeCommandPtr, SIGNAL( activated()), this, SLOT(OnExportToCode()));
 	registryMenuPtr->InsertChild(exportToCodeCommandPtr, true);
 
@@ -170,6 +177,7 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 	}
 
 	if (isSelected){
+		m_removeComponentCommand.setEnabled(true);
 		m_selectedComponentPtr = viewPtr;
 		if (viewPtr != NULL && m_registryElementObserversCompPtr.IsValid()){
 			const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
@@ -187,6 +195,8 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 	}
 	else{
 		m_selectedComponentPtr = NULL;
+
+		m_removeComponentCommand.setEnabled(false);
 	}
 }
 
@@ -223,7 +233,8 @@ void CRegistryViewComp::OnRemoveComponent()
 
 			m_selectedComponentPtr->RemoveAllConnectors();
 			m_scenePtr->removeItem(m_selectedComponentPtr);
-	
+			m_removeComponentCommand.setEnabled(false);
+
 			m_selectedComponentPtr = NULL;
 		}
 	}
