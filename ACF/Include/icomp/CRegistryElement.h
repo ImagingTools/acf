@@ -5,6 +5,8 @@
 #include <map>
 #include <string>
 
+#include "istd/TChangeDelegator.h"
+
 #include "icomp/IRegistryElement.h"
 
 #include "imod/TModelWrap.h"
@@ -17,7 +19,7 @@ namespace icomp
 class IAttributeStaticInfo;
 
 
-class CRegistryElement: public imod::TModelWrap<IRegistryElement>
+class CRegistryElement: public imod::TModelWrap<istd::TChangeDelegator<IRegistryElement> >
 {
 public:
 	/**

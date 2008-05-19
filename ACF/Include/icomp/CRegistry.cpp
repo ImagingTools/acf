@@ -80,7 +80,10 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 				if (componentInfoPtr2 != NULL){
 					I_ASSERT(*componentInfoPtr2 != NULL);
 
-					registryPtr.SetPtr(new CRegistryElement(*componentInfoPtr2));
+					icomp::CRegistryElement* registryElementPtr = new CRegistryElement(*componentInfoPtr2);
+					registryElementPtr->SetSlavePtr(this);
+
+					registryPtr.SetPtr(registryElementPtr);
 				}
 			}
 		}
