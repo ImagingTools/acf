@@ -105,6 +105,7 @@ protected:
 		virtual void drawBackground(QPainter* painter, const QRectF & rect);
 		virtual void dragEnterEvent(QGraphicsSceneDragDropEvent * event);
 		virtual void dropEvent(QGraphicsSceneDragDropEvent * event);
+		virtual void dragMoveEvent(QGraphicsSceneDragDropEvent * event);
 
 	private:
 		CRegistryViewComp& m_parent;

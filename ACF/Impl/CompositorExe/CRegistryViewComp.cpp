@@ -497,7 +497,7 @@ void CRegistryViewComp::CRegistryScene::drawBackground(QPainter* painter, const 
 	painter->save();
 	painter->fillRect(sceneRect, QBrush(Qt::white));
 
-	const double gridSize = 25;
+	const double gridSize = m_parent.GetGrid();
 	QPen pen(Qt::gray);
 	pen.setStyle(Qt::DotLine);
 
@@ -546,3 +546,7 @@ void CRegistryViewComp::CRegistryScene::dropEvent(QGraphicsSceneDragDropEvent* e
 	}
 }
 
+
+void CRegistryViewComp::CRegistryScene::dragMoveEvent(QGraphicsSceneDragDropEvent * event)
+{
+}
