@@ -2,6 +2,8 @@
 #include <QListWidget>
 #include <QLineEdit>
 
+#include "icomp/CRegistryElement.h" 
+
 #include "CAttributeEditorComp.h"
 #include "CRegistryViewComp.h"
 
@@ -47,6 +49,37 @@ const icomp::IAttributeStaticInfo* CAttributeEditorComp::GetStaticAttributeInfo(
 	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
 
 	return *staticAttributes.FindElement(attributeId.toStdString());
+}
+
+	
+QStringList CAttributeEditorComp::GetAvailableComponents(const QString& interfaceId) const
+{
+	QStringList availableComponents;
+
+	icomp::CRegistryElement* elementPtr = dynamic_cast<icomp::CRegistryElement*>(GetObjectPtr());
+	if (elementPtr != NULL){
+		icomp::IRegistry* registryPtr = dynamic_cast<icomp::IRegistry*>(elementPtr->GetSlavePtr());
+		if (registryPtr != NULL){
+			icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
+			for (		icomp::IRegistry::Ids::const_iterator index = elementIds.begin();
+						index != elementIds.end();
+						index++){
+
+				const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(*index);
+				I_ASSERT(elementInfoPtr != NULL);
+				I_ASSERT(elementInfoPtr->elementPtr.IsValid());
+
+				const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr.GetPtr()->GetComponentStaticInfo();
+				icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfo.GetInterfaceExtractors();
+				const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceId.toStdString().c_str());
+				if (extractorPtr != NULL){
+					availableComponents.push_back(iqt::GetQString(*index));
+				}
+			}
+		}
+	}
+
+	return availableComponents;
 }
 
 
@@ -325,7 +358,6 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 		return NULL;
 	}
 
-
 	int propertyMining = index.data(AttributeMining).toInt();
 
 	if (propertyMining == Reference || propertyMining == MultipleReference || propertyMining == SelectableAttribute){
@@ -370,8 +402,13 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 	if (		index.column() == ValueColumn && comboEditor != NULL && 
 				(propertyMining == Reference || propertyMining == MultipleReference)){
 
-		//TODO: Get list of valid components for this reference
-//		comboEditor->addItems(m_parent.m_componentViewPtr->componentsForReference(dependecySource));
+		const icomp::IAttributeStaticInfo* attributeStaticInfoPtr = m_parent.GetStaticAttributeInfo(attributeName);
+		I_ASSERT(attributeStaticInfoPtr != NULL);
+
+		QString interfaceId = attributeStaticInfoPtr->GetRelatedInterfaceType().name();
+		QStringList availableComponents = m_parent.GetAvailableComponents(interfaceId);
+
+		comboEditor->addItems(availableComponents);
 
 		icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
 		icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr);

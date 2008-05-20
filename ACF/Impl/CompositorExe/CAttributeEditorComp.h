@@ -47,10 +47,11 @@ public:
 	};
 
 public:
+	CAttributeEditorComp();
+
 	const icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const QString& attributeId) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const QString& attributeId) const;
-
-	CAttributeEditorComp();
+	QStringList GetAvailableComponents(const QString& interfaceId) const;
 
 	// reimplemented (TGuiObserverWrap)
 	virtual void OnGuiModelDetached();
@@ -65,10 +66,6 @@ protected slots:
 protected:
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
-
-signals:
-	void selectedReferenceInterface(const QString& interfaceId);
-	void selectedPropertyType(const QString& propertyType);
 
 private:
 	friend class AttributeItemDelegate;
