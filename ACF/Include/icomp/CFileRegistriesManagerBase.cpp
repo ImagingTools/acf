@@ -37,6 +37,7 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistryFromFile(const istd::CSt
 		istd::TDelPtr<IRegistry> newRegistryPtr(new CRegistry(&m_componentsFactory));
 		if (newRegistryPtr->Serialize(*archivePtr)){
 			mapValue.TakeOver(newRegistryPtr);
+			m_invRegistriesMap[mapValue.GetPtr()] = correctedPath;
 
 			return mapValue.GetPtr();
 		}
