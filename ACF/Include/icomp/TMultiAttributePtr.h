@@ -19,6 +19,7 @@ class TMultiAttributePtr
 {
 public:
 	typedef Attribute AttributeType;
+	typedef void InterfaceType;
 
 	TMultiAttributePtr();
 

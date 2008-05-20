@@ -100,42 +100,36 @@ bool CCompositeComponentContext::CreateSubcomponentInfo(
 	if (elementInfoPtr != NULL && elementInfoPtr->elementPtr.IsValid()){
 		const IRegistryElement& registryElement = *elementInfoPtr->elementPtr;
 
-		switch (elementInfoPtr->elementType){
-		case IRegistry::ET_COMPONENT:
-			{
+		// try to create composed component
+		const IRegistry* subRegistryPtr = m_registriesManager.GetRegistry(elementInfoPtr->address, &m_registry);
+		if (subRegistryPtr != NULL){
+			if (!contextPtr.IsValid()){
+				contextPtr = new CCompositeComponentContext(
+							&registryElement,
+							subRegistryPtr,
+							&m_registriesManager,
+							this);
+			}
+
+			if (contextPtr.IsValid()){
+				CCompositeComponentContext* compositeContextPtr = dynamic_cast<CCompositeComponentContext*>(contextPtr.GetPtr());
+				I_ASSERT(compositeContextPtr != NULL);
+
+				componentPtr.SetPtr(new TComponentWrap<CCompositeComponent>(compositeContextPtr));
+			}
+
+			return componentPtr.IsValid();
+		}
+		else{	// create real component
+			if (!contextPtr.IsValid()){
+				contextPtr.SetPtr(new CComponentContext(&registryElement, this));
+			}
+
+			if (contextPtr.IsValid()){
 				const IComponentStaticInfo& elementStaticInfo = registryElement.GetComponentStaticInfo();
 
-				if (!contextPtr.IsValid()){
-					contextPtr.SetPtr(new CComponentContext(&registryElement, this));
-				}
-
-				if (contextPtr.IsValid()){
-					componentPtr.SetPtr(elementStaticInfo.CreateComponent(contextPtr.GetPtr()));
-				}
+				componentPtr.SetPtr(elementStaticInfo.CreateComponent(contextPtr.GetPtr()));
 			}
-			break;
-
-		case IRegistry::ET_COMPOSITION:
-			{
-				const IRegistry* subRegistryPtr = m_registriesManager.GetRegistry(elementInfoPtr->packageId, elementInfoPtr->componentId, &m_registry);
-				if (subRegistryPtr != NULL){
-					if (!contextPtr.IsValid()){
-						contextPtr = new CCompositeComponentContext(
-									&registryElement,
-									subRegistryPtr,
-									&m_registriesManager,
-									this);
-					}
-
-					if (contextPtr.IsValid()){
-						CCompositeComponentContext* compositeContextPtr = dynamic_cast<CCompositeComponentContext*>(contextPtr.GetPtr());
-						I_ASSERT(compositeContextPtr != NULL);
-
-						componentPtr = new TComponentWrap<CCompositeComponent>(compositeContextPtr);
-					}
-				}
-			}
-			break;
 		}
 	}
 

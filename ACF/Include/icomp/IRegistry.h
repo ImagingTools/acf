@@ -11,6 +11,7 @@
 #include "iser/ISerializable.h"
 
 #include "icomp/IRegistryElement.h"
+#include "icomp/CComponentAddress.h"
 
 
 namespace icomp
@@ -33,24 +34,12 @@ public:
 	};
 
 	/**
-		Type of element.
-	*/
-	enum ElementType
-	{
-		ET_NONE,
-		ET_COMPONENT,	///<	Normal component loaded from dynamic link library.
-		ET_COMPOSITION	///<	Composition of components used as single component.
-	};
-
-	/**
 		Describe information stored with each element.
 	*/
 	struct ElementInfo
 	{
-		ElementPtr elementPtr;		///<	Pointer to registry element
-		int elementType;			///<	Type of element. \sa ElementType
-		std::string packageId;		///<	ID of package. It can be for example part of dynamic link library storing set of component or folder name with composed components
-		std::string componentId;	///<	ID of component inside package.
+		ElementPtr elementPtr;				///<	Pointer to registry element
+		icomp::CComponentAddress address;	///<	Address of component used to create its instance.
 	};
 
 	/**
@@ -69,13 +58,11 @@ public:
 
 	/**
 		Insert new attribute info object to collection of attributes.
-		\param	attributeId		unique ID of new attribute.
+		\param	elementId		unique ID of new element (component).
 	*/
 	virtual ElementInfo* InsertElementInfo(
 				const std::string& elementId,
-				int elementType,
-				const std::string& packageId,
-				const std::string& componentId,
+				const icomp::CComponentAddress& address,
 				bool ensureElementCreated = true) = 0;
 
 	/**

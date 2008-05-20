@@ -1,14 +1,17 @@
 #include "CPackageOverviewComp.h"
 
 
+// Qt includes
 #include <QVBoxLayout>
 #include <QMouseEvent>
 #include <QApplication>
 #include <QHeaderView>
 #include <QItemDelegate>
 
-
 #include "istd/CString.h"
+
+#include "iser/CMemoryReadArchive.h"
+#include "iser/CMemoryWriteArchive.h"
 
 
 class CItemDelegate: public QItemDelegate
@@ -25,8 +28,7 @@ public:
 
 
 CPackageOverviewComp::CPackageOverviewComp()
-	: BaseClass(),
-	m_selectedComponentInfoPtr(NULL)
+	: BaseClass()
 {
 }
 
@@ -42,9 +44,7 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 		bool isMultiFactory = (attributeStaticInfoPtr->GetAttributeType() == typeid(icomp::CMultiFactoryAttribute));
 
 		if (isReference || isMultiReference || isFactory || isMultiFactory){
-			QString interaceId = "TODO: Get interace id";
-			
-			HighlightComponents(interaceId);
+			HighlightComponents(attributeStaticInfoPtr->GetRelatedInterfaceType().name());
 
 			return;
 		}
@@ -62,13 +62,24 @@ void CPackageOverviewComp::GenerateComponentTree()
 		return;
 	}
 
-	icomp::IComponentStaticInfo::SubcomponentInfos packages = m_generalStaticInfoPtr->GetSubcomponentInfos();
+	const icomp::CPackageStaticInfo::SubcomponentInfos& subcomponentInfos = m_generalStaticInfoPtr->GetSubcomponentInfos();
+	int subcomponentsCount = subcomponentInfos.GetElementsCount();
 
-	for(int packageIndex = 0; packageIndex < packages.GetLocalElementsCount(); packageIndex++){
-		const std::string& packageName = packages.GetLocalKeyAt(packageIndex);
-		const icomp::IComponentStaticInfo* staticInfoPtr = packages.GetValueAt(packageIndex);
+	for (int i = 0; i < subcomponentsCount; ++i){
+		const std::string& packageId = subcomponentInfos.GetKeyAt(i);
+		const icomp::CPackageStaticInfo* packageInfoPtr = dynamic_cast<const icomp::CPackageStaticInfo*>(subcomponentInfos.GetValueAt(i));
+		I_ASSERT(packageInfoPtr != NULL);
 
-		AddPackage(staticInfoPtr, packageName.c_str());
+		if (packageInfoPtr != NULL){
+			QTreeWidgetItem* packageItemPtr = new QTreeWidgetItem();
+			packageItemPtr->setText(0, packageId.c_str());
+			packageItemPtr->setForeground(0, Qt::darkBlue);
+			packageItemPtr->setForeground(1, Qt::darkBlue);
+
+			GeneratePackageTree(packageId, *packageInfoPtr, *packageItemPtr);
+
+			m_rootLocalItem->addChild(packageItemPtr);
+		}
 	}
 }
 
@@ -82,58 +93,44 @@ void CPackageOverviewComp::HighlightComponents(const QString& interfaceId)
 		return;
 	}
 
-	QTreeWidgetItemIterator treeIter(widgetPtr);
-	while (*treeIter != NULL){
-		(*treeIter)->setIcon(0, QIcon());
+	for (QTreeWidgetItemIterator treeIter(widgetPtr); *treeIter != NULL; ++treeIter){
+		QTreeWidgetItem* itemPtr = *treeIter;
 
-		int metaInfoData = (*treeIter)->data(0, ComponentStaticInfo).toInt();
-		const icomp::IComponentStaticInfo* staticInfoPtr = reinterpret_cast<const icomp::IComponentStaticInfo*>(metaInfoData);
+		QTreeWidgetItem* parentItem = itemPtr->parent();
+		bool hasChilds = itemPtr->childCount() > 0;
 
-		QTreeWidgetItem* parentItem = (*treeIter)->parent();
-		if (parentItem != NULL){
-			if (parentItem->isExpanded()){
-				parentItem->setIcon(0, QIcon(s_closedIcon));
-			}
-			else{			
-				parentItem->setIcon(0, QIcon(s_openIcon));
-			}
-		}
+		const icomp::IComponentStaticInfo* staticInfoPtr = GetItemStaticInfo(*itemPtr);
 
-		if (staticInfoPtr != NULL && !interfaceId.isEmpty()){
+		QIcon itemIcon;
+		if ((staticInfoPtr != NULL) && !interfaceId.isEmpty()){
 			icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfoPtr->GetInterfaceExtractors();
 			const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceId.toStdString().c_str());
 			if (extractorPtr != NULL){
-				(*treeIter)->setIcon(0, QIcon(QString::fromUtf8(":/Resources/Icons/ok-16.png")));
-				QTreeWidgetItem* parentItem = (*treeIter)->parent();
+				itemIcon = QIcon(QString::fromUtf8(":/Resources/Icons/ok-16.png"));
+
 				if (parentItem != NULL){
 					parentItem->setExpanded(true);
 				}
-				break;
+			}
+			else{
+				itemIcon = QIcon(QString::fromUtf8(":/Resources/Icons/close_a_128.png"));
 			}
 		}
-		treeIter++;
+		else if (hasChilds){
+			if (itemPtr->isExpanded()){
+				itemIcon = QIcon(s_openIcon);
+			}
+			else{			
+				itemIcon = QIcon(s_closedIcon);
+			}
+		}
+
+		itemPtr->setIcon(0, itemIcon);
 	}
 }
 
 
 // protected slots
-
-void CPackageOverviewComp::OnItemSelected()
-{
-	QTreeWidget* widgetPtr = GetQtWidget();
-	I_ASSERT(widgetPtr);
-
-	m_selectedComponentInfoPtr = NULL;
-
-	QList<QTreeWidgetItem*> items = widgetPtr->selectedItems();
-	if (items.count() != 0){
-		PackageComponentItem* selectedItemPtr = dynamic_cast<PackageComponentItem*>(items.at(0));
-		if (selectedItemPtr != NULL){
-			m_selectedComponentInfoPtr = selectedItemPtr->m_componentInfoPtr.GetPtr();
-		}
-	}
-}
-
 
 void CPackageOverviewComp::OnItemCollapsed(QTreeWidgetItem* item)
 {
@@ -153,38 +150,43 @@ void CPackageOverviewComp::OnItemExpanded(QTreeWidgetItem* item)
 
 // protected methods
 
-void CPackageOverviewComp::AddPackage(const icomp::IComponentStaticInfo* staticInfoPtr, const QString& packageName)
+void CPackageOverviewComp::GeneratePackageTree(
+			const std::string& packageId,
+			const icomp::CPackageStaticInfo& packageInfo,
+			QTreeWidgetItem& root)
 {
-	using iqt::GetQString;
-
-	QTreeWidgetItem* libraryItem = new QTreeWidgetItem();
-	libraryItem->setText(0, packageName);
-	libraryItem->setForeground(0, Qt::darkBlue);
-	libraryItem->setForeground(1, Qt::darkBlue);
-
-	m_rootLocalItem->addChild(libraryItem);
-
 	// create the component list:
-	const icomp::IComponentStaticInfo::SubcomponentInfos& subComponents = staticInfoPtr->GetSubcomponentInfos();
+	icomp::CPackageStaticInfo::SubcomponentInfos subcomponentInfos = packageInfo.GetSubcomponentInfos();
+	int subcomponentsCount = subcomponentInfos.GetElementsCount();
 
-	for(int packageIndex = 0; packageIndex < subComponents.GetLocalElementsCount(); packageIndex++){
-		const std::string& componentName = subComponents.GetLocalKeyAt(packageIndex);
-		const icomp::IComponentStaticInfo* staticInfoPtr = subComponents.GetValueAt(packageIndex);
-	
-		PackageComponentItem* componentItem = new PackageComponentItem(libraryItem);
-		componentItem->m_componentInfoPtr.SetPtr(new CStaticComponentInfo(staticInfoPtr, packageName.toStdString(), componentName));
-		libraryItem->addChild(componentItem);
+	for (int i = 0; i < subcomponentsCount; ++i){
+		const std::string& componentId = subcomponentInfos.GetKeyAt(i);
+		const icomp::IComponentStaticInfo* componentInfoPtr = subcomponentInfos.GetValueAt(i);
+		I_ASSERT(componentInfoPtr != NULL);
 
-		componentItem->setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
-		componentItem->setText(0, componentName.c_str());
-
-		QVariant componentStaticInfoData(QVariant::Int,&staticInfoPtr);
-		componentItem->setData(0, ComponentStaticInfo, componentStaticInfoData);
+		icomp::CComponentAddress address(packageId, componentId);
+		PackageComponentItem* componentItem = new PackageComponentItem(&root, address);
+		root.addChild(componentItem);
 	}
 
-	libraryItem->setExpanded(true);
+	root.setExpanded(true);
 
 	HighlightComponents(QString());
+}
+
+
+const icomp::IComponentStaticInfo* CPackageOverviewComp::GetItemStaticInfo(const QTreeWidgetItem& item) const
+{
+	const PackageComponentItem* componentItemPtr = dynamic_cast<const PackageComponentItem*>(&item);
+	if ((componentItemPtr != NULL) && (m_generalStaticInfoPtr.IsValid())){
+		const icomp::CComponentAddress& address = componentItemPtr->GetAddress();
+		const icomp::IComponentStaticInfo* packageInfoPtr = m_generalStaticInfoPtr->GetSubcomponent(address.GetPackageId());
+		if (packageInfoPtr != NULL){
+			return packageInfoPtr->GetSubcomponent(address.GetComponentId());
+		}
+	}
+
+	return NULL;
 }
 
 
@@ -211,18 +213,20 @@ bool CPackageOverviewComp::eventFilter(QObject* eventObject, QEvent* event)
 				QTreeWidgetItem* pressedItemPtr = reinterpret_cast<QTreeWidgetItem*>(modelIndex.internalPointer());
 				if (pressedItemPtr != NULL){
 					PackageComponentItem* selectedItemPtr = dynamic_cast<PackageComponentItem*>(pressedItemPtr);
-					if (selectedItemPtr != NULL && selectedItemPtr->m_componentInfoPtr.IsValid()){
+					if (selectedItemPtr != NULL){
 						QMimeData* mimeData = new QMimeData;
 
-						componentInfoAddress = int(selectedItemPtr->m_componentInfoPtr.GetPtr());
-					
-						QByteArray byteData = QByteArray::number(componentInfoAddress);
+						icomp::CComponentAddress address = selectedItemPtr->GetAddress();
+						iser::CMemoryWriteArchive archive;
+						if (address.Serialize(archive)){
+							QByteArray byteData = QByteArray((const char*)archive.GetBuffer(), archive.GetBufferSize());
 
-						mimeData->setData("component", byteData);
+							mimeData->setData("component", byteData);
 
-						QDrag *drag = new QDrag(sourceWidgetPtr);
-						drag->setMimeData(mimeData);
-						drag->start(Qt::MoveAction);
+							QDrag *drag = new QDrag(sourceWidgetPtr);
+							drag->setMimeData(mimeData);
+							drag->start(Qt::MoveAction);
+						}
 					}
 				}
 			}
@@ -242,11 +246,6 @@ void CPackageOverviewComp::OnGuiCreated()
 	QTreeWidget* widgetPtr = GetQtWidget();
 	I_ASSERT(widgetPtr);
 	
-	connect(widgetPtr, 
-		SIGNAL(itemSelectionChanged()), 
-		this, 
-		SLOT(OnItemSelected()));
-
 	connect(widgetPtr, 
 		SIGNAL(itemCollapsed(QTreeWidgetItem*)), 
 		this, 

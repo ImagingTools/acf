@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <map>
+#include <set>
 
 
 namespace istd
@@ -23,10 +24,20 @@ public:
 	typedef Key KeyType;
 	typedef Value ValueType;
 
+	typedef std::set<KeyType> Keys;
+
 	/**
-		Constructor with optional assigning of parent map.
+		Default constructor.
 	*/
-	TCascadedMap(const TCascadedMap<Key, Value>* parentPtr = NULL);
+	TCascadedMap();
+	/**
+		Constructor with assigning of parent map.
+	*/
+	explicit TCascadedMap(const TCascadedMap<Key, Value>* parentPtr);
+	/**
+		Copy constructor.
+	*/
+	TCascadedMap(const TCascadedMap& map);
 
 	/**
 		Get access to parent map instance.
@@ -136,6 +147,18 @@ public:
 	*/
 	void ResetLocal();
 
+	/**
+		Get list of keys stored in this map.
+		\param	doAppend	if it is true, list of keys will be appended to existing key list.
+	*/
+	void GetKeys(Keys& result, bool doAppend = false) const;
+
+	/**
+		Get list of local keys stored in this map.
+		\param	doAppend	if it is true, list of keys will be appended to existing key list.
+	*/
+	void GetLocalKeys(Keys& result, bool doAppend = false) const;
+
 	// TODO: add element removing and correct comment in class header.
 
 private:
@@ -153,8 +176,24 @@ private:
 // public methods
 
 template <typename Key, typename Value>
+TCascadedMap<Key, Value>::TCascadedMap()
+:	m_parentPtr(NULL)
+{
+}
+
+
+template <typename Key, typename Value>
 TCascadedMap<Key, Value>::TCascadedMap(const TCascadedMap<Key, Value>* parentPtr)
 :	m_parentPtr(parentPtr)
+{
+}
+
+
+template <typename Key, typename Value>
+TCascadedMap<Key, Value>::TCascadedMap(const TCascadedMap& map)
+:	m_positionsMap(map.m_positionsMap),
+	m_pairList(map.m_pairList),
+	m_parentPtr(map.m_parentPtr)
 {
 }
 
@@ -206,7 +245,10 @@ int TCascadedMap<Key, Value>::FindIndex(const KeyType& key) const
 	}
 
 	if (m_parentPtr != NULL){
-		return m_parentPtr->FindIndex(key) + GetLocalElementsCount();
+		int parentIndex = m_parentPtr->FindIndex(key);
+		if (parentIndex >= 0){
+			return parentIndex + GetLocalElementsCount();
+		}
 	}
 
 	return -1;
@@ -394,6 +436,32 @@ void TCascadedMap<Key, Value>::ResetLocal()
 {
 	m_positionsMap.clear();
 	m_pairList.clear();
+}
+
+
+template <typename Key, typename Value>
+void TCascadedMap<Key, Value>::GetKeys(Keys& result, bool doAppend) const
+{
+	GetLocalKeys(result, doAppend);
+
+	if (m_parentPtr != NULL){
+		m_parentPtr->GetKeys(result, true);
+	}
+}
+
+
+template <typename Key, typename Value>
+void TCascadedMap<Key, Value>::GetLocalKeys(Keys& result, bool doAppend) const
+{
+	if (!doAppend){
+		result.clear();
+	}
+
+	for (		const IndicesMap::const_iterator iter = m_positionsMap.begin();
+				iter != m_positionsMap.end();
+				++iter){
+		result.insert(iter->first);
+	}
 }
 
 

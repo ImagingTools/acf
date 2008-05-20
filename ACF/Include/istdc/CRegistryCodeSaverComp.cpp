@@ -45,14 +45,11 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 			std::string elementId = *iter;
 			const icomp::IRegistry::ElementInfo* infoPtr = registryPtr->GetElementInfo(elementId);
 			I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
-			I_ASSERT(infoPtr->elementType >= 0);
-			I_ASSERT(infoPtr->elementType < ELEMENT_TYPES_COUNT);
 
 			stream << "\ticomp::IRegistry::ElementInfo* infoPtr = registry.InsertElementInfo(" << std::endl;
 			stream << "\t\t\t\t\"" << elementId << "\"," << std::endl;
-			stream << "\t\t\t\t" << s_elementTypeNames[infoPtr->elementType] << "," << std::endl;
-			stream << "\t\t\t\t\"" << infoPtr->packageId << "\"," << std::endl;
-			stream << "\t\t\t\t\"" << infoPtr->componentId << "\"," << std::endl;
+			stream << "\t\t\t\ticomp::CComponentAddress(\"" << infoPtr->address.GetPackageId();
+			stream << "\", \"" << infoPtr->address.GetComponentId() << "\")," << std::endl;
 			stream << "\t\t\t\ttrue);" << std::endl;
 			stream << "\tif (infoPtr == NULL){" << std::endl;
 			stream << "\t\treturn false;" << std::endl;
@@ -84,15 +81,6 @@ const istd::CString& CRegistryCodeSaverComp::GetLastSaveFileName() const
 	return m_lastSaveFileName;
 }
 
-
-// static attributes
-
-std::string CRegistryCodeSaverComp::s_elementTypeNames[ELEMENT_TYPES_COUNT] =
-{
-	"icomp::IRegistry::ET_NONE",
-	"icomp::IRegistry::ET_COMPONENT",
-	"icomp::IRegistry::ET_COMPOSITION"
-};
 
 } // namespace istdc
 

@@ -8,7 +8,6 @@
 #include <QGraphicsItemGroup>
 #include <QDrag>
 #include <QMimeData>
-#include <QDropEvent>
 #include <QTimer>
 
 
@@ -28,7 +27,6 @@
 
 #include "IRegistryPreview.h"
 #include "CComponentView.h"
-#include "CStaticComponentInfo.h"
 
 
 class CRegistryViewComp:	public iqt::TGuiObserverWrap<iqt::TGuiComponentBase<QGraphicsView>, 
@@ -50,8 +48,7 @@ public:
 
 	CRegistryViewComp();
 
-	void OnAddComponent(const CStaticComponentInfo& componentInfo);
-	void OnAddComponent(const CStaticComponentInfo& componentInfo, const QString& componentRole);
+	bool TryCreateComponent(const icomp::CComponentAddress& address);
 
 	QStringList GetComponentsForDependency(const QString& dependecySource) const;
 
@@ -66,6 +63,7 @@ public:
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnRetranslate();
 
 public slots:
 	void SetCenterOn(const QString& componentRole);
@@ -77,6 +75,7 @@ protected slots:
 	void OnExportChanged(CComponentView* view, bool export);
 	void OnComponentPositionChanged(CComponentView* view, const QPoint& newPosition);
 	void OnRemoveComponent();
+	void OnRenameComponent();
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
@@ -89,6 +88,8 @@ private:
 				const icomp::IRegistry* registryPtr,
 				const icomp::IRegistry::ElementInfo* elementInfoPtr,
 				const std::string& role);
+
+	bool ProcessDroppedData(const QMimeData& data);
 
 protected:
 	class CCompositeItem: public QGraphicsRectItem
@@ -127,7 +128,10 @@ private:
 	CComponentView* m_selectedComponentPtr;
 
 	iqt::CHierarchicalCommand m_registryCommand;
+	iqt::CHierarchicalCommand m_registryMenu;
 	iqt::CHierarchicalCommand m_removeComponentCommand;
+	iqt::CHierarchicalCommand m_renameComponentCommand;
+	iqt::CHierarchicalCommand m_exportToCodeCommand;
 	iqt::CHierarchicalCommand m_executeRegistryCommand;
 	iqt::CHierarchicalCommand m_abortRegistryCommand;
 

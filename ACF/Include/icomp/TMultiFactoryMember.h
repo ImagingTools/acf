@@ -6,6 +6,7 @@
 
 #include "icomp/IComponentContext.h"
 #include "icomp/TMultiAttributePtr.h"
+#include "icomp/TInterfaceManipBase.h"
 #include "icomp/CMultiFactoryAttribute.h"
 
 
@@ -18,7 +19,7 @@ namespace icomp
 	Don't use direct this class, use macros \c I_FACT and \c I_ASSIGN instead.
 */
 template <class Interface>
-class TMultiFactoryMember: public TMultiAttributePtr<CMultiFactoryAttribute>
+class TMultiFactoryMember: public TMultiAttributePtr<CMultiFactoryAttribute>, public TInterfaceManipBase<Interface>
 {
 public:
 	typedef TSingleAttributePtr<CFactoryAttribute> BaseClass;

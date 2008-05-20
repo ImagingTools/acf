@@ -25,7 +25,7 @@ public:
 	const IRegistry* GetRegistryFromFile(const istd::CString& path) const;
 
 	// reimplemented (icomp::IRegistriesManager)
-	virtual const IRegistry* GetRegistry(const std::string& packageId, const std::string& componentId, const IRegistry* contextPtr) const;
+	virtual const IRegistry* GetRegistry(const icomp::CComponentAddress& address, const IRegistry* contextPtr) const;
 
 protected:
 	/**

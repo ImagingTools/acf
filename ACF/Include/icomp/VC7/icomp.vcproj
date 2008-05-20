@@ -130,10 +130,16 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CComponentAddress.cpp">
+			</File>
+			<File
 				RelativePath="..\CComponentBase.cpp">
 			</File>
 			<File
 				RelativePath="..\CComponentContext.cpp">
+			</File>
+			<File
+				RelativePath="..\CComponentStaticInfoBase.cpp">
 			</File>
 			<File
 				RelativePath="..\CCompositeComponent.cpp">
@@ -164,10 +170,16 @@
 			Name="Header Files"
 			Filter="h">
 			<File
+				RelativePath="..\CComponentAddress.h">
+			</File>
+			<File
 				RelativePath="..\CComponentBase.h">
 			</File>
 			<File
 				RelativePath="..\CComponentContext.h">
+			</File>
+			<File
+				RelativePath="..\CComponentStaticInfoBase.h">
 			</File>
 			<File
 				RelativePath="..\CCompositeComponent.h">

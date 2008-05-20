@@ -10,9 +10,9 @@
 #include "iqt/TGuiComponentBase.h"
 
 #include "icomp/IRegistry.h"
+#include "icomp/CPackageStaticInfo.h"
 
 #include "IAttributeSelectionObserver.h"
-#include "CStaticComponentInfo.h"
 
 
 class CPackageOverviewComp: public iqt::TGuiComponentBase<QTreeWidget>,
@@ -44,12 +44,16 @@ protected:
  	void HighlightComponents(const QString& interfaceId);
 
 protected slots:
-	void OnItemSelected();
 	void OnItemCollapsed(QTreeWidgetItem* item);
 	void OnItemExpanded(QTreeWidgetItem* item);
 
 protected:
-	void AddPackage(const icomp::IComponentStaticInfo* staticInfoPtr, const QString& name);
+	void GeneratePackageTree(
+				const std::string& packageId,
+				const icomp::CPackageStaticInfo& packageInfo,
+				QTreeWidgetItem& root);
+
+	const icomp::IComponentStaticInfo* GetItemStaticInfo(const QTreeWidgetItem& item) const;
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* eventObject, QEvent* event);
@@ -61,23 +65,26 @@ private:
 	class PackageComponentItem: public QTreeWidgetItem
 	{
 	public:
-		PackageComponentItem()
+		PackageComponentItem(QTreeWidgetItem* parentItemPtr, const icomp::CComponentAddress& address)
+		:	QTreeWidgetItem(parentItemPtr), m_address(address)
 		{
+			setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
+			setText(0, iqt::GetQString(address.GetComponentId()));
 		}
 
-		PackageComponentItem(QTreeWidgetItem* parentItemPtr)
-			:QTreeWidgetItem(parentItemPtr)
+		const icomp::CComponentAddress& GetAddress() const
 		{
+			return m_address;
 		}
-		
-		istd::TDelPtr<CStaticComponentInfo> m_componentInfoPtr;
+
+	private:
+		icomp::CComponentAddress m_address;
 	};
 
-	I_REF(icomp::IComponentStaticInfo, m_generalStaticInfoPtr);
+	I_REF(icomp::CPackageStaticInfo, m_generalStaticInfoPtr);
 
 	QTreeWidgetItem* m_rootLocalItem;
 	QTreeWidgetItem* m_rootComposedItem;
-	CStaticComponentInfo* m_selectedComponentInfoPtr;
 
 	static QString s_closedIcon;
 	static QString s_openIcon;

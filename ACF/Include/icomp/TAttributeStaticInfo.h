@@ -17,8 +17,9 @@ public:
 				icomp::IComponentStaticInfo& staticInfo,
 				const std::string& id,
 				const std::string& description,
-				const Attribute* defaultValuePtr = NULL,
-				bool isObligatory = true);
+				const Attribute* defaultValuePtr,
+				bool isObligatory,
+				const type_info* relatedInterfaceTypePtr);
 
 	// reimplemented (icomp::IAttributeStaticInfo)
 	virtual iser::ISerializable* CreateAttribute() const;
@@ -26,12 +27,14 @@ public:
 	virtual const std::string& GetAttributeDescription() const;
 	virtual const iser::ISerializable* GetAttributeDefaultValue() const;
 	virtual const type_info& GetAttributeType() const;
+	virtual const type_info& GetRelatedInterfaceType() const;
 	virtual bool IsObligatory() const;
 
 private:
 	std::string m_id;
 	std::string m_description;
 	const Attribute* m_defaultValuePtr;
+	const type_info& m_relatedInterfaceType;
 	bool m_isObligatory;
 };
 
@@ -44,8 +47,13 @@ TAttributeStaticInfo<Attribute>::TAttributeStaticInfo(
 			const std::string& id,
 			const std::string& description,
 			const Attribute* defaultValuePtr,
-			bool isObligatory)
-:	m_id(id), m_description(description), m_defaultValuePtr(defaultValuePtr), m_isObligatory(isObligatory)
+			bool isObligatory,
+			const type_info* relatedInterfaceTypePtr)
+:	m_id(id),
+	m_description(description),
+	m_defaultValuePtr(defaultValuePtr),
+	m_isObligatory(isObligatory),
+	m_relatedInterfaceType(*relatedInterfaceTypePtr)
 {
 	staticInfo.RegisterAttributeInfo(id, this);
 }
@@ -90,6 +98,13 @@ template <class Attribute>
 const type_info& TAttributeStaticInfo<Attribute>::GetAttributeType() const
 {
 	return typeid(Attribute);
+}
+
+
+template <class Attribute>
+const type_info& TAttributeStaticInfo<Attribute>::GetRelatedInterfaceType() const
+{
+	return m_relatedInterfaceType;
 }
 
 

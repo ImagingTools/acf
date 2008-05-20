@@ -56,7 +56,7 @@ void CRegistryModelComp::OnComponentCreated()
 
 bool CRegistryModelComp::Serialize(iser::IArchive& archive)
 {
-	bool retVal = BaseClass::Serialize(archive);
+	bool retVal = BaseClass2::Serialize(archive);
 
 	if (retVal){
 		static iser::CArchiveTag positionsTag("ElementPositions", "List of component element positions");

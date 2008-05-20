@@ -13,15 +13,7 @@ protected:
 	/**
 		Extract interface from component.
 	*/
-	Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "") const
-	{
-		if (componentPtr != NULL){
-			return static_cast<Interface*>(componentPtr->GetInterface(typeid(Interface), subId));
-		}
-		else{
-			return NULL;
-		}
-	}
+	Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "") const;
 
 	/**
 		Split component ID into separated ID's.
@@ -31,6 +23,18 @@ protected:
 
 
 // protected methods
+
+template <class Interface>
+typename Interface* TInterfaceManipBase<Interface>::ExtractInterface(IComponent* componentPtr, const std::string& subId = "") const
+{
+	if (componentPtr != NULL){
+		return static_cast<Interface*>(componentPtr->GetInterface(typeid(Interface), subId));
+	}
+	else{
+		return NULL;
+	}
+}
+
 
 template <class Interface>
 bool TInterfaceManipBase<Interface>::SplitId(const std::string& complexId, std::string& baseId, std::string& subId) const

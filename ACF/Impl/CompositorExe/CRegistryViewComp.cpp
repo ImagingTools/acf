@@ -13,40 +13,52 @@
 #include "CComponentConnector.h"
 
 #include "iser/IArchive.h" 
+#include "iser/CMemoryReadArchive.h"
+#include "iser/CMemoryWriteArchive.h"
 
 
 CRegistryViewComp::CRegistryViewComp()
-	:m_selectedComponentPtr(NULL),
+:	m_selectedComponentPtr(NULL),
 	m_removeComponentCommand("&Remove Component", 100, idoc::IHierarchicalCommand::CF_GLOBAL_MENU | idoc::IHierarchicalCommand::CF_TOOLBAR),
 	m_executeRegistryCommand("&Execute Registry", 100, idoc::IHierarchicalCommand::CF_GLOBAL_MENU | idoc::IHierarchicalCommand::CF_TOOLBAR),
 	m_abortRegistryCommand("&Abort Registry", 100, idoc::IHierarchicalCommand::CF_GLOBAL_MENU | idoc::IHierarchicalCommand::CF_TOOLBAR)
-
 {
+	m_removeComponentCommand.setEnabled(false);
+	m_renameComponentCommand.setEnabled(false);
+	m_exportToCodeCommand.setEnabled(false);
+	m_executeRegistryCommand.setEnabled(false);
+	m_abortRegistryCommand.setEnabled(false);
+
+	m_registryMenu.InsertChild(&m_removeComponentCommand);
+	m_registryMenu.InsertChild(&m_renameComponentCommand);
+	m_registryMenu.InsertChild(&m_exportToCodeCommand);
+	m_registryMenu.InsertChild(&m_executeRegistryCommand);
+	m_registryMenu.InsertChild(&m_abortRegistryCommand);
+	m_registryCommand.InsertChild(&m_registryMenu);
+
 	m_scenePtr = new CRegistryScene(*this);
 
 	m_scenePtr->setFocus();
 }
 
 
-void CRegistryViewComp::OnAddComponent(const CStaticComponentInfo& componentInfo)
+bool CRegistryViewComp::TryCreateComponent(const icomp::CComponentAddress& address)
 {
-	bool isOk = false;
-	QString role = QInputDialog::getText(GetWidget(), tr("Application Compositor"), tr("Component role:"), QLineEdit::Normal, "",&isOk);
-	if (isOk && !role.isEmpty()){
-		OnAddComponent(componentInfo, role);
-	}
-}
-
-
-void CRegistryViewComp::OnAddComponent(const CStaticComponentInfo& componentInfo, const QString& componentRole)
-{
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(componentRole.toStdString(), componentInfo.m_elementType, componentInfo.m_packageId, componentInfo.m_componentId);
-		if (elementInfoPtr == NULL){
-			QMessageBox::critical(GetWidget(), tr("Error"), tr("Component could not be added")); 
+	bool retVal = false;
+	QString componentName = QInputDialog::getText(GetWidget(), tr("Application Compositor"), tr("Component name"), QLineEdit::Normal, "",&retVal);
+	if (retVal && !componentName.isEmpty()){
+		icomp::IRegistry* registryPtr = GetObjectPtr();
+		if (registryPtr != NULL){
+			icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(componentName.toStdString(), address);
+			if (elementInfoPtr != NULL){
+				return true;
+			}
 		}
+
+		QMessageBox::critical(GetWidget(), tr("Error"), tr("Component could not be added")); 
 	}
+
+	return false;
 }
 
 
@@ -111,43 +123,15 @@ void CRegistryViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	OnRetranslate();
+
 	I_ASSERT(m_scenePtr != NULL);
 
-	iqt::CHierarchicalCommand* registryMenuPtr = new iqt::CHierarchicalCommand("&Registry");
-
-	// setup remove command
-	m_removeComponentCommand.SetVisuals(tr("&Remove Component"), 
-										tr("&Remove Component"), 
-										tr("Remove the selected component from the registry"),
-										QIcon(":/Resources/Icons/delete_64.png"));
-	m_removeComponentCommand.setEnabled(false);
 	connect(&m_removeComponentCommand, SIGNAL( activated()), this, SLOT(OnRemoveComponent()));
-	registryMenuPtr->InsertChild(&m_removeComponentCommand, false);
-
-	// setup execute command
-	m_executeRegistryCommand.SetVisuals(tr("&Execute Registry"), 
-										tr("&Execute Registry"), 
-										tr("Start registry execution"),
-										QIcon(":/Resources/Icons/player_play.png"));
-	m_executeRegistryCommand.setEnabled(m_registryPreviewCompPtr.IsValid());
+	connect(&m_renameComponentCommand, SIGNAL( activated()), this, SLOT(OnRenameComponent()));
+	connect(&m_exportToCodeCommand, SIGNAL( activated()), this, SLOT(OnExportToCode()));
 	connect(&m_executeRegistryCommand, SIGNAL( activated()), this, SLOT(OnExecute()));
-	registryMenuPtr->InsertChild(&m_executeRegistryCommand, false);
-
-	// setup abort command
-	m_abortRegistryCommand.SetVisuals(tr("&Abort Registry"), 
-										tr("&Abort Registry"), 
-										tr("Abort registry execution"),
-										QIcon(":/Resources/Icons/player_stop.png"));
-	m_abortRegistryCommand.setEnabled(false);
 	connect(&m_abortRegistryCommand, SIGNAL( activated()), this, SLOT(OnAbort()));
-	registryMenuPtr->InsertChild(&m_abortRegistryCommand, false);
-
-	// setup code export command
-	iqt::CHierarchicalCommand* exportToCodeCommandPtr = new iqt::CHierarchicalCommand("&Export To Code");
-	connect(exportToCodeCommandPtr, SIGNAL( activated()), this, SLOT(OnExportToCode()));
-	registryMenuPtr->InsertChild(exportToCodeCommandPtr, true);
-
-	m_registryCommand.InsertChild(registryMenuPtr, true);
 
 	QGraphicsView* viewPtr = GetQtWidget();
 	if (viewPtr != NULL){
@@ -167,6 +151,36 @@ void CRegistryViewComp::OnGuiCreated()
 
 		m_executionObserverTimer.start(500);
 	}
+}
+
+
+void CRegistryViewComp::OnRetranslate()
+{
+	BaseClass::OnRetranslate();
+
+	m_registryMenu.SetVisuals(
+				tr("&Registry"),
+				tr("Registry"),
+				tr("Set of commands manipulating registry"));
+	m_removeComponentCommand.SetVisuals(
+				tr("&Remove Component"), 
+				tr("&Remove Component"), 
+				tr("Remove the selected component from the registry"),
+				QIcon(":/Resources/Icons/delete_64.png"));
+	m_exportToCodeCommand.SetVisuals(
+				tr("&Export To Code..."),
+				tr("Export"),
+				tr("Removes selected component from registry"));
+	m_executeRegistryCommand.SetVisuals(
+				tr("&Execute Registry"), 
+				tr("&Execute Registry"), 
+				tr("Start registry execution"),
+				QIcon(":/Resources/Icons/player_play.png"));
+	m_abortRegistryCommand.SetVisuals(
+				tr("&Abort Registry"), 
+				tr("&Abort Registry"), 
+				tr("Abort registry execution"),
+				QIcon(":/Resources/Icons/player_stop.png"));
 }
 
 
@@ -206,7 +220,6 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 	}
 
 	if (isSelected){
-		m_removeComponentCommand.setEnabled(true);
 		m_selectedComponentPtr = viewPtr;
 		if (viewPtr != NULL && m_registryElementObserversCompPtr.IsValid()){
 			const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
@@ -224,9 +237,12 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 	}
 	else{
 		m_selectedComponentPtr = NULL;
-
-		m_removeComponentCommand.setEnabled(false);
 	}
+
+	m_removeComponentCommand.setEnabled(isSelected);
+	m_renameComponentCommand.setEnabled(isSelected);
+	m_exportToCodeCommand.setEnabled(isSelected);
+	m_executeRegistryCommand.setEnabled(isSelected && m_registryPreviewCompPtr.IsValid());
 }
 
 
@@ -256,18 +272,32 @@ void CRegistryViewComp::OnRemoveComponent()
 		if (m_selectedComponentPtr != NULL){
 			const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
 
-			imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfo.elementPtr.GetPtr());
-			if (registryElementModelPtr != NULL){
-				registryElementModelPtr->DetachAllObservers();
-			}	
-
-			registryPtr->RemoveElementInfo(m_selectedComponentPtr->GetComponentName().toStdString());
-
 			m_selectedComponentPtr->RemoveAllConnectors();
 			m_scenePtr->removeItem(m_selectedComponentPtr);
 			m_removeComponentCommand.setEnabled(false);
 
+			registryPtr->RemoveElementInfo(m_selectedComponentPtr->GetComponentName().toStdString());
+
 			m_selectedComponentPtr = NULL;
+		}
+	}
+}
+
+
+void CRegistryViewComp::OnRenameComponent()
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		if (m_selectedComponentPtr != NULL){
+			QString oldName = m_selectedComponentPtr->GetComponentName();
+
+			bool isOk = false;
+			QString newName = QInputDialog::getText(NULL, tr("ACF Compositor"), tr("New component name"), QLineEdit::Normal, oldName, &isOk);
+			if (isOk && !newName.isEmpty()){
+				const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
+
+				// TODO: implement rename
+			}
 		}
 	}
 }
@@ -489,6 +519,17 @@ void CRegistryViewComp::OnExecutionTimerTick()
 }
 
 
+bool CRegistryViewComp::ProcessDroppedData(const QMimeData& data)
+{
+	QByteArray byteData = data.data("component");
+	iser::CMemoryReadArchive archive(byteData.constData(), byteData.size());
+
+	icomp::CComponentAddress address;
+
+	return address.Serialize(archive) && TryCreateComponent(address);
+}
+
+
 // protected methods of embedded class CRegistryViewComp::CCompositeItem
 
 // reimplemented (QGraphicsRectItem)
@@ -599,18 +640,8 @@ void CRegistryViewComp::CRegistryScene::dragEnterEvent(QGraphicsSceneDragDropEve
 
 void CRegistryViewComp::CRegistryScene::dropEvent(QGraphicsSceneDragDropEvent* event)
 {
-	const QMimeData* data = event->mimeData();
-	QByteArray byteData = data->data("component");
-	int address = byteData.toInt();
-	
-	bool isOk;
-	QString role = QInputDialog::getText(NULL, tr("ACF Compositor"), tr("Component role:"), QLineEdit::Normal, "", &isOk);
-	if (isOk && !role.isEmpty()){
-		const CStaticComponentInfo* componentPtr = (const CStaticComponentInfo*)address;
-		if (componentPtr != NULL){ 
-			m_parent.OnAddComponent(*componentPtr, role);
-		}
-			
+	const QMimeData* dataPtr = event->mimeData();
+	if ((dataPtr != NULL) && m_parent.ProcessDroppedData(*dataPtr)){
 		event->acceptProposedAction();
 	}
 	else{

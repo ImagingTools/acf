@@ -36,11 +36,9 @@ public:
 	// reimplemented (icomp::IRegistry)
 	virtual Ids GetElementIds() const;
 	virtual ElementInfo* InsertElementInfo(
-			const std::string& elementId,
-			int elementType,
-			const std::string& packageId,
-			const std::string& componentId,
-			bool ensureElementCreated = true);
+				const std::string& elementId,
+				const icomp::CComponentAddress& address,
+				bool ensureElementCreated = true);
 	virtual const ElementInfo* GetElementInfo(const std::string& elementId) const;
 	virtual bool RemoveElementInfo(const std::string& elementId);
 	virtual const ExportedInterfacesMap& GetExportedInterfacesMap() const;

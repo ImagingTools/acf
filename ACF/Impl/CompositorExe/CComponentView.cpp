@@ -179,7 +179,7 @@ QRect CComponentView::CalculateRect() const
 	m_componentIdHeight = fontInfo2.height() + 10;
 
 	height += m_componentIdHeight;
-	QString componentPath = QString(m_elementInfo.packageId.c_str()) + QString(".") + m_elementInfo.componentId.c_str();
+	QString componentPath = QString(m_elementInfo.address.GetPackageId().c_str()) + QString(".") + m_elementInfo.address.GetComponentId().c_str();
 
 	width = qMax(width, fontInfo2.width(componentPath) + 20);
 
@@ -284,7 +284,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 
 	painter->drawText(	mainRect, 
 						Qt::AlignLeft | Qt::TextSingleLine, 
-						QString(m_elementInfo.packageId.c_str()) + QString(".") + m_elementInfo.componentId.c_str());
+						QString(m_elementInfo.address.GetPackageId().c_str()) + QString(".") + m_elementInfo.address.GetComponentId().c_str());
 	
 	painter->restore();
 }

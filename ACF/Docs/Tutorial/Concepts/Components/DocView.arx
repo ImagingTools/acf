@@ -9,9 +9,6 @@
       <Id>
         Application
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         QtPck
       </PackageId>
@@ -68,9 +65,6 @@
       <Id>
         DocumentFactory
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         TutorialPck
       </PackageId>
@@ -108,9 +102,6 @@
       <Id>
         DocumentLoader
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         BasePck
       </PackageId>
@@ -129,9 +120,6 @@
       <Id>
         DocumentTemplate
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         BasePck
       </PackageId>
@@ -207,9 +195,6 @@
       <Id>
         MainWindow
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         QtPck
       </PackageId>
@@ -266,9 +251,6 @@
       <Id>
         Splash
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         QtPck
       </PackageId>
@@ -363,9 +345,6 @@
       <Id>
         ViewFactory
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         TutorialPck
       </PackageId>
@@ -384,9 +363,6 @@
       <Id>
         Workspace
       </Id>
-      <Type>
-        1
-      </Type>
       <PackageId>
         QtPck
       </PackageId>

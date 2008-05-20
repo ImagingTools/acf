@@ -19,6 +19,7 @@ class TSingleAttributePtr
 {
 public:
 	typedef Attribute AttributeType;
+	typedef void InterfaceType;
 
 	TSingleAttributePtr();
 

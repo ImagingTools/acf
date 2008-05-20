@@ -51,9 +51,7 @@ IRegistry::Ids CRegistry::GetElementIds() const
 
 IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 			const std::string& elementId,
-			int elementType,
-			const std::string& packageId,
-			const std::string& componentId,
+			const icomp::CComponentAddress& address,
 			bool ensureElementCreated)
 {
 	if (!IsValid()){
@@ -67,30 +65,15 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 
 	istd::TDelPtr<IRegistryElement> registryPtr;
 
-	switch (elementType){
-	case IRegistry::ET_COMPONENT:
-		{
-			const IComponentStaticInfo::SubcomponentInfos& subInfos = m_componentsFactoryPtr->GetSubcomponentInfos();
-			const IComponentStaticInfo::SubcomponentInfos::ValueType* packageInfoPtr2 = subInfos.FindElement(packageId);
-			if (packageInfoPtr2 != NULL){
-				I_ASSERT(*packageInfoPtr2 != NULL);
+	const IComponentStaticInfo* packageInfoPtr = m_componentsFactoryPtr->GetSubcomponent(address.GetPackageId());
+	if (packageInfoPtr != NULL){
+		const IComponentStaticInfo* componentInfoPtr = packageInfoPtr->GetSubcomponent(address.GetComponentId());
+		if (componentInfoPtr != NULL){
+			icomp::CRegistryElement* registryElementPtr = new CRegistryElement(componentInfoPtr);
+			registryElementPtr->SetSlavePtr(this);
 
-				const IComponentStaticInfo::SubcomponentInfos& packageSubInfos = (*packageInfoPtr2)->GetSubcomponentInfos();
-				const IComponentStaticInfo::SubcomponentInfos::ValueType* componentInfoPtr2 = packageSubInfos.FindElement(componentId);
-				if (componentInfoPtr2 != NULL){
-					I_ASSERT(*componentInfoPtr2 != NULL);
-
-					icomp::CRegistryElement* registryElementPtr = new CRegistryElement(*componentInfoPtr2);
-					registryElementPtr->SetSlavePtr(this);
-
-					registryPtr.SetPtr(registryElementPtr);
-				}
-			}
+			registryPtr.SetPtr(registryElementPtr);
 		}
-		break;
-
-	default:
-		I_CRITICAL();		// TODO: implement creation of registry element for compositions.
 	}
 
 	if (ensureElementCreated && !registryPtr.IsValid()){
@@ -101,9 +84,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_ADDED);
 
 	ElementInfo& newElement = m_componentsMap[elementId];
-	newElement.elementType = elementType;
-	newElement.packageId = packageId;
-	newElement.componentId = componentId;
+	newElement.address = address;
 	newElement.elementPtr.TakeOver(registryPtr);
 
 	return &newElement;
@@ -170,8 +151,6 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 	static iser::CArchiveTag elementTag("Element", "Description of single element");
 	static iser::CArchiveTag elementIdTag("Id", "ID of element in registry");
 	static iser::CArchiveTag elementTypeTag("Type", "Type of element");
-	static iser::CArchiveTag packageIdTag("PackageId", "ID of package");
-	static iser::CArchiveTag componentIdTag("ComponentId", "ID of factory");
 	static iser::CArchiveTag dataTag("Data", "Data of single element", true);
 	static iser::CArchiveTag isEnabledTag("IsEnabled", "It is true if this element is valid");
 
@@ -195,17 +174,7 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
 			retVal = retVal && archive.EndTag(elementIdTag);
 
-			retVal = retVal && archive.BeginTag(elementTypeTag);
-			retVal = retVal && archive.Process(element.elementType);
-			retVal = retVal && archive.EndTag(elementTypeTag);
-
-			retVal = retVal && archive.BeginTag(packageIdTag);
-			retVal = retVal && archive.Process(element.packageId);
-			retVal = retVal && archive.EndTag(packageIdTag);
-
-			retVal = retVal && archive.BeginTag(componentIdTag);
-			retVal = retVal && archive.Process(element.componentId);
-			retVal = retVal && archive.EndTag(componentIdTag);
+			retVal = retVal && element.address.Serialize(archive);
 
 			retVal = retVal && archive.BeginTag(dataTag);
 
@@ -232,37 +201,27 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 			retVal = retVal && archive.Process(elementId);
 			retVal = retVal && archive.EndTag(elementIdTag);
 
-			int elementType = ET_NONE;
-			retVal = retVal && archive.BeginTag(elementTypeTag);
-			retVal = retVal && archive.Process(elementType);
-			retVal = retVal && archive.EndTag(elementTypeTag);
-
-			std::string packageId;
-			retVal = retVal && archive.BeginTag(packageIdTag);
-			retVal = retVal && archive.Process(packageId);
-			retVal = retVal && archive.EndTag(packageIdTag);
-
-			std::string componentId;
-			retVal = retVal && archive.BeginTag(componentIdTag);
-			retVal = retVal && archive.Process(componentId);
-			retVal = retVal && archive.EndTag(componentIdTag);
+			CComponentAddress address;
+			retVal = retVal && address.Serialize(archive);
 
 			retVal = retVal && archive.BeginTag(dataTag);
 
-			if (elementType != ET_NONE){
-				ElementInfo* newInfoPtr = InsertElementInfo(elementId, elementType, packageId, componentId, false);
-				if (newInfoPtr == NULL){
-					return false;
-				}
+			if (!retVal){
+				return false;
+			}
 
-				bool isEnabled = false;
-				retVal = retVal && archive.BeginTag(isEnabledTag);
-				retVal = retVal && archive.Process(isEnabled);
-				retVal = retVal && archive.EndTag(isEnabledTag);
+			ElementInfo* newInfoPtr = InsertElementInfo(elementId, address, false);
+			if (newInfoPtr == NULL){
+				return false;
+			}
 
-				if (isEnabled && newInfoPtr->elementPtr.IsValid()){
-					retVal = retVal && newInfoPtr->elementPtr->Serialize(archive);
-				}
+			bool isEnabled = false;
+			retVal = retVal && archive.BeginTag(isEnabledTag);
+			retVal = retVal && archive.Process(isEnabled);
+			retVal = retVal && archive.EndTag(isEnabledTag);
+
+			if (isEnabled && newInfoPtr->elementPtr.IsValid()){
+				retVal = retVal && newInfoPtr->elementPtr->Serialize(archive);
 			}
 
 			retVal = retVal && archive.EndTag(dataTag);

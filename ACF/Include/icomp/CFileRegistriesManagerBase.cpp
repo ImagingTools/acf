@@ -9,6 +9,7 @@
 #include "isys/IFileSystem.h"
 
 #include "icomp/CRegistry.h"
+#include "icomp/CComponentAddress.h"
 
 
 namespace icomp
@@ -48,8 +49,7 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistryFromFile(const istd::CSt
 // reimplemented (icomp::IRegistriesManager)
 
 const IRegistry* CFileRegistriesManagerBase::GetRegistry(
-			const std::string& packageId,
-			const std::string& componentId,
+			const icomp::CComponentAddress& address,
 			const IRegistry* contextPtr) const
 {
 	istd::CString path;
@@ -64,11 +64,12 @@ const IRegistry* CFileRegistriesManagerBase::GetRegistry(
 		}
 	}
 
+	const std::string& packageId = address.GetPackageId();
 	if (!packageId.empty()){
 		path += istd::CString(packageId) + istd::CString("/");
 	}
 
-	path += istd::CString(componentId);
+	path += istd::CString(address.GetComponentId());
 
 	return GetRegistryFromFile(path);
 }

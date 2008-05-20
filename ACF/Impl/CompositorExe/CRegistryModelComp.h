@@ -6,21 +6,22 @@
 
 
 #include "icomp/CRegistry.h"
-#include "icomp/TModelCompWrap.h"
-#include "icomp/TMakeComponentWrap.h"
+#include "icomp/CPackageStaticInfo.h"
+#include "icomp/CComponentBase.h"
 
 #include "IRegistryGeometryProvider.h"
 
 
-class CRegistryModelComp:	public icomp::TModelCompWrap< 
-									icomp::TMakeComponentWrap<icomp::IRegistry, icomp::CRegistry> >,
-							public IRegistryGeometryProvider
+class CRegistryModelComp:	public icomp::CComponentBase,
+							public icomp::CRegistry,
+							virtual public IRegistryGeometryProvider
 {
 public:
-	typedef icomp::TModelCompWrap< 
-				icomp::TMakeComponentWrap<icomp::IRegistry, icomp::CRegistry> > BaseClass;
+	typedef icomp::CComponentBase BaseClass;
+	typedef icomp::CRegistry BaseClass2;
 
 	I_BEGIN_COMPONENT(CRegistryModelComp)
+		I_REGISTER_INTERFACE(icomp::IRegistry)
 		I_ASSIGN(m_staticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo")
 	I_END_COMPONENT
 
@@ -43,7 +44,7 @@ private:
 	bool SerializeComponentPosition(iser::IArchive& archive, istd::CString& componentRole, int& x, int& y);
 
 private:
-	I_REF(icomp::IComponentStaticInfo, m_staticInfoCompPtr);
+	I_REF(icomp::CPackageStaticInfo, m_staticInfoCompPtr);
 
 	typedef std::map<istd::CString, QPoint> ElementsPositionMap;
 

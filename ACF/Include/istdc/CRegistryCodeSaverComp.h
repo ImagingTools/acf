@@ -34,12 +34,6 @@ public:
 
 private:
 	mutable istd::CString m_lastSaveFileName;
-
-	enum{
-		ELEMENT_TYPES_COUNT = icomp::IRegistry::ET_COMPOSITION + 1
-	};
-
-	static std::string s_elementTypeNames[ELEMENT_TYPES_COUNT];
 };
 
 

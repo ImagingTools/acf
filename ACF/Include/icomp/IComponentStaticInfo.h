@@ -30,7 +30,7 @@ public:
 
 	typedef istd::TCascadedMap< std::string, InterfaceExtractorPtr> InterfaceExtractors;
 	typedef istd::TCascadedMap< std::string, const IAttributeStaticInfo*> AttributeInfos;
-	typedef istd::TCascadedMap< std::string, const IComponentStaticInfo*> SubcomponentInfos;
+	typedef std::set< std::string > Ids;
 
 	/**
 		Create component instance.
@@ -55,7 +55,7 @@ public:
 	/**
 		Return number of interfaces for specific slot.
 	*/
-	virtual const SubcomponentInfos& GetSubcomponentInfos() const = 0;
+	virtual const IComponentStaticInfo* GetSubcomponent(const std::string& subcomponentId) const = 0;
 
 	/**
 		Register interface ID for this static component info.

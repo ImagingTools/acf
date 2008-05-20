@@ -2,8 +2,8 @@
 #define icomp_TBaseComponentStaticInfo_included
 
 
-#include "icomp/IComponentStaticInfo.h"
 #include "icomp/TComponentWrap.h"
+#include "icomp/CComponentStaticInfoBase.h"
 
 
 namespace icomp
@@ -15,26 +15,26 @@ namespace icomp
 	The main difference to 'normal' component static info is, that instances of such components cannot be created.
 */
 template <class Component>
-class TBaseComponentStaticInfo: virtual public IComponentStaticInfo
+class TBaseComponentStaticInfo: virtual public CComponentStaticInfoBase
 {
 public:
+	typedef CComponentStaticInfoBase BaseClass;
+
 	TBaseComponentStaticInfo(const IComponentStaticInfo* baseComponentPtr = NULL);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
 	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const;
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
 	virtual const AttributeInfos& GetAttributeInfos() const;
-	virtual const SubcomponentInfos& GetSubcomponentInfos() const;
+	virtual const IComponentStaticInfo* GetSubcomponent(const std::string& subcomponentId) const;
 	virtual bool RegisterInterfaceExtractor(const std::string& interfaceId, InterfaceExtractorPtr extractorPtr);
 	virtual bool RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
-	virtual bool RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
 
 private:
 	const IComponentStaticInfo* m_baseComponentPtr;
 
 	InterfaceExtractors m_interfaceExtractors;
 	AttributeInfos m_attributeInfos;
-	SubcomponentInfos m_subcomponentInfos;
 };
 
 
@@ -47,7 +47,6 @@ TBaseComponentStaticInfo<Component>::TBaseComponentStaticInfo(const IComponentSt
 	if (baseComponentPtr != NULL){
 		m_interfaceExtractors.SetParent(&baseComponentPtr->GetInterfaceExtractors());
 		m_attributeInfos.SetParent(&baseComponentPtr->GetAttributeInfos());
-		m_subcomponentInfos.SetParent(&baseComponentPtr->GetSubcomponentInfos());
 	}
 }
 
@@ -78,9 +77,18 @@ const IComponentStaticInfo::AttributeInfos& TBaseComponentStaticInfo<Component>:
 
 
 template <class Component>
-const IComponentStaticInfo::SubcomponentInfos& TBaseComponentStaticInfo<Component>::GetSubcomponentInfos() const
+const IComponentStaticInfo* TBaseComponentStaticInfo<Component>::GetSubcomponent(const std::string& subcomponentId) const
 {
-	return m_subcomponentInfos;
+	const IComponentStaticInfo* retVal = BaseClass::GetSubcomponent(subcomponentId);
+	if (retVal != NULL){
+		return retVal;
+	}
+	else if (m_baseComponentPtr != NULL){
+		return m_baseComponentPtr->GetSubcomponent(subcomponentId);
+	}
+	else{
+		return NULL;
+	}
 }
 
 
@@ -95,13 +103,6 @@ template <class Component>
 bool TBaseComponentStaticInfo<Component>::RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
 {
 	return m_attributeInfos.InsertLocal(attributeId, attributeInfoPtr);
-}
-
-
-template <class Component>
-bool TBaseComponentStaticInfo<Component>::RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr)
-{
-	return m_subcomponentInfos.InsertLocal(subcomponentId, componentInfoPtr);
 }
 
 

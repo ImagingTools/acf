@@ -3,8 +3,10 @@
 
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
+#include "icomp/TModelCompWrap.h"
 
 #include "iqt/CPackagesLoader.h"
+
 #include "iser/CXmlFileReadArchive.h"
 #include "iser/CXmlFileWriteArchive.h"
 
@@ -39,7 +41,7 @@ int main(int argc, char *argv[])
 	splashScreenGui.SetRef("ApplicationInfo", &applicationInfo);
 	splashScreenGui.InitComponent();
 
-	icomp::TSimComponentWrap<icomp::TMakeComponentWrap<icomp::IComponentStaticInfo, iqt::CPackagesLoader> > packagesLoaderComp;
+	icomp::TSimComponentWrap<icomp::TMakeComponentWrap<icomp::CPackageStaticInfo, iqt::CPackagesLoader> > packagesLoaderComp;
 	packagesLoaderComp.InitComponent();
 
 	std::string registryFile;
@@ -104,7 +106,7 @@ int main(int argc, char *argv[])
 	attributeEditorComp.InitComponent();
 
 	// registry model
-	icomp::TSimComponentsFactory<CRegistryModelComp> modelFactoryComp;
+	icomp::TSimComponentsFactory<icomp::TModelCompWrap<CRegistryModelComp> > modelFactoryComp;
 	modelFactoryComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
 
 	// registry preview
