@@ -12,7 +12,6 @@
 #include "CComponentView.h"
 #include "CComponentConnector.h"
 
-#include "iser/IArchive.h" 
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
 
@@ -54,10 +53,11 @@ bool CRegistryViewComp::TryCreateComponent(const icomp::CComponentAddress& addre
 	bool retVal = false;
 	QString componentName = QInputDialog::getText(GetWidget(), tr("Application Compositor"), tr("Component name"), QLineEdit::Normal, "",&retVal);
 	if (retVal && !componentName.isEmpty()){
-		icomp::IRegistry* registryPtr = GetObjectPtr();
-		if (registryPtr != NULL){
+		istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_ADDED);
+		if (registryPtr.IsValid()){
 			icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(componentName.toStdString(), address);
 			if (elementInfoPtr != NULL){
+				ConnectReferences(componentName);
 				return true;
 			}
 		}
@@ -66,14 +66,6 @@ bool CRegistryViewComp::TryCreateComponent(const icomp::CComponentAddress& addre
 	}
 
 	return false;
-}
-
-
-QStringList CRegistryViewComp::GetComponentsForDependency(const QString& dependecySource) const
-{
-	istd::CStringList components;// = m_composite.componentsForDependency(dependecySource.toStdWString());
-
-	return iqt::GetQStringList(components);
 }
 
 
@@ -111,6 +103,11 @@ void CRegistryViewComp::UpdateEditor()
 				if (geomeometryProviderPtr != NULL){			
 					viewPtr->setPos(geomeometryProviderPtr->GetComponentPosition(elementId));
 				}
+
+				if (		m_selectedComponentPtr != NULL && 
+							viewPtr->GetComponentName() == m_selectedComponentPtr->GetComponentName()){
+					viewPtr->setSelected(true);
+				}	
 			}
 		}
 	}
@@ -181,7 +178,7 @@ void CRegistryViewComp::OnRetranslate()
 	m_exportToCodeCommand.SetVisuals(
 				tr("&Export To Code..."),
 				tr("Export"),
-				tr("Generates C++ code according this registry"));
+				tr("Generates C++ code according to this registry"));
 	m_executeRegistryCommand.SetVisuals(
 				tr("&Execute Registry"), 
 				tr("&Execute Registry"), 
@@ -260,13 +257,6 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 	m_renameComponentCommand.setEnabled(isSelected);
 	m_exportToCodeCommand.setEnabled(isSelected);
 	m_executeRegistryCommand.setEnabled(isSelected && m_registryPreviewCompPtr.IsValid());
-}
-
-
-void CRegistryViewComp::OnExportChanged(CComponentView* viewPtr, bool export)
-{
-//	m_composite.SetExported(iqt::GetCString(view->GetComponentName()), export);
-	viewPtr->update();
 }
 
 
@@ -547,6 +537,73 @@ bool CRegistryViewComp::ProcessDroppedData(const QMimeData& data)
 }
 
 
+void CRegistryViewComp::ConnectReferences(const QString& componentRole)
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr == NULL){
+		return;
+	}
+
+	icomp::IRegistry::Ids componentIds = registryPtr->GetElementIds();
+
+	for (		icomp::IRegistry::Ids::const_iterator index = componentIds.begin();
+				index != componentIds.end();
+				index++){
+
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(*index);
+		I_ASSERT(elementInfoPtr != NULL);
+		I_ASSERT(elementInfoPtr->elementPtr.IsValid());
+
+		icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
+		const icomp::IComponentStaticInfo& elementStaticInfo = registryElementPtr->GetComponentStaticInfo();
+		const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
+	
+		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
+			const icomp::IAttributeStaticInfo* staticAttributeInfoPtr = staticAttributes.GetValueAt(staticAttributeIndex);
+			I_ASSERT(staticAttributeInfoPtr != NULL);
+
+			std::string attributeId = staticAttributeInfoPtr->GetAttributeId();
+
+			const iser::ISerializable* attributePtr = staticAttributeInfoPtr->GetAttributeDefaultValue();
+			const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributePtr);
+			const icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<const icomp::CFactoryAttribute*>(attributePtr);
+			const icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(attributePtr);
+			const icomp::CMultiFactoryAttribute* multiFactoryAttributePtr = dynamic_cast<const icomp::CMultiFactoryAttribute*>(attributePtr);
+
+			bool createAttribute = false;
+
+			if (referenceAttributePtr != NULL && referenceAttributePtr->GetValue() == componentRole.toStdString()){
+				createAttribute = true;
+			}
+			else if (factoryAttributePtr != NULL && factoryAttributePtr->GetValue() == componentRole.toStdString()){
+				createAttribute = true;
+			}
+			else if (multiReferenceAttributePtr != NULL){
+				for (int valueIndex = 0; valueIndex < multiReferenceAttributePtr->GetValuesCount(); valueIndex++){
+					if (multiReferenceAttributePtr->GetValueAt(valueIndex) == componentRole.toStdString()){
+						createAttribute = true;
+						break;
+					}
+				}
+			}
+			else if (multiFactoryAttributePtr != NULL){
+				for (int valueIndex = 0; valueIndex < multiFactoryAttributePtr->GetValuesCount(); valueIndex++){
+					if (multiFactoryAttributePtr->GetValueAt(valueIndex) == componentRole.toStdString()){
+						createAttribute = true;
+						break;
+					}
+				}
+			}
+
+			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
+			if (attributeInfoPtr == NULL && createAttribute){
+				attributeInfoPtr = registryElementPtr->InsertAttributeInfo(attributeId);
+			}
+		}
+	}
+}
+
+
 // protected methods of embedded class CRegistryViewComp::CCompositeItem
 
 // reimplemented (QGraphicsRectItem)
@@ -554,15 +611,15 @@ bool CRegistryViewComp::ProcessDroppedData(const QMimeData& data)
 QVariant CRegistryViewComp::CCompositeItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
 		switch(change){
-			case QGraphicsItem::ItemSelectedChange:
-				break;
+		case QGraphicsItem::ItemSelectedChange:
+			break;
 
-			case QGraphicsItem::ItemPositionChange:
-				QPoint newPos = value.toPoint();
-				newPos.rx() = newPos.rx() - (newPos.rx() % 25);
-				newPos.ry() = newPos.ry() - (newPos.ry() % 25);
+		case QGraphicsItem::ItemPositionChange:
+			QPoint newPos = value.toPoint();
+			newPos.rx() = newPos.rx() - (newPos.rx() % 25);
+			newPos.ry() = newPos.ry() - (newPos.ry() % 25);
 
-				return QVariant(newPos);
+			return QVariant(newPos);
 		}
 
 	return QGraphicsRectItem::itemChange(change, value);

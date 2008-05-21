@@ -384,12 +384,18 @@ QWidget* CAttributeEditorComp::AttributeItemDelegate::createEditor(QWidget* pare
 
 void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index ) const
 {
+	icomp::IRegistryElement* elementPtr = m_parent.GetObjectPtr();
+	I_ASSERT(elementPtr != NULL);
+
 	QComboBox* comboEditor = dynamic_cast<QComboBox*>(editor);
 	QString attributeName = index.data(AttributeId).toString();
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeName);
 	if (attributeInfoPtr == NULL){
-		editor->setProperty("text", QVariant(index.data()));
-		return;
+		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeName.toStdString());
+		I_ASSERT(attributeInfoPtr != NULL);
+		if (attributeInfoPtr == NULL){
+			return;
+		}
 	}
 
 	iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
@@ -510,16 +516,11 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 
 void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-	icomp::IRegistryElement* elementPtr = m_parent.GetObjectPtr();
-	I_ASSERT(elementPtr != NULL);
-
 	QComboBox* comboEditor = dynamic_cast<QComboBox*>(editor);
 
 	QString attributeName = index.data(AttributeId).toString();
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeName);
-	if (attributeInfoPtr == NULL){
-		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeName.toStdString());
-	}
+	I_ASSERT(attributeInfoPtr != NULL);
 
 	iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
 	if (attributePtr == NULL){
@@ -624,7 +625,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		}
 	}
 
-	istd::TChangeNotifier<icomp::IRegistryElement> changePtr(elementPtr);
+	istd::TChangeNotifier<icomp::IRegistryElement> changePtr(m_parent.GetObjectPtr());
 
 	QItemDelegate::setModelData(editor, model, index);
 }

@@ -49,9 +49,6 @@ public:
 	CRegistryViewComp();
 
 	bool TryCreateComponent(const icomp::CComponentAddress& address);
-
-	QStringList GetComponentsForDependency(const QString& dependecySource) const;
-
 	double GetGrid() const;
 
 	// reimplemented (idoc::ICommandsProvider)
@@ -72,7 +69,6 @@ public slots:
 
 protected slots:
 	void OnComponentViewSelected(CComponentView* view, bool selected);
-	void OnExportChanged(CComponentView* view, bool export);
 	void OnComponentPositionChanged(CComponentView* view, const QPoint& newPosition);
 	void OnRemoveComponent();
 	void OnRenameComponent();
@@ -90,9 +86,10 @@ private:
 				const std::string& role);
 
 	bool ProcessDroppedData(const QMimeData& data);
+	void ConnectReferences(const QString& componentRole);
 
 protected:
-	enum GrupId
+	enum GroupId
 	{
 		GI_COMPONENT = 0x5430,
 		GI_CODEGEN,
