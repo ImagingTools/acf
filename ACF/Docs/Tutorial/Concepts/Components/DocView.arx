@@ -130,7 +130,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DocumentFactory
@@ -166,6 +166,44 @@
               </IsEnabled>
               <Value>
                 DocumentLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsEditSupported
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsNewSupported
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -448,7 +486,7 @@
         DocumentTemplate
       </ComponentRole>
       <X>
-        112
+        100
       </X>
       <Y>
         -237
@@ -459,7 +497,7 @@
         MainWindow
       </ComponentRole>
       <X>
-        -250
+        -237
       </X>
       <Y>
         -337
@@ -470,7 +508,7 @@
         Splash
       </ComponentRole>
       <X>
-        187
+        175
       </X>
       <Y>
         -437
