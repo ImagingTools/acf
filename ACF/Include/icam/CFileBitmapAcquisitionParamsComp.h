@@ -28,7 +28,8 @@ public:
 	virtual void OnComponentCreated();
 
 	// reimplemented (icam::IFileBitmapAcquisitionParams)
-	virtual istd::CString GetDirectory() const;
+	virtual const istd::CString& GetDirectory() const;
+	virtual void SetDirectory(const istd::CString& directory);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

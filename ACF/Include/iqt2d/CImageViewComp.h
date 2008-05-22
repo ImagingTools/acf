@@ -52,7 +52,7 @@ public:
 	void SetFitMode(FitMode fitMode);
 	void SetFullScreenMode(bool isFullScreen);
 
-	// reimplemented (iqt::TGuiObserverWrap)
+	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor();
 

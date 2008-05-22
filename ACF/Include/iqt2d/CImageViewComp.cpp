@@ -181,7 +181,7 @@ void CImageViewComp::OnAutoFit(bool isAutoScale)
 }
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (imod::IModelEditor)
 
 void CImageViewComp::UpdateModel() const
 {

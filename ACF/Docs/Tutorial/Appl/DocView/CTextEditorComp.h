@@ -34,7 +34,7 @@ public:
 
 	CTextEditorComp();
 
-	// reimplemented (iqt::TGuiObserverWrap)
+	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor();
 

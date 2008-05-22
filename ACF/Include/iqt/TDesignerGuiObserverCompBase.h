@@ -19,7 +19,12 @@ template <class UI, class Model, class WidgetType = QWidget>
 class TDesignerGuiObserverCompBase: public TGuiObserverWrap<TDesignerGuiCompBase<UI, WidgetType>, imod::TSingleModelObserverBase<Model> >
 {
 public:
-	typedef TGuiObserverWrap<TDesignerGuiCompBase<UI, WidgetType>, Model> BaseClass;
+	typedef TGuiObserverWrap<TDesignerGuiCompBase<UI, WidgetType>, imod::TSingleModelObserverBase<Model> > BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(TDesignerGuiObserverCompBase)
+		I_REGISTER_INTERFACE(imod::IModelEditor)
+		I_REGISTER_INTERFACE(imod::IObserver)
+	I_END_COMPONENT
 };
 
 

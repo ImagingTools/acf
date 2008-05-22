@@ -37,6 +37,8 @@ I_EXPORT_COMPONENT(ImageView, "Display bitmap using observer pattern", "Image Bi
 I_EXPORT_COMPONENT(BitmapLoader, "Load and save bitmaps in binary format", "Image Bitmap Binary Loader Load Save JPG JPEG PNG BMP Qt");
 I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
 I_EXPORT_COMPONENT(SnapImageGui, "Show snapped image and allow to change snap parameters", "View Image Bitmap Camera Snap Parameters GUI Qt");
+I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using simple model observer GUI", "Model Observer Parameter Set Editor GUI Qt");
+I_EXPORT_COMPONENT(FileAcquisitionParamsGui, "File acquisition parameter editor", "Model Observer File Acquisition Snap Camera Parameter Editor GUI Qt");
 
 
 } // namespace QtPck

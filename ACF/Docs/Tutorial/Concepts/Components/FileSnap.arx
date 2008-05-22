@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="11">
     <Element>
       <Id>
         Application
@@ -173,6 +173,42 @@
     </Element>
     <Element>
       <Id>
+        FileSnapParam
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        FileBitmapAcquisitionParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        FileSnapParamGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        FileAcquisitionParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         ImageDialogLoader
       </Id>
       <PackageId>
@@ -242,7 +278,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               Bitmap
@@ -338,6 +374,25 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSetGui
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapParamsGui
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -370,7 +425,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="0">
+              <Values count="1">
+                <Value>
+                  FileSnapParam
+                </Value>
               </Values>
             </Data>
           </AttributeInfo>
@@ -388,7 +446,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="0">
+              <Values count="1">
+                <Value>
+                  FileBitmapAcquisition
+                </Value>
               </Values>
             </Data>
           </AttributeInfo>
@@ -413,6 +474,66 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        SnapParamsGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSetGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Editors
+            </Id>
+            <Type>
+              class icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  FileSnapParamGui
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Ids
+            </Id>
+            <Type>
+              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  FileBitmapAcquisition
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <ExportedInterfaces count="1">
     <Interface>
@@ -426,7 +547,7 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
-  <ElementPositions count="12">
+  <ElementPositions count="15">
     <ElementPosition>
       <ComponentRole>
         Application
@@ -435,7 +556,7 @@
         -375
       </X>
       <Y>
-        237
+        87
       </Y>
     </ElementPosition>
     <ElementPosition>
@@ -506,6 +627,28 @@
     </ElementPosition>
     <ElementPosition>
       <ComponentRole>
+        FileSnapParam
+      </ComponentRole>
+      <X>
+        -775
+      </X>
+      <Y>
+        387
+      </Y>
+    </ElementPosition>
+    <ElementPosition>
+      <ComponentRole>
+        FileSnapParamGui
+      </ComponentRole>
+      <X>
+        -750
+      </X>
+      <Y>
+        537
+      </Y>
+    </ElementPosition>
+    <ElementPosition>
+      <ComponentRole>
         ImageDialogLoader
       </ComponentRole>
       <X>
@@ -542,10 +685,21 @@
         SnapParams
       </ComponentRole>
       <X>
-        -212
+        -312
       </X>
       <Y>
         387
+      </Y>
+    </ElementPosition>
+    <ElementPosition>
+      <ComponentRole>
+        SnapParamsGui
+      </ComponentRole>
+      <X>
+        -275
+      </X>
+      <Y>
+        537
       </Y>
     </ElementPosition>
     <ElementPosition>

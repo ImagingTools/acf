@@ -85,7 +85,6 @@ typename Interface* TMultiReferencePtr<Interface>::operator[](int index) const
 	EnsureInitialized();
 
 	I_ASSERT(index < int(m_components.size()));
-	I_ASSERT(m_components[index] != NULL);
 
 	return m_components[index];
 }
@@ -127,10 +126,6 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 				IComponent* componentPtr = parentPtr->GetSubcomponent(componentId);
 
 				m_components[i] = ExtractInterface(componentPtr, subId);
-
-				if (m_components[i] == NULL){
-					retVal = false;
-				}
 			}
 
 			m_isInitialized = retVal;

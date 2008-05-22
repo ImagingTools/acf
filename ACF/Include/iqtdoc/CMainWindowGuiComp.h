@@ -32,10 +32,11 @@ namespace iqtdoc
 {
 
 
-class CMainWindowGuiComp:	public iqt::TGuiComponentBase<QMainWindow>, 
-							public imod::TSingleModelObserverBase<idoc::IDocumentManager>,
-							public iqt::IDockManager,
-							public iqt::IToolBarManager
+class CMainWindowGuiComp:
+			public iqt::TGuiComponentBase<QMainWindow>,
+			public imod::TSingleModelObserverBase<idoc::IDocumentManager>,
+			public iqt::IDockManager,
+			public iqt::IToolBarManager
 {
 	Q_OBJECT
 

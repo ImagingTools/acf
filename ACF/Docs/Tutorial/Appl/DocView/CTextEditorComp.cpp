@@ -20,7 +20,7 @@ CTextEditorComp::CTextEditorComp()
 }
 
 
-// reimplemented (iqt::TGuiObserverWrap)
+// reimplemented (imod::IModelEditor)
 
 void CTextEditorComp::UpdateModel() const
 {

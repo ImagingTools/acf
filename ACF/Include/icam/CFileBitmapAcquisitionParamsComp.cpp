@@ -23,9 +23,15 @@ void CFileBitmapAcquisitionParamsComp::OnComponentCreated()
 
 // reimplemented (icam::IFileBitmapAcquisitionParams)
 
-istd::CString CFileBitmapAcquisitionParamsComp::GetDirectory() const
+const istd::CString& CFileBitmapAcquisitionParamsComp::GetDirectory() const
 {
 	return m_directory;
+}
+
+
+void CFileBitmapAcquisitionParamsComp::SetDirectory(const istd::CString& directory)
+{
+	m_directory = directory;
 }
 
 

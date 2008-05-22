@@ -14,7 +14,8 @@ namespace icam
 class IFileBitmapAcquisitionParams: virtual public iser::ISerializable
 {
 public:
-	virtual istd::CString GetDirectory() const = 0;
+	virtual const istd::CString& GetDirectory() const = 0;
+	virtual void SetDirectory(const istd::CString& directory) = 0;
 };
 
 
