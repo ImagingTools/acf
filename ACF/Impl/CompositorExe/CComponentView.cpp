@@ -40,9 +40,9 @@ CComponentView::CComponentView(
 	I_ASSERT(registryViewPtr != NULL);
 	I_ASSERT(registryPtr != NULL);
 
-	SetElementInfo(elementInfoPtr);
-
 	CalcExportedInteraces();
+
+	SetElementInfo(elementInfoPtr);
 
 	setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
 }
@@ -138,34 +138,44 @@ QRectF CComponentView::GetInnerRect()const
 
 
 // protected members
-
+ 
 QRect CComponentView::CalculateRect() const
 {
 	I_ASSERT(m_elementInfoPtr != NULL);
 
-	QFont labelFont("Verdana");
+	const int margins = 20;
+
+	QFont labelFont(qApp->font());
 	labelFont.setBold(true);
 	labelFont.setPixelSize(m_componentLabelFontSize);
 	QFontMetrics fontInfo(labelFont);
 
-	int width = fontInfo.width(iqt::GetQString(m_componentName)) + 20;
-	int height = fontInfo.height() + 10;
-	m_componentLabelHeight = height;
-
-	QFont labelFont2("Verdana");
+	QFont labelFont2(qApp->font());
 	labelFont.setPixelSize(m_componentIdFontSize);
 	QFontMetrics fontInfo2(labelFont2);
 
-	m_componentIdHeight = fontInfo2.height() + 10;
+	int width = margins;
+	int height = margins;
 
-	height += m_componentIdHeight;
 	QString componentPath = QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString(".") + m_elementInfoPtr->address.GetComponentId().c_str();
+	width += qMax(fontInfo.width(iqt::GetQString(m_componentName)), fontInfo2.width(componentPath));
 
-	width = qMax(width, fontInfo2.width(componentPath) + 20);
+	height += fontInfo.height();
+	m_componentLabelHeight = fontInfo.height();
+
+	const int verticalSpace = 10;
+	m_componentIdHeight = fontInfo2.height();
+	height += (m_componentIdHeight + verticalSpace);
 
 	double gridSize = m_registryView.GetGrid();
 
-	width += 2 * gridSize * m_exportedInterfacesList.size();
+	if (!m_exportedInterfacesList.empty()){
+		width += 50;
+	}
+
+	const int shadowOffset = 10;
+	width += shadowOffset;
+	height += shadowOffset;
 
 	width = ::ceil(width / gridSize) * gridSize;
 	height = ::ceil(height / gridSize) * gridSize;
@@ -198,6 +208,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 	I_ASSERT(m_elementInfoPtr != NULL);
 
 	QRectF mainRect = rect();
+
 	mainRect.adjust(0, 0, -10, -10);
 	QRectF shadowRect = mainRect;
 	shadowRect.adjust(10, 10, 10, 10);
@@ -220,7 +231,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 		QRectF exportRect = mainRect.adjusted(mainRect.width() - 45, 20, -20, 45 - mainRect.height());
 		painter->fillRect(exportRect, QBrush(Qt::magenta));
 		
-		QPen pen(Qt::magenta,2);
+		QPen pen(Qt::magenta, 2);
 		pen.setJoinStyle(Qt::RoundJoin);
 		pen.setCapStyle(Qt::RoundCap);
 		painter->setPen(pen);
@@ -237,20 +248,20 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* op
 		painter->restore();
 	}
 
-	mainRect.adjust(10, 10, 0, -5);
+	mainRect.adjust(10, 10, 0, 0);
 	mainRect.setHeight(m_componentLabelHeight);
 	painter->save();
 	painter->setPen(Qt::black);
 
-	QFont labelFont("Verdana");
+	QFont labelFont(qApp->font());
 	labelFont.setBold(true);
 	labelFont.setPixelSize(m_componentLabelFontSize);
 	painter->setFont(labelFont);
 	painter->drawText(mainRect, Qt::AlignLeft | Qt::TextSingleLine, m_componentName.c_str());
 
-	mainRect.moveTop(mainRect.height() + mainRect.top());
+	mainRect.moveTop(mainRect.bottom() + 10);
 	mainRect.setHeight(m_componentIdHeight);
-	QFont labelFont2("Verdana");
+	QFont labelFont2(qApp->font());
 	labelFont2.setPixelSize(m_componentIdFontSize);
 	painter->setFont(labelFont2);
 

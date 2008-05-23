@@ -72,9 +72,8 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		m_tempFileName = tempFile.fileName();
 
 		iser::CXmlFileWriteArchive archive(m_tempFileName.toStdString());
-		if (!(const_cast<icomp::IRegistry&>(registry)).Serialize(archive)){
-			retVal = false;
-		}
+
+		retVal = (const_cast<icomp::IRegistry&>(registry)).Serialize(archive);
 	}
 	else{
 		retVal = false;
