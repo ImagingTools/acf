@@ -79,6 +79,16 @@ public:
 									It cannot be NULL.
 	*/
 	virtual bool RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr) = 0;
+
+	/**
+		Get human readable description of this component.
+	*/
+	virtual istd::CString GetDescription() const = 0;
+
+	/**
+		Get keywords for this component.
+	*/
+	virtual istd::CString GetKeywords() const = 0;
 };
 
 

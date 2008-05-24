@@ -35,7 +35,7 @@ namespace icomp
 	}
 
 #define I_EXPORT_COMPONENT(component, description, keywords) \
-	static icomp::TComponentRegistrator< component > component##_registrator(#component, packageInfo);\
+	static icomp::TComponentRegistrator< component > component##_registrator(#component, packageInfo, description, keywords);\
 
 typedef icomp::IComponentStaticInfo* (*GetPackageInfoFunc)();
 

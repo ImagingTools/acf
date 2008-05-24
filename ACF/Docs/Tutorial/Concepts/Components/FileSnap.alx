@@ -10,10 +10,10 @@
         Application
       </ComponentName>
       <X>
-        25
+        -500
       </X>
       <X>
-        -312
+        -237
       </X>
     </Element>
     <Element>
@@ -21,10 +21,10 @@
         Bitmap
       </ComponentName>
       <X>
-        237
+        112
       </X>
       <X>
-        -112
+        -237
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        -175
+        25
       </X>
       <X>
-        87
+        12
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         BitmapView
       </ComponentName>
       <X>
-        225
+        250
       </X>
       <X>
-        -12
+        -237
       </X>
     </Element>
     <Element>
@@ -54,7 +54,7 @@
         FileCamera
       </ComponentName>
       <X>
-        -400
+        -325
       </X>
       <X>
         -112
@@ -65,10 +65,10 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -575
+        -525
       </X>
       <X>
-        -187
+        -137
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         FileSnapParamGui
       </ComponentName>
       <X>
-        -562
+        -512
       </X>
       <X>
-        -12
+        -37
       </X>
     </Element>
     <Element>
@@ -98,10 +98,10 @@
         ImageDialogLoader
       </ComponentName>
       <X>
-        37
+        212
       </X>
       <X>
-        87
+        12
       </X>
     </Element>
     <Element>
@@ -120,10 +120,10 @@
         SnapParams
       </ComponentName>
       <X>
-        -287
+        -212
       </X>
       <X>
-        -187
+        -137
       </X>
     </Element>
     <Element>
@@ -131,10 +131,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -287
+        -212
       </X>
       <X>
-        -12
+        -37
       </X>
     </Element>
   </PositionMap>

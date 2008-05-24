@@ -19,12 +19,12 @@ namespace iqt
 class CPackagesLoader: public icomp::CPackageStaticInfo
 {
 public:
-	bool RegisterPackageFile(const istd::CString& file, bool beQuiet = true);
-	bool RegisterPackagesDir(const istd::CString& directory, bool beQuiet = true);
-	bool LoadConfigFile(const istd::CString& configFile);
+	bool RegisterPackageFile(const istd::CString& file, const istd::CString& baseDir = "", bool beQuiet = true);
+	bool RegisterPackagesDir(const istd::CString& subDir, const istd::CString& baseDir = "", bool beQuiet = true);
+	bool LoadConfigFile(const istd::CString& configFile, const istd::CString& baseDir = "");
 
 protected:
-	CDllFunctionsProvider& GetProviderRef(const istd::CString& file, bool beQuiet = true);
+	CDllFunctionsProvider& GetProviderRef(const istd::CString& file, const istd::CString& baseDir, bool beQuiet = true);
 
 private:
 	typedef istd::TDelPtr<CDllFunctionsProvider> FunctionsProviderPtr;

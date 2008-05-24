@@ -73,6 +73,11 @@ void CComponentView::SetElementInfo(const icomp::IRegistry::ElementInfo* element
 
 	m_elementInfoPtr = elementInfoPtr;
 
+	if (m_elementInfoPtr->elementPtr.IsValid()){
+		const icomp::IComponentStaticInfo& staticInfo = m_elementInfoPtr->elementPtr->GetComponentStaticInfo();
+		setToolTip(iqt::GetQString(staticInfo.GetDescription()));
+	}
+
 	setRect(CalculateRect());
 }
 

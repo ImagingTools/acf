@@ -3,6 +3,7 @@
 
 #include <QFileInfo>
 #include <QDir>
+#include <QCoreApplication>
 #include <QMessageBox>
 #include <QObject>
 
@@ -15,9 +16,9 @@ namespace iqt
 {
 
 
-bool CPackagesLoader::RegisterPackageFile(const istd::CString& file, bool beQuiet)
+bool CPackagesLoader::RegisterPackageFile(const istd::CString& file, const istd::CString& baseDir, bool beQuiet)
 {
-	CDllFunctionsProvider& provider = GetProviderRef(file, beQuiet);
+	CDllFunctionsProvider& provider = GetProviderRef(file, baseDir, beQuiet);
 	if (provider.IsValid()){
 		icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)provider.GetFunction(I_PACKAGE_EXPORT_FUNCTION_NAME);
 		if (getInfoPtr != NULL){
@@ -33,29 +34,35 @@ bool CPackagesLoader::RegisterPackageFile(const istd::CString& file, bool beQuie
 }
 
 
-bool CPackagesLoader::RegisterPackagesDir(const istd::CString& directory, bool beQuiet)
+bool CPackagesLoader::RegisterPackagesDir(const istd::CString& subDir, const istd::CString& baseDir, bool beQuiet)
 {
 	bool retVal = true;
 
-	QDir packagesDir(GetQString(directory));
+	QDir packagesDir(GetQString(baseDir));
+	packagesDir.cd(GetQString(subDir));
+
 	QStringList filters;
 	filters.append("*.arp");
 	QStringList filesInfo = packagesDir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
 	for (		QStringList::iterator iter = filesInfo.begin();
 				iter != filesInfo.end();
 				++iter){
-		istd::CString filePath = GetCString(packagesDir.absoluteFilePath(*iter));
+		istd::CString filePath = GetCString(*iter);
 
-		retVal = RegisterPackageFile(filePath, beQuiet) && retVal;
+		retVal = RegisterPackageFile(filePath, GetCString(packagesDir.absolutePath()), beQuiet) && retVal;
 	}
 
 	return retVal;
 }
 
 
-bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
+bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile, const istd::CString& baseDir)
 {
-	iser::CXmlFileReadArchive archive(configFile);
+	QDir packagesDir(GetQString(baseDir));
+	QFileInfo fileInfo = packagesDir.absoluteFilePath(GetQString(configFile));
+	istd::CString newBaseDir = GetCString(fileInfo.absoluteDir().absolutePath());
+
+	iser::CXmlFileReadArchive archive(GetCString(fileInfo.absoluteFilePath()));
 
 	bool retVal = true;
 
@@ -73,7 +80,7 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 		istd::CString dirPath;
 		retVal = retVal && archive.Process(dirPath);
 		if (retVal){
-			RegisterPackagesDir(dirPath, false);
+			RegisterPackagesDir(dirPath, newBaseDir, false);
 		}
 
 		retVal = retVal && archive.EndTag(dirPathTag);
@@ -95,7 +102,7 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 		istd::CString filePath;
 		retVal = retVal && archive.Process(filePath);
 		if (retVal){
-			RegisterPackageFile(filePath, false);
+			RegisterPackageFile(filePath, newBaseDir, false);
 		}
 
 		retVal = retVal && archive.EndTag(filePathTag);
@@ -109,10 +116,10 @@ bool CPackagesLoader::LoadConfigFile(const istd::CString& configFile)
 
 // protected methods
 
-CDllFunctionsProvider& CPackagesLoader::GetProviderRef(const istd::CString& file, bool beQuiet)
+CDllFunctionsProvider& CPackagesLoader::GetProviderRef(const istd::CString& file, const istd::CString& baseDir, bool beQuiet)
 {
-	QFileInfo fileInfo(GetQString(file));
-	QString absolutePath = fileInfo.absoluteFilePath();
+	QDir applicationDir(GetQString(baseDir));
+	QString absolutePath = applicationDir.absoluteFilePath(GetQString(file));
 
 	DllCacheMap::iterator iter = m_dllCacheMap.find(absolutePath);
 	if (iter != m_dllCacheMap.end()){

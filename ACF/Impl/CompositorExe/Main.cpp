@@ -1,5 +1,7 @@
 #include <QMessageBox>
 #include <QApplication>
+#include <QCoreApplication>
+#include <QDir>
 
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
@@ -65,12 +67,12 @@ int main(int argc, char *argv[])
 			}
 			else if (index < argc - 1){
 				if (option == "packageFile"){
-					packagesLoaderComp.RegisterPackageFile(argv[++index], false);
+					packagesLoaderComp.RegisterPackageFile(argv[++index], "", false);
 
 					useDefaultRegistries = false;
 				}
 				else if (option == "packageDir"){
-					packagesLoaderComp.RegisterPackagesDir(argv[++index], false);
+					packagesLoaderComp.RegisterPackagesDir(argv[++index], "", false);
 
 					useDefaultRegistries = false;
 				}
@@ -86,11 +88,13 @@ int main(int argc, char *argv[])
 		}
 	}
 
-
 	// register default package path
+	istd::CString applicationDirPath = iqt::GetCString(QCoreApplication::applicationDirPath());
 	if (useDefaultRegistries){
-		if (!packagesLoaderComp.LoadConfigFile("./PackagesConfig.xml")){
-			packagesLoaderComp.RegisterPackagesDir(".", false);
+		if (!packagesLoaderComp.LoadConfigFile("PackagesConfig.xml")){
+			if (!packagesLoaderComp.LoadConfigFile("PackagesConfig.xml", applicationDirPath)){
+				packagesLoaderComp.RegisterPackagesDir("", applicationDirPath, false);
+			}
 		}
 	}
 

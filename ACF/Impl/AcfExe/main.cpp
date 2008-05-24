@@ -3,6 +3,8 @@
 #include <QString>
 #include <QMessageBox>
 #include <QApplication>
+#include <QCoreApplication>
+#include <QDir>
 #include <QLabel>
 
 #include "ibase/IApplication.h"
@@ -59,12 +61,12 @@ int main(int argc, char *argv[])
 					componentId = argv[++index];
 				}
 				else if (option == "packageFile"){
-					loader.RegisterPackageFile(argv[++index], false);
+					loader.RegisterPackageFile(argv[++index], "", false);
 
 					useDefaultRegistries = false;
 				}
 				else if (option == "packageDir"){
-					loader.RegisterPackagesDir(argv[++index], false);
+					loader.RegisterPackagesDir(argv[++index], "", false);
 
 					useDefaultRegistries = false;
 				}
@@ -80,9 +82,10 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	// register default package path
 	if (useDefaultRegistries){
-		if (!loader.LoadConfigFile("./PackagesConfig.xml")){
-			loader.RegisterPackagesDir(".", false);
+		if (!loader.LoadConfigFile("PackagesConfig.xml")){
+			loader.RegisterPackagesDir("", "", false);
 		}
 	}
 

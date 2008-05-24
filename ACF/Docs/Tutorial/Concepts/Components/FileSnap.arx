@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="11">
+  <ElementsList count="10">
     <Element>
       <Id>
         Application
@@ -109,62 +109,6 @@
               </IsEnabled>
               <Value>
                 false
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FileCamera
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        BitmapLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DefaultDir
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                C:\Work\TestImages\ProfileEditor
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParameterId
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileBitmapAcquisition
               </Value>
             </Data>
           </AttributeInfo>
@@ -313,7 +257,7 @@
                 true
               </IsEnabled>
               <Value>
-                FileCamera
+                BitmapLoader
               </Value>
             </Data>
           </AttributeInfo>

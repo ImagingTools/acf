@@ -2,6 +2,7 @@
 
 #include <QTemporaryFile>
 #include <QApplication>
+#include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QDesktopWidget>
@@ -67,9 +68,9 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 
 	bool retVal = true;
 
-	QTemporaryFile tempFile("registry_preview.arx");
-	if (tempFile.open()){
-		m_tempFileName = tempFile.fileName();
+	QDir tempDir = QDir::temp();
+	if (tempDir.exists()){
+		m_tempFileName = tempDir.absoluteFilePath("registry_preview.arx");
 
 		iser::CXmlFileWriteArchive archive(m_tempFileName.toStdString());
 
@@ -82,9 +83,12 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 	if (retVal){
 		static QString acfExeFile = "Acf.exe";
 
-		QFileInfo fileInfo(acfExeFile);
+		QDir applicationDir(QCoreApplication::applicationDirPath());
+		QString acfApplicationPath = applicationDir.absoluteFilePath(acfExeFile);
+
+		QFileInfo fileInfo(acfApplicationPath);
 		if (fileInfo.exists()){
-			QProcess::start(acfExeFile, QStringList() << m_tempFileName);
+			QProcess::start(acfApplicationPath, QStringList() << m_tempFileName);
 			if (waitForStarted()){
 				retVal = true;
 			}

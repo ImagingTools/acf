@@ -19,6 +19,8 @@ public:
 	// reimplemented (icomp::IComponentStaticInfo)
 	virtual const IComponentStaticInfo* GetSubcomponent(const std::string& subcomponentId) const;
 	virtual bool RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
+	virtual istd::CString GetDescription() const;
+	virtual istd::CString GetKeywords() const;
 
 protected:
 	void ResetSubcomponentList();
@@ -33,6 +35,18 @@ private:
 inline const CComponentStaticInfoBase::SubcomponentInfos& CComponentStaticInfoBase::GetSubcomponentInfos() const
 {
 	return m_subcomponentInfos;
+}
+
+
+inline istd::CString CComponentStaticInfoBase::GetDescription() const
+{
+	return "";
+}
+
+
+inline istd::CString CComponentStaticInfoBase::GetKeywords() const
+{
+	return "";
 }
 
 
