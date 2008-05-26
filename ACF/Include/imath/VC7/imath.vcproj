@@ -170,6 +170,9 @@
 				RelativePath="..\TIValueManip.h">
 			</File>
 			<File
+				RelativePath="..\TMathVectorWrap.h">
+			</File>
+			<File
 				RelativePath="..\TSplineGridFunctionBase.h">
 			</File>
 			<File
