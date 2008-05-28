@@ -23,6 +23,7 @@
 	\li	istd
 	\li	iser
 	\li	ibase
+	\li	iprm
 */
 namespace iproc
 {

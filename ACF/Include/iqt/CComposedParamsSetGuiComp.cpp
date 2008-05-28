@@ -49,7 +49,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 	QWidget* widgetPtr = GetQtWidget();
 	I_ASSERT(widgetPtr != NULL);
 
-	iproc::IParamsSet* paramsSetPtr = GetObjectPtr();
+	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
 	I_ASSERT(paramsSetPtr != NULL);
 
 	int elementsCount = istd::Min(m_guisCompPtr.GetCount(), m_idsAttrPtr.GetCount());
@@ -74,7 +74,7 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 	QWidget* widgetPtr = GetQtWidget();
 	I_ASSERT(widgetPtr != NULL);
 
-	iproc::IParamsSet* paramsSetPtr = GetObjectPtr();
+	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
 	I_ASSERT(paramsSetPtr != NULL);
 
 	int elementsCount = istd::Min(m_guisCompPtr.GetCount(), m_idsAttrPtr.GetCount());

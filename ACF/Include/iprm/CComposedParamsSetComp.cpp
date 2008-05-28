@@ -1,15 +1,15 @@
-#include "istdc/CComposedParamsSetComp.h"
+#include "iprm/CComposedParamsSetComp.h"
 
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
 
-namespace istdc
+namespace iprm
 {
 
 
-// reimplemented (iproc::IParamsSet)
+// reimplemented (IParamsSet)
 
 const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::string& id) const
 {
@@ -22,7 +22,7 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::strin
 
 	int slavesCount = m_slaveParamsCompPtr.GetCount();
 	for (int i = 0; i < slavesCount; ++i){
-		const iproc::IParamsSet* slavePtr = m_slaveParamsCompPtr[i];
+		const IParamsSet* slavePtr = m_slaveParamsCompPtr[i];
 		if (slavePtr != NULL){
 			const iser::ISerializable* paramPtr = slavePtr->GetParameter(id);
 			if (paramPtr != NULL){
@@ -160,6 +160,6 @@ void CComposedParamsSetComp::OnComponentCreated()
 
 
 
-} // namespace istdc
+} // namespace iprm
 
 

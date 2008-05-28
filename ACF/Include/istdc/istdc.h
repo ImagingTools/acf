@@ -2,8 +2,8 @@
 #define istdc_included
 
 
-#include "istd.h"
-#include "icomp.h"
+#include "istd/istd.h"
+#include "icomp/icomp.h"
 
 
 /**

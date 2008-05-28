@@ -2,11 +2,11 @@
 #define iproc_TIAssyncProcessor_included
 
 
+#include "iprm/IParamsSet.h"
+
+
 namespace iproc
 {
-
-
-class IParamsSet;
 
 
 /**
@@ -77,7 +77,7 @@ public:
 		\param	paramsPtr	pointer to parameter object or NULL if general state is mean.
 		\return				state of this processor \sa ProcessorState.
 	 */
-	virtual int GetProcessorState(const IParamsSet* paramsPtr) const = 0;
+	virtual int GetProcessorState(const iprm::IParamsSet* paramsPtr) const = 0;
 
 	/**
 		Remove all task from queue.
@@ -87,7 +87,7 @@ public:
 	/**
 		Check if specified parameter set is accepted for this processor.
 	 */
-	virtual bool AreParamsAccepted(const IParamsSet* paramsPtr) const = 0;
+	virtual bool AreParamsAccepted(const iprm::IParamsSet* paramsPtr) const = 0;
 
 	/**
 		Begin new task for this processor and add them to queue.
@@ -104,7 +104,7 @@ public:
 							It can be NULL.
 		\return				task ID or -1 if it was not possible to add new task.
 	*/
-	virtual int BeginTask(const IParamsSet* paramsPtr, const InputType* inputPtr, OutputType* outputPtr) = 0;
+	virtual int BeginTask(const iprm::IParamsSet* paramsPtr, const InputType* inputPtr, OutputType* outputPtr) = 0;
 
 	/**
 		Wait for task is finished.
@@ -145,7 +145,7 @@ public:
 							Pointed object can be used till task is finished.
 							It can be NULL.
 	*/
-	virtual void InitProcessor(const IParamsSet* paramsPtr) = 0;
+	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr) = 0;
 };
 
 

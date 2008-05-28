@@ -170,7 +170,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasePck", "..\..\BasePck\VC7\BasePck.vcproj", "{030936A8-23C4-45EE-8E3D-196FF4D405C6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A3BB8D04-552D-4FD4-B799-18187FB17C2C} = {A3BB8D04-552D-4FD4-B799-18187FB17C2C}
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7} = {9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}
 		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B} = {4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}
+		{9BA2C3D2-9483-483F-9019-8C6B027C58C6} = {9BA2C3D2-9483-483F-9019-8C6B027C58C6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iimg", "..\..\..\Include\iimg\VC7\iimg.vcproj", "{DBED1B2F-3F60-4CA1-AF11-1E7FE7763E33}"
@@ -186,6 +188,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "isvn", "..\..\..\Include\is
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icam", "..\..\..\Include\icam\VC7\icam.vcproj", "{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iprm", "..\..\..\Include\iprm\VC7\iprm.vcproj", "{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -453,6 +459,14 @@ Global
 		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.NemoRelease.Build.0 = Release|Win32
 		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.Release.ActiveCfg = Release|Win32
 		{4CE30ACB-6EA3-4AB0-87BA-84D0CBB47A7B}.Release.Build.0 = Release|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.Debug.ActiveCfg = Debug|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.Debug.Build.0 = Debug|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.NemoDebug.ActiveCfg = NemoDebug|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.NemoDebug.Build.0 = NemoDebug|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.NemoRelease.ActiveCfg = NemoRelease|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.NemoRelease.Build.0 = NemoRelease|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.Release.ActiveCfg = Release|Win32
+		{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

@@ -27,7 +27,7 @@ public:
 		\return		if size of bitmap is known it returns this value. Elsewhere invalid size will be returned.
 					\sa \c istd::TIndex::IsValid().
 	*/
-	virtual istd::CIndex2d GetBitmapSize(const iproc::IParamsSet* paramsPtr) const = 0;
+	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const = 0;
 };
 
 

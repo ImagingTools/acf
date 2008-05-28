@@ -1,13 +1,13 @@
-#ifndef iproc_IParamsSet_included
-#define iproc_IParamsSet_included
+#ifndef iprm_IParamsSet_included
+#define iprm_IParamsSet_included
 
 
 #include "iser/ISerializable.h"
 
-#include "iproc/iproc.h"
+#include "iprm/iprm.h"
 
 
-namespace iproc
+namespace iprm
 {
 
 
@@ -33,9 +33,9 @@ public:
 };
 
 
-} // namespace iproc
+} // namespace iprm
 
 
-#endif // !iproc_IParamsSet_included
+#endif // !iprm_IParamsSet_included
 
 

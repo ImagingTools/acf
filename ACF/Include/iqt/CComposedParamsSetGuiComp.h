@@ -9,7 +9,7 @@
 
 #include "imod/TSingleModelObserverBase.h"
 
-#include "iproc/IParamsSet.h"
+#include "iprm/IParamsSet.h"
 
 #include "iqt/IGuiObject.h"
 #include "iqt/TGuiObserverWrap.h"
@@ -20,10 +20,10 @@ namespace iqt
 {
 
 
-class CComposedParamsSetGuiComp: public iqt::TGuiObserverWrap<iqt::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iproc::IParamsSet> >
+class CComposedParamsSetGuiComp: public iqt::TGuiObserverWrap<iqt::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iprm::IParamsSet> >
 {
 public:
-	typedef iqt::TGuiObserverWrap<iqt::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iproc::IParamsSet> > BaseClass;
+	typedef iqt::TGuiObserverWrap<iqt::TGuiComponentBase<QWidget>, imod::TSingleModelObserverBase<iprm::IParamsSet> > BaseClass;
 
 	I_BEGIN_COMPONENT(CComposedParamsSetGuiComp)
 		I_REGISTER_INTERFACE(imod::IObserver)

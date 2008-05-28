@@ -1,5 +1,5 @@
-#ifndef iproc_IParamsManager_included
-#define iproc_IParamsManager_included
+#ifndef iprm_IParamsManager_included
+#define iprm_IParamsManager_included
 
 
 #include "istd/CString.h"
@@ -7,7 +7,7 @@
 #include "iser/ISerializable.h"
 
 
-namespace iproc
+namespace iprm
 {
 
 
@@ -57,9 +57,9 @@ public:
 };
 
 
-} // namespace iproc
+} // namespace iprm
 
 
-#endif // !iproc_IParamsManager_included
+#endif // !iprm_IParamsManager_included
 
 

@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="istdc"
-	ProjectGUID="{AD4F093E-141B-490D-AAAF-C02C69F5C524}"
+	Name="iprm"
+	ProjectGUID="{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}"
 	SccProjectName=""
 	SccLocalPath="">
 	<Platforms>
@@ -234,32 +234,23 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
-				RelativePath="..\CApplicationInfoComp.cpp">
-			</File>
-			<File
-				RelativePath="..\CRegistryCodeSaverComp.cpp">
+				RelativePath="..\CComposedParamsSetComp.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
 			<File
-				RelativePath="..\CApplicationInfoComp.h">
+				RelativePath="..\CComposedParamsSetComp.h">
 			</File>
 			<File
-				RelativePath="..\CRegistryCodeSaverComp.h">
+				RelativePath="..\IParamsManager.h">
 			</File>
 			<File
-				RelativePath="..\istdc.h">
+				RelativePath="..\IParamsSet.h">
 			</File>
 			<File
-				RelativePath="..\TComposedFactoryComp.h">
-			</File>
-			<File
-				RelativePath="..\TFileSerializerComp.h">
-			</File>
-			<File
-				RelativePath="..\TSingleFactoryComp.h">
+				RelativePath="..\iprm.h">
 			</File>
 		</Filter>
 	</Files>

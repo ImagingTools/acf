@@ -174,12 +174,6 @@
 				RelativePath="..\IOperatorManager.h">
 			</File>
 			<File
-				RelativePath="..\IParamsManager.h">
-			</File>
-			<File
-				RelativePath="..\IParamsSet.h">
-			</File>
-			<File
 				RelativePath="..\iproc.h">
 			</File>
 			<File

@@ -12,7 +12,7 @@
 
 #include "iimg/IBitmap.h"
 
-#include "iproc/IParamsSet.h"
+#include "iprm/IParamsSet.h"
 
 #include "icam/IBitmapAcquisition.h"
 
@@ -74,7 +74,7 @@ private:
 	I_REF(iser::IFileLoader, m_bitmapLoaderCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
 
-	I_REF(iproc::IParamsSet, m_paramsSetCompPtr);
+	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);

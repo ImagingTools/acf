@@ -8,7 +8,7 @@
 
 #include "istd/TChangeNotifier.h"
 
-#include "iproc/IParamsSet.h"
+#include "iprm/IParamsSet.h"
 
 #include "iqt/IQImageProvider.h"
 
@@ -104,7 +104,7 @@ const istd::CString& CBitmapLoaderComp::GetLastSaveFileName() const
 
 // reimplemented (iproc::TSyncProcessorWrap<isys::ITimer, iimg::IBitmap>)
 
-int CBitmapLoaderComp::DoSyncProcess(const iproc::IParamsSet* paramsPtr, const isys::ITimer* /*inputPtr*/, iimg::IBitmap* outputPtr)
+int CBitmapLoaderComp::DoSyncProcess(const iprm::IParamsSet* paramsPtr, const isys::ITimer* /*inputPtr*/, iimg::IBitmap* outputPtr)
 {
 	I_ASSERT(m_defaultDirAttrPtr.IsValid());	// obligatory attribute
 	I_ASSERT(m_parameterIdAttrPtr.IsValid());	// obligatory attribute
@@ -161,7 +161,7 @@ int CBitmapLoaderComp::DoSyncProcess(const iproc::IParamsSet* paramsPtr, const i
 
 // reimplemented (icam::IBitmapAcquisition)
 
-istd::CIndex2d CBitmapLoaderComp::GetBitmapSize(const iproc::IParamsSet* /*paramsPtr*/) const
+istd::CIndex2d CBitmapLoaderComp::GetBitmapSize(const iprm::IParamsSet* /*paramsPtr*/) const
 {
 	return istd::CIndex2d(-1, -1);	// unknown size
 }
