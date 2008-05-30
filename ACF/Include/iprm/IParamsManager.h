@@ -26,8 +26,8 @@ public:
 	enum ManagerFlags{
 		MF_COUNT_FIXED = 1,
 		MF_NAME_FIXED = 2,
-		MF_NO_DELETE = 4,
-		MF_NO_INSERT = 8
+		MF_NO_INSERT = 4,
+		MF_NO_DELETE = 8
 	};
 
 	/**
@@ -42,9 +42,14 @@ public:
 	virtual int GetSetsCount() const = 0;
 
 	/**
-		Get number of managed set.
+		Insert new parameters set at selected position or at the and of the list.
 	*/
-	virtual bool SetSetsCount(int count) = 0;
+	virtual bool InsertSet(int index = -1) = 0;
+
+	/**
+		Remove parameters set at selected position.
+	*/
+	virtual bool RemoveSet(int index) = 0;
 
 	/**
 		Get selected parameter set.

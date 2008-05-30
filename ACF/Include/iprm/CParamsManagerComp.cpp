@@ -10,32 +10,6 @@ namespace iprm
 {
 
 
-// reimplemented (iprm::IParamsManager)
-
-int CParamsManagerComp::GetManagerFlags() const
-{
-	int retVal = 0;
-
-	if (!m_paramSetsFactPtr.IsValid()){
-		retVal |= MF_COUNT_FIXED;
-		retVal |= MF_NO_DELETE;
-		retVal |= MF_NO_INSERT;
-	}
-
-	if (m_paramSets.IsEmpty()){
-		retVal |= MF_NO_DELETE;
-	}
-
-	return retVal;
-}
-
-
-int CParamsManagerComp::GetSetsCount() const
-{
-	return m_fixedParamSetsCompPtr.GetCount() + m_paramSets.GetCount();
-}
-
-
 bool CParamsManagerComp::SetSetsCount(int count)
 {
 	int actualSetsCount = GetSetsCount();
@@ -71,6 +45,73 @@ bool CParamsManagerComp::SetSetsCount(int count)
 	m_names.resize(istd::Max(count - m_fixedSetNamesCompPtr.GetCount(), 0), *m_defaultSetNameCompPtr);
 
 	return true;
+}
+
+
+// reimplemented (iprm::IParamsManager)
+
+int CParamsManagerComp::GetManagerFlags() const
+{
+	int retVal = 0;
+
+	if (!m_paramSetsFactPtr.IsValid()){
+		retVal |= MF_COUNT_FIXED;
+		retVal |= MF_NO_DELETE;
+		retVal |= MF_NO_INSERT;
+	}
+
+	if (m_paramSets.IsEmpty()){
+		retVal |= MF_NO_DELETE;
+	}
+
+	return retVal;
+}
+
+
+int CParamsManagerComp::GetSetsCount() const
+{
+	return m_fixedParamSetsCompPtr.GetCount() + m_paramSets.GetCount();
+}
+
+
+bool CParamsManagerComp::InsertSet(int index)
+{
+	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
+
+	if (		!m_paramSetsFactPtr.IsValid() ||
+				((index >= 0) && (index < fixedParamsCount))){
+		return false;
+	}
+
+	IParamsSet* newParamsSetPtr = m_paramSetsFactPtr.CreateInstance();
+	if (newParamsSetPtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier notifier(this);
+
+	if (index >= 0){
+		m_paramSets.InsertElementAt(index - fixedParamsCount, newParamsSetPtr);
+	}
+	else{
+		m_paramSets.PushBack(newParamsSetPtr);
+	}
+
+	return true;
+}
+
+
+bool CParamsManagerComp::RemoveSet(int index)
+{
+	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
+
+	if (index < fixedParamsCount){
+		return false;
+	}
+
+	m_paramSets.RemoveAt(index - fixedParamsCount);
+
+	return false;
 }
 
 

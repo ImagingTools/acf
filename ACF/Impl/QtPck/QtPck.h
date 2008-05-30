@@ -17,6 +17,8 @@
 #include "iqt/CSnapImageGuiComp.h"
 #include "iqt/CComposedParamsSetGuiComp.h"
 #include "iqt/CFileAcquisitionParamsGuiComp.h"
+#include "iqt/CParamsManagerGuiComp.h"
+#include "iqt/CSelectionParamGuiComp.h"
 
 #include "iqt2d/CImageViewComp.h"
 
@@ -48,6 +50,8 @@ typedef iqt::CDockWidgetGuiComp DockWidgetGui;
 typedef iqt::CSnapImageGuiComp SnapImageGui;
 typedef iqt::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqt::CFileAcquisitionParamsGuiComp FileAcquisitionParamsGui;
+typedef iqt::CParamsManagerGuiComp ParamsManagerGui;
+typedef iqt::CSelectionParamGuiComp SelectionParamGui;
 
 
 } // namespace QtPck

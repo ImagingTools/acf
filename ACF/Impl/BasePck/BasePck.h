@@ -14,8 +14,11 @@
 
 #include "istdc/TFileSerializerComp.h"
 #include "istdc/CApplicationInfoComp.h"
-#include "iprm/CComposedParamsSetComp.h"
 #include "istdc/CRegistryCodeSaverComp.h"
+
+#include "iprm/CSelectableParamsSetComp.h"
+#include "iprm/CParamsManagerComp.h"
+#include "iprm/CComposedParamsSetComp.h"
 
 #include "icam/CFileBitmapAcquisitionParamsComp.h"
 
@@ -29,8 +32,11 @@ namespace BasePck
 
 typedef istdc::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> XmlFileSerializer;
 typedef isvn::TApplicationInfoWrap<istdc::CApplicationInfoComp> ApplicationInfo;
-typedef icomp::TModelCompWrap<iprm::CComposedParamsSetComp> ComposedParamsSet;
 typedef istdc::CRegistryCodeSaverComp RegistryCodeSaver;
+
+typedef icomp::TModelCompWrap<iprm::CSelectableParamsSetComp> SelectableParamsSet;
+typedef icomp::TModelCompWrap<iprm::CParamsManagerComp> ParamsManager;
+typedef icomp::TModelCompWrap<iprm::CComposedParamsSetComp> ComposedParamsSet;
 
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;

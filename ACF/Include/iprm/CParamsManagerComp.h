@@ -34,10 +34,13 @@ public:
 		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet")
 	I_END_COMPONENT
 
+	bool SetSetsCount(int count);
+
 	// reimplemented (iprm::IParamsManager)
 	virtual int GetManagerFlags() const;
 	virtual int GetSetsCount() const;
-	virtual bool SetSetsCount(int count);
+	virtual bool InsertSet(int index = -1);
+	virtual bool RemoveSet(int index);
 	virtual IParamsSet* GetParamsSet(int index) const;
 	virtual const istd::CString& GetSetName(int index) const;
 	virtual bool SetSetName(int index, const istd::CString& name);

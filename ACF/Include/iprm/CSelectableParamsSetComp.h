@@ -19,13 +19,14 @@ namespace iprm
 class CSelectableParamsSetComp:
 			public icomp::CComponentBase,
 			virtual public IParamsSet,
-			virtual protected ISelectionParam
+			virtual public ISelectionParam
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectableParamsSetComp)
 		I_REGISTER_INTERFACE(IParamsSet)
+		I_REGISTER_INTERFACE(ISelectionParam)
 		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input")
 		I_ASSIGN(m_paramsManagerCompPtr, "ParamsManager", "Manager of parameter set used to realize selection", true, "ParamsManager")
 	I_END_COMPONENT

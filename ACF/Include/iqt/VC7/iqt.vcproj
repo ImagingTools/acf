@@ -232,7 +232,13 @@
 				RelativePath="..\CPackagesLoader.cpp">
 			</File>
 			<File
+				RelativePath="..\CParamsManagerGuiComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CReflectedBitmapBase.cpp">
+			</File>
+			<File
+				RelativePath="..\CSelectionParamGuiComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.cpp">
@@ -380,7 +386,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -389,7 +396,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -398,7 +406,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -407,7 +416,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -637,7 +647,85 @@
 				RelativePath="..\CPackagesLoader.h">
 			</File>
 			<File
+				RelativePath="..\CParamsManagerGuiComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\CReflectedBitmapBase.h">
+			</File>
+			<File
+				RelativePath="..\CSelectionParamGuiComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.h">
@@ -856,6 +944,12 @@
 				RelativePath="..\generated\moc_CLogGuiComp.cpp">
 			</File>
 			<File
+				RelativePath="..\generated\moc_CParamsManagerGuiComp.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\moc_CSelectionParamGuiComp.cpp">
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSnapImageGuiComp.cpp">
 			</File>
 			<File
@@ -869,6 +963,12 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CLoginGuiComp.h">
+			</File>
+			<File
+				RelativePath="..\generated\ui_CParamsManagerGuiComp.h">
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSelectionParamGuiComp.h">
 			</File>
 			<File
 				RelativePath="..\generated\ui_CSnapImageGuiComp.h">
@@ -968,6 +1068,92 @@
 			</File>
 			<File
 				RelativePath="..\CLoginGuiComp.ui">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CParamsManagerGuiComp.ui">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoDebug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="NemoRelease|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CSelectionParamGuiComp.ui">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
