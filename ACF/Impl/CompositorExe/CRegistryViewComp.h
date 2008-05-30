@@ -27,6 +27,7 @@
 
 #include "IRegistryPreview.h"
 #include "CComponentView.h"
+#include "CComponentNoteView.h"
 
 
 class CRegistryViewComp:
@@ -78,6 +79,8 @@ protected slots:
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
+	void OnAddNote();
+	void OnRemoveNote();
 
 private:
 	void ResetScene();
@@ -141,6 +144,8 @@ private:
 	iqt::CHierarchicalCommand m_exportToCodeCommand;
 	iqt::CHierarchicalCommand m_executeRegistryCommand;
 	iqt::CHierarchicalCommand m_abortRegistryCommand;
+	iqt::CHierarchicalCommand m_addNoteCommand;
+	iqt::CHierarchicalCommand m_removeNoteCommand;
 
 	QTimer m_executionObserverTimer;
 };

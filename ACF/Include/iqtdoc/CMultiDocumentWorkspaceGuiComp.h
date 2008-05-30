@@ -4,6 +4,7 @@
 
 #include <QWorkspace>
 
+#include "ibase/IApplicationInfo.h"
 
 #include "idoc/CDocumentManagerBase.h"
 
@@ -35,6 +36,7 @@ public:
 		I_REGISTER_INTERFACE(iqtdoc::IWorkspaceController)
 		I_ASSIGN(m_scrollingEnabledAttrPtr, "ScrollingWorkspace", "Enable scrolling of workspace area", true, false)
 		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate")
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo")
 	I_END_COMPONENT
 
 	// reimplemented (iqtdoc::IWorkspaceController)
@@ -96,9 +98,31 @@ protected slots:
 	void OnWindowActivated(QWidget* window);
 
 private:
+	template <class Archive> 
+	bool SerializeRecentFiles();
+
+private:
 	I_ATTR(bool, m_scrollingEnabledAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
+	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 };
+
+
+template <class Archive> 
+bool CMultiDocumentWorkspaceGuiComp::SerializeRecentFiles()
+{
+	istd::CString applicationName = "ACF Application";
+	istd::CString companyName = "ImagingTools";
+
+	if (m_applicationInfoCompPtr.IsValid()){ 
+		applicationName = m_applicationInfoCompPtr->GetApplicationName();
+		companyName = m_applicationInfoCompPtr->GetCompanyName();
+	}
+
+	Archive archive(iqt::GetQString(companyName), iqt::GetQString(applicationName));
+	
+	return SerializeRecentFileList(archive);
+}
 
 
 } // namespace iqtdoc

@@ -14,7 +14,7 @@ CHierarchicalCommand::CHierarchicalCommand(const istd::CString& name, int priori
 	BaseClass2::SetName(name);
 	SetStaticFlags(staticFlags);
 
-	connect(this, SIGNAL(triggered()), SLOT(OnTriggered()));
+	connect(this, SIGNAL(triggered()), SLOT(OnTriggered()), Qt::QueuedConnection);
 }
 
 

@@ -23,9 +23,11 @@ public:
 		I_ASSIGN_MULTI_0(m_userVersionIdsAttrPtr, "UserVersionIds", "List of user version ID's", false)
 		I_ASSIGN_MULTI_0(m_userVersionIdDescriptionsAttrPtr, "UserVersionIdDescs", "Descriptions of user version ID's", false)
 		I_ASSIGN(m_applicationNameAttrPtr, "ApplicationName", "Application name", true, "ACF Application")
+		I_ASSIGN(m_companyNameAttrPtr, "CompanyName", "Company name", true, "ImagingTools")
 	I_END_COMPONENT
 
 	// reimplemented (ibase::IApplicationInfo)
+	virtual istd::CString GetCompanyName() const;
 	virtual istd::CString GetApplicationName() const;
 	virtual istd::CString GetApplicationPath() const;
 	virtual istd::CString EncodeVersionName(I_DWORD version, int versionId) const;
@@ -40,6 +42,7 @@ private:
 	I_MULTIATTR(int, m_userVersionIdsAttrPtr);
 	I_MULTIATTR(istd::CString, m_userVersionIdDescriptionsAttrPtr);
 	I_ATTR(istd::CString, m_applicationNameAttrPtr);
+	I_ATTR(istd::CString, m_companyNameAttrPtr);
 };
 
 

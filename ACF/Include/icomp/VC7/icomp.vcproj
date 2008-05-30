@@ -248,6 +248,9 @@
 				RelativePath="..\IRegistryGeometryProvider.h">
 			</File>
 			<File
+				RelativePath="..\IRegistryNotesProvider.h">
+			</File>
+			<File
 				RelativePath="..\TAttributeStaticInfo.h">
 			</File>
 			<File

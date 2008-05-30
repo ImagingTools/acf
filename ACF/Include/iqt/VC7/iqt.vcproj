@@ -241,6 +241,15 @@
 				RelativePath="..\CSelectionParamGuiComp.cpp">
 			</File>
 			<File
+				RelativePath="..\CSettingsArchiveBase.cpp">
+			</File>
+			<File
+				RelativePath="..\CSettingsReadArchive.cpp">
+			</File>
+			<File
+				RelativePath="..\CSettingsWriteArchive.cpp">
+			</File>
+			<File
 				RelativePath="..\CSignalBlocker.cpp">
 			</File>
 			<File
@@ -653,7 +662,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -662,7 +672,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -671,7 +682,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -680,7 +692,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -695,7 +708,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -704,7 +718,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -713,7 +728,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
@@ -722,10 +738,20 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CSettingsArchiveBase.h">
+			</File>
+			<File
+				RelativePath="..\CSettingsReadArchive.h">
+			</File>
+			<File
+				RelativePath="..\CSettingsWriteArchive.h">
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.h">
@@ -858,6 +884,9 @@
 			</File>
 			<File
 				RelativePath="..\ITranslationManager.h">
+			</File>
+			<File
+				RelativePath="..\TDesignerGuiCompBase.h">
 			</File>
 			<File
 				RelativePath="..\TDesignerGuiComponentBase.h">

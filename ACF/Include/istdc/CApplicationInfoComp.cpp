@@ -5,7 +5,17 @@ namespace istdc
 {
 
 
+// public methods
+
 // reimplemented (ibase::IApplicationInfo)
+
+istd::CString CApplicationInfoComp::GetCompanyName() const
+{
+	I_ASSERT(m_companyNameAttrPtr.IsValid());	// This attribute is obligatory
+
+	return *m_companyNameAttrPtr;
+}
+
 
 istd::CString CApplicationInfoComp::GetApplicationName() const
 {

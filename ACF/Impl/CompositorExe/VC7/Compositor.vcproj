@@ -150,6 +150,12 @@
 				RelativePath="..\CComponentConnector.cpp">
 			</File>
 			<File
+				RelativePath="..\CComponentNote.cpp">
+			</File>
+			<File
+				RelativePath="..\CComponentNoteView.cpp">
+			</File>
+			<File
 				RelativePath="..\CComponentView.cpp">
 			</File>
 			<File
@@ -199,6 +205,12 @@
 			</File>
 			<File
 				RelativePath="..\CComponentConnector.h">
+			</File>
+			<File
+				RelativePath="..\CComponentNote.h">
+			</File>
+			<File
+				RelativePath="..\CComponentNoteView.h">
 			</File>
 			<File
 				RelativePath="..\CComponentView.h">
@@ -302,6 +314,9 @@
 				RelativePath="..\IAttributeSelectionObserver.h">
 			</File>
 			<File
+				RelativePath="..\IComponentNote.h">
+			</File>
+			<File
 				RelativePath="..\IRegistryPreview.h">
 			</File>
 		</Filter>
@@ -338,7 +353,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>
@@ -347,7 +363,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>

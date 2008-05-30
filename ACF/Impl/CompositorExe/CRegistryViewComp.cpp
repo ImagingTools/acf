@@ -10,12 +10,14 @@
 #include <math.h>
 
 #include "icomp/IRegistryGeometryProvider.h"
-#include "CComponentView.h"
-#include "CComponentConnector.h"
-#include "CRegistryModelComp.h"
+#include "icomp/IRegistryNotesProvider.h"
 
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
+
+#include "CComponentView.h"
+#include "CComponentConnector.h"
+#include "CRegistryModelComp.h"
 
 
 CRegistryViewComp::CRegistryViewComp()
@@ -38,12 +40,20 @@ CRegistryViewComp::CRegistryViewComp()
 	m_abortRegistryCommand.setEnabled(false);
 	m_abortRegistryCommand.SetGroupId(GI_PREVIEW);
 	m_abortRegistryCommand.SetStaticFlags(lightToolFlags);
+	m_removeNoteCommand.setEnabled(false);
+	m_removeNoteCommand.SetGroupId(GI_COMPONENT);
+	m_removeNoteCommand.SetStaticFlags(lightToolFlags);
+	m_addNoteCommand.setEnabled(false);
+	m_addNoteCommand.SetGroupId(GI_COMPONENT);
+	m_addNoteCommand.SetStaticFlags(lightToolFlags);
 
 	m_registryMenu.InsertChild(&m_removeComponentCommand);
 	m_registryMenu.InsertChild(&m_renameComponentCommand);
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
+	m_registryMenu.InsertChild(&m_addNoteCommand);
+	m_registryMenu.InsertChild(&m_removeNoteCommand);
 	m_registryCommand.InsertChild(&m_registryMenu);
 
 	m_scenePtr = new CRegistryScene(*this);
@@ -145,6 +155,8 @@ void CRegistryViewComp::OnGuiCreated()
 	connect(&m_exportToCodeCommand, SIGNAL( activated()), this, SLOT(OnExportToCode()));
 	connect(&m_executeRegistryCommand, SIGNAL( activated()), this, SLOT(OnExecute()));
 	connect(&m_abortRegistryCommand, SIGNAL( activated()), this, SLOT(OnAbort()));
+	connect(&m_addNoteCommand, SIGNAL( activated()), this, SLOT(OnAddNote()));
+	connect(&m_removeNoteCommand, SIGNAL( activated()), this, SLOT(OnRemoveNote()));
 
 	QGraphicsView* viewPtr = GetQtWidget();
 	if (viewPtr != NULL){
@@ -203,7 +215,16 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Rename Component"), 
 				tr("Rename selected component"),
 				QIcon(":/Resources/Icons/.png"));
-	
+	m_addNoteCommand.SetVisuals(
+				tr("&Add Note"), 
+				tr("&Add Note"), 
+				tr("Add a note to selected component"),
+				QIcon(":/Resources/Icons/.png"));
+	m_removeNoteCommand.SetVisuals(
+				tr("&Remove Note"), 
+				tr("&Remove Note"), 
+				tr("Remove the note from selected component"),
+				QIcon(":/Resources/Icons/.png"));
 }
 
 
@@ -444,6 +465,22 @@ void CRegistryViewComp::OnAbort()
 		m_abortRegistryCommand.setEnabled(false);
 		m_executeRegistryCommand.setEnabled(true);
 	}
+}
+
+
+void CRegistryViewComp::OnAddNote()
+{
+	I_ASSERT(m_selectedComponentPtr != NULL);
+
+	icomp::IRegistryNotesProvider* providerPtr = dynamic_cast<icomp::IRegistryNotesProvider*>(GetObjectPtr());
+	if (providerPtr != NULL){
+		providerPtr->SetComponentNote(m_selectedComponentPtr->GetComponentName(), istd::CString());
+	}
+}
+
+
+void CRegistryViewComp::OnRemoveNote()
+{
 }
 
 

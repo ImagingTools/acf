@@ -89,6 +89,7 @@ protected:
 	virtual void OnDocumentCountChanged();
 	virtual void OnActiveViewChanged();
 	virtual void OnActiveDocumentChanged();
+	virtual void OnRecentFileListChanged();
 
 	template <class MenuType>
 	void CreateMenu(const iqt::CHierarchicalCommand& command, MenuType& result) const;
@@ -101,8 +102,11 @@ protected:
 	bool HasDocumentTemplate() const;
 	void UpdateUndoMenu();
 	void UpdateMenuActions();
+	void UpdateRecentFileMenu();
+	void CreateRecentMenu();
 
 	void OnNewDocument(const std::string& documentTypeId);
+	void OnOpenFile(const QString& fileName);
 
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -184,6 +188,30 @@ private:
 		std::string m_documentTypeId;
 	};
 
+	class RecentFileCommand: public iqt::CHierarchicalCommand
+	{
+	public:
+		typedef iqt::CHierarchicalCommand BaseClass;
+
+		RecentFileCommand(CMainWindowGuiComp* parentPtr, const QString& fileName)
+			:m_parent(*parentPtr), m_fileName(fileName)
+		{
+			setText(m_fileName);
+		}
+
+		// reimplemented (idoc::ICommand)
+		virtual bool Execute(istd::IPolymorphic* /*contextPtr*/)
+		{
+			m_parent.OnOpenFile(m_fileName);
+
+			return true;
+		}
+
+	private:
+		CMainWindowGuiComp& m_parent;
+		QString m_fileName;
+	};
+
 	friend class NewDocumentCommand;
 
 	class ActiveUndoManager: public imod::TSingleModelObserverBase<imod::IUndoManager>
@@ -212,6 +240,9 @@ private:
 	iqt::CHierarchicalCommand m_fixedCommands;
 
 	iqt::CHierarchicalCommand m_menuCommands;
+
+	typedef std::map<std::string, istd::TDelPtr<iqt::CHierarchicalCommand> >  RecentFileCommandMap;
+	RecentFileCommandMap m_recentFilesCommands;
 
 	I_REF(iqt::IGuiObject, m_workspaceCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);

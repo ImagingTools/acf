@@ -7,6 +7,8 @@
 
 #include "imod/IModelEditor.h"
 
+#include "iser/CArchiveTag.h"
+
 #include "idoc/IDocumentTemplate.h"
 
 
@@ -59,10 +61,15 @@ istd::IChangeable* CDocumentManagerBase::OpenDocument(const istd::CString& fileP
 			infoPtr->filePath = filePath;
 			infoPtr->documentTypeId = documentTypeId;
 			iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(documentTypeId);
-			if (		(loaderPtr != NULL) &&
-						(loaderPtr->LoadFromFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk) &&
-						RegisterDocument(infoPtr.GetPtr())){
-				return infoPtr.PopPtr()->documentPtr.GetPtr();
+			if (loaderPtr != NULL){
+				bool isLoaded = (loaderPtr->LoadFromFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk);
+				UpdateRecentFileList(filePath, documentTypeId, isLoaded);
+				
+				if (isLoaded){
+					RegisterDocument(infoPtr.GetPtr());
+
+					return infoPtr.PopPtr()->documentPtr.GetPtr();
+				}
 			}
 		}
 	}
@@ -173,13 +180,18 @@ istd::IChangeable* CDocumentManagerBase::FileNew(const std::string& documentType
 }
 
 
-bool CDocumentManagerBase::FileOpen(const std::string* documentTypeIdPtr, bool createView, const std::string& viewTypeId)
+bool CDocumentManagerBase::FileOpen(const std::string* documentTypeIdPtr, const istd::CString* fileNamePtr, bool createView, const std::string& viewTypeId)
 {
 	bool retVal = true;
 
-	istd::CStringList files = GetOpenFileNames(documentTypeIdPtr);
-	for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
-		retVal = (OpenDocument(files.at(fileIndex), createView, viewTypeId) != NULL) && retVal;
+	if (fileNamePtr == NULL){
+		istd::CStringList files = GetOpenFileNames(documentTypeIdPtr);
+		for (int fileIndex = 0; fileIndex < int(files.size()); fileIndex++){
+			retVal = (OpenDocument(files.at(fileIndex), createView, viewTypeId) != NULL) && retVal;
+		}
+	}
+	else{
+		retVal = (OpenDocument(*fileNamePtr, createView, viewTypeId) != NULL);
 	}
 
 	return retVal;
@@ -261,6 +273,26 @@ bool CDocumentManagerBase::FileClose()
 	}
 
 	return false;
+}
+
+
+istd::CStringList CDocumentManagerBase::GetRecentFileList(const std::string& documentTypeId) const
+{
+	static istd::CStringList emptyRecentFileList;
+
+	RecentFilesMap::const_iterator recentFileIter = m_recentFilesMap.find(documentTypeId);
+	if (recentFileIter != m_recentFilesMap.end()){
+		istd::CStringList recentFileList;
+
+		for (		FileList::const_iterator index = recentFileIter->second.begin();
+					index != recentFileIter->second.end();
+					index++){
+			recentFileList.push_back(*index);
+		}
+		return recentFileList;
+	}
+
+	return emptyRecentFileList;
 }
 
 
@@ -377,6 +409,113 @@ bool CDocumentManagerBase::RegisterDocument(DocumentInfo* infoPtr)
 	}
 
 	return true;
+}
+
+
+bool CDocumentManagerBase::SerializeRecentFileList(iser::IArchive& archive)
+{
+	int documentTypeIdsCount = m_recentFilesMap.size();
+
+	static iser::CArchiveTag recentFilesTag("RecentFileList", "List of application's recent files");
+	static iser::CArchiveTag documentTypeIdsTag("DocumentIds", "List of document ID's");
+	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID");
+	static iser::CArchiveTag fileListTag("FileList", "List of recent files");
+	static iser::CArchiveTag filePathTag("FilePath", "File path");
+
+	bool retVal = archive.BeginTag(recentFilesTag);
+	retVal = retVal && archive.BeginMultiTag(documentTypeIdsTag, documentTypeIdTag, documentTypeIdsCount);
+
+	if (archive.IsStoring()){
+		for (		RecentFilesMap::const_iterator index = m_recentFilesMap.begin();
+					index != m_recentFilesMap.end();
+					index++){
+
+			std::string documentTypeId = index->first;
+
+			retVal = retVal && archive.BeginTag(documentTypeIdTag);
+			retVal = retVal && archive.Process(documentTypeId);
+			retVal = retVal && archive.EndTag(documentTypeIdTag);
+
+			const FileList& recentFileList = index->second;
+
+			int filesCount = recentFileList.size();
+			retVal = retVal && archive.BeginMultiTag(fileListTag, filePathTag, filesCount);
+
+			for (		FileList::const_iterator fileIndex = recentFileList.begin();
+						fileIndex != recentFileList.end();
+						fileIndex++){
+				istd::CString filePath = *fileIndex;
+
+				retVal = retVal && archive.BeginTag(filePathTag);
+				retVal = retVal && archive.Process(filePath);					
+				retVal = retVal && archive.EndTag(filePathTag);
+			}
+
+			retVal = retVal && archive.EndTag(fileListTag);
+		}
+	}
+	else{
+		for (int typeIndex = 0; typeIndex < documentTypeIdsCount; typeIndex++){
+			std::string documentTypeId;
+
+			retVal = retVal && archive.BeginTag(documentTypeIdTag);
+			retVal = retVal && archive.Process(documentTypeId);
+			retVal = retVal && archive.EndTag(documentTypeIdTag);
+			I_ASSERT(!documentTypeId.empty())
+
+			FileList& recentFileList = m_recentFilesMap[documentTypeId];
+
+			int filesCount = 0;
+			retVal = retVal && archive.BeginMultiTag(fileListTag, filePathTag, filesCount);
+
+			for (int fileIndex = 0; fileIndex < filesCount; fileIndex++){
+				istd::CString filePath;
+
+				retVal = retVal && archive.BeginTag(filePathTag);
+				retVal = retVal && archive.Process(filePath);					
+				retVal = retVal && archive.EndTag(filePathTag);
+
+				if (retVal){
+					recentFileList.insert(filePath);
+				}
+			}
+
+			retVal = retVal && archive.EndTag(fileListTag);
+		}
+
+		istd::CChangeNotifier changeNotifier(this, RecentFileListChanged);
+	}
+
+	retVal = retVal && archive.EndTag(documentTypeIdsTag);
+
+	retVal = retVal && archive.EndTag(recentFilesTag);
+
+	return retVal;
+}
+
+
+// private methods
+
+void CDocumentManagerBase::UpdateRecentFileList(const istd::CString& requestedFilePath, const std::string& documentTypeId, bool wasSuccess)
+{
+	if (wasSuccess){
+		istd::CChangeNotifier changeNotifier(this, RecentFileListChanged);
+
+		FileList& recentFileList = m_recentFilesMap[documentTypeId];
+
+		recentFileList.insert(requestedFilePath);
+	}
+	else{
+		RecentFilesMap::iterator recentFileListIter = m_recentFilesMap.find(documentTypeId);
+		if (recentFileListIter != m_recentFilesMap.end()){
+			FileList::iterator recentFileIter = recentFileListIter->second.find(requestedFilePath);
+			if (recentFileIter != recentFileListIter->second.end()){
+				istd::CChangeNotifier changeNotifier(this, RecentFileListChanged);
+		
+				recentFileListIter->second.erase(recentFileIter);
+			}
+		}
+	}
 }
 
 

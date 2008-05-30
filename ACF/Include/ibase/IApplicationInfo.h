@@ -15,17 +15,27 @@ namespace ibase
 {
 
 
+/**
+	This interface provides some information about the application.
+*/
 class IApplicationInfo: public iser::IVersionInfo
 {
 public:
 	/**
+		Get company name.
+	*/
+	virtual istd::CString GetCompanyName() const = 0;
+	
+	/**
 		Get main name of application.
 	*/
 	virtual istd::CString GetApplicationName() const = 0;
+
 	/**
 		Get working directory of this application.
 	*/
 	virtual istd::CString GetApplicationPath() const = 0;
+
 	/**
 		Encode version number to human readable form.
 	*/
@@ -36,6 +46,6 @@ public:
 } // namespace ibase
 
 
-#endif // ibase_IApplicationInfo_included
+#endif // !ibase_IApplicationInfo_included
 
 

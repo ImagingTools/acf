@@ -123,7 +123,7 @@ void CMainWindowGuiComp::OnComponentCreated()
 			if (!ids.empty() && templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::New)){
 				m_newCommand.SetGroupId(GI_DOCUMENT);
 				m_fileCommand.InsertChild(&m_newCommand, false);
-
+				
 				if (ids.size() > 1){
 					for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
 								iter != ids.end();
@@ -146,9 +146,12 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_fileCommand.InsertChild(&m_saveCommand, false);
 		m_saveAsCommand.SetGroupId(GI_DOCUMENT);
 		m_fileCommand.InsertChild(&m_saveAsCommand, false);
+
+		CreateRecentMenu();
+
 		m_quitCommand.SetGroupId(GI_APPLICATION);
 		m_fileCommand.InsertChild(&m_quitCommand, false);
-
+	
 		m_editCommand.SetPriority(60);
 		m_undoCommand.SetGroupId(GI_UNDO);
 		m_editCommand.InsertChild(&m_undoCommand, false);
@@ -251,6 +254,12 @@ void CMainWindowGuiComp::OnActiveDocumentChanged()
 }
 
 
+void CMainWindowGuiComp::OnRecentFileListChanged()
+{
+	UpdateRecentFileMenu();
+}
+
+
 int CMainWindowGuiComp::CreateToolbar(const iqt::CHierarchicalCommand& command, QToolBar& result, int prevGroupId) const
 {
 	int childsCount = command.GetChildsCount();
@@ -341,12 +350,10 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 {
 	if (m_mainWindowComponentsPtr.IsValid()){
 		for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
-			if (m_mainWindowComponentsPtr.IsValid()){
-				iqt::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
-				iqt::IGuiObject* guiPtr =  dynamic_cast<iqt::IGuiObject*>(mainWindowComponentPtr);
-				if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
-					mainWindowComponentPtr->AddToMainWindow(mainWindow);
-				}
+			iqt::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
+			iqt::IGuiObject* guiPtr =  dynamic_cast<iqt::IGuiObject*>(mainWindowComponentPtr);
+			if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
+				mainWindowComponentPtr->AddToMainWindow(mainWindow);
 			}
 		}
 	}
@@ -445,6 +452,80 @@ void CMainWindowGuiComp::UpdateMenuActions()
 }
 
 
+void CMainWindowGuiComp::UpdateRecentFileMenu()
+{
+	idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
+	I_ASSERT(documentManagerPtr != NULL);
+	if (documentManagerPtr != NULL){
+		const idoc::IDocumentTemplate* templatePtr = documentManagerPtr->GetDocumentTemplate();
+		if (templatePtr == NULL){
+			return;
+		}
+
+		idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
+
+		for (		idoc::IDocumentTemplate::Ids::const_iterator index = ids.begin();
+					index != ids.end();
+					index++){
+			std::string documentTypeId = (*index);
+
+			iqt::CHierarchicalCommand* recentGroupCommandPtr = m_recentFilesCommands[documentTypeId].GetPtr();
+			I_ASSERT(recentGroupCommandPtr != NULL);
+
+			recentGroupCommandPtr->ResetChilds();
+
+			istd::CStringList recentFileList = documentManagerPtr->GetRecentFileList(documentTypeId);
+
+			for (int fileIndex = 0; fileIndex < int(recentFileList.size()); fileIndex++){
+				QString filePath = iqt::GetQString(recentFileList.at(fileIndex));
+				
+				RecentFileCommand* recentFileCommand = new RecentFileCommand(this, filePath);
+
+				recentGroupCommandPtr->InsertChild(recentFileCommand, true);
+			}
+		}
+	}
+
+	UpdateMenuActions();
+}
+
+
+void CMainWindowGuiComp::CreateRecentMenu()
+{
+	if (m_documentManagerCompPtr.IsValid()){
+		const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+		if (templatePtr != NULL){
+			idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
+			if (!ids.empty()){
+				if (ids.size() == 1){
+					QString recentListTitle = QString(tr("Recent Files"));
+		
+					iqt::CHierarchicalCommand* fileListCommandPtr = new iqt::CHierarchicalCommand(iqt::GetCString(recentListTitle));
+					if (fileListCommandPtr != NULL){
+						m_fileCommand.InsertChild(fileListCommandPtr, false);
+
+						m_recentFilesCommands[ids.front()] = fileListCommandPtr;
+					}
+				}
+				else{
+					for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
+									iter != ids.end();
+									++iter){
+						QString recentListTitle = QString(tr("Recent ")) + (*iter).c_str() + QString(tr("(s)"));
+						iqt::CHierarchicalCommand* fileListCommandPtr = new iqt::CHierarchicalCommand(iqt::GetCString(recentListTitle));
+						if (fileListCommandPtr != NULL){
+							m_fileCommand.InsertChild(fileListCommandPtr, false);
+
+							m_recentFilesCommands[ids.front()] = fileListCommandPtr;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
 // reimplemented (iqt::TGuiComponentBase)
 
 void CMainWindowGuiComp::OnGuiCreated()
@@ -460,8 +541,19 @@ void CMainWindowGuiComp::OnGuiCreated()
 
 void CMainWindowGuiComp::OnGuiDestroyed()
 {
-	m_menuBar = NULL;
-	m_standardToolBar = NULL;
+	if (m_workspaceCompPtr.IsValid()){
+		m_workspaceCompPtr->DestroyGui();
+	}
+		
+	if (m_mainWindowComponentsPtr.IsValid()){
+		for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
+			iqt::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
+			iqt::IGuiObject* guiPtr =  dynamic_cast<iqt::IGuiObject*>(mainWindowComponentPtr);
+			if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->IsGuiCreated()){
+				guiPtr->DestroyGui();
+			}
+		}
+	}
 }
 
 
@@ -506,6 +598,13 @@ void CMainWindowGuiComp::OnRetranslate()
 
 void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
+	if ((updateFlags & idoc::IDocumentManager::RecentFileListChanged) != 0){
+		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
+		if (documentManagerPtr != NULL){
+			OnRecentFileListChanged();
+		}
+	}
+
 	if ((updateFlags & idoc::IDocumentManager::DocumentCountChanged) != 0){
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
@@ -604,6 +703,19 @@ void CMainWindowGuiComp::OnNewDocument(const std::string& documentFactoryId)
 		istd::IChangeable* documentPtr = m_documentManagerCompPtr->FileNew(documentFactoryId);
 		if (documentPtr == NULL){
 			QMessageBox::warning(GetWidget(), "", tr("Document could not be created"));
+			return;
+		}
+	}
+}
+
+
+void CMainWindowGuiComp::OnOpenFile(const QString& fileName)
+{
+	if (m_documentManagerCompPtr.IsValid()){
+		istd::CString documentFile = iqt::GetCString(fileName);
+		bool result = m_documentManagerCompPtr->FileOpen(NULL, &documentFile);
+		if (!result){
+			QMessageBox::warning(GetWidget(), "", tr("Document could not be opened"));
 			return;
 		}
 	}

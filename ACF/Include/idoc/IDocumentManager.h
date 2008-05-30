@@ -26,7 +26,8 @@ public:
 		DocumentCreated = 0x20,
 		DocumentRemoved = 0x40,
 		DocumentCountChanged = 0x80,
-		ViewActivationChanged = 0x100
+		ViewActivationChanged = 0x100,
+		RecentFileListChanged = 0x200
 	};
 
 	/**
@@ -82,7 +83,7 @@ public:
 		\param	createView			if true, view will be automatically created.
 		\param	viewTypeId			ID of view type, if it will be created.
 	*/
-	virtual bool FileOpen(const std::string* documentTypeIdPtr = NULL, bool createView = true, const std::string& viewTypeId = "") = 0;
+	virtual bool FileOpen(const std::string* documentTypeIdPtr = NULL, const istd::CString* fileNamePtr = NULL, bool createView = true, const std::string& viewTypeId = "") = 0;
 
 	/**
 		Save active document. 
@@ -93,6 +94,11 @@ public:
 		Close current view. 
 	*/
 	virtual bool FileClose() = 0;
+
+	/**
+		Get the recent file list for a given document type.
+	*/
+	virtual istd::CStringList GetRecentFileList(const std::string& documentTypeId) const = 0;
 };
 
 

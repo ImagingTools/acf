@@ -10,6 +10,12 @@
 
 #include "idoc/IDocumentTemplate.h"
 
+#include "iqt/CSettingsWriteArchive.h"
+#include "iqt/CSettingsReadArchive.h"
+
+#include "iser/CXmlFileWriteArchive.h"
+#include "iser/CXmlFileReadArchive.h"
+
 
 namespace iqtdoc
 {
@@ -319,12 +325,16 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 			}
 		}
 	}
+
+	SerializeRecentFiles<iqt::CSettingsReadArchive>();
 }
 
 
 void CMultiDocumentWorkspaceGuiComp::OnGuiDestroyed()
 {
 	CloseAllDocuments();
+
+	SerializeRecentFiles<iqt::CSettingsWriteArchive>();
 }
 
 

@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<BasePck::ApplicationInfo> applicationInfo;
 	applicationInfo.SetStringAttr("ApplicationName", "ACF Compositor");
+	applicationInfo.SetStringAttr("CompanyName", "ImagingTools");
 	applicationInfo.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::GuiApplication> application;
@@ -139,6 +140,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<QtPck::MultiDocWorkspaceGui> workspaceComp;
 	workspaceComp.SetRef("DocumentTemplate", &documentTemplateComp);
+	workspaceComp.SetRef("ApplicationInfo", &applicationInfo);
 	workspaceComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::DockWidgetGui> attributeEditorDockComp;

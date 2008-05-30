@@ -3,12 +3,15 @@
 
 
 // STL includes
+#include <set>
 #include <map>
 #include <list>
 
 #include "istd/TIFactory.h"
 #include "istd/TPointerVector.h"
 #include "istd/TDelPtr.h"
+
+#include "iser/IArchive.h"
 
 #include "imod/TMultiModelObserverBase.h"
 #include "imod/IModel.h"
@@ -45,15 +48,18 @@ public:
 	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view) const;
 	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const;
 	virtual istd::IChangeable* FileNew(const std::string& documentTypeId, bool createView = true, const std::string& viewTypeId = "");
-	virtual bool FileOpen(const std::string* documentTypeIdPtr, bool createView = true, const std::string& viewTypeId = "");
+	virtual bool FileOpen(const std::string* documentTypeIdPtr, const istd::CString* fileNamePtr = NULL, bool createView = true, const std::string& viewTypeId = "");
 	virtual bool FileSave(bool requestFileName = false);
 	virtual bool FileClose();
+	virtual istd::CStringList GetRecentFileList(const std::string& documentTypeId) const;
 
 protected:
 	typedef istd::TDelPtr<istd::IChangeable> DocumentPtr;
 	typedef istd::TDelPtr<imod::IUndoManager> UndoManagerPtr;
 	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
 	typedef std::list<ViewPtr> Views;
+	typedef std::set<istd::CString> FileList;
+	typedef std::map<std::string, FileList> RecentFilesMap;
 
 	struct DocumentInfo
 	{
@@ -101,6 +107,11 @@ protected:
 	*/
 	bool RegisterDocument(DocumentInfo* documentPtr);
 
+	/**
+		Serialize recent file list
+	*/
+	virtual bool SerializeRecentFileList(iser::IArchive& archive);
+
 	// abstract methods
 	
 	/**
@@ -119,12 +130,20 @@ protected:
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr) = 0;
 
 private:
+	/**
+		Do updated of recent file list with the new file \c requestedFilePath.
+	*/
+	void UpdateRecentFileList(const istd::CString& requestedFilePath, const std::string& documentTypeId, bool wasSuccess);
+
+private:
 	typedef istd::TPointerVector<DocumentInfo> DocumentInfos;
 
 	const IDocumentTemplate* m_documentTemplatePtr;
 	DocumentInfos m_documentInfos;
 
 	istd::IPolymorphic* m_activeViewPtr;
+
+	RecentFilesMap m_recentFilesMap;
 };
 
 
