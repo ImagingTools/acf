@@ -8,9 +8,6 @@
 #include <QMenu>
 
 
-#include "iqt/IQImageProvider.h"
-
-
 namespace iqt2d
 {
 
@@ -54,6 +51,8 @@ void CImageViewComp::SetFitMode(FitMode mode)
 		viewPtr->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	}
 }
+
+
 void CImageViewComp::SetFullScreenMode(bool fullScreenMode)
 {
 	m_isFullScreenMode = fullScreenMode;
@@ -135,10 +134,11 @@ void CImageViewComp::OnFitToView()
 		return;
 	}
 
-	double scaleX = viewPtr->width() / (double)(m_imageItem.GetWidth());
-	double scaleY = viewPtr->height() / (double)(m_imageItem.GetHeight());
+	istd::CIndex2d imageSize = m_imageItem.GetSize();
+	double scaleX = viewPtr->width() / double(imageSize.GetX());
+	double scaleY = viewPtr->height() / double(imageSize.GetY());
 	
-	double newScale = (scaleX >=scaleY) ? scaleY : scaleX;
+	double newScale = istd::Max(scaleX, scaleY);
 
 	QMatrix scaleMatrix;
 	scaleMatrix.scale(newScale, newScale);	
@@ -157,7 +157,8 @@ void CImageViewComp::OnFitToImage()
 
 	viewPtr->showNormal();
 	double r = viewPtr->matrix().m11();
-	viewPtr->resize(m_imageItem.GetWidth() * r, m_imageItem.GetHeight() * r);
+	istd::CIndex2d size = m_imageItem.GetSize();
+	viewPtr->resize(size.GetX() * r, size.GetY() * r);
 }
 
 
@@ -191,10 +192,16 @@ void CImageViewComp::UpdateModel() const
 void CImageViewComp::UpdateEditor()
 {
 	if (IsGuiCreated()){
-		iqt::IQImageProvider* bitmapPtr = dynamic_cast<iqt::IQImageProvider*>(GetObjectPtr());
+		QGraphicsView* viewPtr = GetQtWidget();
+		I_ASSERT(viewPtr != NULL);	// gui was created
+
+		iimg::IBitmap* bitmapPtr = GetObjectPtr();
 
 		if (bitmapPtr != NULL){
-			m_imageItem.SetImage(bitmapPtr->GetQImage());
+			m_imageItem.SetBitmap(*bitmapPtr);
+			istd::CIndex2d size = m_imageItem.GetSize();
+
+			viewPtr->setSceneRect(0, 0, size.GetX(), size.GetY());
 
 			InvalidateScene();
 		}
@@ -352,8 +359,6 @@ void CImageViewComp::InvalidateScene()
 	if (viewPtr == NULL){
 		return;
 	}
-	
-	viewPtr->centerOn(&m_imageItem);
 }
 
 

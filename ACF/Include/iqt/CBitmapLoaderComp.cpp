@@ -5,6 +5,7 @@
 #include <QFileInfo>
 #include <QByteArray>
 #include <QImageReader>
+#include <QStringList>
 
 #include "istd/TChangeNotifier.h"
 
@@ -120,7 +121,21 @@ int CBitmapLoaderComp::DoSyncProcess(const iprm::IParamsSet* paramsPtr, const is
 
 	ParamsInfo& info = m_dirInfos[filesPath];
 	if (info.filesIter == info.files.end()){
-		info.files = directory.entryList(QDir::Files | QDir::Readable);
+		QStringList nameFilters;
+
+		if (m_nameFiltersAttrPtr.IsValid()){
+			int filtersCount = m_nameFiltersAttrPtr.GetCount();
+			for (int i = 0; i < filtersCount; ++i){
+				nameFilters << iqt::GetQString(m_nameFiltersAttrPtr[i]);
+			}
+		}
+		else{
+			nameFilters << "*.bmp";
+			nameFilters << "*.png";
+			nameFilters << "*.jpg";
+		}
+
+		info.files = directory.entryList(nameFilters, QDir::Files | QDir::Readable);
 		info.filesIter = info.files.begin();
 	}
 

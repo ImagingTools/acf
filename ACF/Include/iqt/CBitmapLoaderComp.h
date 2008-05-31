@@ -37,6 +37,7 @@ public:
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)
 		I_ASSIGN(m_defaultDirAttrPtr, "DefaultDir", "Directory will be used if no parameters are specified", true, ".")
 		I_ASSIGN(m_parameterIdAttrPtr, "ParameterId", "Id used to get parameters from the parameter set", true, "FileBitmapAcquisition")
+		I_ASSIGN_MULTI_3(m_nameFiltersAttrPtr, "NameFilters", "List of image file filter names", false, "*.png", "*.bmp", "*.jpg")
 		I_ASSIGN(m_maxCachedDirectoriesAttrPtr, "MaxCachedDirs", "Maximum number of cached directories", true, 10)
 	I_END_COMPONENT
 
@@ -83,6 +84,7 @@ private:
 
 	I_ATTR(istd::CString, m_defaultDirAttrPtr);
 	I_ATTR(istd::CString, m_parameterIdAttrPtr);
+	I_MULTIATTR(istd::CString, m_nameFiltersAttrPtr);
 	I_ATTR(int, m_maxCachedDirectoriesAttrPtr);
 };
 

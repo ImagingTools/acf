@@ -3,59 +3,48 @@
 
 
 #include <QGraphicsRectItem>
-#include <QGraphicsItemGroup>
+
+#include "istd/CIndex2d.h"
+
+#include "iimg/IBitmap.h"
+
+#include "iqt2d/iqt2d.h"
 
 
 namespace iqt2d
 {
 
 
-class CImageItem: public QObject, public QGraphicsItemGroup
+class CImageItem: public QGraphicsRectItem
 {
 public:
 	CImageItem();
-	virtual ~CImageItem();
 
-	void SetImage(const QImage& image);
-	int GetWidth() const;
-	int GetHeight() const;
+	istd::CIndex2d GetSize() const;
 
-protected:
-	class ImageItem: public QGraphicsRectItem
-	{
-	public:
-		void SetImage(const QImage& image);
-		int GetWidth() const;
-		int GetHeight() const;
+	void SetBitmap(const iimg::IBitmap& bitmap);
 
-	protected:
-		// reimplemented (QGraphicsRectItem)
-		virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
-
-	private:
-		QPixmap m_pixmap;
-	};
-
-	class ImageFrame: public QGraphicsRectItem
-	{
-	protected:
-		// reimplemented (QGraphicsRectItem)
-		virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
-
-	private:
-		void CreateBackgroundPixmap();
-
-		QPixmap m_backgroundPixmap;
-	};
+	// reimplemented (QGraphicsRectItem)
+	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
-	ImageItem m_imageItem;
-	ImageFrame m_frameItem;
+	QPixmap m_backgroundPixmap;
+
+	QPixmap m_bitmap;
 };
+
+
+// inline methods
+
+inline istd::CIndex2d CImageItem::GetSize() const
+{
+	return iqt::GetCIndex2d(m_bitmap.size());
+}
 
 
 } // namespace iqt2d
 
 
 #endif // !iqt2d_CImageItem_included
+
 

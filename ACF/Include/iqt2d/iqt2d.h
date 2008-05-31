@@ -2,12 +2,14 @@
 #define iqt2d_included
 
 
+#include "iqt/iqt.h"
+
+
 /**
-\defgroup iqt2d Qt Basics
-\ingroup ACF
+	\defgroup iqt2d Qt Basics
+	\ingroup ACF
 
-This package contains Qt based implementations for 2D graphic objects.
-
+	This package contains Qt based implementations for 2D graphic objects.
 */
 
 
