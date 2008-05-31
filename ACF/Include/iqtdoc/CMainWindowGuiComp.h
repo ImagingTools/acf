@@ -90,6 +90,8 @@ protected:
 	virtual void OnActiveViewChanged();
 	virtual void OnActiveDocumentChanged();
 	virtual void OnRecentFileListChanged();
+	virtual void OnDragEnterEvent(QDragEnterEvent* dragEnterEventPtr);
+	virtual void OnDropEvent(QDropEvent* dropEventPtr);
 
 	template <class MenuType>
 	void CreateMenu(const iqt::CHierarchicalCommand& command, MenuType& result) const;
@@ -115,6 +117,9 @@ protected:
 
 	// reimplemented (imod::TSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// reimplemented (QObject)
+	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
 
 	// static methods
 	static QIcon GetIcon(const std::string& name);

@@ -1,15 +1,19 @@
+#include "iqtdoc/CMainWindowGuiComp.h"
+
+
 #include <QStatusBar>
 #include <QMessageBox>
 #include <QFrame>
 #include <QStyle>
 #include <QStyleFactory>
 #include <QApplication>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QUrl> 
 
 #include "imod/IObserver.h"
 
 #include "idoc/ICommandsProvider.h"
-
-#include "iqtdoc/CMainWindowGuiComp.h"
 
 
 namespace iqtdoc
@@ -260,6 +264,38 @@ void CMainWindowGuiComp::OnRecentFileListChanged()
 }
 
 
+void CMainWindowGuiComp::OnDragEnterEvent(QDragEnterEvent* dragEnterEventPtr)
+{
+	if (dragEnterEventPtr->mimeData()->hasFormat("text/uri-list")){
+         dragEnterEventPtr->acceptProposedAction();
+	}
+}
+
+
+void CMainWindowGuiComp::OnDropEvent(QDropEvent* dropEventPtr)
+{
+	const QMimeData* mimeData = dropEventPtr->mimeData();
+	if (mimeData->hasUrls()){
+		QList<QUrl> files = mimeData->urls();
+
+		for (int fileIndex = 0; fileIndex < files.count(); fileIndex++){
+			QString filePath = files.at(fileIndex).toLocalFile();
+			
+			if (m_documentManagerCompPtr.IsValid()){
+				const idoc::IDocumentTemplate* documentTemplatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+				if (documentTemplatePtr != NULL){
+					idoc::IDocumentTemplate::Ids availableDocumentIds = documentTemplatePtr->GetDocumentTypeIdsForFile(iqt::GetCString(filePath));
+					if (!availableDocumentIds.empty()){
+						OnOpenFile(filePath);
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
 int CMainWindowGuiComp::CreateToolbar(const iqt::CHierarchicalCommand& command, QToolBar& result, int prevGroupId) const
 {
 	int childsCount = command.GetChildsCount();
@@ -343,6 +379,10 @@ void CMainWindowGuiComp::SetupMainWindow(QMainWindow& mainWindow)
 	QSize size(800, 600);
 	size = size.expandedTo(mainWindow.minimumSizeHint());
 	mainWindow.resize(size);
+
+	mainWindow.setAcceptDrops(true);
+
+	mainWindow.installEventFilter(this);
 }
 
 
@@ -638,6 +678,27 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 			}
 		}
 	}
+}
+
+
+// reimplemented (QObject)
+
+bool CMainWindowGuiComp::eventFilter(QObject* /*sourcePtr*/, QEvent* eventPtr)
+{
+	if (eventPtr->type() == QEvent::DragEnter){
+		QDragEnterEvent* dragEnterEventPtr = dynamic_cast<QDragEnterEvent*>(eventPtr);
+		I_ASSERT(dragEnterEventPtr != NULL);
+
+		OnDragEnterEvent(dragEnterEventPtr);
+	}
+	else if(eventPtr->type() == QEvent::Drop){
+		QDropEvent* dropEventPtr = dynamic_cast<QDropEvent*>(eventPtr);
+		I_ASSERT(dropEventPtr != NULL);
+
+		OnDropEvent(dropEventPtr);
+	}
+
+	return false;
 }
 
 
