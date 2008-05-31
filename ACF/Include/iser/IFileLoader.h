@@ -47,13 +47,13 @@ public:
 		This function loads data \c data from file \c filePath
 		\returns serialization state. \sa SerializationState
 	*/
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const = 0;
+	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const = 0;
 
 	/**
 		This function saves data \c data to file \c filePath
 		\returns serialization state. \sa SerializationState
 	*/
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const = 0;
+	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const = 0;
 
 	/**
 		Returns the last opened file name.

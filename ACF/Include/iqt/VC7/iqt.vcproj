@@ -247,6 +247,9 @@
 				RelativePath="..\CSettingsReadArchive.cpp">
 			</File>
 			<File
+				RelativePath="..\CSettingsSerializerComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CSettingsWriteArchive.cpp">
 			</File>
 			<File
@@ -749,6 +752,9 @@
 			</File>
 			<File
 				RelativePath="..\CSettingsReadArchive.h">
+			</File>
+			<File
+				RelativePath="..\CSettingsSerializerComp.h">
 			</File>
 			<File
 				RelativePath="..\CSettingsWriteArchive.h">

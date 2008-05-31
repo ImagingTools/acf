@@ -509,7 +509,12 @@ void CMainWindowGuiComp::UpdateRecentFileMenu()
 					index++){
 			std::string documentTypeId = (*index);
 
-			iqt::CHierarchicalCommand* recentGroupCommandPtr = m_recentFilesCommands[documentTypeId].GetPtr();
+			RecentFileCommandMap::iterator foundCommandIter = m_recentFilesCommands.find(documentTypeId);
+			if (foundCommandIter == m_recentFilesCommands.end()){
+				continue;
+			}
+
+			iqt::CHierarchicalCommand* recentGroupCommandPtr = foundCommandIter->second.GetPtr();
 			I_ASSERT(recentGroupCommandPtr != NULL);
 
 			recentGroupCommandPtr->ResetChilds();
