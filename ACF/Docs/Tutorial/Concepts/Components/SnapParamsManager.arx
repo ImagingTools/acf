@@ -89,9 +89,12 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="2">
                 <Value>
                   *.png
+                </Value>
+                <Value>
+                  *.jpg
                 </Value>
               </Values>
             </Data>
