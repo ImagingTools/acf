@@ -44,7 +44,6 @@ bool CSettingsWriteArchive::EndTag(const iser::CArchiveTag& /*tag*/)
 	I_ASSERT(!m_openTagsList.empty());
 
 	TagInfo& currentTag = m_openTagsList.back();
-	
 	if (currentTag.count == 0){		
 		m_openTagsList.pop_back();
 	}

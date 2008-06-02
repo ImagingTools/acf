@@ -26,7 +26,6 @@ QString CSettingsArchiveBase::CreateKey(bool replaceMultiple) const
 	for (		OpenTagsList::iterator index = m_openTagsList.begin();
 				index != m_openTagsList.end();
 				index++){
-
 		TagInfo& tagInfo = *index;
 		if (tagInfo.count > 0 && replaceMultiple){
 			tagInfo.tagId = QString::number(tagInfo.count).toStdString();
@@ -34,7 +33,7 @@ QString CSettingsArchiveBase::CreateKey(bool replaceMultiple) const
 			registryKey += QString::number(tagInfo.count--);
 		}
 		else{
-			registryKey += iqt::GetQString((*index).tagId);
+			registryKey += iqt::GetQString(tagInfo.tagId);
 		}
 
 		registryKey += "/";

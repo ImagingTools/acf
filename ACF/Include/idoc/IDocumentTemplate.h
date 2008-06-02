@@ -53,7 +53,7 @@ public:
 	/**
 		Return \c true, if the feature(s) is supported by this document template.
 	*/
-	virtual bool IsFeatureSupported(int featureFlags) const = 0;
+	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const = 0;
 
 	/**
 		Get list of supported document ID's can be created for specified file.

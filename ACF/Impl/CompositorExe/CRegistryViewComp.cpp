@@ -32,6 +32,10 @@ CRegistryViewComp::CRegistryViewComp()
 	m_removeComponentCommand.SetStaticFlags(lightToolFlags);
 	m_renameComponentCommand.setEnabled(false);
 	m_renameComponentCommand.SetGroupId(GI_COMPONENT);
+	m_exportComponentCommand.setEnabled(false);
+	m_exportComponentCommand.SetGroupId(GI_COMPONENT);
+	m_exportInterfaceCommand.setEnabled(false);
+	m_exportInterfaceCommand.SetGroupId(GI_COMPONENT);
 	m_exportToCodeCommand.setEnabled(false);
 	m_exportToCodeCommand.SetGroupId(GI_CODEGEN);
 	m_executeRegistryCommand.setEnabled(false);
@@ -49,6 +53,8 @@ CRegistryViewComp::CRegistryViewComp()
 
 	m_registryMenu.InsertChild(&m_removeComponentCommand);
 	m_registryMenu.InsertChild(&m_renameComponentCommand);
+	m_registryMenu.InsertChild(&m_exportComponentCommand);
+	m_registryMenu.InsertChild(&m_exportInterfaceCommand);
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
@@ -157,6 +163,8 @@ void CRegistryViewComp::OnGuiCreated()
 	connect(&m_abortRegistryCommand, SIGNAL( activated()), this, SLOT(OnAbort()));
 	connect(&m_addNoteCommand, SIGNAL( activated()), this, SLOT(OnAddNote()));
 	connect(&m_removeNoteCommand, SIGNAL( activated()), this, SLOT(OnRemoveNote()));
+	connect(&m_exportComponentCommand, SIGNAL( activated()), this, SLOT(OnExportComponent()));
+	connect(&m_exportInterfaceCommand, SIGNAL( activated()), this, SLOT(OnExportInterface()));
 
 	QGraphicsView* viewPtr = GetQtWidget();
 	if (viewPtr != NULL){
@@ -196,6 +204,16 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Rename Component"), 
 				tr("Rename"), 
 				tr("Allow to assign new name to selected component"));
+	m_exportComponentCommand.SetVisuals(
+				tr("&Export Component"), 
+				tr("&Export Component"), 
+				tr("Export component"),
+				QIcon(":/Resources/Icons/.png"));
+	m_exportInterfaceCommand.SetVisuals(
+				tr("&Export Inteface(s)"), 
+				tr("&Export Interface(s)"), 
+				tr("Export interface(s)"),
+				QIcon(":/Resources/Icons/.png"));
 	m_exportToCodeCommand.SetVisuals(
 				tr("&Export To Code..."),
 				tr("Export"),
@@ -210,11 +228,6 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Abort Registry"), 
 				tr("Abort registry execution"),
 				QIcon(":/Resources/Icons/player_stop.png"));
-	m_renameComponentCommand.SetVisuals(
-				tr("&Rename Component"), 
-				tr("&Rename Component"), 
-				tr("Rename selected component"),
-				QIcon(":/Resources/Icons/.png"));
 	m_addNoteCommand.SetVisuals(
 				tr("&Add Note"), 
 				tr("&Add Note"), 
@@ -265,6 +278,7 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 
 	if (isSelected){
 		m_selectedComponentPtr = viewPtr;
+
 		if (viewPtr != NULL && m_registryElementObserversCompPtr.IsValid()){
 			const icomp::IRegistry::ElementInfo& elementInfo = m_selectedComponentPtr->GetElementInfo();
 
@@ -285,8 +299,12 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* viewPtr, bool is
 
 	m_removeComponentCommand.setEnabled(isSelected);
 	m_renameComponentCommand.setEnabled(isSelected);
+	m_exportComponentCommand.setEnabled(isSelected);
+	m_exportInterfaceCommand.setEnabled(isSelected);
 	m_exportToCodeCommand.setEnabled(isSelected);
 	m_executeRegistryCommand.setEnabled(isSelected && m_registryPreviewCompPtr.IsValid());
+
+	UpdateExportInterfaceCommand();
 }
 
 
@@ -422,6 +440,27 @@ void CRegistryViewComp::OnRenameComponent()
 			}
 		}
 	}
+}
+
+
+void CRegistryViewComp::OnExportInterface()
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		if (m_selectedComponentPtr != NULL){
+			const std::string& componentRole = m_selectedComponentPtr->GetComponentName();
+
+			bool doExport = !HasExportedInterfaces(*m_selectedComponentPtr);
+
+			registryPtr->ExportElementInterface(componentRole, doExport);
+		}
+	}
+}
+
+
+void CRegistryViewComp::OnExportComponent()
+{
+	// TODO: Implement component export
 }
 
 
@@ -736,6 +775,44 @@ void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 				attributeInfoPtr = registryElementPtr->InsertAttributeInfo(attributeId);
 			}
 		}
+	}
+}
+
+bool CRegistryViewComp::HasExportedInterfaces(const CComponentView& componentView) const
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		using icomp::IRegistry::ExportedInterfacesMap::const_iterator;
+
+		const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registryPtr->GetExportedInterfacesMap();
+		for (		const_iterator iter = interfacesMap.begin();
+					iter != interfacesMap.end();
+					++iter){
+			if (iter->second == componentView.GetComponentName()){
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+void CRegistryViewComp::UpdateExportInterfaceCommand()
+{
+	if (m_selectedComponentPtr && HasExportedInterfaces(*m_selectedComponentPtr)){
+		m_exportInterfaceCommand.SetVisuals(
+				tr("&Remove Inteface Export"), 
+				tr("&Remove Inteface Export"), 
+				tr("Remove Inteface Export"),
+				QIcon(":/Resources/Icons/.png"));
+	}
+	else{
+		m_exportInterfaceCommand.SetVisuals(
+				tr("&Export Inteface(s)"), 
+				tr("&Export Interface(s)"), 
+				tr("Export interface(s)"),
+				QIcon(":/Resources/Icons/.png"));
 	}
 }
 

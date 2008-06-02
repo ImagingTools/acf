@@ -98,10 +98,10 @@ protected:
 	int CreateToolbar(const iqt::CHierarchicalCommand& command, QToolBar& result, int prevGroupId = idoc::ICommand::GI_NONE) const;
 
 	void SetupMainWindow(QMainWindow& mainWindow);
-	void SetupFileMenu();
-	void SetupEditMenu();
+	void SetupNewCommand();
 	void SetupMainWindowComponents(QMainWindow& mainWindow);
 	bool HasDocumentTemplate() const;
+	void UpdateFixedCommands();
 	void UpdateUndoMenu();
 	void UpdateMenuActions();
 	void UpdateRecentFileMenu();
@@ -272,10 +272,12 @@ void CMainWindowGuiComp::CreateMenu(const iqt::CHierarchicalCommand& command, ty
 	std::map<int, istd::TPointer<QActionGroup> > groups;
 
 	for (int i = 0; i < childsCount; ++i){
+		QString text = command.text();
 		iqt::CHierarchicalCommand* hierarchicalPtr = const_cast<iqt::CHierarchicalCommand*>(
 					dynamic_cast<const iqt::CHierarchicalCommand*>(command.GetChild(i)));
 
 		if (hierarchicalPtr != NULL){
+			QString text2 = hierarchicalPtr->text();
 			int groupId = hierarchicalPtr->GetGroupId();
 			int flags = hierarchicalPtr->GetStaticFlags();
 

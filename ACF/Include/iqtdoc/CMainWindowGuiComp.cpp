@@ -67,7 +67,7 @@ void CMainWindowGuiComp::OnTryClose(bool* ignoredPtr)
 }
 
 
-// reimplemented (QtToolBarManagerInterface)
+// reimplemented (IToolBarManager)
 
 void CMainWindowGuiComp::SetToolBarsVisible(bool /*isVisible*/)
 {
@@ -118,30 +118,8 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_documentManagerModelCompPtr->AttachObserver(this);
 	}
 	
-	const idoc::IDocumentTemplate* templatePtr = NULL;
-	
 	if (m_documentManagerCompPtr.IsValid()){
-		templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
-		if (templatePtr != NULL){
-			idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
-			if (!ids.empty() && templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::New)){
-				m_newCommand.SetGroupId(GI_DOCUMENT);
-				m_fileCommand.InsertChild(&m_newCommand, false);
-				
-				if (ids.size() > 1){
-					for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
-								iter != ids.end();
-								++iter){
-						NewDocumentCommand* newCommandPtr = new NewDocumentCommand(this, *iter);
-						if (newCommandPtr != NULL){
-							QString commandName = iqt::GetQString(*iter);
-							newCommandPtr->SetVisuals(commandName, commandName, tr("Creates new document %1").arg(commandName));
-							m_newCommand.InsertChild(newCommandPtr, true);
-						}
-					}
-				}
-			}
-		}
+		SetupNewCommand();
 
 		m_fileCommand.SetPriority(30);
 		m_openCommand.SetGroupId(GI_DOCUMENT);
@@ -178,17 +156,7 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_helpCommand.SetPriority(150);
 		m_helpCommand.InsertChild(&m_aboutCommand, false);
 
-		// fill menu bar with main commands
-
-		m_fixedCommands.InsertChild(&m_fileCommand, false);
-		
-		if (templatePtr != NULL && templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::Edit)){
-			m_fixedCommands.InsertChild(&m_editCommand, false);
-		}
-
-		m_fixedCommands.InsertChild(&m_viewCommand, false);
-		m_fixedCommands.InsertChild(&m_windowCommand, false);
-		m_fixedCommands.InsertChild(&m_helpCommand, false);
+		UpdateFixedCommands();
 	}
 }
 
@@ -356,7 +324,7 @@ void CMainWindowGuiComp::SetupMainWindow(QMainWindow& mainWindow)
 	m_standardToolBar = new QToolBar(&mainWindow);
 	m_standardToolBar->setWindowTitle(tr("Standard"));
 
-	if (m_useIconTextAttrPtr.IsValid()){
+	if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
 		m_standardToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 	}
 
@@ -383,6 +351,49 @@ void CMainWindowGuiComp::SetupMainWindow(QMainWindow& mainWindow)
 	mainWindow.setAcceptDrops(true);
 
 	mainWindow.installEventFilter(this);
+}
+
+
+void CMainWindowGuiComp::SetupNewCommand()
+{
+	if (!m_documentManagerCompPtr.IsValid()){
+		return;
+	}
+	
+	const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+	if (templatePtr == NULL){
+		return;
+	}
+	
+	idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
+	if (ids.empty()){
+		return;
+	}
+
+	m_newCommand.SetGroupId(GI_DOCUMENT);
+
+	bool isNewSupported = templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::New, ids.front());
+
+	if (ids.size() > 1){
+		for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
+					iter != ids.end();
+					++iter){
+			if (templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::New, *iter)){
+				NewDocumentCommand* newCommandPtr = new NewDocumentCommand(this, *iter);
+				if (newCommandPtr != NULL){
+					QString commandName = iqt::GetQString(*iter);
+					newCommandPtr->SetVisuals(commandName, commandName, tr("Creates new document %1").arg(commandName));
+					m_newCommand.InsertChild(newCommandPtr, true);
+
+					isNewSupported = true;
+				}
+			}
+		}
+	}
+
+	if (isNewSupported){
+		m_fileCommand.InsertChild(&m_newCommand, false);
+	}
 }
 
 
@@ -426,6 +437,34 @@ bool CMainWindowGuiComp::HasDocumentTemplate() const
 }
 
 
+void CMainWindowGuiComp::UpdateFixedCommands()
+{
+	m_fixedCommands.ResetChilds();
+
+	bool editMenuActive = false;
+	if (m_activeDocumentPtr != NULL){
+		if (m_documentManagerCompPtr.IsValid()){
+			std::string documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
+				
+			const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+			if (templatePtr != NULL){
+				editMenuActive = templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::Edit, documentTypeId);
+			}
+		}
+	}
+
+	// fill menu bar with main commands
+
+	m_fixedCommands.InsertChild(&m_fileCommand, false);
+	if (editMenuActive){
+		m_fixedCommands.InsertChild(&m_editCommand, false);
+	}
+	m_fixedCommands.InsertChild(&m_viewCommand, false);
+	m_fixedCommands.InsertChild(&m_windowCommand, false);
+	m_fixedCommands.InsertChild(&m_helpCommand, false);
+}
+
+
 void CMainWindowGuiComp::UpdateUndoMenu()
 {
 	bool isUndoAvailable = false;
@@ -452,8 +491,9 @@ void CMainWindowGuiComp::UpdateMenuActions()
 	if (m_menuBar == NULL){
 		return;
 	}
-
 	m_menuCommands.ResetChilds();
+
+	UpdateFixedCommands();
 
 	m_menuCommands.JoinLinkFrom(&m_fixedCommands);
 
@@ -561,7 +601,7 @@ void CMainWindowGuiComp::CreateRecentMenu()
 						if (fileListCommandPtr != NULL){
 							m_fileCommand.InsertChild(fileListCommandPtr, false);
 
-							m_recentFilesCommands[ids.front()] = fileListCommandPtr;
+							m_recentFilesCommands[*iter] = fileListCommandPtr;
 						}
 					}
 				}

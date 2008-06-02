@@ -237,6 +237,10 @@ bool CDocumentManagerBase::FileSave(bool requestFileName)
 			infoPtr->filePath = filePath;
 		}
 
+		if (requestFileName){
+			UpdateRecentFileList(infoPtr->filePath, infoPtr->documentTypeId, true);
+		}
+
 		return true;
 	}
 
@@ -369,6 +373,8 @@ CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::CreateDocument(const s
 
 		infoPtr->documentPtr.SetPtr(documentPtr);
 		infoPtr->undoManagerPtr.SetPtr(m_documentTemplatePtr->CreateUndoManager(documentTypeId, documentPtr));
+
+		infoPtr->documentTypeId = documentTypeId;
 
 		if (infoPtr->documentPtr.IsValid()){
 			if (createView){

@@ -118,19 +118,22 @@ void CAttributeEditorComp::UpdateEditor()
 		std::string attributeId = staticAttributeInfPtr->GetAttributeId();
 		const iser::ISerializable* attributePtr = NULL;
 
+		QTreeWidgetItem* attributeItemPtr = new QTreeWidgetItem();
+		attributeItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
+	
 		const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
 		if (attributeInfoPtr != NULL){
 			attributePtr = attributeInfoPtr->attributePtr.GetPtr();
+			attributeItemPtr->setCheckState(NameColumn, Qt::Checked);
 		}
 		else{
 			attributePtr = staticAttributeInfPtr->GetAttributeDefaultValue();
+			attributeItemPtr->setCheckState(NameColumn, Qt::Unchecked);
 		}
 
 		QString attributeName = attributeId.c_str();
-		QTreeWidgetItem* attributeItemPtr = new QTreeWidgetItem();
 		attributeItemPtr->setText(NameColumn, attributeName);
 		attributeItemPtr->setData(ValueColumn, AttributeId, attributeName);
-		attributeItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
 		AttributeTree->addTopLevelItem(attributeItemPtr);
 
 		const icomp::CBoolAttribute* boolAttribute = dynamic_cast<const icomp::CBoolAttribute*>(attributePtr);

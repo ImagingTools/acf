@@ -43,7 +43,8 @@ public:
 	virtual bool RemoveElementInfo(const std::string& elementId);
 	virtual const ExportedInterfacesMap& GetExportedInterfacesMap() const;
 	virtual const ExportedComponentsMap& GetExportedComponentsMap() const;
-
+	virtual void ExportElementInterface(const std::string& elementId, bool doExport = true);
+	
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 

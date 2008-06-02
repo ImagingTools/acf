@@ -19,12 +19,10 @@ public:
 	I_BEGIN_COMPONENT(CCompositeDocumentTemplateComp)
 		I_REGISTER_INTERFACE(idoc::IDocumentTemplate)
 		I_ASSIGN_MULTI_0(m_slaveTemplatesCompPtr, "SlaveTemplates", "Set of document templates", true);
-		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", false, true);
-		I_ASSIGN(m_isEditSupportedAttrPtr, "IsEditSupported", "Template supports the edit operation", false, true);
 	I_END_COMPONENT
 
 	// reimplemented (idoc::IDocumentTemplate)
-	virtual bool IsFeatureSupported(int featureFlags) const;
+	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIds() const;
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
@@ -45,13 +43,9 @@ public:
 
 private:
 	I_MULTIREF(idoc::IDocumentTemplate, m_slaveTemplatesCompPtr);
-	I_ATTR(bool, m_isNewSupportedAttrPtr);
-	I_ATTR(bool, m_isEditSupportedAttrPtr);
 
 	typedef std::map<std::string, const idoc::IDocumentTemplate*> IdToTemplateMap;
 	IdToTemplateMap m_idToTemplateMap;
-
-	int m_featureFlags;
 };
 
 

@@ -29,8 +29,9 @@ public:
 	*/
 	enum ChangeFlags
 	{
-		CF_COMPONENT_ADDED = 0x1,
-		CF_COMPONENT_REMOVED = 0x2
+		CF_COMPONENT_ADDED = 0x100,
+		CF_COMPONENT_REMOVED = 0x200,
+		CF_COMPONENT_EXPORTED = 0x400
 	};
 
 	/**
@@ -84,6 +85,11 @@ public:
 		Get access to map used to convert exported sub-components to internal sub-component ID's.
 	*/
 	virtual const ExportedComponentsMap& GetExportedComponentsMap() const = 0;
+
+	/**
+		Export interface(s) of component \elementId. If \c doExport is \c false, the existing export will be removed.
+	*/
+	virtual void ExportElementInterface(const std::string& elementId, bool doExport = true) = 0;
 };
 
 

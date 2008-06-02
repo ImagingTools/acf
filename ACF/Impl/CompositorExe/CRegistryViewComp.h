@@ -76,6 +76,8 @@ protected slots:
 	void OnComponentPositionChanged(CComponentView* view, const QPoint& newPosition);
 	void OnRemoveComponent();
 	void OnRenameComponent();
+	void OnExportInterface();
+	void OnExportComponent();
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
@@ -93,6 +95,8 @@ private:
 
 	bool ProcessDroppedData(const QMimeData& data, QGraphicsSceneDragDropEvent* event);
 	void ConnectReferences(const QString& componentRole);
+	bool HasExportedInterfaces(const CComponentView& componentView) const;
+	void UpdateExportInterfaceCommand();
 
 protected:
 	enum GroupId
@@ -146,6 +150,8 @@ private:
 	iqt::CHierarchicalCommand m_abortRegistryCommand;
 	iqt::CHierarchicalCommand m_addNoteCommand;
 	iqt::CHierarchicalCommand m_removeNoteCommand;
+	iqt::CHierarchicalCommand m_exportComponentCommand;
+	iqt::CHierarchicalCommand m_exportInterfaceCommand;
 
 	QTimer m_executionObserverTimer;
 };

@@ -55,9 +55,13 @@ void CSingleDocumentTemplateBase::SetFileExtensions(const istd::CStringList& fil
 
 // reimplemented (idoc::IDocumentTemplate)
 
-bool CSingleDocumentTemplateBase::IsFeatureSupported(int featureFlags) const
+bool CSingleDocumentTemplateBase::IsFeatureSupported(int featureFlags, const std::string& documentId) const
 {
-	return ((m_supportedFeatures & featureFlags) != 0);
+	if (documentId == m_documentTypeId){
+		return ((m_supportedFeatures & featureFlags) != 0);
+	}
+
+	return false;
 }
 
 

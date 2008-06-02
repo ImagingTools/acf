@@ -310,19 +310,19 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 		QWorkspace* workspacePtr = GetQtWidget();
 	
 		workspacePtr->setScrollBarsEnabled(m_scrollingEnabledAttrPtr->GetValue());
+	}
 
-		int documentsCount = GetDocumentsCount();
-		for (int i = 0; i < documentsCount; ++i){
-			DocumentInfo& info = GetDocumentInfo(i);
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		DocumentInfo& info = GetDocumentInfo(i);
 
-			for (		Views::const_iterator viewIter = info.views.begin();
-						viewIter != info.views.end();
-						++viewIter){
+		for (		Views::const_iterator viewIter = info.views.begin();
+					viewIter != info.views.end();
+					++viewIter){
 				const ViewPtr& viewPtr = *viewIter;
 				I_ASSERT(viewPtr.IsValid());
 
 				OnViewRegistered(viewPtr.GetPtr());
-			}
 		}
 	}
 

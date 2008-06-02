@@ -31,7 +31,7 @@ public:
 	virtual void SetFileExtensions(const istd::CStringList& fileExtensions);
 
 	// reimplemented (idoc::IDocumentTemplate)
-	virtual bool IsFeatureSupported(int featureFlags) const;
+	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIds() const;
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;

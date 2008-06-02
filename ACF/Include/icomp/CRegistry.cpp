@@ -126,6 +126,44 @@ const IRegistry::ExportedComponentsMap& CRegistry::GetExportedComponentsMap() co
 }
 
 
+void CRegistry::ExportElementInterface(const std::string& elementId, bool doExport)
+{
+	const ElementInfo* elementInfoPtr = GetElementInfo(elementId);
+	if (elementInfoPtr != NULL && elementInfoPtr->elementPtr.IsValid()){
+
+		if (doExport){
+			const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr.GetPtr()->GetComponentStaticInfo();
+
+			icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfo.GetInterfaceExtractors();
+
+			for (int interfaceIndex= 0; interfaceIndex < interfaceExtractors.GetElementsCount(); interfaceIndex++){
+				const std::string& intefaceId = interfaceExtractors.GetKeyAt(interfaceIndex);
+
+				m_exportedInterfacesMap[intefaceId] = elementId;
+			}
+		}
+		else{
+			bool isDone = false;
+			while(!isDone){
+				isDone = true;
+				for (		ExportedInterfacesMap::iterator index = m_exportedInterfacesMap.begin();
+							index != m_exportedInterfacesMap.end();
+							index++){
+					if (index->second == elementId){
+						m_exportedInterfacesMap.erase(index);
+
+						isDone = false;
+						break;
+					}
+				}
+			}
+		}
+
+		istd::CChangeNotifier changePtr(this, CF_COMPONENT_EXPORTED);
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CRegistry::Serialize(iser::IArchive& archive)
