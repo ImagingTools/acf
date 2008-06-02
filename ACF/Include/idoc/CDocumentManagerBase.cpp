@@ -213,7 +213,9 @@ bool CDocumentManagerBase::FileSave(bool requestFileName)
 
 	istd::CString filePath = infoPtr->filePath;
 
-	if (requestFileName || filePath.IsEmpty()){
+	requestFileName  = requestFileName || filePath.IsEmpty();
+
+	if (requestFileName){
 		filePath = GetSaveFileName(infoPtr->documentTypeId);
 		if (filePath.IsEmpty()){
 			return true;
