@@ -138,7 +138,7 @@ void CImageViewComp::OnFitToView()
 	double scaleX = viewPtr->width() / double(imageSize.GetX());
 	double scaleY = viewPtr->height() / double(imageSize.GetY());
 	
-	double newScale = istd::Max(scaleX, scaleY);
+	double newScale = istd::Min(scaleX, scaleY);
 
 	QMatrix scaleMatrix;
 	scaleMatrix.scale(newScale, newScale);	
