@@ -596,7 +596,7 @@ void CMainWindowGuiComp::CreateRecentMenu()
 					for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
 									iter != ids.end();
 									++iter){
-						QString recentListTitle = QString(tr("Recent ")) + (*iter).c_str() + QString(tr("(s)"));
+						QString recentListTitle = QString(tr("Recent ")) + (*iter).c_str() + QString(tr("s"));
 						iqt::CHierarchicalCommand* fileListCommandPtr = new iqt::CHierarchicalCommand(iqt::GetCString(recentListTitle));
 						if (fileListCommandPtr != NULL){
 							m_fileCommand.InsertChild(fileListCommandPtr, false);

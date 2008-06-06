@@ -33,7 +33,9 @@ bool CSettingsReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, const ise
 {
 	m_openTagsList.push_back(TagInfo(tag.GetId(), count));
 
-	count = value(CreateKey(false)).toInt();
+	QString registryKey = CreateKey(false);
+
+	count = BaseClass2::value(registryKey).toInt();
 
 	m_openTagsList.back().count = count;
 
@@ -61,7 +63,9 @@ bool CSettingsReadArchive::Process(std::string& value)
 		return false;
 	}
 
-	value = QSettings::value(CreateKey()).toString().toStdString();
+	QString registryKey = CreateKey();
+
+	value = BaseClass2::value(registryKey).toString().toStdString();
 
 	return true;
 }

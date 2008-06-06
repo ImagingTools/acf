@@ -33,7 +33,9 @@ bool CSettingsWriteArchive::BeginMultiTag(const iser::CArchiveTag& tag, const is
 {
 	m_openTagsList.push_back(TagInfo(tag.GetId(), count));
 
-	setValue(CreateKey(false), count);
+	QString registryKey = CreateKey(false);
+
+	BaseClass2::setValue(registryKey, count);
 
 	return true;
 }
@@ -58,7 +60,9 @@ bool CSettingsWriteArchive::Process(std::string& value)
 		return false;
 	}
 
-	setValue(CreateKey(), QString(value.c_str()));
+	QString registryKey = CreateKey();
+
+	BaseClass2::setValue(CreateKey(), QString(value.c_str()));
 
 	return true;
 }

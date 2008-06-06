@@ -439,6 +439,7 @@ bool CDocumentManagerBase::SerializeRecentFileList(iser::IArchive& archive)
 					index++){
 
 			std::string documentTypeId = index->first;
+			I_ASSERT(!documentTypeId.empty())
 
 			retVal = retVal && archive.BeginTag(documentTypeIdTag);
 			retVal = retVal && archive.Process(documentTypeId);
