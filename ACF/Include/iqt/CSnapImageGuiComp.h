@@ -45,9 +45,13 @@ public:
 		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_paramsSetObserverCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
+		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
 	I_END_COMPONENT
 
 	CSnapImageGuiComp();
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 protected slots:
 	void on_SnapImageButton_clicked();
@@ -78,6 +82,8 @@ private:
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
+
+	I_ATTR(double, m_liveIntervalAttrPtr);
 
 	QTimer m_timer;
 };

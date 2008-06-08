@@ -41,6 +41,8 @@ I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using s
 I_EXPORT_COMPONENT(FileAcquisitionParamsGui, "File acquisition parameter editor", "Model Observer File Acquisition Snap Camera Parameter Editor GUI Qt");
 I_EXPORT_COMPONENT(ParamsManagerGui, "Allow to manage parameter set", "Model Observer Parameters Set Manager GUI Qt");
 I_EXPORT_COMPONENT(SelectionParamGui, "Single selection parameter from list of options", "Model Observer Parameters Set Selection Options List GUI Qt");
+I_EXPORT_COMPONENT(SamplingParamsGui, "Sampling parameters", "Interval Sample Sampling Model Parameters GUI Qt");
+I_EXPORT_COMPONENT(SampleAcquisitionGui, "Sample acquisition GUI", "Sample Sampling Acquisition GUI Qt");
 
 
 } // namespace QtPck

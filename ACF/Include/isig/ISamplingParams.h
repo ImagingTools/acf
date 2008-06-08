@@ -2,6 +2,8 @@
 #define isig_ISamplingParams_included
 
 
+#include "istd/CRange.h"
+
 #include "iser/ISerializable.h"
 
 #include "isig/isig.h"
@@ -22,7 +24,7 @@ public:
 		SM_SINGLE,
 		SM_PERIODIC,
 		SM_SYNCHRONIZED,
-		SM_LAST = ST_SYNCHRONIZED
+		SM_LAST = SM_SYNCHRONIZED
 	};
 
 	virtual istd::CRange GetIntervalRange() const = 0;
@@ -52,7 +54,7 @@ public:
 		\sa	SamplingMode.
 		\return	true if this mode was supported and was set correctly.
 	*/
-	virtual bool SetSamplingType(int type) = 0;
+	virtual bool SetSamplingMode(int type) = 0;
 };
 
 

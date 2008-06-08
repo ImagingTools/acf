@@ -233,10 +233,16 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp">
+			<File
+				RelativePath="..\CSamplesContainer.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
+			<File
+				RelativePath="..\CSamplesContainer.h">
+			</File>
 			<File
 				RelativePath="..\ISamplesContainer.h">
 			</File>

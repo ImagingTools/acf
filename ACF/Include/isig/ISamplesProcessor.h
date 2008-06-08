@@ -2,9 +2,11 @@
 #define isig_ISamplesProcessor_included
 
 
+#include "istd/CRange.h"
+
 #include "iproc/TIAssyncProcessor.h"
 
-#include "isig/isig.h"
+#include "isig/ISamplesContainer.h"
 
 
 namespace isig

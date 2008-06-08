@@ -1,15 +1,15 @@
-#include "iqt/CSnapImageGuiComp.h"
+#include "iqtsig/CSampleAcquisitionGuiComp.h"
 
 
 // Qt includes
 #include <QMessageBox>
 
 
-namespace iqt
+namespace iqtsig
 {
 
 
-CSnapImageGuiComp::CSnapImageGuiComp()
+CSampleAcquisitionGuiComp::CSampleAcquisitionGuiComp()
 {
 	m_timer.setInterval(40);
 	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
@@ -18,7 +18,7 @@ CSnapImageGuiComp::CSnapImageGuiComp()
 
 // reimplemented (icomp::IComponent)
 
-void CSnapImageGuiComp::OnComponentCreated()
+void CSampleAcquisitionGuiComp::OnComponentCreated()
 {
 	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
 }
@@ -26,15 +26,7 @@ void CSnapImageGuiComp::OnComponentCreated()
 
 // protected slots
 
-void CSnapImageGuiComp::on_SnapImageButton_clicked()
-{
-	LiveImageButton->setChecked(false);
-
-	SnapImage();
-}
-
-
-void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
+void CSampleAcquisitionGuiComp::on_StartButton_toggled(bool checked)
 {
 	if (checked){
 		m_timer.start();
@@ -45,20 +37,20 @@ void CSnapImageGuiComp::on_LiveImageButton_toggled(bool checked)
 }
 
 
-void CSnapImageGuiComp::on_SaveImageButton_clicked()
+void CSampleAcquisitionGuiComp::on_SaveSampleButton_clicked()
 {
-	if (m_bitmapLoaderCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
-		if (m_bitmapLoaderCompPtr->SaveToFile(*m_bitmapCompPtr, "") == iser::IFileLoader::StateFailed){
+	if (m_sampleLoaderCompPtr.IsValid() && (m_samples.GetSamplesCount() > 0)){
+		if (m_sampleLoaderCompPtr->SaveToFile(m_samples, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
 						QObject::tr("Error"),
-						QObject::tr("Cannot save image"));
+						QObject::tr("Cannot save sample"));
 		}
 	}
 }
 
 
-void CSnapImageGuiComp::on_LoadParamsButton_clicked()
+void CSampleAcquisitionGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") != iser::IFileLoader::StateOk){
@@ -71,7 +63,7 @@ void CSnapImageGuiComp::on_LoadParamsButton_clicked()
 }
 
 
-void CSnapImageGuiComp::on_SaveParamsButton_clicked()
+void CSampleAcquisitionGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") != iser::IFileLoader::StateOk){
@@ -84,20 +76,20 @@ void CSnapImageGuiComp::on_SaveParamsButton_clicked()
 }
 
 
-void CSnapImageGuiComp::OnTimerReady()
+void CSampleAcquisitionGuiComp::OnTimerReady()
 {
-	SnapImage();
+	AcquireSample();
 }
 
 
 // protected methods
 
-bool CSnapImageGuiComp::SnapImage()
+bool CSampleAcquisitionGuiComp::AcquireSample()
 {
-	if (m_bitmapAcquisitionCompPtr.IsValid() && m_bitmapCompPtr.IsValid()){
-		int taskId = m_bitmapAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, m_bitmapCompPtr.GetPtr());
+	if (m_sampleAcquisitionCompPtr.IsValid()){
+		int taskId = m_sampleAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, &m_samples);
 		if (taskId >= 0){
-			return m_bitmapAcquisitionCompPtr->WaitTaskFinished(-1, 1) != icam::IBitmapAcquisition::TS_INVALID;
+			return m_sampleAcquisitionCompPtr->WaitTaskFinished(-1, 1) != isig::ISamplesProcessor::TS_INVALID;
 		}
 	}
 
@@ -107,15 +99,16 @@ bool CSnapImageGuiComp::SnapImage()
 
 // reimplemented (iqt::CGuiComponentBase)
 
-void CSnapImageGuiComp::OnGuiCreated()
+void CSampleAcquisitionGuiComp::OnGuiCreated()
 {
-	bool hasBitmap = m_bitmapCompPtr.IsValid();
-	bool hasSnap = m_bitmapAcquisitionCompPtr.IsValid();
+	bool canAcquire = m_sampleAcquisitionCompPtr.IsValid();
 
-	SnapImageButton->setVisible(hasBitmap && hasSnap);
-	LiveImageButton->setVisible(hasBitmap && hasSnap);
-	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
-	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
+	StartButton->setVisible(canAcquire);
+	StartButton->setChecked(*m_startOnInitAttrPtr);
+	StopButton->setVisible(canAcquire);
+	StopButton->setChecked(!*m_startOnInitAttrPtr);
+
+	SaveSampleButton->setVisible(canAcquire && m_sampleLoaderCompPtr.IsValid());
 
 	bool areParamsEditable = false;
 	if (m_paramsSetModelCompPtr.IsValid() && m_paramsSetGuiCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
@@ -125,9 +118,11 @@ void CSnapImageGuiComp::OnGuiCreated()
 		areParamsEditable = true;
 	}
 
-	if (m_bitmapModelCompPtr.IsValid() && m_bitmapGuiCompPtr.IsValid() && m_bitmapObserverCompPtr.IsValid()){
-		m_bitmapModelCompPtr->AttachObserver(m_bitmapObserverCompPtr.GetPtr());
-		m_bitmapGuiCompPtr->CreateGui(ImageViewFrame);
+	m_samples.AttachObserver(&m_samplesView);
+
+	QLayout* viewLayoutPtr = SampleViewFrame->layout();
+	if (viewLayoutPtr != NULL){
+		viewLayoutPtr->addWidget(&m_samplesView);
 	}
 
 	ParamsGB->setVisible(
@@ -136,11 +131,11 @@ void CSnapImageGuiComp::OnGuiCreated()
 	LoadParamsButton->setVisible(m_paramsLoaderCompPtr.IsValid());
 	SaveParamsButton->setVisible(m_paramsLoaderCompPtr.IsValid());
 	ParamsFrame->setVisible(m_paramsSetCompPtr.IsValid() && areParamsEditable);
-	ImageViewFrame->setVisible(hasBitmap && hasSnap && m_bitmapGuiCompPtr.IsValid() && m_bitmapObserverCompPtr.IsValid());
+	SampleViewFrame->setVisible(canAcquire);
 }
 
 
-void CSnapImageGuiComp::OnGuiDestroyed()
+void CSampleAcquisitionGuiComp::OnGuiDestroyed()
 {
 	m_timer.stop();
 
@@ -154,18 +149,15 @@ void CSnapImageGuiComp::OnGuiDestroyed()
 		m_paramsSetGuiCompPtr->DestroyGui();
 	}
 
-	if (		m_bitmapModelCompPtr.IsValid() &&
-				m_bitmapObserverCompPtr.IsValid() &&
-				m_bitmapModelCompPtr->IsAttached(m_bitmapObserverCompPtr.GetPtr())){
-		m_bitmapModelCompPtr->DetachObserver(m_bitmapObserverCompPtr.GetPtr());
+	QLayout* viewLayoutPtr = SampleViewFrame->layout();
+	if (viewLayoutPtr != NULL){
+		viewLayoutPtr->removeWidget(&m_samplesView);
 	}
 
-	if (m_bitmapGuiCompPtr.IsValid() && m_bitmapGuiCompPtr->IsGuiCreated()){
-		m_bitmapGuiCompPtr->DestroyGui();
-	}
+	m_samples.DetachObserver(&m_samplesView);
 }
 
 
-} // namespace iqt
+} // namespace iqtsig
 
 

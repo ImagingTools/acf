@@ -2,7 +2,7 @@
 #define isig_ISamplesContainer_included
 
 
-#include "istd/IPolymorphic.h"
+#include "iser/ISerializable.h"
 
 #include "isig/isig.h"
 
@@ -11,7 +11,7 @@ namespace isig
 {
 
 
-class ISamplesContainer: virtual public istd::IPolymorphic
+class ISamplesContainer: virtual public iser::ISerializable
 {
 public:
 	/**

@@ -1,0 +1,73 @@
+<ui version="4.0" >
+ <class>CSamplingParamsGuiComp</class>
+ <widget class="QWidget" name="CSamplingParamsGuiComp" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>220</width>
+    <height>70</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="label" >
+     <property name="text" >
+      <string>Interval</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" >
+    <widget class="QDoubleSpinBox" name="IntervalSB" >
+     <property name="decimals" >
+      <number>3</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" >
+    <widget class="QLabel" name="label_2" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text" >
+      <string>ms</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QLabel" name="label_3" >
+     <property name="text" >
+      <string>Mode</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2" >
+    <widget class="QComboBox" name="ModeCB" >
+     <item>
+      <property name="text" >
+       <string>Single</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Periodic</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Synchronized</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

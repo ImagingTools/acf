@@ -26,6 +26,9 @@
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CMultiDocumentWorkspaceGuiComp.h"
 
+#include "iqtsig/CSamplingParamsGuiComp.h"
+#include "iqtsig/CSampleAcquisitionGuiComp.h"
+
 
 /**
 	Standard Qt package.
@@ -52,6 +55,8 @@ typedef iqt::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqt::CFileAcquisitionParamsGuiComp FileAcquisitionParamsGui;
 typedef iqt::CParamsManagerGuiComp ParamsManagerGui;
 typedef iqt::CSelectionParamGuiComp SelectionParamGui;
+typedef iqtsig::CSamplingParamsGuiComp SamplingParamsGui;
+typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;
 
 
 } // namespace QtPck
