@@ -15,6 +15,7 @@ I_EXPORT_COMPONENT(ParamsManager, "Manager of parameters set", "Model Parameters
 I_EXPORT_COMPONENT(ComposedParamsSet, "Composed set of parameters", "Parameters Set List Composition Composed");
 I_EXPORT_COMPONENT(SingleDocumentTemplate, "Single document template for only one type of documents", "Single Document Template MVC");
 I_EXPORT_COMPONENT(CompositeDocumentTemplate, "Composite document template supporting more type of documents. It delegates document functionality to set of slave templates", "Composite Document Template MVC");
+I_EXPORT_COMPONENT(GeneralSamplingParams, "Sampling params based on fixed boundary values", "Sample Sampling Acquisition Model Parameters");
 I_EXPORT_COMPONENT(FileBitmapAcquisitionParams, "Parameters for bitmap acquisition from file", "Bitmap Acquisition Snap Parameters");
 
 

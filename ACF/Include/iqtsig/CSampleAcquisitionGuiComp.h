@@ -36,6 +36,7 @@ public:
 	typedef iqt::TDesignerGuiCompBase<Ui::CSampleAcquisitionGuiComp, QWidget> BaseClass;
 
 	I_BEGIN_COMPONENT(CSampleAcquisitionGuiComp)
+		I_ASSIGN(m_sampleAcquisitionCompPtr, "SampleAcquisition", "Sample acquisiotion object used to fill sample container", true, "SampleAcquisition");
 		I_ASSIGN(m_sampleLoaderCompPtr, "SampleLoader", "Saves sample to file", false, "SampleLoader");
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");

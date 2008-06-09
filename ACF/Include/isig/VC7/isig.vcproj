@@ -234,12 +234,18 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CGeneralSamplingParamsComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CSamplesContainer.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h">
+			<File
+				RelativePath="..\CGeneralSamplingParamsComp.h">
+			</File>
 			<File
 				RelativePath="..\CSamplesContainer.h">
 			</File>

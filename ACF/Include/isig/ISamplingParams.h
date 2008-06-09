@@ -41,7 +41,7 @@ public:
 	/**
 		Check if specified sampling mode is supported.
 	*/
-	virtual bool IsSamplingModeSupported(int type) const = 0;
+	virtual bool IsSamplingModeSupported(int mode) const = 0;
 
 	/**
 		Get mode of sampling.
@@ -54,7 +54,7 @@ public:
 		\sa	SamplingMode.
 		\return	true if this mode was supported and was set correctly.
 	*/
-	virtual bool SetSamplingMode(int type) = 0;
+	virtual bool SetSamplingMode(int mode) = 0;
 };
 
 
