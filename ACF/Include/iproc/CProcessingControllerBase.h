@@ -20,6 +20,7 @@ public:
 
 	// reimplemented (iproc::IProcessingController)
 	virtual void SetLogPtr(ibase::IMessageContainer* logPtr); 
+	virtual ibase::IMessageContainer* GetLogPtr() const; 
 	virtual void AddProgressHandler(iproc::IProgressEventHandler* progressHandlerPtr);
 
 protected:

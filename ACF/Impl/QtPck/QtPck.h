@@ -20,6 +20,7 @@
 #include "iqt/CFileAcquisitionParamsGuiComp.h"
 #include "iqt/CParamsManagerGuiComp.h"
 #include "iqt/CSelectionParamGuiComp.h"
+#include "iqt/CTabContainerGuiComp.h"
 
 #include "iqt2d/CImageViewComp.h"
 
@@ -61,6 +62,7 @@ typedef iqt::CSelectionParamGuiComp SelectionParamGui;
 typedef iqtsig::CSamplingParamsGuiComp SamplingParamsGui;
 typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;
 typedef iqtsig::CScriptSampleAcquisitionComp ScriptSampleAcquisition;
+typedef iqt::CTabContainerGuiComp TabContainer;
 
 
 } // namespace QtPck

@@ -1,6 +1,3 @@
-#ifndef OLD_ACF_SUPPORT
-
-
 #include <QDir>
 
 #include "icomp/export.h"
@@ -45,33 +42,7 @@ I_EXPORT_COMPONENT(SelectionParamGui, "Single selection parameter from list of o
 I_EXPORT_COMPONENT(SamplingParamsGui, "Sampling parameters", "Interval Sample Sampling Model Parameters GUI Qt");
 I_EXPORT_COMPONENT(SampleAcquisitionGui, "Sample acquisition GUI", "Sample Sampling Acquisition GUI Qt");
 I_EXPORT_COMPONENT(ScriptSampleAcquisition, "Test sample acquisition based on QtScript", "Test Sample Sampling Acquisition Script QtScript Qt");
+I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Tab Widget GUI");
 
 
 } // namespace QtPck
-
-
-#else OLD_ACF_SUPPORT
-
-
-#include "CQtPackage.h"
-
-#include "iqt/CTabContainerGuiComp.h"
-#include "iqt/CLoginGuiComp.h"
-#include "iqt/CLogGuiComp.h"
-
-
-CQtPackage::CQtPackage()
-:	BaseClass()
-{
-	acf::ComponentLibraryInfo info;
-	info.SetLibName("Qt");
-	SetLibraryInfo(info);
-
-	RegisterComponent<iqt::CTabContainerGuiComp>("TabContainerGui");
-	RegisterComponent<iqt::CLoginGuiComp>("LoginGui");
-}
-
-
-EXPORT_COMPONENT_LIBRARY(CQtPackage);
-
-#endif // OLD_ACF_SUPPORT

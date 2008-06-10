@@ -1,97 +1,83 @@
-#ifdef OLD_ACF_SUPPORT
+#include "iqt/CTabContainerGuiComp.h"
+
 
 #include <QGridLayout>
 #include <QFrame>
-
-#include "iqt/CTabContainerGuiComp.h"
 
 
 namespace iqt
 {
 
 
-CTabContainerGuiComp::CTabContainerGuiComp()
-:	BaseClass(), 
-	m_slaveGuisCompIfPtr(this, "SlaveGuiComponents"),
-	m_cornerGuiCompIfPtr(this, "CornerWidget"),
-	m_tabNamesAttr(this, "TabNames"),
-	m_iconsProviderCompIfPtr(this, "TabIcons"),
-	m_iconSizeAttr(16, this, "IconSize"),
-	m_useTriangularTabsAttr(false, this, "UseTriangularTabs"),
-	m_tabOrientationAttr(0, this, "TabOrientation")
-{
-}
+// public methods
 
-
-CTabContainerGuiComp::~CTabContainerGuiComp()
-{
-}
-
-
-// reimplemented (acf::QtAbstractGuiComponent)
+// reimplemented (iqt::CComponentBase)
 
 void CTabContainerGuiComp::OnGuiCreated()
 {
-	if (m_widget != NULL){
-		if (m_useTriangularTabsAttr.GetValue()){
-			m_widget->setTabShape(QTabWidget::Triangular);
-		}
+	BaseClass::OnGuiCreated();
 
-		m_widget->setTabPosition(QTabWidget::TabPosition(m_tabOrientationAttr.GetValue()));
+	I_ASSERT(IsGuiCreated());
 
-		QSize iconSize = QSize(m_iconSizeAttr.GetValue(), m_iconSizeAttr.GetValue());
+	QTabWidget* widgetPtr = GetQtWidget();
+	I_ASSERT(widgetPtr != NULL);
+	if (widgetPtr == NULL){
+		return;
+	}
+
+	if (m_useTriangularTabsAttrPtr.IsValid() && m_useTriangularTabsAttrPtr->GetValue()){
+		widgetPtr->setTabShape(QTabWidget::Triangular);
+	}
+
+	if (m_tabOrientationAttrPtr.IsValid()){
+		widgetPtr->setTabPosition(QTabWidget::TabPosition(m_tabOrientationAttrPtr->GetValue()));
+	}
+
+	if (m_iconSizeAttrPtr.IsValid()){
+		QSize iconSize = QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue());
 		if (!iconSize.isNull() && iconSize.isValid() && !iconSize.isEmpty()){
-			m_widget->setIconSize(iconSize);
+			widgetPtr->setIconSize(iconSize);
 		}
+	}
 
-		int tabCount = m_tabNamesAttr.GetCount();
+	if (m_tabNamesAttrPtr.IsValid()){
+		int tabCount = m_tabNamesAttrPtr.GetCount();
 		for (int tabIndex = 0; tabIndex < tabCount; tabIndex++){
-			QString tabName = iqt::GetQString(m_tabNamesAttr.GetValue(tabIndex));
+			QString tabName = iqt::GetQString(m_tabNamesAttrPtr[tabIndex]);
 
-			QWidget* tab = new QWidget(m_widget);
-			int addTabIndex = m_widget->addTab(tab, tabName);
-			
+			QWidget* tab = new QWidget(widgetPtr);
+			int addTabIndex = widgetPtr->addTab(tab, tabName);
+
 			bool isAttached = false;
-			if (tabIndex < m_slaveGuisCompIfPtr.dependencyCount()){
-				iqt::IGuiObject* guiPtr = m_slaveGuisCompIfPtr.GetInterfacePtr(tabIndex);
+			if (tabIndex < m_slaveWidgetsCompPtr.GetCount()){
+				iqt::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[tabIndex];
 				if (guiPtr != NULL){
-					guiPtr->AttachTo(tab);
-
-					isAttached = true;
+					isAttached = guiPtr->CreateGui(tab);
 				}
 			}
-			
-			if (m_iconsProviderCompIfPtr.IsValid()){
-				int iconCount = m_iconsProviderCompIfPtr->iconCount();			
-				if (tabIndex < iconCount){
-					QIcon icon = m_iconsProviderCompIfPtr->getIcon(tabIndex);
 
-					m_widget-> setTabIcon(addTabIndex, icon);
+			if (m_iconsProviderCompPtr.IsValid()){
+				int iconCount = m_iconsProviderCompPtr->GetIconCount();			
+				if (tabIndex < iconCount){
+					QIcon icon = m_iconsProviderCompPtr->GetIcon(tabIndex);
+
+					widgetPtr->setTabIcon(addTabIndex, icon);
 				}
 			}
 
 			if (!isAttached){
-				m_widget->setTabEnabled(addTabIndex, false);
+				widgetPtr->setTabEnabled(addTabIndex, false);
 			}
 		}
-		
-		// setup the corner widget:
-		if (m_cornerGuiCompIfPtr.IsValid()){
-			QFrame* cornerFrame = new QFrame(m_widget);
-			m_widget->setCornerWidget(cornerFrame);
+	}
 
-			m_cornerGuiCompIfPtr->AttachTo(cornerFrame);
+	// setup the corner widget:
+	if (m_cornerGuiCompPtr.IsValid()){
+		if (m_cornerGuiCompPtr->CreateGui(NULL)){
+			widgetPtr->setCornerWidget(m_cornerGuiCompPtr->GetWidget());
 		}
 	}
 }
 
 
-void CTabContainerGuiComp::OnGuiDestroyed()
-{
-}
-
-
 } // namespace iqt
-
-
-#endif // OLD_ACF_SUPPORT

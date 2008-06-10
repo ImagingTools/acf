@@ -7,40 +7,42 @@
 
 #include <QTabWidget>
 
-#include "QtAcf/QtGuiComponent.h"
+#include "iqt/TGuiComponentBase.h"
 
-#include "Comp/MultipleComponentDependency.h"
-#include "Comp/Attribute.h"
-#include "Comp/MultipleAttribute.h"
-
-#include "QtCompLib/QtIconProviderInterface.h"
+#include "iqt/IIconProvider.h"
 
 
 namespace iqt
 {
 
 
-class CTabContainerGuiComp: public acf::QtGuiComponent<QTabWidget> 
+class CTabContainerGuiComp: public iqt::TGuiComponentBase<QTabWidget> 
 {
 public:
-	typedef acf::QtGuiComponent<QTabWidget> BaseClass;
+	typedef iqt::TGuiComponentBase<QTabWidget> BaseClass;
 
-	CTabContainerGuiComp();
-	virtual ~CTabContainerGuiComp();
+	I_BEGIN_COMPONENT(CTabContainerGuiComp)
+		I_ASSIGN_MULTI_0(m_slaveWidgetsCompPtr, "SlaveWidgets", "Slave widgets for tab window", true)
+		I_ASSIGN(m_iconsProviderCompPtr, "IconsProvider", "Provider of tab icons", false, "IconsProvider")
+		I_ASSIGN(m_cornerGuiCompPtr, "CornerWidget", "Optional corner widget", false, "CornerWidget")
+		I_ASSIGN_MULTI_0(m_tabNamesAttrPtr, "TabTitles", "Titles for the tab", true)
+		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size for tab icons", false, 16)
+		I_ASSIGN(m_useTriangularTabsAttrPtr, "UseTriangularTabs", "Using triangular tab form", false, false)
+		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar", false, 0)
+	I_END_COMPONENT
 
 protected:
-	// reimplemented (acf::QtAbstractGuiComponent)
+	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
-protected:
-	acf::MultipleComponentDependency<iqt::IGuiObject> m_slaveGuisCompIfPtr;
-	acf::ComponentDependency<acf::QtIconProviderInterface> m_iconsProviderCompIfPtr;
-	acf::ComponentDependency<iqt::IGuiObject> m_cornerGuiCompIfPtr;
-	icomp::TMultiAttribute<istd::CString> m_tabNamesAttr;
-	acf::IntAttribute m_iconSizeAttr;
-	acf::BoolAttribute m_useTriangularTabsAttr;
-	acf::IntAttribute m_tabOrientationAttr;
+private:
+	I_MULTIREF(iqt::IGuiObject, m_slaveWidgetsCompPtr);
+	I_REF(iqt::IIconProvider, m_iconsProviderCompPtr);
+	I_REF(iqt::IGuiObject, m_cornerGuiCompPtr);
+	I_MULTIATTR(istd::CString, m_tabNamesAttrPtr);
+	I_ATTR(int, m_iconSizeAttrPtr);
+	I_ATTR(bool, m_useTriangularTabsAttrPtr);
+	I_ATTR(int, m_tabOrientationAttrPtr);
 };
 
 

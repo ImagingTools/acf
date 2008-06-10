@@ -19,6 +19,17 @@ void CProcessingControllerBase::SetLogPtr(ibase::IMessageContainer* logPtr)
 }
 
 
+ibase::IMessageContainer* CProcessingControllerBase::GetLogPtr() const
+{
+	iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetObjectPtr());
+	if (operatorPtr != NULL){
+		return operatorPtr->GetLogPtr();
+	}
+
+	return NULL;
+}
+
+
 void CProcessingControllerBase::AddProgressHandler(iproc::IProgressEventHandler* progressHandlerPtr)
 {
 	m_progressHandlers.insert(progressHandlerPtr);
