@@ -71,8 +71,10 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 {
 	I_ASSERT(m_guisCompPtr.GetCount() == m_observersCompPtr.GetCount());	// both multi-references use the same ID.
 
-	QWidget* widgetPtr = GetQtWidget();
-	I_ASSERT(widgetPtr != NULL);
+	I_IF_DEBUG(
+		QWidget* widgetPtr = GetQtWidget();
+		I_ASSERT(widgetPtr != NULL);
+	)
 
 	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
 	I_ASSERT(paramsSetPtr != NULL);

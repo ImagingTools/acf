@@ -22,7 +22,7 @@ public:
 	virtual bool IsPaused() const = 0;
 	virtual bool IsFinished() const = 0;
 	virtual double GetProcessingTime() const = 0;
-	virtual const ibase::IMessageContainer* GetLog() const = 0; 
+	virtual void SetLogPtr(ibase::IMessageContainer* logPtr) = 0; 
 	virtual void AddProgressHandler(iproc::IProgressEventHandler* progressHandlerPtr) = 0;
 };
 

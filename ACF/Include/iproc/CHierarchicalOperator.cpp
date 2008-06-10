@@ -19,10 +19,14 @@ CHierarchicalOperator::~CHierarchicalOperator()
 void CHierarchicalOperator::AddChild(iproc::IOperator* operatorPtr)
 {
 	iproc::COperatorBase* operatorImplPtr = dynamic_cast<iproc::COperatorBase*>(operatorPtr);
-	if (operatorImplPtr != NULL){
+	ibase::CMessageContainer* hierarhicalLogPtr = dynamic_cast<ibase::CMessageContainer*>(m_logPtr);
+
+	if (operatorImplPtr != NULL && hierarhicalLogPtr != NULL){
 		operatorImplPtr->SetParentPtr(this);
-		const ibase::IHierarchicalMessageContainer* logPtr = dynamic_cast<const ibase::IHierarchicalMessageContainer*>(&operatorImplPtr->GetLog());
-		m_log.AddChildContainer(const_cast<ibase::IHierarchicalMessageContainer*>(logPtr));
+		ibase::IHierarchicalMessageContainer* logPtr = dynamic_cast<ibase::IHierarchicalMessageContainer*>(operatorImplPtr->GetLogPtr());
+		if (logPtr != NULL){
+			hierarhicalLogPtr->AddChildContainer(logPtr);
+		}
 	}
 
 	m_childs.push_back(operatorPtr);

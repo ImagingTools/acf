@@ -35,7 +35,8 @@ public :
 	virtual void SetProcessingState(int processingState);
 	virtual void AddError(const istd::CString& description);
 	virtual void AddWarning(const istd::CString& description);
-	virtual const ibase::IMessageContainer& GetLog() const;
+	virtual void SetLogPtr(ibase::IMessageContainer* logPtr);
+	virtual ibase::IMessageContainer* GetLogPtr() const;
 
 	// reimplemented (iproc::IOperator)
 	virtual StateInfo GetProcessingState() const;
@@ -49,7 +50,7 @@ public :
 protected:
 	double m_progress;
 
-	ibase::CMessageContainer m_log;
+	ibase::IMessageContainer* m_logPtr;
 
 private:
 	StateInfo m_state;

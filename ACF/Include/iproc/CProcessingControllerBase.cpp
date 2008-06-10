@@ -6,14 +6,16 @@ namespace iproc
 {
 
 
-const ibase::IMessageContainer* CProcessingControllerBase::GetLog() const
+// public methods
+
+// reimplemented (iproc::IProcessingController)
+
+void CProcessingControllerBase::SetLogPtr(ibase::IMessageContainer* logPtr)
 {
 	iproc::COperatorBase* operatorPtr = dynamic_cast<iproc::COperatorBase*>(GetObjectPtr());
 	if (operatorPtr != NULL){
-		return &operatorPtr->GetLog();
+		operatorPtr->SetLogPtr(logPtr);
 	}
-
-	return NULL;
 }
 
 

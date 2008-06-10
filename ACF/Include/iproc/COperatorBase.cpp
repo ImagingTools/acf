@@ -13,12 +13,12 @@ namespace iproc
 
 	
 COperatorBase::COperatorBase()
+	:m_state(StateUnknown),
+	m_progress(0.0),
+	m_logPtr(NULL)
 {
-	m_state = StateUnknown;
-
-	m_progress = 0.0;
 }
-	
+
 
 COperatorBase::~COperatorBase()
 {
@@ -43,7 +43,9 @@ void COperatorBase::AddError(const istd::CString& description)
 {
 	isys::CSectionBlocker lock(&m_mutex);
 
-	m_log.AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
+	if (m_logPtr != NULL){
+		m_logPtr->AddMessage(new ibase::CMessage(ibase::IMessage::Error, description, GetName()));
+	}
 }
 
 
@@ -51,13 +53,23 @@ void COperatorBase::AddWarning(const istd::CString& description)
 {
 	isys::CSectionBlocker lock(&m_mutex);
 
-	m_log.AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
+	if (m_logPtr != NULL){
+		m_logPtr->AddMessage(new ibase::CMessage(ibase::IMessage::Warning, description, GetName()));
+	}
 }
 
 
-const ibase::IMessageContainer& COperatorBase::GetLog() const
+void COperatorBase::SetLogPtr(ibase::IMessageContainer* logPtr)
 {
-	return m_log;
+	isys::CSectionBlocker lock(&m_mutex);
+
+	m_logPtr = logPtr;
+}
+
+
+ibase::IMessageContainer* COperatorBase::GetLogPtr() const
+{
+	return m_logPtr;
 }
 
 

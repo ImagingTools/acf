@@ -164,6 +164,16 @@ ibase::IMessageContainer::Messages TMessageContainerWrap<BaseClass>::GetMessages
 		messages.push_back(messagePtr);
 	}
 
+	int childsCount = GetChildsCount();
+	for (int childIndex = 0; childIndex < childsCount; childIndex++){
+		ibase::IHierarchicalMessageContainer* childPtr = GetChild(childIndex);
+		I_ASSERT(childPtr != NULL);
+
+		ibase::IMessageContainer::Messages childMessages = childPtr->GetMessages();
+
+		messages.insert(messages.end(), childMessages.begin(), childMessages.end());
+	}
+
 	return messages;
 }
 
