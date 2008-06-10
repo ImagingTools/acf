@@ -43,8 +43,18 @@ int main(int argc, char *argv[])
 	splashScreenGui.SetRef("ApplicationInfo", &applicationInfo);
 	splashScreenGui.InitComponent();
 
+	icomp::TSimComponentWrap<BasePck::RegistriesManager> registriesManagerComp;
+
 	icomp::TSimComponentWrap<QtPck::PackagesLoader> packagesLoaderComp;
+	packagesLoaderComp.SetRef("RegistriesManager", &registriesManagerComp);
 	packagesLoaderComp.InitComponent();
+
+	icomp::TSimComponentWrap<CRegistryLoaderComp> registryLoaderComp;
+	registryLoaderComp.InitComponent();
+
+	registriesManagerComp.SetRef("RegistryLoader", &registryLoaderComp);
+	registriesManagerComp.SetRef("ComponentsFactory", &packagesLoaderComp);
+	registriesManagerComp.InitComponent();
 
 	std::string registryFile;
 	bool useDefaultRegistries = true;
@@ -122,9 +132,6 @@ int main(int argc, char *argv[])
 	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
 	viewFactoryComp.SetRef("RegistryCodeSaver", &codeSaverComp);
 	viewFactoryComp.SetRef("RegistryPreview", &registryPreviewComp);
-
-	icomp::TSimComponentWrap<CRegistryLoaderComp> registryLoaderComp;
-	registryLoaderComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);

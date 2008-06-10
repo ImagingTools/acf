@@ -148,6 +148,9 @@
 				RelativePath="..\CCompositeComponentContext.cpp">
 			</File>
 			<File
+				RelativePath="..\CCompositeComponentStaticInfo.cpp">
+			</File>
+			<File
 				RelativePath="..\CPackageStaticInfo.cpp">
 			</File>
 			<File
@@ -183,6 +186,9 @@
 			</File>
 			<File
 				RelativePath="..\CCompositeComponentContext.h">
+			</File>
+			<File
+				RelativePath="..\CCompositeComponentStaticInfo.h">
 			</File>
 			<File
 				RelativePath="..\CFactoryAttribute.h">

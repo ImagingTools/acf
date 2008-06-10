@@ -32,8 +32,17 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file, bool be
 			}
 		}
 	}
-	else{
-		// TODO: implement loading of composite components
+	else if (m_registriesManagerCompPtr.IsValid()){
+		CompositePackagesMap::const_iterator foundIter = m_compositePackagesMap.find(GetCString(fileInfo.absoluteFilePath()));
+		if (foundIter == m_compositePackagesMap.end()){
+			CompositePackageInfoPtr& packageInfoPtr = m_compositePackagesMap[GetCString(fileInfo.absoluteFilePath())];
+			CCompositePackageStaticInfo* infoPtr = new CCompositePackageStaticInfo(
+						fileInfo.absoluteDir(),
+						m_registriesManagerCompPtr.GetPtr());
+			packageInfoPtr.SetPtr(infoPtr);
+
+			return RegisterSubcomponentInfo(fileInfo.baseName().toStdString(), infoPtr);
+		}
 	}
 
 	return false;

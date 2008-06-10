@@ -26,7 +26,17 @@ int main(int argc, char *argv[])
 	QApplication::setStyle("plastique");
 
 	icomp::TSimComponentWrap<iqt::CPackagesLoaderComp> packagesLoaderComp;
+	icomp::TSimComponentWrap<BasePck::RegistriesManager> registriesManagerComp;
+
+	packagesLoaderComp.SetRef("RegistriesManager", &registriesManagerComp);
 	packagesLoaderComp.InitComponent();
+
+	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> registryLoaderComp;
+	registryLoaderComp.InitComponent();
+
+	registriesManagerComp.SetRef("RegistryLoader", &registryLoaderComp);
+	registriesManagerComp.SetRef("ComponentsFactory", &packagesLoaderComp);
+	registriesManagerComp.InitComponent();
 
 	std::string registryFile = "default.acfr";
 	bool showApplicationInfo = false;
@@ -97,14 +107,6 @@ int main(int argc, char *argv[])
 	}
 
 	int retVal = 0;
-
-	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> registryLoaderComp;
-	registryLoaderComp.InitComponent();
-
-	icomp::TSimComponentWrap<BasePck::RegistriesManager> registriesManagerComp;
-	registriesManagerComp.SetRef("RegistryLoader", &registryLoaderComp);
-	registriesManagerComp.SetRef("ComponentsFactory", &packagesLoaderComp);
-	registriesManagerComp.InitComponent();
 
 	const icomp::IRegistry* registryPtr = registriesManagerComp.GetRegistryFromFile(registryFile.c_str());
 	if (registryPtr != NULL){

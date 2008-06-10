@@ -14,11 +14,11 @@ namespace icomp
 class CCompositeComponent: virtual public CComponentBase
 {
 public:
-	// reimplemented (icomp::IComponent)
-	virtual void* GetInterface(const type_info& interfaceType, const std::string& subId = "");
-
 	template <class InterfaceType>
 	InterfaceType* GetComponentInterface(const std::string& subId = "");
+
+	// reimplemented (icomp::IComponent)
+	virtual void* GetInterface(const type_info& interfaceType, const std::string& subId = "");
 
 protected:
 	/**
@@ -28,13 +28,11 @@ protected:
 };
 
 
-
 template <class InterfaceType>
 InterfaceType* CCompositeComponent::GetComponentInterface(const std::string& subId)
 {
 	return static_cast<InterfaceType*>(GetInterface(typeid(InterfaceType),subId));
 }
-
 
 
 } // namespace icomp

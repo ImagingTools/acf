@@ -7,6 +7,9 @@
 #include <set>
 
 
+#include "istd/istd.h"
+
+
 namespace istd
 {
 
@@ -457,7 +460,7 @@ void TCascadedMap<Key, Value>::GetLocalKeys(Keys& result, bool doAppend) const
 		result.clear();
 	}
 
-	for (		const IndicesMap::const_iterator iter = m_positionsMap.begin();
+	for (		IndicesMap::const_iterator iter = m_positionsMap.begin();
 				iter != m_positionsMap.end();
 				++iter){
 		result.insert(iter->first);

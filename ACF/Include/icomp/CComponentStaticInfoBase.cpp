@@ -7,6 +7,16 @@ namespace icomp
 
 // reimplemented (icomp::IPackageStaticInfo)
 
+IComponentStaticInfo::Ids CComponentStaticInfoBase::GetSubcomponentIds() const
+{
+	Ids retVal;
+
+	m_subcomponentInfos.GetKeys(retVal);
+
+	return retVal;
+}
+
+
 const IComponentStaticInfo* CComponentStaticInfoBase::GetSubcomponent(const std::string& subcomponentId) const
 {
 	const SubcomponentInfos::ValueType* retVal = m_subcomponentInfos.FindElement(subcomponentId);

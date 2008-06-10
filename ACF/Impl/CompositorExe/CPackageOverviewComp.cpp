@@ -78,13 +78,17 @@ void CPackageOverviewComp::GenerateComponentTree(const QString& filter)
 	m_rootComposedItem->setExpanded(true);
 	m_rootComposedItem->setFont(0, font);
 
-	const icomp::CPackageStaticInfo::SubcomponentInfos& subcomponentInfos = m_generalStaticInfoPtr->GetSubcomponentInfos();
-	int subcomponentsCount = subcomponentInfos.GetElementsCount();
+	icomp::IComponentStaticInfo::Ids subcomponentIds = m_generalStaticInfoPtr->GetSubcomponentIds();
 
-	for (int i = 0; i < subcomponentsCount; ++i){
-		const std::string& packageId = subcomponentInfos.GetKeyAt(i);
-		const icomp::CPackageStaticInfo* packageInfoPtr = dynamic_cast<const icomp::CPackageStaticInfo*>(subcomponentInfos.GetValueAt(i));
-		I_ASSERT(packageInfoPtr != NULL);
+	for (		icomp::IComponentStaticInfo::Ids::const_iterator iter = subcomponentIds.begin();
+				iter != subcomponentIds.end();
+				++iter){
+		const std::string& packageId = *iter;
+
+		const icomp::IComponentStaticInfo* packageInfoPtr = m_generalStaticInfoPtr->GetSubcomponent(packageId);
+		if (packageInfoPtr == NULL){
+			continue;
+		}
 
 		if (packageInfoPtr != NULL){
 			istd::TDelPtr<QTreeWidgetItem> packageItemPtr(new QTreeWidgetItem());
@@ -182,18 +186,21 @@ void CPackageOverviewComp::on_ResetFilterButton_clicked()
 
 void CPackageOverviewComp::GeneratePackageTree(
 			const std::string& packageId,
-			const icomp::CPackageStaticInfo& packageInfo,
+			const icomp::IComponentStaticInfo& packageInfo,
 			const QString& filter,
 			QTreeWidgetItem& root)
 {
 	// create the component list:
-	icomp::CPackageStaticInfo::SubcomponentInfos subcomponentInfos = packageInfo.GetSubcomponentInfos();
-	int subcomponentsCount = subcomponentInfos.GetElementsCount();
+	icomp::IComponentStaticInfo::Ids subcomponentIds = packageInfo.GetSubcomponentIds();
 
-	for (int i = 0; i < subcomponentsCount; ++i){
-		const std::string& componentId = subcomponentInfos.GetKeyAt(i);
-		const icomp::IComponentStaticInfo* componentInfoPtr = subcomponentInfos.GetValueAt(i);
-		I_ASSERT(componentInfoPtr != NULL);
+	for (		icomp::IComponentStaticInfo::Ids::const_iterator iter = subcomponentIds.begin();
+				iter != subcomponentIds.end();
+				++iter){
+		const std::string& componentId = *iter;
+		const icomp::IComponentStaticInfo* componentInfoPtr = packageInfo.GetSubcomponent(componentId);
+		if (componentInfoPtr == NULL){
+			continue;
+		}
 
 		if (!filter.isEmpty()){
 			QString keywords = " " + iqt::GetQString(componentInfoPtr->GetKeywords());

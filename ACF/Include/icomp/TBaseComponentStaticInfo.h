@@ -26,6 +26,7 @@ public:
 	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const;
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
 	virtual const AttributeInfos& GetAttributeInfos() const;
+	virtual Ids GetSubcomponentIds() const;
 	virtual const IComponentStaticInfo* GetSubcomponent(const std::string& subcomponentId) const;
 	virtual bool RegisterInterfaceExtractor(const std::string& interfaceId, InterfaceExtractorPtr extractorPtr);
 	virtual bool RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
@@ -73,6 +74,21 @@ template <class Component>
 const IComponentStaticInfo::AttributeInfos& TBaseComponentStaticInfo<Component>::GetAttributeInfos() const
 {
 	return m_attributeInfos;
+}
+
+
+template <class Component>
+IComponentStaticInfo::Ids TBaseComponentStaticInfo<Component>::GetSubcomponentIds() const
+{
+	Ids retVal = BaseClass::GetSubcomponentIds();
+
+	if (m_baseComponentPtr != NULL){
+		Ids baseIds = m_baseComponentPtr->GetSubcomponentIds();
+
+		retVal.insert(baseIds.begin(), baseIds.end());
+	}
+
+	return retVal;
 }
 
 

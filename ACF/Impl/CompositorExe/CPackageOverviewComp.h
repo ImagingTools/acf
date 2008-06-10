@@ -9,7 +9,7 @@
 
 #include "istd/TDelPtr.h"
 
-#include "icomp/CPackageStaticInfo.h"
+#include "icomp/IComponentStaticInfo.h"
 #include "icomp/CComponentAddress.h"
 
 #include "iqt/TDesignerGuiCompBase.h"
@@ -57,7 +57,7 @@ protected slots:
 protected:
 	void GeneratePackageTree(
 				const std::string& packageId,
-				const icomp::CPackageStaticInfo& packageInfo,
+				const icomp::IComponentStaticInfo& packageInfo,
 				const QString& filter,
 				QTreeWidgetItem& root);
 
@@ -89,7 +89,7 @@ private:
 		icomp::CComponentAddress m_address;
 	};
 
-	I_REF(icomp::CComponentStaticInfoBase, m_generalStaticInfoPtr);
+	I_REF(icomp::IComponentStaticInfo, m_generalStaticInfoPtr);
 
 	QTreeWidgetItem* m_rootLocalItem;
 	QTreeWidgetItem* m_rootComposedItem;

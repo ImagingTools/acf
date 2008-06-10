@@ -886,7 +886,7 @@ void CRegistryViewComp::CRegistryScene::keyPressEvent(QKeyEvent* keyEvent)
 
 void CRegistryViewComp::CRegistryScene::wheelEvent(QGraphicsSceneWheelEvent* event)
 {
-    m_parent.ScaleView(pow((double)2, -event->delta() / 240.0));
+    m_parent.ScaleView(pow((double)2, event->delta() / 240.0));
 }
 
 

@@ -53,7 +53,14 @@ public:
 	virtual const AttributeInfos& GetAttributeInfos() const = 0;
 
 	/**
+		Get list of subcomponent ID's.
+	*/
+	virtual Ids GetSubcomponentIds() const = 0;
+
+	/**
 		Return number of interfaces for specific slot.
+		\param	subcomponentId	ID of subcomponent.
+								\sa	GetSubcomponentIds().
 	*/
 	virtual const IComponentStaticInfo* GetSubcomponent(const std::string& subcomponentId) const = 0;
 

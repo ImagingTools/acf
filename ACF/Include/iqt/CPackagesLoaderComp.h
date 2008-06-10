@@ -12,6 +12,7 @@
 #include "icomp/CComponentBase.h"
 
 #include "iqt/CDllFunctionsProvider.h"
+#include "iqt/CCompositePackageStaticInfo.h"
 
 
 namespace iqt
@@ -44,6 +45,11 @@ private:
 	typedef std::map<QString, FunctionsProviderPtr> DllCacheMap;
 
 	DllCacheMap m_dllCacheMap;
+
+	typedef istd::TDelPtr<CCompositePackageStaticInfo> CompositePackageInfoPtr;
+	typedef std::map<istd::CString, CompositePackageInfoPtr> CompositePackagesMap;
+
+	CompositePackagesMap m_compositePackagesMap;
 
 	I_REF(icomp::IRegistriesManager, m_registriesManagerCompPtr);
 };
