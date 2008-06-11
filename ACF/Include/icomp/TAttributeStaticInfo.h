@@ -2,7 +2,7 @@
 #define icomp_TAttributeStaticInfo_included
 
 
-#include "icomp/IAttributeStaticInfo.h"
+#include "icomp/IRealAttributeStaticInfo.h"
 
 
 namespace icomp
@@ -10,7 +10,7 @@ namespace icomp
 
 
 template <class Attribute>
-class TAttributeStaticInfo: virtual public IAttributeStaticInfo
+class TAttributeStaticInfo: virtual public IRealAttributeStaticInfo
 {
 public:
 	TAttributeStaticInfo(
@@ -21,9 +21,11 @@ public:
 				bool isObligatory,
 				const type_info* relatedInterfaceTypePtr);
 
+	// reimplemented (icomp::IRealAttributeStaticInfo)
+	virtual const std::string& GetAttributeId() const;
+
 	// reimplemented (icomp::IAttributeStaticInfo)
 	virtual iser::ISerializable* CreateAttribute() const;
-	virtual const std::string& GetAttributeId() const;
 	virtual const std::string& GetAttributeDescription() const;
 	virtual const iser::ISerializable* GetAttributeDefaultValue() const;
 	virtual const type_info& GetAttributeType() const;
@@ -59,6 +61,15 @@ TAttributeStaticInfo<Attribute>::TAttributeStaticInfo(
 }
 
 
+// reimplemented (icomp::IRealAttributeStaticInfo)
+
+template <class Attribute>
+const std::string& TAttributeStaticInfo<Attribute>::GetAttributeId() const
+{
+	return m_id;
+}
+
+
 // reimplemented (icomp::IAttributeStaticInfo)
 
 template <class Attribute>
@@ -71,14 +82,6 @@ iser::ISerializable* TAttributeStaticInfo<Attribute>::CreateAttribute() const
 		return new Attribute();
 	}
 }
-
-
-template <class Attribute>
-const std::string& TAttributeStaticInfo<Attribute>::GetAttributeId() const
-{
-	return m_id;
-}
-
 
 template <class Attribute>
 const std::string& TAttributeStaticInfo<Attribute>::GetAttributeDescription() const

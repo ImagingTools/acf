@@ -3,6 +3,7 @@
 
 
 #include "icomp/IComponentContext.h"
+#include "icomp/IRealAttributeStaticInfo.h"
 
 
 namespace icomp
@@ -23,7 +24,7 @@ public:
 
 	TSingleAttributePtr();
 
-	bool Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
+	bool Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
 
 	/**
 		Check if this attribute is valid.
@@ -63,7 +64,7 @@ TSingleAttributePtr<Attribute>::TSingleAttributePtr()
 
 
 template <typename Attribute>
-bool TSingleAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
+bool TSingleAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
 {
 	I_ASSERT(ownerPtr != NULL);
 

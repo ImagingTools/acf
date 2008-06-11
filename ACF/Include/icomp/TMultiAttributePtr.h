@@ -23,7 +23,7 @@ public:
 
 	TMultiAttributePtr();
 
-	bool Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
+	bool Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
 
 	/**
 		Check if this attribute is valid.
@@ -55,7 +55,7 @@ TMultiAttributePtr<Attribute>::TMultiAttributePtr()
 
 
 template <typename Attribute>
-bool TMultiAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
+bool TMultiAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
 {
 	I_ASSERT(ownerPtr != NULL);
 

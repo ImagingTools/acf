@@ -47,6 +47,7 @@ public:
 		Map assigning interface ID to component ID exporting this interface.
 	*/
 	typedef std::map< std::string, std::string> ExportedInterfacesMap;
+
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/

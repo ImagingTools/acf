@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="28">
+  <PositionMap count="26">
     <Element>
       <ComponentName>
         Application
@@ -29,24 +29,13 @@
     </Element>
     <Element>
       <ComponentName>
-        BitmapAcquisition
-      </ComponentName>
-      <X>
-        62
-      </X>
-      <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
-        300
+        350
       </X>
       <X>
-        -137
+        -112
       </X>
     </Element>
     <Element>
@@ -76,10 +65,10 @@
         FileSnapColor
       </ComponentName>
       <X>
-        -500
+        -450
       </X>
       <X>
-        312
+        337
       </X>
     </Element>
     <Element>
@@ -98,7 +87,7 @@
         FileSnapGui
       </ComponentName>
       <X>
-        -37
+        12
       </X>
       <X>
         312
@@ -139,35 +128,24 @@
     </Element>
     <Element>
       <ComponentName>
+        FileSnapParams
+      </ComponentName>
+      <X>
+        -450
+      </X>
+      <X>
+        312
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         ImageDialogLoader
       </ComponentName>
       <X>
-        337
+        262
       </X>
       <X>
         12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsColor
-      </ComponentName>
-      <X>
-        -475
-      </X>
-      <X>
-        62
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ParamsGray
-      </ComponentName>
-      <X>
-        -475
-      </X>
-      <X>
-        137
       </X>
     </Element>
     <Element>
@@ -186,7 +164,7 @@
         ParamsManager
       </ComponentName>
       <X>
-        -312
+        -212
       </X>
       <X>
         112
@@ -197,10 +175,21 @@
         ParamsManagerGui
       </ComponentName>
       <X>
-        -25
+        25
       </X>
       <X>
         112
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSet
+      </ComponentName>
+      <X>
+        -462
+      </X>
+      <X>
+        187
       </X>
     </Element>
     <Element>
@@ -219,21 +208,10 @@
         SelectableParameter
       </ComponentName>
       <X>
-        -337
+        -237
       </X>
       <X>
         12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapApplication
-      </ComponentName>
-      <X>
-        -375
-      </X>
-      <X>
-        -112
       </X>
     </Element>
     <Element>
@@ -263,7 +241,7 @@
         SnapParamsColor
       </ComponentName>
       <X>
-        -600
+        -487
       </X>
       <X>
         212
@@ -274,7 +252,7 @@
         SnapParamsGray
       </ComponentName>
       <X>
-        -350
+        -237
       </X>
       <X>
         212
@@ -285,7 +263,7 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -50
+        12
       </X>
       <X>
         212

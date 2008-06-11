@@ -734,10 +734,9 @@ void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 		const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
 	
 		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
+			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
 			const icomp::IAttributeStaticInfo* staticAttributeInfoPtr = staticAttributes.GetValueAt(staticAttributeIndex);
 			I_ASSERT(staticAttributeInfoPtr != NULL);
-
-			std::string attributeId = staticAttributeInfoPtr->GetAttributeId();
 
 			const iser::ISerializable* attributePtr = staticAttributeInfoPtr->GetAttributeDefaultValue();
 			const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributePtr);

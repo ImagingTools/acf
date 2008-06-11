@@ -24,11 +24,6 @@ public:
 	virtual iser::ISerializable* CreateAttribute() const = 0;
 
 	/**
-		Get ID of this attribute.
-	 */
-	virtual const std::string& GetAttributeId() const = 0;
-
-	/**
 		Get description of this attribute.
 	 */
 	virtual const std::string& GetAttributeDescription() const = 0;

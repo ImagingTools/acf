@@ -92,7 +92,9 @@ int main(int argc, char *argv[])
 
 	// register default package path
 	if (useDefaultRegistries){
-		if (!packagesLoaderComp.LoadConfigFile("PackagesConfig.xml")){
+		QDir registryDir = QFileInfo(registryFile.c_str()).dir();
+
+		if (!packagesLoaderComp.LoadConfigFile(iqt::GetCString(registryDir.absoluteFilePath("PackagesConfig.xml")))){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
 			if (!packagesLoaderComp.LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("PackagesConfig.xml")))){
 				packagesLoaderComp.RegisterPackagesDir(iqt::GetCString(applicationDir.absolutePath()), false);

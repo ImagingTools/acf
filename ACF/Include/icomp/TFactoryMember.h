@@ -27,7 +27,7 @@ public:
 
 	TFactoryMember();
 
-	void Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo);
+	void Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo);
 
 	/**
 		Check if this factory can be resolved.
@@ -58,7 +58,7 @@ TFactoryMember<Interface>::TFactoryMember()
 
 
 template <class Interface>
-void TFactoryMember<Interface>::Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo)
+void TFactoryMember<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
 	BaseClass::Init(ownerPtr, staticInfo, &m_realContextPtr);
 }

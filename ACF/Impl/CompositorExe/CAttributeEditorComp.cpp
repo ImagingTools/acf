@@ -46,9 +46,17 @@ const icomp::IAttributeStaticInfo* CAttributeEditorComp::GetStaticAttributeInfo(
 	}
 
 	const icomp::IComponentStaticInfo& elementStaticInfo = registryElementPtr->GetComponentStaticInfo();
-	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
+	const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = elementStaticInfo.GetAttributeInfos();
 
-	return *staticAttributes.FindElement(attributeId.toStdString());
+	const icomp::IComponentStaticInfo::AttributeInfos::ValueType* attrInfoPtr2 =
+				staticAttributes.FindElement(attributeId.toStdString());
+
+	if (attrInfoPtr2 != NULL){
+		return *attrInfoPtr2;
+	}
+	else{
+		return NULL;
+	}
 }
 
 	
@@ -112,10 +120,10 @@ void CAttributeEditorComp::UpdateEditor()
 	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
 	
 	for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
+		const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
 		const icomp::IAttributeStaticInfo* staticAttributeInfPtr = staticAttributes.GetValueAt(staticAttributeIndex);
 		I_ASSERT(staticAttributeInfPtr != NULL);
 
-		std::string attributeId = staticAttributeInfPtr->GetAttributeId();
 		const iser::ISerializable* attributePtr = NULL;
 
 		QTreeWidgetItem* attributeItemPtr = new QTreeWidgetItem();

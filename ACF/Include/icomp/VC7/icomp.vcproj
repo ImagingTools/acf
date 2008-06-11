@@ -242,6 +242,9 @@
 				RelativePath="..\IComponentStaticInfo.h">
 			</File>
 			<File
+				RelativePath="..\IRealAttributeStaticInfo.h">
+			</File>
+			<File
 				RelativePath="..\IRegistriesManager.h">
 			</File>
 			<File

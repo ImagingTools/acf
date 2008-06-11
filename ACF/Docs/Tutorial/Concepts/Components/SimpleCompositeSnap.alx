@@ -252,10 +252,10 @@
         SnapParams
       </ComponentName>
       <X>
-        -212
+        -475
       </X>
       <X>
-        262
+        37
       </X>
     </Element>
     <Element>
@@ -277,7 +277,7 @@
         -350
       </X>
       <X>
-        212
+        37
       </X>
     </Element>
     <Element>
@@ -285,10 +285,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -50
+        -175
       </X>
       <X>
-        212
+        37
       </X>
     </Element>
     <Element>

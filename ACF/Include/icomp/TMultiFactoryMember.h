@@ -27,7 +27,7 @@ public:
 
 	TMultiFactoryMember();
 
-	void Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo);
+	void Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo);
 
 	/**
 		Check if this factory can be resolved.
@@ -58,7 +58,7 @@ TMultiFactoryMember<Interface>::TMultiFactoryMember()
 
 
 template <class Interface>
-void TMultiFactoryMember<Interface>::Init(const IComponent* ownerPtr, const IAttributeStaticInfo& staticInfo)
+void TMultiFactoryMember<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
 	BaseClass::Init(ownerPtr, staticInfo, &m_realContextPtr);
 }

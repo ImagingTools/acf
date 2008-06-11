@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="28">
+  <PositionMap count="26">
     <Element>
       <ComponentName>
         Application
@@ -29,24 +29,13 @@
     </Element>
     <Element>
       <ComponentName>
-        BitmapAcquisition
-      </ComponentName>
-      <X>
-        62
-      </X>
-      <X>
-        -112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
-        300
+        350
       </X>
       <X>
-        -137
+        -112
       </X>
     </Element>
     <Element>
@@ -98,7 +87,7 @@
         FileSnapGui
       </ComponentName>
       <X>
-        -37
+        12
       </X>
       <X>
         312
@@ -142,7 +131,7 @@
         ImageDialogLoader
       </ComponentName>
       <X>
-        337
+        262
       </X>
       <X>
         12
@@ -197,7 +186,7 @@
         ParamsManagerGui
       </ComponentName>
       <X>
-        -25
+        25
       </X>
       <X>
         112
@@ -223,17 +212,6 @@
       </X>
       <X>
         12
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SnapApplication
-      </ComponentName>
-      <X>
-        -375
-      </X>
-      <X>
-        -112
       </X>
     </Element>
     <Element>
@@ -285,7 +263,7 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -50
+        12
       </X>
       <X>
         212
