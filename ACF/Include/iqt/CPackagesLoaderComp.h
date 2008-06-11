@@ -13,6 +13,7 @@
 
 #include "iser/IFileLoader.h"
 
+#include "icomp/IRegistry.h"
 #include "icomp/IRegistriesManager.h"
 #include "icomp/CPackageStaticInfo.h"
 #include "icomp/CComponentBase.h"
