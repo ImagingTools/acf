@@ -36,6 +36,6 @@ public:
 } // namespace istd
 
 
-#endif // istd_IEnableable_included
+#endif // !istd_IEnableable_included
 
 

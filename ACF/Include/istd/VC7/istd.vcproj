@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="istd"
-	ProjectGUID="{126B67F7-B779-4A80-A651-1111D5EDF583}"
-	>
+	ProjectGUID="{126B67F7-B779-4A80-A651-1111D5EDF583}">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
@@ -297,6 +296,9 @@
 			</File>
 			<File
 				RelativePath="..\IEnableable.h">
+			</File>
+			<File
+				RelativePath="..\IFileNameProvider.h">
 			</File>
 			<File
 				RelativePath="..\INamed.h">
