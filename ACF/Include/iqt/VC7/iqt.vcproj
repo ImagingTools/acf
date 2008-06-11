@@ -190,6 +190,9 @@
 				RelativePath="..\CComposedParamsSetGuiComp.cpp">
 			</File>
 			<File
+				RelativePath="..\CCompositePackageStaticInfo.cpp">
+			</File>
+			<File
 				RelativePath="..\CCriticalSection.cpp">
 			</File>
 			<File
@@ -295,6 +298,9 @@
 			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.h">
+			</File>
+			<File
+				RelativePath="..\CCompositePackageStaticInfo.h">
 			</File>
 			<File
 				RelativePath="..\CCriticalSection.h">
@@ -971,6 +977,9 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CFileAcquisitionParamsGuiComp.cpp">
+			</File>
+			<File
+				RelativePath="..\generated\moc_CFileList.cpp">
 			</File>
 			<File
 				RelativePath="..\generated\moc_CHierarchicalCommand.cpp">

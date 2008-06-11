@@ -1,7 +1,6 @@
 #include "iqt/CDirList.h"
 
-
-#include <QFileInfo> 
+#include <QFileInfo>
 
 
 namespace iqt
@@ -14,17 +13,17 @@ CDirList::CDirList(QObject* parent)
 }
 
 
-CDirList::CDirList( const QString& root, bool recursive, QObject* parent) 
+CDirList::CDirList( const QString& root, bool isRecursive, QObject* parent) 
 	:QObject(parent)
 {
-	Create(root, recursive);
+	Create(root, isRecursive);
 }
 
 
-CDirList::CDirList( const QDir& root, bool recursive, QObject* parent) 
+CDirList::CDirList( const QDir& root, bool isRecursive, QObject* parent) 
 	:QObject(parent)
 {
-	Create(root, recursive);
+	Create(root, isRecursive);
 }
 
 
@@ -47,7 +46,7 @@ bool CDirList::Create(const QString& rootDirectory, bool isRecursive)
 }
 
 
-bool CDirList::Create(const QDir& root, bool rec)
+bool CDirList::Create(const QDir& root, bool isRecursive)
 {	
 	clear();
 
@@ -66,13 +65,13 @@ bool CDirList::Create(const QDir& root, bool rec)
 	
 	QDir temp = root;
 
-	DoSearch(temp, rec);
+	DoSearch(temp, isRecursive);
 
 	return true;
 }
 
 
-void CDirList::DoSearch( QDir & root, bool recursive)
+void CDirList::DoSearch(QDir& root, bool isRecursive)
 {
 	QStringList entries = root.entryList( QDir::Dirs );
 	
@@ -88,16 +87,17 @@ void CDirList::DoSearch( QDir & root, bool recursive)
 		emit current(entry);
 		push_back(entry);
 
-		if (recursive){
+		if (isRecursive){
 			QDir temp(entry);
 			temp.setNameFilters(root.nameFilters());
 			temp.setSorting( root.sorting() );
 			temp.setFilter( root.filter() );
 			
-			DoSearch(temp, recursive);
+			DoSearch(temp, isRecursive);
 		}
 	}
 }
 
 
 } // namespace iqt
+

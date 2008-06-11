@@ -15,23 +15,23 @@ CFileList::CFileList(QObject* parent)
 }
 
 
-bool CFileList::Create(const QDir& root, bool recursive, const QStringList& nameFilters, QDir::SortFlags sortSpec)
+bool CFileList::Create(const QDir& root, bool isRecursive, const QStringList& nameFilters, QDir::SortFlags sortSpec)
 {
 	clear();
 
 	CDirList dirList;
 
-	if (recursive){
-		if (!dirList.Create(root, recursive)) 
+	if (isRecursive){
+		if (!dirList.Create(root, isRecursive)) 
 			return false;
 	}
 	else{
-		dirList.push_back( root.path() );
+		dirList.push_back(root.path() );
 	}
 
 	for (QStringList::Iterator itDir = dirList.begin(); itDir != dirList.end(); ++itDir){
-		QString strCurDirectory = *itDir;
-		QDir dir(strCurDirectory);
+		QString currenDirectoryPath = *itDir;
+		QDir dir(currenDirectoryPath);
 		dir.setFilter(QDir::Files);
 
 		QStringList entries = dir.entryList(nameFilters, QDir::NoFilter, sortSpec);
@@ -41,18 +41,18 @@ bool CFileList::Create(const QDir& root, bool recursive, const QStringList& name
 				continue;
 			}
 		
-			QFileInfo ff( strCurDirectory, entries[j]);
+			QFileInfo ff( currenDirectoryPath, entries[j]);
 			QString pat = ff.absoluteFilePath();
 			entries[j] = pat;
 		}
 		
 		for (QStringList::size_type i = 0; i < entries.size(); i++){
-			QString e = entries[i];
-			QFileInfo fileInfo(e);
+			QString directoryEntry = entries[i];
+			QFileInfo fileInfo(directoryEntry);
 			
-			QString strName = fileInfo.fileName();
+			QString fileName = fileInfo.fileName();
 			
-			if (strName == "." || strName == ".."){
+			if (fileName == "." || fileName == ".."){
 				continue;
 			}
 			
@@ -60,9 +60,9 @@ bool CFileList::Create(const QDir& root, bool recursive, const QStringList& name
 				continue;
 			}
 		
-			e = QDir::convertSeparators(e);
-			emit current(e);
-			push_back(e);	
+			directoryEntry = QDir::convertSeparators(directoryEntry);
+			emit current(directoryEntry);
+			push_back(directoryEntry);	
 		}
 	}
 
@@ -70,9 +70,9 @@ bool CFileList::Create(const QDir& root, bool recursive, const QStringList& name
 }
 
 
-bool CFileList::Create(const QString& root, bool rec, const QStringList& nameFilters, QDir::SortFlags sortSpec)
+bool CFileList::Create(const QString& root, bool isRecursive, const QStringList& nameFilters, QDir::SortFlags sortSpec)
 {
-	return Create(QDir(root), rec, nameFilters, sortSpec);
+	return Create(QDir(root), isRecursive, nameFilters, sortSpec);
 }
 
 
