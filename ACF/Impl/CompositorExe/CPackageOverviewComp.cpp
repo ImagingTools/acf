@@ -92,20 +92,39 @@ void CPackageOverviewComp::GenerateComponentTree(const QString& filter)
 			}
 		}
 	}
+
+	HighlightComponents(QString());
 }
 
 
 void CPackageOverviewComp::HighlightComponents(const QString& interfaceId)
 {
-	if (PackagesList->topLevelItemCount() == 0){
+	int topLevelItemCount = PackagesList->topLevelItemCount();
+	if (topLevelItemCount == 0){
 		return;
 	}
 
+	// process top level items:
+	for (int topLevelItemIndex = 0; topLevelItemIndex < topLevelItemCount; topLevelItemIndex++){
+		QTreeWidgetItem* itemPtr = PackagesList->topLevelItem(topLevelItemIndex);
+		if (itemPtr->childCount()){
+			if (itemPtr->isExpanded()){
+				itemPtr->setIcon(0, QIcon(s_openIcon));
+			}
+			else{			
+				itemPtr->setIcon(0, QIcon(s_closedIcon));
+			}
+		}
+		else{
+			itemPtr->setTextColor(0, Qt::lightGray);
+		}
+	}
+
+	// process component highlighting:
 	for (QTreeWidgetItemIterator treeIter(PackagesList); *treeIter != NULL; ++treeIter){
 		QTreeWidgetItem* itemPtr = *treeIter;
 
-		QTreeWidgetItem* parentItem = itemPtr->parent();
-		bool hasChilds = itemPtr->childCount() > 0;
+		QTreeWidgetItem* parentItemPtr = itemPtr->parent();
 
 		const icomp::IComponentStaticInfo* staticInfoPtr = GetItemStaticInfo(*itemPtr);
 
@@ -116,24 +135,20 @@ void CPackageOverviewComp::HighlightComponents(const QString& interfaceId)
 			if (extractorPtr != NULL){
 				itemIcon = QIcon(QString::fromUtf8(":/Resources/Icons/ok-16.png"));
 
-				if (parentItem != NULL){
-					parentItem->setExpanded(true);
+				// if parent item is closed we must expand it:
+				if (parentItemPtr != NULL){
+					parentItemPtr->setExpanded(true);
 				}
 			}
 			else{
 				itemIcon = QIcon(QString::fromUtf8(":/Resources/Icons/close_a_128.png"));
 			}
 		}
-		else if (hasChilds){
-			if (itemPtr->isExpanded()){
-				itemIcon = QIcon(s_openIcon);
-			}
-			else{			
-				itemIcon = QIcon(s_closedIcon);
-			}
-		}
 
-		itemPtr->setIcon(0, itemIcon);
+		// set result icon to component item:
+		if (parentItemPtr != NULL){
+			itemPtr->setIcon(0, itemIcon);
+		}
 	}
 }
 
@@ -200,8 +215,6 @@ void CPackageOverviewComp::GeneratePackageTree(
 		componentItem->setToolTip(0, iqt::GetQString(componentInfoPtr->GetDescription()));
 		root.addChild(componentItem);
 	}
-
-	HighlightComponents(QString());
 
 	root.setExpanded(true);
 }
