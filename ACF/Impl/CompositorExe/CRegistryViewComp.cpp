@@ -30,20 +30,25 @@ CRegistryViewComp::CRegistryViewComp()
 	m_removeComponentCommand.setEnabled(false);
 	m_removeComponentCommand.SetGroupId(GI_COMPONENT);
 	m_removeComponentCommand.SetStaticFlags(lightToolFlags);
+	m_removeComponentCommand.setShortcut(QKeySequence(Qt::Key_Delete));
 	m_renameComponentCommand.setEnabled(false);
 	m_renameComponentCommand.SetGroupId(GI_COMPONENT);
+	m_renameComponentCommand.setShortcut(QKeySequence(Qt::Key_F2));
 	m_exportComponentCommand.setEnabled(false);
 	m_exportComponentCommand.SetGroupId(GI_COMPONENT);
 	m_exportInterfaceCommand.setEnabled(false);
 	m_exportInterfaceCommand.SetGroupId(GI_COMPONENT);
+	m_exportInterfaceCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 	m_exportToCodeCommand.setEnabled(false);
 	m_exportToCodeCommand.SetGroupId(GI_CODEGEN);
 	m_executeRegistryCommand.setEnabled(false);
+	m_executeRegistryCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_F5));
 	m_executeRegistryCommand.SetGroupId(GI_PREVIEW);
 	m_executeRegistryCommand.SetStaticFlags(lightToolFlags);
 	m_abortRegistryCommand.setEnabled(false);
 	m_abortRegistryCommand.SetGroupId(GI_PREVIEW);
 	m_abortRegistryCommand.SetStaticFlags(lightToolFlags);
+	m_abortRegistryCommand.setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
 	m_removeNoteCommand.setEnabled(false);
 	m_removeNoteCommand.SetGroupId(GI_COMPONENT);
 	m_removeNoteCommand.SetStaticFlags(lightToolFlags);
@@ -875,9 +880,6 @@ void CRegistryViewComp::CRegistryScene::keyPressEvent(QKeyEvent* keyEvent)
 		break;
 	case Qt::Key_Minus:
 		m_parent.ScaleView(pow((double)2, -0.5));
-		break;
-	case Qt::Key_Delete:
-		m_parent.OnRemoveComponent();  
 		break;
 	}
 }
