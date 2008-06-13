@@ -115,7 +115,9 @@ int CBitmapLoaderComp::DoSyncProcess(const iprm::IParamsSet* paramsPtr, const is
 	const icam::IFileBitmapAcquisitionParams* loaderParamsPtr = NULL;
 	if (paramsPtr != NULL){
 		loaderParamsPtr = dynamic_cast<const icam::IFileBitmapAcquisitionParams*>(paramsPtr->GetParameter((*m_parameterIdAttrPtr).ToString()));
-		filesPath = loaderParamsPtr->GetDirectory();
+		if (loaderParamsPtr != NULL){
+			filesPath = loaderParamsPtr->GetDirectory();
+		}
 	}
 	QDir directory(iqt::GetQString(filesPath));
 

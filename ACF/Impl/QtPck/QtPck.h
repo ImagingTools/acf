@@ -22,6 +22,7 @@
 #include "iqt/CSelectionParamGuiComp.h"
 #include "iqt/CTabContainerGuiComp.h"
 #include "iqt/CFileNameProviderGuiComp.h"
+#include "iqt/CSettingsSerializerComp.h"
 
 #include "iqt2d/CImageViewComp.h"
 
@@ -65,6 +66,7 @@ typedef iqtsig::CSampleAcquisitionGuiComp SampleAcquisitionGui;
 typedef iqtsig::CScriptSampleAcquisitionComp ScriptSampleAcquisition;
 typedef iqt::CTabContainerGuiComp TabContainer;
 typedef iqt::CFileNameProviderGuiComp FileNameProviderGui;
+typedef iqt::CSettingsSerializerComp SettingsSerializer;
 
 
 } // namespace QtPck

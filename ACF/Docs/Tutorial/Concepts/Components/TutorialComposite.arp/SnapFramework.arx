@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="7">
     <Element>
       <Id>
         Application
@@ -19,7 +19,26 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ApplicationInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               MainGui
@@ -36,6 +55,62 @@
               </IsEnabled>
               <Value>
                 SnapGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ApplicationInfo
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ApplicationInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapTest
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;class istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
               </Value>
             </Data>
           </AttributeInfo>
@@ -295,7 +370,7 @@
               class icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              ParamsLoader
             </ExportId>
             <Data>
               <IsEnabled>
@@ -339,13 +414,29 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
         class ibase::IApplication
       </InterfaceId>
       <ComponentId>
         Application
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class ibase::IApplicationInfo
+      </InterfaceId>
+      <ComponentId>
+        ApplicationInfo
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class iser::IVersionInfo
+      </InterfaceId>
+      <ComponentId>
+        ApplicationInfo
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

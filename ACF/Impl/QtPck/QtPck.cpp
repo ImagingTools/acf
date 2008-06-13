@@ -44,6 +44,7 @@ I_EXPORT_COMPONENT(SampleAcquisitionGui, "Sample acquisition GUI", "Sample Sampl
 I_EXPORT_COMPONENT(ScriptSampleAcquisition, "Test sample acquisition based on QtScript", "Test Sample Sampling Acquisition Script QtScript Qt");
 I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Tab Widget GUI");
 I_EXPORT_COMPONENT(FileNameProviderGui, "Qt widget for File/Directory getting", "Qt Widget GUI File");
+I_EXPORT_COMPONENT(SettingsSerializer, "Load and save objects using QSettings as storage", "Qt QSettings Registry Serializer Loader Saver");
 
 
 } // namespace QtPck

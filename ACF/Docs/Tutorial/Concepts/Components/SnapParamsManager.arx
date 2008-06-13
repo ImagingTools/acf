@@ -220,7 +220,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               BitmapAcquisition
@@ -237,6 +237,25 @@
               </IsEnabled>
               <Value>
                 BitmapAcquisition
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsLoader
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SettingsSerializer
               </Value>
             </Data>
           </AttributeInfo>

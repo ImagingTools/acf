@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="28">
+  <PositionMap count="29">
     <Element>
       <ComponentName>
         Application
@@ -223,6 +223,17 @@
       </X>
       <X>
         12
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SettingsSerializer
+      </ComponentName>
+      <X>
+        -587
+      </X>
+      <X>
+        -187
       </X>
     </Element>
     <Element>
