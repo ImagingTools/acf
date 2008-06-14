@@ -9,8 +9,19 @@ namespace iqtsig
 
 
 CSampleContainerView::CSampleContainerView(QWidget* parentPtr)
-:	BaseClass(parentPtr)
+:	BaseClass(parentPtr),
+	m_viewRange(0, 100)
 {
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CSampleContainerView::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	BaseClass2::OnUpdate(updateFlags, updateParamsPtr);
+
+	emit repaint();
 }
 
 
@@ -32,7 +43,8 @@ void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 
 		for (int i = 0; i < samplesCount; ++i){
 			polyline[i].setX(double(i * rectWidth) / samplesCount);
-			polyline[i].setY(samplesPtr->GetSample(i) * rectHeight / 100.0);
+			double sample = samplesPtr->GetSample(i);
+			polyline[i].setY((1 - m_viewRange.GetAlphaFromValue(sample)) * rectHeight);
 		}
 
 		painter.drawPolyline(polyline);

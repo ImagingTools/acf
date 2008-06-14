@@ -61,7 +61,7 @@ void CSnapImageGuiComp::on_SaveImageButton_clicked()
 void CSnapImageGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") != iser::IFileLoader::StateOk){
+		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
 						QObject::tr("Error"),
@@ -74,7 +74,7 @@ void CSnapImageGuiComp::on_LoadParamsButton_clicked()
 void CSnapImageGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
-		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") != iser::IFileLoader::StateOk){
+		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
 						QObject::tr("Error"),

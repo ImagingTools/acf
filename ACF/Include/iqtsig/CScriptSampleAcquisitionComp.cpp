@@ -1,6 +1,9 @@
 #include "iqtsig/CScriptSampleAcquisitionComp.h"
 
 
+#include "istd/TChangeNotifier.h"
+
+
 namespace iqtsig
 {
 
@@ -25,14 +28,30 @@ int CScriptSampleAcquisitionComp::DoSyncProcess(
 	QScriptValue frameValue(&m_scriptEngine, ++frameNumber);
 	m_scriptEngine.globalObject().setProperty("frame", frameValue);
 
-	QString script = iqt::GetQString(*m_defaultScriptAttrPtr);
+	QString functionScript = iqt::GetQString(*m_defaultScriptAttrPtr);
+	m_scriptEngine.evaluate(functionScript);
 
-	int samplesCount = outputPtr->GetSamplesCount();
+	istd::CChangeNotifier notifier(outputPtr);
+
+	int samplesCount;
+	if (m_samplesCountAttrPtr.IsValid()){
+		samplesCount = *m_samplesCountAttrPtr;
+		if (!outputPtr->SetSamplesCount(samplesCount)){
+			return TS_INVALID;
+		}
+	}
+	else{
+		samplesCount = outputPtr->GetSamplesCount();
+	}
+
+	QScriptValue calcCtor = m_scriptEngine.evaluate("Calc");
+
 	for (int i = 0; i < samplesCount; ++i){
+		QScriptValueList arguments;
 		QScriptValue xValue(&m_scriptEngine, i);
-		m_scriptEngine.globalObject().setProperty("x", xValue);
+		arguments << xValue;
 
-		double sample = m_scriptEngine.evaluate(script).toNumber();
+		double sample = calcCtor.call(m_scriptEngine.nullValue(), arguments).toNumber();
 
 		if (m_scriptEngine.hasUncaughtException()) {
 			return TS_INVALID;

@@ -4,6 +4,8 @@
 
 #include <QWidget>
 
+#include "istd/CRange.h"
+
 #include "imod/TSingleModelObserverBase.h"
 
 #include "isig/ISamplesContainer.h"
@@ -21,8 +23,14 @@ public:
 
 	CSampleContainerView(QWidget* parentPtr = NULL);
 
+	// reimplemented (imod::CSingleModelObserverBase)
+	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
 	// reimplemented (QWidget)
 	virtual void paintEvent(QPaintEvent* event);
+
+private:
+	istd::CRange m_viewRange;
 };
 
 
