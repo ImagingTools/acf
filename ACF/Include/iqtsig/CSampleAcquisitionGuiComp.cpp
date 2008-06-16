@@ -87,9 +87,14 @@ void CSampleAcquisitionGuiComp::OnTimerReady()
 bool CSampleAcquisitionGuiComp::AcquireSample()
 {
 	if (m_sampleAcquisitionCompPtr.IsValid()){
+		double timeout = -1;
+		if (m_acquisitionTimeoutAttrPtr.IsValid()){
+			timeout = *m_acquisitionTimeoutAttrPtr;
+		}
+
 		int taskId = m_sampleAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, &m_samples);
 		if (taskId >= 0){
-			return m_sampleAcquisitionCompPtr->WaitTaskFinished(-1, 1) != isig::ISamplesProcessor::TS_INVALID;
+			return m_sampleAcquisitionCompPtr->WaitTaskFinished(taskId, timeout) != isig::ISamplesProcessor::TS_INVALID;
 		}
 	}
 
@@ -117,6 +122,10 @@ void CSampleAcquisitionGuiComp::OnGuiCreated()
 
 		areParamsEditable = true;
 	}
+
+	double minDisplayedValue = istd::Min(*m_minDisplayedValueAttrPtr, *m_maxDisplayedValueAttrPtr);
+	double maxDisplayedValue = istd::Max(*m_minDisplayedValueAttrPtr, *m_maxDisplayedValueAttrPtr);
+	m_samplesView.SetDisplayedRange(istd::CRange(minDisplayedValue, maxDisplayedValue));
 
 	m_samples.AttachObserver(&m_samplesView);
 

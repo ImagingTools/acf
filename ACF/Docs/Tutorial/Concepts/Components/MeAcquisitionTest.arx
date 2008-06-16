@@ -4,25 +4,25 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="8">
     <Element>
       <Id>
-        Application
+        ChannelAddress
       </Id>
       <PackageId>
-        QtPck
+        MePck
       </PackageId>
       <ComponentId>
-        GuiApplication
+        ChannelAddressParam
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              MeilhausAccess
             </Id>
             <Type>
               class icomp::CReferenceAttribute
@@ -35,64 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MainGui
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                MainGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SplashScreen
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SplashScreen
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SplashTime
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                5
+                HardwareAcquisition
               </Value>
             </Data>
           </AttributeInfo>
@@ -101,13 +44,13 @@
     </Element>
     <Element>
       <Id>
-        ApplicationInfo
+        ChannelAddressGui
       </Id>
       <PackageId>
-        BasePck
+        QtPck
       </PackageId>
       <ComponentId>
-        ApplicationInfo
+        SelectionParamGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -119,168 +62,13 @@
     </Element>
     <Element>
       <Id>
-        MainGui
+        HardwareAcquisition
       </Id>
       <PackageId>
-        QtPck
+        MePck
       </PackageId>
       <ComponentId>
-        SampleAcquisitionGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="8">
-          <AttributeInfo>
-            <Id>
-              LiveInterval
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                0.04
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MaxDispValue
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              MaxDispValue
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MinDispValue
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              MinDispValue
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsLoader
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ParamsLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSet
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParamsSetGui
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ParamsSetGui
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SampleAcquisition
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              SampleAcquisition
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SampleLoader
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SampleLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ParamsLoader
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        FileDialogSerializer
+        MeilhausSimpleAcquisition
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -289,146 +77,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              FileFilters
-            </Id>
-            <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Sample XML Parameters (*.xspr)
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Serializers
-            </Id>
-            <Type>
-              class icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  XmlSerializer
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SampleLoader
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        FileDialogSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              FileFilters
-            </Id>
-            <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Sample XML file (*.xsmp)
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Serializers
-            </Id>
-            <Type>
-              class icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  XmlSerializer
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        SplashScreen
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        SplashScreen
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ApplicationInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CopyrightText
+              AddressParamId
             </Id>
             <Type>
               class icomp::TSingleAttribute&lt;class istd::CString&gt;
@@ -441,9 +90,26 @@
                 true
               </IsEnabled>
               <Value>
-                (C) Copyright 2008 I
-
-All rights reseved
+                ChannelAddress
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsOutput
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -452,22 +118,192 @@ All rights reseved
     </Element>
     <Element>
       <Id>
-        XmlSerializer
+        ParamsSet
       </Id>
       <PackageId>
         BasePck
       </PackageId>
       <ComponentId>
-        XmlFileSerializer
+        ComposedParamsSet
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              VersionInfo
+              Parameters
+            </Id>
+            <Type>
+              class icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ChannelAddress
+                </Value>
+                <Value>
+                  SamplingParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParametersId
+            </Id>
+            <Type>
+              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ChannelAddress
+                </Value>
+                <Value>
+                  SamplingParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ParamsSetGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        ComposedParamsSetGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Editors
+            </Id>
+            <Type>
+              class icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ChannelAddressGui
+                </Value>
+                <Value>
+                  SamplingParamsGui
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Ids
+            </Id>
+            <Type>
+              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  ChannelAddress
+                </Value>
+                <Value>
+                  SamplingParams
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SamplingFramework
+      </Id>
+      <PackageId>
+        TutorialComposite
+      </PackageId>
+      <ComponentId>
+        SamplingFramework
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              MaxDispValue
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                -10
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MinDispValue
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                10
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSet
             </Id>
             <Type>
               class icomp::CReferenceAttribute
@@ -480,10 +316,84 @@ All rights reseved
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                ParamsSet
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ParamsSetGui
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ParamsSetGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SampleAcquisition
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                HardwareAcquisition
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SamplingParams
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        GeneralSamplingParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SamplingParamsGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        SamplingParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -494,7 +404,7 @@ All rights reseved
         class ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Application
+        SamplingFramework
       </ComponentId>
     </Interface>
     <Interface>
@@ -502,7 +412,7 @@ All rights reseved
         class ibase::IApplicationInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        SamplingFramework
       </ComponentId>
     </Interface>
     <Interface>
@@ -510,7 +420,7 @@ All rights reseved
         class iser::IVersionInfo
       </InterfaceId>
       <ComponentId>
-        ApplicationInfo
+        SamplingFramework
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

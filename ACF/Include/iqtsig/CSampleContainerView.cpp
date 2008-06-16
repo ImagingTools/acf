@@ -10,8 +10,14 @@ namespace iqtsig
 
 CSampleContainerView::CSampleContainerView(QWidget* parentPtr)
 :	BaseClass(parentPtr),
-	m_viewRange(0, 100)
+	m_displayedRange(0, 100)
 {
+}
+
+
+void CSampleContainerView::SetDisplayedRange(const istd::CRange& range)
+{
+	m_displayedRange = range;
 }
 
 
@@ -44,7 +50,7 @@ void CSampleContainerView::paintEvent(QPaintEvent* /*event*/)
 		for (int i = 0; i < samplesCount; ++i){
 			polyline[i].setX(double(i * rectWidth) / samplesCount);
 			double sample = samplesPtr->GetSample(i);
-			polyline[i].setY((1 - m_viewRange.GetAlphaFromValue(sample)) * rectHeight);
+			polyline[i].setY((1 - m_displayedRange.GetAlphaFromValue(sample)) * rectHeight);
 		}
 
 		painter.drawPolyline(polyline);

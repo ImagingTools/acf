@@ -2,6 +2,10 @@
 #define iqt_CSelectionParamGuiComp_included
 
 
+#include <QComboBox>
+
+#include "istd/TPointerVector.h"
+
 #include "iprm/ISelectionParam.h"
 
 #include "iqt/TDesignerGuiObserverCompBase.h"
@@ -32,10 +36,13 @@ public:
 	virtual void UpdateEditor();
 
 protected slots:
-	void on_SelectionCB_currentIndexChanged(int index);
+	void OnSelectionChanged(int index);
 
 	// reimplemented (iqt::TGuiObserverWrap)
 	virtual void OnGuiModelShown();
+
+private:
+	istd::TPointerVector<QComboBox> m_comboBoxes;
 };
 
 

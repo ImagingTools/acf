@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="MePck"
-	ProjectGUID="{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}"
+	ProjectGUID="{8990DF8C-20DF-4CF2-8825-AAFE0E39723E}"
 	RootNamespace="MePck"
 	Keyword="Qt4VSv1.0">
 	<Platforms>
@@ -22,7 +22,7 @@
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="TRUE"
 				OptimizeForProcessor="3"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(MEIDSDIR)\include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
@@ -36,9 +36,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
+				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib meIDSmain.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(MEIDSDIR)\lib&quot;"
 				GenerateDebugInformation="FALSE"
 				SubSystem="1"/>
 			<Tool
@@ -70,7 +70,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(EXTLIBDIR)\meids\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(MEIDSDIR)\include&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
@@ -87,98 +87,8 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib QtSqld4.lib QtNetworkd4.lib meIDSmain.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(EXTLIBDIR)\meids\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(MEIDSDIR)\lib&quot;"
 				GenerateDebugInformation="TRUE"
-				SubSystem="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="NemoDebug|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\DebugVC7"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../Include/iqt/VC7/Generated;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
-				PreprocessorDefinitions="OLD_ACF_SUPPORT;UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
-				WarningLevel="3"
-				DebugInformationFormat="3"
-				CompileAs="0"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="Acf.lib QtAcf.lib QtLib.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib QtSqld4.lib QtNetworkd4.lib "
-				OutputFile="$(OutDir)\$(ProjectName).dll"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR_OLD)\lib\debug&quot;"
-				GenerateDebugInformation="TRUE"
-				SubSystem="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="NemoRelease|Win32"
-			OutputDirectory="$(ACFDIR)\Bin\ReleaseVC7"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include/iqt/VC7/Generated;../../../Include/;../../;&quot;$(ACFDIR_OLD)\include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\Qt3Support&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
-				PreprocessorDefinitions="OLD_ACF_SUPPORT;UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
-				RuntimeLibrary="2"
-				RuntimeTypeInfo="TRUE"
-				WarningLevel="4"
-				DebugInformationFormat="0"
-				CompileAs="0"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="Acf.lib qtacf.lib qtlib.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
-				OutputFile="$(OutDir)\$(ProjectName).dll"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR_OLD)\lib\release&quot;"
-				GenerateDebugInformation="FALSE"
 				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -210,10 +120,10 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\CChannelSelectionNode.cpp">
+				RelativePath="..\CChannelAddressParamComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CMeBase.cpp">
+				RelativePath="..\CChannelSelectionNode.cpp">
 			</File>
 			<File
 				RelativePath="..\CMeContext.cpp">
@@ -222,7 +132,7 @@
 				RelativePath="..\CMeilhausSimpleComp.cpp">
 			</File>
 			<File
-				RelativePath="..\main.cpp">
+				RelativePath="..\MePck.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -230,10 +140,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\CChannelSelectionNode.h">
+				RelativePath="..\CChannelAddressParamComp.h">
 			</File>
 			<File
-				RelativePath="..\CMeBase.h">
+				RelativePath="..\CChannelSelectionNode.h">
 			</File>
 			<File
 				RelativePath="..\CMeContext.h">

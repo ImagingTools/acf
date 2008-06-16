@@ -192,7 +192,26 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Info
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

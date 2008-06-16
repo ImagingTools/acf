@@ -23,6 +23,8 @@ public:
 
 	CSampleContainerView(QWidget* parentPtr = NULL);
 
+	void SetDisplayedRange(const istd::CRange& range);
+
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
@@ -30,7 +32,7 @@ public:
 	virtual void paintEvent(QPaintEvent* event);
 
 private:
-	istd::CRange m_viewRange;
+	istd::CRange m_displayedRange;
 };
 
 

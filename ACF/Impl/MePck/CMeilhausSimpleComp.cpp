@@ -12,6 +12,8 @@ namespace imebase
 
 CMeilhausSimpleComp::CMeilhausSimpleComp()
 {
+	meOpen(0);
+
 	m_lastTaskId = -1;
 }
 
@@ -50,11 +52,8 @@ void CMeilhausSimpleComp::ResetAllTasks()
 bool CMeilhausSimpleComp::AreParamsAccepted(const iprm::IParamsSet* paramsPtr) const
 {
 	CMeAddr address;
-	if (!GetChannelAddress(paramsPtr, address)){
-		return false;
-	}
-
-	return true;
+	return		GetChannelAddress(paramsPtr, address) &&
+				(GetSamplingParams(paramsPtr) != 0);
 }
 
 
@@ -68,20 +67,36 @@ int CMeilhausSimpleComp::BeginTask(
 		return -1;
 	}
 
+	const isig::ISamplingParams* samplingParamsPtr = GetSamplingParams(paramsPtr);
+	if (samplingParamsPtr == NULL){
+		return -1;
+	}
+
 	CMeContext* context = NULL;
 	if (*m_isOutputAttrPtr){
+		if (inputPtr == NULL){
+			return -1;
+		}
+
 		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, const_cast<isig::ISamplesContainer*>(inputPtr));
 
 		context->CopyFromContainer();
 	}
 	else{
+		if (outputPtr == NULL){
+			return -1;
+		}
+
+		outputPtr->SetSamplesCount(1024);
+
 		context = new CMeContext(address, PullNextTaskId(), *m_isOutputAttrPtr, outputPtr);
 	}
 
-	if (!context->Register(input)){
+	if (!context->Register(samplingParamsPtr->GetInterval())){
 		delete context;
 		return -1;
 	}
+
 	m_activeTaskList.append(context);
 
 	return m_lastTaskId;
@@ -106,6 +121,10 @@ int CMeilhausSimpleComp::WaitSingleTaskFinished(int taskId, double timeoutTime, 
 	for (int index = 0; index < m_activeTaskList.size(); index++) {
 		CMeContext* entry = m_activeTaskList.at(index);
 		if (entry->GetId() == taskId){
+			if (timeoutTime < 0){
+				timeoutTime = entry->GetInterval() + 1;
+			}
+
 			if (entry->Wait(timeoutTime)){
 				if (!*m_isOutputAttrPtr){
 					entry->CopyToContainer();
@@ -208,29 +227,38 @@ bool CMeilhausSimpleComp::CreateSelectionTree(CChannelSelectionNode& result) con
 		return false;
 	}
 
-	for (int deviceIndex=0; deviceIndex < devicesCount; deviceIndex++){
+	for (int deviceIndex = 0; deviceIndex < devicesCount; deviceIndex++){
 		istd::TDelPtr<CChannelSelectionNode> deviceNodePtr(new CChannelSelectionNode);
 
-		int addressSubdevice;
+		int  meType = (*m_isOutputAttrPtr)? ME_TYPE_AO: ME_TYPE_AI;
+
 		for (		int subdeviceIndex = 0;
-					meQuerySubdeviceByType(deviceIndex, subdeviceIndex, ME_TYPE_AO, ME_SUBTYPE_STREAMING, &addressSubdevice) != 0;
+					meQuerySubdeviceByType(deviceIndex, subdeviceIndex, meType, ME_SUBTYPE_STREAMING, &subdeviceIndex) == 0;
 					++subdeviceIndex){
 			istd::TDelPtr<CChannelSelectionNode> subdeviceNodePtr(new CChannelSelectionNode);
 
 			int channelsCount;
-			meQueryNumberRanges(deviceIndex, addressSubdevice, ME_UNIT_ANY, &channelsCount);
+			meQueryNumberChannels(deviceIndex, subdeviceIndex, &channelsCount);
 
 			for (int channelIndex = 0; channelIndex < channelsCount; ++channelIndex){
-				subdeviceNodePtr->InsertNode(channelIndex, NULL);
+				istd::CString channelName = iqt::GetCString(QString::number(channelIndex));
+				subdeviceNodePtr->InsertNode(channelName, channelIndex, NULL);
 			}
 
 			if (subdeviceNodePtr->GetOptionsCount() > 0){
-				deviceNodePtr->InsertNode(addressSubdevice, subdeviceNodePtr.PopPtr());
+				istd::CString subdeviceName = iqt::GetCString(QString::number(subdeviceIndex));
+				deviceNodePtr->InsertNode(subdeviceName, subdeviceIndex, subdeviceNodePtr.PopPtr());
 			}
 		}
 
 		if (deviceNodePtr->GetOptionsCount() > 0){
-			result.InsertNode(deviceIndex, deviceNodePtr.PopPtr());
+			istd::CString deviceName = iqt::GetCString(QString::number(deviceIndex));
+			char buffer[256];
+			if (meQueryNameDevice(deviceIndex, buffer, 255) == 0){
+				deviceName = deviceName + ":" + buffer;
+			}
+
+			result.InsertNode(deviceName, deviceIndex, deviceNodePtr.PopPtr());
 		}
 	}
 
@@ -284,6 +312,14 @@ bool CMeilhausSimpleComp::GetChannelAddress(const iprm::IParamsSet* paramsPtr, C
 	}
 
 	return false;
+}
+
+
+const isig::ISamplingParams* CMeilhausSimpleComp::GetSamplingParams(const iprm::IParamsSet* paramsPtr) const
+{
+	std::string samplingId = (*m_samplingParamsIdAttrPtr).ToString();
+
+	return dynamic_cast<const isig::ISamplingParams*>(paramsPtr->GetParameter(samplingId));
 }
 
 

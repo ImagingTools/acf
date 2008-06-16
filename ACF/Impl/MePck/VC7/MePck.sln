@@ -1,24 +1,18 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MePck", "MePck.vcproj", "{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MePck", "MePck.vcproj", "{8990DF8C-20DF-4CF2-8825-AAFE0E39723E}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
-		NemoDebug = NemoDebug
-		NemoRelease = NemoRelease
 		Release = Release
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.Debug.ActiveCfg = Debug|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.Debug.Build.0 = Debug|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.NemoDebug.ActiveCfg = NemoDebug|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.NemoDebug.Build.0 = NemoDebug|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.NemoRelease.ActiveCfg = NemoRelease|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.NemoRelease.Build.0 = NemoRelease|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.Release.ActiveCfg = Release|Win32
-		{70FDAC6E-D0D2-4AEB-AE0D-BF147732355D}.Release.Build.0 = Release|Win32
+		{8990DF8C-20DF-4CF2-8825-AAFE0E39723E}.Debug.ActiveCfg = Debug|Win32
+		{8990DF8C-20DF-4CF2-8825-AAFE0E39723E}.Debug.Build.0 = Debug|Win32
+		{8990DF8C-20DF-4CF2-8825-AAFE0E39723E}.Release.ActiveCfg = Release|Win32
+		{8990DF8C-20DF-4CF2-8825-AAFE0E39723E}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

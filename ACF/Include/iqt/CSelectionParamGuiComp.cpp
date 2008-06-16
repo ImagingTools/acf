@@ -12,9 +12,19 @@ namespace iqt
 
 void CSelectionParamGuiComp::UpdateModel() const
 {
-	iprm::ISelectionParam* objectPtr = GetObjectPtr();
-	if (IsGuiCreated() && (objectPtr != NULL)){
-		objectPtr->SetSelectedOptionIndex(SelectionCB->currentIndex());
+	if (!IsGuiCreated()){
+		return;
+	}
+
+	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
+	int switchesCount = m_comboBoxes.GetCount();
+	for (		int switchIndex = 0;
+				(selectionPtr != NULL) && switchIndex < switchesCount;
+				++switchIndex){
+		const QComboBox* switchBoxPtr = m_comboBoxes.GetAt(switchIndex);
+		selectionPtr->SetSelectedOptionIndex(switchBoxPtr->currentIndex());
+
+		selectionPtr = selectionPtr->GetActiveSubselection();
 	}
 }
 
@@ -25,27 +35,38 @@ void CSelectionParamGuiComp::UpdateEditor()
 		return;
 	}
 
-	iqt::CSignalBlocker blocker(SelectionCB);
+	iqt::CSignalBlocker blocker(SelectionFrame);
 
-	SelectionCB->clear();
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blocker(this);
 
-	iprm::ISelectionParam* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		int optionsCont = objectPtr->GetOptionsCount();
+		m_comboBoxes.Reset();
 
-		for (int i = 0; i < optionsCont; ++i){
-			const istd::CString& name = objectPtr->GetOptionName(i);
+		for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
+					selectionPtr != NULL;
+					selectionPtr = selectionPtr->GetActiveSubselection()){
+			QComboBox* switchBoxPtr = new QComboBox(NULL);
+			m_comboBoxes.PushBack(switchBoxPtr);
+			QLayout* layoutPtr = SelectionFrame->layout();
+			if (layoutPtr != NULL){
+				layoutPtr->addWidget(switchBoxPtr);
+			}
 
-			SelectionCB->addItem(iqt::GetQString(name));
-		}
+			QObject::connect(switchBoxPtr, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 
-		int selectedIndex = objectPtr->GetSelectedOptionIndex();
+			int optionsCont = selectionPtr->GetOptionsCount();
 
-		if (selectedIndex >= 0){
-			SelectionCB->setCurrentIndex(selectedIndex);
-		}
-		else if (optionsCont > 0){
-			SelectionCB->setCurrentIndex(0);
+			for (int i = 0; i < optionsCont; ++i){
+				const istd::CString& name = selectionPtr->GetOptionName(i);
+
+				switchBoxPtr->addItem(iqt::GetQString(name));
+			}
+
+			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+
+			if (selectedIndex >= 0){
+				switchBoxPtr->setCurrentIndex(selectedIndex);
+			}
 		}
 	}
 }
@@ -53,11 +74,13 @@ void CSelectionParamGuiComp::UpdateEditor()
 
 // protected slots
 
-void CSelectionParamGuiComp::on_SelectionCB_currentIndexChanged(int index)
+void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
 {
-	iprm::ISelectionParam* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		objectPtr->SetSelectedOptionIndex(index);
+	if (!IsUpdateBlocked()){
+		UpdateBlocker blocker(this);
+
+		UpdateModel();
+		UpdateEditor();
 	}
 }
 

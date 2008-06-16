@@ -1,6 +1,9 @@
 #include "CMeContext.h"
 
 
+#include "istd/TChangeNotifier.h"
+
+
 namespace imebase
 {
 
@@ -27,12 +30,14 @@ CMeContext::~CMeContext()
 
 bool CMeContext::Register(double interval)
 {
+	m_interval = interval;
+
 	meIOResetSubdevice(m_address.device, m_address.subdevice, 0);
 
 	meIOStreamCB_t func;
 
 	if (m_isOutput){
-		if (!ConfigOutputStream(interval)){
+		if (!ConfigOutputStream()){
 			return false;
 		}
 
@@ -40,22 +45,20 @@ bool CMeContext::Register(double interval)
 		int aCount = int(m_hwBuffer.size());
 		meIOStreamWrite(m_address.device, m_address.subdevice, ME_WRITE_MODE_PRELOAD, &m_hwBuffer[0], &aCount, 0);
 		m_bufferCount += aCount;
-		if (!IsDone()){
-			m_activeTaskMutex.lock();
-		}
 	}
 	else{
-		if (!ConfigInputStream(interval)){
+		if (!ConfigInputStream()){
 			return false;
 		}
 
 		func = cbAIFunc;
-		m_activeTaskMutex.lock();
 	}
 
 	bool retVal = true;
 	if (!IsDone()){
-		retVal = (meIOStreamSetCallbacks(m_address.device, m_address.subdevice, NULL, NULL, func, this, func, this, 0) == 0);
+		int errCode = meIOStreamSetCallbacks(m_address.device, m_address.subdevice, NULL, NULL, func, this, func, this, 0);
+
+		retVal = (errCode == 0);
 	}
 
 	retVal = retVal && StartStream();
@@ -66,11 +69,14 @@ bool CMeContext::Register(double interval)
 
 void CMeContext::Unregister()
 {
-	meIOStreamSetCallbacks(m_address.device, m_address.subdevice, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+	meIOStreamStop_t stopList;
+	stopList.iDevice = m_address.device;
+	stopList.iSubdevice = m_address.subdevice;
+	stopList.iStopMode = ME_STOP_MODE_IMMEDIATE;
+	stopList.iFlags = 0;
 
-	if (m_activeTaskMutex.tryLock()){
-		m_activeTaskMutex.unlock();
-	}
+	meIOStreamStop(&stopList, 1, 0);
+	meIOStreamSetCallbacks(m_address.device, m_address.subdevice, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 }
 
 
@@ -92,14 +98,24 @@ bool CMeContext::IsDone()
 }
 
 
+double CMeContext::GetInterval() const
+{
+	return m_interval;
+}
+
+
 bool CMeContext::Wait(double timeout)
 {
-	bool ret = m_activeTaskMutex.tryLock(int(timeout * 1000));
-	if (ret){
-		m_activeTaskMutex.unlock();
+	bool retVal = true;
+
+	m_activeTaskMutex.lock();
+	if (!IsDone()){
+		retVal = m_dataReadyCondition.wait(&m_activeTaskMutex, I_DWORD(timeout * 1000));
 	}
 
-	return ret;
+	m_activeTaskMutex.unlock();
+
+	return retVal;
 }
 
 
@@ -113,6 +129,8 @@ void CMeContext::CopyToContainer()
 
 	int samplesCount = m_samplesContainer.GetSamplesCount();
 	I_ASSERT(samplesCount == int(m_hwBuffer.size()));
+
+	istd::CChangeNotifier notifier(&m_samplesContainer);
 
 	for (int index=0; index < samplesCount; index++){
 		double value;
@@ -146,17 +164,18 @@ void CMeContext::CopyFromContainer()
 
 // protected methods
 
-bool CMeContext::ConfigInputStream(double interval)
+bool CMeContext::ConfigInputStream()
 {
 	int interval_high;
 	int interval_low;
-	double intervalMsecs = interval * 1000;
+
+	double sampleInterval = m_interval / m_samplesContainer.GetSamplesCount();
 
 	if (meIOStreamTimeToTicks(
 				m_address.device,
 				m_address.subdevice,
 				ME_TIMER_CONV_START,
-				&intervalMsecs,
+				&sampleInterval,
 				&interval_low,
 				&interval_high,
 				ME_VALUE_NOT_USED) != 0){
@@ -181,27 +200,30 @@ bool CMeContext::ConfigInputStream(double interval)
 	trigger.iConvStartTrigType = ME_TRIG_TYPE_TIMER;
 	trigger.iConvStartTicksLow = interval_low;
 	trigger.iConvStartTicksHigh = interval_high;
-	trigger.iScanStopTrigType = ME_TRIG_TYPE_NONE;
+	trigger.iScanStopTrigType = ME_TRIG_TYPE_COUNT;
 	trigger.iScanStopCount = 1024;
 	trigger.iAcqStopTrigType = ME_TRIG_TYPE_FOLLOW;
 	trigger.iAcqStopCount = 0;
 	trigger.iFlags = ME_VALUE_NOT_USED;
 
-	return (meIOStreamConfig(m_address.device, m_address.subdevice, &configList, 1, &trigger, 1024, 0) == 0);
+	int errCode = meIOStreamConfig(m_address.device, m_address.subdevice, &configList, 1, &trigger, 1024, 0);
+
+	return (errCode == 0);
 }
 
 
-bool CMeContext::ConfigOutputStream(double interval)
+bool CMeContext::ConfigOutputStream()
 {
 	int interval_high;
 	int interval_low;
-	double intervalMsecs = interval * 1000;
+
+	double sampleInterval = m_interval / m_samplesContainer.GetSamplesCount();
 
 	if (meIOStreamTimeToTicks(
 				m_address.device,
 				m_address.subdevice,
 				ME_TIMER_CONV_START,
-				&intervalMsecs,
+				&sampleInterval,
 				&interval_low,
 				&interval_high,
 				ME_VALUE_NOT_USED) != 0){
@@ -265,7 +287,8 @@ int CMeContext::cbAIFunc(int device, int subdevice, int count, void* context, in
 	}
 
 	if (itself->IsDone()){
-		itself->m_activeTaskMutex.unlock();
+		itself->m_dataReadyCondition.wakeAll();
+
 		return 1;
 	}
 
@@ -277,8 +300,8 @@ int CMeContext::cbAOFunc(int device, int subdevice, int /*count*/, void* context
 {
 	CMeContext* itself = (CMeContext *)context;
 	if (itself->IsDone()){
-		itself->m_activeTaskMutex.tryLock();
-			itself->m_activeTaskMutex.unlock();
+		itself->m_dataReadyCondition.wakeAll();
+
 		return 1;
 	}
 
@@ -290,10 +313,11 @@ int CMeContext::cbAOFunc(int device, int subdevice, int /*count*/, void* context
 	}
 
 	if (itself->IsDone()){
-		itself->m_activeTaskMutex.tryLock();
-			itself->m_activeTaskMutex.unlock();
+		itself->m_dataReadyCondition.wakeAll();
+
 		return 1;
 	}
+
 	return 0;
 }
 

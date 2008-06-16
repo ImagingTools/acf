@@ -3,6 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
+#include "istd/CRange.h"
 
 
 namespace imebase

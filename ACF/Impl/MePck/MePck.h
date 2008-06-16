@@ -5,6 +5,9 @@
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
 
+#include "CMeilhausSimpleComp.h"
+#include "CChannelAddressParamComp.h"
+
 
 
 /**
@@ -14,7 +17,8 @@ namespace MePck
 {
 
 
-//typedef iqt::CLoginGuiComp LoginGui;
+typedef imebase::CMeilhausSimpleComp MeilhausSimpleAcquisition;
+typedef icomp::TModelCompWrap<imebase::CChannelAddressParamComp> ChannelAddressParam;
 
 
 } // namespace MePck

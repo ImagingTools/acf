@@ -3,6 +3,9 @@
 
 
 #include <QMutex>
+#include <QWaitCondition>
+
+#include "isig/ISamplesContainer.h"
 
 #include "imebase.h"
 
@@ -33,6 +36,8 @@ public:
 	*/
 	int GetCount()  const;
 	bool IsDone();
+	double GetInterval() const;
+
 	/**
 		Wait for task to end. If time out return false.
 		\param	timeout	time out in seconds.
@@ -43,8 +48,8 @@ public:
 	void CopyFromContainer();
 
 protected:
-	bool ConfigInputStream(double interval);
-	bool ConfigOutputStream(double interval);
+	bool ConfigInputStream();
+	bool ConfigOutputStream();
 
 	bool StartStream();
 
@@ -54,12 +59,14 @@ protected:
 
 private:
 	QMutex m_activeTaskMutex;
+	QWaitCondition m_dataReadyCondition;
 
 	CMeAddr m_address;
 	int m_id;
 	int m_bufferCount;
 	std::vector<int> m_hwBuffer;
 	bool m_isOutput;
+	double m_interval;
 
 	isig::ISamplesContainer& m_samplesContainer;
 };

@@ -66,11 +66,11 @@ CRange CRange::GetUnion(const CRange& otherRange) const
 
 double CRange::GetNearestInRange(double value) const
 {
-	if (value < m_maxValue){
+	if (value > m_maxValue){
 		value = m_maxValue;
 	}
 
-	if (value > m_minValue){
+	if (value < m_minValue){
 		value = m_minValue;
 	}
 

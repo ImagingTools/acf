@@ -43,7 +43,10 @@ public:
 		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_paramsSetObserverCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
+		I_ASSIGN(m_minDisplayedValueAttrPtr, "MinDispValue", "Minimal displayed value", true, 0);
+		I_ASSIGN(m_maxDisplayedValueAttrPtr, "MaxDispValue", "Maximal displayed value", true, 100);
 		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
+		I_ASSIGN(m_acquisitionTimeoutAttrPtr, "AcquisitionTimeout", "Timeout of single acquisition in seconds", false, 1);
 		I_ASSIGN(m_startOnInitAttrPtr, "StartOnInit", "If it true acquisition start on initialization", true, false);
 	I_END_COMPONENT
 
@@ -77,7 +80,10 @@ private:
 	I_REF(iqt::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 
+	I_ATTR(double, m_minDisplayedValueAttrPtr);
+	I_ATTR(double, m_maxDisplayedValueAttrPtr);
 	I_ATTR(double, m_liveIntervalAttrPtr);
+	I_ATTR(double, m_acquisitionTimeoutAttrPtr);
 	I_ATTR(bool, m_startOnInitAttrPtr);
 
 	imod::TModelWrap<isig::CSamplesContainer> m_samples;

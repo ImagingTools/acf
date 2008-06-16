@@ -4,9 +4,8 @@
 #include <QList>
 #include <QVector>
 
-#include "istd\CRange.h"
-#include "isig\ISamplesContainer.h"
-#include "iproc\TIAssyncProcessor.h"
+#include "isig/isig.h"
+#include "iqt/iqt.h"
 
 #include "medriver.h"
 #include "medefines.h"
@@ -30,14 +29,6 @@ public:
 	int channel;
 };
 
-/**
-	Direction of endpont.
-*/
-enum EMeDirection
-{
-	input,
-	output
-};
 
 typedef QList<CMeAddr> CMeList;
 

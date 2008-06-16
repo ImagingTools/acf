@@ -14,9 +14,10 @@ CChannelSelectionNode::CChannelSelectionNode()
 }
 
 
-void CChannelSelectionNode::InsertNode(int physicalAddress, CChannelSelectionNode* nodePtr)
+void CChannelSelectionNode::InsertNode(const istd::CString& name, int physicalAddress, CChannelSelectionNode* nodePtr)
 {
 	SelectionInfo* newNodeInfoPtr = new SelectionInfo;
+	newNodeInfoPtr->name = name;
 	newNodeInfoPtr->selectionPtr.SetPtr(nodePtr);
 	newNodeInfoPtr->physicalIndex = physicalAddress;
 
@@ -30,10 +31,16 @@ int CChannelSelectionNode::GetActivePhysicalAddress() const
 		return NULL;
 	}
 
-	SelectionInfo* infoPtr = m_subselections[m_selectedIndex];
+	const SelectionInfo* infoPtr = m_subselections.GetAt(m_selectedIndex);
 	I_ASSERT(infoPtr != NULL);
 
-	return m_subselections[m_selectedIndex]->physicalIndex;
+	return infoPtr->physicalIndex;
+}
+
+
+void CChannelSelectionNode::ResetNodes()
+{
+	m_subselections.Reset();
 }
 
 
@@ -53,29 +60,38 @@ int CChannelSelectionNode::GetSelectedOptionIndex() const
 
 bool CChannelSelectionNode::SetSelectedOptionIndex(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetOptionsCount());
+	if ((index >= 0) && (index < GetOptionsCount())){
+		m_selectedIndex = index;
 
-	m_selectedIndex = index;
+		return true;
+	}
+
+	return false;
 }
 
 
 const istd::CString& CChannelSelectionNode::GetOptionName(int index) const
 {
-	return iqt::GetQString(QString::number(index));
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < m_subselections.GetCount());
+
+	const SelectionInfo* infoPtr = m_subselections.GetAt(index);
+	I_ASSERT(infoPtr != NULL);
+
+	return infoPtr->name;
 }
 
 
-ISelectionParam* CChannelSelectionNode::GetActiveSubselection() const
+iprm::ISelectionParam* CChannelSelectionNode::GetActiveSubselection() const
 {
 	if (m_selectedIndex >= GetOptionsCount()){
 		return NULL;
 	}
 
-	SelectionInfo* infoPtr = m_subselections[m_selectedIndex];
+	const SelectionInfo* infoPtr = m_subselections.GetAt(m_selectedIndex);
 	I_ASSERT(infoPtr != NULL);
 
-	return m_subselections[m_selectedIndex]->selectionPtr.GetPtr();
+	return infoPtr->selectionPtr.GetPtr();
 }
 
 	
@@ -127,14 +143,14 @@ bool CChannelSelectionNode::SerializeNode(iser::IArchive& archive, const iser::C
 	retVal = retVal && archive.EndTag(nodeTag);
 
 	if (m_selectedIndex >= GetOptionsCount()){
-		index = istd::Max(0, GetOptionsCount() - 1);
+		m_selectedIndex = istd::Max(0, GetOptionsCount() - 1);
 	}
 
 	if (!retVal){
 		return false;
 	}
 
-	const CChannelSelectionNode* selectionPtr = dynamic_cast<CChannelSelectionNode*>(GetActiveSubselection());
+	CChannelSelectionNode* selectionPtr = dynamic_cast<CChannelSelectionNode*>(GetActiveSubselection());
 	if (selectionPtr != NULL){
 		return selectionPtr->SerializeNode(archive, nodeTag, count - 1);
 	}

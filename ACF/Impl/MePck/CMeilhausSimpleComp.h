@@ -9,7 +9,6 @@
 #include "icomp/CComponentBase.h"
 
 #include "IMeilhausAccess.h"
-#include "CMeBase.h"
 #include "CMeContext.h"
 
 
@@ -34,6 +33,7 @@ public:
 
 		I_ASSIGN(m_isOutputAttrPtr, "IsOutput", "If true this processor operate in output mode, otherwise input mode", true, false);
 		I_ASSIGN(m_addressParamIdAttrPtr, "AddressParamId", "ID of channel address in parameter set", true, "ChannelAddress");
+		I_ASSIGN(m_samplingParamsIdAttrPtr, "SamplingParamsId", "ID of sampling parameters in parameter set", true, "SamplingParams");
 	I_END_COMPONENT
 
 	CMeilhausSimpleComp();
@@ -72,6 +72,7 @@ public:
 protected:
 	int PullNextTaskId();
 	bool GetChannelAddress(const iprm::IParamsSet* paramsPtr, CMeAddr& result) const;
+	const isig::ISamplingParams* GetSamplingParams(const iprm::IParamsSet* paramsPtr) const;
 
 	virtual WaitAllTasksFinished(double timeoutTime, bool killOnTimeout);
 	virtual WaitSingleTaskFinished(int taskId, double timeoutTime, bool killOnTimeout);
@@ -80,8 +81,7 @@ private:
 	I_ATTR(bool, m_isOutputAttrPtr);
 
 	I_ATTR(istd::CString, m_addressParamIdAttrPtr);
-
-	double m_interval;
+	I_ATTR(istd::CString, m_samplingParamsIdAttrPtr);
 
 	typedef QList<CMeContext*> CMeContextList;
 	CMeContextList m_activeTaskList;
