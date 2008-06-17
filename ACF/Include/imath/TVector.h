@@ -67,6 +67,12 @@ public:
 	void GetTranslated(const TVector<Size, Element>& vector, TVector<Size, Element>& result);
 
 	/**
+		Add second vector scaled by specified factor.
+		It is equal of Translate(vector * scale) but can be faster implemented.
+	*/
+	void ScaledCumulate(const TVector<Size, Element>& vector, Element scale);
+
+	/**
 		Check if this vector is null.
 	*/
 	bool IsNull(Element tolerance = I_BIG_EPSILON) const;
@@ -224,6 +230,15 @@ template <int Size, class Element>
 void TVector<Size, Element>::GetTranslated(const TVector<Size, Element>& vector, TVector<Size, Element>& result)
 {
 	result = *this + vector;
+}
+
+
+template <int Size, class Element>
+inline void TVector<Size, Element>::ScaledCumulate(const TVector<Size, Element>& vector, Element scale)
+{
+	for (int i = 0; i < Size; ++i){
+		m_elements[i] += vector.m_elements[i] * scale;
+	}
 }
 
 

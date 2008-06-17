@@ -2,6 +2,9 @@
 #define istd_CBinaryIndex_included
 
 
+#include "istd/CBitManip.h"
+
+
 namespace istd
 {
 
@@ -44,7 +47,16 @@ public:
 	/**
 		Constructor initializing all member to specified value.
 	*/
-	explicit CFastBinaryIndex(int size, bool value = false);
+	explicit CFastBinaryIndex(int size, int value = 0);
+
+	/**
+		Constructor initializing all internal members.
+		\param	bits	bit coded value of this index.
+						The index of higher set bit must be smaller than 'size' value.
+		\param	size	number of components of index.
+		\param	dummy	not used parameter using to distinguish between this constructor and the previous one.
+	*/
+	explicit CFastBinaryIndex(I_DWORD bits, int size, int dummy);
 
 	/**
 		Copy constructor.
@@ -171,11 +183,18 @@ inline CFastBinaryIndex::CFastBinaryIndex()
 }
 
 
-inline CFastBinaryIndex::CFastBinaryIndex(int size, bool value)
+inline CFastBinaryIndex::CFastBinaryIndex(int size, int value)
 {
 	m_size = size;
 
 	SetAllTo(value);
+}
+
+
+inline CFastBinaryIndex::CFastBinaryIndex(I_DWORD bits, int size, int /*dummy*/)
+:	m_bits(bits), m_size(size)
+{
+	I_ASSERT(CBitManip::instance.GetFirstBitIndex(bits) < size);
 }
 
 

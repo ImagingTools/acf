@@ -105,6 +105,12 @@ public:
 	void GetTranslated(const TVarVector<Element>& vector, TVarVector<Element>& result);
 
 	/**
+		Add second vector scaled by specified factor.
+		It is equal of Translate(vector * scale) but can be faster implemented.
+	*/
+	void ScaledCumulate(const TVarVector<Element>& vector, Element scale);
+
+	/**
 		Check if this vector is null.
 	*/
 	bool IsNull(Element tolerance = I_BIG_EPSILON) const;
@@ -283,6 +289,18 @@ template <class Element>
 inline void TVarVector<Element>::GetTranslated(const TVarVector<Element>& vector, TVarVector<Element>& result)
 {
 	result = *this + vector;
+}
+
+
+template <class Element>
+inline void TVarVector<Element>::ScaledCumulate(const TVarVector<Element>& vector, Element scale)
+{
+	I_ASSERT(GetElementsCount() == vector.GetElementsCount());
+
+	int elementsCount = GetElementsCount();
+	for (int i = 0; i < elementsCount; ++i){
+		m_elements[i] += vector.m_elements[i] * scale;
+	}
 }
 
 

@@ -151,7 +151,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 	I_ASSERT(index.GetDimensionsCount() == GetDimensionsCount());
 
 	if (dimension < 0){
-		result += GetFulcrumDerivativeAtIndex(index, derivativeDegree) * cumulationFactor;
+		result.ScaledCumulate(GetFulcrumDerivativeAtIndex(index, derivativeDegree), cumulationFactor);
 
 		return;
 	}
