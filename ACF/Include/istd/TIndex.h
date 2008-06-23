@@ -46,6 +46,12 @@ public:
 	bool IsValid() const;
 
 	/**
+		Check if this index point at zero element.
+		In other words, it checks if all components are 0.
+	*/
+	bool IsZero() const;
+
+	/**
 		Check if this index interpreted as size is empty.
 		It means, it returns true, is some of components is less or equal 0.
 	*/
@@ -130,6 +136,12 @@ public:
 	bool Decrease(const TIndex& boundaries);
 
 	/**
+		Get total number of elements if this index is treated as size.
+		\return	multiplication of all elements.
+	*/
+	int GetProductVolume() const;
+
+	/**
 		Get begin value of element access iterator.
 		Please refer to general description of ACF iterators, STL iterators or Qt iterators concept.
 	*/
@@ -179,6 +191,19 @@ inline bool TIndex<Dimensions>::IsValid() const
 {
 	for (int i = 0; i < Dimensions; ++i){
 		if (m_elements[i] < 0){
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+template <int Dimensions>
+inline bool TIndex<Dimensions>::IsZero() const
+{
+	for (int i = 0; i < Dimensions; ++i){
+		if (m_elements[i] > 0){
 			return false;
 		}
 	}
@@ -404,6 +429,19 @@ bool TIndex<Dimensions>::Decrease(const TIndex& boundaries)
 	}
 
 	return false;
+}
+
+
+template <int Dimensions>
+int TIndex<Dimensions>::GetProductVolume() const
+{
+	int retVal = 1;
+
+	for (int i = 0; i < Dimensions; ++i){
+		retVal *= m_elements[i];
+	}
+
+	return retVal;
 }
 
 

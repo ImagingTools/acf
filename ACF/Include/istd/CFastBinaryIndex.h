@@ -71,6 +71,12 @@ public:
 	bool IsValid() const;
 
 	/**
+		Check if this index point at zero element.
+		In other words, it checks if all components are 0.
+	*/
+	bool IsZero() const;
+
+	/**
 		Reset this object.
 		For this implementation, it does the same as clear.
 		\sa Clear()
@@ -134,6 +140,12 @@ public:
 		\return			true if bit at index was enabled and it was possible to realize increasing.
 	*/
 	bool DecreaseAt(int index);
+
+	/**
+		Get total number of elements if this index is treated as size.
+		\return	multiplication of all elements.
+	*/
+	int GetProductVolume() const;
 
 	/**
 		Check if index is inside boundaries.
@@ -209,6 +221,12 @@ inline CFastBinaryIndex::CFastBinaryIndex(const CFastBinaryIndex& index)
 inline bool CFastBinaryIndex::IsValid() const
 {
 	return true;
+}
+
+
+inline bool CFastBinaryIndex::IsZero() const
+{
+	return m_bits == 0;
 }
 
 
@@ -336,6 +354,12 @@ inline bool CFastBinaryIndex::Increase(const CFastBinaryIndex& /*boundaries*/)
 inline bool CFastBinaryIndex::Decrease(const CFastBinaryIndex& /*boundaries*/)
 {
 	return false;
+}
+
+
+inline int CFastBinaryIndex::GetProductVolume() const
+{
+	return int(m_bits + 1) >> m_size;	// it is 1 if all bits are 1
 }
 
 

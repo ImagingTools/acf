@@ -42,6 +42,12 @@ public:
 	CVarIndex(const TIndex<Dimensions> index);
 
 	/**
+		Check if this index point at zero element.
+		In other words, it checks if all components are 0.
+	*/
+	bool IsZero() const;
+
+	/**
 		Reset this object.
 		For this (variable size) implementation, it set dimension size to 0.
 	*/
@@ -121,6 +127,12 @@ public:
 		\return	false, if decrease wasn't possible (e.g. overflow).
 	*/
 	bool Decrease(const CVarIndex& boundaries);
+
+	/**
+		Get total number of elements if this index is treated as size.
+		\return	multiplication of all elements.
+	*/
+	int GetProductVolume() const;
 
 	/**
 		Get minimal number of dimensions needed to to represent this index.
@@ -215,6 +227,20 @@ inline bool CVarIndex::DecreaseAt(int index)
 	--m_elements[index];
 
 	return true;
+}
+
+
+inline int CVarIndex::GetProductVolume() const
+{
+	int retVal = 1;
+
+	int dimensionsCount = GetDimensionsCount();
+
+	for (int i = 0; i < dimensionsCount; ++i){
+		retVal *= GetAt(i);
+	}
+
+	return retVal;
 }
 
 
