@@ -138,6 +138,9 @@
 				RelativePath="..\CMessage.h">
 			</File>
 			<File
+				RelativePath="..\CMsbDWord.h">
+			</File>
+			<File
 				RelativePath="..\IApplication.h">
 			</File>
 			<File

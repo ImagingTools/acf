@@ -50,6 +50,9 @@ class TPointerVector
 public:
 	typedef typename AccessAdapter::ElementType ElementType;
 
+	TPointerVector();
+	TPointerVector(const TPointerVector&);
+
 	~TPointerVector();
 
 	/**
@@ -117,6 +120,18 @@ private:
 
 
 // inline methods
+
+template <typename Pointer, class AccessAdapter>
+inline TPointerVector<Pointer, AccessAdapter>::TPointerVector()
+{
+}
+
+
+template <typename Pointer, class AccessAdapter>
+inline TPointerVector<Pointer, AccessAdapter>::TPointerVector(const TPointerVector& otherVector)
+{
+	I_ASSERT(otherVector.IsEmpty());
+}
 
 
 template <typename Pointer, class AccessAdapter>
