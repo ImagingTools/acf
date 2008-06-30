@@ -145,8 +145,8 @@ protected slots:
 	void OnTile(); 
 
 private:
-	QMenuBar* m_menuBar;
-	QToolBar* m_standardToolBar;
+	istd::TDelPtr<QMenuBar> m_menuBarPtr;
+	istd::TDelPtr<QToolBar> m_standardToolBarPtr;
 
 	iqt::CHierarchicalCommand m_fileCommand;
 	iqt::CHierarchicalCommand m_editCommand;

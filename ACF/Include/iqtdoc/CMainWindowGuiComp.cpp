@@ -34,8 +34,8 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_redoCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
 	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF)
 {
-	m_menuBar = NULL;
-	m_standardToolBar = NULL;
+	m_menuBarPtr = NULL;
+	m_standardToolBarPtr = NULL;
 
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
@@ -312,48 +312,6 @@ int CMainWindowGuiComp::CreateToolbar(const iqt::CHierarchicalCommand& command, 
 }
 
 
-void CMainWindowGuiComp::SetupMainWindow(QMainWindow& mainWindow)
-{
-	if (m_iconSizeAttrPtr.IsValid() && m_iconSizeAttrPtr->GetValue() != 0){
-		mainWindow.setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
-	}
-
-	m_menuBar = new QMenuBar(&mainWindow);
-	m_menuBar->setGeometry(QRect(0, 0, 625, 45));
-
-	m_standardToolBar = new QToolBar(&mainWindow);
-	m_standardToolBar->setWindowTitle(tr("Standard"));
-
-	if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
-		m_standardToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-	}
-
-	if (m_workspaceCompPtr.IsValid()){
-		m_workspaceCompPtr->CreateGui(NULL);
-		QWidget* workspacePtr = m_workspaceCompPtr->GetWidget();
-		if (workspacePtr != NULL){
-			mainWindow.setCentralWidget(workspacePtr);
-		}
-	}
-
-	SetupMainWindowComponents(mainWindow);
-
-	OnRetranslate();
-
-	UpdateMenuActions();
-	UpdateUndoMenu();
-
-	// TODO: Get desktop resolution and calculate the right initial size of the main window.
-	QSize size(800, 600);
-	size = size.expandedTo(mainWindow.minimumSizeHint());
-	mainWindow.resize(size);
-
-	mainWindow.setAcceptDrops(true);
-
-	mainWindow.installEventFilter(this);
-}
-
-
 void CMainWindowGuiComp::SetupNewCommand()
 {
 	if (!m_documentManagerCompPtr.IsValid()){
@@ -409,10 +367,10 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 		}
 	}
 
-	mainWindow.setMenuBar(m_menuBar);
+	mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
 
 	if (HasDocumentTemplate()){
-		mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBar);
+		mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBarPtr.GetPtr());
 	}
 }
 
@@ -488,7 +446,7 @@ void CMainWindowGuiComp::UpdateMenuActions()
 	m_saveCommand.SetEnabled(isDocumentActive);
 	m_saveAsCommand.SetEnabled(isDocumentActive);
 
-	if (m_menuBar == NULL){
+	if (m_menuBarPtr == NULL){
 		return;
 	}
 	m_menuCommands.ResetChilds();
@@ -524,11 +482,11 @@ void CMainWindowGuiComp::UpdateMenuActions()
 		}
 	}
 
-	m_menuBar->clear();
-	CreateMenu(m_menuCommands, *m_menuBar);
+	m_menuBarPtr->clear();
+	CreateMenu(m_menuCommands, *m_menuBarPtr);
 
-	m_standardToolBar->clear();
-	CreateToolbar(m_menuCommands, *m_standardToolBar);
+	m_standardToolBarPtr->clear();
+	CreateToolbar(m_menuCommands, *m_standardToolBarPtr);
 }
 
 
@@ -615,12 +573,50 @@ void CMainWindowGuiComp::CreateRecentMenu()
 
 void CMainWindowGuiComp::OnGuiCreated()
 {
+	BaseClass::OnGuiCreated();
+
 	QMainWindow* mainWindowPtr = GetQtWidget();
 	if (mainWindowPtr == NULL){
 		return;
 	}
 
-	SetupMainWindow(*mainWindowPtr);
+	if (m_iconSizeAttrPtr.IsValid() && m_iconSizeAttrPtr->GetValue() != 0){
+		mainWindowPtr->setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
+	}
+
+	m_menuBarPtr.SetPtr(new QMenuBar(mainWindowPtr));
+	m_menuBarPtr->setGeometry(QRect(0, 0, 625, 45));
+
+	m_standardToolBarPtr.SetPtr(new QToolBar(mainWindowPtr));
+	m_standardToolBarPtr->setWindowTitle(tr("Standard"));
+
+	if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
+		m_standardToolBarPtr->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+	}
+
+	if (m_workspaceCompPtr.IsValid()){
+		m_workspaceCompPtr->CreateGui(NULL);
+		QWidget* workspacePtr = m_workspaceCompPtr->GetWidget();
+		if (workspacePtr != NULL){
+			mainWindowPtr->setCentralWidget(workspacePtr);
+		}
+	}
+
+	SetupMainWindowComponents(*mainWindowPtr);
+
+	OnRetranslate();
+
+	UpdateMenuActions();
+	UpdateUndoMenu();
+
+	// TODO: Get desktop resolution and calculate the right initial size of the main window.
+	QSize size(800, 600);
+	size = size.expandedTo(mainWindowPtr->minimumSizeHint());
+	mainWindowPtr->resize(size);
+
+	mainWindowPtr->setAcceptDrops(true);
+
+	mainWindowPtr->installEventFilter(this);
 }
 
 
@@ -639,6 +635,11 @@ void CMainWindowGuiComp::OnGuiDestroyed()
 			}
 		}
 	}
+
+	m_menuBarPtr.Reset();
+	m_standardToolBarPtr.Reset();
+
+	BaseClass::OnGuiDestroyed();
 }
 
 
@@ -883,12 +884,12 @@ void CMainWindowGuiComp::OnFullScreen()
 
 	if (parentWidgetPtr->isFullScreen()){
 		parentWidgetPtr->showMaximized();
-		m_standardToolBar->show();
+		m_standardToolBarPtr->show();
 		mainWidgetPtr->statusBar()->show();
 	}
 	else{
 		mainWidgetPtr->statusBar()->hide();
-		m_standardToolBar->hide();
+		m_standardToolBarPtr->hide();
 		parentWidgetPtr->showFullScreen();
 	}
 }
