@@ -10,7 +10,7 @@
 	\defgroup Barcode Barcode Recognition
 	\ingroup ACF
 
-	Contains class for barcode recognition
+	Contains classes for barcode recognition
 	This package use following ACF packages:
 	\li istd
 	\li iser
