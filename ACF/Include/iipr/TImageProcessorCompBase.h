@@ -89,7 +89,9 @@ int TImageProcessorCompBase<ParameterType>::DoSyncProcess(
 	outputPtr->CopyImageFrom(*inputPtr);
 
 	// do image processing:
-	ProcessImage(*processorParamsPtr, *inputPtr, *outputPtr);
+	if (!ProcessImage(*processorParamsPtr, *inputPtr, *outputPtr)){
+		return BaseClass2::TS_INVALID;
+	}
 	
 	return BaseClass2::TS_OK;
 }

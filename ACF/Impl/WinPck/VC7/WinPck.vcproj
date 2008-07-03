@@ -4,8 +4,8 @@
 	Version="7.10"
 	Name="WinPck"
 	ProjectGUID="{27AD0792-A6CC-4AA2-BFF6-F547E69E9C23}"
-	SccProjectName="&quot;$/develop/modules/iwin&quot;, XRAAAAAA"
-	SccLocalPath="..\iwin">
+	RootNamespace="WinPck"
+	Keyword="Qt4VSv1.0">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
