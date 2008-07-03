@@ -24,6 +24,11 @@ public:
 		I_ASSIGN(m_logGuiCompPtr, "Log", "Log GUI", true, "LogGui")
 	I_END_COMPONENT
 
+	enum MessageId
+	{
+		MI_TEST_MESSAGE = 0x32320a0
+	};
+
 protected slots:
 	 void OnTimer();
 

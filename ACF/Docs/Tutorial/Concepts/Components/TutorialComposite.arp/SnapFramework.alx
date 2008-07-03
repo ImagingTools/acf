@@ -4,13 +4,13 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="27">
+  <PositionMap count="29">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        -237
+        -437
       </X>
       <X>
         -237
@@ -21,10 +21,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        -237
+        -437
       </X>
       <X>
-        -87
+        -112
       </X>
     </Element>
     <Element>
@@ -146,6 +146,17 @@
       </X>
       <X>
         12
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Log
+      </ComponentName>
+      <X>
+        -150
+      </X>
+      <X>
+        -112
       </X>
     </Element>
     <Element>
@@ -278,6 +289,17 @@
       </X>
       <X>
         212
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Tabs
+      </ComponentName>
+      <X>
+        -150
+      </X>
+      <X>
+        -237
       </X>
     </Element>
     <Element>

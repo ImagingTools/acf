@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="9">
     <Element>
       <Id>
         Application
@@ -54,7 +54,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapGui
+                Tabs
               </Value>
             </Data>
           </AttributeInfo>
@@ -276,6 +276,24 @@
     </Element>
     <Element>
       <Id>
+        Log
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        Log
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         SnapGui
       </Id>
       <PackageId>
@@ -413,8 +431,74 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        Tabs
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        TabContainer
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              SlaveWidgets
+            </Id>
+            <Type>
+              class icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  SnapGui
+                </Value>
+                <Value>
+                  Log
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TabTitles
+            </Id>
+            <Type>
+              class icomp::TMultiAttribute&lt;class istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  Snap
+                </Value>
+                <Value>
+                  Log
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         class ibase::IApplication
@@ -429,6 +513,30 @@
       </InterfaceId>
       <ComponentId>
         ApplicationInfo
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class ibase::IMessageConsumer
+      </InterfaceId>
+      <ComponentId>
+        Log
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class ibase::IMessageContainer
+      </InterfaceId>
+      <ComponentId>
+        Log
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class iqt::IGuiObject
+      </InterfaceId>
+      <ComponentId>
+        Log
       </ComponentId>
     </Interface>
     <Interface>

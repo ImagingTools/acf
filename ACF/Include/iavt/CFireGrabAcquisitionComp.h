@@ -30,7 +30,7 @@ class CFireGrabAcquisitionComp:
 			virtual public iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CFireGrabAcquisitionComp)
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)

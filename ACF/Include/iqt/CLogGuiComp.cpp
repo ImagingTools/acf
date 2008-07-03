@@ -12,12 +12,14 @@ namespace iqt
 // public methods
 
 CLogGuiComp::CLogGuiComp()
-	:m_logObserver(*this)
 {
 	m_categoryNameMap[0] = tr("Info");
 	m_categoryNameMap[1] = tr("Warning");
 	m_categoryNameMap[2] = tr("Error");
 	m_categoryNameMap[3] = tr("Critical");
+
+	connect(this, SIGNAL(EmitAddMessage(ibase::IMessage*)), this, SLOT(OnAddMessage(ibase::IMessage*)), Qt::QueuedConnection);
+	connect(this, SIGNAL(EmitRemoveMessage(ibase::IMessage*)), this, SLOT(OnRemoveMessage(ibase::IMessage*)), Qt::QueuedConnection);
 }
 
 
@@ -29,12 +31,6 @@ void CLogGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	connect(this, SIGNAL(EmitAddMessage(ibase::IMessage*)), this, SLOT(OnAddMessage(ibase::IMessage*)), Qt::QueuedConnection);
-	connect(this, SIGNAL(EmitRemoveMessage(ibase::IMessage*)), this, SLOT(OnRemoveMessage(ibase::IMessage*)), Qt::QueuedConnection);
-	connect(ClearButton, SIGNAL(clicked()), this, SLOT(OnClear()));
-	connect(ExportButton, SIGNAL(clicked()), this, SLOT(OnExport()));
-	connect(CategorySlider, SIGNAL(valueChanged(int)), this, SLOT(OnCategoryChanged(int)));
-
 	LogView->header()->setResizeMode(QHeaderView::Stretch);
 
 	ExportButton->setVisible(m_fileLoaderCompPtr.IsValid());
@@ -42,8 +38,38 @@ void CLogGuiComp::OnGuiCreated()
 	if (m_maxMessageCountAttrPtr.IsValid()){
 		SetMaxMessageCount(m_maxMessageCountAttrPtr->GetValue());
 	}
+}
 
-	AttachObserver(&m_logObserver);
+
+// reimplemented (istd::IChangeable)
+
+void CLogGuiComp::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+{
+	if (changeFlags & ibase::IMessageContainer::Reset){
+		LogView->clear();
+	}
+
+	if (changeFlags & ibase::IMessageContainer::MessageRemoved){
+		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
+		if (messagePtr != NULL){
+			emit EmitRemoveMessage(messagePtr);
+		}
+	}
+
+	BaseClass2::OnBeginChanges(changeFlags, changeParamsPtr);	
+}
+
+
+void CLogGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+{
+	if (changeFlags & ibase::IMessageContainer::MessageAdded){
+		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
+		if (messagePtr != NULL){
+			emit EmitAddMessage(messagePtr);
+		}
+	}
+
+	BaseClass2::OnEndChanges(changeFlags, changeParamsPtr);
 }
 
 
@@ -94,13 +120,13 @@ void CLogGuiComp::OnRemoveMessage(ibase::IMessage* messagePtr)
 }
 
 
-void CLogGuiComp::OnClear()
+void CLogGuiComp::on_ClearButton_clicked()
 {
 	ClearMessages();
 }
 
 
-void CLogGuiComp::OnExport()
+void CLogGuiComp::on_ExportButton_clicked()
 {
 	if (m_fileLoaderCompPtr.IsValid()){
 		m_fileLoaderCompPtr->SaveToFile(*this, istd::CString());
@@ -108,7 +134,7 @@ void CLogGuiComp::OnExport()
 }
 
 
-void CLogGuiComp::OnCategoryChanged(int category)
+void CLogGuiComp::on_CategorySlider_valueChanged(int category)
 {
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
 		CMessageItem* messageItemPtr = dynamic_cast<CMessageItem*>(LogView->topLevelItem(itemIndex));
@@ -162,49 +188,6 @@ bool CLogGuiComp::NeedToBeHidden(const ibase::IMessage& message) const
 	}
 
 	return false;
-}
-
-
-
-// public methods of embedded class LogObserver
-	
-CLogGuiComp::LogObserver::LogObserver(CLogGuiComp& parent)
-	:m_parent(parent)
-{
-}
-
-
-// protected methods of embedded class LogObserver
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CLogGuiComp::LogObserver::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	if (updateFlags & ibase::IMessageContainer::Reset){
-		m_parent.LogView->clear();
-	}
-
-	if (updateFlags & ibase::IMessageContainer::MessageRemoved){
-		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(updateParamsPtr);
-		if (messagePtr != NULL){
-			emit m_parent.EmitRemoveMessage(messagePtr);
-		}
-	}
-
-	BaseClass::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);	
-}
-
-
-void CLogGuiComp::LogObserver::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	if (updateFlags & ibase::IMessageContainer::MessageAdded){
-		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(updateParamsPtr);
-		if (messagePtr != NULL){
-			emit m_parent.EmitAddMessage(messagePtr);
-		}
-	}
-
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 

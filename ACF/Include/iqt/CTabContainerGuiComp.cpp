@@ -41,20 +41,16 @@ void CTabContainerGuiComp::OnGuiCreated()
 	}
 
 	if (m_tabNamesAttrPtr.IsValid()){
-		int tabCount = m_tabNamesAttrPtr.GetCount();
+		int tabCount = istd::Min(m_tabNamesAttrPtr.GetCount(), m_slaveWidgetsCompPtr.GetCount());
 		for (int tabIndex = 0; tabIndex < tabCount; tabIndex++){
 			QString tabName = iqt::GetQString(m_tabNamesAttrPtr[tabIndex]);
 
-			QWidget* tab = new QWidget(widgetPtr);
-			int addTabIndex = widgetPtr->addTab(tab, tabName);
-
-			bool isAttached = false;
-			if (tabIndex < m_slaveWidgetsCompPtr.GetCount()){
-				iqt::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[tabIndex];
-				if (guiPtr != NULL){
-					isAttached = guiPtr->CreateGui(tab);
-				}
+			iqt::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[tabIndex];
+			if ((guiPtr == NULL) || !guiPtr->CreateGui(widgetPtr)){
+				continue;
 			}
+
+			int addTabIndex = widgetPtr->addTab(guiPtr->GetWidget(), tabName);
 
 			if (m_iconsProviderCompPtr.IsValid()){
 				int iconCount = m_iconsProviderCompPtr->GetIconCount();			
@@ -63,10 +59,6 @@ void CTabContainerGuiComp::OnGuiCreated()
 
 					widgetPtr->setTabIcon(addTabIndex, icon);
 				}
-			}
-
-			if (!isAttached){
-				widgetPtr->setTabEnabled(addTabIndex, false);
 			}
 		}
 	}
@@ -81,3 +73,5 @@ void CTabContainerGuiComp::OnGuiCreated()
 
 
 } // namespace iqt
+
+

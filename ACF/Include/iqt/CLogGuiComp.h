@@ -23,13 +23,14 @@ namespace iqt
 
 
 class CLogGuiComp:
-	public iqt::TDesignerGuiCompBase<Ui::CLogGuiComp>, 
-	public imod::TModelWrap<ibase::CMessageContainer>
+			public iqt::TDesignerGuiCompBase<Ui::CLogGuiComp>, 
+			public ibase::CMessageContainer
 {
 	Q_OBJECT
 
 public:
 	typedef iqt::TDesignerGuiCompBase<Ui::CLogGuiComp> BaseClass;
+	typedef ibase::CMessageContainer BaseClass2;
 
 	I_BEGIN_COMPONENT(CLogGuiComp)
 		I_REGISTER_INTERFACE(ibase::IMessageConsumer)
@@ -49,15 +50,19 @@ public:
 	CLogGuiComp();
 
 protected:
-	// reimplemented (CGuiComponentBase)
+	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	
+	// reimplemented (istd::IChangeable)
+	virtual void OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
+
 protected slots:
 	void OnAddMessage(ibase::IMessage* messagePtr);
 	void OnRemoveMessage(ibase::IMessage* messagePtr);
-	void OnClear();
-	void OnExport();
-	void OnCategoryChanged(int category);
+	void on_ClearButton_clicked();
+	void on_ExportButton_clicked();
+	void on_CategorySlider_valueChanged(int category);
 
 private:
 	QColor GetMessageColor(const ibase::IMessage& message) const;
@@ -76,26 +81,6 @@ private:
 	public:
 		ibase::IMessage* messagePtr;
 	};
-
-	class LogObserver: public imod::TSingleModelObserverBase<ibase::IMessageContainer>
-	{
-	public:
-		typedef imod::TSingleModelObserverBase<ibase::IMessageContainer> BaseClass2;
-
-		LogObserver(CLogGuiComp& parent);
-
-	protected:
-		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
-		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
-
-	private:
-		CLogGuiComp& m_parent;
-	};
-	friend class LogObserver;
-
-
-	LogObserver m_logObserver;
 
 	typedef QMap<int, QString> CategoryNameMap;
 
