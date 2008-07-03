@@ -97,78 +97,6 @@
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
-		<Configuration
-			Name="NemoDebug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR_OLD)/Include&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;$(InputDir)\Generated"
-				PreprocessorDefinitions="OLD_ACF_SUPPORT;UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
-				DebugInformationFormat="3"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="NemoRelease|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4">
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ACFDIR_OLD)/Include&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;$(InputDir)\Generated"
-				PreprocessorDefinitions="OLD_ACF_SUPPORT;UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				RuntimeLibrary="2"
-				RuntimeTypeInfo="TRUE"
-				DebugInformationFormat="0"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -209,26 +137,6 @@
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing CImageViewComp.h..."
 						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CImageViewComp.h&quot; -o &quot;$(InputDir)\Generated\moc_CImageViewComp.cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CImageViewComp.h"
-						Outputs="&quot;$(InputDir)\Generated\moc_CImageViewComp.cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing CImageViewComp.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(ACFDIR)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CImageViewComp.h&quot; -o &quot;$(InputDir)\Generated\moc_CImageViewComp.cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CImageViewComp.h"
-						Outputs="&quot;$(InputDir)\Generated\moc_CImageViewComp.cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing CImageViewComp.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;$(ACFDIR_OLD)\Include&quot; -I&quot;$(ACFDIR)\Include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CImageViewComp.h&quot; -o &quot;$(InputDir)\Generated\moc_CImageViewComp.cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;..\CImageViewComp.h"
 						Outputs="&quot;$(InputDir)\Generated\moc_CImageViewComp.cpp&quot;"/>

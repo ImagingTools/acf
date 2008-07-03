@@ -96,78 +96,6 @@
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
-		<Configuration
-			Name="NemoDebug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR_OLD)/include&quot;;&quot;$(QTDIR)\include&quot;;$(InputDir)\Generated;$(InputDir)\Generated\Debug;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
-				PreprocessorDefinitions="OLD_ACF_SUPPORT;UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
-				DebugInformationFormat="3"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="NemoRelease|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4">
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../../Include;&quot;$(ACFDIR_OLD)/include&quot;;&quot;$(QTDIR)\include&quot;;$(InputDir)\Generated;$(InputDir)\Generated\Release;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
-				PreprocessorDefinitions="OLD_ACF_SUPPORT;UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				RuntimeLibrary="2"
-				RuntimeTypeInfo="TRUE"
-				DebugInformationFormat="0"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLibrarianTool"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -212,26 +140,6 @@
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CExtendedDocumentTemplateComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CExtendedDocumentTemplateComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CMainWindowGuiComp.h">
@@ -255,26 +163,6 @@
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMainWindowGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMainWindowGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.h">
@@ -294,26 +182,6 @@
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
 						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Debug&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DOLD_ACF_SUPPORT -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..\..\Include&quot; -I&quot;$(ACFDIR_OLD)\include&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(InputDir)\Generated&quot; -I&quot;$(InputDir)\Generated\Release&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtOpenGL&quot; -I&quot;$(QTDIR)\include\QtNetwork&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;$(QTDIR)\include\QtAssistant&quot; -I&quot;$(QTDIR)\include\QtSvg&quot; &quot;..\CMultiDocumentWorkspaceGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
 "
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
@@ -345,26 +213,6 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Rcc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;Resources/Icons/add_128.png;Resources/Icons/administrator_128.png;Resources/Icons/attach_128.png;Resources/Icons/back_128.png;Resources/Icons/book_128.png;Resources/Icons/calculator_128.png;Resources/Icons/calendar_128.png;Resources/Icons/camera_128.png;Resources/Icons/cancel_128.png;Resources/Icons/chat_128.png;Resources/Icons/clock_128.png;Resources/Icons/close_a_128.png;Resources/Icons/close_b_128.png;Resources/Icons/copy_128.png;Resources/Icons/delete_128.png;Resources/Icons/diskette_128.png;Resources/Icons/document_128.png;Resources/Icons/door_128.png;Resources/Icons/exit.png;Resources/Icons/fast_forward_128.png;Resources/Icons/first_128.png;Resources/Icons/folder_128.png;Resources/Icons/group_128.png;Resources/Icons/hand_128.png;Resources/Icons/home_128.png;Resources/Icons/info_128.png;Resources/Icons/lamp_128.png;Resources/Icons/last_128.png;Resources/Icons/mail_write_128.png;Resources/Icons/mailbox_search_128.png;Resources/Icons/mailbox_write_128.png;Resources/Icons/mailbox_zoom_128.png;Resources/Icons/next_128.png;Resources/Icons/ok_128.png;Resources/Icons/paste_128.png;Resources/Icons/pause_128.png;Resources/Icons/pen_128.png;Resources/Icons/play_128.png;Resources/Icons/preview_128.png;Resources/Icons/printer_128.png;Resources/Icons/sandglass_128.png;Resources/Icons/scissors_128.png;Resources/Icons/star_128.png;Resources/Icons/statistic_128.png;Resources/Icons/trash_128.png;Resources/Icons/up_128.png;Resources/Icons/user_128.png;Resources/Icons/window_128.png;Resources/Icons/wizard_128.png;Resources/Icons/world_128.png;Resources/Icons/write_128.png;Resources/Icons/zoom_128.png"
-						Outputs="&quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoDebug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Rcc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\rcc.exe  -name &quot;$(InputName)&quot; -o &quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot; &quot;$(InputPath)&quot;
-"
-						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;Resources/Icons/add_128.png;Resources/Icons/administrator_128.png;Resources/Icons/attach_128.png;Resources/Icons/back_128.png;Resources/Icons/book_128.png;Resources/Icons/calculator_128.png;Resources/Icons/calendar_128.png;Resources/Icons/camera_128.png;Resources/Icons/cancel_128.png;Resources/Icons/chat_128.png;Resources/Icons/clock_128.png;Resources/Icons/close_a_128.png;Resources/Icons/close_b_128.png;Resources/Icons/copy_128.png;Resources/Icons/delete_128.png;Resources/Icons/diskette_128.png;Resources/Icons/document_128.png;Resources/Icons/door_128.png;Resources/Icons/exit.png;Resources/Icons/fast_forward_128.png;Resources/Icons/first_128.png;Resources/Icons/folder_128.png;Resources/Icons/group_128.png;Resources/Icons/hand_128.png;Resources/Icons/home_128.png;Resources/Icons/info_128.png;Resources/Icons/lamp_128.png;Resources/Icons/last_128.png;Resources/Icons/mail_write_128.png;Resources/Icons/mailbox_search_128.png;Resources/Icons/mailbox_write_128.png;Resources/Icons/mailbox_zoom_128.png;Resources/Icons/next_128.png;Resources/Icons/ok_128.png;Resources/Icons/paste_128.png;Resources/Icons/pause_128.png;Resources/Icons/pen_128.png;Resources/Icons/play_128.png;Resources/Icons/preview_128.png;Resources/Icons/printer_128.png;Resources/Icons/sandglass_128.png;Resources/Icons/scissors_128.png;Resources/Icons/star_128.png;Resources/Icons/statistic_128.png;Resources/Icons/trash_128.png;Resources/Icons/up_128.png;Resources/Icons/user_128.png;Resources/Icons/window_128.png;Resources/Icons/wizard_128.png;Resources/Icons/world_128.png;Resources/Icons/write_128.png;Resources/Icons/zoom_128.png"
-						Outputs="&quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="NemoRelease|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputPath)..."
