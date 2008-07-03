@@ -89,7 +89,7 @@ int CFireGrabAcquisitionComp::DoSyncProcess(const iprm::IParamsSet* paramsPtr, c
 					I_ASSERT(outputPtr->GetLineBytesCount() >= size.GetX());
 
 					for (int y = 0; y < size.GetY(); ++y){
-						memcpy(outputPtr->GetLinePtr(y), frameInfo.pData + y * size.GetX(), size.GetY());
+						memcpy(outputPtr->GetLinePtr(y), frameInfo.pData + y * size.GetX(), size.GetX());
 					}
 
 					retVal = TS_OK;
