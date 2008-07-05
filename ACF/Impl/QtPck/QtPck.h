@@ -46,7 +46,7 @@ typedef iqt::CPackagesLoaderComp PackagesLoader;
 typedef iqt::CLoginGuiComp LoginGui;
 typedef iqt::CApplicationComp GuiApplication;
 typedef iqt::CSplashScreenGuiComp SplashScreen;
-typedef iqt::CLogGuiComp Log;
+typedef icomp::TModelCompWrap<iqt::CLogGuiComp> Log;
 typedef iqt::CIconProviderComp IconProvider;
 typedef iqt::CFileDialogSerializerComp FileDialogSerializer;
 typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
