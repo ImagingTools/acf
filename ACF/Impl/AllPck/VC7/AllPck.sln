@@ -231,10 +231,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iqtcam", "..\..\..\Include\
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ibar", "..\..\..\Include\ibar\VC7\ibar.vcproj", "{2E762C87-D5D5-4B48-86D6-7340D3E15780}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iipr", "..\..\..\Include\iipr\VC7\iipr.vcproj", "{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -421,10 +417,6 @@ Global
 		{9F866425-169A-409F-9D11-B0B478B6C256}.Debug.Build.0 = Debug|Win32
 		{9F866425-169A-409F-9D11-B0B478B6C256}.Release.ActiveCfg = Release|Win32
 		{9F866425-169A-409F-9D11-B0B478B6C256}.Release.Build.0 = Release|Win32
-		{2E762C87-D5D5-4B48-86D6-7340D3E15780}.Debug.ActiveCfg = Debug|Win32
-		{2E762C87-D5D5-4B48-86D6-7340D3E15780}.Debug.Build.0 = Debug|Win32
-		{2E762C87-D5D5-4B48-86D6-7340D3E15780}.Release.ActiveCfg = Release|Win32
-		{2E762C87-D5D5-4B48-86D6-7340D3E15780}.Release.Build.0 = Release|Win32
 		{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}.Debug.ActiveCfg = Debug|Win32
 		{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}.Debug.Build.0 = Debug|Win32
 		{BA5F16D2-D1F0-45C4-B54E-7CE894550C21}.Release.ActiveCfg = Release|Win32
