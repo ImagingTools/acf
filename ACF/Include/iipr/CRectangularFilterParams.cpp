@@ -10,9 +10,15 @@ namespace iipr
 
 
 CRectangularFilterParams::CRectangularFilterParams()
-	:m_iterationsCount(1),
+:	m_iterationsCount(1),
 	m_filterSize(3, 3)
 {
+}
+
+
+const ibase::CSize& CRectangularFilterParams::GetSize() const
+{
+	return m_filterSize;
 }
 
 
@@ -25,9 +31,9 @@ void CRectangularFilterParams::SetSize(const ibase::CSize& filterSize)
 }
 
 
-const ibase::CSize& CRectangularFilterParams::GetSize() const
+int CRectangularFilterParams::GetIterationsCount() const
 {
-	return m_filterSize;
+	return m_iterationsCount;
 }
 
 
@@ -39,17 +45,11 @@ void CRectangularFilterParams::SetIterationsCount(int iterationsCount)
 }
 
 
-int CRectangularFilterParams::GetIterationsCount() const
-{
-	return m_iterationsCount;
-}
-
-
 // reimplemented (iser::ISerializable)
 
 bool CRectangularFilterParams::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag sizeTag("Width", "Width");
+	static iser::CArchiveTag sizeTag("Size", "Size");
 	bool retVal = archive.BeginTag(sizeTag);
 	retVal = retVal && m_filterSize.Serialize(archive);
 	retVal = retVal && archive.EndTag(sizeTag);

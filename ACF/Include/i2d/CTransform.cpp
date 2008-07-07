@@ -16,7 +16,7 @@ CTransform::CTransform()
 }
 
 
-CTransform::CTransform(const imath::CVector2d& translation, const imath::CVector2d& scale, double angle)
+CTransform::CTransform(const CVector2d& translation, const CVector2d& scale, double angle)
 {
 	angle = I_PI / 180 * angle;
 	double sina = sin(angle);
@@ -31,12 +31,12 @@ CTransform::CTransform(const imath::CVector2d& translation, const imath::CVector
 }
 
 
-imath::CVector2d CTransform::ApplyTo(const imath::CVector2d& point) const
+CVector2d CTransform::ApplyTo(const CVector2d& point) const
 {
 	double x = m_m11 * point.GetX() + m_m21 * point.GetY() + m_dx;
 	double y = m_m22 * point.GetY() + m_m12 * point.GetX() + m_dy;
 	
-	return imath::CVector2d(x, y);
+	return CVector2d(x, y);
 }
 
 
@@ -60,7 +60,7 @@ CTransform& CTransform::Rotate(double angle)
 }
 
 
-CTransform& CTransform::Scale(const imath::CVector2d& scale)
+CTransform& CTransform::Scale(const CVector2d& scale)
 {	
 	return this->Scale(scale.GetX(), scale.GetY());
 }
@@ -77,7 +77,7 @@ CTransform& CTransform::Scale(double sx, double sy)
 }
 
 
-CTransform& CTransform::Translate(const imath::CVector2d& translation)
+CTransform& CTransform::Translate(const CVector2d& translation)
 {
 	return Translate(translation.GetX(), translation.GetY());
 }
@@ -101,7 +101,7 @@ CTransform CTransform::GetRotated(double angle) const
 }
 
 
-CTransform CTransform::GetScaled(const imath::CVector2d& scale) const
+CTransform CTransform::GetScaled(const CVector2d& scale) const
 {
 	return GetScaled(scale.GetX(), scale.GetY());
 }
@@ -115,7 +115,7 @@ CTransform CTransform::GetScaled(double sx, double sy) const
 }
 
 
-CTransform CTransform::GetTranslated(const imath::CVector2d& translation) const
+CTransform CTransform::GetTranslated(const CVector2d& translation) const
 {
 	return GetTranslated(translation.GetX(), translation.GetY());
 }

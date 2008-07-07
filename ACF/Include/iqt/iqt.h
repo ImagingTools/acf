@@ -10,7 +10,7 @@
 #include "istd/CString.h"
 #include "istd/CIndex2d.h"
 
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 
 /**
@@ -39,8 +39,8 @@ extern QSize GetQSize(const istd::CIndex2d& size);
 extern istd::CIndex2d GetCIndex2d(const QSize& size);
 extern QPoint GetQPoint(const istd::CIndex2d& position);
 extern istd::CIndex2d GetCIndex2d(const QPoint& position);
-extern QPointF GetQPointF(const imath::CVector2d& position);
-extern imath::CVector2d GetCVector2d(const QPointF& position);
+extern QPointF GetQPointF(const i2d::CVector2d& position);
+extern i2d::CVector2d GetCVector2d(const QPointF& position);
 
 
 } // namespace iqt

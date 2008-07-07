@@ -29,7 +29,7 @@ bool CRegistryModelComp::SerializeComponentsLayout(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(elementTag);
 			
 			std::string componentRole;
-			imath::CVector2d position;
+			i2d::CVector2d position;
 
 			retVal = retVal && SerializeComponentPosition(archive, componentRole, position);
 				
@@ -50,7 +50,7 @@ bool CRegistryModelComp::SerializeComponentsLayout(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(elementTag);
 			
 			std::string componentRole = index->first;
-			imath::CVector2d position = index->second;
+			i2d::CVector2d position = index->second;
 
 			retVal = retVal && SerializeComponentPosition(archive, componentRole, position);
 
@@ -119,19 +119,19 @@ int CRegistryModelComp::CheckAttributeConsistency(const icomp::IRegistryElement&
 
 // reimplemented (icomp::IRegistryGeometryProvider)
 
-imath::CVector2d CRegistryModelComp::GetComponentPosition(const std::string& componentRole) const
+i2d::CVector2d CRegistryModelComp::GetComponentPosition(const std::string& componentRole) const
 {
 	ElementsPositionMap::const_iterator elementIter = m_elementsPositionMap.find(componentRole);
 	if (elementIter != m_elementsPositionMap.end()){
 		return elementIter->second;
 	}
 	else{
-		return imath::CVector2d(0, 0);
+		return i2d::CVector2d(0, 0);
 	}
 }
 
 
-void CRegistryModelComp::SetComponentPosition(const std::string& componentRole, const imath::CVector2d& position)
+void CRegistryModelComp::SetComponentPosition(const std::string& componentRole, const i2d::CVector2d& position)
 {
 	if (position != GetComponentPosition(componentRole)){
 		istd::CChangeNotifier changePtr(this, CF_POSITION);
@@ -190,7 +190,7 @@ void CRegistryModelComp::OnComponentCreated()
 
 // protected methods
 
-bool CRegistryModelComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, imath::CVector2d& position)
+bool CRegistryModelComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, i2d::CVector2d& position)
 {
 	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
 	static iser::CArchiveTag positionXTag("X", "X position of component");

@@ -52,7 +52,7 @@ public:
 
 	CRegistryViewComp();
 
-	bool TryCreateComponent(const icomp::CComponentAddress& address, const imath::CVector2d& position);
+	bool TryCreateComponent(const icomp::CComponentAddress& address, const i2d::CVector2d& position);
 	double GetGrid() const;
 
 	// reimplemented (idoc::ICommandsProvider)

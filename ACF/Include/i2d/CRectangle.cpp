@@ -1,6 +1,6 @@
 #include "i2d/CRectangle.h"
 
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -32,7 +32,7 @@ CRectangle::CRectangle(const CRectangle& ref)
 }
 
 
-CRectangle::CRectangle(const CPoint& topLeft, const CPoint& bottomRight)
+CRectangle::CRectangle(const CVector2d& topLeft, const CVector2d& bottomRight)
 {
 	m_horizontalRange.SetMinValue(topLeft.GetX());
 	m_horizontalRange.SetMaxValue(bottomRight.GetX());
@@ -51,7 +51,7 @@ const CRectangle& CRectangle::operator = (const CRectangle& ref)
 }
 
 
-bool CRectangle::Contains(const CPoint& point) const
+bool CRectangle::Contains(const CVector2d& point) const
 {
 	return	(point.GetX() >= GetLeft()) && 
 			(point.GetX() < GetRight()) && 
@@ -157,39 +157,39 @@ double CRectangle::GetRight() const
 }
 
 
-i2d::IObject2d::CPoint CRectangle::GetTopLeft() const
+CVector2d CRectangle::GetTopLeft() const
 {
-	return CPoint(m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue()); 
+	return CVector2d(m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue()); 
 }
 
 
-i2d::IObject2d::CPoint CRectangle::GetBottomLeft() const
+CVector2d CRectangle::GetBottomLeft() const
 {
-	return CPoint(m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue()); 
+	return CVector2d(m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue()); 
 }
 
 
-i2d::IObject2d::CPoint CRectangle::GetTopRight() const
+CVector2d CRectangle::GetTopRight() const
 {
-	return CPoint(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMinValue()); 
+	return CVector2d(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMinValue()); 
 }
 
 
-i2d::IObject2d::CPoint CRectangle::GetBottomRight() const
+CVector2d CRectangle::GetBottomRight() const
 {
-	return CPoint(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue()); 
+	return CVector2d(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue()); 
 }
 
 
-// reimplemented (i2d::IObject2d)
+// reimplemented (IObject2d)
 
-i2d::IObject2d::CPoint CRectangle::GetCenter() const
+CVector2d CRectangle::GetCenter() const
 {
-	return CPoint(GetWidth() / 2.0, GetHeight() / 2.0);
+	return CVector2d(GetWidth() * 0.5, GetHeight() * 0.5);
 }
 
 
-i2d::CRectangle CRectangle::GetBoundingBox() const
+CRectangle CRectangle::GetBoundingBox() const
 {
 	return *this;
 }

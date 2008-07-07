@@ -2,29 +2,29 @@
 #define	i2d_CRectangle_included
 
 
-#include "i2d/IObject2d.h"
-
-#include "iser/ISerializable.h"
-
 #include "istd/CRange.h"
 #include "istd/CIndex2d.h"
 
+#include "iser/ISerializable.h"
+
+#include "i2d/IObject2d.h"
+
 
 namespace i2d
-{	
+{
 
 
-class CRectangle: virtual public i2d::IObject2d
+class CRectangle: virtual public IObject2d
 {
 public :
 	CRectangle();
 	CRectangle(double top, double left, double bottom, double right);
 	CRectangle(const CRectangle& rect);
-	CRectangle(const CPoint& topLeft, const CPoint& bottomRight);
+	CRectangle(const CVector2d& topLeft, const CVector2d& bottomRight);
 
 	const CRectangle& operator = (const CRectangle& other);
 
-	bool Contains(const CPoint& point) const;
+	bool Contains(const CVector2d& point) const;
 	bool Contains(const istd::CIndex2d& point) const;
 	bool IsInsideOf(const CRectangle& rect) const;
 	double GetWidth() const;
@@ -41,13 +41,13 @@ public :
 	double GetLeft() const;
 	double GetRight() const;
 
-	CPoint GetTopLeft() const;
-	CPoint GetBottomLeft() const;
-	CPoint GetTopRight() const;
-	CPoint GetBottomRight() const;
+	CVector2d GetTopLeft() const;
+	CVector2d GetBottomLeft() const;
+	CVector2d GetTopRight() const;
+	CVector2d GetBottomRight() const;
 
-	// reimplemented (i2d::IObject2d)
-	virtual CPoint GetCenter() const;
+	// reimplemented (IObject2d)
+	virtual CVector2d GetCenter() const;
 	virtual CRectangle GetBoundingBox() const;
 
 	// reimplemented (iser::ISerializable)

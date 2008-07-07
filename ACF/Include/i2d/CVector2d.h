@@ -7,14 +7,14 @@
 #include "imath/TVector.h"
 
 
-namespace imath
+namespace i2d
 {
 
 
-class CVector2d: public TVector<2>
+class CVector2d: public imath::TVector<2>
 {
 public:
-	typedef TVector<2> BaseClass;
+	typedef imath::TVector<2> BaseClass;
 
 	/**
 		Default constructor.
@@ -28,7 +28,7 @@ public:
 	/**
 		Copy constructor.
 	 */
-	CVector2d(const TVector<2>& vector);
+	CVector2d(const imath::TVector<2>& vector);
 
 	/**
 		Get X position of this vector.
@@ -56,12 +56,12 @@ public:
 	/**
 		Get translated point.
 	 */
-	CVector2d GetTranslated(const TVector<2>& vector);
+	CVector2d GetTranslated(const imath::TVector<2>& vector);
 
 	/**
 		Return Z coordinate of two vectors cross product.
 	 */
-	double GetCrossProductZ(const TVector<2>& vector) const;
+	double GetCrossProductZ(const imath::TVector<2>& vector) const;
 	/**
 		Get angle of this vector.
 	 */
@@ -79,13 +79,13 @@ public:
 
 	CVector2d operator-() const;
 
-	CVector2d operator+(const TVector<2>& vector) const;
-	CVector2d operator-(const TVector<2>& vector) const;
+	CVector2d operator+(const imath::TVector<2>& vector) const;
+	CVector2d operator-(const imath::TVector<2>& vector) const;
 	CVector2d operator*(double scalar) const;
 	CVector2d operator/(double scalar) const;
 
-	CVector2d& operator+=(const TVector<2>& vector);
-	CVector2d& operator-=(const TVector<2>& vector);
+	CVector2d& operator+=(const imath::TVector<2>& vector);
+	CVector2d& operator-=(const imath::TVector<2>& vector);
 	CVector2d& operator*=(double scalar);
 	CVector2d& operator/=(double scalar);
 };
@@ -105,7 +105,7 @@ inline CVector2d::CVector2d(double x, double y)
 }
 
 
-inline CVector2d::CVector2d(const TVector<2>& vector)
+inline CVector2d::CVector2d(const imath::TVector<2>& vector)
 :	BaseClass(vector)
 {
 }
@@ -135,13 +135,13 @@ inline void CVector2d::SetY(double y)
 }
 
 
-inline CVector2d CVector2d::GetTranslated(const TVector<2>& vector)
+inline CVector2d CVector2d::GetTranslated(const imath::TVector<2>& vector)
 {
 	return *this + vector;
 }
 
 
-inline double CVector2d::GetCrossProductZ(const TVector<2>& vector) const
+inline double CVector2d::GetCrossProductZ(const imath::TVector<2>& vector) const
 {
 	return GetX() * vector[1] - GetY() * vector[0];
 }
@@ -160,14 +160,14 @@ inline CVector2d CVector2d::operator-() const
 
 
 
-inline CVector2d CVector2d::operator+(const TVector<2>& vector) const
+inline CVector2d CVector2d::operator+(const imath::TVector<2>& vector) const
 {
 	return CVector2d(GetX() + vector[0], GetY() + vector[1]);
 }
 
 
 
-inline CVector2d CVector2d::operator-(const TVector<2>& vector) const
+inline CVector2d CVector2d::operator-(const imath::TVector<2>& vector) const
 {
 	return CVector2d(GetX() - vector[0], GetY() - vector[1]);
 }
@@ -192,7 +192,7 @@ inline CVector2d CVector2d::operator/(double scalar) const
 
 
 
-inline CVector2d& CVector2d::operator+=(const TVector<2>& vector)
+inline CVector2d& CVector2d::operator+=(const imath::TVector<2>& vector)
 {
 	BaseClass::operator+=(vector);
 
@@ -201,7 +201,7 @@ inline CVector2d& CVector2d::operator+=(const TVector<2>& vector)
 
 
 
-inline CVector2d& CVector2d::operator-=(const TVector<2>& vector)
+inline CVector2d& CVector2d::operator-=(const imath::TVector<2>& vector)
 {
 	BaseClass::operator-=(vector);
 
@@ -225,7 +225,7 @@ inline CVector2d& CVector2d::operator/=(double scalar)
 }
 
 
-} // namespace imath
+} // namespace i2d
 
 
 #endif //!i2d_CVector2d_included

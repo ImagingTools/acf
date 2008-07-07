@@ -13,7 +13,7 @@ void CComponentNote::SetText(const istd::CString& noteText)
 }
 
 
-void CComponentNote::SetPosition(const imath::CVector2d& position)
+void CComponentNote::SetPosition(const i2d::CVector2d& position)
 {
 	m_position = position;
 }
@@ -27,7 +27,7 @@ istd::CString CComponentNote::GetText() const
 }
 
 
-imath::CVector2d CComponentNote::GetPosition() const
+i2d::CVector2d CComponentNote::GetPosition() const
 {
 	return m_position;
 }

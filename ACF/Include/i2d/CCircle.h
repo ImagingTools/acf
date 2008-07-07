@@ -4,28 +4,28 @@
 
 #include "i2d/IObject2d.h"
 
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 
 namespace i2d
 {	
 
 
-class CCircle: virtual public i2d::IObject2d
+class CCircle: virtual public IObject2d
 {
 public:
 	CCircle();
-	CCircle(double radius, const CPoint& center);
+	CCircle(double radius, const CVector2d& center);
 
 	double GetRadius() const;
 
-	// reimplemented (i2d::IObject2d)
-	virtual CPoint GetCenter() const;
+	// reimplemented (IObject2d)
+	virtual CVector2d GetCenter() const;
 	virtual CRectangle GetBoundingBox() const;
 
 protected:
 	double m_radius;
-	CPoint m_center;
+	CVector2d m_center;
 };
 
 

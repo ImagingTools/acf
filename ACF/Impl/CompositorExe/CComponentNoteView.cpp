@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 #include "CComponentView.h"
 #include "CComponentNoteView.h"

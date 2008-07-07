@@ -73,15 +73,15 @@ istd::CIndex2d GetCIndex2d(const QPoint& position)
 }
 
 
-QPointF GetQPointF(const imath::CVector2d& position)
+QPointF GetQPointF(const i2d::CVector2d& position)
 {
 	return QPointF(position.GetX(), position.GetY());
 }
 
 
-imath::CVector2d GetCVector2d(const QPointF& position)
+i2d::CVector2d GetCVector2d(const QPointF& position)
 {
-	return imath::CVector2d(position.x(), position.y());
+	return i2d::CVector2d(position.x(), position.y());
 }
 
 

@@ -16,7 +16,7 @@ CLine2d::CLine2d()
 }
 
 
-CLine2d::CLine2d(const imath::CVector2d& point1, const imath::CVector2d& point2)
+CLine2d::CLine2d(const CVector2d& point1, const CVector2d& point2)
 	:m_point1(point1),
 	m_point2(point2)
 {
@@ -46,13 +46,13 @@ CLine2d CLine2d::operator = (const CLine2d& inl)
 }
 
 
-inline const imath::CVector2d& CLine2d::GetPoint1() const
+inline const CVector2d& CLine2d::GetPoint1() const
 {
 	return m_point1;
 }
 
 
-inline const imath::CVector2d& CLine2d::GetPoint2() const
+inline const CVector2d& CLine2d::GetPoint2() const
 {
 	return m_point2;
 }
@@ -94,11 +94,11 @@ bool CLine2d::IsParalell(const CLine2d& line) const
 }
 
 
-bool CLine2d::IsIntersectedBy(const CLine2d& line, imath::CVector2d* intersectionPtr) const
+bool CLine2d::IsIntersectedBy(const CLine2d& line, CVector2d* intersectionPtr) const
 {
-	imath::CVector2d a = m_point2 - m_point1;
-	imath::CVector2d b = line.m_point2 - line.m_point1;
-	imath::CVector2d c = line.m_point1 - m_point1;
+	CVector2d a = m_point2 - m_point1;
+	CVector2d b = line.m_point2 - line.m_point1;
+	CVector2d c = line.m_point1 - m_point1;
 
 	double scale = fabs(a.GetCrossProductZ(b));
 	if (fabs(scale) < I_EPSILON){
@@ -113,9 +113,9 @@ bool CLine2d::IsIntersectedBy(const CLine2d& line, imath::CVector2d* intersectio
 }
 
 
-imath::CVector2d CLine2d::GetIntersection(const CLine2d& line) const
+CVector2d CLine2d::GetIntersection(const CLine2d& line) const
 {
-	imath::CVector2d intersectionPoint;
+	CVector2d intersectionPoint;
 
 	IsIntersectedBy(line, &intersectionPoint);
 
@@ -124,22 +124,22 @@ imath::CVector2d CLine2d::GetIntersection(const CLine2d& line) const
 
 
 
-// reimplemented (i2d::IObject2d)
+// reimplemented (IObject2d)
 
-i2d::IObject2d::CPoint CLine2d::GetCenter() const
+CVector2d CLine2d::GetCenter() const
 {
 	return GetBoundingBox().GetCenter();
 }
 
 
-i2d::CRectangle CLine2d::GetBoundingBox() const
+CRectangle CLine2d::GetBoundingBox() const
 {
 	double left = istd::Min(m_point1.GetX(), m_point2.GetX());
 	double top = istd::Min(m_point1.GetY(), m_point2.GetY());
 	double right = istd::Max(m_point1.GetX(), m_point2.GetX());
 	double bottom = istd::Max(m_point1.GetY(), m_point2.GetY());
 
-	return i2d::CRectangle(top, left, bottom, right);
+	return CRectangle(top, left, bottom, right);
 }
 
 

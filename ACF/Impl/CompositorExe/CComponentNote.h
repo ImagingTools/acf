@@ -9,18 +9,18 @@ class CComponentNote: virtual public IComponentNote
 {
 public:
 	virtual void SetText(const istd::CString& noteText);
-	virtual void SetPosition(const imath::CVector2d& position);
+	virtual void SetPosition(const i2d::CVector2d& position);
 
 	// reimplemented (IComponentNote)
 	virtual istd::CString GetText() const;
-	virtual imath::CVector2d GetPosition() const;
+	virtual i2d::CVector2d GetPosition() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
 	istd::CString m_noteText;
-	imath::CVector2d m_position;
+	i2d::CVector2d m_position;
 };
 
 

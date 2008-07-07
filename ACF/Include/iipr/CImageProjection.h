@@ -2,9 +2,14 @@
 #define iipr_CImageProjection_included
 
 
-#include "iimg/IBitmap.h"
+#include <vector>
+
+#include "istd/IPolymorphic.h"
 #include "istd/CIndex2d.h"
-#include "imath/TVarVector.h"
+
+#include "iimg/IBitmap.h"
+
+#include "iipr/iipr.h"
 
 
 namespace iipr

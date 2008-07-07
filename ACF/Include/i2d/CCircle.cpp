@@ -12,7 +12,7 @@ CCircle::CCircle()
 }
 
 
-CCircle::CCircle(double radius, const CPoint& center)
+CCircle::CCircle(double radius, const CVector2d& center)
 {
 	m_radius = radius;
 	m_center = center;
@@ -25,17 +25,17 @@ double CCircle::GetRadius() const
 }
 
 
-// reimplemented (i2d::IObject2d)
+// reimplemented (IObject2d)
 
-i2d::IObject2d::CPoint CCircle::GetCenter() const
+CVector2d CCircle::GetCenter() const
 {
 	return m_center;
 }
 
 
-i2d::CRectangle CCircle::GetBoundingBox() const
+CRectangle CCircle::GetBoundingBox() const
 {
-	return i2d::CRectangle(
+	return CRectangle(
 				m_center.GetY() - m_radius, 
 				m_center.GetX() - m_radius, 
 				m_center.GetY() + m_radius, 

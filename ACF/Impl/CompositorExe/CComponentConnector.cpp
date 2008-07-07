@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 #include "iqt/iqt.h"
 
@@ -228,7 +228,7 @@ void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsIte
 	}
 
 	const QPointF& circlePoint = m_connectionLine.first();
-	imath::CVector2d circleDirection(circlePoint.x() - m_touchPoint.x(), circlePoint.y() - m_touchPoint.y());
+	i2d::CVector2d circleDirection(circlePoint.x() - m_touchPoint.x(), circlePoint.y() - m_touchPoint.y());
 	int degree = 360 - circleDirection.GetAngle() * 180 / I_PI;
 	circleDirection.Normalize(GP_OFFSET - GP_RADIUS2);
 

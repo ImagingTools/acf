@@ -25,8 +25,6 @@ bool CSize::IsNull() const
 }
 
 
-// reimplemented (iser::ISerializable)
-
 bool CSize::Serialize(iser::IArchive& archive)
 {
 	int width = GetX();

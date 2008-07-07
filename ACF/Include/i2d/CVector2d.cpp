@@ -1,11 +1,11 @@
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
 
-namespace imath
+namespace i2d
 {
 
 
@@ -35,6 +35,6 @@ CVector2d CVector2d::GetNormalized(double length) const
 }
 
 
-} // namespace imath
+} // namespace i2d
 
 

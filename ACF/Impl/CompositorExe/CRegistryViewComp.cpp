@@ -73,7 +73,7 @@ CRegistryViewComp::CRegistryViewComp()
 }
 
 
-bool CRegistryViewComp::TryCreateComponent(const icomp::CComponentAddress& address, const imath::CVector2d& position)
+bool CRegistryViewComp::TryCreateComponent(const icomp::CComponentAddress& address, const i2d::CVector2d& position)
 {
 	bool retVal = false;
 	QString componentName = QInputDialog::getText(GetWidget(), tr("Application Compositor"), tr("Component name"), QLineEdit::Normal, "",&retVal);
@@ -130,7 +130,7 @@ void CRegistryViewComp::UpdateEditor()
 
 				icomp::IRegistryGeometryProvider* geomeometryProviderPtr = dynamic_cast<icomp::IRegistryGeometryProvider*>(registryPtr);
 				if (geomeometryProviderPtr != NULL){
-					imath::CVector2d position = geomeometryProviderPtr->GetComponentPosition(elementId);
+					i2d::CVector2d position = geomeometryProviderPtr->GetComponentPosition(elementId);
 					viewPtr->setPos(int(position.GetX() + 0.5), int(position.GetY() + 0.5));
 				}
 
@@ -317,7 +317,7 @@ void CRegistryViewComp::OnComponentPositionChanged(CComponentView* view, const Q
 {
 	icomp::IRegistryGeometryProvider* geometryProviderPtr = dynamic_cast<icomp::IRegistryGeometryProvider*>(GetObjectPtr());
 	if (geometryProviderPtr != NULL){
-		geometryProviderPtr->SetComponentPosition(view->GetComponentName(), imath::CVector2d(newPosition.x(), newPosition.y()));
+		geometryProviderPtr->SetComponentPosition(view->GetComponentName(), i2d::CVector2d(newPosition.x(), newPosition.y()));
 	}
 
 	int gridSize = GetGrid();
@@ -357,7 +357,7 @@ void CRegistryViewComp::OnRenameComponent()
 		if (m_selectedComponentPtr != NULL){
 			const std::string& oldName = m_selectedComponentPtr->GetComponentName();
 
-			imath::CVector2d position(0, 0);
+			i2d::CVector2d position(0, 0);
 			icomp::IRegistryGeometryProvider* geometryProviderPtr = dynamic_cast<icomp::IRegistryGeometryProvider*>(registryPtr);
 			if (geometryProviderPtr != NULL){
 				position = geometryProviderPtr->GetComponentPosition(oldName);
@@ -708,7 +708,7 @@ bool CRegistryViewComp::ProcessDroppedData(const QMimeData& data, QGraphicsScene
 
 	icomp::CComponentAddress address;
 
-	imath::CVector2d position(0, 0);
+	i2d::CVector2d position(0, 0);
 	if (event != NULL){
 		position = iqt::GetCVector2d(event->pos());
 	}

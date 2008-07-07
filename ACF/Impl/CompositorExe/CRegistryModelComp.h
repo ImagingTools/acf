@@ -41,8 +41,8 @@ public:
 	int CheckAttributeConsistency(const icomp::IRegistryElement& element, const std::string& attributeId);
 
 	// reimplemented (icomp::IRegistryGeometryProvider)
-	virtual imath::CVector2d GetComponentPosition(const std::string& componentRole) const;
-	virtual void SetComponentPosition(const std::string& componentRole, const imath::CVector2d& point);
+	virtual i2d::CVector2d GetComponentPosition(const std::string& componentRole) const;
+	virtual void SetComponentPosition(const std::string& componentRole, const i2d::CVector2d& point);
 
 	// reimplemented (icomp::IRegistryNotesProvider)
 	virtual istd::CString GetComponentNote(const std::string& componentRole) const;
@@ -53,13 +53,13 @@ public:
 	virtual void OnComponentCreated();
 
 protected:
-	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, imath::CVector2d& position);
+	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
 	bool SerializeNote(iser::IArchive& archive, std::string& componentName, istd::CString& note);
 
 private:
 	I_REF(icomp::IComponentStaticInfo, m_staticInfoCompPtr);
 
-	typedef std::map<std::string, imath::CVector2d> ElementsPositionMap;
+	typedef std::map<std::string, i2d::CVector2d> ElementsPositionMap;
 	typedef std::map<std::string, istd::CString> ElementsNoteMap;
 
 	ElementsPositionMap m_elementsPositionMap;

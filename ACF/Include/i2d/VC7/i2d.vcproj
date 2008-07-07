@@ -135,6 +135,9 @@
 			<File
 				RelativePath="..\CTransform.cpp">
 			</File>
+			<File
+				RelativePath="..\CVector2d.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -150,6 +153,9 @@
 			</File>
 			<File
 				RelativePath="..\CTransform.h">
+			</File>
+			<File
+				RelativePath="..\CVector2d.h">
 			</File>
 			<File
 				RelativePath="..\i2d.h">

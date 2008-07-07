@@ -2,21 +2,16 @@
 #define	i2d_IObject2d_included
 
 
-#include "imath/imath.h"
-
 #include "iser/ISerializable.h"
 
-
-namespace imath
-{
-	class CVector2d;
-}
+#include "imath/imath.h"
 
 
 namespace i2d
-{	
+{
 
 
+class CVector2d;
 class CRectangle;
 
 
@@ -26,12 +21,10 @@ class CRectangle;
 class IObject2d: virtual public iser::ISerializable
 {
 public:
-	typedef imath::CVector2d CPoint;
-
 	/**
 		Returns center of this 2D-object.
 	*/
-	virtual CPoint GetCenter() const = 0;
+	virtual CVector2d GetCenter() const = 0;
 
 	/**
 		Returns the bounding box of this 2D-object.
@@ -44,4 +37,5 @@ public:
 
 
 #endif // !i2d_IObject2d_included
+
 

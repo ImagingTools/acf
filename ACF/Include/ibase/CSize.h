@@ -21,7 +21,6 @@ public:
 
 	bool IsNull() const;
 	
-	// pseud-reimplemented (iser::ISerializable)
 	bool Serialize(iser::IArchive& archive);
 };
 

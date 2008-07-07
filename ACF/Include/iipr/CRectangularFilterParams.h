@@ -19,11 +19,11 @@ class CRectangularFilterParams: virtual public iser::ISerializable
 public:
 	CRectangularFilterParams();
 
-	virtual void SetSize(const ibase::CSize& filterSize);
 	virtual const ibase::CSize& GetSize() const;
+	virtual void SetSize(const ibase::CSize& filterSize);
 
-	virtual void SetIterationsCount(int iterationsCount);
 	virtual int GetIterationsCount() const;
+	virtual void SetIterationsCount(int iterationsCount);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

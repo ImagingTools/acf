@@ -4,7 +4,7 @@
 
 #include "istd/IPolymorphic.h"
 
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 
 namespace i2d
@@ -15,20 +15,20 @@ class CTransform: virtual public istd::IPolymorphic
 {
 public:
 	CTransform();
-	CTransform(const imath::CVector2d& translation, const imath::CVector2d& scale, double angle);
+	CTransform(const CVector2d& translation, const CVector2d& scale, double angle);
 
-	imath::CVector2d ApplyTo(const imath::CVector2d& point) const;
+	CVector2d ApplyTo(const CVector2d& point) const;
 
 	CTransform& Rotate(double angle);
-	CTransform& Scale(const imath::CVector2d& scale);
+	CTransform& Scale(const CVector2d& scale);
 	CTransform& Scale(double sx, double sy);
-	CTransform& Translate(const imath::CVector2d& translation);
+	CTransform& Translate(const CVector2d& translation);
 	CTransform& Translate(double dx, double dy);
 
 	CTransform GetRotated(double angle) const;
-	CTransform GetScaled(const imath::CVector2d& scale) const;
+	CTransform GetScaled(const CVector2d& scale) const;
 	CTransform GetScaled(double sx, double sy) const;
-	CTransform GetTranslated(const imath::CVector2d& translation) const;
+	CTransform GetTranslated(const CVector2d& translation) const;
 	CTransform GetTranslated(double dx, double dy) const;
 
 private:

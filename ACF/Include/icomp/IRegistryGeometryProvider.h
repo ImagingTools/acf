@@ -4,7 +4,7 @@
 
 #include "istd/IChangeable.h"
 #include "istd/CString.h"
-#include "imath/CVector2d.h"
+#include "i2d/CVector2d.h"
 
 
 namespace icomp
@@ -20,12 +20,12 @@ public:
 	/**
 		Get the view position for the component \c componentName.
 	*/
-	virtual imath::CVector2d GetComponentPosition(const std::string& componentName) const = 0;
+	virtual i2d::CVector2d GetComponentPosition(const std::string& componentName) const = 0;
 
 	/**
 		Set the view position for the component \c componentName.
 	*/
-	virtual void SetComponentPosition(const std::string& componentName, const imath::CVector2d& position) = 0;
+	virtual void SetComponentPosition(const std::string& componentName, const i2d::CVector2d& position) = 0;
 };
 
 
