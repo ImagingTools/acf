@@ -91,7 +91,7 @@ bool TMorphoProcessorComp<PixelType, CompareFunction>::ProcessImage(
 
 			kernelIterator.x -= kernelHalfWidth;
 
-			for(int mx = -kernelHalfWidth; mx <= kernelHalfWidth; mx++){
+			for (int mx = -kernelHalfWidth; mx <= kernelHalfWidth; mx++){
 				PixelType kernelValue = *kernelIterator;
 
 				outputValue  = m_predicate(outputValue, kernelValue);
@@ -108,7 +108,7 @@ bool TMorphoProcessorComp<PixelType, CompareFunction>::ProcessImage(
 	iimg::CGeneralBitmap tempBitmap;
 	tempBitmap.CopyImageFrom(outputImage);
 
-	for(int x = 0; x < imageWidth; x++){
+	for (int x = 0; x < imageWidth; x++){
 		iimg::TBitmapIterator<PixelType> inputIterator(&tempBitmap);
 		iimg::TBitmapIterator<PixelType> outputIterator(&outputImage);
 
@@ -122,7 +122,7 @@ bool TMorphoProcessorComp<PixelType, CompareFunction>::ProcessImage(
 
 			kernelIterator.y -= kernelHalfHeight;
 
-			for(int kernelIndex = -kernelHalfHeight; kernelIndex <= kernelHalfHeight; kernelIndex++){
+			for (int kernelIndex = -kernelHalfHeight; kernelIndex <= kernelHalfHeight; kernelIndex++){
 				PixelType kernelValue = *kernelIterator;
 
 				outputValue  = m_predicate(outputValue, kernelValue);
@@ -148,4 +148,5 @@ typedef TMorphoProcessorComp<I_BYTE, MinimumFunction> CMorphoMinOperatorComp;
 
 
 #endif // !iipr_TMorphoProcessorComp_included
+
 
