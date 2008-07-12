@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="15">
+  <ElementsList count="16">
     <Element>
       <Id>
         AverageParams
@@ -228,6 +228,24 @@
     </Element>
     <Element>
       <Id>
+        InvertProcessor
+      </Id>
+      <PackageId>
+        IprPck
+      </PackageId>
+      <ComponentId>
+        InverOperator
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         IterationParams
       </Id>
       <PackageId>
@@ -311,7 +329,7 @@
                 true
               </IsEnabled>
               <Value>
-                AverageProcessor
+                MinOperator
               </Value>
             </Data>
           </AttributeInfo>
@@ -332,7 +350,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ParamsId
@@ -349,6 +367,25 @@
               </IsEnabled>
               <Value>
                 AverageParams
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Preprocessor
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                InvertProcessor
               </Value>
             </Data>
           </AttributeInfo>

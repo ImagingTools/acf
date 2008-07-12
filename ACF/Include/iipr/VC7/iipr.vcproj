@@ -195,6 +195,9 @@
 			<File
 				RelativePath="..\TMorphoProcessorComp.h">
 			</File>
+			<File
+				RelativePath="..\TUnaryTransformProcessorComp.h">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="22">
+  <PositionMap count="24">
     <Element>
       <ComponentName>
         AverageParams
@@ -32,10 +32,10 @@
         AverageProcessor
       </ComponentName>
       <X>
-        275
+        150
       </X>
       <X>
-        387
+        337
       </X>
     </Element>
     <Element>
@@ -69,6 +69,17 @@
       </X>
       <X>
         -112
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileAcquisition
+      </ComponentName>
+      <X>
+        75
+      </X>
+      <X>
+        237
       </X>
     </Element>
     <Element>
@@ -128,6 +139,17 @@
     </Element>
     <Element>
       <ComponentName>
+        InvertProcessor
+      </ComponentName>
+      <X>
+        525
+      </X>
+      <X>
+        437
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         IterationParams
       </ComponentName>
       <X>
@@ -164,10 +186,10 @@
         IterativeProcessor
       </ComponentName>
       <X>
-        12
+        -37
       </X>
       <X>
-        387
+        337
       </X>
     </Element>
     <Element>
@@ -178,7 +200,7 @@
         287
       </X>
       <X>
-        487
+        437
       </X>
     </Element>
     <Element>
@@ -197,10 +219,10 @@
         MinOperator
       </ComponentName>
       <X>
-        62
+        37
       </X>
       <X>
-        487
+        437
       </X>
     </Element>
     <Element>

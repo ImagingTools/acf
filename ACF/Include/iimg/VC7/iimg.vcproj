@@ -163,6 +163,9 @@
 				RelativePath="..\IRasterImage.h">
 			</File>
 			<File
+				RelativePath="..\TBitmapIterator.h">
+			</File>
+			<File
 				RelativePath="..\TBitmapIterator2d.h">
 			</File>
 		</Filter>

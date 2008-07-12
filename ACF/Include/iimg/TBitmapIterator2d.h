@@ -203,7 +203,7 @@ TBitmapIterator2d<PixelType>::XIterator::XIterator(TBitmapIterator2d& iterator)
 
 
 template <typename PixelType>
-inline TBitmapIterator2d<PixelType> TBitmapIterator2d<PixelType>::XIterator::operator++(int difference)
+inline TBitmapIterator2d<PixelType> TBitmapIterator2d<PixelType>::XIterator::operator++(int)
 {
 	TBitmapIterator2d<PixelType> temp(m_iterator);
 	
@@ -223,10 +223,10 @@ inline TBitmapIterator2d<PixelType>& TBitmapIterator2d<PixelType>::XIterator::op
 
 
 template <typename PixelType>
-inline TBitmapIterator2d<PixelType> TBitmapIterator2d<PixelType>::XIterator::operator--(int difference)
+inline TBitmapIterator2d<PixelType> TBitmapIterator2d<PixelType>::XIterator::operator--(int)
 {
 	TBitmapIterator2d<PixelType> temp(m_iterator);
-	
+
 	m_iterator.m_imageBufferPtr--;
 
 	return temp;

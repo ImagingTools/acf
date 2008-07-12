@@ -14,7 +14,7 @@
 #include "iipr/CLocalDifferenceFilterParams.h"
 #include "iipr/CIterativeProcessorComp.h"
 #include "iipr/CIterativeProcessorParams.h"
-
+#include "iipr/TUnaryTransformProcessorComp.h"
 
 /**
 	system-undependent image processing package.
@@ -33,7 +33,7 @@ typedef icomp::TMakeComponentWrap<iser::ISerializable, imod::TModelWrap<iipr::CI
 
 typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
 typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;
-
+typedef iipr::CInvertOperatorComp InverOperator;
 
 } // namespace IprPck
 
