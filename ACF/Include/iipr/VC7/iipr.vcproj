@@ -161,6 +161,9 @@
 			<File
 				RelativePath="..\CRectangularFilterParams.cpp">
 			</File>
+			<File
+				RelativePath="..\CSearchParamsBase.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -196,10 +199,22 @@
 				RelativePath="..\CRectangularFilterParams.h">
 			</File>
 			<File
+				RelativePath="..\CSearchParamsBase.h">
+			</File>
+			<File
 				RelativePath="..\IBitmapProcessor.h">
 			</File>
 			<File
 				RelativePath="..\iipr.h">
+			</File>
+			<File
+				RelativePath="..\ILineProjectionProcessor.h">
+			</File>
+			<File
+				RelativePath="..\IProjectionConstraints.h">
+			</File>
+			<File
+				RelativePath="..\IProjectionParams.h">
 			</File>
 			<File
 				RelativePath="..\ISearchModel.h">
@@ -212,15 +227,6 @@
 			</File>
 			<File
 				RelativePath="..\ISearchResult.h">
-			</File>
-			<File
-				RelativePath="..\ILineProjectionProcessor.h">
-			</File>
-			<File
-				RelativePath="..\IProjectionConstraints.h">
-			</File>
-			<File
-				RelativePath="..\IProjectionParams.h">
 			</File>
 			<File
 				RelativePath="..\TImageProcessorCompBase.h">

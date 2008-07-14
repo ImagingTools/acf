@@ -77,4 +77,3 @@ bool CProjectionData::Serialize(iser::IArchive& archive)
 
 } // namespace iipr
 
-

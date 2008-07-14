@@ -2,11 +2,12 @@
 #define iipr_IISearchParams_included
 
 
-#include "q2d/CSearchArea.h"
-
 #include "iser/ISerializable.h"
 
-#include "qclb/IIsomorphCalib.h"
+#include "i2d/CTransform.h"
+#include "i2d/CRectangle.h"
+
+#include "iimg/IBitmap.h"
 
 
 namespace iipr
@@ -23,20 +24,20 @@ class ISearchModel;
 class ISearchParams: virtual public iser::ISerializable
 {
 public:
-	virtual void SetCalibrationPtr(const qclb::IIsomorphCalib* calibrationPtr) = 0;
+	virtual void SetCalibrationPtr(const i2d::CTransform* calibrationPtr) = 0;
+
+	/**
+		Gets the region that is used for model search.
+	*/
+	virtual i2d::CRectangle GetSearchRegion(const i2d::CTransform* calibrationPtr = NULL) const = 0;
 
 	/*
-		Gets the search area. 
+		Gets the region for model teaching.
 	*/
-	virtual q2d::CSearchArea GetSearchArea(const qclb::IIsomorphCalib* calibrationPtr = NULL) const = 0;
+	virtual i2d::CRectangle GetModelRegion(const i2d::CTransform* calibrationPtr = NULL) const = 0;
 		
-	/*
-		Resets all parameters to their default values.
-	*/
-	virtual void ResetParams() = 0;
-
 	/**	
-		Get search model.
+		Get search model definition.
 	*/
 	virtual const ISearchModel& GetModel() const = 0;
 
@@ -62,10 +63,10 @@ public:
 
 	virtual double GetMinScore() const = 0;
 	virtual void SetMinScore(double minScore) = 0;
-	virtual double GetMinAngle() const = 0;
-	virtual void SetMinAngle(double minAngle) = 0;
-	virtual double GetMaxAngle() const = 0;
-	virtual void SetMaxAngle(double maxAngle) = 0;
+	virtual double GetStartAngle() const = 0;
+	virtual void SetStartAngle(double minAngle) = 0;
+	virtual double GetEndAngle() const = 0;
+	virtual void SetEndAngle(double maxAngle) = 0;
 	virtual double GetMinScale() const = 0;
 	virtual void SetMinScale(double minScale) = 0;
 	virtual double GetMaxScale() const = 0;

@@ -33,7 +33,6 @@ private:
 };
 
 
-
 /**
 	Implementation of general morphological operator.
 */
