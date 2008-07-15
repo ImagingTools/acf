@@ -68,6 +68,6 @@ icomp::IComponent* TSimComponentsFactory<Base>::CreateInstance(const std::string
 }//namespace icomp
 
 
-#endif //!icomp_TSimComponentsFactory_included
+#endif // !icomp_TSimComponentsFactory_included
 
 

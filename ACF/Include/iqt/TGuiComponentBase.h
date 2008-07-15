@@ -59,6 +59,6 @@ QWidget* TGuiComponentBase<WidgetType>::InitWidgetToParent(QWidget* parentPtr)
 } // namespace iqt
 
 
-#endif //!iqt_TGuiComponentBase_included
+#endif // !iqt_TGuiComponentBase_included
 
 

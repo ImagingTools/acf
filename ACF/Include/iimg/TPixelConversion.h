@@ -21,6 +21,21 @@ public:
 
 	CalcPixel GetCalc(const SourcePixel& pixel) const;
 	DestPixel GetDest(const CalcPixel& pixel) const;
+
+	/**
+		Get weight of pixel value.
+		Weight is value, typically between 0 and 1, describing importance of pixel.
+		For normal pixels it is always 1.
+		For alpha-channeled pixels or weight pixels it can differ.
+		Values above 1 and negative are also possible for some algorithmical reasons.
+	*/
+	double GetWeight(const CalcPixel& pixel) const;
+
+	/**
+		Get intensity of pixel value.
+		This value is used for grayscale algorithms to operate with pixels with additional than intensity information.
+	*/
+	double GetIntensity(const CalcPixel& pixel) const;
 };
 
 
@@ -44,6 +59,20 @@ template <typename SourcePixel, typename DestPixel, typename CalcPixel>
 inline typename DestPixel TPixelConversion<SourcePixel, DestPixel, CalcPixel>::GetDest(const CalcPixel& pixel) const
 {
 	return DestPixel(pixel);
+}
+
+
+template <typename SourcePixel, typename DestPixel, typename CalcPixel>
+inline double TPixelConversion<SourcePixel, DestPixel, CalcPixel>::GetWeight(const CalcPixel& pixel) const
+{
+	return 1.0;
+}
+
+
+template <typename SourcePixel, typename DestPixel, typename CalcPixel>
+inline double TPixelConversion<SourcePixel, DestPixel, CalcPixel>::GetIntensity(const CalcPixel& pixel) const
+{
+	return double(pixel);
 }
 
 

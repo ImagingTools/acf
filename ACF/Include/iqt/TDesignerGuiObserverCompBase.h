@@ -31,6 +31,6 @@ public:
 } // namespace iqt
 
 
-#endif //!iqt_TDesignerGuiObserverCompBase_included
+#endif // !iqt_TDesignerGuiObserverCompBase_included
 
 

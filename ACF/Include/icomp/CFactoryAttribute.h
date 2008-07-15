@@ -28,6 +28,6 @@ public:
 } // namespace icomp
 
 
-#endif //!icomp_CFactoryAttribute_included
+#endif // !icomp_CFactoryAttribute_included
 
 

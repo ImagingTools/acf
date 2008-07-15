@@ -15,6 +15,7 @@
 #include "iipr/CIterativeProcessorComp.h"
 #include "iipr/CIterativeProcessorParams.h"
 #include "iipr/TUnaryTransformProcessorComp.h"
+#include "iipr/CCaliperParams.h"
 
 /**
 	system-undependent image processing package.
@@ -34,6 +35,8 @@ typedef icomp::TMakeComponentWrap<iser::ISerializable, imod::TModelWrap<iipr::CI
 typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
 typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;
 typedef iipr::CInvertOperatorComp InverOperator;
+
+typedef icomp::TMakeComponentWrap<iipr::ICaliperParams, imod::TModelWrap<iipr::CCaliperParams> > CaliperParams;
 
 } // namespace IprPck
 

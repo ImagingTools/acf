@@ -105,6 +105,6 @@ inline QWidget* CGuiComponentBase::GetWidget() const
 } // namespace iqt
 
 
-#endif //!iqt_CGuiComponentBase_included
+#endif // !iqt_CGuiComponentBase_included
 
 

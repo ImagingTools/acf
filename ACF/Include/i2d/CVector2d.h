@@ -228,5 +228,5 @@ inline CVector2d& CVector2d::operator/=(double scalar)
 } // namespace i2d
 
 
-#endif //!i2d_CVector2d_included
+#endif // !i2d_CVector2d_included
 

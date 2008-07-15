@@ -54,6 +54,6 @@ private:
 }//namespace icomp
 
 
-#endif //!icomp_CCompositePackageStaticInfo_included
+#endif // !icomp_CCompositePackageStaticInfo_included
 
 

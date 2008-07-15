@@ -15,17 +15,17 @@ class IMessage;
 
 
 /**
-	Common interface for an message container.
+	Common interface for a message container consuming message objects.
 */
 class IMessageConsumer: virtual public istd::IPolymorphic
 {
 public:
 	/**
 		Adds a message item to the container. 
-		Please note, that the message container takes controll over the message item, 
+		Please note, that the container takes controll over the message item, 
 		so you cannot destroy this object manually.
 	*/
-	virtual void AddMessage(ibase::IMessage* message) = 0;
+	virtual void AddMessage(ibase::IMessage* messagePtr) = 0;
 };
 
 

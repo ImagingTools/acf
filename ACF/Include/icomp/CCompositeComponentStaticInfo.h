@@ -25,6 +25,6 @@ public:
 }//namespace icomp
 
 
-#endif //!icomp_CCompositeComponentStaticInfo_included
+#endif // !icomp_CCompositeComponentStaticInfo_included
 
 

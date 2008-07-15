@@ -282,6 +282,6 @@ TGuiObserverWrap<Gui, Observer>::UpdateBlocker::~UpdateBlocker()
 } // namespace iqt
 
 
-#endif //!iqt_TGuiObserverWrap_included
+#endif // !iqt_TGuiObserverWrap_included
 
 

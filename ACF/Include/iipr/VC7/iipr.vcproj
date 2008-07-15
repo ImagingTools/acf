@@ -132,6 +132,15 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CCaliperFeature.cpp">
+			</File>
+			<File
+				RelativePath="..\CCaliperParams.cpp">
+			</File>
+			<File
+				RelativePath="..\CExtremumCaliperProcessor.cpp">
+			</File>
+			<File
 				RelativePath="..\CImageProjection.cpp">
 			</File>
 			<File
@@ -169,6 +178,15 @@
 			Name="Header Files"
 			Filter="h">
 			<File
+				RelativePath="..\CCaliperFeature.h">
+			</File>
+			<File
+				RelativePath="..\CCaliperParams.h">
+			</File>
+			<File
+				RelativePath="..\CExtremumCaliperProcessor.h">
+			</File>
+			<File
 				RelativePath="..\CImageProjection.h">
 			</File>
 			<File
@@ -203,6 +221,18 @@
 			</File>
 			<File
 				RelativePath="..\IBitmapProcessor.h">
+			</File>
+			<File
+				RelativePath="..\ICaliperParams.h">
+			</File>
+			<File
+				RelativePath="..\ICaliperProcessor.h">
+			</File>
+			<File
+				RelativePath="..\IFeature.h">
+			</File>
+			<File
+				RelativePath="..\IFeaturesConsumer.h">
 			</File>
 			<File
 				RelativePath="..\iipr.h">

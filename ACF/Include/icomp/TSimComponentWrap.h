@@ -49,6 +49,6 @@ void TSimComponentWrap<Base>::InitComponent()
 }//namespace icomp
 
 
-#endif //!icomp_TSimComponentWrap_included
+#endif // !icomp_TSimComponentWrap_included
 
 

@@ -28,6 +28,6 @@ public:
 } // namespace icomp
 
 
-#endif //!icomp_CReferenceAttribute_included
+#endif // !icomp_CReferenceAttribute_included
 
 

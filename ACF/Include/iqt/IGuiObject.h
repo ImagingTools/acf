@@ -64,7 +64,7 @@ public:
 
 
 
-#endif //!iqt_IGuiObject_included
+#endif // !iqt_IGuiObject_included
 
 
 

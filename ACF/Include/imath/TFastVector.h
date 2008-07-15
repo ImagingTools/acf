@@ -701,6 +701,6 @@ bool TFastVector<MaxSize, Element>::Serialize(iser::IArchive& archive)
 } // namespace imath
 
 
-#endif //!imath_TFastVector_included
+#endif // !imath_TFastVector_included
 
 

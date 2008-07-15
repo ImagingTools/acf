@@ -667,6 +667,6 @@ typedef TVarVector<double> CVarVector;
 } // namespace imath
 
 
-#endif //!imath_TVarVector_included
+#endif // !imath_TVarVector_included
 
 

@@ -549,6 +549,6 @@ TMathVectorWrap<Base>::operator Base() const
 } // namespace imath
 
 
-#endif //!imath_TMathVectorWrap_included
+#endif // !imath_TMathVectorWrap_included
 
 

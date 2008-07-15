@@ -40,6 +40,6 @@ private:
 } // namespace iqt
 
 
-#endif //!iqt_CTreeWidgetFilter_included
+#endif // !iqt_CTreeWidgetFilter_included
 
 

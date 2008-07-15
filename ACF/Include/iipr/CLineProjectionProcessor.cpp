@@ -17,13 +17,13 @@ namespace iipr
 
 template <class PixelConversion>
 bool ProjectionFunction(
-				const I_BYTE* firstPixelAddress,
-				const istd::CIndex2d axisSizes,
-				const istd::CIndex2d addressDiffs,
-				const i2d::CLine2d& projectionLine,
-				const i2d::CLine2d& clippedLine,
-				const PixelConversion& conversion,
-				CProjectionData& results)
+			const I_BYTE* firstPixelAddress,
+			const istd::CIndex2d axisSizes,
+			const istd::CIndex2d addressDiffs,
+			const i2d::CLine2d& projectionLine,
+			const i2d::CLine2d& clippedLine,
+			const PixelConversion& conversion,
+			CProjectionData& results)
 {
 	I_ASSERT(projectionLine.GetPoint1().GetX() <= projectionLine.GetPoint2().GetX());
 	I_ASSERT(clippedLine.GetPoint1().GetX() <= clippedLine.GetPoint2().GetX());
@@ -158,6 +158,30 @@ bool CLineProjectionProcessor::DoProjection(
 			CProjectionData& results)
 {
 	return DoAutosizeProjection(bitmap, projectionLine, results);
+}
+
+
+// reimplemented (iproc::TIProcessor)
+
+int CLineProjectionProcessor::DoProcessing(
+			const iprm::IParamsSet* paramsPtr,
+			const iimg::IBitmap* inputPtr,
+			CProjectionData* outputPtr)
+{
+	if (outputPtr == NULL){
+		return TS_OK;
+	}
+
+	if ((inputPtr == NULL) || (paramsPtr == NULL) || m_lineParamId.empty()){
+		return TS_INVALID;
+	}
+
+	const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(m_lineParamId));
+	if (linePtr == NULL){
+		return TS_INVALID;
+	}
+
+	return DoAutosizeProjection(*inputPtr, *linePtr, *outputPtr)? TS_OK: TS_INVALID;
 }
 
 

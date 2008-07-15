@@ -69,6 +69,6 @@ void TUpdateManagerWrap<BaseClass>::EndChanges(int changeFlags, istd::IPolymorph
 } // namespace istd
 
 
-#endif //!istd_TUpdateManagerWrap_included
+#endif // !istd_TUpdateManagerWrap_included
 
 

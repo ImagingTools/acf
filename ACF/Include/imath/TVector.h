@@ -578,6 +578,6 @@ bool TVector<Size, Element>::Serialize(iser::IArchive& archive)
 } // namespace imath
 
 
-#endif //!imath_TVector_included
+#endif // !imath_TVector_included
 
 

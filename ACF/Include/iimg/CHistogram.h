@@ -57,5 +57,5 @@ private:
 } // namespace iimg
 
 
-#endif //!iimg_CHistogram_included
+#endif // !iimg_CHistogram_included
 

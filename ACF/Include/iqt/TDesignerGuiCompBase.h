@@ -106,6 +106,6 @@ void TDesignerGuiCompBase<UI, WidgetType>::OnRetranslate()
 } // namespace iqt
 
 
-#endif //!iqt_TDesignerGuiComponentBase_included
+#endif // !iqt_TDesignerGuiComponentBase_included
 
 
