@@ -21,6 +21,9 @@ I_EXPORT_COMPONENT(MorphoMaxOperator, "Morphological maximum operator with recta
 I_EXPORT_COMPONENT(InvertOperator, "Invertation operator", "Operator Image Processing");
 I_EXPORT_COMPONENT(GaussianFilter, "Gaussian filter", "Filter Operator Gaussian Image Processing");
 I_EXPORT_COMPONENT(GaussianFilterParams, "Gaussian filter params", "Filter Operator Gaussian Image Processing");
+I_EXPORT_COMPONENT(CaliperParams, "Parameters for caliper tool", "Caliper Weight Direction Gradients Projection Parameters");
+I_EXPORT_COMPONENT(ExtremumCaliperProcessor, "Caliper implementation extracting projection extremums", "Caliper Extremum Minimum Maximum Projection Processor");
+I_EXPORT_COMPONENT(LineProjectionProcessor, "Line projection implementation for single line width", "Projection Line Processor");
 
 
 } // namespace IprPck

@@ -32,12 +32,25 @@ TInterfaceRegistrator<Interface>::TInterfaceRegistrator(icomp::IComponentStaticI
 }
 
 
+template <>
+inline TInterfaceRegistrator<void>::TInterfaceRegistrator(icomp::IComponentStaticInfo& /*staticInfo*/)
+{
+}
+
+
 // protected methods
 
 template <class Interface>
 void* TInterfaceRegistrator<Interface>::InterfaceExtractor(IComponent* componentPtr)
 {
 	return dynamic_cast<Interface*>(componentPtr);
+}
+
+
+template <>
+inline void* TInterfaceRegistrator<void>::InterfaceExtractor(IComponent* /*componentPtr*/)
+{
+	return NULL;
 }
 
 

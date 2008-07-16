@@ -18,6 +18,8 @@
 #include "iipr/TGaussianProcessorComp.h"
 #include "iipr/CGaussian2dFilterParams.h"
 #include "iipr/CCaliperParams.h"
+#include "iipr/CExtremumCaliperProcessorComp.h"
+#include "iipr/CLineProjectionProcessorComp.h"
 
 
 /**
@@ -29,17 +31,19 @@ namespace IprPck
 
 typedef iipr::CProcessedAcquisitionComp ProcessedCamera;
 typedef iipr::CMovingAverageProcessorComp MovingAverageProcessor;
-typedef icomp::TMakeComponentWrap<iser::ISerializable, imod::TModelWrap<iipr::CRectangularFilterParams> > RectangularFilterParams;
+typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CRectangularFilterParams>, iser::ISerializable> RectangularFilterParams;
 typedef iipr::CLocalDifferenceProcessorComp LocalDifferenceProcessor;	
-typedef icomp::TMakeComponentWrap<iser::ISerializable, imod::TModelWrap<iipr::CLocalDifferenceFilterParams> > LocalDifferenceFilterParams;
+typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CLocalDifferenceFilterParams>, iser::ISerializable> LocalDifferenceFilterParams;
 typedef iipr::CIterativeProcessorComp IterationProcessor;
-typedef icomp::TMakeComponentWrap<iser::ISerializable, imod::TModelWrap<iipr::CIterativeProcessorParams> > IterativeProcessorParams;
+typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CIterativeProcessorParams>, iser::ISerializable> IterativeProcessorParams;
 typedef iipr::CMorphoMaxOperatorComp MorphoMaxOperator;
 typedef iipr::CMorphoMinOperatorComp MorphoMinOperator;
 typedef iipr::CInvertOperatorComp InvertOperator;
 typedef iipr::CGaussianFilterComp GaussianFilter;
-typedef icomp::TMakeComponentWrap<iser::ISerializable, imod::TModelWrap<iipr::CGaussian2dFilterParams> > GaussianFilterParams;
-typedef icomp::TMakeComponentWrap<iipr::ICaliperParams, imod::TModelWrap<iipr::CCaliperParams> > CaliperParams;
+typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CGaussian2dFilterParams>, iser::ISerializable> GaussianFilterParams;
+typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CCaliperParams>, iipr::ICaliperParams, iser::ISerializable> CaliperParams;
+typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
+typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
 
 
 } // namespace IprPck

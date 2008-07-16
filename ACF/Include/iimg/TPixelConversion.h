@@ -63,7 +63,7 @@ inline typename DestPixel TPixelConversion<SourcePixel, DestPixel, CalcPixel>::G
 
 
 template <typename SourcePixel, typename DestPixel, typename CalcPixel>
-inline double TPixelConversion<SourcePixel, DestPixel, CalcPixel>::GetWeight(const CalcPixel& pixel) const
+inline double TPixelConversion<SourcePixel, DestPixel, CalcPixel>::GetWeight(const CalcPixel& /*pixel*/) const
 {
 	return 1.0;
 }

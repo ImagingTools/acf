@@ -19,6 +19,7 @@ I_EXPORT_COMPONENT(CompositeDocumentTemplate, "Composite document template suppo
 I_EXPORT_COMPONENT(SamplingParams, "Sampling params based on fixed boundary values", "Sample Sampling Acquisition Model Parameters");
 I_EXPORT_COMPONENT(FileBitmapAcquisitionParams, "Parameters for bitmap acquisition from file", "File Directory Bitmap Acquisition Snap Parameters");
 I_EXPORT_COMPONENT(ExposureParams, "Parameters for exposure parameter control", "Exposure Shutter Delay Time EEN Bitmap Acquisition Snap Parameters");
+I_EXPORT_COMPONENT(Line, "Line 2D object", "Line 2D Object Parameter");
 
 
 } // namespace BasePck

@@ -144,6 +144,9 @@
 				RelativePath="..\CGaussian2dFilterParams.cpp">
 			</File>
 			<File
+				RelativePath="..\CExtremumCaliperProcessorComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CImageProjection.cpp">
 			</File>
 			<File
@@ -154,6 +157,9 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionProcessor.cpp">
+			</File>
+			<File
+				RelativePath="..\CLineProjectionProcessorComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CLocalDifferenceFilterParams.cpp">
@@ -196,6 +202,9 @@
 				RelativePath="..\CGaussian2dFilterParams.h">
 			</File>
 			<File
+				RelativePath="..\CExtremumCaliperProcessorComp.h">
+			</File>
+			<File
 				RelativePath="..\CImageProjection.h">
 			</File>
 			<File
@@ -206,6 +215,9 @@
 			</File>
 			<File
 				RelativePath="..\CLineProjectionProcessor.h">
+			</File>
+			<File
+				RelativePath="..\CLineProjectionProcessorComp.h">
 			</File>
 			<File
 				RelativePath="..\CLocalDifferenceFilterParams.h">

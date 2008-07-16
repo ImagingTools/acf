@@ -6,6 +6,7 @@
 #include "iser/CXmlFileWriteArchive.h"
 
 #include "icomp/TModelCompWrap.h"
+#include "icomp/TMakeComponentWrap.h"
 
 #include "isvn/TApplicationInfoWrap.h"
 
@@ -15,6 +16,8 @@
 #include "istdc/TFileSerializerComp.h"
 #include "istdc/CApplicationInfoComp.h"
 #include "istdc/CRegistryCodeSaverComp.h"
+
+#include "i2d/CLine2d.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
@@ -48,6 +51,8 @@ typedef icomp::TModelCompWrap<isig::CSamplingParamsComp> SamplingParams;
 
 typedef icomp::TModelCompWrap<icam::CFileBitmapAcquisitionParamsComp> FileBitmapAcquisitionParams;
 typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
+
+typedef icomp::TMakeComponentWrap<imod::TModelWrap<i2d::CLine2d>, i2d::IObject2d, iser::ISerializable> Line;
 
 
 } // namespace BasePck

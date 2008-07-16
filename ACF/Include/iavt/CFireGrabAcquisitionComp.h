@@ -37,7 +37,7 @@ public:
 	I_BEGIN_COMPONENT(CFireGrabAcquisitionComp)
 		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)
 		I_REGISTER_INTERFACE(icam::IExposureConstraints)
-		I_ASSIGN(m_exposureParamsIdAttrPtr, "ExposureParamsId", "Id used to get exposure parameters from the parameter set", false, "ExposureParamsId")
+		I_ASSIGN(m_exposureParamsIdAttrPtr, "ExposureParamsId", "Id used to get exposure parameters from the parameter set", false, "ExposureParams")
 	I_END_COMPONENT
 
 	enum MessageId

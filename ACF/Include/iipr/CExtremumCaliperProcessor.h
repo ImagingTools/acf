@@ -20,8 +20,6 @@ class CExtremumCaliperProcessor: public iproc::TSyncProcessorWrap<ICaliperProces
 public:
 	typedef iproc::TSyncProcessorWrap<ICaliperProcessor> BaseClass;
 
-	CExtremumCaliperProcessor();
-
 	/**
 		Do extremum features analyze.
 	*/
@@ -51,7 +49,7 @@ public:
 				IFeaturesConsumer* outputPtr);
 
 private:
-	std::string m_caliperParamId;
+	std::string m_caliperParamsId;
 };
 
 
@@ -59,13 +57,13 @@ private:
 
 inline const std::string& CExtremumCaliperProcessor::GetCaliperParamId() const
 {
-	return m_caliperParamId;
+	return m_caliperParamsId;
 }
 
 
 inline void CExtremumCaliperProcessor::SetCaliperParamId(const std::string& id)
 {
-	m_caliperParamId = id;
+	m_caliperParamsId = id;
 }
 
 

@@ -21,8 +21,8 @@ class CProcessedAcquisitionComp:
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CProcessedAcquisitionComp)
-		I_REGISTER_INTERFACE(icam::IBitmapAcquisition)
+	I_BEGIN_COMPONENT(CProcessedAcquisitionComp);
+		I_REGISTER_INTERFACE(icam::IBitmapAcquisition);
 		I_ASSIGN(m_slaveAcquisitionCompPtr, "SlaveCamera", "Camera for real image acquisition", true, "SlaveCamera");
 		I_ASSIGN(m_processorCompPtr, "ImageProcessor", "Image processor", false, "ImageProcessor");
 	I_END_COMPONENT

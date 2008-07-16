@@ -50,7 +50,7 @@ typedef iqt::CFileDialogSerializerComp FileDialogSerializer;
 typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;
-typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iimg::IBitmap, iqt::CBitmap> > Bitmap;
+typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmap, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable> > Bitmap;
 typedef iqt2d::CImageViewComp ImageView;
 typedef iqt::CDockWidgetGuiComp DockWidgetGui;
 typedef iqt::CComposedParamsSetGuiComp ComposedParamsSetGui;

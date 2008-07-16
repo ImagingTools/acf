@@ -22,6 +22,9 @@ public:
 	virtual int GetDirectionMode() const;
 	virtual void SetDirectionMode(int mode);
 
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
 private:
 	double m_weightThreshold;
 	int m_polarityMode;

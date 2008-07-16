@@ -58,7 +58,7 @@ bool ProjectionFunction(
 			else{
 				if (axis2Index >= axisSizes[1]){
 					int axis2Offset = (axisSizes[1] - 1) * addressDiffs[1];
-					value = conversion.GetCalc(*(const PixelConversion::SourcePixelType*)(firstPixelAddress[axis1Offset]));
+					value = conversion.GetCalc(*(const PixelConversion::SourcePixelType*)(firstPixelAddress[axis1Offset + axis2Offset]));
 				}
 				else{
 					double alpha = axis2Position - axis2Index;

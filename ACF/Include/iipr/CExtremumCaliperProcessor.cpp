@@ -164,11 +164,11 @@ int CExtremumCaliperProcessor::DoProcessing(
 		return TS_OK;
 	}
 
-	if ((inputPtr == NULL) || (paramsPtr == NULL) || m_caliperParamId.empty()){
+	if ((inputPtr == NULL) || (paramsPtr == NULL) || m_caliperParamsId.empty()){
 		return TS_INVALID;
 	}
 
-	const ICaliperParams* caliperParamsPtr = dynamic_cast<const ICaliperParams*>(paramsPtr->GetParameter(m_caliperParamId));
+	const ICaliperParams* caliperParamsPtr = dynamic_cast<const ICaliperParams*>(paramsPtr->GetParameter(m_caliperParamsId));
 	if (caliperParamsPtr == NULL){
 		return TS_INVALID;
 	}

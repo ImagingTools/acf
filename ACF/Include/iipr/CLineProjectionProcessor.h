@@ -64,6 +64,20 @@ private:
 };
 
 
+// inline methods
+
+inline const std::string& CLineProjectionProcessor::GetLineParamId() const
+{
+	return m_lineParamId;
+}
+
+
+inline void CLineProjectionProcessor::SetLineParamId(const std::string& id)
+{
+	m_lineParamId = id;
+}
+
+
 } // namespace iipr
 
 
