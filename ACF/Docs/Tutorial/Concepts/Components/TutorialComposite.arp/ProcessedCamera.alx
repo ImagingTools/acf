@@ -4,7 +4,18 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="25">
+  <PositionMap count="26">
+    <Element>
+      <ComponentName>
+        AverageFilter
+      </ComponentName>
+      <X>
+        25
+      </X>
+      <X>
+        337
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         AverageParams
