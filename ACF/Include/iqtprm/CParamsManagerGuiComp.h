@@ -1,5 +1,5 @@
-#ifndef iqt_CParamsManagerGuiComp_included
-#define iqt_CParamsManagerGuiComp_included
+#ifndef iqtprm_CParamsManagerGuiComp_included
+#define iqtprm_CParamsManagerGuiComp_included
 
 
 #include "iprm/IParamsManager.h"
@@ -7,21 +7,21 @@
 
 #include "iqt/TDesignerGuiObserverCompBase.h"
 
-#include "iqt/Generated/ui_CParamsManagerGuiComp.h"
+#include "iqtprm/Generated/ui_CParamsManagerGuiComp.h"
 
 
-namespace iqt
+namespace iqtprm
 {
 
 
-class CParamsManagerGuiComp: public TDesignerGuiObserverCompBase<
+class CParamsManagerGuiComp: public iqt::TDesignerGuiObserverCompBase<
 			Ui::CParamsManagerGuiComp,
 			iprm::ISelectionParam>
 {
 	Q_OBJECT
 
 public:
-	typedef TDesignerGuiObserverCompBase<
+	typedef iqt::TDesignerGuiObserverCompBase<
 				Ui::CParamsManagerGuiComp,
 				iprm::ISelectionParam> BaseClass;
 
@@ -90,9 +90,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace iqtprm
 
 
-#endif // !iqt_CParamsManagerGuiComp_included
+#endif // !iqtprm_CParamsManagerGuiComp_included
 
 

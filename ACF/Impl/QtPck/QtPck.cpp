@@ -31,6 +31,8 @@ I_EXPORT_COMPONENT(ExtendedDocumentTemplate, "Extended serialized document templ
 I_EXPORT_COMPONENT(MainWindowGui, "Main Qt application window", "Main Window Start Begin GUI Qt");
 I_EXPORT_COMPONENT(MultiDocWorkspaceGui, "Multi document workspace", "Workspace Document Model View Observer MVC GUI Qt");
 I_EXPORT_COMPONENT(Bitmap, "QImage based bitmap implementation", "QImage Image Bitmap Qt");
+I_EXPORT_COMPONENT(SceneConnector, "Display scane provider, scene extender and connect it", "Scene Connector Provider Extender Display Console GUI Qt");
+I_EXPORT_COMPONENT(SceneProvider, "Standard scene provider", "Scene Provider Extender Display Console GUI Qt");
 I_EXPORT_COMPONENT(ImageView, "Display bitmap using observer pattern", "Image Bitmap Display Viewer Observer Qt");
 I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
 I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using simple model observer GUI", "Model Observer Parameter Set Editor GUI Qt");

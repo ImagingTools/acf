@@ -12,173 +12,9 @@ namespace iqt2d
 {
 
 
-// public methods
-
 CImageViewComp::CImageViewComp()
-	:m_isFullScreenMode(true),
-	m_isZoomIgnored(false),
-	m_fitToViewCommand("&Fit Image To View"),
-	m_resetZoomCommand("&Reset Zoom")
 {
-	m_scenePtr = new QGraphicsScene;
-
-	m_scenePtr->setFocus();
-}
-
-
-CImageViewComp::~CImageViewComp() 
-{
-}
-
-
-void CImageViewComp::SetFitMode(FitMode mode)
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	m_fitMode = mode;
-	if (m_fitMode == ScaleToFit){
-		viewPtr->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-		viewPtr->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-		OnFitToView();
-	}
-	else{
-		viewPtr->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-		viewPtr->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-	}
-}
-
-
-void CImageViewComp::SetFullScreenMode(bool fullScreenMode)
-{
-	m_isFullScreenMode = fullScreenMode;
-}
-
-
-// public slots
-
-void CImageViewComp::SetZoom(double scaleFactor)
-{
-	if (m_isZoomIgnored){
-		return;
-	}
-
-	if (m_fitMode == ScaleToFit){
-		return;
-	}
-
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	QMatrix scaleMatrix;
-	scaleMatrix.scale(scaleFactor, scaleFactor);
-
-	viewPtr->setMatrix(scaleMatrix);
-
-	m_isZoomIgnored = true;
-
-	emit zoomChanged(scaleFactor);
-
-	m_isZoomIgnored = false;
-}
-
-
-void CImageViewComp::SetZoom(const QString& zoomString)
-{
-	SetZoom(zoomString.toInt() / 100.0);
-}
-
-
-void CImageViewComp::OnZoomIncrement()
-{
-	 ScaleView(pow((double)2, 0.5));  
-}
-
-
-void CImageViewComp::OnZoomDecrement()
-{
-	ScaleView(pow((double)2, -0.5));  
-}
-
-
-void CImageViewComp::SwitchFullScreen()
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	if (viewPtr->isFullScreen()){
-		viewPtr->showNormal();
-	}
-
-	else{
-		viewPtr->showFullScreen();
-	}
-}
-
-
-void CImageViewComp::OnFitToView()
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	istd::CIndex2d imageSize = m_imageItem.GetSize();
-	double scaleX = viewPtr->width() / double(imageSize.GetX());
-	double scaleY = viewPtr->height() / double(imageSize.GetY());
-	
-	double newScale = istd::Min(scaleX, scaleY);
-
-	QMatrix scaleMatrix;
-	scaleMatrix.scale(newScale, newScale);	
-		
-	viewPtr->setMatrix(scaleMatrix);
-}
-
-
-void CImageViewComp::OnFitToImage()
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	viewPtr->showNormal();
-	double r = viewPtr->matrix().m11();
-	istd::CIndex2d size = m_imageItem.GetSize();
-	viewPtr->resize(size.GetX() * r, size.GetY() * r);
-}
-
-
-void CImageViewComp::OnResetScale()
-{
-	SetZoom(1.0);
-}
-
-
-void CImageViewComp::OnAutoFit(bool isAutoScale)
-{
-	if (isAutoScale){
-		SetFitMode(ScaleToFit);
-	}
-	else{
-		SetFitMode(NoFit);
-	}
-
-	m_fitToViewCommand.setEnabled(!isAutoScale);
-	m_resetZoomCommand.setEnabled(!isAutoScale);
+	SetBackgroundGridUsed();
 }
 
 
@@ -191,113 +27,10 @@ void CImageViewComp::UpdateModel() const
 
 void CImageViewComp::UpdateEditor()
 {
-	if (IsGuiCreated()){
-		QGraphicsView* viewPtr = GetQtWidget();
-		I_ASSERT(viewPtr != NULL);	// gui was created
-
-		iimg::IBitmap* bitmapPtr = GetObjectPtr();
-
-		if (bitmapPtr != NULL){
-			m_imageItem.SetBitmap(*bitmapPtr);
-			istd::CIndex2d size = m_imageItem.GetSize();
-
-			viewPtr->setSceneRect(0, 0, size.GetX(), size.GetY());
-
-			InvalidateScene();
-		}
-	}
-}
-
-
-// reimplemented (idoc::ICommandsProvider)
-
-const idoc::IHierarchicalCommand* CImageViewComp::GetCommands() const
-{
-	return &m_editorCommand;
-}
-
-
-// reimplemented (iqt2d::ISceneProvider)
-
-int CImageViewComp::GetSceneId() const
-{
-	I_ASSERT(m_sceneIdAttrPtr.IsValid());
-
-	return *m_sceneIdAttrPtr;
-}
-
-
-QGraphicsScene* CImageViewComp::GetScene() const
-{
-	return m_scenePtr;
-}
-
-
-// reimplemented (icomp::IComponent)
-
-void CImageViewComp::OnComponentCreated()
-{
-	CreateContextMenu();
 }
 
 
 // protected methods
-
-void CImageViewComp::OnResize(QResizeEvent* /*event*/)
-{
-	if (m_fitMode == ScaleToFit){
-		OnFitToView();
-	}
-}
-
-
-void CImageViewComp::OnWheelEvent(QGraphicsSceneWheelEvent* event)
-{
-	ScaleView(pow((double)2, event->delta() / 240.0));
-}
-
-
-void CImageViewComp::OnMouseDoubleClickEvent(QMouseEvent* /*event*/)
-{
-	if (m_isFullScreenMode){
-		SwitchFullScreen();
-	}
-}
-
-
-void CImageViewComp::OnMouseMoveEvent(QMouseEvent* /*event*/)
-{
-}
-
-
-void CImageViewComp::OnKeyReleaseEvent(QKeyEvent* event)
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	switch(event->key()){
-		case Qt::Key_Plus:
-			OnZoomIncrement();
-			break;
-		case Qt::Key_Minus:
-			OnZoomDecrement();
-			break;
-		case Qt::Key_Escape:
-			if (viewPtr->isFullScreen()){
-				viewPtr->showNormal();
-			}
-			break;
-	}
-}
-
-
-void CImageViewComp::OnContextMenuEvent(QContextMenuEvent* /*event*/)
-{
-}
-
 
 // reimplemented (iqt::CGuiComponentBase)
 
@@ -305,121 +38,21 @@ void CImageViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-	
-	viewPtr->setFrameStyle(QFrame::NoFrame);
-	viewPtr->setScene(m_scenePtr);
-	viewPtr->setMouseTracking(true);
-	viewPtr->setDragMode(QGraphicsView::ScrollHandDrag);
-	viewPtr->setCacheMode(QGraphicsView::CacheBackground);
-
-	m_scenePtr->addItem(&m_imageItem);
-
-	viewPtr->installEventFilter(this);
-	m_scenePtr->installEventFilter(this);
-	
-	m_scenePtr->setBackgroundBrush(QBrush(Qt::lightGray));
-}
-
-
-// reimplemented (QObject)
-
-bool CImageViewComp::eventFilter(QObject* obj, QEvent* event)
-{
-	if (!IsGuiCreated()){
-		return false;
-	}
-
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return false;
-	}
-
-	if (obj != viewPtr && obj != m_scenePtr){
-		return false;
-	}
-
-	switch(event->type()){
-		case QEvent::MouseButtonDblClick:
-		case QEvent::GraphicsSceneMouseDoubleClick:
-			OnMouseDoubleClickEvent(dynamic_cast<QMouseEvent*>(event));
-			break;
-		case QEvent::KeyRelease:
-			OnKeyReleaseEvent(dynamic_cast<QKeyEvent*>(event));
-			break;
-
-		case QEvent::Resize:
-			OnResize(dynamic_cast<QResizeEvent*>(event));
-			break;
-
-		case QEvent::GraphicsSceneWheel:
-			OnWheelEvent(dynamic_cast<QGraphicsSceneWheelEvent*>(event));
-			break;
-	}
-
-	return false;
-}
-
-
-// private methods
-
-void CImageViewComp::InvalidateScene()
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
+	QGraphicsScene* scenePtr = GetScene();
+	if (scenePtr != NULL){
+		scenePtr->addItem(this);
 	}
 }
 
 
-void CImageViewComp::CreateContextMenu()
+void CImageViewComp::OnGuiDestroyed()
 {
-	iqt::CHierarchicalCommand* imageMenuPtr = new iqt::CHierarchicalCommand("&Image");
-
-	iqt::CHierarchicalCommand* autoFitToViewCommandPtr = new iqt::CHierarchicalCommand("&Auto Fit");
-	autoFitToViewCommandPtr->SetStaticFlags(iqt::CHierarchicalCommand::CF_ONOFF | 
-											iqt::CHierarchicalCommand::CF_GLOBAL_MENU);
-	connect(autoFitToViewCommandPtr, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
-	imageMenuPtr->InsertChild(autoFitToViewCommandPtr, true);
-
-	connect(&m_fitToViewCommand, SIGNAL( activated()), this, SLOT(OnFitToView()));
-	imageMenuPtr->InsertChild(&m_fitToViewCommand);
-
-	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
-	if (*m_allowWidgetResizeAttrPtr){
-		iqt::CHierarchicalCommand* fitToImageCommandPtr = new iqt::CHierarchicalCommand("&Fit View To Image");
-		connect(fitToImageCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToImage()));
-		imageMenuPtr->InsertChild(fitToImageCommandPtr, true);
+	QGraphicsScene* scenePtr = GetScene();
+	if (scenePtr != NULL){
+		scenePtr->removeItem(this);
 	}
 
-	connect(&m_resetZoomCommand, SIGNAL( activated()), this, SLOT(OnResetScale()));
-	imageMenuPtr->InsertChild(&m_resetZoomCommand);
-
-	m_editorCommand.InsertChild(imageMenuPtr, true);
-}
-
-
-void CImageViewComp::ScaleView(double scaleFactor)
-{
-	QGraphicsView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	QMatrix sceneMatrix = viewPtr->matrix();
-	QMatrix scaleMatrix;
-	scaleMatrix.scale(scaleFactor, scaleFactor);
-
-	sceneMatrix *= scaleMatrix;
-	
-	SetZoom(sceneMatrix.m11());
+	BaseClass::OnGuiDestroyed();
 }
 
 

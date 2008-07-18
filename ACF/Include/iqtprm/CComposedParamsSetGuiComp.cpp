@@ -1,4 +1,4 @@
-#include "iqt/CComposedParamsSetGuiComp.h"
+#include "iqtprm/CComposedParamsSetGuiComp.h"
 
 
 // Qt includes
@@ -8,7 +8,7 @@
 #include "imod/IObserver.h"
 
 
-namespace iqt
+namespace iqtprm
 {
 
 
@@ -120,6 +120,36 @@ void CComposedParamsSetGuiComp::OnGuiDestroyed()
 }
 
 
-} // namespace iqt
+// reimplemented (iqt2d::ISceneExtender)
+
+void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+{
+	I_ASSERT(providerPtr != NULL);
+
+	int elementsCount = m_extendersCompPtr.GetCount();
+	for (int i = 0; i < elementsCount; ++i){
+		iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[i];
+		if (extenderPtr != NULL){
+			extenderPtr->AddItemsToScene(providerPtr, flags);
+		}
+	}
+}
+
+
+void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+{
+	I_ASSERT(providerPtr != NULL);
+
+	int elementsCount = m_extendersCompPtr.GetCount();
+	for (int i = 0; i < elementsCount; ++i){
+		iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[i];
+		if (extenderPtr != NULL){
+			extenderPtr->RemoveItemsFromScene(providerPtr);
+		}
+	}
+}
+
+
+} // namespace iqtprm
 
 

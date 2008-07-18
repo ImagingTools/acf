@@ -19,7 +19,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ExposureParamsId
@@ -55,6 +55,25 @@
               </IsEnabled>
               <Value>
                 Framework
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseSingleShoot
+            </Id>
+            <Type>
+              class icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
               </Value>
             </Data>
           </AttributeInfo>

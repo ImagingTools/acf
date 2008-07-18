@@ -4,6 +4,10 @@
 // Qt includes
 #include <QMessageBox>
 
+#include "istd/TDelPtr.h"
+
+#include "iqt2d/CImageShape.h"
+
 
 namespace iqtcam
 {
@@ -21,6 +25,28 @@ CSnapImageGuiComp::CSnapImageGuiComp()
 void CSnapImageGuiComp::OnComponentCreated()
 {
 	m_timer.setInterval(int(*m_liveIntervalAttrPtr * 1000));
+}
+
+
+// reimplemented (iqt2d::ISceneExtender)
+
+void CSnapImageGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+{
+	BaseClass::AddItemsToScene(providerPtr, flags);
+
+	if (m_paramsSetExtenderCompPtr.IsValid()){
+		m_paramsSetExtenderCompPtr->AddItemsToScene(providerPtr, flags);
+	}
+}
+
+
+void CSnapImageGuiComp::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+{
+	if (m_paramsSetExtenderCompPtr.IsValid()){
+		m_paramsSetExtenderCompPtr->RemoveItemsFromScene(providerPtr);
+	}
+
+	BaseClass::RemoveItemsFromScene(providerPtr);
 }
 
 
@@ -105,6 +131,21 @@ bool CSnapImageGuiComp::SnapImage()
 }
 
 
+// reimplemented (iqt2d::TSceneExtenderCompBase)
+
+void CSnapImageGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+{
+	if (m_bitmapModelCompPtr.IsValid()){
+		istd::TDelPtr<iqt2d::CImageShape> shapePtr(new iqt2d::CImageShape);
+		if (shapePtr != NULL){
+			if (m_bitmapModelCompPtr->AttachObserver(shapePtr.GetPtr())){
+				result.PushBack(shapePtr.PopPtr());
+			}
+		}
+	}
+}
+
+
 // reimplemented (iqt::CGuiComponentBase)
 
 void CSnapImageGuiComp::OnGuiCreated()
@@ -125,18 +166,12 @@ void CSnapImageGuiComp::OnGuiCreated()
 		areParamsEditable = true;
 	}
 
-	if (m_bitmapModelCompPtr.IsValid() && m_bitmapGuiCompPtr.IsValid() && m_bitmapObserverCompPtr.IsValid()){
-		m_bitmapModelCompPtr->AttachObserver(m_bitmapObserverCompPtr.GetPtr());
-		m_bitmapGuiCompPtr->CreateGui(ImageViewFrame);
-	}
-
 	ParamsGB->setVisible(
 				m_paramsSetCompPtr.IsValid() &&
 				(areParamsEditable || m_paramsLoaderCompPtr.IsValid()));
 	LoadParamsButton->setVisible(m_paramsLoaderCompPtr.IsValid());
 	SaveParamsButton->setVisible(m_paramsLoaderCompPtr.IsValid());
 	ParamsFrame->setVisible(m_paramsSetCompPtr.IsValid() && areParamsEditable);
-	ImageViewFrame->setVisible(hasBitmap && hasSnap && m_bitmapGuiCompPtr.IsValid() && m_bitmapObserverCompPtr.IsValid());
 }
 
 
@@ -152,16 +187,6 @@ void CSnapImageGuiComp::OnGuiDestroyed()
 
 	if (m_paramsSetGuiCompPtr.IsValid() && m_paramsSetGuiCompPtr->IsGuiCreated()){
 		m_paramsSetGuiCompPtr->DestroyGui();
-	}
-
-	if (		m_bitmapModelCompPtr.IsValid() &&
-				m_bitmapObserverCompPtr.IsValid() &&
-				m_bitmapModelCompPtr->IsAttached(m_bitmapObserverCompPtr.GetPtr())){
-		m_bitmapModelCompPtr->DetachObserver(m_bitmapObserverCompPtr.GetPtr());
-	}
-
-	if (m_bitmapGuiCompPtr.IsValid() && m_bitmapGuiCompPtr->IsGuiCreated()){
-		m_bitmapGuiCompPtr->DestroyGui();
 	}
 }
 

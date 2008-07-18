@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="iqt2d"
-	ProjectGUID="{F9F47984-52CC-4D6B-9079-FC7DD1009C6E}"
-	RootNamespace="iqt2d"
+	Name="iqtprm"
+	ProjectGUID="{B11EFB14-C129-4F69-8143-8127D45770BF}"
+	RootNamespace="iqtprm"
 	Keyword="Qt4VSv1.0">
 	<Platforms>
 		<Platform
@@ -106,16 +106,10 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\CImageShape.cpp">
+				RelativePath="..\CComposedParamsSetGuiComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CImageViewComp.cpp">
-			</File>
-			<File
-				RelativePath="..\CSceneConnectorGuiComp.cpp">
-			</File>
-			<File
-				RelativePath="..\CSceneProviderComp.cpp">
+				RelativePath="..\CParamsManagerGuiComp.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -123,34 +117,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\CImageShape.h">
+				RelativePath="..\CComposedParamsSetGuiComp.h">
 			</File>
 			<File
-				RelativePath="..\CImageViewComp.h">
-				<FileConfiguration
-					Name="Release|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description=""
-						CommandLine=""
-						AdditionalDependencies=""
-						Outputs=""/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCustomBuildTool"
-						Description=""
-						CommandLine=""
-						AdditionalDependencies=""
-						Outputs=""/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\CSceneConnectorGuiComp.h">
-			</File>
-			<File
-				RelativePath="..\CSceneProviderComp.h">
+				RelativePath="..\CParamsManagerGuiComp.h">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -171,16 +141,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\iqt2d.h">
-			</File>
-			<File
-				RelativePath="..\ISceneExtender.h">
-			</File>
-			<File
-				RelativePath="..\ISceneProvider.h">
-			</File>
-			<File
-				RelativePath="..\TSceneExtenderCompBase.h">
+				RelativePath="..\iqtprm.h">
 			</File>
 		</Filter>
 		<Filter
@@ -194,24 +155,23 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}">
 			<File
-				RelativePath="..\generated\moc_CSceneProviderComp.cpp">
+				RelativePath="..\generated\moc_CParamsManagerGuiComp.cpp">
 			</File>
 			<File
-				RelativePath="..\generated\ui_CSceneConnectorGuiComp.h">
+				RelativePath="..\generated\ui_CParamsManagerGuiComp.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			Filter="">
 			<File
-				RelativePath="..\CSceneConnectorGuiComp.ui">
+				RelativePath="..\CParamsManagerGuiComp.ui">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
-"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>
@@ -220,8 +180,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
-"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>

@@ -1,4 +1,4 @@
-#include "iqt/CParamsManagerGuiComp.h"
+#include "iqtprm/CParamsManagerGuiComp.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -8,7 +8,7 @@
 #include "iqt/CSignalBlocker.h"
 
 
-namespace iqt
+namespace iqtprm
 {
 
 
@@ -288,6 +288,6 @@ void CParamsManagerGuiComp::ManagerObserver::OnUpdate(int /*updateFlags*/, istd:
 }
 
 
-} // namespace iqt
+} // namespace iqtprm
 
 

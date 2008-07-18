@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="10">
+  <ElementsList count="11">
     <Element>
       <Id>
         Application
@@ -35,7 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapGui
+                MainGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -75,43 +75,6 @@
           true
         </IsEnabled>
         <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        BitmapView
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        ImageView
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              AllowWidgetResize
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -210,6 +173,80 @@
     </Element>
     <Element>
       <Id>
+        MainGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        SceneConnector
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ExtenderGui
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneGui
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Scene
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Scene
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        SceneProvider
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         SnapGui
       </Id>
       <PackageId>
@@ -222,7 +259,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               Bitmap
@@ -258,25 +295,6 @@
               </IsEnabled>
               <Value>
                 BitmapLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              BitmapGui
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapView
               </Value>
             </Data>
           </AttributeInfo>
@@ -354,7 +372,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Parameters
@@ -394,24 +412,6 @@
                 <Value>
                   FileBitmapAcquisition
                 </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SlaveSets
-            </Id>
-            <Type>
-              class icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="0">
               </Values>
             </Data>
           </AttributeInfo>

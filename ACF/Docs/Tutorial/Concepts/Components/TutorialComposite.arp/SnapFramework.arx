@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="10">
     <Element>
       <Id>
         Application
@@ -179,43 +179,6 @@
     </Element>
     <Element>
       <Id>
-        BitmapView
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        ImageView
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              AllowWidgetResize
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         ImageDialogLoader
       </Id>
       <PackageId>
@@ -276,13 +239,31 @@
     </Element>
     <Element>
       <Id>
-        Log
+        LogTab
       </Id>
       <PackageId>
         QtPck
       </PackageId>
       <ComponentId>
         Log
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SceneGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        SceneProvider
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -306,7 +287,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               Bitmap
@@ -340,25 +321,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              BitmapGui
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                BitmapView
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -433,6 +395,62 @@
     </Element>
     <Element>
       <Id>
+        SnapTab
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        SceneConnector
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              ExtenderGui
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SnapGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneGui
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SceneGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         Tabs
       </Id>
       <PackageId>
@@ -462,10 +480,10 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  SnapGui
+                  SnapTab
                 </Value>
                 <Value>
-                  Log
+                  LogTab
                 </Value>
               </Values>
             </Data>
