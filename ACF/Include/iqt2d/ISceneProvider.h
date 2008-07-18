@@ -2,6 +2,8 @@
 #define iqt2d_ISceneProvider_included
 
 
+#include <QGraphicsScene>
+
 #include "istd/IPolymorphic.h"
 
 #include "iqt2d/iqt2d.h"

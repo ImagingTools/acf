@@ -18,7 +18,7 @@ void CSceneConnectorGuiComp::OnGuiCreated()
 	}
 
 	if (m_extenderGuiCompPtr.IsValid()){
-		m_extenderGuiCompPtr->CreateGui(ImageViewFrame);
+		m_extenderGuiCompPtr->CreateGui(ParamsFrame);
 	}
 
 	if (m_sceneProviderCompPtr.IsValid() && m_extenderCompPtr.IsValid()){
@@ -30,7 +30,7 @@ void CSceneConnectorGuiComp::OnGuiCreated()
 void CSceneConnectorGuiComp::OnGuiDestroyed()
 {
 	if (m_sceneProviderCompPtr.IsValid() && m_extenderCompPtr.IsValid()){
-		m_extenderCompPtr->RemoveFromScene(m_sceneProviderCompPtr.GetPtr());
+		m_extenderCompPtr->RemoveItemsFromScene(m_sceneProviderCompPtr.GetPtr());
 	}
 
 	if (m_extenderGuiCompPtr.IsValid()){
