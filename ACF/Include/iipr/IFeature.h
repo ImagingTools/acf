@@ -23,7 +23,7 @@ public:
 
 	/**
 		Get position of this feature.
-		Interpretation of this value is depending on feture type.
+		Interpretation of this value is depending on feature type.
 	*/
 	virtual imath::CVarVector GetPosition() const = 0;
 

@@ -38,7 +38,7 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap* inputPtr,
-				iipr::ISearchResultSet* outputPtr);
+				iipr::IFeaturesConsumer* outputPtr);
 
 private:
 	imil::CMilEngine m_engine;

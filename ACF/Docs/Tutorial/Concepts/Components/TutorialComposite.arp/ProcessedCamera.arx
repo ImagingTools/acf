@@ -19,7 +19,23 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ParamsId

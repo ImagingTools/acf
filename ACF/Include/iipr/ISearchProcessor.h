@@ -6,7 +6,7 @@
 
 #include "iproc/TIProcessor.h"
 
-#include "iipr/ISearchResultSet.h"
+#include "iipr/IFeaturesConsumer.h"
 
 
 namespace iipr
@@ -16,7 +16,7 @@ namespace iipr
 /**
 	Interface for the shape based pattern matching processor.
 */
-class ISearchProcessor: virtual public iproc::TIProcessor<iimg::IBitmap, iipr::ISearchResultSet>
+class ISearchProcessor: virtual public iproc::TIProcessor<iimg::IBitmap, iipr::IFeaturesConsumer>
 {
 };
 

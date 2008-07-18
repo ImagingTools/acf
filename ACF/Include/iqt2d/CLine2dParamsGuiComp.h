@@ -38,6 +38,8 @@ public:
 
 protected slots:
 	void OnParamsChanged(double value);
+
+private:
 	I_ATTR(istd::CString, m_unitNameAttrPtr);
 };
 

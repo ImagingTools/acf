@@ -5,6 +5,7 @@
 #include "iwin/CTimer.h"
 
 #include "iipr/CSearchResultSet.h"
+#include "iipr/CSearchFeature.h"
 
 
 namespace imil
@@ -18,7 +19,7 @@ namespace imil
 int CMilSearchProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const iimg::IBitmap* inputPtr,
-			iipr::ISearchResultSet* outputPtr)
+			iipr::IFeaturesConsumer* outputPtr)
 {
 	iwin::CTimer timer;
 
@@ -26,7 +27,7 @@ int CMilSearchProcessorComp::DoProcessing(
 		return PS_INVALID;
 	}
 
-	outputPtr->ResetResult();
+	outputPtr->ResetFeatures();
 
 	const CMilSearchParams* milParamsPtr = NULL;
 	if (m_searchParamsIdAttrPtr.IsValid()){
@@ -95,13 +96,11 @@ int CMilSearchProcessorComp::DoProcessing(
 
 	// If a model was found above the acceptance threshold.
 	if (numResults >= 1){
-		resultSetPtr->SetMatchesCount(numResults);
-
-		double scaleX = 0;
-		double posy = 0; 
-		double posx = 0;
-		double angle = 0;
-		double score = 0;
+		double scaleX = 0.0;
+		double posy = 0.0; 
+		double posx = 0.0;
+		double angle = 0.0;
+		double score = 0.0;
 
 		// Get the results of the single model:
 		for (int resultIndex = 0; resultIndex < numResults; resultIndex++){
@@ -114,15 +113,12 @@ int CMilSearchProcessorComp::DoProcessing(
 			posy += searchAoi.GetTop();
 			posx += searchAoi.GetLeft();
 
-			i2d::CVector2d pos(posx, posy);
+			i2d::CVector2d position(posx, posy);
 			i2d::CVector2d scale(scaleX, scaleX);	
 
 			angle = (fmod(1 + angle / 180.0, 2) - 1)  * I_PI;
 
-			resultSetPtr->AddPosition(pos);
-			resultSetPtr->AddScale(scale);
-			resultSetPtr->AddAngle(angle);
-			resultSetPtr->AddScore(score);
+			outputPtr->AddFeature(new iipr::CSearchFeature(position, scale, angle, score));
 		}
 	}
 
@@ -131,6 +127,8 @@ int CMilSearchProcessorComp::DoProcessing(
 
 	// Release the model result buffer:
 	MmodFree(milResult);
+
+	// set search duration:
 
 	resultSetPtr->SetTime(timer.GetElapsed() * 1000);
 

@@ -141,10 +141,10 @@
 				RelativePath="..\CExtremumCaliperProcessor.cpp">
 			</File>
 			<File
-				RelativePath="..\CGaussian2dFilterParams.cpp">
+				RelativePath="..\CExtremumCaliperProcessorComp.cpp">
 			</File>
 			<File
-				RelativePath="..\CExtremumCaliperProcessorComp.cpp">
+				RelativePath="..\CGaussian2dFilterParams.cpp">
 			</File>
 			<File
 				RelativePath="..\CImageProjection.cpp">
@@ -180,6 +180,9 @@
 				RelativePath="..\CRectangularFilterParams.cpp">
 			</File>
 			<File
+				RelativePath="..\CSearchFeature.cpp">
+			</File>
+			<File
 				RelativePath="..\CSearchParamsBase.cpp">
 			</File>
 			<File
@@ -199,10 +202,10 @@
 				RelativePath="..\CExtremumCaliperProcessor.h">
 			</File>
 			<File
-				RelativePath="..\CGaussian2dFilterParams.h">
+				RelativePath="..\CExtremumCaliperProcessorComp.h">
 			</File>
 			<File
-				RelativePath="..\CExtremumCaliperProcessorComp.h">
+				RelativePath="..\CGaussian2dFilterParams.h">
 			</File>
 			<File
 				RelativePath="..\CImageProjection.h">
@@ -238,6 +241,9 @@
 				RelativePath="..\CRectangularFilterParams.h">
 			</File>
 			<File
+				RelativePath="..\CSearchFeature.h">
+			</File>
+			<File
 				RelativePath="..\CSearchParamsBase.h">
 			</File>
 			<File
@@ -257,6 +263,9 @@
 			</File>
 			<File
 				RelativePath="..\IFeaturesConsumer.h">
+			</File>
+			<File
+				RelativePath="..\IFeaturesContainer.h">
 			</File>
 			<File
 				RelativePath="..\iipr.h">
@@ -284,6 +293,9 @@
 			</File>
 			<File
 				RelativePath="..\TConvolutionProcessorComp.h">
+			</File>
+			<File
+				RelativePath="..\TFeaturesContainerWrap.h">
 			</File>
 			<File
 				RelativePath="..\TGaussianKernel2d.h">
