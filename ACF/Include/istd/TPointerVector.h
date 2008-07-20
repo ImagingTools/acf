@@ -128,7 +128,7 @@ inline TPointerVector<Pointer, AccessAdapter>::TPointerVector()
 
 
 template <typename Pointer, class AccessAdapter>
-inline TPointerVector<Pointer, AccessAdapter>::TPointerVector(const TPointerVector& otherVector)
+inline TPointerVector<Pointer, AccessAdapter>::TPointerVector(const TPointerVector& I_IF_DEBUG(otherVector))
 {
 	I_ASSERT(otherVector.IsEmpty());
 }
