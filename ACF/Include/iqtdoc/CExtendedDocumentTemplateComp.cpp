@@ -28,14 +28,13 @@ const idoc::IHierarchicalCommand* CExtendedDocumentTemplateComp::GetCommands() c
 
 idoc::IDocumentTemplate::Ids CExtendedDocumentTemplateComp::GetDocumentTypeIdsForFile(const istd::CString& filePath) const
 {
-	QFileInfo info(iqt::GetQString(filePath));
-	istd::CString extension = iqt::GetCString(info.suffix());
-
+	QString path = iqt::GetQString(filePath);
 	istd::CStringList extensions = GetFileExtensions();
 	for (		istd::CStringList::const_iterator iter = extensions.begin();
 				iter != extensions.end();
 				++iter){
-		if (*iter == extension){
+		QString extension = iqt::GetQString(*iter);
+		if (path.endsWith(extension, Qt::CaseInsensitive)){
 			return GetDocumentTypeIds();
 		}
 	}

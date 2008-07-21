@@ -61,7 +61,8 @@ void CSingleDocumentTemplateComp::OnComponentCreated()
 	istd::CStringList fileFilters;
 	if (m_fileFiltersAttrPtr.IsValid()){
 		for (int index = 0; index < m_fileFiltersAttrPtr.GetCount(); index++){
-			fileFilters.push_back(m_fileFiltersAttrPtr[index]);		
+			istd::CString filter = m_fileFiltersAttrPtr[index];
+			fileFilters.push_back(filter);		
 		}
 	}
 	SetFileFilters(fileFilters);

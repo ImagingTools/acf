@@ -49,7 +49,7 @@ TSingleFactory<Interface, Implementation>::TSingleFactory(const std::string& key
 // reimplemented (istd::TIFactory)
 
 template <class Interface, class Implementation>
-typename TIFactory<Interface>::KeyList TSingleFactory<Interface, Implementation>::GetFactoryKeys() const
+typename TSingleFactory<Interface, Implementation>::KeyList TSingleFactory<Interface, Implementation>::GetFactoryKeys() const
 {
 	KeyList retVal;
 

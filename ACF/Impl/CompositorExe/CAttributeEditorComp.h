@@ -80,6 +80,10 @@ protected:
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 
+	// static methods
+	static QString DecodeFromEdit(const QString& text);
+	static QString EncodeToEdit(const QString& text);
+
 private:
 	class AttributeItemDelegate: public QItemDelegate
 	{

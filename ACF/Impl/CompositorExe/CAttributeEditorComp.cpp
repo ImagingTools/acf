@@ -341,7 +341,7 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 
 	const icomp::CStringAttribute* stringAttribute = dynamic_cast<const icomp::CStringAttribute*>(&attribute);
 	if (stringAttribute != NULL){
-		text = iqt::GetQString(stringAttribute->GetValue());
+		text = EncodeToEdit(iqt::GetQString(stringAttribute->GetValue()));
 		meaning = Attribute;
 
 		return true;
@@ -352,7 +352,7 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 		text.clear();
 
 		for (int index = 0; index < stringListAttribute->GetValuesCount(); index++){
-			text += iqt::GetQString(stringListAttribute->GetValueAt(index)) + ";";
+			text += EncodeToEdit(iqt::GetQString(stringListAttribute->GetValueAt(index))) + ";";
 		}	
 			
 		meaning = MultipleAttribute;
@@ -378,7 +378,7 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 		text.clear();
 
 		for (int index = 0; index < doubleListAttribute->GetValuesCount(); index++){
-			text += QString("%1").arg(doubleListAttribute->GetValueAt(index)) + ";";
+			text += QString::number(doubleListAttribute->GetValueAt(index)) + ";";
 		}	
 
 		meaning = MultipleAttribute;
@@ -388,7 +388,7 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 
 	const icomp::TSingleAttribute<std::string>* idPtr = dynamic_cast<const icomp::TSingleAttribute<std::string>*>(&attribute);
 	if (idPtr != NULL){		
-		text = idPtr->GetValue().c_str();
+		text = EncodeToEdit(idPtr->GetValue().c_str());
 
 		meaning = Reference;
 
@@ -401,7 +401,7 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 
 		int idsCount = multiIdPtr->GetValuesCount();
 		for (int idIndex = 0; idIndex < idsCount; idIndex++){
-			text += iqt::GetQString(multiIdPtr->GetValueAt(idIndex))  + ";";
+			text += EncodeToEdit(iqt::GetQString(multiIdPtr->GetValueAt(idIndex)))  + ";";
 		}
 
 		meaning = MultipleReference;
@@ -425,6 +425,28 @@ void CAttributeEditorComp::OnGuiCreated()
 	ExportTree->setItemDelegate(&m_attributeItemDelegate);
 
 	AttributeInfoBox->hide();
+}
+
+
+// static methods
+
+QString CAttributeEditorComp::DecodeFromEdit(const QString& text)
+{
+	QString retVal = text;
+	retVal.replace("\\:", ";");
+	retVal.replace("\\\\", "\\");
+
+	return retVal;
+}
+
+
+QString CAttributeEditorComp::EncodeToEdit(const QString& text)
+{
+	QString retVal = text;
+	retVal.replace("\\", "\\\\");
+	retVal.replace(";", "\\:");
+
+	return retVal;
 }
 
 
@@ -652,10 +674,10 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
 		icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<icomp::CFactoryAttribute*>(attributePtr);
 		if (referenceAttributePtr != NULL){
-			referenceAttributePtr->SetValue(referenceValue.toStdString());
+			referenceAttributePtr->SetValue(DecodeFromEdit(referenceValue).toStdString());
 		}
 		else if (factoryAttributePtr != NULL){
-			factoryAttributePtr->SetValue(referenceValue.toStdString());
+			factoryAttributePtr->SetValue(DecodeFromEdit(referenceValue).toStdString());
 		}
 	}
 	// set multiple reference data
@@ -670,13 +692,13 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		if (multiReferenceAttributePtr != NULL){
 			multiReferenceAttributePtr->Reset();
 			for (int index = 0; index < references.count(); index++){
-				multiReferenceAttributePtr->InsertValue(references.at(index).toStdString());
+				multiReferenceAttributePtr->InsertValue(DecodeFromEdit(references.at(index)).toStdString());
 			}
 		}
 		else if (multiFactoryAttributePtr != NULL){
 			multiFactoryAttributePtr->Reset();
 			for (int index = 0; index < references.count(); index++){
-				multiFactoryAttributePtr->InsertValue(references.at(index).toStdString());
+				multiFactoryAttributePtr->InsertValue(DecodeFromEdit(references.at(index)).toStdString());
 			}
 		}
 	}
@@ -704,7 +726,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		icomp::CStringAttribute* stringAttribute = dynamic_cast<icomp::CStringAttribute*>(attributePtr);
 		if (stringAttribute != NULL){
 			QString newValue = editor->property("text").toString();
-			stringAttribute->SetValue(iqt::GetCString(newValue));
+			stringAttribute->SetValue(iqt::GetCString(DecodeFromEdit(newValue)));
 		}
 
 		icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<icomp::CMultiStringAttribute*>(attributePtr);
@@ -714,7 +736,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 
 			stringListAttribute->Reset();
 			for (int index = 0; index < values.count(); index++){
-				stringListAttribute->InsertValue(values.at(index).toStdString());
+				stringListAttribute->InsertValue(DecodeFromEdit(values.at(index)).toStdString());
 			}
 		}
 
