@@ -82,6 +82,8 @@ protected:
 	void CreateContextMenu();
 	void ScaleView(double scaleFactor);
 
+	iqt::CHierarchicalCommand& GetCommandsRootRef();
+
 	// reimplemented (iqt::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
@@ -106,6 +108,14 @@ private:
 	I_ATTR(bool, m_allowWidgetResizeAttrPtr);
 	I_ATTR(int, m_sceneIdAttrPtr);
 };
+
+
+// inline protected methods
+
+inline iqt::CHierarchicalCommand& CSceneProviderComp::GetCommandsRootRef()
+{
+	return m_editorCommand;
+}
 
 
 } // namespace iqt2d
