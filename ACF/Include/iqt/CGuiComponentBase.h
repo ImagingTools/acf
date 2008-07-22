@@ -31,8 +31,6 @@ public:
 	bool IsGuiShown() const;
 
 	// reimplemented (iqt::IGuiObject)
-	virtual void AttachTo(QWidget* parentWidgetPtr, int layoutMargin = -1);
-	virtual void DetachFrom(QWidget* parentWidgetPtr);
 	virtual bool IsGuiCreated() const;
 	virtual bool CreateGui(QWidget* parentPtr);
 	virtual bool DestroyGui();

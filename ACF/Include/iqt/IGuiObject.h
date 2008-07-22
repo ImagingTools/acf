@@ -22,17 +22,6 @@ class IGuiObject: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Insert a GUI-component into layout of the parent widget \c parentWidgetPtr.
-		If no layout exists a new one will be created.
-	*/
-	virtual void AttachTo(QWidget* parentWidgetPtr, int layoutMargin = -1) = 0;
-
-	/**
-		Removes the GUI-component from layout of the parent widget \c parentWidgetPtr.
-	*/
-	virtual void DetachFrom(QWidget* parentWidgetPtr) = 0;
-
-	/**
 		Inform if GUI was initilized.
 	 */
 	virtual bool IsGuiCreated() const = 0;
