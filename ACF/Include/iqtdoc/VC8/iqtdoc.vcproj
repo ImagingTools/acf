@@ -162,6 +162,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CModelEditorGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.cpp"
 				>
 			</File>
@@ -222,6 +226,10 @@
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CModelEditorGuiComp.h"
+				>
 			</File>
 			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.h"

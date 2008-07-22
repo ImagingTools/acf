@@ -11,6 +11,7 @@
 	\li istd
 	\li iser
 	\li	icmm
+	\li	iqt2d
 */
 namespace iqtdoc
 {

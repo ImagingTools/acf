@@ -27,6 +27,7 @@ I_EXPORT_COMPONENT(SplashScreen, "Splash screen", "Splash Screen Start Begin Qt 
 I_EXPORT_COMPONENT(Log, "Applcation log as simple list", "Log Info List Qt GUI");
 I_EXPORT_COMPONENT(IconProvider, "Icon provider", "Icons Qt GUI"); 
 I_EXPORT_COMPONENT(FileDialogSerializer, "File dialog serializer", "File Serialization Serializer Dialog GUI Qt"); 
+I_EXPORT_COMPONENT(ModelEditorGui, "Connection between GUI and model components", "Model Observer Editor GUI Connection Connector Qt");
 I_EXPORT_COMPONENT(ExtendedDocumentTemplate, "Extended serialized document template", "Serialized Document Template Qt");
 I_EXPORT_COMPONENT(MainWindowGui, "Main Qt application window", "Main Window Start Begin GUI Qt");
 I_EXPORT_COMPONENT(MultiDocWorkspaceGui, "Multi document workspace", "Workspace Document Model View Observer MVC GUI Qt");

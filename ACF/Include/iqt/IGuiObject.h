@@ -48,12 +48,9 @@ public:
 };
 
 
-
 } // namespace iqt
 
 
-
 #endif // !iqt_IGuiObject_included
-
 
 

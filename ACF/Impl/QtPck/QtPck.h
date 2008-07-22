@@ -28,6 +28,7 @@
 #include "iqtprm/CComposedParamsSetGuiComp.h"
 #include "iqtprm/CParamsManagerGuiComp.h"
 
+#include "iqtdoc/CModelEditorGuiComp.h"
 #include "iqtdoc/CExtendedDocumentTemplateComp.h"
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CMultiDocumentWorkspaceGuiComp.h"
@@ -51,6 +52,7 @@ typedef iqt::CSplashScreenGuiComp SplashScreen;
 typedef icomp::TModelCompWrap<iqt::CLogGuiComp> Log;
 typedef iqt::CIconProviderComp IconProvider;
 typedef iqt::CFileDialogSerializerComp FileDialogSerializer;
+typedef iqtdoc::CModelEditorGuiComp ModelEditorGui;
 typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;
