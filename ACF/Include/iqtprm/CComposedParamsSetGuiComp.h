@@ -34,6 +34,7 @@ public:
 	I_BEGIN_COMPONENT(CComposedParamsSetGuiComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
+		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for parameters edition", true);
 		I_ASSIGN_MULTI_0(m_guisCompPtr, "Editors", "List of GUI's for parameters edition", true);
 		I_ASSIGN_MULTI_0(m_observersCompPtr, "Editors", "List of GUI's for parameters edition", true);

@@ -34,6 +34,7 @@ public:
 	I_BEGIN_COMPONENT(CModelEditorGuiComp)
 		I_REGISTER_INTERFACE(iqt::IGuiObject)
 		I_REGISTER_INTERFACE(imod::IModelEditor)
+		I_REGISTER_INTERFACE(iqt2d::ISceneExtender)
 		I_ASSIGN(m_slaveEditorCompPtr, "SlaveEditorGui", "Slave GUI object will be connected to model", true, "SlaveEditor");
 		I_ASSIGN(m_slaveGuiCompPtr, "SlaveEditorGui", "Slave GUI object will be connected to model", true, "SlaveEditor");
 		I_ASSIGN(m_slaveObserverCompPtr, "SlaveEditorGui", "Slave GUI object will be connected to model", false, "SlaveEditor");

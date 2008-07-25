@@ -3,6 +3,8 @@
 
 #include "istd/TChangeNotifier.h"
 
+#include "iqt2d/CLine2dShape.h"
+
 
 namespace iqt2d
 {
@@ -79,6 +81,22 @@ void CLine2dParamsGuiComp::UpdateEditor()
 		const i2d::CVector2d& point2 = objectPtr->GetPoint1();
 		Point2XSB->setValue(point2.GetX());
 		Point2YSB->setValue(point2.GetY());
+	}
+}
+
+
+// reimplemented (iqt2d::TSceneExtenderCompBase)
+
+void CLine2dParamsGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+{
+	imod::IModel* modelPtr = GetModelPtr();
+	if (modelPtr != NULL){
+		istd::TDelPtr<CLine2dShape> shapePtr(new CLine2dShape());
+		if (shapePtr.IsValid()){
+			if (modelPtr->AttachObserver(shapePtr.GetPtr())){
+				result.PushBack(shapePtr.PopPtr());
+			}
+		}
 	}
 }
 

@@ -6,6 +6,8 @@
 
 #include "iqt/TDesignerGuiObserverCompBase.h"
 
+#include "iqt2d/TSceneExtenderCompBase.h"
+
 #include "iqt2d/Generated/ui_CLine2dParamsGuiComp.h"
 
 
@@ -13,16 +15,16 @@ namespace iqt2d
 {
 
 
-class CLine2dParamsGuiComp: public iqt::TDesignerGuiObserverCompBase<
+class CLine2dParamsGuiComp: public iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiObserverCompBase<
 			Ui::CLine2dParamsGuiComp,
-			i2d::CLine2d>
+			i2d::CLine2d> >
 {
 	Q_OBJECT
 
 public:
-	typedef iqt::TDesignerGuiObserverCompBase<
+	typedef iqt2d::TSceneExtenderCompBase<iqt::TDesignerGuiObserverCompBase<
 				Ui::CLine2dParamsGuiComp,
-				i2d::CLine2d> BaseClass;
+				i2d::CLine2d> > BaseClass;
 
 	I_BEGIN_COMPONENT(CLine2dParamsGuiComp);
 		I_ASSIGN(m_unitNameAttrPtr, "UnitName", "Name of geometric units e.g. mm", false, "mm");
@@ -35,6 +37,9 @@ public:
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor();
+
+	// reimplemented (iqt2d::TSceneExtenderCompBase)
+	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
 
 protected slots:
 	void OnParamsChanged(double value);
