@@ -2,7 +2,7 @@
 #define iipr_IFeaturesConsumer_included
 
 
-#include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 
 #include "iipr/IFeature.h"
 
@@ -14,7 +14,7 @@ namespace iipr
 /**
 	Common interface for a features container consuming feature objects.
 */
-class IFeaturesConsumer: public istd::IPolymorphic
+class IFeaturesConsumer: virtual public istd::IChangeable
 {
 public:
 	/**
@@ -38,5 +38,4 @@ public:
 
 
 #endif // !iipr_IFeaturesConsumer_included
-
 

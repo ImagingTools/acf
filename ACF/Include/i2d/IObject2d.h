@@ -38,4 +38,3 @@ public:
 
 #endif // !i2d_IObject2d_included
 
-

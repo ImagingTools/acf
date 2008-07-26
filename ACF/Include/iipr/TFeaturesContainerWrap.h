@@ -3,6 +3,7 @@
 
 
 #include "istd/TPointerVector.h"
+#include "istd/TChangeNotifier.h"
 
 #include "iipr/IFeaturesContainer.h"
 
@@ -43,6 +44,8 @@ private:
 template <class BaseClass, class FeatureInterface>
 void TFeaturesContainerWrap<BaseClass, FeatureInterface>::ResetFeatures()
 {
+	istd::CChangeNotifier changePtr(this);
+
 	m_featuresList.Reset();
 }
 
@@ -51,6 +54,8 @@ template <class BaseClass, class FeatureInterface>
 bool TFeaturesContainerWrap<BaseClass, FeatureInterface>::AddFeature(const iipr::IFeature* featurePtr)
 {
 	if (featurePtr != NULL && IsFeatureAccepted(featurePtr)){
+		istd::CChangeNotifier changePtr(this);
+
 		m_featuresList.PushBack(const_cast<iipr::IFeature*>(featurePtr));
 		
 		return true;

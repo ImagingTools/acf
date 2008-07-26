@@ -58,4 +58,3 @@ bool CCaliperFeature::Serialize(iser::IArchive& archive)
 
 } // namespace iipr
 
-

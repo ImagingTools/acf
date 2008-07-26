@@ -13,7 +13,7 @@ CBitManip::CBitManip()
 			++firstBitIndex;
 		}
 
-		m_fistBitInByte[i] = firstBitIndex;
+		m_firstBitInByte[i] = firstBitIndex;
 	}
 }
 

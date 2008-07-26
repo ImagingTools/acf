@@ -18,4 +18,3 @@ void CExtremumCaliperProcessorComp::OnComponentCreated()
 
 } // namespace iipr
 
-

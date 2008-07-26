@@ -92,4 +92,3 @@ bool CGaussian2dFilterParams::Serialize(iser::IArchive& archive)
 
 } // namespace iipr
 
-

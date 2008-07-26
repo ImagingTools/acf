@@ -1,5 +1,8 @@
 #include "imil/CMilSearchProcessorComp.h"
 
+
+#include "istd/TChangeNotifier.h"
+
 #include "iimg/CBitmapBase.h"
 
 #include "iwin/CTimer.h"
@@ -27,7 +30,10 @@ int CMilSearchProcessorComp::DoProcessing(
 		return PS_INVALID;
 	}
 
-	outputPtr->ResetFeatures();
+	istd::TChangeNotifier<iipr::IFeaturesConsumer> changePtr(outputPtr);
+	I_ASSERT(changePtr.IsValid());
+
+	changePtr->ResetFeatures();
 
 	const CMilSearchParams* milParamsPtr = NULL;
 	if (m_searchParamsIdAttrPtr.IsValid()){
@@ -113,7 +119,7 @@ int CMilSearchProcessorComp::DoProcessing(
 
 			angle = (fmod(1 + angle / 180.0, 2) - 1)  * I_PI;
 
-			outputPtr->AddFeature(new iipr::CSearchFeature(position, scale, angle, score));
+			changePtr->AddFeature(new iipr::CSearchFeature(position, scale, angle, score));
 		}
 	}
 

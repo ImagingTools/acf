@@ -136,6 +136,14 @@ private:
 	icomp::TReferencePtr<interfaceType> member;
 
 /**
+	Declare single reference to another component with \c interfaceType as template argument.
+*/
+#define I_TREF(interfaceType, member)\
+	typedef icomp::TReferencePtr<interfaceType> member##_Type;\
+	typedef typename icomp::TReferencePtr<interfaceType>::AttributeType member##_AttrType;\
+	icomp::TReferencePtr<interfaceType> member;
+
+/**
 	Declare multiple reference to another component.
 */
 #define I_MULTIREF(interfaceType, member)\
@@ -212,5 +220,4 @@ private:
 
 
 #endif // !icomp_CComponentBase_included
-
 

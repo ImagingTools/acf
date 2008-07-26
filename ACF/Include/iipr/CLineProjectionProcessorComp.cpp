@@ -18,4 +18,3 @@ void CLineProjectionProcessorComp::OnComponentCreated()
 
 } // namespace iipr
 
-

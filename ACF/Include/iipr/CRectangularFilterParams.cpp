@@ -46,4 +46,3 @@ bool CRectangularFilterParams::Serialize(iser::IArchive& archive)
 
 } // namespace iipr
 
-

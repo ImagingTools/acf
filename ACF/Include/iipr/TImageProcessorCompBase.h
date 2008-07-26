@@ -4,7 +4,7 @@
 
 #include "ibase/TMessageProducerWrap.h"
 
-#include "iproc/TSyncProcessorWrap.h"
+#include "iproc/TSyncProcessorCompBase.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -23,18 +23,10 @@ namespace iipr
 	Basic implementation for a simple bitmap processor.
 */
 template <class ParameterType>
-class TImageProcessorCompBase:	public ibase::TMessageProducerWrap<icomp::CComponentBase>,
-								public iproc::TSyncProcessorWrap<iipr::IBitmapProcessor>
+class TImageProcessorCompBase: public iproc::TSyncProcessorCompBase<iipr::IBitmapProcessor>
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
-	typedef iproc::TSyncProcessorWrap<iipr::IBitmapProcessor> BaseClass2;
-
-	I_BEGIN_BASE_COMPONENT(TImageProcessorCompBase)
-		I_REGISTER_INTERFACE(iipr::IBitmapProcessor)
-		I_ASSIGN(m_paramsIdAttrPtr, "ParamsId", "ID of processor parameter", true, "ParamsId");
-		I_ASSIGN(m_preprocessorCompPtr, "Preprocessor", "Image preprocessing operator", false, "Preprocessor");
-	I_END_COMPONENT
+	typedef iproc::TSyncProcessorCompBase<iipr::IBitmapProcessor> BaseClass;
 
 protected:
 	// reimplemented (iproc::TSyncProcessorWrap<iipr::IBitmapProcessor>)
@@ -48,10 +40,6 @@ protected:
 				const ParameterType* parameterPtr, 
 				const iimg::IBitmap& inputImage,
 				iimg::IBitmap& outputImage) = 0;
-
-private:
-	I_ATTR(istd::CString, m_paramsIdAttrPtr);
-	I_REF(iipr::IBitmapProcessor, m_preprocessorCompPtr);
 };
 
 

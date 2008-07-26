@@ -84,4 +84,3 @@ bool CSearchFeature::Serialize(iser::IArchive& archive)
 
 } // namespace iipr
 
-

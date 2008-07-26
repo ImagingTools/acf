@@ -77,3 +77,4 @@ bool CLocalDifferenceFilterParams::Serialize(iser::IArchive& archive)
 
 
 } // namespace iipr
+

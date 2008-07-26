@@ -213,4 +213,3 @@ bool CLineProjectionProcessor::IsAutoProjectionSizeSupported() const
 
 } // namespace iipr
 
-
