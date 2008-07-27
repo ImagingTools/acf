@@ -101,10 +101,14 @@ private:
 	template <class Archive> 
 	bool SerializeRecentFiles();
 
+	void UpdateLastDirectory(const QString& filePath) const;
+
 private:
 	I_ATTR(bool, m_scrollingEnabledAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
+
+	mutable QString m_lastDirectory;
 };
 
 

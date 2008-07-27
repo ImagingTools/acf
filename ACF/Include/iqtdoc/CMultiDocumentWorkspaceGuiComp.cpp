@@ -253,7 +253,11 @@ istd::CStringList CMultiDocumentWorkspaceGuiComp::GetOpenFileNames(const std::st
 {
 	QString filter = CreateFileDialogFilter(documentTypeIdPtr);
 
-	QStringList files = QFileDialog::getOpenFileNames(NULL, tr("Open Files..."), "", filter);
+	QStringList files = QFileDialog::getOpenFileNames(NULL, tr("Open Files..."), m_lastDirectory, filter);
+
+	if (!files.isEmpty()){
+		UpdateLastDirectory(files.at(0));
+	}
 
 	return iqt::GetCStringList(files);
 }
@@ -263,7 +267,9 @@ istd::CString CMultiDocumentWorkspaceGuiComp::GetSaveFileName(const std::string&
 {
 	QString filter = CreateFileDialogFilter(&documentTypeId);
 
-	QString filePath = QFileDialog::getSaveFileName(NULL, tr("Save..."), "", filter);
+	QString filePath = QFileDialog::getSaveFileName(NULL, tr("Save..."), m_lastDirectory, filter);
+
+	UpdateLastDirectory(filePath);
 
 	return iqt::GetCString(filePath);
 }
@@ -358,6 +364,16 @@ void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QWidget* window)
 
 	SetActiveView(guiObjectPtr);
 }	
+
+
+// private methods
+
+void CMultiDocumentWorkspaceGuiComp::UpdateLastDirectory(const QString& filePath) const
+{
+	QFileInfo fileInfo(filePath);
+
+	m_lastDirectory = fileInfo.absolutePath();
+}
 
 
 } // namespace iqtdoc
