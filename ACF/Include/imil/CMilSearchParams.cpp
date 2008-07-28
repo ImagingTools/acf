@@ -257,38 +257,6 @@ void CMilSearchParams::SetNominalAngle(double nominalAngle)
 }
 
 
-bool CMilSearchParams::IsAngleRangeEnabled() const 
-{
-	return m_isAngleRangeEnabled;
-}
-
-
-void CMilSearchParams::SetAngleRangeEnabled(bool isAngleRangeEnabled)
-{
-	if (m_isAngleRangeEnabled != isAngleRangeEnabled){
-		istd::CChangeNotifier notifierPtr(this);
-
-		m_isAngleRangeEnabled = isAngleRangeEnabled;
-	}
-}
-
-
-bool CMilSearchParams::IsScaleRangeEnabled() const
-{
-	return m_isScaleRangeEnabled;
-}
-
-
-void CMilSearchParams::SetScaleRangeEnabled(bool isScaleRangeEnabled)
-{
-	if (m_isScaleRangeEnabled != isScaleRangeEnabled){
-		istd::CChangeNotifier notifierPtr(this);
-
-		m_isScaleRangeEnabled = isScaleRangeEnabled;
-	}
-}
-
-
 bool CMilSearchParams::IsTargetCachingEnabled() const
 {
 	return m_isTargetCachingEnabled;
@@ -321,47 +289,15 @@ void CMilSearchParams::SetSharedEdgesEnabled(bool areSharedEdgesEnabled)
 }
 
 
-// reimplemented (iipr::ISearchParams)
-
-const iipr::ISearchModel& CMilSearchParams::GetModel() const
-{
-	return m_searchModel;
-}
-
-
-bool CMilSearchParams::CreateModel(const iimg::IBitmap& inputImage)
-{
-	return m_searchModel.Create(inputImage, this);
-}
-
-
-bool CMilSearchParams::IsModelCreated() const
-{
-	return m_searchModel.IsValid();
-}
-
-
-bool CMilSearchParams::IsModelPreprocessed() const
-{
-	return m_searchModel.IsValid();
-}
-
-
-const iimg::IBitmap& CMilSearchParams::GetModelImage() const
-{
-	return m_searchModel.GetImage();
-}
-
-
 void CMilSearchParams::ResetParams()
 {
 	SetMinScore(60);
 	SetNominalAngle(0);
 
-	SetAngleRange(istd::CRange(-180.0, 180.0));
+	SetRotationRange(istd::CRange(-180.0, 180.0));
 	SetScaleRange(istd::CRange(0.5, 1.5));
 
-	SetMatchesCount(1);
+	SetNominalModelsCount(1);
 
 	SetDownsamplingRange(istd::CRange(0, 0));
 
@@ -370,8 +306,8 @@ void CMilSearchParams::ResetParams()
 	SetSpeed(VeryHighSpeed);
 	SetAccuracy(MediumAccuracy);
 	SetDetailLevel(MediumLevel);
-	SetAngleRangeEnabled(true);
-	SetScaleRangeEnabled(true);
+	SetRotationEnabled(true);
+	SetScaleEnabled(true);
 	SetTargetCachingEnabled(false);
 	SetSharedEdgesEnabled(false);
 
@@ -386,6 +322,20 @@ void CMilSearchParams::ResetParams()
 	SetNominalScale(1.0);
 
 	m_searchModel.ResetModel();
+}
+
+
+const imil::CMilSearchModel& CMilSearchParams::GetModel() const
+{
+	return m_searchModel;
+}
+
+
+// reimplemented (iipr::ISearchParams)
+
+const iimg::IBitmap& CMilSearchParams::GetModelImage() const
+{
+	return m_searchModel.GetImage();
 }
 
 
@@ -434,16 +384,6 @@ bool CMilSearchParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(detailLevelTag);
 	retVal = retVal && archive.Process(m_detailLevel);
 	retVal = retVal && archive.EndTag(detailLevelTag);
-
-	static iser::CArchiveTag isAngleRangeEnabledTag("AngleRangeEnabled", "Is angle range enabled");
-	retVal = retVal && archive.BeginTag(isAngleRangeEnabledTag);
-	retVal = retVal && archive.Process(m_isAngleRangeEnabled);
-	retVal = retVal && archive.EndTag(isAngleRangeEnabledTag);
-
-	static iser::CArchiveTag isScaleRangeEnabledTag("ScaleRangeEnabledTag", "Is scale range enabled");
-	retVal = retVal && archive.BeginTag(isScaleRangeEnabledTag);
-	retVal = retVal && archive.Process(m_isScaleRangeEnabled);
-	retVal = retVal && archive.EndTag(isScaleRangeEnabledTag);
 
 	static iser::CArchiveTag isTargetCachingEnabledTag("TargetCachingEnabledTag", "Is target caching enabled");
 	retVal = retVal && archive.BeginTag(isTargetCachingEnabledTag);
@@ -505,9 +445,15 @@ bool CMilSearchParams::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_nominalAngle);
 	retVal = retVal && archive.EndTag(nominalAngleTag);
 
+	static iser::CArchiveTag timeoutTag("Timeout", "Timout for model search");
+	retVal = retVal && archive.BeginTag(timeoutTag);
+	retVal = retVal && archive.Process(m_timeout);
+	retVal = retVal && archive.EndTag(timeoutTag);
+
 	return retVal;
 }
 
 
 } // namespace imil
+
 

@@ -2,7 +2,7 @@
 #define imil_CMilSearchParams_included
 
 
-#include "iipr/CSearchParamsBase.h"
+#include "iipr/CSearchParams.h"
 
 #include "imil/CMilSearchModel.h"
 
@@ -11,10 +11,10 @@ namespace imil
 {
 
 
-class CMilSearchParams: public iipr::CSearchParamsBase
+class CMilSearchParams: public iipr::CSearchParams
 {
 public:
-	typedef iipr::CSearchParamsBase BaseClass;
+	typedef iipr::CSearchParams BaseClass;
 
 	enum Speed
 	{
@@ -83,22 +83,16 @@ public:
 	virtual void SetNominalScale(double nominalScale);
 	virtual double GetNominalAngle() const; 
 	virtual void SetNominalAngle(double nominalAngle);
-	virtual bool IsAngleRangeEnabled() const; 
-	virtual void SetAngleRangeEnabled(bool isAngleRangeEnabled);
-	virtual bool IsScaleRangeEnabled() const;
-	virtual void SetScaleRangeEnabled(bool isScaleRangeEnabled);
 	virtual bool IsTargetCachingEnabled() const;
 	virtual void SetTargetCachingEnabled(bool isTargetCachingEnabled);
 	virtual bool AreSharedEdgesEnabled() const;
 	virtual void SetSharedEdgesEnabled(bool areSharedEdgesEnabled);
+	virtual void ResetParams();
+
+	virtual const imil::CMilSearchModel& GetModel() const;
 
 	// reimplemented (iipr::ISearchParams)
-	virtual const iipr::ISearchModel& GetModel() const;
-	virtual bool CreateModel(const iimg::IBitmap& inputImage);
-	virtual bool IsModelCreated() const;
-	virtual bool IsModelPreprocessed() const;
 	virtual const iimg::IBitmap& GetModelImage() const;
-	virtual void ResetParams();
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive & archive);
@@ -112,8 +106,6 @@ private:
 	int m_accuracy;
 	double m_nominalScale;
 	double m_nominalAngle;
-	bool m_isAngleRangeEnabled;
-	bool m_isScaleRangeEnabled;
 	bool m_isTargetCachingEnabled;
 	bool m_areSharedEdgesEnabled;
 	int m_polarity;
@@ -131,4 +123,5 @@ private:
 
 
 #endif //!imil_CMilSearchParams_included
+
 

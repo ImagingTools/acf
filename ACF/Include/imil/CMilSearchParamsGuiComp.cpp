@@ -34,16 +34,9 @@ void CMilSearchParamsGuiComp::UpdateEditor()
 {
 	imil::CMilSearchParams* paramsPtr = GetObjectPtr();
 	if (paramsPtr == NULL){
-		return ;
+		return;
 	}
 
-
-	m_spinMinimumAngle->setValue(paramsPtr->GetAngleRange().GetMinValue());
-	m_spinMaximumAngle->setValue(paramsPtr->GetAngleRange().GetMaxValue());
-	m_spinMinimumScale->setValue(paramsPtr->GetScaleRange().GetMinValue());
-	m_spinMaximumScale->setValue(paramsPtr->GetScaleRange().GetMaxValue());
-	m_spinMinimumScore->setValue(paramsPtr->GetMinScore());
-	m_spinModelNumber->setValue(paramsPtr->GetMatchesCount());
 	m_spinFirstLevel->setValue(paramsPtr->GetDownsamplingRange().GetMinValue());
 	m_spinSecondLevel->setValue(paramsPtr->GetDownsamplingRange().GetMaxValue());
 	m_spinTimeout->setValue(paramsPtr->GetTimeout());
@@ -56,8 +49,6 @@ void CMilSearchParamsGuiComp::UpdateEditor()
 	m_spinFitErrorWeight->setValue(paramsPtr->GetFitErrorWeight());
 	m_spinKernelSize->setValue(paramsPtr->GetKernelSize());
 
-	m_checkEnableRotation->setChecked(paramsPtr->IsAngleRangeEnabled());
-	m_checkEnableScale->setChecked(paramsPtr->IsScaleRangeEnabled());
 	m_comboSpeed->setCurrentIndex(m_speedMap.keys(paramsPtr->GetSpeed()).at(0));
 	m_comboAccuracy->setCurrentIndex(m_accuracyMap.keys(paramsPtr->GetAccuracy()).at(0));
 	m_comboDetailLevel->setCurrentIndex(m_detailLevelMap.keys(paramsPtr->GetDetailLevel()).at(0));
@@ -87,9 +78,8 @@ void CMilSearchParamsGuiComp::UpdateEditor()
 void CMilSearchParamsGuiComp::UpdateModel() const
 {
 	imil::CMilSearchParams* paramsPtr = GetObjectPtr();
-
 	if (paramsPtr == NULL || !IsGuiCreated()){
-		return ;
+		return;
 	}
 
 	if (!IsUpdateBlocked()){
@@ -97,10 +87,6 @@ void CMilSearchParamsGuiComp::UpdateModel() const
 
 		istd::TChangeNotifier<imil::CMilSearchParams> updatePtr(paramsPtr);
 
-		updatePtr->SetAngleRange(istd::CRange(m_spinMinimumAngle->value(), m_spinMaximumAngle->value()));
-		updatePtr->SetScaleRange(istd::CRange(m_spinMinimumScale->value(), m_spinMaximumScale->value()));
-		updatePtr->SetMinScore(m_spinMinimumScore->value());
-		updatePtr->SetMatchesCount(m_spinModelNumber->value());
 		updatePtr->SetDownsamplingRange(istd::CRange(m_spinFirstLevel->value(), m_spinSecondLevel->value()));
 		updatePtr->SetTimeout(m_spinTimeout->value());
 		updatePtr->SetNominalScale(m_spinNominalScale->value());
@@ -111,9 +97,6 @@ void CMilSearchParamsGuiComp::UpdateModel() const
 		updatePtr->SetCertaintyTarget(m_spinCertaintyTarget->value());
 		updatePtr->SetFitErrorWeight(m_spinFitErrorWeight->value());
 		updatePtr->SetKernelSize(m_spinKernelSize->value());
-
-		updatePtr->SetAngleRangeEnabled(m_checkEnableRotation->isChecked());
-		updatePtr->SetScaleRangeEnabled(m_checkEnableScale->isChecked());
 		updatePtr->SetSpeed(m_speedMap[m_comboSpeed->currentIndex()]);
 		updatePtr->SetAccuracy(m_accuracyMap[m_comboAccuracy->currentIndex()]);
 		updatePtr->SetDetailLevel(m_detailLevelMap[m_comboDetailLevel->currentIndex()]);
@@ -160,14 +143,8 @@ void CMilSearchParamsGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	connect(m_spinMinimumScore, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
-	connect(m_spinModelNumber, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
-	connect(m_spinMinimumAngle, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
-	connect(m_spinMaximumAngle, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_spinFirstLevel, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_spinSecondLevel, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
-	connect(m_spinMinimumScale, SIGNAL(valueChanged(double)), this, SLOT(OnParameterChanged()));
-	connect(m_spinMaximumScale, SIGNAL(valueChanged(double)), this, SLOT(OnParameterChanged()));
 	connect(m_spinTimeout, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_spinNominalScale, SIGNAL(valueChanged(double)), this, SLOT(OnParameterChanged()));
 	connect(m_spinNominalAngle, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
@@ -177,9 +154,6 @@ void CMilSearchParamsGuiComp::OnGuiCreated()
 	connect(m_spinCertaintyTarget, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_spinFitErrorWeight, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_spinKernelSize, SIGNAL(valueChanged(int)), this, SLOT(OnParameterChanged()));
-
-	connect(m_checkEnableRotation, SIGNAL(stateChanged(int)), this, SLOT(OnParameterChanged()));
-	connect(m_checkEnableScale, SIGNAL(stateChanged(int)), this, SLOT(OnParameterChanged()));
 
 	connect(m_comboSpeed, SIGNAL(currentIndexChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_comboAccuracy, SIGNAL(currentIndexChanged(int)), this, SLOT(OnParameterChanged()));
@@ -191,28 +165,9 @@ void CMilSearchParamsGuiComp::OnGuiCreated()
 	connect(m_comboTargetCaching, SIGNAL(currentIndexChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_comboFilterType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnParameterChanged()));
 	connect(m_comboFilterType, SIGNAL(currentIndexChanged(int)), this, SLOT(OnFilterTypeChanged(int)));
-
-	if (m_modelViewCompPtr.IsValid()){
-		m_modelViewCompPtr->CreateGui(ModelFrame);
-	}
-
-	if (m_modelObserverCompPtr.IsValid()){
-		m_modelBitmap.AttachObserver(m_modelObserverCompPtr.GetPtr());
-	}
-}
-
-
-void CMilSearchParamsGuiComp::OnGuiDestroyed()
-{
-	if (m_modelViewCompPtr.IsValid()){
-		m_modelViewCompPtr->DestroyGui();
-	}
-
-	if (m_modelObserverCompPtr.IsValid()){
-		m_modelBitmap.DetachObserver(m_modelObserverCompPtr.GetPtr());
-	}
 }
 
 
 } // namespace imil
+
 

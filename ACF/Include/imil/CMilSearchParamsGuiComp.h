@@ -23,8 +23,6 @@ public:
 	typedef  iqt::TDesignerGuiObserverCompBase<Ui::CMilSearchParamsGuiComp, imil::CMilSearchParams> BaseClass;
 
 	I_BEGIN_COMPONENT(CMilSearchParamsGuiComp)
-		I_ASSIGN(m_modelViewCompPtr, "ModelView", "Model view", false, "ModelView");
-		I_ASSIGN(m_modelObserverCompPtr, "ModelView", "Model view", false, "ModelView");
 	I_END_COMPONENT
 
 	CMilSearchParamsGuiComp();
@@ -40,7 +38,6 @@ protected slots:
 protected:
 	// reimplemented (iqt::CGuiObjectBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 private:
 	imod::TModelWrap<iqt::CBitmap> m_modelBitmap;
@@ -48,9 +45,6 @@ private:
 	QMap<int,int> m_accuracyMap;
 	QMap<int,int> m_detailLevelMap;
 	QMap<int,int> m_polarityMap;
-
-	I_REF(iqt::IGuiObject, m_modelViewCompPtr);
-	I_REF(imod::IObserver, m_modelObserverCompPtr);
 };
 
 
@@ -58,4 +52,5 @@ private:
 
 
 #endif //!imil_CMilSearchParamsGuiComp_h
+
 

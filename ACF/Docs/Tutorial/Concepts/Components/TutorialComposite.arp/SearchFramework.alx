@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="33">
+  <PositionMap count="39">
     <Element>
       <ComponentName>
         Application
@@ -32,10 +32,10 @@
         Bitmap
       </ComponentName>
       <X>
-        125
+        375
       </X>
       <X>
-        -112
+        162
       </X>
     </Element>
     <Element>
@@ -43,7 +43,7 @@
         BitmapLoader
       </ComponentName>
       <X>
-        250
+        350
       </X>
       <X>
         -112
@@ -142,10 +142,10 @@
         ImageDialogLoader
       </ComponentName>
       <X>
-        262
+        287
       </X>
       <X>
-        12
+        37
       </X>
     </Element>
     <Element>
@@ -227,6 +227,28 @@
     </Element>
     <Element>
       <ComponentName>
+        ParamsSet
+      </ComponentName>
+      <X>
+        312
+      </X>
+      <X>
+        -87
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ParamsSetGui
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        37
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         Scene
       </ComponentName>
       <X>
@@ -241,10 +263,54 @@
         SceneGui
       </ComponentName>
       <X>
-        -125
+        125
+      </X>
+      <X>
+        -212
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SearchGui
+      </ComponentName>
+      <X>
+        162
       </X>
       <X>
         12
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SearchResults
+      </ComponentName>
+      <X>
+        -50
+      </X>
+      <X>
+        12
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SearchResultsVisualizer
+      </ComponentName>
+      <X>
+        100
+      </X>
+      <X>
+        137
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SearchTab
+      </ComponentName>
+      <X>
+        -50
+      </X>
+      <X>
+        -112
       </X>
     </Element>
     <Element>
@@ -274,10 +340,10 @@
         SnapGui
       </ComponentName>
       <X>
-        37
+        137
       </X>
       <X>
-        12
+        112
       </X>
     </Element>
     <Element>

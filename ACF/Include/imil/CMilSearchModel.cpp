@@ -49,18 +49,18 @@ MIL_ID CMilSearchModel::GetContextId() const
 
 void CMilSearchModel::EnsurePreprocessing(const imil::CMilSearchParams& paramsPtr, bool preprocess) const
 {
-	int modelNumber = paramsPtr.GetMatchesCount();
+	int modelNumber = paramsPtr.GetNominalModelsCount();
 	if (modelNumber == -1){
 		modelNumber = M_ALL;
 	}
 
 	double minScore = paramsPtr.GetMinScore();
-	double angleNeg = -paramsPtr.GetAngleRange().GetMinValue() + I_EPSILON;
+	double angleNeg = -paramsPtr.GetRotationRange().GetMinValue() + I_EPSILON;
 	if (angleNeg > 180.0){
 		angleNeg = 180.0;
 	}
 
-	double anglePos = paramsPtr.GetAngleRange().GetMaxValue() + I_EPSILON;
+	double anglePos = paramsPtr.GetRotationRange().GetMaxValue() + I_EPSILON;
 	if (anglePos > 180){
 		anglePos = 180.0;
 	}
@@ -75,8 +75,8 @@ void CMilSearchModel::EnsurePreprocessing(const imil::CMilSearchParams& paramsPt
 	int speed = paramsPtr.GetSpeed();
 	int accuracy = paramsPtr.GetAccuracy();
 	int detailLevel = paramsPtr.GetDetailLevel();
-	int scaleRangeEnabled = paramsPtr.IsScaleRangeEnabled() ? M_ENABLE : M_DISABLE;
-	int angleRangeEnabled = paramsPtr.IsAngleRangeEnabled() ? M_ENABLE : M_DISABLE;
+	int scaleRangeEnabled = paramsPtr.IsScaleEnabled() ? M_ENABLE : M_DISABLE;
+	int angleRangeEnabled = paramsPtr.IsRotationEnabled() ? M_ENABLE : M_DISABLE;
 	int isTargetCachingEnabled = paramsPtr.IsTargetCachingEnabled() ? M_ENABLE : M_DISABLE;
 	int areSharedEdgesEnabled = paramsPtr.AreSharedEdgesEnabled() ? M_ENABLE : M_DISABLE;
 	double nominalAngle = paramsPtr.GetNominalAngle();
@@ -186,8 +186,8 @@ bool CMilSearchModel::Create(const iimg::IBitmap& modelImage, const iipr::ISearc
 	}
 
 	i2d::CRectangle modelRectangle = i2d::CRectangle(0, 0, 
-		bitmapPtr->GetImageSize().GetX() - 1, 
-		bitmapPtr->GetImageSize().GetY() - 1);
+				bitmapPtr->GetImageSize().GetX() - 1, 
+				bitmapPtr->GetImageSize().GetY() - 1);
 
 	if (isModelCreated){
 		ResetModel();
@@ -260,4 +260,5 @@ bool CMilSearchModel::Serialize(iser::IArchive& archive)
 
 
 } // namespace imil
+
 

@@ -54,10 +54,10 @@
         FileAcquisition
       </ComponentName>
       <X>
-        112
+        50
       </X>
       <X>
-        37
+        -12
       </X>
     </Element>
     <Element>
@@ -76,7 +76,7 @@
         FileSnapParam
       </ComponentName>
       <X>
-        -525
+        -512
       </X>
       <X>
         -137
@@ -87,7 +87,7 @@
         FileSnapParamGui
       </ComponentName>
       <X>
-        -512
+        -500
       </X>
       <X>
         -37
@@ -109,10 +109,10 @@
         Framework
       </ComponentName>
       <X>
-        100
+        0
       </X>
       <X>
-        -87
+        -137
       </X>
     </Element>
     <Element>
@@ -145,7 +145,7 @@
         -212
       </X>
       <X>
-        -137
+        -162
       </X>
     </Element>
     <Element>
@@ -153,10 +153,10 @@
         SnapParamsGui
       </ComponentName>
       <X>
-        -212
+        -200
       </X>
       <X>
-        -37
+        -12
       </X>
     </Element>
   </PositionMap>

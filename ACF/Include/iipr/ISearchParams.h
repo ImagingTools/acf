@@ -4,7 +4,6 @@
 
 #include "iser/ISerializable.h"
 
-#include "i2d/CTransform.h"
 #include "i2d/CRectangle.h"
 
 #include "iimg/IBitmap.h"
@@ -14,66 +13,85 @@ namespace iipr
 {
 
 
-class ISearchModel;
-
-
 /**	
-	This interface is common for all classes,
-	which implements a set of parameters for a model search.
+	Common interface for a set of parameters for a model search.
 */
 class ISearchParams: virtual public iser::ISerializable
 {
 public:
-	virtual void SetCalibrationPtr(const i2d::CTransform* calibrationPtr) = 0;
-
 	/**
 		Gets the region that is used for model search.
 	*/
-	virtual i2d::CRectangle GetSearchRegion(const i2d::CTransform* calibrationPtr = NULL) const = 0;
-
-	/*
-		Gets the region for model teaching.
-	*/
-	virtual i2d::CRectangle GetModelRegion(const i2d::CTransform* calibrationPtr = NULL) const = 0;
+	virtual i2d::CRectangle GetSearchRegion() const = 0;
 		
-	/**	
-		Get search model definition.
-	*/
-	virtual const ISearchModel& GetModel() const = 0;
-
-	/**	
-		Creates an internal search model from the image \c modelImage.
-	*/
-	virtual bool CreateModel(const iimg::IBitmap& inputImage) = 0;
-
-	/**	
-		Returns a \c true if the search model exists.
-	*/
-	virtual bool IsModelCreated() const = 0;
-
-	/**	
-		Returns a \c true if the search model is preprocessed.
-	*/
-	virtual bool IsModelPreprocessed() const = 0;
-
 	/** 
 		Returns the model image. 
 	*/
 	virtual const iimg::IBitmap& GetModelImage() const = 0;
 
-	/** 
-		Reset params and set all to their default values.
+	/**
+		Get minimum score for a succefull search.
 	*/
-	virtual void ResetParams() = 0;
-
 	virtual double GetMinScore() const = 0;
+
+	/**
+		Set minimum score for a succefull search.
+	*/
 	virtual void SetMinScore(double minScore) = 0;
-	virtual const istd::CRange& GetAngleRange() const = 0;
-	virtual void SetAngleRange(const istd::CRange& angleRange) = 0;
+
+	/**
+		Set minimum score for a succefull search.
+	*/
+	virtual const istd::CRange& GetRotationRange() const = 0;
+
+	/**
+		Set rotation range for the model search.
+	*/
+	virtual void SetRotationRange(const istd::CRange& angleRange) = 0;
+
+	/**
+		Get scale range for the model search.
+		\sa SetScaleRange()
+	*/
 	virtual const istd::CRange& GetScaleRange() const = 0;
+
+	/**
+		Set scale range for the model search. Range [0, 0] means the scaling is off.
+	*/
 	virtual void SetScaleRange(const istd::CRange& scaleRange) = 0;
-	virtual int GetMatchesCount() const = 0;
-	virtual void SetMatchesCount(int matchesCount) = 0;
+
+	/**
+		Get the number of models that should be found for a successfull search result.
+	*/
+	virtual int GetNominalModelsCount() const = 0;
+
+	/**
+		Set the number of models that should be found for a successfull search result.
+		\param nominalModelsCount number of models.
+	*/
+	virtual void SetNominalModelsCount(int nominalModelsCount) = 0;
+
+	/**
+		Get \c true if the rotation invariance is enabled.
+	*/
+	virtual bool IsRotationEnabled() const = 0; 
+	
+	/**
+		Enable the rotation invariance.
+		\sa SetRotationRange(), GetRotationRange()
+	*/
+	virtual void SetRotationEnabled(bool isRotationEnabled) = 0;
+	
+	/**
+		Get \c true if the scale invariance is enabled.
+	*/
+	virtual bool IsScaleEnabled() const = 0;
+	
+	/**
+		Enable the scale invariance.
+		\sa SetScaleRange(), GetScaleRange()
+	*/
+	virtual void SetScaleEnabled(bool isScaleEnabled) = 0;
 };
 
 

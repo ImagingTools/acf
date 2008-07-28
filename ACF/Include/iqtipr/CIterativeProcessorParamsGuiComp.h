@@ -18,7 +18,6 @@ class CIterativeProcessorParamsGuiComp: public iqt::TDesignerGuiObserverCompBase
 			iipr::CIterativeProcessorParams>
 {
 	Q_OBJECT
-
 public:
 	typedef iqt::TDesignerGuiObserverCompBase<
 				Ui::CIterativeProcessorParamsGuiComp,

@@ -33,5 +33,18 @@ namespace imath
 static const double I_PI = 3.1415926;
 
 
+inline double GetRadianFromDegree(double degree)
+{
+	return degree / 180.0 * I_PI;
+}
+
+
+inline double GetDegreeFromRadian(double radian)
+{
+	return radian * 180.0 / I_PI;
+}
+
+
+
 #endif // !imath_included
 

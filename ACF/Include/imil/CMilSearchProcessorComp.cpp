@@ -46,8 +46,8 @@ int CMilSearchProcessorComp::DoProcessing(
 		return TS_INVALID;
 	}
 
-	const imil::CMilSearchModel* searchModelPtr = dynamic_cast<const imil::CMilSearchModel*>(&milParamsPtr->GetModel()); 
-	if (searchModelPtr == NULL || !searchModelPtr->IsValid()){
+	const imil::CMilSearchModel& searchModel = milParamsPtr->GetModel(); 
+	if (!searchModel.IsValid()){
 		SendErrorMessage(0, "Invalid model or model type");
 
 		return TS_INVALID;
@@ -85,7 +85,7 @@ int CMilSearchProcessorComp::DoProcessing(
 	}
 
 	// Ensure model preproccesing:
-	searchModelPtr->EnsurePreprocessing(*milParamsPtr);
+	searchModel.EnsurePreprocessing(*milParamsPtr);
 
 	// Allocate the result buffer:
 	MIL_ID milResult = MmodAllocResult(m_engine.GetSystemId(), M_DEFAULT, M_NULL);
@@ -98,15 +98,14 @@ int CMilSearchProcessorComp::DoProcessing(
 	}
 
 	// Find the model:
-	MmodFind(searchModelPtr->GetContextId(), milImage, milResult);
+	MmodFind(searchModel.GetContextId(), milImage, milResult);
 
-	long numResults;
-
-	// Get the number of models found.
-	MmodGetResult(milResult, M_DEFAULT, M_NUMBER + M_TYPE_LONG, &numResults);
+	// Get the number of models found:
+	long resultsCount = 0;
+	MmodGetResult(milResult, M_DEFAULT, M_NUMBER + M_TYPE_LONG, &resultsCount);
 
 	// If a model was found above the acceptance threshold.
-	if (numResults >= 1){
+	if (resultsCount >= 1){
 		double scaleX = 0.0;
 		double posy = 0.0; 
 		double posx = 0.0;
@@ -114,7 +113,7 @@ int CMilSearchProcessorComp::DoProcessing(
 		double score = 0.0;
 
 		// Get the results of the single model:
-		for (int resultIndex = 0; resultIndex < numResults; resultIndex++){
+		for (int resultIndex = 0; resultIndex < resultsCount; resultIndex++){
 			MmodGetResult(milResult, resultIndex, M_POSITION_X, &posx);
 			MmodGetResult(milResult, resultIndex, M_POSITION_Y, &posy);
 			MmodGetResult(milResult, resultIndex, M_ANGLE, &angle);
@@ -150,4 +149,5 @@ int CMilSearchProcessorComp::DoProcessing(
 
 
 } // namespace imil
+
 

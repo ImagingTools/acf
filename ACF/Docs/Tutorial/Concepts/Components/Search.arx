@@ -4,107 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
-    <Element>
-      <Id>
-        FileAcquisition
-      </Id>
-      <PackageId>
-        QtCamPck
-      </PackageId>
-      <ComponentId>
-        FileAcquisition
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              NameFilters
-            </Id>
-            <Type>
-              class icomp::TMultiAttribute&lt;class istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="3">
-                <Value>
-                  *.png
-                </Value>
-                <Value>
-                  *.bmp
-                </Value>
-                <Value>
-                  *.jpg
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ParameterId
-            </Id>
-            <Type>
-              class icomp::TSingleAttribute&lt;class istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileBitmapAcquisition
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FileSnapParam
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        FileBitmapAcquisitionParams
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FileSnapParamGui
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        FileAcquisitionParamsGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="5">
     <Element>
       <Id>
         Framework
@@ -119,26 +19,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              BitmapAcquisition
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileAcquisition
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ParamsSet
@@ -154,7 +35,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapParams
+                Params
               </Value>
             </Data>
           </AttributeInfo>
@@ -173,7 +54,7 @@
                 true
               </IsEnabled>
               <Value>
-                SnapParamsGui
+                ParamsGuis
               </Value>
             </Data>
           </AttributeInfo>
@@ -182,7 +63,7 @@
     </Element>
     <Element>
       <Id>
-        SnapParams
+        Params
       </Id>
       <PackageId>
         BasePck
@@ -211,7 +92,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  FileSnapParam
+                  SearchParams
                 </Value>
               </Values>
             </Data>
@@ -232,7 +113,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  FileBitmapAcquisition
+                  SearchParams
                 </Value>
               </Values>
             </Data>
@@ -242,7 +123,7 @@
     </Element>
     <Element>
       <Id>
-        SnapParamsGui
+        ParamsGuis
       </Id>
       <PackageId>
         QtPck
@@ -271,7 +152,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  FileSnapParamGui
+                  SearchGui
                 </Value>
               </Values>
             </Data>
@@ -292,7 +173,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  FileBitmapAcquisition
+                  SearchParams
                 </Value>
               </Values>
             </Data>
@@ -300,8 +181,44 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        SearchGui
+      </Id>
+      <PackageId>
+        MilPck
+      </PackageId>
+      <ComponentId>
+        MilSearchParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SearchParams
+      </Id>
+      <PackageId>
+        MilPck
+      </PackageId>
+      <ComponentId>
+        MilSearchParams
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         class ibase::IApplication
@@ -313,6 +230,30 @@
     <Interface>
       <InterfaceId>
         class ibase::IApplicationInfo
+      </InterfaceId>
+      <ComponentId>
+        Framework
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class ibase::IMessageConsumer
+      </InterfaceId>
+      <ComponentId>
+        Framework
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class ibase::IMessageContainer
+      </InterfaceId>
+      <ComponentId>
+        Framework
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class iqt::IGuiObject
       </InterfaceId>
       <ComponentId>
         Framework

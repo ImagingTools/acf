@@ -183,7 +183,7 @@
 				RelativePath="..\CSearchFeature.cpp">
 			</File>
 			<File
-				RelativePath="..\CSearchParamsBase.cpp">
+				RelativePath="..\CSearchParams.cpp">
 			</File>
 			<File
 				RelativePath="..\CSearchResultSet.cpp">
@@ -244,7 +244,7 @@
 				RelativePath="..\CSearchFeature.h">
 			</File>
 			<File
-				RelativePath="..\CSearchParamsBase.h">
+				RelativePath="..\CSearchParams.h">
 			</File>
 			<File
 				RelativePath="..\CSearchResultSet.h">
@@ -266,6 +266,9 @@
 			</File>
 			<File
 				RelativePath="..\IFeaturesContainer.h">
+			</File>
+			<File
+				RelativePath="..\IFeaturesSupplier.h">
 			</File>
 			<File
 				RelativePath="..\iipr.h">

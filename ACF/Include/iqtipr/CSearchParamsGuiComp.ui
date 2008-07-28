@@ -1,0 +1,488 @@
+<ui version="4.0" >
+ <class>CSearchParamsGuiComp</class>
+ <widget class="QWidget" name="CSearchParamsGuiComp" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>118</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="enabled" >
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="tabPosition" >
+      <enum>QTabWidget::South</enum>
+     </property>
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>General</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip" >
+          <string>Sets the acceptance level for the score. &#xd;
+An occurrence will be returned only if the match score &#xd;
+between the target and the model is greater than or equal to this level.&#xd;
+The score is a measure, as a percentage, &#xd;
+of the presence and fit of the model's active edges in the occurrence. &#xd;
+Using Advanced/Fit Error Weight, you can specify how much the fit influences the score.</string>
+         </property>
+         <property name="whatsThis" >
+          <string>Sets the acceptance level for the score. &#xd;
+An occurrence will be returned only if the match score &#xd;
+between the target and the model is greater than or equal to this level.&#xd;
+The score is a measure, as a percentage, &#xd;
+of the presence and fit of the model's active edges in the occurrence. &#xd;
+Using Advanced/Fit Error Weight, you can specify how much the fit influences the score.</string>
+         </property>
+         <property name="text" >
+          <string>Minimum Score</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QSpinBox" name="m_spinMinimumScore" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip" >
+          <string>Sets the acceptance level for the score. &#xd;
+An occurrence will be returned only if the match score &#xd;
+between the target and the model is greater than or equal to this level.&#xd;
+The score is a measure, as a percentage, &#xd;
+of the presence and fit of the model's active edges in the occurrence. &#xd;
+Using Advanced/Fit Error Weight, you can specify how much the fit influences the score.</string>
+         </property>
+         <property name="whatsThis" >
+          <string>Sets the acceptance level for the score. &#xd;
+An occurrence will be returned only if the match score &#xd;
+between the target and the model is greater than or equal to this level.&#xd;
+The score is a measure, as a percentage, &#xd;
+of the presence and fit of the model's active edges in the occurrence. &#xd;
+Using Advanced/Fit Error Weight, you can specify how much the fit influences the score.</string>
+         </property>
+         <property name="suffix" >
+          <string> %</string>
+         </property>
+         <property name="prefix" >
+          <string/>
+         </property>
+         <property name="maximum" >
+          <number>100</number>
+         </property>
+         <property name="singleStep" >
+          <number>5</number>
+         </property>
+         <property name="value" >
+          <number>70</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QLabel" name="label_2" >
+         <property name="toolTip" >
+          <string>Sets the number of occurrences for which to search.</string>
+         </property>
+         <property name="whatsThis" >
+          <string>Sets the number of occurrences for which to search.</string>
+         </property>
+         <property name="text" >
+          <string>Models Number</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" colspan="2" >
+        <widget class="QSpinBox" name="m_spinModelNumber" >
+         <property name="toolTip" >
+          <string>Sets the number of occurrences for which to search.</string>
+         </property>
+         <property name="whatsThis" >
+          <string>Sets the number of occurrences for which to search.</string>
+         </property>
+         <property name="specialValueText" >
+          <string>All</string>
+         </property>
+         <property name="minimum" >
+          <number>-1</number>
+         </property>
+         <property name="maximum" >
+          <number>1000</number>
+         </property>
+         <property name="singleStep" >
+          <number>1</number>
+         </property>
+         <property name="value" >
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2" >
+        <layout class="QGridLayout" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="label_3" >
+           <property name="text" >
+            <string>Minimum Angle</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QSpinBox" name="m_spinMinimumAngle" >
+           <property name="toolTip" >
+            <string>Defines the start rotation angle of the angle range.</string>
+           </property>
+           <property name="statusTip" >
+            <string/>
+           </property>
+           <property name="whatsThis" >
+            <string>Defines the start rotation angle of the angle range.</string>
+           </property>
+           <property name="suffix" >
+            <string> °</string>
+           </property>
+           <property name="minimum" >
+            <number>-180</number>
+           </property>
+           <property name="maximum" >
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_6" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip" >
+            <string>Sets the minimum scale for the search.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Sets the minimum scale for the search.</string>
+           </property>
+           <property name="text" >
+            <string>Minimum Scale</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QDoubleSpinBox" name="m_spinMinimumScale" >
+           <property name="toolTip" >
+            <string>Sets the minimum scale for the search.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Sets the minimum scale for the search.</string>
+           </property>
+           <property name="minimum" >
+            <double>0.010000000000000</double>
+           </property>
+           <property name="maximum" >
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep" >
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value" >
+            <double>0.500000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="2" colspan="2" >
+        <layout class="QGridLayout" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="label_4" >
+           <property name="text" >
+            <string>Maximum Angle</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QSpinBox" name="m_spinMaximumAngle" >
+           <property name="toolTip" >
+            <string>Defines the stop rotation angle of the angle range.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Defines the stop rotation angle of the angle range.</string>
+           </property>
+           <property name="suffix" >
+            <string> °</string>
+           </property>
+           <property name="minimum" >
+            <number>0</number>
+           </property>
+           <property name="maximum" >
+            <number>180</number>
+           </property>
+           <property name="value" >
+            <number>180</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_5" >
+           <property name="toolTip" >
+            <string>Sets the maximum scale for the search.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Sets the maximum scale for the search.</string>
+           </property>
+           <property name="text" >
+            <string>Maximum Scale</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QDoubleSpinBox" name="m_spinMaximumScale" >
+           <property name="toolTip" >
+            <string>Sets the maximum scale for the search.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Sets the maximum scale for the search.</string>
+           </property>
+           <property name="decimals" >
+            <number>2</number>
+           </property>
+           <property name="minimum" >
+            <double>0.000000000000000</double>
+           </property>
+           <property name="maximum" >
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep" >
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value" >
+            <double>0.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="4" >
+        <layout class="QVBoxLayout" >
+         <item>
+          <widget class="QCheckBox" name="m_checkEnableRotation" >
+           <property name="enabled" >
+            <bool>true</bool>
+           </property>
+           <property name="toolTip" >
+            <string>Sets whether to perform calculations specific to angular-range search strategies. &#xd;
+Typically, to search for models within their specified angular range [Minimum Angle, Maximum Angle] in the target, &#xd;
+calculations specific to angular-range search strategies should be enabled for the context. &#xd;
+Disabling these calculations might speed up the search depending on the model and the target. &#xd;
+Note that rotation must be enabled to search for rotation-invariant non-synthetic models &#xd;
+(for example, an image-type model of a circle). &#xd;
+Also note that candidates can only be returned as occurrences &#xd;
+if found within the angular range specified for their model. &#xd;
+Therefore, whether you enable or disable the calculation, &#xd;
+you can restrict which candidates are returned as occurrences by narrowing the angular range.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Sets whether to perform calculations specific to angular-range search strategies. &#xd;
+Typically, to search for models within their specified angular range [Minimum Angle, Maximum Angle] in the target, &#xd;
+calculations specific to angular-range search strategies should be enabled for the context. &#xd;
+Disabling these calculations might speed up the search depending on the model and the target. &#xd;
+Note that rotation must be enabled to search for rotation-invariant non-synthetic models &#xd;
+(for example, an image-type model of a circle). &#xd;
+Also note that candidates can only be returned as occurrences &#xd;
+if found within the angular range specified for their model. &#xd;
+Therefore, whether you enable or disable the calculation, &#xd;
+you can restrict which candidates are returned as occurrences by narrowing the angular range.</string>
+           </property>
+           <property name="text" >
+            <string>Enable rotation</string>
+           </property>
+           <property name="checked" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="m_checkEnableScale" >
+           <property name="enabled" >
+            <bool>true</bool>
+           </property>
+           <property name="toolTip" >
+            <string>Sets whether to perform calculations specific to scale-range search strategies.&#xd;
+Typically, to search for models within their specified scale range (Adavanced/Nominal Scale x Minimum Scale) to (Adavanced/Nominal Scale x Maximum Scale) in the target, &#xd;
+calculations specific to scale-range search strategies should be enabled for the context. &#xd;
+These calculations are not required to search for models at their nominal scale. &#xd;
+In addition, if you expect that the occurrences sought are close to their model's nominal scale, &#xd;
+you can try disabling these calculations to see if Model Finder can still find the required occurrences. Disabling these calculations might speed up the search depending on the model and the target. &#xd;
+Note that candidates can only be returned as occurrences if found within the scale range specified for their model. &#xd;
+Therefore, whether you enable or disable the calculation, you can restrict which candidates are returned as occurrences by narrowing the scale range.</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Sets whether to perform calculations specific to scale-range search strategies.&#xd;
+Typically, to search for models within their specified scale range (Adavanced/Nominal Scale x Minimum Scale) to (Adavanced/Nominal Scale x Maximum Scale) in the target, &#xd;
+calculations specific to scale-range search strategies should be enabled for the context. &#xd;
+These calculations are not required to search for models at their nominal scale. &#xd;
+In addition, if you expect that the occurrences sought are close to their model's nominal scale, &#xd;
+you can try disabling these calculations to see if Model Finder can still find the required occurrences. Disabling these calculations might speed up the search depending on the model and the target. &#xd;
+Note that candidates can only be returned as occurrences if found within the scale range specified for their model. &#xd;
+Therefore, whether you enable or disable the calculation, you can restrict which candidates are returned as occurrences by narrowing the scale range.</string>
+           </property>
+           <property name="text" >
+            <string>Enable scale</string>
+           </property>
+           <property name="checked" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Model</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <property name="leftMargin" >
+        <number>9</number>
+       </property>
+       <property name="topMargin" >
+        <number>9</number>
+       </property>
+       <property name="rightMargin" >
+        <number>9</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="ModelFrame" >
+         <property name="frameShape" >
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_checkEnableRotation</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_spinMinimumAngle</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>79</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>130</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkEnableRotation</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_spinMaximumAngle</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>28</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>114</x>
+     <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkEnableScale</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_spinMinimumScale</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>144</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>328</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_checkEnableScale</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>m_spinMaximumScale</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>122</x>
+     <y>183</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>305</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

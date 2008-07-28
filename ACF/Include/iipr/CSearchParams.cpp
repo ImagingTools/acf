@@ -1,4 +1,4 @@
-#include "iipr/CSearchParamsBase.h"
+#include "iipr/CSearchParams.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -11,49 +11,30 @@ namespace iipr
 {
 
 
-CSearchParamsBase::CSearchParamsBase()
-:	m_calibrationPtr(NULL)
+CSearchParams::CSearchParams()
+	:m_angleRange(-180.0, 180.0),
+	m_scaleRange(0.5, 2.0),
+	m_nominalModelsCount(1),
+	m_minScore(0.6)
 {
 }
 
 
 // reimplemented (iipr::ISearchParams)
 
-void CSearchParamsBase::SetCalibrationPtr(const i2d::CTransform* calibrationPtr)
+i2d::CRectangle CSearchParams::GetSearchRegion() const
 {
-	m_calibrationPtr = calibrationPtr;
-}
-
-
-i2d::CRectangle CSearchParamsBase::GetSearchRegion(const i2d::CTransform* calibrationPtr) const
-{
-	const i2d::CTransform* calibPtr = (calibrationPtr != NULL) ? calibrationPtr : m_calibrationPtr;
-	if (calibPtr != NULL){
-		return GetCalibrated(*calibPtr, m_searchRegion);
-	}
-
 	return m_searchRegion;
 }
 
 
-i2d::CRectangle CSearchParamsBase::GetModelRegion(const i2d::CTransform* calibrationPtr) const
-{
-	const i2d::CTransform* calibPtr = (calibrationPtr != NULL) ? calibrationPtr : m_calibrationPtr;
-	if (calibPtr != NULL){
-		return GetCalibrated(*calibPtr, m_modelRegion);
-	}
-
-	return m_modelRegion;
-}
-
-
-double CSearchParamsBase::GetMinScore() const
+double CSearchParams::GetMinScore() const
 {
 	return m_minScore;
 }
 
 
-void CSearchParamsBase::SetMinScore(double minScore)
+void CSearchParams::SetMinScore(double minScore)
 {
 	if (m_minScore != minScore){
 		istd::CChangeNotifier changeNotifier(this);
@@ -63,13 +44,13 @@ void CSearchParamsBase::SetMinScore(double minScore)
 }
 
 
-const istd::CRange& CSearchParamsBase::GetAngleRange() const
+const istd::CRange& CSearchParams::GetRotationRange() const
 {
 	return m_angleRange;
 }
 
 
-void CSearchParamsBase::SetAngleRange(const istd::CRange& angleRange)
+void CSearchParams::SetRotationRange(const istd::CRange& angleRange)
 {
 	if (m_angleRange != angleRange){
 		istd::CChangeNotifier changeNotifier(this);
@@ -79,13 +60,13 @@ void CSearchParamsBase::SetAngleRange(const istd::CRange& angleRange)
 }
 
 
-const istd::CRange& CSearchParamsBase::GetScaleRange() const
+const istd::CRange& CSearchParams::GetScaleRange() const
 {
 	return m_scaleRange;
 }
 
 
-void CSearchParamsBase::SetScaleRange(const istd::CRange& scaleRange)
+void CSearchParams::SetScaleRange(const istd::CRange& scaleRange)
 {
 	if (m_scaleRange != scaleRange){
 		istd::CChangeNotifier changeNotifier(this);
@@ -95,25 +76,57 @@ void CSearchParamsBase::SetScaleRange(const istd::CRange& scaleRange)
 }
 
 
-int CSearchParamsBase::GetMatchesCount() const
+int CSearchParams::GetNominalModelsCount() const
 {
-	return m_matchesCount;
+	return m_nominalModelsCount;
 }
 
 
-void CSearchParamsBase::SetMatchesCount(int matchesCount)
+void CSearchParams::SetNominalModelsCount(int nominalModelsCount)
 {
-	if (m_matchesCount != matchesCount){
+	if (m_nominalModelsCount != nominalModelsCount){
 		istd::CChangeNotifier changeNotifier(this);
 
-		m_matchesCount = matchesCount;
+		m_nominalModelsCount = nominalModelsCount;
+	}
+}
+
+
+bool CSearchParams::IsRotationEnabled() const 
+{
+	return m_isRotationEnabled;
+}
+
+
+void CSearchParams::SetRotationEnabled(bool isRotationEnabled)
+{
+	if (m_isRotationEnabled != isRotationEnabled){
+		istd::CChangeNotifier notifierPtr(this);
+
+		m_isRotationEnabled = isRotationEnabled;
+	}
+}
+
+
+bool CSearchParams::IsScaleEnabled() const
+{
+	return m_isScaleEnabled;
+}
+
+
+void CSearchParams::SetScaleEnabled(bool isScaleEnabled)
+{
+	if (m_isScaleEnabled != isScaleEnabled){
+		istd::CChangeNotifier notifierPtr(this);
+
+		m_isScaleEnabled = isScaleEnabled;
 	}
 }
 
 
 // reimplemented (iser::ISerializable)
 
-bool CSearchParamsBase::Serialize(iser::IArchive & archive)
+bool CSearchParams::Serialize(iser::IArchive & archive)
 {
 	double startAngle = m_angleRange.GetMinValue();
 	double endAngle = m_angleRange.GetMaxValue();
@@ -145,25 +158,25 @@ bool CSearchParamsBase::Serialize(iser::IArchive & archive)
 	retVal = retVal && archive.Process(maxScale);
 	retVal = retVal && archive.EndTag(maxScaleTag);
 
-	static iser::CArchiveTag matchesCountTag("MatchesCount", "Minimum model matches count");
-	retVal = retVal && archive.BeginTag(matchesCountTag);
-	retVal = retVal && archive.Process(m_matchesCount);
-	retVal = retVal && archive.EndTag(matchesCountTag);
+	static iser::CArchiveTag isRotationEnabledTag("RotationEnabled", "Is angle range enabled");
+	retVal = retVal && archive.BeginTag(isRotationEnabledTag);
+	retVal = retVal && archive.Process(m_isRotationEnabled);
+	retVal = retVal && archive.EndTag(isRotationEnabledTag);
 
-	static iser::CArchiveTag timeoutTag("Timeout", "Timout for model search");
-	retVal = retVal && archive.BeginTag(timeoutTag);
-	retVal = retVal && archive.Process(m_timeout);
-	retVal = retVal && archive.EndTag(timeoutTag);
+	static iser::CArchiveTag isScaleEnabledTag("ScaleEnabledTag", "Is scale range enabled");
+	retVal = retVal && archive.BeginTag(isScaleEnabledTag);
+	retVal = retVal && archive.Process(m_isScaleEnabled);
+	retVal = retVal && archive.EndTag(isScaleEnabledTag);
+
+	static iser::CArchiveTag nominalModelsCountTag("NominalModelsCount", "Minimum model matches count");
+	retVal = retVal && archive.BeginTag(nominalModelsCountTag);
+	retVal = retVal && archive.Process(m_nominalModelsCount);
+	retVal = retVal && archive.EndTag(nominalModelsCountTag);
 
 	static iser::CArchiveTag searchRegionTag("SearchRegion", "Region for the model search");
 	retVal = retVal && archive.BeginTag(searchRegionTag);
 	retVal = retVal && m_searchRegion.Serialize(archive);
 	retVal = retVal && archive.EndTag(searchRegionTag);
-
-	static iser::CArchiveTag modelRegionTag("SearchRegion", "Region for the model teaching");
-	retVal = retVal && archive.BeginTag(modelRegionTag);
-	retVal = retVal && m_modelRegion.Serialize(archive);
-	retVal = retVal && archive.EndTag(modelRegionTag);
 
 	if (!archive.IsStoring()){
 		m_angleRange = istd::CRange(startAngle, endAngle);
@@ -171,14 +184,6 @@ bool CSearchParamsBase::Serialize(iser::IArchive & archive)
 	}
 
 	return retVal;
-}
-
-
-// protected static members
-
-i2d::CRectangle CSearchParamsBase::GetCalibrated(const i2d::CTransform&/* calibration*/, const i2d::CRectangle& region)
-{
-	return region;
 }
 
 
