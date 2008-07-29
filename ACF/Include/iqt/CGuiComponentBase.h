@@ -40,7 +40,7 @@ public:
 protected:
 	/**
 		Called from widget event filter when key is pressed.
-		\return	if event was consumed returns true, elsewhere false.
+		\return	if event was consumed returns true, otherwise false.
 	 */
 	virtual bool OnKeyPressed(QKeyEvent* event);
 

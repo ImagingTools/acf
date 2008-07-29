@@ -65,7 +65,7 @@ public:
 	/**
 		Set number of dimensions.
 		Please note, that depending on used array type for grid representation not all values must be supported.
-		\return	true, if number of dimension was set or false, elsewhere.
+		\return	true, if number of dimension was set or false otherwise.
 	*/
 	virtual bool SetDimensionsCount(int count);
 

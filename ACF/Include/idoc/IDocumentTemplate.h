@@ -74,7 +74,7 @@ public:
 	/**
 		Get file loader/saver for spacified document ID.
 		\param	documentTypeId	type ID of document will be loaded/saved.
-		\param	forSaving		if it is true, document saving is meant, elsewhere document loading.
+		\param	forSaving		if it is true, document saving is meant, otherwise document loading.
 	*/
 	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId, bool forSaving = false) const = 0;
 

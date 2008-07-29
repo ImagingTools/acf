@@ -112,6 +112,9 @@
 				RelativePath="..\CFileAcquisitionComp.cpp">
 			</File>
 			<File
+				RelativePath="..\CSnapBitmapSupplierGuiComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CSnapImageGuiComp.cpp">
 			</File>
 		</Filter>
@@ -121,6 +124,32 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
 				RelativePath="..\CExposureParamsGuiComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CFileAcquisitionComp.h">
+			</File>
+			<File
+				RelativePath="..\CSnapBitmapSupplierGuiComp.h">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -139,9 +168,6 @@
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\CFileAcquisitionComp.h">
 			</File>
 			<File
 				RelativePath="..\CSnapImageGuiComp.h">
@@ -184,10 +210,16 @@
 				RelativePath="..\generated\moc_CExposureParamsGuiComp.cpp">
 			</File>
 			<File
+				RelativePath="..\generated\moc_CSnapBitmapSupplierGuiComp.cpp">
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSnapImageGuiComp.cpp">
 			</File>
 			<File
 				RelativePath="..\generated\ui_CExposureParamsGuiComp.h">
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSnapBitmapSupplierGuiComp.h">
 			</File>
 			<File
 				RelativePath="..\generated\ui_CSnapImageGuiComp.h">
@@ -203,7 +235,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>
@@ -212,7 +245,31 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;"
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CSnapBitmapSupplierGuiComp.ui">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;$(InputDir)\Generated\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;
+"
 						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 						Outputs="&quot;$(InputDir)\Generated\ui_$(InputName).h&quot;"/>
 				</FileConfiguration>

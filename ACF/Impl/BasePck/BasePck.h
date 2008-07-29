@@ -27,8 +27,11 @@
 
 #include "isig/CSamplingParamsComp.h"
 
+#include "iproc/CTestIdManagerComp.h"
+
 #include "icam/CFileBitmapAcquisitionParamsComp.h"
 #include "icam/CExposureParamsComp.h"
+#include "icam/CSnapBitmapSupplierComp.h"
 
 
 /**
@@ -53,6 +56,9 @@ typedef icomp::TModelCompWrap<isig::CSamplingParamsComp> SamplingParams;
 
 typedef icomp::TModelCompWrap<icam::CFileBitmapAcquisitionParamsComp> FileBitmapAcquisitionParams;
 typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
+typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
+
+typedef iproc::CTestIdManagerComp TestIdManager;
 
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<i2d::CLine2d>, i2d::CLine2d, i2d::IObject2d, iser::ISerializable> Line;
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<i2d::CCircle>, i2d::CCircle, i2d::IObject2d, iser::ISerializable> Circle;

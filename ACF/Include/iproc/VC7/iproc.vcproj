@@ -142,6 +142,9 @@
 			<File
 				RelativePath="..\CProcessingElementBase.cpp">
 			</File>
+			<File
+				RelativePath="..\CTestIdManagerComp.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -160,6 +163,15 @@
 			</File>
 			<File
 				RelativePath="..\CProcessingElementBase.h">
+			</File>
+			<File
+				RelativePath="..\CTestIdManagerComp.h">
+			</File>
+			<File
+				RelativePath="..\IElementSelector.h">
+			</File>
+			<File
+				RelativePath="..\IIdManager.h">
 			</File>
 			<File
 				RelativePath="..\IJob.h">

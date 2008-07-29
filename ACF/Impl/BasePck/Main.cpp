@@ -18,7 +18,9 @@ I_EXPORT_COMPONENT(SingleDocumentTemplate, "Single document template for only on
 I_EXPORT_COMPONENT(CompositeDocumentTemplate, "Composite document template supporting more type of documents. It delegates document functionality to set of slave templates", "Composite Document Template MVC");
 I_EXPORT_COMPONENT(SamplingParams, "Sampling params based on fixed boundary values", "Sample Sampling Acquisition Model Parameters");
 I_EXPORT_COMPONENT(FileBitmapAcquisitionParams, "Parameters for bitmap acquisition from file", "File Directory Bitmap Acquisition Snap Parameters");
-I_EXPORT_COMPONENT(ExposureParams, "Parameters for exposure parameter control", "Exposure Shutter Delay Time EEN Bitmap Acquisition Snap Parameters");
+I_EXPORT_COMPONENT(ExposureParams, "Parameters for exposure parameter control", "Exposure Shutter Delay Time EEN Image Bitmap Acquisition Snap Parameters");
+I_EXPORT_COMPONENT(SnapBitmapSupplier, "Implementation of bitmap supplier getting image from camera", "Image Bitmap Acquisition Snap Supplier Parameters");
+I_EXPORT_COMPONENT(TestIdManager, "Implementation of ID manager generating ID's for test", "ID Manager Test Supplier");
 I_EXPORT_COMPONENT(Line, "Line 2D object", "Line 2D Object Parameter");
 I_EXPORT_COMPONENT(Circle, "Circle 2D object", "Circle 2D Object Parameter");
 I_EXPORT_COMPONENT(Rectangle, "Rectangle (orthogonal to axis) object", "Rectangle Orthogonal 2D Object Parameter");

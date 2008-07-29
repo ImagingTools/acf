@@ -33,15 +33,15 @@ public:
 
 protected:
 	typedef istd::TPointerVector<QGraphicsItem> Shapes;
+	typedef std::map<ISceneProvider*, Shapes> ShapesMap;
 
 	bool IsSceneIdSupported(int id) const;
+	const ShapesMap& GetShapesMap() const;
 
 	// abstract methods
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result) = 0;
 
 private:
-	typedef std::map<ISceneProvider*, Shapes> ShapesMap;
-
 	ShapesMap m_shapesMap;
 
 	I_REF(ISceneExtender, m_slaveExtenderCompPtr);
@@ -130,6 +130,13 @@ bool TSceneExtenderCompBase<Base>::IsSceneIdSupported(int id) const
 	}
 
 	return true;
+}
+
+
+template <class Base>
+const typename TSceneExtenderCompBase<Base>::ShapesMap& TSceneExtenderCompBase<Base>::GetShapesMap() const
+{
+	return m_shapesMap;
 }
 
 

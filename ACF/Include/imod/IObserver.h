@@ -27,7 +27,7 @@ public:
 	/**
 		Check if specified model is attached.
 		\modelPtr	pointer to model object. If this pointer is NULL, any model is meaned.
-		\return	true, if \c modelPtr is attached yet to this observer, false elsewhere.
+		\return	true, if \c modelPtr is attached yet to this observer, false otherwise.
 	*/
 	virtual bool IsModelAttached(const IModel* modelPtr) const = 0;
 	/**

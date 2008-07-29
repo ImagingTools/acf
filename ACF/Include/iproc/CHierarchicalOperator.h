@@ -6,7 +6,7 @@
 
 
 namespace iproc
-{		
+{
 
 
 class CHierarchicalOperator: public iproc::COperatorBase
@@ -43,4 +43,5 @@ protected:
 
 
 #endif // iproc_CHierarchicalOperator_included
+
 
