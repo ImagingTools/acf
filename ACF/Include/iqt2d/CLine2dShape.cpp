@@ -17,9 +17,8 @@ void CLine2dShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, 
 {
 	i2d::CLine2d* linePtr = GetObjectPtr();
 	if (linePtr != NULL){
+		setPen(QPen(Qt::green, 4));
 		setLine(iqt::GetQLineF(*linePtr));
-
-		update();
 	}
 }
 

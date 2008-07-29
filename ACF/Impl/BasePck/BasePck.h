@@ -59,10 +59,26 @@ typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
 
 typedef iproc::CTestIdManagerComp TestIdManager;
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<i2d::CLine2d>, 
+			i2d::CLine2d, 
+			i2d::IObject2d, 
+			iser::ISerializable, 
+			imod::IModel> Line;
 
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<i2d::CLine2d>, i2d::CLine2d, i2d::IObject2d, iser::ISerializable> Line;
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<i2d::CCircle>, i2d::CCircle, i2d::IObject2d, iser::ISerializable> Circle;
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<i2d::CRectangle>, i2d::CRectangle, i2d::IObject2d, iser::ISerializable> Rectangle;
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<i2d::CCircle>, 
+			i2d::CCircle, 
+			i2d::IObject2d, 
+			iser::ISerializable, 
+			imod::IModel> Circle;
+
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<i2d::CRectangle>, 
+			i2d::CRectangle, 
+			i2d::IObject2d, 
+			iser::ISerializable, 
+			imod::IModel> Rectangle;
 
 
 } // namespace BasePck

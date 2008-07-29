@@ -3,7 +3,11 @@
 
 #include "istd/TChangeNotifier.h"
 
+#include "iqt/CBitmap.h"
+
 #include "iqtipr/CSearchResultShape.h"
+
+#include "iqt2d/CImageShape.h"
 
 
 namespace iqtipr
@@ -19,6 +23,13 @@ void CSearchGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes
 		if (shapePtr.IsValid()){
 			if (m_searchResultsModelCompPtr->AttachObserver(shapePtr.GetPtr())){
 				result.PushBack(shapePtr.PopPtr());
+			}
+		}
+
+		istd::TDelPtr<iqt2d::CImageShape> imageShapePtr(new iqt2d::CImageShape());
+		if (imageShapePtr.IsValid()){
+			if (m_bitmapModelCompPtr->AttachObserver(imageShapePtr.GetPtr())){
+				result.PushBack(imageShapePtr.PopPtr());
 			}
 		}
 	}
@@ -53,6 +64,32 @@ void CSearchGuiComp::OnGuiDestroyed()
 
 	if (m_paramsSetGuiCompPtr.IsValid() && m_paramsSetGuiCompPtr->IsGuiCreated()){
 		m_paramsSetGuiCompPtr->DestroyGui();
+	}
+}
+
+
+// protected slots
+	
+void CSearchGuiComp::on_FindButton_clicked()
+{
+	DoSearch();
+}
+
+
+// private methods
+
+void CSearchGuiComp::DoSearch()
+{
+	if (		!m_searchProcessorCompPtr.IsValid() || 
+				!m_bitmapAcquisitionCompPtr.IsValid() || 
+				!m_searchResultsCompPtr.IsValid() ||
+				!m_bitmapCompPtr.IsValid()){
+		return;
+	}
+		
+	int retVal = m_bitmapAcquisitionCompPtr->DoProcessing(m_paramsSetCompPtr.GetPtr(), NULL, m_bitmapCompPtr.GetPtr());
+	if (retVal == icam::IBitmapAcquisition::TS_OK){
+		m_searchProcessorCompPtr->DoProcessing(m_paramsSetCompPtr.GetPtr(), m_bitmapCompPtr.GetPtr(), m_searchResultsCompPtr.GetPtr());
 	}
 }
 

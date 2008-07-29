@@ -45,7 +45,14 @@ typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CGaussian2dFilterParams
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CCaliperParams>, iipr::ICaliperParams, iser::ISerializable> CaliperParams;
 typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
 typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
-typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CSearchResultSet>, iipr::ISearchResultSet, iser::ISerializable, imod::IModel> SearchResults;
+
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<iipr::CSearchResultSet>, 
+			iipr::ISearchResultSet, 
+			iipr::IFeaturesConsumer, 
+			iipr::IFeaturesContainer, 
+			iser::ISerializable, 
+			imod::IModel> SearchResults;
 
 
 } // namespace IprPck

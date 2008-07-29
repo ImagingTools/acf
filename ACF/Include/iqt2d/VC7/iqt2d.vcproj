@@ -186,6 +186,24 @@
 			</File>
 			<File
 				RelativePath="..\CRectangleParamsGuiComp.h">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="RectangleParamsGui"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						AdditionalDependencies="RectangleParamsGui"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\CRectangleShape.h">
@@ -243,10 +261,16 @@
 				RelativePath="..\generated\moc_CLine2dParamsGuiComp.cpp">
 			</File>
 			<File
+				RelativePath="..\generated\moc_CRectangleParamsGuiComp.cpp">
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSceneProviderComp.cpp">
 			</File>
 			<File
 				RelativePath="..\generated\ui_CLine2dParamsGuiComp.h">
+			</File>
+			<File
+				RelativePath="..\generated\ui_CRectangleParamsGuiComp.h">
 			</File>
 			<File
 				RelativePath="..\generated\ui_CSceneConnectorGuiComp.h">

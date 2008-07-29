@@ -36,6 +36,7 @@ I_EXPORT_COMPONENT(SceneConnector, "Display scane provider, scene extender and c
 I_EXPORT_COMPONENT(SceneProvider, "Standard scene provider", "Scene Provider Extender Display Console GUI Qt");
 I_EXPORT_COMPONENT(ImageView, "Display bitmap using observer pattern", "Image Bitmap Display Viewer Observer Qt");
 I_EXPORT_COMPONENT(Line2dParamsGui, "Line parameter GUI displaying line using scene", "Line Parameters Observer Display GUI Qt");
+I_EXPORT_COMPONENT(RectangleParamsGui, "Rectangle parameter GUI displaying a rectangle using scene", "Rectangle Parameters Observer Display GUI Qt");
 I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
 I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using simple model observer GUI", "Model Observer Parameter Set Editor GUI Qt");
 I_EXPORT_COMPONENT(FileAcquisitionParamsGui, "File acquisition parameter editor", "Model Observer File Acquisition Snap Camera Parameter Editor GUI Qt");

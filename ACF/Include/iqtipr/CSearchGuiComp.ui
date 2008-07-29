@@ -53,11 +53,22 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="FindButton" >
-     <property name="text" >
-      <string>Find Model</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QPushButton" name="FindButton" >
+       <property name="text" >
+        <string>Find Model</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="TeachButton" >
+       <property name="text" >
+        <string>Teach Model...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
