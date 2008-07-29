@@ -154,7 +154,6 @@ bool CSnapBitmapSupplierGuiComp::SnapImage()
 				m_idManagerCompPtr.IsValid() &&
 				m_idManagerCompPtr->SkipToNextId(objectId)){
 		const iimg::IBitmap* bitmapPtr = supplierPtr->GetBitmap(objectId);
-		I_DWORD objectId;
 		if (bitmapPtr != NULL){
 			supplierPtr->EnsureWorkFinished(objectId);
 
