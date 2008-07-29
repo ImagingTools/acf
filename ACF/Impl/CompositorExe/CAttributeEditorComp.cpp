@@ -516,6 +516,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 	int propertyMining = index.data(AttributeMining).toInt();
 
 	QString attributeName = index.data(AttributeId).toString();
+
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeName);
 	if (attributeInfoPtr == NULL){
 		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeName.toStdString(), (propertyMining != Export));
@@ -647,7 +648,8 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 	QComboBox* comboEditor = dynamic_cast<QComboBox*>(editor);
 
 	QString attributeName = index.data(AttributeId).toString();
-	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeName);
+	icomp::IRegistryElement::AttributeInfo* attributeInfoPtr =
+				const_cast<icomp::IRegistryElement::AttributeInfo*>(m_parent.GetRegistryAttribute(attributeName));
 	I_ASSERT(attributeInfoPtr != NULL);
 
 	int propertyMining = index.data(AttributeMining).toInt();
@@ -656,7 +658,14 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		istd::CChangeNotifier notifier(m_parent.GetObjectPtr());
 
 		QString newValue = editor->property("text").toString();
-		const_cast<icomp::IRegistryElement::AttributeInfo*>(attributeInfoPtr)->exportId = newValue.toStdString();
+		attributeInfoPtr->exportId = newValue.toStdString();
+	}
+
+	if (!attributeInfoPtr->attributePtr.IsValid()){
+		icomp::IRegistryElement* elementPtr = m_parent.GetObjectPtr();
+		I_ASSERT(elementPtr != NULL);
+
+		attributeInfoPtr->attributePtr.SetPtr(elementPtr->CreateAttribute(attributeName.toStdString()));
 	}
 
 	iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();

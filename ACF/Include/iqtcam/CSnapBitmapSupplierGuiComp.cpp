@@ -66,6 +66,13 @@ void CSnapBitmapSupplierGuiComp::UpdateModel() const
 			}
 		}
 	}
+
+	if (IsGuiCreated()){
+		const iimg::IBitmap* bitmapPtr = GetCurrentBitmap();
+		bool hasBitmap = (bitmapPtr != NULL);
+
+		SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
+	}
 }
 
 
@@ -194,15 +201,8 @@ void CSnapBitmapSupplierGuiComp::OnGuiModelAttached()
 	icam::CSnapBitmapSupplierComp* supplierPtr = GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
-	const iimg::IBitmap* bitmapPtr = GetCurrentBitmap();
 	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetParamsSet());
 	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
-
-	bool hasBitmap = (bitmapPtr != NULL);
-
-	SnapImageButton->setVisible(hasBitmap);
-	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
-	SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
 
 	bool areParamsEditable = false;
 	if ((paramsModelPtr != NULL) && m_paramsSetGuiCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){

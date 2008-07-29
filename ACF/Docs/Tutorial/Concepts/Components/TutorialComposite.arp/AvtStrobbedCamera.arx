@@ -88,7 +88,7 @@
                 true
               </IsEnabled>
               <Value>
-                2e-005
+                0.00015
               </Value>
             </Data>
           </AttributeInfo>

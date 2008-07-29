@@ -48,6 +48,11 @@ public:
 		WS_CRITICAL
 	};
 
+	enum UpdateFlags
+	{
+		UF_SUPPLIER_RESULTS = 0x20000
+	};
+
 	/**
 		Called to signalize to entering of new object.
 		Becouse of all produced object are accessible on demand and must be cached, there is needed signal to clear this cache.

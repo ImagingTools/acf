@@ -6,6 +6,7 @@
 #include <map>
 #include <list>
 
+#include "istd/TChangeNotifier.h"
 #include "istd/CStaticServicesProvider.h"
 
 #include "icomp/CComponentBase.h"
@@ -27,6 +28,7 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
+		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(ISupplier);
 		I_REGISTER_INTERFACE(SupplierInterface);
 		I_ASSIGN(m_recentObjectListSizeAttrPtr, "RecentObjectListSize", "Size of list storing recent processed tagged objects, if it is disabled only one object will stored", false, 10);
@@ -160,6 +162,8 @@ const typename TSupplierCompWrap<SupplierInterface, Product>::WorkInfo* TSupplie
 			if (timerPtr != NULL){
 				beforeTime = timerPtr->GetElapsed();
 			}
+
+			istd::CChangeNotifier notifier(const_cast<TSupplierCompWrap<SupplierInterface, Product>*>(this));
 
 			workInfo.status = ProduceObject(objectId, workInfo.product);
 

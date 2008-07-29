@@ -54,7 +54,7 @@
         Camera
       </ComponentName>
       <X>
-        150
+        175
       </X>
       <X>
         87
@@ -87,7 +87,7 @@
         ExposureParams
       </ComponentName>
       <X>
-        -112
+        -87
       </X>
       <X>
         87
@@ -153,7 +153,7 @@
         Framework
       </ComponentName>
       <X>
-        100
+        175
       </X>
       <X>
         -87
