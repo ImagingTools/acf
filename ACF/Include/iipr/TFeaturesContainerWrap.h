@@ -21,7 +21,7 @@ class TFeaturesContainerWrap: public BaseClass
 public:
 	// pseudo-reimplemented (iipr::IFeaturesConsumer)
 	virtual void ResetFeatures();
-	virtual bool AddFeature(const iipr::IFeature* featurePtr);
+	virtual bool AddFeature(const iipr::IFeature* featurePtr, bool* isFullPtr = NULL);
 
 	// pseudo-reimplemented (iipr::IFeaturesContainer)
 	virtual iipr::IFeaturesContainer::Features GetFeatures() const;
@@ -51,7 +51,7 @@ void TFeaturesContainerWrap<BaseClass, FeatureInterface>::ResetFeatures()
 
 
 template <class BaseClass, class FeatureInterface>
-bool TFeaturesContainerWrap<BaseClass, FeatureInterface>::AddFeature(const iipr::IFeature* featurePtr)
+bool TFeaturesContainerWrap<BaseClass, FeatureInterface>::AddFeature(const iipr::IFeature* featurePtr, bool* /*isFullPtr*/)
 {
 	if (featurePtr != NULL && IsFeatureAccepted(featurePtr)){
 		istd::CChangeNotifier changePtr(this);

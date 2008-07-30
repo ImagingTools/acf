@@ -28,9 +28,13 @@ public:
 								Please note, that the container takes controll over this object, 
 								so you cannot destroy this object manually.
 								It cannot be NULL.
-		\return	true if added feature fullfill search constraints and no additionally features should be added.
+
+		\param isFullPtr If not NULL this paramster is used to get info whether 
+		the added feature satisfy search constraints and no additionally features should be added
+		
+		\return	true if the pushed feature is valid for this container and was inserted correctly.
 	*/
-	virtual bool AddFeature(const IFeature* featurePtr) = 0;
+	virtual bool AddFeature(const IFeature* featurePtr, bool* isFullPtr = NULL) = 0;
 };
 
 

@@ -46,6 +46,8 @@ bool FeaturesExtraction(
 
 	const PixelConversion::SourcePixelType* derivativeElementsPtr = (const PixelConversion::SourcePixelType*)bitmap.GetLinePtr(0);
 
+	bool retVal = true;
+
 	for (; nextIndex != endIndex; nextIndex += indexDiff){
 		PixelConversion::CalcPixelType nextPixel = conversion.GetCalc(derivativeElementsPtr[nextIndex]);
 
@@ -67,8 +69,10 @@ bool FeaturesExtraction(
 					I_ASSERT(position >= 0 - I_EPSILON);
 					I_ASSERT(position <= 1 + I_EPSILON);
 
-					if (results.AddFeature(new CCaliperFeature(pixelIntensity * conversion.GetWeight(pixel), position))){
-						return true;
+					bool isReady = false;
+					retVal = retVal && results.AddFeature(new CCaliperFeature(pixelIntensity * conversion.GetWeight(pixel), position), &isReady);
+					if (isReady){
+						return retVal;
 					}
 				}
 
@@ -90,8 +94,10 @@ bool FeaturesExtraction(
 					I_ASSERT(position >= 0 - I_EPSILON);
 					I_ASSERT(position <= 1 + I_EPSILON);
 
-					if (results.AddFeature(new CCaliperFeature(pixelIntensity * conversion.GetWeight(pixel), position))){
-						return true;
+					bool isReady = false;
+					retVal = retVal && results.AddFeature(new CCaliperFeature(pixelIntensity * conversion.GetWeight(pixel), position), &isReady);
+					if (isReady){
+						return retVal;
 					}
 				}
 
@@ -105,7 +111,7 @@ bool FeaturesExtraction(
 		}
 	}
 
-	return true;
+	return retVal;
 }
 
 
