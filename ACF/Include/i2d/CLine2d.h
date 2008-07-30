@@ -29,9 +29,29 @@ public:
 	void SetPoint2(const CVector2d& point);
 	double GetSlope() const;
 	double GetIntercept() const;
+
+	/**
+		Check if this line is parallel to another one.
+	*/
 	bool IsParalell(const CLine2d& inLine) const;
-	bool IsIntersectedBy(const CLine2d& inLine, CVector2d* intersectionPtr = NULL) const;
+
+	/**
+		Check if two lines has intersection.
+		\param	line			second line.
+		\param	intersectionPtr	optional object will be set to intersection pointer.
+	*/
+	bool IsIntersectedBy(const CLine2d& line, CVector2d* intersectionPtr = NULL) const;
+
+	/**
+		Get intersecition position of two lines.
+	*/
 	CVector2d GetIntersection(const CLine2d& inLine) const;
+
+	/**
+		Get position of point using normed 'alpha' value.
+		Value 0 will be mapped to point 1 and value 1 wil be mapped to point 2.
+	*/
+	CVector2d GetPositionFromAlpha(double alpha) const;
 
 	/**
 		Get difference vector from point 1 to point 2.

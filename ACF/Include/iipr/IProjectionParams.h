@@ -12,6 +12,9 @@ namespace iipr
 class IProjectionConstraints;
 
 
+/**
+	Describe parameter for projection 2D image to 1D structure.
+*/
 class IProjectionParams: virtual public iser::ISerializable
 {
 public:

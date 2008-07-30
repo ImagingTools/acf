@@ -135,6 +135,12 @@ CVector2d CLine2d::GetIntersection(const CLine2d& line) const
 }
 
 
+CVector2d CLine2d::GetPositionFromAlpha(double alpha) const
+{
+	return m_point1 * (1 - alpha) + m_point2 * alpha;
+}
+
+
 CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 {
 	static CLine2d emptyLine(CVector2d(0, 0), CVector2d(0, 0));

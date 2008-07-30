@@ -161,6 +161,21 @@ bool CLineProjectionProcessor::DoProjection(
 }
 
 
+imath::CVarVector CLineProjectionProcessor::GetBitmapPosition(
+			const imath::CVarVector& projectionPosition,
+			const iprm::IParamsSet* paramsPtr) const
+{
+	if ((projectionPosition.GetElementsCount() >= 1) && (paramsPtr != NULL) && !m_lineParamId.empty()){
+		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(paramsPtr->GetParameter(m_lineParamId));
+		if (linePtr != NULL){
+			return linePtr->GetPositionFromAlpha(projectionPosition[0]);
+		}
+	}
+
+	return imath::CVarVector();
+}
+
+
 // reimplemented (iproc::TIProcessor)
 
 int CLineProjectionProcessor::DoProcessing(

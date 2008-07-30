@@ -46,6 +46,9 @@ public:
 				const i2d::CLine2d& projectionLine,
 				const IProjectionParams* paramsPtr,
 				CProjectionData& results);
+	virtual imath::CVarVector GetBitmapPosition(
+				const imath::CVarVector& projectionPosition,
+				const iprm::IParamsSet* paramsPtr) const;
 
 	// reimplemented (iproc::TIProcessor)
 	virtual int DoProcessing(
