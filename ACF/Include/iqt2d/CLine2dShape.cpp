@@ -16,12 +16,12 @@ namespace iqt2d
 // public methods
 
 CLine2dShape::CLine2dShape()
-	:m_pointGrip1(this),
+:	m_pointGrip1(this),
 	m_pointGrip2(this),
 	m_ignoreUpdate(false)
 {
-	connect(&m_pointGrip1, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition1Changed(const QPointF&)));
-	connect(&m_pointGrip2, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition2Changed(const QPointF&)));
+	connect(&m_pointGrip1, SIGNAL(PositionChanged(const i2d::CVector2d&)), this, SLOT(OnPosition1Changed(const QPointF&)));
+	connect(&m_pointGrip2, SIGNAL(PositionChanged(const i2d::CVector2d&)), this, SLOT(OnPosition2Changed(const QPointF&)));
 
 	setFlags(ItemIsMovable | ItemIsSelectable);
 }

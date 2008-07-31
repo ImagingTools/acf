@@ -9,6 +9,7 @@
 #include "iqtipr/CIterativeProcessorParamsGuiComp.h"
 #include "iqtipr/CSearchGuiComp.h"
 #include "iqtipr/CSearchParamsGuiComp.h"
+#include "iqtipr/CCaliperBasedPositionSupplierGuiComp.h"
 
 
 /**
@@ -22,6 +23,7 @@ typedef iqtipr::CRectangularFilterParamsGuiComp RectangularFilterParamsGui;
 typedef iqtipr::CIterativeProcessorParamsGuiComp IterationParamsGui;
 typedef iqtipr::CSearchGuiComp SearchGui;
 typedef iqtipr::CSearchParamsGuiComp SearchParamsGui;
+typedef iqtipr::CCaliperBasedPositionSupplierGuiComp CaliperBasedPositionSupplierGui;
 
 
 } // namespace QtIprPck

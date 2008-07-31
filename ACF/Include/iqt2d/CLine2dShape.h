@@ -2,8 +2,6 @@
 #define iqt2d_CLine2dShape_included
 
 
-#include <QGraphicsItemGroup>
-
 #include "imod/TSingleModelObserverBase.h"
 
 #include "i2d/CLine2d.h"

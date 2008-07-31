@@ -1,4 +1,4 @@
-#include "iipr/CCaliperBasedPositionSupplier.h"
+#include "iipr/CCaliperBasedPositionSupplierComp.h"
 
 
 #include "iipr/CHeaviestFeatureConsumer.h"
@@ -8,9 +8,15 @@ namespace iipr
 {
 
 
+iprm::IParamsSet* CCaliperBasedPositionSupplierComp::GetParamsSet() const
+{
+	return m_paramsSetCompPtr.GetPtr();
+}
+
+
 // reimplemented (iipr::IVector2dSupplier)
 
-const i2d::CVector2d* CCaliperBasedPositionSupplier::GetVector2d(I_DWORD objectId) const
+const i2d::CVector2d* CCaliperBasedPositionSupplierComp::GetVector2d(I_DWORD objectId) const
 {
 	const WorkInfo* infoPtr = GetWorkInfo(objectId, true);
 	if (infoPtr != NULL){
@@ -23,7 +29,7 @@ const i2d::CVector2d* CCaliperBasedPositionSupplier::GetVector2d(I_DWORD objectI
 
 // reimplemented (iser::ISerializable)
 
-bool CCaliperBasedPositionSupplier::Serialize(iser::IArchive& archive)
+bool CCaliperBasedPositionSupplierComp::Serialize(iser::IArchive& archive)
 {
 	if (m_paramsSetCompPtr.IsValid()){
 		return m_paramsSetCompPtr->Serialize(archive);
@@ -33,7 +39,7 @@ bool CCaliperBasedPositionSupplier::Serialize(iser::IArchive& archive)
 }
 
 
-I_DWORD CCaliperBasedPositionSupplier::GetMinimalVersion(int versionId) const
+I_DWORD CCaliperBasedPositionSupplierComp::GetMinimalVersion(int versionId) const
 {
 	if (m_paramsSetCompPtr.IsValid()){
 		return m_paramsSetCompPtr->GetMinimalVersion(versionId);
@@ -47,7 +53,7 @@ I_DWORD CCaliperBasedPositionSupplier::GetMinimalVersion(int versionId) const
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CCaliperBasedPositionSupplier::ProduceObject(I_DWORD objectId, i2d::CVector2d& result) const
+int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, i2d::CVector2d& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_lineProjectionProcessorCompPtr.IsValid() &&

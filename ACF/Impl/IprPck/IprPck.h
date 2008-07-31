@@ -21,6 +21,7 @@
 #include "iipr/CExtremumCaliperProcessorComp.h"
 #include "iipr/CLineProjectionProcessorComp.h"
 #include "iipr/CSearchResultSet.h"
+#include "iipr/CCaliperBasedPositionSupplierComp.h"
 
 
 /**
@@ -45,14 +46,14 @@ typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CGaussian2dFilterParams
 typedef icomp::TMakeComponentWrap<imod::TModelWrap<iipr::CCaliperParams>, iipr::ICaliperParams, iser::ISerializable> CaliperParams;
 typedef iipr::CExtremumCaliperProcessorComp ExtremumCaliperProcessor;
 typedef iipr::CLineProjectionProcessorComp LineProjectionProcessor;
-
 typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<iipr::CSearchResultSet>, 
-			iipr::ISearchResultSet, 
-			iipr::IFeaturesConsumer, 
-			iipr::IFeaturesContainer, 
-			iser::ISerializable, 
+			imod::TModelWrap<iipr::CSearchResultSet>,
+			iipr::ISearchResultSet,
+			iipr::IFeaturesConsumer,
+			iipr::IFeaturesContainer,
+			iser::ISerializable,
 			imod::IModel> SearchResults;
+typedef iipr::CCaliperBasedPositionSupplierComp CaliperBasedPositionSupplier;
 
 
 } // namespace IprPck

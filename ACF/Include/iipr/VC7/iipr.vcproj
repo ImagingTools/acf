@@ -132,7 +132,7 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplier.cpp">
+				RelativePath="..\CCaliperBasedPositionSupplierComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CCaliperFeature.cpp">
@@ -199,7 +199,7 @@
 			Name="Header Files"
 			Filter="h">
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplier.h">
+				RelativePath="..\CCaliperBasedPositionSupplierComp.h">
 			</File>
 			<File
 				RelativePath="..\CCaliperFeature.h">

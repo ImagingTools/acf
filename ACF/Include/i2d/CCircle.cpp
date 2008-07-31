@@ -1,6 +1,9 @@
 #include "i2d/CCircle.h"
-#include "i2d/CRectangle.h"
 
+
+#include "istd/TChangeNotifier.h"
+
+#include "i2d/CRectangle.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -11,31 +14,28 @@ namespace i2d
 
 
 CCircle::CCircle()
+:	m_radius(0)
 {
-	m_radius = 0.0;
 }
 
 
 CCircle::CCircle(double radius, const CVector2d& center)
+:	BaseClass(center), m_radius(radius)
 {
-	m_radius = radius;
-	m_center = center;
 }
 
 
-double CCircle::GetRadius() const
+void CCircle::SetRadius(double radius)
 {
-	return m_radius;
+	if (radius != m_radius){
+		istd::CChangeNotifier notifier(this);
+
+		m_radius = radius;
+	}
 }
 
 
 // reimplemented (IObject2d)
-
-CVector2d CCircle::GetCenter() const
-{
-	return m_center;
-}
-
 
 CRectangle CCircle::GetBoundingBox() const
 {
@@ -53,10 +53,7 @@ bool CCircle::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag centerTag("Center", "Circle center");
-	retVal = retVal && archive.BeginTag(centerTag);
-	retVal = retVal && m_center.Serialize(archive);
-	retVal = retVal && archive.EndTag(centerTag);
+	retVal = retVal && BaseClass::Serialize(archive);
 
 	static iser::CArchiveTag radiusTag("Radius", "Circle radius");
 	retVal = retVal && archive.BeginTag(radiusTag);

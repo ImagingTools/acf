@@ -130,6 +130,9 @@
 				RelativePath="..\CLine2d.cpp">
 			</File>
 			<File
+				RelativePath="..\CPosition2d.cpp">
+			</File>
+			<File
 				RelativePath="..\CRectangle.cpp">
 			</File>
 			<File
@@ -147,6 +150,9 @@
 			</File>
 			<File
 				RelativePath="..\CLine2d.h">
+			</File>
+			<File
+				RelativePath="..\CPosition2d.h">
 			</File>
 			<File
 				RelativePath="..\CRectangle.h">

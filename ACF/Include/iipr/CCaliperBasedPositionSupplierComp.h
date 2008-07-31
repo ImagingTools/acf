@@ -1,5 +1,5 @@
-#ifndef iipr_CCaliperBasedPositionSupplier_included
-#define iipr_CCaliperBasedPositionSupplier_included
+#ifndef iipr_CCaliperBasedPositionSupplierComp_included
+#define iipr_CCaliperBasedPositionSupplierComp_included
 
 
 #include "i2d/CVector2d.h"
@@ -19,17 +19,19 @@ namespace iipr
 {
 
 
-class CCaliperBasedPositionSupplier: public iproc::TSupplierCompWrap<IVector2dSupplier, i2d::CVector2d>
+class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<IVector2dSupplier, i2d::CVector2d>
 {
 public:
 	typedef iproc::TSupplierCompWrap<IVector2dSupplier, i2d::CVector2d> BaseClass;
 
-	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplier);
+	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplierComp);
 		I_ASSIGN(m_bitmapSupplierCompPtr, "BitmapSupplier", "Provide image to analyse", true, "BitmapSupplier");
 		I_ASSIGN(m_lineProjectionProcessorCompPtr, "ProjectionProcessor", "Calculate projection from image", true, "ProjectionProcessor");
 		I_ASSIGN(m_caliperProcessorCompPtr, "CaliperProcessor", "Calculate position from projection", true, "CaliperProcessor");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set for processors", false, "ParamsSet");
 	I_END_COMPONENT;
+
+	iprm::IParamsSet* GetParamsSet() const;
 
 	// reimplemented (iipr::IVector2dSupplier)
 	virtual const i2d::CVector2d* GetVector2d(I_DWORD objectId) const;
@@ -55,6 +57,6 @@ private:
 } // namespace iipr
 
 
-#endif // !iipr_CCaliperBasedPositionSupplier_included
+#endif // !iipr_CCaliperBasedPositionSupplierComp_included
 
 

@@ -24,7 +24,8 @@ I_EXPORT_COMPONENT(ExposureParams, "Parameters for exposure parameter control", 
 I_EXPORT_COMPONENT(SnapBitmapSupplier, "Implementation of bitmap supplier getting image from camera", "Image Bitmap Acquisition Snap Supplier Parameters");
 I_EXPORT_COMPONENT(TestIdManager, "Implementation of ID manager generating ID's for test", "ID Manager Test Supplier");
 I_EXPORT_COMPONENT(Line, "Line 2D object", "Line 2D Object Parameter");
-I_EXPORT_COMPONENT(Circle, "Circle 2D object", "Circle 2D Object Parameter");
+I_EXPORT_COMPONENT(Position2d, "Position 2D object", "Position 2D Object Parameter");
+I_EXPORT_COMPONENT(Circle, "Circle 2D object", "Circle Position Radius 2D Object Parameter");
 I_EXPORT_COMPONENT(Rectangle, "Rectangle (orthogonal to axis) object", "Rectangle Orthogonal 2D Object Parameter");
 
 

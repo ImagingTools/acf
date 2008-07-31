@@ -4,8 +4,6 @@
 // Qt includes
 #include <QMessageBox>
 
-#include "istd/TDelPtr.h"
-
 #include "iqt2d/CImageShape.h"
 
 

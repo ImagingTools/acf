@@ -1,0 +1,37 @@
+#ifndef i2d_CPosition2d_included
+#define	i2d_CPosition2d_included
+
+
+#include "i2d/IObject2d.h"
+#include "i2d/CVector2d.h"
+
+
+namespace i2d
+{	
+
+
+class CPosition2d: virtual public IObject2d
+{
+public:
+	CPosition2d();
+	CPosition2d(const CVector2d& center);
+
+	void SetCenter(const CVector2d& center);
+
+	// reimplemented (IObject2d)
+	virtual CVector2d GetCenter() const;
+	virtual CRectangle GetBoundingBox() const;
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	CVector2d m_center;
+};
+
+
+} // namespace i2d
+
+
+#endif // !i2d_CPosition2d_included
+

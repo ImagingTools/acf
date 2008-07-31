@@ -17,8 +17,9 @@
 #include "istdc/CApplicationInfoComp.h"
 #include "istdc/CRegistryCodeSaverComp.h"
 
-#include "i2d/CLine2d.h"
+#include "i2d/CPosition2d.h"
 #include "i2d/CCircle.h"
+#include "i2d/CLine2d.h"
 #include "i2d/CRectangle.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
@@ -59,25 +60,31 @@ typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
 
 typedef iproc::CTestIdManagerComp TestIdManager;
-typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<i2d::CLine2d>, 
-			i2d::CLine2d, 
-			i2d::IObject2d, 
-			iser::ISerializable, 
-			imod::IModel> Line;
 
 typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<i2d::CCircle>, 
-			i2d::CCircle, 
-			i2d::IObject2d, 
-			iser::ISerializable, 
+			imod::TModelWrap<i2d::CPosition2d>,
+			i2d::CPosition2d,
+			i2d::IObject2d,
+			iser::ISerializable,
+			imod::IModel> Position2d;
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<i2d::CCircle>,
+			i2d::CCircle,
+			i2d::CPosition2d,
+			i2d::IObject2d,
+			iser::ISerializable,
 			imod::IModel> Circle;
-
 typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<i2d::CRectangle>, 
-			i2d::CRectangle, 
-			i2d::IObject2d, 
-			iser::ISerializable, 
+			imod::TModelWrap<i2d::CLine2d>,
+			i2d::CLine2d,
+			i2d::IObject2d,
+			iser::ISerializable,
+			imod::IModel> Line;
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<i2d::CRectangle>,
+			i2d::CRectangle,
+			i2d::IObject2d,
+			iser::ISerializable,
 			imod::IModel> Rectangle;
 
 

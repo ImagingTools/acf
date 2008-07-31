@@ -121,6 +121,9 @@
 				RelativePath="..\CLine2dShape.cpp">
 			</File>
 			<File
+				RelativePath="..\CPosition2dShape.cpp">
+			</File>
+			<File
 				RelativePath="..\CRectangleParamsGuiComp.cpp">
 			</File>
 			<File
@@ -229,6 +232,9 @@
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CPosition2dShape.h">
 			</File>
 			<File
 				RelativePath="..\CRectangleParamsGuiComp.h">

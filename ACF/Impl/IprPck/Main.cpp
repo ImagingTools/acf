@@ -25,6 +25,7 @@ I_EXPORT_COMPONENT(CaliperParams, "Parameters for caliper tool", "Caliper Weight
 I_EXPORT_COMPONENT(ExtremumCaliperProcessor, "Caliper implementation extracting projection extremums", "Caliper Extremum Minimum Maximum Projection Processor");
 I_EXPORT_COMPONENT(LineProjectionProcessor, "Line projection implementation for single line width", "Projection Line Processor");
 I_EXPORT_COMPONENT(SearchResults, "Search results", "Model Search Feature Extraction");
+I_EXPORT_COMPONENT(CaliperBasedPositionSupplier, "supplier implementation returning position found using caliper tool", "Model Caliper Position Processing Supplier");
 
 
 } // namespace IprPck
