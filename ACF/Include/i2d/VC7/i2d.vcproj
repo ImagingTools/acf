@@ -124,6 +124,9 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CAnnulus.cpp">
+			</File>
+			<File
 				RelativePath="..\CCircle.cpp">
 			</File>
 			<File
@@ -145,6 +148,9 @@
 		<Filter
 			Name="Header Files"
 			Filter="h">
+			<File
+				RelativePath="..\CAnnulus.h">
+			</File>
 			<File
 				RelativePath="..\CCircle.h">
 			</File>

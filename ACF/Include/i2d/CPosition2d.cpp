@@ -70,3 +70,4 @@ bool CPosition2d::Serialize(iser::IArchive& archive)
 
 } // namespace i2d
 
+

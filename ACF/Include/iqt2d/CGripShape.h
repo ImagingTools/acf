@@ -21,13 +21,16 @@ public:
 	CGripShape(QGraphicsItem* parentPtr = NULL);
 
 signals:
-	void PositionChanged(const i2d::CVector2d& position);
+	void PositionChanged(const QPointF& position);
 
 protected:
-	virtual void OnPositionChanged(const i2d::CVector2d& position);
+	virtual void OnPositionChanged(const QPointF& position);
 
 	// reimplemented (QGraphicsItem) 
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+
+private:
+	QGraphicsSimpleTextItem m_labelItem;
 };
 
 

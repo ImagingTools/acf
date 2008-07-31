@@ -6,8 +6,6 @@
 
 #include "istd/TChangeNotifier.h"
 
-#include "iqt/CSignalBlocker.h"
-
 
 namespace iqt2d
 {
@@ -37,13 +35,13 @@ void CPosition2dShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags
 
 // reimplemented (CGripShape) 
 
-void CPosition2dShape::OnPositionChanged(const i2d::CVector2d& position)
+void CPosition2dShape::OnPositionChanged(const QPointF& position)
 {
 	i2d::CPosition2d* positionPtr = GetObjectPtr();
 	if ((positionPtr != NULL) && !m_ignoreUpdate){
 		m_ignoreUpdate = true;
 
-		positionPtr->SetCenter(position);
+		positionPtr->SetCenter(iqt::GetCVector2d(position));
 
 		m_ignoreUpdate = false;
 	}

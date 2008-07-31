@@ -35,12 +35,17 @@ protected slots:
 protected:
 	// reimplemented (QGraphicsItem) 
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
+	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+
+private:
+	void UpdateGripPositions();
 
 private:
 	CGripShape m_pointGrip1;
 	CGripShape m_pointGrip2;
-
-	bool m_ignoreUpdate;
+	QPointF m_lastPosition;
 };
 
 

@@ -28,7 +28,7 @@ public:
 
 protected:
 	// reimplemented (CGripShape) 
-	virtual void OnPositionChanged(const i2d::CVector2d& position);
+	virtual void OnPositionChanged(const QPointF& position);
 
 private:
 	bool m_ignoreUpdate;

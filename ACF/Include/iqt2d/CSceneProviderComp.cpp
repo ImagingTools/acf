@@ -328,7 +328,7 @@ void CSceneProviderComp::OnGuiCreated()
 	viewPtr->setFrameStyle(QFrame::NoFrame);
 	viewPtr->setScene(m_scenePtr);
 	viewPtr->setMouseTracking(true);
-//	viewPtr->setDragMode(QGraphicsView::ScrollHandDrag);
+	viewPtr->setDragMode(QGraphicsView::ScrollHandDrag);
 	viewPtr->setCacheMode(QGraphicsView::CacheBackground);
 
 	viewPtr->installEventFilter(this);
