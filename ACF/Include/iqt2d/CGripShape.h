@@ -2,21 +2,19 @@
 #define iqt2d_CGripShape_included
 
 
-#include <QGraphicsRectItem>
-
-#include "iqt2d/iqt2d.h"
+#include "iqt2d/TShapeBase.h"
 
 
 namespace iqt2d
 {
 
 
-class CGripShape: public QObject, public QGraphicsEllipseItem
+class CGripShape: public TShapeBase<QGraphicsEllipseItem>
 {
 	Q_OBJECT
 
 public:
-	typedef QGraphicsEllipseItem BaseClass;
+	typedef TShapeBase<QGraphicsEllipseItem> BaseClass;
 
 	CGripShape(QGraphicsItem* parentPtr = NULL);
 
@@ -24,10 +22,9 @@ signals:
 	void PositionChanged(const QPointF& position);
 
 protected:
+	// reimplemented (TShapeBase<QGraphicsEllipseItem>)
 	virtual void OnPositionChanged(const QPointF& position);
-
-	// reimplemented (QGraphicsItem) 
-	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+	virtual void OnSelectionChanged(bool isSelected);
 
 private:
 	QGraphicsSimpleTextItem m_labelItem;

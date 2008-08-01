@@ -17,8 +17,14 @@ CGripShape::CGripShape(QGraphicsItem* parentPtr)
 :	BaseClass(parentPtr),
 	m_labelItem(this)
 {
-	BaseClass::setPen(QPen(QBrush(QColor(10, 126, 242, 255)), 0));
-	BaseClass::setBrush(QBrush(QColor(10, 126, 242, 128)));
+	SetPen(InactiveColor, QPen(QBrush(QColor(0, 0, 192)), 0));
+	SetPen(EditableColor, QPen(QBrush(QColor(0, 0, 192)), 0));
+	SetPen(SelectedColor, QPen(QBrush(QColor(0, 0, 255)), 0));
+
+	SetBrush(InactiveColor, QBrush(QColor(10, 126, 242)));
+	SetBrush(EditableColor, QBrush(QColor(10, 126, 242)));
+	SetBrush(SelectedColor, QBrush(QColor(255, 255, 0)));
+
 	setRect(-5, -5, 10, 10);
 
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemIgnoresTransformations);
@@ -35,10 +41,14 @@ CGripShape::CGripShape(QGraphicsItem* parentPtr)
 
 	m_labelItem.setPos(0, -20);
 	m_labelItem.setVisible(false);
+
+	SwitchColorSheme(InactiveColor);
 }
 
 
 // protected methods
+
+// reimplemented (TShapeBase<QGraphicsEllipseItem>)
 
 void CGripShape::OnPositionChanged(const QPointF& position)
 {
@@ -48,21 +58,11 @@ void CGripShape::OnPositionChanged(const QPointF& position)
 }
 
 
-// reimplemented (QGraphicsItem) 
-
-QVariant CGripShape::itemChange(GraphicsItemChange change, const QVariant& value)
+void CGripShape::OnSelectionChanged(bool isSelected)
 {
-	if (change == ItemPositionChange) {
-		OnPositionChanged(value.toPointF());
-	}
+	m_labelItem.setVisible(isSelected);
 
-	if (change == ItemSelectedChange){
-		bool isSelected = value.toBool();
-			
-		m_labelItem.setVisible(isSelected);
-	}
-
-	return BaseClass::itemChange(change, value);
+	BaseClass::OnSelectionChanged(isSelected);
 }
 
 

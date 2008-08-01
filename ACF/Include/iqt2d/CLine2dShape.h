@@ -6,6 +6,7 @@
 
 #include "i2d/CLine2d.h"
 
+#include "iqt2d/TShapeBase.h"
 #include "iqt2d/CGripShape.h"
 
 
@@ -14,13 +15,12 @@ namespace iqt2d
 
 
 class CLine2dShape: 
-			public QObject, 
-			public QGraphicsLineItem, 
+			public TShapeBase<QGraphicsLineItem>, 
 			public imod::TSingleModelObserverBase<i2d::CLine2d>
 {
 	Q_OBJECT
 public:
-	typedef QGraphicsLineItem BaseClass;
+	typedef TShapeBase<QGraphicsLineItem> BaseClass;
 	typedef imod::TSingleModelObserverBase<i2d::CLine2d> BaseClass2;
 
 	CLine2dShape();
@@ -35,8 +35,6 @@ protected slots:
 protected:
 	// reimplemented (QGraphicsItem) 
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 
 private:

@@ -26,9 +26,12 @@ CLine2dShape::CLine2dShape()
 
 	setFlags(ItemIsMovable | ItemIsSelectable);
 	setCursor(QCursor(Qt::ArrowCursor)); 
-	setPen(QPen(Qt::green, 0));
+	
+	SetPen(InactiveColor, QPen(Qt::green, 0));
+	SetPen(EditableColor, QPen(Qt::green, 0));
+	SetPen(SelectedColor, QPen(Qt::yellow, 0));
 
-	setAcceptsHoverEvents(true);
+	SwitchColorSheme(EditableColor);
 }
 
 
@@ -84,30 +87,8 @@ QVariant CLine2dShape::itemChange(GraphicsItemChange change, const QVariant& val
 
 		return pos();
 	}
-	if (change == QGraphicsItem::ItemSelectedChange){
-		bool isSelected = value.toBool();
-		// TODO: set the visual properties:
-		if (isSelected){
-		}
-		else{
-		}
-	}
 
 	return BaseClass::itemChange(change, value);
-}
-
-
-void CLine2dShape::hoverEnterEvent(QGraphicsSceneHoverEvent* /*event*/)
-{
-	double scaleFactor = 1.0 / matrix().m22();
-
-	setPen(QPen(QColor(255, 255, 0, 128), scaleFactor * 2));
-}
-
-
-void CLine2dShape::hoverLeaveEvent(QGraphicsSceneHoverEvent* /*event*/)
-{
-	setPen(QPen(Qt::green, 0));
 }
 
 

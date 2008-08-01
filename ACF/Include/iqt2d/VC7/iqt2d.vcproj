@@ -300,6 +300,9 @@
 			<File
 				RelativePath="..\TSceneExtenderCompBase.h">
 			</File>
+			<File
+				RelativePath="..\TShapeBase.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
