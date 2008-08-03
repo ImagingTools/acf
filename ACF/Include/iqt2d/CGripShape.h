@@ -14,9 +14,24 @@ class CGripShape: public TShapeBase<QGraphicsEllipseItem>
 	Q_OBJECT
 
 public:
+	enum LabelPosition
+	{
+		LabelLeft,
+		LabelRight,
+		LabelTop,
+		LabelBottom
+	};
+
+
 	typedef TShapeBase<QGraphicsEllipseItem> BaseClass;
 
 	CGripShape(QGraphicsItem* parentPtr = NULL);
+
+	/**
+		Set label position relative to the grip point.
+		\sa LabelPosition
+	*/
+	void SetLabelPosition(int labelArea);
 
 signals:
 	void PositionChanged(const QPointF& position);

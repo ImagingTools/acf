@@ -39,10 +39,29 @@ CGripShape::CGripShape(QGraphicsItem* parentPtr)
 	m_labelItem.setFlag(ItemIgnoresTransformations);
 	m_labelItem.setZValue(zValue() + 1);
 
-	m_labelItem.setPos(0, -20);
 	m_labelItem.setVisible(false);
 
 	SwitchColorSheme(InactiveColor);
+	SetLabelPosition(LabelTop);
+}
+
+
+void CGripShape::SetLabelPosition(int labelArea)
+{
+	switch (labelArea){
+	case LabelTop:
+		m_labelItem.setPos(0, -20);
+		break;
+	case LabelBottom:
+		m_labelItem.setPos(0, 20);
+		break;
+	case LabelLeft:
+		m_labelItem.setPos(-20, 0);
+		break;
+	case LabelRight:
+		m_labelItem.setPos(20, 0);
+		break;
+	}
 }
 
 

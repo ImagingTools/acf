@@ -28,6 +28,9 @@ CRectangleShape::CRectangleShape(bool isEditable)
 	SetPen(EditableColor, QPen(Qt::green, 0));
 	SetPen(SelectedColor, QPen(Qt::yellow, 0));
 
+	m_bottomLeftGrip.SetLabelPosition(CGripShape::LabelBottom);
+	m_bottomRightGrip.SetLabelPosition(CGripShape::LabelBottom);
+
 	if (isEditable){
 		SwitchColorSheme(EditableColor);
 	}
