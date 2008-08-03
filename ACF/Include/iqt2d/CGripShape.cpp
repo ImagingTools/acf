@@ -48,18 +48,28 @@ CGripShape::CGripShape(QGraphicsItem* parentPtr)
 
 void CGripShape::SetLabelPosition(int labelArea)
 {
+	const int labelMargin = 10;
+
+	QFontMetrics fontMetrics(m_labelItem.font());
+
+	int textHeight = fontMetrics.height();
+	int textWidth = fontMetrics.width(QString("%1 %2").arg(pos().x(), 6, 'f', 2).arg(pos().y(), 6, 'f', 2));
+
+	int dy = textHeight + labelMargin;
+	int dx = textWidth + labelMargin;
+
 	switch (labelArea){
 	case LabelTop:
-		m_labelItem.setPos(0, -20);
+		m_labelItem.setPos(-textWidth/2, -dy);
 		break;
 	case LabelBottom:
-		m_labelItem.setPos(0, 20);
+		m_labelItem.setPos(-textWidth/2, labelMargin);
 		break;
 	case LabelLeft:
-		m_labelItem.setPos(-20, 0);
+		m_labelItem.setPos(-(dx + rect().width()/2), -textHeight/2);
 		break;
 	case LabelRight:
-		m_labelItem.setPos(20, 0);
+		m_labelItem.setPos(labelMargin, -textHeight/2);
 		break;
 	}
 }

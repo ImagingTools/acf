@@ -27,6 +27,12 @@ CCircleShape::CCircleShape(bool isEditable)
 	connect(&m_rightGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnGripPositionChanged(const QPointF&)));
 	connect(&m_topGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnGripPositionChanged(const QPointF&)));
 	connect(&m_bottomGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnGripPositionChanged(const QPointF&)));
+
+	m_leftGrip.SetLabelPosition(CGripShape::LabelLeft);
+	m_rightGrip.SetLabelPosition(CGripShape::LabelRight);
+	m_topGrip.SetLabelPosition(CGripShape::LabelTop);
+	m_bottomGrip.SetLabelPosition(CGripShape::LabelBottom);
+
 }
 
 

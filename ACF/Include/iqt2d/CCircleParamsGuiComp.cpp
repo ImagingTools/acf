@@ -21,12 +21,12 @@ void CCircleParamsGuiComp::OnGuiModelAttached()
 	QObject::connect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
 
 	if (m_unitNameAttrPtr.IsValid()){
-		PositionLabel->setVisible(true);
-		RadiusLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		PositionUnitLabel->setVisible(true);
+		RadiusUnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
 	}
 	else{
-		PositionLabel->setVisible(false);
-		RadiusLabel->setVisible(false);
+		PositionUnitLabel->setVisible(false);
+		RadiusUnitLabel->setVisible(false);
 	}
 }
 
