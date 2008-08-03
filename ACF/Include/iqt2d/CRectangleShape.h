@@ -21,7 +21,7 @@ public:
 public:
 	typedef TObjectShapeBase<QGraphicsRectItem> BaseClass;
 
-	CRectangleShape();
+	CRectangleShape(bool isEditable = false);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);

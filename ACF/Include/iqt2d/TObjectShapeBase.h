@@ -22,24 +22,76 @@ public:
 	typedef TShapeBase<GraphicsItemClass> BaseClass;
 	typedef imod::TSingleModelObserverBase<i2d::IObject2d> BaseClass2;
 
-	TObjectShapeBase(QGraphicsItem* parentPtr = NULL);
+	TObjectShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
+
+	void SetEditable(bool isEditable);
+	bool IsEditable() const;
 
 protected:
+	// reimplemented (TShapeBase<GraphicsItemClass>) 
+	virtual void OnSelectionChanged(bool isSelected);
+
 	// reimplemented (QGraphicsItem) 
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value);
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 
 private:
 	QPointF m_lastPosition;
+	bool m_isEditable;
 };
 
 
 // public methods
 
 template <class GraphicsItemClass>
-TObjectShapeBase<GraphicsItemClass>::TObjectShapeBase(QGraphicsItem* parentPtr)
-	:BaseClass(parentPtr)
+TObjectShapeBase<GraphicsItemClass>::TObjectShapeBase(bool isEditable, QGraphicsItem* parentPtr)
+	:BaseClass(parentPtr),
+	m_isEditable(isEditable)
 {
+	if (isEditable){
+		setFlags(ItemIsMovable | ItemIsSelectable);
+		setCursor(QCursor(Qt::ArrowCursor)); 
+	}
+}
+
+
+template <class GraphicsItemClass>
+void TObjectShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
+{
+	m_isEditable = isEditable;
+	if (isEditable){
+		setFlags(ItemIsMovable | ItemIsSelectable);
+	}
+	else{
+		setFlags(flags() & ~(ItemIsMovable | ItemIsSelectable));
+	}
+}
+
+
+template <class GraphicsItemClass>
+bool TObjectShapeBase<GraphicsItemClass>::IsEditable() const
+{
+	return m_isEditable;
+}
+
+// protected methods
+	
+// reimplemented (TShapeBase<GraphicsItemClass>) 
+
+template <class GraphicsItemClass>
+void TObjectShapeBase<GraphicsItemClass>::OnSelectionChanged(bool isSelected)
+{
+	if (isSelected){
+		SwitchColorSheme(SelectedColor);
+	}
+	else{
+		if (IsEditable()){
+			SwitchColorSheme(EditableColor);
+		}
+		else{
+			SwitchColorSheme(InactiveColor);		
+		}
+	}
 }
 
 

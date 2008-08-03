@@ -12,8 +12,9 @@ namespace iqt2d
 
 // public methods
 
-CRectangleShape::CRectangleShape()
-:	m_topLeftGrip(this),
+CRectangleShape::CRectangleShape(bool isEditable)
+:	BaseClass(isEditable),
+	m_topLeftGrip(this),
 	m_topRightGrip(this),
 	m_bottomLeftGrip(this),
 	m_bottomRightGrip(this)
@@ -22,15 +23,17 @@ CRectangleShape::CRectangleShape()
 	connect(&m_topRightGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnTopRightChanged(const QPointF&)));
 	connect(&m_bottomLeftGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnBottomLeftChanged(const QPointF&)));
 	connect(&m_bottomRightGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnBottomRightChanged(const QPointF&)));
-
-	setFlags(ItemIsMovable | ItemIsSelectable);
-	setCursor(QCursor(Qt::ArrowCursor)); 
 	
-	SetPen(InactiveColor, QPen(Qt::green, 0));
+	SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
 	SetPen(EditableColor, QPen(Qt::green, 0));
 	SetPen(SelectedColor, QPen(Qt::yellow, 0));
 
-	SwitchColorSheme(EditableColor);
+	if (isEditable){
+		SwitchColorSheme(EditableColor);
+	}
+	else{
+		SwitchColorSheme(InactiveColor);
+	}
 }
 
 

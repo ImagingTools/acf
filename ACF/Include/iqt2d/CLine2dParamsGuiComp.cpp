@@ -139,11 +139,11 @@ void CLine2dParamsGuiComp::UpdateEditor()
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-void CLine2dParamsGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+void CLine2dParamsGuiComp::CreateShapes(int /*sceneId*/, bool inactiveOnly, Shapes& result)
 {
 	I_ASSERT(m_lineZValueAttrPtr.IsValid());	// this attribute is obligatory
 
-	CLine2dShape* shapePtr = new CLine2dShape();
+	CLine2dShape* shapePtr = new CLine2dShape(!inactiveOnly);
 	if (shapePtr != NULL){
 		shapePtr->setZValue(*m_lineZValueAttrPtr);
 		result.PushBack(shapePtr);

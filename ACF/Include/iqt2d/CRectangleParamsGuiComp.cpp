@@ -133,13 +133,13 @@ bool CRectangleParamsGuiComp::OnDetached(imod::IModel* modelPtr)
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-void CRectangleParamsGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+void CRectangleParamsGuiComp::CreateShapes(int /*sceneId*/, bool inactiveOnly, Shapes& result)
 {
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
-		CRectangleShape* shapePtr = new CRectangleShape();
+		CRectangleShape* shapePtr = new CRectangleShape(!inactiveOnly);
 		if (shapePtr != NULL){
-			shapePtr->setZValue(3);
+			shapePtr->setZValue(*m_rectZValueAttrPtr);
 			result.PushBack(shapePtr);
 
 			imod::IModel* modelPtr = GetModelPtr();

@@ -437,7 +437,7 @@
                 true
               </IsEnabled>
               <Value>
-                ImageTaskGui
+                LineTestTaskGui
               </Value>
             </Data>
           </AttributeInfo>

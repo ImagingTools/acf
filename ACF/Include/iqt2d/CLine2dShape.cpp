@@ -16,21 +16,29 @@ namespace iqt2d
 
 // public methods
 
-CLine2dShape::CLine2dShape()
-:	m_pointGrip1(this),
+CLine2dShape::CLine2dShape(bool isEditable)
+:	BaseClass(isEditable),
+	m_pointGrip1(this),
 	m_pointGrip2(this)
 {
 	connect(&m_pointGrip1, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition1Changed(const QPointF&)));
 	connect(&m_pointGrip2, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition2Changed(const QPointF&)));
-
-	setFlags(ItemIsMovable | ItemIsSelectable);
-	setCursor(QCursor(Qt::ArrowCursor)); 
 	
-	SetPen(InactiveColor, QPen(Qt::green, 0));
+	SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
 	SetPen(EditableColor, QPen(Qt::green, 0));
 	SetPen(SelectedColor, QPen(Qt::yellow, 0));
 
-	SwitchColorSheme(EditableColor);
+	if (isEditable){
+		SwitchColorSheme(EditableColor);
+	}
+	else{
+		SwitchColorSheme(InactiveColor);
+	}
+
+	if (!isEditable){
+		m_pointGrip1.setParentItem(NULL);
+		m_pointGrip2.setParentItem(NULL);
+	}
 }
 
 

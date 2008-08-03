@@ -26,8 +26,9 @@ public:
 				Ui::CRectangleParamsGuiComp,
 				i2d::CRectangle> > BaseClass;
 
-	I_BEGIN_COMPONENT(CRectangleParamsGuiComp);
-	I_END_COMPONENT;
+	I_BEGIN_COMPONENT(CRectangleParamsGuiComp)
+		I_ASSIGN(m_rectZValueAttrPtr, "RectZValue", "Describe draw priority on display console (the objects with bigger value will overlap the other ones)", true, 1);
+	I_END_COMPONENT
 
 	// reimplemented (iqt::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
@@ -46,6 +47,9 @@ public:
 
 protected slots:
 	void OnParamsChanged(double value);
+
+private:
+	I_ATTR(double, m_rectZValueAttrPtr);
 };
 
 

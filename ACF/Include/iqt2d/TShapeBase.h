@@ -34,20 +34,22 @@ public:
 		SelectedColor,
 
 		/**
-			Color for a shape, that can be edited in graphics view
+			Color for a shape, that can be edited on the graphics view
 		*/
 		EditableColor,
 
 		/**
-			Color for a shape, that can not be edited in graphics view
+			Color for a shape, that can not be edited on the graphics view
 		*/
 		InactiveColor,
+
+		/**
+			Standard shape color.
+		*/
+		DefaultColor = InactiveColor
 	};
 
 	TShapeBase(QGraphicsItem* parentPtr = NULL);
-
-	virtual void SetEditable(bool isEditable);
-	virtual bool IsEditable() const;
 
 	virtual void SetPen(int colorSheme, const QPen& pen);
 	virtual QPen GetPen(int colorSheme) const;
@@ -72,7 +74,6 @@ private:
 	typedef QMap<int, ColorShemeInfo> ColorShemeMap;
 
 	ColorShemeMap m_colorShemeMap;
-	bool m_isEditable;
 };
 
 
@@ -80,24 +81,9 @@ private:
 
 template <class GraphicsItemClass>
 TShapeBase<GraphicsItemClass>::TShapeBase(QGraphicsItem* parentPtr)
-	:BaseClass(parentPtr),
-	m_isEditable(false)
+	:BaseClass(parentPtr)
 {
 	setAcceptsHoverEvents(true);
-}
-
-
-template <class GraphicsItemClass>
-void TShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
-{
-	m_isEditable = isEditable;
-}
-
-
-template <class GraphicsItemClass>
-bool TShapeBase<GraphicsItemClass>::IsEditable() const
-{
-	return m_isEditable;
 }
 
 
@@ -174,12 +160,7 @@ void TShapeBase<GraphicsItemClass>::OnSelectionChanged(bool isSelected)
 		SwitchColorSheme(SelectedColor);
 	}
 	else{
-		if (IsEditable()){
-			SwitchColorSheme(EditableColor);
-		}
-		else{
-			SwitchColorSheme(InactiveColor);		
-		}
+		SwitchColorSheme(DefaultColor);
 	}
 }
 
