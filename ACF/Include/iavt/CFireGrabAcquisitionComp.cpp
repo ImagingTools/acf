@@ -3,15 +3,6 @@
 
 #include <memory.h>
 
-// Qt includes
-#include <QObject>
-#include <QFileInfo>
-#include <QByteArray>
-#include <QImageReader>
-#include <QStringList>
-
-#include "iqt/iqt.h"
-
 #include "istd/TChangeNotifier.h"
 
 #include "iprm/IParamsSet.h"
@@ -24,6 +15,12 @@ namespace iavt
 CFireGrabAcquisitionComp::CFireGrabAcquisitionComp()
 :	m_nodesCount(0), m_isCameraValid(false)
 {
+}
+
+
+bool CFireGrabAcquisitionComp::IsCameraValid() const
+{
+	return m_isCameraValid;
 }
 
 
@@ -154,7 +151,7 @@ void CFireGrabAcquisitionComp::OnComponentCreated()
 						UINT32 triggerValue = MAKETRIGGER((*m_externTriggerAttrPtr)? 1: 0, 1, 0, 0, 0);
 
 						if (m_camera.SetParameter(FGP_TRIGGER, triggerValue) != FCE_NOERROR){
-							SendErrorMessage(MI_CANNOT_SET_TRIGGER, iqt::GetCString(QObject::tr("Cannot set trigger mode")));
+							SendErrorMessage(MI_CANNOT_SET_TRIGGER, "Cannot set trigger mode");
 						}
 					}
 
@@ -165,12 +162,12 @@ void CFireGrabAcquisitionComp::OnComponentCreated()
 							return;
 						}
 						else{
-							SendErrorMessage(MI_CANNOT_SET_SINGLE_SHOT, iqt::GetCString(QObject::tr("Cannot set single shot mode")));
+							SendErrorMessage(MI_CANNOT_SET_SINGLE_SHOT, "Cannot set single shot mode");
 						}
 					}
 					else{
 						if (m_camera.SetParameter(FGP_BURSTCOUNT, BC_INFINITE) != FCE_NOERROR){
-							SendErrorMessage(MI_CANNOT_SET_CONTINUOUS, iqt::GetCString(QObject::tr("Cannot set continuous mode")));
+							SendErrorMessage(MI_CANNOT_SET_CONTINUOUS, "Cannot set continuous mode");
 						}
 					}
 
@@ -182,31 +179,31 @@ void CFireGrabAcquisitionComp::OnComponentCreated()
 						return;
 					}
 					else{
-						SendErrorMessage(MI_CANNOT_START, iqt::GetCString(QObject::tr("Cannot start grab")));
+						SendErrorMessage(MI_CANNOT_START, "Cannot start grab");
 					}
 
 					m_camera.StopDevice();
 				}
 				else{
-					SendErrorMessage(MI_CANNOT_OPEN, iqt::GetCString(QObject::tr("Cannot open capture device")));
+					SendErrorMessage(MI_CANNOT_OPEN, "Cannot open capture device");
 				}
 
 				m_camera.CloseCapture();
 			}
 			else{
-				SendErrorMessage(MI_CANNOT_CONNECT, iqt::GetCString(QObject::tr("Cannot connect to camera node")));
+				SendErrorMessage(MI_CANNOT_CONNECT, "Cannot connect to camera node");
 			}
 
 			m_camera.Disconnect();
 		}
 		else{
-			SendErrorMessage(MI_NO_NODES, iqt::GetCString(QObject::tr("No camera nodes")));
+			SendErrorMessage(MI_NO_NODES, "No camera nodes");
 		}
 
 		FGExitModule();
 	}
 	else{
-		SendErrorMessage(MI_CANNOT_INIT, iqt::GetCString(QObject::tr("Cannot init Fire Grab module")));
+		SendErrorMessage(MI_CANNOT_INIT, "Cannot init Fire Grab module");
 	}
 
 	m_isCameraValid = false;

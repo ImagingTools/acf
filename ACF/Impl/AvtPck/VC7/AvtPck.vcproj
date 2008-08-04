@@ -36,9 +36,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib FGCamera.lib"
+				AdditionalDependencies="AcfStd.lib FGCamera.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(MEIDSDIR)\lib&quot;;$(AVTDIR)/FireGrab"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(AVTDIR)/FireGrab&quot;"
 				GenerateDebugInformation="FALSE"
 				SubSystem="1"/>
 			<Tool
@@ -85,9 +85,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AcfStd.lib AcfQt.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib QtSqld4.lib QtNetworkd4.lib FGCamera.lib"
+				AdditionalDependencies="AcfStd.lib FGCamera.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(MEIDSDIR)\lib&quot;;$(AVTDIR)/FireGrab"
+				AdditionalLibraryDirectories="&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC7&quot;;&quot;$(AVTDIR)/FireGrab&quot;"
 				GenerateDebugInformation="TRUE"
 				SubSystem="1"/>
 			<Tool

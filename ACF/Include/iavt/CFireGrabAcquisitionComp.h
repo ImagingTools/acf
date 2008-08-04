@@ -59,6 +59,8 @@ public:
 
 	CFireGrabAcquisitionComp();
 
+	bool IsCameraValid() const;
+
 	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
 	virtual int DoProcessing(const iprm::IParamsSet* paramsPtr, const isys::ITimer* inputPtr, iimg::IBitmap* outputPtr);
 
