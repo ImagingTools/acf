@@ -4,7 +4,62 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="13">
+  <ElementsList count="14">
+    <Element>
+      <Id>
+        AnnulusTestTask
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Annulus
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        AnnulusTestTaskGui
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        AnnulusParamsGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              SlaveSceneExtender
+            </Id>
+            <Type>
+              class icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                CircleTestTaskGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         Bitmap
@@ -20,43 +75,6 @@
           true
         </IsEnabled>
         <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Camera
-      </Id>
-      <PackageId>
-        TutorialComposite
-      </PackageId>
-      <ComponentId>
-        AvtStrobbedCamera
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              class icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Framework
-              </Value>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -181,7 +199,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   ImageTaskGui
                 </Value>
@@ -193,6 +211,9 @@
                 </Value>
                 <Value>
                   CircleTestTaskGui
+                </Value>
+                <Value>
+                  AnnulusTestTaskGui
                 </Value>
               </Values>
             </Data>
@@ -211,7 +232,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   Image
                 </Value>
@@ -223,6 +244,9 @@
                 </Value>
                 <Value>
                   Circle
+                </Value>
+                <Value>
+                  Annulus
                 </Value>
               </Values>
             </Data>
@@ -241,7 +265,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   Image
                 </Value>
@@ -253,6 +277,9 @@
                 </Value>
                 <Value>
                   Circle Test
+                </Value>
+                <Value>
+                  Annulus Test
                 </Value>
               </Values>
             </Data>
@@ -271,7 +298,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   ImageTask
                 </Value>
@@ -283,6 +310,9 @@
                 </Value>
                 <Value>
                   CircleTestTask
+                </Value>
+                <Value>
+                  AnnulusTestTask
                 </Value>
               </Values>
             </Data>

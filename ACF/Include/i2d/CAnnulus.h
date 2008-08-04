@@ -22,7 +22,10 @@ public:
 	bool IsValid() const;
 
 	double GetInnerRadius() const;
+	void SetInnerRadius(double innerRadius);
+
 	double GetOuterRadius() const;
+	void SetOuterRadius(double outerRadius);
 
 	CCircle GetInnerCircle() const;
 	CCircle GetOuterCircle() const;
@@ -30,9 +33,11 @@ public:
 	// reimplemented (i2d::IObject2d)
 	virtual CRectangle GetBoundingBox() const;
 
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
+
 protected:
-	double m_innerRadius;
-	double m_outerRadius;
+	istd::CRange m_radiusRange;
 };
 
 

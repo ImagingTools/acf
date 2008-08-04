@@ -26,6 +26,7 @@
 #include "iqt2d/CLine2dParamsGuiComp.h"
 #include "iqt2d/CRectangleParamsGuiComp.h"
 #include "iqt2d/CCircleParamsGuiComp.h"
+#include "iqt2d/CAnnulusParamsGuiComp.h"
 
 #include "iqtprm/CComposedParamsSetGuiComp.h"
 #include "iqtprm/CParamsManagerGuiComp.h"
@@ -59,12 +60,15 @@ typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;
 typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmap, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable> > Bitmap;
+
 typedef iqt2d::CSceneConnectorGuiComp SceneConnector;
 typedef iqt2d::CSceneProviderComp SceneProvider;
 typedef iqt2d::CImageViewComp ImageView;
 typedef iqt2d::CLine2dParamsGuiComp Line2dParamsGui;
 typedef iqt2d::CRectangleParamsGuiComp RectangleParamsGui;
 typedef iqt2d::CCircleParamsGuiComp CircleParamsGui;
+typedef iqt2d::CAnnulusParamsGuiComp AnnulusParamsGui;
+
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CParamsManagerGuiComp ParamsManagerGui;
 typedef iqt::CDockWidgetGuiComp DockWidgetGui;

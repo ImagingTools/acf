@@ -44,6 +44,7 @@ I_EXPORT_COMPONENT(ImageView, "Display bitmap using observer pattern", "Image Bi
 I_EXPORT_COMPONENT(Line2dParamsGui, "Line parameter GUI displaying line using scene", "Line Parameters Observer Display GUI Qt");
 I_EXPORT_COMPONENT(RectangleParamsGui, "Rectangle parameter GUI displaying a rectangle using scene", "Rectangle Parameters Observer Display GUI Qt");
 I_EXPORT_COMPONENT(CircleParamsGui, "Circle parameter GUI displaying a cicle using scene", "Circle Parameters Observer Display GUI Qt");
+I_EXPORT_COMPONENT(AnnulusParamsGui, "Annulus parameter GUI displaying a annulus using scene", "Annulus Parameters Observer Display GUI Qt");
 
 I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
 I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using simple model observer GUI", "Model Observer Parameter Set Editor GUI Qt");

@@ -140,13 +140,20 @@ QBrush TShapeBase<GraphicsItemClass>::GetBrush(int colorSheme) const
 template <class GraphicsItemClass>
 void TShapeBase<GraphicsItemClass>::SwitchColorSheme(int colorSheme)
 {
-	QPen pen = GetPen(colorSheme);
-	BaseClass::setPen(pen);
-
 	QAbstractGraphicsShapeItem* itemPtr = dynamic_cast<QAbstractGraphicsShapeItem*>(this);
 	if (itemPtr != NULL){
 		QBrush brush = GetBrush(colorSheme);
 		itemPtr->setBrush(brush);
+
+		QPen pen = GetPen(colorSheme);
+		itemPtr->setPen(pen);
+	}
+	else{
+		QGraphicsLineItem* linePtr = dynamic_cast<QGraphicsLineItem*>(this);
+		if (linePtr != NULL){
+			QPen pen = GetPen(colorSheme);
+			linePtr->setPen(pen);
+		}
 	}
 }
 
