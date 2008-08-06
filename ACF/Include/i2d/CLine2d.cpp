@@ -218,7 +218,7 @@ CRectangle CLine2d::GetBoundingBox() const
 	double right = istd::Max(m_point1.GetX(), m_point2.GetX());
 	double bottom = istd::Max(m_point1.GetY(), m_point2.GetY());
 
-	return CRectangle(left, top, right, bottom);
+	return CRectangle(left, top, right - left, bottom - top);
 }
 
 

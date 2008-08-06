@@ -18,9 +18,9 @@ CRectangle::CRectangle()
 }
 
 
-CRectangle::CRectangle(double left, double top, double right, double bottom)
-:	m_horizontalRange(left, right),
-	m_verticalRange(top, bottom)
+CRectangle::CRectangle(double left, double top, double width, double height)
+:	m_horizontalRange(left, left + width),
+	m_verticalRange(top, top + height)
 {
 }
 
@@ -114,7 +114,7 @@ CRectangle CRectangle::GetIntersection(const CRectangle& other) const
 	double outputRight = istd::Min(other.GetRight(), GetRight());
 	double outputBottom = istd::Min(other.GetBottom(), GetBottom());
 
-	return CRectangle(outputLeft, outputTop, outputRight, outputBottom);
+	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
 }
 
 
@@ -125,7 +125,7 @@ CRectangle CRectangle::GetUnion(const CRectangle& other) const
 	double outputRight = istd::Max(other.GetRight(), GetRight());
 	double outputBottom = istd::Max(other.GetBottom(), GetBottom());
 
-	return CRectangle(outputLeft, outputTop, outputRight, outputBottom);
+	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
 }
 
 	

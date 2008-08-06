@@ -6,17 +6,19 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "iavt/CFireGrabAcquisitionComp.h"
+#include "iavt/CAvtTriggerParamsComp.h"
 
 
 
 /**
-	Meilhaus-specific package.
+	AVT-specific package.
 */
 namespace AvtPck
 {
 
 
 typedef iavt::CFireGrabAcquisitionComp FireGrabAcquisition;
+typedef icomp::TModelCompWrap<iavt::CAvtTriggerParamsComp> AvtTriggerParams;
 
 
 } // namespace AvtPck

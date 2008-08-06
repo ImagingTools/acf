@@ -18,7 +18,7 @@ class CRectangle: virtual public IObject2d
 {
 public :
 	CRectangle();
-	CRectangle(double left, double top, double right, double bottom);
+	CRectangle(double left, double top, double width, double height);
 	CRectangle(const CRectangle& rect);
 	CRectangle(const CVector2d& topLeft, const CVector2d& bottomRight);
 	explicit CRectangle(const istd::CIndex2d& size);

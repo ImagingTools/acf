@@ -18,7 +18,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "iavt/iavt.h"
+#include "iavt/IAvtTriggerParams.h"
 
 
 namespace iavt
@@ -41,8 +41,9 @@ public:
 		I_REGISTER_INTERFACE(icam::IExposureConstraints);
 		I_ASSIGN(m_defaultExposureParamsCompPtr, "DefaultExposureParams", "Default exposure parameters will be used if no parameters are found", false, "DefaultExposureParams");
 		I_ASSIGN(m_exposureParamsIdAttrPtr, "ExposureParamsId", "Id used to get exposure parameters from the parameter set", false, "ExposureParams");
+		I_ASSIGN(m_triggerParamsCompPtr, "TriggerParams", "Trigger parameters that will be used", false, "TriggerParams");
+		I_ASSIGN(m_imageRegionParamsCompPtr, "ImageRegionParams", "Image region parameters that will be used", false, "ImageRegionParams");
 		I_ASSIGN(m_singleShootAttrPtr, "UseSingleShoot", "If it is true, only one shot will be done", true, true);
-		I_ASSIGN(m_externTriggerAttrPtr, "UseExternTrigger", "If it is true extern trigger will be used", false, false);
 	I_END_COMPONENT;
 
 	enum MessageId
@@ -54,7 +55,8 @@ public:
 		MI_CANNOT_START,
 		MI_CANNOT_SET_SINGLE_SHOT,
 		MI_CANNOT_SET_CONTINUOUS,
-		MI_CANNOT_SET_TRIGGER
+		MI_CANNOT_SET_TRIGGER,
+		MI_CANNOT_SET_IMAGE_AOI
 	};
 
 	CFireGrabAcquisitionComp();
@@ -76,11 +78,29 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+protected:
+	/**
+		Check whether parameter was set correctly.
+	*/
+	bool CheckParameter(UINT16 parameterId, UINT32 setValue);
+
+	/**
+		Initialize device with the trigger params.
+	*/
+	void InitializeTriggerParams(const iavt::IAvtTriggerParams& triggerParams);
+
+	/**
+		Initialize image region.
+	*/
+	void InitializeImageRegion(const i2d::CRectangle& imageRegion);
+	
 private:
 	I_REF(icam::IExposureParams, m_defaultExposureParamsCompPtr);
 	I_ATTR(istd::CString, m_exposureParamsIdAttrPtr);
+	I_REF(iavt::IAvtTriggerParams, m_triggerParamsCompPtr);
+	I_REF(i2d::IObject2d, m_imageRegionParamsCompPtr);
+
 	I_ATTR(bool, m_singleShootAttrPtr);
-	I_ATTR(bool, m_externTriggerAttrPtr);
 
 	enum
 	{

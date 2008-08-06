@@ -141,27 +141,20 @@ void CFireGrabAcquisitionComp::OnComponentCreated()
 		if ((status == FCE_NOERROR) && (m_nodesCount > 0)){
 			status = m_camera.Connect(&m_nodeInfos[0].Guid);
 
+			// initialize image region:
+			if (m_imageRegionParamsCompPtr.IsValid()){
+				InitializeImageRegion(m_imageRegionParamsCompPtr->GetBoundingBox());
+			}
+
 			// Start DMA logic
 			if (status == FCE_NOERROR){
 				status = m_camera.OpenCapture();
 
 				// Start image device
 				if (status == FCE_NOERROR){
-					if (m_externTriggerAttrPtr.IsValid()){
-						int triggerOn = *m_externTriggerAttrPtr ? 1: 0;
-
-						UINT32 triggerValue = MAKETRIGGER(triggerOn, 1, 0, 0, 0);
-
-						if (m_camera.SetParameter(FGP_TRIGGER, triggerValue) != FCE_NOERROR){
-							SendErrorMessage(MI_CANNOT_SET_TRIGGER, "Cannot set trigger mode");
-						}
-
-						UINT32 setValue;
-						if (m_camera.GetParameter(FGP_TRIGGER, &setValue) == FCE_NOERROR){
-							if (setValue != triggerValue){
-								SendErrorMessage(MI_CANNOT_SET_TRIGGER, "Cannot set trigger mode");
-							}
-						}
+					// if trigger params component is set, set trigger params to device:
+					if (m_triggerParamsCompPtr.IsValid()){
+						InitializeTriggerParams(*m_triggerParamsCompPtr.GetPtr());
 					}
 
 					if (*m_singleShootAttrPtr){
@@ -232,6 +225,115 @@ void CFireGrabAcquisitionComp::OnComponentDestroyed()
 
 	BaseClass::OnComponentDestroyed();
 }
+
+
+// protected methods
+	
+bool CFireGrabAcquisitionComp::CheckParameter(UINT16 parameterId, UINT32 setValue)
+{
+	UINT32 currentValue;
+	if (m_camera.GetParameter(parameterId, &currentValue) == FCE_NOERROR){
+		if (setValue != currentValue){
+			return false;
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
+void CFireGrabAcquisitionComp::InitializeTriggerParams(const iavt::IAvtTriggerParams& triggerParams)
+{
+	bool isTriggerEnabled = triggerParams.IsTriggerEnabled();
+	int triggerMode = triggerParams.GetTriggerMode();
+	int triggerPolarity = triggerParams.GetTriggerPolarity();
+
+	UINT32 triggerValue;
+	if (m_camera.GetParameter(FGP_TRIGGER, &triggerValue) == FCE_NOERROR){
+		int triggerOn = isTriggerEnabled ? 1 : 0;
+		int polarity = (triggerPolarity == iavt::IAvtTriggerParams::FallingPolarity) ? 0 : 1;
+
+		int mode = -1;
+		switch (triggerMode){
+		case iavt::IAvtTriggerParams::EdgeMode:
+			mode = 0;
+			break;
+		case iavt::IAvtTriggerParams::LevelMode:
+			mode = 1;
+			break;
+		case iavt::IAvtTriggerParams::BulkMode:
+			mode = 15;
+			break;
+		}
+
+		// Get current trigger mode
+		UINT32 source = TRGSRC(triggerValue);
+		UINT32 params = TRGPARM(triggerValue);
+
+		if (triggerOn){
+			// Create new trigger value:
+			triggerValue = MAKETRIGGER(triggerOn, polarity, source, mode, params);
+		}
+		else{
+			triggerValue = MAKETRIGGER(0, 0, 0, 0, 0);
+		}
+	
+		if (m_camera.SetParameter(FGP_TRIGGER, triggerValue) != FCE_NOERROR){
+			SendErrorMessage(MI_CANNOT_SET_TRIGGER, "Cannot set trigger params");
+
+			return;
+		}
+
+		if (!CheckParameter(FGP_TRIGGER, triggerValue)){
+			SendErrorMessage(MI_CANNOT_SET_TRIGGER, "Cannot set trigger params");
+			
+			return;
+		}
+	}
+}
+
+
+void CFireGrabAcquisitionComp::InitializeImageRegion(const i2d::CRectangle& imageRegion)
+{
+	UINT32 imageFormat = MAKEIMAGEFORMAT(RES_SCALABLE, CM_Y8, 0);
+	m_camera.SetParameter(FGP_IMAGEFORMAT, imageFormat);
+	if (!CheckParameter(FGP_IMAGEFORMAT, imageFormat)){
+		SendErrorMessage(MI_CANNOT_SET_IMAGE_AOI, "Cannot set image region");
+
+		return;
+	}
+
+	m_camera.SetParameter(FGP_XSIZE, UINT32(imageRegion.GetWidth()));
+	if (!CheckParameter(FGP_XSIZE, UINT32(imageRegion.GetWidth()))){
+		SendErrorMessage(MI_CANNOT_SET_IMAGE_AOI, "Cannot set image region");
+
+		return;
+	}
+
+	m_camera.SetParameter(FGP_YSIZE, UINT32(imageRegion.GetHeight()));
+	if (!CheckParameter(FGP_YSIZE, UINT32(imageRegion.GetHeight()))){
+		SendErrorMessage(MI_CANNOT_SET_IMAGE_AOI, "Cannot set image region");
+
+		return;
+	}
+
+	m_camera.SetParameter(FGP_XPOSITION, UINT32(imageRegion.GetLeft()));
+	if (!CheckParameter(FGP_XPOSITION, UINT32(imageRegion.GetLeft()))){
+		SendErrorMessage(MI_CANNOT_SET_IMAGE_AOI, "Cannot set image region");
+
+		return;
+	}
+
+	m_camera.SetParameter(FGP_YPOSITION, UINT32(imageRegion.GetTop()));
+	if (!CheckParameter(FGP_YPOSITION, UINT32(imageRegion.GetTop()))){
+		SendErrorMessage(MI_CANNOT_SET_IMAGE_AOI, "Cannot set image region");
+
+		return;
+	}
+}
+
 
 
 } // namespace iavt

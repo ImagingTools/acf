@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="18">
+  <PositionMap count="20">
     <Element>
       <ComponentName>
         Application
@@ -54,7 +54,7 @@
         Camera
       </ComponentName>
       <X>
-        175
+        187
       </X>
       <X>
         87
@@ -65,7 +65,7 @@
         ComposedParamsSet
       </ComponentName>
       <X>
-        -112
+        -100
       </X>
       <X>
         -12
@@ -76,7 +76,7 @@
         ComposedParamsSetGui
       </ComponentName>
       <X>
-        -362
+        -350
       </X>
       <X>
         -87
@@ -98,7 +98,7 @@
         ExposureParamsGui
       </ComponentName>
       <X>
-        -362
+        -350
       </X>
       <X>
         87
@@ -161,6 +161,17 @@
     </Element>
     <Element>
       <ComponentName>
+        ImageAOI
+      </ComponentName>
+      <X>
+        387
+      </X>
+      <X>
+        187
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         ImageDialogLoader
       </ComponentName>
       <X>
@@ -201,6 +212,17 @@
       </X>
       <X>
         -37
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        TriggerParams
+      </ComponentName>
+      <X>
+        112
+      </X>
+      <X>
+        187
       </X>
     </Element>
   </PositionMap>

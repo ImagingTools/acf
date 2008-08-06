@@ -131,6 +131,9 @@
 				RelativePath="..\CMessage.cpp">
 			</File>
 			<File
+				RelativePath="..\CRectangleComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CSize.cpp">
 			</File>
 		</Filter>
@@ -139,6 +142,9 @@
 			Filter="h">
 			<File
 				RelativePath="..\CMessage.h">
+			</File>
+			<File
+				RelativePath="..\CRectangleComp.h">
 			</File>
 			<File
 				RelativePath="..\CSize.h">

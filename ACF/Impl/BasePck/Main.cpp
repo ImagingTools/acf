@@ -28,6 +28,7 @@ I_EXPORT_COMPONENT(Position2d, "Position 2D object", "Position 2D Object Paramet
 I_EXPORT_COMPONENT(Circle, "Circle 2D object", "Circle Position Radius 2D Object Parameter");
 I_EXPORT_COMPONENT(Rectangle, "Rectangle (orthogonal to axis) object", "Rectangle Orthogonal 2D Object Parameter");
 I_EXPORT_COMPONENT(Annulus, "Annulus object", "Annulus 2D Object Parameter");
+I_EXPORT_COMPONENT(AttributedRectangle, "Rectangle component with attributes", "Rectangle 2D Object Parameter");
 
 
 } // namespace BasePck

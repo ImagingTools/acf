@@ -101,7 +101,7 @@ QRectF GetQRectF(const i2d::CRectangle& rect)
 
 i2d::CRectangle GetCRectangle(const QRectF& rect)
 {
-	return i2d::CRectangle(rect.left(), rect.top(), rect.right(), rect.bottom());
+	return i2d::CRectangle(rect.left(), rect.top(), rect.width(), rect.height());
 }
 
 

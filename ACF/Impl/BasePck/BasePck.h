@@ -35,6 +35,8 @@
 #include "icam/CExposureParamsComp.h"
 #include "icam/CSnapBitmapSupplierComp.h"
 
+#include "ibase/CRectangleComp.h"
+
 
 /**
 	Base system-undependent general package.
@@ -68,6 +70,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::IObject2d,
 			iser::ISerializable,
 			imod::IModel> Position2d;
+
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<i2d::CCircle>,
 			i2d::CCircle,
@@ -75,18 +78,21 @@ typedef icomp::TMakeComponentWrap<
 			i2d::IObject2d,
 			iser::ISerializable,
 			imod::IModel> Circle;
+
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<i2d::CLine2d>,
 			i2d::CLine2d,
 			i2d::IObject2d,
 			iser::ISerializable,
 			imod::IModel> Line;
+
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<i2d::CRectangle>,
 			i2d::CRectangle,
 			i2d::IObject2d,
 			iser::ISerializable,
 			imod::IModel> Rectangle;
+
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<i2d::CAnnulus>,
 			i2d::CAnnulus,
@@ -94,6 +100,7 @@ typedef icomp::TMakeComponentWrap<
 			iser::ISerializable,
 			imod::IModel> Annulus;
 
+typedef icomp::TModelCompWrap<ibase::CRectangleComp> AttributedRectangle;
 
 } // namespace BasePck
 

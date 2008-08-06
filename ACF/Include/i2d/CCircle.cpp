@@ -42,8 +42,8 @@ CRectangle CCircle::GetBoundingBox() const
 	return CRectangle(
 				m_center.GetX() - m_radius, 
 				m_center.GetY() - m_radius, 
-				m_center.GetX() + m_radius, 
-				m_center.GetY() + m_radius); 
+				2 * m_radius, 
+				2 * m_radius); 
 }
 
 
