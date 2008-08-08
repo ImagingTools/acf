@@ -112,8 +112,9 @@ int main(int argc, char *argv[])
 	if (registryPtr != NULL){
 		icomp::CRegistryElement dummyElement(&packagesLoaderComp);
 
-		icomp::CCompositeComponentContext compositeContext(&dummyElement, registryPtr, &packagesLoaderComp);
-		icomp::TComponentWrap<icomp::CCompositeComponent> composite(&compositeContext);
+		icomp::CCompositeComponentContext compositeContext(&dummyElement, registryPtr, &packagesLoaderComp, NULL);
+		icomp::TComponentWrap<icomp::CCompositeComponent> composite;
+		composite.SetComponentContext(&compositeContext, NULL, false);
 
 		ibase::IApplication* applicationPtr = composite.GetComponentInterface<ibase::IApplication>(componentId);
 		if (applicationPtr == NULL){

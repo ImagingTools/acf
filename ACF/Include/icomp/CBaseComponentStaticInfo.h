@@ -21,7 +21,7 @@ public:
 	CBaseComponentStaticInfo(const IComponentStaticInfo* baseComponentPtr = NULL);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const;
+	virtual IComponent* CreateComponent() const;
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
 	virtual const AttributeInfos& GetAttributeInfos() const;
 	virtual Ids GetSubcomponentIds() const;

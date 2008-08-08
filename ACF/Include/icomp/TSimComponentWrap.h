@@ -27,6 +27,11 @@ public:
 		Initialilze component after setting all its attributes and references.
 	*/
 	void InitComponent();
+
+	// pseudo-reimplemented (icomp::IComponent)
+	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const;
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 };
 
 
@@ -42,7 +47,41 @@ TSimComponentWrap<Base>::TSimComponentWrap()
 template <class Base>
 void TSimComponentWrap<Base>::InitComponent()
 {
-	SetComponentContext(this);
+	SetComponentContext(this, NULL, false);
+}
+
+
+template <class Base>
+const IComponent* TSimComponentWrap<Base>::GetParentComponent(bool /*ownerOnly*/) const
+{
+	return this;
+}
+
+
+template <class Base>
+IComponent* TSimComponentWrap<Base>::GetSubcomponent(const std::string& componentId) const
+{
+	BaseClass2::ComponentsMap::const_iterator iter = BaseClass2::m_componentsMap.find(componentId);
+
+	if (iter != BaseClass2::m_componentsMap.end()){
+		return iter->second;
+	}
+
+	return NULL;
+}
+
+
+template <class Base>
+IComponent* TSimComponentWrap<Base>::CreateSubcomponent(const std::string& componentId) const
+{
+	FactoriesMap::const_iterator iter = m_factoriesMap.find(componentId);
+	if (iter != m_factoriesMap.end()){
+		I_ASSERT(iter->second != NULL);
+
+		return iter->second->CreateInstance();
+	}
+
+	return NULL;
 }
 
 

@@ -19,7 +19,7 @@ public:
 	TComponentStaticInfo(const IComponentStaticInfo* baseComponentPtr = NULL);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const;
+	virtual IComponent* CreateComponent() const;
 };
 
 
@@ -35,9 +35,9 @@ TComponentStaticInfo<Component>::TComponentStaticInfo(const IComponentStaticInfo
 //	reimplemented (icomp::IComponentStaticInfo)
 
 template <class Component>
-IComponent* TComponentStaticInfo<Component>::CreateComponent(const IComponentContext* contextPtr) const
+IComponent* TComponentStaticInfo<Component>::CreateComponent() const
 {
-	TComponentWrap<Component>* componentPtr = new TComponentWrap<Component>(contextPtr);
+	TComponentWrap<Component>* componentPtr = new TComponentWrap<Component>();
 
 	return componentPtr;
 }

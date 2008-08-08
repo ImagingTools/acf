@@ -23,7 +23,9 @@ public:
 
 	TMultiAttributePtr();
 
-	bool Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
+	bool Init(	const IComponent* ownerPtr,
+				const IRealAttributeStaticInfo& staticInfo,
+				const IComponent** definitionComponentPtr = NULL);
 
 	/**
 		Check if this attribute is valid.
@@ -55,18 +57,42 @@ TMultiAttributePtr<Attribute>::TMultiAttributePtr()
 
 
 template <typename Attribute>
-bool TMultiAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
+bool TMultiAttributePtr<Attribute>::Init(
+			const IComponent* ownerPtr,
+			const IRealAttributeStaticInfo& staticInfo,
+			const IComponent** definitionComponentPtr)
 {
 	I_ASSERT(ownerPtr != NULL);
 
 	const std::string& attributeId = staticInfo.GetAttributeId();
 	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
 	if (componentContextPtr != NULL){
-		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, realContextPtr);
+		int definitionLevel = -1;
+		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, &definitionLevel);
 		m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
+
+		if (m_attributePtr != NULL){
+			I_ASSERT(definitionLevel >= 0);
+
+			if (definitionComponentPtr != NULL){
+				while (definitionLevel > 0){
+					ownerPtr = ownerPtr->GetParentComponent();
+					I_ASSERT(ownerPtr != NULL);
+
+					--definitionLevel;
+				}
+
+				*definitionComponentPtr = ownerPtr;
+			}
+
+			return true;
+		}
+	}
+	else{
+		m_attributePtr = NULL;
 	}
 
-	return (m_attributePtr != NULL);
+	return false;
 }
 
 

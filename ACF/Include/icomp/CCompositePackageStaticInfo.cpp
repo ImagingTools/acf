@@ -27,7 +27,7 @@ CCompositePackageStaticInfo::CCompositePackageStaticInfo(
 
 //	reimplemented (icomp::IComponentStaticInfo)
 
-icomp::IComponent* CCompositePackageStaticInfo::CreateComponent(const icomp::IComponentContext* /*contextPtr*/) const
+icomp::IComponent* CCompositePackageStaticInfo::CreateComponent() const
 {
 	return NULL;
 }

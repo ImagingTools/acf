@@ -135,12 +135,12 @@ const IComponentContext* CSimComponentContextBase::GetParentContext() const
 }
 
 
-const iser::ISerializable* CSimComponentContextBase::GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr) const
+const iser::ISerializable* CSimComponentContextBase::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
 {
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 	if (infoPtr != NULL){
-		if (realContextPtr != NULL){
-			*realContextPtr = this;
+		if (definitionLevelPtr != NULL){
+			*definitionLevelPtr = 0;
 		}
 		return infoPtr->attributePtr.GetPtr();
 	}
@@ -154,38 +154,13 @@ const iser::ISerializable* CSimComponentContextBase::GetAttribute(const std::str
 		if ((*attributePtr2)->IsObligatory()){
 			const iser::ISerializable* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
 			if (defaultAttributePtr != NULL){
-				if (realContextPtr != NULL){
-					*realContextPtr = this;
+				if (definitionLevelPtr != NULL){
+					*definitionLevelPtr = 0;
 				}
 
 				return defaultAttributePtr;
 			}
 		}
-	}
-
-	return NULL;
-}
-
-
-IComponent* CSimComponentContextBase::GetSubcomponent(const std::string& componentId) const
-{
-	ComponentsMap::const_iterator iter = m_componentsMap.find(componentId);
-
-	if (iter != m_componentsMap.end()){
-		return iter->second;
-	}
-
-	return NULL;
-}
-
-
-IComponent* CSimComponentContextBase::CreateSubcomponent(const std::string& componentId) const
-{
-	FactoriesMap::const_iterator iter = m_factoriesMap.find(componentId);
-	if (iter != m_factoriesMap.end()){
-		I_ASSERT(iter->second != NULL);
-
-		return iter->second->CreateInstance();
 	}
 
 	return NULL;

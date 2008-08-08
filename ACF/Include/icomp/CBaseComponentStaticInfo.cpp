@@ -17,7 +17,7 @@ CBaseComponentStaticInfo::CBaseComponentStaticInfo(const IComponentStaticInfo* b
 
 //	reimplemented (icomp::IComponentStaticInfo)
 
-IComponent* CBaseComponentStaticInfo::CreateComponent(const IComponentContext* /*contextPtr*/) const
+IComponent* CBaseComponentStaticInfo::CreateComponent() const
 {
 	I_CRITICAL();	// trying to create abstract base component.
 

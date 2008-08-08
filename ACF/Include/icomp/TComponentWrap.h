@@ -16,42 +16,45 @@ template <class Component>
 class TComponentWrap: public Component
 {
 public:
-	TComponentWrap(const IComponentContext* contextPtr = NULL);
+	TComponentWrap();
 	virtual ~TComponentWrap();
 
 	// pseudo-reimplemented (icomp::IComponent)
-	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr);
+	virtual void SetComponentContext(
+				const icomp::IComponentContext* contextPtr,
+				const IComponent* parentPtr,
+				bool isParentOwner);
 };
 
 
 // public methods
 
 template <class Component>
-TComponentWrap<Component>::TComponentWrap(const IComponentContext* contextPtr)
+TComponentWrap<Component>::TComponentWrap()
 {
-	if (contextPtr != NULL){
-		SetComponentContext(contextPtr);
-	}
 }
 
 
 template <class Component>
 TComponentWrap<Component>::~TComponentWrap()
 {
-	SetComponentContext(NULL);
+	SetComponentContext(NULL, NULL, false);
 }
 
 
 // pseudo-reimplemented (icomp::IComponent)
 
 template <class Component>
-void TComponentWrap<Component>::SetComponentContext(const IComponentContext* contextPtr)
+void TComponentWrap<Component>::SetComponentContext(
+			const icomp::IComponentContext* contextPtr,
+			const IComponent* parentPtr,
+			bool isParentOwner)
 {
 	if (GetComponentContext() != NULL){
 		OnComponentDestroyed();
 	}
 
-	Component::SetComponentContext(contextPtr);
+	Component::SetComponentContext(contextPtr, parentPtr, isParentOwner);
 
 	if (contextPtr != NULL){
 		Component::InitStaticInfo(this);

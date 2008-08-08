@@ -34,49 +34,14 @@ public:
 				const IRegistryElement* elementPtr,
 				const IRegistry* registryPtr,
 				const IRegistriesManager* registriesManagerPtr,
-				const CCompositeComponentContext* parentPtr = NULL);
-
-	/*
-		Destructor deinitializing all components.
-	*/
-	virtual ~CCompositeComponentContext();
+				const CCompositeComponentContext* parentPtr);
 
 	const IRegistry& GetRegistry() const;
 	const IRegistriesManager& GetRegistriesManager() const;
 
-	// reimplemented (icomp::IComponentContext)
-	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
-	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
-
-protected:
-	typedef istd::TDelPtr<icomp::IComponent> ComponentPtr;
-	typedef istd::TDelPtr<icomp::IComponentContext> ContextPtr;
-
-	bool CreateSubcomponentInfo(const std::string& componentId, ContextPtr& contextPtr, ComponentPtr& result) const;
-
-	void PrepareToDestroy();
-
 private:
-	struct ComponentInfo
-	{
-		ComponentInfo(): isInitialized(false){}
-		ComponentInfo(const ComponentInfo& info)
-		:	componentPtr(info.componentPtr),
-			contextPtr(info.contextPtr),
-			isInitialized(false){}
-
-		ComponentPtr componentPtr;
-		ContextPtr contextPtr;
-		bool isInitialized;
-	};
-
-	typedef std::map< std::string, ComponentInfo > ComponentMap;
-
-	mutable ComponentMap m_componentMap;
-
 	const IRegistry& m_registry;
 	const IRegistriesManager& m_registriesManager;
-	bool m_stopCreating;
 };
 
 

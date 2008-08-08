@@ -6,7 +6,7 @@
 
 #include "icomp/IComponent.h"
 #include "icomp/TComponentWrap.h"
-#include "icomp/CSimComponentContextBase.h"
+#include "icomp/TSimComponentWrap.h"
 
 
 namespace icomp
@@ -18,10 +18,10 @@ namespace icomp
 	It allows to use components directly from static linked libraries, without component framework.
 */
 template <class Base>
-class TSimComponentsFactory: public CSimComponentContextBase, public istd::TIFactory<icomp::IComponent>
+class TSimComponentsFactory: public TSimComponentWrap<Base>, public istd::TIFactory<icomp::IComponent>
 {
 public:
-	typedef CSimComponentContextBase BaseClass;
+	typedef TSimComponentWrap<Base> BaseClass;
 
 	TSimComponentsFactory();
 
@@ -38,7 +38,6 @@ private:
 
 template <class Base>
 TSimComponentsFactory<Base>::TSimComponentsFactory()
-:	BaseClass(&Base::InitStaticInfo(NULL))
 {
 	m_factoryKeys.push_back(typeid(Base).name());
 }
@@ -57,11 +56,14 @@ template <class Base>
 icomp::IComponent* TSimComponentsFactory<Base>::CreateInstance(const std::string& keyId) const
 {
 	if (keyId.empty() || (keyId == m_factoryKeys.back())){
-		return new TComponentWrap<Base>(this);
+		icomp::IComponent* retVal = new TComponentWrap<Base>();
+		if (retVal != NULL){
+			retVal->SetComponentContext(this, this, false);
+			return retVal;
+		}
 	}
-	else{
-		return NULL;
-	}
+
+	return NULL;
 }
 
 

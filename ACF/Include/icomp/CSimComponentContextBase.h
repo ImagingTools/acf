@@ -118,9 +118,7 @@ public:
 	// reimplemeted (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr = NULL) const;
-	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
-	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
+	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
 
 protected:
 	/**
@@ -128,13 +126,13 @@ protected:
 	*/
 	bool IsAttributeTypeCorrect(const std::string& attributeId, const type_info& attributeType);
 
-private:
 	typedef std::map<std::string, IComponent*> ComponentsMap;
 	ComponentsMap m_componentsMap;
 
 	typedef std::map< std::string, const ComponentsFactory* > FactoriesMap;
 	FactoriesMap m_factoriesMap;
 
+private:
 	CRegistryElement m_registryElement;
 };
 

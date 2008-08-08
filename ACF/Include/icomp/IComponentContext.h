@@ -41,20 +41,10 @@ public:
 	/**
 		Get attribute using its ID.
 		\param	attributeId		ID of attribute.
-		\param	realContextPtr	optional return value. This will be set to pointer pointed at real context where attribute value is defined.
-								Becouse of attribute value delegation this can differ from this object.
+		\param	parentLevelPtr	optional return value. This will be set to number parents you have to iterate to get
+								component where this attribute was defined. If this attribute was defined in actual component it equals 0.
 	*/
-	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr = NULL) const = 0;
-
-	/**
-		Get access to subcomponent using its ID.
-	*/
-	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
-
-	/**
-		Create instance of subcomponent using its ID.
-	*/
-	virtual IComponent* CreateSubcomponent(const std::string& componentId) const = 0;
+	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const = 0;
 };
 
 

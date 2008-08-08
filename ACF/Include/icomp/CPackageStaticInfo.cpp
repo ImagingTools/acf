@@ -7,7 +7,7 @@ namespace icomp
 
 // reimplemented (icomp::IPackageStaticInfo)
 
-IComponent* CPackageStaticInfo::CreateComponent(const IComponentContext* /*contextPtr*/) const
+IComponent* CPackageStaticInfo::CreateComponent() const
 {
 	return NULL;
 }

@@ -37,17 +37,25 @@ public:
 	CComponentBase();
 
 	// reimplemented (icomp::IComponent)
+	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const;
 	virtual void* GetInterface(const type_info& interfaceType, const std::string& subId = "");
 	virtual const IComponentContext* GetComponentContext() const;
+	virtual void SetComponentContext(
+				const icomp::IComponentContext* contextPtr,
+				const IComponent* parentPtr,
+				bool isParentOwner);
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
-	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr);
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 
 	// static methods
 	static const icomp::IComponentStaticInfo& InitStaticInfo(CComponentBase* componentPtr);
 
 private:
 	const IComponentContext* m_contextPtr;
+	const IComponent* m_parentPtr;
+	bool m_isParentOwner;
 };
 
 

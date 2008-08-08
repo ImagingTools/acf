@@ -44,7 +44,7 @@ protected:
 	bool EnsureInitialized() const;
 
 private:
-	const IComponentContext* m_realContextPtr;
+	const IComponent* m_definitionComponentPtr;
 
 	typedef std::vector<Interface*> Components;
 	mutable Components m_components;
@@ -56,7 +56,7 @@ private:
 
 template <class Interface>
 TMultiReferencePtr<Interface>::TMultiReferencePtr()
-:	m_realContextPtr(NULL), m_isInitialized(false)
+:	m_definitionComponentPtr(NULL), m_isInitialized(false)
 {
 }
 
@@ -64,7 +64,7 @@ TMultiReferencePtr<Interface>::TMultiReferencePtr()
 template <class Interface>
 void TMultiReferencePtr<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
-	BaseClass::Init(ownerPtr, staticInfo, &m_realContextPtr);
+	BaseClass::Init(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
 	m_components.clear();
 }
@@ -95,7 +95,7 @@ typename Interface* TMultiReferencePtr<Interface>::operator[](int index) const
 template <class Interface>
 TMultiReferencePtr<Interface>::TMultiReferencePtr(const TMultiReferencePtr& ptr)
 :	BaseClass(ptr),
-	m_realContextPtr(ptr.m_realContextPtr),
+	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
 	m_components(ptr.m_components),
 	m_isInitialized(ptr.m_isInitialized)
 {
@@ -107,8 +107,8 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 {
 	bool retVal = false;
 
-	if (!m_isInitialized && (m_realContextPtr != NULL) && BaseClass::IsValid()){
-		const IComponentContext* parentPtr = m_realContextPtr->GetParentContext();
+	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
+		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			int attributesCount = BaseClass::GetCount();
 

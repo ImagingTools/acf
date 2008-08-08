@@ -53,7 +53,7 @@ protected:
 	bool EnsureInitialized() const;
 
 private:
-	const IComponentContext* m_realContextPtr;
+	const IComponent* m_definitionComponentPtr;
 
 	mutable Interface* m_componentPtr;
 	mutable bool m_isInitialized;
@@ -64,7 +64,7 @@ private:
 
 template <class Interface>
 TReferencePtr<Interface>::TReferencePtr()
-:	m_realContextPtr(NULL), m_componentPtr(NULL), m_isInitialized(false)
+:	m_definitionComponentPtr(NULL), m_componentPtr(NULL), m_isInitialized(false)
 {
 }
 
@@ -72,7 +72,7 @@ TReferencePtr<Interface>::TReferencePtr()
 template <class Interface>
 void TReferencePtr<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
-	BaseClass::Init(ownerPtr, staticInfo, &m_realContextPtr);
+	BaseClass::Init(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
 	m_componentPtr = NULL;
 }
@@ -120,7 +120,7 @@ typename Interface& TReferencePtr<Interface>::operator*() const
 template <class Interface>
 TReferencePtr<Interface>::TReferencePtr(const TReferencePtr& ptr)
 :	BaseClass(ptr),
-	m_realContextPtr(ptr.m_realContextPtr),
+	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
 	m_componentPtr(ptr.m_componentPtr),
 	m_isInitialized(ptr.m_isInitialized)
 {
@@ -130,8 +130,8 @@ TReferencePtr<Interface>::TReferencePtr(const TReferencePtr& ptr)
 template <class Interface>
 bool TReferencePtr<Interface>::EnsureInitialized() const
 {
-	if (!m_isInitialized && (m_realContextPtr != NULL) && BaseClass::IsValid()){
-		const IComponentContext* parentPtr = m_realContextPtr->GetParentContext();
+	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
+		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			const std::string& componentId = BaseClass::operator*();
 

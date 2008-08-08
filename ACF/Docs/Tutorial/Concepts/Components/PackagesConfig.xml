@@ -9,16 +9,16 @@
       .
     </Dir>
     <Dir>
-		../../../../Bin/DebugVC7
+		../../../../Bin/DebugVC8
     </Dir>
     <Dir>
-		../../../../Bin/ReleaseVC7
+		../../../../Bin/ReleaseVC8
     </Dir>
     <Dir>
-		../../../../Bin/DebugVC7/Tutorial
+		../../../../Bin/DebugVC8/Tutorial
     </Dir>
     <Dir>
-		../../../../Bin/ReleaseVC7/Tutorial
+		../../../../Bin/ReleaseVC8/Tutorial
     </Dir>
   </PackageDirs>
   <PackageFiles count="0">

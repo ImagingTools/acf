@@ -76,9 +76,9 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(const IRegistry& re
 
 //	reimplemented (icomp::IComponentStaticInfo)
 
-IComponent* CCompositeComponentStaticInfo::CreateComponent(const IComponentContext* contextPtr) const
+IComponent* CCompositeComponentStaticInfo::CreateComponent() const
 {
-	TComponentWrap<CCompositeComponent>* componentPtr = new TComponentWrap<CCompositeComponent>(contextPtr);
+	TComponentWrap<CCompositeComponent>* componentPtr = new TComponentWrap<CCompositeComponent>();
 
 	return componentPtr;
 }

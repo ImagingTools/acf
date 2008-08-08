@@ -44,7 +44,7 @@ protected:
 	TFactoryMember(const TFactoryMember& ptr);
 
 private:
-	const IComponentContext* m_realContextPtr;
+	const IComponent* m_definitionComponentPtr;
 };
 
 
@@ -52,7 +52,7 @@ private:
 
 template <class Interface>
 TFactoryMember<Interface>::TFactoryMember()
-:	m_realContextPtr(NULL)
+:	m_definitionComponentPtr(NULL)
 {
 }
 
@@ -60,14 +60,14 @@ TFactoryMember<Interface>::TFactoryMember()
 template <class Interface>
 void TFactoryMember<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
-	BaseClass::Init(ownerPtr, staticInfo, &m_realContextPtr);
+	BaseClass::Init(ownerPtr, staticInfo, &m_definitionComponentPtr);
 }
 
 
 template <class Interface>
 bool TFactoryMember<Interface>::IsValid() const
 {
-	return (m_realContextPtr != NULL) && BaseClass::IsValid();
+	return (m_definitionComponentPtr != NULL) && BaseClass::IsValid();
 }
 
 
@@ -77,8 +77,8 @@ typename Interface* TFactoryMember<Interface>::CreateInstance() const
 {
 	istd::TDelPtr<Interface> retVal;
 
-	if ((m_realContextPtr != NULL) && BaseClass::IsValid()){
-		const IComponentContext* parentPtr = m_realContextPtr->GetParentContext();
+	if ((m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
+		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			const std::string& componentId = BaseClass::operator*();
 
@@ -95,7 +95,7 @@ typename Interface* TFactoryMember<Interface>::CreateInstance() const
 template <class Interface>
 TFactoryMember<Interface>::TFactoryMember(const TFactoryMember& ptr)
 :	BaseClass(ptr),
-	m_realContextPtr(ptr.m_realContextPtr)
+	m_definitionComponentPtr(ptr.m_definitionComponentPtr)
 {
 }
 

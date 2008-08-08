@@ -29,14 +29,25 @@ const IComponentContext* CComponentContext::GetParentContext() const
 }
 
 
-const iser::ISerializable* CComponentContext::GetAttribute(const std::string& attributeId, const IComponentContext** realContextPtr) const
+const iser::ISerializable* CComponentContext::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
 {
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 
 	if (infoPtr  != NULL){
 		const std::string& exportId = infoPtr->exportId;
 		if (!exportId.empty() && (m_parentPtr != NULL)){
-			const iser::ISerializable* parentAttributePtr = m_parentPtr->GetAttribute(exportId, realContextPtr);
+			const iser::ISerializable* parentAttributePtr = NULL;
+			if (definitionLevelPtr != NULL){
+				int parentLevel = -1;
+
+				parentAttributePtr = m_parentPtr->GetAttribute(exportId, &parentLevel);
+				I_ASSERT((parentAttributePtr == NULL) || (parentLevel >= 0));	// if attribute is retured parent level must be set
+
+				*definitionLevelPtr = parentLevel + 1;
+			}
+			else{
+				parentAttributePtr = m_parentPtr->GetAttribute(exportId);
+			}
 
 			if (parentAttributePtr != NULL){
 				return parentAttributePtr;
@@ -44,8 +55,8 @@ const iser::ISerializable* CComponentContext::GetAttribute(const std::string& at
 		}
 
 		if (infoPtr->attributePtr.IsValid()){
-			if (realContextPtr != NULL){
-				*realContextPtr = this;
+			if (definitionLevelPtr != NULL){
+				*definitionLevelPtr = 0;
 			}
 
 			return infoPtr->attributePtr.GetPtr();
@@ -61,8 +72,8 @@ const iser::ISerializable* CComponentContext::GetAttribute(const std::string& at
 		if ((*attributePtr2)->IsObligatory()){
 			const iser::ISerializable* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
 			if (defaultAttributePtr != NULL){
-				if (realContextPtr != NULL){
-					*realContextPtr = this;
+				if (definitionLevelPtr != NULL){
+					*definitionLevelPtr = 0;
 				}
 
 				return defaultAttributePtr;
@@ -71,18 +82,6 @@ const iser::ISerializable* CComponentContext::GetAttribute(const std::string& at
 	}
 
 	return NULL;
-}
-
-
-IComponent* CComponentContext::GetSubcomponent(const std::string& /*componentId*/) const
-{
-	return NULL;	// normal component has no subcomponents
-}
-
-
-IComponent* CComponentContext::CreateSubcomponent(const std::string& /*componentId*/) const
-{
-	return NULL;	// normal component cannot create subcomponents
 }
 
 

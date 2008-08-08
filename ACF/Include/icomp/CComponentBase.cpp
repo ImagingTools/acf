@@ -11,12 +11,22 @@ namespace icomp
 
 
 CComponentBase::CComponentBase()
-:	m_contextPtr(NULL)
+:	m_contextPtr(NULL), m_parentPtr(NULL), m_isParentOwner(false)
 {
 }
 
 
 // reimplemented (icomp::IComponent)
+
+const IComponent* CComponentBase::GetParentComponent(bool ownerOnly) const
+{
+	if (!ownerOnly || m_isParentOwner){
+		return m_parentPtr;
+	}
+
+	return NULL;
+}
+
 
 void* CComponentBase::GetInterface(const type_info& interfaceType, const std::string& /*subId*/)
 {
@@ -58,9 +68,26 @@ void CComponentBase::OnComponentDestroyed()
 }
 
 
-void CComponentBase::SetComponentContext(const icomp::IComponentContext* contextPtr)
+void CComponentBase::SetComponentContext(
+			const icomp::IComponentContext* contextPtr,
+			const IComponent* parentPtr,
+			bool isParentOwner)
 {
 	m_contextPtr = contextPtr;
+	m_parentPtr = parentPtr;
+	m_isParentOwner = isParentOwner;
+}
+
+
+IComponent* CComponentBase::GetSubcomponent(const std::string& /*componentId*/) const
+{
+	return NULL;	// normal component has no subcomponents
+}
+
+
+IComponent* CComponentBase::CreateSubcomponent(const std::string& /*componentId*/) const
+{
+	return NULL;	// normal component cannot create subcomponents
 }
 
 

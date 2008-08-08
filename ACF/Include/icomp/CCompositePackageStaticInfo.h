@@ -23,7 +23,7 @@ public:
 				const icomp::IRegistriesManager* registriesManagerPtr);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual icomp::IComponent* CreateComponent(const icomp::IComponentContext* contextPtr) const;
+	virtual icomp::IComponent* CreateComponent() const;
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
 	virtual const AttributeInfos& GetAttributeInfos() const;
 	virtual Ids GetSubcomponentIds() const;

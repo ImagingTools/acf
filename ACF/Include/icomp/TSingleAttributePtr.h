@@ -24,7 +24,16 @@ public:
 
 	TSingleAttributePtr();
 
-	bool Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr = NULL);
+	/**
+		Initialize this attribute.
+		\param	ownerPtr				pointer to parent component of this attribute.
+		\param	staticInfo				static info structure creating this attribute.
+		\param	definitionComponentPtr	optional pointer will be set with pointer to component defining this attribute.
+										If this attribute was exported it will differ from parent component.
+	*/
+	bool Init(	const IComponent* ownerPtr,
+				const IRealAttributeStaticInfo& staticInfo,
+				const IComponent** definitionComponentPtr = NULL);
 
 	/**
 		Check if this attribute is valid.
@@ -64,18 +73,42 @@ TSingleAttributePtr<Attribute>::TSingleAttributePtr()
 
 
 template <typename Attribute>
-bool TSingleAttributePtr<Attribute>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo, const IComponentContext** realContextPtr)
+bool TSingleAttributePtr<Attribute>::Init(
+			const IComponent* ownerPtr,
+			const IRealAttributeStaticInfo& staticInfo,
+			const IComponent** definitionComponentPtr)
 {
 	I_ASSERT(ownerPtr != NULL);
 
 	const std::string& attributeId = staticInfo.GetAttributeId();
 	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
 	if (componentContextPtr != NULL){
-		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, realContextPtr);
+		int definitionLevel = -1;
+		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, &definitionLevel);
 		m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
+
+		if (m_attributePtr != NULL){
+			I_ASSERT(definitionLevel >= 0);
+
+			if (definitionComponentPtr != NULL){
+				while (definitionLevel > 0){
+					ownerPtr = ownerPtr->GetParentComponent();
+					I_ASSERT(ownerPtr != NULL);
+
+					--definitionLevel;
+				}
+
+				*definitionComponentPtr = ownerPtr;
+			}
+
+			return true;
+		}
+	}
+	else{
+		m_attributePtr = NULL;
 	}
 
-	return (m_attributePtr != NULL);
+	return false;
 }
 
 

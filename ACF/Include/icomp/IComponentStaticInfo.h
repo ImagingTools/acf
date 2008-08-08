@@ -34,13 +34,9 @@ public:
 
 	/**
 		Create component instance.
-		\param	contextPtr	pointer to context of new created component.
-							This context object is same like template and is used to describe component
-							its attributes and connections to other components.
-							It cannot be NULL.
 		\return				pointer to created component or NULL if this component cannot be created.
 	 */
-	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const = 0;
+	virtual IComponent* CreateComponent() const = 0;
 
 	/**
 		Returns the interface ID with the index @c index.

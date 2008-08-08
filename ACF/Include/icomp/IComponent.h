@@ -23,6 +23,15 @@ class IComponent: virtual public istd::IPolymorphic
 {
 public:
 	/**
+		Get parent of this component.
+		Parent is component who created this component.
+		Parent component can be also owner of this component. It means manages life time of this componenent.
+		\param	ownerOnly	indicate, that parent should be returned only if it owns this component.
+		\return	pointer to parent component or NULL if parent is not accessible.
+	*/
+	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const = 0;
+
+	/**
 		Get access to specified component interface.
 	*/
 	virtual void* GetInterface(const type_info& interfaceType, const std::string& subId = "") = 0;
@@ -32,6 +41,17 @@ public:
 		component information loaded from components registry.
 	*/
 	virtual const IComponentContext* GetComponentContext() const = 0;
+
+	/**
+		Set component context of this component.
+		\param	contextPtr	new value of component context.
+							It can be also NULL.
+							Please avoid to use this method, it is designed for internal use only.
+	*/
+	virtual void SetComponentContext(
+				const icomp::IComponentContext* contextPtr,
+				const IComponent* parentPtr,
+				bool isParentOwner) = 0;
 
 	/**
 		Called after component is created.
@@ -46,12 +66,14 @@ public:
 	virtual void OnComponentDestroyed() = 0;
 
 	/**
-		Set component context of this component.
-		\param	contextPtr	new value of component context.
-							It can be also NULL.
-							Please avoid to use this method, it is designed for internal use only.
+		Get access to subcomponent using its ID.
 	*/
-	virtual void SetComponentContext(const icomp::IComponentContext* contextPtr) = 0;
+	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
+
+	/**
+		Create instance of subcomponent using its ID.
+	*/
+	virtual IComponent* CreateSubcomponent(const std::string& componentId) const = 0;
 };
 
 

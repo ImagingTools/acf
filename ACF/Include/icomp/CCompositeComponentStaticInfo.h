@@ -18,7 +18,7 @@ public:
 	CCompositeComponentStaticInfo(const IRegistry& registry);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual IComponent* CreateComponent(const IComponentContext* contextPtr) const;
+	virtual IComponent* CreateComponent() const;
 };
 
 
