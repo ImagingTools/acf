@@ -29,6 +29,7 @@ public:
 	virtual void OnComponentDestroyed();
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
+	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
 
 	// static methods
 	/**

@@ -2,6 +2,8 @@
 #define imod_TModelCompWrap_included
 
 
+#include "istd/IChangeable.h"
+
 #include "imod/TModelWrap.h"
 
 #include "icomp/CComponentBase.h"
@@ -21,6 +23,7 @@ public:
 	typedef imod::TModelWrap<Base> BaseClass;
 
 	I_BEGIN_COMPONENT(TModelCompWrap)
+		I_REGISTER_INTERFACE(istd::IChangeable)
 		I_REGISTER_INTERFACE(imod::IModel)
 	I_END_COMPONENT
 };

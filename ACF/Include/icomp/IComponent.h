@@ -74,6 +74,11 @@ public:
 		Create instance of subcomponent using its ID.
 	*/
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const = 0;
+
+	/**
+		Called if subcomponent is removed from memory.
+	*/
+	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr) = 0;
 };
 
 

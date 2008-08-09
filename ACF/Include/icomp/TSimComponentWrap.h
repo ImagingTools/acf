@@ -54,7 +54,7 @@ void TSimComponentWrap<Base>::InitComponent()
 template <class Base>
 const IComponent* TSimComponentWrap<Base>::GetParentComponent(bool /*ownerOnly*/) const
 {
-	return this;
+	return const_cast<TSimComponentWrap<Base>* >(this);
 }
 
 

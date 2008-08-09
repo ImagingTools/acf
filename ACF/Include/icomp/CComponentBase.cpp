@@ -91,6 +91,12 @@ IComponent* CComponentBase::CreateSubcomponent(const std::string& /*componentId*
 }
 
 
+void CComponentBase::OnSubcomponentDeleted(const IComponent* /*subcomponentPtr*/)
+{
+	// do nothing, real components has no subcomponents
+}
+
+
 // static methods
 
 const icomp::IComponentStaticInfo& CComponentBase::InitStaticInfo(CComponentBase* /*componentPtr*/)

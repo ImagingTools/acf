@@ -118,7 +118,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="2">
+  <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
         class imod::IModel
@@ -130,6 +130,14 @@
     <Interface>
       <InterfaceId>
         class iprm::IParamsSet
+      </InterfaceId>
+      <ComponentId>
+        ParamsSet
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        class istd::IChangeable
       </InterfaceId>
       <ComponentId>
         ParamsSet

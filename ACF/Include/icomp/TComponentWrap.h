@@ -38,6 +38,11 @@ TComponentWrap<Component>::TComponentWrap()
 template <class Component>
 TComponentWrap<Component>::~TComponentWrap()
 {
+	IComponent* parentPtr = const_cast<IComponent*>(GetParentComponent(true));
+	if (parentPtr != NULL){
+		parentPtr->OnSubcomponentDeleted(this);
+	}
+
 	SetComponentContext(NULL, NULL, false);
 }
 

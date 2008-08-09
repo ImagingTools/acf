@@ -75,18 +75,29 @@ bool TMultiFactoryMember<Interface>::IsValid() const
 template <class Interface>
 typename Interface* TMultiFactoryMember<Interface>::CreateInstance(int index) const
 {
-	istd::TDelPtr<Interface> retVal;
-
 	if ((m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			const std::string& componentId = BaseClass::operator[](index);
 
-			retVal.SetCastedOrRemove(parentPtr->CreateSubcomponent(componentId));
+			std::string baseId;
+			std::string subId;
+			SplitId(componentId, baseId, subId);
+			I_ASSERT(subId.empty());	// explicit subelement ID are not implemented correctly
+
+			IComponent* newComponnentPtr = parentPtr->CreateSubcomponent(baseId);
+			if (newComponnentPtr != NULL){
+				Interface* retVal = ExtractInterface(newComponnentPtr);
+				if (retVal != NULL){
+					return retVal;
+				}
+
+				delete newComponnentPtr;
+			}
 		}
 	}
 
-	return retVal.PopPtr();
+	return NULL;
 }
 
 

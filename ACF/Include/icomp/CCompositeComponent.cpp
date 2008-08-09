@@ -131,6 +131,29 @@ IComponent* CCompositeComponent::CreateSubcomponent(const std::string& component
 }
 
 
+void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPtr)
+{
+	for (		ComponentMap::iterator iter = m_componentMap.begin();
+				iter != m_componentMap.end();
+				++iter){
+		ComponentInfo& info = iter->second;
+		if (info.componentPtr.IsValid()){
+			info.componentPtr->SetComponentContext(NULL, NULL, false);
+
+			info.isInitialized = false;
+
+			if (info.componentPtr == subcomponentPtr){
+				info.componentPtr.PopPtr();
+			}
+		}
+	}
+
+	m_componentMap.clear();
+
+	delete this;
+}
+
+
 // static methods
 
 void CCompositeComponent::SplitComponentId(const std::string& fullId, std::string& componentId, std::string& restId)
