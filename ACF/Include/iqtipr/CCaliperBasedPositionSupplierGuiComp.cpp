@@ -38,7 +38,7 @@ void CCaliperBasedPositionSupplierGuiComp::UpdateEditor()
 			m_foundPosition.SetCenter(i2d::CVector2d(0, 0));
 
 			if (IsGuiCreated()){
-				PositionLabel->setText("");
+				PositionLabel->setText("No position");
 			}
 		}
 	}

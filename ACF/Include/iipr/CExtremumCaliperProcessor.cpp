@@ -33,7 +33,9 @@ bool FeaturesExtraction(
 
 	results.ResetFeatures();
 
-	double workThreshold = weightThreshold * conversion.whiteIntensity;
+	double minWorkThreshold = (0.5 - 0.5 * weightThreshold) * conversion.whiteIntensity;
+	double maxWorkThreshold = (0.5 + 0.5 * weightThreshold) * conversion.whiteIntensity;
+
 	int index = -1;
 	int nextIndex = isBackward? bitmapSize.GetX() - 1: 0;
 	int indexDiff = isBackward? -1: 1;
@@ -55,7 +57,7 @@ bool FeaturesExtraction(
 			double nextPixelIntensity = conversion.GetIntensity(nextPixel);
 			if (nextPixelIntensity < pixelIntensity){
 				if (isRisedEdgeSupported && (risedCount > 0)){
-					if (pixelIntensity > workThreshold){
+					if (pixelIntensity > maxWorkThreshold){
 						double prevDelta = pixelIntensity - conversion.GetIntensity(prevPixel);
 						I_ASSERT(prevDelta >= 0);
 
@@ -73,7 +75,10 @@ bool FeaturesExtraction(
 						I_ASSERT(position <= 1 + I_EPSILON);
 
 						bool isReady = false;
-						double featureWeight = pixelIntensity / conversion.whiteIntensity * 0.5;
+
+						double featureWeight = 2.0 * pixelIntensity / conversion.whiteIntensity - 1.0;
+						I_ASSERT(featureWeight >= weightThreshold - I_EPSILON);
+
 						if (		!results.AddFeature(new CCaliperFeature(featureWeight, position), &isReady) ||
 									isReady){
 							return isReady;
@@ -86,7 +91,7 @@ bool FeaturesExtraction(
 			}
 			else{
 				if (isDropppedEdgeSupported && (droppedCount > 0)){
-					if (pixelIntensity < -workThreshold){
+					if (pixelIntensity < minWorkThreshold){
 						double prevDelta = conversion.GetIntensity(prevPixel) - pixelIntensity;
 						I_ASSERT(prevDelta >= 0);
 
@@ -104,7 +109,9 @@ bool FeaturesExtraction(
 						I_ASSERT(position <= 1 + I_EPSILON);
 
 						bool isReady = false;
-						double featureWeight = pixelIntensity / conversion.whiteIntensity * 0.5;
+						double featureWeight = 1.0 - 2.0 * pixelIntensity / conversion.whiteIntensity;
+						I_ASSERT(featureWeight >= weightThreshold - I_EPSILON);
+
 						if (		!results.AddFeature(new CCaliperFeature(featureWeight, position), &isReady) ||
 									isReady){
 							return isReady;

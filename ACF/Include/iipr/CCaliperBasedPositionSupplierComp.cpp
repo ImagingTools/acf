@@ -13,7 +13,7 @@ namespace iipr
 const i2d::CVector2d* CCaliperBasedPositionSupplierComp::GetVector2d(I_DWORD objectId) const
 {
 	const WorkInfo* infoPtr = GetWorkInfo(objectId, true);
-	if (infoPtr != NULL){
+	if ((infoPtr != NULL) && (infoPtr->status == WS_OK)){
 		return &infoPtr->product;
 	}
 
@@ -82,6 +82,8 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, i2d::CVec
 
 			result.SetX(position[0]);
 			result.SetY(position[1]);
+
+			return WS_OK;
 		}
 	}
 

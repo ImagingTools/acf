@@ -1,6 +1,8 @@
 #include "iipr/CLineProjectionProcessor.h"
 
 
+#include "istd/TChangeNotifier.h"
+
 #include "i2d/CRectangle.h"
 
 #include "iimg/TPixelConversion.h"
@@ -42,8 +44,11 @@ bool ProjectionFunction(
 	I_ASSERT(axis1Begin >= 0);
 	I_ASSERT(axis1End <= axisSizes[0]);
 
+	istd::CChangeNotifier projectionNotifier(&results);
+
 	iimg::IBitmap& projectionImage = results.GetProjectionImage();
-	if (projectionImage.CreateBitmap(istd::CIndex2d(axis1End - axis1Begin, 1))){
+
+	if (projectionImage.CreateBitmap(istd::CIndex2d(axis1End - axis1Begin, 1), sizeof(PixelConversion::DestPixelType) * 8)){
 		PixelConversion::DestPixelType* projectionPtr = (I_BYTE*)projectionImage.GetLinePtr(0);
 
 		double axis2Delta = delta.GetY() / delta.GetX();
