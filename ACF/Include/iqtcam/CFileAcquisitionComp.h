@@ -57,7 +57,7 @@ public:
 	virtual const istd::CString& GetLastLoadFileName() const;
 	virtual const istd::CString& GetLastSaveFileName() const;
 
-	// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,

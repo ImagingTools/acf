@@ -103,7 +103,7 @@ const istd::CString& CFileAcquisitionComp::GetLastSaveFileName() const
 }
 
 
-// reimplemented (iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>)
+// reimplemented (iproc::IProcessor)
 
 int CFileAcquisitionComp::DoProcessing(const iprm::IParamsSet* paramsPtr, const istd::IPolymorphic* /*inputPtr*/, istd::IChangeable* outputPtr)
 {

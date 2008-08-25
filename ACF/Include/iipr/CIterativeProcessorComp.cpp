@@ -56,7 +56,7 @@ int CIterativeProcessorComp::DoProcessing(
 }
 
 
-// private methods
+// protected methods
 
 int CIterativeProcessorComp::ProcessSlave(
 			const iprm::IParamsSet* paramsPtr,

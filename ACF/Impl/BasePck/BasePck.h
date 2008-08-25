@@ -30,6 +30,7 @@
 #include "isig/CSamplingParamsComp.h"
 
 #include "iproc/CTestIdManagerComp.h"
+#include "iproc/CCascadedProcessorComp.h"
 
 #include "icam/CFileBitmapAcquisitionParamsComp.h"
 #include "icam/CExposureParamsComp.h"
@@ -63,6 +64,7 @@ typedef icomp::TModelCompWrap<icam::CExposureParamsComp> ExposureParams;
 typedef icomp::TModelCompWrap<icam::CSnapBitmapSupplierComp> SnapBitmapSupplier;
 
 typedef iproc::CTestIdManagerComp TestIdManager;
+typedef iproc::CCascadedProcessorComp CascadedProcessor;
 
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<i2d::CPosition2d>,

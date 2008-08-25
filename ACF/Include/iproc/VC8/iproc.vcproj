@@ -178,6 +178,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CCascadedProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHierarchicalOperator.cpp"
 				>
 			</File>
@@ -206,6 +210,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CCascadedProcessorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CHierarchicalOperator.h"
 				>

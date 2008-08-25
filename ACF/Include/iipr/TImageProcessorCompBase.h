@@ -26,13 +26,13 @@ class TImageProcessorCompBase: public iproc::CSyncProcessorCompBase
 public:
 	typedef iproc::CSyncProcessorCompBase BaseClass;
 
-protected:
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
+protected:
 	// abstract methods
 	virtual bool ProcessImage(
 				const ParameterType* parameterPtr, 
@@ -41,7 +41,9 @@ protected:
 };
 
 
-// protected methods
+// public methods
+
+// reimplemented (iproc::IProcessor)
 
 template <class ParameterType>
 int TImageProcessorCompBase<ParameterType>::DoProcessing(

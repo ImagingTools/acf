@@ -21,8 +21,6 @@ istd::CIndex2d CProcessedAcquisitionComp::GetBitmapSize(const iprm::IParamsSet* 
 }
 
 
-// protected methods
-
 // reimplemented iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 
 int CProcessedAcquisitionComp::DoProcessing(

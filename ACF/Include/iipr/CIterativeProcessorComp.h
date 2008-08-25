@@ -33,18 +33,18 @@ public:
 		I_ASSIGN(m_slaveProcessorCompPtr, "SlaveProcessor", "Slave image processor", true, "SlaveProcessor");
 	I_END_COMPONENT
 
-protected:		
 	// reimplemented (iproc::IProcessor)
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr);
 
-private:
+protected:
 	int ProcessSlave(
 				const iprm::IParamsSet* paramsPtr,
 				const iimg::IBitmap* inputPtr,
 				iimg::IBitmap* outputPtr);
+
 private:
 	I_ATTR(istd::CString, m_paramsIdAttrPtr);
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
@@ -55,4 +55,5 @@ private:
 
 
 #endif // !iipr_CIterativeProcessorComp_included
+
 

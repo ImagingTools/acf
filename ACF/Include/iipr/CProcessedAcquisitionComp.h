@@ -24,7 +24,6 @@ public:
 	// reimplemented (icam::IBitmapAcquisition)
 	virtual istd::CIndex2d GetBitmapSize(const iprm::IParamsSet* paramsPtr) const;
 
-protected:
 	// reimplemented iproc::TSyncProcessorWrap<icam::IBitmapAcquisition>
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,

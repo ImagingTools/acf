@@ -256,6 +256,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRectDerivativeProcessor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectDerivativeProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchFeature.cpp"
 				>
 			</File>
@@ -265,14 +273,6 @@
 			</File>
 			<File
 				RelativePath="..\CSearchResultSet.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectDerivativeProcessor.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectDerivativeProcessorComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -357,6 +357,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRectDerivativeProcessor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectDerivativeProcessorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSearchFeature.h"
 				>
 			</File>
@@ -366,14 +374,6 @@
 			</File>
 			<File
 				RelativePath="..\CSearchResultSet.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectDerivativeProcessor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectDerivativeProcessorComp.h"
 				>
 			</File>
 			<File
