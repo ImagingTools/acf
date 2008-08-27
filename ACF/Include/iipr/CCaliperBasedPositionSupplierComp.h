@@ -11,7 +11,7 @@
 
 #include "icam/IBitmapSupplier.h"
 
-#include "iipr/IVector2dSupplier.h"
+#include "iipr/IValueSupplier.h"
 #include "iipr/IFeaturesMapper.h"
 
 
@@ -19,10 +19,10 @@ namespace iipr
 {
 
 
-class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<IVector2dSupplier, i2d::CVector2d>
+class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<IValueSupplier, imath::CVarVector>
 {
 public:
-	typedef iproc::TSupplierCompWrap<IVector2dSupplier, i2d::CVector2d> BaseClass;
+	typedef iproc::TSupplierCompWrap<IValueSupplier, imath::CVarVector> BaseClass;
 
 	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplierComp);
 		I_REGISTER_INTERFACE(CCaliperBasedPositionSupplierComp);
@@ -31,15 +31,15 @@ public:
 		I_ASSIGN(m_caliperProcessorCompPtr, "CaliperProcessor", "Calculate position from projection", true, "CaliperProcessor");
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IVector2dSupplier)
-	virtual const i2d::CVector2d* GetVector2d(I_DWORD objectId) const;
+	// reimplemented (iipr::IValueSupplier)
+	virtual imath::CVarVector GetValue(I_DWORD objectId) const;
 
 	// reimplemented (iproc::ISupplier)
 	virtual void BeginNextObject(I_DWORD objectId);
 
 protected:
 	// reimplemented (iproc::TSupplierCompWrap)
-	virtual int ProduceObject(I_DWORD objectId, i2d::CVector2d& result) const;
+	virtual int ProduceObject(I_DWORD objectId, imath::CVarVector& result) const;
 
 private:
 	I_REF(icam::IBitmapSupplier, m_bitmapSupplierCompPtr);

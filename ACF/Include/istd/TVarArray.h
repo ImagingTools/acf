@@ -14,7 +14,7 @@ namespace istd
 /**
 	Multidimensional array with fixed number of dimensions.
 */
-template <class Element = double>
+template <class Element>
 class TVarArray
 {
 public:

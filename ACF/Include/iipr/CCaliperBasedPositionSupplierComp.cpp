@@ -8,16 +8,16 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IVector2dSupplier)
+// reimplemented (iipr::IValueSupplier)
 
-const i2d::CVector2d* CCaliperBasedPositionSupplierComp::GetVector2d(I_DWORD objectId) const
+imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(I_DWORD objectId) const
 {
 	const WorkInfo* infoPtr = GetWorkInfo(objectId, true);
 	if ((infoPtr != NULL) && (infoPtr->status == WS_OK)){
-		return &infoPtr->product;
+		return infoPtr->product;
 	}
 
-	return NULL;
+	return imath::CVarVector();
 }
 
 
@@ -39,7 +39,7 @@ void CCaliperBasedPositionSupplierComp::BeginNextObject(I_DWORD objectId)
 
 // reimplemented (iproc::TSupplierCompWrap)
 
-int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, i2d::CVector2d& result) const
+int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, imath::CVarVector& result) const
 {
 	if (		m_bitmapSupplierCompPtr.IsValid() &&
 				m_featuresMapperCompPtr.IsValid() &&
@@ -63,17 +63,12 @@ int CCaliperBasedPositionSupplierComp::ProduceObject(I_DWORD objectId, i2d::CVec
 				return WS_ERROR;
 			}
 
-			imath::CVarVector position = m_featuresMapperCompPtr->GetImagePosition(
+			result = m_featuresMapperCompPtr->GetImagePosition(
 						*featurePtr,
 						paramsSetPtr);
-			if (position.GetElementsCount() < 2){
-				return WS_CRITICAL;
+			if (result.GetElementsCount() >= 2){
+				return WS_OK;
 			}
-
-			result.SetX(position[0]);
-			result.SetY(position[1]);
-
-			return WS_OK;
 		}
 	}
 

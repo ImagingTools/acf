@@ -26,12 +26,12 @@ void CCaliperBasedPositionSupplierGuiComp::UpdateEditor()
 	if (		(supplierPtr != NULL) &&
 				(idManagerPtr != NULL) &&
 				idManagerPtr->GetCurrentId(objectId)){
-		const i2d::CVector2d* positionPtr = supplierPtr->GetVector2d(objectId);
-		if (positionPtr != NULL){
-			m_foundPosition.SetCenter(*positionPtr);
+		imath::CVarVector position = supplierPtr->GetValue(objectId);
+		if (position.GetElementsCount() >= 2){
+			m_foundPosition.SetCenter(i2d::CVector2d(position[0], position[1]));
 
 			if (IsGuiCreated()){
-				PositionLabel->setText(tr("(%1, %2)").arg(positionPtr->GetX()).arg(positionPtr->GetY()));
+				PositionLabel->setText(tr("(%1, %2)").arg(position[0]).arg(position[1]));
 			}
 		}
 		else{

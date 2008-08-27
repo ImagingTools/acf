@@ -23,11 +23,48 @@ public:
 	CLine2d(const CLine2d& line);
 	CLine2d operator=(const CLine2d& inl);
 
+	/**
+		Get value of first line point.
+	*/
 	const CVector2d& GetPoint1() const;
+
+	/**
+		Get reference to first line point.
+		Please avoid to use this function, becouse of eventuel update problems.
+	*/
+	CVector2d& GetPoint1Ref();
+
+	/**
+		Set value of first line point.
+	*/
 	void SetPoint1(const CVector2d& point);
+
+	/**
+		Get value of second line point.
+	*/
 	const CVector2d& GetPoint2() const;
+
+	/**
+		Get reference to second line point.
+		Please avoid to use this function, becouse of eventuel update problems.
+	*/
+	CVector2d& GetPoint2Ref();
+
+	/**
+		Set value of second line point.
+	*/
 	void SetPoint2(const CVector2d& point);
+
+	/**
+		Get slope of this line.
+		Slope is derivative value along X axis (dx/dy) of line function.
+	*/
 	double GetSlope() const;
+
+	/**
+		Get intercept of this line.
+		Intercept is derivative value along Y axis (dy/dx) of line function.
+	*/
 	double GetIntercept() const;
 
 	/**
@@ -100,7 +137,19 @@ inline const CVector2d& CLine2d::GetPoint1() const
 }
 
 
+inline CVector2d& CLine2d::GetPoint1Ref()
+{
+	return m_point1;
+}
+
+
 inline const CVector2d& CLine2d::GetPoint2() const
+{
+	return m_point2;
+}
+
+
+inline CVector2d& CLine2d::GetPoint2Ref()
 {
 	return m_point2;
 }

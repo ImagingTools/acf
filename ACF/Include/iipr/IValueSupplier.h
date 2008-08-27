@@ -1,8 +1,8 @@
-#ifndef iipr_IVector2dSupplier_included
-#define iipr_IVector2dSupplier_included
+#ifndef iipr_IValueSupplier_included
+#define iipr_IValueSupplier_included
 
 
-#include "i2d/CVector2d.h"
+#include "imath/TVarVector.h"
 
 #include "iproc/ISupplier.h"
 
@@ -16,7 +16,7 @@ namespace iipr
 /**
 	2D vector or position supplier.
 */
-class IVector2dSupplier: virtual public iproc::ISupplier
+class IValueSupplier: virtual public iproc::ISupplier
 {
 public:
 	/**
@@ -24,12 +24,13 @@ public:
 		\param	objectId	ID of inspected object. \sa	iproc::ISupplier::BeginNextObject.
 		\return				if vector is accessible pointer to its instance, or NULL.
 	*/
-	virtual const i2d::CVector2d* GetVector2d(I_DWORD objectId) const = 0;
+	virtual imath::CVarVector GetValue(I_DWORD objectId) const = 0;
 };
 
 
 } // namespace iipr
 
 
-#endif // !iipr_IVector2dSupplier_included
+#endif // !iipr_IValueSupplier_included
+
 

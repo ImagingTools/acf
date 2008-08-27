@@ -313,7 +313,7 @@
 				RelativePath="..\ISearchResultSet.h">
 			</File>
 			<File
-				RelativePath="..\IVector2dSupplier.h">
+				RelativePath="..\IValueSupplier.h">
 			</File>
 			<File
 				RelativePath="..\TConvolutionProcessorComp.h">

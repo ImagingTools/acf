@@ -2,7 +2,7 @@
 #define iprm_CComposedParamsSetComp_included
 
 
-#include "iprm/IParamsSet.h"
+#include "iprm/CParamsSet.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -15,7 +15,7 @@ namespace iprm
 	Implementation of interface IParamsSet as component.
 	This implementation allows to register list of objects as editable parameters and list of slave parameter sets.
 */
-class CComposedParamsSetComp: public icomp::CComponentBase, virtual public IParamsSet
+class CComposedParamsSetComp: public icomp::CComponentBase, public CParamsSet
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -27,13 +27,9 @@ public:
 		I_ASSIGN_MULTI_0(m_parametersIdAttrPtr, "ParametersId", "ID of each paremeter in 'Parameters'", true)
 	I_END_COMPONENT
 
-	// reimplemented (IParamsSet)
+	// reimplemented (iprm::IParamsSet)
 	virtual const iser::ISerializable* GetParameter(const std::string& id) const;
 	virtual iser::ISerializable* GetEditableParameter(const std::string& id);
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-	virtual I_DWORD GetMinimalVersion(int versionId = iser::IVersionInfo::UserVersionId) const;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -42,10 +38,6 @@ private:
 	I_MULTIREF(IParamsSet, m_slaveParamsCompPtr);
 	I_MULTIREF(iser::ISerializable, m_parametersCompPtr);
 	I_MULTIATTR(istd::CString, m_parametersIdAttrPtr);
-
-	typedef std::map<std::string, iser::ISerializable*> ParamsMap;
-
-	ParamsMap m_paramsMap;
 };
 
 
