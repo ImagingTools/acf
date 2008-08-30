@@ -106,7 +106,7 @@
 			Filter="cpp;cxx;c;def"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplierGuiComp.cpp">
+				RelativePath="..\CValueSupplierGuiComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CCaliperParamsGuiComp.cpp">
@@ -132,7 +132,7 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplierGuiComp.h">
+				RelativePath="..\CValueSupplierGuiComp.h">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
@@ -328,7 +328,7 @@
 			Name="Forms"
 			Filter="">
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplierGuiComp.ui">
+				RelativePath="..\CValueSupplierGuiComp.ui">
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool

@@ -29,7 +29,7 @@ int CSnapBitmapSupplierComp::ProduceObject(I_DWORD objectId, istd::TDelPtr<iimg:
 	}
 
 	if (result.IsValid() && m_bitmapAcquisitionCompPtr.IsValid()){
-		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetParamsSet(), NULL, result.GetPtr());
+		int status = m_bitmapAcquisitionCompPtr->DoProcessing(GetModelParametersSet(), NULL, result.GetPtr());
 		switch (status){
 		case IBitmapAcquisition::TS_OK:
 			return WS_OK;

@@ -1,5 +1,5 @@
-#ifndef iqtipr_CCaliperBasedPositionSupplierGuiComp_included
-#define iqtipr_CCaliperBasedPositionSupplierGuiComp_included
+#ifndef iqtipr_CValueSupplierGuiComp_included
+#define iqtipr_CValueSupplierGuiComp_included
 
 
 #include "iser/IFileLoader.h"
@@ -11,7 +11,7 @@
 
 #include "iproc/IIdManager.h"
 
-#include "iipr/CCaliperBasedPositionSupplierComp.h"
+#include "iipr/IValueSupplier.h"
 
 #include "iqt/IGuiObject.h"
 #include "iqt/TDesignerGuiObserverCompBase.h"
@@ -20,25 +20,25 @@
 
 #include "iqtipr/iqtipr.h"
 
-#include "iqtipr/Generated/ui_CCaliperBasedPositionSupplierGuiComp.h"
+#include "iqtipr/Generated/ui_CValueSupplierGuiComp.h"
 
 
 namespace iqtipr
 {
 
 
-class CCaliperBasedPositionSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
-			Ui::CCaliperBasedPositionSupplierGuiComp,
-			iipr::CCaliperBasedPositionSupplierComp>
+class CValueSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
+			Ui::CValueSupplierGuiComp,
+			iipr::IValueSupplier>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtproc::TSupplierGuiCompBase<
-				Ui::CCaliperBasedPositionSupplierGuiComp,
-				iipr::CCaliperBasedPositionSupplierComp> BaseClass;
+				Ui::CValueSupplierGuiComp,
+				iipr::IValueSupplier> BaseClass;
 
-	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplierGuiComp)
+	I_BEGIN_COMPONENT(CValueSupplierGuiComp)
 	I_END_COMPONENT
 
 	// reimplemented (imod::IModelEditor)
@@ -68,6 +68,6 @@ private:
 } // namespace iqtipr
 
 
-#endif // !iqtipr_CCaliperBasedPositionSupplierGuiComp_included
+#endif // !iqtipr_CValueSupplierGuiComp_included
 
 

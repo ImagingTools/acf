@@ -6,6 +6,8 @@
 
 #include "imod/IObserver.h"
 
+#include "iprm/IParamsSet.h"
+
 #include "iproc/IIdManager.h"
 
 #include "iqt/IGuiObject.h"
@@ -148,7 +150,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsLoadParamsSupported() const
 {
 	const Model* supplierPtr = GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
-		const iprm::IParamsSet* paramsPtr = supplierPtr->GetParamsSet();
+		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
 			if (m_paramsLoaderCompPtr->IsOperationSupported(paramsPtr, NULL, true, false)){
 				return true;
@@ -165,7 +167,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::IsSaveParamsSupported() const
 {
 	const Model* supplierPtr = GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
-		const iprm::IParamsSet* paramsPtr = supplierPtr->GetParamsSet();
+		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
 			if (m_paramsLoaderCompPtr->IsOperationSupported(paramsPtr, NULL, false, true)){
 				return true;
@@ -182,7 +184,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::LoadParams()
 {
 	Model* supplierPtr = GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
-		iprm::IParamsSet* paramsPtr = supplierPtr->GetParamsSet();
+		iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
 			if (m_paramsLoaderCompPtr->LoadFromFile(*paramsPtr, "") != iser::IFileLoader::StateFailed){
 				return true;
@@ -205,7 +207,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::SaveParams()
 {
 	const Model* supplierPtr = GetObjectPtr();
 	if ((supplierPtr != NULL) && m_paramsLoaderCompPtr.IsValid()){
-		const iprm::IParamsSet* paramsPtr = supplierPtr->GetParamsSet();
+		const iprm::IParamsSet* paramsPtr = supplierPtr->GetModelParametersSet();
 		if (paramsPtr != NULL){
 			if (m_paramsLoaderCompPtr->SaveToFile(*paramsPtr, "") != iser::IFileLoader::StateFailed){
 				return true;
@@ -258,7 +260,7 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelAttached()
 	Model* supplierPtr = GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
-	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetParamsSet());
+	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
 	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
 
 	m_areParamsEditable = false;
@@ -282,7 +284,7 @@ void TSupplierGuiCompBase<UI, Model, WidgetType>::OnGuiModelDetached()
 	Model* supplierPtr = GetObjectPtr();
 	I_ASSERT(supplierPtr != NULL);	// model must be attached
 
-	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetParamsSet());
+	iprm::IParamsSet* paramsPtr = const_cast<iprm::IParamsSet*>(supplierPtr->GetModelParametersSet());
 	imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(paramsPtr);
 
 	if (		m_paramsSetObserverCompPtr.IsValid() &&

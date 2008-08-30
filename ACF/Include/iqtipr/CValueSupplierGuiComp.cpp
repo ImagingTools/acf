@@ -1,4 +1,4 @@
-#include "iqtipr/CCaliperBasedPositionSupplierGuiComp.h"
+#include "iqtipr/CValueSupplierGuiComp.h"
 
 
 // Qt includes
@@ -13,14 +13,14 @@ namespace iqtipr
 
 // reimplemented (imod::IModelEditor)
 
-void CCaliperBasedPositionSupplierGuiComp::UpdateModel() const
+void CValueSupplierGuiComp::UpdateModel() const
 {
 }
 
 
-void CCaliperBasedPositionSupplierGuiComp::UpdateEditor()
+void CValueSupplierGuiComp::UpdateEditor()
 {
-	iipr::CCaliperBasedPositionSupplierComp* supplierPtr = GetObjectPtr();
+	iipr::IValueSupplier* supplierPtr = GetObjectPtr();
 	iproc::IIdManager* idManagerPtr = GetIdManager();
 	I_DWORD objectId;
 	if (		(supplierPtr != NULL) &&
@@ -47,19 +47,19 @@ void CCaliperBasedPositionSupplierGuiComp::UpdateEditor()
 
 // protected slots
 
-void CCaliperBasedPositionSupplierGuiComp::on_TestButton_clicked()
+void CValueSupplierGuiComp::on_TestButton_clicked()
 {
 	DoTest();
 }
 
 
-void CCaliperBasedPositionSupplierGuiComp::on_LoadParamsButton_clicked()
+void CValueSupplierGuiComp::on_LoadParamsButton_clicked()
 {
 	LoadParams();
 }
 
 
-void CCaliperBasedPositionSupplierGuiComp::on_SaveParamsButton_clicked()
+void CValueSupplierGuiComp::on_SaveParamsButton_clicked()
 {
 	SaveParams();
 }
@@ -69,7 +69,7 @@ void CCaliperBasedPositionSupplierGuiComp::on_SaveParamsButton_clicked()
 
 // reimplemented (iqtproc::TSupplierGuiCompBase)
 
-QWidget* CCaliperBasedPositionSupplierGuiComp::GetParamsWidget() const
+QWidget* CValueSupplierGuiComp::GetParamsWidget() const
 {
 	I_ASSERT(IsGuiCreated());
 
@@ -79,7 +79,7 @@ QWidget* CCaliperBasedPositionSupplierGuiComp::GetParamsWidget() const
 
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
-void CCaliperBasedPositionSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
+void CValueSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*inactiveOnly*/, Shapes& result)
 {
 	iqt2d::CPosition2dShape* shapePtr = new iqt2d::CPosition2dShape;
 	if (shapePtr != NULL){
@@ -94,7 +94,7 @@ void CCaliperBasedPositionSupplierGuiComp::CreateShapes(int /*sceneId*/, bool /*
 
 // reimplemented (iqt::TGuiObserverWrap)
 
-void CCaliperBasedPositionSupplierGuiComp::OnGuiModelAttached()
+void CValueSupplierGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 

@@ -9,7 +9,7 @@ namespace i2d
 {
 
 
-inline void CVector2d::Init(double angle, double length)
+void CVector2d::Init(double angle, double length)
 {
 	SetX(::cos(angle) * length);
 	SetY(::sin(angle) * length);

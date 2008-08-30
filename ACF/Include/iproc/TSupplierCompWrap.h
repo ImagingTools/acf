@@ -40,13 +40,12 @@ public:
 		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 	I_END_COMPONENT;
 
-	iprm::IParamsSet* GetParamsSet() const;
-
 	// pseudo-reimplemented (iproc::ISupplier)
 	virtual void BeginNextObject(I_DWORD objectId);
 	virtual void EnsureWorkFinished(I_DWORD objectId);
 	virtual int GetWorkStatus(I_DWORD objectId) const;
 	virtual double GetWorkDurationTime(I_DWORD objectId) const;
+	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 	// pseudo-reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -110,7 +109,7 @@ private:
 // public methods
 
 template <class SupplierInterface, class Product>
-iprm::IParamsSet* TSupplierCompWrap<SupplierInterface, Product>::GetParamsSet() const
+iprm::IParamsSet* TSupplierCompWrap<SupplierInterface, Product>::GetModelParametersSet() const
 {
 	return m_paramsSetCompPtr.GetPtr();
 }

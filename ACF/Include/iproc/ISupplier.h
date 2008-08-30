@@ -4,6 +4,8 @@
 
 #include "iser/ISerializable.h"
 
+#include "iprm/IParamsSet.h"
+
 #include "iproc/iproc.h"
 
 
@@ -80,6 +82,11 @@ public:
 		\return	time of duration or negative value if this time is unknown.
 	*/
 	virtual double GetWorkDurationTime(I_DWORD objectId) const = 0;
+
+	/**
+		Get parameter set using by this supplier.
+	*/
+	virtual iprm::IParamsSet* GetModelParametersSet() const = 0;
 };
 
 

@@ -164,10 +164,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CCaliperBasedPositionSupplierGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CCaliperParamsGuiComp.cpp"
 				>
 			</File>
@@ -191,38 +187,16 @@
 				RelativePath="..\CSearchResultShape.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\CCaliperBasedPositionSupplierGuiComp.h"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
-						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
-					/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath="..\CCaliperParamsGuiComp.h"
 				>
@@ -232,7 +206,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -243,7 +217,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -358,6 +332,32 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CValueSupplierGuiComp.h"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing $(InputPath)..."
+						CommandLine="$(QTDIR)\bin\moc.exe  &quot;$(InputPath)&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
+						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\iqtipr.h"
 				>
 			</File>
@@ -374,10 +374,6 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath="..\generated\moc_CCaliperBasedPositionSupplierGuiComp.cpp"
-				>
-			</File>
 			<File
 				RelativePath="..\generated\moc_CCaliperParamsGuiComp.cpp"
 				>
@@ -399,7 +395,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CCaliperBasedPositionSupplierGuiComp.h"
+				RelativePath="..\generated\moc_CValueSupplierGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -422,14 +418,14 @@
 				RelativePath="..\generated\ui_CSearchParamsGuiComp.h"
 				>
 			</File>
+			<File
+				RelativePath="..\generated\ui_CValueSupplierGuiComp.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
-			<File
-				RelativePath="..\CCaliperBasedPositionSupplierGuiComp.ui"
-				>
-			</File>
 			<File
 				RelativePath="..\CCaliperParamsGuiComp.ui"
 				>
@@ -448,6 +444,10 @@
 			</File>
 			<File
 				RelativePath="..\CSearchParamsGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CValueSupplierGuiComp.ui"
 				>
 			</File>
 		</Filter>

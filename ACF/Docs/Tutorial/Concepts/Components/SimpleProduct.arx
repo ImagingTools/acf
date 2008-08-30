@@ -1276,7 +1276,7 @@
         QtIprPck
       </PackageId>
       <ComponentId>
-        CaliperBasedPositionSupplierGui
+        ValueSupplierGui
       </ComponentId>
       <Data>
         <IsEnabled>
