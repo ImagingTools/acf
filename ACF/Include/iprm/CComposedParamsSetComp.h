@@ -19,6 +19,7 @@ class CComposedParamsSetComp: public icomp::CComponentBase, public CParamsSet
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef CParamsSet BaseClass2;
 
 	I_BEGIN_COMPONENT(CComposedParamsSetComp)
 		I_REGISTER_INTERFACE(IParamsSet)

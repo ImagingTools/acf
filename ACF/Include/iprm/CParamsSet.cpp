@@ -19,11 +19,13 @@ CParamsSet::CParamsSet(const IParamsSet* parentSetPtr)
 
 bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr)
 {
-	ParamsMap::const_iterator findIter = m_paramsMap.find(id);
-	if ((findIter != m_paramsMap.end()) && id.empty()){
-		m_paramsMap[id] = parameterPtr;
+	if (!id.empty()){
+		ParamsMap::const_iterator findIter = m_paramsMap.find(id);
+		if (findIter == m_paramsMap.end()){
+			m_paramsMap[id] = parameterPtr;
 
-		return true;
+			return true;
+		}
 	}
 
 	return false;

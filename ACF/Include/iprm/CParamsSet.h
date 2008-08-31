@@ -2,6 +2,8 @@
 #define iprm_CParamsSet_included
 
 
+#include <map>
+
 #include "iprm/IParamsSet.h"
 
 #include "icomp/CComponentBase.h"
