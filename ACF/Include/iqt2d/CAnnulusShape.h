@@ -12,12 +12,12 @@ namespace iqt2d
 {
 
 
-class CAnnulusShape: public TObjectShapeBase<QGraphicsItemGroup>
+class CAnnulusShape: public TObjectShapeBase<QGraphicsPathItem>
 {
 	Q_OBJECT
 
 public:
-	typedef TObjectShapeBase<QGraphicsItemGroup> BaseClass;
+	typedef TObjectShapeBase<QGraphicsPathItem> BaseClass;
 
 	CAnnulusShape(bool isEditable = false);
 
@@ -40,9 +40,6 @@ private:
 	CGripShape m_bottomOuterGrip;
 	CGripShape m_leftOuterGrip;
 	CGripShape m_rightOuterGrip;
-
-	TShapeBase<QGraphicsEllipseItem> m_innerCircle;
-	TShapeBase<QGraphicsEllipseItem> m_outerCircle;
 };
 
 

@@ -25,9 +25,7 @@ CAnnulusShape::CAnnulusShape(bool isEditable)
 	m_leftOuterGrip(this),
 	m_rightOuterGrip(this),
 	m_topOuterGrip(this),
-	m_bottomOuterGrip(this),
-	m_innerCircle(isEditable, this),
-	m_outerCircle(isEditable, this)
+	m_bottomOuterGrip(this)
 {
 	connect(&m_leftInnerGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnInnerGripPositionChanged(const QPointF&)));
 	connect(&m_rightInnerGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnInnerGripPositionChanged(const QPointF&)));
@@ -49,22 +47,11 @@ CAnnulusShape::CAnnulusShape(bool isEditable)
 	m_topInnerGrip.SetLabelPosition(CGripShape::LabelTop);
 	m_bottomInnerGrip.SetLabelPosition(CGripShape::LabelBottom);
 
-	m_innerCircle.SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
-	m_innerCircle.SetPen(EditableColor, QPen(Qt::magenta, 0));
-	m_innerCircle.SetPen(SelectedColor, QPen(Qt::yellow, 0));
+	SetBrush(InactiveColor, QBrush(QColor(10, 126, 242, 32)));
+	SetBrush(EditableColor, QBrush(QColor(10, 126, 242, 32)));
+	SetBrush(SelectedColor, QBrush(QColor(255, 255, 0, 32)));
 
-	m_outerCircle.SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
-	m_outerCircle.SetPen(EditableColor, QPen(Qt::green, 0));
-	m_outerCircle.SetPen(SelectedColor, QPen(Qt::yellow, 0));
-
-	if (isEditable){
-		m_innerCircle.SwitchColorSheme(EditableColor);
-		m_outerCircle.SwitchColorSheme(EditableColor);
-	}
-	else{
-		m_innerCircle.SwitchColorSheme(InactiveColor);
-		m_outerCircle.SwitchColorSheme(InactiveColor);
-	}
+	SwitchColorSheme(InactiveColor);
 }
 
 
@@ -74,8 +61,13 @@ void CAnnulusShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/,
 {
 	i2d::CAnnulus* annulusPtr = dynamic_cast<i2d::CAnnulus*>(GetObjectPtr());
 	if (annulusPtr != NULL){
-		m_innerCircle.setRect(iqt::GetQRectF(annulusPtr->GetInnerCircle().GetBoundingBox()));
-		m_outerCircle.setRect(iqt::GetQRectF(annulusPtr->GetOuterCircle().GetBoundingBox()));
+		QPainterPath path;
+		
+		path.moveTo(iqt::GetQPointF(annulusPtr->GetCenter()));
+		path.addEllipse(iqt::GetQRectF(annulusPtr->GetInnerCircle().GetBoundingBox()));
+		path.addEllipse(iqt::GetQRectF(annulusPtr->GetOuterCircle().GetBoundingBox()));
+
+		setPath(path);
 
 		UpdateGripPositions();
 	}
@@ -91,6 +83,7 @@ void CAnnulusShape::OnInnerGripPositionChanged(const QPointF& point)
 		annulusPtr->SetInnerRadius(iqt::GetCVector2d(point).GetDistance(annulusPtr->GetCenter()));
 	}
 }
+
 
 void CAnnulusShape::OnOuterGripPositionChanged(const QPointF& point)
 {
