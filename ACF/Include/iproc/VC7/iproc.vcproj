@@ -128,6 +128,9 @@
 			Name="Source Files"
 			Filter="cpp">
 			<File
+				RelativePath="..\CCascadedProcessorComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CHierarchicalOperator.cpp">
 			</File>
 			<File
@@ -150,6 +153,9 @@
 			Name="Header Files"
 			Filter="h">
 			<File
+				RelativePath="..\CCascadedProcessorComp.h">
+			</File>
+			<File
 				RelativePath="..\CHierarchicalOperator.h">
 			</File>
 			<File
@@ -166,9 +172,6 @@
 			</File>
 			<File
 				RelativePath="..\CTestIdManagerComp.h">
-			</File>
-			<File
-				RelativePath="..\IElementSelector.h">
 			</File>
 			<File
 				RelativePath="..\IIdManager.h">

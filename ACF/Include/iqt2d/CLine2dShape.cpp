@@ -23,6 +23,11 @@ CLine2dShape::CLine2dShape(bool isEditable)
 {
 	connect(&m_pointGrip1, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition1Changed(const QPointF&)));
 	connect(&m_pointGrip2, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition2Changed(const QPointF&)));
+
+	if (!isEditable){
+		m_pointGrip1.setParentItem(NULL);
+		m_pointGrip2.setParentItem(NULL);
+	}
 }
 
 

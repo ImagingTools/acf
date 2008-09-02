@@ -49,6 +49,8 @@ bool CMultidimensionalFilterParamsComp::SetFilterLengths(const imath::CVarVector
 
 		m_filterLengts = lengths;
 	}
+
+	return true;
 }
 
 

@@ -33,6 +33,12 @@ CCircleShape::CCircleShape(bool isEditable)
 	m_topGrip.SetLabelPosition(CGripShape::LabelTop);
 	m_bottomGrip.SetLabelPosition(CGripShape::LabelBottom);
 
+	if (!isEditable){
+		m_leftGrip.setParentItem(NULL);
+		m_rightGrip.setParentItem(NULL);
+		m_topGrip.setParentItem(NULL);
+		m_bottomGrip.setParentItem(NULL);
+	}
 }
 
 

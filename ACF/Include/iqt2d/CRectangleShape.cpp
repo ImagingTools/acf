@@ -26,6 +26,13 @@ CRectangleShape::CRectangleShape(bool isEditable)
 	
 	m_bottomLeftGrip.SetLabelPosition(CGripShape::LabelBottom);
 	m_bottomRightGrip.SetLabelPosition(CGripShape::LabelBottom);
+
+	if (!isEditable){
+		m_topLeftGrip.setParentItem(NULL);
+		m_topRightGrip.setParentItem(NULL);
+		m_bottomLeftGrip.setParentItem(NULL);
+		m_bottomRightGrip.setParentItem(NULL);
+	}
 }
 
 

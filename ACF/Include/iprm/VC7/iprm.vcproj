@@ -136,6 +136,9 @@
 				RelativePath="..\CParamsManagerComp.cpp">
 			</File>
 			<File
+				RelativePath="..\CParamsSet.cpp">
+			</File>
+			<File
 				RelativePath="..\CSelectableParamsSetComp.cpp">
 			</File>
 		</Filter>
@@ -147,6 +150,9 @@
 			</File>
 			<File
 				RelativePath="..\CParamsManagerComp.h">
+			</File>
+			<File
+				RelativePath="..\CParamsSet.h">
 			</File>
 			<File
 				RelativePath="..\CSelectableParamsSetComp.h">

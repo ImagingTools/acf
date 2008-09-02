@@ -26,8 +26,8 @@ CAnnulusShape::CAnnulusShape(bool isEditable)
 	m_rightOuterGrip(this),
 	m_topOuterGrip(this),
 	m_bottomOuterGrip(this),
-	m_innerCircle(this),
-	m_outerCircle(this)
+	m_innerCircle(isEditable, this),
+	m_outerCircle(isEditable, this)
 {
 	connect(&m_leftInnerGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnInnerGripPositionChanged(const QPointF&)));
 	connect(&m_rightInnerGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnInnerGripPositionChanged(const QPointF&)));

@@ -133,6 +133,9 @@
 				RelativePath="..\CComplexDoubleManip.cpp">
 			</File>
 			<File
+				RelativePath="..\CDoubleManip.cpp">
+			</File>
+			<File
 				RelativePath="..\CFixedPointManip.cpp">
 			</File>
 		</Filter>
@@ -144,6 +147,9 @@
 			</File>
 			<File
 				RelativePath="..\CDouble.h">
+			</File>
+			<File
+				RelativePath="..\CDoubleManip.h">
 			</File>
 			<File
 				RelativePath="..\CFixedPointManip.h">
@@ -168,6 +174,9 @@
 			</File>
 			<File
 				RelativePath="..\TSplineGridFunctionBase.h">
+			</File>
+			<File
+				RelativePath="..\TVarMatrix.h">
 			</File>
 			<File
 				RelativePath="..\TVarVector.h">

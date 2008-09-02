@@ -28,9 +28,6 @@ public:
 
 	TObjectShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
 
-	void SetEditable(bool isEditable);
-	bool IsEditable() const;
-
 protected:
 	// reimplemented (TShapeBase<GraphicsItemClass>) 
 	virtual void OnSelectionChanged(bool isSelected);
@@ -41,7 +38,6 @@ protected:
 
 private:
 	QPointF m_lastPosition;
-	bool m_isEditable;
 };
 
 
@@ -49,8 +45,7 @@ private:
 
 template <class GraphicsItemClass>
 TObjectShapeBase<GraphicsItemClass>::TObjectShapeBase(bool isEditable, QGraphicsItem* parentPtr)
-	:BaseClass(parentPtr),
-	m_isEditable(isEditable)
+	:BaseClass(isEditable, parentPtr)
 {
 	SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
 	SetPen(EditableColor, QPen(Qt::green, 0));
@@ -67,25 +62,6 @@ TObjectShapeBase<GraphicsItemClass>::TObjectShapeBase(bool isEditable, QGraphics
 	}
 }
 
-
-template <class GraphicsItemClass>
-void TObjectShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
-{
-	m_isEditable = isEditable;
-	if (isEditable){
-		setFlags(ItemIsMovable | ItemIsSelectable);
-	}
-	else{
-		setFlags(flags() & ~(ItemIsMovable | ItemIsSelectable));
-	}
-}
-
-
-template <class GraphicsItemClass>
-bool TObjectShapeBase<GraphicsItemClass>::IsEditable() const
-{
-	return m_isEditable;
-}
 
 // protected methods
 	
@@ -124,8 +100,6 @@ QVariant TObjectShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::Graphics
 			objectPtr->MoveTo(iqt::GetCVector2d(offset) + objectPtr->GetCenter());
 
 			m_lastPosition = newPosition;
-
-			OnPositionChanged(newPosition);
 
 			return pos();
 		}

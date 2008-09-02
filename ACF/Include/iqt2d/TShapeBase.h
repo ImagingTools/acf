@@ -49,7 +49,7 @@ public:
 		DefaultColor = InactiveColor
 	};
 
-	TShapeBase(QGraphicsItem* parentPtr = NULL);
+	TShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
 
 	virtual void SetPen(int colorSheme, const QPen& pen);
 	virtual QPen GetPen(int colorSheme) const;
@@ -58,6 +58,9 @@ public:
 	virtual QBrush GetBrush(int colorSheme) const;
 
 	virtual void SwitchColorSheme(int colorSheme);
+
+	void SetEditable(bool isEditable);
+	bool IsEditable() const;
 
 protected:
 	virtual void OnSelectionChanged(bool isSelected);
@@ -73,6 +76,8 @@ private:
 	typedef QPair<QPen, QBrush> ColorShemeInfo;
 	typedef QMap<int, ColorShemeInfo> ColorShemeMap;
 
+	bool m_isEditable;
+
 	ColorShemeMap m_colorShemeMap;
 };
 
@@ -80,8 +85,9 @@ private:
 // public methods
 
 template <class GraphicsItemClass>
-TShapeBase<GraphicsItemClass>::TShapeBase(QGraphicsItem* parentPtr)
-	:BaseClass(parentPtr)
+TShapeBase<GraphicsItemClass>::TShapeBase(bool isEditable, QGraphicsItem* parentPtr)
+	:BaseClass(parentPtr),
+	m_isEditable(isEditable)
 {
 	setAcceptsHoverEvents(true);
 }
@@ -158,6 +164,26 @@ void TShapeBase<GraphicsItemClass>::SwitchColorSheme(int colorSheme)
 }
 
 
+template <class GraphicsItemClass>
+void TShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
+{
+	m_isEditable = isEditable;
+	if (isEditable){
+		setFlags(ItemIsMovable | ItemIsSelectable);
+	}
+	else{
+		setFlags(flags() & ~(ItemIsMovable | ItemIsSelectable));
+	}
+}
+
+
+template <class GraphicsItemClass>
+bool TShapeBase<GraphicsItemClass>::IsEditable() const
+{
+	return m_isEditable;
+}
+
+
 // protected methods
 	
 template <class GraphicsItemClass>
@@ -198,14 +224,18 @@ QVariant TShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::GraphicsItemCh
 template <class GraphicsItemClass>
 void TShapeBase<GraphicsItemClass>::hoverEnterEvent(QGraphicsSceneHoverEvent* /*event*/)
 {
-	OnSelectionChanged(true);
+	if (m_isEditable){
+		OnSelectionChanged(true);
+	}
 }
 
 
 template <class GraphicsItemClass>
 void TShapeBase<GraphicsItemClass>::hoverLeaveEvent(QGraphicsSceneHoverEvent* /*event*/)
 {
-	OnSelectionChanged(false);
+	if (m_isEditable){
+		OnSelectionChanged(false);
+	}
 }
 
 

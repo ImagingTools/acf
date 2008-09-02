@@ -180,13 +180,19 @@
 				RelativePath="..\CMovingAverageProcessorComp.cpp">
 			</File>
 			<File
+				RelativePath="..\CMultidimensionalFilterParamsComp.cpp">
+			</File>
+			<File
 				RelativePath="..\CProcessedAcquisitionComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CProjectionData.cpp">
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParams.cpp">
+				RelativePath="..\CRectDerivativeProcessor.cpp">
+			</File>
+			<File
+				RelativePath="..\CRectDerivativeProcessorComp.cpp">
 			</File>
 			<File
 				RelativePath="..\CSearchFeature.cpp">
@@ -250,6 +256,9 @@
 				RelativePath="..\CMovingAverageProcessorComp.h">
 			</File>
 			<File
+				RelativePath="..\CMultidimensionalFilterParamsComp.h">
+			</File>
+			<File
 				RelativePath="..\CProcessedAcquisitionComp.h">
 			</File>
 			<File
@@ -257,6 +266,12 @@
 			</File>
 			<File
 				RelativePath="..\CRectangularFilterParams.h">
+			</File>
+			<File
+				RelativePath="..\CRectDerivativeProcessor.h">
+			</File>
+			<File
+				RelativePath="..\CRectDerivativeProcessorComp.h">
 			</File>
 			<File
 				RelativePath="..\CSearchFeature.h">
@@ -286,6 +301,9 @@
 				RelativePath="..\IFeaturesContainer.h">
 			</File>
 			<File
+				RelativePath="..\IFeaturesMapper.h">
+			</File>
+			<File
 				RelativePath="..\IFeaturesSupplier.h">
 			</File>
 			<File
@@ -293,6 +311,12 @@
 			</File>
 			<File
 				RelativePath="..\ILineProjectionProcessor.h">
+			</File>
+			<File
+				RelativePath="..\IMultidimensionalFilterConstraints.h">
+			</File>
+			<File
+				RelativePath="..\IMultidimensionalFilterParams.h">
 			</File>
 			<File
 				RelativePath="..\IProjectionConstraints.h">

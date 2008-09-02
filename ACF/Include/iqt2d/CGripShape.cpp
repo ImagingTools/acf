@@ -14,7 +14,7 @@ namespace iqt2d
 // public methods
 
 CGripShape::CGripShape(QGraphicsItem* parentPtr)
-:	BaseClass(parentPtr),
+:	BaseClass(true, parentPtr),
 	m_labelItem(this)
 {
 	SetPen(InactiveColor, QPen(QBrush(QColor(0, 0, 192)), 0));
