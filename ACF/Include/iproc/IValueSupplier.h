@@ -1,22 +1,20 @@
-#ifndef iipr_IValueSupplier_included
-#define iipr_IValueSupplier_included
+#ifndef iproc_IValueSupplier_included
+#define iproc_IValueSupplier_included
 
 
 #include "imath/TVarVector.h"
 
 #include "iproc/ISupplier.h"
 
-#include "iipr/iipr.h"
 
-
-namespace iipr
+namespace iproc
 {
 
 
 /**
 	2D vector or position supplier.
 */
-class IValueSupplier: virtual public iproc::ISupplier
+class IValueSupplier: virtual public ISupplier
 {
 public:
 	/**
@@ -60,9 +58,9 @@ public:
 };
 
 
-} // namespace iipr
+} // namespace iproc
 
 
-#endif // !iipr_IValueSupplier_included
+#endif // !iproc_IValueSupplier_included
 
 

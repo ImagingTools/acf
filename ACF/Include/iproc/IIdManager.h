@@ -35,12 +35,20 @@ public:
 	virtual isys::ITimer* GetTimeStamp(I_DWORD id) const = 0;
 
 	/**
-		Get access to previous processing ID's.
+		Get access to previous processed ID.
 		\param	offset	previous offset, if it is 1 the previous will be returned, if it is 2 the previous of previous etc.
 		\param	result	object stored returned ID.
 		\return	true, if ID could be retrieved, false otherwise.
 	*/
-	virtual bool GetPreviousId(int offset, I_DWORD& result) const = 0;
+	virtual bool GetPreviousIdFromOffset(int offset, I_DWORD& result) const = 0;
+
+	/**
+		Get offset of previous processed ID.
+		\param	id		processing ID.
+		\param	result	offset to specified object - 1 - previous, 2 the previous of previous etc.
+		\return	true, if offset could be retrieved, false otherwise.
+	*/
+	virtual bool GetOffsetFromPreviousId(I_DWORD id, int& result) const = 0;
 };
 
 

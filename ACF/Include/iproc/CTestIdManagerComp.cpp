@@ -42,10 +42,23 @@ isys::ITimer* CTestIdManagerComp::GetTimeStamp(I_DWORD id) const
 }
 
 
-bool CTestIdManagerComp::GetPreviousId(int offset, I_DWORD& result) const
+bool CTestIdManagerComp::GetPreviousIdFromOffset(int offset, I_DWORD& result) const
 {
 	if (m_isInitialized){
 		result = m_currentId - I_DWORD(offset);
+
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+bool CTestIdManagerComp::GetOffsetFromPreviousId(I_DWORD id, int& result) const
+{
+	if (m_isInitialized){
+		result = int(m_currentId - id);
 
 		return true;
 	}

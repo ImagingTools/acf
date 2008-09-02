@@ -19,6 +19,13 @@ class CChangeDelegator: virtual public istd::IChangeable
 public:
 	typedef istd::IChangeable BaseClass;
 
+	enum ChangeFlags{
+		/**
+			Change flag indicate that this change was delegated (is indirect).
+		*/
+		CF_DELEGATED = 0x10,
+	};
+
 	CChangeDelegator();
 	explicit CChangeDelegator(istd::IChangeable* slavePtr);
 

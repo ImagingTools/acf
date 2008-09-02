@@ -441,10 +441,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IValueSupplier.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TConvolutionProcessorComp.h"
 				>
 			</File>

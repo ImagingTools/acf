@@ -8,7 +8,7 @@ namespace iipr
 {
 
 
-// reimplemented (iipr::IValueSupplier)
+// reimplemented (iproc::IValueSupplier)
 
 imath::CVarVector CCaliperBasedPositionSupplierComp::GetValue(I_DWORD objectId, int /*index*/, int /*valueTypeId*/) const
 {

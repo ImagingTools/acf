@@ -11,7 +11,7 @@
 
 #include "icam/IBitmapSupplier.h"
 
-#include "iipr/IValueSupplier.h"
+#include "iproc/IValueSupplier.h"
 #include "iipr/IFeaturesMapper.h"
 
 
@@ -19,10 +19,10 @@ namespace iipr
 {
 
 
-class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<IValueSupplier, imath::CVarVector>
+class CCaliperBasedPositionSupplierComp: public iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector>
 {
 public:
-	typedef iproc::TSupplierCompWrap<IValueSupplier, imath::CVarVector> BaseClass;
+	typedef iproc::TSupplierCompWrap<iproc::IValueSupplier, imath::CVarVector> BaseClass;
 
 	I_BEGIN_COMPONENT(CCaliperBasedPositionSupplierComp);
 		I_REGISTER_INTERFACE(CCaliperBasedPositionSupplierComp);
@@ -31,7 +31,7 @@ public:
 		I_ASSIGN(m_caliperProcessorCompPtr, "CaliperProcessor", "Calculate position from projection", true, "CaliperProcessor");
 	I_END_COMPONENT;
 
-	// reimplemented (iipr::IValueSupplier)
+	// reimplemented (iproc::IValueSupplier)
 	virtual imath::CVarVector GetValue(I_DWORD objectId, int index = -1, int valueTypeId = VTI_AUTO) const;
 
 	// reimplemented (iproc::ISupplier)

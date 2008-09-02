@@ -52,6 +52,9 @@ protected slots:
 protected:
 	const iimg::IBitmap* GetCurrentBitmap() const;
 
+	// reimplemented (iqt::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
 	// reimplemented (iqtproc::TSupplierGuiCompBase)
 	virtual QWidget* GetParamsWidget() const;
 

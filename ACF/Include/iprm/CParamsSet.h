@@ -4,6 +4,8 @@
 
 #include <map>
 
+#include "imod/CMultiModelObserverBase.h"
+
 #include "iprm/IParamsSet.h"
 
 #include "icomp/CComponentBase.h"
@@ -17,12 +19,13 @@ namespace iprm
 	Implementation of interface IParamsSet as component.
 	This implementation allows to register list of objects as editable parameters and list of slave parameter sets.
 */
-class CParamsSet: virtual public IParamsSet
+class CParamsSet: virtual public IParamsSet, private imod::CMultiModelObserverBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef imod::CMultiModelObserverBase BaseClass2;
 
-	CParamsSet(const IParamsSet* parentSetPtr = NULL);
+	CParamsSet(const IParamsSet* slaveSetPtr = NULL);
 
 	virtual bool SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr);
 
@@ -41,9 +44,13 @@ protected:
 	ParamsMap& GetParamsMapRef();
 
 private:
+	// reimplemented (imod::IObserver)
+	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
+
 	ParamsMap m_paramsMap;
 
-	const IParamsSet* m_parentSetPtr;
+	const IParamsSet* m_slaveSetPtr;
 };
 
 

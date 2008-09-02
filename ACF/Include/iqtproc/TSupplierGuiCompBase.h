@@ -232,7 +232,7 @@ bool TSupplierGuiCompBase<UI, Model, WidgetType>::DoTest()
 	I_DWORD objectId;
 	if (		(supplierPtr != NULL) &&
 				m_idManagerCompPtr.IsValid() &&
-				m_idManagerCompPtr->SkipToNextId(objectId)){
+				m_idManagerCompPtr->GetCurrentId(objectId)){
 		supplierPtr->BeginNextObject(objectId);
 		supplierPtr->EnsureWorkFinished(objectId);
 

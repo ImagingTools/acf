@@ -11,7 +11,7 @@
 
 #include "iproc/IIdManager.h"
 
-#include "iipr/IValueSupplier.h"
+#include "iproc/IValueSupplier.h"
 
 #include "iqt/IGuiObject.h"
 #include "iqt/TDesignerGuiObserverCompBase.h"
@@ -29,14 +29,14 @@ namespace iqtipr
 
 class CValueSupplierGuiComp: public iqtproc::TSupplierGuiCompBase<
 			Ui::CValueSupplierGuiComp,
-			iipr::IValueSupplier>
+			iproc::IValueSupplier>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtproc::TSupplierGuiCompBase<
 				Ui::CValueSupplierGuiComp,
-				iipr::IValueSupplier> BaseClass;
+				iproc::IValueSupplier> BaseClass;
 
 	I_BEGIN_COMPONENT(CValueSupplierGuiComp)
 	I_END_COMPONENT

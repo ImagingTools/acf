@@ -2,6 +2,7 @@
 
 
 #include "istd/TChangeNotifier.h"
+#include "istd/CChangeDelegator.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -11,8 +12,8 @@ namespace iprm
 {
 
 
-CParamsSet::CParamsSet(const IParamsSet* parentSetPtr)
-:	m_parentSetPtr(parentSetPtr)
+CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
+:	m_slaveSetPtr(slaveSetPtr)
 {
 }
 
@@ -23,6 +24,11 @@ bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable
 		ParamsMap::const_iterator findIter = m_paramsMap.find(id);
 		if (findIter == m_paramsMap.end()){
 			m_paramsMap[id] = parameterPtr;
+
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr);
+			if (modelPtr != NULL){
+				modelPtr->AttachObserver(this);
+			}
 
 			return true;
 		}
@@ -41,8 +47,8 @@ const iser::ISerializable* CParamsSet::GetParameter(const std::string& id) const
 		return iter->second;
 	}
 
-	if (m_parentSetPtr != NULL){
-		return m_parentSetPtr->GetParameter(id);
+	if (m_slaveSetPtr != NULL){
+		return m_slaveSetPtr->GetParameter(id);
 	}
 
 	return NULL;
@@ -152,6 +158,22 @@ I_DWORD CParamsSet::GetMinimalVersion(int versionId) const
 	}
 
 	return retVal;
+}
+
+
+// private methods
+
+// reimplemented (imod::IObserver)
+
+void CParamsSet::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	BeginChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
+}
+
+
+void CParamsSet::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	EndChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
 }
 
 

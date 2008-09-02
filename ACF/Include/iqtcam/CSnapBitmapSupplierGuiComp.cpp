@@ -62,7 +62,7 @@ void CSnapBitmapSupplierGuiComp::UpdateEditor()
 		const iimg::IBitmap* bitmapPtr = GetCurrentBitmap();
 		bool hasBitmap = (bitmapPtr != NULL);
 
-		SaveImageButton->setVisible(hasBitmap && m_bitmapLoaderCompPtr.IsValid());
+		SaveImageButton->setEnabled(hasBitmap);
 	}
 }
 
@@ -71,7 +71,22 @@ void CSnapBitmapSupplierGuiComp::UpdateEditor()
 
 void CSnapBitmapSupplierGuiComp::on_SnapImageButton_clicked()
 {
-	DoTest();
+	iproc::ISupplier* supplierPtr = GetObjectPtr();
+	iproc::IIdManager* idManagerPtr = GetIdManager();
+	I_DWORD objectId;
+	if (		(supplierPtr != NULL) &&
+				(idManagerPtr != NULL) &&
+				idManagerPtr->SkipToNextId(objectId)){
+		supplierPtr->BeginNextObject(objectId);
+		supplierPtr->EnsureWorkFinished(objectId);
+
+		if (supplierPtr->GetWorkStatus(objectId) >= iproc::ISupplier::WS_ERROR){
+			QMessageBox::information(
+						NULL,
+						QObject::tr("Error"),
+						QObject::tr("Snap Error"));
+		}
+	}
 }
 
 
@@ -116,6 +131,16 @@ const iimg::IBitmap* CSnapBitmapSupplierGuiComp::GetCurrentBitmap() const
 	}
 
 	return NULL;
+}
+
+
+// reimplemented (iqt::CGuiComponentBase)
+
+void CSnapBitmapSupplierGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	SaveImageButton->setVisible(m_bitmapLoaderCompPtr.IsValid());
 }
 
 

@@ -14,7 +14,7 @@ CChangeDelegator::CChangeDelegator()
 
 
 CChangeDelegator::CChangeDelegator(IChangeable* slavePtr)
-	:m_slavePtr(slavePtr)
+:	m_slavePtr(slavePtr)
 {
 }
 
@@ -24,7 +24,7 @@ CChangeDelegator::CChangeDelegator(IChangeable* slavePtr)
 void CChangeDelegator::BeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	if (m_slavePtr != NULL){
-		m_slavePtr->BeginChanges(changeFlags, changeParamsPtr);
+		m_slavePtr->BeginChanges(changeFlags | CF_DELEGATED, changeParamsPtr);
 	}
 }
 
@@ -32,7 +32,7 @@ void CChangeDelegator::BeginChanges(int changeFlags, istd::IPolymorphic* changeP
 void CChangeDelegator::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	if (m_slavePtr != NULL){
-		m_slavePtr->EndChanges(changeFlags, changeParamsPtr);
+		m_slavePtr->EndChanges(changeFlags | CF_DELEGATED, changeParamsPtr);
 	}
 }
 

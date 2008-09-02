@@ -26,7 +26,8 @@ public:
 	virtual bool SkipToNextId(I_DWORD& result);
 	virtual bool GetCurrentId(I_DWORD& result) const;
 	virtual isys::ITimer* GetTimeStamp(I_DWORD id) const;
-	virtual bool GetPreviousId(int offset, I_DWORD& result) const;
+	virtual bool GetPreviousIdFromOffset(int offset, I_DWORD& result) const;
+	virtual bool GetOffsetFromPreviousId(I_DWORD id, int& result) const;
 
 private:
 	I_DWORD m_currentId;

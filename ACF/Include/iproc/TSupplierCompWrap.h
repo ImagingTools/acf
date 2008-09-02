@@ -25,7 +25,10 @@ namespace iproc
 	Wrapper implementation of interface iproc::ISupplier with preparation for component implementation.
 */
 template <class SupplierInterface, class Product>
-class TSupplierCompWrap: public icomp::CComponentBase, virtual public SupplierInterface, protected imod::CSingleModelObserverBase
+class TSupplierCompWrap:
+			public icomp::CComponentBase,
+			private imod::CSingleModelObserverBase,
+			virtual public SupplierInterface
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
