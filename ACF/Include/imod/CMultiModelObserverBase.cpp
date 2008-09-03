@@ -17,7 +17,7 @@ CMultiModelObserverBase::CMultiModelObserverBase()
 
 CMultiModelObserverBase::~CMultiModelObserverBase()
 {
-	EnsureDetached();
+	CMultiModelObserverBase::EnsureDetached();
 }
 
 
@@ -97,15 +97,12 @@ void CMultiModelObserverBase::AfterUpdate(IModel* modelPtr, int updateFlags, ist
 
 void CMultiModelObserverBase::EnsureDetached()
 {
-	for (Models::iterator index = m_models.begin(); index != m_models.end(); index++){
-		imod::IModel* modelPtr = *index;
+	while (!m_models.empty()){
+		imod::IModel* modelPtr = m_models.front();
 		I_ASSERT(modelPtr != NULL);
-		if (modelPtr != NULL){
-			modelPtr->DetachObserver(this);
-		}
-	}
 
-	m_models.clear();
+		modelPtr->DetachObserver(this);
+	}
 }
 
 

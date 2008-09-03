@@ -120,7 +120,7 @@ inline TDelPtr<Type, DelArray>::TDelPtr(const TDelPtr<Type, DelArray>& I_IF_DEBU
 template <class Type, bool DelArray>
 inline TDelPtr<Type, DelArray>::~TDelPtr()
 {
-	Detach();
+	TDelPtr::Detach();
 }
 
 

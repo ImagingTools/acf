@@ -24,7 +24,7 @@ class CMultiModelObserverBase: virtual public IObserver
 {
 public:
 	CMultiModelObserverBase();
-	~CMultiModelObserverBase();
+	virtual ~CMultiModelObserverBase();
 
 	/**
 		Get access to connected model with the index \c index.
