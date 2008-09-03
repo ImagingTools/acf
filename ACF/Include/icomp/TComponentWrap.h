@@ -16,6 +16,8 @@ template <class Component>
 class TComponentWrap: public Component
 {
 public:
+	typedef Component BaseClass;
+
 	TComponentWrap();
 	virtual ~TComponentWrap();
 
@@ -38,7 +40,7 @@ TComponentWrap<Component>::TComponentWrap()
 template <class Component>
 TComponentWrap<Component>::~TComponentWrap()
 {
-	IComponent* parentPtr = const_cast<IComponent*>(GetParentComponent(true));
+	IComponent* parentPtr = const_cast<IComponent*>(BaseClass::GetParentComponent(true));
 	if (parentPtr != NULL){
 		parentPtr->OnSubcomponentDeleted(this);
 	}
