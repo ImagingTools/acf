@@ -127,6 +127,9 @@
 				RelativePath="..\CAnnulus.cpp">
 			</File>
 			<File
+				RelativePath="..\CAnnulusSegment.cpp">
+			</File>
+			<File
 				RelativePath="..\CCircle.cpp">
 			</File>
 			<File
@@ -150,6 +153,9 @@
 			Filter="h">
 			<File
 				RelativePath="..\CAnnulus.h">
+			</File>
+			<File
+				RelativePath="..\CAnnulusSegment.h">
 			</File>
 			<File
 				RelativePath="..\CCircle.h">

@@ -136,6 +136,9 @@
 			<File
 				RelativePath="..\CSnapBitmapSupplierComp.cpp">
 			</File>
+			<File
+				RelativePath="..\CTriggerParamsComp.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -148,6 +151,9 @@
 			</File>
 			<File
 				RelativePath="..\CSnapBitmapSupplierComp.h">
+			</File>
+			<File
+				RelativePath="..\CTriggerParamsComp.h">
 			</File>
 			<File
 				RelativePath="..\IBitmapAcquisition.h">
@@ -166,6 +172,12 @@
 			</File>
 			<File
 				RelativePath="..\IFileBitmapAcquisitionParams.h">
+			</File>
+			<File
+				RelativePath="..\ITriggerConstraints.h">
+			</File>
+			<File
+				RelativePath="..\ITriggerParams.h">
 			</File>
 		</Filter>
 	</Files>
