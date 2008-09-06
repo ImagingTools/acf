@@ -91,13 +91,13 @@ void CAnnulusSegmentParamsGuiComp::UpdateModel() const
 		}
 
 		double beginAngle = imath::GetRadianFromDegree(BeginAngleSB->value());
-		if (beginAngle = objectPtr->GetBeginAngle()){
+		if (beginAngle != objectPtr->GetBeginAngle()){
 			notifier.SetPtr(objectPtr);
 			objectPtr->SetBeginAngle(beginAngle);
 		}
 
 		double endAngle = imath::GetRadianFromDegree(EndAngleSB->value());
-		if (endAngle = objectPtr->GetEndAngle()){
+		if (endAngle != objectPtr->GetEndAngle()){
 			notifier.SetPtr(objectPtr);
 			objectPtr->SetEndAngle(endAngle);
 		}

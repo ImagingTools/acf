@@ -79,10 +79,6 @@ bool CComposedParamsSetGuiComp::OnDetached(imod::IModel* modelPtr)
 	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
 	I_ASSERT(paramsSetPtr != NULL);
 
-	if (!BaseClass::OnDetached(modelPtr)){
-		return false;
-	}
-
 	int elementsCount = istd::Min(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
 	for (int i = 0; i < elementsCount; ++i){
 		const istd::CString& paramId = m_idsAttrPtr[i];
@@ -95,7 +91,7 @@ bool CComposedParamsSetGuiComp::OnDetached(imod::IModel* modelPtr)
 		}
 	}
 
-	return true;
+	return BaseClass::OnDetached(modelPtr);
 }
 
 
