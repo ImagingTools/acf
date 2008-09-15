@@ -25,7 +25,6 @@ public:
 	typedef ibase::TMessageProducerWrap<iproc::CSyncProcessorCompBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CMilSearchProcessorComp)
-		I_ASSIGN(m_searchParamsIdAttrPtr, "ParamsId", "Search params id", false, "ParamsId");
 	I_END_COMPONENT
 
 	// reimplemented (iproc::IProcessor)
@@ -42,8 +41,6 @@ protected:
 
 private:
 	imil::CMilEngine m_engine;
-
-	I_ATTR(istd::CString, m_searchParamsIdAttrPtr);
 };
 
 

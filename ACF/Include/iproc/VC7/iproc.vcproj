@@ -196,6 +196,9 @@
 				RelativePath="..\IProcessingEventHandler.h">
 			</File>
 			<File
+				RelativePath="..\IProcessor.h">
+			</File>
+			<File
 				RelativePath="..\IProgressEventHandler.h">
 			</File>
 			<File
@@ -205,10 +208,13 @@
 				RelativePath="..\ISupplier.h">
 			</File>
 			<File
-				RelativePath="..\TIProcessor.h">
+				RelativePath="..\IValueSupplier.h">
 			</File>
 			<File
 				RelativePath="..\TSupplierCompWrap.h">
+			</File>
+			<File
+				RelativePath="..\TSyncProcessorCompBase.h">
 			</File>
 			<File
 				RelativePath="..\TSyncProcessorWrap.h">

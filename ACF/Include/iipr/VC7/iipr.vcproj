@@ -200,9 +200,6 @@
 			<File
 				RelativePath="..\CSearchParams.cpp">
 			</File>
-			<File
-				RelativePath="..\CSearchResultSet.cpp">
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -265,9 +262,6 @@
 				RelativePath="..\CProjectionData.h">
 			</File>
 			<File
-				RelativePath="..\CRectangularFilterParams.h">
-			</File>
-			<File
 				RelativePath="..\CRectDerivativeProcessor.h">
 			</File>
 			<File
@@ -278,9 +272,6 @@
 			</File>
 			<File
 				RelativePath="..\CSearchParams.h">
-			</File>
-			<File
-				RelativePath="..\CSearchResultSet.h">
 			</File>
 			<File
 				RelativePath="..\IBitmapProcessor.h">
@@ -332,9 +323,6 @@
 			</File>
 			<File
 				RelativePath="..\ISearchProcessor.h">
-			</File>
-			<File
-				RelativePath="..\ISearchResultSet.h">
 			</File>
 			<File
 				RelativePath="..\IValueSupplier.h">

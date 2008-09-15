@@ -7,7 +7,6 @@
 
 #include "iwin/CTimer.h"
 
-#include "iipr/CSearchResultSet.h"
 #include "iipr/CSearchFeature.h"
 
 
@@ -34,12 +33,11 @@ int CMilSearchProcessorComp::DoProcessing(
 	if (		(inputBitmapPtr == NULL) ||
 				(outputConsumerPtr == NULL) ||
 				(paramsPtr == NULL) ||
-				!m_searchParamsIdAttrPtr.IsValid()){
+				!m_paramsIdAttrPtr.IsValid()){
 		return TS_INVALID;
 	}
 
-	const CMilSearchParams* milParamsPtr = dynamic_cast<const CMilSearchParams*>(paramsPtr->GetParameter(m_searchParamsIdAttrPtr->GetValue().ToString()));
-
+	const CMilSearchParams* milParamsPtr = dynamic_cast<const CMilSearchParams*>(paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
 	if (milParamsPtr == NULL){
 		SendErrorMessage(0, "Invalid parameter type");
 
@@ -155,12 +153,6 @@ bool CMilSearchProcessorComp::DoSearch(
 
 	// Release the model result buffer:
 	MmodFree(milResult);
-
-	// set search duration:
-	iipr::CSearchResultSet* resultSetPtr = dynamic_cast<iipr::CSearchResultSet*>(&result);
-	if (resultSetPtr != NULL){
-		resultSetPtr->SetTime(timer.GetElapsed() * 1000);
-	}
 
 	return true;
 }

@@ -363,6 +363,7 @@ bool CMilSearchParams::Serialize(iser::IArchive& archive)
 
 	// serialize model from the image:
 	retVal = m_searchModel.Serialize(archive);
+
 	// if we read, so we must create the model from the model image:
 	if (!archive.IsStoring() && retVal){
 		m_searchModel.Create(m_searchModel.GetImage(), this);

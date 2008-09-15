@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>418</width>
     <height>118</height>
    </rect>
   </property>
@@ -132,7 +132,7 @@ Using Advanced/Fit Error Weight, you can specify how much the fit influences the
           <string>Sets the number of occurrences for which to search.</string>
          </property>
          <property name="text" >
-          <string>Models Number</string>
+          <string>Model Occurrence</string>
          </property>
         </widget>
        </item>

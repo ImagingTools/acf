@@ -122,6 +122,6 @@ private:
 } // namespace imil
 
 
-#endif //!imil_CMilSearchParams_included
+#endif // !imil_CMilSearchParams_included
 
 
