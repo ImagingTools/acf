@@ -48,7 +48,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../.."
+				AdditionalIncludeDirectories="..;../..;&quot;$(IACFDIR)/Impl&quot;;&quot;$(IACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -76,7 +76,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="QtMain.lib QtCore4.lib QtGui4.lib AcfStd.lib AcfQt.lib iqtcam.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(IACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;"
 				SubSystem="2"
 			/>
 			<Tool
@@ -137,7 +137,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../.."
+				AdditionalIncludeDirectories="..;../..;&quot;$(IACFDIR)/Impl&quot;;&quot;$(IACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -166,7 +166,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="QtMaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib AcfQt.lib iqtcam.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(IACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QTDIR)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 			/>
