@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 	splashScreenGui.InitComponent();
 
 	icomp::TSimComponentWrap<CRegistryLoaderComp> registryLoaderComp;
+	registryLoaderComp.SetRef("Log", &log);
 	registryLoaderComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::PackagesLoader> packagesLoaderComp;

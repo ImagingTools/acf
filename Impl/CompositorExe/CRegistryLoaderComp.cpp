@@ -25,9 +25,18 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 			iser::CXmlFileReadArchive archive(GetLayoutPath(filePath));
 
 			if (!registryModelPtr->SerializeComponentsLayout(archive)){
-				QMessageBox::information(NULL, QObject::tr("Registry Loader"), QObject::tr("Layout information cannot be loaded"));
+				SendInfoMessage(
+							MI_CANNOT_READ_LAYOUT,
+							iqt::GetCString(QObject::tr("Layout information cannot be loaded (%1)").
+										arg(iqt::GetQString(filePath))));
 			}
 		}
+	}
+	else{
+		SendErrorMessage(
+					MI_LOAD_ERROR,
+					iqt::GetCString(QObject::tr("Cannot load file %1").
+								arg(iqt::GetQString(filePath))));
 	}
 
 	return retVal;

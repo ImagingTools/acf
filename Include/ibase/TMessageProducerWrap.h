@@ -30,7 +30,7 @@ protected:
 		\param	id			binary id identifying this message type for automatical processing.
 		\param	message		message text will be send.
 	*/
-	bool SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message);
+	bool SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message) const;
 
 	/**
 		Send info message to log.
@@ -38,7 +38,7 @@ protected:
 		\param	id			binary id identifying this message type for automatical processing.
 		\param	message		message text will be send.
 	*/
-	bool SendInfoMessage(int id, const istd::CString& message);
+	bool SendInfoMessage(int id, const istd::CString& message) const;
 
 	/**
 		Send warning message to log.
@@ -46,7 +46,7 @@ protected:
 		\param	id			binary id identifying this message type for automatical processing.
 		\param	message		message text will be send.
 	*/
-	bool SendWarningMessage(int id, const istd::CString& message);
+	bool SendWarningMessage(int id, const istd::CString& message) const;
 
 	/**
 		Send error message to log.
@@ -54,7 +54,7 @@ protected:
 		\param	id			binary id identifying this message type for automatical processing.
 		\param	message		message text will be send.
 	*/
-	bool SendErrorMessage(int id, const istd::CString& message);
+	bool SendErrorMessage(int id, const istd::CString& message) const;
 
 	/**
 		Send critical message to log.
@@ -62,7 +62,7 @@ protected:
 		\param	id			binary id identifying this message type for automatical processing.
 		\param	message		message text will be send.
 	*/
-	bool SendCriticalMessage(int id, const istd::CString& message);
+	bool SendCriticalMessage(int id, const istd::CString& message) const;
 
 private:
 	I_REF(ibase::IMessageConsumer, m_logCompPtr);
@@ -72,7 +72,7 @@ private:
 // protected methods
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message)
+bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message) const
 {
 	if (m_logCompPtr.IsValid()){
 		const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(GetComponentContext());
@@ -91,28 +91,28 @@ bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category,
 
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendInfoMessage(int id, const istd::CString& message)
+bool TMessageProducerWrap<Base>::SendInfoMessage(int id, const istd::CString& message) const
 {
 	return SendMessage(ibase::IMessage::Info, id, message);
 }
 
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendWarningMessage(int id, const istd::CString& message)
+bool TMessageProducerWrap<Base>::SendWarningMessage(int id, const istd::CString& message) const
 {
 	return SendMessage(ibase::IMessage::Warning, id, message);
 }
 
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendErrorMessage(int id, const istd::CString& message)
+bool TMessageProducerWrap<Base>::SendErrorMessage(int id, const istd::CString& message) const
 {
 	return SendMessage(ibase::IMessage::Error, id, message);
 }
 
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendCriticalMessage(int id, const istd::CString& message)
+bool TMessageProducerWrap<Base>::SendCriticalMessage(int id, const istd::CString& message) const
 {
 	return SendMessage(ibase::IMessage::Critical, id, message);
 }

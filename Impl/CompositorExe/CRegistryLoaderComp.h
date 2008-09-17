@@ -2,16 +2,24 @@
 #define CRegistryLoaderComp_included
 
 
+#include "ibase/TMessageProducerWrap.h"
+
 #include "BasePck/BasePck.h"
 
 
 /**
 	Special registry loader supporting of loading layout data.
 */
-class CRegistryLoaderComp: public BasePck::XmlFileSerializer
+class CRegistryLoaderComp: public ibase::TMessageProducerWrap<BasePck::XmlFileSerializer>
 {
 public:
-	typedef BasePck::XmlFileSerializer BaseClass;
+	typedef ibase::TMessageProducerWrap<BasePck::XmlFileSerializer> BaseClass;
+
+	enum MessageId
+	{
+		MI_LOAD_ERROR = 680,
+		MI_CANNOT_READ_LAYOUT
+	};
 
 	// reimplemented (iser::IFileLoader)
 	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const;
