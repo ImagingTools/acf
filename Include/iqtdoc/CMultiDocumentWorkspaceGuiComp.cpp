@@ -294,6 +294,16 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPt
 }
 
 
+int CMultiDocumentWorkspaceGuiComp::GetMaxRecentFilesCount() const
+{
+	if (m_maxRecentFilesCountAttrPtr.IsValid()){
+		return *m_maxRecentFilesCountAttrPtr;
+	}
+
+	return BaseClass2::GetMaxRecentFilesCount();
+}
+
+
 // reimplemented (imod::CMultiModelObserverBase)
 
 void CMultiDocumentWorkspaceGuiComp::OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)

@@ -35,6 +35,7 @@ public:
 		I_REGISTER_INTERFACE(idoc::IDocumentManager)
 		I_REGISTER_INTERFACE(iqtdoc::IWorkspaceController)
 		I_ASSIGN(m_scrollingEnabledAttrPtr, "ScrollingWorkspace", "Enable scrolling of workspace area", true, false)
+		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list", true, 10)
 		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate")
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo")
 	I_END_COMPONENT
@@ -83,6 +84,7 @@ protected:
 	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const;
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
+	virtual int GetMaxRecentFilesCount() const;
 
 	// reimplemented (imod::CMultiModelObserverBase)
 	void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -104,6 +106,7 @@ private:
 	void UpdateLastDirectory(const QString& filePath) const;
 
 private:
+	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
 	I_ATTR(bool, m_scrollingEnabledAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
