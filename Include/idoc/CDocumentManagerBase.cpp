@@ -487,7 +487,7 @@ bool CDocumentManagerBase::SerializeRecentFileList(iser::IArchive& archive)
 				retVal = retVal && archive.EndTag(filePathTag);
 
 				if (retVal){
-					recentFileList.push_front(filePath);
+					recentFileList.push_back(filePath);
 				}
 			}
 
@@ -549,4 +549,5 @@ void CDocumentManagerBase::UpdateRecentFileList(const istd::CString& requestedFi
 
 
 } // namespace idoc
+
 
