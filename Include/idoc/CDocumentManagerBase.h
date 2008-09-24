@@ -13,8 +13,9 @@
 
 #include "iser/IArchive.h"
 
-#include "imod/TMultiModelObserverBase.h"
 #include "imod/IModel.h"
+#include "imod/TMultiModelObserverBase.h"
+#include "imod/CSingleModelObserverBase.h"
 
 #include "idoc/IDocumentManager.h"
 
@@ -61,21 +62,33 @@ protected:
 	typedef std::list<istd::CString> FileList;
 	typedef std::map<std::string, FileList> RecentFilesMap;
 
-	struct DocumentInfo
+	struct DocumentInfo: public imod::CSingleModelObserverBase
 	{
-		DocumentInfo(){}
-		DocumentInfo(const istd::CString& filePath, istd::IChangeable* documentPtr, imod::IUndoManager* undoManagerPtr)
+		DocumentInfo(
+					CDocumentManagerBase* parentPtr,
+					const std::string& documentTypeId,
+					istd::IChangeable* documentPtr,
+					imod::IUndoManager* undoManagerPtr)
+		:	isDirty(false)
 		{
-			this->filePath = filePath;
+			this->parentPtr = parentPtr;
+			this->documentTypeId = documentTypeId;
 			this->documentPtr.SetPtr(documentPtr);
 			this->undoManagerPtr.SetPtr(undoManagerPtr);
 		}
 
+		CDocumentManagerBase* parentPtr;
 		istd::CString filePath;
 		std::string documentTypeId;
 		DocumentPtr documentPtr;
-		Views views;
 		UndoManagerPtr undoManagerPtr;
+		Views views;
+
+		bool isDirty;
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	};
 
 	void CloseAllDocuments();

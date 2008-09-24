@@ -1,6 +1,7 @@
 #include "idoc/CDocumentManagerBase.h"
 
 
+// STL includes
 #include <algorithm>
 
 #include "istd/TChangeNotifier.h"
@@ -55,10 +56,6 @@ istd::IChangeable* CDocumentManagerBase::OpenDocument(const istd::CString& fileP
 		istd::TDelPtr<DocumentInfo> infoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
 		if (infoPtr.IsValid()){
 			I_ASSERT(infoPtr->documentPtr.IsValid());
-
-			istd::CChangeNotifier documentPtr(
-						dynamic_cast<istd::IChangeable*>(infoPtr->documentPtr.GetPtr()),
-						imod::IUndoManager::CF_NO_UNDO | istd::IChangeable::CF_MODEL);
 
 			infoPtr->filePath = filePath;
 			infoPtr->documentTypeId = documentTypeId;
@@ -235,10 +232,11 @@ bool CDocumentManagerBase::FileSave(bool requestFileName)
 
 	const iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(infoPtr->documentTypeId);
 	if ((loaderPtr != NULL) && loaderPtr->SaveToFile(*infoPtr->documentPtr, filePath) == iser::IFileLoader::StateOk){
-		if (infoPtr->filePath != filePath){
+		if ((infoPtr->filePath != filePath) || infoPtr->isDirty){
 			istd::CChangeNotifier notifierPtr(this);
 
 			infoPtr->filePath = filePath;
+			infoPtr->isDirty = false;
 		}
 
 		if (requestFileName){
@@ -371,16 +369,20 @@ CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::GetDocumentInfoFromPat
 CDocumentManagerBase::DocumentInfo* CDocumentManagerBase::CreateDocument(const std::string& documentTypeId, bool createView, const std::string& viewTypeId) const
 {
 	if (m_documentTemplatePtr != NULL){
-		istd::TDelPtr<DocumentInfo> infoPtr(new DocumentInfo);
-
 		istd::IChangeable* documentPtr = m_documentTemplatePtr->CreateDocument(documentTypeId);
 
-		infoPtr->documentPtr.SetPtr(documentPtr);
-		infoPtr->undoManagerPtr.SetPtr(m_documentTemplatePtr->CreateUndoManager(documentTypeId, documentPtr));
-
-		infoPtr->documentTypeId = documentTypeId;
+		istd::TDelPtr<DocumentInfo> infoPtr(new DocumentInfo(
+					const_cast<CDocumentManagerBase*>(this),
+					documentTypeId,
+					documentPtr,
+					m_documentTemplatePtr->CreateUndoManager(documentTypeId, documentPtr)));
 
 		if (infoPtr->documentPtr.IsValid()){
+			imod::IModel* documentModelPtr = dynamic_cast<imod::IModel*>(documentPtr);
+			if (documentModelPtr != NULL){
+				documentModelPtr->AttachObserver(infoPtr.GetPtr());
+			}
+
 			if (createView){
 				istd::IPolymorphic* viewPtr = m_documentTemplatePtr->CreateView(
 							documentTypeId,
@@ -407,6 +409,8 @@ bool CDocumentManagerBase::RegisterDocument(DocumentInfo* infoPtr)
 	I_ASSERT(infoPtr != NULL);
 
 	istd::CChangeNotifier changePtr(this, DocumentCountChanged | DocumentCreated);
+
+	infoPtr->isDirty = false;
 
 	m_documentInfos.PushBack(infoPtr);
 
@@ -544,6 +548,20 @@ void CDocumentManagerBase::UpdateRecentFileList(const istd::CString& requestedFi
 				fileList.erase(recentFileIter);
 			}
 		}
+	}
+}
+
+
+// protected methods of embedded class DocumentInfo
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CDocumentManagerBase::DocumentInfo::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if (!isDirty){
+		istd::CChangeNotifier notifier(parentPtr);
+
+		isDirty = true;
 	}
 }
 

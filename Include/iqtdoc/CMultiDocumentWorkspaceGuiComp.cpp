@@ -134,6 +134,10 @@ void CMultiDocumentWorkspaceGuiComp::UpdateAllTitles()
 			nameFrequencies[titleName] = 0;
 		}
 
+		if (info.isDirty){
+			titleName += " *";
+		}
+
 		for (		Views::const_iterator viewIter = info.views.begin();
 					viewIter != info.views.end();
 					++viewIter){
