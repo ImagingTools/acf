@@ -32,12 +32,13 @@ int main(int argc, char *argv[])
 	fileDialogSerializerComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::Log> log;
-	log.SetIntAttr("MaxMessageCount", 20);
+	log.SetIntAttr("MaxMessageCount", 10000);
 	log.SetRef("Serializer", &fileDialogSerializerComp);
 	log.InitComponent();
 
 	icomp::TSimComponentWrap<CLogClientGuiComp> logClientGui;
 	logClientGui.SetRef("Log", &log);
+	logClientGui.SetDoubleAttr("AddIntervall", 0.01);
 	logClientGui.InitComponent();
 
 	application.SetRef("MainGui", &logClientGui);

@@ -14,8 +14,9 @@
 #include "imod/TModelWrap.h"
 
 #include "iqtgui/TDesignerGuiCompBase.h"
-
 #include "iqtgui/Generated/ui_CLogGuiComp.h"
+
+#include "ibase/CMessage.h"
 
 
 namespace iqtgui
@@ -49,6 +50,24 @@ public:
 public:
 	CLogGuiComp();
 
+	class CMessageInfo: public ibase::CMessage
+	{
+	public:
+		CMessageInfo(int messageId, MessageCategory category, int id, const istd::CString& text, const istd::CString& source, int flags = 0)
+			:ibase::CMessage(category, id, text, source, flags),
+			m_messageId(messageId)
+		{
+		}
+
+		int m_messageId;
+	};
+
+	class CMessageTreeItem: public QTreeWidgetItem
+	{
+	public:
+		istd::TDelPtr<CMessageInfo> m_messagePtr;
+	};
+
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -58,29 +77,26 @@ protected:
 	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
 protected slots:
-	void OnAddMessage(ibase::IMessage* messagePtr);
-	void OnRemoveMessage(ibase::IMessage* messagePtr);
+	void OnAddMessage(CMessageInfo* messagePtr);
+	void OnRemoveMessage(int messageId);
+	void OnReset();
+
 	void on_ClearButton_clicked();
 	void on_ExportButton_clicked();
 	void on_CategorySlider_valueChanged(int category);
 
 private:
-	QColor GetMessageColor(const ibase::IMessage& message) const;
-	bool NeedToBeHidden(const ibase::IMessage& message) const;
+	QColor GetMessageColor(const CMessageTreeItem& messageItem) const;
+	bool NeedToBeHidden(const CMessageTreeItem& messageItem) const;
 
 signals:
-	void EmitAddMessage(ibase::IMessage* messagePtr);
-	void EmitRemoveMessage(ibase::IMessage* messagePtr);
+	void EmitAddMessage(CMessageInfo* messagePtr);
+	void EmitRemoveMessage(int messageId);
+	void EmitReset();
 
 private:
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 	I_ATTR(int, m_maxMessageCountAttrPtr);
-
-	class CMessageItem: public QTreeWidgetItem
-	{
-	public:
-		ibase::IMessage* messagePtr;
-	};
 
 	typedef QMap<int, QString> CategoryNameMap;
 

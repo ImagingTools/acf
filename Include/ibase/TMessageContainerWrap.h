@@ -126,6 +126,8 @@ bool TMessageContainerWrap<Base>::Serialize(iser::IArchive& archive)
 template <class Base>
 void TMessageContainerWrap<Base>::SetMaxMessageCount(int maxMessageCount)
 {
+	I_ASSERT(m_maxMessageCount != 0);
+
 	m_maxMessageCount = maxMessageCount;
 }
 
@@ -185,11 +187,11 @@ void TMessageContainerWrap<Base>::AddMessage(ibase::IMessage* messagePtr)
 	I_ASSERT(messagePtr != NULL);
 
 	if (m_maxMessageCount >= 0){
-		if (m_messages.GetCount() + 1 > m_maxMessageCount){
+		if (m_messages.GetCount() + 1 > m_maxMessageCount && m_maxMessageCount > 0){
 			ibase::IMessage* removeMessagePtr = m_messages.GetAt(0);
 			istd::TChangeNotifier<ibase::IMessageContainer> changePtr(this, MessageRemoved, removeMessagePtr);
 
-			m_messages.PopAt(0);
+			m_messages.RemoveAt(0);
 		}
 	}
 

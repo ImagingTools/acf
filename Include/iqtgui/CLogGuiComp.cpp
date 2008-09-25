@@ -18,8 +18,9 @@ CLogGuiComp::CLogGuiComp()
 	m_categoryNameMap[ibase::IMessage::MC_ERROR] = tr("Error");
 	m_categoryNameMap[ibase::IMessage::MC_CRITICAL] = tr("Critical");
 
-	connect(this, SIGNAL(EmitAddMessage(ibase::IMessage*)), this, SLOT(OnAddMessage(ibase::IMessage*)), Qt::QueuedConnection);
-	connect(this, SIGNAL(EmitRemoveMessage(ibase::IMessage*)), this, SLOT(OnRemoveMessage(ibase::IMessage*)), Qt::QueuedConnection);
+	connect(this, SIGNAL(EmitAddMessage(CMessageInfo*)), this, SLOT(OnAddMessage(CMessageInfo*)), Qt::QueuedConnection);
+	connect(this, SIGNAL(EmitRemoveMessage(int)), this, SLOT(OnRemoveMessage(int)), Qt::QueuedConnection);
+	connect(this, SIGNAL(EmitReset()), this, SLOT(OnReset()), Qt::QueuedConnection);
 }
 
 
@@ -30,7 +31,6 @@ CLogGuiComp::CLogGuiComp()
 void CLogGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
-
 
 	LogView->header()->setStretchLastSection(true);
 
@@ -47,13 +47,13 @@ void CLogGuiComp::OnGuiCreated()
 void CLogGuiComp::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	if (changeFlags & ibase::IMessageContainer::Reset){
-		LogView->clear();
+		emit EmitReset();
 	}
 
 	if (changeFlags & ibase::IMessageContainer::MessageRemoved){
 		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
 		if (messagePtr != NULL){
-			emit EmitRemoveMessage(messagePtr);
+			emit EmitRemoveMessage(int(messagePtr));
 		}
 	}
 
@@ -66,7 +66,15 @@ void CLogGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParams
 	if (changeFlags & ibase::IMessageContainer::MessageAdded){
 		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
 		if (messagePtr != NULL){
-			emit EmitAddMessage(messagePtr);
+			CMessageInfo* messageItemPtr = new CMessageInfo(
+						int(messagePtr),
+						messagePtr->GetCategory(),
+						messagePtr->GetId(),
+						messagePtr->GetText(),
+						messagePtr->GetSource(),
+						messagePtr->GetFlags());
+
+			emit EmitAddMessage(messageItemPtr);
 		}
 	}
 
@@ -76,51 +84,67 @@ void CLogGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParams
 
 // protected slots
 
-void CLogGuiComp::OnAddMessage(ibase::IMessage* messagePtr)
+void CLogGuiComp::OnAddMessage(CMessageInfo* messagePtr)
 {	
 	I_ASSERT(messagePtr != NULL);
-
-	CMessageItem* messageItemPtr = new CMessageItem();
-	messageItemPtr->messagePtr = messagePtr;
 
 	QDateTime dateTime;
 	dateTime = QDateTime::fromTime_t(messagePtr->GetTimeStamp().ToCTime());
 
+	CMessageTreeItem* treeItemPtr = new CMessageTreeItem;
+	treeItemPtr->m_messagePtr.SetPtr(messagePtr);
+
 	QString date = dateTime.toString();
-	messageItemPtr->setText(TimeColumn, date);
-	messageItemPtr->setText(MessageColumn, iqt::GetQString(messagePtr->GetText()));
-	messageItemPtr->setText(SourceColumn, iqt::GetQString(messagePtr->GetSource()));
+	treeItemPtr->setText(TimeColumn, date);
+	treeItemPtr->setText(MessageColumn, iqt::GetQString(messagePtr->GetText()));
+	treeItemPtr->setText(SourceColumn, iqt::GetQString(messagePtr->GetSource()));
 
-	messageItemPtr->setToolTip(TimeColumn, iqt::GetQString(messagePtr->GetText()));
-	messageItemPtr->setToolTip(MessageColumn, iqt::GetQString(messagePtr->GetText()));
-	messageItemPtr->setToolTip(SourceColumn, iqt::GetQString(messagePtr->GetText()));
+	treeItemPtr->setToolTip(TimeColumn, iqt::GetQString(messagePtr->GetText()));
+	treeItemPtr->setToolTip(MessageColumn, iqt::GetQString(messagePtr->GetText()));
+	treeItemPtr->setToolTip(SourceColumn, iqt::GetQString(messagePtr->GetText()));
 
-	QColor messageColor = GetMessageColor(*messagePtr);
+	QColor messageColor = GetMessageColor(*treeItemPtr);
 
-	messageItemPtr->setBackgroundColor(TimeColumn, messageColor);
-	messageItemPtr->setBackgroundColor(SourceColumn, messageColor);
-	messageItemPtr->setBackgroundColor(MessageColumn, messageColor);
+	treeItemPtr->setBackgroundColor(TimeColumn, messageColor);
+	treeItemPtr->setBackgroundColor(SourceColumn, messageColor);
+	treeItemPtr->setBackgroundColor(MessageColumn, messageColor);
 
-	LogView->addTopLevelItem(messageItemPtr);
-	if (NeedToBeHidden(*messagePtr)){
-		messageItemPtr->setHidden(true);
+	// add message item to the list
+	LogView->addTopLevelItem(treeItemPtr);
+
+	if (NeedToBeHidden(*treeItemPtr)){
+		treeItemPtr->setHidden(true);
 	}
 }
 
 
-void CLogGuiComp::OnRemoveMessage(ibase::IMessage* messagePtr)
+void CLogGuiComp::OnRemoveMessage(int messageId)
 {
-	I_ASSERT(messagePtr != NULL);
-
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
-		CMessageItem* messageItemPtr = dynamic_cast<CMessageItem*>(LogView->topLevelItem(itemIndex));
-		I_ASSERT(messageItemPtr != NULL);
+		CMessageTreeItem* treeMessageItemPtr = dynamic_cast<CMessageTreeItem*>(LogView->topLevelItem(itemIndex));
+		I_ASSERT(treeMessageItemPtr != NULL);
+		I_ASSERT(treeMessageItemPtr->m_messagePtr.IsValid());
 
-		if (messageItemPtr->messagePtr == messagePtr){
+		if (treeMessageItemPtr->m_messagePtr.GetPtr()->m_messageId == messageId){
 			LogView->takeTopLevelItem(itemIndex);
+
+			delete treeMessageItemPtr;
 
 			return;
 		}
+	}
+}
+
+
+void CLogGuiComp::OnReset()
+{
+	while(LogView->topLevelItemCount()){
+		CMessageTreeItem* treeMessageItemPtr = dynamic_cast<CMessageTreeItem*>(LogView->topLevelItem(0));
+		I_ASSERT(treeMessageItemPtr != NULL);
+
+		LogView->takeTopLevelItem(0);
+
+		delete treeMessageItemPtr;
 	}
 }
 
@@ -142,10 +166,10 @@ void CLogGuiComp::on_ExportButton_clicked()
 void CLogGuiComp::on_CategorySlider_valueChanged(int category)
 {
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
-		CMessageItem* messageItemPtr = dynamic_cast<CMessageItem*>(LogView->topLevelItem(itemIndex));
+		CMessageTreeItem* messageItemPtr = dynamic_cast<CMessageTreeItem*>(LogView->topLevelItem(itemIndex));
 		I_ASSERT(messageItemPtr != NULL);
 
-		if (NeedToBeHidden(*messageItemPtr->messagePtr)){
+		if (NeedToBeHidden(*messageItemPtr)){
 			messageItemPtr->setHidden(true);
 		}
 		else{
@@ -159,11 +183,13 @@ void CLogGuiComp::on_CategorySlider_valueChanged(int category)
 
 // private methods
 
-QColor CLogGuiComp::GetMessageColor(const ibase::IMessage& message) const
+QColor CLogGuiComp::GetMessageColor(const CMessageTreeItem& message) const
 {
 	QColor messageColor(0,0,0,0);
 
-	int category = message.GetCategory();
+	I_ASSERT(message.m_messagePtr.IsValid());
+
+	int category = message.m_messagePtr->GetCategory();
 
 	switch(category){
 		case ibase::IMessage::MC_WARNING:
@@ -183,11 +209,13 @@ QColor CLogGuiComp::GetMessageColor(const ibase::IMessage& message) const
 }
 
 
-bool CLogGuiComp::NeedToBeHidden(const ibase::IMessage& message) const
+bool CLogGuiComp::NeedToBeHidden(const CMessageTreeItem& message) const
 {
+	I_ASSERT(message.m_messagePtr.IsValid());
+
 	int currentCategory = CategorySlider->value();
 
-	int itemCategory = message.GetCategory();
+	int itemCategory = message.m_messagePtr->GetCategory();
 	if (itemCategory < currentCategory){
 		return true;
 	}

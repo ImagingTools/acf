@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QTimer>
+#include <QThread>
 
 // ACF includes
 #include "ibase/IMessageContainer.h"
@@ -11,7 +11,7 @@
 #include "iqtgui/TGuiComponentBase.h"
 
 
-class CLogClientGuiComp: public iqtgui::TGuiComponentBase<QWidget>
+class CLogClientGuiComp: public iqtgui::TGuiComponentBase<QWidget>, public QThread
 {
 	Q_OBJECT
 
@@ -29,8 +29,8 @@ public:
 		MI_TEST_MESSAGE = 0x32320a0
 	};
 
-protected slots:
-	 void OnTimer();
+protected:
+	 virtual void run();
 
 protected:
 	// reimplemented (iqt::CGuiComponentBase)
@@ -40,9 +40,6 @@ private:
 	I_REF(ibase::IMessageContainer, m_logCompPtr)
 	I_REF(iqtgui::IGuiObject, m_logGuiCompPtr)
 	I_ATTR(double, m_intervallAttrPtr)
-
-private:
-	QTimer m_timer;
 };
 
 
