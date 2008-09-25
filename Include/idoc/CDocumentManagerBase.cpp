@@ -258,6 +258,12 @@ bool CDocumentManagerBase::FileClose()
 
 		Views::iterator findIter = std::find(info.views.begin(), info.views.end(), m_activeViewPtr);
 		if (findIter != info.views.end()){
+			if (info.isDirty){
+				if (!QueryDocumentClose(info)){
+					return false;
+				}
+			}
+
 			info.views.erase(findIter);	// remove active view
 
 			m_activeViewPtr = NULL;

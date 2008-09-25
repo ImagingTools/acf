@@ -147,6 +147,12 @@ protected:
 	*/
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr) = 0;
 
+	/**
+		Query user if this document can be closed.
+		\return	true, if document can be closed.
+	*/
+	virtual bool QueryDocumentClose(const DocumentInfo& info) = 0;
+
 private:
 	/**
 		Do updated of recent file list with the new file \c requestedFilePath.

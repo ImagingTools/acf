@@ -4,6 +4,8 @@
 #include <QEvent>
 #include <QFileDialog>
 #include <QMap>
+#include <QMessageBox>
+#include <QFileInfo>
 
 
 #include "istd/TChangeNotifier.h"
@@ -295,6 +297,24 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPt
 			SetActiveView(viewPtr);
 		}
 	}
+}
+
+
+bool CMultiDocumentWorkspaceGuiComp::QueryDocumentClose(const DocumentInfo& info)
+{
+	QFileInfo fileInfo(iqt::GetQString(info.filePath));
+	int response = QMessageBox::information(
+				NULL,
+				QObject::tr("Close document"),
+				QObject::tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()),
+				QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+				QMessageBox::Yes);
+
+	if (response == QMessageBox::Yes){
+		return FileSave();
+	}
+
+	return response == QMessageBox::No;
 }
 
 

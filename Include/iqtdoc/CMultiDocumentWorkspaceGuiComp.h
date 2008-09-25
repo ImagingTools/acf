@@ -81,10 +81,11 @@ protected:
 	virtual bool eventFilter(QObject* obj, QEvent* event);
 
 	// reimplemented (idoc::CDocumentManagerBase)
+	virtual int GetMaxRecentFilesCount() const;
 	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const;
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
-	virtual int GetMaxRecentFilesCount() const;
+	virtual bool QueryDocumentClose(const DocumentInfo& info);
 
 	// reimplemented (imod::CMultiModelObserverBase)
 	void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
