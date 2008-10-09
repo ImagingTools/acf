@@ -17,6 +17,8 @@ namespace isys
 class CSimpleDateTime: public isys::CDateTimeBase
 {
 public:
+	CSimpleDateTime& operator=(const IDateTime& dateTime);
+
 	// reimplemented (isys::IDateTime)
 	virtual int GetComponent(int component) const;
 	virtual void SetComponent(int component, int value);

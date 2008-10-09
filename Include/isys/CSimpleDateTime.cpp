@@ -8,6 +8,16 @@ namespace isys
 {
 
 
+CSimpleDateTime& CSimpleDateTime::operator=(const IDateTime& dateTime)
+{
+	for (int i = 0; i <= TC_LAST; ++i){
+		m_components[i] = dateTime.GetComponent(i);
+	}
+
+	return *this;
+}
+
+
 // reimplemented (isys::IDateTime)
 
 int CSimpleDateTime::GetComponent(int component) const
