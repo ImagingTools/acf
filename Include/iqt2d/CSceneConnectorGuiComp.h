@@ -28,7 +28,7 @@ public:
 	I_END_COMPONENT
 
 protected:
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 

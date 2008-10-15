@@ -135,7 +135,7 @@ void CAnnulusParamsGuiComp::CreateShapes(int /*sceneId*/, bool inactiveOnly, Sha
 
 // protected methods
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CAnnulusParamsGuiComp::OnGuiCreated()
 {

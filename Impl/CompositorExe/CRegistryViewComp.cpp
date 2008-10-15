@@ -151,7 +151,7 @@ void CRegistryViewComp::UpdateModel() const
 }
 
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CRegistryViewComp::OnGuiCreated()
 {

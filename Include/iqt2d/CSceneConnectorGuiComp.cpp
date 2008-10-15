@@ -7,7 +7,7 @@ namespace iqt2d
 
 // protected methods
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CSceneConnectorGuiComp::OnGuiCreated()
 {

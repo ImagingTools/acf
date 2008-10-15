@@ -33,7 +33,7 @@ protected:
 	 virtual void run();
 
 protected:
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
 private:

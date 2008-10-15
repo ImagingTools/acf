@@ -48,7 +48,7 @@ protected slots:
 	void OnToUppercase();
 
 protected:
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnRetranslate();
 

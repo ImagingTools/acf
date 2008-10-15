@@ -85,7 +85,7 @@ protected:
 
 	iqtgui::CHierarchicalCommand& GetCommandsRootRef();
 
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
 	// reimplemented (QObject)

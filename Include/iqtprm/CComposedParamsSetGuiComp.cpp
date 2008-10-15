@@ -95,7 +95,7 @@ bool CComposedParamsSetGuiComp::OnDetached(imod::IModel* modelPtr)
 }
 
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CComposedParamsSetGuiComp::OnGuiCreated()
 {

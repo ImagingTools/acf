@@ -32,7 +32,7 @@ public:
 	virtual void UpdateEditor();
 
 protected:
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 };

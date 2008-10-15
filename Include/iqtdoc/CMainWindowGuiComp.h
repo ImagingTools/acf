@@ -111,7 +111,7 @@ protected:
 	void OnNewDocument(const std::string& documentTypeId);
 	void OnOpenFile(const QString& fileName);
 
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnRetranslate();

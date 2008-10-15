@@ -63,7 +63,7 @@ public:
 	virtual void UpdateEditor();
 	virtual void UpdateModel() const;
 
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnRetranslate();
 

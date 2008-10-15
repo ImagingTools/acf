@@ -313,7 +313,7 @@ void CSceneProviderComp::ScaleView(double scaleFactor)
 }
 
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CSceneProviderComp::OnGuiCreated()
 {

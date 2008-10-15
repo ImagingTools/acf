@@ -35,7 +35,7 @@ void CLogClientGuiComp::run()
 
 // protected methods
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CLogClientGuiComp::OnGuiCreated()
 {

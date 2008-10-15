@@ -32,7 +32,7 @@ void CImageViewComp::UpdateEditor()
 
 // protected methods
 
-// reimplemented (iqt::CGuiComponentBase)
+// reimplemented (iqtgui::CGuiComponentBase)
 
 void CImageViewComp::OnGuiCreated()
 {

@@ -43,7 +43,7 @@ public:
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
 
 protected:
-	// reimplemented (iqt::CGuiComponentBase)
+	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
