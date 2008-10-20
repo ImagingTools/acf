@@ -21,7 +21,12 @@ CXmlStringWriteArchive::CXmlStringWriteArchive(
 
 std::string CXmlStringWriteArchive::GetString() const
 {
-	return m_stream.str();
+	if (const_cast<CXmlStringWriteArchive*>(this)->Flush()){
+		return m_stream.str();
+	}
+	else{
+		return "";
+	}
 }
 
 

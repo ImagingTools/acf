@@ -44,7 +44,7 @@ TXmlStreamWriteArchiveBase<StreamClass>::~TXmlStreamWriteArchiveBase()
 
 template <class StreamClass>
 TXmlStreamWriteArchiveBase<StreamClass>::TXmlStreamWriteArchiveBase(const IVersionInfo* versionInfoPtr, const iser::CArchiveTag& rootTag)
-	:BaseClass(versionInfoPtr, rootTag)
+:	BaseClass(versionInfoPtr, rootTag)
 {
 }
 
