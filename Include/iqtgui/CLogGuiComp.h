@@ -23,6 +23,9 @@ namespace iqtgui
 {
 
 
+/**
+	Message container displaying messages as log list.
+*/
 class CLogGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CLogGuiComp>, 
 			public ibase::CMessageContainer
@@ -40,35 +43,31 @@ public:
 		I_ASSIGN(m_maxMessageCountAttrPtr, "MaxMessageCount", "Maximal number of messages", false, 1000)
 	I_END_COMPONENT
 
-	enum
+	CLogGuiComp();
+
+	enum Column
 	{
 		TimeColumn = 0,
 		SourceColumn = 1,
 		MessageColumn = 2
 	};
 
-public:
-	CLogGuiComp();
-
-	class CMessageInfo: public ibase::CMessage
+	enum Role
 	{
-	public:
-		CMessageInfo(int messageId, MessageCategory category, int id, const istd::CString& text, const istd::CString& source, int flags = 0)
-			:ibase::CMessage(category, id, text, source, flags),
-			m_messageId(messageId)
-		{
-		}
-
-		int m_messageId;
+		MessageId = Qt::UserRole,
+		MessageCategory
 	};
 
-	class CMessageTreeItem: public QTreeWidgetItem
-	{
-	public:
-		istd::TDelPtr<CMessageInfo> m_messagePtr;
-	};
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 protected:
+	/**
+		Create GUI item corresponding to specified message.
+	*/
+	QTreeWidgetItem* CreateGuiItem(const ibase::IMessage& message);
+	void UpdateItemState(QTreeWidgetItem& item) const;
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	
@@ -77,21 +76,17 @@ protected:
 	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
 protected slots:
-	void OnAddMessage(CMessageInfo* messagePtr);
-	void OnRemoveMessage(int messageId);
+	void OnAddMessage(QTreeWidgetItem* itemPtr);
+	void OnRemoveMessage(int id);
 	void OnReset();
 
 	void on_ClearButton_clicked();
 	void on_ExportButton_clicked();
 	void on_CategorySlider_valueChanged(int category);
 
-private:
-	QColor GetMessageColor(const CMessageTreeItem& messageItem) const;
-	bool NeedToBeHidden(const CMessageTreeItem& messageItem) const;
-
 signals:
-	void EmitAddMessage(CMessageInfo* messagePtr);
-	void EmitRemoveMessage(int messageId);
+	void EmitAddMessage(QTreeWidgetItem* itemPtr);
+	void EmitRemoveMessage(int);
 	void EmitReset();
 
 private:

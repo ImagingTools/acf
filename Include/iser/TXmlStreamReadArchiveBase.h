@@ -89,7 +89,7 @@ bool TXmlStreamReadArchiveBase<StreamClass>::ReadToDelimeter(
 
 		readString += m_lastReadChar;
 
-		if (!isspace(m_lastReadChar) && !iscntrl(m_lastReadChar)){
+		if (!isspace((unsigned char)m_lastReadChar) && !iscntrl((unsigned char)m_lastReadChar)){
 			cutToPos = int(readString.size());
 
 			if (cutFromPos < 0){
