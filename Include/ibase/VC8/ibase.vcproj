@@ -181,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CInstantiatorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMessage.cpp"
 				>
 			</File>
@@ -203,6 +207,10 @@
 			>
 			<File
 				RelativePath="..\CApplicationInfoComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CInstantiatorComp.h"
 				>
 			</File>
 			<File

@@ -14,6 +14,7 @@
 #include "idoc/CCompositeDocumentTemplateComp.h"
 
 #include "ibase/TFileSerializerComp.h"
+#include "ibase/CInstantiatorComp.h"
 #include "ibase/CApplicationInfoComp.h"
 #include "ibase/CRegistryCodeSaverComp.h"
 #include "ibase/CRectangleComp.h"
@@ -39,6 +40,7 @@ namespace BasePck
 
 
 typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> XmlFileSerializer;
+typedef ibase::CInstantiatorComp Instantiator;
 typedef isvn::TApplicationInfoWrap<ibase::CApplicationInfoComp> ApplicationInfo;
 typedef ibase::CRegistryCodeSaverComp RegistryCodeSaver;
 

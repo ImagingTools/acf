@@ -87,6 +87,8 @@ int CApplicationComp::Execute(int argc, char** argv)
 				mainWidgetPtr->show();
 			}
 
+			m_freeComponentCompPtr.IsValid();
+
 			// start application loop:
 			retVal = m_applicationPtr->exec();
 		}

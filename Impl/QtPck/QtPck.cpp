@@ -48,10 +48,11 @@ I_EXPORT_COMPONENT(CircleParamsGui, "Circle parameter GUI displaying a cicle usi
 I_EXPORT_COMPONENT(AnnulusParamsGui, "Annulus parameter GUI displaying a annulus using scene", "Annulus Radius Radii Parameters Observer Display GUI Qt");
 I_EXPORT_COMPONENT(AnnulusSegmentParamsGui, "Annulus segment parameter GUI displaying a annulus using scene", "Annulus Segment Angle Radius Radii Parameters Observer Display GUI Qt");
 
-I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
 I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using simple model observer GUI", "Model Observer Parameter Set Editor GUI Qt");
 I_EXPORT_COMPONENT(FileNameParamGui, "File acquisition parameter editor", "Model Observer File Acquisition Snap Camera Parameter Editor GUI Qt");
 I_EXPORT_COMPONENT(ParamsManagerGui, "Allow to manage parameter set", "Model Observer Parameters Set Manager GUI Qt");
+I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
+I_EXPORT_COMPONENT(FreeWidgetGui, "Display selected GUI object in separated window", "Free Main Window Separated GUI Qt");
 I_EXPORT_COMPONENT(SelectionParamGui, "Single selection parameter from list of options", "Model Observer Parameters Set Selection Options List GUI Qt");
 I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Tab Widget GUI");
 I_EXPORT_COMPONENT(SettingsSerializer, "Load and save objects using QSettings as storage", "Qt QSettings Registry Serializer Loader Saver");

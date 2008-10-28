@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFreeWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CGuiComponentBase.cpp"
 				>
 			</File>
@@ -249,6 +253,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileDialogSerializerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFreeWidgetGuiComp.h"
 				>
 			</File>
 			<File

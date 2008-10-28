@@ -27,6 +27,7 @@ public:
 		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", true, "MainGui")
 		I_ASSIGN(m_splashScreenCompPtr, "SplashScreen", "Splash screen shown before application is launched", false, "SplashScreen")
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info used to set main window title", false, "ApplicationInfo")
+		I_ASSIGN(m_freeComponentCompPtr, "FreeComponent", "Free component initialization", false, "FreeComponent")
 		I_ASSIGN(m_splashTimeAttrPtr, "SplashTime", "Minimal time splash screen will be shown", true, 2)
 		I_ASSIGN(m_showMaximizedAttrPtr, "ShowMaximized", "Start the main window in maximized state", false, false)
 	I_END_COMPONENT
@@ -41,6 +42,7 @@ private:
 	I_REF(IGuiObject, m_mainGuiCompPtr);
 	I_REF(IGuiObject, m_splashScreenCompPtr);
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
+	I_REF(void*, m_freeComponentCompPtr);
 	I_ATTR(double, m_splashTimeAttrPtr);
 	I_ATTR(bool, m_showMaximizedAttrPtr);
 

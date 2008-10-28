@@ -12,6 +12,7 @@ I_EXPORT_DEFAULT_SERVICES;
 I_EXPORT_PACKAGE("Base", "Base system-undependent general package", "Undependend Standard Base");
 
 I_EXPORT_COMPONENT(XmlFileSerializer, "Simple file serializer using XML format", "File Serializer Archive XML Format");
+I_EXPORT_COMPONENT(Instantiator, "Access specified components forcing to create its instances", "Instance Init Create Free Components");
 I_EXPORT_COMPONENT(ApplicationInfo, "Simple application info based of SVN version", "Application Info SVN SubVersion Version");
 I_EXPORT_COMPONENT(SelectableParamsSet, "Composed set of parameters", "Model Parameters Set Selection Options List");
 I_EXPORT_COMPONENT(ParamsManager, "Manager of parameters set", "Model Parameters Set Manager");

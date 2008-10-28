@@ -53,11 +53,26 @@ public:
 	// static methods
 	static const icomp::IComponentStaticInfo& InitStaticInfo(CComponentBase* componentPtr);
 
+protected:
+	/**
+		Check if component is active.
+		Component is active between \c OnComponentCreated and \c OnComponentDestroyed.
+	*/
+	bool IsComponentActive() const;
+
 private:
 	const IComponentContext* m_contextPtr;
 	const IComponent* m_parentPtr;
 	bool m_isParentOwner;
 };
+
+
+// inline protected methods
+
+inline bool CComponentBase::IsComponentActive() const
+{
+	return (m_contextPtr != NULL);
+}
 
 
 }//namespace icomp
