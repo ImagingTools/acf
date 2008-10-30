@@ -18,10 +18,12 @@ void CFreeWidgetGuiComp::OnComponentCreated()
 		m_mainWindowPtr.SetPtr(new QMainWindow);
 
 		if (m_mainWindowPtr.IsValid()){
-			new QVBoxLayout(m_mainWindowPtr.GetPtr());
+			QVBoxLayout* layoutPtr = new QVBoxLayout(m_mainWindowPtr.GetPtr());
+			m_mainWindowPtr->setLayout(layoutPtr);
 			m_mainWindowPtr->setWindowTitle(iqt::GetQString(*m_titleAttrPtr));
 
 			if (m_slaveGuiCompPtr->CreateGui(m_mainWindowPtr.GetPtr())){
+				m_mainWindowPtr->setCentralWidget(m_slaveGuiCompPtr->GetWidget());
 				m_mainWindowPtr->show();
 			}
 		}
