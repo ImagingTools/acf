@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VisualStudioToolFile
-	Name="Qt Designer"
+	Name="Qt"
 	Version="8,00"
 	>
 	<Rules>
@@ -12,6 +12,30 @@
 			AdditionalDependencies="$(QTDIR)\bin\uic.exe"
 			FileExtensions="*.ui"
 			ExecutionDescription="Uic&apos;ing $(InputFileName)..."
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+		<CustomBuildRule
+			Name="QT Resources"
+			DisplayName="QT Resources"
+			CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; $(InputPath)  -no-compress &quot;$(InputFileName)&quot; -o &quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"
+			Outputs="&quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"
+			AdditionalDependencies="$(QTDIR)\bin\rcc.exe"
+			FileExtensions="*.qrc"
+			ExecutionDescription="Rcc&apos;ing $(InputFileName)..."
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+		<CustomBuildRule
+			Name="QT Moc Metafile"
+			DisplayName="QT Moc"
+			CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot; &quot;$(InputDir)/$(InputName).h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+			Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
+			AdditionalDependencies="$(QTDIR)\bin\moc.exe;&quot;$(InputDir)/$(InputName).h&quot;"
+			FileExtensions="*.moc"
+			ExecutionDescription="Moc&apos;ing $(InputFileName)..."
 			>
 			<Properties>
 			</Properties>
