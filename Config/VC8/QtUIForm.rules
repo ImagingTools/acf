@@ -19,7 +19,7 @@
 		<CustomBuildRule
 			Name="QT Resources"
 			DisplayName="QT Resources"
-			CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; $(InputPath)  -no-compress &quot;$(InputFileName)&quot; -o &quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"
+			CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; $(InputPath) -no-compress -o &quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"
 			Outputs="&quot;$(InputDir)\Generated\qrc_$(InputName).cpp&quot;"
 			AdditionalDependencies="$(QTDIR)\bin\rcc.exe"
 			FileExtensions="*.qrc"
