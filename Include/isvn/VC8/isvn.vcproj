@@ -185,7 +185,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generate SVN version file"
-						CommandLine="SubWCRev $(ACFDIR) $(InputPath) $(InputDir)\Generated\AcfVersion.h&#x0D;&#x0A;"
+						CommandLine="SubWCRev ../../.. $(InputPath) $(InputDir)\Generated\AcfVersion.h&#x0D;&#x0A;"
 						AdditionalDependencies="$(InputDir)\Generated\AcfVersion.h"
 						Outputs="$(InputDir)\Generated\AcfVersion.h"
 					/>
@@ -196,7 +196,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generate SVN version file"
-						CommandLine="SubWCRev $(ACFDIR) $(InputPath) $(InputDir)\Generated\AcfVersion.h&#x0D;&#x0A;"
+						CommandLine="SubWCRev ../../.. $(InputPath) $(InputDir)\Generated\AcfVersion.h&#x0D;&#x0A;"
 						AdditionalDependencies="$(InputDir)\Generated\AcfVersion.h"
 						Outputs="$(InputDir)\Generated\AcfVersion.h"
 					/>
