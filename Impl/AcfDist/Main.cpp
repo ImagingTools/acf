@@ -1,6 +1,10 @@
+// STL includes
+#include <iostream>
+
+// Qt includes
 #include <QApplication>
 
-#include "CDistributeDialog.h"
+#include "CCopyProcessor.h"
 
 
 int main(int argc, char *argv[])
@@ -8,16 +12,21 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	QApplication::setStyle("cleanlooks");
 
-	Q_INIT_RESOURCE(AcfDist);
+	if (argc == 2){
+		CCopyProcessor processor;
 
-	QCoreApplication::setOrganizationName("Imagingtools");
-	QCoreApplication::setOrganizationDomain("imagingtools.de");
-	QCoreApplication::setApplicationName("ACFDist");
+		if (processor.ProcessConfigFile(argv[1])){
+			std::cout << "All files copied correctly";
+		}
+		else{
+			std::cout << "There are some errors";
 
-	QFileInfo applicationInfo(app.applicationFilePath());
-	QString fileName = applicationInfo.fileName();
+			return 1;
+		}
+	}
+	else{
+		std::cout << "Usage: AcfDist.exe configurationFile";
+	}
 
-	CDistributeDialog mainDlg(fileName);
-
-	mainDlg.exec();
+	return 0;
 }

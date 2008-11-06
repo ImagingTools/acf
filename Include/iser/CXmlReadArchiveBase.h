@@ -21,6 +21,7 @@ public:
 	virtual bool EndTag(const CArchiveTag& tag);
 	virtual bool Process(std::string& value);
 	virtual bool Process(istd::CString& value);
+	using BaseClass::Process;
 
 protected:
 	CXmlReadArchiveBase(const iser::CArchiveTag& rootTag);
