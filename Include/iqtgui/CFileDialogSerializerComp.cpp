@@ -94,6 +94,20 @@ bool CFileDialogSerializerComp::GetFileExtensions(istd::CStringList& result, boo
 }
 
 
+// reimplemented (iser::IFileLoaderInfo)
+
+istd::CString CFileDialogSerializerComp::GetLastLoadFileName() const
+{
+	return iqt::GetCString(m_lastOpenPath);
+}
+
+
+istd::CString CFileDialogSerializerComp::GetLastSaveFileName() const
+{
+	return iqt::GetCString(m_lastSavePath);
+}
+
+
 // protected methods
 
 QString CFileDialogSerializerComp::GetOpenFileName(const istd::CString& filePath) const
