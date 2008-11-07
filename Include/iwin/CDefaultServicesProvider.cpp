@@ -1,9 +1,9 @@
-#include "iqt/CDefaultServicesProvider.h"
+#include "iwin/CDefaultServicesProvider.h"
 
 #include "istd/CStaticServicesProvider.h"
 
 
-namespace iqt
+namespace iwin
 {
 
 
@@ -15,11 +15,11 @@ void CDefaultServicesProvider::RegisterServices()
 }
 
 
-iqt::CTimer CDefaultServicesProvider::s_timer;
-iqt::CApplicationEnvironment CDefaultServicesProvider::s_applicationEnvironment;
-iqt::CCriticalSection CDefaultServicesProvider::s_criticalSection;
+iwin::CTimer CDefaultServicesProvider::s_timer;
+iwin::CApplicationEnvironment CDefaultServicesProvider::s_applicationEnvironment;
+iwin::CCriticalSection CDefaultServicesProvider::s_criticalSection;
 
 
-} // namespace iqt
+} // namespace iwin
 
 

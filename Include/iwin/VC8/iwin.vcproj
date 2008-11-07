@@ -187,6 +187,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDefaultServicesProvider.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDllFunctionsProvider.cpp"
 				>
 			</File>
@@ -205,6 +209,10 @@
 			</File>
 			<File
 				RelativePath="..\CCriticalSection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDefaultServicesProvider.h"
 				>
 			</File>
 			<File

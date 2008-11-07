@@ -1,5 +1,5 @@
-#ifndef iwin_CCriticalSection_included
-#define iwin_CCriticalSection_included
+#ifndef iqt_CCriticalSection_included
+#define iqt_CCriticalSection_included
 
 
 #include "iqt/iqt.h"
@@ -32,6 +32,6 @@ private:
 } // namespace iqt
 
 
-#endif // !iwin_CCriticalSection_included
+#endif // !iqt_CCriticalSection_included
 
 

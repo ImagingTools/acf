@@ -29,7 +29,8 @@ namespace inat
 
 #ifdef _WIN32
 	using namespace iwin;
-//#elif
+#elif defined QT_CORE_LIB
+	using namespace iqt;
 #endif
 
 
