@@ -5,7 +5,7 @@
 #include "iser/IFileLoader.h"
 #include "iser/IFileLoaderInfo.h"
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -17,12 +17,12 @@ namespace iqtgui
 
 
 class CFileDialogSerializerComp: 
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>, 
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>, 
 			virtual public iser::IFileLoader,
 			virtual public iser::IFileLoaderInfo
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	enum MessageId
 	{

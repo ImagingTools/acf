@@ -1,23 +1,23 @@
-#ifndef ibase_TMessageProducerWrap_included
-#define ibase_TMessageProducerWrap_included
+#ifndef ibase_TLoggerCompWrap_included
+#define ibase_TLoggerCompWrap_included
 
 
 #include "icomp/CComponentBase.h"
 #include "icomp/CComponentContext.h"
 
-#include "ibase/TLoggableWrap.h"
+#include "ibase/TLoggerWrap.h"
 
 
 namespace ibase
 {		
 
 template <class Base>
-class TMessageProducerWrap: public ibase::TLoggableWrap<Base>
+class TLoggerCompWrap: public ibase::TLoggerWrap<Base>
 {
 public:
-	typedef ibase::TLoggableWrap<Base> BaseClass;
+	typedef ibase::TLoggerWrap<Base> BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(TMessageProducerWrap);
+	I_BEGIN_BASE_COMPONENT(TLoggerCompWrap);
 		I_ASSIGN(m_logCompPtr, "Log", "Consumer log messages", false, "Log");
 	I_END_COMPONENT;
 	
@@ -25,7 +25,7 @@ public:
 	virtual void OnComponentCreated();
 
 protected:
-	// reimplemented (TLoggableWrap)
+	// reimplemented (TLoggerWrap)
 	virtual bool SendLogMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
 
 private:
@@ -38,7 +38,7 @@ private:
 // reimplemented (icomp::IComponent)
 
 template <class Base>
-void TMessageProducerWrap<Base>::OnComponentCreated()
+void TLoggerCompWrap<Base>::OnComponentCreated()
 {
 	if (m_logCompPtr.IsValid()){
 		SetLogPtr(m_logCompPtr.GetPtr());
@@ -51,7 +51,7 @@ void TMessageProducerWrap<Base>::OnComponentCreated()
 // protected methods
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendLogMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
+bool TLoggerCompWrap<Base>::SendLogMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
 {
 	istd::CString messageSource = "<unknown>";
 
@@ -69,6 +69,6 @@ bool TMessageProducerWrap<Base>::SendLogMessage(IMessage::MessageCategory catego
 } // namespace ibase
 
 
-#endif // !ibase_TMessageProducerWrap_included
+#endif // !ibase_TLoggerCompWrap_included
 
 

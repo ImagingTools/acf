@@ -6,7 +6,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 
 namespace ibase
@@ -15,11 +15,11 @@ namespace ibase
 
 template <class ReadArchive, class WriteArchive>
 class TFileSerializerComp:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			public iser::IFileLoader
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(TFileSerializerComp)
 		I_REGISTER_INTERFACE(iser::IFileLoader)

@@ -8,17 +8,17 @@
 #include "icomp/CPackageStaticInfo.h"
 #include "icomp/CComponentBase.h"
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 
 class CRegistryModelComp:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			public icomp::CRegistry,
 			virtual public icomp::IRegistryGeometryProvider,
 			virtual public icomp::IRegistryNotesProvider
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 	typedef icomp::CRegistry BaseClass2;
 
 	I_BEGIN_COMPONENT(CRegistryModelComp)

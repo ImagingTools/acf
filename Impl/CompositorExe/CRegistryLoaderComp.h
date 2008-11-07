@@ -2,7 +2,7 @@
 #define CRegistryLoaderComp_included
 
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "BasePck/BasePck.h"
 
@@ -10,10 +10,10 @@
 /**
 	Special registry loader supporting of loading layout data.
 */
-class CRegistryLoaderComp: public ibase::TMessageProducerWrap<BasePck::XmlFileSerializer>
+class CRegistryLoaderComp: public ibase::TLoggerCompWrap<BasePck::XmlFileSerializer>
 {
 public:
-	typedef ibase::TMessageProducerWrap<BasePck::XmlFileSerializer> BaseClass;
+	typedef ibase::TLoggerCompWrap<BasePck::XmlFileSerializer> BaseClass;
 
 	enum MessageId
 	{

@@ -1,5 +1,5 @@
-#ifndef ibase_TLoggableWrap_included
-#define ibase_TLoggableWrap_included
+#ifndef ibase_TLoggerWrap_included
+#define ibase_TLoggerWrap_included
 
 
 #include "ibase/IMessageConsumer.h"
@@ -11,10 +11,10 @@ namespace ibase
 
 
 template <class Base>
-class TLoggableWrap: public Base
+class TLoggerWrap: public Base
 {
 public:
-	TLoggableWrap();
+	TLoggerWrap();
 
 	/**
 		Install log.
@@ -80,21 +80,21 @@ private:
 // public methods
 
 template <class Base>
-TLoggableWrap<Base>::TLoggableWrap()
+TLoggerWrap<Base>::TLoggerWrap()
 	:m_logPtr(NULL)
 {
 }
 
 
 template <class Base>
-inline void TLoggableWrap<Base>::SetLogPtr(ibase::IMessageConsumer* logPtr)
+inline void TLoggerWrap<Base>::SetLogPtr(ibase::IMessageConsumer* logPtr)
 {
 	m_logPtr = logPtr;
 }
 
 
 template <class Base>
-inline ibase::IMessageConsumer* TLoggableWrap<Base>::GetLogPtr() const
+inline ibase::IMessageConsumer* TLoggerWrap<Base>::GetLogPtr() const
 {
 	return m_logPtr;
 }
@@ -103,7 +103,7 @@ inline ibase::IMessageConsumer* TLoggableWrap<Base>::GetLogPtr() const
 // protected methods
 
 template <class Base>
-bool TLoggableWrap<Base>::SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const
+bool TLoggerWrap<Base>::SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const
 {
 	if (m_logPtr != NULL){
 		m_logPtr->AddMessage(new ibase::CMessage(category, id, message, messageSource));
@@ -116,28 +116,28 @@ bool TLoggableWrap<Base>::SendLogMessage(ibase::IMessage::MessageCategory catego
 
 
 template <class Base>
-bool TLoggableWrap<Base>::SendInfoMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
+bool TLoggerWrap<Base>::SendInfoMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
 	return SendLogMessage(ibase::IMessage::MC_INFO, id, message, messageSource);
 }
 
 
 template <class Base>
-bool TLoggableWrap<Base>::SendWarningMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
+bool TLoggerWrap<Base>::SendWarningMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
 	return SendLogMessage(ibase::IMessage::MC_WARNING, id, message, messageSource);
 }
 
 
 template <class Base>
-bool TLoggableWrap<Base>::SendErrorMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
+bool TLoggerWrap<Base>::SendErrorMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
 	return SendLogMessage(ibase::IMessage::MC_ERROR, id, message, messageSource);
 }
 
 
 template <class Base>
-bool TLoggableWrap<Base>::SendCriticalMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
+bool TLoggerWrap<Base>::SendCriticalMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
 	return SendLogMessage(ibase::IMessage::MC_CRITICAL, id, message, messageSource);
 }
@@ -146,6 +146,6 @@ bool TLoggableWrap<Base>::SendCriticalMessage(int id, const istd::CString& messa
 } // namespace ibase
 
 
-#endif // !ibase_TLoggableWrap_included
+#endif // !ibase_TLoggerWrap_included
 
 

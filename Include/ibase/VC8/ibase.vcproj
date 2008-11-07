@@ -286,7 +286,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TLoggableWrap.h"
+				RelativePath="..\TLoggerWrap.h"
 				>
 			</File>
 			<File
@@ -294,7 +294,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TMessageProducerWrap.h"
+				RelativePath="..\TLoggerCompWrap.h"
 				>
 			</File>
 			<File

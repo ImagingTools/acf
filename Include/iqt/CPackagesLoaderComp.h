@@ -20,7 +20,7 @@
 #include "icomp/CComponentBase.h"
 #include "icomp/CCompositePackageStaticInfo.h"
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iqt/CDllFunctionsProvider.h"
 
@@ -33,12 +33,12 @@ namespace iqt
 	Loads component packages from dynamic link libraries.
 */
 class CPackagesLoaderComp:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			public icomp::CPackageStaticInfo,
 			virtual public icomp::IRegistriesManager
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	enum MessageId
 	{

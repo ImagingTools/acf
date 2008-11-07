@@ -10,7 +10,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iqt/iqt.h"
 
@@ -23,11 +23,11 @@ namespace iqt
 	Bitmap loader component implementing interfaces \c iser::IFileLoader and \c icam::IBitmapAcquisition.
 */
 class CBitmapLoaderComp:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			virtual public iser::IFileLoader
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	enum MessageId
 	{

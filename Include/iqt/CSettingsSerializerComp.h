@@ -7,7 +7,7 @@
 #include "icomp/CComponentBase.h"
 
 #include "ibase/IApplicationInfo.h"
-#include "ibase/TMessageProducerWrap.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iqt/iqt.h"
 
@@ -20,11 +20,11 @@ namespace iqt
 	Store and load parameter as global settings.
 */
 class CSettingsSerializerComp:
-			public ibase::TMessageProducerWrap<icomp::CComponentBase>,
+			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			virtual public iser::IFileLoader
 {
 public:
-	typedef ibase::TMessageProducerWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CSettingsSerializerComp)
 		I_REGISTER_INTERFACE(iser::IFileLoader)
