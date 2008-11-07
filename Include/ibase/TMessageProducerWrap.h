@@ -5,116 +5,64 @@
 #include "icomp/CComponentBase.h"
 #include "icomp/CComponentContext.h"
 
-#include "ibase/IMessageConsumer.h"
-#include "ibase/CMessage.h"
+#include "ibase/TLoggableWrap.h"
 
 
 namespace ibase
 {		
 
 template <class Base>
-class TMessageProducerWrap: public Base
+class TMessageProducerWrap: public ibase::TLoggableWrap<Base>
 {
 public:
-	typedef Base BaseClass;
+	typedef ibase::TLoggableWrap<Base> BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TMessageProducerWrap);
 		I_ASSIGN(m_logCompPtr, "Log", "Consumer log messages", false, "Log");
 	I_END_COMPONENT;
+	
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 protected:
-	/**
-		Send any message to log.
-		\sa ibase::IMessage for message meaning documentation.
-		\param	category	message category defined in ibase::IMessage.
-		\param	id			binary id identifying this message type for automatical processing.
-		\param	message		message text will be send.
-	*/
-	bool SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message) const;
-
-	/**
-		Send info message to log.
-		\sa ibase::IMessage for message meaning documentation.
-		\param	id			binary id identifying this message type for automatical processing.
-		\param	message		message text will be send.
-	*/
-	bool SendInfoMessage(int id, const istd::CString& message) const;
-
-	/**
-		Send warning message to log.
-		\sa ibase::IMessage for message meaning documentation.
-		\param	id			binary id identifying this message type for automatical processing.
-		\param	message		message text will be send.
-	*/
-	bool SendWarningMessage(int id, const istd::CString& message) const;
-
-	/**
-		Send error message to log.
-		\sa ibase::IMessage for message meaning documentation.
-		\param	id			binary id identifying this message type for automatical processing.
-		\param	message		message text will be send.
-	*/
-	bool SendErrorMessage(int id, const istd::CString& message) const;
-
-	/**
-		Send critical message to log.
-		\sa ibase::IMessage for message meaning documentation.
-		\param	id			binary id identifying this message type for automatical processing.
-		\param	message		message text will be send.
-	*/
-	bool SendCriticalMessage(int id, const istd::CString& message) const;
+	// reimplemented (TLoggableWrap)
+	virtual bool SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
 
 private:
 	I_REF(ibase::IMessageConsumer, m_logCompPtr);
 };
 
 
+// public methods
+
+// reimplemented (icomp::IComponent)
+
+template <class Base>
+void TMessageProducerWrap<Base>::OnComponentCreated()
+{
+	if (m_logCompPtr.IsValid()){
+		SetLogPtr(m_logCompPtr.GetPtr());
+	}
+
+	BaseClass::OnComponentCreated();
+}
+
+
 // protected methods
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message) const
+bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
 {
+	istd::CString messageSource = "<unknown>";
+
 	if (m_logCompPtr.IsValid()){
 		const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(GetComponentContext());
 		if (contextPtr != NULL){
-			m_logCompPtr->AddMessage(new ibase::CMessage(category, id, message, contextPtr->GetContextId()));
+			messageSource = contextPtr->GetContextId();
 		}
-		else{
-			m_logCompPtr->AddMessage(new ibase::CMessage(category, id, message, "<unknown>"));
-		}
-
-		return true;
 	}
 
-	return false;
-}
-
-
-template <class Base>
-bool TMessageProducerWrap<Base>::SendInfoMessage(int id, const istd::CString& message) const
-{
-	return SendMessage(ibase::IMessage::MC_INFO, id, message);
-}
-
-
-template <class Base>
-bool TMessageProducerWrap<Base>::SendWarningMessage(int id, const istd::CString& message) const
-{
-	return SendMessage(ibase::IMessage::MC_WARNING, id, message);
-}
-
-
-template <class Base>
-bool TMessageProducerWrap<Base>::SendErrorMessage(int id, const istd::CString& message) const
-{
-	return SendMessage(ibase::IMessage::MC_ERROR, id, message);
-}
-
-
-template <class Base>
-bool TMessageProducerWrap<Base>::SendCriticalMessage(int id, const istd::CString& message) const
-{
-	return SendMessage(ibase::IMessage::MC_CRITICAL, id, message);
+	return BaseClass::SendMessage(category, id, message, messageSource);
 }
 
 

@@ -22,13 +22,16 @@ public:
 		You have to call Leave() if you entered the section.
 	*/
 	virtual void Enter() = 0;
+
 	/**
 		Enter to critical section if it is not blocked.
 		\return	true, if section was entered, false otherwise.
 	*/
 	virtual bool EnterIfFree() = 0;
-	/**	Leave entered section.
-	 */
+
+	/**	
+		Leave entered section.
+	*/
 	virtual void Leave() = 0;
 };
 

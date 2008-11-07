@@ -286,6 +286,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TLoggableWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TMessageContainerWrap.h"
 				>
 			</File>
