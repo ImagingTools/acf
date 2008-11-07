@@ -26,7 +26,7 @@ public:
 
 protected:
 	// reimplemented (TLoggableWrap)
-	virtual bool SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
+	virtual bool SendLogMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
 
 private:
 	I_REF(ibase::IMessageConsumer, m_logCompPtr);
@@ -51,7 +51,7 @@ void TMessageProducerWrap<Base>::OnComponentCreated()
 // protected methods
 
 template <class Base>
-bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
+bool TMessageProducerWrap<Base>::SendLogMessage(IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& /*messageSource*/) const
 {
 	istd::CString messageSource = "<unknown>";
 
@@ -62,7 +62,7 @@ bool TMessageProducerWrap<Base>::SendMessage(IMessage::MessageCategory category,
 		}
 	}
 
-	return BaseClass::SendMessage(category, id, message, messageSource);
+	return BaseClass::SendLogMessage(category, id, message, messageSource);
 }
 
 

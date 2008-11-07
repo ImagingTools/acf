@@ -35,7 +35,7 @@ protected:
 		\param	message			message text will be send.
 		\param	messageSource	source of the message
 	*/
-	virtual bool SendMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
+	virtual bool SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const;
 
 	/**
 		Send info message to log.
@@ -103,7 +103,7 @@ inline ibase::IMessageConsumer* TLoggableWrap<Base>::GetLogPtr() const
 // protected methods
 
 template <class Base>
-bool TLoggableWrap<Base>::SendMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const
+bool TLoggableWrap<Base>::SendLogMessage(ibase::IMessage::MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource) const
 {
 	if (m_logPtr != NULL){
 		m_logPtr->AddMessage(new ibase::CMessage(category, id, message, messageSource));
@@ -118,28 +118,28 @@ bool TLoggableWrap<Base>::SendMessage(ibase::IMessage::MessageCategory category,
 template <class Base>
 bool TLoggableWrap<Base>::SendInfoMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
-	return SendMessage(ibase::IMessage::MC_INFO, id, message, messageSource);
+	return SendLogMessage(ibase::IMessage::MC_INFO, id, message, messageSource);
 }
 
 
 template <class Base>
 bool TLoggableWrap<Base>::SendWarningMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
-	return SendMessage(ibase::IMessage::MC_WARNING, id, message, messageSource);
+	return SendLogMessage(ibase::IMessage::MC_WARNING, id, message, messageSource);
 }
 
 
 template <class Base>
 bool TLoggableWrap<Base>::SendErrorMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
-	return SendMessage(ibase::IMessage::MC_ERROR, id, message, messageSource);
+	return SendLogMessage(ibase::IMessage::MC_ERROR, id, message, messageSource);
 }
 
 
 template <class Base>
 bool TLoggableWrap<Base>::SendCriticalMessage(int id, const istd::CString& message, const istd::CString& messageSource) const
 {
-	return SendMessage(ibase::IMessage::MC_CRITICAL, id, message, messageSource);
+	return SendLogMessage(ibase::IMessage::MC_CRITICAL, id, message, messageSource);
 }
 
 
