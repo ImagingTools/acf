@@ -6,14 +6,14 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = ACF
 PROJECT_NUMBER         = 1.0
-OUTPUT_DIRECTORY       = D:/Development/Acf/ACF/Docs/Doxygen/ACF
+OUTPUT_DIRECTORY       = D:/Development/Acf/Docs/Doxygen/ACF
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
 REPEAT_BRIEF           = YES
-ABBREVIATE_BRIEF       = "The $name class                    " \
-                         "The $name widget                    " \
-                         "The $name file                    " \
+ABBREVIATE_BRIEF       = "The $name class                     " \
+                         "The $name widget                     " \
+                         "The $name file                     " \
                          is \
                          provides \
                          specifies \
@@ -25,7 +25,7 @@ ABBREVIATE_BRIEF       = "The $name class                    " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = "E:/Dokumente und Einstellungen/Kirill.Lepski/                    "
+STRIP_FROM_PATH        = "E:/Dokumente und Einstellungen/Kirill.Lepski/                     "
 STRIP_FROM_INC_PATH    = 
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = YES
@@ -82,12 +82,12 @@ WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = NO
-WARN_FORMAT            = "$file:$line: $text                    "
+WARN_FORMAT            = "$file:$line: $text                     "
 WARN_LOGFILE           = 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = D:/Development/Acf/Acf/Include
+INPUT                  = D:/Development/Acf/Include
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
