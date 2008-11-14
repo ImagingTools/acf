@@ -184,6 +184,10 @@
 				RelativePath="..\CSimpleDateTime.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CSystemEnvironmentBase.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -199,6 +203,10 @@
 			</File>
 			<File
 				RelativePath="..\CSimpleDateTime.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystemEnvironmentBase.h"
 				>
 			</File>
 			<File
@@ -223,6 +231,10 @@
 			</File>
 			<File
 				RelativePath="..\isys.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ISystemEnvironment.h"
 				>
 			</File>
 			<File

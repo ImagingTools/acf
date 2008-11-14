@@ -5,6 +5,7 @@
 #include "iwin/CTimer.h"
 #include "iwin/CApplicationEnvironment.h"
 #include "iwin/CCriticalSection.h"
+#include "iwin/CSystemEnvironment.h"
 
 
 namespace iwin
@@ -22,6 +23,7 @@ public:
 private:
 	static iwin::CTimer s_timer;
 	static iwin::CApplicationEnvironment s_applicationEnvironment;
+	static iwin::CSystemEnvironment s_systemEnvironment;
 	static iwin::CCriticalSection s_criticalSection;
 };
 
