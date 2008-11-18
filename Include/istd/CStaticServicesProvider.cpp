@@ -1,9 +1,6 @@
 #include "istd/CStaticServicesProvider.h"
 
 
-#include <typeinfo>
-
-
 namespace istd
 {
 
@@ -14,7 +11,7 @@ void CStaticServicesProvider::SetParent(const IServicesProvider* parentPtr)
 }
 
 
-bool CStaticServicesProvider::RegisterService(const type_info& serviceId, void* servicePtr)
+bool CStaticServicesProvider::RegisterService(const std::type_info& serviceId, void* servicePtr)
 {
 	std::string serviceTypeName = std::string(serviceId.name());
 
@@ -24,7 +21,7 @@ bool CStaticServicesProvider::RegisterService(const type_info& serviceId, void* 
 }
 
 
-void* CStaticServicesProvider::GetService(const type_info& serviceId)
+void* CStaticServicesProvider::GetService(const std::type_info& serviceId)
 {
 	Services::const_iterator iter = m_registeredServices.find(std::string(serviceId.name()));
 
@@ -49,7 +46,7 @@ IServicesProvider& CStaticServicesProvider::GetProviderInstance()
 
 // reimplemented (istd::IServicesProvider)
 
-void* CStaticServicesProvider::Provider::GetService(const type_info& serviceId) const
+void* CStaticServicesProvider::Provider::GetService(const std::type_info& serviceId) const
 {
 	return CStaticServicesProvider::GetService(serviceId);
 }

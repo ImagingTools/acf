@@ -17,7 +17,7 @@ namespace istd
 
 // define own min function to avoid conflicts between STL and M$ macros
 template <typename T>
-inline typename const T& Min(const T& value1, const T& value2)
+inline const T& Min(const T& value1, const T& value2)
 {
 	if (value1 < value2){
 		return value1;
@@ -30,7 +30,7 @@ inline typename const T& Min(const T& value1, const T& value2)
 
 // define own max function to avoid conflicts between STL and M$ macros
 template <typename T>
-inline typename const T& Max(const T& value1, const T& value2)
+inline const T& Max(const T& value1, const T& value2)
 {
 	if (value1 > value2){
 		return value1;
@@ -42,14 +42,14 @@ inline typename const T& Max(const T& value1, const T& value2)
 
 
 template <typename T>
-inline typename const T& Max3(const T& value1, const T& value2, const T& value3)
+inline const T& Max3(const T& value1, const T& value2, const T& value3)
 {
 	return Max(Max(value1, value2), value3);
 }
 
 
 template <typename T>
-inline typename const T& Max4(const T& value1, const T& value2, const T& value3, const T& value4)
+inline const T& Max4(const T& value1, const T& value2, const T& value3, const T& value4)
 {
 	return Max(Max3(value1, value2, value3), value4);
 }
@@ -177,6 +177,11 @@ if (istd::CheckTraceEnabled(level, groupId)){\
 
 
 #endif //defined(_DEBUG) || defined(I_FORCE_TRACE)
+
+
+#ifndef NULL
+#define NULL 0
+#endif // !NULL
 
 
 #endif // !istd_included

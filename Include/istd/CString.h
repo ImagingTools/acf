@@ -2,13 +2,12 @@
 #define istd_CString_included
 
 
-#include "istd/istd.h"
-
-
+// STL includes
 #include <string>
-#include <xstring>
 #include <vector>
 #include <sstream>
+
+#include "istd/istd.h"
 
 
 namespace istd

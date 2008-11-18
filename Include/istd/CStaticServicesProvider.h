@@ -29,13 +29,13 @@ public:
 	/**
 		Register service for specified ID.
 	*/
-	static bool RegisterService(const type_info& serviceId, void* servicePtr);
+	static bool RegisterService(const std::type_info& serviceId, void* servicePtr);
 	/**
 		Register service for specified ID.
 	*/
 	template <class Service>
 	static bool RegisterService(Service* servicePtr);
-	static void* GetService(const type_info& serviceId);
+	static void* GetService(const std::type_info& serviceId);
 	static IServicesProvider& GetProviderInstance();
 
 protected:
@@ -43,7 +43,7 @@ protected:
 	{
 	public:
 		// reimplemented (istd::IServicesProvider)
-		virtual void* GetService(const type_info& serviceId) const;
+		virtual void* GetService(const std::type_info& serviceId) const;
 	};
 
 private:
@@ -72,7 +72,7 @@ bool CStaticServicesProvider::RegisterService(Service* servicePtr)
 // public template functions
 
 template <typename Service>
-typename Service* GetService()
+Service* GetService()
 {
 	return static_cast<Service*>(CStaticServicesProvider::GetService(typeid(Service)));
 }
