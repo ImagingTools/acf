@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EAB5AC660ED2E572006EC826 /* CBitManip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC370ED2E572006EC826 /* CBitManip.cpp */; };
+		EAB5AC670ED2E572006EC826 /* CBitManip.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC380ED2E572006EC826 /* CBitManip.h */; };
+		EAB5AC680ED2E572006EC826 /* CChangeDelegator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC390ED2E572006EC826 /* CChangeDelegator.cpp */; };
+		EAB5AC690ED2E572006EC826 /* CChangeDelegator.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC3A0ED2E572006EC826 /* CChangeDelegator.h */; };
+		EAB5AC6A0ED2E572006EC826 /* CCrcCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC3B0ED2E572006EC826 /* CCrcCalculator.cpp */; };
+		EAB5AC6B0ED2E572006EC826 /* CCrcCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC3C0ED2E572006EC826 /* CCrcCalculator.h */; };
+		EAB5AC6C0ED2E572006EC826 /* CFastBinaryIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC3D0ED2E572006EC826 /* CFastBinaryIndex.h */; };
+		EAB5AC6D0ED2E572006EC826 /* CIndex2d.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC3E0ED2E572006EC826 /* CIndex2d.h */; };
+		EAB5AC6E0ED2E572006EC826 /* CRandomNumber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC3F0ED2E572006EC826 /* CRandomNumber.cpp */; };
+		EAB5AC6F0ED2E572006EC826 /* CRandomNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC400ED2E572006EC826 /* CRandomNumber.h */; };
+		EAB5AC700ED2E572006EC826 /* CRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC410ED2E572006EC826 /* CRange.cpp */; };
+		EAB5AC710ED2E572006EC826 /* CRange.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC420ED2E572006EC826 /* CRange.h */; };
+		EAB5AC720ED2E572006EC826 /* CStaticServicesProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC430ED2E572006EC826 /* CStaticServicesProvider.cpp */; };
+		EAB5AC730ED2E572006EC826 /* CStaticServicesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC440ED2E572006EC826 /* CStaticServicesProvider.h */; };
+		EAB5AC740ED2E572006EC826 /* CString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC450ED2E572006EC826 /* CString.cpp */; };
+		EAB5AC750ED2E572006EC826 /* CString.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC460ED2E572006EC826 /* CString.h */; };
+		EAB5AC760ED2E572006EC826 /* CVarIndex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC470ED2E572006EC826 /* CVarIndex.cpp */; };
+		EAB5AC770ED2E572006EC826 /* CVarIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC480ED2E572006EC826 /* CVarIndex.h */; };
+		EAB5AC780ED2E572006EC826 /* IChangeable.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC490ED2E572006EC826 /* IChangeable.h */; };
+		EAB5AC790ED2E572006EC826 /* IContainerInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC4A0ED2E572006EC826 /* IContainerInfo.h */; };
+		EAB5AC7A0ED2E572006EC826 /* IDuplicatable.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC4B0ED2E572006EC826 /* IDuplicatable.h */; };
+		EAB5AC7B0ED2E572006EC826 /* IEnableable.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC4C0ED2E572006EC826 /* IEnableable.h */; };
+		EAB5AC7C0ED2E572006EC826 /* INamed.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC4D0ED2E572006EC826 /* INamed.h */; };
+		EAB5AC7D0ED2E572006EC826 /* IPolymorphic.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC4E0ED2E572006EC826 /* IPolymorphic.h */; };
+		EAB5AC7E0ED2E572006EC826 /* IServicesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC4F0ED2E572006EC826 /* IServicesProvider.h */; };
+		EAB5AC7F0ED2E572006EC826 /* istd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB5AC500ED2E572006EC826 /* istd.cpp */; };
+		EAB5AC800ED2E572006EC826 /* istd.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC510ED2E572006EC826 /* istd.h */; };
+		EAB5AC810ED2E572006EC826 /* ITrace.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC520ED2E572006EC826 /* ITrace.h */; };
+		EAB5AC820ED2E572006EC826 /* TArray.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC530ED2E572006EC826 /* TArray.h */; };
+		EAB5AC830ED2E572006EC826 /* TCachedUpdateManagerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC540ED2E572006EC826 /* TCachedUpdateManagerWrap.h */; };
+		EAB5AC840ED2E572006EC826 /* TCascadedMap.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC550ED2E572006EC826 /* TCascadedMap.h */; };
+		EAB5AC850ED2E572006EC826 /* TChangeBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC560ED2E572006EC826 /* TChangeBinder.h */; };
+		EAB5AC860ED2E572006EC826 /* TChangeDelegator.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC570ED2E572006EC826 /* TChangeDelegator.h */; };
+		EAB5AC870ED2E572006EC826 /* TChangeNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC580ED2E572006EC826 /* TChangeNotifier.h */; };
+		EAB5AC880ED2E572006EC826 /* TComposedFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC590ED2E572006EC826 /* TComposedFactory.h */; };
+		EAB5AC890ED2E572006EC826 /* TDelPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC5A0ED2E572006EC826 /* TDelPtr.h */; };
+		EAB5AC8A0ED2E572006EC826 /* TIFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC5B0ED2E572006EC826 /* TIFactory.h */; };
+		EAB5AC8B0ED2E572006EC826 /* TIHierarchical.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC5C0ED2E572006EC826 /* TIHierarchical.h */; };
+		EAB5AC8C0ED2E572006EC826 /* TIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC5D0ED2E572006EC826 /* TIndex.h */; };
+		EAB5AC8D0ED2E572006EC826 /* TOptDelPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC5E0ED2E572006EC826 /* TOptDelPtr.h */; };
+		EAB5AC8E0ED2E572006EC826 /* TOptPointerVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC5F0ED2E572006EC826 /* TOptPointerVector.h */; };
+		EAB5AC8F0ED2E572006EC826 /* TPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC600ED2E572006EC826 /* TPointer.h */; };
+		EAB5AC900ED2E572006EC826 /* TPointerVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC610ED2E572006EC826 /* TPointerVector.h */; };
+		EAB5AC910ED2E572006EC826 /* TSingleFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC620ED2E572006EC826 /* TSingleFactory.h */; };
+		EAB5AC920ED2E572006EC826 /* TSmartPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC630ED2E572006EC826 /* TSmartPtr.h */; };
+		EAB5AC930ED2E572006EC826 /* TUpdateManagerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC640ED2E572006EC826 /* TUpdateManagerWrap.h */; };
+		EAB5AC940ED2E572006EC826 /* TVarArray.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB5AC650ED2E572006EC826 /* TVarArray.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D2AAC046055464E500DB518D /* libistd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAB5AC370ED2E572006EC826 /* CBitManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBitManip.cpp; path = ../CBitManip.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC380ED2E572006EC826 /* CBitManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBitManip.h; path = ../CBitManip.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC390ED2E572006EC826 /* CChangeDelegator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CChangeDelegator.cpp; path = ../CChangeDelegator.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC3A0ED2E572006EC826 /* CChangeDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CChangeDelegator.h; path = ../CChangeDelegator.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC3B0ED2E572006EC826 /* CCrcCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCrcCalculator.cpp; path = ../CCrcCalculator.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC3C0ED2E572006EC826 /* CCrcCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCrcCalculator.h; path = ../CCrcCalculator.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC3D0ED2E572006EC826 /* CFastBinaryIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFastBinaryIndex.h; path = ../CFastBinaryIndex.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC3E0ED2E572006EC826 /* CIndex2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIndex2d.h; path = ../CIndex2d.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC3F0ED2E572006EC826 /* CRandomNumber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRandomNumber.cpp; path = ../CRandomNumber.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC400ED2E572006EC826 /* CRandomNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRandomNumber.h; path = ../CRandomNumber.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC410ED2E572006EC826 /* CRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRange.cpp; path = ../CRange.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC420ED2E572006EC826 /* CRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRange.h; path = ../CRange.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC430ED2E572006EC826 /* CStaticServicesProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CStaticServicesProvider.cpp; path = ../CStaticServicesProvider.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC440ED2E572006EC826 /* CStaticServicesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStaticServicesProvider.h; path = ../CStaticServicesProvider.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC450ED2E572006EC826 /* CString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CString.cpp; path = ../CString.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC460ED2E572006EC826 /* CString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CString.h; path = ../CString.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC470ED2E572006EC826 /* CVarIndex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVarIndex.cpp; path = ../CVarIndex.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC480ED2E572006EC826 /* CVarIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CVarIndex.h; path = ../CVarIndex.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC490ED2E572006EC826 /* IChangeable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IChangeable.h; path = ../IChangeable.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC4A0ED2E572006EC826 /* IContainerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IContainerInfo.h; path = ../IContainerInfo.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC4B0ED2E572006EC826 /* IDuplicatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IDuplicatable.h; path = ../IDuplicatable.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC4C0ED2E572006EC826 /* IEnableable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEnableable.h; path = ../IEnableable.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC4D0ED2E572006EC826 /* INamed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INamed.h; path = ../INamed.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC4E0ED2E572006EC826 /* IPolymorphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPolymorphic.h; path = ../IPolymorphic.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC4F0ED2E572006EC826 /* IServicesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IServicesProvider.h; path = ../IServicesProvider.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC500ED2E572006EC826 /* istd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = istd.cpp; path = ../istd.cpp; sourceTree = SOURCE_ROOT; };
+		EAB5AC510ED2E572006EC826 /* istd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = istd.h; path = ../istd.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC520ED2E572006EC826 /* ITrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITrace.h; path = ../ITrace.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC530ED2E572006EC826 /* TArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TArray.h; path = ../TArray.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC540ED2E572006EC826 /* TCachedUpdateManagerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCachedUpdateManagerWrap.h; path = ../TCachedUpdateManagerWrap.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC550ED2E572006EC826 /* TCascadedMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCascadedMap.h; path = ../TCascadedMap.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC560ED2E572006EC826 /* TChangeBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TChangeBinder.h; path = ../TChangeBinder.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC570ED2E572006EC826 /* TChangeDelegator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TChangeDelegator.h; path = ../TChangeDelegator.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC580ED2E572006EC826 /* TChangeNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TChangeNotifier.h; path = ../TChangeNotifier.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC590ED2E572006EC826 /* TComposedFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TComposedFactory.h; path = ../TComposedFactory.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC5A0ED2E572006EC826 /* TDelPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDelPtr.h; path = ../TDelPtr.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC5B0ED2E572006EC826 /* TIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TIFactory.h; path = ../TIFactory.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC5C0ED2E572006EC826 /* TIHierarchical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TIHierarchical.h; path = ../TIHierarchical.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC5D0ED2E572006EC826 /* TIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TIndex.h; path = ../TIndex.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC5E0ED2E572006EC826 /* TOptDelPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOptDelPtr.h; path = ../TOptDelPtr.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC5F0ED2E572006EC826 /* TOptPointerVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOptPointerVector.h; path = ../TOptPointerVector.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC600ED2E572006EC826 /* TPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPointer.h; path = ../TPointer.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC610ED2E572006EC826 /* TPointerVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPointerVector.h; path = ../TPointerVector.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC620ED2E572006EC826 /* TSingleFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSingleFactory.h; path = ../TSingleFactory.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC630ED2E572006EC826 /* TSmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSmartPtr.h; path = ../TSmartPtr.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC640ED2E572006EC826 /* TUpdateManagerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TUpdateManagerWrap.h; path = ../TUpdateManagerWrap.h; sourceTree = SOURCE_ROOT; };
+		EAB5AC650ED2E572006EC826 /* TVarArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TVarArray.h; path = ../TVarArray.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* istd */ = {
+			isa = PBXGroup;
+			children = (
+				EAB5AC950ED2E587006EC826 /* Header */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6A0FF2B0290797F04C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = istd;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EAB5AC370ED2E572006EC826 /* CBitManip.cpp */,
+				EAB5AC390ED2E572006EC826 /* CChangeDelegator.cpp */,
+				EAB5AC3B0ED2E572006EC826 /* CCrcCalculator.cpp */,
+				EAB5AC3F0ED2E572006EC826 /* CRandomNumber.cpp */,
+				EAB5AC410ED2E572006EC826 /* CRange.cpp */,
+				EAB5AC430ED2E572006EC826 /* CStaticServicesProvider.cpp */,
+				EAB5AC450ED2E572006EC826 /* CString.cpp */,
+				EAB5AC470ED2E572006EC826 /* CVarIndex.cpp */,
+				EAB5AC500ED2E572006EC826 /* istd.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libistd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				EAB5AC380ED2E572006EC826 /* CBitManip.h */,
+				EAB5AC3A0ED2E572006EC826 /* CChangeDelegator.h */,
+				EAB5AC3C0ED2E572006EC826 /* CCrcCalculator.h */,
+				EAB5AC3D0ED2E572006EC826 /* CFastBinaryIndex.h */,
+				EAB5AC3E0ED2E572006EC826 /* CIndex2d.h */,
+				EAB5AC400ED2E572006EC826 /* CRandomNumber.h */,
+				EAB5AC420ED2E572006EC826 /* CRange.h */,
+				EAB5AC440ED2E572006EC826 /* CStaticServicesProvider.h */,
+				EAB5AC460ED2E572006EC826 /* CString.h */,
+				EAB5AC480ED2E572006EC826 /* CVarIndex.h */,
+				EAB5AC490ED2E572006EC826 /* IChangeable.h */,
+				EAB5AC4A0ED2E572006EC826 /* IContainerInfo.h */,
+				EAB5AC4B0ED2E572006EC826 /* IDuplicatable.h */,
+				EAB5AC4C0ED2E572006EC826 /* IEnableable.h */,
+				EAB5AC4D0ED2E572006EC826 /* INamed.h */,
+				EAB5AC4E0ED2E572006EC826 /* IPolymorphic.h */,
+				EAB5AC4F0ED2E572006EC826 /* IServicesProvider.h */,
+				EAB5AC510ED2E572006EC826 /* istd.h */,
+				EAB5AC520ED2E572006EC826 /* ITrace.h */,
+				EAB5AC530ED2E572006EC826 /* TArray.h */,
+				EAB5AC540ED2E572006EC826 /* TCachedUpdateManagerWrap.h */,
+				EAB5AC550ED2E572006EC826 /* TCascadedMap.h */,
+				EAB5AC560ED2E572006EC826 /* TChangeBinder.h */,
+				EAB5AC570ED2E572006EC826 /* TChangeDelegator.h */,
+				EAB5AC580ED2E572006EC826 /* TChangeNotifier.h */,
+				EAB5AC590ED2E572006EC826 /* TComposedFactory.h */,
+				EAB5AC5A0ED2E572006EC826 /* TDelPtr.h */,
+				EAB5AC5B0ED2E572006EC826 /* TIFactory.h */,
+				EAB5AC5C0ED2E572006EC826 /* TIHierarchical.h */,
+				EAB5AC5D0ED2E572006EC826 /* TIndex.h */,
+				EAB5AC5E0ED2E572006EC826 /* TOptDelPtr.h */,
+				EAB5AC5F0ED2E572006EC826 /* TOptPointerVector.h */,
+				EAB5AC600ED2E572006EC826 /* TPointer.h */,
+				EAB5AC610ED2E572006EC826 /* TPointerVector.h */,
+				EAB5AC620ED2E572006EC826 /* TSingleFactory.h */,
+				EAB5AC630ED2E572006EC826 /* TSmartPtr.h */,
+				EAB5AC640ED2E572006EC826 /* TUpdateManagerWrap.h */,
+				EAB5AC650ED2E572006EC826 /* TVarArray.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAB5AC670ED2E572006EC826 /* CBitManip.h in Headers */,
+				EAB5AC690ED2E572006EC826 /* CChangeDelegator.h in Headers */,
+				EAB5AC6B0ED2E572006EC826 /* CCrcCalculator.h in Headers */,
+				EAB5AC6C0ED2E572006EC826 /* CFastBinaryIndex.h in Headers */,
+				EAB5AC6D0ED2E572006EC826 /* CIndex2d.h in Headers */,
+				EAB5AC6F0ED2E572006EC826 /* CRandomNumber.h in Headers */,
+				EAB5AC710ED2E572006EC826 /* CRange.h in Headers */,
+				EAB5AC730ED2E572006EC826 /* CStaticServicesProvider.h in Headers */,
+				EAB5AC750ED2E572006EC826 /* CString.h in Headers */,
+				EAB5AC770ED2E572006EC826 /* CVarIndex.h in Headers */,
+				EAB5AC780ED2E572006EC826 /* IChangeable.h in Headers */,
+				EAB5AC790ED2E572006EC826 /* IContainerInfo.h in Headers */,
+				EAB5AC7A0ED2E572006EC826 /* IDuplicatable.h in Headers */,
+				EAB5AC7B0ED2E572006EC826 /* IEnableable.h in Headers */,
+				EAB5AC7C0ED2E572006EC826 /* INamed.h in Headers */,
+				EAB5AC7D0ED2E572006EC826 /* IPolymorphic.h in Headers */,
+				EAB5AC7E0ED2E572006EC826 /* IServicesProvider.h in Headers */,
+				EAB5AC800ED2E572006EC826 /* istd.h in Headers */,
+				EAB5AC810ED2E572006EC826 /* ITrace.h in Headers */,
+				EAB5AC820ED2E572006EC826 /* TArray.h in Headers */,
+				EAB5AC830ED2E572006EC826 /* TCachedUpdateManagerWrap.h in Headers */,
+				EAB5AC840ED2E572006EC826 /* TCascadedMap.h in Headers */,
+				EAB5AC850ED2E572006EC826 /* TChangeBinder.h in Headers */,
+				EAB5AC860ED2E572006EC826 /* TChangeDelegator.h in Headers */,
+				EAB5AC870ED2E572006EC826 /* TChangeNotifier.h in Headers */,
+				EAB5AC880ED2E572006EC826 /* TComposedFactory.h in Headers */,
+				EAB5AC890ED2E572006EC826 /* TDelPtr.h in Headers */,
+				EAB5AC8A0ED2E572006EC826 /* TIFactory.h in Headers */,
+				EAB5AC8B0ED2E572006EC826 /* TIHierarchical.h in Headers */,
+				EAB5AC8C0ED2E572006EC826 /* TIndex.h in Headers */,
+				EAB5AC8D0ED2E572006EC826 /* TOptDelPtr.h in Headers */,
+				EAB5AC8E0ED2E572006EC826 /* TOptPointerVector.h in Headers */,
+				EAB5AC8F0ED2E572006EC826 /* TPointer.h in Headers */,
+				EAB5AC900ED2E572006EC826 /* TPointerVector.h in Headers */,
+				EAB5AC910ED2E572006EC826 /* TSingleFactory.h in Headers */,
+				EAB5AC920ED2E572006EC826 /* TSmartPtr.h in Headers */,
+				EAB5AC930ED2E572006EC826 /* TUpdateManagerWrap.h in Headers */,
+				EAB5AC940ED2E572006EC826 /* TVarArray.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC045055464E500DB518D /* istd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "istd" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = istd;
+			productName = istd;
+			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "istd" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* istd */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC045055464E500DB518D /* istd */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAB5AC660ED2E572006EC826 /* CBitManip.cpp in Sources */,
+				EAB5AC680ED2E572006EC826 /* CChangeDelegator.cpp in Sources */,
+				EAB5AC6A0ED2E572006EC826 /* CCrcCalculator.cpp in Sources */,
+				EAB5AC6E0ED2E572006EC826 /* CRandomNumber.cpp in Sources */,
+				EAB5AC700ED2E572006EC826 /* CRange.cpp in Sources */,
+				EAB5AC720ED2E572006EC826 /* CStaticServicesProvider.cpp in Sources */,
+				EAB5AC740ED2E572006EC826 /* CString.cpp in Sources */,
+				EAB5AC760ED2E572006EC826 /* CVarIndex.cpp in Sources */,
+				EAB5AC7F0ED2E572006EC826 /* istd.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = istd;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB91ED08733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = istd;
+			};
+			name = Release;
+		};
+		1DEB91F008733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/Users/Witold/Work/Projects/Development/ACF/**";
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Debug;
+		};
+		1DEB91F108733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/Users/Witold/Work/Projects/Development/ACF/**";
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "istd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "istd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
