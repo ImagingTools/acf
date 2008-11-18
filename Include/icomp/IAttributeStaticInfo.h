@@ -37,14 +37,14 @@ public:
 	/**
 		Return attribute type description.
 	 */
-	virtual const type_info& GetAttributeType() const = 0;
+	virtual const std::type_info& GetAttributeType() const = 0;
 
 	/**
 		Get related interface type.
 		If there is no interface typeid(void) will be returned.
 		This type in normally used by references and factories.
 	*/
-	virtual const type_info& GetRelatedInterfaceType() const = 0;
+	virtual const std::type_info& GetRelatedInterfaceType() const = 0;
 
 	/**
 		Check if this attribute is obligatory.

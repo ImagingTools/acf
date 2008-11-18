@@ -38,7 +38,7 @@ public:
 
 	// reimplemented (icomp::IComponent)
 	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const;
-	virtual void* GetInterface(const type_info& interfaceType, const std::string& subId = "");
+	virtual void* GetInterface(const std::type_info& interfaceType, const std::string& subId = "");
 	virtual const IComponentContext* GetComponentContext() const;
 	virtual void SetComponentContext(
 				const icomp::IComponentContext* contextPtr,

@@ -169,7 +169,7 @@ const iser::ISerializable* CSimComponentContextBase::GetAttribute(const std::str
 
 // protected methods
 
-bool CSimComponentContextBase::IsAttributeTypeCorrect(const std::string& attributeId, const type_info& attributeType)
+bool CSimComponentContextBase::IsAttributeTypeCorrect(const std::string& attributeId, const std::type_info& attributeType)
 {
 	const IComponentStaticInfo& componentInfo = m_registryElement.GetComponentStaticInfo();
 	const IComponentStaticInfo::AttributeInfos& attrInfos = componentInfo.GetAttributeInfos();

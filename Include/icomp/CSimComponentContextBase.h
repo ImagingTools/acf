@@ -124,7 +124,7 @@ protected:
 	/**
 		Check if attribute type is corrected.
 	*/
-	bool IsAttributeTypeCorrect(const std::string& attributeId, const type_info& attributeType);
+	bool IsAttributeTypeCorrect(const std::string& attributeId, const std::type_info& attributeType);
 
 	typedef std::map<std::string, IComponent*> ComponentsMap;
 	ComponentsMap m_componentsMap;

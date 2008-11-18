@@ -18,7 +18,7 @@ CCompositeComponent::CCompositeComponent()
 
 // reimplemented (icomp::IComponent)
 
-void* CCompositeComponent::GetInterface(const type_info& interfaceType, const std::string& subId)
+void* CCompositeComponent::GetInterface(const std::type_info& interfaceType, const std::string& subId)
 {
 	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
 	if (contextPtr == NULL){

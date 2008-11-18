@@ -28,7 +28,7 @@ const IComponent* CComponentBase::GetParentComponent(bool ownerOnly) const
 }
 
 
-void* CComponentBase::GetInterface(const type_info& interfaceType, const std::string& /*subId*/)
+void* CComponentBase::GetInterface(const std::type_info& interfaceType, const std::string& /*subId*/)
 {
 	if (interfaceType == typeid(void*)){
 		return this;

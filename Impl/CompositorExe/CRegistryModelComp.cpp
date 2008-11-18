@@ -78,7 +78,7 @@ int CRegistryModelComp::CheckAttributeConsistency(const icomp::IRegistryElement&
 	I_ASSERT(*attrStaticInfoPtrPtr != NULL);
 
 	const icomp::IAttributeStaticInfo& attrStaticInfo = **attrStaticInfoPtrPtr;
-	const type_info& attrType = attrStaticInfo.GetAttributeType();
+	const std::type_info& attrType = attrStaticInfo.GetAttributeType();
 
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = element.GetAttributeInfo(attributeId);
 
