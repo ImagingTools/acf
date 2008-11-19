@@ -6,8 +6,6 @@
 
 #include "istd/TChangeNotifier.h"
 
-#include "i2d/CAnnulus.h"
-
 #include "iqt/CSignalBlocker.h"
 
 
@@ -74,7 +72,7 @@ void CAnnulusShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/,
 
 void CAnnulusShape::OnInnerGripPositionChanged(const QPointF& point)
 {
-	i2d::CAnnulus* annulusPtr = dynamic_cast<i2d::CAnnulus*>(GetObjectPtr());
+	i2d::CAnnulus* annulusPtr = GetObjectPtr();
 	if (annulusPtr != NULL){
 		annulusPtr->SetInnerRadius(iqt::GetCVector2d(point).GetDistance(annulusPtr->GetCenter()));
 	}
@@ -83,7 +81,7 @@ void CAnnulusShape::OnInnerGripPositionChanged(const QPointF& point)
 
 void CAnnulusShape::OnOuterGripPositionChanged(const QPointF& point)
 {
-	i2d::CAnnulus* annulusPtr = dynamic_cast<i2d::CAnnulus*>(GetObjectPtr());
+	i2d::CAnnulus* annulusPtr = GetObjectPtr();
 	if (annulusPtr != NULL){
 		annulusPtr->SetOuterRadius(iqt::GetCVector2d(point).GetDistance(annulusPtr->GetCenter()));
 	}
@@ -94,7 +92,7 @@ void CAnnulusShape::OnOuterGripPositionChanged(const QPointF& point)
 
 void CAnnulusShape::UpdateGripPositions()
 {
-	i2d::CAnnulus* annulusPtr = dynamic_cast<i2d::CAnnulus*>(GetObjectPtr());
+	i2d::CAnnulus* annulusPtr = GetObjectPtr();
 	if (annulusPtr != NULL){
 		QPointF center = iqt::GetQPointF(annulusPtr->GetCenter());
 
@@ -127,7 +125,7 @@ void CAnnulusShape::UpdateGripPositions()
 
 void CAnnulusShape::CalcVisualization(QPainterPath& result)
 {
-	i2d::CAnnulus* annulusPtr = dynamic_cast<i2d::CAnnulus*>(GetObjectPtr());
+	i2d::CAnnulus* annulusPtr = GetObjectPtr();
 	if (annulusPtr != NULL){
 		result.moveTo(iqt::GetQPointF(annulusPtr->GetCenter()));
 		result.addEllipse(iqt::GetQRectF(annulusPtr->GetInnerCircle().GetBoundingBox()));

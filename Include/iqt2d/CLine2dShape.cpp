@@ -35,7 +35,7 @@ CLine2dShape::CLine2dShape(bool isEditable)
 
 void CLine2dShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	i2d::CLine2d* linePtr = dynamic_cast<i2d::CLine2d*>(GetObjectPtr());
+	i2d::CLine2d* linePtr = GetObjectPtr();
 	if (linePtr != NULL){
 		setLine(iqt::GetQLineF(*linePtr));
 
@@ -48,7 +48,7 @@ void CLine2dShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, 
 
 void CLine2dShape::OnPosition1Changed(const QPointF& point1)
 {
-	i2d::CLine2d* linePtr = dynamic_cast<i2d::CLine2d*>(GetObjectPtr());
+	i2d::CLine2d* linePtr = GetObjectPtr();
 	if (linePtr != NULL){
 		linePtr->SetPoint1(iqt::GetCVector2d(point1));
 	}
@@ -57,7 +57,7 @@ void CLine2dShape::OnPosition1Changed(const QPointF& point1)
 
 void CLine2dShape::OnPosition2Changed(const QPointF& point2)
 {
-	i2d::CLine2d* linePtr = dynamic_cast<i2d::CLine2d*>(GetObjectPtr());
+	i2d::CLine2d* linePtr = GetObjectPtr();
 	if (linePtr != NULL){
 		linePtr->SetPoint2(iqt::GetCVector2d(point2));
 	}
@@ -68,7 +68,7 @@ void CLine2dShape::OnPosition2Changed(const QPointF& point2)
 
 void CLine2dShape::UpdateGripPositions()
 {
-	i2d::CLine2d* linePtr = dynamic_cast<i2d::CLine2d*>(GetObjectPtr());
+	i2d::CLine2d* linePtr = GetObjectPtr();
 	if (linePtr != NULL){
 		iqt::CSignalBlocker block(&m_pointGrip1);
 		m_pointGrip1.setPos(iqt::GetQPointF(linePtr->GetPoint1()));

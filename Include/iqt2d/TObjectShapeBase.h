@@ -5,7 +5,6 @@
 // Qt includes
 #include <QGraphicsSceneMouseEvent>
 
-// ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "imod/TSingleModelObserverBase.h"
@@ -17,19 +16,19 @@ namespace iqt2d
 {
 
 
-template <class GraphicsItemClass>
+template <class GraphicsItemClass, class ObjectClass>
 class TObjectShapeBase: 
 			public TShapeBase<GraphicsItemClass>,
-			public imod::TSingleModelObserverBase<i2d::IObject2d>
+			public imod::TSingleModelObserverBase<ObjectClass>
 {
 public:
 	typedef TShapeBase<GraphicsItemClass> BaseClass;
-	typedef imod::TSingleModelObserverBase<i2d::IObject2d> BaseClass2;
+	typedef imod::TSingleModelObserverBase<ObjectClass> BaseClass2;
 
 	TObjectShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
 
 protected:
-	// reimplemented (TShapeBase<GraphicsItemClass>) 
+	// reimplemented (TShapeBase<GraphicsItemClass, ObjectClass>) 
 	virtual void OnSelectionChanged(bool isSelected);
 
 	// reimplemented (QGraphicsItem) 
@@ -43,8 +42,8 @@ private:
 
 // public methods
 
-template <class GraphicsItemClass>
-TObjectShapeBase<GraphicsItemClass>::TObjectShapeBase(bool isEditable, QGraphicsItem* parentPtr)
+template <class GraphicsItemClass, class ObjectClass>
+TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditable, QGraphicsItem* parentPtr)
 	:BaseClass(isEditable, parentPtr)
 {
 	SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
@@ -65,10 +64,10 @@ TObjectShapeBase<GraphicsItemClass>::TObjectShapeBase(bool isEditable, QGraphics
 
 // protected methods
 	
-// reimplemented (TShapeBase<GraphicsItemClass>) 
+// reimplemented (TShapeBase<GraphicsItemClass, ObjectClass>) 
 
-template <class GraphicsItemClass>
-void TObjectShapeBase<GraphicsItemClass>::OnSelectionChanged(bool isSelected)
+template <class GraphicsItemClass, class ObjectClass>
+void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnSelectionChanged(bool isSelected)
 {
 	if (isSelected){
 		SwitchColorSheme(SelectedColor);
@@ -86,8 +85,8 @@ void TObjectShapeBase<GraphicsItemClass>::OnSelectionChanged(bool isSelected)
 
 // reimplemented (QGraphicsItem) 
 
-template <class GraphicsItemClass>
-QVariant TObjectShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
+template <class GraphicsItemClass, class ObjectClass>
+QVariant TObjectShapeBase<GraphicsItemClass, ObjectClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
 	if (change == BaseClass::ItemPositionChange){
 		i2d::IObject2d* objectPtr = GetObjectPtr();
@@ -109,8 +108,8 @@ QVariant TObjectShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::Graphics
 }
 
 
-template <class GraphicsItemClass>
-void TObjectShapeBase<GraphicsItemClass>::mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr)
+template <class GraphicsItemClass, class ObjectClass>
+void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr)
 {
 	BaseClass::mouseReleaseEvent(eventPtr);
 

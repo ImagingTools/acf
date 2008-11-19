@@ -37,19 +37,93 @@ void CRange::SetMaxValue(double maxValue)
 }
 
 
-CRange CRange::GetIntersection(const CRange& otherRange) const
+void CRange::Reset()
 {
-	return CRange(istd::Max(GetMinValue(), otherRange.GetMinValue()), istd::Min(GetMaxValue(), otherRange.GetMaxValue()));
+	m_minValue = 0.0;
+	m_maxValue  = 0.0;
 }
 
 
-CRange CRange::GetUnion(const CRange& otherRange) const
+bool CRange::IsIntersectedBy(const CRange& range) const
 {
-	return CRange(istd::Min(GetMinValue(), otherRange.GetMinValue()), istd::Max(GetMaxValue(), otherRange.GetMaxValue()));
+	return (m_minValue < range.m_maxValue) || (m_maxValue > range.m_minValue);
 }
 
 
-double CRange::GetNearestInRange(double value) const
+CRange CRange::GetIntersection(const CRange& range) const
+{
+	if (IsEmpty()){
+		return *this;
+	}
+	else{
+		return CRange(Max(m_minValue, range.m_minValue), Min(m_maxValue, range.m_maxValue));
+	}
+}
+
+
+void CRange::Intersection(const CRange& range)
+{
+	if (!IsEmpty()){
+		if (range.m_minValue > m_minValue){
+			m_minValue = range.m_minValue;
+		}
+
+		if (range.m_maxValue < m_maxValue){
+			m_maxValue = range.m_maxValue;
+		}
+	}
+}
+
+
+CRange CRange::GetUnion(const CRange& range) const
+{
+	if (range.IsEmpty()){
+		return *this;
+	}
+	else{
+		if (IsEmpty()){
+			return range;
+		}
+		else{
+			return CRange(Min(m_minValue, range.m_minValue), Max(m_maxValue, range.m_maxValue));
+		}
+	}
+}
+
+
+void CRange::Union(const CRange& range)
+{
+	if (!range.IsEmpty()){
+		if (IsEmpty()){
+			*this = range;
+		}
+		else{
+			if (range.m_minValue < m_minValue){
+				m_minValue = range.m_minValue;
+			}
+
+			if (range.m_maxValue > m_maxValue){
+				m_maxValue = range.m_maxValue;
+			}
+		}
+	}
+}
+
+
+CRange CRange::GetExpanded(const CRange& range) const
+{
+	return CRange(m_minValue + range.m_minValue, m_maxValue + range.m_maxValue);
+}
+
+
+void CRange::Expand(const CRange& range)
+{
+	m_minValue += range.m_minValue;
+	m_maxValue += range.m_maxValue;
+}
+
+
+double CRange::GetNearestInside(double value) const
 {
 	if (value > m_maxValue){
 		value = m_maxValue;
@@ -76,9 +150,9 @@ double CRange::GetClipped(double value) const
 }
 
 
-double CRange::GetMappedTo(double value, const istd::CRange& otherRange) const
+double CRange::GetMappedTo(double value, const istd::CRange& range) const
 {
-	return otherRange.GetMinValue() + (value - GetMinValue()) * (otherRange.GetLength() / GetLength());
+	return range.GetMinValue() + (value - GetMinValue()) * (range.GetLength() / GetLength());
 }
 
 

@@ -2,6 +2,8 @@
 #define iqt2d_CAnnulusShape_included
 
 
+#include "i2d/CAnnulus.h"
+
 #include "iqt2d/TObjectShapeBase.h"
 #include "iqt2d/CGripShape.h"
 
@@ -10,12 +12,12 @@ namespace iqt2d
 {
 
 
-class CAnnulusShape: public TObjectShapeBase<QGraphicsPathItem>
+class CAnnulusShape: public TObjectShapeBase<QGraphicsPathItem, i2d::CAnnulus>
 {
 	Q_OBJECT
 
 public:
-	typedef TObjectShapeBase<QGraphicsPathItem> BaseClass;
+	typedef TObjectShapeBase<QGraphicsPathItem, i2d::CAnnulus> BaseClass;
 
 	CAnnulusShape(bool isEditable = false);
 

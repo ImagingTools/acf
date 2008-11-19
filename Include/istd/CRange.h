@@ -72,6 +72,11 @@ public:
 	void SetMaxValue(double topValue);
 
 	/**
+		Set this range to be empty.
+	*/
+	void Reset();
+
+	/**
 		Get length of this range.
 		Length is difference between top and bottom values.
 	*/
@@ -84,24 +89,48 @@ public:
 	bool Contains(double value) const;
 
 	/**
-		Returns \c true, if this range is inside of the \c otherRange.
+		Returns \c true, if this range is inside of the \c range.
 	*/
 	bool Contains(const CRange& range) const;
 
 	/**
-		Gets intersection with the \c otherRange.
+		Check if this range is intersected by other range.
+		Some range is intersected by another, if intercestion of this two ranges is not empty.
 	*/
-	CRange GetIntersection(const CRange& otherRange) const;
+	bool IsIntersectedBy(const CRange& range) const;
+	/**
+		Get intersection with the second \c range.
+	*/
+	CRange GetIntersection(const CRange& range) const;
+	/**
+		Set this range to be intersection of two ranges.
+	*/
+	void Intersection(const CRange& range);
 
 	/**
-		Gets union with the \c otherRange.
+		Get union with the second \c range.
 	*/
-	CRange GetUnion(const CRange& otherRange) const;
+	CRange GetUnion(const CRange& range) const;
+	/**
+		Set this range to be union of two ranges.
+	*/
+	void Union(const CRange& range);
+
+	/**
+		Get expanded range using the second \c range.
+		Expanding operation calculate simple sum for each components separately.
+	*/
+	CRange GetExpanded(const CRange& range) const;
+	/**
+		Set this range to be expanded.
+		Expanding operation calculate simple sum for each components separately.
+	*/
+	void Expand(const CRange& range);
 
 	/**
 		Get nearest value belonging to range.
 	*/
-	double GetNearestInRange(double value) const;
+	double GetNearestInside(double value) const;
 
 	/**
 		Get value clipped to the range.
@@ -125,17 +154,17 @@ public:
 	double GetAlphaFromValue(double value) const;
 
 	/**
-		Returns the value, that corresponds the input value \c inputValue in the other range \c otherRange.
-							It is the same as \c otherRange.GetValueFromAlpha(GetAlphaFromValue(value)).
+		Returns the value, that corresponds the input value \c inputValue in the other range \c range.
+							It is the same as \c range.GetValueFromAlpha(GetAlphaFromValue(value)).
 		\param	value		value definde in this range.
 							If it is equal to minimum value in this range,
-							it will be mapped to minimum value of \c otherRange.
+							it will be mapped to minimum value of \c range.
 							If it is equal to maximum value in this range,
-							it will be mapped to maximum value of \c otherRange.
+							it will be mapped to maximum value of \c range.
 							Rest values are linear interpolated.
 							\note This value must be in current range.
 	*/
-	double GetMappedTo(double value, const istd::CRange& otherRange) const;
+	double GetMappedTo(double value, const istd::CRange& range) const;
 
 	CRange& operator=(const CRange& range);
 	bool operator==(const CRange& range) const;

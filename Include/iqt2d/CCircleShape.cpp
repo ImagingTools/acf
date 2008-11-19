@@ -46,7 +46,7 @@ CCircleShape::CCircleShape(bool isEditable)
 
 void CCircleShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	i2d::CCircle* circlePtr = dynamic_cast<i2d::CCircle*>(GetObjectPtr());
+	i2d::CCircle* circlePtr = GetObjectPtr();
 	if (circlePtr != NULL){
 		setRect(iqt::GetQRectF(circlePtr->GetBoundingBox()));
 
@@ -59,7 +59,7 @@ void CCircleShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, 
 
 void CCircleShape::OnGripPositionChanged(const QPointF& point)
 {
-	i2d::CCircle* circlePtr = dynamic_cast<i2d::CCircle*>(GetObjectPtr());
+	i2d::CCircle* circlePtr = GetObjectPtr();
 	if (circlePtr != NULL){
 		circlePtr->SetRadius(iqt::GetCVector2d(point).GetDistance(circlePtr->GetCenter()));
 	}
@@ -70,7 +70,7 @@ void CCircleShape::OnGripPositionChanged(const QPointF& point)
 
 void CCircleShape::UpdateGripPositions()
 {
-	i2d::CCircle* circlePtr = dynamic_cast<i2d::CCircle*>(GetObjectPtr());
+	i2d::CCircle* circlePtr = GetObjectPtr();
 	if (circlePtr != NULL){
 		QPointF center = iqt::GetQPointF(circlePtr->GetCenter());
 

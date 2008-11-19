@@ -12,11 +12,11 @@ namespace iqt2d
 {
 
 
-class CLine2dShape: public TObjectShapeBase<QGraphicsLineItem>
+class CLine2dShape: public TObjectShapeBase<QGraphicsLineItem, i2d::CLine2d>
 {
 	Q_OBJECT
 public:
-	typedef TObjectShapeBase<QGraphicsLineItem> BaseClass;
+	typedef TObjectShapeBase<QGraphicsLineItem, i2d::CLine2d> BaseClass;
 
 	CLine2dShape(bool isEditable = false);
 

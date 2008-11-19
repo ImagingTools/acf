@@ -40,7 +40,7 @@ CRectangleShape::CRectangleShape(bool isEditable)
 
 void CRectangleShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	i2d::CRectangle* rectPtr = dynamic_cast<i2d::CRectangle*>(GetObjectPtr());
+	i2d::CRectangle* rectPtr = GetObjectPtr();
 	if (rectPtr != NULL){
 		setRect(iqt::GetQRectF(*rectPtr));
 
@@ -53,7 +53,7 @@ void CRectangleShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*
 
 void CRectangleShape::OnTopLeftChanged(const QPointF& point)
 {
-	i2d::CRectangle* rectPtr = dynamic_cast<i2d::CRectangle*>(GetObjectPtr());
+	i2d::CRectangle* rectPtr = GetObjectPtr();
 	if (rectPtr != NULL){
 		rectPtr->SetTopLeft(iqt::GetCVector2d(point));
 	}
@@ -63,7 +63,7 @@ void CRectangleShape::OnTopLeftChanged(const QPointF& point)
 
 void CRectangleShape::OnTopRightChanged(const QPointF& point)
 {
-	i2d::CRectangle* rectPtr = dynamic_cast<i2d::CRectangle*>(GetObjectPtr());
+	i2d::CRectangle* rectPtr = GetObjectPtr();
 	if (rectPtr != NULL){
 		rectPtr->SetTopRight(iqt::GetCVector2d(point));
 	}
@@ -72,7 +72,7 @@ void CRectangleShape::OnTopRightChanged(const QPointF& point)
 
 void CRectangleShape::OnBottomLeftChanged(const QPointF& point)
 {
-	i2d::CRectangle* rectPtr = dynamic_cast<i2d::CRectangle*>(GetObjectPtr());
+	i2d::CRectangle* rectPtr = GetObjectPtr();
 	if (rectPtr != NULL){
 		rectPtr->SetBottomLeft(iqt::GetCVector2d(point));
 	}
@@ -81,7 +81,7 @@ void CRectangleShape::OnBottomLeftChanged(const QPointF& point)
 
 void CRectangleShape::OnBottomRightChanged(const QPointF& point)
 {
-	i2d::CRectangle* rectPtr = dynamic_cast<i2d::CRectangle*>(GetObjectPtr());
+	i2d::CRectangle* rectPtr = GetObjectPtr();
 	if (rectPtr != NULL){
 		rectPtr->SetBottomRight(iqt::GetCVector2d(point));
 	}
@@ -92,7 +92,7 @@ void CRectangleShape::OnBottomRightChanged(const QPointF& point)
 
 void CRectangleShape::UpdateGripPositions()
 {
-	i2d::CRectangle* rectPtr = dynamic_cast<i2d::CRectangle*>(GetObjectPtr());
+	i2d::CRectangle* rectPtr = GetObjectPtr();
 	if (rectPtr != NULL){
 		iqt::CSignalBlocker block(&m_topLeftGrip);
 		m_topLeftGrip.setPos(iqt::GetQPointF(rectPtr->GetTopLeft()));

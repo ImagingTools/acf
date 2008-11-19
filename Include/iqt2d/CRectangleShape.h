@@ -14,12 +14,12 @@ namespace iqt2d
 {
 
 
-class CRectangleShape: public TObjectShapeBase<QGraphicsRectItem>
+class CRectangleShape: public TObjectShapeBase<QGraphicsRectItem, i2d::CRectangle>
 {
 	Q_OBJECT
 
 public:
-	typedef TObjectShapeBase<QGraphicsRectItem> BaseClass;
+	typedef TObjectShapeBase<QGraphicsRectItem, i2d::CRectangle> BaseClass;
 
 	CRectangleShape(bool isEditable = false);
 

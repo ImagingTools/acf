@@ -45,7 +45,7 @@ bool CComplexDoubleManip::GetParsed(const std::string& text, double& result) con
 
 I_SDWORD CComplexDoubleManip::GetInternalValue(double value) const
 {
-	value = m_range.GetNearestInRange(value);
+	value = m_range.GetNearestInside(value);
 
 	return BaseClass::GetInternalValue(value);
 }

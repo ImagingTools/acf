@@ -18,16 +18,16 @@ CRectangle::CRectangle()
 }
 
 
-CRectangle::CRectangle(double left, double top, double width, double height)
-:	m_horizontalRange(left, left + width),
-	m_verticalRange(top, top + height)
+CRectangle::CRectangle(const CRectangle& ref)
+:	m_verticalRange(ref.m_verticalRange),
+	m_horizontalRange(ref.m_horizontalRange)
 {
 }
 
 
-CRectangle::CRectangle(const CRectangle& ref)
-:	m_verticalRange(ref.m_verticalRange),
-	m_horizontalRange(ref.m_horizontalRange)
+CRectangle::CRectangle(double left, double top, double width, double height)
+:	m_horizontalRange(left, left + width),
+	m_verticalRange(top, top + height)
 {
 }
 
@@ -39,6 +39,13 @@ CRectangle::CRectangle(const CVector2d& topLeft, const CVector2d& bottomRight)
 }
 
 
+CRectangle::CRectangle(const istd::CRange& horizontalRange, const istd::CRange& verticalRange)
+:	m_horizontalRange(horizontalRange),
+	m_verticalRange(verticalRange)
+{
+}
+
+
 CRectangle::CRectangle(const istd::CIndex2d& size)
 :	m_horizontalRange(0.0, size.GetX()),
 	m_verticalRange(0.0, size.GetY())
@@ -46,129 +53,15 @@ CRectangle::CRectangle(const istd::CIndex2d& size)
 }
 
 
-const CRectangle& CRectangle::operator=(const CRectangle& ref)
+bool CRectangle::IsValid() const
 {
-	m_horizontalRange = ref.m_horizontalRange;
-	m_verticalRange = ref.m_verticalRange;
-
-	return *this;
-}
-
-
-bool CRectangle::Contains(const CVector2d& point) const
-{
-	return m_horizontalRange.Contains(point.GetX()) && m_verticalRange.Contains(point.GetY());
-}
-
-
-bool CRectangle::Contains(const istd::CIndex2d& point) const
-{
-	return m_horizontalRange.Contains(point.GetX()) && m_verticalRange.Contains(point.GetY());
-}
-
-
-bool CRectangle::Contains(const CRectangle& rect) const
-{
-	return m_horizontalRange.Contains(rect.m_horizontalRange) && m_verticalRange.Contains(rect.m_verticalRange);
-}
-
-
-double CRectangle::GetWidth() const
-{
-	return double(GetRight() - GetLeft());
-}
-
-
-double CRectangle::GetHeight() const 
-{
-	return double(GetBottom() - GetTop());
+	return m_horizontalRange.IsValid() && m_verticalRange.IsValid();
 }
 
 
 bool CRectangle::IsEmpty() const
 {
-	return (GetWidth() > 0 && GetHeight() > 0);
-}
-
-
-bool CRectangle::IsValid() const
-{
-	return (GetRight() >= GetLeft()) && (GetBottom() >= GetTop());
-}
-
-
-bool CRectangle::IsIntersectedBy(const CRectangle& other) const
-{
-	return	Contains(other.GetTopLeft()) || 
-			Contains(other.GetBottomLeft()) || 
-			Contains(other.GetTopRight()) || 
-			Contains(other.GetBottomRight()) ;
-}
-
-
-
-CRectangle CRectangle::GetIntersection(const CRectangle& other) const
-{
-	double outputLeft = istd::Max(other.GetLeft(), GetLeft());
-	double outputTop = istd::Max(other.GetTop(), GetTop());
-	double outputRight = istd::Min(other.GetRight(), GetRight());
-	double outputBottom = istd::Min(other.GetBottom(), GetBottom());
-
-	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
-}
-
-
-CRectangle CRectangle::GetUnion(const CRectangle& other) const
-{
-	double outputLeft = istd::Min(other.GetLeft(), GetLeft());
-	double outputTop = istd::Min(other.GetTop(), GetTop());
-	double outputRight = istd::Max(other.GetRight(), GetRight());
-	double outputBottom = istd::Max(other.GetBottom(), GetBottom());
-
-	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
-}
-
-	
-void CRectangle::Expand(double left, double right, double top, double bottom)
-{
-	istd::CChangeNotifier changePtr(this);
-
-	m_horizontalRange = istd::CRange(GetLeft() - left, GetRight() + right);
-	m_verticalRange = istd::CRange(GetTop() - top, GetBottom() + bottom);
-}
-
-
-CRectangle CRectangle::GetExpanded(double left, double right, double top, double bottom) const
-{
-	i2d::CRectangle retVal(*this);
-
-	retVal.Expand(left, right, top, bottom);
-
-	return retVal;
-}
-
-
-double CRectangle::GetLeft() const
-{
-	return m_horizontalRange.GetMinValue();
-}
-
-
-double CRectangle::GetTop() const
-{
-	return m_verticalRange.GetMinValue();
-}
-
-
-double CRectangle::GetRight() const
-{
-	return m_horizontalRange.GetMaxValue();
-}
-
-
-double CRectangle::GetBottom() const
-{
-	return m_verticalRange.GetMaxValue();
+	return m_horizontalRange.IsEmpty() || m_verticalRange.IsEmpty();
 }
 
 
@@ -212,15 +105,40 @@ void CRectangle::SetBottom(double bottom)
 }
 
 
+void CRectangle::SetHorizontalRange(const istd::CRange& range)
+{
+	if (range != m_horizontalRange){
+		istd::CChangeNotifier notifier(this);
+
+		m_horizontalRange = range;
+	}
+}
+
+
+void CRectangle::SetVerticalRange(const istd::CRange& range)
+{
+	if (range != m_verticalRange){
+		istd::CChangeNotifier notifier(this);
+
+		m_verticalRange = range;
+	}
+}
+
+
 CVector2d CRectangle::GetTopLeft() const
 {
 	return CVector2d(m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue()); 
 }
 
 
-CVector2d CRectangle::GetBottomLeft() const
+void CRectangle::SetTopLeft(const CVector2d& topLeft)
 {
-	return CVector2d(m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue()); 
+	if (topLeft != GetTopLeft()){
+		istd::CChangeNotifier changePtr(this);
+
+		m_horizontalRange.SetMinValue(topLeft.GetX());
+		m_verticalRange.SetMinValue(topLeft.GetY());
+	}
 }
 
 
@@ -230,37 +148,9 @@ CVector2d CRectangle::GetTopRight() const
 }
 
 
-CVector2d CRectangle::GetBottomRight() const
-{
-	return CVector2d(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue()); 
-}
-
-
-void CRectangle::SetTopLeft(const CVector2d& topLeft)
-{
-	if (GetTopLeft() != topLeft){
-		istd::CChangeNotifier changePtr(this);
-
-		m_horizontalRange.SetMinValue(topLeft.GetX());
-		m_verticalRange.SetMinValue(topLeft.GetY());
-	}
-}
-
-
-void CRectangle::SetBottomLeft(const CVector2d& bottomLeft)
-{
-	if (GetBottomLeft() != bottomLeft){
-		istd::CChangeNotifier changePtr(this);
-
-		m_horizontalRange.SetMinValue(bottomLeft.GetX());
-		m_verticalRange.SetMaxValue(bottomLeft.GetY());
-	}
-}	
-
-
 void CRectangle::SetTopRight(const CVector2d& topRight)
 {
-	if (GetTopRight() != topRight){
+	if (topRight != GetTopRight()){
 		istd::CChangeNotifier changePtr(this);
 
 		m_horizontalRange.SetMaxValue(topRight.GetX());
@@ -269,9 +159,32 @@ void CRectangle::SetTopRight(const CVector2d& topRight)
 }
 
 
+CVector2d CRectangle::GetBottomLeft() const
+{
+	return CVector2d(m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue()); 
+}
+
+
+void CRectangle::SetBottomLeft(const CVector2d& bottomLeft)
+{
+	if (bottomLeft != GetBottomLeft()){
+		istd::CChangeNotifier changePtr(this);
+
+		m_horizontalRange.SetMinValue(bottomLeft.GetX());
+		m_verticalRange.SetMaxValue(bottomLeft.GetY());
+	}
+}	
+
+
+CVector2d CRectangle::GetBottomRight() const
+{
+	return CVector2d(m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue()); 
+}
+
+
 void CRectangle::SetBottomRight(const CVector2d& bottomRight)
 {
-	if (GetBottomRight() != bottomRight){
+	if (bottomRight != GetBottomRight()){
 		istd::CChangeNotifier changePtr(this);
 
 		m_horizontalRange.SetMaxValue(bottomRight.GetX());
@@ -280,11 +193,96 @@ void CRectangle::SetBottomRight(const CVector2d& bottomRight)
 }
 
 
+bool CRectangle::Contains(const CVector2d& point) const
+{
+	return m_horizontalRange.Contains(point.GetX()) && m_verticalRange.Contains(point.GetY());
+}
+
+
+bool CRectangle::Contains(const istd::CIndex2d& point) const
+{
+	return m_horizontalRange.Contains(point.GetX()) && m_verticalRange.Contains(point.GetY());
+}
+
+
+bool CRectangle::Contains(const CRectangle& rect) const
+{
+	return m_horizontalRange.Contains(rect.m_horizontalRange) && m_verticalRange.Contains(rect.m_verticalRange);
+}
+
+
+double CRectangle::GetWidth() const
+{
+	return double(GetRight() - GetLeft());
+}
+
+
+double CRectangle::GetHeight() const 
+{
+	return double(GetBottom() - GetTop());
+}
+
+
+bool CRectangle::IsIntersectedBy(const CRectangle& rect) const
+{
+	return	m_horizontalRange.IsIntersectedBy(rect.m_horizontalRange) && m_verticalRange.IsIntersectedBy(rect.m_verticalRange);
+}
+
+
+
+CRectangle CRectangle::GetIntersection(const CRectangle& rect) const
+{
+	double outputLeft = istd::Max(rect.GetLeft(), GetLeft());
+	double outputTop = istd::Max(rect.GetTop(), GetTop());
+	double outputRight = istd::Min(rect.GetRight(), GetRight());
+	double outputBottom = istd::Min(rect.GetBottom(), GetBottom());
+
+	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
+}
+
+
+CRectangle CRectangle::GetUnion(const CRectangle& rect) const
+{
+	double outputLeft = istd::Min(rect.GetLeft(), GetLeft());
+	double outputTop = istd::Min(rect.GetTop(), GetTop());
+	double outputRight = istd::Max(rect.GetRight(), GetRight());
+	double outputBottom = istd::Max(rect.GetBottom(), GetBottom());
+
+	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
+}
+
+
+CRectangle CRectangle::GetExpanded(const CRectangle& rect) const
+{
+	return i2d::CRectangle(
+				m_horizontalRange.GetExpanded(rect.m_horizontalRange),
+				m_verticalRange.GetExpanded(rect.m_verticalRange));
+}
+
+
+void CRectangle::Expand(const CRectangle& rect)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_horizontalRange.Expand(rect.m_horizontalRange);
+	m_verticalRange.Expand(rect.m_verticalRange);
+}
+
+
+const CRectangle& CRectangle::operator=(const CRectangle& rect)
+{
+	m_horizontalRange = rect.m_horizontalRange;
+	m_verticalRange = rect.m_verticalRange;
+
+	return *this;
+}
+
+
 // reimplemented (IObject2d)
 
 CVector2d CRectangle::GetCenter() const
 {
-	return CVector2d(GetWidth() * 0.5, GetHeight() * 0.5);
+	return (GetTopLeft() + GetBottomRight()) * 0.5;
 }
 
 
@@ -310,13 +308,12 @@ void CRectangle::MoveTo(const CVector2d& position)
 
 bool CRectangle::Serialize(iser::IArchive& archive)
 {
-	double top = m_verticalRange.GetMinValue();
-	double bottom = m_verticalRange.GetMaxValue();
-	double left = m_horizontalRange.GetMinValue();
-	double right = m_horizontalRange.GetMinValue();
+	double& top = m_verticalRange.GetMinValueRef();
+	double& bottom = m_verticalRange.GetMaxValueRef();
+	double& left = m_horizontalRange.GetMinValueRef();
+	double& right = m_horizontalRange.GetMinValueRef();
 
 	static iser::CArchiveTag topTag("Top", "Rectangle top edge position");
-
 	bool retVal = archive.BeginTag(topTag);
 	retVal = retVal && archive.Process(top);
 	retVal = retVal && archive.EndTag(topTag);
@@ -335,13 +332,6 @@ bool CRectangle::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(rightTag);
 	retVal = retVal && archive.Process(right);
 	retVal = retVal && archive.EndTag(rightTag);
-
-	if (!archive.IsStoring()){
-		m_verticalRange.SetMinValue(top);
-		m_verticalRange.SetMaxValue(bottom);
-		m_horizontalRange.SetMinValue(left);
-		m_horizontalRange.SetMaxValue(right);
-	}
 	
 	return retVal;
 }

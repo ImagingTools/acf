@@ -12,12 +12,12 @@ namespace iqt2d
 {
 
 
-class CCircleShape: public TObjectShapeBase<QGraphicsEllipseItem>
+class CCircleShape: public TObjectShapeBase<QGraphicsEllipseItem, i2d::CCircle>
 {
 	Q_OBJECT
 
 public:
-	typedef TObjectShapeBase<QGraphicsEllipseItem> BaseClass;
+	typedef TObjectShapeBase<QGraphicsEllipseItem, i2d::CCircle> BaseClass;
 
 	CCircleShape(bool isEditable = false);
 
