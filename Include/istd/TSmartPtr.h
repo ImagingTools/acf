@@ -1,34 +1,50 @@
-#ifndef TSmartPtr_included
-#define TSmartPtr_included
+#ifndef istd_TSmartPtr_included
+#define istd_TSmartPtr_included
 
 
 #include "istd/istd.h"
-
-#include "istd/IPolymorphic.h"
 
 
 namespace istd
 {
 
+
 /**
 	Implementation of a smart pointer.
 */
-template <typename PointerType>
-class TSmartPtr: public istd::IPolymorphic
+template <typename Type>
+class TSmartPtr
 {
 public:
 	TSmartPtr();
-	explicit TSmartPtr(PointerType* pointer);
+	explicit TSmartPtr(Type* pointer);
 	TSmartPtr(const TSmartPtr& other);
 
 	virtual ~TSmartPtr();
 
-	void SetPtr(PointerType* pointer);
-	const PointerType* GetPtr() const;
-	PointerType* GetPtr();
-	const PointerType* operator->() const;
-	PointerType* operator->();
-	TSmartPtr& operator=(const TSmartPtr& otherCounter);
+	void SetPtr(Type* pointer);
+	const Type* GetPtr() const;
+	Type* GetPtr();
+	const Type* operator->() const;
+
+	/**
+		Get access to object pointed at.
+	*/
+	Type& operator*() const;
+	
+	/**
+		Get access to pointer instance.
+	*/
+	Type* operator->();
+
+	/**
+		Assignment operator.
+	*/
+	TSmartPtr& operator = (const TSmartPtr& otherCounter);
+
+	/**
+		Checks, whether the object is in valid state.
+	*/
 	bool IsValid() const;
 
 protected:
@@ -38,7 +54,7 @@ protected:
 	class Counter
 	{
 	public:
-		Counter(PointerType* ptr)
+		Counter(Type* ptr)
 		{
 			objectPtr = ptr;
 			count = 0;
@@ -51,23 +67,23 @@ protected:
 			}
 		}
 
-		int count;
-		PointerType* objectPtr;
+		mutable int count;
+		Type* objectPtr;
 	};
 
 	typename Counter* m_counter;
 };
 
 
-template <typename PointerType>
-TSmartPtr<PointerType>::TSmartPtr()
+template <typename Type>
+TSmartPtr<Type>::TSmartPtr()
 {
 	m_counter = new Counter(NULL);
 }
 
 
-template <typename PointerType>
-TSmartPtr<PointerType>::TSmartPtr(PointerType* pointer)
+template <typename Type>
+TSmartPtr<Type>::TSmartPtr(Type* pointer)
 {
 	m_counter = NULL;
 
@@ -75,23 +91,23 @@ TSmartPtr<PointerType>::TSmartPtr(PointerType* pointer)
 }
 
 
-template <typename PointerType>
-TSmartPtr<PointerType>::TSmartPtr(const TSmartPtr<PointerType>& other)
+template <typename Type>
+TSmartPtr<Type>::TSmartPtr(const TSmartPtr<Type>& other)
 {
 	m_counter = other.m_counter;
 	m_counter->count++;
 }
 
 
-template <typename PointerType>
-TSmartPtr<PointerType>::~TSmartPtr()
+template <typename Type>
+TSmartPtr<Type>::~TSmartPtr()
 {
 	Detach();
 }
 
 
-template <typename PointerType>
-inline void TSmartPtr<PointerType>::SetPtr(PointerType* pointer)
+template <typename Type>
+inline void TSmartPtr<Type>::SetPtr(Type* pointer)
 {
 	Detach();
 
@@ -99,8 +115,8 @@ inline void TSmartPtr<PointerType>::SetPtr(PointerType* pointer)
 }
 
 
-template <typename PointerType>
-inline const PointerType* TSmartPtr<PointerType>::GetPtr() const
+template <typename Type>
+inline const Type* TSmartPtr<Type>::GetPtr() const
 {
 	I_ASSERT(m_counter != NULL);
 
@@ -108,8 +124,8 @@ inline const PointerType* TSmartPtr<PointerType>::GetPtr() const
 }
 
 
-template <typename PointerType>
-inline PointerType* TSmartPtr<PointerType>::GetPtr()
+template <typename Type>
+inline Type* TSmartPtr<Type>::GetPtr()
 {
 	I_ASSERT(m_counter != NULL);
 
@@ -117,8 +133,8 @@ inline PointerType* TSmartPtr<PointerType>::GetPtr()
 }
 
 
-template <typename PointerType>
-inline const PointerType* TSmartPtr<PointerType>::operator->() const
+template <typename Type>
+inline const Type* TSmartPtr<Type>::operator->() const
 {
 	I_ASSERT(m_counter != NULL);
 	I_ASSERT(m_counter->objectPtr != NULL);
@@ -127,8 +143,8 @@ inline const PointerType* TSmartPtr<PointerType>::operator->() const
 }
 
 
-template <typename PointerType>
-inline PointerType* TSmartPtr<PointerType>::operator->()
+template <typename Type>
+inline Type* TSmartPtr<Type>::operator->()
 {
 	I_ASSERT(m_counter != NULL);
 	I_ASSERT(m_counter->objectPtr != NULL);
@@ -137,13 +153,14 @@ inline PointerType* TSmartPtr<PointerType>::operator->()
 }
 
 
-template <typename PointerType>
-TSmartPtr<PointerType>& TSmartPtr<PointerType>::operator=(const TSmartPtr<PointerType>& other)
+template <typename Type>
+TSmartPtr<Type>& TSmartPtr<Type>::operator=(const TSmartPtr<Type>& other)
 {
 	Detach();
 
 	if (other.IsValid()){
-		(const_cast<TSmartPtr<PointerType>&>(other)).m_counter->count++;
+		other.m_counter->count++;
+
 		m_counter = other.m_counter;
 	}
 
@@ -151,8 +168,8 @@ TSmartPtr<PointerType>& TSmartPtr<PointerType>::operator=(const TSmartPtr<Pointe
 }
 
 
-template <typename PointerType>
-bool TSmartPtr<PointerType>::IsValid() const
+template <typename Type>
+bool TSmartPtr<Type>::IsValid() const
 {
 	if (m_counter != NULL){
 		return (m_counter->objectPtr != NULL);
@@ -162,16 +179,18 @@ bool TSmartPtr<PointerType>::IsValid() const
 }
 
 
-template <typename PointerType>
-void TSmartPtr<PointerType>::Detach()
+template <typename Type>
+void TSmartPtr<Type>::Detach()
 {
 	if (m_counter != NULL){
 		if(m_counter->count == 0){
 			delete m_counter;
+
 			m_counter = NULL;
 		}
 		else{
 			m_counter->count--;
+
 			I_ASSERT(m_counter->count >= 0);
 		}
 	}
@@ -181,5 +200,5 @@ void TSmartPtr<PointerType>::Detach()
 } // namespace istd
 
 
-#endif // !TSmartPtr_included
+#endif // !istd_TSmartPtr_included
 
