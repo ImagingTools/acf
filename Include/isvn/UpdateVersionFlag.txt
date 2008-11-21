@@ -1,0 +1,2 @@
+This document will be removed after creating of version info and created during SVN update.
+Please don't commit its deletion to SVN repository!

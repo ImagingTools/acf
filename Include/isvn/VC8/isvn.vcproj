@@ -24,6 +24,8 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				Description="Remove version files"
+				CommandLine="if exist ../UpdateVersionFlag.txt goto SkipAll&#x0D;&#x0A;del /Q ../Generated\AcfVersion.h&#x0D;&#x0A;del /Q ../../../Partitura\AcfVoce.arp\VersionInfo.arx&#x0D;&#x0A;del /Q ../UpdateVersionFlag.txt&#x0D;&#x0A;:SkipAll"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -101,6 +103,8 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				Description="Remove version files"
+				CommandLine="if exist ../UpdateVersionFlag.txt goto SkipAll&#x0D;&#x0A;del /Q ../Generated\AcfVersion.h&#x0D;&#x0A;del /Q ../../../Partitura\AcfVoce.arp\VersionInfo.arx&#x0D;&#x0A;del /Q ../UpdateVersionFlag.txt&#x0D;&#x0A;:SkipAll"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -168,6 +172,85 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="Install|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+				Description="Remove version files"
+				CommandLine="if exist ../UpdateVersionFlag.txt goto SkipAll&#x0D;&#x0A;del /Q ../Generated\AcfVersion.h&#x0D;&#x0A;del /Q ../../../Partitura\AcfVoce.arp\VersionInfo.arx&#x0D;&#x0A;del /Q ../UpdateVersionFlag.txt&#x0D;&#x0A;:SkipAll"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName="./iwin/ReleaseVC7/iwin.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../"
+				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="0"
+				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
+				WarningLevel="4"
+				SuppressStartupBanner="true"
+				CompileAs="0"
+				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1031"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -185,9 +268,9 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generate SVN version file"
-						CommandLine="SubWCRev ../../.. $(InputPath) $(InputDir)\Generated\AcfVersion.h&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputDir)\Generated\AcfVersion.h"
-						Outputs="$(InputDir)\Generated\AcfVersion.h"
+						CommandLine="SubWCRev ../../.. $(InputPath) ..\Generated\AcfVersion.h&#x0D;&#x0A;"
+						AdditionalDependencies="..\Generated\AcfVersion.h"
+						Outputs="..\Generated\AcfVersion.h"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -196,9 +279,57 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generate SVN version file"
-						CommandLine="SubWCRev ../../.. $(InputPath) $(InputDir)\Generated\AcfVersion.h&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputDir)\Generated\AcfVersion.h"
-						Outputs="$(InputDir)\Generated\AcfVersion.h"
+						CommandLine="SubWCRev ../../.. $(InputPath) ..\Generated\AcfVersion.h&#x0D;&#x0A;"
+						AdditionalDependencies="..\Generated\AcfVersion.h"
+						Outputs="..\Generated\AcfVersion.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Install|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generate SVN version file"
+						CommandLine="SubWCRev ../../.. $(InputPath) ..\Generated\AcfVersion.h&#x0D;&#x0A;"
+						AdditionalDependencies="..\Generated\AcfVersion.h"
+						Outputs="..\Generated\AcfVersion.h"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\VersionInfoTemplate.xml"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating ACF version info"
+						CommandLine="SubWCRev ../../.. $(InputPath) ..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx&#x0D;&#x0A;"
+						AdditionalDependencies="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
+						Outputs="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating ACF version info"
+						CommandLine="SubWCRev ../../.. $(InputPath) ..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx&#x0D;&#x0A;"
+						AdditionalDependencies="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
+						Outputs="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Install|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating ACF version info"
+						CommandLine="SubWCRev ../../.. $(InputPath) ..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx&#x0D;&#x0A;"
+						AdditionalDependencies="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
+						Outputs="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
 					/>
 				</FileConfiguration>
 			</File>
