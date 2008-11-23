@@ -2,10 +2,11 @@
 #define isys_CSectionBlocker_included
 
 
-#include "isys/isys.h"
+#include "isys/ICriticalSection.h"
 
 
-namespace isys{
+namespace isys
+{
 
 
 /**

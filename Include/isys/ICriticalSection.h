@@ -8,7 +8,8 @@
 #include "istd/IPolymorphic.h"
 
 
-namespace isys{
+namespace isys
+{
 
 
 /**
