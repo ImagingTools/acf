@@ -134,7 +134,7 @@ double CDateTime::ToCTime() const
 void CDateTime::FromCTime(double ctime)
 {
 	unsigned ctimeValue = unsigned(ctime);
-	setTime_t(ctime);
+	setTime_t(uint(ctime));
 	QDateTime::operator=(addMSecs(qint64((ctime - ctimeValue) * 1000)));
 }
 

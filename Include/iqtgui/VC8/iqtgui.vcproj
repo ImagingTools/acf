@@ -47,7 +47,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;$(InputDir)\Generated"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -114,7 +114,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;$(InputDir)\Generated"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -234,7 +234,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CDockWidgetGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CDockWidgetGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -245,7 +245,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CDockWidgetGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CDockWidgetGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -294,7 +294,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CHierarchicalCommand.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CHierarchicalCommand.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -305,7 +305,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CHierarchicalCommand.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CHierarchicalCommand.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -324,7 +324,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CLogGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CLogGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -335,7 +335,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CLogGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CLogGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -351,7 +351,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CLoginGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CLoginGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -363,7 +363,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CLoginGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CLoginGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -378,7 +378,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CSelectionParamGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CSelectionParamGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -389,7 +389,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CSelectionParamGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CSelectionParamGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -405,7 +405,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CSplashScreenGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CSplashScreenGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>
@@ -417,7 +417,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputPath)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(InputDir)\Generated&quot; &quot;..\CSplashScreenGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_OPENGL_LIB -DQT_NETWORK_LIB -I&quot;.\..\..&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; &quot;..\CSplashScreenGuiComp.h&quot; -o &quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe"
 						Outputs="&quot;$(InputDir)\Generated\moc_$(InputName).cpp&quot;"
 					/>

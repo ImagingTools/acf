@@ -10,7 +10,7 @@ namespace iqtdoc
 
 
 CExtendedDocumentTemplateComp::CExtendedDocumentTemplateComp()
-:	m_globalMenuCommands("Global", NULL)
+:	m_globalMenuCommands("Global")
 {
 	m_globalMenuCommands.SetEnabled(false);
 }

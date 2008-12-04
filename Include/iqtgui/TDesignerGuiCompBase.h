@@ -40,9 +40,9 @@ QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* paren
 
 	QWidget* widgetPtr = BaseClass::InitWidgetToParent(parentPtr);
 
-	setupUi(widgetPtr);
+	UI::setupUi(widgetPtr);
 
-    const QMetaObject* mo = metaObject();
+	const QMetaObject* mo = BaseClass::metaObject();
     I_ASSERT(mo != NULL);
     const QObjectList list = qFindChildren<QObject *>(widgetPtr, QString());
     for (int i = 0; i < mo->methodCount(); ++i) {
@@ -93,10 +93,10 @@ QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* paren
 template <class UI, class WidgetType>
 void TDesignerGuiCompBase<UI, WidgetType>::OnRetranslate()
 {
-	QWidget* widgetPtr = GetWidget();
+	QWidget* widgetPtr = BaseClass::GetWidget();
 
 	if (widgetPtr != NULL){
-		retranslateUi(widgetPtr);
+		UI::retranslateUi(widgetPtr);
 	}
 
 	BaseClass::OnRetranslate();

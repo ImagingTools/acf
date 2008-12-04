@@ -9,7 +9,7 @@
 #include <QApplication>
 #include <QDragEnterEvent>
 #include <QDropEvent>
-#include <QUrl> 
+#include <QUrl>
 
 #include "imod/IObserver.h"
 

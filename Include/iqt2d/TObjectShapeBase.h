@@ -44,20 +44,20 @@ private:
 
 template <class GraphicsItemClass, class ObjectClass>
 TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditable, QGraphicsItem* parentPtr)
-	:BaseClass(isEditable, parentPtr)
+:	BaseClass(isEditable, parentPtr)
 {
-	SetPen(InactiveColor, QPen(Qt::darkGreen, 0));
-	SetPen(EditableColor, QPen(Qt::green, 0));
-	SetPen(SelectedColor, QPen(Qt::yellow, 0));
+	BaseClass::SetPen(BaseClass::InactiveColor, QPen(Qt::darkGreen, 0));
+	BaseClass::SetPen(BaseClass::EditableColor, QPen(Qt::green, 0));
+	BaseClass::SetPen(BaseClass::SelectedColor, QPen(Qt::yellow, 0));
 
 	if (isEditable){
-		setFlags(ItemIsMovable | ItemIsSelectable);
-		setCursor(QCursor(Qt::ArrowCursor)); 
+		BaseClass::setFlags(BaseClass::ItemIsMovable | BaseClass::ItemIsSelectable);
+		BaseClass::setCursor(QCursor(Qt::ArrowCursor)); 
 
-		SwitchColorSheme(EditableColor);
+		BaseClass::SwitchColorSheme(BaseClass::EditableColor);
 	}
 	else{
-		SwitchColorSheme(InactiveColor);
+		BaseClass::SwitchColorSheme(BaseClass::InactiveColor);
 	}
 }
 
@@ -70,14 +70,14 @@ template <class GraphicsItemClass, class ObjectClass>
 void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnSelectionChanged(bool isSelected)
 {
 	if (isSelected){
-		SwitchColorSheme(SelectedColor);
+		BaseClass::SwitchColorSheme(BaseClass::SelectedColor);
 	}
 	else{
-		if (IsEditable()){
-			SwitchColorSheme(EditableColor);
+		if (BaseClass::IsEditable()){
+			BaseClass::SwitchColorSheme(BaseClass::EditableColor);
 		}
 		else{
-			SwitchColorSheme(InactiveColor);		
+			BaseClass::SwitchColorSheme(BaseClass::InactiveColor);		
 		}
 	}
 }
@@ -89,8 +89,8 @@ template <class GraphicsItemClass, class ObjectClass>
 QVariant TObjectShapeBase<GraphicsItemClass, ObjectClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
 	if (change == BaseClass::ItemPositionChange){
-		i2d::IObject2d* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL && change == ItemPositionChange){
+		i2d::IObject2d* objectPtr = BaseClass2::GetObjectPtr();
+		if ((objectPtr != NULL) && (change == BaseClass::ItemPositionChange)){
 			QPointF newPosition = value.toPointF();
 			QPointF offset = newPosition - m_lastPosition;
 
@@ -100,7 +100,7 @@ QVariant TObjectShapeBase<GraphicsItemClass, ObjectClass>::itemChange(QGraphicsI
 
 			m_lastPosition = newPosition;
 
-			return pos();
+			return BaseClass::pos();
 		}
 	}
 

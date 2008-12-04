@@ -2,13 +2,14 @@ var projectExt = "vcproj"
 var projectExp = new RegExp(".*\." + projectExt + "$");
 
 
-function TransformDocument(shell, inputPath, outputPath, templatePath, logicalPath, beQuiet, isTest)
+function TransformDocument(shell, inputPath, outputPath, templatePath, logicalPath, includes, beQuiet, isTest)
 {
 	var retVal = "";
 
 	var xalanCommand = "%XALANDIR%/Bin/Xalan.exe";
 	xalanCommand +=
 				" -p SourcePath '" + logicalPath + "'" +
+				" -p ExtraIncludes '" + includes + "'" +
 				" -o " + outputPath + " " +
 				" " + inputPath +
 				" " + templatePath;
@@ -32,7 +33,7 @@ function TransformDocument(shell, inputPath, outputPath, templatePath, logicalPa
 }
 
 
-function ProcessFolder(fileSystem, shell, folder, subPath, parentFolder, parentSubPath, projectPrefix, beQuiet, isTest)
+function ProcessFolder(fileSystem, shell, folder, subPath, parentFolder, parentSubPath, projectPrefix, include, beQuiet, isTest)
 {
 	var retVal = new String;
 
@@ -64,6 +65,7 @@ function ProcessFolder(fileSystem, shell, folder, subPath, parentFolder, parentS
 							outputDir + "/" + ".project",
 							"%ACFDIR%/Config/Eclipse/VC2Ecl.xslt",
 							projectPrefix + parentSubPath,
+							includes,
 							beQuiet,
 							isTest);
 				retVal += TransformDocument(
@@ -72,6 +74,7 @@ function ProcessFolder(fileSystem, shell, folder, subPath, parentFolder, parentS
 							outputDir + "/" + ".cproject",
 							"%ACFDIR%/Config/Eclipse/VC2EclC.xslt",
 							projectPrefix + parentSubPath,
+							includes,
 							beQuiet,
 							isTest);
 			}
@@ -81,7 +84,7 @@ function ProcessFolder(fileSystem, shell, folder, subPath, parentFolder, parentS
 	var subFolderIter = new Enumerator(folder.SubFolders);
 	for (; !subFolderIter.atEnd() && (!isTest || retVal ==""); subFolderIter.moveNext()){
 		var childFile = subFolderIter.item();
-		retVal += ProcessFolder(fileSystem, shell, childFile, subPath + "/" + childFile.Name, folder, subPath, projectPrefix, beQuiet, isTest);
+		retVal += ProcessFolder(fileSystem, shell, childFile, subPath + "/" + childFile.Name, folder, subPath, projectPrefix, includes, beQuiet, isTest);
 	}
 	
 	return retVal;
@@ -95,6 +98,7 @@ var shell = WScript.CreateObject("WScript.Shell");
 
 var isTest = false;
 var beQuiet = false;
+var includes = "";
 
 for (var i = 0; i < WScript.Arguments.length; ++i){
     var argument = WScript.Arguments(i).toString();
@@ -104,6 +108,9 @@ for (var i = 0; i < WScript.Arguments.length; ++i){
         }
         else if (argument.toUpperCase() == "-Q"){
             beQuiet = true;
+        }
+        else if (argument.substr(0, 2).toUpperCase() == "-I"){
+			includes = argument.substr(2);
         }
         else{
 			WScript.Echo("Unknown parameter: " + argument);
@@ -115,7 +122,7 @@ for (var i = 0; i < WScript.Arguments.length; ++i){
 }
 
 if (projectPrefix.length > 0){
-    var message = ProcessFolder(fileSystem, shell, fileSystem.GetFolder("."), "", null, null, projectPrefix, beQuiet, isTest);
+    var message = ProcessFolder(fileSystem, shell, fileSystem.GetFolder("."), "", null, null, projectPrefix, includes, beQuiet, isTest);
     if (message.length > 1){
 	    WScript.Echo("Following projects was converted:\n\n" + message);
     }
@@ -124,7 +131,7 @@ if (projectPrefix.length > 0){
     }
 }
 else{
-    WScript.Echo("Usage: ConvertToEcl [-t] [-q] ProjectPath\nwhere\n\t-t\t\ttest mode (only one project will be converted)\n\t-q\t\tbe quiet\n\tProjectPath\tproject path will be used to represent actual directory for eclipse");
+    WScript.Echo("Usage: ConvertToEcl [-t] [-q] [-i<<ExtraIncludePath>>] ProjectPath\nwhere\n\t-t\t\ttest mode (only one project will be converted)\n\t-q\t\tbe quiet\n\t-i\t\textra include path\n\tProjectPath\tproject path will be used to represent actual directory for eclipse");
 }
    
 

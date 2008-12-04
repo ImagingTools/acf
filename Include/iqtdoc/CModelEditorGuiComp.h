@@ -4,6 +4,7 @@
 
 #include "imod/IModel.h"
 #include "imod/IModelEditor.h"
+#include "imod/IObserver.h"
 
 #include "icomp/CComponentBase.h"
 

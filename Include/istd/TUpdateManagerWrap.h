@@ -2,6 +2,9 @@
 #define istd_TUpdateManagerWrap_included
 
 
+#include "istd/istd.h"
+
+
 namespace istd
 {
 

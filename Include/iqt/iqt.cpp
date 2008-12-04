@@ -113,7 +113,11 @@ i2d::CLine2d GetCLine2d(const QLine& line)
 
 QLine GetQLine(const i2d::CLine2d& line)
 {
-	return QLine(line.GetPoint1().GetX(), line.GetPoint1().GetY(), line.GetPoint2().GetX(), line.GetPoint2().GetY());
+	return QLine(
+				int(line.GetPoint1().GetX()),
+				int(line.GetPoint1().GetY()),
+				int(line.GetPoint2().GetX()),
+				int(line.GetPoint2().GetY()));
 }
 
 

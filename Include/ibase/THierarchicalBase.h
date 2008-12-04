@@ -16,7 +16,7 @@ namespace ibase
 	\ingroup ibase
 
 	Template based implementation of a heriarchical object. 
-	This class is a pseudo-implementation of istd::IHierarchical interface.
+	This class is a pseudo-implementation of istd::TIHierarchical template interface.
 */
 template <class Base, class Interface = typename Base::InterfaceType>
 class THierarchicalBase: public istd::TChangeDelegator<Base>
@@ -55,7 +55,7 @@ void THierarchicalBase<Base, Interface>::SetParentPtr(Interface* parentPtr)
 
 	istd::IChangeable* changeablePtr = dynamic_cast<istd::IChangeable*>(parentPtr);
 	if (changeablePtr){
-		SetSlavePtr(changeablePtr);
+		BaseClass::SetSlavePtr(changeablePtr);
 	}
 }
 
@@ -65,7 +65,7 @@ void THierarchicalBase<Base, Interface>::SetParentPtr(Interface* parentPtr)
 template <class Base, class Interface>
 int THierarchicalBase<Base, Interface>::GetHierarchicalFlags() const
 {
-	return HF_CHILDS_SUPPORTED | HF_PARENT_SUPPORTED;
+	return BaseClass::HF_CHILDS_SUPPORTED | BaseClass::HF_PARENT_SUPPORTED;
 }
 
 
@@ -77,14 +77,14 @@ int THierarchicalBase<Base, Interface>::GetChildsCount() const
 
 
 template <class Base, class Interface>
-typename Interface* THierarchicalBase<Base, Interface>::GetChild(int /*index*/) const
+Interface* THierarchicalBase<Base, Interface>::GetChild(int /*index*/) const
 {
 	return NULL;
 }
 
 
 template <class Base, class Interface>
-typename Interface* THierarchicalBase<Base, Interface>::GetParent() const
+Interface* THierarchicalBase<Base, Interface>::GetParent() const
 {
 	return m_parentPtr;
 }

@@ -156,26 +156,6 @@ private:
 	iqtgui::CHierarchicalCommand m_windowCommand;
 	iqtgui::CHierarchicalCommand m_helpCommand;
 
-	// file menu group
-	iqtgui::CHierarchicalCommand m_newCommand;
-	iqtgui::CHierarchicalCommand m_openCommand;
-	iqtgui::CHierarchicalCommand m_saveCommand;
-	iqtgui::CHierarchicalCommand m_saveAsCommand;
-	iqtgui::CHierarchicalCommand m_quitCommand;
-	// edit menu group
-	iqtgui::CHierarchicalCommand m_undoCommand;
-	iqtgui::CHierarchicalCommand m_redoCommand;
-	// view menu group
-	iqtgui::CHierarchicalCommand m_fullScreenCommand;
-	iqtgui::CHierarchicalCommand m_showToolBarsCommand;
-	// window menu group
-	iqtgui::CHierarchicalCommand m_cascadeCommand;
-	iqtgui::CHierarchicalCommand m_tileHorizontallyCommand;
-	iqtgui::CHierarchicalCommand m_tileVerticallyCommand;
-	iqtgui::CHierarchicalCommand m_closeAllDocumentsCommand;
-	// help menu group
-	iqtgui::CHierarchicalCommand m_aboutCommand;
-
 	class NewDocumentCommand: public iqtgui::CHierarchicalCommand
 	{
 	public:
@@ -245,9 +225,28 @@ private:
 	istd::IPolymorphic* m_activeViewPtr;
 	istd::IChangeable* m_activeDocumentPtr;
 
-	iqtgui::CHierarchicalCommand m_fixedCommands;
-
 	iqtgui::CHierarchicalCommand m_menuCommands;
+	// file menu group
+	iqtgui::CHierarchicalCommand m_newCommand;
+	iqtgui::CHierarchicalCommand m_openCommand;
+	iqtgui::CHierarchicalCommand m_saveCommand;
+	iqtgui::CHierarchicalCommand m_saveAsCommand;
+	iqtgui::CHierarchicalCommand m_quitCommand;
+	// edit menu group
+	iqtgui::CHierarchicalCommand m_undoCommand;
+	iqtgui::CHierarchicalCommand m_redoCommand;
+	// view menu group
+	iqtgui::CHierarchicalCommand m_fullScreenCommand;
+	iqtgui::CHierarchicalCommand m_showToolBarsCommand;
+	// window menu group
+	iqtgui::CHierarchicalCommand m_cascadeCommand;
+	iqtgui::CHierarchicalCommand m_tileHorizontallyCommand;
+	iqtgui::CHierarchicalCommand m_tileVerticallyCommand;
+	iqtgui::CHierarchicalCommand m_closeAllDocumentsCommand;
+	// help menu group
+	iqtgui::CHierarchicalCommand m_aboutCommand;
+
+	iqtgui::CHierarchicalCommand m_fixedCommands;
 
 	typedef std::map<std::string, istd::TDelPtr<iqtgui::CHierarchicalCommand> >  RecentFileCommandMap;
 	RecentFileCommandMap m_recentFilesCommands;
@@ -268,7 +267,7 @@ private:
 // public template methods
 
 template <class MenuType>
-void CMainWindowGuiComp::CreateMenu(const iqtgui::CHierarchicalCommand& command, typename MenuType& result) const
+void CMainWindowGuiComp::CreateMenu(const iqtgui::CHierarchicalCommand& command, MenuType& result) const
 {
 	int prevGroupId = idoc::ICommand::GI_NONE;
 

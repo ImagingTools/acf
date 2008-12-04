@@ -56,7 +56,7 @@ bool TLoggerCompWrap<Base>::SendLogMessage(IMessage::MessageCategory category, i
 	istd::CString messageSource = "<unknown>";
 
 	if (m_logCompPtr.IsValid()){
-		const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(GetComponentContext());
+		const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(BaseClass::GetComponentContext());
 		if (contextPtr != NULL){
 			messageSource = contextPtr->GetContextId();
 		}

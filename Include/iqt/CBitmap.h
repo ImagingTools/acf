@@ -57,6 +57,6 @@ private:
 } // namespace iqt
 
 
-#endif iqt_CBitmap_included
+#endif //!iqt_CBitmap_included
 
 

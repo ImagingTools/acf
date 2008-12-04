@@ -31,10 +31,10 @@ private:
 	void UpdateGripPositions();
 
 private:
-	CGripShape m_topGrip;
-	CGripShape m_bottomGrip;
 	CGripShape m_leftGrip;
 	CGripShape m_rightGrip;
+	CGripShape m_topGrip;
+	CGripShape m_bottomGrip;
 };
 
 

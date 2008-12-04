@@ -65,8 +65,8 @@ private:
 
 	QFile m_file;
 
-	iser::CArchiveTag m_rootTag;
 	bool m_serializeHeader;
+	iser::CArchiveTag m_rootTag;
 
 	bool m_isSeparatorNeeded;
 };

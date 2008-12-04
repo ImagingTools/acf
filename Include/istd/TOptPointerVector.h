@@ -64,7 +64,7 @@ public:
 template <typename Pointer>
 void TOptPointerVector<Pointer>::SetAt(int index, Pointer* pointer, bool releaseFlag)
 {
-	TOptDeleteAdapter<Pointer>::ElementType element;
+	typename TOptDeleteAdapter<Pointer>::ElementType element;
 	element.pointer = pointer;
 	element.releaseFlag = releaseFlag;
 
@@ -75,7 +75,7 @@ void TOptPointerVector<Pointer>::SetAt(int index, Pointer* pointer, bool release
 template <typename Pointer>
 void TOptPointerVector<Pointer>::PushBack(Pointer* pointer, bool releaseFlag)
 {
-	TOptDeleteAdapter<Pointer>::ElementType element;
+	typename TOptDeleteAdapter<Pointer>::ElementType element;
 	element.pointer = pointer;
 	element.releaseFlag = releaseFlag;
 
@@ -86,7 +86,7 @@ void TOptPointerVector<Pointer>::PushBack(Pointer* pointer, bool releaseFlag)
 template <typename Pointer>
 void TOptPointerVector<Pointer>::InsertAt(int index, Pointer* pointer, bool releaseFlag)
 {
-	TOptDeleteAdapter<Pointer>::ElementType element;
+	typename TOptDeleteAdapter<Pointer>::ElementType element;
 	element.pointer = pointer;
 	element.releaseFlag = releaseFlag;
 

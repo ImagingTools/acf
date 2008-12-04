@@ -101,7 +101,7 @@ bool TGuiObserverWrap<Gui, Observer>::OnAttached(imod::IModel* modelPtr)
 {
 	bool retVal = Observer::OnAttached(modelPtr);
 
-	if (retVal && IsGuiCreated() && IsModelAttached(NULL)){
+	if (retVal && Gui::IsGuiCreated() && Observer::IsModelAttached(NULL)){
 		OnGuiModelAttached();
 	}
 
@@ -112,12 +112,12 @@ bool TGuiObserverWrap<Gui, Observer>::OnAttached(imod::IModel* modelPtr)
 template <class Gui, class Observer>
 bool TGuiObserverWrap<Gui, Observer>::OnDetached(imod::IModel* modelPtr)
 {
-	if (IsModelAttached(modelPtr)){
+	if (Observer::IsModelAttached(modelPtr)){
 		if (!m_isReadOnly){
 			UpdateModel();
 		}
 
-		if (IsGuiCreated()){
+		if (Gui::IsGuiCreated()){
 			OnGuiModelDetached();
 		}
 	}
@@ -150,8 +150,8 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiModelHidden()
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::OnGuiModelAttached()
 {
-	I_ASSERT(IsGuiCreated());
-	I_ASSERT(IsModelAttached(NULL));
+	I_ASSERT(Gui::IsGuiCreated());
+	I_ASSERT(Observer::IsModelAttached(NULL));
 
 	if (!IsUpdateBlocked()){
 		UpdateBlocker blocker(this);
@@ -164,7 +164,7 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiModelAttached()
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::OnGuiModelDetached()
 {
-	if (!m_isReadOnly && IsModelAttached(NULL)){
+	if (!m_isReadOnly && Observer::IsModelAttached(NULL)){
 		UpdateModel();
 	}
 }
@@ -184,7 +184,7 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiShown()
 {
 	Gui::OnGuiShown();
 
-	if (IsModelAttached(NULL)){
+	if (Observer::IsModelAttached(NULL)){
 		OnGuiModelShown();
 	}
 }
@@ -195,7 +195,7 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiHidden()
 {
 	Gui::OnGuiHidden();
 
-	if (IsModelAttached(NULL)){
+	if (Observer::IsModelAttached(NULL)){
 		OnGuiModelHidden();
 	}
 }
@@ -206,7 +206,7 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiCreated()
 {
 	Gui::OnGuiCreated();
 
-	if (IsModelAttached(NULL)){
+	if (Observer::IsModelAttached(NULL)){
 		OnGuiModelAttached();
 	}
 }
@@ -215,7 +215,7 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiCreated()
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::OnGuiDestroyed()
 {
-	if (IsModelAttached(NULL)){
+	if (Observer::IsModelAttached(NULL)){
 		OnGuiModelDetached();
 	}
 
@@ -229,7 +229,7 @@ template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	I_ASSERT(modelPtr != NULL);
-	I_ASSERT(IsModelAttached(modelPtr));
+	I_ASSERT(Observer::IsModelAttached(modelPtr));
 
 	Observer::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
@@ -238,7 +238,7 @@ void TGuiObserverWrap<Gui, Observer>::AfterUpdate(imod::IModel* modelPtr, int up
 		skipUpdate = ((m_updateFilter & updateFlags) == 0);
 	}
 
-	if (!IsUpdateBlocked() && IsGuiCreated() && !skipUpdate){
+	if (!IsUpdateBlocked() && Gui::IsGuiCreated() && !skipUpdate){
 		UpdateBlocker blocker(this);
 
 		UpdateEditor();

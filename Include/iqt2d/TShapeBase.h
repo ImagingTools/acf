@@ -86,10 +86,10 @@ private:
 
 template <class GraphicsItemClass>
 TShapeBase<GraphicsItemClass>::TShapeBase(bool isEditable, QGraphicsItem* parentPtr)
-	:BaseClass(parentPtr),
+:	BaseClass(parentPtr),
 	m_isEditable(isEditable)
 {
-	setAcceptsHoverEvents(true);
+	BaseClass::setAcceptsHoverEvents(true);
 }
 
 
@@ -169,10 +169,10 @@ void TShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
 {
 	m_isEditable = isEditable;
 	if (isEditable){
-		setFlags(ItemIsMovable | ItemIsSelectable);
+		BaseClass::setFlags(BaseClass::ItemIsMovable | BaseClass::ItemIsSelectable);
 	}
 	else{
-		setFlags(flags() & ~(ItemIsMovable | ItemIsSelectable));
+		BaseClass::setFlags(BaseClass::flags() & ~(BaseClass::ItemIsMovable | BaseClass::ItemIsSelectable));
 	}
 }
 

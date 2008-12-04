@@ -57,8 +57,8 @@ private:
 	QDomDocument m_document;
 	QDomNode m_currentNode;
 
-	iser::CArchiveTag m_rootTag;
 	bool m_serializeHeader;
+	iser::CArchiveTag m_rootTag;
 };
 
 

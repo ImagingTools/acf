@@ -154,7 +154,7 @@ void CSceneProviderComp::OnFitToShapes()
 	viewPtr->showNormal();
 	double r = viewPtr->matrix().m11();
 	QRectF sceneRect = viewPtr->sceneRect();
-	viewPtr->resize(sceneRect.width() * r, sceneRect.height() * r);
+	viewPtr->resize(int(sceneRect.width() * r), int(sceneRect.height() * r));
 }
 
 
@@ -375,6 +375,9 @@ bool CSceneProviderComp::eventFilter(QObject* obj, QEvent* event)
 
 		case QEvent::GraphicsSceneWheel:
 			OnWheelEvent(dynamic_cast<QGraphicsSceneWheelEvent*>(event));
+			break;
+
+		default:
 			break;
 	}
 

@@ -47,7 +47,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(InputDir)\Generated&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -114,7 +114,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(InputDir)\Generated&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtSql&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\include\QtAssistant&quot;;&quot;$(QTDIR)\include\QtSvg&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"

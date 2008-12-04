@@ -33,14 +33,14 @@ protected:
 	virtual void CalcVisualization(QPainterPath& result);
 
 private:
-	CGripShape m_topInnerGrip;
-	CGripShape m_bottomInnerGrip;
 	CGripShape m_leftInnerGrip;
 	CGripShape m_rightInnerGrip;
-	CGripShape m_topOuterGrip;
-	CGripShape m_bottomOuterGrip;
+	CGripShape m_topInnerGrip;
+	CGripShape m_bottomInnerGrip;
 	CGripShape m_leftOuterGrip;
 	CGripShape m_rightOuterGrip;
+	CGripShape m_topOuterGrip;
+	CGripShape m_bottomOuterGrip;
 };
 
 
