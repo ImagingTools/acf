@@ -10,6 +10,7 @@ function TransformDocument(shell, inputPath, outputPath, templatePath, logicalPa
 	xalanCommand +=
 				" -p SourcePath '" + logicalPath + "'" +
 				" -p ExtraIncludes '" + includes + "'" +
+				" -p CompilerCode 'Ecl'" +
 				" -o " + outputPath + " " +
 				" " + inputPath +
 				" " + templatePath;
