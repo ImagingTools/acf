@@ -72,7 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqt2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libiqt2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqt2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CAnnulusParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusParamsGuiComp.cpp; path = ../CAnnulusParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusSegmentParamsGuiComp.cpp; path = ../CAnnulusSegmentParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CAnnulusSegmentShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusSegmentShape.cpp; path = ../CAnnulusSegmentShape.cpp; sourceTree = SOURCE_ROOT; };
@@ -185,7 +185,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libiqt2d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,7 +277,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libiqt2d.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

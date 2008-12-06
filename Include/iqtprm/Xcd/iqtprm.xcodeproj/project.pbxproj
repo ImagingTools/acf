@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqtprm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libiqtprm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtprm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CComposedParamsSetGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComposedParamsSetGuiComp.cpp; path = ../CComposedParamsSetGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CFileNameParamGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileNameParamGuiComp.cpp; path = ../CFileNameParamGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CParamsManagerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParamsManagerGuiComp.cpp; path = ../CParamsManagerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -80,7 +80,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libiqtprm.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,7 +136,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libiqtprm.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

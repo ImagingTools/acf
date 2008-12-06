@@ -65,7 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqtgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libiqtgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CApplicationComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationComp.cpp; path = ../CApplicationComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CDockWidgetGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDockWidgetGuiComp.cpp; path = ../CDockWidgetGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CFileDialogSerializerComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileDialogSerializerComp.cpp; path = ../CFileDialogSerializerComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -168,7 +168,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libiqtgui.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,7 +268,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libiqtgui.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

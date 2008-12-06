@@ -66,7 +66,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libiser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CArchiveBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArchiveBase.cpp; path = ../CArchiveBase.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CArchiveTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArchiveTag.cpp; path = ../CArchiveTag.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CBinaryReadArchiveBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBinaryReadArchiveBase.cpp; path = ../CBinaryReadArchiveBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -180,7 +180,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libiser.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -290,7 +290,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libiser.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

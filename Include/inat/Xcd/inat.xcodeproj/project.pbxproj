@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libinat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libinat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libinat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CCriticalSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCriticalSection.h; path = ../CCriticalSection.h; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CDllFunctionsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDllFunctionsProvider.h; path = ../CDllFunctionsProvider.h; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* inat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inat.h; path = ../inat.h; sourceTree = SOURCE_ROOT; };
@@ -57,7 +57,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libinat.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,7 +113,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libinat.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libicmm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libicmm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicmm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CCmy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCmy.cpp; path = ../CCmy.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CCmyk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCmyk.cpp; path = ../CCmyk.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CCmykToRgbTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCmykToRgbTransformation.cpp; path = ../CCmykToRgbTransformation.cpp; sourceTree = SOURCE_ROOT; };
@@ -105,7 +105,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libicmm.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libicmm.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

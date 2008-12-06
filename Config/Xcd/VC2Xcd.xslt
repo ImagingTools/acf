@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* lib<xsl:value-of select="//VisualStudioProject/@Name"/>.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* lib<xsl:value-of select="//VisualStudioProject/@Name"/>.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib<xsl:value-of select="//VisualStudioProject/@Name"/>.a; sourceTree = BUILT_PRODUCTS_DIR; };
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PBXFileReference'"/>
 </xsl:apply-templates>
@@ -71,7 +71,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* lib<xsl:value-of select="//VisualStudioProject/@Name"/>.a */,
 			);
 			name = Products;
 			sourceTree = "&lt;group&gt;";
@@ -123,7 +123,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* lib<xsl:value-of select="//VisualStudioProject/@Name"/>.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
