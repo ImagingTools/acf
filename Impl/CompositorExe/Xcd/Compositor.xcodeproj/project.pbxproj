@@ -84,29 +84,31 @@
 		123457120ED2E572006EC826 /* ui_CPackageOverviewComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CPackageOverviewComp.h; path = ../generated/ui_CPackageOverviewComp.h; sourceTree = SOURCE_ROOT; };
 		123457130ED2E572006EC826 /* Compositor.qrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Compositor.qrc; path = ../Compositor.qrc; sourceTree = SOURCE_ROOT; };
 
-	/* End PBXFileReference section */
+		/* End PBXFileReference section */
 
-	/* Begin PBXFrameworksBuildPhase section */
-	D289987405E68DCB004EDB86 /* Frameworks */ = {
-	isa = PBXFrameworksBuildPhase;
-	buildActionMask = 2147483647;
-	files = (
-	);
-	runOnlyForDeploymentPostprocessing = 0;
-	};
-	/* End PBXFrameworksBuildPhase section */
+		/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXFrameworksBuildPhase section */
 
-	/* Begin PBXGroup section */
-	08FB7794FE84155DC02AAC07 /* istd */ = {
-	isa = PBXGroup;
-	children = (
-	EAB5AC950ED2E587006EC826 /* Header */,
-	08FB7795FE84155DC02AAC07 /* Source */,
-	C6A0FF2B0290797F04C91782 /* Documentation */,
-	1AB674ADFE9D54B511CA2CBB /* Products */,
-	);
-	name = istd;
-	sourceTree = "<group>";
+		/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* istd */ = {
+		isa = PBXGroup;
+		children = (
+		EAB5AC950ED2E587006EC826 /* Header */,
+		08FB7795FE84155DC02AAC07 /* Source */,
+		EA9856A50EEABE3D00C738EF /* Generated */,
+		EA9856A60EEABE5300C738EF /* Garbages */,
+		C6A0FF2B0290797F04C91782 /* Documentation */,
+		1AB674ADFE9D54B511CA2CBB /* Products */,
+		);
+		name = istd;
+		sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -140,6 +142,33 @@
 			children = (
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				123457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp */,
+				123457060ED2E572006EC826 /* moc_CComponentView.cpp */,
+				123457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp */,
+				123457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp */,
+				123457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp */,
+				123457100ED2E572006EC826 /* qrc_Compositor.cpp */,
+				123457110ED2E572006EC826 /* ui_CAttributeEditorComp.h */,
+				123457120ED2E572006EC826 /* ui_CPackageOverviewComp.h */,
+
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+				123457030ED2E572006EC826 /* CAttributeEditorComp.ui */,
+				123457040ED2E572006EC826 /* CPackageOverviewComp.ui */,
+				123457130ED2E572006EC826 /* Compositor.qrc */,
+
+			);
+			name = Garbages;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -183,6 +212,8 @@
 				223457000ED2E572006EC826 /* IAttributeSelectionObserver.h in Headers */,
 				223457010ED2E572006EC826 /* IComponentNote.h in Headers */,
 				223457020ED2E572006EC826 /* IRegistryPreview.h in Headers */,
+				223457110ED2E572006EC826 /* ui_CAttributeEditorComp.h in Headers */,
+				223457120ED2E572006EC826 /* ui_CPackageOverviewComp.h in Headers */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +271,12 @@
 				223456870ED2E572006EC826 /* CRegistryPreviewComp.cpp in Sources */,
 				223456880ED2E572006EC826 /* CRegistryViewComp.cpp in Sources */,
 				223456890ED2E572006EC826 /* Main.cpp in Sources */,
+				223457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp in Sources */,
+				223457060ED2E572006EC826 /* moc_CComponentView.cpp in Sources */,
+				223457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp in Sources */,
+				223457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Sources */,
+				223457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Sources */,
+				223457100ED2E572006EC826 /* qrc_Compositor.cpp in Sources */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;

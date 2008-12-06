@@ -1,3 +1,4 @@
+
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -68,9 +69,11 @@
 		223457370ED2E572006EC826 /* TSimComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* TSimComponentWrap.h */; };
 		223457380ED2E572006EC826 /* TSingleAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457380ED2E572006EC826 /* TSingleAttribute.h */; };
 		223457390ED2E572006EC826 /* TSingleAttributePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457390ED2E572006EC826 /* TSingleAttributePtr.h */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2AAC046055464E500DB518D /* libicomp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicomp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CBaseComponentStaticInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBaseComponentStaticInfo.cpp; path = ../CBaseComponentStaticInfo.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CComponentAddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentAddress.cpp; path = ../CComponentAddress.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CComponentBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentBase.cpp; path = ../CComponentBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -132,32 +135,32 @@
 		123457370ED2E572006EC826 /* TSimComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSimComponentWrap.h; path = ../TSimComponentWrap.h; sourceTree = SOURCE_ROOT; };
 		123457380ED2E572006EC826 /* TSingleAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttribute.h; path = ../TSingleAttribute.h; sourceTree = SOURCE_ROOT; };
 		123457390ED2E572006EC826 /* TSingleAttributePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttributePtr.h; path = ../TSingleAttributePtr.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* libistd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
 
-/* Begin PBXFrameworksBuildPhase section */
+		/* End PBXFileReference section */
+
+		/* Begin PBXFrameworksBuildPhase section */
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXFrameworksBuildPhase section */
+		/* End PBXFrameworksBuildPhase section */
 
-/* Begin PBXGroup section */
+		/* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* istd */ = {
-			isa = PBXGroup;
-			children = (
-				EAB5AC950ED2E587006EC826 /* Header */,
-				08FB7795FE84155DC02AAC07 /* Source */,
-				EA9856A50EEABE3D00C738EF /* Generated */,
-				EA9856A60EEABE5300C738EF /* Garbages */,
-				C6A0FF2B0290797F04C91782 /* Documentation */,
-				1AB674ADFE9D54B511CA2CBB /* Products */,
-			);
-			name = istd;
-			sourceTree = "<group>";
+		isa = PBXGroup;
+		children = (
+		EAB5AC950ED2E587006EC826 /* Header */,
+		08FB7795FE84155DC02AAC07 /* Source */,
+		EA9856A50EEABE3D00C738EF /* Generated */,
+		EA9856A60EEABE5300C738EF /* Garbages */,
+		C6A0FF2B0290797F04C91782 /* Documentation */,
+		1AB674ADFE9D54B511CA2CBB /* Products */,
+		);
+		name = istd;
+		sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -175,14 +178,15 @@
 				123456890ED2E572006EC826 /* CRegistry.cpp */,
 				123456900ED2E572006EC826 /* CRegistryElement.cpp */,
 				123456910ED2E572006EC826 /* CSimComponentContextBase.cpp */,
-			);
-			name = Source;
-			sourceTree = "<group>";
+
+	);
+	name = Source;
+	sourceTree = "<group>";
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
+				D2AAC046055464E500DB518D /* libicomp.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,6 +201,7 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
+
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -259,9 +265,10 @@
 				123457370ED2E572006EC826 /* TSimComponentWrap.h */,
 				123457380ED2E572006EC826 /* TSingleAttribute.h */,
 				123457390ED2E572006EC826 /* TSingleAttributePtr.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
+
+	);
+	name = Header;
+	sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -318,6 +325,7 @@
 				223457370ED2E572006EC826 /* TSimComponentWrap.h in Headers */,
 				223457380ED2E572006EC826 /* TSingleAttribute.h in Headers */,
 				223457390ED2E572006EC826 /* TSingleAttributePtr.h in Headers */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +346,7 @@
 			);
 			name = istd;
 			productName = istd;
-			productReference = D2AAC046055464E500DB518D /* libistd.a */;
+			productReference = D2AAC046055464E500DB518D /* libicomp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -346,7 +354,7 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "icomp" */;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "istd" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* istd */;
@@ -376,6 +384,7 @@
 				223456890ED2E572006EC826 /* CRegistry.cpp in Sources */,
 				223456900ED2E572006EC826 /* CRegistryElement.cpp in Sources */,
 				223456910ED2E572006EC826 /* CSimComponentContextBase.cpp in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "icomp" */ = {
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "istd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
@@ -457,3 +466,4 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
+	

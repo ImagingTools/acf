@@ -104,29 +104,31 @@
 		123457220ED2E572006EC826 /* TUpdateManagerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUpdateManagerWrap.h; path = ../TUpdateManagerWrap.h; sourceTree = SOURCE_ROOT; };
 		123457230ED2E572006EC826 /* TVarArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarArray.h; path = ../TVarArray.h; sourceTree = SOURCE_ROOT; };
 
-	/* End PBXFileReference section */
+		/* End PBXFileReference section */
 
-	/* Begin PBXFrameworksBuildPhase section */
-	D289987405E68DCB004EDB86 /* Frameworks */ = {
-	isa = PBXFrameworksBuildPhase;
-	buildActionMask = 2147483647;
-	files = (
-	);
-	runOnlyForDeploymentPostprocessing = 0;
-	};
-	/* End PBXFrameworksBuildPhase section */
+		/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXFrameworksBuildPhase section */
 
-	/* Begin PBXGroup section */
-	08FB7794FE84155DC02AAC07 /* istd */ = {
-	isa = PBXGroup;
-	children = (
-	EAB5AC950ED2E587006EC826 /* Header */,
-	08FB7795FE84155DC02AAC07 /* Source */,
-	C6A0FF2B0290797F04C91782 /* Documentation */,
-	1AB674ADFE9D54B511CA2CBB /* Products */,
-	);
-	name = istd;
-	sourceTree = "<group>";
+		/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* istd */ = {
+		isa = PBXGroup;
+		children = (
+		EAB5AC950ED2E587006EC826 /* Header */,
+		08FB7795FE84155DC02AAC07 /* Source */,
+		EA9856A50EEABE3D00C738EF /* Generated */,
+		EA9856A60EEABE5300C738EF /* Garbages */,
+		C6A0FF2B0290797F04C91782 /* Documentation */,
+		1AB674ADFE9D54B511CA2CBB /* Products */,
+		);
+		name = istd;
+		sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -158,6 +160,22 @@
 			children = (
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+
+			);
+			name = Garbages;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {

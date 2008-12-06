@@ -33,29 +33,31 @@
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PBXFileReference'"/>
 </xsl:apply-templates>
-	/* End PBXFileReference section */
+		/* End PBXFileReference section */
 
-	/* Begin PBXFrameworksBuildPhase section */
-	D289987405E68DCB004EDB86 /* Frameworks */ = {
-	isa = PBXFrameworksBuildPhase;
-	buildActionMask = 2147483647;
-	files = (
-	);
-	runOnlyForDeploymentPostprocessing = 0;
-	};
-	/* End PBXFrameworksBuildPhase section */
+		/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXFrameworksBuildPhase section */
 
-	/* Begin PBXGroup section */
-	08FB7794FE84155DC02AAC07 /* istd */ = {
-	isa = PBXGroup;
-	children = (
-	EAB5AC950ED2E587006EC826 /* Header */,
-	08FB7795FE84155DC02AAC07 /* Source */,
-	C6A0FF2B0290797F04C91782 /* Documentation */,
-	1AB674ADFE9D54B511CA2CBB /* Products */,
-	);
-	name = istd;
-	sourceTree = "&lt;group&gt;";
+		/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* istd */ = {
+		isa = PBXGroup;
+		children = (
+		EAB5AC950ED2E587006EC826 /* Header */,
+		08FB7795FE84155DC02AAC07 /* Source */,
+		EA9856A50EEABE3D00C738EF /* Generated */,
+		EA9856A60EEABE5300C738EF /* Garbages */,
+		C6A0FF2B0290797F04C91782 /* Documentation */,
+		1AB674ADFE9D54B511CA2CBB /* Products */,
+		);
+		name = istd;
+		sourceTree = "&lt;group&gt;";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -80,6 +82,26 @@
 			children = (
 			);
 			name = Documentation;
+			sourceTree = "&lt;group&gt;";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'.Generated'"/>
+</xsl:apply-templates>
+			);
+			name = Generated;
+			sourceTree = "&lt;group&gt;";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'.Garbages'"/>
+</xsl:apply-templates>
+			);
+			name = Garbages;
 			sourceTree = "&lt;group&gt;";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -244,52 +266,64 @@
 		<xsl:variable name="BuildId" select="position() + 22345678"/>
 		<xsl:variable name="FileId" select="position() + 12345678"/>
 
-		<xsl:choose>
-			<xsl:when test="$UserParam = 'PBXBuildFile'">
-				<xsl:text>		</xsl:text>
-				<xsl:value-of select="$BuildId"/>
-				<xsl:text>0ED2E572006EC826 /* </xsl:text>
-				<xsl:value-of select="$Name"/>
-				<xsl:text> in </xsl:text>
-				<xsl:value-of select="$GroupName"/>
-				<xsl:text> */ = {isa = PBXBuildFile; fileRef = </xsl:text>
-				<xsl:value-of select="$FileId"/>
-				<xsl:text>0ED2E572006EC826 /* </xsl:text>
-				<xsl:value-of select="$Name"/>
-				<xsl:text> */; };
+		<xsl:if test = "($GroupName='Sources') or ($GroupName='Headers') or ($GroupName='Generated') or ($GroupName='Garbages')">
+			<xsl:choose>
+				<xsl:when test="$UserParam = 'PBXBuildFile'">
+					<xsl:text>		</xsl:text>
+					<xsl:value-of select="$BuildId"/>
+					<xsl:text>0ED2E572006EC826 /* </xsl:text>
+					<xsl:value-of select="$Name"/>
+					<xsl:text> in </xsl:text>
+					<xsl:value-of select="$GroupName"/>
+					<xsl:text> */ = {isa = PBXBuildFile; fileRef = </xsl:text>
+					<xsl:value-of select="$FileId"/>
+					<xsl:text>0ED2E572006EC826 /* </xsl:text>
+					<xsl:value-of select="$Name"/>
+					<xsl:text> */; };
 </xsl:text>
-			</xsl:when>
-			<xsl:when test="$UserParam = 'PBXFileReference'">
-				<xsl:text>		</xsl:text>
-				<xsl:value-of select="$FileId"/>
-				<xsl:text>0ED2E572006EC826 /* </xsl:text>
-				<xsl:value-of select="$Name"/>
-				<xsl:text> */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = </xsl:text>
-				<xsl:value-of select="$Name"/>
-				<xsl:text>; path = </xsl:text>
-				<xsl:value-of select="translate($FilePath, '\', '/')"/>
-				<xsl:text>; sourceTree = SOURCE_ROOT; };
+				</xsl:when>
+				<xsl:when test="$UserParam = 'PBXFileReference'">
+					<xsl:text>		</xsl:text>
+					<xsl:value-of select="$FileId"/>
+					<xsl:text>0ED2E572006EC826 /* </xsl:text>
+					<xsl:value-of select="$Name"/>
+					<xsl:text> */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = </xsl:text>
+					<xsl:value-of select="$Name"/>
+					<xsl:text>; path = </xsl:text>
+					<xsl:value-of select="translate($FilePath, '\', '/')"/>
+					<xsl:text>; sourceTree = SOURCE_ROOT; };
 </xsl:text>
-			</xsl:when>
-			<xsl:when test="$UserParam = concat('.', $GroupName)">
-				<xsl:text>				</xsl:text>
-				<xsl:value-of select="$FileId"/>
-				<xsl:text>0ED2E572006EC826 /* </xsl:text>
-				<xsl:value-of select="$Name"/>
-				<xsl:text> */,
+				</xsl:when>
+				<xsl:when test="$UserParam = concat('.', $GroupName)">
+					<xsl:text>				</xsl:text>
+					<xsl:value-of select="$FileId"/>
+					<xsl:text>0ED2E572006EC826 /* </xsl:text>
+					<xsl:value-of select="$Name"/>
+					<xsl:text> */,
 </xsl:text>
-			</xsl:when>
-			<xsl:when test="$UserParam = concat('Group.', $GroupName)">
-				<xsl:text>				</xsl:text>
-				<xsl:value-of select="$BuildId"/>
-				<xsl:text>0ED2E572006EC826 /* </xsl:text>
-				<xsl:value-of select="$Name"/>
-				<xsl:text> in </xsl:text>
-				<xsl:value-of select="$GroupName"/>
-				<xsl:text> */,
+				</xsl:when>
+				<xsl:when test="$UserParam = 'Group.Headers'">
+					<xsl:if test="contains($Name, '.h') or contains($Name, '.H')">
+						<xsl:text>				</xsl:text>
+						<xsl:value-of select="$BuildId"/>
+						<xsl:text>0ED2E572006EC826 /* </xsl:text>
+						<xsl:value-of select="$Name"/>
+						<xsl:text> in Headers */,
 </xsl:text>
-			</xsl:when>
-		</xsl:choose>
+					</xsl:if>
+				</xsl:when>
+				<xsl:when test="$UserParam = 'Group.Sources'">
+					<xsl:if test="contains($Name, '.c') or contains($Name, '.C')">
+						<xsl:text>				</xsl:text>
+						<xsl:value-of select="$BuildId"/>
+						<xsl:text>0ED2E572006EC826 /* </xsl:text>
+						<xsl:value-of select="$Name"/>
+						<xsl:text> in Sources */,
+</xsl:text>
+					</xsl:if>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name = "InsertValue">

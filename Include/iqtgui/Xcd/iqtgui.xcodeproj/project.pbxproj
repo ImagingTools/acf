@@ -120,29 +120,31 @@
 		123457310ED2E572006EC826 /* CSelectionParamGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSelectionParamGuiComp.ui; path = ../CSelectionParamGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123457320ED2E572006EC826 /* CSplashScreenGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSplashScreenGuiComp.ui; path = ../CSplashScreenGuiComp.ui; sourceTree = SOURCE_ROOT; };
 
-	/* End PBXFileReference section */
+		/* End PBXFileReference section */
 
-	/* Begin PBXFrameworksBuildPhase section */
-	D289987405E68DCB004EDB86 /* Frameworks */ = {
-	isa = PBXFrameworksBuildPhase;
-	buildActionMask = 2147483647;
-	files = (
-	);
-	runOnlyForDeploymentPostprocessing = 0;
-	};
-	/* End PBXFrameworksBuildPhase section */
+		/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+		isa = PBXFrameworksBuildPhase;
+		buildActionMask = 2147483647;
+		files = (
+		);
+		runOnlyForDeploymentPostprocessing = 0;
+		};
+		/* End PBXFrameworksBuildPhase section */
 
-	/* Begin PBXGroup section */
-	08FB7794FE84155DC02AAC07 /* istd */ = {
-	isa = PBXGroup;
-	children = (
-	EAB5AC950ED2E587006EC826 /* Header */,
-	08FB7795FE84155DC02AAC07 /* Source */,
-	C6A0FF2B0290797F04C91782 /* Documentation */,
-	1AB674ADFE9D54B511CA2CBB /* Products */,
-	);
-	name = istd;
-	sourceTree = "<group>";
+		/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* istd */ = {
+		isa = PBXGroup;
+		children = (
+		EAB5AC950ED2E587006EC826 /* Header */,
+		08FB7795FE84155DC02AAC07 /* Source */,
+		EA9856A50EEABE3D00C738EF /* Generated */,
+		EA9856A60EEABE5300C738EF /* Garbages */,
+		C6A0FF2B0290797F04C91782 /* Documentation */,
+		1AB674ADFE9D54B511CA2CBB /* Products */,
+		);
+		name = istd;
+		sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -178,6 +180,36 @@
 			children = (
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				123457200ED2E572006EC826 /* moc_CDockWidgetGuiComp.cpp */,
+				123457210ED2E572006EC826 /* moc_CHierarchicalCommand.cpp */,
+				123457220ED2E572006EC826 /* moc_CLogGuiComp.cpp */,
+				123457230ED2E572006EC826 /* moc_CSelectionParamGuiComp.cpp */,
+				123457240ED2E572006EC826 /* qrc_iqtgui.cpp */,
+				123457250ED2E572006EC826 /* ui_CLogGuiComp.h */,
+				123457260ED2E572006EC826 /* ui_CLoginGuiComp.h */,
+				123457270ED2E572006EC826 /* ui_CSelectionParamGuiComp.h */,
+				123457280ED2E572006EC826 /* ui_CSplashScreenGuiComp.h */,
+
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+				123457180ED2E572006EC826 /* iqtgui.qrc */,
+				123457290ED2E572006EC826 /* CLogGuiComp.ui */,
+				123457300ED2E572006EC826 /* CLoginGuiComp.ui */,
+				123457310ED2E572006EC826 /* CSelectionParamGuiComp.ui */,
+				123457320ED2E572006EC826 /* CSplashScreenGuiComp.ui */,
+
+			);
+			name = Garbages;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -247,6 +279,10 @@
 				223457150ED2E572006EC826 /* TDesignerGuiObserverCompBase.h in Headers */,
 				223457160ED2E572006EC826 /* TGuiComponentBase.h in Headers */,
 				223457170ED2E572006EC826 /* TGuiObserverWrap.h in Headers */,
+				223457250ED2E572006EC826 /* ui_CLogGuiComp.h in Headers */,
+				223457260ED2E572006EC826 /* ui_CLoginGuiComp.h in Headers */,
+				223457270ED2E572006EC826 /* ui_CSelectionParamGuiComp.h in Headers */,
+				223457280ED2E572006EC826 /* ui_CSplashScreenGuiComp.h in Headers */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +342,11 @@
 				223456890ED2E572006EC826 /* CSplashScreenGuiComp.cpp in Sources */,
 				223456900ED2E572006EC826 /* CTabContainerGuiComp.cpp in Sources */,
 				223456910ED2E572006EC826 /* CTreeWidgetFilter.cpp in Sources */,
+				223457200ED2E572006EC826 /* moc_CDockWidgetGuiComp.cpp in Sources */,
+				223457210ED2E572006EC826 /* moc_CHierarchicalCommand.cpp in Sources */,
+				223457220ED2E572006EC826 /* moc_CLogGuiComp.cpp in Sources */,
+				223457230ED2E572006EC826 /* moc_CSelectionParamGuiComp.cpp in Sources */,
+				223457240ED2E572006EC826 /* qrc_iqtgui.cpp in Sources */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;
