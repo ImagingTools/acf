@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="Compositor.exe"
+	Name="Compositor"
 	ProjectGUID="{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
 	RootNamespace="Compositor"
 	>
@@ -28,6 +28,12 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -83,7 +89,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="AcfStd.lib iqt.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib QtSql4.lib QtNetwork4.lib"
-				OutputFile="$(OutDir)/$(ProjectName)"
+				OutputFile="$(OutDir)/$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;"
 				SubSystem="2"
 			/>
@@ -123,6 +129,12 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -175,7 +187,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib AcfStd.lib iqt.lib"
-				OutputFile="$(OutDir)/$(ProjectName)"
+				OutputFile="$(OutDir)/$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
