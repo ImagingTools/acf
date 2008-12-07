@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -26,11 +25,9 @@
 		223456940ED2E572006EC826 /* CVector2d.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CVector2d.h */; };
 		223456950ED2E572006EC826 /* i2d.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* i2d.h */; };
 		223456960ED2E572006EC826 /* IObject2d.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* IObject2d.h */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libi2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libi2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CAnnulus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulus.cpp; path = ../CAnnulus.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CAnnulusSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusSegment.cpp; path = ../CAnnulusSegment.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CCircle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCircle.cpp; path = ../CCircle.cpp; sourceTree = SOURCE_ROOT; };
@@ -49,7 +46,7 @@
 		123456940ED2E572006EC826 /* CVector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CVector2d.h; path = ../CVector2d.h; sourceTree = SOURCE_ROOT; };
 		123456950ED2E572006EC826 /* i2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = i2d.h; path = ../i2d.h; sourceTree = SOURCE_ROOT; };
 		123456960ED2E572006EC826 /* IObject2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IObject2d.h; path = ../IObject2d.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libi2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libi2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +85,6 @@
 				123456840ED2E572006EC826 /* CRectangle.cpp */,
 				123456850ED2E572006EC826 /* CTransform.cpp */,
 				123456860ED2E572006EC826 /* CVector2d.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -104,7 +100,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -112,25 +107,22 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -146,7 +138,6 @@
 				123456940ED2E572006EC826 /* CVector2d.h */,
 				123456950ED2E572006EC826 /* i2d.h */,
 				123456960ED2E572006EC826 /* IObject2d.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -168,7 +159,6 @@
 				223456940ED2E572006EC826 /* CVector2d.h in Headers */,
 				223456950ED2E572006EC826 /* i2d.h in Headers */,
 				223456960ED2E572006EC826 /* IObject2d.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +230,6 @@
 				223456840ED2E572006EC826 /* CRectangle.cpp in Sources */,
 				223456850ED2E572006EC826 /* CTransform.cpp in Sources */,
 				223456860ED2E572006EC826 /* CVector2d.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +266,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -299,7 +288,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -336,4 +325,3 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
-	

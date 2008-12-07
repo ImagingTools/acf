@@ -40,7 +40,9 @@ void CSimpleDateTime::SetComponent(int component, int value)
 
 bool CSimpleDateTime::SetCurrentTime()
 {
+#ifdef WIN32
 	_tzset();
+#endif
 
 #ifdef _MSC_VER
 	__time64_t t;
