@@ -8,13 +8,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		223456790ED2E572006EC826 /* Empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* Empty.cpp */; };
 
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D2AAC046055464E500DB518D /* libwinpck.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwinpck.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		123456790ED2E572006EC826 /* Empty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Empty.cpp; path = ../Empty.cpp; sourceTree = SOURCE_ROOT; };
 
 /* End PBXFileReference section */
 
@@ -46,7 +44,6 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				123456790ED2E572006EC826 /* Empty.cpp */,
 
 			);
 			name = Source;
@@ -171,7 +168,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223456790ED2E572006EC826 /* Empty.cpp in Sources */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,26 +9,44 @@
 
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* CComplexDoubleManip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* CComplexDoubleManip.cpp */; };
-		223456800ED2E572006EC826 /* CDouble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CDouble.cpp */; };
+		223456800ED2E572006EC826 /* CDoubleManip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CDoubleManip.cpp */; };
 		223456810ED2E572006EC826 /* CFixedPointManip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CFixedPointManip.cpp */; };
 		223456820ED2E572006EC826 /* CComplexDoubleManip.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CComplexDoubleManip.h */; };
 		223456830ED2E572006EC826 /* CDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CDouble.h */; };
-		223456840ED2E572006EC826 /* CFixedPointManip.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CFixedPointManip.h */; };
-		223456850ED2E572006EC826 /* imath.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* imath.h */; };
-		223456860ED2E572006EC826 /* TIValueManip.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* TIValueManip.h */; };
+		223456840ED2E572006EC826 /* CDoubleManip.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CDoubleManip.h */; };
+		223456850ED2E572006EC826 /* CFixedPointManip.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CFixedPointManip.h */; };
+		223456860ED2E572006EC826 /* imath.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* imath.h */; };
+		223456870ED2E572006EC826 /* TFastVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* TFastVector.h */; };
+		223456880ED2E572006EC826 /* TFulcrumGridFunctionBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* TFulcrumGridFunctionBase.h */; };
+		223456890ED2E572006EC826 /* TIMathFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* TIMathFunction.h */; };
+		223456900ED2E572006EC826 /* TIValueManip.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* TIValueManip.h */; };
+		223456910ED2E572006EC826 /* TMathVectorWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* TMathVectorWrap.h */; };
+		223456920ED2E572006EC826 /* TSplineGridFunctionBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* TSplineGridFunctionBase.h */; };
+		223456930ED2E572006EC826 /* TVarMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* TVarMatrix.h */; };
+		223456940ED2E572006EC826 /* TVarVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* TVarVector.h */; };
+		223456950ED2E572006EC826 /* TVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* TVector.h */; };
 
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D2AAC046055464E500DB518D /* libimath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libimath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CComplexDoubleManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComplexDoubleManip.cpp; path = ../CComplexDoubleManip.cpp; sourceTree = SOURCE_ROOT; };
-		123456800ED2E572006EC826 /* CDouble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDouble.cpp; path = ../CDouble.cpp; sourceTree = SOURCE_ROOT; };
+		123456800ED2E572006EC826 /* CDoubleManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDoubleManip.cpp; path = ../CDoubleManip.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CFixedPointManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFixedPointManip.cpp; path = ../CFixedPointManip.cpp; sourceTree = SOURCE_ROOT; };
 		123456820ED2E572006EC826 /* CComplexDoubleManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComplexDoubleManip.h; path = ../CComplexDoubleManip.h; sourceTree = SOURCE_ROOT; };
 		123456830ED2E572006EC826 /* CDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDouble.h; path = ../CDouble.h; sourceTree = SOURCE_ROOT; };
-		123456840ED2E572006EC826 /* CFixedPointManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFixedPointManip.h; path = ../CFixedPointManip.h; sourceTree = SOURCE_ROOT; };
-		123456850ED2E572006EC826 /* imath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imath.h; path = ../imath.h; sourceTree = SOURCE_ROOT; };
-		123456860ED2E572006EC826 /* TIValueManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TIValueManip.h; path = ../TIValueManip.h; sourceTree = SOURCE_ROOT; };
+		123456840ED2E572006EC826 /* CDoubleManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDoubleManip.h; path = ../CDoubleManip.h; sourceTree = SOURCE_ROOT; };
+		123456850ED2E572006EC826 /* CFixedPointManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFixedPointManip.h; path = ../CFixedPointManip.h; sourceTree = SOURCE_ROOT; };
+		123456860ED2E572006EC826 /* imath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imath.h; path = ../imath.h; sourceTree = SOURCE_ROOT; };
+		123456870ED2E572006EC826 /* TFastVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFastVector.h; path = ../TFastVector.h; sourceTree = SOURCE_ROOT; };
+		123456880ED2E572006EC826 /* TFulcrumGridFunctionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFulcrumGridFunctionBase.h; path = ../TFulcrumGridFunctionBase.h; sourceTree = SOURCE_ROOT; };
+		123456890ED2E572006EC826 /* TIMathFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TIMathFunction.h; path = ../TIMathFunction.h; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* TIValueManip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TIValueManip.h; path = ../TIValueManip.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* TMathVectorWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMathVectorWrap.h; path = ../TMathVectorWrap.h; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* TSplineGridFunctionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSplineGridFunctionBase.h; path = ../TSplineGridFunctionBase.h; sourceTree = SOURCE_ROOT; };
+		123456930ED2E572006EC826 /* TVarMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarMatrix.h; path = ../TVarMatrix.h; sourceTree = SOURCE_ROOT; };
+		123456940ED2E572006EC826 /* TVarVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarVector.h; path = ../TVarVector.h; sourceTree = SOURCE_ROOT; };
+		123456950ED2E572006EC826 /* TVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVector.h; path = ../TVector.h; sourceTree = SOURCE_ROOT; };
 
 /* End PBXFileReference section */
 
@@ -61,7 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* CComplexDoubleManip.cpp */,
-				123456800ED2E572006EC826 /* CDouble.cpp */,
+				123456800ED2E572006EC826 /* CDoubleManip.cpp */,
 				123456810ED2E572006EC826 /* CFixedPointManip.cpp */,
 
 			);
@@ -113,9 +131,18 @@
 			children = (
 				123456820ED2E572006EC826 /* CComplexDoubleManip.h */,
 				123456830ED2E572006EC826 /* CDouble.h */,
-				123456840ED2E572006EC826 /* CFixedPointManip.h */,
-				123456850ED2E572006EC826 /* imath.h */,
-				123456860ED2E572006EC826 /* TIValueManip.h */,
+				123456840ED2E572006EC826 /* CDoubleManip.h */,
+				123456850ED2E572006EC826 /* CFixedPointManip.h */,
+				123456860ED2E572006EC826 /* imath.h */,
+				123456870ED2E572006EC826 /* TFastVector.h */,
+				123456880ED2E572006EC826 /* TFulcrumGridFunctionBase.h */,
+				123456890ED2E572006EC826 /* TIMathFunction.h */,
+				123456900ED2E572006EC826 /* TIValueManip.h */,
+				123456910ED2E572006EC826 /* TMathVectorWrap.h */,
+				123456920ED2E572006EC826 /* TSplineGridFunctionBase.h */,
+				123456930ED2E572006EC826 /* TVarMatrix.h */,
+				123456940ED2E572006EC826 /* TVarVector.h */,
+				123456950ED2E572006EC826 /* TVector.h */,
 
 			);
 			name = Header;
@@ -130,9 +157,18 @@
 			files = (
 				223456820ED2E572006EC826 /* CComplexDoubleManip.h in Headers */,
 				223456830ED2E572006EC826 /* CDouble.h in Headers */,
-				223456840ED2E572006EC826 /* CFixedPointManip.h in Headers */,
-				223456850ED2E572006EC826 /* imath.h in Headers */,
-				223456860ED2E572006EC826 /* TIValueManip.h in Headers */,
+				223456840ED2E572006EC826 /* CDoubleManip.h in Headers */,
+				223456850ED2E572006EC826 /* CFixedPointManip.h in Headers */,
+				223456860ED2E572006EC826 /* imath.h in Headers */,
+				223456870ED2E572006EC826 /* TFastVector.h in Headers */,
+				223456880ED2E572006EC826 /* TFulcrumGridFunctionBase.h in Headers */,
+				223456890ED2E572006EC826 /* TIMathFunction.h in Headers */,
+				223456900ED2E572006EC826 /* TIValueManip.h in Headers */,
+				223456910ED2E572006EC826 /* TMathVectorWrap.h in Headers */,
+				223456920ED2E572006EC826 /* TSplineGridFunctionBase.h in Headers */,
+				223456930ED2E572006EC826 /* TVarMatrix.h in Headers */,
+				223456940ED2E572006EC826 /* TVarVector.h in Headers */,
+				223456950ED2E572006EC826 /* TVector.h in Headers */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,7 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456790ED2E572006EC826 /* CComplexDoubleManip.cpp in Sources */,
-				223456800ED2E572006EC826 /* CDouble.cpp in Sources */,
+				223456800ED2E572006EC826 /* CDoubleManip.cpp in Sources */,
 				223456810ED2E572006EC826 /* CFixedPointManip.cpp in Sources */,
 
 			);
