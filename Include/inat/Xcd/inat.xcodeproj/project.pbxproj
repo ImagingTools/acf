@@ -16,12 +16,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libinat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libinat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CCriticalSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCriticalSection.h; path = ../CCriticalSection.h; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CDllFunctionsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDllFunctionsProvider.h; path = ../CDllFunctionsProvider.h; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* inat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = inat.h; path = ../inat.h; sourceTree = SOURCE_ROOT; };
 		123456820ED2E572006EC826 /* TComPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComPtr.h; path = ../TComPtr.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libinat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libinat.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +51,6 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -68,7 +66,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -76,7 +73,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -84,7 +80,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -92,7 +87,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -104,7 +98,6 @@
 				123456800ED2E572006EC826 /* CDllFunctionsProvider.h */,
 				123456810ED2E572006EC826 /* inat.h */,
 				123456820ED2E572006EC826 /* TComPtr.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -120,7 +113,6 @@
 				223456800ED2E572006EC826 /* CDllFunctionsProvider.h in Headers */,
 				223456810ED2E572006EC826 /* inat.h in Headers */,
 				223456820ED2E572006EC826 /* TComPtr.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +176,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

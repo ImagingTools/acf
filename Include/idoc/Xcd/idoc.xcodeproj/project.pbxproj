@@ -25,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libidoc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libidoc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CCompositeDocumentTemplateComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCompositeDocumentTemplateComp.cpp; path = ../CCompositeDocumentTemplateComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CDocumentManagerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocumentManagerBase.cpp; path = ../CDocumentManagerBase.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateBase.cpp; path = ../CSingleDocumentTemplateBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -39,7 +38,7 @@
 		123456890ED2E572006EC826 /* idoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = idoc.h; path = ../idoc.h; sourceTree = SOURCE_ROOT; };
 		123456900ED2E572006EC826 /* IDocumentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDocumentManager.h; path = ../IDocumentManager.h; sourceTree = SOURCE_ROOT; };
 		123456910ED2E572006EC826 /* IDocumentTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDocumentTemplate.h; path = ../IDocumentTemplate.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libidoc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libidoc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +73,6 @@
 				123456800ED2E572006EC826 /* CDocumentManagerBase.cpp */,
 				123456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */,
 				123456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -90,7 +88,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -98,7 +95,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -106,7 +102,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -114,7 +109,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -131,7 +125,6 @@
 				123456890ED2E572006EC826 /* idoc.h */,
 				123456900ED2E572006EC826 /* IDocumentManager.h */,
 				123456910ED2E572006EC826 /* IDocumentTemplate.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -152,7 +145,6 @@
 				223456890ED2E572006EC826 /* idoc.h in Headers */,
 				223456900ED2E572006EC826 /* IDocumentManager.h in Headers */,
 				223456910ED2E572006EC826 /* IDocumentTemplate.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +212,6 @@
 				223456800ED2E572006EC826 /* CDocumentManagerBase.cpp in Sources */,
 				223456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp in Sources */,
 				223456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

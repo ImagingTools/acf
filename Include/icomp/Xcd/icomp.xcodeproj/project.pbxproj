@@ -73,7 +73,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libicomp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicomp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CBaseComponentStaticInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBaseComponentStaticInfo.cpp; path = ../CBaseComponentStaticInfo.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CComponentAddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentAddress.cpp; path = ../CComponentAddress.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CComponentBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentBase.cpp; path = ../CComponentBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -135,7 +134,7 @@
 		123457370ED2E572006EC826 /* TSimComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSimComponentWrap.h; path = ../TSimComponentWrap.h; sourceTree = SOURCE_ROOT; };
 		123457380ED2E572006EC826 /* TSingleAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttribute.h; path = ../TSingleAttribute.h; sourceTree = SOURCE_ROOT; };
 		123457390ED2E572006EC826 /* TSingleAttributePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttributePtr.h; path = ../TSingleAttributePtr.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libicomp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicomp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +178,6 @@
 				123456890ED2E572006EC826 /* CRegistry.cpp */,
 				123456900ED2E572006EC826 /* CRegistryElement.cpp */,
 				123456910ED2E572006EC826 /* CSimComponentContextBase.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -195,7 +193,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -203,7 +200,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -211,7 +207,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -219,7 +214,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -275,7 +269,6 @@
 				123457370ED2E572006EC826 /* TSimComponentWrap.h */,
 				123457380ED2E572006EC826 /* TSingleAttribute.h */,
 				123457390ED2E572006EC826 /* TSingleAttributePtr.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -335,7 +328,6 @@
 				223457370ED2E572006EC826 /* TSimComponentWrap.h in Headers */,
 				223457380ED2E572006EC826 /* TSingleAttribute.h in Headers */,
 				223457390ED2E572006EC826 /* TSingleAttributePtr.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +404,6 @@
 				223456890ED2E572006EC826 /* CRegistry.cpp in Sources */,
 				223456900ED2E572006EC826 /* CRegistryElement.cpp in Sources */,
 				223456910ED2E572006EC826 /* CSimComponentContextBase.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -58,7 +58,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqt.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CApplicationEnvironment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationEnvironment.cpp; path = ../CApplicationEnvironment.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBitmap.cpp; path = ../CBitmap.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CBitmapLoaderComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBitmapLoaderComp.cpp; path = ../CBitmapLoaderComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -105,7 +104,7 @@
 		123457220ED2E572006EC826 /* ITranslationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ITranslationManager.h; path = ../ITranslationManager.h; sourceTree = SOURCE_ROOT; };
 		123457230ED2E572006EC826 /* moc_CDirList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CDirList.cpp; path = ../Generated/moc_CDirList.cpp; sourceTree = SOURCE_ROOT; };
 		123457240ED2E572006EC826 /* moc_CFileList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CFileList.cpp; path = ../Generated/moc_CFileList.cpp; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiqt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqt.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +155,6 @@
 				123456960ED2E572006EC826 /* CXmlFileReadArchive.cpp */,
 				123456970ED2E572006EC826 /* CXmlFileWriteArchive.cpp */,
 				123456980ED2E572006EC826 /* iqt.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -172,7 +170,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -182,7 +179,6 @@
 			children = (
 				123457230ED2E572006EC826 /* moc_CDirList.cpp */,
 				123457240ED2E572006EC826 /* moc_CFileList.cpp */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -190,7 +186,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -200,7 +195,6 @@
 			children = (
 				123457060ED2E572006EC826 /* CDirList.moc */,
 				123457090ED2E572006EC826 /* CFileList.moc */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -230,7 +224,6 @@
 				123457200ED2E572006EC826 /* IQImageProvider.h */,
 				123457210ED2E572006EC826 /* iqt.h */,
 				123457220ED2E572006EC826 /* ITranslationManager.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -264,7 +257,6 @@
 				223457200ED2E572006EC826 /* IQImageProvider.h in Headers */,
 				223457210ED2E572006EC826 /* iqt.h in Headers */,
 				223457220ED2E572006EC826 /* ITranslationManager.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +346,6 @@
 				223456980ED2E572006EC826 /* iqt.cpp in Sources */,
 				223457230ED2E572006EC826 /* moc_CDirList.cpp in Sources */,
 				223457240ED2E572006EC826 /* moc_CFileList.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

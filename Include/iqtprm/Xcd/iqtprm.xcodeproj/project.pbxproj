@@ -29,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqtprm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtprm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CComposedParamsSetGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComposedParamsSetGuiComp.cpp; path = ../CComposedParamsSetGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CFileNameParamGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileNameParamGuiComp.cpp; path = ../CFileNameParamGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CParamsManagerGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParamsManagerGuiComp.cpp; path = ../CParamsManagerGuiComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -47,7 +46,7 @@
 		123456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CParamsManagerGuiComp.h; path = ../Generated/ui_CParamsManagerGuiComp.h; sourceTree = SOURCE_ROOT; };
 		123456940ED2E572006EC826 /* CFileNameParamGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileNameParamGuiComp.ui; path = ../CFileNameParamGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123456950ED2E572006EC826 /* CParamsManagerGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParamsManagerGuiComp.ui; path = ../CParamsManagerGuiComp.ui; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiqtprm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtprm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +80,6 @@
 				123456790ED2E572006EC826 /* CComposedParamsSetGuiComp.cpp */,
 				123456800ED2E572006EC826 /* CFileNameParamGuiComp.cpp */,
 				123456810ED2E572006EC826 /* CParamsManagerGuiComp.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -99,7 +97,6 @@
 			children = (
 				123456940ED2E572006EC826 /* CFileNameParamGuiComp.ui */,
 				123456950ED2E572006EC826 /* CParamsManagerGuiComp.ui */,
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -112,7 +109,6 @@
 				123456910ED2E572006EC826 /* moc_CParamsManagerGuiComp.cpp */,
 				123456920ED2E572006EC826 /* ui_CFileNameParamGuiComp.h */,
 				123456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -120,7 +116,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -131,7 +126,6 @@
 				123456830ED2E572006EC826 /* CComposedParamsSetGuiComp.moc */,
 				123456850ED2E572006EC826 /* CFileNameParamGuiComp.moc */,
 				123456870ED2E572006EC826 /* CParamsManagerGuiComp.moc */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -143,7 +137,6 @@
 				123456840ED2E572006EC826 /* CFileNameParamGuiComp.h */,
 				123456860ED2E572006EC826 /* CParamsManagerGuiComp.h */,
 				123456880ED2E572006EC826 /* iqtprm.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -161,7 +154,6 @@
 				223456880ED2E572006EC826 /* iqtprm.h in Headers */,
 				223456920ED2E572006EC826 /* ui_CFileNameParamGuiComp.h in Headers */,
 				223456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +233,6 @@
 				223456890ED2E572006EC826 /* moc_CComposedParamsSetGuiComp.cpp in Sources */,
 				223456900ED2E572006EC826 /* moc_CFileNameParamGuiComp.cpp in Sources */,
 				223456910ED2E572006EC826 /* moc_CParamsManagerGuiComp.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

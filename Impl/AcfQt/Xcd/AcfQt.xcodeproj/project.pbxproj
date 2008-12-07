@@ -13,9 +13,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libacfqt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libacfqt.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* Empty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Empty.cpp; path = ../Empty.cpp; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libacfqt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libacfqt.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* Empty.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -63,7 +61,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -71,7 +68,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -79,7 +75,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -87,7 +82,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -95,7 +89,6 @@
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -107,7 +100,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456790ED2E572006EC826 /* Empty.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

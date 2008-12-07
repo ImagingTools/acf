@@ -15,11 +15,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libidb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libidb.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* IDatabaseConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDatabaseConnector.h; path = ../IDatabaseConnector.h; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* IDatabaseTableModelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDatabaseTableModelProvider.h; path = ../IDatabaseTableModelProvider.h; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* idb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = idb.h; path = ../idb.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libidb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libidb.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +49,6 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -66,7 +64,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -74,7 +71,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -82,7 +78,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -90,7 +85,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -101,7 +95,6 @@
 				123456790ED2E572006EC826 /* IDatabaseConnector.h */,
 				123456800ED2E572006EC826 /* IDatabaseTableModelProvider.h */,
 				123456810ED2E572006EC826 /* idb.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -116,7 +109,6 @@
 				223456790ED2E572006EC826 /* IDatabaseConnector.h in Headers */,
 				223456800ED2E572006EC826 /* IDatabaseTableModelProvider.h in Headers */,
 				223456810ED2E572006EC826 /* idb.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +172,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

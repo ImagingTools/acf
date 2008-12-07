@@ -69,7 +69,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqtgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CApplicationComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationComp.cpp; path = ../CApplicationComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CDockWidgetGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDockWidgetGuiComp.cpp; path = ../CDockWidgetGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CFileDialogSerializerComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileDialogSerializerComp.cpp; path = ../CFileDialogSerializerComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -127,7 +126,7 @@
 		123457340ED2E572006EC826 /* CLoginGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLoginGuiComp.ui; path = ../CLoginGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123457350ED2E572006EC826 /* CSelectionParamGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSelectionParamGuiComp.ui; path = ../CSelectionParamGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123457360ED2E572006EC826 /* CSplashScreenGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSplashScreenGuiComp.ui; path = ../CSplashScreenGuiComp.ui; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiqtgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +170,6 @@
 				123456890ED2E572006EC826 /* CSplashScreenGuiComp.cpp */,
 				123456900ED2E572006EC826 /* CTabContainerGuiComp.cpp */,
 				123456910ED2E572006EC826 /* CTreeWidgetFilter.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -191,7 +189,6 @@
 				123457340ED2E572006EC826 /* CLoginGuiComp.ui */,
 				123457350ED2E572006EC826 /* CSelectionParamGuiComp.ui */,
 				123457360ED2E572006EC826 /* CSplashScreenGuiComp.ui */,
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -208,7 +205,6 @@
 				123457300ED2E572006EC826 /* ui_CLoginGuiComp.h */,
 				123457310ED2E572006EC826 /* ui_CSelectionParamGuiComp.h */,
 				123457320ED2E572006EC826 /* ui_CSplashScreenGuiComp.h */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -217,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				123457220ED2E572006EC826 /* iqtgui.qrc */,
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -229,7 +224,6 @@
 				123456990ED2E572006EC826 /* CHierarchicalCommand.moc */,
 				123457020ED2E572006EC826 /* CLogGuiComp.moc */,
 				123457050ED2E572006EC826 /* CSelectionParamGuiComp.moc */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -263,7 +257,6 @@
 				123457190ED2E572006EC826 /* TDesignerGuiObserverCompBase.h */,
 				123457200ED2E572006EC826 /* TGuiComponentBase.h */,
 				123457210ED2E572006EC826 /* TGuiObserverWrap.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -305,7 +298,6 @@
 				223457300ED2E572006EC826 /* ui_CLoginGuiComp.h in Headers */,
 				223457310ED2E572006EC826 /* ui_CSelectionParamGuiComp.h in Headers */,
 				223457320ED2E572006EC826 /* ui_CSplashScreenGuiComp.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +397,6 @@
 				223457260ED2E572006EC826 /* moc_CLogGuiComp.cpp in Sources */,
 				223457270ED2E572006EC826 /* moc_CSelectionParamGuiComp.cpp in Sources */,
 				223457280ED2E572006EC826 /* qrc_iqtgui.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

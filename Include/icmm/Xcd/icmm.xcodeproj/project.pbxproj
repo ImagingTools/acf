@@ -35,7 +35,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libicmm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicmm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CCmy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCmy.cpp; path = ../CCmy.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CCmyk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCmyk.cpp; path = ../CCmyk.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CCmykToRgbTransformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCmykToRgbTransformation.cpp; path = ../CCmykToRgbTransformation.cpp; sourceTree = SOURCE_ROOT; };
@@ -59,7 +58,7 @@
 		123456990ED2E572006EC826 /* icmm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = icmm.h; path = ../icmm.h; sourceTree = SOURCE_ROOT; };
 		123457000ED2E572006EC826 /* IColorTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IColorTransformation.h; path = ../IColorTransformation.h; sourceTree = SOURCE_ROOT; };
 		123457010ED2E572006EC826 /* TComposedColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComposedColor.h; path = ../TComposedColor.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libicmm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicmm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +99,6 @@
 				123456860ED2E572006EC826 /* CRgb.cpp */,
 				123456870ED2E572006EC826 /* CRgbToCmykTransformation.cpp */,
 				123456880ED2E572006EC826 /* CVarColor.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -116,7 +114,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -124,7 +121,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -132,7 +128,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -140,7 +135,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -161,7 +155,6 @@
 				123456990ED2E572006EC826 /* icmm.h */,
 				123457000ED2E572006EC826 /* IColorTransformation.h */,
 				123457010ED2E572006EC826 /* TComposedColor.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -186,7 +179,6 @@
 				223456990ED2E572006EC826 /* icmm.h in Headers */,
 				223457000ED2E572006EC826 /* IColorTransformation.h in Headers */,
 				223457010ED2E572006EC826 /* TComposedColor.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +252,6 @@
 				223456860ED2E572006EC826 /* CRgb.cpp in Sources */,
 				223456870ED2E572006EC826 /* CRgbToCmykTransformation.cpp in Sources */,
 				223456880ED2E572006EC826 /* CVarColor.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

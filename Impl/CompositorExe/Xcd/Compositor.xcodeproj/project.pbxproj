@@ -52,7 +52,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libcompositor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcompositor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CAttributeEditorComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributeEditorComp.cpp; path = ../CAttributeEditorComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CComponentConnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentConnector.cpp; path = ../CComponentConnector.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CComponentNote.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentNote.cpp; path = ../CComponentNote.cpp; sourceTree = SOURCE_ROOT; };
@@ -93,7 +92,7 @@
 		123457160ED2E572006EC826 /* ui_CAttributeEditorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CAttributeEditorComp.h; path = ../Generated/ui_CAttributeEditorComp.h; sourceTree = SOURCE_ROOT; };
 		123457170ED2E572006EC826 /* ui_CPackageOverviewComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CPackageOverviewComp.h; path = ../Generated/ui_CPackageOverviewComp.h; sourceTree = SOURCE_ROOT; };
 		123457180ED2E572006EC826 /* Compositor.qrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Compositor.qrc; path = ../Compositor.qrc; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libcompositor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcompositor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +134,6 @@
 				123456870ED2E572006EC826 /* CRegistryPreviewComp.cpp */,
 				123456880ED2E572006EC826 /* CRegistryViewComp.cpp */,
 				123456890ED2E572006EC826 /* Main.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -153,7 +151,6 @@
 			children = (
 				123457080ED2E572006EC826 /* CAttributeEditorComp.ui */,
 				123457090ED2E572006EC826 /* CPackageOverviewComp.ui */,
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -169,7 +166,6 @@
 				123457150ED2E572006EC826 /* qrc_Compositor.cpp */,
 				123457160ED2E572006EC826 /* ui_CAttributeEditorComp.h */,
 				123457170ED2E572006EC826 /* ui_CPackageOverviewComp.h */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -178,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				123457180ED2E572006EC826 /* Compositor.qrc */,
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -191,7 +186,6 @@
 				123456980ED2E572006EC826 /* CPackageOverviewComp.moc */,
 				123457020ED2E572006EC826 /* CRegistryPreviewComp.moc */,
 				123457040ED2E572006EC826 /* CRegistryViewComp.moc */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -212,7 +206,6 @@
 				123457050ED2E572006EC826 /* IAttributeSelectionObserver.h */,
 				123457060ED2E572006EC826 /* IComponentNote.h */,
 				123457070ED2E572006EC826 /* IRegistryPreview.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -239,7 +232,6 @@
 				223457070ED2E572006EC826 /* IRegistryPreview.h in Headers */,
 				223457160ED2E572006EC826 /* ui_CAttributeEditorComp.h in Headers */,
 				223457170ED2E572006EC826 /* ui_CPackageOverviewComp.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +328,6 @@
 				223457130ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Sources */,
 				223457140ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Sources */,
 				223457150ED2E572006EC826 /* qrc_Compositor.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

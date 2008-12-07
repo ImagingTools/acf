@@ -26,7 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiwin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiwin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CApplicationEnvironment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationEnvironment.cpp; path = ../CApplicationEnvironment.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CCriticalSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCriticalSection.cpp; path = ../CCriticalSection.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CDefaultServicesProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDefaultServicesProvider.cpp; path = ../CDefaultServicesProvider.cpp; sourceTree = SOURCE_ROOT; };
@@ -41,7 +40,7 @@
 		123456900ED2E572006EC826 /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTimer.h; path = ../CTimer.h; sourceTree = SOURCE_ROOT; };
 		123456910ED2E572006EC826 /* iwin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iwin.h; path = ../iwin.h; sourceTree = SOURCE_ROOT; };
 		123456920ED2E572006EC826 /* TComPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComPtr.h; path = ../TComPtr.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiwin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiwin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +77,6 @@
 				123456820ED2E572006EC826 /* CDllFunctionsProvider.cpp */,
 				123456830ED2E572006EC826 /* CSystemEnvironment.cpp */,
 				123456840ED2E572006EC826 /* CTimer.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -94,7 +92,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -102,7 +99,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -110,7 +106,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -118,7 +113,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -134,7 +128,6 @@
 				123456900ED2E572006EC826 /* CTimer.h */,
 				123456910ED2E572006EC826 /* iwin.h */,
 				123456920ED2E572006EC826 /* TComPtr.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -154,7 +147,6 @@
 				223456900ED2E572006EC826 /* CTimer.h in Headers */,
 				223456910ED2E572006EC826 /* iwin.h in Headers */,
 				223456920ED2E572006EC826 /* TComPtr.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +216,6 @@
 				223456820ED2E572006EC826 /* CDllFunctionsProvider.cpp in Sources */,
 				223456830ED2E572006EC826 /* CSystemEnvironment.cpp in Sources */,
 				223456840ED2E572006EC826 /* CTimer.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

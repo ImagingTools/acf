@@ -84,7 +84,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqt2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqt2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CAnnulusParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusParamsGuiComp.cpp; path = ../CAnnulusParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusSegmentParamsGuiComp.cpp; path = ../CAnnulusSegmentParamsGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CAnnulusSegmentShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAnnulusSegmentShape.cpp; path = ../CAnnulusSegmentShape.cpp; sourceTree = SOURCE_ROOT; };
@@ -157,7 +156,7 @@
 		123457480ED2E572006EC826 /* CLine2dParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CLine2dParamsGuiComp.ui; path = ../CLine2dParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123457490ED2E572006EC826 /* CRectangleParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangleParamsGuiComp.ui; path = ../CRectangleParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123457500ED2E572006EC826 /* CSceneConnectorGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneConnectorGuiComp.ui; path = ../CSceneConnectorGuiComp.ui; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiqt2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqt2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +203,6 @@
 				123456920ED2E572006EC826 /* CRectangleShape.cpp */,
 				123456930ED2E572006EC826 /* CSceneConnectorGuiComp.cpp */,
 				123456940ED2E572006EC826 /* CSceneProviderComp.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -226,7 +224,6 @@
 				123457480ED2E572006EC826 /* CLine2dParamsGuiComp.ui */,
 				123457490ED2E572006EC826 /* CRectangleParamsGuiComp.ui */,
 				123457500ED2E572006EC826 /* CSceneConnectorGuiComp.ui */,
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -250,7 +247,6 @@
 				123457420ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h */,
 				123457430ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h */,
 				123457440ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -258,7 +254,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -278,7 +273,6 @@
 				123457170ED2E572006EC826 /* CRectangleParamsGuiComp.moc */,
 				123457190ED2E572006EC826 /* CRectangleShape.moc */,
 				123457220ED2E572006EC826 /* CSceneProviderComp.moc */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -308,7 +302,6 @@
 				123457260ED2E572006EC826 /* TObjectShapeBase.h */,
 				123457270ED2E572006EC826 /* TSceneExtenderCompBase.h */,
 				123457280ED2E572006EC826 /* TShapeBase.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -346,7 +339,6 @@
 				223457420ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h in Headers */,
 				223457430ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h in Headers */,
 				223457440ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +466,6 @@
 				223457380ED2E572006EC826 /* moc_CRectangleParamsGuiComp.cpp in Sources */,
 				223457390ED2E572006EC826 /* moc_CRectangleShape.cpp in Sources */,
 				223457400ED2E572006EC826 /* moc_CSceneProviderComp.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

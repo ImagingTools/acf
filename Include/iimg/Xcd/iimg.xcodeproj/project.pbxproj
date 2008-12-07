@@ -24,7 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiimg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiimg.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CBitmapBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBitmapBase.cpp; path = ../CBitmapBase.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CGeneralBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGeneralBitmap.cpp; path = ../CGeneralBitmap.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CHistogram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CHistogram.cpp; path = ../CHistogram.cpp; sourceTree = SOURCE_ROOT; };
@@ -37,7 +36,7 @@
 		123456880ED2E572006EC826 /* TBitmapIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TBitmapIterator.h; path = ../TBitmapIterator.h; sourceTree = SOURCE_ROOT; };
 		123456890ED2E572006EC826 /* TBitmapIterator2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TBitmapIterator2d.h; path = ../TBitmapIterator2d.h; sourceTree = SOURCE_ROOT; };
 		123456900ED2E572006EC826 /* TPixelConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TPixelConversion.h; path = ../TPixelConversion.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiimg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiimg.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +70,6 @@
 				123456790ED2E572006EC826 /* CBitmapBase.cpp */,
 				123456800ED2E572006EC826 /* CGeneralBitmap.cpp */,
 				123456810ED2E572006EC826 /* CHistogram.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -87,7 +85,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -95,7 +92,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -103,7 +99,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -111,7 +106,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -128,7 +122,6 @@
 				123456880ED2E572006EC826 /* TBitmapIterator.h */,
 				123456890ED2E572006EC826 /* TBitmapIterator2d.h */,
 				123456900ED2E572006EC826 /* TPixelConversion.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -149,7 +142,6 @@
 				223456880ED2E572006EC826 /* TBitmapIterator.h in Headers */,
 				223456890ED2E572006EC826 /* TBitmapIterator2d.h in Headers */,
 				223456900ED2E572006EC826 /* TPixelConversion.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +208,6 @@
 				223456790ED2E572006EC826 /* CBitmapBase.cpp in Sources */,
 				223456800ED2E572006EC826 /* CGeneralBitmap.cpp in Sources */,
 				223456810ED2E572006EC826 /* CHistogram.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

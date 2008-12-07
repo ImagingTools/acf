@@ -29,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libimath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libimath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CComplexDoubleManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComplexDoubleManip.cpp; path = ../CComplexDoubleManip.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CDoubleManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDoubleManip.cpp; path = ../CDoubleManip.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CFixedPointManip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFixedPointManip.cpp; path = ../CFixedPointManip.cpp; sourceTree = SOURCE_ROOT; };
@@ -47,7 +46,7 @@
 		123456930ED2E572006EC826 /* TVarMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarMatrix.h; path = ../TVarMatrix.h; sourceTree = SOURCE_ROOT; };
 		123456940ED2E572006EC826 /* TVarVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarVector.h; path = ../TVarVector.h; sourceTree = SOURCE_ROOT; };
 		123456950ED2E572006EC826 /* TVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVector.h; path = ../TVector.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libimath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libimath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +80,6 @@
 				123456790ED2E572006EC826 /* CComplexDoubleManip.cpp */,
 				123456800ED2E572006EC826 /* CDoubleManip.cpp */,
 				123456810ED2E572006EC826 /* CFixedPointManip.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -97,7 +95,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -105,7 +102,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -113,7 +109,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -121,7 +116,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -143,7 +137,6 @@
 				123456930ED2E572006EC826 /* TVarMatrix.h */,
 				123456940ED2E572006EC826 /* TVarVector.h */,
 				123456950ED2E572006EC826 /* TVector.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -169,7 +162,6 @@
 				223456930ED2E572006EC826 /* TVarMatrix.h in Headers */,
 				223456940ED2E572006EC826 /* TVarVector.h in Headers */,
 				223456950ED2E572006EC826 /* TVector.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +228,6 @@
 				223456790ED2E572006EC826 /* CComplexDoubleManip.cpp in Sources */,
 				223456800ED2E572006EC826 /* CDoubleManip.cpp in Sources */,
 				223456810ED2E572006EC826 /* CFixedPointManip.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

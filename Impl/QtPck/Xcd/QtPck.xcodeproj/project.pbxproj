@@ -14,10 +14,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libqtpck.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libqtpck.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* QtPck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QtPck.cpp; path = ../QtPck.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* QtPck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QtPck.h; path = ../QtPck.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libqtpck.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libqtpck.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +48,6 @@
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* QtPck.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -65,7 +63,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -73,7 +70,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -81,7 +77,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -89,7 +84,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -98,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				123456800ED2E572006EC826 /* QtPck.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -111,7 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456800ED2E572006EC826 /* QtPck.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +168,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456790ED2E572006EC826 /* QtPck.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

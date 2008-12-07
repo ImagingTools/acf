@@ -15,11 +15,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libacfdist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libacfdist.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CCopyProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCopyProcessor.cpp; path = ../CCopyProcessor.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../Main.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CCopyProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCopyProcessor.h; path = ../CCopyProcessor.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libacfdist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libacfdist.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +51,6 @@
 			children = (
 				123456790ED2E572006EC826 /* CCopyProcessor.cpp */,
 				123456800ED2E572006EC826 /* Main.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -68,7 +66,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -76,7 +73,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -84,7 +80,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -92,7 +87,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -101,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				123456810ED2E572006EC826 /* CCopyProcessor.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -114,7 +107,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456810ED2E572006EC826 /* CCopyProcessor.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +172,6 @@
 			files = (
 				223456790ED2E572006EC826 /* CCopyProcessor.cpp in Sources */,
 				223456800ED2E572006EC826 /* Main.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

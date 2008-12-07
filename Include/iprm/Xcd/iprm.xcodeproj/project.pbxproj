@@ -27,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiprm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiprm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CComposedParamsSetComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComposedParamsSetComp.cpp; path = ../CComposedParamsSetComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CFileNameParamComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CFileNameParamComp.cpp; path = ../CFileNameParamComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CParamsManagerComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CParamsManagerComp.cpp; path = ../CParamsManagerComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -43,7 +42,7 @@
 		123456910ED2E572006EC826 /* IParamsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IParamsSet.h; path = ../IParamsSet.h; sourceTree = SOURCE_ROOT; };
 		123456920ED2E572006EC826 /* iprm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iprm.h; path = ../iprm.h; sourceTree = SOURCE_ROOT; };
 		123456930ED2E572006EC826 /* ISelectionParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISelectionParam.h; path = ../ISelectionParam.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiprm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiprm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +78,6 @@
 				123456810ED2E572006EC826 /* CParamsManagerComp.cpp */,
 				123456820ED2E572006EC826 /* CParamsSet.cpp */,
 				123456830ED2E572006EC826 /* CSelectableParamsSetComp.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -95,7 +93,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -103,7 +100,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -111,7 +107,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -119,7 +114,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -137,7 +131,6 @@
 				123456910ED2E572006EC826 /* IParamsSet.h */,
 				123456920ED2E572006EC826 /* iprm.h */,
 				123456930ED2E572006EC826 /* ISelectionParam.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -159,7 +152,6 @@
 				223456910ED2E572006EC826 /* IParamsSet.h in Headers */,
 				223456920ED2E572006EC826 /* iprm.h in Headers */,
 				223456930ED2E572006EC826 /* ISelectionParam.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +220,6 @@
 				223456810ED2E572006EC826 /* CParamsManagerComp.cpp in Sources */,
 				223456820ED2E572006EC826 /* CParamsSet.cpp in Sources */,
 				223456830ED2E572006EC826 /* CSelectableParamsSetComp.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

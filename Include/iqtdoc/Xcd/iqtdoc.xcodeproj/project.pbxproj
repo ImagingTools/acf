@@ -28,7 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiqtdoc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtdoc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CExtendedDocumentTemplateComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CExtendedDocumentTemplateComp.cpp; path = ../CExtendedDocumentTemplateComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CMainWindowGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMainWindowGuiComp.cpp; path = ../CMainWindowGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CModelEditorGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelEditorGuiComp.cpp; path = ../CModelEditorGuiComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -45,7 +44,7 @@
 		123456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CExtendedDocumentTemplateComp.cpp; path = ../Generated/moc_CExtendedDocumentTemplateComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CMainWindowGuiComp.cpp; path = ../Generated/moc_CMainWindowGuiComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CMultiDocumentWorkspaceGuiComp.cpp; path = ../Generated/moc_CMultiDocumentWorkspaceGuiComp.cpp; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiqtdoc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiqtdoc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +79,6 @@
 				123456800ED2E572006EC826 /* CMainWindowGuiComp.cpp */,
 				123456810ED2E572006EC826 /* CModelEditorGuiComp.cpp */,
 				123456820ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -96,7 +94,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -107,7 +104,6 @@
 				123456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp */,
 				123456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp */,
 				123456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -115,7 +111,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -126,7 +121,6 @@
 				123456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.moc */,
 				123456860ED2E572006EC826 /* CMainWindowGuiComp.moc */,
 				123456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.moc */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -140,7 +134,6 @@
 				123456880ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h */,
 				123456900ED2E572006EC826 /* iqtdoc.h */,
 				123456910ED2E572006EC826 /* IWorkspaceController.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -158,7 +151,6 @@
 				223456880ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h in Headers */,
 				223456900ED2E572006EC826 /* iqtdoc.h in Headers */,
 				223456910ED2E572006EC826 /* IWorkspaceController.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +227,6 @@
 				223456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp in Sources */,
 				223456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp in Sources */,
 				223456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

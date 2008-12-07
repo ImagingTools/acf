@@ -66,7 +66,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libiser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CArchiveBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArchiveBase.cpp; path = ../CArchiveBase.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CArchiveTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArchiveTag.cpp; path = ../CArchiveTag.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CBinaryReadArchiveBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBinaryReadArchiveBase.cpp; path = ../CBinaryReadArchiveBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -121,7 +120,7 @@
 		123457300ED2E572006EC826 /* IVersionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IVersionInfo.h; path = ../IVersionInfo.h; sourceTree = SOURCE_ROOT; };
 		123457310ED2E572006EC826 /* TXmlStreamReadArchiveBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TXmlStreamReadArchiveBase.h; path = ../TXmlStreamReadArchiveBase.h; sourceTree = SOURCE_ROOT; };
 		123457320ED2E572006EC826 /* TXmlStreamWriteArchiveBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TXmlStreamWriteArchiveBase.h; path = ../TXmlStreamWriteArchiveBase.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libiser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +174,6 @@
 				123456990ED2E572006EC826 /* CXmlStringReadArchive.cpp */,
 				123457000ED2E572006EC826 /* CXmlStringWriteArchive.cpp */,
 				123457010ED2E572006EC826 /* CXmlWriteArchiveBase.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -191,7 +189,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -199,7 +196,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -207,7 +203,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -215,7 +210,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -254,7 +248,6 @@
 				123457300ED2E572006EC826 /* IVersionInfo.h */,
 				123457310ED2E572006EC826 /* TXmlStreamReadArchiveBase.h */,
 				123457320ED2E572006EC826 /* TXmlStreamWriteArchiveBase.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -297,7 +290,6 @@
 				223457300ED2E572006EC826 /* IVersionInfo.h in Headers */,
 				223457310ED2E572006EC826 /* TXmlStreamReadArchiveBase.h in Headers */,
 				223457320ED2E572006EC826 /* TXmlStreamWriteArchiveBase.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +376,6 @@
 				223456990ED2E572006EC826 /* CXmlStringReadArchive.cpp in Sources */,
 				223457000ED2E572006EC826 /* CXmlStringWriteArchive.cpp in Sources */,
 				223457010ED2E572006EC826 /* CXmlWriteArchiveBase.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

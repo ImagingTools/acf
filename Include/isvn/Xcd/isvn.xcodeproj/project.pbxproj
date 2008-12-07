@@ -16,12 +16,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libisvn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libisvn.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* AcfVersion.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AcfVersion.txt; path = ../AcfVersion.txt; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* VersionInfoTemplate.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VersionInfoTemplate.xml; path = ../VersionInfoTemplate.xml; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* TApplicationInfoWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TApplicationInfoWrap.h; path = ../TApplicationInfoWrap.h; sourceTree = SOURCE_ROOT; };
 		123456820ED2E572006EC826 /* AcfVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AcfVersion.h; path = ../Generated/AcfVersion.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libisvn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libisvn.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +51,6 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -68,7 +66,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -77,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				123456820ED2E572006EC826 /* AcfVersion.h */,
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -85,7 +81,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -95,7 +90,6 @@
 			children = (
 				123456790ED2E572006EC826 /* AcfVersion.txt */,
 				123456800ED2E572006EC826 /* VersionInfoTemplate.xml */,
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -104,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				123456810ED2E572006EC826 /* TApplicationInfoWrap.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -118,7 +111,6 @@
 			files = (
 				223456810ED2E572006EC826 /* TApplicationInfoWrap.h in Headers */,
 				223456820ED2E572006EC826 /* AcfVersion.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +174,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

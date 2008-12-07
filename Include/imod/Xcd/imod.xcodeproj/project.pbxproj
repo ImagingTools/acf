@@ -30,7 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libimod.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libimod.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CModelBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelBase.cpp; path = ../CModelBase.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CModelChangeObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CModelChangeObserver.cpp; path = ../CModelChangeObserver.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CMultiModelObserverBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMultiModelObserverBase.cpp; path = ../CMultiModelObserverBase.cpp; sourceTree = SOURCE_ROOT; };
@@ -49,7 +48,7 @@
 		123456940ED2E572006EC826 /* TModelWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TModelWrap.h; path = ../TModelWrap.h; sourceTree = SOURCE_ROOT; };
 		123456950ED2E572006EC826 /* TMultiModelObserverBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiModelObserverBase.h; path = ../TMultiModelObserverBase.h; sourceTree = SOURCE_ROOT; };
 		123456960ED2E572006EC826 /* TSingleModelObserverBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleModelObserverBase.h; path = ../TSingleModelObserverBase.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libimod.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libimod.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +84,6 @@
 				123456810ED2E572006EC826 /* CMultiModelObserverBase.cpp */,
 				123456820ED2E572006EC826 /* CSerializedUndoManager.cpp */,
 				123456830ED2E572006EC826 /* CSingleModelObserverBase.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -101,7 +99,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -109,7 +106,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -117,7 +113,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -125,7 +120,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -146,7 +140,6 @@
 				123456940ED2E572006EC826 /* TModelWrap.h */,
 				123456950ED2E572006EC826 /* TMultiModelObserverBase.h */,
 				123456960ED2E572006EC826 /* TSingleModelObserverBase.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -171,7 +164,6 @@
 				223456940ED2E572006EC826 /* TModelWrap.h in Headers */,
 				223456950ED2E572006EC826 /* TMultiModelObserverBase.h in Headers */,
 				223456960ED2E572006EC826 /* TSingleModelObserverBase.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +232,6 @@
 				223456810ED2E572006EC826 /* CMultiModelObserverBase.cpp in Sources */,
 				223456820ED2E572006EC826 /* CSerializedUndoManager.cpp in Sources */,
 				223456830ED2E572006EC826 /* CSingleModelObserverBase.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

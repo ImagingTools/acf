@@ -29,10 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* lib<xsl:value-of select="$LowercaseName"/>.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib<xsl:value-of select="$LowercaseName"/>.a; sourceTree = BUILT_PRODUCTS_DIR; };
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PBXFileReference'"/>
-</xsl:apply-templates>
+</xsl:apply-templates>		D2AAC046055464E500DB518D /* lib<xsl:value-of select="$LowercaseName"/>.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib<xsl:value-of select="$LowercaseName"/>.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +64,7 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Sources'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			name = Source;
 			sourceTree = "&lt;group&gt;";
 		};
@@ -83,8 +81,7 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Forms'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			name = Forms;
 			sourceTree = "&lt;group&gt;";
 		};
@@ -93,8 +90,7 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Generated'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			name = Generated;
 			sourceTree = "&lt;group&gt;";
 		};
@@ -103,8 +99,7 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Resources'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			name = Resources;
 			sourceTree = "&lt;group&gt;";
 		};
@@ -113,8 +108,7 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Garbages'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			name = Garbages;
 			sourceTree = "&lt;group&gt;";
 		};
@@ -123,8 +117,7 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Headers'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			name = Header;
 			sourceTree = "&lt;group&gt;";
 		};
@@ -137,8 +130,7 @@
 			files = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'Group.Headers'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
@@ -209,8 +201,7 @@
 			files = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'Group.Sources'"/>
-</xsl:apply-templates>
-			);
+</xsl:apply-templates>			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */

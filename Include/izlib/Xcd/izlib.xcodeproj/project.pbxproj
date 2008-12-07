@@ -17,13 +17,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libizlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libizlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CGzXmlReadArchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGzXmlReadArchive.cpp; path = ../CGzXmlReadArchive.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CGzXmlWriteArchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGzXmlWriteArchive.cpp; path = ../CGzXmlWriteArchive.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CGzXmlReadArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGzXmlReadArchive.h; path = ../CGzXmlReadArchive.h; sourceTree = SOURCE_ROOT; };
 		123456820ED2E572006EC826 /* CGzXmlWriteArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CGzXmlWriteArchive.h; path = ../CGzXmlWriteArchive.h; sourceTree = SOURCE_ROOT; };
 		123456830ED2E572006EC826 /* izlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = izlib.h; path = ../izlib.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libizlib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libizlib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +55,6 @@
 			children = (
 				123456790ED2E572006EC826 /* CGzXmlReadArchive.cpp */,
 				123456800ED2E572006EC826 /* CGzXmlWriteArchive.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -72,7 +70,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -80,7 +77,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -88,7 +84,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -96,7 +91,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -107,7 +101,6 @@
 				123456810ED2E572006EC826 /* CGzXmlReadArchive.h */,
 				123456820ED2E572006EC826 /* CGzXmlWriteArchive.h */,
 				123456830ED2E572006EC826 /* izlib.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -122,7 +115,6 @@
 				223456810ED2E572006EC826 /* CGzXmlReadArchive.h in Headers */,
 				223456820ED2E572006EC826 /* CGzXmlWriteArchive.h in Headers */,
 				223456830ED2E572006EC826 /* izlib.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +180,6 @@
 			files = (
 				223456790ED2E572006EC826 /* CGzXmlReadArchive.cpp in Sources */,
 				223456800ED2E572006EC826 /* CGzXmlWriteArchive.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

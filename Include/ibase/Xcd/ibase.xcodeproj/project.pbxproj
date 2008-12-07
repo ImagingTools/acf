@@ -45,7 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D2AAC046055464E500DB518D /* libibase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libibase.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CApplicationInfoComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationInfoComp.cpp; path = ../CApplicationInfoComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CInstantiatorComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInstantiatorComp.cpp; path = ../CInstantiatorComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessage.cpp; path = ../CMessage.cpp; sourceTree = SOURCE_ROOT; };
@@ -79,7 +78,7 @@
 		123457090ED2E572006EC826 /* TNamedWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TNamedWrap.h; path = ../TNamedWrap.h; sourceTree = SOURCE_ROOT; };
 		123457100ED2E572006EC826 /* TSerializableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSerializableContainer.h; path = ../TSerializableContainer.h; sourceTree = SOURCE_ROOT; };
 		123457110ED2E572006EC826 /* TSingleFactoryComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleFactoryComp.h; path = ../TSingleFactoryComp.h; sourceTree = SOURCE_ROOT; };
-
+		D2AAC046055464E500DB518D /* libibase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libibase.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +115,6 @@
 				123456820ED2E572006EC826 /* CRectangleComp.cpp */,
 				123456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp */,
 				123456840ED2E572006EC826 /* CSize.cpp */,
-
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -132,7 +130,6 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -140,7 +137,6 @@
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -148,7 +144,6 @@
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -156,7 +151,6 @@
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -191,7 +185,6 @@
 				123457090ED2E572006EC826 /* TNamedWrap.h */,
 				123457100ED2E572006EC826 /* TSerializableContainer.h */,
 				123457110ED2E572006EC826 /* TSingleFactoryComp.h */,
-
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -230,7 +223,6 @@
 				223457090ED2E572006EC826 /* TNamedWrap.h in Headers */,
 				223457100ED2E572006EC826 /* TSerializableContainer.h in Headers */,
 				223457110ED2E572006EC826 /* TSingleFactoryComp.h in Headers */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +292,6 @@
 				223456820ED2E572006EC826 /* CRectangleComp.cpp in Sources */,
 				223456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp in Sources */,
 				223456840ED2E572006EC826 /* CSize.cpp in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
