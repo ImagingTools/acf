@@ -46,7 +46,7 @@
 		/* End PBXFrameworksBuildPhase section */
 
 		/* Begin PBXGroup section */
-		08FB7794FE84155DC02AAC07 /* istd */ = {
+		08FB7794FE84155DC02AAC07 /* <xsl:value-of select="$LowercaseName"/> */ = {
 		isa = PBXGroup;
 		children = (
 		EAB5AC950ED2E587006EC826 /* Header */,
@@ -56,7 +56,7 @@
 		C6A0FF2B0290797F04C91782 /* Documentation */,
 		1AB674ADFE9D54B511CA2CBB /* Products */,
 		);
-		name = istd;
+		name = <xsl:value-of select="$LowercaseName"/>;
 		sourceTree = "&lt;group&gt;";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
@@ -130,9 +130,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* istd */ = {
+		D2AAC045055464E500DB518D /* <xsl:value-of select="$LowercaseName"/> */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "istd" */;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "<xsl:value-of select="$LowercaseName"/>" */;
 			buildPhases = (
 				D2AAC043055464E500DB518D /* Headers */,
 				D2AAC044055464E500DB518D /* Sources */,
@@ -142,8 +142,8 @@
 			);
 			dependencies = (
 			);
-			name = istd;
-			productName = istd;
+			name = <xsl:value-of select="$LowercaseName"/>;
+			productName = <xsl:value-of select="$LowercaseName"/>;
 			productReference = D2AAC046055464E500DB518D /* lib<xsl:value-of select="$LowercaseName"/>.a */;
 			productType = "com.apple.product-type.library.static";
 		};
@@ -152,14 +152,14 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "istd" */;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "<xsl:value-of select="$LowercaseName"/>" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
-			mainGroup = 08FB7794FE84155DC02AAC07 /* istd */;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* <xsl:value-of select="$LowercaseName"/> */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* istd */,
+				D2AAC045055464E500DB518D /* <xsl:value-of select="$LowercaseName"/> */,
 			);
 		};
 /* End PBXProject section */
@@ -187,7 +187,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = istd;
+				PRODUCT_NAME = <xsl:value-of select="$LowercaseName"/>;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -198,7 +198,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = istd;
+				PRODUCT_NAME = <xsl:value-of select="$LowercaseName"/>;
 			};
 			name = Release;
 		};
@@ -231,7 +231,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "istd" */ = {
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "<xsl:value-of select="$LowercaseName"/>" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91EC08733DB70010E9CD /* Debug */,
@@ -240,7 +240,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "istd" */ = {
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "<xsl:value-of select="$LowercaseName"/>" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
