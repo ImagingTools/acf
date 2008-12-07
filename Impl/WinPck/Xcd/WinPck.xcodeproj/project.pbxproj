@@ -16,40 +16,41 @@
 		D2AAC046055464E500DB518D /* libwinpck.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwinpck.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* Empty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Empty.cpp; path = ../Empty.cpp; sourceTree = SOURCE_ROOT; };
 
-		/* End PBXFileReference section */
+/* End PBXFileReference section */
 
-		/* Begin PBXFrameworksBuildPhase section */
+/* Begin PBXFrameworksBuildPhase section */
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
-		isa = PBXFrameworksBuildPhase;
-		buildActionMask = 2147483647;
-		files = (
-		);
-		runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		/* End PBXFrameworksBuildPhase section */
+/* End PBXFrameworksBuildPhase section */
 
-		/* Begin PBXGroup section */
+/* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* winpck */ = {
-		isa = PBXGroup;
-		children = (
-		EAB5AC950ED2E587006EC826 /* Header */,
-		08FB7795FE84155DC02AAC07 /* Source */,
-		EA9856A50EEABE3D00C738EF /* Generated */,
-		EA9856A60EEABE5300C738EF /* Garbages */,
-		C6A0FF2B0290797F04C91782 /* Documentation */,
-		1AB674ADFE9D54B511CA2CBB /* Products */,
-		);
-		name = winpck;
-		sourceTree = "<group>";
+			isa = PBXGroup;
+			children = (
+				EAB5AC950ED2E587006EC826 /* Header */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
+				EA9856A60EEABE5300C738EF /* Garbages */,
+				C6A0FF2B0290797F04C91782 /* Forms */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = winpck;
+			sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* Empty.cpp */,
 
-	);
-	name = Source;
-	sourceTree = "<group>";
+			);
+			name = Source;
+			sourceTree = "<group>";
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
@@ -59,11 +60,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C6A0FF2B0290797F04C91782 /* Documentation */ = {
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+
 			);
-			name = Documentation;
+			name = Forms;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -72,6 +74,14 @@
 
 			);
 			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
@@ -86,9 +96,9 @@
 			isa = PBXGroup;
 			children = (
 
-	);
-	name = Header;
-	sourceTree = "<group>";
+			);
+			name = Header;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -108,6 +118,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "winpck" */;
 			buildPhases = (
+				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
 				D2AAC044055464E500DB518D /* Sources */,
 				D289987405E68DCB004EDB86 /* Frameworks */,
@@ -137,6 +148,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = "UIC'ing...";
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2AAC044055464E500DB518D /* Sources */ = {

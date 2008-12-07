@@ -135,6 +135,12 @@
 				<xsl:when test = "contains(@RelativePath,'.cpp')">
 					Sources
 				</xsl:when>
+				<xsl:when test = "contains(@RelativePath,'.ui')">
+					Forms
+				</xsl:when>
+				<xsl:when test = "contains(@RelativePath,'.qrc')">
+					Resources
+				</xsl:when>
 				<xsl:otherwise>
 					Garbages
 				</xsl:otherwise>

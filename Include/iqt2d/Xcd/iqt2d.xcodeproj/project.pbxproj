@@ -62,12 +62,12 @@
 		223457300ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457300ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h */; };
 		223457310ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457310ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h */; };
 		223457320ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457320ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h */; };
-		223457330ED2E572006EC826 /* CAnnulusParamsGuiComp.ui in Garbages */ = {isa = PBXBuildFile; fileRef = 123457330ED2E572006EC826 /* CAnnulusParamsGuiComp.ui */; };
-		223457340ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui in Garbages */ = {isa = PBXBuildFile; fileRef = 123457340ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui */; };
-		223457350ED2E572006EC826 /* CCircleParamsGuiComp.ui in Garbages */ = {isa = PBXBuildFile; fileRef = 123457350ED2E572006EC826 /* CCircleParamsGuiComp.ui */; };
-		223457360ED2E572006EC826 /* CLine2dParamsGuiComp.ui in Garbages */ = {isa = PBXBuildFile; fileRef = 123457360ED2E572006EC826 /* CLine2dParamsGuiComp.ui */; };
-		223457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui in Garbages */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui */; };
-		223457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui in Garbages */ = {isa = PBXBuildFile; fileRef = 123457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui */; };
+		223457330ED2E572006EC826 /* CAnnulusParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457330ED2E572006EC826 /* CAnnulusParamsGuiComp.ui */; };
+		223457340ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457340ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui */; };
+		223457350ED2E572006EC826 /* CCircleParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457350ED2E572006EC826 /* CCircleParamsGuiComp.ui */; };
+		223457360ED2E572006EC826 /* CLine2dParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457360ED2E572006EC826 /* CLine2dParamsGuiComp.ui */; };
+		223457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui */; };
+		223457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui */; };
 
 /* End PBXBuildFile section */
 
@@ -134,31 +134,32 @@
 		123457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangleParamsGuiComp.ui; path = ../CRectangleParamsGuiComp.ui; sourceTree = SOURCE_ROOT; };
 		123457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSceneConnectorGuiComp.ui; path = ../CSceneConnectorGuiComp.ui; sourceTree = SOURCE_ROOT; };
 
-		/* End PBXFileReference section */
+/* End PBXFileReference section */
 
-		/* Begin PBXFrameworksBuildPhase section */
+/* Begin PBXFrameworksBuildPhase section */
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
-		isa = PBXFrameworksBuildPhase;
-		buildActionMask = 2147483647;
-		files = (
-		);
-		runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		/* End PBXFrameworksBuildPhase section */
+/* End PBXFrameworksBuildPhase section */
 
-		/* Begin PBXGroup section */
+/* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* iqt2d */ = {
-		isa = PBXGroup;
-		children = (
-		EAB5AC950ED2E587006EC826 /* Header */,
-		08FB7795FE84155DC02AAC07 /* Source */,
-		EA9856A50EEABE3D00C738EF /* Generated */,
-		EA9856A60EEABE5300C738EF /* Garbages */,
-		C6A0FF2B0290797F04C91782 /* Documentation */,
-		1AB674ADFE9D54B511CA2CBB /* Products */,
-		);
-		name = iqt2d;
-		sourceTree = "<group>";
+			isa = PBXGroup;
+			children = (
+				EAB5AC950ED2E587006EC826 /* Header */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
+				EA9856A60EEABE5300C738EF /* Garbages */,
+				C6A0FF2B0290797F04C91782 /* Forms */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = iqt2d;
+			sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -180,9 +181,9 @@
 				123456930ED2E572006EC826 /* CSceneConnectorGuiComp.cpp */,
 				123456940ED2E572006EC826 /* CSceneProviderComp.cpp */,
 
-	);
-	name = Source;
-	sourceTree = "<group>";
+			);
+			name = Source;
+			sourceTree = "<group>";
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
@@ -192,11 +193,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C6A0FF2B0290797F04C91782 /* Documentation */ = {
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				123457330ED2E572006EC826 /* CAnnulusParamsGuiComp.ui */,
+				123457340ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui */,
+				123457350ED2E572006EC826 /* CCircleParamsGuiComp.ui */,
+				123457360ED2E572006EC826 /* CLine2dParamsGuiComp.ui */,
+				123457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui */,
+				123457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui */,
+
 			);
-			name = Documentation;
+			name = Forms;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -223,15 +231,17 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-				123457330ED2E572006EC826 /* CAnnulusParamsGuiComp.ui */,
-				123457340ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui */,
-				123457350ED2E572006EC826 /* CCircleParamsGuiComp.ui */,
-				123457360ED2E572006EC826 /* CLine2dParamsGuiComp.ui */,
-				123457370ED2E572006EC826 /* CRectangleParamsGuiComp.ui */,
-				123457380ED2E572006EC826 /* CSceneConnectorGuiComp.ui */,
 
 			);
 			name = Garbages;
@@ -263,9 +273,9 @@
 				123457150ED2E572006EC826 /* TSceneExtenderCompBase.h */,
 				123457160ED2E572006EC826 /* TShapeBase.h */,
 
-	);
-	name = Header;
-	sourceTree = "<group>";
+			);
+			name = Header;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -311,6 +321,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "iqt2d" */;
 			buildPhases = (
+				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
 				D2AAC044055464E500DB518D /* Sources */,
 				D289987405E68DCB004EDB86 /* Frameworks */,
@@ -340,6 +351,35 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = "UIC'ing...";
+			files = (
+			);
+			inputPaths = (
+				../CAnnulusParamsGuiComp.ui,
+				../CAnnulusSegmentParamsGuiComp.ui,
+				../CCircleParamsGuiComp.ui,
+				../CLine2dParamsGuiComp.ui,
+				../CRectangleParamsGuiComp.ui,
+				../CSceneConnectorGuiComp.ui,
+			);
+			outputPaths = (
+				../Generated/ui_CAnnulusParamsGuiComp.h,
+				../Generated/ui_CAnnulusSegmentParamsGuiComp.h,
+				../Generated/ui_CCircleParamsGuiComp.h,
+				../Generated/ui_CLine2dParamsGuiComp.h,
+				../Generated/ui_CRectangleParamsGuiComp.h,
+				../Generated/ui_CSceneConnectorGuiComp.h,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "uic -o ../Generated/ui_CAnnulusParamsGuiComp.h ../CAnnulusParamsGuiComp.ui\nuic -o ../Generated/ui_CAnnulusSegmentParamsGuiComp.h ../CAnnulusSegmentParamsGuiComp.ui\nuic -o ../Generated/ui_CCircleParamsGuiComp.h ../CCircleParamsGuiComp.ui\nuic -o ../Generated/ui_CLine2dParamsGuiComp.h ../CLine2dParamsGuiComp.ui\nuic -o ../Generated/ui_CRectangleParamsGuiComp.h ../CRectangleParamsGuiComp.ui\nuic -o ../Generated/ui_CSceneConnectorGuiComp.h ../CSceneConnectorGuiComp.ui\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2AAC044055464E500DB518D /* Sources */ = {

@@ -1,3 +1,4 @@
+
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -31,17 +32,22 @@
 		223457000ED2E572006EC826 /* IAttributeSelectionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* IAttributeSelectionObserver.h */; };
 		223457010ED2E572006EC826 /* IComponentNote.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* IComponentNote.h */; };
 		223457020ED2E572006EC826 /* IRegistryPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* IRegistryPreview.h */; };
-		223457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp */; };
-		223457060ED2E572006EC826 /* moc_CComponentView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* moc_CComponentView.cpp */; };
-		223457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp */; };
-		223457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp */; };
-		223457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp */; };
-		223457100ED2E572006EC826 /* qrc_Compositor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* qrc_Compositor.cpp */; };
-		223457110ED2E572006EC826 /* ui_CAttributeEditorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* ui_CAttributeEditorComp.h */; };
-		223457120ED2E572006EC826 /* ui_CPackageOverviewComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* ui_CPackageOverviewComp.h */; };
+		223457030ED2E572006EC826 /* CAttributeEditorComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* CAttributeEditorComp.ui */; };
+		223457040ED2E572006EC826 /* CPackageOverviewComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* CPackageOverviewComp.ui */; };
+		223457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp */; };
+		223457060ED2E572006EC826 /* moc_CComponentView.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* moc_CComponentView.cpp */; };
+		223457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp */; };
+		223457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp */; };
+		223457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp */; };
+		223457100ED2E572006EC826 /* qrc_Compositor.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* qrc_Compositor.cpp */; };
+		223457110ED2E572006EC826 /* ui_CAttributeEditorComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* ui_CAttributeEditorComp.h */; };
+		223457120ED2E572006EC826 /* ui_CPackageOverviewComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* ui_CPackageOverviewComp.h */; };
+		223457130ED2E572006EC826 /* Compositor.qrc in Resources */ = {isa = PBXBuildFile; fileRef = 123457130ED2E572006EC826 /* Compositor.qrc */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2AAC046055464E500DB518D /* libcompositor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcompositor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		123456790ED2E572006EC826 /* CAttributeEditorComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributeEditorComp.cpp; path = ../CAttributeEditorComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CComponentConnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentConnector.cpp; path = ../CComponentConnector.cpp; sourceTree = SOURCE_ROOT; };
 		123456810ED2E572006EC826 /* CComponentNote.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentNote.cpp; path = ../CComponentNote.cpp; sourceTree = SOURCE_ROOT; };
@@ -66,7 +72,8 @@
 		123457000ED2E572006EC826 /* IAttributeSelectionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IAttributeSelectionObserver.h; path = ../IAttributeSelectionObserver.h; sourceTree = SOURCE_ROOT; };
 		123457010ED2E572006EC826 /* IComponentNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IComponentNote.h; path = ../IComponentNote.h; sourceTree = SOURCE_ROOT; };
 		123457020ED2E572006EC826 /* IRegistryPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRegistryPreview.h; path = ../IRegistryPreview.h; sourceTree = SOURCE_ROOT; };
-		123457040ED2E572006EC826 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = ../English.lproj/CPackageOverviewComp.ui; sourceTree = SOURCE_ROOT; };
+		123457030ED2E572006EC826 /* CAttributeEditorComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributeEditorComp.ui; path = ../CAttributeEditorComp.ui; sourceTree = SOURCE_ROOT; };
+		123457040ED2E572006EC826 /* CPackageOverviewComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPackageOverviewComp.ui; path = ../CPackageOverviewComp.ui; sourceTree = SOURCE_ROOT; };
 		123457050ED2E572006EC826 /* moc_CAttributeEditorComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CAttributeEditorComp.cpp; path = ../generated/moc_CAttributeEditorComp.cpp; sourceTree = SOURCE_ROOT; };
 		123457060ED2E572006EC826 /* moc_CComponentView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CComponentView.cpp; path = ../generated/moc_CComponentView.cpp; sourceTree = SOURCE_ROOT; };
 		123457070ED2E572006EC826 /* moc_CPackageOverviewComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moc_CPackageOverviewComp.cpp; path = ../generated/moc_CPackageOverviewComp.cpp; sourceTree = SOURCE_ROOT; };
@@ -76,8 +83,7 @@
 		123457110ED2E572006EC826 /* ui_CAttributeEditorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CAttributeEditorComp.h; path = ../generated/ui_CAttributeEditorComp.h; sourceTree = SOURCE_ROOT; };
 		123457120ED2E572006EC826 /* ui_CPackageOverviewComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CPackageOverviewComp.h; path = ../generated/ui_CPackageOverviewComp.h; sourceTree = SOURCE_ROOT; };
 		123457130ED2E572006EC826 /* Compositor.qrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Compositor.qrc; path = ../Compositor.qrc; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* libcompositor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcompositor.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA6981220EEBF6DF00FE4110 /* CAttributeEditorComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CAttributeEditorComp.ui; path = ../CAttributeEditorComp.ui; sourceTree = SOURCE_ROOT; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
 				EA9856A60EEABE5300C738EF /* Garbages */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -118,6 +125,7 @@
 				123456870ED2E572006EC826 /* CRegistryPreviewComp.cpp */,
 				123456880ED2E572006EC826 /* CRegistryViewComp.cpp */,
 				123456890ED2E572006EC826 /* Main.cpp */,
+
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -133,8 +141,9 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				EA6981220EEBF6DF00FE4110 /* CAttributeEditorComp.ui */,
-				EA69810A0EEBF27F00FE4110 /* CPackageOverviewComp.ui */,
+				123457030ED2E572006EC826 /* CAttributeEditorComp.ui */,
+				123457040ED2E572006EC826 /* CPackageOverviewComp.ui */,
+
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -150,14 +159,24 @@
 				123457100ED2E572006EC826 /* qrc_Compositor.cpp */,
 				123457110ED2E572006EC826 /* ui_CAttributeEditorComp.h */,
 				123457120ED2E572006EC826 /* ui_CPackageOverviewComp.h */,
+
 			);
 			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				123457130ED2E572006EC826 /* Compositor.qrc */,
+
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
-				123457130ED2E572006EC826 /* Compositor.qrc */,
+
 			);
 			name = Garbages;
 			sourceTree = "<group>";
@@ -178,6 +197,7 @@
 				123457000ED2E572006EC826 /* IAttributeSelectionObserver.h */,
 				123457010ED2E572006EC826 /* IComponentNote.h */,
 				123457020ED2E572006EC826 /* IRegistryPreview.h */,
+
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -204,6 +224,7 @@
 				223457020ED2E572006EC826 /* IRegistryPreview.h in Headers */,
 				223457110ED2E572006EC826 /* ui_CAttributeEditorComp.h in Headers */,
 				223457120ED2E572006EC826 /* ui_CPackageOverviewComp.h in Headers */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +254,7 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "Compositor" */;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "compositor" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* compositor */;
@@ -255,14 +276,16 @@
 			inputPaths = (
 				../CAttributeEditorComp.ui,
 				../CPackageOverviewComp.ui,
+				../Compositor.qrc,
 			);
 			outputPaths = (
 				../Generated/ui_CAttributeEditorComp.h,
 				../Generated/ui_CPackageOverviewComp.h,
+				../Generated/qrc_Compositor.cpp,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "uic -o ../Generated/ui_CAttributeEditorComp.h ../CAttributeEditorComp.ui\nuic -o ../Generated/ui_CPackageOverviewComp.h ../CPackageOverviewComp.ui\n";
+			shellScript = "uic -o ../Generated/ui_CAttributeEditorComp.h ../CAttributeEditorComp.ui\nuic -o ../Generated/ui_CPackageOverviewComp.h ../CPackageOverviewComp.ui\nqrc -o ../Generated/qrc_Compositor.cpp ../Compositor.qrc\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -288,21 +311,11 @@
 				223457080ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Sources */,
 				223457090ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Sources */,
 				223457100ED2E572006EC826 /* qrc_Compositor.cpp in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		EA69810A0EEBF27F00FE4110 /* CPackageOverviewComp.ui */ = {
-			isa = PBXVariantGroup;
-			children = (
-				123457040ED2E572006EC826 /* English */,
-			);
-			name = CPackageOverviewComp.ui;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
@@ -332,23 +345,9 @@
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					/Library/Frameworks/QtCore.framework,
-					/Library/Frameworks/QtGui.framework,
-					/Library/Frameworks/QtNetwork.framework,
-					/Library/Frameworks/QtOpenGL.framework,
-					/Library/Frameworks/QtXml.framework,
-				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/Users/Witold/Work/Projects/Development/ACF/**",
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-				);
+				HEADER_SEARCH_PATHS = "/Users/Witold/Work/Projects/Development/ACF/**";
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
@@ -361,23 +360,9 @@
 					ppc,
 					i386,
 				);
-				FRAMEWORK_SEARCH_PATHS = (
-					/Library/Frameworks/QtCore.framework,
-					/Library/Frameworks/QtGui.framework,
-					/Library/Frameworks/QtNetwork.framework,
-					/Library/Frameworks/QtOpenGL.framework,
-					/Library/Frameworks/QtXml.framework,
-				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/Users/Witold/Work/Projects/Development/ACF/**",
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-				);
+				HEADER_SEARCH_PATHS = "/Users/Witold/Work/Projects/Development/ACF/**";
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
@@ -395,7 +380,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "Compositor" */ = {
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "compositor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
@@ -408,3 +393,4 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
+	

@@ -33,31 +33,32 @@
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PBXFileReference'"/>
 </xsl:apply-templates>
-		/* End PBXFileReference section */
+/* End PBXFileReference section */
 
-		/* Begin PBXFrameworksBuildPhase section */
+/* Begin PBXFrameworksBuildPhase section */
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
-		isa = PBXFrameworksBuildPhase;
-		buildActionMask = 2147483647;
-		files = (
-		);
-		runOnlyForDeploymentPostprocessing = 0;
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		/* End PBXFrameworksBuildPhase section */
+/* End PBXFrameworksBuildPhase section */
 
-		/* Begin PBXGroup section */
+/* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* <xsl:value-of select="$LowercaseName"/> */ = {
-		isa = PBXGroup;
-		children = (
-		EAB5AC950ED2E587006EC826 /* Header */,
-		08FB7795FE84155DC02AAC07 /* Source */,
-		EA9856A50EEABE3D00C738EF /* Generated */,
-		EA9856A60EEABE5300C738EF /* Garbages */,
-		C6A0FF2B0290797F04C91782 /* Documentation */,
-		1AB674ADFE9D54B511CA2CBB /* Products */,
-		);
-		name = <xsl:value-of select="$LowercaseName"/>;
-		sourceTree = "&lt;group&gt;";
+			isa = PBXGroup;
+			children = (
+				EAB5AC950ED2E587006EC826 /* Header */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
+				EA9856A60EEABE5300C738EF /* Garbages */,
+				C6A0FF2B0290797F04C91782 /* Forms */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = <xsl:value-of select="$LowercaseName"/>;
+			sourceTree = "&lt;group&gt;";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
@@ -65,9 +66,9 @@
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Sources'"/>
 </xsl:apply-templates>
-	);
-	name = Source;
-	sourceTree = "&lt;group&gt;";
+			);
+			name = Source;
+			sourceTree = "&lt;group&gt;";
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
@@ -77,11 +78,14 @@
 			name = Products;
 			sourceTree = "&lt;group&gt;";
 		};
-		C6A0FF2B0290797F04C91782 /* Documentation */ = {
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'.Forms'"/>
+</xsl:apply-templates>
 			);
-			name = Documentation;
+			name = Forms;
 			sourceTree = "&lt;group&gt;";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -92,6 +96,16 @@
 </xsl:apply-templates>
 			);
 			name = Generated;
+			sourceTree = "&lt;group&gt;";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'.Resources'"/>
+</xsl:apply-templates>
+			);
+			name = Resources;
 			sourceTree = "&lt;group&gt;";
 		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
@@ -110,9 +124,9 @@
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Headers'"/>
 </xsl:apply-templates>
-	);
-	name = Header;
-	sourceTree = "&lt;group&gt;";
+			);
+			name = Header;
+			sourceTree = "&lt;group&gt;";
 		};
 /* End PBXGroup section */
 
@@ -134,6 +148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "<xsl:value-of select="$LowercaseName"/>" */;
 			buildPhases = (
+				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
 				D2AAC044055464E500DB518D /* Sources */,
 				D289987405E68DCB004EDB86 /* Frameworks */,
@@ -163,6 +178,29 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = "UIC'ing...";
+			files = (
+			);
+			inputPaths = (
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'PreprocessInput'"/>
+</xsl:apply-templates>			);
+			outputPaths = (
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'PreprocessOutput'"/>
+</xsl:apply-templates>			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'PreprocessCommand'"/>
+</xsl:apply-templates>";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2AAC044055464E500DB518D /* Sources */ = {
@@ -266,8 +304,71 @@
 		<xsl:variable name="BuildId" select="position() + 22345678"/>
 		<xsl:variable name="FileId" select="position() + 12345678"/>
 
-		<xsl:if test = "($GroupName='Sources') or ($GroupName='Headers') or ($GroupName='Generated') or ($GroupName='Garbages')">
+		<xsl:if test = "($GroupName='Sources') or ($GroupName='Headers') or ($GroupName='Generated') or ($GroupName='Garbages') or ($GroupName='Forms') or ($GroupName='Resources')">
 			<xsl:choose>
+				<xsl:when test="$UserParam = 'PreprocessInput'">
+					<xsl:choose>
+						<xsl:when test="contains($Name, '.ui') or contains($Name, '.qrc')">
+							<xsl:text>				</xsl:text>
+							<xsl:value-of select="$FilePath"/>
+							<xsl:text>,
+</xsl:text>
+						</xsl:when>
+						<xsl:when test="contains($Name, '.moc')">
+							<xsl:text>				</xsl:text>
+							<xsl:value-of select="concat(substring-before($FilePath, '.moc'), '.h')"/>
+							<xsl:text>,
+</xsl:text>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:when test="$UserParam = 'PreprocessOutput'">
+					<xsl:choose>
+						<xsl:when test="contains($Name, '.ui')">
+							<xsl:text>				../Generated/</xsl:text>
+							<xsl:value-of select="concat('ui_', substring-before($Name, '.'), '.h')"/>
+							<xsl:text>,
+</xsl:text>
+						</xsl:when>
+						<xsl:when test="contains($Name, '.moc')">
+							<xsl:text>				../Generated/</xsl:text>
+							<xsl:value-of select="concat('moc_', substring-before($Name, '.'), '.cpp')"/>
+							<xsl:text>,
+</xsl:text>
+						</xsl:when>
+						<xsl:when test="contains($Name, '.qrc')">
+							<xsl:text>				../Generated/</xsl:text>
+							<xsl:value-of select="concat('qrc_', substring-before($Name, '.'), '.cpp')"/>
+							<xsl:text>,
+</xsl:text>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:when test="$UserParam = 'PreprocessCommand'">
+					<xsl:choose>
+						<xsl:when test="contains($Name, '.ui')">
+							<xsl:text>uic -o ../Generated/</xsl:text>
+							<xsl:value-of select="concat('ui_', substring-before($Name, '.'), '.h')"/>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="$FilePath"/>
+							<xsl:text>\n</xsl:text>
+						</xsl:when>
+						<xsl:when test="contains($Name, '.moc')">
+							<xsl:text>moc -o ../Generated/</xsl:text>
+							<xsl:value-of select="concat('moc_', substring-before($Name, '.'), '.cpp')"/>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="concat(substring-before($FilePath, '.moc'), '.h')"/>
+							<xsl:text>\n</xsl:text>
+						</xsl:when>
+						<xsl:when test="contains($Name, '.qrc')">
+							<xsl:text>qrc -o ../Generated/</xsl:text>
+							<xsl:value-of select="concat('qrc_', substring-before($Name, '.'), '.cpp')"/>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="$FilePath"/>
+							<xsl:text>\n</xsl:text>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:when>
 				<xsl:when test="$UserParam = 'PBXBuildFile'">
 					<xsl:text>		</xsl:text>
 					<xsl:value-of select="$BuildId"/>
