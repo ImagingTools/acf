@@ -1,342 +1,340 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <projectDescription>
-	<name>iser</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-			<triggers>clean,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>?name?</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.append_environment</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildCommand</key>
-					<value>make</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/iser/Debug}</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.contents</key>
-					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-					<value>false</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.stopOnError</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-					<value>true</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-		<nature>org.eclipse.cdt.core.cnature</nature>
-	</natures>
-	<linkedResources>
-		<link>
-			<name>Headers/CArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CArchiveTag.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CArchiveTag.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CBinaryReadArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBinaryReadArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CBinaryWriteArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBinaryWriteArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CBitMemoryReadArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBitMemoryReadArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CBitMemoryWriteArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBitMemoryWriteArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CFileReadArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CFileReadArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CFileWriteArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CFileWriteArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CMemoryReadArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CMemoryReadArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CMemoryWriteArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CMemoryWriteArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CMinimalVersionInfo.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CMinimalVersionInfo.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CReadArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CReadArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CReaderVersionInfo.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CReaderVersionInfo.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CTextReadArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CTextReadArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CTextWriteArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CTextWriteArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CWriteArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CWriteArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlDocumentInfoBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlDocumentInfoBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlFileReadArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlFileReadArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlFileWriteArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlFileWriteArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlReadArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlReadArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlStringReadArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlStringReadArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlStringWriteArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlStringWriteArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CXmlWriteArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlWriteArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IArchive.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/IArchive.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IFileLoader.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/IFileLoader.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IFileLoaderInfo.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/IFileLoaderInfo.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/ISerializable.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/ISerializable.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IVersionInfo.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/IVersionInfo.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TXmlStreamReadArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/TXmlStreamReadArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TXmlStreamWriteArchiveBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/TXmlStreamWriteArchiveBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/iser.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/iser.h</locationURI>
-		</link>
-		<link>
-			<name>Sources/CArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CArchiveTag.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CArchiveTag.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CBinaryReadArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBinaryReadArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CBinaryWriteArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBinaryWriteArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CBitMemoryReadArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBitMemoryReadArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CBitMemoryWriteArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CBitMemoryWriteArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CFileReadArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CFileReadArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CFileWriteArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CFileWriteArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CMemoryReadArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CMemoryReadArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CMemoryWriteArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CMemoryWriteArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CMinimalVersionInfo.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CMinimalVersionInfo.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CReadArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CReadArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CReaderVersionInfo.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CReaderVersionInfo.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CTextReadArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CTextReadArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CTextWriteArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CTextWriteArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CWriteArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CWriteArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlDocumentInfoBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlDocumentInfoBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlFileReadArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlFileReadArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlFileWriteArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlFileWriteArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlReadArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlReadArchiveBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlStringReadArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlStringReadArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlStringWriteArchive.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlStringWriteArchive.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CXmlWriteArchiveBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iser/CXmlWriteArchiveBase.cpp</locationURI>
-		</link>
-	</linkedResources>
+<name>iser</name>
+<comment/>
+<projects/>
+<buildSpec>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+<triggers>clean,full,incremental,</triggers>
+<arguments>
+<dictionary>
+<key>?name?</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.append_environment</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildArguments</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildCommand</key>
+<value>make</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildLocation</key>
+<value>${workspace_loc:/iser/Debug}</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.contents</key>
+<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+<value>false</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.stopOnError</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+<value>true</value>
+</dictionary>
+</arguments>
+</buildCommand>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+<arguments/>
+</buildCommand>
+</buildSpec>
+<natures>
+<nature>org.eclipse.cdt.core.ccnature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+<nature>org.eclipse.cdt.core.cnature</nature>
+</natures>
+<linkedResources>
+<link>
+<name>Sources/CArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CArchiveTag.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CArchiveTag.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CBinaryReadArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBinaryReadArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CBinaryWriteArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBinaryWriteArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CBitMemoryReadArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBitMemoryReadArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CBitMemoryWriteArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBitMemoryWriteArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CFileReadArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CFileReadArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CFileWriteArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CFileWriteArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CMemoryReadArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CMemoryReadArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CMemoryWriteArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CMemoryWriteArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CMinimalVersionInfo.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CMinimalVersionInfo.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CReadArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CReadArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CReaderVersionInfo.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CReaderVersionInfo.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CTextReadArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CTextReadArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CTextWriteArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CTextWriteArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CWriteArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CWriteArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlDocumentInfoBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlDocumentInfoBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlFileReadArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlFileReadArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlFileWriteArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlFileWriteArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlReadArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlReadArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlStringReadArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlStringReadArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlStringWriteArchive.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlStringWriteArchive.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CXmlWriteArchiveBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlWriteArchiveBase.cpp</locationURI>
+</link>
+<link>
+<name>Headers/CArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CArchiveTag.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CArchiveTag.h</locationURI>
+</link>
+<link>
+<name>Headers/CBinaryReadArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBinaryReadArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CBinaryWriteArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBinaryWriteArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CBitMemoryReadArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBitMemoryReadArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CBitMemoryWriteArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CBitMemoryWriteArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CFileReadArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CFileReadArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CFileWriteArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CFileWriteArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CMemoryReadArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CMemoryReadArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CMemoryWriteArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CMemoryWriteArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CMinimalVersionInfo.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CMinimalVersionInfo.h</locationURI>
+</link>
+<link>
+<name>Headers/CReadArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CReadArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CReaderVersionInfo.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CReaderVersionInfo.h</locationURI>
+</link>
+<link>
+<name>Headers/CTextReadArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CTextReadArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CTextWriteArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CTextWriteArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CWriteArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CWriteArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlDocumentInfoBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlDocumentInfoBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlFileReadArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlFileReadArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlFileWriteArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlFileWriteArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlReadArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlReadArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlStringReadArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlStringReadArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlStringWriteArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlStringWriteArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/CXmlWriteArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/CXmlWriteArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/IArchive.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/IArchive.h</locationURI>
+</link>
+<link>
+<name>Headers/IFileLoader.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/IFileLoader.h</locationURI>
+</link>
+<link>
+<name>Headers/IFileLoaderInfo.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/IFileLoaderInfo.h</locationURI>
+</link>
+<link>
+<name>Headers/iser.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/iser.h</locationURI>
+</link>
+<link>
+<name>Headers/ISerializable.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/ISerializable.h</locationURI>
+</link>
+<link>
+<name>Headers/IVersionInfo.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/IVersionInfo.h</locationURI>
+</link>
+<link>
+<name>Headers/TXmlStreamReadArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/TXmlStreamReadArchiveBase.h</locationURI>
+</link>
+<link>
+<name>Headers/TXmlStreamWriteArchiveBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iser/TXmlStreamWriteArchiveBase.h</locationURI>
+</link>
+</linkedResources>
 </projectDescription>

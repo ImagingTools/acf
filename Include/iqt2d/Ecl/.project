@@ -1,432 +1,430 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <projectDescription>
-	<name>iqt2d</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-			<triggers>clean,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>?name?</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.append_environment</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildCommand</key>
-					<value>make</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/iqt2d/Debug}</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.contents</key>
-					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-					<value>false</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.stopOnError</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-					<value>true</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-		<nature>org.eclipse.cdt.core.cnature</nature>
-	</natures>
-	<linkedResources>
-		<link>
-			<name>Forms/CAnnulusParamsGuiComp.ui</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.ui</locationURI>
-		</link>
-		<link>
-			<name>Forms/CAnnulusSegmentParamsGuiComp.ui</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.ui</locationURI>
-		</link>
-		<link>
-			<name>Forms/CCircleParamsGuiComp.ui</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.ui</locationURI>
-		</link>
-		<link>
-			<name>Forms/CLine2dParamsGuiComp.ui</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.ui</locationURI>
-		</link>
-		<link>
-			<name>Forms/CRectangleParamsGuiComp.ui</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.ui</locationURI>
-		</link>
-		<link>
-			<name>Forms/CSceneConnectorGuiComp.ui</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CSceneConnectorGuiComp.ui</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CAnnulusParamsGuiComp.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CAnnulusSegmentParamsGuiComp.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CAnnulusSegmentShape.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentShape.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CAnnulusShape.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusShape.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CCircleParamsGuiComp.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CCircleShape.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleShape.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CGripShape.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CGripShape.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CLine2dParamsGuiComp.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CLine2dShape.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dShape.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CRectangleParamsGuiComp.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CRectangleShape.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleShape.moc</locationURI>
-		</link>
-		<link>
-			<name>Garbages/CSceneProviderComp.moc</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CSceneProviderComp.moc</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CAnnulusParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CAnnulusSegmentParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusSegmentParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CAnnulusSegmentShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusSegmentShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CAnnulusShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CCircleParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CCircleParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CCircleShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CCircleShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CGripShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CGripShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CLine2dParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CLine2dParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CLine2dShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CLine2dShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CRectangleParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CRectangleParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CRectangleShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CRectangleShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/moc_CSceneProviderComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/moc_CSceneProviderComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Generated/ui_CAnnulusParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/ui_CAnnulusParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Generated/ui_CLine2dParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/ui_CLine2dParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Generated/ui_CRectangleParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/ui_CRectangleParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Generated/ui_CSceneConnectorGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/Generated/ui_CSceneConnectorGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CAnnulusParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CAnnulusSegmentParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CAnnulusSegmentShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CAnnulusShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CCircleParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CCircleShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CGripShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CGripShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CImageShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CImageShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CImageViewComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CImageViewComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CLine2dParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CLine2dShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CPosition2dShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CPosition2dShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CRectangleParamsGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CRectangleShape.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleShape.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CSceneConnectorGuiComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CSceneConnectorGuiComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CSceneProviderComp.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CSceneProviderComp.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/ISceneExtender.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/ISceneExtender.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/ISceneProvider.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/ISceneProvider.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TObjectShapeBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/TObjectShapeBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TSceneExtenderCompBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/TSceneExtenderCompBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TShapeBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/TShapeBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/iqt2d.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/iqt2d.h</locationURI>
-		</link>
-		<link>
-			<name>Sources/CAnnulusParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CAnnulusSegmentParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CAnnulusSegmentShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CAnnulusShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CAnnulusShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CCircleParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CCircleShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CCircleShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CGripShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CGripShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CImageShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CImageShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CImageViewComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CImageViewComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CLine2dParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CLine2dShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CLine2dShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CPosition2dShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CPosition2dShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CRectangleParamsGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CRectangleShape.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CRectangleShape.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CSceneConnectorGuiComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CSceneConnectorGuiComp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CSceneProviderComp.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/iqt2d/CSceneProviderComp.cpp</locationURI>
-		</link>
-	</linkedResources>
+<name>iqt2d</name>
+<comment/>
+<projects/>
+<buildSpec>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+<triggers>clean,full,incremental,</triggers>
+<arguments>
+<dictionary>
+<key>?name?</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.append_environment</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildArguments</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildCommand</key>
+<value>make</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildLocation</key>
+<value>${workspace_loc:/iqt2d/Debug}</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.contents</key>
+<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+<value>false</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.stopOnError</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+<value>true</value>
+</dictionary>
+</arguments>
+</buildCommand>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+<arguments/>
+</buildCommand>
+</buildSpec>
+<natures>
+<nature>org.eclipse.cdt.core.ccnature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+<nature>org.eclipse.cdt.core.cnature</nature>
+</natures>
+<linkedResources>
+<link>
+<name>Sources/CAnnulusParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CAnnulusSegmentParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CAnnulusSegmentShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CAnnulusShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CCircleParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CCircleShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CGripShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CGripShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CImageShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CImageShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CImageViewComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CImageViewComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CLine2dParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CLine2dShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CPosition2dShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CPosition2dShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CRectangleParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CRectangleShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleShape.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CSceneConnectorGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CSceneConnectorGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CSceneProviderComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CSceneProviderComp.cpp</locationURI>
+</link>
+<link>
+<name>Headers/CAnnulusParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Garbages/CAnnulusParamsGuiComp.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.moc</locationURI>
+</link>
+<link>
+<name>Headers/CAnnulusSegmentParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Garbages/CAnnulusSegmentParamsGuiComp.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.moc</locationURI>
+</link>
+<link>
+<name>Headers/CAnnulusSegmentShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentShape.h</locationURI>
+</link>
+<link>
+<name>Garbages/CAnnulusSegmentShape.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentShape.moc</locationURI>
+</link>
+<link>
+<name>Headers/CAnnulusShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusShape.h</locationURI>
+</link>
+<link>
+<name>Garbages/CAnnulusShape.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusShape.moc</locationURI>
+</link>
+<link>
+<name>Headers/CCircleParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Garbages/CCircleParamsGuiComp.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.moc</locationURI>
+</link>
+<link>
+<name>Headers/CCircleShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleShape.h</locationURI>
+</link>
+<link>
+<name>Garbages/CCircleShape.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleShape.moc</locationURI>
+</link>
+<link>
+<name>Headers/CGripShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CGripShape.h</locationURI>
+</link>
+<link>
+<name>Garbages/CGripShape.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CGripShape.moc</locationURI>
+</link>
+<link>
+<name>Headers/CImageShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CImageShape.h</locationURI>
+</link>
+<link>
+<name>Headers/CImageViewComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CImageViewComp.h</locationURI>
+</link>
+<link>
+<name>Headers/CLine2dParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Garbages/CLine2dParamsGuiComp.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.moc</locationURI>
+</link>
+<link>
+<name>Headers/CLine2dShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dShape.h</locationURI>
+</link>
+<link>
+<name>Garbages/CLine2dShape.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dShape.moc</locationURI>
+</link>
+<link>
+<name>Headers/CPosition2dShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CPosition2dShape.h</locationURI>
+</link>
+<link>
+<name>Headers/CRectangleParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Garbages/CRectangleParamsGuiComp.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.moc</locationURI>
+</link>
+<link>
+<name>Headers/CRectangleShape.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleShape.h</locationURI>
+</link>
+<link>
+<name>Garbages/CRectangleShape.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleShape.moc</locationURI>
+</link>
+<link>
+<name>Headers/CSceneConnectorGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CSceneConnectorGuiComp.h</locationURI>
+</link>
+<link>
+<name>Headers/CSceneProviderComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CSceneProviderComp.h</locationURI>
+</link>
+<link>
+<name>Garbages/CSceneProviderComp.moc</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CSceneProviderComp.moc</locationURI>
+</link>
+<link>
+<name>Headers/iqt2d.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/iqt2d.h</locationURI>
+</link>
+<link>
+<name>Headers/ISceneExtender.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/ISceneExtender.h</locationURI>
+</link>
+<link>
+<name>Headers/ISceneProvider.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/ISceneProvider.h</locationURI>
+</link>
+<link>
+<name>Headers/TObjectShapeBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/TObjectShapeBase.h</locationURI>
+</link>
+<link>
+<name>Headers/TSceneExtenderCompBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/TSceneExtenderCompBase.h</locationURI>
+</link>
+<link>
+<name>Headers/TShapeBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/TShapeBase.h</locationURI>
+</link>
+<link>
+<name>Generated/moc_CAnnulusParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CAnnulusSegmentParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusSegmentParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CAnnulusSegmentShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusSegmentShape.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CAnnulusShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CAnnulusShape.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CCircleParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CCircleParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CCircleShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CCircleShape.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CGripShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CGripShape.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CLine2dParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CLine2dParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CLine2dShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CLine2dShape.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CRectangleParamsGuiComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CRectangleParamsGuiComp.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CRectangleShape.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CRectangleShape.cpp</locationURI>
+</link>
+<link>
+<name>Generated/moc_CSceneProviderComp.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/moc_CSceneProviderComp.cpp</locationURI>
+</link>
+<link>
+<name>Generated/ui_CAnnulusParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/ui_CAnnulusParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Generated/ui_CLine2dParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/ui_CLine2dParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Generated/ui_CRectangleParamsGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/ui_CRectangleParamsGuiComp.h</locationURI>
+</link>
+<link>
+<name>Generated/ui_CSceneConnectorGuiComp.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/Generated/ui_CSceneConnectorGuiComp.h</locationURI>
+</link>
+<link>
+<name>Forms/CAnnulusParamsGuiComp.ui</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusParamsGuiComp.ui</locationURI>
+</link>
+<link>
+<name>Forms/CAnnulusSegmentParamsGuiComp.ui</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CAnnulusSegmentParamsGuiComp.ui</locationURI>
+</link>
+<link>
+<name>Forms/CCircleParamsGuiComp.ui</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CCircleParamsGuiComp.ui</locationURI>
+</link>
+<link>
+<name>Forms/CLine2dParamsGuiComp.ui</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CLine2dParamsGuiComp.ui</locationURI>
+</link>
+<link>
+<name>Forms/CRectangleParamsGuiComp.ui</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CRectangleParamsGuiComp.ui</locationURI>
+</link>
+<link>
+<name>Forms/CSceneConnectorGuiComp.ui</name>
+<type>1</type>
+<locationURI>ACFPath/Include/iqt2d/CSceneConnectorGuiComp.ui</locationURI>
+</link>
+</linkedResources>
 </projectDescription>

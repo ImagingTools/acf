@@ -1,157 +1,155 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <projectDescription>
-	<name>imath</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-			<triggers>clean,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>?name?</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.append_environment</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildCommand</key>
-					<value>make</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/imath/Debug}</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.contents</key>
-					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-					<value>false</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.stopOnError</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-					<value>true</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-		<nature>org.eclipse.cdt.core.cnature</nature>
-	</natures>
-	<linkedResources>
-		<link>
-			<name>Headers/CComplexDoubleManip.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CComplexDoubleManip.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CDouble.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CDouble.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CDoubleManip.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CDoubleManip.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CFixedPointManip.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CFixedPointManip.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TFastVector.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TFastVector.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TFulcrumGridFunctionBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TFulcrumGridFunctionBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TIMathFunction.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TIMathFunction.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TIValueManip.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TIValueManip.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TMathVectorWrap.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TMathVectorWrap.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TSplineGridFunctionBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TSplineGridFunctionBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TVarMatrix.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TVarMatrix.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TVarVector.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TVarVector.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TVector.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/TVector.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/imath.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/imath.h</locationURI>
-		</link>
-		<link>
-			<name>Sources/CComplexDoubleManip.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CComplexDoubleManip.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CDoubleManip.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CDoubleManip.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CFixedPointManip.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imath/CFixedPointManip.cpp</locationURI>
-		</link>
-	</linkedResources>
+<name>imath</name>
+<comment/>
+<projects/>
+<buildSpec>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+<triggers>clean,full,incremental,</triggers>
+<arguments>
+<dictionary>
+<key>?name?</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.append_environment</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildArguments</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildCommand</key>
+<value>make</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildLocation</key>
+<value>${workspace_loc:/imath/Debug}</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.contents</key>
+<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+<value>false</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.stopOnError</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+<value>true</value>
+</dictionary>
+</arguments>
+</buildCommand>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+<arguments/>
+</buildCommand>
+</buildSpec>
+<natures>
+<nature>org.eclipse.cdt.core.ccnature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+<nature>org.eclipse.cdt.core.cnature</nature>
+</natures>
+<linkedResources>
+<link>
+<name>Sources/CComplexDoubleManip.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CComplexDoubleManip.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CDoubleManip.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CDoubleManip.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CFixedPointManip.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CFixedPointManip.cpp</locationURI>
+</link>
+<link>
+<name>Headers/CComplexDoubleManip.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CComplexDoubleManip.h</locationURI>
+</link>
+<link>
+<name>Headers/CDouble.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CDouble.h</locationURI>
+</link>
+<link>
+<name>Headers/CDoubleManip.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CDoubleManip.h</locationURI>
+</link>
+<link>
+<name>Headers/CFixedPointManip.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/CFixedPointManip.h</locationURI>
+</link>
+<link>
+<name>Headers/imath.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/imath.h</locationURI>
+</link>
+<link>
+<name>Headers/TFastVector.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TFastVector.h</locationURI>
+</link>
+<link>
+<name>Headers/TFulcrumGridFunctionBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TFulcrumGridFunctionBase.h</locationURI>
+</link>
+<link>
+<name>Headers/TIMathFunction.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TIMathFunction.h</locationURI>
+</link>
+<link>
+<name>Headers/TIValueManip.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TIValueManip.h</locationURI>
+</link>
+<link>
+<name>Headers/TMathVectorWrap.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TMathVectorWrap.h</locationURI>
+</link>
+<link>
+<name>Headers/TSplineGridFunctionBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TSplineGridFunctionBase.h</locationURI>
+</link>
+<link>
+<name>Headers/TVarMatrix.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TVarMatrix.h</locationURI>
+</link>
+<link>
+<name>Headers/TVarVector.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TVarVector.h</locationURI>
+</link>
+<link>
+<name>Headers/TVector.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imath/TVector.h</locationURI>
+</link>
+</linkedResources>
 </projectDescription>

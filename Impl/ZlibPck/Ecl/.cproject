@@ -39,14 +39,14 @@
 <tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.521752256" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.2127389662" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 <option id="gnu.cpp.link.option.paths.1364357560" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}$CompilerCode&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}Ecl&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${ZLIBDIR}/lib&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${INTELCDIR}/lib&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.libs.545652829" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libAcfStd.a"/>
-<listOptionValue builtIn="false" value="libizlib.a"/>
-<listOptionValue builtIn="false" value="libd_zlib.a"/>
+<listOptionValue builtIn="false" value="AcfStd"/>
+<listOptionValue builtIn="false" value="izlib"/>
+<listOptionValue builtIn="false" value="d_zlib"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.586701827" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -526,14 +526,14 @@
 <tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.1881846249" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.168717483" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 <option id="gnu.cpp.link.option.paths.384370928" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}$CompilerCode&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}Ecl&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${ZLIBDIR}/lib&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${INTELCDIR}/lib&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.libs.545652829" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libAcfStd.a"/>
-<listOptionValue builtIn="false" value="libizlib.a"/>
-<listOptionValue builtIn="false" value="libzlib.a"/>
+<listOptionValue builtIn="false" value="AcfStd"/>
+<listOptionValue builtIn="false" value="izlib"/>
+<listOptionValue builtIn="false" value="zlib"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.630924128" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

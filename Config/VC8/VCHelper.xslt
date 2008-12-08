@@ -78,7 +78,7 @@
 				<xsl:when test = "$Mode='Lib'">
 					<xsl:choose>
 						<xsl:when test="contains($ToInsert, '.lib')">
-							<xsl:value-of select="translate(concat('lib', substring-before($ToInsert, '.lib'), '.a'), '()\', '{}/')"/>
+							<xsl:value-of select="translate(substring-before($ToInsert, '.lib'), '()\', '{}/')"/>
 						</xsl:when>
 						<xsl:when test="contains($ToInsert, '.dll')">
 							<xsl:value-of select="translate(concat('lib', substring-before($ToInsert, '.lib'), '.prl'), '()\', '{}/')"/>
@@ -88,7 +88,7 @@
 				<xsl:otherwise>
 					<xsl:choose>
 						<xsl:when test="contains($ToInsert, 'VC8')">
-							<xsl:value-of select="translate(concat(substring-before($ToInsert, 'VC8'), '$CompilerCode' ,substring-after($ToInsert, 'VC8')), '()\', '{}/')"/>
+							<xsl:value-of select="translate(concat(substring-before($ToInsert, 'VC8'), $CompilerCode ,substring-after($ToInsert, 'VC8')), '()\', '{}/')"/>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="translate($ToInsert, '()\', '{}/')"/>

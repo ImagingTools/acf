@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?>
+
 <cproject>
 <storageModule moduleId="org.eclipse.cdt.core.settings">
 <cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.127139810">
@@ -9,6 +10,7 @@
 <extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -39,22 +41,20 @@
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.31797866" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug">
 <option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.exe.debug.option.optimization.level.657289317" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.debug.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.651357438" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
-<option id="gnu.c.compiler.option.include.paths.1167909029" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath"/>
+<option id="gnu.c.compiler.option.include.paths.1167909029" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1542919259" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.521752256" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.2127389662" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
-<option id="gnu.cpp.link.option.paths.1364357560" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+<option id="gnu.cpp.link.option.paths.1364357560" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 <listOptionValue builtIn="false" value="&quot;${QTDIR}/lib&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}$CompilerCode&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}Ecl&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.libs.545652829" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libqtmaind.a"/>
-<listOptionValue builtIn="false" value="libQtCored4.a"/>
-<listOptionValue builtIn="false" value="libQtGuid4.a"/>
-<listOptionValue builtIn="false" value="libQtXmld4.a"/>
-<listOptionValue builtIn="false" value="libAcfStd.a"/>
-<listOptionValue builtIn="false" value="libiqt.a"/>
+<listOptionValue builtIn="false" value="qtmaind"/>
+<listOptionValue builtIn="false" value="QtCored4"/>
+<listOptionValue builtIn="false" value="QtGuid4"/>
+<listOptionValue builtIn="false" value="QtXmld4"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.586701827" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -534,24 +534,22 @@
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.615385898" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release">
 <option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.mingw.exe.release.option.optimization.level.1687546278" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.release.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.mingw.exe.release.option.debugging.level.1394361117" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
-<option id="gnu.c.compiler.option.include.paths.573313560" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath"/>
+<option id="gnu.c.compiler.option.include.paths.573313560" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.462516685" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.1881846249" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.168717483" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
-<option id="gnu.cpp.link.option.paths.384370928" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+<option id="gnu.cpp.link.option.paths.384370928" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 <listOptionValue builtIn="false" value="&quot;${QTDIR}/lib&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}$CompilerCode&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${ACFDIR}/Lib/${ConfigurationName}Ecl&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.libs.545652829" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libAcfStd.a"/>
-<listOptionValue builtIn="false" value="libiqt.a"/>
-<listOptionValue builtIn="false" value="libqtmain.a"/>
-<listOptionValue builtIn="false" value="libQtCore4.a"/>
-<listOptionValue builtIn="false" value="libQtGui4.a"/>
-<listOptionValue builtIn="false" value="libQtXml4.a"/>
-<listOptionValue builtIn="false" value="libQtSql4.a"/>
-<listOptionValue builtIn="false" value="libQtNetwork4.a"/>
+<listOptionValue builtIn="false" value="qtmain"/>
+<listOptionValue builtIn="false" value="QtCore4"/>
+<listOptionValue builtIn="false" value="QtGui4"/>
+<listOptionValue builtIn="false" value="QtXml4"/>
+<listOptionValue builtIn="false" value="QtSql4"/>
+<listOptionValue builtIn="false" value="QtNetwork4"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.630924128" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

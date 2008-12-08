@@ -1,162 +1,160 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <projectDescription>
-	<name>imod</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-			<triggers>clean,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>?name?</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.append_environment</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildCommand</key>
-					<value>make</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/imod/Debug}</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.contents</key>
-					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-					<value>false</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.stopOnError</key>
-					<value>true</value>
-				</dictionary>
-				<dictionary>
-					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-					<value>true</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.cdt.core.ccnature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-		<nature>org.eclipse.cdt.core.cnature</nature>
-	</natures>
-	<linkedResources>
-		<link>
-			<name>Headers/CModelBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CModelBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CModelChangeObserver.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CModelChangeObserver.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CMultiModelObserverBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CMultiModelObserverBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CSerializedUndoManager.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CSerializedUndoManager.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/CSingleModelObserverBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CSingleModelObserverBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IModel.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/IModel.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IModelEditor.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/IModelEditor.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IObserver.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/IObserver.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/IUndoManager.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/IUndoManager.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TModelWrap.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/TModelWrap.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TMultiModelObserverBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/TMultiModelObserverBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/TSingleModelObserverBase.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/TSingleModelObserverBase.h</locationURI>
-		</link>
-		<link>
-			<name>Headers/imod.h</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/imod.h</locationURI>
-		</link>
-		<link>
-			<name>Sources/CModelBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CModelBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CModelChangeObserver.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CModelChangeObserver.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CMultiModelObserverBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CMultiModelObserverBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CSerializedUndoManager.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CSerializedUndoManager.cpp</locationURI>
-		</link>
-		<link>
-			<name>Sources/CSingleModelObserverBase.cpp</name>
-			<type>1</type>
-			<locationURI>ACFPath/Include/imod/CSingleModelObserverBase.cpp</locationURI>
-		</link>
-	</linkedResources>
+<name>imod</name>
+<comment/>
+<projects/>
+<buildSpec>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+<triggers>clean,full,incremental,</triggers>
+<arguments>
+<dictionary>
+<key>?name?</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.append_environment</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildArguments</key>
+<value/>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildCommand</key>
+<value>make</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.buildLocation</key>
+<value>${workspace_loc:/imod/Debug}</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.contents</key>
+<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+<value>false</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.stopOnError</key>
+<value>true</value>
+</dictionary>
+<dictionary>
+<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+<value>true</value>
+</dictionary>
+</arguments>
+</buildCommand>
+<buildCommand>
+<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+<arguments/>
+</buildCommand>
+</buildSpec>
+<natures>
+<nature>org.eclipse.cdt.core.ccnature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+<nature>org.eclipse.cdt.core.cnature</nature>
+</natures>
+<linkedResources>
+<link>
+<name>Sources/CModelBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CModelBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CModelChangeObserver.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CModelChangeObserver.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CMultiModelObserverBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CMultiModelObserverBase.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CSerializedUndoManager.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CSerializedUndoManager.cpp</locationURI>
+</link>
+<link>
+<name>Sources/CSingleModelObserverBase.cpp</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CSingleModelObserverBase.cpp</locationURI>
+</link>
+<link>
+<name>Headers/CModelBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CModelBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CModelChangeObserver.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CModelChangeObserver.h</locationURI>
+</link>
+<link>
+<name>Headers/CMultiModelObserverBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CMultiModelObserverBase.h</locationURI>
+</link>
+<link>
+<name>Headers/CSerializedUndoManager.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CSerializedUndoManager.h</locationURI>
+</link>
+<link>
+<name>Headers/CSingleModelObserverBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/CSingleModelObserverBase.h</locationURI>
+</link>
+<link>
+<name>Headers/imod.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/imod.h</locationURI>
+</link>
+<link>
+<name>Headers/IModel.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/IModel.h</locationURI>
+</link>
+<link>
+<name>Headers/IModelEditor.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/IModelEditor.h</locationURI>
+</link>
+<link>
+<name>Headers/IObserver.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/IObserver.h</locationURI>
+</link>
+<link>
+<name>Headers/IUndoManager.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/IUndoManager.h</locationURI>
+</link>
+<link>
+<name>Headers/TModelWrap.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/TModelWrap.h</locationURI>
+</link>
+<link>
+<name>Headers/TMultiModelObserverBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/TMultiModelObserverBase.h</locationURI>
+</link>
+<link>
+<name>Headers/TSingleModelObserverBase.h</name>
+<type>1</type>
+<locationURI>ACFPath/Include/imod/TSingleModelObserverBase.h</locationURI>
+</link>
+</linkedResources>
 </projectDescription>

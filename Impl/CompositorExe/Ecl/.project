@@ -3,6 +3,25 @@
 	<name>Compositor</name>
 	<comment></comment>
 	<projects>
+		<project>i2d</project>
+		<project>ibase</project>
+		<project>icmm</project>
+		<project>icomp</project>
+		<project>idoc</project>
+		<project>iimg</project>
+		<project>imath</project>
+		<project>imeas</project>
+		<project>imod</project>
+		<project>inat</project>
+		<project>iprm</project>
+		<project>iqt</project>
+		<project>iqt2d</project>
+		<project>iqtdoc</project>
+		<project>iqtgui</project>
+		<project>iqtprm</project>
+		<project>iser</project>
+		<project>istd</project>
+		<project>isys</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
