@@ -370,7 +370,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "moc -o ../Generated/moc_CDockWidgetGuiComp.cpp ../CDockWidgetGuiComp.h\nmoc -o ../Generated/moc_CHierarchicalCommand.cpp ../CHierarchicalCommand.h\nmoc -o ../Generated/moc_CLogGuiComp.cpp ../CLogGuiComp.h\nmoc -o ../Generated/moc_CSelectionParamGuiComp.cpp ../CSelectionParamGuiComp.h\nrcc -o ../Generated/qrc_iqtgui.cpp ../iqtgui.qrc\nuic -o ../Generated/ui_CLogGuiComp.h ../CLogGuiComp.ui\nuic -o ../Generated/ui_CLoginGuiComp.h ../CLoginGuiComp.ui\nuic -o ../Generated/ui_CSelectionParamGuiComp.h ../CSelectionParamGuiComp.ui\nuic -o ../Generated/ui_CSplashScreenGuiComp.h ../CSplashScreenGuiComp.ui\n";
+			shellScript = "moc -o ../Generated/moc_CDockWidgetGuiComp.cpp ../CDockWidgetGuiComp.h\nmoc -o ../Generated/moc_CHierarchicalCommand.cpp ../CHierarchicalCommand.h\nmoc -o ../Generated/moc_CLogGuiComp.cpp ../CLogGuiComp.h\nmoc -o ../Generated/moc_CSelectionParamGuiComp.cpp ../CSelectionParamGuiComp.h\nrcc -name iqtgui -o ../Generated/qrc_iqtgui.cpp ../iqtgui.qrc\nuic -o ../Generated/ui_CLogGuiComp.h ../CLogGuiComp.ui\nuic -o ../Generated/ui_CLoginGuiComp.h ../CLoginGuiComp.ui\nuic -o ../Generated/ui_CSelectionParamGuiComp.h ../CSelectionParamGuiComp.ui\nuic -o ../Generated/ui_CSplashScreenGuiComp.h ../CSplashScreenGuiComp.ui\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
