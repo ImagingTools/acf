@@ -12,7 +12,7 @@ namespace istd
 /**
 	Implementation of a smart pointer.
 */
-template <typename Type>
+template <class Type>
 class TSmartPtr
 {
 public:
@@ -71,18 +71,18 @@ protected:
 		Type* objectPtr;
 	};
 
-	typename Counter* m_counter;
+	Counter* m_counter;
 };
 
 
-template <typename Type>
+template <class Type>
 TSmartPtr<Type>::TSmartPtr()
 {
 	m_counter = new Counter(NULL);
 }
 
 
-template <typename Type>
+template <class Type>
 TSmartPtr<Type>::TSmartPtr(Type* pointer)
 {
 	m_counter = NULL;
@@ -91,7 +91,7 @@ TSmartPtr<Type>::TSmartPtr(Type* pointer)
 }
 
 
-template <typename Type>
+template <class Type>
 TSmartPtr<Type>::TSmartPtr(const TSmartPtr<Type>& other)
 {
 	m_counter = other.m_counter;
@@ -99,14 +99,14 @@ TSmartPtr<Type>::TSmartPtr(const TSmartPtr<Type>& other)
 }
 
 
-template <typename Type>
+template <class Type>
 TSmartPtr<Type>::~TSmartPtr()
 {
 	Detach();
 }
 
 
-template <typename Type>
+template <class Type>
 inline void TSmartPtr<Type>::SetPtr(Type* pointer)
 {
 	Detach();
@@ -115,7 +115,7 @@ inline void TSmartPtr<Type>::SetPtr(Type* pointer)
 }
 
 
-template <typename Type>
+template <class Type>
 inline const Type* TSmartPtr<Type>::GetPtr() const
 {
 	I_ASSERT(m_counter != NULL);
@@ -124,7 +124,7 @@ inline const Type* TSmartPtr<Type>::GetPtr() const
 }
 
 
-template <typename Type>
+template <class Type>
 inline Type* TSmartPtr<Type>::GetPtr()
 {
 	I_ASSERT(m_counter != NULL);
@@ -133,7 +133,7 @@ inline Type* TSmartPtr<Type>::GetPtr()
 }
 
 
-template <typename Type>
+template <class Type>
 inline const Type* TSmartPtr<Type>::operator->() const
 {
 	I_ASSERT(m_counter != NULL);
@@ -143,7 +143,7 @@ inline const Type* TSmartPtr<Type>::operator->() const
 }
 
 
-template <typename Type>
+template <class Type>
 inline Type* TSmartPtr<Type>::operator->()
 {
 	I_ASSERT(m_counter != NULL);
@@ -153,7 +153,7 @@ inline Type* TSmartPtr<Type>::operator->()
 }
 
 
-template <typename Type>
+template <class Type>
 TSmartPtr<Type>& TSmartPtr<Type>::operator=(const TSmartPtr<Type>& other)
 {
 	Detach();
@@ -168,7 +168,7 @@ TSmartPtr<Type>& TSmartPtr<Type>::operator=(const TSmartPtr<Type>& other)
 }
 
 
-template <typename Type>
+template <class Type>
 bool TSmartPtr<Type>::IsValid() const
 {
 	if (m_counter != NULL){
@@ -179,7 +179,7 @@ bool TSmartPtr<Type>::IsValid() const
 }
 
 
-template <typename Type>
+template <class Type>
 void TSmartPtr<Type>::Detach()
 {
 	if (m_counter != NULL){

@@ -21,6 +21,8 @@ template <typename ItemClass, typename ContainerClass = std::vector<ItemClass> >
 class TSerializableContainer: public TContainer<ItemClass, ContainerClass>, virtual public iser::ISerializable
 {
 public:
+	typedef TContainer<ItemClass, ContainerClass> BaseClass;
+
 	// reimplemented (iser::Serializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
@@ -42,10 +44,10 @@ template <typename ItemClass, typename ContainerClass>
 bool TSerializableContainer<ItemClass, ContainerClass>::Serialize(iser::IArchive& archive)
 {
 	if (!archive.IsStoring()){
-		Reset();
+		this->Reset();
 	}
 
-	int itemCount = GetItemCount();
+	int itemCount = int(BaseClass::m_items.size());
 
 	static iser::CArchiveTag itemsTag("Items", "List of items");
 	static iser::CArchiveTag itemTag("Item", "Item");
@@ -56,11 +58,11 @@ bool TSerializableContainer<ItemClass, ContainerClass>::Serialize(iser::IArchive
 	}
 
 	if (!archive.IsStoring()){
-		m_items.resize(itemCount);
+		BaseClass::m_items.resize(itemCount);
 	}
 
 	for (int index = 0; index < itemCount; index++){
-		ItemClass& item = m_items.at(index);
+		ItemClass& item = BaseClass::m_items.at(index);
 
 		bool retVal = archive.BeginTag(itemTag);
 

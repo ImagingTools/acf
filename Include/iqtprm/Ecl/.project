@@ -1,155 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>iqtprm</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/iqtprm/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CComposedParamsSetGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CComposedParamsSetGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CFileNameParamGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CParamsManagerGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CComposedParamsSetGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CComposedParamsSetGuiComp.h</locationURI>
-</link>
-<link>
-<name>Garbages/CComposedParamsSetGuiComp.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CComposedParamsSetGuiComp.moc</locationURI>
-</link>
-<link>
-<name>Headers/CFileNameParamGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.h</locationURI>
-</link>
-<link>
-<name>Garbages/CFileNameParamGuiComp.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.moc</locationURI>
-</link>
-<link>
-<name>Headers/CParamsManagerGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.h</locationURI>
-</link>
-<link>
-<name>Garbages/CParamsManagerGuiComp.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.moc</locationURI>
-</link>
-<link>
-<name>Headers/iqtprm.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/iqtprm.h</locationURI>
-</link>
-<link>
-<name>Generated/moc_CComposedParamsSetGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/Generated/moc_CComposedParamsSetGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Generated/moc_CFileNameParamGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/Generated/moc_CFileNameParamGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Generated/moc_CParamsManagerGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/Generated/moc_CParamsManagerGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Generated/ui_CFileNameParamGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/Generated/ui_CFileNameParamGuiComp.h</locationURI>
-</link>
-<link>
-<name>Generated/ui_CParamsManagerGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/Generated/ui_CParamsManagerGuiComp.h</locationURI>
-</link>
-<link>
-<name>Forms/CFileNameParamGuiComp.ui</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.ui</locationURI>
-</link>
-<link>
-<name>Forms/CParamsManagerGuiComp.ui</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.ui</locationURI>
-</link>
-</linkedResources>
+	<name>iqtprm</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/iqtprm/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Forms/CFileNameParamGuiComp.ui</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.ui</locationURI>
+		</link>
+		<link>
+			<name>Forms/CParamsManagerGuiComp.ui</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.ui</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CComposedParamsSetGuiComp.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CComposedParamsSetGuiComp.moc</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CFileNameParamGuiComp.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.moc</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CParamsManagerGuiComp.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.moc</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CComposedParamsSetGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/Generated/moc_CComposedParamsSetGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CFileNameParamGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/Generated/moc_CFileNameParamGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CParamsManagerGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/Generated/moc_CParamsManagerGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/ui_CFileNameParamGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/Generated/ui_CFileNameParamGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Generated/ui_CParamsManagerGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/Generated/ui_CParamsManagerGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CComposedParamsSetGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CComposedParamsSetGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CFileNameParamGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CParamsManagerGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/iqtprm.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/iqtprm.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CComposedParamsSetGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CComposedParamsSetGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CFileNameParamGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CFileNameParamGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CParamsManagerGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtprm/CParamsManagerGuiComp.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

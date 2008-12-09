@@ -213,7 +213,7 @@ inline TFastVector<MaxSize, Element>::TFastVector(const TFastVector<MaxSize, Ele
 {
 	I_ASSERT(m_elementsCount <= MaxSize);
 
-	::memcpy(m_elements, vector.m_elements, sizeof(Element) * m_elementsCount);
+	memcpy(m_elements, vector.m_elements, sizeof(Element) * m_elementsCount);
 }
 
 

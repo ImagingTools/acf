@@ -14,12 +14,16 @@ namespace icomp
 
 #ifdef WIN32
 	#define I_FUNCTION_EXPORT _declspec(dllexport)
+	#define I_BEFORE_EXPORT_FUNCTION
+	#define I_AFTER_EXPORT_FUNCTION
 #else
 	#ifdef LINUX
 		#define I_FUNCTION_EXPORT
 	#else
 		#define I_FUNCTION_EXPORT
 	#endif
+#define I_BEFORE_EXPORT_FUNCTION #pragma export on
+	#define I_AFTER_EXPORT_FUNCTION #pragma export off
 #endif
 
 #ifdef _DEBUG

@@ -1,300 +1,302 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>iqt</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/iqt/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CApplicationEnvironment.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CApplicationEnvironment.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CBitmap.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CBitmap.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CBitmapLoaderComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CBitmapLoaderComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCriticalSection.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CCriticalSection.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CDateTime.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDateTime.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CDefaultServicesProvider.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDefaultServicesProvider.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CDirList.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDirList.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CDllFunctionsProvider.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDllFunctionsProvider.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CFileList.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CFileList.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CPackagesLoaderComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CPackagesLoaderComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CReflectedBitmapBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CReflectedBitmapBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSettingsArchiveBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsArchiveBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSettingsReadArchive.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsReadArchive.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSettingsSerializerComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsSerializerComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSettingsWriteArchive.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsWriteArchive.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSignalBlocker.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSignalBlocker.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CTimer.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CTimer.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CXmlFileReadArchive.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CXmlFileReadArchive.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CXmlFileWriteArchive.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CXmlFileWriteArchive.cpp</locationURI>
-</link>
-<link>
-<name>Sources/iqt.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/iqt.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CApplicationEnvironment.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CApplicationEnvironment.h</locationURI>
-</link>
-<link>
-<name>Headers/CBitmap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CBitmap.h</locationURI>
-</link>
-<link>
-<name>Headers/CBitmapLoaderComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CBitmapLoaderComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CCriticalSection.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CCriticalSection.h</locationURI>
-</link>
-<link>
-<name>Headers/CDateTime.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDateTime.h</locationURI>
-</link>
-<link>
-<name>Headers/CDefaultServicesProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDefaultServicesProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/CDirList.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDirList.h</locationURI>
-</link>
-<link>
-<name>Garbages/CDirList.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDirList.moc</locationURI>
-</link>
-<link>
-<name>Headers/CDllFunctionsProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CDllFunctionsProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/CFileList.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CFileList.h</locationURI>
-</link>
-<link>
-<name>Garbages/CFileList.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CFileList.moc</locationURI>
-</link>
-<link>
-<name>Headers/CPackagesLoaderComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CPackagesLoaderComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CReflectedBitmapBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CReflectedBitmapBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CSettingsArchiveBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsArchiveBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CSettingsReadArchive.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsReadArchive.h</locationURI>
-</link>
-<link>
-<name>Headers/CSettingsSerializerComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsSerializerComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CSettingsWriteArchive.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSettingsWriteArchive.h</locationURI>
-</link>
-<link>
-<name>Headers/CSignalBlocker.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CSignalBlocker.h</locationURI>
-</link>
-<link>
-<name>Headers/CTimer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CTimer.h</locationURI>
-</link>
-<link>
-<name>Headers/CXmlFileReadArchive.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CXmlFileReadArchive.h</locationURI>
-</link>
-<link>
-<name>Headers/CXmlFileWriteArchive.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/CXmlFileWriteArchive.h</locationURI>
-</link>
-<link>
-<name>Headers/IQImageProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/IQImageProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/iqt.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/iqt.h</locationURI>
-</link>
-<link>
-<name>Headers/ITranslationManager.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/ITranslationManager.h</locationURI>
-</link>
-<link>
-<name>Generated/moc_CDirList.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/Generated/moc_CDirList.cpp</locationURI>
-</link>
-<link>
-<name>Generated/moc_CFileList.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqt/Generated/moc_CFileList.cpp</locationURI>
-</link>
-</linkedResources>
+	<name>iqt</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/iqt/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Garbages/CDirList.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDirList.moc</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CFileList.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CFileList.moc</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CDirList.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/Generated/moc_CDirList.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CFileList.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/Generated/moc_CFileList.cpp</locationURI>
+		</link>
+		<link>
+			<name>Headers/CApplicationEnvironment.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CApplicationEnvironment.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CBitmap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CBitmap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CBitmapLoaderComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CBitmapLoaderComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCriticalSection.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CCriticalSection.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CDateTime.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDateTime.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CDefaultServicesProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDefaultServicesProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CDirList.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDirList.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CDllFunctionsProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDllFunctionsProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CFileList.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CFileList.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CPackagesLoaderComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CPackagesLoaderComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CReflectedBitmapBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CReflectedBitmapBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSettingsArchiveBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsArchiveBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSettingsReadArchive.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsReadArchive.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSettingsSerializerComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsSerializerComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSettingsWriteArchive.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsWriteArchive.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSignalBlocker.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSignalBlocker.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CTimer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CTimer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CXmlFileReadArchive.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CXmlFileReadArchive.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CXmlFileWriteArchive.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CXmlFileWriteArchive.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IQImageProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/IQImageProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ITranslationManager.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/ITranslationManager.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/iqt.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/iqt.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CApplicationEnvironment.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CApplicationEnvironment.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CBitmap.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CBitmap.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CBitmapLoaderComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CBitmapLoaderComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCriticalSection.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CCriticalSection.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CDateTime.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDateTime.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CDefaultServicesProvider.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDefaultServicesProvider.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CDirList.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDirList.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CDllFunctionsProvider.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CDllFunctionsProvider.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CFileList.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CFileList.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CPackagesLoaderComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CPackagesLoaderComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CReflectedBitmapBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CReflectedBitmapBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSettingsArchiveBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsArchiveBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSettingsReadArchive.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsReadArchive.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSettingsSerializerComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsSerializerComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSettingsWriteArchive.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSettingsWriteArchive.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSignalBlocker.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CSignalBlocker.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CTimer.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CTimer.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CXmlFileReadArchive.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CXmlFileReadArchive.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CXmlFileWriteArchive.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/CXmlFileWriteArchive.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/iqt.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqt/iqt.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

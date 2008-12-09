@@ -80,7 +80,7 @@ TFactorisableContainer<InterfaceClass>::TFactorisableContainer()
 template <class InterfaceClass>
 TFactorisableContainer<InterfaceClass>::~TFactorisableContainer()
 {
-	Reset();
+	BaseClass::Reset();
 }
 
 
@@ -89,7 +89,7 @@ InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const std::st
 {
 	InterfaceClass* elementPtr = CreateElement(elementFactoryKey);
 	if (elementPtr != NULL){
-		PushBack(std::make_pair(elementPtr, elementFactoryKey));
+		BaseClass::PushBack(std::make_pair(elementPtr, elementFactoryKey));
 	}
 
 	return elementPtr;
@@ -100,8 +100,8 @@ InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const std::st
 template <class InterfaceClass>
 InterfaceClass* TFactorisableContainer<InterfaceClass>::GetElement(int elementIndex) const
 {
-	if (elementIndex < GetItemCount() && elementIndex >= 0){
-		return const_cast<InterfaceClass*>(GetAt(elementIndex).first.GetPtr());
+	if (elementIndex < BaseClass::GetItemCount() && elementIndex >= 0){
+		return const_cast<InterfaceClass*>(BaseClass::GetAt(elementIndex).first.GetPtr());
 	}
 
 	return NULL;
@@ -125,8 +125,8 @@ int TFactorisableContainer<InterfaceClass>::GetElementIndex(const InterfaceClass
 template <class InterfaceClass>
 std::string TFactorisableContainer<InterfaceClass>::GetElementKey(int elementIndex) const
 {
-	if (elementIndex < GetItemCount() &&  elementIndex >= 0){
-		return GetAt(elementIndex).second;
+	if (elementIndex < BaseClass::GetItemCount() &&  elementIndex >= 0){
+		return BaseClass::GetAt(elementIndex).second;
 	}
 
 	return std::string();
@@ -146,10 +146,10 @@ template <class InterfaceClass>
 bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 {
 	if (!archive.IsStoring()){
-		Reset();
+		this->Reset();
 	}
 
-	int itemCount = GetItemCount();
+	int itemCount = BaseClass::GetItemCount();
 
 	static iser::CArchiveTag itemsTag("Items", "List of items");
 	static iser::CArchiveTag itemTag("Item", "Item");
@@ -179,7 +179,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 			if (interfacePtr != NULL){
 				item.first = istd::TSmartPtr<InterfaceClass>(interfacePtr);
 
-				PushBack(item);
+				BaseClass::PushBack(item);
 			}
 			else{
 				return false;

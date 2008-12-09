@@ -1,185 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>icmm</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/icmm/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CCmy.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CCmy.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCmyk.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CCmyk.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCmykToRgbTransformation.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CCmykToRgbTransformation.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CColorTransformationProvider.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CColorTransformationProvider.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CHsv.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CHsv.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CHsvToRgbTransformation.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CHsvToRgbTransformation.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLab.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CLab.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRgb.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CRgb.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRgbToCmykTransformation.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CRgbToCmykTransformation.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CVarColor.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CVarColor.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CCmy.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CCmy.h</locationURI>
-</link>
-<link>
-<name>Headers/CCmyk.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CCmyk.h</locationURI>
-</link>
-<link>
-<name>Headers/CCmykToRgbTransformation.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CCmykToRgbTransformation.h</locationURI>
-</link>
-<link>
-<name>Headers/CColorTransformationProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CColorTransformationProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/CHsv.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CHsv.h</locationURI>
-</link>
-<link>
-<name>Headers/CHsvToRgbTransformation.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CHsvToRgbTransformation.h</locationURI>
-</link>
-<link>
-<name>Headers/CLab.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CLab.h</locationURI>
-</link>
-<link>
-<name>Headers/CRgb.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CRgb.h</locationURI>
-</link>
-<link>
-<name>Headers/CRgbToCmykTransformation.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CRgbToCmykTransformation.h</locationURI>
-</link>
-<link>
-<name>Headers/CVarColor.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/CVarColor.h</locationURI>
-</link>
-<link>
-<name>Headers/icmm.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/icmm.h</locationURI>
-</link>
-<link>
-<name>Headers/IColorTransformation.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/IColorTransformation.h</locationURI>
-</link>
-<link>
-<name>Headers/TComposedColor.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icmm/TComposedColor.h</locationURI>
-</link>
-</linkedResources>
+	<name>icmm</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/icmm/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CCmy.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CCmy.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCmyk.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CCmyk.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCmykToRgbTransformation.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CCmykToRgbTransformation.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CColorTransformationProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CColorTransformationProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CHsv.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CHsv.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CHsvToRgbTransformation.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CHsvToRgbTransformation.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLab.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CLab.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRgb.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CRgb.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRgbToCmykTransformation.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CRgbToCmykTransformation.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CVarColor.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CVarColor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IColorTransformation.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/IColorTransformation.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TComposedColor.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/TComposedColor.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/icmm.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/icmm.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCmy.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CCmy.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCmyk.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CCmyk.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCmykToRgbTransformation.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CCmykToRgbTransformation.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CColorTransformationProvider.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CColorTransformationProvider.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CHsv.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CHsv.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CHsvToRgbTransformation.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CHsvToRgbTransformation.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLab.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CLab.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRgb.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CRgb.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRgbToCmykTransformation.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CRgbToCmykTransformation.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CVarColor.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icmm/CVarColor.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

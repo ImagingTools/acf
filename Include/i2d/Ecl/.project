@@ -1,160 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>i2d</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/i2d/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CAnnulus.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CAnnulus.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CAnnulusSegment.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CAnnulusSegment.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCircle.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CCircle.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLine2d.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CLine2d.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CPosition2d.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CPosition2d.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRectangle.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CRectangle.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CTransform.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CTransform.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CVector2d.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CVector2d.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CAnnulus.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CAnnulus.h</locationURI>
-</link>
-<link>
-<name>Headers/CAnnulusSegment.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CAnnulusSegment.h</locationURI>
-</link>
-<link>
-<name>Headers/CCircle.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CCircle.h</locationURI>
-</link>
-<link>
-<name>Headers/CLine2d.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CLine2d.h</locationURI>
-</link>
-<link>
-<name>Headers/CPosition2d.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CPosition2d.h</locationURI>
-</link>
-<link>
-<name>Headers/CRectangle.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CRectangle.h</locationURI>
-</link>
-<link>
-<name>Headers/CTransform.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CTransform.h</locationURI>
-</link>
-<link>
-<name>Headers/CVector2d.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/CVector2d.h</locationURI>
-</link>
-<link>
-<name>Headers/i2d.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/i2d.h</locationURI>
-</link>
-<link>
-<name>Headers/IObject2d.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/i2d/IObject2d.h</locationURI>
-</link>
-</linkedResources>
+	<name>i2d</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/i2d/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CAnnulus.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CAnnulus.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CAnnulusSegment.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CAnnulusSegment.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCircle.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CCircle.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLine2d.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CLine2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CPosition2d.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CPosition2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRectangle.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CRectangle.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CTransform.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CTransform.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CVector2d.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CVector2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IObject2d.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/IObject2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/i2d.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/i2d.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CAnnulus.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CAnnulus.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CAnnulusSegment.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CAnnulusSegment.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCircle.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CCircle.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLine2d.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CLine2d.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CPosition2d.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CPosition2d.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRectangle.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CRectangle.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CTransform.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CTransform.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CVector2d.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/i2d/CVector2d.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

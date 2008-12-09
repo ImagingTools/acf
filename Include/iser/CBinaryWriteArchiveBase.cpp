@@ -30,73 +30,73 @@ bool CBinaryWriteArchiveBase::EndTag(const CArchiveTag& tag)
 
 bool CBinaryWriteArchiveBase::Process(bool& value)
 {
-	return ProcessData(&value, sizeof(bool));
+	return ProcessData(&value, int(sizeof(bool)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(char& value)
 {
-	return ProcessData(&value, sizeof(char));
+	return ProcessData(&value, int(sizeof(char)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_BYTE& value)
 {
-	return ProcessData(&value, sizeof(I_BYTE));
+	return ProcessData(&value, int(sizeof(I_BYTE)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_SBYTE& value)
 {
-	return ProcessData(&value, sizeof(I_SBYTE));
+	return ProcessData(&value, int(sizeof(I_SBYTE)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_WORD& value)
 {
-	return ProcessData(&value, sizeof(I_WORD));
+	return ProcessData(&value, int(sizeof(I_WORD)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_SWORD& value)
 {
-	return ProcessData(&value, sizeof(I_SWORD));
+	return ProcessData(&value, int(sizeof(I_SWORD)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_DWORD& value)
 {
-	return ProcessData(&value, sizeof(I_DWORD));
+	return ProcessData(&value, int(sizeof(I_DWORD)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_SDWORD& value)
 {
-	return ProcessData(&value, sizeof(I_SDWORD));
+	return ProcessData(&value, int(sizeof(I_SDWORD)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_QWORD& value)
 {
-	return ProcessData(&value, sizeof(I_QWORD));
+	return ProcessData(&value, int(sizeof(I_QWORD)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(I_SQWORD& value)
 {
-	return ProcessData(&value, sizeof(I_SQWORD));
+	return ProcessData(&value, int(sizeof(I_SQWORD)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(float& value)
 {
-	return ProcessData(&value, sizeof(float));
+	return ProcessData(&value, int(sizeof(float)));
 }
 
 
 bool CBinaryWriteArchiveBase::Process(double& value)
 {
-	return ProcessData(&value, sizeof(double));
+	return ProcessData(&value, int(sizeof(double)));
 }
 
 
@@ -106,7 +106,7 @@ bool CBinaryWriteArchiveBase::Process(std::string& value)
 
 	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * sizeof(char));
+	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * int(sizeof(char)));
 
 	return retVal;
 }
@@ -118,7 +118,7 @@ bool CBinaryWriteArchiveBase::Process(istd::CString& value)
 
 	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * sizeof(wchar_t));	
+	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * int(sizeof(wchar_t)));	
 
 	return retVal;
 }

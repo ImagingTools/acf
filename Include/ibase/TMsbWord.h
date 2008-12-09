@@ -107,7 +107,7 @@ inline I_DWORD TMsbWord<Size>::GetLsb() const
 template <int Size>
 inline bool TMsbWord<Size>::Serialize(iser::IArchive& archive)
 {
-	return archive.ProcessData(m_bytes, sizeof(m_bytes));
+	return archive.ProcessData(m_bytes, int(sizeof(m_bytes)));
 }
 
 

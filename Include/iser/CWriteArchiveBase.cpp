@@ -29,7 +29,7 @@ I_DWORD CWriteArchiveBase::GetVersion(int versionId) const
 
 bool CWriteArchiveBase::ProcessBits(void* dataPtr, int bitsCount, int bytesCount)
 {
-	if (bytesCount == sizeof(I_DWORD)){
+	if (bytesCount == int(sizeof(I_DWORD))){
 		I_DWORD mask = (1 << bitsCount) - 1;
 		I_DWORD word = *((I_DWORD*)dataPtr);
 		I_DWORD result = word & mask;

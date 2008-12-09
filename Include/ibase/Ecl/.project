@@ -1,235 +1,237 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>ibase</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/ibase/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CApplicationInfoComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CApplicationInfoComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CInstantiatorComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CInstantiatorComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CMessage.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CMessage.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRectangleComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CRectangleComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRegistryCodeSaverComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CRegistryCodeSaverComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSize.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CSize.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CApplicationInfoComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CApplicationInfoComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CInstantiatorComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CInstantiatorComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CMessage.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CMessage.h</locationURI>
-</link>
-<link>
-<name>Headers/CRectangleComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CRectangleComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CRegistryCodeSaverComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CRegistryCodeSaverComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CSize.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/CSize.h</locationURI>
-</link>
-<link>
-<name>Headers/IApplication.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/IApplication.h</locationURI>
-</link>
-<link>
-<name>Headers/IApplicationInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/IApplicationInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/ibase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/ibase.h</locationURI>
-</link>
-<link>
-<name>Headers/IMessage.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/IMessage.h</locationURI>
-</link>
-<link>
-<name>Headers/IMessageConsumer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/IMessageConsumer.h</locationURI>
-</link>
-<link>
-<name>Headers/IMessageContainer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/IMessageContainer.h</locationURI>
-</link>
-<link>
-<name>Headers/INamedObject.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/INamedObject.h</locationURI>
-</link>
-<link>
-<name>Headers/IObject.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/IObject.h</locationURI>
-</link>
-<link>
-<name>Headers/TComposedFactoryComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TComposedFactoryComp.h</locationURI>
-</link>
-<link>
-<name>Headers/TContainer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TContainer.h</locationURI>
-</link>
-<link>
-<name>Headers/TEnableableWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TEnableableWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TFactorisableContainer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TFactorisableContainer.h</locationURI>
-</link>
-<link>
-<name>Headers/TFileSerializerComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TFileSerializerComp.h</locationURI>
-</link>
-<link>
-<name>Headers/THierarchicalBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/THierarchicalBase.h</locationURI>
-</link>
-<link>
-<name>Headers/TLoggerWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TLoggerWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TMessageContainerWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TMessageContainerWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TLoggerCompWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TLoggerCompWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TMsbWord.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TMsbWord.h</locationURI>
-</link>
-<link>
-<name>Headers/TNamedWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TNamedWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TSerializableContainer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TSerializableContainer.h</locationURI>
-</link>
-<link>
-<name>Headers/TSingleFactoryComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/ibase/TSingleFactoryComp.h</locationURI>
-</link>
-</linkedResources>
+	<name>ibase</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/ibase/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CApplicationInfoComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CApplicationInfoComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CInstantiatorComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CInstantiatorComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CMessage.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CMessage.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRectangleComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CRectangleComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRegistryCodeSaverComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CRegistryCodeSaverComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSize.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CSize.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IApplication.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/IApplication.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IApplicationInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/IApplicationInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IMessage.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/IMessage.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IMessageConsumer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/IMessageConsumer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IMessageContainer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/IMessageContainer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/INamedObject.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/INamedObject.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IObject.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/IObject.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TComposedFactoryComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TComposedFactoryComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TContainer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TContainer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TEnableableWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TEnableableWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TFactorisableContainer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TFactorisableContainer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TFileSerializerComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TFileSerializerComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/THierarchicalBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/THierarchicalBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TLoggerCompWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TLoggerCompWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TLoggerWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TLoggerWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMessageContainerWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TMessageContainerWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMsbWord.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TMsbWord.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TNamedWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TNamedWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSerializableContainer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TSerializableContainer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSingleFactoryComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/TSingleFactoryComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ibase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/ibase.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CApplicationInfoComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CApplicationInfoComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CInstantiatorComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CInstantiatorComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CMessage.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CMessage.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRectangleComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CRectangleComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRegistryCodeSaverComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CRegistryCodeSaverComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSize.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/ibase/CSize.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

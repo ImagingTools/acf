@@ -1,375 +1,377 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>icomp</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/icomp/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CBaseComponentStaticInfo.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CBaseComponentStaticInfo.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CComponentAddress.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentAddress.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CComponentBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CComponentContext.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentContext.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CComponentStaticInfoBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentStaticInfoBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCompositeComponent.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositeComponent.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCompositeComponentContext.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositeComponentContext.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCompositeComponentStaticInfo.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositeComponentStaticInfo.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCompositePackageStaticInfo.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositePackageStaticInfo.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CPackageStaticInfo.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CPackageStaticInfo.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRegistry.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CRegistry.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRegistryElement.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CRegistryElement.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSimComponentContextBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CSimComponentContextBase.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CBaseComponentStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CBaseComponentStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/CComponentAddress.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentAddress.h</locationURI>
-</link>
-<link>
-<name>Headers/CComponentBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CComponentContext.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentContext.h</locationURI>
-</link>
-<link>
-<name>Headers/CComponentStaticInfoBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CComponentStaticInfoBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CCompositeComponent.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositeComponent.h</locationURI>
-</link>
-<link>
-<name>Headers/CCompositeComponentContext.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositeComponentContext.h</locationURI>
-</link>
-<link>
-<name>Headers/CCompositeComponentStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositeComponentStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/CCompositePackageStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CCompositePackageStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/CFactoryAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CFactoryAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/CMultiFactoryAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CMultiFactoryAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/CMultiReferenceAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CMultiReferenceAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/CPackageStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CPackageStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/CReferenceAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CReferenceAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/CRegistry.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CRegistry.h</locationURI>
-</link>
-<link>
-<name>Headers/CRegistryElement.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CRegistryElement.h</locationURI>
-</link>
-<link>
-<name>Headers/CSimComponentContextBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/CSimComponentContextBase.h</locationURI>
-</link>
-<link>
-<name>Headers/export.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/export.h</locationURI>
-</link>
-<link>
-<name>Headers/IAttributeStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IAttributeStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/icomp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/icomp.h</locationURI>
-</link>
-<link>
-<name>Headers/IComponent.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IComponent.h</locationURI>
-</link>
-<link>
-<name>Headers/IComponentContext.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IComponentContext.h</locationURI>
-</link>
-<link>
-<name>Headers/IComponentStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IComponentStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/IRealAttributeStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IRealAttributeStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/IRegistriesManager.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IRegistriesManager.h</locationURI>
-</link>
-<link>
-<name>Headers/IRegistry.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IRegistry.h</locationURI>
-</link>
-<link>
-<name>Headers/IRegistryElement.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IRegistryElement.h</locationURI>
-</link>
-<link>
-<name>Headers/IRegistryGeometryProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IRegistryGeometryProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/IRegistryNotesProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/IRegistryNotesProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/TAttributeStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TAttributeStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/TComponentRegistrator.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TComponentRegistrator.h</locationURI>
-</link>
-<link>
-<name>Headers/TComponentStaticInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TComponentStaticInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/TComponentWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TComponentWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TFactoryMember.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TFactoryMember.h</locationURI>
-</link>
-<link>
-<name>Headers/TInterfaceManipBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TInterfaceManipBase.h</locationURI>
-</link>
-<link>
-<name>Headers/TInterfaceRegistrator.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TInterfaceRegistrator.h</locationURI>
-</link>
-<link>
-<name>Headers/TMakeComponentWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TMakeComponentWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TModelCompWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TModelCompWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TMultiAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TMultiAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/TMultiAttributePtr.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TMultiAttributePtr.h</locationURI>
-</link>
-<link>
-<name>Headers/TMultiFactoryMember.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TMultiFactoryMember.h</locationURI>
-</link>
-<link>
-<name>Headers/TMultiReferencePtr.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TMultiReferencePtr.h</locationURI>
-</link>
-<link>
-<name>Headers/TReferencePtr.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TReferencePtr.h</locationURI>
-</link>
-<link>
-<name>Headers/TSelectableAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TSelectableAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/TSimComponentsFactory.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TSimComponentsFactory.h</locationURI>
-</link>
-<link>
-<name>Headers/TSimComponentWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TSimComponentWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TSingleAttribute.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TSingleAttribute.h</locationURI>
-</link>
-<link>
-<name>Headers/TSingleAttributePtr.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/icomp/TSingleAttributePtr.h</locationURI>
-</link>
-</linkedResources>
+	<name>icomp</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/icomp/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CBaseComponentStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CBaseComponentStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CComponentAddress.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentAddress.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CComponentBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CComponentContext.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentContext.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CComponentStaticInfoBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentStaticInfoBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCompositeComponent.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositeComponent.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCompositeComponentContext.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositeComponentContext.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCompositeComponentStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositeComponentStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCompositePackageStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositePackageStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CFactoryAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CFactoryAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CMultiFactoryAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CMultiFactoryAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CMultiReferenceAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CMultiReferenceAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CPackageStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CPackageStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CReferenceAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CReferenceAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRegistry.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CRegistry.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRegistryElement.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CRegistryElement.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSimComponentContextBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CSimComponentContextBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IAttributeStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IAttributeStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IComponent.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IComponent.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IComponentContext.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IComponentContext.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IComponentStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IComponentStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IRealAttributeStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IRealAttributeStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IRegistriesManager.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IRegistriesManager.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IRegistry.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IRegistry.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IRegistryElement.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IRegistryElement.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IRegistryGeometryProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IRegistryGeometryProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IRegistryNotesProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/IRegistryNotesProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TAttributeStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TAttributeStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TComponentRegistrator.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TComponentRegistrator.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TComponentStaticInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TComponentStaticInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TComponentWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TComponentWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TFactoryMember.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TFactoryMember.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TInterfaceManipBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TInterfaceManipBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TInterfaceRegistrator.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TInterfaceRegistrator.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMakeComponentWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TMakeComponentWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TModelCompWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TModelCompWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMultiAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TMultiAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMultiAttributePtr.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TMultiAttributePtr.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMultiFactoryMember.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TMultiFactoryMember.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TMultiReferencePtr.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TMultiReferencePtr.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TReferencePtr.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TReferencePtr.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSelectableAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TSelectableAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSimComponentWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TSimComponentWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSimComponentsFactory.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TSimComponentsFactory.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSingleAttribute.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TSingleAttribute.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSingleAttributePtr.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/TSingleAttributePtr.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/export.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/export.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/icomp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/icomp.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CBaseComponentStaticInfo.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CBaseComponentStaticInfo.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CComponentAddress.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentAddress.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CComponentBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CComponentContext.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentContext.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CComponentStaticInfoBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CComponentStaticInfoBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCompositeComponent.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositeComponent.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCompositeComponentContext.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositeComponentContext.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCompositeComponentStaticInfo.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositeComponentStaticInfo.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCompositePackageStaticInfo.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CCompositePackageStaticInfo.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CPackageStaticInfo.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CPackageStaticInfo.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRegistry.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CRegistry.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRegistryElement.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CRegistryElement.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSimComponentContextBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/icomp/CSimComponentContextBase.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

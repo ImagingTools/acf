@@ -46,7 +46,7 @@ TComponentWrap<Component>::~TComponentWrap()
 		parentPtr->OnSubcomponentDeleted(this);
 	}
 
-	BaseClass::SetComponentContext(NULL, NULL, false);
+	this->SetComponentContext(NULL, NULL, false);
 }
 
 

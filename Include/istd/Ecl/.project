@@ -1,295 +1,297 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>istd</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/istd/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CBitManip.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CBitManip.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CChangeDelegator.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CChangeDelegator.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CCrcCalculator.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CCrcCalculator.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRandomNumber.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CRandomNumber.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CRange.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CRange.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CStaticServicesProvider.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CStaticServicesProvider.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CString.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CString.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CVarIndex.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CVarIndex.cpp</locationURI>
-</link>
-<link>
-<name>Sources/istd.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/istd.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CBitManip.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CBitManip.h</locationURI>
-</link>
-<link>
-<name>Headers/CChangeDelegator.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CChangeDelegator.h</locationURI>
-</link>
-<link>
-<name>Headers/CCrcCalculator.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CCrcCalculator.h</locationURI>
-</link>
-<link>
-<name>Headers/CFastBinaryIndex.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CFastBinaryIndex.h</locationURI>
-</link>
-<link>
-<name>Headers/CIndex2d.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CIndex2d.h</locationURI>
-</link>
-<link>
-<name>Headers/CRandomNumber.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CRandomNumber.h</locationURI>
-</link>
-<link>
-<name>Headers/CRange.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CRange.h</locationURI>
-</link>
-<link>
-<name>Headers/CStaticServicesProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CStaticServicesProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/CString.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CString.h</locationURI>
-</link>
-<link>
-<name>Headers/CVarIndex.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/CVarIndex.h</locationURI>
-</link>
-<link>
-<name>Headers/IChangeable.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/IChangeable.h</locationURI>
-</link>
-<link>
-<name>Headers/IEnableable.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/IEnableable.h</locationURI>
-</link>
-<link>
-<name>Headers/IFactoryInfo.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/IFactoryInfo.h</locationURI>
-</link>
-<link>
-<name>Headers/INamed.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/INamed.h</locationURI>
-</link>
-<link>
-<name>Headers/IPolymorphic.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/IPolymorphic.h</locationURI>
-</link>
-<link>
-<name>Headers/IServicesProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/IServicesProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/istd.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/istd.h</locationURI>
-</link>
-<link>
-<name>Headers/ITrace.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/ITrace.h</locationURI>
-</link>
-<link>
-<name>Headers/TArray.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TArray.h</locationURI>
-</link>
-<link>
-<name>Headers/TCachedUpdateManagerWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TCachedUpdateManagerWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TCascadedMap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TCascadedMap.h</locationURI>
-</link>
-<link>
-<name>Headers/TChangeBinder.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TChangeBinder.h</locationURI>
-</link>
-<link>
-<name>Headers/TChangeDelegator.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TChangeDelegator.h</locationURI>
-</link>
-<link>
-<name>Headers/TChangeNotifier.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TChangeNotifier.h</locationURI>
-</link>
-<link>
-<name>Headers/TComposedFactory.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TComposedFactory.h</locationURI>
-</link>
-<link>
-<name>Headers/TDelPtr.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TDelPtr.h</locationURI>
-</link>
-<link>
-<name>Headers/TIFactory.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TIFactory.h</locationURI>
-</link>
-<link>
-<name>Headers/TIHierarchical.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TIHierarchical.h</locationURI>
-</link>
-<link>
-<name>Headers/TIndex.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TIndex.h</locationURI>
-</link>
-<link>
-<name>Headers/TOptDelPtr.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TOptDelPtr.h</locationURI>
-</link>
-<link>
-<name>Headers/TOptPointerVector.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TOptPointerVector.h</locationURI>
-</link>
-<link>
-<name>Headers/TPointer.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TPointer.h</locationURI>
-</link>
-<link>
-<name>Headers/TPointerVector.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TPointerVector.h</locationURI>
-</link>
-<link>
-<name>Headers/TSingleFactory.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TSingleFactory.h</locationURI>
-</link>
-<link>
-<name>Headers/TUpdateManagerWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TUpdateManagerWrap.h</locationURI>
-</link>
-<link>
-<name>Headers/TVarArray.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/istd/TVarArray.h</locationURI>
-</link>
-</linkedResources>
+	<name>istd</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/istd/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CBitManip.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CBitManip.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CChangeDelegator.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CChangeDelegator.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CCrcCalculator.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CCrcCalculator.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CFastBinaryIndex.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CFastBinaryIndex.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CIndex2d.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CIndex2d.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRandomNumber.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CRandomNumber.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CRange.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CRange.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CStaticServicesProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CStaticServicesProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CString.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CString.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CVarIndex.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CVarIndex.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IChangeable.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/IChangeable.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IEnableable.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/IEnableable.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IFactoryInfo.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/IFactoryInfo.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/INamed.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/INamed.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IPolymorphic.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/IPolymorphic.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IServicesProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/IServicesProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ITrace.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/ITrace.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TArray.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TArray.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TCachedUpdateManagerWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TCachedUpdateManagerWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TCascadedMap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TCascadedMap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TChangeBinder.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TChangeBinder.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TChangeDelegator.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TChangeDelegator.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TChangeNotifier.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TChangeNotifier.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TComposedFactory.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TComposedFactory.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TDelPtr.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TDelPtr.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TIFactory.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TIFactory.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TIHierarchical.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TIHierarchical.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TIndex.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TIndex.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TOptDelPtr.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TOptDelPtr.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TOptPointerVector.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TOptPointerVector.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TPointer.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TPointer.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TPointerVector.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TPointerVector.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TSingleFactory.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TSingleFactory.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TUpdateManagerWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TUpdateManagerWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TVarArray.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/TVarArray.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/istd.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/istd.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CBitManip.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CBitManip.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CChangeDelegator.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CChangeDelegator.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCrcCalculator.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CCrcCalculator.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRandomNumber.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CRandomNumber.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CRange.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CRange.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CStaticServicesProvider.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CStaticServicesProvider.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CString.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CString.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CVarIndex.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/CVarIndex.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/istd.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/istd/istd.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

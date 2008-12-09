@@ -32,73 +32,73 @@ bool CBinaryReadArchiveBase::EndTag(const CArchiveTag& tag)
 
 bool CBinaryReadArchiveBase::Process(bool& value)
 {
-	return ProcessData(&value, sizeof(bool));
+	return ProcessData(&value, int(sizeof(bool)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(char& value)
 {
-	return ProcessData(&value, sizeof(char));
+	return ProcessData(&value, int(sizeof(char)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_BYTE& value)
 {
-	return ProcessData(&value, sizeof(I_BYTE));
+	return ProcessData(&value, int(sizeof(I_BYTE)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_SBYTE& value)
 {
-	return ProcessData(&value, sizeof(I_SBYTE));
+	return ProcessData(&value, int(sizeof(I_SBYTE)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_WORD& value)
 {
-	return ProcessData(&value, sizeof(I_WORD));
+	return ProcessData(&value, int(sizeof(I_WORD)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_SWORD& value)
 {
-	return ProcessData(&value, sizeof(I_SWORD));
+	return ProcessData(&value, int(sizeof(I_SWORD)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_DWORD& value)
 {
-	return ProcessData(&value, sizeof(I_DWORD));
+	return ProcessData(&value, int(sizeof(I_DWORD)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_SDWORD& value)
 {
-	return ProcessData(&value, sizeof(I_SDWORD));
+	return ProcessData(&value, int(sizeof(I_SDWORD)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_QWORD& value)
 {
-	return ProcessData(&value, sizeof(I_QWORD));
+	return ProcessData(&value, int(sizeof(I_QWORD)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(I_SQWORD& value)
 {
-	return ProcessData(&value, sizeof(I_SQWORD));
+	return ProcessData(&value, int(sizeof(I_SQWORD)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(float& value)
 {
-	return ProcessData(&value, sizeof(float));
+	return ProcessData(&value, int(sizeof(float)));
 }
 
 
 bool CBinaryReadArchiveBase::Process(double& value)
 {
-	return ProcessData(&value, sizeof(double));
+	return ProcessData(&value, int(sizeof(double)));
 }
 
 
@@ -115,7 +115,7 @@ bool CBinaryReadArchiveBase::Process(std::string& value)
 
 		std::vector<char> buffer(stringLength + 1, 0);
 
-		retVal = ProcessData(&buffer[0], stringLength * sizeof(char));	
+		retVal = ProcessData(&buffer[0], stringLength * int(sizeof(char)));	
 
 		if (retVal){
 			value = std::string(&buffer[0]);
@@ -139,7 +139,7 @@ bool CBinaryReadArchiveBase::Process(istd::CString& value)
 
 		std::vector<wchar_t> buffer(stringLength + 1, 0);
 
-		retVal = ProcessData(&buffer[0], stringLength * sizeof(wchar_t));	
+		retVal = ProcessData(&buffer[0], stringLength * int(sizeof(wchar_t)));	
 
 		if (retVal){
 			value = istd::CString(&buffer[0]);

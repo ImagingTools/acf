@@ -1,630 +1,632 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>iqtgui</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/iqtgui/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CApplicationComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CApplicationComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CDockWidgetGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CDockWidgetGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CFileDialogSerializerComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CFileDialogSerializerComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CFreeWidgetGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CFreeWidgetGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CGuiComponentBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CGuiComponentBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CHierarchicalCommand.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CHierarchicalCommand.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CIconProviderComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CIconProviderComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLogGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CLoginGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLoginGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSelectionParamGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSplashScreenGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSplashScreenGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CTabContainerGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CTabContainerGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CTreeWidgetFilter.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CTreeWidgetFilter.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CApplicationComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CApplicationComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CDockWidgetGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CDockWidgetGuiComp.h</locationURI>
-</link>
-<link>
-<name>Garbages/CDockWidgetGuiComp.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CDockWidgetGuiComp.moc</locationURI>
-</link>
-<link>
-<name>Headers/CFileDialogSerializerComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CFileDialogSerializerComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CFreeWidgetGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CFreeWidgetGuiComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CGuiComponentBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CGuiComponentBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CHierarchicalCommand.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CHierarchicalCommand.h</locationURI>
-</link>
-<link>
-<name>Garbages/CHierarchicalCommand.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CHierarchicalCommand.moc</locationURI>
-</link>
-<link>
-<name>Headers/CIconProviderComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CIconProviderComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CLogGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.h</locationURI>
-</link>
-<link>
-<name>Garbages/CLogGuiComp.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.moc</locationURI>
-</link>
-<link>
-<name>Headers/CLoginGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLoginGuiComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CSelectionParamGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.h</locationURI>
-</link>
-<link>
-<name>Garbages/CSelectionParamGuiComp.moc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.moc</locationURI>
-</link>
-<link>
-<name>Headers/CSplashScreenGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSplashScreenGuiComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CTabContainerGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CTabContainerGuiComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CTreeWidgetFilter.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CTreeWidgetFilter.h</locationURI>
-</link>
-<link>
-<name>Headers/CXmlFileReadArchive.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CXmlFileReadArchive.h</locationURI>
-</link>
-<link>
-<name>Headers/CXmlFileWriteArchive.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CXmlFileWriteArchive.h</locationURI>
-</link>
-<link>
-<name>Headers/IDockManager.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/IDockManager.h</locationURI>
-</link>
-<link>
-<name>Headers/IGuiObject.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/IGuiObject.h</locationURI>
-</link>
-<link>
-<name>Headers/IIconProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/IIconProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/IMainWindowComponent.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/IMainWindowComponent.h</locationURI>
-</link>
-<link>
-<name>Headers/IQImageProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/IQImageProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/iqtgui.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/iqtgui.h</locationURI>
-</link>
-<link>
-<name>Headers/IToolBarManager.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/IToolBarManager.h</locationURI>
-</link>
-<link>
-<name>Headers/TDesignerGuiCompBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/TDesignerGuiCompBase.h</locationURI>
-</link>
-<link>
-<name>Headers/TDesignerGuiObserverCompBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/TDesignerGuiObserverCompBase.h</locationURI>
-</link>
-<link>
-<name>Headers/TGuiComponentBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/TGuiComponentBase.h</locationURI>
-</link>
-<link>
-<name>Headers/TGuiObserverWrap.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/TGuiObserverWrap.h</locationURI>
-</link>
-<link>
-<name>Resources/iqtgui.qrc</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/iqtgui.qrc</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\add_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/add_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\administrator_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/administrator_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\attach_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/attach_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\back_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/back_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\book_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/book_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\calculator_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/calculator_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\calendar_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/calendar_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\camera_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/camera_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\cancel_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/cancel_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\chat_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/chat_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\clock_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/clock_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\close_a_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/close_a_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\close_b_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/close_b_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\copy_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/copy_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\delete_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/delete_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\diskette_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/diskette_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\document_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/document_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\door_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/door_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\down_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/down_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\exit.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/exit.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\fast_forward_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/fast_forward_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\first_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/first_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\folder_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/folder_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\group_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/group_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\hand_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/hand_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\home_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/home_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\info_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/info_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\lamp_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/lamp_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\last_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/last_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\mail_write_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mail_write_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\mailbox_search_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mailbox_search_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\mailbox_write_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mailbox_write_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\mailbox_zoom_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mailbox_zoom_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\next_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/next_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\ok_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/ok_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\paste_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/paste_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\pause_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/pause_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\pen_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/pen_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\play_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/play_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\preview_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/preview_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\printer_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/printer_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\reload_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/reload_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\reload_left_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/reload_left_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\sandglass_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/sandglass_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\scissors_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/scissors_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\star_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/star_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\statistic_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/statistic_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\trash_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/trash_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\up_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/up_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\user_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/user_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\window_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/window_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\wizard_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/wizard_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\world_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/world_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\write_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/write_128.png</locationURI>
-</link>
-<link>
-<name>Garbages/Resources\Icons\zoom_128.png</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Resources/Icons/zoom_128.png</locationURI>
-</link>
-<link>
-<name>Generated/moc_CDockWidgetGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/moc_CDockWidgetGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Generated/moc_CHierarchicalCommand.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/moc_CHierarchicalCommand.cpp</locationURI>
-</link>
-<link>
-<name>Generated/moc_CLogGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/moc_CLogGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Generated/moc_CSelectionParamGuiComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/moc_CSelectionParamGuiComp.cpp</locationURI>
-</link>
-<link>
-<name>Generated/qrc_iqtgui.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/qrc_iqtgui.cpp</locationURI>
-</link>
-<link>
-<name>Generated/ui_CLogGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/ui_CLogGuiComp.h</locationURI>
-</link>
-<link>
-<name>Generated/ui_CLoginGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/ui_CLoginGuiComp.h</locationURI>
-</link>
-<link>
-<name>Generated/ui_CSelectionParamGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/ui_CSelectionParamGuiComp.h</locationURI>
-</link>
-<link>
-<name>Generated/ui_CSplashScreenGuiComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/Generated/ui_CSplashScreenGuiComp.h</locationURI>
-</link>
-<link>
-<name>Forms/CLogGuiComp.ui</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.ui</locationURI>
-</link>
-<link>
-<name>Forms/CLoginGuiComp.ui</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CLoginGuiComp.ui</locationURI>
-</link>
-<link>
-<name>Forms/CSelectionParamGuiComp.ui</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.ui</locationURI>
-</link>
-<link>
-<name>Forms/CSplashScreenGuiComp.ui</name>
-<type>1</type>
-<locationURI>ACFPath/Include/iqtgui/CSplashScreenGuiComp.ui</locationURI>
-</link>
-</linkedResources>
+	<name>iqtgui</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/iqtgui/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Forms/CLogGuiComp.ui</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.ui</locationURI>
+		</link>
+		<link>
+			<name>Forms/CLoginGuiComp.ui</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLoginGuiComp.ui</locationURI>
+		</link>
+		<link>
+			<name>Forms/CSelectionParamGuiComp.ui</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.ui</locationURI>
+		</link>
+		<link>
+			<name>Forms/CSplashScreenGuiComp.ui</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSplashScreenGuiComp.ui</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CDockWidgetGuiComp.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CDockWidgetGuiComp.moc</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CHierarchicalCommand.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CHierarchicalCommand.moc</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CLogGuiComp.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.moc</locationURI>
+		</link>
+		<link>
+			<name>Garbages/CSelectionParamGuiComp.moc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.moc</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CDockWidgetGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/moc_CDockWidgetGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CHierarchicalCommand.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/moc_CHierarchicalCommand.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CLogGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/moc_CLogGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/moc_CSelectionParamGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/moc_CSelectionParamGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/qrc_iqtgui.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/qrc_iqtgui.cpp</locationURI>
+		</link>
+		<link>
+			<name>Generated/ui_CLogGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/ui_CLogGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Generated/ui_CLoginGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/ui_CLoginGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Generated/ui_CSelectionParamGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/ui_CSelectionParamGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Generated/ui_CSplashScreenGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Generated/ui_CSplashScreenGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CApplicationComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CApplicationComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CDockWidgetGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CDockWidgetGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CFileDialogSerializerComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CFileDialogSerializerComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CFreeWidgetGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CFreeWidgetGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CGuiComponentBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CGuiComponentBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CHierarchicalCommand.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CHierarchicalCommand.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CIconProviderComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CIconProviderComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLogGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CLoginGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLoginGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSelectionParamGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSplashScreenGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSplashScreenGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CTabContainerGuiComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CTabContainerGuiComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CTreeWidgetFilter.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CTreeWidgetFilter.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CXmlFileReadArchive.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CXmlFileReadArchive.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CXmlFileWriteArchive.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CXmlFileWriteArchive.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IDockManager.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/IDockManager.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IGuiObject.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/IGuiObject.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IIconProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/IIconProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IMainWindowComponent.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/IMainWindowComponent.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IQImageProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/IQImageProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IToolBarManager.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/IToolBarManager.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TDesignerGuiCompBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/TDesignerGuiCompBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TDesignerGuiObserverCompBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/TDesignerGuiObserverCompBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TGuiComponentBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/TGuiComponentBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/TGuiObserverWrap.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/TGuiObserverWrap.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/iqtgui.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/iqtgui.h</locationURI>
+		</link>
+		<link>
+			<name>Resources/iqtgui.qrc</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/iqtgui.qrc</locationURI>
+		</link>
+		<link>
+			<name>Sources/CApplicationComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CApplicationComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CDockWidgetGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CDockWidgetGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CFileDialogSerializerComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CFileDialogSerializerComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CFreeWidgetGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CFreeWidgetGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CGuiComponentBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CGuiComponentBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CHierarchicalCommand.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CHierarchicalCommand.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CIconProviderComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CIconProviderComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLogGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLogGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CLoginGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CLoginGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSelectionParamGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSelectionParamGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSplashScreenGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CSplashScreenGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CTabContainerGuiComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CTabContainerGuiComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CTreeWidgetFilter.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/CTreeWidgetFilter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/add_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/add_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/administrator_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/administrator_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/attach_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/attach_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/back_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/back_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/book_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/book_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/calculator_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/calculator_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/calendar_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/calendar_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/camera_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/camera_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/cancel_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/cancel_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/chat_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/chat_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/clock_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/clock_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/close_a_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/close_a_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/close_b_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/close_b_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/copy_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/copy_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/delete_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/delete_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/diskette_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/diskette_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/document_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/document_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/door_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/door_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/down_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/down_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/exit.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/exit.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/fast_forward_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/fast_forward_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/first_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/first_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/folder_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/folder_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/group_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/group_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/hand_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/hand_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/home_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/home_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/info_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/info_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/lamp_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/lamp_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/last_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/last_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/mail_write_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mail_write_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/mailbox_search_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mailbox_search_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/mailbox_write_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mailbox_write_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/mailbox_zoom_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/mailbox_zoom_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/next_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/next_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/ok_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/ok_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/paste_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/paste_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/pause_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/pause_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/pen_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/pen_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/play_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/play_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/preview_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/preview_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/printer_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/printer_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/reload_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/reload_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/reload_left_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/reload_left_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/sandglass_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/sandglass_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/scissors_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/scissors_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/star_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/star_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/statistic_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/statistic_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/trash_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/trash_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/up_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/up_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/user_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/user_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/window_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/window_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/wizard_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/wizard_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/world_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/world_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/write_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/write_128.png</locationURI>
+		</link>
+		<link>
+			<name>Garbages/Resources/Icons/zoom_128.png</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/iqtgui/Resources/Icons/zoom_128.png</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

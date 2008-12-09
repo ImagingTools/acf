@@ -211,7 +211,7 @@ inline bool CComponentBase::IsComponentActive() const
 	Used to assign value for multiply parameters (attributes, references or factories).
 */
 #define I_ASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)\
-	static member##_AttrType member##_Default(sizeof(member##_DefaultElements) / sizeof(member##_AttrType::ValueType), member##_DefaultElements);\
+	static member##_AttrType member##_Default(int(sizeof(member##_DefaultElements) / sizeof(member##_AttrType::ValueType)), member##_DefaultElements);\
 	I_ASSIGN_BASE(member, id, description, isObligatory)
 
 /**
@@ -241,6 +241,58 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_ASSIGN_MULTI_3(member, id, description, isObligatory, defaultValue1, defaultValue2, defaultValue3)\
 	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2, defaultValue3};\
 	I_ASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
+
+
+/**
+	Used to assign value for single parameter with template type (attribute, reference or factory).
+*/
+#define I_TASSIGN_BASE(member, id, description, isObligatory)\
+	static icomp::TAttributeStaticInfo<member##_AttrType> member##_Info(staticInfo, id, description, &member##_Default, isObligatory, &typeid(typename member##_Type::InterfaceType));\
+	if (componentPtr != NULL){\
+		componentPtr->member.Init(componentPtr, member##_Info);\
+	}
+
+/**
+	Used to assign value for single parameter with template type (attribute, reference or factory).
+*/
+#define I_TASSIGN(member, id, description, isObligatory, defaultValue)\
+	static member##_AttrType member##_Default(defaultValue);\
+	I_TASSIGN_BASE(member, id, description, isObligatory)
+
+/**
+	Used to assign value for multiply parameters with template type (attributes, references or factories).
+*/
+#define I_TASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)\
+	static member##_AttrType member##_Default(int(sizeof(member##_DefaultElements) / sizeof(member##_AttrType::ValueType)), member##_DefaultElements);\
+	I_TASSIGN_BASE(member, id, description, isObligatory)
+
+/**
+	Used to assign value for multiply parameters with template type (attributes, references or factories) with no default parameter.
+*/
+#define I_TASSIGN_MULTI_0(member, id, description, isObligatory)\
+	static member##_AttrType member##_Default(0, NULL);\
+	I_TASSIGN_BASE(member, id, description, isObligatory)
+
+/**
+	Used to assign value for multiply parameters with template type (attributes, references or factories) with 1 default parameter.
+*/
+#define I_TASSIGN_MULTI_1(member, id, description, isObligatory, defaultValue1)\
+	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1};\
+	I_TASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
+
+/**
+	Used to assign value for multiply parameters with template type (attributes, references or factories) with 2 default parameter.
+*/
+#define I_TASSIGN_MULTI_2(member, id, description, isObligatory, defaultValue1, defaultValue2)\
+	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2};\
+	I_TASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
+
+/**
+	Used to assign value for multiply parameters (with template type attributes, references or factories) with 3 default parameter.
+*/
+#define I_TASSIGN_MULTI_3(member, id, description, isObligatory, defaultValue1, defaultValue2, defaultValue3)\
+	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2, defaultValue3};\
+	I_TASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
 
 
 #endif // !icomp_CComponentBase_included

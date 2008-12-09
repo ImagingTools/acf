@@ -1,135 +1,137 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<name>idoc</name>
-<comment/>
-<projects/>
-<buildSpec>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
-<triggers>clean,full,incremental,</triggers>
-<arguments>
-<dictionary>
-<key>?name?</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.append_environment</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildArguments</key>
-<value/>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildCommand</key>
-<value>make</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.buildLocation</key>
-<value>${workspace_loc:/idoc/Debug}</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.contents</key>
-<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
-<value>false</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.stopOnError</key>
-<value>true</value>
-</dictionary>
-<dictionary>
-<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
-<value>true</value>
-</dictionary>
-</arguments>
-</buildCommand>
-<buildCommand>
-<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-<arguments/>
-</buildCommand>
-</buildSpec>
-<natures>
-<nature>org.eclipse.cdt.core.ccnature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
-<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
-<nature>org.eclipse.cdt.core.cnature</nature>
-</natures>
-<linkedResources>
-<link>
-<name>Sources/CCompositeDocumentTemplateComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CCompositeDocumentTemplateComp.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CDocumentManagerBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CDocumentManagerBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSingleDocumentTemplateBase.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateBase.cpp</locationURI>
-</link>
-<link>
-<name>Sources/CSingleDocumentTemplateComp.cpp</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateComp.cpp</locationURI>
-</link>
-<link>
-<name>Headers/CCompositeDocumentTemplateComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CCompositeDocumentTemplateComp.h</locationURI>
-</link>
-<link>
-<name>Headers/CDocumentManagerBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CDocumentManagerBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CSingleDocumentTemplateBase.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateBase.h</locationURI>
-</link>
-<link>
-<name>Headers/CSingleDocumentTemplateComp.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateComp.h</locationURI>
-</link>
-<link>
-<name>Headers/ICommand.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/ICommand.h</locationURI>
-</link>
-<link>
-<name>Headers/ICommandsProvider.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/ICommandsProvider.h</locationURI>
-</link>
-<link>
-<name>Headers/idoc.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/idoc.h</locationURI>
-</link>
-<link>
-<name>Headers/IDocumentManager.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/IDocumentManager.h</locationURI>
-</link>
-<link>
-<name>Headers/IDocumentTemplate.h</name>
-<type>1</type>
-<locationURI>ACFPath/Include/idoc/IDocumentTemplate.h</locationURI>
-</link>
-</linkedResources>
+	<name>idoc</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>?name?</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildCommand</key>
+					<value>make</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>${workspace_loc:/idoc/Debug}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Headers/CCompositeDocumentTemplateComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CCompositeDocumentTemplateComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CDocumentManagerBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CDocumentManagerBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSingleDocumentTemplateBase.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateBase.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/CSingleDocumentTemplateComp.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateComp.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ICommand.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/ICommand.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/ICommandsProvider.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/ICommandsProvider.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IDocumentManager.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/IDocumentManager.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/IDocumentTemplate.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/IDocumentTemplate.h</locationURI>
+		</link>
+		<link>
+			<name>Headers/idoc.h</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/idoc.h</locationURI>
+		</link>
+		<link>
+			<name>Sources/CCompositeDocumentTemplateComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CCompositeDocumentTemplateComp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CDocumentManagerBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CDocumentManagerBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSingleDocumentTemplateBase.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Sources/CSingleDocumentTemplateComp.cpp</name>
+			<type>1</type>
+			<locationURI>ACFPath/Include/idoc/CSingleDocumentTemplateComp.cpp</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

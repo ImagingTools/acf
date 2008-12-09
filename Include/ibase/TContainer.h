@@ -163,3 +163,5 @@ bool TContainer<ItemClass, ContainerClass>::IsIndexValid(int index) const
 
 
 #endif // ibase_TContainer_included
+
+

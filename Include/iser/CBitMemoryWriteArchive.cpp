@@ -59,7 +59,7 @@ bool CBitMemoryWriteArchive::ProcessBits(void* data, int bitsCount, int bytesCou
 {	
 	I_ASSERT(bitsCount <= bytesCount * 8); 
 
-	if (bytesCount == sizeof(I_DWORD)){
+	if (bytesCount == int(sizeof(I_DWORD))){
 		WriteValue(*(I_DWORD*)data, bitsCount);
 	}
 
