@@ -9,6 +9,10 @@
 #include "iqt/CSignalBlocker.h"
 
 
+// QScinitlla includes
+#include <Qsci/qscilexercpp.h>
+
+
 namespace iqsci
 {
 
@@ -27,6 +31,8 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 
 	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
 	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
+	
+	setLexer(new QsciLexerCPP(this));
 }
 
 
