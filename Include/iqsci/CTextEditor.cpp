@@ -31,8 +31,11 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 
 	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
 	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
+	connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
 	
 	setLexer(new QsciLexerCPP(this));
+	setFolding(BoxedFoldStyle); 
+	setAutoIndent(true);
 }
 
 

@@ -58,7 +58,7 @@ void CTextEditorComp::OnGuiCreated()
 	CTextEditor* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
-	connect(textEditPtr, SIGNAL(TextChanged()), this, SLOT(OnTextChanged()));
+	connect(textEditPtr, SIGNAL(DataChanged()), this, SLOT(OnTextChanged()));
 
 	OnRetranslate();
 }
