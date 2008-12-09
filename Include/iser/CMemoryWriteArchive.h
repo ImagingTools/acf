@@ -64,6 +64,6 @@ inline bool CMemoryWriteArchive::operator!=(const CMemoryWriteArchive& archive) 
 } // namespace iser
 
 
-#endif // iser_CMemoryWriteArchive_included
+#endif // !iser_CMemoryWriteArchive_included
 
 

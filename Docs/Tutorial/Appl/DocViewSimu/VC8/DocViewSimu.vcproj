@@ -48,7 +48,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../.."
+				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../..;&quot;$(QScintilla)\include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -137,7 +137,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../.."
+				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../..;&quot;$(QScintilla)\include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

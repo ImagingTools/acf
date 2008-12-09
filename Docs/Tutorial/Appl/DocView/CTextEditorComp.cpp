@@ -29,7 +29,7 @@ void CTextEditorComp::UpdateModel() const
 
 	iqt::CSignalBlocker block(textEditPtr);
 
-	IText* objectPtr = GetObjectPtr();
+	ibase::ITextDocument* objectPtr = GetObjectPtr();
 
 	if (objectPtr != NULL ){
 		objectPtr->SetText(iqt::GetCString(textEditPtr->toPlainText()));
@@ -42,7 +42,7 @@ void CTextEditorComp::UpdateEditor()
 	QTextEdit* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
-	IText* objectPtr = GetObjectPtr();
+	ibase::ITextDocument* objectPtr = GetObjectPtr();
 
 	if ((objectPtr != NULL) && !textEditPtr->signalsBlocked()){
 		textEditPtr->setText(iqt::GetQString(objectPtr->GetText()));

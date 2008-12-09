@@ -4,6 +4,8 @@
 
 #include "iser/CXmlFileReadArchive.h"
 #include "iser/CXmlFileWriteArchive.h"
+#include "iser/CFileReadArchive.h"
+#include "iser/CFileWriteArchive.h"
 
 #include "icomp/TModelCompWrap.h"
 #include "icomp/TMakeComponentWrap.h"
@@ -12,10 +14,12 @@
 #include "idoc/CCompositeDocumentTemplateComp.h"
 
 #include "ibase/TFileSerializerComp.h"
+#include "ibase/CTextFileLoaderComp.h"
 #include "ibase/CInstantiatorComp.h"
 #include "ibase/CApplicationInfoComp.h"
 #include "ibase/CRegistryCodeSaverComp.h"
 #include "ibase/CRectangleComp.h"
+#include "ibase/CTextDocumentComp.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
@@ -38,6 +42,8 @@ namespace BasePck
 
 
 typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> XmlFileSerializer;
+typedef ibase::TFileSerializerComp<iser::CFileReadArchive, iser::CFileWriteArchive> BinaryFileSerializer;
+typedef ibase::CTextFileLoaderComp TextFileSerializer;
 typedef ibase::CInstantiatorComp Instantiator;
 typedef ibase::CApplicationInfoComp ApplicationInfo;
 typedef ibase::CRegistryCodeSaverComp RegistryCodeSaver;
@@ -93,6 +99,8 @@ typedef icomp::TMakeComponentWrap<
 			imod::IModel> AnnulusSegment;
 
 typedef icomp::TModelCompWrap<ibase::CRectangleComp> AttributedRectangle;
+
+typedef icomp::TModelCompWrap<ibase::CTextDocumentComp> TextDocument;
 
 
 } // namespace BasePck

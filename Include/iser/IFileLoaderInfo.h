@@ -33,6 +33,6 @@ public:
 } // namespace iser
 
 
-#endif // iser_IFileLoaderInfo_included
+#endif // !iser_IFileLoaderInfo_included
 
 

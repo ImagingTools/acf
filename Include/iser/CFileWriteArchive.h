@@ -27,8 +27,8 @@ public:
 	*/
 	CFileWriteArchive(
 					const istd::CString& filePath,
-					bool supportTagSkipping = true,
 					const IVersionInfo* versionInfoPtr = NULL,
+					bool supportTagSkipping = true,
 					bool serializeHeader = true);
 
 	/**
@@ -63,5 +63,5 @@ private:
 } // namespace iser
 
 
-#endif // iser_CFileWriteArchive_included
+#endif // !iser_CFileWriteArchive_included
 

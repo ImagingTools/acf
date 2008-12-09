@@ -45,6 +45,6 @@ inline I_DWORD ISerializable::GetMinimalVersion(int /*versionId*/) const
 } // namespace iser
 
 
-#endif // iser_ISerializable_included
+#endif // !iser_ISerializable_included
 
 

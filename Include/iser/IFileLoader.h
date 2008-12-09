@@ -76,6 +76,6 @@ public:
 } // namespace iser
 
 
-#endif // iser_IFileLoader_included
+#endif // !iser_IFileLoader_included
 
 

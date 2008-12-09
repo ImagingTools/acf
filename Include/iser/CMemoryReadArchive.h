@@ -59,6 +59,6 @@ protected:
 } // namespace iser
 
 
-#endif // iser_CMemoryReadArchive_included
+#endif // !iser_CMemoryReadArchive_included
 
 

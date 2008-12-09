@@ -1,24 +1,30 @@
-#ifndef CTextModelComp_included
-#define CTextModelComp_included
+#ifndef ibase_CTextDocumentComp_included
+#define ibase_CTextDocumentComp_included
 
 
+// ACF includes
 #include "istd/CString.h"
 
 #include "icomp/CComponentBase.h"
 
-#include "IText.h"
+#include "ibase/ITextDocument.h"
 
 
-class CTextModelComp: public icomp::CComponentBase, public IText
+namespace ibase
+{
+
+
+class CTextDocumentComp: public icomp::CComponentBase, virtual public ibase::ITextDocument
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CTextModelComp)
+	I_BEGIN_COMPONENT(CTextDocumentComp)
+		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_defaultTextAttrPtr, "DefaultText", "Default text", false, "Hallo World!")
 	I_END_COMPONENT
 
-	// reimplemented (IText)
+	// reimplemented (ibase::ITextDocument)
 	virtual istd::CString GetText() const;
 	virtual void SetText(const istd::CString& text);
 
@@ -35,6 +41,10 @@ private:
 };
 
 
-#endif // !CTextModelComp_included
+} // namespace ibase
+
+
+
+#endif // !ibase_CTextDocumentComp_included
 
 

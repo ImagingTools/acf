@@ -201,10 +201,6 @@
 				RelativePath="..\CTextEditorComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CTextModelComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -216,14 +212,6 @@
 			</File>
 			<File
 				RelativePath="..\CTextEditorComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CTextModelComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IText.h"
 				>
 			</File>
 		</Filter>

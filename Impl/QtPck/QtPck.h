@@ -39,6 +39,7 @@
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CMultiDocumentWorkspaceGuiComp.h"
 
+#include "iqsci/CTextEditorComp.h"
 
 /**
 	Standard Qt package.
@@ -81,6 +82,7 @@ typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;
 
+typedef iqsci::CTextEditorComp ScintillaTextEditor;
 
 } // namespace QtPck
 

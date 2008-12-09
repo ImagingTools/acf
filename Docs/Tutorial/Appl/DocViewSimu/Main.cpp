@@ -22,12 +22,12 @@ int main(int argc, char *argv[])
 	splashScreenGui.SetStringAttr("CopyrightText", "This is a part of ACF project.\nSee 'licence.txt' for copyright informations");
 	splashScreenGui.InitComponent();
 
-	icomp::TSimComponentsFactory<TutorialPck::TextModel> modelFactoryComp;
+	icomp::TSimComponentsFactory<BasePck::TextDocument> modelFactoryComp;
 	modelFactoryComp.SetStringAttr("DefaultText", "Ahoj przygodo!");
 
 	icomp::TSimComponentsFactory<TutorialPck::TextEditor> viewFactoryComp;
 
-	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> serializerComp;
+	icomp::TSimComponentWrap<BasePck::BinaryFileSerializer> serializerComp;
 	serializerComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;
@@ -37,6 +37,8 @@ int main(int argc, char *argv[])
 	documentTemplateComp.SetRef("DocumentLoader", &serializerComp);
 	documentTemplateComp.SetBoolAttr("IsEditSupported", true);
 	documentTemplateComp.SetBoolAttr("IsNewSupported", true);
+	documentTemplateComp.InsertMultiAttr("FileFilters", istd::CString("Binary text files (*.bin)"));
+	documentTemplateComp.InsertMultiAttr("FileExtensions", istd::CString("bin"));
 	documentTemplateComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::MultiDocWorkspaceGui> workspaceComp;

@@ -13,11 +13,11 @@
 #include "iqtgui/TGuiObserverWrap.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
-#include "IText.h"
+#include "ibase/ITextDocument.h"
 
 
 class CTextEditorComp:
-			public iqtgui::TGuiObserverWrap<iqtgui::TGuiComponentBase<QTextEdit>, imod::TSingleModelObserverBase<IText> >,
+	public iqtgui::TGuiObserverWrap<iqtgui::TGuiComponentBase<QTextEdit>, imod::TSingleModelObserverBase<ibase::ITextDocument> >,
 			public idoc::ICommandsProvider
 {
 
@@ -26,7 +26,7 @@ class CTextEditorComp:
 public:
 	typedef iqtgui::TGuiObserverWrap<
 				iqtgui::TGuiComponentBase<QTextEdit>,
-				imod::TSingleModelObserverBase<IText> > BaseClass;
+				imod::TSingleModelObserverBase<ibase::ITextDocument> > BaseClass;
 
 	I_BEGIN_COMPONENT(CTextEditorComp)
 		I_REGISTER_INTERFACE(imod::IObserver)

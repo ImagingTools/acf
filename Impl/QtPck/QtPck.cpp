@@ -57,6 +57,8 @@ I_EXPORT_COMPONENT(SelectionParamGui, "Single selection parameter from list of o
 I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Tab Widget GUI");
 I_EXPORT_COMPONENT(SettingsSerializer, "Load and save objects using QSettings as storage", "Qt QSettings Registry Serializer Loader Saver");
 
+I_EXPORT_COMPONENT(ScintillaTextEditor, "Scintilla text editor", "Qt Text Editor GUI Scintilla");
+
 
 } // namespace QtPck
 

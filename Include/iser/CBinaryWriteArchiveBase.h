@@ -40,5 +40,5 @@ protected:
 } // namespace iser
 
 
-#endif // iser_CBinaryWriteArchiveBase_included
+#endif // !iser_CBinaryWriteArchiveBase_included
 

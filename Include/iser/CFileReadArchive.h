@@ -55,5 +55,5 @@ private:
 } // namespace iser
 
 
-#endif // iser_CFileReadArchive_included
+#endif // !iser_CFileReadArchive_included
 

@@ -10,8 +10,8 @@ namespace iser
 
 CFileWriteArchive::CFileWriteArchive(
 			const istd::CString& filePath,
-			bool supportTagSkipping,
 			const IVersionInfo* versionInfoPtr,
+			bool supportTagSkipping,
 			bool serializeHeader)
 :	BaseClass(versionInfoPtr), m_supportTagSkipping(supportTagSkipping)
 {

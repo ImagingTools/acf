@@ -200,6 +200,14 @@
 				RelativePath="..\CSize.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CTextDocumentComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTextFileLoaderComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -227,6 +235,14 @@
 			</File>
 			<File
 				RelativePath="..\CSize.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTextDocumentComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTextFileLoaderComp.h"
 				>
 			</File>
 			<File
@@ -286,15 +302,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TLoggerCompWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TLoggerWrap.h"
 				>
 			</File>
 			<File
 				RelativePath="..\TMessageContainerWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TLoggerCompWrap.h"
 				>
 			</File>
 			<File

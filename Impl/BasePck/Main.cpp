@@ -12,6 +12,8 @@ I_EXPORT_DEFAULT_SERVICES;
 I_EXPORT_PACKAGE("Base", "Base system-undependent general package", "Undependend Standard Base");
 
 I_EXPORT_COMPONENT(XmlFileSerializer, "Simple file serializer using XML format", "File Serializer Archive XML Format");
+I_EXPORT_COMPONENT(BinaryFileSerializer, "Simple file serializer for binary files", "Binary File Serializer Archive Format");
+I_EXPORT_COMPONENT(TextFileSerializer, "Simple file serializer for text files", "Text File Serializer Format");
 I_EXPORT_COMPONENT(Instantiator, "Access specified components forcing to create its instances", "Instance Init Create Free Components");
 I_EXPORT_COMPONENT(ApplicationInfo, "Simple application info based of SVN version", "Application Info SVN SubVersion Version");
 I_EXPORT_COMPONENT(SelectableParamsSet, "Composed set of parameters", "Model Parameters Set Selection Options List");
@@ -27,6 +29,7 @@ I_EXPORT_COMPONENT(Rectangle, "Rectangle (orthogonal to axis) object", "Rectangl
 I_EXPORT_COMPONENT(Annulus, "Annulus object", "Annulus 2D Object Parameter");
 I_EXPORT_COMPONENT(AnnulusSegment, "Segment of annulus object", "Annulus Segment 2D Object Parameter");
 I_EXPORT_COMPONENT(AttributedRectangle, "Rectangle component with attributes", "Rectangle 2D Object Parameter");
+I_EXPORT_COMPONENT(TextDocument, "Simple text document", "Text Document");
 
 
 } // namespace BasePck

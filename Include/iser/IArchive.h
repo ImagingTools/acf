@@ -160,5 +160,5 @@ public:
 } // namespace iser
 
 
-#endif // iser_IArchive_included
+#endif // !iser_IArchive_included
 

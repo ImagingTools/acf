@@ -1,4 +1,4 @@
-#include "CTextModelComp.h"
+#include "ibase/CTextDocumentComp.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -6,13 +6,21 @@
 #include "istd/TChangeNotifier.h"
 
 
-istd::CString CTextModelComp::GetText() const
+namespace ibase
+{
+
+
+// public methods
+
+// reimplemented (ibase::ITextDocument)
+
+istd::CString CTextDocumentComp::GetText() const
 {
 	return m_text;
 }
 
 
-void CTextModelComp::SetText(const istd::CString& text)
+void CTextDocumentComp::SetText(const istd::CString& text)
 {
 	if (m_text != text){
 		istd::CChangeNotifier changePtr(this);
@@ -24,7 +32,7 @@ void CTextModelComp::SetText(const istd::CString& text)
 
 // reimplemented (icomp::IComponent)
 
-void CTextModelComp::OnComponentCreated()
+void CTextDocumentComp::OnComponentCreated()
 {
 	if (m_defaultTextAttrPtr.IsValid()){
 		m_text = *m_defaultTextAttrPtr;
@@ -34,7 +42,7 @@ void CTextModelComp::OnComponentCreated()
 
 // reimplemented (iser::ISerializable)
 
-bool CTextModelComp::Serialize(iser::IArchive& archive)
+bool CTextDocumentComp::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag textTag("Text", "Text");
 	bool retVal = archive.BeginTag(textTag);
@@ -43,5 +51,8 @@ bool CTextModelComp::Serialize(iser::IArchive& archive)
 
 	return retVal;
 }
+
+
+} // namespace ibase
 
 
