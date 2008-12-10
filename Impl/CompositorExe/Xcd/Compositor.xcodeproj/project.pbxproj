@@ -31,42 +31,6 @@
 		EABA3C990EEFF383009058A6 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EABA3C970EEFF383009058A6 /* libacfstd.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		EA3DF4480EED7297009D0C37 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.moc";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-				"$INPUT_FILE_DIR/Generated/moc_${INPUT_FILE_BASE}.cpp",
-			);
-			script = "moc -o $INPUT_FILE_DIR/Generated/moc_${INPUT_FILE_BASE}.cpp $INPUT_FILE_DIR/$INPUT_FILE_BASE.h";
-		};
-		EA3DF4490EED7311009D0C37 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.qrc";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-				"$INPUT_FILE_DIR/Generated/qrc_${INPUT_FILE_BASE}.cpp",
-			);
-			script = "rcc -o $INPUT_FILE_DIR/Generated/qrc_${INPUT_FILE_BASE}.cpp $INPUT_FILE_PATH";
-		};
-		EA66471C0EED3A69006773C7 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.ui";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-				"${INPUT_FILE_DIR}/Generated/ui_${INPUT_FILE_BASE}.h",
-			);
-			script = "uic -o ${INPUT_FILE_DIR}/Generated/ui_${INPUT_FILE_BASE}.h $INPUT_FILE_PATH";
-		};
-/* End PBXBuildRule section */
-
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* CAttributeEditorComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributeEditorComp.cpp; path = ../CAttributeEditorComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* CComponentConnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CComponentConnector.cpp; path = ../CComponentConnector.cpp; sourceTree = SOURCE_ROOT; };
@@ -127,8 +91,8 @@
 		EA6647B30EED496B006773C7 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = /Library/Frameworks/QtXml.framework; sourceTree = "<absolute>"; };
 		EA6647B40EED496B006773C7 /* QtXmlPatterns.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXmlPatterns.framework; path = /Library/Frameworks/QtXmlPatterns.framework; sourceTree = "<absolute>"; };
 		EA66486F0EED551F006773C7 /* Compositor_Test_Export.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Compositor_Test_Export.txt; sourceTree = "<group>"; };
-		EABA3C960EEFF383009058A6 /* libacfqt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfqt.a; path = ../../../Lib/DebugXcd/libacfqt.a; sourceTree = SOURCE_ROOT; };
-		EABA3C970EEFF383009058A6 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ../../../Lib/DebugXcd/libacfstd.a; sourceTree = SOURCE_ROOT; };
+		EABA3C960EEFF383009058A6 /* libacfqt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfqt.a; path = ../../../Lib/$(CONFIGURATION)Xcd/libacfqt.a; sourceTree = SOURCE_ROOT; };
+		EABA3C970EEFF383009058A6 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ../../../Lib/$(CONFIGURATION)Xcd/libacfstd.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,13 +264,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA5A98720EEC354300FD019A /* Build configuration list for PBXNativeTarget "Compositor" */;
 			buildPhases = (
+				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				EA5A98650EEC34FD00FD019A /* Sources */,
 				EA5A98660EEC34FD00FD019A /* Frameworks */,
 			);
 			buildRules = (
-				EA3DF4490EED7311009D0C37 /* PBXBuildRule */,
-				EA3DF4480EED7297009D0C37 /* PBXBuildRule */,
-				EA66471C0EED3A69006773C7 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -331,6 +293,39 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = "UIC'ing...";
+			files = (
+			);
+			inputPaths = (
+				../CAttributeEditorComp.h,
+				../CComponentView.h,
+				../CPackageOverviewComp.h,
+				../CRegistryPreviewComp.h,
+				../CRegistryViewComp.h,
+				../CAttributeEditorComp.ui,
+				../CPackageOverviewComp.ui,
+				../Compositor.qrc,
+			);
+			outputPaths = (
+				../Generated/moc_CAttributeEditorComp.cpp,
+				../Generated/moc_CComponentView.cpp,
+				../Generated/moc_CPackageOverviewComp.cpp,
+				../Generated/moc_CRegistryPreviewComp.cpp,
+				../Generated/moc_CRegistryViewComp.cpp,
+				../Generated/ui_CAttributeEditorComp.h,
+				../Generated/ui_CPackageOverviewComp.h,
+				../Generated/qrc_Compositor.cpp,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "moc -o ../Generated/moc_CAttributeEditorComp.cpp ../CAttributeEditorComp.h\nmoc -o ../Generated/moc_CComponentView.cpp ../CComponentView.h\nmoc -o ../Generated/moc_CPackageOverviewComp.cpp ../CPackageOverviewComp.h\nmoc -o ../Generated/moc_CRegistryPreviewComp.cpp ../CRegistryPreviewComp.h\nmoc -o ../Generated/moc_CRegistryViewComp.cpp ../CRegistryViewComp.h\nuic -o ../Generated/ui_CAttributeEditorComp.h ../CAttributeEditorComp.ui\nuic -o ../Generated/ui_CPackageOverviewComp.h ../CPackageOverviewComp.ui\nrcc -name Compositor -o ../Generated/qrc_Compositor.cpp ../Compositor.qrc\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EA5A98650EEC34FD00FD019A /* Sources */ = {
