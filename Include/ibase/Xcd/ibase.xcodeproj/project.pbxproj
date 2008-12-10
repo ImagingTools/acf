@@ -14,33 +14,37 @@
 		223456820ED2E572006EC826 /* CRectangleComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CRectangleComp.cpp */; };
 		223456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp */; };
 		223456840ED2E572006EC826 /* CSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CSize.cpp */; };
-		223456850ED2E572006EC826 /* CApplicationInfoComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CApplicationInfoComp.h */; };
-		223456860ED2E572006EC826 /* CInstantiatorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CInstantiatorComp.h */; };
-		223456870ED2E572006EC826 /* CMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CMessage.h */; };
-		223456880ED2E572006EC826 /* CRectangleComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CRectangleComp.h */; };
-		223456890ED2E572006EC826 /* CRegistryCodeSaverComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* CRegistryCodeSaverComp.h */; };
-		223456900ED2E572006EC826 /* CSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* CSize.h */; };
-		223456910ED2E572006EC826 /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* IApplication.h */; };
-		223456920ED2E572006EC826 /* IApplicationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* IApplicationInfo.h */; };
-		223456930ED2E572006EC826 /* ibase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* ibase.h */; };
-		223456940ED2E572006EC826 /* IMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* IMessage.h */; };
-		223456950ED2E572006EC826 /* IMessageConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* IMessageConsumer.h */; };
-		223456960ED2E572006EC826 /* IMessageContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* IMessageContainer.h */; };
-		223456970ED2E572006EC826 /* INamedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* INamedObject.h */; };
-		223456980ED2E572006EC826 /* IObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* IObject.h */; };
-		223456990ED2E572006EC826 /* TComposedFactoryComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* TComposedFactoryComp.h */; };
-		223457000ED2E572006EC826 /* TContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* TContainer.h */; };
-		223457010ED2E572006EC826 /* TEnableableWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* TEnableableWrap.h */; };
-		223457020ED2E572006EC826 /* TFactorisableContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* TFactorisableContainer.h */; };
-		223457030ED2E572006EC826 /* TFileSerializerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* TFileSerializerComp.h */; };
-		223457040ED2E572006EC826 /* THierarchicalBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* THierarchicalBase.h */; };
-		223457050ED2E572006EC826 /* TLoggerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* TLoggerWrap.h */; };
-		223457060ED2E572006EC826 /* TMessageContainerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* TMessageContainerWrap.h */; };
-		223457070ED2E572006EC826 /* TLoggerCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* TLoggerCompWrap.h */; };
-		223457080ED2E572006EC826 /* TMsbWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* TMsbWord.h */; };
-		223457090ED2E572006EC826 /* TNamedWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* TNamedWrap.h */; };
-		223457100ED2E572006EC826 /* TSerializableContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* TSerializableContainer.h */; };
-		223457110ED2E572006EC826 /* TSingleFactoryComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* TSingleFactoryComp.h */; };
+		223456850ED2E572006EC826 /* CTextDocumentComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CTextDocumentComp.cpp */; };
+		223456860ED2E572006EC826 /* CTextFileLoaderComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CTextFileLoaderComp.cpp */; };
+		223456870ED2E572006EC826 /* CApplicationInfoComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CApplicationInfoComp.h */; };
+		223456880ED2E572006EC826 /* CInstantiatorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CInstantiatorComp.h */; };
+		223456890ED2E572006EC826 /* CMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* CMessage.h */; };
+		223456900ED2E572006EC826 /* CRectangleComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* CRectangleComp.h */; };
+		223456910ED2E572006EC826 /* CRegistryCodeSaverComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* CRegistryCodeSaverComp.h */; };
+		223456920ED2E572006EC826 /* CSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* CSize.h */; };
+		223456930ED2E572006EC826 /* CTextDocumentComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* CTextDocumentComp.h */; };
+		223456940ED2E572006EC826 /* CTextFileLoaderComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CTextFileLoaderComp.h */; };
+		223456950ED2E572006EC826 /* IApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* IApplication.h */; };
+		223456960ED2E572006EC826 /* IApplicationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* IApplicationInfo.h */; };
+		223456970ED2E572006EC826 /* ibase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* ibase.h */; };
+		223456980ED2E572006EC826 /* IMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* IMessage.h */; };
+		223456990ED2E572006EC826 /* IMessageConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* IMessageConsumer.h */; };
+		223457000ED2E572006EC826 /* IMessageContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* IMessageContainer.h */; };
+		223457010ED2E572006EC826 /* INamedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* INamedObject.h */; };
+		223457020ED2E572006EC826 /* IObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* IObject.h */; };
+		223457030ED2E572006EC826 /* TComposedFactoryComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* TComposedFactoryComp.h */; };
+		223457040ED2E572006EC826 /* TContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* TContainer.h */; };
+		223457050ED2E572006EC826 /* TEnableableWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* TEnableableWrap.h */; };
+		223457060ED2E572006EC826 /* TFactorisableContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* TFactorisableContainer.h */; };
+		223457070ED2E572006EC826 /* TFileSerializerComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* TFileSerializerComp.h */; };
+		223457080ED2E572006EC826 /* THierarchicalBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* THierarchicalBase.h */; };
+		223457090ED2E572006EC826 /* TLoggerCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* TLoggerCompWrap.h */; };
+		223457100ED2E572006EC826 /* TLoggerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* TLoggerWrap.h */; };
+		223457110ED2E572006EC826 /* TMessageContainerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* TMessageContainerWrap.h */; };
+		223457120ED2E572006EC826 /* TMsbWord.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* TMsbWord.h */; };
+		223457130ED2E572006EC826 /* TNamedWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457130ED2E572006EC826 /* TNamedWrap.h */; };
+		223457140ED2E572006EC826 /* TSerializableContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457140ED2E572006EC826 /* TSerializableContainer.h */; };
+		223457150ED2E572006EC826 /* TSingleFactoryComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457150ED2E572006EC826 /* TSingleFactoryComp.h */; };
 
 /* End PBXBuildFile section */
 
@@ -51,33 +55,37 @@
 		123456820ED2E572006EC826 /* CRectangleComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangleComp.cpp; path = ../CRectangleComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRegistryCodeSaverComp.cpp; path = ../CRegistryCodeSaverComp.cpp; sourceTree = SOURCE_ROOT; };
 		123456840ED2E572006EC826 /* CSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSize.cpp; path = ../CSize.cpp; sourceTree = SOURCE_ROOT; };
-		123456850ED2E572006EC826 /* CApplicationInfoComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationInfoComp.h; path = ../CApplicationInfoComp.h; sourceTree = SOURCE_ROOT; };
-		123456860ED2E572006EC826 /* CInstantiatorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInstantiatorComp.h; path = ../CInstantiatorComp.h; sourceTree = SOURCE_ROOT; };
-		123456870ED2E572006EC826 /* CMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessage.h; path = ../CMessage.h; sourceTree = SOURCE_ROOT; };
-		123456880ED2E572006EC826 /* CRectangleComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangleComp.h; path = ../CRectangleComp.h; sourceTree = SOURCE_ROOT; };
-		123456890ED2E572006EC826 /* CRegistryCodeSaverComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRegistryCodeSaverComp.h; path = ../CRegistryCodeSaverComp.h; sourceTree = SOURCE_ROOT; };
-		123456900ED2E572006EC826 /* CSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSize.h; path = ../CSize.h; sourceTree = SOURCE_ROOT; };
-		123456910ED2E572006EC826 /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IApplication.h; path = ../IApplication.h; sourceTree = SOURCE_ROOT; };
-		123456920ED2E572006EC826 /* IApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IApplicationInfo.h; path = ../IApplicationInfo.h; sourceTree = SOURCE_ROOT; };
-		123456930ED2E572006EC826 /* ibase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ibase.h; path = ../ibase.h; sourceTree = SOURCE_ROOT; };
-		123456940ED2E572006EC826 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMessage.h; path = ../IMessage.h; sourceTree = SOURCE_ROOT; };
-		123456950ED2E572006EC826 /* IMessageConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMessageConsumer.h; path = ../IMessageConsumer.h; sourceTree = SOURCE_ROOT; };
-		123456960ED2E572006EC826 /* IMessageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMessageContainer.h; path = ../IMessageContainer.h; sourceTree = SOURCE_ROOT; };
-		123456970ED2E572006EC826 /* INamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = INamedObject.h; path = ../INamedObject.h; sourceTree = SOURCE_ROOT; };
-		123456980ED2E572006EC826 /* IObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IObject.h; path = ../IObject.h; sourceTree = SOURCE_ROOT; };
-		123456990ED2E572006EC826 /* TComposedFactoryComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComposedFactoryComp.h; path = ../TComposedFactoryComp.h; sourceTree = SOURCE_ROOT; };
-		123457000ED2E572006EC826 /* TContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TContainer.h; path = ../TContainer.h; sourceTree = SOURCE_ROOT; };
-		123457010ED2E572006EC826 /* TEnableableWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TEnableableWrap.h; path = ../TEnableableWrap.h; sourceTree = SOURCE_ROOT; };
-		123457020ED2E572006EC826 /* TFactorisableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFactorisableContainer.h; path = ../TFactorisableContainer.h; sourceTree = SOURCE_ROOT; };
-		123457030ED2E572006EC826 /* TFileSerializerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFileSerializerComp.h; path = ../TFileSerializerComp.h; sourceTree = SOURCE_ROOT; };
-		123457040ED2E572006EC826 /* THierarchicalBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = THierarchicalBase.h; path = ../THierarchicalBase.h; sourceTree = SOURCE_ROOT; };
-		123457050ED2E572006EC826 /* TLoggerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TLoggerWrap.h; path = ../TLoggerWrap.h; sourceTree = SOURCE_ROOT; };
-		123457060ED2E572006EC826 /* TMessageContainerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMessageContainerWrap.h; path = ../TMessageContainerWrap.h; sourceTree = SOURCE_ROOT; };
-		123457070ED2E572006EC826 /* TLoggerCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TLoggerCompWrap.h; path = ../TLoggerCompWrap.h; sourceTree = SOURCE_ROOT; };
-		123457080ED2E572006EC826 /* TMsbWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMsbWord.h; path = ../TMsbWord.h; sourceTree = SOURCE_ROOT; };
-		123457090ED2E572006EC826 /* TNamedWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TNamedWrap.h; path = ../TNamedWrap.h; sourceTree = SOURCE_ROOT; };
-		123457100ED2E572006EC826 /* TSerializableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSerializableContainer.h; path = ../TSerializableContainer.h; sourceTree = SOURCE_ROOT; };
-		123457110ED2E572006EC826 /* TSingleFactoryComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleFactoryComp.h; path = ../TSingleFactoryComp.h; sourceTree = SOURCE_ROOT; };
+		123456850ED2E572006EC826 /* CTextDocumentComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextDocumentComp.cpp; path = ../CTextDocumentComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456860ED2E572006EC826 /* CTextFileLoaderComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextFileLoaderComp.cpp; path = ../CTextFileLoaderComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456870ED2E572006EC826 /* CApplicationInfoComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CApplicationInfoComp.h; path = ../CApplicationInfoComp.h; sourceTree = SOURCE_ROOT; };
+		123456880ED2E572006EC826 /* CInstantiatorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CInstantiatorComp.h; path = ../CInstantiatorComp.h; sourceTree = SOURCE_ROOT; };
+		123456890ED2E572006EC826 /* CMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMessage.h; path = ../CMessage.h; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* CRectangleComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRectangleComp.h; path = ../CRectangleComp.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* CRegistryCodeSaverComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRegistryCodeSaverComp.h; path = ../CRegistryCodeSaverComp.h; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* CSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSize.h; path = ../CSize.h; sourceTree = SOURCE_ROOT; };
+		123456930ED2E572006EC826 /* CTextDocumentComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextDocumentComp.h; path = ../CTextDocumentComp.h; sourceTree = SOURCE_ROOT; };
+		123456940ED2E572006EC826 /* CTextFileLoaderComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTextFileLoaderComp.h; path = ../CTextFileLoaderComp.h; sourceTree = SOURCE_ROOT; };
+		123456950ED2E572006EC826 /* IApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IApplication.h; path = ../IApplication.h; sourceTree = SOURCE_ROOT; };
+		123456960ED2E572006EC826 /* IApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IApplicationInfo.h; path = ../IApplicationInfo.h; sourceTree = SOURCE_ROOT; };
+		123456970ED2E572006EC826 /* ibase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ibase.h; path = ../ibase.h; sourceTree = SOURCE_ROOT; };
+		123456980ED2E572006EC826 /* IMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMessage.h; path = ../IMessage.h; sourceTree = SOURCE_ROOT; };
+		123456990ED2E572006EC826 /* IMessageConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMessageConsumer.h; path = ../IMessageConsumer.h; sourceTree = SOURCE_ROOT; };
+		123457000ED2E572006EC826 /* IMessageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IMessageContainer.h; path = ../IMessageContainer.h; sourceTree = SOURCE_ROOT; };
+		123457010ED2E572006EC826 /* INamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = INamedObject.h; path = ../INamedObject.h; sourceTree = SOURCE_ROOT; };
+		123457020ED2E572006EC826 /* IObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IObject.h; path = ../IObject.h; sourceTree = SOURCE_ROOT; };
+		123457030ED2E572006EC826 /* TComposedFactoryComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComposedFactoryComp.h; path = ../TComposedFactoryComp.h; sourceTree = SOURCE_ROOT; };
+		123457040ED2E572006EC826 /* TContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TContainer.h; path = ../TContainer.h; sourceTree = SOURCE_ROOT; };
+		123457050ED2E572006EC826 /* TEnableableWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TEnableableWrap.h; path = ../TEnableableWrap.h; sourceTree = SOURCE_ROOT; };
+		123457060ED2E572006EC826 /* TFactorisableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFactorisableContainer.h; path = ../TFactorisableContainer.h; sourceTree = SOURCE_ROOT; };
+		123457070ED2E572006EC826 /* TFileSerializerComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFileSerializerComp.h; path = ../TFileSerializerComp.h; sourceTree = SOURCE_ROOT; };
+		123457080ED2E572006EC826 /* THierarchicalBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = THierarchicalBase.h; path = ../THierarchicalBase.h; sourceTree = SOURCE_ROOT; };
+		123457090ED2E572006EC826 /* TLoggerCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TLoggerCompWrap.h; path = ../TLoggerCompWrap.h; sourceTree = SOURCE_ROOT; };
+		123457100ED2E572006EC826 /* TLoggerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TLoggerWrap.h; path = ../TLoggerWrap.h; sourceTree = SOURCE_ROOT; };
+		123457110ED2E572006EC826 /* TMessageContainerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMessageContainerWrap.h; path = ../TMessageContainerWrap.h; sourceTree = SOURCE_ROOT; };
+		123457120ED2E572006EC826 /* TMsbWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMsbWord.h; path = ../TMsbWord.h; sourceTree = SOURCE_ROOT; };
+		123457130ED2E572006EC826 /* TNamedWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TNamedWrap.h; path = ../TNamedWrap.h; sourceTree = SOURCE_ROOT; };
+		123457140ED2E572006EC826 /* TSerializableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSerializableContainer.h; path = ../TSerializableContainer.h; sourceTree = SOURCE_ROOT; };
+		123457150ED2E572006EC826 /* TSingleFactoryComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleFactoryComp.h; path = ../TSingleFactoryComp.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libibase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libibase.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,6 +123,8 @@
 				123456820ED2E572006EC826 /* CRectangleComp.cpp */,
 				123456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp */,
 				123456840ED2E572006EC826 /* CSize.cpp */,
+				123456850ED2E572006EC826 /* CTextDocumentComp.cpp */,
+				123456860ED2E572006EC826 /* CTextFileLoaderComp.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -158,33 +168,35 @@
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				123456850ED2E572006EC826 /* CApplicationInfoComp.h */,
-				123456860ED2E572006EC826 /* CInstantiatorComp.h */,
-				123456870ED2E572006EC826 /* CMessage.h */,
-				123456880ED2E572006EC826 /* CRectangleComp.h */,
-				123456890ED2E572006EC826 /* CRegistryCodeSaverComp.h */,
-				123456900ED2E572006EC826 /* CSize.h */,
-				123456910ED2E572006EC826 /* IApplication.h */,
-				123456920ED2E572006EC826 /* IApplicationInfo.h */,
-				123456930ED2E572006EC826 /* ibase.h */,
-				123456940ED2E572006EC826 /* IMessage.h */,
-				123456950ED2E572006EC826 /* IMessageConsumer.h */,
-				123456960ED2E572006EC826 /* IMessageContainer.h */,
-				123456970ED2E572006EC826 /* INamedObject.h */,
-				123456980ED2E572006EC826 /* IObject.h */,
-				123456990ED2E572006EC826 /* TComposedFactoryComp.h */,
-				123457000ED2E572006EC826 /* TContainer.h */,
-				123457010ED2E572006EC826 /* TEnableableWrap.h */,
-				123457020ED2E572006EC826 /* TFactorisableContainer.h */,
-				123457030ED2E572006EC826 /* TFileSerializerComp.h */,
-				123457040ED2E572006EC826 /* THierarchicalBase.h */,
-				123457050ED2E572006EC826 /* TLoggerWrap.h */,
-				123457060ED2E572006EC826 /* TMessageContainerWrap.h */,
-				123457070ED2E572006EC826 /* TLoggerCompWrap.h */,
-				123457080ED2E572006EC826 /* TMsbWord.h */,
-				123457090ED2E572006EC826 /* TNamedWrap.h */,
-				123457100ED2E572006EC826 /* TSerializableContainer.h */,
-				123457110ED2E572006EC826 /* TSingleFactoryComp.h */,
+				123456870ED2E572006EC826 /* CApplicationInfoComp.h */,
+				123456880ED2E572006EC826 /* CInstantiatorComp.h */,
+				123456890ED2E572006EC826 /* CMessage.h */,
+				123456900ED2E572006EC826 /* CRectangleComp.h */,
+				123456910ED2E572006EC826 /* CRegistryCodeSaverComp.h */,
+				123456920ED2E572006EC826 /* CSize.h */,
+				123456930ED2E572006EC826 /* CTextDocumentComp.h */,
+				123456940ED2E572006EC826 /* CTextFileLoaderComp.h */,
+				123456950ED2E572006EC826 /* IApplication.h */,
+				123456960ED2E572006EC826 /* IApplicationInfo.h */,
+				123456970ED2E572006EC826 /* ibase.h */,
+				123456980ED2E572006EC826 /* IMessage.h */,
+				123456990ED2E572006EC826 /* IMessageConsumer.h */,
+				123457000ED2E572006EC826 /* IMessageContainer.h */,
+				123457010ED2E572006EC826 /* INamedObject.h */,
+				123457020ED2E572006EC826 /* IObject.h */,
+				123457030ED2E572006EC826 /* TComposedFactoryComp.h */,
+				123457040ED2E572006EC826 /* TContainer.h */,
+				123457050ED2E572006EC826 /* TEnableableWrap.h */,
+				123457060ED2E572006EC826 /* TFactorisableContainer.h */,
+				123457070ED2E572006EC826 /* TFileSerializerComp.h */,
+				123457080ED2E572006EC826 /* THierarchicalBase.h */,
+				123457090ED2E572006EC826 /* TLoggerCompWrap.h */,
+				123457100ED2E572006EC826 /* TLoggerWrap.h */,
+				123457110ED2E572006EC826 /* TMessageContainerWrap.h */,
+				123457120ED2E572006EC826 /* TMsbWord.h */,
+				123457130ED2E572006EC826 /* TNamedWrap.h */,
+				123457140ED2E572006EC826 /* TSerializableContainer.h */,
+				123457150ED2E572006EC826 /* TSingleFactoryComp.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -196,33 +208,35 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223456850ED2E572006EC826 /* CApplicationInfoComp.h in Headers */,
-				223456860ED2E572006EC826 /* CInstantiatorComp.h in Headers */,
-				223456870ED2E572006EC826 /* CMessage.h in Headers */,
-				223456880ED2E572006EC826 /* CRectangleComp.h in Headers */,
-				223456890ED2E572006EC826 /* CRegistryCodeSaverComp.h in Headers */,
-				223456900ED2E572006EC826 /* CSize.h in Headers */,
-				223456910ED2E572006EC826 /* IApplication.h in Headers */,
-				223456920ED2E572006EC826 /* IApplicationInfo.h in Headers */,
-				223456930ED2E572006EC826 /* ibase.h in Headers */,
-				223456940ED2E572006EC826 /* IMessage.h in Headers */,
-				223456950ED2E572006EC826 /* IMessageConsumer.h in Headers */,
-				223456960ED2E572006EC826 /* IMessageContainer.h in Headers */,
-				223456970ED2E572006EC826 /* INamedObject.h in Headers */,
-				223456980ED2E572006EC826 /* IObject.h in Headers */,
-				223456990ED2E572006EC826 /* TComposedFactoryComp.h in Headers */,
-				223457000ED2E572006EC826 /* TContainer.h in Headers */,
-				223457010ED2E572006EC826 /* TEnableableWrap.h in Headers */,
-				223457020ED2E572006EC826 /* TFactorisableContainer.h in Headers */,
-				223457030ED2E572006EC826 /* TFileSerializerComp.h in Headers */,
-				223457040ED2E572006EC826 /* THierarchicalBase.h in Headers */,
-				223457050ED2E572006EC826 /* TLoggerWrap.h in Headers */,
-				223457060ED2E572006EC826 /* TMessageContainerWrap.h in Headers */,
-				223457070ED2E572006EC826 /* TLoggerCompWrap.h in Headers */,
-				223457080ED2E572006EC826 /* TMsbWord.h in Headers */,
-				223457090ED2E572006EC826 /* TNamedWrap.h in Headers */,
-				223457100ED2E572006EC826 /* TSerializableContainer.h in Headers */,
-				223457110ED2E572006EC826 /* TSingleFactoryComp.h in Headers */,
+				223456870ED2E572006EC826 /* CApplicationInfoComp.h in Headers */,
+				223456880ED2E572006EC826 /* CInstantiatorComp.h in Headers */,
+				223456890ED2E572006EC826 /* CMessage.h in Headers */,
+				223456900ED2E572006EC826 /* CRectangleComp.h in Headers */,
+				223456910ED2E572006EC826 /* CRegistryCodeSaverComp.h in Headers */,
+				223456920ED2E572006EC826 /* CSize.h in Headers */,
+				223456930ED2E572006EC826 /* CTextDocumentComp.h in Headers */,
+				223456940ED2E572006EC826 /* CTextFileLoaderComp.h in Headers */,
+				223456950ED2E572006EC826 /* IApplication.h in Headers */,
+				223456960ED2E572006EC826 /* IApplicationInfo.h in Headers */,
+				223456970ED2E572006EC826 /* ibase.h in Headers */,
+				223456980ED2E572006EC826 /* IMessage.h in Headers */,
+				223456990ED2E572006EC826 /* IMessageConsumer.h in Headers */,
+				223457000ED2E572006EC826 /* IMessageContainer.h in Headers */,
+				223457010ED2E572006EC826 /* INamedObject.h in Headers */,
+				223457020ED2E572006EC826 /* IObject.h in Headers */,
+				223457030ED2E572006EC826 /* TComposedFactoryComp.h in Headers */,
+				223457040ED2E572006EC826 /* TContainer.h in Headers */,
+				223457050ED2E572006EC826 /* TEnableableWrap.h in Headers */,
+				223457060ED2E572006EC826 /* TFactorisableContainer.h in Headers */,
+				223457070ED2E572006EC826 /* TFileSerializerComp.h in Headers */,
+				223457080ED2E572006EC826 /* THierarchicalBase.h in Headers */,
+				223457090ED2E572006EC826 /* TLoggerCompWrap.h in Headers */,
+				223457100ED2E572006EC826 /* TLoggerWrap.h in Headers */,
+				223457110ED2E572006EC826 /* TMessageContainerWrap.h in Headers */,
+				223457120ED2E572006EC826 /* TMsbWord.h in Headers */,
+				223457130ED2E572006EC826 /* TNamedWrap.h in Headers */,
+				223457140ED2E572006EC826 /* TSerializableContainer.h in Headers */,
+				223457150ED2E572006EC826 /* TSingleFactoryComp.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +306,8 @@
 				223456820ED2E572006EC826 /* CRectangleComp.cpp in Sources */,
 				223456830ED2E572006EC826 /* CRegistryCodeSaverComp.cpp in Sources */,
 				223456840ED2E572006EC826 /* CSize.cpp in Sources */,
+				223456850ED2E572006EC826 /* CTextDocumentComp.cpp in Sources */,
+				223456860ED2E572006EC826 /* CTextFileLoaderComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +317,7 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -315,6 +332,7 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
