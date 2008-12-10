@@ -91,8 +91,8 @@
 		EA6647B30EED496B006773C7 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = /Library/Frameworks/QtXml.framework; sourceTree = "<absolute>"; };
 		EA6647B40EED496B006773C7 /* QtXmlPatterns.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXmlPatterns.framework; path = /Library/Frameworks/QtXmlPatterns.framework; sourceTree = "<absolute>"; };
 		EA66486F0EED551F006773C7 /* Compositor_Test_Export.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Compositor_Test_Export.txt; sourceTree = "<group>"; };
-		EABA3C960EEFF383009058A6 /* libacfqt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfqt.a; path = ../../../Lib/$(CONFIGURATION)Xcd/libacfqt.a; sourceTree = SOURCE_ROOT; };
-		EABA3C970EEFF383009058A6 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ../../../Lib/$(CONFIGURATION)Xcd/libacfstd.a; sourceTree = SOURCE_ROOT; };
+		EABA3C960EEFF383009058A6 /* libacfqt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfqt.a; path = ../../../Lib/DebugXcd/libacfqt.a; sourceTree = SOURCE_ROOT; };
+		EABA3C970EEFF383009058A6 /* libacfstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libacfstd.a; path = ../../../Lib/DebugXcd/libacfstd.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
