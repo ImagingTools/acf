@@ -14,7 +14,7 @@
 
 	<xsl:template match = "VisualStudioProject">
 		<xsl:variable name="LowercaseName" select="translate(//VisualStudioProject/@Name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ.', 'abcdefghijklmnopqrstuvwxyz_')"/>
-// !$*UTF8*$!
+		<xsl:text>// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -23,16 +23,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+</xsl:text>
+	<xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PBXBuildFile'"/>
 </xsl:apply-templates>
-/* End PBXBuildFile section */
+<xsl:text>/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PBXFileReference'"/>
 </xsl:apply-templates>		D2AAC046055464E500DB518D /* lib<xsl:value-of select="$LowercaseName"/>.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib<xsl:value-of select="$LowercaseName"/>.a; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
+<xsl:text>/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
@@ -45,62 +47,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08FB7794FE84155DC02AAC07 /* <xsl:value-of select="$LowercaseName"/> */ = {
+		08FB7794FE84155DC02AAC07 /* </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text> */ = {
 			isa = PBXGroup;
 			children = (
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
-				EA9856A50EEABE3D00C738EF /* Generated */,
-				EA9856AA0EEABE3D00C738EF /* Resources */,
-				EA9856A60EEABE5300C738EF /* Garbages */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
+				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856A60EEABE5300C738EF /* Garbages */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
-			name = <xsl:value-of select="$LowercaseName"/>;
+			name = </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>;
+			sourceTree = "&lt;group&gt;";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+</xsl:text>
+			<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+				<xsl:with-param name="UserParam" select="'.Headers'"/>
+			</xsl:apply-templates>
+<xsl:text>			);
+			name = Header;
 			sourceTree = "&lt;group&gt;";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Sources'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			name = Source;
-			sourceTree = "&lt;group&gt;";
-		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* lib<xsl:value-of select="$LowercaseName"/>.a */,
-			);
-			name = Products;
 			sourceTree = "&lt;group&gt;";
 		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Forms'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			name = Forms;
-			sourceTree = "&lt;group&gt;";
-		};
-		EA9856A50EEABE3D00C738EF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-<xsl:apply-templates mode="Sources" select="Files/Filter/*">
-	<xsl:with-param name="UserParam" select="'.Generated'"/>
-</xsl:apply-templates>			);
-			name = Generated;
 			sourceTree = "&lt;group&gt;";
 		};
 		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Resources'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			name = Resources;
+			sourceTree = "&lt;group&gt;";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+</xsl:text>
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+	<xsl:with-param name="UserParam" select="'.Generated'"/>
+</xsl:apply-templates>			);
+			name = Generated;
 			sourceTree = "&lt;group&gt;";
 		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
@@ -108,17 +120,17 @@
 			children = (
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'.Garbages'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			name = Garbages;
 			sourceTree = "&lt;group&gt;";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-<xsl:apply-templates mode="Sources" select="Files/Filter/*">
-	<xsl:with-param name="UserParam" select="'.Headers'"/>
-</xsl:apply-templates>			);
-			name = Header;
+				D2AAC046055464E500DB518D /* lib</xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>.a */,
+			);
+			name = Products;
 			sourceTree = "&lt;group&gt;";
 		};
 /* End PBXGroup section */
@@ -128,17 +140,19 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'Group.Headers'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* <xsl:value-of select="$LowercaseName"/> */ = {
+		D2AAC045055464E500DB518D /* </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text> */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "<xsl:value-of select="$LowercaseName"/>" */;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "</xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>" */;
 			buildPhases = (
 				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
@@ -149,9 +163,9 @@
 			);
 			dependencies = (
 			);
-			name = <xsl:value-of select="$LowercaseName"/>;
-			productName = <xsl:value-of select="$LowercaseName"/>;
-			productReference = D2AAC046055464E500DB518D /* lib<xsl:value-of select="$LowercaseName"/>.a */;
+			name = </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>;
+			productName = </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>;
+			productReference = D2AAC046055464E500DB518D /* lib</xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -159,14 +173,14 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "<xsl:value-of select="$LowercaseName"/>" */;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "</xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
-			mainGroup = 08FB7794FE84155DC02AAC07 /* <xsl:value-of select="$LowercaseName"/> */;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text> */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* <xsl:value-of select="$LowercaseName"/> */,
+				D2AAC045055464E500DB518D /* </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text> */,
 			);
 		};
 /* End PBXProject section */
@@ -179,18 +193,24 @@
 			files = (
 			);
 			inputPaths = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PreprocessInput'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			outputPaths = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PreprocessOutput'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "<xsl:apply-templates mode="Sources" select="Files/Filter/*">
+			shellScript = "</xsl:text>
+<xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'PreprocessCommand'"/>
-</xsl:apply-templates>";
+</xsl:apply-templates>
+<xsl:text>";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -199,9 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+</xsl:text>
 <xsl:apply-templates mode="Sources" select="Files/Filter/*">
 	<xsl:with-param name="UserParam" select="'Group.Sources'"/>
-</xsl:apply-templates>			);
+</xsl:apply-templates>
+<xsl:text>			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
@@ -219,7 +241,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = <xsl:value-of select="$LowercaseName"/>;
+				PRODUCT_NAME = </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -233,13 +255,15 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = <xsl:value-of select="$LowercaseName"/>;
+				PRODUCT_NAME = </xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>;
 			};
 			name = Release;
 		};
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -262,6 +286,8 @@
 					ppc,
 					i386,
 				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -280,7 +306,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "<xsl:value-of select="$LowercaseName"/>" */ = {
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "</xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91EC08733DB70010E9CD /* Debug */,
@@ -289,7 +315,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "<xsl:value-of select="$LowercaseName"/>" */ = {
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "</xsl:text><xsl:value-of select="$LowercaseName"/><xsl:text>" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
@@ -302,6 +328,7 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
+</xsl:text>
 	</xsl:template>
 
 	<!--Implementation of imported helper stylesheet-->

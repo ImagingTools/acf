@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -31,7 +30,6 @@
 		223456990ED2E572006EC826 /* icmm.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* icmm.h */; };
 		223457000ED2E572006EC826 /* IColorTransformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* IColorTransformation.h */; };
 		223457010ED2E572006EC826 /* TComposedColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* TComposedColor.h */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,66 +75,13 @@
 			children = (
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
-				EA9856A50EEABE3D00C738EF /* Generated */,
-				EA9856AA0EEABE3D00C738EF /* Resources */,
-				EA9856A60EEABE5300C738EF /* Garbages */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
+				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856A60EEABE5300C738EF /* Garbages */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = icmm;
-			sourceTree = "<group>";
-		};
-		08FB7795FE84155DC02AAC07 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				123456790ED2E572006EC826 /* CCmy.cpp */,
-				123456800ED2E572006EC826 /* CCmyk.cpp */,
-				123456810ED2E572006EC826 /* CCmykToRgbTransformation.cpp */,
-				123456820ED2E572006EC826 /* CColorTransformationProvider.cpp */,
-				123456830ED2E572006EC826 /* CHsv.cpp */,
-				123456840ED2E572006EC826 /* CHsvToRgbTransformation.cpp */,
-				123456850ED2E572006EC826 /* CLab.cpp */,
-				123456860ED2E572006EC826 /* CRgb.cpp */,
-				123456870ED2E572006EC826 /* CRgbToCmykTransformation.cpp */,
-				123456880ED2E572006EC826 /* CVarColor.cpp */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libicmm.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C6A0FF2B0290797F04C91782 /* Forms */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856A50EEABE3D00C738EF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Generated;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		EA9856A60EEABE5300C738EF /* Garbages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Garbages;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -157,6 +102,59 @@
 				123457010ED2E572006EC826 /* TComposedColor.h */,
 			);
 			name = Header;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				123456790ED2E572006EC826 /* CCmy.cpp */,
+				123456800ED2E572006EC826 /* CCmyk.cpp */,
+				123456810ED2E572006EC826 /* CCmykToRgbTransformation.cpp */,
+				123456820ED2E572006EC826 /* CColorTransformationProvider.cpp */,
+				123456830ED2E572006EC826 /* CHsv.cpp */,
+				123456840ED2E572006EC826 /* CHsvToRgbTransformation.cpp */,
+				123456850ED2E572006EC826 /* CLab.cpp */,
+				123456860ED2E572006EC826 /* CRgb.cpp */,
+				123456870ED2E572006EC826 /* CRgbToCmykTransformation.cpp */,
+				123456880ED2E572006EC826 /* CVarColor.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Garbages;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libicmm.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +289,8 @@
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -313,6 +313,8 @@
 					ppc,
 					i386,
 				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -353,4 +355,3 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
-	

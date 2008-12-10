@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -25,7 +24,6 @@
 		223456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h */; };
 		223456940ED2E572006EC826 /* CFileNameParamGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CFileNameParamGuiComp.ui */; };
 		223456950ED2E572006EC826 /* CParamsManagerGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* CParamsManagerGuiComp.ui */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,13 +63,24 @@
 			children = (
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
-				EA9856A50EEABE3D00C738EF /* Generated */,
-				EA9856AA0EEABE3D00C738EF /* Resources */,
-				EA9856A60EEABE5300C738EF /* Garbages */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
+				EA9856AA0EEABE3D00C738EF /* Resources */,
+				EA9856A50EEABE3D00C738EF /* Generated */,
+				EA9856A60EEABE5300C738EF /* Garbages */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = iqtprm;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456820ED2E572006EC826 /* CComposedParamsSetGuiComp.h */,
+				123456840ED2E572006EC826 /* CFileNameParamGuiComp.h */,
+				123456860ED2E572006EC826 /* CParamsManagerGuiComp.h */,
+				123456880ED2E572006EC826 /* iqtprm.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
@@ -84,14 +93,6 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libiqtprm.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +100,13 @@
 				123456950ED2E572006EC826 /* CParamsManagerGuiComp.ui */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -113,13 +121,6 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,15 +131,12 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				123456820ED2E572006EC826 /* CComposedParamsSetGuiComp.h */,
-				123456840ED2E572006EC826 /* CFileNameParamGuiComp.h */,
-				123456860ED2E572006EC826 /* CParamsManagerGuiComp.h */,
-				123456880ED2E572006EC826 /* iqtprm.h */,
+				D2AAC046055464E500DB518D /* libiqtprm.a */,
 			);
-			name = Header;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +270,8 @@
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -294,6 +294,8 @@
 					ppc,
 					i386,
 				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -334,4 +336,3 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
-	
