@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -35,10 +34,8 @@
 		223457030ED2E572006EC826 /* CDateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* CDateTime.h */; };
 		223457040ED2E572006EC826 /* CDefaultServicesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* CDefaultServicesProvider.h */; };
 		223457050ED2E572006EC826 /* CDirList.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* CDirList.h */; };
-		223457060ED2E572006EC826 /* CDirList.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* CDirList.moc */; };
 		223457070ED2E572006EC826 /* CDllFunctionsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* CDllFunctionsProvider.h */; };
 		223457080ED2E572006EC826 /* CFileList.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* CFileList.h */; };
-		223457090ED2E572006EC826 /* CFileList.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* CFileList.moc */; };
 		223457100ED2E572006EC826 /* CPackagesLoaderComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* CPackagesLoaderComp.h */; };
 		223457110ED2E572006EC826 /* CReflectedBitmapBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* CReflectedBitmapBase.h */; };
 		223457120ED2E572006EC826 /* CSettingsArchiveBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* CSettingsArchiveBase.h */; };
@@ -52,9 +49,8 @@
 		223457200ED2E572006EC826 /* IQImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* IQImageProvider.h */; };
 		223457210ED2E572006EC826 /* iqt.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* iqt.h */; };
 		223457220ED2E572006EC826 /* ITranslationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* ITranslationManager.h */; };
-		223457230ED2E572006EC826 /* moc_CDirList.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* moc_CDirList.cpp */; };
-		223457240ED2E572006EC826 /* moc_CFileList.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* moc_CFileList.cpp */; };
-
+		223457230ED2E572006EC826 /* moc_CDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* moc_CDirList.cpp */; };
+		223457240ED2E572006EC826 /* moc_CFileList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* moc_CFileList.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -183,13 +179,6 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +186,13 @@
 				123457090ED2E572006EC826 /* CFileList.moc */,
 			);
 			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -382,7 +378,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -404,7 +400,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -441,4 +437,3 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
-	

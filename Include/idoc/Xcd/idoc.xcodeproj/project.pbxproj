@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -21,7 +20,6 @@
 		223456890ED2E572006EC826 /* idoc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* idoc.h */; };
 		223456900ED2E572006EC826 /* IDocumentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* IDocumentManager.h */; };
 		223456910ED2E572006EC826 /* IDocumentTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* IDocumentTemplate.h */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,18 +97,18 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -227,6 +225,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = "-fvisibility=default";
 				PRODUCT_NAME = idoc;
 				ZERO_LINK = YES;
 			};
@@ -248,7 +247,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -270,7 +269,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -307,4 +306,3 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
-	

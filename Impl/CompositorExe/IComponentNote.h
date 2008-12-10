@@ -13,11 +13,8 @@
 class IComponentNote: virtual public iser::ISerializable
 {
 public:
-	virtual istd::CString GetText() const;
-	virtual i2d::CVector2d GetPosition() const;
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
+	virtual istd::CString GetText() const = 0;
+	virtual i2d::CVector2d GetPosition() const = 0;
 };
 
 

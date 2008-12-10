@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -13,18 +12,14 @@
 		223456810ED2E572006EC826 /* CModelEditorGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CModelEditorGuiComp.cpp */; };
 		223456820ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.cpp */; };
 		223456830ED2E572006EC826 /* CExtendedDocumentTemplateComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CExtendedDocumentTemplateComp.h */; };
-		223456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.moc */; };
 		223456850ED2E572006EC826 /* CMainWindowGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CMainWindowGuiComp.h */; };
-		223456860ED2E572006EC826 /* CMainWindowGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CMainWindowGuiComp.moc */; };
 		223456870ED2E572006EC826 /* CModelEditorGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CModelEditorGuiComp.h */; };
 		223456880ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h */; };
-		223456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.moc */; };
 		223456900ED2E572006EC826 /* iqtdoc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* iqtdoc.h */; };
 		223456910ED2E572006EC826 /* IWorkspaceController.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* IWorkspaceController.h */; };
-		223456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp */; };
-		223456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp */; };
-		223456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp */; };
-
+		223456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp */; };
+		223456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp */; };
+		223456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,13 +103,6 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		EA9856A60EEABE5300C738EF /* Garbages */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +111,13 @@
 				123456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.moc */,
 			);
 			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -263,7 +258,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -285,7 +280,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../..",
+					../..,
 					/Library/Frameworks/QtCore.framework/Headers,
 					/Library/Frameworks/QtGui.framework/Headers,
 					/Library/Frameworks/QtNetwork.framework/Headers,
@@ -322,4 +317,3 @@
 	};
 	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }
-	

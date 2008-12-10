@@ -8,7 +8,56 @@
 
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* Empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* Empty.cpp */; };
+		EA6646AA0EED32D6006773C7 /* libi2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E43F0EEC2BE500270CFE /* libi2d.a */; };
+		EA6646AB0EED32D9006773C7 /* libimeas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E49A0EEC2E8C00270CFE /* libimeas.a */; };
+		EA6646AC0EED32DD006773C7 /* libisys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4FD0EEC2F9000270CFE /* libisys.a */; };
+		EA6646AD0EED32DD006773C7 /* libiser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4EB0EEC2F5700270CFE /* libiser.a */; };
+		EA6646AE0EED32DE006773C7 /* libibase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4500EEC2C1300270CFE /* libibase.a */; };
+		EA6646AF0EED32DE006773C7 /* libiprm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4B50EEC2EC900270CFE /* libiprm.a */; };
+		EA6646B00EED32DF006773C7 /* libistd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4F40EEC2F6800270CFE /* libistd.a */; };
+		EA6646B10EED32DF006773C7 /* libimod.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4A30EEC2E9E00270CFE /* libimod.a */; };
+		EA6646B20EED32E0006773C7 /* libicomp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4760EEC2E3E00270CFE /* libicomp.a */; };
+		EA6646B30EED32E0006773C7 /* libimath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4910EEC2E7C00270CFE /* libimath.a */; };
+		EA6646B40EED32E1006773C7 /* libidoc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E47F0EEC2E5A00270CFE /* libidoc.a */; };
+		EA6646B50EED32E1006773C7 /* libicmm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4590EEC2C3800270CFE /* libicmm.a */; };
+		EA6646B60EED32E2006773C7 /* libiimg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA92E4880EEC2E6900270CFE /* libiimg.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		EA3DF4480EED7297009D0C37 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.moc";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				INPUT_FILE_DIR/Generated/moc_INPUT_FILE_BASE.cpp,
+			);
+			script = "moc -o INPUT_FILE_DIR/Generated/moc_INPUT_FILE_BASE.cpp INPUT_FILE_DIR/INPUT_FILE_BASE.h";
+		};
+		EA3DF4490EED7311009D0C37 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.qrc";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				INPUT_FILE_DIR/Generated/qrc_INPUT_FILE_BASE.cpp,
+			);
+			script = "rcc -o INPUT_FILE_DIR/Generated/qrc_INPUT_FILE_BASE.cpp INPUT_FILE_PATH";
+		};
+		EA66471C0EED3A69006773C7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.ui";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				INPUT_FILE_DIR/Generated/uic_INPUT_FILE_BASE.h,
+			);
+			script = "uic -o INPUT_FILE_DIR/Generated/uic_INPUT_FILE_BASE.h INPUT_FILE_PATH";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		EA92E43E0EEC2BE500270CFE /* PBXContainerItemProxy */ = {
@@ -218,6 +267,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6646AA0EED32D6006773C7 /* libi2d.a in Frameworks */,
+				EA6646AB0EED32D9006773C7 /* libimeas.a in Frameworks */,
+				EA6646AC0EED32DD006773C7 /* libisys.a in Frameworks */,
+				EA6646AD0EED32DD006773C7 /* libiser.a in Frameworks */,
+				EA6646AE0EED32DE006773C7 /* libibase.a in Frameworks */,
+				EA6646AF0EED32DE006773C7 /* libiprm.a in Frameworks */,
+				EA6646B00EED32DF006773C7 /* libistd.a in Frameworks */,
+				EA6646B10EED32DF006773C7 /* libimod.a in Frameworks */,
+				EA6646B20EED32E0006773C7 /* libicomp.a in Frameworks */,
+				EA6646B30EED32E0006773C7 /* libimath.a in Frameworks */,
+				EA6646B40EED32E1006773C7 /* libidoc.a in Frameworks */,
+				EA6646B50EED32E1006773C7 /* libicmm.a in Frameworks */,
+				EA6646B60EED32E2006773C7 /* libiimg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,12 +485,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "acfstd" */;
 			buildPhases = (
-				EA6981130EEBF38E00FE4110 /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
 				D2AAC044055464E500DB518D /* Sources */,
 				D289987405E68DCB004EDB86 /* Frameworks */,
 			);
 			buildRules = (
+				EA3DF4490EED7311009D0C37 /* PBXBuildRule */,
+				EA3DF4480EED7297009D0C37 /* PBXBuildRule */,
+				EA66471C0EED3A69006773C7 /* PBXBuildRule */,
 			);
 			dependencies = (
 				EA92E4680EEC2DF900270CFE /* PBXTargetDependency */,
@@ -615,23 +679,6 @@
 		};
 /* End PBXReferenceProxy section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			comments = "UIC'ing...";
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		D2AAC044055464E500DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -721,6 +768,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = "-fvisibility=default";
 				PRODUCT_NAME = acfstd;
 				ZERO_LINK = YES;
 			};
