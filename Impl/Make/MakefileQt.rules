@@ -1,0 +1,4 @@
+#temporary definition of QTDIR
+QTDIR=/usr/local/Trolltech/Qt-4.3.2
+
+ADDITIONAL_COMPILER_FLAGS = -I$(QTDIR)/include -I$(QTDIR)/include/QtCore -I$(QTDIR)/include/QtGui -I$(QTDIR)/include/QtXml

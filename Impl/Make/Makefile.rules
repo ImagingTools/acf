@@ -1,0 +1,39 @@
+ACFDIR=../..
+ACFINCDIR=$(ACFDIR)/Include 
+LIB_DIR=lib
+OBJ_DIR=.objects
+LIBRARY_FILE=$(LIBRARY_NAME).a
+
+SRC_DIR=..
+
+DEFAULT_COMPILER_FLAGS = -I$(ACFINCDIR) -Wall $(CPU) -I../../ -I/usr/local/include
+
+HEADER_FILES = $(wildcard $(SRC_DIR)/*.h)
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+
+LIB_OBJS = $(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES:.cpp=.o))
+
+# build library
+all: $(LIBRARY_FILE)
+
+# build objects
+istd: $(LIB_OBJS) \
+	$(OBJ_DIR)
+
+# clean objects
+clean:
+	@echo "  CLEAN  "$(LIBRARY_NAME)
+	$(Q)rm -f $(LIB_OBJS)
+   
+# rules for creating the object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo "     CC  "$<
+	$(Q)mkdir -p $(OBJ_DIR)
+	$(Q)$(CXX) -g $(DEFAULT_COMPILER_FLAGS) $(ADDITIONAL_COMPILER_FLAGS) -c -o $@ $<
+
+# rules for creating the library:
+$(LIBRARY_FILE): $(LIB_OBJS)
+	@echo "     AR  "$@
+#	$(Q)mkdir -p $(LIB_DIR)
+	$(Q)ar -rs $@ $(LIB_OBJS)
+#	$(Q)cp $@ $(LIB_DIR)
