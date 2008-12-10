@@ -25,6 +25,8 @@ public:
 
 	CTextEditor(QWidget* parentWidget = NULL);
 
+	virtual void OnRetranslate();
+
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 

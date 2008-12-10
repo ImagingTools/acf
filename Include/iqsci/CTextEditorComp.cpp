@@ -39,6 +39,22 @@ void CTextEditorComp::UpdateEditor()
 }
 
 
+// reimplemented (idoc::ICommandsProvider)
+
+const idoc::IHierarchicalCommand* CTextEditorComp::GetCommands() const
+{
+	if (IsGuiCreated()){
+		CTextEditor* textEditPtr = GetQtWidget();
+		I_ASSERT(textEditPtr != NULL);
+		
+		return textEditPtr->GetCommands();
+	}
+
+	return NULL;
+}
+
+
+
 // protected slots
 
 void CTextEditorComp::OnTextChanged()
@@ -60,12 +76,22 @@ void CTextEditorComp::OnGuiCreated()
 
 	connect(textEditPtr, SIGNAL(DataChanged()), this, SLOT(OnTextChanged()));
 
+	if (m_useFoldingAttrPtr.IsValid() && *m_useFoldingAttrPtr){
+		textEditPtr->setFolding(CTextEditor::BoxedFoldStyle); 
+	}
+
 	OnRetranslate();
 }
 
 
 void CTextEditorComp::OnRetranslate()
 {
+	if (IsGuiCreated()){
+		CTextEditor* textEditPtr = GetQtWidget();
+		I_ASSERT(textEditPtr != NULL);
+	
+		textEditPtr->OnRetranslate();
+	}
 }
 
 

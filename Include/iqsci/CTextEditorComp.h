@@ -7,8 +7,6 @@
 
 #include "ibase/ITextDocument.h"
 
-#include "idoc/ICommandsProvider.h"
-
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TGuiObserverWrap.h"
 
@@ -21,7 +19,8 @@ namespace iqsci
 
 class CTextEditorComp: public iqtgui::TGuiObserverWrap<
 			iqtgui::TGuiComponentBase<CTextEditor>, 
-			imod::TSingleModelObserverBase<ibase::ITextDocument> >
+			imod::TSingleModelObserverBase<ibase::ITextDocument> >,
+			virtual public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -33,11 +32,15 @@ public:
 	I_BEGIN_COMPONENT(CTextEditorComp)
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider)
 		I_REGISTER_INTERFACE(imod::IObserver)
+		I_ASSIGN(m_useFoldingAttrPtr, "UseFolding", "Use folding in the text document", false, true);
 	I_END_COMPONENT
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor();
+
+	// reimplemented (idoc::ICommandsProvider)
+	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
 protected slots:
 	virtual void OnTextChanged();
@@ -45,6 +48,9 @@ protected slots:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnRetranslate();
+
+private:
+	I_ATTR(bool, m_useFoldingAttrPtr);
 };
 
 

@@ -19,7 +19,7 @@ namespace iqsci
 
 CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 :	BaseClass(parentWidget),
-	m_editorCommand("&Text"),
+	m_editorCommand("&Edit"),
 	m_lowercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
 	m_uppercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR)
 {
@@ -32,12 +32,20 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
 	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
 	connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
+	connect(this, SIGNAL(selectionChanged()), this, SLOT(OnSelectionChanged()));
 	
 	setLexer(new QsciLexerCPP(this));
 	setFolding(BoxedFoldStyle); 
 	setAutoIndent(true);
+	setIndentationGuides(true);
 }
 
+
+void CTextEditor::OnRetranslate()
+{
+	m_lowercaseCommand.SetVisuals(tr("To &Lowercase"), tr("Lowercase"), tr("Convert selected block to lowercase characters"), QIcon(":/Icons/down"));
+	m_uppercaseCommand.SetVisuals(tr("To &Uppercase"), tr("Uppercase"), tr("Convert selected block to uppercase characters"), QIcon(":/Icons/up"));
+}
 
 // reimplemented (idoc::ICommandsProvider)
 
@@ -70,7 +78,9 @@ void CTextEditor::OnToLowercase()
 
 	int line;
 	int index;
-	getSelection(&line, &index, NULL, NULL);
+	int line2;
+	int index2;
+	getSelection(&line, &index, &line2, &index2);
 
 	removeSelectedText();
 
@@ -87,7 +97,9 @@ void CTextEditor::OnToUppercase()
 
 	int line;
 	int index;
-	getSelection(&line, &index, NULL, NULL);
+	int line2;
+	int index2;
+	getSelection(&line, &index, &line2, &index2);
 
 	removeSelectedText();
 
