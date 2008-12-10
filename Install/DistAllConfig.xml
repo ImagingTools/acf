@@ -40,7 +40,10 @@
       <DestDir>
         Temp/Include
       </DestDir>
-      <Filters count="8">
+      <Filters count="9">
+        <Filter>
+          Makefile
+        </Filter>
         <Filter>
           *.project
         </Filter>
@@ -82,7 +85,10 @@
       <DestDir>
         Temp/Impl
       </DestDir>
-      <Filters count="8">
+      <Filters count="9">
+        <Filter>
+          *.rules
+        </Filter>
         <Filter>
           *.project
         </Filter>
