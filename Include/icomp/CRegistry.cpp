@@ -148,17 +148,21 @@ void CRegistry::SetElementExported(
 			}
 		}
 		else{
-			for (		ExportedInterfacesMap::iterator index = m_exportedInterfacesMap.begin();
-						index != m_exportedInterfacesMap.end();){
-				if (!exportInterfaceInfo.IsValid() || (index->first == exportInterfaceInfo)){
-					if (index->second == elementId){
-						index = m_exportedInterfacesMap.erase(index);
+			bool isDone = false;
+			while(!isDone){
+				isDone = true;
+				for (		ExportedInterfacesMap::iterator index = m_exportedInterfacesMap.begin();
+							index != m_exportedInterfacesMap.end();
+							index++){
+					if (!exportInterfaceInfo.IsValid() || (index->first == exportInterfaceInfo)){
+						if (index->second == elementId){
+							m_exportedInterfacesMap.erase(index);
 
-						continue;
+							isDone = false;
+							break;
+						}
 					}
 				}
-
-				++index;
 			}
 		}
 	}
