@@ -25,38 +25,53 @@ std::string CClassInfo::GetUndecoratedName(const std::string& rawName)
 	while ((position = retVal.find("class ")) != std::string::npos){
 		retVal = retVal.substr(0, position) + retVal.substr(position + 6);
 	}
-
-	return retVal;
 #else
+	std::string retVal;
+	int position = 0;
+
 	int nameSize = int(rawName.size());
-	if (nameSize > 2){
-		if (rawName[0] == 'N'){
-			int namespacePos;
-			int namespaceLength = ParseToNumber(
-						&rawName[1],
-						nameSize - 1,
-						namespacePos);
-			if (namespacePos + namespaceLength + 1 < nameSize){
-				int classNamePos;
-				int classNameLength = ParseToNumber(
-							&rawName[namespacePos + namespaceLength + 1],
-							nameSize - namespacePos - namespaceLength - 1,
-							classNamePos);
-				return rawName.substr(namespacePos + 1, namespaceLength) + "::" + rawName.substr(classNamePos + namespacePos + namespaceLength + 1, classNameLength);
+	while (position < nameSize - 2){
+		char code = rawName[position];
+		if (code >= '0') && (code <= '9'){
+			int substrPos;
+			int substrLength = ParseToNumber(
+						&rawName[position],
+						nameSize - position,
+						substrPos);
+			if (substrLength > nameSize - position - substrPos){
+				substrLength = nameSize - position - substrPos;
 			}
+
+			retVal += rawName.substr(position + substrPos, substrLength);
+
+			position += substrPos + substrLength;
+		}
+		else if (code == 'N'){
+			++position;
+
+			int substrPos;
+			int substrLength = ParseToNumber(
+						&rawName[position],
+						nameSize - position,
+						substrPos);
+			if (substrLength > nameSize - position - substrPos){
+				substrLength = nameSize - position - substrPos;
+			}
+
+			retVal += rawName.substr(position + substrPos, substrLength) + "::";
+
+			position += substrPos + substrLength;
+		}
+		else if (code == 'E'){
+			break;
 		}
 		else{
-			int classNamePos;
-			int classNameLength = ParseToNumber(
-						&rawName[0],
-						nameSize,
-						classNamePos);
-			return rawName.substr(classNamePos, classNameLength);
+			I_CRITICAL();	// This type cannot be parsed, please extend the rules!
 		}
 	}
-	
-	return rawName;
 #endif
+
+	return retVal;
 }
 
 
