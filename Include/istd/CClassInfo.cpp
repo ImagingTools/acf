@@ -36,16 +36,26 @@ std::string CClassInfo::GetUndecoratedName(const std::string& rawName)
 						&rawName[1],
 						nameSize - 1,
 						namespacePos);
-			if (namespacePos + 1 < nameSize){
+			if (namespacePos + namespaceLength + 1 < nameSize){
 				int classNamePos;
 				int classNameLength = ParseToNumber(
-							&rawName[namespacePos + 1],
-							nameSize - namespacePos - 1,
+							&rawName[namespacePos + namespaceLength + 1],
+							nameSize - namespacePos - namespaceLength - 1,
 							classNamePos);
-				return rawName.substr(namespacePos, namespaceLength) + "::" + rawName.substr(classNamePos + namespacePos + 1);
+				return rawName.substr(namespacePos + 1, namespaceLength) + "::" + rawName.substr(classNamePos + namespacePos + namespaceLength + 1, classNameLength);
 			}
 		}
+		else{
+			int classNamePos;
+			int classNameLength = ParseToNumber(
+						&rawName[0],
+						nameSize,
+						classNamePos);
+			return rawName.substr(classNamePos, classNameLength);
+		}
 	}
+	
+	return rawName;
 #endif
 }
 

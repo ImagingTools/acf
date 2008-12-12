@@ -7,10 +7,8 @@
 
 #ifdef _WIN32
 #include "iwin/CTimer.h"
-#elif defined QT_CORE_LIB
+#else
 #include "iqt/CTimer.h"
-#elif
-#error Operating system not supported
 #endif
 
 

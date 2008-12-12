@@ -4,8 +4,8 @@
 
 #ifdef _WIN32
 #include "iwin/iwin.h"
-#elif
-#error Operating system not supported
+#else
+#include "iqt/iqt.h"
 #endif
 
 
@@ -29,7 +29,7 @@ namespace inat
 
 #ifdef _WIN32
 	using namespace iwin;
-#elif defined QT_CORE_LIB
+#else
 	using namespace iqt;
 #endif
 

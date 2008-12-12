@@ -138,6 +138,59 @@
 			name = istd;
 			sourceTree = "<group>";
 		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				123456790ED2E572006EC826 /* CBitManip.cpp */,
+				123456800ED2E572006EC826 /* CChangeDelegator.cpp */,
+				123456810ED2E572006EC826 /* CClassInfo.cpp */,
+				123456820ED2E572006EC826 /* CCrcCalculator.cpp */,
+				123456830ED2E572006EC826 /* CRandomNumber.cpp */,
+				123456840ED2E572006EC826 /* CRange.cpp */,
+				123456850ED2E572006EC826 /* CStaticServicesProvider.cpp */,
+				123456860ED2E572006EC826 /* CString.cpp */,
+				123456870ED2E572006EC826 /* CVarIndex.cpp */,
+				123456880ED2E572006EC826 /* istd.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libistd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,59 +236,6 @@
 				123457280ED2E572006EC826 /* TVarArray.h */,
 			);
 			name = Header;
-			sourceTree = "<group>";
-		};
-		08FB7795FE84155DC02AAC07 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				123456790ED2E572006EC826 /* CBitManip.cpp */,
-				123456800ED2E572006EC826 /* CChangeDelegator.cpp */,
-				123456810ED2E572006EC826 /* CClassInfo.cpp */,
-				123456820ED2E572006EC826 /* CCrcCalculator.cpp */,
-				123456830ED2E572006EC826 /* CRandomNumber.cpp */,
-				123456840ED2E572006EC826 /* CRange.cpp */,
-				123456850ED2E572006EC826 /* CStaticServicesProvider.cpp */,
-				123456860ED2E572006EC826 /* CString.cpp */,
-				123456870ED2E572006EC826 /* CVarIndex.cpp */,
-				123456880ED2E572006EC826 /* istd.cpp */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		C6A0FF2B0290797F04C91782 /* Forms */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		EA9856A50EEABE3D00C738EF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Generated;
-			sourceTree = "<group>";
-		};
-		EA9856A60EEABE5300C738EF /* Garbages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Garbages;
-			sourceTree = "<group>";
-		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libistd.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,16 +367,16 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = istd;
 				ZERO_LINK = YES;
@@ -386,13 +386,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = istd;
 			};

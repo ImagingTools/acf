@@ -11,6 +11,7 @@
 
 #include "icomp/IComponent.h"
 #include "icomp/IComponentContext.h"
+#include "icomp/IComponentStaticInfo.h"
 #include "icomp/CRegistryElement.h"
 #include "icomp/TSingleAttribute.h"
 #include "icomp/TMultiAttribute.h"
@@ -150,7 +151,8 @@ bool CSimComponentContextBase::IsAttributeTypeCorrect(const std::string& attribu
 	const IComponentStaticInfo::AttributeInfos::ValueType* attrInfoPtr = attrInfos.FindElement(attributeId);
 
 	if ((attrInfoPtr != NULL) && (*attrInfoPtr != NULL)){
-		return (*attrInfoPtr)->GetAttributeType().IsType<AttrType>();
+		const istd::CClassInfo& attributeType = (*attrInfoPtr)->GetAttributeType();
+		return attributeType.IsType<AttrType>();
 	}
 
 	return false;
