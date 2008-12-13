@@ -52,6 +52,20 @@
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = acfqt;
 		};
+		EA668A7A0EF2F1C5006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA2842D80EF026EE0044F226 /* AcfQt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = acfqt;
+		};
+		EA668A7C0EF2F1C5006C46C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA2842CC0EF026D50044F226 /* AcfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = acfstd;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -300,6 +314,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				EA668A7B0EF2F1C5006C46C0 /* PBXTargetDependency */,
+				EA668A7D0EF2F1C5006C46C0 /* PBXTargetDependency */,
 			);
 			name = Compositor;
 			productName = Compositor;
@@ -409,6 +425,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA668A7B0EF2F1C5006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfqt;
+			targetProxy = EA668A7A0EF2F1C5006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA668A7D0EF2F1C5006C46C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfstd;
+			targetProxy = EA668A7C0EF2F1C5006C46C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91F008733DB70010E9CD /* Debug */ = {

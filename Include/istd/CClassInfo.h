@@ -70,8 +70,6 @@ public:
 	static std::string GetUndecoratedName(const std::string& rawName);
 
 private:
-	static int ParseToNumber(const char* buffer, int maxLength, int& nextPosition);
-
 	std::string m_name;
 };
 

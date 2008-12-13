@@ -30,7 +30,7 @@ protected:
 template <class Interface>
 TInterfaceRegistrator<Interface>::TInterfaceRegistrator(icomp::IComponentStaticInfo& staticInfo)
 {
-	static istd::CClassInfo info = istd::CClassInfo::GetInfo<Interface>();
+	istd::CClassInfo info = istd::CClassInfo::GetInfo<Interface>();
 
 	staticInfo.RegisterInterfaceExtractor(info, TInterfaceRegistrator<Interface>::InterfaceExtractor);
 }
