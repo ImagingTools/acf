@@ -2,28 +2,35 @@
 #define iqsci_CTextEditor_included
 
 
-// QScinitlla includes
-#include <Qsci/QsciScintilla.h>
-
-
 // ACF includes
 #include "idoc/ICommandsProvider.h"
 
 #include "iqtgui/CHierarchicalCommand.h"
 
 
+// Project includes
+
+#include "iqsci/generated/ui_CTextEditor.h"
+
+
+class QsciScintilla;
+
+
 namespace iqsci
 {
 
 
-class CTextEditor: public QsciScintilla, virtual public idoc::ICommandsProvider
+class CTextEditor: public QWidget, public Ui::CTextEditor, virtual public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef QsciScintilla BaseClass;
+	typedef QWidget BaseClass;
 
 	CTextEditor(QWidget* parentWidget = NULL);
+
+	virtual QString GetText() const;
+	virtual void SetText(const QString& text);
 
 	virtual void OnRetranslate();
 
@@ -44,6 +51,12 @@ signals:
 	void DataChanged();
 
 private:
+	enum MenuFlags
+	{
+		MF_VIEW = 0x9977,
+		MF_EDIT
+	};
+
 	iqtgui::CHierarchicalCommand m_rootCommand;
 	iqtgui::CHierarchicalCommand m_editorCommand;
 	iqtgui::CHierarchicalCommand m_viewCommand;
@@ -56,15 +69,14 @@ private:
 	iqtgui::CHierarchicalCommand m_useFoldingCommand;
 	iqtgui::CHierarchicalCommand m_showLineNumberCommand;
 
+	QsciScintilla* m_scintilla;
 };
 
 
 } // namespace iqsci
 
 
-
 #endif // !iqsci_CTextEditor_included
-
 
 
 

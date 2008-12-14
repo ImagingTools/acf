@@ -180,7 +180,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTextEditorComp.cpp"
+				RelativePath="..\CTextEditorGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -198,11 +198,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTextEditorComp.h"
+				RelativePath="..\CTextEditorGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CTextEditorComp.moc"
+				RelativePath="..\CTextEditorGuiComp.moc"
 				>
 			</File>
 			<File
@@ -220,7 +220,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CTextEditorComp.cpp"
+				RelativePath="..\generated\moc_CTextEditorGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CTextEditor.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Forms"
+			>
+			<File
+				RelativePath="..\CTextEditor.ui"
 				>
 			</File>
 		</Filter>

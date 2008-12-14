@@ -2,7 +2,7 @@
 #define QsciPck_included
 
 
-#include "iqsci/CTextEditorComp.h"
+#include "iqsci/CTextEditorGuiComp.h"
 
 /**
 	Standard Qt package.
@@ -10,7 +10,7 @@
 namespace QsciPck
 {
 
-typedef iqsci::CTextEditorComp ScintillaTextEditor;
+typedef iqsci::CTextEditorGuiComp ScintillaTextEditor;
 
 
 } // namespace QsciPck

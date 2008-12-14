@@ -1,4 +1,4 @@
-#include "iqsci/CTextEditorComp.h"
+#include "iqsci/CTextEditorGuiComp.h"
 
 
 // ACF includes
@@ -11,7 +11,7 @@ namespace iqsci
 
 // reimplemented (imod::IModelEditor)
 
-void CTextEditorComp::UpdateModel() const
+void CTextEditorGuiComp::UpdateModel() const
 {
 	CTextEditor* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
@@ -21,12 +21,12 @@ void CTextEditorComp::UpdateModel() const
 	ibase::ITextDocument* objectPtr = GetObjectPtr();
 
 	if (objectPtr != NULL ){
-		objectPtr->SetText(iqt::GetCString(textEditPtr->text()));
+		objectPtr->SetText(iqt::GetCString(textEditPtr->GetText()));
 	}
 }
 
 
-void CTextEditorComp::UpdateEditor()
+void CTextEditorGuiComp::UpdateEditor()
 {
 	CTextEditor* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
@@ -34,14 +34,14 @@ void CTextEditorComp::UpdateEditor()
 	ibase::ITextDocument* objectPtr = GetObjectPtr();
 
 	if ((objectPtr != NULL) && !textEditPtr->signalsBlocked()){
-		textEditPtr->setText(iqt::GetQString(objectPtr->GetText()));
+		textEditPtr->SetText(iqt::GetQString(objectPtr->GetText()));
 	}
 }
 
 
 // reimplemented (idoc::ICommandsProvider)
 
-const idoc::IHierarchicalCommand* CTextEditorComp::GetCommands() const
+const idoc::IHierarchicalCommand* CTextEditorGuiComp::GetCommands() const
 {
 	if (IsGuiCreated()){
 		CTextEditor* textEditPtr = GetQtWidget();
@@ -57,7 +57,7 @@ const idoc::IHierarchicalCommand* CTextEditorComp::GetCommands() const
 
 // protected slots
 
-void CTextEditorComp::OnTextChanged()
+void CTextEditorGuiComp::OnTextChanged()
 {
 	iqt::CSignalBlocker block(this);
 
@@ -67,7 +67,7 @@ void CTextEditorComp::OnTextChanged()
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
-void CTextEditorComp::OnGuiCreated()
+void CTextEditorGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
@@ -84,7 +84,7 @@ void CTextEditorComp::OnGuiCreated()
 }
 
 
-void CTextEditorComp::OnRetranslate()
+void CTextEditorGuiComp::OnRetranslate()
 {
 	if (IsGuiCreated()){
 		CTextEditor* textEditPtr = GetQtWidget();

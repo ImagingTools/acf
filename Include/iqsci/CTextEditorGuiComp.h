@@ -1,5 +1,5 @@
-#ifndef iqsci_CTextEditorComp_included
-#define iqsci_CTextEditorComp_included
+#ifndef iqsci_CTextEditorGuiComp_included
+#define iqsci_CTextEditorGuiComp_included
 
 
 // ACF includes
@@ -17,7 +17,7 @@ namespace iqsci
 {
 
 
-class CTextEditorComp: public iqtgui::TGuiObserverWrap<
+class CTextEditorGuiComp: public iqtgui::TGuiObserverWrap<
 			iqtgui::TGuiComponentBase<CTextEditor>, 
 			imod::TSingleModelObserverBase<ibase::ITextDocument> >,
 			virtual public idoc::ICommandsProvider
@@ -29,7 +29,7 @@ public:
 				iqtgui::TGuiComponentBase<CTextEditor>,
 				imod::TSingleModelObserverBase<ibase::ITextDocument> > BaseClass;
 
-	I_BEGIN_COMPONENT(CTextEditorComp)
+	I_BEGIN_COMPONENT(CTextEditorGuiComp)
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider)
 		I_REGISTER_INTERFACE(imod::IObserver)
 		I_ASSIGN(m_useFoldingAttrPtr, "UseFolding", "Use folding in the text document", false, true);
@@ -57,6 +57,6 @@ private:
 } // namespace iqsci
 
 
-#endif // !iqsci_CTextEditorComp_included
+#endif // !iqsci_CTextEditorGuiComp_included
 
 

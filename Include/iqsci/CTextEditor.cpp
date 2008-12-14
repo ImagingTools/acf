@@ -1,6 +1,11 @@
 #include "CTextEditor.h"
 
 
+// QScinitlla includes
+#include <Qsci/qsciscintilla.h>
+#include <Qsci/qscilexercpp.h>
+
+
 // Qt includes
 #include <QTextEdit>
 #include <QApplication>
@@ -10,25 +15,33 @@
 #include "iqt/CSignalBlocker.h"
 
 
-// QScinitlla includes
-#include <Qsci/qscilexercpp.h>
-
-
 namespace iqsci
 {
 
 
 CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
-:	BaseClass(parentWidget),
+:	QWidget(parentWidget),
 	m_editorCommand("&Edit"),
 	m_viewCommand("&View"),
-	m_lowercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
-	m_uppercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
+	m_lowercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR, MF_EDIT),
+	m_uppercaseCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR, MF_EDIT),
 	m_languageCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
-	m_useIdentGuideCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
-	m_useFoldingCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
-	m_showLineNumberCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF)
+	m_useIdentGuideCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF, MF_VIEW),
+	m_useFoldingCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF, MF_VIEW),
+	m_showLineNumberCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF, MF_VIEW)
 {
+	Ui_CTextEditor::setupUi(this);
+
+	m_scintilla = new QsciScintilla(EditorFrame);
+	QLayout* editorLayout = EditorFrame->layout();
+	if (editorLayout == NULL){
+		editorLayout = new QVBoxLayout(EditorFrame);
+
+		editorLayout->addWidget(m_scintilla);
+		editorLayout->setMargin(0);
+		m_scintilla->setFrameStyle(QFrame::NoFrame);
+	}
+
 	m_lowercaseCommand.SetEnabled(false);
 	m_uppercaseCommand.SetEnabled(false);
 	m_editorCommand.InsertChild(&m_lowercaseCommand, false);
@@ -39,24 +52,44 @@ CTextEditor::CTextEditor(QWidget* parentWidget/* = NULL*/)
 	
 	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
 	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
-	connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
-	connect(this, SIGNAL(selectionChanged()), this, SLOT(OnSelectionChanged()));
+	connect(m_scintilla, SIGNAL(textChanged()), this, SLOT(OnTextChanged()));
+	connect(m_scintilla, SIGNAL(selectionChanged()), this, SLOT(OnSelectionChanged()));
 	
-	setLexer(new QsciLexerCPP(this));
-	lexer()->setDefaultFont(QFont("CourierNew", 10));
+	QsciLexerCPP* lexerPtr = new QsciLexerCPP(this);
+	lexerPtr->setDefaultFont(QFont("Courier", 10));
+	lexerPtr->setFoldCompact(true);
+
+	m_scintilla->setLexer(lexerPtr);
 
 	// add view commands
 	m_viewCommand.InsertChild(&m_useIdentGuideCommand, false);
 	m_viewCommand.InsertChild(&m_useFoldingCommand, false);
 	m_viewCommand.InsertChild(&m_showLineNumberCommand, false);
 
-	connect(&m_useIdentGuideCommand, SIGNAL(toggled(bool)), this, SLOT(setIndentationGuides(bool)));
+	connect(&m_useIdentGuideCommand, SIGNAL(toggled(bool)), m_scintilla, SLOT(setIndentationGuides(bool)));
 	connect(&m_useFoldingCommand, SIGNAL(toggled(bool)), this, SLOT(SetFoldingEnabled(bool)));
 	connect(&m_showLineNumberCommand, SIGNAL(toggled(bool)), this, SLOT(SetLineNumberEnabled(bool)));
 
 	// some additional settings:
-	setBraceMatching(StrictBraceMatch);
+	m_scintilla->setBraceMatching(QsciScintilla::StrictBraceMatch);
 }
+
+
+QString CTextEditor::GetText() const
+{
+	I_ASSERT(m_scintilla != NULL);
+
+	return m_scintilla->text();
+}
+
+
+void CTextEditor::SetText(const QString& text)
+{
+	I_ASSERT(m_scintilla != NULL);
+
+	m_scintilla->setText(text);
+}
+
 
 
 void CTextEditor::OnRetranslate()
@@ -82,18 +115,22 @@ const idoc::IHierarchicalCommand* CTextEditor::GetCommands() const
 
 void CTextEditor::SetFoldingEnabled(bool useFoldingEnabled)
 {
+	I_ASSERT(m_scintilla != NULL);
+
 	if (useFoldingEnabled){
-		setFolding(CTextEditor::BoxedTreeFoldStyle); 
+		m_scintilla->setFolding(QsciScintilla::BoxedTreeFoldStyle); 
 	}
 	else{
-		setFolding(CTextEditor::NoFoldStyle); 
+		m_scintilla->setFolding(QsciScintilla::NoFoldStyle); 
 	}
 }
 
 
 void CTextEditor::SetLineNumberEnabled(bool showLineNumber)
 {
-	setMarginLineNumbers(1, showLineNumber);
+	I_ASSERT(m_scintilla != NULL);
+
+	m_scintilla->setMarginLineNumbers(1, showLineNumber);
 }
 
 
@@ -101,7 +138,7 @@ void CTextEditor::SetLineNumberEnabled(bool showLineNumber)
 
 void CTextEditor::OnSelectionChanged()
 {
-	bool isTextSelected = hasSelectedText();
+	bool isTextSelected = m_scintilla->hasSelectedText();
 
 	m_lowercaseCommand.SetEnabled(isTextSelected);
 	m_uppercaseCommand.SetEnabled(isTextSelected);
@@ -112,26 +149,29 @@ void CTextEditor::OnTextChanged()
 {
 	emit DataChanged();
 
-	QString linesString = QString("%1").arg(lines());
+	QString linesString = QString("%1").arg(m_scintilla->lines());
+	I_ASSERT(m_scintilla != NULL);
 
-	setMarginWidth(1, linesString);
-	setMarginWidth(1, istd::Max(20, marginWidth(1)));
+	m_scintilla->setMarginWidth(1, linesString);
+	m_scintilla->setMarginWidth(1, istd::Max(20, m_scintilla->marginWidth(1)));
 }
 
 
 void CTextEditor::OnToLowercase()
 {
-	QString selectedText = this->selectedText();
+	I_ASSERT(m_scintilla != NULL);
+
+	QString selectedText = m_scintilla->selectedText();
 
 	int line;
 	int index;
 	int line2;
 	int index2;
-	getSelection(&line, &index, &line2, &index2);
+	m_scintilla->getSelection(&line, &index, &line2, &index2);
 
-	removeSelectedText();
+	m_scintilla->removeSelectedText();
 
-	insertAt(selectedText.toLower(), line, index);
+	m_scintilla->insertAt(selectedText.toLower(), line, index);
 
 	OnSelectionChanged();
 	OnTextChanged();
@@ -140,19 +180,22 @@ void CTextEditor::OnToLowercase()
 
 void CTextEditor::OnToUppercase()
 {
-	QString selectedText = this->selectedText();
+	I_ASSERT(m_scintilla != NULL);
+
+	QString selectedText = m_scintilla->selectedText();
 
 	int line;
 	int index;
 	int line2;
 	int index2;
-	getSelection(&line, &index, &line2, &index2);
+	m_scintilla->getSelection(&line, &index, &line2, &index2);
 
-	removeSelectedText();
+	m_scintilla->removeSelectedText();
 
-	insertAt(selectedText.toUpper(), line, index);
+	m_scintilla->insertAt(selectedText.toUpper(), line, index);
 
 	OnSelectionChanged();
+
 	OnTextChanged();
 }
 
