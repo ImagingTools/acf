@@ -54,8 +54,8 @@ protected:
 	void CumulateRecursiveValueAt(
 				const Argument& argument,
 				int dimension,
-				const FulcrumSizes& sizes,
-				FulcrumIndex& index,
+				const typename BaseClass::FulcrumSizes& sizes,
+				typename BaseClass::FulcrumIndex& index,
 				DerivativeDegreeType& degree,
 				double cumulationFactor,
 				Result& result) const;
@@ -68,8 +68,8 @@ protected:
 	/**
 		Get derivative of specified degree at specified index position.
 	*/
-	virtual const ResultType& GetFulcrumDerivativeAtIndex(
-				const FulcrumIndex& index,
+	virtual const typename BaseClass::ResultType& GetFulcrumDerivativeAtIndex(
+				const typename BaseClass::FulcrumIndex& index,
 				const DerivativeDegreeType& degree) const = 0;
 
 	/**
@@ -105,13 +105,13 @@ bool TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueAt(con
 {
 	result.Clear();
 
-	if (EnsureCacheValid()){
-		FulcrumIndex index = FindIndices(argument);
+	if (BaseClass::EnsureCacheValid()){
+		typename BaseClass::FulcrumIndex index = this->FindIndices(argument);
 
-		FulcrumSizes gridSize = GetGridSize();
+		typename BaseClass::FulcrumSizes gridSize = BaseClass::GetGridSize();
 
 		if (index.IsInside(gridSize)){
-			int dimensionsCount = GetDimensionsCount();
+			int dimensionsCount = BaseClass::GetDimensionsCount();
 			Degree degree;
 			degree.SetDimensionsCount(dimensionsCount);
 
@@ -126,11 +126,11 @@ bool TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueAt(con
 
 
 template <class Argument, class Result, class Fulcrums, class Degree>
-typename Result TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueAt(const Argument& argument) const
+Result TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueAt(const Argument& argument) const
 {
-	ResultType retVal;
+	typename BaseClass::ResultType retVal;
 
-	GetValueAt(argument, retVal);
+	BaseClass::GetValueAt(argument, retVal);
 
 	return retVal;
 }
@@ -142,8 +142,8 @@ template <class Argument, class Result, class Fulcrums, class Degree>
 void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecursiveValueAt(
 			const Argument& argument,
 			int dimension,
-			const FulcrumSizes& sizes,
-			FulcrumIndex& index,
+			const typename BaseClass::FulcrumSizes& sizes,
+			typename BaseClass::FulcrumIndex& index,
 			DerivativeDegreeType& derivativeDegree,
 			double cumulationFactor,
 			Result& result) const
@@ -162,8 +162,8 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 
 	if (indexElement >= 0){
 		if (indexElement < sizes[dimension] - 1){
-			double firstPosition = GetLayerPosition(dimension, indexElement);
-			double secondPosition = GetLayerPosition(dimension, indexElement + 1);
+			double firstPosition = BaseClass::GetLayerPosition(dimension, indexElement);
+			double secondPosition = BaseClass::GetLayerPosition(dimension, indexElement + 1);
 			double layersDistance = secondPosition - firstPosition;
 			I_ASSERT(layersDistance >= 0);
 			I_ASSERT(argument[dimension] >= firstPosition);

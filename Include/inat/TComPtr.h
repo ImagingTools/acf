@@ -7,7 +7,7 @@
 
 #ifdef _WIN32
 #include "iwin/TComPtr.h"
-#elif
+#else
 #error Operating system not supported
 #endif
 
