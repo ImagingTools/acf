@@ -6,6 +6,7 @@ QT -= core \
 TARGET = iser
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += create_prl
 INCLUDEPATH+=$(ACFDIR)/include
 SOURCES += ../CXmlWriteArchiveBase.cpp \
     ../CXmlStringWriteArchive.cpp \

@@ -6,6 +6,7 @@ QT -= core \
 TARGET = istd
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += create_prl
 INCLUDEPATH+=$(ACFDIR)/include
 SOURCES += ../istd.cpp \
     ../CVarIndex.cpp \
