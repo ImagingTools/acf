@@ -1,0 +1,23 @@
+# rules for creation of binary file
+ifneq ($(BUILD_EXECUTABLE), 0)
+ifndef OUTPUT_FILE
+ @echo "Output file was not defined"
+endif
+ifndef LIB_PATH
+ @echo "additional library pathes was not defined"
+endif
+ifndef LIB_OBJS
+ @echo "input binary objects for the output was not defined"
+endif
+ifndef LIBS
+ @echo "additional libraries was not defined"
+endif
+ifndef BINARY_DIR
+ @echo "output directory for the binary was not defined"
+endif
+
+executable:
+	$(Q)$(CXX) -o $(OUTPUT_FILE) $(LIB_PATH) $(LIB_OBJS) $(LIBS)
+	$(Q)mkdir -p $(BINARY_DIR)
+	$(Q)cp $(OUTPUT_FILE) $(BINARY_DIR)/$(OUTPUT_FILE)
+endif

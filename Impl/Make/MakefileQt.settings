@@ -1,0 +1,46 @@
+#temporary definition of QTDIR
+QTDIR=/usr/local/Trolltech/Qt-4.3.2
+
+# Qt target is used
+MAKE_QT_BUILD = 1
+
+# path of the MOC-compiler
+MOC = $(QTDIR)/bin/moc
+
+# path of the UIC-compiler
+UIC = $(QTDIR)/bin/uic
+
+# path of the RCC-compiler
+RCC = $(QTDIR)/bin/rcc
+
+# path of the moc files folder
+MOC_SRC_DIR=..
+
+# path of the ui files folder
+UI_SRC_DIR=..
+
+# path of the ui files folder
+QRC_SRC_DIR=..
+QRC_RESOURCE_DIR=../Resources	
+
+
+# create rules for dynamic creation of file list for MOC compiler
+MOC_INPUT_FILES = $(wildcard $(MOC_SRC_DIR)/*.moc)
+MOC_TEMP_NAME = $(subst $(MOC_SRC_DIR),$(GENERATED_DIR)/moc_,$(MOC_INPUT_FILES:%.moc=%.cpp))
+MOC_OUTPUT_FILES = $(subst moc_/,moc_,$(MOC_TEMP_NAME))
+
+#
+#create rules for dynamic creation of file list for UIC compiler
+UI_INPUT_FILES = $(wildcard $(UI_SRC_DIR)/*.ui)
+UI_TEMP_NAME = $(subst $(UI_SRC_DIR),$(GENERATED_DIR)/ui_,$(UI_INPUT_FILES:%.ui=%.h))
+UI_OUTPUT_FILES = $(subst ui_/,ui_,$(UI_TEMP_NAME))
+
+#
+#create rules for dynamic creation of file list for RCC compiler
+QRC_INPUT_FILES = $(wildcard $(QRC_SRC_DIR)/*.qrc)
+QRC_TEMP_NAME = $(subst $(QRC_SRC_DIR),$(GENERATED_DIR)/qrc_,$(QRC_INPUT_FILES:%.qrc=%.cpp))
+QRC_OUTPUT_FILES = $(subst qrc_/,qrc_,$(QRC_TEMP_NAME))
+
+#
+# set Qt related compiler flags
+ADDITIONAL_COMPILER_FLAGS = -I$(QTDIR)/include -I$(QTDIR)/include/QtCore -I$(QTDIR)/include/QtGui -I$(QTDIR)/include/QtXml -I$(GENERATED_DIR)

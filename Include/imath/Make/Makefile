@@ -1,4 +1,4 @@
-OUTPUT_NAME=icomp
+OUTPUT_NAME=imath
 
 # include the basic definitions for this module
 include ../../../Impl/Make/Makefile.settings

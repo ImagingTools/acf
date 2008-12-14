@@ -1,39 +1,68 @@
-ACFDIR=../..
-ACFINCDIR=$(ACFDIR)/Include 
-LIB_DIR=lib
-OBJ_DIR=.objects
-LIBRARY_FILE=$(LIBRARY_NAME).a
 
-SRC_DIR=..
-
-DEFAULT_COMPILER_FLAGS = -I$(ACFINCDIR) -Wall $(CPU) -I../../ -I/usr/local/include
-
-HEADER_FILES = $(wildcard $(SRC_DIR)/*.h)
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
-
-LIB_OBJS = $(subst $(SRC_DIR),$(OBJ_DIR),$(SRC_FILES:.cpp=.o))
-
+# if wir have cpp files in the source folder, create a static library from
+ifneq ($(HAS_CPP), 0)
 # build library
-all: $(LIBRARY_FILE)
+all: ui moc qrc $(OUTPUT_NAME) generated $(OUTPUT_FILE) executable
+else
+# nothing to do
+all:
+	@echo "Information: No CPP files to be processed"
+endif
+
+# no moc files
+ifeq ($(HAS_MOC), 0)
+moc:
+	@echo "Information: No MOC files to be processed"
+endif
+
+
+# no ui files
+ifeq ($(HAS_UI), 0)
+ui:
+	@echo "Information: No UI files to be processed"
+endif
+
+# no qrc files
+ifeq ($(HAS_RESOURCES), 0)
+qrc:
+	@echo "Information: No Resource files to be processed"
+endif
+
+# no exectuable build
+ifeq ($(BUILD_EXECUTABLE), 0)
+executable:
+endif
+
+# generated objects
+generated:
+	$(MAKE) postgenerated
+
+postgenerated: $(GENERATED_LIB_OBJS) $(OUTPUT_NAME)
 
 # build objects
-istd: $(LIB_OBJS) \
-	$(OBJ_DIR)
+$(OUTPUT_NAME): $(LIB_OBJS)
 
-# clean objects
-clean:
-	@echo "  CLEAN  "$(LIBRARY_NAME)
-	$(Q)rm -f $(LIB_OBJS)
-   
+# rules for creating the object files from generated sources
+$(OBJ_DIR)/%.o: $(GENERATED_DIR)/%.cpp
+	@echo "     CC  "$<
+	$(Q)$(CXX) -c $(DEFAULT_COMPILER_FLAGS) $(ADDITIONAL_COMPILER_FLAGS) -o $@ $<
+
 # rules for creating the object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "     CC  "$<
 	$(Q)mkdir -p $(OBJ_DIR)
-	$(Q)$(CXX) -g $(DEFAULT_COMPILER_FLAGS) $(ADDITIONAL_COMPILER_FLAGS) -c -o $@ $<
+	$(Q)$(CXX) -c $(DEFAULT_COMPILER_FLAGS) $(ADDITIONAL_COMPILER_FLAGS) -o $@ $<
 
 # rules for creating the library:
-$(LIBRARY_FILE): $(LIB_OBJS)
+$(OUTPUT_FILE): $(LIB_OBJS)
 	@echo "     AR  "$@
-#	$(Q)mkdir -p $(LIB_DIR)
-	$(Q)ar -rs $@ $(LIB_OBJS)
-#	$(Q)cp $@ $(LIB_DIR)
+	$(Q)ar -rs $@ $(LIB_OBJS) $(GENERATED_LIB_OBJS)
+
+# clean objects
+clean:
+	@echo "  CLEAN  "$(OUTPUT_NAME)
+	$(Q)rm -f $(LIB_OBJS)
+	$(Q)rm -f $(MOC_OUTPUT_FILES)
+	$(Q)rm -f $(UI_OUTPUT_FILES)
+	$(Q)rm -f $(OUTPUT_FILE)
+	$(Q)rm -f $($(GENERATED_LIB_OBJS)

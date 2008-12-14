@@ -1,4 +1,29 @@
-#temporary definition of QTDIR
-QTDIR=/usr/local/Trolltech/Qt-4.3.2
+# build ui files
+ifneq ($(HAS_UI), 0)
+ui: $(UI_OUTPUT_FILES) $(GENERATED_DIR)
 
-ADDITIONAL_COMPILER_FLAGS = -I$(QTDIR)/include -I$(QTDIR)/include/QtCore -I$(QTDIR)/include/QtGui -I$(QTDIR)/include/QtXml
+$(GENERATED_DIR)/ui_%.h: $(UI_SRC_DIR)/%.ui
+	@echo "     uicing  "$<
+	$(Q)mkdir -p $(GENERATED_DIR)
+	${UIC} -o $@ $<
+endif
+
+# build moc files
+ifneq ($(HAS_MOC), 0)
+moc: $(MOC_OUTPUT_FILES) $(GENERATED_DIR)
+
+$(GENERATED_DIR)/moc_%.cpp: $(MOC_SRC_DIR)/%.moc
+	@echo "     mocing  "$< $@
+	$(Q)mkdir -p $(GENERATED_DIR)
+	${MOC} -o $@ $(subst .moc,.h, $<)
+endif
+
+# build qrc files
+ifneq ($(HAS_RESOURCES), 0)
+qrc: $(QRC_OUTPUT_FILES) $(SRC_DIR)
+
+$(SRC_DIR)/qrc_%.cpp: $(QRC_SRC_DIR)/%.qrc
+	@echo "     rccing  "$< $@
+	${RCC} -o $@ -name $< -no-compress
+endif
+  

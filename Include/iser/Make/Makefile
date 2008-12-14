@@ -1,4 +1,7 @@
-LIBRARY_NAME=iser
+OUTPUT_NAME=iser
 
 # include the basic definitions for this module
-include ../../../Impl/make/Makefile.rules
+include ../../../Impl/Make/Makefile.settings
+
+# include the basic rules for creation this module
+include ../../../Impl/Make/Makefile.rules
