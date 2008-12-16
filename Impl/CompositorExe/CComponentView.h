@@ -25,8 +25,7 @@ public:
 				const icomp::IRegistry* registryPtr,
 				const icomp::IRegistry::ElementInfo* elementInfoPtr, 
 				const std::string& componentName, 
-				QGraphicsItem* parent = NULL, 
-				QGraphicsScene * scene = NULL);
+				QGraphicsItem* parent = NULL);
 
 	virtual ~CComponentView();
 

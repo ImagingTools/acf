@@ -21,9 +21,8 @@ CComponentConnector::CComponentConnector(
 			const CRegistryViewComp* registryViewPtr,
 			CComponentView* sourceComponent, 
 			CComponentView* destComponent,
-			QGraphicsItem *parent, 
-			QGraphicsScene *scene)
-:	BaseClass(parent, scene),
+			QGraphicsItem *parent)
+:	BaseClass(parent),
 	m_registryView(*registryViewPtr)
 {
 	I_ASSERT(registryViewPtr != NULL);

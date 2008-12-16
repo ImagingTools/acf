@@ -23,9 +23,8 @@ CComponentView::CComponentView(
 			const icomp::IRegistry* registryPtr,
 			const icomp::IRegistry::ElementInfo* elementInfoPtr, 
 			const std::string& componentName,
-			QGraphicsItem* parent, 
-			QGraphicsScene* scene) 
-:	QGraphicsRectItem(parent, scene),
+			QGraphicsItem* parent) 
+:	QGraphicsRectItem(parent),
 	m_registryView(*registryViewPtr),
 	m_registry(*registryPtr),
 	m_componentName(componentName),

@@ -573,7 +573,10 @@ void CRegistryViewComp::CreateConnector(CComponentView& sourceView, const std::s
 	foreach(QGraphicsItem* item, items){
 		CComponentView* referenceViewPtr = dynamic_cast<CComponentView*>(item);
 		if ((referenceViewPtr != NULL) && (referenceViewPtr->GetComponentName() == referenceComponentId)){
-			CComponentConnector* connector = new CComponentConnector(this, &sourceView, referenceViewPtr, &m_compositeItem, m_scenePtr);
+			CComponentConnector* connector = new CComponentConnector(this, 
+						&sourceView, 
+						referenceViewPtr, 
+						&m_compositeItem);
 
 			connector->Adjust();
 		}
@@ -586,7 +589,11 @@ CComponentView* CRegistryViewComp::CreateComponentView(
 			const icomp::IRegistry::ElementInfo* elementInfoPtr,
 			const std::string& role)
 {
-	CComponentView* componentViewPtr = new CComponentView(this, registryPtr, elementInfoPtr, role.c_str(), &m_compositeItem, m_scenePtr);
+	CComponentView* componentViewPtr = new CComponentView(this, 
+				registryPtr, 
+				elementInfoPtr, 
+				role.c_str(), 
+				&m_compositeItem);
 
 	connect(componentViewPtr, 
 				SIGNAL(selectionChanged(CComponentView*, bool)),
