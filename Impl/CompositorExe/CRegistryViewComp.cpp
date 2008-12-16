@@ -832,6 +832,8 @@ void CRegistryViewComp::UpdateExportInterfaceCommand()
 
 QVariant CRegistryViewComp::CCompositeItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
+	int gridSize = CRegistryViewComp::GetGrid();
+
 	switch(change){
 	case QGraphicsItem::ItemSelectedChange:
 		break;
@@ -839,9 +841,9 @@ QVariant CRegistryViewComp::CCompositeItem::itemChange(GraphicsItemChange change
 	case QGraphicsItem::ItemPositionChange:
 		{
 			QPoint newPos = value.toPoint();
-			newPos.rx() = newPos.rx() - (newPos.rx() % 25);
-			newPos.ry() = newPos.ry() - (newPos.ry() % 25);
-
+/*			newPos.rx() = newPos.rx() - (newPos.rx() % gridSize);
+			newPos.ry() = newPos.ry() - (newPos.ry() % gridSize);
+*/
 			return QVariant(newPos);
 		}
 

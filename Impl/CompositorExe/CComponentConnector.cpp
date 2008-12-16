@@ -67,8 +67,6 @@ void CComponentConnector::SetSourceComponent(CComponentView* sourceComponent)
 
 		Adjust();
 	}
-
-	update();
 }
 
 CComponentView *CComponentConnector::GetDestinationComponent() const
@@ -85,8 +83,6 @@ void CComponentConnector::SetDestinationComponent(CComponentView* destComponent)
 
 		Adjust();
 	}
-
-	update();
 }
 
 

@@ -54,7 +54,7 @@ public:
 	CRegistryViewComp();
 
 	bool TryCreateComponent(const icomp::CComponentAddress& address, const i2d::CVector2d& position);
-	double GetGrid() const;
+	static double GetGrid();
 
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
@@ -160,7 +160,7 @@ private:
 
 // inline methods
 
-inline double CRegistryViewComp::GetGrid() const
+inline double CRegistryViewComp::GetGrid()
 {
 	return 25;
 }

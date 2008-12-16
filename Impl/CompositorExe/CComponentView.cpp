@@ -283,17 +283,22 @@ QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& v
 		{
 			QSizeF size = CalculateRect().size();
 			QPoint newPos = value.toPoint();
-			double gridSize = m_registryView.GetGrid();
+/*			double gridSize = m_registryView.GetGrid();
 			newPos.setX(int(::ceil((newPos.x() + size.width() * 0.5) / gridSize + 0.5) * gridSize - size.width() * 0.5));
 			newPos.setY(int(::ceil((newPos.y() + size.height() * 0.5) / gridSize + 0.5) * gridSize - size.height() * 0.5));
-
+*/
+			return QVariant(newPos);
+		}
+	
+	case QGraphicsItem::ItemPositionHasChanged:
+		{
 			foreach (CComponentConnector* connector, m_connectors){
 				connector->Adjust();
 			}
 
-			emit positionChanged(this, newPos);
-			
-			return QVariant(newPos);
+			emit positionChanged(this, value.toPoint());
+
+			break;
 		}
 
 	default:
