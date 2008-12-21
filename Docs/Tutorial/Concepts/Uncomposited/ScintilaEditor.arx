@@ -253,16 +253,77 @@
         Info
       </Id>
       <PackageId>
-        BasePck
+        AcfVoce
       </PackageId>
       <ComponentId>
-        ApplicationInfo
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ScintilaEditor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              KnownVersionNames
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  1.0.0
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              KnownVersions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  1000
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               VersionId
@@ -284,25 +345,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              VersionIdDesc
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                User Version
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               VersionNumber
             </Id>
             <Type>
@@ -316,7 +358,7 @@
                 true
               </IsEnabled>
               <Value>
-                0
+                1000
               </Value>
             </Data>
           </AttributeInfo>
@@ -396,6 +438,25 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Info
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               CopyrightText
             </Id>
             <Type>
@@ -429,25 +490,6 @@
               </IsEnabled>
               <Value>
                 ../../Docs/Images/AcfSplashScreen.png
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductName
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Text Editor
               </Value>
             </Data>
           </AttributeInfo>

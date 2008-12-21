@@ -10,7 +10,7 @@
         Application
       </ComponentName>
       <X>
-        200
+        198
       </X>
       <X>
         227
@@ -21,10 +21,10 @@
         DocumentFactory
       </ComponentName>
       <X>
-        487
+        604
       </X>
       <X>
-        537
+        354
       </X>
     </Element>
     <Element>
@@ -32,7 +32,7 @@
         DocumentLoader
       </ComponentName>
       <X>
-        808
+        1149
       </X>
       <X>
         357
@@ -43,10 +43,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        692
+        844
       </X>
       <X>
-        464
+        243
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         Info
       </ComponentName>
       <X>
-        473
+        -62
       </X>
       <X>
-        216
+        228
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         MainWindow
       </ComponentName>
       <X>
-        416
+        525
       </X>
       <X>
-        347
+        222
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         Splash
       </ComponentName>
       <X>
-        223
+        243
       </X>
       <X>
-        336
+        357
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         ViewFactory
       </ComponentName>
       <X>
-        485
+        858
       </X>
       <X>
-        434
+        355
       </X>
     </Element>
     <Element>
@@ -98,10 +98,10 @@
         Workspace
       </ComponentName>
       <X>
-        662
+        516
       </X>
       <X>
-        218
+        80
       </X>
     </Element>
   </PositionMap>

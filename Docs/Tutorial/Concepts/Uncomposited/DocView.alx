@@ -4,16 +4,16 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="8">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        -172
+        -155
       </X>
       <X>
-        -134
+        -122
       </X>
     </Element>
     <Element>
@@ -51,13 +51,24 @@
     </Element>
     <Element>
       <ComponentName>
+        Info
+      </ComponentName>
+      <X>
+        -383
+      </X>
+      <X>
+        10
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         MainWindow
       </ComponentName>
       <X>
         100
       </X>
       <X>
-        -134
+        -121
       </X>
     </Element>
     <Element>
@@ -65,7 +76,7 @@
         Splash
       </ComponentName>
       <X>
-        -147
+        -134
       </X>
       <X>
         12
@@ -79,7 +90,7 @@
         75
       </X>
       <X>
-        -9
+        0
       </X>
     </Element>
     <Element>
@@ -90,7 +101,7 @@
         287
       </X>
       <X>
-        -134
+        -121
       </X>
     </Element>
   </PositionMap>
