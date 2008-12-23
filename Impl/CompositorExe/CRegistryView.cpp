@@ -1,9 +1,11 @@
 #include "CRegistryView.h"
 
 
+// STL includes
+#include <cmath>
+
 // Qt includes
 #include <QVarLengthArray>
-
 
 // Compositor includes
 #include "CComponentView.h"

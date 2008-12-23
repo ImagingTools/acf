@@ -34,8 +34,8 @@ istd::CString TApplicationInfoWrap<Base>::GetEncodedVersionName(int versionId, I
 {
 	istd::CString retVal = BaseClass::GetEncodedVersionName(versionId, versionNumber);
 
-	if ((RS_DIRTY_FLAG != 0) && (versionId == FrameworkVersionId) && (versionNumber == RS_USE_VERSION)){
-		return retVal + "´";
+	if ((RS_DIRTY_FLAG != 0) && (versionId == iser::IVersionInfo::FrameworkVersionId) && (versionNumber == RS_USE_VERSION)){
+		return retVal + "'";
 	}
 
 	return retVal;
@@ -47,7 +47,7 @@ istd::CString TApplicationInfoWrap<Base>::GetEncodedVersionName(int versionId, I
 template <class Base>
 bool TApplicationInfoWrap<Base>::GetVersionNumber(int versionId, I_DWORD& result) const
 {
-	if (versionId == FrameworkVersionId){
+	if (versionId == iser::IVersionInfo::FrameworkVersionId){
 		result = RS_USE_VERSION;
 
 		return true;
@@ -61,7 +61,7 @@ bool TApplicationInfoWrap<Base>::GetVersionNumber(int versionId, I_DWORD& result
 template <class Base>
 istd::CString TApplicationInfoWrap<Base>::GetVersionIdDescription(int versionId) const
 {
-	if (versionId == FrameworkVersionId){
+	if (versionId == iser::IVersionInfo::FrameworkVersionId){
 		return "ACF";
 	}
 	else{
@@ -75,7 +75,7 @@ iser::IVersionInfo::VersionIds TApplicationInfoWrap<Base>::GetVersionIds() const
 {
 	VersionIds retVal = BaseClass::GetVersionIds();
 
-	retVal.insert(FrameworkVersionId);
+	retVal.insert(iser::IVersionInfo::FrameworkVersionId);
 
 	return retVal;
 }

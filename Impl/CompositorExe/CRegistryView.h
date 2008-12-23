@@ -2,14 +2,14 @@
 #define CRegistryView_included
 
 
+// STL includes
+#include <string>
+
 // Qt includes
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsSceneDragDropEvent>
-#include <QGraphicsItemGroup>
-#include <QDrag>
 #include <QMimeData>
-#include <QTimer>
 
 
 // Compositor includes

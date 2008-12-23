@@ -13,13 +13,14 @@
 #include "idoc/CSingleDocumentTemplateComp.h"
 #include "idoc/CCompositeDocumentTemplateComp.h"
 
-#include "ibase/TFileSerializerComp.h"
+#include "ibase/CComposedLoaderComp.h"
 #include "ibase/CTextFileLoaderComp.h"
 #include "ibase/CInstantiatorComp.h"
 #include "ibase/CApplicationInfoComp.h"
 #include "ibase/CRegistryCodeSaverComp.h"
 #include "ibase/CRectangleComp.h"
 #include "ibase/CTextDocumentComp.h"
+#include "ibase/TFileSerializerComp.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
@@ -45,6 +46,7 @@ namespace BasePck
 
 typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> XmlFileSerializer;
 typedef ibase::TFileSerializerComp<iser::CFileReadArchive, iser::CFileWriteArchive> BinaryFileSerializer;
+typedef ibase::CComposedLoaderComp ComposedLoader;
 typedef ibase::CTextFileLoaderComp TextFileSerializer;
 typedef ibase::CInstantiatorComp Instantiator;
 typedef ibase::CApplicationInfoComp ApplicationInfo;

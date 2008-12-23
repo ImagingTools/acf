@@ -14,7 +14,7 @@ namespace iprm
 /**
 	Interface allowing to select single option from list of options.
 */
-class ISelectionParam: public iser::ISerializable
+class ISelectionParam: virtual public iser::ISerializable
 {
 public:
 	/**

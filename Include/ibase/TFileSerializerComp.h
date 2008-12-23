@@ -16,17 +16,17 @@ namespace ibase
 template <class ReadArchive, class WriteArchive>
 class TFileSerializerComp:
 			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
-			public iser::IFileLoader
+			virtual public iser::IFileLoader
 {
 public:
 	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
-	I_BEGIN_COMPONENT(TFileSerializerComp)
+	I_BEGIN_COMPONENT(TFileSerializerComp);
 		I_REGISTER_INTERFACE(iser::IFileLoader)
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
 		I_ASSIGN_MULTI_0(m_fileExtensionsAttrPtr, "FileExtensions", "List of supported file extensions", false);
 		I_ASSIGN_MULTI_0(m_typeDescriptionsAttrPtr, "TypeDescriptions", "List of descriptions for each extension", false);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(
@@ -64,7 +64,7 @@ private:
 template <class ReadArchive, class WriteArchive>
 bool TFileSerializerComp<ReadArchive, WriteArchive>::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* /*filePathPtr*/,
+			const istd::CString* filePathPtr,
 			int flags,
 			bool beQuiet) const
 {
@@ -76,7 +76,23 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::IsOperationSupported(
 		return false;
 	}
 
-	return ((flags & QF_ANONYMOUS_ONLY) == 0);
+	if ((flags & QF_ANONYMOUS_ONLY) != 0){
+		return false;
+	}
+
+	if ((filePathPtr != NULL) && m_fileExtensionsAttrPtr.IsValid()){
+		int extensionsCount = m_fileExtensionsAttrPtr.GetCount();
+		for (int i = 0; i < extensionsCount; ++i){
+			const istd::CString& extension = m_fileExtensionsAttrPtr[i];
+			if (filePathPtr->substr(filePathPtr->length() - extension.length() - 1) == istd::CString(".") + extension.ToLower()){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	return true;
 }
 
 
@@ -131,7 +147,7 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::GetFileExtensions(istd::CSt
 		result.clear();
 	}
 
-	int extensionsCount = istd::Min(m_fileExtensionsAttrPtr.GetCount(), m_typeDescriptionsAttrPtr.GetCount());
+	int extensionsCount = m_fileExtensionsAttrPtr.GetCount();
 	for (int i = 0; i < extensionsCount; ++i){
 		const istd::CString& extension = m_fileExtensionsAttrPtr[i];
 

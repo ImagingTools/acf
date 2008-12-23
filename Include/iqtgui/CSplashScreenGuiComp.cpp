@@ -46,12 +46,14 @@ void CSplashScreenGuiComp::OnGuiCreated()
 
 	ProductTypeLabel->setVisible(m_productTypeAttrPtr.IsValid());
 
+	QString productName;
 	if (m_productNameAttrPtr.IsValid()){
-		ProductNameLabel->setText(iqt::GetQString(*m_productNameAttrPtr));
+		productName = iqt::GetQString(*m_productNameAttrPtr);
 	}
-	else{
-		ProductNameLabel->setText("");
+	else if (m_applicationInfoCompPtr.IsValid()){
+		productName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
 	}
+	ProductNameLabel->setText(productName);
 
 	if (m_copyrightTextAttrPtr.IsValid()){
 		CopyrightLabel->setText(iqt::GetQString(*m_copyrightTextAttrPtr));

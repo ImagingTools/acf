@@ -181,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComposedLoaderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInstantiatorComp.cpp"
 				>
 			</File>
@@ -215,6 +219,10 @@
 			>
 			<File
 				RelativePath="..\CApplicationInfoComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CComposedLoaderComp.h"
 				>
 			</File>
 			<File

@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<QtPck::SplashScreen> splashScreenGui;
 	splashScreenGui.SetStringAttr("ImagePath", "../../Docs/Images/CompositorSplashScreen.png");
+	splashScreenGui.SetStringAttr("ProductName", "");
 	splashScreenGui.SetStringAttr("ProductType", "ACF Tool");
 	splashScreenGui.SetStringAttr("CopyrightText", "This is a part of ACF project.\nSee 'licence.txt' for copyright informations");
 	splashScreenGui.SetRef("ApplicationInfo", &applicationInfo);
