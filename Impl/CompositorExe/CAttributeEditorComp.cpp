@@ -663,6 +663,8 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 
 		QString newValue = editor->property("text").toString();
 		attributeInfoPtr->exportId = newValue.toStdString();
+
+		return;
 	}
 
 	if (!attributeInfoPtr->attributePtr.IsValid()){
