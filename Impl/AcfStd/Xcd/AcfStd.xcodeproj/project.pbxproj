@@ -485,6 +485,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "acfstd" */;
 			buildPhases = (
+				EA99670B0F01B65100FEFB5A /* ShellScript */,
 				D2AAC043055464E500DB518D /* Headers */,
 				D2AAC044055464E500DB518D /* Sources */,
 				D289987405E68DCB004EDB86 /* Frameworks */,
@@ -678,6 +679,26 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA99670B0F01B65100FEFB5A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				../../../Include/isvn/AcfVersion.txt,
+				../../../Include/isvn/VersionInfoTemplate.xml,
+			);
+			outputPaths = (
+				../../../Include/isvn/Generated/AcfVersion.h,
+				../../../Partitura/AcfVoce.arp/,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp ../../../Impl/Fix/AcfVersion.h ../../../Include/isvn/Generated/\ncp ../../../Impl/Fix/VersionInfo.arx ../../../Partitura/AcfVoce.arp/\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2AAC044055464E500DB518D /* Sources */ = {

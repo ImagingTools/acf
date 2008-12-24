@@ -17,6 +17,7 @@
 				EA668A4C0EF2EDB8006C46C0 /* PBXTargetDependency */,
 				EA668A4E0EF2EDB8006C46C0 /* PBXTargetDependency */,
 				EA668A500EF2EDB8006C46C0 /* PBXTargetDependency */,
+				EA92169A0EF6686B00375177 /* PBXTargetDependency */,
 			);
 			name = AcfAll;
 			productName = AcfAll;
@@ -80,6 +81,20 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = Acf;
 		};
+		EA9216970EF6685300375177 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA9216900EF6685300375177 /* izlib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = izlib;
+		};
+		EA9216990EF6686B00375177 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA9216900EF6685300375177 /* izlib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = izlib;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +102,7 @@
 		EA6689D40EF2ED4E006C46C0 /* BasePck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BasePck.xcodeproj; path = ../BasePck/Xcd/BasePck.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA668A170EF2ED5B006C46C0 /* Compositor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Compositor.xcodeproj; path = ../CompositorExe/Xcd/Compositor.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA668A3A0EF2ED73006C46C0 /* QtPck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QtPck.xcodeproj; path = ../QtPck/Xcd/QtPck.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA9216900EF6685300375177 /* izlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = izlib.xcodeproj; path = ../../Include/izlib/Xcd/izlib.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -97,6 +113,7 @@
 				EA668A170EF2ED5B006C46C0 /* Compositor.xcodeproj */,
 				EA6689D40EF2ED4E006C46C0 /* BasePck.xcodeproj */,
 				EA6689CA0EF2ED29006C46C0 /* Acf.xcodeproj */,
+				EA9216900EF6685300375177 /* izlib.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +149,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EA9216910EF6685300375177 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA9216980EF6685300375177 /* libizlib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXProject section */
@@ -154,6 +179,10 @@
 				{
 					ProductGroup = EA668A180EF2ED5B006C46C0 /* Products */;
 					ProjectRef = EA668A170EF2ED5B006C46C0 /* Compositor.xcodeproj */;
+				},
+				{
+					ProductGroup = EA9216910EF6685300375177 /* Products */;
+					ProjectRef = EA9216900EF6685300375177 /* izlib.xcodeproj */;
 				},
 				{
 					ProductGroup = EA668A3B0EF2ED73006C46C0 /* Products */;
@@ -196,6 +225,13 @@
 			remoteRef = EA668A430EF2ED73006C46C0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		EA9216980EF6685300375177 /* libizlib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libizlib.a;
+			remoteRef = EA9216970EF6685300375177 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXTargetDependency section */
@@ -218,6 +254,11 @@
 			isa = PBXTargetDependency;
 			name = Acf;
 			targetProxy = EA668A4F0EF2EDB8006C46C0 /* PBXContainerItemProxy */;
+		};
+		EA92169A0EF6686B00375177 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = izlib;
+			targetProxy = EA9216990EF6686B00375177 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

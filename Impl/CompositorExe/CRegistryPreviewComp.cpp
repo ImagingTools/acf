@@ -85,7 +85,7 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 	}
 
 	if (retVal){
-		static QString acfExeFile = "Acf.exe";
+		static QString acfExeFile = "Acf";
 
 		QDir applicationDir(QCoreApplication::applicationDirPath());
 		QString acfApplicationPath = applicationDir.absoluteFilePath(acfExeFile);
