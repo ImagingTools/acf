@@ -51,6 +51,41 @@
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iqt;
 		};
+		EABF77AB0F06DEB900119803 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtgui */;
+			remoteInfo = iqtgui;
+		};
+		EABF77AD0F06DEB900119803 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqt2d */;
+			remoteInfo = iqt2d;
+		};
+		EABF77AF0F06DEB900119803 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtdoc */;
+			remoteInfo = iqtdoc;
+		};
+		EABF77B10F06DEB900119803 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtprm */;
+			remoteInfo = iqtprm;
+		};
+		EABF77B30F06DEB900119803 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5A97C10EEC337100FD019A /* iqt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqt */;
+			remoteInfo = iqt;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -202,7 +237,7 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* acfqt */ = {
+		D2AAC045055464E500DB518D /* iqt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "acfqt" */;
 			buildPhases = (
@@ -214,6 +249,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				EABF77AC0F06DEB900119803 /* PBXTargetDependency */,
+				EABF77AE0F06DEB900119803 /* PBXTargetDependency */,
+				EABF77B00F06DEB900119803 /* PBXTargetDependency */,
+				EABF77B20F06DEB900119803 /* PBXTargetDependency */,
+				EABF77B40F06DEB900119803 /* PBXTargetDependency */,
 			);
 			name = acfqt;
 			productName = acfqt;
@@ -254,7 +294,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* acfqt */,
+				D2AAC045055464E500DB518D /* iqt */,
 			);
 		};
 /* End PBXProject section */
@@ -324,6 +364,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EABF77AC0F06DEB900119803 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqtgui;
+			targetProxy = EABF77AB0F06DEB900119803 /* PBXContainerItemProxy */;
+		};
+		EABF77AE0F06DEB900119803 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqt2d;
+			targetProxy = EABF77AD0F06DEB900119803 /* PBXContainerItemProxy */;
+		};
+		EABF77B00F06DEB900119803 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqtdoc;
+			targetProxy = EABF77AF0F06DEB900119803 /* PBXContainerItemProxy */;
+		};
+		EABF77B20F06DEB900119803 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqtprm;
+			targetProxy = EABF77B10F06DEB900119803 /* PBXContainerItemProxy */;
+		};
+		EABF77B40F06DEB900119803 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iqt;
+			targetProxy = EABF77B30F06DEB900119803 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
