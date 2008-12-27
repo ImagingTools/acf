@@ -7,6 +7,7 @@
 
 	<xsl:param name = "SourcePath">..</xsl:param>
 	<xsl:param name = "ExtraIncludes"></xsl:param>
+	<xsl:param name = "SpecialCharReplace" select = "'{}/'"/>
 
 	<xsl:template match = "*">
 		<xsl:apply-templates/>
@@ -61,7 +62,7 @@
 											<xsl:call-template name = "ParsePathList">
 												<xsl:with-param name = "ToParse" select="$ExtraIncludes"/>
 											</xsl:call-template>
-											<xsl:apply-templates mode ="IncludePath" select="Configurations/Configuration[2]"/>
+											<xsl:apply-templates mode ="IncludePathEnv" select="Configurations/Configuration[2]"/>
 										</option>
 										<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.680789169" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 									</tool>
@@ -548,7 +549,7 @@
 											<xsl:call-template name = "ParsePathList">
 												<xsl:with-param name = "ToParse" select="$ExtraIncludes"/>
 											</xsl:call-template>
-											<xsl:apply-templates mode ="IncludePath" select="Configurations/Configuration[1]"/>
+											<xsl:apply-templates mode ="IncludePathEnv" select="Configurations/Configuration[1]"/>
 										</option>
 										<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.882795384" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 									</tool>

@@ -5,6 +5,8 @@
 	<xsl:output method = "xml" indent="yes" encoding="utf-8"/>
 	<xsl:strip-space elements="*"/>
 
+	<xsl:param name = "SpecialCharReplace" select = "'{}/'"/>
+
 	<xsl:template match = "*">
 		<xsl:apply-templates/>
 	</xsl:template>

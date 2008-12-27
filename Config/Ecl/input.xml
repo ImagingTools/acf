@@ -392,11 +392,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CDirList.cpp"
+				RelativePath="..\Generated\moc_CDirList.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CFileList.cpp"
+				RelativePath="..\Generated\moc_CFileList.cpp"
 				>
 			</File>
 		</Filter>
