@@ -6,6 +6,7 @@
 	<xsl:strip-space elements="*"/>
 
 	<xsl:param name = "ExtraIncludes"></xsl:param>
+	<xsl:param name = "SpecialCharReplace" select = "'{}/'"/>
 
 	<xsl:template match = "*">
 		<xsl:param name = "UserParam" select="''"/>
@@ -522,11 +523,9 @@
 	<xsl:template name = "InsertValue">
 		<xsl:param name="Path"/>
 
-		<xsl:if test="not(contains($Path, 'QTDIR'))">
-			<xsl:text>					</xsl:text>
-			<xsl:value-of select="$Path"/>
-			<xsl:text>,
+		<xsl:text>					</xsl:text>
+		<xsl:value-of select="$Path"/>
+		<xsl:text>,
 </xsl:text>
-		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

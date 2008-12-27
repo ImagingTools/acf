@@ -2,13 +2,24 @@
 <xsl:stylesheet xmlns:xsl = "http://www.w3.org/1999/XSL/Transform" version = "1.0" >
 	<xsl:param name = "SourcePath">..</xsl:param>
 	<xsl:param name = "CompilerCode"/>
+	<xsl:param name = "SpecialCharReplace"/>
 
 	<xsl:template match = "Tool" mode="IncludePath">
 		<xsl:param name = "UserParam" select="''"/>
 
 		<xsl:call-template name = "ParsePathList">
 			<xsl:with-param name = "ToParse" select="@AdditionalIncludeDirectories"/>
-			<xsl:with-param name = "Mode" select="'EnvOnly'"/>
+			<xsl:with-param name = "Mode" select="'IncludePath'"/>
+			<xsl:with-param name = "UserParam" select="$UserParam"/>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match = "Tool" mode="IncludePathEnv">
+		<xsl:param name = "UserParam" select="''"/>
+
+		<xsl:call-template name = "ParsePathList">
+			<xsl:with-param name = "ToParse" select="@AdditionalIncludeDirectories"/>
+			<xsl:with-param name = "Mode" select="'IncludePathEnv'"/>
 			<xsl:with-param name = "UserParam" select="$UserParam"/>
 		</xsl:call-template>
 	</xsl:template>
@@ -18,7 +29,7 @@
 
 		<xsl:call-template name = "ParsePathList">
 			<xsl:with-param name = "ToParse" select="@AdditionalLibraryDirectories"/>
-			<xsl:with-param name = "Mode" select="'EnvOnly'"/>
+			<xsl:with-param name = "Mode" select="'LinkerPath'"/>
 			<xsl:with-param name = "UserParam" select="$UserParam"/>
 		</xsl:call-template>
 	</xsl:template>
@@ -35,7 +46,6 @@
 	</xsl:template>
 
 	<xsl:template name = "ParsePathList">
-		<!--Three modes are supported: 'Normal', 'EnvOnly' and 'Lib'-->
 		<xsl:param name = "ToParse"/>
 		<xsl:param name = "Mode" select="'Normal'"/>
 		<xsl:param name = "Separator" select="';'"/>
@@ -78,29 +88,31 @@
 				<xsl:when test = "$Mode='Lib'">
 					<xsl:choose>
 						<xsl:when test="contains($ToInsert, '.lib')">
-							<xsl:value-of select="translate(substring-before($ToInsert, '.lib'), '()\', '{}/')"/>
+							<xsl:value-of select="translate(substring-before($ToInsert, '.lib'), '()\', $SpecialCharReplace)"/>
 						</xsl:when>
 						<xsl:when test="contains($ToInsert, '.dll')">
-							<xsl:value-of select="translate(concat('lib', substring-before($ToInsert, '.lib'), '.prl'), '()\', '{}/')"/>
+							<xsl:value-of select="translate(concat('lib', substring-before($ToInsert, '.lib'), '.prl'), '()\', $SpecialCharReplace)"/>
 						</xsl:when>
 					</xsl:choose>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:choose>
 						<xsl:when test="contains($ToInsert, 'VC8')">
-							<xsl:value-of select="translate(concat(substring-before($ToInsert, 'VC8'), $CompilerCode ,substring-after($ToInsert, 'VC8')), '()\', '{}/')"/>
+							<xsl:value-of select="translate(concat(substring-before($ToInsert, 'VC8'), $CompilerCode ,substring-after($ToInsert, 'VC8')), '()\', $SpecialCharReplace)"/>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="translate($ToInsert, '()\', '{}/')"/>
+							<xsl:value-of select="translate($ToInsert, '()\', $SpecialCharReplace)"/>
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
 
-		<xsl:if test="(string-length($CorrectedPath) > 0) and ($Mode!='EnvOnly' or contains($CorrectedPath, '$'))">
+		<xsl:if test="(string-length($CorrectedPath) > 0) and ($Mode!='IncludePathEnv' or contains($CorrectedPath, '$'))">
 			<xsl:call-template name = "InsertValue">
 				<xsl:with-param name = "Path" select="$CorrectedPath"/>
+				<xsl:with-param name = "Mode" select="$Mode"/>
+				<xsl:with-param name = "UserParam" select="$UserParam"/>
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
