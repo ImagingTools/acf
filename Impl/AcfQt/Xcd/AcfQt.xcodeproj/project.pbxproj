@@ -8,82 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* Empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* Empty.cpp */; };
-		EA6646C00EED332A006773C7 /* libiqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5A97C90EEC337100FD019A /* libiqt.a */; };
-		EA6646C10EED332B006773C7 /* libiqt2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5A97D20EEC338100FD019A /* libiqt2d.a */; };
-		EA6646C20EED332C006773C7 /* libiqtdoc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5A97DB0EEC339200FD019A /* libiqtdoc.a */; };
-		EA6646C30EED332C006773C7 /* libiqtgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5A97E40EEC33A100FD019A /* libiqtgui.a */; };
-		EA6646C40EED332D006773C7 /* libiqtprm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5A97ED0EEC33BB00FD019A /* libiqtprm.a */; };
+		EA99CB890F045128003471A1 /* libiqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99C5FF0F044DDC003471A1 /* libiqt.a */; };
+		EA99CB8A0F045128003471A1 /* libiqt2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99C5F70F044DD1003471A1 /* libiqt2d.a */; };
+		EA99CB8B0F045129003471A1 /* libiqtdoc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99C5EF0F044DCA003471A1 /* libiqtdoc.a */; };
+		EA99CB8C0F04512A003471A1 /* libiqtgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99C5E70F044DC4003471A1 /* libiqtgui.a */; };
+		EA99CB8D0F04512A003471A1 /* libiqtprm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99C5DF0F044DBB003471A1 /* libiqtprm.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA5A97C80EEC337100FD019A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA5A97C10EEC337100FD019A /* iqt.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = iqt;
-		};
-		EA5A97D10EEC338100FD019A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = iqt2d;
-		};
-		EA5A97DA0EEC339200FD019A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = iqtdoc;
-		};
-		EA5A97E30EEC33A100FD019A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = iqtgui;
-		};
-		EA5A97EC0EEC33BB00FD019A /* PBXContainerItemProxy */ = {
+		EA99C5DE0F044DBB003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iqtprm;
 		};
-		EA5A97EE0EEC33D500FD019A /* PBXContainerItemProxy */ = {
+		EA99C5E60F044DC4003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iqtgui;
 		};
-		EA5A97F00EEC33D500FD019A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = iqt2d;
-		};
-		EA5A97F20EEC33D500FD019A /* PBXContainerItemProxy */ = {
+		EA99C5EE0F044DCA003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iqtdoc;
 		};
-		EA5A97F40EEC33D500FD019A /* PBXContainerItemProxy */ = {
+		EA99C5F60F044DD1003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = iqtprm;
+			containerPortal = EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = iqt2d;
 		};
-		EA5A97F60EEC33D500FD019A /* PBXContainerItemProxy */ = {
+		EA99C5FE0F044DDC003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97C10EEC337100FD019A /* iqt.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = iqt;
 		};
 /* End PBXContainerItemProxy section */
@@ -91,11 +56,11 @@
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* Empty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Empty.cpp; path = ../Empty.cpp; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libacfqt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libacfqt.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA5A97C10EEC337100FD019A /* iqt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqt.xcodeproj; path = ../../../Include/iqt/Xcd/iqt.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqt2d.xcodeproj; path = ../../../Include/iqt2d/Xcd/iqt2d.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtdoc.xcodeproj; path = ../../../Include/iqtdoc/Xcd/iqtdoc.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtgui.xcodeproj; path = ../../../Include/iqtgui/Xcd/iqtgui.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtprm.xcodeproj; path = ../../../Include/iqtprm/Xcd/iqtprm.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA5A97C10EEC337100FD019A /* iqt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqt.xcodeproj; path = Include/iqt/Xcd/iqt.xcodeproj; sourceTree = ACFDIR; };
+		EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqt2d.xcodeproj; path = Include/iqt2d/Xcd/iqt2d.xcodeproj; sourceTree = ACFDIR; };
+		EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtdoc.xcodeproj; path = Include/iqtdoc/Xcd/iqtdoc.xcodeproj; sourceTree = ACFDIR; };
+		EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtgui.xcodeproj; path = Include/iqtgui/Xcd/iqtgui.xcodeproj; sourceTree = ACFDIR; };
+		EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iqtprm.xcodeproj; path = Include/iqtprm/Xcd/iqtprm.xcodeproj; sourceTree = ACFDIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,11 +68,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA6646C00EED332A006773C7 /* libiqt.a in Frameworks */,
-				EA6646C10EED332B006773C7 /* libiqt2d.a in Frameworks */,
-				EA6646C20EED332C006773C7 /* libiqtdoc.a in Frameworks */,
-				EA6646C30EED332C006773C7 /* libiqtgui.a in Frameworks */,
-				EA6646C40EED332D006773C7 /* libiqtprm.a in Frameworks */,
+				EA99CB890F045128003471A1 /* libiqt.a in Frameworks */,
+				EA99CB8A0F045128003471A1 /* libiqt2d.a in Frameworks */,
+				EA99CB8B0F045129003471A1 /* libiqtdoc.a in Frameworks */,
+				EA99CB8C0F04512A003471A1 /* libiqtgui.a in Frameworks */,
+				EA99CB8D0F04512A003471A1 /* libiqtprm.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,46 +121,6 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA5A97C20EEC337100FD019A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA5A97C90EEC337100FD019A /* libiqt.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EA5A97CB0EEC338100FD019A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA5A97D20EEC338100FD019A /* libiqt2d.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EA5A97D40EEC339200FD019A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA5A97DB0EEC339200FD019A /* libiqtdoc.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EA5A97DD0EEC33A100FD019A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA5A97E40EEC33A100FD019A /* libiqtgui.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EA5A97E60EEC33BB00FD019A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA5A97ED0EEC33BB00FD019A /* libiqtprm.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +140,46 @@
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA99C5DB0F044DBB003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99C5DF0F044DBB003471A1 /* libiqtprm.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99C5E30F044DC4003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99C5E70F044DC4003471A1 /* libiqtgui.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99C5EB0F044DCA003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99C5EF0F044DCA003471A1 /* libiqtdoc.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99C5F30F044DD1003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99C5F70F044DD1003471A1 /* libiqt2d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99C5FB0F044DDC003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99C5FF0F044DDC003471A1 /* libiqt.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -249,11 +214,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA5A97EF0EEC33D500FD019A /* PBXTargetDependency */,
-				EA5A97F10EEC33D500FD019A /* PBXTargetDependency */,
-				EA5A97F30EEC33D500FD019A /* PBXTargetDependency */,
-				EA5A97F50EEC33D500FD019A /* PBXTargetDependency */,
-				EA5A97F70EEC33D500FD019A /* PBXTargetDependency */,
 			);
 			name = acfqt;
 			productName = acfqt;
@@ -272,23 +232,23 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA5A97C20EEC337100FD019A /* Products */;
+					ProductGroup = EA99C5FB0F044DDC003471A1 /* Products */;
 					ProjectRef = EA5A97C10EEC337100FD019A /* iqt.xcodeproj */;
 				},
 				{
-					ProductGroup = EA5A97CB0EEC338100FD019A /* Products */;
+					ProductGroup = EA99C5F30F044DD1003471A1 /* Products */;
 					ProjectRef = EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */;
 				},
 				{
-					ProductGroup = EA5A97D40EEC339200FD019A /* Products */;
+					ProductGroup = EA99C5EB0F044DCA003471A1 /* Products */;
 					ProjectRef = EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */;
 				},
 				{
-					ProductGroup = EA5A97DD0EEC33A100FD019A /* Products */;
+					ProductGroup = EA99C5E30F044DC4003471A1 /* Products */;
 					ProjectRef = EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */;
 				},
 				{
-					ProductGroup = EA5A97E60EEC33BB00FD019A /* Products */;
+					ProductGroup = EA99C5DB0F044DBB003471A1 /* Products */;
 					ProjectRef = EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */;
 				},
 			);
@@ -300,39 +260,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA5A97C90EEC337100FD019A /* libiqt.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libiqt.a;
-			remoteRef = EA5A97C80EEC337100FD019A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EA5A97D20EEC338100FD019A /* libiqt2d.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libiqt2d.a;
-			remoteRef = EA5A97D10EEC338100FD019A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EA5A97DB0EEC339200FD019A /* libiqtdoc.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libiqtdoc.a;
-			remoteRef = EA5A97DA0EEC339200FD019A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EA5A97E40EEC33A100FD019A /* libiqtgui.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libiqtgui.a;
-			remoteRef = EA5A97E30EEC33A100FD019A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EA5A97ED0EEC33BB00FD019A /* libiqtprm.a */ = {
+		EA99C5DF0F044DBB003471A1 /* libiqtprm.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libiqtprm.a;
-			remoteRef = EA5A97EC0EEC33BB00FD019A /* PBXContainerItemProxy */;
+			remoteRef = EA99C5DE0F044DBB003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA99C5E70F044DC4003471A1 /* libiqtgui.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiqtgui.a;
+			remoteRef = EA99C5E60F044DC4003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA99C5EF0F044DCA003471A1 /* libiqtdoc.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiqtdoc.a;
+			remoteRef = EA99C5EE0F044DCA003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA99C5F70F044DD1003471A1 /* libiqt2d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiqt2d.a;
+			remoteRef = EA99C5F60F044DD1003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA99C5FF0F044DDC003471A1 /* libiqt.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libiqt.a;
+			remoteRef = EA99C5FE0F044DDC003471A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -364,34 +324,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		EA5A97EF0EEC33D500FD019A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iqtgui;
-			targetProxy = EA5A97EE0EEC33D500FD019A /* PBXContainerItemProxy */;
-		};
-		EA5A97F10EEC33D500FD019A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iqt2d;
-			targetProxy = EA5A97F00EEC33D500FD019A /* PBXContainerItemProxy */;
-		};
-		EA5A97F30EEC33D500FD019A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iqtdoc;
-			targetProxy = EA5A97F20EEC33D500FD019A /* PBXContainerItemProxy */;
-		};
-		EA5A97F50EEC33D500FD019A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iqtprm;
-			targetProxy = EA5A97F40EEC33D500FD019A /* PBXContainerItemProxy */;
-		};
-		EA5A97F70EEC33D500FD019A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iqt;
-			targetProxy = EA5A97F60EEC33D500FD019A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {

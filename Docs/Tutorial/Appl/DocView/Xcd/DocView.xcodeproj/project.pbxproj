@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* CTextEditorComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* CTextEditorComp.cpp */; };
 		223456800ED2E572006EC826 /* CTextEditorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CTextEditorComp.h */; };
-		223456810ED2E572006EC826 /* CTextEditorComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CTextEditorComp.moc */; };
-		223456820ED2E572006EC826 /* moc_CTextEditorComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* moc_CTextEditorComp.cpp */; };
+		223456820ED2E572006EC826 /* moc_CTextEditorComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* moc_CTextEditorComp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,14 +45,6 @@
 			name = docview;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* CTextEditorComp.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,18 +53,19 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libdocview.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -92,12 +84,19 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libdocview.a */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* CTextEditorComp.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +136,7 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "docview" */;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "DocView" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* docview */;
@@ -184,16 +183,29 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CONFIGURATION_BUILD_DIR = "../../../../../Lib/$(CONFIGURATION)Xcd/Tutorial";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "${QTDIR}/lib";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../../Include,
+					../../../../../Impl,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = docview;
 				ZERO_LINK = YES;
@@ -203,13 +215,26 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CONFIGURATION_BUILD_DIR = "../../../../../Lib/$(CONFIGURATION)Xcd/Tutorial";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "${QTDIR}/lib";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../../Include,
+					../../../../../Impl,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = docview;
 			};
@@ -226,12 +251,12 @@
 					../../../../../Include,
 					../../../../../Impl,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					"${ACFDIR}/Include",
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -253,12 +278,12 @@
 					../../../../../Include,
 					../../../../../Impl,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
-					"${ACFDIR}/Include",
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -277,7 +302,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "docview" */ = {
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "DocView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,

@@ -10,10 +10,10 @@
         Application
       </ComponentName>
       <X>
-        -155
+        -154
       </X>
       <X>
-        -122
+        -121
       </X>
     </Element>
     <Element>
@@ -54,7 +54,7 @@
         Info
       </ComponentName>
       <X>
-        -383
+        -382
       </X>
       <X>
         10
@@ -68,7 +68,7 @@
         100
       </X>
       <X>
-        -121
+        -120
       </X>
     </Element>
     <Element>
@@ -76,7 +76,7 @@
         Splash
       </ComponentName>
       <X>
-        -134
+        -133
       </X>
       <X>
         12
@@ -101,7 +101,7 @@
         287
       </X>
       <X>
-        -121
+        -120
       </X>
     </Element>
   </PositionMap>

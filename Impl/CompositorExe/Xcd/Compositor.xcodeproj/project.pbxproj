@@ -13,16 +13,10 @@
 		EA283C310EF00E830044F226 /* moc_CRegistryPreviewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA283C290EF00E830044F226 /* moc_CRegistryPreviewComp.cpp */; };
 		EA283C320EF00E830044F226 /* moc_CRegistryViewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA283C2A0EF00E830044F226 /* moc_CRegistryViewComp.cpp */; };
 		EA283C330EF00E830044F226 /* qrc_Compositor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA283C2B0EF00E830044F226 /* qrc_Compositor.cpp */; };
-		EA2842DE0EF027170044F226 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2842D10EF026D50044F226 /* libacfstd.a */; };
-		EA2842DF0EF027190044F226 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA2842DD0EF026EE0044F226 /* libacfqt.a */; };
 		EA6647B70EED496B006773C7 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647A60EED496B006773C7 /* QtCore.framework */; };
 		EA6647BB0EED496B006773C7 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647AA0EED496B006773C7 /* QtGui.framework */; };
-		EA6647BC0EED496B006773C7 /* QtHelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647AB0EED496B006773C7 /* QtHelp.framework */; };
 		EA6647BD0EED496B006773C7 /* QtNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647AC0EED496B006773C7 /* QtNetwork.framework */; };
-		EA6647BE0EED496B006773C7 /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647AD0EED496B006773C7 /* QtOpenGL.framework */; };
 		EA6647BF0EED496B006773C7 /* QtScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647AE0EED496B006773C7 /* QtScript.framework */; };
-		EA6647C00EED496B006773C7 /* QtSql.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647AF0EED496B006773C7 /* QtSql.framework */; };
-		EA6647C10EED496B006773C7 /* QtSvg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647B00EED496B006773C7 /* QtSvg.framework */; };
 		EA6647C40EED496B006773C7 /* QtXml.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6647B30EED496B006773C7 /* QtXml.framework */; };
 		EA9968820F026A6700FEFB5A /* CAttributeEditorComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9968760F026A6700FEFB5A /* CAttributeEditorComp.cpp */; };
 		EA9968830F026A6700FEFB5A /* CComponentView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9968770F026A6700FEFB5A /* CComponentView.cpp */; };
@@ -37,31 +31,33 @@
 		EA99688C0F026A6700FEFB5A /* CComponentConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9968800F026A6700FEFB5A /* CComponentConnector.cpp */; };
 		EA99688D0F026A6700FEFB5A /* CRegistryView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9968810F026A6700FEFB5A /* CRegistryView.cpp */; };
 		EA9968910F02730900FEFB5A /* moc_CRegistryView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9968900F02730900FEFB5A /* moc_CRegistryView.cpp */; };
+		EA99CB920F04514D003471A1 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99CB150F0450A8003471A1 /* libacfstd.a */; };
+		EA99CB930F045151003471A1 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99CB220F0450AF003471A1 /* libacfqt.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA2842D00EF026D50044F226 /* PBXContainerItemProxy */ = {
+		EA99CB140F0450A8003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA2842CC0EF026D50044F226 /* AcfStd.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = acfstd;
 		};
-		EA2842DC0EF026EE0044F226 /* PBXContainerItemProxy */ = {
+		EA99CB210F0450AF003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA2842D80EF026EE0044F226 /* AcfQt.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = acfqt;
 		};
-		EA668A7A0EF2F1C5006C46C0 /* PBXContainerItemProxy */ = {
+		EA99CB230F0450CC003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA2842D80EF026EE0044F226 /* AcfQt.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = acfqt;
 		};
-		EA668A7C0EF2F1C5006C46C0 /* PBXContainerItemProxy */ = {
+		EA99CB250F0450CC003471A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA2842CC0EF026D50044F226 /* AcfStd.xcodeproj */;
 			proxyType = 1;
@@ -87,26 +83,14 @@
 		EA283C2B0EF00E830044F226 /* qrc_Compositor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_Compositor.cpp; path = ../Generated/qrc_Compositor.cpp; sourceTree = SOURCE_ROOT; };
 		EA283C2C0EF00E830044F226 /* ui_CAttributeEditorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui_CAttributeEditorComp.h; path = ../Generated/ui_CAttributeEditorComp.h; sourceTree = SOURCE_ROOT; };
 		EA283C2D0EF00E830044F226 /* ui_CPackageOverviewComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ui_CPackageOverviewComp.h; path = ../Generated/ui_CPackageOverviewComp.h; sourceTree = SOURCE_ROOT; };
-		EA2842CC0EF026D50044F226 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA2842D80EF026EE0044F226 /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = ../../AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA2842CC0EF026D50044F226 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = ACFDIR; };
+		EA2842D80EF026EE0044F226 /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = Impl/AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = ACFDIR; };
 		EA5A98680EEC34FD00FD019A /* Compositor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Compositor; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA6647A40EED496B006773C7 /* Qt3Support.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Qt3Support.framework; path = /Library/Frameworks/Qt3Support.framework; sourceTree = "<absolute>"; };
-		EA6647A50EED496B006773C7 /* QtAssistant.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtAssistant.framework; path = /Library/Frameworks/QtAssistant.framework; sourceTree = "<absolute>"; };
-		EA6647A60EED496B006773C7 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Library/Frameworks/QtCore.framework; sourceTree = "<absolute>"; };
-		EA6647A70EED496B006773C7 /* QtDBus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtDBus.framework; path = /Library/Frameworks/QtDBus.framework; sourceTree = "<absolute>"; };
-		EA6647A80EED496B006773C7 /* QtDesigner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtDesigner.framework; path = /Library/Frameworks/QtDesigner.framework; sourceTree = "<absolute>"; };
-		EA6647A90EED496B006773C7 /* QtDesignerComponents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtDesignerComponents.framework; path = /Library/Frameworks/QtDesignerComponents.framework; sourceTree = "<absolute>"; };
-		EA6647AA0EED496B006773C7 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Library/Frameworks/QtGui.framework; sourceTree = "<absolute>"; };
-		EA6647AB0EED496B006773C7 /* QtHelp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtHelp.framework; path = /Library/Frameworks/QtHelp.framework; sourceTree = "<absolute>"; };
-		EA6647AC0EED496B006773C7 /* QtNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtNetwork.framework; path = /Library/Frameworks/QtNetwork.framework; sourceTree = "<absolute>"; };
-		EA6647AD0EED496B006773C7 /* QtOpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtOpenGL.framework; path = /Library/Frameworks/QtOpenGL.framework; sourceTree = "<absolute>"; };
-		EA6647AE0EED496B006773C7 /* QtScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtScript.framework; path = /Library/Frameworks/QtScript.framework; sourceTree = "<absolute>"; };
-		EA6647AF0EED496B006773C7 /* QtSql.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtSql.framework; path = /Library/Frameworks/QtSql.framework; sourceTree = "<absolute>"; };
-		EA6647B00EED496B006773C7 /* QtSvg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtSvg.framework; path = /Library/Frameworks/QtSvg.framework; sourceTree = "<absolute>"; };
-		EA6647B10EED496B006773C7 /* QtTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtTest.framework; path = /Library/Frameworks/QtTest.framework; sourceTree = "<absolute>"; };
-		EA6647B20EED496B006773C7 /* QtWebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWebKit.framework; path = /Library/Frameworks/QtWebKit.framework; sourceTree = "<absolute>"; };
-		EA6647B30EED496B006773C7 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = /Library/Frameworks/QtXml.framework; sourceTree = "<absolute>"; };
-		EA6647B40EED496B006773C7 /* QtXmlPatterns.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXmlPatterns.framework; path = /Library/Frameworks/QtXmlPatterns.framework; sourceTree = "<absolute>"; };
+		EA6647A60EED496B006773C7 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = lib/QtCore.framework; sourceTree = QTDIR; };
+		EA6647AA0EED496B006773C7 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = lib/QtGui.framework; sourceTree = QTDIR; };
+		EA6647AC0EED496B006773C7 /* QtNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtNetwork.framework; path = lib/QtNetwork.framework; sourceTree = QTDIR; };
+		EA6647AE0EED496B006773C7 /* QtScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtScript.framework; path = lib/QtScript.framework; sourceTree = QTDIR; };
+		EA6647B30EED496B006773C7 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = lib/QtXml.framework; sourceTree = QTDIR; };
 		EA9968670F026A2D00FEFB5A /* CRegistryPreviewComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRegistryPreviewComp.h; path = ../CRegistryPreviewComp.h; sourceTree = SOURCE_ROOT; };
 		EA9968680F026A2D00FEFB5A /* CComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CComponentView.h; path = ../CComponentView.h; sourceTree = SOURCE_ROOT; };
 		EA9968690F026A2D00FEFB5A /* IRegistryPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRegistryPreview.h; path = ../IRegistryPreview.h; sourceTree = SOURCE_ROOT; };
@@ -143,15 +127,11 @@
 			files = (
 				EA6647B70EED496B006773C7 /* QtCore.framework in Frameworks */,
 				EA6647BB0EED496B006773C7 /* QtGui.framework in Frameworks */,
-				EA6647BC0EED496B006773C7 /* QtHelp.framework in Frameworks */,
 				EA6647BD0EED496B006773C7 /* QtNetwork.framework in Frameworks */,
-				EA6647BE0EED496B006773C7 /* QtOpenGL.framework in Frameworks */,
 				EA6647BF0EED496B006773C7 /* QtScript.framework in Frameworks */,
-				EA6647C00EED496B006773C7 /* QtSql.framework in Frameworks */,
-				EA6647C10EED496B006773C7 /* QtSvg.framework in Frameworks */,
 				EA6647C40EED496B006773C7 /* QtXml.framework in Frameworks */,
-				EA2842DE0EF027170044F226 /* libacfstd.a in Frameworks */,
-				EA2842DF0EF027190044F226 /* libacfqt.a in Frameworks */,
+				EA99CB920F04514D003471A1 /* libacfstd.a in Frameworks */,
+				EA99CB930F045151003471A1 /* libacfqt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,42 +191,14 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
-		EA2842CD0EF026D50044F226 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA2842D10EF026D50044F226 /* libacfstd.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EA2842D90EF026EE0044F226 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA2842DD0EF026EE0044F226 /* libacfqt.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		EA6647A10EED48A5006773C7 /* QT Libs */ = {
 			isa = PBXGroup;
 			children = (
-				EA6647A40EED496B006773C7 /* Qt3Support.framework */,
-				EA6647A50EED496B006773C7 /* QtAssistant.framework */,
 				EA6647A60EED496B006773C7 /* QtCore.framework */,
-				EA6647A70EED496B006773C7 /* QtDBus.framework */,
-				EA6647A80EED496B006773C7 /* QtDesigner.framework */,
-				EA6647A90EED496B006773C7 /* QtDesignerComponents.framework */,
 				EA6647AA0EED496B006773C7 /* QtGui.framework */,
-				EA6647AB0EED496B006773C7 /* QtHelp.framework */,
 				EA6647AC0EED496B006773C7 /* QtNetwork.framework */,
-				EA6647AD0EED496B006773C7 /* QtOpenGL.framework */,
 				EA6647AE0EED496B006773C7 /* QtScript.framework */,
-				EA6647AF0EED496B006773C7 /* QtSql.framework */,
-				EA6647B00EED496B006773C7 /* QtSvg.framework */,
-				EA6647B10EED496B006773C7 /* QtTest.framework */,
-				EA6647B20EED496B006773C7 /* QtWebKit.framework */,
 				EA6647B30EED496B006773C7 /* QtXml.framework */,
-				EA6647B40EED496B006773C7 /* QtXmlPatterns.framework */,
 			);
 			name = "QT Libs";
 			sourceTree = "<group>";
@@ -287,6 +239,22 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		EA99CB110F0450A8003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99CB150F0450A8003471A1 /* libacfstd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99CB1E0F0450AF003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99CB220F0450AF003471A1 /* libacfqt.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,8 +290,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA668A7B0EF2F1C5006C46C0 /* PBXTargetDependency */,
-				EA668A7D0EF2F1C5006C46C0 /* PBXTargetDependency */,
+				EA99CB240F0450CC003471A1 /* PBXTargetDependency */,
+				EA99CB260F0450CC003471A1 /* PBXTargetDependency */,
 			);
 			name = Compositor;
 			productName = Compositor;
@@ -342,11 +310,11 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA2842D90EF026EE0044F226 /* Products */;
+					ProductGroup = EA99CB1E0F0450AF003471A1 /* Products */;
 					ProjectRef = EA2842D80EF026EE0044F226 /* AcfQt.xcodeproj */;
 				},
 				{
-					ProductGroup = EA2842CD0EF026D50044F226 /* Products */;
+					ProductGroup = EA99CB110F0450A8003471A1 /* Products */;
 					ProjectRef = EA2842CC0EF026D50044F226 /* AcfStd.xcodeproj */;
 				},
 			);
@@ -358,18 +326,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA2842D10EF026D50044F226 /* libacfstd.a */ = {
+		EA99CB150F0450A8003471A1 /* libacfstd.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libacfstd.a;
-			remoteRef = EA2842D00EF026D50044F226 /* PBXContainerItemProxy */;
+			remoteRef = EA99CB140F0450A8003471A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA2842DD0EF026EE0044F226 /* libacfqt.a */ = {
+		EA99CB220F0450AF003471A1 /* libacfqt.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libacfqt.a;
-			remoteRef = EA2842DC0EF026EE0044F226 /* PBXContainerItemProxy */;
+			remoteRef = EA99CB210F0450AF003471A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -437,15 +405,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EA668A7B0EF2F1C5006C46C0 /* PBXTargetDependency */ = {
+		EA99CB240F0450CC003471A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = acfqt;
-			targetProxy = EA668A7A0EF2F1C5006C46C0 /* PBXContainerItemProxy */;
+			targetProxy = EA99CB230F0450CC003471A1 /* PBXContainerItemProxy */;
 		};
-		EA668A7D0EF2F1C5006C46C0 /* PBXTargetDependency */ = {
+		EA99CB260F0450CC003471A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = acfstd;
-			targetProxy = EA668A7C0EF2F1C5006C46C0 /* PBXContainerItemProxy */;
+			targetProxy = EA99CB250F0450CC003471A1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -460,11 +428,12 @@
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -485,11 +454,12 @@
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -503,6 +473,7 @@
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_EXTENSION = app;
+				FRAMEWORK_SEARCH_PATHS = "${QTDIR}/lib";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -510,11 +481,12 @@
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
@@ -540,16 +512,18 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EXECUTABLE_EXTENSION = app;
+				FRAMEWORK_SEARCH_PATHS = "${QTDIR}/lib";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (

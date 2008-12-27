@@ -616,7 +616,7 @@
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        int,bool,signed char,short,long double&lt;long,int,char,signed char,unsigned short,int&gt;
       </InterfaceId>
       <ComponentId>
         Application

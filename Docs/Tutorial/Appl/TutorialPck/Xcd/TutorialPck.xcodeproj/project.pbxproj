@@ -9,12 +9,67 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* Main.cpp */; };
 		223456800ED2E572006EC826 /* TutorialPck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* TutorialPck.h */; };
+		EA99D69F0F046494003471A1 /* libdocview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99D69E0F04648C003471A1 /* libdocview.a */; };
+		EA99D74B0F0464F5003471A1 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99D74A0F0464E6003471A1 /* libacfstd.a */; };
+		EA99D74C0F0464F6003471A1 /* libacfqt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99D6FA0F0464C9003471A1 /* libacfqt.a */; };
+		EA99D7530F046674003471A1 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99D7520F046674003471A1 /* QtCore.framework */; };
+		EA99D7550F046688003471A1 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA99D7540F046688003471A1 /* QtGui.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA99D69D0F04648C003471A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA99D67B0F0463C6003471A1 /* DocView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = docview;
+		};
+		EA99D6A00F04649B003471A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA99D67B0F0463C6003471A1 /* DocView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = docview;
+		};
+		EA99D6F90F0464C9003471A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA99D6EB0F0464C9003471A1 /* AcfQt.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = acfqt;
+		};
+		EA99D7490F0464E6003471A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA99D70B0F0464E6003471A1 /* AcfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = acfstd;
+		};
+		EA99D74D0F046501003471A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA99D6EB0F0464C9003471A1 /* AcfQt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = acfqt;
+		};
+		EA99D74F0F046501003471A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA99D70B0F0464E6003471A1 /* AcfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = acfstd;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../Main.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* TutorialPck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TutorialPck.h; path = ../TutorialPck.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* TutorialPck.arp */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = TutorialPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* TutorialPck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = TutorialPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA99D67B0F0463C6003471A1 /* DocView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DocView.xcodeproj; path = Docs/Tutorial/Appl/DocView/Xcd/DocView.xcodeproj; sourceTree = ACFDIR; };
+		EA99D6EB0F0464C9003471A1 /* AcfQt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfQt.xcodeproj; path = Impl/AcfQt/Xcd/AcfQt.xcodeproj; sourceTree = ACFDIR; };
+		EA99D70B0F0464E6003471A1 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = Impl/AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = ACFDIR; };
+		EA99D7520F046674003471A1 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = lib/QtCore.framework; sourceTree = QTDIR; };
+		EA99D7540F046688003471A1 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = lib/QtGui.framework; sourceTree = QTDIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +77,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA99D69F0F046494003471A1 /* libdocview.a in Frameworks */,
+				EA99D74B0F0464F5003471A1 /* libacfstd.a in Frameworks */,
+				EA99D74C0F0464F6003471A1 /* libacfqt.a in Frameworks */,
+				EA99D7530F046674003471A1 /* QtCore.framework in Frameworks */,
+				EA99D7550F046688003471A1 /* QtGui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +91,11 @@
 		08FB7794FE84155DC02AAC07 /* TutorialPck */ = {
 			isa = PBXGroup;
 			children = (
+				EA99D7540F046688003471A1 /* QtGui.framework */,
+				EA99D7520F046674003471A1 /* QtCore.framework */,
+				EA99D70B0F0464E6003471A1 /* AcfStd.xcodeproj */,
+				EA99D6EB0F0464C9003471A1 /* AcfQt.xcodeproj */,
+				EA99D67B0F0463C6003471A1 /* DocView.xcodeproj */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -42,14 +107,6 @@
 			name = TutorialPck;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* TutorialPck.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,18 +115,19 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* TutorialPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -86,12 +144,43 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* TutorialPck.arp */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA99D69A0F04648C003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99D69E0F04648C003471A1 /* libdocview.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99D6F60F0464C9003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99D6FA0F0464C9003471A1 /* libacfqt.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA99D7460F0464E6003471A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA99D74A0F0464E6003471A1 /* libacfstd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* TutorialPck.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +209,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				EA99D6A10F04649B003471A1 /* PBXTargetDependency */,
+				EA99D74E0F046501003471A1 /* PBXTargetDependency */,
+				EA99D7500F046501003471A1 /* PBXTargetDependency */,
 			);
 			name = TutorialPck;
 			productName = TutorialPck;
@@ -136,12 +228,50 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* TutorialPck */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA99D6F60F0464C9003471A1 /* Products */;
+					ProjectRef = EA99D6EB0F0464C9003471A1 /* AcfQt.xcodeproj */;
+				},
+				{
+					ProductGroup = EA99D7460F0464E6003471A1 /* Products */;
+					ProjectRef = EA99D70B0F0464E6003471A1 /* AcfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EA99D69A0F04648C003471A1 /* Products */;
+					ProjectRef = EA99D67B0F0463C6003471A1 /* DocView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* TutorialPck */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA99D69E0F04648C003471A1 /* libdocview.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libdocview.a;
+			remoteRef = EA99D69D0F04648C003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA99D6FA0F0464C9003471A1 /* libacfqt.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfqt.a;
+			remoteRef = EA99D6F90F0464C9003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA99D74A0F0464E6003471A1 /* libacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfstd.a;
+			remoteRef = EA99D7490F0464E6003471A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
@@ -171,20 +301,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EA99D6A10F04649B003471A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = docview;
+			targetProxy = EA99D6A00F04649B003471A1 /* PBXContainerItemProxy */;
+		};
+		EA99D74E0F046501003471A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfqt;
+			targetProxy = EA99D74D0F046501003471A1 /* PBXContainerItemProxy */;
+		};
+		EA99D7500F046501003471A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfstd;
+			targetProxy = EA99D74F0F046501003471A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
+				CONFIGURATION_BUILD_DIR = "../../../../../Bin/$(CONFIGURATION)Xcd/Tutorial";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../../Include,
+					../../../../../Impl,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = TutorialPck;
 				ZERO_LINK = YES;
@@ -194,13 +357,28 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
+				CONFIGURATION_BUILD_DIR = "../../../../../Bin/$(CONFIGURATION)Xcd/Tutorial";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+				);
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../../../Include,
+					../../../../../Impl,
+					../..,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = TutorialPck;
 			};
@@ -217,11 +395,12 @@
 					../../../../../Include,
 					../../../../../Impl,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -243,11 +422,12 @@
 					../../../../../Include,
 					../../../../../Impl,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
+					"${QTDIR}/include",
+					"${QTDIR}/include/QtCore",
+					"${QTDIR}/include/QtGui",
+					"${QTDIR}/include/QtNetwork",
+					"${QTDIR}/include/QtScript",
+					"${QTDIR}/include/QtXml",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
