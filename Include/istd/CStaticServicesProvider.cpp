@@ -5,15 +5,17 @@ namespace istd
 {
 
 
-void CStaticServicesProvider::SetParent(const IServicesProvider* parentPtr)
+void CStaticServicesProvider::InitServices(const IServicesProvider* parentPtr)
 {
-	m_parentPtr = parentPtr;
+	if (s_parentPtr == NULL){
+		s_parentPtr = parentPtr;
+	}
 }
 
 
 bool CStaticServicesProvider::RegisterService(const istd::CClassInfo& serviceId, void* servicePtr)
 {
-	std::pair<Services::iterator, bool> status = m_registeredServices.insert(std::make_pair(serviceId, servicePtr));
+	std::pair<Services::iterator, bool> status = s_registeredServices.insert(std::make_pair(serviceId, servicePtr));
 
 	return status.second;
 }
@@ -21,13 +23,13 @@ bool CStaticServicesProvider::RegisterService(const istd::CClassInfo& serviceId,
 
 void* CStaticServicesProvider::GetService(const istd::CClassInfo& serviceId)
 {
-	Services::const_iterator iter = m_registeredServices.find(serviceId);
+	Services::const_iterator iter = s_registeredServices.find(serviceId);
 
-	if (iter != m_registeredServices.end()){
+	if (iter != s_registeredServices.end()){
 		return iter->second;
 	}
-	else if(m_parentPtr != NULL){
-		return m_parentPtr->GetService(serviceId);
+	else if(s_parentPtr != NULL){
+		return s_parentPtr->GetService(serviceId);
 	}
 
 	return NULL;
@@ -36,7 +38,7 @@ void* CStaticServicesProvider::GetService(const istd::CClassInfo& serviceId)
 
 IServicesProvider& CStaticServicesProvider::GetProviderInstance()
 {
-	return m_providerInstance;
+	return s_providerInstance;
 }
 
 
@@ -52,9 +54,9 @@ void* CStaticServicesProvider::Provider::GetService(const istd::CClassInfo& serv
 
 // static attributes
 
-CStaticServicesProvider::Services CStaticServicesProvider::m_registeredServices;
-CStaticServicesProvider::Provider CStaticServicesProvider::m_providerInstance;
-const IServicesProvider* CStaticServicesProvider::m_parentPtr(NULL);
+CStaticServicesProvider::Services CStaticServicesProvider::s_registeredServices;
+CStaticServicesProvider::Provider CStaticServicesProvider::s_providerInstance;
+const IServicesProvider* CStaticServicesProvider::s_parentPtr(NULL);
 
 
 } // namespace istd

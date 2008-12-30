@@ -177,6 +177,20 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const istd::CSt
 }
 
 
+// reimplemented (icomp::CComponentBase)
+
+void CPackagesLoaderComp::OnComponentCreated()
+{
+	if (m_configFilePathAttrPtr.IsValid()){
+		QDir applicationDir = QCoreApplication::applicationDirPath();
+
+		LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath(iqt::GetQString(*m_configFilePathAttrPtr))));
+	}
+
+	BaseClass::OnComponentCreated();
+}
+
+
 // reimplemented (icomp::IRegistriesManager)
 
 const icomp::IRegistry* CPackagesLoaderComp::GetRegistry(const icomp::CComponentAddress& address) const

@@ -41,13 +41,13 @@ namespace icomp
 
 #define I_EXPORT_SERVICES_PROVIDER(serviceProvider)\
 	extern "C" I_FUNCTION_EXPORT void I_EXPORT_SERVICES_FUNCTION(const istd::IServicesProvider* parentPtr){\
-		istd::CStaticServicesProvider::SetParent(parentPtr);\
+		istd::CStaticServicesProvider::InitServices(parentPtr);\
 		serviceProvider::RegisterServices();\
 	}
 
 #define I_EXPORT_DEFAULT_SERVICES\
 	extern "C" I_FUNCTION_EXPORT void I_EXPORT_SERVICES_FUNCTION(const istd::IServicesProvider* parentPtr){\
-		istd::CStaticServicesProvider::SetParent(parentPtr);\
+		istd::CStaticServicesProvider::InitServices(parentPtr);\
 	}
 
 

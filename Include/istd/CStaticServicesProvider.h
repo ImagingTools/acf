@@ -24,7 +24,7 @@ public:
 		Set parent provider.
 		This provider will be used if this static service provider has no registered service for specified type.
 	*/
-	static void SetParent(const IServicesProvider* parentPtr);
+	static void InitServices(const IServicesProvider* parentPtr);
 	/**
 		Register service for specified ID.
 	*/
@@ -53,9 +53,9 @@ private:
 
 	typedef std::map<istd::CClassInfo, void*> Services;
 
-	static Services m_registeredServices;
-	static Provider m_providerInstance;
-	static const IServicesProvider* m_parentPtr;
+	static Services s_registeredServices;
+	static Provider s_providerInstance;
+	static const IServicesProvider* s_parentPtr;
 };
 
 

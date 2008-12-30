@@ -46,17 +46,21 @@ public:
 		MI_CANNOT_CREATE_ELEMENT
 	};
 
-	I_BEGIN_COMPONENT(CPackagesLoaderComp)
-		I_REGISTER_INTERFACE(icomp::IComponentStaticInfo)
-		I_REGISTER_INTERFACE(icomp::IRegistriesManager)
-		I_ASSIGN(m_registryLoaderCompPtr, "RegistryLoader", "Loader used to read registry", true, "RegistryLoader")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CPackagesLoaderComp);
+		I_REGISTER_INTERFACE(icomp::IComponentStaticInfo);
+		I_REGISTER_INTERFACE(icomp::IRegistriesManager);
+		I_ASSIGN(m_registryLoaderCompPtr, "RegistryLoader", "Loader used to read registry", true, "RegistryLoader");
+		I_ASSIGN(m_configFilePathAttrPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "PackagesConfig.xml");
+	I_END_COMPONENT;
 
 	bool RegisterPackageFile(const istd::CString& file);
 	bool RegisterPackagesDir(const istd::CString& subDir);
 	bool LoadConfigFile(const istd::CString& configFile);
 
 	const icomp::IRegistry* GetRegistryFromFile(const istd::CString& path) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
 
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address) const;
@@ -107,6 +111,7 @@ private:
 	mutable InvRegistriesMap m_invRegistriesMap;
 
 	I_REF(iser::IFileLoader, m_registryLoaderCompPtr);
+	I_ATTR(istd::CString, m_configFilePathAttrPtr);
 };
 
 

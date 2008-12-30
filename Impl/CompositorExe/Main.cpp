@@ -4,26 +4,15 @@
 #include <QCoreApplication>
 #include <QDir>
 
-
 // ACF includes
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
 #include "icomp/TModelCompWrap.h"
 
-#include "iser/CXmlFileReadArchive.h"
-#include "iser/CXmlFileWriteArchive.h"
-
+// ACF packages includes
 #include "QtPck/QtPck.h"
 #include "BasePck/BasePck.h"
-
-
-// Compositor includes
-#include "CRegistryModelComp.h"
-#include "CRegistryViewComp.h"
-#include "CPackageOverviewComp.h"
-#include "CAttributeEditorComp.h"
-#include "CRegistryPreviewComp.h"
-#include "CRegistryLoaderComp.h"
+#include "CmpstrPck/CmpstrPck.h"
 
 
 int main(int argc, char *argv[])
@@ -34,6 +23,7 @@ int main(int argc, char *argv[])
 	application.EnsureInitialized(argc, argv);
 
 	Q_INIT_RESOURCE(iqtgui);
+	Q_INIT_RESOURCE(icmpstr);
 
 	QApplication::setStyle("plastique");
 
@@ -59,7 +49,7 @@ int main(int argc, char *argv[])
 	splashScreenGui.SetRef("ApplicationInfo", &applicationInfo);
 	splashScreenGui.InitComponent();
 
-	icomp::TSimComponentWrap<CRegistryLoaderComp> registryLoaderComp;
+	icomp::TSimComponentWrap<CmpstrPck::RegistryLoader> registryLoaderComp;
 	registryLoaderComp.SetRef("Log", &log);
 	registryLoaderComp.InitComponent();
 
@@ -122,26 +112,26 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<BasePck::RegistryCodeSaver> codeSaverComp;
 	codeSaverComp.InitComponent();
 
-	icomp::TSimComponentWrap<CPackageOverviewComp> packageOverviewComp;
+	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;
 	packageOverviewComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
 	packageOverviewComp.InitComponent();
 
 	// attribute editor:
-	icomp::TSimComponentWrap<CAttributeEditorComp> attributeEditorComp;
+	icomp::TSimComponentWrap<CmpstrPck::AttributeEditor> attributeEditorComp;
 	attributeEditorComp.SetRef("AttributeSelectionObserver", &packageOverviewComp);
 	attributeEditorComp.InitComponent();
 
 	// registry model
-	icomp::TSimComponentsFactory<icomp::TModelCompWrap<CRegistryModelComp> > modelFactoryComp;
+	icomp::TSimComponentsFactory<CmpstrPck::RegistryModel> modelFactoryComp;
 	modelFactoryComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
 	modelFactoryComp.SetRef("Log", &log);
 
 	// registry preview
-	icomp::TSimComponentWrap<CRegistryPreviewComp> registryPreviewComp;
+	icomp::TSimComponentWrap<CmpstrPck::RegistryPreview> registryPreviewComp;
 	registryPreviewComp.InitComponent();
 
 	// registry view
-	icomp::TSimComponentsFactory<CRegistryViewComp> viewFactoryComp;
+	icomp::TSimComponentsFactory<CmpstrPck::RegistryView> viewFactoryComp;
 	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
 	viewFactoryComp.SetRef("RegistryCodeSaver", &codeSaverComp);
 	viewFactoryComp.SetRef("RegistryPreview", &registryPreviewComp);
