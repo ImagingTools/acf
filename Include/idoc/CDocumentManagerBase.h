@@ -130,6 +130,16 @@ protected:
 	*/
 	virtual int GetMaxRecentFilesCount() const;
 
+	/**
+		Called after view is registered.
+	*/
+	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
+
+	/**
+		Called before view is removed.
+	*/
+	virtual void OnViewRemoved(istd::IPolymorphic* viewPtr);
+
 	// abstract methods
 	
 	/**
@@ -141,11 +151,6 @@ protected:
 		Gets save file name.
 	*/
 	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const = 0;
-
-	/**
-		Called during view is registered.
-	*/
-	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr) = 0;
 
 	/**
 		Query user if this document can be closed.

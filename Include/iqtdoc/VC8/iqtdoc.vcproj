@@ -228,10 +228,6 @@
 				RelativePath="..\iqtdoc.h"
 				>
 			</File>
-			<File
-				RelativePath="..\IWorkspaceController.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"

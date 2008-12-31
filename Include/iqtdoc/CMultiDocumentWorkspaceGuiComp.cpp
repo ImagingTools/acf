@@ -27,90 +27,43 @@ namespace iqtdoc
 
 // public methods
 
-// reimplemented (iqtdoc::IWorkspaceController)
-
-void CMultiDocumentWorkspaceGuiComp::TileHorizontally()
+CMultiDocumentWorkspaceGuiComp::CMultiDocumentWorkspaceGuiComp()
+:	m_workspaceModeCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
+	m_tabbedCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
+	m_subWindowCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
+	m_viewsCount(0)
 {
-	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
+	m_workspaceModeCommand.InsertChild(&m_subWindowCommand, false);
+	m_workspaceModeCommand.InsertChild(&m_tabbedCommand, false);
+	m_commands.InsertChild(&m_windowCommand, false);
+	m_windowCommand.SetPriority(120);
+	m_cascadeCommand.SetGroupId(GI_WINDOW);
+	m_windowCommand.InsertChild(&m_cascadeCommand, false);
+	m_tileHorizontallyCommand.SetGroupId(GI_WINDOW);
+	m_windowCommand.InsertChild(&m_tileHorizontallyCommand, false);
+	m_tileVerticallyCommand.SetGroupId(GI_WINDOW);
+	m_windowCommand.InsertChild(&m_tileVerticallyCommand, false);
+	m_closeAllDocumentsCommand.SetGroupId(GI_DOCUMENT);
+	m_windowCommand.InsertChild(&m_closeAllDocumentsCommand, false);
+	m_workspaceModeCommand.SetGroupId(GI_VIEW);
+	m_windowCommand.InsertChild(&m_workspaceModeCommand, false);
 
-	QList<QMdiSubWindow *> widgets = workspacePtr->subWindowList();
+	connect(&m_cascadeCommand, SIGNAL(activated()), this, SLOT(OnCascade()));
+	connect(&m_tileHorizontallyCommand, SIGNAL(activated()), this, SLOT(OnTileHorizontally()));
+	connect(&m_tileVerticallyCommand, SIGNAL(activated()), this, SLOT(OnTile()));
+	connect(&m_closeAllDocumentsCommand, SIGNAL(activated()), this, SLOT(OnCloseAllViews()));
 
-	int workspaceHeight = workspacePtr->height();
-	int workspaceWidth = workspacePtr->width();
-	int heightForEach = workspaceHeight / widgets.count();
-	
-	int y = 0;
-	for (int viewIndex = 0; viewIndex < widgets.count(); viewIndex++){
-		QMdiSubWindow* widgetPtr = widgets.at(viewIndex);
-		widgetPtr->showNormal();									
-		if (widgetPtr->parentWidget() != NULL){
-			int preferredHeight = widgetPtr->minimumHeight() + widgetPtr->parentWidget()->baseSize().height();
-			int currentHeight = istd::Max(heightForEach, preferredHeight);
-
-			widgetPtr->parentWidget()->setGeometry(0, y, workspaceWidth, currentHeight);
-			y += currentHeight;
-		}
-	}
+	m_subWindowCommand.setChecked(true);
+	connect(&m_subWindowCommand, SIGNAL(activated()), this, SLOT(OnWorkspaceModeChanged()));
+	connect(&m_tabbedCommand, SIGNAL(activated()), this, SLOT(OnWorkspaceModeChanged()));
 }
 
 
-void CMultiDocumentWorkspaceGuiComp::Tile()
+// reimplemented (idoc::ICommandsProvider)
+
+const idoc::IHierarchicalCommand* CMultiDocumentWorkspaceGuiComp::GetCommands() const
 {
-	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	workspacePtr->tileSubWindows();
-}
-
-
-void CMultiDocumentWorkspaceGuiComp::Cascade()
-{
-	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	workspacePtr->cascadeSubWindows();
-}
-
-
-void CMultiDocumentWorkspaceGuiComp::CloseAllViews()
-{
-	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	workspacePtr->closeAllSubWindows();
-}
-
-
-void CMultiDocumentWorkspaceGuiComp::SetWorkspaceMode(int mode)
-{
-	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
-	if (workspacePtr == NULL){
-		return;
-	}
-
-	if (mode == SubWindowMode){
-		workspacePtr->setViewMode(QMdiArea::SubWindowView);
-	}
-	else if (mode == TabbedMode){
-		workspacePtr->setViewMode(QMdiArea::TabbedView);
-	}
-	else{
-		I_CRITICAL();
-	}
+	return &m_commands;
 }
 
 
@@ -123,6 +76,22 @@ void CMultiDocumentWorkspaceGuiComp::OnTryClose(bool* ignoredPtr)
 	if (ignoredPtr != NULL){
 		*ignoredPtr = (GetDocumentsCount() > 0);
 	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CMultiDocumentWorkspaceGuiComp::OnRetranslate()
+{
+	m_windowCommand.SetName(iqt::GetCString(tr("&Window")));
+	// Window commands
+	m_cascadeCommand.SetVisuals(tr("Casca&de"), tr("Cascade"), tr("Lays out all document windows in cascaded mode"));
+	m_tileHorizontallyCommand.SetVisuals(tr("Tile &Horizontaly"), tr("Horizontal"), tr("Lays out all document windows horizontaly"));
+	m_tileVerticallyCommand.SetVisuals(tr("Tile &Verticaly"), tr("Vertical"), tr("Lays out all document windows verticaly"));
+	m_closeAllDocumentsCommand.SetVisuals(tr("&Close All Documents"), tr("Close All"), tr("&Closes all opened documents"));
+	m_workspaceModeCommand.SetVisuals(tr("&Workspace Mode"), tr("Workspace Mode"), tr("Switch workspace mode"));
+	m_subWindowCommand.SetVisuals(tr("&MDI View"), tr("MDI View"), tr("Use sub-windows mode"));
+	m_tabbedCommand.SetVisuals(tr("&Tabbed View"), tr("Tabbed View"), tr("Use tabbed mode"));
 }
 
 
@@ -250,6 +219,15 @@ QString CMultiDocumentWorkspaceGuiComp::CreateFileDialogFilter(const std::string
 }
 
 
+void CMultiDocumentWorkspaceGuiComp::OnViewsCountChanged()
+{
+	m_cascadeCommand.SetEnabled(m_viewsCount > 1);
+	m_tileHorizontallyCommand.SetEnabled(m_viewsCount > 1);
+	m_tileVerticallyCommand.SetEnabled(m_viewsCount > 1);
+	m_closeAllDocumentsCommand.SetEnabled(m_viewsCount > 0);
+}
+
+
 // reimplemented (QObject)
 
 bool CMultiDocumentWorkspaceGuiComp::eventFilter(QObject* obj, QEvent* event)
@@ -327,6 +305,18 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPt
 			SetActiveView(viewPtr);
 		}
 	}
+
+	++m_viewsCount;
+
+	OnViewsCountChanged();
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnViewRemoved(istd::IPolymorphic* /*viewPtr*/)
+{
+	--m_viewsCount;
+
+	OnViewsCountChanged();
 }
 
 
@@ -396,6 +386,8 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 	}
 
 	SerializeRecentFiles<iqt::CSettingsReadArchive>();
+
+	OnRetranslate();
 }
 
 
@@ -433,6 +425,86 @@ void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QMdiSubWindow* window)
 
 	SetActiveView(guiObjectPtr);
 }	
+
+
+void CMultiDocumentWorkspaceGuiComp::OnTileHorizontally()
+{
+	QMdiArea* workspacePtr = GetQtWidget();
+	I_ASSERT(workspacePtr != NULL);
+	if (workspacePtr == NULL){
+		return;
+	}
+
+	QList<QMdiSubWindow *> widgets = workspacePtr->subWindowList();
+
+	int workspaceHeight = workspacePtr->height();
+	int workspaceWidth = workspacePtr->width();
+	int heightForEach = workspaceHeight / widgets.count();
+	
+	int y = 0;
+	for (int viewIndex = 0; viewIndex < widgets.count(); viewIndex++){
+		QMdiSubWindow* widgetPtr = widgets.at(viewIndex);
+		widgetPtr->showNormal();									
+		if (widgetPtr->parentWidget() != NULL){
+			int preferredHeight = widgetPtr->minimumHeight() + widgetPtr->parentWidget()->baseSize().height();
+			int currentHeight = istd::Max(heightForEach, preferredHeight);
+
+			widgetPtr->parentWidget()->setGeometry(0, y, workspaceWidth, currentHeight);
+			y += currentHeight;
+		}
+	}
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnTile()
+{
+	QMdiArea* workspacePtr = GetQtWidget();
+	I_ASSERT(workspacePtr != NULL);
+	if (workspacePtr == NULL){
+		return;
+	}
+
+	workspacePtr->tileSubWindows();
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnCascade()
+{
+	QMdiArea* workspacePtr = GetQtWidget();
+	I_ASSERT(workspacePtr != NULL);
+	if (workspacePtr == NULL){
+		return;
+	}
+
+	workspacePtr->cascadeSubWindows();
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnCloseAllViews()
+{
+	QMdiArea* workspacePtr = GetQtWidget();
+	I_ASSERT(workspacePtr != NULL);
+	if (workspacePtr == NULL){
+		return;
+	}
+
+	workspacePtr->closeAllSubWindows();
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnWorkspaceModeChanged()
+{
+	QMdiArea* mdiAreaPtr = GetQtWidget();
+
+	if (mdiAreaPtr != NULL){
+		if (m_subWindowCommand.isChecked()){
+			mdiAreaPtr->setViewMode(QMdiArea::SubWindowView);
+		}
+		else{
+			mdiAreaPtr->setViewMode(QMdiArea::TabbedView);
+		}
+	}
+}
 
 
 // private methods

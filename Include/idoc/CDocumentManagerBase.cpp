@@ -264,6 +264,9 @@ bool CDocumentManagerBase::FileClose()
 				}
 			}
 
+			I_ASSERT(findIter->IsValid());
+			OnViewRemoved(findIter->GetPtr());
+
 			info.views.erase(findIter);	// remove active view
 
 			m_activeViewPtr = NULL;
@@ -518,6 +521,16 @@ bool CDocumentManagerBase::SerializeRecentFileList(iser::IArchive& archive)
 int CDocumentManagerBase::GetMaxRecentFilesCount() const
 {
 	return 10;
+}
+
+
+void CDocumentManagerBase::OnViewRegistered(istd::IPolymorphic* /*viewPtr*/)
+{
+}
+
+
+void CDocumentManagerBase::OnViewRemoved(istd::IPolymorphic* /*viewPtr*/)
+{
 }
 
 

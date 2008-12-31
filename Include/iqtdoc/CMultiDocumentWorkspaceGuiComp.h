@@ -10,11 +10,11 @@
 // ACF includes
 #include "ibase/IApplicationInfo.h"
 
+#include "idoc/ICommandsProvider.h"
 #include "idoc/CDocumentManagerBase.h"
 
 #include "iqtgui/TGuiComponentBase.h"
-
-#include "iqtdoc/IWorkspaceController.h"
+#include "iqtgui/CHierarchicalCommand.h"
 
 
 namespace iqtdoc
@@ -27,7 +27,7 @@ namespace iqtdoc
 class CMultiDocumentWorkspaceGuiComp:
 			public iqtgui::TGuiComponentBase<QMdiArea>, 
 			public idoc::CDocumentManagerBase,
-			public iqtdoc::IWorkspaceController
+			public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -35,24 +35,32 @@ public:
 	typedef iqtgui::TGuiComponentBase<QMdiArea> BaseClass;
 	typedef idoc::CDocumentManagerBase BaseClass2;
 
-	I_BEGIN_COMPONENT(CMultiDocumentWorkspaceGuiComp)
-		I_REGISTER_INTERFACE(idoc::IDocumentManager)
-		I_REGISTER_INTERFACE(iqtdoc::IWorkspaceController)
-		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true)
-		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list", true, 10)
-		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate")
-		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CMultiDocumentWorkspaceGuiComp);
+		I_REGISTER_INTERFACE(idoc::IDocumentManager);
+		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
+		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true);
+		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list", true, 10);
+		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate");
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
+	I_END_COMPONENT;
 
-	// reimplemented (iqtdoc::IWorkspaceController)
-	virtual void TileHorizontally();
-	virtual void Tile();
-	virtual void Cascade();
-	virtual void CloseAllViews();
-	virtual void SetWorkspaceMode(int mode);
+	enum GroupId
+	{
+		GI_WINDOW = 0x300,
+		GI_DOCUMENT,
+		GI_VIEW
+	};
+
+	CMultiDocumentWorkspaceGuiComp();
+
+	// reimplemented (idoc::ICommandsProvider)
+	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
 	// reimplemented (iqtgui::IGuiObject)
 	virtual void OnTryClose(bool* ignoredPtr = NULL);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	void OnRetranslate();
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -82,6 +90,11 @@ protected:
 	*/
 	QString CreateFileDialogFilter(const std::string* documentTypeIdPtr = NULL) const;
 
+	/**
+		Called when number of windows changed.
+	*/
+	void OnViewsCountChanged();
+
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* obj, QEvent* event);
 
@@ -90,6 +103,7 @@ protected:
 	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const;
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
+	virtual void OnViewRemoved(istd::IPolymorphic* viewPtr);
 	virtual bool QueryDocumentClose(const DocumentInfo& info);
 
 	// reimplemented (imod::CMultiModelObserverBase)
@@ -104,6 +118,11 @@ protected:
 
 protected slots:
 	void OnWindowActivated(QMdiSubWindow* window);
+	void OnTileHorizontally();
+	void OnTile();
+	void OnCascade();
+	void OnCloseAllViews();
+	void OnWorkspaceModeChanged();
 
 private:
 	template <class Archive> 
@@ -111,13 +130,27 @@ private:
 
 	void UpdateLastDirectory(const QString& filePath) const;
 
-private:
+	iqtgui::CHierarchicalCommand m_commands;
+
+	// global commands
+	iqtgui::CHierarchicalCommand m_windowCommand;
+	// window menu group
+	iqtgui::CHierarchicalCommand m_cascadeCommand;
+	iqtgui::CHierarchicalCommand m_tileHorizontallyCommand;
+	iqtgui::CHierarchicalCommand m_tileVerticallyCommand;
+	iqtgui::CHierarchicalCommand m_closeAllDocumentsCommand;
+	iqtgui::CHierarchicalCommand m_workspaceModeCommand;
+	iqtgui::CHierarchicalCommand m_subWindowCommand;
+	iqtgui::CHierarchicalCommand m_tabbedCommand;
+
 	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
 	I_ATTR(bool, m_showMaximizedAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 
 	mutable QString m_lastDirectory;
+
+	int m_viewsCount;
 };
 
 

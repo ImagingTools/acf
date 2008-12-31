@@ -34,9 +34,6 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_redoCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
 	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_showToolBarsCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
-	m_workspaceModeCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
-	m_tabbedCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
-	m_subWindowCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
 	m_menuBarPtr(NULL),
 	m_standardToolBarPtr(NULL)
 {
@@ -49,16 +46,7 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	connect(&m_redoCommand, SIGNAL(activated()), this, SLOT(OnRedo()));
 	connect(&m_fullScreenCommand, SIGNAL(activated()), this, SLOT(OnFullScreen()));
 	connect(&m_showToolBarsCommand, SIGNAL(activated()), this, SLOT(OnShowToolbars()));
-	connect(&m_cascadeCommand, SIGNAL(activated()), this, SLOT(OnCascade()));
-	connect(&m_tileHorizontallyCommand, SIGNAL(activated()), this, SLOT(OnTileHorizontally()));
-	connect(&m_tileVerticallyCommand, SIGNAL(activated()), this, SLOT(OnTile()));
-	connect(&m_closeAllDocumentsCommand, SIGNAL(activated()), this, SLOT(OnCloseAllWindows()));
 	connect(&m_aboutCommand, SIGNAL(activated()), this, SLOT(OnAbout()));
-
-	m_subWindowCommand.setChecked(true);
-	connect(&m_subWindowCommand, SIGNAL(activated()), this, SLOT(OnWorkspaceModeChanged()));
-	connect(&m_tabbedCommand, SIGNAL(activated()), this, SLOT(OnWorkspaceModeChanged()));
-	
 }
 
 
@@ -185,20 +173,6 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_viewCommand.SetPriority(90);
 		m_viewCommand.InsertChild(&m_fullScreenCommand, false);
 		m_viewCommand.InsertChild(&m_showToolBarsCommand, false);
-		m_viewCommand.InsertChild(&m_workspaceModeCommand, false);
-
-		m_workspaceModeCommand.InsertChild(&m_subWindowCommand, false);
-		m_workspaceModeCommand.InsertChild(&m_tabbedCommand, false);
-
-		m_windowCommand.SetPriority(120);
-		m_cascadeCommand.SetGroupId(GI_WINDOW);
-		m_windowCommand.InsertChild(&m_cascadeCommand, false);
-		m_tileHorizontallyCommand.SetGroupId(GI_WINDOW);
-		m_windowCommand.InsertChild(&m_tileHorizontallyCommand, false);
-		m_tileVerticallyCommand.SetGroupId(GI_WINDOW);
-		m_windowCommand.InsertChild(&m_tileVerticallyCommand, false);
-		m_closeAllDocumentsCommand.SetGroupId(GI_DOCUMENT);
-		m_windowCommand.InsertChild(&m_closeAllDocumentsCommand, false);
 
 		m_helpCommand.SetPriority(150);
 		m_helpCommand.InsertChild(&m_aboutCommand, false);
@@ -213,7 +187,6 @@ void CMainWindowGuiComp::OnComponentDestroyed()
 	m_fileCommand.ResetChilds();
 	m_editCommand.ResetChilds();
 	m_viewCommand.ResetChilds();
-	m_windowCommand.ResetChilds();
 	m_helpCommand.ResetChilds();
 	m_fixedCommands.ResetChilds();
 
@@ -226,26 +199,6 @@ void CMainWindowGuiComp::OnComponentDestroyed()
 
 
 // protected methods
-
-void CMainWindowGuiComp::OnDocumentCountChanged()
-{
-	I_ASSERT(IsModelAttached(NULL));
-
-	if (!IsGuiCreated()){
-		return;
-	}
-
-	idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
-	I_ASSERT(documentManagerPtr != NULL);	// Model was attached
-
-	int documentsCount = documentManagerPtr->GetDocumentsCount();
-
-	m_cascadeCommand.SetEnabled(documentsCount > 1);
-	m_tileHorizontallyCommand.SetEnabled(documentsCount > 1);
-	m_tileVerticallyCommand.SetEnabled(documentsCount > 1);
-	m_closeAllDocumentsCommand.SetEnabled(documentsCount > 0);
-}
-
 
 void CMainWindowGuiComp::OnActiveViewChanged()
 {
@@ -473,7 +426,6 @@ void CMainWindowGuiComp::UpdateFixedCommands()
 		m_fixedCommands.InsertChild(&m_editCommand, false);
 	}
 	m_fixedCommands.InsertChild(&m_viewCommand, false);
-	m_fixedCommands.InsertChild(&m_windowCommand, false);
 	m_fixedCommands.InsertChild(&m_helpCommand, false);
 }
 
@@ -518,6 +470,13 @@ void CMainWindowGuiComp::UpdateMenuActions()
 			if (commandsPtr != NULL){
 				m_menuCommands.JoinLinkFrom(commandsPtr);
 			}
+		}
+	}
+
+	if (m_documentManagerCommandsCompPtr.IsValid()){
+		const idoc::IHierarchicalCommand* commandsPtr = m_documentManagerCommandsCompPtr->GetCommands();
+		if (commandsPtr != NULL){
+			m_menuCommands.JoinLinkFrom(commandsPtr);
 		}
 	}
 
@@ -713,7 +672,6 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_fileCommand.SetName(iqt::GetCString(tr("&File")));
 	m_editCommand.SetName(iqt::GetCString(tr("&Edit")));
 	m_viewCommand.SetName(iqt::GetCString(tr("&View")));
-	m_windowCommand.SetName(iqt::GetCString(tr("&Window")));
 	m_helpCommand.SetName(iqt::GetCString(tr("&Help")));
 
 	// File commands
@@ -734,16 +692,8 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_fullScreenCommand.SetVisuals(tr("&Full Screen"), tr("Full Screen"), tr("Turn full screen mode on/off"));
 	m_fullScreenCommand.setShortcut(tr("F11"));
 	m_showToolBarsCommand.SetVisuals(tr("&Show Toolbars"), tr("Show Toolbars"), tr("Show/Hide toolbars"));
-	
-	m_workspaceModeCommand.SetVisuals(tr("&Workspace Mode"), tr("Workspace Mode"), tr("Switch workspace mode"));
-	m_subWindowCommand.SetVisuals(tr("&MDI View"), tr("MDI View"), tr("Use sub-windows mode."));
-	m_tabbedCommand.SetVisuals(tr("&Tabbed View"), tr("Tabbed View"), tr("Use tabbed mode."));
-	
-	// Window commands
-	m_cascadeCommand.SetVisuals(tr("Casca&de"), tr("Cascade"), tr("Lays out all document windows in cascaded mode"));
-	m_tileHorizontallyCommand.SetVisuals(tr("Tile &Horizontaly"), tr("Horizontal"), tr("Lays out all document windows horizontaly"));
-	m_tileVerticallyCommand.SetVisuals(tr("Tile &Verticaly"), tr("Vertical"), tr("Lays out all document windows verticaly"));
-	m_closeAllDocumentsCommand.SetVisuals(tr("&Close All Documents"), tr("Close All"), tr("&Closes all opened documents"));
+
+	// Help commands
 	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), GetIcon("info"));
 }
 
@@ -756,13 +706,6 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 		if (documentManagerPtr != NULL){
 			OnRecentFileListChanged();
-		}
-	}
-
-	if ((updateFlags & idoc::IDocumentManager::DocumentCountChanged) != 0){
-		idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
-		if (documentManagerPtr != NULL){
-			OnDocumentCountChanged();
 		}
 	}
 
@@ -991,57 +934,10 @@ void CMainWindowGuiComp::OnStyleSelected(QAction* actionPtr)
 }
 
 
-void CMainWindowGuiComp::OnCloseAllWindows()
-{
-	if (m_workspaceControllerCompPtr.IsValid()){
-		m_workspaceControllerCompPtr->CloseAllViews();
-	}
-}
-
-
-void CMainWindowGuiComp::OnCascade()
-{
-	if (m_workspaceControllerCompPtr.IsValid()){
-		m_workspaceControllerCompPtr->Cascade();
-	}
-}
-
-
-void CMainWindowGuiComp::OnTileHorizontally()
-{
-	if (m_workspaceControllerCompPtr.IsValid()){
-		m_workspaceControllerCompPtr->TileHorizontally();
-	}
-}
-
-
-void CMainWindowGuiComp::OnTile()
-{
-	if (m_workspaceControllerCompPtr.IsValid()){
-		m_workspaceControllerCompPtr->Tile();
-	}
-}
-
-
-void CMainWindowGuiComp::OnWorkspaceModeChanged()
-{
-	if (m_workspaceControllerCompPtr.IsValid()){
-		bool subWindowEnabled = m_subWindowCommand.isChecked();
-		bool tabbedEnabled = m_tabbedCommand.isChecked();
-		I_ASSERT(subWindowEnabled != tabbedEnabled);
-
-		int workspaceMode = subWindowEnabled ? iqtdoc::IWorkspaceController::SubWindowMode : iqtdoc::IWorkspaceController::TabbedMode;
-
-		m_workspaceControllerCompPtr->SetWorkspaceMode(workspaceMode);
-	}
-}
-
-
-
 // public methods of embedded class ActiveUndoManager
 
 CMainWindowGuiComp::ActiveUndoManager::ActiveUndoManager(CMainWindowGuiComp& parent)
-	:m_parent(parent)
+:	m_parent(parent)
 {
 }
 

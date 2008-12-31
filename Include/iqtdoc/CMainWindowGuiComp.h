@@ -17,6 +17,7 @@
 #include "imod/TSingleModelObserverBase.h"
 
 #include "idoc/IDocumentManager.h"
+#include "idoc/ICommandsProvider.h"
 
 #include "iqt/ITranslationManager.h"
 
@@ -25,8 +26,6 @@
 #include "iqtgui/IDockManager.h"
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
-
-#include "iqtdoc/IWorkspaceController.h"
 
 
 namespace iqtdoc
@@ -51,8 +50,8 @@ public:
 		I_REGISTER_INTERFACE(iqtgui::IToolBarManager)
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager")
 		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager", true, "DocumentManager")
+		I_ASSIGN(m_documentManagerCommandsCompPtr, "DocumentManager", "Document manager", false, "DocumentManager")
 		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Document workspace", true, "Workspace")
-		I_ASSIGN(m_workspaceControllerCompPtr, "Workspace", "Workspace controller", true, "Workspace")
 		I_ASSIGN_MULTI_0(m_mainWindowComponentsPtr, "MainWindowComponents", "Additional GUI components", false)
 		I_ASSIGN(m_translationManagerCompPtr, "TranslationManager", "Translation manager", false, "TranslationManager")
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of icons using in the main window", false, 16)
@@ -87,7 +86,6 @@ public:
 	virtual void OnComponentDestroyed();
 
 protected:
-	virtual void OnDocumentCountChanged();
 	virtual void OnActiveViewChanged();
 	virtual void OnActiveDocumentChanged();
 	virtual void OnRecentFileListChanged();
@@ -140,13 +138,6 @@ protected slots:
 	void OnLanguageSelected(QAction* a); 
 	void OnStyleSelected(QAction* a);
 
-	// Workspace controller slots
-	void OnCloseAllWindows(); 
-	void OnCascade(); 
-	void OnTileHorizontally(); 
-	void OnTile(); 
-	void OnWorkspaceModeChanged();
-
 private:
 	istd::TDelPtr<QMenuBar> m_menuBarPtr;
 	istd::TDelPtr<QToolBar> m_standardToolBarPtr;
@@ -154,7 +145,6 @@ private:
 	iqtgui::CHierarchicalCommand m_fileCommand;
 	iqtgui::CHierarchicalCommand m_editCommand;
 	iqtgui::CHierarchicalCommand m_viewCommand;
-	iqtgui::CHierarchicalCommand m_windowCommand;
 	iqtgui::CHierarchicalCommand m_helpCommand;
 
 	class NewDocumentCommand: public iqtgui::CHierarchicalCommand
@@ -239,15 +229,6 @@ private:
 	// view menu group
 	iqtgui::CHierarchicalCommand m_fullScreenCommand;
 	iqtgui::CHierarchicalCommand m_showToolBarsCommand;
-	iqtgui::CHierarchicalCommand m_workspaceModeCommand;
-	iqtgui::CHierarchicalCommand m_subWindowCommand;
-	iqtgui::CHierarchicalCommand m_tabbedCommand;
-
-	// window menu group
-	iqtgui::CHierarchicalCommand m_cascadeCommand;
-	iqtgui::CHierarchicalCommand m_tileHorizontallyCommand;
-	iqtgui::CHierarchicalCommand m_tileVerticallyCommand;
-	iqtgui::CHierarchicalCommand m_closeAllDocumentsCommand;
 	// help menu group
 	iqtgui::CHierarchicalCommand m_aboutCommand;
 
@@ -259,7 +240,7 @@ private:
 	I_REF(iqtgui::IGuiObject, m_workspaceCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(imod::IModel, m_documentManagerModelCompPtr);
-	I_REF(iqtdoc::IWorkspaceController, m_workspaceControllerCompPtr);
+	I_REF(idoc::ICommandsProvider, m_documentManagerCommandsCompPtr);
 	I_REF(iqt::ITranslationManager, m_translationManagerCompPtr);
 	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
