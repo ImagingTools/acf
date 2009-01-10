@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+#include "istd/TChangeNotifier.h"
+
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
 
@@ -167,15 +169,15 @@ void CRegistryViewComp::OnGuiCreated()
 
 	OnRetranslate();
 
-	connect(&m_removeComponentCommand, SIGNAL( activated()), this, SLOT(OnRemoveComponent()));
-	connect(&m_renameComponentCommand, SIGNAL( activated()), this, SLOT(OnRenameComponent()));
-	connect(&m_exportToCodeCommand, SIGNAL( activated()), this, SLOT(OnExportToCode()));
-	connect(&m_executeRegistryCommand, SIGNAL( activated()), this, SLOT(OnExecute()));
-	connect(&m_abortRegistryCommand, SIGNAL( activated()), this, SLOT(OnAbort()));
-	connect(&m_addNoteCommand, SIGNAL( activated()), this, SLOT(OnAddNote()));
-	connect(&m_removeNoteCommand, SIGNAL( activated()), this, SLOT(OnRemoveNote()));
-	connect(&m_exportComponentCommand, SIGNAL( activated()), this, SLOT(OnExportComponent()));
-	connect(&m_exportInterfaceCommand, SIGNAL( activated()), this, SLOT(OnExportInterface()));
+	connect(&m_removeComponentCommand, SIGNAL(activated()), this, SLOT(OnRemoveComponent()));
+	connect(&m_renameComponentCommand, SIGNAL(activated()), this, SLOT(OnRenameComponent()));
+	connect(&m_exportToCodeCommand, SIGNAL(activated()), this, SLOT(OnExportToCode()));
+	connect(&m_executeRegistryCommand, SIGNAL(activated()), this, SLOT(OnExecute()));
+	connect(&m_abortRegistryCommand, SIGNAL(activated()), this, SLOT(OnAbort()));
+	connect(&m_addNoteCommand, SIGNAL(activated()), this, SLOT(OnAddNote()));
+	connect(&m_removeNoteCommand, SIGNAL(activated()), this, SLOT(OnRemoveNote()));
+	connect(&m_exportComponentCommand, SIGNAL(activated()), this, SLOT(OnExportComponent()));
+	connect(&m_exportInterfaceCommand, SIGNAL(activated()), this, SLOT(OnExportInterface()));
 
 	if (m_registryPreviewCompPtr.IsValid()){
 		connect(&m_executionObserverTimer, SIGNAL(timeout()), this, SLOT(OnExecutionTimerTick()));
@@ -374,6 +376,8 @@ void CRegistryViewComp::OnRenameComponent()
 						iqt::GetQString(oldName),
 						&isOk).toStdString();
 			if (isOk && !newName.empty() && (oldName != newName) && oldInfo.elementPtr.IsValid()){
+				istd::CChangeNotifier notifier(registryPtr);
+
 				const icomp::IRegistry::ElementInfo* newInfoPtr = registryPtr->InsertElementInfo(newName, oldInfo.address, true);
 
 				if (newInfoPtr != NULL){
