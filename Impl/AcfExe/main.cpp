@@ -7,20 +7,18 @@
 #include <QDir>
 #include <QLabel>
 
-#include "ibase/IApplication.h"
-
+// ACF includes
 #include "icomp/TComponentWrap.h"
 #include "icomp/TSimComponentWrap.h"
-#include "icomp/TMakeComponentWrap.h"
 #include "icomp/CCompositeComponentContext.h"
 #include "icomp/CCompositeComponent.h"
 #include "icomp/CRegistryElement.h"
-
-#include "iqt/CPackagesLoaderComp.h"
-
-#include "BasePck/BasePck.h"
-
+#include "ibase/IApplication.h"
 #include "iqt/CDefaultServicesProvider.h"
+
+// ACF packages includes
+#include "BasePck/BasePck.h"
+#include "QtPck/QtPck.h"
 
 
 int main(int argc, char *argv[])
@@ -32,7 +30,7 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> registryLoaderComp;
 	registryLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<iqt::CPackagesLoaderComp> packagesLoaderComp;
+	icomp::TSimComponentWrap<QtPck::PackagesLoader> packagesLoaderComp;
 	packagesLoaderComp.SetRef("RegistryLoader", &registryLoaderComp);
 	packagesLoaderComp.InitComponent();
 
