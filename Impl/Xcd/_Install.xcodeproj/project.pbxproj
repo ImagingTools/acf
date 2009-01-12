@@ -169,6 +169,7 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = $(BUILD_DIR)/$(CONFIGURATION);
 				EXECUTABLE_EXTENSION = "";
 				EXECUTABLE_PREFIX = "";
@@ -203,16 +204,12 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
@@ -233,11 +230,6 @@
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					../..,
-					/Library/Frameworks/QtCore.framework/Headers,
-					/Library/Frameworks/QtGui.framework/Headers,
-					/Library/Frameworks/QtNetwork.framework/Headers,
-					/Library/Frameworks/QtScript.framework/Headers,
-					/Library/Frameworks/QtXml.framework/Headers,
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";

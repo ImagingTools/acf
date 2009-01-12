@@ -284,6 +284,7 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = </xsl:text><xsl:value-of select="$OutputDir"/><xsl:text>;
 				EXECUTABLE_EXTENSION = "</xsl:text><xsl:value-of select="$ProductExtension"/><xsl:text>";
 				EXECUTABLE_PREFIX = "</xsl:text><xsl:value-of select="$ProductPrefix"/><xsl:text>";
@@ -318,6 +319,7 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

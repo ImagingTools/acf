@@ -19,30 +19,39 @@
 		223456880ED2E572006EC826 /* CRegistryView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CRegistryView.cpp */; };
 		223456890ED2E572006EC826 /* CRegistryViewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* CRegistryViewComp.cpp */; };
 		223456900ED2E572006EC826 /* CAttributeEditorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* CAttributeEditorComp.h */; };
+		223456910ED2E572006EC826 /* CAttributeEditorComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* CAttributeEditorComp.moc */; };
 		223456920ED2E572006EC826 /* CComponentConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* CComponentConnector.h */; };
 		223456930ED2E572006EC826 /* CComponentNote.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* CComponentNote.h */; };
 		223456940ED2E572006EC826 /* CComponentNoteView.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CComponentNoteView.h */; };
 		223456950ED2E572006EC826 /* CComponentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* CComponentView.h */; };
+		223456960ED2E572006EC826 /* CComponentView.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* CComponentView.moc */; };
 		223456970ED2E572006EC826 /* CPackageOverviewComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* CPackageOverviewComp.h */; };
+		223456980ED2E572006EC826 /* CPackageOverviewComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* CPackageOverviewComp.moc */; };
 		223456990ED2E572006EC826 /* CRegistryLoaderComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* CRegistryLoaderComp.h */; };
 		223457000ED2E572006EC826 /* CRegistryModelComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* CRegistryModelComp.h */; };
 		223457010ED2E572006EC826 /* CRegistryPreviewComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* CRegistryPreviewComp.h */; };
+		223457020ED2E572006EC826 /* CRegistryPreviewComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* CRegistryPreviewComp.moc */; };
 		223457030ED2E572006EC826 /* CRegistryView.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* CRegistryView.h */; };
+		223457040ED2E572006EC826 /* CRegistryView.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* CRegistryView.moc */; };
 		223457050ED2E572006EC826 /* CRegistryViewComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* CRegistryViewComp.h */; };
+		223457060ED2E572006EC826 /* CRegistryViewComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* CRegistryViewComp.moc */; };
 		223457070ED2E572006EC826 /* IAttributeSelectionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* IAttributeSelectionObserver.h */; };
 		223457080ED2E572006EC826 /* icmpstr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* icmpstr.h */; };
 		223457090ED2E572006EC826 /* IComponentNote.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* IComponentNote.h */; };
 		223457100ED2E572006EC826 /* IRegistryEditController.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* IRegistryEditController.h */; };
 		223457110ED2E572006EC826 /* IRegistryPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* IRegistryPreview.h */; };
-		223457130ED2E572006EC826 /* moc_CAttributeEditorComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457130ED2E572006EC826 /* moc_CAttributeEditorComp.cpp */; };
-		223457140ED2E572006EC826 /* moc_CComponentView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457140ED2E572006EC826 /* moc_CComponentView.cpp */; };
-		223457150ED2E572006EC826 /* moc_CPackageOverviewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457150ED2E572006EC826 /* moc_CPackageOverviewComp.cpp */; };
-		223457160ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457160ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp */; };
-		223457170ED2E572006EC826 /* moc_CRegistryView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457170ED2E572006EC826 /* moc_CRegistryView.cpp */; };
-		223457180ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457180ED2E572006EC826 /* moc_CRegistryViewComp.cpp */; };
-		223457190ED2E572006EC826 /* qrc_icmpstr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457190ED2E572006EC826 /* qrc_icmpstr.cpp */; };
-		223457200ED2E572006EC826 /* ui_CAttributeEditorComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* ui_CAttributeEditorComp.h */; };
-		223457210ED2E572006EC826 /* ui_CPackageOverviewComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* ui_CPackageOverviewComp.h */; };
+		223457120ED2E572006EC826 /* icmpstr.qrc in Resources */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* icmpstr.qrc */; };
+		223457130ED2E572006EC826 /* moc_CAttributeEditorComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457130ED2E572006EC826 /* moc_CAttributeEditorComp.cpp */; };
+		223457140ED2E572006EC826 /* moc_CComponentView.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457140ED2E572006EC826 /* moc_CComponentView.cpp */; };
+		223457150ED2E572006EC826 /* moc_CPackageOverviewComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457150ED2E572006EC826 /* moc_CPackageOverviewComp.cpp */; };
+		223457160ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457160ED2E572006EC826 /* moc_CRegistryPreviewComp.cpp */; };
+		223457170ED2E572006EC826 /* moc_CRegistryView.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457170ED2E572006EC826 /* moc_CRegistryView.cpp */; };
+		223457180ED2E572006EC826 /* moc_CRegistryViewComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457180ED2E572006EC826 /* moc_CRegistryViewComp.cpp */; };
+		223457190ED2E572006EC826 /* qrc_icmpstr.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457190ED2E572006EC826 /* qrc_icmpstr.cpp */; };
+		223457200ED2E572006EC826 /* ui_CAttributeEditorComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* ui_CAttributeEditorComp.h */; };
+		223457210ED2E572006EC826 /* ui_CPackageOverviewComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* ui_CPackageOverviewComp.h */; };
+		223457220ED2E572006EC826 /* CAttributeEditorComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* CAttributeEditorComp.ui */; };
+		223457230ED2E572006EC826 /* CPackageOverviewComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* CPackageOverviewComp.ui */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +128,29 @@
 			name = icmpstr;
 			sourceTree = "<group>";
 		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456900ED2E572006EC826 /* CAttributeEditorComp.h */,
+				123456920ED2E572006EC826 /* CComponentConnector.h */,
+				123456930ED2E572006EC826 /* CComponentNote.h */,
+				123456940ED2E572006EC826 /* CComponentNoteView.h */,
+				123456950ED2E572006EC826 /* CComponentView.h */,
+				123456970ED2E572006EC826 /* CPackageOverviewComp.h */,
+				123456990ED2E572006EC826 /* CRegistryLoaderComp.h */,
+				123457000ED2E572006EC826 /* CRegistryModelComp.h */,
+				123457010ED2E572006EC826 /* CRegistryPreviewComp.h */,
+				123457030ED2E572006EC826 /* CRegistryView.h */,
+				123457050ED2E572006EC826 /* CRegistryViewComp.h */,
+				123457070ED2E572006EC826 /* IAttributeSelectionObserver.h */,
+				123457080ED2E572006EC826 /* icmpstr.h */,
+				123457090ED2E572006EC826 /* IComponentNote.h */,
+				123457100ED2E572006EC826 /* IRegistryEditController.h */,
+				123457110ED2E572006EC826 /* IRegistryPreview.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,14 +169,6 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libicmpstr.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +176,14 @@
 				123457230ED2E572006EC826 /* CPackageOverviewComp.ui */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				123457120ED2E572006EC826 /* icmpstr.qrc */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -183,35 +215,12 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				123457120ED2E572006EC826 /* icmpstr.qrc */,
+				D2AAC046055464E500DB518D /* libicmpstr.a */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456900ED2E572006EC826 /* CAttributeEditorComp.h */,
-				123456920ED2E572006EC826 /* CComponentConnector.h */,
-				123456930ED2E572006EC826 /* CComponentNote.h */,
-				123456940ED2E572006EC826 /* CComponentNoteView.h */,
-				123456950ED2E572006EC826 /* CComponentView.h */,
-				123456970ED2E572006EC826 /* CPackageOverviewComp.h */,
-				123456990ED2E572006EC826 /* CRegistryLoaderComp.h */,
-				123457000ED2E572006EC826 /* CRegistryModelComp.h */,
-				123457010ED2E572006EC826 /* CRegistryPreviewComp.h */,
-				123457030ED2E572006EC826 /* CRegistryView.h */,
-				123457050ED2E572006EC826 /* CRegistryViewComp.h */,
-				123457070ED2E572006EC826 /* IAttributeSelectionObserver.h */,
-				123457080ED2E572006EC826 /* icmpstr.h */,
-				123457090ED2E572006EC826 /* IComponentNote.h */,
-				123457100ED2E572006EC826 /* IRegistryEditController.h */,
-				123457110ED2E572006EC826 /* IRegistryPreview.h */,
-			);
-			name = Header;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,16 +356,17 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
+				EXECUTABLE_EXTENSION = "a";
+				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_EXTENSION = a;
-				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = icmpstr;
 				ZERO_LINK = YES;
@@ -366,13 +376,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EXECUTABLE_EXTENSION = a;
-				EXECUTABLE_PREFIX = lib;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
+				EXECUTABLE_EXTENSION = "a";
+				EXECUTABLE_PREFIX = "lib";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = icmpstr;
 			};
@@ -383,6 +393,7 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

@@ -13,14 +13,17 @@
 		223456820ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.cpp */; };
 		223456830ED2E572006EC826 /* CSingleDocumentWorkspaceGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CSingleDocumentWorkspaceGuiComp.cpp */; };
 		223456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.h */; };
+		223456850ED2E572006EC826 /* CExtendedDocumentTemplateComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CExtendedDocumentTemplateComp.moc */; };
 		223456860ED2E572006EC826 /* CMainWindowGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CMainWindowGuiComp.h */; };
+		223456870ED2E572006EC826 /* CMainWindowGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CMainWindowGuiComp.moc */; };
 		223456880ED2E572006EC826 /* CModelEditorGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CModelEditorGuiComp.h */; };
 		223456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h */; };
+		223456900ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.moc */; };
 		223456910ED2E572006EC826 /* CSingleDocumentWorkspaceGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* CSingleDocumentWorkspaceGuiComp.h */; };
 		223456920ED2E572006EC826 /* iqtdoc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* iqtdoc.h */; };
-		223456930ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp */; };
-		223456940ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp */; };
-		223456950ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp */; };
+		223456930ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* moc_CExtendedDocumentTemplateComp.cpp */; };
+		223456940ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* moc_CMainWindowGuiComp.cpp */; };
+		223456950ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* moc_CMultiDocumentWorkspaceGuiComp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,19 @@
 			name = iqtdoc;
 			sourceTree = "<group>";
 		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.h */,
+				123456860ED2E572006EC826 /* CMainWindowGuiComp.h */,
+				123456880ED2E572006EC826 /* CModelEditorGuiComp.h */,
+				123456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h */,
+				123456910ED2E572006EC826 /* CSingleDocumentWorkspaceGuiComp.h */,
+				123456920ED2E572006EC826 /* iqtdoc.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,19 +97,18 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libiqtdoc.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -116,24 +131,12 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				D2AAC046055464E500DB518D /* libiqtdoc.a */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456840ED2E572006EC826 /* CExtendedDocumentTemplateComp.h */,
-				123456860ED2E572006EC826 /* CMainWindowGuiComp.h */,
-				123456880ED2E572006EC826 /* CModelEditorGuiComp.h */,
-				123456890ED2E572006EC826 /* CMultiDocumentWorkspaceGuiComp.h */,
-				123456910ED2E572006EC826 /* CSingleDocumentWorkspaceGuiComp.h */,
-				123456920ED2E572006EC826 /* iqtdoc.h */,
-			);
-			name = Header;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,16 +238,17 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
+				EXECUTABLE_EXTENSION = "a";
+				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_EXTENSION = a;
-				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqtdoc;
 				ZERO_LINK = YES;
@@ -254,13 +258,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EXECUTABLE_EXTENSION = a;
-				EXECUTABLE_PREFIX = lib;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
+				EXECUTABLE_EXTENSION = "a";
+				EXECUTABLE_PREFIX = "lib";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqtdoc;
 			};
@@ -271,6 +275,7 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
