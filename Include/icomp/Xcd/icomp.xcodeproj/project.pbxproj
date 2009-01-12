@@ -47,27 +47,25 @@
 		223457160ED2E572006EC826 /* IRegistriesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457160ED2E572006EC826 /* IRegistriesManager.h */; };
 		223457170ED2E572006EC826 /* IRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457170ED2E572006EC826 /* IRegistry.h */; };
 		223457180ED2E572006EC826 /* IRegistryElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457180ED2E572006EC826 /* IRegistryElement.h */; };
-		223457190ED2E572006EC826 /* IRegistryGeometryProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457190ED2E572006EC826 /* IRegistryGeometryProvider.h */; };
-		223457200ED2E572006EC826 /* IRegistryNotesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* IRegistryNotesProvider.h */; };
-		223457210ED2E572006EC826 /* TAttributeStaticInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* TAttributeStaticInfo.h */; };
-		223457220ED2E572006EC826 /* TComponentRegistrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* TComponentRegistrator.h */; };
-		223457230ED2E572006EC826 /* TComponentStaticInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* TComponentStaticInfo.h */; };
-		223457240ED2E572006EC826 /* TComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* TComponentWrap.h */; };
-		223457250ED2E572006EC826 /* TFactoryMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457250ED2E572006EC826 /* TFactoryMember.h */; };
-		223457260ED2E572006EC826 /* TInterfaceManipBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457260ED2E572006EC826 /* TInterfaceManipBase.h */; };
-		223457270ED2E572006EC826 /* TInterfaceRegistrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457270ED2E572006EC826 /* TInterfaceRegistrator.h */; };
-		223457280ED2E572006EC826 /* TMakeComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457280ED2E572006EC826 /* TMakeComponentWrap.h */; };
-		223457290ED2E572006EC826 /* TModelCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457290ED2E572006EC826 /* TModelCompWrap.h */; };
-		223457300ED2E572006EC826 /* TMultiAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457300ED2E572006EC826 /* TMultiAttribute.h */; };
-		223457310ED2E572006EC826 /* TMultiAttributePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457310ED2E572006EC826 /* TMultiAttributePtr.h */; };
-		223457320ED2E572006EC826 /* TMultiFactoryMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457320ED2E572006EC826 /* TMultiFactoryMember.h */; };
-		223457330ED2E572006EC826 /* TMultiReferencePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457330ED2E572006EC826 /* TMultiReferencePtr.h */; };
-		223457340ED2E572006EC826 /* TReferencePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457340ED2E572006EC826 /* TReferencePtr.h */; };
-		223457350ED2E572006EC826 /* TSelectableAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457350ED2E572006EC826 /* TSelectableAttribute.h */; };
-		223457360ED2E572006EC826 /* TSimComponentsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457360ED2E572006EC826 /* TSimComponentsFactory.h */; };
-		223457370ED2E572006EC826 /* TSimComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* TSimComponentWrap.h */; };
-		223457380ED2E572006EC826 /* TSingleAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457380ED2E572006EC826 /* TSingleAttribute.h */; };
-		223457390ED2E572006EC826 /* TSingleAttributePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457390ED2E572006EC826 /* TSingleAttributePtr.h */; };
+		223457190ED2E572006EC826 /* TAttributeStaticInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457190ED2E572006EC826 /* TAttributeStaticInfo.h */; };
+		223457200ED2E572006EC826 /* TComponentRegistrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* TComponentRegistrator.h */; };
+		223457210ED2E572006EC826 /* TComponentStaticInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* TComponentStaticInfo.h */; };
+		223457220ED2E572006EC826 /* TComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* TComponentWrap.h */; };
+		223457230ED2E572006EC826 /* TFactoryMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* TFactoryMember.h */; };
+		223457240ED2E572006EC826 /* TInterfaceManipBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* TInterfaceManipBase.h */; };
+		223457250ED2E572006EC826 /* TInterfaceRegistrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457250ED2E572006EC826 /* TInterfaceRegistrator.h */; };
+		223457260ED2E572006EC826 /* TMakeComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457260ED2E572006EC826 /* TMakeComponentWrap.h */; };
+		223457270ED2E572006EC826 /* TModelCompWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457270ED2E572006EC826 /* TModelCompWrap.h */; };
+		223457280ED2E572006EC826 /* TMultiAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457280ED2E572006EC826 /* TMultiAttribute.h */; };
+		223457290ED2E572006EC826 /* TMultiAttributePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457290ED2E572006EC826 /* TMultiAttributePtr.h */; };
+		223457300ED2E572006EC826 /* TMultiFactoryMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457300ED2E572006EC826 /* TMultiFactoryMember.h */; };
+		223457310ED2E572006EC826 /* TMultiReferencePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457310ED2E572006EC826 /* TMultiReferencePtr.h */; };
+		223457320ED2E572006EC826 /* TReferencePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457320ED2E572006EC826 /* TReferencePtr.h */; };
+		223457330ED2E572006EC826 /* TSelectableAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457330ED2E572006EC826 /* TSelectableAttribute.h */; };
+		223457340ED2E572006EC826 /* TSimComponentsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457340ED2E572006EC826 /* TSimComponentsFactory.h */; };
+		223457350ED2E572006EC826 /* TSimComponentWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457350ED2E572006EC826 /* TSimComponentWrap.h */; };
+		223457360ED2E572006EC826 /* TSingleAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457360ED2E572006EC826 /* TSingleAttribute.h */; };
+		223457370ED2E572006EC826 /* TSingleAttributePtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* TSingleAttributePtr.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,27 +109,25 @@
 		123457160ED2E572006EC826 /* IRegistriesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRegistriesManager.h; path = ../IRegistriesManager.h; sourceTree = SOURCE_ROOT; };
 		123457170ED2E572006EC826 /* IRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRegistry.h; path = ../IRegistry.h; sourceTree = SOURCE_ROOT; };
 		123457180ED2E572006EC826 /* IRegistryElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRegistryElement.h; path = ../IRegistryElement.h; sourceTree = SOURCE_ROOT; };
-		123457190ED2E572006EC826 /* IRegistryGeometryProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRegistryGeometryProvider.h; path = ../IRegistryGeometryProvider.h; sourceTree = SOURCE_ROOT; };
-		123457200ED2E572006EC826 /* IRegistryNotesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRegistryNotesProvider.h; path = ../IRegistryNotesProvider.h; sourceTree = SOURCE_ROOT; };
-		123457210ED2E572006EC826 /* TAttributeStaticInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TAttributeStaticInfo.h; path = ../TAttributeStaticInfo.h; sourceTree = SOURCE_ROOT; };
-		123457220ED2E572006EC826 /* TComponentRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComponentRegistrator.h; path = ../TComponentRegistrator.h; sourceTree = SOURCE_ROOT; };
-		123457230ED2E572006EC826 /* TComponentStaticInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComponentStaticInfo.h; path = ../TComponentStaticInfo.h; sourceTree = SOURCE_ROOT; };
-		123457240ED2E572006EC826 /* TComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComponentWrap.h; path = ../TComponentWrap.h; sourceTree = SOURCE_ROOT; };
-		123457250ED2E572006EC826 /* TFactoryMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFactoryMember.h; path = ../TFactoryMember.h; sourceTree = SOURCE_ROOT; };
-		123457260ED2E572006EC826 /* TInterfaceManipBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TInterfaceManipBase.h; path = ../TInterfaceManipBase.h; sourceTree = SOURCE_ROOT; };
-		123457270ED2E572006EC826 /* TInterfaceRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TInterfaceRegistrator.h; path = ../TInterfaceRegistrator.h; sourceTree = SOURCE_ROOT; };
-		123457280ED2E572006EC826 /* TMakeComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMakeComponentWrap.h; path = ../TMakeComponentWrap.h; sourceTree = SOURCE_ROOT; };
-		123457290ED2E572006EC826 /* TModelCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TModelCompWrap.h; path = ../TModelCompWrap.h; sourceTree = SOURCE_ROOT; };
-		123457300ED2E572006EC826 /* TMultiAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiAttribute.h; path = ../TMultiAttribute.h; sourceTree = SOURCE_ROOT; };
-		123457310ED2E572006EC826 /* TMultiAttributePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiAttributePtr.h; path = ../TMultiAttributePtr.h; sourceTree = SOURCE_ROOT; };
-		123457320ED2E572006EC826 /* TMultiFactoryMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiFactoryMember.h; path = ../TMultiFactoryMember.h; sourceTree = SOURCE_ROOT; };
-		123457330ED2E572006EC826 /* TMultiReferencePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiReferencePtr.h; path = ../TMultiReferencePtr.h; sourceTree = SOURCE_ROOT; };
-		123457340ED2E572006EC826 /* TReferencePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TReferencePtr.h; path = ../TReferencePtr.h; sourceTree = SOURCE_ROOT; };
-		123457350ED2E572006EC826 /* TSelectableAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSelectableAttribute.h; path = ../TSelectableAttribute.h; sourceTree = SOURCE_ROOT; };
-		123457360ED2E572006EC826 /* TSimComponentsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSimComponentsFactory.h; path = ../TSimComponentsFactory.h; sourceTree = SOURCE_ROOT; };
-		123457370ED2E572006EC826 /* TSimComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSimComponentWrap.h; path = ../TSimComponentWrap.h; sourceTree = SOURCE_ROOT; };
-		123457380ED2E572006EC826 /* TSingleAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttribute.h; path = ../TSingleAttribute.h; sourceTree = SOURCE_ROOT; };
-		123457390ED2E572006EC826 /* TSingleAttributePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttributePtr.h; path = ../TSingleAttributePtr.h; sourceTree = SOURCE_ROOT; };
+		123457190ED2E572006EC826 /* TAttributeStaticInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TAttributeStaticInfo.h; path = ../TAttributeStaticInfo.h; sourceTree = SOURCE_ROOT; };
+		123457200ED2E572006EC826 /* TComponentRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComponentRegistrator.h; path = ../TComponentRegistrator.h; sourceTree = SOURCE_ROOT; };
+		123457210ED2E572006EC826 /* TComponentStaticInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComponentStaticInfo.h; path = ../TComponentStaticInfo.h; sourceTree = SOURCE_ROOT; };
+		123457220ED2E572006EC826 /* TComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TComponentWrap.h; path = ../TComponentWrap.h; sourceTree = SOURCE_ROOT; };
+		123457230ED2E572006EC826 /* TFactoryMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TFactoryMember.h; path = ../TFactoryMember.h; sourceTree = SOURCE_ROOT; };
+		123457240ED2E572006EC826 /* TInterfaceManipBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TInterfaceManipBase.h; path = ../TInterfaceManipBase.h; sourceTree = SOURCE_ROOT; };
+		123457250ED2E572006EC826 /* TInterfaceRegistrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TInterfaceRegistrator.h; path = ../TInterfaceRegistrator.h; sourceTree = SOURCE_ROOT; };
+		123457260ED2E572006EC826 /* TMakeComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMakeComponentWrap.h; path = ../TMakeComponentWrap.h; sourceTree = SOURCE_ROOT; };
+		123457270ED2E572006EC826 /* TModelCompWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TModelCompWrap.h; path = ../TModelCompWrap.h; sourceTree = SOURCE_ROOT; };
+		123457280ED2E572006EC826 /* TMultiAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiAttribute.h; path = ../TMultiAttribute.h; sourceTree = SOURCE_ROOT; };
+		123457290ED2E572006EC826 /* TMultiAttributePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiAttributePtr.h; path = ../TMultiAttributePtr.h; sourceTree = SOURCE_ROOT; };
+		123457300ED2E572006EC826 /* TMultiFactoryMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiFactoryMember.h; path = ../TMultiFactoryMember.h; sourceTree = SOURCE_ROOT; };
+		123457310ED2E572006EC826 /* TMultiReferencePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TMultiReferencePtr.h; path = ../TMultiReferencePtr.h; sourceTree = SOURCE_ROOT; };
+		123457320ED2E572006EC826 /* TReferencePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TReferencePtr.h; path = ../TReferencePtr.h; sourceTree = SOURCE_ROOT; };
+		123457330ED2E572006EC826 /* TSelectableAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSelectableAttribute.h; path = ../TSelectableAttribute.h; sourceTree = SOURCE_ROOT; };
+		123457340ED2E572006EC826 /* TSimComponentsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSimComponentsFactory.h; path = ../TSimComponentsFactory.h; sourceTree = SOURCE_ROOT; };
+		123457350ED2E572006EC826 /* TSimComponentWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSimComponentWrap.h; path = ../TSimComponentWrap.h; sourceTree = SOURCE_ROOT; };
+		123457360ED2E572006EC826 /* TSingleAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttribute.h; path = ../TSingleAttribute.h; sourceTree = SOURCE_ROOT; };
+		123457370ED2E572006EC826 /* TSingleAttributePtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleAttributePtr.h; path = ../TSingleAttributePtr.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libicomp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicomp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,62 +154,6 @@
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = icomp;
-			sourceTree = "<group>";
-		};
-		08FB7795FE84155DC02AAC07 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				123456790ED2E572006EC826 /* CBaseComponentStaticInfo.cpp */,
-				123456800ED2E572006EC826 /* CComponentAddress.cpp */,
-				123456810ED2E572006EC826 /* CComponentBase.cpp */,
-				123456820ED2E572006EC826 /* CComponentContext.cpp */,
-				123456830ED2E572006EC826 /* CComponentStaticInfoBase.cpp */,
-				123456840ED2E572006EC826 /* CCompositeComponent.cpp */,
-				123456850ED2E572006EC826 /* CCompositeComponentContext.cpp */,
-				123456860ED2E572006EC826 /* CCompositeComponentStaticInfo.cpp */,
-				123456870ED2E572006EC826 /* CCompositePackageStaticInfo.cpp */,
-				123456880ED2E572006EC826 /* CPackageStaticInfo.cpp */,
-				123456890ED2E572006EC826 /* CRegistry.cpp */,
-				123456900ED2E572006EC826 /* CRegistryElement.cpp */,
-				123456910ED2E572006EC826 /* CSimComponentContextBase.cpp */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libicomp.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C6A0FF2B0290797F04C91782 /* Forms */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856A50EEABE3D00C738EF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Generated;
-			sourceTree = "<group>";
-		};
-		EA9856A60EEABE5300C738EF /* Garbages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Garbages;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
@@ -246,29 +186,83 @@
 				123457160ED2E572006EC826 /* IRegistriesManager.h */,
 				123457170ED2E572006EC826 /* IRegistry.h */,
 				123457180ED2E572006EC826 /* IRegistryElement.h */,
-				123457190ED2E572006EC826 /* IRegistryGeometryProvider.h */,
-				123457200ED2E572006EC826 /* IRegistryNotesProvider.h */,
-				123457210ED2E572006EC826 /* TAttributeStaticInfo.h */,
-				123457220ED2E572006EC826 /* TComponentRegistrator.h */,
-				123457230ED2E572006EC826 /* TComponentStaticInfo.h */,
-				123457240ED2E572006EC826 /* TComponentWrap.h */,
-				123457250ED2E572006EC826 /* TFactoryMember.h */,
-				123457260ED2E572006EC826 /* TInterfaceManipBase.h */,
-				123457270ED2E572006EC826 /* TInterfaceRegistrator.h */,
-				123457280ED2E572006EC826 /* TMakeComponentWrap.h */,
-				123457290ED2E572006EC826 /* TModelCompWrap.h */,
-				123457300ED2E572006EC826 /* TMultiAttribute.h */,
-				123457310ED2E572006EC826 /* TMultiAttributePtr.h */,
-				123457320ED2E572006EC826 /* TMultiFactoryMember.h */,
-				123457330ED2E572006EC826 /* TMultiReferencePtr.h */,
-				123457340ED2E572006EC826 /* TReferencePtr.h */,
-				123457350ED2E572006EC826 /* TSelectableAttribute.h */,
-				123457360ED2E572006EC826 /* TSimComponentsFactory.h */,
-				123457370ED2E572006EC826 /* TSimComponentWrap.h */,
-				123457380ED2E572006EC826 /* TSingleAttribute.h */,
-				123457390ED2E572006EC826 /* TSingleAttributePtr.h */,
+				123457190ED2E572006EC826 /* TAttributeStaticInfo.h */,
+				123457200ED2E572006EC826 /* TComponentRegistrator.h */,
+				123457210ED2E572006EC826 /* TComponentStaticInfo.h */,
+				123457220ED2E572006EC826 /* TComponentWrap.h */,
+				123457230ED2E572006EC826 /* TFactoryMember.h */,
+				123457240ED2E572006EC826 /* TInterfaceManipBase.h */,
+				123457250ED2E572006EC826 /* TInterfaceRegistrator.h */,
+				123457260ED2E572006EC826 /* TMakeComponentWrap.h */,
+				123457270ED2E572006EC826 /* TModelCompWrap.h */,
+				123457280ED2E572006EC826 /* TMultiAttribute.h */,
+				123457290ED2E572006EC826 /* TMultiAttributePtr.h */,
+				123457300ED2E572006EC826 /* TMultiFactoryMember.h */,
+				123457310ED2E572006EC826 /* TMultiReferencePtr.h */,
+				123457320ED2E572006EC826 /* TReferencePtr.h */,
+				123457330ED2E572006EC826 /* TSelectableAttribute.h */,
+				123457340ED2E572006EC826 /* TSimComponentsFactory.h */,
+				123457350ED2E572006EC826 /* TSimComponentWrap.h */,
+				123457360ED2E572006EC826 /* TSingleAttribute.h */,
+				123457370ED2E572006EC826 /* TSingleAttributePtr.h */,
 			);
 			name = Header;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				123456790ED2E572006EC826 /* CBaseComponentStaticInfo.cpp */,
+				123456800ED2E572006EC826 /* CComponentAddress.cpp */,
+				123456810ED2E572006EC826 /* CComponentBase.cpp */,
+				123456820ED2E572006EC826 /* CComponentContext.cpp */,
+				123456830ED2E572006EC826 /* CComponentStaticInfoBase.cpp */,
+				123456840ED2E572006EC826 /* CCompositeComponent.cpp */,
+				123456850ED2E572006EC826 /* CCompositeComponentContext.cpp */,
+				123456860ED2E572006EC826 /* CCompositeComponentStaticInfo.cpp */,
+				123456870ED2E572006EC826 /* CCompositePackageStaticInfo.cpp */,
+				123456880ED2E572006EC826 /* CPackageStaticInfo.cpp */,
+				123456890ED2E572006EC826 /* CRegistry.cpp */,
+				123456900ED2E572006EC826 /* CRegistryElement.cpp */,
+				123456910ED2E572006EC826 /* CSimComponentContextBase.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Garbages;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libicomp.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,27 +299,25 @@
 				223457160ED2E572006EC826 /* IRegistriesManager.h in Headers */,
 				223457170ED2E572006EC826 /* IRegistry.h in Headers */,
 				223457180ED2E572006EC826 /* IRegistryElement.h in Headers */,
-				223457190ED2E572006EC826 /* IRegistryGeometryProvider.h in Headers */,
-				223457200ED2E572006EC826 /* IRegistryNotesProvider.h in Headers */,
-				223457210ED2E572006EC826 /* TAttributeStaticInfo.h in Headers */,
-				223457220ED2E572006EC826 /* TComponentRegistrator.h in Headers */,
-				223457230ED2E572006EC826 /* TComponentStaticInfo.h in Headers */,
-				223457240ED2E572006EC826 /* TComponentWrap.h in Headers */,
-				223457250ED2E572006EC826 /* TFactoryMember.h in Headers */,
-				223457260ED2E572006EC826 /* TInterfaceManipBase.h in Headers */,
-				223457270ED2E572006EC826 /* TInterfaceRegistrator.h in Headers */,
-				223457280ED2E572006EC826 /* TMakeComponentWrap.h in Headers */,
-				223457290ED2E572006EC826 /* TModelCompWrap.h in Headers */,
-				223457300ED2E572006EC826 /* TMultiAttribute.h in Headers */,
-				223457310ED2E572006EC826 /* TMultiAttributePtr.h in Headers */,
-				223457320ED2E572006EC826 /* TMultiFactoryMember.h in Headers */,
-				223457330ED2E572006EC826 /* TMultiReferencePtr.h in Headers */,
-				223457340ED2E572006EC826 /* TReferencePtr.h in Headers */,
-				223457350ED2E572006EC826 /* TSelectableAttribute.h in Headers */,
-				223457360ED2E572006EC826 /* TSimComponentsFactory.h in Headers */,
-				223457370ED2E572006EC826 /* TSimComponentWrap.h in Headers */,
-				223457380ED2E572006EC826 /* TSingleAttribute.h in Headers */,
-				223457390ED2E572006EC826 /* TSingleAttributePtr.h in Headers */,
+				223457190ED2E572006EC826 /* TAttributeStaticInfo.h in Headers */,
+				223457200ED2E572006EC826 /* TComponentRegistrator.h in Headers */,
+				223457210ED2E572006EC826 /* TComponentStaticInfo.h in Headers */,
+				223457220ED2E572006EC826 /* TComponentWrap.h in Headers */,
+				223457230ED2E572006EC826 /* TFactoryMember.h in Headers */,
+				223457240ED2E572006EC826 /* TInterfaceManipBase.h in Headers */,
+				223457250ED2E572006EC826 /* TInterfaceRegistrator.h in Headers */,
+				223457260ED2E572006EC826 /* TMakeComponentWrap.h in Headers */,
+				223457270ED2E572006EC826 /* TModelCompWrap.h in Headers */,
+				223457280ED2E572006EC826 /* TMultiAttribute.h in Headers */,
+				223457290ED2E572006EC826 /* TMultiAttributePtr.h in Headers */,
+				223457300ED2E572006EC826 /* TMultiFactoryMember.h in Headers */,
+				223457310ED2E572006EC826 /* TMultiReferencePtr.h in Headers */,
+				223457320ED2E572006EC826 /* TReferencePtr.h in Headers */,
+				223457330ED2E572006EC826 /* TSelectableAttribute.h in Headers */,
+				223457340ED2E572006EC826 /* TSimComponentsFactory.h in Headers */,
+				223457350ED2E572006EC826 /* TSimComponentWrap.h in Headers */,
+				223457360ED2E572006EC826 /* TSingleAttribute.h in Headers */,
+				223457370ED2E572006EC826 /* TSingleAttributePtr.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,16 +403,16 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
+				EXECUTABLE_EXTENSION = "a";
+				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_EXTENSION = a;
-				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = icomp;
 				ZERO_LINK = YES;
@@ -430,13 +422,13 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EXECUTABLE_EXTENSION = a;
-				EXECUTABLE_PREFIX = lib;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
+				EXECUTABLE_EXTENSION = "a";
+				EXECUTABLE_PREFIX = "lib";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = icomp;
 			};
@@ -449,7 +441,9 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../;
+				HEADER_SEARCH_PATHS = (
+					../../,
+				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
@@ -466,7 +460,9 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../../;
+				HEADER_SEARCH_PATHS = (
+					../../,
+				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};

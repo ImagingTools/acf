@@ -8,34 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* CCompositeDocumentTemplateComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* CCompositeDocumentTemplateComp.cpp */; };
-		223456800ED2E572006EC826 /* CDocumentManagerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CDocumentManagerBase.cpp */; };
-		223456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */; };
-		223456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */; };
-		223456830ED2E572006EC826 /* CCompositeDocumentTemplateComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CCompositeDocumentTemplateComp.h */; };
-		223456840ED2E572006EC826 /* CDocumentManagerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CDocumentManagerBase.h */; };
-		223456850ED2E572006EC826 /* CSingleDocumentTemplateBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CSingleDocumentTemplateBase.h */; };
-		223456860ED2E572006EC826 /* CSingleDocumentTemplateComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CSingleDocumentTemplateComp.h */; };
-		223456870ED2E572006EC826 /* ICommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* ICommand.h */; };
-		223456880ED2E572006EC826 /* ICommandsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* ICommandsProvider.h */; };
-		223456890ED2E572006EC826 /* idoc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* idoc.h */; };
-		223456900ED2E572006EC826 /* IDocumentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* IDocumentManager.h */; };
-		223456910ED2E572006EC826 /* IDocumentTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* IDocumentTemplate.h */; };
+		223456800ED2E572006EC826 /* CMultiDocumentManagerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CMultiDocumentManagerBase.cpp */; };
+		223456810ED2E572006EC826 /* CSingleDocumentManagerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CSingleDocumentManagerBase.cpp */; };
+		223456820ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */; };
+		223456830ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */; };
+		223456840ED2E572006EC826 /* CCompositeDocumentTemplateComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CCompositeDocumentTemplateComp.h */; };
+		223456850ED2E572006EC826 /* CMultiDocumentManagerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CMultiDocumentManagerBase.h */; };
+		223456860ED2E572006EC826 /* CSingleDocumentManagerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CSingleDocumentManagerBase.h */; };
+		223456870ED2E572006EC826 /* CSingleDocumentTemplateBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CSingleDocumentTemplateBase.h */; };
+		223456880ED2E572006EC826 /* CSingleDocumentTemplateComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* CSingleDocumentTemplateComp.h */; };
+		223456890ED2E572006EC826 /* ICommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* ICommand.h */; };
+		223456900ED2E572006EC826 /* ICommandsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* ICommandsProvider.h */; };
+		223456910ED2E572006EC826 /* idoc.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* idoc.h */; };
+		223456920ED2E572006EC826 /* IDocumentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* IDocumentManager.h */; };
+		223456930ED2E572006EC826 /* IDocumentTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* IDocumentTemplate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* CCompositeDocumentTemplateComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCompositeDocumentTemplateComp.cpp; path = ../CCompositeDocumentTemplateComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456800ED2E572006EC826 /* CDocumentManagerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocumentManagerBase.cpp; path = ../CDocumentManagerBase.cpp; sourceTree = SOURCE_ROOT; };
-		123456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateBase.cpp; path = ../CSingleDocumentTemplateBase.cpp; sourceTree = SOURCE_ROOT; };
-		123456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateComp.cpp; path = ../CSingleDocumentTemplateComp.cpp; sourceTree = SOURCE_ROOT; };
-		123456830ED2E572006EC826 /* CCompositeDocumentTemplateComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCompositeDocumentTemplateComp.h; path = ../CCompositeDocumentTemplateComp.h; sourceTree = SOURCE_ROOT; };
-		123456840ED2E572006EC826 /* CDocumentManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDocumentManagerBase.h; path = ../CDocumentManagerBase.h; sourceTree = SOURCE_ROOT; };
-		123456850ED2E572006EC826 /* CSingleDocumentTemplateBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateBase.h; path = ../CSingleDocumentTemplateBase.h; sourceTree = SOURCE_ROOT; };
-		123456860ED2E572006EC826 /* CSingleDocumentTemplateComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateComp.h; path = ../CSingleDocumentTemplateComp.h; sourceTree = SOURCE_ROOT; };
-		123456870ED2E572006EC826 /* ICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICommand.h; path = ../ICommand.h; sourceTree = SOURCE_ROOT; };
-		123456880ED2E572006EC826 /* ICommandsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICommandsProvider.h; path = ../ICommandsProvider.h; sourceTree = SOURCE_ROOT; };
-		123456890ED2E572006EC826 /* idoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = idoc.h; path = ../idoc.h; sourceTree = SOURCE_ROOT; };
-		123456900ED2E572006EC826 /* IDocumentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDocumentManager.h; path = ../IDocumentManager.h; sourceTree = SOURCE_ROOT; };
-		123456910ED2E572006EC826 /* IDocumentTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDocumentTemplate.h; path = ../IDocumentTemplate.h; sourceTree = SOURCE_ROOT; };
+		123456800ED2E572006EC826 /* CMultiDocumentManagerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMultiDocumentManagerBase.cpp; path = ../CMultiDocumentManagerBase.cpp; sourceTree = SOURCE_ROOT; };
+		123456810ED2E572006EC826 /* CSingleDocumentManagerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentManagerBase.cpp; path = ../CSingleDocumentManagerBase.cpp; sourceTree = SOURCE_ROOT; };
+		123456820ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateBase.cpp; path = ../CSingleDocumentTemplateBase.cpp; sourceTree = SOURCE_ROOT; };
+		123456830ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateComp.cpp; path = ../CSingleDocumentTemplateComp.cpp; sourceTree = SOURCE_ROOT; };
+		123456840ED2E572006EC826 /* CCompositeDocumentTemplateComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCompositeDocumentTemplateComp.h; path = ../CCompositeDocumentTemplateComp.h; sourceTree = SOURCE_ROOT; };
+		123456850ED2E572006EC826 /* CMultiDocumentManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMultiDocumentManagerBase.h; path = ../CMultiDocumentManagerBase.h; sourceTree = SOURCE_ROOT; };
+		123456860ED2E572006EC826 /* CSingleDocumentManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentManagerBase.h; path = ../CSingleDocumentManagerBase.h; sourceTree = SOURCE_ROOT; };
+		123456870ED2E572006EC826 /* CSingleDocumentTemplateBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateBase.h; path = ../CSingleDocumentTemplateBase.h; sourceTree = SOURCE_ROOT; };
+		123456880ED2E572006EC826 /* CSingleDocumentTemplateComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSingleDocumentTemplateComp.h; path = ../CSingleDocumentTemplateComp.h; sourceTree = SOURCE_ROOT; };
+		123456890ED2E572006EC826 /* ICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICommand.h; path = ../ICommand.h; sourceTree = SOURCE_ROOT; };
+		123456900ED2E572006EC826 /* ICommandsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ICommandsProvider.h; path = ../ICommandsProvider.h; sourceTree = SOURCE_ROOT; };
+		123456910ED2E572006EC826 /* idoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = idoc.h; path = ../idoc.h; sourceTree = SOURCE_ROOT; };
+		123456920ED2E572006EC826 /* IDocumentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDocumentManager.h; path = ../IDocumentManager.h; sourceTree = SOURCE_ROOT; };
+		123456930ED2E572006EC826 /* IDocumentTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IDocumentTemplate.h; path = ../IDocumentTemplate.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libidoc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libidoc.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,15 +71,16 @@
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				123456830ED2E572006EC826 /* CCompositeDocumentTemplateComp.h */,
-				123456840ED2E572006EC826 /* CDocumentManagerBase.h */,
-				123456850ED2E572006EC826 /* CSingleDocumentTemplateBase.h */,
-				123456860ED2E572006EC826 /* CSingleDocumentTemplateComp.h */,
-				123456870ED2E572006EC826 /* ICommand.h */,
-				123456880ED2E572006EC826 /* ICommandsProvider.h */,
-				123456890ED2E572006EC826 /* idoc.h */,
-				123456900ED2E572006EC826 /* IDocumentManager.h */,
-				123456910ED2E572006EC826 /* IDocumentTemplate.h */,
+				123456840ED2E572006EC826 /* CCompositeDocumentTemplateComp.h */,
+				123456850ED2E572006EC826 /* CMultiDocumentManagerBase.h */,
+				123456860ED2E572006EC826 /* CSingleDocumentManagerBase.h */,
+				123456870ED2E572006EC826 /* CSingleDocumentTemplateBase.h */,
+				123456880ED2E572006EC826 /* CSingleDocumentTemplateComp.h */,
+				123456890ED2E572006EC826 /* ICommand.h */,
+				123456900ED2E572006EC826 /* ICommandsProvider.h */,
+				123456910ED2E572006EC826 /* idoc.h */,
+				123456920ED2E572006EC826 /* IDocumentManager.h */,
+				123456930ED2E572006EC826 /* IDocumentTemplate.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -84,9 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				123456790ED2E572006EC826 /* CCompositeDocumentTemplateComp.cpp */,
-				123456800ED2E572006EC826 /* CDocumentManagerBase.cpp */,
-				123456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */,
-				123456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */,
+				123456800ED2E572006EC826 /* CMultiDocumentManagerBase.cpp */,
+				123456810ED2E572006EC826 /* CSingleDocumentManagerBase.cpp */,
+				123456820ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp */,
+				123456830ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -134,15 +140,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				223456830ED2E572006EC826 /* CCompositeDocumentTemplateComp.h in Headers */,
-				223456840ED2E572006EC826 /* CDocumentManagerBase.h in Headers */,
-				223456850ED2E572006EC826 /* CSingleDocumentTemplateBase.h in Headers */,
-				223456860ED2E572006EC826 /* CSingleDocumentTemplateComp.h in Headers */,
-				223456870ED2E572006EC826 /* ICommand.h in Headers */,
-				223456880ED2E572006EC826 /* ICommandsProvider.h in Headers */,
-				223456890ED2E572006EC826 /* idoc.h in Headers */,
-				223456900ED2E572006EC826 /* IDocumentManager.h in Headers */,
-				223456910ED2E572006EC826 /* IDocumentTemplate.h in Headers */,
+				223456840ED2E572006EC826 /* CCompositeDocumentTemplateComp.h in Headers */,
+				223456850ED2E572006EC826 /* CMultiDocumentManagerBase.h in Headers */,
+				223456860ED2E572006EC826 /* CSingleDocumentManagerBase.h in Headers */,
+				223456870ED2E572006EC826 /* CSingleDocumentTemplateBase.h in Headers */,
+				223456880ED2E572006EC826 /* CSingleDocumentTemplateComp.h in Headers */,
+				223456890ED2E572006EC826 /* ICommand.h in Headers */,
+				223456900ED2E572006EC826 /* ICommandsProvider.h in Headers */,
+				223456910ED2E572006EC826 /* idoc.h in Headers */,
+				223456920ED2E572006EC826 /* IDocumentManager.h in Headers */,
+				223456930ED2E572006EC826 /* IDocumentTemplate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,9 +214,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				223456790ED2E572006EC826 /* CCompositeDocumentTemplateComp.cpp in Sources */,
-				223456800ED2E572006EC826 /* CDocumentManagerBase.cpp in Sources */,
-				223456810ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp in Sources */,
-				223456820ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp in Sources */,
+				223456800ED2E572006EC826 /* CMultiDocumentManagerBase.cpp in Sources */,
+				223456810ED2E572006EC826 /* CSingleDocumentManagerBase.cpp in Sources */,
+				223456820ED2E572006EC826 /* CSingleDocumentTemplateBase.cpp in Sources */,
+				223456830ED2E572006EC826 /* CSingleDocumentTemplateComp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
