@@ -133,9 +133,11 @@ istd::CString CSingleDocumentWorkspaceGuiComp::GetOpenFileName(const std::string
 
 	if (!files.isEmpty()){
 		UpdateLastDirectory(files.at(0));
+
+		return iqt::GetCString(files.at(0));
 	}
 
-	return iqt::GetCString(files.at(0));
+	return "";
 }
 
 

@@ -66,13 +66,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EABF76720F05DCF200119803 /* QtCore.framework in Frameworks */,
 				EA2842AF0EF0269B0044F226 /* QtGui.framework in Frameworks */,
 				EA2842B10EF0269B0044F226 /* QtNetwork.framework in Frameworks */,
 				EA2842B30EF0269B0044F226 /* QtScript.framework in Frameworks */,
 				EA2842B60EF0269B0044F226 /* QtXml.framework in Frameworks */,
-				EA99D4580F04584D003471A1 /* libacfqt.a in Frameworks */,
 				EA99D4960F04585C003471A1 /* libacfstd.a in Frameworks */,
-				EABF76720F05DCF200119803 /* QtCore.framework in Frameworks */,
+				EA99D4580F04584D003471A1 /* libacfqt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,8 +87,8 @@
 				EA2842A80EF0269A0044F226 /* QtNetwork.framework */,
 				EA2842AA0EF0269A0044F226 /* QtScript.framework */,
 				EA2842AD0EF0269A0044F226 /* QtXml.framework */,
-				EA283D6D0EF024A40044F226 /* AcfQt.xcodeproj */,
 				EA283D4A0EF024880044F226 /* AcfStd.xcodeproj */,
+				EA283D6D0EF024A40044F226 /* AcfQt.xcodeproj */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				EA9856A50EEABE3D00C738EF /* Generated */,
@@ -272,9 +272,9 @@
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				HEADER_SEARCH_PATHS = (
 					../../../Include,
 					"${QTDIR}/include",
@@ -321,13 +321,14 @@
 				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+					"\"$(QTDIR)/lib\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = QtPck;
@@ -345,10 +346,11 @@
 				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+					"\"$(QTDIR)/lib\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = QtPck;

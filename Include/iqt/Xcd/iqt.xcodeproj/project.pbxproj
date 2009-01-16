@@ -34,10 +34,8 @@
 		223457030ED2E572006EC826 /* CDateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* CDateTime.h */; };
 		223457040ED2E572006EC826 /* CDefaultServicesProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* CDefaultServicesProvider.h */; };
 		223457050ED2E572006EC826 /* CDirList.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* CDirList.h */; };
-		223457060ED2E572006EC826 /* CDirList.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* CDirList.moc */; };
 		223457070ED2E572006EC826 /* CDllFunctionsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* CDllFunctionsProvider.h */; };
 		223457080ED2E572006EC826 /* CFileList.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* CFileList.h */; };
-		223457090ED2E572006EC826 /* CFileList.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* CFileList.moc */; };
 		223457100ED2E572006EC826 /* CPackagesLoaderComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* CPackagesLoaderComp.h */; };
 		223457110ED2E572006EC826 /* CReflectedBitmapBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* CReflectedBitmapBase.h */; };
 		223457120ED2E572006EC826 /* CSettingsArchiveBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* CSettingsArchiveBase.h */; };
@@ -51,8 +49,8 @@
 		223457200ED2E572006EC826 /* IQImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* IQImageProvider.h */; };
 		223457210ED2E572006EC826 /* iqt.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* iqt.h */; };
 		223457220ED2E572006EC826 /* ITranslationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* ITranslationManager.h */; };
-		223457230ED2E572006EC826 /* moc_CDirList.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* moc_CDirList.cpp */; };
-		223457240ED2E572006EC826 /* moc_CFileList.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* moc_CFileList.cpp */; };
+		223457230ED2E572006EC826 /* moc_CDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* moc_CDirList.cpp */; };
+		223457240ED2E572006EC826 /* moc_CFileList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* moc_CFileList.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,35 +128,6 @@
 			name = iqt;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456990ED2E572006EC826 /* CApplicationEnvironment.h */,
-				123457000ED2E572006EC826 /* CBitmap.h */,
-				123457010ED2E572006EC826 /* CBitmapLoaderComp.h */,
-				123457020ED2E572006EC826 /* CCriticalSection.h */,
-				123457030ED2E572006EC826 /* CDateTime.h */,
-				123457040ED2E572006EC826 /* CDefaultServicesProvider.h */,
-				123457050ED2E572006EC826 /* CDirList.h */,
-				123457070ED2E572006EC826 /* CDllFunctionsProvider.h */,
-				123457080ED2E572006EC826 /* CFileList.h */,
-				123457100ED2E572006EC826 /* CPackagesLoaderComp.h */,
-				123457110ED2E572006EC826 /* CReflectedBitmapBase.h */,
-				123457120ED2E572006EC826 /* CSettingsArchiveBase.h */,
-				123457130ED2E572006EC826 /* CSettingsReadArchive.h */,
-				123457140ED2E572006EC826 /* CSettingsSerializerComp.h */,
-				123457150ED2E572006EC826 /* CSettingsWriteArchive.h */,
-				123457160ED2E572006EC826 /* CSignalBlocker.h */,
-				123457170ED2E572006EC826 /* CTimer.h */,
-				123457180ED2E572006EC826 /* CXmlFileReadArchive.h */,
-				123457190ED2E572006EC826 /* CXmlFileWriteArchive.h */,
-				123457200ED2E572006EC826 /* IQImageProvider.h */,
-				123457210ED2E572006EC826 /* iqt.h */,
-				123457220ED2E572006EC826 /* ITranslationManager.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,18 +155,19 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libiqt.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -218,12 +188,40 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libiqt.a */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456990ED2E572006EC826 /* CApplicationEnvironment.h */,
+				123457000ED2E572006EC826 /* CBitmap.h */,
+				123457010ED2E572006EC826 /* CBitmapLoaderComp.h */,
+				123457020ED2E572006EC826 /* CCriticalSection.h */,
+				123457030ED2E572006EC826 /* CDateTime.h */,
+				123457040ED2E572006EC826 /* CDefaultServicesProvider.h */,
+				123457050ED2E572006EC826 /* CDirList.h */,
+				123457070ED2E572006EC826 /* CDllFunctionsProvider.h */,
+				123457080ED2E572006EC826 /* CFileList.h */,
+				123457100ED2E572006EC826 /* CPackagesLoaderComp.h */,
+				123457110ED2E572006EC826 /* CReflectedBitmapBase.h */,
+				123457120ED2E572006EC826 /* CSettingsArchiveBase.h */,
+				123457130ED2E572006EC826 /* CSettingsReadArchive.h */,
+				123457140ED2E572006EC826 /* CSettingsSerializerComp.h */,
+				123457150ED2E572006EC826 /* CSettingsWriteArchive.h */,
+				123457160ED2E572006EC826 /* CSignalBlocker.h */,
+				123457170ED2E572006EC826 /* CTimer.h */,
+				123457180ED2E572006EC826 /* CXmlFileReadArchive.h */,
+				123457190ED2E572006EC826 /* CXmlFileWriteArchive.h */,
+				123457200ED2E572006EC826 /* IQImageProvider.h */,
+				123457210ED2E572006EC826 /* iqt.h */,
+				123457220ED2E572006EC826 /* ITranslationManager.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,17 +351,18 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqt;
 				ZERO_LINK = YES;
@@ -373,13 +372,14 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqt;
 			};
@@ -389,8 +389,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

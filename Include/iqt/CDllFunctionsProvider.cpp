@@ -30,6 +30,7 @@ bool CDllFunctionsProvider::OpenDll(const istd::CString& dllPath)
 	Reset();
 
 	m_library.setFileName(iqt::GetQString(dllPath));
+	m_library.setLoadHints(QLibrary::ExportExternalSymbolsHint);
 
 	m_library.load();
 

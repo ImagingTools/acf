@@ -116,6 +116,58 @@
 			name = ibase;
 			sourceTree = "<group>";
 		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				123456790ED2E572006EC826 /* CApplicationInfoComp.cpp */,
+				123456800ED2E572006EC826 /* CComposedLoaderComp.cpp */,
+				123456810ED2E572006EC826 /* CInstantiatorComp.cpp */,
+				123456820ED2E572006EC826 /* CMessage.cpp */,
+				123456830ED2E572006EC826 /* CRectangleComp.cpp */,
+				123456840ED2E572006EC826 /* CRegistryCodeSaverComp.cpp */,
+				123456850ED2E572006EC826 /* CSize.cpp */,
+				123456860ED2E572006EC826 /* CTextDocumentComp.cpp */,
+				123456870ED2E572006EC826 /* CTextFileLoaderComp.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libibase.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
+		EA9856A50EEABE3D00C738EF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
+		EA9856A60EEABE5300C738EF /* Garbages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Garbages;
+			sourceTree = "<group>";
+		};
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EAB5AC950ED2E587006EC826 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,58 +203,6 @@
 				123457170ED2E572006EC826 /* TSingleFactoryComp.h */,
 			);
 			name = Header;
-			sourceTree = "<group>";
-		};
-		08FB7795FE84155DC02AAC07 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				123456790ED2E572006EC826 /* CApplicationInfoComp.cpp */,
-				123456800ED2E572006EC826 /* CComposedLoaderComp.cpp */,
-				123456810ED2E572006EC826 /* CInstantiatorComp.cpp */,
-				123456820ED2E572006EC826 /* CMessage.cpp */,
-				123456830ED2E572006EC826 /* CRectangleComp.cpp */,
-				123456840ED2E572006EC826 /* CRegistryCodeSaverComp.cpp */,
-				123456850ED2E572006EC826 /* CSize.cpp */,
-				123456860ED2E572006EC826 /* CTextDocumentComp.cpp */,
-				123456870ED2E572006EC826 /* CTextFileLoaderComp.cpp */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		C6A0FF2B0290797F04C91782 /* Forms */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		EA9856A50EEABE3D00C738EF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Generated;
-			sourceTree = "<group>";
-		};
-		EA9856A60EEABE5300C738EF /* Garbages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Garbages;
-			sourceTree = "<group>";
-		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2AAC046055464E500DB518D /* libibase.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,17 +323,18 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = ibase;
 				ZERO_LINK = YES;
@@ -343,13 +344,14 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = ibase;
 			};
@@ -359,13 +361,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../../,
-				);
+				HEADER_SEARCH_PATHS = ../../;
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
@@ -382,9 +382,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../../,
-				);
+				HEADER_SEARCH_PATHS = ../../;
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};

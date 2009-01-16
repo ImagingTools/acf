@@ -11,19 +11,14 @@
 		223456800ED2E572006EC826 /* CFileNameParamGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* CFileNameParamGuiComp.cpp */; };
 		223456810ED2E572006EC826 /* CParamsManagerGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456810ED2E572006EC826 /* CParamsManagerGuiComp.cpp */; };
 		223456820ED2E572006EC826 /* CComposedParamsSetGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456820ED2E572006EC826 /* CComposedParamsSetGuiComp.h */; };
-		223456830ED2E572006EC826 /* CComposedParamsSetGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456830ED2E572006EC826 /* CComposedParamsSetGuiComp.moc */; };
 		223456840ED2E572006EC826 /* CFileNameParamGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456840ED2E572006EC826 /* CFileNameParamGuiComp.h */; };
-		223456850ED2E572006EC826 /* CFileNameParamGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456850ED2E572006EC826 /* CFileNameParamGuiComp.moc */; };
 		223456860ED2E572006EC826 /* CParamsManagerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456860ED2E572006EC826 /* CParamsManagerGuiComp.h */; };
-		223456870ED2E572006EC826 /* CParamsManagerGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456870ED2E572006EC826 /* CParamsManagerGuiComp.moc */; };
 		223456880ED2E572006EC826 /* iqtprm.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456880ED2E572006EC826 /* iqtprm.h */; };
-		223456890ED2E572006EC826 /* moc_CComposedParamsSetGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* moc_CComposedParamsSetGuiComp.cpp */; };
-		223456900ED2E572006EC826 /* moc_CFileNameParamGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* moc_CFileNameParamGuiComp.cpp */; };
-		223456910ED2E572006EC826 /* moc_CParamsManagerGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* moc_CParamsManagerGuiComp.cpp */; };
-		223456920ED2E572006EC826 /* ui_CFileNameParamGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* ui_CFileNameParamGuiComp.h */; };
-		223456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h */; };
-		223456940ED2E572006EC826 /* CFileNameParamGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CFileNameParamGuiComp.ui */; };
-		223456950ED2E572006EC826 /* CParamsManagerGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* CParamsManagerGuiComp.ui */; };
+		223456890ED2E572006EC826 /* moc_CComposedParamsSetGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456890ED2E572006EC826 /* moc_CComposedParamsSetGuiComp.cpp */; };
+		223456900ED2E572006EC826 /* moc_CFileNameParamGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456900ED2E572006EC826 /* moc_CFileNameParamGuiComp.cpp */; };
+		223456910ED2E572006EC826 /* moc_CParamsManagerGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456910ED2E572006EC826 /* moc_CParamsManagerGuiComp.cpp */; };
+		223456920ED2E572006EC826 /* ui_CFileNameParamGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456920ED2E572006EC826 /* ui_CFileNameParamGuiComp.h */; };
+		223456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* ui_CParamsManagerGuiComp.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,17 +67,6 @@
 			name = iqtprm;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456820ED2E572006EC826 /* CComposedParamsSetGuiComp.h */,
-				123456840ED2E572006EC826 /* CFileNameParamGuiComp.h */,
-				123456860ED2E572006EC826 /* CParamsManagerGuiComp.h */,
-				123456880ED2E572006EC826 /* iqtprm.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +77,14 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libiqtprm.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,13 +92,6 @@
 				123456950ED2E572006EC826 /* CParamsManagerGuiComp.ui */,
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -131,12 +116,22 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libiqtprm.a */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456820ED2E572006EC826 /* CComposedParamsSetGuiComp.h */,
+				123456840ED2E572006EC826 /* CFileNameParamGuiComp.h */,
+				123456860ED2E572006EC826 /* CParamsManagerGuiComp.h */,
+				123456880ED2E572006EC826 /* iqtprm.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,17 +235,18 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqtprm;
 				ZERO_LINK = YES;
@@ -260,13 +256,14 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqtprm;
 			};
@@ -276,8 +273,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

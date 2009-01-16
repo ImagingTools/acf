@@ -55,35 +55,35 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97DC0EEC33A100FD019A /* iqtgui.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtgui */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iqtgui;
 		};
 		EABF77AD0F06DEB900119803 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97CA0EEC338100FD019A /* iqt2d.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqt2d */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iqt2d;
 		};
 		EABF77AF0F06DEB900119803 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97D30EEC339200FD019A /* iqtdoc.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtdoc */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iqtdoc;
 		};
 		EABF77B10F06DEB900119803 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97E50EEC33BB00FD019A /* iqtprm.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqtprm */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iqtprm;
 		};
 		EABF77B30F06DEB900119803 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA5A97C10EEC337100FD019A /* iqt.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* iqt */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = iqt;
 		};
 /* End PBXContainerItemProxy section */
@@ -237,7 +237,7 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC045055464E500DB518D /* iqt */ = {
+		D2AAC045055464E500DB518D /* acfqt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "acfqt" */;
 			buildPhases = (
@@ -294,7 +294,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				D2AAC045055464E500DB518D /* iqt */,
+				D2AAC045055464E500DB518D /* acfqt */,
 			);
 		};
 /* End PBXProject section */
@@ -424,8 +424,8 @@
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

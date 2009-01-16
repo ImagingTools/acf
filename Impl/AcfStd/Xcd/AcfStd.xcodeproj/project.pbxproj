@@ -267,19 +267,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA99CB610F045115003471A1 /* libiser.a in Frameworks */,
-				EA99CB620F045116003471A1 /* libisys.a in Frameworks */,
-				EA99CB630F045116003471A1 /* libicomp.a in Frameworks */,
-				EA99CB640F045117003471A1 /* libimath.a in Frameworks */,
-				EA99CB650F045118003471A1 /* libiprm.a in Frameworks */,
-				EA99CB660F045118003471A1 /* libidoc.a in Frameworks */,
-				EA99CB670F045119003471A1 /* libi2d.a in Frameworks */,
-				EA99CB680F045119003471A1 /* libimod.a in Frameworks */,
-				EA99CB690F04511A003471A1 /* libicmm.a in Frameworks */,
 				EA99CB6A0F04511B003471A1 /* libistd.a in Frameworks */,
-				EA99CB6B0F04511B003471A1 /* libibase.a in Frameworks */,
+				EA99CB610F045115003471A1 /* libiser.a in Frameworks */,
+				EA99CB680F045119003471A1 /* libimod.a in Frameworks */,
+				EA99CB640F045117003471A1 /* libimath.a in Frameworks */,
+				EA99CB670F045119003471A1 /* libi2d.a in Frameworks */,
+				EA99CB620F045116003471A1 /* libisys.a in Frameworks */,
+				EA99CB690F04511A003471A1 /* libicmm.a in Frameworks */,
 				EA99CB6C0F04511C003471A1 /* libimeas.a in Frameworks */,
 				EA99CB6D0F04511C003471A1 /* libiimg.a in Frameworks */,
+				EA99CB630F045116003471A1 /* libicomp.a in Frameworks */,
+				EA99CB6B0F04511B003471A1 /* libibase.a in Frameworks */,
+				EA99CB650F045118003471A1 /* libiprm.a in Frameworks */,
+				EA99CB660F045118003471A1 /* libidoc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,13 +810,11 @@
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../..,
-				);
+				HEADER_SEARCH_PATHS = ../..;
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
@@ -834,9 +832,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../..,
-				);
+				HEADER_SEARCH_PATHS = ../..;
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};

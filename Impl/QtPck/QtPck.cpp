@@ -26,7 +26,6 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 I_EXPORT_PACKAGE("Qt", "Standard Qt package", "Qt Standard");
 
 I_EXPORT_COMPONENT(PackagesLoader, "Load and cache packages from files", "Component Cache Package Load File");
-I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 I_EXPORT_COMPONENT(GuiApplication, "Main entry point for window based Qt application", "Application Main Entry Start Begin Qt");
 I_EXPORT_COMPONENT(SplashScreen, "Splash screen", "Splash Screen Start Begin Qt GUI");
 I_EXPORT_COMPONENT(Log, "Applcation log as simple list", "Log Info List Qt GUI");
@@ -37,6 +36,7 @@ I_EXPORT_COMPONENT(ExtendedDocumentTemplate, "Extended serialized document templ
 I_EXPORT_COMPONENT(MainWindowGui, "Main Qt application window", "Main Window Start Begin GUI Qt");
 I_EXPORT_COMPONENT(SingleDocWorkspaceGui, "Single document workspace", "Workspace Single SDI Document Model View Observer MVC GUI Qt");
 I_EXPORT_COMPONENT(MultiDocWorkspaceGui, "Multi document workspace", "Workspace Multi MDI Document Model View Observer MVC GUI Qt");
+I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 
 I_EXPORT_COMPONENT(Bitmap, "QImage based bitmap implementation", "QImage Image Bitmap Qt");
 I_EXPORT_COMPONENT(BitmapLoader, "Loader loading bitmaps using Qt standard implementations", "Image Bitmap Qt File Loader");

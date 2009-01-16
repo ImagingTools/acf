@@ -9,12 +9,49 @@
 /* Begin PBXBuildFile section */
 		223456790ED2E572006EC826 /* ZlibPck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456790ED2E572006EC826 /* ZlibPck.cpp */; };
 		223456800ED2E572006EC826 /* ZlibPck.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456800ED2E572006EC826 /* ZlibPck.h */; };
+		EAD605AC0F1BB37300883059 /* libacfstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD605AB0F1BB35900883059 /* libacfstd.a */; };
+		EAD605B60F1BB3E500883059 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD605B50F1BB3E500883059 /* libz.a */; };
+		EAD605F90F1BB48C00883059 /* libizlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD605F70F1BB47B00883059 /* libizlib.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAD605AA0F1BB35900883059 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libacfstd.a */;
+			remoteInfo = acfstd;
+		};
+		EAD605F60F1BB47B00883059 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libizlib.a */;
+			remoteInfo = izlib;
+		};
+		EAD605FA0F1BB49900883059 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteInfo = acfstd;
+		};
+		EAD605FC0F1BB49900883059 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* izlib */;
+			remoteInfo = izlib;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		123456790ED2E572006EC826 /* ZlibPck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZlibPck.cpp; path = ../ZlibPck.cpp; sourceTree = SOURCE_ROOT; };
 		123456800ED2E572006EC826 /* ZlibPck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZlibPck.h; path = ../ZlibPck.h; sourceTree = SOURCE_ROOT; };
-		D2AAC046055464E500DB518D /* ZlibPck.arp */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = ZlibPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* ZlibPck.arp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = ZlibPck.arp; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AcfStd.xcodeproj; path = ../../AcfStd/Xcd/AcfStd.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAD605B50F1BB3E500883059 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = lib/libz.a; sourceTree = ZLIBDIR; };
+		EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = izlib.xcodeproj; path = ../../../Include/izlib/Xcd/izlib.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD605AC0F1BB37300883059 /* libacfstd.a in Frameworks */,
+				EAD605B60F1BB3E500883059 /* libz.a in Frameworks */,
+				EAD605F90F1BB48C00883059 /* libizlib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +71,9 @@
 		08FB7794FE84155DC02AAC07 /* ZlibPck */ = {
 			isa = PBXGroup;
 			children = (
+				EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */,
+				EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */,
+				EAD605B50F1BB3E500883059 /* libz.a */,
 				EAB5AC950ED2E587006EC826 /* Header */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Forms */,
@@ -42,14 +85,6 @@
 			name = ZlibPck;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456800ED2E572006EC826 /* ZlibPck.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,18 +93,19 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* ZlibPck.arp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -86,10 +122,33 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* ZlibPck.arp */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456800ED2E572006EC826 /* ZlibPck.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		EAD605700F1BB35900883059 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAD605AB0F1BB35900883059 /* libacfstd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAD605F00F1BB47B00883059 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAD605F70F1BB47B00883059 /* libizlib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +179,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				EAD605FB0F1BB49900883059 /* PBXTargetDependency */,
+				EAD605FD0F1BB49900883059 /* PBXTargetDependency */,
 			);
 			name = ZlibPck;
 			productName = ZlibPck;
@@ -136,12 +197,39 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* ZlibPck */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EAD605700F1BB35900883059 /* Products */;
+					ProjectRef = EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */;
+				},
+				{
+					ProductGroup = EAD605F00F1BB47B00883059 /* Products */;
+					ProjectRef = EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* ZlibPck */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EAD605AB0F1BB35900883059 /* libacfstd.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libacfstd.a;
+			remoteRef = EAD605AA0F1BB35900883059 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EAD605F70F1BB47B00883059 /* libizlib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libizlib.a;
+			remoteRef = EAD605F60F1BB47B00883059 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		EA6981130EEBF38E00FE4110 /* ShellScript */ = {
@@ -171,22 +259,39 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EAD605FB0F1BB49900883059 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = acfstd;
+			targetProxy = EAD605FA0F1BB49900883059 /* PBXContainerItemProxy */;
+		};
+		EAD605FD0F1BB49900883059 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = izlib;
+			targetProxy = EAD605FC0F1BB49900883059 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../ExtLib/zlib/lib\"",
+				);
 				PRODUCT_NAME = ZlibPck;
 				ZERO_LINK = YES;
 			};
@@ -195,14 +300,18 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "arp";
-				EXECUTABLE_PREFIX = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = arp;
+				EXECUTABLE_PREFIX = "";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../ExtLib/zlib/lib\"",
+				);
 				PRODUCT_NAME = ZlibPck;
 			};
 			name = Release;
@@ -211,8 +320,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

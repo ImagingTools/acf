@@ -24,61 +24,43 @@
 		223456930ED2E572006EC826 /* CSceneConnectorGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456930ED2E572006EC826 /* CSceneConnectorGuiComp.cpp */; };
 		223456940ED2E572006EC826 /* CSceneProviderComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123456940ED2E572006EC826 /* CSceneProviderComp.cpp */; };
 		223456950ED2E572006EC826 /* CAnnulusParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456950ED2E572006EC826 /* CAnnulusParamsGuiComp.h */; };
-		223456960ED2E572006EC826 /* CAnnulusParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456960ED2E572006EC826 /* CAnnulusParamsGuiComp.moc */; };
 		223456970ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456970ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.h */; };
-		223456980ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123456980ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.moc */; };
 		223456990ED2E572006EC826 /* CAnnulusSegmentShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123456990ED2E572006EC826 /* CAnnulusSegmentShape.h */; };
-		223457000ED2E572006EC826 /* CAnnulusSegmentShape.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457000ED2E572006EC826 /* CAnnulusSegmentShape.moc */; };
 		223457010ED2E572006EC826 /* CAnnulusShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457010ED2E572006EC826 /* CAnnulusShape.h */; };
-		223457020ED2E572006EC826 /* CAnnulusShape.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457020ED2E572006EC826 /* CAnnulusShape.moc */; };
 		223457030ED2E572006EC826 /* CCircleParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457030ED2E572006EC826 /* CCircleParamsGuiComp.h */; };
-		223457040ED2E572006EC826 /* CCircleParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457040ED2E572006EC826 /* CCircleParamsGuiComp.moc */; };
 		223457050ED2E572006EC826 /* CCircleShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457050ED2E572006EC826 /* CCircleShape.h */; };
-		223457060ED2E572006EC826 /* CCircleShape.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457060ED2E572006EC826 /* CCircleShape.moc */; };
 		223457070ED2E572006EC826 /* CGripShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457070ED2E572006EC826 /* CGripShape.h */; };
-		223457080ED2E572006EC826 /* CGripShape.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457080ED2E572006EC826 /* CGripShape.moc */; };
 		223457090ED2E572006EC826 /* CImageShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457090ED2E572006EC826 /* CImageShape.h */; };
 		223457100ED2E572006EC826 /* CImageViewComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457100ED2E572006EC826 /* CImageViewComp.h */; };
 		223457110ED2E572006EC826 /* CLine2dParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457110ED2E572006EC826 /* CLine2dParamsGuiComp.h */; };
-		223457120ED2E572006EC826 /* CLine2dParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457120ED2E572006EC826 /* CLine2dParamsGuiComp.moc */; };
 		223457130ED2E572006EC826 /* CLine2dShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457130ED2E572006EC826 /* CLine2dShape.h */; };
-		223457140ED2E572006EC826 /* CLine2dShape.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457140ED2E572006EC826 /* CLine2dShape.moc */; };
 		223457150ED2E572006EC826 /* CPosition2dShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457150ED2E572006EC826 /* CPosition2dShape.h */; };
 		223457160ED2E572006EC826 /* CRectangleParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457160ED2E572006EC826 /* CRectangleParamsGuiComp.h */; };
-		223457170ED2E572006EC826 /* CRectangleParamsGuiComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457170ED2E572006EC826 /* CRectangleParamsGuiComp.moc */; };
 		223457180ED2E572006EC826 /* CRectangleShape.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457180ED2E572006EC826 /* CRectangleShape.h */; };
-		223457190ED2E572006EC826 /* CRectangleShape.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457190ED2E572006EC826 /* CRectangleShape.moc */; };
 		223457200ED2E572006EC826 /* CSceneConnectorGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* CSceneConnectorGuiComp.h */; };
 		223457210ED2E572006EC826 /* CSceneProviderComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* CSceneProviderComp.h */; };
-		223457220ED2E572006EC826 /* CSceneProviderComp.moc in Garbages */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* CSceneProviderComp.moc */; };
 		223457230ED2E572006EC826 /* iqt2d.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* iqt2d.h */; };
 		223457240ED2E572006EC826 /* ISceneExtender.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* ISceneExtender.h */; };
 		223457250ED2E572006EC826 /* ISceneProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457250ED2E572006EC826 /* ISceneProvider.h */; };
 		223457260ED2E572006EC826 /* TObjectShapeBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457260ED2E572006EC826 /* TObjectShapeBase.h */; };
 		223457270ED2E572006EC826 /* TSceneExtenderCompBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457270ED2E572006EC826 /* TSceneExtenderCompBase.h */; };
 		223457280ED2E572006EC826 /* TShapeBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457280ED2E572006EC826 /* TShapeBase.h */; };
-		223457290ED2E572006EC826 /* moc_CAnnulusParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457290ED2E572006EC826 /* moc_CAnnulusParamsGuiComp.cpp */; };
-		223457300ED2E572006EC826 /* moc_CAnnulusSegmentParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457300ED2E572006EC826 /* moc_CAnnulusSegmentParamsGuiComp.cpp */; };
-		223457310ED2E572006EC826 /* moc_CAnnulusSegmentShape.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457310ED2E572006EC826 /* moc_CAnnulusSegmentShape.cpp */; };
-		223457320ED2E572006EC826 /* moc_CAnnulusShape.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457320ED2E572006EC826 /* moc_CAnnulusShape.cpp */; };
-		223457330ED2E572006EC826 /* moc_CCircleParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457330ED2E572006EC826 /* moc_CCircleParamsGuiComp.cpp */; };
-		223457340ED2E572006EC826 /* moc_CCircleShape.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457340ED2E572006EC826 /* moc_CCircleShape.cpp */; };
-		223457350ED2E572006EC826 /* moc_CGripShape.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457350ED2E572006EC826 /* moc_CGripShape.cpp */; };
-		223457360ED2E572006EC826 /* moc_CLine2dParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457360ED2E572006EC826 /* moc_CLine2dParamsGuiComp.cpp */; };
-		223457370ED2E572006EC826 /* moc_CLine2dShape.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* moc_CLine2dShape.cpp */; };
-		223457380ED2E572006EC826 /* moc_CRectangleParamsGuiComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457380ED2E572006EC826 /* moc_CRectangleParamsGuiComp.cpp */; };
-		223457390ED2E572006EC826 /* moc_CRectangleShape.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457390ED2E572006EC826 /* moc_CRectangleShape.cpp */; };
-		223457400ED2E572006EC826 /* moc_CSceneProviderComp.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457400ED2E572006EC826 /* moc_CSceneProviderComp.cpp */; };
-		223457410ED2E572006EC826 /* ui_CAnnulusParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457410ED2E572006EC826 /* ui_CAnnulusParamsGuiComp.h */; };
-		223457420ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457420ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h */; };
-		223457430ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457430ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h */; };
-		223457440ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457440ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h */; };
-		223457450ED2E572006EC826 /* CAnnulusParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457450ED2E572006EC826 /* CAnnulusParamsGuiComp.ui */; };
-		223457460ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457460ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.ui */; };
-		223457470ED2E572006EC826 /* CCircleParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457470ED2E572006EC826 /* CCircleParamsGuiComp.ui */; };
-		223457480ED2E572006EC826 /* CLine2dParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457480ED2E572006EC826 /* CLine2dParamsGuiComp.ui */; };
-		223457490ED2E572006EC826 /* CRectangleParamsGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457490ED2E572006EC826 /* CRectangleParamsGuiComp.ui */; };
-		223457500ED2E572006EC826 /* CSceneConnectorGuiComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457500ED2E572006EC826 /* CSceneConnectorGuiComp.ui */; };
+		223457290ED2E572006EC826 /* moc_CAnnulusParamsGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457290ED2E572006EC826 /* moc_CAnnulusParamsGuiComp.cpp */; };
+		223457300ED2E572006EC826 /* moc_CAnnulusSegmentParamsGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457300ED2E572006EC826 /* moc_CAnnulusSegmentParamsGuiComp.cpp */; };
+		223457310ED2E572006EC826 /* moc_CAnnulusSegmentShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457310ED2E572006EC826 /* moc_CAnnulusSegmentShape.cpp */; };
+		223457320ED2E572006EC826 /* moc_CAnnulusShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457320ED2E572006EC826 /* moc_CAnnulusShape.cpp */; };
+		223457330ED2E572006EC826 /* moc_CCircleParamsGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457330ED2E572006EC826 /* moc_CCircleParamsGuiComp.cpp */; };
+		223457340ED2E572006EC826 /* moc_CCircleShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457340ED2E572006EC826 /* moc_CCircleShape.cpp */; };
+		223457350ED2E572006EC826 /* moc_CGripShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457350ED2E572006EC826 /* moc_CGripShape.cpp */; };
+		223457360ED2E572006EC826 /* moc_CLine2dParamsGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457360ED2E572006EC826 /* moc_CLine2dParamsGuiComp.cpp */; };
+		223457370ED2E572006EC826 /* moc_CLine2dShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457370ED2E572006EC826 /* moc_CLine2dShape.cpp */; };
+		223457380ED2E572006EC826 /* moc_CRectangleParamsGuiComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457380ED2E572006EC826 /* moc_CRectangleParamsGuiComp.cpp */; };
+		223457390ED2E572006EC826 /* moc_CRectangleShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457390ED2E572006EC826 /* moc_CRectangleShape.cpp */; };
+		223457400ED2E572006EC826 /* moc_CSceneProviderComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 123457400ED2E572006EC826 /* moc_CSceneProviderComp.cpp */; };
+		223457410ED2E572006EC826 /* ui_CAnnulusParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457410ED2E572006EC826 /* ui_CAnnulusParamsGuiComp.h */; };
+		223457420ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457420ED2E572006EC826 /* ui_CLine2dParamsGuiComp.h */; };
+		223457430ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457430ED2E572006EC826 /* ui_CRectangleParamsGuiComp.h */; };
+		223457440ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457440ED2E572006EC826 /* ui_CSceneConnectorGuiComp.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,35 +164,6 @@
 			name = iqt2d;
 			sourceTree = "<group>";
 		};
-		EAB5AC950ED2E587006EC826 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				123456950ED2E572006EC826 /* CAnnulusParamsGuiComp.h */,
-				123456970ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.h */,
-				123456990ED2E572006EC826 /* CAnnulusSegmentShape.h */,
-				123457010ED2E572006EC826 /* CAnnulusShape.h */,
-				123457030ED2E572006EC826 /* CCircleParamsGuiComp.h */,
-				123457050ED2E572006EC826 /* CCircleShape.h */,
-				123457070ED2E572006EC826 /* CGripShape.h */,
-				123457090ED2E572006EC826 /* CImageShape.h */,
-				123457100ED2E572006EC826 /* CImageViewComp.h */,
-				123457110ED2E572006EC826 /* CLine2dParamsGuiComp.h */,
-				123457130ED2E572006EC826 /* CLine2dShape.h */,
-				123457150ED2E572006EC826 /* CPosition2dShape.h */,
-				123457160ED2E572006EC826 /* CRectangleParamsGuiComp.h */,
-				123457180ED2E572006EC826 /* CRectangleShape.h */,
-				123457200ED2E572006EC826 /* CSceneConnectorGuiComp.h */,
-				123457210ED2E572006EC826 /* CSceneProviderComp.h */,
-				123457230ED2E572006EC826 /* iqt2d.h */,
-				123457240ED2E572006EC826 /* ISceneExtender.h */,
-				123457250ED2E572006EC826 /* ISceneProvider.h */,
-				123457260ED2E572006EC826 /* TObjectShapeBase.h */,
-				123457270ED2E572006EC826 /* TSceneExtenderCompBase.h */,
-				123457280ED2E572006EC826 /* TShapeBase.h */,
-			);
-			name = Header;
-			sourceTree = "<group>";
-		};
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +187,14 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libiqt2d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,13 +206,6 @@
 				123457500ED2E572006EC826 /* CSceneConnectorGuiComp.ui */,
 			);
 			name = Forms;
-			sourceTree = "<group>";
-		};
-		EA9856AA0EEABE3D00C738EF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA9856A50EEABE3D00C738EF /* Generated */ = {
@@ -296,12 +250,40 @@
 			name = Garbages;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+		EA9856AA0EEABE3D00C738EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC046055464E500DB518D /* libiqt2d.a */,
 			);
-			name = Products;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5AC950ED2E587006EC826 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				123456950ED2E572006EC826 /* CAnnulusParamsGuiComp.h */,
+				123456970ED2E572006EC826 /* CAnnulusSegmentParamsGuiComp.h */,
+				123456990ED2E572006EC826 /* CAnnulusSegmentShape.h */,
+				123457010ED2E572006EC826 /* CAnnulusShape.h */,
+				123457030ED2E572006EC826 /* CCircleParamsGuiComp.h */,
+				123457050ED2E572006EC826 /* CCircleShape.h */,
+				123457070ED2E572006EC826 /* CGripShape.h */,
+				123457090ED2E572006EC826 /* CImageShape.h */,
+				123457100ED2E572006EC826 /* CImageViewComp.h */,
+				123457110ED2E572006EC826 /* CLine2dParamsGuiComp.h */,
+				123457130ED2E572006EC826 /* CLine2dShape.h */,
+				123457150ED2E572006EC826 /* CPosition2dShape.h */,
+				123457160ED2E572006EC826 /* CRectangleParamsGuiComp.h */,
+				123457180ED2E572006EC826 /* CRectangleShape.h */,
+				123457200ED2E572006EC826 /* CSceneConnectorGuiComp.h */,
+				123457210ED2E572006EC826 /* CSceneProviderComp.h */,
+				123457230ED2E572006EC826 /* iqt2d.h */,
+				123457240ED2E572006EC826 /* ISceneExtender.h */,
+				123457250ED2E572006EC826 /* ISceneProvider.h */,
+				123457260ED2E572006EC826 /* TObjectShapeBase.h */,
+				123457270ED2E572006EC826 /* TSceneExtenderCompBase.h */,
+				123457280ED2E572006EC826 /* TShapeBase.h */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,17 +455,18 @@
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqt2d;
 				ZERO_LINK = YES;
@@ -493,13 +476,14 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				CONFIGURATION_BUILD_DIR = "../../../Lib/$(CONFIGURATION)Xcd";
-				EXECUTABLE_EXTENSION = "a";
-				EXECUTABLE_PREFIX = "lib";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THREADSAFE_STATICS = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = iqt2d;
 			};
@@ -509,8 +493,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
