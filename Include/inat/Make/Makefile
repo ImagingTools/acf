@@ -1,4 +1,5 @@
 OUTPUT_NAME=inat
+BUILD_STATIC_LIB = 1
 
 HAS_CPP = 0
 

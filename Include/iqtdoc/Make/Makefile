@@ -1,4 +1,5 @@
 OUTPUT_NAME=iqtdoc
+BUILD_STATIC_LIB = 1
 
 # include the basic definitions for this module
 include ../../../Impl/Make/Makefile.settings
@@ -8,6 +9,7 @@ include ../../../Impl/Make/MakefileQt.settings
 
 HAS_UI = 0
 HAS_MOC = 1
+HAS_RESOURCES = 1
 
 # include the basic rules for creation this module
 include ../../../Impl/Make/Makefile.rules

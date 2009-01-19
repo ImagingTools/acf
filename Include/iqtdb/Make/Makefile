@@ -1,4 +1,5 @@
 OUTPUT_NAME=iqtdb
+BUILD_STATIC_LIB = 1
 
 HAS_CPP = 1
 HAS_UI = 0

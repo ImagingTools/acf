@@ -6,11 +6,12 @@ $(SOURCE_DIR)/iqt/$(MAKE_FOLDER)/libiqt.a \
 $(SOURCE_DIR)/iqt2d/$(MAKE_FOLDER)/libiqt2d.a \
 $(SOURCE_DIR)/iqtdoc/$(MAKE_FOLDER)/libiqtdoc.a \
 $(SOURCE_DIR)/iqtgui/$(MAKE_FOLDER)/libiqtgui.a \
-$(SOURCE_DIR)/iqtprm/$(MAKE_FOLDER)/libiqtprm.a
+$(SOURCE_DIR)/iqtprm/$(MAKE_FOLDER)/libiqtprm.a \
+$(SOURCE_DIR)/icmpstr/$(MAKE_FOLDER)/libicmpstr.a
 
 all: AcfQt
 
-AcfQt: iqt iqt2d iqtdoc iqtgui iqtprm AcfQt.a
+AcfQt: iqt iqt2d iqtdoc iqtgui iqtprm icmpstr AcfQt.a
 
 AcfQt.a: $(ACFQT_OBJECTS)
 
@@ -24,6 +25,8 @@ iqtgui:
 	$(MAKE) -C  $(SOURCE_DIR)/iqtgui/$(MAKE_FOLDER)
 iqtprm:
 	$(MAKE) -C  $(SOURCE_DIR)/iqtprm/$(MAKE_FOLDER)
+icmpstr:
+	$(MAKE) -C  $(SOURCE_DIR)/icmpstr/$(MAKE_FOLDER)
 
 clean:
 	$(MAKE) -C $(SOURCE_DIR)/iqt/$(MAKE_FOLDER) clean
@@ -31,6 +34,7 @@ clean:
 	$(MAKE) -C $(SOURCE_DIR)/iqtdoc/$(MAKE_FOLDER) clean
 	$(MAKE) -C $(SOURCE_DIR)/iqtgui/$(MAKE_FOLDER) clean
 	$(MAKE) -C $(SOURCE_DIR)/iqtprm/$(MAKE_FOLDER) clean
+	$(MAKE) -C $(SOURCE_DIR)/icmpstr/$(MAKE_FOLDER) clean
 	
 # rules for creating the Acf standard library:
 AcfQt.a: $(ACFQT_OBJECTS)

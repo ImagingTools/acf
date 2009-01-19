@@ -1,22 +1,23 @@
-# Makefile to create the Acf Compositor application
-
-BUILD_EXE = 1
+# Makefile to create the Acf runtime application
 OUTPUT_NAME= AcfCompositor
 ACFDIR=../../..
 BINARY_DIR = $(ACFDIR)/Bin
 
-include ../../Make/Makefile.settings
 include ../../Make/MakefileQt.settings
+include ../../Make/Makefile.settings
 
 LIB_DIR = ../../../Include
 MAKE_FOLDER = Make
+AFCSTD= AcfStd
+AFCQT= AcfQt
 
 #define the search libraries pathes
 LIB_PATH = \
 -L$(LIB_DIR)/ibase/$(MAKE_FOLDER)\
 -L$(LIB_DIR)/iqt/$(MAKE_FOLDER)\
--L$(LIB_DIR)/iqtgui/$(MAKE_FOLDER)\
+-L$(LIB_DIR)/icmpstr/$(MAKE_FOLDER)\
 -L$(LIB_DIR)/iqtdoc/$(MAKE_FOLDER)\
+-L$(LIB_DIR)/iqtgui/$(MAKE_FOLDER)\
 -L$(LIB_DIR)/idoc/$(MAKE_FOLDER)\
 -L$(LIB_DIR)/icomp/$(MAKE_FOLDER)\
 -L$(LIB_DIR)/iser/$(MAKE_FOLDER)\
@@ -29,29 +30,39 @@ LIB_PATH = \
 
 #define the libraries, which must be linked to the Acf executable
 LIBS = \
+-licmpstr \
 -liqtdoc \
 -liqtgui \
 -liqt \
 -lidoc \
--licomp \
 -li2d \
--libase \
+-licomp \
 -liser \
--limod \
 -listd \
+-limod \
+-libase \
 -lisys \
 -lQtGui \
 -lQtCore
 
-HAS_UI = 1
-HAS_MOC = 1
-BUILD_EXECUTABLE = 1
+LINKER_FLAGS= -g 
 
-# include the basic rules for creation this module
-include ../../../Impl/Make/Makefile.rules
 
-# include the rules for compilation of Qt related classes
-include ../../../Impl/Make/MakefileQt.rules
+all: $(OUTPUT_NAME)
 
-# include the rules for compilation of Qt related classes
-include ../../../Impl/Make/MakefileExecutable.rules
+# build objects
+$(OUTPUT_NAME): $(LIB_OBJS) $(OBJ_DIR)
+
+# clean objects
+clean:
+	@echo "  CLEAN  "$(OUTPUT_NAME)
+	$(Q)rm -f $(LIB_OBJS)
+	$(Q)rm -f $(AFCEXE)
+   
+# rules for creating the object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo "     CC  "$<
+	$(Q)mkdir -p $(OBJ_DIR)
+	$(Q)$(CXX) ../Main.cpp -o $(OUTPUT_NAME) $(DEFAULT_COMPILER_FLAGS) $(ADDITIONAL_COMPILER_FLAGS) $(LIB_PATH) $(LIBS) $(LINKER_FLAGS)
+	$(Q)mkdir -p $(BINARY_DIR)
+	$(Q)cp $(OUTPUT_NAME) $(BINARY_DIR)/$(OUTPUT_NAME)

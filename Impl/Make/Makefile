@@ -2,7 +2,7 @@
 LIB_DIR = ..
 MAKE_FOLDER = Make
 
-all: AcfStd AcfQt Acf AcfCompositor
+all: AcfStd AcfQt Acf AcfCompositor BasePck
 
 AcfStd: 
 	$(MAKE) -C  $(LIB_DIR)/AcfStd/$(MAKE_FOLDER)
@@ -12,9 +12,12 @@ Acf:
 	$(MAKE) -C  $(LIB_DIR)/AcfExe/$(MAKE_FOLDER)
 AcfCompositor: 
 	$(MAKE) -C  $(LIB_DIR)/CompositorExe/$(MAKE_FOLDER)
+BasePck:
+	$(MAKE) -C  $(LIB_DIR)/BasePck/$(MAKE_FOLDER)
 
 clean:
 	$(MAKE) -C  $(LIB_DIR)/AcfStd/$(MAKE_FOLDER) clean
 	$(MAKE) -C  $(LIB_DIR)/AcfQt/$(MAKE_FOLDER) clean
 	$(MAKE) -C  $(LIB_DIR)/AcfExe/$(MAKE_FOLDER) clean
 	$(MAKE) -C  $(LIB_DIR)/CompositorExe/$(MAKE_FOLDER) clean
+	$(MAKE) -C  $(LIB_DIR)/BasePck/$(MAKE_FOLDER) clean

@@ -37,7 +37,7 @@ endif
 generated:
 	$(MAKE) postgenerated
 
-postgenerated: $(GENERATED_LIB_OBJS) $(OUTPUT_NAME)
+postgenerated: $(GENERATED_LIB_OBJS) $(OUTPUT_NAME) $(OUTPUT_FILE)
 
 # build objects
 $(OUTPUT_NAME): $(LIB_OBJS)
@@ -64,5 +64,6 @@ clean:
 	$(Q)rm -f $(LIB_OBJS)
 	$(Q)rm -f $(MOC_OUTPUT_FILES)
 	$(Q)rm -f $(UI_OUTPUT_FILES)
+	$(Q)rm -f $(QRC_OUTPUT_FILES)
 	$(Q)rm -f $(OUTPUT_FILE)
 	$(Q)rm -f $($(GENERATED_LIB_OBJS)

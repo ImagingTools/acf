@@ -40,7 +40,3 @@ UI_OUTPUT_FILES = $(subst ui_/,ui_,$(UI_TEMP_NAME))
 QRC_INPUT_FILES = $(wildcard $(QRC_SRC_DIR)/*.qrc)
 QRC_TEMP_NAME = $(subst $(QRC_SRC_DIR),$(GENERATED_DIR)/qrc_,$(QRC_INPUT_FILES:%.qrc=%.cpp))
 QRC_OUTPUT_FILES = $(subst qrc_/,qrc_,$(QRC_TEMP_NAME))
-
-#
-# set Qt related compiler flags
-ADDITIONAL_COMPILER_FLAGS = -I$(QTDIR)/include -I$(QTDIR)/include/QtCore -I$(QTDIR)/include/QtGui -I$(QTDIR)/include/QtXml -I$(GENERATED_DIR)

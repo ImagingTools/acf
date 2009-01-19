@@ -1,4 +1,5 @@
 OUTPUT_NAME=iprm
+BUILD_STATIC_LIB = 1
 
 # include the basic definitions for this module
 include ../../../Impl/Make/Makefile.settings

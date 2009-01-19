@@ -26,8 +26,8 @@ namespace iqtdoc
 
 CMultiDocumentWorkspaceGuiComp::CMultiDocumentWorkspaceGuiComp()
 :	m_workspaceModeCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
-	m_tabbedCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
 	m_subWindowCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
+	m_tabbedCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF | idoc::ICommand::CF_EXCLUSIVE),
 	m_viewsCount(0)
 {
 	m_workspaceModeCommand.InsertChild(&m_subWindowCommand, false);
@@ -474,6 +474,7 @@ void CMultiDocumentWorkspaceGuiComp::OnCloseAllViews()
 
 void CMultiDocumentWorkspaceGuiComp::OnWorkspaceModeChanged()
 {
+#if QT_VERSION >= 0x040400
 	QMdiArea* mdiAreaPtr = GetQtWidget();
 
 	if (mdiAreaPtr != NULL){
@@ -484,6 +485,7 @@ void CMultiDocumentWorkspaceGuiComp::OnWorkspaceModeChanged()
 			mdiAreaPtr->setViewMode(QMdiArea::TabbedView);
 		}
 	}
+#endif
 }
 
 

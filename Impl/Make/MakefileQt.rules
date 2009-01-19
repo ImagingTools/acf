@@ -20,10 +20,10 @@ endif
 
 # build qrc files
 ifneq ($(HAS_RESOURCES), 0)
-qrc: $(QRC_OUTPUT_FILES) $(SRC_DIR)
+qrc: $(QRC_OUTPUT_FILES) $(GENERATED_DIR)
 
-$(SRC_DIR)/qrc_%.cpp: $(QRC_SRC_DIR)/%.qrc
+$(GENERATED_DIR)/qrc_%.cpp: $(QRC_SRC_DIR)/%.qrc
 	@echo "     rccing  "$< $@
-	${RCC} -o $@ -name $< -no-compress
+	${RCC} -o $@ $< -name $(OUTPUT_NAME) -no-compress
 endif
   
