@@ -2,11 +2,13 @@
 #define iqtgui_CDockWidgetGuiComp_included
 
 
+// Qt includes
 #include <QDockWidget>
 
+
+// ACF includes
 #include "iqtgui/IMainWindowComponent.h"
 #include "iqtgui/TGuiComponentBase.h"
-
 
 
 namespace iqtgui

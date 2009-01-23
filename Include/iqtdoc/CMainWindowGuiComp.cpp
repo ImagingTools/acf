@@ -1,6 +1,7 @@
 #include "iqtdoc/CMainWindowGuiComp.h"
 
 
+// Qt includes
 #include <QMessageBox>
 #include <QApplication>
 #include <QDragEnterEvent>
@@ -10,12 +11,16 @@
 #include <QStatusBar>
 #include <QStyle>
 
+
+// ACF includes
 #include "imod/IObserver.h"
 
 #include "idoc/ICommandsProvider.h"
 
 #include "iqt/CSettingsWriteArchive.h"
 #include "iqt/CSettingsReadArchive.h"
+
+#include "iqtgui/CGuiComponentDialog.h"
 
 
 namespace iqtdoc
@@ -229,7 +234,10 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 			m_viewCommand.InsertChild(&m_showToolBarsCommand, false);
 
 			m_helpCommand.SetPriority(150);
-			m_helpCommand.InsertChild(&m_aboutCommand, false);
+
+			if (m_aboutGuiCompPtr.IsValid()){
+				m_helpCommand.InsertChild(&m_aboutCommand, false);
+			}
 
 			UpdateFixedCommands();
 		}
@@ -1052,7 +1060,11 @@ void CMainWindowGuiComp::OnShowToolbars()
 
 void CMainWindowGuiComp::OnAbout()
 {
-	// TODO: implement about for MVC.
+	if (m_aboutGuiCompPtr.IsValid()){
+		iqtgui::CGuiComponentDialog aboutDialog(m_aboutGuiCompPtr.GetPtr()); 
+
+		aboutDialog.exec();
+	}
 }
 
 

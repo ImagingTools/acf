@@ -159,6 +159,10 @@ int main(int argc, char *argv[])
 	packageOverviewDockComp.SetStringAttr("DockTitle", "Packages");
 	packageOverviewDockComp.InitComponent();
 
+	icomp::TSimComponentWrap<QtPck::AboutGui> aboutGuiComp;
+	aboutGuiComp.SetRef("ApplicationInfo", &applicationInfo);
+	aboutGuiComp.InitComponent();
+
 	icomp::TSimComponentWrap<QtPck::MainWindowGui> mainWindowComp;
 	mainWindowComp.SetIntAttr("IconSize", 16);
 	mainWindowComp.SetRef("Workspace", &workspaceComp);
@@ -167,6 +171,7 @@ int main(int argc, char *argv[])
 	mainWindowComp.InsertMultiRef("MainWindowComponents", &attributeEditorDockComp);
 	mainWindowComp.InsertMultiRef("MainWindowComponents", &lockDockComp);
 	mainWindowComp.SetRef("ApplicationInfo", &applicationInfo);
+	mainWindowComp.SetRef("AboutGui", &aboutGuiComp);
 	mainWindowComp.InitComponent();
 
 	application.SetRef("ApplicationInfo", &applicationInfo);

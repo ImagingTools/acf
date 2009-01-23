@@ -176,6 +176,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CAboutWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CApplicationComp.cpp"
 				>
 			</File>
@@ -193,6 +197,10 @@
 			</File>
 			<File
 				RelativePath="..\CGuiComponentBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CGuiComponentDialog.cpp"
 				>
 			</File>
 			<File
@@ -233,6 +241,14 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CAboutWidgetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CAboutWidgetGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CApplicationComp.h"
 				>
@@ -278,6 +294,10 @@
 						Outputs=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\CGuiComponentDialog.h"
+				>
 			</File>
 			<File
 				RelativePath="..\CHierarchicalCommand.h"
@@ -639,6 +659,10 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\generated\moc_CAboutWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CDockWidgetGuiComp.cpp"
 				>
 			</File>
@@ -656,6 +680,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\qrc_iqtgui.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CAboutWidgetGuiComp.h"
 				>
 			</File>
 			<File
@@ -678,6 +706,10 @@
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CAboutWidgetGuiComp.ui"
+				>
+			</File>
 			<File
 				RelativePath="..\CLogGuiComp.ui"
 				>

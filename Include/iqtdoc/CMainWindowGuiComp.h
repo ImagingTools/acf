@@ -49,6 +49,7 @@ public:
 		I_REGISTER_INTERFACE(imod::IObserver)
 		I_REGISTER_INTERFACE(iqtgui::IDockManager)
 		I_REGISTER_INTERFACE(iqtgui::IToolBarManager)
+		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "Gui displayed if about action is triggered", false, "AboutGui")
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager")
 		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager", true, "DocumentManager")
 		I_ASSIGN(m_documentManagerCommandsCompPtr, "DocumentManager", "Document manager", false, "DocumentManager")
@@ -260,6 +261,7 @@ private:
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useIconTextAttrPtr);
 	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
+	I_REF(iqtgui::IGuiObject, m_aboutGuiCompPtr);
 
 	istd::TOptPointerVector<QToolBar> m_toolBarsList;
 };
