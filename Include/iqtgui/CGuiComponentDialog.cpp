@@ -58,7 +58,6 @@ CGuiComponentDialog::~CGuiComponentDialog()
 }
 
 
-
 } // namespace iqtgui
 
 

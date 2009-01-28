@@ -29,8 +29,8 @@ public:
 		Construct the component dialog.
 		\param guiObjectPtr Pointer to the gui object.
 		\param buttons You can define some standard buttons for this dialog. 
-		\sa QDialogButtonBox::StandardButtons. Default no buttons are set and the dialog starts only with close button
-
+		Default no buttons are set and the dialog starts only with the "Close" button.
+		\sa QDialogButtonBox::StandardButtons
 		\param isModal controls the modality of this dialog.
 		\param parentWidgetPtr - parent widget for this dialog. Default is NULL.
 	*/
@@ -66,4 +66,5 @@ inline const QDialogButtonBox* CGuiComponentDialog::GetButtonBoxPtr() const
 
 
 #endif // !iqtgui_CGuiComponentDialog_included
+
 
