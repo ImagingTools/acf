@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QString>
 #include <QIcon>
+#include <QStyle>
 
 #include "iqt/CTimer.h"
 
@@ -33,6 +34,8 @@ bool CApplicationComp::EnsureInitialized(int argc, char** argv)
 		}
 
 		m_applicationPtr->setStyle(appStyle.c_str());
+		m_applicationPtr->setPalette(QApplication::style()->standardPalette());
+	
 		QIcon icon;
 		icon.addFile(":/Icons/acfLogoSmall");
 		icon.addFile(":/Icons/acfLogo3d");

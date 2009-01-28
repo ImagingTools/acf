@@ -247,7 +247,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               AboutGui
@@ -302,6 +302,25 @@
               </IsEnabled>
               <Value>
                 Workspace
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconSize
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                16
               </Value>
             </Data>
           </AttributeInfo>
