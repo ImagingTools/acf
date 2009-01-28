@@ -170,6 +170,15 @@ inline bool CComponentBase::IsComponentActive() const
 	icomp::TReferencePtr<interfaceType> member;
 
 /**
+	Declare multiple reference to another component with \c interfaceType as template argument.
+*/
+#define I_TMULTIREF(interfaceType, member)\
+	typedef icomp::TMultiReferencePtr<interfaceType> member##_Type;\
+	typedef typename icomp::TMultiReferencePtr<interfaceType>::AttributeType member##_AttrType;\
+	icomp::TMultiReferencePtr<interfaceType> member;
+
+
+/**
 	Declare multiple reference to another component.
 */
 #define I_MULTIREF(interfaceType, member)\
