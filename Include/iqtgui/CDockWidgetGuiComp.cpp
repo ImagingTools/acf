@@ -1,5 +1,6 @@
 #include "iqtgui/CDockWidgetGuiComp.h"
 
+
 #include <QMainWindow>
 
 
@@ -59,9 +60,10 @@ void CDockWidgetGuiComp::OnGuiCreated()
 		}
 	}
 
-	dockWidgetPtr->setFeatures(	QDockWidget::DockWidgetMovable | 
-								QDockWidget::DockWidgetFloatable | 
-								QDockWidget::DockWidgetClosable);
+	dockWidgetPtr->setFeatures(	
+				QDockWidget::DockWidgetMovable | 
+				QDockWidget::DockWidgetFloatable | 
+				QDockWidget::DockWidgetClosable);
 }
 
 
