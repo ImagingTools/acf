@@ -368,6 +368,14 @@ void CMainWindowGuiComp::SetupNewCommand()
 
 void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 {
+	if (HasDocumentTemplate()){
+		mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBarPtr.GetPtr());
+
+		m_toolBarsList.PushBack(m_standardToolBarPtr.GetPtr(), false);
+	}
+
+	mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
+
 	if (m_mainWindowComponentsPtr.IsValid()){
 		for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
 			iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
@@ -376,14 +384,6 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 				mainWindowComponentPtr->AddToMainWindow(mainWindow);
 			}
 		}
-	}
-
-	mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
-
-	if (HasDocumentTemplate()){
-		mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBarPtr.GetPtr());
-
-		m_toolBarsList.PushBack(m_standardToolBarPtr.GetPtr(), false);
 	}
 }
 
