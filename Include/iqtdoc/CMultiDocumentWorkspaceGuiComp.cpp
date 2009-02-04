@@ -323,19 +323,19 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRemoved(istd::IPolymorphic* /*viewPtr
 void CMultiDocumentWorkspaceGuiComp::QueryDocumentClose(const SingleDocumentData& info, bool* ignoredPtr)
 {
 	QFileInfo fileInfo(iqt::GetQString(info.filePath));
-	int buttons = QMessageBox::Yes | QMessageBox::No;
+	QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
 
 	if (ignoredPtr != NULL){
 		buttons |= QMessageBox::Cancel;
 	}
 
-	int response = QMessageBox::information(
-				NULL,
-				QObject::tr("Close document"),
-				QObject::tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()),
-				buttons,
-				QMessageBox::Yes);
+	QMessageBox messageBox;
+	messageBox.setText("Close document");
+	messageBox.setInformativeText(QObject::tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()));
+	messageBox.setStandardButtons(buttons);
+	messageBox.setDefaultButton(QMessageBox::Yes);
 
+	int response = messageBox.exec();
 	if (response == QMessageBox::Yes){
 		bool wasSaved = FileSave();
 
