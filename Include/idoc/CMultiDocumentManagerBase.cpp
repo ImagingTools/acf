@@ -275,6 +275,8 @@ void CMultiDocumentManagerBase::FileClose(bool* ignoredPtr)
 				istd::CChangeNotifier notifier(this, changeFlags);
 
 				m_documentInfos.RemoveAt(i);
+
+				break;
 			}
 		}
 	}
