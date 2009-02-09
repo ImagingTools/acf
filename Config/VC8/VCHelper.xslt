@@ -124,17 +124,9 @@
 			<xsl:value-of select = "substring-after(@RelativePath,'..\')"/>
 		</xsl:variable>
 		<xsl:variable name = "FileName">
-			<xsl:choose>
-				<xsl:when test = "contains(@RelativePath,'Generated\')">
-					<xsl:value-of select = "substring-after(@RelativePath,'Generated\')"/>
-				</xsl:when>
-				<xsl:when test = "starts-with(@RelativePath,'..\')">
-					<xsl:value-of select = "substring-after(@RelativePath,'..\')"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select = "@RelativePath"/>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:call-template name = "ExtractFileName">
+				<xsl:with-param name = "FilePath" select = "$FilePath"/>
+			</xsl:call-template>
 		</xsl:variable>
 		<xsl:variable name = "GroupName">
 			<xsl:choose>
@@ -166,5 +158,25 @@
 				<xsl:with-param name = "UserParam" select="$UserParam"/>
 			</xsl:call-template>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name = "ExtractFileName">
+		<xsl:param name = "FilePath"/>
+
+		<xsl:choose>
+			<xsl:when test = "contains($FilePath, '\')">
+				<xsl:call-template name = "ExtractFileName">
+					<xsl:with-param name = "FilePath" select = "substring-after($FilePath, '\')"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test = "contains($FilePath, '/')">
+				<xsl:call-template name = "ExtractFileName">
+					<xsl:with-param name = "FilePath" select = "substring-after($FilePath, '/')"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select = "$FilePath"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet> 

@@ -395,6 +395,7 @@
 
 		<xsl:variable name="BuildId" select="position() + 22345678"/>
 		<xsl:variable name="FileId" select="position() + 12345678"/>
+		<xsl:variable name="NormalizedFilePath" select="translate($FilePath, '\', '/')"/>
 
 		<xsl:if test = "($GroupName='Sources') or ($GroupName='Headers') or ($GroupName='Generated') or ($GroupName='Garbages') or ($GroupName='Forms') or ($GroupName='Resources')">
 			<xsl:choose>
@@ -402,13 +403,13 @@
 					<xsl:choose>
 						<xsl:when test="contains($Name, '.ui') or contains($Name, '.qrc')">
 							<xsl:text>				</xsl:text>
-							<xsl:value-of select="$FilePath"/>
+							<xsl:value-of select="$NormalizedFilePath"/>
 							<xsl:text>,
 </xsl:text>
 						</xsl:when>
 						<xsl:when test="contains($Name, '.moc')">
 							<xsl:text>				</xsl:text>
-							<xsl:value-of select="concat(substring-before($FilePath, '.moc'), '.h')"/>
+							<xsl:value-of select="concat(substring-before($NormalizedFilePath, '.moc'), '.h')"/>
 							<xsl:text>,
 </xsl:text>
 						</xsl:when>
@@ -442,14 +443,14 @@
 							<xsl:text>uic -o ../Generated/</xsl:text>
 							<xsl:value-of select="concat('ui_', substring-before($Name, '.'), '.h')"/>
 							<xsl:text> </xsl:text>
-							<xsl:value-of select="$FilePath"/>
+							<xsl:value-of select="$NormalizedFilePath"/>
 							<xsl:text>\n</xsl:text>
 						</xsl:when>
 						<xsl:when test="contains($Name, '.moc')">
 							<xsl:text>moc -o ../Generated/</xsl:text>
 							<xsl:value-of select="concat('moc_', substring-before($Name, '.'), '.cpp')"/>
 							<xsl:text> </xsl:text>
-							<xsl:value-of select="concat(substring-before($FilePath, '.moc'), '.h')"/>
+							<xsl:value-of select="concat(substring-before($NormalizedFilePath, '.moc'), '.h')"/>
 							<xsl:text>\n</xsl:text>
 						</xsl:when>
 						<xsl:when test="contains($Name, '.qrc')">
@@ -459,7 +460,7 @@
 							<xsl:text> -o ../Generated/</xsl:text>
 							<xsl:value-of select="concat('qrc_', substring-before($Name, '.'), '.cpp')"/>
 							<xsl:text> </xsl:text>
-							<xsl:value-of select="$FilePath"/>
+							<xsl:value-of select="$NormalizedFilePath"/>
 							<xsl:text>\n</xsl:text>
 						</xsl:when>
 					</xsl:choose>
@@ -486,7 +487,7 @@
 					<xsl:text> */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = </xsl:text>
 					<xsl:value-of select="$Name"/>
 					<xsl:text>; path = </xsl:text>
-					<xsl:value-of select="translate($FilePath, '\', '/')"/>
+					<xsl:value-of select="$NormalizedFilePath"/>
 					<xsl:text>; sourceTree = SOURCE_ROOT; };
 </xsl:text>
 				</xsl:when>
