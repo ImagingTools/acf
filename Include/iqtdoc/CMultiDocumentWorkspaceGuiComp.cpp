@@ -256,6 +256,12 @@ bool CMultiDocumentWorkspaceGuiComp::eventFilter(QObject* obj, QEvent* event)
 
 // reimplemented (idoc::CMultiDocumentManagerBase)
 
+void CMultiDocumentWorkspaceGuiComp::CloseAllDocuments()
+{
+	OnCloseAllViews();
+}
+
+
 istd::CStringList CMultiDocumentWorkspaceGuiComp::GetOpenFileNames(const std::string* documentTypeIdPtr) const
 {
 	QString filter = CreateFileDialogFilter(documentTypeIdPtr);

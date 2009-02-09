@@ -95,6 +95,7 @@ protected:
 	virtual bool eventFilter(QObject* obj, QEvent* event);
 
 	// reimplemented (idoc::CMultiDocumentManagerBase)
+	virtual void CloseAllDocuments();
 	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
 	virtual istd::CString GetSaveFileName(const std::string& documentTypeId) const;
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);

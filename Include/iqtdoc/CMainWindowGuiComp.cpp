@@ -382,6 +382,11 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 			iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
 			if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
 				mainWindowComponentPtr->AddToMainWindow(mainWindow);
+
+				QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
+				if (toolBarComponentPtr != NULL){
+					m_toolBarsList.PushBack(toolBarComponentPtr, false);
+				}
 			}
 		}
 	}

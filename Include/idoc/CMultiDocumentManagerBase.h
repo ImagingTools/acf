@@ -104,7 +104,7 @@ protected:
 				const std::string& viewTypeId,
 				std::string& documentTypeId);
 
-	void CloseAllDocuments();
+	virtual void CloseAllDocuments();
 
 	SingleDocumentData& GetSingleDocumentData(int index) const;
 
