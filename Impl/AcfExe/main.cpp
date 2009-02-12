@@ -13,9 +13,11 @@
 #include "icomp/CCompositeComponentContext.h"
 #include "icomp/CCompositeComponent.h"
 #include "icomp/CRegistryElement.h"
-#include "ibase/IApplication.h"
-#include "iqt/CDefaultServicesProvider.h"
 #include "icomp/CComponentAccessor.h"
+
+#include "ibase/IApplication.h"
+
+#include "iqt/CDefaultServicesProvider.h"
 
 
 int main(int argc, char *argv[])
