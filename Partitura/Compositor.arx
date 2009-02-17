@@ -964,26 +964,7 @@ See 'licence.txt' for copyright informations
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Info
-              </Value>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               DocumentTemplate

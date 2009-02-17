@@ -110,7 +110,7 @@ QRectF CComponentNoteView::boundingRect() const
 }
 
 
-void CComponentNoteView::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)
+void CComponentNoteView::paint(QPainter* /*painter*/, const QStyleOptionGraphicsItem*, QWidget*)
 {
 }
 
