@@ -301,6 +301,12 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPt
 			QMdiSubWindow* subWindow = workspacePtr->addSubWindow(widgetPtr);
 			I_ASSERT(subWindow != NULL);
 
+			// set view icon:
+			QIcon windowIcon = widgetPtr->windowIcon();
+			if (!windowIcon.isNull()){
+				subWindow->setWindowIcon(windowIcon);
+			}
+
 			if (m_showMaximizedAttrPtr.IsValid() && *m_showMaximizedAttrPtr){
 				subWindow->showMaximized();
 			}
