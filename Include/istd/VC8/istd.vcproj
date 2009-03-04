@@ -368,6 +368,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TRetSmartPtr.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TSingleFactory.h"
 				>
 			</File>

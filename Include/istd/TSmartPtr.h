@@ -2,7 +2,7 @@
 #define istd_TSmartPtr_included
 
 
-#include "istd/istd.h"
+#include "istd/TRetSmartPtr.h"
 
 
 namespace istd
@@ -11,91 +11,62 @@ namespace istd
 
 /**
 	Implementation of a smart pointer.
+	This implementation uses internal counter object. Internal counter object is used to
+	count of instances of smart pointers and will be shared by all its copies.
 */
 template <class Type>
-class TSmartPtr
+class TSmartPtr: public TRetSmartPtr
 {
 public:
+	typedef TRetSmartPtr BaseClass;
+
 	TSmartPtr();
+	TSmartPtr(const TRetSmartPtr& pointer);
 	explicit TSmartPtr(Type* pointer);
-	TSmartPtr(const TSmartPtr& other);
+	~TSmartPtr();
 
-	virtual ~TSmartPtr();
+	/**
+		Set this pointer to NULL.
+	*/
+	void Reset();
 
+	/**
+		Set pointed object.
+	*/
 	void SetPtr(Type* pointer);
-	const Type* GetPtr() const;
-	Type* GetPtr();
-	const Type* operator->() const;
 
-	/**
-		Get access to object pointed at.
-	*/
-	Type& operator*() const;
-	
-	/**
-		Get access to pointer instance.
-	*/
-	Type* operator->();
-
-	/**
-		Assignment operator.
-	*/
-	TSmartPtr& operator = (const TSmartPtr& otherCounter);
-
-	/**
-		Checks, whether the object is in valid state.
-	*/
-	bool IsValid() const;
+	// operators
+	TSmartPtr& operator=(const TSmartPtr& otherCounter);
 
 protected:
+	/**
+		Detach counter object without changing of internal counter pointer.
+	*/
 	void Detach();
-
-protected:
-	class Counter
-	{
-	public:
-		Counter(Type* ptr)
-		{
-			objectPtr = ptr;
-			count = 0;
-		}
-
-		~Counter()
-		{
-			if (objectPtr != NULL && count == 0){
-				delete objectPtr;
-			}
-		}
-
-		mutable int count;
-		Type* objectPtr;
-	};
-
-	Counter* m_counter;
 };
 
 
 template <class Type>
 TSmartPtr<Type>::TSmartPtr()
 {
-	m_counter = new Counter(NULL);
+	m_counterPtr = NULL;
+}
+
+
+template <class Type>
+TSmartPtr<Type>::TSmartPtr(const TRetSmartPtr<Type>& pointer)
+:	BaseClass(pointer)
+{
+	if (m_counterPtr != NULL){
+		m_counterPtr->OnAttached();
+	}
 }
 
 
 template <class Type>
 TSmartPtr<Type>::TSmartPtr(Type* pointer)
 {
-	m_counter = NULL;
-
-	SetPtr(pointer);
-}
-
-
-template <class Type>
-TSmartPtr<Type>::TSmartPtr(const TSmartPtr<Type>& other)
-{
-	m_counter = other.m_counter;
-	m_counter->count++;
+	m_counterPtr = new Counter(pointer);
 }
 
 
@@ -107,49 +78,22 @@ TSmartPtr<Type>::~TSmartPtr()
 
 
 template <class Type>
+void TSmartPtr<Type>::Reset() const
+{
+	if (m_counterPtr != NULL){
+		m_counterPtr->OnDetached();
+
+		m_counterPtr = NULL;
+	}
+}
+
+
+template <class Type>
 inline void TSmartPtr<Type>::SetPtr(Type* pointer)
 {
 	Detach();
 
-	m_counter = new Counter(pointer);
-}
-
-
-template <class Type>
-inline const Type* TSmartPtr<Type>::GetPtr() const
-{
-	I_ASSERT(m_counter != NULL);
-
-	return m_counter->objectPtr;
-}
-
-
-template <class Type>
-inline Type* TSmartPtr<Type>::GetPtr()
-{
-	I_ASSERT(m_counter != NULL);
-
-	return m_counter->objectPtr;
-}
-
-
-template <class Type>
-inline const Type* TSmartPtr<Type>::operator->() const
-{
-	I_ASSERT(m_counter != NULL);
-	I_ASSERT(m_counter->objectPtr != NULL);
-
-	return GetPtr();
-}
-
-
-template <class Type>
-inline Type* TSmartPtr<Type>::operator->()
-{
-	I_ASSERT(m_counter != NULL);
-	I_ASSERT(m_counter->objectPtr != NULL);
-
-	return GetPtr();
+	m_counterPtr = new Counter(pointer);
 }
 
 
@@ -158,41 +102,23 @@ TSmartPtr<Type>& TSmartPtr<Type>::operator=(const TSmartPtr<Type>& other)
 {
 	Detach();
 
-	if (other.IsValid()){
-		other.m_counter->count++;
+	m_counterPtr = other.m_counterPtr;
 
-		m_counter = other.m_counter;
+	if (m_counterPtr != NULL){
+		m_counterPtr->OnAttached();
 	}
 
 	return *this;
 }
 
 
-template <class Type>
-bool TSmartPtr<Type>::IsValid() const
-{
-	if (m_counter != NULL){
-		return (m_counter->objectPtr != NULL);
-	}
-
-	return false;
-}
-
+// protected methods
 
 template <class Type>
 void TSmartPtr<Type>::Detach()
 {
-	if (m_counter != NULL){
-		if(m_counter->count == 0){
-			delete m_counter;
-
-			m_counter = NULL;
-		}
-		else{
-			m_counter->count--;
-
-			I_ASSERT(m_counter->count >= 0);
-		}
+	if (m_counterPtr != NULL){
+		m_counterPtr->OnDetached();
 	}
 }
 
@@ -201,4 +127,5 @@ void TSmartPtr<Type>::Detach()
 
 
 #endif // !istd_TSmartPtr_included
+
 
