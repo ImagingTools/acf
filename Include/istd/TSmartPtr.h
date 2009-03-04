@@ -15,10 +15,10 @@ namespace istd
 	count of instances of smart pointers and will be shared by all its copies.
 */
 template <class Type>
-class TSmartPtr: public TRetSmartPtr
+class TSmartPtr: public TRetSmartPtr<Type>
 {
 public:
-	typedef TRetSmartPtr BaseClass;
+	typedef TRetSmartPtr<Type> BaseClass;
 
 	TSmartPtr();
 	TSmartPtr(const TRetSmartPtr& pointer);
@@ -78,7 +78,7 @@ TSmartPtr<Type>::~TSmartPtr()
 
 
 template <class Type>
-void TSmartPtr<Type>::Reset() const
+void TSmartPtr<Type>::Reset()
 {
 	if (m_counterPtr != NULL){
 		m_counterPtr->OnDetached();

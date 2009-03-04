@@ -108,7 +108,7 @@ template <class Type>
 inline const Type* TRetSmartPtr<Type>::GetPtr() const
 {
 	if (m_counterPtr != NULL){
-		return m_counterPtr->m_objectPtr;
+		return m_counterPtr->GetPtr();
 	}
 	else{
 		return NULL;
@@ -120,7 +120,7 @@ template <class Type>
 inline Type* TRetSmartPtr<Type>::GetPtr()
 {
 	if (m_counterPtr != NULL){
-		return m_counterPtr->m_objectPtr;
+		return m_counterPtr->GetPtr();
 	}
 	else{
 		return NULL;
