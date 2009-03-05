@@ -86,9 +86,7 @@ void CModelProxy::DetachObserver(IObserver* observerPtr)
 
 void CModelProxy::DetachAllObservers()
 {
-	if (m_modelPtr != NULL){
-		m_modelPtr->DetachAllObservers();
-	}
+	DetachProxyObservers();
 
 	m_proxyObservers.clear();
 }
@@ -161,7 +159,11 @@ CModelProxy::ModelObserver::ModelObserver(CModelProxy& parent)
 
 bool CModelProxy::ModelObserver::OnDetached(imod::IModel* modelPtr)
 {
-	m_parent.ResetModel();
+	I_ASSERT(modelPtr == m_parent.m_modelPtr);
+
+	if (modelPtr == m_parent.m_modelPtr){
+		m_parent.ResetModel();
+	}
 
 	return BaseClass::OnDetached(modelPtr);
 }
