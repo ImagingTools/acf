@@ -72,6 +72,21 @@ void CTabContainerGuiComp::OnGuiCreated()
 }
 
 
+void CTabContainerGuiComp::OnGuiDestroyed()
+{
+	I_ASSERT(m_slaveWidgetsCompPtr.IsValid());
+
+	if (m_slaveWidgetsCompPtr.IsValid()){
+		int slaveWidgetsCount = m_slaveWidgetsCompPtr.GetCount();
+		for (int widgetIndex = 0; widgetIndex < slaveWidgetsCount; widgetIndex++){
+			m_slaveWidgetsCompPtr[widgetIndex]->DestroyGui();
+		}
+	}
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
 } // namespace iqtgui
 
 
