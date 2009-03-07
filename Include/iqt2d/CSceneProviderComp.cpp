@@ -339,6 +339,10 @@ void CSceneProviderComp::OnGuiCreated()
 	if (m_useAntialiasingAttrPtr.IsValid() && *m_useAntialiasingAttrPtr){
 		viewPtr->setRenderHints(QPainter::Antialiasing);
 	}
+
+	if (m_fitModeAttrPtr.IsValid()){
+		SetFitMode(FitMode(*m_fitModeAttrPtr));
+	}
 }
 
 
@@ -386,4 +390,5 @@ bool CSceneProviderComp::eventFilter(QObject* obj, QEvent* event)
 
 
 } // namespace iqt2d
+
 
