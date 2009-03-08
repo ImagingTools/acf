@@ -88,12 +88,7 @@ int CApplicationComp::Execute(int argc, char** argv)
 		}
 
 		if (mainWidgetPtr != NULL){
-			if (m_showMaximizedAttrPtr.IsValid() && m_showMaximizedAttrPtr->GetValue()){
-				mainWidgetPtr->showMaximized();
-			}
-			else{
-				mainWidgetPtr->show();
-			}
+			mainWidgetPtr->show();
 
 			m_freeComponentCompPtr.IsValid();
 

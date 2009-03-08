@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QStatusBar>
 #include <QStyle>
+#include <QSettings>
 
 
 // ACF includes
@@ -312,16 +313,57 @@ void CMainWindowGuiComp::SetToolBarsVisible(bool isVisible)
 		for (int toolbarIndex = 0; toolbarIndex < m_toolBarsList.GetCount(); toolbarIndex++){
 			QToolBar* toolbarPtr = m_toolBarsList.GetAt(toolbarIndex);
 
-			if (!isVisible){
-				mainWindowPtr->removeToolBar(toolbarPtr);
-			}
-			else{
-				toolbarPtr->show();
-
-				mainWindowPtr->addToolBar(toolbarPtr);
-			}
+			toolbarPtr->setVisible(isVisible);
 		}
 	}
+}
+
+
+void CMainWindowGuiComp::SaveWorkspace()
+{
+	I_ASSERT(IsGuiCreated());
+	QMainWindow* mainWindowPtr = GetQtWidget();
+	I_ASSERT(mainWindowPtr != NULL);
+
+	QString companyName = "UnknownCompany";
+	QString applicationName = "ACF Application";
+
+	if(m_applicationInfoCompPtr.IsValid()){
+		companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
+		applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
+	}
+
+	QSettings settings(QSettings::UserScope, companyName, applicationName);
+
+	QByteArray windowState = mainWindowPtr->saveState();
+	QByteArray windowGeometry = mainWindowPtr->saveGeometry();
+
+	settings.setValue("MainWindow/State", windowState);
+	settings.setValue("MainWindow/Geometry", windowGeometry);
+}
+
+
+void CMainWindowGuiComp::RestoreWorkspace()
+{
+	I_ASSERT(IsGuiCreated());
+	QMainWindow* mainWindowPtr = GetQtWidget();
+	I_ASSERT(mainWindowPtr != NULL);
+
+	QString companyName = "UnknownCompany";
+	QString applicationName = "ACF Application";
+
+	if(m_applicationInfoCompPtr.IsValid()){
+		companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
+		applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
+	}
+
+	QSettings settings(QSettings::UserScope, companyName, applicationName);
+	QByteArray windowState = settings.value("MainWindow/State", windowState).toByteArray();
+	QByteArray windowGeometry = settings.value("MainWindow/Geometry", windowState).toByteArray();
+
+	mainWindowPtr->restoreState(windowState);
+	mainWindowPtr->restoreGeometry(windowGeometry);
+
 }
 
 
@@ -539,6 +581,7 @@ void CMainWindowGuiComp::OnGuiCreated()
 
 	m_standardToolBarPtr.SetPtr(new QToolBar(mainWindowPtr));
 	m_standardToolBarPtr->setWindowTitle(tr("Standard"));
+	m_standardToolBarPtr->setObjectName("Standard");
 
 	if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
 		m_standardToolBarPtr->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -560,21 +603,20 @@ void CMainWindowGuiComp::OnGuiCreated()
 	
 	SetupMainWindowComponents(*mainWindowPtr);
 
-	// TODO: Get desktop resolution and calculate the right initial size of the main window.
-	QSize size(800, 600);
-	size = size.expandedTo(mainWindowPtr->minimumSizeHint());
-	mainWindowPtr->resize(size);
-
 	mainWindowPtr->setAcceptDrops(true);
 
 	mainWindowPtr->installEventFilter(this);
 
 	m_showToolBarsCommand.setChecked(true);
+
+	RestoreWorkspace();
 }
 
 
 void CMainWindowGuiComp::OnGuiDestroyed()
 {
+	SaveWorkspace();
+
 	if (m_workspaceCompPtr.IsValid()){
 		m_workspaceCompPtr->DestroyGui();
 	}
@@ -994,15 +1036,21 @@ void CMainWindowGuiComp::OnFullScreen()
 		return;
 	}
 
-	QStatusBar* barPtr = mainWidgetPtr->statusBar();
+	QStatusBar* statusBarPtr = mainWidgetPtr->statusBar();
 	if (parentWidgetPtr->isFullScreen()){
-		parentWidgetPtr->showMaximized();
-		m_standardToolBarPtr->show();
-		barPtr->show();
+		parentWidgetPtr->showNormal();
+		statusBarPtr->show();
+
+		mainWidgetPtr->restoreGeometry(m_beforeFullScreenGeometry);
+		mainWidgetPtr->restoreState(m_beforeFullScreenState);
 	}
 	else{
-		barPtr->hide();
-		m_standardToolBarPtr->hide();
+		m_beforeFullScreenGeometry = mainWidgetPtr->saveGeometry();
+		m_beforeFullScreenState = mainWidgetPtr->saveState();
+
+		statusBarPtr->hide();
+		SetToolBarsVisible(false);
+		m_showToolBarsCommand.setChecked(false);
 		parentWidgetPtr->showFullScreen();
 	}
 }

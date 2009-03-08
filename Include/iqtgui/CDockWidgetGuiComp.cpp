@@ -51,6 +51,7 @@ void CDockWidgetGuiComp::OnGuiCreated()
 
 	if (m_dockTitleAttrPtr.IsValid()){
 		dockWidgetPtr->setWindowTitle(iqt::GetQString(m_dockTitleAttrPtr->GetValue()));
+		dockWidgetPtr->setObjectName(iqt::GetQString(m_dockTitleAttrPtr->GetValue()));
 	}
 
 	if (m_slaveGuiCompPtr.IsValid() && m_slaveGuiCompPtr->CreateGui(NULL)){

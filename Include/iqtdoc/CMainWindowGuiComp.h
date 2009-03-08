@@ -85,6 +85,8 @@ protected:
 
 	int CreateToolbar(const iqtgui::CHierarchicalCommand& command, QToolBar& result, int prevGroupId = idoc::ICommand::GI_NONE) const;
 	void SetToolBarsVisible(bool isVisible = true);
+	void SaveWorkspace();
+	void RestoreWorkspace();
 
 	void SetupMainWindow(QMainWindow& mainWindow);
 	void SetupNewCommand();
@@ -249,6 +251,9 @@ private:
 	I_REF(iqtgui::IGuiObject, m_aboutGuiCompPtr);
 
 	istd::TOptPointerVector<QToolBar> m_toolBarsList;
+
+	QByteArray m_beforeFullScreenGeometry;
+	QByteArray m_beforeFullScreenState;
 };
 
 

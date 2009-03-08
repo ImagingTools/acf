@@ -29,7 +29,6 @@ public:
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info used to set main window title", false, "ApplicationInfo")
 		I_ASSIGN(m_freeComponentCompPtr, "FreeComponent", "Free component initialization", false, "FreeComponent")
 		I_ASSIGN(m_splashTimeAttrPtr, "SplashTime", "Minimal time splash screen will be shown", true, 2)
-		I_ASSIGN(m_showMaximizedAttrPtr, "ShowMaximized", "Start the main window in maximized state", false, false)
 	I_END_COMPONENT
 
 	bool EnsureInitialized(int argc, char** argv);
@@ -44,7 +43,6 @@ private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 	I_REF(void*, m_freeComponentCompPtr);
 	I_ATTR(double, m_splashTimeAttrPtr);
-	I_ATTR(bool, m_showMaximizedAttrPtr);
 
 	istd::TDelPtr<QApplication> m_applicationPtr;
 };
