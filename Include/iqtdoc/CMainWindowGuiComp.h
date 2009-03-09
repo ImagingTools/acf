@@ -254,6 +254,9 @@ private:
 
 	QByteArray m_beforeFullScreenGeometry;
 	QByteArray m_beforeFullScreenState;
+
+	QString m_companyName;
+	QString m_applicationName;
 };
 
 

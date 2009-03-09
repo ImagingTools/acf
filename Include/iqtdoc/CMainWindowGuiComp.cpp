@@ -43,7 +43,10 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_showToolBarsCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_menuBarPtr(NULL),
-	m_standardToolBarPtr(NULL)
+	m_standardToolBarPtr(NULL),
+	m_companyName("UnknownCompany"),
+	m_applicationName("ACF Application")
+
 {
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
@@ -82,6 +85,11 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_documentManagerModelCompPtr->AttachObserver(this);
 	}
 	
+	if (m_applicationInfoCompPtr.IsValid()){
+		m_companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
+		m_applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
+	}
+
 	SerializeRecentFiles<iqt::CSettingsReadArchive>();
 }
 
@@ -325,15 +333,7 @@ void CMainWindowGuiComp::SaveWorkspace()
 	QMainWindow* mainWindowPtr = GetQtWidget();
 	I_ASSERT(mainWindowPtr != NULL);
 
-	QString companyName = "UnknownCompany";
-	QString applicationName = "ACF Application";
-
-	if(m_applicationInfoCompPtr.IsValid()){
-		companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
-		applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
-	}
-
-	QSettings settings(QSettings::UserScope, companyName, applicationName);
+	QSettings settings(QSettings::UserScope, m_companyName, m_applicationName);
 
 	QByteArray windowState = mainWindowPtr->saveState();
 	QByteArray windowGeometry = mainWindowPtr->saveGeometry();
@@ -349,15 +349,8 @@ void CMainWindowGuiComp::RestoreWorkspace()
 	QMainWindow* mainWindowPtr = GetQtWidget();
 	I_ASSERT(mainWindowPtr != NULL);
 
-	QString companyName = "UnknownCompany";
-	QString applicationName = "ACF Application";
+	QSettings settings(QSettings::UserScope, m_companyName, m_applicationName);
 
-	if(m_applicationInfoCompPtr.IsValid()){
-		companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
-		applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
-	}
-
-	QSettings settings(QSettings::UserScope, companyName, applicationName);
 	QByteArray windowState = settings.value("MainWindow/State", windowState).toByteArray();
 	QByteArray windowGeometry = settings.value("MainWindow/Geometry", windowState).toByteArray();
 

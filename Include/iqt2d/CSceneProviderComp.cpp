@@ -392,3 +392,5 @@ bool CSceneProviderComp::eventFilter(QObject* obj, QEvent* event)
 } // namespace iqt2d
 
 
+
+
