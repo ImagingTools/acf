@@ -22,10 +22,10 @@ public:
 	virtual bool BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& subTag, int& count);
 
 	static const iser::CArchiveTag& GetAcfRootTag();
-	
+
 protected:
 	CArchiveBase(){}
-	
+
 	// list of standard tags used to serialize header
 	static iser::CArchiveTag s_acfRootTag;
 	static iser::CArchiveTag s_headerTag;
