@@ -21,7 +21,7 @@
         App
       </ComponentName>
       <X>
-        -215
+        -213
       </X>
       <X>
         19
@@ -65,7 +65,7 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -469
+        -467
       </X>
       <X>
         140
@@ -98,7 +98,7 @@
         SettingsProvider
       </ComponentName>
       <X>
-        -131
+        -129
       </X>
       <X>
         274
@@ -109,10 +109,10 @@
         SplashScreen
       </ComponentName>
       <X>
-        -113
+        -111
       </X>
       <X>
-        -75
+        -73
       </X>
     </Element>
     <Element>
@@ -131,7 +131,7 @@
         Workspace
       </ComponentName>
       <X>
-        -212
+        -210
       </X>
       <X>
         134

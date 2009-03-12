@@ -5,6 +5,8 @@
 #include <QString>
 #include <QIcon>
 #include <QStyle>
+#include <QTextStream>
+#include <QFile>
 
 #include "iqt/CTimer.h"
 
@@ -34,7 +36,6 @@ bool CApplicationComp::EnsureInitialized(int argc, char** argv)
 		}
 
 		m_applicationPtr->setStyle(appStyle.c_str());
-		m_applicationPtr->setPalette(QApplication::style()->standardPalette());
 	
 		QIcon icon;
 		icon.addFile(":/Icons/acfLogoSmall");
@@ -55,6 +56,12 @@ int CApplicationComp::Execute(int argc, char** argv)
 	if (EnsureInitialized(argc, argv) && m_mainGuiCompPtr.IsValid()){
 		iqt::CTimer timer;
 
+		// set style sheet for the application:
+		if (m_styleSheetAttrPtr.IsValid()){
+			SetStyleSheet(iqt::GetQString(*m_styleSheetAttrPtr));
+		}
+
+		// show splash screen:
 		bool useSplashScreen = m_splashScreenCompPtr.IsValid() && m_splashScreenCompPtr->CreateGui(NULL);
 		if (useSplashScreen){
 			QWidget* splashWidgetPtr = m_splashScreenCompPtr->GetWidget();
@@ -65,6 +72,7 @@ int CApplicationComp::Execute(int argc, char** argv)
 			m_applicationPtr->processEvents();
 		}
 
+		// create application's main widget:
 		m_mainGuiCompPtr->CreateGui(NULL);
 		QWidget* mainWidgetPtr = m_mainGuiCompPtr->GetWidget();
 
@@ -109,7 +117,26 @@ istd::CString CApplicationComp::GetHelpText() const
 }
 
 
-// protected methods
+// private methods
+
+void CApplicationComp::SetStyleSheet(const QString& styleSheetFileName)
+{
+	I_ASSERT(m_applicationPtr != NULL);
+
+	QFile styleSheetFile(styleSheetFileName);
+	if (styleSheetFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+		QTextStream stream(&styleSheetFile);
+		QString styleSheetText;
+		QString textLine;
+		do{
+			textLine = stream.readLine();
+			styleSheetText += textLine;
+		} while (!textLine.isNull());
+
+		m_applicationPtr->setStyleSheet(styleSheetText);
+	}
+}
+
 
 } // namespace iqtgui
 

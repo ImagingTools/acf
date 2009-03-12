@@ -56,7 +56,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -127,6 +127,25 @@
               </IsEnabled>
               <Value>
                 SplashScreen
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StyleSheet
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Style/Resources/Style/AcfStyle.ass
               </Value>
             </Data>
           </AttributeInfo>

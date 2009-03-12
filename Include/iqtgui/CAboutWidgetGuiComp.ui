@@ -97,6 +97,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="iqtgui.qrc" />
+ </resources>
  <connections/>
 </ui>
