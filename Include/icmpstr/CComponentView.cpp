@@ -205,7 +205,7 @@ void CComponentView::CalcExportedInteraces()
 
 // reimplemented (QGraphicsRectItem)
 
-void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
 {
 	I_ASSERT(m_elementInfoPtr != NULL);
 
