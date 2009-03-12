@@ -1,66 +1,66 @@
 QTabWidget::pane { /* The tab widget frame */
      border: 1px solid gray;
- }
+}
 
 QTabBar::tab:top{
      min-width: 25ex;
-     min-height: 7ex;
+     min-height: 6ex;
 
 }
 QTabBar::tab:bottom{
      min-width: 25ex;
-     min-height: 7ex;
+     min-height: 6ex;
 }
 
 QTabBar::tab:left{
      min-height: 25ex;
-     min-width: 7ex;
+     min-width: 6ex;
 }
 
 QTabBar::tab:right{
      min-height: 25ex;
-     min-width: 7ex;
+     min-width: 6ex;
 }
 
  /* Style the tab using the tab sub-control. Note that
      it reads QTabBar _not_ QTabWidget */
- QTabBar::tab:top{
+QTabBar::tab:top{
      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
                                  stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-    border-top-left-radius: 4px; 
-    border-top-right-radius: 4px;
- }
-
- QTabBar::tab:bottom{
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-    border-top-left-radius: 4px; 
-    border-bottom-right-radius: 4px;
- }
-
-
- QTabBar::tab:left{
-     background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-     border-top-right-radius: 4px; 
-     border-bottom-right-radius: 4px;
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px;
 }
 
- QTabBar::tab:right{
+QTabBar::tab:bottom{
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+    border-bottom-left-radius: 5px; 
+    border-bottom-right-radius: 5px;
+}
+
+
+QTabBar::tab:left{
      background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
                                  stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
                                  stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-     border-top-left-radius: 4px; 
-     border-bottom-left-radius: 4px;
- }
+     border-top-right-radius: 5px; 
+     border-bottom-right-radius: 5px;
+}
+
+QTabBar::tab:right{
+     background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+     border-top-left-radius: 5px; 
+     border-bottom-left-radius: 5px;
+}
 
 QTabBar::tab{
      border: 1px solid #C4C4C3;
      border-bottom-color: gray; /* same as the pane color */
- }
+}
 
 QTabBar::tab:selected {
      border-color: #9B9B9B;
@@ -82,27 +82,22 @@ QTabBar::tab:selected:right{
      border-right-color: gray;
 }
 
-
- QTabBar::tab:selected:top, QTabBar::tab:hover {
+QTabBar::tab:selected:top, QTabBar::tab:hover {
      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
- }
-
-
- QTabBar::tab:selected:bottom, QTabBar::tab:hover {
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,
-                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-
 }
 
+QTabBar::tab:selected:bottom, QTabBar::tab:hover {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
 
 QTabBar::tab:selected:right, QTabBar::tab:hover {
      background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-
 }
 
 
@@ -110,5 +105,4 @@ QTabBar::tab:selected:right, QTabBar::tab:hover {
      background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-
 }

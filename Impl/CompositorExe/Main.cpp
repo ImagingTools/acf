@@ -181,6 +181,7 @@ int main(int argc, char *argv[])
 	application.SetRef("ApplicationInfo", &applicationInfo);
 	application.SetRef("MainGui", &mainWindowComp);
 	application.SetRef("SplashScreen", &splashScreenGui);
+	application.SetStringAttr("StyleSheet", ":/Style/Resources/Style/AcfStyle.ass");
 	application.InitComponent();
 
 	if (!registryFile.empty()){
