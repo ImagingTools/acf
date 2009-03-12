@@ -24,6 +24,7 @@
 
 #include "iqtgui/IMainWindowComponent.h"
 #include "iqtgui/TGuiComponentBase.h"
+#include "iqtgui/TRestorableGuiWrap.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
 
@@ -32,13 +33,13 @@ namespace iqtdoc
 
 
 class CMainWindowGuiComp:
-			public iqtgui::TGuiComponentBase<QMainWindow>,
+			public iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMainWindow> >,
 			public imod::TSingleModelObserverBase<idoc::IDocumentManager>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TGuiComponentBase<QMainWindow> BaseClass;
+	typedef iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
 	typedef imod::TSingleModelObserverBase<idoc::IDocumentManager> BaseClass2;
 
 	I_BEGIN_COMPONENT(CMainWindowGuiComp)
@@ -85,8 +86,6 @@ protected:
 
 	int CreateToolbar(const iqtgui::CHierarchicalCommand& command, QToolBar& result, int prevGroupId = idoc::ICommand::GI_NONE) const;
 	void SetToolBarsVisible(bool isVisible = true);
-	void SaveWorkspace();
-	void RestoreWorkspace();
 
 	void SetupMainWindow(QMainWindow& mainWindow);
 	void SetupNewCommand();
@@ -108,6 +107,10 @@ protected:
 	void CreateMenu(const iqtgui::CHierarchicalCommand& command, MenuType& result) const;
 	template <class Archive> 
 	bool SerializeRecentFiles();
+
+	// reimplemented (TRestorableGuiWrap)
+	virtual void OnRestoreSettings(const QSettings& settings);
+	virtual void OnSaveSettings(QSettings& settings) const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -254,9 +257,6 @@ private:
 
 	QByteArray m_beforeFullScreenGeometry;
 	QByteArray m_beforeFullScreenState;
-
-	QString m_companyName;
-	QString m_applicationName;
 };
 
 

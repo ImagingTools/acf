@@ -61,6 +61,7 @@ I_EXPORT_COMPONENT(AboutGui, "About GUI for the application", "Qt Help About Wid
 I_EXPORT_COMPONENT(TabbedMultiViewGui, "Multi view editor component", "Qt Widget GUI Observer View Model");
 
 I_EXPORT_COMPONENT(SettingsSerializer, "Load and save objects using QSettings as storage", "Qt QSettings Registry Serializer Loader Saver");
+I_EXPORT_COMPONENT(ApplicationSettingsProvider, "Provider for the global application settings", "Qt QSettings Registry Saver");
 
 
 } // namespace QtPck

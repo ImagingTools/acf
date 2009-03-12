@@ -4,16 +4,16 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="11">
+  <PositionMap count="12">
     <Element>
       <ComponentName>
         AboutGui
       </ComponentName>
       <X>
-        5
+        97
       </X>
       <X>
-        242
+        228
       </X>
     </Element>
     <Element>
@@ -21,7 +21,7 @@
         App
       </ComponentName>
       <X>
-        -225
+        -222
       </X>
       <X>
         19
@@ -32,10 +32,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        183
+        270
       </X>
       <X>
-        238
+        300
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -224
+        -476
       </X>
       <X>
-        241
+        140
       </X>
     </Element>
     <Element>
@@ -95,13 +95,24 @@
     </Element>
     <Element>
       <ComponentName>
+        SettingsProvider
+      </ComponentName>
+      <X>
+        -138
+      </X>
+      <X>
+        274
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         SplashScreen
       </ComponentName>
       <X>
-        -123
+        -120
       </X>
       <X>
-        -85
+        -82
       </X>
     </Element>
     <Element>
@@ -120,7 +131,7 @@
         Workspace
       </ComponentName>
       <X>
-        -222
+        -219
       </X>
       <X>
         134

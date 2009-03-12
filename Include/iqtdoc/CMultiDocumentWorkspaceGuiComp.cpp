@@ -254,6 +254,46 @@ bool CMultiDocumentWorkspaceGuiComp::eventFilter(QObject* obj, QEvent* event)
 }
 
 
+// reimplemented (TRestorableGuiWrap)
+
+void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings)
+{
+	I_ASSERT(IsGuiCreated());
+	
+	QVariant valueNotSet = QVariant(-1);
+
+	QVariant viewModeEntry = settings.value("MDIWorkspace/ViewMode", valueNotSet);
+	if (viewModeEntry != valueNotSet){
+		QMdiArea* workspacePtr = GetQtWidget();
+
+		#if QT_VERSION >= 0x040400
+			QMdiArea::ViewMode viewMode = QMdiArea::ViewMode(viewModeEntry.toInt());
+			workspacePtr->setViewMode(viewMode);
+			if (viewMode == QMdiArea::SubWindowView){
+				m_subWindowCommand.setChecked(true);
+				m_tabbedCommand.setChecked(false);
+			}
+			else{
+				m_tabbedCommand.setChecked(true);
+				m_subWindowCommand.setChecked(false);
+			}
+		#endif
+	}
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::OnSaveSettings(QSettings& settings) const
+{
+	I_ASSERT(IsGuiCreated());
+	
+	QMdiArea* workspacePtr = GetQtWidget();
+	
+#if QT_VERSION >= 0x040400
+	settings.setValue("MDIWorkspace/ViewMode", workspacePtr->viewMode());
+#endif
+}
+
+
 // reimplemented (idoc::CMultiDocumentManagerBase)
 
 void CMultiDocumentWorkspaceGuiComp::CloseAllDocuments()
@@ -392,6 +432,8 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 void CMultiDocumentWorkspaceGuiComp::OnGuiDestroyed()
 {
 	CloseAllDocuments();
+
+	BaseClass::OnGuiDestroyed();
 }
 
 

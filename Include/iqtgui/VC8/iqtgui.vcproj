@@ -419,6 +419,10 @@
 				RelativePath="..\TGuiObserverWrap.h"
 				>
 			</File>
+			<File
+				RelativePath="..\TRestorableGuiWrap.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

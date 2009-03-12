@@ -11,7 +11,10 @@
 #include "idoc/ICommandsProvider.h"
 #include "idoc/CMultiDocumentManagerBase.h"
 
+#include "iqt/IApplicationSettingsProvider.h"
+
 #include "iqtgui/TGuiComponentBase.h"
+#include "iqtgui/TRestorableGuiWrap.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
 
@@ -23,21 +26,21 @@ namespace iqtdoc
 	This class is a Qt-based workspace implementation of a document manager.
 */
 class CMultiDocumentWorkspaceGuiComp:
-			public iqtgui::TGuiComponentBase<QMdiArea>, 
+			public iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMdiArea> >, 
 			public idoc::CMultiDocumentManagerBase,
 			public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TGuiComponentBase<QMdiArea> BaseClass;
+	typedef iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMdiArea> > BaseClass;
 	typedef idoc::CMultiDocumentManagerBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CMultiDocumentWorkspaceGuiComp)
 		I_REGISTER_INTERFACE(idoc::IDocumentManager)
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider)
-		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true);
-		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate");
+		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true)
+		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate")
 	I_END_COMPONENT
 
 	enum GroupId
@@ -94,6 +97,10 @@ protected:
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* obj, QEvent* event);
 
+	// reimplemented (TRestorableGuiWrap)
+	virtual void OnRestoreSettings(const QSettings& settings);
+	virtual void OnSaveSettings(QSettings& settings) const;
+
 	// reimplemented (idoc::CMultiDocumentManagerBase)
 	virtual void CloseAllDocuments();
 	virtual istd::CStringList GetOpenFileNames(const std::string* documentTypeIdPtr = NULL) const;
@@ -135,7 +142,7 @@ private:
 
 	I_ATTR(bool, m_showMaximizedAttrPtr);
 	I_REF(idoc::IDocumentTemplate, m_documentTemplateCompPtr);
-
+	
 	mutable QString m_lastDirectory;
 
 	int m_viewsCount;

@@ -43,10 +43,7 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_showToolBarsCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_menuBarPtr(NULL),
-	m_standardToolBarPtr(NULL),
-	m_companyName("UnknownCompany"),
-	m_applicationName("ACF Application")
-
+	m_standardToolBarPtr(NULL)
 {
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
@@ -85,11 +82,6 @@ void CMainWindowGuiComp::OnComponentCreated()
 		m_documentManagerModelCompPtr->AttachObserver(this);
 	}
 	
-	if (m_applicationInfoCompPtr.IsValid()){
-		m_companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
-		m_applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
-	}
-
 	SerializeRecentFiles<iqt::CSettingsReadArchive>();
 }
 
@@ -327,39 +319,6 @@ void CMainWindowGuiComp::SetToolBarsVisible(bool isVisible)
 }
 
 
-void CMainWindowGuiComp::SaveWorkspace()
-{
-	I_ASSERT(IsGuiCreated());
-	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
-
-	QSettings settings(QSettings::UserScope, m_companyName, m_applicationName);
-
-	QByteArray windowState = mainWindowPtr->saveState();
-	QByteArray windowGeometry = mainWindowPtr->saveGeometry();
-
-	settings.setValue("MainWindow/State", windowState);
-	settings.setValue("MainWindow/Geometry", windowGeometry);
-}
-
-
-void CMainWindowGuiComp::RestoreWorkspace()
-{
-	I_ASSERT(IsGuiCreated());
-	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
-
-	QSettings settings(QSettings::UserScope, m_companyName, m_applicationName);
-
-	QByteArray windowState = settings.value("MainWindow/State", windowState).toByteArray();
-	QByteArray windowGeometry = settings.value("MainWindow/Geometry", windowState).toByteArray();
-
-	mainWindowPtr->restoreState(windowState);
-	mainWindowPtr->restoreGeometry(windowGeometry);
-
-}
-
-
 void CMainWindowGuiComp::SetupNewCommand()
 {
 	if (!m_documentManagerCompPtr.IsValid()){
@@ -554,6 +513,36 @@ void CMainWindowGuiComp::UpdateMenuActions()
 }
 
 
+// reimplemented (TRestorableGuiWrap)
+
+void CMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
+{
+	I_ASSERT(IsGuiCreated());
+	QMainWindow* mainWindowPtr = GetQtWidget();
+	I_ASSERT(mainWindowPtr != NULL);
+
+	QByteArray windowState = settings.value("MainWindow/State", windowState).toByteArray();
+	QByteArray windowGeometry = settings.value("MainWindow/Geometry", windowState).toByteArray();
+
+	mainWindowPtr->restoreState(windowState);
+	mainWindowPtr->restoreGeometry(windowGeometry);
+}
+
+
+void CMainWindowGuiComp::OnSaveSettings(QSettings& settings) const
+{
+	I_ASSERT(IsGuiCreated());
+	QMainWindow* mainWindowPtr = GetQtWidget();
+	I_ASSERT(mainWindowPtr != NULL);
+
+	QByteArray windowState = mainWindowPtr->saveState();
+	QByteArray windowGeometry = mainWindowPtr->saveGeometry();
+
+	settings.setValue("MainWindow/State", windowState);
+	settings.setValue("MainWindow/Geometry", windowGeometry);
+}
+
+
 // reimplemented (iqtgui::TGuiComponentBase)
 
 void CMainWindowGuiComp::OnGuiCreated()
@@ -601,15 +590,11 @@ void CMainWindowGuiComp::OnGuiCreated()
 	mainWindowPtr->installEventFilter(this);
 
 	m_showToolBarsCommand.setChecked(true);
-
-	RestoreWorkspace();
 }
 
 
 void CMainWindowGuiComp::OnGuiDestroyed()
 {
-	SaveWorkspace();
-
 	if (m_workspaceCompPtr.IsValid()){
 		m_workspaceCompPtr->DestroyGui();
 	}

@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="8">
     <Element>
       <Id>
         AboutGui
@@ -231,7 +231,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               AboutGui
@@ -345,6 +345,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              SettingsProvider
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SettingsProvider
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               Workspace
             </Id>
             <Type>
@@ -359,6 +378,43 @@
               </IsEnabled>
               <Value>
                 Workspace
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        SettingsProvider
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        ApplicationSettingsProvider
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -486,7 +542,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               DocumentTemplate
@@ -503,6 +559,25 @@
               </IsEnabled>
               <Value>
                 DocumentTemplate
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SettingsProvider
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                SettingsProvider
               </Value>
             </Data>
           </AttributeInfo>
