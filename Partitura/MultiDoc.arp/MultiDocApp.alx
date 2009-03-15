@@ -65,10 +65,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -467
+        -483
       </X>
       <X>
-        140
+        123
       </X>
     </Element>
     <Element>
@@ -90,7 +90,7 @@
         31
       </X>
       <X>
-        125
+        122
       </X>
     </Element>
     <Element>
@@ -98,7 +98,7 @@
         SettingsProvider
       </ComponentName>
       <X>
-        -129
+        -128
       </X>
       <X>
         274
@@ -109,10 +109,10 @@
         SplashScreen
       </ComponentName>
       <X>
-        -111
+        57
       </X>
       <X>
-        -73
+        -11
       </X>
     </Element>
     <Element>
@@ -131,10 +131,10 @@
         Workspace
       </ComponentName>
       <X>
-        -210
+        -225
       </X>
       <X>
-        134
+        124
       </X>
     </Element>
   </PositionMap>
