@@ -62,7 +62,7 @@ bool CReadArchiveBase::SerializeAcfHeader()
 			retVal = retVal && EndTag(s_versionNumberTag);
 
 			retVal = retVal && BeginTag(s_versionDescriptionTag);
-			std::string description;
+			istd::CString description;
 			retVal = retVal && Process(description);
 			retVal = retVal && EndTag(s_versionDescriptionTag);
 

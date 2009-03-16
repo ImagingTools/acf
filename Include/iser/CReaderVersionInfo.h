@@ -29,7 +29,7 @@ public:
 		\param	version		version number for specified version info ID.
 		\param	description	description of role of specified version info.
 	*/
-	bool InsertVersionId(int id, I_DWORD version, const std::string& description);
+	bool InsertVersionId(int id, I_DWORD version, const istd::CString& description);
 	/**
 		Remove single version info.
 		\param	id	ID of version info.
@@ -45,9 +45,9 @@ protected:
 	struct VersionIdElement
 	{
 		I_DWORD version;
-		std::string description;
+		istd::CString description;
 
-		VersionIdElement(I_DWORD _version, std::string _description):version(_version), description(_description){}
+		VersionIdElement(I_DWORD _version, const istd::CString& _description):version(_version), description(_description){}
 	};
 
 	const VersionIdElement& GetVersionIdElement(int versionId) const;

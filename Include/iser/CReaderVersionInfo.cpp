@@ -11,7 +11,7 @@ void CReaderVersionInfo::Reset()
 }
 
 
-bool CReaderVersionInfo::InsertVersionId(int id, I_DWORD version, const std::string& description)
+bool CReaderVersionInfo::InsertVersionId(int id, I_DWORD version, const istd::CString& description)
 {
 	VersionIdElement element(version, description);
 

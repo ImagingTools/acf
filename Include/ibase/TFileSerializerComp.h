@@ -21,6 +21,11 @@ class TFileSerializerComp:
 public:
 	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
+	enum MessageId
+	{
+		MI_BAD_EXTENSION = 0xac10
+	};
+
 	I_BEGIN_COMPONENT(TFileSerializerComp)
 		I_REGISTER_INTERFACE(iser::IFileLoader)
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
@@ -87,6 +92,10 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::IsOperationSupported(
 			if (filePathPtr->substr(filePathPtr->length() - extension.length() - 1) == istd::CString(".") + extension.ToLower()){
 				return true;
 			}
+		}
+
+		if (!beQuiet){
+			SendInfoMessage(MI_BAD_EXTENSION, "File extension is not supported");
 		}
 
 		return false;
