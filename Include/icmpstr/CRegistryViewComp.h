@@ -71,6 +71,7 @@ protected slots:
 	void OnRemoveComponent();
 	void OnRenameComponent();
 	void OnExportInterface();
+	void OnProperties();
 	void OnExportComponent();
 	void OnExportToCode();
 	void OnExecute();

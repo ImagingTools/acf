@@ -404,6 +404,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TDesignerBasicGui.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TDesignerGuiCompBase.h"
 				>
 			</File>

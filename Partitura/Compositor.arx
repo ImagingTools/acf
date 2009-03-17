@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          807
+          825
         </Number>
         <Description>
           ACF
@@ -21,7 +21,7 @@
         Application
       </Id>
       <PackageId>
-        MultiDoc
+        AcfVoce
       </PackageId>
       <ComponentId>
         MultiDocApp
@@ -847,4 +847,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    Compositor application
+  </Description>
+  <Keywords>
+    Compositor ACF Application
+  </Keywords>
 </Acf>

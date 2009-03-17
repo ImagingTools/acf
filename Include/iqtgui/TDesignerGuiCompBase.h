@@ -1,5 +1,5 @@
-#ifndef iqtgui_TDesignerGuiComponentBase_included
-#define iqtgui_TDesignerGuiComponentBase_included
+#ifndef iqtgui_TDesignerGuiCompBase_included
+#define iqtgui_TDesignerGuiCompBase_included
 
 
 #include "qmetaobject.h"
@@ -66,6 +66,6 @@ void TDesignerGuiCompBase<UI, WidgetType>::OnRetranslate()
 } // namespace iqtgui
 
 
-#endif // !iqtgui_TDesignerGuiComponentBase_included
+#endif // !iqtgui_TDesignerGuiCompBase_included
 
 

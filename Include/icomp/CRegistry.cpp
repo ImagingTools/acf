@@ -34,26 +34,6 @@ void CRegistry::SetComponentStaticInfo(const IComponentStaticInfo* factoryPtr)
 }
 
 
-void CRegistry::SetDescription(const istd::CString& description)
-{
-	if (description != m_description){
-		istd::CChangeNotifier notifier(this);
-
-		m_description = description;
-	}
-}
-
-
-void CRegistry::SetKeywords(const istd::CString& keywords)
-{
-	if (keywords != m_keywords){
-		istd::CChangeNotifier notifier(this);
-
-		m_keywords = keywords;
-	}
-}
-
-
 // reimplemented (icomp::IRegistry)
 
 IRegistry::Ids CRegistry::GetElementIds() const
@@ -195,9 +175,29 @@ const istd::CString& CRegistry::GetDescription() const
 }
 
 
+void CRegistry::SetDescription(const istd::CString& description)
+{
+	if (description != m_description){
+		istd::CChangeNotifier notifier(this);
+
+		m_description = description;
+	}
+}
+
+
 const istd::CString& CRegistry::GetKeywords() const
 {
 	return m_keywords;
+}
+
+
+void CRegistry::SetKeywords(const istd::CString& keywords)
+{
+	if (keywords != m_keywords){
+		istd::CChangeNotifier notifier(this);
+
+		m_keywords = keywords;
+	}
 }
 
 

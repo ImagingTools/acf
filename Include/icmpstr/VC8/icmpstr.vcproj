@@ -366,6 +366,10 @@
 				RelativePath="..\Generated\ui_CPackageOverviewComp.h"
 				>
 			</File>
+			<File
+				RelativePath="..\Generated\ui_CRegistryPropertiesDialog.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
@@ -376,6 +380,10 @@
 			</File>
 			<File
 				RelativePath="..\CPackageOverviewComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryPropertiesDialog.ui"
 				>
 			</File>
 		</Filter>

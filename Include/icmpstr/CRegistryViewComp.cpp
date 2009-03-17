@@ -11,10 +11,14 @@
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
 
+#include "iqtgui/TDesignerBasicGui.h"
+
 #include "icmpstr/IRegistryEditController.h"
 #include "icmpstr/CComponentView.h"
 #include "icmpstr/CComponentConnector.h"
 #include "icmpstr/CRegistryModelComp.h"
+
+#include "icmpstr/Generated/ui_CRegistryPropertiesDialog.h"
 
 
 namespace icmpstr
@@ -179,6 +183,7 @@ void CRegistryViewComp::OnGuiCreated()
 	connect(&m_removeNoteCommand, SIGNAL(activated()), this, SLOT(OnRemoveNote()));
 	connect(&m_exportComponentCommand, SIGNAL(activated()), this, SLOT(OnExportComponent()));
 	connect(&m_exportInterfaceCommand, SIGNAL(activated()), this, SLOT(OnExportInterface()));
+	connect(&m_propertiesCommand, SIGNAL(activated()), this, SLOT(OnProperties()));
 
 	if (m_registryPreviewCompPtr.IsValid()){
 		connect(&m_executionObserverTimer, SIGNAL(timeout()), this, SLOT(OnExecutionTimerTick()));
@@ -465,7 +470,7 @@ void CRegistryViewComp::OnExportInterface()
 	if (viewPtr == NULL){
 		return;
 	}
-	
+
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
 		const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
@@ -475,6 +480,23 @@ void CRegistryViewComp::OnExportInterface()
 			bool doExport = !HasExportedInterfaces(*selectedComponentPtr);
 
 			registryPtr->SetElementExported(componentRole, istd::CClassInfo(), doExport);
+		}
+	}
+}
+
+
+void CRegistryViewComp::OnProperties()
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		iqtgui::TDesignerBasicGui<Ui::CRegistryPropertiesDialog, QDialog> dialog;
+
+		dialog.DescriptionEdit->setText(iqt::GetQString(registryPtr->GetDescription()));
+		dialog.KeywordsEdit->setText(iqt::GetQString(registryPtr->GetKeywords()));
+
+		if (dialog.exec() == QDialog::Accepted){
+			registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
+			registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
 		}
 	}
 }
