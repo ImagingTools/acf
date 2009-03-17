@@ -11,6 +11,8 @@
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
 
+#include "ibase/IApplication.h"
+
 #include "iqtgui/TDesignerBasicGui.h"
 
 #include "icmpstr/IRegistryEditController.h"
@@ -43,9 +45,9 @@ CRegistryViewComp::CRegistryViewComp()
 	m_exportInterfaceCommand.setEnabled(false);
 	m_exportInterfaceCommand.SetGroupId(GI_COMPONENT);
 	m_exportInterfaceCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
+	m_propertiesCommand.setEnabled(false);
 	m_propertiesCommand.SetGroupId(GI_COMPONENT);
 	m_propertiesCommand.setShortcut(QKeySequence(Qt::ALT + Qt::Key_Enter));
-	m_exportToCodeCommand.setEnabled(false);
 	m_exportToCodeCommand.SetGroupId(GI_CODEGEN);
 	m_executeRegistryCommand.setEnabled(false);
 	m_executeRegistryCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_F5));
@@ -232,8 +234,7 @@ void CRegistryViewComp::OnRetranslate()
 	m_propertiesCommand.SetVisuals(
 				tr("&Properties"), 
 				tr("&Properties"), 
-				tr("Edit registry properties"),
-				QIcon(":/Resources/Icons/Export.png"));
+				tr("Edit registry properties"));
 	m_exportToCodeCommand.SetVisuals(
 				tr("&Export To Code..."),
 				tr("Export"),
@@ -308,8 +309,7 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 	m_renameComponentCommand.setEnabled(isSelected);
 	m_exportComponentCommand.setEnabled(isSelected);
 	m_exportInterfaceCommand.setEnabled(isSelected);
-	m_exportToCodeCommand.setEnabled(isSelected);
-	m_executeRegistryCommand.setEnabled(isSelected && m_registryPreviewCompPtr.IsValid());
+	m_propertiesCommand.setEnabled(isSelected);
 
 	UpdateExportInterfaceCommand();
 }
@@ -480,6 +480,8 @@ void CRegistryViewComp::OnExportInterface()
 			bool doExport = !HasExportedInterfaces(*selectedComponentPtr);
 
 			registryPtr->SetElementExported(componentRole, istd::CClassInfo(), doExport);
+
+			OnExecutionTimerTick();
 		}
 	}
 }
@@ -531,8 +533,7 @@ void CRegistryViewComp::OnExecute()
 				m_registryPreviewCompPtr.IsValid()){
 		bool retVal = m_registryPreviewCompPtr->StartRegistry(*registryPtr);
 		if (retVal){
-			m_abortRegistryCommand.setEnabled(true);
-			m_executeRegistryCommand.setEnabled(false);
+			OnExecutionTimerTick();
 		}
 	}
 }
@@ -545,8 +546,7 @@ void CRegistryViewComp::OnAbort()
 				m_registryPreviewCompPtr.IsValid()){
 		m_registryPreviewCompPtr->AbortRegistry();
 
-		m_abortRegistryCommand.setEnabled(false);
-		m_executeRegistryCommand.setEnabled(true);
+		OnExecutionTimerTick();
 	}
 }
 
@@ -654,12 +654,21 @@ void CRegistryViewComp::UpdateConnectors()
 
 void CRegistryViewComp::OnExecutionTimerTick()
 {
-	if (m_registryPreviewCompPtr.IsValid()){
-		bool isRunning = m_registryPreviewCompPtr->IsRunning();
+	bool isExecutable = false;
+	bool isRunning = false;
 
-		m_executeRegistryCommand.setEnabled(!isRunning);
-		m_abortRegistryCommand.setEnabled(isRunning);
+	if (m_registryPreviewCompPtr.IsValid()){
+		isRunning = m_registryPreviewCompPtr->IsRunning();
+
+		icomp::IRegistry* registryPtr = GetObjectPtr();
+		if (registryPtr != NULL){
+			const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registryPtr->GetExportedInterfacesMap();
+			isExecutable = (interfacesMap.find(istd::CClassInfo::GetInfo<ibase::IApplication>()) != interfacesMap.end());
+		}
 	}
+
+	m_executeRegistryCommand.setEnabled(!isRunning && isExecutable);
+	m_abortRegistryCommand.setEnabled(isRunning);
 }
 
 
@@ -762,14 +771,14 @@ void CRegistryViewComp::UpdateExportInterfaceCommand()
 				tr("&Remove Inteface Export"), 
 				tr("&Remove Inteface Export"), 
 				tr("Remove Inteface Export"),
-				QIcon(":/Resources/Icons/.png"));
+				QIcon(":/Resources/Icons/Export.png"));
 	}
 	else{
 		m_exportInterfaceCommand.SetVisuals(
 				tr("&Export Inteface(s)"), 
 				tr("&Export Interface(s)"), 
 				tr("Export interface(s)"),
-				QIcon(":/Resources/Icons/.png"));
+				QIcon(":/Resources/Icons/Export.png"));
 	}
 }
 

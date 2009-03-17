@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          825
+          826
         </Number>
         <Description>
           ACF
@@ -30,7 +30,26 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
+          <AttributeInfo>
+            <Id>
+              AppName
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Compositor Maxi
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Company

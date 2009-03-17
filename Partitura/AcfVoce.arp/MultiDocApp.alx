@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          826
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="12">
@@ -10,10 +21,10 @@
         AboutGui
       </ComponentName>
       <X>
-        97
+        114
       </X>
       <X>
-        228
+        235
       </X>
     </Element>
     <Element>
@@ -21,10 +32,10 @@
         App
       </ComponentName>
       <X>
-        -213
+        52
       </X>
       <X>
-        19
+        -1
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        270
+        388
       </X>
       <X>
-        300
+        459
       </X>
     </Element>
     <Element>
@@ -65,10 +76,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -483
+        -482
       </X>
       <X>
-        123
+        272
       </X>
     </Element>
     <Element>
@@ -87,7 +98,7 @@
         MainGui
       </ComponentName>
       <X>
-        31
+        78
       </X>
       <X>
         122
@@ -98,10 +109,10 @@
         SettingsProvider
       </ComponentName>
       <X>
-        -128
+        -204
       </X>
       <X>
-        274
+        272
       </X>
     </Element>
     <Element>
@@ -109,10 +120,10 @@
         SplashScreen
       </ComponentName>
       <X>
-        57
+        571
       </X>
       <X>
-        -11
+        -4
       </X>
     </Element>
     <Element>
@@ -131,10 +142,10 @@
         Workspace
       </ComponentName>
       <X>
-        -225
+        -490
       </X>
       <X>
-        124
+        123
       </X>
     </Element>
   </PositionMap>

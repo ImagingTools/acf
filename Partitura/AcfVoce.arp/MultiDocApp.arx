@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          826
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="8">
@@ -685,4 +696,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    Framework for multi-document applications
+  </Description>
+  <Keywords>
+    ACF GUI Application Framework Multi Document MDI
+  </Keywords>
 </Acf>
