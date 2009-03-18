@@ -250,7 +250,8 @@ void CPackageOverviewComp::GeneratePackageTree(
 		componentItem->setToolTip(0, iqt::GetQString(componentInfoPtr->GetDescription()));
 
 		if (hasPackageInfo){
-			componentItem->setIcon(0, QIcon(packageDir.absoluteFilePath((componentId + ".small.png").c_str())));
+			QString iconPath = packageDir.absoluteFilePath((componentId + ".small.png").c_str());
+			componentItem->setIcon(0, QIcon(iconPath));
 		}
 
 		root.addChild(componentItem);
@@ -337,7 +338,8 @@ void CPackageOverviewComp::OnGuiCreated()
 	PackagesList->setHeaderLabels(labels);
 	PackagesList->setItemDelegate(new CItemDelegate());
 
-	PackagesList->header()->setResizeMode(QHeaderView::ResizeToContents);
+	PackagesList->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+	PackagesList->header()->setResizeMode(1, QHeaderView::Fixed);
 	PackagesList->header()->hide();
 
 	PackagesList->setIndentation(15);
