@@ -111,10 +111,10 @@ void CPackageOverviewComp::HighlightComponents(const istd::CClassInfo& interface
 		QTreeWidgetItem* itemPtr = PackagesList->topLevelItem(topLevelItemIndex);
 		if (itemPtr->childCount()){
 			if (itemPtr->isExpanded()){
-				itemPtr->setIcon(0, QIcon(s_openIcon));
+				itemPtr->setIcon(0, m_openIcon);
 			}
 			else{			
-				itemPtr->setIcon(0, QIcon(s_closedIcon));
+				itemPtr->setIcon(0, m_closedIcon);
 			}
 		}
 		else{
@@ -135,7 +135,7 @@ void CPackageOverviewComp::HighlightComponents(const istd::CClassInfo& interface
 			icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfoPtr->GetInterfaceExtractors();
 			const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
 			if (extractorPtr != NULL){
-				itemIcon = QIcon(QString::fromUtf8(":/Resources/Icons/ok-16.png"));
+				itemIcon = m_validIcon;
 
 				// if parent item is closed we must expand it:
 				if (parentItemPtr != NULL){
@@ -143,7 +143,7 @@ void CPackageOverviewComp::HighlightComponents(const istd::CClassInfo& interface
 				}
 			}
 			else{
-				itemIcon = QIcon(QString::fromUtf8(":/Resources/Icons/close_a_128.png"));
+				itemIcon = m_invalidIcon;
 			}
 		}
 
@@ -160,7 +160,7 @@ void CPackageOverviewComp::HighlightComponents(const istd::CClassInfo& interface
 void CPackageOverviewComp::on_PackagesList_itemCollapsed(QTreeWidgetItem* item)
 {
 	if (item != NULL && item->childCount() > 0){
-		item->setIcon(0, QIcon(s_closedIcon));
+		item->setIcon(0, m_closedIcon);
 	}
 }
 
@@ -168,7 +168,7 @@ void CPackageOverviewComp::on_PackagesList_itemCollapsed(QTreeWidgetItem* item)
 void CPackageOverviewComp::on_PackagesList_itemExpanded(QTreeWidgetItem* item)
 {
 	if (item != NULL && item->childCount() > 0){
-		item->setIcon(0, QIcon(s_openIcon));
+		item->setIcon(0, m_openIcon);
 	}
 }
 
@@ -199,10 +199,12 @@ void CPackageOverviewComp::GeneratePackageTree(
 	QDir packageDir;
 	bool hasPackageInfo = false;
 	if (m_packagesManagerCompPtr.IsValid()){
-		istd::CString packageInfoPath = m_packagesManagerCompPtr->GetPackageDirPath(packageId);
-		if (!packageInfoPath.IsEmpty()){
-			hasPackageInfo = true;
-			packageDir.setPath(iqt::GetQString(packageInfoPath) + ".info");
+		QString packageInfoPath = iqt::GetQString(m_packagesManagerCompPtr->GetPackageDirPath(packageId));
+		if (!packageInfoPath.isEmpty()){
+			packageDir.setPath(packageInfoPath + ".info");
+			if (packageDir.exists()){
+				hasPackageInfo = true;
+			}
 		}
 	}
 
@@ -323,6 +325,11 @@ void CPackageOverviewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	m_closedIcon = QIcon(":/Resources/Icons/dirclosed-16.png");
+	m_openIcon = QIcon(":/Resources/Icons/diropen-16.png");
+	m_validIcon = QIcon(QString::fromUtf8(":/Resources/Icons/ok-16.png"));
+	m_invalidIcon = QIcon(QString::fromUtf8(":/Resources/Icons/close_a_128.png"));
+
 	// set up the tree view:
 	PackagesList->setColumnCount(2);
 	QStringList labels;
@@ -339,12 +346,6 @@ void CPackageOverviewComp::OnGuiCreated()
 
 	GenerateComponentTree();
 }
-
-
-// private static members
-
-QString CPackageOverviewComp::s_closedIcon = ":/Resources/Icons/dirclosed-16.png";
-QString CPackageOverviewComp::s_openIcon = ":/Resources/Icons/diropen-16.png";
 
 
 } // namespace icmpstr

@@ -96,8 +96,10 @@ private:
 	I_REF(icomp::IComponentStaticInfo, m_generalStaticInfoCompPtr);
 	I_REF(icomp::IRegistriesManager, m_packagesManagerCompPtr);
 
-	static QString s_closedIcon;
-	static QString s_openIcon;
+	QIcon m_closedIcon;
+	QIcon m_openIcon;
+	QIcon m_validIcon;
+	QIcon m_invalidIcon;
 };
 
 
