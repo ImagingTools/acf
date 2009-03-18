@@ -53,7 +53,7 @@ istd::CString CApplicationInfoComp::GetEncodedVersionName(int versionId, I_DWORD
 		for (int i = 0; i < knownVersionsCount; ++i){
 			I_DWORD knownNumber = I_DWORD(m_knownVersionsAttrPtr[i]);
 
-			if ((knownNumber < versionNumber) && (knownNumber >= lastBellowNumber)){
+			if ((knownNumber <= versionNumber) && (knownNumber > lastBellowNumber)){
 				lastBellowNumber = knownNumber;
 				lastBellowText = m_knownVersionNamesAttrPtr[i];
 			}
