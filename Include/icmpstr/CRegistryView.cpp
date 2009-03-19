@@ -30,9 +30,7 @@ CRegistryView::CRegistryView(QWidget* parent/* = NULL*/)
 	setFrameShape(QFrame::NoFrame);
 	setAcceptDrops(true); 
 	
-#if QT_VERSION >= 0x040400
 	setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-#endif
 	m_compositeItem.setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
 	
 	m_scenePtr->addItem(&m_compositeItem);

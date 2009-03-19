@@ -88,7 +88,7 @@ private:
 	void ConnectReferences(const QString& componentRole);
 	bool HasExportedInterfaces(const CComponentView& componentView) const;
 	void UpdateExportInterfaceCommand();
-
+	void ShowPropertiesDialog(icomp::IRegistry* registryPtr, const QString& description, const QString& keywords);
 protected:
 	enum GroupId
 	{

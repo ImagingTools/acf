@@ -45,7 +45,7 @@ CRegistryViewComp::CRegistryViewComp()
 	m_exportInterfaceCommand.setEnabled(false);
 	m_exportInterfaceCommand.SetGroupId(GI_COMPONENT);
 	m_exportInterfaceCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
-	m_propertiesCommand.setEnabled(false);
+	m_propertiesCommand.setEnabled(true);
 	m_propertiesCommand.SetGroupId(GI_COMPONENT);
 	m_propertiesCommand.setShortcut(QKeySequence(Qt::ALT + Qt::Key_Enter));
 	m_exportToCodeCommand.SetGroupId(GI_CODEGEN);
@@ -322,7 +322,6 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 	m_renameComponentCommand.setEnabled(isSelected);
 	m_exportComponentCommand.setEnabled(isSelected);
 	m_exportInterfaceCommand.setEnabled(isSelected);
-	m_propertiesCommand.setEnabled(isSelected);
 
 	UpdateExportInterfaceCommand();
 }
@@ -501,17 +500,34 @@ void CRegistryViewComp::OnExportInterface()
 
 
 void CRegistryViewComp::OnProperties()
-{
+{	
+	CRegistryView* viewPtr = GetQtWidget();
+	I_ASSERT(viewPtr != NULL);
+
+	const CComponentView* selectedComponentViewPtr = viewPtr->GetSelectedComponent();
+
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
-		iqtgui::TDesignerBasicGui<Ui::CRegistryPropertiesDialog, QDialog> dialog;
+		// no component is selected, show registry info:
+		if (selectedComponentViewPtr == NULL){
+			ShowPropertiesDialog(
+						registryPtr, 
+						iqt::GetQString(registryPtr->GetDescription()),
+						iqt::GetQString(registryPtr->GetKeywords()));
+		}
+		// component is selected, show component info:
+		else{
+			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(selectedComponentViewPtr->GetComponentName());
+			I_ASSERT(elementInfoPtr != NULL);
 
-		dialog.DescriptionEdit->setText(iqt::GetQString(registryPtr->GetDescription()));
-		dialog.KeywordsEdit->setText(iqt::GetQString(registryPtr->GetKeywords()));
+			if (elementInfoPtr->elementPtr.IsValid()){
+				const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr->GetComponentStaticInfo();
 
-		if (dialog.exec() == QDialog::Accepted){
-			registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
-			registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
+				QString description = iqt::GetQString(staticInfo.GetDescription());
+				QString keywords = iqt::GetQString(staticInfo.GetKeywords());
+
+				ShowPropertiesDialog(NULL, description, keywords);
+			}
 		}
 	}
 }
@@ -792,6 +808,24 @@ void CRegistryViewComp::UpdateExportInterfaceCommand()
 				tr("&Export Interface(s)"), 
 				tr("Export interface(s)"),
 				QIcon(":/Resources/Icons/Export.png"));
+	}
+}
+
+
+void CRegistryViewComp::ShowPropertiesDialog(icomp::IRegistry* registryPtr, const QString& description, const QString& keywords)
+{
+	iqtgui::TDesignerBasicGui<Ui::CRegistryPropertiesDialog, QDialog> dialog;
+	if (registryPtr == NULL){
+		dialog.DescriptionEdit->setEnabled(false);
+		dialog.KeywordsEdit->setEnabled(false);
+	}
+
+	dialog.DescriptionEdit->setText(description);
+	dialog.KeywordsEdit->setText(keywords);
+
+	if (dialog.exec() == QDialog::Accepted && registryPtr != NULL){
+		registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
+		registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
 	}
 }
 

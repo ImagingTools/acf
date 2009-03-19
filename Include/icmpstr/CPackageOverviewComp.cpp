@@ -32,7 +32,6 @@ public:
 };
 
 
-
 // reimplemented (IAttributeSelectionObserver)
 
 void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo* attributeStaticInfoPtr)
