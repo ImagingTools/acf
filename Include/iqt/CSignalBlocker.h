@@ -18,11 +18,15 @@ namespace iqt
 class CSignalBlocker
 {
 public:
-	CSignalBlocker(QObject* objectPtr);
+	CSignalBlocker(QObject* objectPtr, bool blockChilds = false);
 	virtual ~CSignalBlocker();
 
 private:
+	void BlockChilds(QObject* objectPtr, bool block);
+
+private:
 	QObject* m_objectPtr;
+	bool m_blockChilds;
 };
 
 
