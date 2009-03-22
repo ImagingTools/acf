@@ -335,6 +335,8 @@ bool CSingleDocumentManagerBase::NewDocument(
 		if (documentPtr.IsValid()){
 			istd::IPolymorphic* viewPtr = NULL;
 
+			EnsureViewRemoved();
+
 			if (createView){
 				viewPtr = m_documentTemplatePtr->CreateView(
 							documentTypeId,
@@ -343,11 +345,7 @@ bool CSingleDocumentManagerBase::NewDocument(
 				if (viewPtr == NULL){
 					return false;
 				}
-			}
 
-			EnsureViewRemoved();
-
-			if (viewPtr != NULL){
 				m_viewPtr.SetPtr(viewPtr);
 
 				m_viewTypeId = viewTypeId;
