@@ -1,2 +1,2 @@
-cd %ACFDIR%/Docs\Tutorial\Appl
+cd ../../Docs\Tutorial\Appl
 %ACFDIR%/Config/Xcd/ConvertToXcd.js -q ..
