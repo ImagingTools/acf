@@ -71,16 +71,21 @@ void CTextEditorGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	CTextEditor* textEditPtr = GetQtWidget();
-	I_ASSERT(textEditPtr != NULL);
+	CTextEditor* textEditorPtr = GetQtWidget();
+	I_ASSERT(textEditorPtr != NULL);
+	if (textEditorPtr != NULL){
+		connect(textEditorPtr, SIGNAL(DataChanged()), this, SLOT(OnTextChanged()));
 
-	connect(textEditPtr, SIGNAL(DataChanged()), this, SLOT(OnTextChanged()));
+		if (m_useFoldingAttrPtr.IsValid()){
+			textEditorPtr->SetFoldingEnabled(*m_useFoldingAttrPtr); 
+		}
 
-	if (m_useFoldingAttrPtr.IsValid()){
-		textEditPtr->SetFoldingEnabled(*m_useFoldingAttrPtr); 
+		if (m_languageAttrPtr.IsValid()){
+			textEditorPtr->SetLanguage(iqt::GetQString(*m_languageAttrPtr));
+		}
+
+		OnRetranslate();
 	}
-
-	OnRetranslate();
 }
 
 

@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          837
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="10">
@@ -10,10 +21,10 @@
         App
       </ComponentName>
       <X>
-        -7
+        -87
       </X>
       <X>
-        71
+        72
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         DocumentFactory
       </ComponentName>
       <X>
-        469
+        457
       </X>
       <X>
-        -5
+        -31
       </X>
     </Element>
     <Element>
@@ -43,10 +54,10 @@
         DocumentLoader
       </ComponentName>
       <X>
-        485
+        483
       </X>
       <X>
-        96
+        94
       </X>
     </Element>
     <Element>
@@ -54,10 +65,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        240
+        221
       </X>
       <X>
-        71
+        70
       </X>
     </Element>
     <Element>
@@ -101,7 +112,7 @@
         254
       </X>
       <X>
-        -46
+        -42
       </X>
     </Element>
     <Element>

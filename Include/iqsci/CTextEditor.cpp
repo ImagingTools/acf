@@ -138,7 +138,7 @@ void CTextEditor::SetLanguage(const QString& language)
 {
 	I_ASSERT(m_scintilla != NULL);
 
-	LexerMap::iterator foundIt = m_languages.find(language);
+	LexerMap::iterator foundIt = m_languages.find(language.toUpper());
 	if (foundIt != m_languages.end()){
 		m_scintilla->setLexer(foundIt->second);
 	}
@@ -220,12 +220,10 @@ void CTextEditor::RegisterLexers()
 	QsciLexerCPP* cppLexerPtr = new QsciLexerCPP(this);
 	cppLexerPtr->setDefaultFont(QFont("Courier", 10));
 	cppLexerPtr->setFoldCompact(true);
-
-	m_languages[cppLexerPtr->language()] = cppLexerPtr;
+	m_languages[QString(cppLexerPtr->language()).toUpper()] = cppLexerPtr;
 
 	QsciLexerPostScript* psLexerPtr = new QsciLexerPostScript(this);
-
-	m_languages[psLexerPtr->language()] = psLexerPtr;
+	m_languages[QString(psLexerPtr->language()).toUpper()] = psLexerPtr;
 }
 
 

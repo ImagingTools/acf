@@ -32,6 +32,7 @@ public:
 	I_BEGIN_COMPONENT(CTextEditorGuiComp)
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider)
 		I_REGISTER_INTERFACE(imod::IObserver)
+		I_ASSIGN(m_languageAttrPtr, "Language", "Use syntax highlighting for defined language", false, "Language");
 		I_ASSIGN(m_useFoldingAttrPtr, "UseFolding", "Use folding in the text document", false, true);
 	I_END_COMPONENT
 
@@ -51,6 +52,7 @@ protected slots:
 
 private:
 	I_ATTR(bool, m_useFoldingAttrPtr);
+	I_ATTR(istd::CString, m_languageAttrPtr);
 };
 
 
