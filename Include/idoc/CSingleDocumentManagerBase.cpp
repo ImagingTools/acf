@@ -52,7 +52,7 @@ int CSingleDocumentManagerBase::GetDocumentsCount() const
 }
 
 
-istd::IChangeable& CSingleDocumentManagerBase::GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr) const
+istd::IChangeable& CSingleDocumentManagerBase::GetDocumentFromIndex(int I_IF_DEBUG(index), DocumentInfo* documentInfoPtr) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetDocumentsCount());
@@ -68,7 +68,7 @@ istd::IChangeable& CSingleDocumentManagerBase::GetDocumentFromIndex(int index, D
 }
 
 
-int CSingleDocumentManagerBase::GetViewsCount(int documentIndex) const
+int CSingleDocumentManagerBase::GetViewsCount(int I_IF_DEBUG(documentIndex)) const
 {
 	I_ASSERT(documentIndex >= 0);
 	I_ASSERT(documentIndex < GetDocumentsCount());
@@ -77,7 +77,7 @@ int CSingleDocumentManagerBase::GetViewsCount(int documentIndex) const
 }
 
 
-istd::IPolymorphic* CSingleDocumentManagerBase::GetViewFromIndex(int documentIndex, int viewIndex) const
+istd::IPolymorphic* CSingleDocumentManagerBase::GetViewFromIndex(int I_IF_DEBUG(documentIndex), int I_IF_DEBUG(viewIndex)) const
 {
 	I_ASSERT(documentIndex >= 0);
 	I_ASSERT(documentIndex < GetDocumentsCount());
