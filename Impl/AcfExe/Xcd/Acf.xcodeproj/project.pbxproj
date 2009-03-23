@@ -59,10 +59,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA99D2690F04560E003471A1 /* libacfstd.a in Frameworks */,
-				EA99D26F0F045617003471A1 /* libiqt.a in Frameworks */,
 				EABF7A210F06E04300119803 /* QtCore.framework in Frameworks */,
 				EABF7A230F06E05700119803 /* QtGui.framework in Frameworks */,
+				EA99D2690F04560E003471A1 /* libacfstd.a in Frameworks */,
+				EA99D26F0F045617003471A1 /* libiqt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +283,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+					"\"/Users/Witold/Downloads/qt-mac-opensource-src-4.4.3/lib\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -317,6 +318,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../../../Downloads/qt-mac-opensource-src-4.4.3/lib\"",
+					"\"/Users/Witold/Downloads/qt-mac-opensource-src-4.4.3/lib\"",
 				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;

@@ -50,8 +50,10 @@
 		223457190ED2E572006EC826 /* qrc_icmpstr.cpp in Generated */ = {isa = PBXBuildFile; fileRef = 123457190ED2E572006EC826 /* qrc_icmpstr.cpp */; };
 		223457200ED2E572006EC826 /* ui_CAttributeEditorComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457200ED2E572006EC826 /* ui_CAttributeEditorComp.h */; };
 		223457210ED2E572006EC826 /* ui_CPackageOverviewComp.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457210ED2E572006EC826 /* ui_CPackageOverviewComp.h */; };
-		223457220ED2E572006EC826 /* CAttributeEditorComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* CAttributeEditorComp.ui */; };
-		223457230ED2E572006EC826 /* CPackageOverviewComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* CPackageOverviewComp.ui */; };
+		223457220ED2E572006EC826 /* ui_CRegistryPropertiesDialog.h in Generated */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* ui_CRegistryPropertiesDialog.h */; };
+		223457230ED2E572006EC826 /* CAttributeEditorComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* CAttributeEditorComp.ui */; };
+		223457240ED2E572006EC826 /* CPackageOverviewComp.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* CPackageOverviewComp.ui */; };
+		223457250ED2E572006EC826 /* CRegistryPropertiesDialog.ui in Forms */ = {isa = PBXBuildFile; fileRef = 123457250ED2E572006EC826 /* CRegistryPropertiesDialog.ui */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,8 +100,10 @@
 		123457190ED2E572006EC826 /* qrc_icmpstr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_icmpstr.cpp; path = ../Generated/qrc_icmpstr.cpp; sourceTree = SOURCE_ROOT; };
 		123457200ED2E572006EC826 /* ui_CAttributeEditorComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CAttributeEditorComp.h; path = ../Generated/ui_CAttributeEditorComp.h; sourceTree = SOURCE_ROOT; };
 		123457210ED2E572006EC826 /* ui_CPackageOverviewComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CPackageOverviewComp.h; path = ../Generated/ui_CPackageOverviewComp.h; sourceTree = SOURCE_ROOT; };
-		123457220ED2E572006EC826 /* CAttributeEditorComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributeEditorComp.ui; path = ../CAttributeEditorComp.ui; sourceTree = SOURCE_ROOT; };
-		123457230ED2E572006EC826 /* CPackageOverviewComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPackageOverviewComp.ui; path = ../CPackageOverviewComp.ui; sourceTree = SOURCE_ROOT; };
+		123457220ED2E572006EC826 /* ui_CRegistryPropertiesDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ui_CRegistryPropertiesDialog.h; path = ../Generated/ui_CRegistryPropertiesDialog.h; sourceTree = SOURCE_ROOT; };
+		123457230ED2E572006EC826 /* CAttributeEditorComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CAttributeEditorComp.ui; path = ../CAttributeEditorComp.ui; sourceTree = SOURCE_ROOT; };
+		123457240ED2E572006EC826 /* CPackageOverviewComp.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CPackageOverviewComp.ui; path = ../CPackageOverviewComp.ui; sourceTree = SOURCE_ROOT; };
+		123457250ED2E572006EC826 /* CRegistryPropertiesDialog.ui */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CRegistryPropertiesDialog.ui; path = ../CRegistryPropertiesDialog.ui; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libicmpstr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libicmpstr.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,8 +176,9 @@
 		C6A0FF2B0290797F04C91782 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				123457220ED2E572006EC826 /* CAttributeEditorComp.ui */,
-				123457230ED2E572006EC826 /* CPackageOverviewComp.ui */,
+				123457230ED2E572006EC826 /* CAttributeEditorComp.ui */,
+				123457240ED2E572006EC826 /* CPackageOverviewComp.ui */,
+				123457250ED2E572006EC826 /* CRegistryPropertiesDialog.ui */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				123457190ED2E572006EC826 /* qrc_icmpstr.cpp */,
 				123457200ED2E572006EC826 /* ui_CAttributeEditorComp.h */,
 				123457210ED2E572006EC826 /* ui_CPackageOverviewComp.h */,
+				123457220ED2E572006EC826 /* ui_CRegistryPropertiesDialog.h */,
 			);
 			name = Generated;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 				223457110ED2E572006EC826 /* IRegistryPreview.h in Headers */,
 				223457200ED2E572006EC826 /* ui_CAttributeEditorComp.h in Headers */,
 				223457210ED2E572006EC826 /* ui_CPackageOverviewComp.h in Headers */,
+				223457220ED2E572006EC826 /* ui_CRegistryPropertiesDialog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +313,7 @@
 				../icmpstr.qrc,
 				../CAttributeEditorComp.ui,
 				../CPackageOverviewComp.ui,
+				../CRegistryPropertiesDialog.ui,
 			);
 			outputPaths = (
 				../Generated/moc_CAttributeEditorComp.cpp,
@@ -317,10 +325,11 @@
 				../Generated/qrc_icmpstr.cpp,
 				../Generated/ui_CAttributeEditorComp.h,
 				../Generated/ui_CPackageOverviewComp.h,
+				../Generated/ui_CRegistryPropertiesDialog.h,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "moc -o ../Generated/moc_CAttributeEditorComp.cpp ../CAttributeEditorComp.h\nmoc -o ../Generated/moc_CComponentView.cpp ../CComponentView.h\nmoc -o ../Generated/moc_CPackageOverviewComp.cpp ../CPackageOverviewComp.h\nmoc -o ../Generated/moc_CRegistryPreviewComp.cpp ../CRegistryPreviewComp.h\nmoc -o ../Generated/moc_CRegistryView.cpp ../CRegistryView.h\nmoc -o ../Generated/moc_CRegistryViewComp.cpp ../CRegistryViewComp.h\nrcc -name icmpstr -o ../Generated/qrc_icmpstr.cpp ../icmpstr.qrc\nuic -o ../Generated/ui_CAttributeEditorComp.h ../CAttributeEditorComp.ui\nuic -o ../Generated/ui_CPackageOverviewComp.h ../CPackageOverviewComp.ui\n";
+			shellScript = "moc -o ../Generated/moc_CAttributeEditorComp.cpp ../CAttributeEditorComp.h\nmoc -o ../Generated/moc_CComponentView.cpp ../CComponentView.h\nmoc -o ../Generated/moc_CPackageOverviewComp.cpp ../CPackageOverviewComp.h\nmoc -o ../Generated/moc_CRegistryPreviewComp.cpp ../CRegistryPreviewComp.h\nmoc -o ../Generated/moc_CRegistryView.cpp ../CRegistryView.h\nmoc -o ../Generated/moc_CRegistryViewComp.cpp ../CRegistryViewComp.h\nrcc -name icmpstr -o ../Generated/qrc_icmpstr.cpp ../icmpstr.qrc\nuic -o ../Generated/ui_CAttributeEditorComp.h ../CAttributeEditorComp.ui\nuic -o ../Generated/ui_CPackageOverviewComp.h ../CPackageOverviewComp.ui\nuic -o ../Generated/ui_CRegistryPropertiesDialog.h ../CRegistryPropertiesDialog.ui\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

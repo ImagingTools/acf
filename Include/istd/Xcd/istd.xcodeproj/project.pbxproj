@@ -53,10 +53,11 @@
 		223457220ED2E572006EC826 /* TOptPointerVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457220ED2E572006EC826 /* TOptPointerVector.h */; };
 		223457230ED2E572006EC826 /* TPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457230ED2E572006EC826 /* TPointer.h */; };
 		223457240ED2E572006EC826 /* TPointerVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457240ED2E572006EC826 /* TPointerVector.h */; };
-		223457250ED2E572006EC826 /* TSingleFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457250ED2E572006EC826 /* TSingleFactory.h */; };
-		223457260ED2E572006EC826 /* TSmartPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457260ED2E572006EC826 /* TSmartPtr.h */; };
-		223457270ED2E572006EC826 /* TUpdateManagerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457270ED2E572006EC826 /* TUpdateManagerWrap.h */; };
-		223457280ED2E572006EC826 /* TVarArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457280ED2E572006EC826 /* TVarArray.h */; };
+		223457250ED2E572006EC826 /* TRetSmartPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457250ED2E572006EC826 /* TRetSmartPtr.h */; };
+		223457260ED2E572006EC826 /* TSingleFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457260ED2E572006EC826 /* TSingleFactory.h */; };
+		223457270ED2E572006EC826 /* TSmartPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457270ED2E572006EC826 /* TSmartPtr.h */; };
+		223457280ED2E572006EC826 /* TUpdateManagerWrap.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457280ED2E572006EC826 /* TUpdateManagerWrap.h */; };
+		223457290ED2E572006EC826 /* TVarArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 123457290ED2E572006EC826 /* TVarArray.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,10 +107,11 @@
 		123457220ED2E572006EC826 /* TOptPointerVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TOptPointerVector.h; path = ../TOptPointerVector.h; sourceTree = SOURCE_ROOT; };
 		123457230ED2E572006EC826 /* TPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TPointer.h; path = ../TPointer.h; sourceTree = SOURCE_ROOT; };
 		123457240ED2E572006EC826 /* TPointerVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TPointerVector.h; path = ../TPointerVector.h; sourceTree = SOURCE_ROOT; };
-		123457250ED2E572006EC826 /* TSingleFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleFactory.h; path = ../TSingleFactory.h; sourceTree = SOURCE_ROOT; };
-		123457260ED2E572006EC826 /* TSmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSmartPtr.h; path = ../TSmartPtr.h; sourceTree = SOURCE_ROOT; };
-		123457270ED2E572006EC826 /* TUpdateManagerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUpdateManagerWrap.h; path = ../TUpdateManagerWrap.h; sourceTree = SOURCE_ROOT; };
-		123457280ED2E572006EC826 /* TVarArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarArray.h; path = ../TVarArray.h; sourceTree = SOURCE_ROOT; };
+		123457250ED2E572006EC826 /* TRetSmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TRetSmartPtr.h; path = ../TRetSmartPtr.h; sourceTree = SOURCE_ROOT; };
+		123457260ED2E572006EC826 /* TSingleFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSingleFactory.h; path = ../TSingleFactory.h; sourceTree = SOURCE_ROOT; };
+		123457270ED2E572006EC826 /* TSmartPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TSmartPtr.h; path = ../TSmartPtr.h; sourceTree = SOURCE_ROOT; };
+		123457280ED2E572006EC826 /* TUpdateManagerWrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUpdateManagerWrap.h; path = ../TUpdateManagerWrap.h; sourceTree = SOURCE_ROOT; };
+		123457290ED2E572006EC826 /* TVarArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TVarArray.h; path = ../TVarArray.h; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libistd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libistd.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -177,10 +179,11 @@
 				123457220ED2E572006EC826 /* TOptPointerVector.h */,
 				123457230ED2E572006EC826 /* TPointer.h */,
 				123457240ED2E572006EC826 /* TPointerVector.h */,
-				123457250ED2E572006EC826 /* TSingleFactory.h */,
-				123457260ED2E572006EC826 /* TSmartPtr.h */,
-				123457270ED2E572006EC826 /* TUpdateManagerWrap.h */,
-				123457280ED2E572006EC826 /* TVarArray.h */,
+				123457250ED2E572006EC826 /* TRetSmartPtr.h */,
+				123457260ED2E572006EC826 /* TSingleFactory.h */,
+				123457270ED2E572006EC826 /* TSmartPtr.h */,
+				123457280ED2E572006EC826 /* TUpdateManagerWrap.h */,
+				123457290ED2E572006EC826 /* TVarArray.h */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -281,10 +284,11 @@
 				223457220ED2E572006EC826 /* TOptPointerVector.h in Headers */,
 				223457230ED2E572006EC826 /* TPointer.h in Headers */,
 				223457240ED2E572006EC826 /* TPointerVector.h in Headers */,
-				223457250ED2E572006EC826 /* TSingleFactory.h in Headers */,
-				223457260ED2E572006EC826 /* TSmartPtr.h in Headers */,
-				223457270ED2E572006EC826 /* TUpdateManagerWrap.h in Headers */,
-				223457280ED2E572006EC826 /* TVarArray.h in Headers */,
+				223457250ED2E572006EC826 /* TRetSmartPtr.h in Headers */,
+				223457260ED2E572006EC826 /* TSingleFactory.h in Headers */,
+				223457270ED2E572006EC826 /* TSmartPtr.h in Headers */,
+				223457280ED2E572006EC826 /* TUpdateManagerWrap.h in Headers */,
+				223457290ED2E572006EC826 /* TVarArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
