@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          826
+          752
         </Number>
         <Description>
           ACF
@@ -32,10 +32,10 @@
         Application
       </ComponentName>
       <X>
-        -1341
+        -1339
       </X>
       <X>
-        -736
+        -734
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         AttributeDock
       </ComponentName>
       <X>
-        -1965
+        -1963
       </X>
       <X>
-        -492
+        -490
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         AttributeEditor
       </ComponentName>
       <X>
-        -1942
+        -1940
       </X>
       <X>
-        -101
+        -99
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -1065
+        -1063
       </X>
       <X>
-        -209
+        -207
       </X>
     </Element>
     <Element>
@@ -98,10 +98,10 @@
         Log
       </ComponentName>
       <X>
-        -1363
+        -1522
       </X>
       <X>
-        -543
+        -548
       </X>
     </Element>
     <Element>
@@ -109,10 +109,10 @@
         LogDock
       </ComponentName>
       <X>
-        -1229
+        -1253
       </X>
       <X>
-        -620
+        -619
       </X>
     </Element>
     <Element>
@@ -131,10 +131,10 @@
         PackageOverview
       </ComponentName>
       <X>
-        -1699
+        -1697
       </X>
       <X>
-        -179
+        -177
       </X>
     </Element>
     <Element>
@@ -142,10 +142,10 @@
         PackageOverviewDock
       </ComponentName>
       <X>
-        -1781
+        -1779
       </X>
       <X>
-        -489
+        -487
       </X>
     </Element>
     <Element>
@@ -153,10 +153,10 @@
         PackagesLoader
       </ComponentName>
       <X>
-        -1373
+        -1509
       </X>
       <X>
-        -285
+        -287
       </X>
     </Element>
     <Element>
@@ -164,7 +164,7 @@
         Preview
       </ComponentName>
       <X>
-        -927
+        -925
       </X>
       <X>
         0
@@ -175,10 +175,10 @@
         Registry
       </ComponentName>
       <X>
-        -1222
+        -1328
       </X>
       <X>
-        -472
+        -445
       </X>
     </Element>
     <Element>
@@ -186,10 +186,10 @@
         RegistryEditor
       </ComponentName>
       <X>
-        -911
+        -909
       </X>
       <X>
-        -120
+        -118
       </X>
     </Element>
     <Element>
@@ -197,10 +197,10 @@
         RegistryLoader
       </ComponentName>
       <X>
-        -1589
+        -1176
       </X>
       <X>
-        -392
+        -538
       </X>
     </Element>
     <Element>
