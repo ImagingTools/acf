@@ -5,6 +5,7 @@
 #include <QString>
 #include <QFileInfo>
 #include <QDir>
+#include <QProcess>
 
 
 namespace iqt
@@ -19,21 +20,7 @@ istd::CString CFileSystem::GetNormalizedPath(const istd::CString& path) const
 
 	QString absolutePath = dir.absolutePath();
 
-#ifdef _DEBUG
-#ifdef _WIN32
-	absolutePath.replace("$(ConfigurationName)", "DebugVC8");
-#else // _WIN32
-	absolutePath.replace("$(ConfigurationName)", "DebugXCD");
-#endif // _WIN32
-#else // _DEBUG
-#ifdef _WIN32
-	absolutePath.replace("$(ConfigurationName)", "ReleaseVC8");
-#else // _WIN32
-	absolutePath.replace("$(ConfigurationName)", "ReleaseXCD");
-#endif // _WIN32
-#endif // _DEBUG
-
-	return iqt::GetCString(absolutePath);
+	return iqt::GetCString(GetEnrolledPath(absolutePath));
 }
 
 
@@ -61,25 +48,69 @@ bool CFileSystem::IsPresent(const istd::CString& filePath) const
 
 // static members
 
-istd::CString CFileSystem::GetEnrolledPath(const istd::CString& path)
+QString CFileSystem::GetEnrolledPath(const QString& path)
 {
-	QString qtPath = iqt::GetQString(path);
+	QString retVal = path;
 
+	int endIndex = 0;
+	for (		int beginIndex;
+				((beginIndex = retVal.indexOf("$(", endIndex)) >= 0);){
+				endIndex = retVal.indexOf(")", beginIndex + 2);
+		if (endIndex < 0){
+			break;
+		}
+
+		I_ASSERT(endIndex >= beginIndex + 2);
+
+		QString varName = retVal.mid(beginIndex + 2, endIndex - beginIndex - 2);
+
+		retVal = retVal.left(beginIndex) + FindVariableValue(varName) + retVal.mid(endIndex + 1);
+	}
+
+	return retVal;
+}
+
+
+QString CFileSystem::FindVariableValue(const QString& varName)
+{
+	if (varName == "ConfigurationName"){
 #ifdef _DEBUG
 #ifdef _WIN32
-	qtPath.replace("$(ConfigurationName)", "DebugVC8");
+		return "DebugVC8";
 #else // _WIN32
-	qtPath.replace("$(ConfigurationName)", "DebugXCD");
+		return "DebugXCD";
 #endif // _WIN32
 #else // _DEBUG
 #ifdef _WIN32
-	qtPath.replace("$(ConfigurationName)", "ReleaseVC8");
+		return "ReleaseVC8";
 #else // _WIN32
-	qtPath.replace("$(ConfigurationName)", "ReleaseXCD");
+		return "ReleaseXCD";
 #endif // _WIN32
 #endif // _DEBUG
+	}
 
-	return iqt::GetCString(qtPath);
+	QString varNameExt = varName + "=";
+
+	const QStringList& envList = GetEnvList();
+	for (		QStringList::const_iterator iter = envList.begin();
+				iter != envList.end();
+				++iter){
+		if (iter->startsWith(varNameExt)){
+			return iter->mid(varNameExt.length());
+		}
+	}
+
+	return "";
+}
+
+
+// protected methods
+
+const QStringList& CFileSystem::GetEnvList()
+{
+	static QStringList envList = QProcess::systemEnvironment();
+
+	return envList;
 }
 
 

@@ -53,7 +53,7 @@ public:
 		I_REGISTER_INTERFACE(icomp::IRegistriesManager)
 		I_REGISTER_INTERFACE(icomp::IRegistryLoader)
 		I_ASSIGN(m_registryLoaderCompPtr, "RegistryLoader", "Loader used to read registry", true, "RegistryLoader")
-		I_ASSIGN(m_configFilePathAttrPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "PackagesConfig.xml")
+		I_ASSIGN(m_configFilePathAttrPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "Default.xpc")
 	I_END_COMPONENT
 
 	bool RegisterPackageFile(const istd::CString& file);
@@ -95,6 +95,8 @@ protected:
 
 	CDllFunctionsProvider& GetProviderRef(const QFileInfo& fileInfo);
 
+	bool CheckAndMarkPath(const QDir& directory, const istd::CString& path, istd::CString& resultPath) const;
+
 private:
 	typedef istd::TDelPtr<CDllFunctionsProvider> FunctionsProviderPtr;
 	typedef std::map<QString, FunctionsProviderPtr> DllCacheMap;
@@ -124,6 +126,9 @@ private:
 
 	mutable RegistriesMap m_registriesMap;
 	mutable InvRegistriesMap m_invRegistriesMap;
+
+	typedef std::set<istd::CString> UsedFilesList;
+	mutable UsedFilesList m_usedFilesList;
 
 	I_REF(iser::IFileLoader, m_registryLoaderCompPtr);
 	I_ATTR(istd::CString, m_configFilePathAttrPtr);

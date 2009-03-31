@@ -25,7 +25,11 @@ public:
 	virtual bool IsPresent(const istd::CString& filePath) const;
 
 	// static members
-	static istd::CString GetEnrolledPath(const istd::CString& path);
+	static QString FindVariableValue(const QString& varName);
+	static QString GetEnrolledPath(const QString& path);
+
+protected:
+	static const QStringList& GetEnvList();
 };
 
 

@@ -105,9 +105,9 @@ int main(int argc, char *argv[])
 
 	// register default package path
 	if (useDefaultRegistries){
-		if (!packagesLoaderComp.LoadConfigFile("PackagesConfig.xml")){
+		if (!packagesLoaderComp.LoadConfigFile("Default.xpc")){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
-			if (!packagesLoaderComp.LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("PackagesConfig.xml")))){
+			if (!packagesLoaderComp.LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("Default.xpc")))){
 				packagesLoaderComp.RegisterPackagesDir(iqt::GetCString(applicationDir.absolutePath()));
 			}
 		}

@@ -21,7 +21,7 @@ namespace iqt
 
 bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 {
-	QFileInfo fileInfo(iqt::GetQString(iqt::CFileSystem::GetEnrolledPath(file)));
+	QFileInfo fileInfo(iqt::GetQString(file));
 
 	if (fileInfo.isFile()){
 		CDllFunctionsProvider& provider = GetProviderRef(fileInfo);
@@ -83,7 +83,7 @@ bool CPackagesLoaderComp::RegisterPackagesDir(const istd::CString& path)
 {
 	bool retVal = true;
 
-	QDir packagesDir(GetQString(iqt::CFileSystem::GetEnrolledPath(path)));
+	QDir packagesDir(GetQString(path));
 
 	QStringList filters;
 	filters.append("*.arp");
@@ -102,7 +102,7 @@ bool CPackagesLoaderComp::RegisterPackagesDir(const istd::CString& path)
 
 bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 {
-	QFileInfo fileInfo(iqt::GetQString(iqt::CFileSystem::GetEnrolledPath(configFile)));
+	QFileInfo fileInfo(iqt::GetQString(configFile));
 
 	QDir baseDir = fileInfo.absoluteDir();
 
@@ -114,7 +114,7 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 	iser::CArchiveTag dirPathTag("Dir", "List of package directories", true);
 	iser::CArchiveTag packageFilesTag("PackageFiles", "List of package files", true);
 	iser::CArchiveTag filePathTag("FilePath", "Path of single file", true);
-/*
+
 	iser::CArchiveTag configFilesTag("ConfigFiles", "List of included config files", true);
 
 	int configFilesCount = 0;
@@ -129,15 +129,16 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 		retVal = retVal && archive.BeginTag(filePathTag);
 		istd::CString filePath;
 		retVal = retVal && archive.Process(filePath);
-		if (retVal){
-			LoadConfigFile(iqt::GetCString(baseDir.absoluteFilePath(iqt::GetQString(filePath))));
+		istd::CString correctedPath;
+		if (retVal && CheckAndMarkPath(baseDir, filePath, correctedPath)){
+			LoadConfigFile(correctedPath);
 		}
 
 		retVal = retVal && archive.EndTag(filePathTag);
 	}
 
 	retVal = retVal && archive.EndTag(configFilesTag);
-*/
+
 
 	int dirsCount = 0;
 	retVal = retVal && archive.BeginMultiTag(packageDirsTag, dirPathTag, dirsCount);
@@ -150,8 +151,9 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 		retVal = retVal && archive.BeginTag(dirPathTag);
 		istd::CString dirPath;
 		retVal = retVal && archive.Process(dirPath);
-		if (retVal){
-			RegisterPackagesDir(iqt::GetCString(baseDir.absoluteFilePath(iqt::GetQString(dirPath))));
+		istd::CString correctedPath;
+		if (retVal && CheckAndMarkPath(baseDir, dirPath, correctedPath)){
+			RegisterPackagesDir(correctedPath);
 		}
 
 		retVal = retVal && archive.EndTag(dirPathTag);
@@ -170,8 +172,9 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 		retVal = retVal && archive.BeginTag(filePathTag);
 		istd::CString filePath;
 		retVal = retVal && archive.Process(filePath);
-		if (retVal){
-			RegisterPackageFile(iqt::GetCString(baseDir.absoluteFilePath(iqt::GetQString(filePath))));
+		istd::CString correctedPath;
+		if (retVal && CheckAndMarkPath(baseDir, filePath, correctedPath)){
+			RegisterPackageFile(correctedPath);
 		}
 
 		retVal = retVal && archive.EndTag(filePathTag);
@@ -216,9 +219,9 @@ bool CPackagesLoaderComp::ConfigureEnvironment(
 	if (useDefaultRegistries){
 		QDir registryDir = QFileInfo(iqt::GetQString(registryFile)).dir();
 
-		if (!LoadConfigFile(iqt::GetCString(registryDir.absoluteFilePath("PackagesConfig.xml")))){
+		if (!LoadConfigFile(iqt::GetCString(registryDir.absoluteFilePath("Default.xpc")))){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
-			if (!LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("PackagesConfig.xml")))){
+			if (!LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("Default.xpc")))){
 				retVal = retVal && RegisterPackagesDir(iqt::GetCString(applicationDir.absolutePath()));
 			}
 		}
@@ -354,6 +357,21 @@ CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingReg
 	}
 
 	return retVal;
+}
+
+
+bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const istd::CString& path, istd::CString& resultPath) const
+{
+	istd::CString fullPath = iqt::GetCString(directory.absoluteFilePath(iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path))));
+	if (m_usedFilesList.find(fullPath) == m_usedFilesList.end()){
+		m_usedFilesList.insert(fullPath);
+
+		resultPath = fullPath;
+
+		return true;
+	}
+
+	return false;
 }
 
 
