@@ -10,14 +10,16 @@
 #include "istd/TDelPtr.h"
 #include "istd/CClassInfo.h"
 
+#include "idoc/IHelpViewer.h"
+
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CTreeWidgetFilter.h"
 
 #include "icomp/IRegistryElement.h"
 
-#include "Generated/ui_CAttributeEditorComp.h"
-
 #include "icmpstr/IAttributeSelectionObserver.h"
+
+#include "icmpstr/Generated/ui_CAttributeEditorComp.h"
 
 
 namespace icmpstr
@@ -30,9 +32,10 @@ class CAttributeEditorComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CAtt
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, icomp::IRegistryElement> BaseClass;
-	I_BEGIN_COMPONENT(CAttributeEditorComp)
-		I_ASSIGN(m_attributeSelectionObserverCompPtr, "AttributeSelectionObserver", "Attribute selection observer", false, "AttributeSelectionObserver")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CAttributeEditorComp);
+		I_ASSIGN(m_attributeSelectionObserverCompPtr, "AttributeSelectionObserver", "Attribute selection observer", false, "AttributeSelectionObserver");
+		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Shows object info during selection using its type", false, "QuickHelpViewer");
+	I_END_COMPONENT;
 
 	enum AttrMeaning{
 		Reference = 0x1,
@@ -72,6 +75,7 @@ public:
 protected slots:
 	void on_AttributeTree_itemSelectionChanged();
 	void on_AttributeTree_itemChanged(QTreeWidgetItem* item, int column);
+	void on_InterfacesTree_itemSelectionChanged();
 
 protected:
 	bool SetAttributeToItems(
@@ -112,6 +116,7 @@ private:
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_treeWidgetFilter;
 
 	I_REF(IAttributeSelectionObserver, m_attributeSelectionObserverCompPtr);
+	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 };
 
 

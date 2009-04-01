@@ -252,6 +252,14 @@
 				RelativePath="..\IDocumentTemplate.h"
 				>
 			</File>
+			<File
+				RelativePath="..\IHelpFileProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IHelpViewer.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

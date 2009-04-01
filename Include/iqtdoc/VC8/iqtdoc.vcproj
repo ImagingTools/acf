@@ -175,7 +175,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CDoxygenHelpFileProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtendedDocumentTemplateComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CHtmlHelpViewerComp.cpp"
 				>
 			</File>
 			<File
@@ -201,11 +209,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\CDoxygenHelpFileProviderComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtendedDocumentTemplateComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CExtendedDocumentTemplateComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CHtmlHelpViewerComp.h"
 				>
 			</File>
 			<File

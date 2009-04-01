@@ -36,6 +36,8 @@ I_EXPORT_COMPONENT(ExtendedDocumentTemplate, "Extended serialized document templ
 I_EXPORT_COMPONENT(MainWindowGui, "Main Qt application window", "Main Window Start Begin GUI Qt");
 I_EXPORT_COMPONENT(SingleDocWorkspaceGui, "Single document workspace", "Workspace Single SDI Document Model View Observer MVC GUI Qt");
 I_EXPORT_COMPONENT(MultiDocWorkspaceGui, "Multi document workspace", "Workspace Multi MDI Document Model View Observer MVC GUI Qt");
+I_EXPORT_COMPONENT(HtmlHelpViewer, "Help viewer showing html document", "Help Viewer Document Html Description GUI Qt");
+I_EXPORT_COMPONENT(DoxygenHelpFileProvider, "Provide html help file path converting class type using doxygen format", "DoxyGen Help File Provider Document Html Description Class Interface Qt");
 I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 
 I_EXPORT_COMPONENT(Bitmap, "QImage based bitmap implementation", "QImage Image Bitmap Qt");

@@ -251,6 +251,19 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 }
 
 
+void CAttributeEditorComp::on_InterfacesTree_itemSelectionChanged()
+{
+	QList<QTreeWidgetItem*> items = InterfacesTree->selectedItems();
+	if ((items.count() > 0) && m_quickHelpViewerCompPtr.IsValid()){
+		QTreeWidgetItem* attributeItemPtr = items.at(0);
+
+		istd::CClassInfo info(attributeItemPtr->text(0).toStdString());
+
+		m_quickHelpViewerCompPtr->ShowHelp(info.GetName(), &info);
+	}
+}
+
+
 // protected methods
 
 bool CAttributeEditorComp::SetAttributeToItems(

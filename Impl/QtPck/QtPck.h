@@ -43,6 +43,8 @@
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CSingleDocumentWorkspaceGuiComp.h"
 #include "iqtdoc/CMultiDocumentWorkspaceGuiComp.h"
+#include "iqtdoc/CHtmlHelpViewerComp.h"
+#include "iqtdoc/CDoxygenHelpFileProviderComp.h"
 
 
 /**
@@ -90,6 +92,8 @@ typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CSingleDocumentWorkspaceGuiComp> SingleDocWorkspaceGui;
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;
+typedef iqtdoc::CHtmlHelpViewerComp HtmlHelpViewer;
+typedef iqtdoc::CDoxygenHelpFileProviderComp DoxygenHelpFileProvider;
 
 
 } // namespace QtPck

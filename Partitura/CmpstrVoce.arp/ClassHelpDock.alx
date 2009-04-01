@@ -1,30 +1,19 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          752
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="19">
+  <PositionMap count="16">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        236
+        452
       </X>
       <X>
-        -71
+        -110
       </X>
     </Element>
     <Element>
@@ -43,32 +32,10 @@
         AttributeEditor
       </ComponentName>
       <X>
-        179
+        19
       </X>
       <X>
-        199
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AttributeEditorDock
-      </ComponentName>
-      <X>
-        118
-      </X>
-      <X>
-        76
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CompositorTemplate
-      </ComponentName>
-      <X>
-        511
-      </X>
-      <X>
-        209
+        105
       </X>
     </Element>
     <Element>
@@ -76,10 +43,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -222
+        -230
       </X>
       <X>
-        -107
+        -115
       </X>
     </Element>
     <Element>
@@ -87,10 +54,10 @@
         DoxygenHelpFileProvider
       </ComponentName>
       <X>
-        218
+        230
       </X>
       <X>
-        221
+        222
       </X>
     </Element>
     <Element>
@@ -98,10 +65,10 @@
         Log
       </ComponentName>
       <X>
-        771
+        788
       </X>
       <X>
-        19
+        151
       </X>
     </Element>
     <Element>
@@ -109,10 +76,10 @@
         LogDock
       </ComponentName>
       <X>
-        841
+        468
       </X>
       <X>
-        24
+        157
       </X>
     </Element>
     <Element>
@@ -120,10 +87,10 @@
         PackageOverview
       </ComponentName>
       <X>
-        -38
+        59
       </X>
       <X>
-        324
+        326
       </X>
     </Element>
     <Element>
@@ -131,10 +98,10 @@
         PackageOverviewDock
       </ComponentName>
       <X>
-        -24
+        267
       </X>
       <X>
-        216
+        313
       </X>
     </Element>
     <Element>
@@ -142,7 +109,7 @@
         PackagesLoader
       </ComponentName>
       <X>
-        -475
+        -489
       </X>
       <X>
         299
@@ -153,7 +120,7 @@
         Preview
       </ComponentName>
       <X>
-        -332
+        -340
       </X>
       <X>
         32
@@ -161,24 +128,13 @@
     </Element>
     <Element>
       <ComponentName>
-        QuickHelpDoc
-      </ComponentName>
-      <X>
-        228
-      </X>
-      <X>
-        112
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         QuickHelpDock
       </ComponentName>
       <X>
-        387
+        241
       </X>
       <X>
-        81
+        -11
       </X>
     </Element>
     <Element>
@@ -186,10 +142,10 @@
         QuickHelpViewer
       </ComponentName>
       <X>
-        239
+        241
       </X>
       <X>
-        118
+        105
       </X>
     </Element>
     <Element>
@@ -197,10 +153,10 @@
         Registry
       </ComponentName>
       <X>
-        -14
+        -22
       </X>
       <X>
-        -264
+        -272
       </X>
     </Element>
     <Element>
@@ -208,10 +164,10 @@
         RegistryEditor
       </ComponentName>
       <X>
-        -121
+        -111
       </X>
       <X>
-        57
+        35
       </X>
     </Element>
     <Element>
@@ -219,10 +175,10 @@
         RegistryLoader
       </ComponentName>
       <X>
-        -680
+        -688
       </X>
       <X>
-        -218
+        -226
       </X>
     </Element>
   </PositionMap>

@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="19">
+  <PositionMap count="18">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        236
+        452
       </X>
       <X>
-        -71
+        -82
       </X>
     </Element>
     <Element>
@@ -43,21 +43,10 @@
         AttributeEditor
       </ComponentName>
       <X>
-        179
+        184
       </X>
       <X>
-        199
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AttributeEditorDock
-      </ComponentName>
-      <X>
-        118
-      </X>
-      <X>
-        76
+        202
       </X>
     </Element>
     <Element>
@@ -65,10 +54,10 @@
         CompositorTemplate
       </ComponentName>
       <X>
-        511
+        585
       </X>
       <X>
-        209
+        327
       </X>
     </Element>
     <Element>
@@ -109,10 +98,10 @@
         LogDock
       </ComponentName>
       <X>
-        841
+        771
       </X>
       <X>
-        24
+        19
       </X>
     </Element>
     <Element>
@@ -120,10 +109,10 @@
         PackageOverview
       </ComponentName>
       <X>
-        -38
+        -60
       </X>
       <X>
-        324
+        148
       </X>
     </Element>
     <Element>
@@ -131,10 +120,10 @@
         PackageOverviewDock
       </ComponentName>
       <X>
-        -24
+        -90
       </X>
       <X>
-        216
+        -83
       </X>
     </Element>
     <Element>
@@ -175,10 +164,10 @@
         QuickHelpDock
       </ComponentName>
       <X>
-        387
+        376
       </X>
       <X>
-        81
+        106
       </X>
     </Element>
     <Element>

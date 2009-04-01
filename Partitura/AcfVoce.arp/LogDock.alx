@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="19">
+  <PositionMap count="17">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        236
+        452
       </X>
       <X>
-        -71
+        -103
       </X>
     </Element>
     <Element>
@@ -43,32 +43,10 @@
         AttributeEditor
       </ComponentName>
       <X>
-        179
+        19
       </X>
       <X>
-        199
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        AttributeEditorDock
-      </ComponentName>
-      <X>
-        118
-      </X>
-      <X>
-        76
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CompositorTemplate
-      </ComponentName>
-      <X>
-        511
-      </X>
-      <X>
-        209
+        105
       </X>
     </Element>
     <Element>
@@ -76,10 +54,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -222
+        -221
       </X>
       <X>
-        -107
+        -106
       </X>
     </Element>
     <Element>
@@ -98,10 +76,10 @@
         Log
       </ComponentName>
       <X>
-        771
+        788
       </X>
       <X>
-        19
+        150
       </X>
     </Element>
     <Element>
@@ -109,10 +87,10 @@
         LogDock
       </ComponentName>
       <X>
-        841
+        468
       </X>
       <X>
-        24
+        157
       </X>
     </Element>
     <Element>
@@ -120,10 +98,10 @@
         PackageOverview
       </ComponentName>
       <X>
-        -38
+        59
       </X>
       <X>
-        324
+        326
       </X>
     </Element>
     <Element>
@@ -131,10 +109,10 @@
         PackageOverviewDock
       </ComponentName>
       <X>
-        -24
+        267
       </X>
       <X>
-        216
+        313
       </X>
     </Element>
     <Element>
@@ -142,10 +120,10 @@
         PackagesLoader
       </ComponentName>
       <X>
-        -475
+        -482
       </X>
       <X>
-        299
+        300
       </X>
     </Element>
     <Element>
@@ -153,7 +131,7 @@
         Preview
       </ComponentName>
       <X>
-        -332
+        -336
       </X>
       <X>
         32
@@ -175,10 +153,10 @@
         QuickHelpDock
       </ComponentName>
       <X>
-        387
+        253
       </X>
       <X>
-        81
+        106
       </X>
     </Element>
     <Element>
@@ -197,10 +175,10 @@
         Registry
       </ComponentName>
       <X>
-        -14
+        -11
       </X>
       <X>
-        -264
+        -261
       </X>
     </Element>
     <Element>
@@ -208,10 +186,10 @@
         RegistryEditor
       </ComponentName>
       <X>
-        -121
+        -107
       </X>
       <X>
-        57
+        35
       </X>
     </Element>
     <Element>
@@ -219,10 +197,10 @@
         RegistryLoader
       </ComponentName>
       <X>
-        -680
+        -675
       </X>
       <X>
-        -218
+        -213
       </X>
     </Element>
   </PositionMap>

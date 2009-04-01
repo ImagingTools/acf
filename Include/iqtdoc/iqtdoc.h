@@ -2,6 +2,11 @@
 #define iqtdoc_included
 
 
+#include "idoc/idoc.h"
+
+#include "iqt/iqt.h"
+
+
 
 /**
 \defgroup iqtdoc Qt Document/View

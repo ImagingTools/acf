@@ -16,12 +16,13 @@ namespace istd
 /**
 	Represents platform independent type info and provide set of static class manipulation functions.
 */
-class CClassInfo
+class CClassInfo: virtual public istd::IPolymorphic
 {
 public:
 	CClassInfo();
 	explicit CClassInfo(const std::type_info& info);
 	explicit CClassInfo(const std::string& name);
+	explicit CClassInfo(const istd::IPolymorphic& object);
 
 	/**
 		Check if this class info object is valid.
@@ -89,6 +90,12 @@ inline CClassInfo::CClassInfo(const std::type_info& info)
 
 inline CClassInfo::CClassInfo(const std::string& name)
 :	m_name(GetUndecoratedName(name))
+{
+}
+
+
+inline CClassInfo::CClassInfo(const istd::IPolymorphic& object)
+:	m_name(GetUndecoratedName(typeid(object).name()))
 {
 }
 
