@@ -1,18 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          752
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="19">
@@ -24,7 +13,7 @@
         236
       </X>
       <X>
-        -71
+        -70
       </X>
     </Element>
     <Element>
@@ -131,10 +120,10 @@
         PackageOverviewDock
       </ComponentName>
       <X>
-        -24
+        -90
       </X>
       <X>
-        216
+        224
       </X>
     </Element>
     <Element>
