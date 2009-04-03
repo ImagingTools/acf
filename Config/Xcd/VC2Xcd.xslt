@@ -6,6 +6,9 @@
 	<xsl:strip-space elements="*"/>
 
 	<xsl:param name = "ExtraIncludes"></xsl:param>
+	<xsl:param name = "Defines"></xsl:param>
+	<xsl:param name = "RootPath">../../..</xsl:param>
+
 	<xsl:param name = "SpecialCharReplace" select = "'{}/'"/>
 
 	<xsl:template match = "*">
@@ -53,9 +56,9 @@
 		</xsl:variable>
 		<xsl:variable name = "OutputDir">
 			<xsl:choose>
-				<xsl:when test="Configurations/Configuration/@ConfigurationType='1'">"../../../Bin/$(CONFIGURATION)Xcd"</xsl:when>
-				<xsl:when test="Configurations/Configuration/@ConfigurationType='2'">"../../../Bin/$(CONFIGURATION)Xcd"</xsl:when>
-				<xsl:when test="Configurations/Configuration/@ConfigurationType='4'">"../../../Lib/$(CONFIGURATION)Xcd"</xsl:when>
+				<xsl:when test="Configurations/Configuration/@ConfigurationType='1'">"<xsl:value-of select="$RootPath"/>/Bin/$(CONFIGURATION)Xcd"</xsl:when>
+				<xsl:when test="Configurations/Configuration/@ConfigurationType='2'">"<xsl:value-of select="$RootPath"/>/Bin/$(CONFIGURATION)Xcd"</xsl:when>
+				<xsl:when test="Configurations/Configuration/@ConfigurationType='4'">"<xsl:value-of select="$RootPath"/>/Lib/$(CONFIGURATION)Xcd"</xsl:when>
 				<xsl:otherwise>$(BUILD_DIR)/$(CONFIGURATION)</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -284,7 +287,10 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG=1",
+					</xsl:text><xsl:value-of select="$Defines"/><xsl:text>
+				);
 				CONFIGURATION_BUILD_DIR = </xsl:text><xsl:value-of select="$OutputDir"/><xsl:text>;
 				EXECUTABLE_EXTENSION = "</xsl:text><xsl:value-of select="$ProductExtension"/><xsl:text>";
 				EXECUTABLE_PREFIX = "</xsl:text><xsl:value-of select="$ProductPrefix"/><xsl:text>";
@@ -304,6 +310,9 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					</xsl:text><xsl:value-of select="$Defines"/><xsl:text>
+				);
 				CONFIGURATION_BUILD_DIR = </xsl:text><xsl:value-of select="$OutputDir"/><xsl:text>;
 				EXECUTABLE_EXTENSION = "</xsl:text><xsl:value-of select="$ProductExtension"/><xsl:text>";
 				EXECUTABLE_PREFIX = "</xsl:text><xsl:value-of select="$ProductPrefix"/><xsl:text>";
@@ -319,7 +328,10 @@
 			buildSettings = {
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG=1",
+					</xsl:text><xsl:value-of select="$Defines"/><xsl:text>
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -343,6 +355,9 @@
 				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					</xsl:text><xsl:value-of select="$Defines"/><xsl:text>
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
