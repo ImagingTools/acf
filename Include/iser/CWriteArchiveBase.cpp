@@ -16,14 +16,14 @@ bool CWriteArchiveBase::IsStoring() const
 }
 
 
-I_DWORD CWriteArchiveBase::GetVersion(int versionId) const
+const IVersionInfo& CWriteArchiveBase::GetVersionInfo() const
 {
-	I_DWORD retVal;
-	if ((m_versionInfoPtr != NULL) && m_versionInfoPtr->GetVersionNumber(versionId, retVal)){
-		return retVal;
+	if (m_versionInfoPtr != NULL){
+		return *m_versionInfoPtr;
 	}
-
-	return I_DWORD(IVersionInfo::UnknownVersion);
+	else{
+		return s_emptyVersionInfo;
+	}
 }
 
 
@@ -101,6 +101,33 @@ bool CWriteArchiveBase::SerializeAcfHeader()
 
 	return retVal;
 }
+
+
+// public methods of embedded class EmptyVersionInfo
+
+// reimplemented (iser::IVersionInfo)
+
+bool CWriteArchiveBase::EmptyVersionInfo::GetVersionNumber(int /*versionId*/, I_DWORD& /*result*/) const
+{
+	return false;
+}
+
+
+istd::CString CWriteArchiveBase::EmptyVersionInfo::GetVersionIdDescription(int /*versionId*/) const
+{
+	return "";
+}
+
+
+iser::IVersionInfo::VersionIds CWriteArchiveBase::EmptyVersionInfo::GetVersionIds() const
+{
+	return iser::IVersionInfo::VersionIds();
+}
+
+
+// static attributes
+
+CWriteArchiveBase::EmptyVersionInfo CWriteArchiveBase::s_emptyVersionInfo;
 
 
 } // namespace iser

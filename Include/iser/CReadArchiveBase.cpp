@@ -13,14 +13,9 @@ bool CReadArchiveBase::IsStoring() const
 }
 
 
-I_DWORD CReadArchiveBase::GetVersion(int versionId) const
+const IVersionInfo& CReadArchiveBase::GetVersionInfo() const
 {
-	I_DWORD retVal;
-	if (m_versionInfo.GetVersionNumber(versionId, retVal)){
-		return retVal;
-	}
-
-	return 0;
+	return m_versionInfo;
 }
 
 

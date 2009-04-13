@@ -15,7 +15,7 @@ class CReadArchiveBase: public CArchiveBase
 public:
 	// reimplemented (iser::IArchive)
 	virtual bool IsStoring() const;
-	virtual I_DWORD GetVersion(int versionId = IVersionInfo::UserVersionId) const;
+	virtual const IVersionInfo& GetVersionInfo() const;
 	virtual bool ProcessBits(void* dataPtr, int bitsCount, int bytesCount);
 
 protected:

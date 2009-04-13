@@ -40,7 +40,7 @@ public:
 							For example version number of framework cann differ from application version.
 		\sa VersionId.
 	 */
-	virtual I_DWORD GetVersion(int versionId = IVersionInfo::UserVersionId) const = 0;
+	virtual const IVersionInfo& GetVersionInfo() const = 0;
 
 	/**
 		Begin of archive tag.

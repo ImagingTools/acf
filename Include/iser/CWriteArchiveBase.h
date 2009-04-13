@@ -14,7 +14,7 @@ class CWriteArchiveBase: public CArchiveBase
 public:
 	// reimplemented (iser::IArchive)
 	virtual bool IsStoring() const;
-	virtual I_DWORD GetVersion(int versionId = IVersionInfo::UserVersionId) const;
+	virtual const IVersionInfo& GetVersionInfo() const;
 	virtual bool ProcessBits(void* dataPtr, int bitsCount, int bytesCount);
 
 protected:
@@ -31,8 +31,20 @@ protected:
 	*/
 	virtual bool SerializeAcfHeader();
 
+	class EmptyVersionInfo: virtual public IVersionInfo
+	{
+	public:
+		// reimplemented (iser::IVersionInfo)
+		virtual bool GetVersionNumber(int versionId, I_DWORD& result) const;
+		virtual istd::CString GetVersionIdDescription(int versionId) const;
+		virtual VersionIds GetVersionIds() const;
+	};
+
 private:
 	const IVersionInfo* m_versionInfoPtr;
+
+	// static attributes
+	static EmptyVersionInfo s_emptyVersionInfo;
 };
 
 
