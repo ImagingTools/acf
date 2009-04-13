@@ -218,7 +218,9 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 					SerializeExportedInterfaces(archive) &&
 					SerializeExportedComponents(archive);
 
-	if (archive.GetVersion(iser::IVersionInfo::FrameworkVersionId) >= 807){
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	I_DWORD frameworkVersion;
+	if (!versionInfo.GetVersionNumber(iser::IVersionInfo::FrameworkVersionId, frameworkVersion) || (frameworkVersion >= 807)){
 		static iser::CArchiveTag descriptionTag("Description", "Human readable description");
 		retVal = retVal && archive.BeginTag(descriptionTag);
 		retVal = retVal && archive.Process(m_description);
@@ -235,6 +237,18 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
+}
+
+
+I_DWORD CRegistry::GetMinimalVersion(int versionId) const
+{
+	if (versionId == iser::IVersionInfo::FrameworkVersionId){
+		if (!m_description.IsEmpty() || !m_keywords.IsEmpty()){
+			return 807;
+		}
+	}
+
+	return 0;
 }
 
 

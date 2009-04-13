@@ -27,7 +27,8 @@ public:
 
 	enum MessageId
 	{
-		MI_BAD_EXTENSION = 0xac10
+		MI_BAD_EXTENSION = 0xac10,
+		MI_UNSUPPORTED_VERSION
 	};
 
 	I_BEGIN_COMPONENT(TFileSerializerComp)
@@ -58,6 +59,11 @@ protected:
 		Called if read error is occured.
 	*/
 	virtual void OnReadError(const ReadArchive& archive, const istd::IChangeable& data, const istd::CString& filePath) const;
+
+	/**
+		Check if minimal version of some serializable object is supported by version info.
+	*/
+	bool CheckMinimalVersion(const iser::ISerializable& object, const iser::IVersionInfo& versionInfo) const;
 
 private:
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
@@ -152,6 +158,10 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(const istd::IChan
 		const iser::ISerializable* serializablePtr = dynamic_cast<const iser::ISerializable*>(&data);
 		I_ASSERT(serializablePtr != NULL);
 
+		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){
+			SendWarningMessage(MI_UNSUPPORTED_VERSION, "Archive version is not supported, possible lost of data");
+		}
+
 		if ((const_cast<iser::ISerializable*>(serializablePtr))->Serialize(archive)){
 			return StateOk;
 		}
@@ -215,6 +225,30 @@ template <class ReadArchive, class WriteArchive>
 void TFileSerializerComp<ReadArchive, WriteArchive>::OnReadError(const ReadArchive& /*archive*/, const istd::IChangeable& /*data*/, const istd::CString& filePath) const
 {
 	this->SendInfoMessage(MI_CANNOT_LOAD, istd::CString("Cannot load object from file ") + filePath);
+}
+
+
+template <class ReadArchive, class WriteArchive>
+bool TFileSerializerComp<ReadArchive, WriteArchive>::CheckMinimalVersion(const iser::ISerializable& object, const iser::IVersionInfo& versionInfo) const
+{
+	iser::IVersionInfo::VersionIds ids = versionInfo.GetVersionIds();
+
+	for (		iser::IVersionInfo::VersionIds::const_iterator iter = ids.begin();
+				iter != ids.end();
+				++iter){
+		int id = *iter;
+
+		I_DWORD minimalVersionInfo = object.GetMinimalVersion(id);
+
+		I_DWORD versionNumber;
+		if (versionInfo.GetVersionNumber(id, versionNumber)){
+			if (versionNumber < minimalVersionInfo){
+				return false;
+			}
+		}
+	}
+
+	return true;
 }
 
 

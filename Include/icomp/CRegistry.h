@@ -59,6 +59,7 @@ public:
 	
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+	virtual I_DWORD GetMinimalVersion(int versionId = iser::IVersionInfo::UserVersionId) const;
 
 protected:
 	virtual bool SerializeComponents(iser::IArchive& archive);
