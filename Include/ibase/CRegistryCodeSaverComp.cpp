@@ -41,11 +41,17 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 {
 	const icomp::IRegistry* registryPtr = dynamic_cast<const icomp::IRegistry*>(&data);
 	if (registryPtr != NULL){
-		std::ofstream stream(filePath.ToString().c_str());
+		istd::CString headerFilePath;
+		std::string className;
+		if (ExtractInfoFromFile(filePath, className, headerFilePath)){
+			std::ofstream stream(filePath.ToString().c_str());
+			std::ofstream headerStream(headerFilePath.ToString().c_str());
 
-		CRegistryCodeSaverComp& me = const_cast<CRegistryCodeSaverComp&>(*this);
-		if (me.WriteRegistryIncludes(*registryPtr, stream) && me.WriteRegistryInfo(*registryPtr, stream)){
-			return StateOk;
+			if (		WriteHeader(className, *registryPtr, headerStream) &&
+						WriteRegistryIncludes(className, *registryPtr, stream) &&
+						WriteRegistryInfo(className, *registryPtr, stream)){
+				return StateOk;
+			}
 		}
 	}
 
@@ -59,8 +65,6 @@ bool CRegistryCodeSaverComp::GetFileExtensions(istd::CStringList& result, bool d
 		result.clear();
 	}
 
-	result.push_back("h");
-	result.push_back("hpp");
 	result.push_back("c");
 	result.push_back("cpp");
 
@@ -71,11 +75,9 @@ bool CRegistryCodeSaverComp::GetFileExtensions(istd::CStringList& result, bool d
 istd::CString CRegistryCodeSaverComp::GetTypeDescription(const istd::CString* extensionPtr) const
 {
 	if (		(extensionPtr == NULL) ||
-				extensionPtr->IsEqualNoCase("h") ||
-				extensionPtr->IsEqualNoCase("hpp") ||
 				extensionPtr->IsEqualNoCase("c") ||
 				extensionPtr->IsEqualNoCase("cpp")){
-		return "QSF registry file";
+		return "C++ source file";
 	}
 
 	return "";
@@ -84,9 +86,56 @@ istd::CString CRegistryCodeSaverComp::GetTypeDescription(const istd::CString* ex
 
 // protected methods
 
-bool CRegistryCodeSaverComp::WriteRegistryIncludes(
+bool CRegistryCodeSaverComp::WriteHeader(
+			const std::string& className,
 			const icomp::IRegistry& registry,
-			std::ofstream& stream)
+			std::ofstream& stream) const
+{
+	std::string includeDefine = className + "_included";
+
+	stream << "#ifndef " << includeDefine << std::endl;
+	stream << "#define " << includeDefine << std::endl;
+	stream << std::endl << std::endl;
+
+	istd::CString description = registry.GetDescription();
+	if (!description.IsEmpty()){
+		stream << "/**" << std::endl;
+		stream << "\t" << description.ToString() << "." << std::endl;
+		stream << "*/" << std::endl;
+	}
+
+	stream << "class " << className << ": public icomp::CComponentBase" << std::endl;
+	stream << "{" << std::endl;
+	stream << "public:" << std::endl;
+	stream << "\ttypedef icomp::CComponentBase BaseClass;" << std::endl;
+	stream << "\t" << className << "();" << std::endl;
+	stream << std::endl;
+	stream << "protected:" << std::endl;
+	stream << "\tclass Registry: public icomp::CRegistry" << std::endl;
+	stream << "\t{" << std::endl;
+	stream << "\tpublic:" << std::endl;
+	stream << "\t\tRegistry();" << std::endl;
+	stream << std::endl;
+	stream << "\tprotected:" << std::endl;
+	stream << "\t\tbool SetupRegistry(icomp::CRegistry& registry) const;" << std::endl;
+	stream << "\t};" << std::endl;
+	stream << std::endl;
+	stream << "private:" << std::endl;
+	stream << "\t// static members" << std::endl;
+	stream << "\tstatic Registry s_registry;" << std::endl;
+	stream << "};" << std::endl;
+
+	stream << std::endl << std::endl;
+	stream << "#endif // !" << includeDefine << std::endl;
+
+	return !stream.fail();
+}
+
+
+bool CRegistryCodeSaverComp::WriteRegistryIncludes(
+			const std::string& className,
+			const icomp::IRegistry& registry,
+			std::ofstream& stream) const
 {
 	typedef std::set<std::string> PackageIds;
 
@@ -106,6 +155,7 @@ bool CRegistryCodeSaverComp::WriteRegistryIncludes(
 		packageIds.insert(packageId);
 	}
 	
+	stream << "#include \"" << className << ".h\"" << std::endl << std::endl;
 	for (		PackageIds::const_iterator packageIter = packageIds.begin();
 				packageIter != packageIds.end();
 				++packageIter){
@@ -121,11 +171,24 @@ bool CRegistryCodeSaverComp::WriteRegistryIncludes(
 
 
 bool CRegistryCodeSaverComp::WriteRegistryInfo(
+			const std::string& className,
 			const icomp::IRegistry& registry,
-			std::ofstream& stream)
+			std::ofstream& stream) const
 {
 	NextLine(stream);
-	stream << "bool SetupRegistry(icomp::CRegistry& registry)";
+	stream << className << "::Registry::Registry()";
+	NextLine(stream);
+	stream << "{";
+	ChangeIndent(1);
+	NextLine(stream);
+	stream << "SetupRegistry(*this);";
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
+	stream << std::endl << std::endl;
+
+	NextLine(stream);
+	stream << "bool " << className << "::Registry::SetupRegistry(icomp::CRegistry& registry) const";
 	NextLine(stream);
 	stream << "{";
 	ChangeIndent(1);
@@ -183,7 +246,16 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	stream << "return true;";
 	ChangeIndent(-1);
 	NextLine(stream);
-	stream << "}" << std::endl;
+	stream << "}";
+
+	stream << std::endl << std::endl;
+
+	NextLine(stream);
+	stream << "// static members";
+	NextLine(stream);
+	stream << className << "::s_registry;";
+
+	stream << std::endl << std::endl;
 
 	return !stream.fail();
 }
@@ -193,7 +265,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 			const icomp::IRegistry& registry,
 			const std::string& componentName,
 			const icomp::IRegistry::ElementInfo& componentInfo,
-			std::ofstream& stream)
+			std::ofstream& stream) const
 {
 	std::string elementInfoName = "info" + componentName + "Ptr";
 	NextLine(stream);
@@ -279,7 +351,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 			const std::string& attributeId,
 			const std::string& attributeInfoName,
 			const iser::ISerializable& attribute,
-			std::ofstream& stream)
+			std::ofstream& stream) const
 {
 	NextLine(stream);
 	stream << "I_ASSERT(" << attributeInfoName << "->attributePtr.IsValid());";
@@ -420,7 +492,7 @@ bool CRegistryCodeSaverComp::GetMultipleAttributeValue(
 }
 
 
-bool CRegistryCodeSaverComp::NextLine(std::ofstream& stream)
+bool CRegistryCodeSaverComp::NextLine(std::ofstream& stream) const
 {
 	stream << std::endl;
 
@@ -432,13 +504,35 @@ bool CRegistryCodeSaverComp::NextLine(std::ofstream& stream)
 }
 
 
-int CRegistryCodeSaverComp::ChangeIndent(int difference)
+int CRegistryCodeSaverComp::ChangeIndent(int difference) const
 {
 	m_indentCount += difference;
 
 	I_ASSERT(m_indentCount >= 0);
 
 	return m_indentCount;
+}
+
+
+bool CRegistryCodeSaverComp::ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& headerFilePath) const
+{
+	istd::CString::size_type dotPosition = filePath.find_last_of('.');
+	if ((dotPosition != istd::CString::npos) && (dotPosition > 0)){
+		istd::CString::size_type beginPosition = filePath.find_last_of(istd::CString("/\\"), dotPosition - 1);
+
+		if (beginPosition == istd::CString::npos){
+			beginPosition = -1;
+		}
+
+		I_ASSERT(beginPosition < dotPosition);
+
+		className = filePath.ToString().substr(beginPosition + 1, dotPosition - beginPosition - 1);
+		headerFilePath = filePath.substr(0, dotPosition) + istd::CString(".h");
+
+		return true;
+	}
+
+	return false;
 }
 
 

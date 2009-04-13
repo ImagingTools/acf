@@ -38,22 +38,28 @@ public:
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
 protected:
+	bool WriteHeader(
+				const std::string& className,
+				const icomp::IRegistry& registry,
+				std::ofstream& stream) const;
 	bool WriteRegistryIncludes(
+				const std::string& className,
 				const icomp::IRegistry& registry,
-				std::ofstream& stream);
+				std::ofstream& stream) const;
 	bool WriteRegistryInfo(
+				const std::string& className,
 				const icomp::IRegistry& registry,
-				std::ofstream& stream);
+				std::ofstream& stream) const;
 	bool WriteComponentInfo(
 				const icomp::IRegistry& registry,
 				const std::string& componentId,
 				const icomp::IRegistry::ElementInfo& componentInfo,
-				std::ofstream& stream);
+				std::ofstream& stream) const;
 	bool WriteAttribute(
 				const std::string& attributeId,
 				const std::string& attributeName,
 				const iser::ISerializable& attribute,
-				std::ofstream& stream);
+				std::ofstream& stream) const;
 
 	bool GetSingleAttributeValue(
 				const iser::ISerializable& attribute,
@@ -64,11 +70,13 @@ protected:
 				std::list<std::string>& valueStrings,
 				std::string& typeName) const;
 
-	bool NextLine(std::ofstream& stream);
-	int ChangeIndent(int difference);
+	bool NextLine(std::ofstream& stream) const;
+	int ChangeIndent(int difference) const;
+
+	bool ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& headerFilePath) const;
 
 private:
-	int m_indentCount;
+	mutable int m_indentCount;
 };
 
 
