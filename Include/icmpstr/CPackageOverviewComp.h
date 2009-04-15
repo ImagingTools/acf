@@ -5,6 +5,7 @@
 #include <QTreeWidget>
 #include <QMimeData>
 #include <QDrag>
+#include <QDir>
 
 
 #include "istd/TDelPtr.h"
@@ -77,12 +78,11 @@ private:
 	class PackageComponentItem: public QTreeWidgetItem
 	{
 	public:
-		PackageComponentItem(QTreeWidgetItem* parentItemPtr, const icomp::CComponentAddress& address)
-		:	QTreeWidgetItem(parentItemPtr), m_address(address)
-		{
-			setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
-			setText(0, iqt::GetQString(address.GetComponentId()));
-		}
+		PackageComponentItem(
+					QTreeWidgetItem* parentItemPtr,
+					const icomp::CComponentAddress& address,
+					const icomp::IComponentStaticInfo& staticInfo,
+					const QDir* packageDirPtr);
 
 		const icomp::CComponentAddress& GetAddress() const
 		{

@@ -7,7 +7,6 @@
 #include <QApplication>
 #include <QHeaderView>
 #include <QItemDelegate>
-#include <QDir>
 
 #include "istd/CString.h"
 
@@ -62,6 +61,7 @@ void CPackageOverviewComp::GenerateComponentTree(const QString& filter, bool exp
 	}
 
 	PackagesList->clear();
+	KeywordsList->clear();
 
 	icomp::IComponentStaticInfo::Ids subcomponentIds = m_generalStaticInfoCompPtr->GetSubcomponentIds();
 
@@ -216,17 +216,24 @@ void CPackageOverviewComp::GeneratePackageTree(
 			continue;
 		}
 
+		QString keywordString = iqt::GetQString(componentInfoPtr->GetKeywords());
+		QStringList keywords = keywordString.split(QChar(' '), QString::SkipEmptyParts,  Qt::CaseInsensitive);
+
 		if (!filter.isEmpty()){
-			QString keywordString = iqt::GetQString(componentInfoPtr->GetKeywords());
-			QStringList keywords = keywordString.split(QChar(' '), QString::SkipEmptyParts,  Qt::CaseInsensitive);
 			QStringList filterKeywords = filter.split(QChar(' '), QString::SkipEmptyParts,  Qt::CaseInsensitive);
 
 			bool containsFilter = true;
-			for(int filterIndex = 0; filterIndex < filterKeywords.count(); filterIndex++){
-				QString filter = filterKeywords[filterIndex];
+			for (		QStringList::const_iterator filterIter = filterKeywords.begin();
+						filterIter != filterKeywords.end();
+						++filterIter){
+				const QString& filter = *filterIter;
+
 				bool filterFound = false;
-				for(int keywordIndex = 0; keywordIndex < keywords.count(); keywordIndex++){
-					QString keyword = keywords[keywordIndex];
+				for (		QStringList::const_iterator keywordIter = keywords.begin();
+							keywordIter != keywords.end();
+							++keywordIter){
+					const QString& keyword = *keywordIter;
+
 					if (keyword.contains(filter, Qt::CaseInsensitive)){
 						filterFound = true;
 						break;
@@ -245,13 +252,37 @@ void CPackageOverviewComp::GeneratePackageTree(
 		}
 
 		icomp::CComponentAddress address(packageId, componentId);
-		PackageComponentItem* componentItem = new PackageComponentItem(&root, address);
-		componentItem->setToolTip(0, iqt::GetQString(componentInfoPtr->GetDescription()));
 
-		if (hasPackageInfo){
-			QString iconPath = packageDir.absoluteFilePath((componentId + ".small.png").c_str());
-			componentItem->setIcon(0, QIcon(iconPath));
+		for (		QStringList::const_iterator keywordIter = keywords.begin();
+					keywordIter != keywords.end();
+					++keywordIter){
+			const QString& keyword = *keywordIter;
+
+			QTreeWidgetItem* keywordItemPtr = NULL;
+			QList<QTreeWidgetItem*> keywordItems = KeywordsList->findItems(keyword, Qt::MatchFixedString);
+			if (!keywordItems.isEmpty()){
+				keywordItemPtr = keywordItems.first();
+			}
+			else{
+				keywordItemPtr = new QTreeWidgetItem();
+				if (keywordItemPtr == NULL){
+					return;
+				}
+
+				keywordItemPtr->setText(0, keyword);
+				keywordItemPtr->setForeground(0, Qt::darkBlue);
+				keywordItemPtr->setForeground(1, Qt::darkBlue);
+
+				keywordItemPtr->setToolTip(0, iqt::GetQString(packageInfo.GetDescription()));
+
+				KeywordsList->addTopLevelItem(keywordItemPtr);
+			}
+			I_ASSERT(keywordItemPtr != NULL);
+
+			keywordItemPtr->addChild(new PackageComponentItem(keywordItemPtr, address, *componentInfoPtr, hasPackageInfo? &packageDir: NULL));
 		}
+
+		PackageComponentItem* componentItem = new PackageComponentItem(&root, address, *componentInfoPtr, hasPackageInfo? &packageDir: NULL);
 
 		root.addChild(componentItem);
 	}
@@ -287,24 +318,32 @@ bool CPackageOverviewComp::eventFilter(QObject* eventObject, QEvent* event)
 			I_ASSERT(mouseEvent != NULL);
 
 			if (mouseEvent->button() == Qt::LeftButton){
-				QModelIndex modelIndex = PackagesList->indexAt(mouseEvent->pos());
-				QTreeWidgetItem* pressedItemPtr = reinterpret_cast<QTreeWidgetItem*>(modelIndex.internalPointer());
-				if (pressedItemPtr != NULL){
-					PackageComponentItem* selectedItemPtr = dynamic_cast<PackageComponentItem*>(pressedItemPtr);
-					if (selectedItemPtr != NULL){
-						QMimeData* mimeData = new QMimeData;
+				PackageComponentItem* selectedItemPtr = NULL;
 
-						icomp::CComponentAddress address = selectedItemPtr->GetAddress();
-						iser::CMemoryWriteArchive archive;
-						if (address.Serialize(archive)){
-							QByteArray byteData = QByteArray((const char*)archive.GetBuffer(), archive.GetBufferSize());
+				QModelIndex packagesModelIndex = PackagesList->indexAt(mouseEvent->pos());
+				QModelIndex keywordsModelIndex = KeywordsList->indexAt(mouseEvent->pos());
 
-							mimeData->setData("component", byteData);
+				if (packagesModelIndex.isValid()){
+					selectedItemPtr = dynamic_cast<PackageComponentItem*>(reinterpret_cast<QTreeWidgetItem*>(packagesModelIndex.internalPointer()));
+				}
+				
+				if ((selectedItemPtr == NULL) && keywordsModelIndex.isValid()){
+					selectedItemPtr = dynamic_cast<PackageComponentItem*>(reinterpret_cast<QTreeWidgetItem*>(keywordsModelIndex.internalPointer()));
+				}
 
-							QDrag *drag = new QDrag(sourceWidgetPtr);
-							drag->setMimeData(mimeData);
-							drag->start(Qt::MoveAction);
-						}
+				if (selectedItemPtr != NULL){
+					QMimeData* mimeData = new QMimeData;
+
+					icomp::CComponentAddress address = selectedItemPtr->GetAddress();
+					iser::CMemoryWriteArchive archive;
+					if (address.Serialize(archive)){
+						QByteArray byteData = QByteArray((const char*)archive.GetBuffer(), archive.GetBufferSize());
+
+						mimeData->setData("component", byteData);
+
+						QDrag *drag = new QDrag(sourceWidgetPtr);
+						drag->setMimeData(mimeData);
+						drag->start(Qt::MoveAction);
 					}
 				}
 			}
@@ -345,7 +384,40 @@ void CPackageOverviewComp::OnGuiCreated()
 
 	PackagesList->viewport()->installEventFilter(this);
 
+	KeywordsList->setColumnCount(2);
+	KeywordsList->setHeaderLabels(labels);
+	KeywordsList->setItemDelegate(new CItemDelegate());
+
+	KeywordsList->header()->setResizeMode(0, QHeaderView::ResizeToContents);
+	KeywordsList->header()->setResizeMode(1, QHeaderView::Fixed);
+	KeywordsList->header()->hide();
+
+	KeywordsList->setIndentation(15);
+
+	KeywordsList->viewport()->installEventFilter(this);
+
 	GenerateComponentTree();
+}
+
+
+// public methods of embedded class 
+
+CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
+			QTreeWidgetItem* parentItemPtr,
+			const icomp::CComponentAddress& address,
+			const icomp::IComponentStaticInfo& staticInfo,
+			const QDir* packageDirPtr)
+:	QTreeWidgetItem(parentItemPtr), m_address(address)
+{
+	setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
+	setText(0, iqt::GetQString(address.GetComponentId()));
+	setToolTip(0, iqt::GetQString(staticInfo.GetDescription()));
+
+	if (packageDirPtr != NULL){
+		QString iconPath = packageDirPtr->absoluteFilePath((address.GetComponentId() + ".small.png").c_str());
+		
+		setIcon(0, QIcon(iconPath));
+	}
 }
 
 
