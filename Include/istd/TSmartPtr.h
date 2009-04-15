@@ -22,7 +22,7 @@ public:
 
 	TSmartPtr();
 	explicit TSmartPtr(Type* pointer);
-	TSmartPtr(const TRetSmartPtr& pointer);
+	TSmartPtr(const TRetSmartPtr<Type, Accessor>& pointer);
 	TSmartPtr(const TSmartPtr& pointer);
 	~TSmartPtr();
 
@@ -40,6 +40,8 @@ public:
 	TSmartPtr& operator=(const TSmartPtr& otherCounter);
 
 protected:
+	using TRetSmartPtr<Type, Accessor>::m_counterPtr;
+
 	/**
 		Detach counter object without changing of internal counter pointer.
 	*/
@@ -57,12 +59,12 @@ TSmartPtr<Type, Accessor>::TSmartPtr()
 template <class Type, class Accessor>
 TSmartPtr<Type, Accessor>::TSmartPtr(Type* pointer)
 {
-	m_counterPtr = new Counter(pointer);
+	m_counterPtr = new typename TRetSmartPtr<Type, Accessor>::Counter(pointer);
 }
 
 
 template <class Type, class Accessor>
-TSmartPtr<Type, Accessor>::TSmartPtr(const TRetSmartPtr& pointer)
+TSmartPtr<Type, Accessor>::TSmartPtr(const TRetSmartPtr<Type, Accessor>& pointer)
 :	BaseClass(pointer)
 {
 	if (m_counterPtr != NULL){
@@ -104,7 +106,7 @@ inline void TSmartPtr<Type, Accessor>::SetPtr(Type* pointer)
 {
 	Detach();
 
-	m_counterPtr = new Counter(pointer);
+	m_counterPtr = new typename TRetSmartPtr<Type, Accessor>::Counter(pointer);
 }
 
 
