@@ -19,28 +19,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libacfstd.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = acfstd;
 		};
 		EAD605F60F1BB47B00883059 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libizlib.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = izlib;
 		};
 		EAD605FA0F1BB49900883059 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EAD6056F0F1BB35900883059 /* AcfStd.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* acfstd */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = acfstd;
 		};
 		EAD605FC0F1BB49900883059 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EAD605EF0F1BB47B00883059 /* izlib.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* izlib */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = izlib;
 		};
 /* End PBXContainerItemProxy section */
@@ -300,6 +300,7 @@
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				CONFIGURATION_BUILD_DIR = "../../../Bin/$(CONFIGURATION)Xcd";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EXECUTABLE_EXTENSION = arp;
