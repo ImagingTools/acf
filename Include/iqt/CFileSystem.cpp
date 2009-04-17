@@ -1,7 +1,7 @@
 #include "iqt/CFileSystem.h"
 
 
-// QT includes
+// Qt includes
 #include <QString>
 #include <QFileInfo>
 #include <QDir>

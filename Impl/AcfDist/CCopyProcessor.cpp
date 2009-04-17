@@ -351,7 +351,6 @@ bool CCopyProcessor::CopyFileWithSubstitution(const QString& inputFileName, cons
 
 bool CCopyProcessor::CheckIfExcluded(const QString& fileName, const QStringList& excludeFilters) const
 {
-	bool retVal = false;
 	for (		QStringList::const_iterator excludeIter = excludeFilters.begin();
 				excludeIter != excludeFilters.end();
 				++excludeIter){

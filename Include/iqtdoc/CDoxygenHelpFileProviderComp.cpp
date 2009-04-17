@@ -1,7 +1,7 @@
 #include "iqtdoc/CDoxygenHelpFileProviderComp.h"
 
 
-// QT includes
+// Qt includes
 #include <QFileInfo>
 
 #include "istd/CClassInfo.h"

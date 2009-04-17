@@ -36,12 +36,12 @@ public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CLogGuiComp> BaseClass;
 	typedef ibase::CMessageContainer BaseClass2;
 
-	I_BEGIN_COMPONENT(CLogGuiComp)
-		I_REGISTER_INTERFACE(ibase::IMessageConsumer)
-		I_REGISTER_INTERFACE(ibase::IMessageContainer)
-		I_ASSIGN(m_fileLoaderCompPtr, "Exporter", "File loader used for log export", false, "Exporter")
-		I_ASSIGN(m_maxMessageCountAttrPtr, "MaxMessageCount", "Maximal number of messages", false, 1000)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CLogGuiComp);
+		I_REGISTER_INTERFACE(ibase::IMessageConsumer);
+		I_REGISTER_INTERFACE(ibase::IMessageContainer);
+		I_ASSIGN(m_fileLoaderCompPtr, "Exporter", "File loader used for log export", false, "Exporter");
+		I_ASSIGN(m_maxMessageCountAttrPtr, "MaxMessageCount", "Maximal number of messages", false, 1000);
+	I_END_COMPONENT;
 
 	CLogGuiComp();
 

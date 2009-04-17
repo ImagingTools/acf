@@ -2,7 +2,7 @@
 #define CComponentView_included
 
 
-// QT includes
+// Qt includes
 #include <QGraphicsRectItem>
 #include <QMouseEvent>
 #include <QResizeEvent>

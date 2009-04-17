@@ -185,6 +185,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CConsoleLogComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInstantiatorComp.cpp"
 				>
 			</File>
@@ -231,6 +235,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CConsoleLogComp.h"
 				>
 			</File>
 			<File

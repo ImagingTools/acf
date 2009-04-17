@@ -31,12 +31,12 @@ public:
 		MI_UNSUPPORTED_VERSION
 	};
 
-	I_BEGIN_COMPONENT(TFileSerializerComp)
+	I_BEGIN_COMPONENT(TFileSerializerComp);
 		I_REGISTER_INTERFACE(iser::IFileLoader)
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
 		I_ASSIGN_MULTI_0(m_fileExtensionsAttrPtr, "FileExtensions", "List of supported file extensions", false);
 		I_ASSIGN_MULTI_0(m_typeDescriptionsAttrPtr, "TypeDescriptions", "List of descriptions for each extension", false);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(

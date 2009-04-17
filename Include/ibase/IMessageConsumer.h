@@ -25,7 +25,7 @@ public:
 		Please note, that the container takes controll over the message item, 
 		so you cannot destroy this object manually.
 	*/
-	virtual void AddMessage(ibase::IMessage* messagePtr) = 0;
+	virtual void AddMessage(IMessage* messagePtr) = 0;
 };
 
 

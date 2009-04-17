@@ -20,6 +20,7 @@ I_EXPORT_COMPONENT(ApplicationInfo, "Simple application info", "Application Info
 I_EXPORT_COMPONENT(ApplicationInfoExt, "Application info with ACF information based of SVN version", "Application Info ACF SVN SubVersion Version");
 I_EXPORT_COMPONENT(ModelProxy, "Model proxy", "Model Proxy");
 I_EXPORT_COMPONENT(ModelBinder, "Model binder", "Model Observer Bind Binder");
+I_EXPORT_COMPONENT(ConsoleLog, "Simple log on windows console", "Log Windows Message Consumer");
 
 I_EXPORT_COMPONENT(SelectableParamsSet, "Composed set of parameters", "Model Parameters Set Selection Options List");
 I_EXPORT_COMPONENT(ParamsManager, "Manager of parameters set", "Model Parameters Set Manager");

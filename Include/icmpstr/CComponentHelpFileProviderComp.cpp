@@ -1,7 +1,7 @@
 #include "icmpstr/CComponentHelpFileProviderComp.h"
 
 
-// QT includes
+// Qt includes
 #include <QFileInfo>
 #include <QDir>
 

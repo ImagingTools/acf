@@ -32,7 +32,14 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 	if (subId.empty()){
 		const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
 
-		IRegistry::ExportedInterfacesMap::const_iterator iter = interfaceInfos.find(interfaceType);
+		IRegistry::ExportedInterfacesMap::const_iterator iter;
+		if (interfaceType == s_voidType){
+			iter = interfaceInfos.begin();
+		}
+		else{
+			iter = interfaceInfos.find(interfaceType);
+		}
+
 		if (iter != interfaceInfos.end()){
 			std::string componentId;
 			std::string restId;
@@ -230,6 +237,11 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 
 	return subComponentPtr.IsValid();
 }
+
+
+// static attributes
+
+istd::CClassInfo CCompositeComponent::s_voidType = istd::CClassInfo::GetInfo<void*>();
 
 
 }//namespace icomp

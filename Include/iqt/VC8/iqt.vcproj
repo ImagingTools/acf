@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCopyProcessorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCriticalSection.cpp"
 				>
 			</File>
@@ -287,6 +291,10 @@
 			</File>
 			<File
 				RelativePath="..\CBitmapLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCopyProcessorComp.h"
 				>
 			</File>
 			<File

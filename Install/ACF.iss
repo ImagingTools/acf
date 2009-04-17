@@ -4,13 +4,14 @@
 #define QTDIR GetEnv("QTDIR")
 
 [Setup]
-AppVerName=ACF$WCMIXED? <Dirty>:$$WCMODS? <Local>:$
-AppVersion=0.6
+AppVerName=ACF $AcfVersion:0$
+AppVersion=$AcfVersion:0$
 AppPublisher=ImagingTools
 AppPublisherURL=http://www.imagingtools.de/
 AppName=ACF
+OutputBaseFilename=SetupAcf$AcfVersion:0$
 
-DefaultDirName={sd}\ImagingTools\ACF
+DefaultDirName={sd}\ImagingTools\ACF$AcfVersion:0$
 WizardImageFile=..\..\Docs\Images\InstallerImage.bmp
 WizardSmallImageFile=..\..\Docs\Images\Logo\Logo_128x128.bmp
 SetupIconFile=..\..\Docs\Images\Logo\Logo.ico

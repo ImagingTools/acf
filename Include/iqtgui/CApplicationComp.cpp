@@ -54,7 +54,7 @@ int CApplicationComp::Execute(int argc, char** argv)
 {
 	int retVal = -1;
 
-	if (EnsureInitialized(argc, argv) && m_mainGuiCompPtr.IsValid()){
+	if (EnsureInitialized(argc, argv)){
 		iqt::CTimer timer;
 
 		// set style sheet for the application:
@@ -73,15 +73,18 @@ int CApplicationComp::Execute(int argc, char** argv)
 			m_applicationPtr->processEvents();
 		}
 
-		// create application's main widget:
-		m_mainGuiCompPtr->CreateGui(NULL);
-		QWidget* mainWidgetPtr = m_mainGuiCompPtr->GetWidget();
+		QWidget* mainWidgetPtr = NULL;
+		if (m_mainGuiCompPtr.IsValid()){
+			// create application's main widget:
+			m_mainGuiCompPtr->CreateGui(NULL);
+			mainWidgetPtr = m_mainGuiCompPtr->GetWidget();
 
-		if (m_applicationInfoCompPtr.IsValid()){
-			mainWidgetPtr->setWindowTitle(iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName()));
-		}
-		else{
-			mainWidgetPtr->setWindowTitle(QObject::tr("ACF application"));
+			if (m_applicationInfoCompPtr.IsValid()){
+				mainWidgetPtr->setWindowTitle(iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName()));
+			}
+			else{
+				mainWidgetPtr->setWindowTitle(QObject::tr("ACF application"));
+			}
 		}
 
 		if (useSplashScreen){
@@ -98,14 +101,17 @@ int CApplicationComp::Execute(int argc, char** argv)
 
 		if (mainWidgetPtr != NULL){
 			mainWidgetPtr->show();
-
-			m_freeComponentCompPtr.IsValid();
-
-			// start application loop:
-			retVal = m_applicationPtr->exec();
 		}
 
-		m_mainGuiCompPtr->DestroyGui();
+		m_freeComponentCompPtr.IsValid();
+
+		if (mainWidgetPtr != NULL){
+			// start application loop:
+			retVal = m_applicationPtr->exec();
+
+			I_ASSERT(m_mainGuiCompPtr.IsValid());
+			m_mainGuiCompPtr->DestroyGui();
+		}
 	}
 
 	return retVal;

@@ -78,6 +78,8 @@ private:
 	mutable ComponentMap m_componentMap;
 
 	bool m_blockCreating;
+
+	static istd::CClassInfo s_voidType;
 };
 
 

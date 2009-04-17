@@ -24,7 +24,7 @@ public:
 
 	I_BEGIN_COMPONENT(CApplicationComp)
 		I_REGISTER_INTERFACE(ibase::IApplication)
-		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", true, "MainGui")
+		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", false, "MainGui")
 		I_ASSIGN(m_splashScreenCompPtr, "SplashScreen", "Splash screen shown before application is launched", false, "SplashScreen")
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info used to set main window title", false, "ApplicationInfo")
 		I_ASSIGN(m_freeComponentCompPtr, "FreeComponent", "Free component initialization", false, "FreeComponent")

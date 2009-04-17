@@ -24,6 +24,7 @@
 #include "ibase/CModelProxyComp.h"
 #include "ibase/CModelBinderComp.h"
 #include "ibase/TFileSerializerComp.h"
+#include "ibase/CConsoleLogComp.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
@@ -57,6 +58,7 @@ typedef isvn::TApplicationInfoWrap<ApplicationInfo> ApplicationInfoExt;
 typedef ibase::CRegistryCodeSaverComp RegistryCodeSaver;
 typedef ibase::CModelProxyComp ModelProxy;
 typedef ibase::CModelBinderComp ModelBinder;
+typedef ibase::CConsoleLogComp ConsoleLog;
 
 typedef icomp::TModelCompWrap<iprm::CSelectableParamsSetComp> SelectableParamsSet;
 typedef icomp::TModelCompWrap<iprm::CParamsManagerComp> ParamsManager;

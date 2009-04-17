@@ -2,7 +2,7 @@
 #define iqtdoc_CHtmlHelpViewerComp_included
 
 
-// QT includes
+// Qt includes
 #include <QTextBrowser>
 
 #include "iqtgui/TGuiComponentBase.h"

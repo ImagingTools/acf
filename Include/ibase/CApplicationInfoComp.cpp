@@ -59,7 +59,7 @@ istd::CString CApplicationInfoComp::GetEncodedVersionName(int versionId, I_DWORD
 			}
 		}
 
-		if (m_isExtensionUsedAttrPtr.IsValid()){
+		if (m_isExtensionUsedAttrPtr.IsValid() && *m_isExtensionUsedAttrPtr){
 			lastBellowText += istd::CString(".") + istd::CString::FromNumber(int(versionNumber - lastBellowNumber));
 		}
 
