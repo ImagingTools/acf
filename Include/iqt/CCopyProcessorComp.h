@@ -38,9 +38,7 @@ public:
 		MI_INPUT_OPEN,
 		MI_OUTPUT_OPEN,
 		MI_LICENSE_OPEN,
-		MI_BAD_VERSION,
-		MI_BAD_TAG,
-		MI_NO_VERSION_INFO,
+		MI_BAD_TAG
 	};
 
 	I_BEGIN_COMPONENT(CCopyProcessorComp);
@@ -88,6 +86,7 @@ protected:
 	bool CopyFile(const QString& inputFileName, const QString& outputFileName) const;
 
 	bool CheckIfExcluded(const QString& fileName, const QStringList& excludeFilters) const;
+	bool ProcessSubstitutionTag(const QString& tag, QString& result) const;
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);

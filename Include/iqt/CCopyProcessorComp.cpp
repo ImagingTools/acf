@@ -2,6 +2,7 @@
 
 // Qt includes
 #include <QTextStream>
+#include <QDateTime>
 
 #include "iqt/CFileSystem.h"
 
@@ -205,33 +206,25 @@ bool CCopyProcessorComp::CopyFile(const QString& inputFileName, const QString& o
 	for (int lineCounter = 1; !inputStream.atEnd(); ++lineCounter) {
 		QString line = inputStream.readLine();
 
+		int endIndex = -1;
 		if (*m_useSubstitutionAttrPtr){
-			static const QString acfVersionPrefix("$AcfVersion:");
-			int versionBeginIndex = line.indexOf(acfVersionPrefix);
-			if (versionBeginIndex >= 0){
-				if (m_applicationInfoCompPtr.IsValid()){
-					int versionEndIndex = line.indexOf("$", versionBeginIndex + acfVersionPrefix.size());
-					if (versionEndIndex >= 0){
-						QString versionIdString = line.mid(
-									versionBeginIndex + acfVersionPrefix.size(),
-									versionEndIndex - versionBeginIndex - acfVersionPrefix.size());
-						bool isNumOk;
-						int versionId = versionIdString.toInt(&isNumOk);
-						I_DWORD versionNumber;
-						if (isNumOk && m_applicationInfoCompPtr->GetVersionNumber(versionId, versionNumber)){
-							QString version = iqt::GetQString(m_applicationInfoCompPtr->GetEncodedVersionName(versionId, versionNumber));
-							line.replace(versionBeginIndex, versionEndIndex - versionBeginIndex + 1, version);
-						}
-						else{
-							SendWarningMessage(MI_BAD_VERSION, iqt::GetCString(QObject::tr("%1(%2) : Cannot get version for ID=%3").arg(inputFileName).arg(lineCounter).arg(versionId)));
-						}
-					}
-					else{
-						SendWarningMessage(MI_BAD_TAG, iqt::GetCString(QObject::tr("%1(%2) : Bad substitution tag").arg(inputFileName).arg(lineCounter)));
-					}
+			for (int beginIndex; (beginIndex = line.indexOf("$", endIndex + 1)) >= 0;){
+				endIndex = line.indexOf("$", beginIndex + 1);
+				if (endIndex < 0){
+					SendWarningMessage(MI_BAD_TAG, iqt::GetCString(QObject::tr("%1(%2) : Substitution tag is uncomplete").arg(inputFileName).arg(lineCounter)));
+
+					break;
+				}
+				QString substitutionTag = line.mid(beginIndex + 1, endIndex - beginIndex - 1);
+				QString substituted;
+
+				if (ProcessSubstitutionTag(substitutionTag, substituted)){
+					line.replace(beginIndex, endIndex - beginIndex + 1, substituted);
+
+					endIndex += substituted.length() - (endIndex - beginIndex + 1);
 				}
 				else{
-					SendWarningMessage(MI_NO_VERSION_INFO, iqt::GetCString(QObject::tr("%1(%2) : No version info").arg(inputFileName).arg(lineCounter)));
+					SendWarningMessage(MI_BAD_TAG, iqt::GetCString(QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag)));
 				}
 			}
 		}
@@ -255,6 +248,64 @@ bool CCopyProcessorComp::CheckIfExcluded(const QString& fileName, const QStringL
 		rx.setPatternSyntax(QRegExp::Wildcard);
 		rx.setCaseSensitivity(Qt::CaseInsensitive);
 		if (rx.exactMatch(fileName)){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+bool CCopyProcessorComp::ProcessSubstitutionTag(const QString& tag, QString& result) const
+{
+	static const QString acfProductNameTag("AcfProductName");
+	static const QString acfVersionTag("AcfVersion");
+	static const QString acfRawVersionTag("AcfRawVersion");
+	static const QString acfTimestampTag("AcfTimestamp");
+
+	int separatorIndex = tag.indexOf(":");
+
+	if (separatorIndex >= 0){
+		QString paramTag = tag.left(separatorIndex);
+		QString parameter = tag.right(tag.length() - separatorIndex - 1);
+
+		if (paramTag == acfVersionTag){
+			bool isNumOk;
+			int versionId = parameter.toInt(&isNumOk);
+			I_DWORD versionNumber;
+			if (		isNumOk &&
+						m_applicationInfoCompPtr.IsValid() &&
+						m_applicationInfoCompPtr->GetVersionNumber(versionId, versionNumber)){
+				result = iqt::GetQString(m_applicationInfoCompPtr->GetEncodedVersionName(versionId, versionNumber));
+
+				return true;
+			}
+		}
+		else if (paramTag == acfRawVersionTag){
+			bool isNumOk;
+			int versionId = parameter.toInt(&isNumOk);
+			I_DWORD versionNumber;
+			if (		isNumOk &&
+						m_applicationInfoCompPtr.IsValid() &&
+						m_applicationInfoCompPtr->GetVersionNumber(versionId, versionNumber)){
+				result = QString::number(versionNumber);
+
+				return true;
+			}
+		}
+	}
+	else{
+		if (tag == acfProductNameTag){
+			if (m_applicationInfoCompPtr.IsValid()){
+				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
+
+				return true;
+			}
+		}
+		else if (tag == acfTimestampTag){
+			QDateTime currentTime = QDateTime::currentDateTime();
+			result = currentTime.toString();
+
 			return true;
 		}
 	}
