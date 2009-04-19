@@ -228,8 +228,6 @@ void CString::Copy(const CString& str)
 	resize(str.size());
 
 	std::copy(str.begin(), str.end(), begin());
-
-	ConvertToChar();
 }
 
 
