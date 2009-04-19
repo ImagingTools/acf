@@ -70,7 +70,7 @@
 ### while importing or adding files and directories.
 # global-ignores = *.o *.lo *.la #*# .*.rej *.rej .*~ *~ .#* .DS_Store
 
-global-ignores = *.suo *.ncb *.pch *.idb *.pdb *.obj *.lib *.exe *.dll *.arp *.bsc *.exp *.ilk Debug* Release* debug release *.vspsc generatedfiles generated Generated *.user Thumbs.db build ._* *.pbxuser *.perspectivev3
+global-ignores = *.suo *.ncb *.pch *.idb *.pdb *.obj *.lib *.exe *.dll *.arp *.bsc *.exp *.ilk Debug* Release* debug release *.vspsc generatedfiles generated Generated *.user Thumbs.db build ._* *.pbxuser *.perspectivev3 Makefile* qtc-gdbmacros object_script.*
 
 ### Set log-encoding to the default encoding for log messages
 # log-encoding = latin1
