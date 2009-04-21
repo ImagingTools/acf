@@ -84,7 +84,7 @@ bool CRegistryLoaderComp::GetFileExtensions(istd::CStringList& result, bool doAp
 istd::CString CRegistryLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
 {
 	if ((extensionPtr == NULL) || extensionPtr->IsEqualNoCase("arx")){
-		return iqt::GetCString(QObject::tr("QSF registry file"));
+		return iqt::GetCString(QObject::tr("ACF registry file"));
 	}
 
 	return "";
