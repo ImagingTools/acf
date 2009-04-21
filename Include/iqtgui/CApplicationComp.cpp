@@ -30,13 +30,12 @@ bool CApplicationComp::EnsureInitialized(int argc, char** argv)
 			}
 		}
 
+		m_applicationPtr->setStyle(appStyle.c_str());
+
 		m_applicationPtr.SetPtr(new QApplication(argc, argv));
 		if (!m_applicationPtr.IsValid()){
 			return false;
 		}
-
-		m_applicationPtr->setStyle(appStyle.c_str());
-		m_applicationPtr->setPalette(QApplication::style()->standardPalette());
 		
 		QIcon icon;
 		icon.addFile(":/Icons/acfLogoSmall");
@@ -56,6 +55,8 @@ int CApplicationComp::Execute(int argc, char** argv)
 
 	if (EnsureInitialized(argc, argv)){
 		iqt::CTimer timer;
+
+		m_applicationPtr->setPalette(QApplication::style()->standardPalette());
 
 		// set style sheet for the application:
 		if (m_styleSheetAttrPtr.IsValid()){
