@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="2">
     <Element>
       <Id>
         Application
       </Id>
       <PackageId>
-        QtPck
+        InstallVoce
       </PackageId>
       <ComponentId>
-        GuiApplication
+        CreateInstallationLGPL
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,7 +33,7 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              MainGui
+              ApplicationInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -46,16 +46,16 @@
                 true
               </IsEnabled>
               <Value>
-                Login
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SplashScreen
+              BinaryExcludeFilters
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -64,9 +64,14 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                Splash
-              </Value>
+              <Values count="2">
+                <Value>
+                  *Xcd
+                </Value>
+                <Value>
+                  *QMake
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -74,40 +79,22 @@
     </Element>
     <Element>
       <Id>
-        Login
+        VersionInfo
       </Id>
       <PackageId>
-        QtPck
+        AcfVoce
       </PackageId>
       <ComponentId>
-        LoginGui
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Splash
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        SplashScreen
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              CopyrightText
+              ApplicationName
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;istd::CString&gt;
@@ -120,16 +107,16 @@
                 true
               </IsEnabled>
               <Value>
-                See 'licence.txt' for copyright informations
+                ACF_LGPL
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ImagePath
+              IsExtensionUsed
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -139,45 +126,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../../Docs/Images/AcfSplashScreen.png
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductName
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                CompSimu
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductType
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Tutorial (Dynamic)
+                false
               </Value>
             </Data>
           </AttributeInfo>

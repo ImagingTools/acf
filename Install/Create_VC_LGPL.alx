@@ -15,137 +15,93 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="12">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
-        AboutGui
+        Application
       </ComponentName>
       <X>
-        114
+        40
       </X>
       <X>
-        235
+        -254
       </X>
     </Element>
     <Element>
       <ComponentName>
-        App
+        Application_
       </ComponentName>
       <X>
-        52
+        40
       </X>
       <X>
-        0
+        -257
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
+        Copy
       </ComponentName>
       <X>
-        388
+        90
       </X>
       <X>
-        459
+        -41
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DocumentTempate
+        CopyHeaders
       </ComponentName>
       <X>
-        386
+        1
       </X>
       <X>
-        214
+        -10
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DocumentTemplat
+        InitSeqence
       </ComponentName>
       <X>
-        0
+        -8
       </X>
       <X>
-        250
+        171
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DocumentTemplate
+        InitSequence
       </ComponentName>
       <X>
-        -479
+        368
       </X>
       <X>
-        272
+        -8
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Info
+        Log
       </ComponentName>
       <X>
-        321
+        97
       </X>
       <X>
-        -40
+        115
       </X>
     </Element>
     <Element>
       <ComponentName>
-        MainGui
+        VersionInfo
       </ComponentName>
       <X>
-        78
+        -352
       </X>
       <X>
-        122
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SettingsProvider
-      </ComponentName>
-      <X>
-        -201
-      </X>
-      <X>
-        272
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SplashScreen
-      </ComponentName>
-      <X>
-        571
-      </X>
-      <X>
-        -1
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Te
-      </ComponentName>
-      <X>
-        322
-      </X>
-      <X>
-        257
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Workspace
-      </ComponentName>
-      <X>
-        -487
-      </X>
-      <X>
-        123
+        -253
       </X>
     </Element>
   </PositionMap>

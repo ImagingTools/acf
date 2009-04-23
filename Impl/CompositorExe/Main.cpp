@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<QtPck::DockWidgetGui> attributeEditorDockComp;
 	attributeEditorDockComp.SetRef("SlaveGui", &attributeEditorComp);
 	attributeEditorDockComp.SetIntAttr("DockArea", 0);
-	attributeEditorDockComp.SetStringAttr("DockTitle", "Attributes");
+	attributeEditorDockComp.SetStringAttr("DockTitle", "Selected component");
 	attributeEditorDockComp.InitComponent();
 	
 	icomp::TSimComponentWrap<QtPck::DockWidgetGui> packageOverviewDockComp;
@@ -167,6 +167,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<QtPck::AboutGui> aboutGuiComp;
 	aboutGuiComp.SetRef("ApplicationInfo", &applicationInfo);
+	aboutGuiComp.SetStringAttr("LogoPath", ":/Icons/acfLogo");
 	aboutGuiComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::MainWindowGui> mainWindowComp;

@@ -418,7 +418,12 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 {
 	setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled);
 	setText(0, iqt::GetQString(address.GetComponentId()));
-	setToolTip(0, iqt::GetQString(staticInfo.GetDescription()));
+
+	QString toolTip = QObject::tr("Component %1.%2:\n%3")
+				.arg(address.GetPackageId().c_str())
+				.arg(address.GetComponentId().c_str())
+				.arg(iqt::GetQString(staticInfo.GetDescription()));
+	setToolTip(0, toolTip);
 
 	if (packageDirPtr != NULL){
 		QString iconPath = packageDirPtr->absoluteFilePath((address.GetComponentId() + ".small.png").c_str());

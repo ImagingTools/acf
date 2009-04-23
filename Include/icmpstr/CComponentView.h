@@ -10,9 +10,11 @@
 #include <QIcon>
 
 
+#include "imod/TModelWrap.h"
+
 #include "icomp/IRegistry.h"
 
-#include "icmpstr/icmpstr.h"
+#include "icmpstr/IElementSelectionInfo.h"
 
 
 namespace icmpstr
@@ -23,14 +25,17 @@ class CComponentConnector;
 class CRegistryView;
 
 
-class CComponentView: public QObject, public QGraphicsRectItem
+class CComponentView:
+			public QObject,
+			public QGraphicsRectItem,
+			virtual public imod::TModelWrap<IElementSelectionInfo>
 {
 	Q_OBJECT
 
 public:
 	CComponentView(
 				const CRegistryView* registryViewPtr,
-				const icomp::IRegistry* registryPtr,
+				icomp::IRegistry* registryPtr,
 				const icomp::IRegistry::ElementInfo* elementInfoPtr, 
 				const std::string& componentName, 
 				QGraphicsItem* parent = NULL);
@@ -54,6 +59,13 @@ public:
 
 	QRectF GetInnerRect() const;
 
+	// reimplemented (icmpstr::IElementSelectionInfo)
+	virtual icomp::IRegistry* GetSelectedRegistry() const;
+	virtual iser::ISerializable* GetSelectedElement() const;
+	virtual const std::string& GetSelectedElementName() const;
+	virtual QIcon GetSelectedElementIcon() const;
+	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
+
 signals:
 	void selectionChanged(CComponentView*, bool);
 	void positionChanged(CComponentView*, const QPoint& point);
@@ -70,7 +82,7 @@ protected:
 private:
 	const CRegistryView& m_registryView;
 
-	const icomp::IRegistry& m_registry;
+	icomp::IRegistry& m_registry;
 	std::string m_componentName;
 	const icomp::IRegistry::ElementInfo* m_elementInfoPtr;
 

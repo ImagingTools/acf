@@ -360,11 +360,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								1024
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -379,11 +376,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								User Version
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -398,11 +392,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								0
-							</Value>
 						</Data>
 					</AttributeInfo>
 				</AttributeInfoMap>

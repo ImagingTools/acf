@@ -207,6 +207,8 @@ void CRegistryViewComp::OnGuiCreated()
 
 void CRegistryViewComp::OnGuiDestroyed()
 {
+	OnComponentViewSelected(NULL, false);
+
 	CRegistryView* viewPtr = GetQtWidget();
 	I_ASSERT(viewPtr != NULL);
 	if (viewPtr != NULL){
@@ -285,15 +287,15 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 		return;
 	}
 
-	const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
+	CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
 
 	// detach last model from its observers:
 	if (selectedComponentPtr != NULL){
-		const icomp::IRegistry::ElementInfo& elementInfo = selectedComponentPtr->GetElementInfo();
-
-		imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfo.elementPtr.GetPtr());
-		if (registryElementModelPtr != NULL){
-			registryElementModelPtr->DetachAllObservers();
+		for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
+			imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
+			if (observerPtr != NULL){
+				selectedComponentPtr->DetachObserver(observerPtr);
+			}
 		}
 	}
 
@@ -301,17 +303,14 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 		viewPtr->SetSelectedComponent(componentViewPtr);
 
 		if (componentViewPtr != NULL && m_registryElementObserversCompPtr.IsValid()){
-			const icomp::IRegistry::ElementInfo& elementInfo = componentViewPtr->GetElementInfo();
-
 			for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
 				imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
 				if (observerPtr != NULL){
-					imod::IModel* registryElementModelPtr = dynamic_cast<imod::IModel*>(elementInfo.elementPtr.GetPtr());
-					if (registryElementModelPtr != NULL){
-						registryElementModelPtr->AttachObserver(observerPtr);
-					}
+					componentViewPtr->AttachObserver(observerPtr);
 				}
 			}
+
+			const icomp::IRegistry::ElementInfo& elementInfo = componentViewPtr->GetElementInfo();
 
 			if (m_quickHelpViewerCompPtr.IsValid()){
 				m_quickHelpViewerCompPtr->ShowHelp(elementInfo.address.GetPackageId() + "/" + elementInfo.address.GetComponentId(), &elementInfo.address);
@@ -364,9 +363,9 @@ void CRegistryViewComp::OnRemoveComponent()
 			m_removeComponentCommand.setEnabled(false);
 
 			registryPtr->RemoveElementInfo(selectedComponentPtr->GetComponentName());
-		}
 
-		viewPtr->RemoveSelectedComponent();
+			viewPtr->RemoveSelectedComponent();
+		}
 	}
 }
 
@@ -491,11 +490,11 @@ void CRegistryViewComp::OnExportInterface()
 	if (registryPtr != NULL){
 		const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
 		if (selectedComponentPtr != NULL){
-			const std::string& componentRole = selectedComponentPtr->GetComponentName();
+			const std::string& componentName = selectedComponentPtr->GetComponentName();
 
 			bool doExport = !HasExportedInterfaces(*selectedComponentPtr);
 
-			registryPtr->SetElementExported(componentRole, istd::CClassInfo(), doExport);
+			registryPtr->SetElementExported(componentName, istd::CClassInfo(), doExport);
 
 			OnExecutionTimerTick();
 		}
@@ -505,34 +504,19 @@ void CRegistryViewComp::OnExportInterface()
 
 void CRegistryViewComp::OnProperties()
 {	
-	CRegistryView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-
-	const CComponentView* selectedComponentViewPtr = viewPtr->GetSelectedComponent();
-
 	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		// no component is selected, show registry info:
-		if (selectedComponentViewPtr == NULL){
-			ShowPropertiesDialog(
-						registryPtr, 
-						iqt::GetQString(registryPtr->GetDescription()),
-						iqt::GetQString(registryPtr->GetKeywords()));
-		}
-		// component is selected, show component info:
-		else{
-			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(selectedComponentViewPtr->GetComponentName());
-			I_ASSERT(elementInfoPtr != NULL);
+	if (registryPtr == NULL){
+		return;
+	}
 
-			if (elementInfoPtr->elementPtr.IsValid()){
-				const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr->GetComponentStaticInfo();
+	iqtgui::TDesignerBasicGui<Ui::CRegistryPropertiesDialog, QDialog> dialog;
 
-				QString description = iqt::GetQString(staticInfo.GetDescription());
-				QString keywords = iqt::GetQString(staticInfo.GetKeywords());
+	dialog.DescriptionEdit->setText(iqt::GetQString(registryPtr->GetDescription()));
+	dialog.KeywordsEdit->setText(iqt::GetQString(registryPtr->GetKeywords()));
 
-				ShowPropertiesDialog(NULL, description, keywords);
-			}
-		}
+	if (dialog.exec() == QDialog::Accepted){
+		registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
+		registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
 	}
 }
 
@@ -812,24 +796,6 @@ void CRegistryViewComp::UpdateExportInterfaceCommand()
 				tr("&Export Interface(s)"), 
 				tr("Export interface(s)"),
 				QIcon(":/Resources/Icons/Export.png"));
-	}
-}
-
-
-void CRegistryViewComp::ShowPropertiesDialog(icomp::IRegistry* registryPtr, const QString& description, const QString& keywords)
-{
-	iqtgui::TDesignerBasicGui<Ui::CRegistryPropertiesDialog, QDialog> dialog;
-	if (registryPtr == NULL){
-		dialog.DescriptionEdit->setEnabled(false);
-		dialog.KeywordsEdit->setEnabled(false);
-	}
-
-	dialog.DescriptionEdit->setText(description);
-	dialog.KeywordsEdit->setText(keywords);
-
-	if (dialog.exec() == QDialog::Accepted && registryPtr != NULL){
-		registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
-		registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
 	}
 }
 

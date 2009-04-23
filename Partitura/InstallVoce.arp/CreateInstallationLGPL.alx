@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          867
+          860
         </Number>
         <Description>
           ACF
@@ -24,7 +24,7 @@
         18
       </X>
       <X>
-        -281
+        -274
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         Copy
       </ComponentName>
       <X>
-        90
+        88
       </X>
       <X>
-        -47
+        -41
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -563
+        -561
       </X>
       <X>
-        -193
+        -191
       </X>
     </Element>
   </PositionMap>

@@ -55,7 +55,7 @@ void CRegistryView::CreateConnector(CComponentView& sourceView, const std::strin
 
 
 CComponentView* CRegistryView::CreateComponentView(
-			const icomp::IRegistry* registryPtr,
+			icomp::IRegistry* registryPtr,
 			const icomp::IRegistry::ElementInfo* elementInfoPtr,
 			const std::string& role)
 {
@@ -76,7 +76,7 @@ CComponentView* CRegistryView::CreateComponentView(
 }
 
 
-const CComponentView* CRegistryView::GetSelectedComponent() const
+CComponentView* CRegistryView::GetSelectedComponent() const
 {
 	return m_selectedComponentPtr; 
 }
@@ -92,7 +92,7 @@ void CRegistryView::RemoveSelectedComponent()
 {
 	if (m_selectedComponentPtr != NULL){
 		m_selectedComponentPtr->RemoveAllConnectors();
-		m_scenePtr->removeItem(m_selectedComponentPtr);
+		delete m_selectedComponentPtr;
 			
 		m_selectedComponentPtr = NULL;
 	}
@@ -322,11 +322,11 @@ void CRegistryView::CRegistryScene::wheelEvent(QGraphicsSceneWheelEvent* eventPt
 void CRegistryView::CRegistryScene::drawBackground(QPainter* painter, const QRectF& rect)
 {
 	QRectF gridRect = sceneRect().unite(rect);
-	const int gridSize = CRegistryView::GetGrid();          
-	const int realLeft = std::floor(gridRect.left());         
-	const int realRight = std::ceil(gridRect.right());         
-	const int realTop = std::floor(gridRect.top());         
-	const int realBottom = std::ceil(gridRect.bottom());           
+	const int gridSize = int(CRegistryView::GetGrid());
+	const int realLeft = int(std::floor(gridRect.left()));
+	const int realRight = int(std::ceil(gridRect.right()));
+	const int realTop = int(std::floor(gridRect.top()));
+	const int realBottom = int(std::ceil(gridRect.bottom()));
 	const int firstLeftGridLine = realLeft - (realLeft % gridSize);
 	const int firstTopGridLine = realTop - (realTop % gridSize);
 

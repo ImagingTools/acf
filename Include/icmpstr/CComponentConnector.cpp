@@ -25,7 +25,7 @@ CComponentConnector::CComponentConnector(
 			const CRegistryView* registryViewPtr,
 			CComponentView* sourceComponent, 
 			CComponentView* destComponent,
-			QGraphicsItem *parent)
+			QGraphicsItem* parent)
 :	BaseClass(parent),
 	m_registryView(*registryViewPtr)
 {

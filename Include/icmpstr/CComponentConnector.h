@@ -27,9 +27,9 @@ public:
 
     CComponentConnector(
 				const CRegistryView* registryViewPtr,
-				CComponentView *sourceComponent, 
-				CComponentView *destComponent, 
-				QGraphicsItem *parent = NULL);
+				CComponentView* sourceComponent, 
+				CComponentView* destComponent, 
+				QGraphicsItem* parent = NULL);
     
 	virtual ~CComponentConnector();
 

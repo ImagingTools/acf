@@ -33,7 +33,23 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              MainGui
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FreeComponent
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -46,13 +62,124 @@
                 true
               </IsEnabled>
               <Value>
-                Login
+                Copy
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Copy
+      </Id>
+      <PackageId>
+        InstallVoce
+      </PackageId>
+      <ComponentId>
+        CopyPublic
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              BinaryExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              BinaryExcludeFilters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InstallScriptTags
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  LicensePath
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InstallScriptValues
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  ../LicenseCommercial.txt
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicensePath
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Header_Commercial.txt
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SplashScreen
+              Log
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -65,7 +192,7 @@
                 true
               </IsEnabled>
               <Value>
-                Splash
+                Log
               </Value>
             </Data>
           </AttributeInfo>
@@ -74,43 +201,25 @@
     </Element>
     <Element>
       <Id>
-        Login
+        Log
       </Id>
       <PackageId>
-        QtPck
+        BasePck
       </PackageId>
       <ComponentId>
-        LoginGui
+        ConsoleLog
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Splash
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        SplashScreen
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              CopyrightText
+              MinCategory
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TSingleAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -120,16 +229,16 @@
                 true
               </IsEnabled>
               <Value>
-                See 'licence.txt' for copyright informations
+                1
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ImagePath
+              ShowDots
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -139,45 +248,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../../Docs/Images/AcfSplashScreen.png
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductName
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
                 true
-              </IsEnabled>
-              <Value>
-                CompSimu
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductType
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Tutorial (Dynamic)
               </Value>
             </Data>
           </AttributeInfo>

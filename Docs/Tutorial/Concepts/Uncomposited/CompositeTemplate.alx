@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="17">
@@ -10,10 +21,10 @@
         Application
       </ComponentName>
       <X>
-        -272
+        -271
       </X>
       <X>
-        -72
+        -71
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        -68
+        -67
       </X>
       <X>
-        -547
+        -546
       </X>
     </Element>
     <Element>
@@ -43,10 +54,10 @@
         CompositeTemplate
       </ComponentName>
       <X>
-        -35
+        -34
       </X>
       <X>
-        -397
+        -396
       </X>
     </Element>
     <Element>
@@ -57,7 +68,7 @@
         137
       </X>
       <X>
-        -622
+        -621
       </X>
     </Element>
     <Element>
@@ -68,7 +79,7 @@
         301
       </X>
       <X>
-        -279
+        -278
       </X>
     </Element>
     <Element>
@@ -79,7 +90,7 @@
         137
       </X>
       <X>
-        -522
+        -521
       </X>
     </Element>
     <Element>
@@ -87,10 +98,10 @@
         ImageFactory
       </ComponentName>
       <X>
-        -360
+        -359
       </X>
       <X>
-        -647
+        -646
       </X>
     </Element>
     <Element>
@@ -109,10 +120,10 @@
         ImageTemplate
       </ComponentName>
       <X>
-        -347
+        -346
       </X>
       <X>
-        -547
+        -546
       </X>
     </Element>
     <Element>
@@ -120,10 +131,10 @@
         ImageView
       </ComponentName>
       <X>
-        -135
+        -134
       </X>
       <X>
-        -647
+        -646
       </X>
     </Element>
     <Element>
@@ -134,7 +145,7 @@
         223
       </X>
       <X>
-        -75
+        -74
       </X>
     </Element>
     <Element>
@@ -145,7 +156,7 @@
         0
       </X>
       <X>
-        -147
+        -146
       </X>
     </Element>
     <Element>
@@ -153,10 +164,10 @@
         Splash
       </ComponentName>
       <X>
-        -210
+        -209
       </X>
       <X>
-        -272
+        -271
       </X>
     </Element>
     <Element>
@@ -178,7 +189,7 @@
         387
       </X>
       <X>
-        -622
+        -621
       </X>
     </Element>
     <Element>
@@ -186,10 +197,10 @@
         Workspace
       </ComponentName>
       <X>
-        -10
+        -9
       </X>
       <X>
-        -272
+        -271
       </X>
     </Element>
   </PositionMap>

@@ -18,6 +18,7 @@
 #include "icomp/IRegistryElement.h"
 
 #include "icmpstr/IAttributeSelectionObserver.h"
+#include "icmpstr/IElementSelectionInfo.h"
 
 #include "icmpstr/Generated/ui_CAttributeEditorComp.h"
 
@@ -26,12 +27,12 @@ namespace icmpstr
 {
 
 
-class CAttributeEditorComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, icomp::IRegistryElement>
+class CAttributeEditorComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, IElementSelectionInfo>
 {
     Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, icomp::IRegistryElement> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, IElementSelectionInfo> BaseClass;
 	I_BEGIN_COMPONENT(CAttributeEditorComp);
 		I_ASSIGN(m_attributeSelectionObserverCompPtr, "AttributeSelectionObserver", "Attribute selection observer", false, "AttributeSelectionObserver");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Shows object info during selection using its type", false, "QuickHelpViewer");
@@ -61,7 +62,8 @@ public:
 public:
 	CAttributeEditorComp();
 
-	const icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const QString& attributeId) const;
+	icomp::IRegistryElement* GetRegistryElement() const;
+	icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const QString& attributeId) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const QString& attributeId) const;
 	QStringList GetAvailableComponents(const istd::CClassInfo& interfaceInfo) const;
 

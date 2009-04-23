@@ -51,6 +51,8 @@ public:
 		I_ASSIGN(m_recursionDepthAttrPtr, "RecursionDepth", "Depth of recursion", true, 0);
 		I_ASSIGN(m_licensePathAttrPtr, "LicensePath", "Path of license file will be included at begin of copied file", false, "License.txt");
 		I_ASSIGN(m_useSubstitutionAttrPtr, "UseSubstitution", "If enebled strings like $AcfVersion:n$ will be substituted", true, false);
+		I_ASSIGN_MULTI_0(m_userSubstitutionTagsAttrPtr, "UserSubstitutionTags", "List of user defined substitution tags will be replaced with specified values", false);
+		I_ASSIGN_MULTI_0(m_userSubstitutionValuesAttrPtr, "UserSubstitutionValues", "List of user substitution values according to specified user tags", false);
 	I_END_COMPONENT;
 
 	// reimplemented (icomp::IComponent)
@@ -98,6 +100,8 @@ private:
 	I_ATTR(int, m_recursionDepthAttrPtr);
 	I_ATTR(istd::CString, m_licensePathAttrPtr);
 	I_ATTR(bool, m_useSubstitutionAttrPtr);
+	I_MULTIATTR(istd::CString, m_userSubstitutionTagsAttrPtr);
+	I_MULTIATTR(istd::CString, m_userSubstitutionValuesAttrPtr);
 };
 
 

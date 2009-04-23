@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="27">
+  <PositionMap count="34">
     <Element>
       <ComponentName>
         Application
@@ -40,13 +40,46 @@
     </Element>
     <Element>
       <ComponentName>
+        CopyArpInfo
+      </ComponentName>
+      <X>
+        -432
+      </X>
+      <X>
+        -173
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyBins
       </ComponentName>
       <X>
-        -94
+        -626
       </X>
       <X>
-        0
+        -174
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyCommon
+      </ComponentName>
+      <X>
+        -849
+      </X>
+      <X>
+        85
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyDebugInfo
+      </ComponentName>
+      <X>
+        -508
+      </X>
+      <X>
+        -231
       </X>
     </Element>
     <Element>
@@ -54,7 +87,7 @@
         CopyDocs
       </ComponentName>
       <X>
-        -238
+        94
       </X>
       <X>
         0
@@ -76,7 +109,7 @@
         CopyImpl
       </ComponentName>
       <X>
-        -561
+        -585
       </X>
       <X>
         0
@@ -161,10 +194,32 @@
     </Element>
     <Element>
       <ComponentName>
+        CopyImplSources
+      </ComponentName>
+      <X>
+        -607
+      </X>
+      <X>
+        7
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyIncludeSources
+      </ComponentName>
+      <X>
+        -723
+      </X>
+      <X>
+        108
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyIncludes
       </ComponentName>
       <X>
-        -718
+        -743
       </X>
       <X>
         0
@@ -175,10 +230,10 @@
         CopyInstallInfo
       </ComponentName>
       <X>
-        -732
+        -739
       </X>
       <X>
-        -255
+        -262
       </X>
     </Element>
     <Element>
@@ -186,7 +241,7 @@
         CopyInstallationScript
       </ComponentName>
       <X>
-        -1078
+        -1084
       </X>
       <X>
         114
@@ -197,21 +252,21 @@
         CopyLibs
       </ComponentName>
       <X>
-        -260
+        -825
       </X>
       <X>
-        0
+        -173
       </X>
     </Element>
     <Element>
       <ComponentName>
-        CopyPartitura
+        CopyReleaseInfo
       </ComponentName>
       <X>
-        -73
+        -683
       </X>
       <X>
-        1
+        -232
       </X>
     </Element>
     <Element>
@@ -219,7 +274,7 @@
         CopyRoot
       </ComponentName>
       <X>
-        -876
+        -902
       </X>
       <X>
         0
@@ -227,10 +282,21 @@
     </Element>
     <Element>
       <ComponentName>
+        CopySources
+      </ComponentName>
+      <X>
+        -1060
+      </X>
+      <X>
+        11
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyTexts
       </ComponentName>
       <X>
-        -400
+        -423
       </X>
       <X>
         0
@@ -241,18 +307,7 @@
         CopyTutorial
       </ComponentName>
       <X>
-        277
-      </X>
-      <X>
-        1
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTutorialOther
-      </ComponentName>
-      <X>
-        277
+        492
       </X>
       <X>
         1
@@ -263,10 +318,21 @@
         CopyTutorialSources
       </ComponentName>
       <X>
-        86
+        295
       </X>
       <X>
-        1
+        0
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        DistributionInfo
+      </ComponentName>
+      <X>
+        -456
+      </X>
+      <X>
+        331
       </X>
     </Element>
     <Element>
@@ -285,10 +351,10 @@
         InitSequence
       </ComponentName>
       <X>
-        -1112
+        -1077
       </X>
       <X>
-        -124
+        -54
       </X>
     </Element>
     <Element>
@@ -300,6 +366,17 @@
       </X>
       <X>
         -214
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SimpleInfo
+      </ComponentName>
+      <X>
+        -922
+      </X>
+      <X>
+        222
       </X>
     </Element>
     <Element>

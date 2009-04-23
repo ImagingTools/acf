@@ -24,7 +24,7 @@ namespace icmpstr
 
 CComponentView::CComponentView(
 			const CRegistryView* registryViewPtr,
-			const icomp::IRegistry* registryPtr,
+			icomp::IRegistry* registryPtr,
 			const icomp::IRegistry::ElementInfo* elementInfoPtr, 
 			const std::string& componentName,
 			QGraphicsItem* parent) 
@@ -119,15 +119,19 @@ void CComponentView::RemoveConnector(const CComponentConnector* connector)
 
 void CComponentView::RemoveAllConnectors()
 {
-	foreach(CComponentConnector* connector, m_connectors){
-		CComponentView* view1 =  connector->GetSourceComponent();
-		CComponentView* view2 = connector->GetDestinationComponent();
+	foreach (CComponentConnector* connectorPtr, m_connectors){
+		I_ASSERT(connectorPtr != NULL);
+
+		CComponentView* view1 =  connectorPtr->GetSourceComponent();
+		CComponentView* view2 = connectorPtr->GetDestinationComponent();
 		if (view1 == this){
-			connector->SetSourceComponent(NULL);
+			connectorPtr->SetSourceComponent(NULL);
 		}
 		if (view2 == this){
-			connector->SetDestinationComponent(NULL);
+			connectorPtr->SetDestinationComponent(NULL);
 		}
+
+		delete connectorPtr;
 	}
 
 	m_connectors.clear();
@@ -140,6 +144,50 @@ QRectF CComponentView::GetInnerRect()const
 	mainRect.adjust(0,0,-10,-10);
 
 	return mainRect;
+}
+
+
+// reimplemented (icmpstr::IElementSelectionInfo)
+
+icomp::IRegistry* CComponentView::GetSelectedRegistry() const
+{
+	return &m_registry;
+}
+
+
+iser::ISerializable* CComponentView::GetSelectedElement() const
+{
+	if (m_elementInfoPtr != NULL){
+		return m_elementInfoPtr->elementPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
+const std::string& CComponentView::GetSelectedElementName() const
+{
+	return m_componentName;
+}
+
+
+QIcon CComponentView::GetSelectedElementIcon() const
+{
+	if (m_elementInfoPtr != NULL){
+		return m_registryView.GetIcon(m_elementInfoPtr->address);
+	}
+
+	return QIcon();
+}
+
+
+const icomp::CComponentAddress* CComponentView::GetSelectedElementAddress() const
+{
+	if (m_elementInfoPtr != NULL){
+		return &m_elementInfoPtr->address;
+	}
+
+	return NULL;
 }
 
 

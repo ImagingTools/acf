@@ -35,25 +35,36 @@ CAttributeEditorComp::CAttributeEditorComp()
 }
 
 
-const icomp::IRegistryElement::AttributeInfo* CAttributeEditorComp::GetRegistryAttribute(const QString& attributeName) const
+icomp::IRegistryElement* CAttributeEditorComp::GetRegistryElement() const
 {
-	const icomp::IRegistryElement* registryElementPtr = GetObjectPtr();
-	if (registryElementPtr == NULL){
+	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	if (selectionInfoPtr == NULL){
 		return NULL;
 	}
 
-	return registryElementPtr->GetAttributeInfo(attributeName.toStdString());
+	return dynamic_cast<icomp::IRegistryElement*>(selectionInfoPtr->GetSelectedElement());
+}
+
+
+icomp::IRegistryElement::AttributeInfo* CAttributeEditorComp::GetRegistryAttribute(const QString& attributeName) const
+{
+	icomp::IRegistryElement* elementPtr = GetRegistryElement();
+	if (elementPtr == NULL){
+		return NULL;
+	}
+
+	return const_cast<icomp::IRegistryElement::AttributeInfo*>(elementPtr->GetAttributeInfo(attributeName.toStdString()));
 }
 
 
 const icomp::IAttributeStaticInfo* CAttributeEditorComp::GetStaticAttributeInfo(const QString& attributeId) const
 {
-	const icomp::IRegistryElement* registryElementPtr = GetObjectPtr();
-	if (registryElementPtr == NULL){
+	const icomp::IRegistryElement* elementPtr = GetRegistryElement();
+	if (elementPtr == NULL){
 		return NULL;
 	}
 
-	const icomp::IComponentStaticInfo& elementStaticInfo = registryElementPtr->GetComponentStaticInfo();
+	const icomp::IComponentStaticInfo& elementStaticInfo = elementPtr->GetComponentStaticInfo();
 	const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = elementStaticInfo.GetAttributeInfos();
 
 	const icomp::IComponentStaticInfo::AttributeInfos::ValueType* attrInfoPtr2 =
@@ -70,32 +81,35 @@ const icomp::IAttributeStaticInfo* CAttributeEditorComp::GetStaticAttributeInfo(
 	
 QStringList CAttributeEditorComp::GetAvailableComponents(const istd::CClassInfo& interfaceInfo) const
 {
-	QStringList availableComponents;
+	IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	if (selectionInfoPtr == NULL){
+		return QStringList();
+	}
 
-	icomp::CRegistryElement* elementPtr = dynamic_cast<icomp::CRegistryElement*>(GetObjectPtr());
-	if (elementPtr != NULL){
-		icomp::IRegistry* registryPtr = dynamic_cast<icomp::IRegistry*>(elementPtr->GetSlavePtr());
-		if (registryPtr != NULL){
-			icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
-			for (		icomp::IRegistry::Ids::const_iterator index = elementIds.begin();
-						index != elementIds.end();
-						index++){
+	const icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
+	if (registryPtr == NULL){
+		return QStringList();
+	}
 
-				const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(*index);
-				I_ASSERT(elementInfoPtr != NULL);
-				I_ASSERT(elementInfoPtr->elementPtr.IsValid());
+	QStringList retVal;
 
-				const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr.GetPtr()->GetComponentStaticInfo();
-				icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfo.GetInterfaceExtractors();
-				const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
-				if (extractorPtr != NULL){
-					availableComponents.push_back(iqt::GetQString(*index));
-				}
-			}
+	icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
+	for (		icomp::IRegistry::Ids::const_iterator index = elementIds.begin();
+				index != elementIds.end();
+				index++){
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(*index);
+		I_ASSERT(elementInfoPtr != NULL);
+		I_ASSERT(elementInfoPtr->elementPtr.IsValid());
+
+		const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr.GetPtr()->GetComponentStaticInfo();
+		icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfo.GetInterfaceExtractors();
+		const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
+		if (extractorPtr != NULL){
+			retVal.push_back(iqt::GetQString(*index));
 		}
 	}
 
-	return availableComponents;
+	return retVal;
 }
 
 
@@ -123,19 +137,39 @@ void CAttributeEditorComp::UpdateEditor()
 		return;
 	}
 
-	icomp::IRegistryElement* registryElementPtr = GetObjectPtr();
-	if (registryElementPtr == NULL){
+	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	const icomp::IRegistryElement* elementPtr = GetRegistryElement();
+	if ((selectionInfoPtr == NULL) || (elementPtr == NULL)){
 		return;
 	}
 
 	AttributeTree->clear();
 	InterfacesTree->clear();
+	SubcomponentsTree->clear();
 	ExportTree->clear();
 
 	bool hasExport = false;
 
-	const icomp::IComponentStaticInfo& elementStaticInfo = registryElementPtr->GetComponentStaticInfo();
+	const icomp::IComponentStaticInfo& elementStaticInfo = elementPtr->GetComponentStaticInfo();
 	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
+
+	NameLabel->setText(selectionInfoPtr->GetSelectedElementName().c_str());
+	IconLabel->setPixmap(selectionInfoPtr->GetSelectedElementIcon().pixmap(128));
+
+	const icomp::CComponentAddress* addressPtr = selectionInfoPtr->GetSelectedElementAddress();
+	if (addressPtr != NULL){
+		PackageIdLabel->setText(addressPtr->GetPackageId().c_str());
+		ComponentIdLabel->setText(addressPtr->GetComponentId().c_str());
+		PackageIdLabel->setVisible(true);
+		ComponentIdLabel->setVisible(true);
+	}
+	else{
+		PackageIdLabel->setVisible(false);
+		ComponentIdLabel->setVisible(false);
+	}
+
+	DescriptionLabel->setText(iqt::GetQString(elementStaticInfo.GetDescription()));
+	KeywordsLabel->setText(iqt::GetQString(elementStaticInfo.GetKeywords()));
 
 	for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
 		const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
@@ -160,14 +194,42 @@ void CAttributeEditorComp::UpdateEditor()
 
 	const icomp::IComponentStaticInfo::InterfaceExtractors extractors = elementStaticInfo.GetInterfaceExtractors();
 
+	icomp::IRegistry::ExportedInterfacesMap interfacesMap;
+
+	const icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
+	if (registryPtr != NULL){
+		interfacesMap = registryPtr->GetExportedInterfacesMap();
+	}
+
 	for (int extractorIndex = 0; extractorIndex < extractors.GetElementsCount(); extractorIndex++){
 		const istd::CClassInfo& interfaceInfo = extractors.GetKeyAt(extractorIndex);
 		QTreeWidgetItem* itemPtr = new QTreeWidgetItem();
 
-		itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+		itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
 		itemPtr->setText(0, interfaceInfo.GetName().c_str());
 
+		icomp::IRegistry::ExportedInterfacesMap::const_iterator foundExportIter = interfacesMap.find(interfaceInfo);
+		bool isInterfaceExported = false;
+		if (foundExportIter != interfacesMap.end()){
+			isInterfaceExported = (foundExportIter->second == selectionInfoPtr->GetSelectedElementName());
+		}
+
+		itemPtr->setCheckState(0, isInterfaceExported? Qt::Checked: Qt::Unchecked);
+
 		InterfacesTree->addTopLevelItem(itemPtr);
+	}
+
+	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();
+
+	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
+				subIter != subcomponentIds.end();
+				++subIter){
+		QTreeWidgetItem* itemPtr = new QTreeWidgetItem();
+
+		itemPtr->setFlags(0);
+		itemPtr->setText(0, subIter->c_str());
+
+		SubcomponentsTree->addTopLevelItem(itemPtr);
 	}
 }
 
@@ -228,24 +290,24 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 	UpdateBlocker blocker(this);
 
 	if (column == NameColumn){
-		icomp::IRegistryElement* registryElementPtr = GetObjectPtr();
-		if (registryElementPtr == NULL){
+		icomp::IRegistryElement* elementPtr = GetRegistryElement();
+		if (elementPtr == NULL){
 			return;
 		}
 
 		bool isEnabled = (item->checkState(NameColumn) == Qt::Checked);
 
 		std::string attributeId = item->text(NameColumn).toStdString();
-		const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
+		const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
 		if (isEnabled || (attributeInfoPtr == NULL)){
 			return;
 		}
 
-		istd::CChangeNotifier notifier(registryElementPtr);
+		istd::CChangeNotifier notifier(elementPtr);
 
 		const_cast<icomp::IRegistryElement::AttributeInfo*>(attributeInfoPtr)->attributePtr.Reset();
 		if (attributeInfoPtr->exportId.empty()){
-			registryElementPtr->RemoveAttribute(attributeId);
+			elementPtr->RemoveAttribute(attributeId);
 		}
 	}
 }
@@ -273,8 +335,8 @@ bool CAttributeEditorComp::SetAttributeToItems(
 			QTreeWidgetItem& exportItem,
 			bool* hasExportPtr)
 {
-	icomp::IRegistryElement* registryElementPtr = GetObjectPtr();
-	if (registryElementPtr == NULL){
+	icomp::IRegistryElement* elementPtr = GetRegistryElement();
+	if (elementPtr == NULL){
 		return false;
 	}
 
@@ -284,7 +346,7 @@ bool CAttributeEditorComp::SetAttributeToItems(
 
 	attributeItem.setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
 
-	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
+	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
 	if ((attributeInfoPtr != NULL) && !attributeInfoPtr->exportId.empty()){
 		attributeItem.setIcon(NameColumn, QIcon(":/Resources/Icons/Export.png"));
 		if (hasExportPtr != NULL){
@@ -528,7 +590,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 		QItemDelegate::setEditorData(editor, index);
 	}
 
-	icomp::IRegistryElement* elementPtr = m_parent.GetObjectPtr();
+	icomp::IRegistryElement* elementPtr = m_parent.GetRegistryElement();
 	I_ASSERT(elementPtr != NULL);
 
 	int propertyMining = index.data(AttributeMining).toInt();
@@ -682,7 +744,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 	}
 
 	if (!attributeInfoPtr->attributePtr.IsValid()){
-		icomp::IRegistryElement* elementPtr = m_parent.GetObjectPtr();
+		icomp::IRegistryElement* elementPtr = m_parent.GetRegistryElement();
 		I_ASSERT(elementPtr != NULL);
 
 		attributeInfoPtr->attributePtr.SetPtr(elementPtr->CreateAttribute(attributeName.toStdString()));

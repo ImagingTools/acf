@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          752
+          860
         </Number>
         <Description>
           ACF
@@ -30,7 +30,28 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="11">
+          <AttributeInfo>
+            <Id>
+              AboutDescriptionText
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                (C) Copyright 2009 ImagingTools
+
+All rights reserved
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               AppName
@@ -88,6 +109,25 @@
                   CompositorTemplate
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LogoPath
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Icons/acfLogo
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -494,4 +534,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    
+  </Description>
+  <Keywords>
+    
+  </Keywords>
 </Acf>

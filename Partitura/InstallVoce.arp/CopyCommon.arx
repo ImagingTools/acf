@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          867
+          860
         </Number>
         <Description>
           ACF
@@ -632,7 +632,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -757,6 +757,38 @@
               <Value>
                 true
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -1215,7 +1247,7 @@
     </Element>
     <Element>
       <Id>
-        CopyTutorial
+        CopyTutorialOther
       </Id>
       <PackageId>
         QtPck
@@ -1258,7 +1290,16 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="7">
+                <Value>
+                  *.ui
+                </Value>
+                <Value>
+                  *.qrc
+                </Value>
+                <Value>
+                  *.moc
+                </Value>
                 <Value>
                   *.vcproj
                 </Value>
@@ -1568,7 +1609,7 @@
                   CopyTutorialSources
                 </Value>
                 <Value>
-                  CopyTutorial
+                  CopyTutorialOther
                 </Value>
                 <Value>
                   CopyInstallationScript

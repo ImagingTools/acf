@@ -9,4 +9,4 @@ CONFIG(debug, debug|release) {
 CONFIG(release, debug|release) {
 	LIBS += -L../../../Lib/ReleaseQMake
 }
-LIBS += istd iser imod imath iimg idoc icomp icmm ibase i2d
+SOURCES += ../../../Include/istd/QMake/debug/CBitManip.o

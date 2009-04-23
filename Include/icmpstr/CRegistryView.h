@@ -33,13 +33,13 @@ public:
 	void CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId);
 
 	CComponentView* CreateComponentView(
-				const icomp::IRegistry* registryPtr,
+				icomp::IRegistry* registryPtr,
 				const icomp::IRegistry::ElementInfo* elementInfoPtr,
 				const std::string& role);
 
 	static double GetGrid();
 
-	const CComponentView* GetSelectedComponent() const;
+	CComponentView* GetSelectedComponent() const;
 	void SetSelectedComponent(CComponentView* selectedComponentPtr);
 
 	void RemoveSelectedComponent();

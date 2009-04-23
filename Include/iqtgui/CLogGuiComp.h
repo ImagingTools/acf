@@ -13,10 +13,10 @@
 #include "imod/TSingleModelObserverBase.h"
 #include "imod/TModelWrap.h"
 
+#include "ibase/CMessage.h"
+
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/Generated/ui_CLogGuiComp.h"
-
-#include "ibase/CMessage.h"
 
 
 namespace iqtgui
@@ -27,7 +27,7 @@ namespace iqtgui
 	Message container displaying messages as log list.
 */
 class CLogGuiComp:
-			public iqtgui::TDesignerGuiCompBase<Ui::CLogGuiComp>, 
+			public iqtgui::TDesignerGuiCompBase<Ui::CLogGuiComp>,
 			public ibase::CMessageContainer
 {
 	Q_OBJECT

@@ -30,7 +30,7 @@
 				<IsEnabled>
 					true
 				</IsEnabled>
-				<AttributeInfoMap count="8">
+				<AttributeInfoMap count="9">
 					<AttributeInfo>
 						<Id>
 							ApplicationName
@@ -83,12 +83,15 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="2">
+							<Values count="3">
 								<Value>
 									0.6.1
 								</Value>
 								<Value>
 									0.6.2
+								</Value>
+								<Value>
+									0.7.0
 								</Value>
 							</Values>
 						</Data>
@@ -107,12 +110,15 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="2">
+							<Values count="3">
 								<Value>
 									599
 								</Value>
 								<Value>
 									827
+								</Value>
+								<Value>
+									863
 								</Value>
 							</Values>
 						</Data>
@@ -189,7 +195,26 @@
 								true
 							</IsEnabled>
 							<Value>
-								860
+								810
+							</Value>
+						</Data>
+					</AttributeInfo>
+					<AttributeInfo>
+						<Id>
+							IsExtensionUsed
+						</Id>
+						<Type>
+							icomp::TSingleAttribute&lt;bool&gt;
+						</Type>
+						<ExportId>
+							IsExtensionUsed
+						</ExportId>
+						<Data>
+							<IsEnabled>
+								true
+							</IsEnabled>
+							<Value>
+								true
 							</Value>
 						</Data>
 					</AttributeInfo>
@@ -335,11 +360,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								1024
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -354,11 +376,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								User Version
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -373,11 +392,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								0
-							</Value>
 						</Data>
 					</AttributeInfo>
 				</AttributeInfoMap>

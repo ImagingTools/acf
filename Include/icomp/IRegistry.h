@@ -19,6 +19,10 @@ namespace icomp
 {
 
 
+/**
+	Interface representing information stored in component registry.
+	Registry can be imagined as representation of arx files.
+*/
 class IRegistry: virtual public iser::ISerializable
 {
 public:

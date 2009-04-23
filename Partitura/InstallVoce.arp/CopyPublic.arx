@@ -15,22 +15,22 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
+  <ElementsList count="5">
     <Element>
       <Id>
-        Application
+        CopyArpInfo
       </Id>
       <PackageId>
         QtPck
       </PackageId>
       <ComponentId>
-        GuiApplication
+        CopyProcessor
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -39,23 +39,36 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              ApplicationInfo
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Info
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MainGui
+              ExcludeFilters
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Filters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -64,51 +77,16 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                MainWindow
-              </Value>
+              <Values count="1">
+                <Value>
+                  *
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SplashScreen
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Splash
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentFactory
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        TextDocument
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              DefaultText
+              InputDir
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;istd::CString&gt;
@@ -121,223 +99,29 @@
                 true
               </IsEnabled>
               <Value>
-                Ahoj przygodo!
+                ../Bin/Info
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentLoader
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        XmlFileSerializer
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              FileExtensions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  bin
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TypeDescriptions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Binary text files
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
+              Log
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Info
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        DocumentTemplate
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        SingleDocumentTemplate
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="5">
-          <AttributeInfo>
-            <Id>
-              DocumentFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DocumentFactory
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              DocumentLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                DocumentLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsEditSupported
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsNewSupported
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ViewFactory
-            </Id>
-            <Type>
-              icomp::CFactoryAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ViewFactory
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Info
-      </Id>
-      <PackageId>
-        AcfVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              ApplicationName
+              OutputDir
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;istd::CString&gt;
@@ -350,55 +134,13 @@
                 true
               </IsEnabled>
               <Value>
-                DocView
+                Temp/Bin/Info
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              KnownVersionNames
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  1.0.0
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              KnownVersions
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  1000
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionNumber
+              RecursionDepth
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;int&gt;
@@ -411,7 +153,7 @@
                 true
               </IsEnabled>
               <Value>
-                1000
+                2
               </Value>
             </Data>
           </AttributeInfo>
@@ -420,75 +162,19 @@
     </Element>
     <Element>
       <Id>
-        MainWindow
+        CopyBins
       </Id>
       <PackageId>
         QtPck
       </PackageId>
       <ComponentId>
-        MainWindowGui
+        CopyProcessor
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DocumentManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Workspace
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Workspace
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Workspace
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Splash
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        SplashScreen
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -497,20 +183,57 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              BinaryExcludeFilters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Filters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
               
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                Info
-              </Value>
+              <Values count="2">
+                <Value>
+                  *.exe
+                </Value>
+                <Value>
+                  *.arp
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              CopyrightText
+              InputDir
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;istd::CString&gt;
@@ -523,13 +246,45 @@
                 true
               </IsEnabled>
               <Value>
-                See 'licence.txt' for copyright informations
+                ../Bin
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ImagePath
+              LicensePath
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputDir
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;istd::CString&gt;
@@ -542,16 +297,16 @@
                 true
               </IsEnabled>
               <Value>
-                ../../Docs/Images/AcfSplashScreen.png
+                Temp/Bin
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProductType
+              RecursionDepth
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TSingleAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -561,7 +316,7 @@
                 true
               </IsEnabled>
               <Value>
-                Tutorial (Dynamic)
+                2
               </Value>
             </Data>
           </AttributeInfo>
@@ -570,31 +325,277 @@
     </Element>
     <Element>
       <Id>
-        ViewFactory
+        CopyCommon
       </Id>
       <PackageId>
-        TutorialPck
+        InstallVoce
       </PackageId>
       <ComponentId>
-        TextEditor
+        CopyCommon
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                DistributionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InstallScriptTags
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InstallScriptValues
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicensePath
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              LicensePath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        Workspace
+        CopyLibs
       </Id>
       <PackageId>
         QtPck
       </PackageId>
       <ComponentId>
-        MultiDocWorkspaceGui
+        CopyProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="8">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              BinaryExcludeFilters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Filters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  *.lib
+                </Value>
+                <Value>
+                  *.pdb
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InputDir
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ../Lib
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicensePath
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputDir
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Temp/Lib
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RecursionDepth
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        InitSequence
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Instantiator
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -603,10 +604,10 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              DocumentTemplate
+              Instances
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
               
@@ -615,9 +616,20 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                DocumentTemplate
-              </Value>
+              <Values count="4">
+                <Value>
+                  CopyCommon
+                </Value>
+                <Value>
+                  CopyLibs
+                </Value>
+                <Value>
+                  CopyBins
+                </Value>
+                <Value>
+                  CopyArpInfo
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -627,10 +639,10 @@
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        int,bool,signed char,short,long double&lt;long,int,char,signed char,unsigned short,int&gt;
+        icomp::IComponent
       </InterfaceId>
       <ComponentId>
-        Application
+        InitSequence
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

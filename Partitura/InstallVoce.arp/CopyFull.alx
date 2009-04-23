@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          867
+          860
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="33">
+  <PositionMap count="37">
     <Element>
       <ComponentName>
         Application
@@ -40,13 +40,24 @@
     </Element>
     <Element>
       <ComponentName>
+        CopyArpInfo
+      </ComponentName>
+      <X>
+        -386
+      </X>
+      <X>
+        -161
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyBins
       </ComponentName>
       <X>
-        -87
+        -590
       </X>
       <X>
-        13
+        -162
       </X>
     </Element>
     <Element>
@@ -54,7 +65,7 @@
         CopyCommon
       </ComponentName>
       <X>
-        -868
+        -846
       </X>
       <X>
         223
@@ -68,7 +79,7 @@
         10
       </X>
       <X>
-        -248
+        -242
       </X>
     </Element>
     <Element>
@@ -183,13 +194,35 @@
     </Element>
     <Element>
       <ComponentName>
+        CopyImplOther
+      </ComponentName>
+      <X>
+        -53
+      </X>
+      <X>
+        106
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyImplSources
       </ComponentName>
       <X>
-        -609
+        -273
       </X>
       <X>
-        7
+        107
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyIncludeOther
+      </ComponentName>
+      <X>
+        -490
+      </X>
+      <X>
+        108
       </X>
     </Element>
     <Element>
@@ -197,7 +230,7 @@
         CopyIncludeSources
       </ComponentName>
       <X>
-        -726
+        -704
       </X>
       <X>
         108
@@ -212,6 +245,17 @@
       </X>
       <X>
         0
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyInfo
+      </ComponentName>
+      <X>
+        -399
+      </X>
+      <X>
+        -174
       </X>
     </Element>
     <Element>
@@ -241,10 +285,10 @@
         CopyLibs
       </ComponentName>
       <X>
-        -292
+        -816
       </X>
       <X>
-        10
+        -161
       </X>
     </Element>
     <Element>
@@ -252,10 +296,10 @@
         CopyReleaseInfo
       </ComponentName>
       <X>
-        -147
+        -140
       </X>
       <X>
-        -249
+        -242
       </X>
     </Element>
     <Element>
@@ -340,10 +384,10 @@
         InitSequence
       </ComponentName>
       <X>
-        -1093
+        -1071
       </X>
       <X>
-        -70
+        -48
       </X>
     </Element>
     <Element>

@@ -23,9 +23,11 @@ class CAboutWidgetGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CAboutWidgetG
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CAboutWidgetGuiComp> BaseClass;
 
-	I_BEGIN_COMPONENT(CAboutWidgetGuiComp)
-		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Applciation info object", true, "ApplicationInfo")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CAboutWidgetGuiComp);
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Applciation info object", true, "ApplicationInfo");
+		I_ASSIGN(m_logoPathAttrPtr, "LogoPath", "Path of bitmap logo", false, ":/Icons/acfLogo");
+		I_ASSIGN(m_descriptionTextAttrPtr, "DescriptionText", "Optional description text", false, "(C) Copyright 2008 CompanyName\n\nAll rights reserved")
+	I_END_COMPONENT;
 	
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
@@ -34,6 +36,8 @@ protected:
 
 protected:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
+	I_ATTR(istd::CString, m_logoPathAttrPtr);
+	I_ATTR(istd::CString, m_descriptionTextAttrPtr);
 };
 
 

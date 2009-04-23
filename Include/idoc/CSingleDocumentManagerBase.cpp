@@ -260,7 +260,7 @@ bool CSingleDocumentManagerBase::OpenDocument(
 			std::string& documentTypeId)
 {
 	if (filePath.IsEmpty() || (m_documentTemplatePtr == NULL)){
-		return NULL;
+		return false;
 	}
 
 	if (filePath == m_filePath){

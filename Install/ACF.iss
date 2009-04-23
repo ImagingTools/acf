@@ -4,7 +4,7 @@
 #define QTDIR GetEnv("QTDIR")
 
 [Setup]
-AppVerName=ACF $AcfVersion:0$
+AppVerName=$AcfProductName$ $AcfVersion:0$
 AppVersion=$AcfVersion:0$
 AppPublisher=ImagingTools
 AppPublisherURL=http://www.imagingtools.de/
@@ -19,13 +19,15 @@ AlwaysShowDirOnReadyPage=True
 DefaultGroupName=ImagingTools\ACF
 DisableProgramGroupPage=True
 UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
-UninstallDisplayName=ACF
+UninstallDisplayName=$AcfProductName$ $AcfVersion:0$
 OutputDir=..\Setup
-LicenseFile=..\..\lgpl-2.1.txt
+LicenseFile=$LicensePath$
 InfoAfterFile=..\InfoAfter.txt
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfComp
+Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\DebugVC8; Flags: recursesubdirs; Components: acfComp
+Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\ReleaseVC8; Flags: recursesubdirs; Components: acfComp
 Source: ..\Microsoft.VC80.CRT\*; DestDir: {app}\Bin\DebugVC8; Flags: recursesubdirs; Components: acfComp
 Source: ..\Microsoft.VC80.CRT\*; DestDir: {app}\Bin\ReleaseVC8; Flags: recursesubdirs; Components: acfComp
 

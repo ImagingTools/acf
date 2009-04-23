@@ -518,15 +518,15 @@ bool CRegistryCodeSaverComp::ExtractInfoFromFile(const istd::CString& filePath, 
 {
 	istd::CString::size_type dotPosition = filePath.find_last_of('.');
 	if ((dotPosition != istd::CString::npos) && (dotPosition > 0)){
-		istd::CString::size_type beginPosition = filePath.find_last_of(istd::CString("/\\"), dotPosition - 1);
+		istd::CString::size_type beginPosition = filePath.find_last_of(istd::CString("/\\"), dotPosition - 1) + 1;
 
 		if (beginPosition == istd::CString::npos){
-			beginPosition = -1;
+			beginPosition = 0;
 		}
 
 		I_ASSERT(beginPosition < dotPosition);
 
-		className = filePath.ToString().substr(beginPosition + 1, dotPosition - beginPosition - 1);
+		className = filePath.ToString().substr(beginPosition, dotPosition - beginPosition);
 		headerFilePath = filePath.substr(0, dotPosition) + istd::CString(".h");
 
 		return true;

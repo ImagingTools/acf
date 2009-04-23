@@ -8,4 +8,4 @@ CONFIG(debug, debug|release) {
 CONFIG(release, debug|release) {
 	LIBS += -L../../../Lib/ReleaseQMake
 }
-LIBS += AcfStd AcfQt icmpstr
+LIBS += -lizlib -lixln -liwin -lisys -lisvn -listd -liser -liqtprm -liqtgui -liqtdoc -liqt2d -liqt -liprm -linat -limod -limeas -limath -liimg -lidoc -lidb -licomp -licmpstr -licmm -libase -li2d

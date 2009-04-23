@@ -314,6 +314,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IElementSelectionInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IRegistryEditController.h"
 				>
 			</File>

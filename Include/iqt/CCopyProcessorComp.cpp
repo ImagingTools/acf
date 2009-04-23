@@ -308,6 +308,15 @@ bool CCopyProcessorComp::ProcessSubstitutionTag(const QString& tag, QString& res
 
 			return true;
 		}
+
+		int userTagsCount = istd::Min(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
+		for (int userTagIndex = 0; userTagIndex < userTagsCount; ++userTagIndex){
+			if (tag == iqt::GetQString(m_userSubstitutionTagsAttrPtr[userTagIndex])){
+				result = iqt::GetQString(m_userSubstitutionValuesAttrPtr[userTagIndex]);
+
+				return true;
+			}
+		}
 	}
 
 	return false;

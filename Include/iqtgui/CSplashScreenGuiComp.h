@@ -29,7 +29,7 @@ public:
 		I_ASSIGN(m_productTypeAttrPtr, "ProductType", "Additional product description shown over version info", false, "Server")
 		I_ASSIGN(m_showAcfVersionAttrPtr, "ShowAcfVersion", "If true, ACF version will be shown", true, true)
 		I_ASSIGN(m_showProductVersionAttrPtr, "ShowProductVersion", "If true, product version will be shown", true, true)
-		I_ASSIGN(m_copyrightTextAttrPtr, "CopyrightText", "Optional copyright text", false, "(C) Copyright 2008 CompanyName\n\nAll rights reseved")
+		I_ASSIGN(m_copyrightTextAttrPtr, "CopyrightText", "Optional copyright text", false, "(C) Copyright 2008 CompanyName\n\nAll rights reserved")
 	I_END_COMPONENT
 
 protected:
