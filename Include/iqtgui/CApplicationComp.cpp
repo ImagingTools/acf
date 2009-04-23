@@ -30,12 +30,12 @@ bool CApplicationComp::EnsureInitialized(int argc, char** argv)
 			}
 		}
 
-		m_applicationPtr->setStyle(appStyle.c_str());
-
 		m_applicationPtr.SetPtr(new QApplication(argc, argv));
 		if (!m_applicationPtr.IsValid()){
 			return false;
 		}
+
+		m_applicationPtr->setStyle(appStyle.c_str());
 		
 		QIcon icon;
 		icon.addFile(":/Icons/acfLogoSmall");
