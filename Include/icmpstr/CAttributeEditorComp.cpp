@@ -297,17 +297,22 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 
 		bool isEnabled = (item->checkState(NameColumn) == Qt::Checked);
 
+		istd::CChangeNotifier notifier(elementPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+
 		std::string attributeId = item->text(NameColumn).toStdString();
 		const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
-		if (isEnabled || (attributeInfoPtr == NULL)){
-			return;
+		if (isEnabled){
+			elementPtr->InsertAttributeInfo(attributeId);
 		}
+		else{
+			if (attributeInfoPtr == NULL){
+				return;
+			}
 
-		istd::CChangeNotifier notifier(elementPtr);
-
-		const_cast<icomp::IRegistryElement::AttributeInfo*>(attributeInfoPtr)->attributePtr.Reset();
-		if (attributeInfoPtr->exportId.empty()){
-			elementPtr->RemoveAttribute(attributeId);
+			const_cast<icomp::IRegistryElement::AttributeInfo*>(attributeInfoPtr)->attributePtr.Reset();
+			if (attributeInfoPtr->exportId.empty()){
+				elementPtr->RemoveAttribute(attributeId);
+			}
 		}
 	}
 }
@@ -778,7 +783,10 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		return;
 	}
 
-	istd::CChangeNotifier notifier(m_parent.GetObjectPtr());
+	IElementSelectionInfo* selectionInfoPtr = m_parent.GetObjectPtr();
+	I_ASSERT(selectionInfoPtr != NULL);
+
+	istd::CChangeNotifier notifier(selectionInfoPtr->GetSelectedElement(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
 
 	// set single reference data
 	if (propertyMining == Reference){

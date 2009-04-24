@@ -29,6 +29,13 @@ public:
 	typedef std::set< std::string> Ids;
 	typedef istd::TDelPtr<iser::ISerializable> AttributePtr;
 
+	enum ChangeFlags{
+		/**
+			Indicate that data model is changed.
+		*/
+		CF_ATTRIBUTE_CHANGED = 0x2000
+	};
+
 	/**
 		Describe information stored with each attribute.
 	*/

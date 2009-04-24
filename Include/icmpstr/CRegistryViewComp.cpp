@@ -109,11 +109,6 @@ const idoc::IHierarchicalCommand* CRegistryViewComp::GetCommands() const
 void CRegistryViewComp::UpdateEditor(int updateFlags)
 {
 	if (updateFlags != 0){
-		if ((updateFlags & istd::IChangeable::CF_MODEL) == 0){
-			// no model changes, ignore.
-			return;
-		}
-
 		static const int unimportantChanges = CRegistryModelComp::CF_POSITION | icomp::IRegistry::CF_COMPONENT_EXPORTED | istd::IChangeable::CF_MODEL;
 		if ((updateFlags & ~unimportantChanges) == 0){
 			// some unimportant model changes
@@ -392,7 +387,7 @@ void CRegistryViewComp::OnRenameComponent()
 						iqt::GetQString(oldName),
 						&isOk).toStdString();
 			if (isOk && !newName.empty() && (oldName != newName) && oldInfo.elementPtr.IsValid()){
-				istd::CChangeNotifier notifier(registryPtr);
+				istd::CChangeNotifier notifier(registryPtr, istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_COMPONENT_ADDED);
 
 				const icomp::IRegistry::ElementInfo* newInfoPtr = registryPtr->InsertElementInfo(newName, oldInfo.address, true);
 
