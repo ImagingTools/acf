@@ -26,7 +26,7 @@ void CParamsManagerGuiComp::UpdateModel() const
 }
 
 
-void CParamsManagerGuiComp::UpdateEditor()
+void CParamsManagerGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	if (IsGuiCreated() && !IsUpdateBlocked()){
 		UpdateBlocker updateBlocker(this);

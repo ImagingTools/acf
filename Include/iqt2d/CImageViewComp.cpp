@@ -25,7 +25,7 @@ void CImageViewComp::UpdateModel() const
 }
 
 
-void CImageViewComp::UpdateEditor()
+void CImageViewComp::UpdateEditor(int /*updateFlags*/)
 {
 }
 

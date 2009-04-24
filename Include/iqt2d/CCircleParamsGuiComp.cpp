@@ -120,7 +120,7 @@ void CCircleParamsGuiComp::UpdateModel() const
 }
 
 
-void CCircleParamsGuiComp::UpdateEditor()
+void CCircleParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	i2d::CCircle* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

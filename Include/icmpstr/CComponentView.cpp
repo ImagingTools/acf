@@ -44,6 +44,11 @@ CComponentView::CComponentView(
 
 	setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
 	setCursor(Qt::ArrowCursor);
+
+	imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(registryPtr);
+	if (registryModelPtr != NULL){
+		registryModelPtr->AttachObserver(this);
+	}
 }
 
 
@@ -223,10 +228,6 @@ QRect CComponentView::CalculateRect() const
 
 	double gridSize = m_registryView.GetGrid();
 
-	if (!m_exportedInterfacesList.empty()){
-		width += height - margin;
-	}
-
 	if (!m_image.isNull()){
 		width += height;
 	}
@@ -308,10 +309,10 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*
 	if (!m_exportedInterfacesList.empty()){
 		int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
 		painter->drawPixmap(
-					int(mainRect.right() - minSideSize * 0.8),
-					int(minSideSize * 0.2),
-					int(minSideSize * 0.6),
-					int(minSideSize * 0.6),
+					int(mainRect.right() - minSideSize * 0.4),
+					int(minSideSize * 0.1),
+					int(minSideSize * 0.3),
+					int(minSideSize * 0.3),
 					QIcon(":/Resources/Icons/Export.png").pixmap(128, 128));
 	}
 
@@ -377,6 +378,20 @@ QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& v
 	}
 
 	return QGraphicsRectItem::itemChange(change, value);
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CComponentView::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	BaseObserverClass::OnUpdate(updateFlags, updateParamsPtr);
+
+	if ((updateFlags & icomp::IRegistry::CF_COMPONENT_EXPORTED) != 0){
+		CalcExportedInteraces();
+
+		update();
+	}
 }
 
 

@@ -35,13 +35,13 @@ void CComposedParamsSetGuiComp::UpdateModel() const
 }
 
 
-void CComposedParamsSetGuiComp::UpdateEditor()
+void CComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 {
 	int editorsCount = m_editorsCompPtr.GetCount();
 	for (int i = 0; i < editorsCount; ++i){
 		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
 		if (editorPtr != NULL){
-			editorPtr->UpdateEditor();
+			editorPtr->UpdateEditor(updateFlags);
 		}
 	}
 }

@@ -61,7 +61,7 @@ public:
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
 	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor();
+	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
@@ -74,9 +74,7 @@ protected slots:
 	void OnComponentPositionChanged(CComponentView* view, const QPoint& newPosition);
 	void OnRemoveComponent();
 	void OnRenameComponent();
-	void OnExportInterface();
 	void OnProperties();
-	void OnExportComponent();
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
@@ -88,8 +86,6 @@ protected slots:
 
 private:
 	void ConnectReferences(const QString& componentRole);
-	bool HasExportedInterfaces(const CComponentView& componentView) const;
-	void UpdateExportInterfaceCommand();
 
 protected:
 	enum GroupId
@@ -115,8 +111,6 @@ private:
 	iqtgui::CHierarchicalCommand m_abortRegistryCommand;
 	iqtgui::CHierarchicalCommand m_addNoteCommand;
 	iqtgui::CHierarchicalCommand m_removeNoteCommand;
-	iqtgui::CHierarchicalCommand m_exportComponentCommand;
-	iqtgui::CHierarchicalCommand m_exportInterfaceCommand;
 	iqtgui::CHierarchicalCommand m_propertiesCommand;
 
 	QTimer m_executionObserverTimer;

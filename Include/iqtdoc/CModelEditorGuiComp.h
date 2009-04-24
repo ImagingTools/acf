@@ -57,7 +57,7 @@ public:
 	virtual void OnTryClose(bool* ignoredPtr = NULL);
 
 	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor();
+	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 	virtual bool IsReadOnly() const;
 	virtual void SetReadOnly(bool state);

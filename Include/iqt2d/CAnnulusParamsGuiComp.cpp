@@ -95,7 +95,7 @@ void CAnnulusParamsGuiComp::UpdateModel() const
 }
 
 
-void CAnnulusParamsGuiComp::UpdateEditor()
+void CAnnulusParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	i2d::CAnnulus* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

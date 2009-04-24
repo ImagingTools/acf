@@ -105,7 +105,7 @@ void CAnnulusSegmentParamsGuiComp::UpdateModel() const
 }
 
 
-void CAnnulusSegmentParamsGuiComp::UpdateEditor()
+void CAnnulusSegmentParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	i2d::CAnnulusSegment* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

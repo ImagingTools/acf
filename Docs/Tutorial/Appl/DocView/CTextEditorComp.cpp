@@ -37,7 +37,7 @@ void CTextEditorComp::UpdateModel() const
 }
 
 
-void CTextEditorComp::UpdateEditor()
+void CTextEditorComp::UpdateEditor(int /*updateFlags*/)
 {
 	QTextEdit* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);

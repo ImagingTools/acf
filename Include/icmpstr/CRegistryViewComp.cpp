@@ -40,11 +40,6 @@ CRegistryViewComp::CRegistryViewComp()
 	m_renameComponentCommand.setEnabled(false);
 	m_renameComponentCommand.SetGroupId(GI_COMPONENT);
 	m_renameComponentCommand.setShortcut(QKeySequence(Qt::Key_F2));
-	m_exportComponentCommand.setEnabled(false);
-	m_exportComponentCommand.SetGroupId(GI_COMPONENT);
-	m_exportInterfaceCommand.setEnabled(false);
-	m_exportInterfaceCommand.SetGroupId(GI_COMPONENT);
-	m_exportInterfaceCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_E));
 	m_propertiesCommand.setEnabled(true);
 	m_propertiesCommand.SetGroupId(GI_COMPONENT);
 	m_propertiesCommand.setShortcut(QKeySequence(Qt::ALT + Qt::Key_Enter));
@@ -66,8 +61,6 @@ CRegistryViewComp::CRegistryViewComp()
 
 	m_registryMenu.InsertChild(&m_removeComponentCommand);
 	m_registryMenu.InsertChild(&m_renameComponentCommand);
-	m_registryMenu.InsertChild(&m_exportComponentCommand);
-	m_registryMenu.InsertChild(&m_exportInterfaceCommand);
 	m_registryMenu.InsertChild(&m_propertiesCommand);
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
@@ -113,8 +106,21 @@ const idoc::IHierarchicalCommand* CRegistryViewComp::GetCommands() const
 
 // reimplemented (imod::TModelEditorBase)
 
-void CRegistryViewComp::UpdateEditor()
+void CRegistryViewComp::UpdateEditor(int updateFlags)
 {
+	if (updateFlags != 0){
+		if ((updateFlags & istd::IChangeable::CF_MODEL) == 0){
+			// no model changes, ignore.
+			return;
+		}
+
+		static const int unimportantChanges = CRegistryModelComp::CF_POSITION | icomp::IRegistry::CF_COMPONENT_EXPORTED | istd::IChangeable::CF_MODEL;
+		if ((updateFlags & ~unimportantChanges) == 0){
+			// some unimportant model changes
+			return;
+		}
+	}
+
 	CRegistryView* viewPtr = GetQtWidget();
 	if (viewPtr == NULL){
 		return;
@@ -183,8 +189,6 @@ void CRegistryViewComp::OnGuiCreated()
 	connect(&m_abortRegistryCommand, SIGNAL(activated()), this, SLOT(OnAbort()));
 	connect(&m_addNoteCommand, SIGNAL(activated()), this, SLOT(OnAddNote()));
 	connect(&m_removeNoteCommand, SIGNAL(activated()), this, SLOT(OnRemoveNote()));
-	connect(&m_exportComponentCommand, SIGNAL(activated()), this, SLOT(OnExportComponent()));
-	connect(&m_exportInterfaceCommand, SIGNAL(activated()), this, SLOT(OnExportInterface()));
 	connect(&m_propertiesCommand, SIGNAL(activated()), this, SLOT(OnProperties()));
 
 	if (m_registryPreviewCompPtr.IsValid()){
@@ -236,16 +240,6 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Rename Component"), 
 				tr("Rename"), 
 				tr("Allow to assign new name to selected component"));
-	m_exportComponentCommand.SetVisuals(
-				tr("&Export Component"), 
-				tr("&Export Component"), 
-				tr("Export component"),
-				QIcon(":/Resources/Icons/Export.png"));
-	m_exportInterfaceCommand.SetVisuals(
-				tr("&Export Inteface(s)"), 
-				tr("&Export Interface(s)"), 
-				tr("Export interface(s)"),
-				QIcon(":/Resources/Icons/Export.png"));
 	m_propertiesCommand.SetVisuals(
 				tr("&Properties"), 
 				tr("&Properties"), 
@@ -323,10 +317,6 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 
 	m_removeComponentCommand.setEnabled(isSelected);
 	m_renameComponentCommand.setEnabled(isSelected);
-	m_exportComponentCommand.setEnabled(isSelected);
-	m_exportInterfaceCommand.setEnabled(isSelected);
-
-	UpdateExportInterfaceCommand();
 }
 
 
@@ -478,30 +468,6 @@ void CRegistryViewComp::OnRenameComponent()
 }
 
 
-void CRegistryViewComp::OnExportInterface()
-{
-	CRegistryView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
-		if (selectedComponentPtr != NULL){
-			const std::string& componentName = selectedComponentPtr->GetComponentName();
-
-			bool doExport = !HasExportedInterfaces(*selectedComponentPtr);
-
-			registryPtr->SetElementExported(componentName, istd::CClassInfo(), doExport);
-
-			OnExecutionTimerTick();
-		}
-	}
-}
-
-
 void CRegistryViewComp::OnProperties()
 {	
 	icomp::IRegistry* registryPtr = GetObjectPtr();
@@ -518,12 +484,6 @@ void CRegistryViewComp::OnProperties()
 		registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
 		registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
 	}
-}
-
-
-void CRegistryViewComp::OnExportComponent()
-{
-	// TODO: Implement component export
 }
 
 
@@ -755,50 +715,6 @@ void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 		}
 	}
 }
-
-bool CRegistryViewComp::HasExportedInterfaces(const CComponentView& componentView) const
-{
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registryPtr->GetExportedInterfacesMap();
-		for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator iter = interfacesMap.begin();
-					iter != interfacesMap.end();
-					++iter){
-			if (iter->second == componentView.GetComponentName()){
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-
-void CRegistryViewComp::UpdateExportInterfaceCommand()
-{
-	CRegistryView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr == NULL){
-		return;
-	}
-
-	const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
-	if ((selectedComponentPtr != NULL) && HasExportedInterfaces(*selectedComponentPtr)){
-		m_exportInterfaceCommand.SetVisuals(
-				tr("&Remove Inteface Export"), 
-				tr("&Remove Inteface Export"), 
-				tr("Remove Inteface Export"),
-				QIcon(":/Resources/Icons/Export.png"));
-	}
-	else{
-		m_exportInterfaceCommand.SetVisuals(
-				tr("&Export Inteface(s)"), 
-				tr("&Export Interface(s)"), 
-				tr("Export interface(s)"),
-				QIcon(":/Resources/Icons/Export.png"));
-	}
-}
-
 
 } // namespace icmpstr
 

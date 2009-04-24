@@ -124,7 +124,7 @@ void CLine2dParamsGuiComp::UpdateModel() const
 }
 
 
-void CLine2dParamsGuiComp::UpdateEditor()
+void CLine2dParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	i2d::CLine2d* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

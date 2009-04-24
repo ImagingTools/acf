@@ -131,7 +131,7 @@ void CAttributeEditorComp::OnGuiModelDetached()
 
 // reimplmented (imod::IModelEditor)
 
-void CAttributeEditorComp::UpdateEditor()
+void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 {
 	if (!IsGuiCreated()){
 		return;
@@ -322,6 +322,29 @@ void CAttributeEditorComp::on_InterfacesTree_itemSelectionChanged()
 		istd::CClassInfo info(attributeItemPtr->text(0).toStdString());
 
 		m_quickHelpViewerCompPtr->ShowHelp(info.GetName(), &info);
+	}
+}
+
+
+void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, int column)
+{
+	I_ASSERT(item != NULL);
+
+	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	if (selectionInfoPtr == NULL){
+		return;
+	}
+	icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
+	if (registryPtr == NULL){
+		return;
+	}
+
+	if (column == 0){
+		QString interfaceName = item->text(column);
+
+		const std::string& elementName = selectionInfoPtr->GetSelectedElementName();
+		bool isSelected = (item->checkState(column) == Qt::Checked);
+		registryPtr->SetElementExported(elementName, istd::CClassInfo(interfaceName.toStdString()), isSelected);
 	}
 }
 

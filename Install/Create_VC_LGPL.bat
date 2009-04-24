@@ -13,8 +13,6 @@ rmdir /Q /S TempExcl
 echo Copying files to Temp directory...
 "../bin/DebugVC8/Acf.exe" Create_VC_LGPL.arx -config ../Config/AcfCore.xpc
 
-pause
-
 echo Createing installation file...
 iscc.exe /Q TempExcl\acf.iss
 
@@ -23,4 +21,3 @@ rmdir /Q /S Temp
 rmdir /Q /S TempExcl
 
 echo Installation done
-pause

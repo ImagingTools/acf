@@ -21,7 +21,7 @@ public:
 	/**
 		Updates editor with model data.
 	*/
-	virtual void UpdateEditor() = 0;
+	virtual void UpdateEditor(int updateFlags = 0) = 0;
 
 	/**
 		Updates model from editor.

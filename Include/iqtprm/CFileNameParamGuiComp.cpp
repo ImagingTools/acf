@@ -27,7 +27,7 @@ void CFileNameParamGuiComp::UpdateModel() const
 }
 
 
-void CFileNameParamGuiComp::UpdateEditor()
+void CFileNameParamGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

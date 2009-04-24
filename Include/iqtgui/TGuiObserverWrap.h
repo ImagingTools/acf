@@ -234,14 +234,14 @@ void TGuiObserverWrap<Gui, Observer>::AfterUpdate(imod::IModel* modelPtr, int up
 	Observer::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
 	bool skipUpdate = false;
-	if (m_updateFilter && updateFlags){
+	if ((m_updateFilter != 0) && (updateFlags != 0)){
 		skipUpdate = ((m_updateFilter & updateFlags) == 0);
 	}
 
 	if (!IsUpdateBlocked() && Gui::IsGuiCreated() && !skipUpdate){
 		UpdateBlocker blocker(this);
 
-		UpdateEditor();
+		UpdateEditor(updateFlags);
 	}
 }
 

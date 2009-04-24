@@ -29,7 +29,7 @@ void CSelectionParamGuiComp::UpdateModel() const
 }
 
 
-void CSelectionParamGuiComp::UpdateEditor()
+void CSelectionParamGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	if (!IsGuiCreated()){
 		return;

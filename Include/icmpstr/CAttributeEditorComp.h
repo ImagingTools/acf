@@ -71,13 +71,14 @@ public:
 	virtual void OnGuiModelDetached();
 
 	// reimplmented (imod::IModelEditor)
-	virtual void UpdateEditor();
+	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
 protected slots:
 	void on_AttributeTree_itemSelectionChanged();
 	void on_AttributeTree_itemChanged(QTreeWidgetItem* item, int column);
 	void on_InterfacesTree_itemSelectionChanged();
+	void on_InterfacesTree_itemChanged(QTreeWidgetItem* item, int column);
 
 protected:
 	bool SetAttributeToItems(

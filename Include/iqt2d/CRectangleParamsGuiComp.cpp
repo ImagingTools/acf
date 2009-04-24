@@ -69,7 +69,7 @@ void CRectangleParamsGuiComp::UpdateModel() const
 }
 
 
-void CRectangleParamsGuiComp::UpdateEditor()
+void CRectangleParamsGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	i2d::CRectangle* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

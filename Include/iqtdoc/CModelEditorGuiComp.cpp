@@ -86,10 +86,10 @@ void CModelEditorGuiComp::OnTryClose(bool* ignoredPtr)
 
 // reimplemented (imod::IModelEditor)
 
-void CModelEditorGuiComp::UpdateEditor()
+void CModelEditorGuiComp::UpdateEditor(int updateFlags)
 {
 	if (m_slaveEditorCompPtr.IsValid()){
-		m_slaveEditorCompPtr->UpdateEditor();
+		m_slaveEditorCompPtr->UpdateEditor(updateFlags);
 	}
 }
 

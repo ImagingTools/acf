@@ -52,7 +52,7 @@ I_END_COMPONENT
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
-	virtual void UpdateEditor();
+	virtual void UpdateEditor(int updateFlags = 0);
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
