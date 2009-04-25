@@ -1,2 +1,0 @@
-Installation creation time: $AcfTimestamp$
-ACF Version: $AcfVersion:0$ ($AcfRawVersion:0$)
