@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          882
         </Number>
         <Description>
           ACF
@@ -15,151 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="9">
-    <Element>
-      <Id>
-        CopyArpInfo
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        CopyProcessor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="7">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ApplicationInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ExcludeFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Filters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  *
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputDir
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ../Bin/Info
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDir
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Temp/Bin/Info
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RecursionDepth
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                2
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="8">
     <Element>
       <Id>
         CopyBins
@@ -1248,7 +1104,10 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="16">
+              <Values count="7">
+                <Value>
+                  CopyCommon
+                </Value>
                 <Value>
                   CopyIncludeSources
                 </Value>
@@ -1262,40 +1121,10 @@
                   CopyImplOther
                 </Value>
                 <Value>
-                  CopyCommon
-                </Value>
-                <Value>
-                  CopyRoot
-                </Value>
-                <Value>
-                  CopyIncludes
-                </Value>
-                <Value>
-                  CopyImpl
-                </Value>
-                <Value>
                   CopyLibs
                 </Value>
                 <Value>
                   CopyBins
-                </Value>
-                <Value>
-                  CopyDocs
-                </Value>
-                <Value>
-                  CopyTutorialSources
-                </Value>
-                <Value>
-                  CopyTutorial
-                </Value>
-                <Value>
-                  CopyInstallationScript
-                </Value>
-                <Value>
-                  CopyInstallInfo
-                </Value>
-                <Value>
-                  CopyArpInfo
                 </Value>
               </Values>
             </Data>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          882
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="9">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        18
+        90
       </X>
       <X>
-        -273
+        -281
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         Copy
       </ComponentName>
       <X>
-        90
+        -180
       </X>
       <X>
-        -39
+        -29
       </X>
     </Element>
     <Element>
@@ -47,6 +47,17 @@
       </X>
       <X>
         -10
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyLicense
+      </ComponentName>
+      <X>
+        361
+      </X>
+      <X>
+        -38
       </X>
     </Element>
     <Element>
@@ -73,13 +84,24 @@
     </Element>
     <Element>
       <ComponentName>
-        Log
+        Instantiator
       </ComponentName>
       <X>
         97
       </X>
       <X>
-        115
+        -142
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        Log
+      </ComponentName>
+      <X>
+        102
+      </X>
+      <X>
+        127
       </X>
     </Element>
     <Element>

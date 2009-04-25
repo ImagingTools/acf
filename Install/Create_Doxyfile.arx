@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="4">
     <Element>
       <Id>
         Application
@@ -62,7 +62,7 @@
                 true
               </IsEnabled>
               <Value>
-                Instantiator
+                DoxyfileCopy
               </Value>
             </Data>
           </AttributeInfo>
@@ -71,13 +71,13 @@
     </Element>
     <Element>
       <Id>
-        Copy
+        DoxyfileCopy
       </Id>
       <PackageId>
-        InstallVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        CopyPublic
+        CopyProcessor
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -92,80 +92,6 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ApplicationInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              BinaryExcludeFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              BinaryExcludeFilters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptTags
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  LicensePath
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptValues
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ../LicenseCommercial.txt
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicensePath
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
               
             </ExportId>
             <Data>
@@ -173,61 +99,8 @@
                 true
               </IsEnabled>
               <Value>
-                Header_Commercial.txt
+                VersionInfo
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Log
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        CopyLicense
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        CopyProcessor
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="5">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -246,7 +119,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  LicenseCommercial.txt
+                  *
                 </Value>
               </Values>
             </Data>
@@ -308,30 +181,12 @@
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Instantiator
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        Instantiator
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Instances
+              UseSubstitution
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -340,14 +195,9 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
-                <Value>
-                  Copy
-                </Value>
-                <Value>
-                  CopyLicense
-                </Value>
-              </Values>
+              <Value>
+                true
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -406,6 +256,24 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

@@ -21,10 +21,10 @@
         Application
       </ComponentName>
       <X>
-        90
+        105
       </X>
       <X>
-        -276
+        -251
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         Copy
       </ComponentName>
       <X>
-        -175
+        291
       </X>
       <X>
-        -24
+        -32
       </X>
     </Element>
     <Element>
@@ -51,13 +51,24 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyLicense
+        DoxyfileCopy
       </ComponentName>
       <X>
-        361
+        123
       </X>
       <X>
-        -33
+        -16
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        DyxyfileCopy
+      </ComponentName>
+      <X>
+        19
+      </X>
+      <X>
+        -52
       </X>
     </Element>
     <Element>
@@ -84,24 +95,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Instantiator
-      </ComponentName>
-      <X>
-        97
-      </X>
-      <X>
-        -137
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
         Log
       </ComponentName>
       <X>
-        102
+        107
       </X>
       <X>
-        127
+        174
       </X>
     </Element>
     <Element>
@@ -109,10 +109,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        -561
+        -350
       </X>
       <X>
-        -191
+        -19
       </X>
     </Element>
   </PositionMap>

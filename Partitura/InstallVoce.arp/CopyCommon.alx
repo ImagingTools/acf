@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          882
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="27">
+  <PositionMap count="29">
     <Element>
       <ComponentName>
         Application
@@ -40,6 +40,17 @@
     </Element>
     <Element>
       <ComponentName>
+        CopyBinInfo
+      </ComponentName>
+      <X>
+        -331
+      </X>
+      <X>
+        -234
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyBins
       </ComponentName>
       <X>
@@ -51,10 +62,21 @@
     </Element>
     <Element>
       <ComponentName>
+        CopyConfig
+      </ComponentName>
+      <X>
+        -516
+      </X>
+      <X>
+        -234
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         CopyDocs
       </ComponentName>
       <X>
-        -238
+        -218
       </X>
       <X>
         0
@@ -76,7 +98,7 @@
         CopyImpl
       </ComponentName>
       <X>
-        -561
+        -540
       </X>
       <X>
         0
@@ -164,7 +186,7 @@
         CopyIncludes
       </ComponentName>
       <X>
-        -718
+        -698
       </X>
       <X>
         0
@@ -175,10 +197,10 @@
         CopyInstallInfo
       </ComponentName>
       <X>
-        -732
+        -712
       </X>
       <X>
-        -255
+        -235
       </X>
     </Element>
     <Element>
@@ -186,7 +208,7 @@
         CopyInstallationScript
       </ComponentName>
       <X>
-        -1078
+        -1058
       </X>
       <X>
         114
@@ -208,10 +230,10 @@
         CopyPartitura
       </ComponentName>
       <X>
-        -73
+        -61
       </X>
       <X>
-        1
+        0
       </X>
     </Element>
     <Element>
@@ -219,7 +241,7 @@
         CopyRoot
       </ComponentName>
       <X>
-        -876
+        -856
       </X>
       <X>
         0
@@ -230,7 +252,7 @@
         CopyTexts
       </ComponentName>
       <X>
-        -400
+        -380
       </X>
       <X>
         0
@@ -285,10 +307,10 @@
         InitSequence
       </ComponentName>
       <X>
-        -1112
+        -1092
       </X>
       <X>
-        -124
+        -104
       </X>
     </Element>
     <Element>

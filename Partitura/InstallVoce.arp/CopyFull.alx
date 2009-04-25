@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          882
         </Number>
         <Description>
           ACF
@@ -43,10 +43,10 @@
         CopyArpInfo
       </ComponentName>
       <X>
-        -386
+        -385
       </X>
       <X>
-        -161
+        -160
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         CopyBins
       </ComponentName>
       <X>
-        -590
+        -586
       </X>
       <X>
-        -162
+        -158
       </X>
     </Element>
     <Element>
@@ -65,7 +65,7 @@
         CopyCommon
       </ComponentName>
       <X>
-        -846
+        -842
       </X>
       <X>
         223
@@ -197,7 +197,7 @@
         CopyImplOther
       </ComponentName>
       <X>
-        -53
+        -49
       </X>
       <X>
         106
@@ -208,7 +208,7 @@
         CopyImplSources
       </ComponentName>
       <X>
-        -273
+        -269
       </X>
       <X>
         107
@@ -219,7 +219,7 @@
         CopyIncludeOther
       </ComponentName>
       <X>
-        -490
+        -486
       </X>
       <X>
         108
@@ -230,7 +230,7 @@
         CopyIncludeSources
       </ComponentName>
       <X>
-        -704
+        -700
       </X>
       <X>
         108
@@ -285,10 +285,10 @@
         CopyLibs
       </ComponentName>
       <X>
-        -816
+        -812
       </X>
       <X>
-        -161
+        -157
       </X>
     </Element>
     <Element>
@@ -384,10 +384,10 @@
         InitSequence
       </ComponentName>
       <X>
-        -1071
+        -1067
       </X>
       <X>
-        -48
+        -44
       </X>
     </Element>
     <Element>
