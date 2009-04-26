@@ -61,8 +61,9 @@ protected:
 	/**
 		Send critical message to log.
 		\sa ibase::IMessage for message meaning documentation.
-		\param	id			binary id identifying this message type for automatical processing.
-		\param	message		message text will be send.
+		\param	id				binary id identifying this message type for automatical processing.
+		\param	message			message text will be send.
+		\param	messageSource	optional human readable description of message source.
 	*/
 	bool SendCriticalMessage(int id, const istd::CString& message, const istd::CString& messageSource = istd::CString()) const;
 

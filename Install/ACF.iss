@@ -40,6 +40,7 @@ Source: {#XALANDIR}\*; DestDir: {app}\ExtLib\Xalan; Flags: recursesubdirs; Exclu
 Source: {#ZLIBDIR}\*; DestDir: {app}\ExtLib\Zlib; Flags: recursesubdirs; Excludes: *.dll; Components: zlibComp
 
 Source: {#QTDIR}\bin\Qt*4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
+Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\ExtLib\Bin\imageformats; Components: qtComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl

@@ -11,9 +11,9 @@ namespace imod
 
 
 /**
-	\ingroup ModelObserver
-
 	Basic implementation for a single model observer.
+
+	\ingroup ModelObserver
 */
 template <class ObjectClass> 
 class TSingleModelObserverBase: public CSingleModelObserverBase

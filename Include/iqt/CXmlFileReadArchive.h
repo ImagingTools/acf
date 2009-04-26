@@ -17,9 +17,9 @@ namespace iqt
 
 
 /**
-	\ingroup Persistence
-
 	Qt-based implementation of archive reading from XML file.
+
+	\ingroup Persistence
 */
 class CXmlFileReadArchive: public iser::CReadArchiveBase, public iser::CXmlDocumentInfoBase
 {

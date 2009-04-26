@@ -28,8 +28,8 @@ public:
 	*/
 	virtual const IRegistry* GetRegistry(const CComponentAddress& address) const = 0;
 	/**
-		Get directory path of component package.
-		\param	address		adress of component.
+		Get directory path of specified component package.
+		\param	packageId	ID of component package.
 		\return				package dir path or empty string if specified package is not registered.
 	*/
 	virtual istd::CString GetPackageDirPath(const std::string& packageId) const = 0;

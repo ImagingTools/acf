@@ -13,10 +13,10 @@ namespace imod
 
 
 /**
-	\ingroup ModelObserver
-
 	Basic implementation of an multiple model observer.
-/*/
+
+	\ingroup ModelObserver
+*/
 template<class ObjectClass>
 class TMultiModelObserverBase: public CMultiModelObserverBase
 {

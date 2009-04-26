@@ -11,6 +11,9 @@ namespace idoc
 {
 
 
+/**
+	Complex document template consists of more simple templates.
+*/
 class CCompositeDocumentTemplateComp: public icomp::CComponentBase, virtual public IDocumentTemplate
 {
 public:

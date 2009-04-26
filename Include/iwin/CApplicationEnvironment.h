@@ -10,6 +10,8 @@ namespace iwin
 
 
 /**
+	Windows based implementation of interface \c isys::IApplicationEnvironment.
+
 	\ingroup Windows
 */
 class CApplicationEnvironment: virtual public isys::IApplicationEnvironment

@@ -74,19 +74,20 @@ public:
 	/**
 		Get file loader/saver for spacified document ID.
 		\param	documentTypeId	type ID of document will be loaded/saved.
-		\param	forSaving		if it is true, document saving is meant, otherwise document loading.
 	*/
 	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId) const = 0;
 
 	/**
 		Creates a document instance for document type \c documentTypeId.
+		\param	documentTypeId	ID of document type.
 	*/
 	virtual istd::IChangeable* CreateDocument(const std::string& documentTypeId) const = 0;
 
 	/**
 		Creates a view instance for document \c document of type \c viewTypeId.
-		\param	documentPtr	pointer to document object.
-		\param	viewTypeId	optional ID specifying view type if more view types are supported.
+		\param	documentTypeId	ID of document type.
+		\param	documentPtr		pointer to document object.
+		\param	viewTypeId		optional ID specifying view type if more view types are supported.
 	*/
 	virtual istd::IPolymorphic* CreateView(
 				const std::string& documentTypeId,
@@ -95,13 +96,16 @@ public:
 
 	/**
 		Creates an undo manger for a given document \c documentPtr.
+		\param	documentTypeId	ID of document type.
 		\param	documentPtr	pointer to document object.
+		\return	pointer to created instance of undo manager or NULL, if creating of undo manager was impossible.
 	*/
 	virtual imod::IUndoManager* CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const = 0;
 
 	/**
 		Return default directory for specified document type.
-		\param	sugestedDir	template directory sugested by user.
+		\param	sugestedDir			template directory sugested by user.
+		\param	documentTypeIdPtr	optional ID of document type.
 	*/
 	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const = 0;
 };

@@ -14,9 +14,9 @@ namespace iser
 
 
 /**
-	\ingroup Persistence
-
 	Provide loading and saveing of objects.
+
+	\ingroup Persistence
 */
 class IFileLoader: virtual public istd::IPolymorphic
 {

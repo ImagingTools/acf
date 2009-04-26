@@ -24,12 +24,12 @@ public:
 	virtual	int GetLanguageCount() const = 0;
 
 	/**
-		Returns language ID for the language with the index \index.
+		Returns language ID for the language with the index \c index.
 	*/
 	virtual	QString GetLanguageId(int index) const = 0;
 
 	/**
-		Returns language icon for the language with the index \index.
+		Returns language icon for the language with the index \c index.
 	*/
 	virtual	QIcon GetLanguageIcon(int index) const = 0;
 

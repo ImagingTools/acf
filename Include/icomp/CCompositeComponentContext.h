@@ -25,9 +25,6 @@ public:
 		\param	registryPtr				data model object used by this composition.
 										It can not be NULL.
 		\param	registriesManagerPtr	registry manager allowing to access to registries if composite subelement is created.
-		\param	componentFactoryPtr		root object of native components factory.
-										Subelements of this object are instances of CPackageStaticInfo allowing access to components factory.
-										It can not be NULL.
 		\param	parentPtr				pointer to parent object of this instance.
 	*/
 	CCompositeComponentContext(

@@ -12,10 +12,10 @@ namespace imod
 
 
 /**
-	\ingroup ModelObserver
-
 	This model wrapper provides a simple connection between a concrete
 	\c istd::IChangeable implementation and a model.
+
+	\ingroup ModelObserver
 */
 template <class Base>
 class TModelWrap: public istd::TUpdateManagerWrap<Base>, public imod::CModelBase

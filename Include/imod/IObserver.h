@@ -16,10 +16,10 @@ class IModel;
 
 
 /**
-	\ingroup ModelObserver
-
 	Common interface for all classes implementing the Observer functionality
 	in the Model/Observer design pattern.
+
+	\ingroup ModelObserver
 */
 class IObserver: virtual public istd::IPolymorphic
 {

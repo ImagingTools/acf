@@ -18,12 +18,12 @@ namespace izlib
 
 
 /**
-	\ingroup Persistence
-
 	ZLIB compressed implementation of archive for writing in XML format.
 	This implementation doesn't use any external parser, it uses ZLIB library for file compressing.
 	It creates \c counter attribute indicating number of subtags for each mutli tag node.
 	Compressed XML file in this format are needed by \c izlib::CGzXmlReadArchive.
+
+	\ingroup Persistence
 */
 class CGzXmlWriteArchive: public iser::CXmlWriteArchiveBase 
 {

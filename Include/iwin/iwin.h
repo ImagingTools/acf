@@ -3,26 +3,14 @@
 
 
 /**
-	\defgroup Windows Windows System
-	Realization of operating system specified tasks on Microsoft Windows.
-	\ingroup ACF
-@{
-*/
+	This namespace contains implementations for the windows plattform.
 
-
-/**
-	\namespace iwin
-	\brief This namespace contains implementations for the windows plattform 
+	\ingroup Windows
 */
 namespace iwin
 {
 	
 } // namespace iwin
-
-
-/**
-@}
-*/
 
 
 #endif // !iwin_included

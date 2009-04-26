@@ -45,9 +45,11 @@ public:
 
 	/**
 		Set component context of this component.
-		\param	contextPtr	new value of component context.
-							It can be also NULL.
-							Please avoid to use this method, it is designed for internal use only.
+		\param	contextPtr		new value of component context.
+								It can be also NULL.
+								Please avoid to use this method, it is designed for internal use only.
+		\param	parentPtr		pointer to parent component, or NULL if this component has no parent.
+		\param	isParentOwner	indicate, that life cycle of this component is controller by its parent.
 	*/
 	virtual void SetComponentContext(
 				const icomp::IComponentContext* contextPtr,

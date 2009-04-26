@@ -119,7 +119,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  *
+                  Doxyfile
                 </Value>
               </Values>
             </Data>

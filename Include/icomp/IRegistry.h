@@ -65,7 +65,9 @@ public:
 
 	/**
 		Insert new attribute info object to collection of attributes.
-		\param	elementId		unique ID of new element (component).
+		\param	elementId				unique ID of new element (component).
+		\param	address					address describing element type.
+		\param	ensureElementCreated	if true new element will be created.
 	*/
 	virtual ElementInfo* InsertElementInfo(
 				const std::string& elementId,

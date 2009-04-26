@@ -13,9 +13,9 @@ namespace istd
 
 
 /**
-	\ingroup ACF
-
 	Common interface for all objects that can copies their data from another object.
+
+	\ingroup ACF
 */
 class IDuplicatable: virtual public istd::IPolymorphic
 {

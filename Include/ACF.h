@@ -4,9 +4,6 @@
 
 /**
 \defgroup ACF ACF
-\ingroup ACF
-@{
-@} 
 
 \mainpage
 \section Introduction
@@ -18,7 +15,39 @@ and includes many well designed components, which you can directly use in your a
 \section Example
 
 \section Tutorials
+See \c Docs/Tutorial for tutorials.
+*/
 
+
+/**
+	\defgroup ModelObserver Model/Observer concept
+	The main use-case of this concept is to get information on the observer side about changes of model.
+	It can be used e.g. to realize GUI update if releted model changes.
+
+	\ingroup ACF
+*/
+
+
+/**
+	\defgroup Persistence Persistence concept.
+
+	\ingroup ACF
+*/
+
+
+/**
+	\defgroup Main Main concepts and implementations
+	If you can learn how to use ACF you should begin with elements defined in this module.
+
+	\ingroup ACF
+*/
+
+
+/**
+	\defgroup Windows Windows System
+	Realization of operating system specified tasks on Microsoft Windows.
+
+	\ingroup ACF
 */
 
 

@@ -82,7 +82,7 @@ public:
 
 	/**
 		Return the document assigned to view. 
-		\param	viewPtr	pointer to view object.
+		\param	view	view object.
 		\return			pointer to assigned document, or \c NULL if no document for this view exists.
 	*/
 	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view) const = 0;
@@ -98,6 +98,7 @@ public:
 		\param	documentTypeId	ID of document type.
 		\param	createView		if true, view will be automatically created.
 		\param	viewTypeId		ID of view type, if it will be created.
+		\param	newDocumentPtr	optional pointer where new created document will be returned.
 		\return	true, if success.
 	*/
 	virtual bool FileNew(

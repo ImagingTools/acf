@@ -12,9 +12,9 @@ namespace iwin
 
 
 /**
-	\ingroup Windows
-
 	An timer implementation for the Windows plattform
+
+	\ingroup Windows
 */
 class CTimer: virtual public isys::ITimer
 {

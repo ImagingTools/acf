@@ -15,10 +15,10 @@ namespace istd
 
 
 /**
-	\ingroup Main
-
 	Standard ACF string definition.
 	This class is a wrapper for wchar_t data type from the standard C-library.
+
+	\ingroup Main
 */
 class CString: public std::wstring
 {

@@ -18,9 +18,9 @@ class CArchiveTag;
 
 
 /**
-	\ingroup Persistence
-
 	Represent input/output persistence archive.
+
+	\ingroup Persistence
 */
 class IArchive: virtual public istd::IPolymorphic
 {

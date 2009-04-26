@@ -40,9 +40,9 @@ public:
 
 	/**
 		Get attribute using its ID.
-		\param	attributeId		ID of attribute.
-		\param	parentLevelPtr	optional return value. This will be set to number parents you have to iterate to get
-								component where this attribute was defined. If this attribute was defined in actual component it equals 0.
+		\param	attributeId			ID of attribute.
+		\param	definitionLevelPtr	optional return value. This will be set to number parents you have to iterate to get
+									component where this attribute was defined. If this attribute was defined in actual component it equals 0.
 	*/
 	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const = 0;
 };

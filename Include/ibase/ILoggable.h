@@ -12,8 +12,6 @@ namespace ibase
 
 
 /**
-	\ingroup ACF
-
 	Inteface for object, which support the 
 */
 class ILoggable: virtual public istd::IPolymorphic

@@ -17,9 +17,9 @@ namespace iwin
 
 
 /**
-	\ingroup Windows
-
 	Provide access to public functions in DLL.
+
+	\ingroup Windows
 */
 class CDllFunctionsProvider: virtual public isys::IFunctionsProvider
 {

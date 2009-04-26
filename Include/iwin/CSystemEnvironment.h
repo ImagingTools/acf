@@ -10,9 +10,9 @@ namespace iwin
 
 
 /**
-	\ingroup Windows
-
 	System implementation of ISystemEnvironment interface on Windows plattform.
+
+	\ingroup Windows
 */
 class CSystemEnvironment: virtual public isys::CSystemEnvironmentBase
 {

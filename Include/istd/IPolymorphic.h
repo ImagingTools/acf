@@ -10,9 +10,9 @@ namespace istd
 
 
 /**
-	\ingroup Main
-
 	Base interface for all used interfaces and implementations
+
+	\ingroup Main
 */
 class IPolymorphic
 {

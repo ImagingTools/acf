@@ -15,9 +15,9 @@ class IArchive;
 
 
 /**
-	\ingroup Persistence
-
 	Process tag used to group data in archive stream.
+
+	\ingroup Persistence
 */
 class CArchiveTag
 {

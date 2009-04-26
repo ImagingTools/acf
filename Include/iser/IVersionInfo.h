@@ -15,9 +15,9 @@ namespace iser
 
 
 /**
-	\ingroup Persistence
-
 	Provides access to version information.
+
+	\ingroup Persistence
 */
 class IVersionInfo: virtual public istd::IPolymorphic
 {
@@ -49,6 +49,8 @@ public:
 		\param	versionId	versioning type. It allows you to distinguish different version aspects.
 							For example version number of framework cann differ from application version.
 							\sa VersionId.
+		\param	result		output version number.
+		\return	true, if success.
 	 */
 	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const = 0;
 

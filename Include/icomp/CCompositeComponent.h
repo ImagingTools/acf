@@ -48,7 +48,7 @@ protected:
 		Create information objects and subcomponent.
 		\param	componentId		ID of subcomponent.
 		\param	subContextPtr	pointer to subcomponent context will be set to new context object if needed.
-		\param	result			pointer to subcomponent will be set to new component object.
+		\param	subComponentPtr	pointer to subcomponent will be set to new component object.
 		\param	isOwned			true, if created component will be owned by this component.
 	*/
 	bool CreateSubcomponentInfo(

@@ -11,9 +11,9 @@ namespace imod
 {
 
 /**
-	\ingroup ModelObserver
-
 	Common interface for an model editor.
+
+	\ingroup ModelObserver
 */
 class IModelEditor: virtual public istd::IPolymorphic
 {

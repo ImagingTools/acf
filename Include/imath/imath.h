@@ -6,21 +6,21 @@
 
 
 /**
-	\ingroup Main
-
 	Mathematical constant value PI.
+
+	\ingroup Main
 */
 static const double I_PI = 3.1415926;
 
 
 /**
-	\ingroup Main
-
 	Package with mathematical functions and algebraical primitives.
 	This package is system independent.
 	This package use following ACF packages:
 	\li istd
 	\li iser
+
+	\ingroup Main
 */
 namespace imath
 {

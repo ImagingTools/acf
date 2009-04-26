@@ -6,25 +6,16 @@
 
 
 /**
-	\defgroup Main Main concepts and implementations
-	\ingroup ACF
+	Standard library.
+	Contains the system indenendent primitives and basic implementations.
 
-	If you can learn how to use ACF you should begin with elements defined in this module.
-*/
-
-
-/**
 	\ingroup Main
-
-	Standard Standard, plattform independent implementations.
-
-	Contains the standard, system indenendent primitives and basic implementations.
 */
 namespace istd
 {
 
 
-/*
+/**
 	Define own min function to avoid conflicts between STL and Microsoft macros.
 
 	\ingroup Main

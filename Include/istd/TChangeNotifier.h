@@ -11,9 +11,9 @@ namespace istd
 
 
 /**
-	\ingroup ModelObserver
-
 	Help class which provides the automatic update mechanism of the model.
+
+	\ingroup ModelObserver
 */
 template <class Changeable>
 class TChangeNotifier: public istd::TPointer<Changeable>
@@ -111,9 +111,9 @@ inline TChangeNotifier<Changeable>::operator Changeable*() const
 
 
 /**
-	\ingroup ModelObserver
-
 	Basic change notifier for unspecified type.
+
+	\ingroup ModelObserver
 */
 typedef TChangeNotifier<IChangeable> CChangeNotifier;
 

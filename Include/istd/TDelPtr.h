@@ -10,9 +10,9 @@ namespace istd
 
 
 /**
-	\ingroup Main
-
 	Pointer wrapper providing automatic deleting pointed object during destruction.
+
+	\ingroup Main
 */
 template <class Type, bool DelArray = false>
 class TDelPtr: public TPointer<Type>

@@ -12,10 +12,10 @@ namespace iser
 
 
 /**
-	\ingroup Persistence
-
 	Simple implementation of archive reading from own ACF format binary file.
 	This imlementation is very fast and efficient and should be used if any standarized file format is needed.
+
+	\ingroup Persistence
 */
 class CFileReadArchive: public CBinaryReadArchiveBase
 {

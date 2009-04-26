@@ -10,9 +10,9 @@ namespace istd
 
 
 /**
-	\ingroup Main
-
 	Implementation of a abstract range defined by two values - minimum and maximum.
+
+	\ingroup Main
 */
 class CRange
 {
