@@ -20,6 +20,7 @@ public:
 	virtual istd::CString GetWorkingDirectory() const;
 	virtual istd::CStringList GetApplicationArguments() const;
 	virtual istd::CString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const;
+	virtual EnvironmentVariables GetEnvironmentVariables() const;
 };
 
 

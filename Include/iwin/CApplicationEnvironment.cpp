@@ -37,9 +37,20 @@ istd::CString CApplicationEnvironment::GetWorkingDirectory() const
 
 istd::CStringList CApplicationEnvironment::GetApplicationArguments() const
 {
-	I_CRITICAL(); // TODO: implemented this feature
+	istd::CStringList applicationArguments;
 
-	return istd::CStringList();
+	LPWSTR commandLinePtr = GetCommandLineW();
+	if (commandLinePtr != NULL){
+		int argumentsCount = 0;
+		LPWSTR* applicationArgumentsPtr = CommandLineToArgvW(commandLinePtr, &argumentsCount);
+		if (applicationArgumentsPtr != NULL){
+			for (int argumentIndex = 0; argumentIndex < argumentsCount; argumentIndex++){
+				applicationArguments.push_back(applicationArgumentsPtr[argumentIndex]);
+			}
+		}
+	}
+
+	return applicationArguments;
 }
 
 
@@ -61,6 +72,33 @@ istd::CString CApplicationEnvironment::GetModulePath(bool useApplicationModule /
 	}
 
 	return istd::CString(moduleFileName);
+}
+
+
+CApplicationEnvironment::EnvironmentVariables CApplicationEnvironment::GetEnvironmentVariables() const
+{
+	EnvironmentVariables environmentVariables;
+
+	LPWCH environmentStringsPtr = GetEnvironmentStringsW();
+	if (environmentStringsPtr != NULL){
+		LPCWSTR lpszVariable = (LPCWSTR)environmentStringsPtr;
+		while (*lpszVariable){
+			istd::CString varPair = lpszVariable;
+			istd::CString::size_type separatorIndex = varPair.rfind('=');
+			if (separatorIndex != istd::CString::npos){
+				istd::CString variableName = varPair.substr(0, separatorIndex);
+				istd::CString variableValue = varPair.substr(separatorIndex + 1, varPair.length());
+			
+				environmentVariables[variableName] = variableValue;
+			}
+
+			lpszVariable += lstrlenW(lpszVariable) + 1;
+		}
+
+		FreeEnvironmentStringsW(environmentStringsPtr);
+	}
+
+	return environmentVariables;
 }
 
 

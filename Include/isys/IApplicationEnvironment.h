@@ -2,8 +2,11 @@
 #define isys_IApplicationEnvironment_included
 
 
-#include "isys/isys.h"
+// STL includes
+#include <map>
 
+
+#include "isys/isys.h"
 
 #include "istd/IPolymorphic.h"
 #include "istd/CString.h"
@@ -19,6 +22,7 @@ namespace isys
 class IApplicationEnvironment: virtual public istd::IPolymorphic
 {
 public:
+	typedef std::map<istd::CString, istd::CString> EnvironmentVariables;
 	/**
 		Returns the standard temp path, that will be used by the application.
 	*/
@@ -40,6 +44,12 @@ public:
 		if \c onlyDirectory is \c true only directory path will be returned.
 	*/
 	virtual istd::CString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const = 0;
+
+	/**
+		Returns the environment variables of the application process.
+		The key of the EnvironmentVariables map is the name of the environment variable.
+	*/
+	virtual EnvironmentVariables GetEnvironmentVariables() const = 0;
 };
 
 
