@@ -217,11 +217,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStreamLogCompBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CTextDocumentComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CTextFileLoaderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTextFileLogComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -270,11 +278,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStreamLogCompBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CTextDocumentComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CTextFileLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTextFileLogComp.h"
 				>
 			</File>
 			<File

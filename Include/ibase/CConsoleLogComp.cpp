@@ -11,48 +11,19 @@ namespace ibase
 {
 
 
-// public methods
+// protected methods
 
-CConsoleLogComp::CConsoleLogComp()
-:	m_isLastDotShown(false)
+// reimplemented (CStreamLogCompBase)
+
+void CConsoleLogComp::WriteLine(const istd::CString& text)
 {
+	std::wcout << text.c_str();
 }
 
 
-// reimplemented (ibase::IMessageConsumer)
-
-void CConsoleLogComp::AddMessage(IMessage* messagePtr)
+void CConsoleLogComp::NewLine()
 {
-	if (messagePtr != NULL){
-		if (messagePtr->GetCategory() >= *m_minPriorityAttrPtr){
-			if (m_isLastDotShown){
-				std::cout << std::endl;
-
-				m_isLastDotShown = false;
-			}
-
-			std::cout << messagePtr->GetText().ToString() << std::endl;
-		}
-		else if (*m_isDotEnabledAttrPtr){
-			std::cout << ".";
-
-			m_isLastDotShown = true;
-		}
-	}
-}
-
-
-// reimplemented (icomp::IComponent)
-
-void CConsoleLogComp::OnComponentDestroyed()
-{
-	BaseClass::OnComponentDestroyed();
-
-	if (m_isLastDotShown){
-		std::cout << std::endl;
-
-		m_isLastDotShown = false;
-	}
+	std::wcout << std::endl;
 }
 
 
