@@ -41,6 +41,7 @@ public:
 	};
 
 	virtual bool SerializeComponentsLayout(iser::IArchive& archive);
+	virtual bool SerializeRegistry(iser::IArchive& archive);
 
 	enum ConsistencyState
 	{
@@ -65,6 +66,9 @@ public:
 				const std::string& elementId,
 				const icomp::CComponentAddress& address,
 				bool ensureElementCreated = true);
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);

@@ -25,9 +25,11 @@ CComponentConnector::CComponentConnector(
 			const CRegistryView* registryViewPtr,
 			CComponentView* sourceComponent, 
 			CComponentView* destComponent,
+			int connectFlags,
 			QGraphicsItem* parent)
 :	BaseClass(parent),
-	m_registryView(*registryViewPtr)
+	m_registryView(*registryViewPtr),
+	m_connectFlags(connectFlags)
 {
 	I_ASSERT(registryViewPtr != NULL);
 
@@ -72,6 +74,7 @@ void CComponentConnector::SetSourceComponent(CComponentView* sourceComponent)
 		Adjust();
 	}
 }
+
 
 CComponentView *CComponentConnector::GetDestinationComponent() const
 {
@@ -239,11 +242,11 @@ void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsIte
 
 	painter->setRenderHints(QPainter::Antialiasing, isSelected());
 
-	QColor referenceColor = Qt::darkBlue;
+	QColor referenceColor = ((m_connectFlags & CF_FACTORY) != 0)? Qt::darkYellow: Qt::darkBlue;
 	double referencePenWidth = 0;
 
 	if (m_sourceComponent->isSelected()){
-		referenceColor = QColor(0, 200, 100, 255);
+		referenceColor = ((m_connectFlags & CF_FACTORY) != 0)? QColor(0, 255, 155, 255): QColor(0, 150, 50, 205);
 		referencePenWidth = 2;
 	}
 
@@ -256,11 +259,11 @@ void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsIte
 	QRectF circleRect2(circlePoint.x() - GP_RADIUS2, circlePoint.y() - GP_RADIUS2, GP_RADIUS2 * 2, GP_RADIUS2 * 2);
 	painter->drawArc(circleRect2, (degree + 45) * 16, 270 * 16);
 
-	QColor interfaceColor = Qt::darkBlue;
+	QColor interfaceColor = ((m_connectFlags & CF_FACTORY) != 0)? Qt::darkYellow: Qt::darkBlue;
 	double interfacePenWidth = 0;
 
 	if (m_destComponent->isSelected()){
-		interfaceColor = QColor(0, 200, 100, 255);
+		interfaceColor = ((m_connectFlags & CF_FACTORY) != 0)? QColor(0, 255, 155, 255): QColor(0, 150, 50, 205);
 		interfacePenWidth = 2;
 	}
 
@@ -268,6 +271,11 @@ void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsIte
 	painter->setBrush(interfaceColor);
 	QRectF circleRect(circlePoint.x() - GP_RADIUS, circlePoint.y() - GP_RADIUS, GP_RADIUS * 2, GP_RADIUS * 2);
 	painter->drawEllipse(circleRect);
+
+	if ((m_connectFlags & CF_EMBEDDED) != 0){
+		painter->setPen(QPen(interfaceColor, interfacePenWidth, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
+	}
+
 	painter->drawPolyline(m_connectionLine);
 
 	painter->restore();

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          882
+
         </Number>
         <Description>
           ACF
@@ -216,18 +216,10 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         idoc::IHelpViewer
-      </InterfaceId>
-      <ComponentId>
-        QuickHelpViewer
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         QuickHelpViewer

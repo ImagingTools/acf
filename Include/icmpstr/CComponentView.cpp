@@ -30,6 +30,7 @@ CComponentView::CComponentView(
 			QGraphicsItem* parent) 
 :	QGraphicsRectItem(parent),
 	m_registryView(*registryViewPtr),
+	m_registryObserver(this),
 	m_registry(*registryPtr),
 	m_componentName(componentName),
 	m_componentLabelFontSize(14),
@@ -47,7 +48,7 @@ CComponentView::CComponentView(
 
 	imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(registryPtr);
 	if (registryModelPtr != NULL){
-		registryModelPtr->AttachObserver(this);
+		registryModelPtr->AttachObserver(&m_registryObserver);
 	}
 }
 
@@ -216,7 +217,7 @@ QRect CComponentView::CalculateRect() const
 	int width = margin * 2;
 	int height = margin * 2;
 
-	QString componentPath = QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString(".") + m_elementInfoPtr->address.GetComponentId().c_str();
+	QString componentPath = QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString("/") + m_elementInfoPtr->address.GetComponentId().c_str();
 	width += qMax(fontInfo.width(iqt::GetQString(m_componentName)), fontInfo2.width(componentPath));
 
 	height += fontInfo.height();
@@ -335,7 +336,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*
 
 	painter->drawText(	mainRect, 
 						Qt::AlignLeft | Qt::TextSingleLine, 
-						QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString(".") + m_elementInfoPtr->address.GetComponentId().c_str());
+						QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString("/") + m_elementInfoPtr->address.GetComponentId().c_str());
 	
 	painter->restore();
 }
@@ -381,16 +382,27 @@ QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& v
 }
 
 
+// public methods of embedded class
+
+CComponentView::RegistryObserver::RegistryObserver(CComponentView* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+}
+
+
+// protected methods of embedded class
+
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CComponentView::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CComponentView::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	BaseObserverClass::OnUpdate(updateFlags, updateParamsPtr);
 
 	if ((updateFlags & icomp::IRegistry::CF_COMPONENT_EXPORTED) != 0){
-		CalcExportedInteraces();
+		m_parent.CalcExportedInteraces();
 
-		update();
+		m_parent.update();
 	}
 }
 

@@ -219,6 +219,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CInterfaceManipBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPackageStaticInfo.cpp"
 				>
 			</File>
@@ -281,6 +285,10 @@
 			</File>
 			<File
 				RelativePath="..\CFactoryAttribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CInterfaceManipBase.h"
 				>
 			</File>
 			<File
@@ -377,10 +385,6 @@
 			</File>
 			<File
 				RelativePath="..\TFactoryMember.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TInterfaceManipBase.h"
 				>
 			</File>
 			<File

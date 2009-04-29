@@ -18,6 +18,12 @@ class CComponentConnector: public QGraphicsItem
 public:
 	typedef QGraphicsItem BaseClass;
 
+	enum ConnectFlags
+	{
+		CF_FACTORY = 0x0001,
+		CF_EMBEDDED  =0x0002
+	};
+
 	enum GeometricParams
 	{
 		GP_RADIUS = 4,
@@ -28,7 +34,8 @@ public:
     CComponentConnector(
 				const CRegistryView* registryViewPtr,
 				CComponentView* sourceComponent, 
-				CComponentView* destComponent, 
+				CComponentView* destComponent,
+				int connectFlags = 0,
 				QGraphicsItem* parent = NULL);
     
 	virtual ~CComponentConnector();
@@ -57,6 +64,8 @@ private:
 
     CComponentView* m_sourceComponent;
 	CComponentView* m_destComponent;
+
+	int m_connectFlags;
 
 	QPolygonF m_connectionLine;
 	QPointF m_touchPoint;

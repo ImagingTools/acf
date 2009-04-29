@@ -4,7 +4,7 @@
 
 #include "icomp/IComponentContext.h"
 #include "icomp/TMultiAttributePtr.h"
-#include "icomp/TInterfaceManipBase.h"
+#include "icomp/CInterfaceManipBase.h"
 #include "icomp/CMultiReferenceAttribute.h"
 
 
@@ -17,11 +17,11 @@ namespace icomp
 	Don't use direct this class, use macros \c I_MULTI_REF and \c I_ASSIGN_MULTI_* instead.
 */
 template <class Interface>
-class TMultiReferencePtr: public TMultiAttributePtr<CMultiReferenceAttribute>, public TInterfaceManipBase<Interface>
+class TMultiReferencePtr: public TMultiAttributePtr<CMultiReferenceAttribute>, public CInterfaceManipBase
 {
 public:
 	typedef TMultiAttributePtr<CMultiReferenceAttribute> BaseClass;
-	typedef TInterfaceManipBase<Interface> BaseClass2;
+	typedef CInterfaceManipBase BaseClass2;
 	typedef Interface InterfaceType;
 
 	TMultiReferencePtr();
@@ -126,7 +126,7 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 
 				IComponent* componentPtr = parentPtr->GetSubcomponent(componentId);
 
-				m_components[i] = BaseClass2::ExtractInterface(componentPtr, subId);
+				m_components[i] = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
 			}
 
 			m_isInitialized = retVal;

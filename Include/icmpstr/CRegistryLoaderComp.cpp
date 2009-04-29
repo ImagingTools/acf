@@ -23,49 +23,75 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 {
 	istd::CChangeNotifier notifier(&data);
 
-	int retVal = BaseClass::LoadFromFile(data, filePath);
+	if (!IsOperationSupported(&data, &filePath, QF_NO_SAVING, false)){
+		return StateFailed;
+	}
 
-	if (retVal == StateOk){
-		CRegistryModelComp* registryModelPtr = dynamic_cast<CRegistryModelComp*>(&data);
-		if (registryModelPtr != NULL){
-			iser::CXmlFileReadArchive archive(GetLayoutPath(filePath));
+	CRegistryModelComp* registryModelPtr = dynamic_cast<CRegistryModelComp*>(&data);
+	if (registryModelPtr != NULL){
+		iser::CXmlFileReadArchive registryArchive(filePath);
+		I_ASSERT(!registryArchive.IsStoring());
 
-			if (!registryModelPtr->SerializeComponentsLayout(archive)){
-				SendInfoMessage(
-							MI_CANNOT_READ_LAYOUT,
-							iqt::GetCString(QObject::tr("Layout information cannot be loaded (%1)").
-										arg(iqt::GetQString(filePath))));
-			}
+		if (!registryModelPtr->SerializeRegistry(registryArchive)){
+			OnReadError(registryArchive, data, filePath);
+
+			SendErrorMessage(
+						MI_LOAD_ERROR,
+						iqt::GetCString(QObject::tr("Cannot load file %1").arg(iqt::GetQString(filePath))));
+
+			return StateFailed;
 		}
-	}
-	else{
-		SendErrorMessage(
-					MI_LOAD_ERROR,
-					iqt::GetCString(QObject::tr("Cannot load file %1").
-								arg(iqt::GetQString(filePath))));
+
+		iser::CXmlFileReadArchive layoutArchive(GetLayoutPath(filePath));
+		I_ASSERT(!layoutArchive.IsStoring());
+
+		if (!registryModelPtr->SerializeComponentsLayout(layoutArchive)){
+			SendInfoMessage(
+						MI_CANNOT_READ_LAYOUT,
+						iqt::GetCString(QObject::tr("Layout information cannot be loaded (%1)").
+									arg(iqt::GetQString(filePath))));
+		}
+
+		return StateOk;
 	}
 
-	return retVal;
+	return StateFailed;
 }
 
 
 int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
 {
-	int retVal = BaseClass::SaveToFile(data, filePath);
-
-	if (retVal == StateOk){
-		const CRegistryModelComp* registryModelPtr = dynamic_cast<const CRegistryModelComp*>(&data);
-		if (registryModelPtr != NULL){
-			iser::CXmlFileWriteArchive archive(GetLayoutPath(filePath), GetVersionInfo());
-			I_ASSERT(archive.IsStoring());
-
-			if (!(const_cast<CRegistryModelComp*>(registryModelPtr))->SerializeComponentsLayout(archive)){
-				QMessageBox::information(NULL, QObject::tr("Registry Loader"), QObject::tr("Layout information cannot be stored"));
-			}
-		}
+	if (!IsOperationSupported(&data, &filePath, QF_NO_SAVING, false)){
+		return StateFailed;
 	}
 
-	return retVal;
+	const CRegistryModelComp* registryModelPtr = dynamic_cast<const CRegistryModelComp*>(&data);
+	if (registryModelPtr != NULL){
+		iser::CXmlFileWriteArchive registryArchive(filePath);
+		I_ASSERT(registryArchive.IsStoring());
+
+		if (!const_cast<CRegistryModelComp*>(registryModelPtr)->SerializeRegistry(registryArchive)){
+			SendErrorMessage(
+						MI_LOAD_ERROR,
+						iqt::GetCString(QObject::tr("Cannot store to file %1").arg(iqt::GetQString(filePath))));
+
+			return StateFailed;
+		}
+
+		iser::CXmlFileWriteArchive layoutArchive(GetLayoutPath(filePath));
+		I_ASSERT(layoutArchive.IsStoring());
+
+		if (!const_cast<CRegistryModelComp*>(registryModelPtr)->SerializeComponentsLayout(layoutArchive)){
+			SendInfoMessage(
+						MI_CANNOT_READ_LAYOUT,
+						iqt::GetCString(QObject::tr("Layout information cannot be stored (%1)").
+									arg(iqt::GetQString(filePath))));
+		}
+
+		return StateOk;
+	}
+
+	return StateFailed;
 }
 
 

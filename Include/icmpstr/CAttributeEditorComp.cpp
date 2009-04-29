@@ -79,7 +79,7 @@ const icomp::IAttributeStaticInfo* CAttributeEditorComp::GetStaticAttributeInfo(
 }
 
 	
-QStringList CAttributeEditorComp::GetAvailableComponents(const istd::CClassInfo& interfaceInfo) const
+QStringList CAttributeEditorComp::GetCompatibleComponents(const istd::CClassInfo& interfaceInfo) const
 {
 	IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
 	if (selectionInfoPtr == NULL){
@@ -102,11 +102,11 @@ QStringList CAttributeEditorComp::GetAvailableComponents(const istd::CClassInfo&
 		I_ASSERT(elementInfoPtr->elementPtr.IsValid());
 
 		const icomp::IComponentStaticInfo& staticInfo = elementInfoPtr->elementPtr.GetPtr()->GetComponentStaticInfo();
-		icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = staticInfo.GetInterfaceExtractors();
-		const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
-		if (extractorPtr != NULL){
-			retVal.push_back(iqt::GetQString(*index));
-		}
+
+		retVal += GetCompatibleSubcomponents(
+					*index,
+					staticInfo,
+					interfaceInfo);
 	}
 
 	return retVal;
@@ -221,27 +221,14 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 		InterfacesTree->addTopLevelItem(itemPtr);
 	}
 
-	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();
-
 	const std::string& elementId = selectionInfoPtr->GetSelectedElementName();
 	QTreeWidgetItem* componentRootPtr = new QTreeWidgetItem();
 	componentRootPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
 	componentRootPtr->setText(NameColumn, tr("this"));
 	componentRootPtr->setData(ValueColumn, AttributeId, QString(elementId.c_str()));
 	componentRootPtr->setData(ValueColumn, AttributeMining, ComponentExport);
-	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
-				subIter != subcomponentIds.end();
-				++subIter){
-		QTreeWidgetItem* itemPtr = new QTreeWidgetItem(componentRootPtr);
 
-		QString subcomponentId = subIter->c_str();
-		itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
-		itemPtr->setText(NameColumn, subcomponentId);
-		itemPtr->setData(ValueColumn, AttributeId, QString(elementId.c_str()) + "." + subcomponentId);
-		itemPtr->setData(ValueColumn, AttributeMining, ComponentExport);
-
-		componentRootPtr->addChild(itemPtr);
-	}
+	CreateComponentsTree(elementId, elementStaticInfo, *componentRootPtr);
 
 	ComponentsTree->addTopLevelItem(componentRootPtr);
 }
@@ -531,6 +518,67 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 }
 
 
+void CAttributeEditorComp::CreateComponentsTree(
+			const std::string& elementId,
+			const icomp::IComponentStaticInfo& elementStaticInfo,
+			QTreeWidgetItem& rootItem) const
+{
+	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();
+
+	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
+				subIter != subcomponentIds.end();
+				++subIter){
+		const std::string& subcomponentId = *subIter;
+
+		std::string fullId = elementId + "/" + subcomponentId;
+
+		QTreeWidgetItem* itemPtr = new QTreeWidgetItem();
+
+		itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+		itemPtr->setText(NameColumn, subcomponentId.c_str());
+		itemPtr->setData(ValueColumn, AttributeId, QString(fullId.c_str()));
+		itemPtr->setData(ValueColumn, AttributeMining, ComponentExport);
+
+		const icomp::IComponentStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubcomponentInfo(subcomponentId);
+		if (subcomponentInfoPtr != NULL){
+			CreateComponentsTree(fullId, *subcomponentInfoPtr, *itemPtr);
+		}
+
+		rootItem.addChild(itemPtr);
+	}
+}
+
+
+QStringList CAttributeEditorComp::GetCompatibleSubcomponents(
+			const std::string& elementId,
+			const icomp::IComponentStaticInfo& elementStaticInfo,
+			const istd::CClassInfo& interfaceInfo) const
+{
+	QStringList retVal;
+
+	icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = elementStaticInfo.GetInterfaceExtractors();
+	const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
+	if (extractorPtr != NULL){
+		retVal.push_back(iqt::GetQString(elementId.c_str()));
+	}
+
+	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();
+
+	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
+				subIter != subcomponentIds.end();
+				++subIter){
+		const std::string& subcomponentId = *subIter;
+
+		const icomp::IComponentStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubcomponentInfo(subcomponentId);
+		if (subcomponentInfoPtr != NULL){
+			retVal += GetCompatibleSubcomponents(elementId + "/" + subcomponentId, *subcomponentInfoPtr, interfaceInfo);
+		}
+	}
+
+	return retVal;
+}
+
+
 // reimplemented (CGuiComponentBase)
 
 void CAttributeEditorComp::OnGuiCreated()
@@ -693,7 +741,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 		I_ASSERT(attributeStaticInfoPtr != NULL);
 
 		const istd::CClassInfo& interfaceInfo = attributeStaticInfoPtr->GetRelatedInterfaceType();
-		QStringList availableComponents = m_parent.GetAvailableComponents(interfaceInfo);
+		QStringList availableComponents = m_parent.GetCompatibleComponents(interfaceInfo);
 
 		comboEditor->addItems(availableComponents);
 

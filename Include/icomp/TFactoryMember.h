@@ -6,7 +6,7 @@
 
 #include "icomp/IComponentContext.h"
 #include "icomp/TSingleAttributePtr.h"
-#include "icomp/TInterfaceManipBase.h"
+#include "icomp/CInterfaceManipBase.h"
 #include "icomp/CFactoryAttribute.h"
 
 
@@ -19,11 +19,11 @@ namespace icomp
 	Don't use direct this class, use macros \c I_FACT and \c I_ASSIGN instead.
 */
 template <class Interface>
-class TFactoryMember: public TSingleAttributePtr<CFactoryAttribute>, public TInterfaceManipBase<Interface>
+class TFactoryMember: public TSingleAttributePtr<CFactoryAttribute>, public CInterfaceManipBase
 {
 public:
 	typedef TSingleAttributePtr<CFactoryAttribute> BaseClass;
-	typedef TInterfaceManipBase<Interface> BaseClass2;
+	typedef CInterfaceManipBase BaseClass2;
 	typedef Interface InterfaceType;
 
 	TFactoryMember();
@@ -88,7 +88,7 @@ Interface* TFactoryMember<Interface>::CreateInstance() const
 
 			IComponent* newComponnentPtr = parentPtr->CreateSubcomponent(baseId);
 			if (newComponnentPtr != NULL){
-				Interface* retVal = BaseClass2::ExtractInterface(newComponnentPtr);
+				Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponnentPtr);
 				if (retVal != NULL){
 					return retVal;
 				}

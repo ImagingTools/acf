@@ -66,7 +66,7 @@ public:
 	icomp::IRegistryElement* GetRegistryElement() const;
 	icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const std::string& attributeId) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const std::string& attributeId) const;
-	QStringList GetAvailableComponents(const istd::CClassInfo& interfaceInfo) const;
+	QStringList GetCompatibleComponents(const istd::CClassInfo& interfaceInfo) const;
 
 	// reimplemented (TGuiObserverWrap)
 	virtual void OnGuiModelDetached();
@@ -89,6 +89,15 @@ protected:
 				QTreeWidgetItem& exportItem,
 				bool* hasExportPtr);
 	bool DecodeAttribute(const iser::ISerializable& attribute, QString& text, int& meaning);
+
+	void CreateComponentsTree(
+				const std::string& elementId,
+				const icomp::IComponentStaticInfo& elementStaticInfo,
+				QTreeWidgetItem& rootItem) const;
+	QStringList GetCompatibleSubcomponents(
+				const std::string& elementId,
+				const icomp::IComponentStaticInfo& elementStaticInfo,
+				const istd::CClassInfo& interfaceInfo) const;
 
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();

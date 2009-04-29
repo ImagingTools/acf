@@ -4,7 +4,7 @@
 
 #include "icomp/IComponentContext.h"
 #include "icomp/TSingleAttributePtr.h"
-#include "icomp/TInterfaceManipBase.h"
+#include "icomp/CInterfaceManipBase.h"
 #include "icomp/CReferenceAttribute.h"
 
 
@@ -17,11 +17,11 @@ namespace icomp
 	Don't use direct this class, use macros \c I_REF and \c I_ASSIGN instead.
 */
 template <class Interface>
-class TReferencePtr: public TSingleAttributePtr<CReferenceAttribute>, public TInterfaceManipBase<Interface>
+class TReferencePtr: public TSingleAttributePtr<CReferenceAttribute>, public CInterfaceManipBase
 {
 public:
 	typedef TSingleAttributePtr<CReferenceAttribute> BaseClass;
-	typedef TInterfaceManipBase<Interface> BaseClass2;
+	typedef CInterfaceManipBase BaseClass2;
 	typedef Interface InterfaceType;
 
 	TReferencePtr();
@@ -142,7 +142,7 @@ bool TReferencePtr<Interface>::EnsureInitialized() const
 
 			IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
 
-			m_componentPtr = BaseClass2::ExtractInterface(componentPtr, subId);
+			m_componentPtr = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
 
 			m_isInitialized = true;
 		}

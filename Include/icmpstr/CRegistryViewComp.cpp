@@ -607,7 +607,7 @@ void CRegistryViewComp::UpdateConnectors()
 				if (factoryAttributePtr != NULL){		
 					const std::string& componentId = factoryAttributePtr->GetValue();
 				
-					viewPtr->CreateConnector(*componentItemPtr, componentId);
+					viewPtr->CreateConnector(*componentItemPtr, componentId, true);
 				}
 	
 				const icomp::CMultiFactoryAttribute* multiFactoryAttributePtr = dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr);
@@ -615,7 +615,7 @@ void CRegistryViewComp::UpdateConnectors()
 					for (int referenceIndex = 0; referenceIndex < multiFactoryAttributePtr->GetValuesCount(); referenceIndex++){
 						const std::string& componentId = multiFactoryAttributePtr->GetValueAt(referenceIndex);
 						
-						viewPtr->CreateConnector(*componentItemPtr, componentId);
+						viewPtr->CreateConnector(*componentItemPtr, componentId, true);
 					}
 				}
 			}

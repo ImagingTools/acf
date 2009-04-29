@@ -205,13 +205,19 @@ void CMainWindowGuiComp::OnActiveDocumentChanged()
 		oldModelPtr->DetachObserver(&m_activeUndoManager);
 	}
 
+	bool hasUndoManager = false;
 	idoc::IDocumentManager* documentManagerPtr = GetObjectPtr();
 	if (documentManagerPtr != NULL){
 		imod::IModel* activeUndoManagerModelPtr = dynamic_cast<imod::IModel*>(documentManagerPtr->GetUndoManagerForDocument(m_activeDocumentPtr));
 		if (activeUndoManagerModelPtr != NULL){
 			activeUndoManagerModelPtr->AttachObserver(&m_activeUndoManager);
+
+			hasUndoManager = true;
 		}
 	}
+
+	m_undoCommand.setVisible(hasUndoManager);
+	m_redoCommand.setVisible(hasUndoManager);
 
 	UpdateUndoMenu();
 
@@ -437,17 +443,11 @@ void CMainWindowGuiComp::UpdateFixedCommands()
 
 void CMainWindowGuiComp::UpdateUndoMenu()
 {
-	bool isUndoAvailable = false;
-	bool isRedoAvailable = false;
-
 	imod::IUndoManager* undoManagerPtr = m_activeUndoManager.GetObjectPtr();
 	if (undoManagerPtr != NULL){
-		isUndoAvailable = undoManagerPtr->IsUndoAvailable();
-		isRedoAvailable = undoManagerPtr->IsRedoAvailable();
+		m_undoCommand.SetEnabled(undoManagerPtr->IsUndoAvailable());
+		m_redoCommand.SetEnabled(undoManagerPtr->IsRedoAvailable());
 	}
-
-	m_undoCommand.SetEnabled(isUndoAvailable);
-	m_redoCommand.SetEnabled(isRedoAvailable);
 }
 
 

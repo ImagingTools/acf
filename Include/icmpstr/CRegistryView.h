@@ -30,7 +30,7 @@ public:
 
 	CRegistryView(QWidget* parent = NULL);
 
-	void CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId);
+	void CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId, bool isFactory = false);
 
 	CComponentView* CreateComponentView(
 				icomp::IRegistry* registryPtr,

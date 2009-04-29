@@ -29,7 +29,6 @@ class CRegistryView;
 class CComponentView:
 			public QObject,
 			public QGraphicsRectItem,
-			protected imod::TSingleModelObserverBase<icomp::IRegistry>,
 			virtual public imod::TModelWrap<IElementSelectionInfo>
 {
 	Q_OBJECT
@@ -83,11 +82,23 @@ protected:
 	virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
 
-	// reimplemented (imod::CSingleModelObserverBase)
-	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	class RegistryObserver: public imod::TSingleModelObserverBase<icomp::IRegistry>
+	{
+	public:
+		RegistryObserver(CComponentView* parentPtr);
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CComponentView& m_parent;
+	};
 
 private:
 	const CRegistryView& m_registryView;
+
+	RegistryObserver m_registryObserver;
 
 	icomp::IRegistry& m_registry;
 	std::string m_componentName;
@@ -111,4 +122,5 @@ private:
 
 
 #endif // CComponentView_included
+
 

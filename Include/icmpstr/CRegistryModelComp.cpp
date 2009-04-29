@@ -70,6 +70,12 @@ bool CRegistryModelComp::SerializeComponentsLayout(iser::IArchive& archive)
 }
 
 
+bool CRegistryModelComp::SerializeRegistry(iser::IArchive& archive)
+{
+	return BaseClass2::Serialize(archive);
+}
+
+
 int CRegistryModelComp::CheckAttributeConsistency(const icomp::IRegistryElement& element, const std::string& attributeId)
 {
 	const icomp::IComponentStaticInfo& elementStaticInfo = element.GetComponentStaticInfo();
@@ -208,6 +214,14 @@ CRegistryModelComp::ElementInfo* CRegistryModelComp::InsertElementInfo(
 	}
 
 	return retVal;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CRegistryModelComp::Serialize(iser::IArchive& archive)
+{
+	return BaseClass2::Serialize(archive) && SerializeComponentsLayout(archive);
 }
 
 

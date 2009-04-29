@@ -8,6 +8,8 @@
 #include <QVarLengthArray>
 #include <QDir>
 
+#include "icomp/CInterfaceManipBase.h"
+
 #include "icmpstr/CComponentView.h"
 #include "icmpstr/CComponentConnector.h"
 
@@ -37,15 +39,29 @@ CRegistryView::CRegistryView(QWidget* parent/* = NULL*/)
 }
 
 
-void CRegistryView::CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId)
+void CRegistryView::CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId, bool isFactory)
 {
+	std::string baseId;
+	std::string subId;
+	bool isEmbedded = icomp::CInterfaceManipBase::SplitId(referenceComponentId, baseId, subId);
+
 	QList<QGraphicsItem*> items = m_compositeItem.children();
 	foreach(QGraphicsItem* item, items){
 		CComponentView* referenceViewPtr = dynamic_cast<CComponentView*>(item);
-		if ((referenceViewPtr != NULL) && (referenceViewPtr->GetComponentName() == referenceComponentId)){
-			CComponentConnector* connector = new CComponentConnector(this, 
+		if ((referenceViewPtr != NULL) && (referenceViewPtr->GetComponentName() == baseId)){
+			int connectFlags = 0;
+			if (isEmbedded){
+				connectFlags = connectFlags | CComponentConnector::CF_EMBEDDED;
+			}
+			if (isFactory){
+				connectFlags = connectFlags | CComponentConnector::CF_FACTORY;
+			}
+
+			CComponentConnector* connector = new CComponentConnector(
+						this, 
 						&sourceView, 
 						referenceViewPtr, 
+						connectFlags,
 						&m_compositeItem);
 
 			connector->Adjust();
