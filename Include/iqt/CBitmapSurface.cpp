@@ -1,0 +1,75 @@
+#include "iqt/CBitmapSurface.h"
+
+
+#include <QVector>
+#include <QColor>
+
+#include "istd/TChangeNotifier.h"
+
+
+namespace iqt
+{
+
+
+CBitmapSurface::CBitmapSurface()
+{
+}
+
+
+CBitmapSurface::CBitmapSurface(const CBitmapSurface& bitmap)
+	:BaseClass(bitmap)
+{
+}
+
+
+// reimplemented (istd::IChangeable)
+
+void CBitmapSurface::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+{
+	CreateSurfaceFromBitmap();
+
+	BaseClass::OnEndChanges(changeFlags, changeParamsPtr);
+	BaseClass2::OnEndChanges(changeFlags, changeParamsPtr);
+}
+
+
+// private methods
+
+void CBitmapSurface::CreateSurfaceFromBitmap()
+{
+	I_ASSERT(!GetQImageRef().isNull());
+
+	BaseClass2::Create(GetImageSize().GetX(), GetImageSize().GetY());
+
+	int componentBitsCount = GetComponentBitsCount();
+	int pixelBitsCount = GetPixelBitsCount();
+	int bufferIncrement = 	pixelBitsCount >> 3;
+
+	for (int y = 0; y < GetImageSize().GetY(); y++){
+		I_BYTE* bufferPtr = (I_BYTE*)GetLinePtr(y);
+
+		for (int x = 0; x < GetImageSize().GetX(); x++){
+			double functionValue = 0;
+			if (componentBitsCount == 8){
+				if (pixelBitsCount == 32){
+					functionValue = qGray(*((int*)(bufferPtr)));
+				}
+				else if (pixelBitsCount == 8){
+					functionValue = *bufferPtr;					
+				}
+			}
+
+			ElementIndex index;
+			index.SetAt(0, x);
+			index.SetAt(1, y);
+			BaseClass2::SetSampleValue(index, functionValue);
+
+			bufferPtr += bufferIncrement;
+		}
+	}
+}
+
+
+} // namespace iqt
+
+

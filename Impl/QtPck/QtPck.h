@@ -7,7 +7,7 @@
 
 #include "iqt/CPackagesLoaderComp.h"
 #include "iqt/CBitmap.h"
-#include "iqt/CBitmapFunction.h"
+#include "iqt/CBitmapSurface.h"
 #include "iqt/CBitmapLoaderComp.h"
 #include "iqt/CSettingsSerializerComp.h"
 #include "iqt/CApplicationSettingsProviderComp.h"
@@ -60,7 +60,7 @@ namespace QtPck
 
 typedef iqt::CPackagesLoaderComp PackagesLoader;
 typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmap, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable> > Bitmap;
-typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmapFunction, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable, imath::ISampledFunction2d> > BitmapFunction;
+typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmapSurface, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable, imath::ISampledFunction2d> > BitmapFunction;
 typedef iqt::CBitmapLoaderComp BitmapLoader;
 typedef iqt::CSettingsSerializerComp SettingsSerializer;
 typedef iqt::CApplicationSettingsProviderComp ApplicationSettingsProvider;
