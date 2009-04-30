@@ -54,6 +54,9 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 
 		return StateOk;
 	}
+	else{
+		return BaseClass::LoadFromFile(data, filePath);
+	}
 
 	return StateFailed;
 }
