@@ -276,6 +276,7 @@ void CComponentConnector::paint(QPainter *painter, const QStyleOptionGraphicsIte
 		painter->setPen(QPen(interfaceColor, interfacePenWidth, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
 	}
 
+	painter->setRenderHints(QPainter::Antialiasing, false);
 	painter->drawPolyline(m_connectionLine);
 
 	painter->restore();

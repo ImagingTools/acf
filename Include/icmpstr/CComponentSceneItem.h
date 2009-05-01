@@ -63,7 +63,7 @@ public:
 
 signals:
 	void selectionChanged(CComponentSceneItem*, bool);
-	void positionChanged(CComponentSceneItem*, const QPoint& point);
+	void positionChanged(CComponentSceneItem*, const QPointF& point);
 
 protected:
 	QRect CalculateRect() const;

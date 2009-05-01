@@ -327,6 +327,8 @@ void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, 
 	I_ASSERT(item != NULL);
 
 	if (column == 0){
+		UpdateBlocker blocker(this);
+	
 		const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
 		if (selectionInfoPtr == NULL){
 			return;

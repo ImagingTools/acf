@@ -212,6 +212,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLayoutGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLogGuiComp.cpp"
 				>
 			</File>
@@ -317,6 +321,10 @@
 			</File>
 			<File
 				RelativePath="..\CIconProviderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLayoutGuiComp.h"
 				>
 			</File>
 			<File

@@ -311,7 +311,7 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 	case QGraphicsItem::ItemPositionChange:
 		{
 			QSizeF size = CalculateRect().size();
-			QPoint newPos = value.toPoint();
+			QPointF newPos = value.toPointF();
 /*			double gridSize = m_registryView.GetGrid();
 			newPos.setX(int(::ceil((newPos.x() + size.width() * 0.5) / gridSize + 0.5) * gridSize - size.width() * 0.5));
 			newPos.setY(int(::ceil((newPos.y() + size.height() * 0.5) / gridSize + 0.5) * gridSize - size.height() * 0.5));
@@ -325,7 +325,7 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 				connector->Adjust();
 			}
 
-			emit positionChanged(this, value.toPoint());
+			emit positionChanged(this, value.toPointF());
 
 			break;
 		}

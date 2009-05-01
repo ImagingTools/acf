@@ -83,7 +83,7 @@ public:
 
 protected slots:
 	void OnComponentViewSelected(CComponentSceneItem* view, bool selected);
-	void OnComponentPositionChanged(CComponentSceneItem* view, const QPoint& newPosition);
+	void OnComponentPositionChanged(CComponentSceneItem* view, const QPointF& newPosition);
 	void OnRemoveComponent();
 	void OnRenameComponent();
 	void OnProperties();

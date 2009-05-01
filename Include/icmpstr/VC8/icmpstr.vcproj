@@ -188,15 +188,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentSceneItem.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CNote.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CNoteSceneItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CComponentSceneItem.cpp"
 				>
 			</File>
 			<File
@@ -246,19 +246,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNote.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CNoteSceneItem.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CComponentSceneItem.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CComponentSceneItem.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CNote.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNoteSceneItem.h"
 				>
 			</File>
 			<File

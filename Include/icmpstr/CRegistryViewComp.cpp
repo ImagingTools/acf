@@ -223,14 +223,14 @@ void CRegistryViewComp::UpdateEditor(int updateFlags)
 							SLOT(OnComponentViewSelected(CComponentSceneItem*, bool)));
 
 				connect(	componentViewPtr, 
-							SIGNAL(positionChanged(CComponentSceneItem*, const QPoint&)),
+							SIGNAL(positionChanged(CComponentSceneItem*, const QPointF&)),
 							this,
-							SLOT(OnComponentPositionChanged(CComponentSceneItem*, const QPoint&)));
+							SLOT(OnComponentPositionChanged(CComponentSceneItem*, const QPointF&)));
 				
 				IRegistryEditController* geomeometryProviderPtr = dynamic_cast<IRegistryEditController*>(registryPtr);
 				if (geomeometryProviderPtr != NULL){
 					i2d::CVector2d position = geomeometryProviderPtr->GetComponentPosition(elementId);
-					componentViewPtr->setPos(int(position.GetX() + 0.5), int(position.GetY() + 0.5));
+					componentViewPtr->setPos(position.GetX(), position.GetY());
 				}
 
 				const CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
@@ -398,7 +398,7 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentSceneItem* componentVi
 }
 
 
-void CRegistryViewComp::OnComponentPositionChanged(CComponentSceneItem* view, const QPoint& newPosition)
+void CRegistryViewComp::OnComponentPositionChanged(CComponentSceneItem* view, const QPointF& newPosition)
 {
 	CRegistryView* viewPtr = GetQtWidget();
 	I_ASSERT(viewPtr != NULL);
