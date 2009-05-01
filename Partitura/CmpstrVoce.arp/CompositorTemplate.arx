@@ -1,18 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          904
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="6">
@@ -30,7 +19,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DocumentFactory
@@ -66,6 +55,44 @@
               </IsEnabled>
               <Value>
                 RegistryLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsEditSupported
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsNewSupported
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
               </Value>
             </Data>
           </AttributeInfo>

@@ -105,10 +105,10 @@ const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& eleme
 
 bool CRegistry::RemoveElementInfo(const std::string& elementId)
 {
+	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_REMOVED | CF_MODEL);
+
 	// remove interfaces exported by this component:
 	SetElementInterfaceExported(elementId, istd::CClassInfo(), false);
-
-	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_REMOVED);
 
 	if (m_componentsMap.erase(elementId) <= 0){
 		return false;

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          895
+          904
         </Number>
         <Description>
           ACF
@@ -67,7 +67,7 @@ All rights reserved
                 true
               </IsEnabled>
               <Value>
-                Compositor Maxi
+                ACF Compositor
               </Value>
             </Data>
           </AttributeInfo>
@@ -195,7 +195,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                
+                ACF Product
               </Value>
             </Data>
           </AttributeInfo>

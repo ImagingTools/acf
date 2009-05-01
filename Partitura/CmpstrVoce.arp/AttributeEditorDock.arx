@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          752
+          904
         </Number>
         <Description>
           ACF
@@ -46,7 +46,7 @@
                 true
               </IsEnabled>
               <Value>
-                Attributes
+                Selected component
               </Value>
             </Data>
           </AttributeInfo>
@@ -151,4 +151,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    
+  </Description>
+  <Keywords>
+    
+  </Keywords>
 </Acf>
