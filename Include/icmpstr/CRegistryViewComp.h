@@ -34,7 +34,8 @@ class CRegistryViewComp:
 			public iqtgui::TGuiObserverWrap<
 						iqtgui::TGuiComponentBase<CRegistryView>, 
 						imod::TSingleModelObserverBase<icomp::IRegistry> >,
-			public idoc::ICommandsProvider
+			virtual public imod::TModelWrap<IElementSelectionInfo>,
+			virtual public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
@@ -60,6 +61,13 @@ public:
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
 
+	// reimplemented (icmpstr::IElementSelectionInfo)
+	virtual icomp::IRegistry* GetSelectedRegistry() const;
+	virtual iser::ISerializable* GetSelectedElement() const;
+	virtual const std::string& GetSelectedElementName() const;
+	virtual QIcon GetSelectedElementIcon() const;
+	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
+
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
@@ -68,6 +76,10 @@ public:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 	virtual void OnRetranslate();
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 protected slots:
 	void OnComponentViewSelected(CComponentSceneItem* view, bool selected);

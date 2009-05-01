@@ -112,6 +112,80 @@ const idoc::IHierarchicalCommand* CRegistryViewComp::GetCommands() const
 }
 
 
+// reimplemented (icmpstr::IElementSelectionInfo)
+
+icomp::IRegistry* CRegistryViewComp::GetSelectedRegistry() const
+{
+	return GetObjectPtr();
+}
+
+
+iser::ISerializable* CRegistryViewComp::GetSelectedElement() const
+{
+	CRegistryView* viewPtr = GetQtWidget();
+	if (viewPtr == NULL){
+		return NULL;
+	}
+
+	CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
+	if (selectedComponentPtr == NULL){
+		return NULL;
+	}
+
+	const icomp::IRegistry::ElementInfo& elementInfo = selectedComponentPtr->GetElementInfo();
+
+	return elementInfo.elementPtr.GetPtr();
+}
+
+
+const std::string& CRegistryViewComp::GetSelectedElementName() const
+{
+	static std::string empty;
+
+	CRegistryView* viewPtr = GetQtWidget();
+	if (viewPtr == NULL){
+		return empty;
+	}
+
+	CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
+	if (selectedComponentPtr == NULL){
+		return empty;
+	}
+
+	return selectedComponentPtr->GetComponentName();
+}
+
+
+QIcon CRegistryViewComp::GetSelectedElementIcon() const
+{
+	CRegistryView* viewPtr = GetQtWidget();
+	const icomp::CComponentAddress* addressPtr = GetSelectedElementAddress();
+	if ((viewPtr == NULL) || (addressPtr == NULL)){
+		return QIcon();
+	}
+
+	return viewPtr->GetIcon(*addressPtr);
+}
+
+
+const icomp::CComponentAddress* CRegistryViewComp::GetSelectedElementAddress() const
+{
+	CRegistryView* viewPtr = GetQtWidget();
+	if (viewPtr == NULL){
+		return NULL;
+	}
+
+	CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
+	if (selectedComponentPtr == NULL){
+		return NULL;
+	}
+
+	const icomp::IRegistry::ElementInfo& elementInfo = selectedComponentPtr->GetElementInfo();
+
+	return &elementInfo.address;
+}
+
+
 // reimplemented (imod::TModelEditorBase)
 
 void CRegistryViewComp::UpdateEditor(int updateFlags)
@@ -143,12 +217,12 @@ void CRegistryViewComp::UpdateEditor(int updateFlags)
 				CComponentSceneItem* componentViewPtr = viewPtr->CreateComponentView(registryPtr, elementInfoPtr, elementId);
 				I_ASSERT(componentViewPtr != NULL);
 
-				connect(componentViewPtr, 
+				connect(	componentViewPtr, 
 							SIGNAL(selectionChanged(CComponentSceneItem*, bool)),
 							this,
 							SLOT(OnComponentViewSelected(CComponentSceneItem*, bool)));
 
-				connect(componentViewPtr, 
+				connect(	componentViewPtr, 
 							SIGNAL(positionChanged(CComponentSceneItem*, const QPoint&)),
 							this,
 							SLOT(OnComponentPositionChanged(CComponentSceneItem*, const QPoint&)));
@@ -264,6 +338,34 @@ void CRegistryViewComp::OnRetranslate()
 }
 
 
+// reimplemented (icomp::IComponent)
+
+void CRegistryViewComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
+		imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
+		if (observerPtr != NULL){
+			AttachObserver(observerPtr);
+		}
+	}
+}
+
+
+void CRegistryViewComp::OnComponentDestroyed()
+{
+	for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
+		imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
+		if (observerPtr != NULL){
+			DetachObserver(observerPtr);
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 // protected slots
 
 void CRegistryViewComp::OnComponentViewSelected(CComponentSceneItem* componentViewPtr, bool isSelected)
@@ -274,29 +376,12 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentSceneItem* componentVi
 		return;
 	}
 
-	CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
-
-	// detach last model from its observers:
-	if (selectedComponentPtr != NULL){
-		for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
-			imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
-			if (observerPtr != NULL){
-				selectedComponentPtr->DetachObserver(observerPtr);
-			}
-		}
-	}
+	istd::CChangeNotifier notifier(this);
 
 	if (isSelected){
 		viewPtr->SetSelectedComponent(componentViewPtr);
 
-		if (componentViewPtr != NULL && m_registryElementObserversCompPtr.IsValid()){
-			for (int observerIndex = 0; observerIndex < m_registryElementObserversCompPtr.GetCount(); observerIndex++){
-				imod::IObserver* observerPtr = m_registryElementObserversCompPtr[observerIndex];
-				if (observerPtr != NULL){
-					componentViewPtr->AttachObserver(observerPtr);
-				}
-			}
-
+		if (componentViewPtr != NULL){
 			const icomp::IRegistry::ElementInfo& elementInfo = componentViewPtr->GetElementInfo();
 
 			if (m_quickHelpViewerCompPtr.IsValid()){

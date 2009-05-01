@@ -151,11 +151,12 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	}
 
 	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
-
-	MainTab->setVisible(selectionInfoPtr != NULL);
-
 	const icomp::IRegistryElement* elementPtr = GetRegistryElement();
-	if ((selectionInfoPtr == NULL) || (elementPtr == NULL)){
+
+	bool isSelected = ((selectionInfoPtr != NULL) && (elementPtr != NULL));
+	MainTab->setVisible(isSelected);
+
+	if (!isSelected){
 		return;
 	}
 

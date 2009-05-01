@@ -28,8 +28,7 @@ class CRegistryView;
 
 class CComponentSceneItem:
 			public QObject,
-			public QGraphicsRectItem,
-			virtual public imod::TModelWrap<IElementSelectionInfo>
+			public QGraphicsRectItem
 {
 	Q_OBJECT
 
@@ -61,13 +60,6 @@ public:
 	void RemoveAllConnectors();
 
 	QRectF GetInnerRect() const;
-
-	// reimplemented (icmpstr::IElementSelectionInfo)
-	virtual icomp::IRegistry* GetSelectedRegistry() const;
-	virtual iser::ISerializable* GetSelectedElement() const;
-	virtual const std::string& GetSelectedElementName() const;
-	virtual QIcon GetSelectedElementIcon() const;
-	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
 
 signals:
 	void selectionChanged(CComponentSceneItem*, bool);

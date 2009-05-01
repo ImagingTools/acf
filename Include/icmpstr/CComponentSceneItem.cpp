@@ -153,50 +153,6 @@ QRectF CComponentSceneItem::GetInnerRect()const
 }
 
 
-// reimplemented (icmpstr::IElementSelectionInfo)
-
-icomp::IRegistry* CComponentSceneItem::GetSelectedRegistry() const
-{
-	return &m_registry;
-}
-
-
-iser::ISerializable* CComponentSceneItem::GetSelectedElement() const
-{
-	if (m_elementInfoPtr != NULL){
-		return m_elementInfoPtr->elementPtr.GetPtr();
-	}
-
-	return NULL;
-}
-
-
-const std::string& CComponentSceneItem::GetSelectedElementName() const
-{
-	return m_componentName;
-}
-
-
-QIcon CComponentSceneItem::GetSelectedElementIcon() const
-{
-	if (m_elementInfoPtr != NULL){
-		return m_registryView.GetIcon(m_elementInfoPtr->address);
-	}
-
-	return QIcon();
-}
-
-
-const icomp::CComponentAddress* CComponentSceneItem::GetSelectedElementAddress() const
-{
-	if (m_elementInfoPtr != NULL){
-		return &m_elementInfoPtr->address;
-	}
-
-	return NULL;
-}
-
-
 // protected members
  
 QRect CComponentSceneItem::CalculateRect() const
