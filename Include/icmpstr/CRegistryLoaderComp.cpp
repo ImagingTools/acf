@@ -98,13 +98,15 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 }
 
 
-bool CRegistryLoaderComp::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
+bool CRegistryLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
-	if (!doAppend){
-		result.clear();
-	}
+	if (!BaseClass::GetFileExtensions(result, flags, doAppend)){
+		if (!doAppend){
+			result.clear();
+		}
 
-	result.push_back("arx");
+		result.push_back("arx");
+	}
 
 	return true;
 }

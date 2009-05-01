@@ -140,9 +140,9 @@ void CSerializedUndoManager::AfterUpdate(imod::IModel* modelPtr, int updateFlags
 				m_redoList.clear();
 			}
 		}
-	}
 
-	m_beginStateArchivePtr.Reset();
+		m_beginStateArchivePtr.Reset();
+	}
 
 	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }

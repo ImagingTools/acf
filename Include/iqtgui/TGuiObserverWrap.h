@@ -72,7 +72,7 @@ protected:
 	virtual void OnGuiDestroyed();
 
 	// pseudo-reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// pseudo-reimplemented (imod::IModelEditor)
 	virtual bool IsReadOnly() const;

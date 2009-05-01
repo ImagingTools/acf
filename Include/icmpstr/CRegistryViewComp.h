@@ -70,8 +70,8 @@ public:
 	virtual void OnRetranslate();
 
 protected slots:
-	void OnComponentViewSelected(CComponentView* view, bool selected);
-	void OnComponentPositionChanged(CComponentView* view, const QPoint& newPosition);
+	void OnComponentViewSelected(CComponentSceneItem* view, bool selected);
+	void OnComponentPositionChanged(CComponentSceneItem* view, const QPoint& newPosition);
 	void OnRemoveComponent();
 	void OnRenameComponent();
 	void OnProperties();
@@ -84,9 +84,6 @@ protected slots:
 	void UpdateConnectors();
 	void OnExecutionTimerTick();
 
-private:
-	void ConnectReferences(const QString& componentRole);
-
 protected:
 	enum GroupId
 	{
@@ -95,7 +92,13 @@ protected:
 		GI_PREVIEW
 	};
 
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
+
 private:
+	void ConnectReferences(const QString& componentRole);
+
 	I_MULTIREF(imod::IObserver, m_registryElementObserversCompPtr);
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);

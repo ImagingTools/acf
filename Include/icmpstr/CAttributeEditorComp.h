@@ -63,6 +63,7 @@ public:
 public:
 	CAttributeEditorComp();
 
+	icomp::IRegistry* GetRegistry() const;
 	icomp::IRegistryElement* GetRegistryElement() const;
 	icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const std::string& attributeId) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const std::string& attributeId) const;

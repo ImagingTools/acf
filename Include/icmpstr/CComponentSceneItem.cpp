@@ -1,4 +1,4 @@
-#include "icmpstr/CComponentView.h"
+#include "icmpstr/CComponentSceneItem.h"
 
 
 // Qt includes
@@ -22,7 +22,7 @@ namespace icmpstr
 {
 
 
-CComponentView::CComponentView(
+CComponentSceneItem::CComponentSceneItem(
 			const CRegistryView* registryViewPtr,
 			icomp::IRegistry* registryPtr,
 			const icomp::IRegistry::ElementInfo* elementInfoPtr, 
@@ -53,7 +53,7 @@ CComponentView::CComponentView(
 }
 
 
-CComponentView::~CComponentView()
+CComponentSceneItem::~CComponentSceneItem()
 {
 	foreach(CComponentConnector* connector, m_connectors){
 		connector->SetSourceComponent(NULL);
@@ -63,7 +63,7 @@ CComponentView::~CComponentView()
 }
 
 
-const icomp::IRegistry::ElementInfo& CComponentView::GetElementInfo() const
+const icomp::IRegistry::ElementInfo& CComponentSceneItem::GetElementInfo() const
 {
 	I_ASSERT(m_elementInfoPtr != NULL);
 
@@ -71,7 +71,7 @@ const icomp::IRegistry::ElementInfo& CComponentView::GetElementInfo() const
 }
 
 
-void CComponentView::SetElementInfo(const icomp::IRegistry::ElementInfo* elementInfoPtr)
+void CComponentSceneItem::SetElementInfo(const icomp::IRegistry::ElementInfo* elementInfoPtr)
 {
 	I_ASSERT(elementInfoPtr != NULL);
 
@@ -88,13 +88,13 @@ void CComponentView::SetElementInfo(const icomp::IRegistry::ElementInfo* element
 }
 
 
-const std::string& CComponentView::GetComponentName() const
+const std::string& CComponentSceneItem::GetComponentName() const
 {
 	return m_componentName;
 }
 
 
-void CComponentView::AddConnector(CComponentConnector* connector)
+void CComponentSceneItem::AddConnector(CComponentConnector* connector)
 {
 	if (connector != NULL){
 		m_connectors.push_back(connector);
@@ -105,13 +105,13 @@ void CComponentView::AddConnector(CComponentConnector* connector)
 }
 
 
-void CComponentView::RemoveConnector(const CComponentConnector* connector)
+void CComponentSceneItem::RemoveConnector(const CComponentConnector* connector)
 {
 	QList<CComponentConnector*>::iterator found = qFind(m_connectors.begin(), m_connectors.end(), connector);
 	if (found != m_connectors.end()){
 		CComponentConnector* connector = *found;
-		CComponentView* view1 =  connector->GetSourceComponent();
-		CComponentView* view2 = connector->GetDestinationComponent();
+		CComponentSceneItem* view1 =  connector->GetSourceComponent();
+		CComponentSceneItem* view2 = connector->GetDestinationComponent();
 		if (view1 == this){
 			connector->SetSourceComponent(NULL);
 		}
@@ -123,13 +123,13 @@ void CComponentView::RemoveConnector(const CComponentConnector* connector)
 }
 
 
-void CComponentView::RemoveAllConnectors()
+void CComponentSceneItem::RemoveAllConnectors()
 {
 	foreach (CComponentConnector* connectorPtr, m_connectors){
 		I_ASSERT(connectorPtr != NULL);
 
-		CComponentView* view1 =  connectorPtr->GetSourceComponent();
-		CComponentView* view2 = connectorPtr->GetDestinationComponent();
+		CComponentSceneItem* view1 =  connectorPtr->GetSourceComponent();
+		CComponentSceneItem* view2 = connectorPtr->GetDestinationComponent();
 		if (view1 == this){
 			connectorPtr->SetSourceComponent(NULL);
 		}
@@ -144,7 +144,7 @@ void CComponentView::RemoveAllConnectors()
 }
 
 
-QRectF CComponentView::GetInnerRect()const
+QRectF CComponentSceneItem::GetInnerRect()const
 {
 	QRectF mainRect = rect();
 	mainRect.adjust(0,0,-10,-10);
@@ -155,13 +155,13 @@ QRectF CComponentView::GetInnerRect()const
 
 // reimplemented (icmpstr::IElementSelectionInfo)
 
-icomp::IRegistry* CComponentView::GetSelectedRegistry() const
+icomp::IRegistry* CComponentSceneItem::GetSelectedRegistry() const
 {
 	return &m_registry;
 }
 
 
-iser::ISerializable* CComponentView::GetSelectedElement() const
+iser::ISerializable* CComponentSceneItem::GetSelectedElement() const
 {
 	if (m_elementInfoPtr != NULL){
 		return m_elementInfoPtr->elementPtr.GetPtr();
@@ -171,13 +171,13 @@ iser::ISerializable* CComponentView::GetSelectedElement() const
 }
 
 
-const std::string& CComponentView::GetSelectedElementName() const
+const std::string& CComponentSceneItem::GetSelectedElementName() const
 {
 	return m_componentName;
 }
 
 
-QIcon CComponentView::GetSelectedElementIcon() const
+QIcon CComponentSceneItem::GetSelectedElementIcon() const
 {
 	if (m_elementInfoPtr != NULL){
 		return m_registryView.GetIcon(m_elementInfoPtr->address);
@@ -187,7 +187,7 @@ QIcon CComponentView::GetSelectedElementIcon() const
 }
 
 
-const icomp::CComponentAddress* CComponentView::GetSelectedElementAddress() const
+const icomp::CComponentAddress* CComponentSceneItem::GetSelectedElementAddress() const
 {
 	if (m_elementInfoPtr != NULL){
 		return &m_elementInfoPtr->address;
@@ -199,7 +199,7 @@ const icomp::CComponentAddress* CComponentView::GetSelectedElementAddress() cons
 
 // protected members
  
-QRect CComponentView::CalculateRect() const
+QRect CComponentSceneItem::CalculateRect() const
 {
 	I_ASSERT(m_elementInfoPtr != NULL);
 
@@ -244,7 +244,7 @@ QRect CComponentView::CalculateRect() const
 }
 
 
-void CComponentView::CalcExportedInteraces()
+void CComponentSceneItem::CalcExportedInteraces()
 {
 	m_exportedInterfacesList.clear();
 
@@ -261,7 +261,7 @@ void CComponentView::CalcExportedInteraces()
 
 // reimplemented (QGraphicsRectItem)
 
-void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
+void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
 {
 	I_ASSERT(m_elementInfoPtr != NULL);
 
@@ -342,7 +342,7 @@ void CComponentView::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*
 }
 
 
-QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& value)
+QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVariant& value)
 {
 	switch(change){
 	case QGraphicsItem::ItemSelectedChange:
@@ -384,7 +384,7 @@ QVariant CComponentView::itemChange(GraphicsItemChange change, const QVariant& v
 
 // public methods of embedded class
 
-CComponentView::RegistryObserver::RegistryObserver(CComponentView* parentPtr)
+CComponentSceneItem::RegistryObserver::RegistryObserver(CComponentSceneItem* parentPtr)
 :	m_parent(*parentPtr)
 {
 	I_ASSERT(parentPtr != NULL);
@@ -395,7 +395,7 @@ CComponentView::RegistryObserver::RegistryObserver(CComponentView* parentPtr)
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CComponentView::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CComponentSceneItem::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	BaseObserverClass::OnUpdate(updateFlags, updateParamsPtr);
 

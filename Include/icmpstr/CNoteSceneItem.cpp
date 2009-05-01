@@ -1,4 +1,4 @@
-#include "icmpstr/CComponentNoteView.h"
+#include "icmpstr/CNoteSceneItem.h"
 
 
 // STL includes
@@ -9,7 +9,7 @@
 
 #include "i2d/CVector2d.h"
 
-#include "icmpstr/CComponentView.h"
+#include "icmpstr/CComponentSceneItem.h"
 #include "icmpstr/CRegistryViewComp.h"
 
 
@@ -19,9 +19,9 @@ namespace icmpstr
 
 // public methods
 
-CComponentNoteView::CComponentNoteView(
+CNoteSceneItem::CNoteSceneItem(
 			const CRegistryViewComp* registryViewPtr,
-			CComponentView* parentComponent, 
+			CComponentSceneItem* parentComponent, 
 			QGraphicsItem *parent, 
 			QGraphicsScene *scene)
 :	BaseClass(parent, scene),
@@ -39,18 +39,18 @@ CComponentNoteView::CComponentNoteView(
 }
 
 
-CComponentNoteView::~CComponentNoteView()
+CNoteSceneItem::~CNoteSceneItem()
 {
 }
 
 
-CComponentView *CComponentNoteView::GetParentComponent() const
+CComponentSceneItem *CNoteSceneItem::GetParentComponent() const
 {
 	return m_parentComponent;
 }
 
 
-void CComponentNoteView::SetParentComponent(CComponentView* parentComponent)
+void CNoteSceneItem::SetParentComponent(CComponentSceneItem* parentComponent)
 {
 	m_parentComponent = parentComponent;
 	if (parentComponent != NULL){
@@ -63,7 +63,7 @@ void CComponentNoteView::SetParentComponent(CComponentView* parentComponent)
 }
 
 
-void CComponentNoteView::Adjust()
+void CNoteSceneItem::Adjust()
 {
 	if (m_parentComponent == NULL){
 		return;
@@ -77,13 +77,13 @@ void CComponentNoteView::Adjust()
 
 // reimplemented (QGraphicsItem)
 
-int CComponentNoteView::type() const
+int CNoteSceneItem::type() const
 { 
 	return Type; 
 }
 
 
-QPainterPath CComponentNoteView::shape() const
+QPainterPath CNoteSceneItem::shape() const
 {
 	QPainterPath path;
 	path.addRect(boundingRect());
@@ -96,7 +96,7 @@ QPainterPath CComponentNoteView::shape() const
 
 // reimplemented (QGraphicsItem)
 
-QRectF CComponentNoteView::boundingRect() const
+QRectF CNoteSceneItem::boundingRect() const
 {
 	if ((m_parentComponent == NULL) || (m_connectionLine.size() < 2)){
 		return QRectF();
@@ -110,7 +110,7 @@ QRectF CComponentNoteView::boundingRect() const
 }
 
 
-void CComponentNoteView::paint(QPainter* /*painter*/, const QStyleOptionGraphicsItem*, QWidget*)
+void CNoteSceneItem::paint(QPainter* /*painter*/, const QStyleOptionGraphicsItem*, QWidget*)
 {
 }
 

@@ -34,7 +34,7 @@ public:
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
 	void SetLookupTableToImage(QImage& image, const icmm::IColorTransformation& colorTransformation);

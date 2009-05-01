@@ -46,12 +46,12 @@ public:
 	/**
 		This function will be called before update of the observer contents occures.
 	*/
-	virtual void BeforeUpdate(IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL) = 0;
+	virtual void BeforeUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr) = 0;
 
 	/**
 		This function will be called after update of the observer contents occures.
 	*/
-	virtual void AfterUpdate(IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL) = 0;
+	virtual void AfterUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr) = 0;
 };
 
 

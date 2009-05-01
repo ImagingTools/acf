@@ -318,6 +318,8 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 		}
 	}
 	else{
+		m_componentsMap.clear();
+
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 
@@ -403,6 +405,8 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 		}
 	}
 	else{
+		m_exportedInterfacesMap.clear();
+
 		I_ASSERT(m_componentsFactoryPtr != NULL);
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(interfaceTag);
@@ -463,6 +467,8 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 		}
 	}
 	else{
+		m_exportedComponentsMap.clear();
+
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(componentTag);
 

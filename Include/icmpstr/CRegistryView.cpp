@@ -10,7 +10,7 @@
 
 #include "icomp/CInterfaceManipBase.h"
 
-#include "icmpstr/CComponentView.h"
+#include "icmpstr/CComponentSceneItem.h"
 #include "icmpstr/CComponentConnector.h"
 
 
@@ -21,7 +21,9 @@ namespace icmpstr
 CRegistryView::CRegistryView(QWidget* parent/* = NULL*/)
 :	BaseClass(parent),
 	m_selectedComponentPtr(NULL),
-	m_packagesManagerPtr(NULL)
+	m_registryPtr(NULL),
+	m_packagesManagerPtr(NULL),
+	m_mousePressingNotifier(NULL)
 {
 	m_scenePtr = new CRegistryScene(*this);
 
@@ -39,7 +41,7 @@ CRegistryView::CRegistryView(QWidget* parent/* = NULL*/)
 }
 
 
-void CRegistryView::CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId, bool isFactory)
+void CRegistryView::CreateConnector(CComponentSceneItem& sourceView, const std::string& referenceComponentId, bool isFactory)
 {
 	std::string baseId;
 	std::string subId;
@@ -47,7 +49,7 @@ void CRegistryView::CreateConnector(CComponentView& sourceView, const std::strin
 
 	QList<QGraphicsItem*> items = m_compositeItem.children();
 	foreach(QGraphicsItem* item, items){
-		CComponentView* referenceViewPtr = dynamic_cast<CComponentView*>(item);
+		CComponentSceneItem* referenceViewPtr = dynamic_cast<CComponentSceneItem*>(item);
 		if ((referenceViewPtr != NULL) && (referenceViewPtr->GetComponentName() == baseId)){
 			int connectFlags = 0;
 			if (isEmbedded){
@@ -70,12 +72,12 @@ void CRegistryView::CreateConnector(CComponentView& sourceView, const std::strin
 }
 
 
-CComponentView* CRegistryView::CreateComponentView(
+CComponentSceneItem* CRegistryView::CreateComponentView(
 			icomp::IRegistry* registryPtr,
 			const icomp::IRegistry::ElementInfo* elementInfoPtr,
 			const std::string& role)
 {
-	CComponentView* componentViewPtr = new CComponentView(
+	CComponentSceneItem* componentViewPtr = new CComponentSceneItem(
 				this, 
 				registryPtr, 
 				elementInfoPtr, 
@@ -92,13 +94,13 @@ CComponentView* CRegistryView::CreateComponentView(
 }
 
 
-CComponentView* CRegistryView::GetSelectedComponent() const
+CComponentSceneItem* CRegistryView::GetSelectedComponent() const
 {
 	return m_selectedComponentPtr; 
 }
 
 
-void CRegistryView::SetSelectedComponent(CComponentView* selectedComponentPtr)
+void CRegistryView::SetSelectedComponent(CComponentSceneItem* selectedComponentPtr)
 {
 	m_selectedComponentPtr = selectedComponentPtr; 
 }
@@ -119,7 +121,7 @@ void CRegistryView::RemoveAllConnectors()
 {
 	QList<QGraphicsItem*> items = m_compositeItem.children();
 	foreach(QGraphicsItem* item, items){
-		CComponentView* componentViewPtr = dynamic_cast<CComponentView*>(item);
+		CComponentSceneItem* componentViewPtr = dynamic_cast<CComponentSceneItem*>(item);
 		if (componentViewPtr != NULL){
 			componentViewPtr->RemoveAllConnectors();
 		}
@@ -147,7 +149,7 @@ CRegistryView::ComponentViewList CRegistryView::GetComponentViews() const
 
 	QList<QGraphicsItem*> items = m_compositeItem.children();
 	foreach(QGraphicsItem* item, items){
-		CComponentView* componentViewPtr = dynamic_cast<CComponentView*>(item);
+		CComponentSceneItem* componentViewPtr = dynamic_cast<CComponentSceneItem*>(item);
 		if (componentViewPtr != NULL){
 			componentList.append(componentViewPtr);
 		}
@@ -161,7 +163,7 @@ void CRegistryView::SetCenterOn(const QString& componentName)
 {
 	QList<QGraphicsItem*> items = m_scenePtr->items();
 	foreach(QGraphicsItem* item, items){
-		CComponentView* itemViewPtr = dynamic_cast<CComponentView*>(item);
+		CComponentSceneItem* itemViewPtr = dynamic_cast<CComponentSceneItem*>(item);
 		if (itemViewPtr != NULL){
 			if (componentName == itemViewPtr->GetComponentName().c_str()){
 				centerOn(itemViewPtr);
@@ -240,6 +242,15 @@ QIcon CRegistryView::GetIcon(const icomp::CComponentAddress& address) const
 }
 
 
+void CRegistryView::Init(const icomp::IRegistriesManager* managerPtr, icomp::IRegistry* registryPtr)
+{
+	m_mousePressingNotifier.Reset();
+
+	m_registryPtr = registryPtr;
+	m_packagesManagerPtr = managerPtr;
+}
+
+
 // protected methods
 
 // reimplemented (QWidget)
@@ -307,7 +318,7 @@ void CRegistryView::CCompositeItem::paint(QPainter* painter, const QStyleOptionG
 // public methods of embedded class CRegistryScene
 
 CRegistryView::CRegistryScene::CRegistryScene(CRegistryView& parent)
-	:m_parent(parent)
+:	m_parent(parent)
 {
 }
 
@@ -385,6 +396,24 @@ void CRegistryView::CRegistryScene::dropEvent(QGraphicsSceneDragDropEvent* event
 
 void CRegistryView::CRegistryScene::dragMoveEvent(QGraphicsSceneDragDropEvent* /*eventPtr*/)
 {
+}
+
+
+// reimplemented (QGraphicsScene)
+
+void CRegistryView::CRegistryScene::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	BaseClass::mousePressEvent(mouseEvent);
+
+	m_parent.m_mousePressingNotifier.SetPtr(m_parent.m_registryPtr);
+}
+
+
+void CRegistryView::CRegistryScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	BaseClass::mouseReleaseEvent(mouseEvent);
+
+	m_parent.m_mousePressingNotifier.Reset();
 }
 
 

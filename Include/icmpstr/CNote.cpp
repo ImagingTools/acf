@@ -1,4 +1,4 @@
-#include "icmpstr/CComponentNote.h"
+#include "icmpstr/CNote.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -12,13 +12,13 @@ namespace icmpstr
 
 // public methods
 
-void CComponentNote::SetText(const istd::CString& noteText)
+void CNote::SetText(const istd::CString& noteText)
 {
 	m_noteText = noteText;
 }
 
 
-void CComponentNote::SetPosition(const i2d::CVector2d& position)
+void CNote::SetPosition(const i2d::CVector2d& position)
 {
 	m_position = position;
 }
@@ -26,13 +26,13 @@ void CComponentNote::SetPosition(const i2d::CVector2d& position)
 
 // reimplemented (IComponentNote)
 
-istd::CString CComponentNote::GetText() const
+istd::CString CNote::GetText() const
 {
 	return m_noteText;
 }
 
 
-i2d::CVector2d CComponentNote::GetPosition() const
+i2d::CVector2d CNote::GetPosition() const
 {
 	return m_position;
 }
@@ -40,7 +40,7 @@ i2d::CVector2d CComponentNote::GetPosition() const
 
 // reimplemented (iser::ISerializable)
 
-bool CComponentNote::Serialize(iser::IArchive& archive)
+bool CNote::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag textTag("NoteText", "Note text");
 	static iser::CArchiveTag positionTag("NotePosition", "Note position");

@@ -11,7 +11,7 @@
 
 #include "iqt/iqt.h"
 
-#include "icmpstr/CComponentView.h"
+#include "icmpstr/CComponentSceneItem.h"
 #include "icmpstr/CRegistryView.h"
 
 
@@ -23,8 +23,8 @@ namespace icmpstr
 
 CComponentConnector::CComponentConnector(
 			const CRegistryView* registryViewPtr,
-			CComponentView* sourceComponent, 
-			CComponentView* destComponent,
+			CComponentSceneItem* sourceComponent, 
+			CComponentSceneItem* destComponent,
 			int connectFlags,
 			QGraphicsItem* parent)
 :	BaseClass(parent),
@@ -59,13 +59,13 @@ CComponentConnector::~CComponentConnector()
 }
 
 
-CComponentView *CComponentConnector::GetSourceComponent() const
+CComponentSceneItem *CComponentConnector::GetSourceComponent() const
 {
 	return m_sourceComponent;
 }
 
 
-void CComponentConnector::SetSourceComponent(CComponentView* sourceComponent)
+void CComponentConnector::SetSourceComponent(CComponentSceneItem* sourceComponent)
 {
 	m_sourceComponent = sourceComponent;
 	if (sourceComponent != NULL){
@@ -76,13 +76,13 @@ void CComponentConnector::SetSourceComponent(CComponentView* sourceComponent)
 }
 
 
-CComponentView *CComponentConnector::GetDestinationComponent() const
+CComponentSceneItem *CComponentConnector::GetDestinationComponent() const
 {
 	return m_destComponent;
 }
 
 
-void CComponentConnector::SetDestinationComponent(CComponentView* destComponent)
+void CComponentConnector::SetDestinationComponent(CComponentSceneItem* destComponent)
 {
 	m_destComponent = destComponent;
 	if (destComponent != NULL){

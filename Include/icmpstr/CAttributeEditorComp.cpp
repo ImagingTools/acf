@@ -35,6 +35,17 @@ CAttributeEditorComp::CAttributeEditorComp()
 }
 
 
+icomp::IRegistry* CAttributeEditorComp::GetRegistry() const
+{
+	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	if (selectionInfoPtr == NULL){
+		return NULL;
+	}
+
+	return selectionInfoPtr->GetSelectedRegistry();
+}
+
+
 icomp::IRegistryElement* CAttributeEditorComp::GetRegistryElement() const
 {
 	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
@@ -275,7 +286,8 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 
 		bool isEnabled = (item->checkState(NameColumn) == Qt::Checked);
 
-		istd::CChangeNotifier notifier(elementPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier registryNotifier(GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier elementNotifier(elementPtr, istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
 
 		std::string attributeId = item->text(NameColumn).toStdString();
 		const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
@@ -313,16 +325,19 @@ void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, 
 {
 	I_ASSERT(item != NULL);
 
-	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
-	if (selectionInfoPtr == NULL){
-		return;
-	}
-	icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
-	if (registryPtr == NULL){
-		return;
-	}
-
 	if (column == 0){
+		const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+		if (selectionInfoPtr == NULL){
+			return;
+		}
+
+		istd::TChangeNotifier<icomp::IRegistry> registryPtr(
+					selectionInfoPtr->GetSelectedRegistry(),
+					istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		if (!registryPtr.IsValid()){
+			return;
+		}
+
 		QString interfaceName = item->text(column);
 
 		const std::string& elementName = selectionInfoPtr->GetSelectedElementName();
@@ -841,26 +856,21 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 	std::string attributeName = index.data(AttributeId).toString().toStdString();
 
 	if (propertyMining == ComponentExport){
-		const IElementSelectionInfo* selectionInfoPtr = m_parent.GetObjectPtr();
-		if (selectionInfoPtr != NULL){
-			istd::TChangeNotifier<icomp::IRegistry> registryPtr(
-						selectionInfoPtr->GetSelectedRegistry(),
-						istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_COMPONENT_EXPORTED);
-			if (registryPtr.IsValid()){
-				std::string exportId = editor->property("text").toString().toStdString();
+		istd::TChangeNotifier<icomp::IRegistry> registryPtr(m_parent.GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_COMPONENT_EXPORTED);
+		if (registryPtr.IsValid()){
+			std::string exportId = editor->property("text").toString().toStdString();
 
-				icomp::IRegistry::ExportedComponentsMap exportedMap = registryPtr->GetExportedComponentsMap();
-				for (icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
-							iter != exportedMap.end();
-							++iter){
-					if (iter->second == attributeName){
-						registryPtr->SetElementExported(iter->first, "");
-					}
+			icomp::IRegistry::ExportedComponentsMap exportedMap = registryPtr->GetExportedComponentsMap();
+			for (icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
+						iter != exportedMap.end();
+						++iter){
+				if (iter->second == attributeName){
+					registryPtr->SetElementExported(iter->first, "");
 				}
+			}
 
-				if (!exportId.empty()){
-					registryPtr->SetElementExported(exportId, attributeName);
-				}
+			if (!exportId.empty()){
+				registryPtr->SetElementExported(exportId, attributeName);
 			}
 		}
 

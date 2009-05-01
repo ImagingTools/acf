@@ -16,7 +16,7 @@
 #include "iqtgui/TDesignerBasicGui.h"
 
 #include "icmpstr/IRegistryEditController.h"
-#include "icmpstr/CComponentView.h"
+#include "icmpstr/CComponentSceneItem.h"
 #include "icmpstr/CComponentConnector.h"
 #include "icmpstr/CRegistryModelComp.h"
 
@@ -140,18 +140,18 @@ void CRegistryViewComp::UpdateEditor(int updateFlags)
 			const std::string& elementId = *iter;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
 			if (elementInfoPtr != NULL){
-				CComponentView* componentViewPtr = viewPtr->CreateComponentView(registryPtr, elementInfoPtr, elementId);
+				CComponentSceneItem* componentViewPtr = viewPtr->CreateComponentView(registryPtr, elementInfoPtr, elementId);
 				I_ASSERT(componentViewPtr != NULL);
 
 				connect(componentViewPtr, 
-							SIGNAL(selectionChanged(CComponentView*, bool)),
+							SIGNAL(selectionChanged(CComponentSceneItem*, bool)),
 							this,
-							SLOT(OnComponentViewSelected(CComponentView*, bool)));
+							SLOT(OnComponentViewSelected(CComponentSceneItem*, bool)));
 
 				connect(componentViewPtr, 
-							SIGNAL(positionChanged(CComponentView*, const QPoint&)),
+							SIGNAL(positionChanged(CComponentSceneItem*, const QPoint&)),
 							this,
-							SLOT(OnComponentPositionChanged(CComponentView*, const QPoint&)));
+							SLOT(OnComponentPositionChanged(CComponentSceneItem*, const QPoint&)));
 				
 				IRegistryEditController* geomeometryProviderPtr = dynamic_cast<IRegistryEditController*>(registryPtr);
 				if (geomeometryProviderPtr != NULL){
@@ -159,7 +159,7 @@ void CRegistryViewComp::UpdateEditor(int updateFlags)
 					componentViewPtr->setPos(int(position.GetX() + 0.5), int(position.GetY() + 0.5));
 				}
 
-				const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
+				const CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
 				if (		selectedComponentPtr != NULL && 
 							componentViewPtr->GetComponentName() == selectedComponentPtr->GetComponentName()){
 					componentViewPtr->setSelected(true);
@@ -198,16 +198,6 @@ void CRegistryViewComp::OnGuiCreated()
 		connect(&m_executionObserverTimer, SIGNAL(timeout()), this, SLOT(OnExecutionTimerTick()));
 
 		m_executionObserverTimer.start(500);
-	}
-
-	CRegistryView* viewPtr = GetQtWidget();
-	I_ASSERT(viewPtr != NULL);
-	if (viewPtr != NULL){
-		connect(viewPtr, 
-					SIGNAL(DropDataEventEntered(const QMimeData&, QGraphicsSceneDragDropEvent*)), 
-					this, 
-					SLOT(ProcessDroppedData(const QMimeData&, QGraphicsSceneDragDropEvent*)));
-		viewPtr->SetPackagesManager(m_packagesManagerCompPtr.GetPtr());
 	}
 }
 
@@ -276,7 +266,7 @@ void CRegistryViewComp::OnRetranslate()
 
 // protected slots
 
-void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr, bool isSelected)
+void CRegistryViewComp::OnComponentViewSelected(CComponentSceneItem* componentViewPtr, bool isSelected)
 {
 	CRegistryView* viewPtr = GetQtWidget();
 	I_ASSERT(viewPtr != NULL);
@@ -284,7 +274,7 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 		return;
 	}
 
-	CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
+	CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
 
 	// detach last model from its observers:
 	if (selectedComponentPtr != NULL){
@@ -323,7 +313,7 @@ void CRegistryViewComp::OnComponentViewSelected(CComponentView* componentViewPtr
 }
 
 
-void CRegistryViewComp::OnComponentPositionChanged(CComponentView* view, const QPoint& newPosition)
+void CRegistryViewComp::OnComponentPositionChanged(CComponentSceneItem* view, const QPoint& newPosition)
 {
 	CRegistryView* viewPtr = GetQtWidget();
 	I_ASSERT(viewPtr != NULL);
@@ -350,7 +340,7 @@ void CRegistryViewComp::OnRemoveComponent()
 
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
-		const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();
+		const CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
 
 		if (selectedComponentPtr != NULL){
 			m_removeComponentCommand.setEnabled(false);
@@ -373,7 +363,7 @@ void CRegistryViewComp::OnRenameComponent()
 
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
-		CComponentView* selectedComponentPtr = const_cast<CComponentView*>(viewPtr->GetSelectedComponent());
+		CComponentSceneItem* selectedComponentPtr = const_cast<CComponentSceneItem*>(viewPtr->GetSelectedComponent());
 
 		if (selectedComponentPtr != NULL){
 			const std::string& oldName = selectedComponentPtr->GetComponentName();
@@ -539,7 +529,7 @@ void CRegistryViewComp::OnAddNote()
 		return;
 	}
 	
-	const CComponentView* selectedComponentPtr = viewPtr->GetSelectedComponent();	
+	const CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();	
 	I_ASSERT(selectedComponentPtr != NULL);
 
 	IRegistryEditController* providerPtr = dynamic_cast<IRegistryEditController*>(GetObjectPtr());
@@ -582,7 +572,7 @@ void CRegistryViewComp::UpdateConnectors()
 
 	CRegistryView::ComponentViewList componentViews = viewPtr->GetComponentViews();
 
-	foreach(CComponentView* componentItemPtr, componentViews){
+	foreach(CComponentSceneItem* componentItemPtr, componentViews){
 		const icomp::IRegistry::ElementInfo& elementInfo = componentItemPtr->GetElementInfo();
 
 		icomp::IRegistryElement::Ids attributeIds = elementInfo.elementPtr->GetAttributeIds();
@@ -649,6 +639,40 @@ void CRegistryViewComp::OnExecutionTimerTick()
 
 	m_executeRegistryCommand.setEnabled(!isRunning && isExecutable);
 	m_abortRegistryCommand.setEnabled(isRunning);
+}
+
+
+// protected methods
+
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CRegistryViewComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	CRegistryView* viewPtr = GetQtWidget();
+	I_ASSERT(viewPtr != NULL);
+
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	I_ASSERT(viewPtr != NULL);
+
+	connect(	viewPtr,
+				SIGNAL(DropDataEventEntered(const QMimeData&, QGraphicsSceneDragDropEvent*)),
+				this,
+				SLOT(ProcessDroppedData(const QMimeData&, QGraphicsSceneDragDropEvent*)));
+
+	viewPtr->Init(m_packagesManagerCompPtr.GetPtr(), registryPtr);
+}
+
+
+void CRegistryViewComp::OnGuiModelDetached()
+{
+	CRegistryView* viewPtr = GetQtWidget();
+	I_ASSERT(viewPtr != NULL);
+
+	viewPtr->Init(NULL, NULL);
+
+	BaseClass::OnGuiModelDetached();
 }
 
 

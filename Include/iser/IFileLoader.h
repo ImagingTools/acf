@@ -91,7 +91,10 @@ public:
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const = 0;
 
 	/**
-		Get file extensions supported by this loader.
+		Get file extensions supported by this loader
+		\param	result		list of extensions, e.g. {"txt", "doc"}.
+		\param	flags		set of flags \sa QueryFlags.
+		\param	doAppend	if true, list of extensions should be appended to existing list.
 	*/
 	virtual bool GetFileExtensions(istd::CStringList& result, int flags = 0, bool doAppend = false) const = 0;
 	/**

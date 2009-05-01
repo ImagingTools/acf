@@ -1,5 +1,5 @@
-#ifndef CComponentNote_included
-#define CComponentNote_included
+#ifndef CNote_included
+#define CNote_included
 
 
 #include "icmpstr/IComponentNote.h"
@@ -9,7 +9,7 @@ namespace icmpstr
 {
 
 
-class CComponentNote: virtual public IComponentNote
+class CNote: virtual public IComponentNote
 {
 public:
 	virtual void SetText(const istd::CString& noteText);
@@ -31,5 +31,5 @@ private:
 } // namespace icmpstr
 
 
-#endif // !CComponentNote_included
+#endif // !CNote_included
 

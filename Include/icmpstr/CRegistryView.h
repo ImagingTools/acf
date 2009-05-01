@@ -11,9 +11,11 @@
 #include <QGraphicsSceneDragDropEvent>
 #include <QMimeData>
 
+#include "istd/TChangeNotifier.h"
+
 #include "icomp/IRegistriesManager.h"
 
-#include "icmpstr/CComponentView.h"
+#include "icmpstr/CComponentSceneItem.h"
 
 
 namespace icmpstr
@@ -26,21 +28,21 @@ class CRegistryView: public QGraphicsView
 
 public:
 	typedef QGraphicsView BaseClass;
-	typedef QList<CComponentView*> ComponentViewList;
+	typedef QList<CComponentSceneItem*> ComponentViewList;
 
 	CRegistryView(QWidget* parent = NULL);
 
-	void CreateConnector(CComponentView& sourceView, const std::string& referenceComponentId, bool isFactory = false);
+	void CreateConnector(CComponentSceneItem& sourceView, const std::string& referenceComponentId, bool isFactory = false);
 
-	CComponentView* CreateComponentView(
+	CComponentSceneItem* CreateComponentView(
 				icomp::IRegistry* registryPtr,
 				const icomp::IRegistry::ElementInfo* elementInfoPtr,
 				const std::string& role);
 
 	static double GetGrid();
 
-	CComponentView* GetSelectedComponent() const;
-	void SetSelectedComponent(CComponentView* selectedComponentPtr);
+	CComponentSceneItem* GetSelectedComponent() const;
+	void SetSelectedComponent(CComponentSceneItem* selectedComponentPtr);
 
 	void RemoveSelectedComponent();
 	void RemoveAllConnectors();
@@ -54,8 +56,7 @@ public:
 	void ScaleView(double scaleFactor);
 	QIcon GetIcon(const icomp::CComponentAddress& address) const;
 
-	const icomp::IRegistriesManager* GetPackagesManager() const;
-	void SetPackagesManager(const icomp::IRegistriesManager* managerPtr);
+	void Init(const icomp::IRegistriesManager* managerPtr, icomp::IRegistry* registryPtr);
 
 signals:
 	void DropDataEventEntered(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
@@ -89,6 +90,8 @@ public:
 		virtual void dragEnterEvent(QGraphicsSceneDragDropEvent * eventPtr);
 		virtual void dropEvent(QGraphicsSceneDragDropEvent * eventPtr);
 		virtual void dragMoveEvent(QGraphicsSceneDragDropEvent * eventPtr);
+		virtual void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
+		virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 
 	private:
 		CRegistryView& m_parent;
@@ -97,8 +100,11 @@ public:
 private:
 	CCompositeItem m_compositeItem;
 	CRegistryScene* m_scenePtr;
-	CComponentView* m_selectedComponentPtr;
+	CComponentSceneItem* m_selectedComponentPtr;
+	icomp::IRegistry* m_registryPtr;
 	const icomp::IRegistriesManager* m_packagesManagerPtr;
+
+	istd::CChangeNotifier m_mousePressingNotifier;
 };
 
 
@@ -107,18 +113,6 @@ private:
 inline double CRegistryView::GetGrid()
 {
 	return 25;
-}
-
-
-inline const icomp::IRegistriesManager* CRegistryView::GetPackagesManager() const
-{
-	return m_packagesManagerPtr;
-}
-
-
-inline void CRegistryView::SetPackagesManager(const icomp::IRegistriesManager* managerPtr)
-{
-	m_packagesManagerPtr = managerPtr;
 }
 
 

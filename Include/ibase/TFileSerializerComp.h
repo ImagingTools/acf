@@ -182,18 +182,23 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(const istd::IChan
 template <class ReadArchive, class WriteArchive>
 bool TFileSerializerComp<ReadArchive, WriteArchive>::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
 {
-	if (!doAppend){
-		result.clear();
+	if (m_fileExtensionsAttrPtr.IsValid()){
+		if (!doAppend){
+			result.clear();
+		}
+
+		int extensionsCount = m_fileExtensionsAttrPtr.GetCount();
+		for (int i = 0; i < extensionsCount; ++i){
+			const istd::CString& extension = m_fileExtensionsAttrPtr[i];
+
+			result.push_back(extension);
+		}
+
+		return true;
 	}
-
-	int extensionsCount = m_fileExtensionsAttrPtr.GetCount();
-	for (int i = 0; i < extensionsCount; ++i){
-		const istd::CString& extension = m_fileExtensionsAttrPtr[i];
-
-		result.push_back(extension);
+	else{
+		return false;
 	}
-
-	return true;
 }
 
 

@@ -1,5 +1,5 @@
-#ifndef CComponentView_included
-#define CComponentView_included
+#ifndef CComponentSceneItem_included
+#define CComponentSceneItem_included
 
 
 // Qt includes
@@ -26,7 +26,7 @@ class CComponentConnector;
 class CRegistryView;
 
 
-class CComponentView:
+class CComponentSceneItem:
 			public QObject,
 			public QGraphicsRectItem,
 			virtual public imod::TModelWrap<IElementSelectionInfo>
@@ -36,14 +36,14 @@ class CComponentView:
 public:
 	typedef imod::TSingleModelObserverBase<icomp::IRegistry> BaseObserverClass;
 
-	CComponentView(
+	CComponentSceneItem(
 				const CRegistryView* registryViewPtr,
 				icomp::IRegistry* registryPtr,
 				const icomp::IRegistry::ElementInfo* elementInfoPtr, 
 				const std::string& componentName, 
 				QGraphicsItem* parent = NULL);
 
-	virtual ~CComponentView();
+	virtual ~CComponentSceneItem();
 
 	/**
 		Get registry element info associated with this object.
@@ -70,8 +70,8 @@ public:
 	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
 
 signals:
-	void selectionChanged(CComponentView*, bool);
-	void positionChanged(CComponentView*, const QPoint& point);
+	void selectionChanged(CComponentSceneItem*, bool);
+	void positionChanged(CComponentSceneItem*, const QPoint& point);
 
 protected:
 	QRect CalculateRect() const;
@@ -85,14 +85,14 @@ protected:
 	class RegistryObserver: public imod::TSingleModelObserverBase<icomp::IRegistry>
 	{
 	public:
-		RegistryObserver(CComponentView* parentPtr);
+		RegistryObserver(CComponentSceneItem* parentPtr);
 
 	protected:
 		// reimplemented (imod::CSingleModelObserverBase)
 		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	private:
-		CComponentView& m_parent;
+		CComponentSceneItem& m_parent;
 	};
 
 private:
@@ -121,6 +121,6 @@ private:
 } // namespace icmpstr
 
 
-#endif // CComponentView_included
+#endif // CComponentSceneItem_included
 
 

@@ -21,7 +21,7 @@ public:
 	CLine2dShape(bool isEditable = false);
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags = 0, istd::IPolymorphic* updateParamsPtr = NULL);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected slots:
 	virtual void OnPosition1Changed(const QPointF& point1);

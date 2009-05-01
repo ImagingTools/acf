@@ -1,5 +1,5 @@
-#ifndef CComponentNoteView_included
-#define CComponentNoteView_included
+#ifndef CNoteSceneItem_included
+#define CNoteSceneItem_included
 
 
 #include <QGraphicsItemGroup>
@@ -9,25 +9,25 @@ namespace icmpstr
 {
 
 
-class CComponentView;
+class CComponentSceneItem;
 class CRegistryViewComp;
 
 
-class CComponentNoteView: public QGraphicsItemGroup
+class CNoteSceneItem: public QGraphicsItemGroup
 {
 public:
 	typedef QGraphicsItemGroup BaseClass;
 
-    CComponentNoteView(
+    CNoteSceneItem(
 				const CRegistryViewComp* registryViewPtr,
-				CComponentView *parentComponent, 
+				CComponentSceneItem *parentComponent, 
 				QGraphicsItem *parent = NULL, 
 				QGraphicsScene *scene = NULL);
     
-	virtual ~CComponentNoteView();
+	virtual ~CNoteSceneItem();
 
-    CComponentView* GetParentComponent() const;
-    void SetParentComponent(CComponentView* parentComponentPtr);
+    CComponentSceneItem* GetParentComponent() const;
+    void SetParentComponent(CComponentSceneItem* parentComponentPtr);
 
     void Adjust();
 
@@ -43,7 +43,7 @@ protected:
 private:
 	const CRegistryViewComp& m_registryView;
 
-    CComponentView* m_parentComponent;
+    CComponentSceneItem* m_parentComponent;
 
 	QPolygonF m_connectionLine;
 	QPointF m_touchPoint;
@@ -53,5 +53,5 @@ private:
 } // namespace icmpstr
 
 
-#endif // !CComponentNoteView_included
+#endif // !CNoteSceneItem_included
 

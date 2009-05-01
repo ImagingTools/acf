@@ -309,6 +309,8 @@ bool CSingleDocumentManagerBase::OpenDocument(
 		if (NewDocument(documentTypeId, createView, viewTypeId)){
 			I_ASSERT(m_documentPtr.IsValid());
 
+			istd::CChangeNotifier documentNotifier(m_documentPtr.GetPtr(), imod::IUndoManager::CF_NO_UNDO);
+
 			iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(documentTypeId);
 			if (		(loaderPtr != NULL) &&
 						(loaderPtr->LoadFromFile(*m_documentPtr, filePath) == iser::IFileLoader::StateOk)){

@@ -2,6 +2,7 @@
 
 
 #include "imod/IModel.h" 
+#include "imod/IUndoManager.h"
 
 
 namespace imod
@@ -27,11 +28,11 @@ bool CSingleModelObserverBase::OnAttached(imod::IModel* modelPtr)
 	I_ASSERT(modelPtr != NULL);
 	I_ASSERT(m_modelPtr == NULL);
 
-	BeforeUpdate(NULL);
+	BeforeUpdate(NULL, IUndoManager::CF_NO_UNDO, NULL);
 
 	m_modelPtr = modelPtr;
 
-	AfterUpdate(m_modelPtr);
+	AfterUpdate(m_modelPtr, IUndoManager::CF_NO_UNDO, NULL);
 
 	return true;
 }

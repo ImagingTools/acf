@@ -9,7 +9,7 @@ namespace icmpstr
 {
 
 
-class CComponentView;
+class CComponentSceneItem;
 class CRegistryView;
 
 
@@ -33,18 +33,18 @@ public:
 
     CComponentConnector(
 				const CRegistryView* registryViewPtr,
-				CComponentView* sourceComponent, 
-				CComponentView* destComponent,
+				CComponentSceneItem* sourceComponent, 
+				CComponentSceneItem* destComponent,
 				int connectFlags = 0,
 				QGraphicsItem* parent = NULL);
     
 	virtual ~CComponentConnector();
 
-    CComponentView* GetSourceComponent() const;
-    void SetSourceComponent(CComponentView* sourceComponent);
+    CComponentSceneItem* GetSourceComponent() const;
+    void SetSourceComponent(CComponentSceneItem* sourceComponent);
 
-    CComponentView* GetDestinationComponent() const;
-    void SetDestinationComponent(CComponentView* destComponent);
+    CComponentSceneItem* GetDestinationComponent() const;
+    void SetDestinationComponent(CComponentSceneItem* destComponent);
 
     void Adjust();
 
@@ -62,8 +62,8 @@ protected:
 private:
 	const CRegistryView& m_registryView;
 
-    CComponentView* m_sourceComponent;
-	CComponentView* m_destComponent;
+    CComponentSceneItem* m_sourceComponent;
+	CComponentSceneItem* m_destComponent;
 
 	int m_connectFlags;
 
