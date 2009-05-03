@@ -68,6 +68,7 @@ public:
 	icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const std::string& attributeId) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const std::string& attributeId) const;
 	QStringList GetCompatibleComponents(const istd::CClassInfo& interfaceInfo) const;
+	QStringList GetExportAliases(const std::string& attributeName) const;
 
 	// reimplemented (TGuiObserverWrap)
 	virtual void OnGuiModelDetached();

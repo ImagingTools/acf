@@ -124,6 +124,31 @@ QStringList CAttributeEditorComp::GetCompatibleComponents(const istd::CClassInfo
 }
 
 
+QStringList CAttributeEditorComp::GetExportAliases(const std::string& attributeName) const
+{
+	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	if (selectionInfoPtr == NULL){
+		return QStringList();
+	}
+
+	QStringList exportedAliases;
+
+	const icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
+	if (registryPtr != NULL){
+		const icomp::IRegistry::ExportedComponentsMap& exportedMap = registryPtr->GetExportedComponentsMap();
+		for (		icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
+					iter != exportedMap.end();
+					++iter){
+			if (iter->second == attributeName){
+				exportedAliases.append(iqt::GetQString(iter->first));
+			}
+		}
+	}
+
+	return exportedAliases;
+}
+
+
 // reimplemented (TGuiObserverWrap)
 
 void CAttributeEditorComp::OnGuiModelDetached()
@@ -239,6 +264,7 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	componentRootPtr->setText(NameColumn, tr("this"));
 	componentRootPtr->setData(ValueColumn, AttributeId, QString(elementId.c_str()));
 	componentRootPtr->setData(ValueColumn, AttributeMining, ComponentExport);
+	componentRootPtr->setText(ValueColumn, GetExportAliases(elementId).join(";"));
 
 	CreateComponentsTree(elementId, elementStaticInfo, *componentRootPtr);
 
@@ -556,6 +582,7 @@ void CAttributeEditorComp::CreateComponentsTree(
 		itemPtr->setText(NameColumn, subcomponentId.c_str());
 		itemPtr->setData(ValueColumn, AttributeId, QString(fullId.c_str()));
 		itemPtr->setData(ValueColumn, AttributeMining, ComponentExport);
+		itemPtr->setText(ValueColumn, GetExportAliases(fullId).join(";"));
 
 		const icomp::IComponentStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubcomponentInfo(subcomponentId);
 		if (subcomponentInfoPtr != NULL){
@@ -702,26 +729,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setEditorData(QWidget* editor,
 	std::string attributeName = index.data(AttributeId).toString().toStdString();
 
 	if (propertyMining == ComponentExport){
-		QString editorValue;
-		const IElementSelectionInfo* selectionInfoPtr = m_parent.GetObjectPtr();
-		if (selectionInfoPtr != NULL){
-			const icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
-			if (registryPtr != NULL){
-				bool isFirst = true;
-				icomp::IRegistry::ExportedComponentsMap exportedMap = registryPtr->GetExportedComponentsMap();
-				for (		icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
-							iter != exportedMap.end();
-							++iter){
-					if (iter->second == attributeName){
-						if (!isFirst){
-							editorValue + ";";
-						}
-
-						isFirst = false;
-					}
-				}
-			}
-		}
+		QString editorValue = m_parent.GetExportAliases(attributeName).join(";");
 
 		editor->setProperty("text", QVariant(editorValue));
 		return;

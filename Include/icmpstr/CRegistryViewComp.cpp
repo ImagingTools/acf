@@ -191,7 +191,7 @@ const icomp::CComponentAddress* CRegistryViewComp::GetSelectedElementAddress() c
 void CRegistryViewComp::UpdateEditor(int updateFlags)
 {
 	if (updateFlags != 0){
-		static const int unimportantChanges = CRegistryModelComp::CF_POSITION | icomp::IRegistry::CF_COMPONENT_EXPORTED | istd::IChangeable::CF_MODEL;
+		static const int unimportantChanges = CRegistryModelComp::CF_POSITION | istd::IChangeable::CF_MODEL;
 		if ((updateFlags & ~unimportantChanges) == 0){
 			// some unimportant model changes
 			return;
