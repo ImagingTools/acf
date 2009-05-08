@@ -5,6 +5,7 @@
 #include "qwt3d_surfaceplot.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "iqt/CSignalBlocker.h"
@@ -25,7 +26,7 @@ void CSurfaceViewComp::UpdateModel() const
 void CSurfaceViewComp::UpdateEditor(int /*updateFlags*/)
 {
 	imath::ISampledFunction2d* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && IsGuiCreated() && IsGuiShown()){
+	if (objectPtr != NULL && IsGuiCreated()){
 		I_ASSERT(objectPtr->GetArgumentDimensionality() == 2);
 		I_ASSERT(objectPtr->GetResultDimensionality() == 1);
 
@@ -67,7 +68,6 @@ void CSurfaceViewComp::UpdateEditor(int /*updateFlags*/)
 	
 		delete [] dataPtr;
 
-
 		m_surfacePlotPtr->updateData();
 		m_surfacePlotPtr->updateGL();
 	}
@@ -80,8 +80,6 @@ void CSurfaceViewComp::UpdateEditor(int /*updateFlags*/)
 
 void CSurfaceViewComp::OnGuiCreated()
 {
-	BaseClass::OnGuiCreated();
-
 	m_surfacePlotPtr = new Qwt3D::SurfacePlot(SurfacePlotFrame);
 	QLayout* layoutPtr = SurfacePlotFrame->layout();
 	if (layoutPtr == NULL){
@@ -144,6 +142,8 @@ void CSurfaceViewComp::OnGuiCreated()
 	m_surfacePlotPtr->showColorLegend(true);
 	
 	layoutPtr->addWidget(m_surfacePlotPtr);
+
+	BaseClass::OnGuiCreated();
 }
 
 

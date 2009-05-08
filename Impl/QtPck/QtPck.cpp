@@ -41,7 +41,7 @@ I_EXPORT_COMPONENT(DoxygenHelpFileProvider, "Provide html help file path convert
 I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 
 I_EXPORT_COMPONENT(Bitmap, "QImage based bitmap implementation", "QImage Image Bitmap Qt");
-I_EXPORT_COMPONENT(BitmapFunction, "QImage based bitmap implementation with function extension", "Sampled Function QImage Image Bitmap Qt");
+I_EXPORT_COMPONENT(BitmapSurface, "QImage based bitmap implementation with surface extension", "Sampled Function QImage Image Bitmap Qt Surface");
 I_EXPORT_COMPONENT(BitmapLoader, "Loader loading bitmaps using Qt standard implementations", "Image Bitmap Qt File Loader");
 I_EXPORT_COMPONENT(SceneConnector, "Display scane provider, scene extender and connect it", "Scene Connector Provider Extender Display Console GUI Qt");
 I_EXPORT_COMPONENT(SceneProvider, "Standard scene provider", "Scene Provider Extender Display Console GUI Qt");

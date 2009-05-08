@@ -61,7 +61,7 @@ namespace QtPck
 
 typedef iqt::CPackagesLoaderComp PackagesLoader;
 typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmap, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable> > Bitmap;
-typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmapSurface, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable, imath::ISampledFunction2d> > BitmapFunction;
+typedef icomp::TModelCompWrap<icomp::TMakeComponentWrap<iqt::CBitmapSurface, iimg::IBitmap, iimg::IRasterImage, iser::ISerializable, imath::ISampledFunction2d> > BitmapSurface;
 typedef iqt::CBitmapLoaderComp BitmapLoader;
 typedef iqt::CSettingsSerializerComp SettingsSerializer;
 typedef iqt::CApplicationSettingsProviderComp ApplicationSettingsProvider;
