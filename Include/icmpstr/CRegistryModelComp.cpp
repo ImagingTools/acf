@@ -273,7 +273,7 @@ icomp::IRegistryElement* CRegistryModelComp::CreateRegistryElement(const icomp::
 			if (componentInfoPtr != NULL){
 				Element* registryElementPtr = new Element;
 				if (registryElementPtr != NULL){
-					registryElementPtr->Initialize(componentInfoPtr, address);
+					registryElementPtr->Initialize(this, componentInfoPtr, address);
 					registryElementPtr->SetSlavePtr(const_cast<CRegistryModelComp*>(this));
 
 					return registryElementPtr;

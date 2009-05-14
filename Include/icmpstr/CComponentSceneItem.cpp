@@ -338,7 +338,7 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 }
 
 
-// public methods of embedded class
+// public methods of embedded class RegistryObserver
 
 CComponentSceneItem::RegistryObserver::RegistryObserver(CComponentSceneItem* parentPtr)
 :	m_parent(*parentPtr)

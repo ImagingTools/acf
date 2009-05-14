@@ -208,6 +208,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRegistryElementShape.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CRegistryLoaderComp.cpp"
 				>
 			</File>
@@ -275,6 +279,10 @@
 			</File>
 			<File
 				RelativePath="..\CPackageOverviewComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryElementShape.h"
 				>
 			</File>
 			<File

@@ -15,23 +15,32 @@ namespace icmpstr
 
 
 CGeometricalRegistryElement::CGeometricalRegistryElement()
-:	m_center(0, 0)
+:	m_center(0, 0),
+	m_registryPtr(NULL)
 {
 }
 
 
-const icomp::CComponentAddress& CGeometricalRegistryElement::GetAddress() const
+void CGeometricalRegistryElement::SetName(const std::string& name)
 {
-	return m_addess;
+	if (name != m_name){
+		istd::CChangeNotifier notifier(this);
+
+		m_name = name;
+	}
 }
 
 
 // overloaded (icomp::CRegistryElement)
 
-void CGeometricalRegistryElement::Initialize(const icomp::IComponentStaticInfo* infoPtr, const icomp::CComponentAddress& address)
+void CGeometricalRegistryElement::Initialize(
+			const icomp::IRegistry* parentPtr,
+			const icomp::IComponentStaticInfo* infoPtr,
+			const icomp::CComponentAddress& address)
 {
 	BaseClass::Initialize(infoPtr);
 
+	m_registryPtr = parentPtr;
 	m_addess = address;
 }
 

@@ -29,7 +29,7 @@ public:
 	bool IsBackgroundGridUsed() const;
 	void SetBackgroundGridUsed(bool state = true);
 
-	// reimplemented (QGraphicsRectItem)
+	// reimplemented (QGraphicsItem)
 	virtual QRectF boundingRect() const;
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
