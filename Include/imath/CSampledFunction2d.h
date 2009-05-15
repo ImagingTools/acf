@@ -20,11 +20,11 @@ public:
 	CSampledFunction2d(int width = -1, int height = -1, double defaultValue = 0);
 
 	void Reset();
-	void Create(int width = -1, int height = -1, double defaultValue = 0);
-	void Create(double* dataPtr, int width, int height);
+	void Create(int width, int height, double defaultValue = 0);
 	void SetSampleValue(const ElementIndex& index, double value);
 	
 	// reimplemented (ISampledFunction2d)
+	virtual bool CreateFunction(double* dataPtr, int width, int height);
 	virtual int GetSamplesCount() const;
 	virtual istd::CRange GetIntervalRange(int dimensionIndex) const;
 	virtual istd::CRange GetValueRange(int dimensionIndex) const;

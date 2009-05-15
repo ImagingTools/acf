@@ -5,7 +5,10 @@
 #include <QPainter>
 
 
+#include "istd/TDelPtr.h"
+
 #include "iqt/IQImageProvider.h"
+#include "iqt/CBitmap.h"
 
 
 namespace iqt2d
@@ -33,17 +36,21 @@ CImageShape::CImageShape(const icmm::IColorTransformation* colorTransformationPt
 void CImageShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(GetObjectPtr());
-	if (providerPtr != NULL){
-		QImage image = providerPtr->GetQImage();
-		if (m_colorTransformationPtr != NULL){
-			SetLookupTableToImage(image, *m_colorTransformationPtr);
-		}
+	istd::TDelPtr<iqt::CBitmap> qtBitmapPtr;
+	if (providerPtr == NULL){
+		qtBitmapPtr.SetPtr(new iqt::CBitmap);
+		providerPtr = qtBitmapPtr.GetPtr();
+		iimg::IBitmap* bitmapPtr = GetObjectPtr();
+
+		qtBitmapPtr->CopyImageFrom(*bitmapPtr);
+	}
+
+	QImage image = providerPtr->GetQImage();
+	if (m_colorTransformationPtr != NULL){
+		SetLookupTableToImage(image, *m_colorTransformationPtr);
+	}
 		
-		m_bitmap = QPixmap::fromImage(image, Qt::AutoColor);
-	}
-	else{
-		m_bitmap = QPixmap();
-	}
+	m_bitmap = QPixmap::fromImage(image, Qt::AutoColor);
 
 	update();
 }

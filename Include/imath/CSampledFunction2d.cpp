@@ -26,23 +26,19 @@ void CSampledFunction2d::Create(int width, int height, double defaultValue)
 	if (width > 0 && height > 0){
 		m_samplesContainer.SetSize(0, width);
 		m_samplesContainer.SetSize(1, height);
-		for (		SamplesContainer::Iterator index = m_samplesContainer.Begin();
-					index != m_samplesContainer.End();
-					index++){
-				*index = defaultValue;
+
+		SamplesContainer::Iterator beginIter = m_samplesContainer.Begin();
+		double* dataPtr = &(*beginIter);
+
+		memset(dataPtr, 0, sizeof(double) * width * height);
+
+		if (defaultValue != 0){
+			for (		SamplesContainer::Iterator index = m_samplesContainer.Begin();
+						index != m_samplesContainer.End();
+						index++){
+					*index = defaultValue;
+			}
 		}
-	}
-}
-
-
-void CSampledFunction2d::Create(double* dataPtr, int width, int height)
-{
-	Create(width, height);
-
-	for (		SamplesContainer::Iterator index = m_samplesContainer.Begin();
-				index != m_samplesContainer.End();
-				index++){
-		*index = *dataPtr++;
 	}
 }
 
@@ -60,6 +56,19 @@ void CSampledFunction2d::SetSampleValue(const ElementIndex& index, double value)
 
 
 // reimplemented (ISampledFunction2d)
+
+bool CSampledFunction2d::CreateFunction(double* dataPtr, int width, int height)
+{
+	Create(width, height);
+
+	SamplesContainer::Iterator beginIter = m_samplesContainer.Begin();
+	double* functionDataPtr = &(*beginIter);
+	
+	memcpy(functionDataPtr, dataPtr, sizeof(double) * width * height);
+
+	return true;
+}
+
 
 int CSampledFunction2d::GetSamplesCount() const
 {

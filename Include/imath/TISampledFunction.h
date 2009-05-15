@@ -32,6 +32,11 @@ public:
 	typedef imath::TVector<OutputDimensions> ResultValue;
 
 	/**
+		Create function from input data.
+	*/
+	virtual bool CreateFunction(double* dataPtr, int width, int height) = 0;
+
+	/**
 		Get number of samples stored in this container.
 	*/
 	virtual int GetSamplesCount() const = 0;

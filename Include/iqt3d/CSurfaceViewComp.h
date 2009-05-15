@@ -48,6 +48,10 @@ protected:
 
 protected slots:
 	void OnParamsChanged(double value);
+	void OnToggleAutoScale(bool value);
+	void OnToggleShader(bool value);
+	void OnPolygonOffset(int value);
+	void OnNormalsQuality(int value);
 
 private:
 	I_ATTR(istd::CString, m_unitNameAttrPtr);

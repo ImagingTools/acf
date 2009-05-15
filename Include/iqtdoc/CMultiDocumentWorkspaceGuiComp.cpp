@@ -479,17 +479,12 @@ void CMultiDocumentWorkspaceGuiComp::OnTileHorizontally()
 	int workspaceWidth = workspacePtr->width();
 	int heightForEach = workspaceHeight / widgets.count();
 	
-	int y = 0;
-	for (int viewIndex = 0; viewIndex < widgets.count(); viewIndex++){
+	for (int viewIndex = 0, y = 0; viewIndex < widgets.count(); viewIndex++){
 		QMdiSubWindow* widgetPtr = widgets.at(viewIndex);
 		widgetPtr->showNormal();									
-		if (widgetPtr->parentWidget() != NULL){
-			int preferredHeight = widgetPtr->minimumHeight() + widgetPtr->parentWidget()->baseSize().height();
-			int currentHeight = istd::Max(heightForEach, preferredHeight);
 
-			widgetPtr->parentWidget()->setGeometry(0, y, workspaceWidth, currentHeight);
-			y += currentHeight;
-		}
+		widgetPtr->setGeometry(0, y, workspaceWidth, heightForEach);
+		y += heightForEach;
 	}
 }
 

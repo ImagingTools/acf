@@ -140,7 +140,22 @@ void CSurfaceViewComp::OnGuiCreated()
 
 	m_surfacePlotPtr->coordinates()->setAutoScale(true);
 	m_surfacePlotPtr->showColorLegend(true);
+
+
+	connect(OrthoCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(setOrtho(bool)));
+	connect(AutoScaleCheck, SIGNAL(toggled(bool)), this, SLOT(OnToggleAutoScale(bool)));
+	connect(colorlegend, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(showColorLegend(bool)));
+	connect(shader, SIGNAL(toggled(bool)), this, SLOT( OnToggleShader(bool)));
+	connect(mouseinput, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT( enableMouse(bool)));
+	connect(lightingswitch, SIGNAL( toggled(bool) ), m_surfacePlotPtr, SLOT( enableLighting(bool)));
+	connect(normalsquality,  SIGNAL(valueChanged(int)), this, SLOT(OnNormalsQuality(int)) );
+	connect(normalslength,  SIGNAL(valueChanged(int)), this, SLOT(setNormalLength(int)) );
 	
+	ResolutionSlider->setRange(1,10);
+	connect(ResolutionSlider, SIGNAL(valueChanged(int)), m_surfacePlotPtr, SLOT(setResolution(int)));
+	connect(m_surfacePlotPtr, SIGNAL(resolutionChanged(int)), ResolutionSlider, SLOT(setValue(int)));
+	ResolutionSlider->setValue(1);             
+
 	layoutPtr->addWidget(m_surfacePlotPtr);
 
 	BaseClass::OnGuiCreated();
@@ -158,6 +173,38 @@ void CSurfaceViewComp::OnGuiDestroyed()
 void CSurfaceViewComp::OnParamsChanged(double /*value*/)
 {
 	UpdateModel();
+}
+
+
+void CSurfaceViewComp::OnToggleAutoScale(bool val)
+{
+	m_surfacePlotPtr->coordinates()->setAutoScale(val);
+	m_surfacePlotPtr->updateGL();
+}
+
+
+void CSurfaceViewComp::OnToggleShader(bool val)
+{
+	if (val)
+		m_surfacePlotPtr->setShading(Qwt3D::GOURAUD);
+	else
+		m_surfacePlotPtr->setShading(Qwt3D::FLAT);
+}
+
+
+void CSurfaceViewComp::OnPolygonOffset(int val)
+{
+	m_surfacePlotPtr->setPolygonOffset(val / 10.0);
+	m_surfacePlotPtr->updateData();
+	m_surfacePlotPtr->updateGL();
+}
+
+
+void CSurfaceViewComp::OnNormalsQuality(int val)
+{
+	m_surfacePlotPtr->setNormalQuality(val);
+	m_surfacePlotPtr->updateNormals();
+	m_surfacePlotPtr->updateGL();
 }
 
 

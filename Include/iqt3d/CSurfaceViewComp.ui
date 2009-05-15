@@ -36,7 +36,7 @@
         <enum>QFrame::StyledPanel</enum>
        </property>
        <property name="frameShadow" >
-        <enum>QFrame::Sunken</enum>
+        <enum>QFrame::Plain</enum>
        </property>
       </widget>
      </item>
@@ -57,7 +57,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QCheckBox" name="projection" >
+          <widget class="QCheckBox" name="OrthoCheck" >
            <property name="text" >
             <string>Ortho</string>
            </property>
@@ -74,7 +74,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="autoscale" >
+          <widget class="QCheckBox" name="AutoScaleCheck" >
            <property name="text" >
             <string>Autoscale</string>
            </property>
@@ -307,12 +307,15 @@
         </widget>
        </item>
        <item>
-        <widget class="QSlider" name="resSlider" >
+        <widget class="QSlider" name="ResolutionSlider" >
          <property name="minimum" >
           <number>1</number>
          </property>
          <property name="maximum" >
-          <number>100</number>
+          <number>10</number>
+         </property>
+         <property name="pageStep" >
+          <number>1</number>
          </property>
          <property name="orientation" >
           <enum>Qt::Horizontal</enum>
@@ -321,7 +324,7 @@
           <enum>QSlider::TicksAbove</enum>
          </property>
          <property name="tickInterval" >
-          <number>5</number>
+          <number>1</number>
          </property>
         </widget>
        </item>
