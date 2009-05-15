@@ -33,6 +33,7 @@ CComponentAccessor::CComponentAccessor(
 				const icomp::IRegistry* registryPtr = registryLoaderPtr->GetRegistryFromFile(m_registryFile.c_str());
 				if (registryPtr != NULL){
 					static icomp::CRegistryElement dummyElement;
+					dummyElement.Initialize(staticInfoPtr);
 
 					static icomp::CCompositeComponentContext compositeContext(&dummyElement, registryPtr, registriesManagerPtr, NULL);
 					m_composite.SetComponentContext(&compositeContext, NULL, false);
