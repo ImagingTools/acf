@@ -176,6 +176,8 @@ public:
 	TFastVector<MaxSize, Element> operator*(Element scalar) const;
 	TFastVector<MaxSize, Element> operator/(Element scalar) const;
 
+	TFastVector<MaxSize, Element>& operator=(const TFastVector<MaxSize, Element>& vector);
+
 	TFastVector<MaxSize, Element>& operator+=(const TFastVector<MaxSize, Element>& vector);
 	TFastVector<MaxSize, Element>& operator-=(const TFastVector<MaxSize, Element>& vector);
 	TFastVector<MaxSize, Element>& operator*=(Element scalar);
@@ -487,6 +489,20 @@ bool TFastVector<MaxSize, Element>::operator>=(const TFastVector<MaxSize, Elemen
 	}
 
 	return m_elementsCount >= vector.m_elementsCount;
+}
+
+
+template <int MaxSize, class Element>
+inline TFastVector<MaxSize, Element>& TFastVector<MaxSize, Element>::operator=(const TFastVector<MaxSize, Element>& vector)
+{
+	m_elementsCount = vector.m_elementsCount;
+	I_ASSERT(m_elementsCount < MaxSize);
+
+	for (int i = 0; i < m_elementsCount; ++i){
+		m_elements[i] = vector.m_elements[i];
+	}
+
+	return *this;
 }
 
 

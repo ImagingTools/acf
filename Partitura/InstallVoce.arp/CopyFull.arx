@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          882
+          915
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="8">
+  <ElementsList count="9">
     <Element>
       <Id>
         CopyBins
@@ -1077,6 +1077,115 @@
     </Element>
     <Element>
       <Id>
+        CopyVcRules
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        CopyProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              ExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              BinaryExcludeFilters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Filters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  *.rules
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InputDir
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ../Config
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputDir
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Temp/Config
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         InitSequence
       </Id>
       <PackageId>
@@ -1104,7 +1213,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   CopyCommon
                 </Value>
@@ -1125,6 +1234,9 @@
                 </Value>
                 <Value>
                   CopyBins
+                </Value>
+                <Value>
+                  CopyVcRules
                 </Value>
               </Values>
             </Data>
