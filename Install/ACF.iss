@@ -67,9 +67,9 @@ en.AddExtPath=Add external binaries path to the system PATH
 de.AddExtPath=Pfad für externe Bibliotheken zum Systempfad hinzufügen
 pl.AddExtPath=Dodaj sciezke zewnetrznych bibliotek do sciezki systemowej
 
-en.AddExtPath=Add ACF tools path to the system PATH
-de.AddExtPath=Pfad für ACF-Tools zum Systempfad hinzufügen
-pl.AddExtPath=Dodaj sciezke narzedzi ACF do sciezki systemowej
+en.AddAcfPath=Add ACF tools path to the system PATH
+de.AddAcfPath=Pfad für ACF-Tools zum Systempfad hinzufügen
+pl.AddAcfPath=Dodaj sciezke narzedzi ACF do sciezki systemowej
 
 [Types]
 Name: minimalType; Description: {cm:MinimalType}
