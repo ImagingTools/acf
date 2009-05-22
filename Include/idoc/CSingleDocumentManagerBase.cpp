@@ -194,6 +194,10 @@ bool CSingleDocumentManagerBase::FileSave(
 
 			m_filePath = filePath;
 			m_isDirty = false;
+
+			if (m_stateComparatorPtr.IsValid()){
+				m_stateComparatorPtr->StoreState(*m_documentPtr);
+			}
 		}
 
 		if (savedMapPtr != NULL){
@@ -230,6 +234,7 @@ void CSingleDocumentManagerBase::FileClose(bool* ignoredPtr)
 		m_documentTypeId = "";
 		m_documentPtr.Reset();
 		m_undoManagerPtr.Reset();
+		m_stateComparatorPtr.Reset();
 	}
 }
 
@@ -303,6 +308,10 @@ bool CSingleDocumentManagerBase::OpenDocument(
 
 				m_isDirty = false;
 
+				if (m_stateComparatorPtr.IsValid()){
+					m_stateComparatorPtr->StoreState(*m_documentPtr);
+				}
+
 				return true;
 			}
 		}
@@ -345,6 +354,7 @@ bool CSingleDocumentManagerBase::NewDocument(
 
 			m_documentPtr.TakeOver(documentPtr);
 			m_undoManagerPtr.SetPtr(documentTemplatePtr->CreateUndoManager(documentTypeId, m_documentPtr.GetPtr()));
+			m_stateComparatorPtr.SetPtr(documentTemplatePtr->CreateStateComparator(documentTypeId));
 
 			imod::IModel* documentModelPtr = dynamic_cast<imod::IModel*>(m_documentPtr.GetPtr());
 			if (documentModelPtr != NULL){
@@ -354,6 +364,10 @@ bool CSingleDocumentManagerBase::NewDocument(
 			m_documentTypeId = documentTypeId;
 
 			m_isDirty = false;
+
+			if (m_stateComparatorPtr.IsValid()){
+				m_stateComparatorPtr->StoreState(*m_documentPtr);
+			}
 
 			return true;
 		}
@@ -379,10 +393,15 @@ void CSingleDocumentManagerBase::EnsureViewRemoved()
 
 void CSingleDocumentManagerBase::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (!m_isDirty){
+	bool newDirty = true;
+	if (m_documentPtr.IsValid() && m_stateComparatorPtr.IsValid()){
+		newDirty = !m_stateComparatorPtr->CheckStateEquals(*m_documentPtr);
+	}
+
+	if (m_isDirty != newDirty){
 		istd::CChangeNotifier notifier(this);
 
-		m_isDirty = true;
+		m_isDirty = newDirty;
 	}
 }
 

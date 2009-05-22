@@ -64,7 +64,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 
 int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
 {
-	if (!IsOperationSupported(&data, &filePath, QF_NO_SAVING, false)){
+	if (!IsOperationSupported(&data, &filePath, QF_NO_LOADING, false)){
 		return StateFailed;
 	}
 

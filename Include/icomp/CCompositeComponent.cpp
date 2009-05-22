@@ -33,7 +33,7 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
 
 		IRegistry::ExportedInterfacesMap::const_iterator iter;
-		if (interfaceType == s_voidType){
+		if (interfaceType.IsVoid()){
 			iter = interfaceInfos.begin();
 		}
 		else{
@@ -237,11 +237,6 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 
 	return subComponentPtr.IsValid();
 }
-
-
-// static attributes
-
-istd::CClassInfo CCompositeComponent::s_voidType = istd::CClassInfo::GetInfo<void*>();
 
 
 }//namespace icomp

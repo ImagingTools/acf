@@ -196,6 +196,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSerializedStateComparator.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSingleDocumentManagerBase.cpp"
 				>
 			</File>
@@ -229,6 +233,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSerializedStateComparator.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSingleDocumentManagerBase.h"
 				>
 			</File>
@@ -254,6 +262,10 @@
 			</File>
 			<File
 				RelativePath="..\IDocumentManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDocumentStateComparator.h"
 				>
 			</File>
 			<File

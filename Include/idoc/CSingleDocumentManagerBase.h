@@ -107,6 +107,7 @@ private:
 	std::string m_viewTypeId;
 	istd::TDelPtr<istd::IChangeable> m_documentPtr;
 	istd::TDelPtr<imod::IUndoManager> m_undoManagerPtr;
+	istd::TDelPtr<IDocumentStateComparator> m_stateComparatorPtr;
 	istd::TDelPtr<istd::IPolymorphic> m_viewPtr;
 
 	bool m_isDirty;

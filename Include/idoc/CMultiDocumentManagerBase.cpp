@@ -228,6 +228,10 @@ bool CMultiDocumentManagerBase::FileSave(
 
 			infoPtr->filePath = filePath;
 			infoPtr->isDirty = false;
+
+			if (infoPtr->stateComparatorPtr.IsValid()){
+				infoPtr->stateComparatorPtr->StoreState(*infoPtr->documentPtr);
+			}
 		}
 
 		if (savedMapPtr != NULL){
@@ -350,6 +354,10 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 
 				infoPtr->isDirty = false;
 
+				if (infoPtr->stateComparatorPtr.IsValid()){
+					infoPtr->stateComparatorPtr->StoreState(*infoPtr->documentPtr);
+				}
+
 				return infoPtr.PopPtr()->documentPtr.GetPtr();
 			}
 		}
@@ -431,7 +439,8 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::Create
 					const_cast<CMultiDocumentManagerBase*>(this),
 					documentTypeId,
 					documentPtr,
-					documentTemplatePtr->CreateUndoManager(documentTypeId, documentPtr)));
+					documentTemplatePtr->CreateUndoManager(documentTypeId, documentPtr),
+					documentTemplatePtr->CreateStateComparator(documentTypeId)));
 
 		if (infoPtr->documentPtr.IsValid()){
 			imod::IModel* documentModelPtr = dynamic_cast<imod::IModel*>(documentPtr);
@@ -486,10 +495,15 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 
 void CMultiDocumentManagerBase::SingleDocumentData::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (!isDirty){
+	bool newDirty = true;
+	if (documentPtr.IsValid() && stateComparatorPtr.IsValid()){
+		newDirty = !stateComparatorPtr->CheckStateEquals(*documentPtr);
+	}
+
+	if (isDirty != newDirty){
 		istd::CChangeNotifier notifier(parentPtr);
 
-		isDirty = true;
+		isDirty = newDirty;
 	}
 }
 

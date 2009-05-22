@@ -38,7 +38,15 @@ public:
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Shows object info during selection using its type", false, "QuickHelpViewer");
 	I_END_COMPONENT;
 
-	enum AttrMeaning{
+	enum TabIndex
+	{
+		TI_GENERAL,
+		TI_ATTRIBUTES,
+		TI_EXPORTS
+	};
+
+	enum AttrMeaning
+	{
 		Reference = 0x1,
 		MultipleReference,
 		Attribute,
@@ -89,8 +97,14 @@ protected:
 				const icomp::IAttributeStaticInfo& staticInfo,
 				QTreeWidgetItem& attributeItem,
 				QTreeWidgetItem& exportItem,
-				bool* hasExportPtr);
-	bool DecodeAttribute(const iser::ISerializable& attribute, QString& text, int& meaning);
+				bool* hasExportPtr,
+				bool* isCorrectPtr);
+	bool DecodeAttribute(
+				const iser::ISerializable& attribute,
+				const icomp::IAttributeStaticInfo& staticInfo,
+				QString& text,
+				int& meaning,
+				bool& isCorrect);
 
 	void CreateComponentsTree(
 				const std::string& elementId,

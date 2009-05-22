@@ -8,9 +8,11 @@
 #include "istd/TPointerVector.h"
 #include "istd/TDelPtr.h"
 
+#include "imod/IUndoManager.h"
 #include "imod/CSingleModelObserverBase.h"
 
 #include "idoc/CDocumentManagerBase.h"
+#include "idoc/IDocumentStateComparator.h"
 
 
 namespace idoc
@@ -50,6 +52,7 @@ public:
 protected:
 	typedef istd::TDelPtr<istd::IChangeable> DocumentPtr;
 	typedef istd::TDelPtr<imod::IUndoManager> UndoManagerPtr;
+	typedef istd::TDelPtr<IDocumentStateComparator> StateComparatorPtr;
 	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
 	typedef std::list<ViewPtr> Views;
 
@@ -59,18 +62,25 @@ protected:
 					CMultiDocumentManagerBase* parentPtr,
 					const std::string& documentTypeId,
 					istd::IChangeable* documentPtr,
-					imod::IUndoManager* undoManagerPtr)
+					imod::IUndoManager* undoManagerPtr,
+					IDocumentStateComparator* stateComparatorPtr)
 		{
 			this->parentPtr = parentPtr;
 			this->documentTypeId = documentTypeId;
 			this->documentPtr.SetPtr(documentPtr);
 			this->undoManagerPtr.SetPtr(undoManagerPtr);
+			this->stateComparatorPtr.SetPtr(stateComparatorPtr);
 			isDirty = false;
+
+			if ((documentPtr != NULL) && (stateComparatorPtr != NULL)){
+				stateComparatorPtr->StoreState(*documentPtr);
+			}
 		}
 
 		CMultiDocumentManagerBase* parentPtr;
 		DocumentPtr documentPtr;
 		UndoManagerPtr undoManagerPtr;
+		StateComparatorPtr stateComparatorPtr;
 		Views views;
 
 	protected:

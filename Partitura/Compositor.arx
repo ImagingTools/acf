@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          887
+          886
         </Number>
         <Description>
           ACF
@@ -442,7 +442,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                Application
               </Value>
             </Data>
           </AttributeInfo>

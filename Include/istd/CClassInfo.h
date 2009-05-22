@@ -38,6 +38,11 @@ public:
 	const std::string& GetName() const;
 
 	/**
+		Check if this class information represents void type.
+	*/
+	bool IsVoid() const;
+
+	/**
 		Check if this class information represents template class.
 	*/
 	bool IsTemplateClass() const;
@@ -88,6 +93,8 @@ public:
 
 private:
 	std::string m_name;
+
+	static istd::CClassInfo s_voidType;
 };
 
 
@@ -125,6 +132,12 @@ inline bool CClassInfo::IsValid() const
 inline const std::string& CClassInfo::GetName() const
 {
 	return m_name;
+}
+
+
+inline bool CClassInfo::IsVoid() const
+{
+	return *this == s_voidType;
 }
 
 

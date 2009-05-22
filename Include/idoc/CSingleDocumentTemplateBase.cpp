@@ -7,20 +7,20 @@
 #include "istd/TDelPtr.h"
 #include "istd/CStaticServicesProvider.h"
 
+#include "iser/ISerializable.h"
+
 #include "imod/IModel.h"
+#include "imod/CSerializedUndoManager.h"
+#include "imod/TModelWrap.h"
 
 #include "isys/IFileSystem.h"
 
 #include "idoc/IDocumentManager.h"
-
-#include "iser/ISerializable.h"
-
-#include "imod/CSerializedUndoManager.h"
-#include "imod/TModelWrap.h"
+#include "idoc/CSerializedStateComparator.h"
 
 
 namespace idoc
-{		
+{
 
 
 void CSingleDocumentTemplateBase::SetSupportedFeatures(int featureFlags)
@@ -105,6 +105,16 @@ imod::IUndoManager* CSingleDocumentTemplateBase::CreateUndoManager(const std::st
 				return undoManagerModelPtr.PopPtr();
 			}
 		}
+	}
+
+	return NULL;
+}
+
+
+IDocumentStateComparator* CSingleDocumentTemplateBase::CreateStateComparator(const std::string& documentTypeId) const
+{
+	if (IsDocumentTypeSupported(documentTypeId)){
+		return new CSerializedStateComparator;
 	}
 
 	return NULL;

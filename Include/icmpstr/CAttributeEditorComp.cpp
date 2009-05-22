@@ -189,8 +189,6 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	InterfacesTree->clear();
 	ComponentsTree->clear();
 
-	bool hasExport = false;
-
 	const icomp::IComponentStaticInfo& elementStaticInfo = elementPtr->GetComponentStaticInfo();
 	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
 
@@ -212,6 +210,9 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	DescriptionLabel->setText(iqt::GetQString(elementStaticInfo.GetDescription()));
 	KeywordsLabel->setText(iqt::GetQString(elementStaticInfo.GetKeywords()));
 
+	bool hasExport = false;
+	bool isCorrect = true;
+
 	for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
 		const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
 		const icomp::IAttributeStaticInfo* staticAttributeInfPtr = staticAttributes.GetValueAt(staticAttributeIndex);
@@ -221,9 +222,11 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 		QTreeWidgetItem* exportItemPtr = new QTreeWidgetItem(attributeItemPtr);
 
 		bool exportFlag;
-		SetAttributeToItems(attributeId, *staticAttributeInfPtr, *attributeItemPtr, *exportItemPtr, &exportFlag);
+		bool correctFlag;
+		SetAttributeToItems(attributeId, *staticAttributeInfPtr, *attributeItemPtr, *exportItemPtr, &exportFlag, &correctFlag);
 
 		hasExport = hasExport || exportFlag;
+		isCorrect = isCorrect && correctFlag;
 
 		AttributeTree->addTopLevelItem(attributeItemPtr);
 		attributeItemPtr->addChild(exportItemPtr);
@@ -269,6 +272,8 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	CreateComponentsTree(elementId, elementStaticInfo, *componentRootPtr);
 
 	ComponentsTree->addTopLevelItem(componentRootPtr);
+
+	MainTab->setTabIcon(TI_ATTRIBUTES, isCorrect? QIcon(): QIcon(":/Resources/Icons/close_a_128.png"));
 }
 
 
@@ -383,14 +388,13 @@ bool CAttributeEditorComp::SetAttributeToItems(
 			const icomp::IAttributeStaticInfo& staticInfo,
 			QTreeWidgetItem& attributeItem,
 			QTreeWidgetItem& exportItem,
-			bool* hasExportPtr)
+			bool* hasExportPtr,
+			bool* isCorrectPtr)
 {
 	icomp::IRegistryElement* elementPtr = GetRegistryElement();
 	if (elementPtr == NULL){
 		return false;
 	}
-
-	bool isAttributeCorrect = true;
 
 	const iser::ISerializable* attributePtr = NULL;
 
@@ -404,6 +408,7 @@ bool CAttributeEditorComp::SetAttributeToItems(
 		}
 	}
 
+	bool isDefaultsValueUsed = false;
 	if ((attributeInfoPtr != NULL) && attributeInfoPtr->attributePtr.IsValid()){
 		attributePtr = attributeInfoPtr->attributePtr.GetPtr();
 		attributeItem.setCheckState(NameColumn, Qt::Checked);
@@ -411,6 +416,8 @@ bool CAttributeEditorComp::SetAttributeToItems(
 	else{
 		attributePtr = staticInfo.GetAttributeDefaultValue();
 		attributeItem.setCheckState(NameColumn, Qt::Unchecked);
+
+		isDefaultsValueUsed = true;
 	}
 
 	QString attributeType;
@@ -445,15 +452,20 @@ bool CAttributeEditorComp::SetAttributeToItems(
 	QString text;
 	int meaning;
 
-	if ((attributePtr != NULL) && DecodeAttribute(*attributePtr, text, meaning)){
-		isAttributeCorrect =
-					(meaning == Attribute) ||
-					((attributeInfoPtr != NULL) && (attributeInfoPtr->attributePtr.IsValid() || !attributeInfoPtr->exportId.empty())) ||
-					!staticInfo.IsObligatory();
+	bool isAttributeCorrect = true;
+	if ((attributePtr != NULL) && DecodeAttribute(*attributePtr, staticInfo, text, meaning, isAttributeCorrect)){
+		isAttributeCorrect = isAttributeCorrect || isDefaultsValueUsed;	// default value can points at incorrect component
+		if (isAttributeCorrect  && (meaning != Attribute) && staticInfo.IsObligatory()){
+			isAttributeCorrect = (attributeInfoPtr != NULL) && (attributeInfoPtr->attributePtr.IsValid() || !attributeInfoPtr->exportId.empty());
+		}
 
 		attributeItem.setBackgroundColor(0, isAttributeCorrect? Qt::white: Qt::red);
 		attributeItem.setText(ValueColumn, text);
 		attributeItem.setData(ValueColumn, AttributeMining, meaning);
+
+		if (isCorrectPtr != NULL){
+			*isCorrectPtr = isAttributeCorrect;
+		}
 
 		return true;
 	}
@@ -462,8 +474,15 @@ bool CAttributeEditorComp::SetAttributeToItems(
 }
 
 
-bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute, QString& text, int& meaning)
+bool CAttributeEditorComp::DecodeAttribute(
+			const iser::ISerializable& attribute,
+			const icomp::IAttributeStaticInfo& staticInfo,
+			QString& text,
+			int& meaning,
+			bool& isCorrect)
 {
+	isCorrect = true;
+
 	const icomp::CBoolAttribute* boolAttribute = dynamic_cast<const icomp::CBoolAttribute*>(&attribute);
 	if (boolAttribute != NULL){
 		text = boolAttribute->GetValue() ? tr("true"): tr("false");
@@ -537,7 +556,14 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 
 	const icomp::TSingleAttribute<std::string>* idPtr = dynamic_cast<const icomp::TSingleAttribute<std::string>*>(&attribute);
 	if (idPtr != NULL){		
-		text = EncodeToEdit(idPtr->GetValue().c_str());
+		const istd::CClassInfo& interfaceInfo = staticInfo.GetRelatedInterfaceType();
+		QStringList availableComponents = GetCompatibleComponents(interfaceInfo);
+
+		QString componentId = idPtr->GetValue().c_str();
+
+		isCorrect = isCorrect && availableComponents.contains(componentId);
+
+		text = EncodeToEdit(componentId);
 
 		meaning = Reference;
 
@@ -546,11 +572,18 @@ bool CAttributeEditorComp::DecodeAttribute(const iser::ISerializable& attribute,
 
 	const icomp::TMultiAttribute<std::string>* multiIdPtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(&attribute);
 	if (multiIdPtr != NULL){
+		const istd::CClassInfo& interfaceInfo = staticInfo.GetRelatedInterfaceType();
+		QStringList availableComponents = GetCompatibleComponents(interfaceInfo);
+
 		QString dependecyString;
 
 		int idsCount = multiIdPtr->GetValuesCount();
 		for (int idIndex = 0; idIndex < idsCount; idIndex++){
-			text += EncodeToEdit(iqt::GetQString(multiIdPtr->GetValueAt(idIndex)))  + ";";
+			QString componentId = multiIdPtr->GetValueAt(idIndex).c_str();
+
+			isCorrect = isCorrect && availableComponents.contains(componentId);
+
+			text += EncodeToEdit(componentId)  + ";";
 		}
 
 		meaning = MultipleReference;
@@ -601,10 +634,15 @@ QStringList CAttributeEditorComp::GetCompatibleSubcomponents(
 {
 	QStringList retVal;
 
-	icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = elementStaticInfo.GetInterfaceExtractors();
-	const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
-	if (extractorPtr != NULL){
+	if (interfaceInfo.IsVoid()){
 		retVal.push_back(iqt::GetQString(elementId.c_str()));
+	}
+	else{
+		icomp::IComponentStaticInfo::InterfaceExtractors interfaceExtractors = elementStaticInfo.GetInterfaceExtractors();
+		const icomp::IComponentStaticInfo::InterfaceExtractorPtr* extractorPtr = interfaceExtractors.FindElement(interfaceInfo);
+		if (extractorPtr != NULL){
+			retVal.push_back(iqt::GetQString(elementId.c_str()));
+		}
 	}
 
 	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();

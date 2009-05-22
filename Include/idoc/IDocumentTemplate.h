@@ -15,6 +15,7 @@
 #include "imod/IUndoManager.h"
 
 #include "idoc/ICommand.h"
+#include "idoc/IDocumentStateComparator.h"
 
 
 namespace idoc
@@ -101,6 +102,11 @@ public:
 		\return	pointer to created instance of undo manager or NULL, if creating of undo manager was impossible.
 	*/
 	virtual imod::IUndoManager* CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const = 0;
+
+	/**
+		Creates a document state comparator.
+	*/
+	virtual IDocumentStateComparator* CreateStateComparator(const std::string& documentTypeId) const = 0;
 
 	/**
 		Return default directory for specified document type.

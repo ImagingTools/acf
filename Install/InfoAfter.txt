@@ -1,1 +1,0 @@
-Please dont forget to set system path to ExtLib/Bin subdirectory!

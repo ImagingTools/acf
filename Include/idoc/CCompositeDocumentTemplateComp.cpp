@@ -126,6 +126,20 @@ imod::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const std:
 }
 
 
+IDocumentStateComparator* CCompositeDocumentTemplateComp::CreateStateComparator(const std::string& documentTypeId) const
+{
+	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
+	if (iter != m_idToTemplateMap.end()){
+		I_ASSERT(iter->second != NULL);
+
+		return iter->second->CreateStateComparator(documentTypeId);
+	}
+	else{
+		return NULL;
+	}
+}
+
+
 istd::CString CCompositeDocumentTemplateComp::GetDefaultDirectory(const istd::CString& sugestedDir, const std::string* documentTypeIdPtr) const
 {
 	if (documentTypeIdPtr != NULL){

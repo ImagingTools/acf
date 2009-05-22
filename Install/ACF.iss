@@ -22,7 +22,6 @@ UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
 UninstallDisplayName=$AcfProductName$ $AcfVersion:0$
 OutputDir=..\Setup
 LicenseFile=$LicensePath$
-InfoAfterFile=..\InfoAfter.txt
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfComp
@@ -64,6 +63,14 @@ en.QtBinaries=Qt binaries
 de.QtBinaries=Qt binäre Datei
 pl.QtBinaries=Pliki binarne Qt
 
+en.AddExtPath=Add external binaries path to the system PATH
+de.AddExtPath=Pfad für externe Bibliotheken zum Systempfad hinzufügen
+pl.AddExtPath=Dodaj sciezke zewnetrznych bibliotek do sciezki systemowej
+
+en.AddExtPath=Add ACF tools path to the system PATH
+de.AddExtPath=Pfad für ACF-Tools zum Systempfad hinzufügen
+pl.AddExtPath=Dodaj sciezke narzedzi ACF do sciezki systemowej
+
 [Types]
 Name: minimalType; Description: {cm:MinimalType}
 Name: fullType; Description: {cm:FullType}
@@ -81,14 +88,21 @@ Name: {group}\Compositor; Filename: {app}\Bin\ReleaseVC8\Acf.exe; Parameters: {a
 Name: "{group}\Compositor Mini"; Filename: {app}\Bin\ReleaseVC8\Compositor.exe; WorkingDir: {app}\Bin\ReleaseVC8; Components: acfComp
 Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: acfComp
 
+[Tasks]
+Name: AddExtPath; Description: {cm:AddExtPath}; Flags: checkedonce; Components: xercesComp xalanComp zlibComp qtComp
+Name: AddAcfPath; Description: {cm:AddAcfPath}; Flags: checkedonce; Components: acfComp
+
 [Registry]
-Root: HKLM; Subkey: "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\"; ValueName: ACFDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
+Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\ExtLib\Bin"; Flags: createvalueifdoesntexist; Tasks: AddExtPath
+Root: HKCU; Subkey: "Environment"; ValueType: string; ValueName: "Path"; ValueData: "{olddata};{app}\Bin\ReleaseVC8"; Flags: createvalueifdoesntexist; Tasks: AddAcfPath
+Root: HKCU; Subkey: "Environment"; ValueName: ACFDIR; ValueData: {app}; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
+Root: HKCU; Subkey: "Environment"; ValueName: XERCESDIR; ValueData: {app}\ExtLib\Xerces; ValueType: string; Flags: uninsdeletevalue; Components: xercesComp
+Root: HKCU; Subkey: "Environment"; ValueName: XALANDIR; ValueData: {app}\ExtLib\Xalan; ValueType: string; Flags: uninsdeletevalue; Components: xalanComp
+Root: HKCU; Subkey: "Environment"; ValueName: ZLIBDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: zlibComp
+
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\.arx"; ValueType: string; ValueData: arx_auto_file; Components: acfComp
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueData: "ACF Registry"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: EditFlags; ValueData: 0; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: BrowserFlags; ValueData: 8; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\open\\command"; ValueData: "{app}\\Bin\\ReleaseVC8\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\Open\\command"; ValueData: "{app}\\Bin\\ReleaseVC8\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\Run\\command"; ValueData: "{app}\\Bin\\ReleaseVC8\\Acf.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\"; ValueName: XERCESDIR; ValueData: {app}\ExtLib\Xerces; ValueType: string; Flags: uninsdeletevalue; Components: xercesComp
-Root: HKLM; Subkey: "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\"; ValueName: XALANDIR; ValueData: {app}\ExtLib\Xalan; ValueType: string; Flags: uninsdeletevalue; Components: xalanComp
-Root: HKLM; Subkey: "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\"; ValueName: ZLIBDIR; ValueData: {app}\ExtLib\Zlib; ValueType: string; Flags: uninsdeletevalue; Components: zlibComp

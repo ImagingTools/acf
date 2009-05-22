@@ -36,6 +36,7 @@ public:
 				istd::IChangeable* documentPtr,
 				const std::string& viewTypeId = std::string()) const;
 	virtual imod::IUndoManager* CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const;
+	virtual IDocumentStateComparator* CreateStateComparator(const std::string& documentTypeId) const;
 	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
 
 	// reimplemented (icomp::IComponent)

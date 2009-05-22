@@ -425,8 +425,8 @@ void CPackageOverviewComp::OnGuiCreated()
 
 	m_closedIcon = QIcon(":/Resources/Icons/dirclosed-16.png");
 	m_openIcon = QIcon(":/Resources/Icons/diropen-16.png");
-	m_validIcon = QIcon(QString::fromUtf8(":/Resources/Icons/ok-16.png"));
-	m_invalidIcon = QIcon(QString::fromUtf8(":/Resources/Icons/close_a_128.png"));
+	m_validIcon = QIcon(":/Resources/Icons/ok-16.png");
+	m_invalidIcon = QIcon(":/Resources/Icons/close_a_128.png");
 
 	// set up the tree view:
 	PackagesList->setColumnCount(2);

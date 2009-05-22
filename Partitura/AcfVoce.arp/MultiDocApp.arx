@@ -692,13 +692,21 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
         App
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        ibase::IApplicationInfo
+      </InterfaceId>
+      <ComponentId>
+        ApplicationInfo
       </ComponentId>
     </Interface>
     <Interface>
@@ -723,6 +731,14 @@
       </InterfaceId>
       <ComponentId>
         Workspace
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::IVersionInfo
+      </InterfaceId>
+      <ComponentId>
+        ApplicationInfo
       </ComponentId>
     </Interface>
     <Interface>
