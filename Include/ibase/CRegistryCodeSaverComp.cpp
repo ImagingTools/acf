@@ -99,6 +99,10 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	stream << "#define " << includeDefine << std::endl;
 	stream << std::endl << std::endl;
 
+	stream << "#include \"icomp/CComponentBase.h\"" << std::endl;
+	stream << "#include \"icomp/CRegistry.h\"" << std::endl;
+	stream << std::endl << std::endl;
+
 	istd::CString description = registry.GetDescription();
 	if (!description.IsEmpty()){
 		stream << "/**" << std::endl;
@@ -157,7 +161,12 @@ bool CRegistryCodeSaverComp::WriteRegistryIncludes(
 		packageIds.insert(packageId);
 	}
 	
-	stream << "#include \"" << className << ".h\"" << std::endl << std::endl;
+	stream << "#include \"" << className << ".h\"" << std::endl;
+	stream << std::endl << std::endl;
+	stream << "#include \"icomp/TSingleAttribute.h\"" << std::endl;
+	stream << "#include \"icomp/TMultiAttribute.h\"" << std::endl;
+	stream << "#include \"icomp/CRegistryElement.h\"" << std::endl;
+	stream << std::endl << std::endl;
 	for (		PackageIds::const_iterator packageIter = packageIds.begin();
 				packageIter != packageIds.end();
 				++packageIter){
@@ -166,6 +175,7 @@ bool CRegistryCodeSaverComp::WriteRegistryIncludes(
 		stream << "#include \"" << packageId << "/" << packageId << ".h\"" << std::endl;
 	}
 
+	stream << std::endl;
 	stream << std::endl;
 
 	return !stream.fail();
@@ -209,7 +219,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 		}
 
 		NextLine(stream);
-		stream << "// Element '" << componentName << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
+		stream << "// element '" << componentName << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
 
 		WriteComponentInfo(registry, componentName, *infoPtr, stream);
 	}
@@ -217,7 +227,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	stream << std::endl;
 
 	NextLine(stream);
-	stream << "// Interface export";
+	stream << "// interface export";
 	const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registry.GetExportedInterfacesMap();
 	for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator interfaceIter = interfacesMap.begin();
 				interfaceIter != interfacesMap.end();
@@ -238,7 +248,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	stream << std::endl;
 
 	NextLine(stream);
-	stream << "// Setting of meta info";
+	stream << "// setting of meta info";
 	NextLine(stream);
 	stream << "registry.SetDescription(\"" << registry.GetDescription().ToString() << "\");";
 	NextLine(stream);
@@ -255,7 +265,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	NextLine(stream);
 	stream << "// static members";
 	NextLine(stream);
-	stream << className << "::s_registry;";
+	stream << className << "::Registry " << className << ":: s_registry;";
 
 	stream << std::endl << std::endl;
 
@@ -289,14 +299,26 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 	NextLine(stream);
 	stream << "}" << std::endl;
 
+
+	std::string elementName = "element" + componentName + "Ptr";
+
 	NextLine(stream);
-	stream << elementInfoName << ".elementPtr.SetPtr(new icomp::CRegistryElement(&";
-	stream << componentInfo.address.GetPackageId() << "::" << componentInfo.address.GetComponentId() << "::InitStaticInfo(NULL)));";
+	stream << "icomp::CRegistryElement* " << elementName << " = new icomp::CRegistryElement;";
 	stream << std::endl;
 
 	NextLine(stream);
-	stream << "if (" << elementInfoName << ".elementPtr.IsValid()){";
+	stream << "if (" << elementName << " != NULL){";
 	ChangeIndent(1);
+
+	NextLine(stream);
+	stream << elementName << "->Initialize(&";
+	stream << componentInfo.address.GetPackageId() << "::" << componentInfo.address.GetComponentId() << "::InitStaticInfo(NULL));";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << elementInfoName << "->elementPtr.SetPtr(" << elementName << ");";
+	stream << std::endl;
+
 	if (componentInfo.elementPtr.IsValid()){
 		icomp::IRegistryElement& component = *componentInfo.elementPtr;
 		icomp::IRegistryElement::Ids attributeIds = component.GetAttributeIds();
@@ -313,13 +335,13 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 			}
 
 			NextLine(stream);
-			stream << "// Create and set attribute value for '" << attributeId << "'";
+			stream << "// create and set attribute value for '" << attributeId << "'";
 			if (attrInfoPtr != NULL){
-				std::string attributeInfoName = "attrInfo" + attributeId + "Ptr";
+				std::string attributeInfoName = "info" + attributeId + "Ptr";
 
 				NextLine(stream);
 				stream << "icomp::IRegistryElement::AttributeInfo* " << attributeInfoName << " = ";
-				stream << elementInfoName << ".elementPtr->InsertAttributeInfo(\"" << attributeId << "\", true);";
+				stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", true);";
 
 				NextLine(stream);
 				stream << "if (" << attributeInfoName << " == NULL){";
@@ -367,7 +389,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 
 	if (GetSingleAttributeValue(attribute, valueString, attributeType)){
 		NextLine(stream);
-		stream << attributeType << "* " << attributeName << " = dynamic_cast<" << attributeType << ">(" << attributeInfoName << "->attributePtr.GetPtr());";
+		stream << attributeType << "* " << attributeName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
 		NextLine(stream);
 		stream << "I_ASSERT(" << attributeName << " != NULL);";
 		NextLine(stream);
@@ -377,14 +399,14 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 	}
 	else if (GetMultipleAttributeValue(attribute, valueStrings, attributeType)){
 		NextLine(stream);
-		stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << ">(" << attributeInfoName << ");";
+		stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
 		NextLine(stream);
 		stream << "I_ASSERT(n" << attributeInfoName << " != NULL);";
 		for (		std::list<std::string>::const_iterator iter = valueStrings.begin();
 					iter != valueStrings.end();
 					++iter){
 			NextLine(stream);
-			stream << "n" << attributeInfoName << "->InsertValue(" << valueString << ");";
+			stream << "n" << attributeInfoName << "->InsertValue(" << *iter << ");";
 		}
 
 		return true;
@@ -454,8 +476,9 @@ bool CRegistryCodeSaverComp::GetMultipleAttributeValue(
 	if (stringListAttribute != NULL){
 		for (int index = 0; index < stringListAttribute->GetValuesCount(); index++){
 			valueStrings.push_back((istd::CString("\"") + stringListAttribute->GetValueAt(index) + "\"").ToString());
-			typeName = "icomp::CMultiStringAttribute";
 		}
+
+		typeName = "icomp::CMultiStringAttribute";
 
 		return true;
 	}
@@ -464,8 +487,9 @@ bool CRegistryCodeSaverComp::GetMultipleAttributeValue(
 	if (intListAttribute != NULL){
 		for (int index = 0; index < intListAttribute->GetValuesCount(); index++){
 			valueStrings.push_back(istd::CString::FromNumber(intListAttribute->GetValueAt(index)).ToString());
-			typeName = "icomp::CMultiIntAttribute";
 		}
+
+		typeName = "icomp::CMultiIntAttribute";
 
 		return true;
 	}
@@ -474,8 +498,9 @@ bool CRegistryCodeSaverComp::GetMultipleAttributeValue(
 	if (doubleListAttribute != NULL){
 		for (int index = 0; index < doubleListAttribute->GetValuesCount(); index++){
 			valueStrings.push_back(istd::CString::FromNumber(doubleListAttribute->GetValueAt(index)).ToString());
-			typeName = "icomp::CMultiDoubleAttribute";
 		}
+
+		typeName = "icomp::CMultiDoubleAttribute";
 
 		return true;
 	}
@@ -484,8 +509,9 @@ bool CRegistryCodeSaverComp::GetMultipleAttributeValue(
 	if (multiIdPtr != NULL){
 		for (int index = 0; index < multiIdPtr->GetValuesCount(); index++){
 			valueStrings.push_back(istd::CString("\"" + multiIdPtr->GetValueAt(index) + "\"").ToString());
-			typeName = "icomp::TMultiAttribute<std::string>";
 		}
+
+		typeName = "icomp::TMultiAttribute<std::string>";
 
 		return true;
 	}

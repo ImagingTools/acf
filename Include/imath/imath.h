@@ -10,7 +10,7 @@
 
 	\ingroup Main
 */
-static const double I_PI = 3.1415926;
+static const double I_PI = 3.14159265358979323846;
 
 
 /**

@@ -10,8 +10,6 @@
 // ACF includes
 #include "icomp/TComponentWrap.h"
 #include "icomp/TSimComponentWrap.h"
-#include "icomp/CCompositeComponentContext.h"
-#include "icomp/CCompositeComponent.h"
 #include "icomp/CRegistryElement.h"
 #include "icomp/CComponentAccessor.h"
 

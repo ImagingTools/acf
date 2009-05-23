@@ -216,8 +216,6 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 					subComponentPtr->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
 				}
 			}
-
-			return subComponentPtr.IsValid();
 		}
 		else{	// create real component
 			if (!subContextPtr.IsValid()){
