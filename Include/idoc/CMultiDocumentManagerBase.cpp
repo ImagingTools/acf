@@ -135,9 +135,12 @@ bool CMultiDocumentManagerBase::FileNew(
 {
 	istd::TDelPtr<SingleDocumentData> newInfoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
 	if (newInfoPtr.IsValid() && RegisterDocument(newInfoPtr.PopPtr())){
-		newInfoPtr->isDirty = false;
+		SingleDocumentData* newDocumentDataPtr = m_documentInfos.GetAt(m_documentInfos.GetCount() - 1);
+		I_ASSERT(newDocumentDataPtr != NULL);
+
+		newDocumentDataPtr->isDirty = false;
 		if (newDocumentPtr != NULL){
-			*newDocumentPtr = m_documentInfos.GetAt(m_documentInfos.GetCount() - 1)->documentPtr.GetPtr();
+			*newDocumentPtr = newDocumentDataPtr->documentPtr.GetPtr();
 		}
 
 		return true;
