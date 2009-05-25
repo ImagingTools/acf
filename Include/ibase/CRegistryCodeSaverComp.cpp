@@ -47,8 +47,13 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 			std::ofstream stream(filePath.ToString().c_str());
 			std::ofstream headerStream(headerFilePath.ToString().c_str());
 
+			Addresses realAddresses;
+			Addresses composedAddresses;
+
+			AppendAddresses(*registryPtr, realAddresses, composedAddresses);
+
 			if (		WriteHeader(className, *registryPtr, headerStream) &&
-						WriteRegistryIncludes(className, *registryPtr, stream) &&
+						WriteIncludes(className, realAddresses, stream) &&
 						WriteRegistryInfo(className, *registryPtr, stream)){
 				return StateOk;
 			}
@@ -87,6 +92,44 @@ istd::CString CRegistryCodeSaverComp::GetTypeDescription(const istd::CString* ex
 
 
 // protected methods
+
+bool CRegistryCodeSaverComp::AppendAddresses(
+			const icomp::IRegistry& registry,
+			Addresses& realAddresses,
+			Addresses& composedAddresses) const
+{
+	bool retVal = false;
+
+	icomp::IRegistry::Ids ids = registry.GetElementIds();
+	for (		icomp::IRegistry::Ids::const_iterator elementIter = ids.begin();
+				elementIter != ids.end();
+				++elementIter){
+		const std::string& componentName = *elementIter;
+
+		const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentName);
+		I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
+
+		if (		(realAddresses.find(infoPtr->address) == realAddresses.end()) &&
+					(composedAddresses.find(infoPtr->address) == composedAddresses.end())){
+			if (m_registriesManagerCompPtr.IsValid()){
+				const icomp::IRegistry* subregistryPtr = m_registriesManagerCompPtr->GetRegistry(infoPtr->address);
+				if (subregistryPtr != NULL){
+					composedAddresses.insert(infoPtr->address);
+
+					retVal = retVal || AppendAddresses(*subregistryPtr, realAddresses, composedAddresses);
+				}
+				else{
+					realAddresses.insert(infoPtr->address);
+
+					retVal = true;
+				}
+			}
+		}
+	}
+
+	return retVal;
+}
+
 
 bool CRegistryCodeSaverComp::WriteHeader(
 			const std::string& className,
@@ -138,29 +181,22 @@ bool CRegistryCodeSaverComp::WriteHeader(
 }
 
 
-bool CRegistryCodeSaverComp::WriteRegistryIncludes(
+bool CRegistryCodeSaverComp::WriteIncludes(
 			const std::string& className,
-			const icomp::IRegistry& registry,
+			const Addresses& addresses,
 			std::ofstream& stream) const
 {
 	typedef std::set<std::string> PackageIds;
-
 	PackageIds packageIds;
 
-	icomp::IRegistry::Ids ids = registry.GetElementIds();
-	for (		icomp::IRegistry::Ids::const_iterator elementIter = ids.begin();
-				elementIter != ids.end();
-				++elementIter){
-		const std::string& componentName = *elementIter;
+	for (		Addresses::const_iterator addressIter = addresses.begin();
+				addressIter != addresses.end();
+				++addressIter){
+		const icomp::CComponentAddress& address = *addressIter;
 
-		const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentName);
-		I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
-
-		const std::string& packageId = infoPtr->address.GetPackageId();
-
-		packageIds.insert(packageId);
+		packageIds.insert(address.GetPackageId());
 	}
-	
+
 	stream << "#include \"" << className << ".h\"" << std::endl;
 	stream << std::endl << std::endl;
 	stream << "#include \"icomp/TSingleAttribute.h\"" << std::endl;
@@ -187,7 +223,6 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			const icomp::IRegistry& registry,
 			std::ofstream& stream) const
 {
-	NextLine(stream);
 	stream << className << "::Registry::Registry()";
 	NextLine(stream);
 	stream << "{";

@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
 	}
 
 	icomp::TSimComponentWrap<BasePck::RegistryCodeSaver> codeSaverComp;
+	codeSaverComp.SetRef("RegistriesManager", &packagesLoaderComp);
 	codeSaverComp.InitComponent();
 
 	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;

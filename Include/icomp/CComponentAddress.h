@@ -29,6 +29,8 @@ public:
 	const std::string& GetComponentId() const;
 	void SetComponentId(const std::string& id);
 
+	bool operator<(const CComponentAddress& address) const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
@@ -61,6 +63,16 @@ inline const std::string& CComponentAddress::GetComponentId() const
 inline void CComponentAddress::SetComponentId(const std::string& id)
 {
 	m_componentId = id;
+}
+
+
+inline bool CComponentAddress::operator<(const CComponentAddress& address) const
+{
+	if (m_packageId == address.m_packageId){
+		return m_componentId < address.m_componentId;
+	}
+
+	return m_packageId < address.m_packageId;
 }
 
 

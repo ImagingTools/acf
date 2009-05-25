@@ -4,10 +4,12 @@
 
 // STL includes
 #include <list>
+#include <set>
 
 #include "iser/IFileLoader.h"
 
 #include "icomp/IRegistry.h"
+#include "icomp/IRegistriesManager.h"
 #include "icomp/CComponentBase.h"
 
 
@@ -22,6 +24,7 @@ public:
 
 	I_BEGIN_COMPONENT(CRegistryCodeSaverComp);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
+		I_ASSIGN(m_registriesManagerCompPtr, "RegistriesManager", "Registries manager providing access to all composite component registries", true, "RegistriesManager");
 	I_END_COMPONENT;
 
 	CRegistryCodeSaverComp();
@@ -38,13 +41,23 @@ public:
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
 protected:
+	typedef std::set<icomp::CComponentAddress> Addresses;
+
+	/**
+		Get set of used addresses used by this registry and its subcomponents.
+	*/
+	bool AppendAddresses(
+				const icomp::IRegistry& registry,
+				Addresses& realAddresses,
+				Addresses& composedAddresses) const;
+
 	bool WriteHeader(
 				const std::string& className,
 				const icomp::IRegistry& registry,
 				std::ofstream& stream) const;
-	bool WriteRegistryIncludes(
+	bool WriteIncludes(
 				const std::string& className,
-				const icomp::IRegistry& registry,
+				const Addresses& addresses,
 				std::ofstream& stream) const;
 	bool WriteRegistryInfo(
 				const std::string& className,
@@ -76,6 +89,8 @@ protected:
 	bool ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& headerFilePath) const;
 
 private:
+	I_REF(icomp::IRegistriesManager, m_registriesManagerCompPtr);
+
 	mutable int m_indentCount;
 };
 
