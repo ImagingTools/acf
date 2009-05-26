@@ -17,6 +17,9 @@ namespace ibase
 {
 
 
+/**
+	Save registry as C++ code genereting class with the same functionality.
+*/
 class CRegistryCodeSaverComp: public icomp::CComponentBase, public iser::IFileLoader
 {
 public:
@@ -54,6 +57,7 @@ protected:
 	bool WriteHeader(
 				const std::string& className,
 				const icomp::IRegistry& registry,
+				const Addresses& composedAddresses,
 				std::ofstream& stream) const;
 	bool WriteIncludes(
 				const std::string& className,
@@ -62,6 +66,7 @@ protected:
 	bool WriteRegistryInfo(
 				const std::string& className,
 				const icomp::IRegistry& registry,
+				const Addresses& composedAddresses,
 				std::ofstream& stream) const;
 	bool WriteComponentInfo(
 				const icomp::IRegistry& registry,
@@ -72,6 +77,17 @@ protected:
 				const std::string& attributeId,
 				const std::string& attributeName,
 				const iser::ISerializable& attribute,
+				std::ofstream& stream) const;
+
+	bool WriteRegistryClassDeclaration(
+				const std::string& baseClassName,
+				const std::string& registryClassName,
+				const icomp::IRegistry& registry,
+				std::ofstream& stream) const;
+	bool WriteRegistryClassBody(
+				const std::string& baseClassName,
+				const std::string& registryClassName,
+				const icomp::IRegistry& registry,
 				std::ofstream& stream) const;
 
 	bool GetSingleAttributeValue(
@@ -87,6 +103,13 @@ protected:
 	int ChangeIndent(int difference) const;
 
 	bool ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& headerFilePath) const;
+
+	std::string GetRegistryName(const icomp::CComponentAddress& address) const;
+
+	/**
+		Get some string as C++ string literal.
+	*/
+	std::string GetStringLiteral(const istd::CString& text) const;
 
 private:
 	I_REF(icomp::IRegistriesManager, m_registriesManagerCompPtr);
