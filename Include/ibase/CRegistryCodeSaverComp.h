@@ -45,6 +45,7 @@ public:
 
 protected:
 	typedef std::set<icomp::CComponentAddress> Addresses;
+	typedef std::set<std::string> Ids;
 
 	/**
 		Get set of used addresses used by this registry and its subcomponents.
@@ -53,11 +54,14 @@ protected:
 				const icomp::IRegistry& registry,
 				Addresses& realAddresses,
 				Addresses& composedAddresses) const;
+	Ids ExtractPackageIds(const Addresses& addresses) const;
+	Ids ExtractComponentIds(const Addresses& addresses, const std::string& packageId) const;
 
 	bool WriteHeader(
 				const std::string& className,
 				const icomp::IRegistry& registry,
 				const Addresses& composedAddresses,
+				const Addresses& realAddresses,
 				std::ofstream& stream) const;
 	bool WriteIncludes(
 				const std::string& className,
@@ -67,6 +71,7 @@ protected:
 				const std::string& className,
 				const icomp::IRegistry& registry,
 				const Addresses& composedAddresses,
+				const Addresses& realAddresses,
 				std::ofstream& stream) const;
 	bool WriteComponentInfo(
 				const icomp::IRegistry& registry,
@@ -104,7 +109,8 @@ protected:
 
 	bool ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& headerFilePath) const;
 
-	std::string GetRegistryName(const icomp::CComponentAddress& address) const;
+	std::string GetPackageName(const std::string& packageId) const;
+	std::string GetComponentName(const std::string& componentId) const;
 
 	/**
 		Get some string as C++ string literal.
