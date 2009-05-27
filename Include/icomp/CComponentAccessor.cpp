@@ -14,7 +14,7 @@ CComponentAccessor::CComponentAccessor(
 			const istd::CString& packageFile, 
 			const istd::CString& packageDir,
 			const istd::CString& configFile)
-	:m_registryFile(registryFile)
+:	m_registryFile(registryFile)
 {
 	if (m_registryFile.IsEmpty()){
 		m_registryFile = "default.arx";

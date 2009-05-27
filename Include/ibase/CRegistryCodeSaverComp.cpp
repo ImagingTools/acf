@@ -116,7 +116,7 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 				if (subregistryPtr != NULL){
 					composedAddresses.insert(infoPtr->address);
 
-					retVal = retVal || AppendAddresses(*subregistryPtr, realAddresses, composedAddresses);
+					retVal = AppendAddresses(*subregistryPtr, realAddresses, composedAddresses) || retVal;
 				}
 				else{
 					realAddresses.insert(infoPtr->address);
@@ -183,9 +183,15 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	NextLine(stream);
 	stream << "// ACF includes";
 	NextLine(stream);
-	stream << "#include \"icomp/CComponentStaticInfoBase.h\"";
+	stream << "#include \"icomp/IRegistriesManager.h\"";
+	NextLine(stream);
+	stream << "#include \"icomp/TComponentWrap.h\"";
 	NextLine(stream);
 	stream << "#include \"icomp/CRegistry.h\"";
+	NextLine(stream);
+	stream << "#include \"icomp/CCompositeComponent.h\"";
+	NextLine(stream);
+	stream << "#include \"icomp/CCompositeComponentContext.h\"";
 	NextLine(stream);
 	stream << "#include \"icomp/CCompositeComponentStaticInfo.h\"";
 	NextLine(stream);
@@ -207,19 +213,24 @@ bool CRegistryCodeSaverComp::WriteHeader(
 
 	NextLine(stream);
 	stream << "class " << className << ":";
-
 	NextLine(stream);
-	stream << "\t\t\tprivate icomp::CComponentStaticInfoBase";
-
+	stream << "\t\t\tvirtual private icomp::IRegistriesManager";
 	NextLine(stream);
 	stream << "{";
-
 	NextLine(stream);
 	stream << "public:";
 	ChangeIndent(1);
 
 	NextLine(stream);
-	stream << "typedef icomp::CComponentStaticInfoBase BaseClass;";
+	stream << "typedef icomp::TComponentWrap<icomp::CCompositeComponent> BaseClass;";
+	NextLine(stream);
+	stream << "typedef icomp::CCompositeComponentContext BaseClass2;";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "template <class InterfaceType>";
+	NextLine(stream);
+	stream << "InterfaceType* GetInterface(const std::string& subId = \"\"){return EnsureComponentInit(this).GetComponentInterface<InterfaceType>(subId);}";
 	stream << std::endl;
 
 	NextLine(stream);
@@ -230,6 +241,18 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	NextLine(stream);
 	stream << "protected:";
 	ChangeIndent(1);
+
+	NextLine(stream);
+	stream << "icomp::CCompositeComponent& EnsureComponentInit(const icomp::IRegistriesManager* managerPtr);";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "// reimplemented (icomp::IRegistriesManager)";
+	NextLine(stream);
+	stream << "virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address) const;";
+	NextLine(stream);
+	stream << "virtual istd::CString GetPackageDirPath(const std::string& packageId) const;";
+	stream << std::endl;
 
 	WriteRegistryClassDeclaration(className, "CMainRegistry", registry, stream);
 
@@ -250,7 +273,7 @@ bool CRegistryCodeSaverComp::WriteHeader(
 			stream << std::endl;
 
 			NextLine(stream);
-			stream << "class C" << packageName << ": public icomp::CPackageStaticInfo";
+			stream << "class C" << packageName;
 
 			NextLine(stream);
 			stream << "{";
@@ -260,49 +283,29 @@ bool CRegistryCodeSaverComp::WriteHeader(
 			ChangeIndent(1);
 
 			NextLine(stream);
-			stream << "typedef icomp::CPackageStaticInfo BaseClass;";
-			stream << std::endl;
-
-			NextLine(stream);
-			stream << "C" << packageName << "(const icomp::IComponentStaticInfo* factoryPtr);";
-			stream << std::endl;
+			stream << "static const icomp::IComponentStaticInfo& EnsureStaticInfoInit(const icomp::IRegistriesManager* managerPtr);";
 
 			Ids componentIds = ExtractComponentIds(composedAddresses, packageId);
-			if (!componentIds.empty()){
-				for (		Ids::const_iterator componentIter = componentIds.begin();
-							componentIter != componentIds.end();
-							++componentIter){
-					const std::string& componentId = *componentIter;
-
-					std::string componentName = GetComponentName(componentId);
-
-					icomp::CComponentAddress address(packageId, componentId);
-
-					const icomp::IRegistry* subregistryPtr = m_registriesManagerCompPtr->GetRegistry(address);
-
-					if (subregistryPtr != NULL){
-						stream << std::endl;
-
-						WriteRegistryClassDeclaration(className, "C" + componentName, *subregistryPtr, stream);
-					}
-					else{
-						NextLine(stream);
-						stream << "// Registry for address '" << address.GetPackageId() << "/" << address.GetComponentId() << "' could not be created";
-					}
-
-				}
-				stream << std::endl;
-			}
-
-			for (		Ids::const_iterator componentMemberIter = componentIds.begin();
-						componentMemberIter != componentIds.end();
-						++componentMemberIter){
-				const std::string& componentId = *componentMemberIter;
+			for (		Ids::const_iterator componentIter = componentIds.begin();
+						componentIter != componentIds.end();
+						++componentIter){
+				const std::string& componentId = *componentIter;
 
 				std::string componentName = GetComponentName(componentId);
 
-				NextLine(stream);
-				stream << "C" << componentName << " m_instance" << componentName << ";";
+				icomp::CComponentAddress address(packageId, componentId);
+
+				const icomp::IRegistry* subregistryPtr = m_registriesManagerCompPtr->GetRegistry(address);
+
+				if (subregistryPtr != NULL){
+					stream << std::endl;
+
+					WriteRegistryClassDeclaration(className, "C" + componentName, *subregistryPtr, stream);
+				}
+				else{
+					NextLine(stream);
+					stream << "// Registry for address '" << address.GetPackageId() << "/" << address.GetComponentId() << "' could not be created";
+				}
 			}
 
 			ChangeIndent(-1);
@@ -343,7 +346,6 @@ bool CRegistryCodeSaverComp::WriteHeader(
 
 			NextLine(stream);
 			stream << "C" << packageName << "();";
-			stream << std::endl;
 
 			ChangeIndent(-1);
 			NextLine(stream);
@@ -359,20 +361,21 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	ChangeIndent(1);
 
 	NextLine(stream);
-	stream << "CMainRegistry m_mainRegistry;";
+	stream << "icomp::CPackageStaticInfo m_rootStaticInfo;";
 
-	Ids packageIds;
-	packageIds.insert(composedPackageIds.begin(), composedPackageIds.end());
-	packageIds.insert(realPackageIds.begin(), realPackageIds.end());
-	for (		Ids::const_iterator packageInstanceIter = packageIds.begin();
-				packageInstanceIter != packageIds.end();
-				++packageInstanceIter){
-		const std::string& packageId = *packageInstanceIter;
+	if (!realPackageIds.empty()){
+		stream << std::endl;
 
-		std::string packageName = GetPackageName(packageId);
+		for (		Ids::const_iterator packageInstanceIter = realPackageIds.begin();
+					packageInstanceIter != realPackageIds.end();
+					++packageInstanceIter){
+			const std::string& packageId = *packageInstanceIter;
 
-		NextLine(stream);
-		stream << "C" << packageName << " m_sub" << packageName << ";";
+			std::string packageName = GetPackageName(packageId);
+
+			NextLine(stream);
+			stream << "C" << packageName << " m_sub" << packageName << ";";
+		}
 	}
 
 	ChangeIndent(-1);
@@ -433,42 +436,146 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	stream << className << "::" << className << "()";
 
 	NextLine(stream);
-	stream << ":\tm_mainRegistry(this)";
-
-	Ids composedPackageIds = ExtractPackageIds(composedAddresses);
-	for (		Ids::const_iterator initPackageIter = composedPackageIds.begin();
-				initPackageIter != composedPackageIds.end();
-				++initPackageIter){
-		const std::string& packageId = *initPackageIter;
-
-		std::string packageName = GetPackageName(packageId);
-
-		stream << ",";
-
-		NextLine(stream);
-		stream << "\tm_sub" << packageName << "(this)";
-	}
-
-	NextLine(stream);
 	stream << "{";
 	ChangeIndent(1);
 
 	Ids realPackageIds = ExtractPackageIds(realAddresses);
 
-	Ids packageIds;
-	packageIds.insert(composedPackageIds.begin(), composedPackageIds.end());
-	packageIds.insert(realPackageIds.begin(), realPackageIds.end());
-	for (		Ids::const_iterator registerPackageIter = packageIds.begin();
-				registerPackageIter != packageIds.end();
-				++registerPackageIter){
-		const std::string& packageId = *registerPackageIter;
-
-		std::string packageName = GetPackageName(packageId);
+	if (!realPackageIds.empty()){
+		stream << std::endl;
 
 		NextLine(stream);
-		stream << "RegisterSubcomponentInfo(\"" << packageId << "\", &m_sub" << packageName << ");";
+		stream << "// register real components";
+
+		for (		Ids::const_iterator registerRealIter = realPackageIds.begin();
+					registerRealIter != realPackageIds.end();
+					++registerRealIter){
+			const std::string& packageId = *registerRealIter;
+
+			std::string packageName = GetPackageName(packageId);
+
+			NextLine(stream);
+			stream << "m_rootStaticInfo.RegisterSubcomponentInfo(\"" << packageId << "\", &m_sub" << packageName << ");";
+		}
 	}
 
+	Ids composedPackageIds = ExtractPackageIds(composedAddresses);
+	if (!composedPackageIds.empty()){
+		stream << std::endl;
+
+		NextLine(stream);
+		stream << "// register composed components";
+
+		for (		Ids::const_iterator registerPackageIter = composedPackageIds.begin();
+					registerPackageIter != composedPackageIds.end();
+					++registerPackageIter){
+			const std::string& packageId = *registerPackageIter;
+
+			std::string packageName = GetPackageName(packageId);
+
+			NextLine(stream);
+			stream << "m_rootStaticInfo.RegisterSubcomponentInfo(\"" << packageId << "\", &C" << packageName << "::EnsureStaticInfoInit(this));";
+		}
+	}
+
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
+
+	stream << std::endl << std::endl;
+
+	NextLine(stream);
+	stream << "// protected methods";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "icomp::CCompositeComponent& " << className << "::EnsureComponentInit(const icomp::IRegistriesManager* managerPtr)";
+	NextLine(stream);
+	stream << "{";
+	ChangeIndent(1);
+
+	NextLine(stream);
+	stream << "static icomp::CRegistryElement element;";
+	NextLine(stream);
+	stream << "static icomp::CCompositeComponentContext context(&element, &CMainRegistry::EnsureRegistryInit(&m_rootStaticInfo), managerPtr, NULL);";
+	NextLine(stream);
+	stream << "static icomp::TComponentWrap<icomp::CCompositeComponent> component;";
+
+	NextLine(stream);
+	stream << "static bool isInitialized = false;";
+	NextLine(stream);
+	stream << "if (!isInitialized){";
+	ChangeIndent(1);
+	NextLine(stream);
+	stream << "isInitialized = true;";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "component.SetComponentContext(&context, NULL, false);";
+
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
+
+	NextLine(stream);
+	stream << "return component;";
+
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
+
+	stream << std::endl << std::endl;
+
+	NextLine(stream);
+	stream << "// reimplemented (icomp::IRegistriesManager)";
+	stream << std::endl;
+	NextLine(stream);
+	stream << "const icomp::IRegistry* " << className << "::GetRegistry(const icomp::CComponentAddress& address) const";
+	NextLine(stream);
+	stream << "{";
+	ChangeIndent(1);
+
+	if (!composedAddresses.empty()){
+		for (		Addresses::const_iterator regTestIter = composedAddresses.begin();
+					regTestIter != composedAddresses.end();
+					++regTestIter){
+			const icomp::CComponentAddress& address = *regTestIter;
+
+			if (regTestIter != composedAddresses.begin()){
+				stream << std::endl;
+			}
+
+			NextLine(stream);
+			stream << "if (address == icomp::CComponentAddress(\"" << address.GetPackageId() << "\", \"" << address.GetComponentId() << "\")){";
+			ChangeIndent(1);
+
+			NextLine(stream);
+			stream << "return &C" << GetPackageName(address.GetPackageId()) << "::C" << GetComponentName(address.GetComponentId()) << "::EnsureRegistryInit(&m_rootStaticInfo);";
+
+			ChangeIndent(-1);
+			NextLine(stream);
+			stream << "}";
+		}
+
+		stream << std::endl;
+	}
+
+	NextLine(stream);
+	stream << "return NULL;";
+
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
+
+	stream << std::endl << std::endl;
+
+	NextLine(stream);
+	stream << "istd::CString " << className << "::GetPackageDirPath(const std::string& /*packageId*/) const";
+	NextLine(stream);
+	stream << "{";
+	ChangeIndent(1);
+	NextLine(stream);
+	stream << "return istd::CString();";
 	ChangeIndent(-1);
 	NextLine(stream);
 	stream << "}";
@@ -479,10 +586,6 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	stream << std::endl << std::endl;
 
 	if (m_registriesManagerCompPtr.IsValid()){
-		if (!composedPackageIds.empty()){
-			stream << std::endl;
-		}
-
 		for (		Ids::const_iterator packageIter = composedPackageIds.begin();
 					packageIter != composedPackageIds.end();
 					++packageIter){
@@ -490,49 +593,57 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 
 			std::string packageName = GetPackageName(packageId);
 
-			Ids componentIds = ExtractComponentIds(composedAddresses, packageId);
-
 			NextLine(stream);
 			stream << "// Embedded class C" << packageName;
 
 			stream << std::endl;
 
 			NextLine(stream);
-			stream << className << "::C" << packageName << "::C" << packageName << "(const icomp::IComponentStaticInfo* factoryPtr)";
-
-			for (		Ids::const_iterator instanceInitIter = componentIds.begin();
-						instanceInitIter != componentIds.end();
-						++instanceInitIter){
-				const std::string& componentId = *instanceInitIter;
-
-				std::string componentName = GetComponentName(componentId);
-
-				if (instanceInitIter != componentIds.begin()){
-					stream << ",";
-				}
-
-				NextLine(stream);
-
-				if (instanceInitIter == componentIds.begin()){
-					stream << ":";
-				}
-				stream << "\tm_instance" << componentName << "(factoryPtr)";
-			}
+			stream << "const icomp::IComponentStaticInfo& " << className << "::C" << packageName << "::EnsureStaticInfoInit(icomp::IRegistriesManager* managerPtr)";
 
 			NextLine(stream);
 			stream << "{";
 			ChangeIndent(1);
 
-			for (		Ids::const_iterator instanceRegIter = componentIds.begin();
-						instanceRegIter != componentIds.end();
-						++instanceRegIter){
-				const std::string& componentId = *instanceRegIter;
+			NextLine(stream);
+			stream << "static istd::TDelPtr<icomp::CCompositePackageStaticInfo> infoPtr;";
+			stream << std::endl;
 
-				std::string componentName = GetComponentName(componentId);
+			NextLine(stream);
+			stream << "if (!infoPtr.IsValid()){";
+			ChangeIndent(1);
 
-				NextLine(stream);
-				stream << "RegisterSubcomponentInfo(\"" << componentId << "\", &m_instance" << componentName << ");";
+			NextLine(stream);
+			stream << "icomp::IComponentStaticInfo::Ids ids;";
+			stream << std::endl;
+
+			Ids componentIds = ExtractComponentIds(composedAddresses, packageId);
+			if (!componentIds.empty()){
+				for (		Ids::const_iterator instanceRegIter = componentIds.begin();
+							instanceRegIter != componentIds.end();
+							++instanceRegIter){
+					const std::string& componentId = *instanceRegIter;
+
+					std::string componentName = GetComponentName(componentId);
+
+					NextLine(stream);
+					stream << "ids.insert(\"" << componentId << "\");";
+				}
+
+				stream << std::endl;
 			}
+
+			NextLine(stream);
+			stream << "infoPtr.SetPtr(new icomp::CCompositePackageStaticInfo(\"" << packageId << "\", ids, managerPtr));";
+			stream << std::endl;
+
+			ChangeIndent(-1);
+			NextLine(stream);
+			stream << "}";
+			stream << std::endl;
+
+			NextLine(stream);
+			stream << "return *infoPtr;";
 
 			ChangeIndent(-1);
 			NextLine(stream);
@@ -665,13 +776,8 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 					stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", true);";
 
 					NextLine(stream);
-					stream << "if (" << attributeInfoName << " == NULL){";
+					stream << "if (" << attributeInfoName << " != NULL){";
 					ChangeIndent(1);
-					NextLine(stream);
-					stream << "return false;";
-					ChangeIndent(-1);
-					NextLine(stream);
-					stream << "}";
 
 					if (!attrInfoPtr->exportId.empty()){
 						NextLine(stream);
@@ -681,6 +787,10 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 					if (attrInfoPtr->attributePtr.IsValid()){
 						WriteAttribute(attributeId, attributeInfoName, *attrInfoPtr->attributePtr, stream);
 					}
+
+					ChangeIndent(-1);
+					NextLine(stream);
+					stream << "}";
 				}
 			}
 
@@ -746,11 +856,7 @@ bool CRegistryCodeSaverComp::WriteRegistryClassDeclaration(
 			std::ofstream& stream) const
 {
 	NextLine(stream);
-	stream << "class " << registryClassName << ":";
-	NextLine(stream);
-	stream << "\t\t\tpublic icomp::CRegistry,";
-	NextLine(stream);
-	stream << "\t\t\tpublic icomp::CCompositeComponentStaticInfo";
+	stream << "class " << registryClassName;
 	NextLine(stream);
 	stream << "{";
 
@@ -759,24 +865,11 @@ bool CRegistryCodeSaverComp::WriteRegistryClassDeclaration(
 	ChangeIndent(1);
 
 	NextLine(stream);
-	stream << "typedef icomp::CRegistry BaseClass;";
+	stream << "static const icomp::IComponentStaticInfo& EnsureStaticInfoInit(const icomp::IComponentStaticInfo* factoryPtr);";
 	NextLine(stream);
-	stream << "typedef icomp::CCompositeComponentStaticInfo BaseClass2;";
-	stream << std::endl;
+	stream << "static const icomp::IRegistry& EnsureRegistryInit(const icomp::IComponentStaticInfo* factoryPtr);";
 
-	NextLine(stream);
-	stream << registryClassName << "(const icomp::IComponentStaticInfo* factoryPtr);";
-	stream << std::endl;
 	ChangeIndent(-1);
-
-	NextLine(stream);
-	stream << "protected:";
-	ChangeIndent(1);
-
-	NextLine(stream);
-	stream << "static bool SetupRegistry(icomp::CRegistry& registry);";
-	ChangeIndent(-1);
-
 	NextLine(stream);
 	stream << "};";
 
@@ -796,19 +889,30 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 	stream << std::endl;
 
 	NextLine(stream);
-	stream << baseClassName << "::" << registryClassName << "::" << registryClassName << "(const icomp::IComponentStaticInfo* factoryPtr)";
-
-	NextLine(stream);
-	stream << ":\tBaseClass(factoryPtr),";
-	NextLine(stream);
-	stream << "\tBaseClass2(*this)";
+	stream << "const icomp::IComponentStaticInfo& " << baseClassName << "::" << registryClassName << "::EnsureStaticInfoInit(const icomp::IComponentStaticInfo* factoryPtr)";
 
 	NextLine(stream);
 	stream << "{";
 	ChangeIndent(1);
 
 	NextLine(stream);
-	stream << "SetupRegistry(*this);";
+	stream << "static istd::TDelPtr<icomp::CCompositeComponentStaticInfo> infoPtr;";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "if (!infoPtr.IsValid()){;";
+	ChangeIndent(1);
+
+	NextLine(stream);
+	stream << "infoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(EnsureRegistryInit(factoryPtr)));";
+
+	ChangeIndent(-1);
+	NextLine(stream);
+	stream << "}";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "return *infoPtr;";
 
 	ChangeIndent(-1);
 	NextLine(stream);
@@ -817,29 +921,49 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 	stream << std::endl << std::endl;
 
 	NextLine(stream);
-	stream << "bool " << baseClassName << "::" << registryClassName << "::SetupRegistry(icomp::CRegistry& registry)";
+	stream << "const icomp::IRegistry& " << baseClassName << "::" << registryClassName << "::EnsureRegistryInit(const icomp::IComponentStaticInfo* factoryPtr)";
 
 	NextLine(stream);
 	stream << "{";
 	ChangeIndent(1);
 
+	NextLine(stream);
+	stream << "static bool isInitialized = false;";
+	NextLine(stream);
+	stream << "static icomp::CRegistry registry;";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "if (!isInitialized){";
+	ChangeIndent(1);
+
+	NextLine(stream);
+	stream << "isInitialized = true;";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "registry.SetComponentStaticInfo(factoryPtr);";
+
 	icomp::IRegistry::Ids ids = registry.GetElementIds();
-	for (		icomp::IRegistry::Ids::const_iterator elementIter = ids.begin();
-				elementIter != ids.end();
-				++elementIter){
-		const std::string& componentId = *elementIter;
+	if (!ids.empty()){
+		stream << std::endl;
+		for (		icomp::IRegistry::Ids::const_iterator elementIter = ids.begin();
+					elementIter != ids.end();
+					++elementIter){
+			const std::string& componentId = *elementIter;
 
-		const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentId);
-		I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
+			const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentId);
+			I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
 
-		if (elementIter != ids.begin()){
-			stream << std::endl;
+			if (elementIter != ids.begin()){
+				stream << std::endl;
+			}
+
+			NextLine(stream);
+			stream << "// element '" << componentId << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
+
+			WriteComponentInfo(registry, componentId, *infoPtr, stream);
 		}
-
-		NextLine(stream);
-		stream << "// element '" << componentId << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
-
-		WriteComponentInfo(registry, componentId, *infoPtr, stream);
 	}
 
 	stream << std::endl;
@@ -885,8 +1009,13 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 		stream << std::endl;
 	}
 
+	ChangeIndent(-1);
 	NextLine(stream);
-	stream << "return true;";
+	stream << "}";
+	stream << std::endl;
+
+	NextLine(stream);
+	stream << "return registry;";
 	ChangeIndent(-1);
 	NextLine(stream);
 	stream << "}";

@@ -62,10 +62,13 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		return NULL;
 	}
 
-	istd::TDelPtr<IRegistryElement> registryPtr(CreateRegistryElement(address));
+	istd::TDelPtr<IRegistryElement> registryPtr;
+	if (ensureElementCreated){
+		registryPtr.SetPtr(CreateRegistryElement(address));
 
-	if (ensureElementCreated && !registryPtr.IsValid()){
-		return NULL;
+		if (!registryPtr.IsValid()){
+			return NULL;
+		}
 	}
 
 	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_ADDED);
