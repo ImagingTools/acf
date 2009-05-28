@@ -39,11 +39,11 @@ public:
 
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CPackageOverviewComp> BaseClass;
 	
-	I_BEGIN_COMPONENT(CPackageOverviewComp)
-		I_REGISTER_INTERFACE(IAttributeSelectionObserver)
-		I_ASSIGN(m_generalStaticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo")
-		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager used to provide icon paths", true, "PackagesManager")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CPackageOverviewComp);
+		I_REGISTER_INTERFACE(IAttributeSelectionObserver);
+		I_ASSIGN(m_generalStaticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo");
+		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager used to provide icon paths", true, "PackagesManager");
+	I_END_COMPONENT;
 
 	enum
 	{

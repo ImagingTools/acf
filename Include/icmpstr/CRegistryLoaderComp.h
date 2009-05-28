@@ -20,6 +20,9 @@ class CRegistryLoaderComp: public ibase::TFileSerializerComp<iser::CXmlFileReadA
 public:
 	typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> BaseClass;
 
+	I_BEGIN_COMPONENT(CRegistryLoaderComp);
+	I_END_COMPONENT;
+
 	enum MessageId
 	{
 		MI_LOAD_ERROR = 680,

@@ -599,7 +599,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			stream << std::endl;
 
 			NextLine(stream);
-			stream << "const icomp::IComponentStaticInfo& " << className << "::C" << packageName << "::EnsureStaticInfoInit(icomp::IRegistriesManager* managerPtr)";
+			stream << "const icomp::IComponentStaticInfo& " << className << "::C" << packageName << "::EnsureStaticInfoInit(const icomp::IRegistriesManager* managerPtr)";
 
 			NextLine(stream);
 			stream << "{";
