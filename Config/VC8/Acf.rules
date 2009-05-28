@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualStudioToolFile
+	Name="ACF Rules"
+	Version="8,00"
+	>
+	<Rules>
+		<CustomBuildRule
+			Name="Arxc"
+			DisplayName="ARX Compiler"
+			CommandLine="$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe $(InputPath) -o $(InputDir)/Generated/C$(InputName).cpp"
+			Outputs="$(InputDir)/Generated/C$(InputName).cpp"
+			AdditionalDependencies="$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe"
+			FileExtensions="*.arx"
+			ExecutionDescription="Compiling ACF Registry File..."
+			>
+			<Properties>
+			</Properties>
+		</CustomBuildRule>
+	</Rules>
+</VisualStudioToolFile>

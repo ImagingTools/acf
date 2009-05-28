@@ -22,6 +22,7 @@ I_EXPORT_COMPONENT(ModelProxy, "Model proxy", "Model Proxy");
 I_EXPORT_COMPONENT(ModelBinder, "Model binder", "Model Observer Bind Binder");
 I_EXPORT_COMPONENT(ConsoleLog, "Simple log on windows console", "Log Windows Message Consumer");
 I_EXPORT_COMPONENT(TextFileLog, "Simple text file log", "Log Message Consumer");
+I_EXPORT_COMPONENT(CopyApp, "General object copy or transform", "Copy Compile Transform Application");
 
 I_EXPORT_COMPONENT(SelectableParamsSet, "Composed set of parameters", "Model Parameters Set Selection Options List");
 I_EXPORT_COMPONENT(ParamsManager, "Manager of parameters set", "Model Parameters Set Manager");

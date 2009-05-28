@@ -11,8 +11,6 @@ namespace icomp
 
 CComponentAccessor::CComponentAccessor(
 			const istd::CString& registryFile,
-			const istd::CString& packageFile, 
-			const istd::CString& packageDir,
 			const istd::CString& configFile)
 :	m_registryFile(registryFile)
 {
@@ -25,7 +23,7 @@ CComponentAccessor::CComponentAccessor(
 		icomp::IRegistryLoader* registryLoaderPtr = registryLoaderProviderPtr->GetRegistryLoader();
 	
 		if (registryLoaderPtr != NULL){
-			registryLoaderPtr->ConfigureEnvironment(registryFile, packageFile, packageDir, configFile);
+			registryLoaderPtr->ConfigureEnvironment(configFile);
 
 			const icomp::IComponentStaticInfo* staticInfoPtr = dynamic_cast<const icomp::IComponentStaticInfo*>(registryLoaderPtr);
 			const IRegistriesManager* registriesManagerPtr = dynamic_cast<const icomp::IRegistriesManager*>(registryLoaderPtr);

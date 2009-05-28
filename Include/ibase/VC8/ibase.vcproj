@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCopyAppComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInstantiatorComp.cpp"
 				>
 			</File>
@@ -247,6 +251,10 @@
 			</File>
 			<File
 				RelativePath="..\CConsoleLogComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCopyAppComp.h"
 				>
 			</File>
 			<File

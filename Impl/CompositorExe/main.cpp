@@ -1,5 +1,6 @@
 // Qt includes
 #include <QCoreApplication>
+#include <QApplication>
 
 // ACF includes
 #include "ibase/IApplication.h"
@@ -10,6 +11,8 @@
 
 int main(int argc, char *argv[])
 {
+	QApplication::setStyle("plastique");
+
 	Q_INIT_RESOURCE(iqtgui);
 	Q_INIT_RESOURCE(icmpstr);
 

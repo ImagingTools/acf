@@ -1,5 +1,7 @@
+// STL includes
 #include <iostream>
 
+// Qt includes
 #include <QString>
 #include <QMessageBox>
 #include <QApplication>
@@ -24,8 +26,6 @@ int main(int argc, char *argv[])
 
 	iqt::CDefaultServicesProvider::RegisterServices();
 
-	istd::CString packageFile;
-	istd::CString packageDir;
 	istd::CString configFile;
 
 	std::string registryFile = "default.arx";
@@ -43,8 +43,6 @@ int main(int argc, char *argv[])
 				std::cout << "\tAcf.exe [registryName] {options}      - normal registry start" << std::endl;
 				std::cout << "\t-h or -help              - showing help" << std::endl;
 				std::cout << "\t-id componentId          - specify component ID." << std::endl;
-				std::cout << "\t-packageFile filePath    - append single package file" << std::endl;
-				std::cout << "\t-packageDir directory    - append packages directory" << std::endl;
 				std::cout << "\t-config configFile       - load config file" << std::endl;
 				std::cout << "\t-info                    - application parameter info" << std::endl;
 				std::cout << "\t-wait                    - wait on application end" << std::endl;
@@ -63,12 +61,6 @@ int main(int argc, char *argv[])
 				if (option == "id"){
 					componentId = argv[++index];
 				}
-				else if (option == "packageFile"){
-					packageFile = argv[++index];
-				}
-				else if (option == "packageDir"){
-					packageDir = argv[++index];
-				}
 				else if (option == "config"){
 					configFile = argv[++index];
 				}
@@ -81,7 +73,7 @@ int main(int argc, char *argv[])
 
 	int retVal = 0;
 
-	icomp::CComponentAccessor componentAccessor(registryFile, packageFile, packageDir, configFile);
+	icomp::CComponentAccessor componentAccessor(registryFile, configFile);
 
 	ibase::IApplication* applicationPtr = componentAccessor.GetComponentInterface<ibase::IApplication>(componentId);
 	if (applicationPtr == NULL){

@@ -61,11 +61,7 @@ public:
 	bool LoadConfigFile(const istd::CString& configFile);
 
 	// reimplemented (icomp::IRegistryLoader)
-	virtual bool ConfigureEnvironment(
-				const istd::CString& registryFile,
-				const istd::CString& packageFile = istd::CString(),
-				const istd::CString& packageDir = istd::CString(),
-				const istd::CString& configFile= istd::CString());
+	virtual bool ConfigureEnvironment(const istd::CString& configFile = istd::CString());
 	virtual const icomp::IRegistry* GetRegistryFromFile(const istd::CString& path) const;
 
 	// reimplemented (icomp::CComponentBase)

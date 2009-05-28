@@ -25,10 +25,11 @@ public:
 	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 	typedef icomp::CRegistry BaseClass2;
 
-	I_BEGIN_COMPONENT(CRegistryModelComp)
-		I_REGISTER_INTERFACE(icomp::IRegistry)
-		I_ASSIGN(m_staticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CRegistryModelComp);
+		I_REGISTER_INTERFACE(istd::IChangeable);
+		I_REGISTER_INTERFACE(icomp::IRegistry);
+		I_ASSIGN(m_staticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo");
+	I_END_COMPONENT;
 
 	enum ChangeFlags
 	{

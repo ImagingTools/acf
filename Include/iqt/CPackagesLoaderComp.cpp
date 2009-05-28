@@ -188,27 +188,11 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 
 // reimplemented (icomp::IRegistryLoader)
 
-bool CPackagesLoaderComp::ConfigureEnvironment(
-			const istd::CString& registryFile,
-			const istd::CString& packageFile,
-			const istd::CString& packageDir,
-			const istd::CString& configFile)
+bool CPackagesLoaderComp::ConfigureEnvironment(const istd::CString& configFile)
 {
 	bool useDefaultRegistries = true;
 	bool retVal = true;
 
-	if (!packageFile.IsEmpty()){
-		retVal = retVal && RegisterPackageFile(packageFile);
-
-		useDefaultRegistries = false;
-	}
-	
-	if (!packageDir.IsEmpty()){
-		retVal = retVal && RegisterPackagesDir(packageDir);
-
-		useDefaultRegistries = false;
-	}
-	
 	if (!configFile.IsEmpty()){
 		retVal = retVal && LoadConfigFile(configFile);
 
@@ -217,9 +201,7 @@ bool CPackagesLoaderComp::ConfigureEnvironment(
 
 	// register default package path
 	if (useDefaultRegistries){
-		QDir registryDir = QFileInfo(iqt::GetQString(registryFile)).dir();
-
-		if (!LoadConfigFile(iqt::GetCString(registryDir.absoluteFilePath("Default.xpc")))){
+		if (!LoadConfigFile(iqt::GetCString("Default.xpc"))){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
 			if (!LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("Default.xpc")))){
 				retVal = retVal && RegisterPackagesDir(iqt::GetCString(applicationDir.absolutePath()));

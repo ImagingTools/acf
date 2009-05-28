@@ -14,11 +14,7 @@ namespace icomp
 class IRegistryLoader: virtual public istd::IPolymorphic
 {
 public:
-	virtual bool ConfigureEnvironment(
-				const istd::CString& registryFile,
-				const istd::CString& packageFile = istd::CString(),
-				const istd::CString& packageDir = istd::CString(),
-				const istd::CString& configFile= istd::CString()) = 0;
+	virtual bool ConfigureEnvironment(const istd::CString& configFile = istd::CString()) = 0;
 
 	/**
 		Get an ACF registry from a given file.

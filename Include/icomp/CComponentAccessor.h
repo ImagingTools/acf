@@ -17,10 +17,8 @@ namespace icomp
 class CComponentAccessor
 {
 public:
-	CComponentAccessor(
+	explicit CComponentAccessor(
 				const istd::CString& registryFile, 
-				const istd::CString& packageFile = istd::CString(), 
-				const istd::CString& packageDir = istd::CString(), 
 				const istd::CString& configFile = istd::CString());
 
 	template <class InterfaceType>
