@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="Compositor"
+	Name="CompositorMini"
 	ProjectGUID="{6BD89B26-013F-4F41-87B7-14D632CCFEFF}"
-	RootNamespace="Compositor"
+	RootNamespace="CompositorMini"
 	>
 	<Platforms>
 		<Platform
