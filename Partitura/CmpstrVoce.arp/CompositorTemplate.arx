@@ -7,15 +7,15 @@
           0
         </Id>
         <Number>
-          887
+          932
         </Number>
         <Description>
-          ACF
+          ACF'
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="7">
     <Element>
       <Id>
         DocumentTemplate
@@ -274,6 +274,43 @@
     </Element>
     <Element>
       <Id>
+        RegistryCodeSaver
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        RegistryCodeSaver
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              RegistriesManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         RegistryEditor
       </Id>
       <PackageId>
@@ -286,7 +323,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               MainWindow
@@ -336,6 +373,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryCodeSaver
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryCodeSaver
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

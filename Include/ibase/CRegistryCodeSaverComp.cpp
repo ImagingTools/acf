@@ -771,9 +771,11 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 				if (attrInfoPtr != NULL){
 					std::string attributeInfoName = "info" + attributeId + "Ptr";
 
+					bool isAttributeValid = attrInfoPtr->attributePtr.IsValid();
+
 					NextLine(stream);
 					stream << "icomp::IRegistryElement::AttributeInfo* " << attributeInfoName << " = ";
-					stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", true);";
+					stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", " << isAttributeValid << ");";
 
 					NextLine(stream);
 					stream << "if (" << attributeInfoName << " != NULL){";
@@ -784,7 +786,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 						stream << attributeInfoName << "->exportId = \"" << attrInfoPtr->exportId << "\";";
 					}
 
-					if (attrInfoPtr->attributePtr.IsValid()){
+					if (isAttributeValid){
 						WriteAttribute(attributeId, attributeInfoName, *attrInfoPtr->attributePtr, stream);
 					}
 
@@ -831,15 +833,18 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 		return true;
 	}
 	else if (GetMultipleAttributeValue(attribute, valueStrings, attributeType)){
-		NextLine(stream);
-		stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
-		NextLine(stream);
-		stream << "I_ASSERT(n" << attributeInfoName << " != NULL);";
-		for (		std::list<std::string>::const_iterator iter = valueStrings.begin();
-					iter != valueStrings.end();
-					++iter){
+		if (!valueStrings.empty()){
 			NextLine(stream);
-			stream << "n" << attributeInfoName << "->InsertValue(" << *iter << ");";
+			stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
+			NextLine(stream);
+			stream << "I_ASSERT(n" << attributeInfoName << " != NULL);";
+
+			for (		std::list<std::string>::const_iterator iter = valueStrings.begin();
+						iter != valueStrings.end();
+						++iter){
+				NextLine(stream);
+				stream << "n" << attributeInfoName << "->InsertValue(" << *iter << ");";
+			}
 		}
 
 		return true;

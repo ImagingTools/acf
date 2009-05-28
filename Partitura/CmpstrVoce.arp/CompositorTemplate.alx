@@ -7,15 +7,15 @@
           0
         </Id>
         <Number>
-          887
+          932
         </Number>
         <Description>
-          ACF
+          ACF'
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="17">
+  <PositionMap count="18">
     <Element>
       <ComponentName>
         Application
@@ -54,10 +54,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -416
+        -373
       </X>
       <X>
-        -412
+        -380
       </X>
     </Element>
     <Element>
@@ -120,10 +120,10 @@
         PackagesLoader
       </ComponentName>
       <X>
-        -366
+        -343
       </X>
       <X>
-        50
+        -26
       </X>
     </Element>
     <Element>
@@ -131,10 +131,10 @@
         Preview
       </ComponentName>
       <X>
-        254
+        367
       </X>
       <X>
-        50
+        -22
       </X>
     </Element>
     <Element>
@@ -183,13 +183,24 @@
     </Element>
     <Element>
       <ComponentName>
+        RegistryCodeSaver
+      </ComponentName>
+      <X>
+        23
+      </X>
+      <X>
+        162
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         RegistryEditor
       </ComponentName>
       <X>
-        -94
+        1
       </X>
       <X>
-        49
+        -25
       </X>
     </Element>
     <Element>

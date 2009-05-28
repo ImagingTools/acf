@@ -62,6 +62,7 @@ int main(int argc, char *argv[])
 	packagesLoaderComp.SetRef("Log", &log);
 	packagesLoaderComp.InitComponent();
 
+	istd::CString configFile;
 	istd::CString registryFile;
 	bool useDefaultRegistries = true;
 	for (int index = 1; index < argc; index++){
@@ -74,27 +75,13 @@ int main(int argc, char *argv[])
 							"Usage"
 							"\tCompositor.exe [registryName] {options}      - registry editor"
 							"\t-h or -help              - showing this help"
-							"\t-packageFile filePath    - append single package file"
-							"\t-packageDir directory    - append packages directory"
 							"\t-config configFile       - load config file"));
 
 				return 0;
 			}
 			else if (index < argc - 1){
-				if (option == "packageFile"){
-					packagesLoaderComp.RegisterPackageFile(argv[++index]);
-
-					useDefaultRegistries = false;
-				}
-				else if (option == "packageDir"){
-					packagesLoaderComp.RegisterPackagesDir(argv[++index]);
-
-					useDefaultRegistries = false;
-				}
-				else if (option == "config"){
-					packagesLoaderComp.LoadConfigFile(argv[++index]);
-
-					useDefaultRegistries = false;
+				if (option == "config"){
+					configFile = argv[++index];
 				}
 			}
 		}
@@ -103,19 +90,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	// register default package path
-	if (useDefaultRegistries){
-		if (!packagesLoaderComp.LoadConfigFile("Default.xpc")){
-			QDir applicationDir = QCoreApplication::applicationDirPath();
-			if (!packagesLoaderComp.LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath("Default.xpc")))){
-				packagesLoaderComp.RegisterPackagesDir(iqt::GetCString(applicationDir.absolutePath()));
-			}
-		}
-	}
-
-	icomp::TSimComponentWrap<BasePck::RegistryCodeSaver> codeSaverComp;
-	codeSaverComp.SetRef("RegistriesManager", &packagesLoaderComp);
-	codeSaverComp.InitComponent();
+	packagesLoaderComp.ConfigureEnvironment(configFile);
 
 	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;
 	packageOverviewComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
@@ -139,7 +114,6 @@ int main(int argc, char *argv[])
 	// registry view
 	icomp::TSimComponentsFactory<CmpstrPck::RegistryView> viewFactoryComp;
 	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
-	viewFactoryComp.SetRef("RegistryCodeSaver", &codeSaverComp);
 	viewFactoryComp.SetRef("RegistryPreview", &registryPreviewComp);
 	viewFactoryComp.SetRef("PackagesManager", &packagesLoaderComp);
 

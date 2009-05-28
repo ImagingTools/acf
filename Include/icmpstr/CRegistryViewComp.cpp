@@ -45,7 +45,7 @@ CRegistryViewComp::CRegistryViewComp()
 	m_propertiesCommand.setShortcut(QKeySequence(Qt::ALT + Qt::Key_Enter));
 	m_exportToCodeCommand.SetGroupId(GI_CODEGEN);
 	m_executeRegistryCommand.setEnabled(false);
-	m_executeRegistryCommand.setShortcut(QKeySequence(Qt::CTRL + Qt::Key_F5));
+	m_executeRegistryCommand.setShortcut(QKeySequence(Qt::Key_F5));
 	m_executeRegistryCommand.SetGroupId(GI_PREVIEW);
 	m_executeRegistryCommand.SetStaticFlags(lightToolFlags);
 	m_abortRegistryCommand.setEnabled(false);
@@ -258,6 +258,10 @@ void CRegistryViewComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	OnRetranslate();
+
+	m_exportToCodeCommand.setVisible(m_registryCodeSaverCompPtr.IsValid());
+	m_executeRegistryCommand.setVisible(m_registryPreviewCompPtr.IsValid());
+	m_abortRegistryCommand.setVisible(m_registryPreviewCompPtr.IsValid());
 
 	connect(&m_removeComponentCommand, SIGNAL(activated()), this, SLOT(OnRemoveComponent()));
 	connect(&m_renameComponentCommand, SIGNAL(activated()), this, SLOT(OnRenameComponent()));

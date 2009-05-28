@@ -323,10 +323,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Values count="0">
-							</Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -341,10 +339,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Values count="0">
-							</Values>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
