@@ -202,6 +202,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -230,6 +234,18 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\Compositor.rc"
+			>
+		</File>
+		<File
+			RelativePath=".\icon1.ico"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\Docs\Images\Logo\Logo.ico"
+			>
+		</File>
 	</Files>
 	<Globals>
 		<Global
