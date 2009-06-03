@@ -7,10 +7,10 @@
           0
         </Id>
         <Number>
-          935
+          936
         </Number>
         <Description>
-          ACF
+          ACF'
         </Description>
       </Version>
     </VersionInfos>
@@ -692,7 +692,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -707,6 +707,14 @@
       </InterfaceId>
       <ComponentId>
         ApplicationInfo
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        idoc::IDocumentManager
+      </InterfaceId>
+      <ComponentId>
+        Workspace
       </ComponentId>
     </Interface>
     <Interface>
