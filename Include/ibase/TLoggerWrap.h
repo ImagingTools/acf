@@ -19,7 +19,7 @@ namespace ibase
 	To register it use interface ibase::ILoggable implemented by this wrapper.
 */
 template <class Base>
-class TLoggerWrap: public Base, virtual public ILoggable, virtual public istd::ILogger
+class TLoggerWrap: virtual public Base, virtual public ILoggable, virtual public istd::ILogger
 {
 public:
 	TLoggerWrap();

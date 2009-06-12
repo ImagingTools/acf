@@ -292,9 +292,10 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	labelFont2.setPixelSize(m_componentIdFontSize);
 	painter->setFont(labelFont2);
 
-	painter->drawText(	mainRect, 
-						Qt::AlignLeft | Qt::TextSingleLine, 
-						QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString("/") + m_elementInfoPtr->address.GetComponentId().c_str());
+	painter->drawText(
+				mainRect, 
+				Qt::AlignLeft | Qt::TextSingleLine, 
+				QString(m_elementInfoPtr->address.GetPackageId().c_str()) + QString("/") + m_elementInfoPtr->address.GetComponentId().c_str());
 	
 	painter->restore();
 }

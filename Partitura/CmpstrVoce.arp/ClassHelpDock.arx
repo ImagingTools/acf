@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          882
+          946
         </Number>
         <Description>
           ACF
@@ -136,7 +136,26 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              DockArea
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DockTitle

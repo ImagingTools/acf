@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          882
+          946
         </Number>
         <Description>
           ACF
@@ -54,10 +54,10 @@
         ComponentHelpFileProvider
       </ComponentName>
       <X>
-        229
+        337
       </X>
       <X>
-        233
+        337
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         DoxygenHelpFileProvider
       </ComponentName>
       <X>
-        227
+        337
       </X>
       <X>
-        366
+        462
       </X>
     </Element>
     <Element>
@@ -153,10 +153,10 @@
         QuickHelpDock
       </ComponentName>
       <X>
-        241
+        350
       </X>
       <X>
-        0
+        87
       </X>
     </Element>
     <Element>
@@ -164,10 +164,10 @@
         QuickHelpViewer
       </ComponentName>
       <X>
-        241
+        350
       </X>
       <X>
-        116
+        212
       </X>
     </Element>
     <Element>
