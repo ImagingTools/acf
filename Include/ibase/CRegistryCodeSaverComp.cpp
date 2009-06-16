@@ -955,18 +955,12 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 			const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentId);
 			I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
 
-			if (elementIter != ids.begin()){
-				stream << std::endl;
-			}
-
 			NextLine(stream);
 			stream << "// element '" << componentId << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
 
 			WriteComponentInfo(registry, componentId, *infoPtr, stream);
 		}
 	}
-
-	stream << std::endl;
 
 	NextLine(stream);
 	stream << "// interface export";

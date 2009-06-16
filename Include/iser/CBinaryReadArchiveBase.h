@@ -17,6 +17,12 @@ class CBinaryReadArchiveBase: public CReadArchiveBase
 public:
 	typedef CReadArchiveBase BaseClass;
 
+	enum MessageId
+	{
+		MI_TAG_ERROR = 0x3f320b0,
+		MI_STRING_TOO_LONG
+	};
+
 	// reimplemented (iser::IArchive)
 	virtual bool BeginTag(const CArchiveTag& tag);
 	virtual bool EndTag(const CArchiveTag& tag);

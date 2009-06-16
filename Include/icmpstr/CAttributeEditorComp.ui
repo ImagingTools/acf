@@ -1,233 +1,235 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<ui version="4.0" >
  <class>CAttributeEditorComp</class>
- <widget class="QWidget" name="CAttributeEditorComp">
-  <property name="geometry">
+ <widget class="QWidget" name="CAttributeEditorComp" >
+  <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>282</width>
-    <height>266</height>
+    <width>297</width>
+    <height>291</height>
    </rect>
   </property>
-  <property name="windowTitle">
+  <property name="windowTitle" >
    <string>Property Editor</string>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="spacing">
+  <layout class="QVBoxLayout" >
+   <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="margin">
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="MainTab">
-     <property name="tabPosition">
+    <widget class="QTabWidget" name="MainTab" >
+     <property name="tabPosition" >
       <enum>QTabWidget::South</enum>
      </property>
-     <property name="currentIndex">
+     <property name="currentIndex" >
       <number>0</number>
      </property>
-     <widget class="QWidget" name="InfoTab">
-      <attribute name="title">
+     <widget class="QWidget" name="InfoTab" >
+      <attribute name="title" >
        <string>Info</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_9">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+      <layout class="QGridLayout" name="gridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label_9" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string>Name</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="NameLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+       <item row="0" column="1" >
+        <widget class="QLabel" name="NameLabel" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Ignored" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string/>
          </property>
-         <property name="wordWrap">
+         <property name="wordWrap" >
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_7" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string>Package</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="PackageIdLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+       <item row="1" column="1" >
+        <widget class="QLabel" name="PackageIdLabel" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Ignored" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string/>
          </property>
-         <property name="wordWrap">
+         <property name="wordWrap" >
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_8">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <item row="2" column="0" >
+        <widget class="QLabel" name="label_8" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string>Component ID</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="ComponentIdLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+       <item row="2" column="1" >
+        <widget class="QLabel" name="ComponentIdLabel" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Ignored" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string/>
          </property>
-         <property name="wordWrap">
+         <property name="wordWrap" >
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <item row="3" column="0" >
+        <widget class="QLabel" name="label_5" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string>Description</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="DescriptionLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+       <item row="3" column="1" >
+        <widget class="QLabel" name="DescriptionLabel" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Ignored" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string/>
          </property>
-         <property name="wordWrap">
+         <property name="wordWrap" >
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <item row="4" column="0" >
+        <widget class="QLabel" name="label_6" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string>Keywords</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QLabel" name="KeywordsLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+       <item row="4" column="1" >
+        <widget class="QLabel" name="KeywordsLabel" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Ignored" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string/>
          </property>
-         <property name="wordWrap">
+         <property name="wordWrap" >
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="5" column="0" colspan="2">
-        <widget class="QLabel" name="IconLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
+       <item row="5" column="0" colspan="2" >
+        <widget class="QLabel" name="IconLabel" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Ignored" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
+         <property name="text" >
           <string/>
          </property>
-         <property name="alignment">
+         <property name="scaledContents" >
+          <bool>true</bool>
+         </property>
+         <property name="alignment" >
           <set>Qt::AlignCenter</set>
          </property>
-         <property name="wordWrap">
+         <property name="wordWrap" >
           <bool>true</bool>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="AttributesTab">
-      <attribute name="title">
+     <widget class="QWidget" name="AttributesTab" >
+      <attribute name="title" >
        <string>Attributes</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <property name="spacing">
+      <layout class="QVBoxLayout" >
+       <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="margin">
+       <property name="margin" >
         <number>0</number>
        </property>
        <item>
-        <widget class="QTreeWidget" name="AttributeTree">
-         <property name="frameShape">
+        <widget class="QTreeWidget" name="AttributeTree" >
+         <property name="frameShape" >
           <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="editTriggers">
+         <property name="editTriggers" >
           <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
          </property>
-         <property name="alternatingRowColors">
+         <property name="alternatingRowColors" >
           <bool>false</bool>
          </property>
          <column>
-          <property name="text">
+          <property name="text" >
            <string>Property</string>
           </property>
          </column>
          <column>
-          <property name="text">
+          <property name="text" >
            <string>Value</string>
           </property>
          </column>
@@ -235,45 +237,51 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="ExportTab">
-      <attribute name="icon">
-       <iconset resource="icmpstr.qrc">
-        <normaloff>:/Resources/Icons/Export.png</normaloff>:/Resources/Icons/Export.png</iconset>
+     <widget class="QWidget" name="ExportTab" >
+      <attribute name="title" >
+       <string>Interfaces</string>
       </attribute>
-      <attribute name="title">
-       <string>Export</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="margin">
+      <layout class="QVBoxLayout" name="verticalLayout" >
+       <property name="margin" >
         <number>0</number>
        </property>
        <item>
-        <widget class="QTreeWidget" name="InterfacesTree">
-         <property name="rootIsDecorated">
+        <widget class="QTreeWidget" name="InterfacesTree" >
+         <property name="rootIsDecorated" >
           <bool>false</bool>
          </property>
-         <property name="itemsExpandable">
+         <property name="itemsExpandable" >
           <bool>false</bool>
          </property>
          <column>
-          <property name="text">
+          <property name="text" >
            <string>Export interface</string>
           </property>
          </column>
         </widget>
        </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="ComponentTab" >
+      <attribute name="title" >
+       <string>Components</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
        <item>
-        <widget class="QTreeWidget" name="ComponentsTree">
-         <property name="alternatingRowColors">
+        <widget class="QTreeWidget" name="ComponentsTree" >
+         <property name="alternatingRowColors" >
           <bool>true</bool>
          </property>
          <column>
-          <property name="text">
+          <property name="text" >
            <string>Component</string>
           </property>
          </column>
          <column>
-          <property name="text">
+          <property name="text" >
            <string>Export alias</string>
           </property>
          </column>
@@ -285,9 +293,9 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
+ <layoutdefault spacing="6" margin="11" />
  <resources>
-  <include location="icmpstr.qrc"/>
+  <include location="icmpstr.qrc" />
  </resources>
  <connections/>
 </ui>

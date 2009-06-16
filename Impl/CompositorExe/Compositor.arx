@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          946
+          948
         </Number>
         <Description>
           ACF
@@ -804,9 +804,9 @@ This tool is a part of ACF project
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Compositor application used to graphical edit ACF registry files
   </Description>
   <Keywords>
-    
+    ACF Compositor Editor ARX
   </Keywords>
 </Acf>

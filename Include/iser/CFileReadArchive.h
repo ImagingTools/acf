@@ -47,7 +47,16 @@ protected:
 		bool useTagSkipping;
 	};
 
+	// reimplemented (istd::ILogger)
+	virtual void DecorateMessage(
+				MessageCategory category,
+				int id,
+				int flags,
+				istd::CString& message,
+				istd::CString& messageSource) const;
+
 private:
+	istd::CString m_filePath;
 	std::ifstream m_stream;
 
 	bool m_supportTagSkipping;

@@ -17,7 +17,24 @@ bool CBinaryReadArchiveBase::BeginTag(const CArchiveTag& tag)
 	I_DWORD readId;
 	bool retVal = Process(readId);
 
-	return retVal && (readId == tag.GetBinaryId());
+	if (!retVal){
+		return false;
+	}
+
+	if (readId != tag.GetBinaryId()){
+		if (IsLogConsumed()){
+			SendLogMessage(
+						istd::ILogger::MC_ERROR,
+						MI_TAG_ERROR,
+						istd::CString("Bad tag begin code, is ") + istd::CString::FromNumber(readId) + ", should be " + istd::CString::FromNumber(tag.GetBinaryId()) + " (tag '" + tag.GetId() + "')",
+						"iser::CBinaryReadArchiveBase",
+						MF_SYSTEM);
+		}
+
+		return false;
+	}
+
+	return true;
 }
 
 
@@ -26,7 +43,24 @@ bool CBinaryReadArchiveBase::EndTag(const CArchiveTag& tag)
 	I_DWORD readId;
 	bool retVal = Process(readId);
 
-	return retVal && (~readId == tag.GetBinaryId());
+	if (!retVal){
+		return false;
+	}
+
+	if (~readId != tag.GetBinaryId()){
+		if (IsLogConsumed()){
+			SendLogMessage(
+						istd::ILogger::MC_ERROR,
+						MI_TAG_ERROR,
+						istd::CString("Bad tag begin code, is ") + istd::CString::FromNumber(~readId) + ", should be " + istd::CString::FromNumber(tag.GetBinaryId()) + " (tag '" + tag.GetId() + "')",
+						"iser::CBinaryReadArchiveBase",
+						MF_SYSTEM);
+		}
+
+		return false;
+	}
+
+	return true;
 }
 
 
@@ -110,6 +144,15 @@ bool CBinaryReadArchiveBase::Process(std::string& value)
 
 	if (retVal && (stringLength > 0)){
 		if (stringLength > MaxStringLength){
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::ILogger::MC_ERROR,
+							MI_STRING_TOO_LONG,
+							istd::CString("Read string size is ") + istd::CString::FromNumber(stringLength) + " and it is longer than maximum size",
+							"iser::CBinaryReadArchiveBase",
+							MF_SYSTEM);
+			}
+
 			return false;
 		}
 
@@ -134,6 +177,15 @@ bool CBinaryReadArchiveBase::Process(istd::CString& value)
 
 	if (retVal && (stringLength > 0)){
 		if (stringLength > MaxStringLength){
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::ILogger::MC_ERROR,
+							MI_STRING_TOO_LONG,
+							istd::CString("Read string size is ") + istd::CString::FromNumber(stringLength) + " and it is longer than maximum size",
+							"iser::CBinaryReadArchiveBase",
+							MF_SYSTEM);
+			}
+
 			return false;
 		}
 

@@ -13,9 +13,9 @@ namespace iser
 
 
 CFileReadArchive::CFileReadArchive(const istd::CString& filePath, bool supportTagSkipping, bool serializeHeader)
-:	m_supportTagSkipping(supportTagSkipping)
+:	m_filePath(filePath), m_supportTagSkipping(supportTagSkipping)
 {
-	m_stream.open(filePath.ToString().c_str(), std::fstream::in | std::fstream::binary);
+	m_stream.open(m_filePath.ToString().c_str(), std::fstream::in | std::fstream::binary);
 
 	if (serializeHeader){
 		SerializeAcfHeader();
@@ -84,6 +84,21 @@ bool CFileReadArchive::ProcessData(void* data, int size)
 	m_stream.read((char*)data, size);
 
 	return !m_stream.fail();
+}
+
+
+// protected methods
+
+// reimplemented (istd::ILogger)
+
+void CFileReadArchive::DecorateMessage(
+			MessageCategory /*category*/,
+			int /*id*/,
+			int /*flags*/,
+			istd::CString& message,
+			istd::CString& /*messageSource*/) const
+{
+	message = m_filePath + " : " + message;
 }
 
 

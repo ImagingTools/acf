@@ -43,7 +43,9 @@ protected:
 		Check if any log message is consumed.
 		Default implementation retuns false.
 	*/
-	virtual bool IsLogConsumed() const;
+	virtual bool IsLogConsumed(
+				const MessageCategory* categoryPtr = NULL,
+				int* flagsPtr = NULL) const;
 
 	/**
 		Send any message to log.
@@ -75,7 +77,9 @@ protected:
 
 // inline methods
 
-inline bool ILogger::IsLogConsumed() const
+inline bool ILogger::IsLogConsumed(
+			const MessageCategory* /*categoryPtr*/,
+			int* /*flagsPtr*/) const
 {
 	return false;
 }

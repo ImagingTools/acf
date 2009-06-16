@@ -82,7 +82,9 @@ protected:
 				int flags = 0) const;
 
 	// reimplemented (istd::ILogger)
-	virtual bool IsLogConsumed() const;
+	virtual bool IsLogConsumed(
+				const MessageCategory* categoryPtr = NULL,
+				const int* flagsPtr = NULL) const;
 	virtual bool SendLogMessage(
 				MessageCategory category,
 				int id,
@@ -153,7 +155,9 @@ bool TLoggerWrap<Base>::SendCriticalMessage(int id, const istd::CString& message
 // reimplemented (istd::ILogger)
 
 template <class Base>
-bool TLoggerWrap<Base>::IsLogConsumed() const
+bool TLoggerWrap<Base>::IsLogConsumed(
+			const MessageCategory* /*categoryPtr*/,
+			const int* /*flagsPtr*/) const
 {
 	return (m_logPtr != NULL);
 }

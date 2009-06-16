@@ -243,13 +243,13 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const istd::CSt
 
 void CPackagesLoaderComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	if (m_configFilePathAttrPtr.IsValid()){
 		QDir applicationDir = QCoreApplication::applicationDirPath();
 
 		LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath(iqt::GetQString(*m_configFilePathAttrPtr))));
 	}
-
-	BaseClass::OnComponentCreated();
 }
 
 
@@ -304,7 +304,7 @@ CDllFunctionsProvider& CPackagesLoaderComp::GetProviderRef(const QFileInfo& file
 	if (!providerPtr->IsValid()){
 		SendErrorMessage(
 					MI_CANNOT_REGISTER,
-					iqt::GetCString(QObject::tr("Cannot register components from registry\n%1").arg(fileInfo.fileName())));
+					iqt::GetCString(QObject::tr("Cannot register components from registry %1").arg(fileInfo.fileName())));
 	}
 
 	return *providerPtr;

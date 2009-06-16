@@ -66,9 +66,11 @@ protected:
 
 	protected:
 		// reimplemented (istd::ILogger)
-		virtual bool IsLogConsumed() const
+		virtual bool IsLogConsumed(
+					const MessageCategory* categoryPtr = NULL,
+					const int* flagsPtr = NULL) const
 		{
-			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed();
+			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(categoryPtr, flagsPtr);
 		}
 		virtual bool SendLogMessage(MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource, int flags = 0) const
 		{
@@ -99,9 +101,11 @@ protected:
 
 	protected:
 		// reimplemented (istd::ILogger)
-		virtual bool IsLogConsumed() const
+		virtual bool IsLogConsumed(
+					const MessageCategory* categoryPtr = NULL,
+					const int* flagsPtr = NULL) const
 		{
-			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed();
+			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(categoryPtr, flagsPtr);
 		}
 		virtual bool SendLogMessage(MessageCategory category, int id, const istd::CString& message, const istd::CString& messageSource, int flags = 0) const
 		{
