@@ -202,6 +202,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CServiceApplicationComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\iabc.h"
 				>
 			</File>
@@ -213,6 +217,10 @@
 			>
 			<File
 				RelativePath="..\generated\moc_CFolderMonitorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CServiceApplicationComp.cpp"
 				>
 			</File>
 		</Filter>

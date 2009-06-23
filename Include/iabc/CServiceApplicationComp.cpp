@@ -5,6 +5,11 @@
 #include <QVector>
 #include <QMessageBox>
 #include <QCoreApplication>
+#include <QSystemTrayIcon>
+
+
+// ACF includes
+#include "iqtgui/IGuiApplication.h"
 
 
 namespace iabc
@@ -123,6 +128,60 @@ istd::CString CServiceApplicationComp::GetHelpText() const
 }
 
 
+// reimplemented (QObject)
+	
+bool CServiceApplicationComp::eventFilter(QObject* sourceObject, QEvent* eventPtr)
+{
+	I_ASSERT(m_applicationCompPtr.IsValid());
+	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(m_applicationCompPtr.GetPtr());
+	if (guiAppPtr != NULL){
+		const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
+		if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
+			QWidget* widgetPtr = mainWdigetPtr->GetWidget();
+			I_ASSERT(widgetPtr != NULL);
+
+			// prevent closing of the main widget:
+			if ((widgetPtr == sourceObject) && eventPtr->type() == QEvent::Close){
+				eventPtr->ignore();
+
+				widgetPtr->hide();
+
+				return true;	
+			}
+		}
+	}
+
+	return false;
+}
+
+
+
+// protected slots:
+
+void CServiceApplicationComp::OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+	I_ASSERT(m_applicationCompPtr.IsValid());
+
+	if (reason == QSystemTrayIcon::DoubleClick){
+		iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(m_applicationCompPtr.GetPtr());
+		if (guiAppPtr != NULL){
+			const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
+			if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
+				QWidget* widgetPtr = mainWdigetPtr->GetWidget();
+				I_ASSERT(widgetPtr != NULL);
+				
+				if (widgetPtr->isHidden()){
+					widgetPtr->show();
+				}
+				else{
+					widgetPtr->activateWindow();
+				}
+			}
+		}	
+	}
+}
+
+
 // public methods of embedded class CService
 
 CServiceApplicationComp::CService::CService(
@@ -147,6 +206,53 @@ CServiceApplicationComp::CService::CService(
 
 void CServiceApplicationComp::CService::start()
 {
+	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(&m_application);
+	if (guiAppPtr != NULL){
+		const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
+		if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
+			QWidget* widgetPtr = mainWdigetPtr->GetWidget();
+			I_ASSERT(widgetPtr != NULL);
+			QSystemTrayIcon* trayIcon = new QSystemTrayIcon(widgetPtr);
+			connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), &m_parent, SLOT(OnTrayIconActivated(QSystemTrayIcon::ActivationReason)));
+
+			trayIcon->setIcon(widgetPtr->windowIcon());
+
+			trayIcon->setVisible(true);
+
+			widgetPtr->installEventFilter(&m_parent);
+
+			widgetPtr->hide();
+		}
+	}
+}
+
+
+void CServiceApplicationComp::CService::stop()
+{
+}
+
+
+void CServiceApplicationComp::CService::pause()
+{
+	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(&m_application);
+	if (guiAppPtr != NULL){
+		const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
+		if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
+			mainWdigetPtr->GetWidget()->hide();
+		}
+	}
+}
+
+
+void CServiceApplicationComp::CService::resume()
+{
+	iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(&m_application);
+	if (guiAppPtr != NULL){
+		const iqtgui::IGuiObject* mainWdigetPtr = guiAppPtr->GetApplicationGui();
+		if (mainWdigetPtr != NULL && mainWdigetPtr->IsGuiCreated()){
+			mainWdigetPtr->GetWidget()->show();
+		}
+	}
 }
 
 

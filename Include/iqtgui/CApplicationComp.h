@@ -2,13 +2,13 @@
 #define iqtgui_CApplicationComp_included
 
 
-#include "ibase/IApplication.h"
 #include "ibase/IApplicationInfo.h"
 
 #include "icomp/TSingleAttribute.h"
 #include "icomp/CComponentBase.h"
 
 #include "iqtgui/IGuiObject.h"
+#include "iqtgui/IGuiApplication.h"
 
 
 namespace iqtgui
@@ -17,7 +17,7 @@ namespace iqtgui
 
 class CApplicationComp:
 			public icomp::CComponentBase, 
-			public ibase::IApplication
+			public iqtgui::IGuiApplication
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -30,8 +30,11 @@ public:
 		I_ASSIGN(m_freeComponentCompPtr, "FreeComponent", "Free component initialization", false, "FreeComponent")
 		I_ASSIGN(m_splashTimeAttrPtr, "SplashTime", "Minimal time splash screen will be shown", true, 2)
 		I_ASSIGN(m_styleSheetAttrPtr, "StyleSheet", "Style sheet for the GUI", false, "")
+		I_ASSIGN(m_iconPathAttrPtr, "IconPath", "file path for the application icon", false, "")
 	I_END_COMPONENT
 
+	// reimplemented (ibase::IGuiApplication)
+	virtual const iqtgui::IGuiObject* GetApplicationGui() const;
 
 	// reimplemented (ibase::IApplication)
 	virtual bool InitializeApplication(int argc, char** argv);
@@ -48,6 +51,7 @@ private:
 	I_REF(void*, m_freeComponentCompPtr);
 	I_ATTR(double, m_splashTimeAttrPtr);
 	I_ATTR(istd::CString, m_styleSheetAttrPtr);
+	I_ATTR(istd::CString, m_iconPathAttrPtr);
 
 	istd::TDelPtr<QApplication> m_applicationPtr;
 };

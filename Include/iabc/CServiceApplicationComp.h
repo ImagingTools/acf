@@ -3,6 +3,7 @@
 
 
 // Qt includes
+#include <QSystemTrayIcon>
 #include "QtService.h"
 
 
@@ -22,9 +23,11 @@ namespace iabc
 
 
 class CServiceApplicationComp:
+			public QObject,
 			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
 			public ibase::IApplication
 {
+	Q_OBJECT
 public:
 	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
 
@@ -43,6 +46,12 @@ public:
 	virtual int Execute(int argc, char** argv);
 	virtual istd::CString GetHelpText() const;
 
+	// reimplemented (QObject)
+	virtual bool eventFilter(QObject* sourceObject, QEvent* eventPtr);
+
+protected Q_SLOTS:
+	void OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
+
 protected:
 	class CService: public QtServiceBase
 	{
@@ -58,6 +67,9 @@ protected:
 	protected:
 		// reimplemented (QtServiceBase)
 		virtual void start();
+		virtual void stop();
+		virtual void pause();
+   		virtual void resume();
 		virtual void createApplication(int &argc, char **argv);
 		virtual int executeApplication();
 

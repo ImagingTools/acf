@@ -15,6 +15,18 @@ namespace iqtgui
 {
 
 
+// reimplemented (iqtgui::IGuiApplication)
+
+const iqtgui::IGuiObject* CApplicationComp::GetApplicationGui() const
+{
+	if (m_mainGuiCompPtr.IsValid()){
+		return m_mainGuiCompPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
 // reimplemented (ibase::IApplication)
 
 bool CApplicationComp::InitializeApplication(int argc, char** argv)
@@ -38,10 +50,16 @@ bool CApplicationComp::InitializeApplication(int argc, char** argv)
 		}
 
 		m_applicationPtr->setStyle(appStyle.c_str());
-		
+
 		QIcon icon;
-		icon.addFile(":/Icons/acfLogoSmall");
-		icon.addFile(":/Icons/acfLogo3d");
+		if (m_iconPathAttrPtr.IsValid()){
+			icon = QIcon(iqt::GetQString(*m_iconPathAttrPtr));
+		}
+		else{	
+			icon.addFile(":/Icons/acfLogoSmall");
+			icon.addFile(":/Icons/acfLogo3d");
+		}
+
 		m_applicationPtr->setWindowIcon(icon);
 	}
 

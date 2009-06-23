@@ -1,12 +1,18 @@
-#include <QDir>
-
-
 #include "icomp/export.h"
 
 #include "iqt/CDefaultServicesProvider.h"
 
 #include "AbcPck.h"
 
+
+static struct StaticInit
+{
+	StaticInit()
+	{
+		Q_INIT_RESOURCE(iqtgui);
+	}
+
+} instance;
 
 
 namespace AbcPck

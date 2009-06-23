@@ -376,6 +376,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IGuiApplication.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IGuiObject.h"
 				>
 			</File>

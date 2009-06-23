@@ -17,7 +17,7 @@ class IApplication: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Create and initialize the appliocation object.
+		Initialize the application object.
 	*/
 	virtual bool InitializeApplication(int argc, char** argv) = 0;
 
