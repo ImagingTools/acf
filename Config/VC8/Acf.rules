@@ -7,7 +7,7 @@
 		<CustomBuildRule
 			Name="Arxc"
 			DisplayName="ARX Compiler"
-			CommandLine="$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe $(InputPath) -o $(InputDir)Generated/C$(InputName).cpp [AllOptions] [AdditionalOptions]"
+			CommandLine="if exist $(ACFDIR)\Bin\$(ConfigurationName)VC8\QtCored4.dll goto SkipQtCore&#x0D;&#x0A;copy /Y &quot;$(QTDIR)\bin\Qt*4.dll&quot; $(ACFDIR)\Bin\$(ConfigurationName)VC8&#x0D;&#x0A;:SkipQtCore&#x0D;&#x0A;$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe $(InputPath) -o $(InputDir)Generated/C$(InputName).cpp [AllOptions] [AdditionalOptions]"
 			Outputs="$(InputDir)Generated/C$(InputName).cpp"
 			AdditionalDependencies="$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe"
 			FileExtensions="*.arx"

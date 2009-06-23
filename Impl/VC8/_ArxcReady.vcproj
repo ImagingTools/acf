@@ -36,6 +36,7 @@
 				Name="VCPostBuildEventTool"
 				Description="Copy Qt Dll&apos;s needed for Arxc"
 				CommandLine="if exist ..\..\Bin\$(ConfigurationName)VC8\QtCored4.dll goto SkipQtCore&#x0D;&#x0A;copy /Y &quot;$(QTDIR)\bin\Qt*4.dll&quot; ..\..\Bin\$(ConfigurationName)VC8&#x0D;&#x0A;:SkipQtCore&#x0D;&#x0A;"
+				ExcludedFromBuild="true"
 			/>
 		</Configuration>
 		<Configuration
