@@ -104,6 +104,8 @@ int CApplicationComp::Execute(int argc, char** argv)
 			else{
 				mainWidgetPtr->setWindowTitle(QObject::tr("ACF application"));
 			}
+
+			mainWidgetPtr->setWindowIcon(m_applicationPtr->windowIcon());
 		}
 
 		if (useSplashScreen){
