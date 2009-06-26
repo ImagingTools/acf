@@ -341,7 +341,7 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 }
 
 
-void CComponentSceneItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr)
+void CComponentSceneItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* I_IF_DEBUG(eventPtr))
 {
 	I_ASSERT(eventPtr != NULL);
 	I_ASSERT(m_elementInfoPtr != NULL);
