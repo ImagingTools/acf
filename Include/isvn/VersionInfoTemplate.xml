@@ -105,9 +105,9 @@
 								<Value>
 									0.9.0
 								</Value>
-                <value>
+                <Value>
                   0.9.1
-                </value>
+                </Value>
 							</Values>
 						</Data>
 					</AttributeInfo>
@@ -147,9 +147,9 @@
 								<Value>
 									940
 								</Value>
-                <value>
+                <Value>
                   965
-                </value>
+                </Value>
 							</Values>
 						</Data>
 					</AttributeInfo>
