@@ -19,6 +19,12 @@ istd::CString CApplicationEnvironment::GetTempDirPath() const
 	wchar_t tempPath[MAX_PATH] = {0};
 	::GetTempPathW(MAX_PATH, tempPath);
 
+	int length = wcslen(tempPath);
+
+	if (tempPath[length - 1] == '\\'){
+		tempPath[length - 1] = '\0';
+	}
+
 	return istd::CString(tempPath);
 }
 
