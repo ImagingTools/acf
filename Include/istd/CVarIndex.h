@@ -162,6 +162,10 @@ public:
 
 	bool operator==(const CVarIndex& index) const;
 	bool operator!=(const CVarIndex& index) const;
+	bool operator<(const CVarIndex& index) const;
+	bool operator>(const CVarIndex& index) const;
+	bool operator<=(const CVarIndex& index) const;
+	bool operator>=(const CVarIndex& index) const;
 
 private:
 	std::vector<int> m_elements;
@@ -282,6 +286,31 @@ inline int& CVarIndex::operator[](int index)
 	I_ASSERT(index < int(m_elements.size()));
 
 	return m_elements[index];
+}
+
+
+
+inline bool CVarIndex::operator<(const CVarIndex& index) const
+{
+	return m_elements < index.m_elements;
+}
+
+
+inline bool CVarIndex::operator>(const CVarIndex& index) const
+{
+	return m_elements > index.m_elements;
+}
+
+
+inline bool CVarIndex::operator<=(const CVarIndex& index) const
+{
+	return m_elements <= index.m_elements;
+}
+
+
+inline bool CVarIndex::operator>=(const CVarIndex& index) const
+{
+	return m_elements >= index.m_elements;
 }
 
 
