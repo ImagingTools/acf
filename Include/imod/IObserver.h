@@ -45,6 +45,7 @@ public:
 
 	/**
 		This function will be called before update of the observer contents occures.
+		Please note, that in some cases no following AfterUpdate can be called.
 	*/
 	virtual void BeforeUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr) = 0;
 

@@ -21,9 +21,6 @@ public:
 
 	TCachedUpdateManagerWrap();
 
-	// reimplemented (istd::IChangeable)
-	virtual void EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr = NULL);
-
 protected:
 	/**
 		Ensures cache is valid.
@@ -46,6 +43,9 @@ protected:
 		that base class for all derived classes implement this method.
 	*/
 	virtual bool CalculateCache(int changeFlags);
+
+	// reimplemented (istd::IChangeable)
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr = NULL);
 
 private:
 	mutable bool m_isCacheValid;
@@ -104,11 +104,11 @@ TCachedUpdateManagerWrap<Base>::TCachedUpdateManagerWrap()
 // reimplemented (istd::IChangeable)
 
 template <class Base>
-void TCachedUpdateManagerWrap<Base>::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+void TCachedUpdateManagerWrap<Base>::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	InvalidateCache(changeFlags);
 
-	BaseClass::EndChanges(changeFlags, changeParamsPtr);
+	BaseClass::OnEndChanges(changeFlags, changeParamsPtr);
 }
 
 

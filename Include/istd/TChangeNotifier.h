@@ -24,10 +24,31 @@ public:
 	explicit TChangeNotifier(Changeable* changeablePtr, int changeFlags = IChangeable::CF_MODEL, istd::IPolymorphic* updateParamsPtr = NULL);
 	virtual  ~TChangeNotifier();
 
+	/**
+		Allow Attach to some 'changeable' pointer.
+	*/
 	void SetPtr(Changeable* changeablePtr);
+	/**
+		Call update on attached object and detach it.
+	*/
 	void Reset();
+	/**
+		Similiar like method Reset(), but update will be called with active flag CF_ABORTED.
+		It should be used only if you are sure, that no changes was done, or result will be ignored.
+	*/
+	void Abort();
+
+	/**
+		Method call operator returning slave 'changeable' pointer.
+	*/
 	const Changeable* operator->() const;
+	/**
+		Method call operator returning slave 'changeable' pointer.
+	*/
 	Changeable* operator->();
+	/**
+		Access to slave 'changeable' pointer.
+	*/
 	operator Changeable*() const;
 
 private:
@@ -77,6 +98,19 @@ inline void TChangeNotifier<Changeable>::Reset()
 
 	if (changeablePtr != NULL){
 		changeablePtr->EndChanges(m_changeFlags, m_updateParamsPtr);
+
+		BaseClass::Reset();
+	}
+}
+
+
+template <class Changeable>
+inline void TChangeNotifier<Changeable>::Abort()
+{
+	Changeable* changeablePtr = BaseClass::GetPtr();
+
+	if (changeablePtr != NULL){
+		changeablePtr->EndChanges(m_changeFlags | CF_ABORTED, m_updateParamsPtr);
 
 		BaseClass::Reset();
 	}

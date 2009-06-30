@@ -29,7 +29,11 @@ public:
 		/**
 			Indicate that data model is changed.
 		*/
-		CF_MODEL = 0x2
+		CF_MODEL = 0x2,
+		/**
+			Indicate, that update was aborted by user.
+		*/
+		CF_ABORTED = 0x4
 	};
 	
 	/**
@@ -51,6 +55,7 @@ public:
 protected:
 	/**
 		Callback function for begin change event.
+		Please note, that in some cases no following OnEndChanges can be called.
 	*/
 	virtual void OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
@@ -71,7 +76,9 @@ inline void IChangeable::BeginChanges(int changeFlags, istd::IPolymorphic* chang
 
 inline void IChangeable::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
-	OnEndChanges(changeFlags, changeParamsPtr);
+	if ((changeFlags & CF_ABORTED) == 0){
+		OnEndChanges(changeFlags, changeParamsPtr);
+	}
 }
 
 
