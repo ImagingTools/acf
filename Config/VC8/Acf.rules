@@ -25,5 +25,52 @@
 				/>
 			</Properties>
 		</CustomBuildRule>
+		<CustomBuildRule
+			Name="Copy"
+			DisplayName="Copy files"
+			CommandLine="copy $(InputPath) [$OutputDir]\$(InputName)"
+			Outputs="[$OutputDir]\$(InputName)"
+			FileExtensions="*.copy"
+			ExecutionDescription="Copying file $(InputName)"
+			>
+			<Properties>
+				<StringProperty
+					Name="OutputDir"
+					DisplayName="Output Directory"
+					Description="Specify output directory"
+					DefaultValue="$(OutputDir)"
+				/>
+			</Properties>
+		</CustomBuildRule>
+		<CustomBuildRule
+			Name="SubVersionTransform"
+			DisplayName="SubVersion Transformation"
+			CommandLine="SubWCRev [$SubVersionPath] $(InputPath) [$OutputDir]\$(InputName)"
+			Outputs="[$OutputDir]\$(InputName)"
+			AdditionalDependencies="[$DependencyFlag]"
+			FileExtensions="*.xtrsvn"
+			ExecutionDescription="Transforming with SubVersion $(InputName)..."
+			>
+			<Properties>
+				<StringProperty
+					Name="OutputDir"
+					DisplayName="Ouput Directory"
+					Description="Specify output directory were transformed files will be placed"
+					DefaultValue="$(OutputDir)"
+				/>
+				<StringProperty
+					Name="SubVersionPath"
+					DisplayName="SubVersion Directory"
+					Description="Path of SubVersion directory will be used"
+					DefaultValue="$(InputDir)"
+				/>
+				<StringProperty
+					Name="DependencyFlag"
+					DisplayName="Dependency Flag"
+					Description="Dependency flag restored after SVN &apos;update&apos; command"
+					DefaultValue="$(InputDir)\$(InputName).flgsvn"
+				/>
+			</Properties>
+		</CustomBuildRule>
 	</Rules>
 </VisualStudioToolFile>

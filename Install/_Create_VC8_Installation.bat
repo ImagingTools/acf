@@ -18,10 +18,11 @@ call Create_TechnicalDoc.bat
 
 call Create_VC_LGPL.bat
 
-echo Createing installation file...
-iscc.exe /Q TempExcl\acf.iss
+call Compile_Setup.bat
 
 echo Installation done
+
+pause
 
 echo Removeing temporary files...
 rmdir /Q /S Temp

@@ -1,0 +1,3 @@
+echo Createing installation file...
+iscc.exe /Q TempExcl\acf.iss
+

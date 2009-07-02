@@ -16,6 +16,9 @@
 		<ToolFile
 			RelativePath="..\..\..\Config\VC8\QtUIForm.rules"
 		/>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\Acf.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -29,16 +32,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
+			/>
+			<Tool
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Copy"
+			/>
+			<Tool
+				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -51,8 +63,6 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
@@ -103,16 +113,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
+			/>
+			<Tool
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Copy"
+			/>
+			<Tool
+				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"

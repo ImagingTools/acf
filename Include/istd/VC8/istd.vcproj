@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="istd"
 	ProjectGUID="{126B67F7-B779-4A80-A651-1111D5EDF583}"
+	RootNamespace="istd"
 	>
 	<Platforms>
 		<Platform
@@ -11,6 +12,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\Acf.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -26,7 +30,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="Copy"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="Arxc"
+			/>
+			<Tool
+				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -46,8 +59,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
@@ -90,6 +101,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="del /Q ..\*.flgsvn&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -105,7 +117,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="Copy"
+			/>
+			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="Arxc"
+			/>
+			<Tool
+				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -168,6 +189,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="del /Q ..\*.flgsvn&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -394,6 +416,23 @@
 			<File
 				RelativePath="..\TVarArray.h"
 				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Other"
+			>
+			<File
+				RelativePath="..\AcfVersion.h.xtrsvn"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						OutputDir="..\Generated"
+						SubVersionPath="..\..\.."
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>
