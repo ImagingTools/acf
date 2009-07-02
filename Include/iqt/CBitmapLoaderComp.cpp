@@ -40,7 +40,9 @@ bool CBitmapLoaderComp::IsOperationSupported(
 
 		istd::CStringList extensions;
 		if (GetFileExtensions(extensions, flags)){
-			if (find(extensions.begin(), extensions.end(), iqt::GetCString(info.suffix())) == extensions.end()){
+			QStringList extensionsList = iqt::GetQStringList(extensions);
+
+			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
 				if (!beQuiet){
 					SendInfoMessage(MI_BAD_EXTENSION, iqt::GetCString(QObject::tr("Bad image file extension %1").arg(info.suffix())));
 				}
@@ -132,6 +134,7 @@ bool CBitmapLoaderComp::GetFileExtensions(istd::CStringList& result, int /*flags
 	result.push_back("bmp");
 	result.push_back("png");
 	result.push_back("jpg");
+	result.push_back("jpeg");
 
 	return true;
 }
@@ -142,6 +145,7 @@ istd::CString CBitmapLoaderComp::GetTypeDescription(const istd::CString* extensi
 	if (		(extensionPtr == NULL) ||
 				extensionPtr->IsEqualNoCase("bmp") ||
 				extensionPtr->IsEqualNoCase("png") ||
+				extensionPtr->IsEqualNoCase("jpeg") ||
 				extensionPtr->IsEqualNoCase("jpg")){
 		return iqt::GetCString(QObject::tr("Bitmap"));
 	}
