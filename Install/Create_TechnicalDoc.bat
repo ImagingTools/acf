@@ -1,7 +1,7 @@
 echo Creation of technical documentation...
 
 if not exist Temp goto DelTempSkip
-echo Removeing old temporary files...
+echo Removing old temporary files...
 rmdir /Q /S Temp
 :DelTempSkip
 
@@ -14,7 +14,7 @@ doxygen
 
 cd ..
 
-echo Removeing temporary files...
+echo Removing temporary files...
 rmdir /Q /S Temp
 
 echo Technical documentation created

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          936
+          975
         </Number>
         <Description>
           ACF'
@@ -742,7 +742,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        SettingsProvider
+      </ExportedId>
+      <ComponentId>
+        SettingsProvider
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         Workspace

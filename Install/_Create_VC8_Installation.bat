@@ -1,12 +1,12 @@
 echo off
 
 if not exist Temp goto DelTempSkip
-echo Removeing old temporary files...
+echo Removing old temporary files...
 rmdir /Q /S Temp
 :DelTempSkip
 
 if not exist TempExcl goto DelTempExclSkip
-echo Removeing old temporary scripts...
+echo Removing old temporary scripts...
 rmdir /Q /S TempExcl
 :DelTempExclSkip
 
@@ -24,7 +24,7 @@ echo Installation done
 
 pause
 
-echo Removeing temporary files...
+echo Removing temporary files...
 rmdir /Q /S Temp
 rmdir /Q /S TempExcl
 
