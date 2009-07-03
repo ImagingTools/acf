@@ -40,6 +40,7 @@
 			/>
 			<Tool
 				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
 				OutputDir="..\..\..\Partitura\AcfVoce.arp"
 				SubVersionPath="..\..\.."
 			/>
@@ -103,7 +104,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\*.flgsvn&#x0D;&#x0A;"
+				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -129,6 +130,7 @@
 			/>
 			<Tool
 				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
 				OutputDir="..\..\..\Partitura\AcfVoce.arp"
 				SubVersionPath="..\..\.."
 			/>
@@ -191,7 +193,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\*.flgsvn&#x0D;&#x0A;"
+				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

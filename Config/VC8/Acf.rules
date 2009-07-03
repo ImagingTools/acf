@@ -7,9 +7,8 @@
 		<CustomBuildRule
 			Name="Arxc"
 			DisplayName="ARX Compiler"
-			CommandLine="$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe $(InputPath) -o $(InputDir)Generated/C$(InputName).cpp [AllOptions] [AdditionalOptions]"
-			Outputs="$(InputDir)Generated/C$(InputName).cpp"
-			AdditionalDependencies="$(ACFDIR)/Bin/$(ConfigurationName)VC8/Arxc.exe"
+			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Arxc.exe $(InputPath) -o $(InputDir)Generated\C$(InputName).cpp [AllOptions] [AdditionalOptions]"
+			Outputs="$(InputDir)Generated\C$(InputName).cpp"
 			FileExtensions="*.arx"
 			ExecutionDescription="Compiling ACF Registry File..."
 			>
@@ -26,8 +25,8 @@
 			</Properties>
 		</CustomBuildRule>
 		<CustomBuildRule
-			Name="Copy"
-			DisplayName="Copy files"
+			Name="DeployCopy"
+			DisplayName="Deploy copy files"
 			CommandLine="copy /Y [$InputDir]\$(InputName) + $(ACFDIR)\Config\VC8 [$OutputDir]\"
 			Outputs="[$OutputDir]\$(InputName)"
 			AdditionalDependencies="[$InputDir]\$(InputName)"
@@ -38,6 +37,7 @@
 				<StringProperty
 					Name="OutputDir"
 					DisplayName="Output Directory"
+					Category="Environment"
 					Description="Specify output directory"
 					DefaultValue="$(OutputDir)"
 					Delimited="true"
@@ -46,6 +46,7 @@
 				<StringProperty
 					Name="InputDir"
 					DisplayName="Input Directory"
+					Category="Environment"
 					Description="Optional input directory, if *.copy file should be used as dummy only"
 					DefaultValue="$(InputDir)"
 					Delimited="true"
@@ -58,14 +59,15 @@
 			DisplayName="SubVersion Transformation"
 			CommandLine="SubWCRev [$SubVersionPath] $(InputPath) [$OutputDir]\$(InputName)"
 			Outputs="[$OutputDir]\$(InputName)"
-			AdditionalDependencies="[$DependencyFlag]"
 			FileExtensions="*.xtrsvn"
 			ExecutionDescription="Transforming with SubVersion $(InputName)..."
+			ShowOnlyRuleProperties="false"
 			>
 			<Properties>
 				<StringProperty
 					Name="OutputDir"
-					DisplayName="Ouput Directory"
+					DisplayName="Output Directory"
+					Category="Environment"
 					Description="Specify output directory were transformed files will be placed"
 					DefaultValue="$(OutputDir)"
 					Delimited="true"
@@ -74,16 +76,9 @@
 				<StringProperty
 					Name="SubVersionPath"
 					DisplayName="SubVersion Directory"
+					Category="Environment"
 					Description="Path of SubVersion directory will be used"
 					DefaultValue="$(InputDir)"
-					Delimited="true"
-					Inheritable="true"
-				/>
-				<StringProperty
-					Name="DependencyFlag"
-					DisplayName="Dependency Flag"
-					Description="Dependency flag restored after SVN &apos;update&apos; command"
-					DefaultValue="$(InputDir)\$(InputName).flgsvn"
 					Delimited="true"
 					Inheritable="true"
 				/>

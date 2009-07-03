@@ -30,7 +30,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Copy"
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -40,6 +40,9 @@
 			/>
 			<Tool
 				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
+				OutputDir=".."
+				SubVersionPath="..\..\.."
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -101,7 +104,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\*.flgsvn&#x0D;&#x0A;"
+				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -117,7 +120,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Copy"
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -127,6 +130,9 @@
 			/>
 			<Tool
 				Name="SubVersionTransform"
+				AdditionalDependencies="..\svnflag"
+				OutputDir=".."
+				SubVersionPath="..\..\.."
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -189,7 +195,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\*.flgsvn&#x0D;&#x0A;"
+				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -424,24 +430,6 @@
 			<File
 				RelativePath="..\AcfVersion.h.xtrsvn"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\Generated"
-						SubVersionPath="..\..\.."
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\Generated"
-						SubVersionPath="..\..\.."
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>
