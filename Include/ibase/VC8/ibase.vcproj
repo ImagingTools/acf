@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="ibase"
 	ProjectGUID="{C30159C1-C8F9-49F4-AE32-C014F87B12BD}"
+	RootNamespace="ibase"
 	>
 	<Platforms>
 		<Platform
@@ -11,6 +12,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<ToolFile
+			RelativePath="..\..\..\Config\VC8\Acf.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -27,6 +31,11 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="SubVersionTransform"
+				OutputDir="..\..\..\Partitura\AcfVoce.arp"
+				SubVersionPath="..\..\.."
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -104,6 +113,11 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="SubVersionTransform"
+				OutputDir="..\..\..\Partitura\AcfVoce.arp"
+				SubVersionPath="..\..\.."
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -393,6 +407,14 @@
 			</File>
 			<File
 				RelativePath="..\TSingleFactoryComp.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Other"
+			>
+			<File
+				RelativePath="..\VersionInfo.arx.xtrsvn"
 				>
 			</File>
 		</Filter>

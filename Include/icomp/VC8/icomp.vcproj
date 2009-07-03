@@ -12,9 +12,6 @@
 		/>
 	</Platforms>
 	<ToolFiles>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC8\Acf.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -30,16 +27,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Copy"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -117,16 +105,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Copy"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="Arxc"
-			/>
-			<Tool
-				Name="SubVersionTransform"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -460,32 +439,6 @@
 			<File
 				RelativePath="..\TSingleAttributePtr.h"
 				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\AcfVoce.arp"
-						SubVersionPath="..\..\..\"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="SubVersionTransform"
-						OutputDir="..\..\..\Partitura\AcfVoce.arp"
-						SubVersionPath="..\..\..\"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>

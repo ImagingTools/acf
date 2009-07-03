@@ -40,6 +40,8 @@
 					DisplayName="Output Directory"
 					Description="Specify output directory"
 					DefaultValue="$(OutputDir)"
+					Delimited="true"
+					Inheritable="true"
 				/>
 				<StringProperty
 					Name="InputDir"
@@ -66,18 +68,24 @@
 					DisplayName="Ouput Directory"
 					Description="Specify output directory were transformed files will be placed"
 					DefaultValue="$(OutputDir)"
+					Delimited="true"
+					Inheritable="true"
 				/>
 				<StringProperty
 					Name="SubVersionPath"
 					DisplayName="SubVersion Directory"
 					Description="Path of SubVersion directory will be used"
 					DefaultValue="$(InputDir)"
+					Delimited="true"
+					Inheritable="true"
 				/>
 				<StringProperty
 					Name="DependencyFlag"
 					DisplayName="Dependency Flag"
 					Description="Dependency flag restored after SVN &apos;update&apos; command"
 					DefaultValue="$(InputDir)\$(InputName).flgsvn"
+					Delimited="true"
+					Inheritable="true"
 				/>
 			</Properties>
 		</CustomBuildRule>
