@@ -28,7 +28,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Copy"
+				Name="DeployCopy"
 				OutputDir=""
 				InputDir="..\..\..\Bin\info"
 			/>
@@ -119,7 +119,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="Copy"
+				Name="DeployCopy"
 				OutputDir=""
 				InputDir="..\..\..\Bin\info"
 			/>
