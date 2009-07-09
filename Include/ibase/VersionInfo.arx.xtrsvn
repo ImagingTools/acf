@@ -165,11 +165,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								SlaveApplicationInfo
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
