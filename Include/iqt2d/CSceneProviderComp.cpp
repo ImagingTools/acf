@@ -17,8 +17,9 @@ namespace iqt2d
 CSceneProviderComp::CSceneProviderComp()
 :	m_isFullScreenMode(true),
 	m_isZoomIgnored(false),
-	m_fitToViewCommand("&Fit Image To View"),
-	m_resetZoomCommand("&Reset Zoom")
+	m_fitToViewCommand("&Fit Contents To View"),
+	m_resetZoomCommand("&Reset Zoom"),
+	m_savedParentWidgetPtr(NULL)
 {
 	m_scenePtr = new QGraphicsScene;
 
@@ -112,11 +113,25 @@ void CSceneProviderComp::SwitchFullScreen()
 	}
 
 	if (viewPtr->isFullScreen()){
+		if (m_savedParentWidgetPtr != NULL){
+			viewPtr->setParent(m_savedParentWidgetPtr);
+		}
+		
+		m_savedParentWidgetPtr = NULL;
+
 		viewPtr->showNormal();
+
+		viewPtr->setMatrix(m_savedViewTransform);
 	}
 
 	else{
+		m_savedParentWidgetPtr = viewPtr->parentWidget();
+		m_savedViewTransform = viewPtr->matrix();
+
+		viewPtr->setParent(NULL);
+
 		viewPtr->showFullScreen();
+		OnFitToView();
 	}
 }
 
@@ -256,7 +271,7 @@ void CSceneProviderComp::OnKeyReleaseEvent(QKeyEvent* event)
 			break;
 		case Qt::Key_Escape:
 			if (viewPtr->isFullScreen()){
-				viewPtr->showNormal();
+				SwitchFullScreen();
 			}
 			break;
 	}
@@ -283,7 +298,7 @@ void CSceneProviderComp::CreateContextMenu()
 
 	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
 	if (*m_allowWidgetResizeAttrPtr){
-		iqtgui::CHierarchicalCommand* fitToImageCommandPtr = new iqtgui::CHierarchicalCommand("&Fit View To Image");
+		iqtgui::CHierarchicalCommand* fitToImageCommandPtr = new iqtgui::CHierarchicalCommand("&Fit View To Contents");
 		connect(fitToImageCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToShapes()));
 		imageMenuPtr->InsertChild(fitToImageCommandPtr, true);
 	}
@@ -333,7 +348,8 @@ void CSceneProviderComp::OnGuiCreated()
 	viewPtr->installEventFilter(this);
 	m_scenePtr->installEventFilter(this);
 	
-	m_scenePtr->setBackgroundBrush(QBrush(QColor(128, 128, 128)));
+	viewPtr->setBackgroundBrush(QBrush(QColor(128, 128, 128)));
+	viewPtr->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
 
 	if (m_useAntialiasingAttrPtr.IsValid() && *m_useAntialiasingAttrPtr){
 		viewPtr->setRenderHints(QPainter::Antialiasing);

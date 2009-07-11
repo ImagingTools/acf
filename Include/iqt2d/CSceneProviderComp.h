@@ -111,6 +111,9 @@ private:
 	I_ATTR(int, m_sceneIdAttrPtr);
 	I_ATTR(bool, m_useAntialiasingAttrPtr);
 	I_ATTR(int, m_fitModeAttrPtr);
+
+	QWidget* m_savedParentWidgetPtr;
+	QMatrix m_savedViewTransform;
 };
 
 
