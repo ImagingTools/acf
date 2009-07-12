@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="/Icons" >
+    <file alias="barcode" >Resources/Icons/Barcode.png</file>
+    <file alias="stateWarning" >Resources/Icons/StateWarning.png</file>
+    <file alias="function" >Resources/Icons/Function.png</file>
+    <file alias="log" >Resources/Icons/Log.png</file>
+    <file alias="snapImage" >Resources/Icons/SnapImage.png</file>
+    <file alias="stateInvalid" >Resources/Icons/StateInvalid.png</file>
+    <file alias="stateOk" >Resources/Icons/StateOk.png</file>
+    <file alias="stateUnknown" >Resources/Icons/StateUnknown.png</file>
     <file alias="acfLogo" >../../Docs/Images/Logo/Logo_64x64.png</file>
     <file alias="acfLogoSmall" >../../Docs/Images/Logo/Logo_32x32.png</file>
     <file alias="acfLogo3d" >../../Docs/Images/Logo/Logo3d.png</file>
