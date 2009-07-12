@@ -33,7 +33,7 @@ bool CBitmapBase::IsEmpty() const
 {
 	istd::CIndex2d size = GetImageSize();
 
-	return (size.GetX() > 0) && (size.GetY() > 0);
+	return (size.GetX() <= 0) || (size.GetY() <= 0);
 }
 
 
