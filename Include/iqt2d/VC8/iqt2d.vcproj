@@ -234,7 +234,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSceneProviderComp.cpp"
+				RelativePath="..\CSceneControllerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSceneProviderGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -370,15 +374,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSceneProviderComp.h"
+				RelativePath="..\CSceneControllerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CSceneProviderComp.moc"
+				RelativePath="..\CSceneProviderGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\iqt2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ISceneController.h"
 				>
 			</File>
 			<File
@@ -414,6 +422,14 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\CSceneControllerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSceneProviderGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\Generated\moc_CAnnulusParamsGuiComp.cpp"
 				>
@@ -459,11 +475,27 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CSceneProviderComp.cpp"
+				RelativePath="..\generated\moc_CSceneControllerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CSceneProviderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CSceneProviderGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CAnnulusParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CAnnulusSegmentParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CCircleParamsGuiComp.h"
 				>
 			</File>
 			<File
@@ -476,6 +508,14 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CSceneConnectorGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSceneControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSceneProviderGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -505,6 +545,14 @@
 			</File>
 			<File
 				RelativePath="..\CSceneConnectorGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CSceneControllerGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CSceneProviderGuiComp.ui"
 				>
 			</File>
 		</Filter>

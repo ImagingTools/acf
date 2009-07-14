@@ -49,6 +49,7 @@ I_EXPORT_COMPONENT(RectangleParamsGui, "Rectangle parameter GUI displaying a rec
 I_EXPORT_COMPONENT(CircleParamsGui, "Circle parameter GUI displaying a cicle using scene", "Circle Parameters Observer Display GUI Qt");
 I_EXPORT_COMPONENT(AnnulusParamsGui, "Annulus parameter GUI displaying a annulus using scene", "Annulus Radius Radii Parameters Observer Display GUI Qt");
 I_EXPORT_COMPONENT(AnnulusSegmentParamsGui, "Annulus segment parameter GUI displaying a annulus using scene", "Annulus Segment Angle Radius Radii Parameters Observer Display GUI Qt");
+I_EXPORT_COMPONENT(SceneControllerGui, "Scene controller", "Observer Display GUI Qt Controller");
 
 I_EXPORT_COMPONENT(SurfaceView, "3D-View component", "Model Observer Parameter GUI Qt 3D Surface");
 
