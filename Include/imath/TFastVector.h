@@ -68,6 +68,15 @@ public:
 	bool SetElementsCount(int count, const Element& value = Element());
 
 	/**
+		Ensure, that number of elements vector cannot be smaller that some value.
+		If number of elements was bigger or equal to specified value, it does nothing.
+		In other case, number of elements will be set.
+		\param	count	number of elements.
+		\return			true, if the number of set is not greater than template parameter MaxSize.
+	*/
+	bool EnsureElementsCount(int count, const Element& value = Element());
+
+	/**
 		Get element at specified i.
 	*/
 	const Element& GetElement(int i) const;
@@ -237,6 +246,26 @@ inline bool TFastVector<MaxSize, Element>::SetElementsCount(int count, const Ele
 		}
 
 		m_elementsCount = count;
+
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+template <int MaxSize, class Element>
+inline bool TFastVector<MaxSize, Element>::EnsureElementsCount(int count, const Element& value)
+{
+	if (count <= MaxSize){
+		if (m_elementsCount < count){
+			for (int i = m_elementsCount; i < count; ++i){
+				m_elements[i] = value;
+			}
+
+			m_elementsCount = count;
+		}
 
 		return true;
 	}
