@@ -87,8 +87,8 @@ CTransform& CTransform::Translate(const CVector2d& translation)
 
 CTransform& CTransform::Translate(double dx, double dy)
 {
-	m_dx += dx;
-	m_dy += dy;
+	m_dx += dx * m_m11 + dy * m_m21;
+    m_dy += dy * m_m22 + dx * m_m12;
 
 	return *this;
 }

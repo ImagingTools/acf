@@ -216,8 +216,8 @@ CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 
 	CLine2d retVal = *this;
 
-	bool isLeftOut1 = (retVal.m_point1.GetX() <= rect.GetLeft());
-	bool isLeftOut2 = (retVal.m_point2.GetX() <= rect.GetLeft());
+	bool isLeftOut1 = (retVal.m_point1.GetX() < rect.GetLeft());
+	bool isLeftOut2 = (retVal.m_point2.GetX() < rect.GetLeft());
 
 	if (isLeftOut1 != isLeftOut2){
 		CVector2d& cutPoint = isLeftOut1? retVal.m_point1: retVal.m_point2;
@@ -229,8 +229,8 @@ CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 		return emptyLine;
 	}
 
-	bool isTopOut1 = (retVal.m_point1.GetY() <= rect.GetTop());
-	bool isTopOut2 = (retVal.m_point2.GetY() <= rect.GetTop());
+	bool isTopOut1 = (retVal.m_point1.GetY() < rect.GetTop());
+	bool isTopOut2 = (retVal.m_point2.GetY() < rect.GetTop());
 
 	if (isTopOut1 != isTopOut2){
 		CVector2d& cutPoint = isTopOut1? retVal.m_point1: retVal.m_point2;
@@ -242,8 +242,8 @@ CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 		return emptyLine;
 	}
 
-	bool isRightOut1 = (retVal.m_point1.GetX() >= rect.GetRight());
-	bool isRightOut2 = (retVal.m_point2.GetX() >= rect.GetRight());
+	bool isRightOut1 = (retVal.m_point1.GetX() > rect.GetRight());
+	bool isRightOut2 = (retVal.m_point2.GetX() > rect.GetRight());
 
 	if (isRightOut1 != isRightOut2){
 		CVector2d& cutPoint = isRightOut1? retVal.m_point1: retVal.m_point2;
@@ -255,8 +255,8 @@ CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 		return emptyLine;
 	}
 
-	bool isBottomOut1 = (retVal.m_point1.GetY() >= rect.GetBottom());
-	bool isBottomOut2 = (retVal.m_point2.GetY() >= rect.GetBottom());
+	bool isBottomOut1 = (retVal.m_point1.GetY() > rect.GetBottom());
+	bool isBottomOut2 = (retVal.m_point2.GetY() > rect.GetBottom());
 
 	if (isBottomOut1 != isBottomOut2){
 		CVector2d& cutPoint = isBottomOut1? retVal.m_point1: retVal.m_point2;
