@@ -96,6 +96,16 @@ void CExtendedDocumentTemplateComp::OnAboutCommand()
 }
 
 
+// protected methods
+
+// reimplemented (idoc::CSingleDocumentTemplateComp)
+
+istd::IPolymorphic* CExtendedDocumentTemplateComp::ExtractViewInterface(icomp::IComponent* componentPtr) const
+{
+	return m_viewGuiCompFact.ExtractInterface(componentPtr);
+}
+
+
 } // namespace iqtdoc
 
 

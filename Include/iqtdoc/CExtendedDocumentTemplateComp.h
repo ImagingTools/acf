@@ -36,6 +36,7 @@ public:
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider)
 		I_ASSIGN(m_aboutCommandTextAttrPtr, "AboutCommandText", "Text used in about menu", true, "Document");
 		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "GUI used inside about dialog box", false, "AboutGui");
+		I_ASSIGN(m_viewGuiCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory");
 	I_END_COMPONENT
 
 	// reimplemented (idoc::ICommandsProvider)
@@ -50,9 +51,14 @@ public:
 protected slots:
 	void OnAboutCommand();
 
+protected:
+	// reimplemented (idoc::CSingleDocumentTemplateComp)
+	virtual istd::IPolymorphic* ExtractViewInterface(icomp::IComponent* componentPtr) const;
+
 private:
 	I_ATTR(istd::CString, m_aboutCommandTextAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_aboutGuiCompPtr);
+	I_FACT(iqtgui::IGuiObject, m_viewGuiCompFact);
 
 	iqtgui::CHierarchicalCommand m_globalMenuCommands;
 	istd::CString m_aboutCommandText;

@@ -41,9 +41,17 @@ istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
 				m_viewCompFact.IsValid() &&
 				IsDocumentTypeSupported(documentTypeId) &&
 				IsViewTypeSupported(viewTypeId)){
-		istd::TDelPtr<imod::IObserver> viewPtr(m_viewCompFact.CreateInstance());
-		if (viewPtr.IsValid() && modelPtr->AttachObserver(viewPtr.GetPtr())){
-			return viewPtr.PopPtr();
+		istd::TDelPtr<icomp::IComponent> componentPtr(m_viewCompFact.CreateComponent());
+
+		imod::IObserver* observerPtr = m_viewCompFact.ExtractInterface(componentPtr.GetPtr());
+		istd::IPolymorphic* viewPtr = ExtractViewInterface(componentPtr.GetPtr());
+
+		if (		(viewPtr != NULL) &&
+					(observerPtr != NULL) &&
+					modelPtr->AttachObserver(observerPtr)){
+			componentPtr.PopPtr();
+
+			return viewPtr;
 		}
 	}
 
@@ -71,6 +79,14 @@ void CSingleDocumentTemplateComp::OnComponentCreated()
 	}
 
 	SetSupportedFeatures(featureFlags);
+}
+
+
+// protected methods
+
+istd::IPolymorphic* CSingleDocumentTemplateComp::ExtractViewInterface(icomp::IComponent* componentPtr) const
+{
+	return m_viewCompFact.ExtractInterface(componentPtr);
 }
 
 

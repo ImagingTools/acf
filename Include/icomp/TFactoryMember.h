@@ -37,9 +37,28 @@ public:
 	bool IsValid() const;
 
 	/**
+		Create component without extracting any interface.
+	*/
+	IComponent* CreateComponent() const;
+
+	/**
 		Create instance of this interface.
+		This is combination of the methods CreateComponent() and ExtractInterface()
+		provided for convinience, if only one interface is asked in factorisied objects.
 	*/
 	Interface* CreateInstance() const;
+
+	/**
+		Extract interface from some component.
+		Type of extracted interface is specified by template parameter of this class.
+		If you want to force some factory to support more interfaces, you should simply define
+		multiply I_FACT members with the same ID, factorise instances with any of them and extract
+		specified interfaces using this method.
+		@param	componentPtr	pointer to component object, typically returned by method CreateComponent().
+		@param	subId			optionally ID parameter identifing subcomponent.
+		@return	pointer to interface or NULL, if such interface could not be extracted.
+	*/
+	static Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "");
 
 protected:
 	TFactoryMember(const TFactoryMember& ptr);
@@ -74,7 +93,7 @@ bool TFactoryMember<Interface>::IsValid() const
 
 
 template <class Interface>
-Interface* TFactoryMember<Interface>::CreateInstance() const
+IComponent* TFactoryMember<Interface>::CreateComponent() const
 {
 	if ((m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
@@ -86,19 +105,37 @@ Interface* TFactoryMember<Interface>::CreateInstance() const
 			BaseClass2::SplitId(componentId, baseId, subId);
 			I_ASSERT(subId.empty());	// explicit subelement ID are not implemented correctly
 
-			IComponent* newComponnentPtr = parentPtr->CreateSubcomponent(baseId);
-			if (newComponnentPtr != NULL){
-				Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponnentPtr);
-				if (retVal != NULL){
-					return retVal;
-				}
-
-				delete newComponnentPtr;
-			}
+			return parentPtr->CreateSubcomponent(baseId);
 		}
 	}
 
 	return NULL;
+}
+
+
+template <class Interface>
+Interface* TFactoryMember<Interface>::CreateInstance() const
+{
+	istd::TDelPtr<IComponent> newComponentPtr(CreateComponent());
+	if (newComponentPtr.IsValid()){
+		Interface* retVal = BaseClass2::ExtractInterface<Interface>(newComponentPtr.GetPtr());
+		if (retVal != NULL){
+			newComponentPtr.PopPtr();
+
+			return retVal;
+		}
+	}
+
+	return NULL;
+}
+
+
+// static methods
+
+template <class Interface>
+Interface* TFactoryMember<Interface>::ExtractInterface(IComponent* componentPtr, const std::string& subId)
+{
+	return BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
 }
 
 

@@ -21,17 +21,17 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef CSingleDocumentTemplateBase BaseClass2;
 	
-	I_BEGIN_COMPONENT(CSingleDocumentTemplateComp)
-		I_REGISTER_INTERFACE(idoc::IDocumentTemplate)
+	I_BEGIN_COMPONENT(CSingleDocumentTemplateComp);
+		I_REGISTER_INTERFACE(idoc::IDocumentTemplate);
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of supported document", true, "Default");
-		I_ASSIGN(m_defaultDirectoryAttrPtr, "DefaultDirectory", "Default file directory for open file dialog", true, ".")
-		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")
-		I_ASSIGN(m_modelCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory")
-		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory")
+		I_ASSIGN(m_defaultDirectoryAttrPtr, "DefaultDirectory", "Default file directory for open file dialog", true, ".");
+		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory");
+		I_ASSIGN(m_modelCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory");
+		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory");
 		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
 		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", false, true);
 		I_ASSIGN(m_isEditSupportedAttrPtr, "IsEditSupported", "Template supports the edit operation", false, true);
-	I_END_COMPONENT
+	I_END_COMPONENT;
 
 	// reimplemented (idoc::IDocumentTemplate)
 	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId) const;
@@ -43,6 +43,16 @@ public:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+
+protected:
+	/**
+		Extract pointer of view interface from factorisied view component.
+		This functionality is provided to allow derrived classes
+		to extract implementation-specific GUI interfaces from created composited instances.
+		Default is instance of interface imod::IObserver extracted, but for
+		composite components it can be inaccurate for some cases.
+	*/
+	virtual istd::IPolymorphic* ExtractViewInterface(icomp::IComponent* componentPtr) const;
 
 private:
 	I_ATTR(bool, m_isNewSupportedAttrPtr);

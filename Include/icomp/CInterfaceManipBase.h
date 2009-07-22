@@ -29,14 +29,14 @@ protected:
 		Extract interface from component.
 	*/
 	template <class Interface>
-	Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "") const;
+	static Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "");
 };
 
 
 // protected template methods
 
 template <class Interface>
-Interface* CInterfaceManipBase::ExtractInterface(IComponent* componentPtr, const std::string& subId) const
+Interface* CInterfaceManipBase::ExtractInterface(IComponent* componentPtr, const std::string& subId)
 {
 	if (componentPtr != NULL){
 		static istd::CClassInfo info = istd::CClassInfo::GetInfo<Interface>();

@@ -50,6 +50,7 @@ public:
 
 	I_BEGIN_COMPONENT(CRegistryViewComp);
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
+		I_REGISTER_INTERFACE(iqtdoc::IPrintable);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_ASSIGN_MULTI_0(m_registryElementObserversCompPtr, "RegistryElementObservers", "Registry element observers", false);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
