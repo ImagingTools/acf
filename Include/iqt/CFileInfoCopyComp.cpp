@@ -146,6 +146,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 						m_applicationInfoCompPtr->GetVersionNumber(versionId, versionNumber)){
 				result = iqt::GetQString(m_applicationInfoCompPtr->GetEncodedVersionName(versionId, versionNumber));
 				result.replace(".", ", ");
+				result.replace("'", "");
 
 				return true;
 			}

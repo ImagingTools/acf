@@ -203,7 +203,7 @@
 								true
 							</IsEnabled>
 							<Value>
-								ACF$WCMIXED?':$
+								ACF
 							</Value>
 						</Data>
 					</AttributeInfo>
@@ -234,8 +234,8 @@
 							icomp::TSingleAttribute&lt;bool&gt;
 						</Type>
 						<ExportId>
-							IsExtensionUsed
-						</ExportId>
+
+            </ExportId>
 						<Data>
 							<IsEnabled>
 								true
@@ -275,11 +275,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								ACF Application
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -294,11 +291,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								ImagingTools
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -313,11 +307,8 @@
 						</ExportId>
 						<Data>
 							<IsEnabled>
-								true
+								false
 							</IsEnabled>
-							<Value>
-								true
-							</Value>
 						</Data>
 					</AttributeInfo>
 					<AttributeInfo>
@@ -395,8 +386,8 @@
 							icomp::TSingleAttribute&lt;istd::CString&gt;
 						</Type>
 						<ExportId>
-							VersionIdDescription
-						</ExportId>
+              VersionIdDesc
+            </ExportId>
 						<Data>
 							<IsEnabled>
 								false

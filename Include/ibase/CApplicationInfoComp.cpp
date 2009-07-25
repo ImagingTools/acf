@@ -73,10 +73,6 @@ istd::CString CApplicationInfoComp::GetEncodedVersionName(int versionId, I_DWORD
 		retVal = istd::CString("<") + istd::CString::FromNumber(versionNumber) + ">";
 	}
 
-	if ((istd::RS_DIRTY_FLAG != 0) && (versionId == iser::IVersionInfo::FrameworkVersionId) && (versionNumber == istd::RS_USE_VERSION)){
-		retVal += "'";
-	}
-
 	return retVal;
 }
 

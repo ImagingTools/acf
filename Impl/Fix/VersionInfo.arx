@@ -384,8 +384,8 @@
 							icomp::TSingleAttribute&lt;istd::CString&gt;
 						</Type>
 						<ExportId>
-							VersionIdDescription
-						</ExportId>
+              VersionIdDesc
+            </ExportId>
 						<Data>
 							<IsEnabled>
 								false
