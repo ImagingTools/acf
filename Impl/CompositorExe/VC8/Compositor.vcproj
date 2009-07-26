@@ -86,7 +86,7 @@
 				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
-				AssemblyLinkResource="$(IntDir)Compositor.res"
+				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 				GenerateDebugInformation="false"
 				SubSystem="2"
 			/>
@@ -184,7 +184,7 @@
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
-				AssemblyLinkResource="$(IntDir)Compositor.res"
+				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>

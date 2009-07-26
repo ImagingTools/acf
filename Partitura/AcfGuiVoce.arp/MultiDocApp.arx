@@ -599,13 +599,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ShowProductVersion
+              ProductVersionId
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;bool&gt;
             </Type>
             <ExportId>
-              ShowProductVersion
+              ProductVersionId
             </ExportId>
             <Data>
               <IsEnabled>

@@ -30,7 +30,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="13">
+        <AttributeInfoMap count="12">
           <AttributeInfo>
             <Id>
               AboutDescriptionText
@@ -240,25 +240,6 @@ This tool is a part of ACF project
           <AttributeInfo>
             <Id>
               ShowAcfVersion
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowProductVersion
             </Id>
             <Type>
               icomp::TSingleAttribute&lt;bool&gt;

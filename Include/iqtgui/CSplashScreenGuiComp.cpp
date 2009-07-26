@@ -22,10 +22,10 @@ void CSplashScreenGuiComp::OnGuiCreated()
 			}
 		}
 
-		if (m_showProductVersionAttrPtr.IsValid()){
+		if (m_productVersionIdAttrPtr.IsValid()){
 			I_DWORD version;
-			if (m_applicationInfoCompPtr->GetVersionNumber(iser::IVersionInfo::UserVersionId, version)){
-				productVersionText = m_applicationInfoCompPtr->GetEncodedVersionName(iser::IVersionInfo::UserVersionId, version);
+			if (m_applicationInfoCompPtr->GetVersionNumber(*m_productVersionIdAttrPtr, version)){
+				productVersionText = m_applicationInfoCompPtr->GetEncodedVersionName(*m_productVersionIdAttrPtr, version);
 			}
 		}
 	}
