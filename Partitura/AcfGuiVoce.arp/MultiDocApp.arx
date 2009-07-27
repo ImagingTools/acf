@@ -7,10 +7,10 @@
           0
         </Id>
         <Number>
-          975
+          1018
         </Number>
         <Description>
-          ACF'
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -497,7 +497,7 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -583,29 +583,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ShowAcfVersion
+              VersionIds
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TMultiAttribute&lt;int&gt;
             </Type>
             <ExportId>
-              ShowAcfVersion
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductVersionId
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              ProductVersionId
+              VersionIds
             </ExportId>
             <Data>
               <IsEnabled>

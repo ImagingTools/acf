@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          1018
         </Number>
         <Description>
           ACF
@@ -71,6 +71,26 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              CopyrightText
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Copyright 2009 ImagingTools
+This tutorial demo is a part of ACF project
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               DocumentTemplates
             </Id>
             <Type>
@@ -106,25 +126,6 @@
               </IsEnabled>
               <Value>
                 Tutorial (Dynamic)
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowAcfVersion
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
               </Value>
             </Data>
           </AttributeInfo>

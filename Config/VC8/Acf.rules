@@ -9,6 +9,7 @@
 			DisplayName="ARX Compiler"
 			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Arxc.exe $(InputPath) -o $(InputDir)Generated\C$(InputName).cpp [AllOptions] [AdditionalOptions]"
 			Outputs="$(InputDir)Generated\C$(InputName).cpp"
+			AdditionalDependencies="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Arxc.exe"
 			FileExtensions="*.arx"
 			ExecutionDescription="Compiling ACF Registry File..."
 			>

@@ -31,9 +31,9 @@ public:
 		I_ASSIGN(m_imagePathAttrPtr, "ImagePath", "Path of image shown as splash screen", true, "Splash.jpg");
 		I_ASSIGN(m_productNameAttrPtr, "ProductName", "Optional product name if is not painted at image", false, "ACF Product");
 		I_ASSIGN(m_productTypeAttrPtr, "ProductType", "Additional product description shown over version info", false, "Server");
-		I_ASSIGN(m_showAcfVersionAttrPtr, "ShowAcfVersion", "If true, ACF version will be shown", true, true);
-		I_ASSIGN(m_productVersionIdAttrPtr, "ProductVersionId", "If product version ID to be shown, if disabled no product version will be shown", true, 1024);
 		I_ASSIGN(m_copyrightTextAttrPtr, "CopyrightText", "Optional copyright text", false, "(C) Copyright 2008 CompanyName\n\nAll rights reserved");
+		I_ASSIGN_MULTI_1(m_versionIdsAttrPtr, "VersionIds", "List of version ID's for version infor should be displayed", false, 0);
+		I_ASSIGN_MULTI_1(m_versionNamesAttrPtr, "VersionNames", "List of version names will be used as version description", false, "Version");
 	I_END_COMPONENT;
 
 protected:
@@ -45,9 +45,9 @@ private:
 	I_ATTR(istd::CString, m_imagePathAttrPtr);
 	I_ATTR(istd::CString, m_productNameAttrPtr);
 	I_ATTR(istd::CString, m_productTypeAttrPtr);
-	I_ATTR(bool, m_showAcfVersionAttrPtr);
-	I_ATTR(int, m_productVersionIdAttrPtr);
 	I_ATTR(istd::CString, m_copyrightTextAttrPtr);
+	I_MULTIATTR(int, m_versionIdsAttrPtr);
+	I_MULTIATTR(istd::CString, m_versionNamesAttrPtr);
 };
 
 

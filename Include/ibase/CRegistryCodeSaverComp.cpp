@@ -827,6 +827,9 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 			stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
 			NextLine(stream);
 			stream << "I_ASSERT(n" << attributeInfoName << " != NULL);";
+			stream << std::endl;
+			NextLine(stream);
+			stream << "n" << attributeInfoName << "->Reset();";
 
 			for (		std::list<std::string>::const_iterator iter = valueStrings.begin();
 						iter != valueStrings.end();
