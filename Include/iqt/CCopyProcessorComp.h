@@ -10,9 +10,8 @@
 
 #include "icomp/CComponentBase.h"
 
+#include "ibase/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
-
-#include "iqt/CFileInfoCopyComp.h"
 
 
 namespace iqt
