@@ -210,10 +210,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLabelShape.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CLine2dParamsGuiComp.cpp"
 				>
 			</File>
@@ -318,10 +314,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\CLabelShape.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CLine2dParamsGuiComp.h"
 				>
 			</File>
@@ -421,10 +413,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CGripShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CLabelShape.cpp"
 				>
 			</File>
 			<File
@@ -566,10 +554,6 @@
 			</File>
 			<File
 				RelativePath="..\CGripShape.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CLabelShape.moc"
 				>
 			</File>
 			<File

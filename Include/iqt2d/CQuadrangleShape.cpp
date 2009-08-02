@@ -55,12 +55,6 @@ void CQuadrangleShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags
 		}
 
 		path.moveTo(iqt::GetQPointF(firstDiag.GetPoint1()));
-		path.lineTo(iqt::GetQPointF(firstDiag.GetPoint2()));
-
-		path.moveTo(iqt::GetQPointF(secondDiag.GetPoint1()));
-		path.lineTo(iqt::GetQPointF(secondDiag.GetPoint2()));
-
-		path.moveTo(iqt::GetQPointF(firstDiag.GetPoint1()));
 		path.lineTo(iqt::GetQPointF(secondDiag.GetPoint1()));
 	
 		path.moveTo(iqt::GetQPointF(secondDiag.GetPoint1()));
