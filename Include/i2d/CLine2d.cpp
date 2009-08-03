@@ -272,6 +272,12 @@ CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 }
 
 
+CLine2d CLine2d::GetSwapped() const
+{
+	return i2d::CLine2d(m_point2, m_point1);
+}
+
+
 CRectangle CLine2d::GetBoundingBox() const
 {
 	double left = istd::Min(m_point1.GetX(), m_point2.GetX());

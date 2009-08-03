@@ -135,6 +135,11 @@ public:
 	CLine2d GetClipped(const CRectangle& rect) const;
 
 	/**
+		Get the line with replaced points (p1 = p2 and p2 = p1)
+	*/
+	CLine2d GetSwapped() const;
+
+	/**
 		Get Y position of cutting this line by specified horizontal line.
 	*/
 	double GetCutXPos(double linePosY) const;
