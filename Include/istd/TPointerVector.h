@@ -77,6 +77,11 @@ public:
 	void Reset();
 
 	/**
+		Check if some element is stored in this vector.
+	*/
+	bool HasElement(const Pointer* elementPtr) const;
+
+	/**
 		Get pointer at specified index.
 	*/
 	Pointer* GetAt(int index) const;
@@ -94,17 +99,22 @@ public:
 
 	/**
 		Remove element at specified index.
+		The element will be deleted and removed from this vector.
+		It means after call of this method number of elements will be decreased.
 	*/
 	void RemoveAt(int index);
 
 	/**
 		Remove element \c elementPtr.
+		The element will be deleted and removed from this vector.
+		It means after call of this method number of elements will be decreased if pointer is found.
+		\return	true, if element was removed, false elsewhere.
 	*/
-	void Remove(Pointer* elementPtr);
+	bool Remove(Pointer* elementPtr);
 
 	/**
 		Pop element at specified index.
-		It does't remove pointed object.
+		It does't delete pointed object, it removes it only from the vector.
 	*/
 	Pointer* PopAt(int index);
 
@@ -184,6 +194,22 @@ void TPointerVector<Pointer, AccessAdapter>::Reset()
 
 
 template <typename Pointer, class AccessAdapter>
+bool TPointerVector<Pointer, AccessAdapter>::HasElement(const Pointer* elementPtr) const
+{
+	int elementsCount = GetCount();
+
+	for (int elementIndex = 0; elementIndex < elementsCount; elementIndex++){
+		typename Elements::const_iterator delIter = (m_elements.begin() + elementIndex);
+		if (AccessAdapter::GetPtr(*delIter) == elementPtr){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+template <typename Pointer, class AccessAdapter>
 Pointer* TPointerVector<Pointer, AccessAdapter>::GetAt(int index) const
 {
 	I_ASSERT(index >= 0);
@@ -225,7 +251,7 @@ void TPointerVector<Pointer, AccessAdapter>::RemoveAt(int index)
 
 	
 template <typename Pointer, class AccessAdapter>
-void TPointerVector<Pointer, AccessAdapter>::Remove(Pointer* elementPtr)
+bool TPointerVector<Pointer, AccessAdapter>::Remove(Pointer* elementPtr)
 {
 	int elementsCount = GetCount();
 
@@ -234,9 +260,11 @@ void TPointerVector<Pointer, AccessAdapter>::Remove(Pointer* elementPtr)
 		if (AccessAdapter::GetPtr(*delIter) == elementPtr){
 			RemoveAt(elementIndex);
 
-			return;
+			return true;
 		}
 	}
+
+	return false;
 }
 
 
@@ -266,6 +294,7 @@ void TPointerVector<Pointer, AccessAdapter>::InsertElementAt(int index, const El
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index <= GetCount());
+	I_ASSERT(!HasElement(AccessAdapter::GetPtr(element)));
 
 	m_elements.insert(m_elements.begin() + index, element);
 }
