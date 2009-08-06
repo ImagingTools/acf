@@ -110,13 +110,11 @@ void CQuadrangle::SetSecondDiagonal(const i2d::CLine2d& secondDiagonal)
 CVector2d CQuadrangle::GetCenter() const
 {
 	CVector2d intersectionPoint;
-	if (m_firstDiagonal.GetIntersection(m_firstDiagonal, intersectionPoint)){
+	if (m_firstDiagonal.GetIntersection(m_secondDiagonal, intersectionPoint)){
 		return intersectionPoint;
 	}
 
-	I_CRITICAL();
-
-	return CVector2d();
+	return m_firstDiagonal.GetCenter();
 }
 
 
