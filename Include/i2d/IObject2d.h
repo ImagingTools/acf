@@ -1,5 +1,5 @@
 #ifndef i2d_IObject2d_included
-#define	i2d_IObject2d_included
+#define i2d_IObject2d_included
 
 
 #include "iser/ISerializable.h"

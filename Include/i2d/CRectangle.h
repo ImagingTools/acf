@@ -1,5 +1,5 @@
 #ifndef i2d_CRectangle_included
-#define	i2d_CRectangle_included
+#define i2d_CRectangle_included
 
 
 #include "istd/CRange.h"

@@ -1,5 +1,5 @@
 #ifndef i2d_CAnnulusSegment_included
-#define	i2d_CAnnulusSegment_included
+#define i2d_CAnnulusSegment_included
 
 
 #include "i2d/CAnnulus.h"

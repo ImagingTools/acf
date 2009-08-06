@@ -4,7 +4,7 @@
 // Qt includes
 #include <QVector>
 #include <QMessageBox>
-#include <QCoreApplication>
+#include <QApplication>
 #include <QSystemTrayIcon>
 
 
@@ -92,10 +92,16 @@ int CServiceApplicationComp::Execute(int argc, char** argv)
 			// start service installing:
 			int retVal = m_servicePtr->exec();
 			if (retVal == 0){
-				QMessageBox::information(
-							NULL,
-							QCoreApplication::tr("ACF Service Application"),
-							QString(QCoreApplication::tr("Service: %1 was succesfully installed.\nNow you can start the service from the Service Manager.")).arg(serviceName));
+				QApplication* appPtr = dynamic_cast<QApplication*>(QCoreApplication::instance());
+				QString installMessage = QString(QCoreApplication::tr("Service: %1 was succesfully installed.\nNow you can start the service from the Service Manager.")).arg(serviceName);
+				if (appPtr != NULL){				
+					QMessageBox::information(
+								NULL,
+								QCoreApplication::tr("ACF Service Application"), installMessage);
+				}
+				else{
+					SendInfoMessage(0, iqt::GetCString(installMessage));
+				}
 			}
 
 			return retVal;

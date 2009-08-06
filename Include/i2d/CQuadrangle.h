@@ -1,5 +1,5 @@
 #ifndef i2d_CQuadrangle_included
-#define	i2d_CQuadrangle_included
+#define i2d_CQuadrangle_included
 
 
 #include "istd/CRange.h"

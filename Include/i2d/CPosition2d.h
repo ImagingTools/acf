@@ -1,5 +1,5 @@
 #ifndef i2d_CPosition2d_included
-#define	i2d_CPosition2d_included
+#define i2d_CPosition2d_included
 
 
 #include "i2d/IObject2d.h"

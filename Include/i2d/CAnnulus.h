@@ -1,5 +1,5 @@
 #ifndef i2d_CAnnulus_included
-#define	i2d_CAnnulus_included
+#define i2d_CAnnulus_included
 
 
 #include "i2d/CPosition2d.h"

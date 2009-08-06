@@ -1,5 +1,5 @@
 #ifndef i2d_CTransform_included
-#define	i2d_CTransform_included
+#define i2d_CTransform_included
 
 
 #include "i2d/CVector2d.h"

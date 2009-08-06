@@ -1,5 +1,5 @@
-#ifndef included_ibase_IFileConvertCopy
-#define included_ibase_IFileConvertCopy
+#ifndef ibase_IFileConvertCopy_included
+#define ibase_IFileConvertCopy_included
 
 
 #include "istd/IPolymorphic.h"
@@ -20,6 +20,6 @@ public:
 } // namespace ibase
 
 
-#endif // !included_ibase_IFileConvertCopy
+#endif // !ibase_IFileConvertCopy_included
 
 
