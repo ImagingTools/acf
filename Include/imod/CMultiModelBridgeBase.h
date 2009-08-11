@@ -1,9 +1,11 @@
-#ifndef imod_CMultiModelObserverBase_included
-#define imod_CMultiModelObserverBase_included
+#ifndef imod_CMultiModelBridgeBase_included
+#define imod_CMultiModelBridgeBase_included
 
 
 // STL includes
 #include <vector>
+
+#include "istd/IChangeable.h"
 
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
@@ -14,14 +16,12 @@ namespace imod
 
 
 /**
-	Basic implementation of a multiple model observer.
-
-	\ingroup ModelObserver
+	Allow to connect as observer to multiple models and call BeginChanges and EndChanges on some its changes.
 */
-class CMultiModelObserverBase: virtual public IObserver
+class CMultiModelBridgeBase: virtual public IObserver, virtual public istd::IChangeable
 {
 public:
-	virtual ~CMultiModelObserverBase();
+	virtual ~CMultiModelBridgeBase();
 
 	/**
 		Get access to connected model with the index \c index.
@@ -43,8 +43,6 @@ public:
 protected:
 	void EnsureDetached();
 
-	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
 private:
 	typedef std::vector<imod::IModel*> Models;
 
@@ -55,5 +53,5 @@ private:
 } // namespace imod
 
 
-#endif // !imod_CMultiModelObserverBase_included
+#endif // !imod_CMultiModelBridgeBase_included
 

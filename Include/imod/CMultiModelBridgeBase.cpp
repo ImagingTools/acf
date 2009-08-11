@@ -1,4 +1,4 @@
-#include "imod/CMultiModelObserverBase.h"
+#include "imod/CMultiModelBridgeBase.h"
 
 
 // STL includes
@@ -11,13 +11,13 @@ namespace imod
 
 // public methods
 
-CMultiModelObserverBase::~CMultiModelObserverBase()
+CMultiModelBridgeBase::~CMultiModelBridgeBase()
 {
-	CMultiModelObserverBase::EnsureDetached();
+	CMultiModelBridgeBase::EnsureDetached();
 }
 
 
-IModel* CMultiModelObserverBase::GetModelPtr(int modelIndex) const
+IModel* CMultiModelBridgeBase::GetModelPtr(int modelIndex) const
 {
 	I_ASSERT(modelIndex >= 0)
 	I_ASSERT(modelIndex < GetModelCount());
@@ -26,7 +26,7 @@ IModel* CMultiModelObserverBase::GetModelPtr(int modelIndex) const
 }
 
 
-int CMultiModelObserverBase::GetModelCount() const
+int CMultiModelBridgeBase::GetModelCount() const
 {
 	return int(m_models.size());
 }
@@ -34,7 +34,7 @@ int CMultiModelObserverBase::GetModelCount() const
 
 // reimplemented (imod::IObserver)
 
-bool CMultiModelObserverBase::IsModelAttached(const imod::IModel* modelPtr) const
+bool CMultiModelBridgeBase::IsModelAttached(const imod::IModel* modelPtr) const
 {
 	if (modelPtr == NULL){
 		return !m_models.empty();
@@ -46,7 +46,7 @@ bool CMultiModelObserverBase::IsModelAttached(const imod::IModel* modelPtr) cons
 }
 
 
-bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
+bool CMultiModelBridgeBase::OnAttached(imod::IModel* modelPtr)
 {
 	I_ASSERT(modelPtr != NULL);
 
@@ -60,7 +60,7 @@ bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
 }
 
 
-bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
+bool CMultiModelBridgeBase::OnDetached(IModel* modelPtr)
 {
 	Models::iterator iter = std::find(m_models.begin(), m_models.end(), modelPtr);
 	if (iter != m_models.end()){
@@ -73,25 +73,25 @@ bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
 }
 
 
-void CMultiModelObserverBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	I_ASSERT(IsModelAttached(modelPtr));
+
+	BeginChanges(updateFlags, updateParamsPtr);
 }
 
 
-void CMultiModelObserverBase::AfterUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CMultiModelBridgeBase::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	I_ASSERT(IsModelAttached(modelPtr));
 
-	if (IsModelAttached(modelPtr)){
-		OnUpdate(modelPtr, updateFlags, updateParamsPtr);
-	}
+	EndChanges(updateFlags, updateParamsPtr);
 }
 
 
 // protected methods
 
-void CMultiModelObserverBase::EnsureDetached()
+void CMultiModelBridgeBase::EnsureDetached()
 {
 	while (!m_models.empty()){
 		imod::IModel* modelPtr = m_models.front();
@@ -99,11 +99,6 @@ void CMultiModelObserverBase::EnsureDetached()
 
 		modelPtr->DetachObserver(this);
 	}
-}
-
-
-void CMultiModelObserverBase::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
 }
 
 

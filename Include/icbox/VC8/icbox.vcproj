@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="imod"
-	ProjectGUID="{AA16B362-CE5A-48C6-9322-42620FE1006D}"
+	Name="icbox"
+	ProjectGUID="{BB07D393-32C4-40FC-A1F8-B7ED0E2662B3}"
 	>
 	<Platforms>
 		<Platform
@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="../../"
+				AdditionalIncludeDirectories="../../;&quot;$(XERCESDIR)/src&quot;;&quot;$(XALANDIR)/src&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -123,7 +123,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../"
+				AdditionalIncludeDirectories="../../;&quot;$(XERCESDIR)/src&quot;;&quot;$(XALANDIR)/src&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				BasicRuntimeChecks="3"
@@ -134,7 +134,7 @@
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
@@ -176,101 +176,13 @@
 			Name="Source Files"
 			Filter="cpp"
 			>
-			<File
-				RelativePath="..\CModelBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelChangeObserver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelProxy.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiModelBridgeBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiModelObserverBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSerializedUndoManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSingleModelObserverBase.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CModelBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelChangeObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelProxy.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiModelBridgeBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiModelObserverBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSerializedUndoManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSingleModelObserverBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\imod.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IModel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IModelEditor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IModelSelection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IUndoManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TModelWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TMultiModelObserverBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSingleModelObserverBase.h"
+				RelativePath="..\icbox.h"
 				>
 			</File>
 		</Filter>

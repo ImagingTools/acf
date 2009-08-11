@@ -2,8 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="imod"
-	ProjectGUID="{AA16B362-CE5A-48C6-9322-42620FE1006D}"
+	Name="isec"
+	ProjectGUID="{8C4A6C40-29A3-4007-88F6-FAE09CAD8E8B}"
+	RootNamespace="isec"
 	>
 	<Platforms>
 		<Platform
@@ -51,14 +52,12 @@
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+				DisableSpecificWarnings="4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -130,13 +129,12 @@
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+				DisableSpecificWarnings="4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -177,31 +175,11 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CModelBase.cpp"
+				RelativePath="..\CComposedAuthorizationVerifierComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CModelChangeObserver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelProxy.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiModelBridgeBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiModelObserverBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSerializedUndoManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSingleModelObserverBase.cpp"
+				RelativePath="..\CStaticUserLoginComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -210,67 +188,23 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CModelBase.h"
+				RelativePath="..\CComposedAuthorizationVerifierComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CModelChangeObserver.h"
+				RelativePath="..\CStaticUserLoginComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CModelProxy.h"
+				RelativePath="..\IAuthorizationVerifier.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiModelBridgeBase.h"
+				RelativePath="..\isec.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiModelObserverBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSerializedUndoManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSingleModelObserverBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\imod.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IModel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IModelEditor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IModelSelection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IUndoManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TModelWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TMultiModelObserverBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSingleModelObserverBase.h"
+				RelativePath="..\IUserLogin.h"
 				>
 			</File>
 		</Filter>
