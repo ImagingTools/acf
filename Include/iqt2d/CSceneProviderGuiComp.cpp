@@ -309,7 +309,7 @@ void CSceneProviderGuiComp::OnGuiCreated()
 	SceneView->setBackgroundBrush(QBrush(QColor(128, 128, 128)));
 	SceneView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
 	SceneView->installEventFilter(this);
-	
+
 	if (m_useAntialiasingAttrPtr.IsValid() && *m_useAntialiasingAttrPtr){
 		SceneView->setRenderHints(QPainter::Antialiasing);
 	}

@@ -25,7 +25,7 @@ bool CTextFileLoaderComp::IsOperationSupported(
 		return false;
 	}
 
-	return		(dynamic_cast<const ITextDocument*>(dataObjectPtr) != NULL) &&
+	return		((dataObjectPtr == NULL) || (dynamic_cast<const ITextDocument*>(dataObjectPtr) != NULL)) &&
 				((flags & QF_ANONYMOUS_ONLY) == 0);
 }
 

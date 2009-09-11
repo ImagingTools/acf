@@ -129,7 +129,7 @@ istd::CString CSingleDocumentWorkspaceGuiComp::GetOpenFilePath(const std::string
 {
 	QString filter = CreateFileDialogFilter(documentTypeIdPtr, iser::IFileLoader::QF_NO_SAVING);
 
-	QStringList files = QFileDialog::getOpenFileNames(NULL, tr("Open Files..."), m_lastDirectory, filter);
+	QStringList files = QFileDialog::getOpenFileNames(GetWidget(), tr("Open Files..."), m_lastDirectory, filter);
 
 	if (!files.isEmpty()){
 		UpdateLastDirectory(files.at(0));

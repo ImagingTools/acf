@@ -4,7 +4,6 @@
 
 #include "iser/IFileLoader.h"
 
-#include "icomp/IRegistry.h"
 #include "icomp/CComponentBase.h"
 
 
