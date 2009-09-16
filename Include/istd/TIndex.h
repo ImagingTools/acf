@@ -158,8 +158,22 @@ public:
 	bool operator==(const TIndex& index) const;
 	bool operator!=(const TIndex& index) const;
 
+	// static methods
+	/**
+		Get global instance of zero index.
+	*/
+	static const TIndex<Dimensions>& GetZero();
+	/**
+		Get global instance of invalid index.
+	*/
+	static const TIndex<Dimensions>& GetInvalid();
+
 private:
 	int m_elements[Dimensions];
+
+	// static attributes
+	static TIndex<Dimensions> s_zeroInstance;
+	static TIndex<Dimensions> s_invalidInstance;
 };
 
 
@@ -443,6 +457,30 @@ int TIndex<Dimensions>::GetProductVolume() const
 
 	return retVal;
 }
+
+
+// static methods
+
+template <int Dimensions>
+const TIndex<Dimensions>& TIndex<Dimensions>::GetZero()
+{
+	return s_zeroInstance;
+}
+
+
+template <int Dimensions>
+const TIndex<Dimensions>& TIndex<Dimensions>::GetInvalid()
+{
+	return s_invalidInstance;
+}
+
+
+// static attributes
+
+template <int Dimensions>
+TIndex<Dimensions> TIndex<Dimensions>::s_zeroInstance(0);
+template <int Dimensions>
+TIndex<Dimensions> TIndex<Dimensions>::s_invalidInstance(-1);
 
 
 } // namespace istd
