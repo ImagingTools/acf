@@ -67,8 +67,8 @@ double CTimer::GetTimeTo(const ITimer& timer) const
 
 void CTimer::WaitTo(double time) const
 {
-	int restMis;
-	while ((restMis = int((time - GetElapsed()) * 1000000)) > 0){
+	double restMis;
+	while ((restMis = (time - GetElapsed()) * 1000000) >= 1){
 		ThreadBrute::usleep(I_DWORD(restMis));
 	}
 }
