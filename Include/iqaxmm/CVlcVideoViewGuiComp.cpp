@@ -1,4 +1,4 @@
-#include "iqtmm/CVlcVideoViewGuiComp.h"
+#include "iqaxmm/CVlcVideoViewGuiComp.h"
 
 
 // Qt includes
@@ -9,7 +9,7 @@
 #include "iqt/CTimer.h"
 
 
-namespace iqtmm
+namespace iqaxmm
 {
 
 
@@ -194,6 +194,6 @@ bool CVlcVideoViewGuiComp::GrabFrame(iimg::IBitmap& /*result*/, int /*frameIndex
 }
 
 
-} // namespace iqtmm
+} // namespace iqaxmm
 
 

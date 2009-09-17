@@ -23,6 +23,7 @@ public:
 	typedef iqtgui::TGuiComponentBase<Phonon::VideoWidget> BaseClass;
 
 	I_BEGIN_COMPONENT(CPhononVideoViewGuiComp);
+		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
 		I_REGISTER_INTERFACE(imm::IVideoController);

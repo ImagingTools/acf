@@ -1,5 +1,5 @@
-#ifndef iqtmm_CVlcVideoViewGuiComp_included
-#define iqtmm_CVlcVideoViewGuiComp_included
+#ifndef iqaxmm_CVlcVideoViewGuiComp_included
+#define iqaxmm_CVlcVideoViewGuiComp_included
 
 
 // Qt includes
@@ -9,10 +9,10 @@
 
 #include "iqtgui/TGuiComponentBase.h"
 
-#include "iqtmm/Wrapped/axvlc.h"
+#include "iqaxmm/Wrapped/axvlc.h"
 
 
-namespace iqtmm
+namespace iqaxmm
 {
 
 
@@ -24,6 +24,7 @@ public:
 	typedef iqtgui::TGuiComponentBase<AXVLC::VLCPlugin2> BaseClass;
 
 	I_BEGIN_COMPONENT(CVlcVideoViewGuiComp);
+		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(imm::IMediaController);
 		I_REGISTER_INTERFACE(imm::IVideoInfo);
 		I_REGISTER_INTERFACE(imm::IVideoController);
@@ -67,8 +68,8 @@ private:
 };
 
 
-} // namespace iqtmm
+} // namespace iqaxmm
 
 
-#endif // !iqtmm_CVlcVideoViewGuiComp_included
+#endif // !iqaxmm_CVlcVideoViewGuiComp_included
 

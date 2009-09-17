@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="iqtmm"
-	ProjectGUID="{FBA91AC7-8419-4318-8BD7-ADFB8D4400FF}"
-	RootNamespace="iqtmm"
+	Name="iqaxmm"
+	ProjectGUID="{19BF49D4-532F-4B58-A9B5-F215495527EC}"
+	RootNamespace="iqaxmm"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -201,11 +201,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CMediaLoaderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CPhononVideoViewGuiComp.cpp"
+				RelativePath="..\CVlcVideoViewGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -215,19 +211,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CMediaLoaderComp.h"
+				RelativePath="..\CVlcVideoViewGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CPhononVideoViewGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CPhononVideoViewGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\iqtmm.h"
+				RelativePath="..\iqaxmm.h"
 				>
 			</File>
 		</Filter>
@@ -243,14 +231,22 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath="..\generated\moc_CPhononVideoViewGuiComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
+		</Filter>
+		<Filter
+			Name="Wrapped Files"
+			>
+			<File
+				RelativePath="..\Wrapped\axvlc.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Wrapped\axvlc.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
