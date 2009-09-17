@@ -30,6 +30,8 @@ public:
 		I_ASSIGN(m_framesPerSecondAttrPtr, "FramesPerSecond", "Default number of frames per second if this info is unavailable from video", true, 25.0);
 	I_END_COMPONENT();
 
+	CPhononVideoViewGuiComp();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
@@ -55,8 +57,13 @@ public:
 	virtual bool SetCurrentFrame(int frameIndex);
 	virtual bool GrabFrame(iimg::IBitmap& result, int frameIndex = -1) const;
 
+protected:
+	void EnsureSync() const;
+
 private:
 	Phonon::MediaObject m_mediaObject;
+
+	double m_currentPosition;
 
 	I_ATTR(double, m_framesPerSecondAttrPtr);
 };

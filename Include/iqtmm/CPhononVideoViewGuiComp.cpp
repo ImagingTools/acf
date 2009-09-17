@@ -2,6 +2,8 @@
 
 
 // Qt includes
+#include <QCoreApplication>
+#include <QEventLoop>
 #include <QUrl>
 
 #include <istd/TChangeNotifier.h>
@@ -12,6 +14,12 @@ namespace iqtmm
 
 
 // public methods
+
+CPhononVideoViewGuiComp::CPhononVideoViewGuiComp()
+:	m_currentPosition(0)
+{
+}
+
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
@@ -35,6 +43,8 @@ void CPhononVideoViewGuiComp::OnGuiDestroyed()
 
 istd::CString CPhononVideoViewGuiComp::GetOpenedMediumUrl() const
 {
+	EnsureSync();
+
 	return iqt::GetCString(m_mediaObject.currentSource().url().path());
 }
 
@@ -47,6 +57,9 @@ bool CPhononVideoViewGuiComp::OpenMediumUrl(const istd::CString& url, bool autoP
 
 	if (autoPlay){
 		m_mediaObject.play();
+	}
+	else{
+		m_mediaObject.pause();
 	}
 
 	return true;
@@ -64,6 +77,8 @@ void CPhononVideoViewGuiComp::CloseMedium()
 
 bool CPhononVideoViewGuiComp::IsPlaying() const
 {
+	EnsureSync();
+
 	Phonon::State state = m_mediaObject.state();
 
 	return (state == Phonon::PlayingState) || (state == Phonon::BufferingState);
@@ -72,30 +87,30 @@ bool CPhononVideoViewGuiComp::IsPlaying() const
 
 bool CPhononVideoViewGuiComp::SetPlaying(bool state)
 {
-	if (state != IsPlaying()){
-		istd::CChangeNotifier notifier(this, CF_STATUS);
+	istd::CChangeNotifier notifier(this, CF_STATUS);
 
-		if (state){
-			m_mediaObject.play();
-		}
-		else{
-			m_mediaObject.pause();
-		}
+	if (state){
+		m_mediaObject.play();
+	}
+	else{
+		m_mediaObject.pause();
 	}
 
-	return (IsPlaying() == state);
+	return true;
 }
 
 
 double CPhononVideoViewGuiComp::GetMediumLength() const
 {
+	EnsureSync();
+
 	return m_mediaObject.totalTime() * 0.001;
 }
 
 
 double CPhononVideoViewGuiComp::GetCurrentPosition() const
 {
-	return m_mediaObject.currentTime() * 0.001;
+	return m_currentPosition;
 }
 
 
@@ -109,6 +124,8 @@ bool CPhononVideoViewGuiComp::SetCurrentPosition(double position)
 		istd::CChangeNotifier notifier(this, CF_POSITION);
 
 		m_mediaObject.seek(qint64(position * 1000));
+
+		m_currentPosition = position;
 
 		return true;
 	}
@@ -160,6 +177,22 @@ bool CPhononVideoViewGuiComp::SetCurrentFrame(int frameIndex)
 bool CPhononVideoViewGuiComp::GrabFrame(iimg::IBitmap& /*result*/, int /*frameIndex*/) const
 {
 	return false;
+}
+
+
+// protected methods
+
+void CPhononVideoViewGuiComp::EnsureSync() const
+{
+	for (;;){
+		int state = m_mediaObject.state();
+		if ((state == Phonon::BufferingState) || (state == Phonon::LoadingState)){
+			QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+		}
+		else{
+			break;
+		}
+	}
 }
 
 
