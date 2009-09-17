@@ -3,6 +3,7 @@
 
 
 // Qt includes
+#include <QFrame>
 #include <QAxWidget>
 
 #include "imm/IVideoController.h"
@@ -17,11 +18,11 @@ namespace iqaxmm
 
 
 class CVlcVideoViewGuiComp:
-			public iqtgui::TGuiComponentBase<AXVLC::VLCPlugin2>,
+			public iqtgui::TGuiComponentBase<QFrame>,
 			virtual public imm::IVideoController
 {
 public:
-	typedef iqtgui::TGuiComponentBase<AXVLC::VLCPlugin2> BaseClass;
+	typedef iqtgui::TGuiComponentBase<QFrame> BaseClass;
 
 	I_BEGIN_COMPONENT(CVlcVideoViewGuiComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
@@ -59,6 +60,7 @@ public:
 	virtual bool GrabFrame(iimg::IBitmap& result, int frameIndex = -1) const;
 
 private:
+	AXVLC::VLCPlugin2* m_vlcWidgetPtr;
 	AXVLC::IVLCInput* m_vlcInputPtr;
 	AXVLC::IVLCPlaylist* m_playlistPtr;
 

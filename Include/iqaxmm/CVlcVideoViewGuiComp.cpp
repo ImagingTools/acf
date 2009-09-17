@@ -3,6 +3,8 @@
 
 // Qt includes
 #include <QUrl>
+#include <QFrame>
+#include <QVBoxLayout>
 
 #include "istd/TChangeNotifier.h"
 
@@ -16,7 +18,8 @@ namespace iqaxmm
 // public methods
 
 CVlcVideoViewGuiComp::CVlcVideoViewGuiComp()
-:	m_vlcInputPtr(NULL),
+:	m_vlcWidgetPtr(NULL),
+	m_vlcInputPtr(NULL),
 	m_playlistPtr(NULL)
 {
 }
@@ -27,13 +30,25 @@ CVlcVideoViewGuiComp::CVlcVideoViewGuiComp()
 void CVlcVideoViewGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
+
+	QFrame* widgetPtr = GetQtWidget();
+	if (widgetPtr != NULL){
+		widgetPtr->setFrameStyle(QFrame::NoFrame);
+		QVBoxLayout* layoutPtr = new QVBoxLayout(widgetPtr);
+		layoutPtr->setContentsMargins(0, 0, 0, 0);
+		widgetPtr->setLayout(layoutPtr);
+	}
 }
 
 
 void CVlcVideoViewGuiComp::OnGuiDestroyed()
 {
-	m_vlcInputPtr = NULL;
-	m_playlistPtr = NULL;
+	if (m_vlcWidgetPtr != NULL){
+		delete m_vlcWidgetPtr;
+		m_vlcWidgetPtr = NULL;
+		m_vlcInputPtr = NULL;
+		m_playlistPtr = NULL;
+	}
 
 	m_currentUrl.clear();
 
@@ -51,13 +66,27 @@ istd::CString CVlcVideoViewGuiComp::GetOpenedMediumUrl() const
 
 bool CVlcVideoViewGuiComp::OpenMediumUrl(const istd::CString& url, bool autoPlay)
 {
-	AXVLC::VLCPlugin2* widgetPtr = GetQtWidget();
+	if (m_vlcWidgetPtr != NULL){
+		delete m_vlcWidgetPtr;
+		m_vlcWidgetPtr = NULL;
+		m_vlcInputPtr = NULL;
+		m_playlistPtr = NULL;
+	}
+
+	QWidget* widgetPtr = GetQtWidget();
 	if (widgetPtr != NULL){
+		m_vlcWidgetPtr = new AXVLC::VLCPlugin2(widgetPtr);
+
+		QLayout* layoutPtr = widgetPtr->layout();
+		if (layoutPtr != NULL){
+			layoutPtr->addWidget(m_vlcWidgetPtr);
+		}
+
 		istd::CChangeNotifier notifier(this, CF_STATUS);
 
-		m_vlcInputPtr = widgetPtr->input();
+		m_vlcInputPtr = m_vlcWidgetPtr->input();
 
-		m_playlistPtr = widgetPtr->playlist();
+		m_playlistPtr = m_vlcWidgetPtr->playlist();
 		if (m_playlistPtr != NULL){
 			m_currentUrl = url;
 
