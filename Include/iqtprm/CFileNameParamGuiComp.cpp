@@ -18,10 +18,10 @@ void CFileNameParamGuiComp::UpdateModel() const
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		istd::CString directory = iqt::GetCString(DirEdit->text());
-		if (directory != objectPtr->GetDirectory()){
+		if (directory != objectPtr->GetPath()){
 			istd::CChangeNotifier notifier(objectPtr);
 
-			objectPtr->SetDirectory(directory);
+			objectPtr->SetPath(directory);
 		}
 	}
 }
@@ -31,7 +31,7 @@ void CFileNameParamGuiComp::UpdateEditor(int /*updateFlags*/)
 {
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		DirEdit->setText(iqt::GetQString(objectPtr->GetDirectory()));
+		DirEdit->setText(iqt::GetQString(objectPtr->GetPath()));
 	}
 }
 

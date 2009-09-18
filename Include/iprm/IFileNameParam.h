@@ -14,8 +14,16 @@ namespace iprm
 class IFileNameParam: virtual public iser::ISerializable
 {
 public:
-	virtual const istd::CString& GetDirectory() const = 0;
-	virtual void SetDirectory(const istd::CString& directory) = 0;
+	enum PathType
+	{
+		PT_UNKNOWN,
+		PT_FILE,
+		PT_DIRECTORY
+	};
+
+	virtual int GetPathType() const = 0;
+	virtual const istd::CString& GetPath() const = 0;
+	virtual void SetPath(const istd::CString& directory) = 0;
 };
 
 

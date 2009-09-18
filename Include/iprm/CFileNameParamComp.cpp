@@ -23,13 +23,19 @@ void CFileNameParamComp::OnComponentCreated()
 
 // reimplemented (iprm::IFileNameParam)
 
-const istd::CString& CFileNameParamComp::GetDirectory() const
+int CFileNameParamComp::GetPathType() const
+{
+	return (*m_isFileAttrPtr)? PT_FILE: (*m_isDirAttrPtr)? PT_DIRECTORY: PT_UNKNOWN;
+}
+
+
+const istd::CString& CFileNameParamComp::GetPath() const
 {
 	return m_directory;
 }
 
 
-void CFileNameParamComp::SetDirectory(const istd::CString& directory)
+void CFileNameParamComp::SetPath(const istd::CString& directory)
 {
 	m_directory = directory;
 }
