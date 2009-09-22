@@ -18,7 +18,8 @@ public:
 	{
 		PT_UNKNOWN,
 		PT_FILE,
-		PT_DIRECTORY
+		PT_DIRECTORY,
+		PT_URL
 	};
 
 	virtual int GetPathType() const = 0;
