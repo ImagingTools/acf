@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          948
+          1052
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="11">
+  <ElementsList count="10">
     <Element>
       <Id>
         Application
@@ -30,7 +30,10 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="11">
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               AboutDescriptionText
@@ -129,25 +132,6 @@ This tool is a part of ACF project
                   CompositorTemplate
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FreeComponents
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Instantiator
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -273,6 +257,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -329,6 +316,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
@@ -423,6 +413,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
@@ -460,6 +453,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          1
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -518,6 +514,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          1
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -564,48 +563,6 @@ This tool is a part of ACF project
     </Element>
     <Element>
       <Id>
-        Instantiator
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        Instantiator
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Instances
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="2">
-                <Value>
-                  DocumentMangerModelBinder
-                </Value>
-                <Value>
-                  ElementInfoBinder
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         LogDock
       </Id>
       <PackageId>
@@ -618,6 +575,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
@@ -636,6 +596,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -692,6 +655,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
@@ -729,6 +695,9 @@ This tool is a part of ACF project
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>

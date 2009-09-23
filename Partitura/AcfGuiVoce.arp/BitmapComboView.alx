@@ -18,112 +18,178 @@
   <PositionMap count="25">
     <Element>
       <ComponentName>
-        Application
+        AdvancedImageView
       </ComponentName>
       <X>
-        558
+        -477
       </X>
       <X>
-        -38
+        82
       </X>
     </Element>
     <Element>
       <ComponentName>
-        AttributeDock
+        Bitmap
       </ComponentName>
       <X>
-        144
+        -192
       </X>
       <X>
-        4
+        -3
       </X>
     </Element>
     <Element>
       <ComponentName>
-        AttributeEditor
+        BitmapLoader
       </ComponentName>
       <X>
-        179
+        -395
       </X>
       <X>
-        199
+        182
       </X>
     </Element>
     <Element>
       <ComponentName>
-        AttributeEditorDock
+        ClassifBinder
       </ComponentName>
       <X>
-        108
+        375
       </X>
+      <X>
+        -153
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ClassifGui
+      </ComponentName>
+      <X>
+        602
+      </X>
+      <X>
+        83
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ClassifResults
+      </ComponentName>
+      <X>
+        334
+      </X>
+      <X>
+        -1
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ClassificationBinder
+      </ComponentName>
+      <X>
+        436
+      </X>
+      <X>
+        -153
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        DummyClassifController
+      </ComponentName>
+      <X>
+        -5
+      </X>
+      <X>
+        236
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileDialogLoader
+      </ComponentName>
+      <X>
+        -219
+      </X>
+      <X>
+        183
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        GuiApplication
+      </ComponentName>
       <X>
         70
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CompositorTemplate
-      </ComponentName>
       <X>
-        412
-      </X>
-      <X>
-        227
+        -144
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DocumentManagerListener
+        ImageBinder
       </ComponentName>
       <X>
-        249
+        -459
       </X>
       <X>
-        -334
+        -105
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DocumentMangerModelBinder
+        ImageClassificationGui
       </ComponentName>
       <X>
-        230
+        602
       </X>
       <X>
-        -183
+        83
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DocumentTemplate
+        ImageClassificationResults
       </ComponentName>
       <X>
-        -222
+        399
       </X>
       <X>
-        -107
+        -1
       </X>
     </Element>
     <Element>
       <ComponentName>
-        DoxygenHelpFileProvider
+        ImageSelectorGui
       </ComponentName>
       <X>
-        218
+        345
       </X>
       <X>
-        221
+        84
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ElementInfoBinder
+        ImageView
       </ComponentName>
       <X>
-        -204
+        -445
       </X>
       <X>
-        -181
+        52
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        IniSettingsProvider
+      </ComponentName>
+      <X>
+        405
+      </X>
+      <X>
+        355
       </X>
     </Element>
     <Element>
@@ -131,32 +197,10 @@
         Instantiator
       </ComponentName>
       <X>
-        251
+        76
       </X>
       <X>
-        -120
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        771
-      </X>
-      <X>
-        19
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LogDock
-      </ComponentName>
-      <X>
-        804
-      </X>
-      <X>
-        117
+        -364
       </X>
     </Element>
     <Element>
@@ -164,131 +208,87 @@
         ModelBinder
       </ComponentName>
       <X>
-        -29
+        -205
       </X>
       <X>
-        -204
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PackageOverview
-      </ComponentName>
-      <X>
-        -38
-      </X>
-      <X>
-        324
+        -139
       </X>
     </Element>
     <Element>
       <ComponentName>
-        PackageOverviewDock
+        ModelEditorGui
       </ComponentName>
       <X>
-        -91
+        -215
       </X>
       <X>
-        226
+        20
       </X>
     </Element>
     <Element>
       <ComponentName>
-        PackagesLoader
+        RecognitionTestGui
       </ComponentName>
       <X>
-        -475
+        27
       </X>
       <X>
-        299
+        85
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Preview
+        SceneControllerGui
       </ComponentName>
       <X>
-        -332
+        -769
       </X>
       <X>
-        32
+        85
       </X>
     </Element>
     <Element>
       <ComponentName>
-        QuickHelpDoc
+        TaughtImagesGui
       </ComponentName>
       <X>
-        228
+        281
       </X>
       <X>
-        112
+        230
       </X>
     </Element>
     <Element>
       <ComponentName>
-        QuickHelpDock
+        TeachedImagesGui
       </ComponentName>
       <X>
-        375
+        281
       </X>
       <X>
-        66
+        230
       </X>
     </Element>
     <Element>
       <ComponentName>
-        QuickHelpViewer
+        TechedImagesGui
       </ComponentName>
       <X>
-        239
+        345
       </X>
       <X>
-        118
+        84
       </X>
     </Element>
     <Element>
       <ComponentName>
-        Registry
+        TestImagesGui
       </ComponentName>
       <X>
-        -14
+        496
       </X>
       <X>
-        -264
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        RegistryEditor
-      </ComponentName>
-      <X>
-        -121
-      </X>
-      <X>
-        57
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        RegistryLoader
-      </ComponentName>
-      <X>
-        -680
-      </X>
-      <X>
-        -218
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectedElementInfo
-      </ComponentName>
-      <X>
-        -221
-      </X>
-      <X>
-        -343
+        230
       </X>
     </Element>
   </PositionMap>

@@ -83,7 +83,7 @@ private:
 
 	bool m_blockCreating;
 
-	Ids m_autoInitElementIds;
+	mutable Ids m_autoInitElementIds;
 };
 
 

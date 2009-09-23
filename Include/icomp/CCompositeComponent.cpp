@@ -146,16 +146,18 @@ IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId)
 			CreateSubcomponentInfo(componentId, componentInfo.contextPtr, componentInfo.componentPtr, true);
 
 			componentInfo.isInitialized = true;
-		}
 
-		while (!m_autoInitElementIds.empty()){
-			std::string autoInitId = *m_autoInitElementIds.begin();
+			while (!m_autoInitElementIds.empty()){
+				std::string autoInitId = *m_autoInitElementIds.begin();
 
-			ComponentInfo& autoInitInfo = m_componentMap[autoInitId];
-			if (!autoInitInfo.isInitialized){
-				CreateSubcomponentInfo(autoInitId, autoInitInfo.contextPtr, autoInitInfo.componentPtr, true);
+				m_autoInitElementIds.erase(m_autoInitElementIds.begin());
 
-				autoInitInfo.isInitialized = true;
+				ComponentInfo& autoInitInfo = m_componentMap[autoInitId];
+				if (!autoInitInfo.isInitialized){
+					CreateSubcomponentInfo(autoInitId, autoInitInfo.contextPtr, autoInitInfo.componentPtr, true);
+
+					autoInitInfo.isInitialized = true;
+				}
 			}
 		}
 

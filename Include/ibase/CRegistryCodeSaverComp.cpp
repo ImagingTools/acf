@@ -725,8 +725,10 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 		icomp::IRegistryElement& component = *componentInfo.elementPtr;
 		icomp::IRegistryElement::Ids attributeIds = component.GetAttributeIds();
 
+		I_DWORD componentFlags = component.GetElementFlags();
+
 		NextLine(stream);
-		if (!attributeIds.empty()){
+		if (!attributeIds.empty() || (componentFlags != 0)){
 			stream << "icomp::IRegistry::ElementInfo* " << elementInfoName << " = ";
 		}
 
@@ -739,49 +741,60 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 		NextLine(stream);
 		stream << "\t\t\ttrue);";
 
-		if (!attributeIds.empty()){
+		if (!attributeIds.empty() || (componentFlags != 0)){
 			NextLine(stream);
 			stream << "if ((" << elementInfoName << " != NULL) && " << elementInfoName << "->elementPtr.IsValid()){";
 			ChangeIndent(1);
 
-			for (		icomp::IRegistryElement::Ids::const_iterator attributeIter = attributeIds.begin();
-						attributeIter != attributeIds.end();
-						++attributeIter){
-				const std::string& attributeId = *attributeIter;
+			if (componentFlags != 0){
+				NextLine(stream);
+				stream << elementInfoName << "->elementPtr->SetElementFlags(" << componentFlags << ");";
+			}
 
-				const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = component.GetAttributeInfo(attributeId);
-
-				if (attributeIter != attributeIds.begin()){
+			if (!attributeIds.empty()){
+				if (componentFlags != 0){
 					stream << std::endl;
 				}
 
-				NextLine(stream);
-				stream << "// create and set attribute value for '" << attributeId << "'";
-				if (attrInfoPtr != NULL){
-					std::string attributeInfoName = "info" + attributeId + "Ptr";
+				for (		icomp::IRegistryElement::Ids::const_iterator attributeIter = attributeIds.begin();
+							attributeIter != attributeIds.end();
+							++attributeIter){
+					const std::string& attributeId = *attributeIter;
 
-					bool isAttributeValid = attrInfoPtr->attributePtr.IsValid();
+					const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = component.GetAttributeInfo(attributeId);
+
+					if (attributeIter != attributeIds.begin()){
+						stream << std::endl;
+					}
 
 					NextLine(stream);
-					stream << "icomp::IRegistryElement::AttributeInfo* " << attributeInfoName << " = ";
-					stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", " << isAttributeValid << ");";
+					stream << "// create and set attribute value for '" << attributeId << "'";
+					if (attrInfoPtr != NULL){
+						std::string attributeInfoName = "info" + attributeId + "Ptr";
 
-					NextLine(stream);
-					stream << "if (" << attributeInfoName << " != NULL){";
-					ChangeIndent(1);
+						bool isAttributeValid = attrInfoPtr->attributePtr.IsValid();
 
-					if (!attrInfoPtr->exportId.empty()){
 						NextLine(stream);
-						stream << attributeInfoName << "->exportId = \"" << attrInfoPtr->exportId << "\";";
-					}
+						stream << "icomp::IRegistryElement::AttributeInfo* " << attributeInfoName << " = ";
+						stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", " << isAttributeValid << ");";
 
-					if (isAttributeValid){
-						WriteAttribute(attributeId, attributeInfoName, *attrInfoPtr->attributePtr, stream);
-					}
+						NextLine(stream);
+						stream << "if (" << attributeInfoName << " != NULL){";
+						ChangeIndent(1);
 
-					ChangeIndent(-1);
-					NextLine(stream);
-					stream << "}";
+						if (!attrInfoPtr->exportId.empty()){
+							NextLine(stream);
+							stream << attributeInfoName << "->exportId = \"" << attrInfoPtr->exportId << "\";";
+						}
+
+						if (isAttributeValid){
+							WriteAttribute(attributeId, attributeInfoName, *attrInfoPtr->attributePtr, stream);
+						}
+
+						ChangeIndent(-1);
+						NextLine(stream);
+						stream << "}";
+					}
 				}
 			}
 
