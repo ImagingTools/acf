@@ -18,6 +18,9 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
+  <property name="toolTip" >
+   <string>Display navigation bar</string>
+  </property>
   <property name="styleSheet" >
    <string notr="true" />
   </property>
@@ -56,6 +59,9 @@ QToolButton {
      <layout class="QHBoxLayout" name="horizontalLayout" >
       <item>
        <widget class="QToolButton" name="ResetViewButton" >
+        <property name="toolTip" >
+         <string>Reset display position</string>
+        </property>
         <property name="styleSheet" >
          <string notr="true" />
         </property>
@@ -76,6 +82,9 @@ QToolButton {
       </item>
       <item>
        <widget class="QToolButton" name="ZoomInButton" >
+        <property name="toolTip" >
+         <string>Zoom in</string>
+        </property>
         <property name="text" >
          <string/>
         </property>
@@ -93,6 +102,9 @@ QToolButton {
       </item>
       <item>
        <widget class="QToolButton" name="ZoomOutButton" >
+        <property name="toolTip" >
+         <string>Zoom out</string>
+        </property>
         <property name="text" >
          <string/>
         </property>
@@ -109,27 +121,10 @@ QToolButton {
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="RotateRightButton" >
-        <property name="text" >
-         <string/>
-        </property>
-        <property name="icon" >
-         <iconset resource="../iqtgui/iqtgui.qrc" >
-          <normaloff>:/Icons/redo</normaloff>:/Icons/redo</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="autoRepeat" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QToolButton" name="RotateLeftButton" >
+        <property name="toolTip" >
+         <string>Rotate left</string>
+        </property>
         <property name="text" >
          <string/>
         </property>
@@ -148,6 +143,29 @@ QToolButton {
         </property>
         <property name="autoRepeatDelay" >
          <number>300</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="RotateRightButton" >
+        <property name="toolTip" >
+         <string>Rotate right</string>
+        </property>
+        <property name="text" >
+         <string/>
+        </property>
+        <property name="icon" >
+         <iconset resource="../iqtgui/iqtgui.qrc" >
+          <normaloff>:/Icons/redo</normaloff>:/Icons/redo</iconset>
+        </property>
+        <property name="iconSize" >
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="autoRepeat" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
