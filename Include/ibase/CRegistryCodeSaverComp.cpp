@@ -975,31 +975,52 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 		}
 	}
 
-	NextLine(stream);
-	stream << "// interface export";
 	const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registry.GetExportedInterfacesMap();
-	for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator interfaceIter = interfacesMap.begin();
-				interfaceIter != interfacesMap.end();
-				++interfaceIter){
-		const istd::CClassInfo& info = interfaceIter->first;
-		const std::string& componentName = interfaceIter->second;
+	if (!interfacesMap.empty()){
+		NextLine(stream);
+		stream << "// interface export";
+		for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator interfaceIter = interfacesMap.begin();
+					interfaceIter != interfacesMap.end();
+					++interfaceIter){
+			const istd::CClassInfo& info = interfaceIter->first;
+			const std::string& componentName = interfaceIter->second;
 
-		NextLine(stream);
-		stream << "registry.SetElementInterfaceExported(";
-		NextLine(stream);
-		stream << "\t\t\t\"" << componentName << "\",";
-		NextLine(stream);
-		stream << "\t\t\tistd::CClassInfo(\"" << info.GetName() << "\"),";
-		NextLine(stream);
-		stream << "\t\t\ttrue);";
+			NextLine(stream);
+			stream << "registry.SetElementInterfaceExported(";
+			NextLine(stream);
+			stream << "\t\t\t\"" << componentName << "\",";
+			NextLine(stream);
+			stream << "\t\t\tistd::CClassInfo(\"" << info.GetName() << "\"),";
+			NextLine(stream);
+			stream << "\t\t\ttrue);";
+		}
 	}
 
-	stream << std::endl;
+	const icomp::IRegistry::ExportedComponentsMap& componentsMap = registry.GetExportedComponentsMap();
+	if (!componentsMap.empty()){
+		stream << std::endl;
+		NextLine(stream);
+		stream << "// component export";
+		for (		icomp::IRegistry::ExportedComponentsMap::const_iterator componentIter = componentsMap.begin();
+					componentIter != componentsMap.end();
+					++componentIter){
+			const std::string& exportedName = componentIter->first;
+			const std::string& componentName = componentIter->second;
+
+			NextLine(stream);
+			stream << "registry.SetElementExported(";
+			NextLine(stream);
+			stream << "\t\t\t\"" << exportedName << "\",";
+			NextLine(stream);
+			stream << "\t\t\t\"" << componentName << "\");";
+		}
+	}
 
 	istd::CString description = registry.GetDescription();
 	istd::CString keywords = registry.GetKeywords();
 
 	if (!description.empty() || !keywords.empty()){
+		stream << std::endl;
 		NextLine(stream);
 		stream << "// setting of meta info";
 
@@ -1012,8 +1033,6 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 			NextLine(stream);
 			stream << "registry.SetKeywords(\"" << keywords.ToString() << "\");";
 		}
-
-		stream << std::endl;
 	}
 
 	ChangeIndent(-1);

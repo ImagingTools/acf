@@ -22,15 +22,16 @@ class CApplicationComp:
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CApplicationComp)
-		I_REGISTER_INTERFACE(ibase::IApplication)
-		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", false, "MainGui")
-		I_ASSIGN(m_splashScreenCompPtr, "SplashScreen", "Splash screen shown before application is launched", false, "SplashScreen")
-		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info used to set main window title", false, "ApplicationInfo")
-		I_ASSIGN(m_splashTimeAttrPtr, "SplashTime", "Minimal time splash screen will be shown", true, 2)
-		I_ASSIGN(m_styleSheetAttrPtr, "StyleSheet", "Style sheet for the GUI", false, "")
-		I_ASSIGN(m_iconPathAttrPtr, "IconPath", "file path for the application icon", false, "")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CApplicationComp);
+		I_REGISTER_INTERFACE(ibase::IApplication);
+		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", false, "MainGui");
+		I_ASSIGN(m_splashScreenCompPtr, "SplashScreen", "Splash screen shown before application is launched", false, "SplashScreen");
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info used to set main window title", false, "ApplicationInfo");
+		I_ASSIGN(m_splashTimeAttrPtr, "SplashTime", "Minimal time splash screen will be shown", true, 2);
+		I_ASSIGN(m_styleSheetAttrPtr, "StyleSheet", "Style sheet for the GUI", false, "");
+		I_ASSIGN(m_iconPathAttrPtr, "IconPath", "file path for the application icon", false, "");
+		I_ASSIGN(m_titleFormatAttrPtr, "TitleFormat", "Describe format of title bar, use %1 as application name and %2 as company name", true, "%1");
+	I_END_COMPONENT;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -53,6 +54,7 @@ private:
 	I_ATTR(double, m_splashTimeAttrPtr);
 	I_ATTR(istd::CString, m_styleSheetAttrPtr);
 	I_ATTR(istd::CString, m_iconPathAttrPtr);
+	I_ATTR(istd::CString, m_titleFormatAttrPtr);
 
 	istd::TDelPtr<QApplication> m_applicationPtr;
 };

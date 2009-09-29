@@ -12,13 +12,16 @@
 #include "icomp/IRegistry.h"
 #include "icomp/IComponentContext.h"
 #include "icomp/CComponentBase.h"
+#include "icomp/CInterfaceManipBase.h"
 
 
 namespace icomp
 {
 
 
-class CCompositeComponent: public CComponentBase
+class CCompositeComponent:
+			public CComponentBase,
+			public CInterfaceManipBase
 {
 public:
 	typedef CComponentBase BaseClass;
@@ -48,12 +51,6 @@ public:
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
-
-	// static methods
-	/**
-		Split complete component ID to real component ID and subcomponent ID.
-	*/
-	static void SplitComponentId(const std::string& fullId, std::string& componentId, std::string& restId);
 
 protected:
 	typedef istd::TDelPtr<icomp::IComponent> ComponentPtr;

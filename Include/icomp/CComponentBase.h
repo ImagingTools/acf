@@ -252,6 +252,20 @@ inline bool CComponentBase::IsComponentActive() const
 	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2, defaultValue3};\
 	I_ASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
 
+/**
+	Used to assign value for multiply parameters (attributes, references or factories) with 3 default parameter.
+*/
+#define I_ASSIGN_MULTI_4(member, id, description, isObligatory, defaultValue1, defaultValue2, defaultValue3, defaultValue4)\
+	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2, defaultValue3, defaultValue4};\
+	I_ASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
+
+/**
+	Used to assign value for multiply parameters (attributes, references or factories) with 3 default parameter.
+*/
+#define I_ASSIGN_MULTI_5(member, id, description, isObligatory, defaultValue1, defaultValue2, defaultValue3, defaultValue4, defaultValue5)\
+	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2, defaultValue3, defaultValue4, defaultValue5};\
+	I_ASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
+
 
 /**
 	Used to assign value for single parameter with template type (attribute, reference or factory).

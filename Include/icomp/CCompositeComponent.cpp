@@ -60,7 +60,7 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		if (iter != interfaceInfos.end()){
 			std::string componentId;
 			std::string restId;
-			SplitComponentId(iter->second, componentId, restId);
+			SplitId(iter->second, componentId, restId);
 
 			IComponent* subComponentPtr = GetSubcomponent(componentId);
 			if (subComponentPtr != NULL){
@@ -71,16 +71,20 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 	else{
 		std::string componentId;
 		std::string restId;
-		SplitComponentId(subId, componentId, restId);
+		SplitId(subId, componentId, restId);
 
 		const IRegistry::ExportedComponentsMap& subcomponentMap = registry.GetExportedComponentsMap();
 
 		IRegistry::ExportedComponentsMap::const_iterator iter = subcomponentMap.find(componentId);
 		if (iter != subcomponentMap.end()){
 			const std::string& realComponentId = iter->second;
-			IComponent* subComponentPtr = GetSubcomponent(realComponentId);
+			std::string subComponentId;
+			std::string subRestId;
+			SplitId(realComponentId, subComponentId, subRestId);
+
+			IComponent* subComponentPtr = GetSubcomponent(subComponentId);
 			if (subComponentPtr != NULL){
-				return subComponentPtr->GetInterface(interfaceType, restId);
+				return subComponentPtr->GetInterface(interfaceType, JoinId(subRestId, restId));
 			}
 		}
 	}
@@ -209,22 +213,6 @@ void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPt
 	m_componentMap.clear();
 
 	delete this;
-}
-
-
-// static methods
-
-void CCompositeComponent::SplitComponentId(const std::string& fullId, std::string& componentId, std::string& restId)
-{
-	std::string::size_type pointPos = fullId.find('.');
-	if (pointPos != std::string::npos){
-		componentId = fullId.substr(0, pointPos);
-		restId = componentId.substr(pointPos + 1);
-	}
-	else{
-		componentId = fullId;
-		restId = "";
-	}
 }
 
 

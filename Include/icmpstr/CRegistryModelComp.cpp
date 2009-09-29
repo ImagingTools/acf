@@ -4,7 +4,7 @@
 #include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
 
-#include "icomp/CCompositeComponent.h"
+#include "icomp/CInterfaceManipBase.h"
 
 
 // public methods
@@ -116,7 +116,7 @@ int CRegistryModelComp::CheckAttributeConsistency(const icomp::IRegistryElement&
 
 			std::string componentId;
 			std::string restId;
-			icomp::CCompositeComponent::SplitComponentId(idPtr->GetValue().c_str(), componentId, restId);
+			icomp::CInterfaceManipBase::SplitId(idPtr->GetValue().c_str(), componentId, restId);
 
 			if (GetElementInfo(componentId) == NULL){
 				return CS_INVALID;

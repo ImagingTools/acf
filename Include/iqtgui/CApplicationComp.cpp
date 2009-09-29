@@ -122,7 +122,10 @@ int CApplicationComp::Execute(int argc, char** argv)
 			mainWidgetPtr = m_mainGuiCompPtr->GetWidget();
 
 			if (m_applicationInfoCompPtr.IsValid()){
-				mainWidgetPtr->setWindowTitle(iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName()));
+				QString format = iqt::GetQString(*m_titleFormatAttrPtr);
+				QString applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
+				QString companyName = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
+				mainWidgetPtr->setWindowTitle(format.arg(applicationName).arg(companyName));
 			}
 			else{
 				mainWidgetPtr->setWindowTitle(QObject::tr("ACF application"));
