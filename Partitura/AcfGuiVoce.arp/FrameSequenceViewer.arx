@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1069
         </Number>
         <Description>
           ACF
@@ -15,28 +15,28 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="4">
     <Element>
       <Id>
-        Application
+        PlaybackBinder
       </Id>
       <PackageId>
-        QtPck
+        BasePck
       </PackageId>
       <ComponentId>
-        GuiApplication
+        ModelBinder
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          0
+          1
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              MainGui
+              Model
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -49,34 +49,13 @@
                 true
               </IsEnabled>
               <Value>
-                VideoView
+                VideoViewGui
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FileDialogLoader
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        FileDialogLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Loaders
+              Observers
             </Id>
             <Type>
               icomp::CMultiReferenceAttribute
@@ -90,7 +69,7 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  MediaLoader
+                  PlaybackControllerGui
                 </Value>
               </Values>
             </Data>
@@ -100,91 +79,13 @@
     </Element>
     <Element>
       <Id>
-        FilePersistence
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        FilePersistence
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              FileLoader
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileDialogLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Object
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                VideoView
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StoreOnEnd
-            </Id>
-            <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                false
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        MediaLoader
+        PlaybackControllerGui
       </Id>
       <PackageId>
         QtMmPck
       </PackageId>
       <ComponentId>
-        MediaLoader
+        PlaybackControllerGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -199,13 +100,123 @@
     </Element>
     <Element>
       <Id>
-        VideoView
+        VideoPlayerGui
       </Id>
       <PackageId>
-        QaxPck
+        QtMmPck
       </PackageId>
       <ComponentId>
-        VlcVideoViewGui
+        VideoPlayerGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              ControllerBarGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PlaybackControllerGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MediaController
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VideoViewGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UrlGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              DirectoryGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UrlParams
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              DirectoryParam
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VideoGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VideoViewGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VideoViewGui
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        FrameSeqVideoViewGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -222,10 +233,10 @@
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        Application
+        VideoPlayerGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

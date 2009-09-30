@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>CFrameSequenceViewerGuiComp</class>
- <widget class="QWidget" name="CFrameSequenceViewerGuiComp" >
+ <class>CVideoPlayerGuiComp</class>
+ <widget class="QWidget" name="CVideoPlayerGuiComp" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="DirectorySelectorFrame" >
+    <widget class="QFrame" name="UrlParamFrame" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
        <horstretch>0</horstretch>
@@ -27,10 +27,11 @@
      <property name="frameShape" >
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3" />
+     <layout class="QVBoxLayout" name="verticalLayout_3" >
+      <property name="margin" >
+       <number>0</number>
+      </property>
+     </layout>
     </widget>
    </item>
    <item>
@@ -45,6 +46,24 @@
       <string>Current Frame</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2" />
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="ControllerBarFrame" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4" >
+      <property name="margin" >
+       <number>0</number>
+      </property>
+     </layout>
     </widget>
    </item>
   </layout>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1052
+          1069
         </Number>
         <Description>
           ACF
@@ -18,34 +18,50 @@
   <ElementsList count="3">
     <Element>
       <Id>
-        AdvancedImageView
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        AdvancedImageView
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Bitmap
+        BitmapLoader
       </Id>
       <PackageId>
         QtPck
       </PackageId>
       <ComponentId>
-        Bitmap
+        BitmapLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        BitmapView
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        BitmapView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -60,25 +76,25 @@
     </Element>
     <Element>
       <Id>
-        ImageBinder
+        FrameSeqVideoController
       </Id>
       <PackageId>
-        BasePck
+        QtMmPck
       </PackageId>
       <ComponentId>
-        ModelBinder
+        FrameSeqVideoController
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              Model
+              FrameData
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -91,16 +107,16 @@
                 true
               </IsEnabled>
               <Value>
-                Bitmap
+                BitmapView
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Observers
+              FrameLoader
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -109,11 +125,25 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  AdvancedImageView
-                </Value>
-              </Values>
+              <Value>
+                BitmapLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FramesPerSecond
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              FramesPerSecond
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -123,26 +153,26 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
-        idoc::ICommandsProvider
+        imm::IMediaController
       </InterfaceId>
       <ComponentId>
-        AdvancedImageView
+        FrameSeqVideoController
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iimg::IBitmap
+        imm::IVideoController
       </InterfaceId>
       <ComponentId>
-        Bitmap
+        FrameSeqVideoController
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iimg::IRasterImage
+        imm::IVideoInfo
       </InterfaceId>
       <ComponentId>
-        Bitmap
+        FrameSeqVideoController
       </ComponentId>
     </Interface>
     <Interface>
@@ -150,7 +180,7 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        Bitmap
+        FrameSeqVideoController
       </ComponentId>
     </Interface>
     <Interface>
@@ -158,7 +188,15 @@
         iqt2d::ISceneProvider
       </InterfaceId>
       <ComponentId>
-        AdvancedImageView
+        BitmapView
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqt2d::ISceneRestrictions
+      </InterfaceId>
+      <ComponentId>
+        BitmapView
       </ComponentId>
     </Interface>
     <Interface>
@@ -166,15 +204,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        AdvancedImageView
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
-      </InterfaceId>
-      <ComponentId>
-        Bitmap
+        BitmapView
       </ComponentId>
     </Interface>
     <Interface>
@@ -182,16 +212,16 @@
         istd::IChangeable
       </InterfaceId>
       <ComponentId>
-        Bitmap
+        FrameSeqVideoController
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Bitmap viewer with integrated bitmap object
+    
   </Description>
   <Keywords>
-    Controller Image Bitmap Display Viewer Observer Qt GUI
+    
   </Keywords>
 </Acf>

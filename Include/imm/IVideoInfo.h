@@ -23,7 +23,7 @@ public:
 	/**
 		Return time difference between frames.
 	*/
-	virtual double GetFrameTimeDiff() const = 0;
+	virtual double GetFrameIntervall() const = 0;
 
 	/**
 		Return size in pixels of single frame.

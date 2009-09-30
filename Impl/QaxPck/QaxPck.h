@@ -14,7 +14,7 @@ namespace QaxPck
 {
 
 
-typedef iqaxmm::CVlcVideoViewGuiComp VlcVideoView;
+typedef iqaxmm::CVlcVideoViewGuiComp VlcVideoViewGui;
 
 
 } // namespace QaxPck

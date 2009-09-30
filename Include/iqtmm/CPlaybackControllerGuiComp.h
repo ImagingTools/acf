@@ -7,7 +7,7 @@
 
 
 // ACF inlcudes
-#include "imm/IMediaController.h"
+#include "imm/IVideoController.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -22,11 +22,11 @@ namespace iqtmm
 	Component to play some image (frame) sequence from a directory.
 */
 class CPlaybackControllerGuiComp:
-			public iqtgui::TDesignerGuiObserverCompBase<Ui::CPlaybackControllerGuiComp, imm::IMediaController>
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CPlaybackControllerGuiComp, imm::IVideoController>
 {
 	Q_OBJECT
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CPlaybackControllerGuiComp, imm::IMediaController> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CPlaybackControllerGuiComp, imm::IVideoController> BaseClass;
 
 	I_BEGIN_COMPONENT(CPlaybackControllerGuiComp);
 	I_END_COMPONENT();

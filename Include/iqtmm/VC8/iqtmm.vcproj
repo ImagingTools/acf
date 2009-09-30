@@ -201,7 +201,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CFrameSequenceViewerGuiComp.cpp"
+				RelativePath="..\CFrameSeqVideoControllerComp.cpp"
 				>
 			</File>
 			<File
@@ -216,6 +216,10 @@
 				RelativePath="..\CPlaybackControllerGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CVideoPlayerGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -223,11 +227,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CFrameSequenceViewerGuiComp.h"
+				RelativePath="..\CFrameSeqVideoControllerComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CFrameSequenceViewerGuiComp.moc"
+				RelativePath="..\CFrameSeqVideoControllerComp.moc"
 				>
 			</File>
 			<File
@@ -251,6 +255,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CVideoPlayerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\iqtmm.h"
 				>
 			</File>
@@ -268,7 +276,7 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CFrameSequenceViewerGuiComp.cpp"
+				RelativePath="..\generated\moc_CFrameSeqVideoControllerComp.cpp"
 				>
 			</File>
 			<File
@@ -280,11 +288,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CFrameSequenceViewerGuiComp.h"
+				RelativePath="..\generated\ui_CPlaybackControllerGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CPlaybackControllerGuiComp.h"
+				RelativePath="..\generated\ui_CVideoPlayerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -292,11 +300,11 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CFrameSequenceViewerGuiComp.ui"
+				RelativePath="..\CPlaybackControllerGuiComp.ui"
 				>
 			</File>
 			<File
-				RelativePath="..\CPlaybackControllerGuiComp.ui"
+				RelativePath="..\CVideoPlayerGuiComp.ui"
 				>
 			</File>
 		</Filter>

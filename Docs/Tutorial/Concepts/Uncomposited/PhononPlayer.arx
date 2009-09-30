@@ -205,7 +205,7 @@
         QtMmPck
       </PackageId>
       <ComponentId>
-        PhononVideoView
+        PhononVideoViewGui
       </ComponentId>
       <Data>
         <IsEnabled>

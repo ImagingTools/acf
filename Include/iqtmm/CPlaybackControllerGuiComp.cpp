@@ -25,18 +25,29 @@ namespace iqtmm
 	
 void CPlaybackControllerGuiComp::UpdateEditor(int updateFlags)
 {
-	imm::IMediaController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		if ((updateFlags & imm::IMediaController::CF_STATUS) != 0){
 			iqt::CSignalBlocker block(this, true);
 
-			PlayButton->setChecked(objectPtr->IsPlaying());
+			bool isPlaying = objectPtr->IsPlaying();
+			PlayButton->setChecked(isPlaying);
+
+			int framesCount = objectPtr->GetFramesCount();
+			if (framesCount > 1){
+				PositionSlider->setMaximum(framesCount);
+				PositionSlider->setEnabled(true);
+			}
+			else{
+				PositionSlider->setValue(0);
+				PositionSlider->setEnabled(false);
+			}
 		}
 
 		if ((updateFlags & imm::IMediaController::CF_POSITION) != 0){
 			iqt::CSignalBlocker block(this, true);
 
-			PositionSlider->setValue(objectPtr->GetCurrentPosition() * 100);
+			PositionSlider->setValue(objectPtr->GetCurrentFrame());
 		}
 	}
 }
@@ -62,11 +73,11 @@ void CPlaybackControllerGuiComp::on_PlayButton_toggled(bool isToggled)
 
 void CPlaybackControllerGuiComp::on_PositionSlider_valueChanged(int position)
 {
-	imm::IMediaController* objectPtr = GetObjectPtr();
+	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		UpdateBlocker block(this);
 
-		objectPtr->SetCurrentPosition(position / 100.0);
+		objectPtr->SetCurrentFrame(position);
 	}
 }
 
