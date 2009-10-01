@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1042
+          1073
         </Number>
         <Description>
           ACF
@@ -30,7 +30,10 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="5">
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               AllowWidgetResize
@@ -56,6 +59,22 @@
             </Type>
             <ExportId>
               FitMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsotropyFactor
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              IsotropyFactor
             </ExportId>
             <Data>
               <IsEnabled>
@@ -131,6 +150,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>

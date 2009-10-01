@@ -32,6 +32,8 @@ void CImageViewComp::UpdateEditor(int /*updateFlags*/)
 	QGraphicsScene* scenePtr = GetScene();
 	if (scenePtr != NULL){
 		scenePtr->setSceneRect(QRect(0, 0, imageSize.GetX(), imageSize.GetY()));
+
+		SetFittedScale(GetFitMode());
 	}
 }
 

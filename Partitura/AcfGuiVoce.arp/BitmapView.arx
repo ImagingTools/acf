@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1069
+          1073
         </Number>
         <Description>
           ACF
@@ -115,7 +115,103 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              AllowWidgetResize
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              AllowWidgetResize
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FitMode
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              FitMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsotropyFactor
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              IsotropyFactor
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneController
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              SceneController
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneId
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              SceneId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseAntialiasing
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              UseAntialiasing
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>

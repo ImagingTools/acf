@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1052
+          1073
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="25">
+  <PositionMap count="26">
     <Element>
       <ComponentName>
         AdvancedImageView
@@ -95,6 +95,17 @@
     </Element>
     <Element>
       <ComponentName>
+        ControlledImageView
+      </ComponentName>
+      <X>
+        -6
+      </X>
+      <X>
+        -3
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         DummyClassifController
       </ComponentName>
       <X>
@@ -131,10 +142,10 @@
         ImageBinder
       </ComponentName>
       <X>
-        -459
+        -129
       </X>
       <X>
-        -105
+        -139
       </X>
     </Element>
     <Element>

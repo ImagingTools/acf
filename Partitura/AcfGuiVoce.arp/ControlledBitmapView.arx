@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1052
+          1073
         </Number>
         <Description>
           ACF
@@ -16,27 +16,6 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="3">
-    <Element>
-      <Id>
-        ControlledImageView
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        ControlledImageView
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
     <Element>
       <Id>
         Bitmap
@@ -55,6 +34,107 @@
           0
         </Flags>
         <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ControlledImageView
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        ControlledImageView
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              AllowWidgetResize
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              AllowWidgetResize
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FitMode
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              FitMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsotropyFactor
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              IsotropyFactor
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SceneId
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              SceneId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseAntialiasing
+            </Id>
+            <Type>
+              icomp::TSingleAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              UseAntialiasing
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
