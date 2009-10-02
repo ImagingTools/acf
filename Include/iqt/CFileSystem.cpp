@@ -75,17 +75,29 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 {
 	if (varName == "ConfigurationName"){
 #ifdef _DEBUG
-#ifdef _WIN32
-		return "DebugVC8";
-#else // _WIN32
+	#ifdef _MSC_VER
+		#if _MSC_VER >= 1400
+			return "DebugVC9";
+		#elif _MSC_VER >= 1300
+			return "DebugVC9";
+		#else
+			return "DebugVC";
+		#endif
+	#else // _MSC_VER
 		return "DebugXCD";
-#endif // _WIN32
+	#endif // _MSC_VER
 #else // _DEBUG
-#ifdef _WIN32
-		return "ReleaseVC8";
-#else // _WIN32
+	#ifdef _MSC_VER
+		#if _MSC_VER >= 1400
+			return "ReleaseVC9";
+		#elif _MSC_VER >= 1300
+			return "ReleaseVC8";
+		#else
+			return "ReleaseVC";
+		#endif
+	#else // _MSC_VER
 		return "ReleaseXCD";
-#endif // _WIN32
+	#endif // _MSC_VER
 #endif // _DEBUG
 	}
 

@@ -179,6 +179,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFixedAuthorisationVerifierComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CStaticUserLoginComp.cpp"
 				>
 			</File>
@@ -189,6 +193,10 @@
 			>
 			<File
 				RelativePath="..\CComposedAuthorizationVerifierComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFixedAuthorisationVerifierComp.h"
 				>
 			</File>
 			<File

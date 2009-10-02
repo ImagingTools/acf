@@ -201,11 +201,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CFrameSeqVideoControllerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMediaLoaderComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CPhononVideoViewGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVideoPlayerGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -214,6 +226,14 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CFrameSeqVideoControllerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFrameSeqVideoControllerComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CMediaLoaderComp.h"
 				>
@@ -224,6 +244,18 @@
 			</File>
 			<File
 				RelativePath="..\CPhononVideoViewGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CVideoPlayerGuiComp.h"
 				>
 			</File>
 			<File
@@ -244,13 +276,37 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\generated\moc_CFrameSeqVideoControllerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CPhononVideoViewGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CPlaybackControllerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CPlaybackControllerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CVideoPlayerGuiComp.h"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CPlaybackControllerGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CVideoPlayerGuiComp.ui"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
