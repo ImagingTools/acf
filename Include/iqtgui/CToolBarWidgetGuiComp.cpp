@@ -26,13 +26,19 @@ bool CToolBarWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	}
 
 	switch (dockArea){
-		case 0: area = Qt::TopToolBarArea;
+		case 0:
+			area = Qt::LeftToolBarArea;
 			break;
-		case 1: area = Qt::LeftToolBarArea;
+
+		case 1:
+			area = Qt::RightToolBarArea;
 			break;
-		case 2: area = Qt::BottomToolBarArea;
+		case 2:
+			area = Qt::TopToolBarArea;
 			break;
-		case 3: area = Qt::RightToolBarArea;
+
+		case 3:
+			area = Qt::BottomToolBarArea;
 			break;
 	}
 

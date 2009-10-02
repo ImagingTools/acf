@@ -320,6 +320,10 @@ void CSceneProviderGuiComp::SetFittedScale(FitMode mode)
 	}
 
 	QRectF sceneRect = SceneView->sceneRect();
+	if ((sceneRect.width() < I_BIG_EPSILON) || (sceneRect.height() < I_BIG_EPSILON)){
+		return;
+	}
+
 	double scaleX = SceneView->width() / sceneRect.width();
 	double scaleY = SceneView->height() / sceneRect.height();
 

@@ -27,7 +27,7 @@ public:
 	I_BEGIN_COMPONENT(CToolBarWidgetGuiComp)
 		I_REGISTER_INTERFACE(iqtgui::IMainWindowComponent)
 		I_ASSIGN(m_toolbarWidgetCompPtr, "ToolBarWidget", "", true, "ToolBarWidget")
-		I_ASSIGN(m_dockAreaAttrPtr, "ToolBarArea", "", false, 1)
+		I_ASSIGN(m_dockAreaAttrPtr, "ToolBarArea", "Specify the area for this toolbar\n 0 - left\n 1 - right\n 2 - top\n 3 - bottom", false, 0)
 		I_ASSIGN(m_titleAttrPtr, "Title", "", false, "")
 	I_END_COMPONENT
 

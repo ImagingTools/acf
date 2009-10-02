@@ -13,18 +13,27 @@ namespace iqtgui
 bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 {
 	Qt::DockWidgetArea area = Qt::LeftDockWidgetArea;
+	Qt::Orientation orientation = Qt::Vertical;
 	if (m_dockAreaAttrPtr.IsValid()){
 		switch (m_dockAreaAttrPtr->GetValue()){
-			case 0: area = Qt::LeftDockWidgetArea;
+			case 0:
+				area = Qt::LeftDockWidgetArea;
+				orientation = Qt::Vertical;
 				break;
 
-			case 1: area = Qt::TopDockWidgetArea;
+			case 1:
+				area = Qt::RightDockWidgetArea;
+				orientation = Qt::Vertical;
 				break;
 
-			case 2: area = Qt::BottomDockWidgetArea;
+			case 2:
+				area = Qt::TopDockWidgetArea;
+				orientation = Qt::Horizontal;
 				break;
 
-			case 3: area = Qt::RightDockWidgetArea;
+			case 3:
+				area = Qt::BottomDockWidgetArea;
+				orientation = Qt::Horizontal;
 				break;
 		}
 	}
@@ -61,10 +70,19 @@ void CDockWidgetGuiComp::OnGuiCreated()
 		}
 	}
 
-	dockWidgetPtr->setFeatures(	
-				QDockWidget::DockWidgetMovable | 
-				QDockWidget::DockWidgetFloatable | 
-				QDockWidget::DockWidgetClosable);
+	if (m_dockFeaturesAttrPtr.IsValid()){
+		dockWidgetPtr->setFeatures(QDockWidget::DockWidgetFeature(*m_dockFeaturesAttrPtr));
+	}
+	else{
+		dockWidgetPtr->setFeatures(	
+					QDockWidget::DockWidgetMovable | 
+					QDockWidget::DockWidgetFloatable | 
+					QDockWidget::DockWidgetClosable);
+	}
+
+	if (m_allowedDockAreasAttrPtr.IsValid()){
+		dockWidgetPtr->setAllowedAreas(Qt::DockWidgetAreas(*m_allowedDockAreasAttrPtr));
+	}
 }
 
 

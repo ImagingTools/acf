@@ -34,8 +34,6 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 :	m_activeUndoManager(*this),
 	m_activeViewPtr(NULL),
 	m_activeDocumentPtr(NULL),
-	m_menuBarPtr(NULL),
-	m_standardToolBarPtr(NULL),
 	m_menuCommands("Global"),
 	m_newCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
 	m_openCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
@@ -408,17 +406,15 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 
 	mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
 
-	if (m_mainWindowComponentsPtr.IsValid()){
-		for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
-			iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
-			iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-			if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
-				mainWindowComponentPtr->AddToMainWindow(mainWindow);
+	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
+		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
+		iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
+		if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
+			mainWindowComponentPtr->AddToMainWindow(mainWindow);
 
-				QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
-				if (toolBarComponentPtr != NULL){
-					m_toolBarsList.PushBack(toolBarComponentPtr, false);
-				}
+			QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
+			if (toolBarComponentPtr != NULL){
+				m_toolBarsList.PushBack(toolBarComponentPtr, false);
 			}
 		}
 	}
@@ -449,23 +445,22 @@ void CMainWindowGuiComp::UpdateFixedCommands()
 {
 	m_fixedCommands.ResetChilds();
 
-	bool editMenuActive = false;
-	if (m_activeDocumentPtr != NULL){
-		if (m_documentManagerCompPtr.IsValid()){
-			std::string documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
-				
-			const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
-			if (templatePtr != NULL){
-				editMenuActive = templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::Edit, documentTypeId);
+	// fill menu bar with main commands
+	if (m_documentManagerCompPtr.IsValid()){
+		m_fixedCommands.InsertChild(&m_fileCommand, false);
+
+		if (m_activeDocumentPtr != NULL){
+			if (m_documentManagerCompPtr.IsValid()){
+				std::string documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
+					
+				const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
+				if ((templatePtr != NULL) && templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::Edit, documentTypeId)){
+					m_fixedCommands.InsertChild(&m_editCommand, false);
+				}
 			}
 		}
 	}
 
-	// fill menu bar with main commands
-	m_fixedCommands.InsertChild(&m_fileCommand, false);
-	if (editMenuActive){
-		m_fixedCommands.InsertChild(&m_editCommand, false);
-	}
 	m_fixedCommands.InsertChild(&m_viewCommand, false);
 	m_fixedCommands.InsertChild(&m_helpCommand, false);
 }
@@ -489,13 +484,14 @@ void CMainWindowGuiComp::UpdateMenuActions()
 
 	bool isDocumentActive = (m_activeDocumentPtr != NULL);
 
+	if (!m_menuBarPtr.IsValid() && !m_standardToolBarPtr.IsValid()){
+		return;
+	}
+
 	m_saveCommand.SetEnabled(isDocumentActive);
 	m_saveAsCommand.SetEnabled(isDocumentActive);
 	m_printCommand.SetEnabled(isDocumentActive);
 
-	if (m_menuBarPtr == NULL){
-		return;
-	}
 	m_menuCommands.ResetChilds();
 
 	UpdateFixedCommands();
@@ -536,11 +532,16 @@ void CMainWindowGuiComp::UpdateMenuActions()
 		}
 	}
 
-	m_menuBarPtr->clear();
-	CreateMenu(m_menuCommands, *m_menuBarPtr);
+	if (m_menuBarPtr.IsValid()){
+		m_menuBarPtr->clear();
+		CreateMenu(m_menuCommands, *m_menuBarPtr);
+	}
 
-	m_standardToolBarPtr->clear();
-	CreateToolbar(m_menuCommands, *m_standardToolBarPtr);
+	if (m_standardToolBarPtr.IsValid()){
+		m_standardToolBarPtr->clear();
+		CreateToolbar(m_menuCommands, *m_standardToolBarPtr);
+		m_standardToolBarPtr->setVisible(true);
+	}
 }
 
 
@@ -589,12 +590,20 @@ void CMainWindowGuiComp::OnGuiCreated()
 		mainWindowPtr->setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
 	}
 
-	m_menuBarPtr.SetPtr(new QMenuBar(mainWindowPtr));
-	m_menuBarPtr->setGeometry(QRect(0, 0, 625, 45));
+	I_ASSERT(m_isMenuVisibleAttrPtr.IsValid());	// is obligatory attribute
+	if (*m_isMenuVisibleAttrPtr){
+		m_menuBarPtr.SetPtr(new QMenuBar(mainWindowPtr));
+	}
 
-	m_standardToolBarPtr.SetPtr(new QToolBar(mainWindowPtr));
-	m_standardToolBarPtr->setWindowTitle(tr("Standard"));
-	m_standardToolBarPtr->setObjectName("Standard");
+	I_ASSERT(m_isToolbarVisibleAttrPtr.IsValid());	// is obligatory attribute
+	if (*m_isToolbarVisibleAttrPtr){
+		m_standardToolBarPtr.SetPtr(new QToolBar(mainWindowPtr));
+		m_standardToolBarPtr->setWindowTitle(tr("Standard"));
+		m_standardToolBarPtr->setObjectName("Standard");
+	}
+
+	I_ASSERT(m_isNestingEnabledAttrPtr.IsValid());
+	mainWindowPtr->setDockOptions(*m_isNestingEnabledAttrPtr? QMainWindow::AllowNestedDocks: QMainWindow::DockOption(0));
 
 	if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
 		m_standardToolBarPtr->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
