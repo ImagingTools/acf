@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          941
+          1080
         </Number>
         <Description>
           ACF
@@ -30,6 +30,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
@@ -174,6 +177,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
@@ -337,6 +343,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
@@ -435,6 +444,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
@@ -598,6 +610,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          1
+        </Flags>
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
@@ -633,15 +648,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
-    <Interface>
-      <InterfaceId>
-        icomp::IComponent
-      </InterfaceId>
-      <ComponentId>
-        InitSequence
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="0">
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>

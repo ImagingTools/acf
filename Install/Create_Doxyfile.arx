@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1080
         </Number>
         <Description>
           ACF
@@ -42,12 +42,15 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ApplicationInfo
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

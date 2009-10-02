@@ -1607,15 +1607,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
-    <Interface>
-      <InterfaceId>
-        icomp::IComponent
-      </InterfaceId>
-      <ComponentId>
-        InitSequence
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="0">
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>

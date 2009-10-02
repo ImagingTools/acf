@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1004
+          1080
         </Number>
         <Description>
           ACF
@@ -30,6 +30,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          1
+        </Flags>
         <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
@@ -163,6 +166,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
@@ -264,15 +270,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
-    <Interface>
-      <InterfaceId>
-        icomp::IComponent
-      </InterfaceId>
-      <ComponentId>
-        CopyProcessor
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="0">
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
