@@ -161,7 +161,6 @@ bool CServiceApplicationComp::eventFilter(QObject* sourceObject, QEvent* eventPt
 }
 
 
-
 // protected slots:
 
 void CServiceApplicationComp::OnTrayIconActivated(QSystemTrayIcon::ActivationReason reason)

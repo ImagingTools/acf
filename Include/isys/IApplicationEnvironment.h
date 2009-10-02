@@ -23,6 +23,7 @@ class IApplicationEnvironment: virtual public istd::IPolymorphic
 {
 public:
 	typedef std::map<istd::CString, istd::CString> EnvironmentVariables;
+	
 	/**
 		Returns the standard temp path, that will be used by the application.
 	*/

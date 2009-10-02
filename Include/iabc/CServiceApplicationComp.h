@@ -22,6 +22,9 @@ namespace iabc
 {
 
 
+/**
+	Qt based component for service-based application.
+*/
 class CServiceApplicationComp:
 			public QObject,
 			public ibase::CLoggerComponentBase,

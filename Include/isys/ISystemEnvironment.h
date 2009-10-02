@@ -31,6 +31,11 @@ public:
 		\param variableName Name of the system variable
 	*/
 	virtual istd::CString GetSystemVariableValue(const istd::CString& variableName) const = 0;
+
+	/**
+		Generate unique identifier.
+	*/
+	virtual istd::CString GetUniqueIdentifier() const = 0;
 };
 
 

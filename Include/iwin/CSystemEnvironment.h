@@ -22,6 +22,7 @@ public:
 	// reimplemented (isys::ISystemEnvironment)
 	virtual istd::CString GetUser() const;
 	virtual istd::CString GetTempDirPath() const;
+	virtual istd::CString GetUniqueIdentifier() const;
 };
 
 

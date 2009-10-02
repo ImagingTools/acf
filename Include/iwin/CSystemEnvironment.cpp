@@ -1,6 +1,10 @@
 #include "iwin/CSystemEnvironment.h"
 
 
+// WINFOWS includes
+#include <windows.h>
+
+
 namespace iwin
 {
 
@@ -16,6 +20,22 @@ istd::CString CSystemEnvironment::GetUser() const
 istd::CString CSystemEnvironment::GetTempDirPath() const
 {
 	return GetSystemVariableValue("TEMP");
+}
+
+
+istd::CString CSystemEnvironment::GetUniqueIdentifier() const
+{
+	// TODO: move to basics
+	GUID guid;
+	::UuidCreate(&guid);
+	RPC_CSTR guidBstr = NULL;
+	::UuidToString(&guid, &guidBstr);
+
+	istd::CString uniqueIdentifier = istd::CString((char*)guidBstr);
+	
+	::RpcStringFree(&guidBstr);
+
+	return uniqueIdentifier;
 }
 
 
