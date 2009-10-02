@@ -776,7 +776,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 
 						NextLine(stream);
 						stream << "icomp::IRegistryElement::AttributeInfo* " << attributeInfoName << " = ";
-						stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", " << isAttributeValid << ");";
+						stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", " << (isAttributeValid? "true": "false") << ");";
 
 						NextLine(stream);
 						stream << "if (" << attributeInfoName << " != NULL){";
