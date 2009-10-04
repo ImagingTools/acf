@@ -28,7 +28,7 @@
 		<CustomBuildRule
 			Name="DeployCopy"
 			DisplayName="Deploy copy files"
-			CommandLine="copy /Y [$InputDir]\$(InputName) + $(ACFDIR)\Config\VC9\empty [$OutputDir]\"
+			CommandLine="copy /Y [$InputDir]\$(InputName) [$OutputDir]\"
 			Outputs="[$OutputDir]\$(InputName)"
 			AdditionalDependencies="[$InputDir]\$(InputName)"
 			FileExtensions="*.copy"
