@@ -2,7 +2,6 @@
 
 
 // Qt includes
-#include <Phonon>
 #include <QFileInfo>
 
 #include "imm/IMediaController.h"

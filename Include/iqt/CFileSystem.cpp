@@ -76,10 +76,12 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 	if (varName == "ConfigurationName"){
 #ifdef _DEBUG
 	#ifdef _MSC_VER
-		#if _MSC_VER >= 1400
+		#if _MSC_VER >= 1500
 		return "DebugVC9";
-		#elif _MSC_VER >= 1300
+		#elif _MSC_VER >= 1400
 		return "DebugVC8";
+		#elif _MSC_VER >= 1300
+		return "DebugVC7";
 		#else
 		return "DebugVC";
 		#endif
@@ -88,10 +90,12 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 	#endif // _MSC_VER
 #else // _DEBUG
 	#ifdef _MSC_VER
-		#if _MSC_VER >= 1400
+		#if _MSC_VER >= 1500
 		return "ReleaseVC9";
-		#elif _MSC_VER >= 1300
+		#elif _MSC_VER >= 1400
 		return "ReleaseVC8";
+		#elif _MSC_VER >= 1300
+		return "ReleaseVC7";
 		#else
 		return "ReleaseVC";
 		#endif
@@ -102,10 +106,12 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 	}
 	else if (varName == "CompilerName"){
 #ifdef _MSC_VER
-	#if _MSC_VER >= 1400
+	#if _MSC_VER >= 1500
 		return "VC9";
-	#elif _MSC_VER >= 1300
+	#elif _MSC_VER >= 1400
 		return "VC8";
+	#elif _MSC_VER >= 1300
+		return "VC7";
 	#else
 		return "VC";
 	#endif
