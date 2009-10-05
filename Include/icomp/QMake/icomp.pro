@@ -3,10 +3,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Lib/DebugQMake
+	DESTDIR = ..\..\..\Lib\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Lib/ReleaseQMake
+	DESTDIR = ..\..\..\Lib\ReleaseQMake
 }
 
 UI_DIR = ../Generated
@@ -29,6 +29,7 @@ HEADERS += ../CCompositeComponentContext.h
 HEADERS += ../CCompositeComponentStaticInfo.h
 HEADERS += ../CCompositePackageStaticInfo.h
 HEADERS += ../CFactoryAttribute.h
+HEADERS += ../CInterfaceManipBase.h
 HEADERS += ../CMultiFactoryAttribute.h
 HEADERS += ../CMultiReferenceAttribute.h
 HEADERS += ../CPackageStaticInfo.h
@@ -53,7 +54,6 @@ HEADERS += ../TComponentRegistrator.h
 HEADERS += ../TComponentStaticInfo.h
 HEADERS += ../TComponentWrap.h
 HEADERS += ../TFactoryMember.h
-HEADERS += ../TInterfaceManipBase.h
 HEADERS += ../TInterfaceRegistrator.h
 HEADERS += ../TMakeComponentWrap.h
 HEADERS += ../TModelCompWrap.h
@@ -77,6 +77,7 @@ SOURCES += ../CCompositeComponent.cpp
 SOURCES += ../CCompositeComponentContext.cpp
 SOURCES += ../CCompositeComponentStaticInfo.cpp
 SOURCES += ../CCompositePackageStaticInfo.cpp
+SOURCES += ../CInterfaceManipBase.cpp
 SOURCES += ../CPackageStaticInfo.cpp
 SOURCES += ../CRegistry.cpp
 SOURCES += ../CRegistryElement.cpp

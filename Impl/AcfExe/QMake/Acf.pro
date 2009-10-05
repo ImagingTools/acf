@@ -2,12 +2,12 @@ TARGET = Acf
 TEMPLATE = app
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Bin/DebugQMake
+	DESTDIR = ..\..\..\Bin\DebugQMake
 	LIBS += -L"$(ACFDIR)/Lib/DebugQMake 
 	LIBS += AcfStd iqt 
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Bin/ReleaseQMake
+	DESTDIR = ..\..\..\Bin\ReleaseQMake
 	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake 
 	LIBS += AcfStd iqt 
 }

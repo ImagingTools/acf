@@ -3,10 +3,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Lib/DebugQMake
+	DESTDIR = ..\..\..\Lib\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Lib/ReleaseQMake
+	DESTDIR = ..\..\..\Lib\ReleaseQMake
 }
 
 UI_DIR = ../Generated
@@ -34,6 +34,8 @@ HEADERS += ../IContainerInfo.h
 HEADERS += ../IDuplicatable.h
 HEADERS += ../IEnableable.h
 HEADERS += ../IFactoryInfo.h
+HEADERS += ../IFileSystemObserver.h
+HEADERS += ../ILogger.h
 HEADERS += ../INamed.h
 HEADERS += ../IPolymorphic.h
 HEADERS += ../IServicesProvider.h
@@ -59,6 +61,8 @@ HEADERS += ../TSingleFactory.h
 HEADERS += ../TSmartPtr.h
 HEADERS += ../TUpdateManagerWrap.h
 HEADERS += ../TVarArray.h
+HEADERS += ../AcfVersion.h.xtrsvn
+HEADERS += ../generated\AcfVersion.h
 SOURCES += ../CBitManip.cpp
 SOURCES += ../CChangeDelegator.cpp
 SOURCES += ../CClassInfo.cpp

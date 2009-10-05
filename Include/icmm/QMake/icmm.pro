@@ -3,10 +3,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Lib/DebugQMake
+	DESTDIR = ..\..\..\Lib\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Lib/ReleaseQMake
+	DESTDIR = ..\..\..\Lib\ReleaseQMake
 }
 
 UI_DIR = ../Generated
@@ -30,7 +30,9 @@ HEADERS += ../CRgbToCmykTransformation.h
 HEADERS += ../CVarColor.h
 HEADERS += ../icmm.h
 HEADERS += ../IColorTransformation.h
+HEADERS += ../TColorGradient.h
 HEADERS += ../TComposedColor.h
+HEADERS += ../TComposedColorGradient.h
 SOURCES += ../CCmy.cpp
 SOURCES += ../CCmyk.cpp
 SOURCES += ../CCmykToRgbTransformation.cpp

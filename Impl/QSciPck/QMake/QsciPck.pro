@@ -6,12 +6,12 @@ CONFIG += dll
 TARGET_EXT = arp
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Bin/DebugQMake
+	DESTDIR = ..\..\..\Bin\DebugQMake
 	LIBS += -L"$(ACFDIR)/Lib/DebugQMake -L"$(QScintilla)/Lib/DebugQMake 
 	LIBS += AcfStd AcfQt QScintilla 
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Bin/ReleaseQMake
+	DESTDIR = ..\..\..\Bin\ReleaseQMake
 	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake -L"$(QScintilla)/Lib/ReleaseQMake 
 	LIBS += AcfStd AcfQt QScintilla 
 }

@@ -3,10 +3,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Lib/DebugQMake
+	DESTDIR = ..\..\..\Lib\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Lib/ReleaseQMake
+	DESTDIR = ..\..\..\Lib\ReleaseQMake
 }
 
 UI_DIR = ../Generated
@@ -25,7 +25,9 @@ HEADERS += ../CMainWindowGuiComp.h
 HEADERS += ../CModelEditorGuiComp.h
 HEADERS += ../CMultiDocumentWorkspaceGuiComp.h
 HEADERS += ../CSingleDocumentWorkspaceGuiComp.h
+HEADERS += ../IPrintable.h
 HEADERS += ../iqtdoc.h
+HEADERS += ../TQtDocumentManagerWrap.h
 SOURCES += ../CDoxygenHelpFileProviderComp.cpp
 SOURCES += ../CExtendedDocumentTemplateComp.cpp
 SOURCES += ../CHtmlHelpViewerComp.cpp

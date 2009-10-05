@@ -3,10 +3,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Lib/DebugQMake
+	DESTDIR = ..\..\..\Lib\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Lib/ReleaseQMake
+	DESTDIR = ..\..\..\Lib\ReleaseQMake
 }
 
 UI_DIR = ../Generated
@@ -27,6 +27,7 @@ HEADERS += ../CGuiComponentBase.h
 HEADERS += ../CGuiComponentDialog.h
 HEADERS += ../CHierarchicalCommand.h
 HEADERS += ../CIconProviderComp.h
+HEADERS += ../CLayoutGuiComp.h
 HEADERS += ../CLogGuiComp.h
 HEADERS += ../CLoginGuiComp.h
 HEADERS += ../CSelectionParamGuiComp.h
@@ -35,6 +36,7 @@ HEADERS += ../CTabbedMultiViewGuiComp.h
 HEADERS += ../CTabContainerGuiComp.h
 HEADERS += ../CToolBarWidgetGuiComp.h
 HEADERS += ../CTreeWidgetFilter.h
+HEADERS += ../IGuiApplication.h
 HEADERS += ../IGuiObject.h
 HEADERS += ../IIconProvider.h
 HEADERS += ../IMainWindowComponent.h
@@ -54,6 +56,7 @@ SOURCES += ../CGuiComponentBase.cpp
 SOURCES += ../CGuiComponentDialog.cpp
 SOURCES += ../CHierarchicalCommand.cpp
 SOURCES += ../CIconProviderComp.cpp
+SOURCES += ../CLayoutGuiComp.cpp
 SOURCES += ../CLogGuiComp.cpp
 SOURCES += ../CLoginGuiComp.cpp
 SOURCES += ../CSelectionParamGuiComp.cpp

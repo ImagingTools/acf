@@ -8,4 +8,4 @@ CONFIG(debug, debug|release) {
 CONFIG(release, debug|release) {
 	LIBS += -L../../../Lib/ReleaseQMake
 }
-LIBS += -lizlib -lixln -liwin -lisys -lisvn -listd -liser -liqtprm -liqtgui -liqtdoc -liqt2d -liqt -liprm -linat -limod -limeas -limath -liimg -lidoc -lidb -licomp -licmpstr -licmm -libase -li2d
+LIBS += -lisys -listd -liser -liqtprm -liqtgui -liqtdoc -liqt2d -liqt -liprm -limod -limath -liimg -lidoc -lidb -licomp -licmpstr -libase -li2d

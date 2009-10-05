@@ -3,10 +3,10 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Lib/DebugQMake
+	DESTDIR = ..\..\..\Lib\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Lib/ReleaseQMake
+	DESTDIR = ..\..\..\Lib\ReleaseQMake
 }
 
 UI_DIR = ../Generated
@@ -21,10 +21,13 @@ INCLUDEPATH += ../../ "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/inc
 HEADERS += ../CAttributeEditorComp.h
 HEADERS += ../CComponentConnector.h
 HEADERS += ../CComponentHelpFileProviderComp.h
-HEADERS += ../CComponentNote.h
-HEADERS += ../CComponentNoteView.h
-HEADERS += ../CComponentView.h
+HEADERS += ../CComponentSceneItem.h
+HEADERS += ../CConnectorShape.h
+HEADERS += ../CGeometricalRegistryElement.h
+HEADERS += ../CNote.h
+HEADERS += ../CNoteSceneItem.h
 HEADERS += ../CPackageOverviewComp.h
+HEADERS += ../CRegistryElementShape.h
 HEADERS += ../CRegistryLoaderComp.h
 HEADERS += ../CRegistryModelComp.h
 HEADERS += ../CRegistryPreviewComp.h
@@ -33,15 +36,19 @@ HEADERS += ../CRegistryViewComp.h
 HEADERS += ../IAttributeSelectionObserver.h
 HEADERS += ../icmpstr.h
 HEADERS += ../IComponentNote.h
+HEADERS += ../IElementSelectionInfo.h
 HEADERS += ../IRegistryEditController.h
 HEADERS += ../IRegistryPreview.h
 SOURCES += ../CAttributeEditorComp.cpp
 SOURCES += ../CComponentConnector.cpp
 SOURCES += ../CComponentHelpFileProviderComp.cpp
-SOURCES += ../CComponentNote.cpp
-SOURCES += ../CComponentNoteView.cpp
-SOURCES += ../CComponentView.cpp
+SOURCES += ../CComponentSceneItem.cpp
+SOURCES += ../CConnectorShape.cpp
+SOURCES += ../CGeometricalRegistryElement.cpp
+SOURCES += ../CNote.cpp
+SOURCES += ../CNoteSceneItem.cpp
 SOURCES += ../CPackageOverviewComp.cpp
+SOURCES += ../CRegistryElementShape.cpp
 SOURCES += ../CRegistryLoaderComp.cpp
 SOURCES += ../CRegistryModelComp.cpp
 SOURCES += ../CRegistryPreviewComp.cpp

@@ -4,10 +4,10 @@ TEMPLATE = lib
 CONFIG += dll
 
 CONFIG(debug, debug|release) {
-	DESTDIR = $(ACFDIR)\Bin\DebugQMake
+	DESTDIR = ..\..\..\Bin\DebugQMake
 }
 CONFIG(release, debug|release) {
-	DESTDIR = $(ACFDIR)\Bin\ReleaseQMake
+	DESTDIR = ..\..\..\Bin\ReleaseQMake
 }
 
 UI_DIR = ../Generated

@@ -6,14 +6,14 @@ CONFIG += dll
 TARGET_EXT = arp
 
 CONFIG(debug, debug|release) {
-	DESTDIR = ../../../Bin/DebugQMake
-	LIBS += -L"$(ACFDIR)/Lib/DebugQMake -L"$(QScintilla)/Lib/DebugQMake 
-	LIBS += AcfStd AcfQt 
+	DESTDIR = ..\..\..\Bin\DebugQMake
+	LIBS += -L"$(ACFDIR)/Lib/DebugQMake -L"$(QScintilla)/Lib/DebugQMake -L"$(QWT3DDIR)/Lib/DebugQMake 
+	LIBS += qwt3dlib AcfStd AcfQt 
 }
 CONFIG(release, debug|release) {
-	DESTDIR = ../../../Bin/ReleaseQMake
-	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake -L"$(QScintilla)/Lib/ReleaseQMake 
-	LIBS += AcfStd AcfQt 
+	DESTDIR = ..\..\..\Bin\ReleaseQMake
+	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake -L"$(QScintilla)/Lib/ReleaseQMake -L"$(QWT3DDIR)/Lib/ReleaseQMake 
+	LIBS += qwt3dlib AcfStd AcfQt 
 }
 
 UI_DIR = ../Generated
