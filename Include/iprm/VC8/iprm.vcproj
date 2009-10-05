@@ -179,6 +179,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEnableableParamComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamComp.cpp"
 				>
 			</File>
@@ -201,6 +205,10 @@
 			>
 			<File
 				RelativePath="..\CComposedParamsSetComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CEnableableParamComp.h"
 				>
 			</File>
 			<File

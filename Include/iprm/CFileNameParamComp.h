@@ -11,6 +11,9 @@ namespace iprm
 {
 
 
+/**
+	Basic implementation of interface iprm::IFileNameParam as component.
+*/
 class CFileNameParamComp:
 			public icomp::CComponentBase,
 			virtual public IFileNameParam

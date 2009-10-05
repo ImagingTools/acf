@@ -47,7 +47,9 @@ inline TInterfaceRegistrator<void>::TInterfaceRegistrator(icomp::IComponentStati
 template <class Interface>
 void* TInterfaceRegistrator<Interface>::InterfaceExtractor(IComponent* componentPtr)
 {
-	return dynamic_cast<Interface*>(componentPtr);
+	void* retVal = dynamic_cast<Interface*>(componentPtr);
+
+	return retVal;
 }
 
 

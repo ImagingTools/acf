@@ -124,7 +124,7 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 				std::string subId;
 				BaseClass2::SplitId(componentId, baseId, subId);
 
-				IComponent* componentPtr = parentPtr->GetSubcomponent(componentId);
+				IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
 
 				m_components[i] = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
 			}

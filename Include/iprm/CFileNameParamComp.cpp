@@ -1,6 +1,8 @@
 #include "iprm/CFileNameParamComp.h"
 
 
+#include "istd/TChangeNotifier.h"
+
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -37,7 +39,11 @@ const istd::CString& CFileNameParamComp::GetPath() const
 
 void CFileNameParamComp::SetPath(const istd::CString& path)
 {
-	m_path = path;
+	if (path != m_path){
+		istd::CChangeNotifier notifier(this);
+
+		m_path = path;
+	}
 }
 
 
