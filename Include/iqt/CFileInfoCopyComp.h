@@ -5,9 +5,9 @@
 // Qt includes
 #include <QString>
 
-#include "istd/CString.h"
 
-#include "icomp/CComponentBase.h"
+// ACF includes
+#include "istd/CString.h"
 
 #include "ibase/IApplicationInfo.h"
 #include "ibase/IFileConvertCopy.h"
