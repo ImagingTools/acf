@@ -51,7 +51,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -124,7 +124,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
+				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtNetwork&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
@@ -239,6 +239,10 @@
 			</File>
 			<File
 				RelativePath="..\CIniSettingsProviderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CNetworkWriteArchive.cpp"
 				>
 			</File>
 			<File
@@ -368,6 +372,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNetworkWriteArchive.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNetworkWriteArchive.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CPackagesLoaderComp.h"
 				>
 			</File>
@@ -435,6 +447,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CFileList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CNetworkWriteArchive.cpp"
 				>
 			</File>
 		</Filter>

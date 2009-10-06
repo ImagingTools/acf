@@ -35,7 +35,7 @@ void CVideoPlayerGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	if (m_urlParamsGuiCompPtr.IsValid()){
+	if (m_urlParamsGuiCompPtr.IsValid() && m_urlParamModelCompPtr.IsValid()){
 		m_urlParamsGuiCompPtr->CreateGui(UrlParamFrame);
 
 		UrlParamFrame->setVisible(true);
