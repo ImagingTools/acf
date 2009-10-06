@@ -14,6 +14,7 @@
 #include "iqt/CIniSettingsProviderComp.h"
 #include "iqt/CFileInfoCopyComp.h"
 #include "iqt/CCopyProcessorComp.h"
+#include "iqt/CFileListProviderComp.h"
 
 #include "iqtgui/CLoginGuiComp.h"
 #include "iqtgui/CApplicationComp.h"
@@ -83,6 +84,7 @@ typedef iqt::CApplicationSettingsProviderComp ApplicationSettingsProvider;
 typedef iqt::CIniSettingsProviderComp IniSettingsProvider;
 typedef iqt::CFileInfoCopyComp FileInfoCopy;
 typedef iqt::CCopyProcessorComp CopyProcessor;
+typedef iqt::CFileListProviderComp FileListProvider;
 
 typedef iqtgui::CLoginGuiComp LoginGui;
 typedef iqtgui::CApplicationComp GuiApplication;

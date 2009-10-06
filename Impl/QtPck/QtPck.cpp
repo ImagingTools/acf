@@ -41,6 +41,13 @@ I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 I_EXPORT_COMPONENT(Bitmap, "QImage based bitmap implementation", "QImage Image Bitmap Qt");
 I_EXPORT_COMPONENT(BitmapSurface, "QImage based bitmap implementation with surface extension", "Sampled Function QImage Image Bitmap Qt Surface");
 I_EXPORT_COMPONENT(BitmapLoader, "Loader loading bitmaps using Qt standard implementations", "Image Bitmap Qt File Loader");
+I_EXPORT_COMPONENT(SettingsSerializer, "Load and save objects using QSettings as storage", "Qt QSettings Registry Serializer Loader Saver");
+I_EXPORT_COMPONENT(ApplicationSettingsProvider, "Provider for the global application settings", "Qt Settings QSettings Registry Saver");
+I_EXPORT_COMPONENT(IniSettingsProvider, "Provider for the settings taken from INI file", "Qt INI Settings QSettings Registry Saver");
+I_EXPORT_COMPONENT(FileInfoCopy, "Copy file attaching some additional information like version and license", "Qt Copy Move File Attach License Version Tags");
+I_EXPORT_COMPONENT(CopyProcessor, "Copy files from one directory to another one", "Qt Copy File Dir Filter Installation Tool");
+I_EXPORT_COMPONENT(FileListProvider, "Provide list of file synchronized with some directory", "File List Provider Serialize Directory Model Observer");
+
 I_EXPORT_COMPONENT(SceneConnector, "Display scane provider, scene extender and connect it", "Scene Connector Provider Extender Display Console GUI Qt");
 I_EXPORT_COMPONENT(SceneProvider, "Standard scene provider", "Scene Provider Extender Display Console GUI Qt");
 I_EXPORT_COMPONENT(ImageView, "Display bitmap using observer pattern", "Image Bitmap Display Viewer Observer Qt");
@@ -65,12 +72,6 @@ I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Tab Widget 
 I_EXPORT_COMPONENT(AboutGui, "About GUI for the application", "Qt Help About Widget GUI");
 I_EXPORT_COMPONENT(TabbedMultiViewGui, "Multi view editor component", "Qt Widget GUI Observer View Model");
 I_EXPORT_COMPONENT(LayoutGui, "Allows create layouted UI", "Qt Widget GUI Layout");
-
-I_EXPORT_COMPONENT(SettingsSerializer, "Load and save objects using QSettings as storage", "Qt QSettings Registry Serializer Loader Saver");
-I_EXPORT_COMPONENT(ApplicationSettingsProvider, "Provider for the global application settings", "Qt Settings QSettings Registry Saver");
-I_EXPORT_COMPONENT(IniSettingsProvider, "Provider for the settings taken from INI file", "Qt INI Settings QSettings Registry Saver");
-I_EXPORT_COMPONENT(FileInfoCopy, "Copy file attaching some additional information like version and license", "Qt Copy Move File Attach License Version Tags");
-I_EXPORT_COMPONENT(CopyProcessor, "Copy files from one directory to another one", "Qt Copy File Dir Filter Installation Tool");
 
 
 } // namespace QtPck

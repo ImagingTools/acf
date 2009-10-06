@@ -230,6 +230,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileListProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileSystem.cpp"
 				>
 			</File>
@@ -349,6 +353,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileList.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileListProviderComp.h"
 				>
 			</File>
 			<File

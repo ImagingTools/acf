@@ -59,7 +59,7 @@ bool CFrameSeqVideoControllerComp::OpenMediumUrl(const istd::CString& url, bool 
 		fileFilter.push_back(QString("*.") + iqt::GetQString(fileExtensions[fileExtensionIndex]));
 	}
 	
-	m_fileList.Create(iqt::GetQString(m_mediumUrl), false, fileFilter);
+	m_fileList.Create(iqt::GetQString(m_mediumUrl), 0, 0, fileFilter);
 
 	m_currentFrameIndex = 0;
 

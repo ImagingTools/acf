@@ -1,5 +1,5 @@
-#ifndef icmpstr_IRegistryGeometryProvider_included
-#define icmpstr_IRegistryGeometryProvider_included
+#ifndef icmpstr_IRegistryEditController_included
+#define icmpstr_IRegistryEditController_included
 
 
 #include "istd/IChangeable.h"
@@ -43,6 +43,6 @@ public:
 } // namespace icmpstr
 
 
-#endif // !icmpstr_IRegistryGeometryProvider_included
+#endif // !icmpstr_IRegistryEditController_included
 
 

@@ -8,96 +8,89 @@ namespace iqt
 
 
 CDirList::CDirList(QObject* parent) 
-	:QObject(parent)
+:	QObject(parent)
 {
 }
 
 
-CDirList::CDirList( const QString& root, bool isRecursive, QObject* parent) 
-	:QObject(parent)
+CDirList::CDirList(
+			QObject* parent,
+			const QDir& root,
+			int minRecursionDepth,
+			int maxRecursionDepth) 
+:	QObject(parent)
 {
-	Create(root, isRecursive);
+	Create(root, minRecursionDepth, maxRecursionDepth);
 }
 
 
-CDirList::CDirList( const QDir& root, bool isRecursive, QObject* parent) 
-	:QObject(parent)
+
+bool CDirList::Create(
+			const QDir& root,
+			int minRecursionDepth,
+			int maxRecursionDepth,
+			bool doAppend)
 {
-	Create(root, isRecursive);
-}
+	I_ASSERT(minRecursionDepth >= 0);
 
-
-
-bool CDirList::Create(const QString& rootDirectory, bool isRecursive)
-{	
-	clear();
-
-	QFileInfo fileInfo(rootDirectory);
-	if (!fileInfo.isDir())
-		return false;
-	
-	push_back(rootDirectory);
-	
-	QDir inputDirectory = QDir(rootDirectory);
-
-	DoSearch(inputDirectory, isRecursive);
-
-	return true;
-}
-
-
-bool CDirList::Create(const QDir& root, bool isRecursive)
-{	
-	clear();
-
-	QString rootPath = root.canonicalPath();
-
-	QFileInfo fileInfo( rootPath );
-	if (!fileInfo.isDir()){
-		return false;
+	if (!doAppend){
+		clear();
 	}
-	
+
+	QString rootPath = root.absolutePath();
+
 	if (rootPath.isEmpty()){
 		return false;
 	}
 
-	push_back(rootPath);
-	
-	QDir temp = root;
+	QFileInfo fileInfo(rootPath);
+	if (!fileInfo.isDir()){
+		return false;
+	}
 
-	DoSearch(temp, isRecursive);
+	if (minRecursionDepth == 0){
+		push_back(rootPath);
+	}
+	
+	DoSearch(root, minRecursionDepth, maxRecursionDepth);
 
 	return true;
 }
 
 
-void CDirList::DoSearch(QDir& root, bool isRecursive)
+// protected methods
+
+void CDirList::DoSearch(
+			const QDir& root,
+			int minRecursionDepth,
+			int maxRecursionDepth)
 {
-	QStringList entries = root.entryList( QDir::Dirs );
-	
-	for (QStringList::size_type j = 0; j < entries.size(); j++ ){
-		QString entry = entries[j];
-		if( entry == "." || entry == "..")
-			continue;
-		
-		QFileInfo fi(root, entry );
-		entry = fi.absoluteFilePath();
-		entry = QDir::convertSeparators(entry);
+	QStringList entries = root.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
 
-		emit current(entry);
-		push_back(entry);
+	for (		QStringList::const_iterator iter = entries.begin();
+				iter != entries.end();
+				++iter){
+		const QString& subDirName = *iter;
 
-		if (isRecursive){
-			QDir temp(entry);
-			temp.setNameFilters(root.nameFilters());
-			temp.setSorting( root.sorting() );
-			temp.setFilter( root.filter() );
+		QString subDirPath = root.absoluteFilePath(subDirName);
+
+		if (minRecursionDepth <= 0){
+			push_back(subDirPath);
+
+			emit currentDir(subDirPath);
+		}
+
+		if (maxRecursionDepth != 0){
+			QDir subDir = root;
+
+			subDir.setPath(subDirPath);
 			
-			DoSearch(temp, isRecursive);
+			DoSearch(subDir, minRecursionDepth - 1, maxRecursionDepth - 1);
 		}
 	}
 }
 
 
 } // namespace iqt
+
 
