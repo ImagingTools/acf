@@ -164,8 +164,10 @@ bool CBitmapBase::Serialize(iser::IArchive& archive)
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
 
 	if (!isStoring){
-		if (!CreateBitmap(size, pixelBitsCount, componentsCount)){
-			return false;
+		if (!size.IsZero()){
+			if (!CreateBitmap(size, pixelBitsCount, componentsCount)){
+				return false;
+			}
 		}
 	}
 
