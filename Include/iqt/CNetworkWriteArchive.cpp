@@ -10,7 +10,7 @@ namespace iqt
 
 
 CNetworkWriteArchive::CNetworkWriteArchive(
-			const QHostAddress& hostAddress,
+			const QString& hostAddress,
 			int port,
 			const QString& userName,
 			const QString& password,
@@ -42,16 +42,20 @@ CNetworkWriteArchive::~CNetworkWriteArchive()
 
 bool CNetworkWriteArchive::Flush()
 {
+	if (m_socket.state() != QAbstractSocket::ConnectedState){
+		return false;
+	}
+
 	QDataStream dataStream(&m_socket);
 
 	dataStream << GetBufferSize();
 	dataStream.writeBytes(reinterpret_cast<const char*>(GetBuffer()), GetBufferSize());
 	
-	if (!m_socket.waitForBytesWritten()){
+	if (!m_socket.flush()){
 		return false;
 	}
-
-	return m_socket.flush();
+	
+	return m_socket.waitForBytesWritten();
 }
 
 

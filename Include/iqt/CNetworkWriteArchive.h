@@ -10,6 +10,8 @@
 // ACF includes
 #include "iser/CMemoryWriteArchive.h"
 
+#include "iqt/iqt.h"
+
 
 namespace iqt
 {
@@ -22,7 +24,7 @@ public:
 	typedef iser::CMemoryWriteArchive BaseClass;
 
 	CNetworkWriteArchive(
-				const QHostAddress& hostAddress,
+				const QString& hostAddress,
 				int port,
 				const QString& userName = QString(),
 				const QString& password = QString(),
