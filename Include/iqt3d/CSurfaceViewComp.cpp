@@ -16,6 +16,8 @@ namespace iqt3d
 {
 
 
+// public methods
+
 // reimplemented (imod::IModelEditor)
 
 void CSurfaceViewComp::UpdateModel() const
@@ -86,13 +88,11 @@ void CSurfaceViewComp::OnGuiCreated()
 		layoutPtr = new QVBoxLayout(SurfacePlotFrame);
 	}
 
-	m_surfacePlotPtr->setOrtho(false);
+	m_surfacePlotPtr->setOrtho(true);
 	m_surfacePlotPtr->setSmoothMesh(true);
 	QPalette palette = GetWidget()->palette();
 
-	QColor backgroundColor = palette.color(QPalette::Window);
-
-	m_surfacePlotPtr->setBackgroundColor(Qwt3D::RGBA(backgroundColor.red()/255.0, backgroundColor.green()/255.0, backgroundColor.blue()/255.0));
+	m_surfacePlotPtr->setBackgroundColor(Qwt3D::RGBA(0, 0, 0));
 	m_surfacePlotPtr->setShininess(1);
 	m_surfacePlotPtr->setMaterialComponent(GL_EMISSION, 0.1);
 	m_surfacePlotPtr->setMaterialComponent(GL_SPECULAR, 0.1);
@@ -125,6 +125,20 @@ void CSurfaceViewComp::OnGuiCreated()
 	QString axisYName = "Y"; //m_componentNames[componentAxisYIndex];
 	QString axisZName = "Z"; //tr("Converted ") + m_componentNames[displayIndex];
 
+	Qwt3D::RGBA axisColor(192,192,192);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X1].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X2].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X3].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X4].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Y1].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Y2].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Y3].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Y4].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Z1].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Z2].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Z3].setColor(axisColor);
+	m_surfacePlotPtr->coordinates()->axes[Qwt3D::Z4].setColor(axisColor);
+
 	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X1].setLabelString(axisXName);
 	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X2].setLabelString(axisXName);
 	m_surfacePlotPtr->coordinates()->axes[Qwt3D::X3].setLabelString(axisXName);
@@ -140,16 +154,17 @@ void CSurfaceViewComp::OnGuiCreated()
 
 	m_surfacePlotPtr->coordinates()->setAutoScale(true);
 	m_surfacePlotPtr->showColorLegend(true);
-
+	m_surfacePlotPtr->enableLighting(true);
 
 	connect(OrthoCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(setOrtho(bool)));
 	connect(AutoScaleCheck, SIGNAL(toggled(bool)), this, SLOT(OnToggleAutoScale(bool)));
-	connect(colorlegend, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(showColorLegend(bool)));
-	connect(shader, SIGNAL(toggled(bool)), this, SLOT( OnToggleShader(bool)));
-	connect(mouseinput, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT( enableMouse(bool)));
-	connect(lightingswitch, SIGNAL( toggled(bool) ), m_surfacePlotPtr, SLOT( enableLighting(bool)));
-	connect(normalsquality,  SIGNAL(valueChanged(int)), this, SLOT(OnNormalsQuality(int)) );
-	connect(normalslength,  SIGNAL(valueChanged(int)), this, SLOT(setNormalLength(int)) );
+	connect(ColorLegendCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(showColorLegend(bool)));
+	connect(ShaderCheck, SIGNAL(toggled(bool)), this, SLOT(OnToggleShader(bool)));
+	connect(MouseCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(enableMouse(bool)));
+	connect(LightCheck, SIGNAL( toggled(bool) ), m_surfacePlotPtr, SLOT(enableLighting(bool)));
+	connect(NormalsQualitySlider, SIGNAL(valueChanged(int)), this, SLOT(OnNormalsQuality(int)));
+	connect(NormalsLengthSlider, SIGNAL(valueChanged(int)), m_surfacePlotPtr, SLOT(setNormalLength(int)));
+	connect(PolygonOffsetSlider, SIGNAL(valueChanged(int)), this, SLOT(OnPolygonOffset(int)));
 	
 	ResolutionSlider->setRange(1,10);
 	connect(ResolutionSlider, SIGNAL(valueChanged(int)), m_surfacePlotPtr, SLOT(setResolution(int)));
@@ -179,6 +194,7 @@ void CSurfaceViewComp::OnParamsChanged(double /*value*/)
 void CSurfaceViewComp::OnToggleAutoScale(bool val)
 {
 	m_surfacePlotPtr->coordinates()->setAutoScale(val);
+
 	m_surfacePlotPtr->updateGL();
 }
 
@@ -196,6 +212,7 @@ void CSurfaceViewComp::OnPolygonOffset(int val)
 {
 	m_surfacePlotPtr->setPolygonOffset(val / 10.0);
 	m_surfacePlotPtr->updateData();
+
 	m_surfacePlotPtr->updateGL();
 }
 
@@ -204,6 +221,7 @@ void CSurfaceViewComp::OnNormalsQuality(int val)
 {
 	m_surfacePlotPtr->setNormalQuality(val);
 	m_surfacePlotPtr->updateNormals();
+
 	m_surfacePlotPtr->updateGL();
 }
 
