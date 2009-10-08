@@ -25,12 +25,30 @@ public:
 	typedef Base BaseClass;
 
 	// pseudo-reimplemented (idoc::IDocumentManager)
+	virtual int GetAllowedOperationFlags(const istd::IPolymorphic* viewPtr = NULL) const;
 	virtual void FilePrint() const;
 };
 
 
 
 // reimplemented (idoc::IDocumentManager)
+
+template <typename Base>
+int TQtDocumentManagerWrap<Base>::GetAllowedOperationFlags(const istd::IPolymorphic* viewPtr) const
+{
+	int retVal = BaseClass::GetAllowedOperationFlags(viewPtr);
+
+	if (viewPtr == NULL){
+		viewPtr = GetActiveView();
+	}
+
+	if (dynamic_cast<const iqtdoc::IPrintable*>(viewPtr) != NULL){
+		retVal |= OF_FILE_PRINT;
+	}
+
+	return retVal;
+}
+
 
 template <typename Base>
 void TQtDocumentManagerWrap<Base>::FilePrint() const

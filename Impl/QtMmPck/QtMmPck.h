@@ -9,6 +9,7 @@
 #include "iqtmm/CMediaLoaderComp.h"
 #include "iqtmm/CPlaybackControllerGuiComp.h"
 #include "iqtmm/CFrameSeqVideoControllerComp.h"
+#include "iqtmm/CSvgBitmapLoaderComp.h"
 
 
 /**
@@ -23,6 +24,7 @@ typedef iqtmm::CPhononVideoViewGuiComp PhononVideoViewGui;
 typedef iqtmm::CMediaLoaderComp MediaLoader;
 typedef iqtmm::CPlaybackControllerGuiComp PlaybackControllerGui;
 typedef icomp::TModelCompWrap<iqtmm::CFrameSeqVideoControllerComp> FrameSeqVideoController;
+typedef iqtmm::CSvgBitmapLoaderComp SvgBitmapLoader;
 
 
 } // namespace QtMmPck

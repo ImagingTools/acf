@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          860
+          1102
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="17">
+  <PositionMap count="19">
     <Element>
       <ComponentName>
         Application
@@ -43,10 +43,21 @@
         BitmapLoader
       </ComponentName>
       <X>
-        -67
+        -852
       </X>
       <X>
-        -546
+        -623
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ComposedImageLoader
+      </ComponentName>
+      <X>
+        -608
+      </X>
+      <X>
+        -543
       </X>
     </Element>
     <Element>
@@ -179,6 +190,17 @@
       </X>
       <X>
         -87
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SvgBitmapLoader
+      </ComponentName>
+      <X>
+        -875
+      </X>
+      <X>
+        -473
       </X>
     </Element>
     <Element>

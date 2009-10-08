@@ -27,11 +27,11 @@ public:
 	// reimplemented (idoc::IDocumentManager)
 	virtual imod::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const;
 	virtual int GetDocumentsCount() const;
-	virtual istd::IChangeable& GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr) const;
+	virtual istd::IChangeable& GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr = NULL) const;
 	virtual int GetViewsCount(int documentIndex) const;
 	virtual istd::IPolymorphic* GetViewFromIndex(int documentIndex, int viewIndex) const;
 	virtual istd::IPolymorphic* GetActiveView() const;
-	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view) const;
+	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const;
 	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const;
 	virtual bool FileNew(
 				const std::string& documentTypeId, 

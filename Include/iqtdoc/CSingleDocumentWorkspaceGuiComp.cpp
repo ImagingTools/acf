@@ -127,7 +127,7 @@ QString CSingleDocumentWorkspaceGuiComp::CreateFileDialogFilter(const std::strin
 
 istd::CString CSingleDocumentWorkspaceGuiComp::GetOpenFilePath(const std::string* documentTypeIdPtr) const
 {
-	QString filter = CreateFileDialogFilter(documentTypeIdPtr, iser::IFileLoader::QF_NO_SAVING);
+	QString filter = CreateFileDialogFilter(documentTypeIdPtr, iser::IFileLoader::QF_NAMED_ONLY | iser::IFileLoader::QF_NO_SAVING);
 
 	QStringList files = QFileDialog::getOpenFileNames(GetWidget(), tr("Open Files..."), m_lastDirectory, filter);
 
@@ -143,7 +143,7 @@ istd::CString CSingleDocumentWorkspaceGuiComp::GetOpenFilePath(const std::string
 
 istd::CString CSingleDocumentWorkspaceGuiComp::GetSaveFilePath(const std::string& documentTypeId) const
 {
-	QString filter = CreateFileDialogFilter(&documentTypeId, iser::IFileLoader::QF_NO_LOADING);
+	QString filter = CreateFileDialogFilter(&documentTypeId, iser::IFileLoader::QF_NAMED_ONLY | iser::IFileLoader::QF_NO_LOADING);
 
 	QString filePath = QFileDialog::getSaveFileName(NULL, tr("Save..."), m_lastDirectory, filter);
 

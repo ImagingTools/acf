@@ -18,6 +18,7 @@ I_EXPORT_COMPONENT(PhononVideoViewGui, "Video widget based on Phonon library", "
 I_EXPORT_COMPONENT(MediaLoader, "Loader for multimedia files", "Qt Video Medium Multimedia File Loader Play");
 I_EXPORT_COMPONENT(PlaybackControllerGui, "Simple playback controller", "Play Controller Frame Sequence Qt Video Medium Multimedia File Loader Play");
 I_EXPORT_COMPONENT(FrameSeqVideoController, "Video controller playing images from directory on external bitmaps", "Frame Sequence Bitmaps Images Qt Video Medium Multimedia Directory Play");
+I_EXPORT_COMPONENT(SvgBitmapLoader, "Loader for vector graphics SVG files rendering it to bitmap", "Bitmap Vector Image File Loader Renderer SVG QT Scalable Graphics");
 
 
 } // namespace QtMmPck

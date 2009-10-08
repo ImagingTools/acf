@@ -38,9 +38,26 @@ public:
 	};
 
 	/**
+		Flags describing possible operations.
+	*/
+	enum OperationFlags
+	{
+		OF_FILE_NEW = 0x0001,
+		OF_FILE_OPEN = 0x0002,
+		OF_FILE_SAVE = 0x0004,
+		OF_FILE_SAVE_AS = 0x0008,
+		OF_FILE_PRINT = 0x0010
+	};
+
+	/**
 		Map from file path to ducument type ID's.
 	*/
 	typedef std::map<istd::CString, std::string> FileToTypeMap;
+
+	/**
+		Get flags of allowed operations.
+	*/
+	virtual int GetAllowedOperationFlags(const istd::IPolymorphic* viewPtr = NULL) const = 0;
 
 	/**
 		Return main document template used by this manager.
@@ -60,9 +77,9 @@ public:
 	/**
 		Get document at specified index.
 		\param	index			index of document.
-		\param	documentInfoPtr	optional return value.
+		\param	documentInfoPtr	optional return value describing some additional informations about document.
 	*/
-	virtual istd::IChangeable& GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr) const = 0;
+	virtual istd::IChangeable& GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr = NULL) const = 0;
 
 	/**
 		Get number of view for specified document.
@@ -82,10 +99,11 @@ public:
 
 	/**
 		Return the document assigned to view. 
-		\param	view	view object.
-		\return			pointer to assigned document, or \c NULL if no document for this view exists.
+		\param	view			view object.
+		\param	documentInfoPtr	optional return value describing some additional informations about document.
+		\return					pointer to assigned document, or \c NULL if no document for this view exists.
 	*/
-	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view) const = 0;
+	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const = 0;
 
 	/**
 		Get ID of document type managed by this object.

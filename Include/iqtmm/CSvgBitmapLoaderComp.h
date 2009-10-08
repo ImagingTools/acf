@@ -1,5 +1,5 @@
-#ifndef iqtmm_CMediaLoaderComp_included
-#define iqtmm_CMediaLoaderComp_included
+#ifndef iqtmm_CSvgBitmapLoaderComp_included
+#define iqtmm_CSvgBitmapLoaderComp_included
 
 
 #include "iser/IFileLoader.h"
@@ -8,6 +8,8 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
+#include "iqt/CBitmap.h"
+
 #include "iqtmm/iqtmm.h"
 
 
@@ -15,23 +17,28 @@ namespace iqtmm
 {
 
 
-class CMediaLoaderComp:
+/**
+	Load SVG files to bitmap.
+*/
+class CSvgBitmapLoaderComp:
 			public ibase::CLoggerComponentBase,
 			virtual public iser::IFileLoader
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CMediaLoaderComp)
+	I_BEGIN_COMPONENT(CSvgBitmapLoaderComp)
 		I_REGISTER_INTERFACE(iser::IFileLoader);
-		I_ASSIGN(m_autoPlayAttrPtr, "AutoPlay", "If enabled, movie will be automatically played after loading", true, true);
+		I_ASSIGN(m_bitmapWidthAttrPtr, "BitmapWidth", "Width of rendered bitmap in pixels", true, 100);
+		I_ASSIGN(m_bitmapHeightAttrPtr, "BitmapHeight", "Height of rendered bitmap in pixels", true, 100);
 	I_END_COMPONENT
 
 	enum MessageId
 	{
 		MI_BAD_EXTENSION = 0xa7e0,
 		MI_FILE_NOT_EXIST,
-		MI_BAD_FORMAT
+		MI_BAD_FORMAT,
+		MI_BITMAP_TYPE
 	};
 
 	// reimplemented (iser::IFileLoader)
@@ -46,12 +53,17 @@ public:
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
 private:
-	I_ATTR(bool, m_autoPlayAttrPtr);
+	I_ATTR(int, m_bitmapWidthAttrPtr);
+	I_ATTR(int, m_bitmapHeightAttrPtr);
+
+	mutable istd::CString m_lastFilePath;
+	mutable iqt::CBitmap m_lastBitmap;
 };
 
 
 } // namespace iqtmm
 
 
-#endif // !iqtmm_CMediaLoaderComp_included
+#endif // !iqtmm_CSvgBitmapLoaderComp_included
+
 

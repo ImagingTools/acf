@@ -205,12 +205,6 @@ bool CBitmap::SetQImage(const QImage& image)
 }
 
 
-QImage& CBitmap::GetQImageRef()
-{
-	return m_image;
-}
-
-
 } // namespace iqt
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1052
+          1102
         </Number>
         <Description>
           ACF
@@ -49,7 +49,9 @@
                 true
               </IsEnabled>
               <Value>
-                (C) Copyright 2009 ImagingTools
+                ACF Registry Editor
+
+(C) Copyright 2009 ImagingTools
 
 All rights reserved
               </Value>
@@ -149,7 +151,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                :/Icons/acfLogo
+                :/Icons/compositorLogo3d
               </Value>
             </Data>
           </AttributeInfo>

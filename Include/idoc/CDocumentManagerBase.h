@@ -20,10 +20,13 @@ public:
 	void SetDocumentTemplate(const idoc::IDocumentTemplate* documentTemplatePtr);
 
 	// reimplemented (idoc::IDocumentManager)
+	virtual int GetAllowedOperationFlags(const istd::IPolymorphic* viewPtr = NULL) const;
 	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const;
 
 private:
 	const IDocumentTemplate* m_documentTemplatePtr;
+
+	int m_baseAllowedFlags;
 };
 
 

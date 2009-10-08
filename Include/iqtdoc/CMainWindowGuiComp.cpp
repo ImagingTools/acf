@@ -482,15 +482,9 @@ void CMainWindowGuiComp::UpdateMenuActions()
 		return;
 	}
 
-	bool isDocumentActive = (m_activeDocumentPtr != NULL);
-
 	if (!m_menuBarPtr.IsValid() && !m_standardToolBarPtr.IsValid()){
 		return;
 	}
-
-	m_saveCommand.SetEnabled(isDocumentActive);
-	m_saveAsCommand.SetEnabled(isDocumentActive);
-	m_printCommand.SetEnabled(isDocumentActive);
 
 	m_menuCommands.ResetChilds();
 
@@ -498,7 +492,11 @@ void CMainWindowGuiComp::UpdateMenuActions()
 
 	m_menuCommands.JoinLinkFrom(&m_fixedCommands);
 
+	int allowedOperationFlags = 0;
+
 	if (m_documentManagerCompPtr.IsValid()){
+		allowedOperationFlags = m_documentManagerCompPtr->GetAllowedOperationFlags();
+
 		const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
 		const idoc::ICommandsProvider* templateProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(templatePtr);
 		if (templateProviderPtr != NULL){
@@ -508,6 +506,12 @@ void CMainWindowGuiComp::UpdateMenuActions()
 			}
 		}
 	}
+
+	m_newCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_NEW) != 0);
+	m_openCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_OPEN) != 0);
+	m_saveCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_SAVE) != 0);
+	m_saveAsCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_SAVE_AS) != 0);
+	m_printCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_PRINT) != 0);
 
 	if (m_documentManagerCommandsCompPtr.IsValid()){
 		const idoc::IHierarchicalCommand* commandsPtr = m_documentManagerCommandsCompPtr->GetCommands();
@@ -795,12 +799,12 @@ void CMainWindowGuiComp::OnSave()
 
 		if (m_documentManagerCompPtr->FileSave(false, &fileMap)){
 			UpdateRecentFileList(fileMap);
-
-			UpdateMenuActions();
 		}
 		else{
 			QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
 		}
+
+		UpdateMenuActions();
 	}
 }
 
@@ -812,12 +816,12 @@ void CMainWindowGuiComp::OnSaveAs()
 
 		if (m_documentManagerCompPtr->FileSave(true)){
 			UpdateRecentFileList(fileMap);
-
-			UpdateMenuActions();
 		}
 		else{
 			QMessageBox::critical(GetWidget(), "", tr("File could not be saved!"));
 		}
+
+		UpdateMenuActions();
 	}
 }
 
@@ -994,12 +998,12 @@ void CMainWindowGuiComp::OnOpenDocument(const std::string* documentTypeIdPtr)
 	if (m_documentManagerCompPtr.IsValid()){
 		if (m_documentManagerCompPtr->FileOpen(documentTypeIdPtr, NULL, true, "", &fileMap)){
 			UpdateRecentFileList(fileMap);
-
-			UpdateMenuActions();
 		}
 		else{
 			QMessageBox::warning(GetWidget(), "", tr("Document could not be opened"));
 		}
+
+		UpdateMenuActions();
 	}
 }
 

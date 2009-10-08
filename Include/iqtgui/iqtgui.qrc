@@ -12,6 +12,7 @@
     <file alias="acfLogo" >../../Docs/Images/Logo/Logo_64x64.png</file>
     <file alias="acfLogoSmall" >../../Docs/Images/Logo/Logo_32x32.png</file>
     <file alias="acfLogo3d" >../../Docs/Images/Logo/Logo3d.png</file>
+    <file alias="compositorLogo3d" >../../Docs/Images/Logo/CompositorLogo3d.png</file>
     <file alias="new" >Resources/Icons/document_128.png</file>
     <file alias="open" >Resources/Icons/folder_128.png</file>
     <file alias="save" >Resources/Icons/diskette_128.png</file>

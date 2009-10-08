@@ -24,6 +24,8 @@ public:
 	CBitmap();
 	CBitmap(const CBitmap& bitmap);
 
+	QImage& GetQImageRef();
+
 	// reimplemented (iqt::IQImageProvider)
 	virtual const QImage& GetQImage() const;
 	virtual bool CopyImageFrom(const QImage& image);
@@ -46,12 +48,18 @@ protected:
 	QImage::Format CalcQtFormat(int pixelBitsCount, int componentsCount) const;
 	bool SetQImage(const QImage& image);
 
-	virtual QImage& GetQImageRef();
-
 private:
 	istd::TOptDelPtr<I_BYTE, true> m_externalBuffer;
 	QImage m_image;
 };
+
+
+// inline methods
+
+inline QImage& CBitmap::GetQImageRef()
+{
+	return m_image;
+}
 
 
 } // namespace iqt

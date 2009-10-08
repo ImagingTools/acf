@@ -79,19 +79,21 @@ int CMediaLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const istd::
 }
 
 
-bool CMediaLoaderComp::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
+bool CMediaLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
 	}
 
-	result.push_back("mpg");
-	result.push_back("mpeg");
-	result.push_back("mov");
-	result.push_back("wmv");
-	result.push_back("avi");
-	result.push_back("m2p");
-	result.push_back("mp4");
+	if ((flags & QF_NO_LOADING) == 0){
+		result.push_back("mpg");
+		result.push_back("mpeg");
+		result.push_back("mov");
+		result.push_back("wmv");
+		result.push_back("avi");
+		result.push_back("m2p");
+		result.push_back("mp4");
+	}
 
 	return true;
 }

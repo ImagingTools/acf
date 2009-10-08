@@ -98,12 +98,16 @@ istd::IPolymorphic* CMultiDocumentManagerBase::GetActiveView() const
 }
 
 
-istd::IChangeable* CMultiDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view) const
+istd::IChangeable* CMultiDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr) const
 {
 	const SingleDocumentData* infoPtr = GetDocumentInfoFromView(view);
 	if (infoPtr != NULL){
 		I_ASSERT(infoPtr != NULL);
 		I_ASSERT(infoPtr->documentPtr.IsValid());
+
+		if (documentInfoPtr != NULL){
+			*documentInfoPtr = *infoPtr;
+		}
 
 		return infoPtr->documentPtr.GetPtr();
 	}

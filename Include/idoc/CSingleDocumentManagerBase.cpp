@@ -75,9 +75,15 @@ istd::IPolymorphic* CSingleDocumentManagerBase::GetActiveView() const
 }
 
 
-istd::IChangeable* CSingleDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view) const
+istd::IChangeable* CSingleDocumentManagerBase::GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr) const
 {
-	if (&view == m_viewPtr.GetPtr()){
+	if ((&view == m_viewPtr.GetPtr()) && m_documentPtr.IsValid()){
+		if (documentInfoPtr != NULL){
+			documentInfoPtr->filePath = m_filePath;
+			documentInfoPtr->documentTypeId = m_documentTypeId;
+			documentInfoPtr->isDirty = m_isDirty;
+		}
+
 		return m_documentPtr.GetPtr();
 	}
 
