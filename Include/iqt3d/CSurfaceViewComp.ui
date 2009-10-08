@@ -12,7 +12,7 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_8" >
+  <layout class="QVBoxLayout" name="verticalLayout_9" >
    <property name="margin" >
     <number>0</number>
    </property>
@@ -304,6 +304,27 @@ p, li { white-space: pre-wrap; }
           </property>
           <property name="checked" >
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_8" >
+        <item>
+         <widget class="QCheckBox" name="MeshEnabledCheck" >
+          <property name="text" >
+           <string>Show Mesh</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="DummyFrame" >
+          <property name="frameShape" >
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow" >
+           <enum>QFrame::Raised</enum>
           </property>
          </widget>
         </item>

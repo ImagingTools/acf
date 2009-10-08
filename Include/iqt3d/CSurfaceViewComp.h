@@ -52,6 +52,7 @@ protected slots:
 	void OnToggleShader(bool value);
 	void OnPolygonOffset(int value);
 	void OnNormalsQuality(int value);
+	void OnMeshEnabled(bool isMeshEnabled);
 
 private:
 	I_ATTR(istd::CString, m_unitNameAttrPtr);

@@ -97,7 +97,6 @@ void CSurfaceViewComp::OnGuiCreated()
 	m_surfacePlotPtr->setMaterialComponent(GL_EMISSION, 0.1);
 	m_surfacePlotPtr->setMaterialComponent(GL_SPECULAR, 0.1);
 	m_surfacePlotPtr->setMaterialComponent(GL_AMBIENT_AND_DIFFUSE, 0.1);
-	m_surfacePlotPtr->setMeshColor(Qwt3D::RGBA(0, 255, 0, 0));
     m_surfacePlotPtr->setCoordinateStyle(Qwt3D::BOX);
 
 	m_surfacePlotPtr->setLightShift(200, 0, 0, 0);
@@ -156,16 +155,19 @@ void CSurfaceViewComp::OnGuiCreated()
 	m_surfacePlotPtr->showColorLegend(true);
 	m_surfacePlotPtr->enableLighting(true);
 
+	OnMeshEnabled(MeshEnabledCheck->isChecked());
+
 	connect(OrthoCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(setOrtho(bool)));
 	connect(AutoScaleCheck, SIGNAL(toggled(bool)), this, SLOT(OnToggleAutoScale(bool)));
 	connect(ColorLegendCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(showColorLegend(bool)));
 	connect(ShaderCheck, SIGNAL(toggled(bool)), this, SLOT(OnToggleShader(bool)));
 	connect(MouseCheck, SIGNAL(toggled(bool)), m_surfacePlotPtr, SLOT(enableMouse(bool)));
 	connect(LightCheck, SIGNAL( toggled(bool) ), m_surfacePlotPtr, SLOT(enableLighting(bool)));
+	connect(MeshEnabledCheck, SIGNAL( toggled(bool) ), this, SLOT(OnMeshEnabled(bool)));
 	connect(NormalsQualitySlider, SIGNAL(valueChanged(int)), this, SLOT(OnNormalsQuality(int)));
 	connect(NormalsLengthSlider, SIGNAL(valueChanged(int)), m_surfacePlotPtr, SLOT(setNormalLength(int)));
 	connect(PolygonOffsetSlider, SIGNAL(valueChanged(int)), this, SLOT(OnPolygonOffset(int)));
-	
+		
 	ResolutionSlider->setRange(1,10);
 	connect(ResolutionSlider, SIGNAL(valueChanged(int)), m_surfacePlotPtr, SLOT(setResolution(int)));
 	connect(m_surfacePlotPtr, SIGNAL(resolutionChanged(int)), ResolutionSlider, SLOT(setValue(int)));
@@ -193,6 +195,8 @@ void CSurfaceViewComp::OnParamsChanged(double /*value*/)
 
 void CSurfaceViewComp::OnToggleAutoScale(bool val)
 {
+	I_ASSERT(m_surfacePlotPtr != NULL);
+
 	m_surfacePlotPtr->coordinates()->setAutoScale(val);
 
 	m_surfacePlotPtr->updateGL();
@@ -201,6 +205,8 @@ void CSurfaceViewComp::OnToggleAutoScale(bool val)
 
 void CSurfaceViewComp::OnToggleShader(bool val)
 {
+	I_ASSERT(m_surfacePlotPtr != NULL);
+
 	if (val)
 		m_surfacePlotPtr->setShading(Qwt3D::GOURAUD);
 	else
@@ -210,6 +216,8 @@ void CSurfaceViewComp::OnToggleShader(bool val)
 
 void CSurfaceViewComp::OnPolygonOffset(int val)
 {
+	I_ASSERT(m_surfacePlotPtr != NULL);
+
 	m_surfacePlotPtr->setPolygonOffset(val / 10.0);
 	m_surfacePlotPtr->updateData();
 
@@ -219,10 +227,27 @@ void CSurfaceViewComp::OnPolygonOffset(int val)
 
 void CSurfaceViewComp::OnNormalsQuality(int val)
 {
+	I_ASSERT(m_surfacePlotPtr != NULL);
+
 	m_surfacePlotPtr->setNormalQuality(val);
 	m_surfacePlotPtr->updateNormals();
 
 	m_surfacePlotPtr->updateGL();
+}
+
+
+void CSurfaceViewComp::OnMeshEnabled(bool isMeshEnabled)
+{
+	I_ASSERT(m_surfacePlotPtr != NULL);
+
+	if (isMeshEnabled){
+		m_surfacePlotPtr->setMeshColor(Qwt3D::RGBA(0.6, 0.6, 0.6, 0.5));
+	}
+	else{
+		m_surfacePlotPtr->setMeshColor(Qwt3D::RGBA(0, 0, 0, 0));
+	}
+
+    m_surfacePlotPtr->updateGL();
 }
 
 
