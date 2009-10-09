@@ -134,6 +134,18 @@ bool CPhononVideoViewGuiComp::SetCurrentPosition(double position)
 }
 
 
+int CPhononVideoViewGuiComp::GetSupportedFeatures() const
+{
+	int flags = SF_AUTO_PLAY;
+
+	if (m_mediaObject.isSeekable()){
+		flags = flags | SF_SEEK;
+	}
+
+	return flags;
+}
+
+
 // reimplemented (imm::IVideoInfo)
 
 int CPhononVideoViewGuiComp::GetFramesCount() const

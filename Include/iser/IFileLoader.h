@@ -14,7 +14,7 @@ namespace iser
 
 
 /**
-	Provide loading and saveing of objects.
+	Provide loading and saving of objects.
 
 	\ingroup Persistence
 */
@@ -49,7 +49,7 @@ public:
 		*/
 		QF_NO_LOADING = 0x0001,
 		/**
-			No saveing operation should be considered.
+			No saving operation should be considered.
 		*/
 		QF_NO_SAVING = 0x0002,
 		/**

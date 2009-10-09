@@ -35,9 +35,20 @@ public:
 	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
+
+private slots:
+	void OnTimerTick();
+
 private Q_SLOTS:
 	void on_PlayButton_toggled(bool isToggled);
 	void on_PositionSlider_valueChanged(int position);
+
+private:
+	QTimer m_playTimer;
+	int m_currentFrameIndex;
 };
 
 

@@ -47,6 +47,7 @@ public:
 	virtual double GetMediumLength() const;
 	virtual double GetCurrentPosition() const;
 	virtual bool SetCurrentPosition(double position);
+	virtual int	GetSupportedFeatures() const;
 
 	// reimplemented (imm::IVideoInfo)
 	virtual int GetFramesCount() const;

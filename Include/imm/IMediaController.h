@@ -21,6 +21,11 @@ public:
 		CF_POSITION = 0x0800000,
 	};
 
+	enum SupportedFeatures{
+		SF_SEEK = 0x1,
+		SF_AUTO_PLAY = 0x2 
+	};
+
 	/**
 		Get URL of the medium object.
 	*/
@@ -61,6 +66,12 @@ public:
 		Skip to some position of media stream.
 	*/
 	virtual bool SetCurrentPosition(double position) = 0;
+
+	/**
+		Get info about features, that are supported by this media controller.
+		\sa SupportedFeatures
+	*/
+	virtual int GetSupportedFeatures() const = 0;
 };
 
 

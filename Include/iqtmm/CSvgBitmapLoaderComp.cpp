@@ -129,10 +129,11 @@ istd::CString CSvgBitmapLoaderComp::GetTypeDescription(const istd::CString* exte
 
 	if (!isKnown){
 		istd::CStringList extensions;
-		QStringList extensionsList = iqt::GetQStringList(extensions);
-
-		if (!extensionsList.contains(iqt::GetQString(*extensionPtr), Qt::CaseInsensitive)){
-			isKnown = true;
+		if (GetFileExtensions(extensions)){
+			QStringList extensionsList = iqt::GetQStringList(extensions);
+			if (!extensionsList.contains(iqt::GetQString(*extensionPtr), Qt::CaseInsensitive)){
+				isKnown = true;
+			}
 		}
 	}
 

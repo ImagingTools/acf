@@ -177,6 +177,12 @@ bool CVlcVideoViewGuiComp::SetCurrentPosition(double position)
 }
 
 
+int	CVlcVideoViewGuiComp::GetSupportedFeatures() const
+{
+	return SF_AUTO_PLAY | SF_SEEK;
+}
+
+
 // reimplemented (imm::IVideoInfo)
 
 int CVlcVideoViewGuiComp::GetFramesCount() const

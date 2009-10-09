@@ -47,10 +47,6 @@ public:
 
 	CFrameSeqVideoControllerComp();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 	// reimplemented (imm::IMediaController)
 	virtual istd::CString GetOpenedMediumUrl() const;
 	virtual bool OpenMediumUrl(const istd::CString& url, bool autoPlay = true);
@@ -60,6 +56,7 @@ public:
 	virtual double GetMediumLength() const;
 	virtual double GetCurrentPosition() const;
 	virtual bool SetCurrentPosition(double position);
+	virtual int GetSupportedFeatures() const;
 
 	// reimplemented (imm::IVideoInfo)
 	virtual int GetFramesCount() const;
@@ -75,9 +72,6 @@ public:
 protected:
 	bool LoadCurrentFrame();
 
-private slots:
-	void OnTimerTick();
-
 private:
 	I_ATTR(istd::CString, m_defaultSequenceDirectoryAttrPtr);
 	I_ATTR(double, m_framesPerSecondAttrPtr);
@@ -88,9 +82,8 @@ private:
 
 	istd::CString m_mediumUrl;
 
-	QTimer m_playTimer;
-
 	iqt::CFileList m_fileList;
+	bool m_isPlaying;
 
 	bool m_isFrameLoaded;
 };

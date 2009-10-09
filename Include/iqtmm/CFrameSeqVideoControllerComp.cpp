@@ -12,27 +12,9 @@ namespace iqtmm
 // public methods
 
 CFrameSeqVideoControllerComp::CFrameSeqVideoControllerComp()
-:	m_currentFrameIndex(0),
+:	m_currentFrameIndex(-1),
 	m_isFrameLoaded(false)
 {
-}
-
-
-// reimplemented (icomp::IComponent)
-
-void CFrameSeqVideoControllerComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	connect(&m_playTimer, SIGNAL(timeout()), this, SLOT(OnTimerTick()));
-}
-
-
-void CFrameSeqVideoControllerComp::OnComponentDestroyed()
-{
-	disconnect(&m_playTimer, SIGNAL(timeout()), this, SLOT(OnTimerTick()));
-
-	BaseClass::OnComponentDestroyed();
 }
 
 
@@ -61,9 +43,7 @@ bool CFrameSeqVideoControllerComp::OpenMediumUrl(const istd::CString& url, bool 
 	
 	m_fileList.Create(iqt::GetQString(m_mediumUrl), 0, 0, fileFilter);
 
-	m_currentFrameIndex = 0;
-
-	m_isFrameLoaded = LoadCurrentFrame();
+	SetCurrentFrame(-1);
 
 	SetPlaying(autoPlay);
 
@@ -81,7 +61,7 @@ void CFrameSeqVideoControllerComp::CloseMedium()
 
 bool CFrameSeqVideoControllerComp::IsPlaying() const
 {
-	return m_playTimer.isActive();
+	return m_isPlaying;
 }
 
 
@@ -89,17 +69,8 @@ bool CFrameSeqVideoControllerComp::SetPlaying(bool state)
 {
 	istd::CChangeNotifier notifier(this, CF_STATUS);
 
-	if (state){
-		int timerIntervall = 40;
-		
-		if (m_framesPerSecondAttrPtr.IsValid()){
-			timerIntervall = 1000 / *m_framesPerSecondAttrPtr;
-		}
-
-		m_playTimer.start(timerIntervall);
-	}
-	else{
-		m_playTimer.stop();
+	if (m_isPlaying != state){
+		m_isPlaying = state;
 	}
 
 	return true;
@@ -121,6 +92,12 @@ double CFrameSeqVideoControllerComp::GetCurrentPosition() const
 bool CFrameSeqVideoControllerComp::SetCurrentPosition(double position)
 {
 	return SetCurrentFrame(position * *m_framesPerSecondAttrPtr + 0.5);
+}
+
+
+int CFrameSeqVideoControllerComp::GetSupportedFeatures() const
+{
+	return SF_SEEK;
 }
 
 
@@ -203,6 +180,18 @@ bool CFrameSeqVideoControllerComp::GrabFrame(iimg::IBitmap& result, int frameInd
 
 bool CFrameSeqVideoControllerComp::LoadCurrentFrame()
 {
+	// reset start frame:
+	if (m_currentFrameIndex < 0){
+		iimg::IRasterImage* imagePtr = dynamic_cast<iimg::IRasterImage*>(m_frameDataCompPtr.GetPtr());
+		if (imagePtr != NULL){
+			istd::CChangeNotifier changePtr(imagePtr);
+
+			imagePtr->ResetImage();
+		}
+
+		return true;
+	}
+
 	if (m_frameLoaderCompPtr.IsValid() && m_frameDataCompPtr.IsValid() && (m_currentFrameIndex < m_fileList.count())){
 		QString currentFile = m_fileList[m_currentFrameIndex];
 
@@ -212,17 +201,6 @@ bool CFrameSeqVideoControllerComp::LoadCurrentFrame()
 	}
 	else{
 		return false;
-	}
-}
-
-
-// private slots
-
-void CFrameSeqVideoControllerComp::OnTimerTick()
-{
-	int framesCount = GetFramesCount();
-	if (m_frameLoaderCompPtr.IsValid() && framesCount > 0){
-		SetCurrentFrame((GetCurrentFrame() + 1) % framesCount);
 	}
 }
 

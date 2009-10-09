@@ -1,6 +1,5 @@
 <RCC>
   <qresource prefix="Icons/" >
-    <file alias="Delete">Resources/Icons/delete_64.png</file>
     <file alias="DirClosed">Resources/Icons/dirclosed-16.png</file>
     <file alias="DirOpen">Resources/Icons/diropen-16.png</file>
     <file alias="Folder">Resources/Icons/folder_64.png</file>
