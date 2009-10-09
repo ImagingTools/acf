@@ -1,17 +1,14 @@
 <RCC>
-    <qresource prefix="/" >
-        <file>Resources/Icons/delete_64.png</file>
-        <file>Resources/Icons/dirclosed-16.png</file>
-        <file>Resources/Icons/diropen-16.png</file>
-        <file>Resources/Icons/folder_64.png</file>
-        <file>Resources/Icons/ok-16.png</file>
-        <file>Resources/Icons/ok_64.png</file>
-        <file>Resources/Icons/player_pause.png</file>
-        <file>Resources/Icons/player_play.png</file>
-        <file>Resources/Icons/player_stop.png</file>
-        <file>Resources/Icons/close_a_128.png</file>
-        <file>Resources/Icons/back_128.png</file>
-        <file>Resources/Icons/Export.png</file>
-        <file>Resources/Icons/Anchor_64.png</file>
-    </qresource>
+  <qresource prefix="Icons/" >
+    <file alias="Delete">Resources/Icons/delete_64.png</file>
+    <file alias="DirClosed">Resources/Icons/dirclosed-16.png</file>
+    <file alias="DirOpen">Resources/Icons/diropen-16.png</file>
+    <file alias="Folder">Resources/Icons/folder_64.png</file>
+    <file alias="Ok">Resources/Icons/ok_64.png</file>
+    <file alias="Invalid">Resources/Icons/close_a_128.png</file>
+    <file alias="Back">Resources/Icons/back_128.png</file>
+    <file alias="Export">Resources/Icons/Export.png</file>
+    <file alias="Anchor">Resources/Icons/Anchor_64.png</file>
+    <file alias="CompositorLogoBig">Resources/Icons/CompositorLogo3d.png</file>
+  </qresource>
 </RCC>

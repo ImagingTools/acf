@@ -331,7 +331,7 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Remove Component"), 
 				tr("Remove"), 
 				tr("Remove the selected component from the registry"),
-				QIcon(":/Resources/Icons/delete_64.png"));
+				QIcon(":/Icons/Delete"));
 	m_renameComponentCommand.SetVisuals(
 				tr("&Rename Component"), 
 				tr("Rename"), 
@@ -348,12 +348,12 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Execute Registry"), 
 				tr("&Execute Registry"), 
 				tr("Start registry execution"),
-				QIcon(":/Resources/Icons/player_play.png"));
+				QIcon(":/Icons/PlayerPlay"));
 	m_abortRegistryCommand.SetVisuals(
 				tr("&Abort Registry"), 
 				tr("&Abort Registry"), 
 				tr("Abort registry execution"),
-				QIcon(":/Resources/Icons/player_stop.png"));
+				QIcon(":/Icons/PlayerStop"));
 	m_addNoteCommand.SetVisuals(
 				tr("&Add Note"), 
 				tr("&Add Note"), 

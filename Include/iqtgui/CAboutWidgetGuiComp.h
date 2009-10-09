@@ -25,7 +25,7 @@ public:
 
 	I_BEGIN_COMPONENT(CAboutWidgetGuiComp);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Applciation info object", true, "ApplicationInfo");
-		I_ASSIGN(m_logoPathAttrPtr, "LogoPath", "Path of bitmap logo", false, ":/Icons/acfLogo");
+		I_ASSIGN(m_logoPathAttrPtr, "LogoPath", "Path of bitmap logo", false, ":/Icons/AcfLogoBig");
 		I_ASSIGN(m_descriptionTextAttrPtr, "DescriptionText", "Optional description text", false, "(C) Copyright 2008 CompanyName\n\nAll rights reserved")
 	I_END_COMPONENT;
 	

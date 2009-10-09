@@ -131,9 +131,6 @@ protected:
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
 
-	// static methods
-	static QIcon GetIcon(const std::string& name);
-
 protected slots:
 	void OnNew();
 	void OnOpen();

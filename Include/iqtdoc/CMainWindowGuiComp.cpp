@@ -676,19 +676,19 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_helpCommand.SetName(iqt::GetCString(tr("&Help")));
 
 	// File commands
-	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), GetIcon("new"));
+	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), QIcon(":/Icons/New"));
 	m_newCommand.setShortcut(tr("Ctrl+N"));
-	m_openCommand.SetVisuals(tr("&Open..."), tr("Open"), tr("Opens document from file"), GetIcon("open"));
+	m_openCommand.SetVisuals(tr("&Open..."), tr("Open"), tr("Opens document from file"), QIcon(":/Icons/Open"));
 	m_openCommand.setShortcut(tr("Ctrl+O"));
-	m_saveCommand.SetVisuals(tr("&Save"), tr("Save"), tr("Saves document to actual working file"), GetIcon("save"));
+	m_saveCommand.SetVisuals(tr("&Save"), tr("Save"), tr("Saves document to actual working file"), QIcon(":/Icons/Save"));
 	m_saveCommand.setShortcut(tr("Ctrl+S"));
 	m_saveAsCommand.SetVisuals(tr("&Save As..."), tr("Save As"), tr("Saves document into selected file"));
 	m_printCommand.setShortcut(tr("Ctrl+P"));
-	m_printCommand.SetVisuals(tr("&Print..."), tr("Print"), tr("Prints current document"), GetIcon("print"));
-	m_quitCommand.SetVisuals(tr("&Quit"), tr("Quit"), tr("Quits this application"), GetIcon("exit"));
-	m_undoCommand.SetVisuals(tr("&Undo"), tr("Undo"), tr("Undo last document changes"), GetIcon("undo"));
+	m_printCommand.SetVisuals(tr("&Print..."), tr("Print"), tr("Prints current document"), QIcon(":/Icons/Print"));
+	m_quitCommand.SetVisuals(tr("&Quit"), tr("Quit"), tr("Quits this application"), QIcon(":/Icons/Exit"));
+	m_undoCommand.SetVisuals(tr("&Undo"), tr("Undo"), tr("Undo last document changes"), QIcon(":/Icons/Undo"));
 	m_undoCommand.setShortcut(tr("Ctrl+Z"));
-	m_redoCommand.SetVisuals(tr("&Redo"), tr("Redo"), tr("Redo last document changes"), GetIcon("redo"));
+	m_redoCommand.SetVisuals(tr("&Redo"), tr("Redo"), tr("Redo last document changes"), QIcon(":/Icons/Redo"));
 	m_redoCommand.setShortcut(tr("Ctrl+Shift+Z"));
 	
 	// View commands
@@ -697,7 +697,7 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_showToolBarsCommand.SetVisuals(tr("&Show Toolbars"), tr("Show Toolbars"), tr("Show/Hide toolbars"));
 
 	// Help commands
-	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), GetIcon("info"));
+	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), QIcon(":/Icons/About"));
 }
 
 
@@ -756,12 +756,6 @@ bool CMainWindowGuiComp::eventFilter(QObject* /*sourcePtr*/, QEvent* eventPtr)
 
 
 // static methods
-
-QIcon CMainWindowGuiComp::GetIcon(const std::string& name)
-{
-	return QIcon((":/Icons/" + name).c_str());
-}
-
 
 // protected slots
 

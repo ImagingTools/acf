@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<QtPck::AboutGui> aboutGuiComp;
 	aboutGuiComp.SetRef("ApplicationInfo", &applicationInfo);
-	aboutGuiComp.SetStringAttr("LogoPath", ":/Icons/acfLogo");
+	aboutGuiComp.SetStringAttr("LogoPath", ":/Icons/CompositorLogoBig");
 	aboutGuiComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::MainWindowGui> mainWindowComp;

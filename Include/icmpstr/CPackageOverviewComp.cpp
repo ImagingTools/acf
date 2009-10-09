@@ -442,10 +442,10 @@ void CPackageOverviewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	m_closedIcon = QIcon(QPixmap(":/Resources/Icons/dirclosed-16.png"));
-	m_openIcon = QIcon(QPixmap(":/Resources/Icons/diropen-16.png"));
-	m_validIcon = QIcon(QPixmap(":/Resources/Icons/ok-16.png"));
-	m_invalidIcon = QIcon(QPixmap(":/Resources/Icons/close_a_128.png"));
+	m_closedIcon = QIcon(QPixmap(":/Icons/DirClosed"));
+	m_openIcon = QIcon(QPixmap(":/Icons/DirOpen"));
+	m_validIcon = QIcon(QPixmap(":/Icons/Ok"));
+	m_invalidIcon = QIcon(QPixmap(":/Icons/Invalid"));
 
 	// set up the tree view:
 	PackagesList->setColumnCount(2);

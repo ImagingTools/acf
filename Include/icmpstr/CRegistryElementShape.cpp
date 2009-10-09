@@ -86,7 +86,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 					int(minSideSize * 0.1),
 					int(minSideSize * 0.3),
 					int(minSideSize * 0.3),
-					QIcon(":/Resources/Icons/Export.png").pixmap(128, 128));
+					QIcon(":/Icons/Export").pixmap(128, 128));
 	}
 
 	mainRect.adjust(10, 10, 0, 0);

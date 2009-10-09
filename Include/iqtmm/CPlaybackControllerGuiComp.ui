@@ -23,7 +23,7 @@
      </property>
      <property name="icon" >
       <iconset resource="../iqtgui/iqtgui.qrc" >
-       <normaloff>:/Icons/play</normaloff>:/Icons/play</iconset>
+       <normaloff>:/Icons/PlayerPlay</normaloff>:/Icons/PlayerPlay</iconset>
      </property>
      <property name="iconSize" >
       <size>

@@ -94,8 +94,8 @@ void CTextEditor::SetText(const QString& text)
 
 void CTextEditor::OnRetranslate()
 {
-	m_lowercaseCommand.SetVisuals(tr("To &Lowercase"), tr("Lowercase"), tr("Convert selected block to lowercase characters"), QIcon(":/Icons/down"));
-	m_uppercaseCommand.SetVisuals(tr("To &Uppercase"), tr("Uppercase"), tr("Convert selected block to uppercase characters"), QIcon(":/Icons/up"));
+	m_lowercaseCommand.SetVisuals(tr("To &Lowercase"), tr("Lowercase"), tr("Convert selected block to lowercase characters"), QIcon(":/Icons/Down"));
+	m_uppercaseCommand.SetVisuals(tr("To &Uppercase"), tr("Uppercase"), tr("Convert selected block to uppercase characters"), QIcon(":/Icons/Up"));
 	m_languageCommand.SetVisuals(tr("&Language"), tr("Language"), tr("Select language for syntax highlighting"), QIcon(":/Icons/"));
 	m_useIdentGuideCommand.SetVisuals(tr("Show &Indentation Guides"), tr("Show Indentation Guides"), tr("Show indentation guides"));
 	m_useFoldingCommand.SetVisuals(tr("Use &Folding"), tr("Use Folding"), tr("Use folding"));

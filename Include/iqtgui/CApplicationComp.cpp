@@ -73,7 +73,7 @@ bool CApplicationComp::InitializeApplication(int argc, char** argv)
 			icon = QIcon(iqt::GetQString(*m_iconPathAttrPtr));
 		}
 		else{	
-			icon.addFile(":/Icons/acfLogoSmall");
+			icon.addFile(":/Icons/AcfLogoSmall");
 			icon.addFile(":/Icons/acfLogo3d");
 		}
 

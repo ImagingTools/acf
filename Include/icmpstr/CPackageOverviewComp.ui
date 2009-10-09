@@ -78,7 +78,7 @@
            </property>
            <property name="icon">
             <iconset resource="icmpstr.qrc">
-             <normaloff>:/Resources/Icons/back_128.png</normaloff>:/Resources/Icons/back_128.png</iconset>
+             <normaloff>:/Icons/Back</normaloff>:/Icons/Back</iconset>
            </property>
           </widget>
          </item>

@@ -272,7 +272,7 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 						int(minSideSize * 0.6),
 						int(minSideSize * 0.3),
 						int(minSideSize * 0.3),
-						QIcon(":/Resources/Icons/Anchor_64.png").pixmap(128, 128));
+						QIcon(":/Icons/Anchor").pixmap(128, 128));
 		}
 	}
 
@@ -282,7 +282,7 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 					int(minSideSize * 0.1),
 					int(minSideSize * 0.3),
 					int(minSideSize * 0.3),
-					QIcon(":/Resources/Icons/Export.png").pixmap(128, 128));
+					QIcon(":/Icons/Export").pixmap(128, 128));
 	}
 
 	mainRect.adjust(10, 10, 0, 0);

@@ -70,7 +70,7 @@ QToolButton {
         </property>
         <property name="icon" >
          <iconset resource="../iqtgui/iqtgui.qrc" >
-          <normaloff>:/Icons/hand</normaloff>:/Icons/hand</iconset>
+          <normaloff>:/Icons/ZoomReset</normaloff>:/Icons/ZoomReset</iconset>
         </property>
         <property name="iconSize" >
          <size>
@@ -90,7 +90,7 @@ QToolButton {
         </property>
         <property name="icon" >
          <iconset resource="../iqtgui/iqtgui.qrc" >
-          <normaloff>:/Icons/zoomin</normaloff>:/Icons/zoomin</iconset>
+          <normaloff>:/Icons/ZoomIn</normaloff>:/Icons/ZoomIn</iconset>
         </property>
         <property name="iconSize" >
          <size>
@@ -110,7 +110,7 @@ QToolButton {
         </property>
         <property name="icon" >
          <iconset resource="../iqtgui/iqtgui.qrc" >
-          <normaloff>:/Icons/zoomout</normaloff>:/Icons/zoomout</iconset>
+          <normaloff>:/Icons/ZoomOut</normaloff>:/Icons/ZoomOut</iconset>
         </property>
         <property name="iconSize" >
          <size>

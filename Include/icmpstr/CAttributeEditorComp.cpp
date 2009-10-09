@@ -277,7 +277,7 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 
 	ComponentsTree->addTopLevelItem(componentRootPtr);
 
-	MainTab->setTabIcon(TI_ATTRIBUTES, isCorrect? QIcon(): QIcon(":/Resources/Icons/close_a_128.png"));
+	MainTab->setTabIcon(TI_ATTRIBUTES, isCorrect? QIcon(): QIcon(":/Icons/Invalid"));
 
 	UpdateExportIcon();
 }
@@ -428,7 +428,7 @@ bool CAttributeEditorComp::SetAttributeToItems(
 
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
 	if ((attributeInfoPtr != NULL) && !attributeInfoPtr->exportId.empty()){
-		attributeItem.setIcon(NameColumn, QIcon(":/Resources/Icons/Export.png"));
+		attributeItem.setIcon(NameColumn, QIcon(":/Icons/Export"));
 		if (hasExportPtr != NULL){
 			*hasExportPtr = true;
 		}
@@ -710,7 +710,7 @@ void CAttributeEditorComp::UpdateExportIcon()
 
 				icomp::IRegistry::ExportedInterfacesMap::const_iterator foundExportIter = interfacesMap.find(interfaceInfo);
 				if (foundExportIter != interfacesMap.end()){
-					interfacesIcon = QIcon(":/Resources/Icons/Export.png");
+					interfacesIcon = QIcon(":/Icons/Export");
 
 					break;
 				}
@@ -727,7 +727,7 @@ void CAttributeEditorComp::UpdateExportIcon()
 				std::string restId;
 				icomp::CInterfaceManipBase::SplitId(componentIter->second, componentId, restId);
 				if (componentId == elementName){
-					componentsIcon = QIcon(":/Resources/Icons/Export.png");
+					componentsIcon = QIcon(":/Icons/Export");
 
 					break;
 				}

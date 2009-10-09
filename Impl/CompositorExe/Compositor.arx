@@ -151,7 +151,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                :/Icons/compositorLogo3d
+                :/Icons/CompositorLogoBig
               </Value>
             </Data>
           </AttributeInfo>
