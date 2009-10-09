@@ -130,7 +130,7 @@ QToolButton {
         </property>
         <property name="icon" >
          <iconset resource="../iqtgui/iqtgui.qrc" >
-          <normaloff>:/Icons/undo</normaloff>:/Icons/undo</iconset>
+          <normaloff>:/Icons/undo</normaloff>:/Icons/RotateLeft</iconset>
         </property>
         <property name="iconSize" >
          <size>
@@ -156,7 +156,7 @@ QToolButton {
         </property>
         <property name="icon" >
          <iconset resource="../iqtgui/iqtgui.qrc" >
-          <normaloff>:/Icons/redo</normaloff>:/Icons/redo</iconset>
+          <normaloff>:/Icons/redo</normaloff>:/Icons/RotateRight</iconset>
         </property>
         <property name="iconSize" >
          <size>
