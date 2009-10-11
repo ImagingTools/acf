@@ -116,7 +116,9 @@ void CPlaybackControllerGuiComp::OnTimerTick()
 	if (objectPtr != NULL){
 		int framesCount = objectPtr->GetFramesCount();
 		if (framesCount > 0){
-			objectPtr->SetCurrentFrame((objectPtr->GetCurrentFrame() + 1) % framesCount);
+			int currentFrameIndex = objectPtr->GetCurrentFrame();
+			I_ASSERT(currentFrameIndex < framesCount);
+			objectPtr->SetCurrentFrame((currentFrameIndex + 1) % framesCount);
 		}
 	}
 }
