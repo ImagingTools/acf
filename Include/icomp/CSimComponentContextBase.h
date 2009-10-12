@@ -13,7 +13,7 @@
 #include "icomp/IComponentContext.h"
 #include "icomp/IComponentStaticInfo.h"
 #include "icomp/CRegistryElement.h"
-#include "icomp/TSingleAttribute.h"
+#include "icomp/TAttribute.h"
 #include "icomp/TMultiAttribute.h"
 
 
@@ -76,9 +76,9 @@ public:
 	template <class Attribute>
 	bool SetSingleAttr(const std::string& attributeId, const Attribute& attribute)
 	{
-		I_ASSERT(IsAttributeTypeCorrect<TSingleAttribute<Attribute> >(attributeId));
+		I_ASSERT(IsAttributeTypeCorrect<TAttribute<Attribute> >(attributeId));
 
-		return SetAttr(attributeId, new TSingleAttribute<Attribute>(attribute));
+		return SetAttr(attributeId, new TAttribute<Attribute>(attribute));
 	}
 
 	/**

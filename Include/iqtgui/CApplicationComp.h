@@ -4,7 +4,7 @@
 
 #include "ibase/IApplicationInfo.h"
 
-#include "icomp/TSingleAttribute.h"
+#include "icomp/TAttribute.h"
 #include "icomp/CComponentBase.h"
 
 #include "iqtgui/IGuiObject.h"

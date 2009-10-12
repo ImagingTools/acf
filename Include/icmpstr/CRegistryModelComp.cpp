@@ -107,7 +107,7 @@ int CRegistryModelComp::CheckAttributeConsistency(const icomp::IRegistryElement&
 			}
 		}
 
-		const icomp::TSingleAttribute<std::string>* idPtr = dynamic_cast<const icomp::TSingleAttribute<std::string>*>(attributeInfoPtr->attributePtr.GetPtr());
+		const icomp::TAttribute<std::string>* idPtr = dynamic_cast<const icomp::TAttribute<std::string>*>(attributeInfoPtr->attributePtr.GetPtr());
 		if (idPtr != NULL){		
 			const icomp::CReferenceAttribute* referencePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributeInfoPtr->attributePtr.GetPtr());
 			if ((referencePtr != NULL) && (attrType != istd::CClassInfo::GetInfo<icomp::CReferenceAttribute>())){
@@ -148,39 +148,6 @@ void CRegistryModelComp::SetComponentPosition(const std::string& componentName, 
 		istd::CChangeNotifier changePtr(this, CF_POSITION);
 
 		m_elementsPositionMap[componentName]  = position;
-	}
-}
-
-
-istd::CString CRegistryModelComp::GetComponentNote(const std::string& componentName) const
-{
-	static istd::CString emptyNote;
-
-	ElementsNoteMap::const_iterator noteIter = m_elementsNoteMap.find(componentName);
-	if (noteIter != m_elementsNoteMap.end()){
-		return noteIter->second;
-	}
-
-	return emptyNote;
-}
-
-
-void CRegistryModelComp::SetComponentNote(const std::string& componentName, const istd::CString& componentNote)
-{	
-	if (componentNote != GetComponentNote(componentName)){
-		istd::CChangeNotifier changePtr(this, CF_NOTE);
-
-		if (componentNote.IsEmpty()){
-			ElementsNoteMap::iterator noteIter = m_elementsNoteMap.find(componentName);
-			if (noteIter != m_elementsNoteMap.end()){
-				istd::CChangeNotifier changePtr(this, CF_NOTE);
-
-				m_elementsNoteMap.erase(noteIter);
-			}
-		}
-		else{
-			m_elementsNoteMap[componentName]  = componentNote;
-		}
 	}
 }
 
@@ -244,18 +211,6 @@ bool CRegistryModelComp::SerializeComponentPosition(iser::IArchive& archive, std
 	retVal = retVal && archive.BeginTag(positionXTag);
 	retVal = retVal && archive.Process(position[1]);
 	retVal = retVal && archive.EndTag(positionXTag);
-
-	return retVal;
-}
-
-
-bool CRegistryModelComp::SerializeNote(iser::IArchive& archive, std::string& /*componentRole*/, istd::CString& note)
-{
-	static iser::CArchiveTag noticeTag("ComponentNote", "Note for this component");
-	
-	bool retVal = archive.BeginTag(noticeTag);
-	retVal = retVal && archive.Process(note);
-	retVal = retVal && archive.EndTag(noticeTag);
 
 	return retVal;
 }

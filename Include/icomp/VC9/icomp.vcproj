@@ -405,7 +405,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TMultiAttributePtr.h"
+				RelativePath="..\TMultiAttributeMember.h"
 				>
 			</File>
 			<File
@@ -413,11 +413,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TMultiReferencePtr.h"
+				RelativePath="..\TMultiReferenceMember.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TReferencePtr.h"
+				RelativePath="..\TReferenceMember.h"
 				>
 			</File>
 			<File
@@ -433,11 +433,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TSingleAttribute.h"
+				RelativePath="..\TAttribute.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TSingleAttributePtr.h"
+				RelativePath="..\TAttributeMember.h"
 				>
 			</File>
 		</Filter>

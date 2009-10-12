@@ -121,7 +121,7 @@
               AllowWidgetResize
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               AllowWidgetResize
@@ -137,7 +137,7 @@
               FitMode
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               FitMode
@@ -153,7 +153,7 @@
               IsotropyFactor
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;double&gt;
+              icomp::TAttribute&lt;double&gt;
             </Type>
             <ExportId>
               IsotropyFactor
@@ -185,7 +185,7 @@
               SceneId
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               SceneId
@@ -201,7 +201,7 @@
               UseAntialiasing
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;bool&gt;
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               UseAntialiasing

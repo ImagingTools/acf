@@ -89,7 +89,7 @@
               DoxygenDirectory
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -142,7 +142,7 @@
               DockArea
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;int&gt;
+              icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
               
@@ -161,7 +161,7 @@
               DockTitle
             </Id>
             <Type>
-              icomp::TSingleAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               

@@ -1,5 +1,5 @@
-#ifndef icomp_TSingleAttributePtr_included
-#define icomp_TSingleAttributePtr_included
+#ifndef icomp_TAttributeMember_included
+#define icomp_TAttributeMember_included
 
 
 #include "icomp/IComponentContext.h"
@@ -16,13 +16,13 @@ namespace icomp
 	Don't use direct this class, use macros I_ATTR and I_ASSIGN instead.
 */
 template <typename Attribute>
-class TSingleAttributePtr
+class TAttributeMember
 {
 public:
 	typedef Attribute AttributeType;
 	typedef void InterfaceType;
 
-	TSingleAttributePtr();
+	TAttributeMember();
 
 	/**
 		Initialize this attribute.
@@ -66,14 +66,14 @@ private:
 // public methods
 
 template <typename Attribute>
-TSingleAttributePtr<Attribute>::TSingleAttributePtr()
+TAttributeMember<Attribute>::TAttributeMember()
 :	m_attributePtr(NULL)
 {
 }
 
 
 template <typename Attribute>
-bool TSingleAttributePtr<Attribute>::Init(
+bool TAttributeMember<Attribute>::Init(
 			const IComponent* ownerPtr,
 			const IRealAttributeStaticInfo& staticInfo,
 			const IComponent** definitionComponentPtr)
@@ -113,28 +113,28 @@ bool TSingleAttributePtr<Attribute>::Init(
 
 
 template <typename Attribute>
-bool TSingleAttributePtr<Attribute>::IsValid() const
+bool TAttributeMember<Attribute>::IsValid() const
 {
 	return (m_attributePtr != NULL);
 }
 
 
 template <typename Attribute>
-const Attribute* TSingleAttributePtr<Attribute>::GetAttributePtr() const
+const Attribute* TAttributeMember<Attribute>::GetAttributePtr() const
 {
 	return m_attributePtr;
 }
 
 
 template <typename Attribute>
-const Attribute* TSingleAttributePtr<Attribute>::operator->() const
+const Attribute* TAttributeMember<Attribute>::operator->() const
 {
 	return m_attributePtr;
 }
 
 
 template <typename Attribute>
-const typename Attribute::ValueType& TSingleAttributePtr<Attribute>::operator*() const
+const typename Attribute::ValueType& TAttributeMember<Attribute>::operator*() const
 {
 	I_ASSERT(m_attributePtr != NULL);	// operator* was called for invalid object, or no IsValid() check was called.
 
@@ -145,7 +145,7 @@ const typename Attribute::ValueType& TSingleAttributePtr<Attribute>::operator*()
 // protected methods
 
 template <typename Attribute>
-void TSingleAttributePtr<Attribute>::SetAttribute(const Attribute* attributePtr)
+void TAttributeMember<Attribute>::SetAttribute(const Attribute* attributePtr)
 {
 	m_attributePtr = attributePtr;
 }
@@ -154,6 +154,6 @@ void TSingleAttributePtr<Attribute>::SetAttribute(const Attribute* attributePtr)
 }//namespace icomp
 
 
-#endif // !icomp_TSingleAttributePtr_included
+#endif // !icomp_TAttributeMember_included
 
 

@@ -6,7 +6,9 @@
 #include "icomp/CPackageStaticInfo.h"
 #include "icomp/CComponentBase.h"
 
+#include "ibase/IObject.h"
 #include "ibase/TLoggerCompWrap.h"
+#include "ibase/TFactorisableContainer.h"
 
 #include "icmpstr/IRegistryEditController.h"
 #include "icmpstr/CGeometricalRegistryElement.h"
@@ -19,6 +21,7 @@ namespace icmpstr
 class CRegistryModelComp:
 			public ibase::CLoggerComponentBase,
 			public icomp::CRegistry,
+			public ibase::TFactorisableContainer<ibase::IObject>,
 			virtual public IRegistryEditController
 {
 public:
@@ -57,8 +60,6 @@ public:
 	// reimplemented (icmpstr::IRegistryEditController)
 	virtual i2d::CVector2d GetComponentPosition(const std::string& componentName) const;
 	virtual void SetComponentPosition(const std::string& componentName, const i2d::CVector2d& point);
-	virtual istd::CString GetComponentNote(const std::string& componentName) const;
-	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote);
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -76,7 +77,6 @@ protected:
 	typedef imod::TModelWrap<istd::TChangeDelegator<CGeometricalRegistryElement> > Element;
 
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
-	bool SerializeNote(iser::IArchive& archive, std::string& componentName, istd::CString& note);
 
 	// reimplemented (icomp::CRegistry)
 	virtual icomp::IRegistryElement* CreateRegistryElement(const icomp::CComponentAddress& address) const;
@@ -85,10 +85,7 @@ private:
 	I_REF(icomp::IComponentStaticInfo, m_staticInfoCompPtr);
 
 	typedef std::map<std::string, i2d::CVector2d> ElementsPositionMap;
-	typedef std::map<std::string, istd::CString> ElementsNoteMap;
-
 	ElementsPositionMap m_elementsPositionMap;
-	ElementsNoteMap m_elementsNoteMap;
 };
 
 

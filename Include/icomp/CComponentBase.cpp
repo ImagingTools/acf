@@ -89,6 +89,12 @@ IComponent* CComponentBase::GetSubcomponent(const std::string& /*componentId*/) 
 }
 
 
+const IComponentContext* CComponentBase::GetSubcomponentContext(const std::string& /*componentId*/) const
+{
+	return NULL;	// normal component has no subcomponents and also their contexts
+}
+
+
 IComponent* CComponentBase::CreateSubcomponent(const std::string& /*componentId*/) const
 {
 	return NULL;	// normal component cannot create subcomponents

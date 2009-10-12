@@ -14,7 +14,7 @@
 namespace ibase
 {
 
-	
+
 /**
 	Specific container implementation for factorisable items. 
 
@@ -94,7 +94,6 @@ InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const std::st
 
 	return elementPtr;
 }
-
 
 
 template <class InterfaceClass>
@@ -185,7 +184,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 				return false;
 			}
 		}
-				
+
 		ItemClass& containerItem = BaseClass::GetAt(index);
 
 		retVal = retVal && archive.BeginTag(itemTag);
@@ -226,7 +225,7 @@ InterfaceClass* TFactorisableContainer<InterfaceClass>::CreateElement(const std:
 
 
 template <class InterfaceClass>
-void TFactorisableContainer<InterfaceClass>::OnElementCreated(InterfaceClass* elementPtr)
+void TFactorisableContainer<InterfaceClass>::OnElementCreated(InterfaceClass* /*elementPtr*/)
 {
 }
 

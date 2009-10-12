@@ -7,12 +7,12 @@
 #include "icomp/IComponent.h"
 #include "icomp/IComponentStaticInfo.h"
 #include "icomp/TInterfaceRegistrator.h"
-#include "icomp/TSingleAttribute.h"
+#include "icomp/TAttribute.h"
 #include "icomp/TMultiAttribute.h"
-#include "icomp/TSingleAttributePtr.h"
-#include "icomp/TMultiAttributePtr.h"
-#include "icomp/TReferencePtr.h"
-#include "icomp/TMultiReferencePtr.h"
+#include "icomp/TAttributeMember.h"
+#include "icomp/TMultiAttributeMember.h"
+#include "icomp/TReferenceMember.h"
+#include "icomp/TMultiReferenceMember.h"
 #include "icomp/TFactoryMember.h"
 #include "icomp/TMultiFactoryMember.h"
 #include "icomp/TAttributeStaticInfo.h"
@@ -48,6 +48,7 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
 
@@ -128,23 +129,23 @@ inline bool CComponentBase::IsComponentActive() const
 	Declare user type attribute member.
 */
 #define I_USER_ATTR(attrType, member)\
-	typedef icomp::TSingleAttributePtr< attrType > member##_Type;\
-	typedef icomp::TSingleAttributePtr< attrType >::AttributeType member##_AttrType;\
-	icomp::TSingleAttributePtr< attrType > member;
+	typedef icomp::TAttributeMember< attrType > member##_Type;\
+	typedef icomp::TAttributeMember< attrType >::AttributeType member##_AttrType;\
+	icomp::TAttributeMember< attrType > member;
 
 /**
 	Declare simple single attribute member.
 */
 #define I_ATTR(attrType, member)\
-	I_USER_ATTR(icomp::TSingleAttribute< attrType >, member)
+	I_USER_ATTR(icomp::TAttribute< attrType >, member)
 
 /**
 	Declare multiple user type attribute member.
 */
 #define I_USER_MULTIATTR(attrType, member)\
-	typedef icomp::TMultiAttributePtr< attrType > member##_Type;\
-	typedef icomp::TMultiAttributePtr< attrType >::AttributeType member##_AttrType;\
-	icomp::TMultiAttributePtr< attrType > member;
+	typedef icomp::TMultiAttributeMember< attrType > member##_Type;\
+	typedef icomp::TMultiAttributeMember< attrType >::AttributeType member##_AttrType;\
+	icomp::TMultiAttributeMember< attrType > member;
 
 /**
 	Declare simple multiple attribute member.
@@ -156,34 +157,34 @@ inline bool CComponentBase::IsComponentActive() const
 	Declare single reference to another component.
 */
 #define I_REF(interfaceType, member)\
-	typedef icomp::TReferencePtr<interfaceType> member##_Type;\
-	typedef icomp::TReferencePtr<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TReferencePtr<interfaceType> member;
+	typedef icomp::TReferenceMember<interfaceType> member##_Type;\
+	typedef icomp::TReferenceMember<interfaceType>::AttributeType member##_AttrType;\
+	icomp::TReferenceMember<interfaceType> member;
 
 /**
 	Declare single reference to another component with \c interfaceType as template argument.
 */
 #define I_TREF(interfaceType, member)\
-	typedef icomp::TReferencePtr<interfaceType> member##_Type;\
-	typedef typename icomp::TReferencePtr<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TReferencePtr<interfaceType> member;
+	typedef icomp::TReferenceMember<interfaceType> member##_Type;\
+	typedef typename icomp::TReferenceMember<interfaceType>::AttributeType member##_AttrType;\
+	icomp::TReferenceMember<interfaceType> member;
 
 /**
 	Declare multiple reference to another component with \c interfaceType as template argument.
 */
 #define I_TMULTIREF(interfaceType, member)\
-	typedef icomp::TMultiReferencePtr<interfaceType> member##_Type;\
-	typedef typename icomp::TMultiReferencePtr<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TMultiReferencePtr<interfaceType> member;
+	typedef icomp::TMultiReferenceMember<interfaceType> member##_Type;\
+	typedef typename icomp::TMultiReferenceMember<interfaceType>::AttributeType member##_AttrType;\
+	icomp::TMultiReferenceMember<interfaceType> member;
 
 
 /**
 	Declare multiple reference to another component.
 */
 #define I_MULTIREF(interfaceType, member)\
-	typedef icomp::TMultiReferencePtr<interfaceType> member##_Type;\
-	typedef icomp::TMultiReferencePtr<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TMultiReferencePtr<interfaceType> member;
+	typedef icomp::TMultiReferenceMember<interfaceType> member##_Type;\
+	typedef icomp::TMultiReferenceMember<interfaceType>::AttributeType member##_AttrType;\
+	icomp::TMultiReferenceMember<interfaceType> member;
 
 /**
 	Declare single factory of components.

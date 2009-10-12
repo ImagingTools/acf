@@ -1,5 +1,5 @@
-#ifndef icomp_TMultiAttributePtr_included
-#define icomp_TMultiAttributePtr_included
+#ifndef icomp_TMultiAttributeMember_included
+#define icomp_TMultiAttributeMember_included
 
 
 #include "icomp/IComponentContext.h"
@@ -15,13 +15,13 @@ namespace icomp
 	Don't use direct this class, use macros \c I_ATTR and \c I_ASSIGN_MULTI_* instead.
 */
 template <typename Attribute>
-class TMultiAttributePtr
+class TMultiAttributeMember
 {
 public:
 	typedef Attribute AttributeType;
 	typedef void InterfaceType;
 
-	TMultiAttributePtr();
+	TMultiAttributeMember();
 
 	bool Init(	const IComponent* ownerPtr,
 				const IRealAttributeStaticInfo& staticInfo,
@@ -50,14 +50,14 @@ private:
 // public methods
 
 template <typename Attribute>
-TMultiAttributePtr<Attribute>::TMultiAttributePtr()
+TMultiAttributeMember<Attribute>::TMultiAttributeMember()
 :	m_attributePtr(NULL)
 {
 }
 
 
 template <typename Attribute>
-bool TMultiAttributePtr<Attribute>::Init(
+bool TMultiAttributeMember<Attribute>::Init(
 			const IComponent* ownerPtr,
 			const IRealAttributeStaticInfo& staticInfo,
 			const IComponent** definitionComponentPtr)
@@ -97,14 +97,14 @@ bool TMultiAttributePtr<Attribute>::Init(
 
 
 template <typename Attribute>
-bool TMultiAttributePtr<Attribute>::IsValid() const
+bool TMultiAttributeMember<Attribute>::IsValid() const
 {
 	return (m_attributePtr != NULL);
 }
 
 
 template <typename Attribute>
-int TMultiAttributePtr<Attribute>::GetCount() const
+int TMultiAttributeMember<Attribute>::GetCount() const
 {
 	if (m_attributePtr != NULL){
 		return m_attributePtr->GetValuesCount();
@@ -116,7 +116,7 @@ int TMultiAttributePtr<Attribute>::GetCount() const
 
 
 template <typename Attribute>
-const typename Attribute::ValueType& TMultiAttributePtr<Attribute>::operator[](int index) const
+const typename Attribute::ValueType& TMultiAttributeMember<Attribute>::operator[](int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetCount());
@@ -130,6 +130,6 @@ const typename Attribute::ValueType& TMultiAttributePtr<Attribute>::operator[](i
 }//namespace icomp
 
 
-#endif // !icomp_TMultiAttributePtr_included
+#endif // !icomp_TMultiAttributeMember_included
 
 

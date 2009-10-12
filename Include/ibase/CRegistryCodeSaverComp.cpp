@@ -411,7 +411,7 @@ bool CRegistryCodeSaverComp::WriteIncludes(
 	stream << "#include \"" << className << ".h\"" << std::endl;
 	stream << std::endl << std::endl;
 	stream << "// ACF includes" << std::endl;
-	stream << "#include \"icomp/TSingleAttribute.h\"" << std::endl;
+	stream << "#include \"icomp/TAttribute.h\"" << std::endl;
 	stream << "#include \"icomp/TMultiAttribute.h\"" << std::endl;
 	stream << "#include \"icomp/CRegistryElement.h\"" << std::endl;
 	stream << "#include \"icomp/CCompositePackageStaticInfo.h\"" << std::endl;
@@ -1087,10 +1087,10 @@ bool CRegistryCodeSaverComp::GetSingleAttributeValue(
 		return true;
 	}
 
-	const icomp::TSingleAttribute<std::string>* idPtr = dynamic_cast<const icomp::TSingleAttribute<std::string>*>(&attribute);
+	const icomp::TAttribute<std::string>* idPtr = dynamic_cast<const icomp::TAttribute<std::string>*>(&attribute);
 	if (idPtr != NULL){		
 		valueString = istd::CString("\"" + idPtr->GetValue() + "\"").ToString();
-		typeName = "icomp::TSingleAttribute<std::string>";
+		typeName = "icomp::TAttribute<std::string>";
 
 		return true;
 	}

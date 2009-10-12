@@ -580,7 +580,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		return true;
 	}
 
-	const icomp::TSingleAttribute<std::string>* idPtr = dynamic_cast<const icomp::TSingleAttribute<std::string>*>(&attribute);
+	const icomp::TAttribute<std::string>* idPtr = dynamic_cast<const icomp::TAttribute<std::string>*>(&attribute);
 	if (idPtr != NULL){		
 		const istd::CClassInfo& interfaceInfo = staticInfo.GetRelatedInterfaceType();
 		QStringList availableComponents = GetCompatibleComponents(interfaceInfo);

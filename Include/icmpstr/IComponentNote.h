@@ -2,8 +2,7 @@
 #define icmpstr_IComponentNote_included
 
 
-#include "iser/ISerializable.h"
-
+#include "ibase/IObject.h"
 
 #include "i2d/CVector2d.h"
 
@@ -16,11 +15,13 @@ namespace icmpstr
 {
 
 
-class IComponentNote: virtual public iser::ISerializable
+class IComponentNote: virtual public ibase::IObject
 {
 public:
 	virtual istd::CString GetText() const = 0;
+	virtual void SetText(const istd::CString& noteText) = 0;
 	virtual i2d::CVector2d GetPosition() const = 0;
+	virtual void SetPosition(const i2d::CVector2d& position) = 0;
 };
 
 

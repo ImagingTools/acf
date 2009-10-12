@@ -5,7 +5,7 @@
 // STL includes
 #include <string>
 
-#include "icomp/TSingleAttribute.h"
+#include "icomp/TAttribute.h"
 
 
 namespace icomp{
@@ -14,10 +14,10 @@ namespace icomp{
 /**
 	Special attribute used to store referenced component ID.
 */
-class CReferenceAttribute: public TSingleAttribute<std::string>
+class CReferenceAttribute: public TAttribute<std::string>
 {
 public:
-	typedef TSingleAttribute<std::string> BaseClass;
+	typedef TAttribute<std::string> BaseClass;
 
 	CReferenceAttribute(){}
 	CReferenceAttribute(const CReferenceAttribute& attribute):BaseClass(attribute){}

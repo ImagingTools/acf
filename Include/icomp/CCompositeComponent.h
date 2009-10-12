@@ -49,6 +49,7 @@ public:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
 
@@ -60,13 +61,13 @@ protected:
 		Create information objects and subcomponent.
 		\param	componentId		ID of subcomponent.
 		\param	subContextPtr	pointer to subcomponent context will be set to new context object if needed.
-		\param	subComponentPtr	pointer to subcomponent will be set to new component object.
+		\param	subComponentPtr	optional pointer to subcomponent will be set to new component object.
 		\param	isOwned			true, if created component will be owned by this component.
 	*/
-	bool CreateSubcomponentInfo(
+	void CreateSubcomponentInfo(
 				const std::string& componentId,
 				ContextPtr& subContextPtr,
-				ComponentPtr& subComponentPtr,
+				ComponentPtr* subComponentPtr,
 				bool isOwned) const;
 
 	bool EnsureAutoInitComponentsCreated() const;

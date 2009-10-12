@@ -5,7 +5,7 @@
 #include "istd/TDelPtr.h"
 
 #include "icomp/IComponentContext.h"
-#include "icomp/TSingleAttributePtr.h"
+#include "icomp/TAttributeMember.h"
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CFactoryAttribute.h"
 
@@ -19,10 +19,10 @@ namespace icomp
 	Don't use direct this class, use macros \c I_FACT and \c I_ASSIGN instead.
 */
 template <class Interface>
-class TFactoryMember: public TSingleAttributePtr<CFactoryAttribute>, public CInterfaceManipBase
+class TFactoryMember: public TAttributeMember<CFactoryAttribute>, public CInterfaceManipBase
 {
 public:
-	typedef TSingleAttributePtr<CFactoryAttribute> BaseClass;
+	typedef TAttributeMember<CFactoryAttribute> BaseClass;
 	typedef CInterfaceManipBase BaseClass2;
 	typedef Interface InterfaceType;
 

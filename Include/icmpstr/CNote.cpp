@@ -12,18 +12,6 @@ namespace icmpstr
 
 // public methods
 
-void CNote::SetText(const istd::CString& noteText)
-{
-	m_noteText = noteText;
-}
-
-
-void CNote::SetPosition(const i2d::CVector2d& position)
-{
-	m_position = position;
-}
-
-
 // reimplemented (IComponentNote)
 
 istd::CString CNote::GetText() const
@@ -32,9 +20,29 @@ istd::CString CNote::GetText() const
 }
 
 
+void CNote::SetText(const istd::CString& noteText)
+{
+	if (noteText != m_noteText){
+		istd::CChangeNotifier notifier(this);
+
+		m_noteText = noteText;
+	}
+}
+
+
 i2d::CVector2d CNote::GetPosition() const
 {
 	return m_position;
+}
+
+
+void CNote::SetPosition(const i2d::CVector2d& position)
+{
+	if (position != m_position){
+		istd::CChangeNotifier notifier(this);
+
+		m_position = position;
+	}
 }
 
 

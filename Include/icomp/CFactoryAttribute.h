@@ -5,7 +5,7 @@
 // STL includes
 #include <string>
 
-#include "icomp/TSingleAttribute.h"
+#include "icomp/TAttribute.h"
 
 
 namespace icomp{
@@ -14,10 +14,10 @@ namespace icomp{
 /**
 	Special attribute used to store referenced component ID.
 */
-class CFactoryAttribute: public TSingleAttribute<std::string>
+class CFactoryAttribute: public TAttribute<std::string>
 {
 public:
-	typedef TSingleAttribute<std::string> BaseClass;
+	typedef TAttribute<std::string> BaseClass;
 
 	CFactoryAttribute(){}
 	CFactoryAttribute(const CFactoryAttribute& attribute):BaseClass(attribute){}

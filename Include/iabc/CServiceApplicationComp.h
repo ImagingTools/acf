@@ -14,7 +14,7 @@
 #include "ibase/IApplication.h"
 #include "ibase/TLoggerCompWrap.h"
 
-#include "icomp/TSingleAttribute.h"
+#include "icomp/TAttribute.h"
 #include "icomp/CComponentBase.h"
 
 

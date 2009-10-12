@@ -28,15 +28,6 @@ public:
 		Set the view position for the component \c componentName.
 	*/
 	virtual void SetComponentPosition(const std::string& componentName, const i2d::CVector2d& position) = 0;
-
-	/**
-		Get note text.
-	*/
-	virtual istd::CString GetComponentNote(const std::string& componentName) const = 0;
-	/**
-		Set note text.
-	*/
-	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote) = 0;
 };
 
 

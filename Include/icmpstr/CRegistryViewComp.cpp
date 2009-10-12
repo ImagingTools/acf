@@ -543,13 +543,16 @@ void CRegistryViewComp::OnRenameComponent()
 								}
 
 								iser::ISerializable* attributePtr = attrInfoPtr->attributePtr.GetPtr();
-								icomp::TSingleAttribute<std::string>* singleAttrPtr = dynamic_cast<icomp::TSingleAttribute<std::string>*>(attributePtr);
+								icomp::TAttribute<std::string>* singleAttrPtr = dynamic_cast<icomp::TAttribute<std::string>*>(attributePtr);
 								icomp::TMultiAttribute<std::string>* multiAttrPtr = dynamic_cast<icomp::TMultiAttribute<std::string>*>(attributePtr);
 
 								if (		(dynamic_cast<icomp::CReferenceAttribute*>(attributePtr) != NULL) ||
 											(dynamic_cast<icomp::CFactoryAttribute*>(attributePtr) != NULL)){
-									if (singleAttrPtr->GetValue() == oldName){
-										singleAttrPtr->SetValue(newName);
+									std::string baseId;
+									std::string subId;
+									icomp::CInterfaceManipBase::SplitId(singleAttrPtr->GetValue(), baseId, subId);
+									if (baseId == oldName){
+										singleAttrPtr->SetValue(icomp::CInterfaceManipBase::JoinId(newName, subId));
 									}
 								}
 
@@ -557,8 +560,11 @@ void CRegistryViewComp::OnRenameComponent()
 											(dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr) != NULL)){
 									int valuesCount = multiAttrPtr->GetValuesCount();
 									for (int i = 0; i < valuesCount; ++i){
-										if (multiAttrPtr->GetValueAt(i) == oldName){
-											multiAttrPtr->SetValueAt(i, newName);
+										std::string baseId;
+										std::string subId;
+										icomp::CInterfaceManipBase::SplitId(multiAttrPtr->GetValueAt(i), baseId, subId);
+										if (baseId == oldName){
+											multiAttrPtr->SetValueAt(i, icomp::CInterfaceManipBase::JoinId(newName, subId));
 										}
 									}
 								}
@@ -655,12 +661,9 @@ void CRegistryViewComp::OnAddNote()
 		return;
 	}
 	
-	const CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();	
-	I_ASSERT(selectedComponentPtr != NULL);
-
 	IRegistryEditController* providerPtr = dynamic_cast<IRegistryEditController*>(GetObjectPtr());
 	if (providerPtr != NULL){
-		providerPtr->SetComponentNote(selectedComponentPtr->GetComponentName(), istd::CString());
+//		providerPtr->SetComponentNote(selectedComponentPtr->GetComponentName(), istd::CString());
 	}
 }
 

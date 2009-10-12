@@ -1,9 +1,9 @@
-#ifndef icomp_TMultiReferencePtr_included
-#define icomp_TMultiReferencePtr_included
+#ifndef icomp_TMultiReferenceMember_included
+#define icomp_TMultiReferenceMember_included
 
 
 #include "icomp/IComponentContext.h"
-#include "icomp/TMultiAttributePtr.h"
+#include "icomp/TMultiAttributeMember.h"
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CMultiReferenceAttribute.h"
 
@@ -17,14 +17,14 @@ namespace icomp
 	Don't use direct this class, use macros \c I_MULTI_REF and \c I_ASSIGN_MULTI_* instead.
 */
 template <class Interface>
-class TMultiReferencePtr: public TMultiAttributePtr<CMultiReferenceAttribute>, public CInterfaceManipBase
+class TMultiReferenceMember: public TMultiAttributeMember<CMultiReferenceAttribute>, public CInterfaceManipBase
 {
 public:
-	typedef TMultiAttributePtr<CMultiReferenceAttribute> BaseClass;
+	typedef TMultiAttributeMember<CMultiReferenceAttribute> BaseClass;
 	typedef CInterfaceManipBase BaseClass2;
 	typedef Interface InterfaceType;
 
-	TMultiReferencePtr();
+	TMultiReferenceMember();
 
 	void Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo);
 
@@ -40,7 +40,7 @@ public:
 	Interface* operator[](int index) const;
 
 protected:
-	TMultiReferencePtr(const TMultiReferencePtr& ptr);
+	TMultiReferenceMember(const TMultiReferenceMember& ptr);
 
 	bool EnsureInitialized() const;
 
@@ -56,14 +56,14 @@ private:
 // public methods
 
 template <class Interface>
-TMultiReferencePtr<Interface>::TMultiReferencePtr()
+TMultiReferenceMember<Interface>::TMultiReferenceMember()
 :	m_definitionComponentPtr(NULL), m_isInitialized(false)
 {
 }
 
 
 template <class Interface>
-void TMultiReferencePtr<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
+void TMultiReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
 	BaseClass::Init(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
@@ -72,14 +72,14 @@ void TMultiReferencePtr<Interface>::Init(const IComponent* ownerPtr, const IReal
 
 
 template <class Interface>
-bool TMultiReferencePtr<Interface>::IsValid() const
+bool TMultiReferenceMember<Interface>::IsValid() const
 {
 	return EnsureInitialized();
 }
 
 
 template <class Interface>
-Interface* TMultiReferencePtr<Interface>::operator[](int index) const
+Interface* TMultiReferenceMember<Interface>::operator[](int index) const
 {
 	I_ASSERT(index >= 0);
 
@@ -94,7 +94,7 @@ Interface* TMultiReferencePtr<Interface>::operator[](int index) const
 // protected methods
 
 template <class Interface>
-TMultiReferencePtr<Interface>::TMultiReferencePtr(const TMultiReferencePtr& ptr)
+TMultiReferenceMember<Interface>::TMultiReferenceMember(const TMultiReferenceMember& ptr)
 :	BaseClass(ptr),
 	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
 	m_components(ptr.m_components),
@@ -104,7 +104,7 @@ TMultiReferencePtr<Interface>::TMultiReferencePtr(const TMultiReferencePtr& ptr)
 
 
 template <class Interface>
-bool TMultiReferencePtr<Interface>::EnsureInitialized() const
+bool TMultiReferenceMember<Interface>::EnsureInitialized() const
 {
 	bool retVal = false;
 
@@ -140,6 +140,6 @@ bool TMultiReferencePtr<Interface>::EnsureInitialized() const
 }//namespace icomp
 
 
-#endif // !icomp_TMultiReferencePtr_included
+#endif // !icomp_TMultiReferenceMember_included
 
 

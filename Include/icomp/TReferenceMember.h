@@ -1,9 +1,9 @@
-#ifndef icomp_TReferencePtr_included
-#define icomp_TReferencePtr_included
+#ifndef icomp_TReferenceMember_included
+#define icomp_TReferenceMember_included
 
 
 #include "icomp/IComponentContext.h"
-#include "icomp/TSingleAttributePtr.h"
+#include "icomp/TAttributeMember.h"
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CReferenceAttribute.h"
 
@@ -17,14 +17,14 @@ namespace icomp
 	Don't use direct this class, use macros \c I_REF and \c I_ASSIGN instead.
 */
 template <class Interface>
-class TReferencePtr: public TSingleAttributePtr<CReferenceAttribute>, public CInterfaceManipBase
+class TReferenceMember: public TAttributeMember<CReferenceAttribute>, public CInterfaceManipBase
 {
 public:
-	typedef TSingleAttributePtr<CReferenceAttribute> BaseClass;
+	typedef TAttributeMember<CReferenceAttribute> BaseClass;
 	typedef CInterfaceManipBase BaseClass2;
 	typedef Interface InterfaceType;
 
-	TReferencePtr();
+	TReferenceMember();
 
 	void Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo);
 
@@ -49,7 +49,7 @@ public:
 	Interface& operator*() const;
 
 protected:
-	TReferencePtr(const TReferencePtr& ptr);
+	TReferenceMember(const TReferenceMember& ptr);
 
 	bool EnsureInitialized() const;
 
@@ -64,14 +64,14 @@ private:
 // public methods
 
 template <class Interface>
-TReferencePtr<Interface>::TReferencePtr()
+TReferenceMember<Interface>::TReferenceMember()
 :	m_definitionComponentPtr(NULL), m_componentPtr(NULL), m_isInitialized(false)
 {
 }
 
 
 template <class Interface>
-void TReferencePtr<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
+void TReferenceMember<Interface>::Init(const IComponent* ownerPtr, const IRealAttributeStaticInfo& staticInfo)
 {
 	BaseClass::Init(ownerPtr, staticInfo, &m_definitionComponentPtr);
 
@@ -80,7 +80,7 @@ void TReferencePtr<Interface>::Init(const IComponent* ownerPtr, const IRealAttri
 
 
 template <class Interface>
-bool TReferencePtr<Interface>::IsValid() const
+bool TReferenceMember<Interface>::IsValid() const
 {
 	return EnsureInitialized();
 }
@@ -88,7 +88,7 @@ bool TReferencePtr<Interface>::IsValid() const
 
 
 template <class Interface>
-Interface* TReferencePtr<Interface>::GetPtr() const
+Interface* TReferenceMember<Interface>::GetPtr() const
 {
 	EnsureInitialized();
 
@@ -97,7 +97,7 @@ Interface* TReferencePtr<Interface>::GetPtr() const
 
 
 template <class Interface>
-Interface* TReferencePtr<Interface>::operator->() const
+Interface* TReferenceMember<Interface>::operator->() const
 {
 	EnsureInitialized();
 	I_ASSERT(m_componentPtr != NULL);
@@ -107,7 +107,7 @@ Interface* TReferencePtr<Interface>::operator->() const
 
 
 template <class Interface>
-Interface& TReferencePtr<Interface>::operator*() const
+Interface& TReferenceMember<Interface>::operator*() const
 {
 	EnsureInitialized();
 	I_ASSERT(m_componentPtr != NULL);
@@ -119,7 +119,7 @@ Interface& TReferencePtr<Interface>::operator*() const
 // protected methods
 
 template <class Interface>
-TReferencePtr<Interface>::TReferencePtr(const TReferencePtr& ptr)
+TReferenceMember<Interface>::TReferenceMember(const TReferenceMember& ptr)
 :	BaseClass(ptr),
 	m_definitionComponentPtr(ptr.m_definitionComponentPtr),
 	m_componentPtr(ptr.m_componentPtr),
@@ -129,7 +129,7 @@ TReferencePtr<Interface>::TReferencePtr(const TReferencePtr& ptr)
 
 
 template <class Interface>
-bool TReferencePtr<Interface>::EnsureInitialized() const
+bool TReferenceMember<Interface>::EnsureInitialized() const
 {
 	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
@@ -155,6 +155,6 @@ bool TReferencePtr<Interface>::EnsureInitialized() const
 }//namespace icomp
 
 
-#endif // !icomp_TReferencePtr_included
+#endif // !icomp_TReferenceMember_included
 
 

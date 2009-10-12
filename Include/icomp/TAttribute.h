@@ -1,5 +1,5 @@
-#ifndef icomp_TSingleAttribute_included
-#define icomp_TSingleAttribute_included
+#ifndef icomp_TAttribute_included
+#define icomp_TAttribute_included
 
 
 #include "iser/IArchive.h"
@@ -19,15 +19,15 @@ namespace icomp
 	Don't use direct this class, use macros \c I_ATTR and \c I_ASSIGN instead.
 */
 template <typename Value>
-class TSingleAttribute: virtual public iser::ISerializable
+class TAttribute: virtual public iser::ISerializable
 {
 public:
 	typedef Value ValueType;
 
-	TSingleAttribute();
-	TSingleAttribute(const TSingleAttribute& attribute);
+	TAttribute();
+	TAttribute(const TAttribute& attribute);
 
-	explicit TSingleAttribute(const Value& value);
+	explicit TAttribute(const Value& value);
 
 	virtual const Value& GetValue() const;
 	virtual void SetValue(const Value& value);
@@ -43,34 +43,34 @@ protected:
 // public methods
 
 template <typename Value>
-TSingleAttribute<Value>::TSingleAttribute()
+TAttribute<Value>::TAttribute()
 {
 }
 
 
 template <typename Value>
-TSingleAttribute<Value>::TSingleAttribute(const Value& value)
+TAttribute<Value>::TAttribute(const Value& value)
 :	m_value(value)
 {
 }
 
 
 template <typename Value>
-TSingleAttribute<Value>::TSingleAttribute(const TSingleAttribute& attribute)
+TAttribute<Value>::TAttribute(const TAttribute& attribute)
 :	m_value(attribute.GetValue())
 {
 }
 
 
 template <typename Value>
-const Value& TSingleAttribute<Value>::GetValue() const
+const Value& TAttribute<Value>::GetValue() const
 {
 	return m_value;
 }
 
 
 template <typename Value>
-void TSingleAttribute<Value>::SetValue(const Value& value)
+void TAttribute<Value>::SetValue(const Value& value)
 {
 	m_value = value;
 }
@@ -79,7 +79,7 @@ void TSingleAttribute<Value>::SetValue(const Value& value)
 // reimplemented (ISerializable)
 
 template <typename Value>
-bool TSingleAttribute<Value>::Serialize(iser::IArchive& archive)
+bool TAttribute<Value>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
@@ -94,15 +94,15 @@ bool TSingleAttribute<Value>::Serialize(iser::IArchive& archive)
 }
 
 
-typedef TSingleAttribute<double> CDoubleAttribute;
-typedef TSingleAttribute<bool> CBoolAttribute;
-typedef TSingleAttribute<int> CIntAttribute;
-typedef TSingleAttribute<istd::CString> CStringAttribute;
+typedef TAttribute<double> CDoubleAttribute;
+typedef TAttribute<bool> CBoolAttribute;
+typedef TAttribute<int> CIntAttribute;
+typedef TAttribute<istd::CString> CStringAttribute;
 
 
 } // namespace icomp
 
 
-#endif // !icomp_TSingleAttribute_included
+#endif // !icomp_TAttribute_included
 
 

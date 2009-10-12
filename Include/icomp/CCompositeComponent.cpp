@@ -166,12 +166,34 @@ IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId)
 	else{
 		ComponentInfo& componentInfo = m_componentMap[componentId];
 		if (!componentInfo.isInitialized){
-			CreateSubcomponentInfo(componentId, componentInfo.contextPtr, componentInfo.componentPtr, true);
+			CreateSubcomponentInfo(componentId, componentInfo.contextPtr, &componentInfo.componentPtr, true);
 
 			componentInfo.isInitialized = true;
 		}
 
 		return componentInfo.componentPtr.GetPtr();
+	}
+}
+
+
+const IComponentContext* CCompositeComponent::GetSubcomponentContext(const std::string& componentId) const
+{
+	if (m_blockCreating){
+		ComponentMap::const_iterator iter = m_componentMap.find(componentId);
+		if (iter != m_componentMap.end()){
+			return iter->second.contextPtr.GetPtr();
+		}
+		else{
+			return NULL;
+		}
+	}
+	else{
+		ComponentInfo& componentInfo = m_componentMap[componentId];
+		if (!componentInfo.isInitialized){
+			CreateSubcomponentInfo(componentId, componentInfo.contextPtr, NULL, true);
+		}
+
+		return componentInfo.contextPtr.GetPtr();
 	}
 }
 
@@ -186,7 +208,7 @@ IComponent* CCompositeComponent::CreateSubcomponent(const std::string& component
 
 		ComponentInfo& componentInfo = m_componentMap[componentId];
 
-		CreateSubcomponentInfo(componentId, componentInfo.contextPtr, retVal, false);
+		CreateSubcomponentInfo(componentId, componentInfo.contextPtr, &retVal, false);
 
 		return retVal.PopPtr();
 	}
@@ -218,15 +240,15 @@ void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPt
 
 // protected methods
 
-bool CCompositeComponent::CreateSubcomponentInfo(
+void CCompositeComponent::CreateSubcomponentInfo(
 			const std::string& componentId,
 			ContextPtr& subContextPtr,
-			ComponentPtr& subComponentPtr,
+			ComponentPtr* subComponentPtr,
 			bool isOwned) const
 {
 	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
 	if (contextPtr == NULL){
-		return false;
+		return;
 	}
 
 	const IRegistry& registry = contextPtr->GetRegistry();
@@ -247,30 +269,28 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 							contextPtr));
 			}
 
-			if (subContextPtr.IsValid()){
-				subComponentPtr.SetPtr(new TComponentWrap<CCompositeComponent>);
-				if (subComponentPtr.IsValid()){
-					subComponentPtr->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
+			if (subContextPtr.IsValid() && (subComponentPtr != NULL)){
+				subComponentPtr->SetPtr(new TComponentWrap<CCompositeComponent>);
+				if (subComponentPtr->IsValid()){
+					(*subComponentPtr)->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
 				}
 			}
-		}
+			}
 		else{	// create real component
 			if (!subContextPtr.IsValid()){
 				subContextPtr.SetPtr(new CComponentContext(&registryElement, contextPtr, componentId));
 			}
 
-			if (subContextPtr.IsValid()){
+			if (subContextPtr.IsValid() && (subComponentPtr != NULL)){
 				const IComponentStaticInfo& elementStaticInfo = registryElement.GetComponentStaticInfo();
 
-				subComponentPtr.SetPtr(elementStaticInfo.CreateComponent());
-				if (subComponentPtr.IsValid()){
-					subComponentPtr->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
+				subComponentPtr->SetPtr(elementStaticInfo.CreateComponent());
+				if (subComponentPtr->IsValid()){
+					(*subComponentPtr)->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
 				}
 			}
 		}
 	}
-
-	return subComponentPtr.IsValid();
 }
 
 
@@ -283,7 +303,7 @@ bool CCompositeComponent::EnsureAutoInitComponentsCreated() const
 
 		ComponentInfo& autoInitInfo = m_componentMap[autoInitId];
 		if (!autoInitInfo.isInitialized){
-			CreateSubcomponentInfo(autoInitId, autoInitInfo.contextPtr, autoInitInfo.componentPtr, true);
+			CreateSubcomponentInfo(autoInitId, autoInitInfo.contextPtr, &autoInitInfo.componentPtr, true);
 
 			autoInitInfo.isInitialized = true;
 		}

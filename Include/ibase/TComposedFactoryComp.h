@@ -18,10 +18,10 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef istd::TComposedFactory<Interface> BaseClass2;
 
-	I_BEGIN_COMPONENT(TComposedFactoryComp)
-		I_REGISTER_INTERFACE(FactoryInterface)
-		I_ASSIGN_MULTI_0(m_slaveFactoriesCompPtr, "SlaveFactories", "Slave factories", true)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(TComposedFactoryComp);
+		I_REGISTER_INTERFACE(FactoryInterface);
+		I_ASSIGN_MULTI_0(m_slaveFactoriesCompPtr, "SlaveFactories", "Slave factories", true);
+	I_END_COMPONENT;
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
