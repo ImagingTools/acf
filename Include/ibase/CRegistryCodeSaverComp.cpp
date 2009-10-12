@@ -824,7 +824,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 
 	std::string attributeName = "attr" + attributeId + "Ptr";
 
-	if (GetSingleAttributeValue(attribute, valueString, attributeType)){
+	if (GetAttributeValue(attribute, valueString, attributeType)){
 		NextLine(stream);
 		stream << attributeType << "* " << attributeName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
 		NextLine(stream);
@@ -834,7 +834,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 
 		return true;
 	}
-	else if (GetMultipleAttributeValue(attribute, valueStrings, attributeType)){
+	else if (GetMultiAttributeValue(attribute, valueStrings, attributeType)){
 		if (!valueStrings.empty()){
 			NextLine(stream);
 			stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
@@ -1050,7 +1050,7 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 }
 
 
-bool CRegistryCodeSaverComp::GetSingleAttributeValue(
+bool CRegistryCodeSaverComp::GetAttributeValue(
 			const iser::ISerializable& attribute,
 			std::string& valueString,
 			std::string& typeName) const
@@ -1099,7 +1099,7 @@ bool CRegistryCodeSaverComp::GetSingleAttributeValue(
 }
 
 
-bool CRegistryCodeSaverComp::GetMultipleAttributeValue(
+bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 			const iser::ISerializable& attribute,
 			std::list<std::string>& valueStrings,
 			std::string& typeName) const

@@ -95,11 +95,11 @@ protected:
 				const icomp::IRegistry& registry,
 				std::ofstream& stream) const;
 
-	bool GetSingleAttributeValue(
+	bool GetAttributeValue(
 				const iser::ISerializable& attribute,
 				std::string& valueString,
 				std::string& typeName) const;
-	bool GetMultipleAttributeValue(
+	bool GetMultiAttributeValue(
 				const iser::ISerializable& attribute,
 				std::list<std::string>& valueStrings,
 				std::string& typeName) const;
