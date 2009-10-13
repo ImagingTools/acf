@@ -34,14 +34,17 @@ CGuiComponentDialog::CGuiComponentDialog(
 			}
 		}
 
-		QDialogButtonBox::StandardButtons buttonFlags = 
-			(buttons != 0) ? (QDialogButtonBox::StandardButtons)buttons : QDialogButtonBox::Close; 
-		
-		m_buttonsBox = new QDialogButtonBox(buttonFlags, Qt::Horizontal, this);
-		connect(m_buttonsBox, SIGNAL(accepted()), this, SLOT(accept()));
-		connect(m_buttonsBox, SIGNAL(rejected()), this, SLOT(reject()));
-		
-		dialogLayout->addWidget(m_buttonsBox);
+		if (isModal || (buttons != 0)){
+			QDialogButtonBox::StandardButtons buttonFlags = (buttons != 0)?
+						(QDialogButtonBox::StandardButtons)buttons:
+						QDialogButtonBox::Close;
+
+			m_buttonsBox = new QDialogButtonBox(buttonFlags, Qt::Horizontal, this);
+			connect(m_buttonsBox, SIGNAL(accepted()), this, SLOT(accept()));
+			connect(m_buttonsBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+			dialogLayout->addWidget(m_buttonsBox);
+		}
 	}
 }
 
