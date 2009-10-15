@@ -79,9 +79,22 @@ protected:
 	virtual void SetReadOnly(bool state);
 
 private:
+	void DoUpdate(int updateFlags);
+
+private:
 	int m_ignoreUpdatesCounter;
 	bool m_isReadOnly;
 	int m_updateFilter;
+
+	/**
+		Do editor update, if the gui change its state to visible.
+	*/
+	bool m_updateOnShow;
+
+	/**
+		Cummulated flags for UI-update after it becomes visible state.
+	*/
+	int m_updateOnShowFlags;
 };
 
 
@@ -89,7 +102,11 @@ private:
 
 template <class Gui, class Observer>
 TGuiObserverWrap<Gui, Observer>::TGuiObserverWrap()
-:	m_ignoreUpdatesCounter(0), m_isReadOnly(false), m_updateFilter(0)
+:	m_ignoreUpdatesCounter(0),
+	m_isReadOnly(false),
+	m_updateFilter(0),
+	m_updateOnShow(false),
+	m_updateOnShowFlags(0)
 {
 }
 
@@ -185,6 +202,13 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiShown()
 	Gui::OnGuiShown();
 
 	if (Observer::IsModelAttached(NULL)){
+		if (m_updateOnShow){
+			DoUpdate(m_updateOnShowFlags);
+
+			m_updateOnShow = false;
+			m_updateOnShowFlags = 0;
+		}
+
 		OnGuiModelShown();
 	}
 }
@@ -233,16 +257,19 @@ void TGuiObserverWrap<Gui, Observer>::AfterUpdate(imod::IModel* modelPtr, int up
 
 	Observer::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
-	bool skipUpdate = false;
-	if ((m_updateFilter != 0) && (updateFlags != 0)){
-		skipUpdate = ((m_updateFilter & updateFlags) == 0);
+	if (!Gui::IsGuiCreated()){
+		return;
 	}
 
-	if (!IsUpdateBlocked() && Gui::IsGuiCreated() && !skipUpdate){
-		UpdateBlocker blocker(this);
+	// skip update if the UI is not visible:
+	if (!Gui::IsGuiShown()){
+		m_updateOnShow = true;
+		m_updateOnShowFlags = m_updateOnShowFlags | updateFlags;
 
-		UpdateEditor(updateFlags);
+		return;
 	}
+		
+	DoUpdate(updateFlags);
 }
 
 
@@ -259,6 +286,24 @@ template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::SetReadOnly(bool state)
 {
 	m_isReadOnly = state;
+}
+
+
+// private methods
+
+template <class Gui, class Observer>
+void TGuiObserverWrap<Gui, Observer>::DoUpdate(int updateFlags)
+{
+	bool skipUpdate = false;
+	if ((m_updateFilter != 0) && (updateFlags != 0)){
+		skipUpdate = ((m_updateFilter & updateFlags) == 0);
+	}
+
+	if (!IsUpdateBlocked() && !skipUpdate){
+		UpdateBlocker blocker(this);
+
+		UpdateEditor(updateFlags);
+	}
 }
 
 
