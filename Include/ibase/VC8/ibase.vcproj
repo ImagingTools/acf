@@ -468,6 +468,14 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Generated"
+			>
+			<File
+				RelativePath="..\..\..\Partitura\AcfVoce.arp\VersionInfo.arx"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
