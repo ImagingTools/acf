@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1119
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
         Application
@@ -32,10 +32,10 @@
         Copy
       </ComponentName>
       <X>
-        -180
+        102
       </X>
       <X>
-        -29
+        -83
       </X>
     </Element>
     <Element>
@@ -58,6 +58,17 @@
       </X>
       <X>
         -38
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        GuiApplication
+      </ComponentName>
+      <X>
+        97
+      </X>
+      <X>
+        -296
       </X>
     </Element>
     <Element>
@@ -98,7 +109,7 @@
         Log
       </ComponentName>
       <X>
-        102
+        120
       </X>
       <X>
         127

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1119
         </Number>
         <Description>
           ACF
@@ -80,12 +80,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   *.exe
                 </Value>
                 <Value>
                   *.arp
+                </Value>
+                <Value>
+                  *.exe.manifest
                 </Value>
               </Values>
             </Data>
@@ -199,7 +202,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -241,6 +244,22 @@
             </Type>
             <ExportId>
               InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicenseInputDir
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              LicenseInputDir
             </ExportId>
             <Data>
               <IsEnabled>
@@ -477,7 +496,7 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              VersionInfo
+              ApplicationInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1423,7 +1442,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ExcludeFilters

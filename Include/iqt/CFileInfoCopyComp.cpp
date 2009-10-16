@@ -105,6 +105,7 @@ bool CFileInfoCopyComp::CopyFile(const istd::CString& inputFilePath, const istd:
 bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& result) const
 {
 	static const QString acfProductNameTag("AcfProductName");
+	static const QString acfCompanyNameTag("AcfCompanyName");
 	static const QString acfVersionTag("AcfVersion");
 	static const QString acfRawVersionTag("AcfRawVersion");
 	static const QString acfRcVersionTag("AcfRcVersion");
@@ -159,6 +160,13 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 		if (tag == acfProductNameTag){
 			if (m_applicationInfoCompPtr.IsValid()){
 				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationName());
+
+				return true;
+			}
+		}
+		else if (tag == acfCompanyNameTag){
+			if (m_applicationInfoCompPtr.IsValid()){
+				result = iqt::GetQString(m_applicationInfoCompPtr->GetCompanyName());
 
 				return true;
 			}

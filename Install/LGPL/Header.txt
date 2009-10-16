@@ -1,6 +1,6 @@
 /********************************************************************************
 **
-**	Copyright (c) ImagingTools Gantzke & Lepskiy GbR
+**	Copyright (c) 2007-2009 ImagingTools Gantzke & Lepskiy GbR
 **
 **	This file is part of the ACF Toolkit.
 **

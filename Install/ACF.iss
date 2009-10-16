@@ -7,14 +7,14 @@
 [Setup]
 AppVerName=$AcfProductName$ $AcfVersion:0$
 AppVersion=$AcfVersion:0$
-AppPublisher=ImagingTools
+AppPublisher=$AcfCompanyName$
 AppPublisherURL=http://www.imagingtools.de/
 AppName=ACF
 OutputBaseFilename=Setup_$AcfProductName$_v$AcfVersion:0$_$CompilerName$
 
 DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:0$
-WizardImageFile=..\..\Docs\Images\InstallerImage.bmp
-WizardSmallImageFile=..\..\Docs\Images\Logo\Logo_128x128.bmp
+WizardImageFile=..\WizardImageFile.bmp
+WizardSmallImageFile=..\WizardSmallImageFile.bmp
 SetupIconFile=..\..\Docs\Images\Logo\Logo.ico
 AlwaysShowDirOnReadyPage=True
 DefaultGroupName=ImagingTools\ACF
@@ -23,6 +23,9 @@ UninstallDisplayIcon=..\..\Docs\Images\Logo\Logo.ico
 UninstallDisplayName=$AcfProductName$ $AcfVersion:0$
 OutputDir=..\Setup
 LicenseFile=$LicensePath$
+VersionInfoDescription=$AcfProductName$ v. $AcfVersion:0$ ($AcfRawVersion:0$) by $AcfCompanyName$, compiled using $CompilerName$
+AppCopyright=Copyright (C) 2007-2009 $AcfCompanyName$
+VersionInfoVersion=$AcfVersion:0$
 
 [Files]
 Source: ..\Temp\*; DestDir: {app}; Flags: recursesubdirs; Components: acfComp
@@ -39,8 +42,12 @@ Source: {#XALANDIR}\*; DestDir: {app}\ExtLib\Xalan; Flags: recursesubdirs; Exclu
 
 Source: {#ZLIBDIR}\*; DestDir: {app}\ExtLib\Zlib; Flags: recursesubdirs; Excludes: *.dll; Components: zlibComp
 
-Source: {#QTDIR}\bin\Qt*4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
+Source: {#QTDIR}\lib\Qt*4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
+Source: {#QTDIR}\lib\Qt*4.dll.manifest; DestDir: {app}\ExtLib\Bin; Components: qtComp
 Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\ExtLib\Bin\imageformats; Components: qtComp
+Source: {#QTDIR}\plugins\imageformats\*.dll.manifest; DestDir: {app}\ExtLib\Bin\imageformats; Components: qtComp
+Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\ExtLib\Bin\iconengines; Components: qtComp
+Source: {#QTDIR}\plugins\iconengines\*.dll.manifest; DestDir: {app}\ExtLib\Bin\iconengines; Components: qtComp
 
 [Languages]
 Name: en; MessagesFile: compiler:Default.isl

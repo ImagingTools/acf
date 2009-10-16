@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1080
+          1119
         </Number>
         <Description>
           ACF
@@ -43,10 +43,10 @@
         CopyArpInfo
       </ComponentName>
       <X>
-        -432
+        -371
       </X>
       <X>
-        -173
+        -172
       </X>
     </Element>
     <Element>
@@ -252,10 +252,10 @@
         CopyLibs
       </ComponentName>
       <X>
-        -825
+        -885
       </X>
       <X>
-        -173
+        -178
       </X>
     </Element>
     <Element>

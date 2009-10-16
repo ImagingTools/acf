@@ -1,13 +1,13 @@
 /********************************************************************************
 **
-**	Copyright (c) ImagingTools Gantzke & Lepskiy GbR
+**	Copyright (C) 2007-2009 ImagingTools Gantzke & Lepskiy GbR
 **	All rights reserved.
 **
 **	This file is part of the ACF Toolkit.
 **
 **	Licensees holding valid ACF Commercial licenses may use this file in
 **	accordance with the ACF Commercial License Agreement provided with the
-**	Software and appearing in the file LicenseCommercial.txt or,
+**	Software and appearing in the file License.txt or,
 **	alternatively, in accordance with the terms contained in
 **	a written agreement between you and ImagingTools Gantzke & Lepskiy GbR.
 **

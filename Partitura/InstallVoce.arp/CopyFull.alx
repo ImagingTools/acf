@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1119
         </Number>
         <Description>
           ACF
@@ -54,10 +54,10 @@
         CopyBins
       </ComponentName>
       <X>
-        -585
+        -697.723
       </X>
       <X>
-        -158
+        -252.853
       </X>
     </Element>
     <Element>
@@ -197,10 +197,10 @@
         CopyImplOther
       </ComponentName>
       <X>
-        -49
+        -233.296
       </X>
       <X>
-        106
+        209.716
       </X>
     </Element>
     <Element>
@@ -208,10 +208,10 @@
         CopyImplResources
       </ComponentName>
       <X>
-        -124
+        -383.245
       </X>
       <X>
-        -160
+        -250.63
       </X>
     </Element>
     <Element>
@@ -219,10 +219,10 @@
         CopyImplSources
       </ComponentName>
       <X>
-        -270
+        -405.083
       </X>
       <X>
-        106
+        109.172
       </X>
     </Element>
     <Element>
@@ -241,10 +241,10 @@
         CopyIncludeOther
       </ComponentName>
       <X>
-        -485
+        -543.213
       </X>
       <X>
-        108
+        203.657
       </X>
     </Element>
     <Element>
@@ -252,10 +252,10 @@
         CopyIncludeResources
       </ComponentName>
       <X>
-        141
+        -81.8528
       </X>
       <X>
-        102
+        113.473
       </X>
     </Element>
     <Element>
@@ -318,7 +318,7 @@
         CopyLibs
       </ComponentName>
       <X>
-        -812
+        -865.74
       </X>
       <X>
         -157
@@ -406,10 +406,10 @@
         CopyVcRules
       </ComponentName>
       <X>
-        -314
+        -551.86
       </X>
       <X>
-        -157
+        -164.362
       </X>
     </Element>
     <Element>

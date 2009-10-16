@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1119
         </Number>
         <Description>
           ACF
@@ -15,44 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
-    <Element>
-      <Id>
-        Application
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        GuiApplication
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ApplicationInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="3">
     <Element>
       <Id>
         Copy
@@ -70,7 +33,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -140,9 +103,28 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  ../LicenseCommercial.txt
+                  ../Commercial/License.txt
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicenseInputDir
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Commercial
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -160,7 +142,7 @@
                 true
               </IsEnabled>
               <Value>
-                Header_Commercial.txt
+                Commercial/Header.txt
               </Value>
             </Data>
           </AttributeInfo>
@@ -188,22 +170,22 @@
     </Element>
     <Element>
       <Id>
-        CopyLicense
+        GuiApplication
       </Id>
       <PackageId>
-        InstallVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        CopyInfoProcessor
+        GuiApplication
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -212,90 +194,12 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              VersionInfo
+              ApplicationInfo
             </ExportId>
             <Data>
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Filters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  LicenseCommercial.txt
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                .
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Log
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Temp
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -367,7 +271,7 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Application
+        GuiApplication
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
