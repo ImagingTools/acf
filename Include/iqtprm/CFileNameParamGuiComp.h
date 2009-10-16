@@ -27,6 +27,9 @@ public:
 	I_BEGIN_COMPONENT(CFileNameParamGuiComp)
 	I_END_COMPONENT
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);

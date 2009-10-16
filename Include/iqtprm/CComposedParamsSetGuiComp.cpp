@@ -7,6 +7,7 @@
 #include <QSpacerItem>
 #include <QToolBox>
 #include <QTabWidget>
+#include <QGroupBox>
 
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
@@ -183,8 +184,21 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 		for (int i = 0; i < elementsCount; ++i){
 			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
 
+			QWidget* elementParentPtr = ParamsFrame;
+
+			if (i < m_namesAttrPtr.GetCount()){
+				QLayout* parentLayoutPtr = elementParentPtr->layout();
+
+				elementParentPtr = new QGroupBox(iqt::GetQString(m_namesAttrPtr[i]), elementParentPtr);
+				new QVBoxLayout(elementParentPtr);
+
+				if (parentLayoutPtr != NULL){
+					parentLayoutPtr->addWidget(elementParentPtr);
+				}
+			}
+
 			if (guiPtr != NULL){
-				guiPtr->CreateGui(ParamsFrame);
+				guiPtr->CreateGui(elementParentPtr);
 			}
 		}
 
@@ -192,6 +206,14 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 	}
 
 	BaseClass::OnGuiCreated();
+}
+
+
+void CComposedParamsSetGuiComp::OnGuiDestroyed()
+{
+//	ParamsFrame->destroy(false, true);
+
+	BaseClass::OnGuiDestroyed();
 }
 
 

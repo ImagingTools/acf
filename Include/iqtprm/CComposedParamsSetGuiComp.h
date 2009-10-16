@@ -60,6 +60,7 @@ I_END_COMPONENT
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 
 	// reimplemented (iqt2d::ISceneExtender)
 	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
