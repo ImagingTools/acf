@@ -16,7 +16,7 @@ RCC_DIR = ../Generated
 QT += 
 
 
-INCLUDEPATH += ../../ "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" 
+INCLUDEPATH += ../../ "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/QtNetwork" 
 
 HEADERS += ../CApplicationEnvironment.h
 HEADERS += ../CApplicationSettingsProviderComp.h
@@ -32,8 +32,10 @@ HEADERS += ../CDirList.h
 HEADERS += ../CDllFunctionsProvider.h
 HEADERS += ../CFileInfoCopyComp.h
 HEADERS += ../CFileList.h
+HEADERS += ../CFileListProviderComp.h
 HEADERS += ../CFileSystem.h
 HEADERS += ../CIniSettingsProviderComp.h
+HEADERS += ../CNetworkWriteArchive.h
 HEADERS += ../CPackagesLoaderComp.h
 HEADERS += ../CReflectedBitmapBase.h
 HEADERS += ../CSettingsArchiveBase.h
@@ -62,8 +64,10 @@ SOURCES += ../CDirList.cpp
 SOURCES += ../CDllFunctionsProvider.cpp
 SOURCES += ../CFileInfoCopyComp.cpp
 SOURCES += ../CFileList.cpp
+SOURCES += ../CFileListProviderComp.cpp
 SOURCES += ../CFileSystem.cpp
 SOURCES += ../CIniSettingsProviderComp.cpp
+SOURCES += ../CNetworkWriteArchive.cpp
 SOURCES += ../CPackagesLoaderComp.cpp
 SOURCES += ../CReflectedBitmapBase.cpp
 SOURCES += ../CSettingsArchiveBase.cpp
@@ -75,3 +79,4 @@ SOURCES += ../CTimer.cpp
 SOURCES += ../CXmlFileReadArchive.cpp
 SOURCES += ../CXmlFileWriteArchive.cpp
 SOURCES += ../iqt.cpp
+SOURCES += ../generated\moc_CNetworkWriteArchive.cpp

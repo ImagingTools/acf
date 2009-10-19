@@ -322,10 +322,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFileSystemObserver.h"
-				>
-			</File>
-			<File
 				RelativePath="..\ILogger.h"
 				>
 			</File>

@@ -714,7 +714,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 
 
 bool CRegistryCodeSaverComp::WriteComponentInfo(
-			const icomp::IRegistry& registry,
+                        const icomp::IRegistry& /*registry*/,
 			const std::string& componentId,
 			const icomp::IRegistry::ElementInfo& componentInfo,
 			std::ofstream& stream) const
@@ -862,7 +862,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 bool CRegistryCodeSaverComp::WriteRegistryClassDeclaration(
 			const std::string& /*baseClassName*/,
 			const std::string& registryClassName,
-			const icomp::IRegistry& registry,
+                        const icomp::IRegistry& /*registry*/,
 			std::ofstream& stream) const
 {
 	NextLine(stream);

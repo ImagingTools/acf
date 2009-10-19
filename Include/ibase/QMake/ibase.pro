@@ -40,6 +40,7 @@ HEADERS += ../IApplication.h
 HEADERS += ../IApplicationInfo.h
 HEADERS += ../ibase.h
 HEADERS += ../IFileConvertCopy.h
+HEADERS += ../IFileListProvider.h
 HEADERS += ../ILoggable.h
 HEADERS += ../IMessage.h
 HEADERS += ../IMessageConsumer.h
