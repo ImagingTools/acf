@@ -15,6 +15,7 @@
 #include "iqt/CFileInfoCopyComp.h"
 #include "iqt/CCopyProcessorComp.h"
 #include "iqt/CFileListProviderComp.h"
+#include "iqt/CClipboardSerializerComp.h"
 
 #include "iqtgui/CLoginGuiComp.h"
 #include "iqtgui/CApplicationComp.h"
@@ -86,6 +87,7 @@ typedef iqt::CIniSettingsProviderComp IniSettingsProvider;
 typedef iqt::CFileInfoCopyComp FileInfoCopy;
 typedef iqt::CCopyProcessorComp CopyProcessor;
 typedef icomp::TModelCompWrap<iqt::CFileListProviderComp> FileListProvider;
+typedef iqt::CClipboardSerializerComp ClipboardSerializer;
 
 typedef iqtgui::CLoginGuiComp LoginGui;
 typedef iqtgui::CApplicationComp GuiApplication;

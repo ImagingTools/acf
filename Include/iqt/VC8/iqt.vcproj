@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CClipboardSerializerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCopyProcessorComp.cpp"
 				>
 			</File>
@@ -313,6 +317,10 @@
 			</File>
 			<File
 				RelativePath="..\CBitmapSurface.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CClipboardSerializerComp.h"
 				>
 			</File>
 			<File

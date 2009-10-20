@@ -4,6 +4,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QComboBox>
+#include <QtGui/QIcon>
 #include <QItemDelegate>
 
 
@@ -139,6 +140,16 @@ private:
 		virtual void setEditorData(QWidget* editor, const QModelIndex& index ) const;
 		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
 		virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
+
+	protected:
+		bool SetComponentExportEditor(const std::string& attributeId, QWidget& editor) const;
+		bool SetAttributeExportEditor(const std::string& attributeId, QWidget& editor) const;
+		bool SetAttributeValueEditor(const std::string& attributeId, int propertyMining, QWidget& editor) const;
+
+		bool SetComponentExportData(const std::string& attributeId, const QWidget& editor) const;
+		bool SetAttributeExportData(const std::string& attributeId, const QWidget& editor) const;
+		bool SetAttributeValueData(const std::string& attributeId, int propertyMining, const QWidget& editor) const;
+
 	private:
 		CAttributeEditorComp& m_parent;
 	};
@@ -148,6 +159,8 @@ private:
 	typedef std::map<istd::CClassInfo, QString> AttributeTypesMap;
 	AttributeTypesMap m_attributeTypesMap;
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_treeWidgetFilter;
+
+	QIcon m_exportIcon;
 
 	I_REF(IAttributeSelectionObserver, m_attributeSelectionObserverCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);

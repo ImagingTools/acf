@@ -170,17 +170,31 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 		m_elementFlags = 0;
 	}
 
-	int attributesCount = int(m_attributeInfos.size());
-	retVal = retVal && archive.BeginMultiTag(attributeInfosTag, attributeInfoTag, attributesCount);
-
-	if (!retVal){
-		return false;
-	}
-
 	if (archive.IsStoring()){
+		int attributesCount = 0;
+		for (		AttributeInfoMap::const_iterator checkInfoIter = m_attributeInfos.begin();	// calculate number of real used attributes
+					checkInfoIter != m_attributeInfos.end();
+					++checkInfoIter){
+			const AttributeInfo& info = checkInfoIter->second;
+
+			if (info.exportId.empty() && !info.attributePtr.IsValid()){
+				continue;
+			}
+
+			++attributesCount;
+		}
+
+		retVal = retVal && archive.BeginMultiTag(attributeInfosTag, attributeInfoTag, attributesCount);
+
 		for (		AttributeInfoMap::iterator iter = m_attributeInfos.begin();
 					iter != m_attributeInfos.end();
 					++iter){
+			AttributeInfo& info = iter->second;
+
+			if (info.exportId.empty() && !info.attributePtr.IsValid()){
+				continue;
+			}
+
 			retVal = retVal && archive.BeginTag(attributeInfoTag);
 
 			retVal = retVal && archive.BeginTag(attributeIdTag);
@@ -197,8 +211,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			std::string attributeType = staticInfoPtr->GetAttributeType().GetName();
 			retVal = retVal && archive.Process(attributeType);
 			retVal = retVal && archive.EndTag(attributeTypeTag);
-
-			AttributeInfo& info = iter->second;
 
 			retVal = retVal && archive.BeginTag(exportIdTag);
 			retVal = retVal && archive.Process(info.exportId);
@@ -219,8 +231,17 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 			retVal = retVal && archive.EndTag(attributeInfoTag);
 		}
+
+		retVal = retVal && archive.EndTag(attributeInfosTag);
 	}
 	else{
+		int attributesCount = 0;
+		retVal = retVal && archive.BeginMultiTag(attributeInfosTag, attributeInfoTag, attributesCount);
+
+		if (!retVal){
+			return false;
+		}
+
 		for (int i = 0; i < attributesCount; ++i){
 			retVal = retVal && archive.BeginTag(attributeInfoTag);
 
@@ -277,9 +298,9 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 			retVal = retVal && archive.EndTag(attributeInfoTag);
 		}
-	}
 
-	retVal = retVal && archive.EndTag(attributeInfosTag);
+		retVal = retVal && archive.EndTag(attributeInfosTag);
+	}
 
 	return retVal;
 }

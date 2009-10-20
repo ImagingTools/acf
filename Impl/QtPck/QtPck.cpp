@@ -48,6 +48,7 @@ I_EXPORT_COMPONENT(IniSettingsProvider, "Provider for the settings taken from IN
 I_EXPORT_COMPONENT(FileInfoCopy, "Copy file attaching some additional information like version and license", "Qt Copy Move File Attach License Version Tags");
 I_EXPORT_COMPONENT(CopyProcessor, "Copy files from one directory to another one", "Qt Copy File Dir Filter Installation Tool");
 I_EXPORT_COMPONENT(FileListProvider, "Provide list of file synchronized with some directory", "File List Provider Serialize Directory Model Observer");
+I_EXPORT_COMPONENT(ClipboardSerializer, "Load and store objects from and to clipboard", "System Clipboard Loader Serializer Qt Copy Paste");
 
 I_EXPORT_COMPONENT(SceneConnector, "Display scane provider, scene extender and connect it", "Scene Connector Provider Extender Display Console GUI Qt");
 I_EXPORT_COMPONENT(SceneProvider, "Standard scene provider", "Scene Provider Extender Display Console GUI Qt");
