@@ -259,7 +259,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iqt2d::ISceneRestrictions
+        i2d::ISceneController
       </InterfaceId>
       <ComponentId>
         ImageView

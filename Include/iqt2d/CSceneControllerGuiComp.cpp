@@ -52,7 +52,7 @@ void CSceneControllerGuiComp::OnZoomIncrement()
 	}
 
 	if (		m_sceneRestrictionsCompPtr.IsValid() && 
-				m_sceneRestrictionsCompPtr->GetSceneRestrictionsFlags() & iqt2d::ISceneRestrictions::SR_SCALE){
+				m_sceneRestrictionsCompPtr->GetSceneRestrictionFlags() & i2d::ISceneController::SR_SCALE){
 			return;
 	}
 
@@ -77,7 +77,7 @@ void CSceneControllerGuiComp::OnZoomDecrement()
 	}
 
 	if (		m_sceneRestrictionsCompPtr.IsValid() && 
-				m_sceneRestrictionsCompPtr->GetSceneRestrictionsFlags() & iqt2d::ISceneRestrictions::SR_SCALE){
+				m_sceneRestrictionsCompPtr->GetSceneRestrictionFlags() & i2d::ISceneController::SR_SCALE){
 			return;
 	}
 
@@ -102,7 +102,7 @@ void CSceneControllerGuiComp::OnResetView()
 	}
 	
 	if (		m_sceneRestrictionsCompPtr.IsValid() && 
-				m_sceneRestrictionsCompPtr->GetSceneRestrictionsFlags() != iqt2d::ISceneRestrictions::SR_NONE){
+				m_sceneRestrictionsCompPtr->GetSceneRestrictionFlags() != i2d::ISceneController::SR_NONE){
 			return;
 	}
 
@@ -122,7 +122,7 @@ void CSceneControllerGuiComp::OnRotateRight()
 	}
 
 	if (		m_sceneRestrictionsCompPtr.IsValid() && 
-				m_sceneRestrictionsCompPtr->GetSceneRestrictionsFlags() & iqt2d::ISceneRestrictions::SR_ROTATE){
+				m_sceneRestrictionsCompPtr->GetSceneRestrictionFlags() & i2d::ISceneController::SR_ROTATE){
 			return;
 	}
 
@@ -146,7 +146,7 @@ void CSceneControllerGuiComp::OnRotateLeft()
 	}
 
 	if (		m_sceneRestrictionsCompPtr.IsValid() && 
-				m_sceneRestrictionsCompPtr->GetSceneRestrictionsFlags() & iqt2d::ISceneRestrictions::SR_ROTATE){
+				m_sceneRestrictionsCompPtr->GetSceneRestrictionFlags() & i2d::ISceneController::SR_ROTATE){
 			return;
 	}
 

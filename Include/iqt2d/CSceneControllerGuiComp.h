@@ -5,7 +5,7 @@
 #include "iqtgui/TDesignerGuiCompBase.h"
 
 
-#include "iqt2d/ISceneRestrictions.h"
+#include "i2d/ISceneController.h"
 #include "iqt2d/ISceneProvider.h"
 #include "iqt2d/Generated/ui_CSceneControllerGuiComp.h"
 
@@ -40,7 +40,7 @@ protected slots:
 	void OnRotateLeft();
 
 private:
-	I_REF(iqt2d::ISceneRestrictions, m_sceneRestrictionsCompPtr);
+	I_REF(i2d::ISceneController, m_sceneRestrictionsCompPtr);
 	I_REF(iqt2d::ISceneProvider, m_sceneProviderCompPtr);
 };
 

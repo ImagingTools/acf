@@ -16,7 +16,7 @@
 #include "iqtgui/CHierarchicalCommand.h"
 
 #include "iqt2d/ISceneProvider.h"
-#include "iqt2d/ISceneRestrictions.h"
+#include "i2d/ISceneController.h"
 
 #include "iqt2d/Generated/Ui_CSceneProviderGuiComp.h"
 
@@ -29,7 +29,7 @@ class CSceneProviderGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CSceneProviderGuiComp>,
 			virtual public idoc::ICommandsProvider,
 			virtual public ISceneProvider,
-			virtual public ISceneRestrictions
+			virtual public i2d::ISceneController
 {
 	Q_OBJECT
 
@@ -39,7 +39,7 @@ public:
 	I_BEGIN_COMPONENT(CSceneProviderGuiComp);
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
 		I_REGISTER_INTERFACE(ISceneProvider);
-		I_REGISTER_INTERFACE(ISceneRestrictions);
+		I_REGISTER_INTERFACE(i2d::ISceneController);
 		I_ASSIGN(m_allowWidgetResizeAttrPtr, "AllowWidgetResize", "Allow resize of QWidet object (should be disabled if this GUI size is managed by layout)", true, false)
 		I_ASSIGN(m_sceneIdAttrPtr, "SceneId", "ID allowing identifying this scene", true, 0)
 		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false)
@@ -48,41 +48,7 @@ public:
 		I_ASSIGN(m_sceneControllerGuiCompPtr, "SceneController", "Scene controller", false, "SceneController");		
 	I_END_COMPONENT;
 
-	/**
-		Vieport scale fitting mode.
-	*/
-	enum FitMode{
-		/**
-			No fitting will be done.
-		*/
-		FM_NONE,
-		/**
-			Isotropic scale will be done, but only scale reduction is allowed.
-		*/
-		FM_ISOTROPIC_REDUCTION,
-		/**
-			Complete isotropic scale will be done.
-		*/
-		FM_ISOTROPIC,
-		/**
-			Anisotropic scale will be done to fit whole viewport area.
-		*/
-		FM_ANISOTROPIC
-	};
-
 	CSceneProviderGuiComp();
-
-	/**
-		Get vieport scale fitting mode.
-	*/
-	FitMode GetFitMode() const;
-	/**
-		Set vieport scale fitting mode.
-	*/
-	void SetFitMode(FitMode fitMode);
-
-	bool IsFullScreenMode() const;
-	void SetFullScreenMode(bool isFullScreen);
 
 	double GetIsotropyFactor() const;
 	void SetIsotropyFactor(double factor);
@@ -94,12 +60,16 @@ public:
 	virtual int GetSceneId() const;
 	virtual QGraphicsScene* GetScene() const;
 
-	// reimplemented (iqt2d::ISceneRestrictions)
-	virtual int GetSceneRestrictionsFlags() const;
+	// reimplemented (i2d::ISceneController)
+	virtual int GetSceneRestrictionFlags() const;
+	virtual FitMode GetFitMode() const;
+	virtual bool SetFitMode(FitMode fitMode);
+	virtual bool IsFullScreenMode() const;
+	virtual bool SetFullScreenMode(bool isFullScreen);
+	virtual bool GetScale() const;
+	virtual bool SetScale(int scaleMode = SM_SET, double value = 1.0);
 
 public slots:
-	void SetZoom(double scaleFactor);
-	void SetZoom(const QString& zoomString);
 	void OnZoomIncrement();
 	void OnZoomDecrement();
 	void OnFitToView();

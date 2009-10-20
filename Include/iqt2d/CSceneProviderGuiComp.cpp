@@ -28,72 +28,6 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 }
 
 
-CSceneProviderGuiComp::FitMode CSceneProviderGuiComp::GetFitMode() const
-{
-	return m_fitMode;
-}
-
-
-void CSceneProviderGuiComp::SetFitMode(FitMode mode)
-{
-	if (mode != m_fitMode){
-		m_fitMode = mode;
-
-		if (m_fitMode != FM_NONE){
-			SceneView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-			SceneView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-			SetFittedScale(m_fitMode);
-		}
-		else{
-			SceneView->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-			SceneView->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-		}
-	}
-}
-
-
-bool CSceneProviderGuiComp::IsFullScreenMode() const
-{
-	return m_isFullScreenMode;
-}
-
-
-void CSceneProviderGuiComp::SetFullScreenMode(bool fullScreenMode)
-{
-	if (fullScreenMode != m_isFullScreenMode){
-		m_isFullScreenMode = fullScreenMode;
-
-		if (m_isFullScreenMode != CompleteFrame->isFullScreen()){
-			if (m_isFullScreenMode){
-				m_savedParentWidgetPtr = CompleteFrame->parentWidget();
-				m_savedViewTransform = SceneView->matrix();
-				CompleteFrame->setParent(NULL);
-
-				BottomFrame->setVisible(false);
-				CompleteFrame->showFullScreen();
-
-				SetFittedScale(m_fitMode != FM_NONE? m_fitMode: FM_ISOTROPIC);
-			}
-			else{
-				if (m_savedParentWidgetPtr != NULL){
-					CompleteFrame->setParent(m_savedParentWidgetPtr);
-					m_savedParentWidgetPtr->layout()->addWidget(CompleteFrame);
-				}
-				
-				m_savedParentWidgetPtr = NULL;
-
-				BottomFrame->setVisible(m_sceneControllerGuiCompPtr.IsValid());
-
-				CompleteFrame->showNormal();
-
-				SceneView->setMatrix(m_savedViewTransform);
-			}
-		}
-	}
-}
-
-
 double CSceneProviderGuiComp::GetIsotropyFactor() const
 {
 	return m_isotropyFactor;
@@ -136,9 +70,9 @@ QGraphicsScene* CSceneProviderGuiComp::GetScene() const
 }
 
 
-// reimplemented (iqt2d::ISceneRestrictions)
+// reimplemented (i2d::ISceneController)
 
-int CSceneProviderGuiComp::GetSceneRestrictionsFlags() const
+int CSceneProviderGuiComp::GetSceneRestrictionFlags() const
 {
 	if (m_fitMode != FM_NONE){
 		return SR_ALL;
@@ -148,12 +82,93 @@ int CSceneProviderGuiComp::GetSceneRestrictionsFlags() const
 }
 
 
-// public slots
-
-void CSceneProviderGuiComp::SetZoom(double scaleFactor)
+CSceneProviderGuiComp::FitMode CSceneProviderGuiComp::GetFitMode() const
 {
+	return m_fitMode;
+}
+
+
+bool CSceneProviderGuiComp::SetFitMode(FitMode mode)
+{
+	if (mode != m_fitMode){
+		m_fitMode = mode;
+
+		if (m_fitMode != FM_NONE){
+			SceneView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+			SceneView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+			SetFittedScale(m_fitMode);
+		}
+		else{
+			SceneView->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+			SceneView->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+		}
+	}
+
+	return true;
+}
+
+
+bool CSceneProviderGuiComp::IsFullScreenMode() const
+{
+	return m_isFullScreenMode;
+}
+
+
+bool CSceneProviderGuiComp::SetFullScreenMode(bool fullScreenMode)
+{
+	if (fullScreenMode != m_isFullScreenMode){
+		m_isFullScreenMode = fullScreenMode;
+
+		if (m_isFullScreenMode != CompleteFrame->isFullScreen()){
+			if (m_isFullScreenMode){
+				m_savedParentWidgetPtr = CompleteFrame->parentWidget();
+				m_savedViewTransform = SceneView->matrix();
+				CompleteFrame->setParent(NULL);
+
+				BottomFrame->setVisible(false);
+				CompleteFrame->showFullScreen();
+
+				SetFittedScale(m_fitMode != FM_NONE? m_fitMode: FM_ISOTROPIC);
+			}
+			else{
+				if (m_savedParentWidgetPtr != NULL){
+					CompleteFrame->setParent(m_savedParentWidgetPtr);
+					m_savedParentWidgetPtr->layout()->addWidget(CompleteFrame);
+				}
+				
+				m_savedParentWidgetPtr = NULL;
+
+				BottomFrame->setVisible(m_sceneControllerGuiCompPtr.IsValid());
+
+				CompleteFrame->showNormal();
+
+				SceneView->setMatrix(m_savedViewTransform);
+			}
+		}
+	}
+
+	return true;
+}
+
+
+bool CSceneProviderGuiComp::GetScale() const
+{
+	QMatrix currentMatrix = SceneView->matrix();
+	double currentScale = sqrt(currentMatrix.det());
+
+	return currentScale;
+}
+
+
+bool CSceneProviderGuiComp::SetScale(int scaleMode, double scaleFactor)
+{
+	if (scaleMode != SM_SET){
+		return false;
+	}
+
 	if (m_isZoomIgnored || (m_fitMode != FM_NONE)){
-		return;
+		return false;
 	}
 
 	QMatrix currentMatrix = SceneView->matrix();
@@ -171,14 +186,12 @@ void CSceneProviderGuiComp::SetZoom(double scaleFactor)
 	emit zoomChanged(scaleFactor);
 
 	m_isZoomIgnored = false;
+
+	return true;
 }
 
 
-void CSceneProviderGuiComp::SetZoom(const QString& zoomString)
-{
-	SetZoom(zoomString.toInt() / 100.0);
-}
-
+// public slots
 
 void CSceneProviderGuiComp::OnZoomIncrement()
 {
@@ -210,7 +223,7 @@ void CSceneProviderGuiComp::OnFitToShapes()
 
 void CSceneProviderGuiComp::OnResetScale()
 {
-	SetZoom(1.0);
+	SetScale(SM_SET, 1.0);
 }
 
 
@@ -262,9 +275,11 @@ void CSceneProviderGuiComp::OnKeyReleaseEvent(QKeyEvent* eventPtr)
 	case Qt::Key_Plus:
 		OnZoomIncrement();
 		break;
+
 	case Qt::Key_Minus:
 		OnZoomDecrement();
 		break;
+
 	case Qt::Key_Escape:
 		SetFullScreenMode(false);
 		break;
@@ -310,7 +325,7 @@ void CSceneProviderGuiComp::ScaleView(double scaleFactor)
 
 	double currentScale = sqrt(sceneMatrix.det());
 
-	SetZoom(scaleFactor * currentScale);
+	SetScale(SM_SET, scaleFactor * currentScale);
 }
 
 

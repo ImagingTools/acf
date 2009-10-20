@@ -259,6 +259,10 @@
 				RelativePath="..\IObject2d.h"
 				>
 			</File>
+			<File
+				RelativePath="..\ISceneController.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

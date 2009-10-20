@@ -13,8 +13,8 @@
     <file alias="Exit" >Resources/Icons/exit.png</file>
     <file alias="Undo" >Resources/Icons/reload_left_128.png</file>
     <file alias="Redo" >Resources/Icons/reload_128.png</file>
-    <file alias="RotateLeft" >Resources/Icons/reload_left_128.png</file>
-    <file alias="RotateRight" >Resources/Icons/reload_128.png</file>
+    <file alias="RotateLeft.svg" >Resources/Icons/RotateLeft.svg</file>
+    <file alias="RotateRight.svg" >Resources/Icons/RotateRight.svg</file>
     <file alias="About" >Resources/Icons/info_128.png</file>
     <file alias="Snap" >Resources/Icons/camera_128.png</file>
     <file alias="Add" >Resources/Icons/add_128.png</file>
