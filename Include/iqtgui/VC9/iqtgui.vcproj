@@ -32,25 +32,28 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
 				Name="Arxc"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Copy"
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="SubVersionTransform"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -113,25 +116,28 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
 				Name="Arxc"
 			/>
 			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Copy"
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="SubVersionTransform"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -200,6 +206,10 @@
 			</File>
 			<File
 				RelativePath="..\CApplicationComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CComposedGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -282,6 +292,10 @@
 			</File>
 			<File
 				RelativePath="..\CApplicationComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CComposedGuiComp.h"
 				>
 			</File>
 			<File
@@ -479,27 +493,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\administrator_128.png"
-					>
-				</File>
-				<File
 					RelativePath="..\Resources\Icons\attach_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\back_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\book_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\calculator_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\calendar_128.png"
 					>
 				</File>
 				<File
@@ -508,18 +502,6 @@
 				</File>
 				<File
 					RelativePath="..\Resources\Icons\cancel_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\chat_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\clock_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\close_a_128.png"
 					>
 				</File>
 				<File
@@ -543,10 +525,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\door_128.png"
-					>
-				</File>
-				<File
 					RelativePath="..\Resources\Icons\down_128.png"
 					>
 				</File>
@@ -555,19 +533,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\fast_forward_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\first_128.png"
-					>
-				</File>
-				<File
 					RelativePath="..\Resources\Icons\folder_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\group_128.png"
 					>
 				</File>
 				<File
@@ -575,35 +541,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\home_128.png"
-					>
-				</File>
-				<File
 					RelativePath="..\Resources\Icons\info_128.png"
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\lamp_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\last_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\mail_write_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\mailbox_search_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\mailbox_write_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\mailbox_zoom_128.png"
+					RelativePath="..\Resources\Icons\Log.png"
 					>
 				</File>
 				<File
@@ -611,31 +553,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\ok_128.png"
-					>
-				</File>
-				<File
 					RelativePath="..\Resources\Icons\paste_128.png"
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\pause_128.png"
+					RelativePath="..\Resources\Icons\player_pause.png"
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\pen_128.png"
+					RelativePath="..\Resources\Icons\player_play.png"
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\play_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\preview_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\printer_128.png"
+					RelativePath="..\Resources\Icons\player_stop.png"
 					>
 				</File>
 				<File
@@ -647,19 +577,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\Resources\Icons\RotateLeft.svg"
+					>
+				</File>
+				<File
+					RelativePath="..\Resources\Icons\RotateRight.svg"
+					>
+				</File>
+				<File
 					RelativePath="..\Resources\Icons\sandglass_128.png"
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\scissors_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\star_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\statistic_128.png"
+					RelativePath="..\Resources\Icons\SnapImage.png"
 					>
 				</File>
 				<File
@@ -691,7 +621,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Resources\Icons\zoom_128.png"
+					RelativePath="..\Resources\Icons\Zoom in.png"
+					>
+				</File>
+				<File
+					RelativePath="..\Resources\Icons\Zoom out.png"
 					>
 				</File>
 			</Filter>

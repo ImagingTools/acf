@@ -5,6 +5,7 @@
 	Name="Compositor"
 	ProjectGUID="{00BD2AB5-993C-4B0D-B117-D98F7307E947}"
 	RootNamespace="Compositor"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -28,13 +29,8 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
+				Name="Arxc"
+				ConfigFile="$(ACFDIR)/Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -45,8 +41,13 @@
 				InputDir="..\..\..\Bin\info"
 			/>
 			<Tool
-				Name="Arxc"
-				ConfigFile="$(ACFDIR)/Config/Core.xpc"
+				Name="SubVersionTransform"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -109,9 +110,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -126,13 +124,8 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
+				Name="Arxc"
+				ConfigFile="$(ACFDIR)/Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -143,8 +136,13 @@
 				InputDir="..\..\..\Bin\info"
 			/>
 			<Tool
-				Name="Arxc"
-				ConfigFile="$(ACFDIR)/Config/Core.xpc"
+				Name="SubVersionTransform"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -207,9 +205,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -233,7 +228,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\resource.h"
+				RelativePath="..\VC\resource.h"
 				>
 			</File>
 		</Filter>
@@ -252,11 +247,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Compositor.rc.xtracf"
+				RelativePath="..\VC\Compositor.rc.xtracf"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\Docs\Images\Logo\Logo.ico"
+				RelativePath="..\VC\Logo.ico"
 				>
 			</File>
 		</Filter>
@@ -288,4 +283,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

@@ -376,6 +376,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFileListProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ILoggable.h"
 				>
 			</File>
@@ -463,6 +467,10 @@
 				RelativePath="..\VersionInfo.arx.xtrsvn"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Generated"
+			>
 		</Filter>
 	</Files>
 	<Globals>

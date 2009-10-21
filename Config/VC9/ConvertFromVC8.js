@@ -1,7 +1,7 @@
 var projectExt = "vcproj";
 var projectExp = new RegExp(".*\." + projectExt + "$");
 var solutionExt = "sln";
-var solutionExt = new RegExp(".*\." + solutionExt + "$");
+var solutionExp = new RegExp(".*\." + solutionExt + "$");
 
 
 function TransformProject(fileSystem, shell, inputPath, outputPath, beQuiet, isTest)
@@ -26,7 +26,7 @@ function TransformProject(fileSystem, shell, inputPath, outputPath, beQuiet, isT
 }
 
 
-function ProcessFolder(fileSystem, shell, folder, parentFolder, beQuiet, isTest)
+function ProcessFolder(fileSystem, shell, folder, parentFolder, projEnabled, slnEnabled, beQuiet, isTest)
 {
 	var retVal = new String;
 
@@ -35,8 +35,8 @@ function ProcessFolder(fileSystem, shell, folder, parentFolder, beQuiet, isTest)
 		for (; !fileIter.atEnd(); fileIter.moveNext()){
 			var file = fileIter.item();
 			
-			var isProject = projectExp.exec(file.Name);
-			var isSolution = solutionExt.exec(file.Name);
+			var isProject = projEnabled && projectExp.exec(file.Name);
+			var isSolution = slnEnabled && solutionExp.exec(file.Name);
 
 			if (isProject || isSolution){
 				var fileName = String(file.Name);
@@ -65,7 +65,7 @@ function ProcessFolder(fileSystem, shell, folder, parentFolder, beQuiet, isTest)
 	var subFolderIter = new Enumerator(folder.SubFolders);
 	for (; !subFolderIter.atEnd() && (!isTest || retVal ==""); subFolderIter.moveNext()){
 		var childFile = subFolderIter.item();
-		retVal += ProcessFolder(fileSystem, shell, childFile, folder, beQuiet, isTest);
+		retVal += ProcessFolder(fileSystem, shell, childFile, folder, projEnabled, slnEnabled, beQuiet, isTest);
 	}
 	
 	return retVal;
@@ -78,6 +78,8 @@ var shell = WScript.CreateObject("WScript.Shell");
 
 var isTest = false;
 var beQuiet = false;
+var projEnabled = true;
+var slnEnabled = true;
 
 for (var i = 0; i < WScript.Arguments.length; ++i){
     var argument = WScript.Arguments(i).toString();
@@ -88,6 +90,15 @@ for (var i = 0; i < WScript.Arguments.length; ++i){
         else if (argument.toUpperCase() == "-Q"){
             beQuiet = true;
         }
+        else if (argument.toUpperCase() == "-NOSLN"){
+            slnEnabled = false;
+        }
+        else if (argument.toUpperCase() == "-NOPROJ"){
+            projEnabled = false;
+        }
+        else if (argument.toUpperCase() == "-h"){
+			WScript.Echo("Usage: ConverFromVC8.js [-t] [-q] [-noSln] [-noProj] [-h]" + argument);
+        }
         else{
 			WScript.Echo("Unknown parameter: " + argument);
         }
@@ -97,7 +108,7 @@ for (var i = 0; i < WScript.Arguments.length; ++i){
     }
 }
 
-var message = ProcessFolder(fileSystem, shell, fileSystem.GetFolder("."), null, beQuiet, isTest);
+var message = ProcessFolder(fileSystem, shell, fileSystem.GetFolder("."), null, projEnabled, slnEnabled, beQuiet, isTest);
 if (message.length > 1){
     WScript.Echo("Following projects was converted:\n\n" + message);
 }
