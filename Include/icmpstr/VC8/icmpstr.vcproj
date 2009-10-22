@@ -190,11 +190,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CConnectorShape.cpp"
+				RelativePath="..\CGeometricalRegistryComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CGeometricalRegistryElement.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CGraphicsConnectorItem.cpp"
 				>
 			</File>
 			<File
@@ -211,6 +215,10 @@
 			</File>
 			<File
 				RelativePath="..\CRegistryElementShape.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -264,11 +272,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CConnectorShape.h"
+				RelativePath="..\CGeometricalRegistryComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CGeometricalRegistryElement.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CGraphicsConnectorItem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CGraphicsConnectorItem.moc"
 				>
 			</File>
 			<File
@@ -289,6 +305,18 @@
 			</File>
 			<File
 				RelativePath="..\CRegistryElementShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryElementShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryGuiComp.moc"
 				>
 			</File>
 			<File
@@ -365,62 +393,74 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\Generated\moc_CAttributeEditorComp.cpp"
+				RelativePath="..\generated\moc_CAttributeEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CComponentSceneItem.cpp"
+				RelativePath="..\generated\moc_CComponentSceneItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CPackageOverviewComp.cpp"
+				RelativePath="..\generated\moc_CGraphicsConnectorItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRegistryPreviewComp.cpp"
+				RelativePath="..\generated\moc_CPackageOverviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRegistryView.cpp"
+				RelativePath="..\generated\moc_CRegistryElementShape.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRegistryViewComp.cpp"
+				RelativePath="..\generated\moc_CRegistryGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\qrc_icmpstr.cpp"
+				RelativePath="..\generated\moc_CRegistryPreviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CAttributeEditorComp.h"
+				RelativePath="..\generated\moc_CRegistryView.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CPackageOverviewComp.h"
+				RelativePath="..\generated\moc_CRegistryViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CRegistryPropertiesDialog.h"
+				RelativePath="..\generated\qrc_icmpstr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CAttributeEditorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CPackageOverviewComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CRegistryPropertiesDialog.h"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Forms"
 			>
-			<File
-				RelativePath="..\CAttributeEditorComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CPackageOverviewComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryPropertiesDialog.ui"
-				>
-			</File>
 		</Filter>
+		<File
+			RelativePath="..\CAttributeEditorComp.ui"
+			>
+		</File>
+		<File
+			RelativePath="..\CPackageOverviewComp.ui"
+			>
+		</File>
+		<File
+			RelativePath="..\CRegistryPropertiesDialog.ui"
+			>
+		</File>
 	</Files>
 	<Globals>
 		<Global

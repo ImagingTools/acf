@@ -1,0 +1,241 @@
+#include "icmpstr/CGeometricalRegistryComp.h"
+
+
+#include "istd/TChangeNotifier.h"
+#include "istd/CClassInfo.h"
+
+#include "icomp/CInterfaceManipBase.h"
+
+
+// public methods
+
+
+namespace icmpstr
+{
+
+
+bool CGeometricalRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
+{
+	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
+	static iser::CArchiveTag elementTag("Element", "Map element");
+
+	bool retVal = true;
+
+	Ids ids = GetElementIds();
+	int positionsCount = ids.size();
+
+	retVal = retVal && archive.BeginMultiTag(positionMapTag, elementTag, positionsCount);
+
+	if (!retVal){
+		return false;
+	}
+
+	if (archive.IsStoring()){
+		for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
+			std::string elementId = *iter;
+
+			i2d::CVector2d position(0, 0);
+			const ElementInfo* infoPtr = GetElementInfo(elementId);
+			if (infoPtr != NULL){
+				const CGeometricalRegistryElement* elementPtr = dynamic_cast<const CGeometricalRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				if (elementPtr != NULL){
+					i2d::CVector2d position = elementPtr->GetCenter();
+				}
+			}
+
+			retVal = retVal && archive.BeginTag(elementTag);
+
+			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
+				
+			retVal = retVal && archive.EndTag(elementTag);
+		}
+	}
+	else{
+		istd::CChangeNotifier notifier(this);
+
+		for (int i = 0; i < positionsCount; ++i){
+			retVal = retVal && archive.BeginTag(elementTag);
+			
+			std::string elementId;
+			i2d::CVector2d position;
+
+			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
+			if (!retVal){
+				return false;
+			}
+
+			const ElementInfo* infoPtr = GetElementInfo(elementId);
+			if (infoPtr != NULL){
+				CGeometricalRegistryElement* elementPtr = dynamic_cast<CGeometricalRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				if (elementPtr != NULL){
+					elementPtr->MoveTo(position);
+				}
+			}
+
+			retVal = retVal && archive.EndTag(elementTag);
+		}
+	
+	}
+
+	retVal = retVal && archive.EndTag(positionMapTag);
+
+	return retVal;
+}
+
+
+bool CGeometricalRegistryComp::SerializeRegistry(iser::IArchive& archive)
+{
+	return BaseClass2::Serialize(archive);
+}
+
+
+int CGeometricalRegistryComp::CheckAttributeConsistency(const icomp::IRegistryElement& element, const std::string& attributeId)
+{
+	const icomp::IComponentStaticInfo& elementStaticInfo = element.GetComponentStaticInfo();
+	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
+	const icomp::IComponentStaticInfo::AttributeInfos::ValueType* attrStaticInfoPtrPtr = staticAttributes.FindElement(attributeId);
+	if (attrStaticInfoPtrPtr == NULL){
+		return CS_UNKNOWN;
+	}
+	I_ASSERT(*attrStaticInfoPtrPtr != NULL);
+
+	const icomp::IAttributeStaticInfo& attrStaticInfo = **attrStaticInfoPtrPtr;
+	const istd::CClassInfo& attrType = attrStaticInfo.GetAttributeType();
+
+	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = element.GetAttributeInfo(attributeId);
+
+	if (		(attrType == istd::CClassInfo::GetInfo<icomp::CReferenceAttribute>()) ||
+				(attrType == istd::CClassInfo::GetInfo<icomp::CMultiReferenceAttribute>()) ||
+				(attrType == istd::CClassInfo::GetInfo<icomp::CFactoryAttribute>()) ||
+				(attrType == istd::CClassInfo::GetInfo<icomp::CMultiFactoryAttribute>())){
+		if ((attributeInfoPtr == NULL) || !attributeInfoPtr->attributePtr.IsValid()){
+			if (attrStaticInfo.IsObligatory() && attributeInfoPtr->exportId.empty()){
+				return CS_INVALID;
+			}
+			else if (attributeInfoPtr->exportId.empty()){
+				return CS_OPTIONAL;
+			}
+			else{
+				return CS_OK;
+			}
+		}
+
+		const icomp::TAttribute<std::string>* idPtr = dynamic_cast<const icomp::TAttribute<std::string>*>(attributeInfoPtr->attributePtr.GetPtr());
+		if (idPtr != NULL){		
+			const icomp::CReferenceAttribute* referencePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributeInfoPtr->attributePtr.GetPtr());
+			if ((referencePtr != NULL) && (attrType != istd::CClassInfo::GetInfo<icomp::CReferenceAttribute>())){
+				return CS_INVALID;
+			}
+
+			std::string componentId;
+			std::string restId;
+			icomp::CInterfaceManipBase::SplitId(idPtr->GetValue().c_str(), componentId, restId);
+
+			if (GetElementInfo(componentId) == NULL){
+				return CS_INVALID;
+			}
+		}
+	}
+
+	return CS_OK;
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CGeometricalRegistryComp::OnComponentCreated()
+{
+	if (m_staticInfoCompPtr.IsValid()){
+		SetComponentStaticInfo(m_staticInfoCompPtr.GetPtr());
+	}
+}
+
+
+// reimplemented (icomp::IRegistry)
+
+CGeometricalRegistryComp::ElementInfo* CGeometricalRegistryComp::InsertElementInfo(
+			const std::string& elementId,
+			const icomp::CComponentAddress& address,
+			bool ensureElementCreated)
+{
+	ElementInfo* infoPtr = BaseClass2::InsertElementInfo(elementId, address, ensureElementCreated);
+
+	if (infoPtr != NULL){
+		CGeometricalRegistryElement* elementPtr = dynamic_cast<CGeometricalRegistryElement*>(infoPtr->elementPtr.GetPtr());
+		if (elementPtr != NULL){
+			elementPtr->SetName(elementId);
+		}
+	}
+	else{
+		SendErrorMessage(
+					MI_CANNOT_CREATE_ELEMENT,
+					iqt::GetCString(QObject::tr("Cannot create %1 (%2: %3)").
+								arg(elementId.c_str()).
+								arg(address.GetPackageId().c_str()).
+								arg(address.GetComponentId().c_str())));
+	}
+
+	return infoPtr;
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CGeometricalRegistryComp::Serialize(iser::IArchive& archive)
+{
+	return BaseClass2::Serialize(archive) && SerializeComponentsLayout(archive);
+}
+
+
+// protected methods
+
+bool CGeometricalRegistryComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, i2d::CVector2d& position)
+{
+	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
+	static iser::CArchiveTag positionXTag("X", "X position of component");
+	static iser::CArchiveTag positionYTag("Y", "Y position of component");
+	
+	bool retVal = archive.BeginTag(nameTag);
+	retVal = retVal && archive.Process(componentRole);
+	retVal = retVal && archive.EndTag(nameTag);
+
+	retVal = retVal && archive.BeginTag(positionXTag);
+	retVal = retVal && archive.Process(position[0]);
+	retVal = retVal && archive.EndTag(positionXTag);
+
+	retVal = retVal && archive.BeginTag(positionXTag);
+	retVal = retVal && archive.Process(position[1]);
+	retVal = retVal && archive.EndTag(positionXTag);
+
+	return retVal;
+}
+
+
+// reimplemented (icomp::CRegistry)
+
+icomp::IRegistryElement* CGeometricalRegistryComp::CreateRegistryElement(const icomp::CComponentAddress& address) const
+{
+	const icomp::IComponentStaticInfo* componentsFactoryPtr = GetComponentStaticInfo();
+	if (componentsFactoryPtr != NULL){
+		const icomp::IComponentStaticInfo* packageInfoPtr = componentsFactoryPtr->GetSubcomponentInfo(address.GetPackageId());
+		if (packageInfoPtr != NULL){
+			const icomp::IComponentStaticInfo* componentInfoPtr = packageInfoPtr->GetSubcomponentInfo(address.GetComponentId());
+			if (componentInfoPtr != NULL){
+				Element* registryElementPtr = new Element;
+				if (registryElementPtr != NULL){
+					registryElementPtr->Initialize(this, componentInfoPtr, address);
+					registryElementPtr->SetSlavePtr(const_cast<CGeometricalRegistryComp*>(this));
+
+					return registryElementPtr;
+				}
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+} // namespace icmpstr
+
+

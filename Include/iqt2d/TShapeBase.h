@@ -257,6 +257,20 @@ void TShapeBase<GraphicsItemClass>::paint(QPainter* painter, const QStyleOptionG
 }
 
 
+// specialized implementations
+
+template <>
+inline void TShapeBase<QGraphicsItem>::paint(QPainter* /*painter*/, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
+{
+}
+
+
+template <>
+inline void TShapeBase<QAbstractGraphicsShapeItem>::paint(QPainter* /*painter*/, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
+{
+}
+
+
 } // namespace iqt2d
 
 

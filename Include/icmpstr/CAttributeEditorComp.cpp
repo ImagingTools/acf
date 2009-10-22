@@ -195,7 +195,12 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
 
 	NameLabel->setText(selectionInfoPtr->GetSelectedElementName().c_str());
-	IconLabel->setPixmap(selectionInfoPtr->GetSelectedElementIcon().pixmap(128));
+	const QIcon* iconPtr = selectionInfoPtr->GetSelectedElementIcon();
+	if (iconPtr != NULL){
+		IconLabel->setPixmap(iconPtr->pixmap(128));
+	}
+
+	IconLabel->setVisible(iconPtr != NULL);
 
 	const icomp::CComponentAddress* addressPtr = selectionInfoPtr->GetSelectedElementAddress();
 	if (addressPtr != NULL){

@@ -10,7 +10,9 @@
 
 #include "istd/TChangeNotifier.h"
 
-#include "icmpstr/CRegistryModelComp.h"
+#include "icmpstr/CGeometricalRegistryComp.h"
+
+#include "icmpstr/CRegistryModelComp.h"	// TODO: remove it when old Compositor concept will be removed
 
 
 namespace icmpstr
@@ -28,6 +30,8 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 	}
 
 	CRegistryModelComp* registryModelPtr = dynamic_cast<CRegistryModelComp*>(&data);
+	CGeometricalRegistryComp* geometricalRegistryPtr = dynamic_cast<CGeometricalRegistryComp*>(&data);
+
 	if (registryModelPtr != NULL){
 		ReadArchiveEx registryArchive(filePath, this);
 		I_ASSERT(!registryArchive.IsStoring());
@@ -46,6 +50,32 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 		I_ASSERT(!layoutArchive.IsStoring());
 
 		if (!registryModelPtr->SerializeComponentsLayout(layoutArchive)){
+			SendInfoMessage(
+						MI_CANNOT_READ_LAYOUT,
+						iqt::GetCString(QObject::tr("Layout information cannot be loaded (%1)").
+									arg(iqt::GetQString(filePath))));
+		}
+
+		return StateOk;
+	}
+	else if (geometricalRegistryPtr != NULL){
+		ReadArchiveEx registryArchive(filePath, this);
+		I_ASSERT(!registryArchive.IsStoring());
+
+		if (!geometricalRegistryPtr->SerializeRegistry(registryArchive)){
+			OnReadError(registryArchive, data, filePath);
+
+			SendErrorMessage(
+						MI_LOAD_ERROR,
+						iqt::GetCString(QObject::tr("Cannot load file %1").arg(iqt::GetQString(filePath))));
+
+			return StateFailed;
+		}
+
+		ReadArchiveEx layoutArchive(GetLayoutPath(filePath), this);
+		I_ASSERT(!layoutArchive.IsStoring());
+
+		if (!geometricalRegistryPtr->SerializeComponentsLayout(layoutArchive)){
 			SendInfoMessage(
 						MI_CANNOT_READ_LAYOUT,
 						iqt::GetCString(QObject::tr("Layout information cannot be loaded (%1)").

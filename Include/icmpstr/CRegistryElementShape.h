@@ -3,40 +3,56 @@
 
 
 // Qt includes
-#include <QGraphicsItem>
-#include <QMouseEvent>
-#include <QIcon>
+#include <QAbstractGraphicsShapeItem>
 
 #include "imod/TSingleModelObserverBase.h"
 
 #include "iqt2d/TObjectShapeBase.h"
 
 #include "icmpstr/CGeometricalRegistryElement.h"
-#include "icmpstr/CRegistryView.h"
 
 
 namespace icmpstr
 {
 
 
-class CRegistryElementShape: public iqt2d::TObjectShapeBase<QGraphicsItem, CGeometricalRegistryElement>
-{
-public:
-	typedef iqt2d::TObjectShapeBase<QGraphicsItem, CGeometricalRegistryElement> BaseClass;
+class CRegistryGuiComp;
 
-	CRegistryElementShape(const CRegistryView* registryViewPtr);
+
+/**
+	Visualization of geometrical registry elements.
+*/
+class CRegistryElementShape: public iqt2d::TObjectShapeBase<QAbstractGraphicsShapeItem, CGeometricalRegistryElement>
+{
+	Q_OBJECT
+
+public:
+	typedef iqt2d::TObjectShapeBase<QAbstractGraphicsShapeItem, CGeometricalRegistryElement> BaseClass;
+
+	CRegistryElementShape(const CRegistryGuiComp* registryViewPtr);
 
 	// reimplemented (QGraphicsItem)
 	virtual QRectF boundingRect() const;
 	virtual void paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* stylePtr, QWidget* widgetPtr);
 	virtual bool contains(const QPointF& point) const;
+	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
+signals:
+	void RectChanged(QRectF rect);
+	void SelectionChanged(bool state);
+
 protected:
-	void CalcExportedInteraces();
+	enum
+	{
+		SIDE_OFFSET = 3,
+		SHADOW_OFFSET = 10
+	};
+
+	void CalcExportedInteraces(const CGeometricalRegistryElement& element);
 
 	// reimplemented (QGraphicsItem)
     virtual void mousePressEvent(QGraphicsSceneMouseEvent* eventPtr);
@@ -59,14 +75,12 @@ protected:
 	};
 
 private:
-	const CRegistryView& m_registryView;
+	const CRegistryGuiComp& m_registryView;
 
 	RegistryObserver m_registryObserver;
 
-	QRectF m_boundingBox;
-	QPixmap m_image;
-	int m_componentLabelHeight;
-	int m_componentIdHeight;
+	QRectF m_realBox;
+
 	QStringList m_exportedInterfacesList;
 
 	QPointF m_lastClickPosition;

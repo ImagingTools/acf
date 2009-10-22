@@ -11,15 +11,18 @@
 
 #include "icomp/CCompositeComponentStaticInfo.h"
 
+#include "icmpstr/CRegistryGuiComp.h"
+
 
 namespace icmpstr
 {
 
 
-CRegistryElementShape::CRegistryElementShape(const CRegistryView* registryViewPtr)
+CRegistryElementShape::CRegistryElementShape(const CRegistryGuiComp* registryViewPtr)
 :	m_registryView(*registryViewPtr),
 	m_registryObserver(this)
 {
+	setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
 	I_ASSERT(registryViewPtr != NULL);
 }
 
@@ -28,7 +31,11 @@ CRegistryElementShape::CRegistryElementShape(const CRegistryView* registryViewPt
 
 QRectF CRegistryElementShape::boundingRect() const
 {
-	return m_boundingBox;
+	QRectF retVal = m_realBox;
+
+	retVal.adjust(0, 0, SHADOW_OFFSET, SHADOW_OFFSET);
+
+	return retVal;
 }
 
 
@@ -41,17 +48,15 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	painterPtr->setRenderHints(QPainter::Antialiasing, true);
 
-	QRectF mainRect = m_boundingBox;
+	QRectF mainRect = m_realBox;
 
-	mainRect.adjust(0, 0, -10, -10);
-
-	QRectF shadowRect = mainRect;
-	shadowRect.adjust(10, 10, 10, 10);
+	QRectF shadowRect = m_realBox;
+	shadowRect.adjust(SHADOW_OFFSET, SHADOW_OFFSET, SHADOW_OFFSET, SHADOW_OFFSET);
 	
 	if (isSelected()){
 		painterPtr->fillRect(shadowRect, QColor(10, 242, 126, 50));
 		painterPtr->setPen(Qt::blue);
-		painterPtr->fillRect(mainRect, QColor(10, 242, 126, 255));
+		painterPtr->fillRect(m_realBox, QColor(10, 242, 126, 255));
 	}
 	else{
 		painterPtr->fillRect(shadowRect, QColor(0, 0, 0, 30));
@@ -61,15 +66,22 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	painterPtr->drawRect(mainRect);
 
-	if (!m_image.isNull() && (mainRect.width() > mainRect.height())){
-		mainRect.adjust(mainRect.height(), 0, 0, 0);
+	const icomp::CComponentAddress& address = objectPtr->GetAddress();
 
-		painterPtr->drawPixmap(
-					int(mainRect.height() * 0.05),
-					int(mainRect.height() * 0.05),
-					int(mainRect.height() * 0.9),
-					int(mainRect.height() * 0.9),
-					m_image);
+	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+
+	const QIcon* iconPtr = m_registryView.GetIcon(address);
+	if ((iconPtr != NULL) && (mainRect.width() > mainRect.height())){
+		int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
+
+		QRectF iconRect(
+					mainRect.left(),
+					mainRect.top(),
+					minSideSize,
+					minSideSize);
+		iconPtr->paint(painterPtr, iconRect.toRect());
+
+		mainRect.adjust(minSideSize + SIDE_OFFSET, 0, 0, 0);
 	}
 
 	I_DWORD elementFlags = objectPtr->GetElementFlags();
@@ -78,22 +90,18 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 		QRectF iconRect(
 					mainRect.right() - minSideSize * 0.5,
+					mainRect.top() + minSideSize * 0.5,
 					minSideSize * 0.5,
-					minSideSize * 0.4,
-					minSideSize * 0.4);
-		QRectF worldIconRect = painterPtr->worldTransform().mapRect(iconRect);
-		QSize iconSize(istd::Min(256, int(worldIconRect.width())), istd::Min(256, int(worldIconRect.height())));
-		painterPtr->drawPixmap(
-					iconRect,
-					QIcon(":/Icons/AutoInit.svg").pixmap(iconSize),
-					QRectF(0, 0, iconSize.width(), iconSize.height()));
+					minSideSize * 0.5);
+
+		QIcon(":/Icons/AutoInit.svg").paint(painterPtr, iconRect.toRect());
 	}
 
 	const icomp::IComponentStaticInfo& info = objectPtr->GetComponentStaticInfo();
 	if (dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(&info) != NULL){
-		QRectF compositeRect = mainRect;
-		compositeRect.adjust(4, 4, -4, -4);
-		painterPtr->drawRect(compositeRect);
+		painterPtr->drawRect(mainRect);
+
+		mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 	}
 
 	if (!m_exportedInterfacesList.empty()){
@@ -101,48 +109,45 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 		QRectF iconRect(
 					mainRect.right() - minSideSize * 0.5,
-					minSideSize * 0.1,
-					minSideSize * 0.4,
-					minSideSize * 0.4);
-		QRectF worldIconRect = painterPtr->worldTransform().mapRect(iconRect);
-		QSize iconSize(istd::Min(256, int(worldIconRect.width())), istd::Min(256, int(worldIconRect.height())));
-		painterPtr->drawPixmap(
-					iconRect,
-					QIcon(":/Icons/Export.svg").pixmap(iconSize),
-					QRectF(0, 0, iconSize.width(), iconSize.height()));
+					mainRect.top(),
+					minSideSize * 0.5,
+					minSideSize * 0.5);
+		QIcon(":/Icons/Export.svg").paint(painterPtr, iconRect.toRect());
 	}
 
-	mainRect.adjust(10, 10, 0, 0);
-	mainRect.setHeight(m_componentLabelHeight);
-	painterPtr->save();
 	painterPtr->setPen(Qt::black);
 
 	std::string componentName = objectPtr->GetName();
 
-	QFont labelFont(qApp->font());
-	labelFont.setBold(true);
-	labelFont.setPixelSize(labelFont.pixelSize() * 2);
-	painterPtr->setFont(labelFont);
-	painterPtr->drawText(mainRect, Qt::AlignLeft | Qt::TextSingleLine, componentName.c_str());
+	const QFont& nameFont = m_registryView.GetElementNameFont();
+	painterPtr->setFont(nameFont);
+	painterPtr->drawText(mainRect, componentName.c_str(), Qt::AlignTop | Qt::AlignLeft);
 
-	mainRect.moveTop(mainRect.bottom() + 10);
-	mainRect.setHeight(m_componentIdHeight);
-	painterPtr->setFont(qApp->font());
-
-	const icomp::CComponentAddress& adress = objectPtr->GetAddress();
-
+	const QFont& detailFont = m_registryView.GetElementDetailFont();
+	painterPtr->setFont(detailFont);
 	painterPtr->drawText(
 				mainRect, 
-				Qt::AlignLeft | Qt::TextSingleLine, 
-				QString(adress.GetPackageId().c_str()) + QString("/") + adress.GetComponentId().c_str());
-	
-	painterPtr->restore();
+				QString(address.GetPackageId().c_str()) + QString("/") + address.GetComponentId().c_str(),
+				Qt::AlignBottom | Qt::AlignLeft);
 }
 
 
 bool CRegistryElementShape::contains(const QPointF& point) const
 {
-	return m_boundingBox.contains(point);
+	return m_realBox.contains(point);
+}
+
+
+bool CRegistryElementShape::collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const
+{
+	if (mode == Qt::IntersectsItemShape){
+		return path.intersects(m_realBox);
+	}
+	else if (mode == Qt::ContainsItemShape){
+		return path.contains(m_realBox);
+	}
+
+	return BaseClass::collidesWithPath(path, mode);
 }
 
 
@@ -150,16 +155,18 @@ bool CRegistryElementShape::contains(const QPointF& point) const
 
 bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
 {
+	const CGeometricalRegistryElement* objectPtr = dynamic_cast<const CGeometricalRegistryElement*>(modelPtr);
+	if (objectPtr == NULL){
+		return false;
+	}
+
+	CalcExportedInteraces(*objectPtr);
+
 	if (BaseClass::OnAttached(modelPtr)){
-		const CGeometricalRegistryElement* objectPtr = GetObjectPtr();
-		I_ASSERT(objectPtr == NULL);
+		I_ASSERT(objectPtr != NULL);
 
 		const icomp::IComponentStaticInfo& staticInfo = objectPtr->GetComponentStaticInfo();
 		setToolTip(iqt::GetQString(staticInfo.GetDescription()));
-
-		m_image = m_registryView.GetIcon(objectPtr->GetAddress()).pixmap(128, 128);
-
-		CalcExportedInteraces();
 
 		return true;
 	}
@@ -177,44 +184,45 @@ void CRegistryElementShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags,
 		return;
 	}
 
-	const int margin = 10;
+	const QFont& nameFont = m_registryView.GetElementNameFont();
+	QFontMetrics nameFontInfo(nameFont);
 
-	QFont labelFont(qApp->font());
-	labelFont.setBold(true);
-	labelFont.setPixelSize(labelFont.pixelSize() * 2);
-	QFontMetrics fontInfo(labelFont);
-
-	QFontMetrics fontInfo2(qApp->font());
-
-	int width = margin * 2;
-	int height = margin * 2;
+	QFontMetrics detailFontInfo(m_registryView.GetElementDetailFont());
 
 	const icomp::CComponentAddress& address = objectPtr->GetAddress();
 	const std::string& componentName = objectPtr->GetName();
 	QString componentPath = QString(address.GetPackageId().c_str()) + QString("/") + address.GetComponentId().c_str();
-	width += qMax(fontInfo.width(componentName.c_str()), fontInfo2.width(componentPath));
 
-	height += fontInfo.height();
-	m_componentLabelHeight = fontInfo.height();
+	int width = qMax(nameFontInfo.width(componentName.c_str()), detailFontInfo.width(componentPath));
+	int height = nameFontInfo.height() + detailFontInfo.height();
 
-	const int verticalSpace = 10;
-	m_componentIdHeight = fontInfo2.height();
-	height += (m_componentIdHeight + verticalSpace);
+	I_DWORD elementFlags = objectPtr->GetElementFlags();
+	if (		((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0) ||
+				(!m_exportedInterfacesList.empty())){
+		width += height * 0.5;
+	}
+
+	const QIcon* iconPtr = m_registryView.GetIcon(address);
+	if (iconPtr != NULL){
+		width += height + SIDE_OFFSET;
+	}
+
+	const icomp::IComponentStaticInfo& info = objectPtr->GetComponentStaticInfo();
+	if (dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(&info) != NULL){
+		width += SIDE_OFFSET * 2;
+		height += SIDE_OFFSET * 2;
+	}
+
+	width += SIDE_OFFSET * 2;
+	height += SIDE_OFFSET * 2;
 
 	double gridSize = m_registryView.GetGrid();
 
-	if (!m_image.isNull()){
-		width += height;
-	}
+	width = ::ceil(width / gridSize) * gridSize;
 
-	const int shadowOffset = 10;
-	width += shadowOffset;
-	height += shadowOffset;
+	i2d::CVector2d center = objectPtr->GetCenter();
 
-	width = int(::ceil(width / gridSize) * gridSize);
-	height = int(::ceil(height / gridSize) * gridSize);
-
-	m_boundingBox = QRect(int(pos().x()), int(pos().y()), width, height);
+	m_realBox = QRectF(center.GetX() - width * 0.5, center.GetY() - height * 0.5, width, height);
 
 	update();
 }
@@ -222,19 +230,14 @@ void CRegistryElementShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags,
 
 // protected methods
 
-void CRegistryElementShape::CalcExportedInteraces()
+void CRegistryElementShape::CalcExportedInteraces(const CGeometricalRegistryElement& element)
 {
 	m_exportedInterfacesList.clear();
 
-	const CGeometricalRegistryElement* objectPtr = GetObjectPtr();
-	if (objectPtr == NULL){
-		return;
-	}
-
-	const icomp::IRegistry* registryPtr = objectPtr->GetRegistry();
+	const icomp::IRegistry* registryPtr = element.GetRegistry();
 
 	if (registryPtr != NULL){
-		const std::string& componentName = objectPtr->GetName();
+		const std::string& componentName = element.GetName();
 
 		const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registryPtr->GetExportedInterfacesMap();
 		for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator iter = interfacesMap.begin();
@@ -283,7 +286,12 @@ void CRegistryElementShape::RegistryObserver::OnUpdate(int updateFlags, istd::IP
 	BaseClass::OnUpdate(updateFlags, updateParamsPtr);
 
 	if ((updateFlags & icomp::IRegistry::CF_COMPONENT_EXPORTED) != 0){
-		m_parent.CalcExportedInteraces();
+		const CGeometricalRegistryElement* objectPtr = m_parent.GetObjectPtr();
+		if (objectPtr == NULL){
+			return;
+		}
+
+		m_parent.CalcExportedInteraces(*objectPtr);
 
 		m_parent.update();
 	}

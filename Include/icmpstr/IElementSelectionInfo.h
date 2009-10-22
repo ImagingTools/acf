@@ -39,7 +39,7 @@ public:
 	/**
 		Get icon of selected element.
 	*/
-	virtual QIcon GetSelectedElementIcon() const = 0;
+	virtual const QIcon* GetSelectedElementIcon() const = 0;
 	/**
 		Get address of selected element.
 		\return		pointer to address of selected element or NULL

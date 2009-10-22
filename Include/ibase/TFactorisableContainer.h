@@ -19,8 +19,8 @@ namespace ibase
 	Specific container implementation for factorisable items. 
 
 	This container implementation supports folowing features:
-	1. Automatic memory management for created items
-	2. Serialization mechanism with automatic item allocation.
+	\li Automatic memory management for created items
+	\li Serialization mechanism with automatic item allocation.
 */
 template <class InterfaceClass>
 class TFactorisableContainer: public ibase::TSerializableContainer<std::pair<istd::TSmartPtr<InterfaceClass>, std::string> >

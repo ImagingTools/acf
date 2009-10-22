@@ -1,10 +1,14 @@
-#ifndef icmpstr_CRegistryViewComp_included
-#define icmpstr_CRegistryViewComp_included
+#ifndef icmpstr_CRegistryGuiComp_included
+#define icmpstr_CRegistryGuiComp_included
 
+
+// STL includes
+#include <map>
 
 // Qt includes
 #include <QTimer>
-
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
 // ACF includes
 #include "iser/IFileLoader.h"
@@ -13,6 +17,7 @@
 
 #include "icomp/IComponentStaticInfo.h"
 #include "icomp/IRegistryElement.h"
+#include "icomp/IRegistriesManager.h"
 #include "icomp/CRegistry.h"
 
 #include "idoc/ICommandsProvider.h"
@@ -26,16 +31,20 @@
 #include "iqtdoc/IPrintable.h"
 
 #include "icmpstr/IRegistryPreview.h"
-#include "icmpstr/CRegistryView.h"
+#include "icmpstr/IElementSelectionInfo.h"
 
 
 namespace icmpstr
 {
 
 
-class CRegistryViewComp:
+class CRegistryElementShape;
+class CGeometricalRegistryElement;
+
+
+class CRegistryGuiComp:
 			public iqtgui::TGuiObserverWrap<
-						iqtgui::TGuiComponentBase<CRegistryView>, 
+						iqtgui::TGuiComponentBase<QGraphicsView>, 
 						imod::TSingleModelObserverBase<icomp::IRegistry> >,
 			virtual public imod::TModelWrap<IElementSelectionInfo>,
 			virtual public iqtdoc::IPrintable,
@@ -45,10 +54,10 @@ class CRegistryViewComp:
 
 public:
 	typedef iqtgui::TGuiObserverWrap<
-				iqtgui::TGuiComponentBase<CRegistryView>, 
+				iqtgui::TGuiComponentBase<QGraphicsView>, 
 				imod::TSingleModelObserverBase<icomp::IRegistry> > BaseClass;
 
-	I_BEGIN_COMPONENT(CRegistryViewComp);
+	I_BEGIN_COMPONENT(CRegistryGuiComp);
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
 		I_REGISTER_INTERFACE(iqtdoc::IPrintable);
 		I_REGISTER_INTERFACE(imod::IObserver);
@@ -60,9 +69,13 @@ public:
 		I_ASSIGN(m_mainWindowCompPtr, "MainWindow", "Access to main window command", false, "MainWindow");
 	I_END_COMPONENT;
 
-	CRegistryViewComp();
+	CRegistryGuiComp();
 
-	bool TryCreateComponent(const icomp::CComponentAddress& address, const i2d::CVector2d& position);
+	const QFont& GetElementNameFont() const;
+	const QFont& GetElementDetailFont() const;
+	const QIcon* GetIcon(const icomp::CComponentAddress& address) const;
+
+	double GetGrid() const{return 25;}	// TODO: replace it with some geometrical info concept
 
 	// reimplemented (iqtdoc::IPrintable)
 	virtual void Print(QPrinter* printerPtr) const;
@@ -91,8 +104,7 @@ public:
 	virtual void OnComponentDestroyed();
 
 protected slots:
-	void OnComponentViewSelected(CComponentSceneItem* view, bool selected);
-	void OnComponentPositionChanged(CComponentSceneItem* view, const QPointF& newPosition);
+	void OnSelectionChanged();
 	void OnRemoveComponent();
 	void OnRenameComponent();
 	void OnProperties();
@@ -101,8 +113,7 @@ protected slots:
 	void OnAbort();
 	void OnAddNote();
 	void OnRemoveNote();
-	bool ProcessDroppedData(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
-	void UpdateConnectors();
+	bool OnDroppedData(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
 	void OnExecutionTimerTick();
 
 protected:
@@ -113,13 +124,22 @@ protected:
 		GI_PREVIEW
 	};
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
-
-private:
+	/**
+		Create instance of shape representing some element.
+		The shape will be automatically conncted to element using model/observer pattern.
+		\sa imod.
+	*/
+	QGraphicsItem* AddShapeToScene(iser::ISerializable* elementPtr) const;
+	void AddConnectorsToScene();
+	void AddConnector(
+				CRegistryElementShape& sourceShape,
+				const std::string& referenceComponentId,
+				const std::string& attributeId,
+				bool isFactory = false);
+	bool TryCreateComponent(const icomp::CComponentAddress& address, const i2d::CVector2d& position);
 	void ConnectReferences(const QString& componentRole);
 
+private:
 	I_MULTIREF(imod::IObserver, m_registryElementObserversCompPtr);
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
@@ -139,12 +159,21 @@ private:
 	iqtgui::CHierarchicalCommand m_propertiesCommand;
 
 	QTimer m_executionObserverTimer;
+
+	QGraphicsScene* m_scenePtr;
+
+	typedef istd::TDelPtr<QIcon> IconPtr;
+	typedef std::map<icomp::CComponentAddress, IconPtr> IconMap;
+	mutable IconMap m_iconMap;
+
+	QFont m_elementNameFont;
+	QFont m_elementDetailFont;
 };
 
 
 } // namespace icmpstr
 
 
-#endif // !icmpstr_CRegistryViewComp_included
+#endif // !icmpstr_CRegistryGuiComp_included
 
 

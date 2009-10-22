@@ -23,11 +23,7 @@ CGeometricalRegistryElement::CGeometricalRegistryElement()
 
 void CGeometricalRegistryElement::SetName(const std::string& name)
 {
-	if (name != m_name){
-		istd::CChangeNotifier notifier(this);
-
-		m_name = name;
-	}
+	m_name = name;
 }
 
 

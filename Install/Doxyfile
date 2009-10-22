@@ -206,9 +206,9 @@ SKIP_FUNCTION_MACROS   = YES
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
 TAGFILES               = 
-GENERATE_TAGFILE       = 
+GENERATE_TAGFILE       = ../../Docs/TechnicalDoc.tag
 ALLEXTERNALS           = NO
-EXTERNAL_GROUPS        = YES
+EXTERNAL_GROUPS        = NO
 PERL_PATH              = /usr/bin/perl
 #---------------------------------------------------------------------------
 # Configuration options related to the dot tool   
@@ -229,7 +229,7 @@ CALLER_GRAPH           = NO
 GRAPHICAL_HIERARCHY    = YES
 DIRECTORY_GRAPH        = YES
 DOT_IMAGE_FORMAT       = png
-DOT_PATH               = E:/Programme/Graphviz2.17/bin
+DOT_PATH               = $(GRAPHVIZDIR)/bin
 DOTFILE_DIRS           = 
 DOT_GRAPH_MAX_NODES    = 1000
 MAX_DOT_GRAPH_DEPTH    = 1000
