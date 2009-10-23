@@ -3,33 +3,35 @@
 
 
 // Qt includes
-#include <QAbstractGraphicsShapeItem>
+#include <QGraphicsItem>
 
 #include "imod/TSingleModelObserverBase.h"
 
 #include "iqt2d/TObjectShapeBase.h"
 
-#include "icmpstr/CGeometricalRegistryElement.h"
+#include "icmpstr/CVisualRegistryElement.h"
 
 
 namespace icmpstr
 {
 
 
-class CRegistryGuiComp;
+class CVisualRegistryScenographerComp;
 
 
 /**
 	Visualization of geometrical registry elements.
 */
-class CRegistryElementShape: public iqt2d::TObjectShapeBase<QAbstractGraphicsShapeItem, CGeometricalRegistryElement>
+class CRegistryElementShape: public iqt2d::TObjectShapeBase<QGraphicsItem, CVisualRegistryElement>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt2d::TObjectShapeBase<QAbstractGraphicsShapeItem, CGeometricalRegistryElement> BaseClass;
+	typedef iqt2d::TObjectShapeBase<QGraphicsItem, CVisualRegistryElement> BaseClass;
 
-	CRegistryElementShape(const CRegistryGuiComp* registryViewPtr);
+	CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr);
+
+	QRectF GetViewRect() const;
 
 	// reimplemented (QGraphicsItem)
 	virtual QRectF boundingRect() const;
@@ -52,12 +54,7 @@ protected:
 		SHADOW_OFFSET = 10
 	};
 
-	void CalcExportedInteraces(const CGeometricalRegistryElement& element);
-
-	// reimplemented (QGraphicsItem)
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent* eventPtr);
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* eventPtr);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr);
+	void CalcExportedInteraces(const CVisualRegistryElement& element);
 
 	class RegistryObserver: public imod::TSingleModelObserverBase<icomp::IRegistry>
 	{
@@ -74,8 +71,11 @@ protected:
 		CRegistryElementShape& m_parent;
 	};
 
+	// reimplemented (TShapeBase)
+	virtual void OnSelectionChanged(bool isSelected);
+
 private:
-	const CRegistryGuiComp& m_registryView;
+	const CVisualRegistryScenographerComp& m_registryView;
 
 	RegistryObserver m_registryObserver;
 

@@ -1,5 +1,5 @@
-#ifndef icmpstr_CGeometricalRegistryElement_included
-#define icmpstr_CGeometricalRegistryElement_included
+#ifndef icmpstr_CVisualRegistryElement_included
+#define icmpstr_CVisualRegistryElement_included
 
 
 #include "i2d/IObject2d.h"
@@ -15,12 +15,12 @@ namespace icmpstr
 {
 
 
-class CGeometricalRegistryElement: public icomp::CRegistryElement, virtual public i2d::IObject2d
+class CVisualRegistryElement: public icomp::CRegistryElement, virtual public i2d::IObject2d
 {
 public:
 	typedef icomp::CRegistryElement BaseClass;
 
-	CGeometricalRegistryElement();
+	CVisualRegistryElement();
 
 	const icomp::IRegistry* GetRegistry() const;
 	const icomp::CComponentAddress& GetAddress() const;
@@ -47,19 +47,19 @@ private:
 
 // inline methods
 
-inline const icomp::IRegistry* CGeometricalRegistryElement::GetRegistry() const
+inline const icomp::IRegistry* CVisualRegistryElement::GetRegistry() const
 {
 	return m_registryPtr;
 }
 
 
-inline const icomp::CComponentAddress& CGeometricalRegistryElement::GetAddress() const
+inline const icomp::CComponentAddress& CVisualRegistryElement::GetAddress() const
 {
 	return m_addess;
 }
 
 
-inline const std::string& CGeometricalRegistryElement::GetName() const
+inline const std::string& CVisualRegistryElement::GetName() const
 {
 	return m_name;
 }
@@ -68,6 +68,6 @@ inline const std::string& CGeometricalRegistryElement::GetName() const
 } // namespace icmpstr
 
 
-#endif //!icmpstr_CGeometricalRegistryElement_included
+#endif //!icmpstr_CVisualRegistryElement_included
 
 

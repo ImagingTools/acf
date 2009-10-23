@@ -13,10 +13,13 @@
 
 #include "idoc/ICommandsProvider.h"
 
+#include "i2d/ISceneController.h"
+
 #include "iqtgui/CHierarchicalCommand.h"
 
+#include "iqtdoc/IPrintable.h"
+
 #include "iqt2d/ISceneProvider.h"
-#include "i2d/ISceneController.h"
 
 #include "iqt2d/Generated/Ui_CSceneProviderGuiComp.h"
 
@@ -27,6 +30,7 @@ namespace iqt2d
 
 class CSceneProviderGuiComp: 
 			public iqtgui::TDesignerGuiCompBase<Ui::CSceneProviderGuiComp>,
+			virtual public iqtdoc::IPrintable,
 			virtual public idoc::ICommandsProvider,
 			virtual public ISceneProvider,
 			virtual public i2d::ISceneController
@@ -37,6 +41,7 @@ public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CSceneProviderGuiComp> BaseClass;
 
 	I_BEGIN_COMPONENT(CSceneProviderGuiComp);
+		I_REGISTER_INTERFACE(iqtdoc::IPrintable);
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
 		I_REGISTER_INTERFACE(ISceneProvider);
 		I_REGISTER_INTERFACE(i2d::ISceneController);
@@ -52,6 +57,9 @@ public:
 
 	double GetIsotropyFactor() const;
 	void SetIsotropyFactor(double factor);
+
+	// reimplemented (iqtdoc::IPrintable)
+	virtual void Print(QPrinter* printerPtr) const;
 
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;

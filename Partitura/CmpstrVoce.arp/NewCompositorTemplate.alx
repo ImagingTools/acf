@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="20">
+  <PositionMap count="21">
     <Element>
       <ComponentName>
         Application
@@ -234,6 +234,17 @@
       </X>
       <X>
         -213
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        VisualRegistryView
+      </ComponentName>
+      <X>
+        67
+      </X>
+      <X>
+        -219
       </X>
     </Element>
   </PositionMap>

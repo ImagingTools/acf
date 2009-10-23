@@ -138,7 +138,7 @@ int CFrameSeqVideoControllerComp::GetCurrentFrame() const
 bool CFrameSeqVideoControllerComp::SetCurrentFrame(int frameIndex)
 {
 	if (frameIndex != m_currentFrameIndex){
-		istd::CChangeNotifier notifier(this, CF_POSITION);
+		istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
 
 		m_currentFrameIndex = frameIndex;
 

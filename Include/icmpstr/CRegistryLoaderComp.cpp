@@ -10,7 +10,7 @@
 
 #include "istd/TChangeNotifier.h"
 
-#include "icmpstr/CGeometricalRegistryComp.h"
+#include "icmpstr/CVisualRegistryComp.h"
 
 #include "icmpstr/CRegistryModelComp.h"	// TODO: remove it when old Compositor concept will be removed
 
@@ -30,7 +30,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 	}
 
 	CRegistryModelComp* registryModelPtr = dynamic_cast<CRegistryModelComp*>(&data);
-	CGeometricalRegistryComp* geometricalRegistryPtr = dynamic_cast<CGeometricalRegistryComp*>(&data);
+	CVisualRegistryComp* geometricalRegistryPtr = dynamic_cast<CVisualRegistryComp*>(&data);
 
 	if (registryModelPtr != NULL){
 		ReadArchiveEx registryArchive(filePath, this);

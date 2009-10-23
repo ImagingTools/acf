@@ -36,7 +36,7 @@ void CPlaybackControllerGuiComp::UpdateEditor(int updateFlags)
 			}
 		}
 
-		if ((updateFlags & imm::IMediaController::CF_POSITION) != 0){
+		if ((updateFlags & imm::IMediaController::CF_MEDIA_POSITION) != 0){
 			iqt::CSignalBlocker block(this, true);
 
 			int currentFrame = objectPtr->GetCurrentFrame();

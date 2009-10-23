@@ -49,7 +49,7 @@ const idoc::IHierarchicalCommand* CTabbedMultiViewGuiComp::GetCommands() const
 	if (m_observersCompPtr.IsValid()){
 		int observerCount = m_observersCompPtr.GetCount();
 		for (int observerIndex = 0; observerIndex < observerCount; observerIndex++){
-			idoc::ICommandsProvider* commandsProviderPtr = dynamic_cast<idoc::ICommandsProvider*>(m_observersCompPtr[observerIndex]);
+			idoc::ICommandsProvider* commandsProviderPtr = CompCastPtr<idoc::ICommandsProvider>(m_observersCompPtr[observerIndex]);
 			if (commandsProviderPtr != NULL){
 				const idoc::IHierarchicalCommand* commandPtr = commandsProviderPtr->GetCommands();
 				if (commandPtr != NULL){

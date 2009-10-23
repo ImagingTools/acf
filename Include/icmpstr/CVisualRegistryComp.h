@@ -1,5 +1,5 @@
-#ifndef icmpstr_CGeometricalRegistryComp_included
-#define icmpstr_CGeometricalRegistryComp_included
+#ifndef icmpstr_CVisualRegistryComp_included
+#define icmpstr_CVisualRegistryComp_included
 
 
 #include "icomp/CRegistry.h"
@@ -11,14 +11,14 @@
 #include "ibase/TFactorisableContainer.h"
 
 #include "icmpstr/IRegistryEditController.h"
-#include "icmpstr/CGeometricalRegistryElement.h"
+#include "icmpstr/CVisualRegistryElement.h"
 
 
 namespace icmpstr
 {
 
 
-class CGeometricalRegistryComp:
+class CVisualRegistryComp:
 			public ibase::CLoggerComponentBase,
 			public icomp::CRegistry,
 			public ibase::TFactorisableContainer<ibase::IObject>
@@ -27,7 +27,7 @@ public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef icomp::CRegistry BaseClass2;
 
-	I_BEGIN_COMPONENT(CGeometricalRegistryComp);
+	I_BEGIN_COMPONENT(CVisualRegistryComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(icomp::IRegistry);
 		I_ASSIGN(m_staticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo");
@@ -35,7 +35,6 @@ public:
 
 	enum ChangeFlags
 	{
-		CF_POSITION = 0x20000,
 		CF_NOTE = 0x40000
 	};
 
@@ -69,7 +68,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	typedef imod::TModelWrap<istd::TChangeDelegator<CGeometricalRegistryElement> > Element;
+	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualRegistryElement> > Element;
 
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
 
@@ -84,5 +83,5 @@ private:
 } // namespace icmpstr
 
 
-#endif // !icmpstr_CGeometricalRegistryComp_included
+#endif // !icmpstr_CVisualRegistryComp_included
 

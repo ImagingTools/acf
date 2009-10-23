@@ -320,5 +320,54 @@ inline bool CComponentBase::IsComponentActive() const
 	I_TASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
 
 
+/**
+	Cast to specified interface trying to use component interface query.
+	It extends standard dynamic_cast functinality when you use composed components.
+*/
+template <class Dest>
+Dest* CompCastPtr(istd::IPolymorphic* objectPtr)
+{
+	const icomp::IComponent* componentPtr = dynamic_cast<const icomp::IComponent*>(objectPtr);
+	if (componentPtr != NULL){
+		icomp::IComponent* parentComponentPtr = const_cast<icomp::IComponent*>(componentPtr->GetParentComponent(true));
+
+		if (parentComponentPtr != NULL){
+			Dest* retVal = (Dest*)parentComponentPtr->GetInterface(istd::CClassInfo(typeid(Dest)));
+
+			if (retVal != NULL){
+				return retVal;
+			}
+		}
+	}
+
+	return dynamic_cast<Dest*>(objectPtr);
+}
+
+
+/**
+	Cast to specified interface trying to use component interface query.
+	It extends standard dynamic_cast functinality when you use composed components.
+	\overload
+*/
+template <class Dest>
+const Dest* CompCastPtr(const istd::IPolymorphic* objectPtr)
+{
+	const icomp::IComponent* componentPtr = dynamic_cast<const icomp::IComponent*>(objectPtr);
+	if (componentPtr != NULL){
+		icomp::IComponent* parentComponentPtr = const_cast<icomp::IComponent*>(componentPtr->GetParentComponent(true));
+
+		if (parentComponentPtr != NULL){
+			const Dest* retVal = (const Dest*)parentComponentPtr->GetInterface(istd::CClassInfo(typeid(Dest)));
+
+			if (retVal != NULL){
+				return retVal;
+			}
+		}
+	}
+
+	return dynamic_cast<const Dest*>(objectPtr);
+}
+
+
 #endif // !icomp_CComponentBase_included
 

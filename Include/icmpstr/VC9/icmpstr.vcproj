@@ -194,7 +194,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGeometricalRegistryElement.cpp"
+				RelativePath="..\CVisualRegistryElement.cpp"
 				>
 			</File>
 			<File
@@ -268,7 +268,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGeometricalRegistryElement.h"
+				RelativePath="..\CVisualRegistryElement.h"
 				>
 			</File>
 			<File

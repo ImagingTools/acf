@@ -11,7 +11,7 @@
 #include "ibase/TFactorisableContainer.h"
 
 #include "icmpstr/IRegistryEditController.h"
-#include "icmpstr/CGeometricalRegistryElement.h"
+#include "icmpstr/CVisualRegistryElement.h"
 
 
 namespace icmpstr
@@ -36,7 +36,7 @@ public:
 
 	enum ChangeFlags
 	{
-		CF_POSITION = 0x20000,
+		CF_OBJECT_POSITION = 0x20000,
 		CF_NOTE = 0x40000
 	};
 
@@ -74,7 +74,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	typedef imod::TModelWrap<istd::TChangeDelegator<CGeometricalRegistryElement> > Element;
+	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualRegistryElement> > Element;
 
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
 

@@ -190,11 +190,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGeometricalRegistryComp.cpp"
+				RelativePath="..\CVisualRegistryComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CGeometricalRegistryElement.cpp"
+				RelativePath="..\CVisualRegistryElement.cpp"
 				>
 			</File>
 			<File
@@ -218,7 +218,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRegistryGuiComp.cpp"
+				RelativePath="..\CVisualRegistryScenographerComp.cpp"
 				>
 			</File>
 			<File
@@ -272,11 +272,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGeometricalRegistryComp.h"
+				RelativePath="..\CVisualRegistryComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CGeometricalRegistryElement.h"
+				RelativePath="..\CVisualRegistryElement.h"
 				>
 			</File>
 			<File
@@ -312,11 +312,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRegistryGuiComp.h"
+				RelativePath="..\CVisualRegistryScenographerComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CRegistryGuiComp.moc"
+				RelativePath="..\CVisualRegistryScenographerComp.moc"
 				>
 			</File>
 			<File
@@ -413,7 +413,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CRegistryGuiComp.cpp"
+				RelativePath="..\generated\moc_CVisualRegistryScenographerComp.cpp"
 				>
 			</File>
 			<File

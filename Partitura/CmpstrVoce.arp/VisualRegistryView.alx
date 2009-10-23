@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1126
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        SceneProvider
+      </ComponentName>
+      <X>
+        -34
+      </X>
+      <X>
+        -216
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        VisualRegistryGui
+      </ComponentName>
+      <X>
+        -59
+      </X>
+      <X>
+        -429
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>

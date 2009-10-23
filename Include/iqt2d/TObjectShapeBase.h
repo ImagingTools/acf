@@ -28,15 +28,9 @@ public:
 	TObjectShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
 
 protected:
-	// reimplemented (TShapeBase<GraphicsItemClass, ObjectClass>) 
+	// reimplemented (TShapeBase)
 	virtual void OnSelectionChanged(bool isSelected);
-
-	// reimplemented (QGraphicsItem) 
-	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr);
-
-private:
-	QPointF m_lastPosition;
+	virtual void OnPositionChanged(const QPointF& position);
 };
 
 
@@ -63,7 +57,7 @@ TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditab
 
 
 // protected methods
-	
+
 // reimplemented (TShapeBase<GraphicsItemClass, ObjectClass>) 
 
 template <class GraphicsItemClass, class ObjectClass>
@@ -83,39 +77,17 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnSelectionChanged(bool i
 }
 
 
-// reimplemented (QGraphicsItem) 
-
 template <class GraphicsItemClass, class ObjectClass>
-QVariant TObjectShapeBase<GraphicsItemClass, ObjectClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
+void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnPositionChanged(const QPointF& position)
 {
-	if (change == BaseClass::ItemPositionChange){
-		i2d::IObject2d* objectPtr = BaseClass2::GetObjectPtr();
-		if ((objectPtr != NULL) && (change == BaseClass::ItemPositionChange)){
-			QPointF newPosition = value.toPointF();
-			QPointF offset = newPosition - m_lastPosition;
+	i2d::IObject2d* objectPtr = BaseClass2::GetObjectPtr();
+	if (objectPtr != NULL){
+		istd::CChangeNotifier changePtr(objectPtr, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
-			istd::CChangeNotifier changePtr(objectPtr);
-
-			objectPtr->MoveTo(iqt::GetCVector2d(offset) + objectPtr->GetCenter());
-
-			m_lastPosition = newPosition;
-
-			return BaseClass::pos();
-		}
+		objectPtr->MoveTo(iqt::GetCVector2d(position));
 	}
 
-	return BaseClass::itemChange(change, value);
-}
-
-
-template <class GraphicsItemClass, class ObjectClass>
-void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mouseReleaseEvent(QGraphicsSceneMouseEvent* eventPtr)
-{
-	BaseClass::mouseReleaseEvent(eventPtr);
-
-	if (eventPtr->button() == Qt::LeftButton){
-		m_lastPosition = QPointF(0, 0);
-	}
+	BaseClass::OnPositionChanged(position);
 }
 
 

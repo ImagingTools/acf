@@ -145,7 +145,7 @@ i2d::CVector2d CRegistryModelComp::GetComponentPosition(const std::string& compo
 void CRegistryModelComp::SetComponentPosition(const std::string& componentName, const i2d::CVector2d& position)
 {
 	if (position != GetComponentPosition(componentName)){
-		istd::CChangeNotifier changePtr(this, CF_POSITION);
+		istd::CChangeNotifier changePtr(this, i2d::IObject2d::CF_OBJECT_POSITION);
 
 		m_elementsPositionMap[componentName]  = position;
 	}

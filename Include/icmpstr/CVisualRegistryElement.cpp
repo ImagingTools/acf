@@ -1,4 +1,4 @@
-#include "icmpstr/CGeometricalRegistryElement.h"
+#include "icmpstr/CVisualRegistryElement.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -14,14 +14,14 @@ namespace icmpstr
 {
 
 
-CGeometricalRegistryElement::CGeometricalRegistryElement()
+CVisualRegistryElement::CVisualRegistryElement()
 :	m_center(0, 0),
 	m_registryPtr(NULL)
 {
 }
 
 
-void CGeometricalRegistryElement::SetName(const std::string& name)
+void CVisualRegistryElement::SetName(const std::string& name)
 {
 	m_name = name;
 }
@@ -29,7 +29,7 @@ void CGeometricalRegistryElement::SetName(const std::string& name)
 
 // overloaded (icomp::CRegistryElement)
 
-void CGeometricalRegistryElement::Initialize(
+void CVisualRegistryElement::Initialize(
 			const icomp::IRegistry* parentPtr,
 			const icomp::IComponentStaticInfo* infoPtr,
 			const icomp::CComponentAddress& address)
@@ -43,13 +43,13 @@ void CGeometricalRegistryElement::Initialize(
 
 // reimplemented (IObject2d)
 
-i2d::CVector2d CGeometricalRegistryElement::GetCenter() const
+i2d::CVector2d CVisualRegistryElement::GetCenter() const
 {
 	return m_center;
 }
 
 
-void CGeometricalRegistryElement::MoveTo(const i2d::CVector2d& position)
+void CVisualRegistryElement::MoveTo(const i2d::CVector2d& position)
 {
 	if (position != m_center){
 		istd::CChangeNotifier notifier(this);

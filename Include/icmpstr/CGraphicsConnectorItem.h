@@ -11,7 +11,8 @@ namespace icmpstr
 
 
 class CComponentSceneItem;
-class CRegistryGuiComp;
+class CVisualRegistryScenographerComp;
+class CRegistryElementShape;
 
 
 class CGraphicsConnectorItem:
@@ -37,32 +38,34 @@ public:
 	};
 
     CGraphicsConnectorItem(
-				const CRegistryGuiComp* registryViewPtr,
+				const CVisualRegistryScenographerComp* registryViewPtr,
 				int connectFlags = 0,
 				QGraphicsItem* parent = NULL);
-    
-    void Adjust();
 
+	void InitEnds(CRegistryElementShape* sourceShapePtr, CRegistryElementShape* destShapePtr);
+    
 	// reimplemented (QGraphicsItem)
     virtual int type() const;
 	virtual QPainterPath shape() const;
 	virtual bool contains(const QPointF& point) const;
 
-public slots:
-	void OnSourceRectMoved(const QRectF& rect);
-	void OnDestRectMoved(const QRectF& rect);
-	void OnSourceSelected(bool state);
-	void OnDestSelected(bool state);
-    
 protected:
+    void Adjust();
+
 	// reimplemented (QGraphicsItem)
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 //    virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
 //	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 
+protected slots:
+	void OnSourceRectMoved(const QRectF& rect);
+	void OnDestRectMoved(const QRectF& rect);
+	void OnSourceSelected(bool state);
+	void OnDestSelected(bool state);
+
 private:
-	const CRegistryGuiComp& m_registryView;
+	const CVisualRegistryScenographerComp& m_registryView;
 
 	int m_connectFlags;
 

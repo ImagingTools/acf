@@ -125,7 +125,7 @@
                 true
               </IsEnabled>
               <Value>
-                VisualRegistryGui
+                VisualRegistryView
               </Value>
             </Data>
           </AttributeInfo>
@@ -379,13 +379,13 @@
     </Element>
     <Element>
       <Id>
-        VisualRegistryGui
+        VisualRegistryView
       </Id>
       <PackageId>
-        CmpstrPck
+        CmpstrVoce
       </PackageId>
       <ComponentId>
-        VisualRegistryGui
+        VisualRegistryView
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -394,23 +394,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
-          <AttributeInfo>
-            <Id>
-              MainWindow
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              MainWindow
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               PackagesManager
@@ -463,22 +447,6 @@
               <Value>
                 RegistryCodeSaver
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegistryElementObservers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              RegistryElementObservers
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

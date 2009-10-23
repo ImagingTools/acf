@@ -1,4 +1,4 @@
-#include "icmpstr/CGeometricalRegistryComp.h"
+#include "icmpstr/CVisualRegistryComp.h"
 
 
 #include "istd/TChangeNotifier.h"
@@ -14,7 +14,7 @@ namespace icmpstr
 {
 
 
-bool CGeometricalRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
+bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 {
 	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
 	static iser::CArchiveTag elementTag("Element", "Map element");
@@ -37,7 +37,7 @@ bool CGeometricalRegistryComp::SerializeComponentsLayout(iser::IArchive& archive
 			i2d::CVector2d position(0, 0);
 			const ElementInfo* infoPtr = GetElementInfo(elementId);
 			if (infoPtr != NULL){
-				const CGeometricalRegistryElement* elementPtr = dynamic_cast<const CGeometricalRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 				if (elementPtr != NULL){
 					i2d::CVector2d position = elementPtr->GetCenter();
 				}
@@ -66,7 +66,7 @@ bool CGeometricalRegistryComp::SerializeComponentsLayout(iser::IArchive& archive
 
 			const ElementInfo* infoPtr = GetElementInfo(elementId);
 			if (infoPtr != NULL){
-				CGeometricalRegistryElement* elementPtr = dynamic_cast<CGeometricalRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 				if (elementPtr != NULL){
 					elementPtr->MoveTo(position);
 				}
@@ -83,13 +83,13 @@ bool CGeometricalRegistryComp::SerializeComponentsLayout(iser::IArchive& archive
 }
 
 
-bool CGeometricalRegistryComp::SerializeRegistry(iser::IArchive& archive)
+bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
 {
 	return BaseClass2::Serialize(archive);
 }
 
 
-int CGeometricalRegistryComp::CheckAttributeConsistency(const icomp::IRegistryElement& element, const std::string& attributeId)
+int CVisualRegistryComp::CheckAttributeConsistency(const icomp::IRegistryElement& element, const std::string& attributeId)
 {
 	const icomp::IComponentStaticInfo& elementStaticInfo = element.GetComponentStaticInfo();
 	const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
@@ -143,7 +143,7 @@ int CGeometricalRegistryComp::CheckAttributeConsistency(const icomp::IRegistryEl
 
 // reimplemented (icomp::IComponent)
 
-void CGeometricalRegistryComp::OnComponentCreated()
+void CVisualRegistryComp::OnComponentCreated()
 {
 	if (m_staticInfoCompPtr.IsValid()){
 		SetComponentStaticInfo(m_staticInfoCompPtr.GetPtr());
@@ -153,7 +153,7 @@ void CGeometricalRegistryComp::OnComponentCreated()
 
 // reimplemented (icomp::IRegistry)
 
-CGeometricalRegistryComp::ElementInfo* CGeometricalRegistryComp::InsertElementInfo(
+CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
 			const std::string& elementId,
 			const icomp::CComponentAddress& address,
 			bool ensureElementCreated)
@@ -161,7 +161,7 @@ CGeometricalRegistryComp::ElementInfo* CGeometricalRegistryComp::InsertElementIn
 	ElementInfo* infoPtr = BaseClass2::InsertElementInfo(elementId, address, ensureElementCreated);
 
 	if (infoPtr != NULL){
-		CGeometricalRegistryElement* elementPtr = dynamic_cast<CGeometricalRegistryElement*>(infoPtr->elementPtr.GetPtr());
+		CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 		if (elementPtr != NULL){
 			elementPtr->SetName(elementId);
 		}
@@ -181,7 +181,7 @@ CGeometricalRegistryComp::ElementInfo* CGeometricalRegistryComp::InsertElementIn
 
 // reimplemented (iser::ISerializable)
 
-bool CGeometricalRegistryComp::Serialize(iser::IArchive& archive)
+bool CVisualRegistryComp::Serialize(iser::IArchive& archive)
 {
 	return BaseClass2::Serialize(archive) && SerializeComponentsLayout(archive);
 }
@@ -189,7 +189,7 @@ bool CGeometricalRegistryComp::Serialize(iser::IArchive& archive)
 
 // protected methods
 
-bool CGeometricalRegistryComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, i2d::CVector2d& position)
+bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, i2d::CVector2d& position)
 {
 	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
 	static iser::CArchiveTag positionXTag("X", "X position of component");
@@ -213,7 +213,7 @@ bool CGeometricalRegistryComp::SerializeComponentPosition(iser::IArchive& archiv
 
 // reimplemented (icomp::CRegistry)
 
-icomp::IRegistryElement* CGeometricalRegistryComp::CreateRegistryElement(const icomp::CComponentAddress& address) const
+icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(const icomp::CComponentAddress& address) const
 {
 	const icomp::IComponentStaticInfo* componentsFactoryPtr = GetComponentStaticInfo();
 	if (componentsFactoryPtr != NULL){
@@ -224,7 +224,7 @@ icomp::IRegistryElement* CGeometricalRegistryComp::CreateRegistryElement(const i
 				Element* registryElementPtr = new Element;
 				if (registryElementPtr != NULL){
 					registryElementPtr->Initialize(this, componentInfoPtr, address);
-					registryElementPtr->SetSlavePtr(const_cast<CGeometricalRegistryComp*>(this));
+					registryElementPtr->SetSlavePtr(const_cast<CVisualRegistryComp*>(this));
 
 					return registryElementPtr;
 				}

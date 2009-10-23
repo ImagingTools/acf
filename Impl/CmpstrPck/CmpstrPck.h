@@ -10,8 +10,8 @@
 #include "icmpstr/CRegistryLoaderComp.h"
 #include "icmpstr/CRegistryPreviewComp.h"
 #include "icmpstr/CComponentHelpFileProviderComp.h"
-#include "icmpstr/CGeometricalRegistryComp.h"
-#include "icmpstr/CRegistryGuiComp.h"
+#include "icmpstr/CVisualRegistryComp.h"
+#include "icmpstr/CVisualRegistryScenographerComp.h"
 
 #include "icmpstr/CRegistryModelComp.h"	// TODO: remove it when old Compositor concept will be removed
 #include "icmpstr/CRegistryViewComp.h"	// TODO: remove it when old Compositor concept will be removed
@@ -30,8 +30,8 @@ typedef icmpstr::CPackageOverviewComp PackageOverview;
 typedef icmpstr::CRegistryLoaderComp RegistryLoader;
 typedef icmpstr::CRegistryPreviewComp RegistryPreview;
 typedef icmpstr::CComponentHelpFileProviderComp ComponentHelpFileProvider;
-typedef icomp::TModelCompWrap<icmpstr::CGeometricalRegistryComp> VisualRegistry;
-typedef icmpstr::CRegistryGuiComp VisualRegistryGui;
+typedef icomp::TModelCompWrap<icmpstr::CVisualRegistryComp> VisualRegistry;
+typedef icmpstr::CVisualRegistryScenographerComp VisualRegistryGui;
 
 typedef icomp::TModelCompWrap<icmpstr::CRegistryModelComp> RegistryModel;
 typedef icmpstr::CRegistryViewComp RegistryView;

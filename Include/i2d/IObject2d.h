@@ -21,6 +21,11 @@ class CRectangle;
 class IObject2d: virtual public iser::ISerializable
 {
 public:
+	enum ChangeFlags
+	{
+		CF_OBJECT_POSITION = 0x20000
+	};
+
 	/**
 		Returns center of this 2D-object.
 	*/

@@ -121,7 +121,7 @@ bool CPhononVideoViewGuiComp::SetCurrentPosition(double position)
 	}
 
 	if (m_mediaObject.isSeekable()){
-		istd::CChangeNotifier notifier(this, CF_POSITION);
+		istd::CChangeNotifier notifier(this, CF_MEDIA_POSITION);
 
 		m_mediaObject.seek(qint64(position * 1000));
 

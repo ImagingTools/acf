@@ -1,11 +1,12 @@
-#ifndef icmpstr_CRegistryGuiComp_included
-#define icmpstr_CRegistryGuiComp_included
+#ifndef icmpstr_CVisualRegistryScenographerComp_included
+#define icmpstr_CVisualRegistryScenographerComp_included
 
 
 // STL includes
 #include <map>
 
 // Qt includes
+#include <QObject>
 #include <QTimer>
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -14,11 +15,11 @@
 #include "iser/IFileLoader.h"
 
 #include "imod/TSingleModelObserverBase.h"
+#include "imod/TModelWrap.h"
 
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/IRegistryElement.h"
+#include "icomp/IRegistry.h"
 #include "icomp/IRegistriesManager.h"
-#include "icomp/CRegistry.h"
+#include "icomp/CComponentBase.h"
 
 #include "idoc/ICommandsProvider.h"
 #include "idoc/IHelpViewer.h"
@@ -28,7 +29,7 @@
 #include "iqtgui/TGuiObserverWrap.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
-#include "iqtdoc/IPrintable.h"
+#include "iqt2d/ISceneProvider.h"
 
 #include "icmpstr/IRegistryPreview.h"
 #include "icmpstr/IElementSelectionInfo.h"
@@ -39,46 +40,41 @@ namespace icmpstr
 
 
 class CRegistryElementShape;
-class CGeometricalRegistryElement;
+class CVisualRegistryElement;
 
 
-class CRegistryGuiComp:
-			public iqtgui::TGuiObserverWrap<
-						iqtgui::TGuiComponentBase<QGraphicsView>, 
-						imod::TSingleModelObserverBase<icomp::IRegistry> >,
+class CVisualRegistryScenographerComp:
+			public QObject,
+			public icomp::CComponentBase,
+			public imod::TSingleModelObserverBase<icomp::IRegistry>,
 			virtual public imod::TModelWrap<IElementSelectionInfo>,
-			virtual public iqtdoc::IPrintable,
 			virtual public idoc::ICommandsProvider
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TGuiObserverWrap<
-				iqtgui::TGuiComponentBase<QGraphicsView>, 
-				imod::TSingleModelObserverBase<icomp::IRegistry> > BaseClass;
+	typedef icomp::CComponentBase BaseClass;
+	typedef imod::TSingleModelObserverBase<icomp::IRegistry> BaseClass2;
 
-	I_BEGIN_COMPONENT(CRegistryGuiComp);
+	I_BEGIN_COMPONENT(CVisualRegistryScenographerComp);
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
-		I_REGISTER_INTERFACE(iqtdoc::IPrintable);
 		I_REGISTER_INTERFACE(imod::IObserver);
-		I_ASSIGN_MULTI_0(m_registryElementObserversCompPtr, "RegistryElementObservers", "Registry element observers", false);
+		I_REGISTER_INTERFACE(imod::IModel);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
 		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager used to provide icon paths", true, "PackagesManager");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Show help of selected component using its address", false, "HelpViewer");
 		I_ASSIGN(m_mainWindowCompPtr, "MainWindow", "Access to main window command", false, "MainWindow");
+		I_ASSIGN(m_sceneProviderCompPtr, "SceneProvider", "Display view where the registry will be shown", true, "SceneProvider");
 	I_END_COMPONENT;
 
-	CRegistryGuiComp();
+	CVisualRegistryScenographerComp();
 
 	const QFont& GetElementNameFont() const;
 	const QFont& GetElementDetailFont() const;
 	const QIcon* GetIcon(const icomp::CComponentAddress& address) const;
 
 	double GetGrid() const{return 25;}	// TODO: replace it with some geometrical info concept
-
-	// reimplemented (iqtdoc::IPrintable)
-	virtual void Print(QPrinter* printerPtr) const;
 
 	// reimplemented (idoc::ICommandsProvider)
 	virtual const idoc::IHierarchicalCommand* GetCommands() const;
@@ -90,18 +86,15 @@ public:
 	virtual const QIcon* GetSelectedElementIcon() const;
 	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
 
-	// reimplemented (imod::IModelEditor)
-	virtual void UpdateEditor(int updateFlags = 0);
-	virtual void UpdateModel() const;
-
-	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
-	virtual void OnRetranslate();
+	// reimplemented (imod::CSingleModelObserverBase)
+	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
+
+protected:
+	void DoRetranslate();
 
 protected slots:
 	void OnSelectionChanged();
@@ -140,12 +133,12 @@ protected:
 	void ConnectReferences(const QString& componentRole);
 
 private:
-	I_MULTIREF(imod::IObserver, m_registryElementObserversCompPtr);
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
 	I_REF(icomp::IRegistriesManager, m_packagesManagerCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IMainWindowCommands, m_mainWindowCompPtr);
+	I_REF(iqt2d::ISceneProvider, m_sceneProviderCompPtr);
 
 	iqtgui::CHierarchicalCommand m_registryCommand;
 	iqtgui::CHierarchicalCommand m_registryMenu;
@@ -174,6 +167,6 @@ private:
 } // namespace icmpstr
 
 
-#endif // !icmpstr_CRegistryGuiComp_included
+#endif // !icmpstr_CVisualRegistryScenographerComp_included
 
 

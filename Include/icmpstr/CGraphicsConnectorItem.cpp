@@ -12,8 +12,8 @@
 
 #include "iqt/iqt.h"
 
-#include "icmpstr/CComponentSceneItem.h"
-#include "icmpstr/CRegistryGuiComp.h"
+#include "icmpstr/CRegistryElementShape.h"
+#include "icmpstr/CVisualRegistryScenographerComp.h"
 
 
 // public methods
@@ -23,7 +23,7 @@ namespace icmpstr
 
 
 CGraphicsConnectorItem::CGraphicsConnectorItem(
-			const CRegistryGuiComp* registryViewPtr,
+			const CVisualRegistryScenographerComp* registryViewPtr,
 			int connectFlags,
 			QGraphicsItem* parent)
 :	BaseClass(parent),
@@ -39,6 +39,64 @@ CGraphicsConnectorItem::CGraphicsConnectorItem(
 	setZValue(1);
 }
 
+
+void CGraphicsConnectorItem::InitEnds(CRegistryElementShape* sourceShapePtr, CRegistryElementShape* destShapePtr)
+{
+	if (sourceShapePtr != NULL){
+		m_sourceRect = sourceShapePtr->GetViewRect();
+		m_isSourceSelected = sourceShapePtr->isSelected();
+
+		connect(sourceShapePtr, SIGNAL(RectChanged(QRectF)), this, SLOT(OnSourceRectMoved(QRectF)));
+		connect(sourceShapePtr, SIGNAL(SelectionChanged(bool)), this, SLOT(OnSourceSelected(bool)));
+	}
+
+	if (destShapePtr != NULL){
+		m_destRect = destShapePtr->GetViewRect();
+		m_isDestSelected = destShapePtr->isSelected();
+
+		connect(destShapePtr, SIGNAL(RectChanged(QRectF)), this, SLOT(OnDestRectMoved(QRectF)));
+		connect(destShapePtr, SIGNAL(SelectionChanged(bool)), this, SLOT(OnDestSelected(bool)));
+	}
+
+	Adjust();
+}
+
+
+// reimplemented (QGraphicsItem)
+
+int CGraphicsConnectorItem::type() const
+{ 
+	return Type; 
+}
+
+
+QPainterPath CGraphicsConnectorItem::shape() const
+{
+	QPainterPath path;
+	path.addPolygon(m_connectionLine);
+
+	return path;
+}
+
+
+bool CGraphicsConnectorItem::contains(const QPointF& point) const
+{
+	i2d::CVector2d position = iqt::GetCVector2d(point);
+	int nodesCount = m_connectionLine.count();
+	for (int i = 1; i < nodesCount; ++i){
+		i2d::CLine2d segment(iqt::GetCVector2d(m_connectionLine.at(i - 1)), iqt::GetCVector2d(m_connectionLine.at(i)));
+
+		if (segment.GetDistance(position) < 2){
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+// protected members
 
 void CGraphicsConnectorItem::Adjust()
 {
@@ -126,76 +184,6 @@ void CGraphicsConnectorItem::Adjust()
 
 // reimplemented (QGraphicsItem)
 
-int CGraphicsConnectorItem::type() const
-{ 
-	return Type; 
-}
-
-
-QPainterPath CGraphicsConnectorItem::shape() const
-{
-	QPainterPath path;
-	path.addPolygon(m_connectionLine);
-
-	return path;
-}
-
-
-bool CGraphicsConnectorItem::contains(const QPointF& point) const
-{
-	i2d::CVector2d position = iqt::GetCVector2d(point);
-	int nodesCount = m_connectionLine.count();
-	for (int i = 1; i < nodesCount; ++i){
-		i2d::CLine2d segment(iqt::GetCVector2d(m_connectionLine.at(i - 1)), iqt::GetCVector2d(m_connectionLine.at(i)));
-
-		if (segment.GetDistance(position) < 2){
-
-			return true;
-		}
-	}
-
-	return false;
-}
-
-
-// public slots
-
-void CGraphicsConnectorItem::OnSourceRectMoved(const QRectF& rect)
-{
-	m_sourceRect = rect;
-
-	Adjust();
-}
-
-
-void CGraphicsConnectorItem::OnDestRectMoved(const QRectF& rect)
-{
-	m_destRect = rect;
-
-	Adjust();
-}
-
-
-void CGraphicsConnectorItem::OnSourceSelected(bool state)
-{
-	prepareGeometryChange();
-
-	m_isSourceSelected = true;
-}
-
-
-void CGraphicsConnectorItem::OnDestSelected(bool state)
-{
-	prepareGeometryChange();
-
-	m_isDestSelected = true;
-}
-
-
-// protected members
-
-// reimplemented (QGraphicsItem)
-
 QRectF CGraphicsConnectorItem::boundingRect() const
 {
 	if (m_connectionLine.size() < 2){
@@ -274,6 +262,40 @@ void CGraphicsConnectorItem::paint(QPainter *painter, const QStyleOptionGraphics
 	painter->restore();
 
 	painter->restore();
+}
+
+
+// protected slots
+
+void CGraphicsConnectorItem::OnSourceRectMoved(const QRectF& rect)
+{
+	m_sourceRect = rect;
+
+	Adjust();
+}
+
+
+void CGraphicsConnectorItem::OnDestRectMoved(const QRectF& rect)
+{
+	m_destRect = rect;
+
+	Adjust();
+}
+
+
+void CGraphicsConnectorItem::OnSourceSelected(bool state)
+{
+	prepareGeometryChange();
+
+	m_isSourceSelected = state;
+}
+
+
+void CGraphicsConnectorItem::OnDestSelected(bool state)
+{
+	prepareGeometryChange();
+
+	m_isDestSelected = state;
 }
 
 

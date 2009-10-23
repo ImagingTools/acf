@@ -28,7 +28,7 @@ namespace icmpstr
 
 CRegistryViewComp::CRegistryViewComp()
 {
-	SetUpdateFilter(~CRegistryModelComp::CF_POSITION);
+	SetUpdateFilter(~i2d::IObject2d::CF_OBJECT_POSITION);
 
 	int lightToolFlags = idoc::IHierarchicalCommand::CF_GLOBAL_MENU | idoc::IHierarchicalCommand::CF_TOOLBAR;
 
@@ -216,7 +216,7 @@ const icomp::CComponentAddress* CRegistryViewComp::GetSelectedElementAddress() c
 void CRegistryViewComp::UpdateEditor(int updateFlags)
 {
 	if (updateFlags != 0){
-		static const int unimportantChanges = CRegistryModelComp::CF_POSITION | istd::IChangeable::CF_MODEL;
+		static const int unimportantChanges = i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL;
 		if ((updateFlags & ~unimportantChanges) == 0){
 			// some unimportant model changes
 			return;

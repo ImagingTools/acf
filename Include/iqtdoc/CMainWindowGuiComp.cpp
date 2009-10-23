@@ -498,7 +498,7 @@ void CMainWindowGuiComp::UpdateMenuActions()
 		allowedOperationFlags = m_documentManagerCompPtr->GetAllowedOperationFlags();
 
 		const idoc::IDocumentTemplate* templatePtr = m_documentManagerCompPtr->GetDocumentTemplate();
-		const idoc::ICommandsProvider* templateProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(templatePtr);
+		const idoc::ICommandsProvider* templateProviderPtr = CompCastPtr<idoc::ICommandsProvider>(templatePtr);
 		if (templateProviderPtr != NULL){
 			const idoc::IHierarchicalCommand* commandsPtr = templateProviderPtr->GetCommands();
 			if (commandsPtr != NULL){
@@ -520,7 +520,7 @@ void CMainWindowGuiComp::UpdateMenuActions()
 		}
 	}
 
-	const idoc::ICommandsProvider* viewProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(m_activeViewPtr);
+	const idoc::ICommandsProvider* viewProviderPtr = CompCastPtr<idoc::ICommandsProvider>(m_activeViewPtr);
 	if (viewProviderPtr != NULL){
 		const idoc::IHierarchicalCommand* commandsPtr = viewProviderPtr->GetCommands();
 		if (commandsPtr != NULL){
@@ -528,7 +528,7 @@ void CMainWindowGuiComp::UpdateMenuActions()
 		}
 	}
 
-	const idoc::ICommandsProvider* documentProviderPtr = dynamic_cast<const idoc::ICommandsProvider*>(m_activeDocumentPtr);
+	const idoc::ICommandsProvider* documentProviderPtr = CompCastPtr<idoc::ICommandsProvider>(m_activeDocumentPtr);
 	if (documentProviderPtr != NULL){
 		const idoc::IHierarchicalCommand* commandsPtr = documentProviderPtr->GetCommands();
 		if (commandsPtr != NULL){

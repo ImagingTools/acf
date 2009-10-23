@@ -11,19 +11,29 @@
 
 #include "icomp/CCompositeComponentStaticInfo.h"
 
-#include "icmpstr/CRegistryGuiComp.h"
+#include "icmpstr/CVisualRegistryScenographerComp.h"
+#include "icmpstr/CRegistryElementShape.h"
 
 
 namespace icmpstr
 {
 
 
-CRegistryElementShape::CRegistryElementShape(const CRegistryGuiComp* registryViewPtr)
-:	m_registryView(*registryViewPtr),
+CRegistryElementShape::CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr)
+:	BaseClass(true, NULL),
+	m_registryView(*registryViewPtr),
 	m_registryObserver(this)
 {
-	setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
 	I_ASSERT(registryViewPtr != NULL);
+}
+
+
+QRectF CRegistryElementShape::GetViewRect() const
+{
+	QRectF retVal = m_realBox;
+	retVal.moveCenter(pos());
+
+	return retVal;
 }
 
 
@@ -41,7 +51,7 @@ QRectF CRegistryElementShape::boundingRect() const
 
 void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphicsItem* /*stylePtr*/, QWidget* /*widgetPtr*/)
 {
-	const CGeometricalRegistryElement* objectPtr = GetObjectPtr();
+	const CVisualRegistryElement* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}
@@ -155,7 +165,7 @@ bool CRegistryElementShape::collidesWithPath(const QPainterPath& path, Qt::ItemS
 
 bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
 {
-	const CGeometricalRegistryElement* objectPtr = dynamic_cast<const CGeometricalRegistryElement*>(modelPtr);
+	const CVisualRegistryElement* objectPtr = dynamic_cast<const CVisualRegistryElement*>(modelPtr);
 	if (objectPtr == NULL){
 		return false;
 	}
@@ -179,10 +189,12 @@ void CRegistryElementShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags,
 {
 	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
-	const CGeometricalRegistryElement* objectPtr = GetObjectPtr();
+	const CVisualRegistryElement* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}
+
+	setPos(iqt::GetQPointF(objectPtr->GetCenter()));
 
 	const QFont& nameFont = m_registryView.GetElementNameFont();
 	QFontMetrics nameFontInfo(nameFont);
@@ -220,9 +232,9 @@ void CRegistryElementShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags,
 
 	width = ::ceil(width / gridSize) * gridSize;
 
-	i2d::CVector2d center = objectPtr->GetCenter();
+	m_realBox = QRectF(-width * 0.5, -height * 0.5, width, height);
 
-	m_realBox = QRectF(center.GetX() - width * 0.5, center.GetY() - height * 0.5, width, height);
+	emit RectChanged(GetViewRect());
 
 	update();
 }
@@ -230,7 +242,7 @@ void CRegistryElementShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags,
 
 // protected methods
 
-void CRegistryElementShape::CalcExportedInteraces(const CGeometricalRegistryElement& element)
+void CRegistryElementShape::CalcExportedInteraces(const CVisualRegistryElement& element)
 {
 	m_exportedInterfacesList.clear();
 
@@ -251,29 +263,22 @@ void CRegistryElementShape::CalcExportedInteraces(const CGeometricalRegistryElem
 }
 
 
-// reimplemented (QGraphicsItem)
-
-void CRegistryElementShape::mousePressEvent(QGraphicsSceneMouseEvent* /*eventPtr*/)
-{
-}
-
-
-void CRegistryElementShape::mouseMoveEvent(QGraphicsSceneMouseEvent* /*eventPtr*/)
-{
-}
-
-
-void CRegistryElementShape::mouseReleaseEvent(QGraphicsSceneMouseEvent* /*eventPtr*/)
-{
-}
-
-
 // public methods of embedded class RegistryObserver
 
 CRegistryElementShape::RegistryObserver::RegistryObserver(CRegistryElementShape* parentPtr)
 :	m_parent(*parentPtr)
 {
 	I_ASSERT(parentPtr != NULL);
+}
+
+
+// reimplemented (TShapeBase)
+
+void CRegistryElementShape::OnSelectionChanged(bool isSelected)
+{
+	BaseClass::OnSelectionChanged(isSelected);
+
+	emit SelectionChanged(isSelected);
 }
 
 
@@ -286,7 +291,7 @@ void CRegistryElementShape::RegistryObserver::OnUpdate(int updateFlags, istd::IP
 	BaseClass::OnUpdate(updateFlags, updateParamsPtr);
 
 	if ((updateFlags & icomp::IRegistry::CF_COMPONENT_EXPORTED) != 0){
-		const CGeometricalRegistryElement* objectPtr = m_parent.GetObjectPtr();
+		const CVisualRegistryElement* objectPtr = m_parent.GetObjectPtr();
 		if (objectPtr == NULL){
 			return;
 		}

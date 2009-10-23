@@ -46,6 +46,30 @@ void CSceneProviderGuiComp::SetIsotropyFactor(double factor)
 }
 
 
+// reimplemented (iqtdoc::IPrintable)
+
+void CSceneProviderGuiComp::Print(QPrinter* printerPtr) const
+{
+	if (SceneView == NULL){
+		return;
+	}
+
+	QPrinter* realPrinterPtr = printerPtr;
+	QPrinter defaultPrinter(QPrinter::HighResolution);
+	defaultPrinter.setPageSize(QPrinter::A4);
+	defaultPrinter.setOrientation(QPrinter::Landscape);
+
+	if (realPrinterPtr == NULL){
+		realPrinterPtr = &defaultPrinter;
+	}
+
+	QPainter painter(realPrinterPtr);
+
+	 // print, fitting the viewport contents into a full page
+	SceneView->render(&painter);
+}
+
+
 // reimplemented (idoc::ICommandsProvider)
 
 const idoc::IHierarchicalCommand* CSceneProviderGuiComp::GetCommands() const
