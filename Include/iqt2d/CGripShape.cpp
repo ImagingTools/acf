@@ -13,10 +13,12 @@ namespace iqt2d
 
 // public methods
 
-CGripShape::CGripShape(QGraphicsItem* parentPtr)
-:	BaseClass(true, parentPtr),
+CGripShape::CGripShape(QGraphicsItem* parentPtr, const ISceneProvider* providerPtr)
+:	BaseClass(true, providerPtr),
 	m_labelItem(this)
 {
+	setParentItem(parentPtr);
+
 	SetPen(InactiveColor, QPen(QBrush(QColor(0, 0, 192)), 0));
 	SetPen(EditableColor, QPen(QBrush(QColor(0, 0, 192)), 0));
 	SetPen(SelectedColor, QPen(QBrush(QColor(0, 0, 255)), 0));

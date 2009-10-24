@@ -31,8 +31,9 @@ typedef icmpstr::CRegistryLoaderComp RegistryLoader;
 typedef icmpstr::CRegistryPreviewComp RegistryPreview;
 typedef icmpstr::CComponentHelpFileProviderComp ComponentHelpFileProvider;
 typedef icomp::TModelCompWrap<icmpstr::CVisualRegistryComp> VisualRegistry;
-typedef icmpstr::CVisualRegistryScenographerComp VisualRegistryGui;
+typedef icmpstr::CVisualRegistryScenographerComp VisualRegistryScenographer;
 
+// TODO: remove it when Compositor 2.0 is ready
 typedef icomp::TModelCompWrap<icmpstr::CRegistryModelComp> RegistryModel;
 typedef icmpstr::CRegistryViewComp RegistryView;
 

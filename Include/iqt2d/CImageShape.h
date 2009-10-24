@@ -26,8 +26,8 @@ public:
 
 	istd::CIndex2d GetSize() const;
 
-	bool IsBackgroundGridUsed() const;
-	void SetBackgroundGridUsed(bool state = true);
+	bool IsFrameVisible() const;
+	void SetFrameVisible(bool state = true);
 
 	// reimplemented (QGraphicsItem)
 	virtual QRectF boundingRect() const;
@@ -40,7 +40,7 @@ private:
 	void SetLookupTableToImage(QImage& image, const icmm::IColorTransformation& colorTransformation);
 
 private:
-	bool m_isBackgroundGridUsed;
+	bool m_isFrameVisible;
 	QPixmap m_backgroundPixmap;
 
 	QPixmap m_bitmap;
@@ -57,16 +57,16 @@ inline istd::CIndex2d CImageShape::GetSize() const
 }
 
 
-inline bool CImageShape::IsBackgroundGridUsed() const
+inline bool CImageShape::IsFrameVisible() const
 {
-	return m_isBackgroundGridUsed;
+	return m_isFrameVisible;
 }
 
 
-inline void CImageShape::SetBackgroundGridUsed(bool state)
+inline void CImageShape::SetFrameVisible(bool state)
 {
-	if (state != m_isBackgroundGridUsed){
-		m_isBackgroundGridUsed = state;
+	if (state != m_isFrameVisible){
+		m_isFrameVisible = state;
 
 		update();
 	}

@@ -19,7 +19,7 @@ class CCircleShape: public TObjectShapeBase<QGraphicsEllipseItem, i2d::CCircle>
 public:
 	typedef TObjectShapeBase<QGraphicsEllipseItem, i2d::CCircle> BaseClass;
 
-	CCircleShape(bool isEditable = false);
+	CCircleShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

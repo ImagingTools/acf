@@ -13,10 +13,11 @@ namespace iqt2d
 
 // public methods
 
-CPosition2dShape::CPosition2dShape()
-:	m_ignoreUpdate(false)
+CPosition2dShape::CPosition2dShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(NULL, providerPtr),
+	m_ignoreUpdate(false)
 {
-	setFlags(ItemIsMovable | ItemIsSelectable);
+	SetEditable(isEditable);
 }
 
 

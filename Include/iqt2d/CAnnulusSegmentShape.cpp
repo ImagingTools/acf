@@ -14,8 +14,8 @@ namespace iqt2d
 
 // public methods
 
-CAnnulusSegmentShape::CAnnulusSegmentShape(bool isEditable)
-:	BaseClass(isEditable),
+CAnnulusSegmentShape::CAnnulusSegmentShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr),
 	m_beginAngleGrip(this),
 	m_endAngleGrip(this)
 {

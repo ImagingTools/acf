@@ -40,17 +40,40 @@ class CSceneProviderGuiComp:
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CSceneProviderGuiComp> BaseClass;
 
+	enum BackgroundMode
+	{
+		/**
+			Standard window backround.
+		*/
+		BM_NORMAL,
+		/**
+			Filled with solid color.
+		*/
+		BM_SOLID,
+		/**
+			Grid of horizontal and vertical lines.
+		*/
+		BM_GRID,
+		/**
+			Checkerboard pattern.
+		*/
+		BM_CHECKERBOARD
+	};
+
 	I_BEGIN_COMPONENT(CSceneProviderGuiComp);
 		I_REGISTER_INTERFACE(iqtdoc::IPrintable);
 		I_REGISTER_INTERFACE(idoc::ICommandsProvider);
 		I_REGISTER_INTERFACE(ISceneProvider);
 		I_REGISTER_INTERFACE(i2d::ISceneController);
-		I_ASSIGN(m_allowWidgetResizeAttrPtr, "AllowWidgetResize", "Allow resize of QWidet object (should be disabled if this GUI size is managed by layout)", true, false)
-		I_ASSIGN(m_sceneIdAttrPtr, "SceneId", "ID allowing identifying this scene", true, 0)
-		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false)
-		I_ASSIGN(m_fitModeAttrPtr, "FitMode", "Set fit automatic mode for the scene\n 0 - no fit (default)\n 1 - isotropic (reduction)\n 2 - isotropic\n 3 - anisotropic", false, 0)		
-		I_ASSIGN(m_isotropyFactorAttrPtr, "IsotropyFactor", "Describe type of isotropic transformation: 0 - letterbox, 1 - full", true, 0)		
-		I_ASSIGN(m_sceneControllerGuiCompPtr, "SceneController", "Scene controller", false, "SceneController");		
+		I_ASSIGN(m_allowWidgetResizeAttrPtr, "AllowWidgetResize", "Allow resize of QWidet object (should be disabled if this GUI size is managed by layout)", true, false);
+		I_ASSIGN(m_sceneIdAttrPtr, "SceneId", "ID allowing identifying this scene", true, 0);
+		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false);
+		I_ASSIGN(m_fitModeAttrPtr, "FitMode", "Set fit automatic mode for the scene\n 0 - no fit (default)\n 1 - isotropic (reduction)\n 2 - isotropic\n 3 - anisotropic", false, 0);
+		I_ASSIGN(m_isotropyFactorAttrPtr, "IsotropyFactor", "Describe type of isotropic transformation: 0 - letterbox, 1 - full", true, 0);
+		I_ASSIGN(m_sceneControllerGuiCompPtr, "SceneController", "Scene controller", false, "SceneController");	
+		I_ASSIGN(m_backgroundModeAttrPtr, "BackgroundMode", "Mode of background drawing:\n 0 - normal window\n 1 - solid color\n 2 - grid\n 3 - checkerboard", true, 0);	
+		I_ASSIGN(m_gridSizeAttrPtr, "GridSize", "Size of grid, it is used also for background", true, 20);	
+		I_ASSIGN(m_isAlignmentEnabledAttrPtr, "IsAlignmentEnabled", "If true, grid alignment will be enabled", true, false);	
 	I_END_COMPONENT;
 
 	CSceneProviderGuiComp();
@@ -67,6 +90,7 @@ public:
 	// reimplemented (iqt2d::ISceneProvider)
 	virtual int GetSceneId() const;
 	virtual QGraphicsScene* GetScene() const;
+	virtual bool GetSceneAlignment(double& distance) const;
 
 	// reimplemented (i2d::ISceneController)
 	virtual int GetSceneRestrictionFlags() const;
@@ -86,6 +110,25 @@ public slots:
 	void OnAutoFit(bool isAutoScale);
 
 protected:
+	/**
+		Implementation of QGraphicsScene with own background drawing to provide rastered backgrounds.
+	*/
+	class CScene: public QGraphicsScene
+	{
+	public:
+		typedef QGraphicsScene BaseClass;
+
+		CScene(CSceneProviderGuiComp* parentPtr);
+
+	protected:
+		// reimplemented (QGraphicsScene)
+		virtual void drawBackground(QPainter* painter, const QRectF & rect);
+
+	private:
+		CSceneProviderGuiComp& m_parent;
+		QPixmap m_backgroundPixmap;
+	};
+
 	virtual void OnResize(QResizeEvent* eventPtr);
 	virtual void OnWheelEvent(QGraphicsSceneWheelEvent* eventPtr);
 	virtual void OnKeyReleaseEvent(QKeyEvent* eventPtr);
@@ -128,6 +171,9 @@ private:
 	I_ATTR(bool, m_useAntialiasingAttrPtr);
 	I_ATTR(int, m_fitModeAttrPtr);
 	I_ATTR(double, m_isotropyFactorAttrPtr);
+	I_ATTR(int, m_backgroundModeAttrPtr);
+	I_ATTR(double, m_gridSizeAttrPtr);
+	I_ATTR(bool, m_isAlignmentEnabledAttrPtr);
 
 	QWidget* m_savedParentWidgetPtr;
 	QMatrix m_savedViewTransform;

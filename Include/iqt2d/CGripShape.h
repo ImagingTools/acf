@@ -25,7 +25,7 @@ public:
 
 	typedef TShapeBase<QGraphicsEllipseItem> BaseClass;
 
-	CGripShape(QGraphicsItem* parentPtr = NULL);
+	CGripShape(QGraphicsItem* parentPtr = NULL, const ISceneProvider* providerPtr = NULL);
 
 	/**
 		Set label position relative to the grip point.

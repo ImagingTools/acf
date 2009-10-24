@@ -19,7 +19,7 @@ class CAnnulusShape: public TObjectShapeBase<QGraphicsPathItem, i2d::CAnnulus>
 public:
 	typedef TObjectShapeBase<QGraphicsPathItem, i2d::CAnnulus> BaseClass;
 
-	CAnnulusShape(bool isEditable = false);
+	CAnnulusShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

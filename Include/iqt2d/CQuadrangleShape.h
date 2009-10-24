@@ -21,7 +21,7 @@ class CQuadrangleShape: public TObjectShapeBase<QGraphicsPathItem, i2d::CQuadran
 public:
 	typedef TObjectShapeBase<QGraphicsPathItem, i2d::CQuadrangle> BaseClass;
 
-	CQuadrangleShape(bool isEditable = false);
+	CQuadrangleShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

@@ -32,7 +32,7 @@ I_EXPORT_COMPONENT(RegistryPreview, "Preview of registry object in separated app
 I_EXPORT_COMPONENT(RegistryView, "Registry editor using graphical component diagram", "Registry Editor Observer Diagram Components Qt GUI");
 I_EXPORT_COMPONENT(ComponentHelpFileProvider, "Provide file path of html help for component using its address", "Help File Provider Component Address Qt");
 I_EXPORT_COMPONENT(VisualRegistry, "Model of ACF registry with additional visual elements designed for Compositor", "Components ARX Model ACF Registry Visual Compositor");
-I_EXPORT_COMPONENT(VisualRegistryGui, "Visual registry editor", "Components ACF Registry Visual Compositor Observer Qt GUI");
+I_EXPORT_COMPONENT(VisualRegistryScenographer, "Visual registry editor", "Components ACF Registry Visual Compositor Observer Qt GUI");
 
 
 } // namespace CmpstrPck

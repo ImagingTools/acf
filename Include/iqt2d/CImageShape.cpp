@@ -18,16 +18,9 @@ namespace iqt2d
 // public methods
 
 CImageShape::CImageShape(const icmm::IColorTransformation* colorTransformationPtr)
-:	m_isBackgroundGridUsed(false),
+:	m_isFrameVisible(false),
 	m_colorTransformationPtr(colorTransformationPtr)
 {
-	m_backgroundPixmap = QPixmap(16, 16);
-		
-	QPainter p(&m_backgroundPixmap);
-	p.fillRect(0, 0, 8, 8, QBrush(qRgb(200,200,200)));
-	p.fillRect(0, 8, 8, 8, QBrush(Qt::white));
-	p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
-	p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
 }
 
 
@@ -73,19 +66,13 @@ void CImageShape::paint(QPainter* p, const QStyleOptionGraphicsItem* option, QWi
 		return;
 	}
 
-	if (m_isBackgroundGridUsed){
-		p->save();
-		p->setMatrixEnabled(false);
-
-		QRect viewportRect = p->matrix().mapRect(imageRect);
-		p->drawTiledPixmap(viewportRect, m_backgroundPixmap);
-		p->setPen(QPen(Qt::black));
-		viewportRect.adjust(0, 0, -1, -1);
-		p->drawRect(viewportRect);
-		p->restore();
-	}
-
 	p->drawPixmap(option->exposedRect, m_bitmap, option->exposedRect);
+
+	if (m_isFrameVisible){
+		p->setPen(QPen(Qt::black, 2));
+		imageRect.adjust(-1, -1, 1, 1);
+		p->drawRect(imageRect);
+	}
 }
 
 

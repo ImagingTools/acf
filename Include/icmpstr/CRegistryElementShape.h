@@ -29,7 +29,7 @@ class CRegistryElementShape: public iqt2d::TObjectShapeBase<QGraphicsItem, CVisu
 public:
 	typedef iqt2d::TObjectShapeBase<QGraphicsItem, CVisualRegistryElement> BaseClass;
 
-	CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr);
+	CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr, const iqt2d::ISceneProvider* providerPtr = NULL);
 
 	QRectF GetViewRect() const;
 

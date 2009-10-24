@@ -14,7 +14,7 @@ namespace iqt2d
 
 CImageViewComp::CImageViewComp()
 {
-	SetBackgroundGridUsed();
+	SetFrameVisible();
 }
 
 

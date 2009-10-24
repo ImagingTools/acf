@@ -15,16 +15,16 @@ namespace iqt2d
 
 // public methods
 
-CAnnulusShape::CAnnulusShape(bool isEditable)
-:	BaseClass(isEditable),
-	m_leftInnerGrip(this),
-	m_rightInnerGrip(this),
-	m_topInnerGrip(this),
-	m_bottomInnerGrip(this),
-	m_leftOuterGrip(this),
-	m_rightOuterGrip(this),
-	m_topOuterGrip(this),
-	m_bottomOuterGrip(this)
+CAnnulusShape::CAnnulusShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr),
+	m_leftInnerGrip(this, providerPtr),
+	m_rightInnerGrip(this, providerPtr),
+	m_topInnerGrip(this, providerPtr),
+	m_bottomInnerGrip(this, providerPtr),
+	m_leftOuterGrip(this, providerPtr),
+	m_rightOuterGrip(this, providerPtr),
+	m_topOuterGrip(this, providerPtr),
+	m_bottomOuterGrip(this, providerPtr)
 {
 	connect(&m_leftInnerGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnInnerGripPositionChanged(const QPointF&)));
 	connect(&m_rightInnerGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnInnerGripPositionChanged(const QPointF&)));

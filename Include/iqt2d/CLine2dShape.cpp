@@ -16,10 +16,10 @@ namespace iqt2d
 
 // public methods
 
-CLine2dShape::CLine2dShape(bool isEditable)
-:	BaseClass(isEditable),
-	m_pointGrip1(this),
-	m_pointGrip2(this)
+CLine2dShape::CLine2dShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr),
+	m_pointGrip1(this, providerPtr),
+	m_pointGrip2(this, providerPtr)
 {
 	connect(&m_pointGrip1, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition1Changed(const QPointF&)));
 	connect(&m_pointGrip2, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnPosition2Changed(const QPointF&)));

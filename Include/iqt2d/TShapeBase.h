@@ -13,7 +13,7 @@
 #include <QStyleOptionGraphicsItem>
 
 
-#include "iqt2d/iqt2d.h"
+#include "iqt2d/ISceneProvider.h"
 
 
 namespace iqt2d
@@ -49,7 +49,7 @@ public:
 		DefaultColor = InactiveColor
 	};
 
-	TShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
+	TShapeBase(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	virtual void SetPen(int colorSheme, const QPen& pen);
 	virtual QPen GetPen(int colorSheme) const;
@@ -59,9 +59,11 @@ public:
 
 	virtual void SwitchColorSheme(int colorSheme);
 
-	void SetEditable(bool isEditable);
 	bool IsEditable() const;
+	void SetEditable(bool isEditable);
 
+	const ISceneProvider* GetSceneProvider() const;
+	
 protected:
 	virtual void OnSelectionChanged(bool isSelected);
 	virtual void OnPositionChanged(const QPointF& position);
@@ -77,6 +79,7 @@ private:
 	typedef QMap<int, ColorShemeInfo> ColorShemeMap;
 
 	bool m_isEditable;
+	const ISceneProvider* m_providerPtr;
 
 	ColorShemeMap m_colorShemeMap;
 };
@@ -85,9 +88,9 @@ private:
 // public methods
 
 template <class GraphicsItemClass>
-TShapeBase<GraphicsItemClass>::TShapeBase(bool isEditable, QGraphicsItem* parentPtr)
-:	BaseClass(parentPtr),
-	m_isEditable(isEditable)
+TShapeBase<GraphicsItemClass>::TShapeBase(bool isEditable, const ISceneProvider* providerPtr)
+:	m_isEditable(isEditable),
+	m_providerPtr(providerPtr)
 {
 	BaseClass::setAcceptsHoverEvents(true);
 }
@@ -165,6 +168,13 @@ void TShapeBase<GraphicsItemClass>::SwitchColorSheme(int colorSheme)
 
 
 template <class GraphicsItemClass>
+bool TShapeBase<GraphicsItemClass>::IsEditable() const
+{
+	return m_isEditable;
+}
+
+
+template <class GraphicsItemClass>
 void TShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
 {
 	m_isEditable = isEditable;
@@ -178,9 +188,9 @@ void TShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
 
 
 template <class GraphicsItemClass>
-bool TShapeBase<GraphicsItemClass>::IsEditable() const
+const ISceneProvider* TShapeBase<GraphicsItemClass>::GetSceneProvider() const
 {
-	return m_isEditable;
+	return m_providerPtr;
 }
 
 
@@ -209,8 +219,20 @@ void TShapeBase<GraphicsItemClass>::OnPositionChanged(const QPointF& /*position*
 template <class GraphicsItemClass>
 QVariant TShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
-	if (change == BaseClass::ItemPositionHasChanged) {
-		OnPositionChanged(value.toPointF());
+	if (change == BaseClass::ItemPositionHasChanged){
+		QPointF position = value.toPointF();
+
+		if (m_providerPtr != NULL){
+			double distance;
+			if (m_providerPtr->GetSceneAlignment(distance)){
+				position.setX(::floor(position.x() / distance) * distance);
+				position.setY(::floor(position.y() / distance) * distance);
+			}
+		}
+
+		OnPositionChanged(position);
+
+		return position;
 	}
 
 	if (change == BaseClass::ItemSelectedChange){

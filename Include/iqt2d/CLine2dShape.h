@@ -18,7 +18,7 @@ class CLine2dShape: public TObjectShapeBase<QGraphicsLineItem, i2d::CLine2d>
 public:
 	typedef TObjectShapeBase<QGraphicsLineItem, i2d::CLine2d> BaseClass;
 
-	CLine2dShape(bool isEditable = false);
+	CLine2dShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

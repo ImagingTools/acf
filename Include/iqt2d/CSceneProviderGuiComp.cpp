@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QVBoxLayout>
+#include <QVarLengthArray>
 
 
 namespace iqt2d
@@ -22,7 +23,7 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 	m_savedParentWidgetPtr(NULL),
 	m_isotropyFactor(0)
 {
-	m_scenePtr = new QGraphicsScene;
+	m_scenePtr = new CScene(this);
 
 	m_scenePtr->setFocus();
 }
@@ -91,6 +92,19 @@ int CSceneProviderGuiComp::GetSceneId() const
 QGraphicsScene* CSceneProviderGuiComp::GetScene() const
 {
 	return m_scenePtr;
+}
+
+
+bool CSceneProviderGuiComp::GetSceneAlignment(double& distance) const
+{
+	if (*m_isAlignmentEnabledAttrPtr){
+		distance = *m_gridSizeAttrPtr;
+
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 
@@ -397,7 +411,9 @@ void CSceneProviderGuiComp::OnGuiCreated()
 	SceneView->setScene(m_scenePtr);
 	SceneView->setMouseTracking(true);
 	SceneView->setDragMode(QGraphicsView::ScrollHandDrag);
-	SceneView->setBackgroundBrush(QBrush(QColor(128, 128, 128)));
+	if (*m_backgroundModeAttrPtr == BM_SOLID){
+		SceneView->setBackgroundBrush(QBrush(QColor(128, 128, 128)));
+	}
 	SceneView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
 	SceneView->installEventFilter(this);
 
@@ -413,19 +429,21 @@ void CSceneProviderGuiComp::OnGuiCreated()
 
 	m_scenePtr->installEventFilter(this);
 
-	QColor backgroundColor = SceneView->backgroundBrush().color();
-	QString backgroundColorString = QString("background-color: rgb(%1,%2,%3)").arg(backgroundColor.red()).arg(backgroundColor.green()).arg(backgroundColor.blue());
-
 	// try to place the scene controller:
 	if (m_sceneControllerGuiCompPtr.IsValid()){
 		m_sceneControllerGuiCompPtr->CreateGui(ControllerFrame);
-		QPalette viewPalette = SceneView->palette();
-		viewPalette.setColor(QPalette::Window, SceneView->backgroundBrush().color());
 
-		BottomFrame->setStyleSheet(backgroundColorString);
-		ControllerFrame->setStyleSheet(backgroundColorString);
-		GetWidget()->setStyleSheet(backgroundColorString);
-		m_sceneControllerGuiCompPtr->GetWidget()->setStyleSheet(backgroundColorString);
+		if (*m_backgroundModeAttrPtr == BM_SOLID){
+			QPalette viewPalette = SceneView->palette();
+			viewPalette.setColor(QPalette::Window, SceneView->backgroundBrush().color());
+
+			QColor backgroundColor = SceneView->backgroundBrush().color();
+			QString backgroundColorString = QString("background-color: rgb(%1,%2,%3)").arg(backgroundColor.red()).arg(backgroundColor.green()).arg(backgroundColor.blue());
+			BottomFrame->setStyleSheet(backgroundColorString);
+			ControllerFrame->setStyleSheet(backgroundColorString);
+			GetWidget()->setStyleSheet(backgroundColorString);
+			m_sceneControllerGuiCompPtr->GetWidget()->setStyleSheet(backgroundColorString);
+		}
 
 		BottomFrame->setVisible(true);
 	}
@@ -474,7 +492,68 @@ bool CSceneProviderGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 		}
 	}
 
-	return false;
+	return BaseClass::eventFilter(sourcePtr, eventPtr);
+}
+
+
+// public methods of embedded class CScene
+
+CSceneProviderGuiComp::CScene::CScene(CSceneProviderGuiComp* parentPtr)
+:	m_parent(*parentPtr),
+	m_backgroundPixmap(16, 16)
+{
+	I_ASSERT(parentPtr != NULL);
+
+	QPainter p(&m_backgroundPixmap);
+	p.fillRect(0, 0, 8, 8, QBrush(qRgb(200,200,200)));
+	p.fillRect(0, 8, 8, 8, QBrush(Qt::white));
+	p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
+	p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
+}
+
+
+// protected methods of embedded class CScene
+
+// reimplemented (QGraphicsScene)
+
+void CSceneProviderGuiComp::CScene::drawBackground(QPainter* painter, const QRectF& rect)
+{
+	switch (*m_parent.m_backgroundModeAttrPtr){
+	case BM_GRID:
+		{
+			QRectF gridRect = sceneRect().unite(rect);
+			int gridSize = *m_parent.m_gridSizeAttrPtr;
+
+			QRect realRect = rect.toAlignedRect();
+
+			int firstLeftGridLine = realRect.left() - (realRect.left() % gridSize);
+			int firstTopGridLine = realRect.top() - (realRect.top() % gridSize);
+
+			QVarLengthArray<QLine> lines;
+			for (int x = firstLeftGridLine; x <= realRect.right(); x += gridSize){
+				lines.append(QLine(x, realRect.top(), x, realRect.bottom()));
+			}
+
+			for (int y = firstTopGridLine; y <= realRect.bottom(); y += gridSize){
+				lines.append(QLine(realRect.left(), y, realRect.right(), y));           
+			}
+
+			painter->setPen(QPen(qRgb(224, 224, 255)));
+			painter->drawLines(lines.data(), lines.size());
+		}
+		break;
+
+	case BM_CHECKERBOARD:
+		{
+			painter->setMatrixEnabled(false);
+
+			painter->drawTiledPixmap(sceneRect(), m_backgroundPixmap);
+		}
+		break;
+
+	default:
+		QGraphicsScene::drawBackground(painter, rect);
+	}
 }
 
 

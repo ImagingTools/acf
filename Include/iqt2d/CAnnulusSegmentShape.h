@@ -17,7 +17,7 @@ class CAnnulusSegmentShape: public CAnnulusShape
 public:
 	typedef CAnnulusShape BaseClass;
 
-	CAnnulusSegmentShape(bool isEditable = false);
+	CAnnulusSegmentShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 protected slots:
 	virtual void OnAngleGripPositionChanged(const QPointF& point);

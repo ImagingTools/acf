@@ -16,12 +16,12 @@ namespace iqt2d
 
 // public methods
 
-CCircleShape::CCircleShape(bool isEditable)
-:	BaseClass(isEditable),
-	m_leftGrip(this),
-	m_rightGrip(this),
-	m_topGrip(this),
-	m_bottomGrip(this)
+CCircleShape::CCircleShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr),
+	m_leftGrip(this, providerPtr),
+	m_rightGrip(this, providerPtr),
+	m_topGrip(this, providerPtr),
+	m_bottomGrip(this, providerPtr)
 {
 	connect(&m_leftGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnGripPositionChanged(const QPointF&)));
 	connect(&m_rightGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnGripPositionChanged(const QPointF&)));

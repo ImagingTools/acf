@@ -18,10 +18,10 @@ class CPosition2dShape:
 			public imod::TSingleModelObserverBase<i2d::CPosition2d>
 {
 public:
-	typedef QGraphicsLineItem BaseClass;
+	typedef CGripShape BaseClass;
 	typedef imod::TSingleModelObserverBase<i2d::CPosition2d> BaseClass2;
 
-	CPosition2dShape();
+	CPosition2dShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

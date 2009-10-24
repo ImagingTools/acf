@@ -21,7 +21,7 @@ class CRectangleShape: public TObjectShapeBase<QGraphicsRectItem, i2d::CRectangl
 public:
 	typedef TObjectShapeBase<QGraphicsRectItem, i2d::CRectangle> BaseClass;
 
-	CRectangleShape(bool isEditable = false);
+	CRectangleShape(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 	// reimplemented (imod::IObserver)
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);

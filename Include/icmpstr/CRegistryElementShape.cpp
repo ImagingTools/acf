@@ -19,8 +19,8 @@ namespace icmpstr
 {
 
 
-CRegistryElementShape::CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr)
-:	BaseClass(true, NULL),
+CRegistryElementShape::CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr, const iqt2d::ISceneProvider* providerPtr)
+:	BaseClass(true, providerPtr),
 	m_registryView(*registryViewPtr),
 	m_registryObserver(this)
 {
@@ -228,9 +228,11 @@ void CRegistryElementShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags,
 	width += SIDE_OFFSET * 2;
 	height += SIDE_OFFSET * 2;
 
-	double gridSize = m_registryView.GetGrid();
-
-	width = ::ceil(width / gridSize) * gridSize;
+	double gridSize;
+	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
+	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
+		width = ::ceil(width / (gridSize * 2)) * (gridSize * 2);
+	}
 
 	m_realBox = QRectF(-width * 0.5, -height * 0.5, width, height);
 

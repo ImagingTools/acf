@@ -12,12 +12,12 @@ namespace iqt2d
 
 // public methods
 
-CRectangleShape::CRectangleShape(bool isEditable)
-:	BaseClass(isEditable),
-	m_topLeftGrip(this),
-	m_topRightGrip(this),
-	m_bottomLeftGrip(this),
-	m_bottomRightGrip(this)
+CRectangleShape::CRectangleShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr),
+	m_topLeftGrip(this, providerPtr),
+	m_topRightGrip(this, providerPtr),
+	m_bottomLeftGrip(this, providerPtr),
+	m_bottomRightGrip(this, providerPtr)
 {
 	connect(&m_topLeftGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnTopLeftChanged(const QPointF&)));
 	connect(&m_topRightGrip, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnTopRightChanged(const QPointF&)));

@@ -606,7 +606,7 @@ QGraphicsItem* CVisualRegistryScenographerComp::AddShapeToScene(iser::ISerializa
 	if (elementModelPtr != NULL){
 		CVisualRegistryElement* registryElementPtr = dynamic_cast<CVisualRegistryElement*>(elementPtr);
 		if (registryElementPtr != NULL){
-			CRegistryElementShape* shapePtr = new CRegistryElementShape(this);
+			CRegistryElementShape* shapePtr = new CRegistryElementShape(this, m_sceneProviderCompPtr.GetPtr());
 
 			m_scenePtr->addItem(shapePtr);
 

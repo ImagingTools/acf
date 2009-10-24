@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1126
+          1130
         </Number>
         <Description>
           ACF
@@ -33,19 +33,57 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              BackgroundMode
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                2
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsAlignmentEnabled
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
     <Element>
       <Id>
-        VisualRegistryGui
+        VisualRegistryScenographer
       </Id>
       <PackageId>
         CmpstrPck
       </PackageId>
       <ComponentId>
-        VisualRegistryGui
+        VisualRegistryScenographer
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -156,7 +194,7 @@
         idoc::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        VisualRegistryGui
+        VisualRegistryScenographer
       </ComponentId>
     </Interface>
     <Interface>
@@ -164,7 +202,7 @@
         imod::IModel
       </InterfaceId>
       <ComponentId>
-        VisualRegistryGui
+        VisualRegistryScenographer
       </ComponentId>
     </Interface>
     <Interface>
@@ -172,7 +210,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        VisualRegistryGui
+        VisualRegistryScenographer
       </ComponentId>
     </Interface>
     <Interface>

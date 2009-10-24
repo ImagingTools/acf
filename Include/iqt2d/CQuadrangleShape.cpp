@@ -12,12 +12,12 @@ namespace iqt2d
 
 // public methods
 
-CQuadrangleShape::CQuadrangleShape(bool isEditable)
-:	BaseClass(isEditable),
-	m_firstDiagGrip1(this),
-	m_firstDiagGrip2(this),
-	m_secondDiagGrip1(this),
-	m_secondDiagGrip2(this)
+CQuadrangleShape::CQuadrangleShape(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr),
+	m_firstDiagGrip1(this, providerPtr),
+	m_firstDiagGrip2(this, providerPtr),
+	m_secondDiagGrip1(this, providerPtr),
+	m_secondDiagGrip2(this, providerPtr)
 {
 	connect(&m_firstDiagGrip1, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnFirstDiagGrip1Changed(const QPointF&)));
 	connect(&m_firstDiagGrip2, SIGNAL(PositionChanged(const QPointF&)), this, SLOT(OnFirstDiagGrip2Changed(const QPointF&)));

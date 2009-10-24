@@ -29,6 +29,12 @@ public:
 		Called when items should be removed from specified scene.
 	*/
 	virtual QGraphicsScene* GetScene() const = 0;
+	/**
+		Get parameters of grid alignment.
+		\param	distance	distance between nearest alignment positions.
+		\return	true if grid alignment is enabled.
+	*/
+	virtual bool GetSceneAlignment(double& distance) const = 0;
 };
 
 

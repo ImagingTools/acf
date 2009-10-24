@@ -25,7 +25,7 @@ public:
 	typedef TShapeBase<GraphicsItemClass> BaseClass;
 	typedef imod::TSingleModelObserverBase<ObjectClass> BaseClass2;
 
-	TObjectShapeBase(bool isEditable = false, QGraphicsItem* parentPtr = NULL);
+	TObjectShapeBase(bool isEditable = false, const ISceneProvider* providerPtr = NULL);
 
 protected:
 	// reimplemented (TShapeBase)
@@ -37,8 +37,8 @@ protected:
 // public methods
 
 template <class GraphicsItemClass, class ObjectClass>
-TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditable, QGraphicsItem* parentPtr)
-:	BaseClass(isEditable, parentPtr)
+TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditable, const ISceneProvider* providerPtr)
+:	BaseClass(isEditable, providerPtr)
 {
 	BaseClass::SetPen(BaseClass::InactiveColor, QPen(Qt::darkGreen, 0));
 	BaseClass::SetPen(BaseClass::EditableColor, QPen(Qt::green, 0));
