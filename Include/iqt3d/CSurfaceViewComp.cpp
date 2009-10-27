@@ -193,43 +193,43 @@ void CSurfaceViewComp::OnParamsChanged(double /*value*/)
 }
 
 
-void CSurfaceViewComp::OnToggleAutoScale(bool val)
+void CSurfaceViewComp::OnToggleAutoScale(bool value)
 {
 	I_ASSERT(m_surfacePlotPtr != NULL);
 
-	m_surfacePlotPtr->coordinates()->setAutoScale(val);
+	m_surfacePlotPtr->coordinates()->setAutoScale(value);
 
 	m_surfacePlotPtr->updateGL();
 }
 
 
-void CSurfaceViewComp::OnToggleShader(bool val)
+void CSurfaceViewComp::OnToggleShader(bool value)
 {
 	I_ASSERT(m_surfacePlotPtr != NULL);
 
-	if (val)
+	if (value)
 		m_surfacePlotPtr->setShading(Qwt3D::GOURAUD);
 	else
 		m_surfacePlotPtr->setShading(Qwt3D::FLAT);
 }
 
 
-void CSurfaceViewComp::OnPolygonOffset(int val)
+void CSurfaceViewComp::OnPolygonOffset(int value)
 {
 	I_ASSERT(m_surfacePlotPtr != NULL);
 
-	m_surfacePlotPtr->setPolygonOffset(val / 10.0);
+	m_surfacePlotPtr->setPolygonOffset(value / 10.0);
 	m_surfacePlotPtr->updateData();
 
 	m_surfacePlotPtr->updateGL();
 }
 
 
-void CSurfaceViewComp::OnNormalsQuality(int val)
+void CSurfaceViewComp::OnNormalsQuality(int value)
 {
 	I_ASSERT(m_surfacePlotPtr != NULL);
 
-	m_surfacePlotPtr->setNormalQuality(val);
+	m_surfacePlotPtr->setNormalQuality(value);
 	m_surfacePlotPtr->updateNormals();
 
 	m_surfacePlotPtr->updateGL();
