@@ -81,7 +81,7 @@ public:
 	QStringList GetCompatibleComponents(const istd::CClassInfo& interfaceInfo) const;
 	QStringList GetExportAliases(const std::string& attributeName) const;
 
-	// reimplemented (TGuiObserverWrap)
+	// reimplemented (iqt::TGuiObserverWrap)
 	virtual void OnGuiModelDetached();
 
 	// reimplmented (imod::IModelEditor)

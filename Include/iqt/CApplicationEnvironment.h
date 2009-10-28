@@ -4,6 +4,8 @@
 
 #include "isys/IApplicationEnvironment.h"
 
+#include "iqt/iqt.h"
+
 
 namespace iqt
 {

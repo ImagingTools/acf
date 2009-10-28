@@ -19,8 +19,7 @@ namespace icmpstr
 
 
 CAttributeEditorComp::CAttributeEditorComp()
-:	m_attributeItemDelegate(*this),
-	m_exportIcon(":/Icons/Export.svg")
+:	m_attributeItemDelegate(*this)
 {
 	m_attributeTypesMap[istd::CClassInfo::GetInfo<icomp::CBoolAttribute>()] = tr("Boolean");
 	m_attributeTypesMap[istd::CClassInfo::GetInfo<icomp::CDoubleAttribute>()] = tr("Real number");
@@ -758,6 +757,8 @@ void CAttributeEditorComp::OnGuiCreated()
 
 	AttributeTree->setItemDelegate(&m_attributeItemDelegate);
 	ComponentsTree->setItemDelegate(&m_attributeItemDelegate);
+
+	m_exportIcon.addFile(":/Icons/Export.svg");
 }
 
 

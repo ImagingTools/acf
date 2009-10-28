@@ -1,12 +1,10 @@
 #include "iqt/CApplicationEnvironment.h"
 
 
+// Qt includes
 #include <QDir>
 #include <QCoreApplication>
 #include <QProcess>
-
-
-#include "iqt/iqt.h"
 
 
 namespace iqt
