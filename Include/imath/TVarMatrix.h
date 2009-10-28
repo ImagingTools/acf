@@ -268,7 +268,7 @@ TVarMatrix<Element>::TVarMatrix(istd::CIndex2d size)
 
 
 template <class Element>
-TVarMatrix<Element>::TVarMatrix<Element>(const TVarVector<Element>& vector, bool isTransposed)
+TVarMatrix<Element>::TVarMatrix(const TVarVector<Element>& vector, bool isTransposed)
 {
 	if (isTransposed){
 		DeepCopy(vector.GetElements(), istd::CIndex2d(vector.GetElementsCount(), 1));
@@ -654,7 +654,7 @@ void TVarMatrix<Element>::GetColumnVector(int columnIndex, TVarVector<Element>& 
 
 
 template <class Element>
-void TVarMatrix<Element>::GetRowVector(int rowIndex, TVarVector<Element>& result);
+void TVarMatrix<Element>::GetRowVector(int rowIndex, TVarVector<Element>& result)
 {
 	I_ASSERT(rowIndex < m_sizes[1]);
 
