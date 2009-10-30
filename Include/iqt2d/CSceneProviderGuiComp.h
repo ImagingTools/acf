@@ -74,6 +74,8 @@ public:
 		I_ASSIGN(m_backgroundModeAttrPtr, "BackgroundMode", "Mode of background drawing:\n 0 - normal window\n 1 - solid color\n 2 - grid\n 3 - checkerboard", true, 0);	
 		I_ASSIGN(m_gridSizeAttrPtr, "GridSize", "Size of grid, it is used also for background", true, 20);	
 		I_ASSIGN(m_isAlignmentEnabledAttrPtr, "IsAlignmentEnabled", "If true, grid alignment will be enabled", true, false);	
+		I_ASSIGN(m_sceneWidthAttrPtr, "SceneWidth", "Logical with of scene", false, 1000);	
+		I_ASSIGN(m_sceneHeightAttrPtr, "SceneHeight", "Logical height of scene", false, 1000);	
 	I_END_COMPONENT;
 
 	CSceneProviderGuiComp();
@@ -100,6 +102,9 @@ public:
 	virtual bool SetFullScreenMode(bool isFullScreen);
 	virtual bool GetScale() const;
 	virtual bool SetScale(int scaleMode = SM_SET, double value = 1.0);
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 public slots:
 	void OnZoomIncrement();
@@ -173,6 +178,8 @@ private:
 	I_ATTR(int, m_backgroundModeAttrPtr);
 	I_ATTR(double, m_gridSizeAttrPtr);
 	I_ATTR(bool, m_isAlignmentEnabledAttrPtr);
+	I_ATTR(double, m_sceneWidthAttrPtr);
+	I_ATTR(double, m_sceneHeightAttrPtr);
 
 	QWidget* m_savedParentWidgetPtr;
 	QMatrix m_savedViewTransform;

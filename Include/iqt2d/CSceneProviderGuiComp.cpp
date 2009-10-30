@@ -229,6 +229,18 @@ bool CSceneProviderGuiComp::SetScale(int scaleMode, double scaleFactor)
 }
 
 
+// reimplemented (icomp::IComponent)
+
+void CSceneProviderGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_sceneWidthAttrPtr.IsValid() && m_sceneHeightAttrPtr.IsValid()){
+		m_scenePtr->setSceneRect(0, 0, *m_sceneWidthAttrPtr, *m_sceneHeightAttrPtr);
+	}
+}
+
+
 // public slots
 
 void CSceneProviderGuiComp::OnZoomIncrement()
@@ -407,7 +419,7 @@ void CSceneProviderGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	CreateContextMenu();
-	
+
 	SceneView->setScene(m_scenePtr);
 	SceneView->setMouseTracking(true);
 	SceneView->setDragMode(QGraphicsView::ScrollHandDrag);
@@ -529,10 +541,18 @@ void CSceneProviderGuiComp::CScene::drawBackground(QPainter* painter, const QRec
 	switch (*m_parent.m_backgroundModeAttrPtr){
 	case BM_GRID:
 		{
-			QRectF gridRect = sceneRect().unite(rect);
+			QRectF gridRect = rect;
+			if (!sceneRect().isEmpty()){
+				gridRect = sceneRect().intersected(rect);
+
+				QGraphicsScene::drawBackground(painter, rect);
+
+				painter->drawRect(sceneRect());
+			}
+
 			int gridSize = *m_parent.m_gridSizeAttrPtr;
 
-			QRect realRect = rect.toAlignedRect();
+			QRect realRect = gridRect.toAlignedRect();
 
 			int firstLeftGridLine = realRect.left() - (realRect.left() % gridSize);
 			int firstTopGridLine = realRect.top() - (realRect.top() % gridSize);

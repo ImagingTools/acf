@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1126
+          1141
         </Number>
         <Description>
           ACF
@@ -238,7 +238,7 @@ This tool is a part of ACF project
                 true
               </IsEnabled>
               <Value>
-                
+                Server
               </Value>
             </Data>
           </AttributeInfo>
@@ -340,7 +340,7 @@ This tool is a part of ACF project
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               Log
@@ -357,25 +357,6 @@ This tool is a part of ACF project
               </IsEnabled>
               <Value>
                 LogDock
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MainWindow
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application
               </Value>
             </Data>
           </AttributeInfo>
