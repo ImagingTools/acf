@@ -29,7 +29,7 @@ I_EXPORT_COMPONENT(CopyApp, "Copy application transforming files", "File Copy Co
 I_EXPORT_COMPONENT(SelectableParamsSet, "Composed set of parameters", "Model Parameters Set Selection Options List");
 I_EXPORT_COMPONENT(ParamsManager, "Manager of parameters set", "Model Parameters Set Manager");
 I_EXPORT_COMPONENT(ComposedParamsSet, "Composed set of parameters", "Parameters Set List Composition Composed");
-I_EXPORT_COMPONENT(FileNameParam, "Parameters for bitmap acquisition from file", "File Directory Bitmap Acquisition Snap Parameters Model");
+I_EXPORT_COMPONENT(FileNameParam, "Parameters for file/directory selection", "File Directory Parameters Model");
 I_EXPORT_COMPONENT(EnableableParam, "Parameter with boolean flag", "Enabled Bool Parameter Model");
 
 I_EXPORT_COMPONENT(SingleDocumentTemplate, "Single document template for only one type of documents", "Single Document Template MVC");

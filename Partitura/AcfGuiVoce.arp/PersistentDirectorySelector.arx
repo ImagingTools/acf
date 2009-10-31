@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1102
+          1143
         </Number>
         <Description>
           ACF
@@ -265,9 +265,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    This is the main component for TCP based SwissRanger image acquisition
+    Persistent directory selector
   </Description>
   <Keywords>
-    SwissRanger Simulation Demo
+    Directory File
   </Keywords>
 </Acf>
