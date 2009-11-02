@@ -9,6 +9,8 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "imod/IModel.h"
+
 #include "isys/CSectionBlocker.h"
 
 #include "iqt/CTimer.h"
@@ -25,31 +27,16 @@ CFolderMonitorComp::CFolderMonitorComp()
 {
 }
 
-// reimplemented (isys::IFolderMonitor)
-
-void CFolderMonitorComp::SetFolderPath(const istd::CString& folderPath)
-{	
-	isys::CSectionBlocker block(&m_lock);
-
-	if (folderPath != GetFolderPath()){
-		if (!m_folderPath.isEmpty()){
-			m_fileSystemWatcher.removePath(m_folderPath);
-		}
-
-		m_folderPath = iqt::GetQString(folderPath);
-		QDir folderDir(m_folderPath);
 	
-		m_directoryFiles = folderDir.entryInfoList(QDir::Dirs | QDir::Files);
-		m_fileSystemWatcher.addPath(m_folderPath);
-	}
-}
+// reimplemented (imod::CSingleModelObserverBase)
 
-
-istd::CString CFolderMonitorComp::GetFolderPath() const
+void CFolderMonitorComp::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	return iqt::GetCString(m_folderPath);
+	SetFolderPath(iqt::GetQString(m_fileNameParamCompPtr->GetPath()));
 }
 
+
+// reimplemented (ibase::IFolderMonitor)
 
 istd::CStringList CFolderMonitorComp::GetChangedFileItems(int changeFlags) const
 {
@@ -84,10 +71,6 @@ void CFolderMonitorComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_defaultPathAttrPtr.IsValid()){
-		SetFolderPath(*m_defaultPathAttrPtr);
-	}
-
 	if (m_notificationFrequencyAttrPtr.IsValid()){
 		m_notificationFrequency = *m_notificationFrequencyAttrPtr;
 	}
@@ -99,6 +82,13 @@ void CFolderMonitorComp::OnComponentCreated()
 	if (m_fileFilterExpressionsAttrPtr.IsValid()){
 		for (int filterIndex = 0; filterIndex < m_fileFilterExpressionsAttrPtr.GetCount(); filterIndex++){
 			m_fileFilterExpressions.push_back(iqt::GetQString(m_fileFilterExpressionsAttrPtr[filterIndex]));
+		}
+	}
+
+	if (m_fileNameParamCompPtr.IsValid()){
+		imod::IModel* fileNameModelPtr = dynamic_cast<imod::IModel*>(m_fileNameParamCompPtr.GetPtr());
+		if (fileNameModelPtr != NULL){
+			fileNameModelPtr->AttachObserver(this);
 		}
 	}
 
@@ -124,6 +114,13 @@ void CFolderMonitorComp::OnComponentDestroyed()
 		BaseClass2::terminate();
 	}
 
+	if (m_fileNameParamCompPtr.IsValid()){
+		imod::IModel* fileNameModelPtr = dynamic_cast<imod::IModel*>(m_fileNameParamCompPtr.GetPtr());
+		if (fileNameModelPtr != NULL){
+			fileNameModelPtr->DetachObserver(this);
+		}
+	}
+
 	BaseClass::OnComponentDestroyed();
 }
 
@@ -138,7 +135,7 @@ void CFolderMonitorComp::run()
 	iqt::CTimer directoryChangesUpdateTimer;
 	
 	while (!m_finishThread){
-		QDir folderDir(m_folderPath);
+		QDir folderDir(m_currentFolderPath);
 
 		bool needFullDirectoryUpdate = (fullUpdateTimer.GetElapsed() >= m_poolingFrequency);
 		bool needDirectoryChangesUpdate = (directoryChangesUpdateTimer.GetElapsed() >= m_notificationFrequency);
@@ -233,6 +230,26 @@ void CFolderMonitorComp::OnFolderChanged(int changeFlags)
 	istd::CChangeNotifier changePtr(this, changeFlags, &m_folderChanges);
 
 	changePtr.Reset();
+}
+
+
+// private methods
+
+void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
+{	
+	isys::CSectionBlocker block(&m_lock);
+
+	if (folderPath != m_currentFolderPath){
+		if (!m_currentFolderPath.isEmpty()){
+			m_fileSystemWatcher.removePath(m_currentFolderPath);
+		}
+
+		m_currentFolderPath = folderPath;
+		QDir folderDir(m_currentFolderPath);
+	
+		m_directoryFiles = folderDir.entryInfoList(QDir::Dirs | QDir::Files);
+		m_fileSystemWatcher.addPath(m_currentFolderPath);
+	}
 }
 
 

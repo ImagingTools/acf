@@ -16,7 +16,7 @@ namespace AbcPck
 {
 
 
-typedef iabc::CFolderMonitorComp FolderMonitor;
+typedef icomp::TModelCompWrap<iabc::CFolderMonitorComp> FolderMonitor;
 typedef iabc::CServiceApplicationComp ServiceApplication;
 
 

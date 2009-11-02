@@ -13,11 +13,14 @@
 
 
 // ACF includes
-#include "isys/IFolderMonitor.h"
+#include "imod/CSingleModelObserverBase.h"
 
 #include "icomp/CComponentBase.h"
 
+#include "ibase/IFolderMonitor.h"
 #include "ibase/TLoggerCompWrap.h"
+
+#include "iprm/IFileNameParam.h"
 
 #include "iqt/CCriticalSection.h"
 
@@ -32,7 +35,8 @@ namespace iabc
 class CFolderMonitorComp:
 			public QThread,
 			public ibase::CLoggerComponentBase,
-			virtual public isys::IFolderMonitor
+			public imod::CSingleModelObserverBase,
+			virtual public ibase::IFolderMonitor
 {
 	Q_OBJECT
 
@@ -50,18 +54,19 @@ public:
 	typedef QThread BaseClass2;
 
 	I_BEGIN_COMPONENT(CFolderMonitorComp);
-		I_REGISTER_INTERFACE(isys::IFolderMonitor);
+		I_REGISTER_INTERFACE(ibase::IFolderMonitor);
 		I_ASSIGN(m_notificationFrequencyAttrPtr, "NotificationFrequency", "Minimal time range for the folder check after the change notification", false, 10);
 		I_ASSIGN(m_poolingFrequencyAttrPtr, "PoolingFrequency", "Minimal frequency for pooling of changes in seconds", false, 60);
 		I_ASSIGN_MULTI_0(m_fileFilterExpressionsAttrPtr, "FileFilters", "File filters for the folder (as regular expression)", false);
-		I_ASSIGN(m_defaultPathAttrPtr, "DefaultPath", "Default folder to observe", false, "DefaultPath");
+		I_ASSIGN(m_fileNameParamCompPtr, "FolderPath", "Specify folder to observe.", true, "FolderPath");
 	I_END_COMPONENT;
 
 	CFolderMonitorComp();
 
-	// reimplemented (isys::IFolderMonitor)
-	virtual void SetFolderPath(const istd::CString& folderPah);
-	virtual istd::CString GetFolderPath() const;
+	// reimplemented (imod::CSingleModelObserverBase)
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// reimplemented (ibase::IFolderMonitor)
 	virtual istd::CStringList GetChangedFileItems(int changeFlags) const;
 
 	// reimplemented (icomp::IComponent)
@@ -80,20 +85,25 @@ Q_SIGNALS:
 	void FolderChanged(int changeFlags);
 
 private:
+	void SetFolderPath(const QString& folderPath);
+
+private:
 	I_ATTR(int, m_notificationFrequencyAttrPtr);
 	I_ATTR(int, m_poolingFrequencyAttrPtr);
 	I_ATTR(istd::CString, m_defaultPathAttrPtr);
 	I_MULTIATTR(istd::CString, m_fileFilterExpressionsAttrPtr)
+	I_REF(iprm::IFileNameParam, m_fileNameParamCompPtr);
 
 	QFileSystemWatcher m_fileSystemWatcher;
 
 	QFileInfoList m_directoryFiles;
-	QString m_folderPath;
 
 	iqt::CCriticalSection m_lock;
 
 	bool m_finishThread;
 	bool m_directoryChangesConfirmed;
+
+	QString m_currentFolderPath;
 
 	// Attribute shadows:
 	int m_notificationFrequency;
