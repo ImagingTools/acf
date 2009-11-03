@@ -23,11 +23,12 @@ namespace iabc
 CFolderMonitorComp::CFolderMonitorComp()
 	:m_notificationFrequency(10),
 	m_poolingFrequency(60),
-	m_finishThread(false)
+	m_finishThread(false),
+	m_fileSystemWatcher(this)
 {
 }
 
-	
+
 // reimplemented (imod::CSingleModelObserverBase)
 
 void CFolderMonitorComp::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
@@ -40,6 +41,8 @@ void CFolderMonitorComp::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFla
 
 istd::CStringList CFolderMonitorComp::GetChangedFileItems(int changeFlags) const
 {
+	isys::CSectionBlocker block(&m_lock);
+	
 	istd::CStringList changedFilesList;
 	if ((changeFlags & FilesAdded) != 0){
 		istd::CStringList addedFiles = iqt::GetCStringList(m_folderChanges.addedFiles);
@@ -95,24 +98,13 @@ void CFolderMonitorComp::OnComponentCreated()
 	connect(&m_fileSystemWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChanged(const QString&)));
 	connect(this, SIGNAL(FolderChanged(int)), this, SLOT(OnFolderChanged(int)), Qt::QueuedConnection);
 
-	// start 
-	BaseClass2::start();
+	StartObserverThread();
 }
 
 
 void CFolderMonitorComp::OnComponentDestroyed()
 {
-	m_finishThread = true;
-
-	// wait for 30 seconds for finishing of thread: 
-	iqt::CTimer timer;
-	while (timer.GetElapsed() < 30 && BaseClass2::isRunning()){
-		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-	}
-
-	if (BaseClass2::isRunning()){
-		BaseClass2::terminate();
-	}
+	StopObserverThread();
 
 	if (m_fileNameParamCompPtr.IsValid()){
 		imod::IModel* fileNameModelPtr = dynamic_cast<imod::IModel*>(m_fileNameParamCompPtr.GetPtr());
@@ -225,8 +217,6 @@ void CFolderMonitorComp::OnDirectoryChanged(const QString&/* directoryPath*/)
 
 void CFolderMonitorComp::OnFolderChanged(int changeFlags)
 {
-	isys::CSectionBlocker block(&m_lock);
-
 	istd::CChangeNotifier changePtr(this, changeFlags, &m_folderChanges);
 
 	changePtr.Reset();
@@ -237,18 +227,49 @@ void CFolderMonitorComp::OnFolderChanged(int changeFlags)
 
 void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
 {	
-	isys::CSectionBlocker block(&m_lock);
-
 	if (folderPath != m_currentFolderPath){
 		if (!m_currentFolderPath.isEmpty()){
 			m_fileSystemWatcher.removePath(m_currentFolderPath);
 		}
 
+		StopObserverThread();
+
 		m_currentFolderPath = folderPath;
-		QDir folderDir(m_currentFolderPath);
-	
-		m_directoryFiles = folderDir.entryInfoList(QDir::Dirs | QDir::Files);
-		m_fileSystemWatcher.addPath(m_currentFolderPath);
+		m_directoryFiles.clear();
+
+		QFileInfo fileInfo(m_currentFolderPath);
+		if (fileInfo.exists()){
+			QDir folderDir(m_currentFolderPath);	
+			
+			m_directoryFiles = folderDir.entryInfoList(QDir::Dirs | QDir::Files);
+			m_fileSystemWatcher.addPath(m_currentFolderPath);
+
+			StartObserverThread();
+		}
+	}
+}
+
+
+void CFolderMonitorComp::StartObserverThread()
+{
+	m_finishThread = false;
+
+	BaseClass2::start();
+}
+
+
+void CFolderMonitorComp::StopObserverThread()
+{
+	m_finishThread = true;
+
+	// wait for 30 seconds for finishing of thread: 
+	iqt::CTimer timer;
+	while (timer.GetElapsed() < 30 && BaseClass2::isRunning()){
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	}
+
+	if (BaseClass2::isRunning()){
+		BaseClass2::terminate();
 	}
 }
 

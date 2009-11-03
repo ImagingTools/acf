@@ -86,6 +86,8 @@ Q_SIGNALS:
 
 private:
 	void SetFolderPath(const QString& folderPath);
+	void StartObserverThread();
+	void StopObserverThread();
 
 private:
 	I_ATTR(int, m_notificationFrequencyAttrPtr);
@@ -98,7 +100,7 @@ private:
 
 	QFileInfoList m_directoryFiles;
 
-	iqt::CCriticalSection m_lock;
+	mutable iqt::CCriticalSection m_lock;
 
 	bool m_finishThread;
 	bool m_directoryChangesConfirmed;
