@@ -7,7 +7,10 @@ namespace ibase
 
 // reimplemented (ibase::IFileConvertCopy)
 
-bool CFileCopyOverLoaderComp::CopyFile(const istd::CString& inputFilePath, const istd::CString& outputFilePath) const
+bool CFileCopyOverLoaderComp::CopyFile(
+			const istd::CString& inputFilePath,
+			const istd::CString& outputFilePath,
+			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	if (!m_inputLoaderCompPtr.IsValid() || !m_outputLoaderCompPtr.IsValid() || !m_objectCompPtr.IsValid()){
 		return false;

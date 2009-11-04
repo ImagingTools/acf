@@ -50,7 +50,10 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IFileConvertCopy)
-	virtual bool CopyFile(const istd::CString& inputFilePath, const istd::CString& outputFilePath) const;
+	virtual bool CopyFile(
+				const istd::CString& inputFilePath,
+				const istd::CString& outputFilePath,
+				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 protected:
 	bool ProcessSubstitutionTag(const QString& tag, QString& result) const;

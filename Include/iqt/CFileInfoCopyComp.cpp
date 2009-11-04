@@ -17,7 +17,10 @@ namespace iqt
 
 // reimplemented (ibase::IFileConvertCopy)
 
-bool CFileInfoCopyComp::CopyFile(const istd::CString& inputFilePath, const istd::CString& outputFilePath) const
+bool CFileInfoCopyComp::CopyFile(
+			const istd::CString& inputFilePath,
+			const istd::CString& outputFilePath,
+			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	QString inputFileName = iqt::GetQString(inputFilePath);
 	QString outputFileName = iqt::GetQString(outputFilePath);
