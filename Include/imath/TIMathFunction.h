@@ -9,6 +9,9 @@ namespace imath
 {
 
 
+/**
+	Template interface for any mathematical function.
+*/
 template <typename Argument, typename Result>
 class TIMathFunction: virtual public istd::IPolymorphic
 {

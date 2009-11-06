@@ -238,6 +238,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TISurjectFunction.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TIMathFunction.h"
 				>
 			</File>
