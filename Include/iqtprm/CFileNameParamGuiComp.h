@@ -46,16 +46,19 @@ public:
 protected slots:
 	void on_BrowseButton_clicked();
 	void on_DirEdit_editTextChanged(const QString& text);
-	void on_DirEdit_currentIndexChanged(const QString& text);
+
 private:
 	void SetPathToEditor(const QString& path) const;
 	void MakeSelectionHint(const QString& text) const;
+	QIcon GetFileIcon(const QString& filePath) const;
 	void OnPathEdited(const QString& path) const;
 
 private:
-	mutable QDirModel m_directoryModel;
-
 	I_ATTR(istd::CString, m_pathLabelAttrPtr);
+
+	QDirModel m_directoryModel;
+	istd::TDelPtr<QLabel> m_fileIconPtr;
+
 };
 
 

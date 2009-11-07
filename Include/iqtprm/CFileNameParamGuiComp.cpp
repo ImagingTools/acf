@@ -32,6 +32,10 @@ void CFileNameParamGuiComp::OnGuiCreated()
 		UrlLabel->setText(iqt::GetQString(*m_pathLabelAttrPtr));
 	}
 
+	m_fileIconPtr.SetPtr(new QLabel(DirEdit->lineEdit()));
+	m_fileIconPtr->move(1, 0);
+	m_fileIconPtr->hide();
+
 	BaseClass::OnGuiCreated();
 }
 
@@ -87,21 +91,6 @@ void CFileNameParamGuiComp::OnGuiModelAttached()
 
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		switch(objectPtr->GetPathType()){
-			case iprm::IFileNameParam::PT_DIRECTORY:
-				m_directoryModel.setFilter(QDir::Dirs | QDir::Drives | QDir::NoDotAndDotDot);
-				break;
-			case iprm::IFileNameParam::PT_FILE:
-				m_directoryModel.setFilter(QDir::Files);
-				break;
-		}
-
-		iqt::CSignalBlocker block(DirEdit);
-
-		if (objectPtr->GetPathType() != iprm::IFileNameParam::PT_URL){
-			DirEdit->setModel(&m_directoryModel);
-		}
-
 		SetPathToEditor(iqt::GetQString(objectPtr->GetPath()));
 	}
 }
@@ -137,18 +126,16 @@ void CFileNameParamGuiComp::on_DirEdit_editTextChanged(const QString& text)
 }
 
 
-void CFileNameParamGuiComp::on_DirEdit_currentIndexChanged(const QString&/* text*/)
-{
-	QString filePath = m_directoryModel.filePath(DirEdit->view()->currentIndex());
-
-	OnPathEdited(filePath);
-}
-
-
 // private methods
 
 void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 {
+	I_ASSERT(DirEdit->isEditable());
+
+	iqt::CSignalBlocker blocker(DirEdit, true);
+
+	DirEdit->clear();
+			
 	QString normalizedPath = QDir::toNativeSeparators(path);
 
 	MakeSelectionHint(normalizedPath);
@@ -166,8 +153,18 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 		DirEdit->lineEdit()->setPalette(defaultPalette);
 	}
 
-	iqt::CSignalBlocker blocker(DirEdit, true);
-
+	QIcon fileIcon = GetFileIcon(normalizedPath);
+	if (!fileIcon.isNull()){
+		int lineEditHeight = DirEdit->lineEdit()->height();
+		m_fileIconPtr->setPixmap(fileIcon.pixmap(lineEditHeight - 2, lineEditHeight - 2));
+		DirEdit->lineEdit()->setTextMargins(lineEditHeight, 0, 0, 0);
+		m_fileIconPtr->show();
+	}
+	else{
+		m_fileIconPtr->hide();
+		DirEdit->lineEdit()->setTextMargins(0, 0, 0, 0);
+	}
+	
 	DirEdit->setEditText(normalizedPath);
 }
 
@@ -204,9 +201,39 @@ void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 				directory = validFileInfoPtr->filePath();
 			}
 
-			DirEdit->setRootModelIndex(m_directoryModel.index(directory));
+			QDir::Filters filters = QDir::AllEntries;
+
+			if (objectPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY){
+				filters = QDir::Dirs | QDir::Drives | QDir::NoDotAndDotDot;
+			}
+
+			if (objectPtr->GetPathType() == iprm::IFileNameParam::PT_FILE){
+				filters = QDir::Files;
+			}
+
+			QDir dir(directory);
+			QFileInfoList subDirs = dir.entryInfoList(filters);
+
+			for(int dirIndex = 0; dirIndex < subDirs.count(); dirIndex++){
+				QString filePath = subDirs[dirIndex].absoluteFilePath();
+
+				DirEdit->addItem(GetFileIcon(filePath), QDir::toNativeSeparators(filePath));
+			}
 		}
 	}
+}
+
+
+QIcon CFileNameParamGuiComp::GetFileIcon(const QString& filePath) const
+{
+	QIcon fileIcon;
+
+	QModelIndex index = m_directoryModel.index(filePath);
+	if (index.isValid()){
+		fileIcon = m_directoryModel.fileIcon(index);
+	}
+
+	return fileIcon;
 }
 
 
