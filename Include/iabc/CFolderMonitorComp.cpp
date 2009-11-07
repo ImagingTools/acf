@@ -97,8 +97,6 @@ void CFolderMonitorComp::OnComponentCreated()
 
 	connect(&m_fileSystemWatcher, SIGNAL(directoryChanged(const QString&)), this, SLOT(OnDirectoryChanged(const QString&)));
 	connect(this, SIGNAL(FolderChanged(int)), this, SLOT(OnFolderChanged(int)), Qt::QueuedConnection);
-
-	StartObserverThread();
 }
 
 
@@ -126,6 +124,8 @@ void CFolderMonitorComp::run()
 	iqt::CTimer fullUpdateTimer;
 	iqt::CTimer directoryChangesUpdateTimer;
 	
+	I_ASSERT(!m_currentFolderPath.isEmpty());
+
 	while (!m_finishThread){
 		QDir folderDir(m_currentFolderPath);
 
@@ -253,6 +253,8 @@ void CFolderMonitorComp::OnFolderChanged(int changeFlags)
 void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
 {	
 	if (folderPath != m_currentFolderPath){
+		SendInfoMessage(0, istd::CString("Start observing of: ") + iqt::GetCString(folderPath), "FolderMonitor");
+
 		if (!m_currentFolderPath.isEmpty()){
 			m_fileSystemWatcher.removePath(m_currentFolderPath);
 		}
@@ -261,6 +263,10 @@ void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
 
 		m_currentFolderPath = folderPath;
 		m_directoryFiles.clear();
+		m_folderChanges.addedFiles.clear();
+		m_folderChanges.attributeChangedFiles.clear();
+		m_folderChanges.modifiedFiles.clear();
+		m_folderChanges.removedFiles.clear();
 
 		QFileInfo fileInfo(m_currentFolderPath);
 		if (fileInfo.exists()){
@@ -270,6 +276,9 @@ void CFolderMonitorComp::SetFolderPath(const QString& folderPath)
 			m_fileSystemWatcher.addPath(m_currentFolderPath);
 
 			StartObserverThread();
+		}
+		else{
+			SendWarningMessage(0, istd::CString("Directory: ") + iqt::GetCString(folderPath) + istd::CString(" not exists. Observing aborted"), "FolderMonitor");
 		}
 	}
 }
