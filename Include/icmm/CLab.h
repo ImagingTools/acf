@@ -117,6 +117,66 @@ inline void CLab::SetB(double value)
 
 // operators
 
+inline CLab CLab::operator+(const CLab& color) const
+{
+	CLab retVal = *this;
+
+	retVal += color;
+
+	return retVal;
+}
+
+
+inline CLab CLab::operator-(const CLab& color) const
+{
+	CLab retVal = *this;
+
+	retVal -= color;
+
+	return retVal;
+}
+
+
+inline CLab CLab::operator*(const CLab& color) const
+{
+	CLab retVal = *this;
+
+	retVal *= color;
+
+	return retVal;
+}
+
+
+inline CLab CLab::operator/(const CLab& color) const
+{
+	CLab retVal = *this;
+
+	retVal /= color;
+
+	return retVal;
+}
+
+
+inline CLab CLab::operator*(double value) const
+{
+	CLab retVal = *this;
+
+	retVal *= value;
+
+	return retVal;
+}
+
+
+inline CLab CLab::operator/(double value) const
+{
+	CLab retVal = *this;
+
+	retVal /= value;
+
+	return retVal;
+}
+
+
 inline const CLab& CLab::operator=(const CLab& color)
 {
 	BaseClass::operator=(color);

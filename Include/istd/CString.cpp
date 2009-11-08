@@ -70,7 +70,7 @@ const std::string& CString::ToString() const
 }
 
 
-bool CString::IsEqual(const istd::CString& str, int compareFlags) const
+bool CString::IsEqual(const CString& str, int compareFlags) const
 {
 	if ((compareFlags & CF_CASE_INSENSITIVE) == 0){
 		return *this == str;
@@ -220,6 +220,31 @@ CString CString::ToLower() const
 }
 
 
+std::vector<CString> CString::Split(const CString& separator, bool caseSensitive)
+{
+	std::vector<CString> retVal;
+
+	CString strToCompare = caseSensitive? *this: ToLower();
+	CString sepToCompare = caseSensitive? separator: separator.ToLower();
+	size_type offset = 0;
+	size_type foundPos = 0;
+
+	while ((foundPos = strToCompare.find_first_of(sepToCompare, offset)) != npos){
+		retVal.push_back(substr(offset, foundPos - offset));
+
+		I_ASSERT(foundPos >= offset);
+		offset = foundPos + sepToCompare.size();
+		I_ASSERT(offset > foundPos);
+	}
+
+	if (offset < strToCompare.size()){
+		retVal.push_back(substr(offset));
+	}
+
+	return retVal;
+}
+
+
 // protected methods
 
 void CString::Copy(const CString& str)
@@ -238,19 +263,21 @@ void CString::ConvertToChar() const
 	wcstombs(newAsciiBuffer,c_str(), length);
 	m_stdString = std::string(newAsciiBuffer);
 
-	delete [] newAsciiBuffer;
+	delete[] newAsciiBuffer;
 }
 
 
 
 // static methods
 
-const istd::CString& CString::GetEmpty()
+const CString& CString::GetEmpty()
 {
-	static istd::CString retVal;
+	static CString retVal;
 
 	return retVal;
 }
 
 
 } // namespace istd
+
+

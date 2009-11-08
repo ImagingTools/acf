@@ -50,7 +50,7 @@ public:
 		Compare two strings.
 		\return	true, if this strings are equal.
 	*/
-	bool IsEqual(const istd::CString& str, int compareFlags = 0) const;
+	bool IsEqual(const CString& str, int compareFlags = 0) const;
 
 	/**
 	This function makes this string empty.
@@ -77,11 +77,16 @@ public:
 
 	CString ToUpper() const;
 	CString ToLower() const;
+	std::vector<CString> Split(const CString& separator, bool caseSensitive = true);
 
 	bool IsEqualNoCase(const CString& str) const;
 
+	// template methods
+	template <typename NumberType>
+	NumberType ToNumber();
+
 	// static methods
-	static const istd::CString& GetEmpty();
+	static const CString& GetEmpty();
 
 	// template static methods
 	template <typename NumberType>
@@ -105,7 +110,27 @@ inline bool CString::IsEmpty() const
 }
 
 
-// public static methods
+inline bool CString::IsEqualNoCase(const CString& str) const
+{
+	return ToUpper() == str.ToUpper();
+}
+
+
+// template methods
+
+template <typename NumberType>
+typename NumberType CString::ToNumber()
+{
+	NumberType retVal;
+
+	std::istringstream stringStream(ToString());
+	stringStream >> retVal;
+
+	return retVal;
+}
+
+
+// template static methods
 
 template <typename NumberType>
 CString CString::FromNumber(NumberType number)
@@ -117,13 +142,7 @@ CString CString::FromNumber(NumberType number)
 }
 
 
-inline bool CString::IsEqualNoCase(const CString& str) const
-{
-	return ToUpper() == str.ToUpper();
-}
-
-
-typedef std::vector<istd::CString> CStringList;
+typedef std::vector<CString> CStringList;
 
 
 #define W(string) istd::CString(string)
