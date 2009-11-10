@@ -93,7 +93,8 @@ istd::CString CComposedLoaderComp::GetTypeDescription(const istd::CString* exten
 			}
 		}
 	}
-	else if (m_commonDescriptionAttrPtr.IsValid()){
+
+	if (m_commonDescriptionAttrPtr.IsValid()){
 		return *m_commonDescriptionAttrPtr;
 	}
 
