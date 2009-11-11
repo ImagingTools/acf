@@ -179,7 +179,7 @@ bool CVlcVideoViewGuiComp::SetCurrentPosition(double position)
 
 int	CVlcVideoViewGuiComp::GetSupportedFeatures() const
 {
-	return SF_AUTO_PLAY | SF_SEEK;
+	return SF_PLAY | SF_AUTO_PLAY | SF_SEEK;
 }
 
 
@@ -205,7 +205,7 @@ istd::CIndex2d CVlcVideoViewGuiComp::GetFrameSize() const
 
 double CVlcVideoViewGuiComp::GetPixelAspectRatio() const
 {
-	return 1;
+	return -1;
 }
 
 

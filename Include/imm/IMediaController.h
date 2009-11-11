@@ -22,8 +22,9 @@ public:
 	};
 
 	enum SupportedFeatures{
-		SF_SEEK = 0x1,
-		SF_AUTO_PLAY = 0x2 
+		SF_PLAY = 0x1,
+		SF_SEEK = 0x2,
+		SF_AUTO_PLAY = 0x4
 	};
 
 	/**

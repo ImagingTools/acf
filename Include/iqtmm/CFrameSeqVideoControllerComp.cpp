@@ -97,7 +97,7 @@ bool CFrameSeqVideoControllerComp::SetCurrentPosition(double position)
 
 int CFrameSeqVideoControllerComp::GetSupportedFeatures() const
 {
-	return SF_SEEK;
+	return SF_PLAY | SF_SEEK;
 }
 
 

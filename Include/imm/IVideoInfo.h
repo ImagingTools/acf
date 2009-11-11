@@ -22,6 +22,7 @@ public:
 
 	/**
 		Return time difference between frames.
+		If unknown, negative value will be returned.
 	*/
 	virtual double GetFrameIntervall() const = 0;
 
@@ -34,6 +35,7 @@ public:
 	/**
 		Get frame aspect ratio.
 		Pixel aspect ratio is proportion of pixel with to pixel height.
+		If unknown, negative value will be returned.
 	*/
 	virtual double GetPixelAspectRatio() const = 0;
 };

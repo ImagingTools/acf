@@ -136,7 +136,7 @@ bool CPhononVideoViewGuiComp::SetCurrentPosition(double position)
 
 int CPhononVideoViewGuiComp::GetSupportedFeatures() const
 {
-	int flags = SF_AUTO_PLAY;
+	int flags = SF_PLAY | SF_AUTO_PLAY;
 
 	if (m_mediaObject.isSeekable()){
 		flags = flags | SF_SEEK;
@@ -168,7 +168,7 @@ istd::CIndex2d CPhononVideoViewGuiComp::GetFrameSize() const
 
 double CPhononVideoViewGuiComp::GetPixelAspectRatio() const
 {
-	return 1;
+	return -1;
 }
 
 

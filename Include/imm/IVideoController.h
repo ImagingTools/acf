@@ -15,6 +15,11 @@ namespace imm
 class IVideoController: virtual public IMediaController, virtual public IVideoInfo
 {
 public:
+	enum SupportedFeatures{
+		SF_GRAB_CURRENT = 0x100,
+		SF_GRAB_ANY = 0x200
+	};
+
 	/**
 		Get index of current frame.
 	*/
