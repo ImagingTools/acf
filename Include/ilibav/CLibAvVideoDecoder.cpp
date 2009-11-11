@@ -3,7 +3,7 @@
 
 // LIBAV includes
 extern "C"{
-#include "libavformat/imgconvert.h"
+#include "libavcodec/imgconvert.h"
 }
 
 
@@ -230,7 +230,7 @@ istd::CIndex2d CLibAvVideoDecoder::GetFrameSize() const
 
 double CLibAvVideoDecoder::GetPixelAspectRatio() const
 {
-	if ((m_codecContextPtr != NULL) && (m_codecContextPtr->sample_aspect_ratio != 0)){
+	if ((m_codecContextPtr != NULL) && (m_codecContextPtr->sample_aspect_ratio.num != 0)){
 		AVRational ratio = m_codecContextPtr->sample_aspect_ratio;
 		if (ratio.den != 0){
 			return double(ratio.num) / ratio.den;
@@ -328,8 +328,8 @@ bool CLibAvVideoDecoder::ReadNextFrame()
 			}
 		} while (m_packet.stream_index != m_streamId);
 
-		m_bytesRemaining = packet.size;
-		m_rawDataPtr = packet.data;
+		m_bytesRemaining = m_packet.size;
+		m_rawDataPtr = m_packet.data;
 	}
 }
 
