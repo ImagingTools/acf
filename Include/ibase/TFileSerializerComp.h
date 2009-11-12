@@ -3,6 +3,7 @@
 
 
 #include "istd/CStaticServicesProvider.h"
+#include "istd/TChangeNotifier.h"
 
 #include "iser/IFileLoader.h"
 
@@ -212,7 +213,11 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::LoadFromFile(istd::IChangeab
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
 		I_ASSERT(serializablePtr != NULL);
 
+		istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
+
 		if (serializablePtr->Serialize(archive)){
+			changePtr.SetPtr(&data);
+
 			return StateOk;
 		}
 		else{

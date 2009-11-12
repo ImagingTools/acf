@@ -7,6 +7,10 @@
 #include <QMimeData>
 #include <QByteArray>
 
+
+// ACF includes
+#include "istd/TChangeNotifier.h"
+
 #include "iser/CMemoryReadArchive.h"
 #include "iser/CMemoryWriteArchive.h"
 
@@ -50,11 +54,15 @@ int CClipboardSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::
 
 		QString mimeType = iqt::GetQString(*m_mimeTypeAttrPtr);
 		if (mimeDataPtr->hasFormat(mimeType)){
-			QByteArray data = mimeDataPtr->data(mimeType);
-			if (!data.isEmpty()){
-				iser::CMemoryReadArchive archive(data.constData(), data.size());
+			QByteArray mimeData = mimeDataPtr->data(mimeType);
+			if (!mimeData.isEmpty()){
+				iser::CMemoryReadArchive archive(mimeData.constData(), mimeData.size());
+
+				istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
 
 				if (serializablePtr->Serialize(archive)){
+					changePtr.SetPtr(&data);
+					
 					return StateOk;
 				}
 				else{
