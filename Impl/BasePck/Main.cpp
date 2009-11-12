@@ -54,6 +54,10 @@ I_EXPORT_COMPONENT(SampledFunction2d, "Sampled function with 2-dimensional input
 
 I_EXPORT_COMPONENT(Histogram, "Histogram ", "Image Histogram");
 
+I_EXPORT_COMPONENT(TestIdManager, "Implementation of ID manager generating ID's for test", "ID Manager Test Supplier");
+I_EXPORT_COMPONENT(CascadedProcessor, "Sequence processing using slave processors", "Processor Sequence Buffer Cascade");
+
+
 } // namespace BasePck
 
 

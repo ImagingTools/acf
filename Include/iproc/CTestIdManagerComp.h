@@ -11,6 +11,9 @@ namespace iproc
 {
 
 
+/**
+	Simple processing ID manager counting up current ID.
+*/
 class CTestIdManagerComp: public icomp::CComponentBase, virtual public IIdManager
 {
 public:

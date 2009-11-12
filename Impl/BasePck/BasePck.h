@@ -52,6 +52,9 @@
 
 #include "iimg/CHistogram.h"
 
+#include "iproc/CTestIdManagerComp.h"
+#include "iproc/CCascadedProcessorComp.h"
+
 
 /**
 	Base system-undependent general package.
@@ -153,6 +156,9 @@ typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<iimg::CHistogram>,
 			istd::IChangeable,
 			imod::IModel> Histogram;
+
+typedef iproc::CTestIdManagerComp TestIdManager;
+typedef iproc::CCascadedProcessorComp CascadedProcessor;
 
 
 } // namespace BasePck

@@ -11,6 +11,7 @@ namespace iproc
 
 /**
 	Manage processing ID's used in \c iproc::ISupplier.
+	Processing ID is used to identifying the same object along all its processing steps for diffent measurement or views.
 */
 class IIdManager: virtual public istd::IPolymorphic
 {
