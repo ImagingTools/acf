@@ -174,10 +174,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CFolderMonitorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CServiceApplicationComp.cpp"
 				>
 			</File>
@@ -187,14 +183,6 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\CFolderMonitorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFolderMonitorComp.moc"
-				>
-			</File>
 			<File
 				RelativePath="..\CServiceApplicationComp.h"
 				>
@@ -207,24 +195,12 @@
 				RelativePath="..\iabc.h"
 				>
 			</File>
-			<File
-				RelativePath="..\IDirectoryMonitor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDirectoryMonitorParams.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath="..\generated\moc_CFolderMonitorComp.cpp"
-				>
-			</File>
 			<File
 				RelativePath="..\generated\moc_CServiceApplicationComp.cpp"
 				>
