@@ -37,7 +37,7 @@ CMultiDocumentWorkspaceGuiComp::CMultiDocumentWorkspaceGuiComp()
 	m_workspaceModeCommand.InsertChild(&m_subWindowCommand, false);
 	m_workspaceModeCommand.InsertChild(&m_tabbedCommand, false);
 	m_commands.InsertChild(&m_windowCommand, false);
-	m_windowCommand.SetPriority(120);
+	m_windowCommand.SetPriority(130);
 	m_cascadeCommand.SetGroupId(GI_WINDOW);
 	m_windowCommand.InsertChild(&m_workspaceModeCommand, false);
 	m_windowCommand.InsertChild(&m_cascadeCommand, false);

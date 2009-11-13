@@ -9,8 +9,6 @@
 #include <QUrl>
 #include <QFileInfo>
 #include <QStatusBar>
-#include <QStyle>
-#include <QSettings>
 #include <QClipboard>
 
 
@@ -21,8 +19,6 @@
 
 #include "iqt/CSettingsWriteArchive.h"
 #include "iqt/CSettingsReadArchive.h"
-
-#include "iqtgui/CGuiComponentDialog.h"
 
 
 namespace iqtdoc
@@ -43,7 +39,8 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_redoCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR),
 	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_showToolBarsCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
-	m_copyPathToClippboardCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU)
+	m_copyPathToClippboardCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
+	m_settingsCommand("", 200, idoc::ICommand::CF_GLOBAL_MENU)
 {
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
@@ -56,21 +53,8 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	connect(&m_fullScreenCommand, SIGNAL(activated()), this, SLOT(OnFullScreen()));
 	connect(&m_showToolBarsCommand, SIGNAL(activated()), this, SLOT(OnShowToolbars()));
 	connect(&m_copyPathToClippboardCommand, SIGNAL(activated()), this, SLOT(OnCopyPathToClippboard()));
+	connect(&m_settingsCommand, SIGNAL(activated()), this, SLOT(OnSettings()));
 	connect(&m_aboutCommand, SIGNAL(activated()), this, SLOT(OnAbout()));
-}
-
-
-// reimplemented (iqtgui::IGuiObject)
-
-void CMainWindowGuiComp::OnTryClose(bool* ignoredPtr)
-{
-	if (m_workspaceCompPtr.IsValid()){
-		m_workspaceCompPtr->OnTryClose(ignoredPtr);
-
-		return;
-	}
-
-	BaseClass::OnTryClose(ignoredPtr);
 }
 
 
@@ -93,8 +77,8 @@ void CMainWindowGuiComp::OnComponentDestroyed()
 	m_fileCommand.ResetChilds();
 	m_editCommand.ResetChilds();
 	m_viewCommand.ResetChilds();
-	m_helpCommand.ResetChilds();
 	m_toolsCommand.ResetChilds();
+	m_helpCommand.ResetChilds();
 	m_fixedCommands.ResetChilds();
 
 	if (m_documentManagerModelCompPtr.IsValid()){
@@ -167,10 +151,14 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 			m_viewCommand.InsertChild(&m_fullScreenCommand, false);
 			m_viewCommand.InsertChild(&m_showToolBarsCommand, false);
 
-			m_toolsCommand.SetPriority(140);
+			m_toolsCommand.SetPriority(120);
 
 			if (*m_isCopyPathVisibleAttrPtr){
 				m_toolsCommand.InsertChild(&m_copyPathToClippboardCommand, false);
+			}
+
+			if (m_settingsGuiCompPtr.IsValid()){
+				m_toolsCommand.InsertChild(&m_settingsCommand, false);
 			}
 
 			m_helpCommand.SetPriority(150);
@@ -415,19 +403,6 @@ void CMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 	}
 
 	mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
-
-	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
-		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
-		iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-		if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->CreateGui(NULL)){
-			mainWindowComponentPtr->AddToMainWindow(mainWindow);
-
-			QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
-			if (toolBarComponentPtr != NULL){
-				m_toolBarsList.PushBack(toolBarComponentPtr, false);
-			}
-		}
-	}
 }
 
 
@@ -563,33 +538,22 @@ void CMainWindowGuiComp::UpdateMenuActions()
 }
 
 
-// reimplemented (TRestorableGuiWrap)
+// reimplemented (iqtgui::CSimpleMainWindowGuiComp)
 
-void CMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
+void CMainWindowGuiComp::AddMainComponent(iqtgui::IMainWindowComponent* componentPtr)
 {
-	I_ASSERT(IsGuiCreated());
+	BaseClass::AddMainComponent(componentPtr);
+
 	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
-
-	QByteArray windowState = settings.value("MainWindow/State").toByteArray();
-	QByteArray windowGeometry = settings.value("MainWindow/Geometry").toByteArray();
-
-	mainWindowPtr->restoreState(windowState);
-	mainWindowPtr->restoreGeometry(windowGeometry);
-}
-
-
-void CMainWindowGuiComp::OnSaveSettings(QSettings& settings) const
-{
-	I_ASSERT(IsGuiCreated());
-	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
-
-	QByteArray windowState = mainWindowPtr->saveState();
-	QByteArray windowGeometry = mainWindowPtr->saveGeometry();
-
-	settings.setValue("MainWindow/State", windowState);
-	settings.setValue("MainWindow/Geometry", windowGeometry);
+	if (mainWindowPtr != NULL){
+		iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(componentPtr);
+		if (guiPtr != NULL){
+			QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
+			if (toolBarComponentPtr != NULL){
+				m_toolBarsList.PushBack(toolBarComponentPtr, false);
+			}
+		}
+	}
 }
 
 
@@ -604,10 +568,6 @@ void CMainWindowGuiComp::OnGuiCreated()
 		return;
 	}
 
-	if (m_iconSizeAttrPtr.IsValid() && m_iconSizeAttrPtr->GetValue() != 0){
-		mainWindowPtr->setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
-	}
-
 	I_ASSERT(m_isMenuVisibleAttrPtr.IsValid());	// is obligatory attribute
 	if (*m_isMenuVisibleAttrPtr){
 		m_menuBarPtr.SetPtr(new QMenuBar(mainWindowPtr));
@@ -620,21 +580,9 @@ void CMainWindowGuiComp::OnGuiCreated()
 		m_standardToolBarPtr->setObjectName("Standard");
 	}
 
-	I_ASSERT(m_isNestingEnabledAttrPtr.IsValid());
-	mainWindowPtr->setDockOptions(*m_isNestingEnabledAttrPtr? QMainWindow::AllowNestedDocks: QMainWindow::DockOption(0));
-
 	if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
 		m_standardToolBarPtr->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 	}
-
-	if (m_workspaceCompPtr.IsValid()){
-		m_workspaceCompPtr->CreateGui(NULL);
-		QWidget* workspacePtr = m_workspaceCompPtr->GetWidget();
-		if (workspacePtr != NULL){
-			mainWindowPtr->setCentralWidget(workspacePtr);
-		}
-	}
-
 
 	OnRetranslate();
 
@@ -648,27 +596,24 @@ void CMainWindowGuiComp::OnGuiCreated()
 	mainWindowPtr->installEventFilter(this);
 
 	m_showToolBarsCommand.setChecked(true);
+
+	if (m_settingsGuiCompPtr.IsValid()){
+		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, mainWindowPtr)); 
+	}
+
+	if (m_aboutGuiCompPtr.IsValid()){
+		m_aboutDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_aboutGuiCompPtr.GetPtr(), 0, true, mainWindowPtr)); 
+	}
 }
 
 
 void CMainWindowGuiComp::OnGuiDestroyed()
 {
-	if (m_workspaceCompPtr.IsValid()){
-		m_workspaceCompPtr->DestroyGui();
-	}
-		
-	if (m_mainWindowComponentsPtr.IsValid()){
-		for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
-			iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
-			iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-			if (mainWindowComponentPtr != NULL && guiPtr != NULL && guiPtr->IsGuiCreated()){
-				guiPtr->DestroyGui();
-			}
-		}
-	}
-
 	m_menuBarPtr.Reset();
 	m_standardToolBarPtr.Reset();
+
+	m_settingsDialogPtr.Reset(); 
+	m_aboutDialogPtr.Reset(); 
 
 	BaseClass::OnGuiDestroyed();
 }
@@ -713,6 +658,7 @@ void CMainWindowGuiComp::OnRetranslate()
 
 	// Tools commands
 	m_copyPathToClippboardCommand.SetVisuals(tr("&Copy Document Path"), tr("Copy Path"), tr("Copy current document path to system clippboard"));
+	m_settingsCommand.SetVisuals(tr("&Settings"), tr("Settings"), tr("Show global application setting"));
 
 	// Help commands
 	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), QIcon(":/Icons/About"));
@@ -1107,10 +1053,16 @@ void CMainWindowGuiComp::OnCopyPathToClippboard()
 
 void CMainWindowGuiComp::OnAbout()
 {
-	if (m_aboutGuiCompPtr.IsValid()){
-		iqtgui::CGuiComponentDialog aboutDialog(m_aboutGuiCompPtr.GetPtr()); 
+	if (m_aboutDialogPtr.IsValid()){
+		m_aboutDialogPtr->exec();
+	}
+}
 
-		aboutDialog.exec();
+
+void CMainWindowGuiComp::OnSettings()
+{
+	if (m_settingsDialogPtr.IsValid()){
+		m_settingsDialogPtr->exec();
 	}
 }
 

@@ -23,6 +23,8 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
+#include "iprm/IFileNameParam.h"
+
 #include "iqt/CDllFunctionsProvider.h"
 
 
@@ -53,7 +55,7 @@ public:
 		I_REGISTER_INTERFACE(icomp::IRegistriesManager)
 		I_REGISTER_INTERFACE(icomp::IRegistryLoader)
 		I_ASSIGN(m_registryLoaderCompPtr, "RegistryLoader", "Loader used to read registry", true, "RegistryLoader")
-		I_ASSIGN(m_configFilePathAttrPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "Default.xpc")
+		I_ASSIGN(m_configFilePathCompPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "ConfigFilePath")
 	I_END_COMPONENT
 
 	bool RegisterPackageFile(const istd::CString& file);
@@ -130,7 +132,7 @@ private:
 	istd::CString m_configFilePath;
 
 	I_REF(iser::IFileLoader, m_registryLoaderCompPtr);
-	I_ATTR(istd::CString, m_configFilePathAttrPtr);
+	I_REF(iprm::IFileNameParam, m_configFilePathCompPtr);
 };
 
 

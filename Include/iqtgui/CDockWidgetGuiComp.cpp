@@ -12,6 +12,12 @@ namespace iqtgui
 
 bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 {
+	if (IsGuiCreated()){
+		return false;
+	}
+
+	CreateGui(&mainWindow);
+
 	Qt::DockWidgetArea area = Qt::LeftDockWidgetArea;
 	Qt::Orientation orientation = Qt::Vertical;
 	if (m_dockAreaAttrPtr.IsValid()){
@@ -48,6 +54,14 @@ bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	return false;
 }
 
+
+bool CDockWidgetGuiComp::RemoveFromMainWindow(QMainWindow& /*mainWindow*/)
+{
+	return DestroyGui();
+}
+
+
+// protected methods
 
 // reimplemented (CGuiComponentBase)
 

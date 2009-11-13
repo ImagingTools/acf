@@ -74,7 +74,7 @@ void CRegistryPreviewComp::OnComponentDestroyed()
 
 bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 {
-	if (IsRunning() || m_tempFileName.isEmpty()){
+	if (IsRunning() || m_tempFileName.isEmpty() || !m_commandFileNameCompPtr.IsValid()){
 		return false;
 	}
 
@@ -84,7 +84,7 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		return false;
 	}
 
-	QString acfExeFile = iqt::GetQString(*m_commandAttrPtr);
+	QString acfExeFile = iqt::GetQString(m_commandFileNameCompPtr->GetPath());
 
 	QDir applicationDir(QCoreApplication::applicationDirPath());
 	QString acfApplicationPath = applicationDir.absoluteFilePath(acfExeFile);

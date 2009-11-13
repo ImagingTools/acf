@@ -275,7 +275,7 @@ void CCompositeComponent::CreateSubcomponentInfo(
 					(*subComponentPtr)->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
 				}
 			}
-			}
+		}
 		else{	// create real component
 			if (!subContextPtr.IsValid()){
 				subContextPtr.SetPtr(new CComponentContext(&registryElement, contextPtr, componentId));

@@ -21,7 +21,14 @@ namespace iqtgui
 class IMainWindowComponent: virtual public istd::IPolymorphic
 {
 public:
+	/**
+		Add this component to main window.
+	*/
 	virtual bool AddToMainWindow(QMainWindow& mainWindow) = 0;
+	/**
+		Remove this component from main window.
+	*/
+	virtual bool RemoveFromMainWindow(QMainWindow& mainWindow) = 0;
 };
 
 

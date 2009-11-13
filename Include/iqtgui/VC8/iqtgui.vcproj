@@ -261,6 +261,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSimpleMainWindowGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSplashScreenGuiComp.cpp"
 				>
 			</File>
@@ -386,6 +390,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSimpleMainWindowGuiComp.h"
 				>
 			</File>
 			<File

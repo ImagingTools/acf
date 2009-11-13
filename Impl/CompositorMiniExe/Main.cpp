@@ -107,14 +107,9 @@ int main(int argc, char *argv[])
 	modelFactoryComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
 	modelFactoryComp.SetRef("Log", &log);
 
-	// registry preview
-	icomp::TSimComponentWrap<CmpstrPck::RegistryPreview> registryPreviewComp;
-	registryPreviewComp.InitComponent();
-
 	// registry view
 	icomp::TSimComponentsFactory<CmpstrPck::RegistryView> viewFactoryComp;
 	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
-	viewFactoryComp.SetRef("RegistryPreview", &registryPreviewComp);
 	viewFactoryComp.SetRef("PackagesManager", &packagesLoaderComp);
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;

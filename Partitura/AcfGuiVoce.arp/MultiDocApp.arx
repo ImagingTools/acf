@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1136
+          1181
         </Number>
         <Description>
           ACF
@@ -308,7 +308,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               AboutGui
@@ -450,6 +450,22 @@
               <Value>
                 10
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SettingsGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              SettingsGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

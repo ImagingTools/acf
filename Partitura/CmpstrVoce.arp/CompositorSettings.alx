@@ -43,10 +43,10 @@
         ConfigFile
       </ComponentName>
       <X>
-        470
+        418
       </X>
       <X>
-        90
+        94
       </X>
     </Element>
     <Element>
@@ -57,7 +57,7 @@
         406
       </X>
       <X>
-        -380
+        -376
       </X>
     </Element>
     <Element>
@@ -87,10 +87,10 @@
         FilePersistence
       </ComponentName>
       <X>
-        603
+        1114
       </X>
       <X>
-        288
+        5
       </X>
     </Element>
     <Element>
@@ -175,10 +175,10 @@
         PreviewCommandFile
       </ComponentName>
       <X>
-        457
+        402
       </X>
       <X>
-        -77
+        -82
       </X>
     </Element>
     <Element>
@@ -274,10 +274,10 @@
         Settings
       </ComponentName>
       <X>
-        700
+        795
       </X>
       <X>
-        3
+        -2
       </X>
     </Element>
     <Element>
@@ -307,10 +307,10 @@
         SettingsSerializer
       </ComponentName>
       <X>
-        857
+        1119
       </X>
       <X>
-        285
+        156
       </X>
     </Element>
   </PositionMap>

@@ -253,10 +253,14 @@ void CPackagesLoaderComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_configFilePathAttrPtr.IsValid()){
-		QDir applicationDir = QCoreApplication::applicationDirPath();
+	if (m_configFilePathCompPtr.IsValid()){
+		istd::CString path = m_configFilePathCompPtr->GetPath();
 
-		LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath(iqt::GetQString(*m_configFilePathAttrPtr))));
+		if (!path.IsEmpty()){
+			QDir applicationDir = QCoreApplication::applicationDirPath();
+
+			LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath(iqt::GetQString(path))));
+		}
 	}
 }
 

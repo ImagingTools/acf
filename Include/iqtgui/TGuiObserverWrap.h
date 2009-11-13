@@ -130,11 +130,11 @@ template <class Gui, class Observer>
 bool TGuiObserverWrap<Gui, Observer>::OnDetached(imod::IModel* modelPtr)
 {
 	if (Observer::IsModelAttached(modelPtr)){
-		if (!m_isReadOnly){
-			UpdateModel();
-		}
-
 		if (Gui::IsGuiCreated()){
+			if (!m_isReadOnly){
+				UpdateModel();
+			}
+
 			OnGuiModelDetached();
 		}
 	}

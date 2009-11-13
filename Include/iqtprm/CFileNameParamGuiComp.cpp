@@ -40,6 +40,14 @@ void CFileNameParamGuiComp::OnGuiCreated()
 }
 
 
+void CFileNameParamGuiComp::OnGuiDestroyed()
+{
+	m_fileIconPtr.Reset();
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
 // reimplemented (imod::IModelEditor)
 
 void CFileNameParamGuiComp::UpdateModel() const

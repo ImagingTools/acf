@@ -17,7 +17,7 @@ bool CToolBarWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	if (!IsGuiCreated()){
 		CreateGui(&mainWindow);
 	}
-	
+
 	Qt::ToolBarArea area = Qt::AllToolBarAreas;
 	int dockArea = Qt::TopToolBarArea;
 
@@ -51,6 +51,12 @@ bool CToolBarWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	}
 
 	return false;
+}
+
+
+bool CToolBarWidgetGuiComp::RemoveFromMainWindow(QMainWindow& /*mainWindow*/)
+{
+	return DestroyGui();
 }
 
 

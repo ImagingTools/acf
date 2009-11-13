@@ -213,6 +213,15 @@ void CComposedParamsSetGuiComp::OnGuiDestroyed()
 {
 //	ParamsFrame->destroy(false, true);
 
+	int elementsCount = m_guisCompPtr.GetCount();
+	for (int i = 0; i < elementsCount; ++i){
+		iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
+
+		if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
+			guiPtr->DestroyGui();
+		}
+	}
+
 	BaseClass::OnGuiDestroyed();
 }
 

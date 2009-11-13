@@ -24,9 +24,9 @@
 #include "iqt/ITranslationManager.h"
 
 #include "iqtgui/IMainWindowComponent.h"
-#include "iqtgui/TGuiComponentBase.h"
-#include "iqtgui/TRestorableGuiWrap.h"
+#include "iqtgui/CSimpleMainWindowGuiComp.h"
 #include "iqtgui/CHierarchicalCommand.h"
+#include "iqtgui/CGuiComponentDialog.h"
 
 
 namespace iqtdoc
@@ -34,31 +34,28 @@ namespace iqtdoc
 
 
 class CMainWindowGuiComp:
-			public iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMainWindow> >,
+			public iqtgui::CSimpleMainWindowGuiComp,
 			public imod::TSingleModelObserverBase<idoc::IDocumentManager>,
 			virtual public idoc::IMainWindowCommands
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
+	typedef iqtgui::CSimpleMainWindowGuiComp BaseClass;
 	typedef imod::TSingleModelObserverBase<idoc::IDocumentManager> BaseClass2;
 
 	I_BEGIN_COMPONENT(CMainWindowGuiComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(idoc::IMainWindowCommands);
-		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "Gui displayed if about action is triggered", false, "AboutGui");
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
+		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "Gui displayed if 'About' action is triggered", false, "AboutGui");
+		I_ASSIGN(m_settingsGuiCompPtr, "SettingsGui", "Gui displayed if 'Settings' action is triggered", false, "SettingsGui");
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
 		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
 		I_ASSIGN(m_documentManagerCommandsCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
-		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Document workspace", true, "Workspace");
-		I_ASSIGN_MULTI_0(m_mainWindowComponentsPtr, "MainWindowComponents", "Additional GUI components", false);
-		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
 		I_ASSIGN(m_isMenuVisibleAttrPtr, "IsMenuVisible", "If true, menu bar will be visible", true, true);
 		I_ASSIGN(m_isToolbarVisibleAttrPtr, "IsToolbarVisible", "If true, tool bar will be visible", true, true);
-		I_ASSIGN(m_isNestingEnabledAttrPtr, "IsNestingEnabled", "If true, docking nesting is enabled,\nmore than one docking widget is allowed on the same size", true, false);
 		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
-		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of icons using in the main window", false, 16);
 		I_ASSIGN(m_useIconTextAttrPtr, "UseIconText", "Enable text under the tool bar icons", false, false);
 		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list for one document type", true, 10);
 	I_END_COMPONENT;
@@ -72,9 +69,6 @@ public:
 	};
 
 	CMainWindowGuiComp();
-
-	// reimplemented (iqtgui::IGuiObject)
-	virtual void OnTryClose(bool* ignoredPtr = NULL);
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -96,7 +90,6 @@ protected:
 	int CreateToolbar(const iqtgui::CHierarchicalCommand& command, QToolBar& result, int prevGroupId = idoc::ICommand::GI_NONE) const;
 	void SetToolBarsVisible(bool isVisible = true);
 
-	void SetupMainWindow(QMainWindow& mainWindow);
 	void SetupNewCommand();
 	void SetupMainWindowComponents(QMainWindow& mainWindow);
 	bool HasDocumentTemplate() const;
@@ -116,9 +109,8 @@ protected:
 	template <class Archive> 
 	bool SerializeRecentFiles();
 
-	// reimplemented (TRestorableGuiWrap)
-	virtual void OnRestoreSettings(const QSettings& settings);
-	virtual void OnSaveSettings(QSettings& settings) const;
+	// reimplemented (iqtgui::CSimpleMainWindowGuiComp)
+	virtual void AddMainComponent(iqtgui::IMainWindowComponent* componentPtr);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -144,6 +136,7 @@ protected slots:
 	void OnFullScreen();
 	void OnShowToolbars();
 	void OnCopyPathToClippboard();
+	void OnSettings();
 	void OnAbout();
 
 private:
@@ -241,6 +234,7 @@ private:
 	iqtgui::CHierarchicalCommand m_showToolBarsCommand;
 	// tools menu group
 	iqtgui::CHierarchicalCommand m_copyPathToClippboardCommand;
+	iqtgui::CHierarchicalCommand m_settingsCommand;
 	// help menu group
 	iqtgui::CHierarchicalCommand m_aboutCommand;
 
@@ -250,20 +244,20 @@ private:
 	typedef std::map<std::string, RecentGroupCommandPtr> RecentFilesMap;
 	RecentFilesMap m_recentFilesMap;
 
-	I_REF(iqtgui::IGuiObject, m_workspaceCompPtr);
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_aboutDialogPtr;
+
+	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(imod::IModel, m_documentManagerModelCompPtr);
 	I_REF(idoc::ICommandsProvider, m_documentManagerCommandsCompPtr);
-	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
-	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsPtr);
 	I_ATTR(bool, m_isMenuVisibleAttrPtr);
 	I_ATTR(bool, m_isToolbarVisibleAttrPtr);
-	I_ATTR(bool, m_isNestingEnabledAttrPtr);
 	I_ATTR(bool, m_isCopyPathVisibleAttrPtr);
-	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useIconTextAttrPtr);
 	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_aboutGuiCompPtr);
+	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
 
 	istd::TOptPointerVector<QToolBar> m_toolBarsList;
 
