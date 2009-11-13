@@ -180,13 +180,13 @@ void CLogGuiComp::OnGuiCreated()
 void CLogGuiComp::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
 	if (changeFlags & ibase::IMessageContainer::Reset){
-		emit EmitReset();
+		Q_EMIT EmitReset();
 	}
 
 	if (changeFlags & ibase::IMessageContainer::MessageRemoved){
 		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
 		if (messagePtr != NULL){
-			emit EmitRemoveMessage(QVariant::fromValue((void*)messagePtr));
+			Q_EMIT EmitRemoveMessage(QVariant::fromValue((void*)messagePtr));
 		}
 	}
 
@@ -201,7 +201,7 @@ void CLogGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParams
 		if (messagePtr != NULL){
 			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
 			if (itemPtr != NULL){
-				emit EmitAddMessage(itemPtr);
+				Q_EMIT EmitAddMessage(itemPtr);
 			}
 		}
 	}

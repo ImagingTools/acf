@@ -112,7 +112,7 @@ void CGripShape::OnPositionChanged(const QPointF& /*position*/)
 	i2d::CVector2d position = GetPosition();
 	m_labelItem.setText(QString("%1 %2").arg(position.GetX(), 0, 'f', 2).arg(position.GetY(), 0, 'f', 2));
 
-	emit PositionChanged(position);
+	Q_EMIT PositionChanged(position);
 }
 
 

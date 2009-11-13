@@ -185,7 +185,7 @@ void CRegistryView::SetCenterOn(const QString& componentName)
 
 void CRegistryView::OnDropDataEvent(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr)
 {
-	emit DropDataEventEntered(data, eventPtr);
+	Q_EMIT DropDataEventEntered(data, eventPtr);
 }
 
 

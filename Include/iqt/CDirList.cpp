@@ -66,7 +66,7 @@ void CDirList::DoSearch(
 
 		push_back(rootPath);
 
-		emit currentDir(rootPath);
+		Q_EMIT currentDir(rootPath);
 	}
 
 	if (maxRecursionDepth == 0){

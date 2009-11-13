@@ -221,7 +221,7 @@ bool CSceneProviderGuiComp::SetScale(int scaleMode, double scaleFactor)
 
 	m_isZoomIgnored = true;
 
-	emit zoomChanged(scaleFactor);
+	Q_EMIT zoomChanged(scaleFactor);
 
 	m_isZoomIgnored = false;
 

@@ -46,7 +46,7 @@ bool CFileList::Create(
 
 			push_back(filePath);	
 
-			emit currentFile(filePath);
+			Q_EMIT currentFile(filePath);
 		}
 	}
 

@@ -134,7 +134,7 @@ int CHierarchicalCommand::GetStaticFlags() const
 bool CHierarchicalCommand::Execute(istd::IPolymorphic* contextPtr)
 {
 	if (IsEnabled() && (contextPtr != this)){
-		emit trigger();
+		Q_EMIT trigger();
 
 		return true;
 	}

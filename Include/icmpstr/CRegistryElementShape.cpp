@@ -244,7 +244,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 
 	setRect(QRectF(-width * 0.5, -height * 0.5, width, height));
 
-	emit RectChanged(GetViewRect());
+	Q_EMIT RectChanged(GetViewRect());
 }
 
 
@@ -254,7 +254,7 @@ void CRegistryElementShape::OnSelectionChanged(bool isSelected)
 {
 	BaseClass::OnSelectionChanged(isSelected);
 
-	emit SelectionChanged(isSelected);
+	Q_EMIT SelectionChanged(isSelected);
 }
 
 

@@ -328,7 +328,7 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 		foreach (CComponentConnector* connector, m_connectors){
 			connector->update();
 		}
-		emit selectionChanged(this, value.toBool());
+		Q_EMIT selectionChanged(this, value.toBool());
 		break;
 
 	case QGraphicsItem::ItemPositionChange:
@@ -348,7 +348,7 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 				connector->Adjust();
 			}
 
-			emit positionChanged(this, value.toPointF());
+			Q_EMIT positionChanged(this, value.toPointF());
 
 			break;
 		}
