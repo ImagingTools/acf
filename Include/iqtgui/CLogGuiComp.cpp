@@ -21,11 +21,6 @@ namespace iqtgui
 CLogGuiComp::CLogGuiComp()
 	:m_currentMessageMode(MM_ALL)
 {
-	m_categoryNameMap[istd::ILogger::MC_INFO] = tr("Info");
-	m_categoryNameMap[istd::ILogger::MC_WARNING] = tr("Warning");
-	m_categoryNameMap[istd::ILogger::MC_ERROR] = tr("Error");
-	m_categoryNameMap[istd::ILogger::MC_CRITICAL] = tr("Critical");
-
 	qRegisterMetaType<QVariant>("QVariant");
 
 	connect(this, SIGNAL(EmitAddMessage(QTreeWidgetItem*)), this, SLOT(OnAddMessage(QTreeWidgetItem*)), Qt::QueuedConnection);

@@ -105,10 +105,6 @@ private:
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 	I_ATTR(int, m_maxMessageCountAttrPtr);
 
-	typedef QMap<int, QString> CategoryNameMap;
-
-	CategoryNameMap m_categoryNameMap;
-
 	int m_currentMessageMode;
 };
 
