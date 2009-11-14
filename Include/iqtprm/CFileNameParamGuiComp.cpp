@@ -34,7 +34,12 @@ void CFileNameParamGuiComp::OnGuiCreated()
 		UrlLabel->setText(iqt::GetQString(*m_pathLabelAttrPtr));
 	}
 
-	iqtgui::CExtLineEdit* lineEdit = new iqtgui::CExtLineEdit(tr("<Enter path>"), 2, DirEdit);
+	QString startHint = tr("<Enter path>");
+	if (m_startHintAttrPtr.IsValid()){
+		startHint = iqt::GetQString(*m_startHintAttrPtr);
+	}
+	
+	iqtgui::CExtLineEdit* lineEdit = new iqtgui::CExtLineEdit(startHint, 2, DirEdit);
 
 	DirEdit->setLineEdit(lineEdit);
 	DirEdit->setCompleter(NULL);

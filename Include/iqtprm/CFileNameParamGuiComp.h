@@ -31,6 +31,7 @@ public:
 
 	I_BEGIN_COMPONENT(CFileNameParamGuiComp)
 		I_ASSIGN(m_pathLabelAttrPtr, "PathLabel", "Label for the file editor", false, "Directory");
+		I_ASSIGN(m_startHintAttrPtr, "StartHint", "Start hint for the editor", false, "<Enter path>");
 	I_END_COMPONENT
 
 	// reimplemented (iqtgui::CGuiComponentBase)
@@ -57,6 +58,7 @@ private:
 
 private:
 	I_ATTR(istd::CString, m_pathLabelAttrPtr);
+	I_ATTR(istd::CString, m_startHintAttrPtr);
 
 	QDirModel m_directoryModel;
 };
