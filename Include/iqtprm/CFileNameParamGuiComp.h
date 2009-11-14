@@ -53,12 +53,12 @@ private:
 	void MakeSelectionHint(const QString& text) const;
 	QIcon GetFileIcon(const QString& filePath) const;
 	void OnPathEdited(const QString& path) const;
+	QString GetPathFromEditor() const;
 
 private:
 	I_ATTR(istd::CString, m_pathLabelAttrPtr);
 
 	QDirModel m_directoryModel;
-	istd::TDelPtr<QLabel> m_fileIconPtr;
 };
 
 

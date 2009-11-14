@@ -69,6 +69,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>BrowseButton</tabstop>
+  <tabstop>DirEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

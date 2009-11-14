@@ -217,6 +217,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtLineEdit.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileDialogLoaderComp.cpp"
 				>
 			</File>
@@ -312,6 +316,14 @@
 			</File>
 			<File
 				RelativePath="..\CDockWidgetGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtLineEdit.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtLineEdit.moc"
 				>
 			</File>
 			<File
@@ -657,6 +669,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CDockWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CExtLineEdit.cpp"
 				>
 			</File>
 			<File

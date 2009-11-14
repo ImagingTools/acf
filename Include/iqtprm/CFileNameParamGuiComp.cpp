@@ -12,6 +12,8 @@
 
 #include "iqt/CSignalBlocker.h"
 
+#include "iqtgui/CExtLineEdit.h"
+
 
 namespace iqtprm
 {
@@ -32,9 +34,10 @@ void CFileNameParamGuiComp::OnGuiCreated()
 		UrlLabel->setText(iqt::GetQString(*m_pathLabelAttrPtr));
 	}
 
-	m_fileIconPtr.SetPtr(new QLabel(DirEdit->lineEdit()));
-	m_fileIconPtr->move(1, 0);
-	m_fileIconPtr->hide();
+	iqtgui::CExtLineEdit* lineEdit = new iqtgui::CExtLineEdit(tr("<Enter path>"), 2, DirEdit);
+
+	DirEdit->setLineEdit(lineEdit);
+	DirEdit->setCompleter(NULL);
 
 	BaseClass::OnGuiCreated();
 }
@@ -42,7 +45,8 @@ void CFileNameParamGuiComp::OnGuiCreated()
 
 void CFileNameParamGuiComp::OnGuiDestroyed()
 {
-	m_fileIconPtr.Reset();
+	// set standard line edit:
+	DirEdit->setLineEdit(new QLineEdit());
 
 	BaseClass::OnGuiDestroyed();
 }
@@ -56,7 +60,7 @@ void CFileNameParamGuiComp::UpdateModel() const
 	if (objectPtr != NULL && !IsUpdateBlocked()){
 		UpdateBlocker blocker(const_cast<CFileNameParamGuiComp*>(this));
 
-		istd::CString currentPath = iqt::GetCString(DirEdit->currentText());
+		istd::CString currentPath = iqt::GetCString(GetPathFromEditor());
 		if (currentPath != objectPtr->GetPath()){
 			istd::CChangeNotifier notifier(objectPtr);
 
@@ -73,7 +77,7 @@ void CFileNameParamGuiComp::UpdateEditor(int /*updateFlags*/)
 		int pathType = objectPtr->GetPathType();
 
 		QString newPath = iqt::GetQString(objectPtr->GetPath());
-		if (newPath != DirEdit->currentText()){
+		if (newPath != GetPathFromEditor()){
 			SetPathToEditor(newPath);
 		}
 
@@ -113,13 +117,13 @@ void CFileNameParamGuiComp::on_BrowseButton_clicked()
 		int pathType = objectPtr->GetPathType();
 
 		if (pathType == iprm::IFileNameParam::PT_DIRECTORY){
-			QString filePath = QFileDialog::getExistingDirectory(GetQtWidget(), tr("Select directory"), DirEdit->currentText());
+			QString filePath = QFileDialog::getExistingDirectory(GetQtWidget(), tr("Select directory"), GetPathFromEditor());
 			if (!filePath.isEmpty()){
 				OnPathEdited(filePath);
 			}
 		}
 		else if (pathType == iprm::IFileNameParam::PT_FILE){
-			QString filePath = QFileDialog::getOpenFileName(GetQtWidget(), tr("Select file"), QFileInfo(DirEdit->currentText()).dir().absolutePath());
+			QString filePath = QFileDialog::getOpenFileName(GetQtWidget(), tr("Select file"), QFileInfo(GetPathFromEditor()).dir().absolutePath());
 			if (!filePath.isEmpty()){
 				OnPathEdited(filePath);
 			}
@@ -139,11 +143,12 @@ void CFileNameParamGuiComp::on_DirEdit_editTextChanged(const QString& text)
 void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 {
 	I_ASSERT(DirEdit->isEditable());
-
-	iqt::CSignalBlocker blocker(DirEdit, true);
-
+	
+	
+	iqt::CSignalBlocker blocker(DirEdit);
+	
 	DirEdit->clear();
-			
+		
 	QString normalizedPath = QDir::toNativeSeparators(path);
 
 	MakeSelectionHint(normalizedPath);
@@ -162,17 +167,12 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 	}
 
 	QIcon fileIcon = GetFileIcon(normalizedPath);
-	if (!fileIcon.isNull()){
-		int lineEditHeight = DirEdit->lineEdit()->height();
-		m_fileIconPtr->setPixmap(fileIcon.pixmap(lineEditHeight - 2, lineEditHeight - 2));
-		DirEdit->lineEdit()->setTextMargins(lineEditHeight, 0, 0, 0);
-		m_fileIconPtr->show();
-	}
-	else{
-		m_fileIconPtr->hide();
-		DirEdit->lineEdit()->setTextMargins(0, 0, 0, 0);
-	}
-	
+
+	iqtgui::CExtLineEdit* lineEdit = dynamic_cast<iqtgui::CExtLineEdit*>(DirEdit->lineEdit());
+	I_ASSERT(lineEdit != NULL);
+
+	lineEdit->SetIcon(fileIcon);
+
 	DirEdit->setEditText(normalizedPath);
 }
 
@@ -225,7 +225,7 @@ void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 			for(int dirIndex = 0; dirIndex < subDirs.count(); dirIndex++){
 				QString filePath = subDirs[dirIndex].absoluteFilePath();
 
-				DirEdit->addItem(GetFileIcon(filePath), QDir::toNativeSeparators(filePath));
+				DirEdit->addItem(QDir::toNativeSeparators(filePath));
 			}
 		}
 	}
@@ -250,6 +250,22 @@ void CFileNameParamGuiComp::OnPathEdited(const QString& path) const
 	SetPathToEditor(path);
 
 	UpdateModel();
+}
+
+
+QString CFileNameParamGuiComp::GetPathFromEditor() const
+{
+	iqtgui::CExtLineEdit* lineEdit = dynamic_cast<iqtgui::CExtLineEdit*>(DirEdit->lineEdit());
+	if (lineEdit != NULL){
+		QString path = DirEdit->currentText();
+		if (path == lineEdit->GetStartupText()){
+			return QString();
+		}
+	
+		return path;
+	}
+
+	return DirEdit->currentText();
 }
 
 
