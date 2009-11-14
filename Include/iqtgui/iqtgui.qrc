@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/Icons" >
+    <file alias="CdUp" >Resources/Icons/cdtoparent.png</file>
+    <file alias="Up" >Resources/Icons/up.png</file>
     <file alias="ZoomReset" >Resources/Icons/hand_128.png</file>
     <file alias="ZoomIn" >Resources/Icons/Zoom in.png</file>
     <file alias="Info" >Resources/Icons/dialog-information.png</file>

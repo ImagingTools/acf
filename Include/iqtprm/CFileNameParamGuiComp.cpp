@@ -41,6 +41,14 @@ void CFileNameParamGuiComp::OnGuiCreated()
 	
 	iqtgui::CExtLineEdit* lineEdit = new iqtgui::CExtLineEdit(startHint, 2, DirEdit);
 
+	// add "cd up" button:
+	QToolButton* cdUpButton = new QToolButton(lineEdit);
+	cdUpButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+	cdUpButton->setIcon(QIcon(":/Icons/Up"));
+	connect(cdUpButton, SIGNAL(clicked()), this, SLOT(OnDirectoryUp()));
+
+	lineEdit->AddWidget(cdUpButton, Qt::AlignRight);
+
 	DirEdit->setLineEdit(lineEdit);
 	DirEdit->setCompleter(NULL);
 
@@ -140,6 +148,26 @@ void CFileNameParamGuiComp::on_BrowseButton_clicked()
 void CFileNameParamGuiComp::on_DirEdit_editTextChanged(const QString& text)
 {
 	OnPathEdited(text);
+}
+
+
+void CFileNameParamGuiComp::OnDirectoryUp()
+{
+	QString currentDirectory = GetPathFromEditor();
+
+	QFileInfo fileInfo(currentDirectory);
+	QString directoryPath = currentDirectory;
+	if (!fileInfo.isDir()){
+		directoryPath = fileInfo.absolutePath();
+	}
+
+	QDir directory(directoryPath);
+
+	directory.cdUp();
+
+	QString newPath = directory.absolutePath();
+
+	OnPathEdited(newPath);
 }
 
 

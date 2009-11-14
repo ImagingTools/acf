@@ -48,6 +48,7 @@ public:
 protected slots:
 	void on_BrowseButton_clicked();
 	void on_DirEdit_editTextChanged(const QString& text);
+	void OnDirectoryUp();
 
 private:
 	void SetPathToEditor(const QString& path) const;

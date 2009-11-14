@@ -79,6 +79,9 @@ void CExtLineEdit::AddWidget(QWidget* widgetPtr, int alignmentFlags)
 		widgetPtr->setParent(this);
 	}
 
+	widgetPtr->setStyleSheet("QWidget{border: 0px}");
+	widgetPtr->setCursor(QCursor(Qt::ArrowCursor));
+
 	SubWidgetInfo subWidgetInfo;
 	subWidgetInfo.widget = widgetPtr;
 	subWidgetInfo.margin = m_margins;
