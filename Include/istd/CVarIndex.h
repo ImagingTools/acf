@@ -167,6 +167,9 @@ public:
 	bool operator<=(const CVarIndex& index) const;
 	bool operator>=(const CVarIndex& index) const;
 
+	CVarIndex& operator+=(const CVarIndex& index);
+	CVarIndex& operator-=(const CVarIndex& index);
+
 private:
 	std::vector<int> m_elements;
 };

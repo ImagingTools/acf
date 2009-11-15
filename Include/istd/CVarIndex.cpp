@@ -149,6 +149,28 @@ bool CVarIndex::operator!=(const CVarIndex& index) const
 }
 
 
+CVarIndex& CVarIndex::operator+=(const CVarIndex& index)
+{
+	int dimensionsCount = istd::Min(GetDimensionsCount(), index.GetDimensionsCount());
+	for (int i = 0; i < dimensionsCount; ++i){
+		m_elements[i] += index.m_elements[i];
+	}
+
+	return *this;
+}
+
+
+CVarIndex& CVarIndex::operator-=(const CVarIndex& index)
+{
+	int dimensionsCount = istd::Min(GetDimensionsCount(), index.GetDimensionsCount());
+	for (int i = 0; i < dimensionsCount; ++i){
+		m_elements[i] -= index.m_elements[i];
+	}
+
+	return *this;
+}
+
+
 } // namespace istd
 
 
