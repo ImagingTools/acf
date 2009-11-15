@@ -158,6 +158,7 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 			}
 
 			if (m_settingsGuiCompPtr.IsValid()){
+				m_settingsCommand.SetGroupId(GI_SETTINGS);
 				m_toolsCommand.InsertChild(&m_settingsCommand, false);
 			}
 

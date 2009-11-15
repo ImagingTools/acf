@@ -65,7 +65,8 @@ public:
 		GI_APPLICATION = 0x200,
 		GI_WINDOW,
 		GI_DOCUMENT,
-		GI_UNDO
+		GI_UNDO,
+		GI_SETTINGS
 	};
 
 	CMainWindowGuiComp();
