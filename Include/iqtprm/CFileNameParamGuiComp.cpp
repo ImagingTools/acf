@@ -19,6 +19,8 @@ namespace iqtprm
 {
 
 
+// public methods
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CFileNameParamGuiComp::OnGuiCreated()
@@ -56,15 +58,6 @@ void CFileNameParamGuiComp::OnGuiCreated()
 }
 
 
-void CFileNameParamGuiComp::OnGuiDestroyed()
-{
-	// set standard line edit:
-	DirEdit->setLineEdit(new QLineEdit());
-
-	BaseClass::OnGuiDestroyed();
-}
-
-
 // reimplemented (imod::IModelEditor)
 
 void CFileNameParamGuiComp::UpdateModel() const
@@ -94,9 +87,9 @@ void CFileNameParamGuiComp::UpdateEditor(int /*updateFlags*/)
 			SetPathToEditor(newPath);
 		}
 
-		DirectoryLabel->setVisible(pathType == iprm::IFileNameParam::PT_DIRECTORY);
-		PathLabel->setVisible(pathType == iprm::IFileNameParam::PT_FILE);
-		UrlLabel->setVisible(pathType == iprm::IFileNameParam::PT_URL);
+		DirectoryLabel->setVisible(pathType == iprm::IFileNameParam::PT_DIRECTORY && !(*m_pathLabelAttrPtr).IsEmpty());
+		PathLabel->setVisible(pathType == iprm::IFileNameParam::PT_FILE && !(*m_pathLabelAttrPtr).IsEmpty());
+		UrlLabel->setVisible(pathType == iprm::IFileNameParam::PT_URL && !(*m_pathLabelAttrPtr).IsEmpty());
 		BrowseButton->setVisible((pathType == iprm::IFileNameParam::PT_DIRECTORY) || (pathType == iprm::IFileNameParam::PT_FILE));
 	}
 	else{
@@ -177,7 +170,6 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 {
 	I_ASSERT(DirEdit->isEditable());
 	
-	
 	iqt::CSignalBlocker blocker(DirEdit);
 	
 	DirEdit->clear();
@@ -185,19 +177,6 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 	QString normalizedPath = QDir::toNativeSeparators(path);
 
 	MakeSelectionHint(normalizedPath);
-
-	static QPalette defaultPalette = qApp->palette();
-
-	QFileInfo fileInfo(path);
-	if (!fileInfo.exists() && !path.isEmpty()){
-		QPalette invalidPalette = defaultPalette;
-		invalidPalette.setColor(QPalette::Text, Qt::red);
-	
-		DirEdit->lineEdit()->setPalette(invalidPalette);
-	}
-	else{
-		DirEdit->lineEdit()->setPalette(defaultPalette);
-	}
 
 	QIcon fileIcon = GetFileIcon(normalizedPath);
 
@@ -267,14 +246,18 @@ void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 
 QIcon CFileNameParamGuiComp::GetFileIcon(const QString& filePath) const
 {
-	QIcon fileIcon;
+	if (filePath.isEmpty()){
+		return QIcon();
+	}
+
+	QIcon fileIcon = QIcon(":/Icons/Warning");
 
 	QModelIndex index = m_directoryModel.index(filePath);
 	if (index.isValid()){
 		fileIcon = m_directoryModel.fileIcon(index);
 	}
 
-	return fileIcon;
+	return fileIcon;  
 }
 
 
@@ -298,7 +281,7 @@ QString CFileNameParamGuiComp::GetPathFromEditor() const
 		return path;
 	}
 
-	return DirEdit->currentText();
+	return QString();
 }
 
 

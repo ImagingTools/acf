@@ -68,6 +68,7 @@ protected:
 
 private Q_SLOTS:
 	void OnEditingFinished();
+	void OnTextChanged(const QString& text);
 
 private:
 	void UpdateLayout();

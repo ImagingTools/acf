@@ -36,7 +36,6 @@ public:
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;

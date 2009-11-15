@@ -32,6 +32,7 @@ CExtLineEdit::CExtLineEdit(
 	SetStartupText(startupText);
 
 	connect(this, SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
+	connect(this, SIGNAL(textChanged(const QString&)), this, SLOT(OnTextChanged(const QString&)));
 }
 
 
@@ -123,7 +124,13 @@ void CExtLineEdit::focusInEvent(QFocusEvent* focusEvent)
 
 void CExtLineEdit::OnEditingFinished()
 {
-	if (text().isEmpty()){
+	UpdateStartupText();
+}
+
+
+void CExtLineEdit::OnTextChanged(const QString& /*text*/)
+{
+	if (!hasFocus()){
 		UpdateStartupText();
 	}
 }
