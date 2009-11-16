@@ -19,6 +19,13 @@ void CPlaybackControllerGuiComp::UpdateEditor(int updateFlags)
 {
 	imm::IVideoController* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		int supportedFeatures = objectPtr->GetSupportedFeatures();
+		bool isPlayable = ((supportedFeatures & imm::IMediaController::SF_PLAY) != 0);
+		PlayButton->setVisible(isPlayable);
+		RepeatButton->setVisible(isPlayable);
+
+		PositionSlider->setEnabled((supportedFeatures & imm::IMediaController::SF_SEEK) != 0);
+
 		if ((updateFlags & imm::IMediaController::CF_STATUS) != 0){
 			iqt::CSignalBlocker block(this, true);
 
@@ -37,7 +44,7 @@ void CPlaybackControllerGuiComp::UpdateEditor(int updateFlags)
 		}
 
 		if ((updateFlags & imm::IMediaController::CF_MEDIA_POSITION) != 0){
-			iqt::CSignalBlocker block(this, true);
+			iqt::CSignalBlocker block(PositionSlider, true);
 
 			int currentFrame = objectPtr->GetCurrentFrame();
 			if (currentFrame >= 0){

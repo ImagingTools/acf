@@ -21,7 +21,8 @@ public:
 		CF_MEDIA_POSITION = 0x0800000,
 	};
 
-	enum SupportedFeatures{
+	enum SupportedFeatures
+	{
 		SF_PLAY = 0x1,
 		SF_SEEK = 0x2,
 		SF_AUTO_PLAY = 0x4
