@@ -1,22 +1,46 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompSimu.exe", "..\CompSimu\VC9\CompSimu.vcproj", "{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DocView", "..\DocView\VC9\DocView.vcproj", "{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DocViewSimu.exe", "..\DocViewSimu\VC9\DocViewSimu.vcproj", "{5841387C-CE78-44F4-9766-4DBDEC0B60DE}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 	ProjectSection(ProjectDependencies) = postProject
 		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED} = {0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TutorialPck", "..\TutorialPck\VC9\TutorialPck.vcproj", "{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 	ProjectSection(ProjectDependencies) = postProject
 		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED} = {0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogSimu.exe", "..\LogSimu\VC9\LogSimu.vcproj", "{6CBBCDC1-18C1-4EA4-B37E-C18E0718CE49}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageViewSimu.exe", "..\ImageViewSimu\VC9\ImageViewSimu.vcproj", "{0A83CB79-5835-4EE6-9545-317EA6493E72}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,3 +77,4 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
+

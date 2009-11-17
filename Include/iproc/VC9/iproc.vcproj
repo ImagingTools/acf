@@ -199,6 +199,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IBitmapAcquisition.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IBitmapSupplier.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IIdManager.h"
 				>
 			</File>

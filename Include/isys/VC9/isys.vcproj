@@ -234,10 +234,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFolderMonitor.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IFunctionsProvider.h"
 				>
 			</File>

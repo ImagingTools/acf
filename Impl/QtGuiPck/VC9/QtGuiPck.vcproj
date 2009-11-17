@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="QtPck"
-	ProjectGUID="{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}"
-	RootNamespace="QtPck"
+	Name="QtGuiPck"
+	ProjectGUID="{FC63E8FB-DC12-4E1E-BD93-4AFEFF373282}"
+	RootNamespace="QtGuiPck"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -183,7 +183,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\QtPck.cpp"
+				RelativePath="..\QtGuiPck.cpp"
 				>
 			</File>
 		</Filter>
@@ -193,7 +193,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\QtPck.h"
+				RelativePath="..\QtGuiPck.h"
 				>
 			</File>
 		</Filter>

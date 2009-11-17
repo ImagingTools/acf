@@ -190,11 +190,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CConnectorShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CVisualRegistryElement.cpp"
+				RelativePath="..\CGraphicsConnectorItem.cpp"
 				>
 			</File>
 			<File
@@ -233,6 +229,18 @@
 				RelativePath="..\CRegistryViewComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CVisualRegistryComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualRegistryElement.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualRegistryScenographerComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -264,11 +272,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CConnectorShape.h"
+				RelativePath="..\CGraphicsConnectorItem.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CVisualRegistryElement.h"
+				RelativePath="..\CGraphicsConnectorItem.moc"
 				>
 			</File>
 			<File
@@ -289,6 +297,10 @@
 			</File>
 			<File
 				RelativePath="..\CRegistryElementShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryElementShape.moc"
 				>
 			</File>
 			<File
@@ -321,6 +333,22 @@
 			</File>
 			<File
 				RelativePath="..\CRegistryViewComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualRegistryComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualRegistryElement.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualRegistryScenographerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVisualRegistryScenographerComp.moc"
 				>
 			</File>
 			<File
@@ -365,43 +393,55 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\Generated\moc_CAttributeEditorComp.cpp"
+				RelativePath="..\generated\moc_CAttributeEditorComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CComponentSceneItem.cpp"
+				RelativePath="..\generated\moc_CComponentSceneItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CPackageOverviewComp.cpp"
+				RelativePath="..\generated\moc_CGraphicsConnectorItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRegistryPreviewComp.cpp"
+				RelativePath="..\generated\moc_CPackageOverviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRegistryView.cpp"
+				RelativePath="..\generated\moc_CRegistryElementShape.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CRegistryViewComp.cpp"
+				RelativePath="..\generated\moc_CRegistryPreviewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\qrc_icmpstr.cpp"
+				RelativePath="..\generated\moc_CRegistryView.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CAttributeEditorComp.h"
+				RelativePath="..\generated\moc_CRegistryViewComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CPackageOverviewComp.h"
+				RelativePath="..\generated\moc_CVisualRegistryScenographerComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CRegistryPropertiesDialog.h"
+				RelativePath="..\generated\qrc_icmpstr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CAttributeEditorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CPackageOverviewComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CRegistryPropertiesDialog.h"
 				>
 			</File>
 		</Filter>

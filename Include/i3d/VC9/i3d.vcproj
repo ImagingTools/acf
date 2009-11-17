@@ -2,8 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="imath"
-	ProjectGUID="{7F855A37-4741-472A-82B5-5F57C4B6F2D1}"
+	Name="i3d"
+	ProjectGUID="{B0F9B8B0-C980-49F5-814A-1145B934938E}"
+	RootNamespace="i3d"
 	>
 	<Platforms>
 		<Platform
@@ -51,14 +52,12 @@
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+				DisableSpecificWarnings="4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -130,13 +129,12 @@
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+				DisableSpecificWarnings="4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -177,23 +175,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CComplexDoubleManip.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDoubleManip.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFixedPointManip.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CNormalHistogram.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSampledFunction2d.cpp"
+				RelativePath="..\CVector3d.cpp"
 				>
 			</File>
 		</Filter>
@@ -202,75 +184,11 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CComplexDoubleManip.h"
+				RelativePath="..\CVector3d.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDouble.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDoubleManip.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFixedPointManip.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CNormalHistogram.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSampledFunction2d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\imath.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TFastVector.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TFulcrumGridFunctionBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TISurjectFunction.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TIMathFunction.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TISampledFunction.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TIValueManip.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TMathVectorWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSplineGridFunctionBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TVarMatrix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TVarVector.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TVector.h"
+				RelativePath="..\i3d.h"
 				>
 			</File>
 		</Filter>

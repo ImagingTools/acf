@@ -12,9 +12,6 @@
 		/>
 	</Platforms>
 	<ToolFiles>
-		<ToolFile
-			RelativePath="..\..\..\Config\VC9\Acf.rules"
-		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -28,25 +25,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="DeployCopy"
-				OutputDir=""
-				InputDir="..\..\..\Bin\info"
-			/>
-			<Tool
-				Name="Arxc"
-				ConfigFile="$(ACFDIR)/Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -126,25 +105,7 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
-			/>
-			<Tool
 				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="DeployCopy"
-				OutputDir=""
-				InputDir="..\..\..\Bin\info"
-			/>
-			<Tool
-				Name="Arxc"
-				ConfigFile="$(ACFDIR)/Config/Core.xpc"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -244,7 +205,7 @@
 			ParseFiles="false"
 			>
 			<File
-				RelativePath="..\VC\CompositorMini.rc.xtracf"
+				RelativePath="..\VC\CompositorMini.rc"
 				>
 			</File>
 			<File

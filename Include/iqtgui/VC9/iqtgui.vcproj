@@ -217,6 +217,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtLineEdit.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileDialogLoaderComp.cpp"
 				>
 			</File>
@@ -241,6 +245,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CItemDelegate.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLayoutGuiComp.cpp"
 				>
 			</File>
@@ -254,6 +262,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -307,6 +319,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtLineEdit.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtLineEdit.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileDialogLoaderComp.h"
 				>
 			</File>
@@ -357,6 +377,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CItemDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CLayoutGuiComp.h"
 				>
 			</File>
@@ -378,6 +402,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSimpleMainWindowGuiComp.h"
 				>
 			</File>
 			<File
@@ -641,6 +669,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CDockWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CExtLineEdit.cpp"
 				>
 			</File>
 			<File
