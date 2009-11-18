@@ -143,7 +143,7 @@ iser::ISerializable* CVisualRegistryScenographerComp::GetSelectedElement() const
 	QList<QGraphicsItem*> selectedItems = m_scenePtr->selectedItems();
 
 	for (		QList<QGraphicsItem*>::const_iterator iter = selectedItems.begin();
-				iter != selectedItems.begin();
+				iter != selectedItems.end();
 				++iter){
 		QGraphicsItem* selectedItemPtr = *iter;
 		CRegistryElementShape* selectedShapePtr = dynamic_cast<CRegistryElementShape*>(selectedItemPtr);
