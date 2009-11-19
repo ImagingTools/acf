@@ -37,6 +37,18 @@ bool CVarIndex::IsZero() const
 }
 
 
+bool CVarIndex::IsSizeEmpty() const
+{
+	for (int i = 0; i < int(m_elements.size()); ++i){
+		if (m_elements[i] <= 0){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 void CVarIndex::Reset()
 {
 	m_elements.clear();

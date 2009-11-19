@@ -48,6 +48,12 @@ public:
 	bool IsZero() const;
 
 	/**
+		Check if this index interpreted as size is empty.
+		It means, it returns true, is some of components is less or equal 0.
+	*/
+	bool IsSizeEmpty() const;
+
+	/**
 		Reset this object.
 		For this (variable size) implementation, it set dimension size to 0.
 	*/
