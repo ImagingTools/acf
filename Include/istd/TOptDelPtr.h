@@ -20,7 +20,8 @@ public:
 
 	/**
 		Construct and init this pointer.
-		\param	ptr		pointer to object.
+		\param	ptr			pointer to object.
+		\param	releaseFlag	if true, pointed object will be automatically released.
 	*/
 	TOptDelPtr(Type* ptr = NULL, bool releaseFlag = false);
 
@@ -38,6 +39,13 @@ public:
 	~TOptDelPtr();
 
 	/**
+		Get state of release flag.
+		If this flag is true, pointed object will be automatically removed from memory.
+		If this pointer isn't valid, returned value has no meaning.
+	*/
+	bool IsToRelase() const;
+
+	/**
 		Remove object pointed by internal pointer and set this pointer to NULL.
 	*/
 	void Reset();
@@ -45,6 +53,7 @@ public:
 	/**
 		Set new value of internal pointer.
 		If internal pointer wasn't NULL, it will be deleted.
+		\param	releaseFlag	if true, pointed object will be automatically released.
 	 */
 	void SetPtr(Type* ptr, bool releaseFlag = false);
 
@@ -110,6 +119,13 @@ template <class Type, bool DelArray>
 inline void TOptDelPtr<Type, DelArray>::Reset()
 {
 	SetPtr(NULL);
+}
+
+
+template <class Type, bool DelArray>
+inline bool TOptDelPtr<Type, DelArray>::IsToRelase() const
+{
+	return m_releaseFlag;
 }
 
 
