@@ -43,7 +43,6 @@ private:
 	bool m_isEnabled;
 
 	I_ATTR(bool, m_defaultIsEnabledAttrPtr);
-	I_ATTR(int, m_pathTypeAttrPtr);
 };
 
 
