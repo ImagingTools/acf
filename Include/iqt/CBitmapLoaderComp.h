@@ -36,9 +36,9 @@ public:
 		MI_BAD_FORMAT
 	};
 
-	I_BEGIN_COMPONENT(CBitmapLoaderComp)
-		I_REGISTER_INTERFACE(iser::IFileLoader)
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CBitmapLoaderComp);
+		I_REGISTER_INTERFACE(iser::IFileLoader);
+	I_END_COMPONENT;
 
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(

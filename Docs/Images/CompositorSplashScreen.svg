@@ -25,10 +25,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="217.28346"
+     inkscape:cx="87.78346"
      inkscape:cy="167.20751"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer6"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1134"
@@ -37,6 +37,21 @@
      units="px" />
   <defs
      id="Defs">
+    <linearGradient
+       id="linearGradient2659">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop2661" />
+      <stop
+         id="stop2663"
+         offset="0.66206896"
+         style="stop-color:#ffff00;stop-opacity:1;" />
+      <stop
+         style="stop-color:#8f7100;stop-opacity:1;"
+         offset="1"
+         id="stop2665" />
+    </linearGradient>
     <linearGradient
        id="linearGradient11232">
       <stop
@@ -1035,14 +1050,6 @@
          id="feGaussianBlur3431" />
     </filter>
     <filter
-       inkscape:collect="always"
-       id="filter3433">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.20847659"
-         id="feGaussianBlur3435" />
-    </filter>
-    <filter
        id="filter3261"
        inkscape:collect="always">
       <feGaussianBlur
@@ -1279,6 +1286,28 @@
          stdDeviation="20.18463"
          id="feGaussianBlur3753" />
     </filter>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2659"
+       id="radialGradient2655"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.9600739,0.4698552,-8.91401e-2,0.3718619,-131.87152,-42.608779)"
+       cx="146.9796"
+       cy="73.242905"
+       fx="146.9796"
+       fy="73.242905"
+       r="150.91455" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3514"
+       id="radialGradient2657"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1541409,-0.8063029,2.0081262,0.3838961,315.51564,315.06033)"
+       cx="335.15646"
+       cy="-99.339622"
+       fx="335.15646"
+       fy="-99.339622"
+       r="149.85156" />
   </defs>
   <metadata
      id="metadata7">
@@ -1324,7 +1353,7 @@
        sodipodi:cy="315.5"
        sodipodi:cx="233.75"
        id="path5288"
-       style="opacity:0.87025313999999998;fill:url(#radialGradient12353);fill-opacity:1;stroke:none;stroke-width:1.77165353000000000;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;filter:url(#filter3751)"
+       style="opacity:0.87025314;fill:url(#radialGradient12353);fill-opacity:1;stroke:none;stroke-width:1.77165353;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;filter:url(#filter3751)"
        sodipodi:type="arc" />
     <path
        style="opacity:1;fill:url(#radialGradient12356);fill-opacity:1;stroke:none;stroke-width:1.77165353;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline"
@@ -1437,9 +1466,15 @@
          d="M 226.78125,160.40625 C 223.63789,160.36788 220.12225,161.1277 217.375,163.15625 C 213.43128,166.06827 212.15953,170.57354 213,174.28125 C 213.97218,178.56993 219.85122,182.91613 224.4375,183.3125 C 229.65966,183.76383 237.12297,182.75601 240.46875,178.875 C 240.65275,178.66156 242.6251,176.35927 243.125,175.78125 L 242.15625,169.59375 C 239.1077,165.19222 236.13008,163.50194 232.90625,161.75 C 231.43585,160.95092 229.22608,160.4361 226.78125,160.40625 z"
          id="path5367" />
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Title"
+     style="display:inline">
     <text
        xml:space="preserve"
-       style="font-size:58.9957695px;font-style:normal;font-weight:normal;fill:url(#radialGradient3599);fill-opacity:1;stroke:url(#radialGradient3601);stroke-width:2.12598419;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       style="font-size:58.99576950000000200px;font-style:normal;font-weight:normal;fill:url(#radialGradient2655);fill-opacity:1;stroke:url(#radialGradient2657);stroke-width:2.12598419000000010;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
        x="14.900642"
        y="61.299725"
        id="text3482"><tspan
@@ -1447,7 +1482,7 @@
          id="ApplTitle"
          x="14.900642"
          y="61.299725"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#radialGradient3599);fill-opacity:1;stroke:url(#radialGradient3601);stroke-width:2.12598419;stroke-miterlimit:4;stroke-dasharray:none;font-family:Arial;-inkscape-font-specification:Arial">Compositor</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:url(#radialGradient2655);fill-opacity:1;stroke:url(#radialGradient2657);stroke-width:2.12598419000000010;stroke-miterlimit:4;stroke-dasharray:none;font-family:Arial;-inkscape-font-specification:Arial">Compositor</tspan></text>
   </g>
   <g
      style="display:inline"
@@ -1510,7 +1545,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="ImagingTools">
+     inkscape:label="ImagingTools"
+     style="display:inline">
     <g
        id="g3695"
        transform="matrix(0.2022492,0,0,0.2022492,-35.813253,182.24304)">
