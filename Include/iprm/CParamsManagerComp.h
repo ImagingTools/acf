@@ -5,6 +5,8 @@
 // STL includes
 #include <vector>
 
+
+// ACF includes
 #include "istd/TPointerVector.h"
 
 #include "icomp/CComponentBase.h"
@@ -28,7 +30,8 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CParamsManagerComp)
-		I_REGISTER_INTERFACE(IParamsManager)
+		I_REGISTER_INTERFACE(iprm::IParamsManager)
+		I_REGISTER_INTERFACE(iser::ISerializable)
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of refernces to fixed parameter set", false)
 		I_ASSIGN_MULTI_0(m_fixedSetNamesCompPtr, "FixedSetNames", "List of fixed parameter names", false)
 		I_ASSIGN(m_defaultSetNameCompPtr, "DefaultSetName", "Default name of parameter set", true, "<noname>")
