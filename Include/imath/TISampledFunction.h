@@ -20,7 +20,7 @@ template <int ArgumentDimensions, int ResultDimensions>
 class TISampledFunction: 
 			virtual public imath::TIMathFunction<
 						istd::TIndex<ArgumentDimensions>, 
-						imath::TVector<ResultDimensions> >,
+						TVector<ResultDimensions> >,
 			virtual public istd::IChangeable
 {
 public:

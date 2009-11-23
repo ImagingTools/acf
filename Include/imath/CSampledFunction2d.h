@@ -23,14 +23,14 @@ public:
 	void Create(int width, int height, double defaultValue = 0);
 	void SetSampleValue(const ArgumentType& index, double value);
 	
-	// reimplemented (ISampledFunction2d)
+	// reimplemented (imath::ISampledFunction2d)
 	virtual bool CreateFunction(double* dataPtr, const ArgumentType& sizes);
 	virtual int GetSamplesCount() const;
 	virtual int GetGridSize(int dimensionIndex) const;
 	virtual istd::CRange GetLogicalRange(int dimensionIndex) const;
 	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const;
 
-	// reimplemented (TIMathFunction)
+	// reimplemented (imath::TIMathFunction)
 	virtual bool GetValueAt(const ArgumentType& argument, ResultType& result) const;
 	virtual ResultType GetValueAt(const ArgumentType& argument) const;
 

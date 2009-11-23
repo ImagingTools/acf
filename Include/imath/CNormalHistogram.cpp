@@ -177,6 +177,38 @@ istd::CRange CNormalHistogram::GetResultValueRange(int /*dimensionIndex*/, int /
 }
 
 
+// reimplemented (imath::TIMathFunction)
+
+bool CNormalHistogram::GetValueAt(const ArgumentType& argument, ResultType& result) const
+{
+	int index = argument[0];
+	if ((index >= 0) && index < GetElementsCount()){
+		result[0] = GetElement(index);
+
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+CNormalHistogram::ResultType CNormalHistogram::GetValueAt(const ArgumentType& argument) const
+{
+	TVector<1> retVal;
+
+	int index = argument[0];
+	if ((index >= 0) && index < GetElementsCount()){
+		retVal[0] = GetElement(index);
+	}
+	else{
+		retVal[0] = 0;
+	}
+
+	return retVal;
+}
+
+
 // protected methods
 
 void CNormalHistogram::CalcElementsSum() const

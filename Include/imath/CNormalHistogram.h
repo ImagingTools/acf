@@ -49,6 +49,10 @@ public:
 	virtual istd::CRange GetLogicalRange(int dimensionIndex) const;
 	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const;
 
+	// reimplemented (imath::TIMathFunction)
+	virtual bool GetValueAt(const ArgumentType& argument, ResultType& result) const;
+	virtual ResultType GetValueAt(const ArgumentType& argument) const;
+
 protected:
 	void CalcElementsSum() const;
 
