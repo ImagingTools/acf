@@ -7,8 +7,6 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "imod/CModelBase.h"
-
 
 namespace iprm
 {
@@ -185,8 +183,6 @@ void CParamsSet::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int up
 
 void CParamsSet::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	imod::CModelBase* myModel = dynamic_cast<imod::CModelBase*>(&m_parent);
-
 	m_parent.EndChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
 }
 

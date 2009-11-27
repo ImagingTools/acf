@@ -3,6 +3,8 @@
 
 #include "istd/TChangeNotifier.h"
 
+#include "imod/IModel.h"
+
 #include "iprm/IParamsSet.h"
 
 
@@ -90,11 +92,19 @@ bool CParamsManagerComp::InsertSet(int index)
 
 	istd::CChangeNotifier notifier(this, CF_SET_INSERTED);
 
+	istd::CString defaultSetName = m_defaultSetNameCompPtr.IsValid() ? *m_defaultSetNameCompPtr: "unnamed";
+
 	if (index >= 0){
-		m_paramSets.InsertElementAt(index - fixedParamsCount, newParamsSetPtr);
+		int insertIndex = index - fixedParamsCount;
+
+		m_paramSets.InsertElementAt(insertIndex, newParamsSetPtr);
+
+		m_names.insert(m_names.begin() + insertIndex, defaultSetName);
 	}
 	else{
 		m_paramSets.PushBack(newParamsSetPtr);
+
+		m_names.push_back(defaultSetName);
 	}
 
 	return true;
@@ -109,11 +119,21 @@ bool CParamsManagerComp::RemoveSet(int index)
 		return false;
 	}
 
-	istd::CChangeNotifier notifier(this, CF_SET_REMOVED);
+	istd::CChangeNotifier notifier(this, CF_SET_REMOVED | CF_SELECTION_CHANGED);
+	
+	int removeIndex = index - fixedParamsCount;
 
-	m_paramSets.RemoveAt(index - fixedParamsCount);
+	imod::IModel* paramsSetModelPtr = dynamic_cast<imod::IModel*>(m_paramSets.GetAt(removeIndex));
+	if (paramsSetModelPtr != NULL){
+		paramsSetModelPtr->DetachAllObservers();
+	}
 
-	return false;
+	m_paramSets.RemoveAt(removeIndex);
+	m_names.erase(m_names.begin() + removeIndex);
+
+	m_selectedIndex = index - 1;
+
+	return true;
 }
 
 
