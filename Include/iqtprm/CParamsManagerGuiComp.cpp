@@ -205,6 +205,8 @@ void CParamsManagerGuiComp::UpdateParamsView(int selectedIndex)
 	}
 
 	ParamsFrame->setVisible(paramsFrameVisible);
+
+	RemoveButton->setEnabled(selectedIndex >= 0);
 }
 
 
