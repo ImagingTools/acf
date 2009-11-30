@@ -22,6 +22,7 @@
     <file alias="Clear" >Resources/Icons/edit-clear.png</file>
     <file alias="RotateLeft.svg" >Resources/Icons/RotateLeft.svg</file>
     <file alias="RotateRight.svg" >Resources/Icons/RotateRight.svg</file>
+    <file alias="Settings.svg" >Resources/Icons/Settings.svg</file>
     <file alias="About" >Resources/Icons/info_128.png</file>
     <file alias="Snap" >Resources/Icons/camera_128.png</file>
     <file alias="Add" >Resources/Icons/add_128.png</file>
