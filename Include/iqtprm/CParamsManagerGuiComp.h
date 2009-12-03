@@ -31,12 +31,6 @@ public:
 		I_ASSIGN(m_allowAddRemoveAttrPtr, "AllowAddRemove", "If it is false, 'Add' and 'Remove' buttons will be always hidden", true, true)
 	I_END_COMPONENT
 
-	enum ChangeFlags
-	{
-		CF_PARAMS_ADD = 0x40,
-		CF_PARAMS_REMOVE = 0x80,
-	};
-
 	CParamsManagerGuiComp();
 
 	// reimplemented (imod::IModelEditor)
