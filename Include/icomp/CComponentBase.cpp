@@ -60,18 +60,6 @@ const IComponentContext* CComponentBase::GetComponentContext() const
 }
 
 
-void CComponentBase::OnComponentCreated()
-{
-	I_ASSERT(m_contextPtr != NULL);
-}
-
-
-void CComponentBase::OnComponentDestroyed()
-{
-	I_ASSERT(m_contextPtr != NULL);
-}
-
-
 void CComponentBase::SetComponentContext(
 			const icomp::IComponentContext* contextPtr,
 			const IComponent* parentPtr,
@@ -114,6 +102,22 @@ const icomp::IComponentStaticInfo& CComponentBase::InitStaticInfo(CComponentBase
 	static CPackageStaticInfo emptyInfo;
 
 	return emptyInfo;
+}
+
+
+// protected methods
+
+// reimplemented (icomp::IComponent)
+
+void CComponentBase::OnComponentCreated()
+{
+	I_ASSERT(m_contextPtr != NULL);
+}
+
+
+void CComponentBase::OnComponentDestroyed()
+{
+	I_ASSERT(m_contextPtr != NULL);
 }
 
 

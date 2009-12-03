@@ -123,35 +123,6 @@ void CCompositeComponent::SetComponentContext(
 }
 
 
-void CCompositeComponent::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	m_blockCreating = false;
-
-	EnsureAutoInitComponentsCreated();
-}
-
-
-void CCompositeComponent::OnComponentDestroyed()
-{
-	m_blockCreating = true;
-
-	for (		ComponentMap::iterator iter = m_componentMap.begin();
-				iter != m_componentMap.end();
-				++iter){
-		ComponentInfo& info = iter->second;
-		if (info.componentPtr.IsValid()){
-			info.componentPtr->SetComponentContext(NULL, NULL, false);
-
-			info.isInitialized = false;
-		}
-	}
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId) const
 {
 	if (m_blockCreating){
@@ -310,6 +281,37 @@ bool CCompositeComponent::EnsureAutoInitComponentsCreated() const
 	}
 
 	return m_autoInitComponentIds.empty();
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CCompositeComponent::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_blockCreating = false;
+
+	EnsureAutoInitComponentsCreated();
+}
+
+
+void CCompositeComponent::OnComponentDestroyed()
+{
+	m_blockCreating = true;
+
+	for (		ComponentMap::iterator iter = m_componentMap.begin();
+				iter != m_componentMap.end();
+				++iter){
+		ComponentInfo& info = iter->second;
+		if (info.componentPtr.IsValid()){
+			info.componentPtr->SetComponentContext(NULL, NULL, false);
+
+			info.isInitialized = false;
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

@@ -45,8 +45,6 @@ public:
 				const icomp::IComponentContext* contextPtr,
 				const IComponent* parentPtr,
 				bool isParentOwner);
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
@@ -61,6 +59,10 @@ protected:
 		Component is active between \c OnComponentCreated and \c OnComponentDestroyed.
 	*/
 	bool IsComponentActive() const;
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private:
 	const IComponentContext* m_contextPtr;

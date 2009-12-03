@@ -46,8 +46,6 @@ public:
 				const icomp::IComponentContext* contextPtr,
 				const IComponent* parentPtr,
 				bool isParentOwner);
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
@@ -71,6 +69,10 @@ protected:
 				bool isOwned) const;
 
 	bool EnsureAutoInitComponentsCreated() const;
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private:
 	struct ComponentInfo

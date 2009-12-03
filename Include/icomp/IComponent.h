@@ -57,18 +57,6 @@ public:
 				bool isParentOwner) = 0;
 
 	/**
-		Called after component is created.
-		This is main method used to construct component object.
-		Between calling of OnComponentCreated() and OnComponentDestroyed() component context is always valid.
-	*/
-	virtual void OnComponentCreated() = 0;
-	/**
-		Called before component is destroyed.
-		This is main method used to destruct component object.
-	*/
-	virtual void OnComponentDestroyed() = 0;
-
-	/**
 		Get access to subcomponent using its ID.
 	*/
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
@@ -88,6 +76,19 @@ public:
 		Called if subcomponent is removed from memory.
 	*/
 	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr) = 0;
+
+protected:
+	/**
+		Called after component is created.
+		This is main method used to construct component object.
+		Between calling of OnComponentCreated() and OnComponentDestroyed() component context is always valid.
+	*/
+	virtual void OnComponentCreated() = 0;
+	/**
+		Called before component is destroyed.
+		This is main method used to destruct component object.
+	*/
+	virtual void OnComponentDestroyed() = 0;
 };
 
 
