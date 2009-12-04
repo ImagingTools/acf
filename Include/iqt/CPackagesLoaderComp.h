@@ -58,10 +58,6 @@ public:
 		I_ASSIGN(m_configFilePathCompPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "ConfigFilePath")
 	I_END_COMPONENT
 
-	bool RegisterPackageFile(const istd::CString& file);
-	bool RegisterPackagesDir(const istd::CString& subDir);
-	bool LoadConfigFile(const istd::CString& configFile);
-
 	// reimplemented (icomp::IRegistryLoader)
 	virtual bool ConfigureEnvironment(const istd::CString& configFilePath = istd::CString());
 	virtual istd::CString GetConfigFilePath() const;
@@ -91,6 +87,10 @@ protected:
 	private:
 		CPackagesLoaderComp& m_parent;
 	};
+
+	bool RegisterPackageFile(const istd::CString& file);
+	bool RegisterPackagesDir(const istd::CString& subDir);
+	bool LoadConfigFile(const istd::CString& configFile, bool isRoot);
 
 	CDllFunctionsProvider& GetProviderRef(const QFileInfo& fileInfo);
 

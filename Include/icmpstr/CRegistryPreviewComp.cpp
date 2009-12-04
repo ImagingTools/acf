@@ -78,7 +78,7 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		return false;
 	}
 
-	iser::CXmlFileWriteArchive archive(m_tempFileName.toStdString());
+	iser::CXmlFileWriteArchive archive(m_tempFileName.toStdString(), m_versionInfoCompPtr.GetPtr());
 
 	if (!(const_cast<icomp::IRegistry&>(registry)).Serialize(archive)){
 		return false;

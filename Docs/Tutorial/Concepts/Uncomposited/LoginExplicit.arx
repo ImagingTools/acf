@@ -139,7 +139,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../../Docs/Images/AcfSplashScreen.png
+                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
               </Value>
             </Data>
           </AttributeInfo>

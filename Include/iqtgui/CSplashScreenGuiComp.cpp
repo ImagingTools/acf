@@ -1,6 +1,9 @@
 #include "iqtgui/CSplashScreenGuiComp.h"
 
 
+#include "iqt/CFileSystem.h"
+
+
 namespace iqtgui
 {
 
@@ -89,8 +92,9 @@ void CSplashScreenGuiComp::OnGuiCreated()
 
 	QSplashScreen* splashScreenPtr = GetQtWidget();
 	if (m_imagePathAttrPtr.IsValid() && (splashScreenPtr != NULL)){
-		QPixmap image(iqt::GetQString(*m_imagePathAttrPtr));
-		splashScreenPtr->setPixmap(image);
+		QString imagePath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(*m_imagePathAttrPtr));
+
+		splashScreenPtr->setPixmap(QPixmap(imagePath));
 	}
 }
 
