@@ -429,6 +429,8 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 		}
 	}
 
+	OnViewsCountChanged();
+
 	OnRetranslate();
 }
 

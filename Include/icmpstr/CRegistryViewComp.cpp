@@ -64,8 +64,8 @@ CRegistryViewComp::CRegistryViewComp()
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
-	m_registryMenu.InsertChild(&m_addNoteCommand);
-	m_registryMenu.InsertChild(&m_removeNoteCommand);
+//	m_registryMenu.InsertChild(&m_addNoteCommand);
+//	m_registryMenu.InsertChild(&m_removeNoteCommand);
 	m_registryCommand.InsertChild(&m_registryMenu);
 }
 

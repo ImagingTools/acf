@@ -40,7 +40,7 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_fullScreenCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_showToolBarsCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_ONOFF),
 	m_copyPathToClippboardCommand("", 100, idoc::ICommand::CF_GLOBAL_MENU),
-	m_settingsCommand("", 200, idoc::ICommand::CF_GLOBAL_MENU)
+	m_settingsCommand("", 200, idoc::ICommand::CF_GLOBAL_MENU | idoc::ICommand::CF_TOOLBAR)
 {
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
@@ -600,6 +600,8 @@ void CMainWindowGuiComp::OnGuiCreated()
 
 	if (m_settingsGuiCompPtr.IsValid()){
 		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, mainWindowPtr)); 
+		m_settingsDialogPtr->setWindowIcon(QIcon(":/Icons/Settings.svg"));
+		m_settingsDialogPtr->setWindowTitle(tr("Settings"));
 	}
 
 	if (m_aboutGuiCompPtr.IsValid()){
@@ -659,7 +661,7 @@ void CMainWindowGuiComp::OnRetranslate()
 
 	// Tools commands
 	m_copyPathToClippboardCommand.SetVisuals(tr("&Copy Document Path"), tr("Copy Path"), tr("Copy current document path to system clippboard"));
-	m_settingsCommand.SetVisuals(tr("&Settings"), tr("Settings"), tr("Show global application setting"));
+	m_settingsCommand.SetVisuals(tr("&Settings"), tr("Settings"), tr("Show global application settings"), QIcon(":/Icons/Settings.svg"));
 
 	// Help commands
 	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), QIcon(":/Icons/About"));
