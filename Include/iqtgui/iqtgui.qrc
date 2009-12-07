@@ -43,10 +43,10 @@
     <file alias="Wizard" >Resources/Icons/wizard_128.png</file>
     <file alias="Internet" >Resources/Icons/world_128.png</file>
     <file alias="Edit" >Resources/Icons/write_128.png</file>
-    <file alias="StateUnknown" >Resources/Icons/StateUnknown.png</file>
-    <file alias="StateInvalid" >Resources/Icons/StateInvalid.png</file>
-    <file alias="StateWarning" >Resources/Icons/StateWarning.png</file>
-    <file alias="StateOk" >Resources/Icons/StateOk.png</file>
+    <file alias="StateUnknown.svg" >Resources/Icons/StateUnknown.svg</file>
+    <file alias="StateOk.svg" >Resources/Icons/StateOk.svg</file>
+    <file alias="StateWarning.svg" >Resources/Icons/StateWarning.svg</file>
+    <file alias="StateInvalid.svg" >Resources/Icons/StateInvalid.svg</file>
   </qresource>
   <qresource prefix="Style" >
     <file>Resources/Style/AcfStyle.ass</file>
