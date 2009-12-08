@@ -220,10 +220,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CInterfaceManipBase.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CPackageStaticInfo.cpp"
 				>
 			</File>
@@ -369,6 +365,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TAttribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TAttributeMember.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TAttributeStaticInfo.h"
 				>
 			</File>
@@ -430,14 +434,6 @@
 			</File>
 			<File
 				RelativePath="..\TSimComponentWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TAttribute.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TAttributeMember.h"
 				>
 			</File>
 		</Filter>

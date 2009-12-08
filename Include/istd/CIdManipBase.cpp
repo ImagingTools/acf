@@ -1,13 +1,13 @@
-#include "icomp/CInterfaceManipBase.h"
+#include "istd/CIdManipBase.h"
 
 
-namespace icomp
+namespace istd
 {
 
 
 // static methods
 
-bool CInterfaceManipBase::SplitId(const std::string& complexId, std::string& baseId, std::string& subId)
+bool CIdManipBase::SplitId(const std::string& complexId, std::string& baseId, std::string& subId)
 {
 	std::string::size_type separatorPos = complexId.find('/');
 	if (separatorPos != std::string::npos){
@@ -25,7 +25,7 @@ bool CInterfaceManipBase::SplitId(const std::string& complexId, std::string& bas
 }
 
 
-std::string CInterfaceManipBase::JoinId(const std::string& baseId, const std::string& subId)
+std::string CIdManipBase::JoinId(const std::string& baseId, const std::string& subId)
 {
 	if (!subId.empty()){
 		return baseId + "/" + subId;
@@ -36,6 +36,6 @@ std::string CInterfaceManipBase::JoinId(const std::string& baseId, const std::st
 }
 
 
-}//namespace icomp
+}//namespace istd
 
 

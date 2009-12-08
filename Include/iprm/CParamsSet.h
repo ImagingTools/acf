@@ -21,10 +21,23 @@ namespace iprm
 /**
 	Basic implementation of interface IParamsSet.
 */
-class CParamsSet: virtual public iprm::IParamsSet
+class CParamsSet: virtual public IParamsSet
 {
 public:
 	CParamsSet(const IParamsSet* slaveSetPtr = NULL);
+
+	/**
+		Get slave parameter set.
+		Slave parameter set will be used for non editable parameter query.
+		If no slave parameter set is defined, it returns NULL.
+	*/
+	const IParamsSet* GetSlaveSet() const;
+	/**
+		Set slave parameter set.
+		Slave parameter set will be used for non editable parameter query.
+		@param	slaveSetPtr		slave parameter set, or NULL, if no set is used.
+	*/
+	void SetSlaveSet(const IParamsSet* slaveSetPtr);
 
 	virtual bool SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr);
 
@@ -69,6 +82,18 @@ private:
 
 
 // inline methods
+
+inline const IParamsSet* CParamsSet::GetSlaveSet() const
+{
+	return m_slaveSetPtr;
+}
+
+
+inline void CParamsSet::SetSlaveSet(const IParamsSet* slaveSetPtr)
+{
+	m_slaveSetPtr = slaveSetPtr;
+}
+
 
 // protected methods
 

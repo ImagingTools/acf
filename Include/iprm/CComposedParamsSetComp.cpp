@@ -13,10 +13,23 @@ namespace iprm
 
 const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::string& id) const
 {
+	std::string baseId;
+	std::string subId;
+	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
+
 	const ParamsMap& paramsMap = GetParamsMap();
-	ParamsMap::const_iterator iter = paramsMap.find(id);
+	ParamsMap::const_iterator iter = paramsMap.find(baseId);
 	if (iter != paramsMap.end()){
-		return iter->second;
+		const iser::ISerializable* paramPtr = iter->second;
+		if (isSubelement){
+			const IParamsSet* subSetPtr = dynamic_cast<const IParamsSet*>(paramPtr);
+			if (subSetPtr != NULL){
+				return subSetPtr->GetParameter(subId);
+			}
+		}
+		else{
+			return paramPtr;
+		}
 	}
 
 	int slavesCount = m_slaveParamsCompPtr.GetCount();
@@ -36,10 +49,23 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::strin
 
 iser::ISerializable* CComposedParamsSetComp::GetEditableParameter(const std::string& id)
 {
+	std::string baseId;
+	std::string subId;
+	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
+
 	ParamsMap& paramsMap = GetParamsMapRef();
-	ParamsMap::iterator iter = paramsMap.find(id);
+	ParamsMap::iterator iter = paramsMap.find(baseId);
 	if (iter != paramsMap.end()){
-		return iter->second;
+		iser::ISerializable* paramPtr = iter->second;
+		if (isSubelement){
+			IParamsSet* subSetPtr = dynamic_cast<IParamsSet*>(paramPtr);
+			if (subSetPtr != NULL){
+				return subSetPtr->GetEditableParameter(subId);
+			}
+		}
+		else{
+			return paramPtr;
+		}
 	}
 
 	return NULL;

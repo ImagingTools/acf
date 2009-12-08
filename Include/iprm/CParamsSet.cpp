@@ -13,7 +13,7 @@ namespace iprm
 
 
 CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
-	:m_slaveSetPtr(slaveSetPtr),
+:	m_slaveSetPtr(slaveSetPtr),
 	m_paramsObserver(*this)
 {
 }
