@@ -47,6 +47,10 @@
     <file alias="StateOk.svg" >Resources/Icons/StateOk.svg</file>
     <file alias="StateWarning.svg" >Resources/Icons/StateWarning.svg</file>
     <file alias="StateInvalid.svg" >Resources/Icons/StateInvalid.svg</file>
+    <file alias="Play" >Resources/Icons/Play.png</file>
+    <file alias="Pause" >Resources/Icons/Pause.png</file>
+    <file alias="Restart" >Resources/Icons/Restart.png</file>
+    <file alias="Reset" >Resources/Icons/Reset.png</file>
   </qresource>
   <qresource prefix="Style" >
     <file>Resources/Style/AcfStyle.ass</file>
