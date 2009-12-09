@@ -31,7 +31,7 @@ void CDefaultServicesProvider::RegisterServices()
 	istd::CStaticServicesProvider::RegisterService<icomp::IRegistryLoaderProvider>(&registryLoaderProvider);
 
 	static iqt::CSystemEnvironment systemEnvironment;
-	istd::CStaticServicesProvider::RegisterService<iqt::CSystemEnvironment>(&systemEnvironment);
+	istd::CStaticServicesProvider::RegisterService<isys::ISystemEnvironment>(&systemEnvironment);
 
 	static istd::TSingleFactory<isys::ITimer, iqt::CTimer> timerFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&timerFactory);

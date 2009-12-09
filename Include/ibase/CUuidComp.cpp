@@ -23,6 +23,15 @@ void CUuidComp::OnComponentCreated()
 }
 
 
+// reimplemented (iser::ISerializable)
+
+bool CUuidComp::Serialize(iser::IArchive& archive)
+{
+	return SerializeName(archive);
+}
+
+
+
 } // namespace ibase
 
 

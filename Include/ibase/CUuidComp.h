@@ -14,7 +14,10 @@ namespace ibase
 /**
 	Component for automatic creation of the Universally Unique Identifier (UUID)
 */
-class CUuidComp: public icomp::CComponentBase, public ibase::CNamed
+class CUuidComp:
+				public icomp::CComponentBase,
+				public ibase::CNamed,
+				virtual public iser::ISerializable
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -26,6 +29,9 @@ public:
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
+
+	// reimplemented (iser::ISerializable)
+	virtual bool Serialize(iser::IArchive& archive);
 };
 
 
