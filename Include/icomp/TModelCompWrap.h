@@ -14,7 +14,10 @@ namespace icomp
 
 
 /**
+	Makes component and model from some class implementing interface \c istd::IChangeable.
 	This model wrapper extends functionality of \c icomp::TModelWrap for components.
+
+	\ingroup ComponentConcept
 */
 template <class Base>
 class TModelCompWrap: public imod::TModelWrap<Base>

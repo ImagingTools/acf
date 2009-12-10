@@ -13,6 +13,8 @@ namespace icomp
 /**
 	Simulation wrapper of component.
 	It allows to use components directly from static linked libraries, without component framework.
+
+	\ingroup ComponentConcept
 */
 template <class Base>
 class TSimComponentWrap: public TComponentWrap<Base>, public CSimComponentContextBase

@@ -2,11 +2,6 @@
 #define i2d_CQuadrangle_included
 
 
-#include "istd/CRange.h"
-#include "istd/CIndex2d.h"
-
-#include "iser/ISerializable.h"
-
 #include "i2d/IObject2d.h"
 #include "i2d/CLine2d.h"
 #include "i2d/CRectangle.h"
@@ -16,29 +11,29 @@ namespace i2d
 {
 
 /**
-	Definition for convexes quadrangle object.
+	Definition of convexes quadrangle object.
 */
 class CQuadrangle: virtual public IObject2d
 {
-public :
+public:
 	CQuadrangle();
 	CQuadrangle(const CQuadrangle& quadrangle);
-	CQuadrangle(const i2d::CLine2d& firstDiagonal, const i2d::CLine2d& secondDiagonal);
+	CQuadrangle(const CLine2d& firstDiagonal, const CLine2d& secondDiagonal);
 
 	CQuadrangle& operator = (const CQuadrangle& quadrangle);
 
-	bool operator == (const CQuadrangle& quadrangle) const;
-	bool operator != (const CQuadrangle& quadrangle) const;
+	bool operator==(const CQuadrangle& quadrangle) const;
+	bool operator!=(const CQuadrangle& quadrangle) const;
 
 	bool IsQuadrangleValid() const;
 	bool IsQuadrangleEmpty() const;
 	CRectangle GetBoundingBox() const;
 
-	const i2d::CLine2d& GetFirstDiagonal() const;
-	void SetFirstDiagonal(const i2d::CLine2d& firstDiagonal);
+	const CLine2d& GetFirstDiagonal() const;
+	void SetFirstDiagonal(const CLine2d& firstDiagonal);
 
-	const i2d::CLine2d& GetSecondDiagonal() const;
-	void SetSecondDiagonal(const i2d::CLine2d& secondDiagonal);
+	const CLine2d& GetSecondDiagonal() const;
+	void SetSecondDiagonal(const CLine2d& secondDiagonal);
 
 	// reimplemented (IObject2d)
 	virtual CVector2d GetCenter() const;
@@ -48,8 +43,8 @@ public :
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	i2d::CLine2d m_firstDiagonal;
-	i2d::CLine2d m_secondDiagonal;
+	CLine2d m_firstDiagonal;
+	CLine2d m_secondDiagonal;
 };
 
 

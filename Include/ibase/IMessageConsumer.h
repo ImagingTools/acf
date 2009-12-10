@@ -16,6 +16,8 @@ class IMessage;
 
 /**
 	Common interface for a message container consuming message objects.
+
+	\ingroup Main
 */
 class IMessageConsumer: virtual public istd::IPolymorphic
 {

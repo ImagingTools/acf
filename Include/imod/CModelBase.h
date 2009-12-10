@@ -18,8 +18,6 @@ namespace imod
 
 /**
 	Basic implementation of a model.
-
-	\ingroup ModelObserver
 */
 class CModelBase: virtual public imod::IModel
 {

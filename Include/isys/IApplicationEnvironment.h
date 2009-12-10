@@ -18,6 +18,8 @@ namespace isys
 
 /**
 	Interface for access of some system dependent features and infos.
+
+	\ingroup System
 */
 class IApplicationEnvironment: virtual public istd::IPolymorphic
 {

@@ -9,6 +9,10 @@ namespace i2d
 {	
 
 
+/**
+	Definition of graphical circle object.
+	This object is stored using center position and radius.
+*/
 class CCircle: public CPosition2d
 {
 public:

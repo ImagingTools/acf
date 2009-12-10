@@ -13,6 +13,7 @@
 	\li iser
 
 	\ingroup Main
+	\ingroup ComponentConcept
 */
 namespace icomp
 {

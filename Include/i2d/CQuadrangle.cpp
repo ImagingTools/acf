@@ -25,7 +25,7 @@ CQuadrangle::CQuadrangle(const CQuadrangle& quadrangle)
 }
 
 
-CQuadrangle::CQuadrangle(const i2d::CLine2d& firstDiagonal, const i2d::CLine2d& secondDiagonal)
+CQuadrangle::CQuadrangle(const CLine2d& firstDiagonal, const CLine2d& secondDiagonal)
 :	m_firstDiagonal(firstDiagonal),
 	m_secondDiagonal(secondDiagonal)
 {
@@ -73,13 +73,13 @@ CRectangle CQuadrangle::GetBoundingBox() const
 }
 
 
-const i2d::CLine2d& CQuadrangle::GetFirstDiagonal() const
+const CLine2d& CQuadrangle::GetFirstDiagonal() const
 {
 	return m_firstDiagonal;
 }
 
 
-void CQuadrangle::SetFirstDiagonal(const i2d::CLine2d& firstDiagonal)
+void CQuadrangle::SetFirstDiagonal(const CLine2d& firstDiagonal)
 {
 	if (m_firstDiagonal != firstDiagonal){
 		istd::CChangeNotifier changePtr(this);
@@ -89,13 +89,13 @@ void CQuadrangle::SetFirstDiagonal(const i2d::CLine2d& firstDiagonal)
 }
 
 
-const i2d::CLine2d& CQuadrangle::GetSecondDiagonal() const
+const CLine2d& CQuadrangle::GetSecondDiagonal() const
 {
 	return m_secondDiagonal;
 }
 
 
-void CQuadrangle::SetSecondDiagonal(const i2d::CLine2d& secondDiagonal)
+void CQuadrangle::SetSecondDiagonal(const CLine2d& secondDiagonal)
 {
 	if (m_secondDiagonal != secondDiagonal){
 		istd::CChangeNotifier changePtr(this);

@@ -10,7 +10,7 @@ namespace iproc
 
 
 /**
-	Interface for all synchrone and assynchrone processors.
+	Interface for all synchrone and assynchrone processors with <em>"push data"</em> model.
 	Synchrone processors are blocking and can process single task. Thats why is not necessary to use task ID.
 	Synchrone processing is provide by method DoProcessing.
 	Assynchrone processors can process many tasks parallel. Each task is identified using its ID.

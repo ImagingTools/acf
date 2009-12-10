@@ -12,7 +12,7 @@ void CHtmlHelpViewerComp::ShowHelp(const istd::CString& contextText, const istd:
 	QTextBrowser* editorPtr = GetQtWidget();
 	if (		(editorPtr != NULL) &&
 				m_helpFileProviderCompPtr.IsValid() &&
-				m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr)){
+				(m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr) > 0)){
 		istd::CString filePath = m_helpFileProviderCompPtr->GetHelpFilePath(contextText, contextObjectPtr);
 
 		QUrl url = QUrl::fromLocalFile(iqt::GetQString(filePath));

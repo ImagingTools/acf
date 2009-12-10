@@ -14,7 +14,7 @@ namespace isys
 /**
 	Interface for date and time representation.
 
-	\ingroup Main
+	\ingroup System
 */
 class IDateTime: virtual public iser::ISerializable
 {

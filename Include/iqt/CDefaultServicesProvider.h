@@ -10,8 +10,10 @@ namespace iqt
 
 
 /**
-	Default services provider for qt based services
- */
+	Default services provider for qt based services.
+
+	\ingroup System
+*/
 class CDefaultServicesProvider
 {
 public:

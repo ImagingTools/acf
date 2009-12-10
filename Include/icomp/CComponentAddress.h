@@ -12,6 +12,12 @@ namespace icomp
 {
 
 
+/**
+	Represents global address of component.
+	The component address contains of global package ID and component ID inside this package.
+
+	\ingroup ComponentConcept
+*/
 class CComponentAddress: public iser::ISerializable
 {
 public:

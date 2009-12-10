@@ -17,7 +17,7 @@ namespace isys
 /**
 	Interface for set of functions accessed by its ID.
 	Typically it is used to access dynamic loaded libraries.
- */
+*/
 class IFunctionsProvider: virtual public istd::IPolymorphic
 {
 public:

@@ -18,7 +18,9 @@ namespace istd
 
 /**
 	Manage list of global services.
- */
+
+	\ingroup System
+*/
 class CStaticServicesProvider
 {
 public:
@@ -96,6 +98,11 @@ bool CStaticServicesProvider::RegisterFactory(const TIFactory<Interface>* factor
 
 // public template functions
 
+/**
+	Allow to access some global service from anywhere.
+
+	\ingroup System
+*/
 template <typename Service>
 Service* GetService()
 {
@@ -105,6 +112,11 @@ Service* GetService()
 }
 
 
+/**
+	Allow to create a new service instance from anywhere.
+
+	\ingroup System
+*/
 template <typename Service>
 TSmartPtr<Service> CreateService()
 {

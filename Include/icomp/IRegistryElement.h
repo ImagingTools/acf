@@ -22,6 +22,8 @@ class IComponentStaticInfo;
 /**
 	Represents element of registry describing component parameters.
 	Registry reflects state of registry files.
+
+	\ingroup ComponentConcept
 */
 class IRegistryElement: virtual public iser::ISerializable
 {

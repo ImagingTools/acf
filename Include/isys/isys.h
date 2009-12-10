@@ -5,6 +5,8 @@
 /**
 	\namespace isys
 	\brief This namespace contains system implementations.
+
+	\ingroup System
 */
 namespace isys
 {

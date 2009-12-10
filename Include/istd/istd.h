@@ -157,10 +157,10 @@ static const double I_BIG_EPSILON = 1.0e-8;
 /**
 	Send debug information to predefined output.
 	\param	level	one of:
-		\li	istd::InfoLevel	minimal message priority, info only.
-		\li	istd::WarningLevel	warning message priority, should be used for normally but untipical state.
-		\li	istd::ErrorLevel	error message priority, should not happened but e.g. wrong using of parameters can cause it.
-		\li	istd::CriticalLevel	maximal message priority, for application states which should never occured.
+	\li	istd::InfoLevel	minimal message priority, info only.
+	\li	istd::WarningLevel	warning message priority, should be used for normally but untipical state.
+	\li	istd::ErrorLevel	error message priority, should not happened but e.g. wrong using of parameters can cause it.
+	\li	istd::CriticalLevel	maximal message priority, for application states which should never occured.
 */
 #define I_TRACE(level, groupId, message) \
 if (istd::CheckTraceEnabled(level, groupId)){\

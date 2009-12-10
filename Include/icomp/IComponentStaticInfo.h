@@ -23,6 +23,8 @@ namespace icomp
 	This interface provide static information about component meta info.
 	Components can implements interfaces and contain attributes and subcomponents.
 	Attributes have values specified in IComponentContext object.
+
+	\ingroup ComponentConcept
 */
 class IComponentStaticInfo: virtual public istd::IPolymorphic
 {

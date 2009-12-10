@@ -425,10 +425,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TSelectableAttribute.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TSimComponentsFactory.h"
 				>
 			</File>

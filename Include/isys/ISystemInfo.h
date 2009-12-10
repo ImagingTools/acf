@@ -17,6 +17,8 @@ namespace isys
 
 /**
 	Common interface to get the information about the system resources.
+
+	\ingroup System
 */
 class ISystemInfo: virtual public iser::ISerializable
 {

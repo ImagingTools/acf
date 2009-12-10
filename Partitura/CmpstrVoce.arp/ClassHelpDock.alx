@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          946
+          1253
         </Number>
         <Description>
           ACF
@@ -15,7 +15,18 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="17">
+  <PositionMap count="18">
+    <Element>
+      <ComponentName>
+        AcfHelpFileProvider
+      </ComponentName>
+      <X>
+        338
+      </X>
+      <X>
+        592
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         Application
@@ -76,7 +87,7 @@
         DoxygenHelpFileProvider
       </ComponentName>
       <X>
-        337
+        336
       </X>
       <X>
         462

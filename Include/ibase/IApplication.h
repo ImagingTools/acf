@@ -12,6 +12,9 @@ namespace ibase
 
 /**
 	Main entry point of component-based application.
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 class IApplication: virtual public istd::IPolymorphic
 {

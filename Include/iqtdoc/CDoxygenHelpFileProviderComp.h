@@ -32,7 +32,7 @@ public:
 
 protected:
 	virtual istd::CClassInfo CalcClassInfo(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
-	istd::CString CalcFilePath(const istd::CClassInfo& classInfo) const;
+	QString CalcFilePath(const istd::CClassInfo& classInfo) const;
 
 private:
 	I_ATTR(istd::CString, m_doxygenDirectoryAttrPtr);

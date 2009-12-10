@@ -28,6 +28,9 @@ namespace icomp
 /**
 	Base class for component implementation.
 	This class is compatible with the macros defined in this file \c (CComponentBase.h).
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 class CComponentBase: virtual public IComponent
 {
@@ -83,8 +86,12 @@ inline bool CComponentBase::IsComponentActive() const
 
 
 /**
-	Begin of general ACF component declaration.
-	It should be placed in class declaration as first line.
+	Begin of general ACF component definition section.
+	It should be placed in class declaration before first method is implemented.
+	Please note, the component definition section need type \c BaseClass to be declared.
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 #define I_BEGIN_COMPONENT(ComponentType)\
 	static const icomp::IComponentStaticInfo& InitStaticInfo(ComponentType* componentPtr)\
@@ -98,8 +105,10 @@ inline bool CComponentBase::IsComponentActive() const
 		BaseClass::InitStaticInfo(componentPtr);
 
 /**
-	Begin of ACF component declaration for non-instantiable components.
+	Begin of ACF component declaration for non-instantiable definition section.
 	It should be placed in class declaration in 'public' block.
+
+	\ingroup ComponentConcept
 */
 #define I_BEGIN_BASE_COMPONENT(ComponentType)\
 	static const icomp::IComponentStaticInfo& InitStaticInfo(ComponentType* componentPtr)\
@@ -114,15 +123,21 @@ inline bool CComponentBase::IsComponentActive() const
 		BaseClass::InitStaticInfo(componentPtr);
 
 /**
-	End of general ACF component declaration.
+	End of general ACF component definition section.
 	It should be placed in class declaration as first line.
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 #define I_END_COMPONENT\
 		return staticInfo;\
 	}
 
 /**
-	Declaration of supported interfaces.
+	Declaration of supported interfaces inside component definition section.
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 #define I_REGISTER_INTERFACE(InterfaceType)\
 	static icomp::TInterfaceRegistrator<InterfaceType> AUTO_VARNAME(staticRegistrator)(staticInfo);
@@ -137,6 +152,9 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare simple single attribute member.
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 #define I_ATTR(attrType, member)\
 	I_USER_ATTR(icomp::TAttribute< attrType >, member)
@@ -151,12 +169,16 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare simple multiple attribute member.
+	\ingroup ComponentConcept
 */
 #define I_MULTIATTR(attrType, member)\
 	I_USER_MULTIATTR(icomp::TMultiAttribute<attrType>, member)
 
 /**
 	Declare single reference to another component.
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 #define I_REF(interfaceType, member)\
 	typedef icomp::TReferenceMember<interfaceType> member##_Type;\
@@ -182,6 +204,8 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare multiple reference to another component.
+
+	\ingroup ComponentConcept
 */
 #define I_MULTIREF(interfaceType, member)\
 	typedef icomp::TMultiReferenceMember<interfaceType> member##_Type;\
@@ -190,6 +214,8 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare single factory of components.
+
+	\ingroup ComponentConcept
 */
 #define I_FACT(interfaceType, member)\
 	typedef icomp::TFactoryMember<interfaceType> member##_Type;\
@@ -198,6 +224,8 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare multiple factory of components.
+
+	\ingroup ComponentConcept
 */
 #define I_MULTIFACT(interfaceType, member)\
 	typedef icomp::TMultiFactoryMember<interfaceType> member##_Type;\
@@ -215,6 +243,9 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Used to assign value for single parameter (attribute, reference or factory).
+
+	\ingroup Main
+	\ingroup ComponentConcept
 */
 #define I_ASSIGN(member, id, description, isObligatory, defaultValue)\
 	static member##_AttrType member##_Default(defaultValue);\
@@ -229,6 +260,8 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Used to assign value for multiply parameters (attributes, references or factories) with no default parameter.
+
+	\ingroup ComponentConcept
 */
 #define I_ASSIGN_MULTI_0(member, id, description, isObligatory)\
 	static member##_AttrType member##_Default(0, NULL);\
@@ -236,6 +269,8 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Used to assign value for multiply parameters (attributes, references or factories) with 1 default parameter.
+
+	\ingroup ComponentConcept
 */
 #define I_ASSIGN_MULTI_1(member, id, description, isObligatory, defaultValue1)\
 	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1};\

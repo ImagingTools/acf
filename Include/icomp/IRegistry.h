@@ -21,7 +21,10 @@ namespace icomp
 
 /**
 	Interface representing information stored in component registry.
+	Registry is model representating smallest component topology unit.
 	Registry can be imagined as representation of arx files.
+
+	\ingroup ComponentConcept
 */
 class IRegistry: virtual public iser::ISerializable
 {

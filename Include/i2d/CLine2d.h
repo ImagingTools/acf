@@ -16,6 +16,7 @@ class CRectangle;
 
 /**
 	Definition of a line in 2D-space.
+	Line is stored as the ordered set of two points.
 */
 class CLine2d: virtual public IObject2d
 {

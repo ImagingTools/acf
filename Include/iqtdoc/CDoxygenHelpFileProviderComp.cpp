@@ -6,6 +6,8 @@
 
 #include "istd/CClassInfo.h"
 
+#include "iqt/CFileSystem.h"
+
 
 namespace iqtdoc
 {
@@ -15,7 +17,7 @@ namespace iqtdoc
 
 double CDoxygenHelpFileProviderComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
-	QFileInfo fileInfo(iqt::GetQString(CalcFilePath(CalcClassInfo(contextText, contextObjectPtr))));
+	QFileInfo fileInfo(CalcFilePath(CalcClassInfo(contextText, contextObjectPtr)));
 
 	if (fileInfo.exists()){
 		return 1.0;
@@ -31,7 +33,7 @@ double CDoxygenHelpFileProviderComp::GetHelpQuality(const istd::CString& context
 
 istd::CString CDoxygenHelpFileProviderComp::GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
-	QFileInfo fileInfo(iqt::GetQString(CalcFilePath(CalcClassInfo(contextText, contextObjectPtr))));
+	QFileInfo fileInfo(CalcFilePath(CalcClassInfo(contextText, contextObjectPtr)));
 
 	if (fileInfo.exists()){
 		return iqt::GetCString(fileInfo.absoluteFilePath());
@@ -64,7 +66,7 @@ istd::CClassInfo CDoxygenHelpFileProviderComp::CalcClassInfo(const istd::CString
 }
 
 
-istd::CString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo& classInfo) const
+QString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo& classInfo) const
 {
 	istd::CString retVal = *m_doxygenDirectoryAttrPtr + "/class";
 
@@ -87,7 +89,7 @@ istd::CString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo&
 
 	retVal += ".html";
 
-	return retVal;
+	return iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(retVal));
 }
 
 

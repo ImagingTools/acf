@@ -19,6 +19,8 @@ class IComponentContext;
 
 /**
 	Main component interface.
+
+	\ingroup ComponentConcept
 */
 class IComponent: virtual public istd::IPolymorphic
 {

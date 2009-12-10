@@ -12,6 +12,11 @@ namespace isys
 {
 
 
+/**
+	Defines some file system dependent operations.
+
+	\ingroup System
+*/
 class IFileSystem: virtual public istd::IPolymorphic
 {
 public:

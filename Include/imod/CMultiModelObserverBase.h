@@ -15,8 +15,6 @@ namespace imod
 
 /**
 	Basic implementation of a multiple model observer.
-
-	\ingroup ModelObserver
 */
 class CMultiModelObserverBase: virtual public IObserver
 {

@@ -17,6 +17,8 @@ namespace ibase
 
 /**
 	This interface provides some information about the application.
+
+	\ingroup Main
 */
 class IApplicationInfo: public iser::IVersionInfo
 {

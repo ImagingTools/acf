@@ -15,7 +15,7 @@ namespace isys
 /**
 	Common interface for timer implementations.
 
-	\ingroup Main
+	\ingroup System
 */
 class ITimer: virtual public istd::IPolymorphic
 {

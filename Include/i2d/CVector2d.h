@@ -14,6 +14,9 @@ namespace i2d
 {
 
 
+/**
+	Definition of position or mathematical vector on 2D plane.
+*/
 class CVector2d: public imath::TVector<2>
 {
 public:

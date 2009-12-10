@@ -11,6 +11,11 @@ namespace i2d
 {	
 
 
+/**
+	Definition of graphical annulus object.
+	Annulus is area between two concentrical circles.
+	This object is stored using center position and two radii.
+*/
 class CAnnulus: public i2d::CPosition2d
 {
 public:

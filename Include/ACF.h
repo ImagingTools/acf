@@ -44,8 +44,20 @@ See \c Docs/Tutorial for tutorials.
 
 
 /**
-	\defgroup Windows Windows System
-	Realization of operating system specified tasks on Microsoft Windows.
+	\defgroup System Defines access to operating system dependent implementation
+	Many of system dependent interfaces will be registered on global level as services.
+	This interfaces can be accessed using global template functions istd::GetService() and istd::CreateService().
+
+	\ingroup ACF
+*/
+
+/**
+	\defgroup ComponentConcept Component concept
+	This concept allows to divide application into smaller modules.
+	At the implementation level you don't need to care on the application topology.
+	The topology will be described separatelly using \em .arx files and can be started using
+	runtime environment over ACF tool or compiled to C++ code using ARXC compiler.
+	Additionally you can use component simulation to use components as "normal" classes.
 
 	\ingroup ACF
 */

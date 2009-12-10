@@ -14,7 +14,7 @@ namespace iproc
 
 
 /**
-	Base interface for suppliers providing synchrone processing of single object.
+	Base interface for suppliers providing synchrone processing of single object with <em>"pull data" model</em>.
 	Derivated interfaces should provide access to intern stored produced object for specified object ID.
 	For example image supplier should provide method \c{const iimg::IBitmap* GetBitmap(const I_DWORD* objectIdPtr) const}.
 	The internal stored object should be created on demand.

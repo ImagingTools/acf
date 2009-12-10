@@ -10,6 +10,9 @@ namespace i2d
 {	
 
 
+/**
+	Definition of graphical point object.
+*/
 class CPosition2d: virtual public IObject2d
 {
 public:

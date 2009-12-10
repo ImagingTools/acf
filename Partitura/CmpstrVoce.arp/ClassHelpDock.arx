@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          946
+          1253
         </Number>
         <Description>
           ACF
@@ -15,7 +15,63 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
+    <Element>
+      <Id>
+        AcfHelpFileProvider
+      </Id>
+      <PackageId>
+        QtPck
+      </PackageId>
+      <ComponentId>
+        DoxygenHelpFileProvider
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              DoxygenDirectory
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                $(ACFDIR)/Docs/TechnicalDoc
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveProvider
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              HelpFileProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         ComponentHelpFileProvider
@@ -30,6 +86,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -83,6 +142,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -111,12 +173,15 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              HelpFileProvider
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                AcfHelpFileProvider
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -136,6 +201,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
@@ -211,6 +279,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>

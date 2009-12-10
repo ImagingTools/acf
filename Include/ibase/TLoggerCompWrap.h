@@ -83,6 +83,11 @@ void TLoggerCompWrap<Base>::DecorateMessage(
 }
 
 
+/**
+	Type defininig base class for simple components outputing log messages.
+
+	\ingroup Main
+*/
 typedef TLoggerCompWrap<icomp::CComponentBase> CLoggerComponentBase;
 
 

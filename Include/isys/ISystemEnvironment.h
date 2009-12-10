@@ -12,6 +12,7 @@ namespace isys
 /**
 	Interface to getting the information about the currently system configuration.
 
+	\ingroup System
 */
 class ISystemEnvironment: virtual public istd::IPolymorphic
 {

@@ -22,6 +22,8 @@ class IComponent;
 	Session context provides individual set of attributes generated from icomp::IRegistryElement objects.
 	For static components each component instance has own context object.
 	For dynamic components all components using the same factory have the same session context instance.
+
+	\ingroup ComponentConcept
 */
 class IComponentContext: virtual public istd::IPolymorphic
 {
