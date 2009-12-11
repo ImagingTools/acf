@@ -12,12 +12,19 @@ namespace imod
 
 
 /**
-	
+	Interface for model selection.	
 */
 class IModelSelection: virtual public istd::IChangeable
 {
 public:
+	/**
+		Get selected model.
+	*/
 	virtual imod::IModel* GetSelectedModel() const = 0;
+
+	/**
+		Set selected model.
+	*/
 	virtual void SetSelectedModel(imod::IModel* modelPtr) = 0;
 };
 

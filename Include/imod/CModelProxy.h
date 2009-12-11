@@ -16,6 +16,8 @@ namespace imod
 
 
 /**
+	Implementation of the model proxy.
+	This class can be used to switch model connections behind the proxy.
 */
 class CModelProxy: virtual public imod::IModel
 {
