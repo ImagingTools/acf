@@ -43,6 +43,11 @@ public:
 	virtual void RemoveBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
 	virtual istd::IChangeable* GetFrontObject(int offsetPos = 0, const std::string* typeIdPtr = NULL) const;
 	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL) const;
+	virtual void SelectObjects(
+				ObjectList& result,
+				bool doAppend = false,
+				int offsetPos = 0,
+				const std::string* typeIdPtr = NULL) const;
 	virtual istd::IChangeable* PopFrontObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
 	virtual istd::IChangeable* PopBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
 
@@ -59,10 +64,10 @@ private:
 	I_FACT(istd::IChangeable, m_objectFactoryFactPtr);
 	I_ATTR(int, m_maxReserveObjectsAttrPtr);
 
-	typedef std::list<istd::IChangeable*> ObjectList;
+	typedef std::list<istd::IChangeable*> ObjectQueue;
 
-	ObjectList m_objectsQueue;
-	ObjectList m_objectsReserve;
+	ObjectQueue m_objectsQueue;
+	ObjectQueue m_objectsReserve;
 };
 
 

@@ -47,7 +47,7 @@ istd::IChangeable* CObjectQueueComp::CreateFrontObject(int offsetPos, const std:
 		return NULL;
 	}
 	else{
-		ObjectList::iterator iter = m_objectsQueue.begin();
+		ObjectQueue::iterator iter = m_objectsQueue.begin();
 		while (offsetPos > 0){
 			if (iter == m_objectsQueue.end()){
 				return NULL;
@@ -91,7 +91,7 @@ istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const std::
 		return NULL;
 	}
 	else{
-		ObjectList::reverse_iterator iter = m_objectsQueue.rbegin();
+		ObjectQueue::reverse_iterator iter = m_objectsQueue.rbegin();
 		while (offsetPos > 0){
 			if (iter == m_objectsQueue.rend()){
 				return NULL;
@@ -128,7 +128,7 @@ istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const std::
 void CObjectQueueComp::RemoveFrontObject(int offsetPos, const std::string* typeIdPtr)
 {
 	if (typeIdPtr == NULL){
-		ObjectList::iterator iter = m_objectsQueue.begin();
+		ObjectQueue::iterator iter = m_objectsQueue.begin();
 		while (offsetPos > 0){
 			iter++;
 			offsetPos--;
@@ -152,7 +152,7 @@ void CObjectQueueComp::RemoveFrontObject(int offsetPos, const std::string* typeI
 void CObjectQueueComp::RemoveBackObject(int offsetPos, const std::string* typeIdPtr)
 {
 	if (typeIdPtr == NULL){
-		ObjectList::reverse_iterator iter = m_objectsQueue.rbegin();
+		ObjectQueue::reverse_iterator iter = m_objectsQueue.rbegin();
 		while (offsetPos > 0){
 			iter++;
 			offsetPos--;
@@ -176,7 +176,7 @@ void CObjectQueueComp::RemoveBackObject(int offsetPos, const std::string* typeId
 istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const std::string* typeIdPtr) const
 {
 	if (typeIdPtr == NULL){
-		ObjectList::const_iterator iter = m_objectsQueue.begin();
+		ObjectQueue::const_iterator iter = m_objectsQueue.begin();
 		while (offsetPos > 0){
 			iter++;
 			offsetPos--;
@@ -199,7 +199,7 @@ istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const std::st
 istd::IChangeable* CObjectQueueComp::GetBackObject(int offsetPos, const std::string* typeIdPtr) const
 {
 	if (typeIdPtr == NULL){
-		ObjectList::const_reverse_iterator iter = m_objectsQueue.rbegin();
+		ObjectQueue::const_reverse_iterator iter = m_objectsQueue.rbegin();
 		while (offsetPos > 0){
 			iter++;
 			offsetPos--;
@@ -219,10 +219,34 @@ istd::IChangeable* CObjectQueueComp::GetBackObject(int offsetPos, const std::str
 }
 
 
+void CObjectQueueComp::SelectObjects(
+			ObjectList& result,
+			bool doAppend,
+			int offsetPos,
+			const std::string* typeIdPtr) const
+{
+	if (!doAppend){
+		result.clear();
+	}
+
+	if (typeIdPtr == NULL){
+		for (		ObjectQueue::const_iterator iter = m_objectsQueue.begin();
+					(iter != m_objectsQueue.end());
+					++iter, --offsetPos){
+			if (offsetPos > 0){
+				continue;
+			}
+
+			result.push_back(*iter);
+		}
+	}
+}
+
+
 istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const std::string* typeIdPtr)
 {
 	if (typeIdPtr == NULL){
-		ObjectList::iterator iter = m_objectsQueue.begin();
+		ObjectQueue::iterator iter = m_objectsQueue.begin();
 		while (offsetPos > 0){
 			iter++;
 			offsetPos--;
@@ -247,7 +271,7 @@ istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const std::st
 istd::IChangeable* CObjectQueueComp::PopBackObject(int offsetPos, const std::string* typeIdPtr)
 {
 	if (typeIdPtr == NULL){
-		ObjectList::reverse_iterator iter = m_objectsQueue.rbegin();
+		ObjectQueue::reverse_iterator iter = m_objectsQueue.rbegin();
 		while (offsetPos > 0){
 			iter++;
 			offsetPos--;
@@ -282,7 +306,7 @@ bool CObjectQueueComp::Serialize(iser::IArchive& archive)
 		int objectsCount = int(m_objectsQueue.size());
 
 		retVal = retVal && archive.BeginMultiTag(queueTag, objectTag, objectsCount);
-		for (		ObjectList::const_iterator iter = m_objectsQueue.begin();
+		for (		ObjectQueue::const_iterator iter = m_objectsQueue.begin();
 					iter != m_objectsQueue.end();
 					++iter){
 			iser::ISerializable* serializableObjectPtr = dynamic_cast<iser::ISerializable*>(*iter);

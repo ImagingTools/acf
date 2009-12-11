@@ -4,6 +4,7 @@
 
 // STL includes
 #include <string>
+#include <vector>
 
 #include "istd/IChangeable.h"
 
@@ -18,6 +19,8 @@ namespace ibase
 class IObjectQueue: virtual public istd::IChangeable
 {
 public:
+	typedef std::vector<istd::IChangeable*> ObjectList;
+
 	/**
 		Get number of objects in this queue.
 		\param	typeIdPtr	optional object ID, if many of object types are supported.
@@ -71,6 +74,15 @@ public:
 		\param	typeIdPtr	optional object ID, if many of object types are supported.
 	*/
 	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL) const = 0;
+
+	/**
+		Find set of objects.
+	*/
+	virtual void SelectObjects(
+				ObjectList& result,
+				bool doAppend = false,
+				int offsetPos = 0,
+				const std::string* typeIdPtr = NULL) const = 0;
 
 	/**
 		Get object at the front of queue and remove it from queue.
