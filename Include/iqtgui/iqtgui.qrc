@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="/Icons" >
     <file alias="CdUp" >Resources/Icons/cdtoparent.png</file>
-    <file alias="Up" >Resources/Icons/up.png</file>
+    <file alias="UpDir" >Resources/Icons/up.png</file>
     <file alias="ZoomReset" >Resources/Icons/hand_128.png</file>
     <file alias="ZoomIn.svg" >Resources/Icons/ZoomIn.svg</file>
     <file alias="ZoomOut.svg" >Resources/Icons/ZoomOut.svg</file>
@@ -36,7 +36,7 @@
     <file alias="Pause.svg" >Resources/Icons/Pause.svg</file>
     <file alias="Sandglass" >Resources/Icons/sandglass_128.png</file>
     <file alias="TrashEmpty" >Resources/Icons/trash_128.png</file>
-    <file alias="UpDir" >Resources/Icons/up_128.png</file>
+    <file alias="Up" >Resources/Icons/up_128.png</file>
     <file alias="Down" >Resources/Icons/down_128.png</file>
     <file alias="User" >Resources/Icons/user_128.png</file>
     <file alias="Document" >Resources/Icons/window_128.png</file>

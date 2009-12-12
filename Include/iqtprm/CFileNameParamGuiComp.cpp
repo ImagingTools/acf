@@ -173,6 +173,8 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 	I_ASSERT(DirEdit->isEditable());
 	
 	iqt::CSignalBlocker blocker(DirEdit);
+
+	int currsorPosition = DirEdit->lineEdit()->cursorPosition();
 	
 	DirEdit->clear();
 		
@@ -188,6 +190,7 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 	lineEdit->SetIcon(fileIcon);
 
 	DirEdit->setEditText(normalizedPath);
+	lineEdit->setCursorPosition(currsorPosition);
 }
 
 
