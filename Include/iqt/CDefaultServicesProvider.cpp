@@ -35,6 +35,9 @@ void CDefaultServicesProvider::RegisterServices()
 
 	static istd::TSingleFactory<isys::ITimer, iqt::CTimer> timerFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&timerFactory);
+
+	static istd::TSingleFactory<isys::ICriticalSection, iqt::CCriticalSection> criticalSectionFactory("");
+	istd::CStaticServicesProvider::RegisterFactory(&criticalSectionFactory);
 }
 
 
