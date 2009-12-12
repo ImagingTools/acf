@@ -3,8 +3,6 @@
     <file alias="DirClosed">Resources/Icons/dirclosed-16.png</file>
     <file alias="DirOpen">Resources/Icons/diropen-16.png</file>
     <file alias="Folder">Resources/Icons/folder_64.png</file>
-    <file alias="Ok">Resources/Icons/ok_64.png</file>
-    <file alias="Invalid">Resources/Icons/close_a_128.png</file>
     <file alias="Back">Resources/Icons/back_128.png</file>
     <file alias="Export.svg">Resources/Icons/Export.svg</file>
     <file alias="AutoInit.svg">Resources/Icons/Anchor.svg</file>

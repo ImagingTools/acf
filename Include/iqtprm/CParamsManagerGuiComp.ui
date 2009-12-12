@@ -53,7 +53,7 @@
        </property>
        <property name="icon">
         <iconset resource="../iqtgui/iqtgui.qrc">
-         <normaloff>:/Icons/Add</normaloff>:/Icons/Add</iconset>
+         <normaloff>:/Icons/Add.svg</normaloff>:/Icons/Add.svg</iconset>
        </property>
       </widget>
      </item>

@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="/Icons" >
     <file alias="CdUp" >Resources/Icons/cdtoparent.png</file>
-    <file alias="UpDir" >Resources/Icons/up.png</file>
+    <file alias="UpDir.svg" >Resources/Icons/UpDir.svg</file>
     <file alias="ZoomReset" >Resources/Icons/hand_128.png</file>
     <file alias="ZoomIn.svg" >Resources/Icons/ZoomIn.svg</file>
     <file alias="ZoomOut.svg" >Resources/Icons/ZoomOut.svg</file>
@@ -25,7 +25,7 @@
     <file alias="Settings.svg" >Resources/Icons/Settings.svg</file>
     <file alias="About" >Resources/Icons/info_128.png</file>
     <file alias="Snap" >Resources/Icons/camera_128.png</file>
-    <file alias="Add" >Resources/Icons/add_128.png</file>
+    <file alias="Add.svg" >Resources/Icons/Add.svg</file>
     <file alias="Cancel.svg" >Resources/Icons/Cancel.svg</file>
     <file alias="Close" >Resources/Icons/close_b_128.png</file>
     <file alias="Copy" >Resources/Icons/copy_128.png</file>

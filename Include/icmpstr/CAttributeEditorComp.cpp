@@ -282,7 +282,7 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 
 	ComponentsTree->addTopLevelItem(componentRootPtr);
 
-	MainTab->setTabIcon(TI_ATTRIBUTES, isCorrect? QIcon(): QIcon(":/Icons/Invalid"));
+	MainTab->setTabIcon(TI_ATTRIBUTES, isCorrect? QIcon(): QIcon(":/Icons/StateInvalid.svg"));
 
 	UpdateExportIcon();
 }
