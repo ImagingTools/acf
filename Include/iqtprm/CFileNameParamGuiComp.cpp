@@ -188,7 +188,7 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 	
 	DirEdit->clear();
 		
-	QString normalizedPath = QDir::toNativeSeparators(path);
+	QString normalizedPath = QDir::fromNativeSeparators(path);
 
 	MakeSelectionHint(normalizedPath);
 
