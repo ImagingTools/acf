@@ -39,105 +39,52 @@ void CObjectQueueComp::ClearQueue()
 
 istd::IChangeable* CObjectQueueComp::CreateFrontObject(int offsetPos, const std::string* typeIdPtr)
 {
-	if (!m_objectFactoryFactPtr.IsValid()){
-		return NULL;
-	}
+	if (typeIdPtr == NULL){
+		int objectsCount = int(m_objectsQueue.size());
+		if (offsetPos <= objectsCount){
+			ObjectQueue::iterator iter = m_objectsQueue.begin() + offsetPos;
 
-	if (typeIdPtr != NULL){
-		return NULL;
-	}
-	else{
-		ObjectQueue::iterator iter = m_objectsQueue.begin();
-		while (offsetPos > 0){
-			if (iter == m_objectsQueue.end()){
-				return NULL;
-			}
+			istd::IChangeable* newObjectPtr = CreateObject();
 
-			iter++;
-			offsetPos--;
-		}
+			if (newObjectPtr != NULL){
+				m_objectsQueue.insert(iter, newObjectPtr);
 
-		istd::IChangeable* newObjectPtr = NULL;
-
-		if (m_objectsReserve.empty()){
-			newObjectPtr = m_objectFactoryFactPtr.CreateInstance();
-
-			if (newObjectPtr == NULL){
-				return NULL;
+				return newObjectPtr;
 			}
 		}
-		else{
-			newObjectPtr = m_objectsReserve.front();
-
-			m_objectsReserve.pop_front();
-		}
-
-		I_ASSERT(newObjectPtr != NULL);
-
-		m_objectsQueue.insert(iter, newObjectPtr);
-
-		return newObjectPtr;
 	}
+
+	return NULL;
 }
 
 
 istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const std::string* typeIdPtr)
 {
-	if (!m_objectFactoryFactPtr.IsValid()){
-		return NULL;
-	}
+	if (typeIdPtr == NULL){
+		int objectsCount = int(m_objectsQueue.size());
+		if (offsetPos <= objectsCount){
+			ObjectQueue::iterator iter = m_objectsQueue.begin() + objectsCount - offsetPos;
 
-	if (typeIdPtr != NULL){
-		return NULL;
-	}
-	else{
-		ObjectQueue::reverse_iterator iter = m_objectsQueue.rbegin();
-		while (offsetPos > 0){
-			if (iter == m_objectsQueue.rend()){
-				return NULL;
-			}
+			istd::IChangeable* newObjectPtr = CreateObject();
 
-			iter++;
-			offsetPos--;
-		}
+			if (newObjectPtr != NULL){
+				m_objectsQueue.insert(iter, newObjectPtr);
 
-		istd::IChangeable* newObjectPtr = NULL;
-
-		if (m_objectsReserve.empty()){
-			newObjectPtr = m_objectFactoryFactPtr.CreateInstance();
-
-			if (newObjectPtr == NULL){
-				return NULL;
+				return newObjectPtr;
 			}
 		}
-		else{
-			newObjectPtr = m_objectsReserve.front();
-
-			m_objectsReserve.pop_front();
-		}
-
-		I_ASSERT(newObjectPtr != NULL);
-
-		m_objectsQueue.insert(iter.base(), newObjectPtr);
-
-		return newObjectPtr;
 	}
+
+	return NULL;
 }
 
 
 void CObjectQueueComp::RemoveFrontObject(int offsetPos, const std::string* typeIdPtr)
 {
+	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+
 	if (typeIdPtr == NULL){
-		ObjectQueue::iterator iter = m_objectsQueue.begin();
-		while (offsetPos > 0){
-			iter++;
-			offsetPos--;
-		}
-
-		if (iter == m_objectsQueue.end()){
-			return;
-		}
-
+		ObjectQueue::iterator iter = m_objectsQueue.begin() + offsetPos;
 		istd::IChangeable* objectPtr = *iter;
 		I_ASSERT(objectPtr != NULL);
 
@@ -151,21 +98,16 @@ void CObjectQueueComp::RemoveFrontObject(int offsetPos, const std::string* typeI
 
 void CObjectQueueComp::RemoveBackObject(int offsetPos, const std::string* typeIdPtr)
 {
+	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+
 	if (typeIdPtr == NULL){
-		ObjectQueue::reverse_iterator iter = m_objectsQueue.rbegin();
-		while (offsetPos > 0){
-			iter++;
-			offsetPos--;
-		}
+		int objectsCount = int(m_objectsQueue.size());
 
-		if (iter == m_objectsQueue.rend()){
-			return;
-		}
-
+		ObjectQueue::iterator iter = m_objectsQueue.begin() + objectsCount - 1 - offsetPos;
 		istd::IChangeable* objectPtr = *iter;
 		I_ASSERT(objectPtr != NULL);
 
-		m_objectsQueue.erase(iter.base());
+		m_objectsQueue.erase(iter);
 		m_objectsReserve.push_front(objectPtr);
 
 		TryReductReserve();
@@ -175,18 +117,11 @@ void CObjectQueueComp::RemoveBackObject(int offsetPos, const std::string* typeId
 
 istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const std::string* typeIdPtr) const
 {
+	I_ASSERT(offsetPos >= 0);
+	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+
 	if (typeIdPtr == NULL){
-		ObjectQueue::const_iterator iter = m_objectsQueue.begin();
-		while (offsetPos > 0){
-			iter++;
-			offsetPos--;
-		}
-
-		if (iter == m_objectsQueue.end()){
-			return NULL;
-		}
-
-		istd::IChangeable* objectPtr = *iter;
+		istd::IChangeable* objectPtr = m_objectsQueue.at(offsetPos);
 		I_ASSERT(objectPtr != NULL);
 
 		return objectPtr;
@@ -198,21 +133,17 @@ istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const std::st
 
 istd::IChangeable* CObjectQueueComp::GetBackObject(int offsetPos, const std::string* typeIdPtr) const
 {
+	I_ASSERT(offsetPos >= 0);
+	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+
 	if (typeIdPtr == NULL){
-		ObjectQueue::const_reverse_iterator iter = m_objectsQueue.rbegin();
-		while (offsetPos > 0){
-			iter++;
-			offsetPos--;
-		}
-
-		if (iter == m_objectsQueue.rend()){
-			return NULL;
-		}
-
-		istd::IChangeable* objectPtr = *iter;
+		int objectsCount = int(m_objectsQueue.size());
+		istd::IChangeable* objectPtr = m_objectsQueue.at(objectsCount - 1 - offsetPos);
 		I_ASSERT(objectPtr != NULL);
 
 		return objectPtr;
+
+		return NULL;
 	}
 
 	return NULL;
@@ -245,16 +176,11 @@ void CObjectQueueComp::SelectObjects(
 
 istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const std::string* typeIdPtr)
 {
-	if (typeIdPtr == NULL){
-		ObjectQueue::iterator iter = m_objectsQueue.begin();
-		while (offsetPos > 0){
-			iter++;
-			offsetPos--;
-		}
+	I_ASSERT(offsetPos >= 0);
+	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
-		if (iter != m_objectsQueue.end()){
-			return NULL;
-		}
+	if (typeIdPtr == NULL){
+		ObjectQueue::iterator iter = m_objectsQueue.begin() + offsetPos;
 
 		istd::IChangeable* objectPtr = *iter;
 		I_ASSERT(objectPtr != NULL);
@@ -270,21 +196,17 @@ istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const std::st
 
 istd::IChangeable* CObjectQueueComp::PopBackObject(int offsetPos, const std::string* typeIdPtr)
 {
-	if (typeIdPtr == NULL){
-		ObjectQueue::reverse_iterator iter = m_objectsQueue.rbegin();
-		while (offsetPos > 0){
-			iter++;
-			offsetPos--;
-		}
+	I_ASSERT(offsetPos >= 0);
+	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
-		if (iter != m_objectsQueue.rend()){
-			return NULL;
-		}
+	if (typeIdPtr == NULL){
+		int objectsCount = int(m_objectsQueue.size());
+		ObjectQueue::iterator iter = m_objectsQueue.begin() + objectsCount - 1 - offsetPos;
 
 		istd::IChangeable* objectPtr = *iter;
 		I_ASSERT(objectPtr != NULL);
 
-		m_objectsQueue.erase(iter.base());
+		m_objectsQueue.erase(iter);
 
 		return objectPtr;
 	}
@@ -351,6 +273,25 @@ bool CObjectQueueComp::Serialize(iser::IArchive& archive)
 
 
 // protected methods
+
+istd::IChangeable* CObjectQueueComp::CreateObject()
+{
+	if (!m_objectFactoryFactPtr.IsValid()){
+		return NULL;
+	}
+
+	if (m_objectsReserve.empty()){
+		return m_objectFactoryFactPtr.CreateInstance();
+	}
+	else{
+		istd::IChangeable* retVal = m_objectsReserve.front();
+
+		m_objectsReserve.pop_front();
+
+		return retVal;
+	}
+}
+
 
 void CObjectQueueComp::TryReductReserve()
 {

@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <list>
+#include <deque>
 
 #include "iser/ISerializable.h"
 
@@ -55,6 +55,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
+	istd::IChangeable* CreateObject();
 	void TryReductReserve();
 
 	// reimplemented (icomp::IComponent)
@@ -64,7 +65,7 @@ private:
 	I_FACT(istd::IChangeable, m_objectFactoryFactPtr);
 	I_ATTR(int, m_maxReserveObjectsAttrPtr);
 
-	typedef std::list<istd::IChangeable*> ObjectQueue;
+	typedef std::deque<istd::IChangeable*> ObjectQueue;
 
 	ObjectQueue m_objectsQueue;
 	ObjectQueue m_objectsReserve;
