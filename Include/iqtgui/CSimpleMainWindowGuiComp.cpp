@@ -87,11 +87,15 @@ void CSimpleMainWindowGuiComp::UpdateFixedCommands()
 
 void CSimpleMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 {
-	mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBarPtr.GetPtr());
+	if (m_standardToolBarPtr.IsValid()){
+		mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBarPtr.GetPtr());
 
-	m_toolBarsList.PushBack(m_standardToolBarPtr.GetPtr(), false);
-	
-	mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
+		m_toolBarsList.PushBack(m_standardToolBarPtr.GetPtr(), false);
+	}
+
+	if (m_menuBarPtr.IsValid()){
+		mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
+	}
 }
 
 
