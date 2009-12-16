@@ -8,7 +8,11 @@
 #include <QVarLengthArray>
 #include <QDir>
 
+
+// ACF includes
 #include "icomp/CInterfaceManipBase.h"
+
+#include "iqt/iqt.h"
 
 #include "icmpstr/CComponentSceneItem.h"
 #include "icmpstr/CComponentConnector.h"

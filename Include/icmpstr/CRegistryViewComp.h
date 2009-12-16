@@ -26,7 +26,9 @@
 #include "iqtdoc/IPrintable.h"
 
 #include "icmpstr/IRegistryPreview.h"
+#include "icmpstr/IElementSelectionInfo.h"
 #include "icmpstr/CRegistryView.h"
+
 
 
 namespace icmpstr

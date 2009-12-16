@@ -15,8 +15,6 @@
 
 #include "icomp/IRegistry.h"
 
-#include "icmpstr/IElementSelectionInfo.h"
-
 
 namespace icmpstr
 {

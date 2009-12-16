@@ -10,11 +10,15 @@
 #include <QApplication>
 #include <QDir>
 
+
+// ACF includes
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
 #include "icomp/CCompositeComponent.h"
 #include "icomp/CCompositeComponentStaticInfo.h"
+
+#include "iqt/iqt.h"
 
 #include "icmpstr/CComponentConnector.h"
 #include "icmpstr/CRegistryView.h"
