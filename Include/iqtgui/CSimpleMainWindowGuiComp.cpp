@@ -256,7 +256,9 @@ void CSimpleMainWindowGuiComp::UpdateViewCommands(iqtgui::CHierarchicalCommand& 
 {
 	viewCommand.ResetChilds();
 
-	viewCommand.InsertChild(&m_showToolBarsCommand, false);
+	if (*m_isToolbarVisibleAttrPtr){
+		viewCommand.InsertChild(&m_showToolBarsCommand, false);
+	}
 }
 
 
