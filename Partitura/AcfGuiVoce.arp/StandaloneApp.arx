@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1267
+          1273
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -68,6 +68,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              IconPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              IconPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               MainGui
             </Id>
             <Type>
@@ -81,7 +97,7 @@
                 true
               </IsEnabled>
               <Value>
-                MainWindowGui
+                MainGui
               </Value>
             </Data>
           </AttributeInfo>
@@ -165,13 +181,13 @@
     </Element>
     <Element>
       <Id>
-        MainWindowGui
+        MainGui
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        MainWindowGui
+        SimpleMainGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -180,16 +196,32 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              AboutGui
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ApplicationInfo
+              AboutGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IconSize
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              IconSize
             </ExportId>
             <Data>
               <IsEnabled>
@@ -205,7 +237,7 @@
               icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
-              
+              IsMenuVisible
             </ExportId>
             <Data>
               <IsEnabled>
@@ -224,7 +256,7 @@
               icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
-              
+              IsToolbarVisible
             </ExportId>
             <Data>
               <IsEnabled>
@@ -253,6 +285,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              SettingsGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              SettingsGui
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SettingsProvider
             </Id>
             <Type>
@@ -268,6 +316,22 @@
               <Value>
                 LayoutSettingsProvider
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseIconText
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              UseIconText
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

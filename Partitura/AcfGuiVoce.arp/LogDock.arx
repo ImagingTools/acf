@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1073
+          1273
         </Number>
         <Description>
           ACF
@@ -180,9 +180,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Log widget used as dock window
   </Description>
   <Keywords>
-    
+    Log Dock Main Window GUI Float Error Warning Info Message
   </Keywords>
 </Acf>

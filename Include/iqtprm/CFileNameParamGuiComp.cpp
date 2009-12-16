@@ -176,29 +176,31 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 		return;
 	}
 
-	int pathType = objectPtr->GetPathType();
-	if (pathType == iprm::IFileNameParam::PT_URL){
-		return;
-	}
-
 	I_ASSERT(DirEdit->isEditable());
 	
 	iqt::CSignalBlocker blocker(DirEdit);
 
 	int currsorPosition = DirEdit->lineEdit()->cursorPosition();
-	
-	DirEdit->clear();
-		
-	QString normalizedPath = QDir::fromNativeSeparators(path);
 
-	MakeSelectionHint(normalizedPath);
-
-	QIcon fileIcon = GetFileIcon(normalizedPath);
-
+	QString normalizedPath;
 	iqtgui::CExtLineEdit* lineEdit = dynamic_cast<iqtgui::CExtLineEdit*>(DirEdit->lineEdit());
 	I_ASSERT(lineEdit != NULL);
 
-	lineEdit->SetIcon(fileIcon);
+	int pathType = objectPtr->GetPathType();
+	if (pathType == iprm::IFileNameParam::PT_URL){
+		normalizedPath = path;
+	}
+	else{
+		DirEdit->clear();
+			
+		normalizedPath = QDir::fromNativeSeparators(path);
+
+		MakeSelectionHint(normalizedPath);
+
+		QIcon fileIcon = GetFileIcon(normalizedPath);
+
+		lineEdit->SetIcon(fileIcon);
+	}
 
 	DirEdit->setEditText(normalizedPath);
 	lineEdit->setCursorPosition(currsorPosition);

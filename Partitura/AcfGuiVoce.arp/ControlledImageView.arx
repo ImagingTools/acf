@@ -207,7 +207,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        idoc::ICommandsProvider
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         ImageView

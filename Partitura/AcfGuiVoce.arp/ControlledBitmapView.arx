@@ -203,7 +203,7 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
-        idoc::ICommandsProvider
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         ControlledImageView

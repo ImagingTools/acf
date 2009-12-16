@@ -6,8 +6,6 @@
 
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
-
 #include "iqt/CSignalBlocker.h"
 
 
@@ -18,7 +16,7 @@ namespace iqtgui
 // public methods
 
 CSimpleMainWindowGuiComp::CSimpleMainWindowGuiComp()
-	:m_menuCommands("Global"),
+:	m_menuCommands("Global"),
 	m_showToolBarsCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
 	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR)
 {
@@ -285,13 +283,10 @@ void CSimpleMainWindowGuiComp::UpdateMenuActions(iqtgui::CHierarchicalCommand& m
 {
 	menuCommands.JoinLinkFrom(&m_fixedCommands);
 
-	if (m_workspaceCompPtr.IsValid()){
-		ibase::ICommandsProvider* commandsProviderPtr = CompCastPtr<ibase::ICommandsProvider>(m_workspaceCompPtr.GetPtr());
-		if (commandsProviderPtr != NULL){
-			const ibase::IHierarchicalCommand* commandsPtr = commandsProviderPtr->GetCommands();
-			if (commandsPtr != NULL){
-				menuCommands.JoinLinkFrom(commandsPtr);
-			}
+	if (m_workspaceCommandsCompPtr.IsValid()){
+		const ibase::IHierarchicalCommand* commandsPtr = m_workspaceCommandsCompPtr->GetCommands();
+		if (commandsPtr != NULL){
+			menuCommands.JoinLinkFrom(commandsPtr);
 		}
 	}
 }

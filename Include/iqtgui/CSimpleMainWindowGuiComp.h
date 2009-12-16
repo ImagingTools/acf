@@ -12,6 +12,8 @@
 
 
 // ACF includes
+#include "ibase/ICommandsProvider.h"
+
 #include "iqtgui/IMainWindowComponent.h"
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TRestorableGuiWrap.h"
@@ -31,6 +33,7 @@ public:
 
 	I_BEGIN_COMPONENT(CSimpleMainWindowGuiComp);
 		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Document workspace", true, "Workspace");
+		I_ASSIGN(m_workspaceCommandsCompPtr, "Workspace", "Document workspace", false, "Workspace");
 		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "Gui displayed if 'About' action is triggered", false, "AboutGui");
 		I_ASSIGN(m_settingsGuiCompPtr, "SettingsGui", "Gui displayed if 'Settings' action is triggered", false, "SettingsGui");
 		I_ASSIGN_MULTI_0(m_mainWindowComponentsPtr, "MainWindowComponents", "Additional GUI components", false);
@@ -91,6 +94,7 @@ protected Q_SLOTS:
 
 private:
 	I_REF(iqtgui::IGuiObject, m_workspaceCompPtr);
+	I_REF(ibase::ICommandsProvider, m_workspaceCommandsCompPtr);
 	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsPtr);
 	I_REF(iqtgui::IGuiObject, m_aboutGuiCompPtr);
 	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);

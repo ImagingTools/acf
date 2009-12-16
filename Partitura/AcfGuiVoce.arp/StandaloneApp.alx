@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1267
+          1273
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="58">
+  <PositionMap count="60">
     <Element>
       <ComponentName>
         AdvancedImageView
@@ -392,6 +392,17 @@
     </Element>
     <Element>
       <ComponentName>
+        MainGui
+      </ComponentName>
+      <X>
+        90
+      </X>
+      <X>
+        -265
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
         MainView
       </ComponentName>
       <X>
@@ -498,6 +509,17 @@
       </X>
       <X>
         -366
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SimpleMainGui
+      </ComponentName>
+      <X>
+        399
+      </X>
+      <X>
+        -221
       </X>
     </Element>
     <Element>
