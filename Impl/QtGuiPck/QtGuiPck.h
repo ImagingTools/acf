@@ -47,7 +47,7 @@ namespace QtGuiPck
 
 typedef iqtgui::CApplicationComp GuiApplication;
 typedef iqtgui::CSplashScreenGuiComp SplashScreen;
-typedef icomp::TModelCompWrap<iqtgui::CLogGuiComp> Log;
+typedef icomp::TModelCompWrap<iqtgui::CLogGuiComp> LogGui;
 typedef iqtgui::CComposedGuiComp ComposedGui;
 typedef iqtgui::CIconProviderComp IconProvider;
 typedef iqtgui::CFileDialogLoaderComp FileDialogLoader;

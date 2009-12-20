@@ -18,14 +18,14 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        Log
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        Log
-      </ComponentId>
+				Log
+			</Id>
+			<PackageId>
+				QtGuiPck
+			</PackageId>
+			<ComponentId>
+				LogGui
+			</ComponentId>
       <Data>
         <IsEnabled>
           true

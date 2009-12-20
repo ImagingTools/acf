@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	fileDialogLoaderComp.InsertMultiRef("Loaders", &logSerializerComp);
 	fileDialogLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<QtGuiPck::Log> log;
+	icomp::TSimComponentWrap<QtGuiPck::LogGui> log;
 	log.SetIntAttr("MaxMessageCount", 10000);
 	log.SetRef("Exporter", &fileDialogLoaderComp);
 	log.InitComponent();

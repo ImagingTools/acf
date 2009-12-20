@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	splashScreenGui.SetRef("ApplicationInfo", &applicationInfo);
 	splashScreenGui.InitComponent();
 
-	icomp::TSimComponentWrap<QtGuiPck::Log> log;
+	icomp::TSimComponentWrap<QtGuiPck::LogGui> log;
 	log.InitComponent();
 
 	icomp::TSimComponentWrap<QtGuiPck::DockWidgetGui> lockDockComp;

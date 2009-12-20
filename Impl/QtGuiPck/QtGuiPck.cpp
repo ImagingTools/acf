@@ -26,7 +26,7 @@ I_EXPORT_PACKAGE("Acf/Qt/Gui", "Standard Qt package", "Qt Standard");
 I_EXPORT_COMPONENT(GuiApplication, "Main entry point for window based Qt application", "Application Main Entry Start Begin Qt");
 I_EXPORT_COMPONENT(SplashScreen, "Splash screen", "Splash Screen Start Begin Qt GUI");
 I_EXPORT_COMPONENT(ComposedGui, "Allow to combine more other GUI's", "Combine Collection Composition Slaves Qt GUI");
-I_EXPORT_COMPONENT(Log, "Applcation log as simple list", "Log Info List Qt GUI");
+I_EXPORT_COMPONENT(LogGui, "Application log as simple list", "Log Info List Qt GUI");
 I_EXPORT_COMPONENT(IconProvider, "Icon provider", "Icons Qt GUI"); 
 I_EXPORT_COMPONENT(FileDialogLoader, "File dialog loader", "File Loader Serialization Serializer Dialog GUI Qt"); 
 I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "View Dock Document GUI Qt");
