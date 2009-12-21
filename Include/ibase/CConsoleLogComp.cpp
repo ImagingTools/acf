@@ -15,7 +15,7 @@ namespace ibase
 
 // reimplemented (CStreamLogCompBase)
 
-void CConsoleLogComp::WriteLine(const istd::CString& text)
+void CConsoleLogComp::WriteText(const istd::CString& text)
 {
 	std::wcout << text.c_str();
 }

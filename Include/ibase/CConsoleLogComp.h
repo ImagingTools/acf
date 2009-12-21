@@ -22,7 +22,7 @@ public:
 
 protected:
 	// reimplemented (CStreamLogCompBase)
-	virtual void WriteLine(const istd::CString& text);
+	virtual void WriteText(const istd::CString& text);
 	virtual void NewLine();
 };
 

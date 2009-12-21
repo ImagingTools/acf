@@ -55,8 +55,7 @@ public:
 
 	// operators
 	Type& operator*() const;
-	const Type* operator->() const;
-	Type* operator->();
+	Type* operator->() const;
 
 protected:
 	TRetSmartPtr();
@@ -147,17 +146,17 @@ inline Type* TRetSmartPtr<Type, AccessAdapter>::GetPtr()
 
 
 template <class Type, class AccessAdapter>
-inline const Type* TRetSmartPtr<Type, AccessAdapter>::operator->() const
+inline Type& TRetSmartPtr<Type, AccessAdapter>::operator*() const
 {
 	I_ASSERT(m_counterPtr != NULL);
 	I_ASSERT(m_counterPtr->GetPtr() != NULL);
 
-	return m_counterPtr->GetPtr();
+	return *m_counterPtr->GetPtr();
 }
 
 
 template <class Type, class AccessAdapter>
-inline Type* TRetSmartPtr<Type, AccessAdapter>::operator->()
+inline Type* TRetSmartPtr<Type, AccessAdapter>::operator->() const
 {
 	I_ASSERT(m_counterPtr != NULL);
 	I_ASSERT(m_counterPtr->GetPtr() != NULL);

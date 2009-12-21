@@ -114,8 +114,8 @@ void CLogGuiComp::OnGuiCreated()
 	for (		Messages::const_iterator iter = messages.begin();
 				iter != messages.end();
 				++iter){
-		const ibase::IMessage* messagePtr = *iter;
-		if (messagePtr != NULL){
+		const istd::TSmartPtr<const ibase::IMessage> messagePtr = *iter;
+		if (messagePtr.IsValid()){
 			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
 			if (itemPtr != NULL){
 				OnAddMessage(itemPtr);

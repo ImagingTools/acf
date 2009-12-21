@@ -16,7 +16,7 @@ namespace ibase
 
 // reimplemented (CStreamLogCompBase)
 
-void CTextFileLogComp::WriteLine(const istd::CString& text)
+void CTextFileLogComp::WriteText(const istd::CString& text)
 {
 	if (m_outputFileStream.is_open()){
 		m_outputFileStream << text.c_str();

@@ -18,14 +18,32 @@ CStreamLogCompBase::CStreamLogCompBase()
 
 // reimplemented (ibase::IMessageConsumer)
 
-void CStreamLogCompBase::AddMessage(IMessage* messagePtr)
+bool CStreamLogCompBase::IsMessageSupported(
+			int /*messageCategory*/,
+			int /*messageId*/,
+			const IMessage* /*messagePtr*/) const
 {
-	if (messagePtr != NULL){
+	return true;
+}
+
+
+void CStreamLogCompBase::AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr)
+{
+	if (messagePtr.IsValid()){
 		if (messagePtr->GetCategory() >= *m_minPriorityAttrPtr){
+			if (m_isLastDotShown){
+				NewLine();
+
+				m_isLastDotShown = false;
+			}
+
 			WriteMessageToStream(*messagePtr);
 		}
+		else if (*m_isDotEnabledAttrPtr){
+			WriteText(".");
 
-		ProcessIngoredMessage(*messagePtr);
+			m_isLastDotShown = true;
+		}
 	}
 }
 
@@ -46,23 +64,6 @@ void CStreamLogCompBase::OnComponentDestroyed()
 
 // protected methods
 
-void CStreamLogCompBase::ProcessIngoredMessage(const ibase::IMessage& message)
-{
-	if (message.GetCategory() >= *m_minPriorityAttrPtr){
-		if (m_isLastDotShown){
-			NewLine();
-
-			m_isLastDotShown = false;
-		}
-	}
-	else if (*m_isDotEnabledAttrPtr){
-		WriteLine(".");
-
-		m_isLastDotShown = true;
-	}
-}
-
-
 void CStreamLogCompBase::WriteMessageToStream(const ibase::IMessage& message)
 {
 	istd::CString messageText = message.GetText();
@@ -73,7 +74,7 @@ void CStreamLogCompBase::WriteMessageToStream(const ibase::IMessage& message)
 					istd::CString("] ") +
 					messageText;
 	
-	WriteLine(messageText);
+	WriteText(messageText);
 
 	NewLine();
 }

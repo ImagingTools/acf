@@ -118,7 +118,7 @@ Service* GetService()
 	\ingroup System
 */
 template <typename Service>
-TSmartPtr<Service> CreateService()
+TRetSmartPtr<Service> CreateService()
 {
 	static istd::CClassInfo info = istd::CClassInfo::GetInfo<Service>();
 

@@ -31,17 +31,16 @@ public:
 	CStreamLogCompBase();
 
 	// reimplemented (ibase::IMessageConsumer)
-	virtual void AddMessage(ibase::IMessage* messagePtr);
+	virtual bool IsMessageSupported(
+				int messageCategory = -1,
+				int messageId = -1,
+				const IMessage* messagePtr = NULL) const;
+	virtual void AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr);
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentDestroyed();
 
 protected:
-	/**
-		Make output for skipped messages.
-	*/
-	virtual void ProcessIngoredMessage(const ibase::IMessage& message);
-
 	/**
 		Write formatted the message to the output stream.
 	*/
@@ -52,7 +51,7 @@ protected:
 	/**
 		Write a text line to the output stream.
 	*/
-	virtual void WriteLine(const istd::CString& text) = 0;
+	virtual void WriteText(const istd::CString& text) = 0;
 
 	/**
 		Make new line.

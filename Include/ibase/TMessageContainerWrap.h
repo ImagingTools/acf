@@ -2,7 +2,10 @@
 #define ibase_TMessageContainerWrap_included
 
 
-#include "istd/TPointerVector.h"
+// STL includes
+#include <list>
+
+#include "istd/TSmartPtr.h"
 #include "istd/TChangeNotifier.h"
 
 #include "iser/IArchive.h"
@@ -42,17 +45,21 @@ public:
 	virtual void ClearMessages();
 
 	// pseudo-reimplemented (ibase::IMessageConsumer)
-	virtual void AddMessage(ibase::IMessage* message);
+	virtual bool IsMessageSupported(
+				int messageCategory = -1,
+				int messageId = -1,
+				const IMessage* messagePtr = NULL) const;
+	virtual void AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr);
 
 	// pseudo-reimplemented (IHierarchicalMessageContainer)
 	virtual int GetChildsCount() const;
 	virtual ibase::IHierarchicalMessageContainer* GetChild(int index) const;
 
 protected:
-	typedef istd::TPointerVector<ibase::IMessage> MessageList;
+	typedef std::list< istd::TSmartPtr<const IMessage> > MessageList;
 	MessageList m_messages;
 
-	int m_maxCategory;
+	int m_worstCategory;
 
 private:
 	typedef std::vector<ibase::IHierarchicalMessageContainer*> Childs;
@@ -67,7 +74,7 @@ private:
 
 template <class Base>
 TMessageContainerWrap<Base>::TMessageContainerWrap()
-	:m_maxCategory(0),
+:	m_worstCategory(-1),
 	m_maxMessageCount(-1),
 	m_maxLiveTime(-1)
 {
@@ -101,8 +108,7 @@ bool TMessageContainerWrap<Base>::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	ibase::IMessageContainer::Messages messages = GetMessages();
-	int messageCount = int(messages.size());
+	int messageCount = int(m_messages.size());
 
 	static iser::CArchiveTag messagesTag("Messages", "List of messages");
 	static iser::CArchiveTag messageTag("Message", "Message");
@@ -113,9 +119,13 @@ bool TMessageContainerWrap<Base>::Serialize(iser::IArchive& archive)
 		return false;
 	}
 
-    for (int i = 0; i < messageCount; ++i){
+	for (		MessageList::const_iterator iter = m_messages.begin();
+				iter != m_messages.end();
+				++iter){
+		const istd::TSmartPtr<const IMessage>& messagePtr = *iter;
+
 		retVal = retVal && archive.BeginTag(messageTag);
-		retVal = retVal && (const_cast<ibase::IMessage*>(messages.at(i)))->Serialize(archive);
+		retVal = retVal && const_cast<ibase::IMessage*>(messagePtr.GetPtr())->Serialize(archive);
 		retVal = retVal && archive.EndTag(messageTag);
 	}
 
@@ -146,13 +156,31 @@ void TMessageContainerWrap<Base>::SetMaxLiveTime(int maxLiveTime)
 template <class Base>
 int TMessageContainerWrap<Base>::GetWorstCategory() const
 {
-	int worstCategory = m_maxCategory;
+	int worstCategory = m_worstCategory;
 	int childCount = GetChildsCount();
+
+	if (worstCategory < 0){
+		worstCategory = 0;
+
+		for (		MessageList::const_iterator iter = m_messages.begin();
+					iter != m_messages.end();
+					++iter){
+			const istd::TSmartPtr<const IMessage>& messagePtr = *iter;
+
+			int category = messagePtr->GetCategory();
+			if (category > worstCategory){
+				worstCategory = category;
+			}
+		}
+	}
 
 	for (int childIndex = 0; childIndex < childCount; childIndex++){
 		ibase::IMessageContainer* childPtr = dynamic_cast<ibase::IMessageContainer*>(GetChild(childIndex));
 		if (childPtr != NULL){
-			worstCategory = istd::Max(worstCategory, childPtr->GetWorstCategory());
+			int category = childPtr->GetWorstCategory();
+			if (category > worstCategory){
+				worstCategory = category;
+			}
 		}
 	}
 
@@ -165,8 +193,10 @@ ibase::IMessageContainer::Messages TMessageContainerWrap<Base>::GetMessages() co
 {
 	ibase::IMessageContainer::Messages messages;
 
-	for (int messageIndex = 0; messageIndex < m_messages.GetCount(); messageIndex++){
-		const IMessage* messagePtr = m_messages.GetAt(messageIndex);
+	for (		MessageList::const_iterator iter = m_messages.begin();
+				iter != m_messages.end();
+				++iter){
+		const istd::TSmartPtr<const IMessage>& messagePtr = *iter;
 
 		messages.push_back(messagePtr);
 	}
@@ -186,33 +216,57 @@ ibase::IMessageContainer::Messages TMessageContainerWrap<Base>::GetMessages() co
 
 
 template <class Base>
-void TMessageContainerWrap<Base>::AddMessage(ibase::IMessage* messagePtr)
+bool TMessageContainerWrap<Base>::IsMessageSupported(
+			int /*messageCategory*/,
+			int /*messageId*/,
+			const IMessage* /*messagePtr*/) const
 {
-	I_ASSERT(messagePtr != NULL);
+	return true;
+}
 
-	if (m_maxMessageCount >= 0){
-		if (m_messages.GetCount() + 1 > m_maxMessageCount && m_maxMessageCount > 0){
-			ibase::IMessage* removeMessagePtr = m_messages.GetAt(0);
-			istd::TChangeNotifier<ibase::IMessageContainer> changePtr(
-						this,
-						ibase::IMessageContainer::MessageRemoved,
-						removeMessagePtr);
 
-			m_messages.RemoveAt(0);
+template <class Base>
+void TMessageContainerWrap<Base>::AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr)
+{
+	I_ASSERT(messagePtr.IsValid());
+
+	if (m_maxMessageCount == 0){
+		return;
+	}
+
+	{
+		istd::TChangeNotifier<ibase::IMessageContainer> changePtr(
+					this,
+					ibase::IMessageContainer::MessageAdded,
+					const_cast<IMessage*>(messagePtr.GetPtr()));
+
+		m_messages.push_back(messagePtr);
+
+		int messageCategory = messagePtr->GetCategory();
+		if ((m_worstCategory >= 0) && (messageCategory > m_worstCategory)){
+			m_worstCategory = messageCategory;
 		}
 	}
 
-	istd::TChangeNotifier<ibase::IMessageContainer> changePtr(
-				this,
-				ibase::IMessageContainer::MessageAdded,
-				messagePtr);
+	if (m_maxMessageCount >= 0){
+		while (int(m_messages.size()) > m_maxMessageCount){
+			I_ASSERT(!m_messages.empty());
+			const istd::TSmartPtr<const IMessage>& messageToRemovePtr = m_messages.back();
 
-	m_messages.PushBack(messagePtr);
+			istd::TChangeNotifier<ibase::IMessageContainer> changePtr(
+						this,
+						ibase::IMessageContainer::MessageRemoved,
+						const_cast<IMessage*>(messageToRemovePtr.GetPtr()));
 
-	int messageCategory = messagePtr->GetCategory();
-	if (messageCategory > m_maxCategory){
-		m_maxCategory = messageCategory;
+			int removeCategory = messageToRemovePtr->GetCategory();
+			if (removeCategory >= m_worstCategory){
+				m_worstCategory = -1;
+			}
+
+			m_messages.pop_back();
+		}
 	}
+
 }
 
 
@@ -221,9 +275,9 @@ void TMessageContainerWrap<Base>::ClearMessages()
 {
 	istd::TChangeNotifier<ibase::IMessageContainer> changePtr(this, ibase::IMessageContainer::Reset);
 	
-	m_messages.Reset();
+	m_messages.clear();
 
-	m_maxCategory = 0;
+	m_worstCategory = 0;
 }
 
 

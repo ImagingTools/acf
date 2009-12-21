@@ -23,7 +23,7 @@ public:
 	typedef TRetSmartPtr<Type, Accessor> BaseClass;
 
 	TSmartPtr();
-	explicit TSmartPtr(Type* pointer);
+	TSmartPtr(Type* pointer);
 	TSmartPtr(const TRetSmartPtr<Type, Accessor>& pointer);
 	TSmartPtr(const TSmartPtr& pointer);
 	~TSmartPtr();

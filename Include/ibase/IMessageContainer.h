@@ -20,7 +20,7 @@ namespace ibase
 class IMessageContainer: virtual public IMessageConsumer, virtual public iser::ISerializable
 {
 public:
-	typedef std::vector<const ibase::IMessage*> Messages;
+	typedef std::vector< istd::TSmartPtr<const IMessage> > Messages;
 
 	enum ChangeFlags
 	{

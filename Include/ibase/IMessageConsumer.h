@@ -3,6 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
+#include "istd/TSmartPtr.h"
 
 #include "ibase/ibase.h"
 
@@ -23,11 +24,21 @@ class IMessageConsumer: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Adds a message item to the container. 
-		Please note, that the container takes controll over the message item, 
-		so you cannot destroy this object manually.
+		Check if some messge is supported.
+		\param	messageCategory	category of message or -1 if undefined,
+								\sa istd::ILogger::MessageCategory.
+		\param	messageId		ID of message as defined in ibase::IMessage or -1 if undefined.
+		\param	messagePtr		optional message object, or NULL if undefined.
+								Please note, this object will not be stored by receiver.
 	*/
-	virtual void AddMessage(IMessage* messagePtr) = 0;
+	virtual bool IsMessageSupported(
+				int messageCategory = -1,
+				int messageId = -1,
+				const IMessage* messagePtr = NULL) const = 0;
+	/**
+		Adds a message item to the container. 
+	*/
+	virtual void AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr) = 0;
 };
 
 
