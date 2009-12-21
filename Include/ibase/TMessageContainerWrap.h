@@ -49,14 +49,14 @@ public:
 				int messageCategory = -1,
 				int messageId = -1,
 				const IMessage* messagePtr = NULL) const;
-	virtual void AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr);
+	virtual void AddMessage(const ibase::IMessageContainer::MessagePtr& messagePtr);
 
 	// pseudo-reimplemented (IHierarchicalMessageContainer)
 	virtual int GetChildsCount() const;
 	virtual ibase::IHierarchicalMessageContainer* GetChild(int index) const;
 
 protected:
-	typedef std::list< istd::TSmartPtr<const IMessage> > MessageList;
+	typedef std::list<ibase::IMessageContainer::MessagePtr> MessageList;
 	MessageList m_messages;
 
 	int m_worstCategory;
@@ -122,7 +122,7 @@ bool TMessageContainerWrap<Base>::Serialize(iser::IArchive& archive)
 	for (		MessageList::const_iterator iter = m_messages.begin();
 				iter != m_messages.end();
 				++iter){
-		const istd::TSmartPtr<const IMessage>& messagePtr = *iter;
+		const MessagePtr& messagePtr = *iter;
 
 		retVal = retVal && archive.BeginTag(messageTag);
 		retVal = retVal && const_cast<ibase::IMessage*>(messagePtr.GetPtr())->Serialize(archive);
@@ -165,7 +165,7 @@ int TMessageContainerWrap<Base>::GetWorstCategory() const
 		for (		MessageList::const_iterator iter = m_messages.begin();
 					iter != m_messages.end();
 					++iter){
-			const istd::TSmartPtr<const IMessage>& messagePtr = *iter;
+			const MessagePtr& messagePtr = *iter;
 
 			int category = messagePtr->GetCategory();
 			if (category > worstCategory){
@@ -196,7 +196,7 @@ ibase::IMessageContainer::Messages TMessageContainerWrap<Base>::GetMessages() co
 	for (		MessageList::const_iterator iter = m_messages.begin();
 				iter != m_messages.end();
 				++iter){
-		const istd::TSmartPtr<const IMessage>& messagePtr = *iter;
+		const MessagePtr& messagePtr = *iter;
 
 		messages.push_back(messagePtr);
 	}
@@ -226,7 +226,7 @@ bool TMessageContainerWrap<Base>::IsMessageSupported(
 
 
 template <class Base>
-void TMessageContainerWrap<Base>::AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr)
+void TMessageContainerWrap<Base>::AddMessage(const ibase::IMessageContainer::MessagePtr& messagePtr)
 {
 	I_ASSERT(messagePtr.IsValid());
 
@@ -251,7 +251,7 @@ void TMessageContainerWrap<Base>::AddMessage(const istd::TSmartPtr<const IMessag
 	if (m_maxMessageCount >= 0){
 		while (int(m_messages.size()) > m_maxMessageCount){
 			I_ASSERT(!m_messages.empty());
-			const istd::TSmartPtr<const IMessage>& messageToRemovePtr = m_messages.back();
+			const MessagePtr& messageToRemovePtr = m_messages.back();
 
 			istd::TChangeNotifier<ibase::IMessageContainer> changePtr(
 						this,

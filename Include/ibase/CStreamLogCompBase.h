@@ -35,7 +35,7 @@ public:
 				int messageCategory = -1,
 				int messageId = -1,
 				const IMessage* messagePtr = NULL) const;
-	virtual void AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr);
+	virtual void AddMessage(const MessagePtr& messagePtr);
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentDestroyed();

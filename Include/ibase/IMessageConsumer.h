@@ -5,14 +5,11 @@
 #include "istd/IPolymorphic.h"
 #include "istd/TSmartPtr.h"
 
-#include "ibase/ibase.h"
+#include "ibase/IMessage.h"
 
 
 namespace ibase
 {
-
-
-class IMessage;
 
 
 /**
@@ -23,6 +20,8 @@ class IMessage;
 class IMessageConsumer: virtual public istd::IPolymorphic
 {
 public:
+	typedef istd::TSmartPtr<const IMessage> MessagePtr;
+
 	/**
 		Check if some messge is supported.
 		\param	messageCategory	category of message or -1 if undefined,
@@ -38,7 +37,7 @@ public:
 	/**
 		Adds a message item to the container. 
 	*/
-	virtual void AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr) = 0;
+	virtual void AddMessage(const MessagePtr& messagePtr) = 0;
 };
 
 

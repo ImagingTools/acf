@@ -27,7 +27,7 @@ bool CStreamLogCompBase::IsMessageSupported(
 }
 
 
-void CStreamLogCompBase::AddMessage(const istd::TSmartPtr<const IMessage>& messagePtr)
+void CStreamLogCompBase::AddMessage(const MessagePtr& messagePtr)
 {
 	if (messagePtr.IsValid()){
 		if (messagePtr->GetCategory() >= *m_minPriorityAttrPtr){
