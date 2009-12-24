@@ -54,7 +54,7 @@ void CComposedGuiComp::OnGuiCreated()
 				guiPtr->CreateGui(panelPtr);
 
 				toolBoxPtr->addItem(panelPtr, name);
-
+ 
 				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
 				panelLayoutPtr->addItem(spacerPtr);

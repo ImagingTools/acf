@@ -26,6 +26,7 @@ CExtLineEdit::CExtLineEdit(
 
 	m_iconPtr->move(m_margins, 0);
 	m_iconPtr->setCursor(QCursor(Qt::ArrowCursor));
+	m_iconPtr->setScaledContents(true);
 
 	m_iconPtr->hide();
 

@@ -1,5 +1,8 @@
 #include "iqtgui/CGuiComponentDialog.h"
 
+
+// Qt includes
+#include <QApplication>
 #include <QVBoxLayout>
 
 
@@ -45,6 +48,8 @@ CGuiComponentDialog::CGuiComponentDialog(
 
 			dialogLayout->addWidget(m_buttonsBox);
 		}
+
+		QApplication::processEvents();
 	}
 }
 
