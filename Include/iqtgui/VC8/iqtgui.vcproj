@@ -473,6 +473,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TControlledWidgetWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TDesignerBasicGui.h"
 				>
 			</File>

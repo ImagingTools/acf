@@ -13,7 +13,8 @@ namespace iqtgui
 {
 
 
-/**	Base class for all Qt GUI componentes.
+/**
+	Base class for all Qt GUI componentes.
  */
 template <class WidgetType>
 class TControlledWidgetWrap: public WidgetType

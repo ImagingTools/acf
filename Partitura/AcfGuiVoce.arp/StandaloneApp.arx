@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1273
+          1290
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -103,6 +103,38 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              SplashScreen
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              SplashScreen
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashTime
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;double&gt;
+            </Type>
+            <ExportId>
+              SplashTime
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               StyleSheet
             </Id>
             <Type>
@@ -113,11 +145,8 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                :/Style/Resources/Style/ApolloStyle.ass
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
