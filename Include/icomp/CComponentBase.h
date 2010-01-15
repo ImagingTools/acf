@@ -113,7 +113,6 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_BEGIN_BASE_COMPONENT(ComponentType)\
 	static const icomp::IComponentStaticInfo& InitStaticInfo(ComponentType* componentPtr)\
 	{\
-		BaseClass::InitStaticInfo(componentPtr);\
 		static icomp::CBaseComponentStaticInfo staticInfo(&BaseClass::InitStaticInfo(NULL));\
 		static bool isStaticInitialized = false;\
 		if (isStaticInitialized && (componentPtr == NULL)){\
