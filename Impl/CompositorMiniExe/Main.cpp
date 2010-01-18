@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 	aboutGuiComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtGuiPck::MainWindowGui> mainWindowComp;
-	mainWindowComp.SetIntAttr("IconSize", 16);
+	mainWindowComp.SetIntAttr("IconSize", 32);
 	mainWindowComp.SetRef("Workspace", &workspaceComp);
 	mainWindowComp.SetRef("DocumentManager", &workspaceComp);
 	mainWindowComp.InsertMultiRef("MainWindowComponents", &packageOverviewDockComp);
