@@ -12,6 +12,7 @@
 #include "istd/TChangeNotifier.h"
 
 #include "iqt/IQImageProvider.h"
+#include "iqt/CBitmap.h"
 
 
 namespace iqt
@@ -77,25 +78,22 @@ bool CBitmapLoaderComp::IsOperationSupported(
 
 int CBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
 {
-	iqt::IQImageProvider* bitmapPtr = dynamic_cast<iqt::IQImageProvider*>(&data);
+	istd::CChangeNotifier notifier(&data);
 
-	if (bitmapPtr != NULL){
-		istd::CChangeNotifier notifier(&data);
+	QString qtFilePath = iqt::GetQString(filePath);
 
-		QString qtFilePath = iqt::GetQString(filePath);
-
-		QImage image;
-		if (image.load(qtFilePath)){
-			bitmapPtr->CopyImageFrom(image);
-
+	CBitmap qtBitmap;
+	QImage& image = qtBitmap.GetQImageRef();
+	if (image.load(qtFilePath)){
+		if (data.CopyFrom(qtBitmap)){
 			return StateOk;
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_LOAD, iqt::GetCString(QObject::tr("Cannot load file %1").arg(qtFilePath)));
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(QObject::tr("Object is not supported image")));
 		}
 	}
 	else{
-		SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(QObject::tr("Object is not Qt image")));
+		SendInfoMessage(MI_CANNOT_LOAD, iqt::GetCString(QObject::tr("Cannot load file %1").arg(qtFilePath)));
 	}
 
 	return StateFailed;
@@ -104,21 +102,30 @@ int CBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString
 
 int CBitmapLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
 {
-	const iqt::IQImageProvider* bitmapPtr = dynamic_cast<const iqt::IQImageProvider*>(&data);
+	const iqt::IQImageProvider* imageProviderPtr = dynamic_cast<const iqt::IQImageProvider*>(&data);
 
-	if (bitmapPtr != NULL){
-		QString qtFilePath = iqt::GetQString(filePath);
-
-		const QImage& image = bitmapPtr->GetQImage();
-		if (image.save(qtFilePath)){
-			return StateOk;
+	CBitmap qtBitmap;
+	if (imageProviderPtr == NULL){
+		if (qtBitmap.CopyFrom(data)){
+			imageProviderPtr = &qtBitmap;
 		}
 		else{
-			SendInfoMessage(MI_CANNOT_SAVE, iqt::GetCString(QObject::tr("Cannot save file %1").arg(qtFilePath)));
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(QObject::tr("Object is not supported image")));
+
+			return StateFailed;
 		}
 	}
+
+	I_ASSERT(imageProviderPtr != NULL);
+
+	QString qtFilePath = iqt::GetQString(filePath);
+
+	const QImage& image = imageProviderPtr->GetQImage();
+	if (image.save(qtFilePath)){
+		return StateOk;
+	}
 	else{
-		SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(QObject::tr("Object is not Qt image")));
+		SendInfoMessage(MI_CANNOT_SAVE, iqt::GetCString(QObject::tr("Cannot save file %1").arg(qtFilePath)));
 	}
 
 	return StateFailed;
