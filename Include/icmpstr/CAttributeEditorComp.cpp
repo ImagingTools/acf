@@ -1192,7 +1192,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueData(const st
 		icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<icomp::CMultiStringAttribute*>(attributePtr);
 		if (stringListAttribute != NULL){
 			QString newValue = editor.property("text").toString();
-			QStringList values = newValue.split(';', QString::SkipEmptyParts);
+			QStringList values = newValue.split(';');
 
 			stringListAttribute->Reset();
 			for (int index = 0; index < values.count(); index++){

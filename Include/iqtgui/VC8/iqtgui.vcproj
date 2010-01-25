@@ -273,10 +273,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLayoutGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CLogGuiComp.cpp"
 				>
 			</File>
@@ -410,10 +406,6 @@
 			</File>
 			<File
 				RelativePath="..\CItemDelegate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLayoutGuiComp.h"
 				>
 			</File>
 			<File

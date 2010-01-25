@@ -27,10 +27,10 @@ public:
 	typedef iqtgui::TGuiComponentBase<QTabWidget> BaseClass;
 
 	I_BEGIN_COMPONENT(CTabContainerGuiComp)
-		I_ASSIGN_MULTI_0(m_slaveWidgetsCompPtr, "SlaveWidgets", "Slave widgets for tab window", true)
+		I_ASSIGN_MULTI_0(m_slaveWidgetsCompPtr, "Guis", "Slave widgets for tab window", true)
 		I_ASSIGN(m_iconsProviderCompPtr, "IconsProvider", "Provider of tab icons", false, "IconsProvider")
 		I_ASSIGN(m_cornerGuiCompPtr, "CornerWidget", "Optional corner widget", false, "CornerWidget")
-		I_ASSIGN_MULTI_0(m_tabNamesAttrPtr, "TabTitles", "Titles for the tab", true)
+		I_ASSIGN_MULTI_0(m_tabNamesAttrPtr, "Names", "Titles for the tab", true)
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size for tab icons", false, 16)
 		I_ASSIGN(m_useTriangularTabsAttrPtr, "UseTriangularTabs", "Using triangular tab form", false, false)
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar", false, 0)

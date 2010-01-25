@@ -18,7 +18,6 @@
 #include "iqtgui/CTabContainerGuiComp.h"
 #include "iqtgui/CAboutWidgetGuiComp.h"
 #include "iqtgui/CTabbedMultiViewGuiComp.h"
-#include "iqtgui/CLayoutGuiComp.h"
 #include "iqtgui/CFilePersistenceGuiComp.h"
 #include "iqtgui/CLoginGuiComp.h"
 #include "iqtgui/CSimpleMainWindowGuiComp.h"
@@ -58,7 +57,6 @@ typedef iqtgui::CSelectionParamGuiComp SelectionParamGui;
 typedef iqtgui::CTabContainerGuiComp TabContainer;
 typedef iqtgui::CAboutWidgetGuiComp AboutGui;
 typedef iqtgui::CTabbedMultiViewGuiComp TabbedMultiViewGui;
-typedef iqtgui::CLayoutGuiComp LayoutGui;
 typedef iqtgui::CFilePersistenceGuiComp FilePersistenceGui;
 typedef iqtgui::CLoginGuiComp LoginGui;
 typedef iqtgui::CSimpleMainWindowGuiComp SimpleMainGui;

@@ -25,7 +25,7 @@ I_EXPORT_PACKAGE("Acf/Qt/Gui", "Standard Qt package", "Qt Standard");
 
 I_EXPORT_COMPONENT(GuiApplication, "Main entry point for window based Qt application", "Application Main Entry Start Begin Qt");
 I_EXPORT_COMPONENT(SplashScreen, "Splash screen", "Splash Screen Start Begin Qt GUI");
-I_EXPORT_COMPONENT(ComposedGui, "Allow to combine more other GUI's", "Combine Collection Composition Slaves Qt GUI");
+I_EXPORT_COMPONENT(ComposedGui, "Allow to combine more other GUI's", "Composed Combine Collection Composition Slaves Qt GUI");
 I_EXPORT_COMPONENT(LogGui, "Application log as simple list", "Log Info List Qt GUI");
 I_EXPORT_COMPONENT(IconProvider, "Icon provider", "Icons Qt GUI"); 
 I_EXPORT_COMPONENT(FileDialogLoader, "File dialog loader", "File Loader Serialization Serializer Dialog GUI Qt"); 
@@ -33,10 +33,9 @@ I_EXPORT_COMPONENT(DockWidgetGui, "Allows to use GUI object as docked views", "V
 I_EXPORT_COMPONENT(ToolBarWidgetGui, "Allows to use GUI object as part of a tool bar", "View Dock Document GUI Qt Toolbar");
 I_EXPORT_COMPONENT(FreeWidgetGui, "Display selected GUI object in separated window", "Free Main Window Separated GUI Qt");
 I_EXPORT_COMPONENT(SelectionParamGui, "Single selection parameter from list of options", "Model Observer Parameters Set Selection Options List GUI Qt");
-I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Tab Widget GUI");
+I_EXPORT_COMPONENT(TabContainer, "Tab container for Qt widgets", "Qt Composed Combine Tab Widget Slaves GUI");
 I_EXPORT_COMPONENT(AboutGui, "About GUI for the application", "Qt Help About Widget GUI");
 I_EXPORT_COMPONENT(TabbedMultiViewGui, "Multi view editor component", "Qt Widget GUI Observer View Model");
-I_EXPORT_COMPONENT(LayoutGui, "Allows create layouted UI", "Qt Widget GUI Layout");
 I_EXPORT_COMPONENT(FilePersistenceGui, "Show load and save button for specified object persistence", "Qt Widget GUI Layout Persistence Load Save Object Loader");
 I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 I_EXPORT_COMPONENT(SimpleMainGui, "Simple UI for a main window based application", "Qt GUI");
