@@ -17,13 +17,13 @@ CSimComponentContextBase::CSimComponentContextBase(const IComponentStaticInfo* i
 }
 
 
-bool CSimComponentContextBase::SetAttr(const std::string& attributeId, const iser::ISerializable* attributePtr)
+bool CSimComponentContextBase::SetAttr(const std::string& attributeId, const iser::IObject* attributePtr)
 {
 	I_ASSERT(attributePtr != NULL);
 
 	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId);
 	if (infoPtr != NULL){
-		infoPtr->attributePtr.SetPtr(const_cast<iser::ISerializable*>(attributePtr));
+		infoPtr->attributePtr.SetPtr(const_cast<iser::IObject*>(attributePtr));
 
 		return true;
 	}
@@ -135,7 +135,7 @@ const IComponentContext* CSimComponentContextBase::GetParentContext() const
 }
 
 
-const iser::ISerializable* CSimComponentContextBase::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
+const iser::IObject* CSimComponentContextBase::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
 {
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 	if (infoPtr != NULL){
@@ -152,7 +152,7 @@ const iser::ISerializable* CSimComponentContextBase::GetAttribute(const std::str
 		I_ASSERT(*attributePtr2 != NULL);
 
 		if ((*attributePtr2)->IsObligatory()){
-			const iser::ISerializable* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
+			const iser::IObject* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
 			if (defaultAttributePtr != NULL){
 				if (definitionLevelPtr != NULL){
 					*definitionLevelPtr = 0;

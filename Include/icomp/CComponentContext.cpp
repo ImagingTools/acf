@@ -29,14 +29,14 @@ const IComponentContext* CComponentContext::GetParentContext() const
 }
 
 
-const iser::ISerializable* CComponentContext::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
+const iser::IObject* CComponentContext::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
 {
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 
 	if (infoPtr  != NULL){
 		const std::string& exportId = infoPtr->exportId;
 		if (!exportId.empty() && (m_parentPtr != NULL)){
-			const iser::ISerializable* parentAttributePtr = NULL;
+			const iser::IObject* parentAttributePtr = NULL;
 			if (definitionLevelPtr != NULL){
 				int parentLevel = -1;
 
@@ -70,7 +70,7 @@ const iser::ISerializable* CComponentContext::GetAttribute(const std::string& at
 		I_ASSERT(*attributePtr2 != NULL);
 
 		if ((*attributePtr2)->IsObligatory()){
-			const iser::ISerializable* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
+			const iser::IObject* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
 			if (defaultAttributePtr != NULL){
 				if (definitionLevelPtr != NULL){
 					*definitionLevelPtr = 0;

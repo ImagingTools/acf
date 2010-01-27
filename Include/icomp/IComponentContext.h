@@ -2,7 +2,7 @@
 #define icomp_IComponentContext_included
 
 
-#include "iser/ISerializable.h"
+#include "iser/IObject.h"
 
 #include "icomp/icomp.h"
 
@@ -46,7 +46,7 @@ public:
 		\param	definitionLevelPtr	optional return value. This will be set to number parents you have to iterate to get
 									component where this attribute was defined. If this attribute was defined in actual component it equals 0.
 	*/
-	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const = 0;
+	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const = 0;
 };
 
 

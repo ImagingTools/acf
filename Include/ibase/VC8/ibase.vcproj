@@ -420,14 +420,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\INamedObject.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IObject.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IObjectQueue.h"
 				>
 			</File>

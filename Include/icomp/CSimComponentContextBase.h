@@ -33,7 +33,7 @@ public:
 		\param	attributeId		ID of attribute.
 		\param	attributePtr	pointer to attribute instance. It will be automatically deleted.
 	*/
-	bool SetAttr(const std::string& attributeId, const iser::ISerializable* attributePtr);
+	bool SetAttr(const std::string& attributeId, const iser::IObject* attributePtr);
 
 	/**
 		Set named reference to some component.
@@ -121,7 +121,7 @@ public:
 	// reimplemeted (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
+	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
 
 protected:
 	/**

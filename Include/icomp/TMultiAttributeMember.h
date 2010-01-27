@@ -68,7 +68,7 @@ bool TMultiAttributeMember<Attribute>::Init(
 	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
 	if (componentContextPtr != NULL){
 		int definitionLevel = -1;
-		const iser::ISerializable* attributePtr = componentContextPtr->GetAttribute(attributeId, &definitionLevel);
+		const iser::IObject* attributePtr = componentContextPtr->GetAttribute(attributeId, &definitionLevel);
 		m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
 
 		if (m_attributePtr != NULL){

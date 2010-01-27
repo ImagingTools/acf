@@ -427,7 +427,7 @@ bool CAttributeEditorComp::SetAttributeToItems(
 		return false;
 	}
 
-	const iser::ISerializable* attributePtr = NULL;
+	const iser::IObject* attributePtr = NULL;
 
 	attributeItem.setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
 
@@ -908,7 +908,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			int propertyMining,
 			QWidget& editor) const
 {
-	const iser::ISerializable* attributePtr = NULL;
+	const iser::IObject* attributePtr = NULL;
 
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeId);
 	if ((attributeInfoPtr != NULL) && attributeInfoPtr->attributePtr.IsValid()){

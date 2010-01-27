@@ -8,6 +8,7 @@
 #include "istd/TDelPtr.h"
 
 #include "iser/ISerializable.h"
+#include "iser/IObject.h"
 
 #include "icomp/icomp.h"
 
@@ -29,7 +30,7 @@ class IRegistryElement: virtual public iser::ISerializable
 {
 public:
 	typedef std::set< std::string> Ids;
-	typedef istd::TDelPtr<iser::ISerializable> AttributePtr;
+	typedef istd::TDelPtr<iser::IObject> AttributePtr;
 
 	enum ChangeFlags
 	{
@@ -87,7 +88,7 @@ public:
 	/**
 		Create attribute object for specified ID.
 	*/
-	virtual iser::ISerializable* CreateAttribute(const std::string& attributeId) const = 0;
+	virtual iser::IObject* CreateAttribute(const std::string& attributeId) const = 0;
 
 	/**
 		Get access to stored attribute info structure.

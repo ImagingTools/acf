@@ -87,17 +87,13 @@ IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const std
 		return NULL;
 	}
 
-	iser::ISerializable* attributePtr = NULL;
-
 	AttributeInfo& info = m_attributeInfos[attributeId];
-
-	info.attributePtr.SetPtr(attributePtr);
 
 	return &info;
 }
 
 
-iser::ISerializable* CRegistryElement::CreateAttribute(const std::string& attributeId) const
+iser::IObject* CRegistryElement::CreateAttribute(const std::string& attributeId) const
 {
 	const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
 	if (staticInfoPtr == NULL){
@@ -274,7 +270,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 						infoPtr->exportId = exportId;
 
 						if (isEnabled){
-							iser::ISerializable* attributePtr = CreateAttribute(attributeId);
+							iser::IObject* attributePtr = CreateAttribute(attributeId);
 							if (attributePtr == NULL){
 								return false;
 							}

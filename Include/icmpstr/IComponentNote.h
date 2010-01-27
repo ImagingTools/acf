@@ -2,7 +2,7 @@
 #define icmpstr_IComponentNote_included
 
 
-#include "ibase/IObject.h"
+#include "iser/IObject.h"
 
 #include "i2d/CVector2d.h"
 
@@ -15,7 +15,7 @@ namespace icmpstr
 {
 
 
-class IComponentNote: virtual public ibase::IObject
+class IComponentNote: virtual public iser::IObject
 {
 public:
 	virtual istd::CString GetText() const = 0;

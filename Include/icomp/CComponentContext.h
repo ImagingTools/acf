@@ -31,14 +31,14 @@ public:
 	// reimplemented (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::ISerializable* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
+	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
 
 private:
 	const IRegistryElement& m_registryElement;
 
 	const IComponentContext* m_parentPtr;
 
-	typedef std::map< std::string, const iser::ISerializable* > AttributeMap;
+	typedef std::map<std::string, const iser::IObject*> AttributeMap;
 	AttributeMap m_attributeMap;
 	std::string m_contextId;
 };

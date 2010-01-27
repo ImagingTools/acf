@@ -5,8 +5,10 @@
 // STL includes
 #include <vector>
 
+#include "istd/CClassInfo.h"
 #include "iser/IArchive.h"
 #include "iser/ISerializable.h"
+#include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
 
 #include "icomp/icomp.h"
@@ -22,7 +24,7 @@ namespace icomp
 	Don't use direct this class, use macros I_MULTIATTR and I_ASSIGN instead.
 */
 template <typename Value>
-class TMultiAttribute: virtual public iser::ISerializable
+class TMultiAttribute: virtual public iser::IObject
 {
 public:
 	typedef Value ValueType;
@@ -43,11 +45,16 @@ public:
 	virtual void InsertValue(const Value& value);
 	virtual void Reset();
 
+	// reimplemented (iser::IObject)
+	const std::string& GetFactoryId() const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
 	std::vector<Value> m_values;
+
+	static const istd::CClassInfo s_classInfo;
 };
 
 
@@ -116,6 +123,15 @@ void TMultiAttribute<Value>::Reset()
 }
 
 
+// reimplemented (iser::IObject)
+
+template <typename Value>
+const std::string& TMultiAttribute<Value>::GetFactoryId() const
+{
+	return s_classInfo.GetName();
+}
+
+
 // reimplemented (ISerializable)
 
 template <typename Value>
@@ -155,6 +171,14 @@ bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)
 	return retVal;
 }
 
+
+// static attributes
+
+template <typename Value>
+const istd::CClassInfo TMultiAttribute<Value>::s_classInfo(typeid(TAttribute<Value>));
+
+
+// typedefs
 
 typedef TMultiAttribute<double> CMultiDoubleAttribute;
 typedef TMultiAttribute<bool> CMultiBoolAttribute;

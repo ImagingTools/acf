@@ -6,7 +6,7 @@
 
 #include "istd/IPolymorphic.h"
 
-#include "iser/ISerializable.h"
+#include "iser/IObject.h"
 
 #include "icomp/icomp.h"
 
@@ -21,7 +21,7 @@ public:
 	/**
 		Create instance of this attribute.
 	 */
-	virtual iser::ISerializable* CreateAttribute() const = 0;
+	virtual iser::IObject* CreateAttribute() const = 0;
 
 	/**
 		Get description of this attribute.
@@ -32,7 +32,7 @@ public:
 		Get default attribute value.
 		\return	pointer to default attribute value, if set. Elsewhere it returns NULL.
 	*/
-	virtual const iser::ISerializable* GetAttributeDefaultValue() const = 0;
+	virtual const iser::IObject* GetAttributeDefaultValue() const = 0;
 
 	/**
 		Return attribute type description.

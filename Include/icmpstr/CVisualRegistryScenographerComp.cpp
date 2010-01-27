@@ -794,7 +794,7 @@ void CVisualRegistryScenographerComp::ConnectReferences(const QString& component
 			const icomp::IAttributeStaticInfo* staticAttributeInfoPtr = staticAttributes.GetValueAt(staticAttributeIndex);
 			I_ASSERT(staticAttributeInfoPtr != NULL);
 
-			const iser::ISerializable* attributePtr = staticAttributeInfoPtr->GetAttributeDefaultValue();
+			const iser::IObject* attributePtr = staticAttributeInfoPtr->GetAttributeDefaultValue();
 			const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributePtr);
 			const icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<const icomp::CFactoryAttribute*>(attributePtr);
 			const icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(attributePtr);

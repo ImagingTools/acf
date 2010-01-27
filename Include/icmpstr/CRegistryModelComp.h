@@ -6,7 +6,7 @@
 #include "icomp/CPackageStaticInfo.h"
 #include "icomp/CComponentBase.h"
 
-#include "ibase/IObject.h"
+#include "iser/IObject.h"
 #include "ibase/TLoggerCompWrap.h"
 #include "ibase/TFactorisableContainer.h"
 
@@ -21,7 +21,7 @@ namespace icmpstr
 class CRegistryModelComp:
 			public ibase::CLoggerComponentBase,
 			public icomp::CRegistry,
-			public ibase::TFactorisableContainer<ibase::IObject>,
+			public ibase::TFactorisableContainer<iser::IObject>,
 			virtual public IRegistryEditController
 {
 public:

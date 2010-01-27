@@ -2,8 +2,10 @@
 #define icomp_TAttribute_included
 
 
+#include "istd/CClassInfo.h"
 #include "iser/IArchive.h"
 #include "iser/ISerializable.h"
+#include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
 
 #include "icomp/icomp.h"
@@ -19,7 +21,7 @@ namespace icomp
 	Don't use direct this class, use macros \c I_ATTR and \c I_ASSIGN instead.
 */
 template <typename Value>
-class TAttribute: virtual public iser::ISerializable
+class TAttribute: virtual public iser::IObject
 {
 public:
 	typedef Value ValueType;
@@ -32,11 +34,16 @@ public:
 	virtual const Value& GetValue() const;
 	virtual void SetValue(const Value& value);
 
+	// reimplemented (iser::IObject)
+	virtual const std::string& GetFactoryId() const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
 	Value m_value;
+
+	static const istd::CClassInfo s_classInfo;
 };
 
 
@@ -76,6 +83,15 @@ void TAttribute<Value>::SetValue(const Value& value)
 }
 
 
+// reimplemented (iser::IObject)
+
+template <typename Value>
+const std::string& TAttribute<Value>::GetFactoryId() const
+{
+	return s_classInfo.GetName();
+}
+
+
 // reimplemented (ISerializable)
 
 template <typename Value>
@@ -93,6 +109,14 @@ bool TAttribute<Value>::Serialize(iser::IArchive& archive)
 	return retVal;
 }
 
+
+// static attributes
+
+template <typename Value>
+const istd::CClassInfo TAttribute<Value>::s_classInfo(typeid(TAttribute<Value>));
+
+
+// typedefs
 
 typedef TAttribute<double> CDoubleAttribute;
 typedef TAttribute<bool> CBoolAttribute;
