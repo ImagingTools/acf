@@ -98,7 +98,7 @@ public:
 			multiAttrPtr = dynamic_cast<TMultiAttribute<Attribute>*>(existingInfoPtr->attributePtr.GetPtr());
 		}
 		else{
-			IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
+			IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(attributeId);
 			if (newInfoPtr != NULL){
 				IRegistryElement::AttributePtr& attributePtr = newInfoPtr->attributePtr;
 				if (!attributePtr.IsValid()){

@@ -21,7 +21,7 @@ bool CSimComponentContextBase::SetAttr(const std::string& attributeId, const ise
 {
 	I_ASSERT(attributePtr != NULL);
 
-	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId, false);
+	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId);
 	if (infoPtr != NULL){
 		infoPtr->attributePtr.SetPtr(const_cast<iser::ISerializable*>(attributePtr));
 
@@ -57,7 +57,7 @@ bool CSimComponentContextBase::InsertMultiRef(const std::string& referenceId, IC
 		multiAttrPtr = dynamic_cast<CMultiReferenceAttribute*>(existingInfoPtr->attributePtr.GetPtr());
 	}
 	else{
-		IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(referenceId, false);
+		IRegistryElement::AttributeInfo* newInfoPtr = m_registryElement.InsertAttributeInfo(referenceId);
 		if (newInfoPtr != NULL){
 			IRegistryElement::AttributePtr& attributePtr = newInfoPtr->attributePtr;
 			if (!attributePtr.IsValid()){

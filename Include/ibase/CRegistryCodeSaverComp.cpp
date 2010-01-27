@@ -776,7 +776,21 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 
 						NextLine(stream);
 						stream << "icomp::IRegistryElement::AttributeInfo* " << attributeInfoName << " = ";
-						stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\", " << (isAttributeValid? "true": "false") << ");";
+						stream << elementInfoName << "->elementPtr->InsertAttributeInfo(\"" << attributeId << "\");";
+
+						if (isAttributeValid){
+							NextLine(stream);
+							stream << "if (" << attributeInfoName << " != NULL){";
+
+							ChangeIndent(1);
+							NextLine(stream);
+							stream << attributeInfoName << "->attributePtr.SetPtr(";
+							stream << elementInfoName << "->elementPtr->CreateAttribute(\"" << attributeId << "\"));";
+
+							ChangeIndent(-1);
+							NextLine(stream);
+							stream << "}";
+						}
 
 						NextLine(stream);
 						stream << "if (" << attributeInfoName << " != NULL){";

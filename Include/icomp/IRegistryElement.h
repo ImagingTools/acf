@@ -82,7 +82,7 @@ public:
 		\param	attributeId		unique ID of new attribute.
 		\param	createAttribute	if it is true, new attribute instance will be created.
 	*/
-	virtual AttributeInfo* InsertAttributeInfo(const std::string& attributeId, bool createAttribute = true) = 0;
+	virtual AttributeInfo* InsertAttributeInfo(const std::string& attributeId) = 0;
 
 	/**
 		Create attribute object for specified ID.

@@ -81,23 +81,13 @@ IRegistryElement::Ids CRegistryElement::GetAttributeIds() const
 }
 
 
-IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const std::string& attributeId, bool createAttribute)
+IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(const std::string& attributeId)
 {
 	if (m_attributeInfos.find(attributeId) != m_attributeInfos.end()){
 		return NULL;
 	}
 
 	iser::ISerializable* attributePtr = NULL;
-
-	if (createAttribute){
-		attributePtr = CreateAttribute(attributeId);
-
-		if (attributePtr == NULL){
-			I_TRACE_ONCE(istd::ErrorLevel, "Components", ("Attribute " + attributeId + " cannot be created").c_str());
-
-			return NULL;
-		}
-	}
 
 	AttributeInfo& info = m_attributeInfos[attributeId];
 
@@ -278,14 +268,20 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 						return false;
 					}
 
-					AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, isEnabled);
+					AttributeInfo* infoPtr = InsertAttributeInfo(attributeId);
 
 					if (infoPtr != NULL){
 						infoPtr->exportId = exportId;
 
 						if (isEnabled){
-							I_ASSERT(infoPtr->attributePtr.IsValid());
-							retVal = retVal && infoPtr->attributePtr->Serialize(archive);
+							iser::ISerializable* attributePtr = CreateAttribute(attributeId);
+							if (attributePtr == NULL){
+								return false;
+							}
+
+							infoPtr->attributePtr.SetPtr(attributePtr);
+
+							retVal = retVal && attributePtr->Serialize(archive);
 						}
 					}
 					else if (!archive.IsTagSkippingSupported()){

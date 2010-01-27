@@ -890,7 +890,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeExportEditor(const
 
 	const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = m_parent.GetRegistryAttribute(attributeId);
 	if (attributeInfoPtr == NULL){
-		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId, false);
+		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId);
 		I_ASSERT(attributeInfoPtr != NULL);
 		if (attributeInfoPtr == NULL){
 			return false;
@@ -1067,7 +1067,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeExportData(const s
 	icomp::IRegistryElement::AttributeInfo* attributeInfoPtr =
 				const_cast<icomp::IRegistryElement::AttributeInfo*>(elementPtr->GetAttributeInfo(attributeId));
 	if (attributeInfoPtr == NULL){
-		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId, true);
+		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId);
 		if (attributeInfoPtr == NULL){
 			return false;
 		}
@@ -1090,8 +1090,11 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueData(const st
 	icomp::IRegistryElement::AttributeInfo* attributeInfoPtr =
 				const_cast<icomp::IRegistryElement::AttributeInfo*>(elementPtr->GetAttributeInfo(attributeId));
 	if (attributeInfoPtr == NULL){
-		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId, true);
-		if (attributeInfoPtr == NULL){
+		attributeInfoPtr = elementPtr->InsertAttributeInfo(attributeId);
+		if (attributeInfoPtr != NULL){
+			attributeInfoPtr->attributePtr.SetPtr(elementPtr->CreateAttribute(attributeId));
+		}
+		else{
 			return false;
 		}
 	}

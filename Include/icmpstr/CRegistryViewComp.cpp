@@ -867,7 +867,10 @@ void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr == NULL && createAttribute){
-				attributeInfoPtr = registryElementPtr->InsertAttributeInfo(attributeId);
+				icomp::IRegistryElement::AttributeInfo* newAttributeInfoPtr = registryElementPtr->InsertAttributeInfo(attributeId);
+				if (newAttributeInfoPtr != NULL){
+					newAttributeInfoPtr->attributePtr.SetPtr(registryElementPtr->CreateAttribute(attributeId));
+				}
 			}
 		}
 	}
