@@ -55,6 +55,7 @@ public:
 	{
 		AttributePtr attributePtr;
 		std::string exportId;
+		mutable std::string readAttributeType;
 	};
 
 	/**

@@ -143,9 +143,9 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 	bool isStoring = archive.IsStoring();
 
-	const iser::IVersionInfo& info = archive.GetVersionInfo();
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 	I_DWORD versionNumber = 0xffffffff;
-	info.GetVersionNumber(iser::IVersionInfo::FrameworkVersionId, versionNumber);
+	versionInfo.GetVersionNumber(iser::IVersionInfo::FrameworkVersionId, versionNumber);
 
 	if (versionNumber >= 1052){
 		retVal = retVal && archive.BeginTag(flagsTag);
@@ -193,8 +193,10 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
+			bool isEnabled = info.attributePtr.IsValid();
+			std::string attributeType = isEnabled? info.attributePtr->GetFactoryId(): info.readAttributeType;
+
 			retVal = retVal && archive.BeginTag(attributeTypeTag);
-			std::string attributeType = staticInfoPtr->GetAttributeType().GetName();
 			retVal = retVal && archive.Process(attributeType);
 			retVal = retVal && archive.EndTag(attributeTypeTag);
 
@@ -204,7 +206,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 			retVal = retVal && archive.BeginTag(dataTag);
 
-			bool isEnabled = info.attributePtr.IsValid();
 			retVal = retVal && archive.BeginTag(isEnabledTag);
 			retVal = retVal && archive.Process(isEnabled);
 			retVal = retVal && archive.EndTag(isEnabledTag);
@@ -242,8 +243,8 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 			const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
 			if (staticInfoPtr != NULL){
-				retVal = retVal && archive.BeginTag(attributeTypeTag);
 				std::string attributeType;
+				retVal = retVal && archive.BeginTag(attributeTypeTag);
 				retVal = retVal && archive.Process(attributeType);
 				retVal = retVal && archive.EndTag(attributeTypeTag);
 
@@ -268,6 +269,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 					if (infoPtr != NULL){
 						infoPtr->exportId = exportId;
+						infoPtr->readAttributeType = attributeType;
 
 						if (isEnabled){
 							iser::IObject* attributePtr = CreateAttribute(attributeId);
