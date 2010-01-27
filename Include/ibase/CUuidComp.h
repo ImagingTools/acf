@@ -27,11 +27,12 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 	I_END_COMPONENT;
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 };
 
 

@@ -10,6 +10,16 @@ namespace ibase
 {
 
 
+// reimplemented (iser::ISerializable)
+
+bool CUuidComp::Serialize(iser::IArchive& archive)
+{
+	return SerializeName(archive);
+}
+
+
+// protected methods
+
 // reimplemented (icomp::IComponent)
 
 void CUuidComp::OnComponentCreated()
@@ -21,15 +31,6 @@ void CUuidComp::OnComponentCreated()
 		SetName(systemEnvironmentPtr->GetUniqueIdentifier());
 	}
 }
-
-
-// reimplemented (iser::ISerializable)
-
-bool CUuidComp::Serialize(iser::IArchive& archive)
-{
-	return SerializeName(archive);
-}
-
 
 
 } // namespace ibase
