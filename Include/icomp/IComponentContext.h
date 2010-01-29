@@ -13,6 +13,7 @@ namespace icomp
 
 class IRegistryElement;
 class IComponent;
+class IComponentStaticInfo;
 
 
 /**
@@ -34,6 +35,11 @@ public:
 		(part of registry document describing component) and context parent.
 	*/
 	virtual const IRegistryElement& GetRegistryElement() const = 0;
+
+	/**
+		Get component static info associated with this context.
+	*/
+	virtual const IComponentStaticInfo& GetStaticInfo() const = 0;
 
 	/**
 		Get access to parent component context.

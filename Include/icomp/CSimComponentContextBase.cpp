@@ -131,6 +131,12 @@ const IRegistryElement& CSimComponentContextBase::GetRegistryElement() const
 }
 
 
+const IComponentStaticInfo& CSimComponentContextBase::GetStaticInfo() const
+{
+	return m_registryElement.GetComponentStaticInfo();
+}
+
+
 const IComponentContext* CSimComponentContextBase::GetParentContext() const
 {
 	return this;

@@ -235,6 +235,7 @@ void CCompositeComponent::CreateSubcomponentInfo(
 			if (!subContextPtr.IsValid()){
 				subContextPtr.SetPtr(new CCompositeComponentContext(
 							&registryElement,
+							&registryElement.GetComponentStaticInfo(),
 							subRegistryPtr,
 							&registriesManager,
 							contextPtr));
@@ -249,7 +250,11 @@ void CCompositeComponent::CreateSubcomponentInfo(
 		}
 		else{	// create real component
 			if (!subContextPtr.IsValid()){
-				subContextPtr.SetPtr(new CComponentContext(&registryElement, contextPtr, componentId));
+				subContextPtr.SetPtr(new CComponentContext(
+							&registryElement,
+							&registryElement.GetComponentStaticInfo(),
+							contextPtr,
+							componentId));
 			}
 
 			if (subContextPtr.IsValid() && (subComponentPtr != NULL)){

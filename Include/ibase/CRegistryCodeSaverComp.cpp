@@ -453,7 +453,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	NextLine(stream);
 	stream << "static icomp::CRegistryElement element;";
 	NextLine(stream);
-	stream << "static icomp::CCompositeComponentContext context(&element, &CMainRegistry::EnsureRegistryInit(&s_factory), &s_factory, NULL);";
+	stream << "static icomp::CCompositeComponentContext context(&element, &s_factory, &CMainRegistry::EnsureRegistryInit(&s_factory), &s_factory, NULL);";
 	NextLine(stream);
 	stream << "SetComponentContext(&context, NULL, false);";
 

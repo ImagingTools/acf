@@ -11,10 +11,11 @@ namespace icomp
 
 CCompositeComponentContext::CCompositeComponentContext(
 			const IRegistryElement* elementPtr,
+			const IComponentStaticInfo* staticInfoPtr,
 			const IRegistry* registryPtr,
 			const IRegistriesManager* registriesManagerPtr,
 			const CCompositeComponentContext* parentPtr)
-:	BaseClass(elementPtr, parentPtr),
+:	BaseClass(elementPtr, staticInfoPtr, parentPtr),
 	m_registry(*registryPtr),
 	m_registriesManager(*registriesManagerPtr)
 {

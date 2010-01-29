@@ -29,6 +29,7 @@ public:
 	*/
 	CCompositeComponentContext(
 				const IRegistryElement* elementPtr,
+				const IComponentStaticInfo* staticInfoPtr,
 				const IRegistry* registryPtr,
 				const IRegistriesManager* registriesManagerPtr,
 				const CCompositeComponentContext* parentPtr);

@@ -120,6 +120,7 @@ public:
 
 	// reimplemeted (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
+	virtual const IComponentStaticInfo& GetStaticInfo() const;
 	virtual const IComponentContext* GetParentContext() const;
 	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
 

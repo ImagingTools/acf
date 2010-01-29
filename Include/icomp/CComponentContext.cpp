@@ -9,9 +9,18 @@ namespace icomp
 {
 
 
-CComponentContext::CComponentContext(const IRegistryElement* elementPtr, const IComponentContext* parentPtr, const std::string& contextId)
-:	m_registryElement(*elementPtr), m_parentPtr(parentPtr), m_contextId(contextId)
+CComponentContext::CComponentContext(
+			const IRegistryElement* elementPtr,
+			const IComponentStaticInfo* staticInfoPtr,
+			const IComponentContext* parentPtr,
+			const std::string& contextId)
+:	m_registryElement(*elementPtr),
+	m_staticInfo(*staticInfoPtr),
+	m_parentPtr(parentPtr),
+	m_contextId(contextId)
 {
+	I_ASSERT(elementPtr != NULL);
+	I_ASSERT(staticInfoPtr != NULL);
 }
 
 
@@ -20,6 +29,12 @@ CComponentContext::CComponentContext(const IRegistryElement* elementPtr, const I
 const IRegistryElement& CComponentContext::GetRegistryElement() const
 {
 	return m_registryElement;
+}
+
+
+const IComponentStaticInfo& CComponentContext::GetStaticInfo() const
+{
+	return m_staticInfo;
 }
 
 

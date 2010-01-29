@@ -24,17 +24,23 @@ class IRegistryElement;
 class CComponentContext: virtual public IComponentContext
 {
 public:
-	CComponentContext(const IRegistryElement* elementPtr, const IComponentContext* parentPtr = NULL, const std::string& contextId = "");
+	CComponentContext(
+				const IRegistryElement* elementPtr,
+				const IComponentStaticInfo* staticInfoPtr,
+				const IComponentContext* parentPtr = NULL,
+				const std::string& contextId = "");
 
 	const std::string& GetContextId() const;
 
 	// reimplemented (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
+	virtual const IComponentStaticInfo& GetStaticInfo() const;
 	virtual const IComponentContext* GetParentContext() const;
 	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
 
 private:
 	const IRegistryElement& m_registryElement;
+	const IComponentStaticInfo& m_staticInfo;
 
 	const IComponentContext* m_parentPtr;
 
