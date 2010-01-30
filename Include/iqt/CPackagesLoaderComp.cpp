@@ -387,7 +387,7 @@ CDllFunctionsProvider& CPackagesLoaderComp::GetProviderRef(const QFileInfo& file
 // public methods of embedded class LogingRegistry
 
 CPackagesLoaderComp::LogingRegistry::LogingRegistry(CPackagesLoaderComp* parentPtr)
-:	BaseClass(parentPtr), m_parent(*parentPtr)
+:	m_parent(*parentPtr)
 {
 	I_ASSERT(parentPtr != NULL);
 }

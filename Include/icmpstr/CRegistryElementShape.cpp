@@ -9,8 +9,6 @@
 #include <QGraphicsScene>
 #include <QApplication>
 
-#include "icomp/CCompositeComponentStaticInfo.h"
-
 #include "icmpstr/CVisualRegistryScenographerComp.h"
 #include "icmpstr/CRegistryElementShape.h"
 
@@ -62,15 +60,35 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	QRectF shadowRect = mainRect;
 	shadowRect.adjust(SHADOW_OFFSET, SHADOW_OFFSET, SHADOW_OFFSET, SHADOW_OFFSET);
-	
+
+	const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
+	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
+	if (managerPtr != NULL){
+		metaInfoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
+	}
+
 	if (isSelected()){
 		painterPtr->fillRect(shadowRect, QColor(10, 242, 126, 50));
+
+		if (metaInfoPtr != NULL){
+			painterPtr->fillRect(mainRect, QColor(10, 242, 126, 255));
+		}
+		else{
+			painterPtr->fillRect(mainRect, QColor(69, 185, 127, 255));
+		}
+
 		painterPtr->setPen(Qt::blue);
-		painterPtr->fillRect(mainRect, QColor(10, 242, 126, 255));
 	}
 	else{
 		painterPtr->fillRect(shadowRect, QColor(0, 0, 0, 30));
-		painterPtr->fillRect(mainRect, Qt::white);
+
+		if (metaInfoPtr != NULL){
+			painterPtr->fillRect(mainRect, Qt::white);
+		}
+		else{
+			painterPtr->fillRect(mainRect, QColor(128, 128, 128, 255));
+		}
+
 		painterPtr->setPen(Qt::black);
 	}
 
@@ -107,13 +125,9 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 		QIcon(":/Icons/AutoInit.svg").paint(painterPtr, iconRect.toRect());
 	}
 
-	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
-	if (managerPtr != NULL){
-		const icomp::IComponentStaticInfo* infoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
-		if ((infoPtr != NULL) && (infoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			painterPtr->drawRect(mainRect);
-			mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
-		}
+	if ((metaInfoPtr != NULL) && (metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+		painterPtr->drawRect(mainRect);
+		mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 	}
 
 	if (!m_exportedInterfacesList.empty()){
@@ -158,12 +172,17 @@ bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
 	if (BaseClass::OnAttached(modelPtr)){
 		I_ASSERT(objectPtr != NULL);
 
+		const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
 		const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
 		if (managerPtr != NULL){
-			const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
-			if (metaInfoPtr != NULL){
-				setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
-			}
+			metaInfoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
+		}
+
+		if (metaInfoPtr != NULL){
+			setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
+		}
+		else{
+			setToolTip(tr("Package or component not found"));
 		}
 
 		return true;

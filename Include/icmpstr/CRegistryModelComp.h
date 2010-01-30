@@ -31,7 +31,6 @@ public:
 	I_BEGIN_COMPONENT(CRegistryModelComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(icomp::IRegistry);
-		I_ASSIGN(m_staticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo");
 	I_END_COMPONENT;
 
 	enum ChangeFlags
@@ -52,9 +51,6 @@ public:
 	virtual i2d::CVector2d GetComponentPosition(const std::string& componentName) const;
 	virtual void SetComponentPosition(const std::string& componentName, const i2d::CVector2d& point);
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 	// reimplemented (icomp::IRegistry)
 	virtual ElementInfo* InsertElementInfo(
 				const std::string& elementId,
@@ -70,11 +66,11 @@ protected:
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
 
 	// reimplemented (icomp::CRegistry)
-	virtual icomp::IRegistryElement* CreateRegistryElement(const icomp::CComponentAddress& address) const;
+	virtual icomp::IRegistryElement* CreateRegistryElement(
+				const std::string& elementId,
+				const icomp::CComponentAddress& address) const;
 
 private:
-	I_REF(icomp::IComponentStaticInfo, m_staticInfoCompPtr);
-
 	typedef std::map<std::string, i2d::CVector2d> ElementsPositionMap;
 	ElementsPositionMap m_elementsPositionMap;
 };

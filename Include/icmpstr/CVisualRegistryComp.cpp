@@ -6,6 +6,8 @@
 
 #include "icomp/CInterfaceManipBase.h"
 
+#include "icmpstr/CRegistryModelComp.h"
+
 
 // public methods
 
@@ -89,16 +91,6 @@ bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CVisualRegistryComp::OnComponentCreated()
-{
-	if (m_staticInfoCompPtr.IsValid()){
-		SetComponentStaticInfo(m_staticInfoCompPtr.GetPtr());
-	}
-}
-
-
 // reimplemented (icomp::IRegistry)
 
 CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
@@ -161,23 +153,17 @@ bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, st
 
 // reimplemented (icomp::CRegistry)
 
-icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(const icomp::CComponentAddress& address) const
+icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
+			const std::string& elementId,
+			const icomp::CComponentAddress& address) const
 {
-	const icomp::IComponentStaticInfo* componentsFactoryPtr = GetComponentStaticInfo();
-	if (componentsFactoryPtr != NULL){
-		const icomp::IComponentStaticInfo* packageInfoPtr = componentsFactoryPtr->GetSubcomponentInfo(address.GetPackageId());
-		if (packageInfoPtr != NULL){
-			const icomp::IComponentStaticInfo* componentInfoPtr = packageInfoPtr->GetSubcomponentInfo(address.GetComponentId());
-			if (componentInfoPtr != NULL){
-				Element* registryElementPtr = new Element;
-				if (registryElementPtr != NULL){
-					registryElementPtr->Initialize(this, componentInfoPtr, address);
-					registryElementPtr->SetSlavePtr(const_cast<CVisualRegistryComp*>(this));
+	Element* registryElementPtr = new Element;
+	if (registryElementPtr != NULL){
+		registryElementPtr->Initialize(this, address);
+		registryElementPtr->SetName(elementId);
+		registryElementPtr->SetSlavePtr(const_cast<CVisualRegistryComp*>(this));
 
-					return registryElementPtr;
-				}
-			}
-		}
+		return registryElementPtr;
 	}
 
 	return NULL;

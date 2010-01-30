@@ -30,7 +30,6 @@ public:
 	I_BEGIN_COMPONENT(CVisualRegistryComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(icomp::IRegistry);
-		I_ASSIGN(m_staticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo");
 	I_END_COMPONENT;
 
 	enum ChangeFlags
@@ -45,9 +44,6 @@ public:
 
 	virtual bool SerializeComponentsLayout(iser::IArchive& archive);
 	virtual bool SerializeRegistry(iser::IArchive& archive);
-
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
 
 	// reimplemented (icomp::IRegistry)
 	virtual ElementInfo* InsertElementInfo(
@@ -64,7 +60,9 @@ protected:
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
 
 	// reimplemented (icomp::CRegistry)
-	virtual icomp::IRegistryElement* CreateRegistryElement(const icomp::CComponentAddress& address) const;
+	virtual icomp::IRegistryElement* CreateRegistryElement(
+				const std::string& elementId,
+				const icomp::CComponentAddress& address) const;
 
 private:
 	I_REF(icomp::IComponentStaticInfo, m_staticInfoCompPtr);

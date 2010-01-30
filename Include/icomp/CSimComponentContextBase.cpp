@@ -15,8 +15,6 @@ CSimComponentContextBase::CSimComponentContextBase(const IComponentStaticInfo* i
 :	m_metaInfo(*infoPtr)
 {
 	I_ASSERT(infoPtr != NULL);
-
-	m_registryElement.Initialize(infoPtr);
 }
 
 

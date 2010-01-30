@@ -34,8 +34,6 @@ CComponentAccessor::CComponentAccessor(
 				const icomp::IRegistry* registryPtr = registryLoaderPtr->GetRegistryFromFile(m_registryFile.c_str());
 				if (registryPtr != NULL){
 					static icomp::CRegistryElement dummyElement;
-					dummyElement.Initialize(staticInfoPtr);
-
 
 					m_composite.BeginAutoInitBlock();
 					m_isAutoInitBlocked = true;

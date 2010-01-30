@@ -16,7 +16,6 @@
 #include "iser/CArchiveTag.h"
 
 #include "icomp/CCompositeComponent.h"
-#include "icomp/CCompositeComponentStaticInfo.h"
 
 #include "iqt/iqt.h"
 
@@ -83,12 +82,17 @@ void CComponentSceneItem::SetElementInfo(const icomp::IRegistry::ElementInfo* el
 
 	m_elementInfoPtr = elementInfoPtr;
 
+	const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
 	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetPackagesManager();
 	if (managerPtr != NULL){
-		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(elementInfoPtr->address);
-		if (metaInfoPtr != NULL){
-			setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
-		}
+		metaInfoPtr = managerPtr->GetComponentMetaInfo(m_elementInfoPtr->address);
+	}
+
+	if (metaInfoPtr != NULL){
+		setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
+	}
+	else{
+		setToolTip(tr("Package or component not found"));
 	}
 
 	m_image = m_registryView.GetIcon(m_elementInfoPtr->address).pixmap(128, 128);
@@ -238,15 +242,35 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 
 	QRectF shadowRect = mainRect;
 	shadowRect.adjust(10, 10, 10, 10);
-	
+
+	const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
+	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetPackagesManager();
+	if (managerPtr != NULL){
+		metaInfoPtr = managerPtr->GetComponentMetaInfo(m_elementInfoPtr->address);
+	}
+
 	if (isSelected()){
 		painter->fillRect(shadowRect, QColor(10, 242, 126, 50));
+
+		if (metaInfoPtr != NULL){
+			painter->fillRect(mainRect, QColor(10, 242, 126, 255));
+		}
+		else{
+			painter->fillRect(mainRect, QColor(69, 185, 127, 255));
+		}
+
 		painter->setPen(Qt::blue);
-		painter->fillRect(mainRect, QColor(10, 242, 126, 255));
 	}
 	else{
 		painter->fillRect(shadowRect, QColor(0, 0, 0, 30));
-		painter->fillRect(mainRect, Qt::white);
+
+		if (metaInfoPtr != NULL){
+			painter->fillRect(mainRect, Qt::white);
+		}
+		else{
+			painter->fillRect(mainRect, QColor(128, 128, 128, 255));
+		}
+
 		painter->setPen(Qt::black);
 	}
 
@@ -265,14 +289,10 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 
 	int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
 
-	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetPackagesManager();
-	if (managerPtr != NULL){
-		const icomp::IComponentStaticInfo* infoPtr = managerPtr->GetComponentMetaInfo(m_elementInfoPtr->address);
-		if (infoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE){
-			QRectF compositeRect = mainRect;
-			compositeRect.adjust(4, 4, -4, -4);
-			painter->drawRect(compositeRect);
-		}
+	if ((metaInfoPtr != NULL) && metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE){
+		QRectF compositeRect = mainRect;
+		compositeRect.adjust(4, 4, -4, -4);
+		painter->drawRect(compositeRect);
 	}
 
 	if (m_elementInfoPtr->elementPtr.IsValid()){

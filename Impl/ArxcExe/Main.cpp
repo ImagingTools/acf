@@ -72,7 +72,6 @@ int main(int argc, char *argv[])
 
 	// registry model
 	icomp::TSimComponentWrap<CmpstrPck::RegistryModel> registryComp;
-	registryComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
 	registryComp.SetRef("Log", &log);
 	registryComp.InitComponent();
 

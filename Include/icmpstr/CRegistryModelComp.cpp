@@ -100,16 +100,6 @@ void CRegistryModelComp::SetComponentPosition(const std::string& componentName, 
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CRegistryModelComp::OnComponentCreated()
-{
-	if (m_staticInfoCompPtr.IsValid()){
-		SetComponentStaticInfo(m_staticInfoCompPtr.GetPtr());
-	}
-}
-
-
 // reimplemented (icomp::IRegistry)
 
 CRegistryModelComp::ElementInfo* CRegistryModelComp::InsertElementInfo(
@@ -166,23 +156,17 @@ bool CRegistryModelComp::SerializeComponentPosition(iser::IArchive& archive, std
 
 // reimplemented (icomp::CRegistry)
 
-icomp::IRegistryElement* CRegistryModelComp::CreateRegistryElement(const icomp::CComponentAddress& address) const
+icomp::IRegistryElement* CRegistryModelComp::CreateRegistryElement(
+			const std::string& elementId,
+			const icomp::CComponentAddress& address) const
 {
-	const icomp::IComponentStaticInfo* componentsFactoryPtr = GetComponentStaticInfo();
-	if (componentsFactoryPtr != NULL){
-		const icomp::IComponentStaticInfo* packageInfoPtr = componentsFactoryPtr->GetSubcomponentInfo(address.GetPackageId());
-		if (packageInfoPtr != NULL){
-			const icomp::IComponentStaticInfo* componentInfoPtr = packageInfoPtr->GetSubcomponentInfo(address.GetComponentId());
-			if (componentInfoPtr != NULL){
-				Element* registryElementPtr = new Element;
-				if (registryElementPtr != NULL){
-					registryElementPtr->Initialize(this, componentInfoPtr, address);
-					registryElementPtr->SetSlavePtr(const_cast<CRegistryModelComp*>(this));
+	Element* registryElementPtr = new Element;
+	if (registryElementPtr != NULL){
+		registryElementPtr->Initialize(this, address);
+		registryElementPtr->SetName(elementId);
+		registryElementPtr->SetSlavePtr(const_cast<CRegistryModelComp*>(this));
 
-					return registryElementPtr;
-				}
-			}
-		}
+		return registryElementPtr;
 	}
 
 	return NULL;

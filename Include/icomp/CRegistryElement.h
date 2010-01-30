@@ -24,19 +24,11 @@ public:
 	*/
 	CRegistryElement();
 
-	/**
-		Initialize registry with static info.
-		\param	infoPtr		pointer to static info object. It cannot be NULL.
-	*/
-	void Initialize(const IComponentStaticInfo* infoPtr);
-
-
 	virtual AttributeInfo* GetAttributeInfo(const std::string& attributeId);
 
 	// reimplemented (icomp::IRegistryElement)
 	virtual I_DWORD GetElementFlags() const;
 	virtual void SetElementFlags(I_DWORD flags);
-	virtual const IComponentStaticInfo& GetComponentStaticInfo() const;
 	virtual Ids GetAttributeIds() const;
 	virtual AttributeInfo* InsertAttributeInfo(const std::string& attributeId, const std::string& attributeType);
 	virtual iser::IObject* CreateAttribute(const std::string& attributeType) const;
@@ -46,12 +38,7 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-protected:
-	virtual const IAttributeStaticInfo* GetAttributeStaticInfo(const std::string& attributeId) const;
-
 private:
-	const IComponentStaticInfo* m_staticInfoPtr;
-
 	I_DWORD m_elementFlags;
 
 	typedef std::map< std::string, AttributeInfo> AttributeInfoMap;

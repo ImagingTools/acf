@@ -30,7 +30,6 @@ public:
 	// overloaded (icomp::CRegistryElement)
 	void Initialize(
 				const icomp::IRegistry* parentPtr,
-				const icomp::IComponentStaticInfo* infoPtr,
 				const icomp::CComponentAddress& address);
 
 	// reimplemented (IObject2d)

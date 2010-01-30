@@ -111,7 +111,6 @@ int main(int argc, char *argv[])
 
 	// registry model
 	icomp::TSimComponentsFactory<CmpstrPck::RegistryModel> modelFactoryComp;
-	modelFactoryComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
 	modelFactoryComp.SetRef("Log", &log);
 
 	// registry view

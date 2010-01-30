@@ -10,7 +10,9 @@ namespace icomp
 {
 
 
-CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(const IRegistry& registry)
+CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
+			const IRegistry& registry,
+			const icomp::IMetaInfoManager& manager)
 {
 	// register exported interfaces
 	const IRegistry::ExportedInterfacesMap& interfacesMap = registry.GetExportedInterfacesMap();
@@ -30,14 +32,16 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(const IRegistry& re
 		const std::string& subcomponentId = subcomponentIter->first;
 		const std::string& elementId = subcomponentIter->second;
 		const IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
-		if ((elementInfoPtr == NULL) || !elementInfoPtr->elementPtr.IsValid()){
+		if (elementInfoPtr == NULL){
 			continue;
 		}
 
-		const IRegistryElement& element = *elementInfoPtr->elementPtr;
-		const IComponentStaticInfo& subcomponentInfo = element.GetComponentStaticInfo();
+		const IComponentStaticInfo* subMetaInfoPtr = manager.GetComponentMetaInfo(elementInfoPtr->address);
+		if (subMetaInfoPtr == NULL){
+			continue;
+		}
 
-		RegisterSubcomponentInfo(subcomponentId, &subcomponentInfo);
+		RegisterSubcomponentInfo(subcomponentId, subMetaInfoPtr);
 	}
 
 	// register exported attributes
@@ -47,14 +51,18 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(const IRegistry& re
 				++elementIter){
 		const std::string& elementId = *elementIter;
 		const IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
-		if ((elementInfoPtr == NULL) || !elementInfoPtr->elementPtr.IsValid()){
+		if (elementInfoPtr == NULL){
+			continue;
+		}
+
+		const IComponentStaticInfo* subMetaInfoPtr = manager.GetComponentMetaInfo(elementInfoPtr->address);
+		if (subMetaInfoPtr == NULL){
 			continue;
 		}
 
 		const IRegistryElement& element = *elementInfoPtr->elementPtr;
-		const IComponentStaticInfo& componentInfo = element.GetComponentStaticInfo();
-
 		IRegistryElement::Ids attributeIds = element.GetAttributeIds();
+
 		for (		IRegistryElement::Ids::iterator attrIter = attributeIds.begin();
 					attrIter != attributeIds.end();
 					++attrIter){
@@ -64,11 +72,22 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(const IRegistry& re
 				continue;
 			}
 
-			const IComponentStaticInfo::AttributeInfos& attrInfos = componentInfo.GetAttributeInfos();
+			const IComponentStaticInfo::AttributeInfos& attrInfos = subMetaInfoPtr->GetAttributeInfos();
 			const IComponentStaticInfo::AttributeInfos::ValueType* attrStaticInfoPtr2 =
 						attrInfos.FindElement(attrId);
 			if ((attrStaticInfoPtr2 != NULL) && (*attrStaticInfoPtr2 != NULL)){
-				RegisterAttributeInfo(attrInfoPtr->exportId, *attrStaticInfoPtr2);
+				if (attrInfoPtr->attributePtr.IsValid() && (*attrStaticInfoPtr2)->IsObligatory()){
+					// attribute was obligatory, but it was defined -> now it is optional
+					AttrMetaInfoPtr& replaceAttrPtr = m_attrReplacers[*attrStaticInfoPtr2];
+					if (!replaceAttrPtr.IsValid()){
+						replaceAttrPtr.SetPtr(new AttrAsOptionalDelegator(*attrStaticInfoPtr2));
+					}
+
+					RegisterAttributeInfo(attrInfoPtr->exportId, replaceAttrPtr.GetPtr());
+				}
+				else{
+					RegisterAttributeInfo(attrInfoPtr->exportId, *attrStaticInfoPtr2);
+				}
 			}
 		}
 	}
@@ -101,6 +120,45 @@ const istd::CString& CCompositeComponentStaticInfo::GetDescription() const
 const istd::CString& CCompositeComponentStaticInfo::GetKeywords() const
 {
 	return m_keywords;
+}
+
+
+// public methods of embedded class AttrAsOptionalDelegator
+
+CCompositeComponentStaticInfo::AttrAsOptionalDelegator::AttrAsOptionalDelegator(const IAttributeStaticInfo* slavePtr)
+:	m_slave(*slavePtr)
+{
+	I_ASSERT(slavePtr != NULL);
+}
+
+
+const std::string& CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeDescription() const
+{
+	return m_slave.GetAttributeDescription();
+}
+
+
+const iser::IObject* CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeDefaultValue() const
+{
+	return m_slave.GetAttributeDefaultValue();
+}
+
+
+const std::string& CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeTypeName() const
+{
+	return m_slave.GetAttributeTypeName();
+}
+
+
+const istd::CClassInfo& CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetRelatedInterfaceType() const
+{
+	return m_slave.GetRelatedInterfaceType();
+}
+
+
+bool CCompositeComponentStaticInfo::AttrAsOptionalDelegator::IsObligatory() const
+{
+	return false;
 }
 
 

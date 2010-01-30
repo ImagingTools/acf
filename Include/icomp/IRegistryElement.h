@@ -70,11 +70,6 @@ public:
 	virtual void SetElementFlags(I_DWORD flags) = 0;
 
 	/**
-		Get access to component static info object.
-	*/
-	virtual const IComponentStaticInfo& GetComponentStaticInfo() const = 0;
-
-	/**
 		Get ID list of existing attributes.
 	*/
 	virtual Ids GetAttributeIds() const = 0;

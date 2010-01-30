@@ -13,26 +13,6 @@ namespace icomp
 {
 
 
-CRegistry::CRegistry(const IComponentStaticInfo* factoryPtr)
-:	m_componentsFactoryPtr(factoryPtr)
-{
-}
-
-
-bool CRegistry::IsValid() const
-{
-	return (m_componentsFactoryPtr != NULL);
-}
-
-
-void CRegistry::SetComponentStaticInfo(const IComponentStaticInfo* factoryPtr)
-{
-	I_ASSERT(factoryPtr != NULL);
-
-	m_componentsFactoryPtr = factoryPtr;
-}
-
-
 // reimplemented (icomp::IRegistry)
 
 IRegistry::Ids CRegistry::GetElementIds() const
@@ -53,10 +33,6 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 			const icomp::CComponentAddress& address,
 			bool ensureElementCreated)
 {
-	if (!IsValid()){
-		return NULL;
-	}
-
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
 	if (iter != m_componentsMap.end()){
 		return NULL;
@@ -64,7 +40,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 
 	istd::TDelPtr<IRegistryElement> registryPtr;
 	if (ensureElementCreated){
-		registryPtr.SetPtr(CreateRegistryElement(address));
+		registryPtr.SetPtr(CreateRegistryElement(elementId, address));
 
 		if (!registryPtr.IsValid()){
 			return NULL;
@@ -198,11 +174,6 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 {
 	istd::CChangeNotifier changePtr(archive.IsStoring()? NULL: this);
 
-	bool isStoring = archive.IsStoring();
-	if (!isStoring && (m_componentsFactoryPtr == NULL)){
-		return false;
-	}
-
 	bool retVal =	SerializeComponents(archive) &&
 					SerializeExportedInterfaces(archive) &&
 					SerializeExportedComponents(archive);
@@ -220,7 +191,7 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(m_keywords);
 		retVal = retVal && archive.EndTag(keywordsTag);
 	}
-	else if (!isStoring){
+	else if (!archive.IsStoring()){
 		m_description = "";
 		m_keywords = "";
 	}
@@ -243,22 +214,15 @@ I_DWORD CRegistry::GetMinimalVersion(int versionId) const
 
 // protected methods
 
-icomp::IRegistryElement* CRegistry::CreateRegistryElement(const icomp::CComponentAddress& address) const
+icomp::IRegistryElement* CRegistry::CreateRegistryElement(
+			const std::string& /*elementId*/,
+			const icomp::CComponentAddress& /*address*/) const
 {
-	if (m_componentsFactoryPtr != NULL){
-		const IComponentStaticInfo* packageInfoPtr = m_componentsFactoryPtr->GetSubcomponentInfo(address.GetPackageId());
-		if (packageInfoPtr != NULL){
-			const IComponentStaticInfo* componentInfoPtr = packageInfoPtr->GetSubcomponentInfo(address.GetComponentId());
-			if (componentInfoPtr != NULL){
-				Element* registryElementPtr = new Element;
-				if (registryElementPtr != NULL){
-					registryElementPtr->Initialize(componentInfoPtr);
-					registryElementPtr->SetSlavePtr(const_cast<CRegistry*>(this));
+	Element* registryElementPtr = new Element;
+	if (registryElementPtr != NULL){
+		registryElementPtr->SetSlavePtr(const_cast<CRegistry*>(this));
 
-					return registryElementPtr;
-				}
-			}
-		}
+		return registryElementPtr;
 	}
 
 	return NULL;
@@ -401,7 +365,6 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 	else{
 		m_exportedInterfacesMap.clear();
 
-		I_ASSERT(m_componentsFactoryPtr != NULL);
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(interfaceTag);
 

@@ -11,11 +11,12 @@ namespace icomp
 CCompositePackageStaticInfo::CCompositePackageStaticInfo(
 			const std::string& packageId,
 			const Ids& componentIds,
-			const icomp::IRegistriesManager* registriesManagerPtr)
+			const icomp::IComponentEnvironmentManager* managerPtr)
 
-:	m_packageId(packageId), m_registriesManager(*registriesManagerPtr)
+:	m_packageId(packageId),
+	m_envManager(*managerPtr)
 {
-	I_ASSERT(registriesManagerPtr != NULL);
+	I_ASSERT(managerPtr != NULL);
 
 	for (		Ids::const_iterator iter = componentIds.begin();
 				iter != componentIds.end();
@@ -72,9 +73,9 @@ const icomp::IComponentStaticInfo* CCompositePackageStaticInfo::GetSubcomponentI
 		if (!infoPtr->isInitialized){
 			icomp::CComponentAddress address(m_packageId, subcomponentId);
 
-			const icomp::IRegistry* registryPtr = m_registriesManager.GetRegistry(address);
+			const icomp::IRegistry* registryPtr = m_envManager.GetRegistry(address);
 			if (registryPtr != NULL){
-				infoPtr->componentInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(*registryPtr));
+				infoPtr->componentInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(*registryPtr, m_envManager));
 			}
 
 			infoPtr->isInitialized = true;

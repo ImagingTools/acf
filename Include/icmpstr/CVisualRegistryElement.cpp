@@ -31,11 +31,8 @@ void CVisualRegistryElement::SetName(const std::string& name)
 
 void CVisualRegistryElement::Initialize(
 			const icomp::IRegistry* parentPtr,
-			const icomp::IComponentStaticInfo* infoPtr,
 			const icomp::CComponentAddress& address)
 {
-	BaseClass::Initialize(infoPtr);
-
 	m_registryPtr = parentPtr;
 	m_addess = address;
 }

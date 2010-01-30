@@ -22,17 +22,8 @@ namespace icomp
 
 
 CRegistryElement::CRegistryElement()
-:	m_staticInfoPtr(NULL),
-	m_elementFlags(0)
+:	m_elementFlags(0)
 {
-}
-
-
-void CRegistryElement::Initialize(const IComponentStaticInfo* infoPtr)
-{
-	I_ASSERT(infoPtr != NULL);
-
-	m_staticInfoPtr = infoPtr;
 }
 
 
@@ -62,14 +53,6 @@ void CRegistryElement::SetElementFlags(I_DWORD flags)
 
 		m_elementFlags = flags;
 	}
-}
-
-
-const IComponentStaticInfo& CRegistryElement::GetComponentStaticInfo() const
-{
-	I_ASSERT(m_staticInfoPtr != NULL);
-
-	return *m_staticInfoPtr;
 }
 
 
@@ -241,11 +224,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.Process(attributeId);
 			retVal = retVal && archive.EndTag(attributeIdTag);
 
-			const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
-			if (staticInfoPtr == NULL){
-				return false;
-			}
-
 			bool isEnabled = info.attributePtr.IsValid();
 			std::string attributeType = isEnabled? info.attributePtr->GetFactoryId(): info.attributeTypeName;
 
@@ -294,54 +272,49 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
-			const IAttributeStaticInfo* staticInfoPtr = GetAttributeStaticInfo(attributeId);
-			if (staticInfoPtr != NULL){
-				std::string attributeType;
-				retVal = retVal && archive.BeginTag(attributeTypeTag);
-				retVal = retVal && archive.Process(attributeType);
-				retVal = retVal && archive.EndTag(attributeTypeTag);
+			std::string attributeType;
+			retVal = retVal && archive.BeginTag(attributeTypeTag);
+			retVal = retVal && archive.Process(attributeType);
+			retVal = retVal && archive.EndTag(attributeTypeTag);
 
-				if (attributeType == staticInfoPtr->GetAttributeTypeName()){
-					retVal = retVal && archive.BeginTag(exportIdTag);
-					std::string exportId;
-					retVal = retVal && archive.Process(exportId);
-					retVal = retVal && archive.EndTag(exportIdTag);
+			retVal = retVal && archive.BeginTag(exportIdTag);
+			std::string exportId;
+			retVal = retVal && archive.Process(exportId);
+			retVal = retVal && archive.EndTag(exportIdTag);
 
-					retVal = retVal && archive.BeginTag(dataTag);
+			retVal = retVal && archive.BeginTag(dataTag);
 
-					retVal = retVal && archive.BeginTag(isEnabledTag);
-					bool isEnabled = true;
-					retVal = retVal && archive.Process(isEnabled);
-					retVal = retVal && archive.EndTag(isEnabledTag);
+			retVal = retVal && archive.BeginTag(isEnabledTag);
+			bool isEnabled = true;
+			retVal = retVal && archive.Process(isEnabled);
+			retVal = retVal && archive.EndTag(isEnabledTag);
 
-					if (!retVal){
+			if (!retVal){
+				return false;
+			}
+
+			AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, attributeType);
+
+			if (infoPtr != NULL){
+				infoPtr->exportId = exportId;
+				infoPtr->attributeTypeName = attributeType;
+
+				if (isEnabled){
+					iser::IObject* attributePtr = CreateAttribute(attributeType);
+					if (attributePtr == NULL){
 						return false;
 					}
 
-					AttributeInfo* infoPtr = InsertAttributeInfo(attributeId, attributeType);
+					infoPtr->attributePtr.SetPtr(attributePtr);
 
-					if (infoPtr != NULL){
-						infoPtr->exportId = exportId;
-						infoPtr->attributeTypeName = attributeType;
-
-						if (isEnabled){
-							iser::IObject* attributePtr = CreateAttribute(attributeType);
-							if (attributePtr == NULL){
-								return false;
-							}
-
-							infoPtr->attributePtr.SetPtr(attributePtr);
-
-							retVal = retVal && attributePtr->Serialize(archive);
-						}
-					}
-					else if (!archive.IsTagSkippingSupported()){
-						return false;
-					}
-
-					retVal = retVal && archive.EndTag(dataTag);
+					retVal = retVal && attributePtr->Serialize(archive);
 				}
 			}
+			else if (!archive.IsTagSkippingSupported()){
+				return false;
+			}
+
+			retVal = retVal && archive.EndTag(dataTag);
 
 			retVal = retVal && archive.EndTag(attributeInfoTag);
 		}
@@ -350,24 +323,6 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
-}
-
-
-// protected methods
-
-const IAttributeStaticInfo* CRegistryElement::GetAttributeStaticInfo(const std::string& attributeId) const
-{
-	I_ASSERT(m_staticInfoPtr != NULL);
-
-	const IComponentStaticInfo::AttributeInfos& infos = m_staticInfoPtr->GetAttributeInfos();
-
-	int attributeIndex = infos.FindIndex(attributeId);
-
-	if (attributeIndex >= 0){
-		return infos.GetValueAt(attributeIndex);
-	}
-
-	return NULL;
 }
 
 

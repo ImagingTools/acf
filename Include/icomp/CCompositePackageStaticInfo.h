@@ -6,7 +6,7 @@
 #include "istd/TDelPtr.h"
 
 #include "icomp/IComponentStaticInfo.h"
-#include "icomp/IRegistriesManager.h"
+#include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/CCompositeComponentStaticInfo.h"
 
 
@@ -20,7 +20,7 @@ public:
 	CCompositePackageStaticInfo(
 				const std::string& packageId,
 				const Ids& componentIds,
-				const icomp::IRegistriesManager* registriesManagerPtr);
+				const icomp::IComponentEnvironmentManager* managerPtr);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
 	virtual int GetComponentType() const;
@@ -48,7 +48,7 @@ private:
 
 	mutable SubcomponentInfos m_subcomponentInfos;
 	std::string m_packageId;
-	const icomp::IRegistriesManager& m_registriesManager;
+	const icomp::IComponentEnvironmentManager& m_envManager;
 };
 
 
