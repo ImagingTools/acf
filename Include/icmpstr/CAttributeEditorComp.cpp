@@ -223,26 +223,23 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 			infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(*addressPtr);
 		}
 
-		PackageIdLabel->setText(addressPtr->GetPackageId().c_str());
-		ComponentIdLabel->setText(addressPtr->GetComponentId().c_str());
-		PackageIdLabel->setVisible(true);
-		ComponentIdLabel->setVisible(true);
+		AddressLabel->setText(QString(addressPtr->GetPackageId().c_str()) + QString("/") + addressPtr->GetComponentId().c_str());
+		AddressLabel->setVisible(true);
 	}
 	else{
-		PackageIdLabel->setVisible(false);
-		ComponentIdLabel->setVisible(false);
+		AddressLabel->setVisible(false);
 	}
+
+	NameLabel->setText(elementId.c_str());
+	const QIcon* iconPtr = selectionInfoPtr->GetSelectedElementIcon();
+	if (iconPtr != NULL){
+		IconLabel->setPixmap(iconPtr->pixmap(128));
+	}
+
+	IconLabel->setVisible(iconPtr != NULL);
 
 	if (infoPtr != NULL){
 		const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = infoPtr->GetAttributeInfos();
-
-		NameLabel->setText(elementId.c_str());
-		const QIcon* iconPtr = selectionInfoPtr->GetSelectedElementIcon();
-		if (iconPtr != NULL){
-			IconLabel->setPixmap(iconPtr->pixmap(128));
-		}
-
-		IconLabel->setVisible(iconPtr != NULL);
 
 		DescriptionLabel->setText(iqt::GetQString(infoPtr->GetDescription()));
 		KeywordsLabel->setText(iqt::GetQString(infoPtr->GetKeywords()));
@@ -303,6 +300,11 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 		CreateComponentsTree(elementId, *infoPtr, *componentRootPtr);
 
 		ComponentsTree->addTopLevelItem(componentRootPtr);
+
+		MetaInfoFrame->setVisible(true);
+	}
+	else{
+		MetaInfoFrame->setVisible(false);
 	}
 
 	MainTab->setTabIcon(TI_ATTRIBUTES, isCorrect? QIcon(): QIcon(":/Icons/StateInvalid.svg"));
