@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
 	// registry view
 	icomp::TSimComponentsFactory<CmpstrPck::RegistryView> viewFactoryComp;
 	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
-	viewFactoryComp.SetRef("PackagesManager", &packagesLoaderComp);
+	viewFactoryComp.SetRef("MetaInfoManager", &packagesLoaderComp);
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);

@@ -31,7 +31,7 @@ namespace icmpstr
 CComponentSceneItem::CComponentSceneItem(
 			const CRegistryView* registryViewPtr,
 			icomp::IRegistry* registryPtr,
-			const icomp::IRegistry::ElementInfo* elementInfoPtr, 
+			const icomp::IRegistry::ElementInfo* elementInfoPtr,
 			const std::string& componentName,
 			QGraphicsItem* parent) 
 :	QGraphicsRectItem(parent),
@@ -83,9 +83,12 @@ void CComponentSceneItem::SetElementInfo(const icomp::IRegistry::ElementInfo* el
 
 	m_elementInfoPtr = elementInfoPtr;
 
-	if (m_elementInfoPtr->elementPtr.IsValid()){
-		const icomp::IComponentStaticInfo& staticInfo = m_elementInfoPtr->elementPtr->GetComponentStaticInfo();
-		setToolTip(iqt::GetQString(staticInfo.GetDescription()));
+	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetPackagesManager();
+	if (managerPtr != NULL){
+		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(elementInfoPtr->address);
+		if (metaInfoPtr != NULL){
+			setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
+		}
 	}
 
 	m_image = m_registryView.GetIcon(m_elementInfoPtr->address).pixmap(128, 128);
@@ -261,14 +264,18 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 	}
 
 	int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
-	if (m_elementInfoPtr->elementPtr.IsValid()){
-		const icomp::IComponentStaticInfo& info = m_elementInfoPtr->elementPtr->GetComponentStaticInfo();
-		if (dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(&info) != NULL){
+
+	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetPackagesManager();
+	if (managerPtr != NULL){
+		const icomp::IComponentStaticInfo* infoPtr = managerPtr->GetComponentMetaInfo(m_elementInfoPtr->address);
+		if (infoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE){
 			QRectF compositeRect = mainRect;
 			compositeRect.adjust(4, 4, -4, -4);
 			painter->drawRect(compositeRect);
 		}
+	}
 
+	if (m_elementInfoPtr->elementPtr.IsValid()){
 		I_DWORD elementFlags = m_elementInfoPtr->elementPtr->GetElementFlags();
 		if ((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0){
 			QRectF iconRect(
@@ -373,9 +380,7 @@ void CComponentSceneItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* I_IF_D
 
 	const icomp::IRegistriesManager* managerPtr = m_registryView.GetPackagesManager();
 	idoc::IMainWindowCommands* mainWindowPtr = m_registryView.GetMainWindowCommands();
-	const icomp::IComponentStaticInfo& info = m_elementInfoPtr->elementPtr->GetComponentStaticInfo();
-	const icomp::CCompositeComponentStaticInfo* compositeInfoPtr = dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(&info);
-	if ((managerPtr != NULL) && (compositeInfoPtr != NULL) && (mainWindowPtr != NULL)){
+	if ((managerPtr != NULL) && (mainWindowPtr != NULL)){
 		QDir packageDir(iqt::GetQString(managerPtr->GetPackageDirPath(m_elementInfoPtr->address.GetPackageId())));
 		QString filePath = packageDir.absoluteFilePath((m_elementInfoPtr->address.GetComponentId() + ".arx").c_str());
 

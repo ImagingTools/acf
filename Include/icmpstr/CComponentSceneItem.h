@@ -14,6 +14,7 @@
 #include "imod/TSingleModelObserverBase.h"
 
 #include "icomp/IRegistry.h"
+#include "icomp/IMetaInfoManager.h"
 
 
 namespace icmpstr
@@ -36,7 +37,7 @@ public:
 	CComponentSceneItem(
 				const CRegistryView* registryViewPtr,
 				icomp::IRegistry* registryPtr,
-				const icomp::IRegistry::ElementInfo* elementInfoPtr, 
+				const icomp::IRegistry::ElementInfo* elementInfoPtr,
 				const std::string& componentName, 
 				QGraphicsItem* parent = NULL);
 

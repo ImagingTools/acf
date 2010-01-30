@@ -18,7 +18,7 @@
 #include "imod/TModelWrap.h"
 
 #include "icomp/IRegistry.h"
-#include "icomp/IRegistriesManager.h"
+#include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/CComponentBase.h"
 
 #include "ibase/ICommandsProvider.h"
@@ -62,7 +62,7 @@ public:
 		I_REGISTER_INTERFACE(imod::IModel);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
-		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager used to provide icon paths", true, "PackagesManager");
+		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Show help of selected component using its address", false, "HelpViewer");
 		I_ASSIGN(m_mainWindowCompPtr, "MainWindow", "Access to main window command", false, "MainWindow");
 		I_ASSIGN(m_sceneProviderCompPtr, "SceneProvider", "Display view where the registry will be shown", true, "SceneProvider");
@@ -73,6 +73,8 @@ public:
 	const QFont& GetElementNameFont() const;
 	const QFont& GetElementDetailFont() const;
 	const QIcon* GetIcon(const icomp::CComponentAddress& address) const;
+
+	const icomp::IComponentEnvironmentManager* GetEnvironmentManager() const;
 
 	double GetGrid() const{return 25;}	// TODO: replace it with some geometrical info concept
 
@@ -135,7 +137,7 @@ protected:
 private:
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
-	I_REF(icomp::IRegistriesManager, m_packagesManagerCompPtr);
+	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IMainWindowCommands, m_mainWindowCompPtr);
 	I_REF(iqt2d::ISceneProvider, m_sceneProviderCompPtr);
@@ -162,6 +164,14 @@ private:
 	QFont m_elementNameFont;
 	QFont m_elementDetailFont;
 };
+
+
+// inline methods
+
+inline const icomp::IComponentEnvironmentManager* CVisualRegistryScenographerComp::GetEnvironmentManager() const
+{
+	return m_envManagerCompPtr.GetPtr();
+}
 
 
 } // namespace icmpstr

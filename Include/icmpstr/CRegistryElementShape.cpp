@@ -107,11 +107,13 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 		QIcon(":/Icons/AutoInit.svg").paint(painterPtr, iconRect.toRect());
 	}
 
-	const icomp::IComponentStaticInfo& info = objectPtr->GetComponentStaticInfo();
-	if (dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(&info) != NULL){
-		painterPtr->drawRect(mainRect);
-
-		mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
+	if (managerPtr != NULL){
+		const icomp::IComponentStaticInfo* infoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
+		if ((infoPtr != NULL) && (infoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+			painterPtr->drawRect(mainRect);
+			mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+		}
 	}
 
 	if (!m_exportedInterfacesList.empty()){
@@ -156,8 +158,13 @@ bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
 	if (BaseClass::OnAttached(modelPtr)){
 		I_ASSERT(objectPtr != NULL);
 
-		const icomp::IComponentStaticInfo& staticInfo = objectPtr->GetComponentStaticInfo();
-		setToolTip(iqt::GetQString(staticInfo.GetDescription()));
+		const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
+		if (managerPtr != NULL){
+			const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
+			if (metaInfoPtr != NULL){
+				setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
+			}
+		}
 
 		return true;
 	}
@@ -227,10 +234,13 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		width += height + SIDE_OFFSET;
 	}
 
-	const icomp::IComponentStaticInfo& info = element.GetComponentStaticInfo();
-	if (dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(&info) != NULL){
-		width += SIDE_OFFSET * 2;
-		height += SIDE_OFFSET * 2;
+	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
+	if (managerPtr != NULL){
+		const icomp::IComponentStaticInfo* infoPtr = managerPtr->GetComponentMetaInfo(element.GetAddress());
+		if ((infoPtr != NULL) && (infoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+			width += SIDE_OFFSET * 2;
+			height += SIDE_OFFSET * 2;
+		}
 	}
 
 	width += SIDE_OFFSET * 2;

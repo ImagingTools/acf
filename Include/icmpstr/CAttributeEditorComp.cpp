@@ -5,11 +5,10 @@
 #include <QHeaderView>
 #include <QListWidget>
 #include <QLineEdit>
+#include <QComboBox>
 
-#include "icomp/CRegistryElement.h"
+#include "istd/TChangeNotifier.h"
 #include "icomp/CInterfaceManipBase.h"
-
-#include "icmpstr/CRegistryViewComp.h"
 
 
 // public methods

@@ -233,7 +233,10 @@ void CRegistryViewComp::UpdateEditor(int updateFlags)
 			const std::string& elementId = *iter;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
 			if (elementInfoPtr != NULL){
-				CComponentSceneItem* componentViewPtr = viewPtr->CreateComponentView(registryPtr, elementInfoPtr, elementId);
+				CComponentSceneItem* componentViewPtr = viewPtr->CreateComponentView(
+							registryPtr,
+							elementInfoPtr,
+							elementId);
 				I_ASSERT(componentViewPtr != NULL);
 
 				connect(	componentViewPtr, 
@@ -788,7 +791,7 @@ void CRegistryViewComp::OnGuiModelAttached()
 				this,
 				SLOT(ProcessDroppedData(const QMimeData&, QGraphicsSceneDragDropEvent*)));
 
-	viewPtr->Init(m_packagesManagerCompPtr.GetPtr(), registryPtr, m_mainWindowCompPtr.GetPtr());
+	viewPtr->Init(m_envManagerCompPtr.GetPtr(), registryPtr, m_mainWindowCompPtr.GetPtr());
 }
 
 
@@ -808,7 +811,7 @@ void CRegistryViewComp::OnGuiModelDetached()
 void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 {
 	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr == NULL){
+	if ((registryPtr == NULL) || !m_envManagerCompPtr.IsValid()){
 		return;
 	}
 
@@ -822,9 +825,12 @@ void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 		I_ASSERT(elementInfoPtr != NULL);
 		I_ASSERT(elementInfoPtr->elementPtr.IsValid());
 
-		icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
-		const icomp::IComponentStaticInfo& elementStaticInfo = registryElementPtr->GetComponentStaticInfo();
-		const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
+		const icomp::IComponentStaticInfo* compMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
+		if (compMetaInfoPtr == NULL){
+			continue;
+		}
+
+		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = compMetaInfoPtr->GetAttributeInfos();
 	
 		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
 			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
@@ -862,6 +868,7 @@ void CRegistryViewComp::ConnectReferences(const QString& componentRole)
 				}
 			}
 
+			icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr == NULL && createAttribute){
 				const std::string& attrType = staticAttributeInfoPtr->GetAttributeTypeName();

@@ -17,16 +17,18 @@
 #include "icmpstr/CComponentSceneItem.h"
 #include "icmpstr/CComponentConnector.h"
 
+#include "icmpstr/CComponentSceneItem.h"
+
 
 namespace icmpstr
 {
 
 
-CRegistryView::CRegistryView(QWidget* parent/* = NULL*/)
+CRegistryView::CRegistryView(QWidget* parent)
 :	BaseClass(parent),
 	m_selectedComponentPtr(NULL),
 	m_registryPtr(NULL),
-	m_packagesManagerPtr(NULL),
+	m_environmentManagerPtr(NULL),
 	m_mousePressingNotifier(NULL)
 {
 	m_scenePtr = new CRegistryScene(*this);
@@ -93,7 +95,7 @@ CComponentSceneItem* CRegistryView::CreateComponentView(
 				this, 
 				registryPtr, 
 				elementInfoPtr, 
-				role.c_str(), 
+				role, 
 				&m_compositeItem);
 
 	int itemsCount = m_scenePtr->items().count();
@@ -241,8 +243,8 @@ void CRegistryView::ScaleView(double scaleFactor)
 
 QIcon CRegistryView::GetIcon(const icomp::CComponentAddress& address) const
 {
-	if (m_packagesManagerPtr != NULL){
-		istd::CString packageInfoPath = m_packagesManagerPtr->GetPackageDirPath(address.GetPackageId());
+	if (m_environmentManagerPtr != NULL){
+		istd::CString packageInfoPath = m_environmentManagerPtr->GetPackageDirPath(address.GetPackageId());
 		if (!packageInfoPath.IsEmpty()){
 			QDir packageDir(iqt::GetQString(packageInfoPath) + ".info");
 
@@ -254,12 +256,12 @@ QIcon CRegistryView::GetIcon(const icomp::CComponentAddress& address) const
 }
 
 
-void CRegistryView::Init(const icomp::IRegistriesManager* managerPtr, icomp::IRegistry* registryPtr, idoc::IMainWindowCommands* commandsPtr)
+void CRegistryView::Init(const icomp::IComponentEnvironmentManager* managerPtr, icomp::IRegistry* registryPtr, idoc::IMainWindowCommands* commandsPtr)
 {
 	m_mousePressingNotifier.Reset();
 
 	m_registryPtr = registryPtr;
-	m_packagesManagerPtr = managerPtr;
+	m_environmentManagerPtr = managerPtr;
 	m_mainWindowCommandsPtr = commandsPtr;
 }
 

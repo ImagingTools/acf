@@ -4,9 +4,8 @@
 
 // Qt includes
 #include <QtGui/QWidget>
-#include <QtGui/QComboBox>
 #include <QtGui/QIcon>
-#include <QItemDelegate>
+#include <QtGui/QItemDelegate>
 
 
 // ACF includes

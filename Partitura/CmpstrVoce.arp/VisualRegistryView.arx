@@ -133,14 +133,14 @@
         <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
-              PackagesManager
-            </Id>
+							MetaInfoManager
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              PackagesManager
-            </ExportId>
+							MetaInfoManager
+						</ExportId>
             <Data>
               <IsEnabled>
                 false

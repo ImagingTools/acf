@@ -37,7 +37,7 @@ private:
 
 template <class WidgetType>
 TControlledWidgetWrap<WidgetType>::TControlledWidgetWrap(CGuiComponentBase& ownerComponent, QWidget* parent)
-	:BaseClass(parent),
+:	BaseClass(parent),
 	m_ownerComponent(ownerComponent)
 {
 }

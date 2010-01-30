@@ -429,8 +429,8 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              PackagesManager
-            </Id>
+							MetaInfoManager
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>

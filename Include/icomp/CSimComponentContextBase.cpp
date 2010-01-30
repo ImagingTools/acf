@@ -12,7 +12,10 @@ namespace icomp
 
 
 CSimComponentContextBase::CSimComponentContextBase(const IComponentStaticInfo* infoPtr)
+:	m_metaInfo(*infoPtr)
 {
+	I_ASSERT(infoPtr != NULL);
+
 	m_registryElement.Initialize(infoPtr);
 }
 
@@ -133,7 +136,7 @@ const IRegistryElement& CSimComponentContextBase::GetRegistryElement() const
 
 const IComponentStaticInfo& CSimComponentContextBase::GetStaticInfo() const
 {
-	return m_registryElement.GetComponentStaticInfo();
+	return m_metaInfo;
 }
 
 
@@ -153,8 +156,7 @@ const iser::IObject* CSimComponentContextBase::GetAttribute(const std::string& a
 		return infoPtr->attributePtr.GetPtr();
 	}
 
-	const IComponentStaticInfo& componentInfo = m_registryElement.GetComponentStaticInfo();
-	const IComponentStaticInfo::AttributeInfos& attributeInfos = componentInfo.GetAttributeInfos();
+	const IComponentStaticInfo::AttributeInfos& attributeInfos = m_metaInfo.GetAttributeInfos();
 	const IComponentStaticInfo::AttributeInfos::ValueType* attributePtr2 = attributeInfos.FindElement(attributeId);
 	if (attributePtr2 != NULL){
 		I_ASSERT(*attributePtr2 != NULL);

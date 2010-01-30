@@ -139,6 +139,7 @@ protected:
 
 private:
 	CRegistryElement m_registryElement;
+	const IComponentStaticInfo& m_metaInfo;
 };
 
 
@@ -147,8 +148,7 @@ private:
 template <class AttrType>
 bool CSimComponentContextBase::IsAttributeTypeCorrect(const std::string& attributeId)
 {
-	const IComponentStaticInfo& componentInfo = m_registryElement.GetComponentStaticInfo();
-	const IComponentStaticInfo::AttributeInfos& attrInfos = componentInfo.GetAttributeInfos();
+	const IComponentStaticInfo::AttributeInfos& attrInfos = m_metaInfo.GetAttributeInfos();
 	const IComponentStaticInfo::AttributeInfos::ValueType* attrInfoPtr = attrInfos.FindElement(attributeId);
 
 	if ((attrInfoPtr != NULL) && (*attrInfoPtr != NULL)){

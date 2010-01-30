@@ -93,8 +93,8 @@ const QIcon* CVisualRegistryScenographerComp::GetIcon(const icomp::CComponentAdd
 	else{
 		IconPtr& newIconPtr = m_iconMap[address];
 
-		if (m_packagesManagerCompPtr.IsValid()){
-			istd::CString packageInfoPath = m_packagesManagerCompPtr->GetPackageDirPath(address.GetPackageId());
+		if (m_envManagerCompPtr.IsValid()){
+			istd::CString packageInfoPath = m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId());
 			if (!packageInfoPath.IsEmpty()){
 				QDir packageDir(iqt::GetQString(packageInfoPath) + ".info");
 
@@ -785,9 +785,12 @@ void CVisualRegistryScenographerComp::ConnectReferences(const QString& component
 		I_ASSERT(elementInfoPtr != NULL);
 		I_ASSERT(elementInfoPtr->elementPtr.IsValid());
 
-		icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
-		const icomp::IComponentStaticInfo& elementStaticInfo = registryElementPtr->GetComponentStaticInfo();
-		const icomp::IComponentStaticInfo::AttributeInfos staticAttributes = elementStaticInfo.GetAttributeInfos();
+		const icomp::IComponentStaticInfo* compMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
+		if (compMetaInfoPtr == NULL){
+			continue;
+		}
+
+		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = compMetaInfoPtr->GetAttributeInfos();
 	
 		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
 			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
@@ -825,6 +828,7 @@ void CVisualRegistryScenographerComp::ConnectReferences(const QString& component
 				}
 			}
 
+			icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr == NULL && createAttribute){
 				const std::string& attrType = staticAttributeInfoPtr->GetAttributeTypeName();

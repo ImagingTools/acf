@@ -55,9 +55,9 @@ public:
 		I_REGISTER_INTERFACE(iqtdoc::IPrintable);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_ASSIGN_MULTI_0(m_registryElementObserversCompPtr, "RegistryElementObservers", "Registry element observers", false);
+		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
-		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager used to provide icon paths", true, "PackagesManager");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Show help of selected component using its address", false, "HelpViewer");
 		I_ASSIGN(m_mainWindowCompPtr, "MainWindow", "Access to main window command", false, "MainWindow");
 	I_END_COMPONENT;
@@ -123,9 +123,9 @@ private:
 	void ConnectReferences(const QString& componentRole);
 
 	I_MULTIREF(imod::IObserver, m_registryElementObserversCompPtr);
+	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
-	I_REF(icomp::IRegistriesManager, m_packagesManagerCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IMainWindowCommands, m_mainWindowCompPtr);
 

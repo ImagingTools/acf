@@ -9,19 +9,22 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsSceneDragDropEvent>
+#include <QGraphicsRectItem>
 #include <QMimeData>
 
 #include "istd/TChangeNotifier.h"
 
-#include "icomp/IRegistriesManager.h"
+#include "icomp/IComponentEnvironmentManager.h"
+#include "icomp/IRegistry.h"
 
 #include "idoc/IMainWindowCommands.h"
-
-#include "icmpstr/CComponentSceneItem.h"
 
 
 namespace icmpstr
 {
+
+
+class CComponentSceneItem;
 
 
 class CRegistryView: public QGraphicsView
@@ -32,7 +35,7 @@ public:
 	typedef QGraphicsView BaseClass;
 	typedef QList<CComponentSceneItem*> ComponentViewList;
 
-	CRegistryView(QWidget* parent = NULL);
+	CRegistryView(QWidget* parent);
 
 	void CreateConnector(
 				CComponentSceneItem& sourceView,
@@ -48,7 +51,7 @@ public:
 	CComponentSceneItem* GetSelectedComponent() const;
 	void SetSelectedComponent(CComponentSceneItem* selectedComponentPtr);
 
-	const icomp::IRegistriesManager* GetPackagesManager() const;
+	const icomp::IComponentEnvironmentManager* GetPackagesManager() const;
 
 	void RemoveSelectedComponent();
 	void RemoveAllConnectors();
@@ -62,7 +65,7 @@ public:
 	void ScaleView(double scaleFactor);
 	QIcon GetIcon(const icomp::CComponentAddress& address) const;
 
-	void Init(const icomp::IRegistriesManager* managerPtr, icomp::IRegistry* registryPtr, idoc::IMainWindowCommands* commandsPtr);
+	void Init(const icomp::IComponentEnvironmentManager* managerPtr, icomp::IRegistry* registryPtr, idoc::IMainWindowCommands* commandsPtr);
 
 	virtual idoc::IMainWindowCommands* GetMainWindowCommands() const;
 
@@ -113,7 +116,7 @@ private:
 	CRegistryScene* m_scenePtr;
 	CComponentSceneItem* m_selectedComponentPtr;
 	icomp::IRegistry* m_registryPtr;
-	const icomp::IRegistriesManager* m_packagesManagerPtr;
+	const icomp::IComponentEnvironmentManager* m_environmentManagerPtr;
 	idoc::IMainWindowCommands* m_mainWindowCommandsPtr;
 
 	istd::CChangeNotifier m_mousePressingNotifier;
@@ -122,9 +125,9 @@ private:
 
 // inline methods
 
-inline const icomp::IRegistriesManager* CRegistryView::GetPackagesManager() const
+inline const icomp::IComponentEnvironmentManager* CRegistryView::GetPackagesManager() const
 {
-	return m_packagesManagerPtr;
+	return m_environmentManagerPtr;
 }
 
 
