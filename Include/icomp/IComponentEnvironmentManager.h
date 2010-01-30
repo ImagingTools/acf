@@ -3,7 +3,7 @@
 
 
 #include "icomp/IRegistriesManager.h"
-#include "icomp/IPackagesManager.h"
+#include "icomp/IMetaInfoManager.h"
 
 
 namespace icomp
@@ -12,7 +12,7 @@ namespace icomp
 
 class IComponentEnvironmentManager:
 			virtual public IRegistriesManager,
-			virtual public IPackagesManager
+			virtual public IMetaInfoManager
 {
 public:
 	/**

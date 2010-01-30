@@ -52,7 +52,7 @@ public:
 		I_REGISTER_INTERFACE(icomp::IComponentEnvironmentManager);
 		I_REGISTER_INTERFACE(icomp::IComponentStaticInfo);
 		I_REGISTER_INTERFACE(icomp::IRegistriesManager);
-		I_REGISTER_INTERFACE(icomp::IPackagesManager);
+		I_REGISTER_INTERFACE(icomp::IMetaInfoManager);
 		I_ASSIGN(m_registryLoaderCompPtr, "RegistryLoader", "Loader used to read registry", true, "RegistryLoader");
 		I_ASSIGN(m_configFilePathCompPtr, "ConfigFilePath", "Path of packages configuration file will be loaded, if enabled", false, "ConfigFilePath");
 	I_END_COMPONENT;
@@ -68,7 +68,7 @@ public:
 	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address) const;
 	virtual istd::CString GetPackageDirPath(const std::string& packageId) const;
 
-	// reimplemented (icomp::IPackagesManager)
+	// reimplemented (icomp::IMetaInfoManager)
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
 
 	// reimplemented (icomp::CComponentBase)

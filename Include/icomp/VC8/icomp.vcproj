@@ -369,7 +369,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IPackagesManager.h"
+				RelativePath="..\IMetaInfoManager.h"
 				>
 			</File>
 			<File

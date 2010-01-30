@@ -41,7 +41,7 @@ istd::CString CEnvironmentManagerBase::GetPackageDirPath(const std::string& /*pa
 }
 
 
-// reimplemented (icomp::IPackagesManager)
+// reimplemented (icomp::IMetaInfoManager)
 
 CEnvironmentManagerBase::ComponentAddresses CEnvironmentManagerBase::GetComponentAddresses(int typeFlag) const
 {

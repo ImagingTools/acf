@@ -19,7 +19,7 @@ namespace icomp
 {
 
 
-class IPackagesManager;
+class IMetaInfoManager;
 
 
 class CCompositeComponent:

@@ -26,7 +26,7 @@ public:
 	virtual const IRegistry* GetRegistry(const CComponentAddress& address) const;
 	virtual istd::CString GetPackageDirPath(const std::string& packageId) const;
 
-	// reimplemented (icomp::IPackagesManager)
+	// reimplemented (icomp::IMetaInfoManager)
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
 	virtual const IComponentStaticInfo* GetComponentStaticInfo(const CComponentAddress& address) const;
 };

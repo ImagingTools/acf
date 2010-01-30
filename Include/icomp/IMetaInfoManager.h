@@ -12,7 +12,7 @@ namespace icomp
 {
 
 
-class IPackagesManager: virtual public istd::IPolymorphic
+class IMetaInfoManager: virtual public istd::IPolymorphic
 {
 public:
 	enum ComponentTypeFlag

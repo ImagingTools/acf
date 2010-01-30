@@ -106,7 +106,7 @@ istd::CString CPackagesLoaderComp::GetPackageDirPath(const std::string& packageI
 }
 
 
-// reimplemented (icomp::IPackagesManager)
+// reimplemented (icomp::IMetaInfoManager)
 
 CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddresses(int typeFlag) const
 {
