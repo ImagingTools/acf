@@ -28,7 +28,7 @@ public:
 
 	// reimplemented (icomp::IMetaInfoManager)
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
-	virtual const IComponentStaticInfo* GetComponentStaticInfo(const CComponentAddress& address) const;
+	virtual const IComponentStaticInfo* GetComponentMetaInfo(const CComponentAddress& address) const;
 };
 
 

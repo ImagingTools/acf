@@ -229,7 +229,7 @@ void CCompositeComponent::CreateSubcomponentInfo(
 		const IRegistryElement& registryElement = *elementInfoPtr->elementPtr;
 
 		const IComponentEnvironmentManager& envManager = contextPtr->GetEnvironmentManager();
-		const IComponentStaticInfo* componentInfoPtr = envManager.GetComponentStaticInfo(elementInfoPtr->address);
+		const IComponentStaticInfo* componentInfoPtr = envManager.GetComponentMetaInfo(elementInfoPtr->address);
 		if (componentInfoPtr == NULL){
 			return;
 		}

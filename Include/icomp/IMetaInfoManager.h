@@ -34,7 +34,7 @@ public:
 		\param	address	component address.
 		\return			static info of component or NULL, if no component type for specified address is found.
 	*/
-	virtual const IComponentStaticInfo* GetComponentStaticInfo(const CComponentAddress& address) const = 0;
+	virtual const IComponentStaticInfo* GetComponentMetaInfo(const CComponentAddress& address) const = 0;
 };
 
 

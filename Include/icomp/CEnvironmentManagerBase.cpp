@@ -83,7 +83,7 @@ CEnvironmentManagerBase::ComponentAddresses CEnvironmentManagerBase::GetComponen
 }
 
 
-const IComponentStaticInfo* CEnvironmentManagerBase::GetComponentStaticInfo(const CComponentAddress& address) const
+const IComponentStaticInfo* CEnvironmentManagerBase::GetComponentMetaInfo(const CComponentAddress& address) const
 {
 	const icomp::IComponentStaticInfo* packageInfoPtr = GetSubcomponentInfo(address.GetPackageId());
 	if (packageInfoPtr != NULL){
