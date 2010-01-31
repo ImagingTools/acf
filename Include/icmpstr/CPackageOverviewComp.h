@@ -61,14 +61,15 @@ protected:
 	void HighlightComponents(const istd::CClassInfo& interfaceInfo = istd::CClassInfo());
 
 protected slots:
-	void on_PackagesList_itemCollapsed(QTreeWidgetItem* item);
-	void on_PackagesList_itemExpanded(QTreeWidgetItem* item);
 	void on_FilterEdit_textEdited(const QString& text);
 	void on_ResetFilterButton_clicked();
 
 	void OnContextMenuRequested(const QPoint& menuPoint);
 
 protected:
+	/**
+		Generate tree items for some package.
+	*/
 	void GeneratePackageTree(
 				const std::string& packageId,
 				const icomp::IComponentStaticInfo& packageInfo,
@@ -127,10 +128,11 @@ private:
 	I_REF(icomp::IComponentStaticInfo, m_generalStaticInfoCompPtr);
 	I_REF(icomp::IRegistriesManager, m_packagesManagerCompPtr);
 
-	QIcon m_closedIcon;
-	QIcon m_openIcon;
 	QIcon m_validIcon;
 	QIcon m_invalidIcon;
+	QIcon m_realComponentIcon;
+	QIcon m_compositeComponentIcon;
+	QIcon m_mixedComponentIcon;
 
 	typedef QHash<QString, QIcon> IconCache;
 	mutable IconCache m_iconCache;

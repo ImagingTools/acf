@@ -92,8 +92,6 @@ void CPackageOverviewComp::GenerateComponentTree(const QString& filter, bool exp
 				packageItemPtr->setForeground(0, Qt::darkBlue);
 				packageItemPtr->setForeground(1, Qt::darkBlue);
 
-				packageItemPtr->setToolTip(0, iqt::GetQString(packageInfoPtr->GetDescription()));
-
 				QTreeWidgetItem* packageItem = packageItemPtr.PopPtr();
 				PackagesList->addTopLevelItem(packageItem);
 				packageItem->setExpanded(expandComponents);
@@ -122,15 +120,7 @@ void CPackageOverviewComp::HighlightComponents(const istd::CClassInfo& interface
 	// process top level items:
 	for (int topLevelItemIndex = 0; topLevelItemIndex < topLevelItemCount; topLevelItemIndex++){
 		QTreeWidgetItem* itemPtr = PackagesList->topLevelItem(topLevelItemIndex);
-		if (itemPtr->childCount()){
-			if (itemPtr->isExpanded()){
-				itemPtr->setIcon(0, m_openIcon);
-			}
-			else{			
-				itemPtr->setIcon(0, m_closedIcon);
-			}
-		}
-		else{
+		if (itemPtr->childCount() <= 0){
 			itemPtr->setTextColor(0, Qt::lightGray);
 		}
 	}
@@ -163,22 +153,6 @@ void CPackageOverviewComp::HighlightComponents(const istd::CClassInfo& interface
 
 
 // protected slots
-
-void CPackageOverviewComp::on_PackagesList_itemCollapsed(QTreeWidgetItem* item)
-{
-	if (item != NULL && item->childCount() > 0){
-		item->setIcon(0, m_closedIcon);
-	}
-}
-
-
-void CPackageOverviewComp::on_PackagesList_itemExpanded(QTreeWidgetItem* item)
-{
-	if (item != NULL && item->childCount() > 0){
-		item->setIcon(0, m_openIcon);
-	}
-}
-
 
 void CPackageOverviewComp::on_FilterEdit_textEdited(const QString& text)
 {
@@ -220,13 +194,17 @@ void CPackageOverviewComp::GeneratePackageTree(
 			const QString& filter,
 			QTreeWidgetItem& root)
 {
+	bool hasRealComponents = false;
+	bool hasCompositeComponents = false;
+
 	// create the component list:
 	icomp::IComponentStaticInfo::Ids subcomponentIds = packageInfo.GetSubcomponentIds();
 
 	QDir packageDir;
+	QString packageDirPath;
 	bool hasPackageInfo = false;
 	if (m_packagesManagerCompPtr.IsValid()){
-		QString packageDirPath = iqt::GetQString(m_packagesManagerCompPtr->GetPackageDirPath(packageId));
+		packageDirPath = iqt::GetQString(m_packagesManagerCompPtr->GetPackageDirPath(packageId));
 		if (!packageDirPath.isEmpty()){
 			packageDir.setPath(packageDirPath + ".info");
 			if (packageDir.exists()){
@@ -242,6 +220,17 @@ void CPackageOverviewComp::GeneratePackageTree(
 		const icomp::IComponentStaticInfo* componentInfoPtr = packageInfo.GetSubcomponentInfo(componentId);
 		if (componentInfoPtr == NULL){
 			continue;
+		}
+
+		int compType = componentInfoPtr->GetComponentType();
+		switch (compType){
+		case icomp::IComponentStaticInfo::CT_REAL:
+			hasRealComponents = true;
+			break;
+
+		case icomp::IComponentStaticInfo::CT_COMPOSITE:
+			hasCompositeComponents = true;
+			break;
 		}
 
 		QString keywordString = iqt::GetQString(componentInfoPtr->GetKeywords());
@@ -314,6 +303,40 @@ void CPackageOverviewComp::GeneratePackageTree(
 
 		root.addChild(componentItem);
 	}
+
+	QString typeName;
+	if (hasRealComponents){
+		if (hasCompositeComponents){
+			root.setIcon(0, m_mixedComponentIcon);
+			typeName = "mixed";
+		}
+		else{
+			root.setIcon(0, m_realComponentIcon);
+			typeName = "real";
+		}
+	}
+	else if (hasCompositeComponents){
+		root.setIcon(0, m_compositeComponentIcon);
+		typeName = "composite";
+	}
+	else{
+		root.setIcon(0, QIcon());
+		typeName = "unknown";
+	}
+
+	QString toolTip = tr("Package %1 containing components of %2 type").arg(packageId.c_str()).arg(typeName);
+	if (!packageDirPath.isEmpty()){
+		toolTip += "\n";
+		toolTip += tr("Defined in '%1'").arg(QFileInfo(packageDirPath).canonicalFilePath());
+	}
+
+	QString description = iqt::GetQString(packageInfo.GetDescription());
+	if (!description.isEmpty()){
+		toolTip += "\n";
+		toolTip += tr("Description: %1").arg(description);
+	}
+
+	root.setToolTip(0, toolTip);
 }
 
 
@@ -462,10 +485,11 @@ void CPackageOverviewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	m_closedIcon = QIcon(QPixmap(":/Icons/DirClosed"));
-	m_openIcon = QIcon(QPixmap(":/Icons/DirOpen"));
 	m_validIcon = QIcon(QPixmap(":/Icons/StateOk.svg"));
 	m_invalidIcon = QIcon(QPixmap(":/Icons/StateInvalid.svg"));
+	m_realComponentIcon = QIcon(QPixmap(":/Icons/RealComponent.svg"));
+	m_compositeComponentIcon = QIcon(QPixmap(":/Icons/CompositeComponent.svg"));
+	m_mixedComponentIcon = QIcon(QPixmap(":/Icons/MixedComponent.svg"));
 
 	// set up the tree view:
 	PackagesList->setColumnCount(2);

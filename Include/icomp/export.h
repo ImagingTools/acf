@@ -51,8 +51,8 @@ namespace icomp
 	}
 
 
-#define I_EXPORT_PACKAGE(name, description, keywords) \
-	static icomp::CPackageStaticInfo packageInfo;\
+#define I_EXPORT_PACKAGE(logicalName, description, keywords) \
+	static icomp::CPackageStaticInfo packageInfo(logicalName, description, keywords);\
 	extern "C" I_FUNCTION_EXPORT icomp::IComponentStaticInfo* I_PACKAGE_EXPORT_FUNCTION(){\
 		return &packageInfo;\
 	}

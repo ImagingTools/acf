@@ -1,7 +1,5 @@
 <RCC>
   <qresource prefix="Icons/" >
-    <file alias="DirClosed">Resources/Icons/dirclosed-16.png</file>
-    <file alias="DirOpen">Resources/Icons/diropen-16.png</file>
     <file alias="Folder">Resources/Icons/folder_64.png</file>
     <file alias="Back">Resources/Icons/back_128.png</file>
     <file alias="Export.svg">Resources/Icons/Export.svg</file>
@@ -9,6 +7,8 @@
     <file alias="CompositorSplashScreen">Resources/Icons/CompositorSplashScreen.png</file>
     <file alias="CompositorLogo.svg">Resources/Icons/CompositorLogo.svg</file>
     <file alias="CompositorIcon.svg">Resources/Icons/CompositorIcon.svg</file>
-		<file alias="ExportToCode.svg">Resources/Icons/ExportToCode.svg</file>
+		<file alias="RealComponent.svg">Resources/Icons/RealComponent.svg</file>
+		<file alias="CompositeComponent.svg">Resources/Icons/CompositeComponent.svg</file>
+		<file alias="MixedComponent.svg">Resources/Icons/MixedComponent.svg</file>
 	</qresource>
 </RCC>

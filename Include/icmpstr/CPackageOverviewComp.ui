@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>412</width>
-    <height>357</height>
+    <width>406</width>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,6 +32,9 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTreeWidget" name="PackagesList">
+         <property name="toolTip">
+          <string>List of registered component types</string>
+         </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
@@ -116,6 +119,8 @@
     </widget>
    </item>
   </layout>
+  <zorder>tabWidget</zorder>
+  <zorder>PackagesList</zorder>
  </widget>
  <resources>
   <include location="icmpstr.qrc"/>

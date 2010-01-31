@@ -5,6 +5,21 @@ namespace icomp
 {
 
 
+CPackageStaticInfo::CPackageStaticInfo()
+{
+}
+
+
+CPackageStaticInfo::CPackageStaticInfo(
+			const std::string& /*logicalName*/,
+			const istd::CString& description,
+			const istd::CString& keywords)
+:	m_description(description),
+	m_keywords(keywords)
+{
+}
+
+
 // reimplemented (icomp::IPackageStaticInfo)
 
 const CPackageStaticInfo::InterfaceExtractors& CPackageStaticInfo::GetInterfaceExtractors() const
@@ -32,6 +47,18 @@ bool CPackageStaticInfo::RegisterInterfaceExtractor(const istd::CClassInfo& /*in
 bool CPackageStaticInfo::RegisterAttributeInfo(const std::string& /*attributeId*/, const IAttributeStaticInfo* /*attributeInfoPtr*/)
 {
 	return false;
+}
+
+
+const istd::CString& CPackageStaticInfo::GetDescription() const
+{
+	return m_description;
+}
+
+
+const istd::CString& CPackageStaticInfo::GetKeywords() const
+{
+	return m_keywords;
 }
 
 
