@@ -103,6 +103,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CPosition2d,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> Position2d;
 
 typedef icomp::TMakeComponentWrap<
@@ -111,6 +112,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CPosition2d,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> Circle;
 
 typedef icomp::TMakeComponentWrap<
@@ -118,6 +120,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CLine2d,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> Line;
 
 typedef icomp::TMakeComponentWrap<
@@ -125,6 +128,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CRectangle,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> Rectangle;
 
 typedef icomp::TMakeComponentWrap<
@@ -132,6 +136,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CAnnulus,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> Annulus;
 
 typedef icomp::TMakeComponentWrap<
@@ -139,6 +144,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CAnnulus,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> AnnulusSegment;
 
 typedef icomp::TMakeComponentWrap<
@@ -146,6 +152,7 @@ typedef icomp::TMakeComponentWrap<
 			i2d::CQuadrangle,
 			i2d::IObject2d,
 			iser::ISerializable,
+			istd::IChangeable,
 			imod::IModel> Quadrangle;
 
 typedef icomp::TModelCompWrap<ibase::CRectangleComp> AttributedRectangle;
