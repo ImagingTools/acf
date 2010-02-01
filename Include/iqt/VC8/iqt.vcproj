@@ -258,6 +258,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRegistriesManagerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSafeNotifier.cpp"
 				>
 			</File>
@@ -401,6 +405,10 @@
 			</File>
 			<File
 				RelativePath="..\CReflectedBitmapBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistriesManagerComp.h"
 				>
 			</File>
 			<File

@@ -6,6 +6,7 @@
 #include "icomp/TMakeComponentWrap.h"
 
 #include "iqt/CPackagesLoaderComp.h"
+#include "iqt/CRegistriesManagerComp.h"
 #include "iqt/CBitmap.h"
 #include "iqt/CBitmapSurface.h"
 #include "iqt/CBitmapLoaderComp.h"
@@ -29,6 +30,7 @@ namespace QtPck
 
 
 typedef iqt::CPackagesLoaderComp PackagesLoader;
+typedef iqt::CRegistriesManagerComp RegistriesManager;
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						iqt::CBitmap,

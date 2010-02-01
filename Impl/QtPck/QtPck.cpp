@@ -23,7 +23,8 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
 I_EXPORT_PACKAGE("Acf/Qt/Base", "Standard Qt package", "Qt Standard");
 
-I_EXPORT_COMPONENT(PackagesLoader, "Load and cache packages from files", "Component Cache Package Load File");
+I_EXPORT_COMPONENT(PackagesLoader, "Load and cache packages from files", "Component Registry Cache Package Load File Configuration Components");
+I_EXPORT_COMPONENT(RegistriesManager, "Load and cache registries from files", "Registry Manager Load File Configuration Components");
 I_EXPORT_COMPONENT(Bitmap, "QImage based bitmap implementation", "QImage Image Bitmap Qt");
 I_EXPORT_COMPONENT(BitmapSurface, "QImage based bitmap implementation with surface extension", "Sampled Function QImage Image Bitmap Qt Surface");
 I_EXPORT_COMPONENT(BitmapLoader, "Loader loading bitmaps using Qt standard implementations", "Image Bitmap Qt File Loader");

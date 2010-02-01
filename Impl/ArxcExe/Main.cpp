@@ -59,20 +59,19 @@ int main(int argc, char *argv[])
 	registryLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	registryLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<QtPck::PackagesLoader> packagesLoaderComp;
-	packagesLoaderComp.SetRef("RegistryLoader", &registryLoaderComp);
-	packagesLoaderComp.SetRef("Log", &log);
-	packagesLoaderComp.InitComponent();
+	icomp::TSimComponentWrap<QtPck::RegistriesManager> registriesManagerComp;
+	registriesManagerComp.SetRef("RegistryLoader", &registryLoaderComp);
+	registriesManagerComp.SetRef("Log", &log);
+	registriesManagerComp.InitComponent();
 
-	packagesLoaderComp.ConfigureEnvironment(configFile);
+	registriesManagerComp.ConfigureEnvironment(configFile);
 
 	icomp::TSimComponentWrap<BasePck::RegistryCodeSaver> codeSaverComp;
-	codeSaverComp.SetRef("RegistriesManager", &packagesLoaderComp);
+	codeSaverComp.SetRef("RegistriesManager", &registriesManagerComp);
 	codeSaverComp.InitComponent();
 
 	// registry model
-	icomp::TSimComponentWrap<CmpstrPck::RegistryModel> registryComp;
-	registryComp.SetRef("Log", &log);
+	icomp::TSimComponentWrap<CmpstrPck::Registry> registryComp;
 	registryComp.InitComponent();
 
 	icomp::TSimComponentWrap<BasePck::FileCopyOverLoader> fileCopyComp;
