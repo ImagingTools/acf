@@ -76,11 +76,11 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 			const IComponentStaticInfo::AttributeInfos::ValueType* attrStaticInfoPtr2 =
 						attrInfos.FindElement(attrId);
 			if ((attrStaticInfoPtr2 != NULL) && (*attrStaticInfoPtr2 != NULL)){
-				if (attrInfoPtr->attributePtr.IsValid() && (*attrStaticInfoPtr2)->IsObligatory()){
+				if (attrInfoPtr->attributePtr.IsValid()){
 					// attribute was obligatory, but it was defined -> now it is optional
 					AttrMetaInfoPtr& replaceAttrPtr = m_attrReplacers[*attrStaticInfoPtr2];
 					if (!replaceAttrPtr.IsValid()){
-						replaceAttrPtr.SetPtr(new AttrAsOptionalDelegator(*attrStaticInfoPtr2));
+						replaceAttrPtr.SetPtr(new AttrAsOptionalDelegator(*attrStaticInfoPtr2, attrInfoPtr->attributePtr.GetPtr()));
 					}
 
 					RegisterAttributeInfo(attrInfoPtr->exportId, replaceAttrPtr.GetPtr());
@@ -125,10 +125,14 @@ const istd::CString& CCompositeComponentStaticInfo::GetKeywords() const
 
 // public methods of embedded class AttrAsOptionalDelegator
 
-CCompositeComponentStaticInfo::AttrAsOptionalDelegator::AttrAsOptionalDelegator(const IAttributeStaticInfo* slavePtr)
-:	m_slave(*slavePtr)
+CCompositeComponentStaticInfo::AttrAsOptionalDelegator::AttrAsOptionalDelegator(
+			const IAttributeStaticInfo* slavePtr,
+			const iser::IObject* defaultValuePtr)
+:	m_slave(*slavePtr),
+	m_defaultValuePtr(defaultValuePtr)
 {
 	I_ASSERT(slavePtr != NULL);
+	I_ASSERT(defaultValuePtr != NULL);
 }
 
 
@@ -140,7 +144,7 @@ const std::string& CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAt
 
 const iser::IObject* CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttributeDefaultValue() const
 {
-	return m_slave.GetAttributeDefaultValue();
+	return m_defaultValuePtr;
 }
 
 

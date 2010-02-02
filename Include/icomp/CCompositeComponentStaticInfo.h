@@ -36,7 +36,9 @@ protected:
 	class AttrAsOptionalDelegator: virtual public IAttributeStaticInfo
 	{
 	public:
-		AttrAsOptionalDelegator(const IAttributeStaticInfo* slavePtr);
+		AttrAsOptionalDelegator(
+					const IAttributeStaticInfo* slavePtr,
+					const iser::IObject* defaultValuePtr);
 
 		virtual const std::string& GetAttributeDescription() const;
 		virtual const iser::IObject* GetAttributeDefaultValue() const;
@@ -46,6 +48,7 @@ protected:
 
 	private:
 		const IAttributeStaticInfo& m_slave;
+		const iser::IObject* m_defaultValuePtr;
 	};
 
 private:
