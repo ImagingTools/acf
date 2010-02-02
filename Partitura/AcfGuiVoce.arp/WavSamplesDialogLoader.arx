@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1324
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <ElementsList count="2">
+    <Element>
+      <Id>
+        FileDialogLoader
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        FileDialogLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Loaders
+            </Id>
+            <Type>
+              icomp::CMultiReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  WavSamplesLoader
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        WavSamplesLoader
+      </Id>
+      <PackageId>
+        MeasPck
+      </PackageId>
+      <ComponentId>
+        WavSamplesLoader
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+  </ElementsList>
+  <ExportedInterfaces count="2">
+    <Interface>
+      <InterfaceId>
+        iser::IFileLoader
+      </InterfaceId>
+      <ComponentId>
+        FileDialogLoader
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iser::IFileLoaderInfo
+      </InterfaceId>
+      <ComponentId>
+        FileDialogLoader
+      </ComponentId>
+    </Interface>
+  </ExportedInterfaces>
+  <ExportedComponents count="0">
+  </ExportedComponents>
+  <Description>
+    WAV Samples loader using selection dialog
+  </Description>
+  <Keywords>
+    Samples Sequence Loader Qt Dialog WAV Selection Persistence Files
+  </Keywords>
+</Acf>
