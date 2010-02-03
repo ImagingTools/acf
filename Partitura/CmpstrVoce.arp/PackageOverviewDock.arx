@@ -30,33 +30,17 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              PackagesManager
-            </Id>
+							EnvironmentManager
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              PackagesManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StaticComponentInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              StaticComponentInfo
-            </ExportId>
+							EnvironmentManager
+						</ExportId>
             <Data>
               <IsEnabled>
                 false

@@ -12,8 +12,7 @@
 // ACF includes
 #include "istd/TDelPtr.h"
 
-#include "icomp/IComponentStaticInfo.h"
-#include "icomp/IRegistriesManager.h"
+#include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/CComponentAddress.h"
 
 #include "iqtgui/TDesignerGuiCompBase.h"
@@ -34,17 +33,11 @@ class CPackageOverviewComp:
     Q_OBJECT
 
 public:
-	enum
-	{
-		KeywordColumn = 0
-	};
-
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CPackageOverviewComp> BaseClass;
 	
 	I_BEGIN_COMPONENT(CPackageOverviewComp);
 		I_REGISTER_INTERFACE(IAttributeSelectionObserver);
-		I_ASSIGN(m_generalStaticInfoCompPtr, "StaticComponentInfo", "Static Component Info", true, "StaticComponentInfo");
-		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager used to provide icon paths", true, "PackagesManager");
+		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Packages manager used to provide icon paths", true, "PackagesManager");
 	I_END_COMPONENT;
 
 	enum
@@ -57,16 +50,17 @@ public:
 	virtual void OnAttributeSelected(const icomp::IAttributeStaticInfo* attributeStaticInfoPtr);
 
 protected:
-	void GenerateComponentTree(const QString& filter = "", bool expandComponents = false);
-	void HighlightComponents(const istd::CClassInfo& interfaceInfo = istd::CClassInfo());
+	struct RootInfo
+	{
+		RootInfo(): itemPtr(NULL), hasRealComponents(false), hasCompositeComponents(false){}
 
-protected slots:
-	void on_FilterEdit_textEdited(const QString& text);
-	void on_ResetFilterButton_clicked();
+		QTreeWidgetItem* itemPtr;
+		bool hasRealComponents;
+		bool hasCompositeComponents;
+	};
 
-	void OnContextMenuRequested(const QPoint& menuPoint);
+	void GenerateComponentTree();
 
-protected:
 	/**
 		Generate tree items for some package.
 	*/
@@ -75,7 +69,6 @@ protected:
 				const icomp::IComponentStaticInfo& packageInfo,
 				const QString& filter,
 				QTreeWidgetItem& root);
-	const icomp::IComponentStaticInfo* GetItemStaticInfo(const QTreeWidgetItem& item) const;
 	bool IsInterfaceSupportedByComponent(const istd::CClassInfo& interfaceInfo, const QTreeWidgetItem& item) const;
 
 	/**
@@ -90,11 +83,20 @@ protected:
 
 	QIcon GetIconFromPath(const QString& iconPath) const;
 
+	RootInfo& EnsureRoot(const std::string& path, int compType);
+
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
 
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
+
+protected slots:
+	void on_FilterEdit_editingFinished();
+	void on_GroupByCB_currentIndexChanged(int index);
+	void on_PackagesList_customContextMenuRequested(const QPoint& menuPoint);
+	void on_FilterGB_toggled(bool on);
+	void on_InterfaceCB_currentIndexChanged(int index);
 
 private:
 	class PackageComponentItem: public QTreeWidgetItem
@@ -102,9 +104,8 @@ private:
 	public:
 		PackageComponentItem(
 					CPackageOverviewComp& parent,
-					QTreeWidgetItem* parentItemPtr,
 					const icomp::CComponentAddress& address,
-					const icomp::IComponentStaticInfo& staticInfo,
+					const icomp::IComponentStaticInfo* staticInfoPtr,
 					const QDir* packageDirPtr);
 
 		bool IsInterfaceSupported(const istd::CClassInfo& interfaceInfo) const;
@@ -114,22 +115,29 @@ private:
 			return m_address;
 		}
 
-		const icomp::IComponentStaticInfo& GetStaticInfo() const
-		{
-			return m_staticInfo;
-		}
-
 	private:
 		icomp::CComponentAddress m_address;
-		const icomp::IComponentStaticInfo& m_staticInfo;
 		CPackageOverviewComp& m_parent;
 	};
 
-	I_REF(icomp::IComponentStaticInfo, m_generalStaticInfoCompPtr);
-	I_REF(icomp::IRegistriesManager, m_packagesManagerCompPtr);
+	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 
-	QIcon m_validIcon;
-	QIcon m_invalidIcon;
+	enum GruppingMode
+	{
+		GM_NONE,
+		GM_PACKAGE,
+		GM_KEYWORD,
+		GM_NAME
+	};
+
+	typedef std::map<std::string, RootInfo> RootInfos;
+
+	RootInfos m_roots;
+
+	typedef std::set<istd::CClassInfo> InterfaceFilter;
+	InterfaceFilter m_interfaceFilter;
+	QStringList m_keywordsFilter;
+
 	QIcon m_realComponentIcon;
 	QIcon m_compositeComponentIcon;
 	QIcon m_mixedComponentIcon;

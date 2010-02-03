@@ -31,7 +31,7 @@ public:
 		I_REGISTER_INTERFACE(icmpstr::IRegistryPreview);
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Version info used to serialize temporary registry file", false, "VersionInfo");
 		I_ASSIGN(m_commandFileNameCompPtr, "CommandFileName", "Parameter storing command file name", true, "CommandFileName");
-		I_ASSIGN(m_environmentManagerCompPtr, "EnvironmentManager", "Registry loader used to retrive package configuration", false, "EnvironmentManager");
+		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Registry loader used to retrive package configuration", false, "EnvironmentManager");
 	I_END_COMPONENT;
 
 	CRegistryPreviewComp();
@@ -55,7 +55,7 @@ private:
 	bool m_isRunning;
 
 	I_REF(iprm::IFileNameParam, m_commandFileNameCompPtr);
-	I_REF(icomp::IComponentEnvironmentManager, m_environmentManagerCompPtr);
+	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };
 

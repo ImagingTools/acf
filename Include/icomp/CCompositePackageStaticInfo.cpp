@@ -95,18 +95,6 @@ bool CCompositePackageStaticInfo::RegisterSubcomponentInfo(const std::string& /*
 }
 
 
-const istd::CString& CCompositePackageStaticInfo::GetDescription() const
-{
-	return istd::CString::GetEmpty();
-}
-
-
-const istd::CString& CCompositePackageStaticInfo::GetKeywords() const
-{
-	return istd::CString::GetEmpty();
-}
-
-
 }//namespace icomp
 
 

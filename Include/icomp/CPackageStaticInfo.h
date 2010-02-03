@@ -18,7 +18,6 @@ class CPackageStaticInfo: virtual public CComponentStaticInfoBase
 public:
 	CPackageStaticInfo();
 	CPackageStaticInfo(
-				const std::string& logicalName,
 				const istd::CString& description,
 				const istd::CString& keywords);
 

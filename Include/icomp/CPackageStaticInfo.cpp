@@ -11,7 +11,6 @@ CPackageStaticInfo::CPackageStaticInfo()
 
 
 CPackageStaticInfo::CPackageStaticInfo(
-			const std::string& /*logicalName*/,
 			const istd::CString& description,
 			const istd::CString& keywords)
 :	m_description(description),

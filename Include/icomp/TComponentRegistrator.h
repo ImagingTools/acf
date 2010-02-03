@@ -32,6 +32,7 @@ public:
 	virtual const istd::CString& GetKeywords() const;
 
 private:
+	std::string m_logicalName;
 	istd::CString m_description;
 	istd::CString m_keywords;
 };

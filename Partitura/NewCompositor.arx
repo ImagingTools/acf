@@ -696,30 +696,11 @@ This tool is a part of ACF project
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              PackagesManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                CompositorTemplate
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StaticComponentInfo
-            </Id>
+							EnvironmentManager
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>

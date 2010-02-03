@@ -126,7 +126,7 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 				address.SetPackageId(packageName);
 
 				for (		Ids::const_iterator componentIter = componentIds.begin();
-							componentIter != componentIds.begin();
+							componentIter != componentIds.end();
 							++componentIter){
 					address.SetComponentId(*componentIter);
 
@@ -150,7 +150,7 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 				address.SetPackageId(packageName);
 
 				for (		Ids::const_iterator componentIter = componentIds.begin();
-							componentIter != componentIds.begin();
+							componentIter != componentIds.end();
 							++componentIter){
 					address.SetComponentId(*componentIter);
 

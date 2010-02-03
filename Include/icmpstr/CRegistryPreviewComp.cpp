@@ -96,8 +96,8 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 	QStringList parameters;
 	parameters << m_tempFileName;
 
-	if (m_environmentManagerCompPtr.IsValid()){
-		istd::CString configFilePath = m_environmentManagerCompPtr->GetConfigFilePath();
+	if (m_envManagerCompPtr.IsValid()){
+		istd::CString configFilePath = m_envManagerCompPtr->GetConfigFilePath();
 		if (!configFilePath.IsEmpty()){
 			parameters << "-config";
 			parameters << iqt::GetQString(configFilePath);

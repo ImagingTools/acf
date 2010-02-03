@@ -99,8 +99,7 @@ int main(int argc, char *argv[])
 	packagesLoaderComp.ConfigureEnvironment(configFile);
 
 	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;
-	packageOverviewComp.SetRef("StaticComponentInfo", &packagesLoaderComp);
-	packageOverviewComp.SetRef("PackagesManager", &packagesLoaderComp);
+	packageOverviewComp.SetRef("EnvironmentManager", &packagesLoaderComp);
 	packageOverviewComp.InitComponent();
 
 	// attribute editor:
