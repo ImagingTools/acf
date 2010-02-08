@@ -87,34 +87,10 @@ bool CRegistryConsistInfoComp::IsElementValid(
 	const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementName);
 	if (infoPtr != NULL){
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(infoPtr->address);
-		if (!ignoreUndef && (metaInfoPtr == NULL)){
-			if (reasonConsumerPtr != NULL){
-				reasonConsumerPtr->AddMessage(new ibase::CMessage(
-							istd::ILogger::MC_WARNING,
-							MI_COMPONENT_INACTIVE,
-							iqt::GetCString(QObject::tr("Element %1 uses inactive component %2")
-										.arg(elementName.c_str())
-										.arg(iqt::GetQString(GetAddressName(infoPtr->address)))),
-							iqt::GetCString(QObject::tr("Element Consistency Check")),
-							0));
-			}
-
-			if (allReasons){
-				retVal = false;
-			}
-			else{
-				return false;
-			}
-		}
-
-		const icomp::IRegistryElement* elementPtr = infoPtr->elementPtr.GetPtr();
-		if (elementPtr != NULL){
-			icomp::IRegistryElement::Ids ids = elementPtr->GetAttributeIds();
-
-			for (		icomp::IRegistryElement::Ids::const_iterator iter = ids.begin();
-						iter != ids.end();
-						++iter){
-				const std::string& attributeId = *iter;
+		if (metaInfoPtr != NULL){
+			const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = metaInfoPtr->GetAttributeInfos();
+			for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
+				const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
 
 				bool status = IsAttributeValid(attributeId, elementName, registry, ignoreUndef, allReasons, reasonConsumerPtr);
 
@@ -123,6 +99,48 @@ bool CRegistryConsistInfoComp::IsElementValid(
 				}
 
 				retVal = retVal && status;
+			}
+		}
+		else{
+			if (!ignoreUndef){
+				if (reasonConsumerPtr != NULL){
+					reasonConsumerPtr->AddMessage(new ibase::CMessage(
+								istd::ILogger::MC_WARNING,
+								MI_COMPONENT_INACTIVE,
+								iqt::GetCString(QObject::tr("Element %1 uses inactive component %2")
+											.arg(elementName.c_str())
+											.arg(iqt::GetQString(GetAddressName(infoPtr->address)))),
+								iqt::GetCString(QObject::tr("Element Consistency Check")),
+								0));
+				}
+
+				if (allReasons){
+					retVal = false;
+				}
+				else{
+					return false;
+				}
+			}
+		}
+
+		const icomp::IRegistryElement* elementPtr = infoPtr->elementPtr.GetPtr();
+		if (elementPtr != NULL){
+			if (metaInfoPtr == NULL){	// if no meta info, we try to check attributes from existing attributes list
+				icomp::IRegistryElement::Ids ids = elementPtr->GetAttributeIds();
+
+				for (		icomp::IRegistryElement::Ids::const_iterator iter = ids.begin();
+							iter != ids.end();
+							++iter){
+					const std::string& attributeId = *iter;
+
+					bool status = IsAttributeValid(attributeId, elementName, registry, ignoreUndef, allReasons, reasonConsumerPtr);
+
+					if (!status && !allReasons){
+						return false;
+					}
+
+					retVal = retVal && status;
+				}
 			}
 		}
 		else{
@@ -189,8 +207,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 
 				if (attrMetaInfoPtr2 != NULL){
 					if (*attrMetaInfoPtr2 != NULL){
-						if (attrInfoPtr->attributePtr.IsValid()){
-							if ((*attrMetaInfoPtr2)->GetAttributeTypeName() != attrInfoPtr->attributePtr->GetFactoryId()){
+						if (attrInfoPtr != NULL){
+							if ((*attrMetaInfoPtr2)->GetAttributeTypeName() != attrInfoPtr->attributeTypeName){
 								if (reasonConsumerPtr != NULL){
 									reasonConsumerPtr->AddMessage(new ibase::CMessage(
 												istd::ILogger::MC_ERROR,
@@ -199,7 +217,7 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 															.arg(attributeName.c_str())
 															.arg(elementName.c_str())
 															.arg((*attrMetaInfoPtr2)->GetAttributeTypeName().c_str())
-															.arg(attrInfoPtr->attributePtr->GetFactoryId().c_str())),
+															.arg(attrInfoPtr->attributeTypeName.c_str())),
 												iqt::GetCString(QObject::tr("Attribute Consistency Check")),
 												0));
 								}
@@ -207,17 +225,50 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 								return false;
 							}
 
-							if (!CheckAttributeCompatibility(
-										*attrInfoPtr->attributePtr,
-										**attrMetaInfoPtr2,
-										attributeName,
-										elementName,
-										registry,
-										ignoreUndef,
-										allReasons,
-										reasonConsumerPtr)){
+							if (attrInfoPtr->attributePtr.IsValid()){
+								if (!CheckAttributeCompatibility(
+											*attrInfoPtr->attributePtr,
+											**attrMetaInfoPtr2,
+											attributeName,
+											elementName,
+											registry,
+											ignoreUndef,
+											allReasons,
+											reasonConsumerPtr)){
+									return false;
+								}
+							}
+							else if (	attrInfoPtr->exportId.empty() &&
+										(*attrMetaInfoPtr2)->IsObligatory() &&
+										!(*attrMetaInfoPtr2)->GetRelatedInterfaceType().IsVoid()){
+								if (reasonConsumerPtr != NULL){
+									reasonConsumerPtr->AddMessage(new ibase::CMessage(
+												istd::ILogger::MC_ERROR,
+												MI_REF_NOT_RESOLVED,
+												iqt::GetCString(QObject::tr("Reference of factory %1 in %2 is undefined and it is obligatory")
+															.arg(attributeName.c_str())
+															.arg(elementName.c_str())),
+												iqt::GetCString(QObject::tr("Attribute Consistency Check")),
+												0));
+								}
+
 								return false;
 							}
+						}
+						else if (	(*attrMetaInfoPtr2)->IsObligatory() &&
+									!(*attrMetaInfoPtr2)->GetRelatedInterfaceType().IsVoid()){
+							if (reasonConsumerPtr != NULL){
+								reasonConsumerPtr->AddMessage(new ibase::CMessage(
+											istd::ILogger::MC_ERROR,
+											MI_REF_NOT_RESOLVED,
+											iqt::GetCString(QObject::tr("Reference of factory %1 in %2 is undefined and it is obligatory")
+														.arg(attributeName.c_str())
+														.arg(elementName.c_str())),
+											iqt::GetCString(QObject::tr("Attribute Consistency Check")),
+											0));
+							}
+
+							return false;
 						}
 					}
 					else if (!ignoreUndef){
@@ -250,7 +301,6 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 					return false;
 				}
 			}
-			attrInfoPtr->attributePtr.IsValid();
 		}
 	}
 
@@ -333,7 +383,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 		const istd::CClassInfo& interfaceInfo = attributeMetaInfo.GetRelatedInterfaceType();
 		const std::string& componentId = idPtr->GetValue();
 
-		if (CheckPointedElementCompatibility(
+		if (!CheckPointedElementCompatibility(
 					componentId,
 					interfaceInfo,
 					attributeName,
@@ -354,7 +404,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 		for (int idIndex = 0; idIndex < idsCount; idIndex++){
 			const std::string& componentId = multiIdPtr->GetValueAt(idIndex);
 
-			if (CheckPointedElementCompatibility(
+			if (!CheckPointedElementCompatibility(
 						componentId,
 						interfaceInfo,
 						attributeName,

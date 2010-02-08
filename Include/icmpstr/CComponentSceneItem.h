@@ -60,6 +60,8 @@ public:
 
 	QRectF GetInnerRect() const;
 
+	void SetElementStatus(bool status);
+
 signals:
 	void selectionChanged(CComponentSceneItem*, bool);
 	void positionChanged(CComponentSceneItem*, const QPointF& point);
@@ -107,7 +109,17 @@ private:
 	QStringList m_exportedInterfacesList;
 
 	QPixmap m_image;
+
+	bool m_elementStatus;
 };
+
+
+// inline methods
+
+inline void CComponentSceneItem::SetElementStatus(bool status)
+{
+	m_elementStatus = status;
+}
 
 
 } // namespace icmpstr

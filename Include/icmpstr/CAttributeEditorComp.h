@@ -23,6 +23,7 @@
 
 #include "icmpstr/IAttributeSelectionObserver.h"
 #include "icmpstr/IElementSelectionInfo.h"
+#include "icmpstr/IRegistryConsistInfo.h"
 
 #include "icmpstr/Generated/ui_CAttributeEditorComp.h"
 
@@ -42,6 +43,9 @@ public:
 		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 		I_ASSIGN(m_attributeSelectionObserverCompPtr, "AttributeSelectionObserver", "Attribute selection observer", false, "AttributeSelectionObserver");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Shows object info during selection using its type", false, "QuickHelpViewer");
+		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
+		I_ASSIGN(m_registryPropGuiCompPtr, "RegistryPropGui", "Display and edit registry properties if no element is selected", false, "RegistryPropGui");
+		I_ASSIGN(m_registryPropObserverCompPtr, "RegistryPropGui", "Display and edit registry properties if no element is selected", false, "RegistryPropGui");
 	I_END_COMPONENT;
 
 	enum TabIndex
@@ -86,7 +90,6 @@ public:
 	icomp::CComponentAddress GetComponentAddress() const;
 	icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const std::string& id) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const std::string& id) const;
-	QStringList GetCompatibleComponents(const istd::CClassInfo& interfaceInfo) const;
 	QStringList GetExportAliases(const std::string& attributeName) const;
 
 	// reimplemented (iqt::TGuiObserverWrap)
@@ -109,28 +112,22 @@ protected:
 				const icomp::IAttributeStaticInfo& staticInfo,
 				QTreeWidgetItem& attributeItem,
 				QTreeWidgetItem& exportItem,
-				bool* hasExportPtr,
-				bool* isCorrectPtr);
+				bool* hasExportPtr);
 	bool DecodeAttribute(
 				const iser::ISerializable& attribute,
-				const icomp::IAttributeStaticInfo& staticInfo,
 				QString& text,
-				int& meaning,
-				bool& isCorrect);
+				int& meaning);
 
 	void CreateComponentsTree(
 				const std::string& elementId,
 				const icomp::IComponentStaticInfo& elementStaticInfo,
 				QTreeWidgetItem& rootItem) const;
-	QStringList GetCompatibleSubcomponents(
-				const std::string& elementId,
-				const icomp::IComponentStaticInfo& elementStaticInfo,
-				const istd::CClassInfo& interfaceInfo) const;
 
 	void UpdateExportIcon();
 
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 
 	// static methods
 	static QString DecodeFromEdit(const QString& text);
@@ -175,11 +172,16 @@ private:
 	AttributeTypesMap m_attributeTypesMap;
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_treeWidgetFilter;
 
+	imod::IModel* m_lastRegistryModelPtr;
+
 	QIcon m_exportIcon;
 
 	I_REF(icomp::IMetaInfoManager, m_metaInfoManagerCompPtr);
 	I_REF(IAttributeSelectionObserver, m_attributeSelectionObserverCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
+	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
+	I_REF(iqtgui::IGuiObject, m_registryPropGuiCompPtr);
+	I_REF(imod::IObserver, m_registryPropObserverCompPtr);
 };
 
 

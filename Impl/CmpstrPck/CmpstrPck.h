@@ -13,6 +13,7 @@
 #include "icmpstr/CVisualRegistryComp.h"
 #include "icmpstr/CVisualRegistryScenographerComp.h"
 #include "icmpstr/CRegistryConsistInfoComp.h"
+#include "icmpstr/CRegistryPropEditorComp.h"
 
 #include "icmpstr/CRegistryModelComp.h"	// TODO: remove it when old Compositor concept will be removed
 #include "icmpstr/CRegistryViewComp.h"	// TODO: remove it when old Compositor concept will be removed
@@ -40,6 +41,7 @@ typedef icomp::TMakeComponentWrap<
 			istd::IChangeable,
 			imod::IModel> Registry;
 typedef icmpstr::CRegistryConsistInfoComp RegistryConsistInfo;
+typedef icmpstr::CRegistryPropEditorComp RegistryPropEditor;
 
 // TODO: remove it when Compositor 2.0 is ready
 typedef icomp::TModelCompWrap<icmpstr::CRegistryModelComp> RegistryModel;

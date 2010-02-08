@@ -32,7 +32,9 @@ TInterfaceRegistrator<Interface>::TInterfaceRegistrator(icomp::IComponentStaticI
 {
 	istd::CClassInfo info = istd::CClassInfo::GetInfo<Interface>();
 
-	staticInfo.RegisterInterfaceExtractor(info, TInterfaceRegistrator<Interface>::InterfaceExtractor);
+	if (!info.IsVoid()){
+		staticInfo.RegisterInterfaceExtractor(info, TInterfaceRegistrator<Interface>::InterfaceExtractor);
+	}
 }
 
 

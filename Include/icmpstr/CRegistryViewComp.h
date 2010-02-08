@@ -27,8 +27,8 @@
 
 #include "icmpstr/IRegistryPreview.h"
 #include "icmpstr/IElementSelectionInfo.h"
+#include "icmpstr/IRegistryConsistInfo.h"
 #include "icmpstr/CRegistryView.h"
-
 
 
 namespace icmpstr
@@ -60,6 +60,7 @@ public:
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Show help of selected component using its address", false, "HelpViewer");
 		I_ASSIGN(m_mainWindowCompPtr, "MainWindow", "Access to main window command", false, "MainWindow");
+		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
 	I_END_COMPONENT;
 
 	CRegistryViewComp();
@@ -97,7 +98,6 @@ protected slots:
 	void OnComponentPositionChanged(CComponentSceneItem* view, const QPointF& newPosition);
 	void OnRemoveComponent();
 	void OnRenameComponent();
-	void OnProperties();
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
@@ -128,6 +128,7 @@ private:
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IMainWindowCommands, m_mainWindowCompPtr);
+	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 
 	iqtgui::CHierarchicalCommand m_registryCommand;
 	iqtgui::CHierarchicalCommand m_registryMenu;
@@ -138,7 +139,6 @@ private:
 	iqtgui::CHierarchicalCommand m_abortRegistryCommand;
 	iqtgui::CHierarchicalCommand m_addNoteCommand;
 	iqtgui::CHierarchicalCommand m_removeNoteCommand;
-	iqtgui::CHierarchicalCommand m_propertiesCommand;
 
 	QIcon m_selectedIcon;
 

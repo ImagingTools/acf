@@ -102,7 +102,6 @@ protected slots:
 	void OnSelectionChanged();
 	void OnRemoveComponent();
 	void OnRenameComponent();
-	void OnProperties();
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
@@ -151,7 +150,6 @@ private:
 	iqtgui::CHierarchicalCommand m_abortRegistryCommand;
 	iqtgui::CHierarchicalCommand m_addNoteCommand;
 	iqtgui::CHierarchicalCommand m_removeNoteCommand;
-	iqtgui::CHierarchicalCommand m_propertiesCommand;
 
 	QTimer m_executionObserverTimer;
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1318
+          1333
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="3">
     <Element>
       <Id>
         AttributeDock
@@ -92,7 +92,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               AttributeSelectionObserver
@@ -102,6 +102,22 @@
             </Type>
             <ExportId>
               AttributeSelectionObserver
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ConsistencyInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ConsistencyInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -141,6 +157,46 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryPropGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryPropEditor
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        RegistryPropEditor
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        RegistryPropEditor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>

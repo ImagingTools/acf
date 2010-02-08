@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1318
+          1333
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="28">
+  <PositionMap count="29">
     <Element>
       <ComponentName>
         Application
@@ -164,10 +164,10 @@
         PackagesLoader
       </ComponentName>
       <X>
-        -343
+        -430
       </X>
       <X>
-        -26
+        -34
       </X>
     </Element>
     <Element>
@@ -256,6 +256,17 @@
       </X>
       <X>
         154
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        RegistryConsistInfo
+      </ComponentName>
+      <X>
+        -295
+      </X>
+      <X>
+        68
       </X>
     </Element>
     <Element>

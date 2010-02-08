@@ -102,10 +102,19 @@ int main(int argc, char *argv[])
 	packageOverviewComp.SetRef("EnvironmentManager", &packagesLoaderComp);
 	packageOverviewComp.InitComponent();
 
+	icomp::TSimComponentWrap<CmpstrPck::RegistryConsistInfo> registryConsistInfoComp;
+	registryConsistInfoComp.SetRef("EnvironmentManager", &packagesLoaderComp);
+	registryConsistInfoComp.InitComponent();
+
+	icomp::TSimComponentWrap<CmpstrPck::RegistryPropEditor> propertiesEditorComp;
+	propertiesEditorComp.InitComponent();
+
 	// attribute editor:
 	icomp::TSimComponentWrap<CmpstrPck::AttributeEditor> attributeEditorComp;
 	attributeEditorComp.SetRef("AttributeSelectionObserver", &packageOverviewComp);
 	attributeEditorComp.SetRef("MetaInfoManager", &packagesLoaderComp);
+	attributeEditorComp.SetRef("ConsistencyInfo", &registryConsistInfoComp);
+	attributeEditorComp.SetRef("RegistryPropGui", &propertiesEditorComp);
 	attributeEditorComp.InitComponent();
 
 	// registry model
@@ -116,6 +125,7 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentsFactory<CmpstrPck::RegistryView> viewFactoryComp;
 	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
 	viewFactoryComp.SetRef("MetaInfoManager", &packagesLoaderComp);
+	viewFactoryComp.SetRef("ConsistencyInfo", &registryConsistInfoComp);
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);

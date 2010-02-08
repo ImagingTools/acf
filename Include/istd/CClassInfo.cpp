@@ -317,7 +317,7 @@ std::string CClassInfo::GetUndecoratedName(const std::string& rawName)
 
 // static attributes
 
-istd::CClassInfo CClassInfo::s_voidType = istd::CClassInfo::GetInfo<void*>();
+istd::CClassInfo CClassInfo::s_voidType = istd::CClassInfo::GetInfo<void>();
 
 
 } // namespace istd

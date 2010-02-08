@@ -7,21 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>297</width>
-    <height>291</height>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Property Editor</string>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="spacing">
-    <number>6</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_6">
    <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="MainTab">
+    <widget class="QTabWidget" name="ElementInfoTab">
      <property name="tabPosition">
       <enum>QTabWidget::West</enum>
      </property>
@@ -384,6 +381,43 @@
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="RegistryInfoFrame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="RegistryPropertiesFrame" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>

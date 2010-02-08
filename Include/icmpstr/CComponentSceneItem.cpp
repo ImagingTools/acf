@@ -32,14 +32,15 @@ CComponentSceneItem::CComponentSceneItem(
 			icomp::IRegistry* registryPtr,
 			const icomp::IRegistry::ElementInfo* elementInfoPtr,
 			const std::string& componentName,
-			QGraphicsItem* parent) 
+			QGraphicsItem* parent)
 :	QGraphicsRectItem(parent),
 	m_registryView(*registryViewPtr),
 	m_registryObserver(this),
 	m_registry(*registryPtr),
 	m_componentName(componentName),
 	m_componentLabelFontSize(14),
-	m_componentIdFontSize(10)
+	m_componentIdFontSize(10),
+	m_elementStatus(false)
 {
 	I_ASSERT(registryViewPtr != NULL);
 	I_ASSERT(registryPtr != NULL);
@@ -259,7 +260,7 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 			painter->fillRect(mainRect, QColor(69, 185, 127, 255));
 		}
 
-		painter->setPen(Qt::blue);
+		painter->setPen(m_elementStatus? Qt::blue: Qt::red);
 	}
 	else{
 		painter->fillRect(shadowRect, QColor(0, 0, 0, 30));
@@ -271,10 +272,12 @@ void CComponentSceneItem::paint(QPainter* painter, const QStyleOptionGraphicsIte
 			painter->fillRect(mainRect, QColor(128, 128, 128, 255));
 		}
 
-		painter->setPen(Qt::black);
+		painter->setPen(m_elementStatus? Qt::black: Qt::red);
 	}
 
 	painter->drawRect(mainRect);
+
+	painter->setPen(Qt::black);
 
 	if (!m_image.isNull() && (mainRect.width() > mainRect.height())){
 		mainRect.adjust(mainRect.height(), 0, 0, 0);

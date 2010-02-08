@@ -27,10 +27,12 @@ public:
 		MI_UNDEF_ATTRIBUTE,
 		MI_COMPOSITE_FOUND,
 		MI_WRONG_INTERFACE,
-		MI_COMPONENT_NOT_FOUND
+		MI_COMPONENT_NOT_FOUND,
+		MI_REF_NOT_RESOLVED
 	};
 
 	I_BEGIN_COMPONENT(CRegistryConsistInfoComp);
+		I_REGISTER_INTERFACE(IRegistryConsistInfo);
 		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Allows access to component environment information", true, "EnvironmentManager");
 	I_END_COMPONENT;
 

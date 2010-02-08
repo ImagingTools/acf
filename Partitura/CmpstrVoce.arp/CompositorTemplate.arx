@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1318
+          1333
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="8">
     <Element>
       <Id>
         DocumentTemplate
@@ -355,6 +355,46 @@
     </Element>
     <Element>
       <Id>
+        RegistryConsistInfo
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        RegistryConsistInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              EnvironmentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
         RegistryEditor
       </Id>
       <PackageId>
@@ -370,7 +410,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              ConsistencyInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryConsistInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               MainWindow
@@ -389,8 +448,8 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-							MetaInfoManager
-						</Id>
+              MetaInfoManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
@@ -533,13 +592,21 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="7">
+  <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
         DocumentTemplate
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        icmpstr::IRegistryConsistInfo
+      </InterfaceId>
+      <ComponentId>
+        RegistryConsistInfo
       </ComponentId>
     </Interface>
     <Interface>

@@ -19,8 +19,6 @@
 #include "icmpstr/CComponentConnector.h"
 #include "icmpstr/CRegistryModelComp.h"
 
-#include "icmpstr/Generated/ui_CRegistryPropertiesDialog.h"
-
 
 namespace icmpstr
 {
@@ -39,9 +37,6 @@ CRegistryViewComp::CRegistryViewComp()
 	m_renameComponentCommand.setEnabled(false);
 	m_renameComponentCommand.SetGroupId(GI_COMPONENT);
 	m_renameComponentCommand.setShortcut(QKeySequence(Qt::Key_F2));
-	m_propertiesCommand.setEnabled(true);
-	m_propertiesCommand.SetGroupId(GI_COMPONENT);
-	m_propertiesCommand.setShortcut(QKeySequence(Qt::ALT + Qt::Key_Enter));
 	m_exportToCodeCommand.SetGroupId(GI_CODEGEN);
 	m_executeRegistryCommand.setEnabled(false);
 	m_executeRegistryCommand.setShortcut(QKeySequence(Qt::Key_F5));
@@ -60,7 +55,6 @@ CRegistryViewComp::CRegistryViewComp()
 
 	m_registryMenu.InsertChild(&m_removeComponentCommand);
 	m_registryMenu.InsertChild(&m_renameComponentCommand);
-	m_registryMenu.InsertChild(&m_propertiesCommand);
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
@@ -253,6 +247,12 @@ void CRegistryViewComp::UpdateEditor(int updateFlags)
 				if (geomeometryProviderPtr != NULL){
 					i2d::CVector2d position = geomeometryProviderPtr->GetComponentPosition(elementId);
 					componentViewPtr->setPos(position.GetX(), position.GetY());
+					componentViewPtr->SetElementStatus(m_consistInfoCompPtr->IsElementValid(
+								elementId,
+								*registryPtr,
+								true,
+								false,
+								NULL));
 				}
 
 				const CComponentSceneItem* selectedComponentPtr = viewPtr->GetSelectedComponent();
@@ -292,7 +292,6 @@ void CRegistryViewComp::OnGuiCreated()
 	connect(&m_abortRegistryCommand, SIGNAL(activated()), this, SLOT(OnAbort()));
 	connect(&m_addNoteCommand, SIGNAL(activated()), this, SLOT(OnAddNote()));
 	connect(&m_removeNoteCommand, SIGNAL(activated()), this, SLOT(OnRemoveNote()));
-	connect(&m_propertiesCommand, SIGNAL(activated()), this, SLOT(OnProperties()));
 
 	if (m_registryPreviewCompPtr.IsValid()){
 		connect(&m_executionObserverTimer, SIGNAL(timeout()), this, SLOT(OnExecutionTimerTick()));
@@ -333,10 +332,6 @@ void CRegistryViewComp::OnRetranslate()
 				tr("&Rename Component"), 
 				tr("Rename"), 
 				tr("Allow to assign new name to selected component"));
-	m_propertiesCommand.SetVisuals(
-				tr("&Properties"), 
-				tr("&Properties"), 
-				tr("Edit registry properties"));
 	m_exportToCodeCommand.SetVisuals(
 				tr("&Export To Code..."),
 				tr("Export"),
@@ -588,27 +583,6 @@ void CRegistryViewComp::OnRenameComponent()
 				}
 			}
 		}
-	}
-}
-
-
-void CRegistryViewComp::OnProperties()
-{	
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr == NULL){
-		return;
-	}
-
-	iqtgui::TDesignerBasicGui<Ui::CRegistryPropertiesDialog, QDialog> dialog;
-
-	dialog.DescriptionEdit->setText(iqt::GetQString(registryPtr->GetDescription()));
-	dialog.KeywordsEdit->setText(iqt::GetQString(registryPtr->GetKeywords()));
-
-	if (dialog.exec() == QDialog::Accepted){
-		istd::CChangeNotifier notifier(registryPtr);
-
-		registryPtr->SetDescription(iqt::GetCString(dialog.DescriptionEdit->text()));
-		registryPtr->SetKeywords(iqt::GetCString(dialog.KeywordsEdit->text()));
 	}
 }
 
