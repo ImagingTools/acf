@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1309
+          1337
         </Number>
         <Description>
           ACF
@@ -308,7 +308,7 @@
                 true
               </IsEnabled>
               <Value>
-                CompSimu
+                Login
               </Value>
             </Data>
           </AttributeInfo>
@@ -514,6 +514,6 @@
     Demonstrate using of login and authorization concept
   </Description>
   <Keywords>
-    ACF Tutorial Login Logout Authorization Verifier
+    ACF Tutorial Application Login Logout Authorization Verifier
   </Keywords>
 </Acf>

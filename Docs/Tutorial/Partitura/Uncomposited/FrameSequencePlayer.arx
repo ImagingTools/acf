@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1234
+          1337
         </Number>
         <Description>
           ACF
@@ -270,9 +270,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Simple player using sequence of images in directory as video
   </Description>
   <Keywords>
-    
+    Tutorial Application Player Video Images Sequence
   </Keywords>
 </Acf>

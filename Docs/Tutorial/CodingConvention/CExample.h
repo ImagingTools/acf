@@ -1,5 +1,5 @@
-#ifndef CExample_included
-#define CExample_included
+#ifndef myNamespace_CExample_included
+#define myNamespace_CExample_included
 
 
 // ACF includes
@@ -25,9 +25,9 @@ public:
 /**
 	Demonstrate using of all elements of component concept.
 */
-class CExample: public icomp::CComponentBase, public ITestInterface
+class CExample: public icomp::CComponentBase, virtual public ITestInterface
 {
-	typedef CComponentBase BaseClass;
+	typedef CComponentBase BaseClass;	// OBLIGATORY definition of component base class type as 'BaseClass'
 
 	// initialize all component attributes and references
 	I_BEGIN_COMPONENT(CExample);
@@ -55,25 +55,25 @@ private:
 	/**
 		Normal reference to other component.
 	*/
-	I_REF(IClonable, m_cloneableRef);
+	I_REF(ITestInterface, m_cloneableRef);
 	/**
 		Set of references to other components.
 	*/
-	I_MULTIREF(IClonable, m_cloneableListRef);
+	I_MULTIREF(ITestInterface, m_cloneableListRef);
 	/**
 		Normal factory.
 	*/
-	I_FACT(IClonable, m_cloneableFact);
+	I_FACT(ITestInterface, m_cloneableFact);
 	/**
 		Set of factories.
 	*/
-	I_MULTIFACT(IClonable, m_cloneableListFact);
+	I_MULTIFACT(ITestInterface, m_cloneableListFact);
 };
 
 
 } // namespace myNamespace
 
 
-#endif // !CExample_included
+#endif // !myNamespace_CExample_included
 
 

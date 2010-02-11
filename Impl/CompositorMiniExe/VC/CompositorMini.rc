@@ -42,10 +42,10 @@ BEGIN
         BLOCK "040704b0"
         BEGIN
             VALUE "Comments", "No version available"
-            VALUE "CompanyName", "ImagingTools GbR"
+            VALUE "CompanyName", "ImagingTools"
             VALUE "FileDescription", "ACF Compositor Mini"
             VALUE "InternalName", "CompositorMini"
-            VALUE "LegalCopyright", "Copyright (C) 2009 ImagingTools GbR"
+            VALUE "LegalCopyright", "Copyright (C) 2009-2010 Witold Gantzke & Kirill Lepskiy"
             VALUE "OriginalFilename", "CompositorMini.exe"
             VALUE "ProductName", "ACF Compositor Mini"
         END

@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
 	Q_INIT_RESOURCE(icmpstr);
 
 	icomp::TSimComponentWrap<QtGuiPck::GuiApplication> application;
-	application.SetDoubleAttr("SplashTime", 1.5);
 	application.InitializeApplication(argc, argv);
 
 	QApplication::setStyle("plastique");
@@ -41,14 +40,6 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<QtPck::ApplicationSettingsProvider> applicationSettingsProvider;
 	applicationSettingsProvider.SetRef("ApplicationInfo", &applicationInfo);
 	applicationSettingsProvider.InitComponent();
-
-	icomp::TSimComponentWrap<QtGuiPck::SplashScreen> splashScreenGui;
-	splashScreenGui.SetStringAttr("ImagePath", ":/Icons/CompositorSplashScreen");
-	splashScreenGui.SetStringAttr("ProductName", "");
-	splashScreenGui.SetStringAttr("ProductType", "Mini");
-	splashScreenGui.SetStringAttr("CopyrightText", "Copyright 2009 ImagingTools\nThis tool is a part of ACF project");
-	splashScreenGui.SetRef("ApplicationInfo", &applicationInfo);
-	splashScreenGui.InitComponent();
 
 	icomp::TSimComponentWrap<QtGuiPck::LogGui> log;
 	log.InitComponent();
@@ -152,6 +143,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<QtGuiPck::AboutGui> aboutGuiComp;
 	aboutGuiComp.SetRef("ApplicationInfo", &applicationInfo);
+	aboutGuiComp.SetStringAttr("DescriptionText", "Copyright 2009-2010 Witold Gantzke & Kirill Lepskiy\nThis tool is a part of ACF project\nSee attached 'License.txt' file for license informations");
 	aboutGuiComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtGuiPck::MainWindowGui> mainWindowComp;
@@ -168,7 +160,6 @@ int main(int argc, char *argv[])
 
 	application.SetRef("ApplicationInfo", &applicationInfo);
 	application.SetRef("MainGui", &mainWindowComp);
-	application.SetRef("SplashScreen", &splashScreenGui);
 	application.SetStringAttr("StyleSheet", ":/Style/Resources/Style/AcfStyle.ass");
 	application.InitComponent();
 

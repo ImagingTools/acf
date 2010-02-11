@@ -49,13 +49,14 @@
                 true
               </IsEnabled>
               <Value>
-                ACF Registry Editor
+ACF Registry Editor
 
-(C) Copyright 2009 ImagingTools
-
+Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
-              </Value>
-            </Data>
+This tool is a part of ACF Solutions project
+See attached 'licese.txt' file for license informations
+							</Value>
+						</Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
@@ -110,8 +111,12 @@ All rights reserved
                 true
               </IsEnabled>
               <Value>
-                Copyright 2009 ImagingTools
-This tool is a part of ACF project
+ACF Registry Editor
+
+(C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
+All rights reserved
+This tool is part of ACF Solutions project
+Please read attached License.txt file for license informations
               </Value>
             </Data>
           </AttributeInfo>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1057
+          1337
         </Number>
         <Description>
           ACF
@@ -232,9 +232,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Video player using Qt PHONON background
   </Description>
   <Keywords>
-    
+    ACF Tutorial Application PHONON Video Player
   </Keywords>
 </Acf>

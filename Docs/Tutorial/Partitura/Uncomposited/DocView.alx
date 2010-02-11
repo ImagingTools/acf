@@ -7,10 +7,10 @@
           0
         </Id>
         <Number>
-          983
+          1337
         </Number>
         <Description>
-          ACF'
+          ACF
         </Description>
       </Version>
     </VersionInfos>
@@ -76,10 +76,10 @@
         MainWindow
       </ComponentName>
       <X>
-        100
+        -154
       </X>
       <X>
-        -119
+        -295
       </X>
     </Element>
     <Element>
