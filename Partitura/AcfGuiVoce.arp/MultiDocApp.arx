@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1241
+          1334
         </Number>
         <Description>
           ACF
@@ -397,7 +397,7 @@
                 true
               </IsEnabled>
               <Value>
-                24
+                48
               </Value>
             </Data>
           </AttributeInfo>
