@@ -180,7 +180,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CAcquisitonProcessorGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CIterativeProcessorParamsGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CIterativeProcessorParamsGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CProgressManagerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProgressManagerGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -194,15 +210,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CAcquisitonProcessorGuiComp.moc"
+				RelativePath="..\CIterativeProcessorParamsGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CProgressManagerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CProgressManagerGuiComp.moc"
 				>
 			</File>
 			<File
@@ -231,11 +243,23 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CProgressManagerGuiComp.cpp"
+				RelativePath="..\generated\moc_CIterativeProcessorParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CProgressManagerGuiComp.h"
+				RelativePath="..\generated\moc_CProgressManagerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CAcquisitonProcessorGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CIterativeProcessorParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CProgressManagerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -244,6 +268,10 @@
 			>
 			<File
 				RelativePath="..\CAcquisitonProcessorGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CIterativeProcessorParamsGuiComp.ui"
 				>
 			</File>
 			<File

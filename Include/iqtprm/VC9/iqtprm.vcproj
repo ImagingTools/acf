@@ -178,11 +178,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComposedParamsSetGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamGuiComp.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\CFileNameParamGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CParamsManagerGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -196,23 +208,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComposedParamsSetGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileNameParamGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CFileNameParamGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CParamsManagerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CParamsManagerGuiComp.moc"
 				>
 			</File>
 			<File

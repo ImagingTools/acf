@@ -268,6 +268,10 @@
 				RelativePath="..\CXmlWriteArchiveBase.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\TCopySerializedWrap.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -378,6 +382,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IObject.h"
+				>
+			</File>
+			<File
 				RelativePath="..\iser.h"
 				>
 			</File>
@@ -387,6 +395,10 @@
 			</File>
 			<File
 				RelativePath="..\IVersionInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TCopySerializedWrap.h"
 				>
 			</File>
 			<File

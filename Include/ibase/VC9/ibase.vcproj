@@ -255,6 +255,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CObjectQueueComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangleComp.cpp"
 				>
 			</File>
@@ -280,6 +284,10 @@
 			</File>
 			<File
 				RelativePath="..\CTextFileLogComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CUuidComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -332,6 +340,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CObjectQueueComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangleComp.h"
 				>
 			</File>
@@ -360,6 +372,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CUuidComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IApplication.h"
 				>
 			</File>
@@ -369,6 +385,14 @@
 			</File>
 			<File
 				RelativePath="..\ibase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ICommand.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ICommandsProvider.h"
 				>
 			</File>
 			<File
@@ -396,11 +420,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\INamedObject.h"
+				RelativePath="..\IObjectQueue.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IObject.h"
+				RelativePath="..\IObjectSnap.h"
 				>
 			</File>
 			<File
@@ -453,10 +477,6 @@
 			</File>
 			<File
 				RelativePath="..\TSerializableContainer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSingleFactoryComp.h"
 				>
 			</File>
 		</Filter>

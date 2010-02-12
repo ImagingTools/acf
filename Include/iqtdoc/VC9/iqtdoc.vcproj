@@ -181,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtendedDocumentTemplateComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CHtmlHelpViewerComp.cpp"
 				>
 			</File>
@@ -189,11 +193,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMainWindowGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CModelEditorGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiDocumentWorkspaceGuiComp.moc"
 				>
 			</File>
 			<File
@@ -215,10 +227,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CExtendedDocumentTemplateComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CHtmlHelpViewerComp.h"
 				>
 			</File>
@@ -227,19 +235,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMainWindowGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CModelEditorGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiDocumentWorkspaceGuiComp.moc"
 				>
 			</File>
 			<File

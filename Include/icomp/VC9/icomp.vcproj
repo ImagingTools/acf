@@ -220,11 +220,27 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CInterfaceManipBase.cpp"
+				RelativePath="..\CEnvironmentManagerBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CFactoryAttribute.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultFactoryAttribute.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiReferenceAttribute.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CPackageStaticInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CReferenceAttribute.cpp"
 				>
 			</File>
 			<File
@@ -285,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEnvironmentManagerBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CFactoryAttribute.h"
 				>
 			</File>
@@ -341,7 +361,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IComponentEnvironmentManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IComponentStaticInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMetaInfoManager.h"
 				>
 			</File>
 			<File
@@ -366,6 +394,14 @@
 			</File>
 			<File
 				RelativePath="..\IRegistryLoaderProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TAttribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TAttributeMember.h"
 				>
 			</File>
 			<File
@@ -421,23 +457,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TSelectableAttribute.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TSimComponentsFactory.h"
 				>
 			</File>
 			<File
 				RelativePath="..\TSimComponentWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TAttribute.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TAttributeMember.h"
 				>
 			</File>
 		</Filter>

@@ -213,6 +213,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CBase64.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitManip.cpp"
 				>
 			</File>
@@ -226,6 +230,10 @@
 			</File>
 			<File
 				RelativePath="..\CCrcCalculator.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CIdManipBase.cpp"
 				>
 			</File>
 			<File
@@ -258,6 +266,10 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CBase64.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitManip.h"
 				>
 			</File>
@@ -275,6 +287,10 @@
 			</File>
 			<File
 				RelativePath="..\CFastBinaryIndex.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CIdManipBase.h"
 				>
 			</File>
 			<File
@@ -307,10 +323,6 @@
 			</File>
 			<File
 				RelativePath="..\IContainerInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IDuplicatable.h"
 				>
 			</File>
 			<File
@@ -383,6 +395,10 @@
 			</File>
 			<File
 				RelativePath="..\TIHierarchical.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TIMap.h"
 				>
 			</File>
 			<File

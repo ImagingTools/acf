@@ -205,6 +205,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CAboutWidgetGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CApplicationComp.cpp"
 				>
 			</File>
@@ -217,7 +221,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDockWidgetGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CExtLineEdit.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtLineEdit.moc"
 				>
 			</File>
 			<File
@@ -226,6 +238,10 @@
 			</File>
 			<File
 				RelativePath="..\CFilePersistenceGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CFilePersistenceGuiComp.moc"
 				>
 			</File>
 			<File
@@ -245,6 +261,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHierarchicalCommand.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CIconProviderComp.cpp"
 				>
 			</File>
@@ -253,11 +273,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLayoutGuiComp.cpp"
+				RelativePath="..\CLogGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CLogGuiComp.cpp"
+				RelativePath="..\CLogGuiComp.moc"
 				>
 			</File>
 			<File
@@ -269,7 +289,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectionParamGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSimpleMainWindowGuiComp.moc"
 				>
 			</File>
 			<File
@@ -281,11 +309,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTabbedMultiViewGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CTabContainerGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CToolBarWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CToolBarWidgetGuiComp.moc"
 				>
 			</File>
 			<File
@@ -303,10 +339,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CAboutWidgetGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CApplicationComp.h"
 				>
 			</File>
@@ -319,15 +351,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDockWidgetGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CExtLineEdit.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CExtLineEdit.moc"
 				>
 			</File>
 			<File
@@ -336,10 +360,6 @@
 			</File>
 			<File
 				RelativePath="..\CFilePersistenceGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFilePersistenceGuiComp.moc"
 				>
 			</File>
 			<File
@@ -381,10 +401,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHierarchicalCommand.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CIconProviderComp.h"
 				>
 			</File>
@@ -393,15 +409,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLayoutGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CLogGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLogGuiComp.moc"
 				>
 			</File>
 			<File
@@ -410,10 +418,6 @@
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamGuiComp.moc"
 				>
 			</File>
 			<File
@@ -429,19 +433,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTabbedMultiViewGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CTabContainerGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CToolBarWidgetGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CToolBarWidgetGuiComp.moc"
 				>
 			</File>
 			<File
@@ -466,6 +462,10 @@
 			</File>
 			<File
 				RelativePath="..\iqtgui.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TControlledWidgetWrap.h"
 				>
 			</File>
 			<File
@@ -525,150 +525,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<Filter
-				Name="Icons"
-				>
-				<File
-					RelativePath="..\Resources\Icons\add_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\attach_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\camera_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\cancel_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\close_b_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\copy_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\delete_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\diskette_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\document_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\down_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\exit.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\folder_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\hand_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\info_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\Log.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\next_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\paste_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\Play.svg"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\player_play.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\player_stop.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\reload_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\reload_left_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\RotateLeft.svg"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\RotateRight.svg"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\sandglass_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\SnapImage.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\trash_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\up_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\user_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\window_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\wizard_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\world_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\write_128.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\Zoom in.png"
-					>
-				</File>
-				<File
-					RelativePath="..\Resources\Icons\Zoom out.png"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -701,6 +557,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CSelectionParamGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
 			<File

@@ -31,7 +31,7 @@ Source: ..\Temp\Bin\Info\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: rec
 Source: {#EXTLIBDIR}\Microsoft\Redist\Debug$CompilerName$\*; DestDir: {app}\Bin\Debug$CompilerName$; Flags: recursesubdirs; Components: acfComp
 Source: {#EXTLIBDIR}\Microsoft\Redist\Release$CompilerName$\*; DestDir: {app}\Bin\Release$CompilerName$; Flags: recursesubdirs; Components: acfComp
 
-Source: {#QTDIR}\lib\Qt*4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
+Source: {#QTDIR}\bin\Qt*4.dll; DestDir: {app}\ExtLib\Bin; Components: qtComp
 Source: {#QTDIR}\plugins\imageformats\*.dll; DestDir: {app}\ExtLib\Bin\imageformats; Components: qtComp
 Source: {#QTDIR}\plugins\iconengines\*.dll; DestDir: {app}\ExtLib\Bin\iconengines; Components: qtComp
 

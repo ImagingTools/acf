@@ -258,6 +258,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRegistriesManagerComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSafeNotifier.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSettingsArchiveBase.cpp"
 				>
 			</File>
@@ -275,6 +283,10 @@
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystemEnvironment.cpp"
 				>
 			</File>
 			<File
@@ -396,6 +408,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRegistriesManagerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSafeNotifier.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSafeNotifier.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSettingsArchiveBase.h"
 				>
 			</File>
@@ -413,6 +437,10 @@
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystemEnvironment.h"
 				>
 			</File>
 			<File
@@ -459,6 +487,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CNetworkWriteArchive.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CSafeNotifier.cpp"
 				>
 			</File>
 		</Filter>

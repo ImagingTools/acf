@@ -247,14 +247,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ICommand.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ICommandsProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\idoc.h"
 				>
 			</File>
