@@ -30,8 +30,14 @@ public:
 	// reimplemented (idoc::IHelpViewer)
 	virtual void ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiShown();
+
+
 private:
 	I_REF(idoc::IHelpFileProvider, m_helpFileProviderCompPtr);
+
+	mutable QUrl m_urlToShow;
 };
 
 

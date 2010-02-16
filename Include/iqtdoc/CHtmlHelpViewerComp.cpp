@@ -16,7 +16,28 @@ void CHtmlHelpViewerComp::ShowHelp(const istd::CString& contextText, const istd:
 		istd::CString filePath = m_helpFileProviderCompPtr->GetHelpFilePath(contextText, contextObjectPtr);
 
 		QUrl url = QUrl::fromLocalFile(iqt::GetQString(filePath));
-		editorPtr->setSource(url);
+
+		if (editorPtr->isVisible()){
+			editorPtr->setSource(url);
+
+			m_urlToShow.clear();
+		}
+		else{
+			m_urlToShow = url;
+		}
+	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CHtmlHelpViewerComp::OnGuiShown()
+{
+	BaseClass::OnGuiShown();
+
+	QTextBrowser* editorPtr = GetQtWidget();
+	if ((editorPtr != NULL) && !m_urlToShow.isEmpty()){
+		editorPtr->setSource(m_urlToShow);
 	}
 }
 
