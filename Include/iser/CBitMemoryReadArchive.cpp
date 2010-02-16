@@ -94,7 +94,7 @@ void CBitMemoryReadArchive::ResetPosition()
 
 bool CBitMemoryReadArchive::IsValid() const
 {
-	int bytePosition = ((m_bitPosition % 8) != 0) + m_bitPosition / 8;
+	int bytePosition = m_bitPosition / 8;
 
 	return bytePosition < m_bufferSize;
 }
