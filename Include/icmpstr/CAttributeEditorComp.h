@@ -32,12 +32,15 @@ namespace icmpstr
 {
 
 
-class CAttributeEditorComp: public iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, IElementSelectionInfo>
+class CAttributeEditorComp:
+			public iqtgui::TDesignerGuiObserverCompBase<
+						Ui::CAttributeEditorComp,IElementSelectionInfo>
 {
     Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CAttributeEditorComp, IElementSelectionInfo> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CAttributeEditorComp, IElementSelectionInfo> BaseClass;
 
 	I_BEGIN_COMPONENT(CAttributeEditorComp);
 		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");

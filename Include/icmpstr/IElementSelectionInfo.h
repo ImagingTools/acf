@@ -2,6 +2,11 @@
 #define icmpstr_IElementSelectionInfo_included
 
 
+// Qt includes
+#include <QIcon>
+
+
+// ACF includes
 #include "istd/IChangeable.h"
 
 #include "iser/ISerializable.h"
