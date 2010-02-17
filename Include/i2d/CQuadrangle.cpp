@@ -120,12 +120,13 @@ CVector2d CQuadrangle::GetCenter() const
 
 void CQuadrangle::MoveTo(const CVector2d& position)
 {
-	istd::CChangeNotifier changePtr(this);
-
 	CVector2d delta = position - GetCenter();
+	if (delta != CVector2d(0, 0)){
+		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
-	m_firstDiagonal.MoveTo(delta + m_firstDiagonal.GetCenter());
-	m_secondDiagonal.MoveTo(delta + m_secondDiagonal.GetCenter());
+		m_firstDiagonal.MoveTo(delta + m_firstDiagonal.GetCenter());
+		m_secondDiagonal.MoveTo(delta + m_secondDiagonal.GetCenter());
+	}
 }
 
 

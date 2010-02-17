@@ -1,6 +1,11 @@
 #include "icmpstr/CVisualRegistryComp.h"
 
 
+// Qt includes
+#include <QDir>
+
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
 
@@ -41,7 +46,7 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 			if (infoPtr != NULL){
 				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 				if (elementPtr != NULL){
-					i2d::CVector2d position = elementPtr->GetCenter();
+					position = elementPtr->GetCenter();
 				}
 			}
 
@@ -91,6 +96,75 @@ bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
 }
 
 
+void CVisualRegistryComp::SetSelectedElement(CVisualRegistryElement* selectedElementPtr)
+{
+	std::string elementId;
+	if (selectedElementPtr != NULL){
+		elementId = selectedElementPtr->GetName();
+	}
+
+	if (m_selectedElementId != elementId){
+		istd::CChangeNotifier changePtr(this, CF_SELECTION);
+
+		m_selectedElementId = elementId;
+	}
+}
+
+
+// reimplemented (icmpstr::IElementSelectionInfo)
+
+icomp::IRegistry* CVisualRegistryComp::GetSelectedRegistry() const
+{
+	return const_cast<CVisualRegistryComp*>(this);
+}
+
+
+iser::ISerializable* CVisualRegistryComp::GetSelectedElement() const
+{
+	const ElementInfo* elementInfoPtr = GetElementInfo(m_selectedElementId);
+	if (elementInfoPtr != NULL){
+		return elementInfoPtr->elementPtr.GetPtr();
+	}
+
+	return NULL;
+}
+
+
+const std::string& CVisualRegistryComp::GetSelectedElementName() const
+{
+	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
+	if (elementPtr == NULL){
+		static std::string empty;
+
+		return empty;
+	}
+
+	return elementPtr->GetName();
+}
+
+
+const QIcon* CVisualRegistryComp::GetSelectedElementIcon() const
+{
+	const icomp::CComponentAddress* addressPtr = GetSelectedElementAddress();
+	if (addressPtr == NULL){
+		NULL;
+	}
+
+	return GetIcon(*addressPtr);
+}
+
+
+const icomp::CComponentAddress* CVisualRegistryComp::GetSelectedElementAddress() const
+{
+	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
+	if (elementPtr == NULL){
+		return NULL;
+	}
+
+	return &elementPtr->GetAddress();
+}
+
+
 // reimplemented (icomp::IRegistry)
 
 CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
@@ -116,6 +190,22 @@ CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
 	}
 
 	return infoPtr;
+}
+
+
+bool CVisualRegistryComp::RemoveElementInfo(const std::string& elementId)
+{
+	bool resetSelection = (elementId == m_selectedElementId);
+
+	if (BaseClass2::RemoveElementInfo(elementId)){
+		if (resetSelection){
+			m_selectedElementId.clear();
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -151,6 +241,42 @@ bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, st
 }
 
 
+const QIcon* CVisualRegistryComp::GetIcon(const icomp::CComponentAddress& address) const
+{
+	const QIcon* retVal = NULL;
+
+	IconMap::const_iterator iter = m_iconMap.find(address);
+	if (iter != m_iconMap.end()){
+		retVal = iter->second.GetPtr();
+	}
+	else{
+		IconPtr& newIconPtr = m_iconMap[address];
+
+		if (m_envManagerCompPtr.IsValid()){
+			istd::CString packageInfoPath = m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId());
+			if (!packageInfoPath.IsEmpty()){
+				QDir packageDir(iqt::GetQString(packageInfoPath) + ".info");
+
+				QFileInfo svgFileInfo(packageDir.absoluteFilePath((address.GetComponentId() + ".svg").c_str()));
+				if (svgFileInfo.exists()){
+					newIconPtr.SetPtr(new QIcon(svgFileInfo.absoluteFilePath()));
+				}
+				else{
+					QFileInfo pngFileInfo(packageDir.absoluteFilePath((address.GetComponentId() + ".big.png").c_str()));
+					if (pngFileInfo.exists()){
+						newIconPtr.SetPtr(new QIcon(pngFileInfo.absoluteFilePath()));
+					}
+				}
+			}
+		}
+
+		retVal = newIconPtr.GetPtr();
+	}
+
+	return retVal;
+}
+
+
 // reimplemented (icomp::CRegistry)
 
 icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
@@ -161,6 +287,12 @@ icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
 	if (registryElementPtr != NULL){
 		registryElementPtr->Initialize(this, address);
 		registryElementPtr->SetName(elementId);
+		
+		const QIcon* iconPtr = GetIcon(address);
+		if (iconPtr != NULL){
+			registryElementPtr->SetIcon(*iconPtr);
+		}
+
 		registryElementPtr->SetSlavePtr(const_cast<CVisualRegistryComp*>(this));
 
 		return registryElementPtr;

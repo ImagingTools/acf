@@ -301,8 +301,12 @@ void CLine2d::MoveTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
 
-	SetPoint1(GetPoint1() + offset);
-	SetPoint2(GetPoint2() + offset);
+	if (offset != i2d::CVector2d(0, 0)){
+		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+		SetPoint1(GetPoint1() + offset);
+		SetPoint2(GetPoint2() + offset);
+	}
 }
 
 

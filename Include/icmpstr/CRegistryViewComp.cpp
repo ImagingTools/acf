@@ -648,9 +648,9 @@ void CRegistryViewComp::OnRemoveNote()
 }
 
 
-bool CRegistryViewComp::ProcessDroppedData(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr)
+bool CRegistryViewComp::ProcessDroppedData(const QMimeData& mimeData, QGraphicsSceneDragDropEvent* eventPtr)
 {
-	QByteArray byteData = data.data("component");
+	QByteArray byteData = mimeData.data("component");
 	iser::CMemoryReadArchive archive(byteData.constData(), byteData.size());
 
 	icomp::CComponentAddress address;

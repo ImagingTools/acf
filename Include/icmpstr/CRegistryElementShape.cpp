@@ -98,8 +98,8 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 
-	const QIcon* iconPtr = m_registryView.GetIcon(address);
-	if ((iconPtr != NULL) && (mainRect.width() > mainRect.height())){
+	const QIcon& icon = objectPtr->GetIcon();
+	if (!icon.isNull() && (mainRect.width() > mainRect.height())){
 		int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
 
 		QRectF iconRect(
@@ -107,7 +107,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 					mainRect.top(),
 					minSideSize,
 					minSideSize);
-		iconPtr->paint(painterPtr, iconRect.toRect());
+		icon.paint(painterPtr, iconRect.toRect());
 
 		mainRect.adjust(minSideSize + SIDE_OFFSET, 0, 0, 0);
 	}
@@ -248,8 +248,8 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		width += height * 0.5;
 	}
 
-	const QIcon* iconPtr = m_registryView.GetIcon(address);
-	if (iconPtr != NULL){
+	const QIcon& icon = element.GetIcon();
+	if (!icon.isNull()){
 		width += height + SIDE_OFFSET;
 	}
 
@@ -269,6 +269,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
 	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
 		width = ::ceil(width / (gridSize * 2)) * (gridSize * 2);
+		height = ::ceil(height / (gridSize * 2)) * (gridSize * 2);
 	}
 
 	setRect(QRectF(-width * 0.5, -height * 0.5, width, height));

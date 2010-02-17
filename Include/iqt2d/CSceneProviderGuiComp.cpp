@@ -51,7 +51,7 @@ void CSceneProviderGuiComp::SetIsotropyFactor(double factor)
 
 void CSceneProviderGuiComp::Print(QPrinter* printerPtr) const
 {
-	if (SceneView == NULL){
+	if (m_scenePtr == NULL){
 		return;
 	}
 
@@ -67,7 +67,7 @@ void CSceneProviderGuiComp::Print(QPrinter* printerPtr) const
 	QPainter painter(realPrinterPtr);
 
 	 // print, fitting the viewport contents into a full page
-	SceneView->render(&painter);
+	m_scenePtr->render(&painter);
 }
 
 
@@ -412,6 +412,59 @@ void CSceneProviderGuiComp::SetFittedScale(FitMode mode)
 }
 
 
+bool CSceneProviderGuiComp::HasDropConsumerForFormat(const QStringList& formats) const
+{
+	if (!m_dropConsumersCompPtr.IsValid() || m_dropConsumersCompPtr.GetCount() == 0){
+		return false;
+	}
+
+	for (int formatIndex = 0; formatIndex < formats.size(); formatIndex++){
+		for (int consumerIndex = 0; consumerIndex < m_dropConsumersCompPtr.GetCount(); consumerIndex++){
+			QStringList supportedIds = m_dropConsumersCompPtr[consumerIndex]->GetAcceptedMimeIds();
+
+			if (supportedIds.contains(formats[formatIndex])){
+				return true;
+			}
+		}
+	}
+	
+	return true;
+}
+
+
+void CSceneProviderGuiComp::DelegateDropEvent(const QMimeData& mimeData, QGraphicsSceneDragDropEvent* eventPtr)
+{
+	I_ASSERT(m_dropConsumersCompPtr.IsValid());
+	I_ASSERT(m_dropConsumersCompPtr.GetCount() > 0);
+
+	if (!m_dropConsumersCompPtr.IsValid() || m_dropConsumersCompPtr.GetCount() == 0){
+		return;
+	}
+
+	QStringList formats = mimeData.formats();
+
+	for (int consumerIndex = 0; consumerIndex < m_dropConsumersCompPtr.GetCount(); consumerIndex++){
+		iqtgui::IDropConsumer* dropConsumerPtr = m_dropConsumersCompPtr[consumerIndex];
+		I_ASSERT(dropConsumerPtr != NULL);
+
+		QStringList supportedIds = dropConsumerPtr->GetAcceptedMimeIds();
+		
+		bool triggerEvent = false;
+		for (int idIndex = 0; idIndex < supportedIds.size(); idIndex++){
+			if (formats.contains(supportedIds[idIndex])){
+				triggerEvent = true;
+				
+				break;
+			}
+		}
+
+		if (triggerEvent){
+			dropConsumerPtr->OnDropFinished(mimeData, eventPtr);
+		}
+	}
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CSceneProviderGuiComp::OnGuiCreated()
@@ -420,16 +473,20 @@ void CSceneProviderGuiComp::OnGuiCreated()
 
 	CreateContextMenu();
 
+	if (m_dropConsumersCompPtr.IsValid() && m_dropConsumersCompPtr.GetCount() > 0){
+		SceneView->setAcceptDrops(true);
+	}
+
 	SceneView->setScene(m_scenePtr);
 	SceneView->setMouseTracking(true);
 	SceneView->setDragMode(QGraphicsView::ScrollHandDrag);
+	
 	switch (*m_backgroundModeAttrPtr){
-	case BM_SOLID:
-		SceneView->setBackgroundBrush(QBrush(QColor(128, 128, 128)));
-		break;
+		case BM_SOLID:
+			SceneView->setBackgroundBrush(qApp->palette().window());
+			break;
 
-	case BM_CHECKERBOARD:
-		{
+		case BM_CHECKERBOARD:{
 			QPixmap backgroundPixmap(16, 16);
 
 			QPainter p(&backgroundPixmap);
@@ -438,9 +495,10 @@ void CSceneProviderGuiComp::OnGuiCreated()
 			p.fillRect(8, 0, 8, 8, QBrush(Qt::white));
 			p.fillRect(8, 8, 8, 8, QBrush(qRgb(200,200,200)));
 			SceneView->setBackgroundBrush(QBrush(backgroundPixmap));
+			break;
 		}
-		break;
 	}
+
 	SceneView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
 	SceneView->installEventFilter(this);
 
@@ -526,7 +584,8 @@ bool CSceneProviderGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 // public methods of embedded class CScene
 
 CSceneProviderGuiComp::CScene::CScene(CSceneProviderGuiComp* parentPtr)
-:	m_parent(*parentPtr)
+:	m_parent(*parentPtr),
+	BaseClass(parentPtr->GetWidget())
 {
 	I_ASSERT(parentPtr != NULL);
 }
@@ -534,46 +593,107 @@ CSceneProviderGuiComp::CScene::CScene(CSceneProviderGuiComp* parentPtr)
 
 // protected methods of embedded class CScene
 
+void CSceneProviderGuiComp::CScene::DrawGrid(QPainter* painter, const QRectF& rect, bool useDot)  
+{
+	QRectF gridRect = rect;
+	if (!sceneRect().isEmpty()){
+		QGraphicsScene::drawBackground(painter, rect);
+		
+		gridRect = sceneRect().intersected(rect);
+	}
+
+	int gridSize = *m_parent.m_gridSizeAttrPtr;
+
+	QRect realRect = gridRect.toAlignedRect();
+
+	QColor gridColor = qApp->palette().highlight().color();
+	QColor shadowColor = qApp->palette().shadow().color();
+
+	int firstLeftGridLine = realRect.left() - (realRect.left() % gridSize);
+	int firstTopGridLine = realRect.top() - (realRect.top() % gridSize);
+
+	if (!useDot){
+		QVarLengthArray<QLine> lines;
+		for (int x = firstLeftGridLine; x <= realRect.right(); x += gridSize){
+			lines.append(QLine(x, realRect.top(), x, realRect.bottom()));
+		}
+
+		for (int y = firstTopGridLine; y <= realRect.bottom(); y += gridSize){
+			lines.append(QLine(realRect.left(), y, realRect.right(), y));           
+		}
+
+		gridColor.setAlpha(64);
+		painter->setPen(gridColor);
+		painter->drawLines(lines.data(), lines.size());
+	}
+	else{
+		painter->fillRect(sceneRect(), qApp->palette().window());
+
+		QPolygon points;
+		for (int x = firstLeftGridLine; x <= realRect.right(); x += gridSize){
+			for (int y = firstTopGridLine; y <= realRect.bottom(); y += gridSize){
+				points.append(QPoint(x, y));
+			}
+		}
+
+		painter->setPen(gridColor);
+		painter->drawPoints(points);
+	}
+
+	if (!sceneRect().isEmpty()){
+		painter->setPen(shadowColor);
+
+		painter->drawRect(sceneRect());
+	}
+}
+
+
 // reimplemented (QGraphicsScene)
 
 void CSceneProviderGuiComp::CScene::drawBackground(QPainter* painter, const QRectF& rect)
 {
 	switch (*m_parent.m_backgroundModeAttrPtr){
-	case BM_GRID:
-		{
-			QRectF gridRect = rect;
-			if (!sceneRect().isEmpty()){
-				gridRect = sceneRect().intersected(rect);
+		case BM_GRID:
+			DrawGrid(painter, rect, false);
+			break;
 
-				QGraphicsScene::drawBackground(painter, rect);
+		case BM_DOT_GRID:
+			DrawGrid(painter, rect, true);
+			break;
 
-				painter->drawRect(sceneRect());
-			}
-
-			int gridSize = *m_parent.m_gridSizeAttrPtr;
-
-			QRect realRect = gridRect.toAlignedRect();
-
-			int firstLeftGridLine = realRect.left() - (realRect.left() % gridSize);
-			int firstTopGridLine = realRect.top() - (realRect.top() % gridSize);
-
-			QVarLengthArray<QLine> lines;
-			for (int x = firstLeftGridLine; x <= realRect.right(); x += gridSize){
-				lines.append(QLine(x, realRect.top(), x, realRect.bottom()));
-			}
-
-			for (int y = firstTopGridLine; y <= realRect.bottom(); y += gridSize){
-				lines.append(QLine(realRect.left(), y, realRect.right(), y));           
-			}
-
-			painter->setPen(QPen(qRgb(224, 224, 255)));
-			painter->drawLines(lines.data(), lines.size());
-		}
-		break;
-
-	default:
-		QGraphicsScene::drawBackground(painter, rect);
+		default:
+			QGraphicsScene::drawBackground(painter, rect);
 	}
+}
+
+
+
+void CSceneProviderGuiComp::CScene::dragEnterEvent(QGraphicsSceneDragDropEvent* eventPtr)
+{
+	const QStringList& formats = eventPtr->mimeData()->formats();
+
+	if (m_parent.HasDropConsumerForFormat(formats)){
+		eventPtr->acceptProposedAction();
+	}
+}
+
+
+void CSceneProviderGuiComp::CScene::dropEvent(QGraphicsSceneDragDropEvent* eventPtr)
+{
+	const QMimeData* dataPtr = eventPtr->mimeData();
+	if ((dataPtr != NULL)){
+		m_parent.DelegateDropEvent(*dataPtr, eventPtr);
+
+		eventPtr->acceptProposedAction();
+	}
+	else{
+		eventPtr->ignore();
+	}
+}
+
+
+void CSceneProviderGuiComp::CScene::dragMoveEvent(QGraphicsSceneDragDropEvent* /*eventPtr*/)
+{
 }
 
 

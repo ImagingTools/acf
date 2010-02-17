@@ -11,6 +11,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
+
 // ACF includes
 #include "iser/IFileLoader.h"
 
@@ -25,6 +26,7 @@
 #include "idoc/IHelpViewer.h"
 #include "idoc/IMainWindowCommands.h"
 
+#include "iqtgui/IDropConsumer.h"
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TGuiObserverWrap.h"
 #include "iqtgui/CHierarchicalCommand.h"
@@ -32,7 +34,6 @@
 #include "iqt2d/ISceneProvider.h"
 
 #include "icmpstr/IRegistryPreview.h"
-#include "icmpstr/IElementSelectionInfo.h"
 
 
 namespace icmpstr
@@ -41,14 +42,15 @@ namespace icmpstr
 
 class CRegistryElementShape;
 class CVisualRegistryElement;
+class CVisualRegistryComp;
 
 
 class CVisualRegistryScenographerComp:
 			public QObject,
 			public icomp::CComponentBase,
 			public imod::TSingleModelObserverBase<icomp::IRegistry>,
-			virtual public imod::TModelWrap<IElementSelectionInfo>,
-			virtual public ibase::ICommandsProvider
+			virtual public ibase::ICommandsProvider,
+			virtual public iqtgui::IDropConsumer
 {
 	Q_OBJECT
 
@@ -57,9 +59,9 @@ public:
 	typedef imod::TSingleModelObserverBase<icomp::IRegistry> BaseClass2;
 
 	I_BEGIN_COMPONENT(CVisualRegistryScenographerComp);
+		I_REGISTER_INTERFACE(iqtgui::IDropConsumer);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_REGISTER_INTERFACE(imod::IObserver);
-		I_REGISTER_INTERFACE(imod::IModel);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
 		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
@@ -72,21 +74,17 @@ public:
 
 	const QFont& GetElementNameFont() const;
 	const QFont& GetElementDetailFont() const;
-	const QIcon* GetIcon(const icomp::CComponentAddress& address) const;
-
+	
 	const icomp::IComponentEnvironmentManager* GetEnvironmentManager() const;
 
 	double GetGrid() const{return 25;}	// TODO: replace it with some geometrical info concept
 
+	// reimplemented (iqtgui::IDropConsumer)
+	virtual QStringList GetAcceptedMimeIds() const;
+	virtual void OnDropFinished(const QMimeData& data, QEvent* eventPtr);
+
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
-
-	// reimplemented (icmpstr::IElementSelectionInfo)
-	virtual icomp::IRegistry* GetSelectedRegistry() const;
-	virtual iser::ISerializable* GetSelectedElement() const;
-	virtual const std::string& GetSelectedElementName() const;
-	virtual const QIcon* GetSelectedElementIcon() const;
-	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
 
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -132,6 +130,7 @@ protected:
 				bool isFactory = false);
 	bool TryCreateComponent(const icomp::CComponentAddress& address, const i2d::CVector2d& position);
 	void ConnectReferences(const QString& componentRole);
+	void UpdateComponentSelection();
 
 private:
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
@@ -155,12 +154,10 @@ private:
 
 	QGraphicsScene* m_scenePtr;
 
-	typedef istd::TDelPtr<QIcon> IconPtr;
-	typedef std::map<icomp::CComponentAddress, IconPtr> IconMap;
-	mutable IconMap m_iconMap;
-
 	QFont m_elementNameFont;
 	QFont m_elementDetailFont;
+
+	bool m_isUpdating;
 };
 
 

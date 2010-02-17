@@ -338,12 +338,15 @@ CVector2d CRectangle::GetCenter() const
 void CRectangle::MoveTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
+	if (offset != i2d::CVector2d(0, 0)){
+		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
-	m_verticalRange.SetMinValue(m_verticalRange.GetMinValue() + offset.GetY());
-	m_verticalRange.SetMaxValue(m_verticalRange.GetMaxValue() + offset.GetY());
+		m_verticalRange.SetMinValue(m_verticalRange.GetMinValue() + offset.GetY());
+		m_verticalRange.SetMaxValue(m_verticalRange.GetMaxValue() + offset.GetY());
 
-	m_horizontalRange.SetMinValue(m_horizontalRange.GetMinValue() + offset.GetX());
-	m_horizontalRange.SetMaxValue(m_horizontalRange.GetMaxValue() + offset.GetX());
+		m_horizontalRange.SetMinValue(m_horizontalRange.GetMinValue() + offset.GetX());
+		m_horizontalRange.SetMaxValue(m_horizontalRange.GetMaxValue() + offset.GetX());
+	}
 }
 
 

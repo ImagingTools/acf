@@ -28,7 +28,7 @@ CPosition2d::CPosition2d(const CVector2d& center)
 void CPosition2d::SetCenter(const CVector2d& center)
 {
 	if (center != m_center){
-		istd::CChangeNotifier notifier(this);
+		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 		m_center = center;
 	}

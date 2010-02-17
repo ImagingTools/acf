@@ -367,12 +367,8 @@ QVariant CComponentSceneItem::itemChange(GraphicsItemChange change, const QVaria
 
 	case QGraphicsItem::ItemPositionChange:
 		{
-			QSizeF size = CalculateRect().size();
 			QPointF newPos = value.toPointF();
-/*			double gridSize = m_registryView.GetGrid();
-			newPos.setX(int(::ceil((newPos.x() + size.width() * 0.5) / gridSize + 0.5) * gridSize - size.width() * 0.5));
-			newPos.setY(int(::ceil((newPos.y() + size.height() * 0.5) / gridSize + 0.5) * gridSize - size.height() * 0.5));
-*/
+
 			return QVariant(newPos);
 		}
 	

@@ -188,7 +188,7 @@ void TShapeBase<GraphicsItemClass>::SetEditable(bool isEditable)
 {
 	m_isEditable = isEditable;
 	if (isEditable){
-		BaseClass::setFlags(BaseClass::flags() | BaseClass::ItemIsMovable | BaseClass::ItemIsSelectable);
+		BaseClass::setFlags(BaseClass::flags() | BaseClass::ItemIsMovable | BaseClass::ItemIsSelectable | BaseClass::ItemSendsGeometryChanges);
 	}
 	else{
 		BaseClass::setFlags(BaseClass::flags() & ~(BaseClass::ItemIsMovable | BaseClass::ItemIsSelectable));

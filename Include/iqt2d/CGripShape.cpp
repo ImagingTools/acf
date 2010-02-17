@@ -34,7 +34,7 @@ CGripShape::CGripShape(QGraphicsItem* parentPtr, const ISceneProvider* providerP
 
 	setRect(-5, -5, 10, 10);
 
-	setFlags(ItemIsSelectable | ItemIsMovable | ItemIgnoresTransformations);
+	setFlags(ItemIsSelectable | ItemIsMovable | ItemIgnoresTransformations | ItemSendsGeometryChanges);
 	setCursor(QCursor(Qt::CrossCursor)); 
 
 	// setup label item:

@@ -9,18 +9,17 @@
 #include <QGraphicsSceneWheelEvent>
 
 
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include "i2d/ISceneController.h"
 
 #include "ibase/ICommandsProvider.h"
 
-#include "i2d/ISceneController.h"
-
+#include "iqtgui/IDropConsumer.h"
+#include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
 #include "iqtdoc/IPrintable.h"
 
 #include "iqt2d/ISceneProvider.h"
-
 #include "iqt2d/Generated/Ui_CSceneProviderGuiComp.h"
 
 
@@ -46,18 +45,26 @@ public:
 			Standard window backround.
 		*/
 		BM_NORMAL,
+
 		/**
 			Filled with solid color.
 		*/
 		BM_SOLID,
+
 		/**
 			Grid of horizontal and vertical lines.
 		*/
 		BM_GRID,
+
 		/**
 			Checkerboard pattern.
 		*/
-		BM_CHECKERBOARD
+		BM_CHECKERBOARD,
+
+		/**
+			Dot grid.
+		*/
+		BM_DOT_GRID
 	};
 
 	I_BEGIN_COMPONENT(CSceneProviderGuiComp);
@@ -70,8 +77,9 @@ public:
 		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false);
 		I_ASSIGN(m_fitModeAttrPtr, "FitMode", "Set fit automatic mode for the scene\n 0 - no fit (default)\n 1 - isotropic (reduction)\n 2 - isotropic\n 3 - anisotropic", false, 0);
 		I_ASSIGN(m_isotropyFactorAttrPtr, "IsotropyFactor", "Describe type of isotropic transformation: 0 - letterbox, 1 - full", true, 0);
-		I_ASSIGN(m_sceneControllerGuiCompPtr, "SceneController", "Scene controller", false, "SceneController");	
-		I_ASSIGN(m_backgroundModeAttrPtr, "BackgroundMode", "Mode of background drawing:\n 0 - normal window\n 1 - solid color\n 2 - grid\n 3 - checkerboard", true, 0);	
+		I_ASSIGN(m_sceneControllerGuiCompPtr, "SceneController", "Scene controller", false, "SceneController");
+		I_ASSIGN_MULTI_0(m_dropConsumersCompPtr, "DropConsumers", "List of consumers for the drop event", false);
+		I_ASSIGN(m_backgroundModeAttrPtr, "BackgroundMode", "Mode of background drawing:\n 0 - normal window\n 1 - solid color\n 2 - grid\n 3 - checkerboard\n 4 - dot grid", true, 0);	
 		I_ASSIGN(m_gridSizeAttrPtr, "GridSize", "Size of grid, it is used also for background", true, 20);	
 		I_ASSIGN(m_isAlignmentEnabledAttrPtr, "IsAlignmentEnabled", "If true, grid alignment will be enabled", true, false);	
 		I_ASSIGN(m_sceneWidthAttrPtr, "SceneWidth", "Logical with of scene", false, 1000);	
@@ -126,8 +134,13 @@ protected:
 		CScene(CSceneProviderGuiComp* parentPtr);
 
 	protected:
+		void DrawGrid(QPainter* painter, const QRectF& rect, bool useDot = false);
+
 		// reimplemented (QGraphicsScene)
 		virtual void drawBackground(QPainter* painter, const QRectF & rect);
+		virtual void dragEnterEvent(QGraphicsSceneDragDropEvent * eventPtr);
+		virtual void dropEvent(QGraphicsSceneDragDropEvent * eventPtr);
+		virtual void dragMoveEvent(QGraphicsSceneDragDropEvent * eventPtr);
 
 	private:
 		CSceneProviderGuiComp& m_parent;
@@ -145,6 +158,9 @@ protected:
 	void SetFittedScale(FitMode mode);
 
 	iqtgui::CHierarchicalCommand& GetCommandsRootRef();
+
+	bool HasDropConsumerForFormat(const QStringList& formats) const;
+	void DelegateDropEvent(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -168,7 +184,8 @@ private:
 	iqtgui::CHierarchicalCommand m_fitToViewCommand;
 	iqtgui::CHierarchicalCommand m_resetZoomCommand;
 
-	I_REF(iqtgui::IGuiObject, m_sceneControllerGuiCompPtr)
+	I_REF(iqtgui::IGuiObject, m_sceneControllerGuiCompPtr);
+	I_MULTIREF(iqtgui::IDropConsumer, m_dropConsumersCompPtr);
 
 	I_ATTR(bool, m_allowWidgetResizeAttrPtr);
 	I_ATTR(int, m_sceneIdAttrPtr);

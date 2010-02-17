@@ -99,6 +99,8 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 	}
 
 	const CRegistryModelComp* registryModelPtr = dynamic_cast<const CRegistryModelComp*>(&data);
+	const CVisualRegistryComp* geometricalRegistryPtr = dynamic_cast<const CVisualRegistryComp*>(&data);
+
 	if (registryModelPtr != NULL){
 		WriteArchiveEx registryArchive(filePath, GetVersionInfo(), this);
 		I_ASSERT(registryArchive.IsStoring());
@@ -115,6 +117,30 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 		I_ASSERT(layoutArchive.IsStoring());
 
 		if (!const_cast<CRegistryModelComp*>(registryModelPtr)->SerializeComponentsLayout(layoutArchive)){
+			SendInfoMessage(
+						MI_CANNOT_READ_LAYOUT,
+						iqt::GetCString(QObject::tr("Layout information cannot be stored (%1)").
+									arg(iqt::GetQString(filePath))));
+		}
+
+		return StateOk;
+	}
+	else if (geometricalRegistryPtr != NULL){
+		WriteArchiveEx registryArchive(filePath, GetVersionInfo(), this);
+		I_ASSERT(registryArchive.IsStoring());
+
+		if (!const_cast<CVisualRegistryComp*>(geometricalRegistryPtr)->SerializeRegistry(registryArchive)){
+			SendErrorMessage(
+						MI_LOAD_ERROR,
+						iqt::GetCString(QObject::tr("Cannot store to file %1").arg(iqt::GetQString(filePath))));
+
+			return StateFailed;
+		}
+
+		WriteArchiveEx layoutArchive(GetLayoutPath(filePath), GetVersionInfo(), this);
+		I_ASSERT(layoutArchive.IsStoring());
+
+		if (!const_cast<CVisualRegistryComp*>(geometricalRegistryPtr)->SerializeComponentsLayout(layoutArchive)){
 			SendInfoMessage(
 						MI_CANNOT_READ_LAYOUT,
 						iqt::GetCString(QObject::tr("Layout information cannot be stored (%1)").

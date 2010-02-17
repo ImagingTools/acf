@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1322
+          1343
         </Number>
         <Description>
           ACF
@@ -49,14 +49,14 @@
                 true
               </IsEnabled>
               <Value>
-ACF Registry Editor
+                ACF Registry Editor
 
 Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 This tool is a part of ACF Solutions project
 See attached 'licese.txt' file for license informations
-							</Value>
-						</Data>
+              </Value>
+            </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
@@ -111,7 +111,7 @@ See attached 'licese.txt' file for license informations
                 true
               </IsEnabled>
               <Value>
-ACF Registry Editor
+                ACF Registry Editor
 
 (C) Copyright 2010 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
@@ -534,7 +534,7 @@ Please read attached License.txt file for license informations
                 true
               </IsEnabled>
               <Value>
-                true
+                false
               </Value>
             </Data>
           </AttributeInfo>
@@ -704,8 +704,8 @@ Please read attached License.txt file for license informations
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-							EnvironmentManager
-						</Id>
+              EnvironmentManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>

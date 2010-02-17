@@ -100,8 +100,6 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnPositionChanged(const Q
 	if (objectPtr != NULL){
 		QPointF offset = position - m_lastPosition;
 
-		istd::CChangeNotifier changePtr(objectPtr, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
-
 		objectPtr->MoveTo(iqt::GetCVector2d(offset) + objectPtr->GetCenter());
 
 		m_lastPosition = position;

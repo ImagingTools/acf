@@ -52,6 +52,7 @@ void CLine2dShape::OnPosition2Changed(const i2d::CVector2d& point)
 // protected methods
 
 // reimplemented (iqt2d::TObjectShapeBase)
+
 void CLine2dShape::UpdateGraphicsItem(const i2d::CLine2d& line)
 {
 	m_pointGrip1.SetPosition(line.GetPoint1());

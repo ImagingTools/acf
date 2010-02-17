@@ -7,7 +7,10 @@
 #include <QLineEdit>
 #include <QComboBox>
 
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
+
 #include "icomp/CInterfaceManipBase.h"
 
 
@@ -445,6 +448,12 @@ void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, 
 
 void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 {
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
+
 	istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(GetRegistryElement(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
 
 	if (elementPtr.IsValid()){

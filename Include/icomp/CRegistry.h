@@ -60,7 +60,7 @@ protected:
 	virtual bool SerializeExportedComponents(iser::IArchive& archive);
 
 private:
-	typedef std::map< std::string, ElementInfo> ComponentsMap;
+	typedef std::map<std::string, ElementInfo> ComponentsMap;
 
 	ComponentsMap m_componentsMap;
 	ExportedInterfacesMap m_exportedInterfacesMap;

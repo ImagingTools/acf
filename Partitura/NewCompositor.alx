@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1322
+          1343
         </Number>
         <Description>
           ACF
@@ -65,7 +65,7 @@
         CompositorTemplate
       </ComponentName>
       <X>
-        437
+        394.574
       </X>
       <X>
         231
@@ -79,7 +79,7 @@
         249
       </X>
       <X>
-        -334
+        -335.414
       </X>
     </Element>
     <Element>
@@ -120,10 +120,10 @@
         ElementInfoBinder
       </ComponentName>
       <X>
-        -204
+        -206.828
       </X>
       <X>
-        -181
+        -111.704
       </X>
     </Element>
     <Element>

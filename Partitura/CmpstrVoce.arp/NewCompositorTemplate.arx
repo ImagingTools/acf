@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1318
+          1343
         </Number>
         <Description>
           ACF
@@ -370,7 +370,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -385,6 +385,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -410,8 +429,8 @@
         <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-							MetaInfoManager
-						</Id>
+              MetaInfoManager
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
