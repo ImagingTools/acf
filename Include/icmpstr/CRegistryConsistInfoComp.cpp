@@ -442,16 +442,36 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 		if (pointedInfoPtr != NULL){
 			const icomp::IRegistry* pointedRegistryPtr = m_envManagerCompPtr->GetRegistry(pointedInfoPtr->address);
 			if (pointedRegistryPtr != NULL){
-				if (!CheckPointedElementCompatibility(subId, interfaceInfo, attributeName, elementName, *pointedRegistryPtr, ignoreUndef, NULL)){
+				const icomp::IRegistry::ExportedComponentsMap& exportedMap = pointedRegistryPtr->GetExportedComponentsMap();
+				icomp::IRegistry::ExportedComponentsMap::const_iterator exportIter = exportedMap.find(subId);
+				if (exportIter == exportedMap.end()){
 					if (reasonConsumerPtr != NULL){
 						reasonConsumerPtr->AddMessage(new ibase::CMessage(
 									istd::ILogger::MC_ERROR,
 									MI_COMPONENT_NOT_FOUND,
-									iqt::GetCString(QObject::tr("Reference of factory '%1' in '%2' point at '%3', but subelement '%4' is not compatible")
+									iqt::GetCString(QObject::tr("Reference of factory '%1' in '%2' point at '%3', but subelement '%4' doesn't exist")
 												.arg(attributeName.c_str())
 												.arg(elementName.c_str())
 												.arg(pointedElementName.c_str())
 												.arg(subId.c_str())),
+									iqt::GetCString(QObject::tr("Attribute Consistency Check")),
+									0));
+					}
+
+					return false;
+				}
+
+				const std::string localId = exportIter->second;
+				if (!CheckPointedElementCompatibility(localId, interfaceInfo, attributeName, elementName, *pointedRegistryPtr, ignoreUndef, NULL)){
+					if (reasonConsumerPtr != NULL){
+						reasonConsumerPtr->AddMessage(new ibase::CMessage(
+									istd::ILogger::MC_ERROR,
+									MI_COMPONENT_NOT_FOUND,
+									iqt::GetCString(QObject::tr("Reference of factory '%1' in '%2' point at '%3', but exported element '%4' is not compatible")
+												.arg(attributeName.c_str())
+												.arg(elementName.c_str())
+												.arg(pointedElementName.c_str())
+												.arg(localId.c_str())),
 									iqt::GetCString(QObject::tr("Attribute Consistency Check")),
 									0));
 					}
