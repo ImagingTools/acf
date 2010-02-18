@@ -463,7 +463,7 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 					(flags | icomp::IRegistryElement::EF_AUTO_INSTANCE):
 					(flags & ~icomp::IRegistryElement::EF_AUTO_INSTANCE);
 
-		istd::CChangeNotifier registryNotifier(GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
+		istd::CChangeNotifier registryNotifier(GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_FLAGS_CHANGED);
 
 		elementPtr->SetElementFlags(flags);
 	}

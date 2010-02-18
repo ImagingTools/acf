@@ -9,6 +9,8 @@
 
 #include "imod/TSingleModelObserverBase.h"
 
+#include "i2d/IObject2d.h"
+
 #include "iqt2d/TShapeBase.h"
 
 
@@ -58,7 +60,7 @@ template <class GraphicsItemClass, class ObjectClass>
 TObjectShapeBase<GraphicsItemClass, ObjectClass>::TObjectShapeBase(bool isEditable, const ISceneProvider* providerPtr)
 :	BaseClass(isEditable, providerPtr),
 	m_isShapeUpdateBlocked(false),
-	m_mousePressingNotifier(NULL)
+	m_mousePressingNotifier(NULL, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL)
 {
 	BaseClass::SetPen(BaseClass::InactiveColor, QPen(Qt::darkGreen, 0));
 	BaseClass::SetPen(BaseClass::EditableColor, QPen(Qt::green, 0));

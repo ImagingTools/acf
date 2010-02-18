@@ -114,7 +114,8 @@ void CVisualRegistryScenographerComp::OnUpdate(int updateFlags, istd::IPolymorph
 					i2d::IObject2d::CF_OBJECT_POSITION |
 					istd::IChangeable::CF_MODEL |
 					istd::IChangeable::CF_ACF_INTERNAL |
-					istd::CChangeDelegator::CF_DELEGATED;
+					istd::CChangeDelegator::CF_DELEGATED |
+					icomp::IRegistryElement::CF_FLAGS_CHANGED;
 		int maskedFlags = (updateFlags & ~unimportantChanges);
 		if (maskedFlags == 0){
 			// some unimportant model changes
