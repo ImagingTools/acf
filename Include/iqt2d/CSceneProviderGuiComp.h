@@ -150,7 +150,7 @@ protected:
 	virtual void OnWheelEvent(QGraphicsSceneWheelEvent* eventPtr);
 	virtual void OnKeyReleaseEvent(QKeyEvent* eventPtr);
 	virtual void OnContextMenuEvent(QContextMenuEvent* eventPtr);
-	virtual void OnMouseDoubleClickEvent(QMouseEvent* eventPtr);
+	virtual void OnMouseDoubleClickEvent(QEvent* eventPtr);
 	virtual void OnMouseMoveEvent(QMouseEvent* eventPtr);
 
 	void CreateContextMenu();

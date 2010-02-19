@@ -203,9 +203,12 @@ void CRegistryElementShape::mouseMoveEvent(QGraphicsSceneMouseEvent* eventPtr)
 void CRegistryElementShape::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* eventPtr)
 {
 	CVisualRegistryElement* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && m_registryView.TryOpenComponent(*objectPtr)){
-		eventPtr->accept();
+	if (objectPtr != NULL){
+		m_registryView.TryOpenComponent(*objectPtr);
 	}
+
+	// preserve event delegation:
+	eventPtr->accept();
 
 	BaseClass::mouseDoubleClickEvent(eventPtr);
 }

@@ -307,9 +307,19 @@ void CSceneProviderGuiComp::OnWheelEvent(QGraphicsSceneWheelEvent* eventPtr)
 }
 
 
-void CSceneProviderGuiComp::OnMouseDoubleClickEvent(QMouseEvent* /*eventPtr*/)
+void CSceneProviderGuiComp::OnMouseDoubleClickEvent(QEvent* eventPtr)
 {
-	SetFullScreenMode(!IsFullScreenMode());
+	QGraphicsSceneMouseEvent* sceneEventPtr = dynamic_cast<QGraphicsSceneMouseEvent*>(eventPtr);
+	if (sceneEventPtr != NULL){
+		QGraphicsItem* mouseItemPtr = m_scenePtr->itemAt(sceneEventPtr->scenePos());
+		if (mouseItemPtr != NULL){
+			m_scenePtr->sendEvent(mouseItemPtr, eventPtr);
+		}
+	}
+
+	if (!eventPtr->isAccepted()){
+		SetFullScreenMode(!IsFullScreenMode());
+	}
 }
 
 
@@ -558,7 +568,7 @@ bool CSceneProviderGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 		switch(eventPtr->type()){
 			case QEvent::MouseButtonDblClick:
 			case QEvent::GraphicsSceneMouseDoubleClick:
-				OnMouseDoubleClickEvent(dynamic_cast<QMouseEvent*>(eventPtr));
+				OnMouseDoubleClickEvent(eventPtr);
 				return true;
 
 			case QEvent::KeyRelease:
