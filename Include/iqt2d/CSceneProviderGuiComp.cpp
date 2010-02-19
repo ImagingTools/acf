@@ -190,7 +190,7 @@ bool CSceneProviderGuiComp::SetFullScreenMode(bool fullScreenMode)
 }
 
 
-bool CSceneProviderGuiComp::GetScale() const
+double CSceneProviderGuiComp::GetScale() const
 {
 	QMatrix currentMatrix = SceneView->matrix();
 	double currentScale = sqrt(currentMatrix.det());
@@ -209,12 +209,12 @@ bool CSceneProviderGuiComp::SetScale(int scaleMode, double scaleFactor)
 		return false;
 	}
 
-	QMatrix currentMatrix = SceneView->matrix();
-	double currentScale = sqrt(currentMatrix.det());
+	double currentScale = GetScale();
 
 	QMatrix newMatrix;
 	newMatrix.scale(scaleFactor / currentScale, scaleFactor/ currentScale);
 
+	QMatrix currentMatrix = SceneView->matrix();
 	currentMatrix *= newMatrix;
 
 	SceneView->setMatrix(currentMatrix);
@@ -371,9 +371,7 @@ void CSceneProviderGuiComp::CreateContextMenu()
 
 void CSceneProviderGuiComp::ScaleView(double scaleFactor)
 {
-	QMatrix sceneMatrix = SceneView->matrix();
-
-	double currentScale = sqrt(sceneMatrix.det());
+	double currentScale = GetScale();
 
 	SetScale(SM_SET, scaleFactor * currentScale);
 }

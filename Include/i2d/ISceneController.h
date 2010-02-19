@@ -138,7 +138,7 @@ public:
 	/**
 		Get actual scale factor.
 	*/
-	virtual bool GetScale() const = 0;
+	virtual double GetScale() const = 0;
 	/**
 		Set or modify scale factor.
 		See ScaleMode for possible modes.

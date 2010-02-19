@@ -108,7 +108,7 @@ public:
 	virtual bool SetFitMode(FitMode fitMode);
 	virtual bool IsFullScreenMode() const;
 	virtual bool SetFullScreenMode(bool isFullScreen);
-	virtual bool GetScale() const;
+	virtual double GetScale() const;
 	virtual bool SetScale(int scaleMode = SM_SET, double value = 1.0);
 
 	// reimplemented (icomp::IComponent)
