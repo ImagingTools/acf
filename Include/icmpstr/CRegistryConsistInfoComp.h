@@ -2,6 +2,10 @@
 #define icmpstr_CRegistryConsistInfoComp_included
 
 
+// QT includes
+#include <QHash>
+#include <QIcon>
+
 #include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/CComponentBase.h"
 
@@ -87,6 +91,9 @@ protected:
 
 private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
+
+	typedef std::map<icomp::CComponentAddress, QIcon> IconCache;
+	mutable IconCache m_iconCache;
 };
 
 

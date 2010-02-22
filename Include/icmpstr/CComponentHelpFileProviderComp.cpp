@@ -70,12 +70,12 @@ istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const istd::CStrin
 
 istd::CString CComponentHelpFileProviderComp::GetInfoFilePath(const icomp::CComponentAddress& componentAddress) const
 {
-	if (m_packagesLoaderManagerCompPtr.IsValid()){
-		QString packageDirPath = iqt::GetQString(m_packagesLoaderManagerCompPtr->GetPackageDirPath(componentAddress.GetPackageId()));
-		if (!packageDirPath.isEmpty()){
-			QDir packageDir(packageDirPath + ".info");
+	if (m_metaInfoManagerCompPtr.IsValid()){
+		QString infoPath = iqt::GetQString(m_metaInfoManagerCompPtr->GetComponentInfoPath(componentAddress));
+		if (!infoPath.isEmpty()){
+			QDir packageDir(infoPath);
 			if (packageDir.exists()){
-				return iqt::GetCString(packageDir.absoluteFilePath((componentAddress.GetComponentId() + ".descr.html").c_str()));
+				return iqt::GetCString(packageDir.absoluteFilePath("Description.html"));
 			}
 		}
 	}

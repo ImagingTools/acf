@@ -311,11 +311,25 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress& address) const
 {
 	if (m_envManagerCompPtr.IsValid()){
-		istd::CString packageInfoPath = m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId());
-		if (!packageInfoPath.IsEmpty()){
-			QDir packageDir(iqt::GetQString(packageInfoPath) + ".info");
+		istd::CString infoPath = m_envManagerCompPtr->GetComponentInfoPath(address);
+		if (!infoPath.IsEmpty()){
+			IconCache::const_iterator cachedIter = m_iconCache.find(address);
+			if (cachedIter != m_iconCache.end()){
+				return cachedIter->second;
+			}
+			else{
+				QIcon& icon = m_iconCache[address];
 
-			return QIcon(packageDir.absoluteFilePath((address.GetComponentId() + ".big.png").c_str()));
+				QDir packageDir(iqt::GetQString(infoPath));
+				if (packageDir.exists("Image.png")){
+					icon = QIcon(packageDir.filePath("Image.png"));
+				}
+				else if (packageDir.exists("Image.svg")){
+					icon = QIcon(packageDir.filePath("Image.svg"));
+				}
+
+				return icon;
+			}
 		}
 	}
 

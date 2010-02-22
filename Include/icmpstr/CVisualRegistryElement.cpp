@@ -27,12 +27,6 @@ void CVisualRegistryElement::SetName(const std::string& name)
 }
 
 
-void CVisualRegistryElement::SetIcon(const QIcon& icon)
-{
-	m_icon = icon;
-}
-
-
 // overloaded (icomp::CRegistryElement)
 
 void CVisualRegistryElement::Initialize(

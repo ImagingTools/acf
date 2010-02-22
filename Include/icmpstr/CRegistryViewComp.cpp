@@ -175,12 +175,6 @@ const std::string& CRegistryViewComp::GetSelectedElementName() const
 }
 
 
-const QIcon* CRegistryViewComp::GetSelectedElementIcon() const
-{
-	return &m_selectedIcon;
-}
-
-
 const icomp::CComponentAddress* CRegistryViewComp::GetSelectedElementAddress() const
 {
 	CRegistryView* viewPtr = GetQtWidget();

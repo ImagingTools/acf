@@ -77,7 +77,6 @@ public:
 	virtual icomp::IRegistry* GetSelectedRegistry() const;
 	virtual iser::ISerializable* GetSelectedElement() const;
 	virtual const std::string& GetSelectedElementName() const;
-	virtual const QIcon* GetSelectedElementIcon() const;
 	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
 
 	// reimplemented (imod::IModelEditor)

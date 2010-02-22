@@ -31,8 +31,6 @@ public:
 	const icomp::CComponentAddress& GetAddress() const;
 	const std::string& GetName() const;
 	void SetName(const std::string& name);
-	const QIcon& GetIcon() const;
-	void SetIcon(const QIcon& icon);
 
 	// overloaded (icomp::CRegistryElement)
 	void Initialize(
@@ -48,7 +46,6 @@ private:
 	icomp::CComponentAddress m_addess;
 	i2d::CVector2d m_center;
 	std::string m_name;
-	QIcon m_icon;
 };
 
 
@@ -69,12 +66,6 @@ inline const icomp::CComponentAddress& CVisualRegistryElement::GetAddress() cons
 inline const std::string& CVisualRegistryElement::GetName() const
 {
 	return m_name;
-}
-
-
-inline const QIcon& CVisualRegistryElement::GetIcon() const
-{
-	return m_icon;
 }
 
 

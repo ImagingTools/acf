@@ -42,10 +42,6 @@ public:
 	*/
 	virtual const std::string& GetSelectedElementName() const = 0;
 	/**
-		Get icon of selected element.
-	*/
-	virtual const QIcon* GetSelectedElementIcon() const = 0;
-	/**
 		Get address of selected element.
 		\return		pointer to address of selected element or NULL
 					if no element is selected or selected element doesn't support this functionality.

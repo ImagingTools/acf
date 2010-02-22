@@ -65,7 +65,7 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistryFromFile(const istd::
 
 const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CComponentAddress& address) const
 {
-	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
+	PackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
 	if (foundCompositeIter != m_compositePackagesMap.end()){
 		QString filePath = foundCompositeIter->second.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
 
@@ -78,7 +78,7 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CCompon
 
 istd::CString CRegistriesManagerComp::GetPackageDirPath(const std::string& packageId) const
 {
-	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
+	PackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.end()){
 		return iqt::GetCString(foundCompositeIter->second.absolutePath());
 	}
@@ -115,7 +115,7 @@ void CRegistriesManagerComp::RegisterPackageFile(const istd::CString& file)
 
 	if (fileInfo.isDir()){
 		std::string packageId = fileInfo.baseName().toStdString();
-		CompositePackagesMap::const_iterator foundIter = m_compositePackagesMap.find(packageId);
+		PackagesMap::const_iterator foundIter = m_compositePackagesMap.find(packageId);
 		if (foundIter == m_compositePackagesMap.end()){
 			icomp::IComponentStaticInfo::Ids componentIds;
 

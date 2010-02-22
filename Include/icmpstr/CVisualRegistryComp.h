@@ -57,7 +57,6 @@ public:
 	virtual icomp::IRegistry* GetSelectedRegistry() const;
 	virtual iser::ISerializable* GetSelectedElement() const;
 	virtual const std::string& GetSelectedElementName() const;
-	virtual const QIcon* GetSelectedElementIcon() const;
 	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
 
 	// reimplemented (icomp::IRegistry)
@@ -77,8 +76,6 @@ protected:
 
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
 
-	const QIcon* GetIcon(const icomp::CComponentAddress& address) const;
-
 	// reimplemented (icomp::CRegistry)
 	virtual icomp::IRegistryElement* CreateRegistryElement(
 				const std::string& elementId,
@@ -88,8 +85,6 @@ private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 
 	std::string m_selectedElementId;
-
-	mutable IconMap m_iconMap;
 };
 
 

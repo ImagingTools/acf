@@ -111,14 +111,14 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              PackagesLoader
-            </Id>
+							MetaInfoManager
+						</Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              PackagesLoader
-            </ExportId>
+							MetaInfoManager
+						</ExportId>
             <Data>
               <IsEnabled>
                 false

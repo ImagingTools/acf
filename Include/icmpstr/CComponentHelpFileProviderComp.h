@@ -4,6 +4,7 @@
 
 #include "icomp/IComponentStaticInfo.h"
 #include "icomp/IRegistriesManager.h"
+#include "icomp/IMetaInfoManager.h"
 #include "icomp/CComponentBase.h"
 #include "icomp/CComponentAddress.h"
 
@@ -25,7 +26,7 @@ public:
 		I_REGISTER_INTERFACE(idoc::IHelpFileProvider);
 		I_ASSIGN(m_classHelpProviderCompPtr, "ClassHelpProvider", "Slave help file provider for class info objects", true, "ClassHelpProvider");
 		I_ASSIGN(m_packagesLoaderInfoCompPtr, "PackagesLoader", "Packages loader used to get component info", true, "PackagesLoader");
-		I_ASSIGN(m_packagesLoaderManagerCompPtr, "PackagesLoader", "Packages loader used to get component info", true, "PackagesLoader");
+		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpFileProvider)
@@ -41,7 +42,7 @@ protected:
 private:
 	I_REF(idoc::IHelpFileProvider, m_classHelpProviderCompPtr);
 	I_REF(icomp::IComponentStaticInfo, m_packagesLoaderInfoCompPtr);
-	I_REF(icomp::IRegistriesManager, m_packagesLoaderManagerCompPtr);
+	I_REF(icomp::IMetaInfoManager, m_metaInfoManagerCompPtr);
 };
 
 

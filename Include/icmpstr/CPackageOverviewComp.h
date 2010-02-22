@@ -17,6 +17,7 @@
 
 #include "iqtgui/TDesignerGuiCompBase.h"
 
+#include "icmpstr/IRegistryConsistInfo.h"
 #include "icmpstr/IAttributeSelectionObserver.h"
 
 #include "Generated/ui_CPackageOverviewComp.h"
@@ -38,6 +39,7 @@ public:
 	I_BEGIN_COMPONENT(CPackageOverviewComp);
 		I_REGISTER_INTERFACE(IAttributeSelectionObserver);
 		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Packages manager used to provide icon paths", true, "PackagesManager");
+		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and access to buffred icons", false, "ConsistencyInfo");
 	I_END_COMPONENT;
 
 	enum
@@ -76,13 +78,6 @@ protected:
 	*/
 	QPixmap CreateComponentDragPixmap(const icomp::CComponentAddress &address) const;
 
-	/**
-		Get icon for a given component.
-	*/
-	QIcon GetComponentIcon(const icomp::CComponentAddress& componentAddress)const;
-
-	QIcon GetIconFromPath(const QString& iconPath) const;
-
 	RootInfo& EnsureRoot(const std::string& path, int compType);
 
 	// reimplemented (QObject)
@@ -106,7 +101,7 @@ private:
 					CPackageOverviewComp& parent,
 					const icomp::CComponentAddress& address,
 					const icomp::IComponentStaticInfo* staticInfoPtr,
-					const QDir* packageDirPtr);
+					const QIcon& icon);
 
 		bool IsInterfaceSupported(const istd::CClassInfo& interfaceInfo) const;
 
@@ -121,6 +116,7 @@ private:
 	};
 
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
+	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 
 	enum GruppingMode
 	{
@@ -141,9 +137,6 @@ private:
 	QIcon m_realComponentIcon;
 	QIcon m_compositeComponentIcon;
 	QIcon m_mixedComponentIcon;
-
-	typedef QHash<QString, QIcon> IconCache;
-	mutable IconCache m_iconCache;
 };
 
 

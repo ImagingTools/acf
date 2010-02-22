@@ -184,9 +184,19 @@ void CPackageOverviewComp::GenerateComponentTree()
 				break;
 			}
 
-			QDir packageDir(iqt::GetQString(m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId())) + ".info");
-			bool hasPackageInfo = packageDir.exists();
-			PackageComponentItem* itemPtr = new PackageComponentItem(*this, address, metaInfoPtr, hasPackageInfo? &packageDir: NULL);
+			istd::CString infoPath = m_envManagerCompPtr->GetComponentInfoPath(address);
+
+			QIcon icon;
+			if (m_consistInfoCompPtr.IsValid()){
+				icon = m_consistInfoCompPtr->GetComponentIcon(address);
+			}
+
+			QDir packageDir(iqt::GetQString(infoPath));
+			PackageComponentItem* itemPtr = new PackageComponentItem(
+						*this,
+						address,
+						metaInfoPtr,
+						icon);
 			itemPtr->setText(0, elementName.c_str());
 
 			int compType = metaInfoPtr->GetComponentType();
@@ -315,8 +325,10 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 	font.setPointSize(12);
 	componentLabel.setFont(font);
 	componentLabel.setText(iqt::GetQString(address.GetPackageId()) + "/" + iqt::GetQString(address.GetComponentId()));
-	componentLabel.setIconSize(QSize(64, 64));
-	componentLabel.setIcon(GetComponentIcon(address));
+	if (m_consistInfoCompPtr.IsValid()){
+		componentLabel.setIconSize(QSize(64, 64));
+		componentLabel.setIcon(m_consistInfoCompPtr->GetComponentIcon(address));
+	}
 	componentLabel.adjustSize();
 
 	QPixmap pixmap = QPixmap::grabWidget(&componentLabel);
@@ -332,37 +344,6 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 	painter.end();
 
 	return pixmap;
-}
-
-
-QIcon CPackageOverviewComp::GetComponentIcon(const icomp::CComponentAddress& componentAddress) const
-{
-	if (m_envManagerCompPtr.IsValid()){
-		istd::CString packageInfoPath = m_envManagerCompPtr->GetPackageDirPath(componentAddress.GetPackageId());
-		if (!packageInfoPath.IsEmpty()){
-			QDir packageDir(iqt::GetQString(packageInfoPath) + ".info");
-
-			return GetIconFromPath(packageDir.absoluteFilePath((componentAddress.GetComponentId() + ".small.png").c_str()));
-		}
-	}
-	return QIcon();
-}
-
-
-QIcon CPackageOverviewComp::GetIconFromPath(const QString& iconPath) const
-{
-	QIcon icon;
-
-	if (m_iconCache.contains(iconPath)){
-		return m_iconCache.value(iconPath);
-	}
-	else{
-		icon = QIcon(QPixmap(iconPath));
-
-		m_iconCache[iconPath] = icon;
-	}
-
-	return icon;
 }
 
 
@@ -529,7 +510,7 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 			CPackageOverviewComp& parent,
 			const icomp::CComponentAddress& address,
 			const icomp::IComponentStaticInfo* staticInfoPtr,
-			const QDir* packageDirPtr)
+			const QIcon& icon)
 :	m_parent(parent),
 	m_address(address)
 {
@@ -546,12 +527,7 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 	}
 
 	setToolTip(0, toolTip);
-
-	if (packageDirPtr != NULL){
-		QString iconPath = packageDirPtr->absoluteFilePath((address.GetComponentId() + ".small.png").c_str());
-
-		setIcon(0, m_parent.GetIconFromPath(iconPath));
-	}
+	setIcon(0, icon);
 }
 
 

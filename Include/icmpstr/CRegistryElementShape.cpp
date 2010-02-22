@@ -14,13 +14,16 @@
 // ACF includes
 #include "icmpstr/CVisualRegistryScenographerComp.h"
 #include "icmpstr/CRegistryElementShape.h"
+#include "icmpstr/IRegistryConsistInfo.h"
 
 
 namespace icmpstr
 {
 
 
-CRegistryElementShape::CRegistryElementShape(const CVisualRegistryScenographerComp* registryViewPtr, const iqt2d::ISceneProvider* providerPtr)
+CRegistryElementShape::CRegistryElementShape(
+			const CVisualRegistryScenographerComp* registryViewPtr,
+			const iqt2d::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr),
 	m_registryView(*registryViewPtr),
 	m_registryObserver(this),
@@ -130,8 +133,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 
-	const QIcon& icon = objectPtr->GetIcon();
-	if (!icon.isNull() && (mainRect.width() > mainRect.height())){
+	if (!m_icon.isNull() && (mainRect.width() > mainRect.height())){
 		int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
 
 		QRectF iconRect(
@@ -139,7 +141,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 					mainRect.top(),
 					minSideSize,
 					minSideSize);
-		icon.paint(painterPtr, iconRect.toRect());
+		m_icon.paint(painterPtr, iconRect.toRect());
 
 		mainRect.adjust(minSideSize + SIDE_OFFSET, 0, 0, 0);
 	}
@@ -241,6 +243,11 @@ bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
 			setToolTip(tr("Package or component not found"));
 		}
 
+		const IRegistryConsistInfo* constistInfoPtr = m_registryView.GetRegistryConsistInfo();
+		if (constistInfoPtr != NULL){
+			m_icon = constistInfoPtr->GetComponentIcon(objectPtr->GetAddress());
+		}
+
 		return true;
 	}
 
@@ -304,8 +311,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		width += height * 0.5;
 	}
 
-	const QIcon& icon = element.GetIcon();
-	if (!icon.isNull()){
+	if (!m_icon.isNull()){
 		width += height + SIDE_OFFSET;
 	}
 

@@ -73,9 +73,9 @@ private:
 	/**
 		Map package ID to directory.
 	*/
-	typedef std::map<std::string, QDir> CompositePackagesMap;
+	typedef std::map<std::string, QDir> PackagesMap;
 
-	CompositePackagesMap m_compositePackagesMap;
+	PackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
 	typedef std::map<istd::CString, RegistryPtr> RegistriesMap;

@@ -143,17 +143,6 @@ const std::string& CVisualRegistryComp::GetSelectedElementName() const
 }
 
 
-const QIcon* CVisualRegistryComp::GetSelectedElementIcon() const
-{
-	const icomp::CComponentAddress* addressPtr = GetSelectedElementAddress();
-	if (addressPtr == NULL){
-		NULL;
-	}
-
-	return GetIcon(*addressPtr);
-}
-
-
 const icomp::CComponentAddress* CVisualRegistryComp::GetSelectedElementAddress() const
 {
 	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
@@ -241,42 +230,6 @@ bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, st
 }
 
 
-const QIcon* CVisualRegistryComp::GetIcon(const icomp::CComponentAddress& address) const
-{
-	const QIcon* retVal = NULL;
-
-	IconMap::const_iterator iter = m_iconMap.find(address);
-	if (iter != m_iconMap.end()){
-		retVal = iter->second.GetPtr();
-	}
-	else{
-		IconPtr& newIconPtr = m_iconMap[address];
-
-		if (m_envManagerCompPtr.IsValid()){
-			istd::CString packageInfoPath = m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId());
-			if (!packageInfoPath.IsEmpty()){
-				QDir packageDir(iqt::GetQString(packageInfoPath) + ".info");
-
-				QFileInfo svgFileInfo(packageDir.absoluteFilePath((address.GetComponentId() + ".svg").c_str()));
-				if (svgFileInfo.exists()){
-					newIconPtr.SetPtr(new QIcon(svgFileInfo.absoluteFilePath()));
-				}
-				else{
-					QFileInfo pngFileInfo(packageDir.absoluteFilePath((address.GetComponentId() + ".big.png").c_str()));
-					if (pngFileInfo.exists()){
-						newIconPtr.SetPtr(new QIcon(pngFileInfo.absoluteFilePath()));
-					}
-				}
-			}
-		}
-
-		retVal = newIconPtr.GetPtr();
-	}
-
-	return retVal;
-}
-
-
 // reimplemented (icomp::CRegistry)
 
 icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
@@ -288,11 +241,6 @@ icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
 		registryElementPtr->Initialize(this, address);
 		registryElementPtr->SetName(elementId);
 		
-		const QIcon* iconPtr = GetIcon(address);
-		if (iconPtr != NULL){
-			registryElementPtr->SetIcon(*iconPtr);
-		}
-
 		registryElementPtr->SetSlavePtr(const_cast<CVisualRegistryComp*>(this));
 
 		return registryElementPtr;

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          752
+          1356
         </Number>
         <Description>
           ACF
@@ -30,17 +30,36 @@
         <IsEnabled>
           true
         </IsEnabled>
-        <AttributeInfoMap count="1">
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-							EnvironmentManager
-						</Id>
+              ConsistencyInfo
+            </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-							EnvironmentManager
-						</ExportId>
+              ConsistencyInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnvironmentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              EnvironmentManager
+            </ExportId>
             <Data>
               <IsEnabled>
                 false
@@ -64,6 +83,9 @@
         <IsEnabled>
           true
         </IsEnabled>
+        <Flags>
+          0
+        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
@@ -127,4 +149,10 @@
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
+  <Description>
+    
+  </Description>
+  <Keywords>
+    
+  </Keywords>
 </Acf>

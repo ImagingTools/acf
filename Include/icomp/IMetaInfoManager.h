@@ -30,6 +30,11 @@ public:
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const = 0;
 
 	/**
+		Get path of component info directory.
+	*/
+	virtual istd::CString GetComponentInfoPath(const icomp::CComponentAddress& address) const = 0;
+
+	/**
 		Get access to static info of some component.
 		\param	address	component address.
 		\return			static info of component or NULL, if no component type for specified address is found.

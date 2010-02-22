@@ -70,6 +70,7 @@ public:
 
 	// reimplemented (icomp::IMetaInfoManager)
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
+	virtual istd::CString GetComponentInfoPath(const icomp::CComponentAddress& address) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -115,13 +116,16 @@ private:
 		Map package ID to package file path.
 	*/
 	typedef std::map<std::string, istd::CString> NormalPackagesMap;
+	NormalPackagesMap m_normalPackagesMap;
+
 	/**
 		Map package ID to structure CompositePackageInfo.
 	*/
 	typedef std::map<std::string, CompositePackageInfo> CompositePackagesMap;
-
-	NormalPackagesMap m_normalPackagesMap;
 	CompositePackagesMap m_compositePackagesMap;
+
+	typedef std::map<std::string, QDir> PackageInfosMap;
+	PackageInfosMap m_packageInfosMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
 	typedef std::map<istd::CString, RegistryPtr> RegistriesMap;

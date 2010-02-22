@@ -92,6 +92,7 @@ private:
 
 	QPointF m_lastClickPosition;
 
+	QIcon m_icon;
 	bool m_isConsistent;
 };
 
