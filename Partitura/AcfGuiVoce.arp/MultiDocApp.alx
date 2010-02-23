@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1241
+          1360
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="12">
+  <PositionMap count="8">
     <Element>
       <ComponentName>
         AboutGui
       </ComponentName>
       <X>
-        114
+        1075
       </X>
       <X>
-        235
+        600
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         App
       </ComponentName>
       <X>
-        81
+        600
       </X>
       <X>
-        0
+        150
       </X>
     </Element>
     <Element>
@@ -43,32 +43,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        344
+        925
       </X>
       <X>
-        367
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentTempate
-      </ComponentName>
-      <X>
-        386
-      </X>
-      <X>
-        214
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentTemplat
-      </ComponentName>
-      <X>
-        0
-      </X>
-      <X>
-        250
+        450
       </X>
     </Element>
     <Element>
@@ -76,21 +54,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        -477
+        150
       </X>
       <X>
-        272
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        321
-      </X>
-      <X>
-        -40
+        700
       </X>
     </Element>
     <Element>
@@ -98,10 +65,10 @@
         MainGui
       </ComponentName>
       <X>
-        80
+        650
       </X>
       <X>
-        121
+        600
       </X>
     </Element>
     <Element>
@@ -109,10 +76,10 @@
         SettingsProvider
       </ComponentName>
       <X>
-        -199
+        375
       </X>
       <X>
-        272
+        300
       </X>
     </Element>
     <Element>
@@ -120,21 +87,10 @@
         SplashScreen
       </ComponentName>
       <X>
-        571
+        1025
       </X>
       <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Te
-      </ComponentName>
-      <X>
-        322
-      </X>
-      <X>
-        257
+        150
       </X>
     </Element>
     <Element>
@@ -142,10 +98,10 @@
         Workspace
       </ComponentName>
       <X>
-        -473
+        200
       </X>
       <X>
-        118
+        425
       </X>
     </Element>
   </PositionMap>

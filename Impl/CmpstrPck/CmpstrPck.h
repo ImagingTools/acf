@@ -15,9 +15,6 @@
 #include "icmpstr/CRegistryConsistInfoComp.h"
 #include "icmpstr/CRegistryPropEditorComp.h"
 
-#include "icmpstr/CRegistryModelComp.h"	// TODO: remove it when old Compositor concept will be removed
-#include "icmpstr/CRegistryViewComp.h"	// TODO: remove it when old Compositor concept will be removed
-
 
 /**
 	Component manipulation package.
@@ -42,10 +39,6 @@ typedef icomp::TMakeComponentWrap<
 			imod::IModel> Registry;
 typedef icmpstr::CRegistryConsistInfoComp RegistryConsistInfo;
 typedef icmpstr::CRegistryPropEditorComp RegistryPropEditor;
-
-// TODO: remove it when Compositor 2.0 is ready
-typedef icomp::TModelCompWrap<icmpstr::CRegistryModelComp> RegistryModel;
-typedef icmpstr::CRegistryViewComp RegistryView;
 
 
 } // namespace CmpstrPck

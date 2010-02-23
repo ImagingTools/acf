@@ -14,7 +14,74 @@
 #include "BasePck/BasePck.h"
 #include "QtPck/QtPck.h"
 #include "QtGuiPck/QtGuiPck.h"
+#include "QtViewPck/QtViewPck.h"
 #include "CmpstrPck/CmpstrPck.h"
+
+
+static icomp::IComponent* metaInfoManagerPtr = NULL;
+static icomp::IComponent* consistInfoPtr = NULL;
+
+class RegistryView: public QtViewPck::SceneProvider
+{
+	icomp::TSimComponentWrap<CmpstrPck::VisualRegistryScenographer> scenographer;
+
+public:
+	RegistryView()
+	{
+		scenographer.SetRef("SceneProvider", this);
+		scenographer.SetRef("MetaInfoManager", metaInfoManagerPtr);
+		scenographer.SetRef("ConsistencyInfo", consistInfoPtr);
+	}
+
+	// reimplemented (icomp::IComponent)
+	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "")
+	{
+		if (interfaceType.IsType<imod::IObserver>() || interfaceType.IsType<iqtgui::IDropConsumer>()){
+			return scenographer.GetInterface(interfaceType, subId);
+		}
+		else if (interfaceType.IsType<iqt2d::ISceneProvider>()){
+			return dynamic_cast<iqt2d::ISceneProvider*>(this);
+		}
+		else{
+			return QtViewPck::SceneProvider::GetInterface(interfaceType, subId);
+		}
+	}
+
+protected:
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated()
+	{
+		QtViewPck::SceneProvider::OnComponentCreated();
+		scenographer.InitComponent();
+	}
+};
+
+static icomp::IComponent* modelObserverPtr = NULL;
+
+class RegistryModel: public CmpstrPck::VisualRegistry
+{
+	icomp::TSimComponentWrap<BasePck::ModelBinder> binder;
+
+public:
+	RegistryModel()
+	{
+		binder.SetRef("Model", this);
+		binder.InsertMultiRef("Observers", modelObserverPtr);
+	}
+
+protected:
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated()
+	{
+		CmpstrPck::VisualRegistry::OnComponentCreated();
+		binder.InitComponent();
+	}
+	virtual void OnComponentDestroyed()
+	{
+		binder.SetComponentContext(NULL, NULL, false);
+		CmpstrPck::VisualRegistry::OnComponentDestroyed();
+	}
+};
 
 
 int main(int argc, char *argv[])
@@ -109,14 +176,21 @@ int main(int argc, char *argv[])
 	attributeEditorComp.InitComponent();
 
 	// registry model
-	icomp::TSimComponentsFactory<CmpstrPck::RegistryModel> modelFactoryComp;
+	modelObserverPtr = &attributeEditorComp;
+	icomp::TSimComponentsFactory<RegistryModel> modelFactoryComp;
 	modelFactoryComp.SetRef("Log", &log);
+	modelFactoryComp.SetRef("MetaInfoManager", &packagesLoaderComp);
 
 	// registry view
-	icomp::TSimComponentsFactory<CmpstrPck::RegistryView> viewFactoryComp;
-	viewFactoryComp.InsertMultiRef("RegistryElementObservers", &attributeEditorComp);
-	viewFactoryComp.SetRef("MetaInfoManager", &packagesLoaderComp);
-	viewFactoryComp.SetRef("ConsistencyInfo", &registryConsistInfoComp);
+	metaInfoManagerPtr = &packagesLoaderComp;
+	consistInfoPtr = &registryConsistInfoComp;
+	icomp::TSimComponentsFactory<RegistryView> viewFactoryComp;
+	viewFactoryComp.SetIntAttr("BackgroundMode", 2);
+	viewFactoryComp.SetDoubleAttr("GridSize", 25);
+	viewFactoryComp.SetDoubleAttr("SceneWidth", 1189);
+	viewFactoryComp.SetDoubleAttr("SceneHeight", 841);
+	viewFactoryComp.SetBoolAttr("IsAlignmentEnabled", true);
+	viewFactoryComp.InsertMultiRef("DropConsumers", &viewFactoryComp);
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);

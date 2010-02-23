@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1333
+          1360
         </Number>
         <Description>
           ACF
@@ -49,7 +49,7 @@
                 true
               </IsEnabled>
               <Value>
-                Registry
+                VisualRegistry
               </Value>
             </Data>
           </AttributeInfo>
@@ -125,7 +125,7 @@
                 true
               </IsEnabled>
               <Value>
-                RegistryEditor
+                VisualRegistryView
               </Value>
             </Data>
           </AttributeInfo>
@@ -278,43 +278,6 @@
     </Element>
     <Element>
       <Id>
-        Registry
-      </Id>
-      <PackageId>
-        CmpstrPck
-      </PackageId>
-      <ComponentId>
-        RegistryModel
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         RegistryCodeSaver
       </Id>
       <PackageId>
@@ -395,13 +358,13 @@
     </Element>
     <Element>
       <Id>
-        RegistryEditor
+        RegistryLoader
       </Id>
       <PackageId>
         CmpstrPck
       </PackageId>
       <ComponentId>
-        RegistryView
+        RegistryLoader
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -410,7 +373,116 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              VersionInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VisualRegistry
+      </Id>
+      <PackageId>
+        CmpstrPck
+      </PackageId>
+      <ComponentId>
+        VisualRegistry
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackagesLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VisualRegistryView
+      </Id>
+      <PackageId>
+        CmpstrVoce
+      </PackageId>
+      <ComponentId>
+        VisualRegistryView
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -502,22 +574,6 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              RegistryElementObservers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              RegistryElementObservers
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
               RegistryPreview
             </Id>
             <Type>
@@ -533,59 +589,6 @@
               <Value>
                 Preview
               </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        RegistryLoader
-      </Id>
-      <PackageId>
-        CmpstrPck
-      </PackageId>
-      <ComponentId>
-        RegistryLoader
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -658,15 +661,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="1">
-    <Component>
-      <ExportedId>
-        SettingsGui
-      </ExportedId>
-      <ComponentId>
-        SettingsGui
-      </ComponentId>
-    </Component>
+  <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
     

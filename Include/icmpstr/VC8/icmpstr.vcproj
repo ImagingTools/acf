@@ -234,10 +234,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRegistryModelComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CRegistryPreviewComp.cpp"
 				>
 			</File>
@@ -251,22 +247,6 @@
 			</File>
 			<File
 				RelativePath="..\CRegistryPropEditorComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryView.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryView.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryViewComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryViewComp.moc"
 				>
 			</File>
 			<File
@@ -332,23 +312,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRegistryModelComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CRegistryPreviewComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CRegistryPropEditorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryView.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryViewComp.h"
 				>
 			</File>
 			<File
@@ -434,14 +402,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CRegistryPropEditorComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CRegistryView.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CRegistryViewComp.cpp"
 				>
 			</File>
 			<File
