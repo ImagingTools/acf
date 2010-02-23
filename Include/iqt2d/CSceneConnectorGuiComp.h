@@ -7,7 +7,6 @@
 
 #include "iqt2d/ISceneProvider.h"
 #include "iqt2d/ISceneExtender.h"
-
 #include "iqt2d/Generated/ui_CSceneConnectorGuiComp.h"
 
 

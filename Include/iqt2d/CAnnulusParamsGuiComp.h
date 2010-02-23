@@ -7,7 +7,6 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iqt2d/TSceneExtenderCompBase.h"
-
 #include "iqt2d/Generated/ui_CAnnulusParamsGuiComp.h"
 
 

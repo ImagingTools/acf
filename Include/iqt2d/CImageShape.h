@@ -2,8 +2,11 @@
 #define iqt2d_CImageShape_included
 
 
+// Qt includes
 #include <QGraphicsRectItem>
 
+
+// ACF includes
 #include "istd/CIndex2d.h"
 
 #include "imod/TSingleModelObserverBase.h"

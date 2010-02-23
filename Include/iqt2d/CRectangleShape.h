@@ -2,8 +2,11 @@
 #define iqt2d_CRectangleShape_included
 
 
+// Qt includes
 #include <QGraphicsRectItem>
 
+
+// ACF includes
 #include "i2d/CRectangle.h"
 
 #include "iqt2d/TObjectShapeBase.h"

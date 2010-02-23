@@ -2,8 +2,11 @@
 #define iqt2d_CQuadrangleShape_included
 
 
+// Qt includes
 #include <QGraphicsPathItem>
 
+
+// ACF includes
 #include "i2d/CQuadrangle.h"
 
 #include "iqt2d/TObjectShapeBase.h"

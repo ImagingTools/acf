@@ -2,6 +2,7 @@
 #define iqt2d_TShapeBase_included
 
 
+// Qt includes
 #include <QObject>
 #include <QBrush>
 #include <QPen>
@@ -13,6 +14,7 @@
 #include <QStyleOptionGraphicsItem>
 
 
+// ACF includes
 #include "iqt2d/ISceneProvider.h"
 
 
