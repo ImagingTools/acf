@@ -2,6 +2,7 @@
 
 
 #include <QMainWindow>
+#include <QVBoxLayout>
 
 
 namespace iqtgui
@@ -77,12 +78,18 @@ void CDockWidgetGuiComp::OnGuiCreated()
 		dockWidgetPtr->setObjectName(iqt::GetQString(m_dockTitleAttrPtr->GetValue()));
 	}
 
-	if (m_slaveGuiCompPtr.IsValid() && m_slaveGuiCompPtr->CreateGui(NULL)){
+	QWidget* containerWidgetPtr = new QWidget(NULL);
+	QVBoxLayout* layoutPtr = new QVBoxLayout(containerWidgetPtr);
+	layoutPtr->setContentsMargins(3, 3, 3, 3);
+	containerWidgetPtr->setLayout(layoutPtr);
+
+	if (m_slaveGuiCompPtr.IsValid() && m_slaveGuiCompPtr->CreateGui(containerWidgetPtr)){
 		QWidget* slaveWidgetPtr = m_slaveGuiCompPtr->GetWidget();
 		if (slaveWidgetPtr != NULL){
-			dockWidgetPtr->setWidget(slaveWidgetPtr);
 		}
 	}
+
+	dockWidgetPtr->setWidget(containerWidgetPtr);
 
 	if (m_dockFeaturesAttrPtr.IsValid()){
 		dockWidgetPtr->setFeatures(QDockWidget::DockWidgetFeature(*m_dockFeaturesAttrPtr));

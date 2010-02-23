@@ -12,7 +12,6 @@
 #include "ibase/TLoggerCompWrap.h"
 #include "ibase/TFactorisableContainer.h"
 
-#include "icmpstr/IRegistryEditController.h"
 #include "icmpstr/IElementSelectionInfo.h"
 #include "icmpstr/CVisualRegistryElement.h"
 

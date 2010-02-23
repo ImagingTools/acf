@@ -17,7 +17,6 @@
 
 #include "iqtgui/TDesignerBasicGui.h"
 
-#include "icmpstr/IRegistryEditController.h"
 #include "icmpstr/CRegistryElementShape.h"
 #include "icmpstr/CGraphicsConnectorItem.h"
 #include "icmpstr/CVisualRegistryElement.h"
@@ -489,10 +488,7 @@ void CVisualRegistryScenographerComp::OnAbort()
 
 void CVisualRegistryScenographerComp::OnAddNote()
 {
-	IRegistryEditController* providerPtr = dynamic_cast<IRegistryEditController*>(GetObjectPtr());
-	if (providerPtr != NULL){
-		// TODO: implement registry notes
-	}
+	// TODO: implement registry notes
 }
 
 
@@ -700,10 +696,9 @@ bool CVisualRegistryScenographerComp::TryCreateComponent(const icomp::CComponent
 		if (registryPtr.IsValid()){
 			icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(componentName.toStdString(), address);
 			if (elementInfoPtr != NULL){
-
-				icmpstr::CVisualRegistryElement* elementPtr = dynamic_cast<icmpstr::CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
-				if (elementPtr != NULL){
-					elementPtr->MoveTo(position);
+				CVisualRegistryElement* visualElementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
+				if (visualElementPtr != NULL){
+					visualElementPtr->MoveTo(position);
 				}
 
 				ConnectReferences(componentName);
