@@ -194,10 +194,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNoteSceneItem.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CPackageOverviewComp.cpp"
 				>
 			</File>
@@ -273,10 +269,6 @@
 			</File>
 			<File
 				RelativePath="..\CGraphicsConnectorItem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CNoteSceneItem.h"
 				>
 			</File>
 			<File
