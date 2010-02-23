@@ -92,6 +92,8 @@ private:
 
 	QPointF m_lastClickPosition;
 
+	// shadows
+	QString m_addressString;
 	QIcon m_icon;
 	bool m_isConsistent;
 };

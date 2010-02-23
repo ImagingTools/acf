@@ -207,6 +207,8 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 
 	if (m_registryPreviewCompPtr.IsValid()){
 		connect(&m_executionObserverTimer, SIGNAL(timeout()), this, SLOT(OnExecutionTimerTick()));
+
+		m_executionObserverTimer.start(500);
 	}
 
 	m_elementNameFont = qApp->font();
@@ -550,14 +552,14 @@ QGraphicsItem* CVisualRegistryScenographerComp::AddShapeToScene(iser::ISerializa
 		if (registryElementPtr != NULL){
 			CRegistryElementShape* shapePtr = new CRegistryElementShape(this, m_sceneProviderCompPtr.GetPtr());
 
-			m_scenePtr->addItem(shapePtr);
-
 			icmpstr::IElementSelectionInfo* elementSelectionInfoPtr = dynamic_cast<icmpstr::IElementSelectionInfo*>(GetObjectPtr());
 			if (elementSelectionInfoPtr != NULL && elementSelectionInfoPtr->GetSelectedElement() == elementPtr){
 				shapePtr->setSelected(true);
 			}
 
 			elementModelPtr->AttachObserver(shapePtr);
+
+			m_scenePtr->addItem(shapePtr);
 
 			return shapePtr;
 		}

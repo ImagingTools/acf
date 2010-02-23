@@ -129,8 +129,6 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	painterPtr->drawRect(mainRect);
 
-	const icomp::CComponentAddress& address = objectPtr->GetAddress();
-
 	mainRect.adjust(SIDE_OFFSET, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 
 	if (!m_icon.isNull() && (mainRect.width() > mainRect.height())){
@@ -188,8 +186,8 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 	const QFont& detailFont = m_registryView.GetElementDetailFont();
 	painterPtr->setFont(detailFont);
 	painterPtr->drawText(
-				mainRect, 
-				QString(address.GetPackageId().c_str()) + QString("/") + address.GetComponentId().c_str(),
+				mainRect,
+				m_addressString,
 				Qt::AlignBottom | Qt::AlignLeft);
 }
 
@@ -225,33 +223,7 @@ bool CRegistryElementShape::OnAttached(imod::IModel* modelPtr)
 		return false;
 	}
 
-	CalcExportedInteraces(*objectPtr);
-
-	if (BaseClass::OnAttached(modelPtr)){
-		I_ASSERT(objectPtr != NULL);
-
-		const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
-		const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
-		if (managerPtr != NULL){
-			metaInfoPtr = managerPtr->GetComponentMetaInfo(objectPtr->GetAddress());
-		}
-
-		if (metaInfoPtr != NULL){
-			setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
-		}
-		else{
-			setToolTip(tr("Package or component not found"));
-		}
-
-		const IRegistryConsistInfo* constistInfoPtr = m_registryView.GetRegistryConsistInfo();
-		if (constistInfoPtr != NULL){
-			m_icon = constistInfoPtr->GetComponentIcon(objectPtr->GetAddress());
-		}
-
-		return true;
-	}
-
-	return false;
+	return BaseClass::OnAttached(modelPtr);
 }
 
 
@@ -293,16 +265,22 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 {
 	setPos(iqt::GetQPointF(element.GetCenter()));
 
-	const QFont& nameFont = m_registryView.GetElementNameFont();
-	QFontMetrics nameFontInfo(nameFont);
-
-	QFontMetrics detailFontInfo(m_registryView.GetElementDetailFont());
+	CalcExportedInteraces(element);
 
 	const icomp::CComponentAddress& address = element.GetAddress();
-	const std::string& componentName = element.GetName();
-	QString componentPath = QString(address.GetPackageId().c_str()) + QString("/") + address.GetComponentId().c_str();
+	m_addressString = QString(address.GetPackageId().c_str()) + QString("/") + address.GetComponentId().c_str();
 
-	int width = istd::Max(nameFontInfo.width(componentName.c_str()), detailFontInfo.width(componentPath)) + SIDE_OFFSET * 2;
+	const IRegistryConsistInfo* constistInfoPtr = m_registryView.GetRegistryConsistInfo();
+	if (constistInfoPtr != NULL){
+		m_icon = constistInfoPtr->GetComponentIcon(address);
+	}
+
+	QFontMetrics nameFontInfo(m_registryView.GetElementNameFont());
+	QFontMetrics detailFontInfo(m_registryView.GetElementDetailFont());
+
+	const std::string& componentName = element.GetName();
+
+	int width = istd::Max(nameFontInfo.width(componentName.c_str()), detailFontInfo.width(m_addressString)) + SIDE_OFFSET * 2;
 	int height = nameFontInfo.height() + detailFontInfo.height();
 
 	I_DWORD elementFlags = element.GetElementFlags();
@@ -317,10 +295,17 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 
 	const icomp::IComponentEnvironmentManager* managerPtr = m_registryView.GetEnvironmentManager();
 	if (managerPtr != NULL){
-		const icomp::IComponentStaticInfo* infoPtr = managerPtr->GetComponentMetaInfo(element.GetAddress());
-		if ((infoPtr != NULL) && (infoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			width += SIDE_OFFSET * 2;
-			height += SIDE_OFFSET * 2;
+		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(element.GetAddress());
+		if (metaInfoPtr != NULL){
+			setToolTip(iqt::GetQString(metaInfoPtr->GetDescription()));
+
+			if (metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE){
+				width += SIDE_OFFSET * 2;
+				height += SIDE_OFFSET * 2;
+			}
+		}
+		else{
+			setToolTip(tr("Package or component not found"));
 		}
 	}
 
@@ -331,7 +316,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
 	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
 		width = ::ceil(width / (gridSize * 2)) * (gridSize * 2);
-		height = ::ceil(height / (gridSize * 2)) * (gridSize * 2);
+		height = ::ceil(height / gridSize) * gridSize;
 	}
 
 	setRect(QRectF(-width * 0.5, -height * 0.5, width, height));
