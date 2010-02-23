@@ -215,7 +215,6 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 	m_elementNameFont.setPointSize(12);
 
 	m_elementDetailFont = qApp->font();
-	m_elementDetailFont.setItalic(true);
 	m_elementDetailFont.setPointSize(8);
 
 	if (m_sceneProviderCompPtr.IsValid()){
