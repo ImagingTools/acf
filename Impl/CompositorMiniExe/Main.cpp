@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentWrap<QtGuiPck::AboutGui> aboutGuiComp;
 	aboutGuiComp.SetRef("ApplicationInfo", &applicationInfo);
-	aboutGuiComp.SetStringAttr("DescriptionText", "Copyright 2009-2010 Witold Gantzke & Kirill Lepskiy\nThis tool is a part of ACF project\nSee attached 'License.txt' file for license informations");
+	aboutGuiComp.SetStringAttr("DescriptionText", "Copyright 2009-2010 Witold Gantzke & Kirill Lepskiy\n\nThis tool is a part of ACF project\nSee 'License.txt' for license information");
 	aboutGuiComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtGuiPck::MainWindowGui> mainWindowComp;

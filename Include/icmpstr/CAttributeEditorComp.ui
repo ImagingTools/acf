@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="ElementInfoTab">
      <property name="tabPosition">
-      <enum>QTabWidget::West</enum>
+      <enum>QTabWidget::East</enum>
      </property>
      <property name="currentIndex">
       <number>0</number>
