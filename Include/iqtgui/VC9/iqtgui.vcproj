@@ -285,6 +285,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CModelDialogGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionParamGuiComp.cpp"
 				>
 			</File>
@@ -417,6 +421,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CModelDialogGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionParamGuiComp.h"
 				>
 			</File>
@@ -442,6 +450,14 @@
 			</File>
 			<File
 				RelativePath="..\CTreeWidgetFilter.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IDropConsumer.h"
 				>
 			</File>
 			<File
