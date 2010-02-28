@@ -2,6 +2,7 @@
 #define iser_CReadArchiveBase_included
 
 
+// ACF includes
 #include "iser/CArchiveBase.h"
 #include "iser/CReaderVersionInfo.h"
 
@@ -10,6 +11,11 @@ namespace iser
 {
 
 
+/**
+	Basic implementation of an abstract archive for data reading.
+
+	\ingroup Persistence
+*/
 class CReadArchiveBase: public CArchiveBase
 {
 public:

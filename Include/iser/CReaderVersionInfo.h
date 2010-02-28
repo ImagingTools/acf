@@ -2,8 +2,11 @@
 #define iser_CReaderVersionInfo_included
 
 
+// STL includes
 #include <map>
 
+
+// ACF includes
 #include "iser/IVersionInfo.h"
 
 
@@ -14,6 +17,8 @@ namespace iser
 /**
 	Implementation of version designed to be automaticaly created during reading of ACF header.
 	\sa iser::CReadArchiveBase.
+
+	\ingroup Persistence
 */
 class CReaderVersionInfo: virtual public IVersionInfo
 {

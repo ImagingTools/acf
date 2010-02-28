@@ -5,6 +5,8 @@
 // STL includes
 #include <sstream>
 
+
+// ACF includes
 #include "iser/CReadArchiveBase.h"
 
 
@@ -12,6 +14,11 @@ namespace iser
 {
 
 
+/**
+	Common archive implementation of text-based reading archives.
+
+	\ingroup Persistence
+*/
 class CTextReadArchiveBase: public CReadArchiveBase
 {
 public:

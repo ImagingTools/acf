@@ -5,6 +5,8 @@
 // STL includes
 #include <sstream>
 
+
+// ACF includes
 #include "iser/CWriteArchiveBase.h"
 
 
@@ -14,6 +16,8 @@ namespace iser
 
 /**
 	Common archive implementation of text-based storing archives.
+
+	\ingroup Persistence
 */
 class CTextWriteArchiveBase: public CWriteArchiveBase
 {

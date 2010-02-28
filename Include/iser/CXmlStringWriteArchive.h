@@ -2,8 +2,11 @@
 #define iser_CXmlStringWriteArchive_included
 
 
+// STL includes
 #include <sstream>
 
+
+// ACF includes
 #include "iser/TXmlStreamWriteArchiveBase.h"
 
 
@@ -13,6 +16,8 @@ namespace iser
 
 /**
 	Simple implementation of archive for writing of XML given as a string.
+
+	\ingroup Persistence
 */
 class CXmlStringWriteArchive: public TXmlStreamWriteArchiveBase<std::ostringstream>
 {

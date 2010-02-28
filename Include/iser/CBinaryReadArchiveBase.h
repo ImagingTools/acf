@@ -2,6 +2,7 @@
 #define iser_CBinaryReadArchiveBase_included
 
 
+// ACF includes
 #include "iser/CReadArchiveBase.h"
 
 
@@ -11,6 +12,8 @@ namespace iser
 
 /**
 	Base class for archive implementations reading data based on its binary representation.
+
+	\ingroup Persistence
 */
 class CBinaryReadArchiveBase: public CReadArchiveBase
 {

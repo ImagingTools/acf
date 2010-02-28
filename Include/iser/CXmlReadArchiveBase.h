@@ -2,6 +2,7 @@
 #define iser_CXmlReadArchiveBase_included
 
 
+// ACF includes
 #include "iser/CTextReadArchiveBase.h"
 #include "iser/CXmlDocumentInfoBase.h"
 
@@ -10,6 +11,11 @@ namespace iser
 {
 
 
+/**
+	Base class for XML based reading archives.
+
+	\ingroup Persistence
+*/
 class CXmlReadArchiveBase:
 			public CTextReadArchiveBase,
 			public CXmlDocumentInfoBase

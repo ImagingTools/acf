@@ -2,6 +2,7 @@
 #define iser_CXmlWriteArchiveBase_included
 
 
+// ACF includes
 #include "iser/CTextWriteArchiveBase.h"
 #include "iser/CXmlDocumentInfoBase.h"
 
@@ -12,6 +13,8 @@ namespace iser
 
 /**
 	Base class for XML storing archives.
+
+	\ingroup Persistence
 */
 class CXmlWriteArchiveBase: public CTextWriteArchiveBase, public CXmlDocumentInfoBase
 {

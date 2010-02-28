@@ -2,8 +2,11 @@
 #define iser_CMemoryWriteArchive_included
 
 
+// STL includes
 #include <vector>
 
+
+// ACF includes
 #include "iser/CBinaryWriteArchiveBase.h"
 
 
@@ -12,8 +15,10 @@ namespace iser
 
 
 /**
-	Implementation of archive using memory buffer to store state of persistent objects.
+	Implementation of archive using memory buffer to store the persistent objects.
 	Internal format of this buffer is compatible with class \c iser::CMemoryReadArchive.
+
+	\ingroup Persistence
 */
 class CMemoryWriteArchive: public CBinaryWriteArchiveBase
 {

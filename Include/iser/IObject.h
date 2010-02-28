@@ -2,9 +2,8 @@
 #define iser_IObject_included
 
 
+// ACF includes
 #include "iser/ISerializable.h"
-
-#include "iser/iser.h"
 
 
 namespace iser
@@ -13,6 +12,8 @@ namespace iser
 
 /**
 	Common interface for factorisable model objects.
+
+	\ingroup Persistence
 */
 class IObject: virtual public iser::ISerializable
 {

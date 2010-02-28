@@ -2,6 +2,7 @@
 #define iser_IFileLoaderInfo_included
 
 
+// ACF includes
 #include "istd/IPolymorphic.h"
 #include "istd/CString.h"
 
@@ -14,6 +15,8 @@ namespace iser
 
 /**
 	Provide some information about file loader state.
+
+	\ingroup Persistence
 */
 class IFileLoaderInfo: virtual public istd::IPolymorphic
 {

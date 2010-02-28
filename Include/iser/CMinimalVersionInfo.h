@@ -2,8 +2,11 @@
 #define iser_CMinimalVersionInfo_included
 
 
+// STL includes
 #include <map>
 
+
+// ACF includes
 #include "iser/IVersionInfo.h"
 
 
@@ -19,6 +22,8 @@ class ISerializable;
 	minimal needed version from interface iser::ISerializable.
 	Please note, that list of ID's for version info must be separate created,
 	becouse this information can not be retrived from iser::ISerializable.
+
+	\ingroup Persistence
 */
 class CMinimalVersionInfo: virtual public IVersionInfo
 {

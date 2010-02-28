@@ -2,9 +2,7 @@
 #define iser_CBitMemoryWriteArchive_included
 
 
-#include "iser/iser.h"
-
-
+// ACF includes
 #include "iser/CMemoryWriteArchive.h"
 
 
@@ -14,6 +12,8 @@ namespace iser
 
 /**
 	This is an archive implementation which provides bitwise write of data.
+
+	\ingroup Persistence
 */
 class CBitMemoryWriteArchive: public CMemoryWriteArchive
 {

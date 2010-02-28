@@ -2,6 +2,7 @@
 #define iser_CBinaryWriteArchiveBase_included
 
 
+// ACF includes
 #include "iser/CWriteArchiveBase.h"
 
 
@@ -9,6 +10,11 @@ namespace iser
 {
 
 
+/**
+	Base class for archive implementations writting data based on its binary representation.
+
+	\ingroup Persistence
+*/
 class CBinaryWriteArchiveBase: public CWriteArchiveBase
 {
 public:

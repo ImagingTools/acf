@@ -2,8 +2,11 @@
 #define iser_CMemoryReadArchive_included
 
 
+// STL includes
 #include <vector>
 
+
+// ACF includes
 #include "iser/CBinaryReadArchiveBase.h"
 
 
@@ -15,6 +18,12 @@ class ISerializable;
 class CMemoryWriteArchive;
 
 
+/**
+	Implementation of archive using memory buffer to read the persistent objects.
+	Internal format of this buffer is compatible with class \c iser::CMemoryWriteArchive.
+
+	\ingroup Persistence
+*/
 class CMemoryReadArchive: public CBinaryReadArchiveBase
 {
 public:

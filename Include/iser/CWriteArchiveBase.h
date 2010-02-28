@@ -2,6 +2,7 @@
 #define iser_CWriteArchiveBase_included
 
 
+// ACF includes
 #include "iser/CArchiveBase.h"
 
 
@@ -9,6 +10,11 @@ namespace iser
 {
 
 
+/**
+	Basic implementation of an abstract archive for data writting.
+
+	\ingroup Persistence
+*/
 class CWriteArchiveBase: public CArchiveBase
 {
 public:

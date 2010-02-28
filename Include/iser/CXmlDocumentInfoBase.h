@@ -2,8 +2,11 @@
 #define iser_CXmlDocumentInfoBase_included
 
 
+// STL includes
 #include <map>
 
+
+// ACF includes
 #include "istd/CString.h"
 
 #include "iser/iser.h"
@@ -16,6 +19,9 @@ namespace iser
 /**
 	Base class for all XML implementations for ACF documents.
 	This helper class can be used e.g. to implement XML archives.
+
+	\ingroup Persistence
+
 */
 class CXmlDocumentInfoBase
 {

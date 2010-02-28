@@ -2,6 +2,7 @@
 #define iser_TCopySerializedWrap_included
 
 
+// ACF includes
 #include "istd/IChangeable.h"
 #include "istd/TUpdateManagerWrap.h"
 
@@ -13,6 +14,8 @@ namespace iser
 /// @cond DOCUMENT_ALL
 /**
 	Try copy of two objects using of serialization.
+
+	\ingroup Persistence
 */
 extern bool CopyByArchive(const istd::IChangeable& object, istd::IChangeable& result);
 /// @endcond

@@ -2,9 +2,7 @@
 #define iser_CBitMemoryReadArchive_included
 
 
-#include "iser/iser.h"
-
-
+// ACF includes
 #include "iser/CMemoryReadArchive.h"
 
 
@@ -14,6 +12,8 @@ namespace iser
 
 /**
 	This class provides bitwise access to the byte data.
+	
+	\ingroup Persistence
 */
 class CBitMemoryReadArchive: public CMemoryReadArchive
 {
