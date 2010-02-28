@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1073
+          1381
         </Number>
         <Description>
           ACF
@@ -15,49 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="13">
-    <Element>
-      <ComponentName>
-        AdvancedImageView
-      </ComponentName>
-      <X>
-        -36
-      </X>
-      <X>
-        -113
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        -215
-      </X>
-      <X>
-        -239
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapComboView
-      </ComponentName>
-      <X>
-        -62
-      </X>
-      <X>
-        -107
-      </X>
-    </Element>
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
-        -697
+        200
       </X>
       <X>
-        -96
+        425
       </X>
     </Element>
     <Element>
@@ -65,10 +32,10 @@
         BitmapView
       </ComponentName>
       <X>
-        -66
+        1025
       </X>
       <X>
-        -99
+        450
       </X>
     </Element>
     <Element>
@@ -76,87 +43,10 @@
         FrameSeqVideoController
       </ComponentName>
       <X>
-        -423
+        650
       </X>
       <X>
-        -188
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        45
-      </X>
-      <X>
-        -475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelBinder
-      </ComponentName>
-      <X>
-        -244
-      </X>
-      <X>
-        -372
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PlaybackBinder
-      </ComponentName>
-      <X>
-        -688
-      </X>
-      <X>
-        -370
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PlaybackConnector
-      </ComponentName>
-      <X>
-        -634
-      </X>
-      <X>
-        -424
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PlaybackController
-      </ComponentName>
-      <X>
-        -382
-      </X>
-      <X>
-        -526
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PlaybackControllerGui
-      </ComponentName>
-      <X>
-        -406
-      </X>
-      <X>
-        -595
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VideoPlayerGui
-      </ComponentName>
-      <X>
-        -76
-      </X>
-      <X>
-        -366
+        250
       </X>
     </Element>
   </PositionMap>

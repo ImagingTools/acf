@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1055
+          1381
         </Number>
         <Description>
           ACF
@@ -15,115 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="27">
-    <Element>
-      <ComponentName>
-        AdvancedImageView
-      </ComponentName>
-      <X>
-        -477
-      </X>
-      <X>
-        82
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Bitmap
-      </ComponentName>
-      <X>
-        -192
-      </X>
-      <X>
-        -3
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        BitmapComboView
-      </ComponentName>
-      <X>
-        -380
-      </X>
-      <X>
-        51
-      </X>
-    </Element>
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
-        -395
+        425
       </X>
       <X>
-        182
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ClassifBinder
-      </ComponentName>
-      <X>
-        375
-      </X>
-      <X>
-        -153
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ClassifComboView
-      </ComponentName>
-      <X>
-        428
-      </X>
-      <X>
-        49
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ClassifGui
-      </ComponentName>
-      <X>
-        602
-      </X>
-      <X>
-        83
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ClassifResults
-      </ComponentName>
-      <X>
-        334
-      </X>
-      <X>
-        -1
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ClassificationBinder
-      </ComponentName>
-      <X>
-        436
-      </X>
-      <X>
-        -153
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DummyClassifController
-      </ComponentName>
-      <X>
-        -5
-      </X>
-      <X>
-        236
+        400
       </X>
     </Element>
     <Element>
@@ -131,186 +32,10 @@
         FileDialogLoader
       </ComponentName>
       <X>
-        -219
+        850
       </X>
       <X>
-        183
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        GuiApplication
-      </ComponentName>
-      <X>
-        70
-      </X>
-      <X>
-        -144
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageBinder
-      </ComponentName>
-      <X>
-        -459
-      </X>
-      <X>
-        -105
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageClassificationGui
-      </ComponentName>
-      <X>
-        602
-      </X>
-      <X>
-        83
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageClassificationResults
-      </ComponentName>
-      <X>
-        399
-      </X>
-      <X>
-        -1
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageSelectorGui
-      </ComponentName>
-      <X>
-        345
-      </X>
-      <X>
-        84
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageView
-      </ComponentName>
-      <X>
-        -445
-      </X>
-      <X>
-        52
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        IniSettingsProvider
-      </ComponentName>
-      <X>
-        405
-      </X>
-      <X>
-        355
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Instantiator
-      </ComponentName>
-      <X>
-        76
-      </X>
-      <X>
-        -364
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelBinder
-      </ComponentName>
-      <X>
-        -205
-      </X>
-      <X>
-        -139
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ModelEditorGui
-      </ComponentName>
-      <X>
-        -215
-      </X>
-      <X>
-        20
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        RecognitionTestGui
-      </ComponentName>
-      <X>
-        27
-      </X>
-      <X>
-        85
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SceneControllerGui
-      </ComponentName>
-      <X>
-        -769
-      </X>
-      <X>
-        85
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        TaughtImagesGui
-      </ComponentName>
-      <X>
-        280
-      </X>
-      <X>
-        230
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        TeachedImagesGui
-      </ComponentName>
-      <X>
-        281
-      </X>
-      <X>
-        230
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        TechedImagesGui
-      </ComponentName>
-      <X>
-        345
-      </X>
-      <X>
-        84
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        TestImagesGui
-      </ComponentName>
-      <X>
-        496
-      </X>
-      <X>
-        230
+        400
       </X>
     </Element>
   </PositionMap>

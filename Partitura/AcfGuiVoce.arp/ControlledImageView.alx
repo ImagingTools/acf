@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1229
+          1381
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         ImageView
       </ComponentName>
       <X>
-        4
+        875
       </X>
       <X>
-        -2
+        525
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         SceneControllerGui
       </ComponentName>
       <X>
-        -300
+        300
       </X>
       <X>
-        0
+        250
       </X>
     </Element>
   </PositionMap>

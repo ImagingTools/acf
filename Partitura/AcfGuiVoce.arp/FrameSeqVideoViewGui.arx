@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1073
+          1381
         </Number>
         <Description>
           ACF
@@ -70,7 +70,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               FitMode
@@ -99,22 +99,6 @@
             </Type>
             <ExportId>
               IsotropyFactor
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SceneController
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
             </ExportId>
             <Data>
               <IsEnabled>
@@ -236,6 +220,14 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
+        i2d::ISceneController
+      </InterfaceId>
+      <ComponentId>
+        BitmapView
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
         imm::IMediaController
       </InterfaceId>
       <ComponentId>
@@ -269,14 +261,6 @@
     <Interface>
       <InterfaceId>
         iqt2d::ISceneProvider
-      </InterfaceId>
-      <ComponentId>
-        BitmapView
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        i2d::ISceneController
       </InterfaceId>
       <ComponentId>
         BitmapView
