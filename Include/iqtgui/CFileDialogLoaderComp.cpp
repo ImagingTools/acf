@@ -19,7 +19,7 @@ bool CFileDialogLoaderComp::IsOperationSupported(
 			int flags,
 			bool beQuiet) const
 {
-	if (filePathPtr != NULL){
+	if (filePathPtr != NULL && !filePathPtr->IsEmpty()){
 		const iser::IFileLoader* loaderPtr = GetLoaderFor(iqt::GetQString(*filePathPtr), -1, flags, beQuiet);
 		if (loaderPtr != NULL){
 			return loaderPtr->IsOperationSupported(dataObjectPtr, filePathPtr, flags | QF_NAMED_ONLY, beQuiet);
