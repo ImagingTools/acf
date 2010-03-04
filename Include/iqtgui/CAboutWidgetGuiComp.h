@@ -26,7 +26,7 @@ public:
 	I_BEGIN_COMPONENT(CAboutWidgetGuiComp);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Applciation info object", true, "ApplicationInfo");
 		I_ASSIGN(m_logoPathAttrPtr, "LogoPath", "Path of bitmap logo", false, ":/Icons/AcfLogo3d.svg");
-		I_ASSIGN(m_descriptionTextAttrPtr, "DescriptionText", "Optional description text", false, "(C) Copyright 2008 CompanyName\n\nAll rights reserved")
+		I_ASSIGN(m_descriptionTextAttrPtr, "DescriptionText", "Optional description text", false, "\x00A9 Copyright 2008 CompanyName\n\nAll rights reserved")
 		I_ASSIGN_MULTI_1(m_versionIdsAttrPtr, "VersionIds", "List of version ID's for version infor should be displayed", false, 0);
 		I_ASSIGN_MULTI_1(m_versionNamesAttrPtr, "VersionNames", "List of version names will be used as version description", false, "Version");
 	I_END_COMPONENT;
