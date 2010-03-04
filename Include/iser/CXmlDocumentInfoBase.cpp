@@ -20,7 +20,7 @@ void CXmlDocumentInfoBase::EncodeXml(const std::string& text, std::string& xmlTe
 			xmlText += c;
 		}
 		else{
-			xmlText = "&#" + istd::CString::FromNumber(int(c)).ToString() + ";";
+			xmlText += "&#" + istd::CString::FromNumber(I_WORD((unsigned char)c)).ToString() + ";";
 		}
 	}
 }
