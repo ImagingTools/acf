@@ -640,7 +640,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		return true;
 	}
 
-	const icomp::TMultiAttribute<std::string>* multiIdPtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(&attribute);
+	const icomp::TMultiAttribute<std::string>* multiIdPtr = dynamic_cast<const icomp::TMultiAttribute<std::string>*>(&attribute);
 	if (multiIdPtr != NULL){
 		QString dependecyString;
 
@@ -1155,15 +1155,9 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueData(
 		I_ASSERT(comboEditor != NULL);
 		QString referenceValue = comboEditor->currentText();
 
-		icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
-		icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<icomp::CFactoryAttribute*>(attributePtr);
+		icomp::TAttribute<std::string>* referenceAttributePtr = dynamic_cast<icomp::TAttribute<std::string>*>(attributePtr);
 		if (referenceAttributePtr != NULL){
 			referenceAttributePtr->SetValue(DecodeFromEdit(referenceValue).toStdString());
-
-			return true;
-		}
-		else if (factoryAttributePtr != NULL){
-			factoryAttributePtr->SetValue(DecodeFromEdit(referenceValue).toStdString());
 
 			return true;
 		}
@@ -1174,21 +1168,12 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueData(
 		QString string = comboEditor->lineEdit()->text();
 		QStringList references = string.split(';',QString::SkipEmptyParts); 
 
-		icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr);
-		icomp::CMultiFactoryAttribute* multiFactoryAttributePtr = dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr);
+		icomp::TMultiAttribute<std::string>* multiReferenceAttributePtr = dynamic_cast<icomp::TMultiAttribute<std::string>*>(attributePtr);
 
 		if (multiReferenceAttributePtr != NULL){
 			multiReferenceAttributePtr->Reset();
 			for (int index = 0; index < references.count(); index++){
 				multiReferenceAttributePtr->InsertValue(DecodeFromEdit(references.at(index)).toStdString());
-			}
-
-			return true;
-		}
-		else if (multiFactoryAttributePtr != NULL){
-			multiFactoryAttributePtr->Reset();
-			for (int index = 0; index < references.count(); index++){
-				multiFactoryAttributePtr->InsertValue(DecodeFromEdit(references.at(index)).toStdString());
 			}
 
 			return true;
