@@ -30,9 +30,15 @@ public:
 	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
 protected slots:
 	void on_DescriptionEdit_editingFinished();
 	void on_KeywordsEdit_editingFinished();
+
+private:
+	void CreateOverview();
 };
 
 

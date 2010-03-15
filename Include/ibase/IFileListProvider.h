@@ -4,6 +4,8 @@
 
 #include "istd/IChangeable.h"
 
+#include "istd/CString.h"
+
 
 namespace ibase
 {

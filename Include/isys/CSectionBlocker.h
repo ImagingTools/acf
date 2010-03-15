@@ -15,24 +15,24 @@ namespace isys
 class CSectionBlocker
 {
 public:
-	CSectionBlocker(isys::ICriticalSection* sectionPtr);
+	CSectionBlocker(const isys::ICriticalSection* sectionPtr);
 	~CSectionBlocker();
 
 	void Reset();
 
 private:
-	isys::ICriticalSection* m_sectionPtr;
+	const isys::ICriticalSection* m_sectionPtr;
 };
 
 
 // public inline methods
 
-inline CSectionBlocker::CSectionBlocker(isys::ICriticalSection* sectionPtr)
+inline CSectionBlocker::CSectionBlocker(const isys::ICriticalSection* sectionPtr)
 :	m_sectionPtr(sectionPtr)
 {
 	I_ASSERT(m_sectionPtr != NULL);
 	if (m_sectionPtr != NULL){
-		m_sectionPtr->Enter();
+		(const_cast<isys::ICriticalSection*>(m_sectionPtr))->Enter();
 	}
 }
 
@@ -46,7 +46,7 @@ inline CSectionBlocker::~CSectionBlocker()
 inline void CSectionBlocker::Reset()
 {	
 	if (m_sectionPtr != NULL){
-		m_sectionPtr->Leave();
+		(const_cast<isys::ICriticalSection*>(m_sectionPtr))->Leave();
 	}
 
 	m_sectionPtr = NULL;

@@ -78,18 +78,14 @@ void CDockWidgetGuiComp::OnGuiCreated()
 		dockWidgetPtr->setObjectName(iqt::GetQString(m_dockTitleAttrPtr->GetValue()));
 	}
 
-	QWidget* containerWidgetPtr = new QWidget(NULL);
-	QVBoxLayout* layoutPtr = new QVBoxLayout(containerWidgetPtr);
-	layoutPtr->setContentsMargins(3, 3, 3, 3);
+	istd::TDelPtr<QWidget> containerWidgetPtr(new QWidget(NULL));
+	QVBoxLayout* layoutPtr = new QVBoxLayout(containerWidgetPtr.GetPtr());
+	layoutPtr->setMargin(3);
 	containerWidgetPtr->setLayout(layoutPtr);
 
-	if (m_slaveGuiCompPtr.IsValid() && m_slaveGuiCompPtr->CreateGui(containerWidgetPtr)){
-		QWidget* slaveWidgetPtr = m_slaveGuiCompPtr->GetWidget();
-		if (slaveWidgetPtr != NULL){
-		}
+	if (m_slaveGuiCompPtr.IsValid() && m_slaveGuiCompPtr->CreateGui(containerWidgetPtr.GetPtr())){
+		dockWidgetPtr->setWidget(containerWidgetPtr.PopPtr());
 	}
-
-	dockWidgetPtr->setWidget(containerWidgetPtr);
 
 	if (m_dockFeaturesAttrPtr.IsValid()){
 		dockWidgetPtr->setFeatures(QDockWidget::DockWidgetFeature(*m_dockFeaturesAttrPtr));
