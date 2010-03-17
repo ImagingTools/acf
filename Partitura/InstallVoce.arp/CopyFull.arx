@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1119
+          1410
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -110,22 +110,6 @@
               <Value>
                 ../Bin
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicensePath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -518,7 +502,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   *.png
                 </Value>
@@ -539,6 +523,9 @@
                 </Value>
                 <Value>
                   *.h
+                </Value>
+                <Value>
+                  *.svg
                 </Value>
               </Values>
             </Data>
@@ -998,7 +985,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="6">
+              <Values count="7">
                 <Value>
                   *.png
                 </Value>
@@ -1016,6 +1003,9 @@
                 </Value>
                 <Value>
                   *.aps
+                </Value>
+                <Value>
+                  *.svg
                 </Value>
               </Values>
             </Data>
@@ -1276,7 +1266,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1350,22 +1340,6 @@
               <Value>
                 ../Lib
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicensePath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

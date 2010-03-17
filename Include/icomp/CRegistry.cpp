@@ -74,9 +74,19 @@ bool CRegistry::RemoveElementInfo(const std::string& elementId)
 
 	// remove interfaces exported by this component:
 	for (		ExportedInterfacesMap::iterator iter = m_exportedInterfacesMap.begin();
-				iter != m_exportedInterfacesMap.begin();){
+				iter != m_exportedInterfacesMap.end();){
 		if (iter->second == elementId){
 			iter = m_exportedInterfacesMap.erase(iter);
+		}
+		else{
+			++iter;
+		}
+	}
+
+	for (		ExportedComponentsMap::iterator iter = m_exportedComponentsMap.begin();
+				iter != m_exportedComponentsMap.end();){
+		if (iter->second == elementId){
+			iter = m_exportedComponentsMap.erase(iter);
 		}
 		else{
 			++iter;

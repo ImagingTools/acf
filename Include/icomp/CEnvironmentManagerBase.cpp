@@ -61,7 +61,7 @@ CEnvironmentManagerBase::ComponentAddresses CEnvironmentManagerBase::GetComponen
 			address.SetPackageId(packageName);
 
 			for (		Ids::const_iterator componentIter = componentIds.begin();
-						componentIter != componentIds.begin();
+						componentIter != componentIds.end();
 						++componentIter){
 				const std::string componentName = *componentIter;
 

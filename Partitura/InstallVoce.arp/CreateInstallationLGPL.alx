@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1119
+          1410
         </Number>
         <Description>
           ACF
@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="9">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        90
+        375
       </X>
       <X>
-        -276
+        175
       </X>
     </Element>
     <Element>
@@ -32,65 +32,10 @@
         Copy
       </ComponentName>
       <X>
-        109
+        350
       </X>
       <X>
-        -79
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyHeaders
-      </ComponentName>
-      <X>
-        1
-      </X>
-      <X>
-        -10
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyLicense
-      </ComponentName>
-      <X>
-        361
-      </X>
-      <X>
-        -33
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InitSeqence
-      </ComponentName>
-      <X>
-        -8
-      </X>
-      <X>
-        171
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InitSequence
-      </ComponentName>
-      <X>
-        368
-      </X>
-      <X>
-        -8
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Instantiator
-      </ComponentName>
-      <X>
-        97
-      </X>
-      <X>
-        -137
+        325
       </X>
     </Element>
     <Element>
@@ -98,21 +43,10 @@
         Log
       </ComponentName>
       <X>
-        102
+        650
       </X>
       <X>
-        127
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VersionInfo
-      </ComponentName>
-      <X>
-        -561
-      </X>
-      <X>
-        -191
+        325
       </X>
     </Element>
   </PositionMap>

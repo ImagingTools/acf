@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1119
+          1410
         </Number>
         <Description>
           ACF
@@ -15,38 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="41">
-    <Element>
-      <ComponentName>
-        Application
-      </ComponentName>
-      <X>
-        92
-      </X>
-      <X>
-        -303
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Copy2
-      </ComponentName>
-      <X>
-        9
-      </X>
-      <X>
-        -5
-      </X>
-    </Element>
+  <PositionMap count="11">
     <Element>
       <ComponentName>
         CopyBins
       </ComponentName>
       <X>
-        -697.723
+        475
       </X>
       <X>
-        -252.853
+        125
       </X>
     </Element>
     <Element>
@@ -54,131 +32,10 @@
         CopyCommon
       </ComponentName>
       <X>
-        -842
+        325
       </X>
       <X>
-        223
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyDebugInfo
-      </ComponentName>
-      <X>
-        10
-      </X>
-      <X>
-        -242
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyDocs
-      </ComponentName>
-      <X>
-        94
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyHeaders
-      </ComponentName>
-      <X>
-        1
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl
-      </ComponentName>
-      <X>
-        -585
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl1
-      </ComponentName>
-      <X>
-        -495
-      </X>
-      <X>
-        -20
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl2
-      </ComponentName>
-      <X>
-        -325
-      </X>
-      <X>
-        -24
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl3
-      </ComponentName>
-      <X>
-        -158
-      </X>
-      <X>
-        -8
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl4
-      </ComponentName>
-      <X>
-        9
-      </X>
-      <X>
-        -6
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl5
-      </ComponentName>
-      <X>
-        177
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl6
-      </ComponentName>
-      <X>
-        358
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyImpl7
-      </ComponentName>
-      <X>
-        536
-      </X>
-      <X>
-        0
+        600
       </X>
     </Element>
     <Element>
@@ -186,10 +43,10 @@
         CopyImplOther
       </ComponentName>
       <X>
-        -233.296
+        950
       </X>
       <X>
-        209.716
+        600
       </X>
     </Element>
     <Element>
@@ -197,10 +54,10 @@
         CopyImplResources
       </ComponentName>
       <X>
-        -383.245
+        800
       </X>
       <X>
-        -250.63
+        125
       </X>
     </Element>
     <Element>
@@ -208,21 +65,10 @@
         CopyImplSources
       </ComponentName>
       <X>
-        -405.083
+        775
       </X>
       <X>
-        109.172
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyInclResources
-      </ComponentName>
-      <X>
-        141
-      </X>
-      <X>
-        102
+        500
       </X>
     </Element>
     <Element>
@@ -230,10 +76,10 @@
         CopyIncludeOther
       </ComponentName>
       <X>
-        -543.213
+        625
       </X>
       <X>
-        203.657
+        600
       </X>
     </Element>
     <Element>
@@ -241,10 +87,10 @@
         CopyIncludeResources
       </ComponentName>
       <X>
-        -81.8528
+        1075
       </X>
       <X>
-        113.473
+        475
       </X>
     </Element>
     <Element>
@@ -252,54 +98,10 @@
         CopyIncludeSources
       </ComponentName>
       <X>
-        -700
+        475
       </X>
       <X>
-        108
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyIncludes
-      </ComponentName>
-      <X>
-        -743
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyInfo
-      </ComponentName>
-      <X>
-        -399
-      </X>
-      <X>
-        -174
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyInstallInfo
-      </ComponentName>
-      <X>
-        -739
-      </X>
-      <X>
-        -262
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyInstallationScript
-      </ComponentName>
-      <X>
-        -1084
-      </X>
-      <X>
-        114
+        475
       </X>
     </Element>
     <Element>
@@ -307,87 +109,10 @@
         CopyLibs
       </ComponentName>
       <X>
-        -865.74
+        300
       </X>
       <X>
-        -157
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyReleaseInfo
-      </ComponentName>
-      <X>
-        -140
-      </X>
-      <X>
-        -242
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyResources
-      </ComponentName>
-      <X>
-        141
-      </X>
-      <X>
-        102
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyRoot
-      </ComponentName>
-      <X>
-        -902
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopySources
-      </ComponentName>
-      <X>
-        -1060
-      </X>
-      <X>
-        11
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTexts
-      </ComponentName>
-      <X>
-        -423
-      </X>
-      <X>
-        0
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTutorial
-      </ComponentName>
-      <X>
-        492
-      </X>
-      <X>
-        1
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyTutorialSources
-      </ComponentName>
-      <X>
-        295
-      </X>
-      <X>
-        0
+        225
       </X>
     </Element>
     <Element>
@@ -395,32 +120,10 @@
         CopyVcRules
       </ComponentName>
       <X>
-        -551.86
+        625
       </X>
       <X>
-        -164.362
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DistributionInfo
-      </ComponentName>
-      <X>
-        -456
-      </X>
-      <X>
-        331
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        InitSeqence
-      </ComponentName>
-      <X>
-        -8
-      </X>
-      <X>
-        171
+        225
       </X>
     </Element>
     <Element>
@@ -428,43 +131,10 @@
         InitSequence
       </ComponentName>
       <X>
-        -1067
+        125
       </X>
       <X>
-        -44
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
-      <X>
-        -263
-      </X>
-      <X>
-        -214
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        SimpleInfo
-      </ComponentName>
-      <X>
-        -922
-      </X>
-      <X>
-        222
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VersionInfo
-      </ComponentName>
-      <X>
-        -585
-      </X>
-      <X>
-        -215
+        350
       </X>
     </Element>
   </PositionMap>

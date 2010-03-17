@@ -115,8 +115,8 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 				if (templatePtr != NULL){
 					idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
 					for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
-						iter != ids.end();
-						++iter){
+								iter != ids.end();
+								++iter){
 							const std::string& documentTypeId = *iter;
 							I_ASSERT(!documentTypeId.empty());
 

@@ -58,7 +58,7 @@ bool CRegistryConsistInfoComp::IsRegistryValid(
 
 	icomp::IRegistry::Ids ids = registry.GetElementIds();
 	for (		icomp::IRegistry::Ids::const_iterator iter = ids.begin();
-				iter != ids.begin();
+				iter != ids.end();
 				++iter){
 		const std::string& elementId = *iter;
 
