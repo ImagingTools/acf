@@ -4,8 +4,6 @@
 
 // Qt includes
 #include <QTreeWidget>
-#include <QMimeData>
-#include <QDrag>
 #include <QDir>
 
 

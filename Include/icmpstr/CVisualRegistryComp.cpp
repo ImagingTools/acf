@@ -196,6 +196,38 @@ bool CVisualRegistryComp::RemoveElementInfo(const std::string& elementId)
 }
 
 
+bool CVisualRegistryComp::RenameElement(const std::string& oldElementId, const std::string& newElementId)
+{
+	i2d::CVector2d oldPosition;
+	const ElementInfo* oldElementInfoPtr = GetElementInfo(oldElementId);
+	if (oldElementInfoPtr != NULL){
+		CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(oldElementInfoPtr->elementPtr.GetPtr());
+		if (elementPtr != NULL){
+			oldPosition = elementPtr->GetCenter();
+		}
+	}
+
+	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_MODEL | CF_COMPONENT_RENAMED);
+
+	if (BaseClass2::RenameElement(oldElementId, newElementId)){
+		const ElementInfo* newElementInfoPtr = GetElementInfo(newElementId);
+		if (newElementInfoPtr != NULL){
+			CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(newElementInfoPtr->elementPtr.GetPtr());
+			if (elementPtr != NULL){
+				elementPtr->MoveTo(oldPosition);
+			}
+		}
+
+		return true;
+	}
+	else{
+		changePtr.Abort();
+	}
+
+	return false;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CVisualRegistryComp::Serialize(iser::IArchive& archive)

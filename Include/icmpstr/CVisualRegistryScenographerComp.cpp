@@ -347,6 +347,7 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 	if (selectedComponentPtr == NULL){
 		return;
 	}
+
 	const std::string& oldName = selectedComponentPtr->GetName();
 
 	bool isOk = false;
@@ -361,82 +362,7 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 		return;
 	}
 
-	i2d::CVector2d position = selectedComponentPtr->GetCenter();
-
-	istd::CChangeNotifier registryNotifier(registryPtr, istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_COMPONENT_ADDED);
-
-	const icomp::IRegistry::ElementInfo* newInfoPtr = registryPtr->InsertElementInfo(newName, selectedComponentPtr->GetAddress(), true);
-	if (newInfoPtr == NULL){
-		return;
-	}
-
-	I_ASSERT(newInfoPtr->elementPtr.IsValid());	// InsertElementInfo has to return NULL if element cannot be created with option ensureElementCreated = true
-
-	if (iser::CMemoryReadArchive::CloneObjectByArchive(*selectedComponentPtr, *newInfoPtr->elementPtr)){
-		icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
-		for (		icomp::IRegistry::Ids::iterator compIdIter = elementIds.begin();
-					compIdIter != elementIds.end();
-					++compIdIter){
-			const std::string& componentId = *compIdIter;
-			const icomp::IRegistry::ElementInfo* infoPtr = registryPtr->GetElementInfo(componentId);
-			if (infoPtr == NULL){
-				continue;
-			}
-			const icomp::IRegistryElement* elementPtr = infoPtr->elementPtr.GetPtr();
-			if (elementPtr == NULL){
-				continue;
-			}
-
-			icomp::IRegistryElement::Ids attrIds = elementPtr->GetAttributeIds();
-
-			for (		icomp::IRegistryElement::Ids::iterator attrIdIter = attrIds.begin();
-						attrIdIter != attrIds.end();
-						++attrIdIter){
-				const std::string& attributeId = *attrIdIter;
-				const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = elementPtr->GetAttributeInfo(attributeId);
-				if (attrInfoPtr == NULL){
-					continue;
-				}
-
-				iser::ISerializable* attributePtr = attrInfoPtr->attributePtr.GetPtr();
-				icomp::TAttribute<std::string>* singleAttrPtr = dynamic_cast<icomp::TAttribute<std::string>*>(attributePtr);
-				icomp::TMultiAttribute<std::string>* multiAttrPtr = dynamic_cast<icomp::TMultiAttribute<std::string>*>(attributePtr);
-
-				if (		(dynamic_cast<icomp::CReferenceAttribute*>(attributePtr) != NULL) ||
-							(dynamic_cast<icomp::CFactoryAttribute*>(attributePtr) != NULL)){
-					std::string baseId;
-					std::string subId;
-					icomp::CInterfaceManipBase::SplitId(singleAttrPtr->GetValue(), baseId, subId);
-					if (baseId == oldName){
-						singleAttrPtr->SetValue(icomp::CInterfaceManipBase::JoinId(newName, subId));
-					}
-				}
-
-				if (		(dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr) != NULL) ||
-							(dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr) != NULL)){
-					int valuesCount = multiAttrPtr->GetValuesCount();
-					for (int i = 0; i < valuesCount; ++i){
-						std::string baseId;
-						std::string subId;
-						icomp::CInterfaceManipBase::SplitId(multiAttrPtr->GetValueAt(i), baseId, subId);
-						if (baseId == oldName){
-							multiAttrPtr->SetValueAt(i, icomp::CInterfaceManipBase::JoinId(newName, subId));
-						}
-					}
-				}
-			}
-		}
-
-		registryPtr->RemoveElementInfo(selectedComponentPtr->GetName());
-
-		CVisualRegistryElement* newComponentPtr = dynamic_cast<CVisualRegistryElement*>(newInfoPtr->elementPtr.GetPtr());
-		if (newComponentPtr != NULL){
-			newComponentPtr->MoveTo(position);
-		}
-	}
-	else{
-		registryPtr->RemoveElementInfo(newName);
-	}
+	registryPtr->RenameElement(oldName, newName);
 }
 
 

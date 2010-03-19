@@ -1,12 +1,20 @@
 #include "icomp/CRegistry.h"
 
 
+#include "istd/TChangeNotifier.h"
+
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+#include "iser/CMemoryReadArchive.h"
 
 #include "icomp/IComponentStaticInfo.h"
-
-#include "istd/TChangeNotifier.h"
+#include "icomp/TAttribute.h"
+#include "icomp/TMultiAttribute.h"
+#include "icomp/CReferenceAttribute.h"
+#include "icomp/CFactoryAttribute.h"
+#include "icomp/CInterfaceManipBase.h"
+#include "icomp/CMultiReferenceAttribute.h"
+#include "icomp/CMultiFactoryAttribute.h"
 
 
 namespace icomp
@@ -38,11 +46,11 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		return NULL;
 	}
 
-	istd::TDelPtr<IRegistryElement> registryPtr;
+	istd::TDelPtr<IRegistryElement> registryElementPtr;
 	if (ensureElementCreated){
-		registryPtr.SetPtr(CreateRegistryElement(elementId, address));
+		registryElementPtr.SetPtr(CreateRegistryElement(elementId, address));
 
-		if (!registryPtr.IsValid()){
+		if (!registryElementPtr.IsValid()){
 			return NULL;
 		}
 	}
@@ -51,7 +59,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 
 	ElementInfo& newElement = m_componentsMap[elementId];
 	newElement.address = address;
-	newElement.elementPtr.TakeOver(registryPtr);
+	newElement.elementPtr.TakeOver(registryElementPtr);
 
 	return &newElement;
 }
@@ -143,6 +151,138 @@ void CRegistry::SetElementExported(
 	else{
 		m_exportedComponentsMap.erase(exportId);
 	}
+}
+
+
+bool CRegistry::RenameElement(const std::string& oldElementId, const std::string& newElementId)
+{
+	if (newElementId == oldElementId){
+		return true;
+	}
+
+	ComponentsMap::iterator elementIter = m_componentsMap.find(oldElementId);
+	if (elementIter == m_componentsMap.end()){
+		return false;
+	}
+
+	// element with this ID already exists:
+	elementIter = m_componentsMap.find(newElementId);
+	if (elementIter != m_componentsMap.end()){
+		return false;
+	}
+
+	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_MODEL | CF_COMPONENT_RENAMED);
+
+	// calculate new component exports:
+	icomp::IRegistry::ExportedComponentsMap newExportedComponentsMap;
+	for (		icomp::IRegistry::ExportedComponentsMap::const_iterator index = m_exportedComponentsMap.begin();
+				index != m_exportedComponentsMap.end();
+				index++){
+		std::string exportComponentId;
+		std::string subId;
+		std::string newExportId = index->second;
+		istd::CIdManipBase::SplitId(newExportId, exportComponentId, subId);
+		if (exportComponentId == oldElementId){
+			newExportId = istd::CIdManipBase::JoinId(newElementId, subId);
+		}
+
+		newExportedComponentsMap[index->first] = newExportId;
+	}
+
+	// calculate new interface exports:
+	icomp::IRegistry::ExportedInterfacesMap newExportedInterfacesMap;
+	for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator index = m_exportedInterfacesMap.begin();
+				index != m_exportedInterfacesMap.end();
+				index++){
+		std::string elementId = index->second;
+		if (elementId == oldElementId){
+			elementId = newElementId;
+		}
+
+		newExportedInterfacesMap[index->first] = elementId;
+	}
+
+	// execute rename transaction:
+	ComponentsMap::iterator oldElementIter = m_componentsMap.find(oldElementId);
+
+	icomp::CComponentAddress oldAdress = oldElementIter->second.address;
+	IRegistryElement* oldElementPtr = oldElementIter->second.elementPtr.GetPtr();
+
+	if (InsertElementInfo(newElementId, oldAdress)){
+		ElementInfo& newElement = m_componentsMap[newElementId];
+
+		if (iser::CMemoryReadArchive::CloneObjectByArchive(*oldElementPtr, *newElement.elementPtr.GetPtr())){
+			m_exportedComponentsMap = newExportedComponentsMap;
+			m_exportedInterfacesMap = newExportedInterfacesMap;
+
+			// udpate component dependencies:
+			Ids elementIds = GetElementIds();
+			for (		Ids::iterator compIdIter = elementIds.begin();
+						compIdIter != elementIds.end();
+						++compIdIter){
+				const std::string& componentId = *compIdIter;
+				const icomp::IRegistry::ElementInfo* infoPtr = GetElementInfo(componentId);
+				if (infoPtr == NULL){
+					continue;
+				}
+				const icomp::IRegistryElement* elementPtr = infoPtr->elementPtr.GetPtr();
+				if (elementPtr == NULL){
+					continue;
+				}
+
+				icomp::IRegistryElement::Ids attrIds = elementPtr->GetAttributeIds();
+
+				for (		icomp::IRegistryElement::Ids::iterator attrIdIter = attrIds.begin();
+							attrIdIter != attrIds.end();
+							++attrIdIter){
+					const std::string& attributeId = *attrIdIter;
+					const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = elementPtr->GetAttributeInfo(attributeId);
+					if (attrInfoPtr == NULL){
+						continue;
+					}
+
+					iser::ISerializable* attributePtr = attrInfoPtr->attributePtr.GetPtr();
+					icomp::TAttribute<std::string>* singleAttrPtr = dynamic_cast<icomp::TAttribute<std::string>*>(attributePtr);
+					icomp::TMultiAttribute<std::string>* multiAttrPtr = dynamic_cast<icomp::TMultiAttribute<std::string>*>(attributePtr);
+
+					if (		(dynamic_cast<icomp::CReferenceAttribute*>(attributePtr) != NULL) ||
+								(dynamic_cast<icomp::CFactoryAttribute*>(attributePtr) != NULL)){
+						std::string baseId;
+						std::string subId;
+						icomp::CInterfaceManipBase::SplitId(singleAttrPtr->GetValue(), baseId, subId);
+						if (baseId == oldElementId){
+							singleAttrPtr->SetValue(icomp::CInterfaceManipBase::JoinId(newElementId, subId));
+						}
+					}
+
+					if (		(dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr) != NULL) ||
+								(dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr) != NULL)){
+						int valuesCount = multiAttrPtr->GetValuesCount();
+						for (int i = 0; i < valuesCount; ++i){
+							std::string baseId;
+							std::string subId;
+							icomp::CInterfaceManipBase::SplitId(multiAttrPtr->GetValueAt(i), baseId, subId);
+							if (baseId == oldElementId){
+								multiAttrPtr->SetValueAt(i, icomp::CInterfaceManipBase::JoinId(newElementId, subId));
+							}
+						}
+					}
+				}
+			}
+
+			// remove old element info:
+			RemoveElementInfo(oldElementId);
+
+			// trigger update for the element observer:
+			istd::CChangeNotifier elementChangePtr(newElement.elementPtr.GetPtr());	
+		}
+
+		return true;
+	}
+
+	changePtr.Abort();
+
+	return false;
 }
 
 

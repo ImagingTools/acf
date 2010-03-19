@@ -39,7 +39,8 @@ public:
 	{
 		CF_COMPONENT_ADDED = 0x1000,
 		CF_COMPONENT_REMOVED = 0x2000,
-		CF_COMPONENT_EXPORTED = 0x4000
+		CF_COMPONENT_EXPORTED = 0x4000,
+		CF_COMPONENT_RENAMED = 0x8000
 	};
 
 	/**
@@ -59,7 +60,7 @@ public:
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/
-	typedef std::map< std::string, std::string> ExportedComponentsMap;
+	typedef std::map<std::string, std::string> ExportedComponentsMap;
 
 	/**
 		Get ID list of existing elements.
@@ -116,6 +117,13 @@ public:
 	virtual void SetElementExported(
 				const std::string& exportId,
 				const std::string& elementId) = 0;
+
+	/**
+		Rename an registry element.
+		\param	oldElementId		ID of element to be renamed.
+		\param	newElementId		the new ID of element.
+	*/
+	virtual bool RenameElement(const std::string& oldElementId, const std::string& newElementId) = 0;
 
 	/**
 		Get human readable description of this registry.

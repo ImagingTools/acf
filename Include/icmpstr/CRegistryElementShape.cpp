@@ -26,7 +26,6 @@ CRegistryElementShape::CRegistryElementShape(
 			const iqt2d::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr),
 	m_registryView(*registryViewPtr),
-	m_registryObserver(this),
 	m_isConsistent(false)
 {
 	I_ASSERT(registryViewPtr != NULL);
@@ -255,15 +254,6 @@ void CRegistryElementShape::CalcExportedInteraces(const CVisualRegistryElement& 
 }
 
 
-// public methods of embedded class RegistryObserver
-
-CRegistryElementShape::RegistryObserver::RegistryObserver(CRegistryElementShape* parentPtr)
-:	m_parent(*parentPtr)
-{
-	I_ASSERT(parentPtr != NULL);
-}
-
-
 // reimplemented (iqt2d::TObjectShapeBase)
 
 void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& element)
@@ -344,27 +334,6 @@ void CRegistryElementShape::OnSelectionChanged(bool isSelected)
 	BaseClass::OnSelectionChanged(isSelected);
 
 	Q_EMIT SelectionChanged(isSelected);
-}
-
-
-// protected methods of embedded class
-
-// reimplemented (imod::CSingleModelObserverBase)
-
-void CRegistryElementShape::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	BaseClass::OnUpdate(updateFlags, updateParamsPtr);
-
-	if ((updateFlags & icomp::IRegistry::CF_COMPONENT_EXPORTED) != 0){
-		const CVisualRegistryElement* objectPtr = m_parent.GetObjectPtr();
-		if (objectPtr == NULL){
-			return;
-		}
-
-		m_parent.CalcExportedInteraces(*objectPtr);
-
-		m_parent.update();
-	}
 }
 
 

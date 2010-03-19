@@ -11,6 +11,8 @@
 #include <QPushButton>
 #include <QPainter>
 #include <QMenu>
+#include <QMimeData>
+#include <QDrag>
 
 
 // ACF includes

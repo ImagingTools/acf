@@ -37,6 +37,7 @@ public:
 	virtual void SetElementExported(
 				const std::string& exportId,
 				const std::string& elementId);
+	virtual bool RenameElement(const std::string& oldElementId, const std::string& newElementId);
 	virtual const istd::CString& GetDescription() const;
 	virtual void SetDescription(const istd::CString& description);
 	virtual const istd::CString& GetKeywords() const;

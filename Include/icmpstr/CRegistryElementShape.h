@@ -62,21 +62,6 @@ protected:
 
 	void CalcExportedInteraces(const CVisualRegistryElement& element);
 
-	class RegistryObserver: public imod::TSingleModelObserverBase<icomp::IRegistry>
-	{
-	public:
-		typedef imod::TSingleModelObserverBase<icomp::IRegistry> BaseClass;
-
-		RegistryObserver(CRegistryElementShape* parentPtr);
-
-	protected:
-		// reimplemented (imod::CSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CRegistryElementShape& m_parent;
-	};
-
 	// reimplemented (iqt2d::TObjectShapeBase)
 	void UpdateGraphicsItem(const CVisualRegistryElement& element);
 
@@ -85,8 +70,6 @@ protected:
 
 private:
 	const CVisualRegistryScenographerComp& m_registryView;
-
-	RegistryObserver m_registryObserver;
 
 	QStringList m_exportedInterfacesList;
 

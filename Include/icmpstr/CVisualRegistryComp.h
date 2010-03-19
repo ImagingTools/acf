@@ -62,6 +62,7 @@ public:
 				const icomp::CComponentAddress& address,
 				bool ensureElementCreated = true);
 	virtual bool RemoveElementInfo(const std::string& elementId);
+	virtual bool RenameElement(const std::string& oldElementId, const std::string& newElementId);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
