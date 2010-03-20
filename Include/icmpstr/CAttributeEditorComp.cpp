@@ -316,6 +316,8 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 		CreateComponentsTree(elementId, *infoPtr, *componentRootPtr);
 
 		ComponentsTree->addTopLevelItem(componentRootPtr);
+		
+		componentRootPtr->setExpanded(true);
 
 		MetaInfoFrame->setVisible(true);
 	}
