@@ -95,14 +95,14 @@ void CRegistryPropEditorComp::CreateOverview()
 	// create overview infos:
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
-		QTreeWidgetItem* exportedInterfacesItemPtr = new QTreeWidgetItem();
-		exportedInterfacesItemPtr->setText(0, tr("Exported Interfaces"));
-		exportedInterfacesItemPtr->setFont(0, boldFont);
-		
-		OverviewTree->addTopLevelItem(exportedInterfacesItemPtr);
-
 		const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = registryPtr->GetExportedInterfacesMap();
 		if (!exportedInterfaces.empty()){
+			QTreeWidgetItem* exportedInterfacesItemPtr = new QTreeWidgetItem();
+			exportedInterfacesItemPtr->setText(0, tr("Exported Interfaces"));
+			exportedInterfacesItemPtr->setFont(0, boldFont);
+			
+			OverviewTree->addTopLevelItem(exportedInterfacesItemPtr);
+
 			for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator index = exportedInterfaces.begin();
 						index != exportedInterfaces.end();
 						index++){
