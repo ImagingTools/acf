@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1415
+          1417
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               DialogIconPath
@@ -68,6 +68,25 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              Gui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                UrlParamGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               Model
             </Id>
             <Type>
@@ -88,6 +107,25 @@
           <AttributeInfo>
             <Id>
               ModelEditor
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                UrlParamGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ModelObserver
             </Id>
             <Type>
               icomp::CReferenceAttribute
