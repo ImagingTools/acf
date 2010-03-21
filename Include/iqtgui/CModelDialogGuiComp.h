@@ -6,8 +6,7 @@
 #include "imod/IObserver.h"
 #include "imod/IModel.h"
 
-#include "iqtgui/IDialog.h"
-#include "iqtgui/CGuiComponentDialog.h"
+#include "iqtgui/CDialogGuiComp.h"
 
 
 namespace iqtgui
@@ -17,36 +16,30 @@ namespace iqtgui
 /**
 	Component for the dialog based model editing.
 */
-class CModelDialogGuiComp: public icomp::CComponentBase, virtual public iqtgui::IDialog
+class CModelDialogGuiComp: public iqtgui::CDialogGuiComp
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef iqtgui::CDialogGuiComp BaseClass;
 
 	I_BEGIN_COMPONENT(CModelDialogGuiComp)
-		I_REGISTER_INTERFACE(iqtgui::IDialog);
-		I_ASSIGN(m_editorGuiCompPtr, "ModelEditor", "Editor for the model data", true, "ModelEditor");
-		I_ASSIGN(m_editorCompPtr, "ModelEditor", "Editor for the model data", true, "ModelEditor");
+		I_ASSIGN(m_editorCompPtr, "ModelObserver", "Editor for the model data", true, "ModelObserver");
 		I_ASSIGN(m_modelCompPtr, "Model", "Model data", true, "Model");
 		I_ASSIGN(m_dataCompPtr, "Model", "Model data", true, "Model");
-		I_ASSIGN(m_workingModelCompPtr, "WorkingModel", "Working model data", true, "WorkingModel");
-		I_ASSIGN(m_workingDataCompPtr, "WorkingModel", "Working model data", true, "WorkingModel");
+		I_ASSIGN(m_workingModelFactoryCompPtr, "WorkingDataFactory", "Model factory using to create the working model data", true, "WorkingModelFactory");		
+		I_ASSIGN(m_workingDataFactoryCompPtr, "WorkingDataFactory", "Model factory using to create the working model data", true, "WorkingModelFactory");
 	I_END_COMPONENT
 
 	// reimplemented (iqtgui::IDialog)
 	virtual void Execute();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 private:
-	I_REF(iqtgui::IGuiObject, m_editorGuiCompPtr);
 	I_REF(imod::IObserver, m_editorCompPtr);
 	I_REF(imod::IModel, m_modelCompPtr);
 	I_REF(istd::IChangeable, m_dataCompPtr);
-	I_REF(imod::IModel, m_workingModelCompPtr);
-	I_REF(istd::IChangeable, m_workingDataCompPtr);
+	I_FACT(imod::IModel, m_workingModelFactoryCompPtr);
+	I_FACT(istd::IChangeable, m_workingDataFactoryCompPtr);
 
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_dialogPtr;
+	istd::TDelPtr<istd::IChangeable> m_workingDataPtr;
 };
 
 

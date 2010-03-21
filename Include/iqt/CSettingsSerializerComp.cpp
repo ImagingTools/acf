@@ -39,7 +39,26 @@ int CSettingsSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::C
 
 			CSettingsReadArchive archive(iqt::GetQString(companyName), iqt::GetQString(applicationName));
 
-			if (serializeblePtr->Serialize(archive)){
+			std::string rootKey;
+			if (m_rootKeyAttrPtr.IsValid()){
+				rootKey = (*m_rootKeyAttrPtr).ToString();
+			}
+
+			iser::CArchiveTag rootArchiveTag(rootKey, "Root key");
+
+			bool retVal = true;
+
+			if (!rootKey.empty()){
+				retVal = retVal && archive.BeginTag(rootArchiveTag);
+			}
+
+			retVal = retVal && serializeblePtr->Serialize(archive);
+
+			if (!rootKey.empty()){
+				retVal = retVal && archive.EndTag(rootArchiveTag);
+			}
+
+			if (retVal){
 				return StateOk;
 			}
 			else{
@@ -64,8 +83,27 @@ int CSettingsSerializerComp::SaveToFile(const istd::IChangeable& data, const ist
 			istd::CString companyName = m_applicationInfoCompPtr->GetCompanyName();
 
 			CSettingsWriteArchive archive(iqt::GetQString(companyName), iqt::GetQString(applicationName));
+		
+			std::string rootKey;
+			if (m_rootKeyAttrPtr.IsValid()){
+				rootKey = (*m_rootKeyAttrPtr).ToString();
+			}
 
-			if (serializeblePtr->Serialize(archive)){
+			iser::CArchiveTag rootArchiveTag(rootKey, "Root key");
+
+			bool retVal = true;
+
+			if (!rootKey.empty()){
+				retVal = retVal && archive.BeginTag(rootArchiveTag);
+			}
+
+			retVal = retVal && serializeblePtr->Serialize(archive);
+
+			if (!rootKey.empty()){
+				retVal = retVal && archive.EndTag(rootArchiveTag);
+			}
+
+			if (retVal){
 				return StateOk;
 			}
 			else{

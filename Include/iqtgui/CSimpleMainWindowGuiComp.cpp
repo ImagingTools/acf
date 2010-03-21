@@ -359,16 +359,9 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 
 	m_showToolBarsCommand.setChecked(true);
 
-	if (m_settingsGuiCompPtr.IsValid()){
-		m_settingsDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_settingsGuiCompPtr.GetPtr(), 0, true, mainWindowPtr)); 
-		m_settingsDialogPtr->setWindowIcon(QIcon(":/Icons/Settings.svg"));
-		m_settingsDialogPtr->setWindowTitle(tr("Settings"));
-	}
-
 	if (m_aboutGuiCompPtr.IsValid()){
 		m_aboutDialogPtr.SetPtr(new iqtgui::CGuiComponentDialog(m_aboutGuiCompPtr.GetPtr(), 0, true, mainWindowPtr)); 
 	}
-
 
 	OnRetranslate();
 
@@ -406,7 +399,6 @@ void CSimpleMainWindowGuiComp::OnGuiDestroyed()
 	m_menuBarPtr.Reset();
 	m_standardToolBarPtr.Reset();
 
-	m_settingsDialogPtr.Reset(); 
 	m_aboutDialogPtr.Reset(); 
 
 	BaseClass::OnGuiDestroyed();
@@ -458,8 +450,8 @@ void CSimpleMainWindowGuiComp::OnAbout()
 
 void CSimpleMainWindowGuiComp::OnSettings()
 {
-	if (m_settingsDialogPtr.IsValid()){
-		m_settingsDialogPtr->exec();
+	if (m_settingsGuiCompPtr.IsValid()){
+		m_settingsGuiCompPtr->Execute();
 	}
 }
 

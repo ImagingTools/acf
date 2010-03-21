@@ -16,7 +16,7 @@ namespace iqtgui
 
 
 /**
-	A common interface for main window component such as dock widget,tool bar and so on.
+	A common interface for main window component such as dock widget, tool bar and so on.
 */
 class IMainWindowComponent: virtual public istd::IPolymorphic
 {

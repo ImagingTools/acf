@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="2">
     <Element>
       <Id>
-        ModelBinder
+        FilePersistence
       </Id>
       <PackageId>
         BasePck
       </PackageId>
       <ComponentId>
-        ModelBinder
+        FilePersistence
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,10 +33,10 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              Model
+              FileLoader
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -49,16 +49,32 @@
                 true
               </IsEnabled>
               <Value>
-                UrlParam
+                SettingsSerializer
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Observers
+              Object
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              Object
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RestoreonBegin
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -67,11 +83,28 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  UrlParamGui
-                </Value>
-              </Values>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StoreOnEnd
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -79,20 +112,20 @@
     </Element>
     <Element>
       <Id>
-        SettingsPersistence
+        SettingsSerializer
       </Id>
       <PackageId>
-        AcfGuiVoce
+        QtPck
       </PackageId>
       <ComponentId>
-        SettingsPersistence
+        SettingsSerializer
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
         <AttributeInfoMap count="3">
           <AttributeInfo>
@@ -129,53 +162,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Object
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                UrlParam
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        UrlParam
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        FileNameParam
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              DefaultPath
+              RootKey
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              DefaultUrl
+              RootKey
             </ExportId>
             <Data>
               <IsEnabled>
@@ -183,96 +176,16 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              PathType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                3
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        UrlParamGui
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        FileNameParamGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        UrlParam
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iprm::IFileNameParam
-      </InterfaceId>
-      <ComponentId>
-        UrlParam
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iqtgui::IGuiObject
-      </InterfaceId>
-      <ComponentId>
-        UrlParamGui
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
-      </InterfaceId>
-      <ComponentId>
-        UrlParam
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        UrlParam
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="0">
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Persistent directory selector
+    Realization of the object persistence over Qt registry mechanism
   </Description>
   <Keywords>
     Directory File

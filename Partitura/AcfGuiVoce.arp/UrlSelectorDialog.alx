@@ -18,7 +18,7 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
-        ModelBinder
+        ModelDialogGui
       </ComponentName>
       <X>
         325

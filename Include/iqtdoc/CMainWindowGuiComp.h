@@ -27,6 +27,9 @@ namespace iqtdoc
 {
 
 
+/**
+	Standard main window component for any document based application.
+*/
 class CMainWindowGuiComp:
 			public iqtgui::CSimpleMainWindowGuiComp,
 			public imod::TSingleModelObserverBase<idoc::IDocumentManager>,

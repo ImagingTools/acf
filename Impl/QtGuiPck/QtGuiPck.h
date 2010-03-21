@@ -21,6 +21,7 @@
 #include "iqtgui/CFilePersistenceGuiComp.h"
 #include "iqtgui/CLoginGuiComp.h"
 #include "iqtgui/CSimpleMainWindowGuiComp.h"
+#include "iqtgui/CDialogGuiComp.h"
 #include "iqtgui/CModelDialogGuiComp.h"
 
 #include "iqtprm/CFileNameParamGuiComp.h"
@@ -61,6 +62,7 @@ typedef iqtgui::CTabbedMultiViewGuiComp TabbedMultiViewGui;
 typedef iqtgui::CFilePersistenceGuiComp FilePersistenceGui;
 typedef iqtgui::CLoginGuiComp LoginGui;
 typedef iqtgui::CSimpleMainWindowGuiComp SimpleMainGui;
+typedef iqtgui::CDialogGuiComp DialogGui;
 typedef iqtgui::CModelDialogGuiComp ModelDialogGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;

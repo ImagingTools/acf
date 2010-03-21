@@ -1,6 +1,9 @@
 #include "iqtgui/CModelDialogGuiComp.h"
 
 
+// Qt includes
+#include <QIcon>
+
 
 namespace iqtgui
 {
@@ -14,10 +17,11 @@ void CModelDialogGuiComp::Execute()
 {
 	I_ASSERT(m_dataCompPtr.IsValid());
 	I_ASSERT(m_modelCompPtr.IsValid());
-	I_ASSERT(m_workingModelCompPtr.IsValid());
-	I_ASSERT(m_workingDataCompPtr.IsValid());
+	I_ASSERT(m_workingDataFactoryCompPtr.IsValid());
+	I_ASSERT(m_workingModelFactoryCompPtr.IsValid());
 
-	if (!m_workingModelCompPtr.IsValid()){
+	// create working model:
+	if (!m_workingDataFactoryCompPtr.IsValid()){
 		return;
 	}
 
@@ -25,35 +29,33 @@ void CModelDialogGuiComp::Execute()
 		return;
 	}
 
-	if (m_workingDataCompPtr.IsValid() && m_workingModelCompPtr.IsValid()){
-		if (m_workingDataCompPtr->CopyFrom(*m_dataCompPtr.GetPtr())){
-			m_workingModelCompPtr->AttachObserver(m_editorCompPtr.GetPtr());
-		}
+	if (m_modelCompPtr->IsAttached(m_editorCompPtr.GetPtr())){
+		m_modelCompPtr->DetachObserver(m_editorCompPtr.GetPtr());
 	}
 
-	if (m_workingModelCompPtr->IsAttached(m_editorCompPtr.GetPtr())){
-		int retVal = m_dialogPtr->exec();
+	m_workingDataPtr.SetPtr(m_workingDataFactoryCompPtr.CreateInstance());
 
-		if (retVal == QDialog::Accepted){
-			m_dataCompPtr->CopyFrom(*m_workingDataCompPtr.GetPtr());
+	if (m_workingDataPtr.IsValid()){
+		if (m_workingDataPtr->CopyFrom(*m_dataCompPtr.GetPtr())){
+			imod::IModel* workingModelPtr = dynamic_cast<imod::IModel*>(m_workingDataPtr.GetPtr());
+			I_ASSERT(workingModelPtr != NULL);
+			if (workingModelPtr != NULL){
+				bool isAttached = workingModelPtr->AttachObserver(m_editorCompPtr.GetPtr());
+				if (isAttached){
+					int retVal = m_dialogPtr->exec();
+
+					if (retVal == QDialog::Accepted){
+						m_dataCompPtr->CopyFrom(*m_workingDataPtr.GetPtr());
+					}
+
+					// re-attach the original data model to the editor:
+					workingModelPtr->DetachObserver(m_editorCompPtr.GetPtr());
+
+					m_modelCompPtr->AttachObserver(m_editorCompPtr.GetPtr());
+				}
+			}
 		}
-
-		m_workingModelCompPtr->DetachObserver(m_editorCompPtr.GetPtr());
 	}
-}
-
-
-// reimplemented (icomp::IComponent)
-
-void CModelDialogGuiComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	m_dialogPtr.SetPtr(
-				new iqtgui::CGuiComponentDialog(
-							m_editorGuiCompPtr.GetPtr(),
-							QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-							true));
 }
 
 

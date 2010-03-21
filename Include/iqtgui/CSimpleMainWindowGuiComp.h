@@ -15,6 +15,7 @@
 #include "ibase/ICommandsProvider.h"
 
 #include "iqtgui/IMainWindowComponent.h"
+#include "iqtgui/IDialog.h"
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TRestorableGuiWrap.h"
 #include "iqtgui/CHierarchicalCommand.h"
@@ -68,6 +69,7 @@ protected:
 	virtual int SetupToolbar(const iqtgui::CHierarchicalCommand& command, QToolBar& result, int prevGroupId = ibase::ICommand::GI_NONE) const;
 	virtual void SetToolBarsVisible(bool isVisible = true);
 	virtual void SetupMenu();
+
 	virtual void UpdateFixedCommands(iqtgui::CHierarchicalCommand& fixedCommands);
 	virtual void UpdateViewCommands(iqtgui::CHierarchicalCommand& viewCommand);
 	virtual void UpdateToolsCommands(iqtgui::CHierarchicalCommand& toolsCommand);
@@ -97,14 +99,13 @@ private:
 	I_REF(ibase::ICommandsProvider, m_workspaceCommandsCompPtr);
 	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsPtr);
 	I_REF(iqtgui::IGuiObject, m_aboutGuiCompPtr);
-	I_REF(iqtgui::IGuiObject, m_settingsGuiCompPtr);
+	I_REF(iqtgui::IDialog, m_settingsGuiCompPtr);
 	I_ATTR(bool, m_isNestingEnabledAttrPtr);
 	I_ATTR(bool, m_isMenuVisibleAttrPtr);
 	I_ATTR(bool, m_isToolbarVisibleAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useIconTextAttrPtr);
 
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_settingsDialogPtr;
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_aboutDialogPtr;
 
 	istd::TDelPtr<QMenuBar> m_menuBarPtr;

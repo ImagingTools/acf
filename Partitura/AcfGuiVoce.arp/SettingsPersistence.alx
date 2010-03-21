@@ -15,49 +15,27 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
-        ModelBinder
+        FilePersistence
       </ComponentName>
       <X>
-        325
+        575
       </X>
       <X>
-        375
+        275
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SettingsPersistence
+        SettingsSerializer
       </ComponentName>
       <X>
-        875
+        575
       </X>
       <X>
-        300
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        UrlParam
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        300
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        UrlParamGui
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        450
+        400
       </X>
     </Element>
   </PositionMap>

@@ -18,22 +18,54 @@
   <ElementsList count="4">
     <Element>
       <Id>
-        ModelBinder
+        ModelDialogGui
       </Id>
       <PackageId>
-        BasePck
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        ModelBinder
+        ModelDialogGui
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              DialogIconPath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              IconPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DialogTitle
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              Title
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Model
@@ -55,10 +87,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Observers
+              ModelEditor
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
               
@@ -67,11 +99,28 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
-                <Value>
-                  UrlParamGui
-                </Value>
-              </Values>
+              <Value>
+                UrlParamGui
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WorkingDataFactory
+            </Id>
+            <Type>
+              icomp::CFactoryAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                UrlParam
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -94,7 +143,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -144,6 +193,22 @@
               <Value>
                 UrlParam
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RootKey
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              SettingsRootKey
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -227,7 +292,7 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="5">
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         imod::IModel
@@ -242,6 +307,14 @@
       </InterfaceId>
       <ComponentId>
         UrlParam
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IDialog
+      </InterfaceId>
+      <ComponentId>
+        ModelDialogGui
       </ComponentId>
     </Interface>
     <Interface>

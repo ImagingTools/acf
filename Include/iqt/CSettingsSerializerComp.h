@@ -28,7 +28,8 @@ public:
 
 	I_BEGIN_COMPONENT(CSettingsSerializerComp)
 		I_REGISTER_INTERFACE(iser::IFileLoader)
-		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo")
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
+		I_ASSIGN(m_rootKeyAttrPtr, "RootKey", "The root key in the file/registry for the serialized object", false, "Object");
 	I_END_COMPONENT
 
 	// reimplemented (iser::IFileLoader)
@@ -44,6 +45,7 @@ public:
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
+	I_ATTR(istd::CString, m_rootKeyAttrPtr);
 };
 	  
 

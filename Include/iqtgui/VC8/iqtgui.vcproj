@@ -217,6 +217,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDialogGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDockWidgetGuiComp.cpp"
 				>
 			</File>
@@ -348,6 +352,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDialogGuiComp.h"
 				>
 			</File>
 			<File
