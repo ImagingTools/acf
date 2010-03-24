@@ -41,6 +41,7 @@ I_EXPORT_COMPONENT(LoginGui, "Gui used to user login", "User Login Qt GUI");
 I_EXPORT_COMPONENT(SimpleMainGui, "Simple UI for a main window based application", "Qt GUI");
 I_EXPORT_COMPONENT(DialogGui, "Dialog wrapper of an UI component", "Qt GUI Dialog");
 I_EXPORT_COMPONENT(ModelDialogGui, "Dialog based model editor", "Qt GUI Model Editor Dialog");
+I_EXPORT_COMPONENT(StatusBarWidget, "Status bar widget", "Qt GUI Status Bar Widget Main Window");
 
 I_EXPORT_COMPONENT(FileNameParamGui, "File acquisition parameter editor", "Model Observer File Acquisition Snap Camera Parameter Editor GUI Qt");
 I_EXPORT_COMPONENT(ComposedParamsSetGui, "Allow to edit set of parameter using simple model observer GUI", "Model Observer Parameter Set Editor GUI Qt");

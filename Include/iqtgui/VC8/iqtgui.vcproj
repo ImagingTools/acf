@@ -313,6 +313,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStatusBarWidgetComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CTabbedMultiViewGuiComp.cpp"
 				>
 			</File>
@@ -442,6 +446,10 @@
 			</File>
 			<File
 				RelativePath="..\CSplashScreenGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CStatusBarWidgetComp.h"
 				>
 			</File>
 			<File

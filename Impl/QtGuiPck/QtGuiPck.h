@@ -23,6 +23,7 @@
 #include "iqtgui/CSimpleMainWindowGuiComp.h"
 #include "iqtgui/CDialogGuiComp.h"
 #include "iqtgui/CModelDialogGuiComp.h"
+#include "iqtgui/CStatusBarWidgetComp.h"
 
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
@@ -64,6 +65,7 @@ typedef iqtgui::CLoginGuiComp LoginGui;
 typedef iqtgui::CSimpleMainWindowGuiComp SimpleMainGui;
 typedef iqtgui::CDialogGuiComp DialogGui;
 typedef iqtgui::CModelDialogGuiComp ModelDialogGui;
+typedef iqtgui::CStatusBarWidgetComp StatusBarWidget;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CParamsManagerGuiComp ParamsManagerGui;
