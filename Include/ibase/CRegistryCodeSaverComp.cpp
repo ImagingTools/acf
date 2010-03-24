@@ -757,7 +757,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 					NextLine(stream);
 					stream << "// create and set attribute value for '" << attributeId << "'";
 					if (attrInfoPtr != NULL){
-						std::string attributeInfoName = "info" + attributeId + "Ptr";
+						std::string attributeInfoName = "attrInfo" + attributeId + "Ptr";
 
 						bool isAttributeValid = attrInfoPtr->attributePtr.IsValid();
 
