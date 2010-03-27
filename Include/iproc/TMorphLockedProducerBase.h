@@ -8,9 +8,6 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-
-
-// IACF includes
 #include "iproc/TILockedProducer.h"
 
 

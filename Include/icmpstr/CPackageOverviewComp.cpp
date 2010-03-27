@@ -389,6 +389,7 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const std::stri
 	return rootInfo;
 }
 
+
 // reimplemented (QObject)
 
 bool CPackageOverviewComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)

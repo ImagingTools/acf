@@ -61,14 +61,6 @@ protected:
 
 	void GenerateComponentTree();
 
-	/**
-		Generate tree items for some package.
-	*/
-	void GeneratePackageTree(
-				const std::string& packageId,
-				const icomp::IComponentStaticInfo& packageInfo,
-				const QString& filter,
-				QTreeWidgetItem& root);
 	bool IsInterfaceSupportedByComponent(const istd::CClassInfo& interfaceInfo, const QTreeWidgetItem& item) const;
 
 	/**

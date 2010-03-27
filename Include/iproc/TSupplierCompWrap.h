@@ -21,7 +21,7 @@
 #include "isys/ITimer.h"
 
 
-// IACF includes
+// ACF includes
 #include "iproc/ISupplier.h"
 
 
