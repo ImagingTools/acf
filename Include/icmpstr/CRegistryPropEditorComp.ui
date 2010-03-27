@@ -46,6 +46,14 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="CategoryGroupBox">
+     <property name="title">
+      <string>Categories</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5"/>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="title">
       <string>Overview</string>

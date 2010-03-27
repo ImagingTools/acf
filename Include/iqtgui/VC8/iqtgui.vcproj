@@ -213,6 +213,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCheckableComboBox.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedGuiComp.cpp"
 				>
 			</File>
@@ -352,6 +356,10 @@
 			</File>
 			<File
 				RelativePath="..\CApplicationComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCheckableComboBox.h"
 				>
 			</File>
 			<File
@@ -564,7 +572,15 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\CCheckableComboBox.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CAboutWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CCheckableComboBox.cpp"
 				>
 			</File>
 			<File

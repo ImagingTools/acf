@@ -6,6 +6,7 @@
 #include "icomp/IRegistry.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include "iqtgui/CCheckableComboBox.h"
 
 #include "icmpstr/icmpstr.h"
 
@@ -36,9 +37,17 @@ public:
 protected slots:
 	void on_DescriptionEdit_editingFinished();
 	void on_KeywordsEdit_editingFinished();
+	void OnCategoriesChanged(const QStringList& categories);
 
 private:
 	void CreateOverview();
+
+	QStringList GetCategoryStringList(int category) const;
+
+	typedef QMap<int, QString> CategoriesMap;
+	CategoriesMap m_categoriesMap;
+
+	iqtgui::CCheckableComboBox* m_categoryComboBox;
 };
 
 

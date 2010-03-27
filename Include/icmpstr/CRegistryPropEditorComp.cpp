@@ -26,6 +26,7 @@ void CRegistryPropEditorComp::UpdateEditor(int /*updateFlags*/)
 
 	DescriptionEdit->setText(iqt::GetQString(registryPtr->GetDescription()));
 	KeywordsEdit->setText(iqt::GetQString(registryPtr->GetKeywords()));
+	m_categoryComboBox->SetItemsChecked(GetCategoryStringList(registryPtr->GetCategory()));
 
 	CreateOverview();
 }
@@ -44,6 +45,30 @@ void CRegistryPropEditorComp::OnGuiCreated()
 
 	OverviewTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 	OverviewTree->setStyleSheet("QTreeView {background: palette(window)} QTreeView::branch {background: palette(window);} QTreeView::item {min-height: 25px}");
+
+	m_categoryComboBox = new iqtgui::CCheckableComboBox(CategoryGroupBox);
+	QLayout* groubBoxLayout = CategoryGroupBox->layout();
+	if (groubBoxLayout != NULL){
+		groubBoxLayout->addWidget(m_categoryComboBox);
+	}
+
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_APPLICATION] = "Application";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_MULTIMEDIA] = "Multimedia";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_DATA] = "Data";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_PERSISTENCY] = "Persistency";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_GUI] = "Gui";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION] = "Data Presentation";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_DATA_PROCESSING] = "Data Proceassing";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_APPLICATION] = "Application";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_SERVICE] = "Service";
+
+	for (		CategoriesMap::const_iterator iterator = m_categoriesMap.begin();
+				iterator != m_categoriesMap.end();
+				iterator++){		
+		m_categoryComboBox->addItem(iterator.value(), false);
+	}
+
+	connect(m_categoryComboBox, SIGNAL(EmitActivatedItems(const QStringList&)), this, SLOT(OnCategoriesChanged(const QStringList&)));
 }
 
 
@@ -77,6 +102,29 @@ void CRegistryPropEditorComp::on_KeywordsEdit_editingFinished()
 		}
 	}
 }
+
+
+void CRegistryPropEditorComp::OnCategoriesChanged(const QStringList& categories)
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		int category = icomp::IComponentStaticInfo::CCT_NONE;
+
+		for (int index = 0; index < categories.count(); index++){
+			int singleCategory = m_categoriesMap.key(categories[index], -1);
+			if (singleCategory != -1){
+				category |= singleCategory;
+			}
+		}
+
+		if (category != registryPtr->GetCategory()){
+			istd::CChangeNotifier notifier(registryPtr);
+
+			registryPtr->SetCategory(category);
+		}
+	}
+}
+
 
 
 
@@ -136,6 +184,23 @@ void CRegistryPropEditorComp::CreateOverview()
 		}
 	}
 }
+
+
+QStringList CRegistryPropEditorComp::GetCategoryStringList(int category) const
+{
+	QStringList retVal;
+
+	for (		CategoriesMap::const_iterator iterator = m_categoriesMap.begin();
+				iterator != m_categoriesMap.end();
+				iterator++){		
+		if ((iterator.key() & category) != 0){
+			retVal.push_back(iterator.value());
+		}
+	}
+
+	return retVal;
+}
+
 
 
 } // namespace icmpstr
