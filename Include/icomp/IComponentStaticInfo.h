@@ -105,7 +105,7 @@ public:
 		/**
 			Component realize a service. 
 		*/
-		CCT_SERVICE = 128
+		CCT_SERVICE = 256
 	};
 
 

@@ -59,7 +59,7 @@ void CRegistryPropEditorComp::OnGuiCreated()
 	m_categoriesMap[icomp::IComponentStaticInfo::CCT_GUI] = "Gui";
 	m_categoriesMap[icomp::IComponentStaticInfo::CCT_DATA_PRESENTATION] = "Data Presentation";
 	m_categoriesMap[icomp::IComponentStaticInfo::CCT_DATA_PROCESSING] = "Data Proceassing";
-	m_categoriesMap[icomp::IComponentStaticInfo::CCT_APPLICATION] = "Application";
+	m_categoriesMap[icomp::IComponentStaticInfo::CCT_APPLICATION_LOGIC] = "Application Logic";
 	m_categoriesMap[icomp::IComponentStaticInfo::CCT_SERVICE] = "Service";
 
 	for (		CategoriesMap::const_iterator iterator = m_categoriesMap.begin();
