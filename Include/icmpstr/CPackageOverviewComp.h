@@ -136,7 +136,7 @@ private:
 	QIcon m_compositeComponentIcon;
 	QIcon m_mixedComponentIcon;
 
-	typedef std::map<int, istd::TDelPtr<QTreeWidget> > CategoryWidgetsMap;
+	typedef std::map<int, QTreeWidget*> CategoryWidgetsMap;
 	CategoryWidgetsMap m_categoryWidgetsMap;
 
 	friend class CItemDelegate;

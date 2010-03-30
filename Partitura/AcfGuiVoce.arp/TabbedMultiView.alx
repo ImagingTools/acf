@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1426
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="1">
+    <Element>
+      <ComponentName>
+        TabbedMultiViewGui
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        400
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>

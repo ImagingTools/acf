@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1009
+          1426
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         CopyApp
       </ComponentName>
       <X>
-        -195
+        375
       </X>
       <X>
-        2
+        400
       </X>
     </Element>
     <Element>
@@ -32,10 +32,10 @@
         FileInfoCopy
       </ComponentName>
       <X>
-        317
+        625
       </X>
       <X>
-        0
+        400
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         Log
       </ComponentName>
       <X>
-        315
+        625
       </X>
       <X>
-        153
+        575
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         VersionInfo
       </ComponentName>
       <X>
-        281
+        625
       </X>
       <X>
-        -172
+        225
       </X>
     </Element>
   </PositionMap>

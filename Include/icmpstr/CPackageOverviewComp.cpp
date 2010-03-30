@@ -323,6 +323,9 @@ void CPackageOverviewComp::GenerateComponentToolBox()
 	}
 
 	while(CategoryToolBox->count() > 0){
+		QWidget* widgetPtr = CategoryToolBox->widget(0);
+		widgetPtr->deleteLater();
+
 		CategoryToolBox->removeItem(0);
 	}
 
@@ -359,23 +362,23 @@ void CPackageOverviewComp::GenerateComponentToolBox()
 					continue;
 				}
 
-				istd::TDelPtr<QTreeWidget> treeWidgetPtr(new QTreeWidget(CategoryToolBox));
+				categoryWidgetPtr = new QTreeWidget(CategoryToolBox);
 				if (m_envManagerCompPtr.IsValid()){
-					treeWidgetPtr->setItemDelegate(new CItemDelegate(*m_envManagerCompPtr.GetPtr()));
+					categoryWidgetPtr->setItemDelegate(new CItemDelegate(*m_envManagerCompPtr.GetPtr()));
 				}
 
-				treeWidgetPtr->header()->setResizeMode(0, QHeaderView::Stretch);
-				treeWidgetPtr->header()->hide();
-				treeWidgetPtr->setIndentation(15);
-				treeWidgetPtr->viewport()->installEventFilter(this);
+				categoryWidgetPtr->header()->setResizeMode(0, QHeaderView::Stretch);
+				categoryWidgetPtr->header()->hide();
+				categoryWidgetPtr->setFrameShape(QFrame::NoFrame);
+				categoryWidgetPtr->setRootIsDecorated(false);
+				categoryWidgetPtr->viewport()->installEventFilter(this);
 
-				CategoryToolBox->addItem(treeWidgetPtr.GetPtr(), categoryNames[0]);
-				categoryWidgetPtr = treeWidgetPtr.GetPtr();
+				CategoryToolBox->addItem(categoryWidgetPtr, categoryNames[0]);
 
-				m_categoryWidgetsMap[singleCategory] = treeWidgetPtr.PopPtr();
+				m_categoryWidgetsMap[singleCategory] = categoryWidgetPtr;
 			}
 			else{
-				categoryWidgetPtr = categoryWidgetIter->second.GetPtr();
+				categoryWidgetPtr = categoryWidgetIter->second;
 			}
 
 			I_ASSERT(categoryWidgetPtr != NULL);

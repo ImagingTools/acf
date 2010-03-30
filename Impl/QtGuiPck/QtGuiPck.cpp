@@ -52,7 +52,7 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 		IconProvider,
-		"Icon provider",
+		"Icon set provider",
 		"Icons Qt GUI",
 		IComponentStaticInfo::CCT_SERVICE); 
 
@@ -100,7 +100,7 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			TabbedMultiViewGui,
-			"Multi view editor component",
+			"Tabbed view container for different observer widgets",
 			"Qt Widget GUI Observer View Model",
 			IComponentStaticInfo::CCT_GUI | IComponentStaticInfo::CCT_DATA_PRESENTATION);
 
@@ -142,7 +142,7 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			FileNameParamGui,
-			"File acquisition parameter editor",
+			"File name parameter editor",
 			"Model Observer File Directory Url Parameter Editor GUI Qt",
 			IComponentStaticInfo::CCT_GUI | IComponentStaticInfo::CCT_DATA_PRESENTATION);
 

@@ -15,16 +15,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="1">
     <Element>
       <Id>
-        CopyApp
+        TabbedMultiViewGui
       </Id>
       <PackageId>
-        BasePck
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        CopyApp
+        TabbedMultiViewGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,94 +33,16 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
-              FileCopy
+              CornerWidget
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                FileInfoCopy
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              NeedExplicitInput
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FileInfoCopy
-      </Id>
-      <PackageId>
-        QtPck
-      </PackageId>
-      <ComponentId>
-        FileInfoCopy
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              VersionInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                VersionInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicensePath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              LicensePath
+              CornerWidget
             </ExportId>
             <Data>
               <IsEnabled>
@@ -130,72 +52,45 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Log
+              Editors
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              
+              SlaveGuiComponents
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Log
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseSubstitution
+              Guis
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::CMultiReferenceAttribute
             </Type>
             <ExportId>
-              UseSubstitution
+              SlaveGuiComponents
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                true
-              </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Log
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ConsoleLog
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              MinCategory
+              IconSize
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
             </Type>
             <ExportId>
-              LogMinCategory
+              IconSize
             </ExportId>
             <Data>
               <IsEnabled>
@@ -205,13 +100,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ShowDots
+              IconsProvider
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              LogShowDots
+              IconsProvider
             </ExportId>
             <Data>
               <IsEnabled>
@@ -221,13 +116,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              UseTimeStamp
+              Names
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              LogTimeStamp
+              Names
             </ExportId>
             <Data>
               <IsEnabled>
@@ -235,27 +130,38 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        VersionInfo
-      </Id>
-      <PackageId>
-        AcfVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
+          <AttributeInfo>
+            <Id>
+              TabBarOrientation
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              TabOrientation
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseTriangularTabs
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              UseTriangularTabs
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -263,38 +169,38 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        ibase::IApplication
+        ibase::ICommandsProvider
       </InterfaceId>
       <ComponentId>
-        CopyApp
+        TabbedMultiViewGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IApplicationInfo
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
-        VersionInfo
+        TabbedMultiViewGui
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        iser::IVersionInfo
+        iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        VersionInfo
+        TabbedMultiViewGui
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Replacer for marked text file content
+    Tabbed view container for different observer widgets
   </Description>
   <Keywords>
-    Substituition Copy File Text
+    Observer GUI Model View
   </Keywords>
   <Category>
-    64
+    48
   </Category>
 </Acf>
