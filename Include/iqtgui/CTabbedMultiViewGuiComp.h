@@ -25,8 +25,7 @@ namespace iqtgui
 */
 class CTabbedMultiViewGuiComp:
 			public iqtgui::CTabContainerGuiComp,
-			public imod::CSingleModelObserverBase,
-			virtual public ibase::ICommandsProvider
+			public imod::CSingleModelObserverBase
 {
 	Q_OBJECT
 
@@ -36,7 +35,6 @@ public:
 
 	I_BEGIN_COMPONENT(CTabbedMultiViewGuiComp)
 		I_REGISTER_INTERFACE(imod::IObserver)
-		I_REGISTER_INTERFACE(ibase::ICommandsProvider)
 		I_ASSIGN_MULTI_0(m_observersCompPtr, "Editors", "Editors", true)
 	I_END_COMPONENT
 
@@ -45,13 +43,8 @@ protected:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
-	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
-
 private:
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
-
-	mutable iqtgui::CHierarchicalCommand m_commands;
 };
 
 

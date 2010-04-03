@@ -47,9 +47,9 @@ I_EXPORT_COMPONENT(
 			"Log Info List Qt GUI");
 
 I_EXPORT_COMPONENT(
-		IconProvider,
-		"Icon set provider",
-		"Icons Qt GUI");
+			IconProvider,
+			"Icon set provider",
+			II_META_DESCRIPTION(I_SERVICE, "Icons Qt GUI"));
 
 I_EXPORT_COMPONENT(
 			FileDialogLoader,
@@ -120,6 +120,11 @@ I_EXPORT_COMPONENT(
 			StatusBarWidget,
 			"Status bar widget",
 			"Qt GUI Status Bar Widget Main Window");
+
+I_EXPORT_COMPONENT(
+			CommandsBinder,
+			"Component for binding of several commands provider into a single one",
+			II_META_DESCRIPTION(I_SERVICE, "Qt GUI Menu Action Command"));
 
 I_EXPORT_COMPONENT(
 			FileNameParamGui,

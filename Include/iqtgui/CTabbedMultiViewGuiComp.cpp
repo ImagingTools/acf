@@ -42,27 +42,6 @@ bool CTabbedMultiViewGuiComp::OnDetached(imod::IModel* modelPtr)
 }
 
 
-// reimplemented (ibase::ICommandsProvider)
-
-const ibase::IHierarchicalCommand* CTabbedMultiViewGuiComp::GetCommands() const
-{
-	if (m_observersCompPtr.IsValid()){
-		int observerCount = m_observersCompPtr.GetCount();
-		for (int observerIndex = 0; observerIndex < observerCount; observerIndex++){
-			ibase::ICommandsProvider* commandsProviderPtr = CompCastPtr<ibase::ICommandsProvider>(m_observersCompPtr[observerIndex]);
-			if (commandsProviderPtr != NULL){
-				const ibase::IHierarchicalCommand* commandPtr = commandsProviderPtr->GetCommands();
-				if (commandPtr != NULL){
-					m_commands.JoinLinkFrom(commandPtr);
-				}
-			}
-		}
-	}
-
-	return &m_commands;
-}
-
-
 } // namespace iqtgui
 
 

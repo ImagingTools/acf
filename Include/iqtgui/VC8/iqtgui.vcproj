@@ -217,6 +217,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCommandsBinderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedGuiComp.cpp"
 				>
 			</File>
@@ -360,6 +364,10 @@
 			</File>
 			<File
 				RelativePath="..\CCheckableComboBox.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCommandsBinderComp.h"
 				>
 			</File>
 			<File
