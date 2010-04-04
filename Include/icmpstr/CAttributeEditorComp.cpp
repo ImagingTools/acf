@@ -313,7 +313,7 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 		I_DWORD elementFlags = elementPtr->GetElementFlags();
 		AutoInstanceCB->setChecked((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0);
 
-		CreateComponentsTree(elementId, *infoPtr, *componentRootPtr);
+		CreateExportedComponentsTree(elementId, *infoPtr, *componentRootPtr);
 
 		ComponentsTree->addTopLevelItem(componentRootPtr);
 		
@@ -662,7 +662,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 }
 
 
-void CAttributeEditorComp::CreateComponentsTree(
+void CAttributeEditorComp::CreateExportedComponentsTree(
 			const std::string& elementId,
 			const icomp::IComponentStaticInfo& elementStaticInfo,
 			QTreeWidgetItem& rootItem) const
@@ -686,7 +686,7 @@ void CAttributeEditorComp::CreateComponentsTree(
 
 		const icomp::IComponentStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubcomponentInfo(subcomponentId);
 		if (subcomponentInfoPtr != NULL){
-			CreateComponentsTree(fullId, *subcomponentInfoPtr, *itemPtr);
+			CreateExportedComponentsTree(fullId, *subcomponentInfoPtr, *itemPtr);
 		}
 
 		rootItem.addChild(itemPtr);

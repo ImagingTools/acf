@@ -121,7 +121,7 @@ protected:
 				QString& text,
 				int& meaning);
 
-	void CreateComponentsTree(
+	void CreateExportedComponentsTree(
 				const std::string& elementId,
 				const icomp::IComponentStaticInfo& elementStaticInfo,
 				QTreeWidgetItem& rootItem) const;

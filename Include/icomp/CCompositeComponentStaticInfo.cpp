@@ -12,7 +12,7 @@ namespace icomp
 
 CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 			const IRegistry& registry,
-			const icomp::IMetaInfoManager& manager)
+			const icomp::IComponentEnvironmentManager& manager)
 {
 	// register exported interfaces
 	const IRegistry::ExportedInterfacesMap& interfacesMap = registry.GetExportedInterfacesMap();
@@ -31,7 +31,8 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 				++subcomponentIter){
 		const std::string& subcomponentId = subcomponentIter->first;
 		const std::string& elementId = subcomponentIter->second;
-		const IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
+
+		const IRegistry::ElementInfo* elementInfoPtr = GetElementInfoFromRegistry(registry, elementId, manager);
 		if (elementInfoPtr == NULL){
 			continue;
 		}
@@ -120,6 +121,39 @@ const istd::CString& CCompositeComponentStaticInfo::GetDescription() const
 const istd::CString& CCompositeComponentStaticInfo::GetKeywords() const
 {
 	return m_keywords;
+}
+
+
+// protected methods
+
+const IRegistry::ElementInfo* CCompositeComponentStaticInfo::GetElementInfoFromRegistry(
+			const IRegistry& registry,
+			const std::string& elementId,
+			const icomp::IComponentEnvironmentManager& manager) const
+{
+	std::string baseId;
+	std::string subId;
+	if (istd::CIdManipBase::SplitId(elementId, baseId, subId)){
+		const IRegistry::ElementInfo* subElementInfoPtr = registry.GetElementInfo(baseId);
+		if (subElementInfoPtr != NULL){
+			const icomp::IRegistry* subRegistryPtr = manager.GetRegistry(subElementInfoPtr->address);
+			if (subRegistryPtr != NULL){
+				// get right component path for exported components:
+				const IRegistry::ExportedComponentsMap& exportedComponentsMap = subRegistryPtr->GetExportedComponentsMap();
+				const IRegistry::ExportedComponentsMap::const_iterator foundComponentExportIter = exportedComponentsMap.find(subId);
+				if (foundComponentExportIter != exportedComponentsMap.end()){
+					subId = foundComponentExportIter->second;
+				}
+		
+				return GetElementInfoFromRegistry(*subRegistryPtr, subId, manager);
+			}
+		}
+	}
+	else{
+		return registry.GetElementInfo(elementId);
+	}
+
+	return NULL;
 }
 
 
