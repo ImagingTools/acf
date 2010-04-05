@@ -220,7 +220,7 @@ CString CString::ToLower() const
 }
 
 
-std::vector<CString> CString::Split(const CString& separator, bool caseSensitive)
+std::vector<CString> CString::Split(const CString& separator, bool caseSensitive, bool ignoreEmpty)
 {
 	std::vector<CString> retVal;
 
@@ -230,7 +230,9 @@ std::vector<CString> CString::Split(const CString& separator, bool caseSensitive
 	size_type foundPos = 0;
 
 	while ((foundPos = strToCompare.find_first_of(sepToCompare, offset)) != npos){
-		retVal.push_back(substr(offset, foundPos - offset));
+		if (!ignoreEmpty || (foundPos > offset)){
+			retVal.push_back(substr(offset, foundPos - offset));
+		}
 
 		I_ASSERT(foundPos >= offset);
 		offset = foundPos + sepToCompare.size();

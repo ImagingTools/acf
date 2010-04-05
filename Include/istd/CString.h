@@ -79,7 +79,7 @@ public:
 
 	CString ToUpper() const;
 	CString ToLower() const;
-	std::vector<CString> Split(const CString& separator, bool caseSensitive = true);
+	std::vector<CString> Split(const CString& separator, bool caseSensitive = true, bool ignoreEmpty = false);
 
 	bool IsEqualNoCase(const CString& str) const;
 

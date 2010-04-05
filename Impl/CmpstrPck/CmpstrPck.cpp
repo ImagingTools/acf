@@ -25,52 +25,55 @@ using namespace icomp;
 
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
-I_EXPORT_PACKAGE("Cmpstr", "Compositor package", "Qt Compositor Tool ACF");
+I_EXPORT_PACKAGE(
+			"Cmpstr",
+			"Compositor package",
+			IM_PROJECT("ACF") IM_TAG("Compositor Qt") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			AttributeEditor,
 			"GUI used to edit attributes",
-			"Compositor Observer Editor Attributes Qt GUI");
+			"Observer Attributes Qt" IM_TAG("GUI Editor"));
 
 I_EXPORT_COMPONENT(
 			PackageOverview,
 			"GUI showing all packages",
-			"Compositor Observer Packages Qt GUI");
+			"Observer Packages" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			RegistryLoader,
 			"Loader for registries including component layout in *.alx files",
-			"Compositor Registry Loader Serializer Layout Components");
+			"Registry Loader Serializer Layout Components" IM_TAG("Loader"));
 
 I_EXPORT_COMPONENT(
 			RegistryPreview,
 			"Preview of registry object in separated application context",
-			"Compositor Registry Preview ACF Application");
+			"Registry Preview Application" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			ComponentHelpFileProvider,
 			"Provide file path of html help for component using its address",
-			"Compositor Help File Provider Component Address Qt");
+			"Help File Provider Component Address" IM_TAG("Help"));
 
 I_EXPORT_COMPONENT(
 			VisualRegistry,
 			"Model of ACF registry with additional visual elements designed for Compositor", 
-			"Components ARX Model ACF Registry Visual Compositor");
+			"Components ARX Registry Visual" IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
 			VisualRegistryScenographer,
 			"Visual registry editor",
-			"Components ACF Registry Visual Compositor Observer Qt GUI");
+			"Components Registry Visual Observer" IM_TAG("GUI Editor"));
 
 I_EXPORT_COMPONENT(
 			RegistryConsistInfo,
 			"Provides additional information about registries, its elements and attributes",
-			"Registry Element Attribute Consistency Check Qt Compositor");
+			"Registry Element Attribute Consistency Check");
 
 I_EXPORT_COMPONENT(
 			RegistryPropEditor,
 			"Allows to edit global registry properties",
-			"Registry Editor Qt GUI Compositor Description Keywords");
+			"Registry Description Keywords" IM_TAG("GUI Editor"));
 
 
 } // namespace CmpstrPck

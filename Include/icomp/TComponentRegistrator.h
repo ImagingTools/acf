@@ -23,7 +23,7 @@ public:
 
 	TComponentRegistrator(
 				const std::string& componentId,
-				icomp::IComponentStaticInfo& staticInfo,
+				icomp::IComponentStaticInfo& packageStaticInfo,
 				const istd::CString& description,
 				const istd::CString& keywords);
 
@@ -43,14 +43,18 @@ private:
 template <class Component>
 TComponentRegistrator<Component>::TComponentRegistrator(
 			const std::string& componentId,
-			icomp::IComponentStaticInfo& staticInfo,
+			icomp::IComponentStaticInfo& packageStaticInfo,
 			const istd::CString& description,
 			const istd::CString& keywords)
 :	BaseClass(&Component::InitStaticInfo(NULL)),
 	m_description(description),
 	m_keywords(keywords)
 {
-	staticInfo.RegisterSubcomponentInfo(componentId, this);
+	packageStaticInfo.RegisterSubcomponentInfo(componentId, this);
+
+	m_keywords += " ";
+
+	m_keywords += packageStaticInfo.GetKeywords();
 }
 
 

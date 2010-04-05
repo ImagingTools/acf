@@ -73,9 +73,13 @@ typedef void (*RegisterServicesFunc)(const istd::IServicesProvider*);
 #define I_GUI "GUI"
 #define I_DATA_VISUALIZATION "Visualization"
 #define I_PACKAGE "Package"
-#define I_IMAGINGTOOLS "ImagingTools"
-#define I_META_DESCRIPTION(category, tags, company, authors) "Category:"##category##" Tags:"##tags##" Company:"##company##" Authors:"##authors
-#define II_META_DESCRIPTION(category, tags) I_META_DESCRIPTION(category, tags, I_IMAGINGTOOLS, I_IMAGINGTOOLS)
+
+// defines used to simplify using of meta description
+#define IM_CATEGORY(keywords) " Category='" ##keywords "' "
+#define IM_TAG(keywords) " Tag='" ##keywords "' "
+#define IM_COMPANY(keywords) " Company='" ##keywords "' "
+#define IM_AUTHOR(keywords) " Author='" ##keywords "' "
+#define IM_PROJECT(keywords) " Project='" ##keywords "' "
 
 
 } // namespace icomp

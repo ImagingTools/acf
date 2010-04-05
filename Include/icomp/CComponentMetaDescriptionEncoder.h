@@ -24,35 +24,19 @@ public:
 	/**
 		Get meta keys using in the meta-description.
 	*/
-	istd::CStringList GetMetaKeys() const;
+	const istd::CStringList& GetMetaKeys() const;
 
 	/**
 		Get value list for the given key.
 	*/
-	istd::CStringList GetValues(const istd::CString& key = istd::CString()) const;
-
-	/**
-		Set meta values for the given key.		
-	*/
-	void SetValues(const istd::CString& key, const istd::CStringList& values);
-
-	/**
-		Get full meta description text.
-	*/
-	istd::CString GetMetaDescription() const;
-
-private:
-	void CalculateMetaValuesMap();
-
-	static void RemoveUnusedCharacters(istd::CString& string, const istd::CString& characters);
-	static istd::CStringList SplitString(istd::CString& string);
+	const istd::CStringList& GetValues(const istd::CString& key = istd::CString()) const;
 
 private:
 	typedef std::map<istd::CString, istd::CStringList> MetaValuesMap;
 
 	MetaValuesMap m_metaValuesMap;
-
-	istd::CString m_metaDescription;
+	istd::CStringList m_metaKeys;
+	istd::CStringList m_keywords;
 };
 
 

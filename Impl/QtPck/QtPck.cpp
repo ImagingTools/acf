@@ -24,12 +24,15 @@ using namespace icomp;
 
 I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 
-I_EXPORT_PACKAGE("Acf/Qt/Base", "Standard Qt package", "Qt Standard");
+I_EXPORT_PACKAGE(
+			"Acf/Qt/Base",
+			"Standard Qt package",
+			IM_PROJECT("ACF") IM_TAG("Qt Standard Base") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			PackagesLoader,
 			"Load and cache packages from files",
-			"Component Registry Cache Package Load File Configuration Components");
+			"Component Registry Cache Package Load File Configuration Components" IM_TAG("Loader"));
 
 I_EXPORT_COMPONENT(
 			RegistriesManager,
@@ -39,57 +42,57 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			Bitmap,
 			"QImage based bitmap implementation",
-			"QImage Image Bitmap Qt");
+			"QImage Bitmap" IM_TAG("Image Model"));
 
 I_EXPORT_COMPONENT(
 			BitmapSurface,
 			"QImage based bitmap implementation with surface extension",
-			"Sampled Function QImage Image Bitmap Qt Surface 3D");
+			"Sampled Function QImage Bitmap Surface" IM_TAG("Image Model 3D"));
 
 I_EXPORT_COMPONENT(
 			BitmapLoader,
 			"Loader loading bitmaps using Qt standard implementations",
-			"Image Bitmap Qt File Loader");
+			"Bitmap" IM_TAG("Image File Loader"));
 
 I_EXPORT_COMPONENT(
 			SettingsSerializer,
 			"Load and save objects using QSettings as storage",
-			"Qt QSettings Registry Serializer Loader Saver");
+			"QSettings Registry Serializer Saver" IM_TAG("Persistence Loader"));
 
 I_EXPORT_COMPONENT(
 			ApplicationSettingsProvider,
 			"Provider for the global application settings",
-			"Qt Settings QSettings Registry Saver");
+			"Settings QSettings Registry Saver" IM_TAG("Application Persistence"));
 
 I_EXPORT_COMPONENT(
 			IniSettingsProvider,
 			"Provider for the settings taken from INI file",
-			"Qt INI Settings QSettings Registry Saver");
+			"INI Settings QSettings Registry Saver" IM_TAG("Application Persistence"));
 
 I_EXPORT_COMPONENT(
 			FileInfoCopy,
 			"Copy file attaching some additional information like version and license",
-			"Qt Copy Move File Attach License Version Tags");
+			"Copy Move Attach License Version Tags" IM_TAG("File Processing"));
 
 I_EXPORT_COMPONENT(
 			CopyProcessor,
 			"Copy files from one directory to another one",
-			"Qt Copy File Dir Filter Installation Tool");
+			"Copy Dir Filter Installation Tool" IM_TAG("File Processing"));
 
 I_EXPORT_COMPONENT(
 			FileListProvider,
 			"Provide list of file synchronized with some directory",
-			"File List Provider Directory");
+			"List Provider Directory" IM_TAG("File"));
 
 I_EXPORT_COMPONENT(
 			ClipboardSerializer,
 			"Load and store objects from and to clipboard",
-			"System Clipboard Loader Serializer Qt Copy Paste");
+			"System Clipboard Serializer Copy Paste" IM_TAG("Loader"));
 
 I_EXPORT_COMPONENT(
 		ExtendedDocumentTemplate,
 		"Extended serialized document template",
-		"Serialized Document Template Qt");
+		"Serialized Template" IM_TAG("Document"));
 
 
 } // namespace QtPck

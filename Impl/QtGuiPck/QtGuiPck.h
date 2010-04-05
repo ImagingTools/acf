@@ -56,6 +56,7 @@ typedef iqtgui::CIconProviderComp IconProvider;
 typedef iqtgui::CFileDialogLoaderComp FileDialogLoader;
 typedef iqtgui::CDockWidgetGuiComp DockWidgetGui;
 typedef iqtgui::CToolBarWidgetGuiComp ToolBarWidgetGui;
+typedef iqtgui::CStatusBarWidgetComp StatusBarWidget;
 typedef iqtgui::CFreeWidgetGuiComp FreeWidgetGui;
 typedef iqtgui::CSelectionParamGuiComp SelectionParamGui;
 typedef iqtgui::CTabContainerGuiComp TabContainer;
@@ -66,7 +67,6 @@ typedef iqtgui::CLoginGuiComp LoginGui;
 typedef iqtgui::CSimpleMainWindowGuiComp SimpleMainGui;
 typedef iqtgui::CDialogGuiComp DialogGui;
 typedef iqtgui::CModelDialogGuiComp ModelDialogGui;
-typedef iqtgui::CStatusBarWidgetComp StatusBarWidget;
 typedef iqtgui::CCommandsBinderComp CommandsBinder;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
