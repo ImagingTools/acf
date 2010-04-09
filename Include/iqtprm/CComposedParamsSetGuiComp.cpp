@@ -100,12 +100,14 @@ bool CComposedParamsSetGuiComp::OnDetached(imod::IModel* modelPtr)
 
 void CComposedParamsSetGuiComp::OnGuiCreated()
 {
-	QLayout* layoutPtr = NULL;
-	if (*m_useHorizontalLayoutAttrPtr){
-		layoutPtr = new QHBoxLayout(ParamsFrame);
-	}
-	else{
-		layoutPtr = new QVBoxLayout(ParamsFrame);
+	QLayout* layoutPtr = ParamsFrame->layout();
+	if (layoutPtr == NULL){
+		if (*m_useHorizontalLayoutAttrPtr){
+			layoutPtr = new QHBoxLayout(ParamsFrame);
+		}
+		else{
+			layoutPtr = new QVBoxLayout(ParamsFrame);
+		}
 	}
 
 	if (!m_paramsLoaderCompPtr.IsValid()){
@@ -211,8 +213,6 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 
 void CComposedParamsSetGuiComp::OnGuiDestroyed()
 {
-//	ParamsFrame->destroy(false, true);
-
 	int elementsCount = m_guisCompPtr.GetCount();
 	for (int i = 0; i < elementsCount; ++i){
 		iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];

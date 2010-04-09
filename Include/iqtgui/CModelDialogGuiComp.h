@@ -22,7 +22,7 @@ public:
 	typedef iqtgui::CDialogGuiComp BaseClass;
 
 	I_BEGIN_COMPONENT(CModelDialogGuiComp)
-		I_ASSIGN(m_editorCompPtr, "ModelObserver", "Editor for the model data", true, "ModelObserver");
+		I_ASSIGN(m_editorCompPtr, "Gui", "Editor for the model data", true, "ModelObserver");
 		I_ASSIGN(m_modelCompPtr, "Model", "Model data", true, "Model");
 		I_ASSIGN(m_dataCompPtr, "Model", "Model data", true, "Model");
 		I_ASSIGN(m_workingModelFactoryCompPtr, "WorkingDataFactory", "Model factory using to create the working model data", true, "WorkingModelFactory");		

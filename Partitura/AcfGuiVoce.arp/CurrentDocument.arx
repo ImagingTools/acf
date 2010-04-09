@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1431
+          1441
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          169
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -221,7 +232,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        CurrentDocumentModel
+      </ExportedId>
+      <ComponentId>
+        CurrentDocumentModel
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Bridge to the current/active document in a MDI-Application
