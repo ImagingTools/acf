@@ -220,9 +220,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Hotfolder based workflow designer
+    File explorer dock widget
   </Description>
   <Keywords>
-    Hotfolder Workflow UI
+    Explorer Dock Main Window
   </Keywords>
 </Acf>

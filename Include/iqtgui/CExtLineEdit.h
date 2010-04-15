@@ -50,6 +50,11 @@ public:
 	virtual QString GetStartupText() const;
 
 	/**
+		Get editor text.
+	*/
+	virtual QString GetText() const;
+
+	/**
 		Set the icon, that will appeared on the left side of the line edit.
 	*/
 	void SetIcon(const QIcon& icon);

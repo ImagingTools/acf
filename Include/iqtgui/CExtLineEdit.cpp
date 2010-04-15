@@ -51,6 +51,18 @@ QString CExtLineEdit::GetStartupText() const
 }
 
 
+QString CExtLineEdit::GetText() const
+{
+	QString editText = text();
+
+	if (editText == m_startupText){
+		return QString();
+	}
+
+	return editText;
+}
+
+
 void CExtLineEdit::SetIcon(const QIcon& icon)
 {
 	if (!icon.isNull()){
@@ -173,15 +185,16 @@ void CExtLineEdit::UpdateLayout()
 
 void CExtLineEdit::UpdateStartupText()
 {
-	if (!m_startupText.isEmpty() && text().isEmpty()){
+	if (!m_startupText.isEmpty() && GetText().isEmpty() && !hasFocus()){
 		iqt::CSignalBlocker block(this);
 
 		setText(m_startupText);
+		setCursorPosition(0);
 
 		setStyleSheet(QString("QLineEdit[text=\"%1\"]\n{\n color: rgb(192, 192,192)\n}").arg(m_startupText));
 	}
 	else{
-		setStyleSheet(QString());	
+		setStyleSheet(QString());
 	}
 }
 

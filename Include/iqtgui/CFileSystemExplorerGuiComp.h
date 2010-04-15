@@ -9,6 +9,7 @@
 
 // ACF includes
 #include "iqtgui/TDesignerGuiCompBase.h"
+#include "iqtgui/CExtLineEdit.h"
 
 #include "iqtgui/Generated/ui_CFileSystemExplorerGuiComp.h"
 
@@ -37,12 +38,17 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
+private Q_SLOTS:
+	void OnFilterChanged();
+
 protected:
 	I_ATTR(istd::CString, m_fileFilterAttrPtr);
 	I_ATTR(bool, m_showFileTypeAttrPtr);
 	I_ATTR(bool, m_showFileModificationTimeAttrPtr);
 
 	QFileSystemModel m_fileSystemModel;
+
+	iqtgui::CExtLineEdit* m_filterEdit;
 };
 
 
