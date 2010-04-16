@@ -350,13 +350,6 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 		}
 	}
 
-	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
-		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
-		if (mainWindowComponentPtr != NULL){
-			AddMainComponent(mainWindowComponentPtr);
-		}
-	}
-
 	m_showToolBarsCommand.setChecked(true);
 
 	if (m_aboutGuiCompPtr.IsValid()){
@@ -375,6 +368,12 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 
 	SetupMainWindowComponents(*mainWindowPtr);
 
+	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsPtr.GetCount(); componentIndex++){
+		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsPtr[componentIndex];
+		if (mainWindowComponentPtr != NULL){
+			AddMainComponent(mainWindowComponentPtr);
+		}
+	}
 }
 
 
