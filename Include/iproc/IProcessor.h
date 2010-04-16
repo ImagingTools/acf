@@ -25,7 +25,8 @@ public:
 	/**
 		State of processing.
 	*/
-	enum ProcessorState{
+	enum ProcessorState
+	{
 		/**
 			Processing state is unknown or not initialized.
 		 */
@@ -47,7 +48,8 @@ public:
 	/**
 		Describe state of task.
 	 */
-	enum TaskState{
+	enum TaskState
+	{
 		/**
 			Task state is undefined.
 		 */
