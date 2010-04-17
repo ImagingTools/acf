@@ -53,6 +53,12 @@ public:
 	*/
 	Type* GetPtr();
 
+	template <class CastedType>
+	CastedType Cast() const
+	{
+		return dynamic_cast<CastedType>(GetPtr());
+	}
+
 	// operators
 	Type& operator*() const;
 	Type* operator->() const;

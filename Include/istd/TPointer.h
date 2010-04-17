@@ -45,6 +45,12 @@ public:
 	*/
 	Type& operator*() const;
 
+	template <class CastedType>
+	CastedType Cast() const
+	{
+		return dynamic_cast<CastedType>(GetPtr());
+	}
+
 	// operators
 	Type* operator->() const;
 	bool operator==(const TPointer<Type>& ptr) const;
