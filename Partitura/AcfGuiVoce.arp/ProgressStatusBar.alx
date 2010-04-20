@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1452
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          174
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        ProgressManagerGui
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        425
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ProgressStatus
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        300
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>
