@@ -32,12 +32,8 @@ public:
 	// reimplemented (iqtgui::IDialog)
 	virtual void Execute();
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 protected:
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> m_dialogPtr;
+	iqtgui::CGuiComponentDialog* CreateDialog() const;
 
 private:
 	I_REF(iqtgui::IGuiObject, m_guiCompPtr);

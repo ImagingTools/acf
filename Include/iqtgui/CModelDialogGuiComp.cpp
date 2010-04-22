@@ -25,11 +25,13 @@ void CModelDialogGuiComp::Execute()
 		return;
 	}
 
-	if (!m_dialogPtr.IsValid()){
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateDialog());
+	if (!dialogPtr.IsValid()){
 		return;
 	}
 
-	if (m_modelCompPtr->IsAttached(m_editorCompPtr.GetPtr())){
+	bool orignalModelAttached = m_modelCompPtr->IsAttached(m_editorCompPtr.GetPtr());
+	if (orignalModelAttached){
 		m_modelCompPtr->DetachObserver(m_editorCompPtr.GetPtr());
 	}
 
@@ -42,7 +44,7 @@ void CModelDialogGuiComp::Execute()
 			if (workingModelPtr != NULL){
 				bool isAttached = workingModelPtr->AttachObserver(m_editorCompPtr.GetPtr());
 				if (isAttached){
-					int retVal = m_dialogPtr->exec();
+					int retVal = dialogPtr->exec();
 
 					if (retVal == QDialog::Accepted){
 						m_dataCompPtr->CopyFrom(*m_workingDataPtr.GetPtr());
@@ -51,11 +53,15 @@ void CModelDialogGuiComp::Execute()
 					// re-attach the original data model to the editor:
 					workingModelPtr->DetachObserver(m_editorCompPtr.GetPtr());
 
-					m_modelCompPtr->AttachObserver(m_editorCompPtr.GetPtr());
+					if (orignalModelAttached){
+						m_modelCompPtr->AttachObserver(m_editorCompPtr.GetPtr());
+					}
 				}
 			}
 		}
 	}
+
+	m_workingDataPtr.Reset();
 }
 
 

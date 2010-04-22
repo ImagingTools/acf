@@ -15,43 +15,36 @@ namespace iqtgui
 
 void CDialogGuiComp::Execute()
 {
-	if (!m_dialogPtr.IsValid()){
-		return;
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateDialog());
+	if (dialogPtr.IsValid()){
+		dialogPtr->exec();
 	}
-
-	m_dialogPtr->exec();
 }
 
 
-// reimplemented (icomp::IComponent)
+// protected methods
 
-void CDialogGuiComp::OnComponentCreated()
+iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateDialog() const
 {
-	BaseClass::OnComponentCreated();
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr;
 
 	if (m_guiCompPtr.IsValid()){
-		m_dialogPtr.SetPtr(
+		dialogPtr.SetPtr(
 					new iqtgui::CGuiComponentDialog(
 								m_guiCompPtr.GetPtr(),
 								QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
 								true));
 
 		if (m_dialogTitleAttrPtr.IsValid()){
-			m_dialogPtr->setWindowTitle(iqt::GetQString(*m_dialogTitleAttrPtr));
+			dialogPtr->setWindowTitle(iqt::GetQString(*m_dialogTitleAttrPtr));
 		}
 
 		if (m_dialogIconPathAttrPtr.IsValid()){
-			m_dialogPtr->setWindowIcon(QIcon(iqt::GetQString(*m_dialogIconPathAttrPtr)));
+			dialogPtr->setWindowIcon(QIcon(iqt::GetQString(*m_dialogIconPathAttrPtr)));
 		}
 	}
-}
 
-
-void CDialogGuiComp::OnComponentDestroyed()
-{
-	m_dialogPtr.Reset();
-
-	BaseClass::OnComponentDestroyed();
+	return dialogPtr.PopPtr();
 }
 
 
