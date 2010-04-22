@@ -12,6 +12,8 @@
 #include "istd/TDelPtr.h"
 #include "istd/CClassInfo.h"
 
+#include "imod/CSingleModelObserverBase.h"
+
 #include "icomp/IMetaInfoManager.h"
 #include "icomp/IRegistryElement.h"
 
@@ -110,6 +112,8 @@ protected slots:
 	void on_AutoInstanceCB_toggled(bool checked);
 
 protected:
+	void UpdateSelectedAttr();
+
 	bool SetAttributeToItems(
 				const std::string& id,
 				const icomp::IAttributeStaticInfo& staticInfo,
@@ -142,7 +146,7 @@ private:
 	public:
 		typedef iqtgui::CItemDelegate BaseClass;
 
-		AttributeItemDelegate(CAttributeEditorComp& parent);
+		AttributeItemDelegate(CAttributeEditorComp* parentPtr);
 		
 		// reimplemented (QItemDelegate)
 		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -169,7 +173,21 @@ private:
 		CAttributeEditorComp& m_parent;
 	};
 
+	class RegistryObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		RegistryObserver(CAttributeEditorComp* parentPtr);
+
+	protected:
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CAttributeEditorComp& m_parent;
+	};
+
 	AttributeItemDelegate m_attributeItemDelegate;
+	RegistryObserver m_registryObserver;
 
 	typedef std::map<std::string, QString> AttributeTypesMap;
 	AttributeTypesMap m_attributeTypesMap;

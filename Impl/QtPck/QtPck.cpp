@@ -94,6 +94,10 @@ I_EXPORT_COMPONENT(
 		"Extended serialized document template",
 		"Serialized Template" IM_TAG("Document"));
 
+I_EXPORT_COMPONENT(
+		DoxygenHelpFileProvider,
+		"Provide html help file path converting class type using doxygen format",
+		"DoxyGen File Provider Document Html Description Class Interface Qt" IM_TAG("Help"));
 
 } // namespace QtPck
 

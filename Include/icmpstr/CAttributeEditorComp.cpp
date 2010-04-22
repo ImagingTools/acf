@@ -21,7 +21,8 @@ namespace icmpstr
 
 
 CAttributeEditorComp::CAttributeEditorComp()
-:	m_attributeItemDelegate(*this),
+:	m_attributeItemDelegate(this),
+	m_registryObserver(this),
 	m_lastRegistryModelPtr(NULL)
 {
 	m_attributeTypesMap[icomp::CBoolAttribute::GetTypeName()] = tr("Boolean");
@@ -167,19 +168,27 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 	}
 
 	icomp::IRegistry* registryPtr = GetRegistry();
-	if (m_registryPropObserverCompPtr.IsValid()){
-		imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(registryPtr);
-		if (registryModelPtr != m_lastRegistryModelPtr){
+	imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(registryPtr);
+	if (registryModelPtr != m_lastRegistryModelPtr){
+		if (m_registryObserver.IsModelAttached(m_lastRegistryModelPtr)){
+			m_lastRegistryModelPtr->DetachObserver(&m_registryObserver);
+		}
+
+		if (m_registryPropObserverCompPtr.IsValid()){
 			if (m_registryPropObserverCompPtr->IsModelAttached(m_lastRegistryModelPtr)){
 				m_lastRegistryModelPtr->DetachObserver(m_registryPropObserverCompPtr.GetPtr());
 			}
+		}
 
-			m_lastRegistryModelPtr = NULL;
+		if (registryModelPtr != NULL){
+			registryModelPtr->AttachObserver(&m_registryObserver);
 
-			if ((registryModelPtr != NULL) && registryModelPtr->AttachObserver(m_registryPropObserverCompPtr.GetPtr())){
-				m_lastRegistryModelPtr = registryModelPtr;
+			if (m_registryPropObserverCompPtr.IsValid()){
+				registryModelPtr->AttachObserver(m_registryPropObserverCompPtr.GetPtr());
 			}
 		}
+
+		m_lastRegistryModelPtr = registryModelPtr;
 	}
 
 	if (registryPtr == NULL){
@@ -205,139 +214,7 @@ void CAttributeEditorComp::UpdateEditor(int /*updateFlags*/)
 		ElementInfoTab->setVisible(true);
 	}
 
-	AttributeTree->clear();
-	InterfacesTree->clear();
-	ComponentsTree->clear();
-
-	const std::string& elementId = selectionInfoPtr->GetSelectedElementName();
-	QTreeWidgetItem* componentRootPtr = new QTreeWidgetItem();
-	componentRootPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
-	componentRootPtr->setText(NameColumn, tr("this"));
-	componentRootPtr->setData(ValueColumn, AttributeId, QString(elementId.c_str()));
-	componentRootPtr->setData(ValueColumn, AttributeMining, ComponentExport);
-	componentRootPtr->setText(ValueColumn, GetExportAliases(elementId).join(";"));
-
-	const icomp::IComponentStaticInfo* infoPtr = NULL;
-
-	QIcon icon;
-	const icomp::CComponentAddress* addressPtr = selectionInfoPtr->GetSelectedElementAddress();
-	if (addressPtr != NULL){
-		if (m_metaInfoManagerCompPtr.IsValid()){
-			infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(*addressPtr);
-		}
-
-		AddressLabel->setText(QString(addressPtr->GetPackageId().c_str()) + QString("/") + addressPtr->GetComponentId().c_str());
-		AddressLabel->setVisible(true);
-
-		if (m_consistInfoCompPtr.IsValid()){
-			icon = m_consistInfoCompPtr->GetComponentIcon(*addressPtr);
-		}
-	}
-	else{
-		AddressLabel->setVisible(false);
-	}
-
-	NameLabel->setText(elementId.c_str());
-
-	if (!icon.isNull()){
-		IconLabel->setPixmap(icon.pixmap(128));
-		IconLabel->setVisible(true);
-	}
-	else{
-		IconLabel->setVisible(false);
-	}
-
-	if (infoPtr != NULL){
-		DescriptionLabel->setText(iqt::GetQString(infoPtr->GetDescription()));
-		KeywordsLabel->setText(iqt::GetQString(infoPtr->GetKeywords()));
-
-		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = infoPtr->GetAttributeInfos();
-
-		bool hasExport = false;
-
-		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
-			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
-			const icomp::IAttributeStaticInfo* staticAttributeInfPtr = staticAttributes.GetValueAt(staticAttributeIndex);
-			I_ASSERT(staticAttributeInfPtr != NULL);
-
-			QTreeWidgetItem* attributeItemPtr = new QTreeWidgetItem();
-			QTreeWidgetItem* exportItemPtr = new QTreeWidgetItem(attributeItemPtr);
-
-			bool exportFlag;
-			SetAttributeToItems(attributeId, *staticAttributeInfPtr, *attributeItemPtr, *exportItemPtr, &exportFlag);
-
-			if (m_consistInfoCompPtr.IsValid()){
-				bool isAttrCorrect = m_consistInfoCompPtr->IsAttributeValid(
-							attributeId,
-							elementId,
-							*registryPtr,
-							true,
-							false,
-							NULL);
-
-				attributeItemPtr->setBackgroundColor(ValueColumn, isAttrCorrect? Qt::white: Qt::red);
-			}
-
-			hasExport = hasExport || exportFlag;
-
-			AttributeTree->addTopLevelItem(attributeItemPtr);
-			attributeItemPtr->addChild(exportItemPtr);
-		}
-
-		AttributeTree->resizeColumnToContents(0);
-
-		const icomp::IComponentStaticInfo::InterfaceExtractors& extractors = infoPtr->GetInterfaceExtractors();
-
-		icomp::IRegistry::ExportedInterfacesMap interfacesMap;
-
-		interfacesMap = registryPtr->GetExportedInterfacesMap();
-
-		for (int extractorIndex = 0; extractorIndex < extractors.GetElementsCount(); extractorIndex++){
-			const istd::CClassInfo& interfaceInfo = extractors.GetKeyAt(extractorIndex);
-			QTreeWidgetItem* itemPtr = new QTreeWidgetItem();
-
-			itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
-			itemPtr->setText(0, interfaceInfo.GetName().c_str());
-
-			icomp::IRegistry::ExportedInterfacesMap::const_iterator foundExportIter = interfacesMap.find(interfaceInfo);
-			bool isInterfaceExported = false;
-			if (foundExportIter != interfacesMap.end()){
-				isInterfaceExported = (foundExportIter->second == elementId);
-			}
-
-			itemPtr->setCheckState(0, isInterfaceExported? Qt::Checked: Qt::Unchecked);
-
-			InterfacesTree->addTopLevelItem(itemPtr);
-		}
-
-		I_DWORD elementFlags = elementPtr->GetElementFlags();
-		AutoInstanceCB->setChecked((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0);
-
-		CreateExportedComponentsTree(elementId, *infoPtr, *componentRootPtr);
-
-		ComponentsTree->addTopLevelItem(componentRootPtr);
-		
-		componentRootPtr->setExpanded(true);
-
-		MetaInfoFrame->setVisible(true);
-	}
-	else{
-		MetaInfoFrame->setVisible(false);
-	}
-
-	bool isElementCorrect = true;
-	if (m_consistInfoCompPtr.IsValid()){
-		isElementCorrect = m_consistInfoCompPtr->IsElementValid(
-					elementId,
-					*registryPtr,
-					true,
-					false,
-					NULL);
-	}
-
-	ElementInfoTab->setTabIcon(TI_ATTRIBUTES, isElementCorrect? QIcon(): QIcon(":/Icons/StateInvalid.svg"));
-
-	UpdateExportIcon();
+	UpdateSelectedAttr();
 }
 
 
@@ -473,6 +350,163 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 
 
 // protected methods
+
+void CAttributeEditorComp::UpdateSelectedAttr()
+{
+	AttributeTree->clear();
+	InterfacesTree->clear();
+	ComponentsTree->clear();
+
+	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
+	if (selectionInfoPtr == NULL){
+		return;
+	}
+
+	const icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
+	if (registryPtr == NULL){
+		return;
+	}
+
+	const icomp::IRegistryElement* elementPtr = GetRegistryElement();
+
+	const std::string& elementId = selectionInfoPtr->GetSelectedElementName();
+	QTreeWidgetItem* componentRootPtr = new QTreeWidgetItem();
+	componentRootPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+	componentRootPtr->setText(NameColumn, tr("this"));
+	componentRootPtr->setData(ValueColumn, AttributeId, QString(elementId.c_str()));
+	componentRootPtr->setData(ValueColumn, AttributeMining, ComponentExport);
+	componentRootPtr->setText(ValueColumn, GetExportAliases(elementId).join(";"));
+
+	const icomp::IComponentStaticInfo* infoPtr = NULL;
+
+	QIcon icon;
+	const icomp::CComponentAddress* addressPtr = selectionInfoPtr->GetSelectedElementAddress();
+	if (addressPtr != NULL){
+		if (m_metaInfoManagerCompPtr.IsValid()){
+			infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(*addressPtr);
+		}
+
+		AddressLabel->setText(QString(addressPtr->GetPackageId().c_str()) + QString("/") + addressPtr->GetComponentId().c_str());
+		AddressLabel->setVisible(true);
+
+		if (m_consistInfoCompPtr.IsValid()){
+			icon = m_consistInfoCompPtr->GetComponentIcon(*addressPtr);
+		}
+	}
+	else{
+		AddressLabel->setVisible(false);
+	}
+
+	NameLabel->setText(elementId.c_str());
+
+	if (!icon.isNull()){
+		IconLabel->setPixmap(icon.pixmap(128));
+		IconLabel->setVisible(true);
+	}
+	else{
+		IconLabel->setVisible(false);
+	}
+
+	if (infoPtr != NULL){
+		DescriptionLabel->setText(iqt::GetQString(infoPtr->GetDescription()));
+		KeywordsLabel->setText(iqt::GetQString(infoPtr->GetKeywords()));
+
+		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = infoPtr->GetAttributeInfos();
+
+		bool hasExport = false;
+
+		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
+			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
+			const icomp::IAttributeStaticInfo* staticAttributeInfPtr = staticAttributes.GetValueAt(staticAttributeIndex);
+			I_ASSERT(staticAttributeInfPtr != NULL);
+
+			QTreeWidgetItem* attributeItemPtr = new QTreeWidgetItem();
+			QTreeWidgetItem* exportItemPtr = new QTreeWidgetItem(attributeItemPtr);
+
+			bool exportFlag;
+			SetAttributeToItems(attributeId, *staticAttributeInfPtr, *attributeItemPtr, *exportItemPtr, &exportFlag);
+
+			if (m_consistInfoCompPtr.IsValid()){
+				bool isAttrCorrect = m_consistInfoCompPtr->IsAttributeValid(
+							attributeId,
+							elementId,
+							*registryPtr,
+							true,
+							false,
+							NULL);
+
+				attributeItemPtr->setBackgroundColor(ValueColumn, isAttrCorrect? Qt::white: Qt::red);
+			}
+
+			hasExport = hasExport || exportFlag;
+
+			AttributeTree->addTopLevelItem(attributeItemPtr);
+			attributeItemPtr->addChild(exportItemPtr);
+		}
+
+		AttributeTree->resizeColumnToContents(0);
+
+		const icomp::IComponentStaticInfo::InterfaceExtractors& extractors = infoPtr->GetInterfaceExtractors();
+
+		icomp::IRegistry::ExportedInterfacesMap interfacesMap;
+
+		interfacesMap = registryPtr->GetExportedInterfacesMap();
+
+		for (int extractorIndex = 0; extractorIndex < extractors.GetElementsCount(); extractorIndex++){
+			const istd::CClassInfo& interfaceInfo = extractors.GetKeyAt(extractorIndex);
+			QTreeWidgetItem* itemPtr = new QTreeWidgetItem();
+
+			itemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+			itemPtr->setText(0, interfaceInfo.GetName().c_str());
+
+			icomp::IRegistry::ExportedInterfacesMap::const_iterator foundExportIter = interfacesMap.find(interfaceInfo);
+			bool isInterfaceExported = false;
+			if (foundExportIter != interfacesMap.end()){
+				isInterfaceExported = (foundExportIter->second == elementId);
+			}
+
+			itemPtr->setCheckState(0, isInterfaceExported? Qt::Checked: Qt::Unchecked);
+
+			InterfacesTree->addTopLevelItem(itemPtr);
+		}
+
+		if (elementPtr != NULL){
+			I_DWORD elementFlags = elementPtr->GetElementFlags();
+			AutoInstanceCB->setChecked((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0);
+			AutoInstanceCB->setEnabled(true);
+		}
+		else{
+			AutoInstanceCB->setChecked(false);
+			AutoInstanceCB->setEnabled(false);
+		}
+
+		CreateExportedComponentsTree(elementId, *infoPtr, *componentRootPtr);
+
+		ComponentsTree->addTopLevelItem(componentRootPtr);
+		
+		componentRootPtr->setExpanded(true);
+
+		MetaInfoFrame->setVisible(true);
+	}
+	else{
+		MetaInfoFrame->setVisible(false);
+	}
+
+	bool isElementCorrect = true;
+	if (m_consistInfoCompPtr.IsValid()){
+		isElementCorrect = m_consistInfoCompPtr->IsElementValid(
+					elementId,
+					*registryPtr,
+					true,
+					false,
+					NULL);
+	}
+
+	ElementInfoTab->setTabIcon(TI_ATTRIBUTES, isElementCorrect? QIcon(): QIcon(":/Icons/StateInvalid.svg"));
+
+	UpdateExportIcon();
+}
+
 
 bool CAttributeEditorComp::SetAttributeToItems(
 			const std::string& id,
@@ -796,11 +830,12 @@ QString CAttributeEditorComp::EncodeToEdit(const QString& text)
 }
 
 
-// members of nested class AttributeItemDelegate
+// public methods of embedded class AttributeItemDelegate
 
-CAttributeEditorComp::AttributeItemDelegate::AttributeItemDelegate(CAttributeEditorComp& parent)
-:	m_parent(parent)
+CAttributeEditorComp::AttributeItemDelegate::AttributeItemDelegate(CAttributeEditorComp* parentPtr)
+:	m_parent(*parentPtr)
 {
+	I_ASSERT(parentPtr != NULL);
 }
 
 
@@ -1257,6 +1292,27 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueData(
 	}
 
 	return false;
+}
+
+
+// public methods of embedded class RegistryObserver
+
+CAttributeEditorComp::RegistryObserver::RegistryObserver(CAttributeEditorComp* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+}
+
+
+// protected methods of embedded class RegistryObserver
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CAttributeEditorComp::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if ((updateFlags & istd::IChangeable::CF_MODEL) != 0){
+		m_parent.UpdateSelectedAttr();
+	}
 }
 
 

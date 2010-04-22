@@ -181,10 +181,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CModelChangeObserver.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CModelProxy.cpp"
 				>
 			</File>
@@ -211,10 +207,6 @@
 			>
 			<File
 				RelativePath="..\CModelBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelChangeObserver.h"
 				>
 			</File>
 			<File
