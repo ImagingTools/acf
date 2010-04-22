@@ -106,6 +106,48 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 }
 
 
+// reimplemented (icmpstr::IElementSelectionInfo)
+
+icomp::IRegistry* CVisualRegistryScenographerComp::GetSelectedRegistry() const
+{
+	return GetObjectPtr();
+}
+
+
+iser::ISerializable* CVisualRegistryScenographerComp::GetSelectedElement() const
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(m_selectedElementId);
+		if (elementInfoPtr != NULL){
+			return elementInfoPtr->elementPtr.GetPtr();
+		}
+	}
+
+	return NULL;
+}
+
+
+const std::string& CVisualRegistryScenographerComp::GetSelectedElementName() const
+{
+	return m_selectedElementId;
+}
+
+
+const icomp::CComponentAddress* CVisualRegistryScenographerComp::GetSelectedElementAddress() const
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(m_selectedElementId);
+		if (elementInfoPtr != NULL){
+			return &elementInfoPtr->address;
+		}
+	}
+
+	return NULL;
+}
+
+
 // reimplemented (ibase::ICommandsProvider)
 
 const ibase::IHierarchicalCommand* CVisualRegistryScenographerComp::GetCommands() const
@@ -216,30 +258,28 @@ bool CVisualRegistryScenographerComp::OnDropObject(const QMimeData& mimeData, QG
 }
 
 
-void CVisualRegistryScenographerComp::UpdateScene(int updateFlags)
+void CVisualRegistryScenographerComp::UpdateScene(int /*updateFlags*/)
 {
-	if (updateFlags != CVisualRegistryComp::CF_SELECTION){
-		QList<QGraphicsItem*> items = m_scenePtr->items();
-		foreach(QGraphicsItem* itemPtr, items){
-			m_scenePtr->removeItem(itemPtr);
-		}
+	QList<QGraphicsItem*> itemsToRemove = m_scenePtr->items();
+	foreach(QGraphicsItem* itemPtr, itemsToRemove){
+		m_scenePtr->removeItem(itemPtr);
+	}
 
-		icomp::IRegistry* registryPtr = GetObjectPtr();
-		if (registryPtr != NULL){
-			icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
-			for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
-						iter != elementIds.end();
-						iter++){
-				const std::string& elementId = *iter;
-				const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
-				if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
-					AddShapeToScene(elementInfoPtr->elementPtr.GetPtr());
-				}
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
+		for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
+					iter != elementIds.end();
+					iter++){
+			const std::string& elementId = *iter;
+			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
+			if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
+				AddShapeToScene(elementInfoPtr->elementPtr.GetPtr());
 			}
 		}
-
-		AddConnectorsToScene();
 	}
+
+	AddConnectorsToScene();
 
 	QList<QGraphicsItem*> items = m_scenePtr->items();
 	foreach(QGraphicsItem* itemPtr, items){
@@ -268,6 +308,8 @@ void CVisualRegistryScenographerComp::OnSelectionChanged()
 	QList<QGraphicsItem*> selectedItems = m_scenePtr->selectedItems();
 	CVisualRegistryElement* elementPtr = NULL;
 	
+	std::string elementId;
+
 	for (		QList<QGraphicsItem*>::const_iterator iter = selectedItems.begin();
 				iter != selectedItems.end();
 				++iter){
@@ -279,13 +321,18 @@ void CVisualRegistryScenographerComp::OnSelectionChanged()
 
 		elementPtr = selectedShapePtr->GetObjectPtr();
 		if (elementPtr != NULL){
+			elementId = elementPtr->GetName();
+
 			break;
 		}	
 	}
 
-	CVisualRegistryComp* visualRegistryPtr = dynamic_cast<CVisualRegistryComp*>(GetObjectPtr());
-	if (visualRegistryPtr != NULL){
-		visualRegistryPtr->SetSelectedElement(elementPtr);
+	if (m_selectedElementId != elementId){
+		istd::CChangeNotifier changePtr(this, CF_SELECTION);
+
+		m_selectedElementId = elementId;
+
+		UpdateComponentSelection();
 	}
 }
 
@@ -293,13 +340,8 @@ void CVisualRegistryScenographerComp::OnSelectionChanged()
 void CVisualRegistryScenographerComp::OnRemoveComponent()
 {
 	icomp::IRegistry* registryPtr = GetObjectPtr();
-	icmpstr::IElementSelectionInfo* elementSelectionInfoPtr = dynamic_cast<icmpstr::IElementSelectionInfo*>(registryPtr);
-	if (elementSelectionInfoPtr == NULL){
-		return;
-	}
-
 	if (registryPtr != NULL){
-		registryPtr->RemoveElementInfo(elementSelectionInfoPtr->GetSelectedElementName());
+		registryPtr->RemoveElementInfo(GetSelectedElementName());
 	}
 }
 
@@ -310,17 +352,8 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 	if (registryPtr == NULL){
 		return;
 	}
-	icmpstr::IElementSelectionInfo* elementSelectionInfoPtr = dynamic_cast<icmpstr::IElementSelectionInfo*>(registryPtr);
-	if (elementSelectionInfoPtr == NULL){
-		return;
-	}
 
-	CVisualRegistryElement* selectedComponentPtr = dynamic_cast<CVisualRegistryElement*>(elementSelectionInfoPtr->GetSelectedElement());
-	if (selectedComponentPtr == NULL){
-		return;
-	}
-
-	const std::string& oldName = selectedComponentPtr->GetName();
+	const std::string& oldName = GetSelectedElementName();
 
 	bool isOk = false;
 	std::string newName = QInputDialog::getText(
@@ -428,9 +461,7 @@ QGraphicsItem* CVisualRegistryScenographerComp::AddShapeToScene(iser::ISerializa
 		CVisualRegistryElement* registryElementPtr = dynamic_cast<CVisualRegistryElement*>(elementPtr);
 		if (registryElementPtr != NULL){
 			CRegistryElementShape* shapePtr = new CRegistryElementShape(this, m_sceneProviderCompPtr.GetPtr());
-
-			icmpstr::IElementSelectionInfo* elementSelectionInfoPtr = dynamic_cast<icmpstr::IElementSelectionInfo*>(GetObjectPtr());
-			if (elementSelectionInfoPtr != NULL && elementSelectionInfoPtr->GetSelectedElement() == elementPtr){
+			if (GetSelectedElement() == elementPtr){
 				shapePtr->setSelected(true);
 			}
 
@@ -672,18 +703,17 @@ void CVisualRegistryScenographerComp::ConnectReferences(const QString& component
 void CVisualRegistryScenographerComp::UpdateComponentSelection()
 {
 	// update component selection and related menu actions:
-	icmpstr::IElementSelectionInfo* elementSelectionInfoPtr = dynamic_cast<icmpstr::IElementSelectionInfo*>(GetObjectPtr());
-	if (elementSelectionInfoPtr != NULL){
-		if (m_quickHelpViewerCompPtr.IsValid()){
-			const icomp::CComponentAddress* addressPtr = elementSelectionInfoPtr->GetSelectedElementAddress();
-			if (addressPtr != NULL){
-				m_quickHelpViewerCompPtr->ShowHelp(addressPtr->GetPackageId() + "/" + addressPtr->GetComponentId(), addressPtr);
-			}
+	if (m_quickHelpViewerCompPtr.IsValid()){
+		const icomp::CComponentAddress* addressPtr = GetSelectedElementAddress();
+		if (addressPtr != NULL){
+			m_quickHelpViewerCompPtr->ShowHelp(addressPtr->GetPackageId() + "/" + addressPtr->GetComponentId(), addressPtr);
 		}
-
-		m_removeComponentCommand.setEnabled(elementSelectionInfoPtr->GetSelectedElement() != NULL);
-		m_renameComponentCommand.setEnabled(elementSelectionInfoPtr->GetSelectedElement() != NULL);
 	}
+
+	bool isElementSelected = (GetSelectedElement() != NULL);
+
+	m_removeComponentCommand.setEnabled(isElementSelected);
+	m_renameComponentCommand.setEnabled(isElementSelected);
 }
 
 

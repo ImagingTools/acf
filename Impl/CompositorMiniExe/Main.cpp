@@ -20,10 +20,13 @@
 
 static icomp::IComponent* metaInfoManagerPtr = NULL;
 static icomp::IComponent* consistInfoPtr = NULL;
+static icomp::IComponent* modelObserverPtr = NULL;
+
 
 class RegistryView: public QtViewPck::SceneProvider
 {
 	icomp::TSimComponentWrap<CmpstrPck::VisualRegistryScenographer> scenographer;
+	icomp::TSimComponentWrap<BasePck::ModelBinder> binder;
 
 public:
 	RegistryView()
@@ -31,6 +34,9 @@ public:
 		scenographer.SetRef("SceneProvider", this);
 		scenographer.SetRef("MetaInfoManager", metaInfoManagerPtr);
 		scenographer.SetRef("ConsistencyInfo", consistInfoPtr);
+
+		binder.SetRef("Model", &scenographer);
+		binder.InsertMultiRef("Observers", modelObserverPtr);
 	}
 
 	// reimplemented (icomp::IComponent)
@@ -52,34 +58,16 @@ protected:
 	virtual void OnComponentCreated()
 	{
 		QtViewPck::SceneProvider::OnComponentCreated();
+
 		scenographer.InitComponent();
-	}
-};
-
-static icomp::IComponent* modelObserverPtr = NULL;
-
-class RegistryModel: public CmpstrPck::VisualRegistry
-{
-	icomp::TSimComponentWrap<BasePck::ModelBinder> binder;
-
-public:
-	RegistryModel()
-	{
-		binder.SetRef("Model", this);
-		binder.InsertMultiRef("Observers", modelObserverPtr);
-	}
-
-protected:
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated()
-	{
-		CmpstrPck::VisualRegistry::OnComponentCreated();
 		binder.InitComponent();
 	}
 	virtual void OnComponentDestroyed()
 	{
 		binder.SetComponentContext(NULL, NULL, false);
-		CmpstrPck::VisualRegistry::OnComponentDestroyed();
+		scenographer.SetComponentContext(NULL, NULL, false);
+
+		QtViewPck::SceneProvider::OnComponentDestroyed();
 	}
 };
 
@@ -177,7 +165,7 @@ int main(int argc, char *argv[])
 
 	// registry model
 	modelObserverPtr = &attributeEditorComp;
-	icomp::TSimComponentsFactory<RegistryModel> modelFactoryComp;
+	icomp::TSimComponentsFactory<CmpstrPck::VisualRegistry> modelFactoryComp;
 	modelFactoryComp.SetRef("Log", &log);
 	modelFactoryComp.SetRef("MetaInfoManager", &packagesLoaderComp);
 

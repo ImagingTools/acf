@@ -1,5 +1,5 @@
-#ifndef istdc_TFileSerializerComp_included
-#define istdc_TFileSerializerComp_included
+#ifndef ibase_TFileSerializerComp_included
+#define ibase_TFileSerializerComp_included
 
 
 #include "istd/CStaticServicesProvider.h"
@@ -12,6 +12,7 @@
 #include "isys/IFileSystem.h"
 
 #include "ibase/TLoggerCompWrap.h"
+#include "ibase/CFileTypeInfoComp.h"
 
 
 namespace ibase
@@ -23,11 +24,11 @@ namespace ibase
 */
 template <class ReadArchive, class WriteArchive>
 class TFileSerializerComp:
-			public ibase::CLoggerComponentBase,
+			public ibase::TLoggerCompWrap<CFileTypeInfoComp>,
 			virtual public iser::IFileLoader
 {
 public:
-	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef ibase::TLoggerCompWrap<CFileTypeInfoComp> BaseClass;
 
 	enum MessageId
 	{
@@ -36,6 +37,7 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(TFileSerializerComp);
+		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
 		I_ASSIGN(m_versionInfoCompPtr, "VersionInfo", "Provide information about archive versions", false, "VersionInfo");
 		I_ASSIGN_MULTI_0(m_fileExtensionsAttrPtr, "FileExtensions", "List of supported file extensions", false);
@@ -50,6 +52,8 @@ public:
 				bool beQuiet = true) const;
 	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+
+	// reimplemented (iser::IFileTypeInfo)
 	virtual bool GetFileExtensions(istd::CStringList& result, int flags = 0, bool doAppend = false) const;
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
@@ -253,6 +257,8 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(const istd::IChan
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 template <class ReadArchive, class WriteArchive>
 bool TFileSerializerComp<ReadArchive, WriteArchive>::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
 {
@@ -339,4 +345,4 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::CheckMinimalVersion(const i
 } // namespace ibase
 
 
-#endif // !istdc_TFileSerializerComp_included
+#endif // !ibase_TFileSerializerComp_included

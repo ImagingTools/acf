@@ -1,5 +1,5 @@
-#ifndef istdc_CRegistryCodeSaverComp_included
-#define istdc_CRegistryCodeSaverComp_included
+#ifndef ibase_CRegistryCodeSaverComp_included
+#define ibase_CRegistryCodeSaverComp_included
 
 
 // STL includes
@@ -26,6 +26,7 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CRegistryCodeSaverComp);
+		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
 		I_ASSIGN(m_registriesManagerCompPtr, "RegistriesManager", "Registries manager providing access to all composite component registries", true, "RegistriesManager");
 	I_END_COMPONENT;
@@ -40,6 +41,8 @@ public:
 				bool beQuiet = true) const;
 	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+
+	// reimplemented (iser::IFileTypeInfo)
 	virtual bool GetFileExtensions(istd::CStringList& result, int flags = 0, bool doAppend = false) const;
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
@@ -127,6 +130,6 @@ private:
 } // namespace ibase
 
 
-#endif // !istdc_CRegistryCodeSaverComp_included
+#endif // !ibase_CRegistryCodeSaverComp_included
 
 

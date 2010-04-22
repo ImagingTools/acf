@@ -94,64 +94,6 @@ bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
 }
 
 
-void CVisualRegistryComp::SetSelectedElement(CVisualRegistryElement* selectedElementPtr)
-{
-	std::string elementId;
-	if (selectedElementPtr != NULL){
-		elementId = selectedElementPtr->GetName();
-	}
-
-	if (m_selectedElementId != elementId){
-		istd::CChangeNotifier changePtr(this, CF_SELECTION);
-
-		m_selectedElementId = elementId;
-	}
-}
-
-
-// reimplemented (icmpstr::IElementSelectionInfo)
-
-icomp::IRegistry* CVisualRegistryComp::GetSelectedRegistry() const
-{
-	return const_cast<CVisualRegistryComp*>(this);
-}
-
-
-iser::ISerializable* CVisualRegistryComp::GetSelectedElement() const
-{
-	const ElementInfo* elementInfoPtr = GetElementInfo(m_selectedElementId);
-	if (elementInfoPtr != NULL){
-		return elementInfoPtr->elementPtr.GetPtr();
-	}
-
-	return NULL;
-}
-
-
-const std::string& CVisualRegistryComp::GetSelectedElementName() const
-{
-	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
-	if (elementPtr == NULL){
-		static std::string empty;
-
-		return empty;
-	}
-
-	return elementPtr->GetName();
-}
-
-
-const icomp::CComponentAddress* CVisualRegistryComp::GetSelectedElementAddress() const
-{
-	const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(GetSelectedElement());
-	if (elementPtr == NULL){
-		return NULL;
-	}
-
-	return &elementPtr->GetAddress();
-}
-
-
 // reimplemented (icomp::IRegistry)
 
 CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
@@ -177,22 +119,6 @@ CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
 	}
 
 	return infoPtr;
-}
-
-
-bool CVisualRegistryComp::RemoveElementInfo(const std::string& elementId)
-{
-	bool resetSelection = (elementId == m_selectedElementId);
-
-	if (BaseClass2::RemoveElementInfo(elementId)){
-		if (resetSelection){
-			m_selectedElementId.clear();
-		}
-
-		return true;
-	}
-
-	return false;
 }
 
 

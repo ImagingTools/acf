@@ -109,6 +109,8 @@ int CSvgBitmapLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const is
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CSvgBitmapLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){

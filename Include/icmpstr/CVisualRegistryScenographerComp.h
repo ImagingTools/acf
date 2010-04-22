@@ -35,6 +35,7 @@
 
 #include "icmpstr/IRegistryPreview.h"
 #include "icmpstr/IRegistryConsistInfo.h"
+#include "icmpstr/IElementSelectionInfo.h"
 
 
 namespace icmpstr
@@ -50,6 +51,7 @@ class CVisualRegistryScenographerComp:
 			public QObject,
 			public iqt2d::TScenographerCompBase<
 						imod::TSingleModelObserverBase<icomp::IRegistry> >,
+			virtual public icmpstr::IElementSelectionInfo,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
@@ -59,6 +61,7 @@ public:
 				imod::TSingleModelObserverBase<icomp::IRegistry> > BaseClass;
 
 	I_BEGIN_COMPONENT(CVisualRegistryScenographerComp);
+		I_REGISTER_INTERFACE(IElementSelectionInfo);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
@@ -82,8 +85,15 @@ public:
 	*/
 	bool TryOpenComponent(const CVisualRegistryElement& registryElement) const;
 
+	// reimplemented (icmpstr::IElementSelectionInfo)
+	virtual icomp::IRegistry* GetSelectedRegistry() const;
+	virtual iser::ISerializable* GetSelectedElement() const;
+	virtual const std::string& GetSelectedElementName() const;
+	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
+
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
+
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 
@@ -151,6 +161,8 @@ private:
 
 	QFont m_elementNameFont;
 	QFont m_elementDetailFont;
+
+	std::string m_selectedElementId;
 };
 
 

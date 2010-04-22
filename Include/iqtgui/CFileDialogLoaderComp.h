@@ -41,6 +41,7 @@ public:
 	};
 
 	I_BEGIN_COMPONENT(CFileDialogLoaderComp)
+		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader)
 		I_REGISTER_INTERFACE(iser::IFileLoaderInfo)
 		I_ASSIGN_MULTI_0(m_loadersCompPtr, "Loaders", "List of file serializers will be used as slaves", true)
@@ -54,6 +55,8 @@ public:
 				bool beQuiet = true) const;
 	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+
+	// reimplemented (iser::IFileTypeInfo)
 	virtual bool GetFileExtensions(istd::CStringList& result, int flags = 0, bool doAppend = false) const;
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
@@ -68,7 +71,7 @@ public:
 		\param	result	input/output list of filters with description separated with next line character.
 		\return			number of filters.
 	*/
-	static int AppendLoaderFilterList(const iser::IFileLoader& loader, int flags, QString& allExt, QString& result);
+	static int AppendLoaderFilterList(const iser::IFileTypeInfo& fileTypeInfo, int flags, QString& allExt, QString& result);
 
 protected:
 	istd::CString GetPathForType(const QFileInfo& fileInfo, PathType pathType) const;

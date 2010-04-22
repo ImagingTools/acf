@@ -1,5 +1,5 @@
-#ifndef istdc_CApplicationInfoComp_included
-#define istdc_CApplicationInfoComp_included
+#ifndef ibase_CApplicationInfoComp_included
+#define ibase_CApplicationInfoComp_included
 
 
 #include "icomp/CComponentBase.h"
@@ -60,6 +60,6 @@ private:
 } // namespace ibase
 
 
-#endif // !istdc_CApplicationInfoComp_included
+#endif // !ibase_CApplicationInfoComp_included
 
 

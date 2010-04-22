@@ -25,6 +25,7 @@ public:
 		I_ASSIGN_MULTI_0(m_observersCompPtr, "Observers", "Observers for the model", true)
 	I_END_COMPONENT
 
+protected:
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();

@@ -79,6 +79,8 @@ int CMediaLoaderComp::SaveToFile(const istd::IChangeable&/* data*/, const istd::
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CMediaLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){

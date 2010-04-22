@@ -119,6 +119,8 @@ int CSettingsSerializerComp::SaveToFile(const istd::IChangeable& data, const ist
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CSettingsSerializerComp::GetFileExtensions(istd::CStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;

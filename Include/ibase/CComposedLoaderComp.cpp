@@ -57,6 +57,8 @@ int CComposedLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CComposedLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){

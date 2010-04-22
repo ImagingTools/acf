@@ -34,7 +34,13 @@ void* CComponentBase::GetInterface(const istd::CClassInfo& interfaceType, const 
 		return this;
 	}
 
+	static istd::CClassInfo compInterfaceType(typeid(icomp::IComponent));
+
 	if (m_contextPtr != NULL){
+		if (interfaceType.IsVoid() || (interfaceType == compInterfaceType)){
+			return static_cast<icomp::IComponent*>(this);
+		}
+
 		const IComponentStaticInfo& staticInfo = m_contextPtr->GetStaticInfo();
 
 		const IComponentStaticInfo::InterfaceExtractors& extractors = staticInfo.GetInterfaceExtractors();

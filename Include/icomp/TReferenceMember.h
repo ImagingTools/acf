@@ -43,11 +43,6 @@ public:
 	*/
 	Interface* operator->() const;
 
-	/**
-		Access to object pointed by internal pointer.
-	*/
-	Interface& operator*() const;
-
 protected:
 	TReferenceMember(const TReferenceMember& ptr);
 
@@ -106,16 +101,6 @@ Interface* TReferenceMember<Interface>::operator->() const
 }
 
 
-template <class Interface>
-Interface& TReferenceMember<Interface>::operator*() const
-{
-	EnsureInitialized();
-	I_ASSERT(m_componentPtr != NULL);
-
-	return *m_componentPtr;
-}
-
-
 // protected methods
 
 template <class Interface>
@@ -153,6 +138,18 @@ bool TReferenceMember<Interface>::EnsureInitialized() const
 
 
 }//namespace icomp
+
+
+inline void operator*(const icomp::TReferenceMember<void>& /*ref*/)
+{
+}
+
+
+template <class Interface>
+inline Interface& operator*(const icomp::TReferenceMember<Interface>& ref)
+{
+	return *ref.GetPtr();
+}
 
 
 #endif // !icomp_TReferenceMember_included

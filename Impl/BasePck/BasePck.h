@@ -13,6 +13,7 @@
 #include "idoc/CSingleDocumentTemplateComp.h"
 #include "idoc/CCompositeDocumentTemplateComp.h"
 #include "idoc/CDocumentManagerListenerComp.h"
+#include "idoc/CSelectedDocModelBinderComp.h"
 
 #include "ibase/CComposedLoaderComp.h"
 #include "ibase/CTextFileLoaderComp.h"
@@ -24,6 +25,7 @@
 #include "ibase/CModelProxyComp.h"
 #include "ibase/CModelBinderComp.h"
 #include "ibase/CFilePersistenceComp.h"
+#include "ibase/CFileTypeInfoComp.h"
 #include "ibase/TFileSerializerComp.h"
 #include "ibase/CConsoleLogComp.h"
 #include "ibase/CTextFileLogComp.h"
@@ -66,6 +68,7 @@ namespace BasePck
 {
 
 
+typedef ibase::CFileTypeInfoComp FileTypeInfo;
 typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> XmlFileSerializer;
 typedef ibase::TFileSerializerComp<iser::CFileReadArchive, iser::CFileWriteArchive> BinaryFileSerializer;
 typedef ibase::CComposedLoaderComp ComposedLoader;
@@ -92,6 +95,7 @@ typedef icomp::TModelCompWrap<iprm::CEnableableParamComp> EnableableParam;
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
 typedef icomp::TModelCompWrap<idoc::CDocumentManagerListenerComp> DocumentManagerListener;
+typedef idoc::CSelectedDocModelBinderComp SelectedDocModelBinder;
 
 typedef icomp::TModelCompWrap<isec::CComposedAuthorizationVerifierComp> ComposedAuthorizationVerifier;
 typedef icomp::TModelCompWrap<isec::CFixedAuthorisationVerifierComp> FixedAuthorisationVerifier;

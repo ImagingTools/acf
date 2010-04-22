@@ -346,7 +346,8 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleSubcomponents(
 {
 	icomp::IRegistry::Ids retVal;
 
-	if (interfaceInfo.IsVoid()){
+	static istd::CClassInfo compTypeInfo(typeid(icomp::IComponent));
+	if (interfaceInfo.IsVoid() || (interfaceInfo == compTypeInfo)){
 		retVal.insert(elementId);
 	}
 	else{
@@ -530,6 +531,11 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 	else{
 		const icomp::IRegistry::ElementInfo* pointedInfoPtr = registry.GetElementInfo(pointedElementName);
 		if (pointedInfoPtr != NULL){
+			static istd::CClassInfo compTypeInfo(typeid(icomp::IComponent));
+			if (interfaceInfo.IsVoid() || (interfaceInfo == compTypeInfo)){
+				return true;
+			}
+
 			const icomp::IComponentStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedInfoPtr->address);
 			if (pointedMetaInfoPtr != NULL){
 				const icomp::IComponentStaticInfo::InterfaceExtractors& extractors = pointedMetaInfoPtr->GetInterfaceExtractors();

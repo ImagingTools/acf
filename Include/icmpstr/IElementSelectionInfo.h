@@ -27,6 +27,11 @@ namespace icmpstr
 class IElementSelectionInfo: virtual public istd::IChangeable
 {
 public:
+	enum ChangeFlags
+	{
+		CF_SELECTION = 0x80000
+	};
+
 	/**
 		Get registry containing selected element.
 		\return	pointer to registry or NULL if no registry is selected.

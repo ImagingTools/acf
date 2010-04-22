@@ -14,6 +14,7 @@
 #include "iqt/CFileSystem.h"
 
 #include "iqtgui/CExtLineEdit.h"
+#include "iqtgui/CFileDialogLoaderComp.h"
 
 
 namespace iqtprm
@@ -132,7 +133,27 @@ void CFileNameParamGuiComp::on_BrowseButton_clicked()
 			}
 		}
 		else if (pathType == iprm::IFileNameParam::PT_FILE){
-			QString filePath = QFileDialog::getOpenFileName(GetQtWidget(), tr("Select file"), QFileInfo(GetPathFromEditor()).dir().absolutePath());
+			QString filter;
+
+			if (m_fileTypeInfoPtr.IsValid()){
+				QString allExt;
+				int filtersCount = iqtgui::CFileDialogLoaderComp::AppendLoaderFilterList(
+							*m_fileTypeInfoPtr,
+							0,
+							allExt,
+							filter);
+
+				if (filtersCount > 1){
+					filter += "\n";
+					filter += tr("All supported files (%1)").arg(allExt);
+				}
+			}
+
+			QString filePath = QFileDialog::getOpenFileName(
+						GetQtWidget(),
+						tr("Select file"),
+						QFileInfo(GetPathFromEditor()).dir().absolutePath(),
+						filter);
 			if (!filePath.isEmpty()){
 				OnPathEdited(filePath);
 			}

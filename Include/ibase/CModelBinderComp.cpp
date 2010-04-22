@@ -5,6 +5,8 @@ namespace ibase
 {
 
 
+// protected methods
+
 // reimplemented (icomp::IComponent)
 
 void CModelBinderComp::OnComponentCreated()

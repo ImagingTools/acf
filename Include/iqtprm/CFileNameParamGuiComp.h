@@ -7,6 +7,8 @@
 
 
 // ACF includes
+#include "iser/IFileTypeInfo.h"
+
 #include "iprm/IFileNameParam.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -29,10 +31,11 @@ public:
 				Ui::CFileNameParamGuiComp,
 				iprm::IFileNameParam> BaseClass;
 
-	I_BEGIN_COMPONENT(CFileNameParamGuiComp)
+	I_BEGIN_COMPONENT(CFileNameParamGuiComp);
 		I_ASSIGN(m_pathLabelAttrPtr, "PathLabel", "Label for the file editor", false, "Directory");
 		I_ASSIGN(m_startHintAttrPtr, "StartHint", "Start hint for the editor", false, "<Enter path>");
-	I_END_COMPONENT
+		I_ASSIGN(m_fileTypeInfoPtr, "FileTypeInfo", "Allows to retrive optional file type information for file selection dialog", false, "FileTypeInfo");
+	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -60,6 +63,7 @@ private:
 private:
 	I_ATTR(istd::CString, m_pathLabelAttrPtr);
 	I_ATTR(istd::CString, m_startHintAttrPtr);
+	I_REF(iser::IFileTypeInfo, m_fileTypeInfoPtr);
 
 	QDirModel m_directoryModel;
 };

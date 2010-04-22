@@ -81,6 +81,8 @@ int CFileDialogLoaderComp::SaveToFile(const istd::IChangeable& data, const istd:
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CFileDialogLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
@@ -129,14 +131,14 @@ istd::CString CFileDialogLoaderComp::GetLastFilePath(OperationType operationType
 
 // static methods
 
-int CFileDialogLoaderComp::AppendLoaderFilterList(const iser::IFileLoader& loader, int flags, QString& allExt, QString& result)
+int CFileDialogLoaderComp::AppendLoaderFilterList(const iser::IFileTypeInfo& fileTypeInfo, int flags, QString& allExt, QString& result)
 {
 	int retVal = 0;
 
 	istd::CStringList docExtensions;
-	loader.GetFileExtensions(docExtensions, flags);
+	fileTypeInfo.GetFileExtensions(docExtensions, flags);
 
-	istd::CString commonDescription = loader.GetTypeDescription();
+	istd::CString commonDescription = fileTypeInfo.GetTypeDescription();
 
 	if (!commonDescription.IsEmpty()){
 		if (!result.isEmpty()){
@@ -153,7 +155,7 @@ int CFileDialogLoaderComp::AppendLoaderFilterList(const iser::IFileLoader& loade
 
 		if (!extension.IsEmpty()){
 			if (commonDescription.IsEmpty()){
-				istd::CString description = loader.GetTypeDescription(&extension);
+				istd::CString description = fileTypeInfo.GetTypeDescription(&extension);
 
 				if (!result.isEmpty()){
 					result += "\n";

@@ -111,6 +111,8 @@ int CClipboardSerializerComp::SaveToFile(const istd::IChangeable& data, const is
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CClipboardSerializerComp::GetFileExtensions(istd::CStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;

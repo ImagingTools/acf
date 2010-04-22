@@ -3,11 +3,10 @@
 
 
 // ACF includes
-#include "istd/IPolymorphic.h"
 #include "istd/IChangeable.h"
 #include "istd/CString.h"
 
-#include "iser/iser.h"
+#include "iser/IFileTypeInfo.h"
 
 
 namespace iser
@@ -19,14 +18,25 @@ namespace iser
 
 	\ingroup Persistence
 */
-class IFileLoader: virtual public istd::IPolymorphic
+class IFileLoader: virtual public IFileTypeInfo
 {
 public:
-
+	/**
+		Result of operation.
+	*/
 	enum OperationState
 	{
+		/**
+			Operation was successfull.
+		*/
 		StateOk,
+		/**
+			Operation was aborted by user.
+		*/
 		StateAborted,
+		/**
+			Operation failed.
+		*/
 		StateFailed
 	};
 
@@ -46,17 +56,10 @@ public:
 	enum QueryFlags
 	{
 		/**
-			No loading operation should be considered.
-		*/
-		QF_NO_LOADING = 0x0001,
-		/**
-			No saving operation should be considered.
-		*/
-		QF_NO_SAVING = 0x0002,
-		/**
 			Only operations with specified file name should be considered.
 		*/
 		QF_NAMED_ONLY = 0x0004,
+
 		/**
 			Only operations without specified file name (anonymous) should be considered.
 		*/
@@ -70,7 +73,7 @@ public:
 		\param	filePathPtr		optional pointer to file should be loaded/stored.
 								It can be NULL if any file is meant.
 								If it points at empty string, anonymous loading is mean.
-		\param	flags			combination of flags defined in QueryFlags.
+		\param	flags			combination of flags defined in \c QueryFlags and \c iser::IFileTypeInfo::QueryFlags.
 		\param	beQuiet			if true, no user message output is allowed.
 	*/
 	virtual bool IsOperationSupported(
@@ -90,18 +93,6 @@ public:
 		\returns serialization state. \sa SerializationState
 	*/
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const = 0;
-
-	/**
-		Get file extensions supported by this loader
-		\param	result		list of extensions, e.g. {"txt", "doc"}.
-		\param	flags		set of flags \sa QueryFlags.
-		\param	doAppend	if true, list of extensions should be appended to existing list.
-	*/
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = 0, bool doAppend = false) const = 0;
-	/**
-		Get description of object type associated with single extension.
-	*/
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const = 0;
 };
 
 

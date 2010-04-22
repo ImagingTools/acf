@@ -382,6 +382,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFileTypeInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IObject.h"
 				>
 			</File>

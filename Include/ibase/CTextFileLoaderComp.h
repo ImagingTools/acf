@@ -1,5 +1,5 @@
-#ifndef istdc_CTextFileLoaderComp_included
-#define istdc_CTextFileLoaderComp_included
+#ifndef ibase_CTextFileLoaderComp_included
+#define ibase_CTextFileLoaderComp_included
 
 
 #include "iser/IFileLoader.h"
@@ -17,6 +17,7 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CTextFileLoaderComp)
+		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader)
 		I_ASSIGN_MULTI_1(m_fileExtensionsAttrPtr, "FileExtensions", "List of possible file extensions", false, "txt");
 		I_ASSIGN_MULTI_1(m_typeDescriptionsAttrPtr, "TypeDescriptions", "List of descriptions for each extension", false, "Text file");
@@ -30,6 +31,8 @@ public:
 				bool beQuiet = true) const;
 	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
 	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+
+	// reimplemented (iser::IFileTypeInfo)
 	virtual bool GetFileExtensions(istd::CStringList& result, int flags = 0, bool doAppend = false) const;
 	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
 
@@ -42,6 +45,6 @@ private:
 } // namespace ibase
 
 
-#endif // !istdc_CTextFileLoaderComp_included
+#endif // !ibase_CTextFileLoaderComp_included
 
 

@@ -239,6 +239,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileTypeInfoComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInstantiatorComp.cpp"
 				>
 			</File>
@@ -321,6 +325,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileSystem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileTypeInfoComp.h"
 				>
 			</File>
 			<File

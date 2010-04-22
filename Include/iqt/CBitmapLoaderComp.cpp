@@ -132,6 +132,8 @@ int CBitmapLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CSt
 }
 
 
+// reimplemented (iser::IFileTypeInfo)
+
 bool CBitmapLoaderComp::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){

@@ -18,8 +18,13 @@ I_EXPORT_PACKAGE(
 			IM_PROJECT("ACF") IM_TAG("Undependend Standard Base") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
+			FileTypeInfo,
+			"General file type information provider",
+			"Type Information Format" IM_TAG("File"));
+
+I_EXPORT_COMPONENT(
 			XmlFileSerializer,
-			"Simple file loader serializing objects using XML format",
+			"File loader serializing objects using simplified XML format",
 			"Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
 
 I_EXPORT_COMPONENT(
@@ -136,6 +141,11 @@ I_EXPORT_COMPONENT(
 			DocumentManagerListener,
 			"Document workspace controller",
 			"Model Proxy Composite Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document"));
+
+I_EXPORT_COMPONENT(
+			SelectedDocModelBinder,
+			"Connect model with observer if document is active",
+			"Multiple Model Observer Composite Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document"));
 
 I_EXPORT_COMPONENT(
 			ComposedAuthorizationVerifier,
