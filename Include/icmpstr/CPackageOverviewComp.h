@@ -91,6 +91,8 @@ protected slots:
 	void on_GroupByCB_currentIndexChanged(int index);
 	void on_PackagesList_customContextMenuRequested(const QPoint& menuPoint);
 	void on_PackagesList_itemSelectionChanged();
+	void on_PackagesList_itemCollapsed(QTreeWidgetItem* item);
+	void on_PackagesList_itemExpanded(QTreeWidgetItem* item);
 	void on_FilterGB_toggled(bool on);
 	void on_InterfaceCB_currentIndexChanged(int index);
 

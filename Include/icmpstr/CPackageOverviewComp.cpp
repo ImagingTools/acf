@@ -511,6 +511,23 @@ void CPackageOverviewComp::on_PackagesList_itemSelectionChanged()
 	}
 }
 
+	
+void CPackageOverviewComp::on_PackagesList_itemCollapsed(QTreeWidgetItem* /*item*/)
+{
+}
+
+
+void CPackageOverviewComp::on_PackagesList_itemExpanded(QTreeWidgetItem* item)
+{
+	for (int index = 0; index < PackagesList->topLevelItemCount(); index++){
+		QTreeWidgetItem* itemPtr = PackagesList->topLevelItem(index);
+
+		if (itemPtr != item && itemPtr->isExpanded()){
+			itemPtr->setExpanded(false);
+		}
+	}
+}
+
 
 void CPackageOverviewComp::on_FilterGB_toggled(bool /*on*/)
 {
