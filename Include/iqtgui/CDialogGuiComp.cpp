@@ -15,7 +15,7 @@ namespace iqtgui
 
 void CDialogGuiComp::Execute()
 {
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateDialog());
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog());
 	if (dialogPtr.IsValid()){
 		dialogPtr->exec();
 	}
@@ -24,7 +24,7 @@ void CDialogGuiComp::Execute()
 
 // protected methods
 
-iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateDialog() const
+iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog() const
 {
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr;
 
