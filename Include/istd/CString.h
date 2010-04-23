@@ -80,6 +80,7 @@ public:
 	CString ToUpper() const;
 	CString ToLower() const;
 	std::vector<CString> Split(const CString& separator, bool caseSensitive = true, bool ignoreEmpty = false);
+	CString& Replace(const CString& before, const CString& after, bool caseSensitive = true);
 
 	bool IsEqualNoCase(const CString& str) const;
 

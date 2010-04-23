@@ -226,6 +226,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExternalAppComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileInfoCopyComp.cpp"
 				>
 			</File>
@@ -360,11 +364,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDirList.moc"
+				RelativePath="..\CDllFunctionsProvider.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CDllFunctionsProvider.h"
+				RelativePath="..\CExternalAppComp.h"
 				>
 			</File>
 			<File
@@ -373,10 +377,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileList.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileList.moc"
 				>
 			</File>
 			<File
@@ -396,10 +396,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNetworkWriteArchive.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CPackagesLoaderComp.h"
 				>
 			</File>
@@ -413,10 +409,6 @@
 			</File>
 			<File
 				RelativePath="..\CSafeNotifier.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSafeNotifier.moc"
 				>
 			</File>
 			<File
@@ -482,6 +474,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CExternalAppComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CFileList.cpp"
 				>
 			</File>
@@ -491,6 +487,30 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CSafeNotifier.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Other"
+			>
+			<File
+				RelativePath="..\CDirList.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CExternalAppComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileList.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CNetworkWriteArchive.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSafeNotifier.moc"
 				>
 			</File>
 		</Filter>

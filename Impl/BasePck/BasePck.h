@@ -30,6 +30,7 @@
 #include "ibase/CConsoleLogComp.h"
 #include "ibase/CTextFileLogComp.h"
 #include "ibase/CFileCopyOverLoaderComp.h"
+#include "ibase/CExternalFileConverterComp.h"
 #include "ibase/CCopyAppComp.h"
 #include "ibase/CUuidComp.h"
 #include "ibase/CObjectQueueComp.h"
@@ -82,6 +83,7 @@ typedef ibase::CFilePersistenceComp FilePersistence;
 typedef ibase::CConsoleLogComp ConsoleLog;
 typedef ibase::CTextFileLogComp TextFileLog;
 typedef ibase::CFileCopyOverLoaderComp FileCopyOverLoader;
+typedef ibase::CExternalFileConverterComp ExternalFileConverter;
 typedef ibase::CCopyAppComp CopyApp;
 typedef icomp::TModelCompWrap<ibase::CUuidComp> Uuid;
 typedef ibase::CObjectQueueComp ObjectQueue;

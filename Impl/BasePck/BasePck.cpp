@@ -88,6 +88,11 @@ I_EXPORT_COMPONENT(
 			"Copy Compile Transform Saver" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("File Loader"));
 
 I_EXPORT_COMPONENT(
+			ExternalFileConverter,
+			"General file copy or transform using loaders and any object",
+			"File Converter External Application" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("File Converter"));
+
+I_EXPORT_COMPONENT(
 			CopyApp,
 			"Copy application transforming files",
 			"Copy Compile Transform Application" IM_CATEGORY(I_DATA_PROCESSING I_APPLICATION) IM_TAG("File"));

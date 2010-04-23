@@ -227,6 +227,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExternalFileConverterComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileCopyOverLoaderComp.cpp"
 				>
 			</File>
@@ -313,6 +317,10 @@
 			</File>
 			<File
 				RelativePath="..\CCopyAppComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExternalFileConverterComp.h"
 				>
 			</File>
 			<File

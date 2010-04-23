@@ -247,6 +247,29 @@ std::vector<CString> CString::Split(const CString& separator, bool caseSensitive
 }
 
 
+CString& CString::Replace(const CString& before, const CString& after, bool caseSensitive)
+{
+	CString inputString = caseSensitive ? *this : ToLower();
+	CString beforeString = caseSensitive ? before : before.ToLower();
+
+	size_type offset = 0;
+	size_type foundPos = 0;
+	int positionDifference = after.length() - before.length();
+	int outputPositionOffset = 0;
+	
+	while ((foundPos = inputString.find(beforeString, offset)) != istd::CString::npos){
+		erase(foundPos + outputPositionOffset, beforeString.length());
+		insert(foundPos + outputPositionOffset, after);
+
+		offset = foundPos + beforeString.length();
+
+		outputPositionOffset += positionDifference;
+	}
+
+	return *this;
+}
+
+
 // protected methods
 
 void CString::Copy(const CString& str)
