@@ -28,14 +28,6 @@ int main(int argc, char *argv[])
 
 	istd::CString configFile;
 
-	istd::CString test("%1 -qe %1 %1 test %2 test %2 -tr");
-
-	test.Replace("%1", "Lepsai1");
-	test.Replace("%2", "Lepsai2");
-
-	test.Replace("Lepsai1", "%1");
-	test.Replace("Lepsai2", "%2");
-
 	std::string registryFile = "default.arx";
 	bool showApplicationInfo = false;
 	std::string componentId;
