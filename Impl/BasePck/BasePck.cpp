@@ -45,7 +45,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			Instantiator,
 			"Access specified components forcing to create its instances",
-			"Instance Create Free Components" IM_CATEGORY(I_SERVICE) IM_TAG("Init"));
+			"Instance Create Free Components" IM_CATEGORY(I_SERVICE));
 
 I_EXPORT_COMPONENT(
 			ApplicationInfo,

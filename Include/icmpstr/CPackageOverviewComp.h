@@ -63,7 +63,6 @@ protected:
 	};
 
 	void GenerateComponentTree();
-	void GenerateComponentToolBox();
 	void UpdateComponentsView();
 	void UpdateComponentGroups();
 
@@ -142,18 +141,17 @@ private:
 					const QIcon& icon = QIcon());
 	};
 
-	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
-	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
-	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
-
 	enum GruppingMode
 	{
 		GM_NONE,
 		GM_PACKAGE
 	};
 
-	typedef std::map<std::string, RootInfo> RootInfos;
+	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
+	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
+	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 
+	typedef std::map<std::string, RootInfo> RootInfos;
 	RootInfos m_roots;
 
 	typedef std::set<istd::CClassInfo> InterfaceFilter;

@@ -76,24 +76,32 @@ public:
 
 		CPackageOverviewComp::PackageItem* packageItemPtr = dynamic_cast<CPackageOverviewComp::PackageItem*>(selectedItemPtr);
 
-		// main margins
-		mainRect.adjust(0, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
-
 		QBrush itemBrush = QBrush(Qt::NoBrush);
 		if (option.state & QStyle::State_Selected){
 			itemBrush = qApp->palette().highlight();
 		}
-		else{
-			if (option.state & QStyle::State_Open && (packageItemPtr != NULL)){
-				itemBrush = option.palette.window();
-			}
+		else if (packageItemPtr != NULL){
+			itemBrush = option.palette.window();
 		}
 
 		painter->save();
 		painter->setBrush(itemBrush);
 
-		painter->setPen(QPen(option.palette.mid().color(), 0, Qt::DotLine));
-		painter->drawRoundedRect(mainRect, SIDE_OFFSET, SIDE_OFFSET);
+		if (packageItemPtr != NULL){
+			painter->fillRect(mainRect, itemBrush);
+			if (option.state & QStyle::State_Open){
+				painter->drawLine(mainRect.left(), mainRect.bottom() - 1, mainRect.right() - 1, mainRect.bottom() - 1);
+			}
+
+			mainRect.adjust(0, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+		}
+		else{
+			mainRect.adjust(0, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+
+			painter->setPen(QPen(option.palette.mid().color(), 0, Qt::DotLine));
+			painter->drawRoundedRect(mainRect, SIDE_OFFSET, SIDE_OFFSET);
+		}
+
 		painter->restore();
 	
 		painter->setPen(option.palette.text().color());
@@ -219,18 +227,16 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 
 void CPackageOverviewComp::GenerateComponentTree()
 {
-	if (GroupByCB->currentIndex() > GM_PACKAGE){
-		return;
-	}
-
 	PackagesList->clear();
 	m_roots.clear();
 
 	if (!m_envManagerCompPtr.IsValid()){
 		return;
 	}
-	
+
 	icomp::IMetaInfoManager::ComponentAddresses addresses = GetFilteredComponentAdresses();
+
+	istd::CString currentKey = iqt::GetCString(GroupByCB->currentText()); 
 
 	for (		icomp::IMetaInfoManager::ComponentAddresses::const_iterator addressIter = addresses.begin();
 				addressIter != addresses.end();
@@ -238,16 +244,24 @@ void CPackageOverviewComp::GenerateComponentTree()
 		const icomp::CComponentAddress& address = *addressIter;
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 
-		std::string groupId;
+		istd::CStringList groupIds;
 		std::string elementName = address.GetPackageId() + "/" + address.GetComponentId();
 		switch (GroupByCB->currentIndex()){
 		case GM_NONE:
+			groupIds.push_back("");
+			break;
+
+		case GM_PACKAGE:
+			groupIds.push_back(address.GetPackageId());
+			elementName = address.GetComponentId();
 			break;
 
 		default:
-			groupId = address.GetPackageId();
-			elementName = address.GetComponentId();
-			break;
+			{
+				icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
+
+				groupIds = encoder.GetValues(currentKey);
+			}
 		}
 
 		istd::CString infoPath = m_envManagerCompPtr->GetComponentInfoPath(address);
@@ -268,18 +282,21 @@ void CPackageOverviewComp::GenerateComponentTree()
 			}
 		}
 
-		QDir packageDir(iqt::GetQString(infoPath));
-		PackageComponentItem* itemPtr = new PackageComponentItem(
-			*this,
-			address,
-			metaInfoPtr,
-			icon);
-		itemPtr->setText(0, elementName.c_str());
+		for (		istd::CStringList::const_iterator iter = groupIds.begin();
+					iter != groupIds.end();
+					++iter){
+			PackageComponentItem* itemPtr = new PackageComponentItem(
+						*this,
+						address,
+						metaInfoPtr,
+						icon);
+			itemPtr->setText(0, elementName.c_str());
 
-		RootInfo& rootInfo = EnsureRoot(groupId, address, metaInfoPtr);
-		I_ASSERT(rootInfo.itemPtr != NULL);
+			RootInfo& rootInfo = EnsureRoot(iter->ToString(), address, metaInfoPtr);
+			I_ASSERT(rootInfo.itemPtr != NULL);
 
-		rootInfo.itemPtr->addChild(itemPtr);
+			rootInfo.itemPtr->addChild(itemPtr);
+		}
 	}
 
 	for (		RootInfos::const_iterator toolTipIter = m_roots.begin();
@@ -321,109 +338,9 @@ void CPackageOverviewComp::GenerateComponentTree()
 }
 
 
-void CPackageOverviewComp::GenerateComponentToolBox()
-{
-	if (GroupByCB->currentIndex() <= GM_PACKAGE){
-		return;
-	}
-
-	while(CategoryToolBox->count() > 0){
-		QWidget* widgetPtr = CategoryToolBox->widget(0);
-		widgetPtr->deleteLater();
-
-		CategoryToolBox->removeItem(0);
-	}
-
-	m_categoryWidgetsMap.clear();
-
-	if (!m_envManagerCompPtr.IsValid()){
-		return;
-	}
-
-	istd::CString currentKey = iqt::GetCString(GroupByCB->currentText()); 
-
-	icomp::IMetaInfoManager::ComponentAddresses addresses = GetFilteredComponentAdresses();
-
-	for (		icomp::IMetaInfoManager::ComponentAddresses::const_iterator addressIter = addresses.begin();
-				addressIter != addresses.end();
-				++addressIter){
-		const icomp::CComponentAddress& address = *addressIter;
-		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
-
-		icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
-
-		istd::CStringList categories = encoder.GetValues(currentKey);
-
-		for (int categoryIndex = 0; categoryIndex < int(categories.size()); categoryIndex++){
-			istd::CString singleCategory = categories[categoryIndex];
-
-			QTreeWidget* categoryWidgetPtr = NULL;
-
-			CategoryWidgetsMap::iterator categoryWidgetIter = m_categoryWidgetsMap.find(singleCategory);
-
-			if (categoryWidgetIter == m_categoryWidgetsMap.end()){
-				categoryWidgetPtr = new QTreeWidget(CategoryToolBox);
-	
-				categoryWidgetPtr->setItemDelegate(new CItemDelegate());
-
-				categoryWidgetPtr->header()->setResizeMode(0, QHeaderView::Stretch);
-				categoryWidgetPtr->header()->hide();
-				categoryWidgetPtr->setFrameShape(QFrame::NoFrame);
-				categoryWidgetPtr->setRootIsDecorated(false);
-				categoryWidgetPtr->viewport()->installEventFilter(this);
-
-				CategoryToolBox->addItem(categoryWidgetPtr, iqt::GetQString(singleCategory));
-
-				m_categoryWidgetsMap[singleCategory] = categoryWidgetPtr;
-			}
-			else{
-				categoryWidgetPtr = categoryWidgetIter->second;
-			}
-
-			I_ASSERT(categoryWidgetPtr != NULL);
-			if (categoryWidgetPtr != NULL){
-				std::string elementName = address.GetComponentId();
-
-				istd::CString infoPath = m_envManagerCompPtr->GetComponentInfoPath(address);
-
-				QIcon icon;
-				if (m_consistInfoCompPtr.IsValid()){
-					icon = m_consistInfoCompPtr->GetComponentIcon(address);
-				}
-
-				QDir packageDir(iqt::GetQString(infoPath));
-				PackageComponentItem* itemPtr = new PackageComponentItem(
-					*this,
-					address,
-					metaInfoPtr,
-					icon);
-
-				itemPtr->setText(0, elementName.c_str());
-
-				categoryWidgetPtr->addTopLevelItem(itemPtr);
-			}
-		}
-	}
-
-	// sort keywords alphabetically:
-	QAbstractItemModel* keywordsListModelPtr = PackagesList->model();
-	I_ASSERT(keywordsListModelPtr != NULL);
-	if (keywordsListModelPtr != NULL){
-		keywordsListModelPtr->sort(0);
-	}
-}
-
-
 void CPackageOverviewComp::UpdateComponentsView()
 {
-	int currentGroupIndex = GroupByCB->currentIndex();
-
-	PackagesList->setVisible((currentGroupIndex <= GM_PACKAGE));
-	CategoryToolBox->setVisible((currentGroupIndex > GM_PACKAGE));
-
 	GenerateComponentTree();
-	
-	GenerateComponentToolBox();
 }
 
 
@@ -552,11 +469,8 @@ void CPackageOverviewComp::on_FilterEdit_editingFinished()
 }
 
 
-void CPackageOverviewComp::on_GroupByCB_currentIndexChanged(int index)
+void CPackageOverviewComp::on_GroupByCB_currentIndexChanged(int /*index*/)
 {
-	PackagesList->setVisible((index <= GM_PACKAGE));
-	CategoryToolBox->setVisible((index > GM_PACKAGE));
-
 	UpdateComponentsView();
 }
 
@@ -692,7 +606,7 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const std::stri
 			I_ASSERT(groupRoot.itemPtr != NULL);
 
 			QString packageDescription;
-			if (m_envManagerCompPtr.IsValid()){
+			if ((GroupByCB->currentIndex() == GM_PACKAGE) && m_envManagerCompPtr.IsValid()){
 				const icomp::IComponentStaticInfo* packageInfoPtr = m_envManagerCompPtr->GetPackageMetaInfo(address.GetPackageId());
 				if (packageInfoPtr != NULL){
 					packageDescription = iqt::GetQString(packageInfoPtr->GetDescription());
@@ -831,8 +745,6 @@ void CPackageOverviewComp::OnGuiCreated()
 	}
 
 	UpdateComponentGroups();
-
-//	CategoryToolBox->setStyleSheet("QToolBox::tab {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #E1E1E1, stop: 0.4 #DDDDDD, stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);border-radius: 5px;color: darkgray;}");
 
 	UpdateComponentsView();
 }
