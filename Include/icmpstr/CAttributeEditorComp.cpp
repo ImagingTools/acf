@@ -483,7 +483,7 @@ void CAttributeEditorComp::UpdateSelectedAttr()
 		CreateExportedComponentsTree(elementId, *infoPtr, *componentRootPtr);
 
 		ComponentsTree->addTopLevelItem(componentRootPtr);
-		
+
 		componentRootPtr->setExpanded(true);
 
 		MetaInfoFrame->setVisible(true);
@@ -1311,6 +1311,12 @@ CAttributeEditorComp::RegistryObserver::RegistryObserver(CAttributeEditorComp* p
 void CAttributeEditorComp::RegistryObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	if ((updateFlags & istd::IChangeable::CF_MODEL) != 0){
+		if (m_parent.IsUpdateBlocked()){
+			return;
+		}
+
+		UpdateBlocker blocker(&m_parent);
+
 		m_parent.UpdateSelectedAttr();
 	}
 }
