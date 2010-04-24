@@ -89,7 +89,6 @@ protected:
 protected slots:
 	void on_FilterEdit_editingFinished();
 	void on_GroupByCB_currentIndexChanged(int index);
-	void on_PackagesList_customContextMenuRequested(const QPoint& menuPoint);
 	void on_PackagesList_itemSelectionChanged();
 	void on_PackagesList_itemExpanded(QTreeWidgetItem* item);
 	void on_PackagesList_itemClicked(QTreeWidgetItem* item, int column);

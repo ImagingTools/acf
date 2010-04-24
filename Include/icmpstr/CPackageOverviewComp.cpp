@@ -480,23 +480,6 @@ void CPackageOverviewComp::on_GroupByCB_currentIndexChanged(int /*index*/)
 }
 
 
-void CPackageOverviewComp::on_PackagesList_customContextMenuRequested(const QPoint& menuPoint)
-{
-	I_ASSERT(IsGuiCreated());
-
-	QAction actionCollapseAll(tr("&Collapse All"), this);
-	connect(&actionCollapseAll, SIGNAL(triggered()), PackagesList, SLOT(collapseAll()), Qt::QueuedConnection);
-	QAction actionExpandAll(tr("&Expand All"), this);
-    connect(&actionExpandAll, SIGNAL(triggered()), PackagesList, SLOT(expandAll()), Qt::QueuedConnection);
-	QList<QAction*> actionList;
-	actionList << &actionCollapseAll << &actionExpandAll;
-
-	QPoint localPoint = PackagesList->viewport()->mapToGlobal(menuPoint);
-
-	QMenu::exec(actionList, localPoint);
-}
-
-
 void CPackageOverviewComp::on_PackagesList_itemSelectionChanged()
 {
 	QList<QTreeWidgetItem*> items = PackagesList->selectedItems();
@@ -526,7 +509,10 @@ void CPackageOverviewComp::on_PackagesList_itemExpanded(QTreeWidgetItem* item)
 
 void CPackageOverviewComp::on_PackagesList_itemClicked(QTreeWidgetItem* item, int /*column*/)
 {
-	item->setExpanded(!item->isExpanded());
+	PackageItem* packageItemPtr = dynamic_cast<CPackageOverviewComp::PackageItem*>(item);
+	if (packageItemPtr != NULL){
+		item->setExpanded(!item->isExpanded());
+	}
 }
 
 
@@ -723,8 +709,6 @@ void CPackageOverviewComp::OnGuiCreated()
 	PackagesList->setPalette(palette);
 
 	PackagesList->viewport()->installEventFilter(this);
-
-	PackagesList->setContextMenuPolicy( Qt::CustomContextMenu);
 
 	InterfaceFilter knownInterfaces;
 	if (m_envManagerCompPtr.IsValid()){
