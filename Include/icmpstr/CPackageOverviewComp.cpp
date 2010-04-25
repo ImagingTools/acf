@@ -47,19 +47,7 @@ public:
 		m_componentDescriptionFont.setPointSize(8);
 
 		m_defaultComponentIcon = QIcon(":/Icons/CompositorIcon.svg").pixmap(QSize(64, 64), QIcon::Disabled);
-
-		QColor window = qApp->palette().midlight().color();
-		window.setAlpha(100);
-		QColor light = qApp->palette().mid().color();
-		light.setAlpha(20);
-	
-		QLinearGradient headerBackgroundGradient(0, 0, 0, CalculateItemHeight());
-		headerBackgroundGradient.setColorAt(0, window);
-		headerBackgroundGradient.setColorAt(0.5, light);
-		headerBackgroundGradient.setColorAt(0.51, light);
-		headerBackgroundGradient.setColorAt(1, window);
-		m_openRootItemBackground = headerBackgroundGradient;
-	}
+}
 
 	void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 	{
@@ -70,44 +58,40 @@ public:
 			return;
 		}
 
+		UpdateGradients(option);
+
 	 	QRect mainRect = option.rect;
 
-		painter->save();
+		mainRect.adjust(SIDE_OFFSET, 0, 0, 0);
 
 		CPackageOverviewComp::PackageItem* packageItemPtr = dynamic_cast<CPackageOverviewComp::PackageItem*>(selectedItemPtr);
 
 		QBrush itemBrush = QBrush(Qt::NoBrush);
-		if (option.state & QStyle::State_Selected){
-			itemBrush = qApp->palette().highlight();
-		}
-		else if (packageItemPtr != NULL){
-			itemBrush = option.palette.window();
-		}
-
-		painter->save();
-		painter->setBrush(itemBrush);
 
 		if (packageItemPtr != NULL){
-			painter->fillRect(mainRect, itemBrush);
-			if (option.state & QStyle::State_Open){
-				painter->setPen(Qt::black);
+			if (option.state & QStyle::State_Open || option.state & QStyle::State_Selected || option.state & QStyle::State_HasFocus){
+				itemBrush = m_openPackageItemBrush;
 			}
 			else{
-				painter->setPen(option.palette.mid().color());
+				itemBrush = m_closedPackageItemBrush;
 			}
-
-			painter->drawLine(mainRect.left(), mainRect.bottom() - 1, mainRect.right() - 1, mainRect.bottom() - 1);
-
-			mainRect.adjust(0, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
 		}
 		else{
-			mainRect.adjust(0, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
-
-			painter->setPen(QPen(option.palette.mid().color(), 0, Qt::DotLine));
-			painter->drawRoundedRect(mainRect, SIDE_OFFSET, SIDE_OFFSET);
+			if (option.state & QStyle::State_Selected){
+				itemBrush = m_selectedItemBrush;
+			}
+			else{
+				itemBrush = m_itemBrush;				
+			}
 		}
 
-		painter->restore();
+		painter->setBrush(itemBrush);
+
+		mainRect.adjust(0, SIDE_OFFSET, -SIDE_OFFSET, -SIDE_OFFSET);
+		
+		painter->setPen(QPen(option.palette.mid().color()));
+		
+		painter->drawRoundedRect(mainRect, SIDE_OFFSET, SIDE_OFFSET);
 	
 		painter->setPen(option.palette.text().color());
 
@@ -142,8 +126,6 @@ public:
 						mainRect,
 						Qt::AlignBottom | Qt::AlignLeft | Qt::TextSingleLine, componentDescription);
 		}
-
-		painter->restore();
 	}
 
 
@@ -160,7 +142,9 @@ public:
 
 		QSize size = BaseClass::sizeHint(option, index);
 
-		size.setHeight(CalculateItemHeight());
+		int itemHeight = CalculateItemHeight();
+
+		size.setHeight(itemHeight);
 
 		return size;
 	}
@@ -173,9 +157,37 @@ private:
 
 		int height = nameFontMetrics.height();
 		height += descriptionFontMetrics.height();
-		height += 2 * SIDE_OFFSET; // margin
+		height += 4 * SIDE_OFFSET; // margin
 
 		return height;
+	}
+
+	void UpdateGradients(const QStyleOptionViewItem& option) const
+	{
+		QColor startColor = option.palette.window().color();
+		startColor.setAlpha(50);
+		QColor endColor = option.palette.window().color();
+
+		QColor startColor2("#dadbde");
+		QColor endColor2("#f6f7fa");
+
+		QRectF rect = option.rect;
+
+		QLinearGradient closedPackageItemGradient(rect.left(), rect.top(), rect.left(), rect.bottom());
+		closedPackageItemGradient.setColorAt(0, startColor);
+		closedPackageItemGradient.setColorAt(0.5, endColor);
+		closedPackageItemGradient.setColorAt(0.51, endColor);
+		closedPackageItemGradient.setColorAt(1, endColor);
+		m_closedPackageItemBrush = closedPackageItemGradient;
+
+		QLinearGradient openPackageItemGradient(rect.left(), rect.top(), rect.left(), rect.bottom());
+		openPackageItemGradient.setColorAt(0, endColor2);
+		openPackageItemGradient.setColorAt(0.5, startColor2);
+		openPackageItemGradient.setColorAt(0.51, startColor2);
+		openPackageItemGradient.setColorAt(1.0, endColor2);
+	
+		m_openPackageItemBrush = openPackageItemGradient;
+		m_selectedItemBrush =  QColor(10, 242, 126, 128);
 	}
 
 private:
@@ -184,7 +196,10 @@ private:
 
 	QIcon m_defaultComponentIcon;
 
-	QBrush m_openRootItemBackground;
+	mutable QBrush m_openPackageItemBrush;
+	mutable QBrush m_closedPackageItemBrush;
+	mutable QBrush m_selectedItemBrush;
+	mutable QBrush m_itemBrush;
 };
 
 
@@ -702,11 +717,12 @@ void CPackageOverviewComp::OnGuiCreated()
 
 	PackagesList->header()->setResizeMode(0, QHeaderView::Stretch);
 	PackagesList->header()->hide();
-	PackagesList->setIndentation(15);
 
 	QPalette palette = qApp->palette();
 	palette.setBrush(QPalette::Highlight, palette.base());
 	PackagesList->setPalette(palette);
+
+	PackagesList->setStyleSheet("QTreeView::branch {background: palette(base);}");
 
 	PackagesList->viewport()->installEventFilter(this);
 

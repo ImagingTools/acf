@@ -68,6 +68,9 @@
      <property name="midLineWidth">
       <number>1</number>
      </property>
+     <property name="indentation">
+      <number>4</number>
+     </property>
      <property name="rootIsDecorated">
       <bool>false</bool>
      </property>

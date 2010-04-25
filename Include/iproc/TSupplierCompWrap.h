@@ -35,12 +35,12 @@ namespace iproc
 */
 template <class SupplierInterface, class Product>
 class TSupplierCompWrap:
-			public ibase::TLoggerCompWrap<icomp::CComponentBase>,
+			public ibase::CLoggerComponentBase,
 			private imod::CSingleModelObserverBase,
 			virtual public SupplierInterface
 {
 public:
-	typedef ibase::TLoggerCompWrap<icomp::CComponentBase> BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 	typedef imod::CSingleModelObserverBase BaseClass2;
 
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
