@@ -187,7 +187,7 @@ private:
 		QLinearGradient selectedPackageItemGradient(rect.left(), rect.top(), rect.left(), rect.bottom());
 		selectedPackageItemGradient.setColorAt(0, startColor3);
 		selectedPackageItemGradient.setColorAt(0.4, startColor3);
-		selectedPackageItemGradient.setColorAt(0.45, endColor3);
+		selectedPackageItemGradient.setColorAt(0.5, endColor3);
 		selectedPackageItemGradient.setColorAt(0.9, startColor3);
 		m_selectedPackageItemBrush = selectedPackageItemGradient;
 
