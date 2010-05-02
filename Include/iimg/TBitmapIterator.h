@@ -5,6 +5,7 @@
 #include "i2d/CRectangle.h"
 
 #include "iimg/IBitmap.h"
+#include "iimg/TPixelAccessor.h"
 
 
 namespace iimg
@@ -18,7 +19,8 @@ template <typename PixelType>
 class TBitmapIterator
 {
 public:
-	typedef PixelType ValueType;
+	typedef typename TPixelAccessor<PixelType> PixelAccessor;
+	typedef typename PixelType ValueType;
 	/**
 		Construct image iterator from a bitmap.
 	*/
@@ -32,7 +34,8 @@ public:
 	/**
 		Access operator
 	*/
-	ValueType& operator*() const;
+	const PixelAccessor& operator*() const;
+	PixelAccessor& operator*();
 
 	bool operator < (const TBitmapIterator& iterator);
 	bool operator > (const TBitmapIterator& iterator);
@@ -80,11 +83,14 @@ private:
 	istd::CIndex2d m_index;
 	istd::CIndex2d m_endIndex;
 	int m_bytesPerPixel;
+
+	mutable PixelAccessor m_currentPixel;
 };
 
 
 template <typename PixelType>
 TBitmapIterator<PixelType>::TBitmapIterator(const iimg::IBitmap* bitmapPtr, const i2d::CRectangle* regionPtr)
+	:m_currentPixel(bitmapPtr->GetComponentsCount())
 {
 	I_ASSERT(bitmapPtr != NULL);
 
@@ -115,17 +121,30 @@ TBitmapIterator<PixelType>::TBitmapIterator(const TBitmapIterator& iterator)
 	m_linesDifference(iterator.m_linesDifference),
 	m_endIndex(iterator.m_endIndex),
 	m_index(iterator.m_index),
-	m_startIndex(iterator.m_startIndex)
+	m_startIndex(iterator.m_startIndex),
+	m_currentPixel(iterator.m_currentPixel)
 {
 }
 
 
 template <typename PixelType>
-inline typename TBitmapIterator<PixelType>::ValueType& TBitmapIterator<PixelType>::operator*() const
+inline const typename TBitmapIterator<PixelType>::PixelAccessor& TBitmapIterator<PixelType>::operator*() const
+{
+	I_ASSERT(IsValid());
+	m_currentPixel.SetPixelBuffer(m_imageBufferPtr);
+
+	return m_currentPixel;
+}
+
+
+template <typename PixelType>
+inline typename TBitmapIterator<PixelType>::PixelAccessor& TBitmapIterator<PixelType>::operator*()
 {
 	I_ASSERT(IsValid());
 		
-	return *m_imageBufferPtr;
+	m_currentPixel.SetPixelBuffer(m_imageBufferPtr);
+
+	return m_currentPixel;
 }
 
 
