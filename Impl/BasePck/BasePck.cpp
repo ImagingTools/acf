@@ -15,7 +15,7 @@ I_EXPORT_DEFAULT_SERVICES;
 I_EXPORT_PACKAGE(
 			"Base",
 			"Base system-undependent general package",
-			IM_PROJECT("ACF") IM_TAG("Standard Basic") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			IM_PROJECT("ACF") IM_TAG("Basic") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			FileTypeInfo,

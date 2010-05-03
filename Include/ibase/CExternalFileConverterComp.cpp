@@ -40,10 +40,12 @@ bool CExternalFileConverterComp::CopyFile(
 	else{
 		istd::CString applicationArguments = *m_processArgumentsAttrPtr;
 
-		applicationArguments.Replace("$(Input)", inputFilePath);
-		applicationArguments.Replace("$(Output)", outputFilePath);
-
 		arguments = applicationArguments.Split(" ", false);
+
+		for (int argIndex = 0; argIndex < int(arguments.size()); argIndex++){
+			arguments[argIndex].Replace("$(Input)", inputFilePath);
+			arguments[argIndex].Replace("$(Output)", outputFilePath);
+		}
 	}
 
 	return (m_processExecuterCompPtr->Execute(m_executablePathCompPtr->GetPath(), arguments) == 0);

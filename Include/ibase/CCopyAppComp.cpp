@@ -32,13 +32,13 @@ int CCopyAppComp::Execute(int argc, char** argv)
 					outputFilePath = argv[index + 1];
 					++index;
 				}
-				else if ((option == "input") && *m_needExplicitinputAttrPtr){
+				else if ((option == "input") && *m_needExplicitInputAttrPtr){
 					inputFilePath = argv[index + 1];
 					++index;
 				}
 			}
 		}
-		else if (!*m_needExplicitinputAttrPtr && (index == 1)){
+		else if (!*m_needExplicitInputAttrPtr && (index == 1)){
 			inputFilePath = argument;
 		}
 	}

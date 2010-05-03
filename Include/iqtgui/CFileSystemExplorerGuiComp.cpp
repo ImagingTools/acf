@@ -11,8 +11,6 @@ namespace iqtgui
 {
 
 
-// public methods
-
 // protected methods
 
 // reimplemented (CGuiComponentBase)

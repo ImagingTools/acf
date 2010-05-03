@@ -27,7 +27,7 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 I_EXPORT_PACKAGE(
 			"Acf/Qt/Gui",
 			"Standard Qt package",
-			IM_PROJECT("ACF") IM_TAG("Qt Standard Base") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			IM_PROJECT("ACF") IM_TAG("Qt") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			GuiApplication,
@@ -193,6 +193,11 @@ I_EXPORT_COMPONENT(
 			ImagePropertyGui,
 			"Image property viewer",
 			"Observer Display GUI Image Bitmap Property" IM_TAG("GUI"));
+
+I_EXPORT_COMPONENT(
+			SelectableFileConverterGui,
+			"Selectable file converter",
+			"File Converter" IM_TAG("GUI"));
 
 
 } // namespace QtGuiPck

@@ -27,6 +27,7 @@
 #include "iqtgui/CCommandsBinderComp.h"
 #include "iqtgui/CFileSystemExplorerGuiComp.h"
 #include "iqtgui/CImagePropertyGuiComp.h"
+#include "iqtgui/CSelectableFileConverterGuiComp.h"
 
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
@@ -72,6 +73,7 @@ typedef iqtgui::CModelDialogGuiComp ModelDialogGui;
 typedef iqtgui::CCommandsBinderComp CommandsBinder;
 typedef iqtgui::CFileSystemExplorerGuiComp FileSystemExplorerGui;
 typedef iqtgui::CImagePropertyGuiComp ImagePropertyGui;
+typedef iqtgui::CSelectableFileConverterGuiComp SelectableFileConverterGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CParamsManagerGuiComp ParamsManagerGui;

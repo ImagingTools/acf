@@ -27,7 +27,7 @@ I_EXPORT_SERVICES_PROVIDER(iqt::CDefaultServicesProvider);
 I_EXPORT_PACKAGE(
 			"Acf/Qt/Gui/View",
 			"Viewport package",
-			IM_PROJECT("ACF") IM_TAG("Qt Standard Viewport") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
+			IM_PROJECT("ACF") IM_TAG("Qt Viewport") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
 			SceneConnector,

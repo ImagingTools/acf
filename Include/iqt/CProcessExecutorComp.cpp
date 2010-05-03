@@ -27,7 +27,7 @@ CProcessExecutorComp::CProcessExecutorComp()
 void CProcessExecutorComp::SetEnvironment(const isys::IApplicationEnvironment& processEnvironment)
 {
 	if (m_applicationProcess.state() != QProcess::NotRunning){
-		SendErrorMessage(0, "Application path has wrong type. It must be a file path");
+		SendErrorMessage(0, "Process already running. Environment cannot be set.");
 
 		return;
 	}
