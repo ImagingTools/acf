@@ -1,5 +1,5 @@
-#ifndef iqtgui_CSelectionParamGuiComp_included
-#define iqtgui_CSelectionParamGuiComp_included
+#ifndef iqtprm_CSelectionParamGuiComp_included
+#define iqtprm_CSelectionParamGuiComp_included
 
 
 // Qt includes
@@ -16,42 +16,46 @@
 #include "iqtgui/Generated/ui_CSelectionParamGuiComp.h"
 
 
-namespace iqtgui
+namespace iqtprm
 {
 
 
-class CSelectionParamGuiComp: public TDesignerGuiObserverCompBase<
+class CSelectionParamGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CSelectionParamGuiComp,
 			iprm::ISelectionParam>
 {
 	Q_OBJECT
 
 public:
-	typedef TDesignerGuiObserverCompBase<
+	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CSelectionParamGuiComp,
 				iprm::ISelectionParam> BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectionParamGuiComp);
+		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Label for the options selector", false, "Select");
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
 	virtual void UpdateEditor(int updateFlags = 0);
 
-protected slots:
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+
+protected Q_SLOTS:
 	void OnSelectionChanged(int index);
 
-	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelShown();
-
 private:
+	I_ATTR(istd::CString, m_optionsLabelAttrPtr);
+
 	istd::TPointerVector<QComboBox> m_comboBoxes;
 };
 
 
-} // namespace iqtgui
+} // namespace iqtprm
 
 
-#endif // !iqtgui_CSelectionParamGuiComp_included
+#endif // !iqtprm_CSelectionParamGuiComp_included
 
 

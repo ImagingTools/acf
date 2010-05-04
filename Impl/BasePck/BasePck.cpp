@@ -108,6 +108,12 @@ I_EXPORT_COMPONENT(
 			"Objects Queue List FIFO Stack Elements Serial Delay Line" IM_CATEGORY(I_SERVICE));
 
 I_EXPORT_COMPONENT(
+			SelectableFileConverter,
+			"Selectable file converter",
+			"File Converter" IM_CATEGORY(I_SERVICE));
+
+
+I_EXPORT_COMPONENT(
 			SelectableParamsSet,
 			"Composed set of parameters",
 			"Parameters Set Selection Options List" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));

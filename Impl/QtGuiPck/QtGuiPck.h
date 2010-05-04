@@ -14,7 +14,6 @@
 #include "iqtgui/CDockWidgetGuiComp.h"
 #include "iqtgui/CToolBarWidgetGuiComp.h"
 #include "iqtgui/CFreeWidgetGuiComp.h"
-#include "iqtgui/CSelectionParamGuiComp.h"
 #include "iqtgui/CTabContainerGuiComp.h"
 #include "iqtgui/CAboutWidgetGuiComp.h"
 #include "iqtgui/CTabbedMultiViewGuiComp.h"
@@ -27,11 +26,11 @@
 #include "iqtgui/CCommandsBinderComp.h"
 #include "iqtgui/CFileSystemExplorerGuiComp.h"
 #include "iqtgui/CImagePropertyGuiComp.h"
-#include "iqtgui/CSelectableFileConverterGuiComp.h"
 
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
 #include "iqtprm/CParamsManagerGuiComp.h"
+#include "iqtprm/CSelectionParamGuiComp.h"
 
 #include "iqtdoc/CModelEditorGuiComp.h"
 #include "iqtdoc/CMainWindowGuiComp.h"
@@ -61,7 +60,6 @@ typedef iqtgui::CDockWidgetGuiComp DockWidgetGui;
 typedef iqtgui::CToolBarWidgetGuiComp ToolBarWidgetGui;
 typedef iqtgui::CStatusBarWidgetComp StatusBarWidget;
 typedef iqtgui::CFreeWidgetGuiComp FreeWidgetGui;
-typedef iqtgui::CSelectionParamGuiComp SelectionParamGui;
 typedef iqtgui::CTabContainerGuiComp TabContainer;
 typedef iqtgui::CAboutWidgetGuiComp AboutGui;
 typedef iqtgui::CTabbedMultiViewGuiComp TabbedMultiViewGui;
@@ -73,11 +71,11 @@ typedef iqtgui::CModelDialogGuiComp ModelDialogGui;
 typedef iqtgui::CCommandsBinderComp CommandsBinder;
 typedef iqtgui::CFileSystemExplorerGuiComp FileSystemExplorerGui;
 typedef iqtgui::CImagePropertyGuiComp ImagePropertyGui;
-typedef iqtgui::CSelectableFileConverterGuiComp SelectableFileConverterGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CParamsManagerGuiComp ParamsManagerGui;
 typedef iqtprm::CFileNameParamGuiComp FileNameParamGui;
+typedef iqtprm::CSelectionParamGuiComp SelectionParamGui;
 
 typedef iqtdoc::CModelEditorGuiComp ModelEditorGui;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;

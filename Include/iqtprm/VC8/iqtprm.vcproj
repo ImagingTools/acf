@@ -178,15 +178,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComposedParamsSetGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileNameParamGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileNameParamGuiComp.moc"
 				>
 			</File>
 			<File
@@ -194,7 +186,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CParamsManagerGuiComp.moc"
+				RelativePath="..\CSelectionParamGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -216,16 +208,13 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectionParamGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\iqtprm.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			UniqueIdentifier="{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}"
-			ParseFiles="false"
-			>
 		</Filter>
 		<Filter
 			Name="Generated Files"
@@ -245,11 +234,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CSelectionParamGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CComposedParamsSetGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CFileNameParamGuiComp.h"
 				>
 			</File>
 			<File
+				RelativePath="..\generated\ui_COptionSelectorGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CParamsManagerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSelectionParamGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -266,6 +271,30 @@
 			</File>
 			<File
 				RelativePath="..\CParamsManagerGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectionParamGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="MOC Files"
+			>
+			<File
+				RelativePath="..\CComposedParamsSetGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileNameParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CParamsManagerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectionParamGuiComp.moc"
 				>
 			</File>
 		</Filter>

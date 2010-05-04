@@ -194,11 +194,6 @@ I_EXPORT_COMPONENT(
 			"Image property viewer",
 			"Observer Display GUI Image Bitmap Property" IM_TAG("GUI"));
 
-I_EXPORT_COMPONENT(
-			SelectableFileConverterGui,
-			"Selectable file converter",
-			"File Converter" IM_TAG("GUI"));
-
 
 } // namespace QtGuiPck
 
