@@ -1,30 +1,52 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1337
+          1490
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          192
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="6">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
         Application
       </ComponentName>
       <X>
-        -2
+        350
       </X>
       <X>
-        -452
+        125
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileDialogLoader
+      </ComponentName>
+      <X>
+        725
+      </X>
+      <X>
+        500
       </X>
     </Element>
     <Element>
@@ -32,10 +54,10 @@
         FilePersistence
       </ComponentName>
       <X>
-        -5
+        725
       </X>
       <X>
-        -225
+        300
       </X>
     </Element>
     <Element>
@@ -43,10 +65,10 @@
         MediaLoader
       </ComponentName>
       <X>
-        -333
+        350
       </X>
       <X>
-        -3
+        500
       </X>
     </Element>
     <Element>
@@ -54,32 +76,10 @@
         VideoView
       </ComponentName>
       <X>
-        -322
+        350
       </X>
       <X>
-        -216
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VlcPlayer
-      </ComponentName>
-      <X>
-        -407
-      </X>
-      <X>
-        -222
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        VlcVideoView
-      </ComponentName>
-      <X>
-        -342
-      </X>
-      <X>
-        -222
+        300
       </X>
     </Element>
   </PositionMap>

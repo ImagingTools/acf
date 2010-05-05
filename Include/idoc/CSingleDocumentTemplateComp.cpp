@@ -59,10 +59,20 @@ istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
 }
 
 
+// protected methods
+
+istd::IPolymorphic* CSingleDocumentTemplateComp::ExtractViewInterface(icomp::IComponent* componentPtr) const
+{
+	return m_viewCompFact.ExtractInterface(componentPtr);
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CSingleDocumentTemplateComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	I_ASSERT(m_documentTypeIdAttrPtr.IsValid());
 	SetDocumentTypeId((*m_documentTypeIdAttrPtr).ToString());
 
@@ -70,23 +80,15 @@ void CSingleDocumentTemplateComp::OnComponentCreated()
 	SetDefaultDirectory(*m_defaultDirectoryAttrPtr);
 
 	int featureFlags = 0;
-	if (m_isNewSupportedAttrPtr.IsValid() && m_isNewSupportedAttrPtr->GetValue()){
+	if (*m_isNewSupportedAttrPtr){
 		featureFlags |= idoc::IDocumentTemplate::New;
 	}
 
-	if (m_isEditSupportedAttrPtr.IsValid() && m_isEditSupportedAttrPtr->GetValue()){
+	if (*m_isEditSupportedAttrPtr){
 		featureFlags |= idoc::IDocumentTemplate::Edit;
 	}
 
 	SetSupportedFeatures(featureFlags);
-}
-
-
-// protected methods
-
-istd::IPolymorphic* CSingleDocumentTemplateComp::ExtractViewInterface(icomp::IComponent* componentPtr) const
-{
-	return m_viewCompFact.ExtractInterface(componentPtr);
 }
 
 

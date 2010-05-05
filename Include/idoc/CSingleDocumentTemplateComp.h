@@ -29,8 +29,8 @@ public:
 		I_ASSIGN(m_modelCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory");
 		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory");
 		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
-		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", false, true);
-		I_ASSIGN(m_isEditSupportedAttrPtr, "IsEditSupported", "Template supports the edit operation", false, true);
+		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", true, false);
+		I_ASSIGN(m_isEditSupportedAttrPtr, "IsEditSupported", "Template supports the edit operation", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IDocumentTemplate)
@@ -41,9 +41,6 @@ public:
 				istd::IChangeable* documentPtr,
 				const std::string& viewTypeId = std::string()) const;
 
-	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-
 protected:
 	/**
 		Extract pointer of view interface from factorisied view component.
@@ -53,6 +50,9 @@ protected:
 		composite components it can be inaccurate for some cases.
 	*/
 	virtual istd::IPolymorphic* ExtractViewInterface(icomp::IComponent* componentPtr) const;
+
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
 
 private:
 	I_ATTR(bool, m_isNewSupportedAttrPtr);

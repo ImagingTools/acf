@@ -169,10 +169,14 @@ istd::CString CCompositeDocumentTemplateComp::GetDefaultDirectory(const istd::CS
 }
 
 
+// protected methods
+
 // reimplemented (icomp::IComponent)
 
 void CCompositeDocumentTemplateComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	int slavesCount = m_slaveTemplatesCompPtr.GetCount();
 
 	if (slavesCount > 0){
@@ -195,6 +199,8 @@ void CCompositeDocumentTemplateComp::OnComponentCreated()
 void CCompositeDocumentTemplateComp::OnComponentDestroyed()
 {
 	m_idToTemplateMap.clear();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

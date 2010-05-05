@@ -39,6 +39,7 @@ public:
 	virtual IDocumentStateComparator* CreateStateComparator(const std::string& documentTypeId) const;
 	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
 
+protected:
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
