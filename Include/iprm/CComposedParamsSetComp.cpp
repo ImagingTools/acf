@@ -17,10 +17,9 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::strin
 	std::string subId;
 	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
 
-	const ParamsMap& paramsMap = GetParamsMap();
-	ParamsMap::const_iterator iter = paramsMap.find(baseId);
-	if (iter != paramsMap.end()){
-		const iser::ISerializable* paramPtr = iter->second;
+	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
+	if (parameterInfoPtr != NULL){
+		const iser::ISerializable* paramPtr = parameterInfoPtr->parameterPtr.GetPtr();
 		if (isSubelement){
 			const IParamsSet* subSetPtr = dynamic_cast<const IParamsSet*>(paramPtr);
 			if (subSetPtr != NULL){
@@ -53,10 +52,9 @@ iser::ISerializable* CComposedParamsSetComp::GetEditableParameter(const std::str
 	std::string subId;
 	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
 
-	ParamsMap& paramsMap = GetParamsMapRef();
-	ParamsMap::iterator iter = paramsMap.find(baseId);
-	if (iter != paramsMap.end()){
-		iser::ISerializable* paramPtr = iter->second;
+	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
+	if (parameterInfoPtr != NULL){
+		iser::ISerializable* paramPtr = parameterInfoPtr->parameterPtr.GetPtr();
 		if (isSubelement){
 			IParamsSet* subSetPtr = dynamic_cast<IParamsSet*>(paramPtr);
 			if (subSetPtr != NULL){

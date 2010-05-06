@@ -3,6 +3,7 @@
 
 #include "istd/TChangeNotifier.h"
 #include "istd/CChangeDelegator.h"
+#include "istd/TDelPtr.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -19,12 +20,12 @@ CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
 }
 
 
-bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr)
+bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr, bool releaseFlag)
 {
 	if (!id.empty()){
-		ParamsMap::const_iterator findIter = m_paramsMap.find(id);
-		if (findIter == m_paramsMap.end()){
-			m_paramsMap[id] = parameterPtr;
+		const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+		if (parameterInfoPtr == NULL){
+			m_params.PushBack(new ParameterInfo(id, parameterPtr, releaseFlag));
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr);
 			if (modelPtr != NULL){
@@ -43,9 +44,9 @@ bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable
 
 const iser::ISerializable* CParamsSet::GetParameter(const std::string& id) const
 {
-	ParamsMap::const_iterator iter = m_paramsMap.find(id);
-	if (iter != m_paramsMap.end()){
-		return iter->second;
+	const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+	if (parameterInfoPtr != NULL){
+		return parameterInfoPtr->parameterPtr.GetPtr();
 	}
 
 	if (m_slaveSetPtr != NULL){
@@ -58,9 +59,9 @@ const iser::ISerializable* CParamsSet::GetParameter(const std::string& id) const
 
 iser::ISerializable* CParamsSet::GetEditableParameter(const std::string& id)
 {
-	ParamsMap::iterator iter = m_paramsMap.find(id);
-	if (iter != m_paramsMap.end()){
-		return iter->second;
+	const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+	if (parameterInfoPtr != NULL){
+		return parameterInfoPtr->parameterPtr.GetPtr();
 	}
 
 	return NULL;
@@ -79,24 +80,23 @@ bool CParamsSet::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag parameterValueTag("Value", "Value of parameter");
 
 	if (archive.IsStoring()){
-		int paramsCount = int(m_paramsMap.size());
+		int paramsCount = m_params.GetCount();
 
 		retVal = retVal && archive.BeginMultiTag(paramsSetTag, parameterTag, paramsCount);
 
-		for (		ParamsMap::iterator iter = m_paramsMap.begin();
-					iter != m_paramsMap.end();
-					++iter){
-			I_ASSERT(iter->second != NULL);
+		for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
+			ParameterInfo* parameterInfoPtr = m_params.GetAt(parameterIndex);
+			I_ASSERT(parameterInfoPtr != NULL);
 
 			retVal = retVal && archive.BeginTag(parameterTag);
 
-			std::string id = iter->first;
 			retVal = retVal && archive.BeginTag(parameterIdTag);
-			retVal = retVal && archive.Process(id);
+			retVal = retVal && archive.Process(parameterInfoPtr->parameterId);
 			retVal = retVal && archive.EndTag(parameterIdTag);
 
+			I_ASSERT(parameterInfoPtr->parameterPtr.IsValid());
 			retVal = retVal && archive.BeginTag(parameterValueTag);
-			retVal = retVal && iter->second->Serialize(archive);
+			retVal = retVal && parameterInfoPtr->parameterPtr->Serialize(archive);
 			retVal = retVal && archive.EndTag(parameterValueTag);
 
 			retVal = retVal && archive.EndTag(parameterTag);
@@ -127,10 +127,10 @@ bool CParamsSet::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
-			ParamsMap::iterator foundParameter = m_paramsMap.find(id);
-			if (foundParameter != m_paramsMap.end()){
+			const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+			if (parameterInfoPtr != NULL){
 				retVal = retVal && archive.BeginTag(parameterValueTag);
-				retVal = retVal && foundParameter->second->Serialize(archive);
+				retVal = retVal && parameterInfoPtr->parameterPtr->Serialize(archive);
 				retVal = retVal && archive.EndTag(parameterValueTag);
 			}
 
@@ -147,12 +147,11 @@ bool CParamsSet::Serialize(iser::IArchive& archive)
 I_DWORD CParamsSet::GetMinimalVersion(int versionId) const
 {
 	I_DWORD retVal = 0;
-	for (		ParamsMap::const_iterator iter = m_paramsMap.begin();
-				iter != m_paramsMap.end();
-				++iter){
-		I_ASSERT(iter->second != NULL);
+	for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
+		const ParameterInfo* parameterInfoPtr = m_params.GetAt(parameterIndex);
+		I_ASSERT(parameterInfoPtr != NULL);
 
-		I_DWORD minimalVersion = iter->second->GetMinimalVersion(versionId);
+		I_DWORD minimalVersion = parameterInfoPtr->parameterPtr->GetMinimalVersion(versionId);
 		if (minimalVersion > retVal){
 			retVal = minimalVersion;
 		}
@@ -161,6 +160,60 @@ I_DWORD CParamsSet::GetMinimalVersion(int versionId) const
 	return retVal;
 }
 
+
+// reimplemented (istd::IChangeable)
+
+bool CParamsSet::CopyFrom(const IChangeable& object)
+{
+	const iprm::CParamsSet* inputParamsSetPtr = dynamic_cast<const iprm::CParamsSet*>(&object);
+	if (inputParamsSetPtr == NULL){
+		return false;
+	}
+
+	CParamsSet tempSet;
+
+	for (int parameterIndex = 0; parameterIndex < inputParamsSetPtr->m_params.GetCount(); parameterIndex++){
+		const ParameterInfo* parameterInfoPtr = inputParamsSetPtr->m_params.GetAt(parameterIndex);
+		I_ASSERT(parameterInfoPtr != NULL);
+
+		istd::TDelPtr<iser::ISerializable> parameterCopyPtr;
+		
+		parameterCopyPtr.SetCastedOrRemove(parameterInfoPtr->parameterPtr->CloneMe());
+
+		if (parameterCopyPtr.IsValid()){
+			tempSet.SetEditableParameter(parameterInfoPtr->parameterId, parameterCopyPtr.PopPtr(), true);
+		}
+		else{
+			return false;
+		}
+	}
+
+	// copy params into the target parameter set:
+	m_params.Reset();
+
+	while (!tempSet.m_params.IsEmpty()){
+		m_params.PushBack(tempSet.m_params.PopAt(0));
+	}
+
+	return true;
+}
+
+
+// protected methods
+
+const CParamsSet::ParameterInfo* CParamsSet::FindParameterInfo(const std::string& parameterId) const
+{
+	for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
+		const ParameterInfo* parameterPtr = m_params.GetAt(parameterIndex);
+		I_ASSERT(parameterPtr != NULL);
+
+		if (parameterPtr->parameterId == parameterId){
+			return parameterPtr;
+		}
+	}
+
+	return NULL;
+}
 
 
 // public methods of embedded class ParamsObserver

@@ -8,6 +8,8 @@
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
+#include "istd/TOptDelPtr.h"
+#include "istd/TPointerVector.h"
 
 #include "imod/CMultiModelObserverBase.h"
 
@@ -39,7 +41,7 @@ public:
 	*/
 	void SetSlaveSet(const IParamsSet* slaveSetPtr);
 
-	virtual bool SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr);
+	virtual bool SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr, bool releaseFlag = false);
 
 	// reimplemented (iprm::IParamsSet)
 	virtual const iser::ISerializable* GetParameter(const std::string& id) const;
@@ -49,11 +51,25 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 	virtual I_DWORD GetMinimalVersion(int versionId = iser::IVersionInfo::UserVersionId) const;
 
-protected:
-	typedef std::map<std::string, iser::ISerializable*> ParamsMap;
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const IChangeable& object);
 
-	const ParamsMap& GetParamsMap() const;
-	ParamsMap& GetParamsMapRef();
+protected:
+	struct ParameterInfo
+	{
+		ParameterInfo(const std::string& parameterId, iser::ISerializable* parameterPtr, bool releaseFlag = false)
+		{
+			this->parameterPtr.SetPtr(parameterPtr, releaseFlag);
+			this->parameterId = parameterId;
+		}
+
+		std::string parameterId;
+		istd::TOptDelPtr<iser::ISerializable> parameterPtr;
+	};
+
+	typedef istd::TPointerVector<ParameterInfo> Parameters;
+
+	const ParameterInfo* FindParameterInfo(const std::string& parameterId) const;
 
 private:
 	/**
@@ -75,7 +91,7 @@ private:
 
 	ParamsObserver m_paramsObserver;
 
-	ParamsMap m_paramsMap;
+	Parameters m_params;
 
 	const IParamsSet* m_slaveSetPtr;
 };
@@ -92,20 +108,6 @@ inline const IParamsSet* CParamsSet::GetSlaveSet() const
 inline void CParamsSet::SetSlaveSet(const IParamsSet* slaveSetPtr)
 {
 	m_slaveSetPtr = slaveSetPtr;
-}
-
-
-// protected methods
-
-inline const CParamsSet::ParamsMap& CParamsSet::GetParamsMap() const
-{
-	return m_paramsMap;
-}
-
-
-inline CParamsSet::ParamsMap& CParamsSet::GetParamsMapRef()
-{
-	return m_paramsMap;
 }
 
 

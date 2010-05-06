@@ -69,7 +69,13 @@ int CProcessExecutorComp::Execute(const istd::CString& executablePath, const ist
 
 void CProcessExecutorComp::OnComponentDestroyed()
 {
-	m_applicationProcess.kill();
+	if (m_applicationProcess.state() == QProcess::Running){
+		m_applicationProcess.terminate();
+	}
+
+	if (!m_applicationProcess.waitForFinished()){
+		m_applicationProcess.kill();
+	}
 
 	BaseClass::OnComponentDestroyed();
 }
