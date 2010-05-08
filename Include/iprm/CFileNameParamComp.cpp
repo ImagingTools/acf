@@ -27,6 +27,8 @@ void CFileNameParamComp::OnComponentCreated()
 
 int CFileNameParamComp::GetPathType() const
 {
+	I_ASSERT(m_pathTypeAttrPtr.IsValid());
+
 	return *m_pathTypeAttrPtr;
 }
 
