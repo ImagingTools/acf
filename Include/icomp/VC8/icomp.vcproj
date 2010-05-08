@@ -417,6 +417,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TComponentCopyWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TComponentRegistrator.h"
 				>
 			</File>

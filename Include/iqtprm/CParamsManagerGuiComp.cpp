@@ -6,8 +6,6 @@
 
 #include "iprm/IParamsSet.h"
 
-#include "iqt/CSignalBlocker.h"
-
 #include "iqtgui/CItemDelegate.h"
 
 
@@ -34,11 +32,11 @@ void CParamsManagerGuiComp::UpdateEditor(int updateFlags)
 {
 	// if the set was removed, the model was already detached from all observers,
 	// so we must reset our temporary model pointer:
-	if ((updateFlags & iprm::IParamsManager::CF_SET_REMOVED) != 0 && ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0)){
+	if ((updateFlags & iprm::IParamsManager::CF_SET_REMOVED) != 0){
 		m_lastConnectedModelPtr = NULL;
 	}
-
-	if (IsGuiCreated() && !IsUpdateBlocked()){
+	
+	if (IsGuiCreated()){
 		UpdateBlocker updateBlocker(this);
 
 		UpdateTree();
@@ -179,8 +177,6 @@ void CParamsManagerGuiComp::UpdateTree()
 
 void CParamsManagerGuiComp::UpdateParamsView(int selectedIndex)
 {
-	iqt::CSignalBlocker blocker(ParamsFrame);
-
 	EnsureParamsGuiDetached();
 
 	bool paramsFrameVisible = false;
@@ -241,12 +237,6 @@ void CParamsManagerGuiComp::EnsureParamsGuiDetached()
 
 
 // reimplemented (iqtgui::TGuiObserverWrap)
-
-void CParamsManagerGuiComp::OnGuiModelShown()
-{
-	UpdateTree();
-}
-
 
 void CParamsManagerGuiComp::OnGuiModelAttached()
 {

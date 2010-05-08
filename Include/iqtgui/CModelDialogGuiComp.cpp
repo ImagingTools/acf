@@ -17,14 +17,8 @@ void CModelDialogGuiComp::Execute()
 {
 	I_ASSERT(m_dataCompPtr.IsValid());
 	I_ASSERT(m_modelCompPtr.IsValid());
-	I_ASSERT(m_workingDataFactoryCompPtr.IsValid());
-	I_ASSERT(m_workingModelFactoryCompPtr.IsValid());
 
 	// create working model:
-	if (!m_workingDataFactoryCompPtr.IsValid()){
-		return;
-	}
-
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog());
 	if (!dialogPtr.IsValid()){
 		return;
@@ -35,27 +29,25 @@ void CModelDialogGuiComp::Execute()
 		m_modelCompPtr->DetachObserver(m_editorCompPtr.GetPtr());
 	}
 
-	m_workingDataPtr.SetPtr(m_workingDataFactoryCompPtr.CreateInstance());
+	m_workingDataPtr.SetPtr(m_dataCompPtr->CloneMe());
 
 	if (m_workingDataPtr.IsValid()){
-		if (m_workingDataPtr->CopyFrom(*m_dataCompPtr.GetPtr())){
-			imod::IModel* workingModelPtr = dynamic_cast<imod::IModel*>(m_workingDataPtr.GetPtr());
-			I_ASSERT(workingModelPtr != NULL);
-			if (workingModelPtr != NULL){
-				bool isAttached = workingModelPtr->AttachObserver(m_editorCompPtr.GetPtr());
-				if (isAttached){
-					int retVal = dialogPtr->exec();
+		imod::IModel* workingModelPtr = dynamic_cast<imod::IModel*>(m_workingDataPtr.GetPtr());
+		I_ASSERT(workingModelPtr != NULL);
+		if (workingModelPtr != NULL){
+			bool isAttached = workingModelPtr->AttachObserver(m_editorCompPtr.GetPtr());
+			if (isAttached){
+				int retVal = dialogPtr->exec();
 
-					if (retVal == QDialog::Accepted){
-						m_dataCompPtr->CopyFrom(*m_workingDataPtr.GetPtr());
-					}
+				if (retVal == QDialog::Accepted){
+					m_dataCompPtr->CopyFrom(*m_workingDataPtr.GetPtr());
+				}
 
-					// re-attach the original data model to the editor:
-					workingModelPtr->DetachObserver(m_editorCompPtr.GetPtr());
+				// re-attach the original data model to the editor:
+				workingModelPtr->DetachObserver(m_editorCompPtr.GetPtr());
 
-					if (orignalModelAttached){
-						m_modelCompPtr->AttachObserver(m_editorCompPtr.GetPtr());
-					}
+				if (orignalModelAttached){
+					m_modelCompPtr->AttachObserver(m_editorCompPtr.GetPtr());
 				}
 			}
 		}

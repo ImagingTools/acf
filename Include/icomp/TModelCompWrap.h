@@ -6,6 +6,7 @@
 
 #include "imod/TModelWrap.h"
 
+#include "icomp/TComponentCloneWrap.h"
 #include "icomp/CComponentBase.h"
 
 
@@ -21,10 +22,10 @@ namespace icomp
 	\ingroup Helpers
 */
 template <class Base>
-class TModelCompWrap: public imod::TModelWrap<Base>
+class TModelCompWrap: public icomp::TComponentCloneWrap<imod::TModelWrap<Base> >
 {
 public:
-	typedef imod::TModelWrap<Base> BaseClass;
+	typedef icomp::TComponentCloneWrap<imod::TModelWrap<Base> > BaseClass;
 
 	I_BEGIN_COMPONENT(TModelCompWrap)
 		I_REGISTER_INTERFACE(istd::IChangeable)

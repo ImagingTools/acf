@@ -51,7 +51,6 @@ protected:
 	void EnsureParamsGuiDetached();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelShown();
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 
