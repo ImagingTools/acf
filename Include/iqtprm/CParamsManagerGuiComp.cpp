@@ -85,8 +85,7 @@ void CParamsManagerGuiComp::on_ParamsTree_itemSelectionChanged()
 	int selectedIndex = GetSelectedIndex();
 
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
-	if (		(selectedIndex >= 0) &&
-				(selectionPtr != NULL) &&
+	if (		(selectionPtr != NULL) &&
 				(selectedIndex < selectionPtr->GetOptionsCount()) &&
 				(selectedIndex != selectionPtr->GetSelectedOptionIndex())){
 		selectionPtr->SetSelectedOptionIndex(selectedIndex);
@@ -169,7 +168,7 @@ void CParamsManagerGuiComp::UpdateTree()
 			paramsSetItemPtr->setFlags(itemFlags);
 			ParamsTree->addTopLevelItem(paramsSetItemPtr);
 
-			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);
+			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);	
 		}
 
 		UpdateParamsView(selectedIndex);
@@ -192,8 +191,9 @@ void CParamsManagerGuiComp::UpdateParamsView(int selectedIndex)
 
 			if (modelPtr != NULL){
 				I_ASSERT(!modelPtr->IsAttached(m_paramsObserverCompPtr.GetPtr()));
-				
+					
 				if (modelPtr->AttachObserver(m_paramsObserverCompPtr.GetPtr())){
+					qDebug("after AttachObserver: %d", selectedIndex);
 					m_lastConnectedModelPtr = modelPtr;
 
 					paramsFrameVisible = true;

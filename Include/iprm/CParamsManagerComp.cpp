@@ -12,6 +12,12 @@ namespace iprm
 {
 
 
+CParamsManagerComp::CParamsManagerComp()
+	:m_selectedIndex(-1)
+{
+}
+
+
 bool CParamsManagerComp::SetSetsCount(int count)
 {
 	int actualSetsCount = GetSetsCount();
@@ -142,6 +148,9 @@ bool CParamsManagerComp::RemoveSet(int index)
 IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 {
 	I_ASSERT((index >= 0) && (index < GetSetsCount()));
+	if ((index < 0) || (index >= GetSetsCount())){
+		return NULL;
+	}
 
 	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedCount){
@@ -204,7 +213,7 @@ int CParamsManagerComp::GetSelectedOptionIndex() const
 
 bool CParamsManagerComp::SetSelectedOptionIndex(int index)
 {
-	if ((index >= 0) && (index < GetOptionsCount())){
+	if (index < GetOptionsCount()){
 		if (index != m_selectedIndex){
 			istd::CChangeNotifier notifier(this, CF_SELECTION_CHANGED);
 

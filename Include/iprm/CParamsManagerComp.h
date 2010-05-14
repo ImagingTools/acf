@@ -38,6 +38,8 @@ public:
 		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet")
 	I_END_COMPONENT
 
+	CParamsManagerComp();
+
 	bool SetSetsCount(int count);
 
 	// reimplemented (iprm::IParamsManager)
