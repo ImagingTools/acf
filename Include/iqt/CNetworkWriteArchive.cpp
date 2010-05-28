@@ -37,6 +37,8 @@ CNetworkWriteArchive::~CNetworkWriteArchive()
 	Flush();
 
 	m_socket.disconnectFromHost();
+	
+	m_socket.waitForDisconnected();
 }
 
 
@@ -48,8 +50,12 @@ bool CNetworkWriteArchive::Flush()
 
 	QDataStream dataStream(&m_socket);
 
-	dataStream << GetBufferSize();
-	dataStream.writeBytes(reinterpret_cast<const char*>(GetBuffer()), GetBufferSize());
+	dataStream << int(GetBufferSize());
+
+	int written = dataStream.writeRawData(reinterpret_cast<const char*>(GetBuffer()), GetBufferSize());
+	if (written != GetBufferSize()){
+		return false;
+	}
 	
 	if (!m_socket.flush()){
 		return false;
