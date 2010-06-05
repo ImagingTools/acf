@@ -11,6 +11,9 @@ namespace iprm
 {
 
 
+class ISelectionConstraints;
+
+
 /**
 	Interface allowing to select single option from list of options.
 */
@@ -18,9 +21,10 @@ class ISelectionParam: virtual public iser::ISerializable
 {
 public:
 	/**
-		Get number of managed set.
+		Get constraints of this parameter.
+		Constraints describes some additional information about allowed parameter ranges and related informations.
 	*/
-	virtual int GetOptionsCount() const = 0;
+	virtual const ISelectionConstraints* GetConstraints() const = 0;
 
 	/**
 		Get selected index.
@@ -32,11 +36,6 @@ public:
 		\return	true	if selection change was possible.
 	*/
 	virtual bool SetSelectedOptionIndex(int index) = 0;
-
-	/**
-		Get name of specified option.
-	*/
-	virtual const istd::CString& GetOptionName(int index) const = 0;
 
 	/**
 		Get subselection for specified option.

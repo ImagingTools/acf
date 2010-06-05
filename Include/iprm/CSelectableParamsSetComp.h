@@ -6,6 +6,7 @@
 
 #include "iprm/IParamsSet.h"
 #include "iprm/ISelectionParam.h"
+#include "iprm/ISelectionConstraints.h"
 #include "iprm/IParamsManager.h"
 
 
@@ -19,12 +20,14 @@ namespace iprm
 class CSelectableParamsSetComp:
 			public icomp::CComponentBase,
 			virtual public IParamsSet,
-			virtual public ISelectionParam
+			virtual public ISelectionParam,
+			virtual protected iprm::ISelectionConstraints
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectableParamsSetComp)
+		I_REGISTER_INTERFACE(iser::ISerializable)
 		I_REGISTER_INTERFACE(IParamsSet)
 		I_REGISTER_INTERFACE(ISelectionParam)
 		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input")
@@ -38,14 +41,18 @@ public:
 	virtual iser::ISerializable* GetEditableParameter(const std::string& id);
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual int GetOptionsCount() const;
+	virtual const ISelectionConstraints* GetConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
-	virtual const istd::CString& GetOptionName(int index) const;
 	virtual ISelectionParam* GetActiveSubselection() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	// reimplemented (iprm::ISelectionConstraints)
+	virtual int GetOptionsCount() const;
+	virtual const istd::CString& GetOptionName(int index) const;
 
 private:
 	int m_selectedIndex;

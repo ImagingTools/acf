@@ -244,6 +244,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\ISelectionConstraints.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ISelectionParam.h"
 				>
 			</File>

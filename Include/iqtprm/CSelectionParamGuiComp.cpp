@@ -1,6 +1,8 @@
 #include "iqtprm/CSelectionParamGuiComp.h"
 
 
+#include "iprm/ISelectionConstraints.h"
+
 #include "iqt/CSignalBlocker.h"
 
 
@@ -38,12 +40,6 @@ void CSelectionParamGuiComp::UpdateEditor(int /*updateFlags*/)
 		return;
 	}
 
-	if (IsUpdateBlocked()){
-		return;
-	}
-
-	UpdateBlocker block(this);
-
 	m_comboBoxes.Reset();
 
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
@@ -58,18 +54,21 @@ void CSelectionParamGuiComp::UpdateEditor(int /*updateFlags*/)
 
 		QObject::connect(switchBoxPtr, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 
-		int optionsCont = selectionPtr->GetOptionsCount();
-	
-		for (int i = 0; i < optionsCont; ++i){
-			const istd::CString& name = selectionPtr->GetOptionName(i);
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
+		if (constraintsPtr != NULL){
+			int optionsCont = constraintsPtr->GetOptionsCount();
 
-			switchBoxPtr->addItem(iqt::GetQString(name));
-		}
+			for (int i = 0; i < optionsCont; ++i){
+				const istd::CString& name = constraintsPtr->GetOptionName(i);
 
-		int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+				switchBoxPtr->addItem(iqt::GetQString(name));
+			}
 
-		if (selectedIndex >= 0){
-			switchBoxPtr->setCurrentIndex(selectedIndex);
+			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+
+			if (selectedIndex >= 0){
+				switchBoxPtr->setCurrentIndex(selectedIndex);
+			}
 		}
 	}
 }

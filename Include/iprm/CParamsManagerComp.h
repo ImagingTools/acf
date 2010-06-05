@@ -12,6 +12,8 @@
 #include "icomp/CComponentBase.h"
 
 #include "iprm/IParamsSet.h"
+#include "iprm/ISelectionParam.h"
+#include "iprm/ISelectionConstraints.h"
 #include "iprm/IParamsManager.h"
 
 
@@ -24,7 +26,8 @@ namespace iprm
 */
 class CParamsManagerComp:
 			public icomp::CComponentBase,
-			virtual public IParamsManager
+			virtual public IParamsManager,
+			virtual protected ISelectionConstraints
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -52,14 +55,18 @@ public:
 	virtual bool SetSetName(int index, const istd::CString& name);
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual int GetOptionsCount() const;
+	virtual const ISelectionConstraints* GetConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
-	virtual const istd::CString& GetOptionName(int index) const;
 	virtual ISelectionParam* GetActiveSubselection() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	// reimplemented (iprm::ISelectionConstraints)
+	virtual int GetOptionsCount() const;
+	virtual const istd::CString& GetOptionName(int index) const;
 
 private:
 	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);

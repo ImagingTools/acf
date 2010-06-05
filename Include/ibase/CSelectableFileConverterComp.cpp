@@ -15,7 +15,7 @@ namespace ibase
 // public methods
 	
 CSelectableFileConverterComp::CSelectableFileConverterComp()
-	:m_optionsCount(0),
+:	m_optionsCount(0),
 	m_selectedOptionIndex(-1)
 {
 }
@@ -38,9 +38,9 @@ bool CSelectableFileConverterComp::CopyFile(
 
 // reimplemented (iprm::ISelectionParam)
 
-int CSelectableFileConverterComp::GetOptionsCount() const
+const iprm::ISelectionConstraints* CSelectableFileConverterComp::GetConstraints() const
 {
-	return m_optionsCount;
+	return this;
 }
 
 
@@ -61,14 +61,6 @@ bool CSelectableFileConverterComp::SetSelectedOptionIndex(int index)
 	}
 
 	return false;
-}
-
-
-const istd::CString& CSelectableFileConverterComp::GetOptionName(int index) const
-{
-	I_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
-
-	return m_slaveConverterNamesAttrPtr[index];
 }
 
 
@@ -106,6 +98,24 @@ void CSelectableFileConverterComp::OnComponentCreated()
 	if (m_optionsCount > 0){
 		m_selectedOptionIndex = 0;
 	}
+}
+
+
+// protected methods
+
+// reimplemented (iprm::ISelectionConstraints)
+
+int CSelectableFileConverterComp::GetOptionsCount() const
+{
+	return m_optionsCount;
+}
+
+
+const istd::CString& CSelectableFileConverterComp::GetOptionName(int index) const
+{
+	I_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
+
+	return m_slaveConverterNamesAttrPtr[index];
 }
 
 

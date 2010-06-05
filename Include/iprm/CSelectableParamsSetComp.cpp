@@ -51,13 +51,9 @@ iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const std::s
 
 // reimplemented (iprm::ISelectionParam)
 
-int CSelectableParamsSetComp::GetOptionsCount() const
+const ISelectionConstraints* CSelectableParamsSetComp::GetConstraints() const
 {
-	if (m_paramsManagerCompPtr.IsValid()){
-		return m_paramsManagerCompPtr->GetSetsCount();
-	}
-
-	return 0;
+	return this;
 }
 
 
@@ -69,7 +65,7 @@ int CSelectableParamsSetComp::GetSelectedOptionIndex() const
 
 bool CSelectableParamsSetComp::SetSelectedOptionIndex(int index)
 {
-	if ((index >= 0) && (index < CSelectableParamsSetComp::GetOptionsCount())){
+	if ((index >= 0) && (index < GetOptionsCount())){
 		if (index != m_selectedIndex){
 			istd::CChangeNotifier notifier(this);
 
@@ -81,19 +77,6 @@ bool CSelectableParamsSetComp::SetSelectedOptionIndex(int index)
 
 	return false;
 }
-
-
-const istd::CString& CSelectableParamsSetComp::GetOptionName(int index) const
-{
-	if (m_paramsManagerCompPtr.IsValid()){
-		return m_paramsManagerCompPtr->GetSetName(index);
-	}
-
-	static istd::CString noname("<noname>");
-
-	return noname;
-}
-
 
 
 ISelectionParam* CSelectableParamsSetComp::GetActiveSubselection() const
@@ -116,6 +99,33 @@ bool CSelectableParamsSetComp::Serialize(iser::IArchive& archive)
 
 	return retVal;
 }
+
+
+// protected methods
+
+// reimplemented (iprm::ISelectionConstraints)
+
+int CSelectableParamsSetComp::GetOptionsCount() const
+{
+	if (m_paramsManagerCompPtr.IsValid()){
+		return m_paramsManagerCompPtr->GetSetsCount();
+	}
+
+	return 0;
+}
+
+
+const istd::CString& CSelectableParamsSetComp::GetOptionName(int index) const
+{
+	if (m_paramsManagerCompPtr.IsValid()){
+		return m_paramsManagerCompPtr->GetSetName(index);
+	}
+
+	static istd::CString noname("<noname>");
+
+	return noname;
+}
+
 
 
 } // namespace iprm

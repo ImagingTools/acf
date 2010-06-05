@@ -5,6 +5,7 @@
 #include "istd/CChangeDelegator.h"
 
 #include "iprm/IParamsSet.h"
+#include "iprm/ISelectionConstraints.h"
 
 #include "iqtgui/CItemDelegate.h"
 
@@ -85,13 +86,22 @@ void CParamsManagerGuiComp::on_ParamsTree_itemSelectionChanged()
 	int selectedIndex = GetSelectedIndex();
 
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
-	if (		(selectionPtr != NULL) &&
-				(selectedIndex < selectionPtr->GetOptionsCount()) &&
+	if (selectionPtr == NULL){
+		return;
+	}
+
+	const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
+
+	if (		(constraintsPtr != NULL) &&
+				(selectedIndex < constraintsPtr->GetOptionsCount()) &&
 				(selectedIndex != selectionPtr->GetSelectedOptionIndex())){
 		selectionPtr->SetSelectedOptionIndex(selectedIndex);
+
+		return;
 	}
-	else if(selectedIndex < 0){
-		UpdateParamsView(selectedIndex);
+
+	if (selectedIndex < 0){
+		UpdateParamsView(-1);
 	}
 }
 

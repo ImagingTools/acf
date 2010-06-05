@@ -28,7 +28,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 			return false;
 		}
 
-		istd::CChangeNotifier notifier(this);
+		istd::CChangeNotifier notifier(this, CF_MODEL | CF_OPTIONS_COUNT_CHANGED);
 
 		m_paramSets.resize(count - fixedSetsCount);
 	}
@@ -44,7 +44,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 				return false;
 			}
 
-			istd::CChangeNotifier notifier(this);
+			istd::CChangeNotifier notifier(this, CF_MODEL | CF_OPTIONS_COUNT_CHANGED);
 
 			ParamSet paramsSet;
 			paramsSet.paramSetPtr.SetPtr(newParamsSetPtr);
@@ -98,7 +98,7 @@ bool CParamsManagerComp::InsertSet(int index)
 		return false;
 	}
 
-	istd::CChangeNotifier notifier(this, CF_SET_INSERTED);
+	istd::CChangeNotifier notifier(this, CF_SET_INSERTED | CF_OPTIONS_COUNT_CHANGED);
 
 	istd::CString defaultSetName = m_defaultSetNameCompPtr.IsValid() ? *m_defaultSetNameCompPtr: "unnamed";
 
@@ -128,7 +128,7 @@ bool CParamsManagerComp::RemoveSet(int index)
 		return false;
 	}
 
-	istd::CChangeNotifier notifier(this, CF_SET_REMOVED | CF_SELECTION_CHANGED);
+	istd::CChangeNotifier notifier(this, CF_SET_REMOVED | CF_OPTIONS_COUNT_CHANGED | CF_SELECTION_CHANGED);
 	
 	int removeIndex = index - fixedParamsCount;
 
@@ -188,7 +188,7 @@ bool CParamsManagerComp::SetSetName(int index, const istd::CString& name)
 	}
 
 	if (m_paramSets[index - fixedCount].name != name){
-		istd::CChangeNotifier notifier(this, CF_SET_NAME_CHANGED);
+		istd::CChangeNotifier notifier(this, CF_SET_NAME_CHANGED | CF_OPTION_RENAMED);
 
 		m_paramSets[index - fixedCount].name = name;
 	}
@@ -199,9 +199,9 @@ bool CParamsManagerComp::SetSetName(int index, const istd::CString& name)
 
 // reimplemented (iprm::ISelectionParam)
 
-int CParamsManagerComp::GetOptionsCount() const
+const ISelectionConstraints* CParamsManagerComp::GetConstraints() const
 {
-	return GetSetsCount();
+	return this;
 }
 
 
@@ -215,7 +215,7 @@ bool CParamsManagerComp::SetSelectedOptionIndex(int index)
 {
 	if (index < GetOptionsCount()){
 		if (index != m_selectedIndex){
-			istd::CChangeNotifier notifier(this, CF_SELECTION_CHANGED);
+			istd::CChangeNotifier notifier(this, CF_SELECTION_CHANGED | CF_OPTIONS_COUNT_CHANGED);
 
 			m_selectedIndex = index;
 		}
@@ -225,13 +225,6 @@ bool CParamsManagerComp::SetSelectedOptionIndex(int index)
 
 	return false;
 }
-
-
-const istd::CString& CParamsManagerComp::GetOptionName(int index) const
-{
-	return GetSetName(index);
-}
-
 
 
 ISelectionParam* CParamsManagerComp::GetActiveSubselection() const
@@ -303,6 +296,22 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(selectedIndexTag);
 
 	return retVal;
+}
+
+
+// protected methods
+
+// reimplemented (iprm::ISelectionConstraints)
+
+int CParamsManagerComp::GetOptionsCount() const
+{
+	return GetSetsCount();
+}
+
+
+const istd::CString& CParamsManagerComp::GetOptionName(int index) const
+{
+	return GetSetName(index);
 }
 
 

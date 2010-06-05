@@ -6,6 +6,7 @@
 #include "icomp/CComponentBase.h"
 
 #include "iprm/ISelectionParam.h"
+#include "iprm/ISelectionConstraints.h"
 
 #include "ibase/IFileConvertCopy.h"
 
@@ -17,7 +18,8 @@ namespace ibase
 class CSelectableFileConverterComp:
 			public icomp::CComponentBase,
 			virtual public ibase::IFileConvertCopy,
-			virtual public iprm::ISelectionParam
+			virtual public iprm::ISelectionParam,
+			virtual protected iprm::ISelectionConstraints
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -39,10 +41,9 @@ public:
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual int GetOptionsCount() const;
+	virtual const ISelectionConstraints* GetConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
-	virtual const istd::CString& GetOptionName(int index) const;
 	virtual ISelectionParam* GetActiveSubselection() const;
 
 	// reimplemented (iser::ISerializable)
@@ -50,6 +51,11 @@ public:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+
+protected:
+	// reimplemented (iprm::ISelectionConstraints)
+	virtual int GetOptionsCount() const;
+	virtual const istd::CString& GetOptionName(int index) const;
 
 private:
 	I_MULTIREF(ibase::IFileConvertCopy, m_slaveConvertersCompPtr);
