@@ -22,6 +22,14 @@ namespace iproc
 class IProcessor: virtual public istd::IPolymorphic
 {
 public:
+	enum MessageId
+	{
+		/**
+			Bad processor parameter.
+		*/
+		MI_BAD_PARAMS = 0x16372620
+	};
+
 	/**
 		State of processing.
 	*/
