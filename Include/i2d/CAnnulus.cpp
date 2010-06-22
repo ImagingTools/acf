@@ -66,13 +66,13 @@ void CAnnulus::SetOuterRadius(double outerRadius)
 
 CCircle CAnnulus::GetInnerCircle() const
 {
-	return CCircle(m_radiusRange.GetMinValue(), m_center);
+	return CCircle(m_radiusRange.GetMinValue(), m_position);
 }
 
 
 CCircle CAnnulus::GetOuterCircle() const
 {
-	return CCircle(m_radiusRange.GetMaxValue(), m_center);
+	return CCircle(m_radiusRange.GetMaxValue(), m_position);
 }
 
 
@@ -80,10 +80,10 @@ CRectangle CAnnulus::GetBoundingBox() const
 {
 	double outerRadius = m_radiusRange.GetMaxValue();
 
-	return CRectangle(m_center.GetY() - outerRadius, 
-		m_center.GetX() - outerRadius,
-		m_center.GetY() + outerRadius,
-		m_center.GetX() + outerRadius);
+	return CRectangle(m_position.GetY() - outerRadius, 
+		m_position.GetX() - outerRadius,
+		m_position.GetY() + outerRadius,
+		m_position.GetX() + outerRadius);
 }
 
 

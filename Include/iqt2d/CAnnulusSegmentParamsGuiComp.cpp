@@ -75,7 +75,7 @@ void CAnnulusSegmentParamsGuiComp::UpdateModel() const
 		i2d::CVector2d postion(XSpin->value(), YSpin->value());
 		if (objectPtr->GetCenter() != postion){
 			notifier.SetPtr(objectPtr);
-			objectPtr->SetCenter(postion);
+			objectPtr->SetPosition(postion);
 		}
 
 		double innerRadius = InnerRadiusSpin->value();

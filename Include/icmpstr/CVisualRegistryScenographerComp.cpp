@@ -610,7 +610,7 @@ bool CVisualRegistryScenographerComp::TryCreateComponent(const icomp::CComponent
 			if (elementInfoPtr != NULL){
 				CVisualRegistryElement* visualElementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
 				if (visualElementPtr != NULL){
-					visualElementPtr->MoveTo(position);
+					visualElementPtr->MoveCenterTo(position);
 				}
 
 				ConnectReferences(componentName);

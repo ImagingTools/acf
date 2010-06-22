@@ -347,7 +347,7 @@ CVector2d CRectangle::GetCenter() const
 }
 
 
-void CRectangle::MoveTo(const CVector2d& position)
+void CRectangle::MoveCenterTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
 	if (offset != i2d::CVector2d(0, 0)){

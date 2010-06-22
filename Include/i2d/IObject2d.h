@@ -34,7 +34,7 @@ public:
 	/**
 		Move object to position \c position.
 	*/
-	virtual void MoveTo(const CVector2d& position) = 0;
+	virtual void MoveCenterTo(const CVector2d& position) = 0;
 };
 
 

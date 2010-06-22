@@ -104,7 +104,7 @@ public :
 	
 	// reimplemented (IObject2d)
 	virtual CVector2d GetCenter() const;
-	virtual void MoveTo(const CVector2d& position);
+	virtual void MoveCenterTo(const CVector2d& position);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

@@ -38,8 +38,8 @@ void CCircle::SetRadius(double radius)
 CRectangle CCircle::GetBoundingBox() const
 {
 	return CRectangle(
-				m_center.GetX() - m_radius, 
-				m_center.GetY() - m_radius, 
+				m_position.GetX() - m_radius, 
+				m_position.GetY() - m_radius, 
 				2 * m_radius, 
 				2 * m_radius); 
 }

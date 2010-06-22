@@ -39,7 +39,7 @@ public:
 
 	// reimplemented (IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
-	virtual void MoveTo(const i2d::CVector2d& position);
+	virtual void MoveCenterTo(const i2d::CVector2d& position);
 
 private:
 	const icomp::IRegistry* m_registryPtr;

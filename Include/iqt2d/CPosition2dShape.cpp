@@ -42,7 +42,7 @@ void CPosition2dShape::OnPositionChanged(const QPointF& position)
 	if ((positionPtr != NULL) && !m_ignoreUpdate){
 		m_ignoreUpdate = true;
 
-		positionPtr->SetCenter(iqt::GetCVector2d(position));
+		positionPtr->SetPosition(iqt::GetCVector2d(position));
 
 		m_ignoreUpdate = false;
 	}

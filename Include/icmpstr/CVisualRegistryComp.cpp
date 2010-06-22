@@ -73,7 +73,7 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 			if (infoPtr != NULL){
 				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 				if (elementPtr != NULL){
-					elementPtr->MoveTo(position);
+					elementPtr->MoveCenterTo(position);
 				}
 			}
 
@@ -140,7 +140,7 @@ bool CVisualRegistryComp::RenameElement(const std::string& oldElementId, const s
 		if (newElementInfoPtr != NULL){
 			CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(newElementInfoPtr->elementPtr.GetPtr());
 			if (elementPtr != NULL){
-				elementPtr->MoveTo(oldPosition);
+				elementPtr->MoveCenterTo(oldPosition);
 			}
 		}
 

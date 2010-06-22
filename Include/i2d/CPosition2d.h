@@ -19,18 +19,27 @@ public:
 	CPosition2d();
 	CPosition2d(const CVector2d& center);
 
-	void SetCenter(const CVector2d& center);
+	const CVector2d& GetPosition() const;
+	void SetPosition(const CVector2d& position);
 
 	// reimplemented (IObject2d)
 	virtual CVector2d GetCenter() const;
-	virtual void MoveTo(const CVector2d& position);
+	virtual void MoveCenterTo(const CVector2d& position);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	CVector2d m_center;
+	CVector2d m_position;
 };
+
+
+// inline methods
+
+inline const CVector2d& CPosition2d::GetPosition() const
+{
+	return m_position;
+}
 
 
 } // namespace i2d

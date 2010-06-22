@@ -297,7 +297,7 @@ CVector2d CLine2d::GetCenter() const
 }
 
 
-void CLine2d::MoveTo(const CVector2d& position)
+void CLine2d::MoveCenterTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
 

@@ -46,7 +46,7 @@ i2d::CVector2d CVisualRegistryElement::GetCenter() const
 }
 
 
-void CVisualRegistryElement::MoveTo(const i2d::CVector2d& position)
+void CVisualRegistryElement::MoveCenterTo(const i2d::CVector2d& position)
 {
 	if (position != m_center){
 		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);

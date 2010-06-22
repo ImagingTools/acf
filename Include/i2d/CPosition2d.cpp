@@ -14,23 +14,23 @@ namespace i2d
 
 
 CPosition2d::CPosition2d()
-:	m_center(0, 0)
+:	m_position(0, 0)
 {
 }
 
 
-CPosition2d::CPosition2d(const CVector2d& center)
-:	m_center(center)
+CPosition2d::CPosition2d(const CVector2d& position)
+:	m_position(position)
 {
 }
 
 
-void CPosition2d::SetCenter(const CVector2d& center)
+void CPosition2d::SetPosition(const CVector2d& position)
 {
-	if (center != m_center){
+	if (position != m_position){
 		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
-		m_center = center;
+		m_position = position;
 	}
 }
 
@@ -39,13 +39,13 @@ void CPosition2d::SetCenter(const CVector2d& center)
 
 CVector2d CPosition2d::GetCenter() const
 {
-	return m_center;
+	return m_position;
 }
 
 
-void CPosition2d::MoveTo(const CVector2d& position)
+void CPosition2d::MoveCenterTo(const CVector2d& position)
 {
-	SetCenter(position);
+	SetPosition(position);
 }
 
 
@@ -57,7 +57,7 @@ bool CPosition2d::Serialize(iser::IArchive& archive)
 
 	static iser::CArchiveTag centerTag("Center", "Center position");
 	retVal = retVal && archive.BeginTag(centerTag);
-	retVal = retVal && m_center.Serialize(archive);
+	retVal = retVal && m_position.Serialize(archive);
 	retVal = retVal && archive.EndTag(centerTag);
 
 	return retVal;

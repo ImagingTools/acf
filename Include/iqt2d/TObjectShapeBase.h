@@ -109,7 +109,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::OnPositionChanged(const Q
 	if (objectPtr != NULL){
 		QPointF offset = position - m_lastPosition;
 
-		objectPtr->MoveTo(iqt::GetCVector2d(offset) + objectPtr->GetCenter());
+		objectPtr->MoveCenterTo(iqt::GetCVector2d(offset) + objectPtr->GetCenter());
 
 		m_lastPosition = position;
 	}
