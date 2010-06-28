@@ -108,19 +108,6 @@ void CLogGuiComp::OnGuiCreated()
 	LogView->header()->setResizeMode(CT_ICON, QHeaderView::Fixed);
 	LogView->header()->resizeSection(CT_ICON, itemDelegate->GetItemHeight());
 
-	Messages messages = GetMessages();
-	for (		Messages::const_iterator iter = messages.begin();
-				iter != messages.end();
-				++iter){
-		const MessagePtr& messagePtr = *iter;
-		if (messagePtr.IsValid()){
-			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
-			if (itemPtr != NULL){
-				OnAddMessage(itemPtr);
-			}
-		}
-	}
-
 	QToolBar* toolBar = new QToolBar(ToolBarFrame);
 	if (ToolBarFrame->layout()){
 		ToolBarFrame->layout()->addWidget(toolBar);
@@ -177,6 +164,19 @@ void CLogGuiComp::OnGuiCreated()
 	m_infoIcon = QIcon(":/Icons/Info.svg").pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
 	m_warningIcon = QIcon(":/Icons/Warning.svg").pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
 	m_errorIcon = QIcon(":/Icons/Error.svg").pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
+
+	Messages messages = GetMessages();
+	for (		Messages::const_iterator iter = messages.begin();
+				iter != messages.end();
+				++iter){
+		const MessagePtr& messagePtr = *iter;
+		if (messagePtr.IsValid()){
+			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
+			if (itemPtr != NULL){
+				OnAddMessage(itemPtr);
+			}
+		}
+	}
 }
 
 
