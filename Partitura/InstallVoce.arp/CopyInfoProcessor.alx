@@ -1,30 +1,52 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1080
+          1518
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          219
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="1">
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        CopyProcessor
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        350
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         FileCopy
       </ComponentName>
       <X>
-        -333
+        550
       </X>
       <X>
-        -2
+        350
       </X>
     </Element>
   </PositionMap>
