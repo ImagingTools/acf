@@ -30,6 +30,7 @@ public:
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
+protected:
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
 

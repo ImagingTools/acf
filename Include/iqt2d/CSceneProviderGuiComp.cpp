@@ -18,7 +18,10 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 :	m_fitMode(FM_NONE),
 	m_isFullScreenMode(true),
 	m_isZoomIgnored(false),
+	m_viewCommand("&View"),
+	m_autoFitToViewCommand("&Auto Fit"),
 	m_fitToViewCommand("&Fit Contents To View"),
+	m_fitToImageCommand("&Fit View To Contents"),
 	m_resetZoomCommand("&Reset Zoom"),
 	m_savedParentWidgetPtr(NULL),
 	m_isotropyFactor(0)
@@ -26,6 +29,23 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 	m_scenePtr = new CScene(this);
 
 	m_scenePtr->setFocus();
+
+	m_autoFitToViewCommand.SetStaticFlags(
+				iqtgui::CHierarchicalCommand::CF_ONOFF | 
+				iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
+	connect(&m_autoFitToViewCommand, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
+	m_viewCommand.InsertChild(&m_autoFitToViewCommand);
+
+	connect(&m_fitToViewCommand, SIGNAL( activated()), this, SLOT(OnFitToView()));
+	m_viewCommand.InsertChild(&m_fitToViewCommand);
+
+	connect(&m_fitToImageCommand, SIGNAL( activated()), this, SLOT(OnFitToShapes()));
+	m_viewCommand.InsertChild(&m_fitToImageCommand);
+
+	connect(&m_resetZoomCommand, SIGNAL( activated()), this, SLOT(OnResetScale()));
+	m_viewCommand.InsertChild(&m_resetZoomCommand);
+
+	m_commands.InsertChild(&m_viewCommand);
 }
 
 
@@ -75,7 +95,7 @@ void CSceneProviderGuiComp::Print(QPrinter* printerPtr) const
 
 const ibase::IHierarchicalCommand* CSceneProviderGuiComp::GetCommands() const
 {
-	return &m_editorCommand;
+	return &m_commands;
 }
 
 
@@ -246,18 +266,6 @@ bool CSceneProviderGuiComp::SetScale(int scaleMode, double scaleFactor)
 }
 
 
-// reimplemented (icomp::IComponent)
-
-void CSceneProviderGuiComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	if (m_sceneWidthAttrPtr.IsValid() && m_sceneHeightAttrPtr.IsValid()){
-		m_scenePtr->setSceneRect(0, 0, *m_sceneWidthAttrPtr, *m_sceneHeightAttrPtr);
-	}
-}
-
-
 // public slots
 
 void CSceneProviderGuiComp::OnZoomIncrement()
@@ -369,33 +377,6 @@ void CSceneProviderGuiComp::OnContextMenuEvent(QContextMenuEvent* /*eventPtr*/)
 }
 
 
-void CSceneProviderGuiComp::CreateContextMenu()
-{
-	iqtgui::CHierarchicalCommand* viewMenuPtr = new iqtgui::CHierarchicalCommand("&View");
-
-	iqtgui::CHierarchicalCommand* autoFitToViewCommandPtr = new iqtgui::CHierarchicalCommand("&Auto Fit");
-	autoFitToViewCommandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_ONOFF | 
-											iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
-	connect(autoFitToViewCommandPtr, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
-	viewMenuPtr->InsertChild(autoFitToViewCommandPtr, true);
-
-	connect(&m_fitToViewCommand, SIGNAL( activated()), this, SLOT(OnFitToView()));
-	viewMenuPtr->InsertChild(&m_fitToViewCommand);
-
-	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
-	if (*m_allowWidgetResizeAttrPtr){
-		iqtgui::CHierarchicalCommand* fitToImageCommandPtr = new iqtgui::CHierarchicalCommand("&Fit View To Contents");
-		connect(fitToImageCommandPtr, SIGNAL( activated()), this, SLOT(OnFitToShapes()));
-		viewMenuPtr->InsertChild(fitToImageCommandPtr, true);
-	}
-
-	connect(&m_resetZoomCommand, SIGNAL( activated()), this, SLOT(OnResetScale()));
-	viewMenuPtr->InsertChild(&m_resetZoomCommand);
-
-	m_editorCommand.InsertChild(viewMenuPtr, true);
-}
-
-
 void CSceneProviderGuiComp::ScaleView(double scaleFactor)
 {
 	double currentScale = GetScale();
@@ -498,8 +479,6 @@ void CSceneProviderGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	CreateContextMenu();
-
 	if (m_dropConsumersCompPtr.IsValid() && m_dropConsumersCompPtr.GetCount() > 0){
 		SceneView->setAcceptDrops(true);
 	}
@@ -576,6 +555,21 @@ void CSceneProviderGuiComp::OnGuiDestroyed()
 	}
 
 	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CSceneProviderGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_sceneWidthAttrPtr.IsValid() && m_sceneHeightAttrPtr.IsValid()){
+		m_scenePtr->setSceneRect(0, 0, *m_sceneWidthAttrPtr, *m_sceneHeightAttrPtr);
+	}
+
+	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
+	m_fitToImageCommand.setVisible(*m_allowWidgetResizeAttrPtr);
 }
 
 

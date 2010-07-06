@@ -118,9 +118,6 @@ public:
 	virtual double GetScale() const;
 	virtual bool SetScale(int scaleMode = SM_SET, double value = 1.0);
 
-	// reimplemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-
 public slots:
 	void OnZoomIncrement();
 	void OnZoomDecrement();
@@ -160,7 +157,6 @@ protected:
 	virtual void OnMouseDoubleClickEvent(QEvent* eventPtr);
 	virtual void OnMouseMoveEvent(QMouseEvent* eventPtr);
 
-	void CreateContextMenu();
 	void ScaleView(double scaleFactor);
 	void SetFittedScale(FitMode mode);
 
@@ -172,6 +168,9 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+
+	// reimplemented (icomp::IComponent)
+	virtual void OnComponentCreated();
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
@@ -187,8 +186,11 @@ private:
 	bool m_isFullScreenMode;
 	bool m_isZoomIgnored;
 
-	iqtgui::CHierarchicalCommand m_editorCommand;
+	iqtgui::CHierarchicalCommand m_commands;
+	iqtgui::CHierarchicalCommand m_viewCommand;
+	iqtgui::CHierarchicalCommand m_autoFitToViewCommand;
 	iqtgui::CHierarchicalCommand m_fitToViewCommand;
+	iqtgui::CHierarchicalCommand m_fitToImageCommand;
 	iqtgui::CHierarchicalCommand m_resetZoomCommand;
 
 	I_REF(iqtgui::IGuiObject, m_sceneControllerGuiCompPtr);
@@ -216,7 +218,7 @@ private:
 
 inline iqtgui::CHierarchicalCommand& CSceneProviderGuiComp::GetCommandsRootRef()
 {
-	return m_editorCommand;
+	return m_commands;
 }
 
 

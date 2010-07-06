@@ -13,10 +13,14 @@ const ibase::IHierarchicalCommand* CCommandsBinderComp::GetCommands() const
 }
 
 
+// protected methods
+
 // reimplemented (icomp::IComponent)
 
 void CCommandsBinderComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	if (m_commandProvidersCompPtr.IsValid()){
 		for (int index = 0; index < m_commandProvidersCompPtr.GetCount(); index++){
 			ibase::ICommandsProvider* commandsProviderPtr = m_commandProvidersCompPtr[index];

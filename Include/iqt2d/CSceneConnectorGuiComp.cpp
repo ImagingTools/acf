@@ -5,6 +5,14 @@ namespace iqt2d
 {
 
 
+// reimplemented (ibase::ICommandsProvider)
+
+const ibase::IHierarchicalCommand* CSceneConnectorGuiComp::GetCommands() const
+{
+	return &m_commands;
+}
+
+
 // protected methods
 
 // reimplemented (iqtgui::CGuiComponentBase)
@@ -55,6 +63,36 @@ void CSceneConnectorGuiComp::OnGuiDestroyed()
 	}
 
 	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CSceneConnectorGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_sceneCommandsCompPtr.IsValid()){
+		const ibase::IHierarchicalCommand* commandPtr = m_sceneCommandsCompPtr->GetCommands();
+		if (commandPtr != NULL){
+			m_commands.JoinLinkFrom(commandPtr);
+		}
+	}
+
+	if (m_extenderCommandsCompPtr.IsValid()){
+		const ibase::IHierarchicalCommand* commandPtr = m_extenderCommandsCompPtr->GetCommands();
+		if (commandPtr != NULL){
+			m_commands.JoinLinkFrom(commandPtr);
+		}
+	}
+}
+
+
+void CSceneConnectorGuiComp::OnComponentDestroyed()
+{
+	m_commands.ResetChilds();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 
