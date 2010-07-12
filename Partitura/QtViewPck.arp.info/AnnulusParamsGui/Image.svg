@@ -307,6 +307,24 @@
        x2="466.87885"
        y2="483.40295"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3644"
+       id="linearGradient2874"
+       gradientUnits="userSpaceOnUse"
+       x1="26.614229"
+       y1="41.602821"
+       x2="466.87885"
+       y2="483.40295" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3644"
+       id="linearGradient2876"
+       gradientUnits="userSpaceOnUse"
+       x1="26.614229"
+       y1="41.602821"
+       x2="466.87885"
+       y2="483.40295" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -344,13 +362,14 @@
      transform="translate(-150.51273,-167.46855)">
     <g
        id="g2967"
-       style="fill-opacity:1;fill:url(#linearGradient3650)">
+       style="fill:url(#linearGradient3650);fill-opacity:1"
+       transform="matrix(0.99645862,0,0,0.99435221,-0.71106956,0.79408056)">
       <path
          id="rect3023"
          d="m 159.38045,175.25641 0,306.54696 305.89881,0 0,-306.54696 -305.89881,0 z"
-         style="fill:url(#linearGradient3650);fill-opacity:1;stroke:url(#radialGradient2953);stroke-width:3.19914794000000000;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+         style="fill:url(#linearGradient2874);fill-opacity:1;stroke:url(#radialGradient2953);stroke-width:3.19914794;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
       <path
-         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:url(#linearGradient3650);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:6.82610225999999990;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:url(#linearGradient2876);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:6.82610226;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
          d="m 443.62864,187.0204 c -1.19811,-0.011 -2.28388,-0.003 -3.32876,0.007 -0.0542,6.6e-4 -0.11918,-6.5e-4 -0.17285,0 -0.0402,6.6e-4 -0.0897,-6.5e-4 -0.12955,0 -18.84902,0.12566 -38.08924,-0.0274 -57.45364,0.031 -0.0289,9e-5 -0.0575,-9e-5 -0.0866,0 -67.54298,0.0183 -135.15463,-0.0333 -202.70897,0.031 -0.52839,-2.5e-4 -1.05694,0.0155 -1.55631,0.0465 -2.25521,0.14358 -4.27815,0.43632 -5.31738,0.78348 -1.03924,0.34718 -1.16602,0.68373 -1.16723,0.95415 -0.001,0.54084 0.12753,0.93981 0.12959,0.93863 -0.14008,0.0802 -0.21323,0.16418 -0.21616,0.24823 -0.14748,11.6787 -0.001,23.35628 -0.0431,35.03181 5.9e-4,0.16428 0.27468,0.32822 0.77816,0.46543 1.59851,0.43939 4.03322,0.72502 6.39816,0.86107 2.36493,0.13603 4.66079,0.15216 6.83045,0.14738 4.33926,-0.01 8.4667,-0.10504 10.72121,-0.0466 0.21484,0.005 0.43166,0.008 0.64847,0.007 l 249.78725,0 c 0.55718,0.001 1.11621,-0.0138 1.64277,-0.0465 2.74085,-0.18212 5.04471,-0.50532 6.31171,-0.9076 1.26697,-0.40228 1.46754,-0.81681 1.42659,-1.15583 -0.0819,-0.67806 -0.60213,-1.19918 -0.43232,-1.31873 0.0914,-0.0685 0.13525,-0.13904 0.12955,-0.20946 l 0,-34.3957 c -0.007,-0.1061 -0.12386,-0.21198 -0.34582,-0.31029 -1.5083,-0.67315 -4.95152,-0.94473 -7.73832,-1.06275 -1.39341,-0.059 -2.79992,-0.0889 -4.1069,-0.10084 l 0,2e-5 -1e-4,3e-5 z"
          id="path3927"
          sodipodi:nodetypes="csscsccssssccsssscccsssccssccc" />
