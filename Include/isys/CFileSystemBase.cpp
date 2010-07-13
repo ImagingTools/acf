@@ -1,23 +1,25 @@
-#include "ibase/CFileSystem.h"
+#include "isys/CFileSystemBase.h"
 
 
-// STD includes
+// STL includes
 #include <sys/types.h>
+#include <fstream>
+#include <iostream>
 
 
-namespace ibase
+namespace isys
 {
 
 
 // reimplemented (isys::IFileSystem)
 
-istd::CString CFileSystem::GetNormalizedPath(const istd::CString& path) const
+istd::CString CFileSystemBase::GetNormalizedPath(const istd::CString& path) const
 {
-	return path;	// TODO: correct CFileSystem::GetNormalizedPath dummy implementation
+	return path;	// TODO: correct CFileSystemBase::GetNormalizedPath dummy implementation
 }
 
 
-istd::CString CFileSystem::GetFileName(const istd::CString& filePath) const
+istd::CString CFileSystemBase::GetFileName(const istd::CString& filePath) const
 {
 	istd::CString::size_type slashPos = filePath.rfind('/');
 	istd::CString::size_type backSlashPos = filePath.rfind('\\');
@@ -40,7 +42,7 @@ istd::CString CFileSystem::GetFileName(const istd::CString& filePath) const
 	}
 }
 
-istd::CString CFileSystem::GetBaseFileName(const istd::CString& filePath) const
+istd::CString CFileSystemBase::GetBaseFileName(const istd::CString& filePath) const
 {
 	istd::CString fileName = GetFileName(filePath);
 
@@ -54,7 +56,7 @@ istd::CString CFileSystem::GetBaseFileName(const istd::CString& filePath) const
 }
 
 
-istd::CString CFileSystem::GetDirPath(const istd::CString& filePath) const
+istd::CString CFileSystemBase::GetDirPath(const istd::CString& filePath) const
 {
 	istd::CString::size_type slashPos = filePath.rfind('/');
 	istd::CString::size_type backSlashPos = filePath.rfind('\\');
@@ -80,8 +82,7 @@ istd::CString CFileSystem::GetDirPath(const istd::CString& filePath) const
 }
 
 
-
-bool CFileSystem::HasExtension(const istd::CString& filePath, const istd::CString& extension) const
+bool CFileSystemBase::HasExtension(const istd::CString& filePath, const istd::CString& extension) const
 {
 	istd::CString::size_type extensionSize = extension.size();
 	istd::CString::size_type filePathSize = filePath.size();
@@ -90,12 +91,6 @@ bool CFileSystem::HasExtension(const istd::CString& filePath, const istd::CStrin
 }
 
 
-bool CFileSystem::IsPresent(const istd::CString& filePath) const
-{
-	return (_waccess(filePath.c_str(), 0) == 0);
-}
-
-
-} // namespace ibase
+} // namespace isys
 
 

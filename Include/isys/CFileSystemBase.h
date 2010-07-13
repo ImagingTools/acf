@@ -1,21 +1,19 @@
-#ifndef ibase_CFileSystem_included
-#define ibase_CFileSystem_included
+#ifndef isys_CFileSystemBase_included
+#define isys_CFileSystemBase_included
 
 
+// ACF includes
 #include "isys/IFileSystem.h"
 
-#include "ibase/ibase.h"
 
-
-namespace ibase
+namespace isys
 {
 
 
 /**
-	Implementation of simple file system information.
-	This implementation is part of standard services.
+	Basic plattform independent implementation of the file system information.
 */
-class CFileSystem: virtual public isys::IFileSystem
+class CFileSystemBase: virtual public isys::IFileSystem
 {
 public:
 	// reimplemented (isys::IFileSystem)
@@ -24,13 +22,12 @@ public:
 	virtual istd::CString GetBaseFileName(const istd::CString& filePath) const;
 	virtual istd::CString GetDirPath(const istd::CString& filePath) const;
 	virtual bool HasExtension(const istd::CString& filePath, const istd::CString& extension) const;
-	virtual bool IsPresent(const istd::CString& filePath) const;
 };
 
 
-} // namespace ibase
+} // namespace isys
 
 
-#endif // !ibase_CFileSystem_included
+#endif // !isys_CFileSystemBase_included
 
 

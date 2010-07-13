@@ -54,6 +54,11 @@ public:
 		Check if some file is present.
 	*/
 	virtual bool IsPresent(const istd::CString& filePath) const = 0;
+
+	/**
+		Copy any file to another. If the \c overwriteExisting is set on, the existing file will be overwritten.
+	*/
+	virtual bool CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting = false) const = 0;
 };
 
 

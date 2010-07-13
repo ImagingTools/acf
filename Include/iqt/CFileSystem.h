@@ -25,6 +25,7 @@ public:
 	virtual istd::CString GetDirPath(const istd::CString& filePath) const;
 	virtual bool HasExtension(const istd::CString& filePath, const istd::CString& extension) const;
 	virtual bool IsPresent(const istd::CString& filePath) const;
+	virtual bool CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting = false) const;
 
 	// static members
 	static QString FindVariableValue(const QString& varName);

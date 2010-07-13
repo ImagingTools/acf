@@ -62,6 +62,29 @@ bool CFileSystem::IsPresent(const istd::CString& filePath) const
 }
 
 
+bool CFileSystem::CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
+{
+	QString inputFilePath = iqt::GetQString(outputFile);
+	QFileInfo inputFileInfo(inputFilePath);
+	if (!inputFileInfo.exists()){
+		return false;
+	}
+
+	QString outputFilePath = iqt::GetQString(outputFile);
+
+	if (overwriteExisting){
+		QFileInfo fileInfo(outputFilePath);
+		if (fileInfo.exists()){
+			if (!QFile::remove(outputFilePath)){
+				return false;
+			}
+		}
+	}
+
+	return QFile::copy(iqt::GetQString(inputFile), outputFilePath);
+}
+
+
 // static members
 
 QString CFileSystem::GetEnrolledPath(const QString& path)

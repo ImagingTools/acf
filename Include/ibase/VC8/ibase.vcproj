@@ -239,10 +239,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileSystem.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileTypeInfoComp.cpp"
 				>
 			</File>
@@ -333,10 +329,6 @@
 			</File>
 			<File
 				RelativePath="..\CFilePersistenceComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystem.h"
 				>
 			</File>
 			<File
