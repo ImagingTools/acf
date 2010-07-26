@@ -5,6 +5,7 @@
 	Name="ibase"
 	ProjectGUID="{C30159C1-C8F9-49F4-AE32-C014F87B12BD}"
 	RootNamespace="ibase"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -239,10 +240,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileSystem.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileTypeInfoComp.cpp"
 				>
 			</File>
@@ -333,10 +330,6 @@
 			</File>
 			<File
 				RelativePath="..\CFilePersistenceComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystem.h"
 				>
 			</File>
 			<File
@@ -524,4 +517,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
