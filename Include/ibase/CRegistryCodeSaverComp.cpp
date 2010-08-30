@@ -1018,12 +1018,12 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 
 		if (!description.empty()){
 			NextLine(stream);
-			stream << "registry.SetDescription(\"" << description.ToString() << "\");";
+			stream << "registry.SetDescription(" << GetStringLiteral(description) << ");";
 		}
 
 		if (!keywords.empty()){
 			NextLine(stream);
-			stream << "registry.SetKeywords(\"" << keywords.ToString() << "\");";
+			stream << "registry.SetKeywords(" << GetStringLiteral(keywords) << ");";
 		}
 	}
 
@@ -1238,6 +1238,9 @@ std::string CRegistryCodeSaverComp::GetStringLiteral(const istd::CString& text) 
 		}
 		else if (c == '\\'){
 			retVal += "\\\\";
+		}
+		else if (c == '\"'){
+			retVal += "\\\"";
 		}
 		else if ((c >= 128) || (c < 32)){
 			retVal += "\\x";
