@@ -19,7 +19,6 @@ CString::CString()
 CString::CString(const wchar_t* str)
 :	BaseClass(str)
 {
-
 }
 
 
