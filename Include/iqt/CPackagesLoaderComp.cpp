@@ -249,6 +249,16 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 			packageInfo.staticInfoPtr.SetPtr(infoPtr);
 			packageInfo.directory = packageDir;
 
+			istd::CString metaInfoFile(iqt::GetCString(packageDir.absoluteFilePath("General.xml")));
+			iser::CXmlFileReadArchive archive(metaInfoFile);
+			if (!infoPtr->SerializeMeta(archive)){
+				SendErrorMessage(
+							iser::IFileLoader::MI_CANNOT_LOAD,
+							iqt::GetCString(QObject::tr("Cannot load meta description for registry %1 (%2)")
+										.arg(packageId.c_str())
+										.arg(iqt::GetQString(metaInfoFile))));
+			}
+
 			return RegisterSubcomponentInfo(packageId, infoPtr);
 		}
 	}

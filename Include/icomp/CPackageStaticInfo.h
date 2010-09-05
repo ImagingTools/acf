@@ -2,6 +2,8 @@
 #define icomp_CPackageStaticInfo_included
 
 
+#include "iser/IArchive.h"
+
 #include "icomp/CComponentStaticInfoBase.h"
 
 
@@ -20,6 +22,8 @@ public:
 	CPackageStaticInfo(
 				const istd::CString& description,
 				const istd::CString& keywords);
+
+	virtual bool SerializeMeta(iser::IArchive& archive);
 
 	// reimplemented (icomp::IComponentStaticInfo)
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const;

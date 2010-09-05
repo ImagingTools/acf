@@ -24,7 +24,8 @@ class CCompositeComponentStaticInfo: public CBaseComponentStaticInfo
 public:
 	CCompositeComponentStaticInfo(
 				const IRegistry& registry,
-				const icomp::IComponentEnvironmentManager& manager);
+				const icomp::IComponentEnvironmentManager& manager,
+				const IComponentStaticInfo* parentPtr = NULL);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
 	virtual int GetComponentType() const;

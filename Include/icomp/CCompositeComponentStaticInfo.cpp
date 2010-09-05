@@ -12,7 +12,8 @@ namespace icomp
 
 CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 			const IRegistry& registry,
-			const icomp::IComponentEnvironmentManager& manager)
+			const icomp::IComponentEnvironmentManager& manager,
+			const IComponentStaticInfo* parentPtr)
 {
 	// register exported interfaces
 	const IRegistry::ExportedInterfacesMap& interfacesMap = registry.GetExportedInterfacesMap();
@@ -95,6 +96,18 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 
 	m_description = registry.GetDescription();
 	m_keywords = registry.GetKeywords();
+
+	if (parentPtr != NULL){
+		const istd::CString& parentKeywords = parentPtr->GetKeywords();
+		if (!parentKeywords.IsEmpty()){
+			if (m_keywords.IsEmpty()){
+				m_keywords = parentKeywords;
+			}
+			else{
+				m_keywords = m_keywords + " " + parentKeywords;
+			}
+		}
+	}
 }
 
 

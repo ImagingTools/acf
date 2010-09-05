@@ -63,7 +63,7 @@ const icomp::IComponentStaticInfo* CCompositePackageStaticInfo::GetSubcomponentI
 
 			const icomp::IRegistry* registryPtr = m_envManager.GetRegistry(address);
 			if (registryPtr != NULL){
-				infoPtr->componentInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(*registryPtr, m_envManager));
+				infoPtr->componentInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(*registryPtr, m_envManager, this));
 			}
 
 			infoPtr->isInitialized = true;

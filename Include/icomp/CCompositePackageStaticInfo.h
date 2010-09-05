@@ -5,8 +5,10 @@
 #include "istd/TCascadedMap.h"
 #include "istd/TDelPtr.h"
 
+#include "iser/ISerializable.h"
+
 #include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/CComponentStaticInfoBase.h"
+#include "icomp/CPackageStaticInfo.h"
 #include "icomp/CCompositeComponentStaticInfo.h"
 
 
@@ -14,7 +16,7 @@ namespace icomp
 {
 
 
-class CCompositePackageStaticInfo: public icomp::CComponentStaticInfoBase
+class CCompositePackageStaticInfo: public CPackageStaticInfo
 {
 public:
 	CCompositePackageStaticInfo(
