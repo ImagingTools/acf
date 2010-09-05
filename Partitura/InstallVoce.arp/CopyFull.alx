@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1518
+          1543
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          219
+          237
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="11">
+  <PositionMap count="10">
     <Element>
       <ComponentName>
         CopyBins
@@ -98,10 +98,10 @@
         CopyIncludeResources
       </ComponentName>
       <X>
-        1075
+        625
       </X>
       <X>
-        475
+        225
       </X>
     </Element>
     <Element>
@@ -121,17 +121,6 @@
       </ComponentName>
       <X>
         300
-      </X>
-      <X>
-        225
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyVcRules
-      </ComponentName>
-      <X>
-        625
       </X>
       <X>
         225
