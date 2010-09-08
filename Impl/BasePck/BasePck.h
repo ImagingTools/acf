@@ -45,6 +45,7 @@
 #include "iprm/CComposedParamsSetComp.h"
 #include "iprm/CFileNameParamComp.h"
 #include "iprm/CEnableableParamComp.h"
+#include "iprm/CLinearAdjustParamsComp.h"
 
 #include "i2d/CPosition2d.h"
 #include "i2d/CCircle.h"
@@ -93,6 +94,7 @@ typedef icomp::TModelCompWrap<iprm::CParamsManagerComp> ParamsManager;
 typedef icomp::TModelCompWrap<iprm::CComposedParamsSetComp> ComposedParamsSet;
 typedef icomp::TModelCompWrap<iprm::CFileNameParamComp> FileNameParam;
 typedef icomp::TModelCompWrap<iprm::CEnableableParamComp> EnableableParam;
+typedef icomp::TModelCompWrap<iprm::CLinearAdjustParamsComp> LinearAdjustParams;
 
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;

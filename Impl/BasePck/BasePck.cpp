@@ -139,6 +139,11 @@ I_EXPORT_COMPONENT(
 			"Parameter Enabled Bool" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
+			LinearAdjustParams,
+			"Parameter with scale and offset for simple linear transformations",
+			"Parameter Enabled Bool" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
+
+I_EXPORT_COMPONENT(
 			SingleDocumentTemplate,
 			"Single document template for only one type of documents",
 			"Single Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document"));

@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLinearAdjustParamsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerComp.cpp"
 				>
 			</File>
@@ -212,6 +216,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLinearAdjustParamsComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerComp.h"
 				>
 			</File>
@@ -225,6 +233,14 @@
 			</File>
 			<File
 				RelativePath="..\IFileNameParam.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ILinearAdjustConstraints.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ILinearAdjustParams.h"
 				>
 			</File>
 			<File

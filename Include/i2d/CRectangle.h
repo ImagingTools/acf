@@ -15,9 +15,12 @@ namespace i2d
 {
 
 
+/**
+	Definition of rectangle area orthogonal to axis of coordination system.
+*/
 class CRectangle: virtual public IObject2d
 {
-public :
+public:
 	CRectangle();
 	CRectangle(const CRectangle& rect);
 	CRectangle(double left, double top, double width, double height);
