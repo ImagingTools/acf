@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1543
+          1549
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          237
+          240
         </Number>
         <Description>
           ACF-Solutions
@@ -1520,7 +1520,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="8">
                 <Value>
                   *.ui
                 </Value>
@@ -1541,6 +1541,9 @@
                 </Value>
                 <Value>
                   *.alx
+                </Value>
+                <Value>
+                  *.xml
                 </Value>
               </Values>
             </Data>
