@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1536
+          1543
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          232
+          237
         </Number>
         <Description>
           ACF-Solutions
@@ -105,7 +105,55 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              ShowFrameIndex
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              ShowFrameIndex
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowPositionSlider
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              ShowPositionSlider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowTimePosition
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              ShowTimePosition
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -241,7 +289,47 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="7">
+    <Interface>
+      <InterfaceId>
+        imm::IMediaController
+      </InterfaceId>
+      <ComponentId>
+        VideoViewGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imm::IVideoController
+      </InterfaceId>
+      <ComponentId>
+        VideoViewGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imm::IVideoInfo
+      </InterfaceId>
+      <ComponentId>
+        VideoViewGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        VideoViewGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqt2d::ISceneProvider
+      </InterfaceId>
+      <ComponentId>
+        VideoViewGui
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         iqtgui::IGuiObject
@@ -250,8 +338,24 @@
         VideoPlayerGui
       </ComponentId>
     </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        VideoViewGui
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        Bitmap
+      </ExportedId>
+      <ComponentId>
+        VideoViewGui/Bitmap
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Video player displaying image sequence form some directory

@@ -12,7 +12,7 @@ namespace iqtmm
 
 
 // public methods
-	
+
 // reimplemented (imod::IModelEditor)
 	
 void CPlaybackControllerGuiComp::UpdateEditor(int updateFlags)
@@ -21,8 +21,11 @@ void CPlaybackControllerGuiComp::UpdateEditor(int updateFlags)
 	if (objectPtr != NULL){
 		int supportedFeatures = objectPtr->GetSupportedFeatures();
 		bool isPlayable = ((supportedFeatures & imm::IMediaController::SF_PLAY) != 0);
-		PlayButton->setVisible(isPlayable);
-		RepeatButton->setVisible(isPlayable);
+		PlayButton->setEnabled(isPlayable);
+		TimeEdit->setEnabled(isPlayable);
+		PositionSlider->setEnabled(isPlayable);
+		FrameIndexSB->setEnabled(isPlayable);
+		RepeatButton->setEnabled(isPlayable);
 
 		bool isSeekEnabled = ((supportedFeatures & imm::IMediaController::SF_SEEK) != 0);
 
@@ -78,9 +81,16 @@ void CPlaybackControllerGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	PlayButton->setVisible(*m_showPlayButtonAttrPtr);
+	PlayButton->setEnabled(false);
 	TimeEdit->setVisible(*m_showTimePositionAttrPtr);
+	TimeEdit->setEnabled(false);
 	PositionSlider->setVisible(*m_showPositionSliderAttrPtr);
+	PositionSlider->setEnabled(false);
 	FrameIndexSB->setVisible(*m_showFrameIndexAttrPtr);
+	FrameIndexSB->setEnabled(false);
+	RepeatButton->setVisible(*m_showRepeatButtonAttrPtr);
+	RepeatButton->setEnabled(false);
 }
 
 

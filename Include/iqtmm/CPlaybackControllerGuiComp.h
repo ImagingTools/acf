@@ -29,9 +29,11 @@ public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CPlaybackControllerGuiComp, imm::IVideoController> BaseClass;
 
 	I_BEGIN_COMPONENT(CPlaybackControllerGuiComp);
+		I_ASSIGN(m_showPlayButtonAttrPtr, "ShowPlayButton", "Allow to display play button", true, true);
 		I_ASSIGN(m_showPositionSliderAttrPtr, "ShowPositionSlider", "Shows and allows edit position slider", true, true);
 		I_ASSIGN(m_showTimePositionAttrPtr, "ShowTimePosition", "Shows and allows edit current time position", true, false);
 		I_ASSIGN(m_showFrameIndexAttrPtr, "ShowFrameIndex", "Shows and allows edit current frame index", true, false);
+		I_ASSIGN(m_showRepeatButtonAttrPtr, "ShowRepeatButton", "Allow to display play button", true, true);
 	I_END_COMPONENT();
 
 	// reimplemented (imod::IModelEditor)
@@ -59,9 +61,11 @@ private:
 	QTimer m_playTimer;
 	int m_currentFrameIndex;
 
+	I_ATTR(bool, m_showPlayButtonAttrPtr);
 	I_ATTR(bool, m_showPositionSliderAttrPtr);
 	I_ATTR(bool, m_showTimePositionAttrPtr);
 	I_ATTR(bool, m_showFrameIndexAttrPtr);
+	I_ATTR(bool, m_showRepeatButtonAttrPtr);
 };
 
 
