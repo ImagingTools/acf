@@ -170,19 +170,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CProcessorControlGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CProcessorControlGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CIterativeProcessorParamsGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CIterativeProcessorParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessorControlGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CProcessorControlGuiComp.moc"
 				>
 			</File>
 			<File
@@ -200,11 +200,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CProcessorControlGuiComp.h"
+				RelativePath="..\CIterativeProcessorParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CIterativeProcessorParamsGuiComp.h"
+				RelativePath="..\CProcessorControlGuiComp.h"
 				>
 			</File>
 			<File
@@ -233,11 +233,11 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CAcquisitonProcessorGuiComp.cpp"
+				RelativePath="..\generated\moc_CIterativeProcessorParamsGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CIterativeProcessorParamsGuiComp.cpp"
+				RelativePath="..\generated\moc_CProcessorControlGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -245,11 +245,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CAcquisitonProcessorGuiComp.h"
+				RelativePath="..\generated\ui_CIterativeProcessorParamsGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CIterativeProcessorParamsGuiComp.h"
+				RelativePath="..\generated\ui_CProcessorControlGuiComp.h"
 				>
 			</File>
 			<File
@@ -261,11 +261,11 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CProcessorControlGuiComp.ui"
+				RelativePath="..\CIterativeProcessorParamsGuiComp.ui"
 				>
 			</File>
 			<File
-				RelativePath="..\CIterativeProcessorParamsGuiComp.ui"
+				RelativePath="..\CProcessorControlGuiComp.ui"
 				>
 			</File>
 			<File
