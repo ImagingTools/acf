@@ -1,4 +1,4 @@
-#include "iqtproc/CAcquisitonProcessorGuiComp.h"
+#include "iqtproc/CProcessorControlGuiComp.h"
 
 
 // Qt includes
@@ -11,7 +11,7 @@ namespace iqtproc
 {
 
 
-CAcquisitonProcessorGuiComp::CAcquisitonProcessorGuiComp()
+CProcessorControlGuiComp::CProcessorControlGuiComp()
 {
 	m_timer.setInterval(40);
 	QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(OnTimerReady()));
@@ -20,7 +20,7 @@ CAcquisitonProcessorGuiComp::CAcquisitonProcessorGuiComp()
 
 // reimplemented (icomp::IComponent)
 
-void CAcquisitonProcessorGuiComp::OnComponentCreated()
+void CProcessorControlGuiComp::OnComponentCreated()
 {
 	I_ASSERT(m_liveIntervalAttrPtr.IsValid());
 
@@ -30,7 +30,7 @@ void CAcquisitonProcessorGuiComp::OnComponentCreated()
 
 // protected slots
 
-void CAcquisitonProcessorGuiComp::on_DataAcquisitionButton_clicked()
+void CProcessorControlGuiComp::on_DataAcquisitionButton_clicked()
 {
 	LiveDataAcquisitionButton->setChecked(false);
 
@@ -38,7 +38,7 @@ void CAcquisitonProcessorGuiComp::on_DataAcquisitionButton_clicked()
 }
 
 
-void CAcquisitonProcessorGuiComp::on_LiveDataAcquisitionButton_toggled(bool checked)
+void CProcessorControlGuiComp::on_LiveDataAcquisitionButton_toggled(bool checked)
 {
 	if (checked){
 		m_timer.start();
@@ -49,10 +49,10 @@ void CAcquisitonProcessorGuiComp::on_LiveDataAcquisitionButton_toggled(bool chec
 }
 
 
-void CAcquisitonProcessorGuiComp::on_SaveDataButton_clicked()
+void CProcessorControlGuiComp::on_SaveDataButton_clicked()
 {
-	if (m_processingDataLoaderCompPtr.IsValid() && m_processingDataCompPtr.IsValid()){
-		if (m_processingDataLoaderCompPtr->SaveToFile(*m_processingDataCompPtr, "") == iser::IFileLoader::StateFailed){
+	if (m_outputDataLoaderCompPtr.IsValid() && m_outputDataCompPtr.IsValid()){
+		if (m_outputDataLoaderCompPtr->SaveToFile(*m_outputDataCompPtr, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
 						QObject::tr("Error"),
@@ -62,7 +62,7 @@ void CAcquisitonProcessorGuiComp::on_SaveDataButton_clicked()
 }
 
 
-void CAcquisitonProcessorGuiComp::on_LoadParamsButton_clicked()
+void CProcessorControlGuiComp::on_LoadParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
@@ -75,7 +75,7 @@ void CAcquisitonProcessorGuiComp::on_LoadParamsButton_clicked()
 }
 
 
-void CAcquisitonProcessorGuiComp::on_SaveParamsButton_clicked()
+void CProcessorControlGuiComp::on_SaveParamsButton_clicked()
 {
 	if (m_paramsLoaderCompPtr.IsValid() && m_paramsSetCompPtr.IsValid()){
 		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
@@ -88,7 +88,7 @@ void CAcquisitonProcessorGuiComp::on_SaveParamsButton_clicked()
 }
 
 
-void CAcquisitonProcessorGuiComp::OnTimerReady()
+void CProcessorControlGuiComp::OnTimerReady()
 {
 	DoDataAcquisition();
 }
@@ -96,12 +96,15 @@ void CAcquisitonProcessorGuiComp::OnTimerReady()
 
 // protected methods
 
-bool CAcquisitonProcessorGuiComp::DoDataAcquisition()
+bool CProcessorControlGuiComp::DoDataAcquisition()
 {
-	if (m_processingDataAcquisitionCompPtr.IsValid() && m_processingDataCompPtr.IsValid()){
-		int taskId = m_processingDataAcquisitionCompPtr->BeginTask(m_paramsSetCompPtr.GetPtr(), NULL, m_processingDataCompPtr.GetPtr());
+	if (m_processorCompPtr.IsValid() && m_outputDataCompPtr.IsValid()){
+		int taskId = m_processorCompPtr->BeginTask(
+					m_paramsSetCompPtr.GetPtr(),
+					m_inputDataCompPtr.GetPtr(),
+					m_outputDataCompPtr.GetPtr());
 		if (taskId >= 0){
-			return m_processingDataAcquisitionCompPtr->WaitTaskFinished(-1, 1) != iproc::IProcessor::TS_INVALID;
+			return m_processorCompPtr->WaitTaskFinished(-1, 1) != iproc::IProcessor::TS_INVALID;
 		}
 	}
 
@@ -111,14 +114,14 @@ bool CAcquisitonProcessorGuiComp::DoDataAcquisition()
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
-void CAcquisitonProcessorGuiComp::OnGuiCreated()
+void CProcessorControlGuiComp::OnGuiCreated()
 {
-	bool hasProcessingData = m_processingDataCompPtr.IsValid();
-	bool hasProcessor = m_processingDataAcquisitionCompPtr.IsValid();
+	bool hasProcessingData = m_outputDataCompPtr.IsValid();
+	bool hasProcessor = m_processorCompPtr.IsValid();
 
 	DataAcquisitionButton->setVisible(hasProcessingData && hasProcessor);
 	LiveDataAcquisitionButton->setVisible(hasProcessingData && hasProcessor);
-	SaveDataButton->setVisible(hasProcessingData && m_processingDataLoaderCompPtr.IsValid());
+	SaveDataButton->setVisible(hasProcessingData && m_outputDataLoaderCompPtr.IsValid());
 
 	bool areParamsEditable = false;
 	if (m_paramsSetModelCompPtr.IsValid() && m_paramsSetGuiCompPtr.IsValid() && m_paramsSetObserverCompPtr.IsValid()){
@@ -137,7 +140,7 @@ void CAcquisitonProcessorGuiComp::OnGuiCreated()
 }
 
 
-void CAcquisitonProcessorGuiComp::OnGuiDestroyed()
+void CProcessorControlGuiComp::OnGuiDestroyed()
 {
 	m_timer.stop();
 

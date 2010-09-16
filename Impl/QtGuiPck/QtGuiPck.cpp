@@ -180,7 +180,7 @@ I_EXPORT_COMPONENT(
 			"Progress Manager" IM_TAG("GUI Processing"));
 
 I_EXPORT_COMPONENT(
-			AcquisitionProcessorGui,
+			ProcessorControlGui,
 			"Processor acquisition GUI",
 			"Acquisition Processor Parameter View" IM_TAG("GUI Image Processing"));
 

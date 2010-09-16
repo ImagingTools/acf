@@ -39,7 +39,7 @@
 #include "iqtdoc/CHtmlHelpViewerComp.h"
 
 #include "iqtproc/CProgressManagerGuiComp.h"
-#include "iqtproc/CAcquisitonProcessorGuiComp.h"
+#include "iqtproc/CProcessorControlGuiComp.h"
 #include "iqtproc/CIterativeProcessorParamsGuiComp.h"
 
 
@@ -84,7 +84,7 @@ typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWo
 typedef iqtdoc::CHtmlHelpViewerComp HtmlHelpViewer;
 
 typedef iqtproc::CProgressManagerGuiComp ProgressManagerGui;
-typedef iqtproc::CAcquisitonProcessorGuiComp AcquisitionProcessorGui;
+typedef iqtproc::CProcessorControlGuiComp ProcessorControlGui;
 typedef iqtproc::CIterativeProcessorParamsGuiComp IterationParamsGui;
 
 

@@ -170,11 +170,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CAcquisitonProcessorGuiComp.cpp"
+				RelativePath="..\CProcessorControlGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CAcquisitonProcessorGuiComp.moc"
+				RelativePath="..\CProcessorControlGuiComp.moc"
 				>
 			</File>
 			<File
@@ -200,7 +200,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CAcquisitonProcessorGuiComp.h"
+				RelativePath="..\CProcessorControlGuiComp.h"
 				>
 			</File>
 			<File
@@ -261,7 +261,7 @@
 			Name="Forms"
 			>
 			<File
-				RelativePath="..\CAcquisitonProcessorGuiComp.ui"
+				RelativePath="..\CProcessorControlGuiComp.ui"
 				>
 			</File>
 			<File

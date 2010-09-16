@@ -28,27 +28,27 @@ namespace iqtproc
 {
 
 
-class CAcquisitonProcessorGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CAcquisitonProcessorGuiComp, QWidget>
+class CProcessorControlGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CProcessorControlGuiComp, QWidget>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiCompBase<Ui::CAcquisitonProcessorGuiComp, QWidget> BaseClass;
+	typedef iqtgui::TDesignerGuiCompBase<Ui::CProcessorControlGuiComp, QWidget> BaseClass;
 
-	I_BEGIN_COMPONENT(CAcquisitonProcessorGuiComp)
-		I_ASSIGN(m_processingDataCompPtr, "ProcessingData", "Processing data that will be shown", true, "ProcessingData");
-		I_ASSIGN(m_processingDataModelCompPtr, "ProcessingData", "Processing data that will be shown", true, "ProcessingData");
-		I_ASSIGN(m_processingDataAcquisitionCompPtr, "ProcessingDataAcquisition", "Processing data acquision object", false, "ProcessingDataAcquisition");
-		I_ASSIGN(m_processingDataLoaderCompPtr, "ProcessingDataLoader", "Saves processing data to file", false, "ProcessingDataLoader");
-		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
+	I_BEGIN_COMPONENT(CProcessorControlGuiComp)
+		I_ASSIGN(m_inputDataCompPtr, "InputData", "Input data that will be processed", false, "InputData");
+		I_ASSIGN(m_outputDataCompPtr, "OutputData", "Output data object", true, "OutputData");
+		I_ASSIGN(m_outputDataLoaderCompPtr, "OutputDataLoader", "Saves processing data to file", false, "OutputDataLoader");
+		I_ASSIGN(m_processorCompPtr, "Processor", "Processor object used to convert input to output data", true, "Processor");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
 		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set", false, "ParamsSet");
+		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loads and saves parameters from and to file", false, "ParamsLoader");
 		I_ASSIGN(m_paramsSetGuiCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_paramsSetObserverCompPtr, "ParamsSetGui", "Shows parameter set", false, "ParamsSetGui");
 		I_ASSIGN(m_liveIntervalAttrPtr, "LiveInterval", "Interval (in seconds) of acquisition in continuous mode", true, 0.04);
 	I_END_COMPONENT
 
-	CAcquisitonProcessorGuiComp();
+	CProcessorControlGuiComp();
 
 	// reimplemented (icomp::IComponent)
 	virtual void OnComponentCreated();
@@ -69,15 +69,16 @@ protected:
 	virtual void OnGuiDestroyed();
 
 private:
-	I_REF(istd::IChangeable, m_processingDataCompPtr);
-	I_REF(imod::IModel, m_processingDataModelCompPtr);
-	I_REF(iproc::IProcessor, m_processingDataAcquisitionCompPtr);
+	I_REF(istd::IChangeable, m_inputDataCompPtr);
+	I_REF(istd::IChangeable, m_outputDataCompPtr);
+	I_REF(iser::IFileLoader, m_outputDataLoaderCompPtr);
 
-	I_REF(iser::IFileLoader, m_processingDataLoaderCompPtr);
-	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+	I_REF(iproc::IProcessor, m_processorCompPtr);
 
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
+	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
+
 	I_REF(iqtgui::IGuiObject, m_paramsSetGuiCompPtr);
 	I_REF(imod::IObserver, m_paramsSetObserverCompPtr);
 
