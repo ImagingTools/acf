@@ -76,7 +76,7 @@ protected:
 	/**
 		Remove supplier from input supplier list.
 	*/
-	void RemoveInputSupplier(const ISupplier* supplierPtr);
+	void RemoveInputSupplier(ISupplier* supplierPtr);
 	/**
 		Remove all suppliers from input supplier list.
 	*/
@@ -252,7 +252,7 @@ void TSupplierCompWrap<SupplierInterface, Product>::AddInputSupplier(ISupplier* 
 
 
 template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::RemoveInputSupplier(const ISupplier* supplierPtr)
+void TSupplierCompWrap<SupplierInterface, Product>::RemoveInputSupplier(ISupplier* supplierPtr)
 {
 	m_inputSuppliers.erase(supplierPtr);
 }

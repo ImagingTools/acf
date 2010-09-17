@@ -42,7 +42,7 @@ int CFrameSeqVideoControllerComp::DoProcessing(
 		if (m_isFrameLoaded){
 			const istd::IChangeable* imagePtr = m_frameDataCompPtr.GetPtr();
 			if ((imagePtr != NULL) && bitmapPtr->CopyFrom(*imagePtr)){
-				return true;
+				return TS_OK;
 			}
 		}
 
