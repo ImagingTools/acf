@@ -31,7 +31,8 @@ istd::CIndex2d CFrameSeqVideoControllerComp::GetBitmapSize(const iprm::IParamsSe
 int CFrameSeqVideoControllerComp::DoProcessing(
 			const iprm::IParamsSet* /*paramsPtr*/,
 			const istd::IPolymorphic* /*inputPtr*/,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			iproc::IProgressManager* /*progressManagerPtr*/)
 {
 	if (outputPtr == NULL){
 		return TS_OK;

@@ -1,7 +1,11 @@
 #include "iproc/CCascadedProcessorComp.h"
 
 
+#include "istd/TPointerVector.h"
+
 #include "iimg/CGeneralBitmap.h"
+
+#include "iproc/CDelegatedProgressManager.h"
 
 
 namespace iproc
@@ -85,11 +89,30 @@ bool CCascadedProcessorComp::AreParamsAccepted(
 int CCascadedProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			IProgressManager* progressManagerPtr)
 {
+	int processorsCount = m_processorsCompPtr.GetCount();
+	istd::TPointerVector<CDelegatedProgressManager> progressDelegators;
+	progressDelegators.SetCount(processorsCount);
+
+	if (progressManagerPtr != NULL){
+		int managersCount = istd::Min(processorsCount, m_progressIdsAttrPtr.GetCount());
+		for (int i = 0; i < managersCount; ++i){
+			const istd::CString& progressId = m_progressIdsAttrPtr[i];
+			if (!progressId.IsEmpty()){
+				istd::CString description = progressId;
+				if (i < m_progressDescriptionsAttrPtr.GetCount()){
+					description = m_progressDescriptionsAttrPtr[i];
+				}
+
+				progressDelegators.SetElementAt(i, new CDelegatedProgressManager(progressManagerPtr, progressId.ToString(), description));
+			}
+		}
+	}
+
 	int buffersCount = m_buffersCompPtr.GetCount();
 
-	int processorsCount = m_processorsCompPtr.GetCount();
 	for (int i = 0; i < processorsCount; ++i){
 		const istd::IPolymorphic* processorInputPtr = NULL;
 		if (i > 0){
@@ -115,7 +138,7 @@ int CCascadedProcessorComp::DoProcessing(
 		iproc::IProcessor* processorPtr = m_processorsCompPtr[i];
 		I_ASSERT(processorPtr != NULL);	// flag 'isObligatory' was set to true
 
-		int taskState = processorPtr->DoProcessing(paramsPtr, processorInputPtr, processorOutputPtr);
+		int taskState = processorPtr->DoProcessing(paramsPtr, processorInputPtr, processorOutputPtr, progressDelegators.GetAt(i));
 		if (taskState != TS_OK){
 			return taskState;
 		}

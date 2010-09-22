@@ -2,8 +2,11 @@
 #define iproc_IProgressManager_included
 
 
+// STL includes
+#include <string>
+
 #include "istd/IPolymorphic.h"
-#include "iser/CArchiveTag.h"
+#include "istd/CString.h"
 
 
 namespace iproc
@@ -17,7 +20,10 @@ public:
 		Begin progress report session.
 		\return	session ID or negative value if failed.
 	*/
-	virtual int BeginProgressSession(const iser::CArchiveTag& progressTag, bool isCancelable = false) = 0;
+	virtual int BeginProgressSession(
+				const std::string& progressId,
+				const istd::CString& description,
+				bool isCancelable = false) = 0;
 	/**
 		Close progress report session.
 		\param	sessionId	session ID returned by \c BeginProgressSession.

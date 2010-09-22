@@ -19,75 +19,6 @@ CProgressManagerGuiComp::CProgressManagerGuiComp()
 
 // reimplemented (iproc::IProgressManager)
 
-int CProgressManagerGuiComp::BeginProgressSession(const iser::CArchiveTag& /*progressTag*/, bool isCancelable)
-{
-	if (m_isCanceled){
-		return -1;
-	}
-
-	int id = m_nextSessionId++;
-
-	ProgressInfo& info = m_progressMap[id];
-	info.progress = 0;
-	info.isCancelable = isCancelable;
-
-	if (isCancelable){
-		++m_cancelableSessionsCount;
-	}
-
-	if (IsGuiCreated()){
-		UpdateVisibleComponents();
-
-		QCoreApplication::processEvents();
-	}
-
-	return id;
-}
-
-
-void CProgressManagerGuiComp::EndProgressSession(int sessionId)
-{
-	ProgressMap::iterator iter = m_progressMap.find(sessionId);
-	I_ASSERT(iter != m_progressMap.end());
-
-	const ProgressInfo& info = iter->second;
-	m_progressSum -= info.progress;
-
-	if (info.isCancelable){
-		--m_cancelableSessionsCount;
-	}
-
-	m_progressMap.erase(iter);
-
-	if (m_progressMap.empty()){
-		m_progressSum = 0;
-		m_isCanceled = false;
-	}
-
-	if (IsGuiCreated()){
-		UpdateVisibleComponents();
-
-		QCoreApplication::processEvents();
-	}
-}
-
-
-void CProgressManagerGuiComp::OnProgress(int sessionId, double currentProgress)
-{
-	ProgressMap::iterator iter = m_progressMap.find(sessionId);
-	I_ASSERT(iter != m_progressMap.end());
-
-	m_progressSum += currentProgress - iter->second.progress;
-	iter->second.progress = currentProgress;
-
-	if (IsGuiCreated()){
-		UpdateProgressBar();
-
-		QCoreApplication::processEvents();
-	}
-}
-
-
 bool CProgressManagerGuiComp::IsCanceled(int /*sessionId*/) const
 {
 	return m_isCanceled;
@@ -121,6 +52,20 @@ void CProgressManagerGuiComp::UpdateProgressBar()
 	else{
 		ProgressBar->setValue(1000 * m_progressSum / m_progressMap.size());
 		ProgressBar->setEnabled(true);
+	}
+}
+
+
+// reimplemented (istd::IChangeable)
+
+void CProgressManagerGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* /*changeParamsPtr*/)
+{
+	if ((changeFlags & CF_SESSIONS_NUMBER) != 0){
+		UpdateVisibleComponents();
+	}
+
+	if ((changeFlags & CF_PROGRESS_CHANGED) != 0){
+		UpdateProgressBar();
 	}
 }
 

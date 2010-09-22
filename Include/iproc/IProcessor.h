@@ -9,6 +9,9 @@ namespace iproc
 {
 
 
+class IProgressManager;
+
+
 /**
 	Interface for all synchrone and assynchrone processors with <em>"push data"</em> model.
 	Synchrone processors are blocking and can process single task. Thats why is not necessary to use task ID.
@@ -110,7 +113,8 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr) = 0;
+				istd::IChangeable* outputPtr,
+				IProgressManager* progressManagerPtr = NULL) = 0;
 
 	/**
 		Begin new task for this processor and add them to queue.
@@ -130,7 +134,8 @@ public:
 	virtual int BeginTask(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr) = 0;
+				istd::IChangeable* outputPtr,
+				IProgressManager* progressManagerPtr = NULL) = 0;
 
 	/**
 		Wait for task is finished.

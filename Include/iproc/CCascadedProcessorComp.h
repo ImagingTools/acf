@@ -29,6 +29,8 @@ public:
 		I_REGISTER_INTERFACE(iproc::IProcessor)
 		I_ASSIGN_MULTI_0(m_processorsCompPtr, "Processors", "List of processors", true);
 		I_ASSIGN_MULTI_0(m_buffersCompPtr, "Buffers", "List of buffers storing data between processors", false);
+		I_ASSIGN_MULTI_0(m_progressIdsAttrPtr, "ProgressIds", "List of progress ID's used for progress manager for each processor", false);
+		I_ASSIGN_MULTI_0(m_progressDescriptionsAttrPtr, "ProgressDescriptions", "List of progress descriptions used for progress manager for each processor", false);
 	I_END_COMPONENT
 
 	// reimplemented (iproc::IProcessor)
@@ -41,12 +43,15 @@ public:
 	virtual int DoProcessing(
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
-				istd::IChangeable* outputPtr);
+				istd::IChangeable* outputPtr,
+				IProgressManager* progressManagerPtr = NULL);
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
 private:
 	I_MULTIREF(iproc::IProcessor, m_processorsCompPtr);
 	I_MULTIREF(istd::IChangeable, m_buffersCompPtr);
+	I_MULTIATTR(istd::CString, m_progressIdsAttrPtr);
+	I_MULTIATTR(istd::CString, m_progressDescriptionsAttrPtr);
 };
 
 

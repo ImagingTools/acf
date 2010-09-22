@@ -5,7 +5,7 @@
 // ACF includes
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "iproc/IProgressManager.h"
+#include "iproc/CDelegatedProgressManager.h"
 
 #include "iqtproc/Generated/ui_CProgressManagerGuiComp.h"
 
@@ -16,7 +16,7 @@ namespace iqtproc
 
 class CProgressManagerGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CProgressManagerGuiComp>,
-			public iproc::IProgressManager
+			public iproc::CDelegatedProgressManager
 {
 	Q_OBJECT
 
@@ -32,14 +32,14 @@ public:
 	CProgressManagerGuiComp();
 
 	// reimplemented (iproc::IProgressManager)
-	virtual int BeginProgressSession(const iser::CArchiveTag& progressTag, bool isCancelable = false);
-	virtual void EndProgressSession(int sessionId);
-	virtual void OnProgress(int sessionId, double currentProgress);
 	virtual bool IsCanceled(int sessionId) const;
 
 protected:
 	void UpdateVisibleComponents();
 	void UpdateProgressBar();
+
+	// reimplemented (istd::IChangeable)
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -66,6 +66,8 @@ private:
 	bool m_isCanceled;
 
 	int m_cancelableSessionsCount;
+
+	IProgressManager* m_slaveManagerPtr;
 };
 
 

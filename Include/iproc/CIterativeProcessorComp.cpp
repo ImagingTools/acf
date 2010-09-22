@@ -1,6 +1,9 @@
 #include "iproc/CIterativeProcessorComp.h"
 
 
+#include "iproc/IProgressManager.h"
+
+
 namespace iproc
 {
 
@@ -10,7 +13,8 @@ namespace iproc
 int CIterativeProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
-			istd::IChangeable* outputPtr)
+			istd::IChangeable* outputPtr,
+			IProgressManager* progressManagerPtr)
 {
 	if (outputPtr == NULL){
 		return TS_OK;
@@ -25,22 +29,30 @@ int CIterativeProcessorComp::DoProcessing(
 
 	int retVal = TS_INVALID;
 
+	int progressSessionId = -1;
+
 	const CIterativeProcessorParams* processorParamsPtr = dynamic_cast<const CIterativeProcessorParams*>(
 				paramsPtr->GetParameter(m_paramsIdAttrPtr->GetValue().ToString()));
 	if ((processorParamsPtr != NULL) && m_slaveProcessorCompPtr.IsValid()){
 		int iterationsCount = processorParamsPtr->GetIterationsCount();
 
+		if (progressManagerPtr != NULL){
+			progressSessionId = progressManagerPtr->BeginProgressSession("IterativeProcessor", "Iteration");
+		}
+
 		for (int iterationIndex = 0; iterationIndex < iterationsCount; iterationIndex++){
 			retVal = ProcessSlave(paramsPtr, inputPtr, outputPtr);
 			if (retVal != TS_OK){
-				return retVal;
+				break;
 			}
 
 			if (iterationIndex < iterationsCount - 1){
 				if (!m_bufferObjectCompPtr.IsValid()){
 					SendErrorMessage(MI_BAD_BUFFER, "No buffer object");
 
-					return TS_INVALID;
+					retVal = TS_INVALID;
+
+					break;
 				}
 
 				if (m_bufferObjectCompPtr->CopyFrom(*outputPtr)){
@@ -49,10 +61,22 @@ int CIterativeProcessorComp::DoProcessing(
 				else{
 					SendErrorMessage(MI_BAD_BUFFER, "Copy of used type is not supported by buffer object");
 
-					return TS_INVALID;
+					retVal = TS_INVALID;
+
+					break;
 				}
 			}
+
+			if (progressSessionId >= 0){
+				I_ASSERT(progressManagerPtr != NULL);
+				progressManagerPtr->OnProgress(progressSessionId, iterationIndex / double(iterationsCount - 1));
+			}
 		}
+	}
+
+	if (progressSessionId >= 0){
+		I_ASSERT(progressManagerPtr != NULL);
+		progressManagerPtr->EndProgressSession(progressSessionId);
 	}
 
 	return retVal;

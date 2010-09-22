@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDelegatedProgressManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CIterativeProcessorComp.cpp"
 				>
 			</File>
@@ -190,6 +194,10 @@
 			>
 			<File
 				RelativePath="..\CCascadedProcessorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDelegatedProgressManager.h"
 				>
 			</File>
 			<File
