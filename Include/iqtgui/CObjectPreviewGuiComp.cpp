@@ -31,6 +31,9 @@ void CObjectPreviewGuiComp::UpdateEditor(int /*updateFlags*/)
 			if (QFile::exists(m_lastFilePath)){
 				m_fileSystemObserver.addPath(m_lastFilePath);
 			}
+			else{
+				m_lastFilePath = QString();
+			}
 
 			m_lastModificationTimeStamp = QDateTime();
 		}
