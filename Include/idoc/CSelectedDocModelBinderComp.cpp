@@ -19,6 +19,10 @@ void CSelectedDocModelBinderComp::TryConnectObservers()
 		return;
 	}
 
+	if (!m_documentManagerCompPtr.IsValid()){
+		return;
+	}
+
 	const icomp::IComponent* observedObjectPtr = m_observedObjectCompPtr.GetPtr();
 	if (observedObjectPtr == NULL){
 		return;

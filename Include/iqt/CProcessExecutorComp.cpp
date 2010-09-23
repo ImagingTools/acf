@@ -27,6 +27,8 @@ CProcessExecutorComp::CProcessExecutorComp()
 	
 void CProcessExecutorComp::SetEnvironment(const isys::IApplicationEnvironment& processEnvironment)
 {
+	QMutexLocker blockProcessing(&m_lock);
+
 	if (m_applicationProcess.state() != QProcess::NotRunning){
 		SendErrorMessage(0, "Process already running. Environment cannot be set.");
 
@@ -51,6 +53,8 @@ void CProcessExecutorComp::SetEnvironment(const isys::IApplicationEnvironment& p
 
 int CProcessExecutorComp::Execute(const istd::CString& executablePath, const istd::CStringList& processArguments)
 {
+	QMutexLocker blockProcessing(&m_lock);
+
 	m_isFailed = false;
 
 	m_applicationProcess.start(iqt::GetQString(executablePath), iqt::GetQStringList(processArguments));
@@ -69,6 +73,8 @@ int CProcessExecutorComp::Execute(const istd::CString& executablePath, const ist
 
 void CProcessExecutorComp::OnComponentDestroyed()
 {
+	QMutexLocker blockProcessing(&m_lock);
+
 	if (m_applicationProcess.state() == QProcess::Running){
 		m_applicationProcess.terminate();
 

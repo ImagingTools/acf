@@ -5,6 +5,7 @@
 // Qt includes
 #include <QObject>
 #include <QProcess>
+#include <QMutex>
 
 
 // ACF includes
@@ -51,6 +52,7 @@ protected Q_SLOTS:
 
 private:
 	QProcess m_applicationProcess;
+	QMutex m_lock;
 
 	bool m_isFailed;
 };

@@ -54,9 +54,6 @@ void CObjectPreviewGuiComp::UpdateModel() const
 
 void CObjectPreviewGuiComp::OnGuiModelDetached()
 {
-	I_ASSERT(m_objectModelCompPtr.IsValid());
-	I_ASSERT(m_objectObserverCompPtr.IsValid());
-
 	if (m_objectObserverCompPtr.IsValid() && m_objectModelCompPtr.IsValid()){
 		if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
 			m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
@@ -71,7 +68,6 @@ void CObjectPreviewGuiComp::OnGuiModelDetached()
 
 void CObjectPreviewGuiComp::OnGuiCreated()
 {
-	I_ASSERT(m_objectGuiCompPtr.IsValid());
 	if (m_objectGuiCompPtr.IsValid()){
 		m_objectGuiCompPtr->CreateGui(ObjectViewFrame);	
 	}
@@ -84,7 +80,6 @@ void CObjectPreviewGuiComp::OnGuiCreated()
 
 void CObjectPreviewGuiComp::OnGuiDestroyed()
 {
-	I_ASSERT(m_objectGuiCompPtr.IsValid());
 	if (m_objectGuiCompPtr.IsValid()){
 		m_objectGuiCompPtr->DestroyGui();	
 	}
@@ -104,14 +99,16 @@ void CObjectPreviewGuiComp::OnFileChanged(const QString&/* filePath*/)
 // private methods
 
 void CObjectPreviewGuiComp::UpdateObjectFromFile()
-{	
-	I_ASSERT(m_objectModelCompPtr.IsValid());
-	I_ASSERT(m_objectObserverCompPtr.IsValid());
-
+{
 	QFileInfo fileInfo(m_lastFilePath);
 	if (!fileInfo.exists()){
 		if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
 			m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
+		}
+	}
+	else{
+		if (!m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
+			m_objectModelCompPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
 		}
 	}
 	
@@ -124,11 +121,6 @@ void CObjectPreviewGuiComp::UpdateObjectFromFile()
 		if (retVal != iser::IFileLoader::StateOk){
 			if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
 				m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
-			}
-		}
-		else{
-			if (!m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
-				m_objectModelCompPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
 			}
 		}
 	}
