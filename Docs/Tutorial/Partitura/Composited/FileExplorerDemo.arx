@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1571
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          255
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <ElementsList count="2">
+    <Element>
+      <Id>
+        FileExplorer
+      </Id>
+      <PackageId>
+        AcfTutorialVoce
+      </PackageId>
+      <ComponentId>
+        FileExplorer
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        StandaloneApp
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        StandaloneApp
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              MainView
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileExplorer
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+  </ElementsList>
+  <ExportedInterfaces count="1">
+    <Interface>
+      <InterfaceId>
+        ibase::IApplication
+      </InterfaceId>
+      <ComponentId>
+        StandaloneApp
+      </ComponentId>
+    </Interface>
+  </ExportedInterfaces>
+  <ExportedComponents count="0">
+  </ExportedComponents>
+  <Description>
+    Tutorial: File system exploring with preview
+  </Description>
+  <Keywords>
+    ACF File Explorer Demo Preview
+  </Keywords>
+</Acf>
