@@ -18,6 +18,7 @@
 #include "iqt/CFileListProviderComp.h"
 #include "iqt/CClipboardSerializerComp.h"
 #include "iqt/CProcessExecutorComp.h"
+#include "iqt/CRenderedObjectFileLoaderComp.h"
 
 #include "iqtdoc/CExtendedDocumentTemplateComp.h"
 #include "iqtdoc/CDoxygenHelpFileProviderComp.h"
@@ -55,6 +56,7 @@ typedef iqt::CCopyProcessorComp CopyProcessor;
 typedef icomp::TModelCompWrap<iqt::CFileListProviderComp> FileListProvider;
 typedef iqt::CClipboardSerializerComp ClipboardSerializer;
 typedef iqt::CProcessExecutorComp ProcessorExecutor;
+typedef iqt::CRenderedObjectFileLoaderComp RenderedObjectFileLoader;
 
 typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CDoxygenHelpFileProviderComp DoxygenHelpFileProvider;

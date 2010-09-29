@@ -6,7 +6,6 @@
 	ProjectGUID="{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}"
 	RootNamespace="iqt"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -267,6 +266,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRenderedObjectFileLoaderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSafeNotifier.cpp"
 				>
 			</File>
@@ -409,6 +412,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRenderedObjectFileLoaderComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSafeNotifier.h"
 				>
 			</File>
@@ -531,4 +538,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-

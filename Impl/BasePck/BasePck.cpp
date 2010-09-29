@@ -118,11 +118,6 @@ I_EXPORT_COMPONENT(
 			"File Converter" IM_CATEGORY(I_DATA_PROCESSING I_SERVICE));
 
 I_EXPORT_COMPONENT(
-			RenderedObjectFileLoader,
-			"Loader of the rendered preview for an object",
-			"File Loader Preview");
-
-I_EXPORT_COMPONENT(
 			SelectableParamsSet,
 			"Composed set of parameters",
 			"Parameters Set Selection Options List" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));

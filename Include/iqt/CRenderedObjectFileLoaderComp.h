@@ -1,16 +1,24 @@
-#ifndef ibase_CRenderedObjectFileLoaderComp_included
-#define ibase_CRenderedObjectFileLoaderComp_included
+#ifndef iqt_CRenderedObjectFileLoaderComp_included
+#define iqt_CRenderedObjectFileLoaderComp_included
+
+
+// Qt includes
+#include <QDateTime>
 
 
 // ACF includes
+#include "istd/TSmartPtr.h"
+
 #include "iser/IFileLoader.h"
 
 #include "icomp/CComponentBase.h"
 
 #include "ibase/IObjectSnap.h"
 
+#include "iqt/CBitmap.h"
 
-namespace ibase
+
+namespace iqt
 {
 
 
@@ -49,12 +57,22 @@ private:
 	I_REF(ibase::IObjectSnap, m_objectSnapCompPtr);
 	I_ATTR(int, m_widthAttrPtr);
 	I_ATTR(int, m_heightAttrPtr);
+
+	struct FileInfo
+	{
+		QDateTime fileTimeStamp;
+		istd::TSmartPtr<iqt::CBitmap> fileBitmapPtr;
+	};
+
+	typedef std::map<QString, FileInfo> PreviewCache;
+
+	mutable PreviewCache m_previewCache;
 };
 
 
-} // namespace ibase
+} // namespace iqt
 
 
-#endif // !ibase_CRenderedObjectFileLoaderComp_included
+#endif // !iqt_CRenderedObjectFileLoaderComp_included
 
 

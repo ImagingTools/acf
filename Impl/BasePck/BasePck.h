@@ -36,7 +36,6 @@
 #include "ibase/CObjectQueueComp.h"
 #include "ibase/CSelectableFileConverterComp.h"
 #include "ibase/CFileConvertOverProcessorComp.h"
-#include "ibase/CRenderedObjectFileLoaderComp.h"
 
 #include "isec/CComposedAuthorizationVerifierComp.h"
 #include "isec/CFixedAuthorisationVerifierComp.h"
@@ -91,7 +90,6 @@ typedef icomp::TModelCompWrap<ibase::CUuidComp> Uuid;
 typedef ibase::CObjectQueueComp ObjectQueue;
 typedef icomp::TModelCompWrap<ibase::CSelectableFileConverterComp> SelectableFileConverter;
 typedef ibase::CFileConvertOverProcessorComp FileConvertOverProcessor;
-typedef ibase::CRenderedObjectFileLoaderComp RenderedObjectFileLoader;
 
 typedef icomp::TModelCompWrap<iprm::CSelectableParamsSetComp> SelectableParamsSet;
 typedef icomp::TModelCompWrap<iprm::CParamsManagerComp> ParamsManager;

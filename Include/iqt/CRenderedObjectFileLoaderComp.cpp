@@ -1,11 +1,15 @@
-#include "ibase/CRenderedObjectFileLoaderComp.h"
+#include "iqt/CRenderedObjectFileLoaderComp.h"
+
+
+// Qt includes
+#include <QFileInfo>
 
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 
-namespace ibase
+namespace iqt
 {
 
 
@@ -29,18 +33,48 @@ bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 
 int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
 {
+	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(&data);
+	if (bitmapPtr == NULL){
+		return StateFailed;
+	}
+
 	if (m_fileLoaderCompPtr.IsValid() && m_fileDataCompPtr.IsValid() && m_objectSnapCompPtr.IsValid()){
-		int loadResult = m_fileLoaderCompPtr->LoadFromFile(*m_fileDataCompPtr.GetPtr(), filePath);
-		if (loadResult == StateOk){
-			iimg::IBitmap* outputBitmapPtr = dynamic_cast<iimg::IBitmap*>(&data);
-			if (outputBitmapPtr == NULL){
-				return StateFailed;
+		QFileInfo fileInfo(iqt::GetQString(filePath));
+		if (fileInfo.exists()){
+			QDateTime fileTimeStamp = fileInfo.lastModified();
+
+			PreviewCache::iterator foundCacheIter = m_previewCache.find(iqt::GetQString(filePath));
+			if (foundCacheIter != m_previewCache.end()){
+				if (fileTimeStamp == foundCacheIter->second.fileTimeStamp){
+					if (bitmapPtr->CopyFrom(*foundCacheIter->second.fileBitmapPtr.GetPtr())){
+						return StateOk;
+					}
+
+					return StateFailed;
+				}
+				else{
+					m_previewCache.erase(foundCacheIter);
+				}
 			}
 
-			istd::CChangeNotifier changePtr(outputBitmapPtr);
+			int loadResult = m_fileLoaderCompPtr->LoadFromFile(*m_fileDataCompPtr.GetPtr(), filePath);
+			if (loadResult == StateOk){
+				istd::CChangeNotifier changePtr(bitmapPtr);
 
-			if (m_objectSnapCompPtr->GetSnap(*m_fileDataCompPtr.GetPtr(), *outputBitmapPtr, istd::CIndex2d(*m_widthAttrPtr, *m_heightAttrPtr))){
-				return StateOk;
+				if (m_objectSnapCompPtr->GetSnap(*m_fileDataCompPtr.GetPtr(), *bitmapPtr, istd::CIndex2d(*m_widthAttrPtr, *m_heightAttrPtr))){
+					FileInfo fileInfo;
+					fileInfo.fileTimeStamp = fileTimeStamp;
+
+					istd::TSmartPtr<iqt::CBitmap> cachedBitmapPtr(new iqt::CBitmap);
+
+					if (cachedBitmapPtr->CopyFrom(*bitmapPtr)){
+						fileInfo.fileBitmapPtr = cachedBitmapPtr;
+
+						m_previewCache[iqt::GetQString(filePath)] = fileInfo;
+					}
+
+					return StateOk;
+				}
 			}
 		}
 	}
@@ -80,6 +114,6 @@ istd::CString CRenderedObjectFileLoaderComp::GetTypeDescription(const istd::CStr
 }
 
 
-} // namespace ibase
+} // namespace iqt
 
 

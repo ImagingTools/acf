@@ -95,6 +95,11 @@ I_EXPORT_COMPONENT(
 			"Application External Process" IM_CATEGORY(I_APPLICATION) IM_TAG("Application"));
 
 I_EXPORT_COMPONENT(
+			RenderedObjectFileLoader,
+			"Loader of the rendered preview for an object",
+			"File Loader Preview");
+
+I_EXPORT_COMPONENT(
 		ExtendedDocumentTemplate,
 		"Extended serialized document template",
 		"Serialized Template" IM_TAG("Document"));
