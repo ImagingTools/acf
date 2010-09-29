@@ -15,6 +15,7 @@
 #include "icmpstr/CRegistryConsistInfoComp.h"
 #include "icmpstr/CRegistryPropEditorComp.h"
 #include "icmpstr/CQuickHelpViewerComp.h"
+#include "icmpstr/CPackagesLoaderExtComp.h"
 
 
 /**
@@ -41,6 +42,7 @@ typedef icomp::TMakeComponentWrap<
 typedef icmpstr::CRegistryConsistInfoComp RegistryConsistInfo;
 typedef icmpstr::CRegistryPropEditorComp RegistryPropEditor;
 typedef icmpstr::CQuickHelpViewerComp QuickHelpViewer;
+typedef icmpstr::CPackagesLoaderExtComp PackagesLoaderExt;
 
 
 } // namespace CmpstrPck

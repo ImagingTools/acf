@@ -3,9 +3,13 @@
 
 // Qt includes
 #include <QProcess>
+#include <QDir>
 #include <QFileInfo>
+#include <QDomDocument>
+#include <QDomNode>
 
 #include "iqt/CSignalBlocker.h"
+#include "iqt/CFileSystem.h"
 
 
 namespace icmpstr
@@ -49,7 +53,7 @@ void CQuickHelpViewerComp::ShowHelp(const istd::CString& contextText, const istd
 
 	m_techFilePath = "";
 
-	if (m_metaInfoManagerCompPtr.IsValid() && m_technicalFileProviderCompPtr.IsValid()){
+	if (m_metaInfoManagerCompPtr.IsValid()){
 		const icomp::CComponentAddress* addressPtr = dynamic_cast<const icomp::CComponentAddress*>(contextObjectPtr);
 		if (addressPtr != NULL){
 			const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(*addressPtr);
@@ -60,22 +64,65 @@ void CQuickHelpViewerComp::ShowHelp(const istd::CString& contextText, const istd
 					classInfo = classInfo.GetTemplateParam();
 				}
 
-				if (classInfo.GetName() != "icomp::CCompositeComponentStaticInfo"){
-					m_techFilePath = m_technicalFileProviderCompPtr->GetHelpFilePath(classInfo.GetName(), &classInfo);
+				if (m_externalMetaInfoManagerCompPtr.IsValid()){
+					istd::CString infoPath = m_externalMetaInfoManagerCompPtr->GetPackageInfoPath(addressPtr->GetPackageId());
+					if (!infoPath.IsEmpty() && (classInfo.GetName() != "icomp::CCompositeComponentStaticInfo")){
+						QDir infoDir(iqt::GetQString(infoPath));
+						QFile file(infoDir.absoluteFilePath("CompositorInfo.xml"));
+						QDomDocument domDocument;
+						if (file.open(QIODevice::ReadOnly) && domDocument.setContent(&file)){
+							QDomElement root = domDocument.firstChildElement("CompositorInfo");
 
-					ShowTechButton->setVisible(!m_techFilePath.IsEmpty());
-
-					return;
+							if (root.isElement()){
+								QString doxygenPath = iqt::CFileSystem::GetEnrolledPath(root.firstChildElement("DoxyGenPath").text().trimmed());
+								if (!doxygenPath.isEmpty()){
+									QDir doxygenDir(infoDir.absoluteFilePath(doxygenPath));
+									istd::CString doxyFileName = CalcDoxygenFileName(classInfo);
+									QFileInfo fileInfo(doxygenDir.absoluteFilePath(iqt::GetQString(doxyFileName)));
+									if (fileInfo.exists()){
+										m_techFilePath = iqt::GetCString(fileInfo.absoluteFilePath());
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	ShowTechButton->setVisible(false);
+	ShowTechButton->setVisible(!m_techFilePath.IsEmpty());
 }
 
 
 // protected methods
+
+istd::CString CQuickHelpViewerComp::CalcDoxygenFileName(const istd::CClassInfo& classInfo) const
+{
+	istd::CString retVal = "class";
+
+	std::string className = classInfo.GetName();
+	for (		std::string::const_iterator iter = className.begin();
+				iter != className.end();
+				++iter){
+		char c = *iter;
+		if (c == ':'){
+			retVal += "_1";
+		}
+		else if ((c >= 'A') && (c <= 'Z')){
+			retVal += "_";
+			retVal.push_back(c - 'A' + 'a');
+		}
+		else{
+			retVal.push_back(c);
+		}
+	}
+
+	retVal += ".html";
+
+	return retVal;
+}
+
 
 // reimplemented (CGuiComponentBase)
 

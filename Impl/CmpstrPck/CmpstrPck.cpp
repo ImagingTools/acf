@@ -80,6 +80,11 @@ I_EXPORT_COMPONENT(
 			"Show short description and allow to show technical documentation",
 			"Quick Help Technical Documentation" IM_TAG("GUI Help"));
 
+I_EXPORT_COMPONENT(
+			PackagesLoaderExt,
+			"Load, cache packages from files and supports additional meta information needed for compositor",
+			"Component Registry Cache Package Load File Configuration Components" IM_TAG("Loader"));
+
 
 } // namespace CmpstrPck
 

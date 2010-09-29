@@ -10,6 +10,7 @@
 #include "icomp/CComponentBase.h"
 
 #include "icmpstr/IRegistryConsistInfo.h"
+#include "icmpstr/IExternalMetaInfoManager.h"
 
 
 namespace icmpstr
@@ -38,6 +39,7 @@ public:
 	I_BEGIN_COMPONENT(CRegistryConsistInfoComp);
 		I_REGISTER_INTERFACE(IRegistryConsistInfo);
 		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Allows access to component environment information", true, "EnvironmentManager");
+		I_ASSIGN(m_externalMetaInfoManagerCompPtr, "EnvironmentManager", "Allows access to component environment information", false, "EnvironmentManager");
 	I_END_COMPONENT;
 
 	// reimplemented (icmpstr::IRegistryConsistInfo)
@@ -91,6 +93,7 @@ protected:
 
 private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
+	I_REF(IExternalMetaInfoManager, m_externalMetaInfoManagerCompPtr);
 
 	typedef std::map<icomp::CComponentAddress, QIcon> IconCache;
 	mutable IconCache m_iconCache;

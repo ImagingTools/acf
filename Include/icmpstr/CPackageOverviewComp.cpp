@@ -291,8 +291,6 @@ void CPackageOverviewComp::GenerateComponentTree()
 			}
 		}
 
-		istd::CString infoPath = m_envManagerCompPtr->GetComponentInfoPath(address);
-
 		QIcon icon;
 		if (m_consistInfoCompPtr.IsValid()){
 			icon = m_consistInfoCompPtr->GetComponentIcon(address);

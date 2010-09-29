@@ -70,8 +70,8 @@ istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const istd::CStrin
 
 istd::CString CComponentHelpFileProviderComp::GetInfoFilePath(const icomp::CComponentAddress& componentAddress) const
 {
-	if (m_metaInfoManagerCompPtr.IsValid()){
-		QString infoPath = iqt::GetQString(m_metaInfoManagerCompPtr->GetComponentInfoPath(componentAddress));
+	if (m_externalMetaInfoManagerCompPtr.IsValid()){
+		QString infoPath = iqt::GetQString(m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(componentAddress));
 		if (!infoPath.isEmpty()){
 			QDir packageDir(infoPath);
 			if (packageDir.exists()){
@@ -86,10 +86,10 @@ istd::CString CComponentHelpFileProviderComp::GetInfoFilePath(const icomp::CComp
 
 istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const icomp::CComponentAddress& componentAddress) const
 {
-	if (m_metaInfoManagerCompPtr.IsValid()){
+	if (m_metaInfoManagerCompPtr.IsValid() && m_externalMetaInfoManagerCompPtr.IsValid()){
 		const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(componentAddress);
 		if (infoPtr != NULL){
-			istd::CString infoPath = m_metaInfoManagerCompPtr->GetComponentInfoPath(componentAddress);
+			istd::CString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(componentAddress);
 			if (!infoPath.IsEmpty()){
 				QDir infoDir(iqt::GetQString(infoPath));
 				QFileInfo helpFileInfo(infoDir.filePath(iqt::GetQString(*m_helpFileNameAttrPtr)));

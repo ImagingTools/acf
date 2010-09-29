@@ -70,7 +70,6 @@ public:
 
 	// reimplemented (icomp::IMetaInfoManager)
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
-	virtual istd::CString GetComponentInfoPath(const icomp::CComponentAddress& address) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -93,9 +92,9 @@ protected:
 		CPackagesLoaderComp& m_parent;
 	};
 
-	bool RegisterPackageFile(const istd::CString& file);
-	bool RegisterPackagesDir(const istd::CString& subDir);
-	bool LoadConfigFile(const istd::CString& configFile, bool isRoot);
+	virtual bool RegisterPackageFile(const istd::CString& file);
+	virtual bool RegisterPackagesDir(const istd::CString& subDir);
+	virtual bool LoadConfigFile(const istd::CString& configFile, bool isRoot);
 
 	CDllFunctionsProvider& GetProviderRef(const QFileInfo& fileInfo);
 
@@ -123,9 +122,6 @@ private:
 	*/
 	typedef std::map<std::string, CompositePackageInfo> CompositePackagesMap;
 	CompositePackagesMap m_compositePackagesMap;
-
-	typedef std::map<std::string, QDir> PackageInfosMap;
-	PackageInfosMap m_packageInfosMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
 	typedef std::map<istd::CString, RegistryPtr> RegistriesMap;

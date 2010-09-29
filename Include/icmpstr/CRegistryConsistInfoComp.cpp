@@ -310,8 +310,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 
 QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress& address) const
 {
-	if (m_envManagerCompPtr.IsValid()){
-		istd::CString infoPath = m_envManagerCompPtr->GetComponentInfoPath(address);
+	if (m_externalMetaInfoManagerCompPtr.IsValid()){
+		istd::CString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(address);
 		if (!infoPath.IsEmpty()){
 			IconCache::const_iterator cachedIter = m_iconCache.find(address);
 			if (cachedIter != m_iconCache.end()){
