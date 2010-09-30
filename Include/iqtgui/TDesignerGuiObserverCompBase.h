@@ -22,10 +22,10 @@ class TDesignerGuiObserverCompBase: public TGuiObserverWrap<TDesignerGuiCompBase
 public:
 	typedef TGuiObserverWrap<TDesignerGuiCompBase<UI, WidgetType>, imod::TSingleModelObserverBase<Model> > BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(TDesignerGuiObserverCompBase)
-		I_REGISTER_INTERFACE(imod::IModelEditor)
-		I_REGISTER_INTERFACE(imod::IObserver)
-	I_END_COMPONENT
+	I_BEGIN_BASE_COMPONENT(TDesignerGuiObserverCompBase);
+		I_REGISTER_INTERFACE(imod::IModelEditor);
+		I_REGISTER_INTERFACE(imod::IObserver);
+	I_END_COMPONENT;
 };
 
 

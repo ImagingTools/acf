@@ -28,6 +28,7 @@ public:
 				imod::TSingleModelObserverBase<ibase::ITextDocument> > BaseClass;
 
 	I_BEGIN_COMPONENT(CTextEditorComp);
+		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_REGISTER_INTERFACE(imod::IObserver);
 	I_END_COMPONENT;
 

@@ -30,7 +30,8 @@ public:
 		/**
 			Bad processor parameter.
 		*/
-		MI_BAD_PARAMS = 0x16372620
+		MI_BAD_PARAMS = 0x16372620,
+		MI_PROCESSING_ERROR
 	};
 
 	/**
