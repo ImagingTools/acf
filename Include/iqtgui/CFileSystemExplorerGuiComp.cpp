@@ -1,6 +1,8 @@
 // Qt includes
 #include <QHeaderView>
 #include <QToolButton>
+#include <QDesktopServices>
+#include <QUrl>
 
 
 // ACF includes
@@ -66,22 +68,29 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	if (m_previewGuiCompPtr.IsValid()){
-		m_previewGuiCompPtr->CreateGui(PreviewFrame);
+	if (!m_useSystemDecoratedIconsAttrPtr.IsValid() || !*m_useSystemDecoratedIconsAttrPtr){
+		m_fileSystemModel.setIconProvider(&m_fileIconProvider);
 	}
 
+	FileTree->header()->hide();
+
 	FileTree->setModel(&m_fileSystemModel);
+
 	m_fileSystemModel.setRootPath(QDir::currentPath());
 	FileTree->setRootIndex(m_fileSystemModel.setRootPath(m_fileSystemModel.myComputer().toString()));
 
 	QItemSelectionModel* selectionModelPtr = FileTree->selectionModel();
 	if (selectionModelPtr != NULL){
-		connect(selectionModelPtr, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(OnSelectionChanged(const QItemSelection&, const QItemSelection&)));
+		connect(selectionModelPtr,
+					SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+					this,
+					SLOT(OnSelectionChanged(const QItemSelection&, const QItemSelection&)));
 	}
 
 	QStringList fileFilters = GetDefaultFilters();
 
 	m_fileSystemModel.setNameFilters(fileFilters);
+	m_fileSystemModel.setNameFilterDisables(false);
 
 	FilterFrame->setVisible(*m_showUserFilterAttrPtr);
 	QLayout* filterLayoutPtr = FilterFrame->layout();
@@ -122,16 +131,10 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 			headerPtr->setSectionHidden(3, true);
 		}
 	}
-}
 
-
-void CFileSystemExplorerGuiComp::OnGuiDestroyed()
-{
-	if (m_previewGuiCompPtr.IsValid()){
-		m_previewGuiCompPtr->DestroyGui();
+	if (m_allowOpenFileAttrPtr.IsValid() && *m_allowOpenFileAttrPtr){
+		connect(FileTree, SIGNAL(doubleClicked(const QModelIndex&)), this, SLOT(OnDoubleClicked(const QModelIndex&)));
 	}
-
-	BaseClass::OnGuiDestroyed();
 }
 
 
@@ -157,12 +160,50 @@ void CFileSystemExplorerGuiComp::OnSelectionChanged(const QItemSelection& select
 		QModelIndex selectedIndex = selected.indexes().at(0);
 
 		QString currentFilePath = m_fileSystemModel.filePath(selectedIndex);
+		QFileInfo fileInfo = m_fileSystemModel.fileInfo(selectedIndex);
+
+		bool isFile = fileInfo.isFile();
+		bool isDir = fileInfo.isDir();
+
+		int fileType = iprm::IFileNameParam::PT_UNKNOWN;
+
+		if (isFile){
+			fileType = iprm::IFileNameParam::PT_FILE;
+		}
+
+		if (isDir){
+			fileType = iprm::IFileNameParam::PT_DIRECTORY;
+		}
 
 		iprm::IFileNameParam* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL){
+		if (objectPtr != NULL && objectPtr->GetPathType() == fileType){
 			objectPtr->SetPath(iqt::GetCString(currentFilePath));
 		}
 	}
+}
+
+void CFileSystemExplorerGuiComp::OnDoubleClicked(const QModelIndex& modelIndex)
+{
+	QFileInfo fileInfo = m_fileSystemModel.fileInfo(modelIndex);
+	if (fileInfo.isDir()){
+		return;
+	}
+
+	QDesktopServices::openUrl(fileInfo.canonicalFilePath());
+}
+
+
+// public methods of the embedded class FileIconProvider
+
+// reimplemented (QFileIconProvider)
+
+QIcon CFileSystemExplorerGuiComp::FileIconProvider::icon(const QFileInfo& fileInfo) const
+{
+	if (fileInfo.isDir()){
+		return BaseClass::icon(Folder);
+	}
+
+	return BaseClass::icon(fileInfo);
 }
 
 

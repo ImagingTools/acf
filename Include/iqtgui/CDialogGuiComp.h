@@ -3,9 +3,6 @@
 
 
 // ACF includes
-#include "imod/IObserver.h"
-#include "imod/IModel.h"
-
 #include "iqtgui/IDialog.h"
 #include "iqtgui/CGuiComponentDialog.h"
 
@@ -15,7 +12,7 @@ namespace iqtgui
 
 
 /**
-	Component for the dialog based model editing.
+	Dialog based represenation of any UI-Component.
 */
 class CDialogGuiComp: public icomp::CComponentBase, virtual public iqtgui::IDialog
 {

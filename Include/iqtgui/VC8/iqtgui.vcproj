@@ -624,6 +624,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\ui_CFileSystemExplorerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CLogGuiComp.h"
 				>
 			</File>
@@ -752,5 +756,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
-

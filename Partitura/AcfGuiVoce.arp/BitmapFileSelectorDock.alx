@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1582
+          1586
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          263
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -32,10 +32,10 @@
         Bitmap
       </ComponentName>
       <X>
-        125
+        175
       </X>
       <X>
-        250
+        350
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         BitmapLoader
       </ComponentName>
       <X>
-        850
+        975
       </X>
       <X>
-        250
+        350
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         FileSelectorDockWithPreview
       </ComponentName>
       <X>
-        450
+        550
       </X>
       <X>
-        250
+        350
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         ImageView
       </ComponentName>
       <X>
-        450
+        550
       </X>
       <X>
-        100
+        150
       </X>
     </Element>
   </PositionMap>

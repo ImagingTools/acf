@@ -202,6 +202,10 @@
 				RelativePath="..\CSelectableParamsSetComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CVariableParamComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -236,6 +240,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CVariableParamComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFileNameParam.h"
 				>
 			</File>
@@ -267,10 +275,12 @@
 				RelativePath="..\ISelectionParam.h"
 				>
 			</File>
+			<File
+				RelativePath="..\IVariableParam.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-

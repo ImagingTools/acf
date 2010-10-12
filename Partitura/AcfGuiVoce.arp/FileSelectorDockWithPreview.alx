@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1582
+          1586
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          263
+          268
         </Number>
         <Description>
           ACF-Solutions
@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="6">
+  <PositionMap count="7">
     <Element>
       <ComponentName>
         DockWidgetGui
       </ComponentName>
       <X>
-        500
+        550
       </X>
       <X>
-        325
+        50
       </X>
     </Element>
     <Element>
@@ -43,10 +43,10 @@
         FileExplorerGui
       </ComponentName>
       <X>
-        500
+        275
       </X>
       <X>
-        450
+        300
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         FilePath
       </ComponentName>
       <X>
-        500
+        550
       </X>
       <X>
-        700
+        575
       </X>
     </Element>
     <Element>
@@ -65,10 +65,10 @@
         ModelBinder
       </ComponentName>
       <X>
-        750
+        800
       </X>
       <X>
-        575
+        450
       </X>
     </Element>
     <Element>
@@ -76,10 +76,10 @@
         PathBinder
       </ComponentName>
       <X>
-        225
+        275
       </X>
       <X>
-        575
+        450
       </X>
     </Element>
     <Element>
@@ -87,10 +87,21 @@
         PreviewGui
       </ComponentName>
       <X>
-        775
+        850
       </X>
       <X>
-        450
+        325
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SplittedGui
+      </ComponentName>
+      <X>
+        550
+      </X>
+      <X>
+        200
       </X>
     </Element>
   </PositionMap>

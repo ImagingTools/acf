@@ -9,12 +9,48 @@
 #include <QTabWidget>
 #include <QGroupBox>
 
-#include "imod/IModel.h"
-#include "imod/IObserver.h"
-
 
 namespace iqtgui
 {
+
+
+// public methods
+
+CComposedGuiComp::CComposedGuiComp()
+	:m_splitterPtr(NULL)
+{
+}
+
+
+// reimplemented (TRestorableGuiWrap)
+
+void CComposedGuiComp::OnRestoreSettings(const QSettings& settings)
+{
+	I_ASSERT(IsGuiCreated());
+
+	if (m_splitterPtr != NULL){
+		// preserve overriding of splitter orientation:
+		Qt::Orientation splitterOrientation = m_splitterPtr->orientation();
+
+		QByteArray splitterState = settings.value(GetSettingsKey()).toByteArray();
+
+		m_splitterPtr->restoreState(splitterState);
+
+		m_splitterPtr->setOrientation(splitterOrientation);
+	}
+}
+
+
+void CComposedGuiComp::OnSaveSettings(QSettings& settings) const
+{
+	I_ASSERT(IsGuiCreated());
+
+	if (m_splitterPtr != NULL){
+		QByteArray splitterState = m_splitterPtr->saveState();
+
+		settings.setValue(GetSettingsKey(), splitterState);
+	}
+}
 
 
 // reimplemented (iqtgui::CGuiComponentBase)
@@ -54,7 +90,8 @@ void CComposedGuiComp::OnGuiCreated()
 				guiPtr->CreateGui(panelPtr);
 
 				toolBoxPtr->addItem(panelPtr, name);
- 
+
+				// TODO: candidate to remove
 				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
 				panelLayoutPtr->addItem(spacerPtr);
@@ -83,6 +120,7 @@ void CComposedGuiComp::OnGuiCreated()
 
 				tabWidgetPtr->addTab(panelPtr, name);
 
+				// TODO: candidate to remove
 				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
 				panelLayoutPtr->addItem(spacerPtr);
@@ -90,6 +128,28 @@ void CComposedGuiComp::OnGuiCreated()
 		}
 
 		layoutPtr->addWidget(tabWidgetPtr);
+	}
+	else if (*m_designTypeAttrPtr == 3){
+		int elementsCount = m_guisCompPtr.GetCount();
+		m_splitterPtr = new QSplitter(widgetPtr);
+
+		if (*m_useHorizontalLayoutAttrPtr){
+			m_splitterPtr->setOrientation(Qt::Horizontal);
+		}
+		else{
+			m_splitterPtr->setOrientation(Qt::Vertical);
+		}
+
+		for (int i = 0; i < elementsCount; ++i){
+			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
+			if (guiPtr != NULL){
+				guiPtr->CreateGui(widgetPtr);
+
+				m_splitterPtr->addWidget(guiPtr->GetWidget());
+			}
+		}
+
+		layoutPtr->addWidget(m_splitterPtr);
 	}
 	else{
 		int elementsCount = m_guisCompPtr.GetCount();
@@ -116,6 +176,19 @@ void CComposedGuiComp::OnGuiCreated()
 	}
 
 	BaseClass::OnGuiCreated();
+}
+
+
+// private methods
+
+QString CComposedGuiComp::GetSettingsKey() const
+{
+	QString settingsKey = "Splitter";
+	if (m_settingsKeyAttrPtr.IsValid()){
+		settingsKey = iqt::GetQString(*m_settingsKeyAttrPtr) + QString("/") + settingsKey;
+	}
+
+	return settingsKey;
 }
 
 

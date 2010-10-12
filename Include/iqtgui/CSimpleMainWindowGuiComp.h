@@ -1,5 +1,5 @@
-#ifndef iqtgui_CMainWindowComp_included
-#define iqtgui_CMainWindowComp_included
+#ifndef iqtgui_CSimpleMainWindowGuiComp_included
+#define iqtgui_CSimpleMainWindowGuiComp_included
 
 
 // Qt includes
@@ -26,11 +26,14 @@ namespace iqtgui
 {
 
 
-class CSimpleMainWindowGuiComp: public iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMainWindow> >
+class CSimpleMainWindowGuiComp:
+			public iqtgui::TRestorableGuiWrap<
+						iqtgui::TGuiComponentBase<QMainWindow> >
 {
 	Q_OBJECT
 public:
-	typedef iqtgui::TRestorableGuiWrap<iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
+	typedef iqtgui::TRestorableGuiWrap<
+					iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSimpleMainWindowGuiComp);
 		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Document workspace", true, "Workspace");
@@ -191,6 +194,6 @@ void CSimpleMainWindowGuiComp::CreateMenu(const iqtgui::CHierarchicalCommand& co
 } // namespace iqtgui
 
 
-#endif // !iqtgui_CMainWindowComp_included
+#endif // !iqtgui_CSimpleMainWindowGuiComp_included
 
 
