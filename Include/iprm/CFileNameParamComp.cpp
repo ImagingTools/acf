@@ -55,10 +55,18 @@ bool CFileNameParamComp::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
+	istd::CString filePath = m_path;
+
 	static iser::CArchiveTag pathTag("Path", "File path");
 	retVal = retVal && archive.BeginTag(pathTag);
-	retVal = retVal && archive.Process(m_path);
+	retVal = retVal && archive.Process(filePath);
 	retVal = retVal && archive.EndTag(pathTag);
+
+	if (!archive.IsStoring() && (filePath != m_path)){
+		istd::CChangeNotifier changePtr(this);
+
+		m_path = filePath;
+	}
 
 	return retVal;
 }

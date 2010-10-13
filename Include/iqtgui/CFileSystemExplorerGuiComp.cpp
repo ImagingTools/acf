@@ -34,7 +34,9 @@ void CFileSystemExplorerGuiComp::UpdateEditor(int /*updateFlags*/)
 		if (index.isValid()){
 			QItemSelectionModel* selectionModelPtr = FileTree->selectionModel();
 			if (selectionModelPtr != NULL){
-				selectionModelPtr->select(index, QItemSelectionModel::Select);
+				selectionModelPtr->select(index, QItemSelectionModel::ClearAndSelect);
+
+				FileTree->scrollTo(index);
 			}
 		}
 	}
@@ -74,9 +76,12 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 
 	FileTree->header()->hide();
 
+	FileTree->setSelectionMode(QAbstractItemView::SingleSelection);
+
 	FileTree->setModel(&m_fileSystemModel);
 
 	m_fileSystemModel.setRootPath(QDir::currentPath());
+	
 	FileTree->setRootIndex(m_fileSystemModel.setRootPath(m_fileSystemModel.myComputer().toString()));
 
 	QItemSelectionModel* selectionModelPtr = FileTree->selectionModel();
