@@ -63,7 +63,6 @@ private:
 
 	int m_nextSessionId;
 	double m_progressSum;
-	bool m_isCanceled;
 
 	int m_cancelableSessionsCount;
 

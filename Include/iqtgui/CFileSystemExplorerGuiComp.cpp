@@ -176,11 +176,17 @@ void CFileSystemExplorerGuiComp::OnSelectionChanged(const QItemSelection& select
 		}
 
 		iprm::IFileNameParam* objectPtr = GetObjectPtr();
-		if (objectPtr != NULL && objectPtr->GetPathType() == fileType){
-			objectPtr->SetPath(iqt::GetCString(currentFilePath));
+		if (objectPtr != NULL){
+			if (objectPtr->GetPathType() == fileType){
+				objectPtr->SetPath(iqt::GetCString(currentFilePath));
+			}
+			else{
+				objectPtr->SetPath(istd::CString());
+			}
 		}
 	}
 }
+
 
 void CFileSystemExplorerGuiComp::OnDoubleClicked(const QModelIndex& modelIndex)
 {

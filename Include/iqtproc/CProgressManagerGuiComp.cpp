@@ -11,7 +11,6 @@ namespace iqtproc
 CProgressManagerGuiComp::CProgressManagerGuiComp()
 :	m_nextSessionId(0),
 	m_progressSum(0),
-	m_isCanceled(false),
 	m_cancelableSessionsCount(0)
 {
 }

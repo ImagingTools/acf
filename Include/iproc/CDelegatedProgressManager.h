@@ -57,6 +57,9 @@ protected:
 	// reimplemented (istd::IChangeable)
 	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
+protected:
+	bool m_isCanceled;
+
 private:
 	struct ProgressInfo
 	{
@@ -70,7 +73,6 @@ private:
 
 	int m_nextSessionId;
 	double m_progressSum;
-	bool m_isCanceled;
 
 	int m_cancelableSessionsCount;
 
