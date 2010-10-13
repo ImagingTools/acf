@@ -6,6 +6,7 @@
 	ProjectGUID="{B11EFB14-C129-4F69-8143-8127D45770BF}"
 	RootNamespace="iqtprm"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -189,6 +190,10 @@
 				RelativePath="..\CSelectionParamGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CVariableParamGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -209,6 +214,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectionParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVariableParamGuiComp.h"
 				>
 			</File>
 			<File
@@ -238,6 +247,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CVariableParamGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CComposedParamsSetGuiComp.h"
 				>
 			</File>
@@ -255,6 +268,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CSelectionParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CVariableParamGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -277,6 +294,10 @@
 				RelativePath="..\CSelectionParamGuiComp.ui"
 				>
 			</File>
+			<File
+				RelativePath="..\CVariableParamGuiComp.ui"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="MOC Files"
@@ -297,6 +318,10 @@
 				RelativePath="..\CSelectionParamGuiComp.moc"
 				>
 			</File>
+			<File
+				RelativePath="..\CVariableParamGuiComp.moc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
@@ -314,6 +339,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
-
-

@@ -22,7 +22,7 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(IVariableParam);
 		I_ASSIGN_MULTI_0(m_factoriesFact, "Factories", "List of factories for each type", true);
-		I_ASSIGN_MULTI_0(m_factoryIdsAttrPtr, "FactoryTypeIds", "List of factory ID for each factory object", true);
+		I_ASSIGN_MULTI_0(m_factoryIdsAttrPtr, "TypeIds", "List of factory ID for each factory object", true);
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::IParamsSet)

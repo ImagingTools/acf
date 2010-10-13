@@ -369,7 +369,7 @@ bool CRectangle::Serialize(iser::IArchive& archive)
 	double& top = m_verticalRange.GetMinValueRef();
 	double& bottom = m_verticalRange.GetMaxValueRef();
 	double& left = m_horizontalRange.GetMinValueRef();
-	double& right = m_horizontalRange.GetMinValueRef();
+	double& right = m_horizontalRange.GetMaxValueRef();
 
 	static iser::CArchiveTag topTag("Top", "Rectangle top edge position");
 	bool retVal = archive.BeginTag(topTag);

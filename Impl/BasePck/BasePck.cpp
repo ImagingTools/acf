@@ -65,7 +65,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			ModelBinder,
 			"Model binder",
-			"Observer Bind Binder" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition"));
+			"Observer Bind Composition Connection" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition"));
 
 I_EXPORT_COMPONENT(
 			FilePersistence,
@@ -135,7 +135,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			VariableParam,
 			"Parameter which can change its type",
-			"Parameters Choice Change Selection Mutable Variable" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
+			"Parameter Choice Change Selection Mutable Variable" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
 			FileNameParam,

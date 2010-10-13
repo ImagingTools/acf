@@ -39,6 +39,9 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 		return false;
 	}
 
+	m_isSeparatorNeeded = false;
+
+
 	return retVal;
 }
 
@@ -90,6 +93,8 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 
 	stream >> count;
 
+	m_isSeparatorNeeded = false;
+
 	return retVal;
 }
 
@@ -116,6 +121,25 @@ bool CXmlReadArchiveBase::EndTag(const CArchiveTag& tag)
 bool CXmlReadArchiveBase::Process(std::string& value)
 {
 	std::string xmlText;
+
+	if (m_isSeparatorNeeded){
+		if (!ReadToDelimeter(">", xmlText)){
+			return false;
+		}
+
+		if (xmlText != GetElementSeparator().ToString()){
+			SendLogMessage(
+						istd::ILogger::MC_INFO,
+						MI_TAG_ERROR,
+						"Bad separator tag, should be ",
+						"iser::CXmlReadArchiveBase",
+						MF_SYSTEM);
+		}
+	}
+	else{
+		m_isSeparatorNeeded = true;
+	}
+
 	if (ReadToDelimeter("<", xmlText, false)){
 		DecodeXml(xmlText, value);
 
@@ -143,7 +167,8 @@ bool CXmlReadArchiveBase::Process(istd::CString& value)
 // protected methods
 
 CXmlReadArchiveBase::CXmlReadArchiveBase(const CArchiveTag& rootTag)
-:	m_rootTag(rootTag)
+:	m_rootTag(rootTag),
+	m_isSeparatorNeeded(false)
 {
 }
 

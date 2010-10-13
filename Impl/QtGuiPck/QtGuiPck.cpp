@@ -145,6 +145,11 @@ I_EXPORT_COMPONENT(
 			"Model Observer Parameter Set" IM_TAG("GUI Editor Composition"));
 
 I_EXPORT_COMPONENT(
+			VariableParamGui,
+			"Allow to edit variable parameter using model-observer GUI",
+			"Model Observer Parameter Choice Change Selection Mutable Variable" IM_TAG("GUI Editor"));
+
+I_EXPORT_COMPONENT(
 			ParamsManagerGui,
 			"Allow to manage parameter set",
 			"Model Observer Parameters Set Manager" IM_TAG("GUI Editor Composition"));

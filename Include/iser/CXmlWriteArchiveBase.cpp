@@ -58,7 +58,10 @@ bool CXmlWriteArchiveBase::Process(std::string& value)
 
 	if (m_isSeparatorNeeded){
 		retVal = retVal && MakeIndent();
-		retVal = retVal && WriteString("<" + GetElementSeparator().ToString() + ">\n");
+		retVal = retVal && WriteString("<" + GetElementSeparator().ToString() + "/>\n");
+	}
+	else{
+		m_isSeparatorNeeded = true;
 	}
 
 	retVal = retVal && MakeIndent();

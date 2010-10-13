@@ -77,16 +77,17 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
+	std::string paramTypeId = m_paramTypeId;
 	static iser::CArchiveTag paramTypeIdTag("TypeId", "Paramter type ID used to create specified type object");
 	retVal = retVal && archive.BeginTag(paramTypeIdTag);
-	retVal = retVal && archive.Process(m_paramTypeId);
+	retVal = retVal && archive.Process(paramTypeId);
 	retVal = retVal && archive.EndTag(paramTypeIdTag);
 
 	if (!retVal){
 		return false;
 	}
 
-	if (!archive.IsStoring() && !AssignTypeId(m_paramTypeId)){
+	if (!archive.IsStoring() && !AssignTypeId(paramTypeId)){
 		return false;
 	}
 

@@ -65,6 +65,8 @@ protected:
 
 private:
 	CArchiveTag m_rootTag;
+
+	bool m_isSeparatorNeeded;
 };
 
 

@@ -2,6 +2,10 @@
 #define iqtgui_TDesignerGuiObserverCompBase_included
 
 
+// Qt includes
+#include <QWidget>
+
+
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 

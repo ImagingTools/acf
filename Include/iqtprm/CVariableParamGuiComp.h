@@ -1,0 +1,88 @@
+#ifndef iqtprm_CVariableParamGuiComp_included
+#define iqtprm_CVariableParamGuiComp_included
+
+
+// ACF includes
+#include "istd/CString.h"
+
+#include "iser/IFileLoader.h"
+
+#include "iprm/IVariableParam.h"
+
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
+
+#include "iqt2d/ISceneExtender.h"
+
+#include "iqtprm/iqtprm.h"
+#include "iqtprm/Generated/ui_CVariableParamGuiComp.h"
+
+
+namespace iqtprm
+{
+
+
+class CVariableParamGuiComp:
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CVariableParamGuiComp, iprm::IVariableParam>,
+			public iqt2d::ISceneExtender
+{
+	Q_OBJECT
+
+public:
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CVariableParamGuiComp, iprm::IVariableParam> BaseClass;
+
+	I_BEGIN_COMPONENT(CVariableParamGuiComp);
+		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
+		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
+		I_ASSIGN_MULTI_0(m_guisCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
+		I_ASSIGN_MULTI_0(m_observersCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
+		I_ASSIGN_MULTI_0(m_extendersCompPtr, "Editors", "List of editor GUI's for each parameter type ID", false);
+		I_ASSIGN_MULTI_0(m_typeIdsAttrPtr, "TypeIds", "List of ID for each variable type", true);
+		I_ASSIGN_MULTI_0(m_typeNamesAttrPtr, "TypeNames", "List of ID for each variable type", false);
+	I_END_COMPONENT;
+
+	CVariableParamGuiComp();
+
+	// reimplemented (imod::IModelEditor)
+	virtual void UpdateModel() const;
+	virtual void UpdateEditor(int updateFlags = 0);
+
+	// reimplemented (imod::IObserver)
+	virtual bool OnDetached(imod::IModel* modelPtr);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+
+	// reimplemented (iqt2d::ISceneExtender)
+	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+
+protected:
+	void AttachCurrentType();
+	void DetachCurrentType();
+
+protected slots:
+	void on_TypeSelectorCB_currentIndexChanged(int index);
+
+private:
+	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
+	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
+	I_MULTIREF(imod::IObserver, m_observersCompPtr);
+	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
+	I_MULTIATTR(istd::CString, m_typeIdsAttrPtr);
+	I_MULTIATTR(istd::CString, m_typeNamesAttrPtr);
+
+	typedef std::map<iqt2d::ISceneProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	ConnectedSceneFlags m_connectedSceneFlags;
+
+	imod::IModel* m_lastParamModelPtr;
+	int m_currentTypeIndex;
+};
+
+
+} // namespace iqtprm
+
+
+#endif // !iqtprm_CVariableParamGuiComp_included
+
+

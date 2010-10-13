@@ -30,6 +30,7 @@
 
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
+#include "iqtprm/CVariableParamGuiComp.h"
 #include "iqtprm/CParamsManagerGuiComp.h"
 #include "iqtprm/CSelectionParamGuiComp.h"
 
@@ -75,6 +76,7 @@ typedef iqtgui::CImagePropertyGuiComp ImagePropertyGui;
 typedef iqtgui::CObjectPreviewGuiComp ObjectPreviewGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
+typedef iqtprm::CVariableParamGuiComp VariableParamGui;
 typedef iqtprm::CParamsManagerGuiComp ParamsManagerGui;
 typedef iqtprm::CFileNameParamGuiComp FileNameParamGui;
 typedef iqtprm::CSelectionParamGuiComp SelectionParamGui;
