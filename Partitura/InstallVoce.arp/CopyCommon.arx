@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1549
+          1595
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          240
+          269
         </Number>
         <Description>
           ACF-Solutions
@@ -236,7 +236,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="10">
                 <Value>
                   *.htm
                 </Value>
@@ -260,6 +260,12 @@
                 </Value>
                 <Value>
                   *.css
+                </Value>
+                <Value>
+                  *.svg
+                </Value>
+                <Value>
+                  *.ico
                 </Value>
               </Values>
             </Data>
