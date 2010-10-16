@@ -1,6 +1,9 @@
 #include "iqt/iqt.h"
 
+
+// Qt includes
 #include <QStringList>
+#include <QDateTime>
 
 
 namespace iqt
@@ -132,6 +135,54 @@ QLineF GetQLineF(const i2d::CLine2d& line)
 	return QLineF(line.GetPoint1().GetX(), line.GetPoint1().GetY(), line.GetPoint2().GetX(), line.GetPoint2().GetY());
 }
 
+
+isys::CFileInfo GetCFileInfo(const QFileInfo& fileInfo)
+{
+	isys::CSimpleDateTime modificationTime;
+
+	modificationTime.FromCTime(fileInfo.lastModified().toTime_t());
+
+	return isys::CFileInfo(
+				iqt::GetCString(fileInfo.absoluteFilePath()),
+				fileInfo.permissions(),
+				modificationTime);
+}
+
+
+QFileInfo GetQFileInfo(const isys::CFileInfo& fileInfo)
+{
+	return QFileInfo(iqt::GetQString(fileInfo.GetFilePath()));
+}
+
+
+QDateTime GetQDateTime(const isys::IDateTime& dateTime)
+{
+	QDateTime qtDateTime;
+
+	QDate date(dateTime.GetComponent(isys::IDateTime::TC_YEAR),
+				dateTime.GetComponent(isys::IDateTime::TC_MONTH),
+				dateTime.GetComponent(isys::IDateTime::TC_DAY));
+
+	QTime time(dateTime.GetComponent(isys::IDateTime::TC_HOUR),
+				dateTime.GetComponent(isys::IDateTime::TC_MINUTE),
+				dateTime.GetComponent(isys::IDateTime::TC_SECOND),
+				dateTime.GetComponent(isys::IDateTime::TC_MICROSECOND));
+	
+	qtDateTime.setDate(date);
+	qtDateTime.setTime(time);
+
+	return qtDateTime;
+}
+
+
+isys::CSimpleDateTime GetCSimpleDateTime(const QDateTime& dateTime)
+{
+	isys::CSimpleDateTime simpleDateTime;
+
+	simpleDateTime.FromCTime(dateTime.toTime_t());
+
+	return simpleDateTime;
+}
 
 
 } // namespace iqt

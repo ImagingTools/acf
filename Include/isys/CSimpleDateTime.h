@@ -17,7 +17,15 @@ namespace isys
 class CSimpleDateTime: public isys::CDateTimeBase
 {
 public:
+	CSimpleDateTime();
+	CSimpleDateTime(const IDateTime& dateTime);
+
 	CSimpleDateTime& operator=(const IDateTime& dateTime);
+
+	bool operator==(const IDateTime& dateTime) const;
+	bool operator!=(const IDateTime& dateTime) const;
+
+	static CSimpleDateTime GetCurrent();
 
 	// reimplemented (isys::IDateTime)
 	virtual int GetComponent(int component) const;

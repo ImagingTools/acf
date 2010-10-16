@@ -8,6 +8,9 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "iser/IArchive.h"
+#include "iser/CArchiveTag.h"
+
 
 namespace iqt
 {
@@ -70,6 +73,10 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const i
 					if (cachedBitmapPtr->CopyFrom(*bitmapPtr)){
 						fileInfo.fileBitmapPtr = cachedBitmapPtr;
 
+						if (m_maxCacheSizeAttrPtr.IsValid() && (int(m_previewCache.size()) >= *m_maxCacheSizeAttrPtr)){
+							m_previewCache.erase(m_previewCache.begin());
+						}
+
 						m_previewCache[iqt::GetQString(filePath)] = fileInfo;
 					}
 
@@ -104,6 +111,7 @@ bool CRenderedObjectFileLoaderComp::GetFileExtensions(istd::CStringList& result,
 	return false;
 }
 
+
 istd::CString CRenderedObjectFileLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
 {
 	if (m_fileLoaderCompPtr.IsValid()){
@@ -111,6 +119,82 @@ istd::CString CRenderedObjectFileLoaderComp::GetTypeDescription(const istd::CStr
 	}
 
 	return istd::CString::GetEmpty();
+}
+
+	
+// reimplemented (iser::ISerializable)
+
+bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
+{
+	int cacheSize = m_previewCache.size();
+
+	iser::CArchiveTag previewCacheTag("PreviewCacheElements", "Elements list in the preview cache");
+
+	iser::CArchiveTag previewCacheElementTag("PreviewCacheElement", "An element in the preview cache");
+
+	bool retVal = archive.BeginMultiTag(previewCacheTag, previewCacheElementTag, cacheSize);
+
+	if (archive.IsStoring()){
+		for (PreviewCache::const_iterator index = m_previewCache.begin(); index != m_previewCache.end(); index++){
+			retVal = retVal && archive.BeginTag(previewCacheElementTag);
+	
+			iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
+			retVal = retVal && archive.BeginTag(filePathTag);
+			istd::CString filePath = iqt::GetCString(index->first);
+			retVal = retVal && archive.Process(filePath);
+			retVal = retVal && archive.EndTag(filePathTag);
+
+			iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
+			retVal = retVal && archive.BeginTag(fileTimeStampTag);
+			isys::CSimpleDateTime timeStamp = iqt::GetCSimpleDateTime(index->second.fileTimeStamp);
+			retVal = retVal && timeStamp.Serialize(archive);
+			retVal = retVal && archive.EndTag(fileTimeStampTag);
+
+			iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
+			retVal = retVal && archive.BeginTag(bitmapTag);
+			retVal = retVal && index->second.fileBitmapPtr->Serialize(archive);
+			retVal = retVal && archive.EndTag(bitmapTag);
+
+			retVal = retVal && archive.EndTag(previewCacheElementTag);
+		}
+	}
+	else{
+		for (int elementIndex = 0; elementIndex < cacheSize; elementIndex++){
+			retVal = retVal && archive.BeginTag(previewCacheElementTag);
+	
+			iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
+			retVal = retVal && archive.BeginTag(filePathTag);
+			istd::CString filePath;
+			retVal = retVal && archive.Process(filePath);
+			retVal = retVal && archive.EndTag(filePathTag);
+
+			iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
+			retVal = retVal && archive.BeginTag(fileTimeStampTag);
+			isys::CSimpleDateTime timeStamp;
+			retVal = retVal && timeStamp.Serialize(archive);
+			retVal = retVal && archive.EndTag(fileTimeStampTag);
+
+			istd::TSmartPtr<iqt::CBitmap> bitmapPtr(new iqt::CBitmap);
+			iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
+			retVal = retVal && archive.BeginTag(bitmapTag);
+			retVal = retVal && bitmapPtr->Serialize(archive);
+			retVal = retVal && archive.EndTag(bitmapTag);
+
+			retVal = retVal && archive.EndTag(previewCacheElementTag);
+
+			if (retVal){
+				FileInfo fileInfo;
+
+				fileInfo.fileBitmapPtr = bitmapPtr;
+				fileInfo.fileTimeStamp = iqt::GetQDateTime(timeStamp);
+				m_previewCache[iqt::GetQString(filePath)] = fileInfo;
+			}
+		}
+	}
+
+	retVal = retVal && archive.EndTag(previewCacheTag);
+
+	return retVal;
 }
 
 

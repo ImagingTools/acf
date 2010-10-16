@@ -5,7 +5,6 @@
 	Name="isys"
 	ProjectGUID="{633B67F7-B154-4A80-A651-0243D5EDF583}"
 	RootNamespace="isys"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -182,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileSystemBase.cpp"
 				>
 			</File>
@@ -204,6 +207,10 @@
 			>
 			<File
 				RelativePath="..\CDateTimeBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileInfo.h"
 				>
 			</File>
 			<File
@@ -239,6 +246,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFileInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFileSystem.h"
 				>
 			</File>
@@ -267,6 +278,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
-
-

@@ -1,11 +1,27 @@
 #include "isys/CSimpleDateTime.h"
 
 
+// STD includes
 #include <time.h>
 
 
 namespace isys
 {
+
+
+CSimpleDateTime::CSimpleDateTime()
+{
+	m_components.Clear();
+}
+
+
+CSimpleDateTime::CSimpleDateTime(const IDateTime& dateTime)
+{
+	for (int i = 0; i <= TC_LAST; ++i){
+		m_components[i] = dateTime.GetComponent(i);
+	}
+
+}
 
 
 CSimpleDateTime& CSimpleDateTime::operator=(const IDateTime& dateTime)
@@ -15,6 +31,34 @@ CSimpleDateTime& CSimpleDateTime::operator=(const IDateTime& dateTime)
 	}
 
 	return *this;
+}
+
+
+bool CSimpleDateTime::operator==(const IDateTime& dateTime) const
+{
+	for (int i = 0; i <= TC_LAST; ++i){
+		if (m_components[i] != dateTime.GetComponent(i)){
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+bool CSimpleDateTime::operator!=(const IDateTime& dateTime) const
+{
+	return !operator==(dateTime);
+}
+
+
+isys::CSimpleDateTime CSimpleDateTime::GetCurrent()
+{
+	isys::CSimpleDateTime currentDateTime;
+
+	currentDateTime.SetCurrentTime();
+
+	return currentDateTime;
 }
 
 
