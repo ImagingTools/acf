@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="3">
     <Element>
       <Id>
-        CopyBins
+        Application
       </Id>
       <PackageId>
-        InstallVoce
+        QtGuiPck
       </PackageId>
       <ComponentId>
-        CopyInfoProcessor
+        GuiApplication
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -59,125 +59,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ExcludeFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              BinaryExcludeFilters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Filters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="4">
-                <Value>
-                  *.exe
-                </Value>
-                <Value>
-                  *.arp
-                </Value>
-                <Value>
-                  *.pdb
-                </Value>
-                <Value>
-                  *.exe.manifest
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ../Bin
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Temp/Bin
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RecursionDepth
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                2
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -185,22 +66,22 @@
     </Element>
     <Element>
       <Id>
-        CopyLibs
+        CopyOpenSources
       </Id>
       <PackageId>
         InstallVoce
       </PackageId>
       <ComponentId>
-        CopyInfoProcessor
+        CopyOpenSources
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          0
+          1
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -219,7 +100,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ExcludeFilters
+              BinaryExcludeFilters
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
@@ -235,7 +116,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Filters
+              InstallScriptTags
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
@@ -247,19 +128,37 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="1">
                 <Value>
-                  *.lib
-                </Value>
-                <Value>
-                  *.pdb
+                  LicensePath
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InstallScriptValues
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  ../LGPL/LicenseLGPL.txt
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicenseInputDir
             </Id>
             <Type>
               icomp::TAttribute&lt;istd::CString&gt;
@@ -272,7 +171,26 @@
                 true
               </IsEnabled>
               <Value>
-                ../Lib
+                LGPL
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicensePath
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LGPL/Header.txt
               </Value>
             </Data>
           </AttributeInfo>
@@ -284,22 +202,6 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              Log
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
               
             </ExportId>
             <Data>
@@ -307,13 +209,50 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Lib
+                Log
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              RecursionDepth
+              VersionInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        Log
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        ConsoleLog
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              MinCategory
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
@@ -330,54 +269,12 @@
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        CopyOpenSources
-      </Id>
-      <PackageId>
-        InstallVoce
-      </PackageId>
-      <ComponentId>
-        CopyOpenSources
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InitSequence
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        Instantiator
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Instances
+              ShowDots
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
               
@@ -386,31 +283,31 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
-                <Value>
-                  CopyLibs
-                </Value>
-                <Value>
-                  CopyBins
-                </Value>
-                <Value>
-                  CopyOpenSources
-                </Value>
-              </Values>
+              <Value>
+                true
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="0">
+  <ExportedInterfaces count="1">
+    <Interface>
+      <InterfaceId>
+        ibase::IApplication
+      </InterfaceId>
+      <ComponentId>
+        Application
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Copy all files for complete installation during component instantiation
+    
   </Description>
   <Keywords>
-    Copy Full Install
+    
   </Keywords>
 </Acf>

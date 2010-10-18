@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="2">
     <Element>
       <Id>
         Application
       </Id>
       <PackageId>
-        QtGuiPck
+        InstallVoce
       </PackageId>
       <ComponentId>
-        GuiApplication
+        CreateInstallationOpenSource
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -53,70 +53,20 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ApplicationInfo
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        Copy
-      </Id>
-      <PackageId>
-        InstallVoce
-      </PackageId>
-      <ComponentId>
-        CopyFull
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="8">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              ApplicationInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
               BinaryExcludeFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              BinaryExcludeFilters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptTags
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
@@ -130,90 +80,12 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  LicensePath
+                  *Xcd
                 </Value>
                 <Value>
-                  
+                  *QMake
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptValues
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ../LGPL/LicenseLGPL.txt
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicenseInputDir
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                LGPL
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicensePath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                LGPL/Header.txt
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Log
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -224,12 +96,15 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ApplicationInfo
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -237,13 +112,13 @@
     </Element>
     <Element>
       <Id>
-        Log
+        VersionInfo
       </Id>
       <PackageId>
-        BasePck
+        AcfVoce
       </PackageId>
       <ComponentId>
-        ConsoleLog
+        VersionInfo
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -255,10 +130,10 @@
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              MinCategory
+              ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -268,13 +143,13 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                ACF_LGPL
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ShowDots
+              IsExtensionUsed
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
@@ -287,7 +162,7 @@
                 true
               </IsEnabled>
               <Value>
-                true
+                false
               </Value>
             </Data>
           </AttributeInfo>

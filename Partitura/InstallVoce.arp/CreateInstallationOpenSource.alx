@@ -26,27 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        CopyBins
+        Application
       </ComponentName>
       <X>
-        475
+        375
       </X>
       <X>
-        475
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyLibs
-      </ComponentName>
-      <X>
-        475
-      </X>
-      <X>
-        225
+        175
       </X>
     </Element>
     <Element>
@@ -54,21 +43,21 @@
         CopyOpenSources
       </ComponentName>
       <X>
-        125
+        375
       </X>
       <X>
-        525
+        325
       </X>
     </Element>
     <Element>
       <ComponentName>
-        InitSequence
+        Log
       </ComponentName>
       <X>
-        125
+        650
       </X>
       <X>
-        350
+        325
       </X>
     </Element>
   </PositionMap>
