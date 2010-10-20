@@ -16,6 +16,7 @@
 #include "ibase/ICommandsProvider.h"
 
 #include "idoc/IHelpViewer.h"
+#include "idoc/IDocumentManager.h"
 
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
@@ -46,6 +47,7 @@ public:
 		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Packages manager used to provide icon paths", true, "PackagesManager");
 		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and access to buffred icons", false, "ConsistencyInfo");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Show help of selected component using its address", false, "HelpViewer");
+		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager allowing to load files on double click", false, "DocumentManager");
 	I_END_COMPONENT;
 
 	CPackageOverviewComp();
@@ -97,6 +99,7 @@ protected slots:
 	void on_PackagesList_itemSelectionChanged();
 	void on_PackagesList_itemExpanded(QTreeWidgetItem* item);
 	void on_PackagesList_itemClicked(QTreeWidgetItem* item, int column);
+	void on_PackagesList_itemDoubleClicked(QTreeWidgetItem* item, int column);
 	void on_FilterGB_toggled(bool on);
 	void on_InterfaceCB_currentIndexChanged(int index);
 	void OnReloadPackages();
@@ -156,6 +159,7 @@ private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
+	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 
 	iqtgui::CHierarchicalCommand m_commands;
 	iqtgui::CHierarchicalCommand m_packagesCommand;

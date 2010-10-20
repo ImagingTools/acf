@@ -24,7 +24,7 @@
 
 #include "ibase/ICommandsProvider.h"
 #include "idoc/IHelpViewer.h"
-#include "idoc/IMainWindowCommands.h"
+#include "idoc/IDocumentManager.h"
 
 #include "iqtgui/IDropConsumer.h"
 #include "iqtgui/TGuiComponentBase.h"
@@ -68,7 +68,7 @@ public:
 		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 		I_ASSIGN(m_envManagerModelCompPtr, "MetaInfoManager", "Allows access to component meta information", false, "MetaInfoManager");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpViewer", "Show help of selected component using its address", false, "HelpViewer");
-		I_ASSIGN(m_mainWindowCompPtr, "MainWindow", "Access to main window command", false, "MainWindow");
+		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager allowing to load files on double click", false, "DocumentManager");
 		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
 	I_END_COMPONENT;
 
@@ -159,7 +159,7 @@ private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(imod::IModel, m_envManagerModelCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
-	I_REF(idoc::IMainWindowCommands, m_mainWindowCompPtr);
+	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 	
 	iqtgui::CHierarchicalCommand m_registryCommand;

@@ -16,7 +16,6 @@
 #include "ibase/ICommandsProvider.h"
 
 #include "idoc/IDocumentManager.h"
-#include "idoc/IMainWindowCommands.h"
 
 #include "iqt/ITranslationManager.h"
 
@@ -32,8 +31,7 @@ namespace iqtdoc
 */
 class CMainWindowGuiComp:
 			public iqtgui::CSimpleMainWindowGuiComp,
-			public imod::TSingleModelObserverBase<idoc::IDocumentManager>,
-			virtual public idoc::IMainWindowCommands
+			protected imod::TSingleModelObserverBase<idoc::IDocumentManager>
 {
 	Q_OBJECT
 
@@ -42,11 +40,9 @@ public:
 	typedef imod::TSingleModelObserverBase<idoc::IDocumentManager> BaseClass2;
 
 	I_BEGIN_COMPONENT(CMainWindowGuiComp);
-		I_REGISTER_INTERFACE(imod::IObserver);
-		I_REGISTER_INTERFACE(idoc::IMainWindowCommands);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
-		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
-		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
+		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
+		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
 		I_ASSIGN(m_documentManagerCommandsCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
 		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
 		I_ASSIGN(m_isOpenContainingFolderVisibleAttrPtr, "IsOpenContainingFolderVisible", "If true, operation Tools/Open Containing Folder will be visible", true, false);
@@ -70,10 +66,9 @@ public:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
-	// reimplemented (idoc::IMainWindowCommands)
+protected:
 	virtual bool OpenFile(const istd::CString& fileName);
 
-protected:
 	virtual void OnActiveViewChanged();
 	virtual void OnActiveDocumentChanged();
 	virtual void OnDragEnterEvent(QDragEnterEvent* dragEnterEventPtr);

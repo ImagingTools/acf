@@ -123,8 +123,8 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 							RecentGroupCommandPtr& groupCommandPtr = m_recentFilesMap[documentTypeId];
 
 							QString recentListTitle = (ids.size() > 1)?
-								tr("Recent %1 Files").arg(documentTypeId.c_str()):
-							tr("Recent Files");
+										tr("Recent %1 Files").arg(documentTypeId.c_str()):
+										tr("Recent Files");
 							iqtgui::CHierarchicalCommand* fileListCommandPtr = new iqtgui::CHierarchicalCommand(iqt::GetCString(recentListTitle));
 
 							if (fileListCommandPtr != NULL){
@@ -168,7 +168,7 @@ bool CMainWindowGuiComp::OnDetached(imod::IModel* modelPtr)
 
 
 
-// reimplemented (idoc::IMainWindowCommands)
+// protected methods
 
 bool CMainWindowGuiComp::OpenFile(const istd::CString& fileName)
 {
@@ -186,15 +186,11 @@ bool CMainWindowGuiComp::OpenFile(const istd::CString& fileName)
 
 			RemoveFromRecentFileList(istd::CString(fileName));
 		}
-
-		BaseClass::UpdateMenuActions();
 	}
 
 	return retVal;
 }
 
-
-// protected methods
 
 void CMainWindowGuiComp::OnActiveViewChanged()
 {

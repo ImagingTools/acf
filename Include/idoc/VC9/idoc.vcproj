@@ -5,6 +5,7 @@
 	Name="idoc"
 	ProjectGUID="{CEB219AC-442A-4B4C-8324-719352C0922B}"
 	SccLocalPath="..\iwin"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -278,13 +279,8 @@
 				RelativePath="..\IHelpViewer.h"
 				>
 			</File>
-			<File
-				RelativePath="..\IMainWindowCommands.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

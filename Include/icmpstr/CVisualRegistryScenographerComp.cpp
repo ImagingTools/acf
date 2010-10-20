@@ -89,7 +89,7 @@ const QFont& CVisualRegistryScenographerComp::GetElementDetailFont() const
 bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElement& registryElement) const
 {
 	const icomp::IComponentEnvironmentManager* managerPtr = GetEnvironmentManager();
-	if ((managerPtr != NULL) && m_mainWindowCompPtr.IsValid()){
+	if ((managerPtr != NULL) && m_documentManagerCompPtr.IsValid()){
 		
 		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(registryElement.GetAddress());
 
@@ -97,7 +97,7 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 			QDir packageDir(iqt::GetQString(managerPtr->GetPackageDirPath(registryElement.GetAddress().GetPackageId())));
 			QString filePath = packageDir.absoluteFilePath((registryElement.GetAddress().GetComponentId() + ".arx").c_str());
 
-			m_mainWindowCompPtr->OpenFile(iqt::GetCString(filePath));
+			m_documentManagerCompPtr->FileOpen(NULL, &iqt::GetCString(filePath));
 
 			return true;
 		}

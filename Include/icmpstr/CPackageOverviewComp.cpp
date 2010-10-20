@@ -549,6 +549,24 @@ void CPackageOverviewComp::on_PackagesList_itemClicked(QTreeWidgetItem* item, in
 }
 
 
+void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* item, int /*column*/)
+{
+	PackageComponentItem* itemPtr = dynamic_cast<CPackageOverviewComp::PackageComponentItem*>(item);
+	if (m_envManagerCompPtr.IsValid() && (itemPtr != NULL)){
+		const icomp::CComponentAddress& address = itemPtr->GetAddress();
+
+		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
+
+		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+			QDir packageDir(iqt::GetQString(m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId())));
+			QString filePath = packageDir.absoluteFilePath((address.GetComponentId() + ".arx").c_str());
+
+			m_documentManagerCompPtr->FileOpen(NULL, &iqt::GetCString(filePath));
+		}
+	}
+}
+
+
 void CPackageOverviewComp::on_FilterGB_toggled(bool /*on*/)
 {
 	if (!m_interfaceFilter.empty() || !m_keywordsFilter.isEmpty()){

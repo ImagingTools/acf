@@ -278,10 +278,6 @@
 				RelativePath="..\IHelpViewer.h"
 				>
 			</File>
-			<File
-				RelativePath="..\IMainWindowCommands.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
