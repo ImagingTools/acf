@@ -59,9 +59,9 @@ void CVariableParamGuiComp::UpdateEditor(int updateFlags)
 				break;
 			}
 		}
-
-		TypeSelectorCB->setCurrentIndex(m_currentTypeIndex);
 	}
+
+	TypeSelectorCB->setCurrentIndex(m_currentTypeIndex);
 
 	if (		(m_lastParamModelPtr != NULL) &&
 				(m_currentTypeIndex >= 0) &&
