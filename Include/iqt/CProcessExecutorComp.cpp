@@ -61,7 +61,7 @@ int CProcessExecutorComp::Execute(const istd::CString& executablePath, const ist
 
 	m_applicationProcess.waitForFinished(-1);
 
-	if (m_isFailed){
+	if (m_isFailed || m_applicationProcess.error() != QProcess::UnknownError){
 		return -1;
 	}
 
@@ -78,7 +78,7 @@ void CProcessExecutorComp::OnComponentDestroyed()
 	if (m_applicationProcess.state() == QProcess::Running){
 		m_applicationProcess.terminate();
 
-		if (!m_applicationProcess.waitForFinished()){
+		if (!m_applicationProcess.waitForFinished(2000)){
 			m_applicationProcess.kill();
 		}
 	}

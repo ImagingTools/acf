@@ -559,9 +559,9 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
 			QDir packageDir(iqt::GetQString(m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId())));
-			QString filePath = packageDir.absoluteFilePath((address.GetComponentId() + ".arx").c_str());
+			istd::CString filePath = iqt::GetCString(packageDir.absoluteFilePath((address.GetComponentId() + ".arx").c_str()));
 
-			m_documentManagerCompPtr->FileOpen(NULL, &iqt::GetCString(filePath));
+			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
 		}
 	}
 }

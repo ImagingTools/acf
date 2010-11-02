@@ -95,9 +95,10 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
 			QDir packageDir(iqt::GetQString(managerPtr->GetPackageDirPath(registryElement.GetAddress().GetPackageId())));
-			QString filePath = packageDir.absoluteFilePath((registryElement.GetAddress().GetComponentId() + ".arx").c_str());
+		
+			istd::CString filePath = iqt::GetCString(packageDir.absoluteFilePath((registryElement.GetAddress().GetComponentId() + ".arx").c_str()));
 
-			m_documentManagerCompPtr->FileOpen(NULL, &iqt::GetCString(filePath));
+			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
 
 			return true;
 		}

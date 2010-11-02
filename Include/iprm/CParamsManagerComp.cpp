@@ -2,6 +2,7 @@
 
 
 #include "istd/TChangeNotifier.h"
+#include "istd/TChangeDelegator.h"
 
 #include "imod/IModel.h"
 
@@ -13,7 +14,8 @@ namespace iprm
 
 
 CParamsManagerComp::CParamsManagerComp()
-	:m_selectedIndex(-1)
+	:m_selectedIndex(-1),
+	m_paramsObserver(*this)
 {
 }
 
@@ -51,6 +53,11 @@ bool CParamsManagerComp::SetSetsCount(int count)
 			paramsSet.name = *m_defaultSetNameCompPtr;
 
 			m_paramSets.push_back(paramsSet);
+
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+			if (modelPtr != NULL){
+				modelPtr->AttachObserver(&m_paramsObserver);
+			}
 		}
 	}
 
@@ -248,6 +255,9 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginMultiTag(paramsSetListTag, paramsSetTag, paramsCount);
 
 	bool isStoring = archive.IsStoring();
+
+	istd::CChangeNotifier notifier(isStoring ? NULL : this);
+
 	if (!isStoring){
 		if (!retVal || !SetSetsCount(paramsCount)){
 			return false;
@@ -312,6 +322,62 @@ int CParamsManagerComp::GetOptionsCount() const
 const istd::CString& CParamsManagerComp::GetOptionName(int index) const
 {
 	return GetSetName(index);
+}
+
+
+// reimplemented (icomp::IComponent)
+
+void CParamsManagerComp::OnComponentCreated()
+{
+	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
+
+	for (int setIndex = 0; setIndex < fixedCount; setIndex++){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
+		if (modelPtr != NULL){
+			modelPtr->AttachObserver(&m_paramsObserver);
+		}
+	}
+
+	BaseClass::OnComponentCreated();
+}
+
+
+void CParamsManagerComp::OnComponentDestroyed()
+{
+	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
+
+	for (int setIndex = 0; setIndex < fixedCount; setIndex++){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
+		if (modelPtr != NULL && modelPtr->IsAttached(&m_paramsObserver)){
+			modelPtr->DetachObserver(&m_paramsObserver);
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
+// public methods of embedded class ParamsObserver
+
+CParamsManagerComp::ParamsObserver::ParamsObserver(CParamsManagerComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// private methods of embedded class ParamsObserver
+
+// reimplemented (imod::IObserver)
+
+void CParamsManagerComp::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_parent.BeginChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
+}
+
+
+void CParamsManagerComp::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_parent.EndChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
 }
 
 
