@@ -75,7 +75,7 @@ void CXmlDocumentInfoBase::EncodeXml(const std::wstring& text, std::string& xmlT
 			xmlText += iter->second;
 		}
 		else if ((c >= ' ') && (c <= '}')){
-			xmlText += (char)c;
+			xmlText += char(c);
 		}
 		else{
 			xmlText += "&#" + istd::CString::FromNumber(I_WORD((unsigned short)c)).ToString() + ";";

@@ -82,6 +82,11 @@ public:
 	void Reset();
 
 	/**
+		Set number of elements and set all elements to specified value.
+	*/
+	void Reset(int elementsCount, const Element& value);
+
+	/**
 		Set all coordinates to zero.
 	*/
 	void Clear();
@@ -288,6 +293,18 @@ inline void TVarVector<Element>::Clear()
 	for (int i = 0; i < elementsCount; ++i){
 		m_elements[i] = 0;
 	}
+}
+
+
+template <class Element>
+inline void TVarVector<Element>::Reset(int elementsCount, const Element& value)
+{
+	int elementsCount = GetElementsCount();
+	for (int i = 0; i < elementsCount; ++i){
+		m_elements[i] = value;
+	}
+
+	m_elements.resize(elementsCount, value);
 }
 
 
