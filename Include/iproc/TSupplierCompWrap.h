@@ -50,11 +50,13 @@ public:
 
 	// pseudo-reimplemented (iproc::ISupplier)
 	virtual void InitNewWork(bool thisOnly = false);
-	virtual void EnsureWorkFinished();
+	virtual void EnsureWorkFinished(const istd::IPolymorphic* outputObjectPtr = NULL);
 	virtual void ClearWorkResults();
 	virtual int GetWorkStatus() const;
 	virtual double GetWorkDurationTime() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
+	virtual void OnOutputSubscribed(istd::IPolymorphic* outputObjectPtr);
+	virtual void OnOutputUnsubscribed(const istd::IPolymorphic* outputObjectPtr);
 
 	// pseudo-reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -67,7 +69,7 @@ protected:
 	/**
 		Get current work product, if work was done correctly.
 	*/
-	const Product* GetWorkProduct() const;
+	const Product* GetWorkProduct(const istd::IPolymorphic* outputObjectPtr = NULL) const;
 
 	/**
 		Add some supplier to input supplier list.
@@ -126,9 +128,9 @@ void TSupplierCompWrap<SupplierInterface, Product>::InitNewWork(bool thisOnly)
 						iter != m_inputSuppliers.end();
 						++iter){
 				ISupplier* supplierPtr = *iter;
-				if (supplierPtr != NULL){
-					supplierPtr->InitNewWork();
-				}
+				I_ASSERT(supplierPtr != NULL);
+
+				supplierPtr->InitNewWork();
 			}
 		}
 	}
@@ -136,7 +138,7 @@ void TSupplierCompWrap<SupplierInterface, Product>::InitNewWork(bool thisOnly)
 
 
 template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::EnsureWorkFinished()
+void TSupplierCompWrap<SupplierInterface, Product>::EnsureWorkFinished(const istd::IPolymorphic* /*outputObjectPtr*/)
 {
 	if (m_workStatus <= ISupplier::WS_INIT){
 		m_workStatus = ISupplier::WS_LOCKED;
@@ -171,9 +173,9 @@ void TSupplierCompWrap<SupplierInterface, Product>::ClearWorkResults()
 					iter != m_inputSuppliers.end();
 					++iter){
 			ISupplier* supplierPtr = *iter;
-			if (supplierPtr != NULL){
-				supplierPtr->ClearWorkResults();
-			}
+			I_ASSERT(supplierPtr != NULL);
+
+			supplierPtr->ClearWorkResults();
 		}
 	}
 }
@@ -190,6 +192,18 @@ template <class SupplierInterface, class Product>
 double TSupplierCompWrap<SupplierInterface, Product>::GetWorkDurationTime() const
 {
 	return m_durationTime;
+}
+
+
+template <class SupplierInterface, class Product>
+void TSupplierCompWrap<SupplierInterface, Product>::OnOutputSubscribed(istd::IPolymorphic* /*outputObjectPtr*/)
+{
+}
+
+
+template <class SupplierInterface, class Product>
+void TSupplierCompWrap<SupplierInterface, Product>::OnOutputUnsubscribed(const istd::IPolymorphic* /*outputObjectPtr*/)
+{
 }
 
 
@@ -231,9 +245,9 @@ void TSupplierCompWrap<SupplierInterface, Product>::OnComponentDestroyed()
 // protected methods
 
 template <class SupplierInterface, class Product>
-const Product* TSupplierCompWrap<SupplierInterface, Product>::GetWorkProduct() const
+const Product* TSupplierCompWrap<SupplierInterface, Product>::GetWorkProduct(const istd::IPolymorphic* outputObjectPtr) const
 {
-	const_cast< TSupplierCompWrap<SupplierInterface, Product>* >(this)->EnsureWorkFinished();
+	const_cast< TSupplierCompWrap<SupplierInterface, Product>* >(this)->EnsureWorkFinished(outputObjectPtr);
 
 	if ((m_workStatus == WS_OK) || (m_workStatus == WS_WARNING)){
 		return &m_product;
@@ -247,6 +261,10 @@ const Product* TSupplierCompWrap<SupplierInterface, Product>::GetWorkProduct() c
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::AddInputSupplier(ISupplier* supplierPtr)
 {
+	I_ASSERT(supplierPtr != NULL);
+
+	supplierPtr->OnOutputSubscribed(this);
+
 	m_inputSuppliers.insert(supplierPtr);
 }
 
@@ -254,6 +272,10 @@ void TSupplierCompWrap<SupplierInterface, Product>::AddInputSupplier(ISupplier* 
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::RemoveInputSupplier(ISupplier* supplierPtr)
 {
+	I_ASSERT(supplierPtr != NULL);
+
+	supplierPtr->OnOutputUnsubscribed(this);
+
 	m_inputSuppliers.erase(supplierPtr);
 }
 
@@ -261,6 +283,15 @@ void TSupplierCompWrap<SupplierInterface, Product>::RemoveInputSupplier(ISupplie
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::RemoveAllInputSuppliers()
 {
+	for (		InputSuppliers::const_iterator iter = m_inputSuppliers.begin();
+				iter != m_inputSuppliers.end();
+				++iter){
+		ISupplier* supplierPtr = *iter;
+		I_ASSERT(supplierPtr != NULL);
+
+		supplierPtr->OnOutputUnsubscribed(this);
+	}
+
 	m_inputSuppliers.clear();
 }
 

@@ -75,7 +75,7 @@ public:
 	/**
 		Ensure that all objects are produced.
 	*/
-	virtual void EnsureWorkFinished() = 0;
+	virtual void EnsureWorkFinished(const istd::IPolymorphic* outputObjectPtr = NULL) = 0;
 
 	/**
 		Remove all stored work results.
@@ -99,6 +99,15 @@ public:
 		Get parameter set using by this supplier.
 	*/
 	virtual iprm::IParamsSet* GetModelParametersSet() const = 0;
+
+	/**
+		Register output object for unanonymous supplying.
+	*/
+	virtual void OnOutputSubscribed(istd::IPolymorphic* outputObjectPtr) = 0;
+	/**
+		Unregister output object for unanonymous supplying.
+	*/
+	virtual void OnOutputUnsubscribed(const istd::IPolymorphic* outputObjectPtr) = 0;
 };
 
 
