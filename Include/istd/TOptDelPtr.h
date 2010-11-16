@@ -182,7 +182,7 @@ void TOptDelPtr<Type, DelArray>::TakeOver(TOptDelPtr& sourcePtr)
 // public methods
 
 template <class Type, bool DelArray>
-TOptDelPtr<Type, DelArray>& TOptDelPtr<Type, DelArray>::operator=(const TOptDelPtr& ptr)
+TOptDelPtr<Type, DelArray>& TOptDelPtr<Type, DelArray>::operator=(const TOptDelPtr& I_IF_DEBUG(ptr))
 {
 	I_ASSERT(ptr.GetPtr() == NULL);
 

@@ -2,8 +2,8 @@
 #define ibase_TFileSerializerComp_included
 
 
-#include "istd/CStaticServicesProvider.h"
 #include "istd/TChangeNotifier.h"
+#include "istd/CStaticServicesProvider.h"
 
 #include "iser/IFileLoader.h"
 
@@ -298,3 +298,5 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::CheckMinimalVersion(const i
 
 
 #endif // !ibase_TFileSerializerComp_included
+
+
