@@ -8,6 +8,7 @@
 
 // ACF includes
 #include "iser/CBinaryReadArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 
 
 namespace iser
@@ -20,10 +21,13 @@ namespace iser
 
 	\ingroup Persistence
 */
-class CFileReadArchive: public CBinaryReadArchiveBase
+class CFileReadArchive:
+			public CBinaryReadArchiveBase,
+			public CFileArchiveInfo
 {
 public:
 	typedef CBinaryReadArchiveBase BaseClass;
+	typedef CFileArchiveInfo BaseClass2;
 
 	/**
 		Contructor.
@@ -59,7 +63,6 @@ protected:
 				istd::CString& messageSource) const;
 
 private:
-	istd::CString m_filePath;
 	std::ifstream m_stream;
 
 	bool m_supportTagSkipping;
@@ -74,4 +77,5 @@ private:
 
 
 #endif // !iser_CFileReadArchive_included
+
 

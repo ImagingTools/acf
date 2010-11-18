@@ -13,7 +13,9 @@ CFileWriteArchive::CFileWriteArchive(
 			const IVersionInfo* versionInfoPtr,
 			bool supportTagSkipping,
 			bool serializeHeader)
-:	BaseClass(versionInfoPtr), m_supportTagSkipping(supportTagSkipping)
+:	BaseClass(versionInfoPtr),
+	BaseClass2(filePath),
+	m_supportTagSkipping(supportTagSkipping)
 {
 	m_stream.open(filePath.ToString().c_str(), std::fstream::out | std::fstream::binary);
 

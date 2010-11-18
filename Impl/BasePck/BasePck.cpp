@@ -145,7 +145,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			FileNameParam,
 			"Parameters for file/directory selection",
-			"Directory Parameters URL" IM_CATEGORY(I_DATA_MODEL) IM_TAG("File Model Parameter"));
+			"Name Directory Parameters URL" IM_CATEGORY(I_DATA_MODEL) IM_TAG("File Model Parameter"));
 
 I_EXPORT_COMPONENT(
 			EnableableParam,

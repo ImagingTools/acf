@@ -7,6 +7,7 @@
 #include <QFile>
 
 #include "iser/CWriteArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 #include "iser/CXmlDocumentInfoBase.h"
 
 #include "iqt/iqt.h"
@@ -22,10 +23,14 @@ namespace iqt
 
 	\ingroup Persistence
 */
-class CXmlFileWriteArchive: public iser::CWriteArchiveBase, public iser::CXmlDocumentInfoBase
+class CXmlFileWriteArchive:
+			public iser::CWriteArchiveBase,
+			public iser::CFileArchiveInfo,
+			public iser::CXmlDocumentInfoBase
 {
 public:
 	typedef iser::CWriteArchiveBase BaseClass;
+	typedef iser::CFileArchiveInfo BaseClass2;
 
 	CXmlFileWriteArchive(
 				const istd::CString& filePath = "",

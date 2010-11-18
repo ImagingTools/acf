@@ -8,6 +8,7 @@
 
 // ACF includes
 #include "iser/CBinaryWriteArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 
 
 namespace iser
@@ -20,10 +21,13 @@ namespace iser
 
 	\ingroup Persistence
 */
-class CFileWriteArchive: public CBinaryWriteArchiveBase
+class CFileWriteArchive:
+			public CBinaryWriteArchiveBase,
+			public CFileArchiveInfo
 {
 public:
 	typedef CBinaryWriteArchiveBase BaseClass;
+	typedef CFileArchiveInfo BaseClass2;
 
 	/**
 		Contructor.

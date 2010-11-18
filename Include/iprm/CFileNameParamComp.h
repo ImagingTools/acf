@@ -18,8 +18,7 @@ namespace iprm
 */
 class CFileNameParamComp:
 			public icomp::CComponentBase,
-			virtual public IFileNameParam,
-			virtual public iser::ISerializable
+			virtual public IFileNameParam
 {
 public:
 	typedef icomp::CComponentBase BaseClass;

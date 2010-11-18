@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="iser"
 	ProjectGUID="{6DFD9DED-F84C-43C5-953A-9713464D7D15}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -201,6 +202,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileArchiveInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileReadArchive.cpp"
 				>
 			</File>
@@ -302,6 +307,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileArchiveInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileReadArchive.h"
 				>
 			</File>
@@ -374,6 +383,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFileArchiveInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFileLoader.h"
 				>
 			</File>
@@ -418,4 +431,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

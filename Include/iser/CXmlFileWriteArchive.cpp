@@ -10,7 +10,8 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 			const IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const CArchiveTag& rootTag)
-:	BaseClass(versionInfoPtr, rootTag)
+:	BaseClass(versionInfoPtr, rootTag),
+	BaseClass2(filePath)
 {
 	m_stream.open(filePath.ToString().c_str(), std::fstream::out);
 

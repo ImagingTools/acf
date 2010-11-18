@@ -23,6 +23,8 @@
 #include "iqtdoc/CExtendedDocumentTemplateComp.h"
 #include "iqtdoc/CDoxygenHelpFileProviderComp.h"
 
+#include "iqtprm/CRelativeFileNameParamComp.h"
+
 
 /**
 	Standard Qt package.
@@ -60,6 +62,8 @@ typedef iqt::CRenderedObjectFileLoaderComp RenderedObjectFileLoader;
 
 typedef iqtdoc::CExtendedDocumentTemplateComp ExtendedDocumentTemplate;
 typedef iqtdoc::CDoxygenHelpFileProviderComp DoxygenHelpFileProvider;
+
+typedef icomp::TModelCompWrap<iqtprm::CRelativeFileNameParamComp> RelativeFileNameParam;
 
 
 } // namespace QtPck

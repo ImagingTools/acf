@@ -24,6 +24,7 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr),
+	BaseClass2(filePath),
 	m_serializeHeader(serializeHeader),
 	m_rootTag(rootTag),
 	m_isSeparatorNeeded(false)

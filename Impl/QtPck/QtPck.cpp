@@ -100,14 +100,20 @@ I_EXPORT_COMPONENT(
 			"File Loader Preview");
 
 I_EXPORT_COMPONENT(
-		ExtendedDocumentTemplate,
-		"Extended serialized document template",
-		"Serialized Template" IM_TAG("Document"));
+			ExtendedDocumentTemplate,
+			"Extended serialized document template",
+			"Serialized Template" IM_TAG("Document"));
 
 I_EXPORT_COMPONENT(
-		DoxygenHelpFileProvider,
-		"Provide html help file path converting class type using doxygen format",
-		"DoxyGen File Provider Document Html Description Class Interface Qt" IM_TAG("Help"));
+			DoxygenHelpFileProvider,
+			"Provide html help file path converting class type using doxygen format",
+			"DoxyGen File Provider Document Html Description Class Interface Qt" IM_TAG("Help"));
+
+I_EXPORT_COMPONENT(
+			RelativeFileNameParam,
+			"Provide file name relative to some other optional directory",
+			"Name Relative Directory Parameters URL" IM_CATEGORY(I_DATA_MODEL) IM_TAG("File Model Parameter"));
+
 
 } // namespace QtPck
 

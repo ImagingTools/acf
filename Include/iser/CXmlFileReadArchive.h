@@ -8,6 +8,7 @@
 
 // ACF includes
 #include "iser/TXmlStreamReadArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 
 
 namespace iser
@@ -23,10 +24,13 @@ namespace iser
 
 	\ingroup Persistence
 */
-class CXmlFileReadArchive: public TXmlStreamReadArchiveBase<std::ifstream> 
+class CXmlFileReadArchive:
+			public TXmlStreamReadArchiveBase<std::ifstream>,
+			public CFileArchiveInfo
 {
 public:
 	typedef TXmlStreamReadArchiveBase<std::ifstream> BaseClass;
+	typedef CFileArchiveInfo BaseClass2;
 
 	explicit CXmlFileReadArchive(const istd::CString& filePath, bool serializeHeader = true, const CArchiveTag& rootTag = s_acfRootTag);
 
@@ -38,9 +42,6 @@ protected:
 				int flags,
 				istd::CString& message,
 				istd::CString& messageSource) const;
-
-private:
-	istd::CString m_filePath;
 };
 
 

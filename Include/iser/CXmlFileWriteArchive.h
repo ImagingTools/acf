@@ -6,6 +6,7 @@
 #include <fstream>
 
 #include "iser/TXmlStreamWriteArchiveBase.h"
+#include "iser/CFileArchiveInfo.h"
 
 
 namespace iser
@@ -20,10 +21,13 @@ namespace iser
 
 	\ingroup Persistence
 */
-class CXmlFileWriteArchive: public TXmlStreamWriteArchiveBase<std::ofstream>
+class CXmlFileWriteArchive:
+			public TXmlStreamWriteArchiveBase<std::ofstream>,
+			public CFileArchiveInfo
 {
 public:
 	typedef TXmlStreamWriteArchiveBase<std::ofstream> BaseClass;
+	typedef CFileArchiveInfo BaseClass2;
 
 	explicit CXmlFileWriteArchive(
 				const istd::CString& filePath,
