@@ -7,7 +7,7 @@ namespace icmpstr
 
 // reimplemented (iqt::CPackagesLoaderComp)
 
-bool CPackagesLoaderExtComp	::RegisterPackagesDir(const istd::CString& path)
+bool CPackagesLoaderExtComp::RegisterPackagesDir(const istd::CString& path)
 {
 	bool retVal = BaseClass::RegisterPackagesDir(path);
 
