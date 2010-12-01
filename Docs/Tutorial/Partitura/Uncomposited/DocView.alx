@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1337
+          1631
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          286
+        </Number>
+        <Description>
+          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -21,10 +32,10 @@
         Application
       </ComponentName>
       <X>
-        -153
+        600
       </X>
       <X>
-        -119
+        175
       </X>
     </Element>
     <Element>
@@ -32,10 +43,10 @@
         DocumentFactory
       </ComponentName>
       <X>
-        62
+        600
       </X>
       <X>
-        87
+        725
       </X>
     </Element>
     <Element>
@@ -43,10 +54,10 @@
         DocumentLoader
       </ComponentName>
       <X>
-        300
+        150
       </X>
       <X>
-        187
+        600
       </X>
     </Element>
     <Element>
@@ -54,10 +65,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        275
+        600
       </X>
       <X>
-        62
+        600
       </X>
     </Element>
     <Element>
@@ -65,10 +76,10 @@
         Info
       </ComponentName>
       <X>
-        -381
+        125
       </X>
       <X>
-        10
+        350
       </X>
     </Element>
     <Element>
@@ -76,10 +87,10 @@
         MainWindow
       </ComponentName>
       <X>
-        -154
+        600
       </X>
       <X>
-        -295
+        350
       </X>
     </Element>
     <Element>
@@ -87,10 +98,10 @@
         Splash
       </ComponentName>
       <X>
-        -132
+        125
       </X>
       <X>
-        12
+        100
       </X>
     </Element>
     <Element>
@@ -98,10 +109,10 @@
         ViewFactory
       </ComponentName>
       <X>
-        75
+        925
       </X>
       <X>
-        0
+        600
       </X>
     </Element>
     <Element>
@@ -109,10 +120,10 @@
         Workspace
       </ComponentName>
       <X>
-        287
+        625
       </X>
       <X>
-        -119
+        475
       </X>
     </Element>
   </PositionMap>

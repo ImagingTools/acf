@@ -24,21 +24,24 @@ CTextEditorComp::CTextEditorComp()
 
 void CTextEditorComp::UpdateModel() const
 {
+	I_ASSERT(IsGuiCreated());
+
 	QTextEdit* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
 	iqt::CSignalBlocker block(textEditPtr);
 
 	ibase::ITextDocument* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
 
-	if (objectPtr != NULL ){
-		objectPtr->SetText(iqt::GetCString(textEditPtr->toPlainText()));
-	}
+	objectPtr->SetText(iqt::GetCString(textEditPtr->toPlainText()));
 }
 
 
 void CTextEditorComp::UpdateEditor(int /*updateFlags*/)
 {
+	I_ASSERT(IsGuiCreated());
+
 	QTextEdit* textEditPtr = GetQtWidget();
 	I_ASSERT(textEditPtr != NULL);
 
