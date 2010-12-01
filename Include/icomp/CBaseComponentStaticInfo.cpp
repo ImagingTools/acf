@@ -29,7 +29,7 @@ bool CBaseComponentStaticInfo::RegisterAttributeInfo(const std::string& attribut
 
 //	reimplemented (icomp::IRealComponentStaticInfo)
 
-const IComponentStaticInfo::InterfaceExtractors& CBaseComponentStaticInfo::GetInterfaceExtractors() const
+const IRealComponentStaticInfo::InterfaceExtractors& CBaseComponentStaticInfo::GetInterfaceExtractors() const
 {
 	return m_interfaceExtractors;
 }

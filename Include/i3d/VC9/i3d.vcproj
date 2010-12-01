@@ -5,6 +5,7 @@
 	Name="i3d"
 	ProjectGUID="{B0F9B8B0-C980-49F5-814A-1145B934938E}"
 	RootNamespace="i3d"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -52,12 +53,11 @@
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -127,14 +127,12 @@
 				StringPooling="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -196,4 +194,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

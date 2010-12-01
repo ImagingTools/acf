@@ -16,6 +16,11 @@ class IRealComponentStaticInfo: virtual public IComponentStaticInfo
 {
 public:
 	/**
+		Map from class type to interface extractor implementation.
+	*/
+	typedef istd::TIMap<std::string, InterfaceExtractorPtr> InterfaceExtractors;
+
+	/**
 		Get list of physical interface extractors.
 	*/
 	virtual const InterfaceExtractors& GetInterfaceExtractors() const = 0;

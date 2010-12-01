@@ -59,11 +59,6 @@ public:
 		*/
 		MGI_INTERFACES = 0
 	};
-
-	/**
-		Map from class type to interface extractor implementation.
-	*/
-	typedef istd::TIMap<std::string, InterfaceExtractorPtr> InterfaceExtractors;
 	/**
 		Map from attribute name string to attribute static info object.
 	*/

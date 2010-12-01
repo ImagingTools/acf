@@ -33,7 +33,7 @@ IComponent* CComponentStaticInfoBase::CreateComponent() const
 }
 
 
-IComponentStaticInfo::Ids CComponentStaticInfoBase::GetMetaIds(int metaGroupId) const
+IComponentStaticInfo::Ids CComponentStaticInfoBase::GetMetaIds(int /*metaGroupId*/) const
 {
 	return Ids();
 }

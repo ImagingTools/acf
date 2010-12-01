@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="imath"
 	ProjectGUID="{7F855A37-4741-472A-82B5-5F57C4B6F2D1}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -52,13 +53,12 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -128,15 +128,13 @@
 				StringPooling="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="3"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -238,15 +236,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TISurjectFunction.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TIMathFunction.h"
 				>
 			</File>
 			<File
 				RelativePath="..\TISampledFunction.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TISurjectFunction.h"
 				>
 			</File>
 			<File
@@ -278,4 +276,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
