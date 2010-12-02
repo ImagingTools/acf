@@ -206,7 +206,7 @@ SKIP_FUNCTION_MACROS   = YES
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
 TAGFILES               = 
-GENERATE_TAGFILE       = ../../Docs/TechnicalDoc.tag
+GENERATE_TAGFILE       = ../../Docs/TechnicalDoc/Package.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = NO
 PERL_PATH              = /usr/bin/perl
