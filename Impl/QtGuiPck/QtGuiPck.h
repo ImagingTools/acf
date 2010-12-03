@@ -27,6 +27,7 @@
 #include "iqtgui/CFileSystemExplorerGuiComp.h"
 #include "iqtgui/CImagePropertyGuiComp.h"
 #include "iqtgui/CObjectPreviewGuiComp.h"
+#include "iqtgui/CModelEditorGuiComp.h"
 
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
@@ -35,7 +36,6 @@
 #include "iqtprm/CSelectionParamGuiComp.h"
 #include "iqtprm/CSelectionParamIndexGuiComp.h"
 
-#include "iqtdoc/CModelEditorGuiComp.h"
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CSingleDocumentWorkspaceGuiComp.h"
 #include "iqtdoc/CMultiDocumentWorkspaceGuiComp.h"
@@ -74,6 +74,7 @@ typedef iqtgui::CCommandsBinderComp CommandsBinder;
 typedef iqtgui::CFileSystemExplorerGuiComp FileSystemExplorerGui;
 typedef iqtgui::CImagePropertyGuiComp ImagePropertyGui;
 typedef iqtgui::CObjectPreviewGuiComp ObjectPreviewGui;
+typedef iqtgui::CModelEditorGuiComp ModelEditorGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CVariableParamGuiComp VariableParamGui;
@@ -82,7 +83,6 @@ typedef iqtprm::CFileNameParamGuiComp FileNameParamGui;
 typedef iqtprm::CSelectionParamGuiComp SelectionParamGui;
 typedef iqtprm::CSelectionParamIndexGuiComp SelectionParamIndexGui;
 
-typedef iqtdoc::CModelEditorGuiComp ModelEditorGui;
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CSingleDocumentWorkspaceGuiComp> SingleDocWorkspaceGui;
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;

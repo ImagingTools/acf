@@ -6,6 +6,7 @@
 	ProjectGUID="{8EDC6010-0614-4B06-9375-F5660831DF54}"
 	RootNamespace="iqtgui"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -32,28 +33,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="DeployCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
 				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -71,11 +69,10 @@
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				DebugInformationFormat="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -116,28 +113,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="DeployCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
 				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -155,13 +149,11 @@
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				StringPooling="true"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -282,6 +274,10 @@
 			</File>
 			<File
 				RelativePath="..\CModelDialogGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CModelEditorGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -426,6 +422,10 @@
 			</File>
 			<File
 				RelativePath="..\CModelDialogGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CModelEditorGuiComp.h"
 				>
 			</File>
 			<File
@@ -734,4 +734,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-

@@ -5,6 +5,7 @@
 	Name="ibase"
 	ProjectGUID="{C30159C1-C8F9-49F4-AE32-C014F87B12BD}"
 	RootNamespace="ibase"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -33,13 +34,13 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\..\..\Partitura\AcfVoce.arp"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -74,13 +75,12 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -126,13 +126,13 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
+				Name="FileConvertCopy"
+			/>
+			<Tool
 				Name="SubVersionTransform"
 				AdditionalDependencies="..\svnflag"
 				OutputDir="..\..\..\Partitura\AcfVoce.arp"
 				SubVersionPath="..\..\.."
-			/>
-			<Tool
-				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -165,14 +165,12 @@
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -527,4 +525,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

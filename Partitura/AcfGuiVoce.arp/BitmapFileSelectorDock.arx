@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1586
+          1633
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          268
+          289
         </Number>
         <Description>
           ACF-Solutions
@@ -102,7 +102,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              FileInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                BitmapLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               PreviewObject

@@ -6,6 +6,7 @@
 	ProjectGUID="{783AA78B-9309-466C-9734-ED719D979FF9}"
 	RootNamespace="_ArxcReady"
 	Keyword="MakeFileProj"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -32,15 +33,12 @@
 				Name="FileConvertCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="Arxc"
-			/>
-			<Tool
 				Name="DeployCopy"
 				OutputDir="..\..\Bin\$(ConfigurationName)VC8"
 				InputDir="$(QTDIR)\bin"
+			/>
+			<Tool
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -67,15 +65,12 @@
 				Name="FileConvertCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
-				Name="Arxc"
-			/>
-			<Tool
 				Name="DeployCopy"
 				OutputDir="..\..\Bin\$(ConfigurationName)VC8"
 				InputDir="$(QTDIR)\bin"
+			/>
+			<Tool
+				Name="Arxc"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -92,92 +87,7 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath=".\QtCore4.dll.copy"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\QtCored4.dll.copy"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\QtGui4.dll.copy"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\QtGuid4.dll.copy"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="DeployCopy"
-					/>
-				</FileConfiguration>
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

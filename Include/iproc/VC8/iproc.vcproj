@@ -56,13 +56,12 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -131,14 +130,12 @@
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

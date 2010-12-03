@@ -1,7 +1,7 @@
-#include "iqtdoc/CModelEditorGuiComp.h"
+#include "iqtgui/CModelEditorGuiComp.h"
 
 
-namespace iqtdoc
+namespace iqtgui
 {
 
 
@@ -144,6 +144,6 @@ void CModelEditorGuiComp::OnComponentDestroyed()
 }
 
 
-} // namespace iqtdoc
+} // namespace iqtgui
 
 

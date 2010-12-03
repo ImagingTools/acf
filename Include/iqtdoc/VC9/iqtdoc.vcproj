@@ -195,10 +195,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CModelEditorGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.cpp"
 				>
 			</File>
@@ -230,10 +226,6 @@
 			</File>
 			<File
 				RelativePath="..\CMainWindowGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CModelEditorGuiComp.h"
 				>
 			</File>
 			<File

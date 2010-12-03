@@ -1,5 +1,5 @@
-#ifndef iqtdoc_CModelEditorGuiComp_included
-#define iqtdoc_CModelEditorGuiComp_included
+#ifndef iqtgui_CModelEditorGuiComp_included
+#define iqtgui_CModelEditorGuiComp_included
 
 
 // ACF includes
@@ -13,10 +13,8 @@
 
 #include "iqt2d/ISceneExtender.h"
 
-#include "iqtdoc/iqtdoc.h"
 
-
-namespace iqtdoc
+namespace iqtgui
 {
 
 
@@ -79,9 +77,9 @@ private:
 };
 
 
-} // namespace iqtdoc
+} // namespace iqtgui
 
 
-#endif // !iqtdoc_CModelEditorGuiComp_included
+#endif // !iqtgui_CModelEditorGuiComp_included
 
 

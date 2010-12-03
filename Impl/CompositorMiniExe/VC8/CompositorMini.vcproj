@@ -45,12 +45,11 @@
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				DebugInformationFormat="0"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -65,6 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;"
 				AssemblyLinkResource="$(IntDir)CompositorMini.res"
 				GenerateDebugInformation="false"
@@ -120,14 +120,12 @@
 				AdditionalIncludeDirectories="&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -142,6 +140,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;"
 				AssemblyLinkResource="$(IntDir)CompositorMini.res"
 				GenerateDebugInformation="true"
@@ -224,4 +223,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

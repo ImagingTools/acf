@@ -59,11 +59,10 @@
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				DebugInformationFormat="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -131,13 +130,11 @@
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
 				StringPooling="true"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile=""
 				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -177,6 +174,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CGeneralSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CGeneralSupplierGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CProcessorControlGuiComp.cpp"
 				>
 			</File>
@@ -198,6 +203,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CGeneralSupplierGuiComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CProcessorControlGuiComp.h"
 				>
@@ -228,6 +237,10 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\generated\moc_CGeneralSupplierGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CProcessorControlGuiComp.cpp"
 				>
 			</File>
@@ -240,6 +253,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\ui_CGeneralSupplierGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CProgressManagerGuiComp.h"
 				>
 			</File>
@@ -247,6 +264,10 @@
 		<Filter
 			Name="Forms"
 			>
+			<File
+				RelativePath="..\CGeneralSupplierGuiComp.ui"
+				>
+			</File>
 			<File
 				RelativePath="..\CProcessorControlGuiComp.ui"
 				>

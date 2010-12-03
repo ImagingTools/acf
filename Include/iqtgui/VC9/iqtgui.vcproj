@@ -277,6 +277,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CModelEditorGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CObjectPreviewGuiComp.cpp"
 				>
 			</File>
@@ -418,6 +422,10 @@
 			</File>
 			<File
 				RelativePath="..\CModelDialogGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CModelEditorGuiComp.h"
 				>
 			</File>
 			<File
