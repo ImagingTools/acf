@@ -10,6 +10,7 @@
 	<Tool
 		Name="VCCLCompilerTool"
 		AdditionalIncludeDirectories=""
+		ProgramDataBaseFileName="$(OutDir)\$(ProjectName).pdb"
 	/>
 	<Tool
 		Name="VCLinkerTool"

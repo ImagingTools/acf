@@ -60,7 +60,6 @@
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
 				PrecompiledHeaderFile=""
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				DebugInformationFormat="0"
 			/>
@@ -131,7 +130,6 @@
 				StringPooling="true"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"

@@ -12,7 +12,7 @@
 		StringPooling="true"
 		TreatWChar_tAsBuiltInType="false"
 		PrecompiledHeaderFile="$(IntDir)/$(ProjectName).pch"
-		ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
+		ProgramDataBaseFileName="$(IntDir)\$(ProjectName).pdb"
 		WarningLevel="4"
 		DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 	/>

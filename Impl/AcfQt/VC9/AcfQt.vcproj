@@ -5,6 +5,7 @@
 	Name="AcfQt"
 	ProjectGUID="{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}"
 	RootNamespace="AcfQt"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -57,7 +58,6 @@
 				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				CompileAs="0"
@@ -134,7 +134,6 @@
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 				BrowseInformation="1"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
@@ -196,4 +195,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
