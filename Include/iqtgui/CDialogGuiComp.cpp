@@ -15,7 +15,7 @@ namespace iqtgui
 
 void CDialogGuiComp::Execute()
 {
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog());
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog(QDialogButtonBox::Close));
 	if (dialogPtr.IsValid()){
 		dialogPtr->exec();
 	}
@@ -24,7 +24,7 @@ void CDialogGuiComp::Execute()
 
 // protected methods
 
-iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog() const
+iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons) const
 {
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr;
 
@@ -32,7 +32,7 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog() const
 		dialogPtr.SetPtr(
 					new iqtgui::CGuiComponentDialog(
 								m_guiCompPtr.GetPtr(),
-								QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+								buttons,
 								true));
 
 		if (m_dialogTitleAttrPtr.IsValid()){

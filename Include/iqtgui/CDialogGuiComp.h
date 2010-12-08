@@ -30,7 +30,7 @@ public:
 	virtual void Execute();
 
 protected:
-	iqtgui::CGuiComponentDialog* CreateComponentDialog() const;
+	virtual iqtgui::CGuiComponentDialog* CreateComponentDialog(int buttons) const;
 
 private:
 	I_REF(iqtgui::IGuiObject, m_guiCompPtr);

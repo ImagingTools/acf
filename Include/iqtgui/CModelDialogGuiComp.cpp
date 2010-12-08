@@ -25,7 +25,7 @@ void CModelDialogGuiComp::Execute()
 		return;
 	}
 
-	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog());
+	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog(QDialogButtonBox::Ok | QDialogButtonBox::Cancel));
 	if (!dialogPtr.IsValid()){
 		return;
 	}
