@@ -11,19 +11,21 @@ namespace icomp
 
 /**
 	Interface adding to component static info functionality existing only for real components.
+	Real components are components which can be created in memory.
 */
 class IRealComponentStaticInfo: virtual public IComponentStaticInfo
 {
 public:
 	/**
-		Map from class type to interface extractor implementation.
-	*/
-	typedef istd::TIMap<std::string, InterfaceExtractorPtr> InterfaceExtractors;
+		Create component instance.
+		\return				pointer to created component or NULL if this component cannot be created.
+	 */
+	virtual IComponent* CreateComponent() const = 0;
 
 	/**
-		Get list of physical interface extractors.
+		Extract instance implemented specified interface from some component.
 	*/
-	virtual const InterfaceExtractors& GetInterfaceExtractors() const = 0;
+	virtual void* GetComponentInterface(const std::string& interfaceName, IComponent& component) const = 0;
 };
 
 

@@ -148,11 +148,9 @@ private:
 template <class AttrType>
 bool CSimComponentContextBase::IsAttributeTypeCorrect(const std::string& attributeId)
 {
-	const IComponentStaticInfo::AttributeInfos& attrInfos = m_metaInfo.GetAttributeInfos();
-	const IComponentStaticInfo::AttributeInfos::ValueType* attrInfoPtr = attrInfos.FindElement(attributeId);
-
-	if ((attrInfoPtr != NULL) && (*attrInfoPtr != NULL)){
-		const std::string& attributeType = (*attrInfoPtr)->GetAttributeTypeName();
+	const IAttributeStaticInfo* attributeInfoPtr = m_metaInfo.GetAttributeInfo(attributeId);
+	if (attributeInfoPtr != NULL){
+		const std::string& attributeType = attributeInfoPtr->GetAttributeTypeName();
 
 		return attributeType == AttrType::GetTypeName();
 	}

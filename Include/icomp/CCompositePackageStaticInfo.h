@@ -2,7 +2,8 @@
 #define icomp_CCompositePackageStaticInfo_included
 
 
-#include "istd/TCascadedMap.h"
+#include <map>
+
 #include "istd/TDelPtr.h"
 
 #include "iser/ISerializable.h"
@@ -16,6 +17,9 @@ namespace icomp
 {
 
 
+/**
+	Implementation of package static info designing to provide composite component information 'on demand'.
+*/
 class CCompositePackageStaticInfo: public CPackageStaticInfo
 {
 public:
@@ -26,12 +30,9 @@ public:
 				const Ids& componentIds,
 				const icomp::IComponentEnvironmentManager* managerPtr);
 
-	void Reset();
-
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual const AttributeInfos& GetAttributeInfos() const;
-	virtual Ids GetSubcomponentIds() const;
-	virtual const icomp::IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
+	virtual Ids GetMetaIds(int metaGroupId) const;
 
 private:
 	struct ComponentInfo
@@ -42,9 +43,9 @@ private:
 		bool isInitialized;
 	};
 
-	typedef istd::TCascadedMap< std::string, ComponentInfo > SubcomponentInfos;
-
+	typedef std::map<std::string, ComponentInfo> SubcomponentInfos;
 	mutable SubcomponentInfos m_subcomponentInfos;
+
 	std::string m_packageId;
 	const icomp::IComponentEnvironmentManager& m_envManager;
 };

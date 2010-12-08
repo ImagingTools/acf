@@ -104,7 +104,6 @@ protected:
 				const icomp::IComponentStaticInfo::Ids& interfaceNames,
 				const std::string& attributeName,
 				const std::string& elementName,
-				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 

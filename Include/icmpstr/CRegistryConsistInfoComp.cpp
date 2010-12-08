@@ -183,9 +183,11 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	bool retVal = true;
 
 	if (metaInfoPtr != NULL){
-		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = metaInfoPtr->GetAttributeInfos();
-		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
-			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
+		icomp::IComponentStaticInfo::Ids attributeIds = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		for (		icomp::IComponentStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
+					attrIter != attributeIds.end();
+					++attrIter){
+			const std::string& attributeId = *attrIter;
 
 			retVal = IsAttributeValid(attributeId, elementName, registry, ignoreUndef, allReasons, reasonConsumerPtr) && retVal;
 
@@ -269,59 +271,42 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = infoPtr->elementPtr->GetAttributeInfo(attributeName);
 
 			if (compInfoPtr != NULL){
-				const icomp::IComponentStaticInfo::AttributeInfos& attrInfos = compInfoPtr->GetAttributeInfos();
-				const icomp::IComponentStaticInfo::AttributeInfos::ValueType* attrMetaInfoPtr2 = attrInfos.FindElement(attributeName);
+				const icomp::IAttributeStaticInfo* attrMetaInfoPtr = compInfoPtr->GetAttributeInfo(attributeName);
 
-				if (attrMetaInfoPtr2 != NULL){
-					if (*attrMetaInfoPtr2 != NULL){
-						if (attrInfoPtr != NULL){
-							if ((*attrMetaInfoPtr2)->GetAttributeTypeName() != attrInfoPtr->attributeTypeName){
-								if (reasonConsumerPtr != NULL){
-									reasonConsumerPtr->AddMessage(new ibase::CMessage(
-												istd::ILogger::MC_ERROR,
-												MI_BAD_ATTRIBUTE_TYPE,
-												iqt::GetCString(QObject::tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
-															.arg(attributeName.c_str())
-															.arg(elementName.c_str())
-															.arg((*attrMetaInfoPtr2)->GetAttributeTypeName().c_str())
-															.arg(attrInfoPtr->attributeTypeName.c_str())),
-												iqt::GetCString(QObject::tr("Attribute Consistency Check")),
-												0));
-								}
-
-								return false;
+				if (attrMetaInfoPtr != NULL){
+					if (attrInfoPtr != NULL){
+						if (attrMetaInfoPtr->GetAttributeTypeName() != attrInfoPtr->attributeTypeName){
+							if (reasonConsumerPtr != NULL){
+								reasonConsumerPtr->AddMessage(new ibase::CMessage(
+											istd::ILogger::MC_ERROR,
+											MI_BAD_ATTRIBUTE_TYPE,
+											iqt::GetCString(QObject::tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
+														.arg(attributeName.c_str())
+														.arg(elementName.c_str())
+														.arg(attrMetaInfoPtr->GetAttributeTypeName().c_str())
+														.arg(attrInfoPtr->attributeTypeName.c_str())),
+											iqt::GetCString(QObject::tr("Attribute Consistency Check")),
+											0));
 							}
 
-							if (attrInfoPtr->attributePtr.IsValid()){
-								if (!CheckAttributeCompatibility(
-											*attrInfoPtr->attributePtr,
-											**attrMetaInfoPtr2,
-											attributeName,
-											elementName,
-											registry,
-											ignoreUndef,
-											allReasons,
-											reasonConsumerPtr)){
-									return false;
-								}
-							}
-							else if (	attrInfoPtr->exportId.empty() &&
-										(((*attrMetaInfoPtr2)->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0)){
-								if (reasonConsumerPtr != NULL){
-									reasonConsumerPtr->AddMessage(new ibase::CMessage(
-												istd::ILogger::MC_ERROR,
-												MI_REF_NOT_RESOLVED,
-												iqt::GetCString(QObject::tr("Reference or factory %1 in %2 cannot be undefined")
-															.arg(attributeName.c_str())
-															.arg(elementName.c_str())),
-												iqt::GetCString(QObject::tr("Attribute Consistency Check")),
-												0));
-								}
+							return false;
+						}
 
+						if (attrInfoPtr->attributePtr.IsValid()){
+							if (!CheckAttributeCompatibility(
+										*attrInfoPtr->attributePtr,
+										*attrMetaInfoPtr,
+										attributeName,
+										elementName,
+										registry,
+										ignoreUndef,
+										allReasons,
+										reasonConsumerPtr)){
 								return false;
 							}
 						}
-						else if (((*attrMetaInfoPtr2)->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0){
+						else if (	attrInfoPtr->exportId.empty() &&
+									((attrMetaInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0)){
 							if (reasonConsumerPtr != NULL){
 								reasonConsumerPtr->AddMessage(new ibase::CMessage(
 											istd::ILogger::MC_ERROR,
@@ -336,12 +321,12 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 							return false;
 						}
 					}
-					else if (!ignoreUndef){
+					else if ((attrMetaInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0){
 						if (reasonConsumerPtr != NULL){
 							reasonConsumerPtr->AddMessage(new ibase::CMessage(
-										istd::ILogger::MC_WARNING,
-										MI_UNDEF_ATTRIBUTE,
-										iqt::GetCString(QObject::tr("Attribute %1 in %2 is not enabled in component specification")
+										istd::ILogger::MC_ERROR,
+										MI_REF_NOT_RESOLVED,
+										iqt::GetCString(QObject::tr("Reference or factory %1 in %2 cannot be undefined")
 													.arg(attributeName.c_str())
 													.arg(elementName.c_str())),
 										iqt::GetCString(QObject::tr("Attribute Consistency Check")),
@@ -429,7 +414,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleSubcomponents(
 		retVal.insert(elementId);
 	}
 
-	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();
+	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBCOMPONENTS);
 
 	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
 				subIter != subcomponentIds.end();
@@ -628,7 +613,6 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 							interfaceNames,
 							attributeName,
 							elementName,
-							registry,
 							ignoreUndef,
 							reasonConsumerPtr);
 			}
@@ -642,7 +626,6 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 								interfaceNames,
 								attributeName,
 								elementName,
-								registry,
 								ignoreUndef,
 								reasonConsumerPtr);
 				}
@@ -690,7 +673,6 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 			const icomp::IComponentStaticInfo::Ids& interfaceNames,
 			const std::string& attributeName,
 			const std::string& elementName,
-			const icomp::IRegistry& registry,
 			bool ignoreUndef,
 			ibase::IMessageConsumer* reasonConsumerPtr) const
 {

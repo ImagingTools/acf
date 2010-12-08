@@ -22,6 +22,12 @@ CPackageStaticInfo::CPackageStaticInfo(
 }
 
 
+void CPackageStaticInfo::Reset()
+{
+	m_embeddedComponentInfos.clear();
+}
+
+
 bool CPackageStaticInfo::SerializeMeta(iser::IArchive& archive)
 {
 	bool retVal = true;
@@ -40,13 +46,39 @@ bool CPackageStaticInfo::SerializeMeta(iser::IArchive& archive)
 }
 
 
+void CPackageStaticInfo::RegisterEmbeddedComponentInfo(const std::string& embeddedId, const IComponentStaticInfo* componentInfoPtr)
+{
+	m_embeddedComponentInfos[embeddedId] = componentInfoPtr;
+}
+
+
 // reimplemented (icomp::IPackageStaticInfo)
 
-const CPackageStaticInfo::AttributeInfos& CPackageStaticInfo::GetAttributeInfos() const
+const IComponentStaticInfo* CPackageStaticInfo::GetEmbeddedComponentInfo(const std::string& embeddedId) const
 {
-	static CascAttributeInfos empty;
+	EmbeddedComponentInfos::const_iterator foundIter = m_embeddedComponentInfos.find(embeddedId);
+	if (foundIter != m_embeddedComponentInfos.end()){
+		return foundIter->second;
+	}
+	else{
+		return NULL;
+	}
+}
 
-	return empty;
+
+IComponentStaticInfo::Ids CPackageStaticInfo::GetMetaIds(int metaGroupId) const
+{
+	Ids retVal;
+
+	if (metaGroupId == MGI_EMBEDDED_COMPONENTS){
+		for (		EmbeddedComponentInfos::const_iterator iter = m_embeddedComponentInfos.begin();
+					iter != m_embeddedComponentInfos.end();
+					++iter){
+			retVal.insert(iter->first);
+		}
+	}
+
+	return retVal;
 }
 
 

@@ -166,13 +166,14 @@ int main(int argc, char *argv[])
 
 	packagesLoaderComp.ConfigureEnvironment(configFile);
 
-	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;
-	packageOverviewComp.SetRef("EnvironmentManager", &packagesLoaderComp);
-	packageOverviewComp.InitComponent();
-
 	icomp::TSimComponentWrap<CmpstrPck::RegistryConsistInfo> registryConsistInfoComp;
 	registryConsistInfoComp.SetRef("EnvironmentManager", &packagesLoaderComp);
 	registryConsistInfoComp.InitComponent();
+
+	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;
+	packageOverviewComp.SetRef("EnvironmentManager", &packagesLoaderComp);
+	packageOverviewComp.SetRef("ConsistencyInfo", &registryConsistInfoComp);
+	packageOverviewComp.InitComponent();
 
 	icomp::TSimComponentWrap<CmpstrPck::RegistryPropEditor> propertiesEditorComp;
 	propertiesEditorComp.InitComponent();

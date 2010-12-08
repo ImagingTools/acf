@@ -43,14 +43,7 @@ void* CComponentBase::GetInterface(const istd::CClassInfo& interfaceType, const 
 
 		const IRealComponentStaticInfo& staticInfo = GetComponentStaticInfo();
 
-		const IRealComponentStaticInfo::InterfaceExtractors& extractors = staticInfo.GetInterfaceExtractors();
-
-		int index = extractors.FindIndex(interfaceType.GetName());
-		if (index >= 0){
-			IComponentStaticInfo::InterfaceExtractorPtr extractorPtr = extractors.GetValueAt(index);
-
-			return extractorPtr(this);
-		}
+		return staticInfo.GetComponentInterface(interfaceType.GetName(), *this);
 	}
 
 	return NULL;

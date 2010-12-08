@@ -21,7 +21,7 @@ public:
 	TInterfaceRegistrator(CBaseComponentStaticInfo& staticInfo);
 
 protected:
-	static void* InterfaceExtractor(IComponent* componentPtr);
+	static void* InterfaceExtractor(IComponent& component);
 };
 
 
@@ -47,16 +47,16 @@ inline TInterfaceRegistrator<void>::TInterfaceRegistrator(CBaseComponentStaticIn
 // protected methods
 
 template <class Interface>
-void* TInterfaceRegistrator<Interface>::InterfaceExtractor(IComponent* componentPtr)
+void* TInterfaceRegistrator<Interface>::InterfaceExtractor(IComponent& component)
 {
-	void* retVal = dynamic_cast<Interface*>(componentPtr);
+	void* retVal = dynamic_cast<Interface*>(&component);
 
 	return retVal;
 }
 
 
 template <>
-inline void* TInterfaceRegistrator<void>::InterfaceExtractor(IComponent* /*componentPtr*/)
+inline void* TInterfaceRegistrator<void>::InterfaceExtractor(IComponent& /*component*/)
 {
 	return NULL;
 }

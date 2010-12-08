@@ -27,9 +27,11 @@ public:
 				const icomp::IComponentEnvironmentManager& manager,
 				const IComponentStaticInfo* parentPtr = NULL);
 
+	// reimplemented (icomp::IRealComponentStaticInfo)
+	virtual IComponent* CreateComponent() const;
+
 	//	reimplemented (icomp::IComponentStaticInfo)
 	virtual int GetComponentType() const;
-	virtual IComponent* CreateComponent() const;
 	virtual const istd::CString& GetDescription() const;
 	virtual const istd::CString& GetKeywords() const;
 

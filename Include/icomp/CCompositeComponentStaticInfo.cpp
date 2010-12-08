@@ -74,21 +74,19 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 				continue;
 			}
 
-			const IComponentStaticInfo::AttributeInfos& attrInfos = subMetaInfoPtr->GetAttributeInfos();
-			const IComponentStaticInfo::AttributeInfos::ValueType* attrStaticInfoPtr2 =
-						attrInfos.FindElement(attrId);
-			if ((attrStaticInfoPtr2 != NULL) && (*attrStaticInfoPtr2 != NULL)){
-				if (attrInfoPtr->attributePtr.IsValid()){
+			const IAttributeStaticInfo* attributeInfoPtr = subMetaInfoPtr->GetAttributeInfo(attrId);
+			if (attributeInfoPtr != NULL){
+				if (attrInfoPtr->attributePtr.IsValid() && ((attributeInfoPtr->GetAttributeFlags() & IAttributeStaticInfo::AF_NULLABLE) == 0)){
 					// attribute was obligatory, but it was defined -> now it is optional
-					AttrMetaInfoPtr& replaceAttrPtr = m_attrReplacers[*attrStaticInfoPtr2];
+					AttrMetaInfoPtr& replaceAttrPtr = m_attrReplacers[attributeInfoPtr];
 					if (!replaceAttrPtr.IsValid()){
-						replaceAttrPtr.SetPtr(new AttrAsOptionalDelegator(*attrStaticInfoPtr2, attrInfoPtr->attributePtr.GetPtr()));
+						replaceAttrPtr.SetPtr(new AttrAsOptionalDelegator(attributeInfoPtr, attrInfoPtr->attributePtr.GetPtr()));
 					}
 
 					RegisterAttributeInfo(attrInfoPtr->exportId, replaceAttrPtr.GetPtr());
 				}
 				else{
-					RegisterAttributeInfo(attrInfoPtr->exportId, *attrStaticInfoPtr2);
+					RegisterAttributeInfo(attrInfoPtr->exportId, attributeInfoPtr);
 				}
 			}
 		}
@@ -111,17 +109,19 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 }
 
 
+// reimplemented (icomp::IRealComponentStaticInfo)
+
+IComponent* CCompositeComponentStaticInfo::CreateComponent() const
+{
+	return new CCompositeComponent();
+}
+
+
 //	reimplemented (icomp::IComponentStaticInfo)
 
 int CCompositeComponentStaticInfo::GetComponentType() const
 {
 	return CT_COMPOSITE;
-}
-
-
-IComponent* CCompositeComponentStaticInfo::CreateComponent() const
-{
-	return new CCompositeComponent();
 }
 
 

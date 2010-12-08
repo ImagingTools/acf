@@ -104,17 +104,7 @@ const icomp::IAttributeStaticInfo* CAttributeEditorComp::GetStaticAttributeInfo(
 		return NULL;
 	}
 
-	const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = componentInfoPtr->GetAttributeInfos();
-
-	const icomp::IComponentStaticInfo::AttributeInfos::ValueType* attrInfoPtr2 =
-				staticAttributes.FindElement(id);
-
-	if (attrInfoPtr2 != NULL){
-		return *attrInfoPtr2;
-	}
-	else{
-		return NULL;
-	}
+	return componentInfoPtr->GetAttributeInfo(id);
 }
 
 	
@@ -418,14 +408,18 @@ void CAttributeEditorComp::UpdateSelectedAttr()
 		DescriptionLabel->setText(iqt::GetQString(infoPtr->GetDescription()));
 		KeywordsLabel->setText(iqt::GetQString(infoPtr->GetKeywords()));
 
-		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = infoPtr->GetAttributeInfos();
-
 		bool hasExport = false;
 
-		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
-			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
-			const icomp::IAttributeStaticInfo* staticAttributeInfPtr = staticAttributes.GetValueAt(staticAttributeIndex);
-			I_ASSERT(staticAttributeInfPtr != NULL);
+		icomp::IComponentStaticInfo::Ids attributeIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		for (		icomp::IComponentStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
+					attrIter != attributeIds.end();
+					++attrIter){
+			const std::string& attributeId = *attrIter;
+
+			const icomp::IAttributeStaticInfo* staticAttributeInfPtr = infoPtr->GetAttributeInfo(attributeId);
+			if (staticAttributeInfPtr == NULL){
+				continue;
+			}
 
 			QTreeWidgetItem* attributeItemPtr = new QTreeWidgetItem();
 			QTreeWidgetItem* exportItemPtr = new QTreeWidgetItem(attributeItemPtr);
@@ -732,7 +726,7 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 			const icomp::IComponentStaticInfo& elementStaticInfo,
 			QTreeWidgetItem& rootItem) const
 {
-	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetSubcomponentIds();
+	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBCOMPONENTS);
 
 	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
 				subIter != subcomponentIds.end();

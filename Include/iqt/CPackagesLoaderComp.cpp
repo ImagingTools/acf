@@ -135,9 +135,9 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 					++packageIter){
 			const std::string packageName = packageIter->first;
 
-			const IComponentStaticInfo* packageInfoPtr = GetSubcomponentInfo(packageName);
+			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageName);
 			if (packageInfoPtr != NULL){
-				Ids componentIds = packageInfoPtr->GetSubcomponentIds();
+				Ids componentIds = packageInfoPtr->GetMetaIds(MGI_EMBEDDED_COMPONENTS);
 
 				icomp::CComponentAddress address;
 				address.SetPackageId(packageName);
@@ -159,9 +159,9 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 					++packageIter){
 			const std::string packageName = packageIter->first;
 
-			const IComponentStaticInfo* packageInfoPtr = GetSubcomponentInfo(packageName);
+			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageName);
 			if (packageInfoPtr != NULL){
-				Ids componentIds = packageInfoPtr->GetSubcomponentIds();
+				Ids componentIds = packageInfoPtr->GetMetaIds(MGI_EMBEDDED_COMPONENTS);
 
 				icomp::CComponentAddress address;
 				address.SetPackageId(packageName);
@@ -214,7 +214,9 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 
 					m_normalPackagesMap[packageName] = iqt::GetCString(fileInfo.absoluteFilePath());
 
-					return RegisterSubcomponentInfo(packageName, infoPtr);
+					RegisterEmbeddedComponentInfo(packageName, infoPtr);
+
+					return true;
 				}
 			}
 		}
@@ -255,7 +257,9 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 										.arg(iqt::GetQString(metaInfoFile))));
 			}
 
-			return RegisterSubcomponentInfo(packageId, infoPtr);
+			RegisterEmbeddedComponentInfo(packageId, infoPtr);
+
+			return true;
 		}
 	}
 

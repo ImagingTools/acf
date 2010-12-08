@@ -50,7 +50,7 @@ TComponentRegistrator<Component>::TComponentRegistrator(
 	m_description(description),
 	m_keywords(keywords)
 {
-	packageStaticInfo.RegisterSubcomponentInfo(componentId, this);
+	packageStaticInfo.RegisterEmbeddedComponentInfo(componentId, this);
 
 	m_keywords += " ";
 

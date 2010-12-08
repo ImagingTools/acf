@@ -270,23 +270,33 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 
 	const IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(componentId);
 	if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
+		const CComponentAddress& elementAddress = elementInfoPtr->address;
 		const IRegistryElement& registryElement = *elementInfoPtr->elementPtr;
 
 		const IComponentEnvironmentManager& envManager = contextPtr->GetEnvironmentManager();
-		const IComponentStaticInfo* componentInfoPtr = envManager.GetComponentMetaInfo(elementInfoPtr->address);
-		if (componentInfoPtr == NULL){
+
+		const IComponentStaticInfo* subComponentInfoPtr = NULL;
+		if (!elementAddress.GetPackageId().empty()){
+			subComponentInfoPtr = envManager.GetComponentMetaInfo(elementAddress);
+		}
+		else{
+			const IComponentStaticInfo& info = contextPtr->GetStaticInfo();
+			subComponentInfoPtr = info.GetEmbeddedComponentInfo(elementAddress.GetComponentId());
+		}
+
+		if (subComponentInfoPtr == NULL){
 			return false;
 		}
 
 		if (!subContextPtr.IsValid()){
-			int componentType = componentInfoPtr->GetComponentType();
+			int componentType = subComponentInfoPtr->GetComponentType();
 			if (componentType == IComponentStaticInfo::CT_COMPOSITE){
 				// create composed component
-				const icomp::IRegistry* subRegistryPtr = envManager.GetRegistry(elementInfoPtr->address, &registry);
+				const icomp::IRegistry* subRegistryPtr = envManager.GetRegistry(elementAddress, &registry);
 				if (subRegistryPtr != NULL){
 					subContextPtr.SetPtr(new CCompositeComponentContext(
 								&registryElement,
-								componentInfoPtr,
+								subComponentInfoPtr,
 								subRegistryPtr,
 								&envManager,
 								contextPtr));
@@ -296,7 +306,7 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 				// create real component
 				subContextPtr.SetPtr(new CComponentContext(
 							&registryElement,
-							componentInfoPtr,
+							subComponentInfoPtr,
 							contextPtr,
 							componentId));
 			}
@@ -307,7 +317,12 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 		}
 
 		if (subComponentPtr != NULL){
-			subComponentPtr->SetPtr(componentInfoPtr->CreateComponent());
+			const IRealComponentStaticInfo* realComponentInfoPtr = dynamic_cast<const IRealComponentStaticInfo*>(subComponentInfoPtr);
+			if (realComponentInfoPtr == NULL){
+				return false;
+			}
+
+			subComponentPtr->SetPtr(realComponentInfoPtr->CreateComponent());
 			if (!subComponentPtr->IsValid()){
 				return false;
 			}

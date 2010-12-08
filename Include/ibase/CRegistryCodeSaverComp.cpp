@@ -366,7 +366,7 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	NextLine(stream);
 	stream << "// reimplemented (icomp::IRegistriesManager)";
 	NextLine(stream);
-	stream << "virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const IRegistry* contextRegistryPtr = NULL) const;";
+	stream << "virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const;";
 	stream << std::endl;
 
 	ChangeIndent(-1);
@@ -603,7 +603,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			stream << "const icomp::IComponentStaticInfo& " << infoName << " = " << packageId << "::" << componentId << "::InitStaticInfo(NULL);";
 
 			NextLine(stream);
-			stream << "RegisterSubcomponentInfo(\"" << componentId << "\", &" << infoName << ");";
+			stream << "RegisterEmbeddedComponentInfo(\"" << componentId << "\", &" << infoName << ");";
 		}
 
 		ChangeIndent(-1);
@@ -637,7 +637,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			std::string packageName = GetPackageName(packageId);
 
 			NextLine(stream);
-			stream << "RegisterSubcomponentInfo(\"" << packageId << "\", &m_sub" << packageName << ");";
+			stream << "RegisterEmbeddedComponentInfo(\"" << packageId << "\", &m_sub" << packageName << ");";
 		}
 	}
 
@@ -653,7 +653,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			std::string packageName = GetPackageName(packageId);
 
 			NextLine(stream);
-			stream << "RegisterSubcomponentInfo(\"" << packageId << "\", &C" << packageName << "::EnsureStaticInfoInit(this));";
+			stream << "RegisterEmbeddedComponentInfo(\"" << packageId << "\", &C" << packageName << "::EnsureStaticInfoInit(this));";
 		}
 	}
 
@@ -667,7 +667,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 	stream << "// reimplemented (icomp::IRegistriesManager)";
 	stream << std::endl;
 	NextLine(stream);
-	stream << "const icomp::IRegistry* " << className << "::CFactory::GetRegistry(const icomp::CComponentAddress& address, const IRegistry* contextRegistryPtr) const";
+	stream << "const icomp::IRegistry* " << className << "::CFactory::GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr) const";
 	NextLine(stream);
 	stream << "{";
 	ChangeIndent(1);

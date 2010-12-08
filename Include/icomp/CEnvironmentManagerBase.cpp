@@ -54,15 +54,15 @@ CEnvironmentManagerBase::ComponentAddresses CEnvironmentManagerBase::GetComponen
 {
 	ComponentAddresses retVal;
 
-	Ids packageIds = GetSubcomponentIds();
+	Ids packageIds = GetMetaIds(MGI_EMBEDDED_COMPONENTS);
 	for (		Ids::const_iterator packageIter = packageIds.begin();
 				packageIter != packageIds.end();
 				++packageIter){
 		const std::string packageName = *packageIter;
 
-		const IComponentStaticInfo* packageInfoPtr = GetSubcomponentInfo(packageName);
+		const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageName);
 		if (packageInfoPtr != NULL){
-			Ids componentIds = packageInfoPtr->GetSubcomponentIds();
+			Ids componentIds = packageInfoPtr->GetMetaIds(MGI_EMBEDDED_COMPONENTS);
 
 			icomp::CComponentAddress address;
 			address.SetPackageId(packageName);
@@ -72,7 +72,7 @@ CEnvironmentManagerBase::ComponentAddresses CEnvironmentManagerBase::GetComponen
 						++componentIter){
 				const std::string componentName = *componentIter;
 
-				const IComponentStaticInfo* componentInfoPtr = GetSubcomponentInfo(componentName);
+				const IComponentStaticInfo* componentInfoPtr = GetEmbeddedComponentInfo(componentName);
 				if (componentInfoPtr != NULL){
 					int componentType = componentInfoPtr->GetComponentType();
 
@@ -92,9 +92,9 @@ CEnvironmentManagerBase::ComponentAddresses CEnvironmentManagerBase::GetComponen
 
 const IComponentStaticInfo* CEnvironmentManagerBase::GetComponentMetaInfo(const CComponentAddress& address) const
 {
-	const icomp::IComponentStaticInfo* packageInfoPtr = GetSubcomponentInfo(address.GetPackageId());
+	const icomp::IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(address.GetPackageId());
 	if (packageInfoPtr != NULL){
-		return packageInfoPtr->GetSubcomponentInfo(address.GetComponentId());
+		return packageInfoPtr->GetEmbeddedComponentInfo(address.GetComponentId());
 	}
 
 	return NULL;
@@ -103,7 +103,7 @@ const IComponentStaticInfo* CEnvironmentManagerBase::GetComponentMetaInfo(const 
 
 const IComponentStaticInfo* CEnvironmentManagerBase::GetPackageMetaInfo(const std::string& packageId) const
 {
-	return GetSubcomponentInfo(packageId);
+	return GetEmbeddedComponentInfo(packageId);
 }
 
 

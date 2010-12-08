@@ -21,6 +21,8 @@ class CBaseComponentStaticInfo:
 public:
 	typedef CComponentStaticInfoBase BaseClass;
 
+	typedef void* (*InterfaceExtractorPtr)(IComponent& component);
+
 	CBaseComponentStaticInfo(const IRealComponentStaticInfo* baseComponentPtr = NULL);
 
 	/**
@@ -28,29 +30,42 @@ public:
 		This interface ID is used for static check
 		if this component can be used to resolve reference dependecy of second one.
 	*/
-	virtual bool RegisterInterfaceExtractor(const std::string& interfaceName, InterfaceExtractorPtr extractorPtr);
+	virtual void RegisterInterfaceExtractor(const std::string& interfaceName, InterfaceExtractorPtr extractorPtr);
 	/**
 		Register static attribute info.
 		\param	attributeId			ID of attribute.
 		\param	attributeInfoPtr	static attribute info object used to describe attribute type and as factory.
 									It cannot be NULL.
 	*/
-	virtual bool RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
+	virtual void RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr);
+	/**
+		Register static subcomponent info.
+		\param	subcomponentId		ID of this subcomponent.
+		\param	componentInfoPtr	static subcomponent info object used to describe subcomponent type and as factory.
+									It cannot be NULL.
+	*/
+	virtual void RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
 
 	//	reimplemented (icomp::IRealComponentStaticInfo)
-	virtual const InterfaceExtractors& GetInterfaceExtractors() const;
+	virtual IComponent* CreateComponent() const;
+	virtual void* GetComponentInterface(const std::string& interfaceName, IComponent& component) const;
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual const AttributeInfos& GetAttributeInfos() const;
-	virtual Ids GetMetaIds(int metaGroupId) const;
-	virtual Ids GetSubcomponentIds() const;
+	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const;
 	virtual const IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const;
+	virtual Ids GetMetaIds(int metaGroupId) const;
 
 private:
-	const IComponentStaticInfo* m_baseComponentPtr;
+	const IRealComponentStaticInfo* m_baseComponentPtr;
 
-	CascInterfaceExtractors m_interfaceExtractors;
-	CascAttributeInfos m_attributeInfos;
+	typedef std::map<std::string, InterfaceExtractorPtr> InterfaceExtractors;
+	InterfaceExtractors m_interfaceExtractors;
+
+	typedef std::map<std::string, const IComponentStaticInfo*> SubcomponentInfos;
+	SubcomponentInfos m_subcomponentInfos;
+
+	typedef std::map<std::string, const IAttributeStaticInfo*> AttributeInfos;
+	AttributeInfos m_attributeInfos;
 };
 
 

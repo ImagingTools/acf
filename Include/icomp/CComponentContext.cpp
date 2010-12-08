@@ -79,13 +79,10 @@ const iser::IObject* CComponentContext::GetAttribute(const std::string& attribut
 		}
 	}
 
-	const IComponentStaticInfo::AttributeInfos& attributeInfos = m_staticInfo.GetAttributeInfos();
-	const IComponentStaticInfo::AttributeInfos::ValueType* attributePtr2 = attributeInfos.FindElement(attributeId);
-	if (attributePtr2 != NULL){
-		I_ASSERT(*attributePtr2 != NULL);
-
-		if (((*attributePtr2)->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_OBLIGATORY) != 0){
-			const iser::IObject* defaultAttributePtr = (*attributePtr2)->GetAttributeDefaultValue();
+	const IAttributeStaticInfo* attributeInfoPtr = m_staticInfo.GetAttributeInfo(attributeId);
+	if (attributeInfoPtr != NULL){
+		if ((attributeInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_OBLIGATORY) != 0){
+			const iser::IObject* defaultAttributePtr = attributeInfoPtr->GetAttributeDefaultValue();
 			if (defaultAttributePtr != NULL){
 				if (definitionLevelPtr != NULL){
 					*definitionLevelPtr = 0;

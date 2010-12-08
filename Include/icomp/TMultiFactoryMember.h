@@ -43,7 +43,7 @@ public:
 
 	/**
 		Create instance of interface for specified index.
-		This is combination of the methods CreateComponent() and ExtractInterface()
+		This is combination of the methods \c CreateComponent and \c ExtractInterface
 		provided for convinience, if only one interface is asked in factorisied objects.
 	*/
 	Interface* CreateInstance(int index) const;

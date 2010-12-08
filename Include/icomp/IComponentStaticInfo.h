@@ -29,8 +29,6 @@ class IComponent;
 class IComponentStaticInfo: virtual public istd::IPolymorphic
 {
 public:
-	typedef void* (*InterfaceExtractorPtr)(IComponent* componentPtr);
-
 	/**
 		Specify type of the component realization
 	*/
@@ -57,7 +55,19 @@ public:
 		/**
 			ID of meta group storing list of supported interfaces.
 		*/
-		MGI_INTERFACES = 0
+		MGI_INTERFACES = 0,
+		/**
+			ID of meta group storing list of attributes.
+		*/
+		MGI_ATTRIBUTES,
+		/**
+			ID of group for subcomponents.
+		*/
+		MGI_SUBCOMPONENTS,
+		/**
+			ID of group for embedded types.
+		*/
+		MGI_EMBEDDED_COMPONENTS
 	};
 	/**
 		Map from attribute name string to attribute static info object.
@@ -71,33 +81,29 @@ public:
 	virtual int GetComponentType() const = 0;
 
 	/**
-		Create component instance.
-		\return				pointer to created component or NULL if this component cannot be created.
-	 */
-	virtual IComponent* CreateComponent() const = 0;
-
-	/**
 		Get set of attributes.
 	*/
-	virtual const AttributeInfos& GetAttributeInfos() const = 0;
+	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const = 0;
+
+	/**
+		Return number of interfaces for specific slot.
+		\param	subcomponentId	ID of subcomponent.
+								\sa	GetMetaIds() and MGI_SUBCOMPONENTS.
+	*/
+	virtual const IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const = 0;
+
+	/**
+		Return number of interfaces for specific slot.
+		\param	subcomponentId	ID of subcomponent.
+								\sa	GetMetaIds() and MGI_EMBEDDED_COMPONENTS.
+	*/
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const = 0;
 
 	/**
 		Get list of meta IDs associated with some meta key.
 		\sa MetaGroupId
 	*/
 	virtual Ids GetMetaIds(int metaGroupId) const = 0;
-
-	/**
-		Get list of subcomponent ID's.
-	*/
-	virtual Ids GetSubcomponentIds() const = 0;
-
-	/**
-		Return number of interfaces for specific slot.
-		\param	subcomponentId	ID of subcomponent.
-								\sa	GetSubcomponentIds().
-	*/
-	virtual const IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const = 0;
 
 	/**
 		Get human readable description of this component.

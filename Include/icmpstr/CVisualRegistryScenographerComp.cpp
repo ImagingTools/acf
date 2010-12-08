@@ -370,12 +370,16 @@ void CVisualRegistryScenographerComp::ConnectReferences(const QString& component
 			continue;
 		}
 
-		const icomp::IComponentStaticInfo::AttributeInfos& staticAttributes = compMetaInfoPtr->GetAttributeInfos();
-	
-		for (int staticAttributeIndex = 0; staticAttributeIndex < staticAttributes.GetElementsCount(); staticAttributeIndex++){
-			const std::string& attributeId = staticAttributes.GetKeyAt(staticAttributeIndex);
-			const icomp::IAttributeStaticInfo* staticAttributeInfoPtr = staticAttributes.GetValueAt(staticAttributeIndex);
-			I_ASSERT(staticAttributeInfoPtr != NULL);
+		icomp::IComponentStaticInfo::Ids attributeIds = compMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		for (		icomp::IComponentStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
+					attrIter != attributeIds.end();
+					++attrIter){
+			const std::string& attributeId = *attrIter;
+
+			const icomp::IAttributeStaticInfo* staticAttributeInfoPtr = compMetaInfoPtr->GetAttributeInfo(attributeId);
+			if (staticAttributeInfoPtr == NULL){
+				continue;
+			}
 
 			const iser::IObject* attributePtr = staticAttributeInfoPtr->GetAttributeDefaultValue();
 			const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributePtr);
