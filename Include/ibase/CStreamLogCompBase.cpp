@@ -55,11 +55,12 @@ void CStreamLogCompBase::WriteMessageToStream(const ibase::IMessage& message)
 	istd::CString messageText = message.GetText();
 
 	if (m_useTimeStampAttrPtr.IsValid() && *m_useTimeStampAttrPtr){
-		messageText = istd::CString("[") +
+		messageText =
+					istd::CString("[") +
 					istd::CString(message.GetTimeStamp().ToString(isys::IDateTime::TC_YEAR, isys::IDateTime::TC_SECOND)) +
 					istd::CString("] ") +
 					messageText;
-		}
+	}
 	
 	WriteText(messageText);
 

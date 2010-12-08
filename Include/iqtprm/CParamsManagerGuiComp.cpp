@@ -34,12 +34,6 @@ void CParamsManagerGuiComp::UpdateEditor(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
-	// if the set was removed, the model was already detached from all observers,
-	// so we must reset our temporary model pointer:
-	if ((updateFlags & iprm::IParamsManager::CF_SET_REMOVED) != 0 && (updateFlags & istd::CChangeDelegator::CF_DELEGATED) != 0){
-		m_lastConnectedModelPtr = NULL;
-	}
-
 	UpdateTree();
 }
 
@@ -62,6 +56,8 @@ void CParamsManagerGuiComp::on_RemoveButton_clicked()
 {
 	iprm::IParamsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		EnsureParamsGuiDetached();
+
 		int selectedIndex = GetSelectedIndex();
 		I_ASSERT(selectedIndex < objectPtr->GetParamsSetsCount());
 
@@ -109,11 +105,11 @@ void CParamsManagerGuiComp::on_ParamsTree_itemSelectionChanged()
 
 void CParamsManagerGuiComp::on_ParamsTree_itemChanged(QTreeWidgetItem* item, int column)
 {
-	if (IsUpdateBlocked()){
+	if (column != 0){
 		return;
 	}
 
-	if (column != 0){
+	if (IsUpdateBlocked()){
 		return;
 	}
 
@@ -146,13 +142,9 @@ void CParamsManagerGuiComp::UpdateActions()
 
 void CParamsManagerGuiComp::UpdateTree()
 {
-	if (!IsGuiCreated()){
-		return;
-	}
-
-	UpdateBlocker updateBlocker(this);
-
 	ParamsTree->clear();
+
+	int selectedIndex = -1;
 
 	iprm::IParamsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -166,7 +158,6 @@ void CParamsManagerGuiComp::UpdateTree()
 		int setsCount = objectPtr->GetParamsSetsCount();
 
 		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
-		int selectedIndex = -1;
 		if (selectionPtr != NULL){
 			selectedIndex = selectionPtr->GetSelectedOptionIndex();
 		}
@@ -181,9 +172,9 @@ void CParamsManagerGuiComp::UpdateTree()
 
 			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);	
 		}
-
-		UpdateParamsView(selectedIndex);
 	}
+
+	UpdateParamsView(selectedIndex);
 }
 
 
@@ -238,8 +229,8 @@ int CParamsManagerGuiComp::GetSelectedIndex() const
 
 void CParamsManagerGuiComp::EnsureParamsGuiDetached()
 {
-	if ((m_lastConnectedModelPtr != NULL) && m_paramsObserverCompPtr.IsValid()){
-		if (m_lastConnectedModelPtr->IsAttached(m_paramsObserverCompPtr.GetPtr())){
+	if (m_paramsObserverCompPtr.IsValid() && (m_lastConnectedModelPtr != NULL)){
+		if (m_paramsObserverCompPtr->IsModelAttached(m_lastConnectedModelPtr)){
 			m_lastConnectedModelPtr->DetachObserver(m_paramsObserverCompPtr.GetPtr());
 		}
 	}
