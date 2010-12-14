@@ -120,17 +120,15 @@ public:
 	/**
 		Transform matrix to upper triangle form using method of Householder reflexions.
 		\param	result		triangle matrix.
-		\param	matrix2Ptr	optional source matrix will be transformed using the same reflexions.
+		\param	matrix2Ptr	optional matrix will be transformed using the same reflexions.
 							To realize QR decomposition you can use identity matrix.
-		\param	result2Ptr	optional result object storing transformation of matrix2Ptr.
 		\param	maxColumns	optional maximal number of transformed columns. If it is negative value whole matrix will be transformed.
 		\param	minHhNorm	minimal Hausholder reflexion vector length. If any reflexion vector is shorter this method fails.
 		\return				true if success.
 	*/
 	bool GetTriangleDecomposed(
 				CVarMatrix& result,
-				const CVarMatrix* matrix2Ptr = NULL,
-				CVarMatrix* result2Ptr = NULL,
+				CVarMatrix* matrix2Ptr = NULL,
 				int maxColumns = -1,
 				double minHhNorm = I_BIG_EPSILON) const;
 

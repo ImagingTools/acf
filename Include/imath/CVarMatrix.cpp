@@ -255,25 +255,13 @@ double CVarMatrix::GetEuclideanNorm() const
 
 bool CVarMatrix::GetTriangleDecomposed(
 				CVarMatrix& result,
-				const CVarMatrix* matrix2Ptr,
-				CVarMatrix* result2Ptr,
+				CVarMatrix* matrix2Ptr,
 				int maxColumns,
 				double minHhNorm) const
 {
-	I_ASSERT((matrix2Ptr == NULL) == (result2Ptr == NULL));
-
 	istd::CIndex2d size = GetSizes();
 
-	int matrix2ColumnsCount = 0;
-	if (matrix2Ptr != NULL){
-		I_ASSERT(matrix2Ptr->GetSize(1) == size[1]);
-
-		if (matrix2Ptr != result2Ptr){
-			*result2Ptr = *matrix2Ptr;
-		}
-
-		matrix2ColumnsCount = matrix2Ptr->GetSize(0);
-	}
+	I_ASSERT((matrix2Ptr == NULL) || (matrix2Ptr->GetSize(1) == size[1]));
 
 	if (&result != this){
 		result = *this;
@@ -285,42 +273,25 @@ bool CVarMatrix::GetTriangleDecomposed(
 	}
 
 	for (int hhIndex = 0; hhIndex < columnsCount; ++hhIndex){
-		double hhNorm = 0;
+		double hhNorm2 = 0;
 		for (istd::CIndex2d normIndex(hhIndex, hhIndex); normIndex[1] < size[1]; ++normIndex[1]){
 			double element = result.GetAt(normIndex);
 
-			hhNorm += element * element;
+			hhNorm2 += element * element;
 		}
 
-		if (hhNorm < minHhNorm){
+		if (hhNorm2 < minHhNorm){
 			return false;
 		}
 
 		double element0 = result[istd::CIndex2d(hhIndex, hhIndex)];
 
-		double hhLength = (element0 >= 0)? std::sqrt(hhNorm): -sqrt(hhNorm);
+		double hhLength = (element0 >= 0)? std::sqrt(hhNorm2): -sqrt(hhNorm2);	// destination diagonal value of current processed column, sign is choosen optimal for maximal householder vector length
 
-		double hhVector0 = element0 + hhLength;
-		double hhVectorNorm2 = hhNorm + hhVector0 * hhVector0 - element0 * element0;
+		double hhVector0 = element0 + hhLength;	// element 0 of householder vector, rest of ist will be taken directly from matrix elements
+		double hhVectorNorm2 = hhNorm2 + hhVector0 * hhVector0 - element0 * element0;	// sqare of norm of householder vector, first element replaced from original column norm sqare
 
-		if (result2Ptr != NULL){
-			istd::CIndex2d matrix2Index;
-			for (matrix2Index[0] = 0; matrix2Index[0] < matrix2ColumnsCount; ++matrix2Index[0]){
-				matrix2Index[1] = hhIndex;
-				double dotProduct = result2Ptr->GetAt(matrix2Index) * hhVector0;
-				for (++matrix2Index[1]; matrix2Index[1] < size[1]; ++matrix2Index[1]){
-					dotProduct += result2Ptr->GetAt(matrix2Index) * result[istd::CIndex2d(hhIndex, matrix2Index[1])];
-				}
-
-				double reflexionFactor = 2 * dotProduct / hhVectorNorm2;
-				matrix2Index[1] = hhIndex;
-				result2Ptr->GetAtRef(matrix2Index) -= hhVector0 * reflexionFactor;
-				for (matrix2Index[1]++; matrix2Index[1] < size[1]; ++matrix2Index[1]){
-					result2Ptr->GetAtRef(matrix2Index) -= result.GetAt(istd::CIndex2d(hhIndex, matrix2Index[1])) * reflexionFactor;
-				}
-			}
-		}
-
+		// correct next columns
 		istd::CIndex2d matrixIndex;
 		for (matrixIndex[0] = hhIndex + 1; matrixIndex[0] < size[0]; ++matrixIndex[0]){
 			matrixIndex[1] = hhIndex;
@@ -337,6 +308,28 @@ bool CVarMatrix::GetTriangleDecomposed(
 			}
 		}
 
+		// correct optional matrix
+		if (matrix2Ptr != NULL){
+			int matrix2ColumnsCount = matrix2Ptr->GetSize(0);
+
+			istd::CIndex2d matrix2Index;
+			for (matrix2Index[0] = 0; matrix2Index[0] < matrix2ColumnsCount; ++matrix2Index[0]){
+				matrix2Index[1] = hhIndex;
+				double dotProduct = matrix2Ptr->GetAt(matrix2Index) * hhVector0;
+				for (++matrix2Index[1]; matrix2Index[1] < size[1]; ++matrix2Index[1]){
+					dotProduct += matrix2Ptr->GetAt(matrix2Index) * result[istd::CIndex2d(hhIndex, matrix2Index[1])];
+				}
+
+				double reflexionFactor = 2 * dotProduct / hhVectorNorm2;
+				matrix2Index[1] = hhIndex;
+				matrix2Ptr->GetAtRef(matrix2Index) -= hhVector0 * reflexionFactor;
+				for (matrix2Index[1]++; matrix2Index[1] < size[1]; ++matrix2Index[1]){
+					matrix2Ptr->GetAtRef(matrix2Index) -= result.GetAt(istd::CIndex2d(hhIndex, matrix2Index[1])) * reflexionFactor;
+				}
+			}
+		}
+
+		// correct current column
 		result.SetAt(istd::CIndex2d(hhIndex, hhIndex), -hhLength);
 		for (int i = hhIndex + 1; i < size[1]; ++i){
 			result.SetAt(istd::CIndex2d(hhIndex, i), 0);
@@ -380,9 +373,9 @@ bool CVarMatrix::GetSolvedTriangle(const CVarMatrix& vector, CVarMatrix& result,
 bool CVarMatrix::GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, double accuracy) const
 {
 	CVarMatrix matrixR;
-	CVarMatrix matrixQY;
+	CVarMatrix matrixQY = vector;
 
-	if (GetTriangleDecomposed(matrixR, &vector, &matrixQY, -1, accuracy)){
+	if (GetTriangleDecomposed(matrixR, &matrixQY, -1, accuracy)){
 		return matrixR.GetSolvedTriangle(matrixQY, result, accuracy);
 	}
 
