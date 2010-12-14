@@ -7,7 +7,7 @@
 #include "iser/ISerializable.h"
 
 #include "imath/TIValueManip.h"
-#include "imath/TVarVector.h"
+#include "imath/CVarVector.h"
 
 #include "icmm/icmm.h"
 
@@ -19,10 +19,10 @@ namespace icmm
 /**
 	Generic color implementation with components number set at construction time.
 */
-class CVarColor: public imath::TVarVector<>, public iser::ISerializable
+class CVarColor: public imath::CVarVector, public iser::ISerializable
 {
 public:
-	typedef imath::TVarVector<> BaseClass;
+	typedef imath::CVarVector BaseClass;
 
 	/**
 		Default constructor.

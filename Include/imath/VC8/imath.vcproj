@@ -258,11 +258,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TVarMatrix.h"
+				RelativePath="..\CVarMatrix.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TVarVector.h"
+				RelativePath="..\CVarVector.h"
 				>
 			</File>
 			<File

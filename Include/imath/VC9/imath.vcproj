@@ -192,6 +192,14 @@
 				RelativePath="..\CSampledFunction2d.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CVarMatrix.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CVarVector.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -219,6 +227,14 @@
 			</File>
 			<File
 				RelativePath="..\CSampledFunction2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVarMatrix.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVarVector.h"
 				>
 			</File>
 			<File
@@ -255,14 +271,6 @@
 			</File>
 			<File
 				RelativePath="..\TSplineGridFunctionBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TVarMatrix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TVarVector.h"
 				>
 			</File>
 			<File

@@ -9,7 +9,7 @@
 
 #include "imath/TIValueManip.h"
 #include "imath/TVector.h"
-#include "imath/TVarVector.h"
+#include "imath/CVarVector.h"
 
 #include "icmm/icmm.h"
 
@@ -29,7 +29,7 @@ public:
 
 	TComposedColor();
 	TComposedColor(const BaseClass& value);
-	explicit TComposedColor(const imath::TVarVector<double>& vector);
+	explicit TComposedColor(const imath::CVarVector& vector);
 
 	/**
 		Get color after components value rounding with specified precision.
@@ -108,7 +108,7 @@ inline TComposedColor<Size>::TComposedColor(const BaseClass& value)
 
 
 template <int Size>
-inline TComposedColor<Size>::TComposedColor(const imath::TVarVector<double>& vector)
+inline TComposedColor<Size>::TComposedColor(const imath::CVarVector& vector)
 :	BaseClass(vector)
 {
 	Elements& elements = BaseClass::GetElementsRef();

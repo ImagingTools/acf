@@ -66,6 +66,11 @@ public:
 	void Reset();
 
 	/**
+		Check if this array has no elements.
+	*/
+	bool IsEmpty() const;
+
+	/**
 		Check, if number dimensions is fixed.
 		It is provided for template implementations. It returns always true.
 	*/
@@ -159,6 +164,13 @@ private:
 
 
 // inline methods
+
+template <class Element, int Dimensions>
+bool TArray<Element, Dimensions>::IsEmpty() const
+{
+	return m_sizes.IsSizeEmpty();
+}
+
 
 template <class Element, int Dimensions>
 inline bool TArray<Element, Dimensions>::IsDimensionsCountFixed() const
@@ -352,7 +364,7 @@ void TArray<Element, Dimensions>::UpdateElementsSize()
 template <class Element, int Dimensions>
 void TArray<Element, Dimensions>::DeepCopy(const Elements& elements, const SizesType& sizes)
 {
-	I_ASSERT(elements.size() == sizes[0] * sizes[1]);
+	I_ASSERT(int(elements.size()) == sizes[0] * sizes[1]);
 
 	m_elements = elements;
 	m_sizes = sizes;

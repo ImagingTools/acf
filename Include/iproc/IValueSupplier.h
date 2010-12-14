@@ -2,7 +2,7 @@
 #define iproc_IValueSupplier_included
 
 
-#include "imath/TVarVector.h"
+#include "imath/CVarVector.h"
 
 #include "iproc/ISupplier.h"
 
