@@ -3,6 +3,7 @@
 
 // STL includes
 #include <cmath>
+#include <vector>
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -353,7 +354,7 @@ bool CVarMatrix::GetSolvedTriangle(const CVarMatrix& vector, CVarMatrix& result,
 	for (resultIndex[0] = 0; resultIndex[0] < columnsCount; ++resultIndex[0]){
 		for (resultIndex[1] = size[0] - 1; resultIndex[1] >= 0; --resultIndex[1]){
 			double diagonalElement = GetAt(istd::CIndex2d(resultIndex[1], resultIndex[1]));
-			if (::fabs(diagonalElement) < accuracy){
+			if (std::fabs(diagonalElement) < accuracy){
 				return false;
 			}
 
@@ -448,6 +449,179 @@ bool CVarMatrix::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(cellsTag);
 
 	return retVal;
+}
+
+
+// static methods
+
+/**
+	LSP solving using Householder reflexions with column preselection.
+	In each step we have calculated column with maximal norm.
+	This column will be transformed and its index will be stored in permutation table.
+	This permutation table stores index in matrix A for each calculation step.
+*/
+void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMatrix& matrixX, double accuracy)
+{
+	I_ASSERT(accuracy > 0);
+
+	istd::CIndex2d size = matrixA.GetSizes();
+	I_ASSERT(size[0] == matrixX.GetSize(1));
+	I_ASSERT(size[1] == matrixY.GetSize(1));
+
+	int columnsCount = size[0];
+	int matrixYColumnsCount = matrixY.GetSize(0);
+
+	int maxStepsCount = istd::Min(size[1], columnsCount);
+
+	std::vector<double> columnNorms2(columnsCount);
+	std::vector<int> realColumnIndices(columnsCount);
+
+	int maxNormColumnIndex = -1;
+	double maxNorm2 = 0;
+
+	istd::CIndex2d matrixIndex;
+	for (matrixIndex[0] = 0; matrixIndex[0] < columnsCount; ++matrixIndex[0]){
+		realColumnIndices[matrixIndex[0]] = matrixIndex[0];
+
+		double norm2 = 0;
+		for (matrixIndex[1] = 0; matrixIndex[1] < size[1]; ++matrixIndex[1]){
+			double element = matrixA.GetAt(matrixIndex);
+
+			norm2 += element * element;
+		}
+
+		if (norm2 >= maxNorm2){
+			maxNorm2 = norm2;
+			maxNormColumnIndex = matrixIndex[0];
+		}
+
+		columnNorms2[matrixIndex[0]] = norm2;
+	}
+
+	int stepIndex = 0;
+	for (; stepIndex < maxStepsCount; ++stepIndex){
+		if (maxNorm2 < accuracy){
+			break;
+		}
+		I_ASSERT(maxNormColumnIndex >= 0);
+
+		int realColumnIndex = maxNormColumnIndex;
+
+		int prevIndex = realColumnIndices[stepIndex];	// switch columns in permutation table
+		I_ASSERT(prevIndex >= stepIndex);
+		realColumnIndices[stepIndex] = realColumnIndex;
+		realColumnIndices[realColumnIndex] = prevIndex;
+
+		double element0 = matrixA[istd::CIndex2d(realColumnIndex, stepIndex)];
+
+		double hhLength = (element0 >= 0)? std::sqrt(maxNorm2): -sqrt(maxNorm2);	// destination diagonal value of current processed column, sign is choosen optimal for maximal householder vector length
+
+		double hhVector0 = element0 + hhLength;	// element 0 of householder vector, rest of ist will be taken directly from matrix elements
+		double hhVectorNorm2 = maxNorm2 + hhVector0 * hhVector0 - element0 * element0;	// sqare of norm of householder vector, first element replaced from original column norm sqare
+
+		maxNormColumnIndex = -1;
+		maxNorm2 = 0;
+		// correct next columns
+		for (int i = stepIndex + 1; i < columnsCount; ++i){
+			matrixIndex[0] = realColumnIndices[i];
+			matrixIndex[1] = stepIndex;
+			double dotProduct = matrixA[matrixIndex] * hhVector0;
+			for (matrixIndex[1]++; matrixIndex[1] < size[1]; ++matrixIndex[1]){
+				dotProduct += matrixA.GetAt(matrixIndex) * matrixA.GetAt(istd::CIndex2d(realColumnIndex, matrixIndex[1]));
+			}
+
+			double reflexionFactor = 2 * dotProduct / hhVectorNorm2;
+			matrixIndex[1] = stepIndex;
+
+			double& firstElement = matrixA[matrixIndex];
+
+			firstElement -= hhVector0 * reflexionFactor;
+			for (matrixIndex[1]++; matrixIndex[1] < size[1]; ++matrixIndex[1]){
+				matrixA.GetAtRef(matrixIndex) -= matrixA[istd::CIndex2d(realColumnIndex, matrixIndex[1])] * reflexionFactor;
+			}
+
+			// correct norm table, remove the current row
+			double norm2 = columnNorms2[matrixIndex[0]] - firstElement * firstElement;
+			if (norm2 >= maxNorm2){
+				maxNorm2 = norm2;
+				maxNormColumnIndex = matrixIndex[0];
+			}
+			columnNorms2[matrixIndex[0]] = norm2;
+		}
+
+		// correct matrix QY
+		for (matrixIndex[0] = 0; matrixIndex[0] < matrixYColumnsCount; ++matrixIndex[0]){
+			matrixIndex[1] = stepIndex;
+			double dotProduct = matrixY.GetAt(matrixIndex) * hhVector0;
+			for (++matrixIndex[1]; matrixIndex[1] < size[1]; ++matrixIndex[1]){
+				dotProduct += matrixY.GetAt(matrixIndex) * matrixA[istd::CIndex2d(realColumnIndex, matrixIndex[1])];
+			}
+
+			double reflexionFactor = 2 * dotProduct / hhVectorNorm2;
+			matrixIndex[1] = stepIndex;
+			matrixY.GetAtRef(matrixIndex) -= hhVector0 * reflexionFactor;
+			for (matrixIndex[1]++; matrixIndex[1] < size[1]; ++matrixIndex[1]){
+				matrixY.GetAtRef(matrixIndex) -= matrixA.GetAt(istd::CIndex2d(realColumnIndex, matrixIndex[1])) * reflexionFactor;
+			}
+		}
+
+		// correct current column
+		matrixA.SetAt(istd::CIndex2d(realColumnIndex, stepIndex), -hhLength);
+		for (int i = stepIndex + 1; i < size[1]; ++i){
+			matrixA.SetAt(istd::CIndex2d(realColumnIndex, i), 0);
+		}
+	}
+
+	// calculate output matrix X solving equation RX = Y
+    matrixX.SetSizes(istd::CIndex2d(matrixYColumnsCount, size[0]));
+
+	double restNorm2 = 0;
+	if (stepIndex > 0){
+		matrixIndex[1] = stepIndex - 1;
+		for (int i = stepIndex - 1; i < columnsCount; ++i){
+			matrixIndex[0] = realColumnIndices[i];
+			double element = matrixA.GetAt(matrixIndex);
+
+			restNorm2 += element * element;
+		}
+	}
+
+	istd::CIndex2d resultIndex;
+	for (resultIndex[0] = 0; resultIndex[0] < matrixYColumnsCount; ++resultIndex[0]){
+		if (std::fabs(restNorm2) >= accuracy){
+			I_ASSERT(stepIndex > 0);	// restNorm is positive only if it was calculated -> there are non-zero elemens
+
+			matrixIndex[1] = stepIndex - 1;
+			for (int i = stepIndex - 1; i < columnsCount; ++i){
+				matrixIndex[0] = realColumnIndices[i];
+				resultIndex[1] = matrixIndex[0];
+
+				matrixX.SetAt(resultIndex, matrixA.GetAt(resultIndex) / restNorm2);
+			}
+		}
+		else{
+			for (int i = istd::Max(stepIndex - 1, 0); i < columnsCount; ++i){
+				resultIndex[1] = realColumnIndices[i];
+
+				matrixX.SetAt(resultIndex, 0);
+			}
+		}
+
+		for (int i = stepIndex - 2; i >= 0; --i){
+			resultIndex[1] = realColumnIndices[i];
+
+			double diagonalElement = matrixA.GetAt(istd::CIndex2d(resultIndex[1], i));
+			I_ASSERT(std::fabs(diagonalElement) >= accuracy);	// was sorted previously and this condition was filled
+
+			double previousProduct = 0.0;
+			for (int columnIndex = size[0] - 1; columnIndex > i; columnIndex--){
+				int realColumnIndex = realColumnIndices[columnIndex];
+				previousProduct += matrixX.GetAt(istd::CIndex2d(resultIndex[0], realColumnIndex)) * matrixA.GetAt(istd::CIndex2d(realColumnIndex, resultIndex[1]));
+			}
+
+			matrixX.SetAt(resultIndex, (matrixY.GetAt(resultIndex) - previousProduct) / diagonalElement);
+		}
+	}
 }
 
 

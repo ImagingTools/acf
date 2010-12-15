@@ -146,7 +146,7 @@ public:
 
 	/**
 		Solve 'Least Square Problem'.
-		Solve linear Least Square Problem for equation Ax = y, where A is a N * M matrix, N >= M.
+		Solve linear Least Square Problem for equation AX = Y, where A is a N * M matrix, N >= M, X is n * k matrix and Y is m * k matrix.
 	 */
 	bool GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, double minHhNorm = I_BIG_EPSILON) const;
 
@@ -170,6 +170,22 @@ public:
 
 	bool operator==(const CVarMatrix& matrix) const;
 	bool operator!=(const CVarMatrix& matrix) const;
+
+	// static methods
+	/**
+		Solve 'Least Square Problem' using robust algorithm.
+		Solve linear Least Square Problem for equation AX = Y, where A is a \em {n * m} matrix, X is \em {m * k} matrix and Y is \em {n * k} matrix.
+		This implementation solve LSP in place, it transforms internal matrix A into R = HA and matrix Y into Y' = HY.
+		Then it solves equation in form RX = Y', where R is 'quasi' triangle matrix.
+		\param	matrixA	input matrix A in equation AX = Y.
+						It will be destroyed by this operation (triangle matrix R = HA will be calculated in place).
+		\param	matrixY	input matrix Y in equation AX = Y.
+						It will be destroyed by this operation (matrix Y' = HY will be calculated in place).
+						Please note, that height of this matrix must be the same as height of matrix A.
+		\param	matrixX result matrix X in equation AX = Y. It will be initialized be this function.
+						The output size of this matrix will be set to \em {m * k} where \em m is width of matrix A and \em k is height of matrix Y.
+	 */
+	static void SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMatrix& matrixX, double minHhNorm = I_BIG_EPSILON);
 };
 
 
