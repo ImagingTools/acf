@@ -68,6 +68,10 @@ protected:
 	*/
 	bool IsUpdateBlocked() const;
 
+	// reimplemented (imod::IModelEditor)
+	virtual void UpdateEditor(int updateFlags = 0);
+	virtual void UpdateModel() const;
+
 	// pseudo-reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiShown();
 	virtual void OnGuiHidden();
@@ -198,6 +202,20 @@ template <class Gui, class Observer>
 bool TGuiObserverWrap<Gui, Observer>::IsUpdateBlocked() const
 {
 	return (m_ignoreUpdatesCounter > 0);
+}
+
+
+// reimplemented (imod::IModelEditor)
+
+template <class Gui, class Observer>
+void TGuiObserverWrap<Gui, Observer>::UpdateEditor(int /*updateFlags*/)
+{
+}
+
+
+template <class Gui, class Observer>
+void TGuiObserverWrap<Gui, Observer>::UpdateModel() const
+{
 }
 
 

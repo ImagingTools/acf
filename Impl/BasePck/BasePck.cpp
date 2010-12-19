@@ -257,6 +257,11 @@ I_EXPORT_COMPONENT(
 			"Iterative Processor",
 			"Iterative Loop Sequence Processor" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processing"));
 
+I_EXPORT_COMPONENT(
+			Log,
+			"Data model of the logging component",
+			IM_TAG("Log"));
+
 
 } // namespace BasePck
 

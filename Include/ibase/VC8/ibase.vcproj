@@ -5,7 +5,6 @@
 	Name="ibase"
 	ProjectGUID="{C30159C1-C8F9-49F4-AE32-C014F87B12BD}"
 	RootNamespace="ibase"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -250,6 +249,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLogComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMessage.cpp"
 				>
 			</File>
@@ -344,6 +347,10 @@
 			</File>
 			<File
 				RelativePath="..\CInstantiatorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLogComp.h"
 				>
 			</File>
 			<File

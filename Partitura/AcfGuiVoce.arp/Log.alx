@@ -26,49 +26,38 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
-        FileDialogLoader
+        LogGui
       </ComponentName>
-      <X>
-        275
-      </X>
       <X>
         375
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        Log
-      </ComponentName>
       <X>
-        550
-      </X>
-      <X>
-        275
+        300
       </X>
     </Element>
     <Element>
       <ComponentName>
-        LogDock
+        LogModel
       </ComponentName>
       <X>
-        550
+        925
       </X>
       <X>
-        150
+        300
       </X>
     </Element>
     <Element>
       <ComponentName>
-        XmlFileSerializer
+        LogModelBinder
       </ComponentName>
       <X>
-        825
+        625
       </X>
       <X>
-        375
+        125
       </X>
     </Element>
   </PositionMap>

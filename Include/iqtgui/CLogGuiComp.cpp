@@ -80,12 +80,34 @@ void CLogGuiComp::UpdateItemState(QTreeWidgetItem& item) const
 }
 
 
+// reimplemented (iqtgui::TGuiObserverWrap)
+
+void CLogGuiComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	ibase::IMessageContainer* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		ibase::IMessageContainer::Messages messages = objectPtr->GetMessages();
+		for (		ibase::IMessageContainer::Messages::const_iterator iter = messages.begin();
+					iter != messages.end();
+					++iter){
+			const ibase::IMessageContainer::MessagePtr& messagePtr = *iter;
+			if (messagePtr.IsValid()){
+				QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
+				if (itemPtr != NULL){
+					OnAddMessage(itemPtr);
+				}
+			}
+		}
+	}
+}
+
+
 // reimplemented (CGuiComponentBase)
 
 void CLogGuiComp::OnGuiCreated()
 {
-	BaseClass::OnGuiCreated();
-
 	LogView->header()->setResizeMode(QHeaderView::ResizeToContents);
 	LogView->header()->setStretchLastSection(true);
 
@@ -154,54 +176,36 @@ void CLogGuiComp::OnGuiCreated()
 	m_warningIcon = QIcon(":/Icons/Warning.svg").pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
 	m_errorIcon = QIcon(":/Icons/Error.svg").pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
 
-	Messages messages = GetMessages();
-	for (		Messages::const_iterator iter = messages.begin();
-				iter != messages.end();
-				++iter){
-		const MessagePtr& messagePtr = *iter;
-		if (messagePtr.IsValid()){
-			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
-			if (itemPtr != NULL){
-				OnAddMessage(itemPtr);
+	BaseClass::OnGuiCreated();
+}
+
+
+// reimplemented (imod::IObserver)
+
+void CLogGuiComp::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	if (IsGuiCreated()){
+		if (updateFlags & ibase::IMessageContainer::CF_RESET){
+			Q_EMIT EmitReset();
+		}
+
+		if (updateFlags & ibase::IMessageContainer::CF_MESSAGE_REMOVED){
+			ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(updateParamsPtr);
+			if (messagePtr != NULL){
+				Q_EMIT EmitRemoveMessage(QVariant::fromValue((void*)messagePtr));
 			}
 		}
 	}
+
+	BaseClass::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
-// reimplemented (icomp::CComponentBase)
-
-void CLogGuiComp::OnComponentCreated()
+void CLogGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	if (m_maxMessageCountAttrPtr.IsValid()){
-		SetMaxMessageCount(m_maxMessageCountAttrPtr->GetValue());
-	}
-}
 
-
-// reimplemented (istd::IChangeable)
-
-void CLogGuiComp::OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
-{
-	if (changeFlags & ibase::IMessageContainer::Reset){
-		Q_EMIT EmitReset();
-	}
-
-	if (changeFlags & ibase::IMessageContainer::MessageRemoved){
-		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
-		if (messagePtr != NULL){
-			Q_EMIT EmitRemoveMessage(QVariant::fromValue((void*)messagePtr));
-		}
-	}
-
-	BaseClass2::OnBeginChanges(changeFlags, changeParamsPtr);	
-}
-
-
-void CLogGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
-{
-	if (((changeFlags & ibase::IMessageContainer::MessageAdded) != 0) && IsGuiCreated()){
-		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(changeParamsPtr);
+	if (((updateFlags & ibase::IMessageContainer::CF_MESSAGE_ADDED) != 0) && IsGuiCreated()){
+		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(updateParamsPtr);
 		if (messagePtr != NULL){
 			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
 			if (itemPtr != NULL){
@@ -210,7 +214,7 @@ void CLogGuiComp::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParams
 		}
 	}
 
-	BaseClass2::OnEndChanges(changeFlags, changeParamsPtr);
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
@@ -267,14 +271,18 @@ void CLogGuiComp::OnMessageModeChanged()
 
 void CLogGuiComp::OnClearAction()
 {
-	ClearMessages();
+	ibase::IMessageContainer* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		objectPtr->ClearMessages();
+	}
 }
 
 
 void CLogGuiComp::OnExportAction()
 {
-	if (m_fileLoaderCompPtr.IsValid()){
-		m_fileLoaderCompPtr->SaveToFile(*this);
+	ibase::IMessageContainer* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL && m_fileLoaderCompPtr.IsValid()){
+		m_fileLoaderCompPtr->SaveToFile(*objectPtr);
 	}
 }
 

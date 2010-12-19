@@ -4,13 +4,11 @@
 
 // ACF includes
 #include "ibase/IMessageContainer.h"
-#include "ibase/TMessageContainerWrap.h"
+#include "ibase/CMessage.h"
 
 #include "iser/IFileLoader.h"
 
-#include "ibase/CMessage.h"
-
-#include "iqtgui/TDesignerGuiCompBase.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/Generated/ui_CLogGuiComp.h"
 
 
@@ -22,20 +20,17 @@ namespace iqtgui
 	Message container displaying messages as log list.
 */
 class CLogGuiComp:
-			public iqtgui::TDesignerGuiCompBase<Ui::CLogGuiComp>,
-			public ibase::CMessageContainer
+	public iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CLogGuiComp, ibase::IMessageContainer>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiCompBase<Ui::CLogGuiComp> BaseClass;
-	typedef ibase::CMessageContainer BaseClass2;
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CLogGuiComp, ibase::IMessageContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CLogGuiComp);
-		I_REGISTER_INTERFACE(ibase::IMessageConsumer);
-		I_REGISTER_INTERFACE(ibase::IMessageContainer);
 		I_ASSIGN(m_fileLoaderCompPtr, "Exporter", "File loader used for log export", false, "Exporter");
-		I_ASSIGN(m_maxMessageCountAttrPtr, "MaxMessageCount", "Maximal number of messages", false, 1000);
 		I_ASSIGN(m_defaultModeAttrPtr, "DefaultMode", "Default display mode,\n 0 - info,\n 1 - warning,\n 2 - error", true, 0);
 	I_END_COMPONENT;
 
@@ -70,15 +65,15 @@ protected:
 	QTreeWidgetItem* CreateGuiItem(const ibase::IMessage& message);
 	void UpdateItemState(QTreeWidgetItem& item) const;
 
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void OnGuiModelAttached();
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
-	// reimplemented (icomp::CComponentBase)
-	virtual void OnComponentCreated();
-
-	// reimplemented (istd::IChangeable)
-	virtual void OnBeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
-	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
+	// reimplemented (imod::IObserver)
+	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected Q_SLOTS:
 	void OnAddMessage(QTreeWidgetItem* itemPtr);
@@ -96,7 +91,6 @@ Q_SIGNALS:
 
 private:
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
-	I_ATTR(int, m_maxMessageCountAttrPtr);
 	I_ATTR(int, m_defaultModeAttrPtr);
 
 	QIcon m_infoIcon;
