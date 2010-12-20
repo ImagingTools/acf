@@ -86,6 +86,7 @@ protected:
 	virtual int ProduceObject(Product& result) const = 0;
 
 	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
 private:
@@ -125,7 +126,11 @@ iprm::IParamsSet* TSupplierCompWrap<SupplierInterface, Product>::GetModelParamet
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::InvalidateSupplier()
 {
-	if ((m_workStatus != ISupplier::WS_INIT) && (m_workStatus != ISupplier::WS_LOCKED)){
+	if (m_workStatus == ISupplier::WS_LOCKED){
+		return;
+	}
+
+	if (m_workStatus != ISupplier::WS_INIT){
 		istd::CChangeNotifier notifier(this, ISupplier::CF_SUPPLIER_RESULTS);
 
 		m_workStatus = ISupplier::WS_LOCKED;
@@ -281,6 +286,15 @@ void TSupplierCompWrap<SupplierInterface, Product>::RemoveAllInputSuppliers()
 
 
 // reimplemented (icomp::CComponentBase)
+
+template <class SupplierInterface, class Product>
+void TSupplierCompWrap<SupplierInterface, Product>::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_workStatus = ISupplier::WS_NONE;
+}
+
 
 template <class SupplierInterface, class Product>
 void TSupplierCompWrap<SupplierInterface, Product>::OnComponentDestroyed()

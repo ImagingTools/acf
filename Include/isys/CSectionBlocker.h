@@ -2,6 +2,7 @@
 #define isys_CSectionBlocker_included
 
 
+#include "istd/istd.h"
 #include "isys/ICriticalSection.h"
 
 
