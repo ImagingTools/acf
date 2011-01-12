@@ -393,7 +393,7 @@ void CVarMatrix::GetColumnVector(int columnIndex, CVarVector& result)
 
 	istd::CIndex2d index(columnIndex, 0);
 
-	for (int i = 0; i < size[1]; ++index[1]){
+	for (; index[1] < size[1]; ++index[1]){
 		result[index[1]] = GetAt(index);
 	}
 }
@@ -465,7 +465,6 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 	I_ASSERT(accuracy > 0);
 
 	istd::CIndex2d size = matrixA.GetSizes();
-	I_ASSERT(size[0] == matrixX.GetSize(1));
 	I_ASSERT(size[1] == matrixY.GetSize(1));
 
 	int columnsCount = size[0];
@@ -503,14 +502,14 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 		if (maxNorm2 < accuracy){
 			break;
 		}
-		I_ASSERT(maxNormColumnIndex >= 0);
+		I_ASSERT(maxNormColumnIndex >= stepIndex);
 
-		int realColumnIndex = maxNormColumnIndex;
-
-		int prevIndex = realColumnIndices[stepIndex];	// switch columns in permutation table
-		I_ASSERT(prevIndex >= stepIndex);
-		realColumnIndices[stepIndex] = realColumnIndex;
-		realColumnIndices[realColumnIndex] = prevIndex;
+		int realColumnIndex = realColumnIndices[maxNormColumnIndex];
+		if (maxNormColumnIndex != stepIndex){
+			int prevIndex = realColumnIndices[stepIndex];	// switch columns in permutation table
+			realColumnIndices[stepIndex] = realColumnIndex;
+			realColumnIndices[maxNormColumnIndex] = prevIndex;
+		}
 
 		double element0 = matrixA[istd::CIndex2d(realColumnIndex, stepIndex)];
 
@@ -544,7 +543,7 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 			double norm2 = columnNorms2[matrixIndex[0]] - firstElement * firstElement;
 			if (norm2 >= maxNorm2){
 				maxNorm2 = norm2;
-				maxNormColumnIndex = matrixIndex[0];
+				maxNormColumnIndex = i;
 			}
 			columnNorms2[matrixIndex[0]] = norm2;
 		}
@@ -591,12 +590,14 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 		if (std::fabs(restNorm2) >= accuracy){
 			I_ASSERT(stepIndex > 0);	// restNorm is positive only if it was calculated -> there are non-zero elemens
 
+			double valueY = matrixY.GetAt(istd::CIndex2d(resultIndex[0], stepIndex - 1));
+
 			matrixIndex[1] = stepIndex - 1;
 			for (int i = stepIndex - 1; i < columnsCount; ++i){
 				matrixIndex[0] = realColumnIndices[i];
 				resultIndex[1] = matrixIndex[0];
 
-				matrixX.SetAt(resultIndex, matrixA.GetAt(resultIndex) / restNorm2);
+				matrixX.SetAt(resultIndex, valueY * matrixA.GetAt(matrixIndex) / restNorm2);
 			}
 		}
 		else{
@@ -616,10 +617,11 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 			double previousProduct = 0.0;
 			for (int columnIndex = size[0] - 1; columnIndex > i; columnIndex--){
 				int realColumnIndex = realColumnIndices[columnIndex];
-				previousProduct += matrixX.GetAt(istd::CIndex2d(resultIndex[0], realColumnIndex)) * matrixA.GetAt(istd::CIndex2d(realColumnIndex, resultIndex[1]));
+				previousProduct += matrixX.GetAt(istd::CIndex2d(resultIndex[0], realColumnIndex)) * matrixA.GetAt(istd::CIndex2d(realColumnIndex, i));
 			}
 
-			matrixX.SetAt(resultIndex, (matrixY.GetAt(resultIndex) - previousProduct) / diagonalElement);
+			double valueY = matrixY.GetAt(istd::CIndex2d(resultIndex[0], i));
+			matrixX.SetAt(resultIndex, (valueY - previousProduct) / diagonalElement);
 		}
 	}
 }
