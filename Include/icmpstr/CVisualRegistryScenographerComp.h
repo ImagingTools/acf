@@ -88,9 +88,7 @@ public:
 
 	// reimplemented (icmpstr::IElementSelectionInfo)
 	virtual icomp::IRegistry* GetSelectedRegistry() const;
-	virtual iser::ISerializable* GetSelectedElement() const;
-	virtual const std::string& GetSelectedElementName() const;
-	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const;
+	virtual Elements GetSelectedElements() const;
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -182,6 +180,7 @@ private:
 	QFont m_elementNameFont;
 	QFont m_elementDetailFont;
 
+	typedef std::set<std::string> ElementIds;
 	ElementIds m_selectedElementIds;
 
 	EnvironmentObserver m_environmentObserver;

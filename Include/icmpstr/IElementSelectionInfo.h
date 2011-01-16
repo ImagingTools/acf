@@ -35,7 +35,7 @@ public:
 		CF_SELECTION = 0x80000
 	};
 
-	typedef std::set<std::string> ElementIds;
+	typedef std::map<std::string, const icomp::IRegistry::ElementInfo*> Elements;
 
 	/**
 		Get registry containing selected element.
@@ -43,20 +43,11 @@ public:
 	*/
 	virtual icomp::IRegistry* GetSelectedRegistry() const = 0;
 	/**
-		Get selected element.
-		\return	pointer to selected element or NULL if no element is selected.
+		Get set of selected elements.
+		\return	map from element name to element information object.
+				This map doesn't include pointers to NULL element info.
 	*/
-	virtual iser::ISerializable* GetSelectedElement() const = 0;
-	/**
-		Get name of selected element.
-	*/
-	virtual const std::string& GetSelectedElementName() const = 0;
-	/**
-		Get address of selected element.
-		\return		pointer to address of selected element or NULL
-					if no element is selected or selected element doesn't support this functionality.
-	*/
-	virtual const icomp::CComponentAddress* GetSelectedElementAddress() const = 0;
+	virtual Elements GetSelectedElements() const = 0;
 };
 
 

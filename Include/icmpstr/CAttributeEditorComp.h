@@ -10,6 +10,7 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
+#include "istd/TOptDelPtr.h"
 #include "istd/CClassInfo.h"
 
 #include "imod/CSingleModelObserverBase.h"
@@ -36,7 +37,7 @@ namespace icmpstr
 
 class CAttributeEditorComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CAttributeEditorComp,IElementSelectionInfo>
+						Ui::CAttributeEditorComp, IElementSelectionInfo>
 {
     Q_OBJECT
 
@@ -83,17 +84,17 @@ public:
 	{
 		AttributeMining = Qt::UserRole + 1,
 		AttributeId,
-		AttributeType
+		AttributeValue,
+		AttributeType,
+		ElementId,
+		InterfaceName,
+		ExportId
 	};
 
 public:
 	CAttributeEditorComp();
 
 	icomp::IRegistry* GetRegistry() const;
-	icomp::IRegistryElement* GetRegistryElement() const;
-	const std::string& GetRegistryElementName() const;
-	icomp::CComponentAddress GetComponentAddress() const;
-	icomp::IRegistryElement::AttributeInfo* GetRegistryAttribute(const std::string& id) const;
 	const icomp::IAttributeStaticInfo* GetStaticAttributeInfo(const std::string& id) const;
 	QStringList GetExportAliases(const std::string& attributeName) const;
 
@@ -116,9 +117,9 @@ protected:
 
 	bool SetAttributeToItems(
 				const std::string& id,
+				const icomp::IRegistryElement& element,
 				const icomp::IAttributeStaticInfo& staticInfo,
 				QTreeWidgetItem& attributeItem,
-				QTreeWidgetItem& exportItem,
 				bool* hasExportPtr);
 	bool DecodeAttribute(
 				const iser::ISerializable& attribute,
@@ -155,7 +156,7 @@ private:
 
 	protected:
 		bool SetComponentExportEditor(const std::string& attributeId, QWidget& editor) const;
-		bool SetAttributeExportEditor(const std::string& id, QWidget& editor) const;
+		bool SetAttributeExportEditor(const std::string& id, const std::string& exportId, QWidget& editor) const;
 		bool SetAttributeValueEditor(const std::string& id, int propertyMining, QWidget& editor) const;
 
 		bool SetComponentExportData(const std::string& attributeId, const QWidget& editor) const;
@@ -203,6 +204,8 @@ private:
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 	I_REF(iqtgui::IGuiObject, m_registryPropGuiCompPtr);
 	I_REF(imod::IObserver, m_registryPropObserverCompPtr);
+
+	typedef std::map<icomp::CComponentAddress, istd::TOptDelPtr<const icomp::IComponentStaticInfo> > AddressToInfoMap;
 };
 
 
