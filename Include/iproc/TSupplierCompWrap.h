@@ -40,9 +40,15 @@ class TSupplierCompWrap:
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
+	enum MessageId
+	{
+		MI_DURATION_TIME = 077a1b
+	};
+
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 		I_REGISTER_INTERFACE(ISupplier);
 		I_REGISTER_INTERFACE(SupplierInterface);
+		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 	I_END_COMPONENT;
@@ -90,7 +96,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	I_ATTR(int, m_recentObjectListSizeAttrPtr);
+	I_ATTR(istd::CString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 
@@ -170,6 +176,10 @@ void TSupplierCompWrap<SupplierInterface, Product>::EnsureWorkFinished()
 
 		if (timerPtr != NULL){
 			m_durationTime = timerPtr->GetElapsed() - beforeTime;
+
+			if (m_diagnosticNameAttrPtr.IsValid() && !m_diagnosticNameAttrPtr->m_value.empty){
+				SendInfoMessage(MI_DURATION_TIME, *m_diagnosticNameAttrPtr + ": Calculation time " + istd::CString::FromNumber(m_durationTime * 1000) + " ms.";
+			}
 		}
 	}
 }
