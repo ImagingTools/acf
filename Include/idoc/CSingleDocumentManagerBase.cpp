@@ -170,6 +170,7 @@ bool CSingleDocumentManagerBase::FileOpen(
 
 
 bool CSingleDocumentManagerBase::FileSave(
+			int /*documentIndex*/,
 			bool requestFileName,
 			FileToTypeMap* savedMapPtr)
 {

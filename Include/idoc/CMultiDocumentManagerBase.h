@@ -47,9 +47,10 @@ public:
 				const std::string& viewTypeId = "",
 				FileToTypeMap* loadedMapPtr = NULL);
 	virtual bool FileSave(
+				int documentIndex = -1,
 				bool requestFileName = false,
 				FileToTypeMap* savedMapPtr = NULL);
-	virtual void FileClose(bool* ignoredPtr = NULL);
+	virtual void FileClose(int documentIndex = -1, bool* ignoredPtr = NULL);
 
 protected:
 	typedef istd::TDelPtr<istd::IChangeable> DocumentPtr;

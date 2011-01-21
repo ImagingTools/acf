@@ -26,7 +26,7 @@ public:
 
 	// pseudo-reimplemented (idoc::IDocumentManager)
 	virtual int GetAllowedOperationFlags(const istd::IPolymorphic* viewPtr = NULL) const;
-	virtual void FilePrint() const;
+	virtual void FilePrint(int documentIndex = -1) const;
 };
 
 
@@ -51,9 +51,20 @@ int TQtDocumentManagerWrap<Base>::GetAllowedOperationFlags(const istd::IPolymorp
 
 
 template <typename Base>
-void TQtDocumentManagerWrap<Base>::FilePrint() const
+void TQtDocumentManagerWrap<Base>::FilePrint(int documentIndex) const
 {
-	istd::IPolymorphic* activeViewPtr = GetActiveView();
+	istd::IPolymorphic* activeViewPtr = NULL;
+	if (documentIndex >= 0){
+		I_ASSERT(documentIndex < GetDocumentsCount());
+
+		if (GetViewsCount(documentIndex) > 0){
+			activeViewPtr = GetViewFromIndex(documentIndex, 0);
+		}
+	}
+	else{
+		activeViewPtr = GetActiveView();
+	}
+
 	if (activeViewPtr != NULL){
 		iqtdoc::IPrintable* printablePtr = dynamic_cast<iqtdoc::IPrintable*>(activeViewPtr);
 		if (printablePtr != NULL){

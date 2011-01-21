@@ -147,21 +147,26 @@ public:
 
 	/**
 		Save active document. 
+		\param	documentIndex	optional index of document to save.
+		\param	requestFileName	if true, file name will be always requested by user.
 	*/
 	virtual bool FileSave(
+				int documentIndex = -1,
 				bool requestFileName = false,
 				FileToTypeMap* savedMapPtr = NULL) = 0;
 
 	/**
 		Close current view.
-		\param	ignoredPtr	optional return flag indicating that closing was aborted by user.
+		\param	documentIndex	optional index of document to save.
+		\param	ignoredPtr		optional return flag indicating that closing was aborted by user.
 	*/
-	virtual void FileClose(bool* ignoredPtr = NULL) = 0;
+	virtual void FileClose(int documentIndex = -1, bool* ignoredPtr = NULL) = 0;
 
 	/**
 		Print current document.
+		\param	documentIndex	optional index of document to save.
 	*/
-	virtual void FilePrint() const = 0;
+	virtual void FilePrint(int documentIndex = -1) const = 0;
 };
 
 
