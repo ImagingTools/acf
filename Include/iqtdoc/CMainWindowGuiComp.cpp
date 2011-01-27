@@ -777,7 +777,7 @@ void CMainWindowGuiComp::OnSaveAs()
 	if (m_documentManagerCompPtr.IsValid()){
 		idoc::IDocumentManager::FileToTypeMap fileMap;
 
-		if (m_documentManagerCompPtr->FileSave(true)){
+		if (m_documentManagerCompPtr->FileSave(-1, true)){
 			UpdateRecentFileList(fileMap);
 		}
 		else{
