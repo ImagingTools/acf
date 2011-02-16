@@ -437,8 +437,6 @@ void CAttributeEditorComp::UpdateSelectedAttr()
 
 	QIcon icon;
 	if (infoMap.size() == 1){
-		I_ASSERT(infoMap.begin()->second.IsValid());
-
 		infoPtr = infoMap.begin()->second.GetPtr();
 	}
 
