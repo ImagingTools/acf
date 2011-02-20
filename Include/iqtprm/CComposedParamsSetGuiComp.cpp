@@ -9,6 +9,7 @@
 #include <QTabWidget>
 #include <QGroupBox>
 
+#include "istd/CChangeDelegator.h"
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 
@@ -50,19 +51,21 @@ void CComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 {
 	I_ASSERT(IsGuiCreated());
 
-	int editorsCount = m_editorsCompPtr.GetCount();
-	for (int i = 0; i < editorsCount; ++i){
-		iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
-		if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
-			continue;
-		}
+	if ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) == 0){
+		int editorsCount = m_editorsCompPtr.GetCount();
+		for (int i = 0; i < editorsCount; ++i){
+			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
+			if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
+				continue;
+			}
 
-		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-		if (editorPtr == NULL){
-			continue;
-		}
+			imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
+			if (editorPtr == NULL){
+				continue;
+			}
 
-		editorPtr->UpdateEditor(updateFlags);
+			editorPtr->UpdateEditor(updateFlags);
+		}
 	}
 }
 
