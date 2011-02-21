@@ -430,6 +430,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TSceneExtenderDelgatorCompWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TScenographerCompBase.h"
 				>
 			</File>

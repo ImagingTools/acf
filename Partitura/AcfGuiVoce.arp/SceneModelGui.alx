@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1672
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          301
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        ModelEditorGui
+      </ComponentName>
+      <X>
+        475
+      </X>
+      <X>
+        375
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        SceneExtenderDelgator
+      </ComponentName>
+      <X>
+        750
+      </X>
+      <X>
+        375
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>

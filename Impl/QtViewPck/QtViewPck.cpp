@@ -29,6 +29,12 @@ I_EXPORT_PACKAGE(
 			"Viewport package",
 			IM_PROJECT("ACF") IM_TAG("Qt Viewport") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
+
+I_EXPORT_COMPONENT(
+			SceneExtenderDelgator,
+			"Delegate a scene extender",
+			"Scene Connector Provider Extender Display Console" IM_TAG("GUI"));
+
 I_EXPORT_COMPONENT(
 			SceneConnector,
 			"Display scene provider, scene extender and connect it",
