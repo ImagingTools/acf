@@ -184,7 +184,7 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::IsOperationSupported(
 			int extensionsCount = fileExtensions.size();
 			for (int i = 0; i < extensionsCount; ++i){
 				const istd::CString& extension = fileExtensions[i];
-				if (filePathPtr->substr(filePathPtr->length() - extension.length() - 1) == istd::CString(".") + extension.ToLower()){
+				if (!filePathPtr->IsEmpty() && filePathPtr->substr(filePathPtr->length() - extension.length() - 1) == istd::CString(".") + extension.ToLower()){
 					return true;
 				}
 			}

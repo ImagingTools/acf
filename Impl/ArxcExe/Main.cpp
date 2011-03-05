@@ -1,16 +1,21 @@
 // STL includes
 #include <iostream>
 
+
 // Qt includes
 #include <QMessageBox>
 #include <QApplication>
 #include <QCoreApplication>
 #include <QDir>
 
+
 // ACF includes
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
 #include "icomp/TModelCompWrap.h"
+
+#include "iqt/CDefaultServicesProvider.h"
+
 
 // ACF packages includes
 #include "QtPck/QtPck.h"
@@ -18,9 +23,21 @@
 #include "CmpstrPck/CmpstrPck.h"
 
 
+static void ShowUsage()
+{
+	std::cout << "Usage";
+	std::cout << "\tArxc.exe [registryName] {options}      - convertion registry to C++ code" << std::endl;
+	std::cout << "\t-h or -help              - showing this help" << std::endl;
+	std::cout << "\t-o outputFile            - output file path" << std::endl;
+	std::cout << "\t-config configFile       - specify ACF packages configuration file" << std::endl;
+}
+
+
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
+
+	iqt::CDefaultServicesProvider::RegisterServices();
 
 	istd::CString configFile;
 
@@ -30,11 +47,7 @@ int main(int argc, char *argv[])
 			std::string option = argument.substr(1);
 
 			if ((option == "h") || (option == "help")){
-				std::cout << "Usage";
-				std::cout << "\tArxc.exe [registryName] {options}      - convertion registry to C++ code" << std::endl;
-				std::cout << "\t-h or -help              - showing this help" << std::endl;
-				std::cout << "\t-o outputFile            - output file path" << std::endl;
-				std::cout << "\t-config configFile       - specify ACF packages configuration file" << std::endl;
+				ShowUsage();
 
 				return 0;
 			}
