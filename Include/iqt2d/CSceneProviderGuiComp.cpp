@@ -452,6 +452,17 @@ void CSceneProviderGuiComp::DelegateDropEvent(const QMimeData& mimeData, QGraphi
 }
 
 
+void CSceneProviderGuiComp::ResetScene()
+{
+	QList<QGraphicsItem*> sceneItems = m_scenePtr->items();
+	foreach(QGraphicsItem* itemPtr, sceneItems){
+		m_scenePtr->removeItem(itemPtr);
+	}
+	
+	m_scenePtr.Reset();
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 void CSceneProviderGuiComp::OnGuiCreated()
@@ -574,7 +585,7 @@ void CSceneProviderGuiComp::OnComponentCreated()
 
 void CSceneProviderGuiComp::OnComponentDestroyed()
 {
-	m_scenePtr.Reset();
+	ResetScene();
 
 	BaseClass::OnComponentDestroyed();
 }

@@ -164,6 +164,7 @@ protected:
 
 	bool HasDropConsumerForFormat(const QStringList& formats) const;
 	void DelegateDropEvent(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
+	void ResetScene();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
