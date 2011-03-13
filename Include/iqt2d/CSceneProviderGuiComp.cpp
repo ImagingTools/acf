@@ -26,26 +26,6 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 	m_savedParentWidgetPtr(NULL),
 	m_isotropyFactor(0)
 {
-	m_scenePtr = new CScene(this);
-
-	m_scenePtr->setFocus();
-
-	m_autoFitToViewCommand.SetStaticFlags(
-				iqtgui::CHierarchicalCommand::CF_ONOFF | 
-				iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
-	connect(&m_autoFitToViewCommand, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
-	m_viewCommand.InsertChild(&m_autoFitToViewCommand);
-
-	connect(&m_fitToViewCommand, SIGNAL( activated()), this, SLOT(OnFitToView()));
-	m_viewCommand.InsertChild(&m_fitToViewCommand);
-
-	connect(&m_fitToImageCommand, SIGNAL( activated()), this, SLOT(OnFitToShapes()));
-	m_viewCommand.InsertChild(&m_fitToImageCommand);
-
-	connect(&m_resetZoomCommand, SIGNAL( activated()), this, SLOT(OnResetScale()));
-	m_viewCommand.InsertChild(&m_resetZoomCommand);
-
-	m_commands.InsertChild(&m_viewCommand);
 }
 
 
@@ -71,7 +51,7 @@ void CSceneProviderGuiComp::SetIsotropyFactor(double factor)
 
 void CSceneProviderGuiComp::Print(QPrinter* printerPtr) const
 {
-	if (m_scenePtr == NULL){
+	if (!m_scenePtr.IsValid()){
 		return;
 	}
 
@@ -111,7 +91,7 @@ int CSceneProviderGuiComp::GetSceneId() const
 
 QGraphicsScene* CSceneProviderGuiComp::GetScene() const
 {
-	return m_scenePtr;
+	return m_scenePtr.GetPtr();
 }
 
 
@@ -122,9 +102,8 @@ bool CSceneProviderGuiComp::GetSceneAlignment(double& distance) const
 
 		return true;
 	}
-	else{
-		return false;
-	}
+
+	return false;
 }
 
 
@@ -483,7 +462,27 @@ void CSceneProviderGuiComp::OnGuiCreated()
 		SceneView->setAcceptDrops(true);
 	}
 
-	SceneView->setScene(m_scenePtr);
+	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
+	m_fitToImageCommand.setVisible(*m_allowWidgetResizeAttrPtr);
+
+	m_autoFitToViewCommand.SetStaticFlags(
+				iqtgui::CHierarchicalCommand::CF_ONOFF | 
+				iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
+	connect(&m_autoFitToViewCommand, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
+	m_viewCommand.InsertChild(&m_autoFitToViewCommand);
+
+	connect(&m_fitToViewCommand, SIGNAL( activated()), this, SLOT(OnFitToView()));
+	m_viewCommand.InsertChild(&m_fitToViewCommand);
+
+	connect(&m_fitToImageCommand, SIGNAL( activated()), this, SLOT(OnFitToShapes()));
+	m_viewCommand.InsertChild(&m_fitToImageCommand);
+
+	connect(&m_resetZoomCommand, SIGNAL( activated()), this, SLOT(OnResetScale()));
+	m_viewCommand.InsertChild(&m_resetZoomCommand);
+
+	m_commands.InsertChild(&m_viewCommand);
+
+	SceneView->setScene(m_scenePtr.GetPtr());
 	SceneView->setMouseTracking(true);
 	SceneView->setDragMode(QGraphicsView::ScrollHandDrag);
 	
@@ -564,12 +563,20 @@ void CSceneProviderGuiComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	m_scenePtr.SetPtr(new CScene(this));
+	m_scenePtr->setFocus();
+
 	if (m_sceneWidthAttrPtr.IsValid() && m_sceneHeightAttrPtr.IsValid()){
 		m_scenePtr->setSceneRect(0, 0, *m_sceneWidthAttrPtr, *m_sceneHeightAttrPtr);
 	}
+}
 
-	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
-	m_fitToImageCommand.setVisible(*m_allowWidgetResizeAttrPtr);
+
+void CSceneProviderGuiComp::OnComponentDestroyed()
+{
+	m_scenePtr.Reset();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 
@@ -577,7 +584,7 @@ void CSceneProviderGuiComp::OnComponentCreated()
 
 bool CSceneProviderGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	if ((sourcePtr != SceneView) && (sourcePtr != m_scenePtr)){
+	if ((sourcePtr != SceneView) && (sourcePtr != m_scenePtr.GetPtr())){
 		return BaseClass::eventFilter(sourcePtr, eventPtr);
 	}
 
@@ -609,8 +616,7 @@ bool CSceneProviderGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 // public methods of embedded class CScene
 
 CSceneProviderGuiComp::CScene::CScene(CSceneProviderGuiComp* parentPtr)
-:	m_parent(*parentPtr),
-	BaseClass(parentPtr->GetWidget())
+:	m_parent(*parentPtr)
 {
 	I_ASSERT(parentPtr != NULL);
 }
@@ -684,20 +690,24 @@ void CSceneProviderGuiComp::CScene::DrawGrid(QPainter& painter, const QRectF& re
 
 void CSceneProviderGuiComp::CScene::drawBackground(QPainter* painter, const QRectF& rect)
 {
-	switch (*m_parent.m_backgroundModeAttrPtr){
-		case BM_GRID:
-			DrawGrid(*painter, rect, false);
-			break;
+	if (m_parent.IsGuiCreated() && m_parent.m_backgroundModeAttrPtr.IsValid()){
+		switch (*m_parent.m_backgroundModeAttrPtr){
+			case BM_GRID:
+				DrawGrid(*painter, rect, false);
+				break;
 
-		case BM_DOT_GRID:
-			DrawGrid(*painter, rect, true);
-			break;
+			case BM_DOT_GRID:
+				DrawGrid(*painter, rect, true);
+				break;
 
-		default:
-			QGraphicsScene::drawBackground(painter, rect);
+			default:
+				QGraphicsScene::drawBackground(painter, rect);
+		}
+	}
+	else{
+		QGraphicsScene::drawBackground(painter, rect);
 	}
 }
-
 
 
 void CSceneProviderGuiComp::CScene::dragEnterEvent(QGraphicsSceneDragDropEvent* eventPtr)

@@ -171,6 +171,7 @@ protected:
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
@@ -179,7 +180,7 @@ signals:
 	void zoomChanged(double);
 
 private:
-	QGraphicsScene* m_scenePtr;
+	istd::TDelPtr<QGraphicsScene> m_scenePtr;
 	
 	FitMode m_fitMode;
 
