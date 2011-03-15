@@ -237,7 +237,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFilePersistenceComp.cpp"
+				RelativePath="..\CAutoPersistenceComp.cpp"
 				>
 			</File>
 			<File
@@ -338,7 +338,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFilePersistenceComp.h"
+				RelativePath="..\CAutoPersistenceComp.h"
 				>
 			</File>
 			<File

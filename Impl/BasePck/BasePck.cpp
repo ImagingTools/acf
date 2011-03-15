@@ -73,7 +73,7 @@ I_EXPORT_COMPONENT(
 			"Observer Bind Composition Connection" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition"));
 
 I_EXPORT_COMPONENT(
-			FilePersistence,
+			AutoPersistence,
 			"Allows object persistence using files",
 			"Free Create Store Restore Load Save" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Persistence File"));
 

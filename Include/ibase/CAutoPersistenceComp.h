@@ -1,5 +1,5 @@
-#ifndef ibase_CFilePersistenceComp_included
-#define ibase_CFilePersistenceComp_included
+#ifndef ibase_CAutoPersistenceComp_included
+#define ibase_CAutoPersistenceComp_included
 
 
 #include "istd/IChangeable.h"
@@ -17,12 +17,12 @@ namespace ibase
 	Allow automatic object persistence.
 	Referenced object will be restored during creation and stored during destruction.
 */
-class CFilePersistenceComp: public icomp::CComponentBase
+class CAutoPersistenceComp: public icomp::CComponentBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CFilePersistenceComp);
+	I_BEGIN_COMPONENT(CAutoPersistenceComp);
 		I_ASSIGN(m_objectCompPtr, "Object", "Object will be restored and stored", true, "Object");
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "File loader used to store and restore object", true, "FileLoader");
 		I_ASSIGN(m_filePathAttrPtr, "FilePath", "File path where object data will be stored", true, "");
@@ -47,6 +47,6 @@ private:
 } // namespace ibase
 
 
-#endif // !ibase_CFilePersistenceComp_included
+#endif // !ibase_CAutoPersistenceComp_included
 
 

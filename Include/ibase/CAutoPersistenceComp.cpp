@@ -1,4 +1,4 @@
-#include "ibase/CFilePersistenceComp.h"
+#include "ibase/CAutoPersistenceComp.h"
 
 
 namespace ibase
@@ -9,7 +9,7 @@ namespace ibase
 
 // reimplemented (icomp::CComponentBase)
 
-void CFilePersistenceComp::OnComponentCreated()
+void CAutoPersistenceComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -21,7 +21,7 @@ void CFilePersistenceComp::OnComponentCreated()
 }
 
 
-void CFilePersistenceComp::OnComponentDestroyed()
+void CAutoPersistenceComp::OnComponentDestroyed()
 {
 	if (*m_storeOnEndAttrPtr){
 		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){

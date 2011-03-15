@@ -71,13 +71,13 @@
     </Element>
     <Element>
       <Id>
-        FilePersistence
+        AutoPersistence
       </Id>
       <PackageId>
         BasePck
       </PackageId>
       <ComponentId>
-        FilePersistence
+        AutoPersistence
       </ComponentId>
       <Data>
         <IsEnabled>
