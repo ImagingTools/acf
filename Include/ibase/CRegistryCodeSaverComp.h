@@ -70,14 +70,19 @@ protected:
 				const std::string& className,
 				const Addresses& addresses,
 				std::ofstream& stream) const;
-	bool WriteRegistryInfo(
+	bool WriteClassDefinisions(
 				const std::string& className,
 				const icomp::IRegistry& registry,
 				const Addresses& composedAddresses,
 				const Addresses& realAddresses,
 				std::ofstream& stream) const;
+	bool WriteRegistryInfo(
+				const icomp::IRegistry& registry,
+				const std::string& registryCallPrefix,
+				std::ofstream& stream) const;
 	bool WriteComponentInfo(
 				const icomp::IRegistry& registry,
+				const std::string& registryCallPrefix,
 				const std::string& componentId,
 				const icomp::IRegistry::ElementInfo& componentInfo,
 				std::ofstream& stream) const;
