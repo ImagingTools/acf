@@ -9,10 +9,6 @@ CONFIG(release, debug|release) {
 	DESTDIR = ../../../Lib/ReleaseQMake
 }
 
-
-QT += 
-
-
 INCLUDEPATH += ../../ 
 
 HEADERS += ../*.h

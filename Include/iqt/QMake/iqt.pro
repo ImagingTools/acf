@@ -1,6 +1,7 @@
 TARGET = iqt
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += create_prl
 
 CONFIG(debug, debug|release) {
 	DESTDIR = ../../../Lib/DebugQMake

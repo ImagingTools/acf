@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
+CONFIG += ordered
 
-SUBDIRS += ../AcfQt/QMake/AcfQt.pro
 SUBDIRS += ../AcfStd/QMake/AcfStd.pro
+SUBDIRS += ../AcfQt/QMake/AcfQt.pro

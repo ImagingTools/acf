@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
+CONFIG += ordered
 
-SUBDIRS += Component.pro
-SUBDIRS += Library.pro
 SUBDIRS += Static.pro
+SUBDIRS += Library.pro
+SUBDIRS += Component.pro
 SUBDIRS += Tool.pro
