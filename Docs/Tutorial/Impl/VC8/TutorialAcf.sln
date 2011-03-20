@@ -1,11 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompSimu.exe", "..\CompSimu\VC8\CompSimu.vcproj", "{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DocView", "..\DocView\VC8\DocView.vcproj", "{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
@@ -30,28 +24,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TutorialPck", "..\TutorialP
 		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED} = {0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogSimu.exe", "..\LogSimu\VC8\LogSimu.vcproj", "{6CBBCDC1-18C1-4EA4-B37E-C18E0718CE49}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageViewSimu.exe", "..\ImageViewSimu\VC8\ImageViewSimu.vcproj", "{0A83CB79-5835-4EE6-9545-317EA6493E72}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Debug|Win32.Build.0 = Debug|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Release|Win32.ActiveCfg = Release|Win32
-		{DEFDB415-CBC9-48A0-A227-CD7B4B4CE610}.Release|Win32.Build.0 = Release|Win32
 		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Debug|Win32.ActiveCfg = Debug|Win32
 		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Debug|Win32.Build.0 = Debug|Win32
 		{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}.Release|Win32.ActiveCfg = Release|Win32
@@ -64,14 +42,6 @@ Global
 		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Debug|Win32.Build.0 = Debug|Win32
 		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Release|Win32.ActiveCfg = Release|Win32
 		{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}.Release|Win32.Build.0 = Release|Win32
-		{6CBBCDC1-18C1-4EA4-B37E-C18E0718CE49}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6CBBCDC1-18C1-4EA4-B37E-C18E0718CE49}.Debug|Win32.Build.0 = Debug|Win32
-		{6CBBCDC1-18C1-4EA4-B37E-C18E0718CE49}.Release|Win32.ActiveCfg = Release|Win32
-		{6CBBCDC1-18C1-4EA4-B37E-C18E0718CE49}.Release|Win32.Build.0 = Release|Win32
-		{0A83CB79-5835-4EE6-9545-317EA6493E72}.Debug|Win32.ActiveCfg = Debug|Win32
-		{0A83CB79-5835-4EE6-9545-317EA6493E72}.Debug|Win32.Build.0 = Debug|Win32
-		{0A83CB79-5835-4EE6-9545-317EA6493E72}.Release|Win32.ActiveCfg = Release|Win32
-		{0A83CB79-5835-4EE6-9545-317EA6493E72}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
