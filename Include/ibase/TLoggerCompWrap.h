@@ -32,7 +32,7 @@ public:
 protected:
 	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
-                                istd::ILogger::MessageCategory category,
+				istd::ILogger::MessageCategory category,
 				int id,
 				int flags,
 				istd::CString& message,
@@ -52,7 +52,7 @@ private:
 
 template <class Base>
 void TLoggerCompWrap<Base>::DecorateMessage(
-                        istd::ILogger::MessageCategory category,
+			istd::ILogger::MessageCategory category,
 			int id,
 			int flags,
 			istd::CString& message,

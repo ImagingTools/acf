@@ -83,34 +83,34 @@ bool CRegistry::RemoveElementInfo(const std::string& elementId)
 	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_REMOVED | CF_MODEL);
 
 	// remove interfaces exported by this component:
-        bool isDone = false;
-        while(!isDone){
-                isDone = true;      
-                for (		ExportedInterfacesMap::iterator iter = m_exportedInterfacesMap.begin();
-                                        iter != m_exportedInterfacesMap.end();){
-                        if (iter->second == elementId){                         
-                                m_exportedInterfacesMap.erase(iter);
-                                isDone = false;
-                                break;
-                        }
-                        iter++;
-                }
-        }
+	bool isDone = false;
+	while(!isDone){
+		isDone = true;      
+		for (		ExportedInterfacesMap::iterator iter = m_exportedInterfacesMap.begin();
+					iter != m_exportedInterfacesMap.end();){
+			if (iter->second == elementId){                         
+				m_exportedInterfacesMap.erase(iter);
+				isDone = false;
+				break;
+			}
+			iter++;
+		}
+	}
 
-       isDone = false;
-        while(!isDone){
-                isDone = true;      
-                for (		ExportedComponentsMap::iterator iter = m_exportedComponentsMap.begin();
-                                        iter != m_exportedComponentsMap.end();){
-                        if (iter->second == elementId){
-                                m_exportedComponentsMap.erase(iter);
-                                isDone = false;
-                                break;
-                        }
+	isDone = false;
+	while(!isDone){
+		isDone = true;      
+		for (		ExportedComponentsMap::iterator iter = m_exportedComponentsMap.begin();
+					iter != m_exportedComponentsMap.end();){
+			if (iter->second == elementId){
+				m_exportedComponentsMap.erase(iter);
+				isDone = false;
+				break;
+			}
 
-                        ++iter;
-                }
-        }                        
+			++iter;
+		}
+	}                        
 
 	if (m_componentsMap.erase(elementId) <= 0){
 		return false;

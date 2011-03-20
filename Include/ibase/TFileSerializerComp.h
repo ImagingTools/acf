@@ -55,7 +55,7 @@ protected:
 	class ReadArchiveEx: public ReadArchive
 	{
 	public:
-                typedef ReadArchive BaseClass;
+		typedef ReadArchive BaseClass;
                 
 		ReadArchiveEx(const istd::CString& filePath, const TFileSerializerComp* loggerPtr)
 		:	ReadArchive(filePath),
@@ -94,7 +94,7 @@ protected:
 	class WriteArchiveEx: public WriteArchive
 	{
 	public:
-                typedef WriteArchive BaseClass;
+		typedef WriteArchive BaseClass;
                 
 		WriteArchiveEx(const istd::CString& filePath, const iser::IVersionInfo* infoPtr, const TFileSerializerComp* loggerPtr)
 		:	WriteArchive(filePath, infoPtr),

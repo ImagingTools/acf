@@ -21,7 +21,7 @@ class TSmartPtr: public TTransPtr<Type>
 {
 public:
 	typedef TTransPtr<Type> BaseClass;
-        typedef typename BaseClass::RefCountBase RefCountBase;
+	typedef typename BaseClass::RefCountBase RefCountBase;
 
 	TSmartPtr();
 	TSmartPtr(Type* pointer);

@@ -26,7 +26,7 @@ class TComposedColor: public imath::TVector<Size>, virtual public iser::ISeriali
 {
 public:
 	typedef imath::TVector<Size> BaseClass;
-        typedef typename BaseClass::Elements Elements;
+	typedef typename BaseClass::Elements Elements;
 
 	TComposedColor();
 	TComposedColor(const BaseClass& value);

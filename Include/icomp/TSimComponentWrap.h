@@ -22,8 +22,6 @@ class TSimComponentWrap: public TComponentWrap<Base>, public CSimComponentContex
 public:
 	typedef TComponentWrap<Base> BaseClass;
 	typedef CSimComponentContextBase BaseClass2;
-        
-        using BaseClass::GetComponentStaticInfo;
 
 	TSimComponentWrap();
 
@@ -43,7 +41,8 @@ public:
 
 template <class Base>
 TSimComponentWrap<Base>::TSimComponentWrap()
-:	BaseClass(), BaseClass2(&GetComponentStaticInfo())
+:	BaseClass(),
+	BaseClass2(&BaseClass::GetComponentStaticInfo())
 {
 }
 

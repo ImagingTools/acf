@@ -27,8 +27,7 @@ public:
 	typedef imath::TIMathFunction<
 				istd::TIndex<ArgumentDimensions>, 
 				imath::TVector<ResultDimensions> > BaseClass;
-        
-        typedef typename BaseClass::ArgumentType ArgumentType;
+	typedef typename BaseClass::ArgumentType ArgumentType;
 
 	/**
 		Create function from input data.
