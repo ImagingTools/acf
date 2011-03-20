@@ -1,6 +1,10 @@
 #include "iser/CBitMemoryReadArchive.h"
 
 
+// STD includes
+#include <cstring>
+
+
 namespace iser
 {
 
@@ -75,8 +79,8 @@ bool CBitMemoryReadArchive::ProcessBits(void* dataPtr, int bitsCount, int bytesC
 	}
 
 	I_DWORD retVal = ReadValue(bitsCount);
-
-	memcpy(dataPtr, &retVal, bytesCount);
+	
+	::memcpy(dataPtr, &retVal, bytesCount);
 
 	return true;
 }

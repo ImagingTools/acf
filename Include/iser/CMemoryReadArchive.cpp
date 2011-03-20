@@ -1,6 +1,11 @@
 #include "iser/CMemoryReadArchive.h"
 
 
+// STD includes
+#include <cstring>
+
+
+// ACF includes
 #include "istd/CString.h"
 
 #include "iser/ISerializable.h"

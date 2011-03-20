@@ -1,5 +1,11 @@
 #include "imath/CSampledFunction2d.h"
 
+
+// STD includes
+#include <cstring>
+
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 
@@ -36,7 +42,7 @@ void CSampledFunction2d::Create(int width, int height, double defaultValue)
 			for (		SamplesContainer::Iterator index = m_samplesContainer.Begin();
 						index != m_samplesContainer.End();
 						index++){
-					*index = defaultValue;
+				*index = defaultValue;
 			}
 		}
 	}

@@ -1,6 +1,9 @@
 #include "isys/CSystemEnvironmentBase.h"
 
 
+#include <cstdlib>
+
+
 namespace isys
 {
 

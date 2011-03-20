@@ -43,13 +43,17 @@ void CTextFileLogComp::OnComponentCreated()
 	I_ASSERT(m_fileNameCompPtr.IsValid());
 
 	if (m_fileNameCompPtr.IsValid()){
-		std::ios::openmode  fileMode = std::wofstream::out | std::wofstream::app;
+		std::ios::openmode fileMode = std::wofstream::out | std::wofstream::app;
 
 		if (m_isAppendAttrPtr.IsValid() && !*m_isAppendAttrPtr){
 			fileMode = std::wofstream::out;
 		}
 
+#ifdef _MSC_VER
 		m_outputFileStream.open(m_fileNameCompPtr->GetPath().c_str(), fileMode);
+#else
+		m_outputFileStream.open(m_fileNameCompPtr->GetPath().ToString().c_str(), fileMode);
+#endif
 	}
 }
 

@@ -34,7 +34,7 @@ public:
 		I_ASSIGN(m_showTimePositionAttrPtr, "ShowTimePosition", "Shows and allows edit current time position", true, false);
 		I_ASSIGN(m_showFrameIndexAttrPtr, "ShowFrameIndex", "Shows and allows edit current frame index", true, false);
 		I_ASSIGN(m_showRepeatButtonAttrPtr, "ShowRepeatButton", "Allow to display play button", true, true);
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateEditor(int updateFlags = 0);

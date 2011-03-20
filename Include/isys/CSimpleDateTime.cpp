@@ -99,7 +99,7 @@ bool CSimpleDateTime::SetCurrentTime()
 #else
 	time_t t;
 	time(&t);
-	std::tm currentTime = *localtime(&t);
+	tm currentTime = *localtime(&t);
 #endif
 
 	m_components[TC_YEAR] = currentTime.tm_year + 1900;
@@ -116,7 +116,7 @@ bool CSimpleDateTime::SetCurrentTime()
 
 double CSimpleDateTime::ToCTime() const
 {
-	std::tm tmTime = {0};
+	tm tmTime = {0};
 
 	tmTime.tm_year = m_components[TC_YEAR] - 1900;
 	tmTime.tm_mon = m_components[TC_MONTH] - 1;
@@ -137,7 +137,7 @@ void CSimpleDateTime::FromCTime(double ctime)
 {
 	time_t time = (time_t)ctime;
 
-	std::tm* timePtr = localtime(&time);;
+	tm* timePtr = localtime(&time);;
 	if (timePtr != NULL){
 		m_components[TC_YEAR] = timePtr->tm_year + 1900;
 		m_components[TC_MONTH] = timePtr->tm_mon + 1;

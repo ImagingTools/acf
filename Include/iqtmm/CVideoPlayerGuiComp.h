@@ -35,7 +35,7 @@ public:
 		I_ASSIGN(m_controllerBarGuiCompPtr, "ControllerBarGui", "Displayed on the bottom used typically to controll of playback", false, "ControllerBarGui");
 		I_ASSIGN(m_urlParamCompPtr, "UrlParams", "Parameter storing media URL or file or directory", true, "UrlParams");
 		I_ASSIGN(m_urlParamModelCompPtr, "UrlParams", "Parameter storing media URL or file or directory", true, "UrlParams");
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();

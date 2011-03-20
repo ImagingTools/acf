@@ -46,7 +46,7 @@ public:
 		I_ASSIGN(m_framesPerSecondAttrPtr, "FramesPerSecond", "Default number of frames per second if this info is unavailable from video", true, 25.0);
 		I_ASSIGN(m_frameLoaderCompPtr, "FrameLoader", "Loader for the single frame", true, "FrameLoader");
 		I_ASSIGN(m_frameDataCompPtr, "FrameData", "Frame instance will be loaded with loader", true, "FrameData");
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	CFrameSeqVideoControllerComp();
 

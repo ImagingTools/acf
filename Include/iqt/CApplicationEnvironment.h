@@ -23,7 +23,7 @@ public:
 	virtual istd::CStringList GetApplicationArguments() const;
 	virtual istd::CString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const;
 	virtual EnvironmentVariables GetEnvironmentVariables() const;
-	void CApplicationEnvironment::SetEnvironmentVariableValue(const istd::CString& variableName, const istd::CString& value);
+	virtual void SetEnvironmentVariableValue(const istd::CString& variableName, const istd::CString& value);
 };
 
 

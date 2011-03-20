@@ -1,6 +1,11 @@
 #include "iser/CTextReadArchiveBase.h"
 
 
+// STD includes
+#include <cstring>
+
+
+// ACF includes
 #include "istd/CBase64.h"
 
 
