@@ -2,7 +2,6 @@ TARGET = BasePck
 TEMPLATE = lib
 
 CONFIG += dll
-CONFIG += warn_off
 
 TARGET_EXT = .arp
 
@@ -20,7 +19,6 @@ CONFIG(release, debug|release) {
 UI_DIR = ../Generated
 MOC_DIR = ../Generated
 RCC_DIR = ../Generated
-
 
 INCLUDEPATH += ../../../Include "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" 
 

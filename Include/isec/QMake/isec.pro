@@ -1,6 +1,7 @@
 TARGET = isec
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += stl
 
 CONFIG(debug, debug|release) {
 	DESTDIR = ../../../Lib/DebugQMake

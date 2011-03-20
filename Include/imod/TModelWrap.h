@@ -3,6 +3,7 @@
 
 
 #include "istd/TDelPtr.h"
+#include "istd/IChangeable.h"
 
 #include "iser/TCopySerializedWrap.h"
 
@@ -56,11 +57,11 @@ int TModelWrap<Base>::GetSupportedOperations() const
 {
 	int baseOperations = Base::GetSupportedOperations();
 
-	if ((baseOperations & SO_COPY) != 0){
-		return baseOperations | SO_CLONE | SO_OBSERVE;
+	if ((baseOperations & istd::IChangeable::SO_COPY) != 0){
+		return baseOperations |  istd::IChangeable::SO_CLONE |  istd::IChangeable::SO_OBSERVE;
 	}
 	else{
-		return baseOperations | SO_OBSERVE;
+		return baseOperations |  istd::IChangeable::SO_OBSERVE;
 	}
 }
 

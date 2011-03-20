@@ -4,6 +4,7 @@
 
 // STL includes
 #include <vector>
+#include <string>
 
 
 // ACF includes

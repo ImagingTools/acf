@@ -5,6 +5,8 @@
 #include "icomp/CComponentBase.h"
 #include "icomp/CComponentContext.h"
 
+#include "istd/ILogger.h"
+
 #include "ibase/TLoggerWrap.h"
 
 
@@ -30,7 +32,7 @@ public:
 protected:
 	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
-				MessageCategory category,
+                                istd::ILogger::MessageCategory category,
 				int id,
 				int flags,
 				istd::CString& message,
@@ -50,7 +52,7 @@ private:
 
 template <class Base>
 void TLoggerCompWrap<Base>::DecorateMessage(
-			MessageCategory category,
+                        istd::ILogger::MessageCategory category,
 			int id,
 			int flags,
 			istd::CString& message,

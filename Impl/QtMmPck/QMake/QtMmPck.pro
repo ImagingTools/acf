@@ -22,7 +22,6 @@ RCC_DIR = ../Generated
 
 QT += main core gui svg 
 
-
 INCLUDEPATH += ../../../Include "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/phonon" "$(QTDIR)/include/QtSvg" 
 
 HEADERS += ../QtMmPck.h

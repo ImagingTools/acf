@@ -21,6 +21,7 @@ class TSmartPtr: public TTransPtr<Type>
 {
 public:
 	typedef TTransPtr<Type> BaseClass;
+        typedef typename BaseClass::RefCountBase RefCountBase;
 
 	TSmartPtr();
 	TSmartPtr(Type* pointer);
@@ -89,7 +90,7 @@ protected:
 			I_ASSERT(m_count > 0);
 
 			if (--m_count <= 0){
-				Accessor::Delete(GetPtr());
+				Accessor::Delete(BaseClass::GetPtr());
 
 				delete this;
 			}
@@ -118,7 +119,7 @@ TSmartPtr<Type, Accessor>::TSmartPtr()
 template <class Type, class Accessor>
 TSmartPtr<Type, Accessor>::TSmartPtr(Type* pointer)
 {
-	m_counterPtr = new typename RefCounter(pointer);
+	m_counterPtr = new RefCounter(pointer);
 }
 
 
@@ -165,7 +166,7 @@ inline void TSmartPtr<Type, Accessor>::SetPtr(Type* pointer)
 {
 	Detach();
 
-	m_counterPtr = new typename RefCounter(pointer);
+	m_counterPtr = new RefCounter(pointer);
 }
 
 

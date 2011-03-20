@@ -1,6 +1,7 @@
 TARGET = istd
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += stl
 
 CONFIG(debug, debug|release) {
         DESTDIR = ../../../Lib/DebugQMake
@@ -8,8 +9,6 @@ CONFIG(debug, debug|release) {
 CONFIG(release, debug|release) {
         DESTDIR = ../../../Lib/ReleaseQMake
 }
-
-QT +=
 
 INCLUDEPATH += ../../ 
 

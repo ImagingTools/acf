@@ -40,7 +40,7 @@ public:
 		I_ASSIGN(m_outputDataCompPtr, "OutputData", "Output data definition", true, "OutputData");
 		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Processing progress observer", false, "ProgressManager");
 		I_ASSIGN(m_processingParamsSetCompPtr, "ProcessingParams", "Processing parameters", false, "ProcessingParams");
-	I_END_COMPONENT();
+	I_END_COMPONENT;
 
 	// reimplemented (ibase::IFileConvertCopy)
 	virtual bool CopyFile(

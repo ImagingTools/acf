@@ -118,7 +118,7 @@ inline bool CString::IsEqualNoCase(const CString& str) const
 // template methods
 
 template <typename NumberType>
-typename NumberType CString::ToNumber()
+NumberType CString::ToNumber()
 {
 	NumberType retVal;
 

@@ -2,8 +2,12 @@
 #define icomp_CComponentContext_included
 
 
+// STL includes
 #include <map>
+#include <string>
 
+
+// ACF includes
 #include "icomp/IComponentContext.h"
 
 

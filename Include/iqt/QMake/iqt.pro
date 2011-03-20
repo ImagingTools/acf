@@ -1,7 +1,7 @@
 TARGET = iqt
 TEMPLATE = lib
 CONFIG += staticlib
-CONFIG += create_prl
+CONFIG += stl
 
 CONFIG(debug, debug|release) {
 	DESTDIR = ../../../Lib/DebugQMake
@@ -14,8 +14,7 @@ UI_DIR = ../Generated
 MOC_DIR = ../Generated
 RCC_DIR = ../Generated
 
-QT += 
-
+QT += core gui network xml
 
 INCLUDEPATH += ../../ "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/QtNetwork" 
 

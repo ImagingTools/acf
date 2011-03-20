@@ -324,7 +324,7 @@ void TGuiObserverWrap<Gui, Observer>::DoUpdate(int updateFlags)
 		skipUpdate = ((m_updateFilter & updateFlags) == 0);
 	}
 
-	if (!IsUpdateBlocked() && !skipUpdate && IsGuiCreated()){
+	if (!IsUpdateBlocked() && !skipUpdate && Gui::IsGuiCreated()){
 		UpdateBlocker blocker(this);
 
 		UpdateEditor(updateFlags);

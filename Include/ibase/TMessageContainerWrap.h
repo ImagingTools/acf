@@ -123,7 +123,7 @@ bool TMessageContainerWrap<Base>::Serialize(iser::IArchive& archive)
 	for (		MessageList::const_iterator iter = m_messages.begin();
 				iter != m_messages.end();
 				++iter){
-		const MessagePtr& messagePtr = *iter;
+		const  ibase::IMessageContainer::MessagePtr& messagePtr = *iter;
 
 		retVal = retVal && archive.BeginTag(messageTag);
 		retVal = retVal && const_cast<ibase::IMessage*>(messagePtr.GetPtr())->Serialize(archive);
@@ -166,7 +166,7 @@ int TMessageContainerWrap<Base>::GetWorstCategory() const
 		for (		MessageList::const_iterator iter = m_messages.begin();
 					iter != m_messages.end();
 					++iter){
-			const MessagePtr& messagePtr = *iter;
+			const  ibase::IMessageContainer::MessagePtr& messagePtr = *iter;
 
 			int category = messagePtr->GetCategory();
 			if (category > worstCategory){
@@ -197,7 +197,7 @@ ibase::IMessageContainer::Messages TMessageContainerWrap<Base>::GetMessages() co
 	for (		MessageList::const_iterator iter = m_messages.begin();
 				iter != m_messages.end();
 				++iter){
-		const MessagePtr& messagePtr = *iter;
+		const  ibase::IMessageContainer::MessagePtr& messagePtr = *iter;
 
 		messages.push_back(messagePtr);
 	}
@@ -252,7 +252,7 @@ void TMessageContainerWrap<Base>::AddMessage(const ibase::IMessageContainer::Mes
 	if (m_maxMessageCount >= 0){
 		while (int(m_messages.size()) > m_maxMessageCount){
 			I_ASSERT(!m_messages.empty());
-			const MessagePtr& messageToRemovePtr = m_messages.back();
+			const  ibase::IMessageContainer::MessagePtr& messageToRemovePtr = m_messages.back();
 
 			istd::TChangeNotifier<ibase::IMessageContainer> changePtr(
 						this,

@@ -18,7 +18,7 @@ namespace iqtgui
 class CGuiComponentBase:
 			public QObject, 
 			public icomp::CComponentBase,
-			public IGuiObject
+			virtual public IGuiObject
 {
 public:
 	typedef icomp::CComponentBase BaseClass;

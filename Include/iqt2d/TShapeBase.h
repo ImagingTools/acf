@@ -88,7 +88,7 @@ protected:
 private:
 	typedef QPair<QPen, QBrush> ColorShemeInfo;
 	typedef QMap<int, ColorShemeInfo> ColorShemeMap;
-
+        
 	bool m_isEditable;
 	const ISceneProvider* m_providerPtr;
 
@@ -210,14 +210,14 @@ const ISceneProvider* TShapeBase<GraphicsItemClass>::GetSceneProvider() const
 template <class GraphicsItemClass>
 i2d::CVector2d TShapeBase<GraphicsItemClass>::GetPosFromLocal(const QPointF& position) const
 {
-	return iqt::GetCVector2d(mapToScene(position));
+	return iqt::GetCVector2d(BaseClass::mapToScene(position));
 }
 
 
 template <class GraphicsItemClass>
 QPointF TShapeBase<GraphicsItemClass>::GetLocalFromPos(const i2d::CVector2d& position) const
 {
-	return mapFromScene(iqt::GetQPointF(position));
+	return BaseClass::mapFromScene(iqt::GetQPointF(position));
 }
 
 
@@ -244,13 +244,13 @@ void TShapeBase<GraphicsItemClass>::OnPositionChanged(const QPointF& /*position*
 template <class GraphicsItemClass>
 QVariant TShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
-	if (change == ItemPositionChange){
+	if (change == BaseClass::ItemPositionChange){
 		if (m_providerPtr != NULL && ((m_providerPtr->GetSceneFlags() & iqt2d::ISceneProvider::SF_FIXED_SIZE) != 0)){
 			QGraphicsScene* scenePtr = m_providerPtr->GetScene();
 
 			if (scenePtr != NULL){
 				QRectF sceneRect = scenePtr->sceneRect();
-				QRectF itemRect = boundingRect();
+				QRectF itemRect = BaseClass::boundingRect();
 
 				i2d::CRectangle innerRect = iqt::GetCRectangle(sceneRect.adjusted(itemRect.width() / 2, itemRect.height() / 2, -itemRect.width() / 2, -itemRect.height() / 2));
 				i2d::CVector2d innerPosition = iqt::GetCVector2d(value.toPointF());

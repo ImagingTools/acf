@@ -14,7 +14,12 @@ CONFIG(release, debug|release) {
         DEPENDPATH += ../../../Lib/ReleaseQMake
 }
 
-OBJECTS += i2d.lib ibase.lib icmm.lib icomp.lib idoc.lib iimg.lib imath.lib imod.lib iprm.lib isec.lib iser.lib istd.lib isys.lib iproc.lib
+win32{
+        OBJECTS += i2d.lib ibase.lib icmm.lib icomp.lib idoc.lib iimg.lib imath.lib imod.lib iprm.lib isec.lib iser.lib istd.lib isys.lib iproc.lib
+}
+else{
+        LIBS += i2d.lib ibase.lib icmm.lib icomp.lib idoc.lib iimg.lib imath.lib imod.lib iprm.lib isec.lib iser.lib istd.lib isys.lib iproc.lib
+}
 
 INCLUDEPATH += ../../ 
 

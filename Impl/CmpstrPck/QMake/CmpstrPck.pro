@@ -22,7 +22,6 @@ RCC_DIR = ../Generated
 
 QT += main core gui xml
 
-
 INCLUDEPATH += ../../../Include "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" 
 
 HEADERS += ../CmpstrPck.h

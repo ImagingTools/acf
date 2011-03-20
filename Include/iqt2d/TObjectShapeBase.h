@@ -134,10 +134,10 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::mousePressEvent(QGraphics
 {
 	BaseClass::mousePressEvent(eventPtr);
 
-	if (IsEditable() && (eventPtr->button() == Qt::LeftButton)){
-		m_lastPosition = pos();
+	if (BaseClass::IsEditable() && (eventPtr->button() == Qt::LeftButton)){
+		m_lastPosition = BaseClass::pos();
 
-		m_mousePressingNotifier.SetPtr(GetObjectPtr());
+		m_mousePressingNotifier.SetPtr(BaseClass2::GetObjectPtr());
 	}
 }
 
@@ -167,7 +167,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel*
 {
 	I_ASSERT(!m_isShapeUpdateBlocked);
 
-	ObjectClass* objectPtr = GetObjectPtr();
+	ObjectClass* objectPtr = BaseClass2::GetObjectPtr();
 	if (objectPtr != NULL){
 		m_isShapeUpdateBlocked = true;
 
@@ -175,7 +175,7 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel*
 
 		m_isShapeUpdateBlocked = false;
 
-		update();
+		BaseClass::update();
 	}
 }
 

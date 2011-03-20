@@ -7,6 +7,8 @@
 
 
 // ACF includes
+#include "idoc/IDocumentManager.h"
+
 #include "iqtdoc/IPrintable.h"
 
 
@@ -39,11 +41,11 @@ int TQtDocumentManagerWrap<Base>::GetAllowedOperationFlags(const istd::IPolymorp
 	int retVal = BaseClass::GetAllowedOperationFlags(viewPtr);
 
 	if (viewPtr == NULL){
-		viewPtr = GetActiveView();
+		viewPtr = BaseClass::GetActiveView();
 	}
 
 	if (dynamic_cast<const iqtdoc::IPrintable*>(viewPtr) != NULL){
-		retVal |= OF_FILE_PRINT;
+		retVal |= idoc::IDocumentManager::OF_FILE_PRINT;
 	}
 
 	return retVal;
@@ -57,12 +59,12 @@ void TQtDocumentManagerWrap<Base>::FilePrint(int documentIndex) const
 	if (documentIndex >= 0){
 		I_ASSERT(documentIndex < GetDocumentsCount());
 
-		if (GetViewsCount(documentIndex) > 0){
-			activeViewPtr = GetViewFromIndex(documentIndex, 0);
+		if (BaseClass::GetViewsCount(documentIndex) > 0){
+			activeViewPtr = BaseClass::GetViewFromIndex(documentIndex, 0);
 		}
 	}
 	else{
-		activeViewPtr = GetActiveView();
+		activeViewPtr = BaseClass::GetActiveView();
 	}
 
 	if (activeViewPtr != NULL){

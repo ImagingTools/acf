@@ -7,6 +7,7 @@
 #include "icomp/CComponentBase.h"
 
 #include "iprm/ILinearAdjustParams.h"
+#include "iprm/ILinearAdjustConstraints.h"
 
 
 namespace iprm

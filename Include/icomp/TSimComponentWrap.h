@@ -22,6 +22,8 @@ class TSimComponentWrap: public TComponentWrap<Base>, public CSimComponentContex
 public:
 	typedef TComponentWrap<Base> BaseClass;
 	typedef CSimComponentContextBase BaseClass2;
+        
+        using BaseClass::GetComponentStaticInfo;
 
 	TSimComponentWrap();
 

@@ -15,7 +15,9 @@ SUBDIRS += ../../Include/idoc/QMake/idoc.pro
 SUBDIRS += ../../Include/iprm/QMake/iprm.pro
 SUBDIRS += ../../Include/ibase/QMake/ibase.pro
 SUBDIRS += ../../Include/iproc/QMake/iproc.pro
-SUBDIRS += ../../Include/imm/QMake/imm.pro
+win32{
+        SUBDIRS += ../../Include/imm/QMake/imm.pro
+}
 SUBDIRS += ../../Include/iqt/QMake/iqt.pro
 SUBDIRS += ../../Include/iqt2d/QMake/iqt2d.pro
 SUBDIRS += ../../Include/iqtdoc/QMake/iqtdoc.pro
