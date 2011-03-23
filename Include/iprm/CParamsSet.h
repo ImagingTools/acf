@@ -11,7 +11,7 @@
 #include "istd/TOptDelPtr.h"
 #include "istd/TPointerVector.h"
 
-#include "imod/CMultiModelObserverBase.h"
+#include "imod/CMultiModelBridgeBase.h"
 
 #include "iprm/IParamsSet.h"
 
@@ -23,7 +23,9 @@ namespace iprm
 /**
 	Basic implementation of interface IParamsSet.
 */
-class CParamsSet: virtual public IParamsSet
+class CParamsSet:
+			virtual public IParamsSet,
+			protected imod::CMultiModelBridgeBase
 {
 public:
 	struct ParameterInfo
@@ -80,25 +82,6 @@ protected:
 	const ParameterInfo* FindParameterInfo(const std::string& parameterId) const;
 
 private:
-	/**
-		Class to observe the changes of the single parameters.
-	*/
-	class ParamsObserver: public imod::CMultiModelObserverBase
-	{
-	public:
-		ParamsObserver(CParamsSet& parent);
-
-	private:
-		// reimplemented (imod::IObserver)
-		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CParamsSet& m_parent;
-	};
-
-	ParamsObserver m_paramsObserver;
-
 	ParameterInfos m_params;
 
 	const IParamsSet* m_slaveSetPtr;

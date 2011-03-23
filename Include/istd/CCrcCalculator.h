@@ -21,6 +21,7 @@ class CCrcCalculator
 public:
 	typedef std::vector<I_BYTE> ByteStream;
 
+	static I_DWORD GetCrcFromData(const I_BYTE* dataPtr, int dataSize);
 	static I_DWORD GetCrcFromStream(const ByteStream& byteStream);
 	static I_DWORD GetCrcFromFile(const istd::CString& fileName);
 

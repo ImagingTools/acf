@@ -16,11 +16,9 @@ namespace iqt
 
 istd::CString CFileSystem::GetNormalizedPath(const istd::CString& path) const
 {
-	QDir dir(iqt::GetQString(path));
+	QDir dir(GetEnrolledPath(iqt::GetQString(path)));
 
-	QString absolutePath = dir.absolutePath();
-
-	return iqt::GetCString(GetEnrolledPath(absolutePath));
+	return iqt::GetCString(dir.absolutePath());
 }
 
 

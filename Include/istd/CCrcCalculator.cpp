@@ -12,6 +12,18 @@ namespace istd
 
 // public methods
 
+I_DWORD CCrcCalculator::GetCrcFromData(const I_BYTE* dataPtr, int dataSize)
+{
+	I_DWORD crcValue = 0xFFFFFFFF;
+
+	for (		int i = 0; i < dataSize; ++i){
+		UpdateCrc(dataPtr[i], crcValue);
+	}
+
+	return ~crcValue;
+}
+
+
 I_DWORD CCrcCalculator::GetCrcFromStream(const ByteStream& byteStream)
 {
 	I_DWORD crcValue = 0xFFFFFFFF;

@@ -24,15 +24,19 @@ public:
 			Internal ACF flag.
 			Indicate that internal update is done.
 		*/
-		CF_ACF_INTERNAL = 0x1,
+		CF_ACF_INTERNAL = 1 << 0,
 		/**
 			Indicate that data model is changed.
 		*/
-		CF_MODEL = 0x2,
+		CF_MODEL = 1 << 1,
 		/**
 			Indicate, that update was aborted by user.
 		*/
-		CF_ABORTED = 0x4
+		CF_ABORTED = 1 << 2,
+		/**
+			Change flag indicate that this change was delegated (is indirect) for example from agregated object.
+		*/
+		CF_DELEGATED = 1 << 3
 	};
 
 	/**

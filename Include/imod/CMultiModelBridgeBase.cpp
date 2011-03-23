@@ -77,7 +77,7 @@ void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int updat
 {
 	I_ASSERT(IsModelAttached(modelPtr));
 
-	BeginChanges(updateFlags, updateParamsPtr);
+	BeginChanges(updateFlags | CF_DELEGATED, updateParamsPtr);
 }
 
 
@@ -85,7 +85,7 @@ void CMultiModelBridgeBase::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), int update
 {
 	I_ASSERT(IsModelAttached(modelPtr));
 
-	EndChanges(updateFlags, updateParamsPtr);
+	EndChanges(updateFlags | CF_DELEGATED, updateParamsPtr);
 }
 
 

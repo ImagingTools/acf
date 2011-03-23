@@ -14,8 +14,7 @@ namespace iprm
 
 
 CParamsManagerComp::CParamsManagerComp()
-:	m_selectedIndex(-1),
-	m_paramsObserver(*this)
+:	m_selectedIndex(-1)
 {
 }
 
@@ -56,7 +55,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 			if (modelPtr != NULL){
-				modelPtr->AttachObserver(&m_paramsObserver);
+				modelPtr->AttachObserver(this);
 			}
 		}
 	}
@@ -334,7 +333,7 @@ void CParamsManagerComp::OnComponentCreated()
 	for (int setIndex = 0; setIndex < fixedCount; setIndex++){
 		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
 		if (modelPtr != NULL){
-			modelPtr->AttachObserver(&m_paramsObserver);
+			modelPtr->AttachObserver(this);
 		}
 	}
 
@@ -348,36 +347,12 @@ void CParamsManagerComp::OnComponentDestroyed()
 
 	for (int setIndex = 0; setIndex < fixedCount; setIndex++){
 		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
-		if (modelPtr != NULL && modelPtr->IsAttached(&m_paramsObserver)){
-			modelPtr->DetachObserver(&m_paramsObserver);
+		if (modelPtr != NULL && modelPtr->IsAttached(this)){
+			modelPtr->DetachObserver(this);
 		}
 	}
 
 	BaseClass::OnComponentDestroyed();
-}
-
-
-// public methods of embedded class ParamsObserver
-
-CParamsManagerComp::ParamsObserver::ParamsObserver(CParamsManagerComp& parent)
-	:m_parent(parent)
-{
-}
-
-
-// private methods of embedded class ParamsObserver
-
-// reimplemented (imod::IObserver)
-
-void CParamsManagerComp::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	m_parent.BeginChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
-}
-
-
-void CParamsManagerComp::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	m_parent.EndChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
 }
 
 

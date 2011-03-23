@@ -14,8 +14,7 @@ namespace iprm
 
 
 CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
-:	m_slaveSetPtr(slaveSetPtr),
-	m_paramsObserver(*this)
+:	m_slaveSetPtr(slaveSetPtr)
 {
 }
 
@@ -29,7 +28,7 @@ bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(parameterPtr);
 			if (modelPtr != NULL){
-				modelPtr->AttachObserver(&m_paramsObserver);
+				modelPtr->AttachObserver(this);
 			}
 
 			return true;
@@ -221,30 +220,6 @@ const CParamsSet::ParameterInfo* CParamsSet::FindParameterInfo(const std::string
 	}
 
 	return NULL;
-}
-
-
-// public methods of embedded class ParamsObserver
-
-CParamsSet::ParamsObserver::ParamsObserver(CParamsSet& parent)
-	:m_parent(parent)
-{
-}
-
-
-// private methods of embedded class ParamsObserver
-
-// reimplemented (imod::IObserver)
-
-void CParamsSet::ParamsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	m_parent.BeginChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
-}
-
-
-void CParamsSet::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
-{
-	m_parent.EndChanges(updateFlags | istd::CChangeDelegator::CF_DELEGATED, updateParamsPtr);
 }
 
 

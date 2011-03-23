@@ -37,6 +37,7 @@ public:
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private:
 	I_MULTIREF(IAuthorizationVerifier, m_slaveVerifiersCompPtr);

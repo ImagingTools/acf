@@ -9,7 +9,7 @@
 // ACF includes
 #include "istd/TSmartPtr.h"
 
-#include "imod/CMultiModelObserverBase.h"
+#include "imod/CMultiModelBridgeBase.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -29,6 +29,7 @@ namespace iprm
 class CParamsManagerComp:
 			public icomp::CComponentBase,
 			virtual public IParamsManager,
+			protected imod::CMultiModelBridgeBase,
 			virtual protected ISelectionConstraints
 {
 public:
@@ -75,24 +76,6 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	/**
-		Class to observe the changes of the single parameters.
-	*/
-	class ParamsObserver: public imod::CMultiModelObserverBase
-	{
-	public:
-		ParamsObserver(CParamsManagerComp& parent);
-
-	private:
-		// reimplemented (imod::IObserver)
-		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-
-	private:
-		CParamsManagerComp& m_parent;
-	};
-
-private:
 	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
 	I_MULTIATTR(istd::CString, m_fixedSetNamesCompPtr);
 	I_ATTR(istd::CString, m_defaultSetNameCompPtr);
@@ -107,7 +90,6 @@ private:
 	typedef std::vector<ParamSet> ParamSets;
 
 	ParamSets m_paramSets;
-	ParamsObserver m_paramsObserver;
 
 	int m_selectedIndex;
 };

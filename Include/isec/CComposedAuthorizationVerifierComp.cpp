@@ -59,6 +59,21 @@ void CComposedAuthorizationVerifierComp::OnComponentCreated()
 }
 
 
+void CComposedAuthorizationVerifierComp::OnComponentDestroyed()
+{
+	int modelsCount = m_slaveVerifiersModelCompPtr.GetCount();
+
+	for (int i = 0; i < modelsCount; ++i){
+		imod::IModel* modelPtr = m_slaveVerifiersModelCompPtr[i];
+		if ((modelPtr != NULL) && modelPtr->IsAttached(this)){
+			modelPtr->DetachObserver(this);
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 } // namespace isec
 
 
