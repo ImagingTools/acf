@@ -40,8 +40,6 @@ void CTextFileLogComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_fileNameCompPtr.IsValid());
-
 	if (m_fileNameCompPtr.IsValid()){
 		std::ios::openmode fileMode = std::wofstream::out | std::wofstream::app;
 
