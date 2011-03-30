@@ -1,6 +1,7 @@
 #include "iqtgui/CDockWidgetGuiComp.h"
 
 
+// Qt includes
 #include <QMainWindow>
 #include <QVBoxLayout>
 
@@ -11,13 +12,17 @@ namespace iqtgui
 
 // public methods
 
+// reimplemented (iqtgui::IMainWindowComponent)
+
 bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 {
 	if (IsGuiCreated()){
 		return false;
 	}
 
-	CreateGui(&mainWindow);
+	if (!CreateGui(NULL)){
+		return false;
+	}
 
 	Qt::DockWidgetArea area = Qt::LeftDockWidgetArea;
 	Qt::Orientation orientation = Qt::Vertical;
@@ -46,6 +51,7 @@ bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	}
 
 	QDockWidget* dockWidgetPtr = GetQtWidget();
+	I_ASSERT(dockWidgetPtr != NULL);
 	if (dockWidgetPtr != NULL){
 		mainWindow.addDockWidget(area, dockWidgetPtr, orientation);
 

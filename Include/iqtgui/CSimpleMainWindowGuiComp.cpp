@@ -88,6 +88,14 @@ void CSimpleMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow
 	if (m_menuBarPtr.IsValid()){
 		mainWindow.setMenuBar(m_menuBarPtr.GetPtr());
 	}
+
+	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsCompPtr.GetCount(); componentIndex++){
+		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsCompPtr[componentIndex];
+		if (mainWindowComponentPtr != NULL){
+			AddMainComponent(mainWindowComponentPtr);
+		}
+	}
+
 }
 
 
@@ -370,13 +378,6 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 	UpdateMenuActions();
 
 	SetupMainWindowComponents(*mainWindowPtr);
-
-	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsCompPtr.GetCount(); componentIndex++){
-		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsCompPtr[componentIndex];
-		if (mainWindowComponentPtr != NULL){
-			AddMainComponent(mainWindowComponentPtr);
-		}
-	}
 }
 
 

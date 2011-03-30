@@ -9,6 +9,8 @@ namespace iqtgui
 {
 
 
+// public methods
+
 // reimplemented (iqtgui::IMainWindowComponent)
 
 bool CStatusBarWidgetComp::AddToMainWindow(QMainWindow& mainWindow)
@@ -21,7 +23,6 @@ bool CStatusBarWidgetComp::AddToMainWindow(QMainWindow& mainWindow)
 			if (m_statusBarWidgetCompPtr->CreateGui(statusBar)){
 				statusBar->addPermanentWidget(m_statusBarWidgetCompPtr->GetWidget());
 			}
-
 
 			return true;
 		}

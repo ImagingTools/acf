@@ -1,5 +1,5 @@
-#ifndef CToolBarWidgetGuiComp_h_included
-#define CToolBarWidgetGuiComp_h_included
+#ifndef iqtgui_CToolBarWidgetGuiComp_included
+#define iqtgui_CToolBarWidgetGuiComp_included
 
 
 // Qt includes
@@ -21,7 +21,7 @@ namespace iqtgui
 */
 class CToolBarWidgetGuiComp: 
 			public iqtgui::TGuiComponentBase<QToolBar>, 
-			public iqtgui::IMainWindowComponent
+			virtual public iqtgui::IMainWindowComponent
 {
 	Q_OBJECT
 public:
@@ -29,9 +29,9 @@ public:
 	
 	I_BEGIN_COMPONENT(CToolBarWidgetGuiComp);
 		I_REGISTER_INTERFACE(iqtgui::IMainWindowComponent);
-		I_ASSIGN(m_toolbarWidgetCompPtr, "ToolBarWidget", "", true, "ToolBarWidget");
+		I_ASSIGN(m_toolbarWidgetCompPtr, "ToolBarWidget", "Widget to place into the tool bar", true, "ToolBarWidget");
 		I_ASSIGN(m_dockAreaAttrPtr, "ToolBarArea", "Specify the area for this toolbar\n 0 - left\n 1 - right\n 2 - top\n 3 - bottom", false, 0);
-		I_ASSIGN(m_titleAttrPtr, "Title", "", false, "");
+		I_ASSIGN(m_titleAttrPtr, "Title", "Tool bar title", false, "");
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IMainWindowComponent)
@@ -43,7 +43,7 @@ protected:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
-protected:
+private:
 	I_REF(iqtgui::IGuiObject, m_toolbarWidgetCompPtr);
 	I_ATTR(int, m_dockAreaAttrPtr);
 	I_ATTR(istd::CString, m_titleAttrPtr);
@@ -52,6 +52,6 @@ protected:
 
 } // namespace iqtgui
 
-	
-#endif // CToolBarWidgetGuiComp_h_included
+
+#endif // !iqtgui_CToolBarWidgetGuiComp_included
 

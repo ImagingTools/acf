@@ -1,21 +1,28 @@
+#include "iqtgui/CToolBarWidgetGuiComp.h"
+
+
+// Qt includes
 #include <QHBoxLayout>
 #include <QComboBox>
 #include <QMainWindow>
-
-
-#include "iqtgui/CToolBarWidgetGuiComp.h"
 
 
 namespace iqtgui
 {
 
 
+// public methods
+
 // reimplemented (iqtgui::IMainWindowComponent)
 
 bool CToolBarWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 {
-	if (!IsGuiCreated()){
-		CreateGui(&mainWindow);
+	if (IsGuiCreated()){
+		return false;
+	}
+		
+	if (!CreateGui(NULL)){
+		return false;
 	}
 
 	Qt::ToolBarArea area = Qt::AllToolBarAreas;
@@ -43,6 +50,7 @@ bool CToolBarWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	}
 
 	QToolBar* toolBarPtr = GetQtWidget();
+	I_ASSERT(toolBarPtr != NULL); 
 	if (toolBarPtr != NULL){
 		toolBarPtr->setIconSize(mainWindow.iconSize());
 		mainWindow.addToolBar(area, toolBarPtr);

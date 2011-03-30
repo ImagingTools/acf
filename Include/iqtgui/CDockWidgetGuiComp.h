@@ -18,7 +18,9 @@ namespace iqtgui
 /**
 	Wrapper for docking windows for main window.
 */
-class CDockWidgetGuiComp: public iqtgui::TGuiComponentBase<QDockWidget>, public iqtgui::IMainWindowComponent
+class CDockWidgetGuiComp:
+			public iqtgui::TGuiComponentBase<QDockWidget>,
+			virtual public iqtgui::IMainWindowComponent
 {
 	Q_OBJECT
 public:
@@ -43,7 +45,7 @@ protected:
 	virtual void OnGuiDestroyed();
 	virtual void OnRetranslate();
 
-protected:
+private:
 	I_REF(iqtgui::IGuiObject, m_slaveGuiCompPtr);
 	I_ATTR(int, m_dockAreaAttrPtr);
 	I_ATTR(int, m_dockFeaturesAttrPtr);
@@ -56,4 +58,5 @@ protected:
 
 
 #endif // !iqtgui_CDockWidgetGuiComp_included
+
 
