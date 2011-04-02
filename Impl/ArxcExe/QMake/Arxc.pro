@@ -1,11 +1,11 @@
 TARGET = Arxc
 TEMPLATE = app
 
-CONFIG(debug, debug|release) {
+CONFIG(debug, debug|release){
 	DESTDIR = ../../../Bin/DebugQMake
 	LIBS += -L../../../Lib/DebugQMake 
 }
-CONFIG(release, debug|release) {
+CONFIG(release, debug|release){
 	DESTDIR = ../../../Bin/ReleaseQMake
 	LIBS += -L../../../Lib/ReleaseQMake 
 }

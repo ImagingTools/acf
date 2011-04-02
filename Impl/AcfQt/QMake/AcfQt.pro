@@ -4,11 +4,11 @@ CONFIG += staticlib
 CONFIG += lib_bundle
 CONFIG += no_lflags_merge no_smart_library_merge
 
-CONFIG(debug, debug|release) {
+CONFIG(debug, debug|release){
 	DESTDIR = ../../../Lib/DebugQMake
         DEPENDPATH += ../../../Lib/DebugQMake
 }
-CONFIG(release, debug|release) {
+CONFIG(release, debug|release){
 	DESTDIR = ../../../Lib/ReleaseQMake
         DEPENDPATH += ../../../Lib/ReleaseQMake
 }

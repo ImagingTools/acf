@@ -5,6 +5,7 @@
 	Name="ibase"
 	ProjectGUID="{C30159C1-C8F9-49F4-AE32-C014F87B12BD}"
 	RootNamespace="ibase"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -213,6 +214,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CAutoPersistenceComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedLoaderComp.cpp"
 				>
 			</File>
@@ -234,10 +239,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileCopyOverLoaderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CAutoPersistenceComp.cpp"
 				>
 			</File>
 			<File
@@ -304,6 +305,10 @@
 				RelativePath="..\CUuidComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CVersionInfoComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -311,6 +316,10 @@
 			>
 			<File
 				RelativePath="..\CApplicationInfoComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CAutoPersistenceComp.h"
 				>
 			</File>
 			<File
@@ -335,10 +344,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileCopyOverLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CAutoPersistenceComp.h"
 				>
 			</File>
 			<File
@@ -403,6 +408,10 @@
 			</File>
 			<File
 				RelativePath="..\CUuidComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CVersionInfoComp.h"
 				>
 			</File>
 			<File

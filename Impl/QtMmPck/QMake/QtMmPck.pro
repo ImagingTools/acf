@@ -5,13 +5,13 @@ CONFIG += dll
 
 TARGET_EXT = .arp
 
-CONFIG(debug, debug|release) {
+CONFIG(debug, debug|release){
 	DESTDIR = ../../../Bin/DebugQMake
 	LIBS += -L../../../Lib/DebugQMake 
 	LIBS += -lphonond4
 }
 
-CONFIG(release, debug|release) {
+CONFIG(release, debug|release){
 	DESTDIR = ../../../Bin/ReleaseQMake
 	LIBS += -L../../../Lib/ReleaseQMake 
 	LIBS += -lphonon4

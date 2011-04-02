@@ -1,12 +1,12 @@
 TARGET = DocViewSimu_exe
 TEMPLATE = app
 
-CONFIG(debug, debug|release) {
+CONFIG(debug, debug|release){
 	DESTDIR = ../../../../../Bin/DebugQMake
 	LIBS += -L"$(ACFDIR)/Lib/DebugQMake 
 	LIBS += AcfStd AcfQt 
 }
-CONFIG(release, debug|release) {
+CONFIG(release, debug|release){
 	DESTDIR = ../../../../../Bin/ReleaseQMake
 	LIBS += -L"$(ACFDIR)/Lib/ReleaseQMake 
 	LIBS += AcfStd AcfQt 
