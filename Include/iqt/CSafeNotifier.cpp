@@ -1,6 +1,7 @@
 #include "iqt/CSafeNotifier.h"
 
 
+// Qt includes
 #include <QApplication>
 
 

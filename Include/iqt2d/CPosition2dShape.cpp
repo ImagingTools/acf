@@ -1,9 +1,12 @@
 #include "iqt2d/CPosition2dShape.h"
 
 
+// Qt includes
 #include <QPen>
 #include <QBrush>
 
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 

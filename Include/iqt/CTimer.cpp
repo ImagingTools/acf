@@ -1,6 +1,7 @@
 #include "iqt/CTimer.h"
 
 
+// Qt includes
 #include <QThread>
 
 

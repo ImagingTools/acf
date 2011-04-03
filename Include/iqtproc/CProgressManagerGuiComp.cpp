@@ -1,6 +1,7 @@
 #include "iqtproc/CProgressManagerGuiComp.h"
 
 
+// Qt includes
 #include <QCoreApplication>
 
 

@@ -1,6 +1,7 @@
 #include "iqt2d/CSceneProviderGuiComp.h"
 
 
+// Qt includes
 #include <QApplication>
 #include <QKeyEvent>
 #include <QMenu>

@@ -8,7 +8,6 @@
 #include <cstring>
 
 
-
 namespace istd
 {
 

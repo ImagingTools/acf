@@ -1,11 +1,10 @@
 #include "iqtgui/CGuiComponentBase.h"
 
 
+// Qt includes
 #include <QLayout>
 #include <QEvent>
 #include <QMetaMethod>
-
-#include <iostream>
 
 
 namespace iqtgui

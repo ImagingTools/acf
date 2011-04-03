@@ -1,6 +1,7 @@
 #include "iqtgui/CApplicationComp.h"
 
 
+// Qt includes
 #include <QApplication>
 #include <QString>
 #include <QIcon>
@@ -9,6 +10,8 @@
 #include <QFile>
 #include <QVBoxLayout>
 
+
+// ACF includes
 #include "icomp/CCompositeComponent.h"
 #include "iqt/CTimer.h"
 

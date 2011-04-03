@@ -1,9 +1,12 @@
 #include "iqt/CBitmapSurface.h"
 
 
+// Qt includes
 #include <QVector>
 #include <QColor>
 
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 

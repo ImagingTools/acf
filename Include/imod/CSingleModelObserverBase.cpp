@@ -1,7 +1,8 @@
 #include "imod/CSingleModelObserverBase.h"
 
 
-#include "imod/IModel.h" 
+// ACF includes
+#include "imod/IModel.h"
 #include "imod/IUndoManager.h"
 
 

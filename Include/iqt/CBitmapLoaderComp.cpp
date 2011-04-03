@@ -4,11 +4,14 @@
 // STL includes
 #include <algorithm>
 
+
 // Qt includes
 #include <QFileInfo>
 #include <QByteArray>
 #include <QImageReader>
 
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "iqt/IQImageProvider.h"

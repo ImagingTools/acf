@@ -1,10 +1,12 @@
 #include "iqt2d/CImageShape.h"
 
 
+// Qt includes
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
 
 
+// ACF includes
 #include "istd/TDelPtr.h"
 
 #include "iqt/IQImageProvider.h"

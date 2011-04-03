@@ -1,12 +1,14 @@
 #include "iqt2d/CGripShape.h"
 
 
+// Qt includes
 #include <QPen>
 #include <QBrush>
 #include <QFont>
 #include <QCursor>
 
 
+// ACF includes
 #include "iqt/CSignalBlocker.h"
 
 

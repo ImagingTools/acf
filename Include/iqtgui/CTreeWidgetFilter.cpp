@@ -1,6 +1,7 @@
 #include "iqtgui/CTreeWidgetFilter.h"
 
 
+// Qt includes
 #include <QEvent>
 #include <QMouseEvent>
 

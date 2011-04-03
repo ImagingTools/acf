@@ -2,7 +2,8 @@
 #include "iqt/CDirList.h"
 
 
-#include <QFileInfo> 
+// Qt includes
+#include <QFileInfo>
 
 
 namespace iqt

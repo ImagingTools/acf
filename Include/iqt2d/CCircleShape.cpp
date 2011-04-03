@@ -1,10 +1,13 @@
 #include "iqt2d/CCircleShape.h"
 
 
+// Qt includes
 #include <QPen>
 #include <QBrush>
 #include <QCursor>
 
+
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
 
