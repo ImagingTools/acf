@@ -12,13 +12,11 @@ include(../../AcfQt/QMake/AcfQt.pri)
 CONFIG(debug, debug|release){
 	DESTDIR = ../../../Bin/DebugQMake
 	LIBS += -L../../../Lib/DebugQMake 
-	LIBS += -lphonond4
 }
 
 CONFIG(release, debug|release){
 	DESTDIR = ../../../Bin/ReleaseQMake
 	LIBS += -L../../../Lib/ReleaseQMake 
-	LIBS += -lphonon4
 }
 
 win32-msvc*{
@@ -32,7 +30,7 @@ UI_DIR = ../Generated
 MOC_DIR = ../Generated
 RCC_DIR = ../Generated
 
-QT += core gui svg
+QT += core gui svg phonon
 
 INCLUDEPATH += ../../../Include "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/phonon" "$(QTDIR)/include/QtSvg" 
 

@@ -18,7 +18,7 @@ CONFIG(release, debug|release){
 MSVC_OBJECTS = iqt.lib iqt2d.lib iqtdoc.lib iqtgui.lib iqtprm.lib iqtproc.lib iqtmm.lib
 
 # static libs for the GCC compiler
-GCC_OBJECTS = libiqt.a libiqt2d.a libiqtdoc.a libiqtgui.a libiqtprm.a libiqtproc.a libiqtmm.a
+GCC_OBJECTS = libiqtmm.a libiqtproc.a libiqt2d.a libiqtdoc.a libiqtprm.a libiqtgui.a libiqt.a
 
 win32{
 	win32-g++{
