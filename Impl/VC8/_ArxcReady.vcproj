@@ -6,7 +6,6 @@
 	ProjectGUID="{783AA78B-9309-466C-9734-ED719D979FF9}"
 	RootNamespace="_ArxcReady"
 	Keyword="MakeFileProj"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -21,8 +20,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			ConfigurationType="10"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops"
 			>
@@ -53,7 +51,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="Release"
 			ConfigurationType="10"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops"

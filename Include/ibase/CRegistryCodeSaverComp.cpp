@@ -1001,7 +1001,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 
 
 bool CRegistryCodeSaverComp::WriteRegistryClassDeclaration(
-			const std::string& baseClassName,
+			const std::string& /*baseClassName*/,
 			const std::string& registryClassName,
 			const icomp::IRegistry& registry,
 			std::ofstream& stream) const

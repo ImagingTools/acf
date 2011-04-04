@@ -30,7 +30,7 @@ bool CDateTimeBase::SerializeComponents(iser::IArchive& archive, TimeComponent f
 	}
 	else{
 		for (int i = fromComponent; i <= toComponent; ++i){
-			int componentValue;
+			int componentValue = 0;
 
 			retVal = retVal && archive.BeginTag(s_archiveTags[i]);
 			retVal = retVal && archive.Process(componentValue);

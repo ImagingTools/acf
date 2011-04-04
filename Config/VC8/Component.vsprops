@@ -3,21 +3,11 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="ACF Component Package"
-	OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
+	OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC8"
 	IntermediateDirectory="$(ConfigurationName)"
 	ConfigurationType="2"
+	InheritedPropertySheets=".\General.vsprops"
 	>
-	<Tool
-		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="../../"
-		PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
-		StringPooling="true"
-		RuntimeLibrary="3"
-		TreatWChar_tAsBuiltInType="false"
-		ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
-		WarningLevel="4"
-		DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
-	/>
 	<Tool
 		Name="VCLinkerTool"
 		OutputFile="$(OutDir)\$(ProjectName).arp"

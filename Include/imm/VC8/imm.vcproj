@@ -23,7 +23,6 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
@@ -32,28 +31,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="DeployCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
 				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -106,8 +102,6 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Lib\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			>
@@ -115,28 +109,25 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="DeployCopy"
 			/>
 			<Tool
-				Name="SubVersionTransform"
-			/>
-			<Tool
 				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -237,4 +228,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-
