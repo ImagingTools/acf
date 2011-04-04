@@ -122,6 +122,8 @@
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				UsePrecompiledHeader="0"
+				BrowseInformation="1"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

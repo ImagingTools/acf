@@ -121,6 +121,7 @@
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;NO_QT_STL_SUPPORT"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

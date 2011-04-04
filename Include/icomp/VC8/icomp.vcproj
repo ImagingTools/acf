@@ -120,6 +120,7 @@
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
