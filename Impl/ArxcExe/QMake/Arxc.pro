@@ -27,6 +27,8 @@ RCC_DIR = ../Generated
 
 QT += core gui 
 
-INCLUDEPATH += "$(ACFDIR)/Include" "$(ACFDIR)/Impl" "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/QtScript" .. 
+INCLUDEPATH += ../../../Include
+INCLUDEPATH += ../../../Impl
+INCLUDEPATH += "$(QTDIR)/include" "$(QTDIR)/include/QtCore" "$(QTDIR)/include/QtGui" "$(QTDIR)/include/QtXml" "$(QTDIR)/include/QtScript" .. 
 
 SOURCES += ../Main.cpp

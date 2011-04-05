@@ -3,12 +3,13 @@
 
 // Qt includes
 #include <QFileInfo>
-#include <QSvgRenderer>
+#include <QtSvg/QSvgRenderer>
 #include <QPainter>
 
 
 // ACF includes
 #include "iimg/IBitmap.h"
+
 #include "iqt/IQImageProvider.h"
 
 

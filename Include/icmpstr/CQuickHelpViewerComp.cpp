@@ -5,8 +5,8 @@
 #include <QProcess>
 #include <QDir>
 #include <QFileInfo>
-#include <QDomDocument>
-#include <QDomNode>
+#include <QtXml/QDomDocument>
+#include <QtXml/QDomNode>
 
 #include "iqt/CSignalBlocker.h"
 #include "iqt/CFileSystem.h"
