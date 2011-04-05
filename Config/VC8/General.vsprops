@@ -10,7 +10,6 @@
 		AdditionalIncludeDirectories="../../"
 		PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 		StringPooling="true"
-		RuntimeLibrary="3"
 		TreatWChar_tAsBuiltInType="true"
 		ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 		WarningLevel="4"

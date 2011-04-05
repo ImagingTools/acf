@@ -10,7 +10,7 @@
 		AdditionalIncludeDirectories="../../"
 		PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 		StringPooling="true"
-		TreatWChar_tAsBuiltInType="false"
+		TreatWChar_tAsBuiltInType="true"
 		PrecompiledHeaderFile="$(IntDir)/$(ProjectName).pch"
 		ProgramDataBaseFileName="$(IntDir)\$(ProjectName).pdb"
 		WarningLevel="4"
