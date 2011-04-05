@@ -110,6 +110,7 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\Include"
 				PreprocessorDefinitions="UNICODE;WIN32"
+				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
 				DebugInformationFormat="4"

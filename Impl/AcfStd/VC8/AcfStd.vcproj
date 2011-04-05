@@ -120,6 +120,7 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				BrowseInformation="1"

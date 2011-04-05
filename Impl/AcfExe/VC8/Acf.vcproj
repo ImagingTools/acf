@@ -130,6 +130,7 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\Include;..\..\..\Impl;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
 				DebugInformationFormat="4"

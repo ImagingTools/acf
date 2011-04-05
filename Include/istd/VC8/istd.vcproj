@@ -154,6 +154,7 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
 				DebugInformationFormat="4"
