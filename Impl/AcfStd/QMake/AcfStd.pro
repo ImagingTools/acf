@@ -1,18 +1,16 @@
+include(../../../Config/QMake/Static.config)
+include(./AcfStd.pri)
+
 TARGET = AcfStd
-TEMPLATE = lib
-CONFIG += staticlib
+
 CONFIG += lib_bundle
 CONFIG += no_lflags_merge no_smart_library_merge
-CONFIG += create_prl link_prl
 
-CONFIG(debug, debug|release){
-        DESTDIR = ../../../Lib/DebugQMake
-}
-CONFIG(release, debug|release){
-        DESTDIR = ../../../Lib/ReleaseQMake
-}
+DEPENDPATH += $$DESTDIR
 
-LIBS += -L$$DESTDIR -libase -licomp -li2d -liproc -lidoc -liimg -lisec -liprm -limod -licmm -limath -liser -lisys -listd
+LIBS += -L$$DESTDIR
+
+OBJECTS += $$ACFSTD_DEPENDENCIES
 
 INCLUDEPATH += ../../
 

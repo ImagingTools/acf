@@ -1,3 +1,8 @@
+include(../../../Config/QMake/General.config)
+include(../../../Config/QMake/QtBase.config)
+include(../../AcfStd/QMake/AcfStd.pri)
+include(../../AcfQt/QMake/AcfQt.pri)
+
 TARGET = CompositorMini
 TEMPLATE = app
 CONFIG += link_prl
@@ -11,13 +16,12 @@ CONFIG(release, debug|release){
 	LIBS += -L../../../Lib/ReleaseQMake
 }
 
-LIBS += -licmpstr -lAcfQt -lAcfStd
-
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
-
-QT += core gui
+win32-msvc*{
+	LIBS += -licmpstr -lAcfQt -lAcfStd
+}
+else{
+	LIBS += -licmpstr $$ACFQT_LIBS $$ACFSTD_LIBS
+}
 
 INCLUDEPATH += ../../../Include ../../../Impl
 

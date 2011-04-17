@@ -1,29 +1,18 @@
+include(../../../Config/QMake/Component.config)
+include(../../../Config/QMake/QtBase.config)
+include(../../AcfStd/QMake/AcfStd.pri)
+include(../../AcfQt/QMake/AcfQt.pri)
+
 TARGET = QtMmPck
-TEMPLATE = lib
 
-CONFIG += dll
-CONFIG += link_prl
-
-TARGET_EXT = .arp
-
-CONFIG(debug, debug|release){
-	DESTDIR = ../../../Bin/DebugQMake
-	LIBS += -L../../../Lib/DebugQMake 
+win32-msvc*{
+	LIBS += -lAcfQt -lAcfStd
 }
-CONFIG(release, debug|release){
-	DESTDIR = ../../../Bin/ReleaseQMake
-	LIBS += -L../../../Lib/ReleaseQMake 
+else{
+	LIBS += $$ACFQT_LIBS $$ACFSTD_LIBS
 }
 
-LIBS += -lAcfQt -lAcfStd
-
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
-
-QT += core gui svg phonon
-
-INCLUDEPATH += ../../../Include
+QT += svg phonon
 
 HEADERS += ../QtMmPck.h
 SOURCES += ../QtMmPck.cpp

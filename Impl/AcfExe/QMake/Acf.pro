@@ -1,3 +1,8 @@
+include(../../../Config/QMake/General.config)
+include(../../../Config/QMake/QtBase.config)
+include(../../AcfStd/QMake/AcfStd.pri)
+include(../../AcfQt/QMake/AcfQt.pri)
+
 TARGET = Acf
 TEMPLATE = app
 CONFIG += link_prl
@@ -11,13 +16,15 @@ CONFIG(release, debug|release){
 	LIBS += -L../../../Lib/ReleaseQMake 
 }
 
-LIBS += -licmpstr -lAcfQt -lAcfStd
+win32-msvc*{
+	LIBS += -licmpstr -lAcfQt -lAcfStd
+}
+else{
+	QMAKE_LFLAGS = -fPIC
+	LIBS += -licmpstr $$ACFQT_LIBS $$ACFSTD_LIBS
+}
 
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
-
-QT += core gui xml 
+QT += xml
 
 INCLUDEPATH += ../../../Include ../../../Impl
 
