@@ -309,8 +309,6 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 }
 
 
-// protected methods
-
 // reimplemented (iprm::ISelectionConstraints)
 
 int CParamsManagerComp::GetOptionsCount() const
@@ -324,6 +322,8 @@ const istd::CString& CParamsManagerComp::GetOptionName(int index) const
 	return GetParamsSetName(index);
 }
 
+
+// protected methods
 
 // reimplemented (icomp::CComponentBase)
 

@@ -29,20 +29,21 @@ namespace iprm
 class CParamsManagerComp:
 			public icomp::CComponentBase,
 			virtual public IParamsManager,
-			protected imod::CMultiModelBridgeBase,
-			virtual protected ISelectionConstraints
+			virtual public ISelectionConstraints,
+			protected imod::CMultiModelBridgeBase
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CParamsManagerComp)
-		I_REGISTER_INTERFACE(iprm::IParamsManager)
-		I_REGISTER_INTERFACE(iser::ISerializable)
-		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of refernces to fixed parameter set", false)
-		I_ASSIGN_MULTI_0(m_fixedSetNamesCompPtr, "FixedSetNames", "List of fixed parameter names", false)
-		I_ASSIGN(m_defaultSetNameCompPtr, "DefaultSetName", "Default name of parameter set", true, "<noname>")
-		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CParamsManagerComp);
+		I_REGISTER_INTERFACE(iprm::IParamsManager);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(ISelectionConstraints);
+		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of refernces to fixed parameter set", false);
+		I_ASSIGN_MULTI_0(m_fixedSetNamesCompPtr, "FixedSetNames", "List of fixed parameter names", false);
+		I_ASSIGN(m_defaultSetNameCompPtr, "DefaultSetName", "Default name of parameter set", true, "<noname>");
+		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet");
+	I_END_COMPONENT;
 
 	CParamsManagerComp();
 
@@ -66,11 +67,11 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-protected:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetOptionsCount() const;
 	virtual const istd::CString& GetOptionName(int index) const;
 
+protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
