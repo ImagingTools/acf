@@ -1,21 +1,11 @@
+include($(ACFDIR)/Config/QMake/Static.config)
+include($(ACFDIR)/Config/QMake/QtGuiBase.config)
+
 TARGET = DocView
-TEMPLATE = lib
-CONFIG += staticlib
 
-CONFIG(debug, debug|release){
-	DESTDIR = ../../../../../Lib/DebugQMake
-}
-CONFIG(release, debug|release){
-	DESTDIR = ../../../../../Lib/ReleaseQMake
-}
+DESTDIR = ../../../../../Lib/$$COMPILER_DIR
 
-UI_DIR = ../Generated
-MOC_DIR = ../Generated
-RCC_DIR = ../Generated
-
-QT += core gui
-
-INCLUDEPATH += .. ../../../../../Include
+INCLUDEPATH += ..
 
 HEADERS += ../*.h
 SOURCES += ../*.cpp

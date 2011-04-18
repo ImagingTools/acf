@@ -1,14 +1,9 @@
-TARGET = DocViewSimu_exe
-TEMPLATE = app
+include(../../../../../Config/QMake/Application.config)
+include(../../../../../Config/QMake/QtGuiBase.config)
 
-CONFIG(debug, debug|release){
-	DESTDIR = ../../../../../Bin/DebugQMake
-	LIBS += -L../../../../../Lib/DebugQMake
-}
-CONFIG(release, debug|release){
-	DESTDIR = ../../../../../Bin/ReleaseQMake
-	LIBS += -L../../../../../Lib/ReleaseQMake
-}
+TARGET = DocViewSimu
+
+DESTDIR = ../../../../../Bin/$$COMPILER_DIR
 
 LIBS += -lAcfStd -lAcfQt
 
@@ -19,6 +14,6 @@ RCC_DIR = ../Generated
 QT += main core gui 
 
 
-INCLUDEPATH += ../.. ../../../../../Include ../../../../../Impl "$(QScintilla)/include"
+INCLUDEPATH += ../.. ../../../../../Impl "$(QScintilla)/include"
 
 SOURCES += ../*.cpp
