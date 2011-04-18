@@ -5,12 +5,7 @@ include(../../AcfQt/QMake/AcfQt.pri)
 
 TARGET = CmpstrPck
 
-win32-msvc*{
-	LIBS += -licmpstr -lAcfQt -lAcfStd
-}
-else{
-	LIBS += -licmpstr $$ACFQT_LIBS $$ACFSTD_LIBS
-}
+LIBS += -licmpstr
 
 QT += xml
 

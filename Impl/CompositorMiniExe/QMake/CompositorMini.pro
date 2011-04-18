@@ -16,12 +16,7 @@ CONFIG(release, debug|release){
 	LIBS += -L../../../Lib/ReleaseQMake
 }
 
-win32-msvc*{
-	LIBS += -licmpstr -lAcfQt -lAcfStd
-}
-else{
-	LIBS += -licmpstr $$ACFQT_LIBS $$ACFSTD_LIBS
-}
+LIBS += -licmpstr
 
 INCLUDEPATH += ../../../Include ../../../Impl
 
