@@ -4,13 +4,46 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         BitmapFileExplorer
       </ComponentName>
       <X>
-        225
+        250
+      </X>
+      <X>
+        200
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        ComposedGui
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        375
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileNameParamGui
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        525
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        FileNameParamGuiBinder
+      </ComponentName>
+      <X>
+        275
       </X>
       <X>
         525
@@ -21,10 +54,10 @@
         StandaloneApp
       </ComponentName>
       <X>
-        575
+        625
       </X>
       <X>
-        350
+        200
       </X>
     </Element>
     <Element>
@@ -35,7 +68,7 @@
         950
       </X>
       <X>
-        350
+        200
       </X>
     </Element>
   </PositionMap>

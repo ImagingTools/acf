@@ -24,7 +24,11 @@ namespace iqtgui
 
 
 /**
-	Component for visualization of file system contents.
+	UI component for visualization of file system contents.
+
+	CFileSystemExplorerGuiComp is implemented as an observer of IFileNameParam.
+	Connected to model, this component will show the file system item, provided by the data model.
+	Model data will be changed, if the the user selects an supported file item in the file system view.
 */
 class CFileSystemExplorerGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
@@ -89,7 +93,6 @@ private:
 	FileIconProvider m_fileIconProvider;
 
 	QFileSystemModel m_fileSystemModel;
-
 };
 
 
@@ -97,4 +100,5 @@ private:
 
 
 #endif // !iqtgui_CFileSystemExplorerGuiComp_included
+
 

@@ -137,7 +137,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			FileSystemExplorerGui,
 			"Component for file system visualization",
-			"Qt GUI File" IM_CATEGORY(I_GUI) IM_TAG("GUI"));
+			"File Path Directory Observer" IM_CATEGORY(I_GUI) IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			FileNameParamGui,

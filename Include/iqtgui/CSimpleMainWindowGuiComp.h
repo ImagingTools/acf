@@ -36,8 +36,8 @@ public:
 					iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
 
 	I_BEGIN_COMPONENT(CSimpleMainWindowGuiComp);
-		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Document workspace", true, "Workspace");
-		I_ASSIGN(m_workspaceCommandsCompPtr, "Workspace", "Document workspace", false, "Workspace");
+		I_ASSIGN(m_workspaceCommandsCompPtr, "Workspace", "Main widget", false, "Workspace");
+		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Main widget", true, "Workspace");
 		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "Gui displayed if 'About' action is triggered", false, "AboutGui");
 		I_ASSIGN(m_settingsGuiCompPtr, "SettingsGui", "Gui displayed if 'Settings' action is triggered", false, "SettingsGui");
 		I_ASSIGN_MULTI_0(m_mainWindowCommandsCompPtr, "MainWindowComponents", "Additional GUI components", false);
