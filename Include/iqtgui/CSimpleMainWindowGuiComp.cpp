@@ -429,9 +429,11 @@ void CSimpleMainWindowGuiComp::OnRetranslate()
 
 	// Tools commands
 	m_settingsCommand.SetVisuals(tr("&Settings"), tr("Settings"), tr("Show global application settings"), QIcon(":/Icons/Settings.svg"));
+	m_settingsCommand.setMenuRole(QAction::PreferencesRole);
 
 	// Help commands
 	m_aboutCommand.SetVisuals(tr("&About..."), tr("About"), tr("Shows information about this application"), QIcon(":/Icons/About"));
+	m_aboutCommand.setMenuRole(QAction::AboutRole);
 }
 
 

@@ -42,6 +42,8 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_copyPathToClippboardCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU),
 	m_openDocumentFolderCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU)
 {
+	m_quitCommand.setMenuRole(QAction::QuitRole);
+
 	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
 	connect(&m_saveCommand, SIGNAL(activated()), this, SLOT(OnSave()));
