@@ -65,6 +65,9 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const istd::C
 
 				m_metaValuesMap[currentKey].push_back(keyword);
 			}
+			else{
+				m_unassignedKeywords.push_back(keyword);
+			}
 
 			if (apostrophCount <= 0){
 				currentKey = "";
@@ -98,6 +101,12 @@ const istd::CStringList& CComponentMetaDescriptionEncoder::GetValues(const istd:
 	else{
 		return m_keywords;
 	}
+}
+
+
+const istd::CStringList& CComponentMetaDescriptionEncoder::GetUnassignedKeywords() const
+{
+	return m_unassignedKeywords;
 }
 
 

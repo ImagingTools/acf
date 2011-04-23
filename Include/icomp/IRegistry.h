@@ -2,10 +2,13 @@
 #define icomp_IRegistry_included
 
 
+// STL includes
 #include <string>
 #include <set>
 #include <map>
 
+
+// ACF includes
 #include "istd/TDelPtr.h"
 
 #include "iser/ISerializable.h"

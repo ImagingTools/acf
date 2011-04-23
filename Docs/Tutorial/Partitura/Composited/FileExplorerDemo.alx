@@ -13,7 +13,7 @@
         250
       </X>
       <X>
-        200
+        225
       </X>
     </Element>
     <Element>
@@ -24,7 +24,7 @@
         625
       </X>
       <X>
-        375
+        400
       </X>
     </Element>
     <Element>
@@ -43,7 +43,7 @@
         FileNameParamGuiBinder
       </ComponentName>
       <X>
-        275
+        250
       </X>
       <X>
         525
@@ -57,7 +57,7 @@
         625
       </X>
       <X>
-        200
+        225
       </X>
     </Element>
     <Element>
@@ -68,7 +68,7 @@
         950
       </X>
       <X>
-        200
+        225
       </X>
     </Element>
   </PositionMap>

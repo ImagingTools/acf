@@ -105,7 +105,7 @@ public:
 	virtual void UpdateEditor(int updateFlags = 0);
 	virtual void UpdateModel() const;
 
-protected slots:
+protected Q_SLOTS:
 	void on_AttributeTree_itemSelectionChanged();
 	void on_AttributeTree_itemChanged(QTreeWidgetItem* item, int column);
 	void on_InterfacesTree_itemSelectionChanged();

@@ -59,8 +59,10 @@ protected:
 
 protected Q_SLOTS:
 	void on_DescriptionEdit_editingFinished();
-	void on_KeywordsEdit_editingFinished();
-	void OnCategoriesChanged(const QStringList& categories);
+	void OnUpdateKeywords();
+
+private:
+	static QString ConvertToKeyword(const QString& input, const QString& key = QString());
 
 private:
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);

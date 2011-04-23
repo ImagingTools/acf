@@ -1,29 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1708
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          315
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="6">
@@ -204,7 +182,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="17">
+        <AttributeInfoMap count="16">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -240,25 +218,6 @@
               </IsEnabled>
               <Value>
                 Tutorial
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              CompanyName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ImagingTools
               </Value>
             </Data>
           </AttributeInfo>
@@ -573,6 +532,6 @@
     Simple image viewer over single document interface (SDI)
   </Description>
   <Keywords>
-    Demo Image Tutorial Viewer SDI
+    Demo Image Viewer SDI Company='ImagingTools' Project='ACF' Category='Tutorial' Tag='Tutorial'
   </Keywords>
 </Acf>

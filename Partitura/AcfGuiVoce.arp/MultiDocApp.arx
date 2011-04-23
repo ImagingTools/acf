@@ -1,29 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1708
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          315
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="8">
@@ -1009,6 +987,6 @@
     Framework for multi-document applications
   </Description>
   <Keywords>
-    ACF GUI Application Framework Multi Document MDI MVC
+    GUI Application Framework Multi Document MDI MVC
   </Keywords>
 </Acf>

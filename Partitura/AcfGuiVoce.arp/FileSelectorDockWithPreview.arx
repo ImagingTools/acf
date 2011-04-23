@@ -1,29 +1,7 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          1688
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          307
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="8">
@@ -673,6 +651,6 @@
     General file selector with external preview
   </Description>
   <Keywords>
-    File Name Selector Preview Explorer Choice Author='"Witold Gantzke"' Category='GUI'
+    File Name Selector Preview Explorer Choice Category='GUI'
   </Keywords>
 </Acf>

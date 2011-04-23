@@ -31,12 +31,18 @@ public:
 	*/
 	const istd::CStringList& GetValues(const istd::CString& key = istd::CString()) const;
 
+	/**
+		Get the keyword list.
+	*/
+	const istd::CStringList& GetUnassignedKeywords() const;
+
 private:
 	typedef std::map<istd::CString, istd::CStringList> MetaValuesMap;
 
 	MetaValuesMap m_metaValuesMap;
 	istd::CStringList m_metaKeys;
 	istd::CStringList m_keywords;
+	istd::CStringList m_unassignedKeywords;
 };
 
 

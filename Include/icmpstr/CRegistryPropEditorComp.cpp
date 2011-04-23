@@ -4,6 +4,8 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "icomp/CComponentMetaDescriptionEncoder.h"
+
 
 // public methods
 	
@@ -23,11 +25,23 @@ void CRegistryPropEditorComp::UpdateEditor(int /*updateFlags*/)
 	}
 
 	DescriptionEdit->setText(iqt::GetQString(registryPtr->GetDescription()));
-	KeywordsEdit->setText(iqt::GetQString(registryPtr->GetKeywords()));
-/*
-	CComponentCategoryEncoder encoder;
-	m_categoryComboBox->SetItemsChecked(encoder.GetCategoryNames(registryPtr->GetCategory()));
-*/
+
+	icomp::CComponentMetaDescriptionEncoder metaDescriptionEncoder(registryPtr->GetKeywords());
+
+	QStringList companyList = iqt::GetQStringList(metaDescriptionEncoder.GetValues("Company"));
+	QStringList projectsList = iqt::GetQStringList(metaDescriptionEncoder.GetValues("Project"));
+	QStringList authorsList = iqt::GetQStringList(metaDescriptionEncoder.GetValues("Author"));
+	QStringList categoriesList = iqt::GetQStringList(metaDescriptionEncoder.GetValues("Category"));
+	QStringList tagsList = iqt::GetQStringList(metaDescriptionEncoder.GetValues("Tag"));
+	QStringList keywords = iqt::GetQStringList(metaDescriptionEncoder.GetUnassignedKeywords());
+
+	CompanyEdit->setText(companyList.join(","));
+	CategoryEdit->setText(categoriesList.join(","));
+	ProjectEdit->setText(projectsList.join(","));
+	AuthorEdit->setText(authorsList.join(","));
+	TagsEdit->setText(tagsList.join(","));
+	KeywordsEdit->setText(keywords.join(","));
+
 	CreateOverview();
 }
 
@@ -45,17 +59,22 @@ void CRegistryPropEditorComp::OnGuiModelAttached()
 	BaseClass::OnGuiModelAttached();
 
 	DescriptionEdit->setEnabled(true);
-	KeywordsEdit->setEnabled(true);
+	RegistryInfoFrame->setEnabled(true);
 }
 
 
 void CRegistryPropEditorComp::OnGuiModelDetached()
 {
 	DescriptionEdit->clear();
+	CompanyEdit->clear();
+	CategoryEdit->clear();
+	ProjectEdit->clear();
+	AuthorEdit->clear();
+	TagsEdit->clear();
 	KeywordsEdit->clear();
 
 	DescriptionEdit->setDisabled(true);
-	KeywordsEdit->setDisabled(true);
+	RegistryInfoFrame->setDisabled(true);
 
 	OverviewTree->clear();
 
@@ -139,27 +158,15 @@ void CRegistryPropEditorComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	connect(CompanyEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+	connect(ProjectEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+	connect(AuthorEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+	connect(CategoryEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+	connect(TagsEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+	connect(KeywordsEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+
 	OverviewTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 	OverviewTree->setStyleSheet("QTreeView {background: palette(window)} QTreeView::branch {background: palette(window);} QTreeView::item {min-height: 25px}");
-/*
-	m_categoryComboBox = new iqtgui::CCheckableComboBox(CategoryGroupBox);
-	QLayout* groubBoxLayout = CategoryGroupBox->layout();
-	if (groubBoxLayout != NULL){
-		groubBoxLayout->addWidget(m_categoryComboBox);
-	}
-
-	CComponentCategoryEncoder encoder;
-	const CComponentCategoryEncoder::CategoriesMap& categoriesMap = encoder.GetCategoriesMap();
-
-	for (		CComponentCategoryEncoder::CategoriesMap::const_iterator iterator = categoriesMap.begin();
-				iterator != categoriesMap.end();
-				iterator++){		
-		m_categoryComboBox->addItem(iterator.value(), false);
-	}
-
-	connect(m_categoryComboBox, SIGNAL(EmitActivatedItems(const QStringList&)), this, SLOT(OnCategoriesChanged(const QStringList&)));
-
-	*/
 }
 
 
@@ -180,11 +187,26 @@ void CRegistryPropEditorComp::on_DescriptionEdit_editingFinished()
 }
 
 
-void CRegistryPropEditorComp::on_KeywordsEdit_editingFinished()
+void CRegistryPropEditorComp::OnUpdateKeywords()
 {
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
-		istd::CString keywords = iqt::GetCString(KeywordsEdit->text());
+		QString company = ConvertToKeyword(CompanyEdit->text(), "Company");
+		QString project = ConvertToKeyword(ProjectEdit->text(), "Project");
+		QString author = ConvertToKeyword(AuthorEdit->text(), "Author");
+		QString category = ConvertToKeyword(CategoryEdit->text(), "Category");
+		QString tags = ConvertToKeyword(TagsEdit->text(), "Tag");
+		QString unassignedKeywords = ConvertToKeyword(KeywordsEdit->text());
+
+		QString allKeywords =
+					unassignedKeywords + QString(" ") + 
+					company + QString(" ") + 
+					project + QString(" ") + 
+					author + QString(" ") + 
+					category + QString(" ") + 
+					tags;
+		
+		istd::CString keywords = iqt::GetCString(allKeywords.simplified());
 
 		if (keywords != registryPtr->GetKeywords()){
 			istd::CChangeNotifier notifier(registryPtr);
@@ -195,23 +217,36 @@ void CRegistryPropEditorComp::on_KeywordsEdit_editingFinished()
 }
 
 
-void CRegistryPropEditorComp::OnCategoriesChanged(const QStringList& /*categories*/)
-{/*
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		CComponentCategoryEncoder encoder;
-		int category = encoder.GetCategoryFromNames(categories);
+// private static methods
 
-		if (category != registryPtr->GetCategory()){
-			istd::CChangeNotifier notifier(registryPtr);
-
-			registryPtr->SetCategory(category);
-		}
+QString CRegistryPropEditorComp::ConvertToKeyword(const QString& input, const QString& key)
+{
+	static QString emptyString;
+	if (input.isEmpty()){
+		return emptyString;
 	}
-	*/
+
+	QString keyword = !key.isEmpty() ? key + "=\'" : key;
+
+	QStringList inputPartList = input.split(",", QString::SkipEmptyParts);
+
+	for (int inputPartIndex = 0; inputPartIndex < inputPartList.count(); inputPartIndex++){
+		QString inputPart = inputPartList[inputPartIndex].simplified();
+		if (inputPart.contains(" ")){
+			inputPart = QString("\"") + inputPart + QString("\"");
+		}
+
+		keyword += inputPart + QString(" ");
+	}
+
+	keyword = keyword.simplified();
+	
+	if (!key.isEmpty()){
+		keyword += "\'";
+	}
+
+	return keyword;
 }
-
-
 
 
 // public methods of embedded class TextLog

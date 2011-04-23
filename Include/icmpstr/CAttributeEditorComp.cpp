@@ -14,6 +14,7 @@
 
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CCompositeComponentStaticInfo.h"
+#include "icomp/CComponentMetaDescriptionEncoder.h"
 
 
 // public methods
@@ -446,7 +447,15 @@ void CAttributeEditorComp::UpdateSelectedAttr()
 		const icomp::CComponentAddress& address = infoMap.begin()->first;
 
 		DescriptionLabel->setText(iqt::GetQString(infoPtr->GetDescription()));
-		KeywordsLabel->setText(iqt::GetQString(infoPtr->GetKeywords()));
+		
+		icomp::CComponentMetaDescriptionEncoder encoder(infoPtr->GetKeywords());
+
+		CompanyLabel->setText(iqt::GetQStringList(encoder.GetValues("Company")).join(", "));
+		ProjectLabel->setText(iqt::GetQStringList(encoder.GetValues("Project")).join(", "));
+		AuthorLabel->setText(iqt::GetQStringList(encoder.GetValues("Author")).join(", "));
+		CategoryLabel->setText(iqt::GetQStringList(encoder.GetValues("Category")).join(", "));
+		TagsLabel->setText(iqt::GetQStringList(encoder.GetValues("Tag")).join(", "));
+		KeywordsLabel->setText(iqt::GetQStringList(encoder.GetUnassignedKeywords()).join(", "));
 
 		AddressLabel->setText(QString(address.GetPackageId().c_str()) + QString("/") + address.GetComponentId().c_str());
 		AddressLabel->setVisible(true);

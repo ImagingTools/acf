@@ -22,7 +22,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               AllowOpenFile
@@ -63,6 +63,44 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              BackgroundMode
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                3
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileExplorerSettingsKey
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                FileExplorer
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               FitMode
             </Id>
             <Type>
@@ -77,6 +115,25 @@
               </IsEnabled>
               <Value>
                 2
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              PathPersistenceSettingsKey
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RecentFileSelectorPath
               </Value>
             </Data>
           </AttributeInfo>
@@ -649,6 +706,6 @@
     Tutorial: File system exploring with bitmap preview
   </Description>
   <Keywords>
-    ACF File Explorer Demo Preview
+    Explorer Demo Preview Company='ImagingTools' Project='ACF' Author='"Witold Gantzke" "Kirill Lepskiy"' Category='Tutorial' Tag='Qt File Gui'
   </Keywords>
 </Acf>
