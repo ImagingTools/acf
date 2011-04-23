@@ -24,7 +24,7 @@ public:
 
 	// pseudo-reimplemented (icomp::IComponent)
 	virtual void SetComponentContext(
-				const icomp::IComponentContext* contextPtr,
+				const IComponentContext* contextPtr,
 				const IComponent* parentPtr,
 				bool isParentOwner);
 };
@@ -54,7 +54,7 @@ TComponentWrap<Component>::~TComponentWrap()
 
 template <class Component>
 void TComponentWrap<Component>::SetComponentContext(
-			const icomp::IComponentContext* contextPtr,
+			const IComponentContext* contextPtr,
 			const IComponent* parentPtr,
 			bool isParentOwner)
 {
