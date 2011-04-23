@@ -79,6 +79,7 @@ public:
 
 	/**
 		Called if subcomponent is removed from memory.
+		\param	subcomponentPtr	pointer to component beeing removed. It cannot be NULL.
 	*/
 	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr) = 0;
 };

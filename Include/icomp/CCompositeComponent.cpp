@@ -238,18 +238,26 @@ IComponent* CCompositeComponent::CreateSubcomponent(const std::string& component
 
 void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPtr)
 {
+	I_ASSERT(subcomponentPtr != NULL);
+
 	for (		ComponentMap::iterator iter = m_componentMap.begin();
 				iter != m_componentMap.end();
 				++iter){
 		ComponentInfo& info = iter->second;
 		if (info.componentPtr == subcomponentPtr){
+			info.componentPtr->SetComponentContext(NULL, NULL, false);
+
 			info.componentPtr.PopPtr();
 
 			info.isInitialized = false;
+
+			delete this;
+
+			return;
 		}
 	}
 
-	delete this;
+	I_CRITICAL();	// subcomponent not found in this composition
 }
 
 
