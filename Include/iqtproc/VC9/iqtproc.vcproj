@@ -168,11 +168,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CDocumentProcessingCommandComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDocumentProcessingManagerComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CDocumentProcessingManagerComp.moc"
+				RelativePath="..\CDocumentProcessingManagerCompBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CDocumentProcessingManagerCompBase.moc"
 				>
 			</File>
 			<File
@@ -198,7 +206,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\CDocumentProcessingCommandComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CDocumentProcessingManagerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDocumentProcessingManagerCompBase.h"
 				>
 			</File>
 			<File
@@ -227,7 +243,7 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\generated\moc_CDocumentProcessingManagerComp.cpp"
+				RelativePath="..\generated\moc_CDocumentProcessingManagerCompBase.cpp"
 				>
 			</File>
 			<File
