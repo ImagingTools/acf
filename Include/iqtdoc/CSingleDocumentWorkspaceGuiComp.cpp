@@ -239,6 +239,8 @@ void CSingleDocumentWorkspaceGuiComp::OnGuiCreated()
 void CSingleDocumentWorkspaceGuiComp::OnGuiDestroyed()
 {
 	FileClose();
+
+	BaseClass::OnGuiDestroyed();
 }
 
 

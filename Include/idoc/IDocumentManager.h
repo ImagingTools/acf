@@ -113,6 +113,14 @@ public:
 	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const = 0;
 
 	/**
+		Add a new view to the document.
+		\param	document		document instance
+		\param	viewTypeId		ID of view type, if it will be created.
+		\return					Created view object
+	*/
+	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId = std::string()) = 0;
+
+	/**
 		Get ID of document type managed by this object.
 		\return	ID of document type or empty string if no document is found.
 	*/
@@ -159,14 +167,14 @@ public:
 
 	/**
 		Close current view.
-		\param	documentIndex	optional index of document to save.
+		\param	documentIndex	optional index of document to close.
 		\param	ignoredPtr		optional return flag indicating that closing was aborted by user.
 	*/
 	virtual void FileClose(int documentIndex = -1, bool* ignoredPtr = NULL) = 0;
 
 	/**
 		Print current document.
-		\param	documentIndex	optional index of document to save.
+		\param	documentIndex	optional index of document to print.
 	*/
 	virtual void FilePrint(int documentIndex = -1) const = 0;
 };

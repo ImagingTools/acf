@@ -43,6 +43,7 @@
 
 #include "iqtproc/CProgressManagerGuiComp.h"
 #include "iqtproc/CProcessorControlGuiComp.h"
+#include "iqtproc/CDocumentProcessingManagerComp.h"
 
 
 /**
@@ -90,6 +91,7 @@ typedef iqtdoc::CHtmlHelpViewerComp HtmlHelpViewer;
 
 typedef iqtproc::CProgressManagerGuiComp ProgressManagerGui;
 typedef iqtproc::CProcessorControlGuiComp ProcessorControlGui;
+typedef iqtproc::CDocumentProcessingManagerComp DocumentProcessingManager;
 
 
 } // namespace QtGuiPck

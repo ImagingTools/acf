@@ -32,6 +32,7 @@ public:
 	virtual istd::IPolymorphic* GetViewFromIndex(int documentIndex, int viewIndex) const;
 	virtual istd::IPolymorphic* GetActiveView() const;
 	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const;
+	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId = std::string());
 	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const;
 	virtual bool FileNew(
 				const std::string& documentTypeId, 

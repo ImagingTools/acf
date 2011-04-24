@@ -118,6 +118,40 @@ istd::IChangeable* CMultiDocumentManagerBase::GetDocumentFromView(const istd::IP
 }
 
 
+istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId)
+{
+	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
+	if (documentTemplatePtr == NULL){
+		return NULL;
+	}
+
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		SingleDocumentData& info = GetSingleDocumentData(i);
+		
+		if(info.documentPtr == &document){
+			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+				info.documentTypeId,
+				info.documentPtr.GetPtr(),
+				viewTypeId);
+			if (viewPtr == NULL){
+				return NULL;
+			}
+
+			info.views.push_back(ViewPtr());
+			info.views.back().SetPtr(viewPtr);
+
+			OnViewRegistered(viewPtr);
+
+			return viewPtr;
+		}
+	}
+
+	return NULL;
+}
+
+
+
 std::string CMultiDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable& document) const
 {
 	int documentsCount = GetDocumentsCount();

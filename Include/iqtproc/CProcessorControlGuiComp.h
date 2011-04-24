@@ -1,5 +1,5 @@
-#ifndef iqtproc_CAcquisitonProcessorGuiComp_included
-#define iqtproc_CAcquisitonProcessorGuiComp_included
+#ifndef iqtproc_CProcessorControlGuiComp_included
+#define iqtproc_CProcessorControlGuiComp_included
 
 
 // Qt includes
@@ -28,7 +28,7 @@ namespace iqtproc
 {
 
 
-class CProcessorControlGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CProcessorControlGuiComp, QWidget>
+class CProcessorControlGuiComp: public iqtgui::TDesignerGuiCompBase<Ui::CProcessorControlGuiComp>
 {
 	Q_OBJECT
 
@@ -92,6 +92,6 @@ private:
 } // namespace iqtproc
 
 
-#endif // !iqtproc_CAcquisitonProcessorGuiComp_included
+#endif // !iqtproc_CProcessorControlGuiComp_included
 
 

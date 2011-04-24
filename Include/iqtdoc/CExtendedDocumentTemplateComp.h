@@ -7,8 +7,9 @@
 
 
 // ACF includes
-#include "ibase/ICommandsProvider.h"
 #include "idoc/CSingleDocumentTemplateComp.h"
+
+#include "ibase/ICommandsProvider.h"
 
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/CHierarchicalCommand.h"

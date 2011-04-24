@@ -93,6 +93,33 @@ istd::IChangeable* CSingleDocumentManagerBase::GetDocumentFromView(const istd::I
 }
 
 
+istd::IPolymorphic* CSingleDocumentManagerBase::AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId)
+{
+	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
+	if (documentTemplatePtr != NULL){
+		if (m_documentPtr.IsValid() && m_documentPtr.GetPtr() == &document){
+			EnsureViewRemoved();
+
+			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
+						m_documentTypeId,
+						m_documentPtr.GetPtr(),
+						viewTypeId);
+			if (viewPtr != NULL){
+				m_viewPtr.SetPtr(viewPtr);
+
+				m_viewTypeId = viewTypeId;
+
+				OnViewRegistered(viewPtr);
+			}
+
+			return viewPtr;
+		}
+	}
+
+	return NULL;
+}
+
+
 std::string CSingleDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable& document) const
 {
 	if (&document == m_documentPtr.GetPtr()){

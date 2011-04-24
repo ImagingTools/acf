@@ -3,6 +3,8 @@
 
 
 #include "iqt/iqt.h"
+#include "iqtgui/iqtgui.h"
+#include "iqtdoc/iqtdoc.h"
 
 
 /**

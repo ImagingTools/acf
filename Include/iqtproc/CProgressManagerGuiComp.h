@@ -65,8 +65,6 @@ private:
 	double m_progressSum;
 
 	int m_cancelableSessionsCount;
-
-	IProgressManager* m_slaveManagerPtr;
 };
 
 
