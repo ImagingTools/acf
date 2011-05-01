@@ -57,7 +57,7 @@ void CObjectPreviewGuiComp::UpdateModel() const
 
 void CObjectPreviewGuiComp::OnGuiModelDetached()
 {
-	if (m_objectObserverCompPtr.IsValid() && m_objectModelCompPtr.IsValid()){
+	if (m_objectModelCompPtr.IsValid() && m_objectObserverCompPtr.IsValid()){
 		if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
 			m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
 		}
@@ -104,17 +104,9 @@ void CObjectPreviewGuiComp::OnFileChanged(const QString&/* filePath*/)
 void CObjectPreviewGuiComp::UpdateObjectFromFile()
 {
 	QFileInfo fileInfo(m_lastFilePath);
-	if (!fileInfo.exists()){
-		if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
-			m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
-		}
-	}
-	else{
-		if (!m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
-			m_objectModelCompPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
-		}
-	}
-	
+
+	bool disableView = !fileInfo.exists();
+
 	if (fileInfo.lastModified() != m_lastModificationTimeStamp){
 		m_lastModificationTimeStamp = fileInfo.lastModified();
 
@@ -123,9 +115,20 @@ void CObjectPreviewGuiComp::UpdateObjectFromFile()
 		if (m_fileLoaderCompPtr.IsValid()){
 			int retVal = m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr.GetPtr(), iqt::GetCString(m_lastFilePath));
 			if (retVal != iser::IFileLoader::StateOk){
-				if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
-					m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
-				}
+				disableView = true;
+			}
+		}
+	}
+
+	if (m_objectModelCompPtr.IsValid() && m_objectObserverCompPtr.IsValid()){
+		if (disableView){
+			if (m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
+				m_objectModelCompPtr->DetachObserver(m_objectObserverCompPtr.GetPtr());
+			}
+		}
+		else{
+			if (!m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
+				m_objectModelCompPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
 			}
 		}
 	}

@@ -66,6 +66,7 @@ public:
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
 	// reimplemented (imod::IObserver)
+	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 

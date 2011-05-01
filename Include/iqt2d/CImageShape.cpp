@@ -29,6 +29,12 @@ CImageShape::CImageShape(const icmm::IColorTransformation* colorTransformationPt
 
 // reimplemented (imod::IObserver)
 
+void CImageShape::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	prepareGeometryChange();
+}
+
+
 void CImageShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(GetObjectPtr());
@@ -45,7 +51,7 @@ void CImageShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, i
 	if (m_colorTransformationPtr != NULL){
 		SetLookupTableToImage(image, *m_colorTransformationPtr);
 	}
-		
+
 	m_bitmap = QPixmap::fromImage(image, Qt::AutoColor);
 
 	update();
