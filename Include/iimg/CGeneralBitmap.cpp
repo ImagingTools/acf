@@ -110,17 +110,24 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 	switch(pixelFormat){
 		case PF_UNKNOWN:
 			return false;
+
 		case PF_USER:
 			return CreateBitmap(size);
+
 		case PF_GRAY:
 			return CreateBitmap(size, 8, 1, PF_GRAY);
+
 		case PF_RGB:
 		case PF_RGBA:
 			return CreateBitmap(size, 32, 4, pixelFormat);
+
+		case PF_GRAY32:
+			return CreateBitmap(size, 32, 1, PF_GRAY32);
 	}
 
 	return false;
 }
+
 
 bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference)
 {

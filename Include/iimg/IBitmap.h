@@ -48,7 +48,11 @@ public:
 		/**
 			32-bit RGB bitmap with alpha channel.
 		*/
-		PF_RGBA
+		PF_RGBA,
+		/**
+			32-bit grayscale bitmap.
+		*/
+		PF_GRAY32
 	};
 
 
