@@ -11,11 +11,54 @@ namespace iproc
 {
 
 
+// public methods
+
+CModelBasedProcessingTriggerComp::CModelBasedProcessingTriggerComp()
+	:m_paramsObserver(*this)
+{
+}
+
+// reimplemented (icomp::IComponent)
+
+void CModelBasedProcessingTriggerComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_paramsSetCompPtr.IsValid() && m_triggerOnParamsChangeAttrPtr.IsValid() && *m_triggerOnParamsChangeAttrPtr){
+		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(m_paramsSetCompPtr.GetPtr());
+		if (paramsModelPtr != NULL){
+			paramsModelPtr->AttachObserver(&m_paramsObserver);
+		}
+	}
+}
+
+
+void CModelBasedProcessingTriggerComp::OnComponentDestroyed()
+{
+	if (m_paramsSetCompPtr.IsValid() && m_triggerOnParamsChangeAttrPtr.IsValid() && *m_triggerOnParamsChangeAttrPtr){
+		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(m_paramsSetCompPtr.GetPtr());
+		if (paramsModelPtr != NULL && paramsModelPtr->IsAttached(&m_paramsObserver)){
+			paramsModelPtr->DetachObserver(&m_paramsObserver);
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 // protected methods
 	
-// reimplemented (imod::CMultiModelObserverBase)
+// reimplemented (imod::CSingleModelObserverBase)
 
 void CModelBasedProcessingTriggerComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	DoProcessing();
+}
+
+
+// private methods
+
+void CModelBasedProcessingTriggerComp::DoProcessing()
 {
 	if (!m_processorCompPtr.IsValid()){
 		SendErrorMessage(0, "Processor not set");
@@ -41,6 +84,22 @@ void CModelBasedProcessingTriggerComp::OnUpdate(int /*updateFlags*/, istd::IPoly
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing failed");
 	}
+}
+
+
+// public methods of the embedded class ParamsObserver
+
+CModelBasedProcessingTriggerComp::ParamsObserver::ParamsObserver(CModelBasedProcessingTriggerComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CModelBasedProcessingTriggerComp::ParamsObserver::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_parent.DoProcessing();
 }
 
 

@@ -90,6 +90,11 @@ I_EXPORT_COMPONENT(
 			"Simple binder for scene provider and scene extender",
 			"Scene Extender Binder Console Connector Display" IM_TAG("2D"));
 
+I_EXPORT_COMPONENT(
+			SelectableSceneExtender,
+			"Selectable scene extender",
+			"Scene Extender Selection Console Connector Display" IM_TAG("2D"));
+
 
 } // namespace QtViewPck
 

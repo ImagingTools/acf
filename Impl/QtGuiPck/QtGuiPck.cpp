@@ -219,6 +219,11 @@ I_EXPORT_COMPONENT(
 			"Document processing command",
 			"Processing Document Command" IM_TAG("Processing"));
 
+I_EXPORT_COMPONENT(
+			SelectableGui,
+			"Component to show a GUI from the list of options",
+			"Selection Stack" IM_TAG("GUI"));
+
 
 } // namespace QtGuiPck
 

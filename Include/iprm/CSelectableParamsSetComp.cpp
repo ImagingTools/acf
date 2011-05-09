@@ -10,7 +10,7 @@ namespace iprm
 
 
 CSelectableParamsSetComp::CSelectableParamsSetComp()
-:	m_selectedIndex(0)
+:	m_selectedIndex(-1)
 {
 }
 
@@ -26,7 +26,7 @@ const iser::ISerializable* CSelectableParamsSetComp::GetParameter(const std::str
 		return static_cast<const ISelectionParam*>(this);
 	}
 
-	if (m_paramsManagerCompPtr.IsValid() && (m_selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount())){
+	if (m_paramsManagerCompPtr.IsValid() && (m_selectedIndex >= 0) && (m_selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount())){
 		const IParamsSet* paramsSetPtr = m_paramsManagerCompPtr->GetParamsSet(m_selectedIndex);
 		if (paramsSetPtr != NULL){
 			return paramsSetPtr->GetParameter(id);
@@ -66,7 +66,7 @@ int CSelectableParamsSetComp::GetSelectedOptionIndex() const
 
 bool CSelectableParamsSetComp::SetSelectedOptionIndex(int index)
 {
-	if ((index >= 0) && (index < GetOptionsCount())){
+	if (index < GetOptionsCount()){
 		if (index != m_selectedIndex){
 			istd::CChangeNotifier notifier(this);
 

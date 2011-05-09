@@ -305,6 +305,10 @@
 				RelativePath="..\CSceneProviderGuiComp.moc"
 				>
 			</File>
+			<File
+				RelativePath="..\CSelectableSceneExtenderComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -411,6 +415,10 @@
 			</File>
 			<File
 				RelativePath="..\CSceneProviderGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableSceneExtenderComp.h"
 				>
 			</File>
 			<File

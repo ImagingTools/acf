@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectableGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionParamGuiComp.cpp"
 				>
 			</File>
@@ -213,6 +217,10 @@
 			</File>
 			<File
 				RelativePath="..\CRelativeFileNameParamComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableGuiComp.h"
 				>
 			</File>
 			<File
@@ -250,6 +258,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CSelectableGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSelectionParamGuiComp.cpp"
 				>
 			</File>
@@ -275,6 +287,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CParamsManagerGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSelectableGuiComp.h"
 				>
 			</File>
 			<File
@@ -306,6 +322,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectableGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionParamGuiComp.ui"
 				>
 			</File>
@@ -331,6 +351,10 @@
 			</File>
 			<File
 				RelativePath="..\CParamsManagerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableGuiComp.moc"
 				>
 			</File>
 			<File
