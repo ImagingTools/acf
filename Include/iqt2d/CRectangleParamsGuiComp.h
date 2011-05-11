@@ -14,16 +14,17 @@ namespace iqt2d
 {
 
 
-class CRectangleParamsGuiComp: public iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CRectangleParamsGuiComp,
-			i2d::CRectangle> >
+class CRectangleParamsGuiComp:
+			public iqt2d::TSceneExtenderCompBase<
+						iqtgui::TDesignerGuiObserverCompBase<
+										Ui::CRectangleParamsGuiComp, i2d::CRectangle> >
 {
 	Q_OBJECT
 
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CRectangleParamsGuiComp,
-				i2d::CRectangle> > BaseClass;
+	typedef iqt2d::TSceneExtenderCompBase<
+					iqtgui::TDesignerGuiObserverCompBase<
+								Ui::CRectangleParamsGuiComp, i2d::CRectangle> > BaseClass;
 
 	I_BEGIN_COMPONENT(CRectangleParamsGuiComp)
 		I_ASSIGN(m_rectZValueAttrPtr, "RectZValue", "Describe draw priority on display console (the objects with bigger value will overlap the other ones)", true, 1);
@@ -44,7 +45,7 @@ public:
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
 
-protected slots:
+protected Q_SLOTS:
 	void OnParamsChanged(double value);
 
 private:

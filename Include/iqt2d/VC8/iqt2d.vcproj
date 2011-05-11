@@ -6,6 +6,7 @@
 	ProjectGUID="{F9F47984-52CC-4D6B-9079-FC7DD1009C6E}"
 	RootNamespace="iqt2d"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -301,6 +302,10 @@
 				RelativePath="..\CSceneProviderGuiComp.moc"
 				>
 			</File>
+			<File
+				RelativePath="..\CSelectableSceneExtenderComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -407,6 +412,10 @@
 			</File>
 			<File
 				RelativePath="..\CSceneProviderGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableSceneExtenderComp.h"
 				>
 			</File>
 			<File
