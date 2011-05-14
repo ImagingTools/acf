@@ -56,7 +56,7 @@ public:
 
 	enum ChangeFlags
 	{
-		CF_SUPPLIER_RESULTS = 0x4000000
+		CF_SUPPLIER_RESULTS = 1 << 21
 	};
 
 	/**

@@ -35,10 +35,9 @@ public:
 	*/
 	enum ChangeFlags
 	{
-		CF_SET_INSERTED = 0x1000,
-		CF_SET_REMOVED = 0x2000,
-		CF_SET_NAME_CHANGED = 0x4000,
-		CF_SELECTION_CHANGED = 0x8000
+		CF_SET_INSERTED = 1 << 14,
+		CF_SET_REMOVED = 1 << 15,
+		CF_SET_NAME_CHANGED = 1 << 16
 	};
 
 	/**

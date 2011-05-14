@@ -32,7 +32,7 @@ class IElementSelectionInfo: virtual public istd::IChangeable
 public:
 	enum ChangeFlags
 	{
-		CF_SELECTION = 0x40000000
+		CF_SELECTION = 1 << 31
 	};
 
 	typedef std::map<std::string, const icomp::IRegistry::ElementInfo*> Elements;

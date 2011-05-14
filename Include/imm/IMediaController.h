@@ -17,8 +17,8 @@ class IMediaController: virtual public istd::IChangeable
 public:
 	enum ChangeFlags
 	{
-		CF_STATUS = 0x0400000,
-		CF_MEDIA_POSITION = 0x0800000,
+		CF_STATUS = 1 << 28,
+		CF_MEDIA_POSITION = 29,
 	};
 
 	enum SupportedFeatures

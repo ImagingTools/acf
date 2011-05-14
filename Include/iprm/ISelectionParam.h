@@ -20,6 +20,11 @@ class ISelectionConstraints;
 class ISelectionParam: virtual public iser::ISerializable
 {
 public:
+	enum ChangeFlags
+	{
+		CF_SELECTION_CHANGED = 1 << 17
+	};
+
 	/**
 		Get constraints of this parameter.
 		Constraints describes some additional information about allowed parameter ranges and related informations.

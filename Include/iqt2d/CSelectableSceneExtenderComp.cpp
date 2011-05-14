@@ -122,7 +122,9 @@ void CSelectableSceneExtenderComp::DetachCurrent()
 
 void CSelectableSceneExtenderComp::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	DetachCurrent();
+	if ((updateFlags & iprm::ISelectionParam::CF_SELECTION_CHANGED) != 0){
+		DetachCurrent();
+	}
 
 	BaseClass2::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
@@ -130,7 +132,9 @@ void CSelectableSceneExtenderComp::BeforeUpdate(imod::IModel* modelPtr, int upda
 
 void CSelectableSceneExtenderComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	AttachCurrent();
+	if ((updateFlags & iprm::ISelectionParam::CF_SELECTION_CHANGED) != 0){
+		AttachCurrent();
+	}
 
 	BaseClass2::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }

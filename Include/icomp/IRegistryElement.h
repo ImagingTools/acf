@@ -36,8 +36,8 @@ public:
 		/**
 			Indicate that data model is changed.
 		*/
-		CF_ATTRIBUTE_CHANGED = 0x10000000,
-		CF_FLAGS_CHANGED = 0x20000000
+		CF_ATTRIBUTE_CHANGED = 1 << 29,
+		CF_FLAGS_CHANGED = 1 << 30
 	};
 
 	enum ElementFlags

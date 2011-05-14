@@ -24,7 +24,7 @@ class CReflectedBitmapBase:
 public:
 	enum ChangeFlags
 	{
-		CF_BLOCK_BITMAP_CONVERSION = 0x200000
+		CF_BLOCK_BITMAP_CONVERSION = 1 << 21
 	};
 
 	// reimplemented (iqt::IQImageProvider)

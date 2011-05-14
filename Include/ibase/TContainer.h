@@ -26,9 +26,9 @@ class TContainer: virtual public istd::IContainerInfo, virtual public istd::ICha
 public:
 	enum ChangeFlags
 	{
-		CF_ELEMENT_ADDED = 0x1000000,
-		CF_ELEMENT_REMOVED = 0x2000000,
-		CF_RESET = 0x4000000
+		CF_ELEMENT_ADDED = 1 << 21,
+		CF_ELEMENT_REMOVED = 1 << 22,
+		CF_RESET = 1 << 23
 	};
 
 	const ItemClass& GetAt(int index) const;

@@ -23,7 +23,7 @@ public:
 		/**
 			Called at begin of editor initialization.
 		*/
-		CF_INIT_EDITOR = 0x10
+		CF_INIT_EDITOR = 1 << 4
 	};
 
 	/**

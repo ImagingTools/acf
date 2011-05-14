@@ -23,8 +23,8 @@ public:
 	*/
 	enum ChangeFlags
 	{
-		CF_OPTIONS_COUNT_CHANGED = 0x200,
-		CF_OPTION_RENAMED = 0x400
+		CF_OPTIONS_COUNT_CHANGED = 1 << 18,
+		CF_OPTION_RENAMED = 1 << 19
 	};
 
 	/**

@@ -23,7 +23,7 @@ class IObject2d: virtual public iser::ISerializable
 public:
 	enum ChangeFlags
 	{
-		CF_OBJECT_POSITION = 0x800
+		CF_OBJECT_POSITION = 1 << 20
 	};
 
 	/**

@@ -24,9 +24,9 @@ public:
 
 	enum ChangeFlags
 	{
-		CF_MESSAGE_ADDED = 0x20,
-		CF_MESSAGE_REMOVED = 0x40,
-		CF_RESET = 0x80
+		CF_MESSAGE_ADDED = 1 << 6,
+		CF_MESSAGE_REMOVED = 1 << 7,
+		CF_RESET = 1 << 8
 	};
 
 	/**

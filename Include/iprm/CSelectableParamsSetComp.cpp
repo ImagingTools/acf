@@ -4,13 +4,17 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "imod/IModel.h"
+
 
 namespace iprm
 {
 
 
 CSelectableParamsSetComp::CSelectableParamsSetComp()
-:	m_selectedIndex(-1)
+:	m_selectedIndex(-1),
+	m_currentParamsSetObserver(*this),
+	m_currentParamsModelPtr(NULL)
 {
 }
 
@@ -68,9 +72,11 @@ bool CSelectableParamsSetComp::SetSelectedOptionIndex(int index)
 {
 	if (index < GetOptionsCount()){
 		if (index != m_selectedIndex){
-			istd::CChangeNotifier notifier(this);
+			istd::CChangeNotifier notifier(this, CF_SELECTION_CHANGED);
 
 			m_selectedIndex = index;
+
+			SetupCurrentParamsSetBridge();
 		}
 
 		return true;
@@ -127,6 +133,50 @@ const istd::CString& CSelectableParamsSetComp::GetOptionName(int index) const
 	return noname;
 }
 
+
+// private methods
+
+void CSelectableParamsSetComp::SetupCurrentParamsSetBridge()
+{
+	const imod::IModel* currentParamsModelPtr = NULL;
+
+	if (m_selectedIndex >= 0 && m_selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount()){
+		currentParamsModelPtr = dynamic_cast<const imod::IModel*>((m_paramsManagerCompPtr->GetParamsSet(m_selectedIndex)));
+		if (currentParamsModelPtr != m_currentParamsModelPtr){
+			if (m_currentParamsModelPtr != NULL && m_currentParamsModelPtr->IsAttached(&m_currentParamsSetObserver)){
+				m_currentParamsModelPtr->DetachObserver(&m_currentParamsSetObserver);
+
+				m_currentParamsModelPtr = NULL;
+			}
+
+			if (currentParamsModelPtr != NULL && const_cast<imod::IModel*>(currentParamsModelPtr)->AttachObserver(&m_currentParamsSetObserver)){
+				m_currentParamsModelPtr  = const_cast<imod::IModel*>(currentParamsModelPtr);
+			}
+		}
+	}
+}
+
+
+// public methods of the embedded class CurrentParamsSetObserver
+
+CSelectableParamsSetComp::CurrentParamsSetObserver::CurrentParamsSetObserver(CSelectableParamsSetComp& parent)
+	:m_parent(parent)
+{
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CSelectableParamsSetComp::CurrentParamsSetObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_parent.BeginChanges(updateFlags | istd::IChangeable::CF_DELEGATED, updateParamsPtr);
+}
+
+
+void CSelectableParamsSetComp::CurrentParamsSetObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_parent.EndChanges(updateFlags | istd::IChangeable::CF_DELEGATED, updateParamsPtr);
+}
 
 
 } // namespace iprm

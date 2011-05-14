@@ -4,6 +4,8 @@
 
 #include "icomp/CComponentBase.h"
 
+#include "imod/CSingleModelObserverBase.h"
+
 #include "iprm/IParamsSet.h"
 #include "iprm/ISelectionParam.h"
 #include "iprm/ISelectionConstraints.h"
@@ -55,7 +57,34 @@ protected:
 	virtual const istd::CString& GetOptionName(int index) const;
 
 private:
+	/**
+		Set the bridge to the currently selected parameter set.
+		Over this mechanism the changes in the slave parameter set will be reflected by this object.
+		\sa CurrentParamsSetObserver
+	*/
+	void SetupCurrentParamsSetBridge();
+
+private:
+	/**
+		Observer for the selected parameter set.
+		On changes in the observed model the change event will be delegated to the observers of the CSelectableParamsSetComp object.
+	*/
+	class CurrentParamsSetObserver: public imod::CSingleModelObserverBase
+	{
+	public:
+		CurrentParamsSetObserver(CSelectableParamsSetComp& parent);
+
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	private:
+		CSelectableParamsSetComp& m_parent;
+	};
+
+private:
 	int m_selectedIndex;
+	CurrentParamsSetObserver m_currentParamsSetObserver;
+	imod::IModel* m_currentParamsModelPtr;
 
 	I_ATTR(istd::CString, m_selectionIdAttrPtr);
 	I_REF(IParamsManager, m_paramsManagerCompPtr);
