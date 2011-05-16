@@ -54,11 +54,15 @@ public:
 	virtual bool IsCanceled(int sessionId) const;
 
 protected:
+	int GetOpenSessionsCount() const;
+
+	/**
+		Called when state of cancel operation has changed.
+	*/
+	virtual void OnCancelable(bool cancelState);
+
 	// reimplemented (istd::IChangeable)
 	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
-
-protected:
-	bool m_isCanceled;
 
 private:
 	struct ProgressInfo

@@ -22,21 +22,30 @@ class CProgressManagerGuiComp:
 
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CProgressManagerGuiComp> BaseClass;
+	typedef iproc::CDelegatedProgressManager BaseClass2;
 
 	I_BEGIN_COMPONENT(CProgressManagerGuiComp);
 		I_REGISTER_INTERFACE(IProgressManager);
+		I_ASSIGN(m_showCancelAttrPtr, "ShowCancel", "If true, cancel button will be visible", true, true);
 		I_ASSIGN(m_automaticHideAttrPtr, "AutomaticHide", "If true, progress bar will be automatically hidden", true, false);
 		I_ASSIGN(m_descriptionAttrPtr, "Description", "Description text show left to progress bar", false, "Progress");
 	I_END_COMPONENT;
 
 	CProgressManagerGuiComp();
 
-	// reimplemented (iproc::IProgressManager)
-	virtual bool IsCanceled(int sessionId) const;
-
 protected:
 	void UpdateVisibleComponents();
 	void UpdateProgressBar();
+
+	// reimplemented (iproc::CDelegatedProgressManager)
+	void CProgressManagerGuiComp::OnCancelable(bool cancelState);
+
+	// reimplemented (iproc::IProgressManager)
+	virtual int CProgressManagerGuiComp::BeginProgressSession(
+				const std::string& progressId,
+				const istd::CString& description,
+				bool isCancelable);
+	virtual bool IsCanceled(int sessionId) const;
 
 	// reimplemented (istd::IChangeable)
 	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
@@ -48,23 +57,13 @@ protected slots:
 	void on_CancelButton_clicked();
 
 private:
+	I_ATTR(bool, m_showCancelAttrPtr);
 	I_ATTR(bool, m_automaticHideAttrPtr);
 	I_ATTR(istd::CString, m_descriptionAttrPtr);
 
-	struct ProgressInfo
-	{
-		double progress;
-		bool isCancelable;
-	};
+	bool m_isCanceled;
 
-	typedef std::map<int, ProgressInfo> ProgressMap;
-
-	ProgressMap m_progressMap;
-
-	int m_nextSessionId;
-	double m_progressSum;
-
-	int m_cancelableSessionsCount;
+	bool m_isCancelable;
 };
 
 

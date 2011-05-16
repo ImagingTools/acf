@@ -10,8 +10,7 @@ namespace iproc
 
 
 CDelegatedProgressManager::CDelegatedProgressManager()
-:	m_isCanceled(false),
-	m_nextSessionId(-1),
+:	m_nextSessionId(-1),
 	m_progressSum(0.0),
 	m_cancelableSessionsCount(0),
 	m_slaveManagerPtr(NULL),
@@ -58,10 +57,6 @@ int CDelegatedProgressManager::BeginProgressSession(
 			const istd::CString& /*description*/,
 			bool isCancelable)
 {
-	if (m_isCanceled){
-		return -1;
-	}
-
 	istd::CChangeNotifier notifier(this, CF_SESSIONS_NUMBER | CF_PROGRESS_CHANGED);
 
 	int id = m_nextSessionId++;
@@ -71,6 +66,10 @@ int CDelegatedProgressManager::BeginProgressSession(
 	info.isCancelable = isCancelable;
 
 	if (isCancelable){
+		if (m_cancelableSessionsCount == 0){
+			OnCancelable(true);
+		}
+
 		++m_cancelableSessionsCount;
 	}
 
@@ -90,14 +89,13 @@ void CDelegatedProgressManager::EndProgressSession(int sessionId)
 
 	if (info.isCancelable){
 		--m_cancelableSessionsCount;
+
+		if (m_cancelableSessionsCount == 0){
+			OnCancelable(false);
+		}
 	}
 
 	m_progressMap.erase(iter);
-
-	if (m_progressMap.empty()){
-		m_progressSum = 0;
-		m_isCanceled = false;
-	}
 }
 
 
@@ -124,6 +122,17 @@ bool CDelegatedProgressManager::IsCanceled(int /*sessionId*/) const
 
 
 // protected methods
+
+int CDelegatedProgressManager::GetOpenSessionsCount() const
+{
+	return int(m_progressMap.size());
+}
+
+
+void CDelegatedProgressManager::OnCancelable(bool /*cancelState*/)
+{
+}
+
 
 // reimplemented (istd::IChangeable)
 
