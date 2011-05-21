@@ -42,8 +42,8 @@ public:
 	I_BEGIN_COMPONENT(CMainWindowGuiComp);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
-		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
-		I_ASSIGN(m_documentManagerCommandsCompPtr, "DocumentManager", "Document manager", false, "DocumentManager");
+		I_ASSIGN_TO(m_documentManagerModelCompPtr, m_documentManagerCompPtr, true);
+		I_ASSIGN_TO(m_documentManagerCommandsCompPtr, m_documentManagerCompPtr, false);
 		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
 		I_ASSIGN(m_isOpenContainingFolderVisibleAttrPtr, "IsOpenContainingFolderVisible", "If true, operation Tools/Open Containing Folder will be visible", true, false);
 		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list for one document type", true, 10);

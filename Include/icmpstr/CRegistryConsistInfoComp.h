@@ -39,7 +39,7 @@ public:
 	I_BEGIN_COMPONENT(CRegistryConsistInfoComp);
 		I_REGISTER_INTERFACE(IRegistryConsistInfo);
 		I_ASSIGN(m_envManagerCompPtr, "EnvironmentManager", "Allows access to component environment information", true, "EnvironmentManager");
-		I_ASSIGN(m_externalMetaInfoManagerCompPtr, "EnvironmentManager", "Allows access to component environment information", false, "EnvironmentManager");
+		I_ASSIGN_TO(m_externalMetaInfoManagerCompPtr, m_envManagerCompPtr, false);
 	I_END_COMPONENT;
 
 	// reimplemented (icmpstr::IRegistryConsistInfo)

@@ -33,9 +33,9 @@ public:
 	I_BEGIN_COMPONENT(CObjectPreviewGuiComp);
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "Object loader", true, "FileLoader");
 		I_ASSIGN(m_objectCompPtr, "Object", "Object", true, "Object");
-		I_ASSIGN(m_objectModelCompPtr, "Object", "Object", true, "Object");
+		I_ASSIGN_TO(m_objectModelCompPtr, m_objectCompPtr, true);
 		I_ASSIGN(m_objectObserverCompPtr, "ObjectView", "View component for the object", true, "ObjectView");
-		I_ASSIGN(m_objectGuiCompPtr, "ObjectView", "View component for the object", true, "ObjectView");
+		I_ASSIGN_TO(m_objectGuiCompPtr, m_objectObserverCompPtr, true);
 	I_END_COMPONENT;
 
 protected:

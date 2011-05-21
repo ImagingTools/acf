@@ -32,8 +32,8 @@ public:
 		I_REGISTER_INTERFACE(iqtgui::IGuiObject)
 		I_REGISTER_INTERFACE(imod::IModelEditor)
 		I_ASSIGN(m_slaveEditorCompPtr, "SlaveEditorGui", "Slave GUI object will be connected to model", true, "SlaveEditor");
-		I_ASSIGN(m_slaveGuiCompPtr, "SlaveEditorGui", "Slave GUI object will be connected to model", true, "SlaveEditor");
-		I_ASSIGN(m_slaveObserverCompPtr, "SlaveEditorGui", "Slave GUI object will be connected to model", false, "SlaveEditor");
+		I_ASSIGN_TO(m_slaveGuiCompPtr, m_slaveEditorCompPtr, true);
+		I_ASSIGN_TO(m_slaveObserverCompPtr, m_slaveEditorCompPtr, false);
 		I_ASSIGN(m_modelCompPtr, "Model", "Model will be observed and modify using editor", true, "Model");
 	I_END_COMPONENT
 

@@ -2,6 +2,9 @@
 #define icomp_TAttributeStaticInfo_included
 
 
+// STL includes
+#include <map>
+
 #include "istd/CClassInfo.h"
 
 #include "icomp/IRealAttributeStaticInfo.h"
@@ -26,6 +29,7 @@ public:
 
 	// reimplemented (icomp::IRealAttributeStaticInfo)
 	virtual const std::string& GetAttributeId() const;
+	virtual void AddRelatedMetaId(int metaGroupId, const std::string& id, int flags);
 
 	// reimplemented (icomp::IAttributeStaticInfo)
 	virtual const std::string& GetAttributeDescription() const;
@@ -39,7 +43,10 @@ private:
 	std::string m_description;
 	const Attribute* m_defaultValuePtr;
 	int m_attributeFlags;
-	istd::CClassInfo m_relatedInterfaceType;
+
+	typedef std::map<std::string, int> IdsToFlagsMap;
+	typedef std::map<int, IdsToFlagsMap> RelatedIdsMap;
+	RelatedIdsMap m_relatedInterfacesMap;
 };
 
 
@@ -56,9 +63,12 @@ TAttributeStaticInfo<Attribute>::TAttributeStaticInfo(
 :	m_id(id),
 	m_description(description),
 	m_defaultValuePtr(defaultValuePtr),
-	m_attributeFlags(flags),
-	m_relatedInterfaceType(relatedInterfaceInfo)
+	m_attributeFlags(flags)
 {
+	if (relatedInterfaceInfo.IsValid() && !relatedInterfaceInfo.IsVoid()){
+		m_relatedInterfacesMap[IComponentStaticInfo::MGI_INTERFACES][relatedInterfaceInfo.GetName()] = flags;
+	}
+
 	staticInfo.RegisterAttributeInfo(id, this);
 }
 
@@ -69,6 +79,29 @@ template <class Attribute>
 const std::string& TAttributeStaticInfo<Attribute>::GetAttributeId() const
 {
 	return m_id;
+}
+
+
+template <class Attribute>
+void TAttributeStaticInfo<Attribute>::AddRelatedMetaId(int metaGroupId, const std::string& id, int flags)
+{
+	IdsToFlagsMap& groupMap = m_relatedInterfacesMap[metaGroupId];
+
+	IdsToFlagsMap::iterator foundIter = groupMap.find(id);
+	if (foundIter != groupMap.end()){
+		I_ASSERT((flags & (AF_REFERENCE | AF_FACTORY)) == (foundIter->second & (AF_REFERENCE | AF_FACTORY)));	// factory can be combined with factory only and reference with reference
+
+		foundIter->second |= flags & AF_OBLIGATORY;	// is obligatory if once obligatory registred is
+		foundIter->second &= flags | ~AF_NULLABLE;	// is nullable if always nullable registred is
+	}
+	else{
+		groupMap[id] = flags;
+	}
+
+	if (metaGroupId == IComponentStaticInfo::MGI_INTERFACES){
+		m_attributeFlags |= flags & AF_OBLIGATORY;	// attribute is obligatory if one of declared interfaces obligatory is
+		m_attributeFlags &= flags | ~AF_NULLABLE;	// attribute is nullable if all of declared interfaces nullable are
+	}
 }
 
 
@@ -100,9 +133,19 @@ IComponentStaticInfo::Ids TAttributeStaticInfo<Attribute>::GetRelatedMetaIds(int
 {
 	IComponentStaticInfo::Ids retVal;
 
-	if (metaGroupId == IComponentStaticInfo::MGI_INTERFACES){
-		if (((m_attributeFlags & flagsMask) == flags) && !m_relatedInterfaceType.IsVoid()){
-			retVal.insert(m_relatedInterfaceType.GetName());
+	RelatedIdsMap::const_iterator foundGroupIter = m_relatedInterfacesMap.find(metaGroupId);
+	if (foundGroupIter != m_relatedInterfacesMap.end()){
+		const IdsToFlagsMap& groupMap = foundGroupIter->second;
+
+		for (		IdsToFlagsMap::const_iterator iter = groupMap.begin();
+					iter != groupMap.end();
+					++iter){
+						const std::string& id = iter->first;
+			int idFlags = iter->second;
+
+			if (((idFlags & flagsMask) == flags)){
+				retVal.insert(id);
+			}
 		}
 	}
 

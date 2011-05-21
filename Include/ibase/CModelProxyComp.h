@@ -22,11 +22,11 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef imod::CModelProxy BaseClass2;
 
-	I_BEGIN_COMPONENT(CModelProxyComp)
-		I_REGISTER_INTERFACE(imod::IModel)
-		I_ASSIGN(m_modelSelectionCompPtr, "ModelSelectionProvider", "Container of switchable models", true, "ModelSelectionProvider")
-		I_ASSIGN(m_selectionModelCompPtr, "ModelSelectionProvider", "Container of switchable models", true, "ModelSelectionProvider")
-	I_END_COMPONENT
+	I_BEGIN_COMPONENT(CModelProxyComp);
+		I_REGISTER_INTERFACE(imod::IModel);
+		I_ASSIGN(m_modelSelectionCompPtr, "ModelSelectionProvider", "Container of switchable models", true, "ModelSelectionProvider");
+		I_ASSIGN_TO(m_selectionModelCompPtr, m_modelSelectionCompPtr, true);
+	I_END_COMPONENT;
 
 	CModelProxyComp();
 

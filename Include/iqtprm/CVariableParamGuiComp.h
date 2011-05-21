@@ -33,9 +33,9 @@ public:
 	I_BEGIN_COMPONENT(CVariableParamGuiComp);
 		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
-		I_ASSIGN_MULTI_0(m_guisCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
-		I_ASSIGN_MULTI_0(m_observersCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
-		I_ASSIGN_MULTI_0(m_extendersCompPtr, "Editors", "List of editor GUI's for each parameter type ID", false);
+		I_ASSIGN_TO(m_guisCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_extendersCompPtr, m_editorsCompPtr, false);
 		I_ASSIGN_MULTI_0(m_typeIdsAttrPtr, "TypeIds", "List of ID for each variable type", true);
 		I_ASSIGN_MULTI_0(m_typeNamesAttrPtr, "TypeNames", "List of ID for each variable type", false);
 	I_END_COMPONENT;

@@ -18,7 +18,7 @@
 #include "icomp/TAttributeStaticInfo.h"
 #include "icomp/TComponentStaticInfo.h"
 #include "icomp/CBaseComponentStaticInfo.h"
-
+#include "icomp/CRelatedInfoRegistrator.h"
 
 
 namespace icomp
@@ -366,6 +366,15 @@ inline bool CComponentBase::IsComponentActive() const
 	static member##_AttrType::ValueType member##_DefaultElements[] = {defaultValue1, defaultValue2, defaultValue3};\
 	I_TASSIGN_MULTI_BASE(member, id, description, isObligatory, defaultValue)
 
+
+/**
+	Used to assign value for overloaded attributes or references.
+*/
+#define I_ASSIGN_TO(member, baseAttribute, isObligatory)\
+	static icomp::CRelatedInfoRegistrator member##_Info(baseAttribute##_Info, icomp::IComponentStaticInfo::MGI_INTERFACES, istd::CClassInfo::GetInfo<member##_Type::InterfaceType>().GetName(), isObligatory? member##_AttrType::DAF_OBLIGATORY: member##_AttrType::DAF_OPTIONAL);\
+	if (componentPtr != NULL){\
+		componentPtr->member.Init(componentPtr, baseAttribute##_Info);\
+	}
 
 /**
 	Cast to specified interface trying to use component interface query.

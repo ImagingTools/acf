@@ -22,6 +22,12 @@ public:
 		Get ID of this attribute.
 	 */
 	virtual const std::string& GetAttributeId() const = 0;
+	/**
+		Add related interface to this attribute info.
+		\param	relatedInterfaceInfo	specify interface.
+		\param	flags					set of flags defined in \c icomp::IAttributeStaticInfo::AttributeFlags.
+	*/
+	virtual void AddRelatedMetaId(int metaGroupId, const std::string& id, int flags) = 0;
 };
 
 

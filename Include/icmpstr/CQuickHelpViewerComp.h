@@ -39,7 +39,7 @@ public:
 		I_ASSIGN(m_docuEditorFileParamsCompPtr, "DocuEditorFileParam", "Object storing path to html editor used to edit the description", true, "DocuEditorFileParam");
 		I_ASSIGN(m_techDocuViewerFileParamsCompPtr, "TechDocuViewerParam", "Object storing path to html viewer used to show technical documentation", true, "TechDocuViewerParam");
 		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
-		I_ASSIGN(m_externalMetaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", false, "MetaInfoManager");
+		I_ASSIGN_TO(m_externalMetaInfoManagerCompPtr, m_metaInfoManagerCompPtr, false);
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpViewer)

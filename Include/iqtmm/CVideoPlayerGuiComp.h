@@ -34,7 +34,7 @@ public:
 		I_ASSIGN(m_urlParamsGuiCompPtr, "UrlGui", "Sequence directory selection GUI", false, "UrlGui");
 		I_ASSIGN(m_controllerBarGuiCompPtr, "ControllerBarGui", "Displayed on the bottom used typically to controll of playback", false, "ControllerBarGui");
 		I_ASSIGN(m_urlParamCompPtr, "UrlParams", "Parameter storing media URL or file or directory", true, "UrlParams");
-		I_ASSIGN(m_urlParamModelCompPtr, "UrlParams", "Parameter storing media URL or file or directory", true, "UrlParams");
+		I_ASSIGN_TO(m_urlParamModelCompPtr, m_urlParamCompPtr, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CGuiComponentBase)

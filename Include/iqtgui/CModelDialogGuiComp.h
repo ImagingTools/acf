@@ -32,7 +32,7 @@ public:
 		I_ASSIGN(m_editorCompPtr, "Gui", "Editor for the model data", true, "ModelObserver");
 		I_ASSIGN(m_dataCompPtr, "Model", "Model data", false, "Model");
 		I_ASSIGN(m_workingModelFactoryCompPtr, "WorkingDataFactory", "Model factory using to create the working model data", true, "WorkingModelFactory");		
-		I_ASSIGN(m_workingDataFactoryCompPtr, "WorkingDataFactory", "Model factory using to create the working model data", true, "WorkingModelFactory");
+		I_ASSIGN_TO(m_workingDataFactoryCompPtr, m_workingModelFactoryCompPtr, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IDialog)

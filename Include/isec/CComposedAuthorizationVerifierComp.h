@@ -27,7 +27,7 @@ public:
 	I_BEGIN_COMPONENT(CComposedAuthorizationVerifierComp);
 		I_REGISTER_INTERFACE(IAuthorizationVerifier);
 		I_ASSIGN_MULTI_0(m_slaveVerifiersCompPtr, "SlaveVerifiers", "List of slave verifiers", true);
-		I_ASSIGN_MULTI_0(m_slaveVerifiersModelCompPtr, "SlaveVerifiers", "List of slave verifiers", true);
+		I_ASSIGN_TO(m_slaveVerifiersModelCompPtr, m_slaveVerifiersCompPtr, true);
 	I_END_COMPONENT;
 
 	// reimplemented (isec::IAuthorizationVerifier)

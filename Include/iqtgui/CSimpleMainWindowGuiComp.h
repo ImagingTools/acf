@@ -37,11 +37,11 @@ public:
 
 	I_BEGIN_COMPONENT(CSimpleMainWindowGuiComp);
 		I_ASSIGN(m_workspaceCommandsCompPtr, "Workspace", "Main widget", false, "Workspace");
-		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Main widget", true, "Workspace");
+		I_ASSIGN_TO(m_workspaceCompPtr, m_workspaceCommandsCompPtr, true);
 		I_ASSIGN(m_aboutGuiCompPtr, "AboutGui", "Gui displayed if 'About' action is triggered", false, "AboutGui");
 		I_ASSIGN(m_settingsGuiCompPtr, "SettingsGui", "Gui displayed if 'Settings' action is triggered", false, "SettingsGui");
 		I_ASSIGN_MULTI_0(m_mainWindowCommandsCompPtr, "MainWindowComponents", "Additional GUI components", false);
-		I_ASSIGN_MULTI_0(m_mainWindowComponentsCompPtr, "MainWindowComponents", "Additional GUI components", false);
+		I_ASSIGN_TO(m_mainWindowComponentsCompPtr, m_mainWindowCommandsCompPtr, false);
 		I_ASSIGN(m_isNestingEnabledAttrPtr, "IsNestingEnabled", "If true, docking nesting is enabled,\nmore than one docking widget is allowed on the same size", true, false);
 		I_ASSIGN(m_isMenuVisibleAttrPtr, "IsMenuVisible", "If true, menu bar will be visible", true, true);
 		I_ASSIGN(m_isToolbarVisibleAttrPtr, "IsToolbarVisible", "If true, tool bar will be visible", true, true);

@@ -36,9 +36,9 @@ public:
 	I_BEGIN_COMPONENT(CComposedParamsSetGuiComp);
 		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for parameters edition", true);
-		I_ASSIGN_MULTI_0(m_guisCompPtr, "Editors", "List of GUI's for parameters edition", true);
-		I_ASSIGN_MULTI_0(m_observersCompPtr, "Editors", "List of GUI's for parameters edition", true);
-		I_ASSIGN_MULTI_0(m_extendersCompPtr, "Editors", "List of GUI's for parameters edition", false);
+		I_ASSIGN_TO(m_guisCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
+		I_ASSIGN_TO(m_extendersCompPtr, m_editorsCompPtr, false);
 		I_ASSIGN(m_paramsLoaderCompPtr, "ParamsLoader", "Loader for the parameter set", false, "ParamsLoader");
 		I_ASSIGN_MULTI_0(m_idsAttrPtr, "Ids", "List of parameter ID's according to defined editors", true);
 		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);

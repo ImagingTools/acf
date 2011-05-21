@@ -26,7 +26,7 @@ public:
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of supported document", true, "Default");
 		I_ASSIGN(m_defaultDirectoryAttrPtr, "DefaultDirectory", "Default file directory for open file dialog", true, ".");
 		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory");
-		I_ASSIGN(m_modelCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory");
+		I_ASSIGN_TO(m_modelCompFact, m_documentCompFact, true);
 		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory");
 		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
 		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", true, false);

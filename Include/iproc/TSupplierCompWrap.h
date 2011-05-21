@@ -50,7 +50,7 @@ public:
 		I_REGISTER_INTERFACE(SupplierInterface);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
-		I_ASSIGN(m_paramsSetModelCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
+		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
 	I_END_COMPONENT;
 
 	TSupplierCompWrap();

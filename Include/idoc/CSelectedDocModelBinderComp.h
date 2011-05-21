@@ -30,7 +30,7 @@ public:
 	I_BEGIN_COMPONENT(CSelectedDocModelBinderComp);
 		I_ASSIGN(m_observedObjectCompPtr, "ActivationObject", "Object will be observed if it is active", true, "ActivationObject");
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager used to check which object is active", true, "DocumentManager");
-		I_ASSIGN(m_documentManagerModelCompPtr, "DocumentManager", "Document manager used to check which object is active", true, "DocumentManager");
+		I_ASSIGN_TO(m_documentManagerModelCompPtr, m_documentManagerCompPtr, true);
 		I_ASSIGN(m_modelCompPtr, "Model", "Model to be connected", true, "Model");
 		I_ASSIGN_MULTI_0(m_observersCompPtr, "Observers", "Observers for the model", true);
 	I_END_COMPONENT;

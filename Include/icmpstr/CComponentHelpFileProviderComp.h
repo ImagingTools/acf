@@ -28,7 +28,7 @@ public:
 		I_REGISTER_INTERFACE(idoc::IHelpFileProvider);
 		I_ASSIGN(m_slaveProviderCompPtr, "SlaveProvider", "Slave help file provider used if no class description is found", false, "SlaveProvider");
 		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
-		I_ASSIGN(m_externalMetaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", false, "MetaInfoManager");
+		I_ASSIGN_TO(m_externalMetaInfoManagerCompPtr, m_metaInfoManagerCompPtr, false);
 		I_ASSIGN(m_helpFileNameAttrPtr, "HelpFileName", "Name of help file in component info directory", true, "ShortDescription.html");
 	I_END_COMPONENT;
 
