@@ -3,9 +3,18 @@
 
 
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
-#include "iprm/IParamsSet.h"
+
+namespace istd
+{
+	class CString;
+}
+
+
+namespace iprm
+{
+	class IParamsSet;
+}
 
 
 namespace ibase
