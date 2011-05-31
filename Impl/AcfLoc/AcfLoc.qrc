@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/Translations">
+    <file alias="Acf_de_DE">Translations/Acf_de_DE.qm</file>
+    <file alias="Acf_ru_RU">Translations/Acf_ru_RU.qm</file>
+    <file alias="Acf_pl_PL">Translations/Acf_pl_PL.qm</file>
+  </qresource>
+</RCC>

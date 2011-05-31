@@ -1,0 +1,3 @@
+call Update_de_DE.bat
+call Update_pl_PL.bat
+call Update_ru_RU.bat
