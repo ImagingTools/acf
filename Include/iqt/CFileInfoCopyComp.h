@@ -24,6 +24,7 @@ namespace iqt
 	Copy of text files with some tags substitution and optional license attachment.
 */
 class CFileInfoCopyComp:
+			public QObject,
 			public ibase::CLoggerComponentBase,
 			virtual public ibase::IFileConvertCopy
 {

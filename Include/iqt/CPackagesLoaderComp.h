@@ -34,6 +34,7 @@ namespace iqt
 	Loads component packages from dynamic link libraries.
 */
 class CPackagesLoaderComp:
+			public QObject,
 			public ibase::CLoggerComponentBase,
 			public icomp::CEnvironmentManagerBase,
 			virtual public icomp::IRegistryLoader

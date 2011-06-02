@@ -188,8 +188,8 @@ void CSingleDocumentWorkspaceGuiComp::QueryDocumentClose(bool* ignoredPtr)
 
 		int response = QMessageBox::information(
 					NULL,
-					QObject::tr("Close document"),
-					QObject::tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()),
+					tr("Close document"),
+					tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()),
 					buttons,
 					QMessageBox::Yes);
 

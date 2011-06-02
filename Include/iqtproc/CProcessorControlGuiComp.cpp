@@ -59,8 +59,8 @@ void CProcessorControlGuiComp::on_SaveDataButton_clicked()
 		if (m_outputDataLoaderCompPtr->SaveToFile(*m_outputDataCompPtr, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot save image"));
+						tr("Error"),
+						tr("Cannot save the output"));
 		}
 	}
 }
@@ -72,8 +72,8 @@ void CProcessorControlGuiComp::on_LoadParamsButton_clicked()
 		if (m_paramsLoaderCompPtr->LoadFromFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot load parameters"));
+						tr("Error"),
+						tr("Cannot load parameters"));
 		}
 	}
 }
@@ -85,8 +85,8 @@ void CProcessorControlGuiComp::on_SaveParamsButton_clicked()
 		if (m_paramsLoaderCompPtr->SaveToFile(*m_paramsSetCompPtr, "") == iser::IFileLoader::StateFailed){
 			QMessageBox::information(
 						NULL,
-						QObject::tr("Error"),
-						QObject::tr("Cannot save parameters"));
+						tr("Error"),
+						tr("Cannot save parameters"));
 		}
 	}
 }

@@ -16,6 +16,7 @@ namespace iqtmm
 
 
 class CMediaLoaderComp:
+			public QObject,
 			public ibase::CLoggerComponentBase,
 			virtual public iser::IFileLoader
 {

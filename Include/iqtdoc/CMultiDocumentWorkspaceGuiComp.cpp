@@ -365,7 +365,7 @@ void CMultiDocumentWorkspaceGuiComp::QueryDocumentClose(const SingleDocumentData
 
 	QMessageBox messageBox;
 	messageBox.setText("Close document");
-	messageBox.setInformativeText(QObject::tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()));
+	messageBox.setInformativeText(tr("Do you want to save your changes made in document\n%1").arg(fileInfo.fileName()));
 	messageBox.setStandardButtons(buttons);
 	messageBox.setDefaultButton(QMessageBox::Yes);
 

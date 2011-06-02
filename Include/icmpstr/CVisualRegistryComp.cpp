@@ -112,7 +112,7 @@ CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
 	else{
 		SendErrorMessage(
 					MI_CANNOT_CREATE_ELEMENT,
-					iqt::GetCString(QObject::tr("Cannot create %1 (%2: %3)").
+					iqt::GetCString(tr("Cannot create %1 (%2: %3)").
 								arg(elementId.c_str()).
 								arg(address.GetPackageId().c_str()).
 								arg(address.GetComponentId().c_str())));

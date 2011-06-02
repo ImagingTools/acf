@@ -228,14 +228,14 @@ QString CFileDialogLoaderComp::GetFileName(const istd::CString& filePath, bool i
 
 		if (filtersCount > 1){
 			filterList += "\n";
-			filterList += QObject::tr("All known file types (%1)").arg(allExt);
+			filterList += tr("All known file types (%1)").arg(allExt);
 		}
 
 		QString selectedFilter;
 		if (isSaving){
 			retVal = QFileDialog::getSaveFileName(
 						NULL,
-						QObject::tr("Enter file name"), 
+						tr("Enter file name"), 
 						m_lastSaveInfo.absolutePath(),
 						filterList,
 						&selectedFilter); 
@@ -243,7 +243,7 @@ QString CFileDialogLoaderComp::GetFileName(const istd::CString& filePath, bool i
 		else{
 			retVal = QFileDialog::getOpenFileName(
 						NULL,
-						QObject::tr("Select a file to open"),
+						tr("Select a file to open"),
 						m_lastOpenInfo.absolutePath(),
 						filterList,
 						&selectedFilter);

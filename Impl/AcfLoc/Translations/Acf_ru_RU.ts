@@ -989,162 +989,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="146"/>
-        <source>Element %1 uses unknown embedded composite component %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="147"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="165"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="210"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="246"/>
-        <source>Element Consistency Check</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="164"/>
-        <source>No element info available for %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="207"/>
-        <source>Element %1 uses inactive component %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="245"/>
-        <source>Element %1 is not loaded</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="285"/>
-        <source>Attribute %1 in %2 is defined as %3, but in registry it has type %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="290"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="319"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="334"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="349"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="543"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="568"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="585"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="602"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="647"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="664"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="706"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="723"/>
-        <source>Attribute Consistency Check</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="316"/>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="331"/>
-        <source>Reference or factory %1 in %2 cannot be undefined</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="346"/>
-        <source>Attribute %1 in %2 not exists in component specification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="538"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but subelement &apos;%4&apos; doesn&apos;t exist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="563"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but exported element &apos;%4&apos; is not compatible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="580"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but element &apos;%4&apos; is not accessible in actual configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="597"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; contains &apos;%3&apos;, but element &apos;%4&apos; doesn&apos;t exist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="643"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; uses embedded type &apos;%3&apos;, but this type is undefined</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="660"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; contains &apos;%3&apos;, but this element doesn&apos;t exist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="701"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it doesn&apos;t implement interface %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="719"/>
-        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it is not accessible in actual configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="48"/>
-        <source>Layout information cannot be loaded (%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="76"/>
-        <source>Cannot store to file %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="87"/>
-        <source>Layout information cannot be stored (%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="117"/>
-        <source>ACF registry file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="144"/>
-        <source>%1(%2) : Cannot load file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/icmpstr/CVisualRegistryComp.cpp" line="115"/>
-        <location filename="../../../Include/iqt/CPackagesLoaderComp.cpp" line="428"/>
-        <source>Cannot create %1 (%2: %3)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="69"/>
-        <source>No input directory %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="76"/>
-        <source>No output directory %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="153"/>
-        <source>File copy provider is not present</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="181"/>
-        <source>Success: %1 files copied</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="184"/>
-        <source>Failed: %1 files copied</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../../Include/iqt/CFileInfoCopyComp.cpp" line="30"/>
         <source>Processing file %1 to %2</source>
         <translation type="unfinished"></translation>
@@ -1185,108 +1029,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="368"/>
-        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="192"/>
-        <source>Do you want to save your changes made in document
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="191"/>
-        <source>Close document</source>
+        <location filename="../../../Include/iqt/CPackagesLoaderComp.cpp" line="428"/>
+        <source>Cannot create %1 (%2: %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../Include/iqtgui/CApplicationComp.cpp" line="134"/>
         <source>ACF application</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="231"/>
-        <source>All known file types (%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="238"/>
-        <source>Enter file name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="246"/>
-        <source>Select a file to open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="29"/>
-        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="34"/>
-        <source>Object is not a valid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="45"/>
-        <source>Bad multimedia file extension %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="66"/>
-        <source>Cannot open media &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="70"/>
-        <source>Wrong object type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="120"/>
-        <source>Multimedia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="54"/>
-        <source>Bad SVG file extension %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="79"/>
-        <source>Cannot create bitmap</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="91"/>
-        <source>Cannot load SVG file &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="101"/>
-        <source>Cannot copy bitmap from Qt bitmap</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="146"/>
-        <source>SVG image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="62"/>
-        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="75"/>
-        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="88"/>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="63"/>
-        <source>Cannot save image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="76"/>
-        <source>Cannot load parameters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="89"/>
-        <source>Cannot save parameters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1502,6 +1251,109 @@ Interfaces:</source>
     </message>
 </context>
 <context>
+    <name>icmpstr::CRegistryConsistInfoComp</name>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="146"/>
+        <source>Element %1 uses unknown embedded composite component %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="147"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="165"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="210"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="246"/>
+        <source>Element Consistency Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="164"/>
+        <source>No element info available for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="207"/>
+        <source>Element %1 uses inactive component %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="245"/>
+        <source>Element %1 is not loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="285"/>
+        <source>Attribute %1 in %2 is defined as %3, but in registry it has type %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="290"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="319"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="334"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="349"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="543"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="568"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="585"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="602"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="647"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="664"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="706"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="723"/>
+        <source>Attribute Consistency Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="316"/>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="331"/>
+        <source>Reference or factory %1 in %2 cannot be undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="346"/>
+        <source>Attribute %1 in %2 not exists in component specification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="538"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but subelement &apos;%4&apos; doesn&apos;t exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="563"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but exported element &apos;%4&apos; is not compatible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="580"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but element &apos;%4&apos; is not accessible in actual configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="597"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; contains &apos;%3&apos;, but element &apos;%4&apos; doesn&apos;t exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="643"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; uses embedded type &apos;%3&apos;, but this type is undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="660"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; contains &apos;%3&apos;, but this element doesn&apos;t exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="701"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it doesn&apos;t implement interface %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryConsistInfoComp.cpp" line="719"/>
+        <source>Reference or factory &apos;%1&apos; in &apos;%2&apos; point at &apos;%3&apos;, but it is not accessible in actual configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>icmpstr::CRegistryElementShape</name>
     <message>
         <location filename="../../../Include/icmpstr/CRegistryElementShape.cpp" line="274"/>
@@ -1515,6 +1367,34 @@ Interfaces:</source>
     </message>
 </context>
 <context>
+    <name>icmpstr::CRegistryLoaderComp</name>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="48"/>
+        <source>Layout information cannot be loaded (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="76"/>
+        <source>Cannot store to file %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="87"/>
+        <source>Layout information cannot be stored (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="117"/>
+        <source>ACF registry file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/icmpstr/CRegistryLoaderComp.cpp" line="144"/>
+        <source>%1(%2) : Cannot load file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>icmpstr::CRegistryPropEditorComp</name>
     <message>
         <location filename="../../../Include/icmpstr/CRegistryPropEditorComp.cpp" line="104"/>
@@ -1524,6 +1404,14 @@ Interfaces:</source>
     <message>
         <location filename="../../../Include/icmpstr/CRegistryPropEditorComp.cpp" line="124"/>
         <source>Exported Components</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>icmpstr::CVisualRegistryComp</name>
+    <message>
+        <location filename="../../../Include/icmpstr/CVisualRegistryComp.cpp" line="115"/>
+        <source>Cannot create %1 (%2: %3)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1865,6 +1753,34 @@ It allows to group set of components and manage it as single one</source>
     </message>
 </context>
 <context>
+    <name>iqt::CCopyProcessorComp</name>
+    <message>
+        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="69"/>
+        <source>No input directory %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="76"/>
+        <source>No output directory %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="153"/>
+        <source>File copy provider is not present</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="181"/>
+        <source>Success: %1 files copied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqt/CCopyProcessorComp.cpp" line="184"/>
+        <source>Failed: %1 files copied</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>iqtdoc::CMainWindowGuiComp</name>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="99"/>
@@ -2143,6 +2059,12 @@ It allows to group set of components and manage it as single one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="368"/>
+        <source>Do you want to save your changes made in document
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="422"/>
         <source>&amp;Window</source>
         <translation type="unfinished"></translation>
@@ -2276,12 +2198,41 @@ It allows to group set of components and manage it as single one</source>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="191"/>
+        <source>Close document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="192"/>
+        <source>Do you want to save your changes made in document
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>iqtgui::CCheckableComboBox</name>
     <message>
         <location filename="../../../Include/iqtgui/CCheckableComboBox.cpp" line="83"/>
         <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtgui::CFileDialogLoaderComp</name>
+    <message>
+        <location filename="../../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="231"/>
+        <source>All known file types (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="238"/>
+        <source>Enter file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="246"/>
+        <source>Select a file to open</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2421,6 +2372,67 @@ It allows to group set of components and manage it as single one</source>
     </message>
 </context>
 <context>
+    <name>iqtmm::CMediaLoaderComp</name>
+    <message>
+        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="29"/>
+        <source>Object is not a valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="45"/>
+        <source>Bad multimedia file extension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="66"/>
+        <source>Cannot open media &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="70"/>
+        <source>Wrong object type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CMediaLoaderComp.cpp" line="120"/>
+        <source>Multimedia</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtmm::CSvgBitmapLoaderComp</name>
+    <message>
+        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="34"/>
+        <source>Object is not a valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="54"/>
+        <source>Bad SVG file extension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="79"/>
+        <source>Cannot create bitmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="91"/>
+        <source>Cannot load SVG file &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="101"/>
+        <source>Cannot copy bitmap from Qt bitmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtmm/CSvgBitmapLoaderComp.cpp" line="146"/>
+        <source>SVG image</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>iqtprm::CFileNameParamGuiComp</name>
     <message>
         <location filename="../../../Include/iqtprm/CFileNameParamGuiComp.cpp" line="41"/>
@@ -2453,6 +2465,31 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtproc/CDocumentProcessingManagerCompBase.cpp" line="57"/>
         <source>Document processing actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>iqtproc::CProcessorControlGuiComp</name>
+    <message>
+        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="62"/>
+        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="75"/>
+        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="88"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="63"/>
+        <source>Cannot save the output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="76"/>
+        <source>Cannot load parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="89"/>
+        <source>Cannot save parameters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

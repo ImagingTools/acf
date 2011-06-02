@@ -31,7 +31,7 @@ bool CSvgBitmapLoaderComp::IsOperationSupported(
 	if (		(dataObjectPtr != NULL) &&
 				(dynamic_cast<const iimg::IRasterImage*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
-			SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(QObject::tr("Object is not a valid")));
+			SendInfoMessage(MI_BAD_OBJECT_TYPE, iqt::GetCString(tr("Object is not a valid")));
 		}
 
 		return false;
@@ -51,7 +51,7 @@ bool CSvgBitmapLoaderComp::IsOperationSupported(
 
 			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
 				if (!beQuiet){
-					SendInfoMessage(MI_BAD_EXTENSION, iqt::GetCString(QObject::tr("Bad SVG file extension %1").arg(info.suffix())));
+					SendInfoMessage(MI_BAD_EXTENSION, iqt::GetCString(tr("Bad SVG file extension %1").arg(info.suffix())));
 				}
 
 				return false;
@@ -76,7 +76,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 				if (!m_lastBitmap.CreateBitmap(iimg::IBitmap::PF_RGBA, istd::CIndex2d(*m_bitmapWidthAttrPtr, *m_bitmapHeightAttrPtr))){
 					m_lastFilePath.Reset();
 
-					SendInfoMessage(MI_BITMAP_TYPE, iqt::GetCString(QObject::tr("Cannot create bitmap")));
+					SendInfoMessage(MI_BITMAP_TYPE, iqt::GetCString(tr("Cannot create bitmap")));
 
 					return StateFailed;
 				}
@@ -88,7 +88,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 				m_lastFilePath = filePath;
 			}
 			else{
-				SendInfoMessage(MI_CANNOT_LOAD, iqt::GetCString(QObject::tr("Cannot load SVG file '%1'").arg(iqt::GetQString(filePath))));
+				SendInfoMessage(MI_CANNOT_LOAD, iqt::GetCString(tr("Cannot load SVG file '%1'").arg(iqt::GetQString(filePath))));
 
 				return StateFailed;
 			}
@@ -98,7 +98,7 @@ int CSvgBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStr
 			return StateOk;
 		}
 		else{
-			SendInfoMessage(MI_BITMAP_TYPE, iqt::GetCString(QObject::tr("Cannot copy bitmap from Qt bitmap")));
+			SendInfoMessage(MI_BITMAP_TYPE, iqt::GetCString(tr("Cannot copy bitmap from Qt bitmap")));
 		}
 	}
 
@@ -143,7 +143,7 @@ istd::CString CSvgBitmapLoaderComp::GetTypeDescription(const istd::CString* exte
 	}
 
 	if (isKnown){
-		return iqt::GetCString(QObject::tr("SVG image"));
+		return iqt::GetCString(tr("SVG image"));
 	}
 
 	return "";

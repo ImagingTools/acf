@@ -28,6 +28,7 @@ namespace iqtgui
 	File dialog will be created according to set of the slave file loaders.
 */
 class CFileDialogLoaderComp: 
+			public QObject,
 			public ibase::CLoggerComponentBase, 
 			virtual public iser::IFileLoader,
 			virtual public iser::IFileLoaderInfo

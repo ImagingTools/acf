@@ -18,6 +18,7 @@ namespace icmpstr
 
 
 class CRegistryConsistInfoComp:
+			public QObject,
 			public icomp::CComponentBase,
 			virtual public IRegistryConsistInfo
 {

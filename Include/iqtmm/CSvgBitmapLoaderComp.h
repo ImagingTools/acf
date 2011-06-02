@@ -21,6 +21,7 @@ namespace iqtmm
 	Load SVG files to bitmap.
 */
 class CSvgBitmapLoaderComp:
+			public QObject,
 			public ibase::CLoggerComponentBase,
 			virtual public iser::IFileLoader
 {

@@ -2,6 +2,11 @@
 #define icmpstr_CRegistryLoaderComp_included
 
 
+// Qt includes
+#include <QObject>
+
+
+// ACF includes
 #include "iser/CXmlFileReadArchive.h"
 #include "iser/CXmlFileWriteArchive.h"
 
@@ -15,7 +20,9 @@ namespace icmpstr
 /**
 	Special registry loader supporting of loading layout data.
 */
-class CRegistryLoaderComp: public ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive>
+class CRegistryLoaderComp:
+	public QObject,
+	public ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive>
 {
 public:
 	typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> BaseClass;
@@ -45,6 +52,8 @@ protected:
 				const iser::CXmlFileReadArchive& archive,
 				const istd::IChangeable& data,
 				const istd::CString& filePath) const;
+
+	using QObject::tr;
 };
 
 

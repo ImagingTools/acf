@@ -66,14 +66,14 @@ bool CCopyProcessorComp::CopyFileTree(
 			int& counter) const
 {
 	if (!inputDir.exists()){
-		SendWarningMessage(MI_NO_INPUT, iqt::GetCString(QObject::tr("No input directory %1").arg(inputDir.absolutePath())));
+		SendWarningMessage(MI_NO_INPUT, iqt::GetCString(tr("No input directory %1").arg(inputDir.absolutePath())));
 
 		return false;
 	}
 
 	outputDir.mkpath(outputDir.absolutePath());
 	if (!outputDir.exists()){
-		SendWarningMessage(MI_NO_OUTPUT, iqt::GetCString(QObject::tr("No output directory %1").arg(outputDir.absolutePath())));
+		SendWarningMessage(MI_NO_OUTPUT, iqt::GetCString(tr("No output directory %1").arg(outputDir.absolutePath())));
 
 		return false;
 	}
@@ -150,7 +150,7 @@ void CCopyProcessorComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (!m_fileCopyCompPtr.IsValid()){
-		SendErrorMessage(MI_END_STATUS, iqt::GetCString(QObject::tr("File copy provider is not present")));
+		SendErrorMessage(MI_END_STATUS, iqt::GetCString(tr("File copy provider is not present")));
 
 		return;
 	}
@@ -178,10 +178,10 @@ void CCopyProcessorComp::OnComponentCreated()
 				*m_recursionDepthAttrPtr,
 				counter)){
 
-		SendInfoMessage(MI_END_STATUS, iqt::GetCString(QObject::tr("Success: %1 files copied").arg(counter)));
+		SendInfoMessage(MI_END_STATUS, iqt::GetCString(tr("Success: %1 files copied").arg(counter)));
 	}
 	else{
-		SendErrorMessage(MI_END_STATUS, iqt::GetCString(QObject::tr("Failed: %1 files copied").arg(counter)));
+		SendErrorMessage(MI_END_STATUS, iqt::GetCString(tr("Failed: %1 files copied").arg(counter)));
 	}
 }
 
