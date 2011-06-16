@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_[RU]">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>CAboutWidgetGuiComp</name>
     <message>
@@ -1785,12 +1785,12 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="99"/>
         <source>Recent %1 Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Последние %1</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="100"/>
         <source>Recent Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Последние</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="158"/>
@@ -1811,22 +1811,22 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="442"/>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="622"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="623"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Редактировать</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="626"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Создать</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="626"/>
@@ -1846,7 +1846,7 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="628"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть...</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="628"/>
@@ -1866,7 +1866,7 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="630"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="630"/>
@@ -1886,12 +1886,12 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="632"/>
         <source>&amp;Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сохранить как...</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="632"/>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить как</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="632"/>
@@ -1901,17 +1901,17 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="633"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="634"/>
         <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Печать...</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="634"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Печать</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="634"/>
@@ -1921,12 +1921,12 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="635"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выйти</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="635"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="635"/>
@@ -1976,12 +1976,12 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="642"/>
         <source>&amp;Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Весь экран</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="642"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Весь экран</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="642"/>
@@ -1991,17 +1991,17 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="643"/>
         <source>F11</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="646"/>
         <source>&amp;Copy Document Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Скопировать путь к файлу</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="646"/>
         <source>Copy Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать путь к файлу</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="646"/>
@@ -2011,12 +2011,12 @@ It allows to group set of components and manage it as single one</source>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="647"/>
         <source>&amp;Open Containing Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть папку файла</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="647"/>
         <source>Open Containing Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть папку файла</translation>
     </message>
     <message>
         <location filename="../../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="647"/>
