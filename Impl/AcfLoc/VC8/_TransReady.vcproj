@@ -106,33 +106,90 @@
 			<File
 				RelativePath="..\Translations\Acf_de_DE.ts"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="Qt Linguist"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\Translations\Acf_pl_PL.ts"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="Qt Linguist"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\Translations\Acf_ru_RU.ts"
 				>
+			</File>
+			<File
+				RelativePath="$(QTDIR)\translations\qt_de.ts"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Create translation of $(InputName)"
+						CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputDir)/$(InputName).ts&quot; -qm &quot;$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputDir)/$(InputName).ts"
+						Outputs="$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm"
+					/>
+				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug|Win32"
 					>
 					<Tool
-						Name="Qt Linguist"
+						Name="VCCustomBuildTool"
+						Description="Create translation of $(InputName)"
+						CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputDir)/$(InputName).ts&quot; -qm &quot;$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputDir)/$(InputName).ts"
+						Outputs="$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="$(QTDIR)\translations\qt_pl.ts"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Create translation of $(InputName)"
+						CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputDir)/$(InputName).ts&quot; -qm &quot;$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputDir)/$(InputName).ts"
+						Outputs="$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Create translation of $(InputName)"
+						CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputDir)/$(InputName).ts&quot; -qm &quot;$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputDir)/$(InputName).ts"
+						Outputs="$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="$(QTDIR)\translations\qt_ru.ts"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Create translation of $(InputName)"
+						CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputDir)/$(InputName).ts&quot; -qm &quot;$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputDir)/$(InputName).ts"
+						Outputs="$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Create translation of $(InputName)"
+						CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputDir)/$(InputName).ts&quot; -qm &quot;$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputDir)/$(InputName).ts"
+						Outputs="$(ACFDIR)\Impl\AcfLoc\Translations\$(InputName).qm"
 					/>
 				</FileConfiguration>
 			</File>

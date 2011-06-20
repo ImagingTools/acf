@@ -4,7 +4,7 @@
     <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="1">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         AcfLocalization
@@ -14,6 +14,17 @@
       </X>
       <X>
         375
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        QtLocalization
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        225
       </X>
     </Element>
   </PositionMap>

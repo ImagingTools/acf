@@ -3,5 +3,8 @@
     <file alias="Acf_de_DE">Translations/Acf_de_DE.qm</file>
     <file alias="Acf_ru_RU">Translations/Acf_ru_RU.qm</file>
     <file alias="Acf_pl_PL">Translations/Acf_pl_PL.qm</file>
+    <file alias="Qt_de_DE">Translations/qt_de.qm</file>
+    <file alias="Qt_ru_RU">Translations/qt_ru.qm</file>
+    <file alias="Qt_pl_PL">Translations/qt_pl.qm</file>
   </qresource>
 </RCC>
