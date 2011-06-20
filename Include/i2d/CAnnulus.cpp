@@ -80,10 +80,10 @@ CRectangle CAnnulus::GetBoundingBox() const
 {
 	double outerRadius = m_radiusRange.GetMaxValue();
 
-	return CRectangle(m_position.GetY() - outerRadius, 
-		m_position.GetX() - outerRadius,
-		m_position.GetY() + outerRadius,
-		m_position.GetX() + outerRadius);
+	return CRectangle(m_position.GetX() - outerRadius, 
+		m_position.GetY() - outerRadius,
+		2 * outerRadius,
+		2 * outerRadius);
 }
 
 
