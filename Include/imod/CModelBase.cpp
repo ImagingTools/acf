@@ -38,7 +38,7 @@ bool CModelBase::AttachObserver(IObserver* observerPtr)
 
 	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
 		if (m_observers.at(observerIndex) == observerPtr){
-			I_ASSERT(false);
+			I_CRITICAL();
 
 			return false;
 		}

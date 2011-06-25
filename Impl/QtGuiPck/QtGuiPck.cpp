@@ -224,6 +224,11 @@ I_EXPORT_COMPONENT(
 			"Component to show a GUI from the list of options",
 			"Selection Stack" IM_TAG("GUI"));
 
+I_EXPORT_COMPONENT(
+			SelectableParamsSetGui,
+			"Component to show a selected GUI of a parameter set",
+			"Selection Stack Parameter" IM_TAG("GUI"));
+
 
 } // namespace QtGuiPck
 

@@ -6,9 +6,9 @@
 
 #include "imod/CSingleModelObserverBase.h"
 
+#include "iprm/ISelectionConstraints.h"
 #include "iprm/IParamsSet.h"
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
 #include "iprm/IParamsManager.h"
 
 
@@ -21,19 +21,19 @@ namespace iprm
 */
 class CSelectableParamsSetComp:
 			public icomp::CComponentBase,
-			virtual public IParamsSet,
-			virtual public ISelectionParam,
+			virtual public iprm::IParamsSet,
+			virtual public iprm::ISelectionParam,
 			virtual protected iprm::ISelectionConstraints
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CSelectableParamsSetComp)
-		I_REGISTER_INTERFACE(iser::ISerializable)
-		I_REGISTER_INTERFACE(IParamsSet)
-		I_REGISTER_INTERFACE(ISelectionParam)
-		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input")
-		I_ASSIGN(m_paramsManagerCompPtr, "ParamsManager", "Manager of parameter set used to realize selection", true, "ParamsManager")
+	I_BEGIN_COMPONENT(CSelectableParamsSetComp);
+		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(IParamsSet);
+		I_REGISTER_INTERFACE(ISelectionParam);
+		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input");
+		I_ASSIGN(m_paramsManagerCompPtr, "ParamsManager", "Manager of parameter set used to realize selection", true, "ParamsManager");
 	I_END_COMPONENT
 
 	CSelectableParamsSetComp();

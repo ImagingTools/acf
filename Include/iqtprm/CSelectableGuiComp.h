@@ -45,14 +45,15 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 
+protected:
+	I_MULTIREF(iqtgui::IGuiObject, m_slaveGuisCompPtr);
+	I_ATTR(istd::CString, m_noSelectionLabelAttrPtr);
+	I_ATTR(istd::CString, m_noSelectionIconAttrPtr);
+
 private:
 	typedef std::map<QWidget*, iqtgui::IGuiObject*> WidgetGuiMap;
 
 	WidgetGuiMap m_widgetToGuiMap;
-
-	I_MULTIREF(iqtgui::IGuiObject, m_slaveGuisCompPtr);
-	I_ATTR(istd::CString, m_noSelectionLabelAttrPtr);
-	I_ATTR(istd::CString, m_noSelectionIconAttrPtr);
 };
 
 

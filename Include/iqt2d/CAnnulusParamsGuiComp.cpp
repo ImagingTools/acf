@@ -4,8 +4,6 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iqt2d/CAnnulusShape.h"
-
 #include "iqt/CSignalBlocker.h"
 
 
@@ -14,58 +12,6 @@ namespace iqt2d
 
 
 // public methods
-
-// reimplemented (imod::IObserver)
-
-bool CAnnulusParamsGuiComp::OnAttached(imod::IModel* modelPtr)
-{
-	if (BaseClass::OnAttached(modelPtr)){
-		const ShapesMap& shapesMap = GetShapesMap();
-		for (		ShapesMap::const_iterator iter = shapesMap.begin();
-					iter != shapesMap.end();
-					++iter){
-			const Shapes& shapes = iter->second;
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				iqt2d::CAnnulusShape* shapePtr = dynamic_cast<iqt2d::CAnnulusShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					modelPtr->AttachObserver(shapePtr);
-				}
-			}
-		}
-
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
-
-bool CAnnulusParamsGuiComp::OnDetached(imod::IModel* modelPtr)
-{
-	if (BaseClass::OnDetached(modelPtr)){
-		const ShapesMap& shapesMap = GetShapesMap();
-		for (		ShapesMap::const_iterator iter = shapesMap.begin();
-					iter != shapesMap.end();
-					++iter){
-			const Shapes& shapes = iter->second;
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				iqt2d::CAnnulusShape* shapePtr = dynamic_cast<iqt2d::CAnnulusShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					modelPtr->DetachObserver(shapePtr);
-				}
-			}
-		}
-
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
 
 // reimplemented (imod::IModelEditor)
 
@@ -94,25 +40,6 @@ void CAnnulusParamsGuiComp::UpdateModel() const
 	if (objectPtr->GetOuterRadius() != outerRadius){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetOuterRadius(outerRadius);
-	}
-}
-
-
-// reimplemented (iqt2d::TSceneExtenderCompBase)
-
-void CAnnulusParamsGuiComp::CreateShapes(int /*sceneId*/, bool inactiveOnly, Shapes& result)
-{
-	I_ASSERT(m_annulusZValueAttrPtr.IsValid());	// this attribute is obligatory
-
-	CAnnulusShape* shapePtr = new CAnnulusShape(!inactiveOnly);
-	if (shapePtr != NULL){
-		shapePtr->setZValue(*m_annulusZValueAttrPtr);
-		result.PushBack(shapePtr);
-
-		imod::IModel* modelPtr = GetModelPtr();
-		if (modelPtr != NULL){
-			modelPtr->AttachObserver(shapePtr);
-		}
 	}
 }
 

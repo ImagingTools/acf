@@ -15,58 +15,6 @@ namespace iqt2d
 
 // public methods
 
-// reimplemented (imod::IObserver)
-
-bool CQuadrangleParamsGuiComp::OnAttached(imod::IModel* modelPtr)
-{
-	if (BaseClass::OnAttached(modelPtr)){
-		const ShapesMap& shapesMap = GetShapesMap();
-		for (		ShapesMap::const_iterator iter = shapesMap.begin();
-					iter != shapesMap.end();
-					++iter){
-			const Shapes& shapes = iter->second;
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				iqt2d::CQuadrangleShape* shapePtr = dynamic_cast<iqt2d::CQuadrangleShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					modelPtr->AttachObserver(shapePtr);
-				}
-			}
-		}
-
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
-
-bool CQuadrangleParamsGuiComp::OnDetached(imod::IModel* modelPtr)
-{
-	if (BaseClass::OnDetached(modelPtr)){
-		const ShapesMap& shapesMap = GetShapesMap();
-		for (		ShapesMap::const_iterator iter = shapesMap.begin();
-					iter != shapesMap.end();
-					++iter){
-			const Shapes& shapes = iter->second;
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				iqt2d::CQuadrangleShape* shapePtr = dynamic_cast<iqt2d::CQuadrangleShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					modelPtr->DetachObserver(shapePtr);
-				}
-			}
-		}
-
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
-
 // reimplemented (imod::IModelEditor)
 
 void CQuadrangleParamsGuiComp::UpdateModel() const
@@ -92,25 +40,6 @@ void CQuadrangleParamsGuiComp::UpdateModel() const
 	
 		objectPtr->SetFirstDiagonal(i2d::CLine2d(point1, point2));
 		objectPtr->SetSecondDiagonal(i2d::CLine2d(point3, point4));
-	}
-}
-
-
-// reimplemented (iqt2d::TSceneExtenderCompBase)
-
-void CQuadrangleParamsGuiComp::CreateShapes(int /*sceneId*/, bool inactiveOnly, Shapes& result)
-{
-	I_ASSERT(m_shapeZValueAttrPtr.IsValid());	// this attribute is obligatory
-
-	CQuadrangleShape* shapePtr = new CQuadrangleShape(!inactiveOnly);
-	if (shapePtr != NULL){
-		shapePtr->setZValue(*m_shapeZValueAttrPtr);
-		result.PushBack(shapePtr);
-
-		imod::IModel* modelPtr = GetModelPtr();
-		if (modelPtr != NULL){
-			modelPtr->AttachObserver(shapePtr);
-		}
 	}
 }
 

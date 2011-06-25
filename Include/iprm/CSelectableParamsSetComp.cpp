@@ -50,6 +50,13 @@ iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const std::s
 		return static_cast<ISelectionParam*>(this);
 	}
 
+	if (m_paramsManagerCompPtr.IsValid() && (m_selectedIndex >= 0) && (m_selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount())){
+		IParamsSet* paramsSetPtr = m_paramsManagerCompPtr->GetParamsSet(m_selectedIndex);
+		if (paramsSetPtr != NULL){
+			return paramsSetPtr->GetEditableParameter(id);
+		}
+	}
+
 	return NULL;
 }
 

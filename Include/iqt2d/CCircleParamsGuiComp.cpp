@@ -4,8 +4,6 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iqt2d/CCircleShape.h"
-
 #include "iqt/CSignalBlocker.h"
 
 
@@ -14,58 +12,6 @@ namespace iqt2d
 
 
 // public methods
-
-// reimplemented (imod::IObserver)
-
-bool CCircleParamsGuiComp::OnAttached(imod::IModel* modelPtr)
-{
-	if (BaseClass::OnAttached(modelPtr)){
-		const ShapesMap& shapesMap = GetShapesMap();
-		for (		ShapesMap::const_iterator iter = shapesMap.begin();
-					iter != shapesMap.end();
-					++iter){
-			const Shapes& shapes = iter->second;
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				iqt2d::CCircleShape* shapePtr = dynamic_cast<iqt2d::CCircleShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					modelPtr->AttachObserver(shapePtr);
-				}
-			}
-		}
-
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
-
-bool CCircleParamsGuiComp::OnDetached(imod::IModel* modelPtr)
-{
-	if (BaseClass::OnDetached(modelPtr)){
-		const ShapesMap& shapesMap = GetShapesMap();
-		for (		ShapesMap::const_iterator iter = shapesMap.begin();
-					iter != shapesMap.end();
-					++iter){
-			const Shapes& shapes = iter->second;
-			int shapesCount = shapes.GetCount();
-			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
-				iqt2d::CCircleShape* shapePtr = dynamic_cast<iqt2d::CCircleShape*>(shapes.GetAt(shapeIndex));
-				if (shapePtr != NULL){
-					modelPtr->DetachObserver(shapePtr);
-				}
-			}
-		}
-
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-
 
 // reimplemented (imod::IModelEditor)
 
@@ -88,25 +34,6 @@ void CCircleParamsGuiComp::UpdateModel() const
 	if (objectPtr->GetRadius() != radius){
 		notifier.SetPtr(objectPtr);
 		objectPtr->SetRadius(radius);
-	}
-}
-
-
-// reimplemented (iqt2d::TSceneExtenderCompBase)
-
-void CCircleParamsGuiComp::CreateShapes(int /*sceneId*/, bool inactiveOnly, Shapes& result)
-{
-	I_ASSERT(m_circleZValueAttrPtr.IsValid());	// this attribute is obligatory
-
-	CCircleShape* shapePtr = new CCircleShape(!inactiveOnly);
-	if (shapePtr != NULL){
-		shapePtr->setZValue(*m_circleZValueAttrPtr);
-		result.PushBack(shapePtr);
-
-		imod::IModel* modelPtr = GetModelPtr();
-		if (modelPtr != NULL){
-			modelPtr->AttachObserver(shapePtr);
-		}
 	}
 }
 
