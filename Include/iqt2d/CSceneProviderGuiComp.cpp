@@ -494,6 +494,10 @@ void CSceneProviderGuiComp::OnGuiCreated()
 	SceneView->setDragMode(QGraphicsView::ScrollHandDrag);
 	
 	switch (*m_backgroundModeAttrPtr){
+		case BM_NORMAL:
+			SceneView->setBackgroundBrush(qApp->palette().button());
+			break;
+
 		case BM_SOLID:
 			SceneView->setBackgroundBrush(qApp->palette().window());
 			break;

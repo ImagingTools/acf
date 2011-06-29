@@ -4,6 +4,8 @@
 // Qt includes
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 
 // ACF includes
@@ -68,7 +70,6 @@ bool CImageShape::OnDetached(imod::IModel* modelPtr)
 }
 
 
-
 // reimplemented (QGraphicsRectItem)
 
 QRectF CImageShape::boundingRect() const
@@ -80,6 +81,10 @@ QRectF CImageShape::boundingRect() const
 
 	QRectF retVal(imageRect);
 
+	if (m_isFrameVisible){
+		imageRect.adjust(-1, -1, 1, 1);
+	}
+
 	if (m_positionMode == PM_CENTER){
 		QPointF center = retVal.center();
 		retVal.adjust(-center.x(), -center.y(), -center.x(), -center.y());
@@ -89,18 +94,37 @@ QRectF CImageShape::boundingRect() const
 }
 
 
-void CImageShape::paint(QPainter* p, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
+void CImageShape::paint(QPainter* p, const QStyleOptionGraphicsItem* option, QWidget* /*widget*/)
 {
 	QRectF imageRect = boundingRect();
 	if (imageRect.isEmpty()){
 		return;
 	}
 
-	p->drawPixmap(imageRect.topLeft(), m_bitmap);
+	bool drawFrame = m_isFrameVisible;
+	if (drawFrame){
+		QGraphicsScene* scenePtr = scene();
+		I_ASSERT(scenePtr != NULL);
 
-	if (m_isFrameVisible){
-		p->setPen(QPen(Qt::black, 2));
-		imageRect.adjust(-1, -1, 1, 1);
+		QList<QGraphicsView*> sceneViews = scenePtr->views(); 
+		I_ASSERT(sceneViews.count() > 0);
+
+		QGraphicsView* sceneViewPtr = sceneViews.at(0);
+		I_ASSERT(sceneViewPtr != NULL);
+
+		QRect viewportRect = sceneViewPtr->viewport()->rect();
+		QRectF drawingRect = sceneViewPtr->mapFromScene(option->exposedRect).boundingRect();
+
+		if (drawingRect.contains(viewportRect)){
+			drawFrame = false;
+		}
+	}
+
+	p->drawPixmap(imageRect.topLeft(), m_bitmap, imageRect);
+
+	if (drawFrame){
+		p->setPen(QPen(Qt::black, 0, Qt::SolidLine));
+
 		p->drawRect(imageRect);
 	}
 }
@@ -130,7 +154,6 @@ void CImageShape::SetLookupTableToImage(QImage& image, const icmm::IColorTransfo
 		image.setColorTable(rgbTable);
 	}
 }
-
 
 
 } // namespace iqt2d

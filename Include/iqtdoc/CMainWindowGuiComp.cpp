@@ -890,7 +890,9 @@ void CMainWindowGuiComp::OnCopyPathToClippboard()
 		if (m_documentManagerCompPtr->GetDocumentFromView(*m_activeViewPtr, &info) != NULL){
 			QClipboard* clipboardPtr = QApplication::clipboard();
 			if (clipboardPtr != NULL){
-				clipboardPtr->setText(iqt::GetQString(info.filePath));
+				QString filePath = QDir::toNativeSeparators(iqt::GetQString(info.filePath));
+
+				clipboardPtr->setText(filePath);
 			}
 		}
 	}
