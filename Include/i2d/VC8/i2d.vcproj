@@ -5,6 +5,7 @@
 	Name="i2d"
 	ProjectGUID="{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}"
 	RootNamespace="i2d"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -165,7 +166,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CAnnulusComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CAnnulusSegment.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CAnnulusSegmentComp.cpp"
 				>
 			</File>
 			<File
@@ -173,7 +182,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCircleComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CLine2d.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CLine2dComp.cpp"
 				>
 			</File>
 			<File
@@ -181,11 +198,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPosition2dComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CQuadrangle.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\CQuadrangleComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangle.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectangleComp.cpp"
 				>
 			</File>
 			<File
@@ -206,7 +235,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CAnnulusComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CAnnulusSegment.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CAnnulusSegmentComp.h"
 				>
 			</File>
 			<File
@@ -214,7 +251,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCircleComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CLine2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLine2dComp.h"
 				>
 			</File>
 			<File
@@ -222,11 +267,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPosition2dComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CQuadrangle.h"
 				>
 			</File>
 			<File
+				RelativePath="..\CQuadrangleComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CRectangle.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectangleComp.h"
 				>
 			</File>
 			<File
