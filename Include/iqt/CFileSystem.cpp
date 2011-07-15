@@ -60,7 +60,7 @@ bool CFileSystem::IsPresent(const istd::CString& filePath) const
 }
 
 
-bool CFileSystem::CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
+bool CFileSystem::CreateFileCopy(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
 {
 	QString inputFilePath = iqt::GetQString(outputFile);
 	QFileInfo inputFileInfo(inputFilePath);
@@ -80,6 +80,51 @@ bool CFileSystem::CopyFile(const istd::CString& inputFile, const istd::CString& 
 	}
 
 	return QFile::copy(iqt::GetQString(inputFile), outputFilePath);
+}
+
+
+bool CFileSystem::RemoveFile(const istd::CString& filePath) const
+{
+	QFile file(iqt::GetQString(filePath));
+
+	return file.remove();
+}
+
+
+bool CFileSystem::RemoveFolder(const istd::CString& directoryPath, bool ignoreNonEmpty) const
+{
+	QString directory = iqt::GetQString(directoryPath);
+
+	QDir dir(directory);
+
+	if (ignoreNonEmpty){
+		bool retVal = true;
+		QFileInfoList directoryItems = dir.entryInfoList(QDir::Files | QDir::Dirs);
+		for (int itemIndex = 0; itemIndex < directoryItems.count(); itemIndex++){
+			QFileInfo& fileInfo  = directoryItems[itemIndex];
+
+			if (fileInfo.exists()){
+				if (fileInfo.isDir()){
+					retVal = retVal && RemoveFolder(iqt::GetCString(fileInfo.absoluteFilePath()), true);
+				}
+				else{				
+					retVal = retVal && RemoveFile(iqt::GetCString(fileInfo.absoluteFilePath()));
+				}
+			}
+		}
+	}
+
+	return dir.rmdir(directory);
+}
+
+
+bool CFileSystem::CreateFolder(const istd::CString& directoryPath) const
+{
+	QString directory = iqt::GetQString(directoryPath);
+
+	QDir dir(directory);
+
+	return dir.mkdir(directory);
 }
 
 

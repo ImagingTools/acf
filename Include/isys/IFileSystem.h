@@ -58,7 +58,24 @@ public:
 	/**
 		Copy any file to another. If the \c overwriteExisting is set on, the existing file will be overwritten.
 	*/
-	virtual bool CopyFile(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting = false) const = 0;
+	virtual bool CreateFileCopy(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting = false) const = 0;
+
+	/**
+		Remove the file \c filePath from the file system.
+	*/
+	virtual bool RemoveFile(const istd::CString& filePath) const = 0;
+	
+	/**
+		Remove the directory \c directoryPath from the file system.
+		If \c ignoreNonEmpty flag set, all files in the directory will be also deleted,
+		otherwise operation will be canceled and the function returns \c false.
+	*/
+	virtual bool RemoveFolder(const istd::CString& directoryPath, bool ignoreNonEmpty = false) const = 0;
+
+	/**
+		Create an empty directory.
+	*/
+	virtual bool CreateFolder(const istd::CString& directoryPath) const = 0;
 };
 
 

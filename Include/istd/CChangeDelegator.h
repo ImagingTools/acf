@@ -2,7 +2,7 @@
 #define istd_CChangeDelegator_included
 
 
-#include "istd/IChangeable.h"
+#include "istd/IChangeDelegator.h"
 
 
 namespace istd
@@ -12,7 +12,7 @@ namespace istd
 /**
 	Delegates calls of IChangeable methods to the given slave.
 */
-class CChangeDelegator: virtual public istd::IChangeable
+class CChangeDelegator: virtual public istd::IChangeDelegator 
 {
 public:
 	typedef istd::IChangeable BaseClass;
@@ -20,15 +20,8 @@ public:
 	CChangeDelegator();
 	explicit CChangeDelegator(istd::IChangeable* slavePtr);
 
-	/**
-		Sets the slave object pointer. 
-		Its IChangeable methods will be called, if this object is updated.
-	*/
+	// reimplemented (istd::IChangeDelegator)
 	virtual void SetSlavePtr(istd::IChangeable* slavePtr);
-
-	/**
-		Gets the slave object pointer. 
-	*/
 	virtual istd::IChangeable* GetSlavePtr() const;
 
 	// reimplemented (istd::IChangeable)
