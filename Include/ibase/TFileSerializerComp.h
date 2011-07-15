@@ -286,11 +286,11 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::CheckMinimalVersion(const i
 				++iter){
 		int id = *iter;
 
-		I_DWORD minimalVersionInfo = object.GetMinimalVersion(id);
+		I_DWORD objectMinimalVersion = object.GetMinimalVersion(id);
 
 		I_DWORD versionNumber;
 		if (versionInfo.GetVersionNumber(id, versionNumber)){
-			if (versionNumber < minimalVersionInfo){
+			if (versionNumber < objectMinimalVersion){
 				return false;
 			}
 		}
