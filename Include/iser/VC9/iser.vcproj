@@ -410,6 +410,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TVersionInfoSerializer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TXmlStreamReadArchiveBase.h"
 				>
 			</File>

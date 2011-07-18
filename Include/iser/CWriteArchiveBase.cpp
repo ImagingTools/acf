@@ -4,6 +4,8 @@
 // ACF includes
 #include "istd/CStaticServicesProvider.h"
 
+#include "iser/TVersionInfoSerializer.h"
+
 
 namespace iser
 {
@@ -54,53 +56,8 @@ CWriteArchiveBase::CWriteArchiveBase(const IVersionInfo* versionInfoPtr)
 
 
 bool CWriteArchiveBase::SerializeAcfHeader()
-{
-	I_ASSERT(IsStoring());
-
-	bool retVal = BeginTag(s_headerTag);
-
-	IVersionInfo::VersionIds ids;
-
-	if (m_versionInfoPtr != NULL){
-		ids = m_versionInfoPtr->GetVersionIds();
-	}
-
-	int versionIdsCount = int(ids.size());
-
-	retVal = retVal && BeginMultiTag(s_versionInfosTag, s_versionInfoTag, versionIdsCount);
-
-	for (		IVersionInfo::VersionIds::iterator iter = ids.begin();
-				retVal && (iter != ids.end());
-				++iter){
-		I_ASSERT(m_versionInfoPtr != NULL);
-
-		retVal = retVal && BeginTag(s_versionInfoTag);
-
-		retVal = retVal && BeginTag(s_versionIdTag);
-		int id = *iter;
-		I_IF_DEBUG(I_DWORD dummyVersion;I_ASSERT(m_versionInfoPtr->GetVersionNumber(id, dummyVersion)));	// all known IDs must have its version.
-		retVal = retVal && Process(id);
-		retVal = retVal && EndTag(s_versionIdTag);
-
-		retVal = retVal && BeginTag(s_versionNumberTag);
-		I_DWORD versionNumber;
-		m_versionInfoPtr->GetVersionNumber(id, versionNumber);
-		retVal = retVal && Process(versionNumber);
-		retVal = retVal && EndTag(s_versionNumberTag);
-
-		retVal = retVal && BeginTag(s_versionDescriptionTag);
-		istd::CString description = m_versionInfoPtr->GetVersionIdDescription(id);
-		retVal = retVal && Process(description);
-		retVal = retVal && EndTag(s_versionDescriptionTag);
-
-		retVal = retVal && EndTag(s_versionInfoTag);
-	}
-
-	retVal = retVal && EndTag(s_versionInfosTag);
-
-	retVal = retVal && EndTag(s_headerTag);
-
-	return retVal;
+{	
+	return TVersionInfoSerializer<IVersionInfo>::WriteVersion(m_versionInfoPtr, *this);
 }
 
 

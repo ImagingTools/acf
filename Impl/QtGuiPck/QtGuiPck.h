@@ -102,6 +102,7 @@ typedef iqtproc::CProcessorControlGuiComp ProcessorControlGui;
 typedef iqtproc::CDocumentProcessingManagerComp DocumentProcessingManager;
 typedef iqtproc::CDocumentProcessingCommandComp DocumentProcessingCommand;
 
+
 } // namespace QtGuiPck
 
 

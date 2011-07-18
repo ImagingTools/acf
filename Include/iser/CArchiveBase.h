@@ -33,12 +33,6 @@ protected:
 
 	// list of standard tags used to serialize header
 	static CArchiveTag s_acfRootTag;
-	static CArchiveTag s_headerTag;
-	static CArchiveTag s_versionInfosTag;
-	static CArchiveTag s_versionInfoTag;
-	static CArchiveTag s_versionIdTag;
-	static CArchiveTag s_versionNumberTag;
-	static CArchiveTag s_versionDescriptionTag;
 
 private:
 	/**
