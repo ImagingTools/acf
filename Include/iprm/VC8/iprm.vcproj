@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CManagerParamsSetShadowerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerComp.cpp"
 				>
 			</File>
@@ -214,6 +218,10 @@
 			</File>
 			<File
 				RelativePath="..\CLinearAdjustParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CManagerParamsSetShadowerComp.h"
 				>
 			</File>
 			<File

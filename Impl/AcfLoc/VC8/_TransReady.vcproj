@@ -108,6 +108,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Translations\Acf_en_US.ts"
+				>
+			</File>
+			<File
 				RelativePath="..\Translations\Acf_pl_PL.ts"
 				>
 			</File>
