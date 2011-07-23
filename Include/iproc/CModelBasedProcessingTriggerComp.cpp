@@ -18,7 +18,7 @@ CModelBasedProcessingTriggerComp::CModelBasedProcessingTriggerComp()
 {
 }
 
-// reimplemented (icomp::IComponent)
+// reimplemented (icomp::CComponentBase)
 
 void CModelBasedProcessingTriggerComp::OnComponentCreated()
 {

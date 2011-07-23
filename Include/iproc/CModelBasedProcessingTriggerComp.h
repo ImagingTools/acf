@@ -35,7 +35,7 @@ public:
 
 	CModelBasedProcessingTriggerComp();
 
-	// reimplemented (icomp::IComponent)
+	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
