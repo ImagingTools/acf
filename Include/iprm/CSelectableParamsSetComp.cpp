@@ -81,7 +81,7 @@ bool CSelectableParamsSetComp::SetSelectedOptionIndex(int index)
 		return false;
 	}
 
-	if (index < GetOptionsCount()){
+	if (index >= GetOptionsCount()){
 		return false;
 	}
 

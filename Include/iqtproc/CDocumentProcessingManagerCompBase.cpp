@@ -19,6 +19,16 @@ CDocumentProcessingManagerCompBase::CDocumentProcessingManagerCompBase()
 }
 
 
+void CDocumentProcessingManagerCompBase::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	idoc::IDocumentManager* objectPtr = m_documentManagerObserver.GetObjectPtr<idoc::IDocumentManager>(modelId);
+	I_ASSERT(objectPtr != NULL);
+	if (objectPtr != NULL){
+		SetProcessingCommandEnabled(objectPtr->GetActiveView() != NULL || !IsInputDocumentRequired());
+	}
+}
+
+
 bool CDocumentProcessingManagerCompBase::IsInputDocumentRequired() const
 {
 	bool retVal = true;
@@ -53,7 +63,7 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 
 	imod::IModel* documentManagerModelPtr = dynamic_cast<imod::IModel*>(m_documentManagerCompPtr.GetPtr());
 	if (documentManagerModelPtr != NULL){
-		documentManagerModelPtr->AttachObserver(&m_documentManagerObserver);
+		m_documentManagerObserver.RegisterModel(documentManagerModelPtr);
 	}
 	
 	QString menuName = tr("Processing");
@@ -78,10 +88,7 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 
 void CDocumentProcessingManagerCompBase::OnComponentDestroyed()
 {
-	imod::IModel* documentManagerModelPtr = dynamic_cast<imod::IModel*>(m_documentManagerCompPtr.GetPtr());
-	if (documentManagerModelPtr != NULL && documentManagerModelPtr->IsAttached(&m_documentManagerObserver)){
-		documentManagerModelPtr->DetachObserver(&m_documentManagerObserver);
-	}
+	m_documentManagerObserver.UnregisterAllModels();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -137,28 +144,6 @@ void CDocumentProcessingManagerCompBase::OnDoProcessing()
 	}
 
 	DoDocumentProcessing(inputDocumentPtr, documentTypeId);
-}
-
-
-// public methods of the embedded class DocumentManagerObserver
-
-CDocumentProcessingManagerCompBase::DocumentManagerObserver::DocumentManagerObserver(CDocumentProcessingManagerCompBase& parent)
-	:m_parent(parent)
-{
-}
-
-
-// protected methods
-
-// reimplemented (imod::TSingleModelObserverBase)
-
-void CDocumentProcessingManagerCompBase::DocumentManagerObserver::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	idoc::IDocumentManager* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
-	if (objectPtr != NULL){
-		m_parent.SetProcessingCommandEnabled(objectPtr->GetActiveView() != NULL || !m_parent.IsInputDocumentRequired());
-	}
 }
 
 

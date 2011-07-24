@@ -7,7 +7,7 @@
 
 
 // ACF includes
-#include "imod/TSingleModelObserverBase.h"
+#include "imod/TModelDispatcher.h"
 
 #include "ibase/TLoggerCompWrap.h"
 #include "ibase/ICommandsProvider.h"
@@ -46,6 +46,8 @@ public:
 	I_END_COMPONENT;
 
 	CDocumentProcessingManagerCompBase();
+
+	void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
 
 	/**
 		Return \c true, if the input document is required for processing.
@@ -89,18 +91,7 @@ protected:
 	iqtgui::CHierarchicalCommand m_processingCommand;
 
 private:
-	class DocumentManagerObserver: public imod::TSingleModelObserverBase<idoc::IDocumentManager>
-	{
-	public:
-		DocumentManagerObserver(CDocumentProcessingManagerCompBase& parent);
-	protected:
-		// reimplemented (imod::TSingleModelObserverBase)
-		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
-	private:
-		CDocumentProcessingManagerCompBase& m_parent;
-	};
-
-	DocumentManagerObserver m_documentManagerObserver;
+	imod::TModelDispatcher<CDocumentProcessingManagerCompBase> m_documentManagerObserver;
 };
 
 
