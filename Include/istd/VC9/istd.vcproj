@@ -317,6 +317,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IChangeDelegator.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IContainerInfo.h"
 				>
 			</File>
