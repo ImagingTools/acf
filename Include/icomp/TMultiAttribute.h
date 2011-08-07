@@ -5,10 +5,14 @@
 // STL includes
 #include <vector>
 
+
+// ACF includes
 #include "istd/CClassInfo.h"
+
 #include "iser/IArchive.h"
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
+#include "iser/TCopySerializedWrap.h"
 
 #include "icomp/IAttributeStaticInfo.h"
 
@@ -23,7 +27,7 @@ namespace icomp
 	Don't use direct this class, use macros I_MULTIATTR and I_ASSIGN instead.
 */
 template <typename Value>
-class TMultiAttribute: virtual public iser::IObject
+class TMultiAttribute: virtual public iser::TCopySerializedWrap<iser::IObject>
 {
 public:
 	typedef Value ValueType;

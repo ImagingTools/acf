@@ -24,7 +24,6 @@ void CObjectPreviewGuiComp::OnGuiModelAttached()
 	if (m_objectModelCompPtr.IsValid() && m_objectObserverCompPtr.IsValid() && !m_objectModelCompPtr->IsAttached(m_objectObserverCompPtr.GetPtr())){
 		m_objectModelCompPtr->AttachObserver(m_objectObserverCompPtr.GetPtr());
 	}
-
 }
 
 

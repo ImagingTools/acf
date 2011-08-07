@@ -3,9 +3,11 @@
 
 
 #include "istd/CClassInfo.h"
+
 #include "iser/IArchive.h"
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
+#include "iser/TCopySerializedWrap.h"
 
 #include "icomp/IAttributeStaticInfo.h"
 
@@ -20,7 +22,7 @@ namespace icomp
 	Don't use direct this class, use macros \c I_ATTR and \c I_ASSIGN instead.
 */
 template <typename Value>
-class TAttribute: virtual public iser::IObject
+class TAttribute: virtual public iser::TCopySerializedWrap<iser::IObject>
 {
 public:
 	typedef Value ValueType;
