@@ -262,7 +262,9 @@ QString CFileDialogLoaderComp::GetFileName(const istd::CString& filePath, bool i
 		m_lastOpenInfo = fileInfo;
 	}
 
-	m_statupDirectoryCompPtr->SetPath(iqt::GetCString(fileInfo.dir().absolutePath()));
+	if (m_statupDirectoryCompPtr.IsValid()){
+		m_statupDirectoryCompPtr->SetPath(iqt::GetCString(fileInfo.dir().absolutePath()));
+	}
 
 	return retVal;
 }
