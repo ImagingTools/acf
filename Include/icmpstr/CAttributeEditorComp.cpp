@@ -1212,17 +1212,19 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 
 			const icomp::IRegistry* registryPtr = m_parent.GetRegistry();
 			if ((registryPtr != NULL) && (staticInfoPtr != NULL) && m_parent.m_consistInfoCompPtr.IsValid()){
+				int queryFlags = IRegistryConsistInfo::QF_NONE;
 				icomp::IComponentStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
 							0,
 							icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
 				if (obligatoryInterfaces.empty()){
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
+					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
 				icomp::IRegistry::Ids compatIds = m_parent.m_consistInfoCompPtr->GetCompatibleElements(
 							obligatoryInterfaces,
 							*registryPtr,
-							false);
+							queryFlags);
 
 				for (		icomp::IRegistry::Ids::const_iterator iter = compatIds.begin();
 							iter != compatIds.end();

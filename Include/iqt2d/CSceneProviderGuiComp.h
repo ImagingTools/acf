@@ -149,12 +149,10 @@ protected:
 		CSceneProviderGuiComp& m_parent;
 	};
 
-	virtual void OnResize(QResizeEvent* eventPtr);
-	virtual void OnWheelEvent(QGraphicsSceneWheelEvent* eventPtr);
-	virtual void OnKeyReleaseEvent(QKeyEvent* eventPtr);
-	virtual void OnContextMenuEvent(QContextMenuEvent* eventPtr);
-	virtual void OnMouseDoubleClickEvent(QEvent* eventPtr);
-	virtual void OnMouseMoveEvent(QMouseEvent* eventPtr);
+	virtual bool OnResize(QResizeEvent* eventPtr);
+	virtual bool OnWheelEvent(QGraphicsSceneWheelEvent* eventPtr);
+	virtual bool OnKeyReleaseEvent(QKeyEvent* eventPtr);
+	virtual bool OnMouseDoubleClickEvent(QEvent* eventPtr);
 
 	void ScaleView(double scaleFactor);
 	void SetFittedScale(FitMode mode);

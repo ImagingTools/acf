@@ -47,7 +47,7 @@ public:
 	virtual icomp::IRegistry::Ids GetCompatibleElements(
 				const icomp::IComponentStaticInfo::Ids& interfaceNames,
 				const icomp::IRegistry& registry,
-				bool includeUndefined) const;
+				int queryFlags) const;
 	virtual bool IsRegistryValid(
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,

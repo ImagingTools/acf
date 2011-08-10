@@ -20,9 +20,11 @@ namespace icmpstr
 icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 			const icomp::IComponentStaticInfo::Ids& interfaceNames,
 			const icomp::IRegistry& registry,
-			bool includeUndefined) const
+			int queryFlags) const
 {
 	icomp::IRegistry::Ids retVal;
+
+	bool includeUndefined = (queryFlags & QF_INCLUDE_UNDEFINED) != 0;
 
 	if (m_envManagerCompPtr.IsValid()){
 		icomp::IRegistry::Ids elementIds = registry.GetElementIds();

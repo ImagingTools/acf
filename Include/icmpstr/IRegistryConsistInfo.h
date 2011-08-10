@@ -24,16 +24,28 @@ namespace icmpstr
 class IRegistryConsistInfo: virtual public istd::IPolymorphic
 {
 public:
+	enum QueryFlags
+	{
+		QF_NONE = 0,
+		/**
+			Supporting of any specified interfaces is enough to interprete component as compatible one.
+		*/
+		QF_ANY_INTERFACE = 1 << 0,
+		/**
+			If active, all undefined (without available meta information) elements will be also included.
+		*/
+		QF_INCLUDE_UNDEFINED = 1 << 1,
+	};
+
 	/**
 		Get list of compatible element names.
 		\param	interfaceNames		list of interfaces must be implemented.
 		\param	registry			registry will be looked in.
-		\param	includeUndefined	if it is true, all undefined elements will be included.
 	*/
 	virtual icomp::IRegistry::Ids GetCompatibleElements(
 				const icomp::IComponentStaticInfo::Ids& interfaceNames,
 				const icomp::IRegistry& registry,
-				bool includeUndefined) const = 0;
+				int queryFlags = QF_NONE) const = 0;
 
 	/**
 		Check if registry is valid.
