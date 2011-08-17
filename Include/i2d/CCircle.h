@@ -26,6 +26,26 @@ public:
 
 	virtual CRectangle GetBoundingBox() const;
 
+	// reimplemented (IObject2d)
+	virtual bool Transform(
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool InvTransform(
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool GetTransformed(
+				const ITransformation2d& transformation,
+				IObject2d& result,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+	virtual bool GetInvTransformed(
+				const ITransformation2d& transformation,
+				IObject2d& result,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 

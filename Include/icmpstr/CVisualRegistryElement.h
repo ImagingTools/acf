@@ -40,6 +40,24 @@ public:
 	// reimplemented (IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const i2d::CVector2d& position);
+	virtual bool Transform(
+				const i2d::ITransformation2d& transformation,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool InvTransform(
+				const i2d::ITransformation2d& transformation,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool GetTransformed(
+				const i2d::ITransformation2d& transformation,
+				i2d::IObject2d& result,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+	virtual bool GetInvTransformed(
+				const i2d::ITransformation2d& transformation,
+				i2d::IObject2d& result,
+				i2d::ITransformation2d::ExactnessMode mode = i2d::ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
 
 private:
 	i2d::CVector2d m_center;

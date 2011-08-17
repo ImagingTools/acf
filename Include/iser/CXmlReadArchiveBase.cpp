@@ -209,16 +209,24 @@ bool CXmlReadArchiveBase::EndTag(const CArchiveTag& tag)
 bool CXmlReadArchiveBase::Process(std::string& value)
 {
 	if (m_isTagEmpty){
-		if (IsLogConsumed()){
-			SendLogMessage(
-						istd::ILogger::MC_ERROR,
-						MI_TAG_SKIPPED,
-						"Could not read data from empty tag",
-						"iser::CXmlReadArchiveBase",
-						MF_SYSTEM);
+		if (m_isSeparatorNeeded){
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::ILogger::MC_ERROR,
+							MI_TAG_SKIPPED,
+							"Could not read second string from empty tag",
+							"iser::CXmlReadArchiveBase",
+							MF_SYSTEM);
+			}
+
+			return false;
 		}
 
-		return false;
+		value = "";
+
+		m_isSeparatorNeeded = true;
+
+		return true;
 	}
 
 	std::string xmlText;
@@ -279,7 +287,24 @@ bool CXmlReadArchiveBase::Process(std::string& value)
 bool CXmlReadArchiveBase::Process(istd::CString& value)
 {
 	if (m_isTagEmpty){
-		return false;
+		if (m_isSeparatorNeeded){
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::ILogger::MC_ERROR,
+							MI_TAG_SKIPPED,
+							"Could not read second string from empty tag",
+							"iser::CXmlReadArchiveBase",
+							MF_SYSTEM);
+			}
+
+			return false;
+		}
+
+		value = "";
+
+		m_isSeparatorNeeded = true;
+
+		return true;
 	}
 
 	std::string xmlText;

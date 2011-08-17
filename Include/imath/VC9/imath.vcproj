@@ -266,6 +266,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TMatrix.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TSplineGridFunctionBase.h"
 				>
 			</File>

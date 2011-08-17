@@ -132,6 +132,118 @@ void CQuadrangle::MoveCenterTo(const CVector2d& position)
 }
 
 
+bool CQuadrangle::Transform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+	if (errorFactorPtr != NULL){
+		double errorFactor1 = 0;
+		double errorFactor2 = 0;
+		bool retVal =
+					m_firstDiagonal.Transform(transformation, mode, &errorFactor1) &&
+					m_secondDiagonal.Transform(transformation, mode, &errorFactor2);
+
+		*errorFactorPtr = errorFactor1 + errorFactor2;
+
+		return retVal;
+	}
+	else{
+		return		m_firstDiagonal.Transform(transformation, mode) &&
+					m_secondDiagonal.Transform(transformation, mode);
+	}
+}
+
+
+bool CQuadrangle::InvTransform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+	if (errorFactorPtr != NULL){
+		double errorFactor1 = 0;
+		double errorFactor2 = 0;
+		bool retVal =
+					m_firstDiagonal.InvTransform(transformation, mode, &errorFactor1) &&
+					m_secondDiagonal.InvTransform(transformation, mode, &errorFactor2);
+
+		*errorFactorPtr = errorFactor1 + errorFactor2;
+
+		return retVal;
+	}
+	else{
+		return		m_firstDiagonal.InvTransform(transformation, mode) &&
+					m_secondDiagonal.InvTransform(transformation, mode);
+	}
+}
+
+
+bool CQuadrangle::GetTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CQuadrangle* resultQuadranglePtr = dynamic_cast<CQuadrangle*>(&result);
+	if (resultQuadranglePtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier notifier(resultQuadranglePtr, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+	if (errorFactorPtr != NULL){
+		double errorFactor1 = 0;
+		double errorFactor2 = 0;
+		bool retVal =
+					m_firstDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode, &errorFactor1) &&
+					m_secondDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode, &errorFactor2);
+
+		*errorFactorPtr = errorFactor1 + errorFactor2;
+
+		return retVal;
+	}
+	else{
+		return		m_firstDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode) &&
+					m_secondDiagonal.GetTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode);
+	}
+}
+
+
+bool CQuadrangle::GetInvTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CQuadrangle* resultQuadranglePtr = dynamic_cast<CQuadrangle*>(&result);
+	if (resultQuadranglePtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier notifier(resultQuadranglePtr, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+	if (errorFactorPtr != NULL){
+		double errorFactor1 = 0;
+		double errorFactor2 = 0;
+		bool retVal =
+					m_firstDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode, &errorFactor1) &&
+					m_secondDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode, &errorFactor2);
+
+		*errorFactorPtr = errorFactor1 + errorFactor2;
+
+		return retVal;
+	}
+	else{
+		return		m_firstDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_firstDiagonal, mode) &&
+					m_secondDiagonal.GetInvTransformed(transformation, resultQuadranglePtr->m_secondDiagonal, mode);
+	}
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CQuadrangle::Serialize(iser::IArchive& archive)

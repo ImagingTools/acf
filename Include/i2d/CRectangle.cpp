@@ -362,6 +362,48 @@ void CRectangle::MoveCenterTo(const CVector2d& position)
 }
 
 
+bool CRectangle::Transform(
+			const ITransformation2d& /*transformation*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/)
+{
+	// TODO: implement geometrical transformations for rectangle.
+	return false;
+}
+
+
+bool CRectangle::InvTransform(
+			const ITransformation2d& /*transformation*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/)
+{
+	// TODO: implement geometrical transformations for rectangle.
+	return false;
+}
+
+
+bool CRectangle::GetTransformed(
+			const ITransformation2d& /*transformation*/,
+			IObject2d& /*result*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/) const
+{
+	// TODO: implement geometrical transformations for rectangle.
+	return false;
+}
+
+
+bool CRectangle::GetInvTransformed(
+			const ITransformation2d& /*transformation*/,
+			IObject2d& /*result*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/) const
+{
+	// TODO: implement geometrical transformations for rectangle.
+	return false;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CRectangle::Serialize(iser::IArchive& archive)

@@ -15,7 +15,7 @@ namespace imath
 	there is at least one x in the domain X such that f(x) = y.
 */
 template <typename Argument, typename Result>
-class TISurjectFunction: virtual public TIMathFunction
+class TISurjectFunction: virtual public TIMathFunction<Argument, Result>
 {
 public:
 	/**
@@ -37,7 +37,7 @@ public:
 
 // standard templatization
 
-typedef TISurjectFunction<double, double> IDoubleFunction;
+typedef TISurjectFunction<double, double> ISurjectDoubleFunction;
 
 
 } // namespace imath

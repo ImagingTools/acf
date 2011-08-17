@@ -45,6 +45,50 @@ CRectangle CCircle::GetBoundingBox() const
 }
 
 
+// reimplemented (IObject2d)
+
+bool CCircle::Transform(
+			const ITransformation2d& /*transformation*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/)
+{
+	// TODO: implement geometrical transformations for circle.
+	return false;
+}
+
+
+bool CCircle::InvTransform(
+			const ITransformation2d& /*transformation*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/)
+{
+	// TODO: implement geometrical transformations for circle.
+	return false;
+}
+
+
+bool CCircle::GetTransformed(
+			const ITransformation2d& /*transformation*/,
+			IObject2d& /*result*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/) const
+{
+	// TODO: implement geometrical transformations for circle.
+	return false;
+}
+
+
+bool CCircle::GetInvTransformed(
+			const ITransformation2d& /*transformation*/,
+			IObject2d& /*result*/,
+			ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/) const
+{
+	// TODO: implement geometrical transformations for circle.
+	return false;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CCircle::Serialize(iser::IArchive& archive)

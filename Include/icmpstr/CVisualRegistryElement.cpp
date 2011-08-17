@@ -56,6 +56,44 @@ void CVisualRegistryElement::MoveCenterTo(const i2d::CVector2d& position)
 }
 
 
+bool CVisualRegistryElement::Transform(
+			const i2d::ITransformation2d& /*transformation*/,
+			i2d::ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/)
+{
+	return false;
+}
+
+
+bool CVisualRegistryElement::InvTransform(
+			const i2d::ITransformation2d& /*transformation*/,
+			i2d::ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/)
+{
+	return false;
+}
+
+
+bool CVisualRegistryElement::GetTransformed(
+			const i2d::ITransformation2d& /*transformation*/,
+			i2d::IObject2d& /*result*/,
+			i2d::ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/) const
+{
+	return false;
+}
+
+
+bool CVisualRegistryElement::GetInvTransformed(
+			const i2d::ITransformation2d& /*transformation*/,
+			i2d::IObject2d& /*result*/,
+			i2d::ITransformation2d::ExactnessMode /*mode*/,
+			double* /*errorFactorPtr*/) const
+{
+	return false;
+}
+
+
 } // namespace icmpstr
 
 

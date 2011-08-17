@@ -110,12 +110,12 @@ public:
 	/*
 		Get square of euclidean norm.
 	*/
-	double GetEuclideanNorm2() const;
+	double GetFrobeniusNorm2() const;
 
 	/*
 		Get euclidean norm.
 	*/
-	double GetEuclideanNorm() const;
+	double GetFrobeniusNorm() const;
 
 	/**
 		Transform matrix to upper triangle form using method of Householder reflexions.

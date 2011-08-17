@@ -169,6 +169,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CAffine2d.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CAnnulus.cpp"
 				>
 			</File>
@@ -201,6 +205,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMatrix2d.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPosition2d.cpp"
 				>
 			</File>
@@ -225,10 +233,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTransform.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CVector2d.cpp"
 				>
 			</File>
@@ -237,6 +241,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CAffine2d.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CAnnulus.h"
 				>
@@ -270,6 +278,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMatrix2d.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CPosition2d.h"
 				>
 			</File>
@@ -294,10 +306,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTransform.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CVector2d.h"
 				>
 			</File>
@@ -311,6 +319,10 @@
 			</File>
 			<File
 				RelativePath="..\ISceneController.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ITransformation2d.h"
 				>
 			</File>
 		</Filter>

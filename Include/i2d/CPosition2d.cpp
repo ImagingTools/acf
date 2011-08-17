@@ -49,6 +49,98 @@ void CPosition2d::MoveCenterTo(const CVector2d& position)
 }
 
 
+bool CPosition2d::Transform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	CVector2d transPos;
+	if (!transformation.GetPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	SetPosition(transPos);
+
+	return true;
+}
+
+
+bool CPosition2d::InvTransform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	CVector2d transPos;
+	if (!transformation.GetInvPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	SetPosition(transPos);
+
+	return true;
+}
+
+
+bool CPosition2d::GetTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CPosition2d* resultPositionPtr = dynamic_cast<CPosition2d*>(&result);
+	if (resultPositionPtr == NULL){
+		return false;
+	}
+
+	CVector2d transPos;
+	if (!transformation.GetPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	resultPositionPtr->SetPosition(transPos);
+
+	return true;
+}
+
+
+bool CPosition2d::GetInvTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CPosition2d* resultPositionPtr = dynamic_cast<CPosition2d*>(&result);
+	if (resultPositionPtr == NULL){
+		return false;
+	}
+
+	CVector2d transPos;
+	if (!transformation.GetInvPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	resultPositionPtr->SetPosition(transPos);
+
+	return true;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CPosition2d::Serialize(iser::IArchive& archive)

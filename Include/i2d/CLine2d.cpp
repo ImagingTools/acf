@@ -310,6 +310,166 @@ void CLine2d::MoveCenterTo(const CVector2d& position)
 }
 
 
+bool CLine2d::Transform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	CVector2d transPos1;
+	CVector2d transPos2;
+	if (!transformation.GetPositionAt(m_point1, transPos1, mode) || !transformation.GetPositionAt(m_point2, transPos2, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		if ((transformation.GetTransformationFlags() & ITransformation2d::TF_AFFINE) != 0){
+			*errorFactorPtr = 0;
+		}
+		else{
+			// approx error if transformation of center lies on the result line
+			CVector2d transCenter;
+			if (transformation.GetPositionAt(GetCenter(), transCenter, mode)){
+				*errorFactorPtr = std::sqrt((transCenter - transPos1).GetCrossProductZ(transPos2 - transPos1));
+			}
+			else{
+				// there is no possibility to calculate it, get proportional dummy error
+				*errorFactorPtr = transPos2.GetDistance(transPos1);
+			}
+		}
+	}
+
+	istd::CChangeNotifier notifier(this);
+
+	m_point1 = transPos1;
+	m_point2 = transPos2;
+
+	return true;
+}
+
+
+bool CLine2d::InvTransform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	CVector2d transPos1;
+	CVector2d transPos2;
+	if (!transformation.GetInvPositionAt(m_point1, transPos1, mode) || !transformation.GetInvPositionAt(m_point2, transPos2, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		if ((transformation.GetTransformationFlags() & ITransformation2d::TF_AFFINE) != 0){
+			*errorFactorPtr = 0;
+		}
+		else{
+			// approx error if transformation of center lies on the result line
+			CVector2d transCenter;
+			if (transformation.GetInvPositionAt(GetCenter(), transCenter, mode)){
+				*errorFactorPtr = std::sqrt((transCenter - transPos1).GetCrossProductZ(transPos2 - transPos1));
+			}
+			else{
+				// there is no possibility to calculate it, get proportional dummy error
+				*errorFactorPtr = transPos2.GetDistance(transPos1);
+			}
+		}
+	}
+
+	istd::CChangeNotifier notifier(this);
+
+	m_point1 = transPos1;
+	m_point2 = transPos2;
+
+	return true;
+}
+
+
+bool CLine2d::GetTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CLine2d* resultLinePtr = dynamic_cast<CLine2d*>(&result);
+	if (resultLinePtr == NULL){
+		return false;
+	}
+
+	CVector2d transPos1;
+	CVector2d transPos2;
+	if (!transformation.GetPositionAt(m_point1, transPos1, mode) || !transformation.GetPositionAt(m_point2, transPos2, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		if ((transformation.GetTransformationFlags() & ITransformation2d::TF_AFFINE) != 0){
+			*errorFactorPtr = 0;
+		}
+		else{
+			// approx error if transformation of center lies on the result line
+			CVector2d transCenter;
+			if (transformation.GetPositionAt(GetCenter(), transCenter, mode)){
+				*errorFactorPtr = std::sqrt((transCenter - transPos1).GetCrossProductZ(transPos2 - transPos1));
+			}
+			else{
+				// there is no possibility to calculate it, get proportional dummy error
+				*errorFactorPtr = transPos2.GetDistance(transPos1);
+			}
+		}
+	}
+
+	istd::CChangeNotifier notifier(resultLinePtr);
+
+	resultLinePtr->SetPoint1(transPos1);
+	resultLinePtr->SetPoint2(transPos2);
+
+	return true;
+}
+
+
+bool CLine2d::GetInvTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CLine2d* resultLinePtr = dynamic_cast<CLine2d*>(&result);
+	if (resultLinePtr == NULL){
+		return false;
+	}
+
+	CVector2d transPos1;
+	CVector2d transPos2;
+	if (!transformation.GetInvPositionAt(m_point1, transPos1, mode) || !transformation.GetInvPositionAt(m_point2, transPos2, mode)){
+		return false;
+	}
+
+	if (errorFactorPtr != NULL){
+		if ((transformation.GetTransformationFlags() & ITransformation2d::TF_AFFINE) != 0){
+			*errorFactorPtr = 0;
+		}
+		else{
+			// approx error if transformation of center lies on the result line
+			CVector2d transCenter;
+			if (transformation.GetInvPositionAt(GetCenter(), transCenter, mode)){
+				*errorFactorPtr = std::sqrt((transCenter - transPos1).GetCrossProductZ(transPos2 - transPos1));
+			}
+			else{
+				// there is no possibility to calculate it, get proportional dummy error
+				*errorFactorPtr = transPos2.GetDistance(transPos1);
+			}
+		}
+	}
+
+	istd::CChangeNotifier notifier(resultLinePtr);
+
+	resultLinePtr->SetPoint1(transPos1);
+	resultLinePtr->SetPoint2(transPos2);
+
+	return true;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CLine2d::Serialize(iser::IArchive& archive)

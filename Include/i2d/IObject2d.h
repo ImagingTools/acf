@@ -4,7 +4,7 @@
 
 #include "iser/ISerializable.h"
 
-#include "imath/imath.h"
+#include "i2d/ITransformation2d.h"
 
 
 namespace i2d
@@ -35,6 +35,58 @@ public:
 		Move object to position \c position.
 	*/
 	virtual void MoveCenterTo(const CVector2d& position) = 0;
+
+	/**
+		Transform this object using some transformation.
+		\param	mode			controls needed transformation exactness.
+		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
+								Value 0 means that transformation is exactly done.
+		\return	true, if  transformation was done correctly.
+	*/
+	virtual bool Transform(
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) = 0;
+
+	/**
+		Do inverse transformation of this object.
+		\param	mode			controls needed transformation exactness.
+		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
+								Value 0 means that transformation is exactly done.
+		\return	true, if  transformation was done correctly.
+	*/
+	virtual bool InvTransform(
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) = 0;
+
+	/**
+		Calulate transformation of the object into second one.
+		\param	mode			controls needed transformation exactness.
+		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
+								Value 0 means that transformation is exactly done.
+		\param	result			result object.
+		\return	true, if  transformation was done correctly.
+	*/
+	virtual bool GetTransformed(
+				const ITransformation2d& transformation,
+				IObject2d& result,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const = 0;
+
+	/**
+		Calulate inverse transformation of the object into second one.
+		\param	mode			controls needed transformation exactness.
+		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
+								Value 0 means that transformation is exactly done.
+		\param	result			result object.
+		\return	true, if  transformation was done correctly.
+	*/
+	virtual bool GetInvTransformed(
+				const ITransformation2d& transformation,
+				IObject2d& result,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const = 0;
 };
 
 
