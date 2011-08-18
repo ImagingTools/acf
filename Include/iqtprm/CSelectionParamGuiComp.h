@@ -4,6 +4,7 @@
 
 // Qt includes
 #include <QComboBox>
+#include <QRadioButton>
 
 
 // ACF includes
@@ -20,19 +21,43 @@ namespace iqtprm
 {
 
 
-class CSelectionParamGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
-			Ui::CSelectionParamGuiComp,
-			iprm::ISelectionParam>
+/**
+	Simple editor for an exclusive option selection.
+*/
+class CSelectionParamGuiComp:
+			public iqtgui::TDesignerGuiObserverCompBase<
+						Ui::CSelectionParamGuiComp, iprm::ISelectionParam>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CSelectionParamGuiComp,
-				iprm::ISelectionParam> BaseClass;
+				Ui::CSelectionParamGuiComp, iprm::ISelectionParam> BaseClass;
+
+	/**
+		GUI mode for selection representation
+	*/
+	enum UiMode
+	{
+		/**
+			Combo box selection
+		*/
+		UM_COMBOBOX,
+
+		/**
+			Horizontal radio buttons group
+		*/
+		UM_RADIOBUTTON_HORIZONTAL,
+
+		/**
+			Vertical radio buttons group
+		*/
+		UM_RADIOBUTTON_VERTICAL
+	};
 
 	I_BEGIN_COMPONENT(CSelectionParamGuiComp);
 		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Label for the options selector", false, "Select");
+		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode. 0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", false, 0);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -48,11 +73,19 @@ protected:
 
 protected Q_SLOTS:
 	void OnSelectionChanged(int index);
+	void OnRadioButtonSelectionChanged(bool isSelected);
+
+private:
+	void UpdateComboBoxesView();
+	void UpdateRadioButtonView(bool useVerticalLayout = false);
 
 private:
 	I_ATTR(istd::CString, m_optionsLabelAttrPtr);
+	I_ATTR(int, m_uiModeAttrPtr);
 
 	istd::TPointerVector<QComboBox> m_comboBoxes;
+	istd::TPointerVector<QRadioButton> m_radioButtons;
+	istd::TDelPtr<QFrame> m_radioButtonFramePtr;
 };
 
 

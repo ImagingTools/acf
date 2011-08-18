@@ -43,6 +43,94 @@ void CSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
+	int uiMode = 0;
+	if (m_uiModeAttrPtr.IsValid()){
+		uiMode = *m_uiModeAttrPtr;
+	}
+
+	switch (uiMode){
+		case UM_COMBOBOX:
+			UpdateComboBoxesView();
+			break;
+
+		case UM_RADIOBUTTON_HORIZONTAL:
+			UpdateRadioButtonView(false);
+			break;
+
+		case UM_RADIOBUTTON_VERTICAL:
+			UpdateRadioButtonView(true);
+			break;
+	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CSelectionParamGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	if (m_optionsLabelAttrPtr.IsValid()){
+		SelectionLabel->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+	}
+	else{
+		SelectionLabel->hide();
+	}
+}
+
+
+void CSelectionParamGuiComp::OnGuiDestroyed()
+{
+	m_comboBoxes.Reset();
+	m_radioButtons.Reset();
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
+// protected slots
+
+void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
+{
+	if (!IsUpdateBlocked()){
+		UpdateBlocker updateBlocker(this);
+
+		UpdateModel();
+	}
+}
+
+
+void CSelectionParamGuiComp::OnRadioButtonSelectionChanged(bool isSelected)
+{
+	if (!isSelected){
+		return;
+	}
+
+	QRadioButton* senderPtr = dynamic_cast<QRadioButton*>(sender());
+	I_ASSERT(senderPtr != NULL);
+
+	iprm::ISelectionParam* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
+	if (objectPtr != NULL){
+		if (!IsUpdateBlocked()){
+			UpdateBlocker updateBlocker(this);
+
+			for (int selectionIndex = 0; selectionIndex < m_radioButtons.GetCount(); selectionIndex++){
+				if (senderPtr == m_radioButtons.GetAt(selectionIndex)){
+					objectPtr->SetSelectedOptionIndex(selectionIndex);
+
+					break;
+				}
+			}
+		}
+	}
+}
+
+
+// private methods
+
+void CSelectionParamGuiComp::UpdateComboBoxesView()
+{
 	m_comboBoxes.Reset();
 
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
@@ -59,16 +147,15 @@ void CSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 
 		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
 		if (constraintsPtr != NULL){
-			int optionsCont = constraintsPtr->GetOptionsCount();
+			int optionsCount = constraintsPtr->GetOptionsCount();
 
-			for (int i = 0; i < optionsCont; ++i){
+			for (int i = 0; i < optionsCount; ++i){
 				istd::CString name = constraintsPtr->GetOptionName(i);
 
 				switchBoxPtr->addItem(iqt::GetQString(name));
 			}
 
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
-
 			if (selectedIndex >= 0){
 				switchBoxPtr->setCurrentIndex(selectedIndex);
 			}
@@ -77,34 +164,66 @@ void CSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 }
 
 
-// reimplemented (iqtgui::CGuiComponentBase)
-
-void CSelectionParamGuiComp::OnGuiCreated()
+void CSelectionParamGuiComp::UpdateRadioButtonView(bool useVerticalLayout)
 {
-	BaseClass::OnGuiCreated();
+	m_radioButtons.Reset();
+	m_radioButtonFramePtr.Reset();
 
-	if (m_optionsLabelAttrPtr.IsValid()){
-		SelectionLabel->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
-	}
-}
+	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
+				selectionPtr != NULL;
+				selectionPtr = selectionPtr->GetActiveSubselection()){
+		QLayout* mainLayoutPtr = SelectionFrame->layout();
+		if (mainLayoutPtr == NULL){
+			mainLayoutPtr = new QVBoxLayout(SelectionFrame);
+		}
 
+		mainLayoutPtr->setMargin(0);
 
-void CSelectionParamGuiComp::OnGuiDestroyed()
-{
-	m_comboBoxes.Reset();
+		m_radioButtonFramePtr = new QFrame(SelectionFrame);
+		m_radioButtonFramePtr->setFrameShape(QFrame::NoFrame);
+		mainLayoutPtr->addWidget(m_radioButtonFramePtr.GetPtr());
 
-	BaseClass::OnGuiDestroyed();
-}
+		QLayout* buttonLayoutPtr = NULL;
+		if (useVerticalLayout){
+			buttonLayoutPtr = new QVBoxLayout(m_radioButtonFramePtr.GetPtr());
+		}
+		else{
+			buttonLayoutPtr = new QHBoxLayout(m_radioButtonFramePtr.GetPtr());
+		}
 
+		buttonLayoutPtr->setContentsMargins(0, 0, 0, 0);
 
-// protected slots
+		QRadioButton* selectedButtonPtr = NULL;
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
+		if (constraintsPtr != NULL){
+			int optionsCount = constraintsPtr->GetOptionsCount();
+			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 
-void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
-{
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(const_cast<CSelectionParamGuiComp*>(this));
+			for (int i = 0; i < optionsCount; ++i){
+				istd::CString name = constraintsPtr->GetOptionName(i);
 
-		UpdateModel();
+				QRadioButton* radioButtonPtr = new QRadioButton(SelectionFrame);
+				if (selectedIndex == i){
+					selectedButtonPtr = radioButtonPtr;
+				}
+
+				radioButtonPtr->setText(iqt::GetQString(name));
+				m_radioButtons.PushBack(radioButtonPtr);
+
+				buttonLayoutPtr->addWidget(radioButtonPtr);
+
+				QObject::connect(radioButtonPtr, SIGNAL(toggled(bool)), this, SLOT(OnRadioButtonSelectionChanged(bool)));
+			}
+
+			QSizePolicy::Policy vPolicy = useVerticalLayout ? QSizePolicy::Expanding : QSizePolicy::Preferred;
+			QSizePolicy::Policy hPolicy = (useVerticalLayout == false) ? QSizePolicy::Expanding : QSizePolicy::Preferred;
+			buttonLayoutPtr->addItem(new QSpacerItem(5, 5, hPolicy, vPolicy));
+
+			if (selectedButtonPtr != NULL){
+				selectedButtonPtr->setChecked(true);
+			}
+	
+		}
 	}
 }
 
