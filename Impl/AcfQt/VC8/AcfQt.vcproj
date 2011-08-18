@@ -5,6 +5,7 @@
 	Name="AcfQt"
 	ProjectGUID="{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}"
 	RootNamespace="AcfQt"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -46,14 +47,18 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				EnableEnhancedInstructionSet="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
+				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
@@ -121,10 +126,16 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				BrowseInformation="1"
-				DebugInformationFormat="4"
+				WarningLevel="4"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+				CompileAs="0"
+				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

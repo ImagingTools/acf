@@ -5,6 +5,7 @@
 	Name="istd"
 	ProjectGUID="{126B67F7-B779-4A80-A651-1111D5EDF583}"
 	RootNamespace="istd"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -70,10 +71,13 @@
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				EnableEnhancedInstructionSet="2"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=""
 				WarningLevel="4"
 				SuppressStartupBanner="true"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -154,10 +158,15 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				StringPooling="true"
+				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
-				DebugInformationFormat="4"
+				WarningLevel="4"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

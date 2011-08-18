@@ -16,6 +16,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC8/Tutorial"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Component.vsprops"
 			>
@@ -90,6 +91,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC8/Tutorial"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Component.vsprops"
 			>
@@ -211,3 +213,4 @@
 		/>
 	</Globals>
 </VisualStudioProject>
+

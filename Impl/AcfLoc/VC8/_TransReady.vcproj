@@ -5,6 +5,7 @@
 	Name="_TransReady"
 	ProjectGUID="{1C91B064-DE7F-4FF1-8AE9-863100CA4E0D}"
 	RootNamespace="TransReady"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform

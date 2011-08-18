@@ -5,6 +5,7 @@
 	Name="AcfLoc"
 	ProjectGUID="{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}"
 	RootNamespace="AcfLoc"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform

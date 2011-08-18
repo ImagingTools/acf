@@ -6,6 +6,7 @@
 	ProjectGUID="{80A7AA84-5640-40CB-9BB3-544B07CC6E0A}"
 	RootNamespace="QtPck"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -38,10 +39,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\Include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB;QT_QT3SUPPORT_LIB;QT3_SUPPORT;QTACF_DLL_EXPORT"
 				RuntimeLibrary="2"
+				EnableEnhancedInstructionSet="2"
 				PrecompiledHeaderFile=""
+				WarningLevel="4"
+				DebugInformationFormat="0"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -58,6 +64,7 @@
 				OutputFile="$(OutDir)\$(ProjectName).arp"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;"
+				GenerateDebugInformation="false"
 				SubSystem="1"
 			/>
 			<Tool
@@ -77,9 +84,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -113,7 +117,9 @@
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
-				DebugInformationFormat="4"
+				WarningLevel="4"
+				DebugInformationFormat="3"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -150,9 +156,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"

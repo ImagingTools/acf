@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="imod"
 	ProjectGUID="{AA16B362-CE5A-48C6-9322-42620FE1006D}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -48,10 +49,13 @@
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				EnableEnhancedInstructionSet="2"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=""
 				WarningLevel="4"
 				SuppressStartupBanner="true"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -116,10 +120,15 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="../../"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
+				StringPooling="true"
+				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
+				WarningLevel="4"
+				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -234,6 +243,10 @@
 			</File>
 			<File
 				RelativePath="..\IUndoManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TModelDispatcher.h"
 				>
 			</File>
 			<File

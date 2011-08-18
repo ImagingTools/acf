@@ -16,7 +16,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="Debug"
+			IntermediateDirectory="Debug"
 			ConfigurationType="10"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops"
 			>
@@ -36,7 +37,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="10"
 			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops"
@@ -63,3 +64,4 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
+

@@ -6,6 +6,7 @@
 	ProjectGUID="{030936A8-23C4-45EE-8E3D-196FF4D405C6}"
 	RootNamespace="BasePck"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -38,10 +39,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\Include"
 				PreprocessorDefinitions="UNICODE;WIN32;NDEBUG"
 				RuntimeLibrary="2"
+				EnableEnhancedInstructionSet="2"
 				PrecompiledHeaderFile=""
+				WarningLevel="4"
+				DebugInformationFormat="0"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -79,9 +85,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -113,7 +116,9 @@
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
 				BrowseInformation="1"
-				DebugInformationFormat="4"
+				WarningLevel="4"
+				DebugInformationFormat="3"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -149,9 +154,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"

@@ -6,6 +6,7 @@
 	ProjectGUID="{FB8AA493-6CFD-4E1B-ABF8-09E4BE6CDD59}"
 	RootNamespace="iqt"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform

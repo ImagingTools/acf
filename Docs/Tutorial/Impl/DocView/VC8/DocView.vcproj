@@ -22,7 +22,7 @@
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC8/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -107,7 +107,7 @@
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC8/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -236,3 +236,4 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
+
