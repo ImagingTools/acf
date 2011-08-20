@@ -971,7 +971,7 @@ CMainWindowGuiComp::ActiveUndoManager::ActiveUndoManager(CMainWindowGuiComp& par
 
 bool CMainWindowGuiComp::ActiveUndoManager::OnAttached(imod::IModel* modelPtr)
 {
-	EnsureDetached();
+	EnsureModelDetached();
 
 	return BaseClass::OnAttached(modelPtr);
 }

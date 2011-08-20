@@ -44,7 +44,7 @@ protected:
 		Make sure this observer is detached.
 		It calls model method DetachObserver() if model is available.
 	*/
-	void EnsureDetached();
+	void EnsureModelDetached();
 
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 

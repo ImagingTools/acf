@@ -13,7 +13,7 @@ namespace imod
 
 CMultiModelBridgeBase::~CMultiModelBridgeBase()
 {
-	CMultiModelBridgeBase::EnsureDetached();
+	CMultiModelBridgeBase::EnsureModelsDetached();
 }
 
 
@@ -91,7 +91,7 @@ void CMultiModelBridgeBase::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), int update
 
 // protected methods
 
-void CMultiModelBridgeBase::EnsureDetached()
+void CMultiModelBridgeBase::EnsureModelsDetached()
 {
 	while (!m_models.empty()){
 		imod::IModel* modelPtr = m_models.front();

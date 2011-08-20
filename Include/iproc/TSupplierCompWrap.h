@@ -39,6 +39,7 @@ class TSupplierCompWrap:
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
+	typedef Product ProductType;
 
 	enum MessageId
 	{

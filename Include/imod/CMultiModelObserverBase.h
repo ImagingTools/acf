@@ -5,6 +5,7 @@
 // STL includes
 #include <vector>
 
+// ACF includes
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 
@@ -24,7 +25,7 @@ public:
 	/**
 		Get access to connected model with the index \c index.
 	*/
-	imod::IModel* GetModelPtr(int modelIndex) const;
+	IModel* GetModelPtr(int modelIndex) const;
 
 	/**
 		Gets the number of connected models.	
@@ -32,19 +33,19 @@ public:
 	int GetModelCount() const;
 
 	// reimplemented (imod::IObserver)
-	virtual bool IsModelAttached(const imod::IModel* modelPtr) const;
-	virtual bool OnAttached(imod::IModel* modelPtr);
-	virtual bool OnDetached(imod::IModel* modelPtr);
-	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual bool IsModelAttached(const IModel* modelPtr) const;
+	virtual bool OnAttached(IModel* modelPtr);
+	virtual bool OnDetached(IModel* modelPtr);
+	virtual void BeforeUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void AfterUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:
-	void EnsureDetached();
+	void EnsureModelsDetached();
 
-	virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void OnUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	typedef std::vector<imod::IModel*> Models;
+	typedef std::vector<IModel*> Models;
 
 	Models m_models;
 };

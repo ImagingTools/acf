@@ -13,7 +13,7 @@ namespace imod
 
 CMultiModelObserverBase::~CMultiModelObserverBase()
 {
-	CMultiModelObserverBase::EnsureDetached();
+	CMultiModelObserverBase::EnsureModelsDetached();
 }
 
 
@@ -91,7 +91,7 @@ void CMultiModelObserverBase::AfterUpdate(IModel* modelPtr, int updateFlags, ist
 
 // protected methods
 
-void CMultiModelObserverBase::EnsureDetached()
+void CMultiModelObserverBase::EnsureModelsDetached()
 {
 	while (!m_models.empty()){
 		imod::IModel* modelPtr = m_models.front();

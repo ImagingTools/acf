@@ -41,7 +41,7 @@ public:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:
-	void EnsureDetached();
+	void EnsureModelsDetached();
 
 private:
 	typedef std::vector<imod::IModel*> Models;

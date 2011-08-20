@@ -911,7 +911,7 @@ void CPackageOverviewComp::UpdateGui(int updateFlags)
 
 		imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(registryPtr);
 		if (!m_registryObserver.IsModelAttached(registryModelPtr)){
-			m_registryObserver.EnsureDetached();
+			m_registryObserver.EnsureModelDetached();
 
 			if (registryModelPtr != NULL){
 				registryModelPtr->AttachObserver(&m_registryObserver);
@@ -923,7 +923,7 @@ void CPackageOverviewComp::UpdateGui(int updateFlags)
 		}
 	}
 	else{
-		m_registryObserver.EnsureDetached();
+		m_registryObserver.EnsureModelDetached();
 
 		GenerateComponentTree(false);
 	}
