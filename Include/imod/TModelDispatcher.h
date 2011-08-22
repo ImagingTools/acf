@@ -114,7 +114,7 @@ template <class NotifyReceiver>
 void TModelDispatcher<NotifyReceiver>::UnregisterModel(int modelId)
 {
 	for (ModelMap::iterator index = m_modelMap.begin(); index != m_modelMap.end(); index++){
-		if (modelId == index->second){
+		if (modelId == index->second.modelId){
 			imod::IModel* modelPtr = index->first;
 
 			m_modelMap.erase(index);
