@@ -455,6 +455,22 @@
 			<File
 				RelativePath="..\AcfVersion.h.xtrsvn"
 				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						SubVersionPath="$(ACFDIR)"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="SubVersionTransform"
+						SubVersionPath="$(ACFDIR)"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
