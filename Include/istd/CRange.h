@@ -83,6 +83,27 @@ public:
 	double GetLength() const;
 
 	/**
+		Get validated range, if it was invalid.
+		Range is invalid if set min value is bigger than set max value.
+		It returns range with smaller range value as minimum and bigger one as maximum.
+	*/
+	CRange GetValidated() const;
+
+	/**
+		Get validated range, if it was invalid.
+		Range is invalid if set min value is bigger than set max value.
+		It returns range with smaller range value as minimum and bigger one as maximum.
+	*/
+	void GetValidated(CRange& result) const;
+
+	/**
+		Force this range to be valid.
+		Range is invalid if set min value is bigger than set max value.
+		It set smaller range value as minimum and bigger one as maximum.
+	*/
+	void Validate();
+
+	/**
 		Returns \c true, if value is in range between \c top and \c bottom.
 		This range must be valid.
 	*/
@@ -192,6 +213,10 @@ public:
 		Return invalid range.
 	*/
 	static const CRange& GetInvalid();
+	/**
+		Return always valid range.
+	*/
+	static CRange GetValid(double value1, double value2);
 
 private:
 	double m_minValue;

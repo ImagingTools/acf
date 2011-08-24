@@ -46,6 +46,25 @@ void CRange::Reset()
 }
 
 
+CRange CRange::GetValidated() const
+{
+	return CRange(istd::Min(m_minValue, m_maxValue), istd::Max(m_minValue, m_maxValue));
+}
+
+
+void CRange::GetValidated(CRange& result) const
+{
+	result.SetMinValue(istd::Min(m_minValue, m_maxValue));
+	result.SetMaxValue(istd::Max(m_minValue, m_maxValue));
+}
+
+
+void CRange::Validate()
+{
+	*this = CRange(istd::Min(m_minValue, m_maxValue), istd::Max(m_minValue, m_maxValue));
+}
+
+
 bool CRange::IsIntersectedBy(const CRange& range) const
 {
 	return (m_minValue < range.m_maxValue) || (m_maxValue > range.m_minValue);
@@ -210,6 +229,14 @@ CRange& CRange::operator=(const CRange& range)
 	m_minValue = range.m_minValue;
 
 	return *this;
+}
+
+
+// static methods
+
+CRange CRange::GetValid(double value1, double value2)
+{
+	return CRange(istd::Min(value1, value2), istd::Max(value1, value2));
 }
 
 
