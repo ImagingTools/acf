@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (verboseEnabled){
-		std::cout << "ARX Compiler started in: " + QApplication::applicationDirPath().toStdString() << std::endl;
+		std::cout << "ARX Compiler started in: " + QDir::currentPath().toStdString() << std::endl;
 	}
 
 	icomp::TSimComponentWrap<BasePck::ApplicationInfo> applicationInfo;
