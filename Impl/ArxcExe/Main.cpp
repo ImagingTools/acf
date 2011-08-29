@@ -28,10 +28,10 @@ static void ShowUsage()
 {
 	std::cout << "Usage";
 	std::cout << "\tArxc.exe [registryName] {options}      - convertion registry to C++ code" << std::endl;
-	std::cout << "\t-h or -help              - showing this help" << std::endl;
+	std::cout << "\t-h or -help				 - showing this help" << std::endl;
 	std::cout << "\t-o outputFile            - output file path" << std::endl;
 	std::cout << "\t-config configFile       - specify ACF packages configuration file" << std::endl;
-	std::cout << "\t-v						 - enable verbose mode" << std::endl;
+	std::cout << "\t-v			 - enable verbose mode" << std::endl;
 }
 
 
