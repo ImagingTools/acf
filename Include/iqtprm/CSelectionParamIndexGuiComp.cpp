@@ -44,7 +44,7 @@ void CSelectionParamIndexGuiComp::UpdateGui(int /*updateFlags*/)
 	const iprm::ISelectionParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int maxCount = 10;
-		const iprm::ISelectionConstraints* constraintsPtr = objectPtr->GetConstraints();
+		const iprm::ISelectionConstraints* constraintsPtr = objectPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			maxCount = constraintsPtr->GetOptionsCount() - 1;
 		}

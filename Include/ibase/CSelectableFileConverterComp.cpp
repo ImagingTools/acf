@@ -38,7 +38,7 @@ bool CSelectableFileConverterComp::ConvertFile(
 
 // reimplemented (iprm::ISelectionParam)
 
-const iprm::ISelectionConstraints* CSelectableFileConverterComp::GetConstraints() const
+const iprm::ISelectionConstraints* CSelectableFileConverterComp::GetSelectionConstraints() const
 {
 	return this;
 }

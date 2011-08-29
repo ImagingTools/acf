@@ -206,7 +206,7 @@ bool CParamsManagerComp::SetParamsSetName(int index, const istd::CString& name)
 
 // reimplemented (iprm::ISelectionParam)
 
-const ISelectionConstraints* CParamsManagerComp::GetConstraints() const
+const ISelectionConstraints* CParamsManagerComp::GetSelectionConstraints() const
 {
 	return this;
 }

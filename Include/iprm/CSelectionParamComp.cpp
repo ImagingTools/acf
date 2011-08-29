@@ -20,7 +20,7 @@ CSelectionParamComp::CSelectionParamComp()
 
 // reimplemented (iprm::ISelectionParam)
 
-const ISelectionConstraints* CSelectionParamComp::GetConstraints() const
+const ISelectionConstraints* CSelectionParamComp::GetSelectionConstraints() const
 {
 	return m_constraintsCompPtr.GetPtr();
 }

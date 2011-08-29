@@ -19,7 +19,7 @@ void CSelectableGuiComp::OnGuiModelAttached()
 {
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	if (selectionPtr != NULL && m_slaveGuisCompPtr.IsValid()){
-		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCont = constraintsPtr->GetOptionsCount();
 

@@ -36,7 +36,7 @@ public:
 	CLinearAdjustParamsComp();
 
 	// reimplemented (iprm::ILinearAdjustParams)
-	virtual const ILinearAdjustConstraints* GetConstraints() const;
+	virtual const ILinearAdjustConstraints* GetAdjustConstraints() const;
 	virtual double GetScaleFactor() const;
 	virtual void SetScaleFactor(double scale);
 	virtual double GetOffsetFactor() const;

@@ -145,7 +145,7 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 
 		QObject::connect(switchBoxPtr, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 
-		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 
@@ -194,7 +194,7 @@ void CSelectionParamGuiComp::UpdateRadioButtonView(bool useVerticalLayout)
 		buttonLayoutPtr->setContentsMargins(0, 0, 0, 0);
 
 		QRadioButton* selectedButtonPtr = NULL;
-		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetConstraints();
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();

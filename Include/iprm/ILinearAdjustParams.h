@@ -23,7 +23,7 @@ public:
 		Get access to constraints object.
 		This object describes for example range of possible parameter values.
 	*/
-	virtual const ILinearAdjustConstraints* GetConstraints() const = 0;
+	virtual const ILinearAdjustConstraints* GetAdjustConstraints() const = 0;
 
 	/**
 		Get value of scale factor.

@@ -63,7 +63,7 @@ iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const std::s
 
 // reimplemented (iprm::ISelectionParam)
 
-const ISelectionConstraints* CSelectableParamsSetComp::GetConstraints() const
+const ISelectionConstraints* CSelectableParamsSetComp::GetSelectionConstraints() const
 {
 	return this;
 }
