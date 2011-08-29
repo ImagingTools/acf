@@ -15,6 +15,7 @@
 #include "icomp/TModelCompWrap.h"
 
 #include "iqt/CDefaultServicesProvider.h"
+#include "iqt/CProcessEnvironment.h"
 
 
 // ACF packages includes
@@ -73,6 +74,13 @@ int main(int argc, char *argv[])
 
 	if (verboseEnabled){
 		std::cout << "ARX Compiler started in: " + QDir::currentPath().toStdString() << std::endl;
+		iqt::CProcessEnvironment processEnvironment;
+
+		iqt::CProcessEnvironment::EnvironmentVariables environmentVariables = processEnvironment.GetEnvironmentVariables();
+
+		for (iqt::CProcessEnvironment::EnvironmentVariables::const_iterator index = environmentVariables.begin(); index != environmentVariables.end(); ++index){
+			std::cout << index->first.ToString() << " = " << index->second.ToString() << std::endl;
+		}
 	}
 
 	icomp::TSimComponentWrap<BasePck::ApplicationInfo> applicationInfo;
