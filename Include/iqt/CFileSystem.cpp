@@ -8,6 +8,10 @@
 #include <QProcess>
 
 
+// ACF includes
+#include "iqt/CProcessEnvironment.h"
+
+
 namespace iqt
 {
 
@@ -147,6 +151,8 @@ QString CFileSystem::GetEnrolledPath(const QString& path)
 		QString varName = retVal.mid(beginIndex + 2, endIndex - beginIndex - 2);
 
 		retVal = retVal.left(beginIndex) + FindVariableValue(varName) + retVal.mid(endIndex + 1);
+
+		retVal = QDir::toNativeSeparators(retVal);
 	}
 
 	return retVal;
@@ -202,28 +208,15 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 #endif // _MSC_VER
 	}
 
-	QString varNameExt = varName + "=";
+	iqt::CProcessEnvironment processEnvironment;
+	iqt::CProcessEnvironment::EnvironmentVariables environmentVariables = processEnvironment.GetEnvironmentVariables();
 
-	const QStringList& envList = GetEnvList();
-	for (		QStringList::const_iterator iter = envList.begin();
-				iter != envList.end();
-				++iter){
-		if (iter->startsWith(varNameExt)){
-			return iter->mid(varNameExt.length());
-		}
+	iqt::CProcessEnvironment::EnvironmentVariables::const_iterator foundVarIter = environmentVariables.find(iqt::GetCString(varName));
+	if (foundVarIter != environmentVariables.end()){
+		return iqt::GetQString(foundVarIter->second);
 	}
 
-	return "";
-}
-
-
-// protected methods
-
-const QStringList& CFileSystem::GetEnvList()
-{
-	static QStringList envList = QProcess::systemEnvironment();
-
-	return envList;
+	return QString();
 }
 
 

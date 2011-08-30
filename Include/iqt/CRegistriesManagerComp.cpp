@@ -194,6 +194,8 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 	retVal = retVal && archive.BeginMultiTag(configFilesTag, filePathTag, configFilesCount);
 
 	if (!retVal){
+		SendVerboseMessage(istd::CString("Load of configuration file: ") + configFilePath + istd::CString(" failed"));
+	
 		return false;
 	}
 
@@ -216,6 +218,8 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 	retVal = retVal && archive.BeginMultiTag(packageDirsTag, dirPathTag, dirsCount);
 
 	if (!retVal){
+		SendVerboseMessage(istd::CString("Load of configuration file: ") + configFilePath + istd::CString(" failed"));
+
 		return false;
 	}
 
@@ -237,6 +241,8 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 	retVal = retVal && archive.BeginMultiTag(packageFilesTag, filePathTag, filesCount);
 
 	if (!retVal){
+		SendVerboseMessage(istd::CString("Load of configuration file: ") + configFilePath + istd::CString(" failed"));
+
 		return false;
 	}
 
@@ -253,6 +259,12 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 	}
 
 	retVal = retVal && archive.EndTag(packageFilesTag);
+
+	if (!retVal){
+		SendVerboseMessage(istd::CString("Load of configuration file: ") + configFilePath + istd::CString(" failed"));
+
+		return false;
+	}
 
 	return retVal;
 }

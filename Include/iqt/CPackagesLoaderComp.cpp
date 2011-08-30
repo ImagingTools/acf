@@ -69,9 +69,13 @@ bool CPackagesLoaderComp::ConfigureEnvironment(const istd::CString& configFilePa
 
 			m_configFilePath = iqt::GetCString(applicationDir.absoluteFilePath(enrolledPath));
 		}
+
+		SendVerboseMessage(istd::CString("Configure component environment using ") + configFilePath);
 	}
 
 	if (m_configFilePath.IsEmpty()){
+		SendVerboseMessage("Configure component environment using default configuration");
+
 		m_configFilePath = "Default.xpc";
 	}
 
@@ -298,6 +302,8 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 	QDir baseDir = fileInfo.absoluteDir();
 
 	istd::CString configFilePath = GetCString(fileInfo.absoluteFilePath());
+
+	SendVerboseMessage(istd::CString("Load configuration file: ") + configFilePath);
 
 	iser::CXmlFileReadArchive archive(configFilePath);
 

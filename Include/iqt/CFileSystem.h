@@ -33,9 +33,6 @@ public:
 	// static members
 	static QString FindVariableValue(const QString& varName);
 	static QString GetEnrolledPath(const QString& path);
-
-protected:
-	static const QStringList& GetEnvList();
 };
 
 
