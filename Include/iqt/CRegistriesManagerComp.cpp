@@ -272,7 +272,14 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 
 bool CRegistriesManagerComp::CheckAndMarkPath(const QDir& directory, const istd::CString& path, istd::CString& resultPath) const
 {
-	istd::CString fullPath = iqt::GetCString(directory.absoluteFilePath(iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path))));
+	SendVerboseMessage(istd::CString("Check path: ") + path);
+
+	QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path));
+	SendVerboseMessage(istd::CString("Enrolled path: ") + iqt::GetCString(enrolledPath));
+
+	istd::CString fullPath = iqt::GetCString(directory.absoluteFilePath(enrolledPath));
+	SendVerboseMessage(istd::CString("Full path: ") + fullPath);
+
 	if (m_usedFilesList.find(fullPath) == m_usedFilesList.end()){
 		m_usedFilesList.insert(fullPath);
 
