@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1563
+          1860
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          245
+          369
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        FilePersistence
+        AutoPersistence
       </ComponentName>
       <X>
         600

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1486
+          1860
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          190
+          369
         </Number>
         <Description>
           ACF-Solutions
@@ -44,42 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
-          <AttributeInfo>
-            <Id>
-              Application
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ExternalApplication
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ApplicationArguments
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              ApplicationArguments
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               ExecutablePath
@@ -247,6 +212,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="1">
     <Interface>
       <InterfaceId>
