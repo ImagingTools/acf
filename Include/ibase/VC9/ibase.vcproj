@@ -107,7 +107,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -194,7 +194,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="del /Q ..\svnflag&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
