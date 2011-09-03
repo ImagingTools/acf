@@ -511,18 +511,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\VersionInfo.arx.xtrsvn"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Generated"
-			>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
