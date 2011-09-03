@@ -5,7 +5,8 @@
 #include <QDir>
 
 // ACF includes
-#include "istd/Generated/AcfVersion.h"
+#include "istd/AcfVersion.h"
+
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
 #include "icomp/TModelCompWrap.h"

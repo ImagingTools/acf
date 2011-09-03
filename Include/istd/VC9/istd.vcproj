@@ -261,6 +261,10 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\AcfVersion.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CBase64.h"
 				>
 			</File>
@@ -446,22 +450,6 @@
 			</File>
 			<File
 				RelativePath="..\TVarArray.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Other"
-			>
-			<File
-				RelativePath="..\AcfVersion.h.xtrsvn"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			>
-			<File
-				RelativePath="..\generated\AcfVersion.h"
 				>
 			</File>
 		</Filter>

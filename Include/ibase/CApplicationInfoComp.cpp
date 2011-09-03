@@ -1,7 +1,7 @@
 #include "ibase/CApplicationInfoComp.h"
 
 
-#include "istd/Generated/AcfVersion.h"
+#include "istd/AcfVersion.h"
 
 
 namespace ibase
