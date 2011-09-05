@@ -11,5 +11,6 @@
 		Name="VCCLCompilerTool"
 		AdditionalIncludeDirectories=""
 		StringPooling="true"
+		ProgramDataBaseFileName="$(OutDir)/$(ProjectName).pdb"
 	/>
 </VisualStudioPropertySheet>
