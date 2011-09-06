@@ -1,9 +1,6 @@
 #include "ibase/CApplicationInfoComp.h"
 
 
-#include "istd/AcfVersion.h"
-
-
 namespace ibase
 {
 

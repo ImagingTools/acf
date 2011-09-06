@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationType
@@ -93,6 +93,39 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              OtherExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="5">
+                <Value>
+                  Generated
+                </Value>
+                <Value>
+                  generated
+                </Value>
+                <Value>
+                  Xcd
+                </Value>
+                <Value>
+                  QMake
+                </Value>
+                <Value>
+                  VC9
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               ProductName
             </Id>
             <Type>
@@ -108,6 +141,39 @@
               <Value>
                 ACF
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SourceExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="5">
+                <Value>
+                  Generated
+                </Value>
+                <Value>
+                  generated
+                </Value>
+                <Value>
+                  Xcd
+                </Value>
+                <Value>
+                  QMake
+                </Value>
+                <Value>
+                  VC9
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

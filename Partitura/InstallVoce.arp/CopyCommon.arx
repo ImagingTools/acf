@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1646
+          1860
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          293
+          369
         </Number>
         <Description>
           ACF-Solutions
@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -59,27 +59,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ExcludeFilters
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  Tortoise.rules
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -1874,7 +1853,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="13">
+              <Values count="12">
                 <Value>
                   CopyRoot
                 </Value>
@@ -1910,9 +1889,6 @@
                 </Value>
                 <Value>
                   CopyConfig
-                </Value>
-                <Value>
-                  CopyKnockout
                 </Value>
               </Values>
             </Data>

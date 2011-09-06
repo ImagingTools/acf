@@ -217,7 +217,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -354,27 +354,48 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              OtherExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              OtherExcludeFilters
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  Generated
+                </Value>
+                <Value>
+                  generated
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               SourceExcludeFilters
             </Id>
             <Type>
               icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              SourceExcludeFilters
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="2">
                 <Value>
-                  moc_*
+                  Generated
                 </Value>
                 <Value>
-                  qrc_*
-                </Value>
-                <Value>
-                  ui_*
+                  generated
                 </Value>
               </Values>
             </Data>

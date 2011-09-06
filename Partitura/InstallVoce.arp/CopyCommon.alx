@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1646
+          1860
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          293
+          369
         </Number>
         <Description>
           ACF-Solutions
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="14">
+  <PositionMap count="13">
     <Element>
       <ComponentName>
         CopyConfig
@@ -99,17 +99,6 @@
       </ComponentName>
       <X>
         650
-      </X>
-      <X>
-        75
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyKnockout
-      </ComponentName>
-      <X>
-        950
       </X>
       <X>
         75

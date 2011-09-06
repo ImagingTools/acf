@@ -1,7 +1,29 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          369
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="8">
@@ -54,10 +76,10 @@
         CopyIncludeOther
       </ComponentName>
       <X>
-        650
+        825
       </X>
       <X>
-        600
+        475
       </X>
     </Element>
     <Element>
@@ -65,10 +87,10 @@
         CopyIncludeResources
       </ComponentName>
       <X>
-        825
+        650
       </X>
       <X>
-        475
+        625
       </X>
     </Element>
     <Element>

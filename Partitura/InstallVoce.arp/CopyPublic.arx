@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1549
+          1860
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          240
+          369
         </Number>
         <Description>
           ACF-Solutions
@@ -200,7 +200,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -290,6 +290,22 @@
             </Type>
             <ExportId>
               Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SourceExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              SourceExcludeFilters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -499,6 +515,8 @@
       </Data>
     </Element>
   </ElementsList>
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
   <ExportedComponents count="0">

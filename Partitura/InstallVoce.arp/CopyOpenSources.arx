@@ -1,7 +1,29 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1860
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          369
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="8">
@@ -202,7 +224,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="10">
+              <Values count="9">
                 <Value>
                   *.ui
                 </Value>
@@ -223,9 +245,6 @@
                 </Value>
                 <Value>
                   *.alx
-                </Value>
-                <Value>
-                  *.xtrsvn
                 </Value>
                 <Value>
                   *.xtracf
@@ -329,7 +348,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -339,6 +358,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              OtherExcludeFilters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -818,7 +853,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -828,6 +863,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ExcludeFilters
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              OtherExcludeFilters
             </ExportId>
             <Data>
               <IsEnabled>
@@ -849,7 +900,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="9">
                 <Value>
                   *.png
                 </Value>
@@ -869,7 +920,13 @@
                   *.aps
                 </Value>
                 <Value>
+                  *.h
+                </Value>
+                <Value>
                   *.svg
+                </Value>
+                <Value>
+                  *.ts
                 </Value>
               </Values>
             </Data>
