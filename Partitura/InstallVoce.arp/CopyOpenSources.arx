@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1860
+          1881
         </Number>
         <Description>
           ACF
@@ -395,7 +395,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="9">
+              <Values count="8">
                 <Value>
                   *.png
                 </Value>
@@ -413,9 +413,6 @@
                 </Value>
                 <Value>
                   *.aps
-                </Value>
-                <Value>
-                  *.h
                 </Value>
                 <Value>
                   *.svg
@@ -900,7 +897,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="9">
+              <Values count="8">
                 <Value>
                   *.png
                 </Value>
@@ -918,9 +915,6 @@
                 </Value>
                 <Value>
                   *.aps
-                </Value>
-                <Value>
-                  *.h
                 </Value>
                 <Value>
                   *.svg
