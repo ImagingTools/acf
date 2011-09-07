@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1860
+          1881
         </Number>
         <Description>
           ACF
@@ -26,7 +26,18 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="13">
+  <PositionMap count="14">
+    <Element>
+      <ComponentName>
+        CopyCommitLog
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <X>
+        75
+      </X>
+    </Element>
     <Element>
       <ComponentName>
         CopyConfig
