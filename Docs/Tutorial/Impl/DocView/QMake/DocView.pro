@@ -6,6 +6,3 @@ TARGET = DocView
 DESTDIR = ../../../../../Lib/$$COMPILER_DIR
 
 INCLUDEPATH += ..
-
-HEADERS += ../*.h
-SOURCES += ../*.cpp

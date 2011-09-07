@@ -8,6 +8,3 @@ DESTDIR = ../../../../../Bin/$$COMPILER_DIR
 QT += main core gui xml sql network
 
 INCLUDEPATH += ../..
-
-HEADERS += ../TutorialPck.h
-SOURCES += ../Main.cpp

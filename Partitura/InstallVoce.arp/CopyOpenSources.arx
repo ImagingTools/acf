@@ -240,7 +240,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="10">
+              <Values count="11">
                 <Value>
                   *.ui
                 </Value>
@@ -256,10 +256,13 @@
                 <Value>
                   *.sln
                 </Value>
-                <Value>
-                  *.pro
-                </Value>
-                <Value>
+								<Value>
+									*.pro
+								</Value>
+								<Value>
+									*.pri
+								</Value>
+								<Value>
                   *.arx
                 </Value>
                 <Value>
@@ -745,7 +748,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="10">
                 <Value>
                   *.ui
                 </Value>
@@ -762,6 +765,12 @@
                   *.sln
                 </Value>
                 <Value>
+                  *.pro
+                </Value>
+								<Value>
+									*.pri
+								</Value>
+								<Value>
                   *.arx
                 </Value>
                 <Value>

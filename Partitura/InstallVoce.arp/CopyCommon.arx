@@ -222,7 +222,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="6">
                 <Value>
                   *.xpc
                 </Value>
@@ -231,6 +231,12 @@
                 </Value>
                 <Value>
                   *.vsprops
+                </Value>
+                <Value>
+                  *.pri
+                </Value>
+                <Value>
+                  *.pro
                 </Value>
                 <Value>
                   empty
@@ -1761,7 +1767,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="8">
+              <Values count="15">
                 <Value>
                   *.ui
                 </Value>
@@ -1777,7 +1783,13 @@
                 <Value>
                   *.sln
                 </Value>
-                <Value>
+								<Value>
+									*.pro
+								</Value>
+								<Value>
+									*.pri
+								</Value>
+								<Value>
                   *.arx
                 </Value>
                 <Value>
@@ -1785,6 +1797,21 @@
                 </Value>
                 <Value>
                   *.xml
+                </Value>
+                <Value>
+                  *.png
+                </Value>
+                <Value>
+                  *.svg
+                </Value>
+                <Value>
+                  *.txt
+                </Value>
+                <Value>
+                  *.html
+                </Value>
+                <Value>
+                  *.htm
                 </Value>
               </Values>
             </Data>

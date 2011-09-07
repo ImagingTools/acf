@@ -20,3 +20,5 @@ call Create_TechnicalDoc.bat
 echo Copying files to Temp directory...
 "../bin/Debug%COMPILER_EXT%/Acf.exe" Create_VC9_OpenSource.arx -config ../Config/Core.xpc
 
+call MakeVCProjects.bat
+
