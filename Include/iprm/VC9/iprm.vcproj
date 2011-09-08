@@ -201,6 +201,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectionConstraintsComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionParamComp.cpp"
 				>
 			</File>
@@ -243,6 +247,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectableParamsSetComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectionConstraintsComp.h"
 				>
 			</File>
 			<File

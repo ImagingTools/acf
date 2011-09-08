@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="ACF Component Package"
-	OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC9"
+	OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC8"
 	ConfigurationType="2"
 	InheritedPropertySheets=".\General.vsprops"
 	>
