@@ -100,7 +100,7 @@ public:
 	/**
 		Calculate transposed matrix.
 	*/
-	CMatrix2d CMatrix2d::GetTransposed() const;
+	CMatrix2d GetTransposed() const;
 
 	/**
 		Calculate decomposition in form of QDQ where \c Q is ortogonal matrix and \c D is diagonal one.
