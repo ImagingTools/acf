@@ -52,7 +52,7 @@ public:
 		/**
 			Downer triangle matrix.
 		*/
-		MIM_DOWNER_TRIANLE
+		MIM_DOWNER_TRIANGLE
 	};
 
 	/**
@@ -452,7 +452,7 @@ TMatrix<Width, Height, Element>::TMatrix(MatrixInitMode mode)
 		}
 		break;
 
-	case MIM_DOWNER_TRIANL:
+	case MIM_DOWNER_TRIANGLE:
 		for (int x = 0; x < Width; ++x){
 			for (int y = 0; y < Height; ++y){
 				if (x >= y){
@@ -775,7 +775,7 @@ void TMatrix<Width, Height, Element>::GetRowVector(int rowIndex, TVector<Width, 
 	I_ASSERT(rowIndex < Height);
 
 	for (int x = 0; x < Width; ++x){
-		result[y] = m_elements[x][rowIndex];
+		result[rowIndex] = m_elements[x][rowIndex];
 	}
 }
 
