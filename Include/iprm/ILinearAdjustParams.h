@@ -29,14 +29,17 @@ public:
 		Get value of scale factor.
 	*/
 	virtual double GetScaleFactor() const = 0;
+
 	/**
 		Set value of scale factor.
 	*/
 	virtual void SetScaleFactor(double scale) = 0;
+
 	/**
 		Get value of offset factor.
 	*/
 	virtual double GetOffsetFactor() const = 0;
+
 	/**
 		Set value of offset factor.
 	*/

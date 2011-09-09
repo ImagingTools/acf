@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1860
+          1899
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          369
+          384
         </Number>
         <Description>
           ACF-Solutions
@@ -88,7 +88,7 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              Hotfolder
+              Object
             </ExportId>
             <Data>
               <IsEnabled>
