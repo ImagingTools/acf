@@ -12,5 +12,6 @@ All environment variables from ExtLib must be registered using RegisterEnvVariab
 
 Running of installation script:
 
-_Create_VC8_Installation.bat
-
+_Create_VC8_Installation.bat to create of installation with Visual Studio 2005, or
+_Create_VC9_Installation.bat to create of installation with Visual Studio 2008, or
+_Create_VC9_OpenSource.bat to create open source version (no binaries will be included) using ACF tools compiled with Visual Studio 2008.
