@@ -24,7 +24,7 @@ public:
 		Constructor overtaking the pointer.
 		\param	pointer	pointer to overtake - WARNING: After this operation this pointer is invalid!
 	*/
-	TTransPtr(TTransPtr& pointer);
+	TTransPtr(const TTransPtr& pointer);
 	~TTransPtr();
 
 	// operators
@@ -106,10 +106,10 @@ protected:
 // public methods
 
 template <class Type>
-TTransPtr<Type>::TTransPtr(TTransPtr& pointer)
+TTransPtr<Type>::TTransPtr(const TTransPtr& pointer)
 :	m_counterPtr(pointer.m_counterPtr)
 {
-	pointer.m_counterPtr = NULL;
+	const_cast<TTransPtr&>(pointer).m_counterPtr = NULL;
 }
 
 
