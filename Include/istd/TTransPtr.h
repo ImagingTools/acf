@@ -27,12 +27,40 @@ public:
 	TTransPtr(const TTransPtr& pointer);
 	~TTransPtr();
 
+	/**
+		Check, whether the object is in valid state.
+	*/
+	bool IsValid() const;
+
+	/**
+		Get access to pointed object.
+	*/
+	const Type* GetPtr() const;
+
+	/**
+		Get access to pointed object.
+	*/
+	Type* GetPtr();
+
+	/**
+		Set this pointer to NULL.
+	*/
+	void Reset();
+
+	template <class CastedType>
+	CastedType Cast() const
+	{
+		return dynamic_cast<CastedType>(GetPtr());
+	}
+
 	// operators
 	/**
 		Copy operator overtaking the pointer.
 		\param	pointer	pointer to overtake - WARNING: After this operation this pointer is invalid!
 	*/
 	TTransPtr& operator=(TTransPtr& pointer);
+	Type& operator*() const;
+	Type* operator->() const;
 
 protected:
 	class RefCountBase: public TPointerBase<Type>
@@ -61,32 +89,6 @@ protected:
 	TTransPtr();
 
 	/**
-		Set this pointer to NULL.
-	*/
-	void Reset();
-
-	/**
-		Check, whether the object is in valid state.
-	*/
-	bool IsValid() const;
-
-	/**
-		Get access to pointed object.
-	*/
-	const Type* GetPtr() const;
-
-	/**
-		Get access to pointed object.
-	*/
-	Type* GetPtr();
-
-	template <class CastedType>
-	CastedType Cast() const
-	{
-		return dynamic_cast<CastedType>(GetPtr());
-	}
-
-	/**
 		Detach counter object without changing of internal counter pointer.
 	*/
 	void Detach();
@@ -94,10 +96,6 @@ protected:
 		Get internal counter.
 	*/
 	RefCountBase* GetInternalCounter(const TTransPtr& pointer) const;
-
-	// operators
-	Type& operator*() const;
-	Type* operator->() const;
 
 	RefCountBase* m_counterPtr;
 };
@@ -117,36 +115,6 @@ template <class Type>
 TTransPtr<Type>::~TTransPtr()
 {
 	Detach();
-}
-
-
-template <class Type>
-TTransPtr<Type>& TTransPtr<Type>::operator=(TTransPtr& pointer)
-{
-	Detach();
-
-	m_counterPtr = pointer.m_counterPtr;
-
-	pointer.m_counterPtr = NULL;
-
-	return *this;
-}
-
-
-// protected methods
-
-template <class Type>
-TTransPtr<Type>::TTransPtr()
-{
-}
-
-
-template <class Type>
-void TTransPtr<Type>::Reset()
-{
-	Detach();
-
-	m_counterPtr = NULL;
 }
 
 
@@ -182,18 +150,24 @@ inline Type* TTransPtr<Type>::GetPtr()
 
 
 template <class Type>
-inline void TTransPtr<Type>::Detach()
+void TTransPtr<Type>::Reset()
 {
-	if (m_counterPtr != NULL){
-		m_counterPtr->OnDetached();
-	}
+	Detach();
+
+	m_counterPtr = NULL;
 }
 
 
 template <class Type>
-typename TTransPtr<Type>::RefCountBase* TTransPtr<Type>::GetInternalCounter(const TTransPtr& pointer) const
+TTransPtr<Type>& TTransPtr<Type>::operator=(TTransPtr& pointer)
 {
-	return pointer.m_counterPtr;
+	Detach();
+
+	m_counterPtr = pointer.m_counterPtr;
+
+	pointer.m_counterPtr = NULL;
+
+	return *this;
 }
 
 
@@ -214,6 +188,30 @@ inline Type* TTransPtr<Type>::operator->() const
 	I_ASSERT(m_counterPtr->GetPtr() != NULL);
 
 	return m_counterPtr->GetPtr();
+}
+
+
+// protected methods
+
+template <class Type>
+TTransPtr<Type>::TTransPtr()
+{
+}
+
+
+template <class Type>
+inline void TTransPtr<Type>::Detach()
+{
+	if (m_counterPtr != NULL){
+		m_counterPtr->OnDetached();
+	}
+}
+
+
+template <class Type>
+typename TTransPtr<Type>::RefCountBase* TTransPtr<Type>::GetInternalCounter(const TTransPtr& pointer) const
+{
+	return pointer.m_counterPtr;
 }
 
 

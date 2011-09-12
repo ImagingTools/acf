@@ -58,13 +58,6 @@ public:
 	TSmartPtr& operator=(const TTransPtr<Type>& pointer);
 	TSmartPtr& operator=(const TSmartPtr& pointer);
 
-	using BaseClass::Reset;
-	using BaseClass::IsValid;
-	using BaseClass::GetPtr;
-	using BaseClass::Cast;
-	using BaseClass::operator*;
-	using BaseClass::operator->;
-
 protected:
 	class RefCounter: public RefCountBase
 	{
