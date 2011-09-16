@@ -7,9 +7,9 @@
 		<CustomBuildRule
 			Name="Arxc"
 			DisplayName="ARX Compiler"
-			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Arxc.exe $(InputPath) -o $(InputDir)Generated\C$(InputName).cpp [AllOptions] [AdditionalOptions]"
+			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Arxc.exe $(InputPath) -o $(InputDir)Generated\C$(InputName).cpp [AllOptions] [AdditionalOptions]"
 			Outputs="$(InputDir)Generated\C$(InputName).cpp;$(InputDir)Generated\C$(InputName).h"
-			AdditionalDependencies="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Arxc.exe"
+			AdditionalDependencies="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Arxc.exe"
 			FileExtensions="*.arx"
 			ExecutionDescription="Compiling ACF Registry File..."
 			>
@@ -65,9 +65,9 @@
 		<CustomBuildRule
 			Name="FileConvertCopy"
 			DisplayName="ACF file convertion copy"
-			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Acf.exe [$RegistryFile] -config [$ConfigFile] -input $(InputPath) -o [$OutputDir]\$(InputName)"
+			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Acf.exe [$RegistryFile] -config [$ConfigFile] -input $(InputPath) -o [$OutputDir]\$(InputName)"
 			Outputs="[$OutputDir]\$(InputName)"
-			AdditionalDependencies="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Acf.exe;[$RegistryFile];[$ConfigFile];"
+			AdditionalDependencies="$(ACFDIR)\Bin\$(ConfigurationName)VC8\Acf.exe;[$RegistryFile];[$ConfigFile];"
 			FileExtensions="*.xtracf"
 			ExecutionDescription="Converting File With ACF transformation..."
 			>
