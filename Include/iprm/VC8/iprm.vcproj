@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="iprm"
 	ProjectGUID="{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform

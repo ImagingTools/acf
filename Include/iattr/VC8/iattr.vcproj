@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="iattr"
-	ProjectGUID=""
+	ProjectGUID="{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
