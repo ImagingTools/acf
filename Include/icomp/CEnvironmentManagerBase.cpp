@@ -8,23 +8,29 @@ namespace icomp
 {
 
 
-// reimplemented (icomp::IRegistryLoader)
+// reimplemented (icomp::IComponentEnvironmentManager)
 
-const IRegistry* CEnvironmentManagerBase::GetRegistryFromFile(const istd::CString& /*path*/) const
+istd::CString CEnvironmentManagerBase::GetConfigFilePath() const
 {
-	return NULL;
+	return istd::CString::GetEmpty();
 }
 
 
-// reimplemented (icomp::IComponentEnvironmentManager)
+// reimplemented (icomp::IPackagesManager)
 
-bool CEnvironmentManagerBase::ConfigureEnvironment(const istd::CString& /*configFilePath*/)
+bool CEnvironmentManagerBase::LoadPackages(const istd::CString& /*configFilePath*/)
 {
 	return false;
 }
 
 
-istd::CString CEnvironmentManagerBase::GetConfigFilePath() const
+int CEnvironmentManagerBase::GetPackageType(const std::string& /*packageId*/) const
+{
+	return PT_UNKNOWN;
+}
+
+
+istd::CString CEnvironmentManagerBase::GetPackagePath(const std::string& /*packageId*/) const
 {
 	return istd::CString::GetEmpty();
 }
@@ -39,12 +45,6 @@ const IRegistry* CEnvironmentManagerBase::GetRegistry(const CComponentAddress& a
 	}
 
 	return NULL;
-}
-
-
-istd::CString CEnvironmentManagerBase::GetPackageDirPath(const std::string& /*packageId*/) const
-{
-	return istd::CString::GetEmpty();
 }
 
 

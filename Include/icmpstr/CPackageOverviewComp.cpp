@@ -663,7 +663,7 @@ void CPackageOverviewComp::on_PackagesList_itemSelectionChanged()
 		if ((itemPtr != NULL) && m_quickHelpViewerCompPtr.IsValid()){
 			const icomp::CComponentAddress& address = itemPtr->GetAddress();
 
-			m_quickHelpViewerCompPtr->ShowHelp(address.GetPackageId() + "/" + address.GetComponentId(), &address);
+			m_quickHelpViewerCompPtr->ShowHelp(address.ToString(), &address);
 		}
 	}
 }
@@ -699,7 +699,7 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			QDir packageDir(iqt::GetQString(m_envManagerCompPtr->GetPackageDirPath(address.GetPackageId())));
+			QDir packageDir(iqt::GetQString(m_envManagerCompPtr->GetPackagePath(address.GetPackageId())));
 			istd::CString filePath = iqt::GetCString(packageDir.absoluteFilePath((address.GetComponentId() + ".arx").c_str()));
 
 			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
@@ -745,7 +745,7 @@ void CPackageOverviewComp::OnReloadPackages()
 		configFilePath = m_configFilePathCompPtr->GetPath();
 	}
 	static iqt::CFileSystem fileSystem;
-	m_envManagerCompPtr->ConfigureEnvironment(fileSystem.GetNormalizedPath(configFilePath));
+	m_envManagerCompPtr->LoadPackages(fileSystem.GetNormalizedPath(configFilePath));
 
 	UpdateInterfaceList();
 
@@ -767,7 +767,7 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 	font.setBold(true);
 	font.setPointSize(12);
 	componentLabel.setFont(font);
-	componentLabel.setText(iqt::GetQString(address.GetPackageId()) + "/" + iqt::GetQString(address.GetComponentId()));
+	componentLabel.setText(iqt::GetQString(address.ToString()));
 	if (m_consistInfoCompPtr.IsValid()){
 		componentLabel.setIconSize(QSize(64, 64));
 		componentLabel.setIcon(m_consistInfoCompPtr->GetComponentIcon(address));

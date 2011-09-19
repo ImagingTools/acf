@@ -6,11 +6,16 @@
 #include <list>
 #include <set>
 
+// ACF includes
+#include "istd/itr.h"
+
 #include "iser/IFileLoader.h"
 
 #include "icomp/IRegistry.h"
+#include "icomp/IPackagesManager.h"
 #include "icomp/IRegistriesManager.h"
-#include "icomp/CComponentBase.h"
+
+#include "ibase/TLoggerCompWrap.h"
 
 
 namespace ibase
@@ -20,14 +25,23 @@ namespace ibase
 /**
 	Save registry as C++ code genereting class with the same functionality.
 */
-class CRegistryCodeSaverComp: public icomp::CComponentBase, public iser::IFileLoader
+class CRegistryCodeSaverComp: public ibase::CLoggerComponentBase, public iser::IFileLoader
 {
+	I_DECLARE_TR_FUNCTION(CRegistryCodeSaverComp);
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
+
+	enum MessageId
+	{
+		MI_UNDEFINED_PACKAGE = 0x341f0,
+		MI_UNDEFINED_COMPONENT,
+		MI_UNDEFINED_ATTR_TYPE
+	};
 
 	I_BEGIN_COMPONENT(CRegistryCodeSaverComp);
 		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
+		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager providing access to package informations", true, "PackagesManager");
 		I_ASSIGN(m_registriesManagerCompPtr, "RegistriesManager", "Registries manager providing access to all composite component registries", true, "RegistriesManager");
 	I_END_COMPONENT;
 
@@ -125,6 +139,7 @@ protected:
 	std::string GetStringLiteral(const istd::CString& text) const;
 
 private:
+	I_REF(icomp::IPackagesManager, m_packagesManagerCompPtr);
 	I_REF(icomp::IRegistriesManager, m_registriesManagerCompPtr);
 
 	mutable int m_indentCount;

@@ -50,9 +50,8 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 			Addresses realAddresses;
 			Addresses composedAddresses;
 
-			AppendAddresses(*registryPtr, realAddresses, composedAddresses);
-
-			if (		WriteHeader(className, *registryPtr, composedAddresses, realAddresses, headerStream) &&
+			if (		AppendAddresses(*registryPtr, realAddresses, composedAddresses) &&
+						WriteHeader(className, *registryPtr, composedAddresses, realAddresses, headerStream) &&
 						WriteIncludes(className, realAddresses, stream) &&
 						WriteClassDefinitions(className, *registryPtr, composedAddresses, realAddresses, stream)){
 				return StateOk;
@@ -100,7 +99,9 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 			Addresses& realAddresses,
 			Addresses& composedAddresses) const
 {
-	bool retVal = false;
+	if (!m_packagesManagerCompPtr.IsValid() || !m_registriesManagerCompPtr.IsValid()){
+		return false;
+	}
 
 	icomp::IRegistry::Ids ids = registry.GetElementIds();
 	for (		icomp::IRegistry::Ids::const_iterator elementIter = ids.begin();
@@ -111,25 +112,48 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 		const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentId);
 		I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
 
-		if (		(realAddresses.find(infoPtr->address) == realAddresses.end()) &&
-					(composedAddresses.find(infoPtr->address) == composedAddresses.end())){
-			if (m_registriesManagerCompPtr.IsValid()){
+		const std::string& packageId = infoPtr->address.GetPackageId();
+		if (packageId.empty()){
+			continue;	// skip embedded components
+		}
+
+		int packageType = m_packagesManagerCompPtr->GetPackageType(packageId);
+
+		switch (packageType){
+		case icomp::IPackagesManager::PT_REAL:
+			if (realAddresses.find(infoPtr->address) == realAddresses.end()){
+				realAddresses.insert(infoPtr->address);
+			}
+			break;
+
+		case icomp::IPackagesManager::PT_COMPOSED:
+			{
 				const icomp::IRegistry* registryPtr = m_registriesManagerCompPtr->GetRegistry(infoPtr->address);
 				if (registryPtr != NULL){
 					composedAddresses.insert(infoPtr->address);
 
-					retVal = AppendAddresses(*registryPtr, realAddresses, composedAddresses) || retVal;
+					if (!AppendAddresses(*registryPtr, realAddresses, composedAddresses)){
+						return false;
+					}
 				}
 				else{
-					realAddresses.insert(infoPtr->address);
-
-					retVal = true;
+					SendErrorMessage(
+								MI_UNDEFINED_COMPONENT,
+								tr("Composite component is undefined: ") + infoPtr->address.ToString());
+					return false;
 				}
 			}
+			break;
+
+		default:
+			SendErrorMessage(
+						MI_UNDEFINED_PACKAGE,
+						tr("Package is undefined: ") + packageId);
+			return false;
 		}
 	}
 
-	return retVal;
+	return true;
 }
 
 
@@ -242,7 +266,9 @@ bool CRegistryCodeSaverComp::WriteHeader(
 	stream << "protected:";
 	ChangeIndent(1);
 
-	WriteRegistryClassDeclaration(className, "CMainRegistry", registry, stream);
+	if (!WriteRegistryClassDeclaration(className, "CMainRegistry", registry, stream)){
+		return false;
+	}
 
 	Ids composedPackageIds = ExtractPackageIds(composedAddresses);
 	if (m_registriesManagerCompPtr.IsValid() && !composedPackageIds.empty()){
@@ -288,7 +314,9 @@ bool CRegistryCodeSaverComp::WriteHeader(
 
 				if (registryPtr != NULL){
 					stream << std::endl;
-					WriteRegistryClassDeclaration(className, "C" + componentId + "Registry", *registryPtr, stream);
+					if (!WriteRegistryClassDeclaration(className, "C" + componentId + "Registry", *registryPtr, stream)){
+						return false;
+					}
 				}
 				else{
 					NextLine(stream);
@@ -526,7 +554,10 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 	stream << "icomp::CCompositeComponentContext " << className << "::" << "s_mainComponentContext(&s_mainElement, &s_localEnvironmentManager, &s_mainRegistry, &s_localEnvironmentManager, NULL);";
 	stream << std::endl << std::endl;
 
-	WriteRegistryClassBody(className, "CMainRegistry", registry, stream);
+	if (!WriteRegistryClassBody(className, "CMainRegistry", registry, stream)){
+		return false;
+	}
+
 	stream << std::endl << std::endl;
 
 	Ids composedPackageIds = ExtractPackageIds(composedAddresses);
@@ -583,7 +614,10 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 
 				const icomp::IRegistry* registryPtr = m_registriesManagerCompPtr->GetRegistry(address, &registry);
 				if (registryPtr != NULL){
-					WriteRegistryClassBody(className + "::C" + packageName, "C" + componentId + "Registry", *registryPtr, stream);
+					if (!WriteRegistryClassBody(className + "::C" + packageName, "C" + componentId + "Registry", *registryPtr, stream)){
+						return false;
+					}
+
 					stream << std::endl << std::endl;
 				}
 			}
@@ -774,7 +808,9 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			NextLine(stream);
 			stream << "// element '" << componentId << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
 
-			WriteComponentInfo(registry, registryCallPrefix, componentId, *infoPtr, stream);
+			if (!WriteComponentInfo(registry, registryCallPrefix, componentId, *infoPtr, stream)){
+				return false;
+			}
 		}
 	}
 
@@ -838,7 +874,9 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 			stream << "if (" << embeddedRegName << " != NULL){";
 			ChangeIndent(1);
 
-			WriteRegistryInfo(*embeddedRegistryPtr, embeddedRegName + "->", stream);
+			if (!WriteRegistryInfo(*embeddedRegistryPtr, embeddedRegName + "->", stream)){
+				return false;
+			}
 
 			ChangeIndent(-1);
 			NextLine(stream);
@@ -926,7 +964,9 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 						}
 
 						if (isAttributeValid){
-							WriteAttribute(attributeId, attributeInfoName, *attrInfoPtr->attributePtr, stream);
+							if (!WriteAttribute(attributeId, attributeInfoName, *attrInfoPtr->attributePtr, stream)){
+								return false;
+							}
 						}
 
 						ChangeIndent(-1);
@@ -972,8 +1012,6 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 		stream << "I_ASSERT(" << attributeName << " != NULL);";
 		NextLine(stream);
 		stream << attributeName << "->SetValue(" << valueString << ");";
-
-		return true;
 	}
 	else if (GetMultiAttributeValue(attribute, valueStrings, attributeType)){
 		if (!valueStrings.empty()){
@@ -992,11 +1030,15 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 				stream << "n" << attributeInfoName << "->InsertValue(" << *iter << ");";
 			}
 		}
-
-		return true;
+	}
+	else{
+		SendErrorMessage(
+					MI_UNDEFINED_ATTR_TYPE,
+					tr("Unknown attribute type: ") + attributeId);
+		return false;
 	}
 
-	return false;
+	return true;
 }
 
 
@@ -1057,7 +1099,9 @@ bool CRegistryCodeSaverComp::WriteRegistryClassBody(
 	stream << "{";
 	ChangeIndent(1);
 
-	WriteRegistryInfo(registry, "", stream);
+	if (!WriteRegistryInfo(registry, "", stream)){
+		return false;
+	}
 
 	ChangeIndent(-1);
 	NextLine(stream);
@@ -1122,6 +1166,17 @@ bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 			std::string& typeName) const
 {
 	valueStrings.clear();
+
+	const icomp::CMultiBoolAttribute* boolListAttribute = dynamic_cast<const icomp::CMultiBoolAttribute*>(&attribute);
+	if (boolListAttribute != NULL){
+		for (int index = 0; index < boolListAttribute->GetValuesCount(); index++){
+			valueStrings.push_back(boolListAttribute->GetValueAt(index)? "true": "false");
+		}
+
+		typeName = "icomp::CMultiBoolAttribute";
+
+		return true;
+	}
 
 	const icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<const icomp::CMultiStringAttribute*>(&attribute);
 	if (stringListAttribute != NULL){

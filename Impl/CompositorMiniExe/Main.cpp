@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	packagesLoaderComp.ConfigureEnvironment(configFile);
+	packagesLoaderComp.LoadPackages(configFile);
 
 	icomp::TSimComponentWrap<CmpstrPck::RegistryConsistInfo> registryConsistInfoComp;
 	registryConsistInfoComp.SetRef("EnvironmentManager", &packagesLoaderComp);

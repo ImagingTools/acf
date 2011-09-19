@@ -43,3 +43,4 @@ QString CSettingsArchiveBase::CreateKey(bool replaceMultiple) const
 
 } // namespace iqt
 
+

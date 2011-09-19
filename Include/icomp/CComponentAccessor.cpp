@@ -29,7 +29,7 @@ CComponentAccessor::CComponentAccessor(
 		IComponentEnvironmentManager* managerPtr = registryLoaderProviderPtr->GetEnvironmentManager();
 
 		if (managerPtr != NULL){
-			managerPtr->ConfigureEnvironment(configFile);
+			managerPtr->LoadPackages(configFile);
 
 			const icomp::IComponentStaticInfo* staticInfoPtr = dynamic_cast<const icomp::IComponentStaticInfo*>(managerPtr);
 			const icomp::IRegistryLoader* registryLoaderPtr = registryLoaderProviderPtr->GetRegistryLoader();

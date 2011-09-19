@@ -208,7 +208,7 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 							MI_COMPONENT_INACTIVE,
 							iqt::GetCString(tr("Element %1 uses inactive component %2")
 										.arg(elementName.c_str())
-										.arg(iqt::GetQString(GetAddressName(elementInfo.address)))),
+										.arg(iqt::GetQString(elementInfo.address.ToString()))),
 							iqt::GetCString(tr("Element Consistency Check")),
 							0));
 			}
@@ -437,12 +437,6 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleSubcomponents(
 	}
 
 	return retVal;
-}
-
-
-istd::CString CRegistryConsistInfoComp::GetAddressName(const icomp::CComponentAddress& address) const
-{
-	return address.GetPackageId() + "/" + address.GetComponentId();
 }
 
 

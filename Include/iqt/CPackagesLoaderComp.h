@@ -63,12 +63,15 @@ public:
 	virtual const icomp::IRegistry* GetRegistryFromFile(const istd::CString& path) const;
 
 	// reimplemented (icomp::IComponentEnvironmentManager)
-	virtual bool ConfigureEnvironment(const istd::CString& configFilePath = istd::CString());
 	virtual istd::CString GetConfigFilePath() const;
+
+	// reimplemented (icomp::IPackagesManager)
+	virtual bool LoadPackages(const istd::CString& configFilePath = istd::CString::GetEmpty());
+	virtual int GetPackageType(const std::string& packageId) const;
+	virtual istd::CString GetPackagePath(const std::string& packageId) const;
 
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const;
-	virtual istd::CString GetPackageDirPath(const std::string& packageId) const;
 
 	// reimplemented (icomp::IMetaInfoManager)
 	virtual ComponentAddresses GetComponentAddresses(int typeFlag = CTF_ALL) const;
@@ -116,8 +119,8 @@ private:
 	/**
 		Map package ID to package file path.
 	*/
-	typedef std::map<std::string, istd::CString> NormalPackagesMap;
-	NormalPackagesMap m_normalPackagesMap;
+	typedef std::map<std::string, istd::CString> RealPackagesMap;
+	RealPackagesMap m_realPackagesMap;
 
 	/**
 		Map package ID to structure CompositePackageInfo.

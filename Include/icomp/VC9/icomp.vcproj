@@ -377,6 +377,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IPackagesManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IRealAttributeStaticInfo.h"
 				>
 			</File>

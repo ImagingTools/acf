@@ -5,9 +5,10 @@
 #include <QCoreApplication>
 #include <QFileInfo>
 
-
 // ACF includes
 #include "iser/CXmlFileReadArchive.h"
+
+#include "icomp/CRegistry.h"
 
 #include "iqt/CFileSystem.h"
 
@@ -16,7 +17,9 @@ namespace iqt
 {
 
 
-bool CRegistriesManagerComp::ConfigureEnvironment(const istd::CString& configFilePath)
+// reimplemented (icomp::IPackagesManager)
+
+bool CRegistriesManagerComp::LoadPackages(const istd::CString& configFilePath)
 {
 	bool retVal = true;
 
@@ -37,6 +40,57 @@ bool CRegistriesManagerComp::ConfigureEnvironment(const istd::CString& configFil
 	}
 
 	return retVal;
+}
+
+
+int CRegistriesManagerComp::GetPackageType(const std::string& packageId) const
+{
+	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
+	if (foundNormalIter != m_realPackagesMap.end()){
+		return PT_REAL;
+	}
+
+	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
+	if (foundCompositeIter != m_compositePackagesMap.end()){
+		return PT_COMPOSED;
+	}
+
+	return PT_UNKNOWN;
+}
+
+
+istd::CString CRegistriesManagerComp::GetPackagePath(const std::string& packageId) const
+{
+	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
+	if (foundNormalIter != m_realPackagesMap.end()){
+		return iqt::GetCString(foundNormalIter->second);
+	}
+
+	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
+	if (foundCompositeIter != m_compositePackagesMap.end()){
+		return iqt::GetCString(foundCompositeIter->second.absolutePath());
+	}
+
+	return istd::CString::GetEmpty();
+}
+
+
+// reimplemented (icomp::IRegistriesManager)
+
+const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr) const
+{
+	if ((contextRegistryPtr != NULL) && address.GetPackageId().empty()){
+		return contextRegistryPtr->GetEmbeddedRegistry(address.GetComponentId());
+	}
+
+	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
+	if (foundCompositeIter != m_compositePackagesMap.end()){
+		QString filePath = foundCompositeIter->second.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
+
+		return GetRegistryFromFile(GetCString(filePath));
+	}
+
+	return NULL;
 }
 
 
@@ -67,67 +121,29 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistryFromFile(const istd::
 }
 
 
-// reimplemented (icomp::IRegistriesManager)
-
-const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr) const
-{
-	if ((contextRegistryPtr != NULL) && address.GetPackageId().empty()){
-		return contextRegistryPtr->GetEmbeddedRegistry(address.GetComponentId());
-	}
-
-	PackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
-	if (foundCompositeIter != m_compositePackagesMap.end()){
-		QString filePath = foundCompositeIter->second.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
-
-		return GetRegistryFromFile(GetCString(filePath));
-	}
-
-	return NULL;
-}
-
-
-istd::CString CRegistriesManagerComp::GetPackageDirPath(const std::string& packageId) const
-{
-	PackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
-	if (foundCompositeIter != m_compositePackagesMap.end()){
-		return iqt::GetCString(foundCompositeIter->second.absolutePath());
-	}
-
-	return istd::CString::GetEmpty();
-}
-
-
-// reimplemented (icomp::CComponentBase)
-
-void CRegistriesManagerComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	if (m_configFilePathCompPtr.IsValid()){
-		istd::CString path = m_configFilePathCompPtr->GetPath();
-
-		if (!path.IsEmpty()){
-			QDir applicationDir = QCoreApplication::applicationDirPath();
-
-			QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path));
-
-			LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath(enrolledPath)));
-		}
-	}
-}
-
-
 // protected methods
 
 void CRegistriesManagerComp::RegisterPackageFile(const istd::CString& file)
 {
 	QFileInfo fileInfo(iqt::GetQString(file));
 
+	std::string packageId(fileInfo.baseName().toStdString());
+
 	SendVerboseMessage(istd::CString("Register package file: ") + file);
 
-	if (fileInfo.isDir()){
-		std::string packageId = fileInfo.baseName().toStdString();
-		PackagesMap::const_iterator foundIter = m_compositePackagesMap.find(packageId);
+	if (fileInfo.isFile()){
+		RealPackagesMap::const_iterator foundIter = m_realPackagesMap.find(packageId);
+		if (foundIter == m_realPackagesMap.end()){
+			m_realPackagesMap[packageId] = fileInfo.absoluteFilePath();
+		}
+		else{
+			SendWarningMessage(
+						MI_CANNOT_REGISTER,
+						iqt::GetCString(QObject::tr("Second real package definition was ignored %1 (previous: %2)").arg(fileInfo.absoluteFilePath()).arg(foundIter->second)));
+		}
+	}
+	else if (fileInfo.isDir()){
+		CompositePackagesMap::const_iterator foundIter = m_compositePackagesMap.find(packageId);
 		if (foundIter == m_compositePackagesMap.end()){
 			icomp::IComponentStaticInfo::Ids componentIds;
 
@@ -145,6 +161,11 @@ void CRegistriesManagerComp::RegisterPackageFile(const istd::CString& file)
 
 			m_compositePackagesMap[packageId] = packageDir;
 		}
+		else{
+			SendWarningMessage(
+						MI_CANNOT_REGISTER,
+						iqt::GetCString(QObject::tr("Second composed package definition was ignored %1 (previous: %2)").arg(fileInfo.absoluteFilePath()).arg(foundIter->second.absolutePath())));
+		}
 	}
 }
 
@@ -157,7 +178,7 @@ void CRegistriesManagerComp::RegisterPackagesDir(const istd::CString& path)
 
 	QStringList filters;
 	filters.append("*.arp");
-	QStringList filesInfo = packagesDir.entryList(filters, QDir::Dirs | QDir::NoDotAndDotDot);
+	QStringList filesInfo = packagesDir.entryList(filters, QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
 	for (		QStringList::iterator iter = filesInfo.begin();
 				iter != filesInfo.end();
 				++iter){
@@ -289,6 +310,26 @@ bool CRegistriesManagerComp::CheckAndMarkPath(const QDir& directory, const istd:
 	}
 
 	return false;
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CRegistriesManagerComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_configFilePathCompPtr.IsValid()){
+		istd::CString path = m_configFilePathCompPtr->GetPath();
+
+		if (!path.IsEmpty()){
+			QDir applicationDir = QCoreApplication::applicationDirPath();
+
+			QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path));
+
+			LoadConfigFile(iqt::GetCString(applicationDir.absoluteFilePath(enrolledPath)));
+		}
+	}
 }
 
 

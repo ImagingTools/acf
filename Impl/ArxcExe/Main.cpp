@@ -105,9 +105,11 @@ int main(int argc, char *argv[])
 	registriesManagerComp.SetBoolAttr("EnableVerbose", verboseEnabled);
 	registriesManagerComp.InitComponent();
 
-	registriesManagerComp.ConfigureEnvironment(configFile);
+	registriesManagerComp.LoadPackages(configFile);
 
 	icomp::TSimComponentWrap<BasePck::RegistryCodeSaver> codeSaverComp;
+	codeSaverComp.SetRef("Log", &log);
+	codeSaverComp.SetRef("PackagesManager", &registriesManagerComp);
 	codeSaverComp.SetRef("RegistriesManager", &registriesManagerComp);
 	codeSaverComp.InitComponent();
 

@@ -81,7 +81,6 @@ protected:
 				const std::string& elementId,
 				const icomp::IComponentStaticInfo& elementStaticInfo,
 				const icomp::IComponentStaticInfo::Ids& interfaceNames) const;
-	istd::CString GetAddressName(const icomp::CComponentAddress& address) const;
 	bool CheckAttributeCompatibility(
 				const iser::IObject& attribute,
 				const icomp::IAttributeStaticInfo& attributeMetaInfo,

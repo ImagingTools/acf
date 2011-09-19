@@ -53,7 +53,15 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const istd::CSt
 
 // reimplemented (icomp::IComponentEnvironmentManager)
 
-bool CPackagesLoaderComp::ConfigureEnvironment(const istd::CString& configFilePath)
+istd::CString CPackagesLoaderComp::GetConfigFilePath() const
+{
+	return m_configFilePath;
+}
+
+
+// reimplemented (icomp::IPackagesManager)
+
+bool CPackagesLoaderComp::LoadPackages(const istd::CString& configFilePath)
 {
 	istd::CChangeNotifier notifier(this);
 
@@ -85,16 +93,42 @@ bool CPackagesLoaderComp::ConfigureEnvironment(const istd::CString& configFilePa
 	m_invRegistriesMap.clear();
 	m_usedFilesList.clear();
 	m_compositePackagesMap.clear();
-	m_normalPackagesMap.clear();
+	m_realPackagesMap.clear();
 	m_dllCacheMap.clear();
 
 	return LoadConfigFile(m_configFilePath);
 }
 
 
-istd::CString CPackagesLoaderComp::GetConfigFilePath() const
+int CPackagesLoaderComp::GetPackageType(const std::string& packageId) const
 {
-	return m_configFilePath;
+	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
+	if (foundNormalIter != m_realPackagesMap.end()){
+		return PT_REAL;
+	}
+
+	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
+	if (foundCompositeIter != m_compositePackagesMap.end()){
+		return PT_COMPOSED;
+	}
+
+	return PT_UNKNOWN;
+}
+
+
+istd::CString CPackagesLoaderComp::GetPackagePath(const std::string& packageId) const
+{
+	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
+	if (foundNormalIter != m_realPackagesMap.end()){
+		return foundNormalIter->second;
+	}
+
+	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
+	if (foundCompositeIter != m_compositePackagesMap.end()){
+		return iqt::GetCString(foundCompositeIter->second.directory.absolutePath());
+	}
+
+	return istd::CString::GetEmpty();
 }
 
 
@@ -113,22 +147,6 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistry(const icomp::CComponent
 }
 
 
-istd::CString CPackagesLoaderComp::GetPackageDirPath(const std::string& packageId) const
-{
-	NormalPackagesMap::const_iterator foundNormalIter = m_normalPackagesMap.find(packageId);
-	if (foundNormalIter != m_normalPackagesMap.end()){
-		return foundNormalIter->second;
-	}
-
-	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
-	if (foundCompositeIter != m_compositePackagesMap.end()){
-		return iqt::GetCString(foundCompositeIter->second.directory.absolutePath());
-	}
-
-	return istd::CString::GetEmpty();
-}
-
-
 // reimplemented (icomp::IMetaInfoManager)
 
 CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddresses(int typeFlag) const
@@ -136,17 +154,17 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 	ComponentAddresses retVal;
 
 	if ((typeFlag & CTF_REAL) != 0){
-		for (		NormalPackagesMap::const_iterator packageIter = m_normalPackagesMap.begin();
-					packageIter != m_normalPackagesMap.end();
+		for (		RealPackagesMap::const_iterator packageIter = m_realPackagesMap.begin();
+					packageIter != m_realPackagesMap.end();
 					++packageIter){
-			const std::string packageName = packageIter->first;
+			const std::string packageId = packageIter->first;
 
-			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageName);
+			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageId);
 			if (packageInfoPtr != NULL){
 				Ids componentIds = packageInfoPtr->GetMetaIds(MGI_EMBEDDED_COMPONENTS);
 
 				icomp::CComponentAddress address;
-				address.SetPackageId(packageName);
+				address.SetPackageId(packageId);
 
 				for (		Ids::const_iterator componentIter = componentIds.begin();
 							componentIter != componentIds.end();
@@ -163,14 +181,14 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 		for (		CompositePackagesMap::const_iterator packageIter = m_compositePackagesMap.begin();
 					packageIter != m_compositePackagesMap.end();
 					++packageIter){
-			const std::string packageName = packageIter->first;
+			const std::string packageId = packageIter->first;
 
-			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageName);
+			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageId);
 			if (packageInfoPtr != NULL){
 				Ids componentIds = packageInfoPtr->GetMetaIds(MGI_EMBEDDED_COMPONENTS);
 
 				icomp::CComponentAddress address;
-				address.SetPackageId(packageName);
+				address.SetPackageId(packageId);
 
 				for (		Ids::const_iterator componentIter = componentIds.begin();
 							componentIter != componentIds.end();
@@ -193,7 +211,7 @@ void CPackagesLoaderComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	ConfigureEnvironment();
+	LoadPackages();
 }
 
 
@@ -203,32 +221,41 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 {
 	QFileInfo fileInfo(iqt::GetQString(file));
 
+	std::string packageId(fileInfo.baseName().toStdString());
+
 	if (fileInfo.isFile()){
-		CDllFunctionsProvider& provider = GetProviderRef(fileInfo);
-		if (provider.IsValid()){
-			// register services:
-			icomp::RegisterServicesFunc registerServicesInfoPtr = (icomp::RegisterServicesFunc)provider.GetFunction(I_EXPORT_SERVICES_FUNCTION_NAME);
-			if (registerServicesInfoPtr != NULL){
-				registerServicesInfoPtr(&istd::CStaticServicesProvider::GetProviderInstance());
-			}
+		RealPackagesMap::const_iterator foundIter = m_realPackagesMap.find(packageId);
+		if (foundIter == m_realPackagesMap.end()){
+			CDllFunctionsProvider& provider = GetProviderRef(fileInfo);
+			if (provider.IsValid()){
+				// register services:
+				icomp::RegisterServicesFunc registerServicesInfoPtr = (icomp::RegisterServicesFunc)provider.GetFunction(I_EXPORT_SERVICES_FUNCTION_NAME);
+				if (registerServicesInfoPtr != NULL){
+					registerServicesInfoPtr(&istd::CStaticServicesProvider::GetProviderInstance());
+				}
 
-			icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)provider.GetFunction(I_PACKAGE_EXPORT_FUNCTION_NAME);
-			if (getInfoPtr != NULL){
-				icomp::CPackageStaticInfo* infoPtr = getInfoPtr();
-				if (infoPtr != NULL){
-					std::string packageName(fileInfo.baseName().toStdString());
+				icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)provider.GetFunction(I_PACKAGE_EXPORT_FUNCTION_NAME);
+				if (getInfoPtr != NULL){
+					icomp::CPackageStaticInfo* infoPtr = getInfoPtr();
+					if (infoPtr != NULL){
+						m_realPackagesMap[packageId] = iqt::GetCString(fileInfo.absoluteFilePath());
 
-					m_normalPackagesMap[packageName] = iqt::GetCString(fileInfo.absoluteFilePath());
+						RegisterEmbeddedComponentInfo(packageId, infoPtr);
 
-					RegisterEmbeddedComponentInfo(packageName, infoPtr);
-
-					return true;
+						return true;
+					}
 				}
 			}
 		}
+		else{
+			SendWarningMessage(
+						MI_CANNOT_REGISTER,
+						iqt::GetCString(QObject::tr("Second real package definition was ignored %1 (previous: %2)")
+									.arg(fileInfo.absoluteFilePath())
+									.arg(iqt::GetQString(foundIter->second))));
+		}
 	}
 	else if (fileInfo.isDir()){
-		std::string packageId = fileInfo.baseName().toStdString();
 		CompositePackagesMap::const_iterator foundIter = m_compositePackagesMap.find(packageId);
 		if (foundIter == m_compositePackagesMap.end()){
 			CompositePackageInfo& packageInfo = m_compositePackagesMap[packageId];
@@ -267,6 +294,13 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 			RegisterEmbeddedComponentInfo(packageId, infoPtr);
 
 			return true;
+		}
+		else{
+			SendWarningMessage(
+						MI_CANNOT_REGISTER,
+						iqt::GetCString(QObject::tr("Second composed package definition was ignored %1 (previous: %2)")
+									.arg(fileInfo.absoluteFilePath())
+									.arg(foundIter->second.directory.absolutePath())));
 		}
 	}
 

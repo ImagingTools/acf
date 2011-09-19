@@ -100,7 +100,7 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(registryElement.GetAddress());
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			QDir packageDir(iqt::GetQString(managerPtr->GetPackageDirPath(registryElement.GetAddress().GetPackageId())));
+			QDir packageDir(iqt::GetQString(managerPtr->GetPackagePath(registryElement.GetAddress().GetPackageId())));
 		
 			istd::CString filePath = iqt::GetCString(packageDir.absoluteFilePath((registryElement.GetAddress().GetComponentId() + ".arx").c_str()));
 
@@ -424,7 +424,7 @@ void CVisualRegistryScenographerComp::UpdateComponentSelection()
 				if (elementInfoPtr != NULL){
 					const icomp::CComponentAddress& address = elementInfoPtr->address;
 					m_quickHelpViewerCompPtr->ShowHelp(
-								address.GetPackageId() + "/" + address.GetComponentId(),
+								address.ToString(),
 								&address);
 				}
 			}

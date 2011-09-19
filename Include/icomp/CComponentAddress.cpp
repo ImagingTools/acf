@@ -27,6 +27,12 @@ bool CComponentAddress::IsValid() const
 }
 
 
+istd::CString CComponentAddress::ToString() const
+{
+	return istd::CString(m_packageId + "/" + m_componentId);
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CComponentAddress::Serialize(iser::IArchive& archive)
