@@ -31,7 +31,7 @@ public:
 
 int CProcessEnvironment::GetMainThreadId() const
 {
-	return int(QThread::currentThreadId());
+	return *static_cast<int*>(QThread::currentThreadId());
 }
 
 
