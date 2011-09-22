@@ -47,6 +47,7 @@ public:
 		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
 		I_REGISTER_INTERFACE(iser::IFileLoaderInfo);
+		I_ASSIGN(m_useNativeAttrPtr, "UseNative", "Use native system file dialog", true, true);
 		I_ASSIGN_MULTI_0(m_loadersCompPtr, "Loaders", "List of file serializers will be used as slaves", true);
 		I_ASSIGN(m_statupDirectoryCompPtr, "StartupDirectory", "Initial directory path for the file loader dialog", false, "StartupDirectory");
 	I_END_COMPONENT;
@@ -87,6 +88,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
+	I_ATTR(bool, m_useNativeAttrPtr);
 	I_MULTIREF(iser::IFileLoader, m_loadersCompPtr);
 	I_REF(iprm::IFileNameParam, m_statupDirectoryCompPtr);
 
