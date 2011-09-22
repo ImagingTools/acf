@@ -15,6 +15,14 @@ namespace iattr
 class IAttribute: virtual public iser::IObject
 {
 public:
+	enum AttributeFlags
+	{
+		/**
+			Attribute is persistent.
+		*/
+		AF_PERSISTENT
+	};
+
 	/**
 		Get default value for the attribute.
 	*/

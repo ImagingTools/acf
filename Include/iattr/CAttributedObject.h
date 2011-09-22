@@ -33,6 +33,7 @@ public:
 	{
 		std::string attributeId;
 		std::string attributeDescription;
+		int attributeFlags;
 
 		istd::TOptDelPtr<iser::IObject> objectPtr; 
 	};
@@ -53,13 +54,22 @@ public:
 				iser::IObject* objectPtr,
 				const std::string& attributeId,
 				const std::string& attributeDescription,
+				int attributeFlags,
 				bool releaseFlag);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
+	bool ReadAttributes(
+				iser::IArchive& archive,
+				const iser::CArchiveTag& attributesTag,
+				const iser::CArchiveTag& attributeTag);
 
+	bool WriteAttributes(
+				iser::IArchive& archive,
+				const iser::CArchiveTag& attributesTag,
+				const iser::CArchiveTag& attributeTag) const;
 
 private:
 	typedef istd::TComposedFactory<iser::IObject> AttributesFactory;

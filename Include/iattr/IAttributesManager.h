@@ -41,11 +41,18 @@ public:
 
 	/**
 		Insert an attribute into the object.
+		\param objectPtr	Attribute data object.
+		\param attributeId	Unique ID of the attribute in the attributes repository.
+		\param attributeDescription	Human readable description of the attribute.
+		\param attributeFlags	Attribute flags. \sa IAttribute::AttributeFlags.
+		\param releaseFlag	Indicate who control the attribute's memory.
+		If \c releaseFlag is \c true, the control over the \c objectPtr will be overtaken by this object.
 	*/
 	virtual void InsertAttribute(
 				iser::IObject* objectPtr,
 				const std::string& attributeId,
 				const std::string& attributeDescription,
+				int attributeFlags,
 				bool releaseFlag) = 0;
 };
 

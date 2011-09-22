@@ -21,12 +21,13 @@ CAttributeBase::CAttributeBase(
 				iattr::IAttributesManager* attributeOwnerPtr,
 				const std::string& attributeId,
 				const std::string& attributeDescription,
+				int attributeFlags,
 				int changeFlags)
 	:m_attributeOwnerPtr(attributeOwnerPtr),
 	m_changeFlags(changeFlags)
 {
 	if (attributeOwnerPtr != NULL){
-		attributeOwnerPtr->InsertAttribute(this, attributeId, attributeDescription, false);
+		attributeOwnerPtr->InsertAttribute(this, attributeId, attributeDescription, attributeFlags, false);
 	}
 }
 

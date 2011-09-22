@@ -73,6 +73,7 @@ void CAttributedObject::InsertAttribute(
 			iser::IObject* objectPtr,
 			const std::string& attributeId,
 			const std::string& attributeDescription,
+			int attributeFlags,
 			bool releaseFlag)
 {
 	AttributeInfo* existingInfoPtr = GetAttributeInfo(attributeId);
@@ -83,6 +84,7 @@ void CAttributedObject::InsertAttribute(
 		attributeInfoPtr->objectPtr.SetPtr(objectPtr, releaseFlag);
 		attributeInfoPtr->attributeId = attributeId;
 		attributeInfoPtr->attributeDescription = attributeDescription;
+		attributeInfoPtr->attributeFlags = attributeFlags;
 
 		m_attributesList.PushBack(attributeInfoPtr);
 	}
@@ -93,35 +95,33 @@ void CAttributedObject::InsertAttribute(
 
 bool CAttributedObject::Serialize(iser::IArchive& archive)
 {
+	iser::CArchiveTag attributesTag("Attributes", "Liste of object attributes");
+	iser::CArchiveTag attributeTag("Attribute", "Object attribute");
+
+	if (archive.IsStoring()){
+		return WriteAttributes(archive, attributesTag, attributeTag);
+	}
+
+	return ReadAttributes(archive, attributesTag, attributeTag);
+}
+
+
+bool CAttributedObject::ReadAttributes(
+			iser::IArchive& archive,
+			const iser::CArchiveTag& attributesTag,
+			const iser::CArchiveTag& attributeTag)
+{
 	bool retVal = true;
 
 	int attributesCount = m_attributesList.GetCount();
-
-	iser::CArchiveTag attributesTag("Attributes", "Liste of object attributes");
-	iser::CArchiveTag attributeTag("Attribute", "Object attribute");
 
 	retVal = retVal && archive.BeginMultiTag(attributesTag, attributeTag, attributesCount);
 
 	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
 		retVal = retVal && archive.BeginTag(attributeTag);
 
-		std::string attributeTypeId;
 		std::string attributeId;
-		iser::IObject* objectPtr = NULL;
-		AttributeInfo* attrubiteInfoPtr = NULL;
-
-		if (archive.IsStoring()){
-			attrubiteInfoPtr = m_attributesList.GetAt(attributeIndex);
-			I_ASSERT(attrubiteInfoPtr != NULL);
-			objectPtr = attrubiteInfoPtr->objectPtr.GetPtr();
-			attributeId = attrubiteInfoPtr->attributeId;
-			attributeTypeId = objectPtr->GetFactoryId();
-		}
-		else{
-			AttributeInfo* attrubiteInfoPtr = m_attributesList.GetAt(attributeIndex);
-			I_ASSERT(attrubiteInfoPtr != NULL);
-			objectPtr = attrubiteInfoPtr->objectPtr.GetPtr();
-		}
+		std::string attributeTypeId;
 
 		iser::CArchiveTag attributeTypeIdTag("AttributeTypeId", "ID of the attribute object");
 		retVal = retVal && archive.BeginTag(attributeTypeIdTag);
@@ -134,24 +134,77 @@ bool CAttributedObject::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(attributeIdTag);
 
 		if (retVal){
-			if (!archive.IsStoring()){
-				AttributeInfo* existingAttrPtr = GetAttributeInfo(attributeId);
-				if (existingAttrPtr != NULL && existingAttrPtr->objectPtr->GetFactoryId() == attributeTypeId){
-					existingAttrPtr->objectPtr->Serialize(archive);
-				}
-				else{
-					// try to serialize deprecated attribute:
-					istd::TDelPtr<iser::IObject> objectPtr(s_attributesFactory.CreateInstance(attributeTypeId));
+			AttributeInfo* existingAttrPtr = GetAttributeInfo(attributeId);
 
-					if (objectPtr.IsValid()){
-						retVal = retVal && objectPtr->Serialize(archive);
-					}
-				}
+			if (		existingAttrPtr != NULL &&
+						existingAttrPtr->objectPtr->GetFactoryId() == attributeTypeId &&
+						((existingAttrPtr->attributeFlags & iattr::IAttribute::AF_PERSISTENT) != 0)){
+				retVal = retVal && existingAttrPtr->objectPtr->Serialize(archive);
 			}
 			else{
-				retVal = retVal && objectPtr->Serialize(archive);
+				// try to serialize deprecated attribute:
+				istd::TDelPtr<iser::IObject> objectPtr(s_attributesFactory.CreateInstance(attributeTypeId));
+				if (objectPtr.IsValid()){
+					retVal = retVal && objectPtr->Serialize(archive);
+				}
 			}
 		}
+
+		retVal = retVal && archive.EndTag(attributeTag);
+	}
+
+	retVal = retVal && archive.EndTag(attributesTag);
+
+	return retVal;
+}
+
+
+bool CAttributedObject::WriteAttributes(
+			iser::IArchive& archive,
+			const iser::CArchiveTag& attributesTag,
+			const iser::CArchiveTag& attributeTag) const
+{
+
+	bool retVal = true;
+	int attributesCount = m_attributesList.GetCount();
+	int persistentAttributesCount = 0;
+
+	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
+		AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
+
+		bool isPersistent = ((attributeInfoPtr->attributeFlags & iattr::IAttribute::AF_PERSISTENT) != 0);
+		if (isPersistent){
+			++persistentAttributesCount;
+		}
+	}
+
+	retVal = retVal && archive.BeginMultiTag(attributesTag, attributeTag, persistentAttributesCount);
+
+	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
+		AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
+
+		bool isPersistent = ((attributeInfoPtr->attributeFlags & iattr::IAttribute::AF_PERSISTENT) != 0);
+		if (!isPersistent){
+			continue;
+		}
+
+		iser::IObject* objectPtr = attributeInfoPtr->objectPtr.GetPtr();
+		std::string attributeId = attributeInfoPtr->attributeId;
+		std::string attributeTypeId = objectPtr->GetFactoryId();
+
+		retVal = retVal && archive.BeginTag(attributeTag);
+
+		iser::CArchiveTag attributeTypeIdTag("AttributeTypeId", "ID of the attribute object");
+		retVal = retVal && archive.BeginTag(attributeTypeIdTag);
+		retVal = retVal && archive.Process(attributeTypeId);
+		retVal = retVal && archive.EndTag(attributeTypeIdTag);
+
+		iser::CArchiveTag attributeIdTag("AttributeId", "Name of the attribute object");
+		retVal = retVal && archive.BeginTag(attributeIdTag);
+		retVal = retVal && archive.Process(attributeId);
+		retVal = retVal && archive.EndTag(attributeIdTag);
+
+		retVal = retVal && objectPtr->Serialize(archive);
 
 		retVal = retVal && archive.EndTag(attributeTag);
 	}
