@@ -4,6 +4,8 @@
 
 #include "iser/IObject.h"
 
+#include "iattr/iattr.h"
+
 
 namespace iattr
 {
