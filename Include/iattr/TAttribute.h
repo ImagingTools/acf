@@ -33,6 +33,7 @@ public:
 				iattr::IAttributesManager* attributeOwnerPtr,
 				const std::string& attributeName,
 				const std::string& attributeDescription,
+				int attributeFlags,
 				int changeFlags = 0,
 				const ValueType& defaultValue = ValueType());
 
@@ -76,9 +77,10 @@ TAttribute<Value>::TAttribute(
 				iattr::IAttributesManager* attributeOwnerPtr,
 				const std::string& attributeName,
 				const std::string& attributeDescription,
+				int attributeFlags,
 				int changeFlags,
 				const ValueType& defaultValue)
-	:BaseClass(attributeOwnerPtr, attributeName, attributeDescription, changeFlags),
+	:BaseClass(attributeOwnerPtr, attributeName, attributeDescription, attributeFlags, changeFlags),
 	m_value(defaultValue)
 {
 	if (!m_defaultAttributeValuePtr.IsValid()){
