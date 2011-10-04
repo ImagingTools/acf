@@ -8,6 +8,7 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
+		AdditionalOptions="/MP"
 		AdditionalIncludeDirectories="../../"
 		PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS"
 		StringPooling="true"
