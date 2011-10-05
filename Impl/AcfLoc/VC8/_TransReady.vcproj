@@ -22,7 +22,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			ConfigurationType="10"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="..\..\..\Config\VC8\Release.vsprops;..\..\..\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>

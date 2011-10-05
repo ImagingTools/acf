@@ -4,6 +4,7 @@
 	Version="8,00"
 	Name="imod"
 	ProjectGUID="{AA16B362-CE5A-48C6-9322-42620FE1006D}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -180,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiModelDispatcherBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiModelObserverBase.cpp"
 				>
 			</File>
@@ -206,6 +211,10 @@
 			</File>
 			<File
 				RelativePath="..\CMultiModelBridgeBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiModelDispatcherBase.h"
 				>
 			</File>
 			<File
@@ -242,10 +251,6 @@
 			</File>
 			<File
 				RelativePath="..\IUndoManager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TModelDispatcherWrap.h"
 				>
 			</File>
 			<File
