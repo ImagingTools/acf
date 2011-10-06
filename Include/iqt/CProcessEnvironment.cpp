@@ -26,12 +26,16 @@ public:
 
 
 // public methods
-	
+
 // reimplemented (isys::IProcessEnvironment)
 
 int CProcessEnvironment::GetMainThreadId() const
 {
+#if defined(Q_WS_X11)
+	return int(QThread::currentThreadId());
+#else
 	return *static_cast<int*>(QThread::currentThreadId());
+#endif
 }
 
 
