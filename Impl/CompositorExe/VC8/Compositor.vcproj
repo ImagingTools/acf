@@ -24,12 +24,26 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops;$(ACFDIR)\Config\VC8\Release.vsprops"
+			InheritedPropertySheets="..\..\..\Config\VC8\General.vsprops;..\..\..\Config\VC8\Release.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -37,26 +51,14 @@
 				InputDir="..\..\..\Bin\info"
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
+				Name="QT Moc Metafile"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="Arxc"
 				ConfigFile="../../../Config/Core.xpc"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -69,16 +71,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../..;../../../include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;"
+				AdditionalIncludeDirectories="../../../include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				RuntimeLibrary="2"
-				EnableEnhancedInstructionSet="2"
-				RuntimeTypeInfo="true"
-				WarningLevel="4"
-				DebugInformationFormat="0"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -93,8 +87,9 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="icmpstr.lib AcfStd.lib AcfQt.lib AcfLoc.lib qtmain.lib QtCore4.lib QtGui4.lib QtXml4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
+				SubSystem="2"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -121,12 +116,26 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="..\..\..\Bin\$(ConfigurationName)VC8"
-			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC8\General.vsprops;$(ACFDIR)\Config\VC8\Debug.vsprops"
+			InheritedPropertySheets="..\..\..\Config\VC8\General.vsprops;..\..\..\Config\VC8\Debug.vsprops"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="QT Resources"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="QT Designer Form"
+			/>
+			<Tool
+				Name="FileConvertCopy"
+				RegistryFile="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+				ConfigFile="..\..\..\Config\BaseOnly.xpc"
+				OutputDir="$(InputDir)\..\Generated"
 			/>
 			<Tool
 				Name="DeployCopy"
@@ -134,28 +143,16 @@
 				InputDir="..\..\..\Bin\info"
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
+				Name="QT Moc Metafile"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-				RegistryFile="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
-				ConfigFile="..\..\..\Config\BaseOnly.xpc"
-				OutputDir="$(InputDir)\..\Generated"
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="Arxc"
 				AdditionalOptions=""
 				ConfigFile="../../../Config/Core.xpc"
 				Verbose="true"
-			/>
-			<Tool
-				Name="QT Designer Form"
-			/>
-			<Tool
-				Name="QT Resources"
-			/>
-			<Tool
-				Name="QT Moc Metafile"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -168,16 +165,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../..;../../../include;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;"
+				AdditionalIncludeDirectories="../../../include;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include\QtScript&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;"
 				PreprocessorDefinitions="UNICODE;WIN32;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_SQL_LIB;QT_OPENGL_LIB;QT_NETWORK_LIB"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
-				BrowseInformation="1"
-				WarningLevel="4"
-				DebugInformationFormat="3"
-				CompileAs="0"
-				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -192,7 +181,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="icmpstr.lib AcfStd.lib AcfQt.lib AcfLoc.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtXmld4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\Lib\$(ConfigurationName)VC8&quot;;&quot;$(QScintilla)\Lib\$(ConfigurationName)VC8&quot;"
 				AssemblyLinkResource="$(IntDir)$(ProjectName).res"
 			/>
 			<Tool
@@ -270,22 +259,6 @@
 			<File
 				RelativePath="..\VC\Compositor.rc.xtracf"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="FileConvertCopy"
-						RegistryFile="..\..\..\Partitura\AcfSlnVoce.arp\FileSubstitCopyApp.arx"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="FileConvertCopy"
-						RegistryFile="..\..\..\Partitura\AcfSlnVoce.arp\FileSubstitCopyApp.arx"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\VC\Logo.ico"

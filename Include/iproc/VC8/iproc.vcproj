@@ -48,7 +48,6 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -121,7 +120,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../;&quot;$(ACFDIR)/Include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
