@@ -4,5 +4,5 @@ TARGET = AcfLoc
 
 HEADERS =
 SOURCES =
-TRANSLATIONS += ../Translations/*.ts
+TRANSLATIONS += ../*.ts
 RESOURCES += ../*.qrc

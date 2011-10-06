@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1945
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="10">
@@ -252,7 +263,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               DialogIconPath
@@ -326,44 +337,6 @@
               </IsEnabled>
               <Value>
                 Settings
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ModelEditor
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SettingsGui
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ModelObserver
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                SettingsGui
               </Value>
             </Data>
           </AttributeInfo>

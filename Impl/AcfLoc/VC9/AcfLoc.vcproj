@@ -30,28 +30,39 @@
 				CommandLine=""
 			/>
 			<Tool
-				Name="QT Moc Metafile"
+				Name="VCCustomBuildTool"
+				Description="Qt translations will be generated..."
+				CommandLine="$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_de.ts&quot; -qm ..\Generated\qt_de.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_ru.ts&quot; -qm ..\Generated\qt_ru.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_pl.ts&quot; -qm ..\Generated\qt_pl.qm&#x0D;&#x0A;"
+				AdditionalDependencies="$(QTDIR)/translations/qt_de.ts;$(QTDIR)/translations/qt_ru.ts;$(QTDIR)/translations/qt_pl.ts;$(QTDIR)/bin/lrelease.exe"
+				Outputs="../Generated/qt_de.qm;../Generated/qt_ru.qm;../Generated/qt_pl.qm"
+				ExecutionBucket="2"
 			/>
 			<Tool
 				Name="Qt Linguist"
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
 				Name="QT Resources"
+				ExecutionBucket="4"
 			/>
 			<Tool
 				Name="QT Designer Form"
+				ExecutionBucket="5"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+				ExecutionBucket="6"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
+				ExecutionBucket="7"
 			/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"
+				ExecutionBucket="8"
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				ExecutionBucket="9"
 				PreprocessorDefinitions="NDEBUG"
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
@@ -61,6 +72,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				ExecutionBucket="10"
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
@@ -75,34 +87,42 @@
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
+				ExecutionBucket="11"
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				ExecutionBucket="12"
 				PreprocessorDefinitions="NDEBUG"
 				Culture="1031"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
+				ExecutionBucket="13"
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				ExecutionBucket="14"
 				LinkLibraryDependencies="true"
 				OutputFile="$(OutDir)/$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
+				ExecutionBucket="15"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
+				ExecutionBucket="16"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
+				ExecutionBucket="17"
 			/>
 			<Tool
 				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				ExecutionBucket="19"
 			/>
 		</Configuration>
 		<Configuration
@@ -116,28 +136,39 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
+				Name="VCCustomBuildTool"
+				Description="Qt translations will be generated..."
+				CommandLine="$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_de.ts&quot; -qm ..\Generated\qt_de.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_ru.ts&quot; -qm ..\Generated\qt_ru.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_pl.ts&quot; -qm ..\Generated\qt_pl.qm&#x0D;&#x0A;"
+				AdditionalDependencies="$(QTDIR)/translations/qt_de.ts;$(QTDIR)/translations/qt_ru.ts;$(QTDIR)/translations/qt_pl.ts;$(QTDIR)/bin/lrelease.exe"
+				Outputs="../Generated/qt_de.qm;../Generated/qt_ru.qm;../Generated/qt_pl.qm"
+				ExecutionBucket="2"
 			/>
 			<Tool
 				Name="Qt Linguist"
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
 				Name="QT Resources"
+				ExecutionBucket="4"
 			/>
 			<Tool
 				Name="QT Designer Form"
+				ExecutionBucket="5"
+			/>
+			<Tool
+				Name="QT Moc Metafile"
+				ExecutionBucket="6"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
+				ExecutionBucket="7"
 			/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"
+				ExecutionBucket="8"
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				ExecutionBucket="9"
 				PreprocessorDefinitions="_DEBUG"
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
@@ -147,6 +178,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				ExecutionBucket="10"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
@@ -161,34 +193,42 @@
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
+				ExecutionBucket="11"
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				ExecutionBucket="12"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1031"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
+				ExecutionBucket="13"
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				ExecutionBucket="14"
 				LinkLibraryDependencies="true"
 				OutputFile="$(OutDir)/$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
+				ExecutionBucket="15"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
+				ExecutionBucket="16"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
+				ExecutionBucket="17"
 			/>
 			<Tool
 				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				ExecutionBucket="19"
 			/>
 		</Configuration>
 	</Configurations>
@@ -208,6 +248,42 @@
 			>
 			<File
 				RelativePath="..\AcfLoc.qrc"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="QT Resources"
+						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\Generated\Acf_en_US.qm;..\Generated\Acf_de_DE.qm;..\Generated\Acf_ru_RU.qm;..\Generated\Acf_pl_PL.qm;..\Generated\qt_de.qm;..\Generated\qt_ru.qm;..\Generated\qt_pl.qm"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="QT Resources"
+						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\Generated\Acf_en_US.qm;..\Generated\Acf_de_DE.qm;..\Generated\Acf_ru_RU.qm;..\Generated\Acf_pl_PL.qm;..\Generated\qt_de.qm;..\Generated\qt_ru.qm;..\Generated\qt_pl.qm"
+					/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="Translations"
+			>
+			<File
+				RelativePath="..\Acf_de_DE.ts"
+				>
+			</File>
+			<File
+				RelativePath="..\Acf_en_US.ts"
+				>
+			</File>
+			<File
+				RelativePath="..\Acf_pl_PL.ts"
+				>
+			</File>
+			<File
+				RelativePath="..\Acf_ru_RU.ts"
 				>
 			</File>
 		</Filter>

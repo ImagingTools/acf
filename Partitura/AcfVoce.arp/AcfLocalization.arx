@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          1945
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="2">
@@ -155,21 +166,24 @@
               icomp::TMultiAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
-              
+              LanguageIds
             </ExportId>
             <Data>
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="3">
+              <Values count="4">
                 <Value>
-                  de
+                  en_US
                 </Value>
                 <Value>
-                  ru
+                  de_DE
                 </Value>
                 <Value>
-                  pl
+                  ru_RU
+                </Value>
+                <Value>
+                  pl_PL
                 </Value>
               </Values>
             </Data>

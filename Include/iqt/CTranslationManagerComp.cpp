@@ -40,7 +40,7 @@ void CTranslationManagerComp::OnComponentCreated()
 		QString translationsPath = iqt::GetQString(*m_translationFilePathAttrPtr);
 		QString translationFilePrefix = iqt::GetQString(*m_translationFilePrefixAttrPtr);
 
-		for(int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
+		for (int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
 			QString languageId = iqt::GetQString(m_languagesAttrPtr[translatorIndex]);
 
 			QString translatorFile = translationsPath + QString("/") + translationFilePrefix + QString("_") + languageId;
