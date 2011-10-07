@@ -1,5 +1,5 @@
-#ifndef iattr_TMultiAttribute_included
-#define iattr_TMultiAttribute_included
+#ifndef iprop_TMultiProperty_included
+#define iprop_TMultiProperty_included
 
 
 // STL includes
@@ -13,10 +13,10 @@
 #include "iser/IObject.h"
 #include "iser/CArchiveTag.h"
 
-#include "iattr/CAttributeBase.h"
+#include "iprop/CPropertyBase.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
@@ -25,11 +25,11 @@ namespace iattr
 	\internal
 */
 template <typename Value>
-class TMultiAttribute: public iattr::CAttributeBase
+class TMultiProperty: public iprop::CPropertyBase
 {
 public:
 	typedef Value ValueType;
-	typedef iattr::CAttributeBase BaseClass;
+	typedef iprop::CPropertyBase BaseClass;
 	typedef std::vector<ValueType> ValueList;
 	typedef typename ValueList::iterator iterator;
 	typedef typename ValueList::const_iterator const_iterator;
@@ -37,7 +37,7 @@ public:
 	/**
 		Default constructor.
 	*/
-	TMultiAttribute();
+	TMultiProperty();
 
 	/**
 		Constructor.
@@ -48,8 +48,8 @@ public:
 		\param	elementsCount	Number of elements stored at \c valuesPtr.
 		\param	valuesPtr		Pointer to array of elements.
 	*/
-	TMultiAttribute(
-				iattr::IAttributesManager* attributeOwnerPtr,
+	TMultiProperty(
+				iprop::IPropertiesManager* attributeOwnerPtr,
 				const std::string& attributeId,
 				const std::string& attributeDescription,
 				int attributeFlags,
@@ -121,14 +121,14 @@ private:
 // public methods
 
 template <typename Value>
-TMultiAttribute<Value>::TMultiAttribute()
+TMultiProperty<Value>::TMultiProperty()
 {
 }
 
 
 template <typename Value>
-TMultiAttribute<Value>::TMultiAttribute(
-				iattr::IAttributesManager* attributeOwnerPtr,
+TMultiProperty<Value>::TMultiProperty(
+				iprop::IPropertiesManager* attributeOwnerPtr,
 				const std::string& attributeId,
 				const std::string& attributeDescription,
 				int attributeFlags,
@@ -144,7 +144,7 @@ TMultiAttribute<Value>::TMultiAttribute(
 
 
 template <typename Value>
-void TMultiAttribute<Value>::SetValues(const ValueList& valueList)
+void TMultiProperty<Value>::SetValues(const ValueList& valueList)
 {
 	SetValues<ValueList>(valueList.begin(), valueList.end());
 }
@@ -152,7 +152,7 @@ void TMultiAttribute<Value>::SetValues(const ValueList& valueList)
 
 template <typename Value>
 template <class ContainerImpl>
-void TMultiAttribute<Value>::SetValues(typename ContainerImpl::const_iterator beginIter, typename ContainerImpl::const_iterator endIter)
+void TMultiProperty<Value>::SetValues(typename ContainerImpl::const_iterator beginIter, typename ContainerImpl::const_iterator endIter)
 {
 	istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
 
@@ -167,21 +167,21 @@ void TMultiAttribute<Value>::SetValues(typename ContainerImpl::const_iterator be
 
 
 template <typename Value>
-const typename TMultiAttribute<Value>::ValueList& TMultiAttribute<Value>::GetValues() const
+const typename TMultiProperty<Value>::ValueList& TMultiProperty<Value>::GetValues() const
 {
 	return m_values;
 }
 
 
 template <typename Value>
-int TMultiAttribute<Value>::GetValuesCount() const
+int TMultiProperty<Value>::GetValuesCount() const
 {
 	return int(m_values.size());
 }
 
 
 template <typename Value>
-Value TMultiAttribute<Value>::GetValueAt(int index) const
+Value TMultiProperty<Value>::GetValueAt(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetValuesCount());
@@ -191,7 +191,7 @@ Value TMultiAttribute<Value>::GetValueAt(int index) const
 
 
 template <typename Value>
-void TMultiAttribute<Value>::SetValueAt(int index, const Value& value)
+void TMultiProperty<Value>::SetValueAt(int index, const Value& value)
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetValuesCount());
@@ -205,14 +205,14 @@ void TMultiAttribute<Value>::SetValueAt(int index, const Value& value)
 
 
 template <typename Value>
-void TMultiAttribute<Value>::InsertValue(const Value& value)
+void TMultiProperty<Value>::InsertValue(const Value& value)
 {
 	m_values.push_back(value);
 }
 
 
 template <typename Value>
-void TMultiAttribute<Value>::ResetValues()
+void TMultiProperty<Value>::ResetValues()
 {
 	istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
 	
@@ -223,28 +223,28 @@ void TMultiAttribute<Value>::ResetValues()
 // STL compatibility
 
 template <typename Value>
-typename TMultiAttribute<Value>::iterator TMultiAttribute<Value>::begin()
+typename TMultiProperty<Value>::iterator TMultiProperty<Value>::begin()
 {
 	return m_values.begin();
 }
 
 
 template <typename Value>
-typename TMultiAttribute<Value>::const_iterator TMultiAttribute<Value>::begin() const
+typename TMultiProperty<Value>::const_iterator TMultiProperty<Value>::begin() const
 {
 	return m_values.begin();
 }
 
 
 template <typename Value>
-typename TMultiAttribute<Value>::iterator TMultiAttribute<Value>::end()
+typename TMultiProperty<Value>::iterator TMultiProperty<Value>::end()
 {
 	return m_values.end();
 }
 	
 
 template <typename Value>
-typename TMultiAttribute<Value>::const_iterator TMultiAttribute<Value>::end() const
+typename TMultiProperty<Value>::const_iterator TMultiProperty<Value>::end() const
 {
 	return m_values.end();
 }
@@ -253,7 +253,7 @@ typename TMultiAttribute<Value>::const_iterator TMultiAttribute<Value>::end() co
 // reimplemented (iser::IObject)
 
 template <typename Value>
-const std::string& TMultiAttribute<Value>::GetFactoryId() const
+const std::string& TMultiProperty<Value>::GetFactoryId() const
 {
 	return s_typeName;
 }
@@ -262,7 +262,7 @@ const std::string& TMultiAttribute<Value>::GetFactoryId() const
 // reimplemented (ISerializable)
 
 template <typename Value>
-bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)
+bool TMultiProperty<Value>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
@@ -304,7 +304,7 @@ bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value>
-const std::string& TMultiAttribute<Value>::GetTypeName()
+const std::string& TMultiProperty<Value>::GetTypeName()
 {
 	return s_typeName;
 }
@@ -313,20 +313,20 @@ const std::string& TMultiAttribute<Value>::GetTypeName()
 // private static attributes
 
 template <typename Value>
-const std::string TMultiAttribute<Value>::s_typeName(istd::CClassInfo::GetName<TMultiAttribute<Value> >());
+const std::string TMultiProperty<Value>::s_typeName(istd::CClassInfo::GetName<TMultiProperty<Value> >());
 
 
 // typedefs
 
-typedef TMultiAttribute<double> CMultiDoubleAttribute;
-typedef TMultiAttribute<bool> CMultiBoolAttribute;
-typedef TMultiAttribute<int> CMultiIntAttribute;
-typedef TMultiAttribute<istd::CString> CMultiStringAttribute;
+typedef TMultiProperty<double> CMultiDoubleAttribute;
+typedef TMultiProperty<bool> CMultiBoolAttribute;
+typedef TMultiProperty<int> CMultiIntAttribute;
+typedef TMultiProperty<istd::CString> CMultiStringAttribute;
 
 
-} // namespace iattr
+} // namespace iprop
 
 
-#endif // !iattr_TMultiAttribute_included
+#endif // !iprop_TMultiProperty_included
 
 

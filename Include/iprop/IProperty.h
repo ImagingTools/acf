@@ -1,20 +1,20 @@
-#ifndef iattr_IAttribute_included
-#define iattr_IAttribute_included
+#ifndef iprop_IProperty_included
+#define iprop_IProperty_included
 
 
 #include "iser/IObject.h"
 
-#include "iattr/iattr.h"
+#include "iprop/iprop.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
 /**
 	Common interface for an attribute.
 */
-class IAttribute: virtual public iser::IObject
+class IProperty: virtual public iser::IObject
 {
 public:
 	enum AttributeFlags
@@ -32,9 +32,9 @@ public:
 };
 
 
-} // namespace iattr
+} // namespace iprop
 
 
-#endif // !iattr_IAttribute_included
+#endif // !iprop_IProperty_included
 
 

@@ -1,24 +1,24 @@
-#include "iattr/CAttributeBase.h"
+#include "iprop/CPropertyBase.h"
 
 
-#include "iattr/IAttributesManager.h"
+#include "iprop/IPropertiesManager.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
 // public methods
 
-CAttributeBase::CAttributeBase()
+CPropertyBase::CPropertyBase()
 	:m_attributeOwnerPtr(NULL),
 	m_changeFlags(0)
 {
 }
 
 
-CAttributeBase::CAttributeBase(
-				iattr::IAttributesManager* attributeOwnerPtr,
+CPropertyBase::CPropertyBase(
+				iprop::IPropertiesManager* attributeOwnerPtr,
 				const std::string& attributeId,
 				const std::string& attributeDescription,
 				int attributeFlags,
@@ -32,14 +32,14 @@ CAttributeBase::CAttributeBase(
 }
 
 
-// reimplemented (iattr::IAttribute)
+// reimplemented (iprop::IProperty)
 
-const iser::IObject* CAttributeBase::GetDefaultAttributeValue() const
+const iser::IObject* CPropertyBase::GetDefaultAttributeValue() const
 {
 	return NULL;
 }
 
 
-} // namespace iattr
+} // namespace iprop
 
 

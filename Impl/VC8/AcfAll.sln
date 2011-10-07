@@ -356,12 +356,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcfLoc", "..\AcfLoc\VC8\Acf
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iattr", "..\..\Include\iattr\VC8\iattr.vcproj", "{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\CompositorExe\VC8\Compositor.vcproj", "{00BD2AB5-993C-4B0D-B117-D98F7307E947}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
@@ -373,6 +367,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\Compositor
 		{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4} = {B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017} = {BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}
 		{AA94C676-48A9-4FCF-BC0F-96B0E910F463} = {AA94C676-48A9-4FCF-BC0F-96B0E910F463}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iprop", "..\..\Include\iprop\VC8\iprop.vcproj", "{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
 Global
@@ -521,14 +521,14 @@ Global
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}.Debug|Win32.Build.0 = Debug|Win32
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}.Release|Win32.ActiveCfg = Release|Win32
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}.Release|Win32.Build.0 = Release|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.Build.0 = Debug|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.ActiveCfg = Release|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.Build.0 = Release|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Debug|Win32.ActiveCfg = Debug|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Debug|Win32.Build.0 = Debug|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Release|Win32.ActiveCfg = Release|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Release|Win32.Build.0 = Release|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.Build.0 = Debug|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.ActiveCfg = Release|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

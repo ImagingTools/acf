@@ -1,5 +1,5 @@
-#ifndef iattr_CAttributedObject_included
-#define iattr_CAttributedObject_included
+#ifndef iprop_CPropertiesManager_included
+#define iprop_CPropertiesManager_included
 
 
 #include "istd/TComposedFactory.h"
@@ -10,19 +10,19 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "iattr/TAttribute.h"
-#include "iattr/TMultiAttribute.h"
-#include "iattr/IAttributesManager.h"
+#include "iprop/TProperty.h"
+#include "iprop/TMultiProperty.h"
+#include "iprop/IPropertiesManager.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
 /**
 	Basic implementation of an attribute container.
 */
-class CAttributedObject: virtual public iattr::IAttributesManager
+class CPropertiesManager: virtual public iprop::IPropertiesManager
 {
 public:
 	typedef istd::TComposedFactory<iser::IObject> BaseClass;
@@ -39,7 +39,7 @@ public:
 		istd::TOptDelPtr<iser::IObject> objectPtr; 
 	};
 
-	CAttributedObject();
+	CPropertiesManager();
 
 	/**
 		Get attribute info object for a given attribute ID.
@@ -52,7 +52,7 @@ public:
 	template <typename AttributeType>
 	static bool RegisterAttributeType();
 
-	// reimplemented (iattr::IAttributesManager)
+	// reimplemented (iprop::IPropertiesManager)
 	virtual int GetAttributesCount() const;
 	virtual iser::IObject* GetAttribute(int attributeIndex) const;
 	virtual std::string GetAttributeId(int attributeIndex) const;
@@ -90,15 +90,15 @@ private:
 // public static methods
 
 template <typename AttributeImpl>
-bool CAttributedObject::RegisterAttributeType()
+bool CPropertiesManager::RegisterAttributeType()
 {
 	return s_attributesFactory.RegisterFactory(new istd::TSingleFactory<iser::IObject, AttributeImpl>(AttributeImpl::GetTypeName()), true);
 }
 
 
-} // namespace iattr
+} // namespace iprop
 
 
-#endif // !iattr_CAttributedObject_included
+#endif // !iprop_CPropertiesManager_included
 
 

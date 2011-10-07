@@ -1,5 +1,5 @@
-#ifndef iattr_TAttribute_included
-#define iattr_TAttribute_included
+#ifndef iprop_TProperty_included
+#define iprop_TProperty_included
 
 
 #include "istd/TChangeNotifier.h"
@@ -9,10 +9,10 @@
 #include "iser/CArchiveTag.h"
 #include "iser/TCopySerializedWrap.h"
 
-#include "iattr/CAttributeBase.h"
+#include "iprop/CPropertyBase.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
@@ -20,17 +20,17 @@ namespace iattr
 	Template implementation of an atomic attribute.
 */
 template <typename Value>
-class TAttribute: public iattr::CAttributeBase
+class TProperty: public iprop::CPropertyBase
 {
 public:
 	typedef Value ValueType;
-	typedef TAttribute<Value> AttributeType;
-	typedef iattr::CAttributeBase BaseClass;
+	typedef TProperty<Value> AttributeType;
+	typedef iprop::CPropertyBase BaseClass;
 
-	TAttribute();
+	TProperty();
 
-	TAttribute(
-				iattr::IAttributesManager* attributeOwnerPtr,
+	TProperty(
+				iprop::IPropertiesManager* attributeOwnerPtr,
 				const std::string& attributeName,
 				const std::string& attributeDescription,
 				int attributeFlags,
@@ -66,15 +66,15 @@ private:
 // public methods
 
 template <typename Value>
-TAttribute<Value>::TAttribute()
+TProperty<Value>::TProperty()
 	:BaseClass()
 {
 }
 
 
 template <typename Value>
-TAttribute<Value>::TAttribute(
-				iattr::IAttributesManager* attributeOwnerPtr,
+TProperty<Value>::TProperty(
+				iprop::IPropertiesManager* attributeOwnerPtr,
 				const std::string& attributeName,
 				const std::string& attributeDescription,
 				int attributeFlags,
@@ -92,14 +92,14 @@ TAttribute<Value>::TAttribute(
 
 
 template <typename Value>
-const Value& TAttribute<Value>::GetValue() const
+const Value& TProperty<Value>::GetValue() const
 {
 	return m_value;
 }
 
 
 template <typename Value>
-void TAttribute<Value>::SetValue(const Value& value)
+void TProperty<Value>::SetValue(const Value& value)
 {
 	if (m_value != value){
 		istd::CChangeNotifier changePtr(m_attributeOwnerPtr, m_changeFlags);
@@ -110,7 +110,7 @@ void TAttribute<Value>::SetValue(const Value& value)
 
 
 template <typename Value>
-void  TAttribute<Value>::ResetValue()
+void  TProperty<Value>::ResetValue()
 {
 	if (m_defaultAttributeValuePtr.IsValid()){
 		SetValue(m_defaultAttributeValuePtr->GetValue());
@@ -121,7 +121,7 @@ void  TAttribute<Value>::ResetValue()
 // reimplemented (iser::IAttribute)
 
 template <typename Value>
-const iser::IObject* TAttribute<Value>::GetDefaultAttributePtr() const
+const iser::IObject* TProperty<Value>::GetDefaultAttributePtr() const
 {
 	return m_defaultAttributeValuePtr.GetPtr();
 }
@@ -130,7 +130,7 @@ const iser::IObject* TAttribute<Value>::GetDefaultAttributePtr() const
 // reimplemented (iser::IObject)
 
 template <typename Value>
-const std::string& TAttribute<Value>::GetFactoryId() const
+const std::string& TProperty<Value>::GetFactoryId() const
 {
 	return s_typeName;
 }
@@ -139,7 +139,7 @@ const std::string& TAttribute<Value>::GetFactoryId() const
 // reimplemented (ISerializable)
 
 template <typename Value>
-bool TAttribute<Value>::Serialize(iser::IArchive& archive)
+bool TProperty<Value>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
@@ -157,7 +157,7 @@ bool TAttribute<Value>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value>
-const std::string& TAttribute<Value>::GetTypeName()
+const std::string& TProperty<Value>::GetTypeName()
 {
 	return s_typeName;
 }
@@ -166,20 +166,20 @@ const std::string& TAttribute<Value>::GetTypeName()
 // private static attributes
 
 template <typename Value>
-const std::string TAttribute<Value>::s_typeName(istd::CClassInfo::GetName<TAttribute<Value> >());
+const std::string TProperty<Value>::s_typeName(istd::CClassInfo::GetName<TProperty<Value> >());
 
 
 // typedefs
 
-typedef TAttribute<double> CDoubleAttribute;
-typedef TAttribute<bool> CBoolAttribute;
-typedef TAttribute<int> CIntAttribute;
-typedef TAttribute<istd::CString> CStringAttribute;
+typedef TProperty<double> CDoubleAttribute;
+typedef TProperty<bool> CBoolAttribute;
+typedef TProperty<int> CIntAttribute;
+typedef TProperty<istd::CString> CStringAttribute;
 
 
-} // namespace iattr
+} // namespace iprop
 
 
-#endif // !iattr_TAttribute_included
+#endif // !iprop_TProperty_included
 
 

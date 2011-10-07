@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
-	Name="iattr"
+	Version="8,00"
+	Name="iprop"
 	ProjectGUID="{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
 	TargetFrameworkVersion="0"
 	>
@@ -17,7 +17,7 @@
 		<Configuration
 			Name="Release|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="..\..\..\Config\VC9\Static.vsprops;..\..\..\Config\VC9\Release.vsprops"
+			InheritedPropertySheets="..\..\..\Config\VC8\Static.vsprops;..\..\..\Config\VC8\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -90,7 +90,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			ConfigurationType="4"
-			InheritedPropertySheets="..\..\..\Config\VC9\Debug.vsprops;..\..\..\Config\VC9\Static.vsprops"
+			InheritedPropertySheets="..\..\..\Config\VC8\Debug.vsprops;..\..\..\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -161,11 +161,11 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CAttributeBase.cpp"
+				RelativePath="..\CPropertiesManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CAttributedObject.cpp"
+				RelativePath="..\CPropertyBase.cpp"
 				>
 			</File>
 		</Filter>
@@ -174,31 +174,31 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CAttributeBase.h"
+				RelativePath="..\CPropertiesManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CAttributedObject.h"
+				RelativePath="..\CPropertyBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iattr.h"
+				RelativePath="..\iprop.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IAttribute.h"
+				RelativePath="..\IPropertiesManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\IAttributesManager.h"
+				RelativePath="..\IProperty.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TAttribute.h"
+				RelativePath="..\TMultiProperty.h"
 				>
 			</File>
 			<File
-				RelativePath="..\TMultiAttribute.h"
+				RelativePath="..\TProperty.h"
 				>
 			</File>
 		</Filter>

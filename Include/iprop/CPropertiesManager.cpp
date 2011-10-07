@@ -1,28 +1,28 @@
-#include "iattr/CAttributedObject.h"
+#include "iprop/CPropertiesManager.h"
 
 
 // ACF includes
-#include "iattr/TAttribute.h"
-#include "iattr/TMultiAttribute.h"
+#include "iprop/TProperty.h"
+#include "iprop/TMultiProperty.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
 // public methods
 
-CAttributedObject::CAttributedObject()
+CPropertiesManager::CPropertiesManager()
 {
 }
 
 
-CAttributedObject::AttributeInfo* CAttributedObject::GetAttributeInfo(const std::string& attributeId) const
+CPropertiesManager::AttributeInfo* CPropertiesManager::GetAttributeInfo(const std::string& attributeId) const
 {
 	int attributesCount = m_attributesList.GetCount();
 
 	for (int attributeIndex = 0; attributeIndex < attributesCount; attributeIndex++){
-		CAttributedObject::AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
+		CPropertiesManager::AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
 		I_ASSERT(attributeInfoPtr != NULL);
 
 		if (attributeInfoPtr->attributeId == attributeId){
@@ -34,15 +34,15 @@ CAttributedObject::AttributeInfo* CAttributedObject::GetAttributeInfo(const std:
 }
 
 
-// reimplemented (iattr::IAttributesManager)
+// reimplemented (iprop::IPropertiesManager)
 
-int CAttributedObject::GetAttributesCount() const
+int CPropertiesManager::GetAttributesCount() const
 {
 	return m_attributesList.GetCount();
 }
 
 
-iser::IObject* CAttributedObject::GetAttribute(int attributeIndex) const
+iser::IObject* CPropertiesManager::GetAttribute(int attributeIndex) const
 {
 	I_ASSERT(attributeIndex >= 0);
 	I_ASSERT(attributeIndex < m_attributesList.GetCount());
@@ -51,7 +51,7 @@ iser::IObject* CAttributedObject::GetAttribute(int attributeIndex) const
 }
 
 
-std::string CAttributedObject::GetAttributeId(int attributeIndex) const
+std::string CPropertiesManager::GetAttributeId(int attributeIndex) const
 {
 	I_ASSERT(attributeIndex >= 0);
 	I_ASSERT(attributeIndex < m_attributesList.GetCount());
@@ -60,7 +60,7 @@ std::string CAttributedObject::GetAttributeId(int attributeIndex) const
 }
 
 
-istd::CString CAttributedObject::GetAttributeDescription(int attributeIndex) const
+istd::CString CPropertiesManager::GetAttributeDescription(int attributeIndex) const
 {
 	I_ASSERT(attributeIndex >= 0);
 	I_ASSERT(attributeIndex < m_attributesList.GetCount());
@@ -69,7 +69,7 @@ istd::CString CAttributedObject::GetAttributeDescription(int attributeIndex) con
 }
 
 
-void CAttributedObject::InsertAttribute(
+void CPropertiesManager::InsertAttribute(
 			iser::IObject* objectPtr,
 			const std::string& attributeId,
 			const std::string& attributeDescription,
@@ -93,7 +93,7 @@ void CAttributedObject::InsertAttribute(
 
 // reimplemented (ISerializable)
 
-bool CAttributedObject::Serialize(iser::IArchive& archive)
+bool CPropertiesManager::Serialize(iser::IArchive& archive)
 {
 	iser::CArchiveTag attributesTag("Attributes", "Liste of object attributes");
 	iser::CArchiveTag attributeTag("Attribute", "Object attribute");
@@ -106,7 +106,7 @@ bool CAttributedObject::Serialize(iser::IArchive& archive)
 }
 
 
-bool CAttributedObject::ReadAttributes(
+bool CPropertiesManager::ReadAttributes(
 			iser::IArchive& archive,
 			const iser::CArchiveTag& attributesTag,
 			const iser::CArchiveTag& attributeTag)
@@ -138,7 +138,7 @@ bool CAttributedObject::ReadAttributes(
 
 			if (		existingAttrPtr != NULL &&
 						existingAttrPtr->objectPtr->GetFactoryId() == attributeTypeId &&
-						((existingAttrPtr->attributeFlags & iattr::IAttribute::AF_PERSISTENT) != 0)){
+						((existingAttrPtr->attributeFlags & iprop::IProperty::AF_PERSISTENT) != 0)){
 				retVal = retVal && existingAttrPtr->objectPtr->Serialize(archive);
 			}
 			else{
@@ -159,7 +159,7 @@ bool CAttributedObject::ReadAttributes(
 }
 
 
-bool CAttributedObject::WriteAttributes(
+bool CPropertiesManager::WriteAttributes(
 			iser::IArchive& archive,
 			const iser::CArchiveTag& attributesTag,
 			const iser::CArchiveTag& attributeTag) const
@@ -172,7 +172,7 @@ bool CAttributedObject::WriteAttributes(
 	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
 		AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
 
-		bool isPersistent = ((attributeInfoPtr->attributeFlags & iattr::IAttribute::AF_PERSISTENT) != 0);
+		bool isPersistent = ((attributeInfoPtr->attributeFlags & iprop::IProperty::AF_PERSISTENT) != 0);
 		if (isPersistent){
 			++persistentAttributesCount;
 		}
@@ -183,7 +183,7 @@ bool CAttributedObject::WriteAttributes(
 	for (int attributeIndex = 0; attributeIndex < attributesCount; ++attributeIndex){
 		AttributeInfo* attributeInfoPtr = m_attributesList.GetAt(attributeIndex);
 
-		bool isPersistent = ((attributeInfoPtr->attributeFlags & iattr::IAttribute::AF_PERSISTENT) != 0);
+		bool isPersistent = ((attributeInfoPtr->attributeFlags & iprop::IProperty::AF_PERSISTENT) != 0);
 		if (!isPersistent){
 			continue;
 		}
@@ -217,25 +217,25 @@ bool CAttributedObject::WriteAttributes(
 
 // private static members
 
-CAttributedObject::AttributesFactory CAttributedObject::s_attributesFactory;
+CPropertiesManager::AttributesFactory CPropertiesManager::s_attributesFactory;
 
 static struct DefaultAttributeTypesRegistrator
 {
 	DefaultAttributeTypesRegistrator()
 	{
-		CAttributedObject::RegisterAttributeType<iattr::CIntAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CBoolAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CDoubleAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CStringAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CMultiIntAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CMultiBoolAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CMultiDoubleAttribute>();
-		CAttributedObject::RegisterAttributeType<iattr::CMultiStringAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CIntAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CBoolAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CDoubleAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CStringAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CMultiIntAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CMultiBoolAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CMultiDoubleAttribute>();
+		CPropertiesManager::RegisterAttributeType<iprop::CMultiStringAttribute>();
 	}
 
 } s_defaultAttributeTypesRegistrator;
 
 
-} // namespace iattr
+} // namespace iprop
 
 

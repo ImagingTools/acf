@@ -197,8 +197,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtViewPck", "..\QtViewPck\V
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcfLoc", "..\AcfLoc\VC9\AcfLoc.vcproj", "{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iattr", "..\..\Include\iattr\VC9\iattr.vcproj", "{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\CompositorExe\VC9\Compositor.vcproj", "{00BD2AB5-993C-4B0D-B117-D98F7307E947}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E089473F-CFF6-478B-99A3-6C9109CFC9A3} = {E089473F-CFF6-478B-99A3-6C9109CFC9A3}
@@ -210,6 +208,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compositor", "..\Compositor
 		{3F9592CC-7F0C-454B-AD1B-25165AD40022} = {3F9592CC-7F0C-454B-AD1B-25165AD40022}
 		{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4} = {B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iprop", "..\..\Include\iprop\VC9\iprop.vcproj", "{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -357,14 +357,14 @@ Global
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}.Debug|Win32.Build.0 = Debug|Win32
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}.Release|Win32.ActiveCfg = Release|Win32
 		{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}.Release|Win32.Build.0 = Release|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.Build.0 = Debug|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.ActiveCfg = Release|Win32
-		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.Build.0 = Release|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Debug|Win32.ActiveCfg = Debug|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Debug|Win32.Build.0 = Debug|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Release|Win32.ActiveCfg = Release|Win32
 		{00BD2AB5-993C-4B0D-B117-D98F7307E947}.Release|Win32.Build.0 = Release|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Debug|Win32.Build.0 = Debug|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.ActiveCfg = Release|Win32
+		{5D64FA09-A869-4FEC-B3ED-1C91C6B3EA04}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

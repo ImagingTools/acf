@@ -1,13 +1,13 @@
-#ifndef iattr_IAttributesManager_included
-#define iattr_IAttributesManager_included
+#ifndef iprop_IPropertiesManager_included
+#define iprop_IPropertiesManager_included
 
 
 #include "iser/IObject.h"
 
-#include "iattr/iattr.h"
+#include "iprop/iprop.h"
 
 
-namespace iattr
+namespace iprop
 {
 
 
@@ -17,7 +17,7 @@ class IAttribute;
 /**
 	Interface for an attribute container
 */
-class IAttributesManager: virtual public iser::ISerializable
+class IPropertiesManager: virtual public iser::ISerializable
 {
 public:
 	/**
@@ -59,9 +59,9 @@ public:
 };
 
 
-} // namespace iattr
+} // namespace iprop
 
 
-#endif // !iattr_IAttributesManager_included
+#endif // !iprop_IPropertiesManager_included
 
 
