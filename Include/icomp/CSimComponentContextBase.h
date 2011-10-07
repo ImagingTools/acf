@@ -83,7 +83,7 @@ public:
 
 	/**
 		Insert new attribute to multi attributes.
-		\param	attributeId		ID of attribute (multipropibute).
+		\param	attributeId		ID of attribute (multi attribute).
 		\param	attribute		single attribute value.
 	*/
 	template <class Attribute>
