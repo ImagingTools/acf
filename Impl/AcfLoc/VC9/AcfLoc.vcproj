@@ -30,14 +30,6 @@
 				CommandLine=""
 			/>
 			<Tool
-				Name="VCCustomBuildTool"
-				Description="Qt translations will be generated..."
-				CommandLine="$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_de.ts&quot; -qm ..\Generated\qt_de.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_ru.ts&quot; -qm ..\Generated\qt_ru.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_pl.ts&quot; -qm ..\Generated\qt_pl.qm&#x0D;&#x0A;"
-				AdditionalDependencies="$(QTDIR)/translations/qt_de.ts;$(QTDIR)/translations/qt_ru.ts;$(QTDIR)/translations/qt_pl.ts;$(QTDIR)/bin/lrelease.exe"
-				Outputs="../Generated/qt_de.qm;../Generated/qt_ru.qm;../Generated/qt_pl.qm"
-				ExecutionBucket="2"
-			/>
-			<Tool
 				Name="Qt Linguist"
 			/>
 			<Tool
@@ -134,14 +126,6 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-				Description="Qt translations will be generated..."
-				CommandLine="$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_de.ts&quot; -qm ..\Generated\qt_de.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_ru.ts&quot; -qm ..\Generated\qt_ru.qm&#x0D;&#x0A;$(QTDIR)\bin\lrelease &quot;$(QTDIR)\translations\qt_pl.ts&quot; -qm ..\Generated\qt_pl.qm&#x0D;&#x0A;"
-				AdditionalDependencies="$(QTDIR)/translations/qt_de.ts;$(QTDIR)/translations/qt_ru.ts;$(QTDIR)/translations/qt_pl.ts;$(QTDIR)/bin/lrelease.exe"
-				Outputs="../Generated/qt_de.qm;../Generated/qt_ru.qm;../Generated/qt_pl.qm"
-				ExecutionBucket="2"
 			/>
 			<Tool
 				Name="Qt Linguist"
@@ -284,6 +268,18 @@
 			</File>
 			<File
 				RelativePath="..\Acf_ru_RU.ts"
+				>
+			</File>
+			<File
+				RelativePath="$(QTDIR)\translations\qt_de.ts"
+				>
+			</File>
+			<File
+				RelativePath="$(QTDIR)\translations\qt_pl.ts"
+				>
+			</File>
+			<File
+				RelativePath="$(QTDIR)\translations\qt_ru.ts"
 				>
 			</File>
 		</Filter>

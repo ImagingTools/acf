@@ -44,8 +44,8 @@
 		<CustomBuildRule
 			Name="Qt Linguist"
 			DisplayName="QT Linguist"
-			CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputPath)&quot; -qm &quot;$(InputDir)\Generated\$(InputName).qm&quot;"
-			Outputs="&quot;$(InputDir)\Generated\$(InputName).qm&quot;"
+			CommandLine="&quot;$(QTDIR)\bin\lrelease.exe&quot; &quot;$(InputPath)&quot; -qm &quot;$(ProjectDir)\..\Generated\$(InputName).qm&quot;"
+			Outputs="&quot;$(ProjectDir)\..\Generated\$(InputName).qm&quot;"
 			AdditionalDependencies="$(QTDIR)\bin\lrelease.exe"
 			FileExtensions="*.ts"
 			ExecutionDescription="Creating translation of $(InputFileName)..."
