@@ -191,7 +191,7 @@ bool TFileSerializerComp<ReadArchive, WriteArchive>::IsOperationSupported(
 
 		istd::CStringList fileExtensions;
 		if (GetFileExtensions(fileExtensions)){
-			int extensionsCount = fileExtensions.size();
+			int extensionsCount = int(fileExtensions.size());
 			for (int i = 0; i < extensionsCount; ++i){
 				const istd::CString& extension = fileExtensions[i];
 				if (!filePathPtr->IsEmpty() && filePathPtr->substr(filePathPtr->length() - extension.length() - 1) == istd::CString(".") + extension.ToLower()){

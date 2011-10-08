@@ -85,6 +85,10 @@ void CTextFileLogComp::OpenFileStream()
 			fileMode = std::wofstream::out;
 		}
 
+		if (m_fileNameCompPtr->GetPath().IsEmpty()){
+			return;
+		}
+
 #ifdef _MSC_VER
 		m_outputFileStream.open(m_fileNameCompPtr->GetPath().c_str(), fileMode);
 #else
