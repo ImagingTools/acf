@@ -181,7 +181,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 	I_DWORD versionNumber = 0xffffffff;
-	versionInfo.GetVersionNumber(iser::IVersionInfo::FrameworkVersionId, versionNumber);
+	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber);
 
 	if (versionNumber >= 1052){
 		retVal = retVal && archive.BeginTag(flagsTag);

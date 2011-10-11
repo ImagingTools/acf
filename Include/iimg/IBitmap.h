@@ -26,11 +26,6 @@ public:
 		PF_UNKNOWN = 0,
 
 		/**
-			User defined format
-		*/
-		PF_USER,
-
-		/**
 			Monochrome bitmap
 		*/
 		PF_MONO,
@@ -56,7 +51,11 @@ public:
 		/**
 			32-bit grayscale bitmap.
 		*/
-		PF_GRAY32
+		PF_GRAY32,
+		/**
+			First user defined pixel format.
+		*/
+		PF_USER = 256
 	};
 
 
@@ -64,14 +63,14 @@ public:
 		Get the bitmap's pixel format.
 		\sa PixelFormat
 	*/
-	virtual PixelFormat GetPixelFormat() const = 0;
+	virtual int GetPixelFormat() const = 0;
 
 	/**
 		Create bitmap with specified size and format.
 		\param	pixelFormat		bitmap format. \sa PixelFormat
 		\param	size			bitmap size.
 	*/
-	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size) = 0;
+	virtual bool CreateBitmap(int pixelFormat, const istd::CIndex2d& size) = 0;
 
 	/**
 		Create bitmap with specified size and format using external image data buffer.
@@ -81,7 +80,7 @@ public:
 		\param	releaseFlag		if its true, external buffer will be managed (removed) by this object.
 		\param	linesDifference	address difference between next and previos line. If it equals 0, the value will be taken from size and number of bits per pixel.
 	*/
-	virtual bool CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0) = 0;
+	virtual bool CreateBitmap(int pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0) = 0;
 
 	/**
 		Number of bytes per single line.
@@ -89,9 +88,14 @@ public:
 	virtual int GetLineBytesCount() const = 0;
 
 	/**
-		Get address difference between next and previos line.
+		Get address difference between next and previous line.
 	*/
 	virtual int GetLinesDifference() const = 0;
+
+	/**
+		Get address difference between next and previous pixel.
+	*/
+	virtual int GetPixelsDifference() const = 0;
 
 	/**
 		Get number of bits per single pixel component.

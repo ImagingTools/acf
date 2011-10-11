@@ -24,35 +24,35 @@ CGeneralBitmap::CGeneralBitmap()
 
 // reimplemented (iimg::IBitmap)
 
-IBitmap::PixelFormat CGeneralBitmap::GetPixelFormat() const
+int CGeneralBitmap::GetPixelFormat() const
 {
 	return m_pixelFormat;
 }
 
 
-bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size)
+bool CGeneralBitmap::CreateBitmap(int pixelFormat, const istd::CIndex2d& size)
 {
 	switch(pixelFormat){
-		case PF_GRAY:
-			return CreateBitmap(size, 8, 1, PF_GRAY);
+	case PF_GRAY:
+		return CreateBitmap(size, 8, 1, pixelFormat);
 
-		case PF_RGB:
-		case PF_RGBA:
-			return CreateBitmap(size, 32, 4, pixelFormat);
+	case PF_RGB:
+	case PF_RGBA:
+		return CreateBitmap(size, 32, 4, pixelFormat);
 
-		case PF_GRAY16:
-			return CreateBitmap(size, 16, 1, PF_GRAY16);
+	case PF_GRAY16:
+		return CreateBitmap(size, 16, 1, pixelFormat);
 
-		case PF_GRAY32:
-			return CreateBitmap(size, 32, 1, PF_GRAY32);
+	case PF_GRAY32:
+		return CreateBitmap(size, 32, 1, pixelFormat);
 
-		default:
-			return false;
+	default:
+		return false;
 	}
 }
 
 
-bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference)
+bool CGeneralBitmap::CreateBitmap(int pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference)
 {
 	switch(pixelFormat){
 		case PF_GRAY:
@@ -77,6 +77,12 @@ bool CGeneralBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d&
 int CGeneralBitmap::GetLinesDifference() const
 {
 	return m_linesDifference;
+}
+
+
+int CGeneralBitmap::GetPixelsDifference() const
+{
+	return m_pixelBitsCount >> 3;
 }
 
 
@@ -169,7 +175,7 @@ bool CGeneralBitmap::CreateBitmap(
 			const istd::CIndex2d& size,
 			int pixelBitsCount,
 			int componentsCount,
-			PixelFormat pixelFormat)
+			int pixelFormat)
 {
 	if (		(size.GetX() < 0) ||
 				(size.GetY() < 0) ||
@@ -210,7 +216,7 @@ bool CGeneralBitmap::CreateBitmap(
 			int linesDifference,
 			int pixelBitsCount,
 			int componentsCount,
-			PixelFormat pixelFormat)
+			int pixelFormat)
 {
 	if (		(size.GetX() < 0) ||
 				(size.GetY() < 0) ||

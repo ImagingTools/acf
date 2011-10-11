@@ -61,7 +61,7 @@ public:
 	TArray(const TArray& array);
 
 	/**
-		Removes all elements and set all sizes to 1.
+		Removes all elements and set all sizes to 0.
 	*/
 	void Reset();
 

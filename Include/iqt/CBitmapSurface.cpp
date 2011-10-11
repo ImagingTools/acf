@@ -45,7 +45,7 @@ void CBitmapSurface::CreateSurfaceFromBitmap()
 		return;
 	}
 
-	BaseClass2::Create(GetImageSize().GetX(), GetImageSize().GetY());
+	BaseClass2::CreateGrid2d(GetImageSize());
 
 	int componentBitsCount = GetComponentBitsCount();
 	int pixelBitsCount = GetPixelBitsCount();

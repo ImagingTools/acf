@@ -34,7 +34,7 @@ public:
 		Get minimal needed version to correct storing of this data.
 		In implementation shold be calculated maximum version of this and composed component.
 	*/
-	virtual I_DWORD GetMinimalVersion(int versionId = IVersionInfo::UserVersionId) const;
+	virtual I_DWORD GetMinimalVersion(int versionId) const;
 };
 
 

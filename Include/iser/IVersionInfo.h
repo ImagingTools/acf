@@ -27,13 +27,12 @@ public:
 	/**
 		Type of version.
 		This is needed for the sake of supporting mutliply separated versions for separated modules.
-		Whole ACF framework lay under single versioning mechanism and has one version number identified by FrameworkVersionId type ID.
+		Whole ACF framework lay under single versioning mechanism and has one version number identified by AcfVersionId type ID.
 		User version type ID should be greater or equal UserVersionId value.
-		As a default version type ID for user applications UserVersionId should be used.
 	*/
 	enum VersionId
 	{
-		FrameworkVersionId,
+		AcfVersionId = 0,
 		UserVersionId = 1024
 	};
 

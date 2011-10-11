@@ -33,7 +33,7 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
-	virtual I_DWORD GetMinimalVersion(int versionId = iser::IVersionInfo::UserVersionId) const;
+	virtual I_DWORD GetMinimalVersion(int versionId) const;
 
 private:
 	I_MULTIFACT(iser::ISerializable, m_factoriesFact);

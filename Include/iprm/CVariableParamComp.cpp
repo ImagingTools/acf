@@ -105,7 +105,7 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 
 I_DWORD CVariableParamComp::GetMinimalVersion(int versionId) const
 {
-	I_DWORD retVal = (versionId == iser::IVersionInfo::FrameworkVersionId)? 1582: 0;
+	I_DWORD retVal = (versionId == iser::IVersionInfo::AcfVersionId)? 1582: 0;
 	if (m_paramPtr.IsValid()){
 		retVal = istd::Max(retVal, m_paramPtr->GetMinimalVersion(versionId));
 	}

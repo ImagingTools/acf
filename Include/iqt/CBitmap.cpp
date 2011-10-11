@@ -4,11 +4,9 @@
 // STL includes
 #include <cstring>
 
-
 // QT includes
 #include <QVector>
 #include <QColor>
-
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -74,13 +72,13 @@ bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, 
 
 // reimplemented (iimg::IBitmap)
 
-iimg::IBitmap::PixelFormat CBitmap::GetPixelFormat() const
+int CBitmap::GetPixelFormat() const
 {
 	return CalcFromQtFormat(m_image.format());
 }
 
 
-bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size)
+bool CBitmap::CreateBitmap(int pixelFormat, const istd::CIndex2d& size)
 {
 	istd::CChangeNotifier changePtr(this);
 
@@ -96,7 +94,7 @@ bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size)
 	return false;
 }
 
-bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference)
+bool CBitmap::CreateBitmap(int pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference)
 {
 	istd::CChangeNotifier changePtr(this);
 
@@ -119,6 +117,12 @@ bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, 
 int CBitmap::GetLinesDifference() const
 {
 	return m_image.scanLine(1) - m_image.scanLine(0);
+}
+
+
+int CBitmap::GetPixelsDifference() const
+{
+	return GetComponentsCount();
 }
 
 
@@ -232,7 +236,7 @@ istd::IChangeable* CBitmap::CloneMe() const
 
 // protected methods
 
-QImage::Format CBitmap::CalcQtFormat(PixelFormat pixelFormat) const
+QImage::Format CBitmap::CalcQtFormat(int pixelFormat) const
 {
 	switch (pixelFormat){
 	case PF_RGB:
@@ -250,7 +254,7 @@ QImage::Format CBitmap::CalcQtFormat(PixelFormat pixelFormat) const
 }
 
 
-iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat) const
+int CBitmap::CalcFromQtFormat(QImage::Format imageFormat) const
 {
 	switch (imageFormat){
 	case QImage::Format_RGB32:

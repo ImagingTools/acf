@@ -22,7 +22,7 @@ bool CVersionInfoComp::GetVersionNumber(int versionId, I_DWORD& result) const
 	else if (m_slaveVersionInfoCompPtr.IsValid()){
 		return m_slaveVersionInfoCompPtr->GetVersionNumber(versionId, result);
 	}
-	else if (versionId == iser::IVersionInfo::FrameworkVersionId){
+	else if (versionId == iser::IVersionInfo::AcfVersionId){
 		result = istd::RS_USE_VERSION;
 
 		return true;

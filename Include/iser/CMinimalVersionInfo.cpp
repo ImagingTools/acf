@@ -15,8 +15,7 @@ CMinimalVersionInfo::CMinimalVersionInfo(const ISerializable* serializablePtr, b
 	I_ASSERT(serializablePtr != NULL);
 
 	if (addStandardIds){
-		AddId(FrameworkVersionId, "ACF Framework");
-		AddId(UserVersionId, "User");
+		AddId(AcfVersionId, "ACF Framework");
 	}
 }
 
