@@ -60,10 +60,22 @@ public:
 	virtual Ids GetDocumentTypeIds() const = 0;
 
 	/**
+		Get human readable name of some document type ID.
+	*/
+	virtual istd::CString GetDocumentTypeName(const std::string& documentTypeId) const = 0;
+
+	/**
 		Return supported view type IDs for specified document type.
 		\param	documentTypeId	ID of document type.
 	*/
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const = 0;
+
+	/**
+		Get human readable name of some view type ID.
+	*/
+	virtual istd::CString GetViewTypeName(
+				const std::string& documentTypeId,
+				const std::string& viewTypeId) const = 0;
 
 	/**
 		Get list of supported document ID's can be created for specified file.

@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1860
+          1962
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          369
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -508,7 +497,7 @@
               DocumentTypeId
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               
@@ -664,7 +653,7 @@
               DocumentTypeId
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;std::string&gt;
             </Type>
             <ExportId>
               
@@ -929,7 +918,7 @@
                 true
               </IsEnabled>
               <Value>
-                Info
+                ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>

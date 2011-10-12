@@ -24,6 +24,7 @@ public:
 	I_BEGIN_COMPONENT(CSingleDocumentTemplateComp);
 		I_REGISTER_INTERFACE(idoc::IDocumentTemplate);
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of supported document", true, "Default");
+		I_ASSIGN(m_documentTypeNameAttrPtr, "DocumentTypeName", "Human readable name of document", false, "");
 		I_ASSIGN(m_defaultDirectoryAttrPtr, "DefaultDirectory", "Default file directory for open file dialog", true, ".");
 		I_ASSIGN(m_documentCompFact, "DocumentFactory", "Document factory", true, "DocumentFactory");
 		I_ASSIGN_TO(m_modelCompFact, m_documentCompFact, true);
@@ -58,7 +59,8 @@ protected:
 private:
 	I_ATTR(bool, m_isNewSupportedAttrPtr);
 	I_ATTR(bool, m_isEditSupportedAttrPtr);
-	I_ATTR(istd::CString, m_documentTypeIdAttrPtr);
+	I_ATTR(std::string, m_documentTypeIdAttrPtr);
+	I_ATTR(istd::CString, m_documentTypeNameAttrPtr);
 	I_ATTR(istd::CString, m_defaultDirectoryAttrPtr);
 	I_FACT(istd::IChangeable, m_documentCompFact);
 	I_FACT(imod::IModel, m_modelCompFact);

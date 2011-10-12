@@ -27,7 +27,11 @@ public:
 	// reimplemented (idoc::IDocumentTemplate)
 	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIds() const;
+	virtual istd::CString GetDocumentTypeName(const std::string& documentTypeId) const;
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
+	virtual istd::CString GetViewTypeName(
+				const std::string& documentTypeId,
+				const std::string& viewTypeId) const;
 	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
 	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId) const;
 	virtual istd::IChangeable* CreateDocument(const std::string& documentTypeId) const;

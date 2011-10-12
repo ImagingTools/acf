@@ -92,24 +92,26 @@ void CSplashScreenGuiComp::OnGuiRetranslate()
 	QString applicationType;
 	QString legalCopyright;
 
-	if (*m_showProductNameAttrPtr){
-		productName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME));
-	}
+	if (m_applicationInfoCompPtr.IsValid()){
+		if (*m_showProductNameAttrPtr){
+			productName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME));
+		}
 
-	if (*m_showApplicationNameAttrPtr){
-		applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
-	}
+		if (*m_showApplicationNameAttrPtr){
+			applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
+		}
 
-	if (*m_showApplicationSubnameAttrPtr){
-		applicationSubname = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME));
-	}
+		if (*m_showApplicationSubnameAttrPtr){
+			applicationSubname = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME));
+		}
 
-	if (*m_showProductTypeAttrPtr){
-		applicationType = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE));
-	}
+		if (*m_showProductTypeAttrPtr){
+			applicationType = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE));
+		}
 
-	if (*m_showLegalCopyrightAttrPtr){
-		legalCopyright = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT));
+		if (*m_showLegalCopyrightAttrPtr){
+			legalCopyright = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT));
+		}
 	}
 
 	ProductNameLabel->setText(productName);

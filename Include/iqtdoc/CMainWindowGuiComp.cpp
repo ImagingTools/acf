@@ -90,23 +90,25 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 					for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
 								iter != ids.end();
 								++iter){
-							const std::string& documentTypeId = *iter;
-							I_ASSERT(!documentTypeId.empty());
+						const std::string& documentTypeId = *iter;
+						I_ASSERT(!documentTypeId.empty());
 
-							RecentGroupCommandPtr& groupCommandPtr = m_recentFilesMap[documentTypeId];
+						RecentGroupCommandPtr& groupCommandPtr = m_recentFilesMap[documentTypeId];
 
-							QString recentListTitle = (ids.size() > 1)?
-										tr("Recent %1 Files").arg(documentTypeId.c_str()):
-										tr("Recent Files");
-							iqtgui::CHierarchicalCommand* fileListCommandPtr = new iqtgui::CHierarchicalCommand(iqt::GetCString(recentListTitle));
+						istd::CString documentTypeName = templatePtr->GetDocumentTypeName(documentTypeId);
 
-							if (fileListCommandPtr != NULL){
-								fileListCommandPtr->SetPriority(130);
+						QString recentListTitle = (ids.size() > 1)?
+									tr("Recent %1 Files").arg(iqt::GetQString(documentTypeName)):
+									tr("Recent Files");
+						iqtgui::CHierarchicalCommand* fileListCommandPtr = new iqtgui::CHierarchicalCommand(iqt::GetCString(recentListTitle));
 
-								groupCommandPtr.SetPtr(fileListCommandPtr);
+						if (fileListCommandPtr != NULL){
+							fileListCommandPtr->SetPriority(130);
 
-								m_fileCommand.InsertChild(fileListCommandPtr, false);
-							}
+							groupCommandPtr.SetPtr(fileListCommandPtr);
+
+							m_fileCommand.InsertChild(fileListCommandPtr, false);
+						}
 					}
 				}
 			}
@@ -258,10 +260,12 @@ void CMainWindowGuiComp::SetupNewCommand()
 		for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
 					iter != ids.end();
 					++iter){
-			if (templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::SF_NEW_DOCUMENT, *iter)){
-				NewDocumentCommand* newCommandPtr = new NewDocumentCommand(this, *iter);
+			const std::string& documentTypeId = *iter;
+
+			if (templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::SF_NEW_DOCUMENT, documentTypeId)){
+				NewDocumentCommand* newCommandPtr = new NewDocumentCommand(this, documentTypeId);
 				if (newCommandPtr != NULL){
-					QString commandName = iqt::GetQString(*iter);
+					QString commandName = iqt::GetQString(templatePtr->GetDocumentTypeName(documentTypeId));
 					newCommandPtr->SetVisuals(commandName, commandName, tr("Creates new document %1").arg(commandName));
 					m_newCommand.InsertChild(newCommandPtr, true);
 
@@ -745,11 +749,17 @@ void CMainWindowGuiComp::OnNew()
 	}
 
 	idoc::IDocumentTemplate::Ids ids = templatePtr->GetDocumentTypeIds();
-	if (!ids.empty()){
-		const std::string& documentTypeId = ids.front();
+	for (		idoc::IDocumentTemplate::Ids::const_iterator iter = ids.begin();
+				iter != ids.end();
+				++iter){
+		const std::string& documentTypeId = *iter;
 		I_ASSERT(!documentTypeId.empty());
 
-		OnNewDocument(documentTypeId);
+		if (templatePtr->IsFeatureSupported(idoc::IDocumentTemplate::SF_NEW_DOCUMENT, documentTypeId)){
+			OnNewDocument(documentTypeId);
+
+			return;
+		}
 	}
 }
 

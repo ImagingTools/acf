@@ -26,9 +26,27 @@ void CSingleDocumentTemplateBase::SetSupportedFeatures(int featureFlags)
 }
 
 
-void CSingleDocumentTemplateBase::SetDocumentTypeId(const std::string& documentTypeId)
+void CSingleDocumentTemplateBase::SetDocumentTypeId(const std::string& id)
 {
-	m_documentTypeId = documentTypeId;
+	m_documentTypeId = id;
+}
+
+
+void CSingleDocumentTemplateBase::SetDocumentTypeName(const istd::CString& name)
+{
+	m_documentTypeName = name;
+}
+
+
+void CSingleDocumentTemplateBase::SetViewTypeId(const std::string& id)
+{
+	m_viewTypeId = id;
+}
+
+
+void CSingleDocumentTemplateBase::SetViewTypeName(const istd::CString& name)
+{
+	m_viewTypeName = name;
 }
 
 
@@ -60,13 +78,49 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIds() const
 }
 
 
+istd::CString CSingleDocumentTemplateBase::GetDocumentTypeName(const std::string& documentTypeId) const
+{
+	if (documentTypeId == m_documentTypeId){
+		if (!m_documentTypeName.IsEmpty()){
+			return m_documentTypeName;
+		}
+		else{
+			return documentTypeId;
+		}
+	}
+	else{
+		return "";
+	}
+}
+
+
 IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetViewTypeIds(const std::string& documentTypeId) const
 {
-	if (IsDocumentTypeSupported(documentTypeId)){
-		return CSingleDocumentTemplateBase::GetDocumentTypeIds();
+	IDocumentTemplate::Ids retVal;
+
+	if (documentTypeId == m_documentTypeId){
+		retVal.push_back(m_viewTypeId);
 	}
 
-	return Ids();
+	return retVal;
+}
+
+
+istd::CString CSingleDocumentTemplateBase::GetViewTypeName(
+			const std::string& documentTypeId,
+			const std::string& viewTypeId) const
+{
+	if ((documentTypeId == m_documentTypeId) && (viewTypeId == m_viewTypeId)){
+		if (!m_viewTypeName.IsEmpty()){
+			return m_viewTypeName;
+		}
+		else{
+			return m_viewTypeId;
+		}
+	}
+	else{
+		return "";
+	}
 }
 
 

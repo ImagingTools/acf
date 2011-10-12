@@ -36,18 +36,18 @@ idoc::IDocumentTemplate::Ids CExtendedDocumentTemplateComp::GetDocumentTypeIdsFo
 
 	QString qtFilePath = iqt::GetQString(filePath);
 
-	for (		IDocumentTemplate::Ids::const_iterator iter = allIds.begin();
-				iter != allIds.end();
-				++iter){
-		const std::string& id = *iter;
+	for (		IDocumentTemplate::Ids::const_iterator documentIdIter = allIds.begin();
+				documentIdIter != allIds.end();
+				++documentIdIter){
+		const std::string& id = *documentIdIter;
 
 		istd::CStringList extensions;
 		iser::IFileLoader* loaderPtr = GetFileLoader(id);
 		if ((loaderPtr != NULL) && loaderPtr->GetFileExtensions(extensions)){
-			for (		istd::CStringList::const_iterator iter = extensions.begin();
-						iter != extensions.end();
-						++iter){
-				QString extension = iqt::GetQString(*iter);
+			for (		istd::CStringList::const_iterator extensionIter = extensions.begin();
+						extensionIter != extensions.end();
+						++extensionIter){
+				QString extension = iqt::GetQString(*extensionIter);
 				if (qtFilePath.endsWith(extension, Qt::CaseInsensitive)){
 					retVal.push_back(id);
 
