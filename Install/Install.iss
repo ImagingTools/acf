@@ -80,7 +80,6 @@ Name: qtComp; Description: {cm:QtBinaries}; Types: fullType customType
 
 [Icons]
 Name: "{group}\Compositor"; Filename: {app}\Bin\Release$CompilerName$\Compositor.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfComp
-Name: "{group}\Compositor Mini"; Filename: {app}\Bin\Release$CompilerName$\CompositorMini.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfComp
 Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: acfComp
 
 [Tasks]
