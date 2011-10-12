@@ -51,7 +51,7 @@ const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& eleme
 
 IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 			const std::string& elementId,
-			const icomp::CComponentAddress& address,
+			const CComponentAddress& address,
 			bool ensureElementCreated)
 {
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
@@ -68,7 +68,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		}
 	}
 
-	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_ADDED);
+	istd::TChangeNotifier<IRegistry> changePtr(this, CF_COMPONENT_ADDED);
 
 	ElementInfo& newElement = m_componentsMap[elementId];
 	newElement.address = address;
@@ -80,7 +80,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 
 bool CRegistry::RemoveElementInfo(const std::string& elementId)
 {
-	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_COMPONENT_REMOVED | CF_MODEL);
+	istd::TChangeNotifier<IRegistry> changePtr(this, CF_COMPONENT_REMOVED | CF_MODEL);
 
 	// remove interfaces exported by this component:
 	bool isDone = false;
@@ -257,11 +257,11 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 		return false;
 	}
 
-	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_MODEL | CF_COMPONENT_RENAMED);
+	istd::TChangeNotifier<IRegistry> changePtr(this, CF_MODEL | CF_COMPONENT_RENAMED);
 
 	// calculate new component exports:
-	icomp::IRegistry::ExportedComponentsMap newExportedComponentsMap;
-	for (		icomp::IRegistry::ExportedComponentsMap::const_iterator index = m_exportedComponentsMap.begin();
+	IRegistry::ExportedComponentsMap newExportedComponentsMap;
+	for (		IRegistry::ExportedComponentsMap::const_iterator index = m_exportedComponentsMap.begin();
 				index != m_exportedComponentsMap.end();
 				index++){
 		std::string exportComponentId;
@@ -276,8 +276,8 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 	}
 
 	// calculate new interface exports:
-	icomp::IRegistry::ExportedInterfacesMap newExportedInterfacesMap;
-	for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator index = m_exportedInterfacesMap.begin();
+	IRegistry::ExportedInterfacesMap newExportedInterfacesMap;
+	for (		IRegistry::ExportedInterfacesMap::const_iterator index = m_exportedInterfacesMap.begin();
 				index != m_exportedInterfacesMap.end();
 				index++){
 		std::string elementId = index->second;
@@ -291,7 +291,7 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 	// execute rename transaction:
 	ComponentsMap::iterator oldElementIter = m_componentsMap.find(oldElementId);
 
-	icomp::CComponentAddress oldAdress = oldElementIter->second.address;
+	CComponentAddress oldAdress = oldElementIter->second.address;
 	IRegistryElement* oldElementPtr = oldElementIter->second.elementPtr.GetPtr();
 
 	if (InsertElementInfo(newElementId, oldAdress)){
@@ -307,49 +307,47 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 						compIdIter != elementIds.end();
 						++compIdIter){
 				const std::string& componentId = *compIdIter;
-				const icomp::IRegistry::ElementInfo* infoPtr = GetElementInfo(componentId);
+				const IRegistry::ElementInfo* infoPtr = GetElementInfo(componentId);
 				if (infoPtr == NULL){
 					continue;
 				}
-				const icomp::IRegistryElement* elementPtr = infoPtr->elementPtr.GetPtr();
+				const IRegistryElement* elementPtr = infoPtr->elementPtr.GetPtr();
 				if (elementPtr == NULL){
 					continue;
 				}
 
-				icomp::IRegistryElement::Ids attrIds = elementPtr->GetAttributeIds();
+				IRegistryElement::Ids attrIds = elementPtr->GetAttributeIds();
 
-				for (		icomp::IRegistryElement::Ids::iterator attrIdIter = attrIds.begin();
+				for (		IRegistryElement::Ids::iterator attrIdIter = attrIds.begin();
 							attrIdIter != attrIds.end();
 							++attrIdIter){
 					const std::string& attributeId = *attrIdIter;
-					const icomp::IRegistryElement::AttributeInfo* attrInfoPtr = elementPtr->GetAttributeInfo(attributeId);
+					const IRegistryElement::AttributeInfo* attrInfoPtr = elementPtr->GetAttributeInfo(attributeId);
 					if (attrInfoPtr == NULL){
 						continue;
 					}
 
 					iser::ISerializable* attributePtr = attrInfoPtr->attributePtr.GetPtr();
-					icomp::TAttribute<std::string>* singleAttrPtr = dynamic_cast<icomp::TAttribute<std::string>*>(attributePtr);
-					icomp::TMultiAttribute<std::string>* multiAttrPtr = dynamic_cast<icomp::TMultiAttribute<std::string>*>(attributePtr);
 
-					if (		(dynamic_cast<icomp::CReferenceAttribute*>(attributePtr) != NULL) ||
-								(dynamic_cast<icomp::CFactoryAttribute*>(attributePtr) != NULL)){
+					CReferenceAttribute* referenceAttrPtr = dynamic_cast<CReferenceAttribute*>(attributePtr);
+					if (referenceAttrPtr != NULL){
 						std::string baseId;
 						std::string subId;
-						icomp::CInterfaceManipBase::SplitId(singleAttrPtr->GetValue(), baseId, subId);
+						CInterfaceManipBase::SplitId(referenceAttrPtr->GetValue(), baseId, subId);
 						if (baseId == oldElementId){
-							singleAttrPtr->SetValue(icomp::CInterfaceManipBase::JoinId(newElementId, subId));
+							referenceAttrPtr->SetValue(CInterfaceManipBase::JoinId(newElementId, subId));
 						}
 					}
 
-					if (		(dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr) != NULL) ||
-								(dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr) != NULL)){
-						int valuesCount = multiAttrPtr->GetValuesCount();
+					CMultiReferenceAttribute* multiRefAttrPtr = dynamic_cast<CMultiReferenceAttribute*>(attributePtr);
+					if (multiRefAttrPtr != NULL){
+						int valuesCount = multiRefAttrPtr->GetValuesCount();
 						for (int i = 0; i < valuesCount; ++i){
 							std::string baseId;
 							std::string subId;
-							icomp::CInterfaceManipBase::SplitId(multiAttrPtr->GetValueAt(i), baseId, subId);
+							CInterfaceManipBase::SplitId(multiRefAttrPtr->GetValueAt(i), baseId, subId);
 							if (baseId == oldElementId){
-								multiAttrPtr->SetValueAt(i, icomp::CInterfaceManipBase::JoinId(newElementId, subId));
+								multiRefAttrPtr->SetValueAt(i, CInterfaceManipBase::JoinId(newElementId, subId));
 							}
 						}
 					}
@@ -467,9 +465,9 @@ I_DWORD CRegistry::GetMinimalVersion(int versionId) const
 
 // protected methods
 
-icomp::IRegistryElement* CRegistry::CreateRegistryElement(
+IRegistryElement* CRegistry::CreateRegistryElement(
 			const std::string& /*elementId*/,
-			const icomp::CComponentAddress& /*address*/) const
+			const CComponentAddress& /*address*/) const
 {
 	Element* registryElementPtr = new Element;
 	if (registryElementPtr != NULL){

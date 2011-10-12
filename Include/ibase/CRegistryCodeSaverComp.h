@@ -102,6 +102,7 @@ protected:
 				std::ofstream& stream) const;
 	bool WriteAttribute(
 				const std::string& attributeId,
+				const std::string& componentId,
 				const std::string& attributeName,
 				const iser::IObject& attribute,
 				std::ofstream& stream) const;
@@ -118,10 +119,14 @@ protected:
 				std::ofstream& stream) const;
 
 	bool GetAttributeValue(
+				const std::string& attributeId,
+				const std::string& componentId,
 				const iser::ISerializable& attribute,
 				std::string& valueString,
 				std::string& typeName) const;
 	bool GetMultiAttributeValue(
+				const std::string& attributeId,
+				const std::string& componentId,
 				const iser::ISerializable& attribute,
 				std::list<std::string>& valueStrings,
 				std::string& typeName) const;
@@ -134,9 +139,13 @@ protected:
 	std::string GetPackageName(const std::string& packageId) const;
 
 	/**
-		Get some string as C++ string literal.
+		Get some wide string as C++ string literal.
 	*/
 	std::string GetStringLiteral(const istd::CString& text) const;
+	/**
+		Get some string as C++ string literal.
+	*/
+	std::string GetStdStringLiteral(const std::string& text) const;
 
 private:
 	I_REF(icomp::IPackagesManager, m_packagesManagerCompPtr);

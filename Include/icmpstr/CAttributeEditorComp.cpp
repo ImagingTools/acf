@@ -1153,6 +1153,22 @@ bool CAttributeEditorComp::DecodeAttribute(
 		return true;
 	}
 
+	const icomp::CStdStringAttribute* idPtr = dynamic_cast<const icomp::CStdStringAttribute*>(&attribute);
+	if (idPtr != NULL){		
+		QString componentId = idPtr->GetValue().c_str();
+
+		text = EncodeToEdit(componentId);
+
+		if (dynamic_cast<const icomp::CReferenceAttribute*>(idPtr) != NULL){
+			meaning = AM_REFERENCE;
+		}
+		else{
+			meaning = AM_ATTRIBUTE;
+		}
+
+		return true;
+	}
+
 	const icomp::CMultiStringAttribute* stringListAttribute = dynamic_cast<const icomp::CMultiStringAttribute*>(&attribute);
 	if (stringListAttribute != NULL){
 		text.clear();
@@ -1217,17 +1233,6 @@ bool CAttributeEditorComp::DecodeAttribute(
 		}
 
 		meaning = AM_MULTI_ATTRIBUTE;
-
-		return true;
-	}
-
-	const icomp::TAttribute<std::string>* idPtr = dynamic_cast<const icomp::TAttribute<std::string>*>(&attribute);
-	if (idPtr != NULL){		
-		QString componentId = idPtr->GetValue().c_str();
-
-		text = EncodeToEdit(componentId);
-
-		meaning = AM_REFERENCE;
 
 		return true;
 	}

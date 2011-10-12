@@ -162,7 +162,12 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare simple single attribute member.
-
+	At this moment following attribute types are supported:
+	\li \c bool
+	\li \c int
+	\li \c double
+	\li \c std::string
+	\li \c istd::CString (will be compiled by ARX compiler using translation function 'tr')
 	\ingroup Main
 	\ingroup ComponentConcept
 */
@@ -179,6 +184,12 @@ inline bool CComponentBase::IsComponentActive() const
 
 /**
 	Declare simple multiple attribute member.
+	At this moment following attribute types are supported:
+	\li \c bool
+	\li \c int
+	\li \c double
+	\li \c std::string
+	\li \c istd::CString (will be compiled by ARX compiler using translation function 'tr')
 	\ingroup ComponentConcept
 */
 #define I_MULTIATTR(attrType, member)\

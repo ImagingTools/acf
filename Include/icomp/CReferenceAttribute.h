@@ -14,10 +14,10 @@ namespace icomp{
 /**
 	Special attribute used to store referenced component ID.
 */
-class CReferenceAttribute: public TAttribute<std::string>
+class CReferenceAttribute: public CStdStringAttribute
 {
 public:
-	typedef TAttribute<std::string> BaseClass;
+	typedef CStdStringAttribute BaseClass;
 
 	enum DefaultAttributeFlags
 	{

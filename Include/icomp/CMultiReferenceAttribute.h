@@ -15,10 +15,10 @@ namespace icomp
 /**
 	Special attribute used to store list of referenced component ID's.
 */
-class CMultiReferenceAttribute: public TMultiAttribute<std::string>
+class CMultiReferenceAttribute: public CMultiStdStringAttribute
 {
 public:
-	typedef TMultiAttribute<std::string> BaseClass;
+	typedef CMultiStdStringAttribute BaseClass;
 
 	enum DefaultAttributeFlags
 	{

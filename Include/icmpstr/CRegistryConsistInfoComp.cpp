@@ -450,7 +450,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 			bool allReasons,
 			ibase::IMessageConsumer* reasonConsumerPtr) const
 {
-	const icomp::TAttribute<std::string>* idPtr = dynamic_cast<const icomp::TAttribute<std::string>*>(&attribute);
+	const icomp::CReferenceAttribute* idPtr = dynamic_cast<const icomp::CReferenceAttribute*>(&attribute);
 	if (idPtr != NULL){		
 		icomp::IComponentStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
 					icomp::IComponentStaticInfo::MGI_INTERFACES,
@@ -472,7 +472,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 
 	bool retVal = true;
 
-	const icomp::TMultiAttribute<std::string>* multiIdPtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(&attribute);
+	const icomp::CMultiReferenceAttribute* multiIdPtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(&attribute);
 	if (multiIdPtr != NULL){
 		icomp::IComponentStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
 					icomp::IComponentStaticInfo::MGI_INTERFACES,
