@@ -79,6 +79,7 @@ Name: acfComp; Description: ACF; Types: minimalType fullType customType
 Name: qtComp; Description: {cm:QtBinaries}; Types: fullType customType
 
 [Icons]
+Name: "{group}\Compositor"; Filename: {app}\Bin\Release$CompilerName$\Compositor.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfComp
 Name: "{group}\Compositor Mini"; Filename: {app}\Bin\Release$CompilerName$\CompositorMini.exe; WorkingDir: {app}\Bin\Release$CompilerName$; Components: acfComp
 Name: "{group}\API Documentation"; Filename: {app}\Docs\TechnicalDoc\index.html; Components: acfComp
 
@@ -95,4 +96,5 @@ Root: HKLM; Subkey: "SOFTWARE\\Classes\\.arx"; ValueType: string; ValueData: arx
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueData: "ACF Registry"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: EditFlags; ValueData: 0; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
 Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file"; ValueName: BrowserFlags; ValueData: 8; ValueType: dword; Flags: uninsdeletevalue; Components: acfComp
-Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\Run\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Acf.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\shell\\open\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Acf.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
+Root: HKLM; Subkey: "SOFTWARE\\Classes\\arx_auto_file\\shell\\edit\\command"; ValueData: "{app}\\Bin\\Release$CompilerName$\\Compositor.exe %22%251%22"; ValueType: string; Flags: uninsdeletevalue; Components: acfComp
