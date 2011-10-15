@@ -210,6 +210,12 @@ CVector2d CLine2d::GetPositionFromAlpha(double alpha) const
 }
 
 
+double CLine2d::GetLength() const
+{
+	return GetDiffVector().GetLength();
+}
+
+
 CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 {
 	static CLine2d emptyLine(CVector2d(0, 0), CVector2d(0, 0));

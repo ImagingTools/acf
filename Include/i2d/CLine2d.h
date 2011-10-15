@@ -131,6 +131,11 @@ public:
 	CVector2d GetDiffVector() const;
 
 	/**
+		Get distance between line points.
+	*/
+	double GetLength() const;
+
+	/**
 		Get part of line intersecting specified rectangle.
 	*/
 	CLine2d GetClipped(const CRectangle& rect) const;
