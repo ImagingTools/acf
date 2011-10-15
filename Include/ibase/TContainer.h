@@ -21,7 +21,7 @@ namespace ibase
 	Common implementation of an abstract container. 
 */
 template <typename ItemClass, typename ContainerClass = std::vector<ItemClass> >
-class TContainer: virtual public istd::IContainerInfo, virtual public istd::IChangeable
+class TContainer: virtual public istd::IContainerInfo
 {
 public:
 	enum ChangeFlags

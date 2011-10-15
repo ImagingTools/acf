@@ -158,6 +158,12 @@ public:
 	bool operator==(const TIndex& index) const;
 	bool operator!=(const TIndex& index) const;
 
+	TIndex operator+(const TIndex& index) const;
+	TIndex& operator+=(const TIndex& index);
+	TIndex operator-(const TIndex& index) const;
+	TIndex& operator-=(const TIndex& index);
+
+
 	// static methods
 	/**
 		Get global instance of zero index.
@@ -346,6 +352,63 @@ bool TIndex<Dimensions>::operator!=(const TIndex& index) const
 {
 	return !operator==(index);
 }
+
+
+template <int Dimensions>
+TIndex<Dimensions> TIndex<Dimensions>::operator+(const TIndex<Dimensions>& index) const
+{
+	I_ASSERT(Dimensions >= index.GetDimensionsCount());
+
+	TIndex<Dimensions> retVal = *this;
+
+	for (int i = 0; i < Dimensions; ++i){
+		retVal[i] += index[i];
+	}
+
+	return retVal;
+}
+
+
+template <int Dimensions>
+TIndex<Dimensions>& TIndex<Dimensions>::operator+=(const TIndex<Dimensions>& index)
+{
+	I_ASSERT(Dimensions >= index.GetDimensionsCount());
+
+	for (int i = 0; i < Dimensions; ++i){
+		m_elements[i] += index[i];
+	}
+
+	return this;
+}
+
+
+template <int Dimensions>
+TIndex<Dimensions> TIndex<Dimensions>::operator-(const TIndex<Dimensions>& index) const
+{
+	I_ASSERT(Dimensions >= index.GetDimensionsCount());
+
+	TIndex<Dimensions> retVal = *this;
+
+	for (int i = 0; i < Dimensions; ++i){
+		retVal[i] -= index[i];
+	}
+
+	return retVal;
+}
+
+
+template <int Dimensions>
+TIndex<Dimensions>& TIndex<Dimensions>::operator-=(const TIndex<Dimensions>& index)
+{
+	I_ASSERT(Dimensions >= index.GetDimensionsCount());
+
+	for (int i = 0; i < Dimensions; ++i){
+		m_elements[i] -= index[i];
+	}
+
+	return this;
+}
+
 
 
 // public methods

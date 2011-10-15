@@ -53,11 +53,11 @@ public:
 		If you want to force some factory to support more interfaces, you should simply define
 		multiply I_FACT members with the same ID, factorise instances with any of them and extract
 		specified interfaces using this method.
-		@param	componentPtr	pointer to component object, typically returned by method CreateComponent().
+		@param	instancePtr	pointer to component object, typically returned by method CreateComponent().
 		@param	subId			optionally ID parameter identifing subcomponent.
 		@return	pointer to interface or NULL, if such interface could not be extracted.
 	*/
-	static Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "");
+	static Interface* ExtractInterface(istd::IPolymorphic* instancePtr, const std::string& subId = "");
 
 protected:
 	TFactoryMember(const TFactoryMember& ptr);
@@ -132,9 +132,16 @@ Interface* TFactoryMember<Interface>::CreateInstance() const
 // static methods
 
 template <class Interface>
-Interface* TFactoryMember<Interface>::ExtractInterface(IComponent* componentPtr, const std::string& subId)
+Interface* TFactoryMember<Interface>::ExtractInterface(istd::IPolymorphic* instancePtr, const std::string& subId)
 {
-	return BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+	icomp::IComponent* componentPtr = dynamic_cast<icomp::IComponent>(instancePtr);
+	I_ASSERT(componentPtr != NULL);
+
+	if (componentPtr != NULL){
+		return BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+	}
+
+	return NULL;
 }
 
 
