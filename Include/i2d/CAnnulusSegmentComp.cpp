@@ -23,8 +23,8 @@ void CAnnulusSegmentComp::OnComponentCreated()
 	SetPosition(i2d::CVector2d(*m_centerXAttrPtr, *m_centerXAttrPtr));
 	SetOuterRadius(*m_outerRadiusAttrPtr);
 	SetInnerRadius(*m_innerRadiusAttrPtr);
-	SetEndAngle(*m_endAngleAttrPtr);
-	SetBeginAngle(*m_beginAngleAttrPtr);
+	SetBeginAngle(imath::GetRadianFromDegree(*m_beginAngleAttrPtr));
+	SetEndAngle(imath::GetRadianFromDegree(*m_endAngleAttrPtr));
 }
 
 

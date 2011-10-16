@@ -27,8 +27,8 @@ public:
 		I_ASSIGN(m_centerYAttrPtr, "Y", "X-Position of the annulus center", true, 0);
 		I_ASSIGN(m_innerRadiusAttrPtr, "InnerRadius", "Inner radius of the annulus", true, 0);
 		I_ASSIGN(m_outerRadiusAttrPtr, "OuterRadius", "Outer radius of the annulus", true, 0);
-		I_ASSIGN(m_beginAngleAttrPtr, "BeginAngle", "Begin angle of the annulus segment", true, 0);
-		I_ASSIGN(m_endAngleAttrPtr, "EndAngle", "End angle of the annulus segement", true, 360);
+		I_ASSIGN(m_beginAngleAttrPtr, "BeginAngle", "Begin angle (in degree) of the annulus segment", true, 0);
+		I_ASSIGN(m_endAngleAttrPtr, "EndAngle", "End angle (in degree) of the annulus segement", true, 360);
 	I_END_COMPONENT;
 
 protected:
