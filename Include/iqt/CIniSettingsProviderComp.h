@@ -18,7 +18,7 @@ namespace iqt
 */
 class CIniSettingsProviderComp: 
 			public icomp::CComponentBase,
-			public iqt::ISettingsProvider
+			virtual public iqt::ISettingsProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;

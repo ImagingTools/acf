@@ -15,7 +15,7 @@ namespace iqt
 
 class CApplicationSettingsProviderComp: 
 			public icomp::CComponentBase,
-			public iqt::ISettingsProvider
+			virtual public iqt::ISettingsProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;

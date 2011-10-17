@@ -12,7 +12,7 @@ namespace iqtgui
 {
 
 
-class CIconProviderComp: public icomp::CComponentBase, public iqtgui::IIconProvider
+class CIconProviderComp: public icomp::CComponentBase, virtual public iqtgui::IIconProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
