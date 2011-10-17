@@ -1,10 +1,10 @@
-#ifndef iproc_IValueSupplier_included
-#define iproc_IValueSupplier_included
+#ifndef iproc_IValueProvider_included
+#define iproc_IValueProvider_included
 
 
+// ACF includes
+#include "istd/IChangeable.h"
 #include "imath/CVarVector.h"
-
-#include "iproc/ISupplier.h"
 
 
 namespace iproc
@@ -12,9 +12,9 @@ namespace iproc
 
 
 /**
-	2D vector or position supplier.
+	Provide generic access to some data vector.
 */
-class IValueSupplier: virtual public ISupplier
+class IValueProvider: virtual public istd::IChangeable
 {
 public:
 	/**
@@ -51,7 +51,7 @@ public:
 
 	/**
 		Get access to produced vector object.
-		\return				if vector is accessible pointer to its instance, or NULL.
+		\return				if data vector cannot be calculated it returns empty vector.
 	*/
 	virtual imath::CVarVector GetValue(int index = -1, int valueTypeId = VTI_AUTO) const = 0;
 };
@@ -60,6 +60,6 @@ public:
 } // namespace iproc
 
 
-#endif // !iproc_IValueSupplier_included
+#endif // !iproc_IValueProvider_included
 
 

@@ -18,7 +18,7 @@ namespace iqt
 /**
 	Provide access to public functions in DLL.
  */
-class CDllFunctionsProvider: public isys::IFunctionsProvider
+class CDllFunctionsProvider: virtual public isys::IFunctionsProvider
 {
 public:
 	/**

@@ -15,8 +15,8 @@ namespace iproc
 
 /**
 	Base interface for suppliers providing synchrone processing of single object with <em>"pull data" model</em>.
-	Derivated interfaces should provide access to intern stored produced object for specified object ID.
-	For example image supplier should provide method \c{const iimg::IBitmap* GetBitmap(const I_DWORD* objectIdPtr) const}.
+	Additional interfaces (providers) should provide access to intern stored produced objects.
+	For example image provider should provide method \c{const iimg::IBitmap* GetBitmap(const I_DWORD* objectIdPtr) const}.
 	The internal stored object should be created on demand.
 */
 class ISupplier: virtual public istd::IChangeable
@@ -83,25 +83,9 @@ public:
 	virtual int GetWorkStatus() const = 0;
 
 	/**
-		Get duration time of work.
-		\return	time of duration or negative value if this time is unknown.
-	*/
-	virtual double GetWorkDurationTime() const = 0;
-
-	/**
 		Get parameter set using by this supplier.
 	*/
 	virtual iprm::IParamsSet* GetModelParametersSet() const = 0;
-
-	/**
-		Register output supplier object.
-		The output object will be informed about invalidate of this supplier.
-	*/
-	virtual void OnOutputSubscribed(ISupplier* outputSupplierPtr) = 0;
-	/**
-		Unregister output supplier object.
-	*/
-	virtual void OnOutputUnsubscribed(const ISupplier* outputSupplierPtr) = 0;
 };
 
 

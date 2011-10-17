@@ -12,6 +12,7 @@
 #include "istd/CStaticServicesProvider.h"
 
 #include "imod/IModel.h"
+#include "imod/CMultiModelObserverBase.h"
 
 #include "icomp/CComponentBase.h"
 
@@ -30,12 +31,12 @@ namespace iproc
 
 /**
 	Wrapper implementation of interface iproc::ISupplier with preparation for component implementation.
-	During component initalization you should call \c AddInputSupplier for all suppliers used by this component as a input.
+	During component initalization you should call \c RegisterSupplierInput for all suppliers used by this component as a input.
 */
-template <class SupplierInterface, class Product>
+template <class Product>
 class TSupplierCompWrap:
 			public ibase::CLoggerComponentBase,
-			virtual public SupplierInterface
+			virtual public ISupplier
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -48,7 +49,6 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(TSupplierCompWrap);
 		I_REGISTER_INTERFACE(ISupplier);
-		I_REGISTER_INTERFACE(SupplierInterface);
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
@@ -56,15 +56,12 @@ public:
 
 	TSupplierCompWrap();
 
-	// pseudo-reimplemented (iproc::ISupplier)
+	// reimplemented (iproc::ISupplier)
 	virtual void InvalidateSupplier();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
 	virtual int GetWorkStatus() const;
-	virtual double GetWorkDurationTime() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
-	virtual void OnOutputSubscribed(ISupplier* outputSupplierPtr);
-	virtual void OnOutputUnsubscribed(const ISupplier* outputSupplierPtr);
 
 protected:
 	/**
@@ -73,17 +70,16 @@ protected:
 	const Product* GetWorkProduct() const;
 
 	/**
-		Add some supplier to input supplier list.
+		Register supplier input.
+		Changes of supplier input will force this supplier invalidate.
+		All registered inputs will be unregistered ducring component destroing (OnComponentDestryed method).
 	*/
-	void AddInputSupplier(ISupplier* supplierPtr);
+	virtual void RegisterSupplierInput(imod::IModel* modelPtr);
 	/**
-		Remove supplier from input supplier list.
+		Unregister supplier input.
+		Changes of this input will no more invalidate this supplier.
 	*/
-	void RemoveInputSupplier(ISupplier* supplierPtr);
-	/**
-		Remove all suppliers from input supplier list.
-	*/
-	void RemoveAllInputSuppliers();
+	virtual void UnregisterSupplierInput(imod::IModel* modelPtr);
 
 	// abstract methods
 	/**
@@ -96,33 +92,45 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+	class InputObserver: public imod::CMultiModelObserverBase
+	{
+	public:
+		InputObserver(TSupplierCompWrap<Product>* parentPtr);
+
+		using imod::CMultiModelObserverBase::EnsureModelsDetached;
+
+	protected:
+		// reimplemented (imod::CMultiModelObserverBase)
+		virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		TSupplierCompWrap<Product>& m_parent;
+	};
+
 private:
 	I_ATTR(istd::CString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 
-	typedef std::set<ISupplier*> Suppliers;
-	Suppliers m_inputSuppliers;
-	Suppliers m_outputSuppliers;
-
-	Product m_product;
+	istd::TDelPtr<Product> m_productPtr;
 	int m_workStatus;
-	double m_durationTime;
+
+	InputObserver m_inputObserver;
 };
 
 
 // public methods
 
-template <class SupplierInterface, class Product>
-TSupplierCompWrap<SupplierInterface, Product>::TSupplierCompWrap()
+template <class Product>
+TSupplierCompWrap<Product>::TSupplierCompWrap()
 :	m_workStatus(WS_NONE),
-	m_durationTime(0)
+	m_inputObserver(this)
 {
 }
 
 
-template <class SupplierInterface, class Product>
-iprm::IParamsSet* TSupplierCompWrap<SupplierInterface, Product>::GetModelParametersSet() const
+template <class Product>
+iprm::IParamsSet* TSupplierCompWrap<Product>::GetModelParametersSet() const
 {
 	return m_paramsSetCompPtr.GetPtr();
 }
@@ -130,8 +138,8 @@ iprm::IParamsSet* TSupplierCompWrap<SupplierInterface, Product>::GetModelParamet
 
 // pseudo-reimplemented (iproc::ISupplier)
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::InvalidateSupplier()
+template <class Product>
+void TSupplierCompWrap<Product>::InvalidateSupplier()
 {
 	if (m_workStatus == ISupplier::WS_LOCKED){
 		return;
@@ -140,124 +148,58 @@ void TSupplierCompWrap<SupplierInterface, Product>::InvalidateSupplier()
 	if (m_workStatus != ISupplier::WS_INIT){
 		istd::CChangeNotifier notifier(this, ISupplier::CF_SUPPLIER_RESULTS);
 
-		m_workStatus = ISupplier::WS_LOCKED;
-
-		for (		Suppliers::const_iterator iter = m_outputSuppliers.begin();
-					iter != m_outputSuppliers.end();
-					++iter){
-			ISupplier* supplierPtr = *iter;
-			I_ASSERT(supplierPtr != NULL);
-
-			supplierPtr->InvalidateSupplier();
-		}
-
 		m_workStatus = ISupplier::WS_INIT;
-		m_durationTime = 0;
 	}
 }
 
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::EnsureWorkFinished()
+template <class Product>
+void TSupplierCompWrap<Product>::EnsureWorkFinished()
 {
 	if (m_workStatus <= ISupplier::WS_INIT){
 		istd::CChangeNotifier notifier(this, ISupplier::CF_SUPPLIER_RESULTS);
 
 		m_workStatus = WS_LOCKED;
 
-		istd::TSmartPtr<isys::ITimer> timerPtr(istd::CreateService<isys::ITimer>());
-
-		if (timerPtr.IsValid()){
-			// before time measurement is started, we have to ensure that all input suppliers has work finished
-			for (		Suppliers::const_iterator iter = m_inputSuppliers.begin();
-						iter != m_inputSuppliers.end();
-						++iter){
-				ISupplier* supplierPtr = *iter;
-				I_ASSERT(supplierPtr != NULL);
-
-				supplierPtr->EnsureWorkFinished();
-			}
-
-			timerPtr->Start();
+		if (!m_productPtr.IsValid()){
+			m_productPtr.SetPtr(new Product());
 		}
 
-		m_workStatus = ProduceObject(m_product);
+		m_workStatus = ProduceObject(*m_productPtr);
 		I_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
-
-		if (timerPtr.IsValid()){
-			m_durationTime = timerPtr->GetElapsed();
-
-			if (m_diagnosticNameAttrPtr.IsValid() && !(*m_diagnosticNameAttrPtr).empty()){
-				SendInfoMessage(MI_DURATION_TIME, *m_diagnosticNameAttrPtr + ": Calculation time " + istd::CString::FromNumber(m_durationTime * 1000) + " ms.");
-			}
-		}
 	}
 }
 
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::ClearWorkResults()
+template <class Product>
+void TSupplierCompWrap<Product>::ClearWorkResults()
 {
 	if (m_workStatus != ISupplier::WS_NONE){
 		istd::CChangeNotifier notifier(this, ISupplier::CF_SUPPLIER_RESULTS);
 
+		m_productPtr.Reset();
+
 		m_workStatus = ISupplier::WS_NONE;
-		m_durationTime = 0;
-
-		for (		Suppliers::const_iterator iter = m_inputSuppliers.begin();
-					iter != m_inputSuppliers.end();
-					++iter){
-			ISupplier* supplierPtr = *iter;
-			I_ASSERT(supplierPtr != NULL);
-
-			supplierPtr->ClearWorkResults();
-		}
 	}
 }
 
 
-template <class SupplierInterface, class Product>
-int TSupplierCompWrap<SupplierInterface, Product>::GetWorkStatus() const
+template <class Product>
+int TSupplierCompWrap<Product>::GetWorkStatus() const
 {
 	return m_workStatus;
 }
 
 
-template <class SupplierInterface, class Product>
-double TSupplierCompWrap<SupplierInterface, Product>::GetWorkDurationTime() const
-{
-	return m_durationTime;
-}
-
-
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::OnOutputSubscribed(ISupplier* outputSupplierPtr)
-{
-	I_ASSERT(outputSupplierPtr != NULL);
-
-	m_outputSuppliers.insert(outputSupplierPtr);
-}
-
-
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::OnOutputUnsubscribed(const ISupplier* outputSupplierPtr)
-{
-	I_ASSERT(outputSupplierPtr != NULL);
-	I_ASSERT(m_outputSuppliers.find(const_cast<ISupplier*>(outputSupplierPtr)) != m_outputSuppliers.end());
-
-	m_outputSuppliers.erase(const_cast<ISupplier*>(outputSupplierPtr));
-}
-
-
 // protected methods
 
-template <class SupplierInterface, class Product>
-const Product* TSupplierCompWrap<SupplierInterface, Product>::GetWorkProduct() const
+template <class Product>
+const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
-	const_cast< TSupplierCompWrap<SupplierInterface, Product>* >(this)->EnsureWorkFinished();
+	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
 
 	if (m_workStatus == WS_OK){
-		return &m_product;
+		return m_productPtr.GetPtr();
 	}
 	else{
 		return NULL;
@@ -265,63 +207,66 @@ const Product* TSupplierCompWrap<SupplierInterface, Product>::GetWorkProduct() c
 }
 
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::AddInputSupplier(ISupplier* supplierPtr)
+template <class Product>
+void TSupplierCompWrap<Product>::RegisterSupplierInput(imod::IModel* modelPtr)
 {
-	I_ASSERT(supplierPtr != NULL);
-
-	std::pair<Suppliers::iterator, bool> status = m_inputSuppliers.insert(supplierPtr);
-
-	if (status.second){
-		supplierPtr->OnOutputSubscribed(this);
-	}
+	I_ASSERT(modelPtr != NULL);
+	modelPtr->AttachObserver(&m_inputObserver);
 }
 
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::RemoveInputSupplier(ISupplier* supplierPtr)
+template <class Product>
+void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 {
-	I_ASSERT(supplierPtr != NULL);
-
-	supplierPtr->OnOutputUnsubscribed(this);
-
-	m_inputSuppliers.erase(supplierPtr);
-}
-
-
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::RemoveAllInputSuppliers()
-{
-	for (		Suppliers::const_iterator iter = m_inputSuppliers.begin();
-				iter != m_inputSuppliers.end();
-				++iter){
-		ISupplier* supplierPtr = *iter;
-		I_ASSERT(supplierPtr != NULL);
-
-		supplierPtr->OnOutputUnsubscribed(this);
+	I_ASSERT(modelPtr != NULL);
+	if (m_inputObserver.IsModelAttached(modelPtr)){
+		modelPtr->DetachObserver(&m_inputObserver);
 	}
-
-	m_inputSuppliers.clear();
 }
 
 
 // reimplemented (icomp::CComponentBase)
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::OnComponentCreated()
+template <class Product>
+void TSupplierCompWrap<Product>::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
+
+	if (m_paramsSetModelCompPtr.IsValid()){
+		m_paramsSetModelCompPtr->AttachObserver(&m_inputObserver);
+	}
 
 	m_workStatus = ISupplier::WS_NONE;
 }
 
 
-template <class SupplierInterface, class Product>
-void TSupplierCompWrap<SupplierInterface, Product>::OnComponentDestroyed()
+template <class Product>
+void TSupplierCompWrap<Product>::OnComponentDestroyed()
 {
-	RemoveAllInputSuppliers();
+	m_inputObserver.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
+}
+
+
+// public methods of embedded class InputObserver
+
+template <class Product>
+TSupplierCompWrap<Product>::InputObserver::InputObserver(TSupplierCompWrap<Product>* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+}
+
+
+// protected methods of embedded class InputObserver
+
+// reimplemented (imod::CMultiModelObserverBase)
+
+template <class Product>
+void TSupplierCompWrap<Product>::InputObserver::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_parent.InvalidateSupplier();
 }
 
 

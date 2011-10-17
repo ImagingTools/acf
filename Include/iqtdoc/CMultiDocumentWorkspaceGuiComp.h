@@ -32,7 +32,7 @@ class CMultiDocumentWorkspaceGuiComp:
 						idoc::CMultiDocumentManagerBase,
 						iqtgui::TRestorableGuiWrap<
 									iqtgui::TGuiComponentBase<QMdiArea> > >,
-			public ibase::ICommandsProvider
+			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
 
