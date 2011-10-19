@@ -5,6 +5,7 @@
 	Name="DocViewSimu.exe"
 	ProjectGUID="{5841387C-CE78-44F4-9766-4DBDEC0B60DE}"
 	RootNamespace="DocViewSimu"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -48,7 +49,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../..;&quot;$(QScintilla)\include&quot;"
+				AdditionalIncludeDirectories="..;..\..\..\..\..\Include;..\..\..\..\..\Impl;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtXml&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;;&quot;$(QScintilla)\include&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -97,9 +98,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -136,7 +134,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtScript&quot;;&quot;$(ACFDIR)/Include&quot;;&quot;$(ACFDIR)/Impl&quot;;../..;&quot;$(QScintilla)\include&quot;"
+				AdditionalIncludeDirectories="..;..\..\..\..\..\Include;..\..\..\..\..\Impl;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtXml&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;;&quot;$(QScintilla)\include&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -187,9 +185,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -230,4 +225,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-

@@ -17,7 +17,9 @@
 
 
 class CTextEditorComp:
-			public iqtgui::TGuiObserverWrap<iqtgui::TGuiComponentBase<QTextEdit>, imod::TSingleModelObserverBase<ibase::ITextDocument> >,
+			public iqtgui::TGuiObserverWrap<
+						iqtgui::TGuiComponentBase<QTextEdit>,
+						imod::TSingleModelObserverBase<ibase::ITextDocument> >,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT

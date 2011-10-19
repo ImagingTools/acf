@@ -5,6 +5,7 @@
 	Name="DocView"
 	ProjectGUID="{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}"
 	RootNamespace="DocView"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -30,16 +31,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -60,7 +64,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..;..\..\..\..\..\Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="..;..\..\..\..\..\Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtXml&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;"
 				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -115,16 +119,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Resources"
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Resources"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -144,7 +151,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;..\..\..\..\..\Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(ACFDIR)/Include&quot;"
+				AdditionalIncludeDirectories="..;..\..\..\..\..\Include;&quot;$(QTDIR)/Include&quot;;&quot;$(QTDIR)/Include/QtCore&quot;;&quot;$(QTDIR)/Include/QtGui&quot;;&quot;$(QTDIR)/Include/QtXml&quot;;&quot;$(QTDIR)\include\QtXmlPatterns&quot;"
 				PreprocessorDefinitions="_DEBUG;WIN32;_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -236,4 +243,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
