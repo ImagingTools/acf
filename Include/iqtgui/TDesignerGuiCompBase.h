@@ -43,9 +43,12 @@ QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* paren
 
 	QWidget* widgetPtr = BaseClass::InitWidgetToParent(parentPtr);
 
-	UI::setupUi(widgetPtr);
+	WidgetType* concreteWidgetPtr = dynamic_cast<WidgetType*>(widgetPtr);
+	I_ASSERT(concreteWidgetPtr != NULL);
 
-	return widgetPtr;
+	UI::setupUi(concreteWidgetPtr);
+
+	return concreteWidgetPtr;
 }
 
 
@@ -56,8 +59,7 @@ QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* paren
 template <class UI, class WidgetType>
 void TDesignerGuiCompBase<UI, WidgetType>::OnGuiRetranslate()
 {
-	QWidget* widgetPtr = BaseClass::GetWidget();
-
+	WidgetType* widgetPtr = dynamic_cast<WidgetType*>(BaseClass::GetWidget());
 	if (widgetPtr != NULL){
 		UI::retranslateUi(widgetPtr);
 	}

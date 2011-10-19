@@ -387,7 +387,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CAttributeEditorComp.ui"

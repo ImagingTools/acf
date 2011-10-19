@@ -229,6 +229,11 @@ I_EXPORT_COMPONENT(
 			"Component to show a selected GUI of a parameter set",
 			"Selection Stack Parameter" IM_TAG("GUI"));
 
+I_EXPORT_COMPONENT(
+			WizardGui,
+			"Wizard-based parameter editor",
+			"Wizard" IM_TAG("GUI"));
+
 
 } // namespace QtGuiPck
 

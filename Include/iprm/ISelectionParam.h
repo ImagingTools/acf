@@ -25,6 +25,11 @@ public:
 		CF_SELECTION_CHANGED = 1 << 17
 	};
 
+	enum 
+	{
+		NO_SELECTION = -1,
+	};
+
 	/**
 		Get constraints of this parameter.
 		Constraints describes some additional information about allowed parameter ranges and related informations.

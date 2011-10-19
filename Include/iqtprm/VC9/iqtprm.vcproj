@@ -179,6 +179,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COptionsListGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -206,6 +210,10 @@
 				RelativePath="..\CVariableParamGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CWizardGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -218,6 +226,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileNameParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsListGuiComp.h"
 				>
 			</File>
 			<File
@@ -246,6 +258,10 @@
 			</File>
 			<File
 				RelativePath="..\CVariableParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CWizardGuiComp.h"
 				>
 			</File>
 			<File
@@ -287,6 +303,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CWizardGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CComposedParamsSetGuiComp.h"
 				>
 			</File>
@@ -320,7 +340,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.ui"
@@ -328,6 +348,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileNameParamGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsListGuiComp.ui"
 				>
 			</File>
 			<File
@@ -352,7 +376,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="MOC Files"
+			Name="Moc Files"
 			>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.moc"
@@ -360,6 +384,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileNameParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsListGuiComp.moc"
 				>
 			</File>
 			<File
@@ -380,6 +408,10 @@
 			</File>
 			<File
 				RelativePath="..\CVariableParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CWizardGuiComp.moc"
 				>
 			</File>
 		</Filter>

@@ -175,15 +175,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CAnnulusParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CAnnulusSegmentParamsGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CAnnulusSegmentParamsGuiComp.moc"
 				>
 			</File>
 			<File
@@ -191,15 +183,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CAnnulusSegmentShape.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CAnnulusShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CAnnulusShape.moc"
 				>
 			</File>
 			<File
@@ -207,23 +191,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCircleParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CCircleShape.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CCircleShape.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CGripShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CGripShape.moc"
 				>
 			</File>
 			<File
@@ -239,15 +211,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLine2dParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CLine2dShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CLine2dShape.moc"
 				>
 			</File>
 			<File
@@ -259,15 +223,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CQuadrangleParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CQuadrangleShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CQuadrangleShape.moc"
 				>
 			</File>
 			<File
@@ -275,15 +231,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRectangleParamsGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CRectangleShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRectangleShape.moc"
 				>
 			</File>
 			<File
@@ -299,15 +247,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSceneControllerGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CSceneProviderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSceneProviderGuiComp.moc"
 				>
 			</File>
 			<File
@@ -566,7 +506,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			Filter="ui"
 			>
 			<File
@@ -603,6 +543,70 @@
 			</File>
 			<File
 				RelativePath="..\CSceneProviderGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CAnnulusParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CAnnulusSegmentParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CAnnulusSegmentShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CAnnulusShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CCircleShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CGripShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CLine2dParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CLine2dShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CQuadrangleParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CQuadrangleShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectangleParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CRectangleShape.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSceneControllerGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSceneProviderGuiComp.moc"
 				>
 			</File>
 		</Filter>

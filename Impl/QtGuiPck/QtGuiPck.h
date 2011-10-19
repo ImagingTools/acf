@@ -38,6 +38,7 @@
 #include "iqtprm/CSelectionParamIndexGuiComp.h"
 #include "iqtprm/CSelectableGuiComp.h"
 #include "iqtprm/CSelectableParamsSetGuiComp.h"
+#include "iqtprm/CWizardGuiComp.h"
 
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CSingleDocumentWorkspaceGuiComp.h"
@@ -90,7 +91,7 @@ typedef iqtprm::CSelectionParamGuiComp SelectionParamGui;
 typedef iqtprm::CSelectionParamIndexGuiComp SelectionParamIndexGui;
 typedef iqtprm::CSelectableGuiComp SelectableGui;
 typedef iqtprm::CSelectableParamsSetGuiComp SelectableParamsSetGui;
-
+typedef iqtprm::CWizardGuiComp WizardGui;
 
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CSingleDocumentWorkspaceGuiComp> SingleDocWorkspaceGui;

@@ -642,7 +642,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Forms"
+			Name="Qt Designer Files"
 			>
 			<File
 				RelativePath="..\CAboutWidgetGuiComp.ui"
@@ -682,7 +682,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="MOC Files"
+			Name="Moc Files"
 			>
 			<File
 				RelativePath="..\CAboutWidgetGuiComp.moc"
