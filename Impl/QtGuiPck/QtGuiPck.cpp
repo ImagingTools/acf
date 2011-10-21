@@ -185,7 +185,7 @@ I_EXPORT_COMPONENT(
 			"Help Viewer Document Html Description" IM_TAG("GUI Help"));
 
 I_EXPORT_COMPONENT(
-			HtmlHelpWindow,
+			HtmlHelpViewer,
 			"Help viewer showing html document in separated window",
 			"Viewer Window Dialog Document Html Description" IM_TAG("GUI Help"));
 

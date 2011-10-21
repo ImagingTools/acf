@@ -187,7 +187,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHtmlHelpWindowComp.cpp"
+				RelativePath="..\CHtmlHelpViewerComp.cpp"
 				>
 			</File>
 			<File
@@ -233,7 +233,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHtmlHelpWindowComp.h"
+				RelativePath="..\CHtmlHelpViewerComp.h"
 				>
 			</File>
 			<File

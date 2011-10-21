@@ -74,13 +74,13 @@
     </Element>
     <Element>
       <Id>
-        HtmlHelpWindow
+        HtmlHelpViewer
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        HtmlHelpWindow
+        HtmlHelpViewer
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -209,7 +209,7 @@
         idoc::IHelpViewer
       </InterfaceId>
       <ComponentId>
-        HtmlHelpWindow
+        HtmlHelpViewer
       </ComponentId>
     </Interface>
     <Interface>

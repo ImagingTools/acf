@@ -1,4 +1,4 @@
-#include "iqtdoc/CHtmlHelpWindowComp.h"
+#include "iqtdoc/CHtmlHelpViewerComp.h"
 
 
 // ACF includes
@@ -11,7 +11,7 @@ namespace iqtdoc
 
 // reimplemented (idoc::IHelpInfoProvider)
 
-double CHtmlHelpWindowComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CHtmlHelpViewerComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	if (m_helpFileProviderCompPtr.IsValid()){
 		return m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr);
@@ -23,7 +23,7 @@ double CHtmlHelpWindowComp::GetHelpQuality(const istd::CString& contextText, con
 
 // reimplemented (idoc::IHelpViewer)
 
-void CHtmlHelpWindowComp::ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr)
+void CHtmlHelpViewerComp::ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr)
 {
 	if (		m_helpFileProviderCompPtr.IsValid() &&
 				(m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr) > 0)){
