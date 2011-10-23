@@ -28,7 +28,7 @@ void COptionsListGuiComp::UpdateModel() const
 		QTreeWidgetItem* selectedItemPtr = selectedItems[0];
 
 		int selectedIndex = selectedItemPtr->data(0, DR_SELECTION_INDEX).toInt();
-		iprm::ISelectionParam* selectionParamPtr = reinterpret_cast<iprm::ISelectionParam*>(selectedItemPtr->data(0, DR_SELECTION_PARAM).toInt());
+		iprm::ISelectionParam* selectionParamPtr = reinterpret_cast<iprm::ISelectionParam*>(selectedItemPtr->data(0, DR_SELECTION_PARAM).toUInt());
 
 		I_ASSERT(selectionParamPtr != NULL);
 
@@ -96,7 +96,7 @@ void COptionsListGuiComp::CreateOptionsTree(const iprm::ISelectionParam* selecti
 			QTreeWidgetItem* itemPtr = new QTreeWidgetItem(OptionsList);
 			itemPtr->setText(0, optionName);
 			itemPtr->setData(0, DR_SELECTION_INDEX, optionIndex);
-			itemPtr->setData(0, DR_SELECTION_PARAM, int(selectionParamPtr));
+			itemPtr->setData(0, DR_SELECTION_PARAM, quintptr(selectionParamPtr));
 
 			if (parentItemPtr != NULL){
 				parentItemPtr->addChild(itemPtr);

@@ -283,6 +283,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_COptionsListGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -316,6 +320,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_COptionSelectorGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_COptionsListGuiComp.h"
 				>
 			</File>
 			<File

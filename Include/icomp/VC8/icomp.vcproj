@@ -175,10 +175,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComponentAccessor.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CComponentAddress.cpp"
 				>
 			</File>
@@ -257,10 +253,6 @@
 			>
 			<File
 				RelativePath="..\CBaseComponentStaticInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CComponentAccessor.h"
 				>
 			</File>
 			<File

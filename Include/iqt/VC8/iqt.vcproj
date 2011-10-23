@@ -191,6 +191,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentAccessor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCopyProcessorComp.cpp"
 				>
 			</File>
@@ -358,6 +362,10 @@
 			</File>
 			<File
 				RelativePath="..\CClipboardSerializerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CComponentAccessor.h"
 				>
 			</File>
 			<File
@@ -544,7 +552,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Other"
+			Name="Moc Files"
 			>
 			<File
 				RelativePath="..\CDirList.moc"

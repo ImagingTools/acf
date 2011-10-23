@@ -6,6 +6,7 @@
 	ProjectGUID="{E089473F-CFF6-478B-99A3-6C9109CFC9A3}"
 	RootNamespace="icmpstr"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
