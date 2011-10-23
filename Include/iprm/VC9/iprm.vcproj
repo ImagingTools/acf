@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="iprm"
 	ProjectGUID="{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}"
+	RootNamespace="iprm"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -184,6 +185,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CLinearWizardControllerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CManagerParamsSetShadowerComp.cpp"
 				>
 			</File>
@@ -211,6 +216,10 @@
 				RelativePath="..\CVariableParamComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CWizardPageComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -230,6 +239,10 @@
 			</File>
 			<File
 				RelativePath="..\CLinearAdjustParamsComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CLinearWizardControllerComp.h"
 				>
 			</File>
 			<File
@@ -258,6 +271,10 @@
 			</File>
 			<File
 				RelativePath="..\CVariableParamComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CWizardPageComp.h"
 				>
 			</File>
 			<File
@@ -294,6 +311,18 @@
 			</File>
 			<File
 				RelativePath="..\IVariableParam.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IWizardNavigationController.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IWizardPageController.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IWizardPageInfo.h"
 				>
 			</File>
 		</Filter>

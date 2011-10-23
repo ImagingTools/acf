@@ -9,8 +9,9 @@
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
-#include "iprm/IParamsManager.h"
 #include "iprm/ISelectionParam.h"
+#include "iprm/IParamsManager.h"
+#include "iprm/IWizardNavigationController.h"
 
 #include "idoc/IHelpViewer.h"
 
@@ -40,6 +41,7 @@ public:
 	I_BEGIN_COMPONENT(CWizardGuiComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
+		I_ASSIGN(m_wizardControllerCompPtr, "LinearWizardController", "Wizard navigation controller", false, "LinearWizardController");
 		I_ASSIGN(m_sideGuiCompPtr, "SideWidget", "Side widget of the wizard", false, "SideWidget");
 		I_ASSIGN(m_helpViewerCompPtr, "HelpViewer", "Help view component", false, "HelpViewer");
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for parameters edition", true);
@@ -55,7 +57,7 @@ protected Q_SLOTS:
 	void OnHelpRequested();
 
 protected:
-	int GetSelectedIndex() const;
+	int GetNextPageId() const;
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();
@@ -67,9 +69,25 @@ protected:
 	virtual void OnGuiDestroyed();
 
 private:
+	class CWizardPage: public QWizardPage
+	{
+	public:
+		typedef QWizardPage BaseClass;
+
+		CWizardPage(CWizardGuiComp& parent);
+
+		// reimplemented (QWizardPage)
+		virtual int nextId() const;
+	
+	private:
+		CWizardGuiComp& m_parent;
+	};
+
+private:
 	void GoToPage(int pageIndex);
 
 private:
+	I_REF(iprm::IWizardNavigationController, m_wizardControllerCompPtr);
 	I_REF(iqtgui::IGuiObject, m_sideGuiCompPtr);
 	I_REF(idoc::IHelpViewer, m_helpViewerCompPtr);
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);

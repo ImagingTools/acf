@@ -10,7 +10,7 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 
-#include "iprm/ISelectionParam.h"
+#include "iprm/IParamsManager.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -26,18 +26,18 @@ namespace iqtprm
 */
 class COptionsListGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::COptionsListGuiComp, iprm::ISelectionParam>
+			Ui::COptionsListGuiComp, iprm::IParamsManager>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::COptionsListGuiComp, iprm::ISelectionParam> BaseClass;
+				Ui::COptionsListGuiComp, iprm::IParamsManager> BaseClass;
 
 	enum DataRole
 	{
 		DR_SELECTION_INDEX = Qt::UserRole + 1,
-		DR_SELECTION_PARAM
+		DR_OBJECT_PTR
 	};
 
 	I_BEGIN_COMPONENT(COptionsListGuiComp);
@@ -58,7 +58,7 @@ protected Q_SLOTS:
 	void OnSelectionChanged();
 
 private:
-	void CreateOptionsTree(const iprm::ISelectionParam* selectionParamPtr, QTreeWidgetItem* parentItemPtr = NULL);
+	void CreateOptionsTree(const iprm::IParamsManager* paramsManagerPtr, QTreeWidgetItem* parentItemPtr = NULL);
 };
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1990
+          2001
         </Number>
         <Description>
           ACF
@@ -32,21 +32,21 @@
         ParamsManager
       </ComponentName>
       <X>
-        350
+        300
       </X>
       <X>
-        400
+        450
       </X>
     </Element>
     <Element>
       <ComponentName>
-        SplashScreen
+        LinearWizardController
       </ComponentName>
       <X>
-        300
+        575
       </X>
       <X>
-        175
+        450
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         WizardGui
       </ComponentName>
       <X>
-        800
+        850
       </X>
       <X>
-        400
+        450
       </X>
     </Element>
     <Element>

@@ -43,11 +43,16 @@ void CWizardGuiComp::OnHelpRequested()
 
 // protected methods
 
-int CWizardGuiComp::GetSelectedIndex() const
+int CWizardGuiComp::GetNextPageId() const
 {
-	I_ASSERT(IsGuiCreated());
+	QWizard* wizardPtr = GetQtWidget();
+	I_ASSERT(wizardPtr != NULL);
+	
+	if (m_wizardControllerCompPtr.IsValid()){
+		return m_wizardControllerCompPtr->GetNextPageId(wizardPtr->currentId());
+	}
 
-	return 0;
+	return -1;
 }
 
 
@@ -169,7 +174,7 @@ void CWizardGuiComp::OnGuiCreated()
 	wizardPtr->setWizardStyle(wizardStyle);
 
 	QWizard::WizardOptions options;
-	options |= QWizard::IndependentPages;
+//	options |= QWizard::IndependentPages;
 	
 	if (m_helpViewerCompPtr.IsValid()){
 		options |= QWizard::HaveHelpButton;
@@ -177,30 +182,32 @@ void CWizardGuiComp::OnGuiCreated()
 
 	wizardPtr->setOptions(options);
 
-	int pagesCount = m_guisCompPtr.GetCount();
+	if (m_wizardControllerCompPtr.IsValid()){
+		int pagesCount = m_guisCompPtr.GetCount();
 
-	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
-		istd::TDelPtr<QWizardPage> wizardPage(new QWizardPage(wizardPtr));
-		QVBoxLayout* layoutPtr = new QVBoxLayout(wizardPage.GetPtr());
-		layoutPtr->setMargin(0);
+		for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
+			istd::TDelPtr<QWizardPage> wizardPage(new CWizardPage(*this));
+			QVBoxLayout* layoutPtr = new QVBoxLayout(wizardPage.GetPtr());
+			layoutPtr->setMargin(0);
 
-		QString pageTitel;
-		if (m_titelsAttrPtr.IsValid() && pageIndex < m_titelsAttrPtr.GetCount()){
-			pageTitel = iqt::GetQString(m_titelsAttrPtr[pageIndex]);
-		}
+			QString pageTitel;
+			if (m_titelsAttrPtr.IsValid() && pageIndex < m_titelsAttrPtr.GetCount()){
+				pageTitel = iqt::GetQString(m_titelsAttrPtr[pageIndex]);
+			}
 
-		QString pageSubTitel;
-		if (m_titelsAttrPtr.IsValid() && pageIndex < m_subTitelsAttrPtr.GetCount()){
-			pageSubTitel = iqt::GetQString(m_subTitelsAttrPtr[pageIndex]);
-		}
+			QString pageSubTitel;
+			if (m_titelsAttrPtr.IsValid() && pageIndex < m_subTitelsAttrPtr.GetCount()){
+				pageSubTitel = iqt::GetQString(m_subTitelsAttrPtr[pageIndex]);
+			}
 
-		wizardPage->setTitle(pageTitel);
-		wizardPage->setSubTitle(pageSubTitel);
+			wizardPage->setTitle(pageTitel);
+			wizardPage->setSubTitle(pageSubTitel);
 
-		iqtgui::IGuiObject* pageGuiObjectPtr = m_guisCompPtr[pageIndex];
-		if (pageGuiObjectPtr != NULL){
-			if (pageGuiObjectPtr->CreateGui(wizardPage.GetPtr())){
-				wizardPtr->setPage(pageIndex, wizardPage.PopPtr());
+			iqtgui::IGuiObject* pageGuiObjectPtr = m_guisCompPtr[pageIndex];
+			if (pageGuiObjectPtr != NULL){
+				if (pageGuiObjectPtr->CreateGui(wizardPage.GetPtr())){
+					wizardPtr->setPage(pageIndex, wizardPage.PopPtr());
+				}
 			}
 		}
 	}
@@ -251,6 +258,21 @@ void CWizardGuiComp::GoToPage(int pageIndex)
 			wizardPtr->next();
 		}
 	}
+}
+
+
+CWizardGuiComp::CWizardPage::CWizardPage(CWizardGuiComp& parent)
+	:m_parent(parent),
+	BaseClass(parent.GetQtWidget())
+{
+}
+
+
+// reimplemented (QWizardPage)
+
+int CWizardGuiComp::CWizardPage::nextId() const
+{
+	return m_parent.GetNextPageId();
 }
 
 

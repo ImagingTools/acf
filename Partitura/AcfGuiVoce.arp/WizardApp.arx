@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1990
+          2001
         </Number>
         <Description>
           ACF
@@ -93,15 +93,12 @@
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              SplashScreen
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                SplashScreen
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -245,13 +242,13 @@
     </Element>
     <Element>
       <Id>
-        SplashScreen
+        LinearWizardController
       </Id>
       <PackageId>
-        QtGuiPck
+        BasePck
       </PackageId>
       <ComponentId>
-        SplashScreen
+        LinearWizardController
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -260,149 +257,24 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              WizardPages
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ApplicationInfo
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ImagePath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              SplashScreenImagePath
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowApplicationName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              SplashScreenShowApplicationName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowApplicationSubName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              SplashScreenShowApplicationSubName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowLegalCopyright
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              SplashScreenShowLegalCopyright
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowProductName
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              SplashScreenShowProductName
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowProductType
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              SplashScreenShowProductType
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionIds
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              DisplayVersionIds
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              VersionNames
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              DisplayVersionNames
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
+              <Value>
+                ParamsManager
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -425,7 +297,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               Editors
@@ -504,6 +376,25 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LinearWizardController
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LinearWizardController
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
