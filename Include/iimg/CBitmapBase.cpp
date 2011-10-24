@@ -128,14 +128,10 @@ bool CBitmapBase::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.BeginTag(headerTag);
 
 	istd::CIndex2d size;
-	int pixelBitsCount = 0;
-	int componentsCount = 0;
 	int pixelFormat = PF_UNKNOWN;
 
 	if (isStoring){
 		size = GetImageSize();
-		pixelBitsCount = GetPixelBitsCount();
-		componentsCount = GetComponentsCount();
 		pixelFormat =  GetPixelFormat();
 	}
 
