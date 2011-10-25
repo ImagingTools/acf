@@ -210,10 +210,6 @@
 				RelativePath="..\CVariableParamGuiComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CWizardGuiComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -261,10 +257,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CWizardGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\iqtprm.h"
 				>
 			</File>
@@ -304,10 +296,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CVariableParamGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CWizardGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -416,10 +404,6 @@
 			</File>
 			<File
 				RelativePath="..\CVariableParamGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CWizardGuiComp.moc"
 				>
 			</File>
 		</Filter>

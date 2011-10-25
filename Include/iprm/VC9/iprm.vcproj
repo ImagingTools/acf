@@ -185,10 +185,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLinearWizardControllerComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CManagerParamsSetShadowerComp.cpp"
 				>
 			</File>
@@ -216,10 +212,6 @@
 				RelativePath="..\CVariableParamComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CWizardPageComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -239,10 +231,6 @@
 			</File>
 			<File
 				RelativePath="..\CLinearAdjustParamsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CLinearWizardControllerComp.h"
 				>
 			</File>
 			<File
@@ -311,18 +299,6 @@
 			</File>
 			<File
 				RelativePath="..\IVariableParam.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IWizardNavigationController.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IWizardPageController.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IWizardPageInfo.h"
 				>
 			</File>
 		</Filter>
