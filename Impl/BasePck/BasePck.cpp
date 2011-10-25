@@ -178,16 +178,6 @@ I_EXPORT_COMPONENT(
 			"Selection Constraints" IM_CATEGORY(I_DATA_MODEL));
 
 I_EXPORT_COMPONENT(
-			LinearWizardController,
-			"Wizard controller",
-			"Wizard Parameter" IM_CATEGORY(I_DATA_MODEL));
-
-I_EXPORT_COMPONENT(
-			WizardPage,
-			"Single wizard page data",
-			"Wizard Parameter" IM_CATEGORY(I_DATA_MODEL));
-
-I_EXPORT_COMPONENT(
 			SingleDocumentTemplate,
 			"Single document template for only one type of documents",
 			"Single Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document"));

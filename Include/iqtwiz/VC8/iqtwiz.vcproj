@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="iqtprm"
-	ProjectGUID="{B11EFB14-C129-4F69-8143-8127D45770BF}"
-	RootNamespace="iqtprm"
+	Name="iqtwiz"
+	ProjectGUID="{7A94C760-200C-41C6-82D3-93FB5DEA127B}"
+	RootNamespace="iqtwiz"
 	Keyword="Qt4VSv1.0"
 	>
 	<Platforms>
@@ -170,43 +170,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\CComposedParamsSetGuiComp.cpp"
+				RelativePath="..\CWizardGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CFileNameParamGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\COptionsListGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CParamsManagerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRelativeFileNameParamComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectableGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectableParamsSetGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamIndexGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CVariableParamGuiComp.cpp"
+				RelativePath="..\CWizardOptionsListGuiComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -216,51 +184,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CComposedParamsSetGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileNameParamGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\COptionsListGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CParamsManagerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRelativeFileNameParamComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectableGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectableParamsSetGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamIndexGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CVariableParamGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CWizardGuiComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\iqtprm.h"
+				RelativePath="..\CWizardOptionsListGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\iqtwiz.h"
 				>
 			</File>
 		</Filter>
@@ -270,75 +202,15 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath="..\Generated\moc_CComposedParamsSetGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CFileNameParamGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_COptionsListGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CParamsManagerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CSelectableGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CSelectionParamGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CSelectionParamIndexGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CVariableParamGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\moc_CWizardGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\ui_CComposedParamsSetGuiComp.h"
+				RelativePath="..\generated\moc_CWizardOptionsListGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CFileNameParamGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_COptionSelectorGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_COptionsListGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CParamsManagerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CSelectableGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CSelectionParamGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CSelectionParamIndexGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CVariableParamGuiComp.h"
+				RelativePath="..\generated\ui_CWizardOptionsListGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -346,35 +218,7 @@
 			Name="Qt Designer Files"
 			>
 			<File
-				RelativePath="..\CComposedParamsSetGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileNameParamGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\COptionsListGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CParamsManagerGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectableGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamIndexGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CVariableParamGuiComp.ui"
+				RelativePath="..\CWizardOptionsListGuiComp.ui"
 				>
 			</File>
 		</Filter>
@@ -382,39 +226,11 @@
 			Name="Moc Files"
 			>
 			<File
-				RelativePath="..\CComposedParamsSetGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileNameParamGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\COptionsListGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CParamsManagerGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectableGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionParamIndexGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CVariableParamGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CWizardGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CWizardOptionsListGuiComp.moc"
 				>
 			</File>
 		</Filter>

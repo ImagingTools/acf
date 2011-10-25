@@ -245,7 +245,7 @@
         LinearWizardController
       </Id>
       <PackageId>
-        BasePck
+        WizPck
       </PackageId>
       <ComponentId>
         LinearWizardController
@@ -285,7 +285,7 @@
         WizardGui
       </Id>
       <PackageId>
-        QtGuiPck
+        QtWizPck
       </PackageId>
       <ComponentId>
         WizardGui
