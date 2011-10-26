@@ -1,30 +1,19 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
-      <Version>
-        <Id>
-          0
-        </Id>
-        <Number>
-          2001
-        </Number>
-        <Description>
-          ACF
-        </Description>
-      </Version>
+    <VersionInfos count="0">
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="4">
     <Element>
       <Id>
-        GuiApplication
+        AttributeEditorDock
       </Id>
       <PackageId>
-        QtGuiPck
+        CompositorVoce
       </PackageId>
       <ComponentId>
-        GuiApplication
+        AttributeEditorDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -33,7 +22,98 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="4">
+          <AttributeInfo>
+            <Id>
+              AttributeSelectionObserver
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PackageOverviewDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ConsistencyInfo
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              ConsistencyInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              QuickHelpGui
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                QuickHelpDock
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        LogDock
+      </Id>
+      <PackageId>
+        AcfGuiVoce
+      </PackageId>
+      <ComponentId>
+        LogDock
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -52,131 +132,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              IconPath
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              IconPath
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MainGui
+              VersionInfo
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                WizardGuiBinder
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SplashScreen
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              SplashScreen
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SplashTime
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              SplashTime
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              StyleSheet
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              StyleSheet
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TitleFormat
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                %1 by %2
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TranslationManager
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              TranslationManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UiStartMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              UiStartMode
+              VersionInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -189,13 +151,13 @@
     </Element>
     <Element>
       <Id>
-        ParamsManager
+        PackageOverviewDock
       </Id>
       <PackageId>
-        BasePck
+        CompositorVoce
       </PackageId>
       <ComponentId>
-        ParamsManager
+        PackageOverviewDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -204,16 +166,16 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
-              FixedParamSets
+              ConfigFilePath
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              WizardPageData
+              ConfigFilePath
             </ExportId>
             <Data>
               <IsEnabled>
@@ -223,13 +185,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              FixedSetNames
+              ConsistencyInfo
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              WizardPageNames
+              ConsistencyInfo
             </ExportId>
             <Data>
               <IsEnabled>
@@ -237,30 +199,41 @@
               </IsEnabled>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        LinearWizardController
-      </Id>
-      <PackageId>
-        WizardPck
-      </PackageId>
-      <ComponentId>
-        LinearWizardController
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              WizardPages
+              DocumentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              DocumentManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnvironmentManager
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              EnvironmentManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              QuickHelpGui
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -273,146 +246,7 @@
                 true
               </IsEnabled>
               <Value>
-                ParamsManager
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        WizardGui
-      </Id>
-      <PackageId>
-        QtWizardPck
-      </PackageId>
-      <ComponentId>
-        WizardGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="7">
-          <AttributeInfo>
-            <Id>
-              Editors
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              WizardPageEditors
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              HelpViewer
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              HelpViewer
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              PageSubTitels
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              PageSubTitels
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              PageTitels
-            </Id>
-            <Type>
-              icomp::TMultiAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              PageTitels
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SideWidget
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              SideWidget
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LinearWizardController
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                LinearWizardController
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              WizardStyle
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              WizardStyle
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1
+                QuickHelpDock
               </Value>
             </Data>
           </AttributeInfo>
@@ -421,13 +255,13 @@
     </Element>
     <Element>
       <Id>
-        WizardGuiBinder
+        QuickHelpDock
       </Id>
       <PackageId>
-        QtGuiPck
+        CompositorVoce
       </PackageId>
       <ComponentId>
-        ModelEditorGui
+        ClassHelpDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -436,43 +270,53 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              Model
+              DocuEditorFileParam
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              DocuEditorFileParam
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                ParamsManager
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SlaveEditorGui
+              MetaInfoManager
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              MetaInfoManager
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                WizardGui
-              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TechDocuViewerFileParam
+            </Id>
+            <Type>
+              icomp::CReferenceAttribute
+            </Type>
+            <ExportId>
+              TechDocuViewerFileParam
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -481,30 +325,46 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
-    <Interface>
-      <InterfaceId>
-        ibase::IApplication
-      </InterfaceId>
-      <ComponentId>
-        GuiApplication
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="1">
+  <ExportedComponents count="4">
     <Component>
       <ExportedId>
-        WizardData
+        AttributeEditorDock
       </ExportedId>
       <ComponentId>
-        ParamsManager
+        AttributeEditorDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        LogDock
+      </ExportedId>
+      <ComponentId>
+        LogDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        PackageOverviewDock
+      </ExportedId>
+      <ComponentId>
+        PackageOverviewDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        QuickHelpDock
+      </ExportedId>
+      <ComponentId>
+        QuickHelpDock
       </ComponentId>
     </Component>
   </ExportedComponents>
   <Description>
-    Wizard-based application template
+    Main UI components of the Compositor
   </Description>
   <Keywords>
-    Tag='Wizard Application'
+    ACF Compositor Editor ARX UI Dock
   </Keywords>
 </Acf>

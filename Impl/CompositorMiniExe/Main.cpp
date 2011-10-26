@@ -16,19 +16,19 @@
 #include "QtPck/QtPck.h"
 #include "QtGuiPck/QtGuiPck.h"
 #include "QtViewPck/QtViewPck.h"
-#include "CmpstrPck/CmpstrPck.h"
+#include "CompositorPck/CompositorPck.h"
 
 
 static icomp::IComponent* metaInfoManagerPtr = NULL;
 static icomp::IComponent* consistInfoPtr = NULL;
-static icomp::TSimComponentWrap<CmpstrPck::AttributeEditor>* modelObserverPtr = NULL;
+static icomp::TSimComponentWrap<CompositorPck::AttributeEditor>* modelObserverPtr = NULL;
 
 
 // dirty wor-around to simulate composed components
 class RegistryView: public icomp::CComponentBase
 {
 	icomp::TSimComponentWrap<QtViewPck::SceneProvider>* sceneProviderPtr;
-	icomp::TSimComponentWrap<CmpstrPck::VisualRegistryScenographer> scenographer;
+	icomp::TSimComponentWrap<CompositorPck::VisualRegistryScenographer> scenographer;
 	icomp::TSimComponentWrap<BasePck::ModelBinder> binder;
 
 public:
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 	lockDockComp.SetStringAttr("DockTitle", "Log");
 	lockDockComp.InitComponent();
 
-	icomp::TSimComponentWrap<CmpstrPck::RegistryLoader> registryLoaderComp;
+	icomp::TSimComponentWrap<CompositorPck::RegistryLoader> registryLoaderComp;
 	registryLoaderComp.SetRef("Log", &log);
 	registryLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	registryLoaderComp.InitComponent();
@@ -173,20 +173,20 @@ int main(int argc, char *argv[])
 
 	packagesLoaderComp.LoadPackages(configFile);
 
-	icomp::TSimComponentWrap<CmpstrPck::RegistryConsistInfo> registryConsistInfoComp;
+	icomp::TSimComponentWrap<CompositorPck::RegistryConsistInfo> registryConsistInfoComp;
 	registryConsistInfoComp.SetRef("EnvironmentManager", &packagesLoaderComp);
 	registryConsistInfoComp.InitComponent();
 
-	icomp::TSimComponentWrap<CmpstrPck::PackageOverview> packageOverviewComp;
+	icomp::TSimComponentWrap<CompositorPck::PackageOverview> packageOverviewComp;
 	packageOverviewComp.SetRef("EnvironmentManager", &packagesLoaderComp);
 	packageOverviewComp.SetRef("ConsistencyInfo", &registryConsistInfoComp);
 	packageOverviewComp.InitComponent();
 
-	icomp::TSimComponentWrap<CmpstrPck::RegistryPropEditor> propertiesEditorComp;
+	icomp::TSimComponentWrap<CompositorPck::RegistryPropEditor> propertiesEditorComp;
 	propertiesEditorComp.InitComponent();
 
 	// attribute editor:
-	icomp::TSimComponentWrap<CmpstrPck::AttributeEditor> attributeEditorComp;
+	icomp::TSimComponentWrap<CompositorPck::AttributeEditor> attributeEditorComp;
 	attributeEditorComp.SetRef("AttributeSelectionObserver", &packageOverviewComp);
 	attributeEditorComp.SetRef("MetaInfoManager", &packagesLoaderComp);
 	attributeEditorComp.SetRef("ConsistencyInfo", &registryConsistInfoComp);
@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
 
 	// registry model
 	modelObserverPtr = &attributeEditorComp;
-	icomp::TSimComponentsFactory<CmpstrPck::VisualRegistry> modelFactoryComp;
+	icomp::TSimComponentsFactory<CompositorPck::VisualRegistry> modelFactoryComp;
 	modelFactoryComp.SetRef("Log", &log);
 	modelFactoryComp.SetRef("MetaInfoManager", &packagesLoaderComp);
 
