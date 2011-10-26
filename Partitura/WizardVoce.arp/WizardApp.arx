@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2001
+          2014
         </Number>
         <Description>
           ACF
@@ -15,10 +15,10 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="4">
     <Element>
       <Id>
-        GuiApplication
+        Application
       </Id>
       <PackageId>
         QtGuiPck
@@ -189,7 +189,7 @@
     </Element>
     <Element>
       <Id>
-        ParamsManager
+        WizardDocument
       </Id>
       <PackageId>
         BasePck
@@ -235,46 +235,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        LinearWizardController
-      </Id>
-      <PackageId>
-        WizardPck
-      </PackageId>
-      <ComponentId>
-        LinearWizardController
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              WizardPages
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ParamsManager
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -380,21 +340,18 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              LinearWizardController
+              WizardController
             </Id>
             <Type>
               icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              
+              WizardController
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                LinearWizardController
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -452,7 +409,7 @@
                 true
               </IsEnabled>
               <Value>
-                ParamsManager
+                WizardDocument
               </Value>
             </Data>
           </AttributeInfo>
@@ -487,17 +444,17 @@
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        GuiApplication
+        Application
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="1">
     <Component>
       <ExportedId>
-        WizardData
+        WizardDocument
       </ExportedId>
       <ComponentId>
-        ParamsManager
+        WizardDocument
       </ComponentId>
     </Component>
   </ExportedComponents>

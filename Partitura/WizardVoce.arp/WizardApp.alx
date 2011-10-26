@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2001
+          2014
         </Number>
         <Description>
           ACF
@@ -15,10 +15,10 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="4">
     <Element>
       <ComponentName>
-        GuiApplication
+        Application
       </ComponentName>
       <X>
         575
@@ -29,21 +29,10 @@
     </Element>
     <Element>
       <ComponentName>
-        ParamsManager
+        WizardDocument
       </ComponentName>
       <X>
         300
-      </X>
-      <X>
-        450
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LinearWizardController
-      </ComponentName>
-      <X>
-        575
       </X>
       <X>
         450
