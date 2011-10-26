@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2016
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="2">
+    <Element>
+      <ComponentName>
+        LinearWizardController
+      </ComponentName>
+      <X>
+        850
+      </X>
+      <X>
+        500
+      </X>
+    </Element>
+    <Element>
+      <ComponentName>
+        WizardBasedApp
+      </ComponentName>
+      <X>
+        575
+      </X>
+      <X>
+        300
+      </X>
+    </Element>
+  </PositionMap>
+</Acf>
