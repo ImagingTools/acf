@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1860
+          2020
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          369
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -44,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="20">
+        <AttributeInfoMap count="21">
           <AttributeInfo>
             <Id>
               AllowViewRepeating
@@ -228,7 +217,7 @@
                 true
               </IsEnabled>
               <Value>
-                &#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF Solutions project&#10;See 'License.txt' for license information
+                &#169; Copyright 2011 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF project&#10;See 'License.txt' for license information
               </Value>
             </Data>
           </AttributeInfo>
@@ -247,7 +236,7 @@
                 true
               </IsEnabled>
               <Value>
-                :/Icons/CompositorLogo.svg
+                :/Images/CompositorLogo.svg
               </Value>
             </Data>
           </AttributeInfo>
@@ -301,7 +290,7 @@
                 true
               </IsEnabled>
               <Value>
-                ACF-Solutions
+                ACF
               </Value>
             </Data>
           </AttributeInfo>
@@ -321,6 +310,25 @@
               </IsEnabled>
               <Value>
                 Settings
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowAboutProductName
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
               </Value>
             </Data>
           </AttributeInfo>

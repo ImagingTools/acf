@@ -4,8 +4,6 @@
 		<file alias="Back">Resources/Icons/back_128.png</file>
 		<file alias="Export.svg">Resources/Icons/Export.svg</file>
 		<file alias="AutoInit.svg">Resources/Icons/Anchor.svg</file>
-		<file alias="CompositorLogo.svg">Resources/Icons/CompositorLogo.svg</file>
-		<file alias="CompositorIcon.svg">Resources/Icons/CompositorIcon.svg</file>
 		<file alias="ExportToCode.svg">Resources/Icons/ExportToCode.svg</file>
 		<file alias="RealComponent.svg">Resources/Icons/RealComponent.svg</file>
 		<file alias="CompositeComponent.svg">Resources/Icons/CompositeComponent.svg</file>

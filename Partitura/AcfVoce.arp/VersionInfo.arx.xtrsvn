@@ -45,7 +45,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="18">
+							<Values count="19">
 								<Value>
 									0.9.0
 								</Value>
@@ -100,6 +100,9 @@
                 <Value>
                   1.5.0
                 </Value>
+                <Value>
+                  1.5.1
+                </Value>
               </Values>
 						</Data>
 					</AttributeInfo>
@@ -117,7 +120,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="18">
+							<Values count="19">
 								<Value>
 									940
 								</Value>
@@ -171,6 +174,9 @@
                 </Value>
                 <Value>
                   1943
+                </Value>
+                <Value>
+                  2020
                 </Value>
               </Values>
 						</Data>

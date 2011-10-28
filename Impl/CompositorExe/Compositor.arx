@@ -450,6 +450,6 @@
     Compositor tool - graphical editor for ACF registry files
   </Description>
   <Keywords>
-    ACF Editor ARX Company='ImagingTools' Project='ACF-Solutions' Author='"Witold Gantzke" "Kirill Lepskiy"' Category='Tool' Tag='Compositor'
+    ACF Editor ARX Company='ImagingTools' Project='ACF' Author='"Witold Gantzke" "Kirill Lepskiy"' Category='Tool' Tag='Compositor'
   </Keywords>
 </Acf>
