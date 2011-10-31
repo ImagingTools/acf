@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1860
+          2021
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          369
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -179,7 +168,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="5">
     <Interface>
       <InterfaceId>
         ibase::IMessageConsumer
@@ -198,10 +187,26 @@
     </Interface>
     <Interface>
       <InterfaceId>
+        imod::IModel
+      </InterfaceId>
+      <ComponentId>
+        LogModel
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
         ModelEditorGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        LogModel
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
