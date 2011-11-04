@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          1410
+          2027
         </Number>
         <Description>
           ACF
@@ -18,24 +18,24 @@
   <PositionMap count="2">
     <Element>
       <ComponentName>
-        AcfInfo
+        BaseInfo
       </ComponentName>
       <X>
-        375
+        575
       </X>
       <X>
-        375
+        275
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
+        VersionInfo
       </ComponentName>
       <X>
-        725
+        575
       </X>
       <X>
-        375
+        400
       </X>
     </Element>
   </PositionMap>
