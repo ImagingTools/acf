@@ -55,9 +55,28 @@ public:
 		UM_RADIOBUTTON_VERTICAL
 	};
 
+	/**
+		Command label position
+	*/
+	enum LabelPosition
+	{
+		/**
+			Left from the selector
+		*/
+		LP_LEFT,
+
+		/**
+			On top of the selector
+		*/
+		LP_TOP
+	};
+
+
 	I_BEGIN_COMPONENT(CSelectionParamGuiComp);
-		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Label for the options selector", false, "Select");
-		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode. 0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", false, 0);
+		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Command label for the options selector", false, "Select");
+		I_ASSIGN(m_infoLabelAttrPtr, "InfoLabel", "Information label for the options selector", false, "Info");
+		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode. 0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", false, UM_COMBOBOX);
+		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -70,6 +89,7 @@ protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
+	virtual void OnGuiShown();
 
 protected Q_SLOTS:
 	void OnSelectionChanged(int index);
@@ -78,14 +98,19 @@ protected Q_SLOTS:
 private:
 	void UpdateComboBoxesView();
 	void UpdateRadioButtonView(bool useVerticalLayout = false);
+	void UpdateDescriptionFrame();
 
 private:
 	I_ATTR(istd::CString, m_optionsLabelAttrPtr);
+	I_ATTR(istd::CString, m_infoLabelAttrPtr);
 	I_ATTR(int, m_uiModeAttrPtr);
+	I_ATTR(int, m_labelPositionAttrPtr);
 
 	istd::TPointerVector<QComboBox> m_comboBoxes;
 	istd::TPointerVector<QRadioButton> m_radioButtons;
 	istd::TDelPtr<QFrame> m_radioButtonFramePtr;
+
+	istd::TDelPtr<QLabel> m_selectorLabelPtr;
 };
 
 

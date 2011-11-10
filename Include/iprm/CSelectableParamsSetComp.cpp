@@ -166,6 +166,19 @@ istd::CString CSelectableParamsSetComp::GetOptionName(int index) const
 	return noname;
 }
 
+istd::CString CSelectableParamsSetComp::GetOptionDescription(int index) const
+{
+	if (m_paramsManagerCompPtr.IsValid()){
+		const iprm::ISelectionConstraints* constraintsPtr = m_paramsManagerCompPtr->GetSelectionConstraints();
+		if (constraintsPtr != NULL){
+			return constraintsPtr->GetOptionDescription(index);
+		}
+	}
+
+	return istd::CString();
+}
+
+
 
 // public methods of the embedded class CurrentParamsSetObserver
 

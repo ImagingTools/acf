@@ -61,6 +61,8 @@ void CSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 			UpdateRadioButtonView(true);
 			break;
 	}
+
+	UpdateDescriptionFrame();
 }
 
 
@@ -70,12 +72,38 @@ void CSelectionParamGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	DescriptionFrame->hide();
+
+	if (!m_infoLabelAttrPtr.IsValid()){
+		InfoFrame->hide();
+	}
+
 	if (m_optionsLabelAttrPtr.IsValid()){
-		SelectionLabel->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+		int labelPosition = LP_LEFT;
+
+		if (m_labelPositionAttrPtr.IsValid()){
+			labelPosition = *m_labelPositionAttrPtr;
+		}
+
+		QLabel* selectorLabelPtr = new QLabel(SelectionFrame);
+		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+		selectorLabelPtr->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+
+		QLayout* selectorLayoutPtr = NULL;
+		I_ASSERT(SelectionFrame->layout() == NULL);
+
+		if (labelPosition == LP_LEFT){
+			selectorLayoutPtr = new QHBoxLayout(SelectionFrame);
+			
+		}
+		else{
+			selectorLayoutPtr = new QVBoxLayout(SelectionFrame);			
+		}
+
+		selectorLayoutPtr->setMargin(0);
+		selectorLayoutPtr->addWidget(selectorLabelPtr);
 	}
-	else{
-		SelectionLabel->hide();
-	}
+
 }
 
 
@@ -86,6 +114,27 @@ void CSelectionParamGuiComp::OnGuiDestroyed()
 	m_radioButtonFramePtr.Reset();
 
 	BaseClass::OnGuiDestroyed();
+}
+
+
+void CSelectionParamGuiComp::OnGuiShown()
+{
+	BaseClass::OnGuiShown();
+
+	if (m_optionsLabelAttrPtr.IsValid() && m_selectorLabelPtr.IsValid()){
+		m_selectorLabelPtr->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+	}
+
+	if (m_infoLabelAttrPtr.IsValid()){
+		InfoLabel->setText(iqt::GetQString(*m_infoLabelAttrPtr));
+
+		InfoIcon->setScaledContents(true);
+		InfoIcon->setMaximumWidth(32);
+		InfoIcon->setMaximumHeight(32);
+		InfoIcon->setMinimumWidth(32);
+		InfoIcon->setMinimumHeight(32);
+		InfoIcon->setPixmap(QPixmap(":/Icons/About"));
+	}
 }
 
 
@@ -222,6 +271,27 @@ void CSelectionParamGuiComp::UpdateRadioButtonView(bool useVerticalLayout)
 				selectedButtonPtr->setChecked(true);
 			}
 	
+		}
+	}
+}
+
+
+void CSelectionParamGuiComp::UpdateDescriptionFrame()
+{
+	DescriptionFrame->setVisible(false);
+
+	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
+	if (selectionPtr != NULL){
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
+		if (constraintsPtr != NULL){
+			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+
+			QString optionDescription = iqt::GetQString(constraintsPtr->GetOptionDescription(selectedIndex));
+			DescriptionLabel->setText(optionDescription);
+
+			if (!optionDescription.isEmpty()){
+				DescriptionFrame->setVisible(true);
+			}
 		}
 	}
 }

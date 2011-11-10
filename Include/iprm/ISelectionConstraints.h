@@ -23,7 +23,14 @@ public:
 	*/
 	enum ChangeFlags
 	{
-		CF_OPTIONS_COUNT_CHANGED = 1 << 18,
+		/**
+			Option list updated.
+		*/
+		CF_OPTIONS_CHANGED = 1 << 18,
+
+		/**
+			One or more options were renamed.
+		*/
 		CF_OPTION_RENAMED = 1 << 19
 	};
 
@@ -36,6 +43,11 @@ public:
 		Get name of specified option.
 	*/
 	virtual istd::CString GetOptionName(int index) const = 0;
+
+	/**
+		Get description for a option with the index \c index.
+	*/
+	virtual istd::CString GetOptionDescription(int index) const = 0;
 };
 
 

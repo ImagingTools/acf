@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNameParamComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerComp.cpp"
 				>
 			</File>
@@ -235,6 +239,10 @@
 			</File>
 			<File
 				RelativePath="..\CManagerParamsSetShadowerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNameParamComp.h"
 				>
 			</File>
 			<File

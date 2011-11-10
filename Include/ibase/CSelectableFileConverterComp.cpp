@@ -119,6 +119,13 @@ istd::CString CSelectableFileConverterComp::GetOptionName(int index) const
 }
 
 
+istd::CString CSelectableFileConverterComp::GetOptionDescription(int index) const
+{
+	I_ASSERT(m_slaveConverterDescriptionsAttrPtr.IsValid());
+
+	return m_slaveConverterDescriptionsAttrPtr[index];
+}
+
 } // namespace ibase
 
 

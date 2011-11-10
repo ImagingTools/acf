@@ -26,6 +26,9 @@ public:
 	*/
 	virtual void SetName(const istd::CString& name) = 0;
 
+	/**
+		Return \c true, if the name setting is enabled.
+	*/
 	virtual bool IsNameFixed() const = 0;
 };
 

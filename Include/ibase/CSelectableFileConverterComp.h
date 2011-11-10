@@ -30,6 +30,7 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_slaveConvertersCompPtr, "SlaveConverters", "List of the slave converters", true);
 		I_ASSIGN_MULTI_0(m_slaveConverterNamesAttrPtr, "SlaveConverterNames", "List of the converter names", true);
+		I_ASSIGN_MULTI_0(m_slaveConverterDescriptionsAttrPtr, "SlaveConverterDescriptions", "List of the converter's descriptions", true);
 	I_END_COMPONENT;
 
 	CSelectableFileConverterComp();
@@ -56,10 +57,12 @@ protected:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetOptionsCount() const;
 	virtual istd::CString GetOptionName(int index) const;
+	virtual istd::CString GetOptionDescription(int index) const;
 
 private:
 	I_MULTIREF(ibase::IFileConvertCopy, m_slaveConvertersCompPtr);
 	I_MULTIATTR(istd::CString, m_slaveConverterNamesAttrPtr);
+	I_MULTIATTR(istd::CString, m_slaveConverterDescriptionsAttrPtr);
 
 	int m_optionsCount;
 	int m_selectedOptionIndex;

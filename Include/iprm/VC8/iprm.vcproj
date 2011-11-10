@@ -5,7 +5,6 @@
 	Name="iprm"
 	ProjectGUID="{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}"
 	RootNamespace="iprm"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -189,6 +188,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNameParamComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerComp.cpp"
 				>
 			</File>
@@ -235,6 +238,10 @@
 			</File>
 			<File
 				RelativePath="..\CManagerParamsSetShadowerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CNameParamComp.h"
 				>
 			</File>
 			<File

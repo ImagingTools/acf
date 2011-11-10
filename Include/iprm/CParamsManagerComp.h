@@ -71,6 +71,7 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetOptionsCount() const;
 	virtual istd::CString GetOptionName(int index) const;
+	virtual istd::CString GetOptionDescription(int index) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)

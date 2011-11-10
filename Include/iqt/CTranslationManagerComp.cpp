@@ -167,6 +167,12 @@ istd::CString CTranslationManagerComp::GetOptionName(int index) const
 }
 
 
+istd::CString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
+{
+	return istd::CString();
+}
+
+
 // public methods embedded class LanguageSelectionObserver
 
 CTranslationManagerComp::LanguageSelectionObserver::LanguageSelectionObserver(CTranslationManagerComp& parent)

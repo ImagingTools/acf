@@ -24,6 +24,18 @@ istd::CString CSelectionConstraintsComp::GetOptionName(int index) const
 }
 
 
+istd::CString CSelectionConstraintsComp::GetOptionDescription(int index) const
+{
+	I_ASSERT(index >= 0);
+
+	if (index < m_optionDescriptionsAttrPtr.GetCount()){
+		return m_optionDescriptionsAttrPtr[index];
+	}
+
+	return istd::CString();
+}
+
+
 } // namespace iprm
 
 

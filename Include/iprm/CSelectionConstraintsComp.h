@@ -27,14 +27,17 @@ public:
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
 		I_ASSIGN_MULTI_0(m_optionNamesAttrPtr, "OptionNames", "Names of selectable options", true);
+		I_ASSIGN_MULTI_0(m_optionDescriptionsAttrPtr, "OptionDescriptions", "Descriptions of selectable options", true);
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetOptionsCount() const;
 	virtual istd::CString GetOptionName(int index) const;
+	virtual istd::CString GetOptionDescription(int index) const;
 
 private:
 	I_MULTIATTR(istd::CString, m_optionNamesAttrPtr);
+	I_MULTIATTR(istd::CString, m_optionDescriptionsAttrPtr);
 };
 
 

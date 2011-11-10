@@ -79,11 +79,38 @@ bool CSelectionParamComp::Serialize(iser::IArchive& archive)
 
 // protected methods
 
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CSelectionParamComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	// adjust selection to the new constraints:
+	SetSelectedOptionIndex(0);
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CSelectionParamComp::OnComponentCreated()
 {
+	BaseClass::OnComponentCreated();
+
 	m_selectedOptionIndex = *m_defaultIndexAttrPtr;
+/*
+	if (m_constraintsCompPtr.IsValid()){
+		imod::IModel* constraintsModelPtr = dynamic_cast<imod::IModel*>(m_constraintsCompPtr.GetPtr());
+		if (constraintsModelPtr != NULL){
+			RegisterModel(constraintsModelPtr);
+		}
+	}
+	*/
+}
+
+
+void CSelectionParamComp::OnComponentDestroyed()
+{
+	UnregisterAllModels();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 
