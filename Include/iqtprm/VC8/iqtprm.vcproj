@@ -6,7 +6,6 @@
 	ProjectGUID="{B11EFB14-C129-4F69-8143-8127D45770BF}"
 	RootNamespace="iqtprm"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -179,6 +178,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNameParamGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -221,6 +224,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNameParamGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerGuiComp.h"
 				>
 			</File>
@@ -258,6 +265,10 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="..\CNameParamGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\Generated\moc_CComposedParamsSetGuiComp.cpp"
 				>
@@ -324,6 +335,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileNameParamGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CNameParamGuiComp.ui"
 				>
 			</File>
 			<File

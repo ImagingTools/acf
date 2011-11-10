@@ -85,10 +85,6 @@ void CSelectionParamGuiComp::OnGuiCreated()
 			labelPosition = *m_labelPositionAttrPtr;
 		}
 
-		QLabel* selectorLabelPtr = new QLabel(SelectionFrame);
-		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-		selectorLabelPtr->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
-
 		QLayout* selectorLayoutPtr = NULL;
 		I_ASSERT(SelectionFrame->layout() == NULL);
 
@@ -100,10 +96,14 @@ void CSelectionParamGuiComp::OnGuiCreated()
 			selectorLayoutPtr = new QVBoxLayout(SelectionFrame);			
 		}
 
-		selectorLayoutPtr->setMargin(0);
+		selectorLayoutPtr->setContentsMargins(0, 0, 0, 0);
+
+		QLabel* selectorLabelPtr = new QLabel(SelectionFrame);
+		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+		selectorLabelPtr->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+
 		selectorLayoutPtr->addWidget(selectorLabelPtr);
 	}
-
 }
 
 
@@ -146,6 +146,8 @@ void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
 		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
+
+		UpdateDescriptionFrame();
 	}
 }
 
@@ -187,7 +189,10 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 				selectionPtr != NULL;
 				selectionPtr = selectionPtr->GetActiveSubselection()){
 		QComboBox* switchBoxPtr = new QComboBox(SelectionFrame);
+		switchBoxPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+
 		m_comboBoxes.PushBack(switchBoxPtr);
+		
 		QLayout* layoutPtr = SelectionFrame->layout();
 		if (layoutPtr != NULL){
 			layoutPtr->addWidget(switchBoxPtr);
@@ -209,6 +214,8 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 			switchBoxPtr->setCurrentIndex(selectedIndex);
 		}
 	}
+
+	UpdateDescriptionFrame();
 }
 
 
@@ -273,6 +280,8 @@ void CSelectionParamGuiComp::UpdateRadioButtonView(bool useVerticalLayout)
 	
 		}
 	}
+
+	UpdateDescriptionFrame();
 }
 
 
