@@ -35,14 +35,14 @@ const IComponentStaticInfo* CCompositePackageStaticInfo::GetEmbeddedComponentInf
 		ComponentInfo& info = infoIter->second;
 
 		if (!info.isInitialized){
+			info.isInitialized = true;
+
 			icomp::CComponentAddress address(m_packageId, embeddedId);
 
 			const icomp::IRegistry* registryPtr = m_envManager.GetRegistry(address);
 			if (registryPtr != NULL){
 				info.componentInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(*registryPtr, m_envManager, this));
 			}
-
-			info.isInitialized = true;
 		}
 
 		return info.componentInfoPtr.GetPtr();

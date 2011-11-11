@@ -62,7 +62,7 @@ protected:
 		\param	componentId		ID of subcomponent.
 		\param	subContextPtr	pointer to subcomponent context will be set to new context object if needed.
 		\param	subComponentPtr	optional pointer to subcomponent will be set to new component object.
-		\param	isOwned			true, if created component will be owned by this component.
+		\param	isOwned			true, if created component will be owned by this component and should delegate its destroy event.
 		\return					true if success.
 	*/
 	bool CreateSubcomponentInfo(
@@ -76,15 +76,25 @@ protected:
 private:
 	struct ComponentInfo
 	{
-		ComponentInfo(): isInitialized(false){}
-		ComponentInfo(const ComponentInfo& info)
-		:	componentPtr(info.componentPtr),
-			contextPtr(info.contextPtr),
-			isInitialized(false){}
-
+		ComponentInfo(): isComponentInitialized(false), isContextInitialized(false){}
+		/**
+			Pointer to component context for some component type.
+		*/
 		ComponentPtr componentPtr;
+		/**
+			Flag signaling we tried to create context of this component.
+			It is used to avoid multiple initialization of component context.
+		*/
+		bool isComponentInitialized;
+		/**
+			Pointer to static component for some component type.
+		*/
 		ContextPtr contextPtr;
-		bool isInitialized;
+		/**
+			Flag signaling we tried to create static component.
+			It is used to avoid multiple initialization of component.
+		*/
+		bool isContextInitialized;
 	};
 
 	typedef std::map< std::string, ComponentInfo > ComponentMap;

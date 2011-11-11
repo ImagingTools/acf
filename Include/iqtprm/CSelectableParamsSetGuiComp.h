@@ -28,8 +28,8 @@ public:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelDetached();
 	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
 
 private:
 	void EnsureDetachLastEditor();

@@ -76,6 +76,7 @@ protected:
 	void GenerateComponentTree(bool forceUpdate);
 	void UpdateComponentGroups();
 	void UpdateInterfaceList();
+	void UpdateAllLists();
 
 	/**
 		Get component list, that match to the filter criteria.

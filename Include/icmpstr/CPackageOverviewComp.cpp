@@ -216,7 +216,6 @@ CPackageOverviewComp::CPackageOverviewComp()
 	m_reloadCommand("", 110, ibase::ICommand::CF_GLOBAL_MENU),
 	m_registryObserver(this),
 	m_configObserver(this),
-	m_currentPackageGroupIndex(-1),
 	m_startDrag(false),
 	m_starDragPosition(0, 0)
 {
@@ -489,6 +488,16 @@ void CPackageOverviewComp::UpdateInterfaceList()
 }
 
 
+void CPackageOverviewComp::UpdateAllLists()
+{
+	UpdateInterfaceList();
+
+	UpdateComponentGroups();
+
+	GenerateComponentTree(true);
+}
+
+
 icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredComponentAdresses() const
 {
 	icomp::IMetaInfoManager::ComponentAddresses filteredComponentAdresses;
@@ -638,6 +647,12 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 
 void CPackageOverviewComp::on_FilterEdit_editingFinished()
 {
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
+
 	QStringList keywordsFilter = FilterEdit->text().split(QChar(' '), QString::SkipEmptyParts,  Qt::CaseInsensitive);
 
 	if (keywordsFilter != m_keywordsFilter){
@@ -652,12 +667,24 @@ void CPackageOverviewComp::on_FilterEdit_editingFinished()
 
 void CPackageOverviewComp::on_GroupByCB_currentIndexChanged(int /*index*/)
 {
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
+
 	GenerateComponentTree(true);
 }
 
 
 void CPackageOverviewComp::on_PackagesList_itemSelectionChanged()
 {
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker blocker(this);
+
 	QList<QTreeWidgetItem*> items = PackagesList->selectedItems();
 	if (items.count() > 0){
 		const PackageComponentItem* itemPtr = dynamic_cast<const PackageComponentItem*>(items.at(0));
@@ -749,13 +776,7 @@ void CPackageOverviewComp::OnReloadPackages()
 	static iqt::CFileSystem fileSystem;
 	m_envManagerCompPtr->LoadPackages(fileSystem.GetNormalizedPath(configFilePath));
 
-	UpdateInterfaceList();
-
-	m_currentPackageGroupIndex = GroupByCB->currentIndex();
-
-	UpdateComponentGroups();
-
-	GenerateComponentTree(true);
+	UpdateAllLists();
 }
 
 
@@ -964,10 +985,6 @@ void CPackageOverviewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	if (m_configFilePathModelCompPtr.IsValid()){
-		m_configFilePathModelCompPtr->AttachObserver(&m_configObserver);
-	}
-
 	m_realComponentIcon = QIcon(":/Icons/RealComponent.svg");
 	m_compositeComponentIcon = QIcon(":/Icons/CompositeComponent.svg");
 	m_mixedComponentIcon = QIcon(":/Icons/MixedComponent.svg");
@@ -986,14 +1003,6 @@ void CPackageOverviewComp::OnGuiCreated()
 	PackagesList->setStyleSheet("QTreeView::branch {background: palette(base);}");
 
 	PackagesList->viewport()->installEventFilter(this);
-
-	UpdateInterfaceList();
-
-	m_currentPackageGroupIndex = GroupByCB->currentIndex();
-
-	UpdateComponentGroups();
-
-	GenerateComponentTree(true);
 }
 
 
@@ -1018,14 +1027,24 @@ void CPackageOverviewComp::OnRetranslate()
 
 void CPackageOverviewComp::OnGuiRetranslate()
 {
+	UpdateBlocker blocker(this);
+
+	int currentGroupIndex = GroupByCB->currentIndex();
+
 	BaseClass::OnGuiRetranslate();
 
 	// Work around a Qt bug: By retranslation of the UI the combo boxes will be reset and lose their previous model:
-	UpdateInterfaceList();
+	GroupByCB->setCurrentIndex(currentGroupIndex);
 
-	UpdateComponentGroups();
-
-	GroupByCB->setCurrentIndex(m_currentPackageGroupIndex);
+	if (m_configFilePathModelCompPtr.IsValid()){
+		if (		!m_configFilePathModelCompPtr->IsAttached(&m_configObserver) &&
+					!m_configFilePathModelCompPtr->AttachObserver(&m_configObserver)){
+			UpdateAllLists();
+		}
+	}
+	else{
+		UpdateAllLists();
+	}
 }
 
 
@@ -1141,7 +1160,20 @@ CPackageOverviewComp::ConfigObserver::ConfigObserver(CPackageOverviewComp* paren
 
 void CPackageOverviewComp::ConfigObserver::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	m_parent.OnReloadPackages();
+	if (!m_parent.m_envManagerCompPtr.IsValid()){
+		return;
+	}
+
+	istd::CString configFilePath;
+	if (m_parent.m_configFilePathCompPtr.IsValid()){
+		configFilePath = m_parent.m_configFilePathCompPtr->GetPath();
+	}
+	static iqt::CFileSystem fileSystem;
+
+	if (configFilePath != m_parent.m_envManagerCompPtr->GetConfigFilePath()){
+		m_parent.m_envManagerCompPtr->LoadPackages(fileSystem.GetNormalizedPath(configFilePath));
+		m_parent.UpdateAllLists();
+	}
 }
 
 

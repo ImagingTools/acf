@@ -193,10 +193,13 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 
 		m_comboBoxes.PushBack(switchBoxPtr);
 		
-		QLayout* layoutPtr = SelectionFrame->layout();
-		if (layoutPtr != NULL){
-			layoutPtr->addWidget(switchBoxPtr);
+		QLayout* mainLayoutPtr = SelectionFrame->layout();
+		if (mainLayoutPtr == NULL){
+			mainLayoutPtr = new QHBoxLayout(SelectionFrame);
 		}
+
+		mainLayoutPtr->setMargin(0);
+		mainLayoutPtr->addWidget(switchBoxPtr);
 
 		QObject::connect(switchBoxPtr, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 

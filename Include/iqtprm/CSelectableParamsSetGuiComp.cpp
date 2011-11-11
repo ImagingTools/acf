@@ -43,19 +43,19 @@ void CSelectableParamsSetGuiComp::AfterUpdate(imod::IModel* modelPtr, int update
 
 // reimplemented (iqtgui::TModelObserverWrap)
 
-void CSelectableParamsSetGuiComp::OnGuiModelDetached()
-{
-	EnsureDetachLastEditor();
-
-	BaseClass::OnGuiModelDetached();
-}
-
-
 void CSelectableParamsSetGuiComp::OnGuiModelAttached()
 {
 	ConnectCurrentEditor();
 
 	BaseClass::OnGuiModelAttached();
+}
+
+
+void CSelectableParamsSetGuiComp::OnGuiModelDetached()
+{
+	EnsureDetachLastEditor();
+
+	BaseClass::OnGuiModelDetached();
 }
 
 
