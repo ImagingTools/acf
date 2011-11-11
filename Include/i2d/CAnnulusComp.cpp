@@ -4,6 +4,7 @@
 namespace i2d
 {		
 
+
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
@@ -17,7 +18,7 @@ void CAnnulusComp::OnComponentCreated()
 	I_ASSERT(m_innerRadiusAttrPtr.IsValid());
 	I_ASSERT(m_outerRadiusAttrPtr.IsValid());
 
-	SetPosition(i2d::CVector2d(*m_centerXAttrPtr, *m_centerXAttrPtr));
+	SetPosition(i2d::CVector2d(*m_centerXAttrPtr, *m_centerYAttrPtr));
 	SetOuterRadius(*m_outerRadiusAttrPtr);
 	SetInnerRadius(*m_innerRadiusAttrPtr);
 }
