@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1860
+          2040
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          369
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -54,7 +43,7 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        250
+        600
       </X>
       <X>
         75
@@ -68,7 +57,7 @@
         300
       </X>
       <X>
-        375
+        325
       </X>
     </Element>
     <Element>
@@ -79,7 +68,7 @@
         600
       </X>
       <X>
-        375
+        325
       </X>
     </Element>
     <Element>
@@ -98,10 +87,10 @@
         Splash
       </ComponentName>
       <X>
-        900
+        225
       </X>
       <X>
-        100
+        75
       </X>
     </Element>
     <Element>
@@ -112,7 +101,7 @@
         600
       </X>
       <X>
-        475
+        450
       </X>
     </Element>
     <Element>
@@ -131,7 +120,7 @@
         VersionInfo
       </ComponentName>
       <X>
-        600
+        975
       </X>
       <X>
         75

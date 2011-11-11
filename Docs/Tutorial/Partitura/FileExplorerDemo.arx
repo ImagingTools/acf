@@ -1,32 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1860
+          2040
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          369
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="6">
+  <ElementsList count="5">
     <Element>
       <Id>
         BitmapFileExplorer
@@ -253,7 +242,7 @@
               </IsEnabled>
               <Values count="2">
                 <Value>
-                  FileNameParamGuiBinder
+                  FileNameParamGui
                 </Value>
                 <Value>
                   BitmapFileExplorer
@@ -338,50 +327,10 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              PathLabel
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                File Path
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        FileNameParamGuiBinder
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        ModelEditorGui
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
         <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              Model
+              DefaultModel
             </Id>
             <Type>
               icomp::CReferenceAttribute
@@ -400,10 +349,10 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              SlaveEditorGui
+              PathLabel
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              icomp::TAttribute&lt;istd::CString&gt;
             </Type>
             <ExportId>
               
@@ -413,7 +362,7 @@
                 true
               </IsEnabled>
               <Value>
-                FileNameParamGui
+                File Path
               </Value>
             </Data>
           </AttributeInfo>
