@@ -30,13 +30,20 @@ protected:
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int updateFlags = 0);
-
+	virtual void OnGuiModelAttached();
 
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 
 private Q_SLOTS:
+	/**
+		The function will be triggered on changes of A.
+	*/
 	void OnAValueChanged(int value);
+
+	/**
+		The function will be triggered on changes of B.
+	*/
 	void OnBValueChanged(const QString& value);
 };
 

@@ -5,6 +5,10 @@
 #include "istd/TChangeNotifier.h"
 
 
+// Tutorial includes
+#include "IAconstraints.h"
+
+
 // protected methods
 
 // reimplemented (imod::IModelEditor)
@@ -33,6 +37,20 @@ void CAbGuiComp::UpdateGui(int /*updateFlags*/)
 
 		BValueEdit->setText(objectPtr->GetB().c_str());
 	}
+}
+
+void CAbGuiComp::OnGuiModelAttached()
+{
+	// Set data model constraints to the editor of A:
+	IAb* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
+
+	const IAConstraints& constraints = objectPtr->GetAConstraints();
+	AValueSpinBox->setMinimum(constraints.GetARange().GetMinValue());
+	AValueSpinBox->setMaximum(constraints.GetARange().GetMaxValue());
+
+	// Call basic functionality:
+	BaseClass::OnGuiModelAttached();
 }
 
 
