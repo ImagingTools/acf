@@ -17,6 +17,11 @@ I_EXPORT_COMPONENT(
 			"Text editor being observer of text model",
 			"Text Tutorial Document Observer Qt GUI");
 
+I_EXPORT_COMPONENT(
+			AB,
+			"Data model of AB",
+			"Data Model AB");
+
 
 } // namespace TutorialPck
 

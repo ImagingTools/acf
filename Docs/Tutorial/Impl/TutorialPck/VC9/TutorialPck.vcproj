@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="TutorialPck"
 	ProjectGUID="{5B77A7D7-79EB-4B4B-9FFB-4745195B18FB}"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -82,9 +83,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -160,9 +158,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -176,7 +171,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\Main.cpp"
+				RelativePath="..\TutorialPck.cpp"
 				>
 			</File>
 		</Filter>
@@ -213,4 +208,3 @@
 		/>
 	</Globals>
 </VisualStudioProject>
-

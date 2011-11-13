@@ -201,26 +201,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="Header Files"
-			Filter="h"
-			>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="qrc;*"
-			ParseFiles="false"
-			>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			Filter="moc;h;cpp"
-			>
-		</Filter>
-		<Filter
-			Name="Forms"
-			>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

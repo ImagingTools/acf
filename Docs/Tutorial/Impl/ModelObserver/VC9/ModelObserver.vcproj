@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="DocView"
-	ProjectGUID="{0DE2C74D-7A15-4CCD-9DE0-3B92933B28ED}"
-	RootNamespace="DocView"
+	Name="ModelObserver"
+	ProjectGUID="{07031D01-E5E9-48E5-B121-E389B3BD196D}"
+	RootNamespace="ModelObserver"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -203,7 +203,7 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CTextEditorComp.cpp"
+				RelativePath="..\CAbComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -212,7 +212,11 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CTextEditorComp.h"
+				RelativePath="..\CAbComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IAb.h"
 				>
 			</File>
 		</Filter>
@@ -226,22 +230,10 @@
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			>
-			<File
-				RelativePath="..\Generated\moc_CTextEditorComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Qt Designer Files"
 			>
-		</Filter>
-		<Filter
-			Name="Moc Files"
-			>
-			<File
-				RelativePath="..\CTextEditorComp.moc"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
