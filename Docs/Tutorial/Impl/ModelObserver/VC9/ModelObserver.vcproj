@@ -206,6 +206,10 @@
 				RelativePath="..\CAbComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\CAbGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -213,6 +217,10 @@
 			>
 			<File
 				RelativePath="..\CAbComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CAbGuiComp.h"
 				>
 			</File>
 			<File
@@ -230,10 +238,30 @@
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			>
+			<File
+				RelativePath="..\Generated\moc_CAbGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CAbGuiComp.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Qt Designer Files"
 			>
+			<File
+				RelativePath="..\CAbGuiComp.ui"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CAbGuiComp.moc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -22,6 +22,11 @@ I_EXPORT_COMPONENT(
 			"Data model of AB",
 			"Data Model AB");
 
+I_EXPORT_COMPONENT(
+			AbGui,
+			"Editor for AB data model",
+			"Data Model AB Editor GUI");
+
 
 } // namespace TutorialPck
 

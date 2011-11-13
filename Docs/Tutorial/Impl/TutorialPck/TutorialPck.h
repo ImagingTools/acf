@@ -7,6 +7,7 @@
 #include "DocView/CTextEditorComp.h"
 
 #include "ModelObserver/CAbComp.h"
+#include "ModelObserver/CAbGuiComp.h"
 
 
 /**
@@ -19,6 +20,7 @@ namespace TutorialPck
 typedef CTextEditorComp TextEditor;
 
 typedef icomp::TModelCompWrap<CAbComp> AB;
+typedef CAbGuiComp AbGui;
 
 
 } // namespace TutorialPck
