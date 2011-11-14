@@ -14,12 +14,12 @@
    height="258.22198"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.2 r9819"
    sodipodi:docname="AcfLogo3d.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0"
    style="enable-background:new"
-   inkscape:export-filename="C:\Dokumente und Einstellungen\wga\Desktop\Test.png"
+   inkscape:export-filename="AcfLogo3d_full.png"
    inkscape:export-xdpi="187.59"
    inkscape:export-ydpi="187.59">
   <defs
@@ -418,7 +418,7 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="1912"
-     inkscape:window-height="1126"
+     inkscape:window-height="1061"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0">
@@ -495,7 +495,7 @@
        sodipodi:cy="548.7254"
        sodipodi:rx="16.970562"
        sodipodi:ry="16.440233"
-       d="m 364.15998,548.7254 a 16.970562,16.440233 0 1 1 -33.94112,0 16.970562,16.440233 0 1 1 33.94112,0 z"
+       d="m 364.15998,548.7254 c 0,9.07969 -7.59797,16.44024 -16.97056,16.44024 -9.37258,0 -16.97056,-7.36055 -16.97056,-16.44024 0,-9.07969 7.59798,-16.44023 16.97056,-16.44023 9.37259,0 16.97056,7.36054 16.97056,16.44023 z"
        transform="matrix(0.943137,0,0,1.1618462,20.59015,-90.047374)" />
     <g
        id="g5205"

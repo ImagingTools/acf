@@ -227,6 +227,10 @@
 				RelativePath="..\IAb.h"
 				>
 			</File>
+			<File
+				RelativePath="..\IAConstraints.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
