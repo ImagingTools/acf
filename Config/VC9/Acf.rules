@@ -7,7 +7,7 @@
 		<CustomBuildRule
 			Name="Arxc"
 			DisplayName="ARX Compiler"
-			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Arxc.exe $(InputPath) -o $(InputDir)Generated\C$(InputName).cpp [AllOptions] [AdditionalOptions]"
+			CommandLine="..\..\..\Bin\$(ConfigurationName)VC9\Arxc.exe $(InputPath) -o $(InputDir)Generated\C$(InputName).cpp [AllOptions] [AdditionalOptions]"
 			Outputs="$(InputDir)Generated\C$(InputName).cpp;$(InputDir)Generated\C$(InputName).h"
 			FileExtensions="*.arx"
 			ExecutionDescription="Compiling ACF Registry File..."
@@ -64,9 +64,9 @@
 		<CustomBuildRule
 			Name="FileConvertCopy"
 			DisplayName="ACF file convertion copy"
-			CommandLine="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Acf.exe [$RegistryFile] -config [$ConfigFile] -input $(InputPath) -o [$OutputDir]\$(InputName)"
+			CommandLine="..\..\..\Bin\$(ConfigurationName)VC9\Acf.exe [$RegistryFile] -config [$ConfigFile] -input $(InputPath) -o [$OutputDir]\$(InputName)"
 			Outputs="[$OutputDir]\$(InputName)"
-			AdditionalDependencies="$(ACFDIR)\Bin\$(ConfigurationName)VC9\Acf.exe;[$RegistryFile];[$ConfigFile];"
+			AdditionalDependencies="..\..\..\Bin\$(ConfigurationName)VC9\Acf.exe;[$RegistryFile];[$ConfigFile];"
 			FileExtensions="*.xtracf"
 			ExecutionDescription="Converting File With ACF transformation..."
 			>
@@ -76,7 +76,7 @@
 					DisplayName="Application Registry File"
 					Category="Environment"
 					Description="ACF registry file with exported interface ibase::IApplication"
-					DefaultValue="$(ACFDIR)\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
+					DefaultValue="..\..\..\Partitura\AcfVoce.arp\FileSubstitCopyApp.arx"
 					Delimited="true"
 					Inheritable="true"
 				/>
@@ -85,7 +85,7 @@
 					DisplayName="Packages Configuration File"
 					Category="Environment"
 					Description="ACF packages configuration file"
-					DefaultValue="$(ACFDIR)\Config\AcfBaseOnly.xpc"
+					DefaultValue="..\..\..\Config\AcfBaseOnly.xpc"
 					Delimited="true"
 					Inheritable="true"
 				/>

@@ -4,8 +4,5 @@
 		<file alias="Acf_de_DE">Generated/Acf_de_DE.qm</file>
 		<file alias="Acf_ru_RU">Generated/Acf_ru_RU.qm</file>
     <file alias="Acf_pl_PL">Generated/Acf_pl_PL.qm</file>
-		<file alias="Qt_de_DE">Generated/qt_de.qm</file>
-    <file alias="Qt_ru_RU">Generated/qt_ru.qm</file>
-    <file alias="Qt_pl_PL">Generated/qt_pl.qm</file>
   </qresource>
 </RCC>
