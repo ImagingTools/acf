@@ -5,8 +5,6 @@
 // Qt includes
 #include <QDomDocument>
 #include <QDomNode>
-#include <QXmlQuery>
-#include <QAbstractMessageHandler>
 
 
 // ACF includes
@@ -66,37 +64,14 @@ protected:
 	*/
 	QString PullTextNode();
 
-	//virtual bool SendLogMessage(
-	//	MessageCategory category,
-	//	int id,
-	//	const istd::CString& message,
-	//	const istd::CString& messageSource,
-	//	int flags = 0) const
-	//{
-	//	return iser::CReadArchiveBase::SendLogMessage(category, id, message, messageSource, flags);
-	//}
-
 private:
-	class MessageHandler:
-		virtual public QAbstractMessageHandler
-	{
-		I_DECLARE_TR_FUNCTION(MessageHandler);
-	public:
-		MessageHandler(CXslTransformationReadArchive* logger);
-	protected:
-
-		void handleMessage(QtMsgType type, const QString &description, const QUrl &identifier, const QSourceLocation &sourceLocation);
-
-		CXslTransformationReadArchive* m_loggerPtr;
-	};
-
-	friend class MessageHandler;
-
 	QDomDocument m_document;
 	QDomNode m_currentNode;
 
 	bool m_serializeHeader;
 	iser::CArchiveTag m_rootTag;
+
+	friend class ReadArchiveMessageHandler;
 };
 
 

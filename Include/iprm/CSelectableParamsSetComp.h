@@ -33,6 +33,7 @@ public:
 		I_REGISTER_INTERFACE(IParamsSet);
 		I_REGISTER_INTERFACE(ISelectionParam);
 		I_ASSIGN(m_selectionIdAttrPtr, "SelectionId", "ID of selection in parameter set", true, "Input");
+		I_ASSIGN(m_defaultIndexAttrPtr, "DefaultIndex", "Default selected index", false, 0);
 		I_ASSIGN(m_paramsManagerCompPtr, "ParamsManager", "Manager of parameter set used to realize selection", true, "ParamsManager");
 	I_END_COMPONENT;
 
@@ -64,6 +65,9 @@ protected:
 	virtual istd::CString GetOptionName(int index) const;
 	virtual istd::CString GetOptionDescription(int index) const;
 
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	/**
 		Observer for the selected parameter set.
@@ -86,6 +90,7 @@ private:
 	CurrentParamsSetObserver m_currentParamsSetObserver;
 
 	I_ATTR(istd::CString, m_selectionIdAttrPtr);
+	I_ATTR(int, m_defaultIndexAttrPtr);
 	I_REF(IParamsManager, m_paramsManagerCompPtr);
 };
 

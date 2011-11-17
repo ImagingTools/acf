@@ -6,9 +6,7 @@
 #include <QDomDocument>
 #include <QDomNode>
 #include <QFile>
-#include <QXmlQuery>
 #include <QBuffer>
-#include <QAbstractMessageHandler>
 
 
 // ACF includes
@@ -93,20 +91,7 @@ protected:
 		return iser::CWriteArchiveBase::SendLogMessage(category, id, message, messageSource, flags);
 	}
 private:
-	class MessageHandler:
-		virtual public QAbstractMessageHandler
-	{
-		I_DECLARE_TR_FUNCTION(MessageHandler);
-	public:
-		MessageHandler(CXslTransformationWriteArchive* logger);
-	protected:
-
-		void handleMessage(QtMsgType type, const QString &description, const QUrl &identifier, const QSourceLocation &sourceLocation);
-
-		CXslTransformationWriteArchive* m_loggerPtr;
-	};
-
-	friend class MessageHandler;
+	friend class WriteArchiveMessageHandler;
 
 	QDomDocument m_document;
 	QDomElement m_currentParent;

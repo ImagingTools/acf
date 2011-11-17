@@ -108,13 +108,18 @@ ISelectionParam* CSelectableParamsSetComp::GetActiveSubselection() const
 
 bool CSelectableParamsSetComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index");
-
 	bool retVal = true;
 
+	int selectedIndex = m_selectedIndex;
+
+	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index");
 	retVal = retVal && archive.BeginTag(selectedIndexTag);
-	retVal = retVal && archive.Process(m_selectedIndex);
+	retVal = retVal && archive.Process(selectedIndex);
 	retVal = retVal && archive.EndTag(selectedIndexTag);
+
+	if (!archive.IsStoring() && selectedIndex != m_selectedIndex){
+		retVal = retVal && SetSelectedOptionIndex(selectedIndex);
+	}
 
 	return retVal;
 }
@@ -178,6 +183,17 @@ istd::CString CSelectableParamsSetComp::GetOptionDescription(int index) const
 	return istd::CString();
 }
 
+
+// reimplemented (icomp::CComponentBase)
+
+void CSelectableParamsSetComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_defaultIndexAttrPtr.IsValid()){
+		SetSelectedOptionIndex(*m_defaultIndexAttrPtr);
+	}
+}
 
 
 // public methods of the embedded class CurrentParamsSetObserver
