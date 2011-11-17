@@ -378,7 +378,7 @@ CVector2d CRectangle::GetNearestPointTo(const CVector2d& point) const
 }
 
 
-// reimplemented (IObject2d)
+// reimplemented (i2d::IObject2d)
 
 CVector2d CRectangle::GetCenter() const
 {

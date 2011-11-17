@@ -77,6 +77,8 @@ CVisualRegistryScenographerComp::CVisualRegistryScenographerComp()
 				istd::IChangeable::CF_ACF_INTERNAL |
 				istd::CChangeDelegator::CF_DELEGATED |
 				icomp::IRegistryElement::CF_FLAGS_CHANGED);
+
+	m_selectionInfo.SetParent(this);
 }
 
 
@@ -111,36 +113,6 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 	}
 
 	return false;
-}
-
-
-// reimplemented (icmpstr::IElementSelectionInfo)
-
-icomp::IRegistry* CVisualRegistryScenographerComp::GetSelectedRegistry() const
-{
-	return GetObjectPtr();
-}
-
-
-IElementSelectionInfo::Elements CVisualRegistryScenographerComp::GetSelectedElements() const
-{
-	IElementSelectionInfo::Elements retVal;
-
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		for (		ElementIds::const_iterator iter = m_selectedElementIds.begin();
-					iter != m_selectedElementIds.end();
-					++iter){
-			const std::string& elementName = *iter;
-
-			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementName);
-			if (elementInfoPtr != NULL){
-				retVal[elementName] = elementInfoPtr;
-			}
-		}
-	}
-
-	return retVal;
 }
 
 
@@ -353,8 +325,8 @@ void CVisualRegistryScenographerComp::ConnectReferences(const QString& component
 			continue;
 		}
 
-		icomp::IComponentStaticInfo::Ids attributeIds = compMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
-		for (		icomp::IComponentStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
+		icomp::IElementStaticInfo::Ids attributeIds = compMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		for (		icomp::IElementStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
 					attrIter != attributeIds.end();
 					++attrIter){
 			const std::string& attributeId = *attrIter;
@@ -599,6 +571,26 @@ void CVisualRegistryScenographerComp::OnComponentDestroyed()
 }
 
 
+// static methods
+
+IElementSelectionInfo* CVisualRegistryScenographerComp::ExtractSelectionInterface(CVisualRegistryScenographerComp& component)
+{
+	return &component.m_selectionInfo;
+}
+
+
+imod::IModel* CVisualRegistryScenographerComp::ExtractSelectionInterfaceModel(CVisualRegistryScenographerComp& component)
+{
+	return &component.m_selectionInfo;
+}
+
+
+istd::IChangeable* CVisualRegistryScenographerComp::ExtractSelectionInterfaceChangeable(CVisualRegistryScenographerComp& component)
+{
+	return &component.m_selectionInfo;
+}
+
+
 // protected slots
 
 void CVisualRegistryScenographerComp::OnSelectionChanged()
@@ -632,7 +624,7 @@ void CVisualRegistryScenographerComp::OnSelectionChanged()
 	}
 
 	if (m_selectedElementIds != elementIds){
-		istd::CChangeNotifier changePtr(this, CF_SELECTION);
+		istd::CChangeNotifier changePtr(&m_selectionInfo, IElementSelectionInfo::CF_SELECTION);
 
 		m_selectedElementIds = elementIds;
 
@@ -643,7 +635,7 @@ void CVisualRegistryScenographerComp::OnSelectionChanged()
 
 void CVisualRegistryScenographerComp::OnRemoveComponent()
 {
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_REMOVED | CF_MODEL);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_REMOVED | istd::IChangeable::CF_MODEL);
 	if (registryPtr.IsValid()){
 		for (		ElementIds::const_iterator iter = m_selectedElementIds.begin();
 					iter != m_selectedElementIds.end();
@@ -863,6 +855,48 @@ CVisualRegistryScenographerComp::EnvironmentObserver::EnvironmentObserver(CVisua
 void CVisualRegistryScenographerComp::EnvironmentObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_parent.UpdateScene(updateFlags);
+}
+
+
+// public methods of embedded class SelectionInfo
+
+void CVisualRegistryScenographerComp::SelectionInfo::SetParent(CVisualRegistryScenographerComp* parentPtr)
+{
+	m_parentPtr = parentPtr;
+}
+
+
+// reimplemented (icmpstr::IElementSelectionInfo)
+
+icomp::IRegistry* CVisualRegistryScenographerComp::SelectionInfo::GetSelectedRegistry() const
+{
+	I_ASSERT(m_parentPtr != NULL);	// parent should be set before any subelement can be accessed
+
+	return m_parentPtr->GetObjectPtr();
+}
+
+
+IElementSelectionInfo::Elements CVisualRegistryScenographerComp::SelectionInfo::GetSelectedElements() const
+{
+	I_ASSERT(m_parentPtr != NULL);	// parent should be set before any subelement can be accessed
+
+	IElementSelectionInfo::Elements retVal;
+
+	icomp::IRegistry* registryPtr = m_parentPtr->GetObjectPtr();
+	if (registryPtr != NULL){
+		for (		ElementIds::const_iterator iter = m_parentPtr->m_selectedElementIds.begin();
+					iter != m_parentPtr->m_selectedElementIds.end();
+					++iter){
+			const std::string& elementName = *iter;
+
+			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementName);
+			if (elementInfoPtr != NULL){
+				retVal[elementName] = elementInfoPtr;
+			}
+		}
+	}
+
+	return retVal;
 }
 
 

@@ -109,7 +109,7 @@ bool TMultiReferenceMember<Interface>::EnsureInitialized() const
 	bool retVal = false;
 
 	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
-		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
+		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			int attributesCount = BaseClass::GetCount();
 

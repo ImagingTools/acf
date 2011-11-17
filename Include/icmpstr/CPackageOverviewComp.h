@@ -60,7 +60,7 @@ public:
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
-	// reimplemented (IAttributeSelectionObserver)
+	// reimplemented (icmpstr::IAttributeSelectionObserver)
 	virtual void OnAttributeSelected(const icomp::IAttributeStaticInfo* attributeStaticInfoPtr);
 
 protected:

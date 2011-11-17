@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1606
+          2058
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          275
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -277,7 +266,7 @@
                 true
               </IsEnabled>
               <Value>
-                VisualRegistryScenographer
+                VisualRegistryScenographer/SelectionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -317,7 +306,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -343,22 +332,6 @@
             </Type>
             <ExportId>
               DocumentManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MainWindow
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              MainWindow
             </ExportId>
             <Data>
               <IsEnabled>
@@ -453,7 +426,9 @@
       </Data>
     </Element>
   </ElementsList>
-  <ExportedInterfaces count="7">
+  <EmbeddedRegistriesList count="0">
+  </EmbeddedRegistriesList>
+  <ExportedInterfaces count="6">
     <Interface>
       <InterfaceId>
         i2d::ISceneController
@@ -468,14 +443,6 @@
       </InterfaceId>
       <ComponentId>
         CommandsBinder
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        VisualRegistryScenographer
       </ComponentId>
     </Interface>
     <Interface>

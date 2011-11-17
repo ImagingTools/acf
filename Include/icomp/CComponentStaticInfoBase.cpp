@@ -19,19 +19,21 @@ const IAttributeStaticInfo* CComponentStaticInfoBase::GetAttributeInfo(const std
 }
 
 
-const IComponentStaticInfo* CComponentStaticInfoBase::GetSubcomponentInfo(const std::string& /*subcomponentId*/) const
-{
-	return NULL;
-}
-
-
 const IComponentStaticInfo* CComponentStaticInfoBase::GetEmbeddedComponentInfo(const std::string& /*embeddedId*/) const
 {
 	return NULL;
 }
 
 
-IComponentStaticInfo::Ids CComponentStaticInfoBase::GetMetaIds(int /*metaGroupId*/) const
+//	reimplemented (icomp::IElementStaticInfo)
+
+const IElementStaticInfo* CComponentStaticInfoBase::GetSubelementInfo(const std::string& /*subcomponentId*/) const
+{
+	return NULL;
+}
+
+
+IElementStaticInfo::Ids CComponentStaticInfoBase::GetMetaIds(int /*metaGroupId*/) const
 {
 	Ids retVal;
 

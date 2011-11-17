@@ -45,7 +45,7 @@ public:
 
 	// reimplemented (icmpstr::IRegistryConsistInfo)
 	virtual icomp::IRegistry::Ids GetCompatibleElements(
-				const icomp::IComponentStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const icomp::IRegistry& registry,
 				int queryFlags) const;
 	virtual bool IsRegistryValid(
@@ -79,8 +79,8 @@ public:
 protected:
 	icomp::IRegistry::Ids GetCompatibleSubcomponents(
 				const std::string& elementId,
-				const icomp::IComponentStaticInfo& elementStaticInfo,
-				const icomp::IComponentStaticInfo::Ids& interfaceNames) const;
+				const icomp::IElementStaticInfo& elementStaticInfo,
+				const icomp::IElementStaticInfo::Ids& interfaceNames) const;
 	bool CheckAttributeCompatibility(
 				const iser::IObject& attribute,
 				const icomp::IAttributeStaticInfo& attributeMetaInfo,
@@ -92,7 +92,7 @@ protected:
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementCompatibility(
 				const std::string& pointedElementName,
-				const icomp::IComponentStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const std::string& attributeName,
 				const std::string& elementName,
 				const icomp::IRegistry& registry,
@@ -100,8 +100,8 @@ protected:
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementInfoCompatibility(
 				const std::string& pointedElementName,
-				const icomp::IComponentStaticInfo* pointedMetaInfoPtr,
-				const icomp::IComponentStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo* pointedMetaInfoPtr,
+				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const std::string& attributeName,
 				const std::string& elementName,
 				bool ignoreUndef,

@@ -44,7 +44,7 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 			continue;
 		}
 
-		RegisterSubcomponentInfo(subcomponentId, subMetaInfoPtr);
+		RegisterSubelementInfo(subcomponentId, subMetaInfoPtr);
 	}
 
 	// register embedded components
@@ -228,7 +228,7 @@ std::string CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetAttribute
 }
 
 
-IComponentStaticInfo::Ids CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const
+IElementStaticInfo::Ids CCompositeComponentStaticInfo::AttrAsOptionalDelegator::GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const
 {
 	return m_slave.GetRelatedMetaIds(metaGroupId, flags, flagsMask);
 }

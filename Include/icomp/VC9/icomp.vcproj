@@ -360,7 +360,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IComponentInterfaceExtractor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IComponentStaticInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ICompositeComponent.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IElementStaticInfo.h"
 				>
 			</File>
 			<File
@@ -469,6 +481,10 @@
 			</File>
 			<File
 				RelativePath="..\TSimComponentWrap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TSubelementStaticInfo.h"
 				>
 			</File>
 		</Filter>

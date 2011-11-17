@@ -21,6 +21,7 @@ namespace icomp
 
 
 class IComponentContext;
+class ICompositeComponent;
 
 
 /**
@@ -38,10 +39,12 @@ public:
 		\param	ownerOnly	indicate, that parent should be returned only if it owns this component.
 		\return	pointer to parent component or NULL if parent is not accessible.
 	*/
-	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const = 0;
+	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const = 0;
 
 	/**
 		Get access to specified component interface.
+		\param	interfaceType	requested interface.
+		\param	subId			some additional ID to identify subelement of this component.
 	*/
 	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "") = 0;
 
@@ -61,30 +64,8 @@ public:
 	*/
 	virtual void SetComponentContext(
 				const icomp::IComponentContext* contextPtr,
-				const IComponent* parentPtr,
+				const ICompositeComponent* parentPtr,
 				bool isParentOwner) = 0;
-
-	/**
-		Get access to subcomponent using its ID.
-	*/
-	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
-
-	/**
-		Get access to context of subcomponent using its ID.
-		Please note, that this does'n create component instance.
-	*/
-	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const = 0;
-
-	/**
-		Create instance of subcomponent using its ID.
-	*/
-	virtual IComponent* CreateSubcomponent(const std::string& componentId) const = 0;
-
-	/**
-		Called if subcomponent is removed from memory.
-		\param	subcomponentPtr	pointer to component beeing removed. It cannot be NULL.
-	*/
-	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr) = 0;
 };
 
 

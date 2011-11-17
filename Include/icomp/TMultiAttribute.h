@@ -151,7 +151,7 @@ std::string TMultiAttribute<Value>::GetFactoryId() const
 }
 
 
-// reimplemented (ISerializable)
+// reimplemented (iser::ISerializable)
 
 template <typename Value>
 bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)

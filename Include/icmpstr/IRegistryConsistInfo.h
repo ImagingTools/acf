@@ -43,7 +43,7 @@ public:
 		\param	registry			registry will be looked in.
 	*/
 	virtual icomp::IRegistry::Ids GetCompatibleElements(
-				const icomp::IComponentStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				const icomp::IRegistry& registry,
 				int queryFlags = QF_NONE) const = 0;
 

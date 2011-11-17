@@ -1,7 +1,7 @@
 #include "icomp/CBaseComponentStaticInfo.h"
 
 
-#include "istd/istd.h"
+#include "istd/CIdManipBase.h"
 
 
 namespace icomp
@@ -26,9 +26,9 @@ void CBaseComponentStaticInfo::RegisterAttributeInfo(const std::string& attribut
 }
 
 
-void CBaseComponentStaticInfo::RegisterSubcomponentInfo(const std::string& embeddedId, const IComponentStaticInfo* componentInfoPtr)
+void CBaseComponentStaticInfo::RegisterSubelementInfo(const std::string& embeddedId, const IElementStaticInfo* staticInfoPtr)
 {
-	m_subcomponentInfos[embeddedId] = componentInfoPtr;
+	m_subelementInfos[embeddedId] = staticInfoPtr;
 }
 
 
@@ -42,28 +42,50 @@ IComponent* CBaseComponentStaticInfo::CreateComponent() const
 }
 
 
-void* CBaseComponentStaticInfo::GetComponentInterface(const istd::CClassInfo& interfaceType, IComponent& component) const
+//	reimplemented (icomp::IComponentInterfaceExtractor)
+
+void* CBaseComponentStaticInfo::GetComponentInterface(
+			const istd::CClassInfo& interfaceType,
+			IComponent& component,
+			const std::string& subId) const
 {
-	InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(interfaceType.GetName());
-	if (foundIter != m_interfaceExtractors.end()){
-		InterfaceExtractorPtr extractorPtr = foundIter->second;
-
-		return extractorPtr(component);
+	if (!subId.empty()){
+		std::string componentId;
+		std::string restId;
+		istd::CIdManipBase::SplitId(subId, componentId, restId);
+		const IComponentInterfaceExtractor* subelementInfoPtr = dynamic_cast<const IComponentInterfaceExtractor*>(GetSubelementInfo(componentId));
+		if (subelementInfoPtr != NULL){
+			return subelementInfoPtr->GetComponentInterface(interfaceType, component, restId);
+		}
 	}
+	else{
+		static istd::CClassInfo compInterfaceType(typeid(icomp::IComponent));
 
-	if (interfaceType.IsConst()){
-		istd::CClassInfo nonConstType = interfaceType.GetConstCasted(false);
+		if (!interfaceType.IsValid() || interfaceType.IsVoid() || (interfaceType == compInterfaceType)){
+			return &component;
+		}
 
-		InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(nonConstType.GetName());
+		InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(interfaceType.GetName());
 		if (foundIter != m_interfaceExtractors.end()){
 			InterfaceExtractorPtr extractorPtr = foundIter->second;
 
 			return extractorPtr(component);
 		}
+
+		if (interfaceType.IsConst()){
+			istd::CClassInfo nonConstType = interfaceType.GetConstCasted(false);
+
+			InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(nonConstType.GetName());
+			if (foundIter != m_interfaceExtractors.end()){
+				InterfaceExtractorPtr extractorPtr = foundIter->second;
+
+				return extractorPtr(component);
+			}
+		}
 	}
 
 	if (m_baseComponentPtr != NULL){
-		return m_baseComponentPtr->GetComponentInterface(interfaceType, component);
+		return m_baseComponentPtr->GetComponentInterface(interfaceType, component, subId);
 	}
 
 	return NULL;
@@ -87,14 +109,16 @@ const IAttributeStaticInfo* CBaseComponentStaticInfo::GetAttributeInfo(const std
 }
 
 
-const IComponentStaticInfo* CBaseComponentStaticInfo::GetSubcomponentInfo(const std::string& subcomponentId) const
+//	reimplemented (icomp::IElementStaticInfo)
+
+const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const std::string& subcomponentId) const
 {
-	SubcomponentInfos::const_iterator fondIter = m_subcomponentInfos.find(subcomponentId);
-	if (fondIter != m_subcomponentInfos.end()){
+	SubelementInfos::const_iterator fondIter = m_subelementInfos.find(subcomponentId);
+	if (fondIter != m_subelementInfos.end()){
 		return fondIter->second;
 	}
 	else if (m_baseComponentPtr != NULL){
-		return m_baseComponentPtr->GetSubcomponentInfo(subcomponentId);
+		return m_baseComponentPtr->GetSubelementInfo(subcomponentId);
 	}
 	else{
 		return NULL;
@@ -102,7 +126,7 @@ const IComponentStaticInfo* CBaseComponentStaticInfo::GetSubcomponentInfo(const 
 }
 
 
-IComponentStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) const
+IElementStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) const
 {
 	Ids retVal;
 
@@ -124,9 +148,9 @@ IComponentStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) 
 			retVal.insert(iter->first);
 		}
 	}
-	else if (metaGroupId == MGI_SUBCOMPONENTS){
-		for (		SubcomponentInfos::const_iterator iter = m_subcomponentInfos.begin();
-					iter != m_subcomponentInfos.end();
+	else if (metaGroupId == MGI_SUBELEMENTS){
+		for (		SubelementInfos::const_iterator iter = m_subelementInfos.begin();
+					iter != m_subelementInfos.end();
 					++iter){
 			retVal.insert(iter->first);
 		}

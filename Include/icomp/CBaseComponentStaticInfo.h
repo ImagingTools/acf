@@ -44,15 +44,22 @@ public:
 		\param	componentInfoPtr	static subcomponent info object used to describe subcomponent type and as factory.
 									It cannot be NULL.
 	*/
-	virtual void RegisterSubcomponentInfo(const std::string& subcomponentId, const IComponentStaticInfo* componentInfoPtr);
+	virtual void RegisterSubelementInfo(const std::string& subcomponentId, const IElementStaticInfo* staticInfoPtr);
 
 	//	reimplemented (icomp::IRealComponentStaticInfo)
 	virtual IComponent* CreateComponent() const;
-	virtual void* GetComponentInterface(const istd::CClassInfo& interfaceType, IComponent& component) const;
+
+	//	reimplemented (icomp::IComponentInterfaceExtractor)
+	virtual void* GetComponentInterface(
+				const istd::CClassInfo& interfaceType,
+				IComponent& component,
+				const std::string& subId) const;
 
 	//	reimplemented (icomp::IComponentStaticInfo)
 	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const;
-	virtual const IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const;
+
+	//	reimplemented (icomp::IElementStaticInfo)
+	virtual const IElementStaticInfo* GetSubelementInfo(const std::string& subcomponentId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
 
 private:
@@ -61,8 +68,8 @@ private:
 	typedef std::map<std::string, InterfaceExtractorPtr> InterfaceExtractors;
 	InterfaceExtractors m_interfaceExtractors;
 
-	typedef std::map<std::string, const IComponentStaticInfo*> SubcomponentInfos;
-	SubcomponentInfos m_subcomponentInfos;
+	typedef std::map<std::string, const IElementStaticInfo*> SubelementInfos;
+	SubelementInfos m_subelementInfos;
 
 	typedef std::map<std::string, const IAttributeStaticInfo*> AttributeInfos;
 	AttributeInfos m_attributeInfos;

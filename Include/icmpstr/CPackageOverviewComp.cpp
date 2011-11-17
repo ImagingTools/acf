@@ -232,7 +232,7 @@ const ibase::IHierarchicalCommand* CPackageOverviewComp::GetCommands() const
 }
 
 
-// reimplemented (IAttributeSelectionObserver)
+// reimplemented (icmpstr::IAttributeSelectionObserver)
 
 void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo* attributeStaticInfoPtr)
 {
@@ -246,7 +246,7 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 		bool isMultiFactory = (attributeType == icomp::CMultiFactoryAttribute::GetTypeName());
 
 		if (isReference || isMultiReference || isFactory || isMultiFactory){
-			icomp::IComponentStaticInfo::Ids interfaceNames = attributeStaticInfoPtr->GetRelatedMetaIds(
+			icomp::IElementStaticInfo::Ids interfaceNames = attributeStaticInfoPtr->GetRelatedMetaIds(
 						icomp::IComponentStaticInfo::MGI_INTERFACES,
 						0,
 						icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
@@ -456,9 +456,9 @@ void CPackageOverviewComp::UpdateInterfaceList()
 
 			const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 			if (metaInfoPtr != NULL){
-				const icomp::IComponentStaticInfo::Ids& interfaceNames = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+				const icomp::IElementStaticInfo::Ids& interfaceNames = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
 
-				for (		icomp::IComponentStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
+				for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
 							interfaceIter != interfaceNames.end();
 							++interfaceIter){
 					knownInterfaces.insert(*interfaceIter);
@@ -527,7 +527,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 			bool isFilterMatched = true;
 
 			if (metaInfoPtr != NULL){
-				const icomp::IComponentStaticInfo::Ids& interfaces = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+				const icomp::IElementStaticInfo::Ids& interfaces = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
 				for (		InterfaceFilter::const_iterator iterfaceIter = m_interfaceFilter.begin();
 							iterfaceIter != m_interfaceFilter.end();
 							++iterfaceIter){

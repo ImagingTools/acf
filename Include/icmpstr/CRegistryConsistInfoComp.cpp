@@ -18,7 +18,7 @@ namespace icmpstr
 // reimplemented (icmpstr::IRegistryConsistInfo)
 
 icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
-			const icomp::IComponentStaticInfo::Ids& interfaceNames,
+			const icomp::IElementStaticInfo::Ids& interfaceNames,
 			const icomp::IRegistry& registry,
 			int queryFlags) const
 {
@@ -187,8 +187,8 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	bool retVal = true;
 
 	if (metaInfoPtr != NULL){
-		icomp::IComponentStaticInfo::Ids attributeIds = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
-		for (		icomp::IComponentStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
+		icomp::IElementStaticInfo::Ids attributeIds = metaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+		for (		icomp::IElementStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
 					attrIter != attributeIds.end();
 					++attrIter){
 			const std::string& attributeId = *attrIter;
@@ -391,13 +391,13 @@ QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress&
 
 icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleSubcomponents(
 			const std::string& elementId,
-			const icomp::IComponentStaticInfo& elementStaticInfo,
-			const icomp::IComponentStaticInfo::Ids& interfaceNames) const
+			const icomp::IElementStaticInfo& elementStaticInfo,
+			const icomp::IElementStaticInfo::Ids& interfaceNames) const
 {
 	icomp::IRegistry::Ids retVal;
 
 	bool areInterfacesSupported = true;
-	for (		icomp::IComponentStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
+	for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
 				interfaceIter != interfaceNames.end();
 				++interfaceIter){
 		const std::string& interfaceName = *interfaceIter;
@@ -411,7 +411,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleSubcomponents(
 			continue;
 		}
 
-		icomp::IComponentStaticInfo::Ids supportedInterfaces = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+		icomp::IElementStaticInfo::Ids supportedInterfaces = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
 
 		std::string nonConstInterfaceName = interfaceType.GetConstCasted(false).GetName();
 		bool isInterfaceCompatible =
@@ -428,14 +428,14 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleSubcomponents(
 		retVal.insert(elementId);
 	}
 
-	const icomp::IComponentStaticInfo::Ids subcomponentIds = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBCOMPONENTS);
+	const icomp::IElementStaticInfo::Ids subcomponentIds = elementStaticInfo.GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
 
-	for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
+	for (		icomp::IElementStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
 				subIter != subcomponentIds.end();
 				++subIter){
 		const std::string& subcomponentId = *subIter;
 
-		const icomp::IComponentStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubcomponentInfo(subcomponentId);
+		const icomp::IElementStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubelementInfo(subcomponentId);
 		if (subcomponentInfoPtr != NULL){
 			icomp::IRegistry::Ids subIds = GetCompatibleSubcomponents(
 						icomp::CInterfaceManipBase::JoinId(elementId, subcomponentId),
@@ -462,7 +462,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 {
 	const icomp::CReferenceAttribute* idPtr = dynamic_cast<const icomp::CReferenceAttribute*>(&attribute);
 	if (idPtr != NULL){		
-		icomp::IComponentStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
+		icomp::IElementStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
 					icomp::IComponentStaticInfo::MGI_INTERFACES,
 					0,
 					icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
@@ -484,7 +484,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 
 	const icomp::CMultiReferenceAttribute* multiIdPtr = dynamic_cast<const icomp::CMultiReferenceAttribute*>(&attribute);
 	if (multiIdPtr != NULL){
-		icomp::IComponentStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
+		icomp::IElementStaticInfo::Ids interfaceNames = attributeMetaInfo.GetRelatedMetaIds(
 					icomp::IComponentStaticInfo::MGI_INTERFACES,
 					0,
 					icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
@@ -516,7 +516,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 
 bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			const std::string& pointedElementName,
-			const icomp::IComponentStaticInfo::Ids& interfaceNames,
+			const icomp::IElementStaticInfo::Ids& interfaceNames,
 			const std::string& attributeName,
 			const std::string& elementName,
 			const icomp::IRegistry& registry,
@@ -524,49 +524,30 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			ibase::IMessageConsumer* reasonConsumerPtr) const
 {
 	std::string baseId;
-	std::string subId;
-	if (istd::CIdManipBase::SplitId(pointedElementName, baseId, subId)){
-		const icomp::IRegistry::ElementInfo* pointedInfoPtr = registry.GetElementInfo(baseId);
-		if (pointedInfoPtr != NULL){
-			const icomp::IRegistry* pointedRegistryPtr = m_envManagerCompPtr->GetRegistry(pointedInfoPtr->address, &registry);
-			if (pointedRegistryPtr != NULL){
-				const icomp::IRegistry::ExportedComponentsMap& exportedMap = pointedRegistryPtr->GetExportedComponentsMap();
-				icomp::IRegistry::ExportedComponentsMap::const_iterator exportIter = exportedMap.find(subId);
-				if (exportIter == exportedMap.end()){
-					if (reasonConsumerPtr != NULL){
-						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
-									istd::ILogger::MC_ERROR,
-									MI_COMPONENT_NOT_FOUND,
-									iqt::GetCString(tr("Reference or factory '%1' in '%2' point at '%3', but subelement '%4' doesn't exist")
-												.arg(attributeName.c_str())
-												.arg(elementName.c_str())
-												.arg(pointedElementName.c_str())
-												.arg(subId.c_str())),
-									iqt::GetCString(tr("Attribute Consistency Check")),
-									0)));
-					}
+	std::string subId = pointedElementName;
+	istd::CIdManipBase::SplitId(pointedElementName, baseId, subId);
 
-					return false;
+	const icomp::IRegistry::ElementInfo* pointedInfoPtr = registry.GetElementInfo(baseId);
+	if (pointedInfoPtr != NULL){
+		const icomp::CComponentAddress& pointedElementAddress = pointedInfoPtr->address;
+		if (!pointedElementAddress.GetPackageId().empty()){
+			const icomp::IElementStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedElementAddress);
+
+			while (!subId.empty()){
+				istd::CIdManipBase::SplitId(std::string(subId), baseId, subId);
+
+				if (pointedMetaInfoPtr != NULL){
+					pointedMetaInfoPtr = pointedMetaInfoPtr->GetSubelementInfo(baseId);
 				}
-
-				const std::string localId = exportIter->second;
-				if (!CheckPointedElementCompatibility(
-							localId,
-							interfaceNames,
-							attributeName,
-							elementName,
-							*pointedRegistryPtr,
-							ignoreUndef,
-							NULL)){
+				else{
 					if (reasonConsumerPtr != NULL){
 						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 									istd::ILogger::MC_ERROR,
 									MI_COMPONENT_NOT_FOUND,
-									iqt::GetCString(tr("Reference or factory '%1' in '%2' point at '%3', but exported element '%4' is not compatible")
+									iqt::GetCString(tr("Reference or factory '%1' in '%2' is set to %3, but it cannot be resolved")
 												.arg(attributeName.c_str())
 												.arg(elementName.c_str())
-												.arg(pointedElementName.c_str())
-												.arg(localId.c_str())),
+												.arg(pointedElementName.c_str())),
 									iqt::GetCString(tr("Attribute Consistency Check")),
 									0)));
 					}
@@ -574,50 +555,23 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 					return false;
 				}
 			}
-			else if (!ignoreUndef){
-				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
-								istd::ILogger::MC_WARNING,
-								MI_COMPOSITE_FOUND,
-								iqt::GetCString(tr("Reference or factory '%1' in '%2' point at '%3', but element '%4' is not accessible in actual configuration")
-											.arg(attributeName.c_str())
-											.arg(elementName.c_str())
-											.arg(pointedElementName.c_str())
-											.arg(baseId.c_str())),
-								iqt::GetCString(tr("Attribute Consistency Check")),
-								0)));
-				}
 
-				return false;
-			}
+			return CheckPointedElementInfoCompatibility(
+						baseId,
+						pointedMetaInfoPtr,
+						interfaceNames,
+						attributeName,
+						elementName,
+						ignoreUndef,
+						reasonConsumerPtr);
 		}
 		else{
-			if (reasonConsumerPtr != NULL){
-				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
-							istd::ILogger::MC_ERROR,
-							MI_COMPONENT_NOT_FOUND,
-							iqt::GetCString(tr("Reference or factory '%1' in '%2' contains '%3', but element '%4' doesn't exist")
-										.arg(attributeName.c_str())
-										.arg(elementName.c_str())
-										.arg(pointedElementName.c_str())
-										.arg(baseId.c_str())),
-							iqt::GetCString(tr("Attribute Consistency Check")),
-							0)));
-			}
-
-			return false;
-		}
-	}
-	else{
-		const icomp::IRegistry::ElementInfo* pointedInfoPtr = registry.GetElementInfo(pointedElementName);
-		if (pointedInfoPtr != NULL){
-			const icomp::CComponentAddress& pointedElementAddress = pointedInfoPtr->address;
-			if (!pointedElementAddress.GetPackageId().empty()){
-				const icomp::IComponentStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedElementAddress);
-
+			icomp::IRegistry* embeddedRegistryPtr = registry.GetEmbeddedRegistry(pointedElementAddress.GetComponentId());
+			if (embeddedRegistryPtr != NULL){
+				icomp::CCompositeComponentStaticInfo info(*embeddedRegistryPtr, *m_envManagerCompPtr);
 				return CheckPointedElementInfoCompatibility(
-							baseId,
-							pointedMetaInfoPtr,
+							pointedElementName,
+							&info,
 							interfaceNames,
 							attributeName,
 							elementName,
@@ -625,50 +579,36 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 							reasonConsumerPtr);
 			}
 			else{
-				icomp::IRegistry* embeddedRegistryPtr = registry.GetEmbeddedRegistry(pointedElementAddress.GetComponentId());
-				if (embeddedRegistryPtr != NULL){
-					icomp::CCompositeComponentStaticInfo info(*embeddedRegistryPtr, *m_envManagerCompPtr);
-					return CheckPointedElementInfoCompatibility(
-								pointedElementName,
-								&info,
-								interfaceNames,
-								attributeName,
-								elementName,
-								ignoreUndef,
-								reasonConsumerPtr);
+				if (reasonConsumerPtr != NULL){
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
+								istd::ILogger::MC_ERROR,
+								MI_COMPONENT_NOT_FOUND,
+								iqt::GetCString(tr("Reference or factory '%1' in '%2' uses embedded type '%3', but this type is undefined")
+											.arg(attributeName.c_str())
+											.arg(elementName.c_str())
+											.arg(pointedElementAddress.GetComponentId().c_str())),
+								iqt::GetCString(tr("Attribute Consistency Check")),
+								0)));
 				}
-				else{
-					if (reasonConsumerPtr != NULL){
-						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
-									istd::ILogger::MC_ERROR,
-									MI_COMPONENT_NOT_FOUND,
-									iqt::GetCString(tr("Reference or factory '%1' in '%2' uses embedded type '%3', but this type is undefined")
-												.arg(attributeName.c_str())
-												.arg(elementName.c_str())
-												.arg(pointedElementAddress.GetComponentId().c_str())),
-									iqt::GetCString(tr("Attribute Consistency Check")),
-									0)));
-					}
 
-					return false;
-				}
+				return false;
 			}
 		}
-		else{
-			if (reasonConsumerPtr != NULL){
-				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
-							istd::ILogger::MC_ERROR,
-							MI_COMPONENT_NOT_FOUND,
-							iqt::GetCString(tr("Reference or factory '%1' in '%2' contains '%3', but this element doesn't exist")
-										.arg(attributeName.c_str())
-										.arg(elementName.c_str())
-										.arg(pointedElementName.c_str())),
-							iqt::GetCString(tr("Attribute Consistency Check")),
-							0)));
-			}
-
-			return false;
+	}
+	else{
+		if (reasonConsumerPtr != NULL){
+			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
+						istd::ILogger::MC_ERROR,
+						MI_COMPONENT_NOT_FOUND,
+						iqt::GetCString(tr("Reference or factory '%1' in '%2' contains '%3', but this element doesn't exist")
+									.arg(attributeName.c_str())
+									.arg(elementName.c_str())
+									.arg(pointedElementName.c_str())),
+						iqt::GetCString(tr("Attribute Consistency Check")),
+						0)));
 		}
+
+		return false;
 	}
 
 	return true;
@@ -677,16 +617,16 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 
 bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 			const std::string& pointedElementName,
-			const icomp::IComponentStaticInfo* pointedMetaInfoPtr,
-			const icomp::IComponentStaticInfo::Ids& interfaceNames,
+			const icomp::IElementStaticInfo* pointedMetaInfoPtr,
+			const icomp::IElementStaticInfo::Ids& interfaceNames,
 			const std::string& attributeName,
 			const std::string& elementName,
 			bool ignoreUndef,
 			ibase::IMessageConsumer* reasonConsumerPtr) const
 {
 	if (pointedMetaInfoPtr != NULL){
-		const icomp::IComponentStaticInfo::Ids& supportedInterfaces = pointedMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
-		for (		icomp::IComponentStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
+		const icomp::IElementStaticInfo::Ids& supportedInterfaces = pointedMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+		for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
 					interfaceIter != interfaceNames.end();
 					++interfaceIter){
 			const std::string& interfaceName = *interfaceIter;

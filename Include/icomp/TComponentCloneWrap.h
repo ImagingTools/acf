@@ -12,7 +12,7 @@ namespace icomp
 
 
 template <class BaseClass>
-class TComponentCloneWrap: virtual public BaseClass, protected icomp::CInterfaceManipBase
+class TComponentCloneWrap: virtual public BaseClass, protected CInterfaceManipBase
 {
 public:
 	// pseudo-reimplemented (istd::IChangeable)
@@ -25,12 +25,12 @@ public:
 template <class BaseClass>
 istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe() const
 {
-	const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(BaseClass::GetComponentContext());
+	const CComponentContext* contextPtr = dynamic_cast<const CComponentContext*>(BaseClass::GetComponentContext());
 	if (contextPtr != NULL){
-		const icomp::IComponent* parentComponentPtr = BaseClass::GetParentComponent();
+		const ICompositeComponent* parentComponentPtr = BaseClass::GetParentComponent();
 		if (parentComponentPtr != NULL){
 			istd::TDelPtr<istd::IChangeable> clonedPtr;
-			
+
 			clonedPtr.SetCastedOrRemove(ExtractInterface<istd::IChangeable>(parentComponentPtr->CreateSubcomponent(contextPtr->GetContextId())));
 
 			if (clonedPtr.IsValid()){

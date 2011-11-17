@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "icomp/ICompositeComponent.h"
 #include "icomp/TComponentWrap.h"
 #include "icomp/CSimComponentContextBase.h"
 
@@ -18,7 +19,10 @@ namespace icomp
 	\ingroup ComponentConcept
 */
 template <class Base>
-class TSimComponentWrap: public TComponentWrap<Base>, public CSimComponentContextBase
+class TSimComponentWrap:
+			public TComponentWrap<Base>,
+			public CSimComponentContextBase,
+			virtual public ICompositeComponent
 {
 public:
 	typedef TComponentWrap<Base> BaseClass;
@@ -31,10 +35,14 @@ public:
 	*/
 	void InitComponent();
 
-	// pseudo-reimplemented (icomp::IComponent)
-	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const;
+	// reimplemented (icomp::ICompositeComponent)
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
+	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
+	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
+
+	// reimplemented (icomp::IComponent)
+	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const;
 };
 
 
@@ -55,19 +63,7 @@ void TSimComponentWrap<Base>::InitComponent()
 }
 
 
-// pseudo-reimplemented (icomp::IComponent)
-
-template <class Base>
-const IComponent* TSimComponentWrap<Base>::GetParentComponent(bool ownerOnly) const
-{
-	if (ownerOnly){
-		return NULL;
-	}
-	else{
-		return const_cast<TSimComponentWrap<Base>* >(this);
-	}
-}
-
+// reimplemented (icomp::ICompositeComponent)
 
 template <class Base>
 IComponent* TSimComponentWrap<Base>::GetSubcomponent(const std::string& componentId) const
@@ -83,6 +79,13 @@ IComponent* TSimComponentWrap<Base>::GetSubcomponent(const std::string& componen
 
 
 template <class Base>
+const IComponentContext* TSimComponentWrap<Base>::GetSubcomponentContext(const std::string& /*componentId*/) const
+{
+	return NULL;
+}
+
+
+template <class Base>
 IComponent* TSimComponentWrap<Base>::CreateSubcomponent(const std::string& componentId) const
 {
 	FactoriesMap::const_iterator iter = m_factoriesMap.find(componentId);
@@ -93,6 +96,27 @@ IComponent* TSimComponentWrap<Base>::CreateSubcomponent(const std::string& compo
 	}
 
 	return NULL;
+}
+
+
+template <class Base>
+void TSimComponentWrap<Base>::OnSubcomponentDeleted(const IComponent* /*subcomponentPtr*/)
+{
+	I_CRITICAL();
+}
+
+
+// reimplemented (icomp::IComponent)
+
+template <class Base>
+const ICompositeComponent* TSimComponentWrap<Base>::GetParentComponent(bool ownerOnly) const
+{
+	if (ownerOnly){
+		return NULL;
+	}
+	else{
+		return const_cast<TSimComponentWrap<Base>* >(this);
+	}
 }
 
 

@@ -38,7 +38,7 @@ void CVisualRegistryElement::Initialize(
 }
 
 
-// reimplemented (IObject2d)
+// reimplemented (i2d::IObject2d)
 
 i2d::CVector2d CVisualRegistryElement::GetCenter() const
 {

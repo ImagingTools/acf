@@ -107,7 +107,7 @@ void CQuadrangle::SetSecondDiagonal(const CLine2d& secondDiagonal)
 }
 
 
-// reimplemented (IObject2d)
+// reimplemented (i2d::IObject2d)
 
 CVector2d CQuadrangle::GetCenter() const
 {

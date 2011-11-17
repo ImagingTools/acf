@@ -5,6 +5,7 @@
 #include "istd/CClassInfo.h"
 
 #include "icomp/IComponent.h"
+#include "icomp/ICompositeComponent.h"
 #include "icomp/IRealComponentStaticInfo.h"
 #include "icomp/TInterfaceRegistrator.h"
 #include "icomp/TAttribute.h"
@@ -17,6 +18,7 @@
 #include "icomp/TMultiFactoryMember.h"
 #include "icomp/TAttributeStaticInfo.h"
 #include "icomp/TComponentStaticInfo.h"
+#include "icomp/TSubelementStaticInfo.h"
 #include "icomp/CBaseComponentStaticInfo.h"
 #include "icomp/CRelatedInfoRegistrator.h"
 
@@ -41,17 +43,13 @@ public:
 	CComponentBase();
 
 	// reimplemented (icomp::IComponent)
-	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const;
+	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const;
 	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "");
 	virtual const IComponentContext* GetComponentContext() const;
 	virtual void SetComponentContext(
 				const icomp::IComponentContext* contextPtr,
-				const IComponent* parentPtr,
+				const ICompositeComponent* parentPtr,
 				bool isParentOwner);
-	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
-	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
-	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
-	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
 
 protected:
 	/**
@@ -74,7 +72,7 @@ protected:
 
 private:
 	const IComponentContext* m_contextPtr;
-	const IComponent* m_parentPtr;
+	const ICompositeComponent* m_parentPtr;
 	bool m_isParentOwner;
 };
 
@@ -99,6 +97,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\ingroup ComponentConcept
 */
 #define I_BEGIN_COMPONENT(ComponentType)\
+	typedef ComponentType CurrentComponentType;\
 	static const icomp::IRealComponentStaticInfo& InitStaticInfo(ComponentType* componentPtr)\
 	{\
 		static icomp::TComponentStaticInfo<ComponentType> staticInfo(&BaseClass::InitStaticInfo(NULL));\
@@ -116,6 +115,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\ingroup ComponentConcept
 */
 #define I_BEGIN_BASE_COMPONENT(ComponentType)\
+	typedef ComponentType CurrentComponentType;\
 	static const icomp::IRealComponentStaticInfo& InitStaticInfo(ComponentType* componentPtr)\
 	{\
 		static icomp::CBaseComponentStaticInfo staticInfo(&BaseClass::InitStaticInfo(NULL));\
@@ -150,6 +150,26 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_REGISTER_INTERFACE(InterfaceType)\
 	{\
 		static icomp::TInterfaceRegistrator<InterfaceType> staticRegistrator(staticInfo);\
+	}
+
+/**
+	Register subelement of component.
+*/
+#define I_REGISTER_SUBELEMENT(ElementName)\
+	static icomp::TSubelementStaticInfo<CurrentComponentType> subelementInfo_##ElementName(#ElementName, staticInfo);
+
+/**
+	Register interface extractor for some subelement.
+	\param	ElementName			name of subelement.
+	\param	InterfaceType		type of registered interface.
+	\param	extractorFunction	function returning pointer to casted type (must be 'InterfaceType* Foo(MyComponent& component)')".
+*/
+#define I_REGISTER_SUBELEMENT_INTERFACE(ElementName, InterfaceType, extractorFunction)\
+	{\
+		static icomp::TSubelementStaticInfo<CurrentComponentType>::Registrator<InterfaceType> registrator(\
+					subelementInfo_##ElementName,\
+					#InterfaceType,\
+					extractorFunction);\
 	}
 
 /**
@@ -396,7 +416,7 @@ Dest* CompCastPtr(istd::IPolymorphic* objectPtr)
 {
 	const icomp::IComponent* componentPtr = dynamic_cast<const icomp::IComponent*>(objectPtr);
 	if (componentPtr != NULL){
-		icomp::IComponent* parentComponentPtr = const_cast<icomp::IComponent*>(componentPtr->GetParentComponent(true));
+		icomp::ICompositeComponent* parentComponentPtr = const_cast<icomp::ICompositeComponent*>(componentPtr->GetParentComponent(true));
 
 		if (parentComponentPtr != NULL){
 			Dest* retVal = (Dest*)parentComponentPtr->GetInterface(istd::CClassInfo(typeid(Dest)));
@@ -421,7 +441,7 @@ const Dest* CompCastPtr(const istd::IPolymorphic* objectPtr)
 {
 	const icomp::IComponent* componentPtr = dynamic_cast<const icomp::IComponent*>(objectPtr);
 	if (componentPtr != NULL){
-		icomp::IComponent* parentComponentPtr = const_cast<icomp::IComponent*>(componentPtr->GetParentComponent(true));
+		icomp::ICompositeComponent* parentComponentPtr = const_cast<icomp::ICompositeComponent*>(componentPtr->GetParentComponent(true));
 
 		if (parentComponentPtr != NULL){
 			const Dest* retVal = (const Dest*)parentComponentPtr->GetInterface(istd::CClassInfo(typeid(Dest)));

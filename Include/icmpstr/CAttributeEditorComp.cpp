@@ -459,8 +459,8 @@ void CAttributeEditorComp::UpdateAttributesView()
 				// creating map of attributes based on static meta info
 				const icomp::IComponentStaticInfo* infoPtr = GetComponentMetaInfo(selectedInfoPtr->address);
 				if (infoPtr != NULL){
-					icomp::IComponentStaticInfo::Ids attributeIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
-					for (		icomp::IComponentStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
+					icomp::IElementStaticInfo::Ids attributeIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_ATTRIBUTES);
+					for (		icomp::IElementStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
 								attrIter != attributeIds.end();
 								++attrIter){
 						const std::string& attributeId = *attrIter;
@@ -558,7 +558,7 @@ void CAttributeEditorComp::UpdateInterfacesView()
 					const std::string& elementId = iter->first;
 
 					// create list of all interfaces exported by element
-					icomp::IComponentStaticInfo::Ids elementInterfaceIds;
+					icomp::IElementStaticInfo::Ids elementInterfaceIds;
 					for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator regInterfaceIter = registryInterfaces.begin();
 								regInterfaceIter != registryInterfaces.end();
 								++regInterfaceIter){
@@ -570,8 +570,8 @@ void CAttributeEditorComp::UpdateInterfacesView()
 					// display all interfaces based on meta information
 					const icomp::IComponentStaticInfo* infoPtr = GetComponentMetaInfo(selectedInfoPtr->address);
 					if (infoPtr != NULL){
-						const icomp::IComponentStaticInfo::Ids& interfaceIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
-						for (		icomp::IComponentStaticInfo::Ids::const_iterator interfaceIter = interfaceIds.begin();
+						const icomp::IElementStaticInfo::Ids& interfaceIds = infoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+						for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceIds.begin();
 									interfaceIter != interfaceIds.end();
 									interfaceIter++, ++itemIndex){
 							const std::string& interfaceName = *interfaceIter;
@@ -604,7 +604,7 @@ void CAttributeEditorComp::UpdateInterfacesView()
 					}
 
 					// display all interfaces assigned to this element, but not existing in element meta information
-					for (		icomp::IComponentStaticInfo::Ids::const_iterator interfaceIter = elementInterfaceIds.begin();
+					for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = elementInterfaceIds.begin();
 								interfaceIter != elementInterfaceIds.end();
 								interfaceIter++, ++itemIndex){
 						const std::string& interfaceName = *interfaceIter;
@@ -858,8 +858,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	QString attributeDescription;
 
 	std::string attributeTypeId;
-	icomp::IComponentStaticInfo::Ids obligatoryInterfaces;
-	icomp::IComponentStaticInfo::Ids optionalInterfaces;
+	icomp::IElementStaticInfo::Ids obligatoryInterfaces;
+	icomp::IElementStaticInfo::Ids optionalInterfaces;
 
 	for (		ElementIdToAttrInfoMap::const_iterator attrsIter = infos.begin();
 				attrsIter != infos.end();
@@ -943,7 +943,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 				break;
 			}
 
-			icomp::IComponentStaticInfo::Ids interfaces = attrInfo.staticInfoPtr->GetRelatedMetaIds(
+			icomp::IElementStaticInfo::Ids interfaces = attrInfo.staticInfoPtr->GetRelatedMetaIds(
 						icomp::IComponentStaticInfo::MGI_INTERFACES,
 						icomp::IAttributeStaticInfo::AF_OBLIGATORY,
 						icomp::IAttributeStaticInfo::AF_OBLIGATORY);	// Names of obligatory interfaces
@@ -994,12 +994,12 @@ bool CAttributeEditorComp::SetAttributeToItem(
 
 		if (!obligatoryInterfaces.empty() || !optionalInterfaces.empty()){
 			attributeValueTip += tr("\nInterfaces:");
-			for (		icomp::IComponentStaticInfo::Ids::const_iterator obligIter = obligatoryInterfaces.begin();
+			for (		icomp::IElementStaticInfo::Ids::const_iterator obligIter = obligatoryInterfaces.begin();
 						obligIter != obligatoryInterfaces.end();
 						++obligIter){
 				attributeValueTip += tr("\n - %1").arg(obligIter->c_str());
 			}
-			for (		icomp::IComponentStaticInfo::Ids::const_iterator optIter = optionalInterfaces.begin();
+			for (		icomp::IElementStaticInfo::Ids::const_iterator optIter = optionalInterfaces.begin();
 						optIter != optionalInterfaces.end();
 						++optIter){
 				attributeValueTip += tr("\n - %1 (optional)").arg(optIter->c_str());
@@ -1368,7 +1368,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 void CAttributeEditorComp::CreateExportedComponentsTree(
 			const std::string& elementId,
 			const std::string& globalElementId,
-			const icomp::IComponentStaticInfo* elementMetaInfoPtr,
+			const icomp::IElementStaticInfo* elementMetaInfoPtr,
 			QTreeWidgetItem& item,
 			bool* hasWarningPtr,
 			bool* hasExportPtr) const
@@ -1388,9 +1388,9 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 	item.setExpanded(true);
 
 	if (elementMetaInfoPtr != NULL){
-		const icomp::IComponentStaticInfo::Ids subcomponentIds = elementMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBCOMPONENTS);
+		const icomp::IElementStaticInfo::Ids subcomponentIds = elementMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_SUBELEMENTS);
 
-		for (		icomp::IComponentStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
+		for (		icomp::IElementStaticInfo::Ids::const_iterator subIter = subcomponentIds.begin();
 					subIter != subcomponentIds.end();
 					++subIter, ++itemIndex){
 			const std::string& sublementId = *subIter;
@@ -1406,7 +1406,7 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 			}
 			I_ASSERT(itemPtr != NULL);
 
-			const icomp::IComponentStaticInfo* subcomponentInfoPtr = elementMetaInfoPtr->GetSubcomponentInfo(sublementId);
+			const icomp::IElementStaticInfo* subcomponentInfoPtr = elementMetaInfoPtr->GetSubelementInfo(sublementId);
 
 			bool warningFlag = false;
 			bool exportFlag = false;
@@ -1794,7 +1794,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 			const icomp::IRegistry* registryPtr = m_parent.GetRegistry();
 			if ((registryPtr != NULL) && (staticInfoPtr != NULL) && m_parent.m_consistInfoCompPtr.IsValid()){
 				int queryFlags = IRegistryConsistInfo::QF_NONE;
-				icomp::IComponentStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
+				icomp::IElementStaticInfo::Ids obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
 							0,
 							icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set

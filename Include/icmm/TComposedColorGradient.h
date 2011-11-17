@@ -19,7 +19,7 @@ class TComposedColorGradient: virtual public IColorTransformation
 public:
 	void AddGradient(const istd::CRange& intervall, const Gradient& gradient);
 
-	// reimplemented (IColorTransformation)
+	// reimplemented (icmm::IColorTransformation)
 	virtual bool GetValueAt(const Argument& argument, Result& result) const;
 	virtual Result GetValueAt(const Argument& argument) const;
 
@@ -40,7 +40,7 @@ void TColorGradient<GradientFunction>::AddGradient(const istd::CRange& intervall
 }
 
 
-// reimplemented (IColorTransformation)
+// reimplemented (icmm::IColorTransformation)
 
 template <class GradientFunction>
 bool TColorGradient<GradientFunction>::GetValueAt(const Argument& argument, Result& result) const

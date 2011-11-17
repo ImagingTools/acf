@@ -100,7 +100,7 @@ std::string TAttribute<Value>::GetFactoryId() const
 }
 
 
-// reimplemented (ISerializable)
+// reimplemented (iser::ISerializable)
 
 template <typename Value>
 bool TAttribute<Value>::Serialize(iser::IArchive& archive)

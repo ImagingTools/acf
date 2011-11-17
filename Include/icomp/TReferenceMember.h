@@ -117,7 +117,7 @@ template <class Interface>
 bool TReferenceMember<Interface>::EnsureInitialized() const
 {
 	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
-		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
+		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			const std::string& componentId = BaseClass::operator*();
 

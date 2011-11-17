@@ -147,7 +147,7 @@ void CRegistriesManagerComp::RegisterPackageFile(const istd::CString& file)
 	else if (fileInfo.isDir()){
 		CompositePackagesMap::const_iterator foundIter = m_compositePackagesMap.find(packageId);
 		if (foundIter == m_compositePackagesMap.end()){
-			icomp::IComponentStaticInfo::Ids componentIds;
+			icomp::IElementStaticInfo::Ids componentIds;
 
 			QStringList filters;
 			filters.append("*.arx");

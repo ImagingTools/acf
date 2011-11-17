@@ -37,7 +37,7 @@ public:
 				const icomp::IRegistry* parentPtr,
 				const icomp::CComponentAddress& address);
 
-	// reimplemented (IObject2d)
+	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const i2d::CVector2d& position);
 	virtual bool Transform(

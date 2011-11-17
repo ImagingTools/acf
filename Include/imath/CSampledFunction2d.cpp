@@ -69,7 +69,7 @@ bool CSampledFunction2d::CreateGrid2d(const istd::CIndex2d& sizes, double defaul
 }
 
 
-// reimplemented (ISampledFunction2d)
+// reimplemented (imath::ISampledFunction2d)
 
 bool CSampledFunction2d::CreateFunction(double* dataPtr, const ArgumentType& sizes)
 {

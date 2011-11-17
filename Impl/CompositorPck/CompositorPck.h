@@ -32,7 +32,7 @@ typedef icmpstr::CRegistryLoaderComp RegistryLoader;
 typedef icmpstr::CRegistryPreviewComp RegistryPreview;
 typedef icmpstr::CComponentHelpFileProviderComp ComponentHelpFileProvider;
 typedef icomp::TModelCompWrap<icmpstr::CVisualRegistryComp> VisualRegistry;
-typedef icomp::TModelCompWrap<icmpstr::CVisualRegistryScenographerComp> VisualRegistryScenographer;
+typedef icmpstr::CVisualRegistryScenographerComp VisualRegistryScenographer;
 typedef icomp::TMakeComponentWrap<
 			imod::TModelWrap<icomp::CRegistry>,
 			icomp::IRegistry,

@@ -8,6 +8,7 @@
 
 #include "istd/CClassInfo.h"
 
+#include "icomp/ICompositeComponent.h"
 #include "icomp/IRegistry.h"
 #include "icomp/IComponentContext.h"
 #include "icomp/CInterfaceManipBase.h"
@@ -22,7 +23,7 @@ class IMetaInfoManager;
 
 class CCompositeComponent:
 			public CInterfaceManipBase,
-			virtual public IComponent
+			virtual public ICompositeComponent
 {
 public:
 	CCompositeComponent();
@@ -40,18 +41,20 @@ public:
 	*/
 	bool EndAutoInitBlock();
 
-	// reimplemented (icomp::IComponent)
-	virtual const IComponent* GetParentComponent(bool ownerOnly = false) const;
-	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "");
-	virtual const IComponentContext* GetComponentContext() const;
-	virtual void SetComponentContext(
-				const icomp::IComponentContext* contextPtr,
-				const IComponent* parentPtr,
-				bool isParentOwner);
+	// reimplemented (icomp::ICompositeComponent)
 	virtual IComponent* GetSubcomponent(const std::string& componentId) const;
 	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const;
 	virtual IComponent* CreateSubcomponent(const std::string& componentId) const;
 	virtual void OnSubcomponentDeleted(const IComponent* subcomponentPtr);
+
+	// reimplemented (icomp::IComponent)
+	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const;
+	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "");
+	virtual const IComponentContext* GetComponentContext() const;
+	virtual void SetComponentContext(
+				const icomp::IComponentContext* contextPtr,
+				const ICompositeComponent* parentPtr,
+				bool isParentOwner);
 
 protected:
 	typedef istd::TDelPtr<icomp::IComponent> ComponentPtr;
@@ -105,7 +108,7 @@ private:
 	int m_isAutoInitBlockCount;
 
 	const IComponentContext* m_contextPtr;
-	const IComponent* m_parentPtr;
+	const ICompositeComponent* m_parentPtr;
 	bool m_isParentOwner;
 };
 

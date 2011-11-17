@@ -62,7 +62,7 @@ public:
 		Get related meta information.
 		This information in normally used by references and factories to provide information about related interfaces.
 	*/
-	virtual IComponentStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const = 0;
+	virtual IElementStaticInfo::Ids GetRelatedMetaIds(int metaGroupId, int flags, int flagsMask) const = 0;
 
 	/**
 		Get flags of this attribute.

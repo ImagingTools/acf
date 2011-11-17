@@ -21,15 +21,19 @@ public:
 	// reimplemented (icomp::IComponentStaticInfo)
 	virtual int GetComponentType() const;
 	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const;
-	virtual const IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const;
 	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
-	virtual Ids GetMetaIds(int metaGroupId) const;
 	virtual const istd::CString& GetDescription() const;
 	virtual const istd::CString& GetKeywords() const;
+
+	//	reimplemented (icomp::IElementStaticInfo)
+	virtual const IElementStaticInfo* GetSubelementInfo(const std::string& subcomponentId) const;
+	virtual Ids GetMetaIds(int metaGroupId) const;
 };
 
 
 // inline methods
+
+// reimplemented (icomp::IComponentStaticInfo)
 
 inline const istd::CString& CComponentStaticInfoBase::GetDescription() const
 {

@@ -2,14 +2,8 @@
 #define icomp_IComponentStaticInfo_included
 
 
-// STL includes
-#include <set>
-#include <string>
-
-
 // ACF includes
-#include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include "icomp/IElementStaticInfo.h"
 
 
 namespace icomp
@@ -17,7 +11,6 @@ namespace icomp
 
 
 class IAttributeStaticInfo;
-class IComponent;
 
 
 /**
@@ -27,7 +20,7 @@ class IComponent;
 
 	\ingroup ComponentConcept
 */
-class IComponentStaticInfo: virtual public istd::IPolymorphic
+class IComponentStaticInfo: virtual public IElementStaticInfo
 {
 public:
 	/**
@@ -54,24 +47,14 @@ public:
 	enum MetaGroupId
 	{
 		/**
-			ID of meta group storing list of supported interfaces.
-		*/
-		MGI_INTERFACES = 0,
-		/**
 			ID of meta group storing list of attributes.
 		*/
-		MGI_ATTRIBUTES,
-		/**
-			ID of group for subcomponents.
-		*/
-		MGI_SUBCOMPONENTS,
+		MGI_ATTRIBUTES = IElementStaticInfo::MGI_LAST + 1,
 		/**
 			ID of group for embedded types.
 		*/
 		MGI_EMBEDDED_COMPONENTS
 	};
-
-	typedef std::set<std::string> Ids;
 
 	/**
 		Get information about component type.
@@ -86,22 +69,9 @@ public:
 	/**
 		Return number of interfaces for specific slot.
 		\param	subcomponentId	ID of subcomponent.
-								\sa	GetMetaIds() and MGI_SUBCOMPONENTS.
-	*/
-	virtual const IComponentStaticInfo* GetSubcomponentInfo(const std::string& subcomponentId) const = 0;
-
-	/**
-		Return number of interfaces for specific slot.
-		\param	subcomponentId	ID of subcomponent.
 								\sa	GetMetaIds() and MGI_EMBEDDED_COMPONENTS.
 	*/
 	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const = 0;
-
-	/**
-		Get list of meta IDs associated with some meta key.
-		\sa MetaGroupId
-	*/
-	virtual Ids GetMetaIds(int metaGroupId) const = 0;
 
 	/**
 		Get human readable description of this component.

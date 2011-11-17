@@ -22,7 +22,7 @@ public:
 	const CVector2d& GetPosition() const;
 	void SetPosition(const CVector2d& position);
 
-	// reimplemented (IObject2d)
+	// reimplemented (i2d::IObject2d)
 	virtual CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const CVector2d& position);
 	virtual bool Transform(

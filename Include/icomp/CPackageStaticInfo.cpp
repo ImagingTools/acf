@@ -67,7 +67,7 @@ const IComponentStaticInfo* CPackageStaticInfo::GetEmbeddedComponentInfo(const s
 }
 
 
-IComponentStaticInfo::Ids CPackageStaticInfo::GetMetaIds(int metaGroupId) const
+IElementStaticInfo::Ids CPackageStaticInfo::GetMetaIds(int metaGroupId) const
 {
 	Ids retVal;
 

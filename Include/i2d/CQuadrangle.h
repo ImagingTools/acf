@@ -35,7 +35,7 @@ public:
 	const CLine2d& GetSecondDiagonal() const;
 	void SetSecondDiagonal(const CLine2d& secondDiagonal);
 
-	// reimplemented (IObject2d)
+	// reimplemented (i2d::IObject2d)
 	virtual CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const CVector2d& position);
 	virtual bool Transform(

@@ -24,7 +24,7 @@ CCompositeComponent::CCompositeComponent()
 CCompositeComponent::~CCompositeComponent()
 {
 	if (m_isParentOwner && (m_parentPtr != NULL)){
-		const_cast<IComponent*>(m_parentPtr)->OnSubcomponentDeleted(this);
+		const_cast<ICompositeComponent*>(m_parentPtr)->OnSubcomponentDeleted(this);
 	}
 
 	SetComponentContext(NULL, NULL, false);
@@ -48,136 +48,7 @@ bool CCompositeComponent::EndAutoInitBlock()
 }
 
 
-// reimplemented (icomp::IComponent)
-
-const IComponent* CCompositeComponent::GetParentComponent(bool ownerOnly) const
-{
-	if (!ownerOnly || m_isParentOwner){
-		return m_parentPtr;
-	}
-
-	return NULL;
-}
-
-
-void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId)
-{
-	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
-	if (contextPtr == NULL){
-		return NULL;
-	}
-
-	const IRegistry& registry = contextPtr->GetRegistry();
-
-	if (subId.empty()){
-		const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
-
-		IRegistry::ExportedInterfacesMap::const_iterator iter;
-		if (interfaceType.IsVoid()){
-			iter = interfaceInfos.begin();
-		}
-		else{
-			iter = interfaceInfos.find(interfaceType.GetName());
-			if ((iter == interfaceInfos.end()) && interfaceType.IsConst()){
-				istd::CClassInfo nonConstInterfaceType = interfaceType.GetConstCasted(false);
-
-				iter = interfaceInfos.find(nonConstInterfaceType.GetName());
-			}
-		}
-
-		if (iter != interfaceInfos.end()){
-			std::string componentId;
-			std::string restId;
-			SplitId(iter->second, componentId, restId);
-
-			IComponent* subComponentPtr = GetSubcomponent(componentId);
-			if (subComponentPtr != NULL){
-				return subComponentPtr->GetInterface(interfaceType, restId);
-			}
-		}
-	}
-	else{
-		std::string componentId;
-		std::string restId;
-		SplitId(subId, componentId, restId);
-
-		const IRegistry::ExportedComponentsMap& subcomponentMap = registry.GetExportedComponentsMap();
-
-		IRegistry::ExportedComponentsMap::const_iterator iter = subcomponentMap.find(componentId);
-		if (iter != subcomponentMap.end()){
-			const std::string& realComponentId = iter->second;
-			std::string subComponentId;
-			std::string subRestId;
-			SplitId(realComponentId, subComponentId, subRestId);
-
-			IComponent* subComponentPtr = GetSubcomponent(subComponentId);
-			if (subComponentPtr != NULL){
-				return subComponentPtr->GetInterface(interfaceType, JoinId(subRestId, restId));
-			}
-		}
-	}
-
-	return NULL;
-}
-
-
-const IComponentContext* CCompositeComponent::GetComponentContext() const
-{
-	return m_contextPtr;
-}
-
-
-void CCompositeComponent::SetComponentContext(
-			const icomp::IComponentContext* contextPtr,
-			const IComponent* parentPtr,
-			bool isParentOwner)
-{
-	m_parentPtr = parentPtr;
-	m_isParentOwner = isParentOwner;
-
-	m_autoInitComponentIds.clear();
-
-	const CCompositeComponentContext* compositeContextPtr = dynamic_cast<const CCompositeComponentContext*>(contextPtr);
-	if (compositeContextPtr != NULL){
-		m_contextPtr = contextPtr;
-
-		const IRegistry& registry = compositeContextPtr->GetRegistry();
-
-		IRegistry::Ids elementIds = registry.GetElementIds();
-		for (		IRegistry::Ids::const_iterator iter = elementIds.begin();
-					iter != elementIds.end();
-					++iter){
-			const std::string& elementId = *iter;
-			const IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementId);
-			I_ASSERT(infoPtr);	// ID must be valid, becouse it was taken using icomp::IRegistry::GetElementIds()!
-
-			I_DWORD flags = infoPtr->elementPtr->GetElementFlags();
-			if ((flags & IRegistryElement::EF_AUTO_INSTANCE) != 0){
-				m_autoInitComponentIds.insert(elementId);
-			}
-		}
-
-		EnsureAutoInitComponentsCreated();
-	}
-	else{
-		m_contextPtr = NULL;
-
-		for (		ComponentMap::iterator iter = m_componentMap.begin();
-					iter != m_componentMap.end();
-					++iter){
-			ComponentInfo& info = iter->second;
-
-			if (info.isComponentInitialized){
-				if (info.componentPtr.IsValid()){
-					info.componentPtr->SetComponentContext(NULL, NULL, false);
-				}
-
-				info.isComponentInitialized = false;
-			}
-		}
-	}
-}
-
+// reimplemented (icomp::ICompositeComponent)
 
 IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId) const
 {
@@ -269,6 +140,137 @@ void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPt
 	}
 
 	I_CRITICAL();	// subcomponent not found in this composition
+}
+
+
+// reimplemented (icomp::IComponent)
+
+const ICompositeComponent* CCompositeComponent::GetParentComponent(bool ownerOnly) const
+{
+	if (!ownerOnly || m_isParentOwner){
+		return m_parentPtr;
+	}
+
+	return NULL;
+}
+
+
+void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId)
+{
+	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
+	if (contextPtr == NULL){
+		return NULL;
+	}
+
+	const IRegistry& registry = contextPtr->GetRegistry();
+
+	if (subId.empty()){
+		const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
+
+		IRegistry::ExportedInterfacesMap::const_iterator iter;
+		if (interfaceType.IsVoid()){
+			iter = interfaceInfos.begin();
+		}
+		else{
+			iter = interfaceInfos.find(interfaceType.GetName());
+			if ((iter == interfaceInfos.end()) && interfaceType.IsConst()){
+				istd::CClassInfo nonConstInterfaceType = interfaceType.GetConstCasted(false);
+
+				iter = interfaceInfos.find(nonConstInterfaceType.GetName());
+			}
+		}
+
+		if (iter != interfaceInfos.end()){
+			std::string componentId;
+			std::string restId;
+			SplitId(iter->second, componentId, restId);
+
+			IComponent* subComponentPtr = GetSubcomponent(componentId);
+			if (subComponentPtr != NULL){
+				return subComponentPtr->GetInterface(interfaceType, restId);
+			}
+		}
+	}
+	else{
+		std::string componentId;
+		std::string restId;
+		SplitId(subId, componentId, restId);
+
+		const IRegistry::ExportedComponentsMap& subcomponentMap = registry.GetExportedComponentsMap();
+
+		IRegistry::ExportedComponentsMap::const_iterator iter = subcomponentMap.find(componentId);
+		if (iter != subcomponentMap.end()){
+			const std::string& realComponentId = iter->second;
+			std::string subComponentId;
+			std::string subRestId;
+			SplitId(realComponentId, subComponentId, subRestId);
+
+			IComponent* subComponentPtr = GetSubcomponent(subComponentId);
+			if (subComponentPtr != NULL){
+				return subComponentPtr->GetInterface(interfaceType, JoinId(subRestId, restId));
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+const IComponentContext* CCompositeComponent::GetComponentContext() const
+{
+	return m_contextPtr;
+}
+
+
+void CCompositeComponent::SetComponentContext(
+			const icomp::IComponentContext* contextPtr,
+			const ICompositeComponent* parentPtr,
+			bool isParentOwner)
+{
+	m_parentPtr = parentPtr;
+	m_isParentOwner = isParentOwner;
+
+	m_autoInitComponentIds.clear();
+
+	const CCompositeComponentContext* compositeContextPtr = dynamic_cast<const CCompositeComponentContext*>(contextPtr);
+	if (compositeContextPtr != NULL){
+		m_contextPtr = contextPtr;
+
+		const IRegistry& registry = compositeContextPtr->GetRegistry();
+
+		IRegistry::Ids elementIds = registry.GetElementIds();
+		for (		IRegistry::Ids::const_iterator iter = elementIds.begin();
+					iter != elementIds.end();
+					++iter){
+			const std::string& elementId = *iter;
+			const IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementId);
+			I_ASSERT(infoPtr);	// ID must be valid, becouse it was taken using icomp::IRegistry::GetElementIds()!
+
+			I_DWORD flags = infoPtr->elementPtr->GetElementFlags();
+			if ((flags & IRegistryElement::EF_AUTO_INSTANCE) != 0){
+				m_autoInitComponentIds.insert(elementId);
+			}
+		}
+
+		EnsureAutoInitComponentsCreated();
+	}
+	else{
+		m_contextPtr = NULL;
+
+		for (		ComponentMap::iterator iter = m_componentMap.begin();
+					iter != m_componentMap.end();
+					++iter){
+			ComponentInfo& info = iter->second;
+
+			if (info.isComponentInitialized){
+				if (info.componentPtr.IsValid()){
+					info.componentPtr->SetComponentContext(NULL, NULL, false);
+				}
+
+				info.isComponentInitialized = false;
+			}
+		}
+	}
 }
 
 

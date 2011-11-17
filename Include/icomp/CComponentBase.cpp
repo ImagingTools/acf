@@ -18,7 +18,7 @@ CComponentBase::CComponentBase()
 
 // reimplemented (icomp::IComponent)
 
-const IComponent* CComponentBase::GetParentComponent(bool ownerOnly) const
+const ICompositeComponent* CComponentBase::GetParentComponent(bool ownerOnly) const
 {
 	if (!ownerOnly || m_isParentOwner){
 		return m_parentPtr;
@@ -28,22 +28,12 @@ const IComponent* CComponentBase::GetParentComponent(bool ownerOnly) const
 }
 
 
-void* CComponentBase::GetInterface(const istd::CClassInfo& interfaceType, const std::string& /*subId*/)
+void* CComponentBase::GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId)
 {
-	if (!interfaceType.IsValid()){
-		return this;
-	}
-
-	static istd::CClassInfo compInterfaceType(typeid(icomp::IComponent));
-
 	if (m_contextPtr != NULL){
-		if (interfaceType.IsVoid() || (interfaceType == compInterfaceType)){
-			return static_cast<icomp::IComponent*>(this);
-		}
-
 		const IRealComponentStaticInfo& staticInfo = GetComponentStaticInfo();
 
-		return staticInfo.GetComponentInterface(interfaceType, *this);
+		return staticInfo.GetComponentInterface(interfaceType, *this, subId);
 	}
 
 	return NULL;
@@ -58,36 +48,12 @@ const IComponentContext* CComponentBase::GetComponentContext() const
 
 void CComponentBase::SetComponentContext(
 			const icomp::IComponentContext* contextPtr,
-			const IComponent* parentPtr,
+			const ICompositeComponent* parentPtr,
 			bool isParentOwner)
 {
 	m_contextPtr = contextPtr;
 	m_parentPtr = parentPtr;
 	m_isParentOwner = isParentOwner;
-}
-
-
-IComponent* CComponentBase::GetSubcomponent(const std::string& /*componentId*/) const
-{
-	return NULL;	// normal component has no subcomponents
-}
-
-
-const IComponentContext* CComponentBase::GetSubcomponentContext(const std::string& /*componentId*/) const
-{
-	return NULL;	// normal component has no subcomponents and also their contexts
-}
-
-
-IComponent* CComponentBase::CreateSubcomponent(const std::string& /*componentId*/) const
-{
-	return NULL;	// normal component cannot create subcomponents
-}
-
-
-void CComponentBase::OnSubcomponentDeleted(const IComponent* /*subcomponentPtr*/)
-{
-	// do nothing, real components has no subcomponents
 }
 
 

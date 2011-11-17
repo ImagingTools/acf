@@ -157,7 +157,7 @@ protected:
 	void CreateExportedComponentsTree(
 				const std::string& elementId,
 				const std::string& globalElementId,
-				const icomp::IComponentStaticInfo* elementMetaInfoPtr,
+				const icomp::IElementStaticInfo* elementMetaInfoPtr,
 				QTreeWidgetItem& item,
 				bool* hasWarningPtr = NULL,
 				bool* hasExportPtr = NULL) const;

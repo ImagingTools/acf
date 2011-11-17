@@ -71,7 +71,7 @@ void CTranslationManagerComp::OnComponentDestroyed()
 }
 
 
-// reimplemented (ITranslationManager)
+// reimplemented (iqt::ITranslationManager)
 
 int CTranslationManagerComp::GetLanguagesCount() const
 {

@@ -51,7 +51,6 @@ class CVisualRegistryScenographerComp:
 			public QObject,
 			public iqt2d::TScenographerCompBase<
 						imod::TSingleModelObserverBase<icomp::IRegistry> >,
-			virtual public icmpstr::IElementSelectionInfo,
 			virtual public ibase::ICommandsProvider
 {
 	Q_OBJECT
@@ -61,8 +60,11 @@ public:
 				imod::TSingleModelObserverBase<icomp::IRegistry> > BaseClass;
 
 	I_BEGIN_COMPONENT(CVisualRegistryScenographerComp);
-		I_REGISTER_INTERFACE(IElementSelectionInfo);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
+		I_REGISTER_SUBELEMENT(SelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, IElementSelectionInfo, ExtractSelectionInterface);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, imod::IModel, ExtractSelectionInterfaceModel);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, istd::IChangeable, ExtractSelectionInterfaceChangeable);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
 		I_ASSIGN(m_registryPreviewCompPtr, "RegistryPreview", "Executes preview of the registry", false, "RegistryPreview");
 		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
@@ -85,10 +87,6 @@ public:
 		If the element is a composite component the function returns \c true, otherwise a \c false.
 	*/
 	bool TryOpenComponent(const CVisualRegistryElement& registryElement) const;
-
-	// reimplemented (icmpstr::IElementSelectionInfo)
-	virtual icomp::IRegistry* GetSelectedRegistry() const;
-	virtual Elements GetSelectedElements() const;
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -141,6 +139,11 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+	// static methods
+	static IElementSelectionInfo* ExtractSelectionInterface(CVisualRegistryScenographerComp& component);
+	static imod::IModel* ExtractSelectionInterfaceModel(CVisualRegistryScenographerComp& component);
+	static istd::IChangeable* ExtractSelectionInterfaceChangeable(CVisualRegistryScenographerComp& component);
+
 protected Q_SLOTS:
 	void OnSelectionChanged();
 	void OnRemoveComponent();
@@ -155,6 +158,19 @@ protected Q_SLOTS:
 	void OnExecutionTimerTick();
 
 private:
+	class SelectionInfo: virtual public IElementSelectionInfo
+	{
+	public:
+		void SetParent(CVisualRegistryScenographerComp* parentPtr);
+
+		// reimplemented (icmpstr::IElementSelectionInfo)
+		virtual icomp::IRegistry* GetSelectedRegistry() const;
+		virtual Elements GetSelectedElements() const;
+
+	private:
+		CVisualRegistryScenographerComp* m_parentPtr;
+	};
+
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
@@ -184,6 +200,8 @@ private:
 	ElementIds m_selectedElementIds;
 
 	EnvironmentObserver m_environmentObserver;
+
+	imod::TModelWrap<SelectionInfo> m_selectionInfo;
 };
 
 

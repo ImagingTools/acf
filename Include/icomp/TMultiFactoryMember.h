@@ -96,7 +96,7 @@ template <class Interface>
 IComponent* TMultiFactoryMember<Interface>::CreateComponent(int index) const
 {
 	if ((m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
-		const IComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
+		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
 			const std::string& componentId = BaseClass::operator[](index);
 
