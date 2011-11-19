@@ -17,13 +17,14 @@ namespace imod
 
 	\ingroup ModelObserver
 */
-template<class ObjectClass>
+template<class ModelInterface>
 class TMultiModelObserverBase: public CMultiModelObserverBase
 {
 public:
 	typedef CMultiModelObserverBase BaseClass;
+	typedef ModelInterface ModelType;
 
-	ObjectClass* GetObjectPtr(int objectIndex) const;
+	ModelInterface* GetObjectPtr(int objectIndex) const;
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
@@ -32,22 +33,22 @@ public:
 
 // public methods
 
-template<class ObjectClass>
-ObjectClass* TMultiModelObserverBase<ObjectClass>::GetObjectPtr(int objectIndex) const
+template<class ModelInterface>
+ModelInterface* TMultiModelObserverBase<ModelInterface>::GetObjectPtr(int objectIndex) const
 {
 	I_ASSERT(objectIndex >= 0)
 	I_ASSERT(objectIndex < GetModelCount());
 
-	return dynamic_cast<ObjectClass*>(GetModelPtr(objectIndex));
+	return dynamic_cast<ModelInterface*>(GetModelPtr(objectIndex));
 }
 	
 
 // reimplemented (imod::IObserver)
 
-template<class ObjectClass>
-bool TMultiModelObserverBase<ObjectClass>::OnAttached(imod::IModel* modelPtr)
+template<class ModelInterface>
+bool TMultiModelObserverBase<ModelInterface>::OnAttached(imod::IModel* modelPtr)
 {
-	ObjectClass* objectPtr = dynamic_cast<ObjectClass*>(modelPtr);
+	ModelInterface* objectPtr = dynamic_cast<ModelInterface*>(modelPtr);
 	if (objectPtr == NULL){
 		return false;
 	}

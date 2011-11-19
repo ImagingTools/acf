@@ -5,7 +5,7 @@
 #include "icomp/TModelCompWrap.h"
 
 
-#include "iwiz/CLinearWizardControllerComp.h"
+#include "iwiz/CWizardDocumentComp.h"
 #include "iwiz/CWizardPageComp.h"
 
 
@@ -16,9 +16,8 @@ namespace WizardPck
 {
 
 
-typedef iwiz::CLinearWizardControllerComp LinearWizardController;
-typedef icomp::TModelCompWrap<
-			iwiz::CWizardPageComp> WizardPage;
+typedef icomp::TModelCompWrap<iwiz::CWizardDocumentComp> WizardDocument;
+typedef icomp::TModelCompWrap<iwiz::CWizardPageComp> WizardPage;
 
 
 } // namespace WizardPck

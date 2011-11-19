@@ -9,8 +9,7 @@
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
 
-#include "iprm/ISelectionParam.h"
-#include "iprm/IParamsManager.h"
+#include "iwiz/IParamsManagerWizard.h"
 #include "iwiz/IWizardNavigationController.h"
 
 #include "idoc/IHelpViewer.h"
@@ -29,19 +28,18 @@ namespace iqtwiz
 class CWizardGuiComp:
 			public iqtgui::TGuiObserverWrap<
 						iqtgui::TGuiComponentBase<QWizard>,
-						imod::TSingleModelObserverBase<iprm::IParamsManager> >
+						imod::TSingleModelObserverBase<iwiz::IParamsManagerWizard> >
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TGuiObserverWrap<
 				iqtgui::TGuiComponentBase<QWizard>,
-				imod::TSingleModelObserverBase<iprm::IParamsManager> > BaseClass;
+				imod::TSingleModelObserverBase<iwiz::IParamsManagerWizard> > BaseClass;
 
 	I_BEGIN_COMPONENT(CWizardGuiComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
-		I_ASSIGN(m_wizardControllerCompPtr, "WizardController", "Wizard navigation controller", false, "WizardController");
 		I_ASSIGN(m_sideGuiCompPtr, "SideWidget", "Side widget of the wizard", false, "SideWidget");
 		I_ASSIGN(m_helpViewerCompPtr, "HelpViewer", "Help view component", false, "HelpViewer");
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for parameters edition", true);
@@ -87,7 +85,6 @@ private:
 	void GoToPage(int pageIndex);
 
 private:
-	I_REF(iwiz::IWizardNavigationController, m_wizardControllerCompPtr);
 	I_REF(iqtgui::IGuiObject, m_sideGuiCompPtr);
 	I_REF(idoc::IHelpViewer, m_helpViewerCompPtr);
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);

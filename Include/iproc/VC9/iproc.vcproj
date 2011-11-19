@@ -221,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IStateController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ISupplier.h"
 				>
 			</File>

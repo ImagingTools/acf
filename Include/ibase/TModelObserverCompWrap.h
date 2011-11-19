@@ -13,18 +13,17 @@ namespace ibase
 
 
 /**
-	Basic implementation for a single model observer component.
+	Implementation of component wrapper for model observer classes.
 */
-template <class ObjectInterface, class ObserverImpl>
-class TModelObserverCompWrap: public ObserverImpl
+template <class ObserverComponent>
+class TModelObserverCompWrap: public ObserverComponent
 {
 public:
-	typedef ObserverImpl BaseClass;
-	typedef ObjectInterface ModelInterface;
+	typedef ObserverComponent BaseClass;
 
 	I_BEGIN_COMPONENT(TModelObserverCompWrap);
-		I_ASSIGN(m_modelCompPtr, "DefaultModel", "Data model to be connected to the observer", false, "DefaultModel");
-		I_ASSIGN_TO(m_objectCompPtr, m_modelCompPtr, false);
+		I_ASSIGN(m_defaultModelCompPtr, "DefaultModel", "Data model to be connected to the observer", false, "DefaultModel");
+		I_ASSIGN_TO(m_defaultObjectCompPtr, m_defaultModelCompPtr, false);
 	I_END_COMPONENT;
 
 protected:
@@ -33,8 +32,8 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	I_REF(imod::IModel, m_modelCompPtr);
-	I_TREF(ModelInterface, m_objectCompPtr);
+	I_REF(imod::IModel, m_defaultModelCompPtr);
+	I_TREF(typename ObserverComponent::ModelType, m_defaultObjectCompPtr);
 };
 
 
@@ -42,24 +41,22 @@ private:
 
 // reimplemented (icomp::CComponentBase)
 
-template <class ObjectInterface, class ObserverImpl>
-void TModelObserverCompWrap<ObjectInterface, ObserverImpl>::OnComponentCreated()
+template <class ObserverComponent>
+void TModelObserverCompWrap<ObserverComponent>::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_modelCompPtr.IsValid() && m_objectCompPtr.IsValid()){
-		m_modelCompPtr->AttachObserver(this);
+	if (m_defaultModelCompPtr.IsValid() && m_defaultObjectCompPtr.IsValid()){
+		m_defaultModelCompPtr->AttachObserver(this);
 	}
 }
 
 
-template <class ObjectInterface, class ObserverImpl>
-void TModelObserverCompWrap<ObjectInterface, ObserverImpl>::OnComponentDestroyed()
+template <class ObserverComponent>
+void TModelObserverCompWrap<ObserverComponent>::OnComponentDestroyed()
 {
-	if (m_modelCompPtr.IsValid()){
-		if (m_modelCompPtr->IsAttached(this)){
-			m_modelCompPtr->DetachObserver(this);
-		}
+	if (m_defaultModelCompPtr.IsValid() && m_defaultModelCompPtr->IsAttached(this)){
+		m_defaultModelCompPtr->DetachObserver(this);
 	}
 
 	BaseClass::OnComponentDestroyed();

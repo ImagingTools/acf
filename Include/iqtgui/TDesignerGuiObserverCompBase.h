@@ -25,15 +25,11 @@ namespace iqtgui
 template <class UI, class Model, class WidgetType = QWidget>
 class TDesignerGuiObserverCompBase:
 			public ibase::TModelObserverCompWrap<
-						Model, iqtgui::TGuiObserverWrap<
-									iqtgui::TDesignerGuiCompBase<UI, WidgetType>,
-									imod::TSingleModelObserverBase<Model> > >
+						iqtgui::TGuiObserverWrap< iqtgui::TDesignerGuiCompBase<UI, WidgetType>, imod::TSingleModelObserverBase<Model> > >
 {
 public:
 	typedef ibase::TModelObserverCompWrap<
-				Model, iqtgui::TGuiObserverWrap<
-							iqtgui::TDesignerGuiCompBase<UI, WidgetType>,
-							imod::TSingleModelObserverBase<Model> > > BaseClass;
+				iqtgui::TGuiObserverWrap< iqtgui::TDesignerGuiCompBase<UI, WidgetType>, imod::TSingleModelObserverBase<Model> > > BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TDesignerGuiObserverCompBase);
 		I_REGISTER_INTERFACE(imod::IModelEditor);

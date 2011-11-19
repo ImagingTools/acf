@@ -499,6 +499,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TModelObserverCompWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TMsbWord.h"
 				>
 			</File>

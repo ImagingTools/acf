@@ -26,8 +26,8 @@ void CWizardGuiComp::OnCurrentPageChanged(int pageId)
 
 	UpdateBlocker updateBlocker(this);
 
-	iprm::IParamsManager* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL && pageId >= 0){
+	iwiz::IParamsManagerWizard* objectPtr = GetObjectPtr();
+	if ((objectPtr != NULL) && (pageId >= 0)){
 		objectPtr->SetSelectedOptionIndex(pageId);
 	}
 }
@@ -45,11 +45,9 @@ void CWizardGuiComp::OnHelpRequested()
 
 int CWizardGuiComp::GetNextPageId() const
 {
-	QWizard* wizardPtr = GetQtWidget();
-	I_ASSERT(wizardPtr != NULL);
-	
-	if (m_wizardControllerCompPtr.IsValid()){
-		return m_wizardControllerCompPtr->GetNextPageId(wizardPtr->currentId());
+	iwiz::IParamsManagerWizard* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		return objectPtr->GetNextPageIndex();
 	}
 
 	return -1;
@@ -64,7 +62,7 @@ void CWizardGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	iprm::IParamsManager* objectPtr = GetObjectPtr();
+	iwiz::IParamsManagerWizard* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int paramsCount = objectPtr->GetParamsSetsCount();
 		int connectionsCount = istd::Min(m_observersCompPtr.GetCount(), paramsCount);
@@ -100,7 +98,7 @@ void CWizardGuiComp::OnGuiModelAttached()
 
 void CWizardGuiComp::OnGuiModelDetached()
 {
-	iprm::IParamsManager* objectPtr = GetObjectPtr();
+	iwiz::IParamsManagerWizard* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int paramsCount = objectPtr->GetParamsSetsCount();
 		int connectionsCount = istd::Min(m_observersCompPtr.GetCount(), paramsCount);
@@ -129,10 +127,8 @@ void CWizardGuiComp::UpdateGui(int updateFlags)
 
 	wizardPtr->setStartId(0);
 
-	if ((updateFlags & iprm::ISelectionParam::CF_SELECTION_CHANGED) != 0){
-		iprm::IParamsManager* objectPtr = GetObjectPtr();
-		I_ASSERT(objectPtr != NULL);
-
+	iwiz::IParamsManagerWizard* objectPtr = GetObjectPtr();
+	if ((objectPtr != NULL) && ((updateFlags & iprm::ISelectionParam::CF_SELECTION_CHANGED) != 0)){
 		int pageIndex = objectPtr->GetSelectedOptionIndex();
 		if (pageIndex < 0){
 			pageIndex = 0;
@@ -154,20 +150,21 @@ void CWizardGuiComp::OnGuiCreated()
 
 	if (m_wizardStyleAttrPtr.IsValid()){
 		switch (*m_wizardStyleAttrPtr){
-			case 0:
-				wizardStyle = QWizard::ClassicStyle;
-				break;
-			case 1:
-				wizardStyle = QWizard::ModernStyle;
-				break;
-			case 2:
-				wizardStyle = QWizard::MacStyle;
-				break;
-			case 3:
-				wizardStyle = QWizard::AeroStyle;
-				break;
-			default:
-				I_CRITICAL();
+		case 0:
+			wizardStyle = QWizard::ClassicStyle;
+			break;
+
+		case 1:
+			wizardStyle = QWizard::ModernStyle;
+			break;
+
+		case 2:
+			wizardStyle = QWizard::MacStyle;
+			break;
+
+		case 3:
+			wizardStyle = QWizard::AeroStyle;
+			break;
 		}
 	}
 
@@ -181,32 +178,29 @@ void CWizardGuiComp::OnGuiCreated()
 
 	wizardPtr->setOptions(options);
 
-	if (m_wizardControllerCompPtr.IsValid()){
-		int pagesCount = m_guisCompPtr.GetCount();
+	int pagesCount = m_guisCompPtr.GetCount();
+	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
+		istd::TDelPtr<QWizardPage> wizardPage(new CWizardPage(*this));
+		QVBoxLayout* layoutPtr = new QVBoxLayout(wizardPage.GetPtr());
+		layoutPtr->setMargin(0);
 
-		for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
-			istd::TDelPtr<QWizardPage> wizardPage(new CWizardPage(*this));
-			QVBoxLayout* layoutPtr = new QVBoxLayout(wizardPage.GetPtr());
-			layoutPtr->setMargin(0);
+		QString pageTitel;
+		if (m_titelsAttrPtr.IsValid() && pageIndex < m_titelsAttrPtr.GetCount()){
+			pageTitel = iqt::GetQString(m_titelsAttrPtr[pageIndex]);
+		}
 
-			QString pageTitel;
-			if (m_titelsAttrPtr.IsValid() && pageIndex < m_titelsAttrPtr.GetCount()){
-				pageTitel = iqt::GetQString(m_titelsAttrPtr[pageIndex]);
-			}
+		QString pageSubTitel;
+		if (m_titelsAttrPtr.IsValid() && pageIndex < m_subTitelsAttrPtr.GetCount()){
+			pageSubTitel = iqt::GetQString(m_subTitelsAttrPtr[pageIndex]);
+		}
 
-			QString pageSubTitel;
-			if (m_titelsAttrPtr.IsValid() && pageIndex < m_subTitelsAttrPtr.GetCount()){
-				pageSubTitel = iqt::GetQString(m_subTitelsAttrPtr[pageIndex]);
-			}
+		wizardPage->setTitle(pageTitel);
+		wizardPage->setSubTitle(pageSubTitel);
 
-			wizardPage->setTitle(pageTitel);
-			wizardPage->setSubTitle(pageSubTitel);
-
-			iqtgui::IGuiObject* pageGuiObjectPtr = m_guisCompPtr[pageIndex];
-			if (pageGuiObjectPtr != NULL){
-				if (pageGuiObjectPtr->CreateGui(wizardPage.GetPtr())){
-					wizardPtr->setPage(pageIndex, wizardPage.PopPtr());
-				}
+		iqtgui::IGuiObject* pageGuiObjectPtr = m_guisCompPtr[pageIndex];
+		if (pageGuiObjectPtr != NULL){
+			if (pageGuiObjectPtr->CreateGui(wizardPage.GetPtr())){
+				wizardPtr->setPage(pageIndex, wizardPage.PopPtr());
 			}
 		}
 	}

@@ -16,7 +16,7 @@ I_EXPORT_PACKAGE(
 			IM_PROJECT("ACF") IM_TAG("Wizard") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			LinearWizardController,
+			WizardDocument,
 			"Wizard controller",
 			"Wizard Parameter" IM_CATEGORY(I_DATA_MODEL));
 

@@ -12,41 +12,146 @@ namespace iwiz
 // public methods
 
 CWizardPageComp::CWizardPageComp()
-	:m_isPageFinished(false)
+:	m_isStateEnabled(true),
+	m_isStateActive(false)
 {
 }
 
 
-// reimplemented (iwiz::IWizardPageInfo)
+// reimplemented (iproc::IStateController)
 
-bool CWizardPageComp::IsPageFinished() const
+bool CWizardPageComp::IsStateEnabled() const
 {
-	return m_isPageFinished;
+	return m_isStateEnabled;
 }
 
 
-void CWizardPageComp::SetPageFinished(bool isPageFinished)
+bool CWizardPageComp::IsStateActive() const
 {
-	if (m_isPageFinished != isPageFinished){
-		istd::CChangeNotifier changePtr(this, CF_PAGE_FINISHED);
+	return m_isStateActive;
+}
 
-		m_isPageFinished = isPageFinished;
+
+bool CWizardPageComp::IsEnterAllowed(bool isActionAllowed, const IStateController* prevStatePtr) const
+{
+	if (m_isStateActive){
+		return false;
 	}
+
+	if (isActionAllowed && m_processOnEnterCompPtr.IsValid()){
+		if (		(m_processOnEnterCompPtr->GetProcessorState(this) != iproc::IProcessor::PS_READY) ||
+					!m_processOnEnterCompPtr->AreParamsAccepted(this, NULL, NULL)){
+			return false;
+		}
+	}
+
+	int slavesCount = m_slaveControllersCompPtr.GetCount();
+	for (int i = 0; i < slavesCount; ++i){
+		const iproc::IStateController* slaveConstrollerPtr = m_slaveControllersCompPtr[i];
+		if ((slaveConstrollerPtr != NULL) && !slaveConstrollerPtr->IsEnterAllowed(isActionAllowed)){
+			return false;	// if any subcontroller block entering this state, it will be blocked
+		}
+	}
+
+	return true;
+}
+
+
+bool CWizardPageComp::IsLeaveAllowed(bool isActionAllowed, const IStateController* nextStatePtr) const
+{
+	if (!m_isStateActive){
+		return false;
+	}
+
+	if (isActionAllowed && m_processOnLeaveCompPtr.IsValid()){
+		if (		(m_processOnLeaveCompPtr->GetProcessorState(this) != iproc::IProcessor::PS_READY) ||
+					!m_processOnLeaveCompPtr->AreParamsAccepted(this, NULL, NULL)){
+			return false;
+		}
+	}
+
+	int slavesCount = m_slaveControllersCompPtr.GetCount();
+	for (int i = 0; i < slavesCount; ++i){
+		const iproc::IStateController* slaveConstrollerPtr = m_slaveControllersCompPtr[i];
+		if ((slaveConstrollerPtr != NULL) && !slaveConstrollerPtr->IsEnterAllowed(isActionAllowed)){
+			return false;	// if any subcontroller block leaving this state, it will be blocked
+		}
+	}
+
+	return true;
+}
+
+
+bool CWizardPageComp::TryEnterState(bool isActionAllowed, const IStateController* /*prevStatePtr*/)
+{
+	if (m_isStateActive){
+		return false;
+	}
+
+	if (isActionAllowed && m_processOnEnterCompPtr.IsValid()){
+		if (		(m_processOnEnterCompPtr->GetProcessorState(this) != iproc::IProcessor::PS_READY) ||
+					!m_processOnEnterCompPtr->AreParamsAccepted(this, NULL, NULL) ||
+					(m_processOnEnterCompPtr->DoProcessing(this, NULL, NULL)  != iproc::IProcessor::TS_OK)){
+			return false;
+		}
+	}
+
+	istd::CChangeNotifier notifier(this, CF_STATE_ENTERED);
+
+	m_isStateActive = true;
+
+	return true;
+}
+
+
+bool CWizardPageComp::TryLeaveState(bool isActionAllowed, const IStateController* /*prevStatePtr*/)
+{
+	if (!m_isStateActive){
+		return false;
+	}
+
+	if (isActionAllowed && m_processOnLeaveCompPtr.IsValid()){
+		if (		(m_processOnLeaveCompPtr->GetProcessorState(this) != iproc::IProcessor::PS_READY) ||
+					!m_processOnLeaveCompPtr->AreParamsAccepted(this, NULL, NULL) ||
+					(m_processOnLeaveCompPtr->DoProcessing(this, NULL, NULL)  != iproc::IProcessor::TS_OK)){
+			return false;
+		}
+	}
+
+	istd::CChangeNotifier notifier(this, CF_STATE_LEAVED);
+
+	m_isStateActive = false;
+
+	return true;
 }
 
 
 // protected methods
 
+void CWizardPageComp::UpdateAllMembers()
+{
+	bool isEnabled = false;
+
+	int slavesCount = m_slaveControllersCompPtr.GetCount();
+	for (int i = 0; i < slavesCount; ++i){
+		const iproc::IStateController* slaveConstrollerPtr = m_slaveControllersCompPtr[i];
+		if ((slaveConstrollerPtr != NULL) && slaveConstrollerPtr->IsStateEnabled()){
+			isEnabled = true;
+		}
+	}
+
+	m_isStateEnabled = isEnabled;
+}
+
+
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-void CWizardPageComp::OnModelChanged(int modelId, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CWizardPageComp::OnModelChanged(int /*modelId*/, int changeFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (m_pageControllerCompPtr.IsValid()){
-		imod::IModel* modelPtr = GetObjectAt<imod::IModel>(modelId);
+	if ((changeFlags & (CF_STATE_ENTERED | CF_STATE_LEAVED | CF_GRAPH_CHANGED)) != 0){
+		istd::CChangeNotifier notifier(this, changeFlags);
 
-		I_ASSERT(modelPtr != NULL);
-
-		m_pageControllerCompPtr->UpdateWizardPage(*this, *modelPtr);		
+		UpdateAllMembers();
 	}
 }
 
@@ -57,18 +162,15 @@ void CWizardPageComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	// if no page controller was set, the page can be immediately marked as finished:
-	if (!m_pageControllerCompPtr.IsValid()){
-		m_isPageFinished = true;
-	}
-
-	const ParameterInfos& parameterInfos = GetParameterInfos();
-	for (int parameterIndex = 0; parameterIndex < parameterInfos.GetCount(); parameterIndex++){
-		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(parameterInfos.GetAt(parameterIndex)->parameterPtr.GetPtr());
+	int modelsCount = m_slaveControllerModelsCompPtr.GetCount();
+	for (int i = 0; i < modelsCount; ++i){
+		imod::IModel* parameterModelPtr = m_slaveControllerModelsCompPtr[i];
 		if (parameterModelPtr != NULL){
-			RegisterModel(parameterModelPtr, parameterIndex);
+			RegisterModel(parameterModelPtr, i);
 		}
 	}
+
+	UpdateAllMembers();
 }
 
 

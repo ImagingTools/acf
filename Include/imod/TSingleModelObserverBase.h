@@ -15,36 +15,37 @@ namespace imod
 
 	\ingroup ModelObserver
 */
-template <class ObjectClass> 
+template <class ModelInterface> 
 class TSingleModelObserverBase: public CSingleModelObserverBase
 {
 public:
 	typedef CSingleModelObserverBase BaseClass;
+	typedef ModelInterface ModelType;
 
 	TSingleModelObserverBase();
 
-	ObjectClass* GetObjectPtr() const;
+	ModelInterface* GetObjectPtr() const;
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
 private:
-	ObjectClass* m_objectPtr;
+	ModelInterface* m_objectPtr;
 };
 
 
 // public methods
 
-template <class ObjectClass> 
-TSingleModelObserverBase<ObjectClass>::TSingleModelObserverBase()
+template <class ModelInterface> 
+TSingleModelObserverBase<ModelInterface>::TSingleModelObserverBase()
 {
 	m_objectPtr = NULL;
 }
 
 
-template <class ObjectClass> 
-ObjectClass* TSingleModelObserverBase<ObjectClass>::GetObjectPtr() const
+template <class ModelInterface> 
+ModelInterface* TSingleModelObserverBase<ModelInterface>::GetObjectPtr() const
 {
 	return m_objectPtr;
 }
@@ -52,10 +53,10 @@ ObjectClass* TSingleModelObserverBase<ObjectClass>::GetObjectPtr() const
 
 // reimplemented (imod::IObserver)
 
-template <class ObjectClass> 
-bool TSingleModelObserverBase<ObjectClass>::OnAttached(imod::IModel* modelPtr)
+template <class ModelInterface> 
+bool TSingleModelObserverBase<ModelInterface>::OnAttached(imod::IModel* modelPtr)
 {
-	m_objectPtr = dynamic_cast<ObjectClass*>(modelPtr);
+	m_objectPtr = dynamic_cast<ModelInterface*>(modelPtr);
 	if ((m_objectPtr != NULL) && BaseClass::OnAttached(modelPtr)){
 		return true;
 	}
@@ -66,8 +67,8 @@ bool TSingleModelObserverBase<ObjectClass>::OnAttached(imod::IModel* modelPtr)
 }
 
 
-template <class ObjectClass> 
-bool TSingleModelObserverBase<ObjectClass>::OnDetached(imod::IModel* modelPtr)
+template <class ModelInterface> 
+bool TSingleModelObserverBase<ModelInterface>::OnDetached(imod::IModel* modelPtr)
 {
 	if (BaseClass::OnDetached(modelPtr)){
 		// If model was correctly attached m_objectPtr cannot be NULL. OnDetach returns true only if model was correctly attached.
