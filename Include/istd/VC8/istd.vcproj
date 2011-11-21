@@ -344,10 +344,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\INameParam.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IPolymorphic.h"
 				>
 			</File>

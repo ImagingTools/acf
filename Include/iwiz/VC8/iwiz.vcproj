@@ -210,10 +210,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNonLinearWizardControllerComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CWizardPageComp.cpp"
 				>
 			</File>
@@ -227,11 +223,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNonLinearWizardControllerComp.h"
+				RelativePath="..\CWizardPageComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CWizardPageComp.h"
+				RelativePath="..\IParamsManagerWizard.h"
 				>
 			</File>
 			<File
@@ -240,10 +236,6 @@
 			</File>
 			<File
 				RelativePath="..\IWizardNavigationController.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IWizardPageController.h"
 				>
 			</File>
 		</Filter>

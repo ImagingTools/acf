@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNameParam.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CNameParamComp.cpp"
 				>
 			</File>
@@ -242,6 +246,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNameParam.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CNameParamComp.h"
 				>
 			</File>
@@ -283,6 +291,10 @@
 			</File>
 			<File
 				RelativePath="..\ILinearAdjustParams.h"
+				>
+			</File>
+			<File
+				RelativePath="..\INameParam.h"
 				>
 			</File>
 			<File
