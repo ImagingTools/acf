@@ -839,12 +839,12 @@ bool CAttributeEditorComp::SetAttributeToItem(
 			bool* hasWarningPtr,
 			bool* hasExportPtr) const
 {
-	QTreeWidgetItem* exportItemPtr = NULL;
+	QTreeWidgetItem* importItemPtr = NULL;
 	if (attributeItem.childCount() < 1){
-		exportItemPtr = new QTreeWidgetItem(&attributeItem);
+		importItemPtr = new QTreeWidgetItem(&attributeItem);
 	}
 	else{
-		exportItemPtr = attributeItem.child(0);
+		importItemPtr = attributeItem.child(0);
 	}
 
 	bool isAttributeEditable = true;
@@ -854,7 +854,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	bool isAttributeError = false;
 	QString attributeValueText;
 	int attributeValueMeaning = AM_NONE;
-	QString attributeExportText;
+	QString attributeImportText;
 	std::string attributeExportValue;
 	QString attributeValueTip;
 	QString attributeDescription;
@@ -881,11 +881,11 @@ bool CAttributeEditorComp::SetAttributeToItem(
 
 		if (attrInfo.infoPtr.IsValid()){
 			if (!attributeExportValue.empty() && (attrInfo.infoPtr->exportId != attributeExportValue)){
-				attributeExportText = tr("<multi selection>");
+				attributeImportText = tr("<multi selection>");
 			}
 			else{
 				attributeExportValue = attrInfo.infoPtr->exportId;
-				attributeExportText = attributeExportValue.c_str();
+				attributeImportText = attributeExportValue.c_str();
 			}
 		}
 
@@ -1047,30 +1047,30 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		attributeItem.setBackgroundColor(AC_VALUE, Qt::white);
 	}
 
-	exportItemPtr->setText(AC_NAME, tr("<import>"));
-	exportItemPtr->setData(AC_VALUE, AttributeMining, AM_EXPORTED_ATTR);
-	exportItemPtr->setData(AC_VALUE, AttributeId, attributeName);
-	exportItemPtr->setData(AC_VALUE, AttributeTypeId, attributeTypeId.c_str());
-	exportItemPtr->setText(AC_VALUE, attributeExportText);
-	exportItemPtr->setData(AC_VALUE, AttributeValue, attributeExportValue.c_str());
+	importItemPtr->setText(AC_NAME, tr("<import>"));
+	importItemPtr->setData(AC_VALUE, AttributeMining, AM_EXPORTED_ATTR);
+	importItemPtr->setData(AC_VALUE, AttributeId, attributeName);
+	importItemPtr->setData(AC_VALUE, AttributeTypeId, attributeTypeId.c_str());
+	importItemPtr->setText(AC_VALUE, attributeImportText);
+	importItemPtr->setData(AC_VALUE, AttributeValue, attributeExportValue.c_str());
 
-	if (!attributeExportText.isEmpty()){
-		exportItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
-		exportItemPtr->setCheckState(AC_NAME, Qt::Checked);
+	if (!attributeImportText.isEmpty()){
+		importItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
+		importItemPtr->setCheckState(AC_NAME, Qt::Checked);
 
-		attributeItem.setIcon(AC_NAME, m_exportIcon);
+		attributeItem.setIcon(AC_NAME, m_importIcon);
 
 		if (hasExportPtr != NULL){
 			*hasExportPtr = true;
 		}
 	}
 	else{
-		exportItemPtr->setData(AC_NAME, Qt::CheckStateRole, QVariant());
-		exportItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+		importItemPtr->setData(AC_NAME, Qt::CheckStateRole, QVariant());
+		importItemPtr->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
 		attributeItem.setIcon(AC_NAME, QIcon());
 	}
 
-	exportItemPtr->setHidden(false);
+	importItemPtr->setHidden(false);
 
 	return true;
 }
