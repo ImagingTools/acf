@@ -1155,7 +1155,13 @@ bool CAttributeEditorComp::DecodeAttribute(
 	const icomp::CStdStringAttribute* idPtr = dynamic_cast<const icomp::CStdStringAttribute*>(&attribute);
 	if (idPtr != NULL){
 		text = EncodeToEdit(idPtr->GetValue().c_str());
-		meaning = AM_ATTRIBUTE;
+
+		if (dynamic_cast<const icomp::CReferenceAttribute*>(idPtr) != NULL){
+			meaning = AM_REFERENCE;
+		}
+		else{
+			meaning = AM_ATTRIBUTE;
+		}
 
 		return true;
 	}
@@ -1228,7 +1234,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 		return true;
 	}
 
-	const icomp::CMultiStdStringAttribute* multiIdPtr = dynamic_cast<const icomp::TMultiAttribute<std::string>*>(&attribute);
+	const icomp::CMultiStdStringAttribute* multiIdPtr = dynamic_cast<const icomp::CMultiStdStringAttribute*>(&attribute);
 	if (multiIdPtr != NULL){
 		QString dependecyString;
 
@@ -1243,7 +1249,12 @@ bool CAttributeEditorComp::DecodeAttribute(
 			text += EncodeToEdit(componentId);
 		}
 
-		meaning = AM_MULTI_REFERENCE;
+		if (dynamic_cast<const icomp::CMultiReferenceAttribute*>(idPtr) != NULL){
+			meaning = AM_MULTI_REFERENCE;
+		}
+		else{
+			meaning = AM_MULTI_ATTRIBUTE;
+		}
 
 		return true;
 	}
