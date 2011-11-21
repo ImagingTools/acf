@@ -74,9 +74,11 @@ int CWizardDocumentComp::GetNextPageIndex() const
 	int pagesCount = GetParamsSetsCount();
 	int currentPageIndex = GetSelectedOptionIndex();
 
-	const iproc::IStateController* currentPageInfoPtr = CompCastPtr<const iproc::IStateController>(GetParamsSet(currentPageIndex));
-	if ((currentPageInfoPtr != NULL) && !currentPageInfoPtr->IsLeaveAllowed()){
-		return -1;
+	if (currentPageIndex >= 0){
+		const iproc::IStateController* currentPageInfoPtr = CompCastPtr<const iproc::IStateController>(GetParamsSet(currentPageIndex));
+		if ((currentPageInfoPtr != NULL) && !currentPageInfoPtr->IsLeaveAllowed()){
+			return -1;
+		}
 	}
 
 	for (int checkPageIndex = currentPageIndex + 1; checkPageIndex < pagesCount; ++checkPageIndex){
@@ -97,9 +99,13 @@ bool CWizardDocumentComp::DoWizardFinish()
 
 	istd::CChangeNotifier notifier(this);
 
-	iproc::IStateController* currentPageInfoPtr = CompCastPtr<iproc::IStateController>(GetParamsSet(currentPageIndex));
-	if ((currentPageInfoPtr != NULL) && !currentPageInfoPtr->TryLeaveState()){
-		return false;
+	iproc::IStateController* currentPageInfoPtr = NULL;
+
+	if (currentPageIndex >= 0){
+		currentPageInfoPtr = CompCastPtr<iproc::IStateController>(GetParamsSet(currentPageIndex));
+		if ((currentPageInfoPtr != NULL) && !currentPageInfoPtr->TryLeaveState()){
+			return false;
+		}
 	}
 
 	for (int checkPageIndex = currentPageIndex + 1; checkPageIndex < pagesCount; ++checkPageIndex){
