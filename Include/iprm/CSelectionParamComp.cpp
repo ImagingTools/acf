@@ -62,7 +62,11 @@ bool CSelectionParamComp::Serialize(iser::IArchive& archive)
 	std::string selectedOptionId;
 
 	if (m_constraintsCompPtr.IsValid()){
-		selectedOptionId = m_constraintsCompPtr->GetOptionId(selectionOptionIndex);
+		int optionsCount = m_constraintsCompPtr->GetOptionsCount();
+
+		if (selectionOptionIndex < optionsCount){
+			selectedOptionId = m_constraintsCompPtr->GetOptionId(selectionOptionIndex);
+		}
 	}
 
 	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index");
