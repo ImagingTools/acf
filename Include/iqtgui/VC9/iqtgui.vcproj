@@ -196,7 +196,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CApplicationComp.cpp"
+				RelativePath="..\CGuiApplicationComp.cpp"
 				>
 			</File>
 			<File
@@ -330,7 +330,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CApplicationComp.h"
+				RelativePath="..\CGuiApplicationComp.h"
 				>
 			</File>
 			<File

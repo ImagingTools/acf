@@ -1,5 +1,5 @@
-#ifndef iqtgui_CApplicationComp_included
-#define iqtgui_CApplicationComp_included
+#ifndef iqtgui_CGuiApplicationComp_included
+#define iqtgui_CGuiApplicationComp_included
 
 
 // ACF includes
@@ -23,14 +23,14 @@ namespace iqtgui
 	You have several attributes to control the appearance and decoration of the application window,
 	you can define the splash screen and set some information about your application.
 */
-class CApplicationComp:
+class CGuiApplicationComp:
 			public icomp::CComponentBase, 
 			public iqtgui::IGuiApplication
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(CApplicationComp);
+	I_BEGIN_COMPONENT(CGuiApplicationComp);
 		I_REGISTER_INTERFACE(ibase::IApplication);
 		I_ASSIGN(m_mainGuiCompPtr, "MainGui", "Gui object shown as main window", false, "MainGui");
 		I_ASSIGN(m_translationManagerCompPtr, "TranslationManager", "Translation manager", false, "TranslationManager");
@@ -80,5 +80,5 @@ private:
 } // namespace iqtgui
 
 
-#endif // iqtgui_CApplicationComp_included
+#endif // iqtgui_CGuiApplicationComp_included
 

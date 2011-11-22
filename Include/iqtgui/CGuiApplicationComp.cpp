@@ -1,4 +1,4 @@
-#include "iqtgui/CApplicationComp.h"
+#include "iqtgui/CGuiApplicationComp.h"
 
 
 // Qt includes
@@ -22,7 +22,7 @@ namespace iqtgui
 
 // reimplemented (iqtgui::IGuiApplication)
 
-const iqtgui::IGuiObject* CApplicationComp::GetApplicationGui() const
+const iqtgui::IGuiObject* CGuiApplicationComp::GetApplicationGui() const
 {
 	if (m_mainGuiCompPtr.IsValid()){
 		return m_mainGuiCompPtr.GetPtr();
@@ -34,7 +34,7 @@ const iqtgui::IGuiObject* CApplicationComp::GetApplicationGui() const
 
 // reimplemented (ibase::IApplication)
 
-bool CApplicationComp::InitializeApplication(int argc, char** argv)
+bool CGuiApplicationComp::InitializeApplication(int argc, char** argv)
 {
 	if (!m_applicationPtr.IsValid()){
 		std::string appStyle;
@@ -82,7 +82,7 @@ bool CApplicationComp::InitializeApplication(int argc, char** argv)
 }
 
 
-int CApplicationComp::Execute(int argc, char** argv)
+int CGuiApplicationComp::Execute(int argc, char** argv)
 {
 	int retVal = -1;
 
@@ -185,7 +185,7 @@ int CApplicationComp::Execute(int argc, char** argv)
 }
 
 
-istd::CString CApplicationComp::GetHelpText() const
+istd::CString CGuiApplicationComp::GetHelpText() const
 {
 	return "-style QtStyle\tname of Qt-specified style";
 }
@@ -195,7 +195,7 @@ istd::CString CApplicationComp::GetHelpText() const
 
 // reimplemented (icomp::CComponentBase)
 
-void CApplicationComp::OnComponentCreated()
+void CGuiApplicationComp::OnComponentCreated()
 {
 	icomp::ICompositeComponent* parentPtr = const_cast<icomp::ICompositeComponent*>(GetParentComponent(true));
 	icomp::CCompositeComponent* compositePtr = dynamic_cast<icomp::CCompositeComponent*>(parentPtr);
@@ -210,7 +210,7 @@ void CApplicationComp::OnComponentCreated()
 
 // private methods
 
-void CApplicationComp::SetStyleSheet(const QString& styleSheetFileName)
+void CGuiApplicationComp::SetStyleSheet(const QString& styleSheetFileName)
 {
 	I_ASSERT(m_applicationPtr != NULL);
 
