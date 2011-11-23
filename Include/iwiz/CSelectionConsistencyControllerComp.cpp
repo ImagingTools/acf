@@ -87,27 +87,63 @@ void CSelectionConsistencyControllerComp::OnComponentCreated()
 
 	BaseClass::OnComponentCreated();
 
-	int enablingParamsCount = m_enablingParamModelsCompPtr.GetCount();
-	for (int i = 0; i < enablingParamsCount; ++i){
+	int enablingParamModelsCount = m_enablingParamModelsCompPtr.GetCount();
+	for (int i = 0; i < enablingParamModelsCount; ++i){
 		imod::IModel* modelPtr = m_enablingParamModelsCompPtr[i];
 		if (modelPtr != NULL){
 			modelPtr->AttachObserver(this);
 		}
 	}
 
-	int enterCondParamsCount = m_enterCondParamModelsCompPtr.GetCount();
-	for (int i = 0; i < enterCondParamsCount; ++i){
+	int enterCondParamModelsCount = m_enterCondParamModelsCompPtr.GetCount();
+	for (int i = 0; i < enterCondParamModelsCount; ++i){
 		imod::IModel* modelPtr = m_enterCondParamModelsCompPtr[i];
 		if (modelPtr != NULL){
 			modelPtr->AttachObserver(this);
 		}
 	}
 
-	int leaveCondParamsCount = m_leaveCondParamModelsCompPtr.GetCount();
-	for (int i = 0; i < leaveCondParamsCount; ++i){
+	int leaveCondParamModelsCount = m_leaveCondParamModelsCompPtr.GetCount();
+	for (int i = 0; i < leaveCondParamModelsCount; ++i){
 		imod::IModel* modelPtr = m_leaveCondParamModelsCompPtr[i];
 		if (modelPtr != NULL){
 			modelPtr->AttachObserver(this);
+		}
+	}
+
+	int enablingParamsCount = m_enablingParamsCompPtr.GetCount();
+	for (int i = 0; i < enablingParamsCount; ++i){
+		const iprm::ISelectionParam* paramPtr = m_enablingParamsCompPtr[i];
+		if (paramPtr != NULL){
+			imod::IModel* contraintsModelPtr =
+						const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramPtr->GetSelectionConstraints()));
+			if (contraintsModelPtr != NULL){
+				contraintsModelPtr->AttachObserver(this);
+			}
+		}
+	}
+
+	int enterCondParamsCount = m_enterCondParamsCompPtr.GetCount();
+	for (int i = 0; i < enterCondParamsCount; ++i){
+		const iprm::ISelectionParam* paramPtr = m_enterCondParamsCompPtr[i];
+		if (paramPtr != NULL){
+			imod::IModel* contraintsModelPtr =
+						const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramPtr->GetSelectionConstraints()));
+			if (contraintsModelPtr != NULL){
+				contraintsModelPtr->AttachObserver(this);
+			}
+		}
+	}
+
+	int leaveCondParamsCount = m_leaveCondParamsCompPtr.GetCount();
+	for (int i = 0; i < leaveCondParamsCount; ++i){
+		const iprm::ISelectionParam* paramPtr = m_leaveCondParamsCompPtr[i];
+		if (paramPtr != NULL){
+			imod::IModel* contraintsModelPtr =
+						const_cast<imod::IModel*>(dynamic_cast<const imod::IModel*>(paramPtr->GetSelectionConstraints()));
+			if (contraintsModelPtr != NULL){
+				contraintsModelPtr->AttachObserver(this);
+			}
 		}
 	}
 }
@@ -115,29 +151,7 @@ void CSelectionConsistencyControllerComp::OnComponentCreated()
 
 void CSelectionConsistencyControllerComp::OnComponentDestroyed()
 {
-	int leaveCondParamsCount = m_leaveCondParamModelsCompPtr.GetCount();
-	for (int i = 0; i < leaveCondParamsCount; ++i){
-		imod::IModel* modelPtr = m_leaveCondParamModelsCompPtr[i];
-		if ((modelPtr != NULL) && modelPtr->IsAttached(this)){
-			modelPtr->DetachObserver(this);
-		}
-	}
-
-	int enterCondParamsCount = m_enterCondParamModelsCompPtr.GetCount();
-	for (int i = 0; i < enterCondParamsCount; ++i){
-		imod::IModel* modelPtr = m_enterCondParamModelsCompPtr[i];
-		if ((modelPtr != NULL) && modelPtr->IsAttached(this)){
-			modelPtr->DetachObserver(this);
-		}
-	}
-
-	int enablingParamsCount = m_enablingParamModelsCompPtr.GetCount();
-	for (int i = 0; i < enablingParamsCount; ++i){
-		imod::IModel* modelPtr = m_enablingParamModelsCompPtr[i];
-		if ((modelPtr != NULL) && modelPtr->IsAttached(this)){
-			modelPtr->DetachObserver(this);
-		}
-	}
+	EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
 }
