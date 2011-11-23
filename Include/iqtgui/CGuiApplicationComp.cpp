@@ -140,7 +140,7 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 			I_ASSERT(m_splashTimeAttrPtr.IsValid());
 			timer.WaitTo(m_splashTimeAttrPtr->GetValue());
 
-			QWidget* splashWidgetPtr = m_mainGuiCompPtr->GetWidget();
+			QWidget* splashWidgetPtr = m_splashScreenCompPtr->GetWidget();
 			I_ASSERT(splashWidgetPtr != NULL);
 
 			splashWidgetPtr->hide();

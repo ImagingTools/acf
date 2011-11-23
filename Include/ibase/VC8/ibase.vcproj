@@ -503,10 +503,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNameParam.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TSerializableContainer.h"
 				>
 			</File>

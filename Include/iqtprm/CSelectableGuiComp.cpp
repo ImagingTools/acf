@@ -42,6 +42,13 @@ void CSelectableGuiComp::OnGuiModelAttached()
 		}
 	}
 
+	imod::IModel* selectionModelPtr = GetModelPtr();
+	I_ASSERT(selectionModelPtr != NULL);
+
+	if (m_selectorObserverCompPtr.IsValid()){
+		selectionModelPtr->AttachObserver(m_selectorObserverCompPtr.GetPtr());
+	}
+
 	BaseClass::OnGuiModelAttached();
 }
 
@@ -65,6 +72,13 @@ void CSelectableGuiComp::OnGuiModelDetached()
 	}
 
 	m_widgetToGuiMap.clear();
+
+	imod::IModel* selectionModelPtr = GetModelPtr();
+	I_ASSERT(selectionModelPtr != NULL);
+
+	if (m_selectorObserverCompPtr.IsValid() && selectionModelPtr->IsAttached(m_selectorObserverCompPtr.GetPtr())){
+		selectionModelPtr->DetachObserver(m_selectorObserverCompPtr.GetPtr());
+	}
 
 	BaseClass::OnGuiModelDetached();
 }
@@ -95,7 +109,21 @@ void CSelectableGuiComp::OnGuiCreated()
 
 	if (m_noSelectionIconAttrPtr.IsValid()){
 		NoSelectionLabel->setPixmap(QPixmap(iqt::GetQString(*m_noSelectionIconAttrPtr)));
-	}	
+	}
+
+	if (m_selectorGuiCompPtr.IsValid()){
+		m_selectorGuiCompPtr->CreateGui(SelectorFrame);
+	}
+}
+
+
+void CSelectableGuiComp::OnGuiDestroyed()
+{
+	if (m_selectorGuiCompPtr.IsValid()){
+		m_selectorGuiCompPtr->DestroyGui();
+	}
+	
+	BaseClass::OnGuiDestroyed();
 }
 
 

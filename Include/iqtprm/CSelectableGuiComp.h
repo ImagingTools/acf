@@ -34,6 +34,8 @@ public:
 		I_ASSIGN_MULTI_0(m_slaveGuisCompPtr, "SlaveGuis", "List of the slave GUI's", true);
 		I_ASSIGN(m_noSelectionLabelAttrPtr, "NoSelectionLabel", "Text to be shown for empty selection", false, "Nothing selected");
 		I_ASSIGN(m_noSelectionIconAttrPtr, "NoSelectionIcon", "File path to the image to be shown for empty selection", false, "");
+		I_ASSIGN(m_selectorGuiCompPtr, "SelectorGui", "UI for selection change", false, "SelectorGui");
+		I_ASSIGN_TO(m_selectorObserverCompPtr, m_selectorGuiCompPtr, false);
 	I_END_COMPONENT;
 
 protected:
@@ -44,11 +46,14 @@ protected:
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
 
 protected:
 	I_MULTIREF(iqtgui::IGuiObject, m_slaveGuisCompPtr);
 	I_ATTR(istd::CString, m_noSelectionLabelAttrPtr);
 	I_ATTR(istd::CString, m_noSelectionIconAttrPtr);
+	I_REF(iqtgui::IGuiObject, m_selectorGuiCompPtr);
+	I_REF(imod::IObserver, m_selectorObserverCompPtr);
 
 private:
 	typedef std::map<QWidget*, iqtgui::IGuiObject*> WidgetGuiMap;
