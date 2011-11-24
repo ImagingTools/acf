@@ -327,9 +327,10 @@ void CSelectionParamGuiComp::UpdateDescriptionFrame()
 
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	if (selectionPtr != NULL){
+		int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+		
 		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
-		if (constraintsPtr != NULL){
-			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+		if (constraintsPtr != NULL && selectedIndex >= 0){
 
 			QString optionDescription = iqt::GetQString(constraintsPtr->GetOptionDescription(selectedIndex));
 			DescriptionLabel->setText(optionDescription);

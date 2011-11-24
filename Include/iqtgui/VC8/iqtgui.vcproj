@@ -196,7 +196,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGuiApplicationComp.cpp"
+				RelativePath="..\CApplicationCompBase.cpp"
 				>
 			</File>
 			<File
@@ -209,6 +209,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CDialogApplicationComp.cpp"
 				>
 			</File>
 			<File
@@ -237,6 +241,10 @@
 			</File>
 			<File
 				RelativePath="..\CFreeWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CGuiApplicationComp.cpp"
 				>
 			</File>
 			<File
@@ -330,7 +338,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CGuiApplicationComp.h"
+				RelativePath="..\CApplicationCompBase.h"
 				>
 			</File>
 			<File
@@ -343,6 +351,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CDialogApplicationComp.h"
 				>
 			</File>
 			<File
@@ -371,6 +383,10 @@
 			</File>
 			<File
 				RelativePath="..\CFreeWidgetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CGuiApplicationComp.h"
 				>
 			</File>
 			<File

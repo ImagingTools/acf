@@ -1,10 +1,9 @@
-#ifndef iqtprm_CSelectionParamGuiComp_included
-#define iqtprm_CSelectionParamGuiComp_included
+#ifndef iqtprm_COptionsManagerGuiComp_included
+#define iqtprm_COptionsManagerGuiComp_included
 
 
 // Qt includes
 #include <QComboBox>
-#include <QRadioButton>
 
 
 // ACF includes
@@ -13,10 +12,11 @@
 #include "imod/CMultiModelDispatcherBase.h"
 
 #include "iprm/ISelectionParam.h"
+#include "iprm/IOptionsManager.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtprm/Generated/ui_CSelectionParamGuiComp.h"
+#include "iqtprm/Generated/ui_COptionsManagerGuiComp.h"
 
 
 namespace iqtprm
@@ -26,37 +26,16 @@ namespace iqtprm
 /**
 	Simple editor for an exclusive option selection.
 */
-class CSelectionParamGuiComp:
+class COptionsManagerGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CSelectionParamGuiComp, iprm::ISelectionParam>,
+						Ui::COptionsManagerGuiComp, iprm::ISelectionParam>,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CSelectionParamGuiComp, iprm::ISelectionParam> BaseClass;
-
-	/**
-		GUI mode for selection representation
-	*/
-	enum UiMode
-	{
-		/**
-			Combo box selection
-		*/
-		UM_COMBOBOX,
-
-		/**
-			Horizontal radio buttons group
-		*/
-		UM_RADIOBUTTON_HORIZONTAL,
-
-		/**
-			Vertical radio buttons group
-		*/
-		UM_RADIOBUTTON_VERTICAL
-	};
+				Ui::COptionsManagerGuiComp, iprm::ISelectionParam> BaseClass;
 
 	/**
 		Command label position
@@ -74,11 +53,11 @@ public:
 		LP_TOP
 	};
 
-	I_BEGIN_COMPONENT(CSelectionParamGuiComp);
+	I_BEGIN_COMPONENT(COptionsManagerGuiComp);
 		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Command label for the options selector", false, "Select");
 		I_ASSIGN(m_infoLabelAttrPtr, "InfoLabel", "Information label for the options selector", false, "Info");
-		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode. 0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", false, UM_COMBOBOX);
 		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
+		I_ASSIGN(m_optionsManagerCompPtr, "OptionsManager", "Manager for editing of option list", false, "OptionsManager");
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -100,28 +79,24 @@ protected:
 
 protected Q_SLOTS:
 	void OnSelectionChanged(int index);
-	void OnRadioButtonSelectionChanged(bool isSelected);
+	void on_EditEnableButton_toggled(bool toggled);
 
 private:
 	void UpdateComboBoxesView();
-	void UpdateRadioButtonView(bool useVerticalLayout = false);
 	void UpdateDescriptionFrame();
 
 private:
 	I_ATTR(istd::CString, m_optionsLabelAttrPtr);
 	I_ATTR(istd::CString, m_infoLabelAttrPtr);
-	I_ATTR(int, m_uiModeAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
 
-	istd::TPointerVector<QComboBox> m_comboBoxes;
-	istd::TPointerVector<QRadioButton> m_radioButtons;
-	istd::TDelPtr<QFrame> m_radioButtonFramePtr;
+	I_REF(iprm::IOptionsManager, m_optionsManagerCompPtr);
 };
 
 
 } // namespace iqtprm
 
 
-#endif // !iqtprm_CSelectionParamGuiComp_included
+#endif // !iqtprm_COptionsManagerGuiComp_included
 
 

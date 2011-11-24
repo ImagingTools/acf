@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COptionsManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -225,6 +229,10 @@
 			</File>
 			<File
 				RelativePath="..\CNameParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsManagerGuiComp.h"
 				>
 			</File>
 			<File
@@ -278,6 +286,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_COptionsManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -307,6 +319,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CNameParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_COptionsManagerGuiComp.h"
 				>
 			</File>
 			<File
@@ -346,6 +362,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COptionsManagerGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CParamsManagerGuiComp.ui"
 				>
 			</File>
@@ -379,6 +399,10 @@
 			</File>
 			<File
 				RelativePath="..\CNameParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsManagerGuiComp.moc"
 				>
 			</File>
 			<File

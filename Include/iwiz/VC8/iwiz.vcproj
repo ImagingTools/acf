@@ -206,6 +206,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CSelectionConsistencyControllerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CWizardDocumentComp.cpp"
 				>
 			</File>
@@ -218,6 +222,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CSelectionConsistencyControllerComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CWizardDocumentComp.h"
 				>
