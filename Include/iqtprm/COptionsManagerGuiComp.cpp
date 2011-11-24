@@ -1,6 +1,10 @@
 #include "iqtprm/COptionsManagerGuiComp.h"
 
 
+// Qt includes
+#include <QLineEdit>
+
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
@@ -104,10 +108,11 @@ void COptionsManagerGuiComp::OnGuiCreated()
 	}
 
 	QObject::connect(Selector, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
-
+/*
 	if (!m_optionsManagerCompPtr.IsValid()){
 		EditEnableButton->hide();
 	}
+	*/
 }
 
 
@@ -164,7 +169,53 @@ void COptionsManagerGuiComp::OnSelectionChanged(int /*index*/)
 
 void COptionsManagerGuiComp::on_EditEnableButton_toggled(bool toggled)
 {
+	if (!toggled && Selector->lineEdit() != NULL){
+		disconnect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
+	}
+
 	Selector->setEditable(toggled);
+
+	if (toggled){
+		connect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
+	}
+}
+
+
+void COptionsManagerGuiComp::OnEditingFinished()
+{
+	istd::CString newOptionName = iqt::GetCString(Selector->lineEdit()->text());
+	if (!newOptionName.IsEmpty()){
+		bool addNewOption = true;
+		iprm::ISelectionParam* selectionParamsPtr = GetObjectPtr();
+		if (selectionParamsPtr != NULL){
+			const iprm::ISelectionConstraints* constraintsPtr = selectionParamsPtr->GetSelectionConstraints();
+			if (constraintsPtr != NULL){
+				int optionsCount = constraintsPtr->GetOptionsCount();
+
+				for (int i = 0; i < optionsCount; ++i){
+					istd::CString name = constraintsPtr->GetOptionName(i);
+
+					if (newOptionName == name){
+						selectionParamsPtr->SetSelectedOptionIndex(i);
+
+						addNewOption = false;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (!m_optionsManagerCompPtr.IsValid() && addNewOption){
+
+		}
+		else
+		{
+
+		}
+	}
+
+	EditEnableButton->toggle();
 }
 
 

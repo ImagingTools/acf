@@ -80,6 +80,7 @@ protected:
 protected Q_SLOTS:
 	void OnSelectionChanged(int index);
 	void on_EditEnableButton_toggled(bool toggled);
+	void OnEditingFinished();
 
 private:
 	void UpdateComboBoxesView();
