@@ -34,14 +34,25 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 		const std::string& subcomponentId = subcomponentIter->first;
 		const std::string& elementId = subcomponentIter->second;
 
-		const IRegistry::ElementInfo* elementInfoPtr = GetElementInfoFromRegistry(registry, elementId, manager);
+		std::string baseId;
+		std::string subId;
+		istd::CIdManipBase::SplitId(elementId, baseId, subId);
+
+		const IRegistry::ElementInfo* elementInfoPtr = GetElementInfoFromRegistry(registry, baseId, manager);
 		if (elementInfoPtr == NULL){
 			continue;
 		}
 
-		const IComponentStaticInfo* subMetaInfoPtr = manager.GetComponentMetaInfo(elementInfoPtr->address);
+		const IElementStaticInfo* subMetaInfoPtr = manager.GetComponentMetaInfo(elementInfoPtr->address);
 		if (subMetaInfoPtr == NULL){
 			continue;
+		}
+
+		if (!subId.empty()){
+			subMetaInfoPtr = subMetaInfoPtr->GetSubelementInfo(subId);
+			if (subMetaInfoPtr == NULL){
+				continue;
+			}
 		}
 
 		RegisterSubelementInfo(subcomponentId, subMetaInfoPtr);
