@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2064
+          2088
         </Number>
         <Description>
           ACF
@@ -193,7 +193,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="13">
+        <AttributeInfoMap count="14">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -307,6 +307,25 @@
               </IsEnabled>
               <Value>
                 See 'licence.txt' for copyright informations
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                0
               </Value>
             </Data>
           </AttributeInfo>
