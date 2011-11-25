@@ -42,6 +42,14 @@ public:
 	virtual istd::CString GetApplicationAttribute(int attributeId) const = 0;
 
 	/**
+		Get ID of main module version ID for \c iser::IVersionInfo.
+		This ID is used to identify which module is main application module.
+		The meaning is the same as meaning of \c versionId parameters in interface \c iser::IVersionInfo.
+		\return	ID of main module, or negative value if it is undefined.
+	*/
+	virtual int GetMainVersionId() const = 0;
+
+	/**
 		Get access to application version info.
 	*/
 	virtual const iser::IVersionInfo& GetVersionInfo() const = 0;

@@ -32,13 +32,23 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 	QString applicationSubname;
 	QString applicationType;
 	QString legalCopyright;
+	QString mainVersionText;
 
 	if (m_applicationInfoCompPtr.IsValid()){
+		const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
+
+		I_DWORD mainVersionNumber;
+
+		int mainVersionId = m_applicationInfoCompPtr->GetMainVersionId();
+		if (mainVersionId >= 0){
+			if (versionInfo.GetVersionNumber(mainVersionId, mainVersionNumber)){
+				mainVersionText = iqt::GetQString(versionInfo.GetEncodedVersionName(mainVersionId, mainVersionNumber));
+			}
+		}
+
 		// set version information
 		QGridLayout* layoutPtr = dynamic_cast<QGridLayout*>(VersionsFrame->layout());
 		if (layoutPtr != NULL){
-			const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
-
 			if (m_versionIdsAttrPtr.IsValid()){
 				int versionsCount = m_versionIdsAttrPtr.GetCount();
 
@@ -70,7 +80,7 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 					int versionId = *iter;
 
 					I_DWORD version;
-					if (versionInfo.GetVersionNumber(versionId, version)){
+					if ((versionId != mainVersionId) && versionInfo.GetVersionNumber(versionId, version)){
 						istd::CString description = versionInfo.GetVersionIdDescription(versionId);
 						istd::CString versionText = versionInfo.GetEncodedVersionName(versionId, version);
 
@@ -116,8 +126,15 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 	else{
 		ApplicationTypeLabel->setText(applicationSubname + applicationType);
 	}
-
 	ApplicationTypeLabel->setVisible(!applicationSubname.isEmpty() || !applicationType.isEmpty());
+
+	if (!mainVersionText.isEmpty()){
+		MainVersionLabel->setText(mainVersionText);
+		MainVersionFrame->setVisible(true);
+	}
+	else{
+		MainVersionFrame->setVisible(false);
+	}
 
 	CopyrightLabel->setText(legalCopyright);
 	CopyrightLabel->setVisible(!legalCopyright.isEmpty());

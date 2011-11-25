@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2021
+          2064
         </Number>
         <Description>
           ACF
@@ -378,7 +378,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -452,6 +452,22 @@
             </Type>
             <ExportId>
               LegalCopyright
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              MainVersionId
             </ExportId>
             <Data>
               <IsEnabled>

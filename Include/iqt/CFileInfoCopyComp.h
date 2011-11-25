@@ -22,6 +22,19 @@ namespace iqt
 
 /**
 	Copy of text files with some tags substitution and optional license attachment.
+	Tags parameter must be separated using \c : character.
+	Tags (inclusive parameter) must be enclosed in \c $ character, for example $AcfCompanyName$ or $AcfVersion:0$.
+	Known tasks:
+	\li	\c AcfCompanyName - gets name of company
+	\li	\c AcfProductName - gets name of product
+	\li	\c AcfApplicationName - gets name of application
+	\li	\c AcfApplicationSubname - gets sub-name of product
+	\li	\c AcfApplicationType - gets type information text
+	\li	\c AcfLegalCopyright - gets legal copyright information text
+	\li	\c AcfVersion - gets version of application, or its module, if parameter with module ID is specified
+	\li	\c AcfRawVersion - gets internal version number of application, or its module, if parameter with module ID is specified
+	\li	\c AcfRcVersion - gets version number (in RC compiler compatible format) of application, or its module, if parameter with module ID is specified
+	\li	\c AcfTimestamp - gets current time
 */
 class CFileInfoCopyComp:
 			public QObject,

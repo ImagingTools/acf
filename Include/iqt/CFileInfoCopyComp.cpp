@@ -126,41 +126,30 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 		QString paramTag = tag.left(separatorIndex);
 		QString parameter = tag.right(tag.length() - separatorIndex - 1);
 
-		if (m_applicationInfoCompPtr.IsValid()){
-			const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
-			if (paramTag == acfVersionTag){
+		if ((paramTag == acfVersionTag) || (paramTag == acfRawVersionTag) || (paramTag == acfRcVersionTag)){
+			if (m_applicationInfoCompPtr.IsValid()){
 				bool isNumOk;
 				int versionId = parameter.toInt(&isNumOk);
-				I_DWORD versionNumber;
-				if (		isNumOk &&
-							versionInfo.GetVersionNumber(versionId, versionNumber)){
-					result = iqt::GetQString(versionInfo.GetEncodedVersionName(versionId, versionNumber));
 
-					return true;
-				}
-			}
-			else if (paramTag == acfRawVersionTag){
-				bool isNumOk;
-				int versionId = parameter.toInt(&isNumOk);
 				I_DWORD versionNumber;
-				if (		isNumOk &&
-							versionInfo.GetVersionNumber(versionId, versionNumber)){
-					result = QString::number(versionNumber);
+				const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
+				if (isNumOk && (versionId >= 0) && versionInfo.GetVersionNumber(versionId, versionNumber)){
+					if (paramTag == acfRawVersionTag){
+						result = QString::number(versionNumber);
+						return true;
+					}
+					else{
+						result = iqt::GetQString(versionInfo.GetEncodedVersionName(versionId, versionNumber));
+						if (paramTag == acfVersionTag){
+							return true;
+						}
+						else if (paramTag == acfRcVersionTag){
+							result.replace(".", ", ");
+							result.replace("'", "");
 
-					return true;
-				}
-			}
-			else if (paramTag == acfRcVersionTag){
-				bool isNumOk;
-				int versionId = parameter.toInt(&isNumOk);
-				I_DWORD versionNumber;
-				if (		isNumOk &&
-							versionInfo.GetVersionNumber(versionId, versionNumber)){
-					result = iqt::GetQString(versionInfo.GetEncodedVersionName(versionId, versionNumber));
-					result.replace(".", ", ");
-					result.replace("'", "");
-
-					return true;
+							return true;
+						}
+					}
 				}
 			}
 		}
@@ -196,6 +185,30 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT));
 
 				return true;
+			}
+			else if ((tag == acfVersionTag) || (tag == acfRawVersionTag) || (tag == acfRcVersionTag)){
+				I_DWORD versionNumber;
+
+				const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
+				int versionId = m_applicationInfoCompPtr->GetMainVersionId();
+				if ((versionId >= 0) && versionInfo.GetVersionNumber(versionId, versionNumber)){
+					if (tag == acfRawVersionTag){
+						result = QString::number(versionNumber);
+						return true;
+					}
+					else{
+						result = iqt::GetQString(versionInfo.GetEncodedVersionName(versionId, versionNumber));
+						if (tag == acfVersionTag){
+							return true;
+						}
+						else if (tag == acfRcVersionTag){
+							result.replace(".", ", ");
+							result.replace("'", "");
+
+							return true;
+						}
+					}
+				}
 			}
 		}
 

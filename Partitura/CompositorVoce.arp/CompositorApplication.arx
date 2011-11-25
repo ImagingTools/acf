@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2021
+          2064
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="22">
+        <AttributeInfoMap count="23">
           <AttributeInfo>
             <Id>
               AboutDialogTitle
@@ -256,6 +256,25 @@
               </IsEnabled>
               <Value>
                 :/Images/CompositorLogo.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;int&gt;
+            </Type>
+            <ExportId>
+              MainVersionId
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                0
               </Value>
             </Data>
           </AttributeInfo>

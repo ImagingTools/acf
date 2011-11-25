@@ -51,9 +51,33 @@ istd::CString CApplicationInfoComp::GetApplicationAttribute(int attributeId) con
 			return *m_legalCopyrightAttrPtr;
 		}
 		break;
+
+	case AA_MAIN_VERSION:
+		if (m_mainVersionIdAttrPtr.IsValid() && m_versionInfoCompPtr.IsValid()){
+			I_DWORD versionNumber;
+			if (m_versionInfoCompPtr->GetVersionNumber(*m_mainVersionIdAttrPtr, versionNumber)){
+				return m_versionInfoCompPtr->GetEncodedVersionName(*m_mainVersionIdAttrPtr, versionNumber);
+			}
+		}
+		break;
+
+	default:
+		break;
 	}
 
 	return "";
+}
+
+
+int CApplicationInfoComp::GetMainVersionId() const
+{
+	int retVal = -1;
+
+	if (m_mainVersionIdAttrPtr.IsValid()){
+		retVal = *m_mainVersionIdAttrPtr;
+	}
+
+	return retVal;
 }
 
 

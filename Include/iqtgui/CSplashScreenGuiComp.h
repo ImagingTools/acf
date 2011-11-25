@@ -56,6 +56,8 @@ private:
 	I_ATTR(bool, m_showLegalCopyrightAttrPtr);
 	I_MULTIATTR(int, m_versionIdsAttrPtr);
 	I_MULTIATTR(istd::CString, m_versionNamesAttrPtr);
+
+	int m_mainVersionId;
 };
 
 

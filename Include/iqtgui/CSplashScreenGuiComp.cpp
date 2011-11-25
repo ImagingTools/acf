@@ -19,8 +19,12 @@ void CSplashScreenGuiComp::OnGuiCreated()
 	QPalette palette = GetQtWidget()->palette();
 
 	if (m_applicationInfoCompPtr.IsValid()){
+		m_mainVersionId = m_applicationInfoCompPtr->GetMainVersionId();
+
 		QGridLayout* layoutPtr = dynamic_cast<QGridLayout*>(VersionsFrame->layout());
 		if (layoutPtr != NULL){
+			int gridVerticalOffset = (m_mainVersionId >= 0)? 2: 0;
+
 			const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
 
 			if (m_versionIdsAttrPtr.IsValid()){
@@ -38,11 +42,11 @@ void CSplashScreenGuiComp::OnGuiCreated()
 
 						QLabel* descriptionLabelPtr = new QLabel(iqt::GetQString(description), VersionsFrame);
 						descriptionLabelPtr->setPalette(palette);
-						layoutPtr->addWidget(descriptionLabelPtr, i, 0);
+						layoutPtr->addWidget(descriptionLabelPtr, gridVerticalOffset + i, 0);
 
 						QLabel* versionLabelPtr = new QLabel(iqt::GetQString(versionText), VersionsFrame);
 						versionLabelPtr->setPalette(palette);
-						layoutPtr->addWidget(versionLabelPtr, i, 1);
+						layoutPtr->addWidget(versionLabelPtr, gridVerticalOffset + i, 1);
 					}
 				}
 			}
@@ -56,17 +60,17 @@ void CSplashScreenGuiComp::OnGuiCreated()
 					int versionId = *iter;
 
 					I_DWORD version;
-					if (versionInfo.GetVersionNumber(versionId, version)){
+					if ((versionId != m_mainVersionId) && versionInfo.GetVersionNumber(versionId, version)){
 						istd::CString description = versionInfo.GetVersionIdDescription(versionId);
 						istd::CString versionText = versionInfo.GetEncodedVersionName(versionId, version);
 
 						QLabel* descriptionLabelPtr = new QLabel(iqt::GetQString(description), VersionsFrame);
 						descriptionLabelPtr->setPalette(palette);
-						layoutPtr->addWidget(descriptionLabelPtr, rowCount, 0);
+						layoutPtr->addWidget(descriptionLabelPtr, gridVerticalOffset + rowCount, 0);
 
 						QLabel* versionLabelPtr = new QLabel(iqt::GetQString(versionText), VersionsFrame);
 						versionLabelPtr->setPalette(palette);
-						layoutPtr->addWidget(versionLabelPtr, rowCount++, 1);
+						layoutPtr->addWidget(versionLabelPtr, gridVerticalOffset + rowCount++, 1);
 					}
 				}
 			}
@@ -91,8 +95,18 @@ void CSplashScreenGuiComp::OnGuiRetranslate()
 	QString applicationSubname;
 	QString applicationType;
 	QString legalCopyright;
+	QString mainVersionText;
 
 	if (m_applicationInfoCompPtr.IsValid()){
+		const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
+
+		if (m_mainVersionId >= 0){
+			I_DWORD mainVersionNumber;
+			if (versionInfo.GetVersionNumber(m_mainVersionId, mainVersionNumber)){
+				mainVersionText = iqt::GetQString(versionInfo.GetEncodedVersionName(m_mainVersionId, mainVersionNumber));
+			}
+		}
+
 		if (*m_showProductNameAttrPtr){
 			productName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME));
 		}
@@ -124,6 +138,16 @@ void CSplashScreenGuiComp::OnGuiRetranslate()
 	}
 
 	ApplicationTypeLabel->setVisible(!applicationSubname.isEmpty() || !applicationType.isEmpty());
+
+	if (!mainVersionText.isEmpty()){
+		MainVersionLabel->setText(mainVersionText);
+		MainVersionLabel->setVisible(true);
+		MainVersionTitleLabel->setVisible(true);
+	}
+	else{
+		MainVersionLabel->setVisible(false);
+		MainVersionTitleLabel->setVisible(false);
+	}
 
 	CopyrightLabel->setText(legalCopyright);
 	CopyrightLabel->setVisible(!legalCopyright.isEmpty());
