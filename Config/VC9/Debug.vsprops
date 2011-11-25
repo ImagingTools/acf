@@ -12,7 +12,6 @@
 		PreprocessorDefinitions="_DEBUG"
 		BasicRuntimeChecks="3"
 		RuntimeLibrary="3"
-		BrowseInformation="1"
 	/>
 	<Tool
 		Name="VCLinkerTool"
