@@ -334,9 +334,9 @@ istd::CString CParamsManagerComp::GetOptionDescription(int /*index*/) const
 }
 
 
-std::string CParamsManagerComp::GetOptionId(int /*index*/) const
+std::string CParamsManagerComp::GetOptionId(int index) const
 {
-	return std::string();
+	return GetParamsSetName(index).ToString();
 }
 
 

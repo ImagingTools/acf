@@ -170,6 +170,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CComboParamsManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedParamsSetGuiComp.cpp"
 				>
 			</File>
@@ -213,12 +217,20 @@
 				RelativePath="..\CVariableParamGuiComp.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\generated\moc_CComboParamsManagerGuiComp.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CComboParamsManagerGuiComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.h"
 				>
@@ -265,6 +277,10 @@
 			</File>
 			<File
 				RelativePath="..\iqtprm.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CComboParamsManagerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -350,6 +366,10 @@
 			Name="Qt Designer Files"
 			>
 			<File
+				RelativePath="..\CComboParamsManagerGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedParamsSetGuiComp.ui"
 				>
 			</File>
@@ -389,6 +409,10 @@
 		<Filter
 			Name="Moc Files"
 			>
+			<File
+				RelativePath="..\CComboParamsManagerGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.moc"
 				>

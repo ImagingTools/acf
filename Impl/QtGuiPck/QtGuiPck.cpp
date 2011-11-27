@@ -247,6 +247,11 @@ I_EXPORT_COMPONENT(
 			"Options parameter manager editor",
 			"Parameter Manager Selection");
 
+I_EXPORT_COMPONENT(
+			ComboParamsManagerGui,
+			"Parameter manager editor as a combo box",
+			"Parameter Manager Selection");
+
 
 } // namespace QtGuiPck
 
