@@ -292,21 +292,38 @@ void CVisualRegistryScenographerComp::AddConnector(
 
 
 icomp::IRegistryElement* CVisualRegistryScenographerComp::TryCreateComponent(
-			const std::string elementId,
+			const std::string& elementId,
 			const icomp::CComponentAddress& address,
 			const i2d::CVector2d& position)
 {
 	if (!elementId.empty()){
 		istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_ADDED);
 		if (registryPtr.IsValid()){
-			icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(elementId, address);
+			QRegExp exp("^(\\w*)_(\\d+)$");
+			QString elementIdString = elementId.c_str();
+
+			int elementValue = 0;
+			QString elementBase = elementIdString;
+			int pos = exp.indexIn(elementIdString);
+			if (pos >= 0){
+				elementBase = exp.cap(1);
+				elementValue = exp.cap(2).toInt();
+			}
+
+			std::string realElementId = elementId;
+			icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
+			while (elementIds.find(realElementId) != elementIds.end()){
+				realElementId = QString("%1_%2").arg(elementBase).arg(++elementValue).toStdString();
+			}
+
+			icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(realElementId, address);
 			if (elementInfoPtr != NULL){
 				CVisualRegistryElement* visualElementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
 				if (visualElementPtr != NULL){
 					visualElementPtr->MoveCenterTo(position);
 				}
 
-				ConnectReferences(elementId);
+				ConnectReferences(realElementId);
 
 				return elementInfoPtr->elementPtr.GetPtr();
 			}
@@ -517,21 +534,11 @@ bool CVisualRegistryScenographerComp::OnDropObject(const QMimeData& mimeData, QG
 	}
 
 	if (address.Serialize(archive)){
-		bool retVal = false;
-		QString componentName = QInputDialog::getText(
-					NULL, 
-					tr("Application Compositor"), 
-					tr("Component name"), 
-					QLineEdit::Normal, 
-					iqt::GetQString(address.GetComponentId()),
-					&retVal);
-		if (retVal){
-			if (TryCreateComponent(componentName.toStdString(), address, position) != NULL){
-				return true;
-			}
-			else{
-				QMessageBox::critical(NULL, tr("Error"), tr("Component could not be added")); 
-			}
+		if (TryCreateComponent(address.GetComponentId(), address, position) != NULL){
+			return true;
+		}
+		else{
+			QMessageBox::critical(NULL, tr("Error"), tr("Component could not be added")); 
 		}
 	}
 
@@ -786,6 +793,8 @@ void CVisualRegistryScenographerComp::OnPasteCommand()
 
 	int elementsCount = 0;
 
+	bool hasErrors = false;
+
 	bool retVal = archive.BeginMultiTag(s_elementsListTag, s_elementTag, elementsCount);
 	for (int i = 0; i < elementsCount; ++i){
 		retVal = retVal && archive.BeginTag(s_elementTag);
@@ -817,6 +826,11 @@ void CVisualRegistryScenographerComp::OnPasteCommand()
 		retVal = retVal && archive.EndTag(s_elementTag);
 	}
 	retVal = retVal && archive.EndTag(s_elementsListTag);
+
+	if (hasErrors){
+		QMessageBox::critical(NULL, tr("Error"), tr("Some components could not be added")); 
+	}
+
 }
 
 

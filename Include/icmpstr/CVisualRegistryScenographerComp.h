@@ -127,7 +127,7 @@ protected:
 				const std::string& attributeId,
 				bool isFactory = false);
 	icomp::IRegistryElement* TryCreateComponent(
-				const std::string elementId,
+				const std::string& elementId,
 				const icomp::CComponentAddress& address,
 				const i2d::CVector2d& position);
 	void ConnectReferences(const std::string& componentRole);
