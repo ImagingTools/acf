@@ -18,8 +18,7 @@
 // ACF includes
 #include "istd/CString.h"
 
-#include "iser/CMemoryReadArchive.h"
-#include "iser/CMemoryWriteArchive.h"
+#include "iser/CXmlStringWriteArchive.h"
 
 #include "icomp/CComponentMetaDescriptionEncoder.h"
 
@@ -906,17 +905,15 @@ bool CPackageOverviewComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 				PackageComponentItem* selectedItemPtr = dynamic_cast<PackageComponentItem*>(reinterpret_cast<QTreeWidgetItem*>(componentModelIndex.internalPointer()));
 
 				if (selectedItemPtr != NULL){
-					QMimeData* mimeData = new QMimeData;
+					QMimeData* mimeDataPtr = new QMimeData;
 
 					icomp::CComponentAddress address = selectedItemPtr->GetAddress();
-					iser::CMemoryWriteArchive archive;
+					iser::CXmlStringWriteArchive archive(NULL, false);
 					if (address.Serialize(archive)){
-						QByteArray byteData = QByteArray((const char*)archive.GetBuffer(), archive.GetBufferSize());
-
-						mimeData->setData("component", byteData);
+						mimeDataPtr->setText(archive.GetString().c_str());
 
 						QDrag *drag = new QDrag(sourceWidgetPtr);
-						drag->setMimeData(mimeData);
+						drag->setMimeData(mimeDataPtr);
 						drag->setPixmap(CreateComponentDragPixmap(address));
 						drag->setHotSpot(QPoint(drag->pixmap().width()/2, drag->pixmap().height()));
 						drag->start(Qt::MoveAction);

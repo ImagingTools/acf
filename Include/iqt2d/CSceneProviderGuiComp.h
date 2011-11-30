@@ -182,14 +182,15 @@ private:
 	bool m_isZoomIgnored;
 
 	iqtgui::CHierarchicalCommand m_commands;
-	iqtgui::CHierarchicalCommand m_fileCommand;
+	iqtgui::CHierarchicalCommand m_fileMenu;
 	iqtgui::CHierarchicalCommand m_printCommand;
-	iqtgui::CHierarchicalCommand m_viewCommand;
+	iqtgui::CHierarchicalCommand m_editMenu;
+	iqtgui::CHierarchicalCommand m_selectAllCommand;
+	iqtgui::CHierarchicalCommand m_viewMenu;
 	iqtgui::CHierarchicalCommand m_autoFitToViewCommand;
 	iqtgui::CHierarchicalCommand m_fitToViewCommand;
 	iqtgui::CHierarchicalCommand m_fitToImageCommand;
 	iqtgui::CHierarchicalCommand m_resetZoomCommand;
-	iqtgui::CHierarchicalCommand m_selectAllCommand;
 
 	I_REF(iqtgui::IGuiObject, m_sceneControllerGuiCompPtr);
 	I_MULTIREF(iqtgui::IDropConsumer, m_dropConsumersCompPtr);

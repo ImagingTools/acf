@@ -112,7 +112,7 @@ protected Q_SLOTS:
 	void OnUndo();
 	void OnRedo();
 	void OnFullScreen();
-	void OnCopyPathToClippboard();
+	void OnCopyPathToClipboard();
 	void OnOpenDocumentFolder();
 
 private:
@@ -197,7 +197,7 @@ private:
 	// view menu group
 	iqtgui::CHierarchicalCommand m_fullScreenCommand;
 	// tools menu group
-	iqtgui::CHierarchicalCommand m_copyPathToClippboardCommand;
+	iqtgui::CHierarchicalCommand m_copyPathToClipboardCommand;
 	iqtgui::CHierarchicalCommand m_openDocumentFolderCommand;
 
 	typedef istd::TDelPtr<iqtgui::CHierarchicalCommand> RecentGroupCommandPtr;

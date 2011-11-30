@@ -27,29 +27,30 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 	m_printCommand.SetGroupId(iqtdoc::CMainWindowGuiComp::GI_DOCUMENT);
 	m_printCommand.setShortcut(tr("Ctrl+P"));
 	connect(&m_printCommand, SIGNAL(activated()), this, SLOT(OnPrint()));
-	m_fileCommand.InsertChild(&m_printCommand);
+	m_fileMenu.InsertChild(&m_printCommand);
+
+	m_selectAllCommand.setShortcut(Qt::CTRL + Qt::Key_A);
+	connect(&m_selectAllCommand, SIGNAL(activated()), this, SLOT(OnSelectAllShapes()));
+	m_editMenu.InsertChild(&m_selectAllCommand);
 
 	m_autoFitToViewCommand.SetStaticFlags(
 				iqtgui::CHierarchicalCommand::CF_ONOFF | 
 				iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
 	connect(&m_autoFitToViewCommand, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
-	m_viewCommand.InsertChild(&m_autoFitToViewCommand);
+	m_viewMenu.InsertChild(&m_autoFitToViewCommand);
 
 	connect(&m_fitToViewCommand, SIGNAL(activated()), this, SLOT(OnFitToView()));
-	m_viewCommand.InsertChild(&m_fitToViewCommand);
+	m_viewMenu.InsertChild(&m_fitToViewCommand);
 
 	connect(&m_fitToImageCommand, SIGNAL(activated()), this, SLOT(OnFitToShapes()));
-	m_viewCommand.InsertChild(&m_fitToImageCommand);
-
-	m_selectAllCommand.setShortcut(Qt::CTRL + Qt::Key_A);
-	connect(&m_selectAllCommand, SIGNAL(activated()), this, SLOT(OnSelectAllShapes()));
-	m_viewCommand.InsertChild(&m_selectAllCommand);
+	m_viewMenu.InsertChild(&m_fitToImageCommand);
 
 	connect(&m_resetZoomCommand, SIGNAL(activated()), this, SLOT(OnResetScale()));
-	m_viewCommand.InsertChild(&m_resetZoomCommand);
+	m_viewMenu.InsertChild(&m_resetZoomCommand);
 
-	m_commands.InsertChild(&m_fileCommand);
-	m_commands.InsertChild(&m_viewCommand);
+	m_commands.InsertChild(&m_fileMenu);
+	m_commands.InsertChild(&m_editMenu);
+	m_commands.InsertChild(&m_viewMenu);
 }
 
 
@@ -516,9 +517,10 @@ void CSceneProviderGuiComp::OnRetranslate()
 {
 	BaseClass::OnRetranslate();
 
-	m_fileCommand.SetVisuals(tr("&File"), tr("File"), tr("File menu"));
+	m_fileMenu.SetVisuals(tr("&File"), tr("File"), tr("File menu"));
 	m_printCommand.SetVisuals(tr("&Print..."), tr("Print"), tr("Prints current document"), QIcon(":/Icons/Print"));
-	m_viewCommand.SetVisuals(tr("&View"), tr("View"), tr("View menu"));
+	m_editMenu.SetName(iqt::GetCString(tr("&Edit")));
+	m_viewMenu.SetVisuals(tr("&View"), tr("View"), tr("View menu"));
 	m_autoFitToViewCommand.SetVisuals(tr("&Auto Fit"), tr("Auto Fit"), tr("Automatical fit contents to view area"));
 	m_fitToViewCommand.SetVisuals(tr("&Fit Contents To View"), tr("Fit contents To View"), tr("Fit contents to view area"));
 	m_fitToImageCommand.SetVisuals(tr("&Fit View To Contents"), tr("Fit View To Contents"), tr("Fit view area to contents"));

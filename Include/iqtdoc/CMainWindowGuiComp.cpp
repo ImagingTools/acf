@@ -39,7 +39,7 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_undoCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
 	m_redoCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
 	m_fullScreenCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
-	m_copyPathToClippboardCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU),
+	m_copyPathToClipboardCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU),
 	m_openDocumentFolderCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU)
 {
 	m_quitCommand.setMenuRole(QAction::QuitRole);
@@ -52,7 +52,7 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	connect(&m_undoCommand, SIGNAL(activated()), this, SLOT(OnUndo()));
 	connect(&m_redoCommand, SIGNAL(activated()), this, SLOT(OnRedo()));
 	connect(&m_fullScreenCommand, SIGNAL(activated()), this, SLOT(OnFullScreen()));
-	connect(&m_copyPathToClippboardCommand, SIGNAL(activated()), this, SLOT(OnCopyPathToClippboard()));
+	connect(&m_copyPathToClipboardCommand, SIGNAL(activated()), this, SLOT(OnCopyPathToClipboard()));
 	connect(&m_openDocumentFolderCommand, SIGNAL(activated()), this, SLOT(OnOpenDocumentFolder()));
 }
 
@@ -526,7 +526,7 @@ void CMainWindowGuiComp::UpdateToolsCommands(iqtgui::CHierarchicalCommand& tools
 	BaseClass::UpdateToolsCommands(toolsCommand);
 
 	if (*m_isCopyPathVisibleAttrPtr){
-		toolsCommand.InsertChild(&m_copyPathToClippboardCommand, false);
+		toolsCommand.InsertChild(&m_copyPathToClipboardCommand, false);
 	}
 
 	if (*m_isOpenContainingFolderVisibleAttrPtr){
@@ -558,7 +558,7 @@ void CMainWindowGuiComp::UpdateMenuActions(iqtgui::CHierarchicalCommand& menuCom
 	m_openCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_OPEN) != 0);
 	m_saveCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_SAVE) != 0);
 	m_saveAsCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_FILE_SAVE_AS) != 0);
-	m_copyPathToClippboardCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_KNOWN_PATH) != 0);
+	m_copyPathToClipboardCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_KNOWN_PATH) != 0);
 	m_openDocumentFolderCommand.SetEnabled((allowedOperationFlags & idoc::IDocumentManager::OF_KNOWN_PATH) != 0);
 
 	if (m_documentManagerCommandsCompPtr.IsValid()){
@@ -649,7 +649,7 @@ void CMainWindowGuiComp::OnRetranslate()
 	m_fullScreenCommand.setShortcut(tr("F11"));
 
 	// Tools commands
-	m_copyPathToClippboardCommand.SetVisuals(tr("&Copy Document Path"), tr("Copy Path"), tr("Copy current document path to system clippboard"));
+	m_copyPathToClipboardCommand.SetVisuals(tr("&Copy Document Path"), tr("Copy Path"), tr("Copy current document path to system clipboard"));
 	m_openDocumentFolderCommand.SetVisuals(tr("&Open Containing Folder"), tr("Open Containing Folder"), tr("Open folder containing the current document"));
 }
 
@@ -890,7 +890,7 @@ void CMainWindowGuiComp::OnFullScreen()
 }
 
 
-void CMainWindowGuiComp::OnCopyPathToClippboard()
+void CMainWindowGuiComp::OnCopyPathToClipboard()
 {
 	if ((m_activeViewPtr != NULL) && m_documentManagerCompPtr.IsValid()){
 		idoc::IDocumentManager::DocumentInfo info;
