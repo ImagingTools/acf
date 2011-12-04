@@ -49,7 +49,7 @@ public:
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
 
-signals:
+Q_SIGNALS:
 	void RectChanged(QRectF rect);
 	void SelectionChanged(bool state);
 

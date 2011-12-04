@@ -6,6 +6,8 @@
 #include <QVarLengthArray>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QGraphicsItem>
+
 
 // ACF includes
 #include "iqtdoc/CMainWindowGuiComp.h"
@@ -681,7 +683,15 @@ void CSceneProviderGuiComp::OnSelectAllShapes()
 		QPainterPath sceneSelection;
 		sceneSelection.addRect(m_scenePtr->sceneRect());
 
-		m_scenePtr->setSelectionArea(sceneSelection);
+		QList<QGraphicsItem*> itemList = m_scenePtr->items();
+		for (int itemIndex = 0; itemIndex < itemList.count(); itemIndex++){
+			QGraphicsItem* itemPtr = itemList.at(itemIndex);
+			I_ASSERT(itemPtr != NULL);
+
+			if ((itemPtr->flags() & QGraphicsItem::ItemIsSelectable) != 0){
+				itemPtr->setSelected(true);
+			}
+		}
 	}
 }
 

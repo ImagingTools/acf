@@ -160,7 +160,7 @@ protected:
 	// reimplemented (QObject)
 	virtual bool eventFilter(QObject* sourcePtr, QEvent* eventPtr);
 
-signals:
+Q_SIGNALS:
 	void zoomChanged(double);
 
 protected Q_SLOTS:

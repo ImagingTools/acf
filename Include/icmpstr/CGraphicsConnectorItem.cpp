@@ -35,7 +35,7 @@ CGraphicsConnectorItem::CGraphicsConnectorItem(
 	setAcceptedMouseButtons(0);
 	setAcceptsHoverEvents(true);
 
-	setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemSendsGeometryChanges);
+	setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemSendsGeometryChanges);
 
 	setZValue(1);
 }

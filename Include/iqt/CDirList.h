@@ -50,7 +50,7 @@ public:
 				int maxRecursionDepth = 0,
 				bool doAppend = false);
 
-signals:
+Q_SIGNALS:
 	/**
 		This signal is emitted whenever the directory \c dir has been processed.
 	*/

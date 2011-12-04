@@ -24,7 +24,6 @@ class CGraphicsConnectorItem:
 			public QGraphicsItem
 {
 	Q_OBJECT
-//	Q_INTERFACES(QGraphicsItem)
 
 public:
 	typedef QGraphicsItem BaseClass;
