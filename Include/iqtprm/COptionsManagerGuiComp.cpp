@@ -61,9 +61,7 @@ void COptionsManagerGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	UpdateComboBoxesView();
-
-	UpdateDescriptionFrame();
+	UpdateComboBox();
 }
 
 
@@ -109,15 +107,11 @@ void COptionsManagerGuiComp::OnGuiCreated()
 
 	QObject::connect(Selector, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
 
-	if (!m_optionsManagerCompPtr.IsValid()){
-		EditEnableButton->hide();
+	if (m_optionsManagerCompPtr.IsValid()){
+		Selector->setEditable(true);
+
+		connect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
 	}
-}
-
-
-void COptionsManagerGuiComp::OnGuiDestroyed()
-{
-	BaseClass::OnGuiDestroyed();
 }
 
 
@@ -166,20 +160,6 @@ void COptionsManagerGuiComp::OnSelectionChanged(int /*index*/)
 }
 
 
-void COptionsManagerGuiComp::on_EditEnableButton_toggled(bool toggled)
-{
-	if (!toggled && Selector->lineEdit() != NULL){
-		disconnect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
-	}
-
-	Selector->setEditable(toggled);
-
-	if (toggled){
-		connect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
-	}
-}
-
-
 void COptionsManagerGuiComp::OnEditingFinished()
 {
 	istd::CString newOptionName = iqt::GetCString(Selector->lineEdit()->text());
@@ -209,14 +189,12 @@ void COptionsManagerGuiComp::OnEditingFinished()
 			m_optionsManagerCompPtr->InsertOption(newOptionName, newOptionName.ToString());
 		}
 	}
-
-	EditEnableButton->toggle();
 }
 
 
 // private methods
 
-void COptionsManagerGuiComp::UpdateComboBoxesView()
+void COptionsManagerGuiComp::UpdateComboBox()
 {
 	Selector->clear();
 	

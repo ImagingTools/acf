@@ -48,26 +48,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QPushButton" name="EditEnableButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Ignored">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../iqtgui/iqtgui.qrc">
-           <normaloff>:/Icons/ZoomReset</normaloff>:/Icons/ZoomReset</iconset>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </widget>

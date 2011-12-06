@@ -110,7 +110,7 @@ I_EXPORT_COMPONENT(
 I_EXPORT_COMPONENT(
 			DoxygenHelpFileProvider,
 			"Provide html help file path converting class type using doxygen format",
-			"DoxyGen File Provider Document Html Description Class Interface Qt" IM_TAG("Help"));
+			"Doxygen File Provider Document Html Description Class Interface Qt" IM_TAG("Help"));
 
 I_EXPORT_COMPONENT(
 			RelativeFileNameParam,
@@ -131,6 +131,7 @@ I_EXPORT_COMPONENT(
 		   XslFileSerializer,
 		   "File loader serializing objects using simplified XML format using Qt, provides XSLT",
 		   "Save Serializer Archive Format XSLT" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
+
 
 } // namespace QtPck
 
