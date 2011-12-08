@@ -21,5 +21,6 @@
 	<Tool
 		Name="VCLinkerTool"
 		LinkIncremental="2"
+		EnableUAC="false"
 	/>
 </VisualStudioPropertySheet>

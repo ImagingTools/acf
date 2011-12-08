@@ -29,7 +29,7 @@ QMAKE_EXTRA_COMPILERS += arxCompiler
 
 # custom build for ACF conform translations
 isEmpty(QMAKE_LRELEASE) {
-    win32:QMAKE_LRELEASE = $$QT_INSTALL_BINS\lrelease.exe
+    win32:QMAKE_LRELEASE = $$QT_INSTALL_BINS\\lrelease.exe
     else:QMAKE_LRELEASE = $$QT_INSTALL_BINS/lrelease
 }
 updateqm.input = TRANSLATIONS

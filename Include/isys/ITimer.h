@@ -2,10 +2,10 @@
 #define isys_ITimer_included
 
 
+// ACF includes
+#include "istd/IChangeable.h"
+
 #include "isys/isys.h"
-
-
-#include "istd/IPolymorphic.h"
 
 
 namespace isys
@@ -17,7 +17,7 @@ namespace isys
 
 	\ingroup System
 */
-class ITimer: virtual public istd::IPolymorphic
+class ITimer: virtual public istd::IChangeable
 {
 public:
 	/**
