@@ -97,7 +97,7 @@ IElementStaticInfo::Ids TSubelementStaticInfo<ComponentType>::GetMetaIds(int met
 	Ids retVal;
 
 	if (metaGroupId == MGI_INTERFACES){
-		for (		InterfaceExtractors::const_iterator iter = m_interfaceExtractors.begin();
+		for (		typename InterfaceExtractors::const_iterator iter = m_interfaceExtractors.begin();
 					iter != m_interfaceExtractors.end();
 					++iter){
 			retVal.insert(iter->first);
@@ -124,7 +124,7 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 			return &component;
 		}
 
-		InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(interfaceType.GetName());
+		typename InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(interfaceType.GetName());
 		if (foundIter != m_interfaceExtractors.end()){
 			InterfaceExtractorPtr extractorPtr = foundIter->second;
 
@@ -134,7 +134,7 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 		if (interfaceType.IsConst()){
 			istd::CClassInfo nonConstType = interfaceType.GetConstCasted(false);
 
-			InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(nonConstType.GetName());
+			typename InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(nonConstType.GetName());
 			if (foundIter != m_interfaceExtractors.end()){
 				InterfaceExtractorPtr extractorPtr = foundIter->second;
 

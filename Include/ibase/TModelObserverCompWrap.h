@@ -24,7 +24,7 @@ public:
 	I_BEGIN_COMPONENT(TModelObserverCompWrap);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_ASSIGN(m_defaultModelCompPtr, "DefaultModel", "Data model to be connected to the observer", false, "DefaultModel");
-		I_ASSIGN_TO(m_defaultObjectCompPtr, m_defaultModelCompPtr, false);
+		I_TASSIGN_TO(m_defaultObjectCompPtr, m_defaultModelCompPtr, false);
 	I_END_COMPONENT;
 
 protected:

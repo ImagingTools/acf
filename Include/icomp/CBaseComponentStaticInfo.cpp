@@ -1,7 +1,10 @@
 #include "icomp/CBaseComponentStaticInfo.h"
 
 
+// ACF includes
 #include "istd/CIdManipBase.h"
+
+#include "icomp/IComponent.h"
 
 
 namespace icomp

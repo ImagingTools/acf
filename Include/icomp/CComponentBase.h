@@ -408,6 +408,15 @@ inline bool CComponentBase::IsComponentActive() const
 	}
 
 /**
+	Used to assign value for overloaded attributes or references.
+*/
+#define I_TASSIGN_TO(member, baseAttribute, isObligatory)\
+	static icomp::CRelatedInfoRegistrator member##_Info(baseAttribute##_Info, icomp::IComponentStaticInfo::MGI_INTERFACES, istd::CClassInfo::GetInfo<typename member##_Type::InterfaceType>().GetName(), isObligatory? member##_AttrType::DAF_OBLIGATORY: member##_AttrType::DAF_OPTIONAL);\
+	if (componentPtr != NULL){\
+		componentPtr->member.Init(componentPtr, baseAttribute##_Info);\
+	}
+
+/**
 	Cast to specified interface trying to use component interface query.
 	It extends standard dynamic_cast functinality when you use composed components.
 */
