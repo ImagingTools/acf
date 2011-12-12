@@ -54,10 +54,10 @@ public:
 		If you want to force some factory to support more interfaces, you should simply define
 		multiply I_FACT members with the same ID, factorise instances with any of them and extract
 		specified interfaces using this method.
-		@param	instancePtr	pointer to component object, typically returned by method CreateComponent().
+		\param	instancePtr	pointer to component object, typically returned by method CreateComponent().
 				If it is NULL, this function return also NULL value.
-		@param	subId			optionally ID parameter identifing subcomponent.
-		@return	pointer to interface or NULL, if such interface could not be extracted.
+		\param	subId			optionally ID parameter identifing subcomponent.
+		\return	pointer to interface or NULL, if such interface could not be extracted.
 	*/
 	static Interface* ExtractInterface(istd::IPolymorphic* instancePtr, const std::string& subId = "");
 

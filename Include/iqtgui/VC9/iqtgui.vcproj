@@ -280,10 +280,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLoginGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CModelDialogGuiComp.cpp"
 				>
 			</File>
@@ -444,10 +440,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CLoginGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CModelDialogGuiComp.h"
 				>
 			</File>
@@ -601,10 +593,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CLoginGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\moc_CObjectPreviewGuiComp.cpp"
 				>
 			</File>
@@ -645,10 +633,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CLoginGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\ui_CObjectPreviewGuiComp.h"
 				>
 			</File>
@@ -682,10 +666,6 @@
 			</File>
 			<File
 				RelativePath="..\CLogGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CLoginGuiComp.ui"
 				>
 			</File>
 			<File
@@ -738,10 +718,6 @@
 			</File>
 			<File
 				RelativePath="..\CLogGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CLoginGuiComp.moc"
 				>
 			</File>
 			<File

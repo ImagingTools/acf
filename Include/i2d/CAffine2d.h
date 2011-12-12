@@ -93,24 +93,24 @@ public:
 
 	/**
 		Get combined transformation.
-		@param	transform	local transformation used on right side of transformation multiplication.
-		@return	combined transform.
+		\param	transform	local transformation used on right side of transformation multiplication.
+		\return	combined transform.
 	*/
 	CAffine2d GetApply(const CAffine2d& transform) const;
 	/**
 		Get combined transformation.
-		@param	transform	local transformation used on right side of transformation multiplication.
-		@return	combined transformation, it is equal to thisTranform * parameterTransform.
+		\param	transform	local transformation used on right side of transformation multiplication.
+		\return	combined transformation, it is equal to thisTranform * parameterTransform.
 	*/
 	void GetApply(const CAffine2d& transform, CAffine2d& result) const;
 	/**
 		Combine this transformation with another transformation.
-		@param	transform	local transformation used on right side of transformation multiplication.
+		\param	transform	local transformation used on right side of transformation multiplication.
 	*/
 	void Apply(const CAffine2d& transform);
 	/**
 		Combine this transformation with another transformation on the left side.
-		@param	transform	local transformation used on left side of transformation multiplication.
+		\param	transform	local transformation used on left side of transformation multiplication.
 	*/
 	void ApplyLeft(const CAffine2d& transform);
 

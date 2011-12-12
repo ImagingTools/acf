@@ -53,9 +53,9 @@ public:
 	/**
 		Get range of result value for the given axis.
 		Optionally some result dimension can be also specified.
-		@param	dimensionIndex	index of argument dimension.
-		@param	resultDimension	optional index of result dimension, it can be negative if all dimensions are meaned.
-		@return	range of possible values, or invalid range if it is unknown.
+		\param	dimensionIndex	index of argument dimension.
+		\param	resultDimension	optional index of result dimension, it can be negative if all dimensions are meaned.
+		\return	range of possible values, or invalid range if it is unknown.
 	*/
 	virtual istd::CRange GetResultValueRange(int dimensionIndex, int resultDimension = -1) const = 0;
 

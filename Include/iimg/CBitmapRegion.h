@@ -61,8 +61,8 @@ private:
 
 private:
 	const IBitmap* m_bitmapPtr;
-	::std::vector<PixelRanges> m_rangesContainer;
-	::std::vector<const PixelRanges*> m_lineRangePtr;
+	std::vector<PixelRanges> m_rangesContainer;
+	std::vector<const PixelRanges*> m_lineRangePtr;
 	i2d::CRectangle m_boundingBox;
 	bool m_isEmpty;
 };

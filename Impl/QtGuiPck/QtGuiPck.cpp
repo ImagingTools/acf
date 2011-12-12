@@ -113,11 +113,6 @@ I_EXPORT_COMPONENT(
 			"Widget Layout Load Save Object Loader" IM_TAG("Persistence"));
 
 I_EXPORT_COMPONENT(
-			LoginGui,
-			"Gui used to user login",
-			"User Login" IM_TAG("Authorization"));
-
-I_EXPORT_COMPONENT(
 			SimpleMainGui,
 			"Simple UI for a main window based application",
 			"Simple Main" IM_TAG("Application"));

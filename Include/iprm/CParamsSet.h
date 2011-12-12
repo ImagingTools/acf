@@ -52,7 +52,7 @@ public:
 	/**
 		Set slave parameter set.
 		Slave parameter set will be used for non editable parameter query.
-		@param	slaveSetPtr		slave parameter set, or NULL, if no set is used.
+		\param	slaveSetPtr		slave parameter set, or NULL, if no set is used.
 	*/
 	void SetSlaveSet(const IParamsSet* slaveSetPtr);
 

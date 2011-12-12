@@ -54,9 +54,9 @@ public:
 		If you want to force some factory to support more interfaces, you should simply define
 		multiply I_FACT members with the same ID, factorise instances with any of them and extract
 		specified interfaces using this method.
-		@param	componentPtr	pointer to component object, typically returned by method CreateComponent().
-		@param	subId			optionally ID parameter identifing subcomponent.
-		@return	pointer to interface or NULL, if such interface could not be extracted.
+		\param	componentPtr	pointer to component object, typically returned by method CreateComponent().
+		\param	subId			optionally ID parameter identifing subcomponent.
+		\return	pointer to interface or NULL, if such interface could not be extracted.
 	*/
 	static Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "");
 
