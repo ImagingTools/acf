@@ -5,6 +5,7 @@
 	Name="iprm"
 	ProjectGUID="{9ABA7CB2-C8DB-4704-BC43-537BD9AD82D7}"
 	RootNamespace="iprm"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -291,14 +292,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CComposedStateControllerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ICOptionsManager.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IEnableableParam.h"
 				>
 			</File>
@@ -316,6 +309,10 @@
 			</File>
 			<File
 				RelativePath="..\INameParam.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IOptionsManager.h"
 				>
 			</File>
 			<File
