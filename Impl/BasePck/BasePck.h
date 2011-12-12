@@ -42,10 +42,6 @@
 #include "ibase/CFileConvertOverProcessorComp.h"
 #include "ibase/CLogComp.h"
 
-#include "isec/CComposedAuthorizationVerifierComp.h"
-#include "isec/CFixedAuthorisationVerifierComp.h"
-#include "isec/CStaticUserLoginComp.h"
-
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
 #include "iprm/CComposedParamsSetComp.h"
@@ -123,10 +119,6 @@ typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
 typedef icomp::TModelCompWrap<idoc::CDocumentManagerListenerComp> DocumentManagerListener;
 typedef idoc::CSelectedDocModelBinderComp SelectedDocModelBinder;
-
-typedef icomp::TModelCompWrap<isec::CComposedAuthorizationVerifierComp> ComposedAuthorizationVerifier;
-typedef icomp::TModelCompWrap<isec::CFixedAuthorisationVerifierComp> FixedAuthorisationVerifier;
-typedef icomp::TModelCompWrap<isec::CStaticUserLoginComp> StaticUserLogin;
 
 typedef icomp::TModelCompWrap<i2d::CPosition2dComp> Position2d;
 typedef icomp::TModelCompWrap<i2d::CRectangleComp> Rectangle;
