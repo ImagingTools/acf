@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup
+    Condition="'$(SubVersionTransformBeforeTargets)' == '' and '$(SubVersionTransformAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+    <SubVersionTransformBeforeTargets>Midl</SubVersionTransformBeforeTargets>
+    <SubVersionTransformAfterTargets>CustomBuild</SubVersionTransformAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SubVersionTransformDependsOn
+      Condition="'$(ConfigurationType)' != 'Makefile'">_SelectedFiles;$(SubVersionTransformDependsOn)</SubVersionTransformDependsOn>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <SubVersionTransform>
+      <OutputDir>$(OutputDir)</OutputDir>
+      <SubVersionPath>%(RootDir)%(Directory)</SubVersionPath>
+      <CommandLineTemplate>SubWCRev %(SubVersionPath) %(FullPath) %(OutputDir)\%(Filename)</CommandLineTemplate>
+      <Outputs>%(OutputDir)\%(Filename)</Outputs>
+      <ExecutionDescription>Transforming with SubVersion %(Filename)...</ExecutionDescription>
+      <ShowOnlyRuleProperties>false</ShowOnlyRuleProperties>
+    </SubVersionTransform>
+  </ItemDefinitionGroup>
+</Project>

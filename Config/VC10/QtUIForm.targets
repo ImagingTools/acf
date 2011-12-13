@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema
+      Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName
+      Include="QT_Designer_Form">
+      <Targets>_QT_Designer_Form</Targets>
+    </AvailableItemName>
+    <AvailableItemName
+      Include="QT_Resources">
+      <Targets>_QT_Resources</Targets>
+    </AvailableItemName>
+    <AvailableItemName
+      Include="QT_Moc_Metafile">
+      <Targets>_QT_Moc_Metafile</Targets>
+    </AvailableItemName>
+    <AvailableItemName
+      Include="Qt_Linguist">
+      <Targets>_Qt_Linguist</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <UsingTask
+    TaskName="QT_Designer_Form"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <UsingTask
+    TaskName="QT_Resources"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <UsingTask
+    TaskName="QT_Moc_Metafile"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <UsingTask
+    TaskName="Qt_Linguist"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target
+    Name="_QT_Designer_Form"
+    BeforeTargets="$(QT_Designer_FormBeforeTargets)"
+    AfterTargets="$(QT_Designer_FormAfterTargets)"
+    Condition="'@(QT_Designer_Form)' != ''"
+    DependsOnTargets="$(QT_Designer_FormDependsOn);ComputeQT_Designer_FormOutput"
+    Outputs="%(QT_Designer_Form.Outputs)"
+    Inputs="%(QT_Designer_Form.Identity);%(QT_Designer_Form.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <QT_Designer_Form
+        Remove="@(QT_Designer_Form)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <QT_Designer_Form_tlog
+        Include="%(QT_Designer_Form.Outputs)"
+        Condition="'%(QT_Designer_Form.Outputs)' != '' and '%(QT_Designer_Form.ExcludedFromBuild)' != 'true'">
+        <Source>@(QT_Designer_Form, '|')</Source>
+      </QT_Designer_Form_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(QT_Designer_Form.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(QT_Designer_Form_tlog)' != '' and '%(QT_Designer_Form_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QT_Designer_Form_tlog.Source);@(QT_Designer_Form_tlog-&gt;'%(Fullpath)')" />
+    <QT_Designer_Form
+      Condition="'@(QT_Designer_Form)' != '' and '%(QT_Designer_Form.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(QT_Designer_Form.CommandLineTemplate)"
+      AdditionalOptions="%(QT_Designer_Form.AdditionalOptions)"
+      Inputs="%(QT_Designer_Form.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeQT_Designer_FormOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeQT_Designer_FormOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeQT_Designer_FormOutput"
+    Condition="'@(QT_Designer_Form)' != ''">
+    <ItemGroup>
+      <QT_Designer_FormDirsToMake
+        Condition="'@(QT_Designer_Form)' != '' and '%(QT_Designer_Form.ExcludedFromBuild)' != 'true'"
+        Include="%(QT_Designer_Form.Outputs)" />
+      <Link
+        Include="%(QT_Designer_FormDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(QT_Designer_FormDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(QT_Designer_FormDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(QT_Designer_FormDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+  <Target
+    Name="_QT_Resources"
+    BeforeTargets="$(QT_ResourcesBeforeTargets)"
+    AfterTargets="$(QT_ResourcesAfterTargets)"
+    Condition="'@(QT_Resources)' != ''"
+    DependsOnTargets="$(QT_ResourcesDependsOn);ComputeQT_ResourcesOutput"
+    Outputs="%(QT_Resources.Outputs)"
+    Inputs="%(QT_Resources.Identity);%(QT_Resources.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <QT_Resources
+        Remove="@(QT_Resources)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <QT_Resources_tlog
+        Include="%(QT_Resources.Outputs)"
+        Condition="'%(QT_Resources.Outputs)' != '' and '%(QT_Resources.ExcludedFromBuild)' != 'true'">
+        <Source>@(QT_Resources, '|')</Source>
+      </QT_Resources_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(QT_Resources.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(QT_Resources_tlog)' != '' and '%(QT_Resources_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QT_Resources_tlog.Source);@(QT_Resources_tlog-&gt;'%(Fullpath)')" />
+    <QT_Resources
+      Condition="'@(QT_Resources)' != '' and '%(QT_Resources.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(QT_Resources.CommandLineTemplate)"
+      AdditionalOptions="%(QT_Resources.AdditionalOptions)"
+      Inputs="%(QT_Resources.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeQT_ResourcesOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeQT_ResourcesOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeQT_ResourcesOutput"
+    Condition="'@(QT_Resources)' != ''">
+    <ItemGroup>
+      <QT_ResourcesDirsToMake
+        Condition="'@(QT_Resources)' != '' and '%(QT_Resources.ExcludedFromBuild)' != 'true'"
+        Include="%(QT_Resources.Outputs)" />
+      <Link
+        Include="%(QT_ResourcesDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(QT_ResourcesDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(QT_ResourcesDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(QT_ResourcesDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+  <Target
+    Name="_QT_Moc_Metafile"
+    BeforeTargets="$(QT_Moc_MetafileBeforeTargets)"
+    AfterTargets="$(QT_Moc_MetafileAfterTargets)"
+    Condition="'@(QT_Moc_Metafile)' != ''"
+    DependsOnTargets="$(QT_Moc_MetafileDependsOn);ComputeQT_Moc_MetafileOutput"
+    Outputs="%(QT_Moc_Metafile.Outputs)"
+    Inputs="%(QT_Moc_Metafile.Identity);%(QT_Moc_Metafile.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <QT_Moc_Metafile
+        Remove="@(QT_Moc_Metafile)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <QT_Moc_Metafile_tlog
+        Include="%(QT_Moc_Metafile.Outputs)"
+        Condition="'%(QT_Moc_Metafile.Outputs)' != '' and '%(QT_Moc_Metafile.ExcludedFromBuild)' != 'true'">
+        <Source>@(QT_Moc_Metafile, '|')</Source>
+      </QT_Moc_Metafile_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(QT_Moc_Metafile.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(QT_Moc_Metafile_tlog)' != '' and '%(QT_Moc_Metafile_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(QT_Moc_Metafile_tlog.Source);@(QT_Moc_Metafile_tlog-&gt;'%(Fullpath)')" />
+    <QT_Moc_Metafile
+      Condition="'@(QT_Moc_Metafile)' != '' and '%(QT_Moc_Metafile.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(QT_Moc_Metafile.CommandLineTemplate)"
+      AdditionalOptions="%(QT_Moc_Metafile.AdditionalOptions)"
+      Inputs="%(QT_Moc_Metafile.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeQT_Moc_MetafileOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeQT_Moc_MetafileOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeQT_Moc_MetafileOutput"
+    Condition="'@(QT_Moc_Metafile)' != ''">
+    <ItemGroup>
+      <QT_Moc_MetafileDirsToMake
+        Condition="'@(QT_Moc_Metafile)' != '' and '%(QT_Moc_Metafile.ExcludedFromBuild)' != 'true'"
+        Include="%(QT_Moc_Metafile.Outputs)" />
+      <Link
+        Include="%(QT_Moc_MetafileDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(QT_Moc_MetafileDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(QT_Moc_MetafileDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(QT_Moc_MetafileDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+  <Target
+    Name="_Qt_Linguist"
+    BeforeTargets="$(Qt_LinguistBeforeTargets)"
+    AfterTargets="$(Qt_LinguistAfterTargets)"
+    Condition="'@(Qt_Linguist)' != ''"
+    DependsOnTargets="$(Qt_LinguistDependsOn);ComputeQt_LinguistOutput"
+    Outputs="%(Qt_Linguist.Outputs)"
+    Inputs="%(Qt_Linguist.Identity);%(Qt_Linguist.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <Qt_Linguist
+        Remove="@(Qt_Linguist)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <Qt_Linguist_tlog
+        Include="%(Qt_Linguist.Outputs)"
+        Condition="'%(Qt_Linguist.Outputs)' != '' and '%(Qt_Linguist.ExcludedFromBuild)' != 'true'">
+        <Source>@(Qt_Linguist, '|')</Source>
+      </Qt_Linguist_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(Qt_Linguist.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(Qt_Linguist_tlog)' != '' and '%(Qt_Linguist_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(Qt_Linguist_tlog.Source);@(Qt_Linguist_tlog-&gt;'%(Fullpath)')" />
+    <Qt_Linguist
+      Condition="'@(Qt_Linguist)' != '' and '%(Qt_Linguist.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(Qt_Linguist.CommandLineTemplate)"
+      AdditionalOptions="%(Qt_Linguist.AdditionalOptions)"
+      Inputs="%(Qt_Linguist.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeQt_LinguistOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeQt_LinguistOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeQt_LinguistOutput"
+    Condition="'@(Qt_Linguist)' != ''">
+    <ItemGroup>
+      <Qt_LinguistDirsToMake
+        Condition="'@(Qt_Linguist)' != '' and '%(Qt_Linguist.ExcludedFromBuild)' != 'true'"
+        Include="%(Qt_Linguist.Outputs)" />
+      <Link
+        Include="%(Qt_LinguistDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(Qt_LinguistDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(Qt_LinguistDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(Qt_LinguistDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+</Project>

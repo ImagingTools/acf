@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema
+      Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName
+      Include="Arxc">
+      <Targets>_Arxc</Targets>
+    </AvailableItemName>
+    <AvailableItemName
+      Include="DeployCopy">
+      <Targets>_DeployCopy</Targets>
+    </AvailableItemName>
+    <AvailableItemName
+      Include="FileConvertCopy">
+      <Targets>_FileConvertCopy</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <UsingTask
+    TaskName="Arxc"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <UsingTask
+    TaskName="DeployCopy"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <UsingTask
+    TaskName="FileConvertCopy"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target
+    Name="_Arxc"
+    BeforeTargets="$(ArxcBeforeTargets)"
+    AfterTargets="$(ArxcAfterTargets)"
+    Condition="'@(Arxc)' != ''"
+    DependsOnTargets="$(ArxcDependsOn);ComputeArxcOutput"
+    Outputs="%(Arxc.Outputs)"
+    Inputs="%(Arxc.Identity);%(Arxc.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <Arxc
+        Remove="@(Arxc)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <Arxc_tlog
+        Include="%(Arxc.Outputs)"
+        Condition="'%(Arxc.Outputs)' != '' and '%(Arxc.ExcludedFromBuild)' != 'true'">
+        <Source>@(Arxc, '|')</Source>
+      </Arxc_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(Arxc.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(Arxc_tlog)' != '' and '%(Arxc_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(Arxc_tlog.Source);@(Arxc_tlog-&gt;'%(Fullpath)')" />
+    <Arxc
+      Condition="'@(Arxc)' != '' and '%(Arxc.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(Arxc.CommandLineTemplate)"
+      Verbose="%(Arxc.Verbose)"
+      ConfigFile="%(Arxc.ConfigFile)"
+      AdditionalOptions="%(Arxc.AdditionalOptions)"
+      Inputs="%(Arxc.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeArxcOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeArxcOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeArxcOutput"
+    Condition="'@(Arxc)' != ''">
+    <ItemGroup>
+      <ArxcDirsToMake
+        Condition="'@(Arxc)' != '' and '%(Arxc.ExcludedFromBuild)' != 'true'"
+        Include="%(Arxc.Outputs)" />
+      <Link
+        Include="%(ArxcDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(ArxcDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(ArxcDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(ArxcDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+  <Target
+    Name="_DeployCopy"
+    BeforeTargets="$(DeployCopyBeforeTargets)"
+    AfterTargets="$(DeployCopyAfterTargets)"
+    Condition="'@(DeployCopy)' != ''"
+    DependsOnTargets="$(DeployCopyDependsOn);ComputeDeployCopyOutput"
+    Outputs="%(DeployCopy.Outputs)"
+    Inputs="%(DeployCopy.Identity);%(DeployCopy.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <DeployCopy
+        Remove="@(DeployCopy)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <DeployCopy_tlog
+        Include="%(DeployCopy.Outputs)"
+        Condition="'%(DeployCopy.Outputs)' != '' and '%(DeployCopy.ExcludedFromBuild)' != 'true'">
+        <Source>@(DeployCopy, '|')</Source>
+      </DeployCopy_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(DeployCopy.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(DeployCopy_tlog)' != '' and '%(DeployCopy_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(DeployCopy_tlog.Source);@(DeployCopy_tlog-&gt;'%(Fullpath)')" />
+    <DeployCopy
+      Condition="'@(DeployCopy)' != '' and '%(DeployCopy.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(DeployCopy.CommandLineTemplate)"
+      OutputDir="%(DeployCopy.OutputDir)"
+      InputDir="%(DeployCopy.InputDir)"
+      AdditionalOptions="%(DeployCopy.AdditionalOptions)"
+      Inputs="%(DeployCopy.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeDeployCopyOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeDeployCopyOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeDeployCopyOutput"
+    Condition="'@(DeployCopy)' != ''">
+    <ItemGroup>
+      <DeployCopyDirsToMake
+        Condition="'@(DeployCopy)' != '' and '%(DeployCopy.ExcludedFromBuild)' != 'true'"
+        Include="%(DeployCopy.Outputs)" />
+      <Link
+        Include="%(DeployCopyDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(DeployCopyDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(DeployCopyDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(DeployCopyDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+  <Target
+    Name="_FileConvertCopy"
+    BeforeTargets="$(FileConvertCopyBeforeTargets)"
+    AfterTargets="$(FileConvertCopyAfterTargets)"
+    Condition="'@(FileConvertCopy)' != ''"
+    DependsOnTargets="$(FileConvertCopyDependsOn);ComputeFileConvertCopyOutput"
+    Outputs="%(FileConvertCopy.Outputs)"
+    Inputs="%(FileConvertCopy.Identity);%(FileConvertCopy.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <FileConvertCopy
+        Remove="@(FileConvertCopy)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <FileConvertCopy_tlog
+        Include="%(FileConvertCopy.Outputs)"
+        Condition="'%(FileConvertCopy.Outputs)' != '' and '%(FileConvertCopy.ExcludedFromBuild)' != 'true'">
+        <Source>@(FileConvertCopy, '|')</Source>
+      </FileConvertCopy_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(FileConvertCopy.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(FileConvertCopy_tlog)' != '' and '%(FileConvertCopy_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(FileConvertCopy_tlog.Source);@(FileConvertCopy_tlog-&gt;'%(Fullpath)')" />
+    <FileConvertCopy
+      Condition="'@(FileConvertCopy)' != '' and '%(FileConvertCopy.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(FileConvertCopy.CommandLineTemplate)"
+      RegistryFile="%(FileConvertCopy.RegistryFile)"
+      ConfigFile="%(FileConvertCopy.ConfigFile)"
+      OutputDir="%(FileConvertCopy.OutputDir)"
+      AdditionalOptions="%(FileConvertCopy.AdditionalOptions)"
+      Inputs="%(FileConvertCopy.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeFileConvertCopyOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeFileConvertCopyOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeFileConvertCopyOutput"
+    Condition="'@(FileConvertCopy)' != ''">
+    <ItemGroup>
+      <FileConvertCopyDirsToMake
+        Condition="'@(FileConvertCopy)' != '' and '%(FileConvertCopy.ExcludedFromBuild)' != 'true'"
+        Include="%(FileConvertCopy.Outputs)" />
+      <Link
+        Include="%(FileConvertCopyDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(FileConvertCopyDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(FileConvertCopyDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(FileConvertCopyDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+</Project>

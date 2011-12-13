@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema
+      Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName
+      Include="SubVersionTransform">
+      <Targets>_SubVersionTransform</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <UsingTask
+    TaskName="SubVersionTransform"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target
+    Name="_SubVersionTransform"
+    BeforeTargets="$(SubVersionTransformBeforeTargets)"
+    AfterTargets="$(SubVersionTransformAfterTargets)"
+    Condition="'@(SubVersionTransform)' != ''"
+    DependsOnTargets="$(SubVersionTransformDependsOn);ComputeSubVersionTransformOutput"
+    Outputs="%(SubVersionTransform.Outputs)"
+    Inputs="%(SubVersionTransform.Identity);%(SubVersionTransform.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <SubVersionTransform
+        Remove="@(SubVersionTransform)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <SubVersionTransform_tlog
+        Include="%(SubVersionTransform.Outputs)"
+        Condition="'%(SubVersionTransform.Outputs)' != '' and '%(SubVersionTransform.ExcludedFromBuild)' != 'true'">
+        <Source>@(SubVersionTransform, '|')</Source>
+      </SubVersionTransform_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(SubVersionTransform.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(SubVersionTransform_tlog)' != '' and '%(SubVersionTransform_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(SubVersionTransform_tlog.Source);@(SubVersionTransform_tlog-&gt;'%(Fullpath)')" />
+    <SubVersionTransform
+      Condition="'@(SubVersionTransform)' != '' and '%(SubVersionTransform.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(SubVersionTransform.CommandLineTemplate)"
+      OutputDir="%(SubVersionTransform.OutputDir)"
+      SubVersionPath="%(SubVersionTransform.SubVersionPath)"
+      AdditionalOptions="%(SubVersionTransform.AdditionalOptions)"
+      Inputs="%(SubVersionTransform.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeSubVersionTransformOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeSubVersionTransformOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeSubVersionTransformOutput"
+    Condition="'@(SubVersionTransform)' != ''">
+    <ItemGroup>
+      <SubVersionTransformDirsToMake
+        Condition="'@(SubVersionTransform)' != '' and '%(SubVersionTransform.ExcludedFromBuild)' != 'true'"
+        Include="%(SubVersionTransform.Outputs)" />
+      <Link
+        Include="%(SubVersionTransformDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(SubVersionTransformDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(SubVersionTransformDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(SubVersionTransformDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+</Project>
