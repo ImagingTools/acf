@@ -23,7 +23,7 @@
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC9/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -110,7 +110,7 @@
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC9/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\Static.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Config\VC9\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>

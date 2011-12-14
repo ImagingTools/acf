@@ -698,7 +698,7 @@
                 true
               </IsEnabled>
               <Value>
-                $(ACFDIR)/Docs/Images/AcfSplashScreen.png
+                ../../../Docs/Images/AcfSplashScreen.png
               </Value>
             </Data>
           </AttributeInfo>

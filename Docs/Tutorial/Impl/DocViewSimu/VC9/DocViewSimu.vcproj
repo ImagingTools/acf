@@ -20,7 +20,7 @@
 			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC9/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Config\VC9\General.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -75,7 +75,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib AcfStd.lib AcfQt.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\..\..\Lib\$(ConfigurationName)VC9&quot;"
 				SubSystem="2"
 			/>
 			<Tool
@@ -105,7 +105,7 @@
 			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC9/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(ACFDIR)\Config\VC9\General.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Config\VC9\General.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -160,7 +160,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib AcfStd.lib AcfQt.lib"
 				OutputFile="$(OutDir)/$(ProjectName)"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(ACFDIR)\Lib\$(ConfigurationName)VC9&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;..\..\..\..\..\Lib\$(ConfigurationName)VC9&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
