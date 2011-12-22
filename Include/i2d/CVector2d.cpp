@@ -22,6 +22,12 @@ CVector2d CVector2d::GetOrthogonal() const
 }
 
 
+istd::CIndex2d CVector2d::ToIndex2d() const
+{
+	return istd::CIndex2d(int(GetX()), int(GetY()));
+}
+
+
 CVector2d CVector2d::GetNormalized(double length) const
 {
 	CVector2d retVal;

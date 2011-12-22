@@ -5,6 +5,9 @@
 // STL includes
 #include <cmath>
 
+
+// ACF includes
+#include "istd/CIndex2d.h"
 #include "imath/TVector.h"
 
 #include "i2d/i2d.h"
@@ -27,10 +30,14 @@ public:
 		Please note, elements will be not initilized.
 	 */
 	CVector2d();
+	
 	/**
 		Construct initializing elements to specified values.
 	 */
 	CVector2d(double x, double y);
+	
+	CVector2d(const istd::CIndex2d& index);
+
 	/**
 		Copy constructor.
 	 */
@@ -85,6 +92,11 @@ public:
 	 */
 	CVector2d GetOrthogonal() const;
 
+	/**
+		Get vector converted to 2D index.
+	*/
+	istd::CIndex2d ToIndex2d() const;
+
 	using BaseClass::GetNormalized;
 	/**
 		Return normalized vector with the same direction and specified length.
@@ -122,6 +134,13 @@ inline CVector2d::CVector2d(double x, double y)
 inline CVector2d::CVector2d(const imath::TVector<2>& vector)
 :	BaseClass(vector)
 {
+}
+
+
+inline CVector2d::CVector2d(const istd::CIndex2d& index)
+{
+	operator[](0) = index.GetX();
+	operator[](1) = index.GetY();
 }
 
 
