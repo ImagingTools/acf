@@ -13,6 +13,7 @@
 #include "imod/CMultiModelDispatcherBase.h"
 
 #include "iprm/ISelectionParam.h"
+#include "iqtgui/IIconProvider.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -77,6 +78,8 @@ public:
 	I_BEGIN_COMPONENT(CSelectionParamGuiComp);
 		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Command label for the options selector", false, "Select");
 		I_ASSIGN(m_infoLabelAttrPtr, "InfoLabel", "Information label for the options selector", false, "Info");
+		I_ASSIGN(m_infoIconProviderCompPtr, "InfoIconProvider", "Provider of the info icon", false, "InfoIconProvider");
+		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of the used icons", false, 32);
 		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode. 0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", false, UM_COMBOBOX);
 		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
 	I_END_COMPONENT;
@@ -112,6 +115,8 @@ private:
 	I_ATTR(istd::CString, m_infoLabelAttrPtr);
 	I_ATTR(int, m_uiModeAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
+	I_REF(iqtgui::IIconProvider, m_infoIconProviderCompPtr);
+	I_ATTR(int, m_iconSizeAttrPtr);
 
 	istd::TPointerVector<QComboBox> m_comboBoxes;
 	istd::TPointerVector<QRadioButton> m_radioButtons;

@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>CComposedParamsSetGuiComp</class>
- <widget class="QWidget" name="CComposedParamsSetGuiComp" >
-  <property name="geometry" >
+ <widget class="QWidget" name="CComposedParamsSetGuiComp">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,63 +10,63 @@
     <height>438</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" >
-   <property name="margin" >
+  <layout class="QVBoxLayout" name="InternalLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="ParamsFrame" >
-     <property name="frameShape" >
+    <widget class="QFrame" name="ParamsFrame">
+     <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="frameShadow" >
+     <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="LoaderFrame" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
+    <widget class="QFrame" name="LoaderFrame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="frameShape" >
+     <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="frameShadow" >
+     <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout" >
-      <property name="margin" >
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="SaveParamsButton" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <widget class="QPushButton" name="SaveParamsButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>Save...</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="LoadParamsButton" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <widget class="QPushButton" name="LoadParamsButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>Load...</string>
         </property>
        </widget>

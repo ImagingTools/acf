@@ -87,11 +87,13 @@ bool CSelectableParamsSetComp::SetSelectedOptionIndex(int index)
 	if (index != m_selectedIndex){
 		I_ASSERT(m_paramsManagerCompPtr.IsValid());
 
-		istd::CChangeNotifier notifier(this, CF_SELECTION_CHANGED);
+		if (m_paramsManagerCompPtr->SetSelectedOptionIndex(index)){
+			istd::CChangeNotifier notifier(this, CF_SELECTION_CHANGED);
 
-		m_selectedIndex = index;
+			m_selectedIndex = index;
 
-		SetupCurrentParamsSetBridge();
+			SetupCurrentParamsSetBridge();
+		}
 	}
 
 	return true;
@@ -206,7 +208,28 @@ void CSelectableParamsSetComp::OnComponentCreated()
 	if (m_defaultIndexAttrPtr.IsValid()){
 		SetSelectedOptionIndex(*m_defaultIndexAttrPtr);
 	}
+
+	if (m_paramsManagerCompPtr.IsValid()){
+		imod::IModel* managerModePtr = dynamic_cast<imod::IModel*>(m_paramsManagerCompPtr.GetPtr());
+		if (managerModePtr != NULL){
+			managerModePtr->AttachObserver(this);
+		}
+	}
 }
+
+
+void CSelectableParamsSetComp::OnComponentDestroyed()
+{
+	if (m_paramsManagerCompPtr.IsValid()){
+		imod::IModel* managerModePtr = dynamic_cast<imod::IModel*>(m_paramsManagerCompPtr.GetPtr());
+		if (managerModePtr != NULL && managerModePtr->IsAttached(this)){
+			managerModePtr->DetachObserver(this);
+		}
+	}
+
+	BaseClass::OnComponentDestroyed();
+}
+
 
 
 // public methods of the embedded class CurrentParamsSetObserver

@@ -126,17 +126,21 @@ bool CComposedStateControllerComp::TryLeaveState(bool isActionAllowed, const ISt
 
 void CComposedStateControllerComp::UpdateAllMembers()
 {
-	bool isEnabled = false;
+	bool isEnabled = true;
 
 	int slavesCount = m_slaveControllersCompPtr.GetCount();
 	for (int i = 0; i < slavesCount; ++i){
 		const iproc::IStateController* slaveConstrollerPtr = m_slaveControllersCompPtr[i];
-		if ((slaveConstrollerPtr != NULL) && slaveConstrollerPtr->IsStateEnabled()){
-			isEnabled = true;
+		if (slaveConstrollerPtr != NULL){
+			isEnabled = isEnabled && slaveConstrollerPtr->IsStateEnabled();
 		}
 	}
 
-	m_isStateEnabled = isEnabled;
+	if (m_isStateEnabled != isEnabled){
+		istd::CChangeNotifier notifier(this, CF_STATE_ENABLED);
+
+		m_isStateEnabled = isEnabled;
+	}
 }
 
 
@@ -144,7 +148,7 @@ void CComposedStateControllerComp::UpdateAllMembers()
 
 void CComposedStateControllerComp::OnModelChanged(int /*modelId*/, int changeFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if ((changeFlags & (CF_STATE_ENTERED | CF_STATE_LEAVED | CF_GRAPH_CHANGED)) != 0){
+	if ((changeFlags & (CF_STATE_ENTERED | CF_STATE_LEAVED | CF_GRAPH_CHANGED | CF_STATE_ENABLED)) != 0){
 		istd::CChangeNotifier notifier(this, changeFlags);
 
 		UpdateAllMembers();

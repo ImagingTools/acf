@@ -204,15 +204,19 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CComposedStateControllerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionConsistencyControllerComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CWizardDocumentComp.cpp"
+				RelativePath="..\CStateControllerCompBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CComposedStateControllerComp.cpp"
+				RelativePath="..\CWizardDocumentComp.cpp"
 				>
 			</File>
 		</Filter>
@@ -221,15 +225,19 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CComposedStateControllerComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectionConsistencyControllerComp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CWizardDocumentComp.h"
+				RelativePath="..\CStateControllerCompBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CComposedStateControllerComp.h"
+				RelativePath="..\CWizardDocumentComp.h"
 				>
 			</File>
 			<File

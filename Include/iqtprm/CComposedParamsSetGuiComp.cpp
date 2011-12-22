@@ -236,6 +236,12 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 		m_currentGuiIndex = -1;
 	}
 
+	if(*m_useVerticalSpacerAttrPtr){
+		QSpacerItem* VerticalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+		layoutPtr->layout()->addItem(VerticalSpacer);
+	}
+
 	BaseClass::OnGuiCreated();
 }
 

@@ -119,15 +119,25 @@ void COptionsManagerGuiComp::OnGuiShown()
 {
 	BaseClass::OnGuiShown();
 
+	int iconSize = 32;
+	if (m_iconSizeAttrPtr.IsValid()){
+		iconSize = *m_iconSizeAttrPtr;
+	}
+
 	if (m_infoLabelAttrPtr.IsValid()){
 		InfoLabel->setText(iqt::GetQString(*m_infoLabelAttrPtr));
 
 		InfoIcon->setScaledContents(true);
-		InfoIcon->setMaximumWidth(32);
-		InfoIcon->setMaximumHeight(32);
-		InfoIcon->setMinimumWidth(32);
-		InfoIcon->setMinimumHeight(32);
-		InfoIcon->setPixmap(QPixmap(":/Icons/About"));
+		InfoIcon->setMaximumWidth(iconSize);
+		InfoIcon->setMaximumHeight(iconSize);
+		InfoIcon->setMinimumWidth(iconSize);
+		InfoIcon->setMinimumHeight(iconSize);
+		if (m_infoIconProviderCompPtr.IsValid() && m_infoIconProviderCompPtr->GetIconCount() > 0){
+			InfoIcon->setPixmap(m_infoIconProviderCompPtr->GetIcon(0).pixmap(iconSize, iconSize, QIcon::Normal, QIcon::On));
+		}
+		else{
+			InfoIcon->setPixmap(QPixmap(":/Icons/About"));
+		}
 	}
 }
 
