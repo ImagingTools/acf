@@ -23,7 +23,7 @@
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC8/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="..\..\..\..\..\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -57,6 +57,7 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
+				TypeLibraryName="./iwin/ReleaseVC7/iwin.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
@@ -110,7 +111,7 @@
 			OutputDirectory="../../../../../Lib/$(ConfigurationName)VC8/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			InheritedPropertySheets="..\..\..\..\..\Config\VC8\Static.vsprops"
+			InheritedPropertySheets="$(ACFDIR)\Config\VC8\Static.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -144,6 +145,7 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
+				TypeLibraryName="./iwin/DebugVC7/iwin.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
