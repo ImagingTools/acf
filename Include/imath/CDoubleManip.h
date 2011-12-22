@@ -2,7 +2,7 @@
 #define imath_CDoubleManip_included
 
 
-#include "imath/TIValueManip.h"
+#include "imath/IDoubleManip.h"
 
 
 namespace imath
@@ -26,6 +26,9 @@ public:
 		Set point character.
 	 */
 	void SetPointChar(char pointChar);
+
+	// reimplemented (imath::IDoubleManip)
+	virtual int GetPrecision() const;
 
 	// reimplemented (imath::TIValueManip)
 	virtual double GetRounded(const double& value) const;

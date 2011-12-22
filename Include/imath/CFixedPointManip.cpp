@@ -28,6 +28,14 @@ void CFixedPointManip::SetRoundingType(RoundingType roundingType)
 }
 
 
+// reimplemented (imath::IDoubleManip)
+
+int CFixedPointManip::GetPrecision() const
+{
+	return m_precision;
+}
+
+
 // reimplemented (imath::TIValueManip)
 
 std::string CFixedPointManip::GetString(const double& value) const

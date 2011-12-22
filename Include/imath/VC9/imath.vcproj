@@ -223,6 +223,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDoubleManip.h"
+				>
+			</File>
+			<File
 				RelativePath="..\imath.h"
 				>
 			</File>

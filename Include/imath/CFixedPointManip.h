@@ -37,12 +37,6 @@ public:
 	CFixedPointManip(int precision = 1, RoundingType roundingType = RT_NORMAL);
 
 	/**
-		Get fixed point precision.
-		Please note, that also negative values are allowed.
-	 */
-	int GetPrecision() const;
-
-	/**
 		Set fixed point precision.
 	 */
 	void SetPrecision(int precision);
@@ -54,6 +48,9 @@ public:
 	/**	Set type of rounding.
 	 */
 	void SetRoundingType(RoundingType roundingType);
+
+	// reimplemented (imath::IDoubleManip)
+	virtual int GetPrecision() const;
 
 	// reimplemented (imath::TIValueManip)
 	virtual double GetRounded(const double& value) const;
@@ -86,12 +83,6 @@ private:
 
 
 // inline methods
-
-inline int CFixedPointManip::GetPrecision() const
-{
-	return m_precision;
-}
-
 
 inline CFixedPointManip::RoundingType CFixedPointManip::GetRoundingType() const
 {

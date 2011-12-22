@@ -15,6 +15,14 @@ CDoubleManip::CDoubleManip()
 }
 
 
+// reimplemented (imath::IDoubleManip)
+
+int CDoubleManip::GetPrecision() const
+{
+	return 15;	// approximated precision of type double with the leading digit before the point
+}
+
+
 // reimplemented (imath::TIValueManip)
 
 std::string CDoubleManip::GetString(const double& value) const

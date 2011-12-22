@@ -6,7 +6,7 @@
 
 #include "iser/ISerializable.h"
 
-#include "imath/TIValueManip.h"
+#include "imath/IDoubleManip.h"
 #include "imath/CVarVector.h"
 
 #include "icmm/icmm.h"

@@ -10,7 +10,7 @@
 #include "iser/ISerializable.h"
 #include "iser/CArchiveTag.h"
 
-#include "imath/TIValueManip.h"
+#include "imath/IDoubleManip.h"
 #include "imath/TVector.h"
 #include "imath/CVarVector.h"
 

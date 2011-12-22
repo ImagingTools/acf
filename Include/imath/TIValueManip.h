@@ -14,9 +14,9 @@ namespace imath
 {
 
 
-/**	Interface for all classes providing simply arithmetic functions on predefined
- *		data type.
- */
+/**
+	Interface for all classes providing simply arithmetic functions on predefined data type.
+*/
 template <class ValueType>
 class TIValueManip: virtual public istd::IPolymorphic
 {
@@ -64,10 +64,6 @@ public:
 	 */
 	virtual ValueType GetBiggerValue(const ValueType& value) const = 0;
 };
-
-
-typedef TIValueManip<float> IFloatManip;
-typedef TIValueManip<double> IDoubleManip;
 
 
 } // namespace imath
