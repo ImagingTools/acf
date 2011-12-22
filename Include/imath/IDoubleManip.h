@@ -2,9 +2,11 @@
 #define imath_IDoubleManip_included
 
 
-
+// STL includes
 #include <string>
 
+
+// ACF includes
 #include "istd/IPolymorphic.h"
 
 #include "imath/TIValueManip.h"
