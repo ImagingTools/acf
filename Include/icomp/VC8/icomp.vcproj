@@ -374,6 +374,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IExtPackagesManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IMetaInfoManager.h"
 				>
 			</File>

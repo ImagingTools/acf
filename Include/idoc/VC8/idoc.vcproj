@@ -259,6 +259,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDocumentTypesInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IHelpFileProvider.h"
 				>
 			</File>

@@ -179,10 +179,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CExtendedDocumentTemplateComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CHtmlHelpGuiComp.cpp"
 				>
 			</File>
@@ -266,10 +262,6 @@
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath="..\Generated\moc_CExtendedDocumentTemplateComp.cpp"
-				>
-			</File>
 			<File
 				RelativePath="..\Generated\moc_CMainWindowGuiComp.cpp"
 				>
