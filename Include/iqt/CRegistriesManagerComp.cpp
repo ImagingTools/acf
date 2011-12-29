@@ -260,7 +260,8 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 		retVal = retVal && archive.BeginTag(filePathTag);
 		istd::CString filePath;
 		retVal = retVal && archive.Process(filePath);
-		LoadConfigFile(iqt::GetCString(baseDir.absoluteFilePath(iqt::GetQString(filePath))));
+		QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(filePath));
+		LoadConfigFile(iqt::GetCString(baseDir.absoluteFilePath(enrolledPath)));
 
 		retVal = retVal && archive.EndTag(filePathTag);
 	}
@@ -326,18 +327,15 @@ bool CRegistriesManagerComp::LoadConfigFile(const istd::CString& configFile)
 
 bool CRegistriesManagerComp::CheckAndMarkPath(PathList& pathList, const QDir& directory, const istd::CString& path, istd::CString& resultPath) const
 {
-	SendVerboseMessage(istd::CString("Check path: ") + path);
-
 	QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path));
-	SendVerboseMessage(istd::CString("Enrolled path: ") + iqt::GetCString(enrolledPath));
-
-	istd::CString fullPath = iqt::GetCString(directory.absoluteFilePath(enrolledPath));
-	SendVerboseMessage(istd::CString("Full path: ") + fullPath);
+	istd::CString fullPath = iqt::GetCString(QFileInfo(directory.absoluteFilePath(enrolledPath)).canonicalFilePath());
 
 	if (pathList.find(fullPath) == pathList.end()){
 		pathList.insert(fullPath);
 
 		resultPath = fullPath;
+
+		SendVerboseMessage(istd::CString(">> new path: ") + resultPath + " (" + path + ")");
 
 		return true;
 	}
