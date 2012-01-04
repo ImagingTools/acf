@@ -22,8 +22,9 @@ class ITimer: virtual public istd::IChangeable
 public:
 	/**
 		Start the timer.
+		\param	elapsed	optional current elapsed time.
 	*/
-	virtual void Start() = 0;
+	virtual void Start(double elapsedTime = 0) = 0;
 
 	/**
 		Return the time in seconds from start until this call.

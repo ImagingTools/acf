@@ -27,10 +27,15 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(TLoggerCompWrap);
 		I_ASSIGN(m_logCompPtr, "Log", "Consumer log messages", false, "Log");
-		I_ASSIGN(m_verboseEnabledAttrPtr, "EnableVerbose", "If enabled, verbose messages can be produced", false, false);
+		I_ASSIGN(m_verboseEnabledAttrPtr, "EnableVerbose", "If enabled, verbose messages can be produced", true, false);
 	I_END_COMPONENT;
 
 protected:
+	/**
+		Check if verbose messages are eneabled.
+	*/
+	bool IsVerboseEnabled() const;
+
 	/**
 		Send verbose message. If \c m_verboseEnabledAttrPtr is not enabled, the function does nothiing.
 	*/
@@ -56,9 +61,16 @@ private:
 // protected methods
 	
 template <class Base>
+bool TLoggerCompWrap<Base>::IsVerboseEnabled() const
+{
+	return *m_verboseEnabledAttrPtr;
+}
+
+
+template <class Base>
 void TLoggerCompWrap<Base>::SendVerboseMessage(const istd::CString& message, const istd::CString& messageSource) const
 {
-	if (m_verboseEnabledAttrPtr.IsValid() && *m_verboseEnabledAttrPtr){
+	if (*m_verboseEnabledAttrPtr){
 		BaseClass::SendInfoMessage(0, message, messageSource);
 	}
 }
