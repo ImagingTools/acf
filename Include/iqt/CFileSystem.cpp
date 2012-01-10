@@ -66,7 +66,7 @@ bool CFileSystem::IsPresent(const istd::CString& filePath) const
 
 bool CFileSystem::CreateFileCopy(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
 {
-	QString inputFilePath = iqt::GetQString(outputFile);
+	QString inputFilePath = iqt::GetQString(inputFile);
 	QFileInfo inputFileInfo(inputFilePath);
 	if (!inputFileInfo.exists()){
 		return false;
@@ -83,7 +83,7 @@ bool CFileSystem::CreateFileCopy(const istd::CString& inputFile, const istd::CSt
 		}
 	}
 
-	return QFile::copy(iqt::GetQString(inputFile), outputFilePath);
+	return QFile::copy(inputFilePath, outputFilePath);
 }
 
 
