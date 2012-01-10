@@ -327,18 +327,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CXslSerializerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CXslTransformationReadArchive.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CXslTransformationWriteArchive.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\iqt.cpp"
 				>
 			</File>
@@ -502,18 +490,6 @@
 			</File>
 			<File
 				RelativePath="..\CXmlFileWriteArchive.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CXslSerializerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CXslTransformationReadArchive.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CXslTransformationWriteArchive.h"
 				>
 			</File>
 			<File
