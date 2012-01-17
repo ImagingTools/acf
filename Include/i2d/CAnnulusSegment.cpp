@@ -68,6 +68,40 @@ CRectangle CAnnulusSegment::GetBoundingBox() const
 }
 
 
+bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
+{
+	double r = point.GetLength();
+	double phi = atan2(point.GetY(), point.GetX());
+
+	if (r < GetInnerRadius() || r > GetOuterRadius()){
+		return false;
+	}
+
+	if(m_angleRange.IsEmpty()){
+		return true;
+	}
+
+	if ( fabs(phi) > I_2PI)
+		phi = fmod(phi, I_2PI);
+
+	if (phi < 0)
+		phi += I_2PI;
+
+	if (GetBeginAngle() < GetEndAngle()){
+		if(phi > GetBeginAngle() && phi < GetEndAngle()){
+			return true;
+		}
+	}
+	else if (GetBeginAngle() > GetEndAngle()){
+		if(phi > GetBeginAngle() && phi > GetEndAngle()){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CAnnulusSegment::Serialize(iser::IArchive& archive)

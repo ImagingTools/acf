@@ -27,7 +27,15 @@ public:
 	double GetEndAngle() const;
 	void SetEndAngle(double angle);
 
+	/**
+		Get bounding box of the annulus segment object.
+	*/
 	virtual CRectangle GetBoundingBox() const;
+
+	/**
+		Return \c true if a given point is inside of annulus segment area.
+	*/
+	bool Contains(const i2d::CVector2d& point) const; 
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
