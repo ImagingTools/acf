@@ -216,6 +216,12 @@ double CLine2d::GetLength() const
 }
 
 
+double CLine2d::GetLength2() const
+{
+	return GetDiffVector().GetLength2();
+}
+
+
 CLine2d CLine2d::GetClipped(const CRectangle& rect) const
 {
 	static CLine2d emptyLine(CVector2d(0, 0), CVector2d(0, 0));
@@ -292,6 +298,167 @@ CRectangle CLine2d::GetBoundingBox() const
 	double bottom = istd::Max(m_point1.GetY(), m_point2.GetY());
 
 	return CRectangle(left, top, right - left, bottom - top);
+}
+
+
+
+void CLine2d::PushBeginPoint(const i2d::CVector2d& newBeginPoint)
+{
+	SetPoint2(GetPoint1());
+	SetPoint1(newBeginPoint);
+}
+
+
+
+void CLine2d::PushEndPoint(const i2d::CVector2d& newEndPoint)
+{
+	SetPoint1(GetPoint2());
+	SetPoint2(newEndPoint);
+}
+
+
+bool CLine2d::GetCutPoint(const CLine2d& otherLine, i2d::CVector2d& cutPoint) const
+{
+	if (!IsIntersectedBy(otherLine)){
+		return false;
+	}
+
+	double x1 = otherLine.GetPoint1().GetX();
+	double x2 = otherLine.GetPoint2().GetX();
+
+	double y1 = otherLine.GetPoint1().GetY();
+	double y2 = otherLine.GetPoint2().GetY();
+
+	double x3 = GetPoint1().GetX();
+	double x4 = GetPoint2().GetX();
+
+	double y3 = GetPoint1().GetY();
+	double y4 = GetPoint2().GetY();
+
+	if (x1 == x2 && y3 == y4){
+		cutPoint = i2d::CVector2d(x1,y3);
+		return true;
+	}
+
+	if (y1 == y2 && x3 == x4){
+		cutPoint = i2d::CVector2d(x3,y1);
+		return true;
+	}
+
+	double dx1 = x2 - x1;
+	if (fabs(dx1) < I_BIG_EPSILON){
+		dx1 = I_BIG_EPSILON;
+	}
+
+	double dx2 = x4 - x3;
+	if (fabs(dx2) < I_BIG_EPSILON){
+		dx2 = I_BIG_EPSILON;
+	}
+
+	double m1 = (y2 - y1) / dx1;
+	double m2 = (y4 - y3) / dx2;
+
+	// no intersection was found:
+	if ( fabs(m2 - m1) < I_BIG_EPSILON){
+		return false;
+	}
+
+	double b1 = -(-x2 * y1 + y2 * x1) / dx1;
+	double b2 = -(-x4 * y3 + y4 * x3) / dx2;
+
+	double x = (b2 - b1) / (m1 - m2);
+	double y = m1 * x + b1;
+
+	cutPoint = i2d::CVector2d(x,y);
+	return true;
+}
+
+
+
+i2d::CVector2d CLine2d::GetNearestPoint(const i2d::CVector2d& point) const
+{
+	double alpha = GetDistance(point);
+
+	if (alpha <= 0){
+		return m_point1;
+	}
+	else if (alpha >= 1){
+		return m_point2;
+	}
+	else{
+		return GetPositionFromAlpha(alpha);
+	}
+}
+
+
+CLine2d CLine2d::GetShortestEndConnection(const CLine2d& line) const
+{
+	double dist1 = m_point1.GetDistance(line.m_point1);
+	double dist2 = m_point2.GetDistance(line.m_point1);
+	double dist3 = m_point1.GetDistance(line.m_point2);
+	double dist4 = m_point2.GetDistance(line.m_point2);
+	if ((dist1 < dist2) && (dist1 < dist3) && (dist1 < dist4)){
+		return CLine2d(m_point1, line.m_point1);
+	}
+	else if ((dist2 < dist3) && (dist2 < dist4)){
+		return CLine2d(m_point2, line.m_point1);
+	}
+	else if (dist3 < dist4){
+		return CLine2d(m_point1, line.m_point2);
+	}
+	else{
+		return CLine2d(m_point2, line.m_point2);
+	}
+}
+
+
+CLine2d CLine2d::GetShortestConnectionToNext(const CLine2d& line) const
+{	// TODO: implement it better
+	double dist1 = line.GetDistance(m_point2);
+	double dist2 = GetDistance(line.m_point1);
+	if (dist1 < dist2){
+		return CLine2d(m_point2, line.GetNearestPoint(m_point2));
+	}
+	else{
+		return CLine2d(GetNearestPoint(line.m_point1), line.m_point1);
+	}
+}
+
+
+CLine2d CLine2d::GetShortestConnection(const i2d::CVector2d& point) const
+{
+	double alpha = GetDistance(point);
+
+	if (alpha <= 0){
+		return CLine2d(m_point1, point);
+	}
+	else if (alpha >= 1){
+		return CLine2d(m_point2, point);
+	}
+	else{
+		return CLine2d(GetPositionFromAlpha(alpha), point);
+	}
+}
+
+
+CLine2d CLine2d::GetShortestConnection(const CLine2d& line) const
+{	// TODO: implement it better
+	double dist1 = line.GetDistance(m_point1);
+	double dist2 = line.GetDistance(m_point2);
+	double dist3 = GetDistance(line.m_point1);
+	double dist4 = GetDistance(line.m_point2);
+	if ((dist1 < dist2) && (dist1 < dist3) && (dist1 < dist4)){
+		return CLine2d(m_point1, line.GetNearestPoint(m_point1));
+	}
+	else if ((dist2 < dist3) && (dist2 < dist4)){
+		return CLine2d(m_point2, line.GetNearestPoint(m_point2));
+	}
+	else if (dist3 < dist4){
+		return CLine2d(GetNearestPoint(line.m_point1), line.m_point1);
+	}
+	else{
+		return CLine2d(GetNearestPoint(line.m_point2), line.m_point2);
+	}
 }
 
 

@@ -92,7 +92,7 @@ public:
 	bool IsIntersectedBy(const CLine2d& line) const;
 
 	/**
-		Get intersecition position of two lines.
+		Get intersection position of two lines.
 		\param	line	second line.
 		\param	result	object will be set to intersection point.
 		\return	true if lines intersects and intersection could be calculated.
@@ -100,7 +100,7 @@ public:
 	bool GetIntersection(const CLine2d& line, CVector2d& result) const;
 
 	/**
-		Get intersecition position of extended lines.
+		Get intersection position of extended lines.
 		As extended line are mean mathematical lines going over specified line points.
 		\param	line	second line.
 		\param	result	object will be set to intersection point.
@@ -136,6 +136,11 @@ public:
 	double GetLength() const;
 
 	/**
+		Get quadratic distance between line points.
+	*/
+	double GetLength2() const;
+
+	/**
 		Get part of line intersecting specified rectangle.
 	*/
 	CLine2d GetClipped(const CRectangle& rect) const;
@@ -146,6 +151,11 @@ public:
 	CLine2d GetSwapped() const;
 
 	/**
+		Get bounding box of this line.
+	*/
+	virtual CRectangle GetBoundingBox() const;
+
+	/**
 		Get Y position of cutting this line by specified horizontal line.
 	*/
 	double GetCutXPos(double linePosY) const;
@@ -154,7 +164,55 @@ public:
 	*/
 	double GetCutYPos(double linePosX) const;
 
-	virtual CRectangle GetBoundingBox() const;
+	/**	
+		Copy begin point to end point and set new begin point.
+	*/
+	void PushBeginPoint(const i2d::CVector2d& newBeginPoint);
+
+	/**	
+		Copy end point to begin point and set new end point.
+	*/
+	void PushEndPoint(const i2d::CVector2d& newEndPoint);
+
+	/**
+		Get a proportion of lines cut point to line length.
+	*/
+	double GetCutAlpha(const CLine2d& line) const;
+
+	double GetCastAlpha(const i2d::CVector2d& point) const;
+
+	bool CutDisk(const i2d::CVector2d& center, double radius) const;
+
+	::std::pair<double, double> GetAlphaAndCastDistance(const i2d::CVector2d& point) const;
+
+	bool GetCutPoint(const CLine2d& otherLine, i2d::CVector2d& cutPoint) const;
+
+	/**
+		Return a line point, which is the nearest to the specified point.
+	*/
+	i2d::CVector2d GetNearestPoint(const i2d::CVector2d& point) const;
+	
+	/**
+		Return a line, which connects the nearest end points of two lines.
+	*/
+	CLine2d GetShortestEndConnection(const CLine2d& line) const;
+	
+	/**	
+		Return a line, which connects the nearest points of two lines.
+		Only connection between end point of first line and second line
+		or connection between first line and begin point of second line will be checked.
+	*/
+	CLine2d GetShortestConnectionToNext(const CLine2d& line) const;
+	
+	/**
+		Return a line, which connects the nearest point of line and specified point.
+	*/
+	CLine2d GetShortestConnection(const i2d::CVector2d& point) const;
+	
+	/**
+		Return a line, which connects the nearest points of two lines.
+	*/
+	CLine2d GetShortestConnection(const CLine2d& line) const;
 
 	// reimplemented (i2d::IObject2d)
 	virtual CVector2d GetCenter() const;
@@ -177,6 +235,7 @@ public:
 				IObject2d& result,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
 				double* errorFactorPtr = NULL) const;
+
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -251,6 +310,67 @@ inline double CLine2d::GetCutYPos(double linePosX) const
 	CVector2d diff = GetDiffVector();
 
 	return (linePosX - m_point1.GetX()) * diff.GetY() / diff.GetX() + m_point1.GetY();
+}
+
+
+inline double CLine2d::GetCutAlpha(const CLine2d& line) const
+{
+	const i2d::CVector2d& delta = GetDiffVector();
+	const i2d::CVector2d& lineDelta = line.GetDiffVector();
+	const i2d::CVector2d& beginPoint = GetPoint1();
+	const i2d::CVector2d& lineBeginPoint = line.GetPoint1();
+
+	double crossProductZ = lineDelta.GetCrossProductZ(delta);
+
+	return (beginPoint.GetCrossProductZ(delta) + delta.GetCrossProductZ(lineBeginPoint)) / crossProductZ;
+}
+
+
+inline double CLine2d::GetCastAlpha(const i2d::CVector2d& point) const
+{
+	i2d::CVector2d delta = GetDiffVector();
+	i2d::CVector2d deltaToPoint = point - m_point1;
+
+	double dotProduct = delta.GetDotProduct(deltaToPoint);
+	return dotProduct / delta.GetLength2();
+}
+
+
+inline bool CLine2d::CutDisk(const i2d::CVector2d& center, double radius) const
+{
+	const i2d::CVector2d& delta = GetDiffVector();
+	const i2d::CVector2d& deltaToCenter = m_point1 - center;
+
+	double a = delta.GetLength2();
+	if (a < I_BIG_EPSILON * I_BIG_EPSILON){
+		return (m_point1.GetDistance2(center) <= radius * radius);
+	}
+	double b = delta.GetDotProduct(deltaToCenter);
+	double c = deltaToCenter.GetLength2() - radius * radius;
+
+	double D = b * b - a * c;
+	if (D >= 0){
+		double sqrtD = ::sqrt(D);
+
+		double alpha1 = (-b - sqrtD) / a;
+		double alpha2 = (-b + sqrtD) / a;
+		if ((alpha1 < 1) && (alpha2 > 0)){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+inline ::std::pair<double, double> CLine2d::GetAlphaAndCastDistance(const i2d::CVector2d& point) const
+{
+	i2d::CVector2d delta = m_point2 - m_point1;
+	i2d::CVector2d deltaToPoint = point - m_point1;
+
+	double dotProduct = delta.GetDotProduct(deltaToPoint);
+	double field = delta.GetCrossProductZ(deltaToPoint);
+	double deltaLength2 = delta.GetLength2();
+	return ::std::pair<double, double>(dotProduct / deltaLength2, field / ::sqrt(deltaLength2));
 }
 
 

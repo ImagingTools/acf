@@ -45,6 +45,18 @@ CRectangle CCircle::GetBoundingBox() const
 }
 
 
+bool CCircle::operator ==(const CCircle & ref) const
+{
+	return (ref.GetRadius() == GetRadius() && ref.GetPosition() == GetPosition()) ? true : false;
+}
+
+
+bool CCircle::operator !=(const CCircle & ref) const
+{
+	return !operator ==(ref);
+}
+
+
 // reimplemented (i2d::IObject2d)
 
 bool CCircle::Transform(
