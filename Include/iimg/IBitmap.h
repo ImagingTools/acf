@@ -44,14 +44,17 @@ public:
 			32-bit RGB bitmap with alpha channel.
 		*/
 		PF_RGBA,
+
 		/**
 			16-bit grayscale bitmap.
 		*/
 		PF_GRAY16,
+
 		/**
 			32-bit grayscale bitmap.
 		*/
 		PF_GRAY32,
+
 		/**
 			First user defined pixel format.
 		*/
@@ -64,6 +67,12 @@ public:
 		\sa PixelFormat
 	*/
 	virtual int GetPixelFormat() const = 0;
+
+	/**
+		Get \c true if the pixel format is supported by the bitmap implementation.
+		\param	pixelFormat		bitmap format. \sa PixelFormat
+	*/
+	virtual bool IsFormatSupported(PixelFormat pixelFormat) const = 0;
 
 	/**
 		Create bitmap with specified size and format.

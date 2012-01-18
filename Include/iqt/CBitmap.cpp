@@ -72,6 +72,20 @@ bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, 
 
 // reimplemented (iimg::IBitmap)
 
+bool CBitmap::IsFormatSupported(PixelFormat pixelFormat) const
+{
+	switch (pixelFormat){
+		case PF_MONO:
+		case PF_GRAY:
+		case PF_RGB:
+		case PF_RGBA:
+			return true;
+	}
+
+	return false;
+}
+
+
 int CBitmap::GetPixelFormat() const
 {
 	return CalcFromQtFormat(m_image.format());

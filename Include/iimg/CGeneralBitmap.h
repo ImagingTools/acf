@@ -20,6 +20,7 @@ public:
 	CGeneralBitmap();
 
 	// reimplemented (iimg::IBitmap)
+	virtual bool IsFormatSupported(PixelFormat pixelFormat) const;
 	virtual int GetPixelFormat() const;
 	virtual bool CreateBitmap(int pixelFormat, const istd::CIndex2d& size);
 	virtual bool CreateBitmap(int pixelFormat, const istd::CIndex2d& size, void* dataPtr, bool releaseFlag, int linesDifference = 0);

@@ -24,6 +24,12 @@ CGeneralBitmap::CGeneralBitmap()
 
 // reimplemented (iimg::IBitmap)
 
+bool CGeneralBitmap::IsFormatSupported(PixelFormat /*pixelFormat*/) const
+{
+	return true;
+}
+
+
 int CGeneralBitmap::GetPixelFormat() const
 {
 	return m_pixelFormat;
