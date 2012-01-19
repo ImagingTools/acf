@@ -4,6 +4,8 @@
 
 #include "iimg/IRasterImage.h"
 
+#include "i2d/CRectangle.h"
+
 
 namespace iimg
 {
@@ -61,6 +63,10 @@ public:
 		PF_USER = 256
 	};
 
+	/**
+		Create and copy bitmap region to the bitmap
+	*/
+	virtual bool CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRectangle& area) = 0;
 
 	/**
 		Get the bitmap's pixel format.

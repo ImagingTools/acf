@@ -6,9 +6,46 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
+#include "ibase/CSize.h"
+
 
 namespace iimg
 {
+
+
+bool CBitmapBase::CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRectangle& area)
+{
+	istd::CIndex2d sourceImageSize = sourceBitmap.GetImageSize();
+	i2d::CRectangle bitmapAoi;
+
+	bitmapAoi.SetLeft(::floor(area.GetLeft()));
+	bitmapAoi.SetRight(::ceil(area.GetRight()));
+	bitmapAoi.SetTop(::floor(area.GetTop()));
+	bitmapAoi.SetBottom(::ceil(area.GetBottom()));
+
+	bitmapAoi = bitmapAoi.GetIntersection(i2d::CRectangle(sourceImageSize));
+	if (bitmapAoi.IsEmpty()){
+		return false;
+	}
+
+	if (!CreateBitmap(sourceBitmap.GetPixelFormat(), ibase::CSize((int)bitmapAoi.GetWidth(), (int)bitmapAoi.GetHeight()))){
+		return false;
+	}
+
+	int top  = (int)bitmapAoi.GetTop();
+	int left = (int)bitmapAoi.GetLeft();
+
+	istd::CIndex2d size = GetImageSize();
+	int lineBytesCount = GetLineBytesCount();
+	for (int y = 0; y < size.GetY(); ++y){
+		I_BYTE* destLinePtr = (I_BYTE*)GetLinePtr(y);
+		I_BYTE* sourceLinePtr = ((I_BYTE*)sourceBitmap.GetLinePtr(y + top)) + left;
+
+		std::memcpy(destLinePtr, sourceLinePtr, lineBytesCount);
+	}
+
+	return true;
+}
 
 
 // reimplemented (iimg::IBitmap)
