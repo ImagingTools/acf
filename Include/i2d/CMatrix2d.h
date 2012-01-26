@@ -26,7 +26,7 @@ public:
 	CMatrix2d();
 	CMatrix2d(const CMatrix2d& transform);
 	/**
-		Contructor using 2 vectors to span the transformation space.
+		Constructor using 2 vectors to span the transformation space.
 	*/
 	CMatrix2d(const CVector2d& axisX, const CVector2d& axisY);
 	/**
@@ -34,7 +34,10 @@ public:
 	*/
 	CMatrix2d(double m11, double m12, double m21, double m22);
 
-	using BaseClass::Reset;
+	/**
+		Default reset to identity.
+	*/
+	void Reset();
 	/**
 		Set the matrix using specified angle (in radians) and uniform scale.
 	*/
@@ -88,11 +91,11 @@ public:
 	bool GetInvMultiplied(const i2d::CVector2d& position, i2d::CVector2d& result) const;
 
 	/**
-		Calculte inverted matrix.
+		Calculate inverted matrix.
 	*/
 	CMatrix2d GetInverted() const;
 	/**
-		Calculte inverted matrix.
+		Calculate inverted matrix.
 	*/
 	bool GetInverted(CMatrix2d& result) const;
 
@@ -103,7 +106,7 @@ public:
 	CMatrix2d GetTransposed() const;
 
 	/**
-		Calculate decomposition in form of QDQ where \c Q is ortogonal matrix and \c D is diagonal one.
+		Calculate decomposition in form of QDQ where \c Q is orthogonal matrix and \c D is diagonal one.
 	*/
 	bool GetDecompositionQDQ(i2d::CMatrix2d& matrixQ, i2d::CVector2d& diagonalD);
 
@@ -122,7 +125,7 @@ public:
 	*/
 	CMatrix2d operator*(double scale) const;
 	/**
-		Dividition by scalar number.
+		Division by scalar number.
 	*/
 	CMatrix2d operator/(double scale) const;
 

@@ -30,6 +30,8 @@ public:
 	typedef istd::CIndex2d IndexType;
 	typedef istd::CIndex2d SizesType;
 	typedef Element ElementType;
+	typedef imath::TVector<Height, Element> ColumnVector;
+	typedef imath::TVector<Width, Element> RowVector;
 
 	enum MatrixInitMode
 	{
@@ -276,6 +278,12 @@ public:
 		Get single column as vector.
 	*/
 	void GetColumnVector(int columnIndex, TVector<Height, Element>& result);
+
+	/**
+		Set a single column vector to matrix.
+	*/
+	void SetColumnVector(int columnIndex, const TVector<Height, Element>& columnVector);
+
 	/**
 		Get single row as vector.
 	*/
@@ -287,6 +295,7 @@ public:
 	TMatrix<Width, Height, Element> operator+(const TMatrix<Width, Height, Element>& matrix) const;
 	TMatrix<Width, Height, Element> operator-(const TMatrix<Width, Height, Element>& matrix) const;
 	TMatrix<Width, Height, Element> operator-();
+	
 	template <int SecondWidth>
 	TMatrix<SecondWidth, Height, Element> operator*(const TMatrix<SecondWidth, Width, Element>& matrix) const
 	{
@@ -762,9 +771,22 @@ template <int Width, int Height, typename Element>
 void TMatrix<Width, Height, Element>::GetColumnVector(int columnIndex, TVector<Height, Element>& result)
 {
 	I_ASSERT(columnIndex < Width);
+	I_ASSERT(columnIndex >= 0);
 
 	for (int y = 0; y < Height; ++y){
 		result[y] = m_elements[columnIndex][y];
+	}
+}
+
+
+template <int Width, int Height, typename Element>
+void TMatrix<Width, Height, Element>::SetColumnVector(int columnIndex, const TVector<Height, Element>& columnVector)
+{
+	I_ASSERT(columnIndex < Width);
+	I_ASSERT(columnIndex >= 0);
+
+	for (int y = 0; y < Height; ++y){
+		m_elements[columnIndex][y] = columnVector[y];
 	}
 }
 
