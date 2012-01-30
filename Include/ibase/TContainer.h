@@ -35,6 +35,7 @@ public:
 	ItemClass& GetAt(int index);
 	void PushBack(const ItemClass& item);
 	void PushFront(const ItemClass& item);
+	void InsertAt(const ItemClass& item, int index);
 	void PopBack();
 	void PopFront();
 	void RemoveAt(int index);
@@ -84,6 +85,18 @@ void TContainer<ItemClass, ContainerClass>::PushFront(const ItemClass& item)
 	istd::CChangeNotifier changePtr(this, CF_ELEMENT_ADDED);
 
 	std::front_inserter<ContainerClass>(m_items) = item;
+}
+
+
+template <typename ItemClass, typename ContainerClass>
+void TContainer<ItemClass, ContainerClass>::InsertAt(const ItemClass& item, int index)
+{
+	I_ASSERT(index >= 0);
+	I_ASSERT(index < int(m_items.size()));
+
+	istd::CChangeNotifier changePtr(this, CF_ELEMENT_ADDED);
+
+	std::inserter<ContainerClass>(m_items, m_items.begin() + index) = item;
 }
 
 

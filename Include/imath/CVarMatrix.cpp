@@ -339,6 +339,75 @@ bool CVarMatrix::GetTriangleDecomposed(
 }
 
 
+bool CVarMatrix::TransformR(int firstPartWidth)
+{
+	istd::CIndex2d size = GetSizes();
+
+	I_ASSERT(firstPartWidth < size.GetX());
+
+	// QR transformation using Householder's reflections.
+	for (int column = 0; column < firstPartWidth; column++){
+		// calculate Householder's vector.
+		double normA2 = 0;
+		int i;
+		for (i = column; i < size.GetY(); i++){
+			double element = GetAt(istd::CIndex2d(column, i));
+			normA2 += element * element;
+		}
+
+		if (::fabs(normA2) < I_EPSILON){
+			return false;
+		}
+
+		double element0 = GetAt(istd::CIndex2d(column, column));
+
+		double hhSign = (element0 >= 0)? 1: -1;
+		double lenghtA = sqrt(normA2);
+
+		double hhVector_0 = element0 + hhSign * lenghtA;	// v = a + e * |a|, where e = {1, 0, 0, ..., 0}'
+		double normV2 = normA2 + hhVector_0 * hhVector_0 - element0 * element0;	// norm2 := |v|^2;
+
+		// transform matrix R
+		istd::CIndex2d changedIndex;
+		for (int x = column + 1; x < size.GetX(); x++){
+			changedIndex.IncreaseAt(0);
+
+			// calculate dot product
+			changedIndex.SetY(column);
+			int y = column;
+
+			double dotProduct = GetAt(changedIndex) * hhVector_0;
+
+			for (y++; y < size.GetY(); y++){
+				changedIndex.IncreaseAt(1);
+
+				dotProduct += GetAt(changedIndex) * GetAt(istd::CIndex2d(column, changedIndex.GetY()));
+			}
+
+			double transConst = 2 * dotProduct / normV2;
+			// transform column: c = c - 2 * v * <c, v> / <v, v>, where <., .> is dot product operator
+			changedIndex.SetY(column);
+			GetAtRef(changedIndex) -= hhVector_0 * transConst;
+
+			y = column;
+
+			for (y++; y < size.GetY(); y++){
+				changedIndex.IncreaseAt(1);
+
+				GetAtRef(changedIndex) -= GetAt(istd::CIndex2d(column, changedIndex.GetY())) * transConst;
+			}
+		}
+
+		SetAt(istd::CIndex2d(column, column), -hhSign * lenghtA);
+		for (i = column + 1; i < size.GetY(); i++){
+			SetAt(istd::CIndex2d(column, i), 0.0);
+		}
+	}
+
+	return true;
+}
+
+
 bool CVarMatrix::GetSolvedTriangle(const CVarMatrix& vector, CVarMatrix& result, double accuracy) const
 {
 	istd::CIndex2d size = GetSizes();
@@ -370,28 +439,6 @@ bool CVarMatrix::GetSolvedTriangle(const CVarMatrix& vector, CVarMatrix& result,
 }
 
 
-bool imath::CVarMatrix::GetSolvedTriangle(imath::CVarMatrix& result) const
-{
-	istd::CIndex2d size = GetSizes();
-	I_ASSERT(size.GetY() >= size.GetX() - 1);
-
-	result.SetSizes(istd::CIndex2d(1, size.GetX() - 1));
-	for (int row = size.GetX() - 2; row >= 0; row--){
-		double dif = 0.0;
-		for (int i = size.GetX() - 2; i > row; i--){
-			dif += result[istd::CIndex2d(0, i)] * GetAt(istd::CIndex2d(i, row));
-		}
-		double diagonal = GetAt(istd::CIndex2d(row, row));
-		if (::fabs(diagonal) < I_BIG_EPSILON){
-			return false;
-		}
-		double value = (GetAt(istd::CIndex2d(size.GetX() - 1, row)) - dif) / diagonal;
-		result.SetAt(istd::CIndex2d(0, row), value);
-	}
-	return true;
-}
-
-
 bool CVarMatrix::GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, double accuracy) const
 {
 	CVarMatrix matrixR;
@@ -402,16 +449,6 @@ bool CVarMatrix::GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, doub
 	}
 
 	return false;
-}
-
-
-bool CVarMatrix::SolveLSP(imath::CVarMatrix& result)
-{
-	I_ASSERT(!IsEmpty());
-
-	istd::CIndex2d size = GetSizes();
-	int firstPart = size.GetX() - 1;
-	return TransformR(firstPart) && GetSolvedTriangle(result);
 }
 
 

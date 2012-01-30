@@ -143,18 +143,12 @@ public:
 		\return	true if linear equation system was solved.
 	*/
 	bool GetSolvedTriangle(const CVarMatrix& vector, CVarMatrix& result, double accuracy = I_BIG_EPSILON) const;
-	bool GetSolvedTriangle(imath::CVarMatrix& result) const;
 
 	/**
 		Solve 'Least Square Problem'.
 		Solve linear Least Square Problem for equation AX = Y, where A is a N * M matrix, N >= M, X is n * k matrix and Y is m * k matrix.
 	 */
 	bool GetSolvedLSP(const CVarMatrix& vector, CVarMatrix& result, double minHhNorm = I_BIG_EPSILON) const;
-
-	/**	Solve 'Least Square Problem' in place.
-	*		Please note, that values in this matrix will be changed.
-	*/
-	bool SolveLSP(imath::CVarMatrix& result);
 
 	/**
 		Get single column as vector.

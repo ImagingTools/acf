@@ -37,7 +37,12 @@ public:
 	virtual ~TFactorisableContainer();
 
 	/**
-		Adds the element to container. 
+		Insert the element to the container at the given index. 
+	*/
+	InterfaceClass* InsertElement(int index, const std::string& elementFactoryKey);
+
+	/**
+		Add the element to container. 
 	*/
 	InterfaceClass* AddElement(const std::string& elementFactoryKey);
 
@@ -94,6 +99,18 @@ InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const std::st
 	InterfaceClass* elementPtr = CreateElement(elementFactoryKey);
 	if (elementPtr != NULL){
 		BaseClass::PushBack(std::make_pair(elementPtr, elementFactoryKey));
+	}
+
+	return elementPtr;
+}
+
+
+template <class InterfaceClass>
+InterfaceClass* TFactorisableContainer<InterfaceClass>::InsertElement(int index, const std::string& elementFactoryKey)
+{
+	InterfaceClass* elementPtr = CreateElement(elementFactoryKey);
+	if (elementPtr != NULL){
+		BaseClass::InsertAt(std::make_pair(elementPtr, elementFactoryKey), index);
 	}
 
 	return elementPtr;

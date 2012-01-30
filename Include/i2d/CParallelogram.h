@@ -19,7 +19,7 @@ namespace i2d
 	This class defines parallelogram.
 	Internal is this parallelogram represents as 2D linear transformation (i2d::ITransformation2d),
 	but it is interpreted as a geometrical shape which is done,
-	if you transform unity quadrat [0, 1]X[0, 1] using this transformation.
+	if you transform unity quadrant [0, 1]X[0, 1] using this transformation.
 */
 class CParallelogram: virtual public i2d::IObject2d
 {
@@ -27,7 +27,7 @@ public:
 	virtual const i2d::CAffine2d& GetTransform() const;
 	virtual void SetTransform(const i2d::CAffine2d& transform);
 	virtual const i2d::CMatrix2d& GetDeformMatrix() const;
-	virtual void SetDeform(const i2d::CMatrix2d& deform);
+	virtual void SetDeformMatrix(const i2d::CMatrix2d& deform);
 
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
@@ -80,7 +80,7 @@ inline const i2d::CMatrix2d& CParallelogram::GetDeformMatrix() const
 }
 
 
-inline void CParallelogram::SetDeform(const i2d::CMatrix2d& deform)
+inline void CParallelogram::SetDeformMatrix(const i2d::CMatrix2d& deform)
 {
 	m_transform.SetDeformMatrix(deform);
 }
