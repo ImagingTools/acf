@@ -28,8 +28,8 @@ CDirection2d::CDirection2d(const CDirection2d& direction)
 CDirection2d::CDirection2d(double radian)
 	:	m_direction(radian)
 {
-	I_ASSERT(radian >= -I_PI - i2d_EPSYLON);
-	I_ASSERT(radian <= I_PI + i2d_EPSYLON);
+	I_ASSERT(radian >= -I_PI - I_BIG_EPSILON);
+	I_ASSERT(radian <= I_PI + I_BIG_EPSILON);
 
 	I_ASSERT(Invariant());
 }
@@ -150,7 +150,7 @@ CDirection2d CDirection2d::Avg(double weight, const CDirection2d& dir2) const
 		const double a(res.DistInRadian(*this));
 		const double b(res.DistInRadian(dir2));
 		const double c(DistInRadian(dir2));
-		I_ASSERT((a + b < c + i2d_EPSYLON) && (a + b > c - i2d_EPSYLON));
+		I_ASSERT((a + b < c + I_BIG_EPSILON) && (a + b > c - I_BIG_EPSILON));
 	);
 	
 	I_ASSERT(res.Invariant());
