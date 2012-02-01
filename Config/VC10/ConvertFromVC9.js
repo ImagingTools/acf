@@ -14,7 +14,7 @@ function TransformProject(fileSystem, shell, inputPath, outputPath, beQuiet, isT
 
     var text = inputFile.readAll();
     inputFile.close();
-    var re1 = /VC10/g;
+    var re1 = /VC9/g;
     text = text.replace(re1, "VC10");
 
     var outputFile = fileSystem.OpenTextFile(outputPath, 2, true);
@@ -32,7 +32,7 @@ function ProcessFolder(fileSystem, shell, folder, parentFolder, projEnabled, sln
 {
 	var retVal = new String;
 
-	if ((parentFolder != null) && (folder.Name.match("VC10") != null)){
+	if ((parentFolder != null) && (folder.Name.match("VC9") != null)){
 		var fileIter = new Enumerator(folder.files);
 		for (; !fileIter.atEnd(); fileIter.moveNext()){
 			var file = fileIter.item();
