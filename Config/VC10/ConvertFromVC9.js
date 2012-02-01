@@ -99,7 +99,7 @@ for (var i = 0; i < WScript.Arguments.length; ++i){
             projEnabled = false;
         }
         else if (argument.toUpperCase() == "-h"){
-			WScript.Echo("Usage: ConverFromVC8.js [-t] [-q] [-noSln] [-noProj] [-h]" + argument);
+			WScript.Echo("Usage: ConverFromVC10.js [-t] [-q] [-noSln] [-noProj] [-h]" + argument);
         }
         else{
 			WScript.Echo("Unknown parameter: " + argument);
