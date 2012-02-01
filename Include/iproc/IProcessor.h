@@ -148,7 +148,7 @@ public:
 	/**
 		Remove task from queue.
 		\param	taskId			ID of task returned by BeginTask() or -1 if all tasks are mean.
-	 */
+	*/
 	virtual void CancelTask(int taskId = -1) = 0;
 
 	/**

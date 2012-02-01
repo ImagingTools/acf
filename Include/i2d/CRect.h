@@ -60,71 +60,89 @@ public:
 
 	istd::CIndex2d GetCenter() const;
 
-	/**	Check if rectangle is valid.
-	 */
+	/**
+		Check if rectangle is valid.
+	*/
 	bool IsValid() const;
-	/**	Check if rectangle is empty.
-	 */
+	/**
+		Check if rectangle is empty.
+	*/
 	bool IsEmpty() const;
-	/** Check if all parameters are 0.
-	 */
+	/**
+		Check if all parameters are 0.
+	*/
 	bool IsNull() const;
-	/**	Get size of rectangle.
-	 */
+	/**
+		Get size of rectangle.
+	*/
 	ibase::CSize GetSize() const;
-	/**	Check if specified point lies inside.
-	 */
+	/**
+		Check if specified point lies inside.
+	*/
 	bool IsInside(const istd::CIndex2d& point) const;
-	/**	Check if specified rectangle lies inside.
-	 */
+	/**
+		Check if specified rectangle lies inside.
+	*/
 	bool IsInside(const CRect& rect) const;
-	/**	Check if specified rectangle lies fully outside.
-	 */
+	/**
+		Check if specified rectangle lies fully outside.
+	*/
 	bool IsOutside(const CRect& rect) const;
-	/**	Set all members to 0.
-	 */
+	/**
+		Set all members to 0.
+	*/
 	void Reset();
-	/**	Calculate union of this and second rectangle and stores result in this object.
-	 */
+	/**
+		Calculate union of this and second rectangle and stores result in this object.
+	*/
 	void Union(const CRect& rect);
-	/**	Get union of two rectangles.
-	 */
+	/**
+		Get union of two rectangles.
+	*/
 	void GetUnion(const CRect& rect, CRect& result) const;
-	/**	Get union of two rectangles.
-	 *		@overload
-	 */
+	/**
+		Get union of two rectangles.
+		\overload
+	*/
 	CRect GetUnion(const CRect& rect) const;
-	/**	Calculate union of this rectangle and point.
-	 *		Result is atored in this object.
-	 */
+	/**
+		Calculate union of this rectangle and point.
+		Result is atored in this object.
+	*/
 	void Union(istd::CIndex2d point);
-	/**	Get union of this rectangle and point.
-	 */
+	/**
+		Get union of this rectangle and point.
+	*/
 	CRect GetUnion(istd::CIndex2d point) const;
-	/**	Expand rectangle using second rectangle.
-	 *		Expanded rectangle is easy sum of coordinates of both rectangles.
-	 */
+	/**
+		Expand rectangle using second rectangle.
+		Expanded rectangle is easy sum of coordinates of both rectangles.
+	*/
 	void Expand(const CRect& rect);
-	/**	Get expanded rectangle.
-	 *		Expanded rectangle is easy sum of coordinates of both rectangles.
-	 */
+	/**
+		Get expanded rectangle.
+		Expanded rectangle is easy sum of coordinates of both rectangles.
+	*/
 	CRect GetExpanded(const CRect& rect) const;
-	/**	Calculate intersection of this and second rectangle and stores result in this object.
-	 */
+	/**
+		Calculate intersection of this and second rectangle and stores result in this object.
+	*/
 	void Intersection(const CRect& rect);
-	/**	Get intersection of two rectangles.
-	 */
+	/**
+		Get intersection of two rectangles.
+	*/
 	CRect GetIntersection(const CRect& rect) const;
-	/**	Move rectangle.
-	 */
+	/**
+		Move rectangle.
+	*/
 	void Translate(istd::CIndex2d point);
-	/**	Get moved rectangle.
-	 */
+	/**
+		Get moved rectangle.
+	*/
 	CRect GetTranslated(istd::CIndex2d point) const;
-	/** Assignment (=) operator 
-	 */
-	CRect& operator=(const CRect& rect);
 
+	// operators
+	CRect& operator=(const CRect& rect);
 	bool operator==(const CRect& rect) const;
 	bool operator!=(const CRect& rect) const;
 

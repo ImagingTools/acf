@@ -119,6 +119,12 @@ static const double I_BIG_EPSILON = 1.0e-8;
 
 
 /**
+	Some very big number.
+*/
+#define I_HUGE_NUMBER 10e20
+
+
+/**
 	Infinite value.
 */
 #define I_INFINITY std::numeric_limits<double>::infinity()
