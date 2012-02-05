@@ -27,6 +27,7 @@ public:
 		Constructs a transform using specified deformation matrix and translation.
 	*/
 	explicit CAffine2d(const CMatrix2d& deform, const CVector2d& translation = CVector2d(0.0, 0.0));
+
 	/**
 		Constructs a transform with translation.
 	*/
@@ -36,6 +37,7 @@ public:
 		Get translation part of this affine transformation.
 	*/
 	const CVector2d& GetTranslation() const;
+
 	/**
 		Set translation part of this affine transformation.
 	*/
@@ -45,6 +47,7 @@ public:
 		Get rotation, skew and skale part of this affine transformation.
 	*/
 	const CMatrix2d& GetDeformMatrix() const;
+
 	/**
 		Set rotation, skew and skale part of this affine transformation.
 	*/
@@ -76,15 +79,18 @@ public:
 		Calculate transformed position.
 	*/
 	CVector2d GetApply(const CVector2d& position) const;
+
 	/**
 		Get position after this transformation.
 	*/
 	void GetApply(const CVector2d& position, CVector2d& result) const;
+
 	/**
 		Get difference vector after this transformation.
 		Please note, that the translation will be not concidered for this transformation.
 	*/
 	CVector2d GetApplyToDelta(const CVector2d& delta) const;
+
 	/**
 		Get vector after this transformation.
 		Please note, that the translation will be not concidered for this transformation.
@@ -97,17 +103,20 @@ public:
 		\return	combined transform.
 	*/
 	CAffine2d GetApply(const CAffine2d& transform) const;
+
 	/**
 		Get combined transformation.
 		\param	transform	local transformation used on right side of transformation multiplication.
 		\return	combined transformation, it is equal to thisTranform * parameterTransform.
 	*/
 	void GetApply(const CAffine2d& transform, CAffine2d& result) const;
+
 	/**
 		Combine this transformation with another transformation.
 		\param	transform	local transformation used on right side of transformation multiplication.
 	*/
 	void Apply(const CAffine2d& transform);
+
 	/**
 		Combine this transformation with another transformation on the left side.
 		\param	transform	local transformation used on left side of transformation multiplication.
@@ -118,6 +127,7 @@ public:
 		Inverted operation to GetApply().
 	*/
 	CVector2d GetInvertedApply(const CVector2d& position) const;
+
 	/**
 		Inverted operation to GetApply().
 	*/
@@ -127,10 +137,12 @@ public:
 		Get some transformation combined with translation.
 	*/
 	CAffine2d GetTranslated(const CVector2d& delta) const;
+
 	/**
 		Get some transformation combined with translation.
 	*/
 	void GetTranslated(const CVector2d& delta, CAffine2d& result) const;
+
 	/**
 		Combine this transformation with translation.
 	*/
@@ -140,6 +152,7 @@ public:
 		Get inverted transformation.
 	*/
 	CAffine2d GetInverted() const;
+
 	/**
 		Get inverted transformation.
 	*/
