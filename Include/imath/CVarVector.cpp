@@ -116,7 +116,7 @@ bool CVarVector::Serialize(iser::IArchive& archive)
 	int elementsCount = GetElementsCount();
 
 	static iser::CArchiveTag elementsTag("Elements", "List of vector element");
-	static iser::CArchiveTag elementTag("double", "Single vector element");
+	static iser::CArchiveTag elementTag("Element", "Single vector element");
 
 	retVal = retVal && archive.BeginMultiTag(elementsTag, elementTag, elementsCount);
 

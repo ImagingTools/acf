@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2064
+          2165
         </Number>
         <Description>
           ACF
@@ -143,7 +143,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              FileExtensions
+            </Id>
+            <Type>
+              icomp::TMultiAttribute&lt;istd::CString&gt;
+            </Type>
+            <ExportId>
+              FileExtensions
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               Log
@@ -184,7 +200,15 @@
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        FileSerializer
+      </ExportedId>
+      <ComponentId>
+        XmlFileSerializer
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Simple XML-based persistence for automatic object serialization at begining and finalization of the application
