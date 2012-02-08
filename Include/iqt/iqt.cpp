@@ -185,5 +185,17 @@ isys::CSimpleDateTime GetCSimpleDateTime(const QDateTime& dateTime)
 }
 
 
+QRect GetQRect(const i2d::CRect& rect)
+{
+	return QRect(rect.GetLeft(), rect.GetTop(), rect.GetWidth(), rect.GetHeight());
+}
+
+
+i2d::CRect GetCRect(const QRect& rect)
+{
+	return i2d::CRect(rect.left(), rect.top(), rect.right() + 1, rect.bottom() + 1);
+}
+
+
 } // namespace iqt
 

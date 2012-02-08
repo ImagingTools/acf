@@ -24,6 +24,7 @@
 #include "i2d/CVector2d.h"
 #include "i2d/CRectangle.h"
 #include "i2d/CLine2d.h"
+#include "i2d/CRect.h"
 
 
 /**
@@ -53,6 +54,8 @@ extern isys::CFileInfo GetCFileInfo(const QFileInfo& fileInfo);
 extern QFileInfo GetQFileInfo(const isys::CFileInfo& fileInfo);
 extern QDateTime GetQDateTime(const isys::IDateTime& dateTime);
 extern isys::CSimpleDateTime GetCSimpleDateTime(const QDateTime& dateTime);
+extern QRect GetQRect(const i2d::CRect& rect);
+extern i2d::CRect GetCRect(const QRect& rect);
 
 
 } // namespace iqt
