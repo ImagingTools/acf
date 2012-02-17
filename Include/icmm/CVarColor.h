@@ -2,8 +2,7 @@
 #define icmm_CVarColor_included
 
 
-#include "math.h"
-
+// ACF includes
 #include "iser/ISerializable.h"
 
 #include "imath/IDoubleManip.h"

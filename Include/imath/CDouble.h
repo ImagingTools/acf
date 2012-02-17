@@ -2,8 +2,10 @@
 #define istd_CDouble_included
 
 
-#include "math.h"
+// STL includes
+#include <cmath>
 
+// ACF includes
 #include "iser/IArchive.h"
 
 #include "imath/TVector.h"
@@ -258,55 +260,55 @@ inline const CDouble& CDouble::operator/=(const CDouble& value)
 
 inline double CDouble::GetRounded(double value, int precision)
 {
-	double scale = ::pow(10.0, precision);
+	double scale = std::pow(10.0, precision);
 
-	return ::floor(value * scale + 0.5) / scale;
+	return std::floor(value * scale + 0.5) / scale;
 }
 
 
 inline bool CDouble::IsRoundedEqual(double value1, double value2, int precision)
 {
-	double scale = ::pow(10.0, precision);
+	double scale = std::pow(10.0, precision);
 
-	return ::floor(value1 * scale + 0.5) == ::floor(value2 * scale + 0.5);
+	return std::floor(value1 * scale + 0.5) == std::floor(value2 * scale + 0.5);
 }
 
 
 inline double CDouble::GetRoundedDown(double value, int precision)
 {
-	double scale = ::pow(10.0, precision);
+	double scale = std::pow(10.0, precision);
 
-	return ::floor(value * scale) / scale;
+	return std::floor(value * scale) / scale;
 }
 
 
 inline bool CDouble::IsRoundedDownEqual(double value1, double value2, int precision)
 {
-	double scale = ::pow(10.0, precision);
+	double scale = std::pow(10.0, precision);
 
-	return ::floor(value1 * scale) == ::floor(value2 * scale);
+	return std::floor(value1 * scale) == std::floor(value2 * scale);
 }
 
 
 inline double CDouble::GetRoundedUp(double value, int precision)
 {
-	double scale = ::pow(10.0, precision);
+	double scale = std::pow(10.0, precision);
 
-	return ::ceil(value * scale) / scale;
+	return std::ceil(value * scale) / scale;
 }
 
 
 inline bool CDouble::IsRoundedUpEqual(double value1, double value2, int precision)
 {
-	double scale = ::pow(10.0, precision);
+	double scale = std::pow(10.0, precision);
 
-	return ::ceil(value1 * scale) == ::ceil(value2 * scale);
+	return std::ceil(value1 * scale) == std::ceil(value2 * scale);
 }
 
 
 inline bool CDouble::IsSimiliar(double value1, double value2, double tolerance)
 {
-	return ::fabs(value1 - value2) <= tolerance;
+	return std::fabs(value1 - value2) <= tolerance;
 }
 
 
