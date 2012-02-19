@@ -12,38 +12,56 @@ namespace iview
 
 
 // TODO: Switch to ACF i2d::ITransformation2d and i2d::CAffineTransformation2d.
-/**	Affinite calibration.
- *		This class describe a calibration where the coordination system is moved and rotated.
- *		You need this calibration when your logical coordination system is flat,
- *		but not orthogonal to camera axis.
- *		Please note, that logical coordination system represents only finite
- *		rectangle area, you can set using SetBounds(const i2d::CRectangle&) method.
+
+/**
+	Affinite calibration.
+	This class describe a calibration where the coordination system is moved and rotated.
+	You need this calibration when your logical coordination system is flat,
+	but not orthogonal to camera axis.
+
+	\note Please note, that logical coordination system represents only finite
+	rectangle area, you can set using SetBounds(const i2d::CRectangle&) method.
 */
 class CAffiniteCalibration: public IIsomorphicCalibration
 {
 public:
 	CAffiniteCalibration();
 
-	/**	Get global transformation from logical into view units representing this calibration.
+	/**
+		Get global transformation from logical into view units representing this calibration.
 	*/
 	const i2d::CAffine2d& GetLogToViewTransform() const;
-	/**	Get global transformation from logical into view units representing this calibration.
-	 *		@overload
+	
+	/**
+		Get global transformation from logical into view units representing this calibration.
+		\overload
 	*/
 	void GetLogToViewTransform(i2d::CAffine2d& result) const;
-	/**	Get global transformation from view into logical units representing this calibration.
+	
+	/**
+		Get global transformation from view into logical units representing this calibration.
 	*/
 	i2d::CAffine2d GetViewToLogTransform() const;
-	/**	Get global transformation from view into logical units representing this calibration.
-	 *		@overload
+	
+	/**
+		Get global transformation from view into logical units representing this calibration.
+		\overload
 	*/
 	void GetViewToLogTransform(i2d::CAffine2d& result) const;
 
-	/**	Reset this calibration, set to be identity transform.
+	/**
+		Reset this calibration, set to be identity transform.
 	*/
 	void Reset();
+
+	/**
+		Reset this calibration using position, rotation angle, and scale.
+	*/
 	void Reset(const i2d::CVector2d& position, double angle, double scale = 1.0);
 
+	/**
+		Set the transform object.
+	*/
 	void SetTransform(const i2d::CAffine2d& transform);
 
 	i2d::CVector2d GetCenter() const;
@@ -75,9 +93,7 @@ private:
 };
 
 
-
 } // namespace iview
 
 
-
-#endif // !iview_CPerspectiveCalibration_included
+#endif // !iview_CAffiniteCalibration_included

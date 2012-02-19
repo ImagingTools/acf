@@ -93,6 +93,11 @@ I_EXPORT_COMPONENT(
 			"Selectable scene extender",
 			"Scene Extender Selection Console Connector Display" IM_TAG("2D"));
 
+I_EXPORT_COMPONENT(
+			ConsoleImageView,
+			"Display bitmap on the graphics console using observer pattern",
+			"Bitmap Display Viewer Observer" IM_TAG("GUI Image 2D Console"));
+
 
 } // namespace QtViewPck
 

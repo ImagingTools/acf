@@ -219,7 +219,7 @@ void TViewImpl<Base>::DrawToContext(
 	context.setBrush(colorShema.GetBrush(iview::IColorShema::SB_NORMAL));
 	context.setFont(colorShema.GetFont(iview::IColorShema::SF_NORMAL));
 
-	int lastBkLayerIndex = GetLastBkLayerIndex();
+	int lastBackgroundLayerIndex = GetLastBackgroundLayerIndex();
 	int layersCount = GetLayersCount();
 
 	bool isBackgroundBufferValid = IsBackgroundBufferValid();
@@ -228,12 +228,12 @@ void TViewImpl<Base>::DrawToContext(
 		backgroundDC.setClipRegion(iqt::GetQRect(m_lastClientArea));
 		backgroundDC.fillRect(iqt::GetQRect(m_lastClientArea), colorShema.GetBrush(iview::IColorShema::SB_BACKGROUND));
 
-		if ((lastBkLayerIndex >= 0) && (lastBkLayerIndex < layersCount)){
+		if ((lastBackgroundLayerIndex >= 0) && (lastBackgroundLayerIndex < layersCount)){
 			backgroundDC.setPen(colorShema.GetPen(iview::IColorShema::SP_NORMAL));
 			backgroundDC.setBrush(colorShema.GetBrush(iview::IColorShema::SB_BACKGROUND));
 			backgroundDC.setFont(colorShema.GetFont(iview::IColorShema::SF_NORMAL));
 
-			DrawLayers(backgroundDC, 0, lastBkLayerIndex);
+			DrawLayers(backgroundDC, 0, lastBackgroundLayerIndex);
 		}
 
 		SetBackgroundBufferValid();
@@ -242,9 +242,9 @@ void TViewImpl<Base>::DrawToContext(
 	context.setClipRegion(iqt::GetQRect(invalidatedBox));
 	backgroundBuffer.CopyRectTo(invalidatedBox, context, invalidatedBox.GetLeftTop());
 
-	I_ASSERT(lastBkLayerIndex >= -1);
-	if (lastBkLayerIndex + 1 < layersCount){
-		DrawLayers(context, lastBkLayerIndex + 1, layersCount - 1);
+	I_ASSERT(lastBackgroundLayerIndex >= -1);
+	if (lastBackgroundLayerIndex + 1 < layersCount){
+		DrawLayers(context, lastBackgroundLayerIndex + 1, layersCount - 1);
 	}
 }
 

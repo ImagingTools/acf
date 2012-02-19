@@ -40,7 +40,9 @@ public:
 	{
 		m_blockBBoxEvent = false;
 		m_framePtr = framePtr;
-		AddViewListener(this);
+	
+		AddViewEventObserver(this);
+
 		m_lastBoundingBox.Reset();
 	}
 
@@ -105,7 +107,7 @@ TFramedViewBase<ViewBase>::TFramedViewBase(Frame* framePtr)
 {
 	m_framePtr = framePtr;
 	m_blockBBoxEvent = false;
-	AddViewListener(this);
+	AddViewEventObserver(this);
 	m_lastBoundingBox.Reset();
 }
 

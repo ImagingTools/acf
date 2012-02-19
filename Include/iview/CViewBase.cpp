@@ -36,7 +36,7 @@ CViewBase::CViewBase()
 	m_isBoundingBoxValid = false;
 	m_mouseShapePtr = NULL;
 	m_isMouseShapeValid = false;
-	m_lastBkLayerIndex = -1;
+	m_lastBackgroundLayerIndex = -1;
 
 	m_viewMode = VM_NONE;
 	m_editMode = EM_NONE;
@@ -257,7 +257,7 @@ void CViewBase::SetScreenPosition(const i2d::CVector2d& client, istd::CIndex2d s
 }
 
 
-void CViewBase::AddViewListener(iview::IViewEventObserver* listenerPtr)
+void CViewBase::AddViewEventObserver(iview::IViewEventObserver* listenerPtr)
 {
 	std::vector<iview::IViewEventObserver*>::iterator foundIter = std::find(m_viewListeners.begin(), m_viewListeners.end(), listenerPtr);
 	if (foundIter == m_viewListeners.end()){
@@ -266,7 +266,7 @@ void CViewBase::AddViewListener(iview::IViewEventObserver* listenerPtr)
 }
 
 
-void CViewBase::RemoveViewListener(iview::IViewEventObserver* listenerPtr)
+void CViewBase::RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr)
 {
 	std::vector<iview::IViewEventObserver*>::iterator foundIter = std::find(m_viewListeners.begin(), m_viewListeners.end(), listenerPtr);
 	if (foundIter != m_viewListeners.end()){
@@ -595,7 +595,7 @@ void CViewBase::OnLayerInvalidated(const ILayer& layer, const i2d::CRect& prevAr
 
 	m_isBoundingBoxValid = false;
 
-	for (int layerIndex = 0; layerIndex <= m_lastBkLayerIndex; ++layerIndex){
+	for (int layerIndex = 0; layerIndex <= m_lastBackgroundLayerIndex; ++layerIndex){
 		if (m_layers[layerIndex] == &layer){
 			InvalidateBackground();
 		}

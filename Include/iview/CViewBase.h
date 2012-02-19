@@ -101,12 +101,12 @@ public:
 	/**
 		Adds handler to catch view events.
 	*/
-	virtual void AddViewListener(iview::IViewEventObserver* listenerPtr);
+	virtual void AddViewEventObserver(iview::IViewEventObserver* listenerPtr);
 	
 	/**	
 		Removes handler to catch view events.
 	*/
-	virtual void RemoveViewListener(iview::IViewEventObserver* listenerPtr);
+	virtual void RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr);
 	
 	/**
 		Insert default layers, when there is no one user layer.
@@ -197,8 +197,8 @@ protected:
 	/**
 		Get last background layer index.
 	*/
-	int GetLastBkLayerIndex();
-	void SetLastBkLayerIndex(int index);
+	int GetLastBackgroundLayerIndex();
+	void SetLastBackgroundLayerIndex(int index);
 	
 	/**
 		Get index of default background layer.
@@ -339,7 +339,7 @@ private:
 
 	Layers m_layers;
 
-	int m_lastBkLayerIndex;
+	int m_lastBackgroundLayerIndex;
 
 	// default layers
 	iview::CSingleLayer m_backgroundLayer;
@@ -500,15 +500,15 @@ inline bool CViewBase::IsDraggable() const
 
 // protected methods
 
-inline int CViewBase::GetLastBkLayerIndex()
+inline int CViewBase::GetLastBackgroundLayerIndex()
 {
-	return m_lastBkLayerIndex;
+	return m_lastBackgroundLayerIndex;
 }
 
 
-inline void CViewBase::SetLastBkLayerIndex(int index)
+inline void CViewBase::SetLastBackgroundLayerIndex(int index)
 {
-	m_lastBkLayerIndex = index;
+	m_lastBackgroundLayerIndex = index;
 }
 
 
