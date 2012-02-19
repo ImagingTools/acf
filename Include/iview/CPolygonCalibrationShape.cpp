@@ -630,7 +630,7 @@ bool CPolygonCalibrationShape::IsCurveTouched(istd::CIndex2d position) const
 }
 
 
-// reimplemented (iview::CInteractiveTransformableRectangle)
+// reimplemented (iview::CInteractiveTransformableRectangleShape)
 
 void CPolygonCalibrationShape::EnsureValidNodes() const
 {

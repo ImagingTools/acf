@@ -577,7 +577,7 @@ bool CInteractivePolygonShape::IsCurveTouched(istd::CIndex2d position) const
 }
 
 
-// reimplemented (iview::CInteractiveTransformableRectangle)
+// reimplemented (iview::CInteractiveTransformableRectangleShape)
 
 void CInteractivePolygonShape::EnsureValidNodes() const
 {

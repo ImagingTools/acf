@@ -275,7 +275,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CInteractiveTransformableRectangle.cpp"
+				RelativePath="..\CInteractiveTransformableRectangleShape.cpp"
 				>
 			</File>
 			<File
@@ -461,7 +461,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CInteractiveTransformableRectangle.h"
+				RelativePath="..\CInteractiveTransformableRectangleShape.h"
 				>
 			</File>
 			<File

@@ -10,17 +10,17 @@
 #include "i2d/CVector2d.h"
 
 
-#include "iview/CInteractiveTransformableRectangle.h"
+#include "iview/CInteractiveTransformableRectangleShape.h"
 
 
 namespace iview
 {
 
 
-class CInteractivePolygonShape: public CInteractiveTransformableRectangle
+class CInteractivePolygonShape: public CInteractiveTransformableRectangleShape
 {
 public:
-	typedef CInteractiveTransformableRectangle BaseClass;
+	typedef CInteractiveTransformableRectangleShape BaseClass;
 
 	CInteractivePolygonShape();
 
@@ -66,7 +66,7 @@ protected:
 	virtual void DrawSelectionElements(QPainter& drawContext) const;
 	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 
-	// reimplemented (iview::CInteractiveTransformableRectangle)
+	// reimplemented (iview::CInteractiveTransformableRectangleShape)
 	virtual void EnsureValidNodes() const;
 
 	// reimplemented (iview::CInteractiveShapeBase)

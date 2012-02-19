@@ -41,7 +41,7 @@ public:
 	virtual bool IsProportionalScaled() const;
 	virtual void SetProportionalScaled(bool state = true);
 
-	// reimplemented (iview::CInteractiveShapeBase, see iview::TShapeBase)
+	// reimplemented (iview::CInteractiveShapeBase)
 	virtual void InvalidateBoundingBox();
 
 	// reimplemented (iview::IInteractiveShape)
@@ -58,7 +58,8 @@ public:
 	virtual bool OnMouseMove(istd::CIndex2d position);
 
 protected:
-	enum EditNode{
+	enum EditNode
+	{
 		EN_NODE1 = 0,
 		EN_NODE2,
 		EN_NODE3,
@@ -73,7 +74,8 @@ protected:
 		EN_LAST = EN_ROTATION2
 	};
 
-	enum MouseMode{
+	enum MouseMode
+	{
 		MM_NONE,
 		MM_ROTATION1,
 		MM_ROTATION2,

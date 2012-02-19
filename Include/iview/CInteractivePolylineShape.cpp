@@ -43,7 +43,7 @@ bool CInteractivePolylineShape::OnMouseButton(istd::CIndex2d position, Qt::Mouse
 			int editMode = GetEditMode();
 			switch (editMode){
 			case ISelectable::EM_NONE:
-				if (IsSelected() && CInteractiveTransformableRectangle::OnMouseButton(position, buttonType, downFlag)){
+				if (IsSelected() && CInteractiveTransformableRectangleShape::OnMouseButton(position, buttonType, downFlag)){
 					return true;
 				}
 				break;

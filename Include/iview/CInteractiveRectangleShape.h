@@ -19,7 +19,7 @@ public:
 
 	CInteractiveRectangleShape();
 
-	// reimplemented (iview::CInteractiveShapeBase, see iview::TShapeBase)
+	// reimplemented (iview::CInteractiveShapeBase)
 	virtual void InvalidateBoundingBox();
 
 	// reimplemented (iview::ITouchable)

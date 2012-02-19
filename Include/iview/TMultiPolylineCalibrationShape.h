@@ -68,7 +68,7 @@ protected:
 	
 	void CalculateRemovePoints(const iview::TMultiPolyline<SegmentData>& polyline, int segment, i2d::CVector2d& first, i2d::CVector2d& second) const;
 
-	// reimplemented (iview::CInteractiveTransformableRectangle)
+	// reimplemented (iview::CInteractiveTransformableRectangleShape)
 	virtual void EnsureValidNodes() const;
     
 private:
@@ -800,7 +800,7 @@ void TMultiPolylineCalibrationShape<SegmentData>::CalculateRemovePoints(const iv
 }
 
 
-// reimplemented (iview::CInteractiveTransformableRectangle)
+// reimplemented (iview::CInteractiveTransformableRectangleShape)
 
 template<class SegmentData>
 void TMultiPolylineCalibrationShape<SegmentData>::EnsureValidNodes() const

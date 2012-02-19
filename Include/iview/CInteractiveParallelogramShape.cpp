@@ -6,11 +6,11 @@
 
 
 // ACF includes
-#include "i2d/CLine2d.h"
 #include "imod/IModel.h"
+
+#include "i2d/CLine2d.h"
+
 #include "iqt/iqt.h"
-
-
 
 #include "iview/CScreenTransform.h"
 
@@ -33,7 +33,7 @@ CInteractiveParallelogramShape::CInteractiveParallelogramShape()
 }
 
 
-// reimplemented (iview::CInteractiveShapeBase, see iview::TShapeBase)
+// reimplemented (iview::CInteractiveShapeBase)
 
 void CInteractiveParallelogramShape::InvalidateBoundingBox()
 {

@@ -5,8 +5,6 @@
 // ACF includes
 #include "i2d/CParallelogram.h"
 
-
-
 #include "iview/CInteractiveShapeBase.h"
 
 
@@ -14,31 +12,38 @@ namespace iview
 {
 
 
-class CInteractiveTransformableRectangle: public CInteractiveShapeBase
+class CInteractiveTransformableRectangleShape: public CInteractiveShapeBase
 {
 public:
 	typedef CInteractiveShapeBase BaseClass;
 	
-	CInteractiveTransformableRectangle();
+	CInteractiveTransformableRectangleShape();
 
-	/**	Check, if rotation is editable.
+	/**
+		Check, if rotation is editable.
 	*/
 	virtual bool IsEditableRotation();
 	virtual void SetEditableRotation(bool state = true);
-	/**	Check, if width is editable.
+	
+	/**
+		Check, if width is editable.
 	*/
 	virtual bool IsEditableWidth();
 	virtual void SetEditableWidth(bool state = true);
-	/**	Check, if height is editable.
+	
+	/**
+		Check, if height is editable.
 	*/
 	virtual bool IsEditableHeight();
 	virtual void SetEditableHeight(bool state = true);
-	/**	Check, if both axis will be scaled proportional.
+	
+	/**
+		Check, if both axis will be scaled proportional.
 	*/
 	virtual bool IsProportionalScaled() const;
 	virtual void SetProportionalScaled(bool state = true);
 
-	// reimplemented (iview::CInteractiveShapeBase, see iview::TShapeBase)
+	// reimplemented (iview::CInteractiveShapeBase)
 	virtual void InvalidateBoundingBox();
 
 	// reimplemented (iview::IInteractiveShape)
@@ -136,49 +141,49 @@ private:
 
 // inline methods
 
-inline bool CInteractiveTransformableRectangle::IsEditableRotation()
+inline bool CInteractiveTransformableRectangleShape::IsEditableRotation()
 {
 	return m_isEditableRotation;
 }
 
 
-inline void CInteractiveTransformableRectangle::SetEditableRotation(bool state)
+inline void CInteractiveTransformableRectangleShape::SetEditableRotation(bool state)
 {
 	m_isEditableRotation = state;
 }
 
 
-inline bool CInteractiveTransformableRectangle::IsEditableWidth()
+inline bool CInteractiveTransformableRectangleShape::IsEditableWidth()
 {
 	return m_isEditableWidth;
 }
 
 
-inline void CInteractiveTransformableRectangle::SetEditableWidth(bool state)
+inline void CInteractiveTransformableRectangleShape::SetEditableWidth(bool state)
 {
 	m_isEditableWidth = state;
 }
 
 
-inline bool CInteractiveTransformableRectangle::IsEditableHeight()
+inline bool CInteractiveTransformableRectangleShape::IsEditableHeight()
 {
 	return m_isEditableHeight;
 }
 
 
-inline void CInteractiveTransformableRectangle::SetEditableHeight(bool state)
+inline void CInteractiveTransformableRectangleShape::SetEditableHeight(bool state)
 {
 	m_isEditableHeight = state;
 }
 
 
-inline bool CInteractiveTransformableRectangle::IsProportionalScaled() const
+inline bool CInteractiveTransformableRectangleShape::IsProportionalScaled() const
 {
 	return m_isProportionalScaled;
 }
 
 
-inline void CInteractiveTransformableRectangle::SetProportionalScaled(bool state)
+inline void CInteractiveTransformableRectangleShape::SetProportionalScaled(bool state)
 {
 	m_isProportionalScaled = state;
 }
@@ -186,13 +191,13 @@ inline void CInteractiveTransformableRectangle::SetProportionalScaled(bool state
 
 // protected methods
 
-inline bool CInteractiveTransformableRectangle::AreNodesValid() const
+inline bool CInteractiveTransformableRectangleShape::AreNodesValid() const
 {
 	return m_areNodesValid;
 }
 
 
-inline const istd::CIndex2d* CInteractiveTransformableRectangle::GetNodes() const
+inline const istd::CIndex2d* CInteractiveTransformableRectangleShape::GetNodes() const
 {
 	return m_nodes;
 }

@@ -63,7 +63,7 @@ protected:
 	virtual bool IsTickerTouched(istd::CIndex2d position) const;
 	virtual bool IsCurveTouched(istd::CIndex2d position) const;
 
-	// reimplemented (iview::CInteractiveTransformableRectangle)
+	// reimplemented (iview::CInteractiveTransformableRectangleShape)
 	virtual void EnsureValidNodes() const;
 
 	// reimplemented (iview::CInteractiveShapeBase)
