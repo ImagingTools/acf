@@ -484,6 +484,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CWidgetUpdateBlocker.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IDialog.h"
 				>
 			</File>
