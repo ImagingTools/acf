@@ -10,9 +10,6 @@
 namespace iview
 {
 
-
-// TODO: Redesign it to ACF transformation concept.
-
 /**
 	Common interface for all objects which allow access to calibration info.
 */
