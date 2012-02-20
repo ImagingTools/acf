@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "i2d/CAffine2d.h"
+#include "icmm/IColorTransformation.h"
 
 #include "iimg/IBitmap.h"
 
@@ -19,11 +19,13 @@ class CImageShape: public CShapeBase
 public:
 	typedef CShapeBase BaseClass;
 
+	CImageShape(const icmm::IColorTransformation* colorTransformationPtr = NULL);
+
 	// reimplemented (iview::IShape)
 	virtual void Draw(QPainter& drawContext) const;
 
 	// reimplemented (imod::IObserver)
-	virtual bool OnAttached(imod::IModel* modelPtr);
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// reimplemented (iview::CShapeBase)
 	virtual void CalcBoundingBox(i2d::CRect& result) const;
@@ -34,6 +36,14 @@ protected:
 				const iimg::IBitmap& bitmap,
 				const i2d::CRect& bitmapArea,
 				const i2d::CAffine2d& destTransform) const;
+private:
+	void SetLookupTableToImage(QImage& image, const icmm::IColorTransformation& colorTransformation);
+
+private:
+	QPixmap m_pixmap;
+
+	const icmm::IColorTransformation* m_colorTransformationPtr;
+
 };
 
 

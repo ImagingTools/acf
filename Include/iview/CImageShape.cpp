@@ -6,17 +6,27 @@
 
 
 // ACF includes
-#include "iimg/IBitmap.h"
-#include "iqt/CBitmap.h"
+#include "istd/TDelPtr.h"
+
 #include "imod/IModel.h"
 
+#include "iimg/IBitmap.h"
 
+#include "iqt/CBitmap.h"
 
 #include "iview/CScreenTransform.h"
 
 
 namespace iview
 {
+
+
+// public methods
+
+CImageShape::CImageShape(const icmm::IColorTransformation* colorTransformationPtr)
+:	m_colorTransformationPtr(colorTransformationPtr)
+{
+}
 
 
 // reimplemented (iview::IVisualizable)
@@ -53,11 +63,25 @@ void CImageShape::Draw(QPainter& drawContext) const
 
 // reimplemented (imod::IObserver)
 
-bool CImageShape::OnAttached(imod::IModel* modelPtr)
+void CImageShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	I_ASSERT(dynamic_cast<iimg::IBitmap*>(modelPtr) != NULL);
+	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(GetModelPtr());
+	istd::TDelPtr<iqt::CBitmap> qtBitmapPtr;
+	if (providerPtr == NULL){
+		qtBitmapPtr.SetPtr(new iqt::CBitmap);
+		providerPtr = qtBitmapPtr.GetPtr();
+		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(GetModelPtr());
+		I_ASSERT(bitmapPtr != NULL);
 
-	return BaseClass::OnAttached(modelPtr);
+		qtBitmapPtr->CopyFrom(*bitmapPtr);
+	}
+
+	QImage image = providerPtr->GetQImage();
+	if (m_colorTransformationPtr != NULL){
+		SetLookupTableToImage(image, *m_colorTransformationPtr);
+	}
+
+	m_pixmap = QPixmap::fromImage(image, Qt::AutoColor);
 }
 
 
@@ -115,9 +139,35 @@ void CImageShape::DrawBitmap(
 		
 		painter.setMatrix(matrix);
 
-		painter.drawImage(0, 0, bitmapPtr->GetQImage(), bitmapArea.GetLeft(), bitmapArea.GetTop(), bitmapArea.GetRight(), bitmapArea.GetBottom());
+		painter.drawPixmap(0, 0, m_pixmap, bitmapArea.GetLeft(), bitmapArea.GetTop(), bitmapArea.GetRight(), bitmapArea.GetBottom());
 
 		painter.setMatrixEnabled(false);
+	}
+}
+
+
+// private methods
+
+void CImageShape::SetLookupTableToImage(QImage& image, const icmm::IColorTransformation& colorTransformation)
+{
+	if (image.isGrayscale()){
+		QVector<QRgb> rgbTable;
+		for (int colorIndex = 0; colorIndex < 256; colorIndex++){
+			icmm::CVarColor argumentColor;	
+			argumentColor.SetElementsCount(1);
+			argumentColor.SetElement(0, colorIndex / 255.0);
+
+			icmm::CVarColor result = colorTransformation.GetValueAt(argumentColor);
+			if (result.GetElementsCount() == 3){
+				rgbTable.append(qRgb(result[0] * 255, result[1] * 255, result[2] * 255));
+			}
+			else{
+				rgbTable.append(qRgb(colorIndex, colorIndex, colorIndex));
+			}
+		}
+
+		image.setNumColors(256);
+		image.setColorTable(rgbTable);
 	}
 }
 
