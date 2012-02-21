@@ -15,67 +15,34 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
-        AttributeEditorDock
+        ComponentNoteDock
       </ComponentName>
       <X>
-        1000
+        575
       </X>
       <X>
-        125
+        325
       </X>
     </Element>
     <Element>
       <ComponentName>
-        ComponentNoteEditorDock
+        ComponentNoteEditor
       </ComponentName>
       <X>
-        618
+        575
       </X>
       <X>
-        550
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        LogDock
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        675
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        PackageOverviewDock
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <X>
-        400
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        QuickHelpDock
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <X>
-        400
+        475
       </X>
     </Element>
   </PositionMap>
   <NotesMap count="1">
     <Element>
       <ComponentName>
-        ComponentNoteEditorDock
+        ComponentNoteDock
       </ComponentName>
       <Note>
         

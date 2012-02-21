@@ -42,7 +42,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 		ReadArchiveEx layoutArchive(GetLayoutPath(filePath), this);
 		I_ASSERT(!layoutArchive.IsStoring());
 
-		if (!geometricalRegistryPtr->SerializeComponentsLayout(layoutArchive)){
+		if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
 			SendInfoMessage(
 						MI_CANNOT_READ_LAYOUT,
 						iqt::GetCString(tr("Layout information cannot be loaded (%1)").
@@ -81,7 +81,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 		WriteArchiveEx layoutArchive(GetLayoutPath(filePath), GetVersionInfo(), this);
 		I_ASSERT(layoutArchive.IsStoring());
 
-		if (!const_cast<CVisualRegistryComp*>(geometricalRegistryPtr)->SerializeComponentsLayout(layoutArchive)){
+		if (!const_cast<CVisualRegistryComp*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
 			SendInfoMessage(
 						MI_CANNOT_READ_LAYOUT,
 						iqt::GetCString(tr("Layout information cannot be stored (%1)").

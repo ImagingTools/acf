@@ -1,10 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="0">
+    <VersionInfos count="1">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2191
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
+  <ElementsList count="5">
     <Element>
       <Id>
         AttributeEditorDock
@@ -93,6 +104,27 @@
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ComponentNoteEditorDock
+      </Id>
+      <PackageId>
+        CompositorVoce
+      </PackageId>
+      <ComponentId>
+        ComponentNoteEditorDock
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -327,13 +359,21 @@
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="4">
+  <ExportedComponents count="5">
     <Component>
       <ExportedId>
         AttributeEditorDock
       </ExportedId>
       <ComponentId>
         AttributeEditorDock
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        ComponentNoteEditorDock
+      </ExportedId>
+      <ComponentId>
+        ComponentNoteEditorDock
       </ComponentId>
     </Component>
     <Component>

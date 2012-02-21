@@ -39,6 +39,7 @@ public:
 							iqtgui::TDesignerGuiCompBase<Ui::CAttributeEditorComp>, CElementSelectionInfoManagerBase> > BaseClass;
 
 	I_BEGIN_COMPONENT(CAttributeEditorComp);
+		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_ASSIGN(m_metaInfoManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 		I_ASSIGN(m_attributeSelectionObserverCompPtr, "AttributeSelectionObserver", "Attribute selection observer", false, "AttributeSelectionObserver");
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpGui", "Shows object info during selection using its type", false, "QuickHelpGui");

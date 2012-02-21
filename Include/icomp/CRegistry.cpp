@@ -439,8 +439,8 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 		}
 	}
 	else if (!archive.IsStoring()){
-		m_description = "";
-		m_keywords = "";
+		m_description.clear();
+		m_keywords.clear();
 	}
 
 	return retVal;

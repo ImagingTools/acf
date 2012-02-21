@@ -164,6 +164,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentNoteEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CElementSelectionInfoManagerBase.cpp"
 				>
 			</File>
@@ -238,6 +242,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentNoteEditorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CElementSelectionInfoManagerBase.h"
 				>
 			</File>
@@ -306,10 +314,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IComponentNote.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IElementSelectionInfo.h"
 				>
 			</File>
@@ -344,6 +348,10 @@
 			>
 			<File
 				RelativePath="..\generated\moc_CAttributeEditorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\moc_CComponentNoteEditorComp.cpp"
 				>
 			</File>
 			<File
@@ -391,6 +399,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\ui_CComponentNoteEditorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CMultiAttributeEditor.h"
 				>
 			</File>
@@ -409,9 +421,14 @@
 		</Filter>
 		<Filter
 			Name="Qt Designer Files"
+			Filter="*.ui"
 			>
 			<File
 				RelativePath="..\CAttributeEditorComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CComponentNoteEditorComp.ui"
 				>
 			</File>
 			<File
@@ -437,6 +454,10 @@
 			>
 			<File
 				RelativePath="..\CAttributeEditorComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CComponentNoteEditorComp.moc"
 				>
 			</File>
 			<File

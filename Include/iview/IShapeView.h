@@ -25,7 +25,9 @@ class ISelectableLayer;
 /**
 	Common interface for a general shape view implementations.
 */
-class IShapeView: virtual public IDisplay, virtual public ISelectable
+class IShapeView:
+			virtual public IDisplay,
+			virtual public ISelectable
 {
 public:
 	typedef IShapeObserver BaseClass;

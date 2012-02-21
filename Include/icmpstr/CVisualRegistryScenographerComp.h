@@ -161,8 +161,6 @@ protected Q_SLOTS:
 	void OnExportToCode();
 	void OnExecute();
 	void OnAbort();
-	void OnAddNote();
-	void OnRemoveNote();
 	void OnExecutionTimerTick();
 
 private:
@@ -202,8 +200,6 @@ private:
 	iqtgui::CHierarchicalCommand m_exportToCodeCommand;
 	iqtgui::CHierarchicalCommand m_executeRegistryCommand;
 	iqtgui::CHierarchicalCommand m_abortRegistryCommand;
-	iqtgui::CHierarchicalCommand m_addNoteCommand;
-	iqtgui::CHierarchicalCommand m_removeNoteCommand;
 
 	QTimer m_executionObserverTimer;
 

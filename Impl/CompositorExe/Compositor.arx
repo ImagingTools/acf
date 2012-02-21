@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2116
+          2191
         </Number>
         <Description>
           ACF
@@ -88,7 +88,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="4">
+              <Values count="5">
                 <Value>
                   MainWindowComponents/AttributeEditorDock
                 </Value>
@@ -100,6 +100,9 @@
                 </Value>
                 <Value>
                   MainWindowComponents/QuickHelpDock
+                </Value>
+                <Value>
+                  MainWindowComponents/ComponentNoteEditorDock
                 </Value>
               </Values>
             </Data>
@@ -215,12 +218,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   MainWindowComponents/AttributeEditorDock
                 </Value>
                 <Value>
                   MainWindowComponents/PackageOverviewDock
+                </Value>
+                <Value>
+                  MainWindowComponents/ComponentNoteEditorDock
                 </Value>
               </Values>
             </Data>

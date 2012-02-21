@@ -83,6 +83,11 @@ I_EXPORT_COMPONENT(
 			"Load, cache packages from files and supports additional meta information needed for compositor",
 			"Component Registry Cache Package Load File Configuration Components" IM_TAG("Loader"));
 
+I_EXPORT_COMPONENT(
+			ComponentNoteEditor,
+			"Editor for user notes in the component diagram",
+			"Help Technical Documentation Note Component" IM_TAG("GUI Help"));
+
 
 } // namespace CompositorPck
 

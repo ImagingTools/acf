@@ -69,12 +69,6 @@ CVisualRegistryScenographerComp::CVisualRegistryScenographerComp()
 	m_abortRegistryCommand.SetGroupId(GI_PREVIEW);
 	m_abortRegistryCommand.SetStaticFlags(lightToolFlags);
 	m_abortRegistryCommand.setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
-	m_removeNoteCommand.setEnabled(false);
-	m_removeNoteCommand.SetGroupId(GI_COMPONENT);
-	m_removeNoteCommand.SetStaticFlags(ibase::IHierarchicalCommand::CF_GLOBAL_MENU);
-	m_addNoteCommand.setEnabled(false);
-	m_addNoteCommand.SetGroupId(GI_COMPONENT);
-	m_addNoteCommand.SetStaticFlags(ibase::IHierarchicalCommand::CF_GLOBAL_MENU);
 
 	m_editMenu.InsertChild(&m_cutCommand);
 	m_editMenu.InsertChild(&m_copyCommand);
@@ -87,8 +81,6 @@ CVisualRegistryScenographerComp::CVisualRegistryScenographerComp()
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
-	m_registryMenu.InsertChild(&m_addNoteCommand);
-	m_registryMenu.InsertChild(&m_removeNoteCommand);
 
 	m_registryCommand.InsertChild(&m_editMenu);
 	m_registryCommand.InsertChild(&m_registryMenu);
@@ -498,16 +490,6 @@ void CVisualRegistryScenographerComp::DoRetranslate()
 				tr("&Abort Registry"), 
 				tr("Abort registry execution"),
 				QIcon(":/Icons/Stop.svg"));
-	m_addNoteCommand.SetVisuals(
-				tr("&Add Note"), 
-				tr("&Add Note"), 
-				tr("Add a note to selected component"),
-				QIcon(":/Resources/Icons/.png"));
-	m_removeNoteCommand.SetVisuals(
-				tr("&Remove Note"), 
-				tr("&Remove Note"), 
-				tr("Remove the note from selected component"),
-				QIcon(":/Resources/Icons/.png"));
 }
 
 
@@ -598,9 +580,7 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 	connect(&m_exportToCodeCommand, SIGNAL(activated()), this, SLOT(OnExportToCode()));
 	connect(&m_executeRegistryCommand, SIGNAL(activated()), this, SLOT(OnExecute()));
 	connect(&m_abortRegistryCommand, SIGNAL(activated()), this, SLOT(OnAbort()));
-	connect(&m_addNoteCommand, SIGNAL(activated()), this, SLOT(OnAddNote()));
-	connect(&m_removeNoteCommand, SIGNAL(activated()), this, SLOT(OnRemoveNote()));
-
+	
 	m_exportToCodeCommand.setVisible(m_registryCodeSaverCompPtr.IsValid());
 	m_executeRegistryCommand.setVisible(m_registryPreviewCompPtr.IsValid());
 	m_abortRegistryCommand.setVisible(m_registryPreviewCompPtr.IsValid());
@@ -1000,18 +980,6 @@ void CVisualRegistryScenographerComp::OnAbort()
 
 		m_executionObserverTimer.stop();
 	}
-}
-
-
-void CVisualRegistryScenographerComp::OnAddNote()
-{
-	// TODO: implement registry notes
-}
-
-
-void CVisualRegistryScenographerComp::OnRemoveNote()
-{
-	// TODO: implement registry notes
 }
 
 

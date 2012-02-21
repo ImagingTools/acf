@@ -19,6 +19,68 @@ namespace icmpstr
 {
 
 
+bool CVisualRegistryComp::SerializeNotes(iser::IArchive& archive)
+{
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	I_DWORD frameworkVersion = 0;
+	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
+	if (frameworkVersion < 2192 && !archive.IsStoring()){
+		return true;
+	}
+
+	static iser::CArchiveTag noteMapTag("NotesMap", "Map of component name to its note");
+	static iser::CArchiveTag elementTag("Element", "Map element");
+
+	int notesCount = m_notesMap.size();
+
+	bool retVal = archive.BeginMultiTag(noteMapTag, elementTag, notesCount);
+	if (!retVal){
+		return false;
+	}
+
+	if (archive.IsStoring()){
+		for (		NotesMap::const_iterator noteIndex = m_notesMap.begin();
+					noteIndex != m_notesMap.end();
+					noteIndex++){
+			retVal = retVal && archive.BeginTag(elementTag);
+
+			std::string elementId = noteIndex->first;
+			istd::CString componentNote = noteIndex->second;
+
+			retVal = retVal && SerializeComponentNote(archive, elementId, componentNote);
+				
+			retVal = retVal && archive.EndTag(elementTag);
+		}
+	}
+	else{
+		istd::CChangeNotifier notifier(this);
+
+		for (int i = 0; i < notesCount; ++i){
+			retVal = retVal && archive.BeginTag(elementTag);
+			
+			std::string elementId;
+			istd::CString componentNote;
+
+			retVal = retVal && SerializeComponentNote(archive, elementId, componentNote);
+			if (!retVal){
+				return false;
+			}
+
+			const ElementInfo* infoPtr = GetElementInfo(elementId);
+			if (infoPtr != NULL){
+				SetComponentNote(elementId, componentNote);
+			}
+
+			retVal = retVal && archive.EndTag(elementTag);
+		}
+	}
+
+	retVal = retVal && archive.EndTag(noteMapTag);
+
+	return retVal;
+}
+
+
 bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 {
 	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
@@ -94,6 +156,50 @@ bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
 }
 
 
+bool CVisualRegistryComp::SerializeUserData(iser::IArchive& archive)
+{
+	return SerializeComponentsLayout(archive) && SerializeNotes(archive);
+}
+
+
+// reimplemented (IComponentNoteController)
+
+void CVisualRegistryComp::SetComponentNote(const std::string& componentName, const istd::CString& componentNote)
+{
+	const ElementInfo* elementInfoPtr = GetElementInfo(componentName);
+	if (elementInfoPtr == NULL){
+		return;
+	}
+
+	istd::CChangeNotifier changePtr(this, CF_NOTE_ADDED);
+
+	m_notesMap[componentName] = componentNote;
+}
+
+
+void CVisualRegistryComp::RemoveComponentNote(const std::string& componentName)
+{
+	NotesMap::iterator foundIter = m_notesMap.find(componentName);
+
+	if (foundIter != m_notesMap.end()){
+		istd::CChangeNotifier changePtr(this, CF_NOTE_REMOVED);
+
+		m_notesMap.erase(foundIter);
+	}
+}
+
+
+istd::CString CVisualRegistryComp::GetComponentNote(const std::string& componentName)
+{
+	NotesMap::iterator foundIter = m_notesMap.find(componentName);
+	if (foundIter != m_notesMap.end()){
+		return foundIter->second;
+	}
+
+	return istd::CString();
+}
+
+
 // reimplemented (icomp::IRegistry)
 
 CVisualRegistryComp::ElementInfo* CVisualRegistryComp::InsertElementInfo(
@@ -158,7 +264,7 @@ bool CVisualRegistryComp::RenameElement(const std::string& oldElementId, const s
 
 bool CVisualRegistryComp::Serialize(iser::IArchive& archive)
 {
-	return BaseClass2::Serialize(archive) && SerializeComponentsLayout(archive);
+	return BaseClass2::Serialize(archive) && SerializeUserData(archive);
 }
 
 
@@ -181,6 +287,23 @@ bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, st
 	retVal = retVal && archive.BeginTag(positionXTag);
 	retVal = retVal && archive.Process(position[1]);
 	retVal = retVal && archive.EndTag(positionXTag);
+
+	return retVal;
+}
+
+
+bool CVisualRegistryComp::SerializeComponentNote(iser::IArchive& archive, std::string& componentName, istd::CString& componentNote)
+{
+	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
+	static iser::CArchiveTag componentNoteTag("Note", "Component note");
+	
+	bool retVal = archive.BeginTag(nameTag);
+	retVal = retVal && archive.Process(componentName);
+	retVal = retVal && archive.EndTag(nameTag);
+
+	retVal = retVal && archive.BeginTag(componentNoteTag);
+	retVal = retVal && archive.Process(componentNote);
+	retVal = retVal && archive.EndTag(componentNoteTag);
 
 	return retVal;
 }
