@@ -22,6 +22,8 @@ CComponentNoteEditorComp::CComponentNoteEditorComp()
 
 // protected methods
 
+// reimplemented (iqtgui::TGuiObserverWrap)
+
 void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
 {
 	IElementSelectionInfo* objectPtr = GetObjectPtr();
@@ -73,11 +75,55 @@ void CComponentNoteEditorComp::UpdateModel()
 }
 
 
+void CComponentNoteEditorComp::OnGuiModelAttached()
+{
+	BaseClass::OnGuiModelAttached();
+
+	IElementSelectionInfo* objectPtr = GetObjectPtr();
+	I_ASSERT(objectPtr != NULL);
+	
+	imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetSelectedRegistry());
+	if (registryModelPtr != NULL){
+		RegisterModel(registryModelPtr);
+	}
+}
+
+
+void CComponentNoteEditorComp::OnGuiModelDetached()
+{
+	UnregisterAllModels();
+
+	CommitButton->setEnabled(false);
+
+	BaseClass::OnGuiModelDetached();
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CComponentNoteEditorComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	NoteEditor->setReadOnly(true);
+	CommitButton->setFocusPolicy(Qt::NoFocus);
+	CommitButton->setEnabled(false);
+}
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CComponentNoteEditorComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	UpdateEditor(istd::IChangeable::CF_MODEL);
+}
+
+
 // protected slots
 
 void CComponentNoteEditorComp::on_NoteEditor_textChanged()
 {
-	CommitButton->setVisible(!NoteEditor->isReadOnly());
+	CommitButton->setEnabled(!NoteEditor->isReadOnly());
 }
 
 
@@ -88,7 +134,7 @@ void CComponentNoteEditorComp::on_CommitButton_clicked()
 
 		UpdateModel();
 
-		CommitButton->setVisible(false);
+		CommitButton->setEnabled(false);
 	}
 }
 

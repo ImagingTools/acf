@@ -3,6 +3,8 @@
 
 
 // ACF includes
+#include "imod/CMultiModelDispatcherBase.h"
+
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "icmpstr/IElementSelectionInfo.h"
@@ -16,7 +18,8 @@ namespace icmpstr
 
 class CComponentNoteEditorComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CComponentNoteEditorComp, IElementSelectionInfo>
+						Ui::CComponentNoteEditorComp, IElementSelectionInfo>,
+			protected imod::CMultiModelDispatcherBase
 {
     Q_OBJECT
 
@@ -33,6 +36,14 @@ protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int updateFlags = 0);
 	virtual void UpdateModel();
+	virtual void OnGuiModelAttached();
+	virtual void OnGuiModelDetached();
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+
+	// reimplemented (imod::CMultiModelDispatcherBase)
+	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected Q_SLOTS:
 	void on_NoteEditor_textChanged();

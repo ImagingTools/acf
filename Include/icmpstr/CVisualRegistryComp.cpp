@@ -55,6 +55,8 @@ bool CVisualRegistryComp::SerializeNotes(iser::IArchive& archive)
 	else{
 		istd::CChangeNotifier notifier(this);
 
+		m_notesMap.clear();
+
 		for (int i = 0; i < notesCount; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 			
