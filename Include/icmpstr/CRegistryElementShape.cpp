@@ -24,6 +24,9 @@ CRegistryElementShape::CRegistryElementShape(
 			const iqt2d::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr),
 	m_registryView(*registryViewPtr),
+	m_exportIcon(":/Icons/Export.svg"),
+	m_noteAttachedIcon(":/Icons/NoteAttached.svg"),
+	m_autoInitIcon(":/Icons/AutoInit.svg"),
 	m_isConsistent(false),
 	m_componentType(0)
 {
@@ -162,7 +165,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 					mainRect.top(),
 					attributeIconSize,
 					attributeIconSize);
-		QIcon(":/Icons/Export.svg").paint(painterPtr, iconRect.toRect());
+		m_exportIcon.paint(painterPtr, iconRect.toRect());
 	}
 
 	// draw element flags icon:
@@ -174,7 +177,17 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 					attributeIconSize,
 					attributeIconSize);
 
-		QIcon(":/Icons/AutoInit.svg").paint(painterPtr, iconRect.toRect());
+		m_autoInitIcon.paint(painterPtr, iconRect.toRect());
+	}
+
+	// draw 'note attached' icon:
+	if (!objectPtr->GetNote().IsEmpty()){
+		QRectF iconRect(
+					mainRect.right() - (attributeIconSize + SIDE_OFFSET) * ++iconsCount,
+					mainRect.top(),
+					attributeIconSize,
+					attributeIconSize);
+		m_noteAttachedIcon.paint(painterPtr, iconRect.toRect());
 	}
 }
 
@@ -305,6 +318,10 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	}
 
 	if ((!m_exportedInterfacesList.empty())){
+		titleWidth += attributeIconSize + SIDE_OFFSET;
+	}
+
+	if ((!element.GetNote().IsEmpty())){
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 

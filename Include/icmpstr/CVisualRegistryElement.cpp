@@ -27,6 +27,18 @@ void CVisualRegistryElement::SetName(const std::string& name)
 }
 
 
+const istd::CString& CVisualRegistryElement::GetNote() const
+{
+	return m_note;
+}
+
+
+void CVisualRegistryElement::SetNote(const istd::CString& note)
+{
+	m_note = note;
+}
+
+
 // overloaded (icomp::CRegistryElement)
 
 void CVisualRegistryElement::Initialize(

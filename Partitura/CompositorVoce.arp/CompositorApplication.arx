@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2116
+          2195
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="23">
+        <AttributeInfoMap count="24">
           <AttributeInfo>
             <Id>
               AboutDialogTitle
@@ -205,6 +205,25 @@
           <AttributeInfo>
             <Id>
               IsOpenContainingFolderVisible
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsTabbedDockAllowed
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;

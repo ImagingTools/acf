@@ -21,24 +21,18 @@ class IComponentNoteController: virtual public istd::IChangeable
 public:
 	enum ChangeFlags
 	{
-		CF_NOTE_ADDED = 1 << 29,
-		CF_NOTE_REMOVED = 1 << 30,
+		CF_NOTE_CHANGED = 1 << 29
 	};
-
-	/**
-		Add a note \c componentNote to the component with the given name \c componentName.
-	*/
-	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote) = 0;
-
-	/**
-		Remove the note from the component with the given name \c componentName.
-	*/
-	virtual void RemoveComponentNote(const std::string& componentName) = 0;
 
 	/**
 		Get the note text to the component with the given name \c componentName.
 	*/
 	virtual istd::CString GetComponentNote(const std::string& componentName) = 0;
+
+	/**
+		Add a note \c componentNote to the component with the given name \c componentName.
+	*/
+	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote) = 0;
 };
 
 

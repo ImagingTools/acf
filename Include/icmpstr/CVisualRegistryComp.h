@@ -48,9 +48,8 @@ public:
 	virtual bool SerializeUserData(iser::IArchive& archive);
 
 	// reimplemented (IComponentNoteController)
-	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote);
-	virtual void RemoveComponentNote(const std::string& componentName);
 	virtual istd::CString GetComponentNote(const std::string& componentName);
+	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote);
 
 	// reimplemented (icomp::IRegistry)
 	virtual ElementInfo* InsertElementInfo(
@@ -77,10 +76,6 @@ protected:
 
 private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
-
-	typedef std::map<std::string, istd::CString> NotesMap;
-
-	NotesMap m_notesMap;
 };
 
 

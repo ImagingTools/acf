@@ -43,6 +43,7 @@ public:
 		I_ASSIGN_MULTI_0(m_mainWindowCommandsCompPtr, "MainWindowComponents", "Additional GUI components", false);
 		I_ASSIGN_TO(m_mainWindowComponentsCompPtr, m_mainWindowCommandsCompPtr, false);
 		I_ASSIGN(m_isNestingEnabledAttrPtr, "IsNestingEnabled", "If true, docking nesting is enabled,\nmore than one docking widget is allowed on the same size", true, false);
+		I_ASSIGN(m_isAllowTabbedDockAttrPtr, "IsTabbedDockAllowed", "If true, stacking docking windows on each other is enabled", true, false);
 		I_ASSIGN(m_isMenuVisibleAttrPtr, "IsMenuVisible", "If true, menu bar will be visible", true, true);
 		I_ASSIGN(m_isToolbarVisibleAttrPtr, "IsToolbarVisible", "If true, tool bar will be visible", true, true);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of icons using in the main window", false, 16);
@@ -105,6 +106,7 @@ private:
 	I_REF(iqtgui::IDialog, m_aboutDialogCompPtr);
 	I_REF(iqtgui::IDialog, m_settingsDialogCompPtr);
 	I_ATTR(bool, m_isNestingEnabledAttrPtr);
+	I_ATTR(bool, m_isAllowTabbedDockAttrPtr);
 	I_ATTR(bool, m_isMenuVisibleAttrPtr);
 	I_ATTR(bool, m_isToolbarVisibleAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);

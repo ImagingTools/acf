@@ -31,6 +31,8 @@ public:
 	const icomp::CComponentAddress& GetAddress() const;
 	const std::string& GetName() const;
 	void SetName(const std::string& name);
+	const istd::CString& GetNote() const;
+	void SetNote(const istd::CString& note);
 
 	// overloaded (icomp::CRegistryElement)
 	void Initialize(
@@ -64,6 +66,7 @@ private:
 	const icomp::IRegistry* m_registryPtr;
 	icomp::CComponentAddress m_addess;
 	std::string m_name;
+	istd::CString m_note;
 };
 
 

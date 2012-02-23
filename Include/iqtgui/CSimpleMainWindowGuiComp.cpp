@@ -363,8 +363,17 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 		mainWindowPtr->setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
 	}	
 
+	int dockOptions = 0;
+
 	I_ASSERT(m_isNestingEnabledAttrPtr.IsValid());
-	mainWindowPtr->setDockOptions(*m_isNestingEnabledAttrPtr? QMainWindow::AllowNestedDocks: QMainWindow::DockOption(0));
+	if (*m_isNestingEnabledAttrPtr){
+		dockOptions |= QMainWindow::AllowNestedDocks;
+	}
+	I_ASSERT(m_isAllowTabbedDockAttrPtr.IsValid());
+	if (*m_isAllowTabbedDockAttrPtr){
+		dockOptions |= QMainWindow::AllowTabbedDocks;
+	}
+	mainWindowPtr->setDockOptions(QMainWindow::DockOption(dockOptions));
 
 	if (m_workspaceCompPtr.IsValid()){
 		m_workspaceCompPtr->CreateGui(NULL);

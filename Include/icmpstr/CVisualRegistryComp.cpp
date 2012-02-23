@@ -31,53 +31,99 @@ bool CVisualRegistryComp::SerializeNotes(iser::IArchive& archive)
 	static iser::CArchiveTag noteMapTag("NotesMap", "Map of component name to its note");
 	static iser::CArchiveTag elementTag("Element", "Map element");
 
-	int notesCount = m_notesMap.size();
+	bool retVal = true;
 
-	bool retVal = archive.BeginMultiTag(noteMapTag, elementTag, notesCount);
-	if (!retVal){
-		return false;
-	}
+	Ids ids = GetElementIds();
 
 	if (archive.IsStoring()){
-		for (		NotesMap::const_iterator noteIndex = m_notesMap.begin();
-					noteIndex != m_notesMap.end();
-					noteIndex++){
-			retVal = retVal && archive.BeginTag(elementTag);
-
-			std::string elementId = noteIndex->first;
-			istd::CString componentNote = noteIndex->second;
-
-			retVal = retVal && SerializeComponentNote(archive, elementId, componentNote);
-				
-			retVal = retVal && archive.EndTag(elementTag);
+		// calculate number of non-empty notes
+		int notesCount = 0;
+		for (		Ids::const_iterator iter = ids.begin();
+					iter != ids.end();
+					++iter){
+			const std::string& elementId = *iter;
+			const ElementInfo* infoPtr = GetElementInfo(elementId);
+			if (infoPtr != NULL){
+				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				if ((elementPtr != NULL) && !elementPtr->GetNote().IsEmpty()){
+					notesCount++;
+				}
+			}
 		}
+
+		retVal = retVal && archive.BeginMultiTag(noteMapTag, elementTag, notesCount);
+
+		for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
+			std::string elementId = *iter;
+
+			istd::CString note;
+			const ElementInfo* infoPtr = GetElementInfo(elementId);
+			if (infoPtr != NULL){
+				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				if (elementPtr != NULL){
+					note = elementPtr->GetNote();
+				}
+			}
+
+			if (!note.IsEmpty()){
+				retVal = retVal && archive.BeginTag(elementTag);
+
+				retVal = retVal && SerializeComponentNote(archive, elementId, note);
+
+				retVal = retVal && archive.EndTag(elementTag);
+			}
+		}
+
+		retVal = retVal && archive.EndTag(noteMapTag);
 	}
 	else{
 		istd::CChangeNotifier notifier(this);
 
-		m_notesMap.clear();
+		// at the first remove all notes be reading
+		for (		Ids::const_iterator iter = ids.begin();
+					iter != ids.end();
+					++iter){
+			const std::string& elementId = *iter;
+			const ElementInfo* infoPtr = GetElementInfo(elementId);
+			if (infoPtr != NULL){
+				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				if (elementPtr != NULL){
+					elementPtr->SetNote(istd::CString::GetEmpty());
+				}
+			}
+		}
+
+		int notesCount = 0;
+		retVal = retVal && archive.BeginMultiTag(noteMapTag, elementTag, notesCount);
+
+		if (!retVal){
+			return false;
+		}
 
 		for (int i = 0; i < notesCount; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 			
 			std::string elementId;
-			istd::CString componentNote;
+			istd::CString note;
 
-			retVal = retVal && SerializeComponentNote(archive, elementId, componentNote);
+			retVal = retVal && SerializeComponentNote(archive, elementId, note);
 			if (!retVal){
 				return false;
 			}
 
 			const ElementInfo* infoPtr = GetElementInfo(elementId);
 			if (infoPtr != NULL){
-				SetComponentNote(elementId, componentNote);
+				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
+				if (elementPtr != NULL){
+					elementPtr->SetNote(note);
+				}
 			}
 
 			retVal = retVal && archive.EndTag(elementTag);
 		}
-	}
 
-	retVal = retVal && archive.EndTag(noteMapTag);
+		retVal = retVal && archive.EndTag(noteMapTag);
+	}
 
 	return retVal;
 }
@@ -115,7 +161,7 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(elementTag);
 
 			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
-				
+
 			retVal = retVal && archive.EndTag(elementTag);
 		}
 	}
@@ -143,7 +189,6 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 
 			retVal = retVal && archive.EndTag(elementTag);
 		}
-	
 	}
 
 	retVal = retVal && archive.EndTag(positionMapTag);
@@ -166,6 +211,20 @@ bool CVisualRegistryComp::SerializeUserData(iser::IArchive& archive)
 
 // reimplemented (IComponentNoteController)
 
+istd::CString CVisualRegistryComp::GetComponentNote(const std::string& componentName)
+{
+	const ElementInfo* elementInfoPtr = GetElementInfo(componentName);
+	if (elementInfoPtr != NULL){
+		CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
+		if (elementPtr != NULL){
+			return elementPtr->GetNote();
+		}
+	}
+
+	return istd::CString();
+}
+
+
 void CVisualRegistryComp::SetComponentNote(const std::string& componentName, const istd::CString& componentNote)
 {
 	const ElementInfo* elementInfoPtr = GetElementInfo(componentName);
@@ -173,32 +232,12 @@ void CVisualRegistryComp::SetComponentNote(const std::string& componentName, con
 		return;
 	}
 
-	istd::CChangeNotifier changePtr(this, CF_NOTE_ADDED);
+	istd::CChangeNotifier changePtr(this, CF_NOTE_CHANGED);
 
-	m_notesMap[componentName] = componentNote;
-}
-
-
-void CVisualRegistryComp::RemoveComponentNote(const std::string& componentName)
-{
-	NotesMap::iterator foundIter = m_notesMap.find(componentName);
-
-	if (foundIter != m_notesMap.end()){
-		istd::CChangeNotifier changePtr(this, CF_NOTE_REMOVED);
-
-		m_notesMap.erase(foundIter);
+	CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
+	if (elementPtr != NULL){
+		elementPtr->SetNote(componentNote);
 	}
-}
-
-
-istd::CString CVisualRegistryComp::GetComponentNote(const std::string& componentName)
-{
-	NotesMap::iterator foundIter = m_notesMap.find(componentName);
-	if (foundIter != m_notesMap.end()){
-		return foundIter->second;
-	}
-
-	return istd::CString();
 }
 
 

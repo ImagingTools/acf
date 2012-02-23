@@ -1,15 +1,14 @@
 <RCC>
 	<qresource prefix="Icons/" >
-		<file alias="Folder">Resources/Icons/folder_64.png</file>
-		<file alias="Back">Resources/Icons/back_128.png</file>
     <file alias="Export.svg">Resources/Icons/Export.svg</file>
     <file alias="Import.svg">Resources/Icons/Import.svg</file>
     <file alias="AutoInit.svg">Resources/Icons/Anchor.svg</file>
-		<file alias="ExportToCode.svg">Resources/Icons/ExportToCode.svg</file>
+    <file alias="NoteAttached.svg">Resources/Icons/NoteAttached.svg</file>
+    <file alias="ExportToCode.svg">Resources/Icons/ExportToCode.svg</file>
 		<file alias="RealComponent.svg">Resources/Icons/RealComponent.svg</file>
 		<file alias="CompositeComponent.svg">Resources/Icons/CompositeComponent.svg</file>
 		<file alias="MixedComponent.svg">Resources/Icons/MixedComponent.svg</file>
 		<file alias="EmbeddedComponent.svg">Resources/Icons/EmbeddedComponent.svg</file>
-		<file alias="ToEmbeddedComponent.svg">Resources/Icons/ToEmbeddedComponent.svg</file>
-	</qresource>
+    <file alias="ToEmbeddedComponent.svg">Resources/Icons/ToEmbeddedComponent.svg</file>
+  </qresource>
 </RCC>
