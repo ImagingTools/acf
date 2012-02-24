@@ -43,7 +43,7 @@ QStringList CElementSelectionInfoManagerBase::GetExportAliases(const std::string
 					iter != exportedMap.end();
 					++iter){
 			if (iter->second == attributeName){
-				exportedAliases.append(iqt::GetQString(iter->first));
+				exportedAliases.append(QString::fromStdString(iter->first));
 			}
 		}
 	}

@@ -93,7 +93,7 @@ protected:
 
 	// reimplemented (idoc::CMultiDocumentManagerBase)
 	virtual istd::IChangeable* OpenDocument(
-				const istd::CString& filePath,
+				const QString& filePath,
 				bool createView,
 				const std::string& viewTypeId,
 				std::string& documentTypeId);
@@ -108,7 +108,7 @@ protected:
 
 	// reimplemented (idoc::CMultiDocumentManagerBase)
 	virtual void CloseAllDocuments();
-	virtual istd::CStringList GetOpenFilePaths(const std::string* documentTypeIdPtr = NULL) const;
+	virtual QStringList GetOpenFilePaths(const std::string* documentTypeIdPtr = NULL) const;
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
 	virtual void OnViewRemoved(istd::IPolymorphic* viewPtr);
 	virtual void QueryDocumentClose(const SingleDocumentData& info, bool* ignoredPtr);

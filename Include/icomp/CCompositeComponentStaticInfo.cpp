@@ -123,9 +123,9 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 	m_keywords = registry.GetKeywords();
 
 	if (parentPtr != NULL){
-		const istd::CString& parentKeywords = parentPtr->GetKeywords();
-		if (!parentKeywords.IsEmpty()){
-			if (m_keywords.IsEmpty()){
+		const QString& parentKeywords = parentPtr->GetKeywords();
+		if (!parentKeywords.isEmpty()){
+			if (m_keywords.isEmpty()){
 				m_keywords = parentKeywords;
 			}
 			else{
@@ -163,13 +163,13 @@ const IComponentStaticInfo* CCompositeComponentStaticInfo::GetEmbeddedComponentI
 }
 
 
-const istd::CString& CCompositeComponentStaticInfo::GetDescription() const
+const QString& CCompositeComponentStaticInfo::GetDescription() const
 {
 	return m_description;
 }
 
 
-const istd::CString& CCompositeComponentStaticInfo::GetKeywords() const
+const QString& CCompositeComponentStaticInfo::GetKeywords() const
 {
 	return m_keywords;
 }

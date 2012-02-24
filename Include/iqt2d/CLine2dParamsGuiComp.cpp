@@ -53,9 +53,9 @@ void CLine2dParamsGuiComp::OnGuiModelAttached()
 
 	if (m_unitNameAttrPtr.IsValid()){
 		Point1UnitLabel->setVisible(true);
-		Point1UnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		Point1UnitLabel->setText(*m_unitNameAttrPtr);
 		Point2UnitLabel->setVisible(true);
-		Point2UnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		Point2UnitLabel->setText(*m_unitNameAttrPtr);
 	}
 	else{
 		Point1UnitLabel->setVisible(false);

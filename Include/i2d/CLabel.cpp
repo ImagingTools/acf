@@ -5,14 +5,14 @@ namespace i2d
 {
 
 
-CLabel::CLabel(const i2d::CVector2d& position, const istd::CString& labelText)
+CLabel::CLabel(const i2d::CVector2d& position, const QString& labelText)
 	:BaseClass(position), 
 	m_text(labelText)
 {
 }
 
 
-void CLabel::SetText(const istd::CString& labelText)
+void CLabel::SetText(const QString& labelText)
 {
 	m_text = labelText;
 }

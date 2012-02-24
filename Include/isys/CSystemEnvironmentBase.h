@@ -16,7 +16,7 @@ class CSystemEnvironmentBase: virtual public isys::ISystemEnvironment
 {
 public:
 	// reimplemented (isys::ISystemEnvironment)
-	virtual istd::CString GetSystemVariableValue(const istd::CString& variableName) const;
+	virtual QString GetSystemVariableValue(const QString& variableName) const;
 };
 
 

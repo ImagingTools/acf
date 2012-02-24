@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/CArchiveTag.h"
 
@@ -25,7 +25,7 @@ bool CBinaryReadArchiveBase::BeginTag(const CArchiveTag& tag)
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						tr("Bad tag begin code, is ") + istd::CString::FromNumber(readId) + tr(", should be ") + istd::CString::FromNumber(tag.GetBinaryId()) + tr(" (tag '") + tag.GetId() + tr("')"),
+						QString(tr("Bad tag begin code, is ")) + QString("%1").arg(readId) + QString(tr(", should be ")) + QString("%1").arg(tag.GetBinaryId()) + QString(tr(" (tag '")) + QString(tag.GetId().c_str()) + QString(tr("')")),
 						"iser::CBinaryReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -51,7 +51,7 @@ bool CBinaryReadArchiveBase::EndTag(const CArchiveTag& tag)
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						tr("Bad tag begin code, is ") + istd::CString::FromNumber(~readId) + tr(", should be ") + istd::CString::FromNumber(tag.GetBinaryId()) + tr(" (tag '") + tag.GetId() + tr("')"),
+						tr("Bad tag begin code, is ") + QString("%1").arg(~readId) + tr(", should be ") + QString("%1").arg(tag.GetBinaryId()) + tr(" (tag '") + QString(tag.GetId().c_str()) + tr("')"),
 						"iser::CBinaryReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -148,7 +148,7 @@ bool CBinaryReadArchiveBase::Process(std::string& value)
 					SendLogMessage(
 								istd::ILogger::MC_ERROR,
 								MI_STRING_TOO_LONG,
-								istd::CString("Read string size is ") + istd::CString::FromNumber(stringLength) + " and it is longer than maximum size",
+								QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
 								"iser::CBinaryReadArchiveBase",
 								MF_SYSTEM);
 				}
@@ -174,7 +174,7 @@ bool CBinaryReadArchiveBase::Process(std::string& value)
 }
 
 
-bool CBinaryReadArchiveBase::Process(istd::CString& value)
+bool CBinaryReadArchiveBase::Process(QString& value)
 {
 	int stringLength;
 
@@ -187,7 +187,7 @@ bool CBinaryReadArchiveBase::Process(istd::CString& value)
 					SendLogMessage(
 								istd::ILogger::MC_ERROR,
 								MI_STRING_TOO_LONG,
-								istd::CString("Read string size is ") + istd::CString::FromNumber(stringLength) + " and it is longer than maximum size",
+								QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
 								"iser::CBinaryReadArchiveBase",
 								MF_SYSTEM);
 				}
@@ -200,12 +200,12 @@ bool CBinaryReadArchiveBase::Process(istd::CString& value)
 			retVal = ProcessData(&buffer[0], stringLength * int(sizeof(wchar_t)));	
 
 			if (retVal){
-				value = istd::CString(&buffer[0]);
+				value = QString::fromStdWString(std::wstring(&buffer[0]));
 			}
 		}
 		else {
 			// just clear the string
-			value.Reset();
+			value.clear();
 		}
 	}
 

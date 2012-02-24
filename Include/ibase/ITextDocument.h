@@ -2,7 +2,7 @@
 #define ibase_ITextDocument_included
 
 
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/ISerializable.h"
 
@@ -20,12 +20,12 @@ public:
 	/**
 		Get document text.
 	*/
-	virtual istd::CString GetText() const = 0;
+	virtual QString GetText() const = 0;
 
 	/**
 		Set document text.
 	*/
-	virtual void SetText(const istd::CString& text) = 0;
+	virtual void SetText(const QString& text) = 0;
 };
 
 

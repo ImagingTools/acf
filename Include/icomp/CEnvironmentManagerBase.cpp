@@ -10,15 +10,15 @@ namespace icomp
 
 // reimplemented (icomp::IComponentEnvironmentManager)
 
-istd::CString CEnvironmentManagerBase::GetConfigFilePath() const
+QString CEnvironmentManagerBase::GetConfigFilePath() const
 {
-	return istd::CString::GetEmpty();
+	return QString();
 }
 
 
 // reimplemented (icomp::IPackagesManager)
 
-bool CEnvironmentManagerBase::LoadPackages(const istd::CString& /*configFilePath*/)
+bool CEnvironmentManagerBase::LoadPackages(const QString& /*configFilePath*/)
 {
 	return false;
 }
@@ -30,9 +30,9 @@ int CEnvironmentManagerBase::GetPackageType(const std::string& /*packageId*/) co
 }
 
 
-istd::CString CEnvironmentManagerBase::GetPackagePath(const std::string& /*packageId*/) const
+QString CEnvironmentManagerBase::GetPackagePath(const std::string& /*packageId*/) const
 {
-	return istd::CString::GetEmpty();
+	return QString();
 }
 
 

@@ -521,7 +521,7 @@ void CSceneProviderGuiComp::OnRetranslate()
 
 	m_fileMenu.SetVisuals(tr("&File"), tr("File"), tr("File menu"));
 	m_printCommand.SetVisuals(tr("&Print..."), tr("Print"), tr("Prints current document"), QIcon(":/Icons/Print"));
-	m_editMenu.SetName(iqt::GetCString(tr("&Edit")));
+	m_editMenu.SetName(tr("&Edit"));
 	m_viewMenu.SetVisuals(tr("&View"), tr("View"), tr("View menu"));
 	m_autoFitToViewCommand.SetVisuals(tr("&Auto Fit"), tr("Auto Fit"), tr("Automatical fit contents to view area"));
 	m_fitToViewCommand.SetVisuals(tr("&Fit Contents To View"), tr("Fit contents To View"), tr("Fit contents to view area"));

@@ -3,7 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "isys/IProcessEnvironment.h"
 
@@ -30,7 +30,7 @@ public:
 		\param applicationPath - Path to the application's file. 
 		\param applicationArguments - Calling arguments for the application. 
 	*/
-	virtual int ExecuteProcess(const istd::CString& executablePath, const istd::CStringList& processArguments) = 0;
+	virtual int ExecuteProcess(const QString& executablePath, const QStringList& processArguments) = 0;
 };
 
 

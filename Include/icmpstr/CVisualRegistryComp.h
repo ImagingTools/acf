@@ -48,8 +48,8 @@ public:
 	virtual bool SerializeUserData(iser::IArchive& archive);
 
 	// reimplemented (IComponentNoteController)
-	virtual istd::CString GetComponentNote(const std::string& componentName);
-	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote);
+	virtual QString GetComponentNote(const std::string& componentName);
+	virtual void SetComponentNote(const std::string& componentName, const QString& componentNote);
 
 	// reimplemented (icomp::IRegistry)
 	virtual ElementInfo* InsertElementInfo(
@@ -67,7 +67,7 @@ protected:
 	typedef std::map<icomp::CComponentAddress, IconPtr> IconMap;
 
 	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
-	bool SerializeComponentNote(iser::IArchive& archive, std::string& componentName, istd::CString& componentNote);
+	bool SerializeComponentNote(iser::IArchive& archive, std::string& componentName, QString& componentNote);
 
 	// reimplemented (icomp::CRegistry)
 	virtual icomp::IRegistryElement* CreateRegistryElement(

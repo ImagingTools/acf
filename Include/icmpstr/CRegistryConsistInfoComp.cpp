@@ -147,8 +147,8 @@ bool CRegistryConsistInfoComp::IsElementValid(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 								istd::ILogger::MC_WARNING,
 								MI_COMPONENT_INACTIVE,
-								iqt::GetCString(tr("Element %1 uses unknown embedded composite component %2").arg(elementName.c_str()).arg(elementAddress.GetComponentId().c_str())),
-								iqt::GetCString(tr("Element Consistency Check")),
+								tr("Element %1 uses unknown embedded composite component %2").arg(elementName.c_str()).arg(elementAddress.GetComponentId().c_str()),
+								tr("Element Consistency Check"),
 								0)));
 				}
 
@@ -165,8 +165,8 @@ bool CRegistryConsistInfoComp::IsElementValid(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 						istd::ILogger::MC_ERROR,
 						MI_NO_ELEMENT_INFO,
-						iqt::GetCString(tr("No element info available for %1").arg(elementName.c_str())),
-						iqt::GetCString(tr("Element Consistency Check")),
+						tr("No element info available for %1").arg(elementName.c_str()),
+						tr("Element Consistency Check"),
 						0)));
 		}
 
@@ -208,10 +208,8 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 							istd::ILogger::MC_WARNING,
 							MI_COMPONENT_INACTIVE,
-							iqt::GetCString(tr("Element %1 uses inactive component %2")
-										.arg(elementName.c_str())
-										.arg(iqt::GetQString(elementInfo.address.ToString()))),
-							iqt::GetCString(tr("Element Consistency Check")),
+							tr("Element %1 uses inactive component %2").arg(elementName.c_str()).arg(elementInfo.address.ToString()),
+							tr("Element Consistency Check"),
 							0)));
 			}
 
@@ -246,8 +244,8 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 						istd::ILogger::MC_WARNING,
 						MI_COMPONENT_INACTIVE,
-						iqt::GetCString(tr("Element %1 is not loaded").arg(elementName.c_str())),
-						iqt::GetCString(tr("Element Consistency Check")),
+						tr("Element %1 is not loaded").arg(elementName.c_str()),
+						tr("Element Consistency Check"),
 						0)));
 		}
 
@@ -283,12 +281,12 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 										istd::ILogger::MC_ERROR,
 										MI_BAD_ATTRIBUTE_TYPE,
-										iqt::GetCString(tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
+										tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
 													.arg(attributeName.c_str())
 													.arg(elementName.c_str())
 													.arg(attrMetaInfoPtr->GetAttributeTypeName().c_str())
-													.arg(attrInfoPtr->attributeTypeName.c_str())),
-										iqt::GetCString(tr("Attribute Consistency Check")),
+													.arg(attrInfoPtr->attributeTypeName.c_str()),
+										tr("Attribute Consistency Check"),
 										0)));
 						}
 
@@ -314,10 +312,10 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 										istd::ILogger::MC_ERROR,
 										MI_REF_NOT_RESOLVED,
-										iqt::GetCString(tr("Reference or factory %1 in %2 cannot be undefined")
+										tr("Reference or factory %1 in %2 cannot be undefined")
 													.arg(attributeName.c_str())
-													.arg(elementName.c_str())),
-										iqt::GetCString(tr("Attribute Consistency Check")),
+													.arg(elementName.c_str()),
+										tr("Attribute Consistency Check"),
 										0)));
 						}
 
@@ -329,10 +327,10 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 									istd::ILogger::MC_ERROR,
 									MI_REF_NOT_RESOLVED,
-									iqt::GetCString(tr("Reference or factory %1 in %2 cannot be undefined")
+									tr("Reference or factory %1 in %2 cannot be undefined")
 												.arg(attributeName.c_str())
-												.arg(elementName.c_str())),
-									iqt::GetCString(tr("Attribute Consistency Check")),
+												.arg(elementName.c_str()),
+									tr("Attribute Consistency Check"),
 									0)));
 					}
 
@@ -344,10 +342,10 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 								istd::ILogger::MC_ERROR,
 								MI_UNDEF_ATTRIBUTE,
-								iqt::GetCString(tr("Attribute %1 in %2 not exists in component specification")
+								tr("Attribute %1 in %2 not exists in component specification")
 											.arg(attributeName.c_str())
-											.arg(elementName.c_str())),
-								iqt::GetCString(tr("Attribute Consistency Check")),
+											.arg(elementName.c_str()),
+								tr("Attribute Consistency Check"),
 								0)));
 				}
 
@@ -363,8 +361,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress& address) const
 {
 	if (m_externalMetaInfoManagerCompPtr.IsValid()){
-		istd::CString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(address);
-		if (!infoPath.IsEmpty()){
+		QString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(address);
+		if (!infoPath.isEmpty()){
 			IconCache::const_iterator cachedIter = m_iconCache.find(address);
 			if (cachedIter != m_iconCache.end()){
 				return cachedIter->second;
@@ -372,7 +370,7 @@ QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress&
 			else{
 				QIcon& icon = m_iconCache[address];
 
-				QDir packageDir(iqt::GetQString(infoPath));
+				QDir packageDir(infoPath);
 				if (packageDir.exists("Image.png")){
 					icon = QIcon(packageDir.filePath("Image.png"));
 				}
@@ -543,11 +541,11 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 								istd::ILogger::MC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
-								iqt::GetCString(tr("Reference or factory '%1' in '%2' is set to %3, but it cannot be resolved")
+								tr("Reference or factory '%1' in '%2' is set to %3, but it cannot be resolved")
 											.arg(attributeName.c_str())
 											.arg(elementName.c_str())
-											.arg(pointedElementName.c_str())),
-								iqt::GetCString(tr("Attribute Consistency Check")),
+											.arg(pointedElementName.c_str()),
+								tr("Attribute Consistency Check"),
 								0)));
 				}
 
@@ -562,11 +560,11 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 									istd::ILogger::MC_ERROR,
 									MI_COMPONENT_NOT_FOUND,
-									iqt::GetCString(tr("Reference or factory '%1' in '%2' is set to %3, but its subelement cannot be found")
+									tr("Reference or factory '%1' in '%2' is set to %3, but its subelement cannot be found")
 												.arg(attributeName.c_str())
 												.arg(elementName.c_str())
-												.arg(pointedElementName.c_str())),
-									iqt::GetCString(tr("Attribute Consistency Check")),
+												.arg(pointedElementName.c_str()),
+									tr("Attribute Consistency Check"),
 									0)));
 					}
 
@@ -601,11 +599,11 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 								istd::ILogger::MC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
-								iqt::GetCString(tr("Reference or factory '%1' in '%2' uses embedded type '%3', but this type is undefined")
+								tr("Reference or factory '%1' in '%2' uses embedded type '%3', but this type is undefined")
 											.arg(attributeName.c_str())
 											.arg(elementName.c_str())
-											.arg(pointedElementAddress.GetComponentId().c_str())),
-								iqt::GetCString(tr("Attribute Consistency Check")),
+											.arg(pointedElementAddress.GetComponentId().c_str()),
+								tr("Attribute Consistency Check"),
 								0)));
 				}
 
@@ -618,11 +616,11 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 						istd::ILogger::MC_ERROR,
 						MI_COMPONENT_NOT_FOUND,
-						iqt::GetCString(tr("Reference or factory '%1' in '%2' contains '%3', but this element doesn't exist")
+						tr("Reference or factory '%1' in '%2' contains '%3', but this element doesn't exist")
 									.arg(attributeName.c_str())
 									.arg(elementName.c_str())
-									.arg(pointedElementName.c_str())),
-						iqt::GetCString(tr("Attribute Consistency Check")),
+									.arg(pointedElementName.c_str()),
+						tr("Attribute Consistency Check"),
 						0)));
 		}
 
@@ -667,12 +665,12 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 								istd::ILogger::MC_ERROR,
 								MI_WRONG_INTERFACE,
-								iqt::GetCString(tr("Reference or factory '%1' in '%2' point at '%3', but it doesn't implement interface %4")
+								tr("Reference or factory '%1' in '%2' point at '%3', but it doesn't implement interface %4")
 											.arg(attributeName.c_str())
 											.arg(elementName.c_str())
 											.arg(pointedElementName.c_str())
-											.arg(interfaceName.c_str())),
-								iqt::GetCString(tr("Attribute Consistency Check")),
+											.arg(interfaceName.c_str()),
+								tr("Attribute Consistency Check"),
 								0)));
 				}
 
@@ -685,11 +683,11 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const ibase::IMessage>(new ibase::CMessage(
 						istd::ILogger::MC_WARNING,
 						MI_COMPOSITE_FOUND,
-						iqt::GetCString(tr("Reference or factory '%1' in '%2' point at '%3', but it is not accessible in actual configuration")
+						tr("Reference or factory '%1' in '%2' point at '%3', but it is not accessible in actual configuration")
 									.arg(attributeName.c_str())
 									.arg(elementName.c_str())
-									.arg(pointedElementName.c_str())),
-						iqt::GetCString(tr("Attribute Consistency Check")),
+									.arg(pointedElementName.c_str()),
+						tr("Attribute Consistency Check"),
 						0)));
 		}
 

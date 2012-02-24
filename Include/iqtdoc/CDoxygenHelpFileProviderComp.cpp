@@ -17,7 +17,7 @@ namespace iqtdoc
 
 // reimplemented (idoc::IHelpFileProvider)
 
-double CDoxygenHelpFileProviderComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CDoxygenHelpFileProviderComp::GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	QFileInfo fileInfo(CalcFilePath(CalcClassInfo(contextText, contextObjectPtr)));
 
@@ -33,12 +33,12 @@ double CDoxygenHelpFileProviderComp::GetHelpQuality(const istd::CString& context
 }
 
 
-istd::CString CDoxygenHelpFileProviderComp::GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+QString CDoxygenHelpFileProviderComp::GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	QFileInfo fileInfo(CalcFilePath(CalcClassInfo(contextText, contextObjectPtr)));
 
 	if (fileInfo.exists()){
-		return iqt::GetCString(fileInfo.absoluteFilePath());
+		return fileInfo.absoluteFilePath();
 	}
 	else if (m_slaveProvider.IsValid()){
 		return m_slaveProvider->GetHelpFilePath(contextText, contextObjectPtr);
@@ -51,7 +51,7 @@ istd::CString CDoxygenHelpFileProviderComp::GetHelpFilePath(const istd::CString&
 
 // protected methods
 
-istd::CClassInfo CDoxygenHelpFileProviderComp::CalcClassInfo(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+istd::CClassInfo CDoxygenHelpFileProviderComp::CalcClassInfo(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	if (contextObjectPtr != NULL){
 		const istd::CClassInfo* classInfoPtr = dynamic_cast<const istd::CClassInfo*>(contextObjectPtr);
@@ -63,14 +63,14 @@ istd::CClassInfo CDoxygenHelpFileProviderComp::CalcClassInfo(const istd::CString
 		}
 	}
 	else{
-		return istd::CClassInfo(contextText.ToString());
+		return istd::CClassInfo(contextText.toStdString());
 	}
 }
 
 
 QString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo& classInfo) const
 {
-	istd::CString retVal = *m_doxygenDirectoryAttrPtr + "/class";
+	QString retVal = *m_doxygenDirectoryAttrPtr + "/class";
 
 	std::string className = classInfo.GetName();
 	for (		std::string::const_iterator iter = className.begin();
@@ -91,7 +91,7 @@ QString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo& class
 
 	retVal += ".html";
 
-	return iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(retVal));
+	return iqt::CFileSystem::GetEnrolledPath(retVal);
 }
 
 

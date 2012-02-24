@@ -21,7 +21,7 @@ public:
 		Get file path of real used config file.
 		If no config file was used, it returns empty string.
 	*/
-	virtual istd::CString GetConfigFilePath() const = 0;
+	virtual QString GetConfigFilePath() const = 0;
 };
 
 

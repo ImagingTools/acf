@@ -18,61 +18,61 @@ namespace iqt
 
 // reimplemented (isys::IFileSystem)
 
-istd::CString CFileSystem::GetNormalizedPath(const istd::CString& path) const
+QString CFileSystem::GetNormalizedPath(const QString& path) const
 {
-	QDir dir(GetEnrolledPath(iqt::GetQString(path)));
+	QDir dir(GetEnrolledPath(path));
 
-	return iqt::GetCString(dir.absolutePath());
+	return dir.absolutePath();
 }
 
 
-istd::CString CFileSystem::GetFileName(const istd::CString& filePath) const
+QString CFileSystem::GetFileName(const QString& filePath) const
 {
-	QFileInfo fileInfo(iqt::GetQString(filePath));
+	QFileInfo fileInfo(filePath);
 
-	return iqt::GetCString(fileInfo.fileName());
+	return fileInfo.fileName();
 }
 
 
-istd::CString CFileSystem::GetBaseFileName(const istd::CString& filePath) const
+QString CFileSystem::GetBaseFileName(const QString& filePath) const
 {
-	QFileInfo fileInfo(iqt::GetQString(filePath));
+	QFileInfo fileInfo(filePath);
 
-	return iqt::GetCString(fileInfo.baseName());
+	return fileInfo.baseName();
 }
 
 
-istd::CString CFileSystem::GetDirPath(const istd::CString& filePath) const
+QString CFileSystem::GetDirPath(const QString& filePath) const
 {
-	QFileInfo fileInfo(iqt::GetQString(filePath));
+	QFileInfo fileInfo(filePath);
 
-	return iqt::GetCString(fileInfo.absolutePath());
+	return fileInfo.absolutePath();
 }
 
 
-bool CFileSystem::HasExtension(const istd::CString& filePath, const istd::CString& extension) const
+bool CFileSystem::HasExtension(const QString& filePath, const QString& extension) const
 {
-	return iqt::GetQString(filePath).endsWith(iqt::GetQString(extension));
+	return filePath.endsWith(extension);
 }
 
 
-bool CFileSystem::IsPresent(const istd::CString& filePath) const
+bool CFileSystem::IsPresent(const QString& filePath) const
 {
-	QFileInfo fileInfo(iqt::GetQString(filePath));
+	QFileInfo fileInfo(filePath);
 
 	return fileInfo.exists();
 }
 
 
-bool CFileSystem::CreateFileCopy(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting) const
+bool CFileSystem::CreateFileCopy(const QString& inputFile, const QString& outputFile, bool overwriteExisting) const
 {
-	QString inputFilePath = iqt::GetQString(inputFile);
+	QString inputFilePath = inputFile;
 	QFileInfo inputFileInfo(inputFilePath);
 	if (!inputFileInfo.exists()){
 		return false;
 	}
 
-	QString outputFilePath = iqt::GetQString(outputFile);
+	QString outputFilePath = outputFile;
 
 	if (overwriteExisting){
 		QFileInfo fileInfo(outputFilePath);
@@ -87,17 +87,17 @@ bool CFileSystem::CreateFileCopy(const istd::CString& inputFile, const istd::CSt
 }
 
 
-bool CFileSystem::RemoveFile(const istd::CString& filePath) const
+bool CFileSystem::RemoveFile(const QString& filePath) const
 {
-	QFile file(iqt::GetQString(filePath));
+	QFile file(filePath);
 
 	return file.remove();
 }
 
 
-bool CFileSystem::RemoveFolder(const istd::CString& directoryPath, bool ignoreNonEmpty) const
+bool CFileSystem::RemoveFolder(const QString& directoryPath, bool ignoreNonEmpty) const
 {
-	QString directory = iqt::GetQString(directoryPath);
+	QString directory = directoryPath;
 
 	QDir dir(directory);
 
@@ -109,10 +109,10 @@ bool CFileSystem::RemoveFolder(const istd::CString& directoryPath, bool ignoreNo
 
 			if (fileInfo.exists()){
 				if (fileInfo.isDir()){
-					retVal = retVal && RemoveFolder(iqt::GetCString(fileInfo.absoluteFilePath()), true);
+					retVal = retVal && RemoveFolder(fileInfo.absoluteFilePath(), true);
 				}
 				else{				
-					retVal = retVal && RemoveFile(iqt::GetCString(fileInfo.absoluteFilePath()));
+					retVal = retVal && RemoveFile(fileInfo.absoluteFilePath());
 				}
 			}
 		}
@@ -122,9 +122,9 @@ bool CFileSystem::RemoveFolder(const istd::CString& directoryPath, bool ignoreNo
 }
 
 
-bool CFileSystem::CreateFolder(const istd::CString& directoryPath) const
+bool CFileSystem::CreateFolder(const QString& directoryPath) const
 {
-	QString directory = iqt::GetQString(directoryPath);
+	QString directory = directoryPath;
 
 	QDir dir(directory);
 
@@ -217,9 +217,9 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 	iqt::CProcessEnvironment processEnvironment;
 	iqt::CProcessEnvironment::EnvironmentVariables environmentVariables = processEnvironment.GetEnvironmentVariables();
 
-	iqt::CProcessEnvironment::EnvironmentVariables::const_iterator foundVarIter = environmentVariables.find(iqt::GetCString(varName).ToUpper());
+	iqt::CProcessEnvironment::EnvironmentVariables::const_iterator foundVarIter = environmentVariables.find(varName.toUpper());
 	if (foundVarIter != environmentVariables.end()){
-		return iqt::GetQString(foundVarIter->second);
+		return foundVarIter->second;
 	}
 
 	return QString();

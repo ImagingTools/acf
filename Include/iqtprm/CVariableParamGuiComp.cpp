@@ -161,7 +161,7 @@ void CVariableParamGuiComp::UpdateGui(int updateFlags)
 
 	std::string currentId;
 	if (m_currentTypeIndex >= 0){
-		currentId = m_typeIdsAttrPtr[m_currentTypeIndex].ToString();
+		currentId = m_typeIdsAttrPtr[m_currentTypeIndex].toStdString();
 	}
 
 	std::string typeId = variableParamPtr->GetParameterTypeId();
@@ -170,7 +170,7 @@ void CVariableParamGuiComp::UpdateGui(int updateFlags)
 
 		int typeIdsCount = m_typeIdsAttrPtr.GetCount();
 		for (int i = 0; i < typeIdsCount; ++i){
-			if (typeId == m_typeIdsAttrPtr[i].ToString()){
+			if (typeId == m_typeIdsAttrPtr[i].toStdString()){
 				m_currentTypeIndex = i;
 
 				AttachCurrentType();
@@ -207,8 +207,8 @@ void CVariableParamGuiComp::OnGuiCreated()
 
 	int typeIdsCount = m_typeIdsAttrPtr.GetCount();
 	for (int i = 0; i < typeIdsCount; ++i){
-		istd::CString typeName = (i < m_typeNamesAttrPtr.GetCount())? m_typeNamesAttrPtr[i]: m_typeIdsAttrPtr[i];
-		TypeSelectorCB->addItem(iqt::GetQString(typeName));
+		QString typeName = (i < m_typeNamesAttrPtr.GetCount())? m_typeNamesAttrPtr[i]: m_typeIdsAttrPtr[i];
+		TypeSelectorCB->addItem(typeName);
 	}
 
 	TypeSelectorCB->setCurrentIndex(m_currentTypeIndex);
@@ -246,7 +246,7 @@ void CVariableParamGuiComp::on_TypeSelectorCB_currentIndexChanged(int index)
 	}
 
 	if ((index >= 0) && (index < m_typeIdsAttrPtr.GetCount())){
-		variableParamPtr->AssignTypeId(m_typeIdsAttrPtr[index].ToString());
+		variableParamPtr->AssignTypeId(m_typeIdsAttrPtr[index].toStdString());
 	}
 }
 

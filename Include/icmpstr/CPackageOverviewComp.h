@@ -219,7 +219,7 @@ private:
 	QIcon m_compositeComponentIcon;
 	QIcon m_mixedComponentIcon;
 
-	typedef std::map<istd::CString, QTreeWidget*> CategoryWidgetsMap;
+	typedef std::map<QString, QTreeWidget*> CategoryWidgetsMap;
 	CategoryWidgetsMap m_categoryWidgetsMap;
 
 	icomp::IMetaInfoManager::ComponentAddresses m_shownAddresses;

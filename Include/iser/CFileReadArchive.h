@@ -38,7 +38,7 @@ public:
 									\sa	EndTag and IsTagSkippingSupported.
 		\param	serializeHeader		if it is true (default) archive header will be serialized.
 	*/
-	CFileReadArchive(const istd::CString& filePath, bool supportTagSkipping = true, bool serializeHeader = true);
+	CFileReadArchive(const QString& filePath, bool supportTagSkipping = true, bool serializeHeader = true);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;
@@ -59,8 +59,8 @@ protected:
 				MessageCategory category,
 				int id,
 				int flags,
-				istd::CString& message,
-				istd::CString& messageSource) const;
+				QString& message,
+				QString& messageSource) const;
 
 private:
 	std::ifstream m_stream;

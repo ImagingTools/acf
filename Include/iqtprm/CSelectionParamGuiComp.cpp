@@ -123,7 +123,7 @@ void CSelectionParamGuiComp::OnGuiCreated()
 
 		QLabel* selectorLabelPtr = new QLabel(SelectionFrame);
 		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-		selectorLabelPtr->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+		selectorLabelPtr->setText(*m_optionsLabelAttrPtr);
 
 		selectorLayoutPtr->addWidget(selectorLabelPtr);
 	}
@@ -150,7 +150,7 @@ void CSelectionParamGuiComp::OnGuiShown()
 	}
 
 	if (m_infoLabelAttrPtr.IsValid()){
-		InfoLabel->setText(iqt::GetQString(*m_infoLabelAttrPtr));
+		InfoLabel->setText(*m_infoLabelAttrPtr);
 
 		InfoIcon->setScaledContents(true);
 		InfoIcon->setMaximumWidth(iconSize);
@@ -251,9 +251,9 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 			int optionsCount = constraintsPtr->GetOptionsCount();
 
 			for (int i = 0; i < optionsCount; ++i){
-				istd::CString name = constraintsPtr->GetOptionName(i);
+				QString name = constraintsPtr->GetOptionName(i);
 
-				switchBoxPtr->addItem(iqt::GetQString(name));
+				switchBoxPtr->addItem(name);
 			}
 
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
@@ -301,14 +301,14 @@ void CSelectionParamGuiComp::UpdateRadioButtonView(bool useVerticalLayout)
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 
 			for (int i = 0; i < optionsCount; ++i){
-				istd::CString name = constraintsPtr->GetOptionName(i);
+				QString name = constraintsPtr->GetOptionName(i);
 
 				QRadioButton* radioButtonPtr = new QRadioButton(SelectionFrame);
 				if (selectedIndex == i){
 					selectedButtonPtr = radioButtonPtr;
 				}
 
-				radioButtonPtr->setText(iqt::GetQString(name));
+				radioButtonPtr->setText(name);
 				m_radioButtons.PushBack(radioButtonPtr);
 
 				buttonLayoutPtr->addWidget(radioButtonPtr);
@@ -342,7 +342,7 @@ void CSelectionParamGuiComp::UpdateDescriptionFrame()
 		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL && selectedIndex >= 0){
 
-			QString optionDescription = iqt::GetQString(constraintsPtr->GetOptionDescription(selectedIndex));
+			QString optionDescription = constraintsPtr->GetOptionDescription(selectedIndex);
 			DescriptionLabel->setText(optionDescription);
 
 			if (!optionDescription.isEmpty()){

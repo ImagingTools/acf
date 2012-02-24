@@ -32,13 +32,13 @@ public:
 
 	// reimplemented (ibase::IFileConvertCopy)
 	virtual bool ConvertFile(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath,
+				const QString& inputFilePath,
+				const QString& outputFilePath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 private:
 	I_REF(ibase::IProcessExecutor, m_processExecuterCompPtr);
-	I_ATTR(istd::CString, m_processArgumentsAttrPtr);
+	I_ATTR(QString, m_processArgumentsAttrPtr);
 	I_REF(iprm::IFileNameParam, m_executablePathCompPtr);
 };
 

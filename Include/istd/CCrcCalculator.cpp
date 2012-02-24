@@ -5,7 +5,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 
 namespace istd
@@ -41,13 +41,13 @@ I_DWORD CCrcCalculator::GetCrcFromStream(const ByteStream& byteStream)
 
 
 
-I_DWORD CCrcCalculator::GetCrcFromFile(const istd::CString& fileName)
+I_DWORD CCrcCalculator::GetCrcFromFile(const QString& fileName)
 {
 	std::ifstream file;
 
 	I_DWORD crcValue = 0xFFFFFFFF;
 
-	file.open(fileName.ToString().c_str(), std::fstream::in | std::fstream::binary);
+	file.open(fileName.toStdString().c_str(), std::fstream::in | std::fstream::binary);
 	if (file.is_open()){
 		char buffer[1024];
 		int readBytes = file.read(buffer, sizeof(buffer)).gcount();

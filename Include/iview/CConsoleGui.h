@@ -102,7 +102,7 @@ protected:
 	virtual void UpdateEditModeButtons();
 	virtual void UpdateButtonsState();
 	virtual void UpdateComponentsPosition();
-	virtual void SetStatusText(const istd::CString& message);
+	virtual void SetStatusText(const QString& message);
 
 	// events
 	virtual bool OnSelectChange(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state);

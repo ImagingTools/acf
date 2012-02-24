@@ -14,7 +14,7 @@ namespace iqt
 
 bool CSettingsSerializerComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* /*filePathPtr*/,
+			const QString* /*filePathPtr*/,
 			int flags,
 			bool beQuiet) const
 {
@@ -34,15 +34,15 @@ bool CSettingsSerializerComp::IsOperationSupported(
 }
 
 
-int CSettingsSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::CString& /*filePath*/) const
+int CSettingsSerializerComp::LoadFromFile(istd::IChangeable& data, const QString& /*filePath*/) const
 {
 	if (IsOperationSupported(&data, NULL, QF_LOAD | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializeblePtr = dynamic_cast<iser::ISerializable*>(&data);
 		if (m_applicationInfoCompPtr.IsValid() && (serializeblePtr != NULL)){ 
-			istd::CString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
-			istd::CString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
+			QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
+			QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
 
-			CSettingsReadArchive archive(iqt::GetQString(companyName), iqt::GetQString(applicationName), iqt::GetQString(*m_rootKeyAttrPtr));
+			CSettingsReadArchive archive(companyName, applicationName, *m_rootKeyAttrPtr);
 
 			if (serializeblePtr->Serialize(archive)){
 				return StateOk;
@@ -60,18 +60,18 @@ int CSettingsSerializerComp::LoadFromFile(istd::IChangeable& data, const istd::C
 }
 
 
-int CSettingsSerializerComp::SaveToFile(const istd::IChangeable& data, const istd::CString& /*filePath*/) const
+int CSettingsSerializerComp::SaveToFile(const istd::IChangeable& data, const QString& /*filePath*/) const
 {
 	if (IsOperationSupported(&data, NULL, QF_SAVE | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializeblePtr = dynamic_cast<iser::ISerializable*>(const_cast<istd::IChangeable*>(&data));
 		if (m_applicationInfoCompPtr.IsValid() && (serializeblePtr != NULL)){ 
-			istd::CString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
-			istd::CString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
+			QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
+			QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
 
 			CSettingsWriteArchive archive(
-						iqt::GetQString(companyName),
-						iqt::GetQString(applicationName),
-						iqt::GetQString(*m_rootKeyAttrPtr),
+						companyName,
+						applicationName,
+						*m_rootKeyAttrPtr,
 						&m_applicationInfoCompPtr->GetVersionInfo());
 		
 			if (serializeblePtr->Serialize(archive)){
@@ -92,13 +92,13 @@ int CSettingsSerializerComp::SaveToFile(const istd::IChangeable& data, const ist
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CSettingsSerializerComp::GetFileExtensions(istd::CStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
+bool CSettingsSerializerComp::GetFileExtensions(QStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;
 }
 
 
-istd::CString CSettingsSerializerComp::GetTypeDescription(const istd::CString* /*extensionPtr*/) const
+QString CSettingsSerializerComp::GetTypeDescription(const QString* /*extensionPtr*/) const
 {
 	return "";
 }

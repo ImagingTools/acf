@@ -20,15 +20,15 @@ class CNameParam: virtual public INameParam
 {
 public:
 	// reimplemented (iprm::INameParam)
-	virtual const istd::CString& GetName() const;
-	virtual void SetName(const istd::CString& name);
+	virtual const QString& GetName() const;
+	virtual void SetName(const QString& name);
 	virtual bool IsNameFixed() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	istd::CString m_name;
+	QString m_name;
 };
 
 

@@ -28,8 +28,8 @@ public:
 	virtual QIcon GetIcon(int index) const;
 
 private:
-	I_MULTIATTR(istd::CString, m_iconFilesAttrPtr);
-	I_ATTR(istd::CString, m_iconPathAttrPtr);
+	I_MULTIATTR(QString, m_iconFilesAttrPtr);
+	I_ATTR(QString, m_iconPathAttrPtr);
 };
 
 

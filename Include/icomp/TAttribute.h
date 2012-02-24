@@ -136,7 +136,7 @@ std::string TAttribute<Value>::GetTypeName()
 typedef TAttribute<int> CIntAttribute;
 typedef TAttribute<double> CDoubleAttribute;
 typedef TAttribute<bool> CBoolAttribute;
-typedef TAttribute<istd::CString> CStringAttribute;
+typedef TAttribute<QString> CStringAttribute;
 typedef TAttribute<std::string> CStdStringAttribute;
 
 

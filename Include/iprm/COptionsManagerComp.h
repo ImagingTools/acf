@@ -33,16 +33,16 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 	// reimplemented (iprm::IOptionsManager)
 	virtual void RemoveOption(int index);
 	virtual bool InsertOption(
-					istd::CString& optionName,
+					QString& optionName,
 					const std::string& optionId,
-					const istd::CString& optionDescription = istd::CString(), 
+					const QString& optionDescription = QString(), 
 					int index = -	1);
 
 	// reimplemented (iser::ISerializable)
@@ -59,16 +59,16 @@ private:
 		{
 		}
 
-		OptionInfo(const istd::CString& optionName, std::string optionId, const istd::CString& optionDescription)
+		OptionInfo(const QString& optionName, std::string optionId, const QString& optionDescription)
 			:optionName(optionName),
 			optionId(optionId),
 			optionDescription(optionDescription)
 		{
 		}
 
-		istd::CString optionName;
+		QString optionName;
 		std::string optionId;
-		istd::CString optionDescription;
+		QString optionDescription;
 	};
 
 	typedef std::vector<OptionInfo> Options;

@@ -20,7 +20,7 @@ namespace icmpstr
 
 // reimplemented (iser::IFileLoader)
 
-int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	istd::CChangeNotifier notifier(&data);
 
@@ -45,8 +45,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 		if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
 			SendInfoMessage(
 						MI_CANNOT_READ_LAYOUT,
-						iqt::GetCString(tr("Layout information cannot be loaded (%1)").
-									arg(iqt::GetQString(filePath))));
+						tr("Layout information cannot be loaded (%1)").arg(filePath));
 		}
 
 		return StateOk;
@@ -59,7 +58,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 }
 
 
-int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		return StateFailed;
@@ -73,7 +72,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 		if (!const_cast<CVisualRegistryComp*>(geometricalRegistryPtr)->SerializeRegistry(registryArchive)){
 			SendErrorMessage(
 						MI_LOAD_ERROR,
-						iqt::GetCString(tr("Cannot store to file %1").arg(iqt::GetQString(filePath))));
+						tr("Cannot store to file %1").arg(filePath));
 
 			return StateFailed;
 		}
@@ -84,8 +83,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 		if (!const_cast<CVisualRegistryComp*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
 			SendInfoMessage(
 						MI_CANNOT_READ_LAYOUT,
-						iqt::GetCString(tr("Layout information cannot be stored (%1)").
-									arg(iqt::GetQString(filePath))));
+						tr("Layout information cannot be stored (%1)").arg(filePath));
 		}
 
 		return StateOk;
@@ -97,7 +95,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CRegistryLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CRegistryLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!BaseClass::GetFileExtensions(result, flags, doAppend)){
 		if (!doAppend){
@@ -111,10 +109,10 @@ bool CRegistryLoaderComp::GetFileExtensions(istd::CStringList& result, int flags
 }
 
 
-istd::CString CRegistryLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CRegistryLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
-	if ((extensionPtr == NULL) || extensionPtr->IsEqualNoCase("arx")){
-		return iqt::GetCString(tr("ACF registry file"));
+	if ((extensionPtr == NULL) || (extensionPtr->compare("arx", Qt::CaseInsensitive) == 0)){
+		return tr("ACF registry file");
 	}
 
 	return "";
@@ -123,12 +121,12 @@ istd::CString CRegistryLoaderComp::GetTypeDescription(const istd::CString* exten
 
 // protected methods
 
-istd::CString CRegistryLoaderComp::GetLayoutPath(const istd::CString& registryPath) const
+QString CRegistryLoaderComp::GetLayoutPath(const QString& registryPath) const
 {
-	QFileInfo fileInfo(iqt::GetQString(registryPath));
+	QFileInfo fileInfo(registryPath);
 	QString layoutPath = fileInfo.dir().absoluteFilePath(fileInfo.completeBaseName() + ".alx");
 
-	return iqt::GetCString(layoutPath);
+	return layoutPath;
 }
 
 
@@ -137,13 +135,13 @@ istd::CString CRegistryLoaderComp::GetLayoutPath(const istd::CString& registryPa
 void CRegistryLoaderComp::OnReadError(
 			const iser::CXmlFileReadArchive& archive,
 			const istd::IChangeable& /*data*/,
-			const istd::CString& filePath) const
+			const QString& filePath) const
 {
 	int lastReadLine = archive.GetLastReadLine();
 
-	QString message = tr("%1(%2) : Cannot load file").arg(iqt::GetQString(filePath)).arg(lastReadLine);
+	QString message = tr("%1(%2) : Cannot load file").arg(filePath).arg(lastReadLine);
 
-	SendErrorMessage(MI_CANNOT_LOAD, iqt::GetCString(message));
+	SendErrorMessage(MI_CANNOT_LOAD, message);
 }
 
 

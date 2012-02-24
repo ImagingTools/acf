@@ -2,7 +2,7 @@
 #define iprm_IFileNameParam_included
 
 
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/ISerializable.h"
 
@@ -36,12 +36,12 @@ public:
 	/**
 		Get path.
 	*/
-	virtual const istd::CString& GetPath() const = 0;
+	virtual const QString& GetPath() const = 0;
 
 	/**
 		Set path.
 	*/
-	virtual void SetPath(const istd::CString& path) = 0;
+	virtual void SetPath(const QString& path) = 0;
 };
 
 

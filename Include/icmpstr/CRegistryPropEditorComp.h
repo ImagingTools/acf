@@ -32,7 +32,7 @@ public:
 
 protected:
 	class TextLog:
-				public istd::CString,
+				public QString,
 				virtual public ibase::IMessageConsumer
 	{
 	public:

@@ -56,8 +56,8 @@ public:
 	virtual int InsertParamsSet(int index = -1);
 	virtual bool RemoveParamsSet(int index);
 	virtual IParamsSet* GetParamsSet(int index) const;
-	virtual const istd::CString& GetParamsSetName(int index) const;
-	virtual bool SetParamsSetName(int index, const istd::CString& name);
+	virtual const QString& GetParamsSetName(int index) const;
+	virtual bool SetParamsSetName(int index, const QString& name);
 
 	// reimplemented (iprm::ISelectionParam)
 	virtual const ISelectionConstraints* GetSelectionConstraints() const;
@@ -71,8 +71,8 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 protected:
@@ -82,14 +82,14 @@ protected:
 
 private:
 	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
-	I_MULTIATTR(istd::CString, m_fixedSetNamesCompPtr);
-	I_ATTR(istd::CString, m_defaultSetNameCompPtr);
+	I_MULTIATTR(QString, m_fixedSetNamesCompPtr);
+	I_ATTR(QString, m_defaultSetNameCompPtr);
 	I_FACT(IParamsSet, m_paramSetsFactPtr);
 
 	struct ParamSet
 	{
 		istd::TSmartPtr<IParamsSet> paramSetPtr;
-		istd::CString name;
+		QString name;
 	};
 
 	typedef std::vector<ParamSet> ParamSets;

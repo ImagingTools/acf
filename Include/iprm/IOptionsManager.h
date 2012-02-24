@@ -32,9 +32,9 @@ public:
 		Insert an option with the at the given option name and ID.
 	*/
 	virtual bool InsertOption(
-				istd::CString& optionName,
+				QString& optionName,
 				const std::string& optionId,
-				const istd::CString& optionDescription = istd::CString(),
+				const QString& optionDescription = QString(),
 				int index = -1) = 0;
 };
 

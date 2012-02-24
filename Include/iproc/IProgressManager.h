@@ -6,7 +6,7 @@
 #include <string>
 
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include <QString>
 
 
 namespace iproc
@@ -25,7 +25,7 @@ public:
 	*/
 	virtual int BeginProgressSession(
 				const std::string& progressId,
-				const istd::CString& description,
+				const QString& description,
 				bool isCancelable = false) = 0;
 	/**
 		Close progress report session.

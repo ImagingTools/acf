@@ -237,10 +237,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CString.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CVarIndex.cpp"
 				>
 			</File>
@@ -303,10 +299,6 @@
 			</File>
 			<File
 				RelativePath="..\CStaticServicesProvider.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CString.h"
 				>
 			</File>
 			<File

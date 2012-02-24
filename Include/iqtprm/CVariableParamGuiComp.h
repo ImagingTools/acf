@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/IFileLoader.h"
 
@@ -69,8 +69,8 @@ private:
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
 	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
-	I_MULTIATTR(istd::CString, m_typeIdsAttrPtr);
-	I_MULTIATTR(istd::CString, m_typeNamesAttrPtr);
+	I_MULTIATTR(QString, m_typeIdsAttrPtr);
+	I_MULTIATTR(QString, m_typeNamesAttrPtr);
 
 	typedef std::map<iqt2d::ISceneProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;

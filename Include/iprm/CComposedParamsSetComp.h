@@ -58,7 +58,7 @@ protected:
 private:
 	I_MULTIREF(IParamsSet, m_slaveParamsCompPtr);
 	I_MULTIREF(iser::ISerializable, m_parametersCompPtr);
-	I_MULTIATTR(istd::CString, m_parametersIdAttrPtr);
+	I_MULTIATTR(QString, m_parametersIdAttrPtr);
 };
 
 

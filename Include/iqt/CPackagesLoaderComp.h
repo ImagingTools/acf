@@ -61,15 +61,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (icomp::IRegistryLoader)
-	virtual const icomp::IRegistry* GetRegistryFromFile(const istd::CString& path) const;
+	virtual const icomp::IRegistry* GetRegistryFromFile(const QString& path) const;
 
 	// reimplemented (icomp::IComponentEnvironmentManager)
-	virtual istd::CString GetConfigFilePath() const;
+	virtual QString GetConfigFilePath() const;
 
 	// reimplemented (icomp::IPackagesManager)
-	virtual bool LoadPackages(const istd::CString& configFilePath = istd::CString::GetEmpty());
+	virtual bool LoadPackages(const QString& configFilePath = QString());
 	virtual int GetPackageType(const std::string& packageId) const;
-	virtual istd::CString GetPackagePath(const std::string& packageId) const;
+	virtual QString GetPackagePath(const std::string& packageId) const;
 
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const;
@@ -98,13 +98,13 @@ protected:
 		CPackagesLoaderComp& m_parent;
 	};
 
-	virtual bool RegisterPackageFile(const istd::CString& file);
-	virtual bool RegisterPackagesDir(const istd::CString& subDir);
-	virtual bool LoadConfigFile(const istd::CString& configFile);
+	virtual bool RegisterPackageFile(const QString& file);
+	virtual bool RegisterPackagesDir(const QString& subDir);
+	virtual bool LoadConfigFile(const QString& configFile);
 
 	CDllFunctionsProvider& GetProviderRef(const QFileInfo& fileInfo);
 
-	bool CheckAndMarkPath(const QDir& directory, const istd::CString& path, istd::CString& resultPath) const;
+	bool CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const;
 
 private:
 	typedef istd::TDelPtr<CDllFunctionsProvider> FunctionsProviderPtr;
@@ -130,7 +130,7 @@ private:
 	CompositePackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
-	typedef std::map<istd::CString, RegistryPtr> RegistriesMap;
+	typedef std::map<QString, RegistryPtr> RegistriesMap;
 	typedef std::map<const icomp::IRegistry*, QFileInfo> InvRegistriesMap;
 
 	mutable RegistriesMap m_registriesMap;
@@ -139,10 +139,10 @@ private:
 	/**
 		List of pathes.
 	*/
-	typedef std::set<istd::CString> PathList;
+	typedef std::set<QString> PathList;
 	mutable PathList m_usedFilesList;
 
-	istd::CString m_configFilePath;
+	QString m_configFilePath;
 
 	I_REF(iser::IFileLoader, m_registryLoaderCompPtr);
 	I_REF(iprm::IFileNameParam, m_configFilePathCompPtr);

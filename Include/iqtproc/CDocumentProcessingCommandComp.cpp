@@ -43,7 +43,7 @@ void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeabl
 
 	double processingTime = timer.GetElapsed();
 
-	SendInfoMessage(0, istd::CString("Processing time: ") + istd::CString::FromNumber(processingTime * 1000) + " ms", "Document processing manager");
+	SendInfoMessage(0, QString("Processing time: ") + QString("%1").arg(processingTime * 1000) + " ms", "Document processing manager");
 
 	changePtr.Reset();
 

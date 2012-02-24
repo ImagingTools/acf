@@ -29,11 +29,11 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iqt::CPackagesLoaderComp)
-	virtual bool RegisterPackagesDir(const istd::CString& subDir);
+	virtual bool RegisterPackagesDir(const QString& subDir);
 
 	// reimplemented (icmpstr::IExternalMetaInfoManager)
-	virtual istd::CString GetPackageInfoPath(const std::string& packageId) const;
-	virtual istd::CString GetComponentInfoPath(const icomp::CComponentAddress& address) const;
+	virtual QString GetPackageInfoPath(const std::string& packageId) const;
+	virtual QString GetComponentInfoPath(const icomp::CComponentAddress& address) const;
 
 private:
 	typedef std::map<std::string, QDir> PackageInfosMap;

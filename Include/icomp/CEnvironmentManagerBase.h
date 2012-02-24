@@ -16,12 +16,12 @@ class CEnvironmentManagerBase:
 {
 public:
 	// reimplemented (icomp::IComponentEnvironmentManager)
-	virtual istd::CString GetConfigFilePath() const;
+	virtual QString GetConfigFilePath() const;
 
 	// reimplemented (icomp::IPackagesManager)
-	virtual bool LoadPackages(const istd::CString& configFilePath = istd::CString::GetEmpty());
+	virtual bool LoadPackages(const QString& configFilePath = QString());
 	virtual int GetPackageType(const std::string& packageId) const;
-	virtual istd::CString GetPackagePath(const std::string& packageId) const;
+	virtual QString GetPackagePath(const std::string& packageId) const;
 
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const IRegistry* GetRegistry(const CComponentAddress& address, const IRegistry* contextRegistryPtr = NULL) const;

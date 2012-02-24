@@ -2,8 +2,12 @@
 #define iprm_ISelectionContstraints_included
 
 
+// Qt includes
+#include <QString>
+
+
+// ACF includes
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
 
 #include "iprm/iprm.h"
 
@@ -60,12 +64,12 @@ public:
 	/**
 		Get name of specified option.
 	*/
-	virtual istd::CString GetOptionName(int index) const = 0;
+	virtual QString GetOptionName(int index) const = 0;
 
 	/**
 		Get description for a option with the index \c index.
 	*/
-	virtual istd::CString GetOptionDescription(int index) const = 0;
+	virtual QString GetOptionDescription(int index) const = 0;
 
 	/**
 		Get option ID. The option ID must be unique, if flag SCF_SUPPORT_UNIQUE_ID is set.

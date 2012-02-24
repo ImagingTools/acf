@@ -67,21 +67,21 @@ public:
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
-				const istd::CString* filePathPtr = NULL,
+				const QString* filePathPtr = NULL,
 				int flags = -1,
 				bool beQuiet = true) const;
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath = QString()) const;
+	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath = QString()) const;
 
 	// reimplemented (iser::IFileTypeInfo)
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 protected:
@@ -163,14 +163,14 @@ protected:
 	bool NextLine(std::ofstream& stream) const;
 	int ChangeIndent(int difference) const;
 
-	bool ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& baseFilePath) const;
+	bool ExtractInfoFromFile(const QString& filePath, std::string& className, QString& baseFilePath) const;
 
 	std::string GetPackageName(const std::string& packageId) const;
 
 	/**
 		Get some wide string as C++ string literal.
 	*/
-	std::string GetStringLiteral(const istd::CString& text) const;
+	std::string GetStringLiteral(const QString& text) const;
 	/**
 		Get some string as C++ string literal.
 	*/

@@ -52,7 +52,7 @@ void CCircleParamsGuiComp::OnGuiModelAttached()
 
 	if (m_unitNameAttrPtr.IsValid()){
 		PositionUnitLabel->setVisible(true);
-		RadiusUnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		RadiusUnitLabel->setText(*m_unitNameAttrPtr);
 	}
 	else{
 		PositionUnitLabel->setVisible(false);

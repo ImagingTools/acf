@@ -22,9 +22,9 @@ public:
 	typedef isys::CSystemEnvironmentBase BaseClass;
 
 	// reimplemented (isys::ISystemEnvironment)
-	virtual istd::CString GetUser() const;
-	virtual istd::CString GetTempDirPath() const;
-	virtual istd::CString GetUniqueIdentifier() const;
+	virtual QString GetUser() const;
+	virtual QString GetTempDirPath() const;
+	virtual QString GetUniqueIdentifier() const;
 };
 
 

@@ -5,11 +5,11 @@ namespace iser
 {
 
 
-CXmlFileReadArchive::CXmlFileReadArchive(const istd::CString& filePath, bool serializeHeader, const CArchiveTag& rootTag)
+CXmlFileReadArchive::CXmlFileReadArchive(const QString& filePath, bool serializeHeader, const CArchiveTag& rootTag)
 :	BaseClass(rootTag),
 	BaseClass2(filePath)
 {
-	m_stream.open(filePath.ToString().c_str(), std::fstream::in);
+	m_stream.open(filePath.toStdString().c_str(), std::fstream::in);
 
 	SerializeXmlHeader();
 
@@ -27,10 +27,10 @@ void CXmlFileReadArchive::DecorateMessage(
 			MessageCategory /*category*/,
 			int /*id*/,
 			int /*flags*/,
-			istd::CString& message,
-			istd::CString& /*messageSource*/) const
+			QString& message,
+			QString& /*messageSource*/) const
 {
-	message = m_filePath + "(" + istd::CString::FromNumber(m_lastReadLine) + ") : " + message;
+	message = m_filePath + "(" + QString("%1").arg(m_lastReadLine) + ") : " + message;
 }
 
 

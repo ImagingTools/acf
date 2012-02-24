@@ -42,22 +42,22 @@ void CProcessExecutorComp::SetEnvironment(const isys::IProcessEnvironment& proce
 	for (		isys::IProcessEnvironment::EnvironmentVariables::const_iterator index = environmentVariables.begin();
 				index != environmentVariables.end();
 				index++){
-		qtProcessEvironment.insert(iqt::GetQString(index->first), iqt::GetQString(index->second));
+		qtProcessEvironment.insert(index->first, index->second);
 	}
 
 	m_applicationProcess.setProcessEnvironment(qtProcessEvironment);
 
-	m_applicationProcess.setWorkingDirectory(iqt::GetQString(processEnvironment.GetWorkingDirectory()));
+	m_applicationProcess.setWorkingDirectory(processEnvironment.GetWorkingDirectory());
 }
 
 
-int CProcessExecutorComp::ExecuteProcess(const istd::CString& executablePath, const istd::CStringList& processArguments)
+int CProcessExecutorComp::ExecuteProcess(const QString& executablePath, const QStringList& processArguments)
 {
 	QMutexLocker blockProcessing(&m_lock);
 
 	m_isFailed = false;
 
-	m_applicationProcess.start(iqt::GetQString(executablePath), iqt::GetQStringList(processArguments));
+	m_applicationProcess.start(executablePath, processArguments);
 
 	m_applicationProcess.waitForFinished(-1);
 
@@ -121,7 +121,7 @@ void CProcessExecutorComp::OnReadyReadStandardError()
 	
 	errorOutput = errorOutput.simplified();
 
-	SendErrorMessage(0, iqt::GetCString(errorOutput));
+	SendErrorMessage(0, errorOutput);
 }
 
 
@@ -131,7 +131,7 @@ void CProcessExecutorComp::OnReadyReadStandardOutput()
 
 	standardOutput = standardOutput.simplified();
 
-	SendInfoMessage(0, iqt::GetCString(standardOutput));
+	SendInfoMessage(0, standardOutput);
 }
 
 

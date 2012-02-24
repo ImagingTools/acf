@@ -2,8 +2,12 @@
 #define iser_IFileArchiveInfo_included
 
 
+// Qt includes
+#include <QString>
+
+
+// ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 
 namespace iser
@@ -18,7 +22,7 @@ namespace iser
 class IFileArchiveInfo: virtual public istd::IPolymorphic
 {
 public:
-	virtual const istd::CString& GetCurrentFilePath() const = 0;
+	virtual const QString& GetCurrentFilePath() const = 0;
 };
 
 

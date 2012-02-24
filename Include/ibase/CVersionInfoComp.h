@@ -33,16 +33,16 @@ public:
 
 	// reimplemented (iser::IVersionInfo)
 	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const;
-	virtual istd::CString GetVersionIdDescription(int versionId) const;
+	virtual QString GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
-	virtual istd::CString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
+	virtual QString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
 
 private:
 	I_ATTR(int, m_versionIdAttrPtr);
 	I_ATTR(int, m_versionNumberAttrPtr);
-	I_ATTR(istd::CString, m_versionIdDescriptionAttrPtr);
+	I_ATTR(QString, m_versionIdDescriptionAttrPtr);
 	I_MULTIATTR(int, m_knownVersionsAttrPtr);
-	I_MULTIATTR(istd::CString, m_knownVersionNamesAttrPtr);
+	I_MULTIATTR(QString, m_knownVersionNamesAttrPtr);
 	I_ATTR(bool, m_isExtensionUsedAttrPtr);
 
 	I_REF(iser::IVersionInfo, m_slaveVersionInfoCompPtr);

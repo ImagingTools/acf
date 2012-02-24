@@ -60,8 +60,8 @@ private:
 	I_ATTR(bool, m_isNewSupportedAttrPtr);
 	I_ATTR(bool, m_isEditSupportedAttrPtr);
 	I_ATTR(std::string, m_documentTypeIdAttrPtr);
-	I_ATTR(istd::CString, m_documentTypeNameAttrPtr);
-	I_ATTR(istd::CString, m_defaultDirectoryAttrPtr);
+	I_ATTR(QString, m_documentTypeNameAttrPtr);
+	I_ATTR(QString, m_defaultDirectoryAttrPtr);
 	I_FACT(istd::IChangeable, m_documentCompFact);
 	I_FACT(imod::IModel, m_modelCompFact);
 	I_FACT(imod::IObserver, m_viewCompFact);

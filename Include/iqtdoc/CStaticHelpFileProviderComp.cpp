@@ -15,14 +15,14 @@ namespace iqtdoc
 
 // reimplemented (idoc::IHelpFileProvider)
 
-double CStaticHelpFileProviderComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CStaticHelpFileProviderComp::GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
-	istd::CString filePath = GetHelpFilePath(contextText, contextObjectPtr);
-	if (filePath.IsEmpty()){
+	QString filePath = GetHelpFilePath(contextText, contextObjectPtr);
+	if (filePath.isEmpty()){
 		return 0;
 	}
 
-	QFileInfo fileInfo(iqt::GetQString(filePath));
+	QFileInfo fileInfo(filePath);
 	if (fileInfo.isFile()){
 		return 1;
 	}
@@ -32,22 +32,22 @@ double CStaticHelpFileProviderComp::GetHelpQuality(const istd::CString& contextT
 }
 
 
-istd::CString CStaticHelpFileProviderComp::GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* /*contextObjectPtr*/) const
+QString CStaticHelpFileProviderComp::GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* /*contextObjectPtr*/) const
 {
 	if (!m_helpFileDirCompPtr.IsValid()){
-		return istd::CString::GetEmpty();
+		return QString();
 	}
 
-	QDir helpDir(iqt::GetQString(m_helpFileDirCompPtr->GetPath()));
+	QDir helpDir(m_helpFileDirCompPtr->GetPath());
 	QString fileName;
-	if (contextText.IsEmpty()){
-		fileName = iqt::GetQString(*m_defaultFileNameAttrPtr);
+	if (contextText.isEmpty()){
+		fileName = *m_defaultFileNameAttrPtr;
 	}
 	else{
-		fileName = iqt::GetQString(*m_contextPrefixAttrPtr + contextText + *m_contextSuffixAttrPtr);
+		fileName = *m_contextPrefixAttrPtr + contextText + *m_contextSuffixAttrPtr;
 	}
 
-	return iqt::GetCString(helpDir.absoluteFilePath(fileName));
+	return helpDir.absoluteFilePath(fileName);
 }
 
 

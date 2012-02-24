@@ -34,7 +34,7 @@ bool CVersionInfoComp::GetVersionNumber(int versionId, I_DWORD& result) const
 }
 
 
-istd::CString CVersionInfoComp::GetVersionIdDescription(int versionId) const
+QString CVersionInfoComp::GetVersionIdDescription(int versionId) const
 {
 	if (m_versionIdAttrPtr.IsValid() && (versionId == *m_versionIdAttrPtr)){
 		return *m_versionIdDescriptionAttrPtr;
@@ -63,9 +63,9 @@ iser::IVersionInfo::VersionIds CVersionInfoComp::GetVersionIds() const
 }
 
 
-istd::CString CVersionInfoComp::GetEncodedVersionName(int versionId, I_DWORD versionNumber) const
+QString CVersionInfoComp::GetEncodedVersionName(int versionId, I_DWORD versionNumber) const
 {
-	istd::CString retVal;
+	QString retVal;
 
 	if (m_versionIdAttrPtr.IsValid() && (versionId == *m_versionIdAttrPtr)){
 		I_DWORD lastBellowNumber = 0;
@@ -80,14 +80,14 @@ istd::CString CVersionInfoComp::GetEncodedVersionName(int versionId, I_DWORD ver
 		}
 
 		if (m_isExtensionUsedAttrPtr.IsValid() && *m_isExtensionUsedAttrPtr){
-			retVal += istd::CString(".") + istd::CString::FromNumber(int(versionNumber - lastBellowNumber));
+			retVal += QString(".") + QString("%1").arg(int(versionNumber - lastBellowNumber));
 		}
 	}
 	else if (m_slaveVersionInfoCompPtr.IsValid()){
 		retVal = m_slaveVersionInfoCompPtr->GetEncodedVersionName(versionId, versionNumber);
 	}
 	else{
-		retVal = istd::CString("<") + istd::CString::FromNumber(versionNumber) + ">";
+		retVal = QString("<") + QString("%1").arg(versionNumber) + ">";
 	}
 
 	return retVal;

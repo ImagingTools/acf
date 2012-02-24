@@ -21,7 +21,7 @@ class CFileInfo: virtual public isys::IFileInfo
 {
 public:
 	CFileInfo(
-				const istd::CString& filePath = istd::CString(),
+				const QString& filePath = QString(),
 				int filePermissions = 0,
 				const isys::CSimpleDateTime& modificationTime = isys::CSimpleDateTime::GetCurrent());
 
@@ -32,7 +32,7 @@ public:
 	virtual void SetModificationTime(const isys::IDateTime& modificationTime);
 
 	// reimplemented (isys::IFileInfo)
-	virtual istd::CString GetFilePath() const;
+	virtual QString GetFilePath() const;
 	virtual int GetPermissions() const;
 	virtual const isys::IDateTime& GetModificationTime() const;
 
@@ -40,7 +40,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	istd::CString m_filePath;
+	QString m_filePath;
 
 	int m_filePermissions;
 

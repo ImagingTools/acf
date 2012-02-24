@@ -3,7 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/IVersionInfo.h"
 
@@ -39,7 +39,7 @@ public:
 		Get value of application attribute.
 		\param	attributeId	ID of application attribute \sa ApplicationAttribute.
 	*/
-	virtual istd::CString GetApplicationAttribute(int attributeId) const = 0;
+	virtual QString GetApplicationAttribute(int attributeId) const = 0;
 
 	/**
 		Get ID of main module version ID for \c iser::IVersionInfo.

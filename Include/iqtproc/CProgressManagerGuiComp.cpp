@@ -61,7 +61,7 @@ void CProgressManagerGuiComp::OnCancelable(bool cancelState)
 
 int CProgressManagerGuiComp::BeginProgressSession(
 			const std::string& progressId,
-			const istd::CString& description,
+			const QString& description,
 			bool isCancelable)
 {
 	if (GetOpenSessionsCount() <= 0){
@@ -110,7 +110,7 @@ void CProgressManagerGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	if (m_descriptionAttrPtr.IsValid()){
-		DescriptionLabel->setText(tr((*m_descriptionAttrPtr).ToString().c_str()));
+		DescriptionLabel->setText(tr((*m_descriptionAttrPtr).toStdString().c_str()));
 		DescriptionLabel->setVisible(true);
 	}
 	else{

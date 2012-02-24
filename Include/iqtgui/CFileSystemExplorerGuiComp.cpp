@@ -24,12 +24,12 @@ QStringList CFileSystemExplorerGuiComp::GetDefaultFilters() const
 	QStringList retVal;
 
 	if (m_filterInfoCompPtr.IsValid()){
-		istd::CStringList extensions;
+		QStringList extensions;
 		if (m_filterInfoCompPtr->GetFileExtensions(extensions, iser::IFileTypeInfo::QF_LOAD | iser::IFileTypeInfo::QF_FILE)){
-			for (		istd::CStringList::const_iterator iter = extensions.begin();
+			for (		QStringList::const_iterator iter = extensions.begin();
 						iter != extensions.end();
 						++iter){
-				retVal += "*." + iqt::GetQString(*iter);
+				retVal += "*." + *iter;
 			}
 		}
 	}
@@ -46,7 +46,7 @@ void CFileSystemExplorerGuiComp::UpdateGui(int /*updateFlags*/)
 
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		QString currentFilePath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(objectPtr->GetPath()));
+		QString currentFilePath = iqt::CFileSystem::GetEnrolledPath(objectPtr->GetPath());
 
 		InvalidateFileSystemModel(currentFilePath);
 
@@ -183,10 +183,10 @@ void CFileSystemExplorerGuiComp::OnSelectionChanged(const QItemSelection& select
 
 			int supportedPathType = objectPtr->GetPathType();
 			if ((supportedPathType == iprm::IFileNameParam::PT_UNKNOWN) || (supportedPathType == selectedFileType)){
-				objectPtr->SetPath(iqt::GetCString(currentFilePath));
+				objectPtr->SetPath(currentFilePath);
 			}
 			else{
-				objectPtr->SetPath(istd::CString());
+				objectPtr->SetPath(QString());
 			}
 		}
 	}

@@ -9,7 +9,7 @@
 	<Tool
 		Name="VCCLCompilerTool"
 		AdditionalOptions="/MP"
-		AdditionalIncludeDirectories="../../"
+		AdditionalIncludeDirectories="../../;$(QTDIR)/include;$(QTDIR)/include/QtCore"
 		PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS"
 		StringPooling="true"
 		TreatWChar_tAsBuiltInType="false"

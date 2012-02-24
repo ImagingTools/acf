@@ -26,7 +26,7 @@ CRegistryCodeSaverComp::CRegistryCodeSaverComp()
 
 bool CRegistryCodeSaverComp::IsOperationSupported(
 		const istd::IChangeable* dataObjectPtr,
-		const istd::CString* /*filePathPtr*/,
+		const QString* /*filePathPtr*/,
 		int flags,
 		bool /*beQuiet*/) const
 {
@@ -38,13 +38,13 @@ bool CRegistryCodeSaverComp::IsOperationSupported(
 }
 
 
-int CRegistryCodeSaverComp::LoadFromFile(istd::IChangeable& /*data*/, const istd::CString& /*filePath*/) const
+int CRegistryCodeSaverComp::LoadFromFile(istd::IChangeable& /*data*/, const QString& /*filePath*/) const
 {
 	return StateFailed;
 }
 
 
-int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	const icomp::IRegistry* registryPtr = dynamic_cast<const icomp::IRegistry*>(&data);
 	if (registryPtr == NULL){
@@ -54,7 +54,7 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 	Addresses realAddresses;
 	Addresses composedAddresses;
 	std::string className;
-	istd::CString baseFilePath;
+	QString baseFilePath;
 	if (		!AppendAddresses(*registryPtr, realAddresses, composedAddresses) ||
 				!ExtractInfoFromFile(filePath, className, baseFilePath)){
 		return StateFailed;
@@ -66,9 +66,9 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 	}
 
 	if ((workingMode == WM_SOURCES) || (workingMode == WM_SOURCES_AND_WM_DEPENDENCIES)){
-		istd::CString headerFilePath = baseFilePath + istd::CString(".h");
-		std::ofstream stream(filePath.ToString().c_str());
-		std::ofstream headerStream(headerFilePath.ToString().c_str());
+		QString headerFilePath = baseFilePath + QString(".h");
+		std::ofstream stream(filePath.toStdString().c_str());
+		std::ofstream headerStream(headerFilePath.toStdString().c_str());
 
 		if (		!WriteHeader(className, *registryPtr, composedAddresses, realAddresses, headerStream) ||
 					!WriteIncludes(className, realAddresses, stream) ||
@@ -78,8 +78,8 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 	}
 
 	if ((workingMode == WM_DEPENDENCIES) || (workingMode == WM_SOURCES_AND_WM_DEPENDENCIES)){
-		istd::CString depsFilePath = baseFilePath + istd::CString(".pri");
-		std::ofstream stream(depsFilePath.ToString().c_str());
+		QString depsFilePath = baseFilePath + QString(".pri");
+		std::ofstream stream(depsFilePath.toStdString().c_str());
 
 		if (!WriteDependencies(className, composedAddresses, realAddresses, stream)){
 			return StateFailed;
@@ -92,7 +92,7 @@ int CRegistryCodeSaverComp::SaveToFile(const istd::IChangeable& data, const istd
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CRegistryCodeSaverComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CRegistryCodeSaverComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -120,7 +120,7 @@ bool CRegistryCodeSaverComp::GetFileExtensions(istd::CStringList& result, int fl
 }
 
 
-istd::CString CRegistryCodeSaverComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CRegistryCodeSaverComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	if (extensionPtr == NULL){
 		int workingMode = *m_workingModeAttrPtr;
@@ -130,18 +130,19 @@ istd::CString CRegistryCodeSaverComp::GetTypeDescription(const istd::CString* ex
 
 		switch (workingMode){
 		case WM_DEPENDENCIES:
-			return iqt::GetCString(QObject::tr("qmake dependency file"));
+			return QObject::tr("qmake dependency file");
 
 		default:
-			return iqt::GetCString(QObject::tr("C++ source file"));
+			return QObject::tr("C++ source file");
 		}
 	}
 
-	if (extensionPtr->IsEqualNoCase("c") || extensionPtr->IsEqualNoCase("cpp")){
-		return iqt::GetCString(QObject::tr("C++ source file"));
+	if (		(extensionPtr->compare("c", Qt::CaseInsensitive) == 0) ||
+				(extensionPtr->compare("cpp", Qt::CaseInsensitive) == 0)){
+		return QObject::tr("C++ source file");
 	}
-	else if (extensionPtr->IsEqualNoCase("pri")){
-		return iqt::GetCString(QObject::tr("qmake dependency file"));
+	else if (extensionPtr->compare("pri", Qt::CaseInsensitive) == 0){
+		return QObject::tr("qmake dependency file");
 	}
 
 	return "";
@@ -162,32 +163,32 @@ int CRegistryCodeSaverComp::GetOptionsCount() const
 }
 
 
-istd::CString CRegistryCodeSaverComp::GetOptionName(int index) const
+QString CRegistryCodeSaverComp::GetOptionName(int index) const
 {
 	switch (index){
 	case WM_DEPENDENCIES:
-		return iqt::GetCString(QObject::tr("Dependencies"));
+		return QObject::tr("Dependencies");
 
 	case WM_SOURCES_AND_WM_DEPENDENCIES:
-		return iqt::GetCString(QObject::tr("Sources and dependencies"));
+		return QObject::tr("Sources and dependencies");
 
 	default:
-		return iqt::GetCString(QObject::tr("Sources"));
+		return QObject::tr("Sources");
 	}
 }
 
 
-istd::CString CRegistryCodeSaverComp::GetOptionDescription(int index) const
+QString CRegistryCodeSaverComp::GetOptionDescription(int index) const
 {
 	switch (index){
 	case WM_DEPENDENCIES:
-		return iqt::GetCString(QObject::tr("List of all component and package files requested by this registry will be saved"));
+		return QObject::tr("List of all component and package files requested by this registry will be saved");
 
 	case WM_SOURCES_AND_WM_DEPENDENCIES:
-		return iqt::GetCString(QObject::tr("C++ sources and list of all component and package files requested by this registry will be saved"));
+		return QObject::tr("C++ sources and list of all component and package files requested by this registry will be saved");
 
 	default:
-		return iqt::GetCString(QObject::tr("C++ sources will be saved"));
+		return QObject::tr("C++ sources will be saved");
 	}
 }
 
@@ -254,7 +255,7 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 				else{
 					SendErrorMessage(
 								MI_UNDEFINED_COMPONENT,
-								iqt::GetCString(QObject::tr("Composite component '%1' is undefined").arg(iqt::GetQString(infoPtr->address.ToString()))));
+								QObject::tr("Composite component '%1' is undefined").arg(infoPtr->address.ToString()));
 					return false;
 				}
 			}
@@ -263,7 +264,7 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 		default:
 			SendErrorMessage(
 						MI_UNDEFINED_PACKAGE,
-						iqt::GetCString(QObject::tr("Package '%1' is undefined").arg(packageId.c_str())));
+						QObject::tr("Package '%1' is undefined").arg(packageId.c_str()));
 			return false;
 		}
 	}
@@ -344,13 +345,13 @@ bool CRegistryCodeSaverComp::WriteHeader(
 
 	stream << std::endl << std::endl;
 
-	istd::CString description = registry.GetDescription();
-	if (!description.IsEmpty()){
+	QString description = registry.GetDescription();
+	if (!description.isEmpty()){
 		NextLine(stream);
 		stream << "/**";
 
 		NextLine(stream);
-		stream << "\t" << description.ToString() << ".";
+		stream << "\t" << description.toStdString() << ".";
 
 		NextLine(stream);
 		stream << "*/";
@@ -913,7 +914,7 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 
 	QDir baseDir;
 	if (m_baseDependenciesPathCompPtr.IsValid()){
-		baseDir.setPath(iqt::GetQString(m_baseDependenciesPathCompPtr->GetPath()));
+		baseDir.setPath(m_baseDependenciesPathCompPtr->GetPath());
 	}
 
 	stream << "#dependencies of class " << className << std::endl;
@@ -926,16 +927,16 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 			const icomp::CComponentAddress& address = *addressIter;
 			const std::string& packageId = address.GetPackageId();
 
-			istd::CString packagePath = m_packagesManagerCompPtr->GetPackagePath(packageId);
-			if (packagePath.IsEmpty()){
+			QString packagePath = m_packagesManagerCompPtr->GetPackagePath(packageId);
+			if (packagePath.isEmpty()){
 				SendErrorMessage(
 							MI_UNKNOWN_PACKAGE,
-							iqt::GetCString(QObject::tr("Composed package '%1' cannot be found").arg(packageId.c_str())));
+							QObject::tr("Composed package '%1' cannot be found").arg(packageId.c_str()));
 				return false;
 			}
 
 			stream << " \\" << std::endl;
-			stream << "\t" << baseDir.relativeFilePath(iqt::GetQString(packagePath)).toStdString() << "/" << address.GetComponentId() << ".arx";
+			stream << "\t" << baseDir.relativeFilePath(packagePath).toStdString() << "/" << address.GetComponentId() << ".arx";
 		}
 
 		Ids packageIdsList;
@@ -951,16 +952,16 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 					++packageIter){
 			const std::string& packageId = *packageIter;
 
-			istd::CString packagePath = m_packagesManagerCompPtr->GetPackagePath(packageId);
-			if (packagePath.IsEmpty()){
+			QString packagePath = m_packagesManagerCompPtr->GetPackagePath(packageId);
+			if (packagePath.isEmpty()){
 				SendErrorMessage(
 							MI_UNKNOWN_PACKAGE,
-							iqt::GetCString(QObject::tr("Package '%1' cannot be found").arg(packageId.c_str())));
+							QObject::tr("Package '%1' cannot be found").arg(packageId.c_str()));
 				return false;
 			}
 
 			stream << " \\" << std::endl;
-			stream << "\t" << baseDir.relativeFilePath(iqt::GetQString(packagePath)).toStdString();
+			stream << "\t" << baseDir.relativeFilePath(packagePath).toStdString();
 		}
 	}
 
@@ -969,10 +970,10 @@ bool CRegistryCodeSaverComp::WriteDependencies(
 		for (		icomp::IExtPackagesManager::PathList::const_iterator pathIter = configFilesList.begin();
 					pathIter != configFilesList.end();
 					++pathIter){
-			const istd::CString& configFilePath = *pathIter;
+			const QString& configFilePath = *pathIter;
 
 			stream << " \\" << std::endl;
-			stream << "\t" << baseDir.relativeFilePath(iqt::GetQString(configFilePath)).toStdString();
+			stream << "\t" << baseDir.relativeFilePath(configFilePath).toStdString();
 		}
 	}
 
@@ -1227,7 +1228,7 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 	else{
 		SendErrorMessage(
 					MI_UNDEFINED_ATTR_TYPE,
-					iqt::GetCString(QObject::tr("Unknown attribute type: %1").arg(attributeType.c_str())));
+					QObject::tr("Unknown attribute type: %1").arg(attributeType.c_str()));
 		return false;
 	}
 
@@ -1241,14 +1242,14 @@ bool CRegistryCodeSaverComp::WriteRegistryClassDeclaration(
 			const icomp::IRegistry& registry,
 			std::ofstream& stream) const
 {
-	istd::CString description = registry.GetDescription();
+	QString description = registry.GetDescription();
 
-	if (!description.empty()){
+	if (!description.isEmpty()){
 		NextLine(stream);
 		stream << "/**";
 
 		NextLine(stream);
-		stream << "\t" << description.ToString() << ".";
+		stream << "\t" << description.toStdString() << ".";
 
 		NextLine(stream);
 		stream << "*/";
@@ -1321,7 +1322,7 @@ bool CRegistryCodeSaverComp::GetAttributeValue(
 
 	const icomp::CDoubleAttribute* doubleAttribute = dynamic_cast<const icomp::CDoubleAttribute*>(&attribute);
 	if (doubleAttribute != NULL){
-		valueString = istd::CString::FromNumber(doubleAttribute->GetValue()).ToString();
+		valueString = QString("%1").arg(doubleAttribute->GetValue()).toStdString();
 		typeName = "icomp::CDoubleAttribute";
 
 		return true;
@@ -1329,7 +1330,7 @@ bool CRegistryCodeSaverComp::GetAttributeValue(
 
 	const icomp::CIntAttribute* intAttribute = dynamic_cast<const icomp::CIntAttribute*>(&attribute);
 	if (intAttribute != NULL){
-		valueString = istd::CString::FromNumber(intAttribute->GetValue()).ToString();
+		valueString = QString("%1").arg(intAttribute->GetValue()).toStdString();
 		typeName = "icomp::CIntAttribute";
 
 		return true;
@@ -1378,7 +1379,7 @@ bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 	const icomp::CMultiIntAttribute* intListAttribute = dynamic_cast<const icomp::CMultiIntAttribute*>(&attribute);
 	if (intListAttribute != NULL){
 		for (int index = 0; index < intListAttribute->GetValuesCount(); index++){
-			valueStrings.push_back(istd::CString::FromNumber(intListAttribute->GetValueAt(index)).ToString());
+			valueStrings.push_back(QString("%1").arg(intListAttribute->GetValueAt(index)).toStdString());
 		}
 
 		typeName = "icomp::CMultiIntAttribute";
@@ -1389,7 +1390,7 @@ bool CRegistryCodeSaverComp::GetMultiAttributeValue(
 	const icomp::CMultiDoubleAttribute* doubleListAttribute = dynamic_cast<const icomp::CMultiDoubleAttribute*>(&attribute);
 	if (doubleListAttribute != NULL){
 		for (int index = 0; index < doubleListAttribute->GetValuesCount(); index++){
-			valueStrings.push_back(istd::CString::FromNumber(doubleListAttribute->GetValueAt(index)).ToString());
+			valueStrings.push_back(QString("%1").arg(doubleListAttribute->GetValueAt(index)).toStdString());
 		}
 
 		typeName = "icomp::CMultiDoubleAttribute";
@@ -1445,25 +1446,16 @@ int CRegistryCodeSaverComp::ChangeIndent(int difference) const
 }
 
 
-bool CRegistryCodeSaverComp::ExtractInfoFromFile(const istd::CString& filePath, std::string& className, istd::CString& headerFilePath) const
+bool CRegistryCodeSaverComp::ExtractInfoFromFile(const QString& filePath, std::string& className, QString& headerFilePath) const
 {
-	istd::CString::size_type dotPosition = filePath.find_last_of('.');
-	if ((dotPosition != istd::CString::npos) && (dotPosition > 0)){
-		istd::CString::size_type beginPosition = filePath.find_last_of(istd::CString("/\\"), dotPosition - 1) + 1;
+	QFileInfo fileInfo(filePath);
 
-		if (beginPosition == istd::CString::npos){
-			beginPosition = 0;
-		}
+	className = fileInfo.baseName().toStdString();
 
-		I_ASSERT(beginPosition < dotPosition);
+	headerFilePath = fileInfo.absolutePath() + "/" + QString::fromStdString(className);
+	headerFilePath = QDir::toNativeSeparators(headerFilePath);
 
-		className = filePath.ToString().substr(beginPosition, dotPosition - beginPosition);
-		headerFilePath = filePath.substr(0, dotPosition);
-
-		return true;
-	}
-
-	return false;
+	return (!className.empty());
 }
 
 
@@ -1478,16 +1470,16 @@ std::string CRegistryCodeSaverComp::GetPackageName(const std::string& packageId)
 }
 
 
-std::string CRegistryCodeSaverComp::GetStringLiteral(const istd::CString& text) const
+std::string CRegistryCodeSaverComp::GetStringLiteral(const QString& text) const
 {
 	static const char* hexCiphers = "0123456789ABCDEF";
 
 	std::string retVal("\"");
 
-	for (		istd::CString::const_iterator iter = text.begin();
+	for (		QString::const_iterator iter = text.begin();
 				iter != text.end();
 				++iter){
-		istd::CString::value_type c = *iter;
+		wchar_t c = (*iter).unicode();
 
 		if (c == '\a'){
 			retVal += "\\a";

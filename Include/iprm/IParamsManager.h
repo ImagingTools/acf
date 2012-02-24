@@ -2,8 +2,11 @@
 #define iprm_IParamsManager_included
 
 
-#include "istd/CString.h"
+// Qt includes
+#include <QString>
 
+
+// ACF includes
 #include "iprm/ISelectionParam.h"
 
 
@@ -79,12 +82,12 @@ public:
 	/**
 		Get name of specified parameter set.
 	*/
-	virtual const istd::CString& GetParamsSetName(int index) const = 0;
+	virtual const QString& GetParamsSetName(int index) const = 0;
 
 	/**
 		Set name of specified parameter set.
 	*/
-	virtual bool SetParamsSetName(int index, const istd::CString& name) = 0;
+	virtual bool SetParamsSetName(int index, const QString& name) = 0;
 };
 
 

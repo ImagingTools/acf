@@ -98,7 +98,7 @@ void CWizardOptionsListGuiComp::CreateOptionsTree(const iwiz::IParamsManagerWiza
 
 		int pagesCount = paramsManagerPtr->GetParamsSetsCount();
 		for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
-			QString optionName = iqt::GetQString(paramsManagerPtr->GetParamsSetName(pageIndex));
+			QString optionName = paramsManagerPtr->GetParamsSetName(pageIndex);
 
 			QTreeWidgetItem* itemPtr = new QTreeWidgetItem(OptionsList);
 			itemPtr->setText(0, optionName);

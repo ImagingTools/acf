@@ -9,7 +9,6 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 
 namespace icomp

@@ -41,7 +41,7 @@ void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
 					index != elements.end();
 					index++){
 
-			QString noteText = iqt::GetQString(componentNoteControllerPtr->GetComponentNote(index->first));
+			QString noteText = componentNoteControllerPtr->GetComponentNote(index->first);
 			if (!noteText.isEmpty()){
 				notes.push_back(noteText);
 			}
@@ -67,7 +67,7 @@ void CComponentNoteEditorComp::UpdateModel()
 	if (componentNoteControllerPtr != NULL){
 		IElementSelectionInfo::Elements elements = objectPtr->GetSelectedElements();
 		if (elements.size() == 1){
-			istd::CString currentNote = iqt::GetCString(NoteEditor->toPlainText());
+			QString currentNote = NoteEditor->toPlainText();
 
 			componentNoteControllerPtr->SetComponentNote(elements.begin()->first, currentNote);
 		}

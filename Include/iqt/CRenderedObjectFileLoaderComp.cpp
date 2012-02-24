@@ -22,7 +22,7 @@ namespace iqt
 
 bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
-				const istd::CString* filePathPtr,
+				const QString* filePathPtr,
 				int flags,
 				bool beQuiet) const
 {
@@ -34,7 +34,7 @@ bool CRenderedObjectFileLoaderComp::IsOperationSupported(
 }
 
 
-int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(&data);
 	if (bitmapPtr == NULL){
@@ -42,11 +42,11 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const i
 	}
 
 	if (m_fileLoaderCompPtr.IsValid() && m_fileDataCompPtr.IsValid() && m_objectSnapCompPtr.IsValid()){
-		QFileInfo fileInfo(iqt::GetQString(filePath));
+		QFileInfo fileInfo(filePath);
 		if (fileInfo.exists()){
 			QDateTime fileTimeStamp = fileInfo.lastModified();
 
-			PreviewCache::iterator foundCacheIter = m_previewCache.find(iqt::GetQString(filePath));
+			PreviewCache::iterator foundCacheIter = m_previewCache.find(filePath);
 			if (foundCacheIter != m_previewCache.end()){
 				if (fileTimeStamp == foundCacheIter->second.fileTimeStamp){
 					if (bitmapPtr->CopyFrom(*foundCacheIter->second.fileBitmapPtr.GetPtr())){
@@ -77,7 +77,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const i
 							m_previewCache.erase(m_previewCache.begin());
 						}
 
-						m_previewCache[iqt::GetQString(filePath)] = fileInfo;
+						m_previewCache[filePath] = fileInfo;
 					}
 
 					return StateOk;
@@ -90,7 +90,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const i
 }
 
 
-int CRenderedObjectFileLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CRenderedObjectFileLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (m_fileLoaderCompPtr.IsValid()){
 		return m_fileLoaderCompPtr->SaveToFile(data, filePath);
@@ -102,7 +102,7 @@ int CRenderedObjectFileLoaderComp::SaveToFile(const istd::IChangeable& data, con
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CRenderedObjectFileLoaderComp::GetFileExtensions(istd::CStringList& result, int flags, bool doAppend) const
+bool CRenderedObjectFileLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
 {
 	if (m_fileLoaderCompPtr.IsValid()){
 		return m_fileLoaderCompPtr->GetFileExtensions(result, flags, doAppend);
@@ -112,13 +112,13 @@ bool CRenderedObjectFileLoaderComp::GetFileExtensions(istd::CStringList& result,
 }
 
 
-istd::CString CRenderedObjectFileLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	if (m_fileLoaderCompPtr.IsValid()){
 		return m_fileLoaderCompPtr->GetTypeDescription(extensionPtr);
 	}
 
-	return istd::CString::GetEmpty();
+	return QString();
 }
 
 	
@@ -140,7 +140,7 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 	
 			iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
 			retVal = retVal && archive.BeginTag(filePathTag);
-			istd::CString filePath = iqt::GetCString(index->first);
+			QString filePath = index->first;
 			retVal = retVal && archive.Process(filePath);
 			retVal = retVal && archive.EndTag(filePathTag);
 
@@ -164,7 +164,7 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 	
 			iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
 			retVal = retVal && archive.BeginTag(filePathTag);
-			istd::CString filePath;
+			QString filePath;
 			retVal = retVal && archive.Process(filePath);
 			retVal = retVal && archive.EndTag(filePathTag);
 
@@ -187,7 +187,7 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 
 				fileInfo.fileBitmapPtr = bitmapPtr;
 				fileInfo.fileTimeStamp = iqt::GetQDateTime(timeStamp);
-				m_previewCache[iqt::GetQString(filePath)] = fileInfo;
+				m_previewCache[filePath] = fileInfo;
 			}
 		}
 	}

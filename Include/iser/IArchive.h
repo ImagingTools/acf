@@ -6,10 +6,13 @@
 #include <string>
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/istd.h"
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 
 namespace iser
@@ -144,7 +147,7 @@ public:
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(istd::CString& value) = 0;
+	virtual bool Process(QString& value) = 0;
 
 	/**
 		Process binary data block.

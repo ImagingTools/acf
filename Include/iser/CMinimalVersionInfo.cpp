@@ -20,7 +20,7 @@ CMinimalVersionInfo::CMinimalVersionInfo(const ISerializable* serializablePtr, b
 }
 
 
-bool CMinimalVersionInfo::AddId(int versionId, const istd::CString& description)
+bool CMinimalVersionInfo::AddId(int versionId, const QString& description)
 {
 	Versions::const_iterator iter = m_versions.find(versionId);
 	if (iter != m_versions.end()){
@@ -55,7 +55,7 @@ bool CMinimalVersionInfo::GetVersionNumber(int versionId, I_DWORD& result) const
 }
 
 
-istd::CString CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
+QString CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
 {
 	Versions::const_iterator iter = m_versions.find(versionId);
 	if (m_versions.find(versionId) != m_versions.end()){
@@ -64,7 +64,7 @@ istd::CString CMinimalVersionInfo::GetVersionIdDescription(int versionId) const
 		return info.description;
 	}
 
-	static istd::CString description("<unregistered>");
+	static QString description("<unregistered>");
 
 	return description;
 }
@@ -84,7 +84,7 @@ IVersionInfo::VersionIds CMinimalVersionInfo::GetVersionIds() const
 }
 
 
-istd::CString CMinimalVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
+QString CMinimalVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
 {
 	return "";
 }

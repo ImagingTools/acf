@@ -7,7 +7,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "ibase/IApplicationInfo.h"
 #include "ibase/IFileConvertCopy.h"
@@ -65,8 +65,8 @@ public:
 
 	// reimplemented (ibase::IFileConvertCopy)
 	virtual bool ConvertFile(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath,
+				const QString& inputFilePath,
+				const QString& outputFilePath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 protected:
@@ -75,10 +75,10 @@ protected:
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 
-	I_ATTR(istd::CString, m_licensePathAttrPtr);
+	I_ATTR(QString, m_licensePathAttrPtr);
 	I_ATTR(bool, m_useSubstitutionAttrPtr);
-	I_MULTIATTR(istd::CString, m_userSubstitutionTagsAttrPtr);
-	I_MULTIATTR(istd::CString, m_userSubstitutionValuesAttrPtr);
+	I_MULTIATTR(QString, m_userSubstitutionTagsAttrPtr);
+	I_MULTIATTR(QString, m_userSubstitutionValuesAttrPtr);
 };
 
 

@@ -13,11 +13,10 @@
 #include <QMenu>
 #include <QMimeData>
 #include <QDrag>
+#include <QString>
 
 
 // ACF includes
-#include "istd/CString.h"
-
 #include "iser/CXmlStringWriteArchive.h"
 
 #include "icomp/CComponentMetaDescriptionEncoder.h"
@@ -294,7 +293,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 	PackagesList->clear();
 	m_roots.clear();
 
-	istd::CString currentKey = iqt::GetCString(GroupByCB->currentText()); 
+	QString currentKey = GroupByCB->currentText(); 
 
 	for (		icomp::IMetaInfoManager::ComponentAddresses::const_iterator addressIter = addresses.begin();
 				addressIter != addresses.end();
@@ -306,14 +305,14 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 			metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 		}
 
-		istd::CStringList groupIds;
+		QStringList groupIds;
 		std::string elementName;
 
 		if (!address.GetPackageId().empty()){
 			elementName += address.GetPackageId() + "/";
 		}
 		else{
-			groupIds.push_back(tr("<< Local >>").toStdString());
+			groupIds.push_back(tr("<< Local >>"));
 		}
 
 		elementName += address.GetComponentId();
@@ -325,7 +324,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 
 		case GM_PACKAGE:
 			if (!address.GetPackageId().empty()){
-				groupIds.push_back(address.GetPackageId());
+				groupIds.push_back(address.GetPackageId().c_str());
 			}
 
 			elementName = address.GetComponentId();
@@ -357,7 +356,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 			}
 		}
 
-		for (		istd::CStringList::const_iterator iter = groupIds.begin();
+		for (		QStringList::const_iterator iter = groupIds.begin();
 					iter != groupIds.end();
 					++iter){
 			PackageComponentItem* itemPtr = new PackageComponentItem(
@@ -367,7 +366,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 						icon);
 			itemPtr->setText(0, elementName.c_str());
 
-			RootInfo& rootInfo = EnsureRoot(iter->ToString(), address, metaInfoPtr);
+			RootInfo& rootInfo = EnsureRoot(iter->toStdString(), address, metaInfoPtr);
 			I_ASSERT(rootInfo.itemPtr != NULL);
 
 			rootInfo.itemPtr->addChild(itemPtr);
@@ -430,7 +429,7 @@ void CPackageOverviewComp::UpdateComponentGroups()
 		if (metaInfoPtr != NULL){
 			icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
 
-			QStringList categoryList = iqt::GetQStringList(encoder.GetMetaKeys());
+			QStringList categoryList = (encoder.GetMetaKeys());
 
 			for (int index = 0; index < categoryList.count(); index++){
 				categories.insert(categoryList[index]);
@@ -519,7 +518,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 		if (metaInfoPtr != NULL){
 			icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
 
-			keywords << iqt::GetQStringList(encoder.GetValues());
+			keywords << (encoder.GetValues());
 		}
 
 		if (FilterGB->isChecked()){
@@ -588,7 +587,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 				keywords << embeddedId.c_str();
 
 				icomp::CComponentMetaDescriptionEncoder encoder(embeddedRegistryPtr->GetKeywords());
-				keywords << iqt::GetQStringList(encoder.GetValues());
+				keywords << (encoder.GetValues());
 
 				if (FilterGB->isChecked()){
 					bool isFilterMatched = true;
@@ -727,8 +726,8 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			QDir packageDir(iqt::GetQString(m_envManagerCompPtr->GetPackagePath(address.GetPackageId())));
-			istd::CString filePath = iqt::GetCString(packageDir.absoluteFilePath((address.GetComponentId() + ".arx").c_str()));
+			QDir packageDir(m_envManagerCompPtr->GetPackagePath(address.GetPackageId()));
+			QString filePath = packageDir.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
 
 			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
 		}
@@ -768,7 +767,7 @@ void CPackageOverviewComp::OnReloadPackages()
 		return;
 	}
 
-	istd::CString configFilePath;
+	QString configFilePath;
 	if (m_configFilePathCompPtr.IsValid()){
 		configFilePath = m_configFilePathCompPtr->GetPath();
 	}
@@ -789,7 +788,7 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 	font.setBold(true);
 	font.setPointSize(12);
 	componentLabel.setFont(font);
-	componentLabel.setText(iqt::GetQString(address.ToString()));
+	componentLabel.setText(address.ToString());
 	if (m_consistInfoCompPtr.IsValid()){
 		componentLabel.setIconSize(QSize(64, 64));
 		componentLabel.setIcon(m_consistInfoCompPtr->GetComponentIcon(address));
@@ -853,7 +852,7 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const std::stri
 			if ((GroupByCB->currentIndex() == GM_PACKAGE) && m_envManagerCompPtr.IsValid()){
 				const icomp::IComponentStaticInfo* packageInfoPtr = m_envManagerCompPtr->GetPackageMetaInfo(address.GetPackageId());
 				if (packageInfoPtr != NULL){
-					packageDescription = iqt::GetQString(packageInfoPtr->GetDescription());
+					packageDescription = packageInfoPtr->GetDescription();
 				}
 			}
 
@@ -1071,7 +1070,7 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 			const icomp::CComponentAddress& address,
 			const icomp::IComponentStaticInfo* staticInfoPtr,
 			const QIcon& icon)
-:	BaseClass(parent, (staticInfoPtr != NULL) ? iqt::GetQString(staticInfoPtr->GetDescription()) : QString(), icon),
+:	BaseClass(parent, (staticInfoPtr != NULL) ? staticInfoPtr->GetDescription() : QString(), icon),
 	m_address(address)
 {
 	QString toolTip;
@@ -1161,7 +1160,7 @@ void CPackageOverviewComp::ConfigObserver::OnUpdate(int /*updateFlags*/, istd::I
 		return;
 	}
 
-	istd::CString configFilePath;
+	QString configFilePath;
 	if (m_parent.m_configFilePathCompPtr.IsValid()){
 		configFilePath = m_parent.m_configFilePathCompPtr->GetPath();
 	}

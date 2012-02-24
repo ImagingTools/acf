@@ -5,7 +5,7 @@ namespace iser
 {
 
 
-CFileArchiveInfo::CFileArchiveInfo(const istd::CString& filePath)
+CFileArchiveInfo::CFileArchiveInfo(const QString& filePath)
 :	m_filePath(filePath)
 {
 }
@@ -13,7 +13,7 @@ CFileArchiveInfo::CFileArchiveInfo(const istd::CString& filePath)
 
 // reimplemented (iser::IFileArchiveInfo)
 
-const istd::CString& CFileArchiveInfo::GetCurrentFilePath() const
+const QString& CFileArchiveInfo::GetCurrentFilePath() const
 {
 	return m_filePath;
 }

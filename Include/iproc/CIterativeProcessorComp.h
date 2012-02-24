@@ -5,7 +5,7 @@
 // STL includes
 #include <vector>
 
-#include "istd/CString.h"
+#include <QString>
 
 #include "ibase/TLoggerCompWrap.h"
 
@@ -55,8 +55,8 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 protected:
@@ -69,12 +69,12 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_ATTR(istd::CString, m_paramsIdAttrPtr);
+	I_ATTR(QString, m_paramsIdAttrPtr);
 	I_ATTR(int, m_maxIterationsCountAttrPtr);
 	I_REF(istd::IChangeable, m_bufferObjectCompPtr);
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 
-	std::vector<istd::CString> m_iterationNames;
+	std::vector<QString> m_iterationNames;
 };
 
 

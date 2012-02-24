@@ -10,11 +10,11 @@
 #include "istd/IPolymorphic.h"
 
 
+class QString;
+
+
 namespace istd
 {
-
-
-class CString;
 
 
 /**
@@ -26,9 +26,9 @@ public:
 	/**
 		Translate text \c text in the context \c context to defined language.
 	*/
-	virtual istd::CString GetTranslatedText(
+	virtual QString GetTranslatedText(
 				const std::string& context,
-				const istd::CString& text,
+				const QString& text,
 				const std::string& disambiguation = std::string()) const = 0;
 };
 

@@ -14,13 +14,13 @@ namespace iprm
 
 // reimplemented (iprm::INameParam)
 
-const istd::CString& CNameParam::GetName() const
+const QString& CNameParam::GetName() const
 {
 	return m_name;
 }
 
 
-void CNameParam::SetName(const istd::CString& name)
+void CNameParam::SetName(const QString& name)
 {
 	if (m_name != name){
 		istd::CChangeNotifier changePtr(this);

@@ -6,6 +6,10 @@
 #include <string>
 
 
+// ACF includes
+#include "istd.h"
+
+
 namespace istd
 {
 

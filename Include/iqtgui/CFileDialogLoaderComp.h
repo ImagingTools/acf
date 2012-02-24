@@ -7,7 +7,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/IFileLoader.h"
 #include "iser/IFileLoaderInfo.h"
@@ -55,18 +55,18 @@ public:
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
-				const istd::CString* filePathPtr = NULL,
+				const QString* filePathPtr = NULL,
 				int flags = -1,
 				bool beQuiet = true) const;
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath = QString()) const;
+	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath = QString()) const;
 
 	// reimplemented (iser::IFileTypeInfo)
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 	// reimplemented (iser::IFileLoaderInfo)
-	virtual istd::CString GetLastFilePath(OperationType operationType = OT_UNKNOWN, PathType pathType = PT_COMPLETE) const;
+	virtual QString GetLastFilePath(OperationType operationType = OT_UNKNOWN, PathType pathType = PT_COMPLETE) const;
 
 	// static methods
 	/**
@@ -79,8 +79,8 @@ public:
 	static int AppendLoaderFilterList(const iser::IFileTypeInfo& fileTypeInfo, int flags, QString& allExt, QString& result);
 
 protected:
-	istd::CString GetPathForType(const QFileInfo& fileInfo, PathType pathType) const;
-	virtual QString GetFileName(const istd::CString& filePath, bool isSaving, int& selectionIndex) const;
+	QString GetPathForType(const QFileInfo& fileInfo, PathType pathType) const;
+	virtual QString GetFileName(const QString& filePath, bool isSaving, int& selectionIndex) const;
 
 	iser::IFileLoader* GetLoaderFor(const QString& filePath, int selectionIndex, int flags, bool beQuiet) const;
 

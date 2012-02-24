@@ -40,14 +40,14 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, 
 								parentWidgetPtr));
 
 		if (m_dialogTitleAttrPtr.IsValid()){
-			dialogPtr->setWindowTitle(iqt::GetQString(*m_dialogTitleAttrPtr));
+			dialogPtr->setWindowTitle(*m_dialogTitleAttrPtr);
 		}
 		else{
 			dialogPtr->setWindowTitle(QCoreApplication::applicationName());
 		}
 
 		if (m_dialogIconPathAttrPtr.IsValid()){
-			dialogPtr->setWindowIcon(QIcon(iqt::GetQString(*m_dialogIconPathAttrPtr)));
+			dialogPtr->setWindowIcon(QIcon(*m_dialogIconPathAttrPtr));
 		}
 		else{
 			dialogPtr->setWindowIcon(QApplication::windowIcon());

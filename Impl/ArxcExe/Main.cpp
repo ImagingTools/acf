@@ -53,11 +53,11 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	istd::CString configFile;
+	QString configFile;
 	bool verboseEnabled = false;
 	bool sourcesEnabled = true;
 	bool depandenciesEnabled = false;
-	istd::CString baseDependsPath;
+	QString baseDependsPath;
 
 	for (int index = 1; index < argc; index++){
 		std::string argument = argv[index];
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 		for (		iqt::CProcessEnvironment::EnvironmentVariables::const_iterator index = environmentVariables.begin();
 					index != environmentVariables.end();
 					++index){
-			std::cout << index->first.ToString() << " = " << index->second.ToString() << std::endl;
+			std::cout << index->first.toStdString() << " = " << index->second.toStdString() << std::endl;
 		}
 	}
 

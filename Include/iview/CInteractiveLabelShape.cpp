@@ -287,7 +287,7 @@ void CInteractiveLabelShape::CalculateTextOriginSize(i2d::CRect& textBox) const
 		istd::CIndex2d sp = transform.GetScreenPosition(labelPtr->GetPosition());
 
 		QFontMetrics metrics(font);
-		ibase::CSize textSize = iqt::GetCIndex2d(metrics.size(0, iqt::GetQString(labelPtr->GetText())));
+		ibase::CSize textSize = iqt::GetCIndex2d(metrics.size(0, labelPtr->GetText()));
 		istd::CIndex2d leftTop;
 
 		const i2d::CRect& clientArea = GetClientRect();

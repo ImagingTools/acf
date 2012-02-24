@@ -41,14 +41,14 @@ public:
 	CDelegatedProgressManager(
 				IProgressManager* slaveManagerPtr,
 				const std::string& progressId,
-				const istd::CString& description,
+				const QString& description,
 				bool isCancelable = false);
 	virtual ~CDelegatedProgressManager();
 
 	double GetCumulatedProgress() const;
 
 	// reimplemented (iproc::IProgressManager)
-	virtual int BeginProgressSession(const std::string& progressId, const istd::CString& description, bool isCancelable = false);
+	virtual int BeginProgressSession(const std::string& progressId, const QString& description, bool isCancelable = false);
 	virtual void EndProgressSession(int sessionId);
 	virtual void OnProgress(int sessionId, double currentProgress);
 	virtual bool IsCanceled(int sessionId) const;

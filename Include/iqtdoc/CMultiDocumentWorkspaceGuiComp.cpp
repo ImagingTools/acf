@@ -90,9 +90,9 @@ void CMultiDocumentWorkspaceGuiComp::UpdateAllTitles()
 	for (int i = 0; i < documentsCount; ++i){
 		const SingleDocumentData& info = GetSingleDocumentData(i);
 
-		QString titleName = info.filePath.IsEmpty()?
+		QString titleName = info.filePath.isEmpty()?
 					tr("<no name>"):
-					QFileInfo(iqt::GetQString(info.filePath)).fileName();
+					QFileInfo(info.filePath).fileName();
 
 		NameFrequencies::iterator freqIter = nameFrequencies.find(titleName);
 		int& frequency = freqIter.value();
@@ -167,7 +167,7 @@ void CMultiDocumentWorkspaceGuiComp::OnViewsCountChanged()
 // reimplemented (idoc::CMultiDocumentManagerBase)
 
 istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenDocument(
-			const istd::CString& filePath,
+			const QString& filePath,
 			bool createView,
 			const std::string& viewTypeId,
 			std::string& documentTypeId)
@@ -293,7 +293,7 @@ void CMultiDocumentWorkspaceGuiComp::CloseAllDocuments()
 }
 
 
-istd::CStringList CMultiDocumentWorkspaceGuiComp::GetOpenFilePaths(const std::string* documentTypeIdPtr) const
+QStringList CMultiDocumentWorkspaceGuiComp::GetOpenFilePaths(const std::string* documentTypeIdPtr) const
 {
 	QStringList files = GetOpenFilePathesFromDialog(documentTypeIdPtr);
 
@@ -301,7 +301,7 @@ istd::CStringList CMultiDocumentWorkspaceGuiComp::GetOpenFilePaths(const std::st
 		UpdateLastDirectory(files.at(0));
 	}
 
-	return iqt::GetCStringList(files);
+	return files;
 }
 
 
@@ -355,7 +355,7 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRemoved(istd::IPolymorphic* viewPtr)
 
 void CMultiDocumentWorkspaceGuiComp::QueryDocumentClose(const SingleDocumentData& info, bool* ignoredPtr)
 {
-	QFileInfo fileInfo(iqt::GetQString(info.filePath));
+	QFileInfo fileInfo(info.filePath);
 	QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
 
 	if (ignoredPtr != NULL){
@@ -423,7 +423,7 @@ void CMultiDocumentWorkspaceGuiComp::OnRetranslate()
 {
 	BaseClass::OnRetranslate();
 
-	m_windowCommand.SetName(iqt::GetCString(tr("&Window")));
+	m_windowCommand.SetName(tr("&Window"));
 	// Window commands
 	m_cascadeCommand.SetVisuals(tr("Casca&de"), tr("Cascade"), tr("Lays out all document windows in cascaded mode"));
 	m_tileHorizontallyCommand.SetVisuals(tr("Tile &Horizontaly"), tr("Horizontal"), tr("Lays out all document windows horizontaly"));

@@ -5,10 +5,7 @@
 #include "istd/IPolymorphic.h"
 
 
-namespace istd
-{
-	class CString;
-}
+class QString;
 
 
 namespace iprm
@@ -31,8 +28,8 @@ public:
 		Copy a file \c inputFilePath to destination \c outputFilePath. Optionally, you can use \c paramsPtr to control the copy process.
 	*/
 	virtual bool ConvertFile(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath,
+				const QString& inputFilePath,
+				const QString& outputFilePath,
 				const iprm::IParamsSet* paramsPtr = NULL) const = 0;
 };
 

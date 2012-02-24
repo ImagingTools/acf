@@ -6,9 +6,12 @@
 #include <map>
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 #include "isys/isys.h"
 
@@ -25,7 +28,7 @@ namespace isys
 class IProcessEnvironment: virtual public istd::IPolymorphic
 {
 public:
-	typedef std::map<istd::CString, istd::CString> EnvironmentVariables;
+	typedef std::map<QString, QString> EnvironmentVariables;
 	
 	/**
 		Get current thread ID.
@@ -40,24 +43,24 @@ public:
 	/**
 		Returns the standard temp path, that will be used by the application.
 	*/
-	virtual istd::CString GetTempDirPath() const = 0;
+	virtual QString GetTempDirPath() const = 0;
 
 	/**
 		Returns the working directory of application.
 	*/
-	virtual istd::CString GetWorkingDirectory() const = 0;
+	virtual QString GetWorkingDirectory() const = 0;
 
 	/**
 		Returns the arguments of command line for running application process.
 	*/
-	virtual istd::CStringList GetApplicationArguments() const = 0;
+	virtual QStringList GetApplicationArguments() const = 0;
 
 	/**
 		Returns the module file name. If the \c useApplicationModule is \c true returns the name of application file/directory,
 		otherwise the file name or (directory path) of module in which context this function was called.
 		if \c onlyDirectory is \c true only directory path will be returned.
 	*/
-	virtual istd::CString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const = 0;
+	virtual QString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const = 0;
 
 	/**
 		Returns the environment variables of the application process.
@@ -70,7 +73,7 @@ public:
 		\param variableName Name of the system variable
 		\param variableValue Value of the system variable
 	*/
-	virtual void SetEnvironmentVariableValue(const istd::CString& variableName, const istd::CString& value) = 0;
+	virtual void SetEnvironmentVariableValue(const QString& variableName, const QString& value) = 0;
 };
 
 

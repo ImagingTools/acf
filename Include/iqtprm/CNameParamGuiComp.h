@@ -58,7 +58,7 @@ private Q_SLOTS:
 	void OnNameChanged(const QString& text);
 
 private:
-	I_ATTR(istd::CString, m_labelAttrPtr);
+	I_ATTR(QString, m_labelAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
 };
 

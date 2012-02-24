@@ -44,7 +44,7 @@ int CDialogApplicationComp::Execute(int argc, char** argv)
 }
 
 
-istd::CString CDialogApplicationComp::GetHelpText() const
+QString CDialogApplicationComp::GetHelpText() const
 {
 	return "-style QtStyle\tname of Qt-specified style";
 }

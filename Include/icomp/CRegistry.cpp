@@ -370,13 +370,13 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 }
 
 
-const istd::CString& CRegistry::GetDescription() const
+const QString& CRegistry::GetDescription() const
 {
 	return m_description;
 }
 
 
-void CRegistry::SetDescription(const istd::CString& description)
+void CRegistry::SetDescription(const QString& description)
 {
 	if (description != m_description){
 		istd::CChangeNotifier notifier(this);
@@ -386,13 +386,13 @@ void CRegistry::SetDescription(const istd::CString& description)
 }
 
 
-const istd::CString& CRegistry::GetKeywords() const
+const QString& CRegistry::GetKeywords() const
 {
 	return m_keywords;
 }
 
 
-void CRegistry::SetKeywords(const istd::CString& keywords)
+void CRegistry::SetKeywords(const QString& keywords)
 {
 	if (keywords != m_keywords){
 		istd::CChangeNotifier notifier(this);
@@ -454,7 +454,7 @@ I_DWORD CRegistry::GetMinimalVersion(int versionId) const
 			return 1637;
 		}
 
-		if (!m_description.IsEmpty() || !m_keywords.IsEmpty()){
+		if (!m_description.isEmpty() || !m_keywords.isEmpty()){
 			return 807;
 		}
 	}

@@ -104,11 +104,11 @@ void CSelectableGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	if (m_noSelectionLabelAttrPtr.IsValid()){
-		NoSelectionLabel->setText(iqt::GetQString(*m_noSelectionLabelAttrPtr));
+		NoSelectionLabel->setText(*m_noSelectionLabelAttrPtr);
 	}
 
 	if (m_noSelectionIconAttrPtr.IsValid()){
-		NoSelectionLabel->setPixmap(QPixmap(iqt::GetQString(*m_noSelectionIconAttrPtr)));
+		NoSelectionLabel->setPixmap(QPixmap(*m_noSelectionIconAttrPtr));
 	}
 
 	if (m_selectorGuiCompPtr.IsValid()){

@@ -509,9 +509,9 @@ void CConsoleGui::UpdateComponentsPosition()
 }
 
 
-void CConsoleGui::SetStatusText(const istd::CString& message)
+void CConsoleGui::SetStatusText(const QString& message)
 {
-	m_statusBarPtr->showMessage(iqt::GetQString(message));
+	m_statusBarPtr->showMessage(message);
 }
 
 

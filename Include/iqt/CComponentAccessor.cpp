@@ -17,12 +17,12 @@ namespace iqt
 
 
 CComponentAccessor::CComponentAccessor(
-			const istd::CString& registryFile,
-			const istd::CString& configFile)
+			const QString& registryFile,
+			const QString& configFile)
 :	m_registryFile(registryFile),
 	m_isAutoInitBlocked(false)
 {
-	if (m_registryFile.IsEmpty()){
+	if (m_registryFile.isEmpty()){
 		m_registryFile = "default.arx";
 	}
 
@@ -35,7 +35,7 @@ CComponentAccessor::CComponentAccessor(
 		const icomp::IComponentStaticInfo* staticInfoPtr = dynamic_cast<const icomp::IComponentStaticInfo*>(managerPtr);
 		const icomp::IRegistryLoader* registryLoaderPtr = registryProvider.GetRegistryLoader();
 		if ((registryLoaderPtr != NULL) && (staticInfoPtr != NULL)){
-			const icomp::IRegistry* registryPtr = registryLoaderPtr->GetRegistryFromFile(m_registryFile.c_str());
+			const icomp::IRegistry* registryPtr = registryLoaderPtr->GetRegistryFromFile(m_registryFile);
 			if (registryPtr != NULL){
 				static icomp::CRegistryElement dummyElement;
 

@@ -2,9 +2,12 @@
 #define iview_TFrameBase_included
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 #include "i2d/CRectangle.h"
 
@@ -154,7 +157,7 @@ public:
 	/**
 		Display specified text in status window.
 	*/
-	virtual void SetStatusText(const istd::CString& message) = 0;
+	virtual void SetStatusText(const QString& message) = 0;
 
 	struct CursorInfo
 	{

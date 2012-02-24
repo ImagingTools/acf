@@ -105,7 +105,7 @@ void CSingleDocumentTemplateComp::OnComponentCreated()
 		SetDocumentTypeName(*m_documentTypeNameAttrPtr);
 	}
 	else{
-		SetDocumentTypeName(*m_documentTypeIdAttrPtr);
+		SetDocumentTypeName((*m_documentTypeIdAttrPtr).c_str());
 	}
 
 	I_ASSERT(m_defaultDirectoryAttrPtr.IsValid());

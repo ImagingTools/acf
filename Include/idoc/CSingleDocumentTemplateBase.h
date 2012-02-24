@@ -26,22 +26,22 @@ public:
 	const std::string& GetDocumentTypeId() const;
 	virtual void SetSupportedFeatures(int featureFlags);
 	virtual void SetDocumentTypeId(const std::string& id);
-	virtual void SetDocumentTypeName(const istd::CString& name);
+	virtual void SetDocumentTypeName(const QString& name);
 	virtual void SetViewTypeId(const std::string& id);
-	virtual void SetViewTypeName(const istd::CString& name);
-	virtual void SetDefaultDirectory(const istd::CString& defaultDirectory);
+	virtual void SetViewTypeName(const QString& name);
+	virtual void SetDefaultDirectory(const QString& defaultDirectory);
 
 	// reimplemented (idoc::IDocumentTypesInfo)
 	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIds() const;
-	virtual istd::CString GetDocumentTypeName(const std::string& documentTypeId) const;
+	virtual QString GetDocumentTypeName(const std::string& documentTypeId) const;
 	virtual iser::IFileTypeInfo* GetDocumentFileTypeInfo(const std::string& documentTypeId) const;
-	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
-	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
+	virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const;
+	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
 
 	// reimplemented (idoc::IDocumentTemplate)
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
-	virtual istd::CString GetViewTypeName(
+	virtual QString GetViewTypeName(
 				const std::string& documentTypeId,
 				const std::string& viewTypeId) const;
 	virtual IDocumentStateComparator* CreateStateComparator(const std::string& documentTypeId) const;
@@ -51,12 +51,12 @@ protected:
 	bool IsViewTypeSupported(const std::string& viewTypeId) const;
 
 private:
-	istd::CString m_defaultDirectory;
+	QString m_defaultDirectory;
 
 	std::string m_documentTypeId;
-	istd::CString m_documentTypeName;
+	QString m_documentTypeName;
 	std::string m_viewTypeId;
-	istd::CString m_viewTypeName;
+	QString m_viewTypeName;
 
 	int m_supportedFeatures;
 };

@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
 	CCompositor instance;
 
 	ibase::IApplication* applicationPtr = instance.GetInterface<ibase::IApplication>();
-
 	if (applicationPtr != NULL){
 		return applicationPtr->Execute(argc, argv);
 	}

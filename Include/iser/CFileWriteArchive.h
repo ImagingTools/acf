@@ -4,6 +4,7 @@
 
 // STL includes
 #include <fstream>
+#include <vector>
 
 
 // ACF includes
@@ -39,7 +40,7 @@ public:
 		\param	serializeHeader		if it is true (default) archive header will be serialized.
 	*/
 	CFileWriteArchive(
-					const istd::CString& filePath,
+					const QString& filePath,
 					const IVersionInfo* versionInfoPtr = NULL,
 					bool supportTagSkipping = true,
 					bool serializeHeader = true);

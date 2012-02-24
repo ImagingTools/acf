@@ -8,7 +8,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "icomp/CComponentBase.h"
 
@@ -85,10 +85,10 @@ protected:
 
 private:
 	I_REF(ibase::IFileConvertCopy, m_fileCopyCompPtr);
-	I_ATTR(istd::CString, m_inputPathAttrPtr);
-	I_ATTR(istd::CString, m_outputPathAttrPtr);
-	I_MULTIATTR(istd::CString, m_filtersAttrPtr);
-	I_MULTIATTR(istd::CString, m_excludeFiltersAttrPtr);
+	I_ATTR(QString, m_inputPathAttrPtr);
+	I_ATTR(QString, m_outputPathAttrPtr);
+	I_MULTIATTR(QString, m_filtersAttrPtr);
+	I_MULTIATTR(QString, m_excludeFiltersAttrPtr);
 	I_ATTR(int, m_recursionDepthAttrPtr);
 };
 

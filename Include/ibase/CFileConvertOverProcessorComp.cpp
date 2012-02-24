@@ -21,8 +21,8 @@ CFileConvertOverProcessorComp::CFileConvertOverProcessorComp()
 // reimplemented (ibase::IFileConvertCopy)
 
 bool CFileConvertOverProcessorComp::ConvertFile(
-			const istd::CString& inputFilePath,
-			const istd::CString& outputFilePath,
+			const QString& inputFilePath,
+			const QString& outputFilePath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	isys::CSectionBlocker blocker(m_lock.GetPtr());

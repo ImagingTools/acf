@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/ISerializable.h"
 
@@ -21,12 +21,12 @@ public:
 	/**
 		Get the object name.
 	*/
-	virtual const istd::CString& GetName() const = 0;
+	virtual const QString& GetName() const = 0;
 
 	/**
 		Set the object name.
 	*/
-	virtual void SetName(const istd::CString& name) = 0;
+	virtual void SetName(const QString& name) = 0;
 
 	/**
 		Return \c true, if the name setting is enabled.

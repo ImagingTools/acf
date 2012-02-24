@@ -33,20 +33,20 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpFileProvider)
-	virtual double GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
-	virtual istd::CString GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual double GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual QString GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
 protected:
-	virtual istd::CString GetInfoFilePath(const icomp::CComponentAddress& componentAddress) const;
-	virtual istd::CString GetHelpFilePath(const icomp::CComponentAddress& componentAddress) const;
+	virtual QString GetInfoFilePath(const icomp::CComponentAddress& componentAddress) const;
+	virtual QString GetHelpFilePath(const icomp::CComponentAddress& componentAddress) const;
 
-	bool ExtractComponentAddress(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr, icomp::CComponentAddress& result) const;
+	bool ExtractComponentAddress(const QString& contextText, const istd::IPolymorphic* contextObjectPtr, icomp::CComponentAddress& result) const;
 
 private:
 	I_REF(idoc::IHelpFileProvider, m_slaveProviderCompPtr);
 	I_REF(icomp::IMetaInfoManager, m_metaInfoManagerCompPtr);
 	I_REF(IExternalMetaInfoManager, m_externalMetaInfoManagerCompPtr);
-	I_ATTR(istd::CString, m_helpFileNameAttrPtr);
+	I_ATTR(QString, m_helpFileNameAttrPtr);
 };
 
 

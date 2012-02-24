@@ -43,10 +43,10 @@ public:
 	virtual void SetElementExported(
 				const std::string& exportId,
 				const std::string& elementId);
-	virtual const istd::CString& GetDescription() const;
-	virtual void SetDescription(const istd::CString& description);
-	virtual const istd::CString& GetKeywords() const;
-	virtual void SetKeywords(const istd::CString& keywords);
+	virtual const QString& GetDescription() const;
+	virtual void SetDescription(const QString& description);
+	virtual const QString& GetKeywords() const;
+	virtual void SetKeywords(const QString& keywords);
 	
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -76,8 +76,8 @@ private:
 	ExportedInterfacesMap m_exportedInterfacesMap;
 	ExportedComponentsMap m_exportedComponentsMap;
 
-	istd::CString m_description;
-	istd::CString m_keywords;
+	QString m_description;
+	QString m_keywords;
 };
 
 

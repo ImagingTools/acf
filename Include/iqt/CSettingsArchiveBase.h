@@ -2,9 +2,13 @@
 #define iqt_CSettingsArchiveBase_included
 
 
-#include <QSettings>
+// STL includes
+#include <vector>
 
-#include "istd/CString.h"
+
+// Qt includes
+#include <QSettings>
+#include <QString>
 
 
 namespace iqt

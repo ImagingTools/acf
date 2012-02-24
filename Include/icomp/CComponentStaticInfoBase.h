@@ -22,8 +22,8 @@ public:
 	virtual int GetComponentType() const;
 	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const;
 	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
-	virtual const istd::CString& GetDescription() const;
-	virtual const istd::CString& GetKeywords() const;
+	virtual const QString& GetDescription() const;
+	virtual const QString& GetKeywords() const;
 
 	//	reimplemented (icomp::IElementStaticInfo)
 	virtual const IElementStaticInfo* GetSubelementInfo(const std::string& subcomponentId) const;
@@ -35,15 +35,19 @@ public:
 
 // reimplemented (icomp::IComponentStaticInfo)
 
-inline const istd::CString& CComponentStaticInfoBase::GetDescription() const
+inline const QString& CComponentStaticInfoBase::GetDescription() const
 {
-	return istd::CString::GetEmpty();
+	static QString emptyString;
+
+	return emptyString;
 }
 
 
-inline const istd::CString& CComponentStaticInfoBase::GetKeywords() const
+inline const QString& CComponentStaticInfoBase::GetKeywords() const
 {
-	return istd::CString::GetEmpty();
+	static QString emptyString;
+
+	return emptyString;
 }
 
 

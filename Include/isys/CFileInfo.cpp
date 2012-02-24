@@ -13,7 +13,7 @@ namespace isys
 
 
 CFileInfo::CFileInfo(
-			const istd::CString& filePath,
+			const QString& filePath,
 			int filePermissions,
 			const isys::CSimpleDateTime& modificationTime)
 	:m_filePath(filePath),
@@ -57,7 +57,7 @@ void CFileInfo::SetModificationTime(const isys::IDateTime& modificationTime)
 
 // reimplemented (isys::IFileInfo)
 
-istd::CString CFileInfo::GetFilePath() const
+QString CFileInfo::GetFilePath() const
 {
 	return m_filePath;
 }

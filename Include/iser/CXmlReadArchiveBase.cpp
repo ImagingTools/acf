@@ -31,7 +31,7 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Begin of tag cannot be found, shoud be '" + tag.GetId() + "'",
+						QString("Begin of tag cannot be found, shoud be '%1'").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -44,7 +44,7 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Found tag is empty, shoud be '" + tag.GetId() + "'",
+						QString("Found tag is empty, shoud be '%1'").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -66,7 +66,7 @@ bool CXmlReadArchiveBase::BeginTag(const CArchiveTag& tag)
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Bad tag begin, is '" + tagText + "', should be '" + tag.GetId() + "'",
+						QString("Bad tag begin, is '%1', should be '%2'").arg(tagText.c_str()).arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -95,7 +95,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Found tag is empty, shoud be '" + tag.GetId() + "'",
+						QString("Found tag is empty, shoud be '%'").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -108,7 +108,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Found tag is empty, shoud be '" + tag.GetId() + "'",
+						QString("Found tag is empty, shoud be '%'").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -121,7 +121,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Bad tag begin, is '" + tagText + "', should be '" + tag.GetId() + "'",
+						QString("Bad tag begin, is '%1', should be '%2'").arg(tagText.c_str()).arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -134,7 +134,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"No count attribute in multitag '" + tag.GetId() + "'",
+						QString("No count attribute in multitag '%1").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -150,7 +150,7 @@ bool CXmlReadArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTa
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"The quotes for tag '" + tag.GetId() + "' could not be found",
+						QString("The quotes for tag '%1' could not be found").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -196,7 +196,7 @@ bool CXmlReadArchiveBase::EndTag(const CArchiveTag& tag)
 			SendLogMessage(
 						istd::ILogger::MC_INFO,
 						MI_TAG_SKIPPED,
-						"Some elements in '" + tag.GetId() + "' was skipped",
+						QString("Some elements in '%1' was skipped").arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -245,7 +245,7 @@ bool CXmlReadArchiveBase::Process(std::string& value)
 			return false;
 		}
 
-		if (xmlText != GetElementSeparator().ToString()){
+		if (xmlText != GetElementSeparator().toStdString()){
 			if (IsLogConsumed()){
 				SendLogMessage(
 							istd::ILogger::MC_ERROR,
@@ -284,7 +284,7 @@ bool CXmlReadArchiveBase::Process(std::string& value)
 }
 
 
-bool CXmlReadArchiveBase::Process(istd::CString& value)
+bool CXmlReadArchiveBase::Process(QString& value)
 {
 	if (m_isTagEmpty){
 		if (m_isSeparatorNeeded){
@@ -300,7 +300,7 @@ bool CXmlReadArchiveBase::Process(istd::CString& value)
 			return false;
 		}
 
-		value = "";
+		value.clear();
 
 		m_isSeparatorNeeded = true;
 
@@ -323,7 +323,7 @@ bool CXmlReadArchiveBase::Process(istd::CString& value)
 			return false;
 		}
 
-		if (xmlText != GetElementSeparator().ToString()){
+		if (xmlText != GetElementSeparator().toStdString()){
 			if (IsLogConsumed()){
 				SendLogMessage(
 					istd::ILogger::MC_ERROR,
@@ -388,7 +388,7 @@ bool CXmlReadArchiveBase::InternEndTag(const CArchiveTag& tag, bool& wasTagSkipp
 				SendLogMessage(
 							istd::ILogger::MC_ERROR,
 							MI_TAG_ERROR,
-							"End of tag cannot be found, shoud be '" + tag.GetId() + "'",
+							QString("End of tag cannot be found, shoud be '%1").arg(tag.GetId().c_str()),
 							"iser::CXmlReadArchiveBase",
 							MF_SYSTEM);
 			}
@@ -410,7 +410,7 @@ bool CXmlReadArchiveBase::InternEndTag(const CArchiveTag& tag, bool& wasTagSkipp
 				SendLogMessage(
 							istd::ILogger::MC_ERROR,
 							MI_TAG_ERROR,
-							"Tag end expected but found '" + tagText + "'",
+							QString("Tag end expected but found '%'").arg(tagText.c_str()),
 							"iser::CXmlReadArchiveBase",
 							MF_SYSTEM);
 			}
@@ -424,7 +424,7 @@ bool CXmlReadArchiveBase::InternEndTag(const CArchiveTag& tag, bool& wasTagSkipp
 			SendLogMessage(
 						istd::ILogger::MC_ERROR,
 						MI_TAG_ERROR,
-						"Bad tag end, is '" + tagText.substr(1) + "', should be '" + tag.GetId() + "'",
+						QString("Bad tag end, is '%1', should be '%2'").arg(tagText.substr(1).c_str()).arg(tag.GetId().c_str()),
 						"iser::CXmlReadArchiveBase",
 						MF_SYSTEM);
 		}
@@ -451,7 +451,7 @@ bool CXmlReadArchiveBase::SerializeXmlHeader()
 		SendLogMessage(
 					istd::ILogger::MC_ERROR,
 					MI_TAG_ERROR,
-					"Cannot find root tag '" + m_rootTag.GetId() + "'",
+					QString("Cannot find root tag '%1'").arg(m_rootTag.GetId().c_str()),
 					"iser::CXmlReadArchiveBase",
 					MF_SYSTEM);
 	}

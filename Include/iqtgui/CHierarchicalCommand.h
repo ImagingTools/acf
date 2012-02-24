@@ -39,7 +39,7 @@ public:
 	typedef iprm::CEnableableParam BaseClass2;
 	typedef iprm::CNameParam BaseClass3;
 
-	explicit CHierarchicalCommand(const istd::CString& name = "", int priority = 100, int staticFlags = CF_GLOBAL_MENU, int groupId = GI_NORMAL);
+	explicit CHierarchicalCommand(const QString& name = "", int priority = 100, int staticFlags = CF_GLOBAL_MENU, int groupId = GI_NORMAL);
 
 	void SetPriority(int priority);
 	void SetStaticFlags(int flags);
@@ -92,7 +92,7 @@ public:
 	virtual ibase::ICommand* GetChild(int index) const;
 
 	// reimplemented (iprm::INameParam)
-	virtual void SetName(const istd::CString& name);
+	virtual void SetName(const QString& name);
 
 	// reimplemented (iprm::IEnableableParam)
 	virtual void SetEnabled(bool isEnabled = true);

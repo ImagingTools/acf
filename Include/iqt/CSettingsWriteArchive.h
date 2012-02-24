@@ -31,7 +31,7 @@ public:
 	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count);
 	virtual bool EndTag(const iser::CArchiveTag& tag);
 	virtual bool Process(std::string& value);
-	virtual bool Process(istd::CString& value);
+	virtual bool Process(QString& value);
 };
 
 

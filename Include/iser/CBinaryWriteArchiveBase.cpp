@@ -1,9 +1,11 @@
 #include "iser/CBinaryWriteArchiveBase.h"
 
 
-// ACF includes
-#include "istd/CString.h"
+// Qt includes
+#include <QString>
 
+
+// ACF includes
 #include "iser/CArchiveTag.h"
 
 
@@ -113,13 +115,13 @@ bool CBinaryWriteArchiveBase::Process(std::string& value)
 }
 
 
-bool CBinaryWriteArchiveBase::Process(istd::CString& value)
+bool CBinaryWriteArchiveBase::Process(QString& value)
 {
 	int stringLength = value.size();
 
 	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * int(sizeof(wchar_t)));	
+	retVal = retVal && ProcessData((void*)value.toStdWString().c_str(), stringLength * int(sizeof(wchar_t)));	
 
 	return retVal;
 }

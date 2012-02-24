@@ -108,7 +108,7 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 }
 
 
-istd::CString CGuiApplicationComp::GetHelpText() const
+QString CGuiApplicationComp::GetHelpText() const
 {
 	return "-style QtStyle\tname of Qt-specified style";
 }

@@ -14,7 +14,7 @@ void CAboutWidgetGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 	
 	if (m_logoPathAttrPtr.IsValid()){
-		LogoLabel->setPixmap(QPixmap(iqt::GetQString(*m_logoPathAttrPtr)));
+		LogoLabel->setPixmap(QPixmap(*m_logoPathAttrPtr));
 		LogoLabel->setVisible(true);
 	}
 	else{
@@ -42,7 +42,7 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 		int mainVersionId = m_applicationInfoCompPtr->GetMainVersionId();
 		if (mainVersionId >= 0){
 			if (versionInfo.GetVersionNumber(mainVersionId, mainVersionNumber)){
-				mainVersionText = iqt::GetQString(versionInfo.GetEncodedVersionName(mainVersionId, mainVersionNumber));
+				mainVersionText = versionInfo.GetEncodedVersionName(mainVersionId, mainVersionNumber);
 			}
 		}
 
@@ -57,15 +57,15 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 
 					I_DWORD version;
 					if (versionInfo.GetVersionNumber(versionId, version)){
-						istd::CString description = (i < m_versionNamesAttrPtr.GetCount())?
+						QString description = (i < m_versionNamesAttrPtr.GetCount())?
 									m_versionNamesAttrPtr[i]:
 									versionInfo.GetVersionIdDescription(versionId);
-						istd::CString versionText = versionInfo.GetEncodedVersionName(versionId, version);
+						QString versionText = versionInfo.GetEncodedVersionName(versionId, version);
 
-						QLabel* descriptionLabelPtr = new QLabel(iqt::GetQString(description), VersionsFrame);
+						QLabel* descriptionLabelPtr = new QLabel(description, VersionsFrame);
 						layoutPtr->addWidget(descriptionLabelPtr, i, 0);
 
-						QLabel* versionLabelPtr = new QLabel(iqt::GetQString(versionText), VersionsFrame);
+						QLabel* versionLabelPtr = new QLabel(versionText, VersionsFrame);
 						layoutPtr->addWidget(versionLabelPtr, i, 1);
 					}
 				}
@@ -81,13 +81,13 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 
 					I_DWORD version;
 					if ((versionId != mainVersionId) && versionInfo.GetVersionNumber(versionId, version)){
-						istd::CString description = versionInfo.GetVersionIdDescription(versionId);
-						istd::CString versionText = versionInfo.GetEncodedVersionName(versionId, version);
+						QString description = versionInfo.GetVersionIdDescription(versionId);
+						QString versionText = versionInfo.GetEncodedVersionName(versionId, version);
 
-						QLabel* descriptionLabelPtr = new QLabel(iqt::GetQString(description), VersionsFrame);
+						QLabel* descriptionLabelPtr = new QLabel(description, VersionsFrame);
 						layoutPtr->addWidget(descriptionLabelPtr, rowCount, 0);
 
-						QLabel* versionLabelPtr = new QLabel(iqt::GetQString(versionText), VersionsFrame);
+						QLabel* versionLabelPtr = new QLabel(versionText, VersionsFrame);
 						layoutPtr->addWidget(versionLabelPtr, rowCount++, 1);
 					}
 				}
@@ -95,23 +95,23 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 		}
 
 		if (*m_showProductNameAttrPtr){
-			productName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME));
+			productName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME);
 		}
 
 		if (*m_showApplicationNameAttrPtr){
-			applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
+			applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
 		}
 
 		if (*m_showApplicationSubnameAttrPtr){
-			applicationSubname = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME));
+			applicationSubname = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME);
 		}
 
 		if (*m_showProductTypeAttrPtr){
-			applicationType = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE));
+			applicationType = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE);
 		}
 
 		if (*m_showLegalCopyrightAttrPtr){
-			legalCopyright = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT));
+			legalCopyright = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT);
 		}
 	}
 

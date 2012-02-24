@@ -23,9 +23,9 @@ class CLocalizer: virtual public istd::ILocalizer
 {
 public:
 	// reimplemented (istd::ILocalizer)
-	virtual istd::CString GetTranslatedText(
+	virtual QString GetTranslatedText(
 				const std::string& context,
-				const istd::CString& text,
+				const QString& text,
 				const std::string& disambiguation = std::string()) const;
 };
 

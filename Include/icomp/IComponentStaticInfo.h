@@ -2,6 +2,10 @@
 #define icomp_IComponentStaticInfo_included
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "icomp/IElementStaticInfo.h"
 
@@ -76,12 +80,12 @@ public:
 	/**
 		Get human readable description of this component.
 	*/
-	virtual const istd::CString& GetDescription() const = 0;
+	virtual const QString& GetDescription() const = 0;
 
 	/**
 		Get keywords for this component.
 	*/
-	virtual const istd::CString& GetKeywords() const = 0;
+	virtual const QString& GetKeywords() const = 0;
 };
 
 

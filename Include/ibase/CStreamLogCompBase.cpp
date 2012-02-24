@@ -55,7 +55,7 @@ void CStreamLogCompBase::AddMessage(const MessagePtr& messagePtr)
 
 void CStreamLogCompBase::WriteMessageToStream(const ibase::IMessage& message)
 {
-	istd::CString messageText = GenerateMessageText(message);
+	QString messageText = GenerateMessageText(message);
 	
 	WriteText(messageText);
 
@@ -63,15 +63,15 @@ void CStreamLogCompBase::WriteMessageToStream(const ibase::IMessage& message)
 }
 
 
-istd::CString CStreamLogCompBase::GenerateMessageText(const ibase::IMessage& message) const
+QString CStreamLogCompBase::GenerateMessageText(const ibase::IMessage& message) const
 {
-	istd::CString messageText = message.GetText();
+	QString messageText = message.GetText();
 
 	if (m_useTimeStampAttrPtr.IsValid() && *m_useTimeStampAttrPtr){
 		messageText =
-					istd::CString("[") +
-					istd::CString(message.GetTimeStamp().ToString(isys::IDateTime::TC_YEAR, isys::IDateTime::TC_SECOND)) +
-					istd::CString("] ") +
+					QString("[") +
+					message.GetTimeStamp().ToString(isys::IDateTime::TC_YEAR, isys::IDateTime::TC_SECOND) +
+					QString("] ") +
 					messageText;
 	}
 

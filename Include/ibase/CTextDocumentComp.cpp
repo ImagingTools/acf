@@ -14,13 +14,13 @@ namespace ibase
 
 // reimplemented (ibase::ITextDocument)
 
-istd::CString CTextDocumentComp::GetText() const
+QString CTextDocumentComp::GetText() const
 {
 	return m_text;
 }
 
 
-void CTextDocumentComp::SetText(const istd::CString& text)
+void CTextDocumentComp::SetText(const QString& text)
 {
 	if (m_text != text){
 		istd::CChangeNotifier changePtr(this);

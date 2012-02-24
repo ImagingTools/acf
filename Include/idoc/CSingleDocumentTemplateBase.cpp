@@ -32,7 +32,7 @@ void CSingleDocumentTemplateBase::SetDocumentTypeId(const std::string& id)
 }
 
 
-void CSingleDocumentTemplateBase::SetDocumentTypeName(const istd::CString& name)
+void CSingleDocumentTemplateBase::SetDocumentTypeName(const QString& name)
 {
 	m_documentTypeName = name;
 }
@@ -44,13 +44,13 @@ void CSingleDocumentTemplateBase::SetViewTypeId(const std::string& id)
 }
 
 
-void CSingleDocumentTemplateBase::SetViewTypeName(const istd::CString& name)
+void CSingleDocumentTemplateBase::SetViewTypeName(const QString& name)
 {
 	m_viewTypeName = name;
 }
 
 
-void CSingleDocumentTemplateBase::SetDefaultDirectory(const istd::CString& defaultDirectory)
+void CSingleDocumentTemplateBase::SetDefaultDirectory(const QString& defaultDirectory)
 {
 	m_defaultDirectory = defaultDirectory;
 }
@@ -78,14 +78,14 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIds() const
 }
 
 
-istd::CString CSingleDocumentTemplateBase::GetDocumentTypeName(const std::string& documentTypeId) const
+QString CSingleDocumentTemplateBase::GetDocumentTypeName(const std::string& documentTypeId) const
 {
 	if (documentTypeId == m_documentTypeId){
-		if (!m_documentTypeName.IsEmpty()){
+		if (!m_documentTypeName.isEmpty()){
 			return m_documentTypeName;
 		}
 		else{
-			return documentTypeId;
+			return QString::fromStdString(documentTypeId);
 		}
 	}
 	else{
@@ -100,7 +100,7 @@ iser::IFileTypeInfo* CSingleDocumentTemplateBase::GetDocumentFileTypeInfo(const 
 }
 
 
-IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(const istd::CString& filePath) const
+IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(const QString& filePath) const
 {
 	IDocumentTemplate::Ids retVal;
 
@@ -120,14 +120,14 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(co
 }
 
 
-istd::CString CSingleDocumentTemplateBase::GetDefaultDirectory(const istd::CString& sugestedDir, const std::string* documentTypeIdPtr) const
+QString CSingleDocumentTemplateBase::GetDefaultDirectory(const QString& sugestedDir, const std::string* documentTypeIdPtr) const
 {
-	if (sugestedDir.IsEmpty()){
+	if (sugestedDir.isEmpty()){
 		if ((documentTypeIdPtr == NULL) || IsDocumentTypeSupported(*documentTypeIdPtr)){
 			return m_defaultDirectory;
 		}
 		else{
-			return istd::CString();
+			return QString();
 		}
 	}
 
@@ -149,21 +149,20 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetViewTypeIds(const std::st
 }
 
 
-istd::CString CSingleDocumentTemplateBase::GetViewTypeName(
+QString CSingleDocumentTemplateBase::GetViewTypeName(
 			const std::string& documentTypeId,
 			const std::string& viewTypeId) const
 {
 	if ((documentTypeId == m_documentTypeId) && (viewTypeId == m_viewTypeId)){
-		if (!m_viewTypeName.IsEmpty()){
+		if (!m_viewTypeName.isEmpty()){
 			return m_viewTypeName;
 		}
 		else{
-			return m_viewTypeId;
+			return QString::fromStdString(m_viewTypeId);
 		}
 	}
-	else{
-		return "";
-	}
+
+	return QString();
 }
 
 

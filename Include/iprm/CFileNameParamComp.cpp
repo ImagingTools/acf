@@ -22,13 +22,13 @@ int CFileNameParamComp::GetPathType() const
 }
 
 
-const istd::CString& CFileNameParamComp::GetPath() const
+const QString& CFileNameParamComp::GetPath() const
 {
 	return m_path;
 }
 
 
-void CFileNameParamComp::SetPath(const istd::CString& path)
+void CFileNameParamComp::SetPath(const QString& path)
 {
 	if (path != m_path){
 		istd::CChangeNotifier notifier(this);
@@ -44,7 +44,7 @@ bool CFileNameParamComp::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	istd::CString filePath = m_path;
+	QString filePath = m_path;
 
 	static iser::CArchiveTag pathTag("Path", "File path");
 	retVal = retVal && archive.BeginTag(pathTag);

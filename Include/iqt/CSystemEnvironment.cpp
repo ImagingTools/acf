@@ -12,21 +12,21 @@ namespace iqt
 
 // reimplemented (isys::ISystemEnvironment)
 
-istd::CString CSystemEnvironment::GetUser() const
+QString CSystemEnvironment::GetUser() const
 {
 	return GetSystemVariableValue("USER");
 }
 
 
-istd::CString CSystemEnvironment::GetTempDirPath() const
+QString CSystemEnvironment::GetTempDirPath() const
 {
-	return iqt::GetCString(QDir::tempPath());
+	return QDir::tempPath();
 }
 
 
-istd::CString CSystemEnvironment::GetUniqueIdentifier() const
+QString CSystemEnvironment::GetUniqueIdentifier() const
 {
-	return iqt::GetCString(QUuid::createUuid().toString());
+	return QUuid::createUuid().toString();
 }
 
 

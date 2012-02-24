@@ -7,11 +7,11 @@ namespace icmpstr
 
 // reimplemented (iqt::CPackagesLoaderComp)
 
-bool CPackagesLoaderExtComp::RegisterPackagesDir(const istd::CString& path)
+bool CPackagesLoaderExtComp::RegisterPackagesDir(const QString& path)
 {
 	bool retVal = BaseClass::RegisterPackagesDir(path);
 
-	QDir packagesDir(iqt::GetQString(path));
+	QDir packagesDir(path);
 
 	QStringList infoFilters;
 	infoFilters.append("*.arp.info");
@@ -35,22 +35,22 @@ bool CPackagesLoaderExtComp::RegisterPackagesDir(const istd::CString& path)
 
 // reimplemented (icmpstr::IExternalMetaInfoManager)
 
-istd::CString CPackagesLoaderExtComp::GetPackageInfoPath(const std::string& packageId) const
+QString CPackagesLoaderExtComp::GetPackageInfoPath(const std::string& packageId) const
 {
 	PackageInfosMap::const_iterator foundPackageIter = m_packageInfosMap.find(packageId);
 	if (foundPackageIter != m_packageInfosMap.end()){
-		return iqt::GetCString(foundPackageIter->second.absolutePath());
+		return foundPackageIter->second.absolutePath();
 	}
 
 	return "";
 }
 
 
-istd::CString CPackagesLoaderExtComp::GetComponentInfoPath(const icomp::CComponentAddress& address) const
+QString CPackagesLoaderExtComp::GetComponentInfoPath(const icomp::CComponentAddress& address) const
 {
 	PackageInfosMap::const_iterator foundPackageIter = m_packageInfosMap.find(address.GetPackageId());
 	if (foundPackageIter != m_packageInfosMap.end()){
-		return iqt::GetCString(foundPackageIter->second.filePath(address.GetComponentId().c_str()));
+		return foundPackageIter->second.filePath(address.GetComponentId().c_str());
 	}
 
 	return "";

@@ -2,9 +2,12 @@
 #define idoc_IHelpFileProvider_included
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 #include "idoc/IHelpInfoProvider.h"
 
@@ -22,7 +25,7 @@ public:
 	/**
 		Get access to help file path for specified help information.
 	*/
-	virtual istd::CString GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const = 0;
+	virtual QString GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const = 0;
 };
 
 

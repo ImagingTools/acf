@@ -22,9 +22,9 @@ int main(int argc, char *argv[])
 
 	iqt::CDefaultServicesProvider::RegisterServices();
 
-	istd::CString configFile;
+	QString configFile;
 
-	std::string registryFile = "default.arx";
+	QString registryFile = "default.arx";
 	bool showApplicationInfo = false;
 	std::string componentId;
 	bool waitOnEnd = false;
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if (index == 1){
-			registryFile = argument;
+			registryFile = QString::fromStdString(argument);
 		}
 	}
 
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	}
 	
 	else if (showApplicationInfo){
-		std::cout << applicationPtr->GetHelpText().ToString();
+		std::cout << applicationPtr->GetHelpText().toStdString();
 
 		retVal = 0;
 	}

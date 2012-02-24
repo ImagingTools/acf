@@ -34,7 +34,7 @@ int CIterativeProcessorComp::DoProcessing(
 
 	int progressSessionId = -1;
 
-	iprm::TParamsPtr<iprm::ISelectionParam> processorParamsPtr(paramsPtr, m_paramsIdAttrPtr->GetValue().ToString());
+	iprm::TParamsPtr<iprm::ISelectionParam> processorParamsPtr(paramsPtr, m_paramsIdAttrPtr->GetValue().toStdString());
 	if (processorParamsPtr.IsValid() && m_slaveProcessorCompPtr.IsValid()){
 		int iterationsCount = processorParamsPtr->GetSelectedOptionIndex();
 
@@ -113,7 +113,7 @@ int CIterativeProcessorComp::GetOptionsCount() const
 }
 
 
-istd::CString CIterativeProcessorComp::GetOptionName(int index) const
+QString CIterativeProcessorComp::GetOptionName(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < int(m_iterationNames.size()));
@@ -122,9 +122,9 @@ istd::CString CIterativeProcessorComp::GetOptionName(int index) const
 }
 
 
-istd::CString CIterativeProcessorComp::GetOptionDescription(int /*index*/) const
+QString CIterativeProcessorComp::GetOptionDescription(int /*index*/) const
 {
-	return istd::CString();
+	return QString();
 }
 
 
@@ -168,7 +168,7 @@ void CIterativeProcessorComp::OnComponentCreated()
 		m_iterationNames[1] = "1 iteration";
 
 		for (int i = 2; i < optionsCount; ++i){
-			m_iterationNames[i] = istd::CString::FromNumber(i) + " iterations";
+			m_iterationNames[i] = QString("%1").arg(i) + " iterations";
 		}
 	}
 }

@@ -19,16 +19,16 @@ class CFileSystem: virtual public isys::IFileSystem
 {
 public:
 	// reimplemented (isys::IFileSystem)
-	virtual istd::CString GetNormalizedPath(const istd::CString& path) const;
-	virtual istd::CString GetFileName(const istd::CString& filePath) const;
-	virtual istd::CString GetBaseFileName(const istd::CString& filePath) const;
-	virtual istd::CString GetDirPath(const istd::CString& filePath) const;
-	virtual bool HasExtension(const istd::CString& filePath, const istd::CString& extension) const;
-	virtual bool IsPresent(const istd::CString& filePath) const;
-	virtual bool CreateFileCopy(const istd::CString& inputFile, const istd::CString& outputFile, bool overwriteExisting = false) const;
-	virtual bool RemoveFile(const istd::CString& filePath) const;
-	virtual bool RemoveFolder(const istd::CString& directoryPath, bool ignoreNonEmpty = false) const;
-	virtual bool CreateFolder(const istd::CString& directoryPath) const;
+	virtual QString GetNormalizedPath(const QString& path) const;
+	virtual QString GetFileName(const QString& filePath) const;
+	virtual QString GetBaseFileName(const QString& filePath) const;
+	virtual QString GetDirPath(const QString& filePath) const;
+	virtual bool HasExtension(const QString& filePath, const QString& extension) const;
+	virtual bool IsPresent(const QString& filePath) const;
+	virtual bool CreateFileCopy(const QString& inputFile, const QString& outputFile, bool overwriteExisting = false) const;
+	virtual bool RemoveFile(const QString& filePath) const;
+	virtual bool RemoveFolder(const QString& directoryPath, bool ignoreNonEmpty = false) const;
+	virtual bool CreateFolder(const QString& directoryPath) const;
 
 	// static members
 	static QString FindVariableValue(const QString& varName);

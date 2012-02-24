@@ -45,31 +45,31 @@ void CProcessEnvironment::Sleep(double seconds)
 }
 
 
-istd::CString CProcessEnvironment::GetTempDirPath() const
+QString CProcessEnvironment::GetTempDirPath() const
 {
-	return iqt::GetCString(QDir::tempPath());
+	return QDir::tempPath();
 }
 
 
-istd::CString CProcessEnvironment::GetWorkingDirectory() const
+QString CProcessEnvironment::GetWorkingDirectory() const
 {
-	return iqt::GetCString(QDir::currentPath());
+	return QDir::currentPath();
 }
 
 
-istd::CStringList CProcessEnvironment::GetApplicationArguments() const
+QStringList CProcessEnvironment::GetApplicationArguments() const
 {
-	return iqt::GetCStringList(QCoreApplication::arguments());
+	return QCoreApplication::arguments();
 }
 
 
-istd::CString CProcessEnvironment::GetModulePath(bool /*useApplicationModule = false*/, bool onlyDirectory /*= false*/) const
+QString CProcessEnvironment::GetModulePath(bool /*useApplicationModule = false*/, bool onlyDirectory /*= false*/) const
 {
 	if (!onlyDirectory){
-		return iqt::GetCString(QCoreApplication::applicationFilePath());
+		return QCoreApplication::applicationFilePath();
 	}
 
-	return iqt::GetCString(QCoreApplication::applicationDirPath());
+	return QCoreApplication::applicationDirPath();
 }
 
 
@@ -83,10 +83,10 @@ CProcessEnvironment::EnvironmentVariables CProcessEnvironment::GetEnvironmentVar
 		QStringList splitted = variableEntry.split('=');
 
 		if (splitted.count() == 2){
-			istd::CString variableName = iqt::GetCString(splitted[0]);
-			istd::CString variableValue = iqt::GetCString(splitted[1]);
+			QString variableName = splitted[0];
+			QString variableValue = splitted[1];
 
-			environmentVariables[variableName.ToUpper()] = variableValue;
+			environmentVariables[variableName.toUpper()] = variableValue;
 		}
 	}
 
@@ -94,7 +94,7 @@ CProcessEnvironment::EnvironmentVariables CProcessEnvironment::GetEnvironmentVar
 }
 
 
-void CProcessEnvironment::SetEnvironmentVariableValue(const istd::CString&/* variableName*/, const istd::CString&/* value*/)
+void CProcessEnvironment::SetEnvironmentVariableValue(const QString&/* variableName*/, const QString&/* value*/)
 {
 	// not implemented yet.
 	I_CRITICAL();

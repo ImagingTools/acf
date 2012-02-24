@@ -34,8 +34,8 @@ protected:
 
 private:
 	I_REF(iqtgui::IGuiObject, m_guiCompPtr);
-	I_ATTR(istd::CString, m_dialogTitleAttrPtr);
-	I_ATTR(istd::CString, m_dialogIconPathAttrPtr);
+	I_ATTR(QString, m_dialogTitleAttrPtr);
+	I_ATTR(QString, m_dialogIconPathAttrPtr);
 };
 
 

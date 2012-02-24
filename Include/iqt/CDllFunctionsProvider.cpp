@@ -5,9 +5,9 @@ namespace iqt
 {
 
 
-CDllFunctionsProvider::CDllFunctionsProvider(const istd::CString& dllPath)
+CDllFunctionsProvider::CDllFunctionsProvider(const QString& dllPath)
 {
-	if (!dllPath.IsEmpty()){
+	if (!dllPath.isEmpty()){
 		OpenDll(dllPath);
 	}
 }
@@ -25,11 +25,11 @@ void CDllFunctionsProvider::Reset()
 }
 
 
-bool CDllFunctionsProvider::OpenDll(const istd::CString& dllPath)
+bool CDllFunctionsProvider::OpenDll(const QString& dllPath)
 {
 	Reset();
 
-	m_library.setFileName(iqt::GetQString(dllPath));
+	m_library.setFileName(dllPath);
 	m_library.setLoadHints(QLibrary::ExportExternalSymbolsHint);
 
 	m_library.load();

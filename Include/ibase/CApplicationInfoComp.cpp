@@ -9,7 +9,7 @@ namespace ibase
 
 // reimplemented (ibase::IApplicationInfo)
 
-istd::CString CApplicationInfoComp::GetApplicationAttribute(int attributeId) const
+QString CApplicationInfoComp::GetApplicationAttribute(int attributeId) const
 {
 	switch (attributeId){
 	case AA_COMPANY_NAME:
@@ -43,7 +43,7 @@ istd::CString CApplicationInfoComp::GetApplicationAttribute(int attributeId) con
 		break;
 
 	case AA_APPLICATION_PATH:
-		return istd::CString(".");
+		return QString(".");
 		break;
 
 	case AA_LEGAL_COPYRIGHT:
@@ -103,7 +103,7 @@ bool CApplicationInfoComp::GetVersionNumber(int /*versionId*/, I_DWORD& result) 
 }
 
 
-istd::CString CApplicationInfoComp::GetVersionIdDescription(int /*versionId*/) const
+QString CApplicationInfoComp::GetVersionIdDescription(int /*versionId*/) const
 {
 	return "";
 }
@@ -115,7 +115,7 @@ iser::IVersionInfo::VersionIds CApplicationInfoComp::GetVersionIds() const
 }
 
 
-istd::CString CApplicationInfoComp::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
+QString CApplicationInfoComp::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
 {
 	return "";
 }

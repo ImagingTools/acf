@@ -33,8 +33,8 @@ void CApplicationSettingsProviderComp::OnComponentCreated()
 	QString applicationName("ACF Application");
 
 	if (m_applicationInfoCompPtr.IsValid()){
-		companyName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME));
-		applicationName = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
+		companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
+		applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
 	}
 
 	m_settingsPtr.SetPtr(new QSettings(QSettings::UserScope, companyName, applicationName));

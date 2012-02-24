@@ -23,7 +23,7 @@ void CFreeWidgetGuiComp::OnComponentCreated()
 		if (m_mainWindowPtr.IsValid()){
 			QVBoxLayout* layoutPtr = new QVBoxLayout(m_mainWindowPtr.GetPtr());
 			m_mainWindowPtr->setLayout(layoutPtr);
-			m_mainWindowPtr->setWindowTitle(iqt::GetQString(*m_titleAttrPtr));
+			m_mainWindowPtr->setWindowTitle(*m_titleAttrPtr);
 
 			if (m_slaveGuiCompPtr->CreateGui(m_mainWindowPtr.GetPtr())){
 				m_mainWindowPtr->setCentralWidget(m_slaveGuiCompPtr->GetWidget());

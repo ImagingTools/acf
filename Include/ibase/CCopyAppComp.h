@@ -37,7 +37,7 @@ public:
 	// reimplemented (ibase::IApplication)
 	virtual bool InitializeApplication(int argc, char** argv);
 	virtual int Execute(int argc, char** argv);
-	virtual istd::CString GetHelpText() const;
+	virtual QString GetHelpText() const;
 
 private:
 	I_REF(IFileConvertCopy, m_fileCopyCompPtr);

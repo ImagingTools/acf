@@ -163,22 +163,22 @@ public:
 	/**
 		Get human readable description of this registry.
 	*/
-	virtual const istd::CString& GetDescription() const = 0;
+	virtual const QString& GetDescription() const = 0;
 
 	/**
 		set human readable description of this registry.
 	*/
-	virtual void SetDescription(const istd::CString& description) = 0;
+	virtual void SetDescription(const QString& description) = 0;
 
 	/**
 		Get keywords for this registry used for search.
 	*/
-	virtual const istd::CString& GetKeywords() const = 0;
+	virtual const QString& GetKeywords() const = 0;
 
 	/**
 		Set keywords for this registry used for search.
 	*/
-	virtual void SetKeywords(const istd::CString& keywords) = 0;
+	virtual void SetKeywords(const QString& keywords) = 0;
 };
 
 

@@ -44,13 +44,13 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpInfoProvider)
-	virtual double GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual double GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
 	// reimplemented (idoc::IHelpViewer)
-	virtual void ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr);
+	virtual void ShowHelp(const QString& contextText, const istd::IPolymorphic* contextObjectPtr);
 
 protected:
-	istd::CString CalcDoxygenFileName(const istd::CClassInfo& classInfo) const;
+	QString CalcDoxygenFileName(const istd::CClassInfo& classInfo) const;
 
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
@@ -67,8 +67,8 @@ private:
 	I_REF(icomp::IMetaInfoManager, m_metaInfoManagerCompPtr);
 	I_REF(IExternalMetaInfoManager, m_externalMetaInfoManagerCompPtr);
 
-	istd::CString m_descrFilePath;
-	istd::CString m_techFilePath;
+	QString m_descrFilePath;
+	QString m_techFilePath;
 };
 
 

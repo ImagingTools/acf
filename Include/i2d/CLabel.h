@@ -19,22 +19,22 @@ class CLabel: public i2d::CPosition2d
 public:
 	typedef i2d::CPosition2d BaseClass;
 
-	CLabel(const i2d::CVector2d& position = i2d::CVector2d(0, 0), const istd::CString& labelText = "Label");
+	CLabel(const i2d::CVector2d& position = i2d::CVector2d(0, 0), const QString& labelText = "Label");
 
-	virtual const istd::CString& GetText() const;
-	virtual void SetText(const istd::CString& labelText);
+	virtual const QString& GetText() const;
+	virtual void SetText(const QString& labelText);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	istd::CString m_text;
+	QString m_text;
 };
 
 
 // inline methods
 
-inline const istd::CString& CLabel::GetText() const
+inline const QString& CLabel::GetText() const
 {
 	return m_text;
 }

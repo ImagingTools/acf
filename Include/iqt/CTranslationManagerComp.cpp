@@ -37,11 +37,11 @@ void CTranslationManagerComp::OnComponentCreated()
 	if (m_languagesAttrPtr.IsValid() && m_translationFilePrefixAttrPtr.IsValid()){
 		int languagesCount = GetLanguagesCount();
 
-		QString translationsPath = iqt::GetQString(*m_translationFilePathAttrPtr);
-		QString translationFilePrefix = iqt::GetQString(*m_translationFilePrefixAttrPtr);
+		QString translationsPath = *m_translationFilePathAttrPtr;
+		QString translationFilePrefix = *m_translationFilePrefixAttrPtr;
 
 		for (int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
-			QString languageId = iqt::GetQString(m_languagesAttrPtr[translatorIndex]);
+			QString languageId = m_languagesAttrPtr[translatorIndex];
 
 			QString translatorFile = translationsPath + QString("/") + translationFilePrefix + QString("_") + languageId;
 			
@@ -134,7 +134,7 @@ void CTranslationManagerComp::SetSystemLanguage()
 	int languagesCount = GetLanguagesCount();
 
 	for(int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
-		QString languageId = iqt::GetQString(m_languagesAttrPtr[translatorIndex]);
+		QString languageId = m_languagesAttrPtr[translatorIndex];
 		if (languageId == defaultSystemLanguage){
 			SwitchLanguage(translatorIndex);
 			break;
@@ -157,25 +157,25 @@ int CTranslationManagerComp::GetOptionsCount() const
 }
 
 
-istd::CString CTranslationManagerComp::GetOptionName(int index) const
+QString CTranslationManagerComp::GetOptionName(int index) const
 {
 	I_ASSERT(index < GetOptionsCount());
 
 	if (index >= 0 && m_languagesAttrPtr.IsValid()){
-		QString languageId = iqt::GetQString(m_languagesAttrPtr[index]);
+		QString languageId = m_languagesAttrPtr[index];
 
 		QLocale locale(languageId);
 
-		return iqt::GetCString(QLocale::languageToString(locale.language()));
+		return QLocale::languageToString(locale.language());
 	}
 
-	return istd::CString();
+	return QString();
 }
 
 
-istd::CString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
+QString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
 {
-	return istd::CString();
+	return QString();
 }
 
 

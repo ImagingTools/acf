@@ -37,7 +37,7 @@ public:
 
 private:
 	I_MULTIFACT(iser::ISerializable, m_factoriesFact);
-	I_MULTIATTR(istd::CString, m_factoryIdsAttrPtr);
+	I_MULTIATTR(QString, m_factoryIdsAttrPtr);
 
 	std::string m_paramTypeId;
 	istd::TDelPtr<iser::ISerializable> m_paramPtr;

@@ -24,8 +24,8 @@ const iser::ISerializable* CSelectableParamsSetComp::GetParameter(const std::str
 {
 	I_ASSERT(m_selectionIdAttrPtr.IsValid());
 
-	const istd::CString& selectionId = *m_selectionIdAttrPtr;
-	if (id == selectionId.ToString()){
+	const std::string& selectionId = *m_selectionIdAttrPtr;
+	if (id == selectionId){
 		return static_cast<const ISelectionParam*>(this);
 	}
 
@@ -44,8 +44,8 @@ iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const std::s
 {
 	I_ASSERT(m_selectionIdAttrPtr.IsValid());
 
-	const istd::CString& selectionId = *m_selectionIdAttrPtr;
-	if (id == selectionId.ToString()){
+	const std::string& selectionId = *m_selectionIdAttrPtr;
+	if (id == selectionId){
 		return static_cast<ISelectionParam*>(this);
 	}
 
@@ -168,19 +168,19 @@ int CSelectableParamsSetComp::GetOptionsCount() const
 }
 
 
-istd::CString CSelectableParamsSetComp::GetOptionName(int index) const
+QString CSelectableParamsSetComp::GetOptionName(int index) const
 {
 	if (m_paramsManagerCompPtr.IsValid()){
 		return m_paramsManagerCompPtr->GetParamsSetName(index);
 	}
 
-	static istd::CString noname("<noname>");
+	static QString noname("<noname>");
 
 	return noname;
 }
 
 
-istd::CString CSelectableParamsSetComp::GetOptionDescription(int index) const
+QString CSelectableParamsSetComp::GetOptionDescription(int index) const
 {
 	if (m_paramsManagerCompPtr.IsValid()){
 		const iprm::ISelectionConstraints* constraintsPtr = m_paramsManagerCompPtr->GetSelectionConstraints();
@@ -189,7 +189,7 @@ istd::CString CSelectableParamsSetComp::GetOptionDescription(int index) const
 		}
 	}
 
-	return istd::CString();
+	return QString();
 }
 
 

@@ -24,7 +24,7 @@ public:
 	virtual void LogMessage(
 				istd::TraceLevel level,
 				const std::string& groupId,
-				const istd::CString& message,
+				const QString& message,
 				const std::string& fileName = std::string(),
 				int line = -1) const;
 	virtual bool IsTraceEnabled(istd::TraceLevel level, const std::string& groupId) const;

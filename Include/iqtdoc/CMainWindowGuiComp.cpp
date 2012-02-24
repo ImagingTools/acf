@@ -90,12 +90,12 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 
 					RecentGroupCommandPtr& groupCommandPtr = m_recentFilesMap[documentTypeId];
 
-					istd::CString documentTypeName = managerPtr->GetDocumentTypeName(documentTypeId);
+					QString documentTypeName = managerPtr->GetDocumentTypeName(documentTypeId);
 
 					QString recentListTitle = (ids.size() > 1)?
-								tr("Recent %1 Files").arg(iqt::GetQString(documentTypeName)):
+								tr("Recent %1 Files").arg(documentTypeName):
 								tr("Recent Files");
-					iqtgui::CHierarchicalCommand* fileListCommandPtr = new iqtgui::CHierarchicalCommand(iqt::GetCString(recentListTitle));
+					iqtgui::CHierarchicalCommand* fileListCommandPtr = new iqtgui::CHierarchicalCommand(recentListTitle);
 
 					if (fileListCommandPtr != NULL){
 						fileListCommandPtr->SetPriority(130);
@@ -129,12 +129,12 @@ bool CMainWindowGuiComp::OnDetached(imod::IModel* modelPtr)
 
 	if (retVal){
 		if (m_applicationInfoCompPtr.IsValid()){ 
-			istd::CString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
-			istd::CString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
+			QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
+			QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
 
 			iqt::CSettingsWriteArchive archive(
-						iqt::GetQString(companyName),
-						iqt::GetQString(applicationName),
+						companyName,
+						applicationName,
 						"RecentFileList",
 						&m_applicationInfoCompPtr->GetVersionInfo());
 
@@ -151,7 +151,7 @@ bool CMainWindowGuiComp::OnDetached(imod::IModel* modelPtr)
 
 // protected methods
 
-bool CMainWindowGuiComp::OpenFile(const istd::CString& fileName)
+bool CMainWindowGuiComp::OpenFile(const QString& fileName)
 {
 	bool retVal = false;
 
@@ -165,7 +165,7 @@ bool CMainWindowGuiComp::OpenFile(const istd::CString& fileName)
 		else{
 			QMessageBox::warning(GetWidget(), "", tr("Document could not be opened"));
 
-			RemoveFromRecentFileList(istd::CString(fileName));
+			RemoveFromRecentFileList(QString(fileName));
 		}
 	}
 
@@ -225,7 +225,7 @@ void CMainWindowGuiComp::OnDropEvent(QDropEvent* dropEventPtr)
 		QList<QUrl> files = mimeData->urls();
 
 		for (int fileIndex = 0; fileIndex < files.count(); fileIndex++){
-			istd::CString filePath = iqt::GetCString(files.at(fileIndex).toLocalFile());
+			QString filePath = files.at(fileIndex).toLocalFile();
 
 			if (m_documentManagerCompPtr.IsValid()){
 				idoc::IDocumentTypesInfo::Ids availableDocumentIds = m_documentManagerCompPtr->GetDocumentTypeIdsForFile(filePath);
@@ -263,7 +263,7 @@ void CMainWindowGuiComp::SetupNewCommand()
 			if (m_documentManagerCompPtr->IsFeatureSupported(idoc::IDocumentTypesInfo::SF_NEW_DOCUMENT, documentTypeId)){
 				NewDocumentCommand* newCommandPtr = new NewDocumentCommand(this, documentTypeId);
 				if (newCommandPtr != NULL){
-					QString commandName = iqt::GetQString(m_documentManagerCompPtr->GetDocumentTypeName(documentTypeId));
+					QString commandName = m_documentManagerCompPtr->GetDocumentTypeName(documentTypeId);
 					newCommandPtr->SetVisuals(commandName, commandName, tr("Creates new document %1").arg(commandName));
 					m_newCommand.InsertChild(newCommandPtr, true);
 
@@ -356,7 +356,7 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 
 				RecentFileCommand* commandPtr = dynamic_cast<RecentFileCommand*>(groupCommandPtr->GetChild(i));
 				if ((commandPtr != NULL) && commandPtr->IsOpenCommand()){
-					istd::CString filePath = commandPtr->GetActionString();
+					QString filePath = commandPtr->GetActionString();
 
 					retVal = retVal && archive.BeginTag(filePathTag);
 					retVal = retVal && archive.Process(filePath);					
@@ -389,12 +389,12 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 			retVal = retVal && archive.BeginMultiTag(fileListTag, filePathTag, filesCount);
 
 			for (int fileIndex = 0; fileIndex < filesCount; fileIndex++){
-				istd::CString filePath;
+				QString filePath;
 				retVal = retVal && archive.BeginTag(filePathTag);
 				retVal = retVal && archive.Process(filePath);					
 				retVal = retVal && archive.EndTag(filePathTag);
 
-				if (retVal && !filePath.IsEmpty()){
+				if (retVal && !filePath.isEmpty()){
 					idoc::IDocumentManager::FileToTypeMap fileMap;
 
 					fileMap[filePath] = documentTypeId;
@@ -420,9 +420,9 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 	for (		idoc::IDocumentManager::FileToTypeMap::const_iterator iter = fileToTypeMap.begin();
 				iter != fileToTypeMap.end();
 				++iter){
-		QFileInfo fileInfo(iqt::GetQString(iter->first));
+		QFileInfo fileInfo(iter->first);
 
-		istd::CString filePath = iqt::GetCString(fileInfo.absoluteFilePath());
+		QString filePath = fileInfo.absoluteFilePath();
 		const std::string documentTypeId = iter->second;
 		I_ASSERT(!documentTypeId.empty());
 
@@ -432,7 +432,7 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 
 		if (groupCommandPtr.IsValid()){
 			if (groupCommandPtr->GetChildsCount() == 0){
-				RecentFileCommand* commandPtr = new RecentFileCommand(this, iqt::GetCString(tr("Clear List")), documentTypeId, false);
+				RecentFileCommand* commandPtr = new RecentFileCommand(this, tr("Clear List"), QString::fromStdString(documentTypeId), false);
 				groupCommandPtr->InsertChild(commandPtr, true);
 			}
 
@@ -448,7 +448,7 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 }
 
 
-void CMainWindowGuiComp::RemoveFromRecentFileList(const istd::CString& filePath)
+void CMainWindowGuiComp::RemoveFromRecentFileList(const QString& filePath)
 {
 	for (		RecentFilesMap::iterator iter = m_recentFilesMap.begin();
 				iter != m_recentFilesMap.end();
@@ -580,7 +580,7 @@ void CMainWindowGuiComp::OnGuiCreated()
 	// load the document from command line:
 	QStringList applicationArguments = QApplication::arguments();
 	if (applicationArguments.count() > 1 && m_documentManagerCompPtr.IsValid()){
-		istd::CString documentFileName = iqt::GetCString(applicationArguments[1]);
+		QString documentFileName = applicationArguments[1];
 		idoc::IDocumentManager::FileToTypeMap fileMap;
 
 		if (m_documentManagerCompPtr->FileOpen(NULL, &documentFileName, true, "", &fileMap)){
@@ -601,8 +601,8 @@ void CMainWindowGuiComp::OnRetranslate()
 	BaseClass::OnRetranslate();
 
 	// Main commands
-	m_fileCommand.SetName(iqt::GetCString(tr("&File")));
-	m_editCommand.SetName(iqt::GetCString(tr("&Edit")));
+	m_fileCommand.SetName(tr("&File"));
+	m_editCommand.SetName(tr("&Edit"));
 
 	// File commands
 	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), QIcon(":/Icons/New"));
@@ -697,10 +697,10 @@ void CMainWindowGuiComp::OnComponentCreated()
 	}
 	
 	if (m_applicationInfoCompPtr.IsValid()){ 
-		istd::CString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
-		istd::CString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
+		QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
+		QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
 
-		iqt::CSettingsReadArchive archive(iqt::GetQString(companyName), iqt::GetQString(applicationName), "RecentFileList");
+		iqt::CSettingsReadArchive archive(companyName, applicationName, "RecentFileList");
 
 		SerializeRecentFileList(archive);
 	}
@@ -866,7 +866,7 @@ void CMainWindowGuiComp::OnCopyPathToClipboard()
 		if (m_documentManagerCompPtr->GetDocumentFromView(*m_activeViewPtr, &info) != NULL){
 			QClipboard* clipboardPtr = QApplication::clipboard();
 			if (clipboardPtr != NULL){
-				QString filePath = QDir::toNativeSeparators(iqt::GetQString(info.filePath));
+				QString filePath = QDir::toNativeSeparators(info.filePath);
 
 				clipboardPtr->setText(filePath);
 			}
@@ -880,7 +880,7 @@ void CMainWindowGuiComp::OnOpenDocumentFolder()
 	if ((m_activeViewPtr != NULL) && m_documentManagerCompPtr.IsValid()){
 		idoc::IDocumentManager::DocumentInfo info;
 		if (m_documentManagerCompPtr->GetDocumentFromView(*m_activeViewPtr, &info) != NULL){
-			QFileInfo fileInfo(iqt::GetQString(info.filePath));
+			QFileInfo fileInfo(info.filePath);
 			if (fileInfo.absoluteDir().exists()){
 				QDesktopServices::openUrl(fileInfo.absoluteDir().absolutePath());
 			}
@@ -893,8 +893,8 @@ void CMainWindowGuiComp::OnOpenDocumentFolder()
 
 CMainWindowGuiComp::RecentFileCommand::RecentFileCommand(
 			CMainWindowGuiComp* parentPtr,
-			const istd::CString& name,
-			const istd::CString& actionString,
+			const QString& name,
+			const QString& actionString,
 			bool isOpenCommand)
 :	m_parent(*parentPtr),
 	m_actionString(actionString),
@@ -905,7 +905,7 @@ CMainWindowGuiComp::RecentFileCommand::RecentFileCommand(
 }
 
 
-const istd::CString& CMainWindowGuiComp::RecentFileCommand::GetActionString() const
+const QString& CMainWindowGuiComp::RecentFileCommand::GetActionString() const
 {
 	return m_actionString;
 }
@@ -925,7 +925,7 @@ bool CMainWindowGuiComp::RecentFileCommand::Execute(istd::IPolymorphic* /*contex
 		m_parent.OpenFile(m_actionString);
 	}
 	else{
-		RecentGroupCommandPtr& groupCommandPtr = m_parent.m_recentFilesMap[m_actionString.ToString()];
+		RecentGroupCommandPtr& groupCommandPtr = m_parent.m_recentFilesMap[m_actionString.toStdString()];
 		if (groupCommandPtr.IsValid()){
 			groupCommandPtr->ResetChilds();
 		}

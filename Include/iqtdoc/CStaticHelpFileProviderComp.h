@@ -28,14 +28,14 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpFileProvider)
-	virtual double GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
-	virtual istd::CString GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual double GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual QString GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
 private:
 	I_REF(iprm::IFileNameParam, m_helpFileDirCompPtr);
-	I_ATTR(istd::CString, m_defaultFileNameAttrPtr);
-	I_ATTR(istd::CString, m_contextPrefixAttrPtr);
-	I_ATTR(istd::CString, m_contextSuffixAttrPtr);
+	I_ATTR(QString, m_defaultFileNameAttrPtr);
+	I_ATTR(QString, m_contextPrefixAttrPtr);
+	I_ATTR(QString, m_contextSuffixAttrPtr);
 };
 
 

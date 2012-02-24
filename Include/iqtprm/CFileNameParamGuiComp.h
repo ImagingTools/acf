@@ -61,8 +61,8 @@ private:
 	bool IsLabelNeeded() const;
 
 private:
-	I_ATTR(istd::CString, m_pathLabelAttrPtr);
-	I_ATTR(istd::CString, m_startHintAttrPtr);
+	I_ATTR(QString, m_pathLabelAttrPtr);
+	I_ATTR(QString, m_startHintAttrPtr);
 	I_REF(iser::IFileTypeInfo, m_fileTypeInfoPtr);
 
 	QDirModel m_directoryModel;

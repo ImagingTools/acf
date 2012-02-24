@@ -60,9 +60,9 @@ private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 	I_REF(iqt::ITranslationManager, m_translationManagerCompPtr);
 	I_ATTR(double, m_splashTimeAttrPtr);
-	I_ATTR(istd::CString, m_styleSheetAttrPtr);
-	I_ATTR(istd::CString, m_iconPathAttrPtr);
-	I_ATTR(istd::CString, m_titleFormatAttrPtr);
+	I_ATTR(QString, m_styleSheetAttrPtr);
+	I_ATTR(QString, m_iconPathAttrPtr);
+	I_ATTR(QString, m_titleFormatAttrPtr);
 
 	bool m_useSplashScreen;
 	iqt::CTimer m_splashScreenTimer;

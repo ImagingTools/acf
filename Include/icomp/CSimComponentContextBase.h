@@ -5,7 +5,7 @@
 // STL includes
 #include <map>
 
-#include "istd/CString.h"
+#include <QString>
 
 #include "istd/TIFactory.h"
 #include "istd/CIdManipBase.h"
@@ -69,9 +69,9 @@ public:
 	bool SetDoubleAttr(const std::string& attributeId, double value);
 
 	/**
-		Set instance of \c istd::CString attribute.
+		Set instance of \c QString attribute.
 	*/
-	bool SetStringAttr(const std::string& attributeId, const istd::CString& value);
+	bool SetStringAttr(const std::string& attributeId, const QString& value);
 
 	/**
 		Set instance of simple attribute.

@@ -5,8 +5,10 @@
 // STL includes
 #include <map>
 
-// ACF includes
-#include "istd/CString.h"
+
+// Qt includes
+#include <QString>
+#include <QStringList>
 
 
 namespace icomp
@@ -19,30 +21,30 @@ namespace icomp
 class CComponentMetaDescriptionEncoder
 {
 public:
-	CComponentMetaDescriptionEncoder(const istd::CString& metaDescription);
+	CComponentMetaDescriptionEncoder(const QString& metaDescription);
 
 	/**
 		Get meta keys using in the meta-description.
 	*/
-	const istd::CStringList& GetMetaKeys() const;
+	const QStringList& GetMetaKeys() const;
 
 	/**
 		Get value list for the given key.
 	*/
-	const istd::CStringList& GetValues(const istd::CString& key = istd::CString()) const;
+	const QStringList& GetValues(const QString& key = QString()) const;
 
 	/**
 		Get the keyword list.
 	*/
-	const istd::CStringList& GetUnassignedKeywords() const;
+	const QStringList& GetUnassignedKeywords() const;
 
 private:
-	typedef std::map<istd::CString, istd::CStringList> MetaValuesMap;
+	typedef std::map<QString, QStringList> MetaValuesMap;
 
 	MetaValuesMap m_metaValuesMap;
-	istd::CStringList m_metaKeys;
-	istd::CStringList m_keywords;
-	istd::CStringList m_unassignedKeywords;
+	QStringList m_metaKeys;
+	QStringList m_keywords;
+	QStringList m_unassignedKeywords;
 };
 
 

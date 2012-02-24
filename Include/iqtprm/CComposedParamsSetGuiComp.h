@@ -6,7 +6,7 @@
 #include <set>
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/IFileLoader.h"
 
@@ -81,8 +81,8 @@ private:
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
 	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
-	I_MULTIATTR(istd::CString, m_idsAttrPtr);
-	I_MULTIATTR(istd::CString, m_namesAttrPtr);
+	I_MULTIATTR(QString, m_idsAttrPtr);
+	I_MULTIATTR(QString, m_namesAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(bool, m_useVerticalSpacerAttrPtr);
 	I_ATTR(bool, m_showAllShapesAttrPtr);

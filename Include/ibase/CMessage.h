@@ -5,7 +5,7 @@
 #include "istd/ILogger.h"
 #include "istd/TSmartPtr.h"
 
-#include "istd/CString.h"
+#include <QString>
 
 #include "isys/CSimpleDateTime.h"
 
@@ -25,20 +25,20 @@ public:
 	CMessage();
 	CMessage(	istd::ILogger::MessageCategory category,
 				int id,
-				const istd::CString& text,
-				const istd::CString& source,
+				const QString& text,
+				const QString& source,
 				int flags = 0);
 
 	virtual void SetCategory(istd::ILogger::MessageCategory category);
-	virtual void SetText(const istd::CString& text);
-	virtual void SetSource(const istd::CString& source);
+	virtual void SetText(const QString& text);
+	virtual void SetSource(const QString& source);
 
 	// reimplemented (ibase::IMessage)
 	virtual const isys::IDateTime& GetTimeStamp() const;
 	virtual istd::ILogger::MessageCategory GetCategory() const;
 	virtual int GetId() const;
-	virtual istd::CString GetText() const;
-	virtual istd::CString GetSource() const;
+	virtual QString GetText() const;
+	virtual QString GetSource() const;
 	virtual int GetFlags() const;
 
 	// reimplemented (iser::ISerializable)
@@ -52,8 +52,8 @@ protected:
 
 	istd::ILogger::MessageCategory m_category;
 	int m_id;
-	istd::CString m_text;
-	istd::CString m_source;
+	QString m_text;
+	QString m_source;
 	int m_flags;
 
 	TimePtr m_timePtr;
@@ -82,13 +82,13 @@ inline int CMessage::GetId() const
 }
 
 
-inline istd::CString CMessage::GetText() const
+inline QString CMessage::GetText() const
 {
 	return m_text;
 }
 
 
-inline istd::CString CMessage::GetSource() const
+inline QString CMessage::GetSource() const
 {
 	return m_source;
 }

@@ -83,8 +83,8 @@ protected:
 	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(iqtgui::IGuiObject, m_paramsGuiCompPtr);
-	I_ATTR(istd::CString, m_commandNameAttrPtr);
-	I_ATTR(istd::CString, m_menuNameAttrPtr);
+	I_ATTR(QString, m_commandNameAttrPtr);
+	I_ATTR(QString, m_menuNameAttrPtr);
 	I_ATTR(bool, m_inputDocumentRequiredAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_processingMenu;

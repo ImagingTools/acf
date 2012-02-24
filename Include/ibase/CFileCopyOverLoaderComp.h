@@ -35,8 +35,8 @@ public:
 
 	// reimplemented (ibase::IFileConvertCopy)
 	virtual bool ConvertFile(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath,
+				const QString& inputFilePath,
+				const QString& outputFilePath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 private:

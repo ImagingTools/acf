@@ -34,7 +34,7 @@ public:
 	virtual bool Process(float& value);
 	virtual bool Process(double& value);
 	virtual bool Process(std::string& value);
-	virtual bool Process(istd::CString& value);
+	virtual bool Process(QString& value);
 
 protected:
 	CBinaryWriteArchiveBase(const IVersionInfo* versionInfoPtr);

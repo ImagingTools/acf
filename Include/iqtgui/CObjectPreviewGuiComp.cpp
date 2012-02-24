@@ -51,7 +51,7 @@ void CObjectPreviewGuiComp::UpdateGui(int /*updateFlags*/)
 
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		QString newFilePath = iqt::GetQString(objectPtr->GetPath());
+		QString newFilePath = objectPtr->GetPath();
 
 		int fileQueryFlags = iser::IFileLoader::QF_LOAD;
 
@@ -128,7 +128,7 @@ void CObjectPreviewGuiComp::UpdateObjectFromFile()
 		istd::CChangeNotifier changePtr(m_objectCompPtr.GetPtr());
 
 		if (m_fileLoaderCompPtr.IsValid()){
-			int retVal = m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr.GetPtr(), iqt::GetCString(m_lastFilePath));
+			int retVal = m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr.GetPtr(), m_lastFilePath);
 			if (retVal != iser::IFileLoader::StateOk){
 				disableView = true;
 			}

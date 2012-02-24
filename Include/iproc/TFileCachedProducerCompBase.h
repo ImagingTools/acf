@@ -51,14 +51,14 @@ protected:
 	void CleanFileList();
 
 	// methods for optional ovelloading
-	virtual void OnCacheFileSaved(const Key& key, const istd::CString& cacheFilePath);
-	virtual void OnCacheFileRemoved(const Key& key, const istd::CString& cacheFilePath);
+	virtual void OnCacheFileSaved(const Key& key, const QString& cacheFilePath);
+	virtual void OnCacheFileRemoved(const Key& key, const QString& cacheFilePath);
 
 	// abstract methods
 	/**
 		Calculate unique file path of temporary file cache object.
 	*/
-	virtual istd::CString CalcCacheFilePath(const Key& key) const = 0;
+	virtual QString CalcCacheFilePath(const Key& key) const = 0;
 	/**
 		Get number of maximal cached files.
 	*/
@@ -68,7 +68,7 @@ private:
 	I_REF(iser::IFileLoader, m_cacheLoaderCompPtr);
 	I_TREF(LockedProducerType, m_slaveCacheEngineCompPtr);
 
-	typedef std::map<Key, istd::CString> KeyToFileNameMap;
+	typedef std::map<Key, QString> KeyToFileNameMap;
 	typedef std::list<Key> RecentlyUsedKeys;
 	typedef std::set<const CacheObject*> OwnedObjects;
 
@@ -86,7 +86,7 @@ template <class Key, class CacheObject>
 const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedObject(const Key& key)
 {
 	if (m_cacheLoaderCompPtr.IsValid()){
-		istd::CString cacheFilePath;
+		QString cacheFilePath;
 		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
 			cacheFilePath = foundIter->second;
@@ -121,7 +121,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 	if (m_slaveCacheEngineCompPtr.IsValid()){
 		const CacheObject* objectPtr = m_slaveCacheEngineCompPtr->ProduceLockedObject(key);
 		if (objectPtr != NULL){
-			istd::CString cacheFilePath = CalcCacheFilePath(key);
+			QString cacheFilePath = CalcCacheFilePath(key);
 			if (!cacheFilePath.IsEmpty() && m_cacheLoaderCompPtr.IsValid()){
 				if (m_cacheLoaderCompPtr->SaveToFile(*const_cast<CacheObject*>(objectPtr), cacheFilePath) == iser::IFileLoader::StateOk){
 					OnCacheFileSaved(key, cacheFilePath);
@@ -167,7 +167,7 @@ template <class Key, class CacheObject>
 bool TFileCachedProducerCompBase<Key, CacheObject>::PushKeyBack(const Key& key)
 {
 	if (m_keyToFileNameMap.find(key) == m_keyToFileNameMap.end()){
-		istd::CString cacheFilePath = CalcCacheFilePath(key);
+		QString cacheFilePath = CalcCacheFilePath(key);
 		if (!cacheFilePath.IsEmpty()){
 			m_keyToFileNameMap[key] = cacheFilePath;
 			m_recentlyUsedKeys.push_back(key);
@@ -187,13 +187,13 @@ void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 	I_ASSERT(maxCachedFiles >= 0);
 
 	while (int(m_recentlyUsedKeys.size()) > maxCachedFiles){
-		const istd::CString& key = m_recentlyUsedKeys.front();
+		const QString& key = m_recentlyUsedKeys.front();
 
 		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
-			const istd::CString& cacheFilePath = foundIter->second;
+			const QString& cacheFilePath = foundIter->second;
 
-			if (remove(cacheFilePath.ToString().c_str()) != 0){
+			if (remove(cacheFilePath.toStdString().c_str()) != 0){
 				OnCacheFileRemoved(key, cacheFilePath);
 			}
 
@@ -206,13 +206,13 @@ void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 
 
 template <class Key, class CacheObject>
-void TFileCachedProducerCompBase<Key, CacheObject>::OnCacheFileSaved(const Key& /*key*/, const istd::CString& /*cacheFilePath*/)
+void TFileCachedProducerCompBase<Key, CacheObject>::OnCacheFileSaved(const Key& /*key*/, const QString& /*cacheFilePath*/)
 {
 }
 
 
 template <class Key, class CacheObject>
-void TFileCachedProducerCompBase<Key, CacheObject>::OnCacheFileRemoved(const Key& /*key*/, const istd::CString& /*cacheFilePath*/)
+void TFileCachedProducerCompBase<Key, CacheObject>::OnCacheFileRemoved(const Key& /*key*/, const QString& /*cacheFilePath*/)
 {
 }
 

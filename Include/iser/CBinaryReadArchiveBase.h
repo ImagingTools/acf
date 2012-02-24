@@ -16,8 +16,6 @@ namespace iser
 */
 class CBinaryReadArchiveBase: public CReadArchiveBase
 {
-	I_DECLARE_TR_FUNCTION(CBinaryReadArchiveBase);
-
 public:
 	typedef CReadArchiveBase BaseClass;
 
@@ -43,7 +41,7 @@ public:
 	virtual bool Process(float& value);
 	virtual bool Process(double& value);
 	virtual bool Process(std::string& value);
-	virtual bool Process(istd::CString& value);
+	virtual bool Process(QString& value);
 
 protected:
 	enum{

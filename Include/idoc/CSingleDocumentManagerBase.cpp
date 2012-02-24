@@ -164,14 +164,14 @@ bool CSingleDocumentManagerBase::FileNew(
 
 bool CSingleDocumentManagerBase::FileOpen(
 			const std::string* documentTypeIdPtr,
-			const istd::CString* fileNamePtr,
+			const QString* fileNamePtr,
 			bool createView,
 			const std::string& viewTypeId,
 			FileToTypeMap* loadedMapPtr)
 {
 	bool retVal = true;
 
-	istd::CString fileName;
+	QString fileName;
 
 	if (fileNamePtr != NULL){
 		fileName = *fileNamePtr;
@@ -180,7 +180,7 @@ bool CSingleDocumentManagerBase::FileOpen(
 		fileName = GetOpenFilePath(documentTypeIdPtr);
 	}
 
-	if (!fileName.IsEmpty()){
+	if (!fileName.isEmpty()){
 		std::string documentTypeId;
 		if (OpenDocument(fileName, createView, viewTypeId, documentTypeId)){
 			if (loadedMapPtr != NULL){
@@ -206,14 +206,14 @@ bool CSingleDocumentManagerBase::FileSave(
 		return false;
 	}
 
-	istd::CString filePath = m_filePath;
+	QString filePath = m_filePath;
 
-	requestFileName  = requestFileName || filePath.IsEmpty();
+	requestFileName  = requestFileName || filePath.isEmpty();
 
 	if (requestFileName){
 		filePath = GetSaveFilePath(m_documentTypeId);
 
-		if (filePath.IsEmpty()){
+		if (filePath.isEmpty()){
 			return true;
 		}
 	}
@@ -278,13 +278,13 @@ void CSingleDocumentManagerBase::FileClose(int /*documentIndex*/, bool* ignoredP
 // protected methods
 
 bool CSingleDocumentManagerBase::OpenDocument(
-			const istd::CString& filePath,
+			const QString& filePath,
 			bool createView,
 			const std::string& viewTypeId,
 			std::string& documentTypeId)
 {
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
-	if (filePath.IsEmpty() || (documentTemplatePtr == NULL)){
+	if (filePath.isEmpty() || (documentTemplatePtr == NULL)){
 		return false;
 	}
 

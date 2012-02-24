@@ -17,7 +17,7 @@ public:
 	bool SerializeComponents(iser::IArchive& archive, TimeComponent fromComponent, TimeComponent toComponent);
 
 	// reimplemented (isys::IDateTime)
-	virtual std::string ToString(int fromComponent = TC_YEAR, int toComponent = TC_MILLISECOND, const TimeSeparator& separator = TS_ISO) const;
+	virtual QString ToString(int fromComponent = TC_YEAR, int toComponent = TC_MILLISECOND, const TimeSeparator& separator = TS_ISO) const;
 	virtual bool FromString(const std::string& dateTime, int fromComponent = TC_YEAR, int toComponent = TC_MILLISECOND);
 
 	// reimplemented (iser::ISerializable)

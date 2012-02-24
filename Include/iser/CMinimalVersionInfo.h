@@ -41,19 +41,19 @@ public:
 		\param	description	description of this ID.
 		\return				true, if success.
 	*/
-	bool AddId(int versionId, const istd::CString& description = "");
+	bool AddId(int versionId, const QString& description = "");
 
 	// reimplemented (iser::IVersionInfo)
 	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const;
-	virtual istd::CString GetVersionIdDescription(int versionId) const;
+	virtual QString GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
-	virtual istd::CString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
+	virtual QString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
 
 private:
 	struct Info
 	{
 		mutable I_DWORD version;
-		istd::CString description;
+		QString description;
 	};
 
 	typedef std::map<int, Info> Versions;

@@ -64,14 +64,14 @@ void CQuadrangleParamsGuiComp::OnGuiModelAttached()
 
 	if (m_unitNameAttrPtr.IsValid()){
 		FirstDiagPoint1UnitLabel->setVisible(true);
-		FirstDiagPoint1UnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		FirstDiagPoint1UnitLabel->setText(*m_unitNameAttrPtr);
 		FirstDiagPoint2UnitLabel->setVisible(true);
-		FirstDiagPoint2UnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		FirstDiagPoint2UnitLabel->setText(*m_unitNameAttrPtr);
 		
 		SecondDiagPoint1UnitLabel->setVisible(true);
-		SecondDiagPoint1UnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		SecondDiagPoint1UnitLabel->setText(*m_unitNameAttrPtr);
 		SecondDiagPoint2UnitLabel->setVisible(true);
-		SecondDiagPoint2UnitLabel->setText(iqt::GetQString(*m_unitNameAttrPtr));
+		SecondDiagPoint2UnitLabel->setText(*m_unitNameAttrPtr);
 	}
 	else{
 		FirstDiagPoint1UnitLabel->setVisible(false);

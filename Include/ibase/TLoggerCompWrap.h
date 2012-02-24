@@ -39,15 +39,15 @@ protected:
 	/**
 		Send verbose message. If \c m_verboseEnabledAttrPtr is not enabled, the function does nothiing.
 	*/
-	void SendVerboseMessage(const istd::CString& message, const istd::CString& messageSource = istd::CString()) const;
+	void SendVerboseMessage(const QString& message, const QString& messageSource = QString()) const;
 
 	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
 				istd::ILogger::MessageCategory category,
 				int id,
 				int flags,
-				istd::CString& message,
-				istd::CString& messageSource) const;
+				QString& message,
+				QString& messageSource) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -68,7 +68,7 @@ bool TLoggerCompWrap<Base>::IsVerboseEnabled() const
 
 
 template <class Base>
-void TLoggerCompWrap<Base>::SendVerboseMessage(const istd::CString& message, const istd::CString& messageSource) const
+void TLoggerCompWrap<Base>::SendVerboseMessage(const QString& message, const QString& messageSource) const
 {
 	if (*m_verboseEnabledAttrPtr){
 		BaseClass::SendInfoMessage(0, message, messageSource);
@@ -83,18 +83,18 @@ void TLoggerCompWrap<Base>::DecorateMessage(
 			istd::ILogger::MessageCategory category,
 			int id,
 			int flags,
-			istd::CString& message,
-			istd::CString& messageSource) const
+			QString& message,
+			QString& messageSource) const
 {
 	BaseClass::DecorateMessage(category, id, flags, message, messageSource);
 
 	const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(BaseClass::GetComponentContext());
 	if (contextPtr != NULL){
-		if (messageSource.empty()){
-			messageSource = contextPtr->GetContextId();
+		if (messageSource.isEmpty()){
+			messageSource = contextPtr->GetContextId().c_str();
 		}
 		else{
-			messageSource = istd::CString(contextPtr->GetContextId()) + " (" + messageSource + ")";
+			messageSource = QString(contextPtr->GetContextId().c_str()) + " (" + messageSource + ")";
 		}
 	}
 }

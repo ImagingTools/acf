@@ -15,8 +15,8 @@ CPackageStaticInfo::CPackageStaticInfo()
 
 
 CPackageStaticInfo::CPackageStaticInfo(
-			const istd::CString& description,
-			const istd::CString& keywords)
+			const QString& description,
+			const QString& keywords)
 :	m_description(description),
 	m_keywords(keywords)
 {
@@ -83,13 +83,13 @@ IElementStaticInfo::Ids CPackageStaticInfo::GetMetaIds(int metaGroupId) const
 }
 
 
-const istd::CString& CPackageStaticInfo::GetDescription() const
+const QString& CPackageStaticInfo::GetDescription() const
 {
 	return m_description;
 }
 
 
-const istd::CString& CPackageStaticInfo::GetKeywords() const
+const QString& CPackageStaticInfo::GetKeywords() const
 {
 	return m_keywords;
 }

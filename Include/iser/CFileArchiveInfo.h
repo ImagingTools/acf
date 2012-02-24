@@ -15,13 +15,13 @@ namespace iser
 class CFileArchiveInfo: virtual public IFileArchiveInfo
 {
 public:
-	CFileArchiveInfo(const istd::CString& filePath);
+	CFileArchiveInfo(const QString& filePath);
 
 	// reimplemented (iser::IFileArchiveInfo)
-	virtual const istd::CString& GetCurrentFilePath() const;
+	virtual const QString& GetCurrentFilePath() const;
 
 protected:
-	istd::CString m_filePath;
+	QString m_filePath;
 };
 
 

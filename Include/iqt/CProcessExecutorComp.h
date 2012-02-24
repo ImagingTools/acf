@@ -39,7 +39,7 @@ public:
 
 	// reimplemented (ibase::IProcessExecutor)
 	virtual void SetEnvironment(const isys::IProcessEnvironment& processEnvironment);
-	virtual int ExecuteProcess(const istd::CString& executablePath, const istd::CStringList& processArguments);
+	virtual int ExecuteProcess(const QString& executablePath, const QStringList& processArguments);
 
 protected:
 	// reimplemented (icomp::CComponentBase)

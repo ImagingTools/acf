@@ -36,8 +36,8 @@ public:
 	//	reimplemented (icomp::IComponentStaticInfo)
 	virtual int GetComponentType() const;
 	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
-	virtual const istd::CString& GetDescription() const;
-	virtual const istd::CString& GetKeywords() const;
+	virtual const QString& GetDescription() const;
+	virtual const QString& GetKeywords() const;
 
 protected:
 	/**
@@ -75,8 +75,8 @@ private:
 	typedef std::map<std::string, ComponentInfoPtr> EmbeddedComponentInfos;
 	mutable EmbeddedComponentInfos m_embeddedComponentInfos;
 
-	istd::CString m_description;
-	istd::CString m_keywords;
+	QString m_description;
+	QString m_keywords;
 	int m_category;
 };
 

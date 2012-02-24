@@ -21,8 +21,8 @@ int CCopyAppComp::Execute(int argc, char** argv)
 		return 1;
 	}
 
-	istd::CString inputFilePath;
-	istd::CString outputFilePath;
+	QString inputFilePath;
+	QString outputFilePath;
 
 	for (int index = 1; index < argc; ++index){
 		std::string argument = argv[index];
@@ -41,12 +41,12 @@ int CCopyAppComp::Execute(int argc, char** argv)
 			}
 		}
 		else if (!*m_needExplicitInputAttrPtr && (index == 1)){
-			inputFilePath = argument;
+			inputFilePath = argument.c_str();
 		}
 	}
 
 	if (!m_fileCopyCompPtr->ConvertFile(inputFilePath, outputFilePath)){
-		SendErrorMessage(0, istd::CString("Copy of ") + inputFilePath + istd::CString(" to ") + outputFilePath + " failed", "CopyApp");
+		SendErrorMessage(0, QString("Copy of ") + inputFilePath + QString(" to ") + outputFilePath + " failed", "CopyApp");
 
 		return 20;
 	}
@@ -55,7 +55,7 @@ int CCopyAppComp::Execute(int argc, char** argv)
 }
 
 
-istd::CString CCopyAppComp::GetHelpText() const
+QString CCopyAppComp::GetHelpText() const
 {
 	return "General ACF copy application. Usage: <application> InputFilePath [-o OutputFilePath]";
 }

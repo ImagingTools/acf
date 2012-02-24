@@ -24,7 +24,7 @@ void CIniSettingsProviderComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	m_settingsPtr.SetPtr(new QSettings(iqt::GetQString(*m_iniFilePathAttrPtr), QSettings::IniFormat));
+	m_settingsPtr.SetPtr(new QSettings(*m_iniFilePathAttrPtr, QSettings::IniFormat));
 }
 
 

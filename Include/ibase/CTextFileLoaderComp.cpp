@@ -5,6 +5,10 @@
 #include <fstream>
 
 
+// Qt includes
+#include <QStringList>
+
+
 // ACF includes
 #include "ibase/ITextDocument.h"
 
@@ -17,11 +21,11 @@ namespace ibase
 
 bool CTextFileLoaderComp::IsOperationSupported(
 			const istd::IChangeable* dataObjectPtr,
-			const istd::CString* filePathPtr,
+			const QString* filePathPtr,
 			int flags,
 			bool /*beQuiet*/) const
 {
-	if ((filePathPtr != NULL) && filePathPtr->IsEmpty()){
+	if ((filePathPtr != NULL) && filePathPtr->isEmpty()){
 		return false;
 	}
 
@@ -31,13 +35,13 @@ bool CTextFileLoaderComp::IsOperationSupported(
 }
 
 
-int CTextFileLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CString& filePath) const
+int CTextFileLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		return StateFailed;
 	}
 
-	std::basic_ifstream<wchar_t> fileStream(filePath.ToString().c_str(), std::ios::in);
+	std::basic_ifstream<wchar_t> fileStream(filePath.toStdString().c_str(), std::ios::in);
 	if (!fileStream.is_open()){
 		return StateFailed;
 	}
@@ -47,13 +51,13 @@ int CTextFileLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 	ibase::ITextDocument* documentPtr = dynamic_cast<ITextDocument*>(&data);
 	I_ASSERT(documentPtr != NULL);
 
-	istd::CString documentText;
+	QString documentText;
 	if (documentPtr != NULL){
 		while(!fileStream.eof()){
 			wchar_t textCharBuffer;
 			fileStream.get(textCharBuffer);
 
-			documentText.append(1, textCharBuffer);
+			documentText.append(QChar(textCharBuffer));
 		}
 		
 		documentPtr->SetText(documentText);
@@ -67,13 +71,13 @@ int CTextFileLoaderComp::LoadFromFile(istd::IChangeable& data, const istd::CStri
 }
 
 
-int CTextFileLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::CString& filePath) const
+int CTextFileLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
 	if (!IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		return StateFailed;
 	}
 
-	std::basic_ofstream<wchar_t> fileStream(filePath.ToString().c_str(), std::ios::out);
+	std::basic_ofstream<wchar_t> fileStream(filePath.toStdString().c_str(), std::ios::out);
 	if (!fileStream.is_open()){
 		return StateFailed;
 	}
@@ -84,7 +88,7 @@ int CTextFileLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 	I_ASSERT(documentPtr != NULL);
 
 	if (documentPtr != NULL){
-		fileStream << documentPtr->GetText();
+		fileStream << documentPtr->GetText().toStdWString();
 
 		retVal = fileStream.good() ? StateOk : StateFailed;
 	}
@@ -97,7 +101,7 @@ int CTextFileLoaderComp::SaveToFile(const istd::IChangeable& data, const istd::C
 
 // reimplemented (iser::IFileTypeInfo)
 
-bool CTextFileLoaderComp::GetFileExtensions(istd::CStringList& result, int /*flags*/, bool doAppend) const
+bool CTextFileLoaderComp::GetFileExtensions(QStringList& result, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -112,7 +116,7 @@ bool CTextFileLoaderComp::GetFileExtensions(istd::CStringList& result, int /*fla
 }
 
 
-istd::CString CTextFileLoaderComp::GetTypeDescription(const istd::CString* extensionPtr) const
+QString CTextFileLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	if (extensionPtr != NULL){
 		int extensionsCount = istd::Min(m_fileExtensionsAttrPtr.GetCount(), m_typeDescriptionsAttrPtr.GetCount());

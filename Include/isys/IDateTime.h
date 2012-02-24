@@ -6,6 +6,10 @@
 #include <string>
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "iser/ISerializable.h"
 
@@ -86,7 +90,7 @@ public:
 	/**
 		Returns the datetime object as a string.
 	*/
-	virtual std::string ToString(int fromComponent = TC_YEAR, int toComponent = TC_MILLISECOND, const TimeSeparator& separator = TS_ISO) const = 0;
+	virtual QString ToString(int fromComponent = TC_YEAR, int toComponent = TC_MILLISECOND, const TimeSeparator& separator = TS_ISO) const = 0;
 
 	/**
 		Creates a datetime object from a string.

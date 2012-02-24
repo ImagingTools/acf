@@ -45,7 +45,7 @@ private:
 	I_MULTIREF(iqtgui::IGuiObject, m_slaveWidgetsCompPtr);
 	I_REF(iqtgui::IIconProvider, m_iconsProviderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_cornerGuiCompPtr);
-	I_MULTIATTR(istd::CString, m_tabNamesAttrPtr);
+	I_MULTIATTR(QString, m_tabNamesAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useTriangularTabsAttrPtr);
 	I_ATTR(int, m_tabOrientationAttrPtr);

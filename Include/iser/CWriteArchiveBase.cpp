@@ -73,7 +73,7 @@ bool CWriteArchiveBase::EmptyVersionInfo::GetVersionNumber(int /*versionId*/, I_
 }
 
 
-istd::CString CWriteArchiveBase::EmptyVersionInfo::GetVersionIdDescription(int /*versionId*/) const
+QString CWriteArchiveBase::EmptyVersionInfo::GetVersionIdDescription(int /*versionId*/) const
 {
 	return "";
 }
@@ -85,7 +85,7 @@ iser::IVersionInfo::VersionIds CWriteArchiveBase::EmptyVersionInfo::GetVersionId
 }
 
 
-istd::CString CWriteArchiveBase::EmptyVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
+QString CWriteArchiveBase::EmptyVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
 {
 	return "";
 }

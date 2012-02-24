@@ -14,20 +14,20 @@ namespace icmpstr
 
 // reimplemented (idoc::IHelpFileProvider)
 
-double CComponentHelpFileProviderComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CComponentHelpFileProviderComp::GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	icomp::CComponentAddress address;
 
 	if (ExtractComponentAddress(contextText, contextObjectPtr, address)){
-		istd::CString filePath = GetInfoFilePath(address);
+		QString filePath = GetInfoFilePath(address);
 
-		if (!filePath.IsEmpty() && QFileInfo(iqt::GetQString(filePath)).exists()){
+		if (!filePath.isEmpty() && QFileInfo(filePath).exists()){
 			return 1.0;
 		}
 
 		filePath = GetHelpFilePath(address);
 
-		if (!filePath.IsEmpty() && QFileInfo(iqt::GetQString(filePath)).exists()){
+		if (!filePath.isEmpty() && QFileInfo(filePath).exists()){
 			return 0.5;
 		}
 	}
@@ -40,20 +40,20 @@ double CComponentHelpFileProviderComp::GetHelpQuality(const istd::CString& conte
 }
 
 
-istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+QString CComponentHelpFileProviderComp::GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	icomp::CComponentAddress address;
 
 	if (ExtractComponentAddress(contextText, contextObjectPtr, address)){
-		istd::CString filePath = GetInfoFilePath(address);
+		QString filePath = GetInfoFilePath(address);
 
-		if (!filePath.IsEmpty() && QFileInfo(iqt::GetQString(filePath)).exists()){
+		if (!filePath.isEmpty() && QFileInfo(filePath).exists()){
 			return filePath;
 		}
 
 		filePath = GetHelpFilePath(address);
 
-		if (!filePath.IsEmpty() && QFileInfo(iqt::GetQString(filePath)).exists()){
+		if (!filePath.isEmpty() && QFileInfo(filePath).exists()){
 			return filePath;
 		}
 	}
@@ -68,14 +68,14 @@ istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const istd::CStrin
 
 // protected methods
 
-istd::CString CComponentHelpFileProviderComp::GetInfoFilePath(const icomp::CComponentAddress& componentAddress) const
+QString CComponentHelpFileProviderComp::GetInfoFilePath(const icomp::CComponentAddress& componentAddress) const
 {
 	if (m_externalMetaInfoManagerCompPtr.IsValid()){
-		QString infoPath = iqt::GetQString(m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(componentAddress));
+		QString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(componentAddress);
 		if (!infoPath.isEmpty()){
 			QDir packageDir(infoPath);
 			if (packageDir.exists()){
-				return iqt::GetCString(packageDir.absoluteFilePath("Description.html"));
+				return packageDir.absoluteFilePath("Description.html");
 			}
 		}
 	}
@@ -84,17 +84,17 @@ istd::CString CComponentHelpFileProviderComp::GetInfoFilePath(const icomp::CComp
 }
 
 
-istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const icomp::CComponentAddress& componentAddress) const
+QString CComponentHelpFileProviderComp::GetHelpFilePath(const icomp::CComponentAddress& componentAddress) const
 {
 	if (m_metaInfoManagerCompPtr.IsValid() && m_externalMetaInfoManagerCompPtr.IsValid()){
 		const icomp::IComponentStaticInfo* infoPtr = m_metaInfoManagerCompPtr->GetComponentMetaInfo(componentAddress);
 		if (infoPtr != NULL){
-			istd::CString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(componentAddress);
-			if (!infoPath.IsEmpty()){
-				QDir infoDir(iqt::GetQString(infoPath));
-				QFileInfo helpFileInfo(infoDir.filePath(iqt::GetQString(*m_helpFileNameAttrPtr)));
+			QString infoPath = m_externalMetaInfoManagerCompPtr->GetComponentInfoPath(componentAddress);
+			if (!infoPath.isEmpty()){
+				QDir infoDir(infoPath);
+				QFileInfo helpFileInfo(infoDir.filePath(*m_helpFileNameAttrPtr));
 				if (helpFileInfo.exists()){
-					return iqt::GetCString(helpFileInfo.absoluteFilePath());
+					return helpFileInfo.absoluteFilePath();
 				}
 			}
 		}
@@ -105,7 +105,7 @@ istd::CString CComponentHelpFileProviderComp::GetHelpFilePath(const icomp::CComp
 
 
 bool CComponentHelpFileProviderComp::ExtractComponentAddress(
-			const istd::CString& /*contextText*/,
+			const QString& /*contextText*/,
 			const istd::IPolymorphic* contextObjectPtr,
 			icomp::CComponentAddress& result) const
 {

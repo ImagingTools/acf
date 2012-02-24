@@ -14,7 +14,7 @@ namespace isys
 
 // reimplemented (isys::ISystemInfo)
 
-istd::CString CSystemInfoBase::GetComputerName() const
+QString CSystemInfoBase::GetComputerName() const
 {
 	return m_computerName;
 }

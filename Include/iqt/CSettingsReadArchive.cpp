@@ -68,7 +68,7 @@ bool CSettingsReadArchive::Process(std::string& value)
 }
 
 
-bool CSettingsReadArchive::Process(istd::CString& value)
+bool CSettingsReadArchive::Process(QString& value)
 {
 	QString registryKey = CreateNextValueKey();
 
@@ -76,7 +76,7 @@ bool CSettingsReadArchive::Process(istd::CString& value)
 		return false;
 	}
 
-	value = iqt::GetCString(BaseClass2::value(registryKey).toString());
+	value = BaseClass2::value(registryKey).toString();
 
 	return true;
 }

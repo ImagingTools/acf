@@ -54,9 +54,9 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (icomp::IPackagesManager)
-	virtual bool LoadPackages(const istd::CString& configFilePath = istd::CString::GetEmpty());
+	virtual bool LoadPackages(const QString& configFilePath = QString());
 	virtual int GetPackageType(const std::string& packageId) const;
-	virtual istd::CString GetPackagePath(const std::string& packageId) const;
+	virtual QString GetPackagePath(const std::string& packageId) const;
 
 	// reimplemented (icomp::IExtRegistriesManager)
 	virtual PathList GetConfigurationPathList(PathType pathType) const;
@@ -65,14 +65,14 @@ public:
 	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const;
 
 	// reimplemented (icomp::IRegistryLoader)
-	virtual const icomp::IRegistry* GetRegistryFromFile(const istd::CString& path) const;
+	virtual const icomp::IRegistry* GetRegistryFromFile(const QString& path) const;
 
 protected:
-	void RegisterPackageFile(const istd::CString& file);
-	void RegisterPackagesDir(const istd::CString& subDir);
-	bool LoadConfigFile(const istd::CString& configFile);
+	void RegisterPackageFile(const QString& file);
+	void RegisterPackagesDir(const QString& subDir);
+	bool LoadConfigFile(const QString& configFile);
 
-	bool CheckAndMarkPath(PathList& pathList, const QDir& directory, const istd::CString& path, istd::CString& resultPath) const;
+	bool CheckAndMarkPath(PathList& pathList, const QDir& directory, const QString& path, QString& resultPath) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -91,7 +91,7 @@ private:
 	CompositePackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
-	typedef std::map<istd::CString, RegistryPtr> RegistriesMap;
+	typedef std::map<QString, RegistryPtr> RegistriesMap;
 
 	mutable RegistriesMap m_registriesMap;
 

@@ -21,8 +21,8 @@ CMessage::CMessage()
 CMessage::CMessage(
 			istd::ILogger::MessageCategory category,
 			int id,
-			const istd::CString& text,
-			const istd::CString& source,
+			const QString& text,
+			const QString& source,
 			int flags)
 :	m_category(category),
 	m_id(id),
@@ -40,13 +40,13 @@ void CMessage::SetCategory(istd::ILogger::MessageCategory category)
 }
 
 
-void CMessage::SetText(const istd::CString& text)
+void CMessage::SetText(const QString& text)
 {
 	m_text = text;
 }
 
 
-void CMessage::SetSource(const istd::CString& source)
+void CMessage::SetSource(const QString& source)
 {
 	m_source = source;
 }

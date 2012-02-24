@@ -16,16 +16,16 @@ namespace iqtprm
 
 // reimplemented (iprm::IFileNameParam)
 
-const istd::CString& CRelativeFileNameParamComp::GetPath() const
+const QString& CRelativeFileNameParamComp::GetPath() const
 {
-	const istd::CString& relativePath = BaseClass::GetPath();
+	const QString& relativePath = BaseClass::GetPath();
 
-	if (!relativePath.IsEmpty() && m_relativeToCompPtr.IsValid()){
-		const istd::CString& basePath = m_relativeToCompPtr->GetPath();
-		if (!basePath.IsEmpty()){
-			QDir baseDir(iqt::GetQString(basePath));
+	if (!relativePath.isEmpty() && m_relativeToCompPtr.IsValid()){
+		const QString& basePath = m_relativeToCompPtr->GetPath();
+		if (!basePath.isEmpty()){
+			QDir baseDir(basePath);
 
-			m_relativePath = iqt::GetCString(baseDir.absoluteFilePath(iqt::GetQString(relativePath)));
+			m_relativePath = baseDir.absoluteFilePath(relativePath);
 
 			return m_relativePath;
 		}
@@ -35,14 +35,14 @@ const istd::CString& CRelativeFileNameParamComp::GetPath() const
 }
 
 
-void CRelativeFileNameParamComp::SetPath(const istd::CString& path)
+void CRelativeFileNameParamComp::SetPath(const QString& path)
 {
-	if (!path.IsEmpty() && m_relativeToCompPtr.IsValid()){
-		const istd::CString& basePath = m_relativeToCompPtr->GetPath();
-		if (!basePath.IsEmpty()){
-			QDir baseDir(iqt::GetQString(basePath));
+	if (!path.isEmpty() && m_relativeToCompPtr.IsValid()){
+		const QString& basePath = m_relativeToCompPtr->GetPath();
+		if (!basePath.isEmpty()){
+			QDir baseDir(basePath);
 
-			BaseClass::SetPath(iqt::GetCString(baseDir.relativeFilePath(iqt::GetQString(path))));
+			BaseClass::SetPath(baseDir.relativeFilePath(path));
 
 			return;
 		}
@@ -58,7 +58,7 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	istd::CString documentPath;
+	QString documentPath;
 	const iser::IFileArchiveInfo* fileArchiveInfoPtr = dynamic_cast<const iser::IFileArchiveInfo*>(&archive);
 	if (fileArchiveInfoPtr != NULL){
 		documentPath = fileArchiveInfoPtr->GetCurrentFilePath();
@@ -67,12 +67,12 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag pathTag("Path", "File path");
 
 	if (archive.IsStoring()){
-		istd::CString filePath = GetPath();
+		QString filePath = GetPath();
 
-		if (!documentPath.IsEmpty()){
-			QFileInfo docuInfo(iqt::GetQString(documentPath));
+		if (!documentPath.isEmpty()){
+			QFileInfo docuInfo(documentPath);
 
-			filePath = iqt::GetCString(docuInfo.absoluteDir().relativeFilePath(iqt::GetQString(filePath)));
+			filePath = docuInfo.absoluteDir().relativeFilePath(filePath);
 		}
 
 		retVal = retVal && archive.BeginTag(pathTag);
@@ -80,7 +80,7 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(pathTag);
 	}
 	else{
-		istd::CString filePath;
+		QString filePath;
 
 		retVal = retVal && archive.BeginTag(pathTag);
 		retVal = retVal && archive.Process(filePath);
@@ -90,10 +90,10 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 			return false;
 		}
 
-		if (!documentPath.IsEmpty()){
-			QFileInfo docuInfo(iqt::GetQString(documentPath));
+		if (!documentPath.isEmpty()){
+			QFileInfo docuInfo(documentPath);
 
-			filePath = iqt::GetCString(docuInfo.absoluteDir().absoluteFilePath(iqt::GetQString(filePath)));
+			filePath = docuInfo.absoluteDir().absoluteFilePath(filePath);
 		}
 
 		if (filePath != GetPath()){

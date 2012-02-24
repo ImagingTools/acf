@@ -28,7 +28,7 @@ public:
 
 	// reimplemented (ibase::IApplication)
 	virtual int Execute(int argc, char** argv);
-	virtual istd::CString GetHelpText() const;
+	virtual QString GetHelpText() const;
 
 private:
 	I_REF(IDialog, m_mainDialogCompPtr);

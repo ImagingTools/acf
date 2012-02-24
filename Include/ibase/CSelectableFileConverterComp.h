@@ -37,8 +37,8 @@ public:
 
 	// reimplemented (ibase::IFileConvertCopy)
 	virtual bool ConvertFile(
-				const istd::CString& inputFilePath,
-				const istd::CString& outputFilePath,
+				const QString& inputFilePath,
+				const QString& outputFilePath,
 				const iprm::IParamsSet* paramsPtr = NULL) const;
 
 	// reimplemented (iprm::ISelectionParam)
@@ -57,14 +57,14 @@ protected:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 private:
 	I_MULTIREF(ibase::IFileConvertCopy, m_slaveConvertersCompPtr);
-	I_MULTIATTR(istd::CString, m_slaveConverterNamesAttrPtr);
-	I_MULTIATTR(istd::CString, m_slaveConverterDescriptionsAttrPtr);
+	I_MULTIATTR(QString, m_slaveConverterNamesAttrPtr);
+	I_MULTIATTR(QString, m_slaveConverterDescriptionsAttrPtr);
 
 	int m_optionsCount;
 	int m_selectedOptionIndex;

@@ -77,7 +77,7 @@ void CParamsManagerGuiComp::on_UpButton_clicked()
 			return;
 		}
 
-		istd::CString name = objectPtr->GetParamsSetName(selectedIndex);
+		QString name = objectPtr->GetParamsSetName(selectedIndex);
 
 		istd::CChangeNotifier notifier(objectPtr);
 
@@ -130,7 +130,7 @@ void CParamsManagerGuiComp::on_DownButton_clicked()
 			return;
 		}
 
-		istd::CString name = objectPtr->GetParamsSetName(selectedIndex);
+		QString name = objectPtr->GetParamsSetName(selectedIndex);
 
 		istd::CChangeNotifier notifier(objectPtr);
 
@@ -211,7 +211,7 @@ void CParamsManagerGuiComp::on_ParamsTree_itemChanged(QTreeWidgetItem* item, int
 	if (objectPtr != NULL){
 		int setIndex = item->data(0, Qt::UserRole).toInt();
 
-		objectPtr->SetParamsSetName(setIndex, iqt::GetCString(item->text(0)));
+		objectPtr->SetParamsSetName(setIndex, item->text(0));
 	}
 }
 
@@ -279,9 +279,9 @@ void CParamsManagerGuiComp::UpdateTree()
 				itemFlags |= Qt::ItemIsEditable;
 			}
 
-			const istd::CString& name = objectPtr->GetParamsSetName(paramSetIndex);
+			const QString& name = objectPtr->GetParamsSetName(paramSetIndex);
 			QTreeWidgetItem* paramsSetItemPtr = new QTreeWidgetItem();
-			paramsSetItemPtr->setText(0, iqt::GetQString(name));
+			paramsSetItemPtr->setText(0, name);
 			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);
 			paramsSetItemPtr->setFlags(itemFlags);
 			ParamsTree->addTopLevelItem(paramsSetItemPtr);

@@ -5,9 +5,13 @@
 // STL includes
 #include <set>
 
+
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "icomp/IPackagesManager.h"
-#include "istd/CString.h"
 
 
 namespace icomp
@@ -37,7 +41,7 @@ public:
 	/**
 		List of pathes.
 	*/
-	typedef std::set<istd::CString> PathList;
+	typedef std::set<QString> PathList;
 
 	/**
 		Get list of files used for configuration.

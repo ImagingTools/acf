@@ -18,7 +18,7 @@ namespace icmpstr
 
 // reimplemented (idoc::IHelpInfoProvider)
 
-double CQuickHelpGuiComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CQuickHelpGuiComp::GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	if (m_descriptionFileProviderCompPtr.IsValid()){
 		return m_descriptionFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr);
@@ -30,7 +30,7 @@ double CQuickHelpGuiComp::GetHelpQuality(const istd::CString& contextText, const
 
 // reimplemented (idoc::IHelpViewer)
 
-void CQuickHelpGuiComp::ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr)
+void CQuickHelpGuiComp::ShowHelp(const QString& contextText, const istd::IPolymorphic* contextObjectPtr)
 {
 	if (!IsGuiCreated()){
 		return;
@@ -46,19 +46,19 @@ void CQuickHelpGuiComp::ShowHelp(const istd::CString& contextText, const istd::I
 
 		hasDescrFile = (m_descriptionFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr) > 0);
 		if (hasDescrFile){
-			QUrl url = QUrl::fromLocalFile(iqt::GetQString(m_descrFilePath));
+			QUrl url = QUrl::fromLocalFile(m_descrFilePath);
 
 			DescriptionBrowser->setSource(url);
 		}
 	}
 
 	bool isEditAvailable =
-				!m_descrFilePath.IsEmpty() &&
+				!m_descrFilePath.isEmpty() &&
 				m_docuEditorFileParamsCompPtr.IsValid() &&
-				!m_docuEditorFileParamsCompPtr->GetPath().IsEmpty();
+				!m_docuEditorFileParamsCompPtr->GetPath().isEmpty();
 	NewButton->setVisible(isEditAvailable);
 	EditButton->setVisible(isEditAvailable);
-	EditButton->setEnabled(!m_descrFilePath.IsEmpty() && QFileInfo(iqt::GetQString(m_descrFilePath)).isWritable());
+	EditButton->setEnabled(!m_descrFilePath.isEmpty() && QFileInfo(m_descrFilePath).isWritable());
 
 	DescriptionFrame->setVisible(hasDescrFile);
 	NoDescriptionFrame->setVisible(!hasDescrFile);
@@ -77,9 +77,9 @@ void CQuickHelpGuiComp::ShowHelp(const istd::CString& contextText, const istd::I
 				}
 
 				if (m_externalMetaInfoManagerCompPtr.IsValid()){
-					istd::CString infoPath = m_externalMetaInfoManagerCompPtr->GetPackageInfoPath(addressPtr->GetPackageId());
-					if (!infoPath.IsEmpty() && (classInfo.GetName() != "icomp::CCompositeComponentStaticInfo")){
-						QDir infoDir(iqt::GetQString(infoPath));
+					QString infoPath = m_externalMetaInfoManagerCompPtr->GetPackageInfoPath(addressPtr->GetPackageId());
+					if (!infoPath.isEmpty() && (classInfo.GetName() != "icomp::CCompositeComponentStaticInfo")){
+						QDir infoDir(infoPath);
 						QFile file(infoDir.absoluteFilePath("CompositorInfo.xml"));
 						QDomDocument domDocument;
 						if (file.open(QIODevice::ReadOnly) && domDocument.setContent(&file)){
@@ -89,10 +89,10 @@ void CQuickHelpGuiComp::ShowHelp(const istd::CString& contextText, const istd::I
 								QString doxygenPath = iqt::CFileSystem::GetEnrolledPath(root.firstChildElement("DoxyGenPath").text().trimmed());
 								if (!doxygenPath.isEmpty()){
 									QDir doxygenDir(infoDir.absoluteFilePath(doxygenPath));
-									istd::CString doxyFileName = CalcDoxygenFileName(classInfo);
-									QFileInfo fileInfo(doxygenDir.absoluteFilePath(iqt::GetQString(doxyFileName)));
+									QString doxyFileName = CalcDoxygenFileName(classInfo);
+									QFileInfo fileInfo(doxygenDir.absoluteFilePath(doxyFileName));
 									if (fileInfo.exists()){
-										m_techFilePath = iqt::GetCString(fileInfo.absoluteFilePath());
+										m_techFilePath = fileInfo.absoluteFilePath();
 									}
 								}
 							}
@@ -103,15 +103,15 @@ void CQuickHelpGuiComp::ShowHelp(const istd::CString& contextText, const istd::I
 		}
 	}
 
-	ShowTechButton->setVisible(!m_techFilePath.IsEmpty());
+	ShowTechButton->setVisible(!m_techFilePath.isEmpty());
 }
 
 
 // protected methods
 
-istd::CString CQuickHelpGuiComp::CalcDoxygenFileName(const istd::CClassInfo& classInfo) const
+QString CQuickHelpGuiComp::CalcDoxygenFileName(const istd::CClassInfo& classInfo) const
 {
-	istd::CString retVal = "class";
+	QString retVal = "class";
 
 	std::string className = classInfo.GetName();
 	for (		std::string::const_iterator iter = className.begin();
@@ -156,16 +156,16 @@ void CQuickHelpGuiComp::on_EditButton_clicked()
 		return;
 	}
 
-	istd::CString editorPath = m_docuEditorFileParamsCompPtr->GetPath();
+	QString editorPath = m_docuEditorFileParamsCompPtr->GetPath();
 	
-	if (editorPath.IsEmpty()){
+	if (editorPath.isEmpty()){
 		return;
 	}
 
 	QStringList parameters;
-	parameters << iqt::GetQString(m_descrFilePath);
+	parameters << m_descrFilePath;
 
-	QProcess::startDetached(iqt::GetQString(editorPath), parameters);
+	QProcess::startDetached(editorPath, parameters);
 }
 
 
@@ -181,16 +181,16 @@ void CQuickHelpGuiComp::on_ShowTechButton_clicked()
 		return;
 	}
 
-	istd::CString editorPath = m_techDocuViewerFileParamsCompPtr->GetPath();
+	QString editorPath = m_techDocuViewerFileParamsCompPtr->GetPath();
 	
-	if (editorPath.IsEmpty()){
+	if (editorPath.isEmpty()){
 		return;
 	}
 
 	QStringList parameters;
-	parameters << "file://" + iqt::GetQString(m_techFilePath);
+	parameters << "file://" + m_techFilePath;
 
-	QProcess::startDetached(iqt::GetQString(editorPath), parameters);
+	QProcess::startDetached(editorPath, parameters);
 }
 
 

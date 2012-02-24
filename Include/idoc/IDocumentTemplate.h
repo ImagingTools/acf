@@ -3,7 +3,7 @@
 
 
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/IFileLoader.h"
 
@@ -35,7 +35,7 @@ public:
 	/**
 		Get human readable name of some view type ID.
 	*/
-	virtual istd::CString GetViewTypeName(
+	virtual QString GetViewTypeName(
 				const std::string& documentTypeId,
 				const std::string& viewTypeId) const = 0;
 

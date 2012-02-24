@@ -143,7 +143,7 @@ void CComposedParamsSetComp::OnComponentCreated()
 
 	for (int i = 0; i < setsCount; ++i){
 		iser::ISerializable* paramPtr = m_parametersCompPtr[i];
-		std::string id = m_parametersIdAttrPtr[i].ToString();
+		std::string id = m_parametersIdAttrPtr[i].toStdString();
 
 		SetEditableParameter(id, paramPtr);
 	}

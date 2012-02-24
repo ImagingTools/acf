@@ -34,7 +34,7 @@ void CFileNameParamGuiComp::UpdateModel() const
 
 	UpdateBlocker updateBlocker(const_cast<CFileNameParamGuiComp*>(this));
 
-	istd::CString currentPath = iqt::GetCString(GetPathFromEditor());
+	QString currentPath = GetPathFromEditor();
 	if (currentPath != objectPtr->GetPath()){
 		istd::CChangeNotifier notifier(objectPtr);
 
@@ -53,7 +53,7 @@ void CFileNameParamGuiComp::OnGuiModelAttached()
 
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		SetPathToEditor(iqt::GetQString(objectPtr->GetPath()));
+		SetPathToEditor(objectPtr->GetPath());
 	}
 }
 
@@ -66,7 +66,7 @@ void CFileNameParamGuiComp::UpdateGui(int /*updateFlags*/)
 	if (objectPtr != NULL){
 		int pathType = objectPtr->GetPathType();
 
-		QString newPath = iqt::GetQString(objectPtr->GetPath());
+		QString newPath = objectPtr->GetPath();
 		if (newPath != GetPathFromEditor()){
 			SetPathToEditor(newPath);
 		}
@@ -97,14 +97,14 @@ void CFileNameParamGuiComp::OnGuiCreated()
 	BrowseButton->setVisible(false);
 
 	if (m_pathLabelAttrPtr.IsValid()){
-		DirectoryLabel->setText(iqt::GetQString(*m_pathLabelAttrPtr));
-		PathLabel->setText(iqt::GetQString(*m_pathLabelAttrPtr));
-		UrlLabel->setText(iqt::GetQString(*m_pathLabelAttrPtr));
+		DirectoryLabel->setText(*m_pathLabelAttrPtr);
+		PathLabel->setText(*m_pathLabelAttrPtr);
+		UrlLabel->setText(*m_pathLabelAttrPtr);
 	}
 
 	QString startHint = tr("<Enter path>");
 	if (m_startHintAttrPtr.IsValid()){
-		startHint = iqt::GetQString(*m_startHintAttrPtr);
+		startHint = *m_startHintAttrPtr;
 	}
 	
 	iqtgui::CExtLineEdit* lineEdit = new iqtgui::CExtLineEdit(startHint, 2, DirEdit);
@@ -332,7 +332,7 @@ QString CFileNameParamGuiComp::GetPathFromEditor() const
 
 bool CFileNameParamGuiComp::IsLabelNeeded() const
 {
-	return (m_pathLabelAttrPtr.IsValid() && !(*m_pathLabelAttrPtr).IsEmpty());
+	return (m_pathLabelAttrPtr.IsValid() && !(*m_pathLabelAttrPtr).isEmpty());
 }
 
 

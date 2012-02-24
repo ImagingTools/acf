@@ -2,8 +2,12 @@
 #define icomp_IRegistryLoader_included
 
 
+// Qt includes
+#include <QString>
+
+
+// ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 
 namespace icomp
@@ -22,7 +26,7 @@ public:
 	/**
 		Get an ACF registry from a given file.
 	*/
-	virtual const icomp::IRegistry* GetRegistryFromFile(const istd::CString& path) const = 0;
+	virtual const icomp::IRegistry* GetRegistryFromFile(const QString& path) const = 0;
 };
 	
 

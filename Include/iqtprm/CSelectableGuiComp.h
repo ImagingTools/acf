@@ -49,8 +49,8 @@ protected:
 
 protected:
 	I_MULTIREF(iqtgui::IGuiObject, m_slaveGuisCompPtr);
-	I_ATTR(istd::CString, m_noSelectionLabelAttrPtr);
-	I_ATTR(istd::CString, m_noSelectionIconAttrPtr);
+	I_ATTR(QString, m_noSelectionLabelAttrPtr);
+	I_ATTR(QString, m_noSelectionIconAttrPtr);
 	I_REF(iqtgui::IGuiObject, m_selectorGuiCompPtr);
 	I_REF(imod::IObserver, m_selectorObserverCompPtr);
 

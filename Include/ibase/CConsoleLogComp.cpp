@@ -4,6 +4,8 @@
 // STL includes
 #include <iostream>
 
+
+// ACF includes
 #include "ibase/IMessage.h"
 
 
@@ -15,9 +17,9 @@ namespace ibase
 
 // reimplemented (CStreamLogCompBase)
 
-void CConsoleLogComp::WriteText(const istd::CString& text)
+void CConsoleLogComp::WriteText(const QString& text)
 {
-	std::wcout << text.c_str();
+	std::wcout << text.toStdWString().c_str();
 }
 
 

@@ -27,9 +27,9 @@ bool CComponentAddress::IsValid() const
 }
 
 
-istd::CString CComponentAddress::ToString() const
+QString CComponentAddress::ToString() const
 {
-	return istd::CString(m_packageId + "/" + m_componentId);
+	return QString(QString::fromStdString(m_packageId) + "/" + QString::fromStdString(m_componentId));
 }
 
 

@@ -99,7 +99,7 @@ void COptionsManagerGuiComp::OnGuiCreated()
 
 		QLabel* selectorLabelPtr = new QLabel(SelectionFrame);
 		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-		selectorLabelPtr->setText(iqt::GetQString(*m_optionsLabelAttrPtr));
+		selectorLabelPtr->setText(*m_optionsLabelAttrPtr);
 
 		selectorLayoutPtr->addWidget(selectorLabelPtr);
 		selectorLayoutPtr->addWidget(SelectorLayout->parentWidget());
@@ -125,7 +125,7 @@ void COptionsManagerGuiComp::OnGuiShown()
 	}
 
 	if (m_infoLabelAttrPtr.IsValid()){
-		InfoLabel->setText(iqt::GetQString(*m_infoLabelAttrPtr));
+		InfoLabel->setText(*m_infoLabelAttrPtr);
 
 		InfoIcon->setScaledContents(true);
 		InfoIcon->setMaximumWidth(iconSize);
@@ -172,8 +172,8 @@ void COptionsManagerGuiComp::OnSelectionChanged(int /*index*/)
 
 void COptionsManagerGuiComp::OnEditingFinished()
 {
-	istd::CString newOptionName = iqt::GetCString(Selector->lineEdit()->text());
-	if (!newOptionName.IsEmpty()){
+	QString newOptionName = Selector->lineEdit()->text();
+	if (!newOptionName.isEmpty()){
 		bool addNewOption = true;
 		iprm::ISelectionParam* selectionParamsPtr = GetObjectPtr();
 		if (selectionParamsPtr != NULL){
@@ -182,7 +182,7 @@ void COptionsManagerGuiComp::OnEditingFinished()
 				int optionsCount = constraintsPtr->GetOptionsCount();
 
 				for (int i = 0; i < optionsCount; ++i){
-					istd::CString name = constraintsPtr->GetOptionName(i);
+					QString name = constraintsPtr->GetOptionName(i);
 
 					if (newOptionName == name){
 						selectionParamsPtr->SetSelectedOptionIndex(i);
@@ -196,7 +196,7 @@ void COptionsManagerGuiComp::OnEditingFinished()
 		}
 
 		if (m_optionsManagerCompPtr.IsValid() && addNewOption){
-			m_optionsManagerCompPtr->InsertOption(newOptionName, newOptionName.ToString());
+			m_optionsManagerCompPtr->InsertOption(newOptionName, newOptionName.toStdString());
 		}
 	}
 }
@@ -215,9 +215,9 @@ void COptionsManagerGuiComp::UpdateComboBox()
 			int optionsCount = constraintsPtr->GetOptionsCount();
 
 			for (int i = 0; i < optionsCount; ++i){
-				istd::CString name = constraintsPtr->GetOptionName(i);
+				QString name = constraintsPtr->GetOptionName(i);
 
-				Selector->addItem(iqt::GetQString(name));
+				Selector->addItem(name);
 			}
 
 			int selectedIndex = selectionParamsPtr->GetSelectedOptionIndex();
@@ -241,7 +241,7 @@ void COptionsManagerGuiComp::UpdateDescriptionFrame()
 		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL && selectedIndex >= 0){
 
-			QString optionDescription = iqt::GetQString(constraintsPtr->GetOptionDescription(selectedIndex));
+			QString optionDescription = constraintsPtr->GetOptionDescription(selectedIndex);
 			DescriptionLabel->setText(optionDescription);
 
 			if (!optionDescription.isEmpty()){

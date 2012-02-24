@@ -20,21 +20,21 @@ namespace iqt
 
 
 CXmlFileReadArchive::CXmlFileReadArchive(
-			const istd::CString& filePath,
+			const QString& filePath,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
 :	m_serializeHeader(serializeHeader),
 	m_rootTag(rootTag)
 {
-	if (!filePath.IsEmpty()){
+	if (!filePath.isEmpty()){
 		OpenDocument(filePath);
 	}
 }
 
 
-bool CXmlFileReadArchive::OpenDocument(const istd::CString& filePath)
+bool CXmlFileReadArchive::OpenDocument(const QString& filePath)
 {
-	QFile file(iqt::GetQString(filePath));
+	QFile file(filePath);
 	if (!file.open(QIODevice::ReadOnly)){
 		return false;
 	}
@@ -45,7 +45,7 @@ bool CXmlFileReadArchive::OpenDocument(const istd::CString& filePath)
 		return false;
 	}
 
-	if (m_currentNode.nodeValue() != iqt::GetQString(m_rootTag.GetId())){
+	if (m_currentNode.nodeValue() != QString::fromStdString(m_rootTag.GetId())){
 		QDomElement mainElement = m_document.documentElement();
 
 		m_currentNode = mainElement;
@@ -271,11 +271,11 @@ bool CXmlFileReadArchive::Process(std::string& value)
 }
 
 
-bool CXmlFileReadArchive::Process(istd::CString& value)
+bool CXmlFileReadArchive::Process(QString& value)
 {
 	QString text = PullTextNode();
 
-	value = iqt::GetCString(text);
+	value = text;
 
 	return !m_currentNode.isNull();
 }

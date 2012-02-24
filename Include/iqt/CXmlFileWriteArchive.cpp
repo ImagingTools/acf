@@ -19,7 +19,7 @@ namespace iqt
 
 
 CXmlFileWriteArchive::CXmlFileWriteArchive(
-			const istd::CString& filePath,
+			const QString& filePath,
 			const iser::IVersionInfo* versionInfoPtr,
 			bool serializeHeader,
 			const iser::CArchiveTag& rootTag)
@@ -29,7 +29,7 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 	m_rootTag(rootTag),
 	m_isSeparatorNeeded(false)
 {
-	if (!filePath.empty()){
+	if (!filePath.isEmpty()){
 		OpenDocument(filePath);
 	}
 }
@@ -56,16 +56,16 @@ bool CXmlFileWriteArchive::Flush()
 }
 
 
-bool CXmlFileWriteArchive::OpenDocument(const istd::CString& filePath)
+bool CXmlFileWriteArchive::OpenDocument(const QString& filePath)
 {
 	bool retVal = true;
 
-	m_file.setFileName(iqt::GetQString(filePath));
+	m_file.setFileName(filePath);
 	m_file.open(QIODevice::WriteOnly);
 
 	m_document.clear();
 
-	m_currentParent = m_document.createElement(iqt::GetQString(m_rootTag.GetId()));
+	m_currentParent = m_document.createElement(QString::fromStdString(m_rootTag.GetId()));
 
 	m_document.appendChild(m_currentParent);
 
@@ -201,9 +201,9 @@ bool CXmlFileWriteArchive::Process(std::string& value)
 }
 
 
-bool CXmlFileWriteArchive::Process(istd::CString& value)
+bool CXmlFileWriteArchive::Process(QString& value)
 {
-	return PushTextNode(iqt::GetQString(value));
+	return PushTextNode(value);
 }
 
 
@@ -220,7 +220,7 @@ bool CXmlFileWriteArchive::ProcessData(void* dataPtr, int size)
 bool CXmlFileWriteArchive::PushTextNode(const QString& text)
 {
 	if (m_isSeparatorNeeded){
-		QDomElement separator = m_document.createElement(GetQString(GetElementSeparator()));
+		QDomElement separator = m_document.createElement(GetElementSeparator());
 
 		m_currentParent.appendChild(separator);
 	}

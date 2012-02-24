@@ -2,9 +2,12 @@
 #define icomp_IPackagesManager_included
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
 
 
 namespace icomp
@@ -31,7 +34,7 @@ public:
 		Configure environment for specified file path.
 		If this file path is invalid or empty, standard configuration file will be used.
 	*/
-	virtual bool LoadPackages(const istd::CString& configFilePath = istd::CString::GetEmpty()) = 0;
+	virtual bool LoadPackages(const QString& configFilePath = QString()) = 0;
 
 	/**
 		Get type of package as defined in \c PackageType.
@@ -43,7 +46,7 @@ public:
 		\param	packageId	ID of component package.
 		\return				package path or empty string if specified package is not registered.
 	*/
-	virtual istd::CString GetPackagePath(const std::string& packageId) const = 0;
+	virtual QString GetPackagePath(const std::string& packageId) const = 0;
 };
 
 

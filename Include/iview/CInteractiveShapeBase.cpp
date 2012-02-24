@@ -126,11 +126,11 @@ void CInteractiveShapeBase::UpdateModelChanges()
 }
 
 
-void CInteractiveShapeBase::DrawText(QPainter& drawContext, istd::CIndex2d point, const istd::CString& text) const
+void CInteractiveShapeBase::DrawText(QPainter& drawContext, istd::CIndex2d point, const QString& text) const
 {
 	QFontMetrics metrics(drawContext.font());
 
-	QString qText = iqt::GetQString(text);
+	QString qText = text;
 
 	QRect textRect(iqt::GetQPoint(point), metrics.size(0, qText));
 

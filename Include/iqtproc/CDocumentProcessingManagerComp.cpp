@@ -63,7 +63,7 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 				m_progressManagerCompPtr.GetPtr());
 
 	double processingTime = timer.GetElapsed();
-	SendInfoMessage(0, istd::CString("Processing time: ") + istd::CString::FromNumber(processingTime * 1000) + " ms", "Document processing manager");
+	SendInfoMessage(0, QString("Processing time: ") + QString("%1").arg(processingTime * 1000) + " ms", "Document processing manager");
 	
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing was failed", "Document processing manager");
@@ -111,7 +111,7 @@ void CDocumentProcessingManagerComp::DoInPlaceProcessing(istd::IChangeable* inpu
 				m_progressManagerCompPtr.GetPtr());
 
 	double processingTime = timer.GetElapsed();
-	SendInfoMessage(0, istd::CString("Processing time: ") + istd::CString::FromNumber(processingTime * 1000) + " ms", "Document processing manager");
+	SendInfoMessage(0, QString("Processing time: ") + QString("%1").arg(processingTime * 1000) + " ms", "Document processing manager");
 	
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing was failed", "Document processing manager");

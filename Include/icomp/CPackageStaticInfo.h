@@ -24,8 +24,8 @@ class CPackageStaticInfo: virtual public CComponentStaticInfoBase
 public:
 	CPackageStaticInfo();
 	CPackageStaticInfo(
-				const istd::CString& description,
-				const istd::CString& keywords);
+				const QString& description,
+				const QString& keywords);
 
 	void Reset();
 
@@ -42,15 +42,15 @@ public:
 	// reimplemented (icomp::IComponentStaticInfo)
 	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
-	virtual const istd::CString& GetDescription() const;
-	virtual const istd::CString& GetKeywords() const;
+	virtual const QString& GetDescription() const;
+	virtual const QString& GetKeywords() const;
 
 private:
 	typedef std::map<std::string, const IComponentStaticInfo*> EmbeddedComponentInfos;
 	EmbeddedComponentInfos m_embeddedComponentInfos;
 
-	istd::CString m_description;
-	istd::CString m_keywords;
+	QString m_description;
+	QString m_keywords;
 };
 
 

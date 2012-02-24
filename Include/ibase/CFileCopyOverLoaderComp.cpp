@@ -1,6 +1,10 @@
 #include "ibase/CFileCopyOverLoaderComp.h"
 
 
+// Qt includes
+#include <QStringList>
+
+
 namespace ibase
 {
 
@@ -8,8 +12,8 @@ namespace ibase
 // reimplemented (ibase::IFileConvertCopy)
 
 bool CFileCopyOverLoaderComp::ConvertFile(
-			const istd::CString& inputFilePath,
-			const istd::CString& outputFilePath,
+			const QString& inputFilePath,
+			const QString& outputFilePath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	if (!m_inputLoaderCompPtr.IsValid()){
@@ -30,10 +34,10 @@ bool CFileCopyOverLoaderComp::ConvertFile(
 		return false;
 	}
 
-	istd::CString usedOutputPath = outputFilePath;
+	QString usedOutputPath = outputFilePath;
 
-	if (usedOutputPath.IsEmpty()){
-		istd::CStringList extensions;
+	if (usedOutputPath.isEmpty()){
+		QStringList extensions;
 		m_outputLoaderCompPtr->GetFileExtensions(extensions);
 
 		if (extensions.empty()){
@@ -42,10 +46,9 @@ bool CFileCopyOverLoaderComp::ConvertFile(
 			return false;
 		}
 
-		istd::CString::size_type pointPos = inputFilePath.rfind('.');
-
-		if (pointPos != istd::CString::npos){
-			usedOutputPath = inputFilePath.substr(0, pointPos + 1) + extensions.front();
+		int pointPos = inputFilePath.lastIndexOf(".");
+		if (pointPos != -1){
+			usedOutputPath = inputFilePath.left(pointPos + 1) + extensions.front();
 		}
 		else{
 			usedOutputPath = inputFilePath + extensions.front();

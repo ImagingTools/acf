@@ -180,7 +180,7 @@ void CAttributeEditorComp::on_InterfacesTree_itemSelectionChanged()
 
 		istd::CClassInfo info(attributeItemPtr->data(0, InterfaceName).toString().toStdString());
 
-		m_quickHelpViewerCompPtr->ShowHelp(info.GetName(), &info);
+		m_quickHelpViewerCompPtr->ShowHelp(info.GetName().c_str(), &info);
 	}
 }
 
@@ -312,16 +312,16 @@ void CAttributeEditorComp::UpdateGeneralView()
 		const icomp::CComponentAddress& address = infoIter->first;
 		const icomp::IComponentStaticInfo* infoPtr = infoIter->second.GetPtr();
 		if (infoPtr != NULL){
-			description = iqt::GetQString(infoPtr->GetDescription());
+			description = infoPtr->GetDescription();
 			
 			icomp::CComponentMetaDescriptionEncoder encoder(infoPtr->GetKeywords());
 
-			companyInfoList += iqt::GetQStringList(encoder.GetValues("Company"));
-			projectInfoList += iqt::GetQStringList(encoder.GetValues("Project"));
-			authorInfoList += iqt::GetQStringList(encoder.GetValues("Author"));
-			categoryInfoList += iqt::GetQStringList(encoder.GetValues("Category"));
-			tagInfoList += iqt::GetQStringList(encoder.GetValues("Tag"));
-			keywordInfoList += iqt::GetQStringList(encoder.GetUnassignedKeywords());
+			companyInfoList += (encoder.GetValues("Company"));
+			projectInfoList += (encoder.GetValues("Project"));
+			authorInfoList += (encoder.GetValues("Author"));
+			categoryInfoList += (encoder.GetValues("Category"));
+			tagInfoList += (encoder.GetValues("Tag"));
+			keywordInfoList += (encoder.GetUnassignedKeywords());
 		}
 		else{
 			companyInfoList += tr("<unknown>");
@@ -1075,7 +1075,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 
 	const icomp::CStringAttribute* stringAttribute = dynamic_cast<const icomp::CStringAttribute*>(&attribute);
 	if (stringAttribute != NULL){
-		text = EncodeToEdit(iqt::GetQString(stringAttribute->GetValue()));
+		text = EncodeToEdit(stringAttribute->GetValue());
 		meaning = AM_ATTRIBUTE;
 
 		return true;
@@ -1104,7 +1104,7 @@ bool CAttributeEditorComp::DecodeAttribute(
 				text += ";";
 			}
 
-			text += EncodeToEdit(iqt::GetQString(stringListAttribute->GetValueAt(index)));
+			text += EncodeToEdit(stringListAttribute->GetValueAt(index));
 		}
 			
 		meaning = AM_MULTI_ATTRIBUTE;
@@ -1246,7 +1246,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 
 		icomp::CStringAttribute* stringAttributePtr = dynamic_cast<icomp::CStringAttribute*>(&result);
 		if (stringAttributePtr != NULL){
-			stringAttributePtr->SetValue(iqt::GetCString(DecodeFromEdit(text)));
+			stringAttributePtr->SetValue(DecodeFromEdit(text));
 
 			return true;
 		}
@@ -1295,7 +1295,7 @@ bool CAttributeEditorComp::EncodeAttribute(
 		if (stringListAttributePtr != NULL){
 			stringListAttributePtr->Reset();
 			for (int index = 0; index < values.count(); index++){
-				stringListAttributePtr->InsertValue(iqt::GetCString(DecodeFromEdit(values.at(index))));
+				stringListAttributePtr->InsertValue(DecodeFromEdit(values.at(index)));
 			}
 
 			return true;
@@ -1813,14 +1813,14 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 
 			const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<const icomp::CReferenceAttribute*>(attributePtr);
 			if (referenceAttributePtr != NULL){
-				comboEditor->lineEdit()->setText(iqt::GetQString(referenceAttributePtr->GetValue()));
+				comboEditor->lineEdit()->setText(QString::fromStdString(referenceAttributePtr->GetValue()));
 
 				return true;
 			}
 
 			const icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<const icomp::CFactoryAttribute*>(attributePtr);
 			if (factoryAttributePtr != NULL){
-				comboEditor->lineEdit()->setText(iqt::GetQString(factoryAttributePtr->GetValue()));		
+				comboEditor->lineEdit()->setText(QString::fromStdString(factoryAttributePtr->GetValue()));
 
 				return true;
 			}
@@ -1853,8 +1853,8 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 
 			const icomp::CStringAttribute* stringAttributePtr = dynamic_cast<const icomp::CStringAttribute*>(attributePtr);
 			if (stringAttributePtr != NULL){
-				const istd::CString& value = stringAttributePtr->GetValue();
-				editor.setProperty("text", QVariant(iqt::GetQString(value)));
+				const QString& value = stringAttributePtr->GetValue();
+				editor.setProperty("text", QVariant(value));
 
 				return true;
 			}
@@ -1929,7 +1929,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 						outputValue += ";";
 					}
 
-					outputValue += iqt::GetQString(stringListAttributePtr->GetValueAt(index));
+					outputValue += stringListAttributePtr->GetValueAt(index);
 				}
 
 				multiEditorPtr->SetText(outputValue);

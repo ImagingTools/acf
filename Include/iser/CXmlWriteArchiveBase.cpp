@@ -58,7 +58,7 @@ bool CXmlWriteArchiveBase::Process(std::string& value)
 
 	if (m_isSeparatorNeeded){
 		retVal = retVal && MakeIndent();
-		retVal = retVal && WriteString("<" + GetElementSeparator().ToString() + "/>\n");
+		retVal = retVal && WriteString("<" + GetElementSeparator().toStdString() + "/>\n");
 	}
 	else{
 		m_isSeparatorNeeded = true;
@@ -75,13 +75,13 @@ bool CXmlWriteArchiveBase::Process(std::string& value)
 }
 
 
-bool CXmlWriteArchiveBase::Process(istd::CString& value)
+bool CXmlWriteArchiveBase::Process(QString& value)
 {
 	bool retVal = true;
 
 	if (m_isSeparatorNeeded){
 		retVal = retVal && MakeIndent();
-		retVal = retVal && WriteString("<" + GetElementSeparator().ToString() + "/>\n");
+		retVal = retVal && WriteString("<" + GetElementSeparator().toStdString() + "/>\n");
 	}
 	else{
 		m_isSeparatorNeeded = true;
@@ -91,7 +91,7 @@ bool CXmlWriteArchiveBase::Process(istd::CString& value)
 
 	std::string xmlText;
 
-	EncodeXml(value, xmlText);
+	EncodeXml(value.toStdString(), xmlText);
 
 	retVal = retVal && WriteString(xmlText) && WriteString("\n");
 

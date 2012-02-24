@@ -24,7 +24,7 @@ void CXmlDocumentInfoBase::EncodeXml(const std::string& text, std::string& xmlTe
 			xmlText += c;
 		}
 		else{
-			xmlText += "&#" + istd::CString::FromNumber(I_WORD((unsigned char)c)).ToString() + ";";
+			xmlText +=  QString("&#%1;").arg(I_WORD((unsigned char)c)).toStdString();
 		}
 	}
 }
@@ -47,7 +47,9 @@ void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::string& te
 			}
 
 			if (xmlText[ampPos + 1] == '#'){
-				text += char(istd::CString(xmlText.substr(ampPos + 2, semicolonPos - ampPos - 2)).ToNumber<int>());
+				QString number(xmlText.substr(ampPos + 2, semicolonPos - ampPos - 2).c_str());
+
+				text += char(number.toInt());
 			}
 			else{
 				EntityToChartMap::const_iterator entityIter = s_entityToChartMap.find(xmlText.substr(ampPos, semicolonPos - ampPos + 1));
@@ -67,37 +69,39 @@ void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::string& te
 }
 
 
-void CXmlDocumentInfoBase::EncodeXml(const std::wstring& text, std::string& xmlText)
+void CXmlDocumentInfoBase::EncodeXml(const QString& text, std::string& xmlText)
 {
 	xmlText = "";
 
 	std::wstring::size_type textLength = int(text.size());
 	for (std::wstring::size_type i = 0; i < textLength; ++i){
-		wchar_t c = text[i];
+		QChar c = text[i];
 		WideCharToEntityMap::const_iterator iter = s_wideCharToEntityMap.find(c);
 		if (iter != s_wideCharToEntityMap.end()){
 			xmlText += iter->second;
 		}
 		else if ((c >= ' ') && (c <= '}')){
-			xmlText += char(c);
+			xmlText += c.toAscii();
 		}
 		else{
-			xmlText += "&#" + istd::CString::FromNumber(I_WORD((unsigned short)c)).ToString() + ";";
+			I_WORD unicodeChar = I_WORD(c.unicode());
+
+			xmlText +=  QString("&#%1;").arg(unicodeChar).toStdString();
 		}
 	}
 }
 
 
-void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::wstring& text)
+void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, QString& text)
 {
-	text = L"";
+	text.clear();
 
-	std::wstring::size_type actPos = 0;
+	int actPos = 0;
 
 	for (;;){
 		std::string::size_type ampPos = xmlText.find('&', actPos);
 		if (ampPos != std::string::npos){
-			istd::CString subString = xmlText.substr(actPos, ampPos - actPos);
+			QString subString = xmlText.substr(actPos, ampPos - actPos).c_str();
 
 			text += subString;
 
@@ -107,7 +111,9 @@ void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::wstring& t
 			}
 
 			if (xmlText[ampPos + 1] == '#'){
-				text += wchar_t(istd::CString(xmlText.substr(ampPos + 2, semicolonPos - ampPos - 2)).ToNumber<int>());
+				QString numberString = xmlText.substr(ampPos + 2, semicolonPos - ampPos - 2).c_str();
+
+				text += wchar_t(numberString.toInt());
 			}
 			else{
 				EntityToWideChartMap::const_iterator entityIter = s_entityToWideChartMap.find(xmlText.substr(ampPos, semicolonPos - ampPos + 1));
@@ -119,7 +125,7 @@ void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::wstring& t
 			actPos = semicolonPos + 1;
 		}
 		else{
-			istd::CString subString = xmlText.substr(actPos);
+			QString subString = xmlText.substr(actPos).c_str();
 
 			text += subString;
 
@@ -129,7 +135,7 @@ void CXmlDocumentInfoBase::DecodeXml(const std::string& xmlText, std::wstring& t
 }
 
 
-const istd::CString& CXmlDocumentInfoBase::GetElementSeparator()
+const QString& CXmlDocumentInfoBase::GetElementSeparator()
 {
 	return s_elementSeparator;
 }
@@ -182,7 +188,7 @@ CXmlDocumentInfoBase::EntityToChartMap CXmlDocumentInfoBase::s_entityToChartMap;
 CXmlDocumentInfoBase::WideCharToEntityMap CXmlDocumentInfoBase::s_wideCharToEntityMap;
 CXmlDocumentInfoBase::EntityToWideChartMap CXmlDocumentInfoBase::s_entityToWideChartMap;
 
-istd::CString CXmlDocumentInfoBase::s_elementSeparator("br");
+QString CXmlDocumentInfoBase::s_elementSeparator("br");
 
 
 } // namespace iser

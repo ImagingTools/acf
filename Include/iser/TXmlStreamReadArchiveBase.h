@@ -36,8 +36,8 @@ protected:
 				MessageCategory category,
 				int id,
 				int flags,
-				istd::CString& message,
-				istd::CString& messageSource) const;
+				QString& message,
+				QString& messageSource) const;
 
 protected:
 	StreamClass m_stream;
@@ -144,12 +144,12 @@ void TXmlStreamReadArchiveBase<StreamClass>::DecorateMessage(
 			MessageCategory category,
 			int id,
 			int flags,
-			istd::CString& message,
-			istd::CString& messageSource) const
+			QString& message,
+			QString& messageSource) const
 {
 	BaseClass::DecorateMessage(category, id, flags, message, messageSource);
 
-	message += istd::CString(" (Last parsed line: ") + istd::CString::FromNumber(m_lastReadLine) + ")";
+	message += QString(" (Last parsed line: ") + QString("%1").arg(m_lastReadLine) + ")";
 }
 
 

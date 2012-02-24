@@ -111,7 +111,7 @@ int CParamsManagerComp::InsertParamsSet(int index)
 
 	istd::CChangeNotifier notifier(this, CF_SET_INSERTED | CF_OPTIONS_CHANGED);
 
-	istd::CString defaultSetName = m_defaultSetNameCompPtr.IsValid() ? *m_defaultSetNameCompPtr: "unnamed";
+	QString defaultSetName = m_defaultSetNameCompPtr.IsValid() ? *m_defaultSetNameCompPtr: "unnamed";
 
 	ParamSet paramSet;
 	
@@ -174,7 +174,7 @@ IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 }
 
 
-const istd::CString& CParamsManagerComp::GetParamsSetName(int index) const
+const QString& CParamsManagerComp::GetParamsSetName(int index) const
 {
 	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
@@ -191,7 +191,7 @@ const istd::CString& CParamsManagerComp::GetParamsSetName(int index) const
 }
 
 
-bool CParamsManagerComp::SetParamsSetName(int index, const istd::CString& name)
+bool CParamsManagerComp::SetParamsSetName(int index, const QString& name)
 {
 	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
@@ -281,12 +281,12 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginTag(nameTag);
 		if (isStoring){
-			istd::CString name = GetParamsSetName(i);
+			QString name = GetParamsSetName(i);
 
 			retVal = retVal && archive.Process(name);
 		}
 		else{
-			istd::CString name;
+			QString name;
 
 			retVal = retVal && archive.Process(name);
 			if (!retVal){
@@ -329,20 +329,20 @@ int CParamsManagerComp::GetOptionsCount() const
 }
 
 
-istd::CString CParamsManagerComp::GetOptionName(int index) const
+QString CParamsManagerComp::GetOptionName(int index) const
 {
 	return GetParamsSetName(index);
 }
 
-istd::CString CParamsManagerComp::GetOptionDescription(int /*index*/) const
+QString CParamsManagerComp::GetOptionDescription(int /*index*/) const
 {
-	return istd::CString();
+	return QString();
 }
 
 
 std::string CParamsManagerComp::GetOptionId(int index) const
 {
-	return GetParamsSetName(index).ToString();
+	return GetParamsSetName(index).toStdString();
 }
 
 

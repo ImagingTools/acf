@@ -17,7 +17,7 @@ IVariableParam::TypeIds CVariableParamComp::GetKnownTypeIds() const
 
 	int typesCount = istd::Min(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
-		retVal.insert(m_factoryIdsAttrPtr[i].ToString());
+		retVal.insert(m_factoryIdsAttrPtr[i].toStdString());
 	}
 
 	return retVal;
@@ -51,7 +51,7 @@ bool CVariableParamComp::AssignTypeId(const std::string& typeId)
 
 	int typesCount = istd::Min(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
-		if (m_factoryIdsAttrPtr[i].ToString() == typeId){
+		if (m_factoryIdsAttrPtr[i].toStdString() == typeId){
 			iser::ISerializable* newParamPtr = m_factoriesFact.CreateInstance(i);
 			if (newParamPtr != NULL){
 				if (m_paramPtr.IsValid()){

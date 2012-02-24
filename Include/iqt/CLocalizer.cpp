@@ -13,15 +13,14 @@ namespace iqt
 
 // reimplemented (istd::ILocalizer)
 
-istd::CString CLocalizer::GetTranslatedText(
+QString CLocalizer::GetTranslatedText(
 			const std::string& context,
-			const istd::CString& text,
+			const QString& text,
 			const std::string& disambiguation) const
 {
-	std::string textKey = text.ToString();
+	std::string textKey = text.toStdString();
 
-	return iqt::GetCString(
-				QCoreApplication::translate(context.c_str(), textKey.c_str(), disambiguation.c_str()));
+	return QCoreApplication::translate(context.c_str(), textKey.c_str(), disambiguation.c_str());
 }
 
 

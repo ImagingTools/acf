@@ -25,10 +25,10 @@ namespace iqt
 
 // reimplemented (icomp::IRegistryLoader)
 
-const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const istd::CString& path) const
+const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const QString& path) const
 {
-	QFileInfo fileInfo(iqt::GetQString(path));
-	istd::CString correctedPath = iqt::GetCString(fileInfo.canonicalFilePath());
+	QFileInfo fileInfo(path);
+	QString correctedPath = fileInfo.canonicalFilePath();
 
 	RegistriesMap::const_iterator iter = m_registriesMap.find(correctedPath);
 
@@ -53,7 +53,7 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const istd::CSt
 
 // reimplemented (icomp::IComponentEnvironmentManager)
 
-istd::CString CPackagesLoaderComp::GetConfigFilePath() const
+QString CPackagesLoaderComp::GetConfigFilePath() const
 {
 	return m_configFilePath;
 }
@@ -61,27 +61,27 @@ istd::CString CPackagesLoaderComp::GetConfigFilePath() const
 
 // reimplemented (icomp::IPackagesManager)
 
-bool CPackagesLoaderComp::LoadPackages(const istd::CString& configFilePath)
+bool CPackagesLoaderComp::LoadPackages(const QString& configFilePath)
 {
 	istd::CChangeNotifier notifier(this);
 
 	m_configFilePath = configFilePath;
 
-	if (m_configFilePath.IsEmpty() && m_configFilePathCompPtr.IsValid()){
-		istd::CString path = m_configFilePathCompPtr->GetPath();
+	if (m_configFilePath.isEmpty() && m_configFilePathCompPtr.IsValid()){
+		QString path = m_configFilePathCompPtr->GetPath();
 
-		if (!path.IsEmpty()){
+		if (!path.isEmpty()){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
 
-			QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path));
+			QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(path);
 
-			m_configFilePath = iqt::GetCString(applicationDir.absoluteFilePath(enrolledPath));
+			m_configFilePath = applicationDir.absoluteFilePath(enrolledPath);
 		}
 
-		SendVerboseMessage(istd::CString("Configure component environment using ") + configFilePath);
+		SendVerboseMessage(QString("Configure component environment using ") + configFilePath);
 	}
 
-	if (m_configFilePath.IsEmpty()){
+	if (m_configFilePath.isEmpty()){
 		SendVerboseMessage("Configure component environment using default configuration");
 
 		m_configFilePath = "Default.xpc";
@@ -118,19 +118,19 @@ int CPackagesLoaderComp::GetPackageType(const std::string& packageId) const
 }
 
 
-istd::CString CPackagesLoaderComp::GetPackagePath(const std::string& packageId) const
+QString CPackagesLoaderComp::GetPackagePath(const std::string& packageId) const
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
-		return iqt::GetCString(foundNormalIter->second);
+		return foundNormalIter->second;
 	}
 
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		return iqt::GetCString(foundCompositeIter->second.directory.absolutePath());
+		return foundCompositeIter->second.directory.absolutePath();
 	}
 
-	return istd::CString::GetEmpty();
+	return QString();
 }
 
 
@@ -142,7 +142,7 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistry(const icomp::CComponent
 	if (foundCompositeIter != m_compositePackagesMap.end()){
 		QString filePath = foundCompositeIter->second.directory.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
 
-		return GetRegistryFromFile(GetCString(filePath));
+		return GetRegistryFromFile(filePath);
 	}
 
 	return BaseClass2::GetRegistry(address, contextRegistryPtr);
@@ -219,9 +219,9 @@ void CPackagesLoaderComp::OnComponentCreated()
 
 // protected methods
 
-bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
+bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 {
-	QFileInfo fileInfo(iqt::GetQString(file));
+	QFileInfo fileInfo(file);
 
 	std::string packageId(fileInfo.baseName().toStdString());
 
@@ -252,9 +252,9 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 		else if (foundIter->second != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
-						iqt::GetCString(QObject::tr("Second real package definition was ignored %1 (previous: %2)")
+						QObject::tr("Second real package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter->second)));
+									.arg(foundIter->second));
 		}
 	}
 	else if (fileInfo.isDir()){
@@ -283,14 +283,14 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 			packageInfo.staticInfoPtr.SetPtr(infoPtr);
 			packageInfo.directory = packageDir;
 
-			istd::CString metaInfoFile(iqt::GetCString(packageDir.absoluteFilePath("General.xml")));
+			QString metaInfoFile(packageDir.absoluteFilePath("General.xml"));
 			iser::CXmlFileReadArchive archive(metaInfoFile);
 			if (!infoPtr->SerializeMeta(archive)){
 				SendErrorMessage(
 							iser::IFileLoader::MI_CANNOT_LOAD,
-							iqt::GetCString(QObject::tr("Cannot load meta description for registry %1 (%2)")
+							QObject::tr("Cannot load meta description for registry %1 (%2)")
 										.arg(packageId.c_str())
-										.arg(iqt::GetQString(metaInfoFile))));
+										.arg(metaInfoFile));
 			}
 
 			RegisterEmbeddedComponentInfo(packageId, infoPtr);
@@ -300,9 +300,9 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 		else if (foundIter->second.directory.canonicalPath() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
-						iqt::GetCString(QObject::tr("Second composed package definition was ignored %1 (previous: %2)")
+						QObject::tr("Second composed package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter->second.directory.canonicalPath())));
+									.arg(foundIter->second.directory.canonicalPath()));
 		}
 	}
 
@@ -310,11 +310,11 @@ bool CPackagesLoaderComp::RegisterPackageFile(const istd::CString& file)
 }
 
 
-bool CPackagesLoaderComp::RegisterPackagesDir(const istd::CString& path)
+bool CPackagesLoaderComp::RegisterPackagesDir(const QString& path)
 {
 	bool retVal = true;
 
-	QDir packagesDir(GetQString(path));
+	QDir packagesDir(path);
 
 	QStringList filters;
 	filters.append("*.arp");
@@ -322,7 +322,7 @@ bool CPackagesLoaderComp::RegisterPackagesDir(const istd::CString& path)
 	for (		QStringList::iterator iter = filesInfo.begin();
 				iter != filesInfo.end();
 				++iter){
-		istd::CString filePath = GetCString(packagesDir.absoluteFilePath(*iter));
+		QString filePath = packagesDir.absoluteFilePath(*iter);
 
 		retVal = RegisterPackageFile(filePath) && retVal;
 	}
@@ -331,17 +331,17 @@ bool CPackagesLoaderComp::RegisterPackagesDir(const istd::CString& path)
 }
 
 
-bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
+bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 {
-	QFileInfo fileInfo(iqt::GetQString(configFile));
+	QFileInfo fileInfo(configFile);
 
 	QDir baseDir = fileInfo.absoluteDir();
 
 	QString configFilePath = fileInfo.absoluteFilePath();
 
-	SendVerboseMessage(iqt::GetCString(tr("Load configuration file: %1").arg(configFilePath)));
+	SendVerboseMessage(tr("Load configuration file: %1").arg(configFilePath));
 
-	iser::CXmlFileReadArchive archive(GetCString(configFilePath));
+	iser::CXmlFileReadArchive archive(configFilePath);
 
 	bool retVal = true;
 
@@ -362,9 +362,9 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 
 	for (int i = 0; i < configFilesCount; ++i){
 		retVal = retVal && archive.BeginTag(filePathTag);
-		istd::CString filePath;
+		QString filePath;
 		retVal = retVal && archive.Process(filePath);
-		istd::CString correctedPath;
+		QString correctedPath;
 		if (retVal && CheckAndMarkPath(baseDir, filePath, correctedPath)){
 			LoadConfigFile(correctedPath);
 		}
@@ -384,9 +384,9 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 
 	for (int i = 0; i < dirsCount; ++i){
 		retVal = retVal && archive.BeginTag(dirPathTag);
-		istd::CString dirPath;
+		QString dirPath;
 		retVal = retVal && archive.Process(dirPath);
-		istd::CString correctedPath;
+		QString correctedPath;
 		if (retVal && CheckAndMarkPath(baseDir, dirPath, correctedPath)){
 			RegisterPackagesDir(correctedPath);
 		}
@@ -405,9 +405,9 @@ bool CPackagesLoaderComp::LoadConfigFile(const istd::CString& configFile)
 
 	for (int i = 0; i < filesCount; ++i){
 		retVal = retVal && archive.BeginTag(filePathTag);
-		istd::CString filePath;
+		QString filePath;
 		retVal = retVal && archive.Process(filePath);
-		istd::CString correctedPath;
+		QString correctedPath;
 		if (retVal && CheckAndMarkPath(baseDir, filePath, correctedPath)){
 			RegisterPackageFile(correctedPath);
 		}
@@ -433,13 +433,13 @@ CDllFunctionsProvider& CPackagesLoaderComp::GetProviderRef(const QFileInfo& file
 	}
 
 	FunctionsProviderPtr& providerPtr = m_dllCacheMap[absolutePath];
-	providerPtr.SetPtr(new CDllFunctionsProvider(GetCString(absolutePath)));
+	providerPtr.SetPtr(new CDllFunctionsProvider(absolutePath));
 	I_ASSERT(providerPtr.IsValid());
 
 	if (!providerPtr->IsValid()){
 		SendErrorMessage(
 					MI_CANNOT_REGISTER,
-					iqt::GetCString(QObject::tr("Cannot register components from package %1").arg(fileInfo.fileName())));
+					QObject::tr("Cannot register components from package %1").arg(fileInfo.fileName()));
 	}
 
 	return *providerPtr;
@@ -467,19 +467,19 @@ CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingReg
 	if (retVal == NULL){
 		m_parent.SendErrorMessage(
 					MI_CANNOT_CREATE_ELEMENT,
-					iqt::GetCString(QObject::tr("Cannot create %1 (%2: %3)").
+					QObject::tr("Cannot create %1 (%2: %3)").
 								arg(elementId.c_str()).
 								arg(address.GetPackageId().c_str()).
-								arg(address.GetComponentId().c_str())));
+								arg(address.GetComponentId().c_str()));
 	}
 
 	return retVal;
 }
 
 
-bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const istd::CString& path, istd::CString& resultPath) const
+bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const
 {
-	istd::CString fullPath = iqt::GetCString(QFileInfo(directory.filePath(iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(path)))).canonicalFilePath());
+	QString fullPath = QFileInfo(directory.filePath(iqt::CFileSystem::GetEnrolledPath(path))).canonicalFilePath();
 	if (m_usedFilesList.find(fullPath) == m_usedFilesList.end()){
 		m_usedFilesList.insert(fullPath);
 

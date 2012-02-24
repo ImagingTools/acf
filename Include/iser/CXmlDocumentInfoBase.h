@@ -7,7 +7,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 
 namespace iser
@@ -35,9 +35,9 @@ public:
 	// static methods
 	static void EncodeXml(const std::string& text, std::string& xmlText);
 	static void DecodeXml(const std::string& xmlText, std::string& text);
-	static void EncodeXml(const std::wstring& text, std::string& xmlText);
-	static void DecodeXml(const std::string& xmlText, std::wstring& text);
-	static const istd::CString& GetElementSeparator();
+	static void EncodeXml(const QString& text, std::string& xmlText);
+	static void DecodeXml(const std::string& xmlText, QString& text);
+	static const QString& GetElementSeparator();
 
 protected:
 	class CharToEntityMap: public std::map<char, std::string>
@@ -52,13 +52,13 @@ protected:
 		EntityToChartMap();
 	};
 
-	class WideCharToEntityMap: public std::map<wchar_t, std::string >
+	class WideCharToEntityMap: public std::map<QChar, std::string >
 	{
 	public:
 		WideCharToEntityMap();
 	};
 
-	class EntityToWideChartMap: public std::map<std::string, wchar_t>
+	class EntityToWideChartMap: public std::map<std::string, QChar>
 	{
 	public:
 		EntityToWideChartMap();
@@ -72,7 +72,7 @@ private:
 	static WideCharToEntityMap s_wideCharToEntityMap;
 	static EntityToWideChartMap s_entityToWideChartMap;
 
-	static istd::CString s_elementSeparator;
+	static QString s_elementSeparator;
 };
 
 

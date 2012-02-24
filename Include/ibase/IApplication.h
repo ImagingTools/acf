@@ -3,7 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include <QString>
 
 
 namespace ibase
@@ -32,7 +32,7 @@ public:
 	/**
 		Gets the command line arguments of this application.
 	*/
-	virtual istd::CString GetHelpText() const = 0;
+	virtual QString GetHelpText() const = 0;
 };
 
 

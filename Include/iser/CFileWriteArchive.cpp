@@ -1,8 +1,8 @@
 #include "iser/CFileWriteArchive.h"
 
 
-// ACF includes
-#include "istd/CString.h"
+// Qt includes
+#include <QString>
 
 
 namespace iser
@@ -10,7 +10,7 @@ namespace iser
 
 
 CFileWriteArchive::CFileWriteArchive(
-			const istd::CString& filePath,
+			const QString& filePath,
 			const IVersionInfo* versionInfoPtr,
 			bool supportTagSkipping,
 			bool serializeHeader)
@@ -18,7 +18,7 @@ CFileWriteArchive::CFileWriteArchive(
 	BaseClass2(filePath),
 	m_supportTagSkipping(supportTagSkipping)
 {
-	m_stream.open(filePath.ToString().c_str(), std::fstream::out | std::fstream::binary);
+	m_stream.open(filePath.toStdString().c_str(), std::fstream::out | std::fstream::binary);
 
 	if (serializeHeader){
 		SerializeAcfHeader();

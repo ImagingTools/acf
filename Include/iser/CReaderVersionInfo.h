@@ -34,7 +34,7 @@ public:
 		\param	version		version number for specified version info ID.
 		\param	description	description of role of specified version info.
 	*/
-	bool InsertVersionId(int id, I_DWORD version, const istd::CString& description);
+	bool InsertVersionId(int id, I_DWORD version, const QString& description);
 	/**
 		Remove single version info.
 		\param	id	ID of version info.
@@ -43,17 +43,17 @@ public:
 
 	// reimplemented (iser::IVersionInfo)
 	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const;
-	virtual istd::CString GetVersionIdDescription(int versionId) const;
+	virtual QString GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
-	virtual istd::CString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
+	virtual QString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
 
 protected:
 	struct VersionIdElement
 	{
 		I_DWORD version;
-		istd::CString description;
+		QString description;
 
-		VersionIdElement(I_DWORD _version, const istd::CString& _description):version(_version), description(_description){}
+		VersionIdElement(I_DWORD _version, const QString& _description):version(_version), description(_description){}
 	};
 
 	const VersionIdElement& GetVersionIdElement(int versionId) const;

@@ -27,13 +27,13 @@ void CVisualRegistryElement::SetName(const std::string& name)
 }
 
 
-const istd::CString& CVisualRegistryElement::GetNote() const
+const QString& CVisualRegistryElement::GetNote() const
 {
 	return m_note;
 }
 
 
-void CVisualRegistryElement::SetNote(const istd::CString& note)
+void CVisualRegistryElement::SetNote(const QString& note)
 {
 	m_note = note;
 }

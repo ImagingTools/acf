@@ -21,7 +21,7 @@ int CSelectionConstraintsComp::GetOptionsCount() const
 }
 
 
-istd::CString CSelectionConstraintsComp::GetOptionName(int index) const
+QString CSelectionConstraintsComp::GetOptionName(int index) const
 {
 	I_ASSERT(m_optionNamesAttrPtr.GetCount() > index);
 	I_ASSERT(index >= 0);
@@ -30,7 +30,7 @@ istd::CString CSelectionConstraintsComp::GetOptionName(int index) const
 }
 
 
-istd::CString CSelectionConstraintsComp::GetOptionDescription(int index) const
+QString CSelectionConstraintsComp::GetOptionDescription(int index) const
 {
 	I_ASSERT(index >= 0);
 
@@ -38,7 +38,7 @@ istd::CString CSelectionConstraintsComp::GetOptionDescription(int index) const
 		return m_optionDescriptionsAttrPtr[index];
 	}
 
-	return istd::CString();
+	return QString();
 }
 
 

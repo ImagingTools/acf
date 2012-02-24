@@ -31,19 +31,19 @@ public:
 	// reimplemented (iser::IFileLoader)
 	virtual bool IsOperationSupported(
 				const istd::IChangeable* dataObjectPtr,
-				const istd::CString* filePathPtr = NULL,
+				const QString* filePathPtr = NULL,
 				int flags = -1,
 				bool beQuiet = true) const;
-	virtual int LoadFromFile(istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
-	virtual int SaveToFile(const istd::IChangeable& data, const istd::CString& filePath = istd::CString()) const;
+	virtual int LoadFromFile(istd::IChangeable& data, const QString& filePath = QString()) const;
+	virtual int SaveToFile(const istd::IChangeable& data, const QString& filePath = QString()) const;
 
 	// reimplemented (iser::IFileTypeInfo)
-	virtual bool GetFileExtensions(istd::CStringList& result, int flags = -1, bool doAppend = false) const;
-	virtual istd::CString GetTypeDescription(const istd::CString* extensionPtr = NULL) const;
+	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 private:
 	I_MULTIREF(iser::IFileLoader, m_slaveLoadersCompPtr);
-	I_ATTR(istd::CString, m_commonDescriptionAttrPtr);
+	I_ATTR(QString, m_commonDescriptionAttrPtr);
 };
 
 

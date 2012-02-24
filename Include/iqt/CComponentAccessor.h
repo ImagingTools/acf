@@ -13,14 +13,14 @@ class CComponentAccessor
 {
 public:
 	explicit CComponentAccessor(
-				const istd::CString& registryFile, 
-				const istd::CString& configFile = istd::CString());
+				const QString& registryFile, 
+				const QString& configFile = QString());
 
 	template <class InterfaceType>
 	InterfaceType* GetComponentInterface(const std::string& componentId = std::string());
 
 private:
-	istd::CString m_registryFile;
+	QString m_registryFile;
 
 	icomp::CCompositeComponent m_composite;
 

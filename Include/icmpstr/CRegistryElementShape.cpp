@@ -181,7 +181,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 	}
 
 	// draw 'note attached' icon:
-	if (!objectPtr->GetNote().IsEmpty()){
+	if (!objectPtr->GetNote().isEmpty()){
 		QRectF iconRect(
 					mainRect.right() - (attributeIconSize + SIDE_OFFSET) * ++iconsCount,
 					mainRect.top(),
@@ -276,7 +276,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		if (managerPtr != NULL){
 			const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(element.GetAddress());
 			if (metaInfoPtr != NULL){
-				toolTip = iqt::GetQString(metaInfoPtr->GetDescription());
+				setToolTip(metaInfoPtr->GetDescription());
 
 				m_componentType = metaInfoPtr->GetComponentType();
 
@@ -299,13 +299,13 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		m_backgroundSelectedColor = QColor(10, 126, 242, 255);
 	}
 
-	const istd::CString& note = element.GetNote();
-	if (!note.IsEmpty()){
+	const QString& note = element.GetNote();
+	if (!note.isEmpty()){
 		if (!toolTip.isEmpty()){
 			toolTip += "\n\nAttached note:\n";
 		}
 
-		toolTip += iqt::GetQString(note).simplified();
+		toolTip += note.simplified();
 	}
 
 	setToolTip(toolTip);
@@ -329,7 +329,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 
-	if ((!element.GetNote().IsEmpty())){
+	if ((!element.GetNote().isEmpty())){
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 

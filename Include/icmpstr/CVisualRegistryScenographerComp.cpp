@@ -117,9 +117,9 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(registryElement.GetAddress());
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			QDir packageDir(iqt::GetQString(managerPtr->GetPackagePath(registryElement.GetAddress().GetPackageId())));
+			QDir packageDir(managerPtr->GetPackagePath(registryElement.GetAddress().GetPackageId().c_str()));
 		
-			istd::CString filePath = iqt::GetCString(packageDir.absoluteFilePath((registryElement.GetAddress().GetComponentId() + ".arx").c_str()));
+			QString filePath = packageDir.absoluteFilePath(QString::fromStdString(registryElement.GetAddress().GetComponentId()) + ".arx");
 
 			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
 
@@ -440,7 +440,7 @@ void CVisualRegistryScenographerComp::UpdateComponentSelection()
 
 void CVisualRegistryScenographerComp::DoRetranslate()
 {
-	m_editMenu.SetName(iqt::GetCString(tr("&Edit")));
+	m_editMenu.SetName(tr("&Edit"));
 	m_cutCommand.SetVisuals(
 				tr("Cut"),
 				tr("Cut"),
@@ -844,7 +844,7 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 				tr("ACF Compositor"),
 				tr("New component name"),
 				QLineEdit::Normal,
-				iqt::GetQString(oldName),
+				QString::fromStdString(oldName),
 				&isOk).toStdString();
 	if (!isOk || newName.empty() || (oldName == newName)){
 		return;
@@ -946,7 +946,7 @@ void CVisualRegistryScenographerComp::OnExportToCode()
 		QString filter = tr("C++ code file (*.cpp)");
 		QString file = QFileDialog::getSaveFileName(NULL, tr("Export registry to code"), "", filter);
 		if (!file.isEmpty()){
-			if (m_registryCodeSaverCompPtr->SaveToFile(*registryPtr, iqt::GetCString(file)) == iser::IFileLoader::StateFailed){
+			if (m_registryCodeSaverCompPtr->SaveToFile(*registryPtr, file) == iser::IFileLoader::StateFailed){
 				QMessageBox::warning(NULL, tr("Error"), tr("Cannot export to file\n%1").arg(file));
 			}
 		}

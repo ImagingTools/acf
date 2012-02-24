@@ -17,7 +17,7 @@ namespace iqt
 {
 
 
-class CNetworkWriteArchive: public QObject, public iser::CMemoryWriteArchive
+class CNetworkWriteArchive: public iser::CMemoryWriteArchive
 {
 	Q_OBJECT
 public:

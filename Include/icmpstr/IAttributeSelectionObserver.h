@@ -2,8 +2,6 @@
 #define icmpstr_IAttributeSelectionObserver_included
 
 
-#include "istd/CString.h"
-
 #include "icomp/IAttributeStaticInfo.h"
 
 #include "icmpstr/icmpstr.h"

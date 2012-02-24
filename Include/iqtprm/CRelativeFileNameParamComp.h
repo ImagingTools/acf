@@ -21,8 +21,8 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::IFileNameParam)
-	virtual const istd::CString& GetPath() const;
-	virtual void SetPath(const istd::CString& path);
+	virtual const QString& GetPath() const;
+	virtual void SetPath(const QString& path);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -30,7 +30,7 @@ public:
 private:
 	I_REF(iprm::IFileNameParam, m_relativeToCompPtr);
 
-	mutable istd::CString m_relativePath;
+	mutable QString m_relativePath;
 };
 
 

@@ -46,14 +46,14 @@ protected:
 	/**
 		Generate formatted message text for the output.
 	*/
-	virtual istd::CString GenerateMessageText(const ibase::IMessage& message) const;
+	virtual QString GenerateMessageText(const ibase::IMessage& message) const;
 
 	// abstract methods
 
 	/**
 		Write a text line to the output stream.
 	*/
-	virtual void WriteText(const istd::CString& text) = 0;
+	virtual void WriteText(const QString& text) = 0;
 
 	/**
 		Make new line.

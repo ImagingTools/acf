@@ -33,7 +33,7 @@ public:
 	typedef iser::CFileArchiveInfo BaseClass2;
 
 	CXmlFileWriteArchive(
-				const istd::CString& filePath = "",
+				const QString& filePath = "",
 				const iser::IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const iser::CArchiveTag& rootTag = s_acfRootTag);
@@ -41,7 +41,7 @@ public:
 
 	bool Flush();
 
-	bool OpenDocument(const istd::CString& filePath);
+	bool OpenDocument(const QString& filePath);
 
 	// reimplemented (iser::IArchive)
 	virtual bool IsTagSkippingSupported() const;
@@ -61,7 +61,7 @@ public:
 	virtual bool Process(float& value);
 	virtual bool Process(double& value);
 	virtual bool Process(std::string& value);
-	virtual bool Process(istd::CString& value);
+	virtual bool Process(QString& value);
 	virtual bool ProcessData(void* dataPtr, int size);
 
 protected:

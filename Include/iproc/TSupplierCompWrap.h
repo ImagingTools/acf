@@ -108,7 +108,7 @@ protected:
 	};
 
 private:
-	I_ATTR(istd::CString, m_diagnosticNameAttrPtr);
+	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 

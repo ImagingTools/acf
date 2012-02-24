@@ -32,7 +32,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 	I_REF(iqtgui::IGuiObject, m_slaveGuiCompPtr);
-	I_ATTR(istd::CString, m_titleAttrPtr);
+	I_ATTR(QString, m_titleAttrPtr);
 
 	istd::TDelPtr<QMainWindow> m_mainWindowPtr;
 };

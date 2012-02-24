@@ -31,10 +31,10 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpInfoProvider)
-	virtual double GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual double GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
 	// reimplemented (idoc::IHelpViewer)
-	virtual void ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr);
+	virtual void ShowHelp(const QString& contextText, const istd::IPolymorphic* contextObjectPtr);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiShown();

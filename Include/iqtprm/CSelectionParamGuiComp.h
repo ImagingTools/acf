@@ -111,8 +111,8 @@ private:
 	void UpdateDescriptionFrame();
 
 private:
-	I_ATTR(istd::CString, m_optionsLabelAttrPtr);
-	I_ATTR(istd::CString, m_infoLabelAttrPtr);
+	I_ATTR(QString, m_optionsLabelAttrPtr);
+	I_ATTR(QString, m_infoLabelAttrPtr);
 	I_ATTR(int, m_uiModeAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
 	I_REF(iqtgui::IIconProvider, m_infoIconProviderCompPtr);

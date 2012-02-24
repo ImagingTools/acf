@@ -5,8 +5,8 @@ namespace iqtgui
 {
 
 
-CHierarchicalCommand::CHierarchicalCommand(const istd::CString& name, int priority, int staticFlags, int groupId)
-:	BaseClass(iqt::GetQString(name), NULL),
+CHierarchicalCommand::CHierarchicalCommand(const QString& name, int priority, int staticFlags, int groupId)
+:	BaseClass(name, NULL),
 	m_priority(priority),
 	m_staticFlags(0),
 	m_groupId(groupId)
@@ -103,7 +103,7 @@ void CHierarchicalCommand::JoinLinkFrom(const ibase::IHierarchicalCommand* rootP
 
 void CHierarchicalCommand::SetVisuals(const QString& name, const QString& shortName, const QString& description, const QIcon& icon)
 {
-	SetName(iqt::GetCString(name));
+	SetName(name);
 	BaseClass::setIconText(shortName);
 	BaseClass::setStatusTip(description);
 	BaseClass::setToolTip(description);
@@ -163,9 +163,9 @@ ibase::ICommand* CHierarchicalCommand::GetChild(int index) const
 
 // reimplemented (iprm::INameParam)
 
-void CHierarchicalCommand::SetName(const istd::CString& name)
+void CHierarchicalCommand::SetName(const QString& name)
 {
-	BaseClass::setText(iqt::GetQString(name));
+	BaseClass::setText(name);
 	BaseClass3::SetName(name);
 }
 
@@ -199,14 +199,14 @@ void CHierarchicalCommand::OnTriggered()
 
 int CHierarchicalCommand::FindTheSameCommand(const ibase::IHierarchicalCommand& command) const
 {
-	const istd::CString& elementName = command.GetName();
+	const QString& elementName = command.GetName();
 
 	int childsCount = m_childs.GetCount();
 	for (int i = 0; i < childsCount; ++i){
 		CHierarchicalCommand* childPtr = m_childs.GetAt(i);
 		I_ASSERT(childPtr != NULL);
 
-		if (childPtr->GetName().IsEqual(elementName, istd::CString::CF_CASE_INSENSITIVE)){
+		if (childPtr->GetName().compare(elementName, Qt::CaseInsensitive) == 0){
 			return i;
 		}
 	}

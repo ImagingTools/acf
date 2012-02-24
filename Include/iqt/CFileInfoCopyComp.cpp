@@ -20,14 +20,14 @@ namespace iqt
 // reimplemented (ibase::IFileConvertCopy)
 
 bool CFileInfoCopyComp::ConvertFile(
-			const istd::CString& inputFilePath,
-			const istd::CString& outputFilePath,
+			const QString& inputFilePath,
+			const QString& outputFilePath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
-	QString inputFileName = iqt::GetQString(inputFilePath);
-	QString outputFileName = iqt::GetQString(outputFilePath);
+	QString inputFileName = inputFilePath;
+	QString outputFileName = outputFilePath;
 
-	SendInfoMessage(MI_FILE_INFO, iqt::GetCString(QObject::tr("Processing file %1 to %2").arg(inputFileName).arg(outputFileName)));
+	SendInfoMessage(MI_FILE_INFO, QObject::tr("Processing file %1 to %2").arg(inputFileName).arg(outputFileName));
 
 	if (!*m_useSubstitutionAttrPtr && !m_licensePathAttrPtr.IsValid()){
 		QFile::remove(outputFileName);
@@ -37,13 +37,13 @@ bool CFileInfoCopyComp::ConvertFile(
 	QFile inputFile(inputFileName);
 	QFile outputFile(outputFileName);
 	if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-		SendWarningMessage(MI_INPUT_OPEN, iqt::GetCString(QObject::tr("Opening input file failed (%1)").arg(inputFileName)));
+		SendWarningMessage(MI_INPUT_OPEN, QObject::tr("Opening input file failed (%1)").arg(inputFileName));
 
 		return false;
 	}
 
 	if (!outputFile.open(QIODevice::WriteOnly  | QIODevice::Text)){
-		SendWarningMessage(MI_OUTPUT_OPEN, iqt::GetCString(QObject::tr("Opening output file failed (%1)").arg(outputFileName)));
+		SendWarningMessage(MI_OUTPUT_OPEN, QObject::tr("Opening output file failed (%1)").arg(outputFileName));
 
 		return false;
 	}
@@ -52,11 +52,11 @@ bool CFileInfoCopyComp::ConvertFile(
 	QTextStream outputStream(&outputFile);
 
 	if (m_licensePathAttrPtr.IsValid()){
-		QString licenseFileName = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(*m_licensePathAttrPtr));
+		QString licenseFileName = iqt::CFileSystem::GetEnrolledPath(*m_licensePathAttrPtr);
 
 		QFile licenseFile(licenseFileName);
 		if (!licenseFile.open(QIODevice::ReadOnly)){
-			SendWarningMessage(MI_LICENSE_OPEN, iqt::GetCString(QObject::tr("Opening license file failed (%1)").arg(licenseFileName)));
+			SendWarningMessage(MI_LICENSE_OPEN, QObject::tr("Opening license file failed (%1)").arg(licenseFileName));
 
 			return false;
 		}
@@ -77,7 +77,7 @@ bool CFileInfoCopyComp::ConvertFile(
 			for (int beginIndex; (beginIndex = line.indexOf("$", endIndex + 1)) >= 0;){
 				endIndex = line.indexOf("$", beginIndex + 1);
 				if (endIndex < 0){
-					SendWarningMessage(MI_BAD_TAG, iqt::GetCString(QObject::tr("%1(%2) : Substitution tag is uncomplete").arg(inputFileName).arg(lineCounter)));
+					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Substitution tag is uncomplete").arg(inputFileName).arg(lineCounter));
 
 					break;
 				}
@@ -90,7 +90,7 @@ bool CFileInfoCopyComp::ConvertFile(
 					endIndex += substituted.length() - (endIndex - beginIndex + 1);
 				}
 				else{
-					SendWarningMessage(MI_BAD_TAG, iqt::GetCString(QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag)));
+					SendWarningMessage(MI_BAD_TAG, QObject::tr("%1(%2) : Cannot process tag '%3'").arg(inputFileName).arg(lineCounter).arg(substitutionTag));
 				}
 			}
 		}
@@ -139,7 +139,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 						return true;
 					}
 					else{
-						result = iqt::GetQString(versionInfo.GetEncodedVersionName(versionId, versionNumber));
+						result = versionInfo.GetEncodedVersionName(versionId, versionNumber);
 						if (paramTag == acfVersionTag){
 							return true;
 						}
@@ -157,32 +157,32 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 	else{
 		if (m_applicationInfoCompPtr.IsValid()){
 			if (tag == acfCompanyNameTag){
-				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME));
+				result = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
 
 				return true;
 			}
 			else if (tag == acfProductNameTag){
-				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME));
+				result = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME);
 
 				return true;
 			}
 			else if (tag == acfApplicationNameTag){
-				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME));
+				result = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
 
 				return true;
 			}
 			else if (tag == acfApplicationSubnameTag){
-				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME));
+				result = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME);
 
 				return true;
 			}
 			else if (tag == acfApplicationTypeTag){
-				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE));
+				result = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE);
 
 				return true;
 			}
 			else if (tag == acfLegalCopyrightTag){
-				result = iqt::GetQString(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT));
+				result = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT);
 
 				return true;
 			}
@@ -197,7 +197,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 						return true;
 					}
 					else{
-						result = iqt::GetQString(versionInfo.GetEncodedVersionName(versionId, versionNumber));
+						result = versionInfo.GetEncodedVersionName(versionId, versionNumber);
 						if (tag == acfVersionTag){
 							return true;
 						}
@@ -221,8 +221,8 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 
 		int userTagsCount = istd::Min(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
 		for (int userTagIndex = 0; userTagIndex < userTagsCount; ++userTagIndex){
-			if (tag == iqt::GetQString(m_userSubstitutionTagsAttrPtr[userTagIndex])){
-				result = iqt::GetQString(m_userSubstitutionValuesAttrPtr[userTagIndex]);
+			if (tag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
+				result = m_userSubstitutionValuesAttrPtr[userTagIndex];
 
 				return true;
 			}

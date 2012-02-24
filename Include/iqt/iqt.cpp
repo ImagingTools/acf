@@ -10,56 +10,6 @@ namespace iqt
 {
 
 
-QString GetQString(const istd::CString& string)
-{
-#ifdef NO_QT_STL_SUPPORT
-	return QString::fromUtf16((const I_WORD*)string.c_str());
-#else
-	return QString::fromStdWString(string);
-#endif
-}
-
-
-istd::CString GetCString(const QString& string)
-{
-#ifdef NO_QT_STL_SUPPORT
-	return istd::CString((const wchar_t*)string.utf16());
-#else
-	return istd::CString(string.toStdWString());
-#endif
-}
-
-
-QStringList GetQStringList(const istd::CStringList& stringList)
-{
-	QStringList output;
-
-	for (		istd::CStringList::const_iterator begin = stringList.begin(); 
-				begin != stringList.end(); 
-				begin++){
-		
-		output.push_back(GetQString(*begin));
-	}
-
-	return output;
-}
-
-
-istd::CStringList GetCStringList(const QStringList& stringList)
-{
-	istd::CStringList output;
-
-	for (		QStringList::const_iterator begin = stringList.begin(); 
-				begin != stringList.end(); 
-				begin++){
-
-		output.push_back(GetCString(*begin));
-	}
-
-	return output;
-}
-
-
 QSize GetQSize(const istd::CIndex2d& size)
 {
 	return QSize(size.GetX(), size.GetY());
@@ -143,7 +93,7 @@ isys::CFileInfo GetCFileInfo(const QFileInfo& fileInfo)
 	modificationTime.FromCTime(fileInfo.lastModified().toTime_t());
 
 	return isys::CFileInfo(
-				iqt::GetCString(fileInfo.absoluteFilePath()),
+				fileInfo.absoluteFilePath(),
 				fileInfo.permissions(),
 				modificationTime);
 }
@@ -151,7 +101,7 @@ isys::CFileInfo GetCFileInfo(const QFileInfo& fileInfo)
 
 QFileInfo GetQFileInfo(const isys::CFileInfo& fileInfo)
 {
-	return QFileInfo(iqt::GetQString(fileInfo.GetFilePath()));
+	return QFileInfo(fileInfo.GetFilePath());
 }
 
 

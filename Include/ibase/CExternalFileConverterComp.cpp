@@ -1,6 +1,10 @@
 #include "ibase/CExternalFileConverterComp.h"
 
 
+// Qt includes
+#include <QStringList>
+
+
 namespace ibase
 {
 
@@ -8,8 +12,8 @@ namespace ibase
 // reimplemented (ibase::IFileConvertCopy)
 
 bool CExternalFileConverterComp::ConvertFile(
-			const istd::CString& inputFilePath,
-			const istd::CString& outputFilePath,
+			const QString& inputFilePath,
+			const QString& outputFilePath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	if (!m_executablePathCompPtr.IsValid()){
@@ -30,7 +34,7 @@ bool CExternalFileConverterComp::ConvertFile(
 		return false;
 	}
 
-	istd::CStringList arguments;
+	QStringList arguments;
 
 	// setup command line arguments:
 	if (!m_processArgumentsAttrPtr.IsValid()){
@@ -38,13 +42,13 @@ bool CExternalFileConverterComp::ConvertFile(
 		arguments.push_back(outputFilePath);
 	}
 	else{
-		istd::CString applicationArguments = *m_processArgumentsAttrPtr;
+		QString applicationArguments = *m_processArgumentsAttrPtr;
 
-		arguments = applicationArguments.Split(" ", false);
+		arguments = applicationArguments.split(" ");
 
 		for (int argIndex = 0; argIndex < int(arguments.size()); argIndex++){
-			arguments[argIndex].Replace("$(Input)", inputFilePath);
-			arguments[argIndex].Replace("$(Output)", outputFilePath);
+			arguments[argIndex].replace("$(Input)", inputFilePath);
+			arguments[argIndex].replace("$(Output)", outputFilePath);
 		}
 	}
 

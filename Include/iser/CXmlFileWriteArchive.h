@@ -30,7 +30,7 @@ public:
 	typedef CFileArchiveInfo BaseClass2;
 
 	explicit CXmlFileWriteArchive(
-				const istd::CString& filePath,
+				const QString& filePath,
 				const IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const CArchiveTag& rootTag = s_acfRootTag);

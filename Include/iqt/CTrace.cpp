@@ -27,12 +27,12 @@ CTrace::CTrace()
 void CTrace::LogMessage(
 			istd::TraceLevel level,
 			const std::string& groupId,
-			const istd::CString& message,
+			const QString& message,
 			const std::string& fileName,
 			int line) const
 {
 	if (IsTraceEnabled(level, groupId)){
-		QString traceMessage = iqt::GetQString(message);
+		QString traceMessage = message;
 		if (!fileName.empty() && line >= 0){
 			QString fileMessage = QString ("%1, Line: %2: ").arg(fileName.c_str()).arg(line);
 

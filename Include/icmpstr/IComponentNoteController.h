@@ -27,12 +27,12 @@ public:
 	/**
 		Get the note text to the component with the given name \c componentName.
 	*/
-	virtual istd::CString GetComponentNote(const std::string& componentName) = 0;
+	virtual QString GetComponentNote(const std::string& componentName) = 0;
 
 	/**
 		Add a note \c componentNote to the component with the given name \c componentName.
 	*/
-	virtual void SetComponentNote(const std::string& componentName, const istd::CString& componentNote) = 0;
+	virtual void SetComponentNote(const std::string& componentName, const QString& componentNote) = 0;
 };
 
 

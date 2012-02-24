@@ -2,9 +2,16 @@
 #define idoc_IDocumentTypesInfo_included
 
 
+// STL includes
+#include <vector>
+
+
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
 
 #include "iser/IFileTypeInfo.h"
 
@@ -56,7 +63,7 @@ public:
 		Get human readable name of some document type ID.
 		\param	documentTypeId	ID of document type as returned by \c GetDocumentTypeIds().
 	*/
-	virtual istd::CString GetDocumentTypeName(const std::string& documentTypeId) const = 0;
+	virtual QString GetDocumentTypeName(const std::string& documentTypeId) const = 0;
 
 	/**
 		Get file type information object for some selected document type.
@@ -67,14 +74,14 @@ public:
 	/**
 		Get list of supported document ID's can be created for specified file.
 	*/
-	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const = 0;
+	virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const = 0;
 
 	/**
 		Return default directory for specified document type.
 		\param	sugestedDir			template directory sugested by user.
 		\param	documentTypeIdPtr	optional ID of document type.
 	*/
-	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const = 0;
+	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const = 0;
 };
 
 

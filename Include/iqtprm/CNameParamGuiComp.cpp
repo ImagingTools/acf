@@ -23,7 +23,7 @@ void CNameParamGuiComp::UpdateModel() const
 
 	iprm::INameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		objectPtr->SetName(iqt::GetCString(NameEdit->text()));
+		objectPtr->SetName(NameEdit->text());
 	}
 }
 
@@ -36,7 +36,7 @@ void CNameParamGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	iprm::INameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		NameEdit->setText(iqt::GetQString(objectPtr->GetName()));
+		NameEdit->setText(objectPtr->GetName());
 	}
 }
 
@@ -69,7 +69,7 @@ void CNameParamGuiComp::OnGuiCreated()
 	if (m_labelAttrPtr.IsValid()){
 		QLabel* selectorLabelPtr = new QLabel(NameFrame);
 		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-		selectorLabelPtr->setText(iqt::GetQString(*m_labelAttrPtr));
+		selectorLabelPtr->setText(*m_labelAttrPtr);
 
 		selectorLayoutPtr->addWidget(selectorLabelPtr);
 	}

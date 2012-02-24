@@ -27,15 +27,15 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IHelpFileProvider)
-	virtual double GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
-	virtual istd::CString GetHelpFilePath(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual double GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual QString GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
 protected:
-	virtual istd::CClassInfo CalcClassInfo(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
+	virtual istd::CClassInfo CalcClassInfo(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 	QString CalcFilePath(const istd::CClassInfo& classInfo) const;
 
 private:
-	I_ATTR(istd::CString, m_doxygenDirectoryAttrPtr);
+	I_ATTR(QString, m_doxygenDirectoryAttrPtr);
 	I_REF(idoc::IHelpFileProvider, m_slaveProvider);
 };
 

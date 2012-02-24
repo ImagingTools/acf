@@ -7,12 +7,12 @@ namespace icomp
 
 // public methods
 
-CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const istd::CString& metaDescription)
+CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const QString& metaDescription)
 {
 	m_metaValuesMap.clear();
 	m_keywords.clear();
 
-	istd::CString currentKey;
+	QString currentKey;
 	int wordBegin = 0;
 	int quoteCount = 0;
 	int apostrophCount = 0;
@@ -20,7 +20,7 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const istd::C
 	int descriptionLength = int(metaDescription.length());
 	for (int i = 0; i <= descriptionLength; ++i){
 		if (i < descriptionLength){
-			istd::CString::value_type ch = metaDescription[i];
+			QString::value_type ch = metaDescription[i];
 
 			if (ch == '\''){
 				if (apostrophCount <= 0){
@@ -44,7 +44,7 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const istd::C
 			}
 			else if (ch == '='){
 				if (i > wordBegin){
-					currentKey = metaDescription.substr(wordBegin, i - wordBegin);
+					currentKey = metaDescription.mid(wordBegin, i - wordBegin);
 				}
 
 				wordBegin = i + 1;
@@ -56,9 +56,9 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const istd::C
 		}
 
 		if (i > wordBegin){
-			istd::CString keyword = metaDescription.substr(wordBegin, i - wordBegin);
+			QString keyword = metaDescription.mid(wordBegin, i - wordBegin);
 			m_keywords.push_back(keyword);
-			if (!currentKey.IsEmpty()){
+			if (!currentKey.isEmpty()){
 				if (m_metaValuesMap.find(currentKey) == m_metaValuesMap.end()){
 					m_metaKeys.push_back(currentKey);
 				}
@@ -79,21 +79,21 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const istd::C
 }
 
 
-const istd::CStringList& CComponentMetaDescriptionEncoder::GetMetaKeys() const
+const QStringList& CComponentMetaDescriptionEncoder::GetMetaKeys() const
 {
 	return m_metaKeys;
 }
 
 
-const istd::CStringList& CComponentMetaDescriptionEncoder::GetValues(const istd::CString& key) const
+const QStringList& CComponentMetaDescriptionEncoder::GetValues(const QString& key) const
 {
-	if (!key.IsEmpty()){
+	if (!key.isEmpty()){
 		MetaValuesMap::const_iterator foundKeyIter = m_metaValuesMap.find(key);
 		if (foundKeyIter != m_metaValuesMap.end()){
 			return foundKeyIter->second;
 		}
 		else{
-			static istd::CStringList emptyList;
+			static QStringList emptyList;
 
 			return emptyList;
 		}
@@ -104,7 +104,7 @@ const istd::CStringList& CComponentMetaDescriptionEncoder::GetValues(const istd:
 }
 
 
-const istd::CStringList& CComponentMetaDescriptionEncoder::GetUnassignedKeywords() const
+const QStringList& CComponentMetaDescriptionEncoder::GetUnassignedKeywords() const
 {
 	return m_unassignedKeywords;
 }

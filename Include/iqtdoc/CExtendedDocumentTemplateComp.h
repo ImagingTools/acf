@@ -25,7 +25,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IDocumentTemplate)
-	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
+	virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const;
 
 protected:
 	// reimplemented (idoc::CSingleDocumentTemplateComp)

@@ -11,7 +11,7 @@ void CReaderVersionInfo::Reset()
 }
 
 
-bool CReaderVersionInfo::InsertVersionId(int id, I_DWORD version, const istd::CString& description)
+bool CReaderVersionInfo::InsertVersionId(int id, I_DWORD version, const QString& description)
 {
 	VersionIdElement element(version, description);
 
@@ -45,7 +45,7 @@ bool CReaderVersionInfo::GetVersionNumber(int versionId, I_DWORD& result) const
 }
 
 
-istd::CString CReaderVersionInfo::GetVersionIdDescription(int versionId) const
+QString CReaderVersionInfo::GetVersionIdDescription(int versionId) const
 {
 	const VersionIdElement& element = GetVersionIdElement(versionId);
 
@@ -67,7 +67,7 @@ CReaderVersionInfo::VersionIds CReaderVersionInfo::GetVersionIds() const
 }
 
 
-istd::CString CReaderVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
+QString CReaderVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
 {
 	return "";
 }

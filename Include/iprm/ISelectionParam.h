@@ -2,8 +2,11 @@
 #define iprm_ISelectionParam_included
 
 
-#include "istd/CString.h"
+// Qt includes
+#include <QString>
 
+
+// ACF includes
 #include "iser/ISerializable.h"
 
 

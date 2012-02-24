@@ -7,7 +7,7 @@ namespace iqtdoc
 
 // reimplemented (idoc::IHelpInfoProvider)
 
-double CHtmlHelpGuiComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CHtmlHelpGuiComp::GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	if (m_helpFileProviderCompPtr.IsValid()){
 		return m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr);
@@ -19,15 +19,15 @@ double CHtmlHelpGuiComp::GetHelpQuality(const istd::CString& contextText, const 
 
 // reimplemented (idoc::IHelpViewer)
 
-void CHtmlHelpGuiComp::ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr)
+void CHtmlHelpGuiComp::ShowHelp(const QString& contextText, const istd::IPolymorphic* contextObjectPtr)
 {
 	QTextBrowser* editorPtr = GetQtWidget();
 	if (		(editorPtr != NULL) &&
 				m_helpFileProviderCompPtr.IsValid() &&
 				(m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr) > 0)){
-		istd::CString filePath = m_helpFileProviderCompPtr->GetHelpFilePath(contextText, contextObjectPtr);
+		QString filePath = m_helpFileProviderCompPtr->GetHelpFilePath(contextText, contextObjectPtr);
 
-		QUrl url = QUrl::fromLocalFile(iqt::GetQString(filePath));
+		QUrl url = QUrl::fromLocalFile(filePath);
 
 		if (editorPtr->isVisible()){
 			editorPtr->setSource(url);

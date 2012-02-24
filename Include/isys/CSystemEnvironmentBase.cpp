@@ -11,9 +11,9 @@ namespace isys
 
 // reimplemented (isys::ISystemEnvironment)
 
-istd::CString CSystemEnvironmentBase::GetSystemVariableValue(const istd::CString& variableName) const
+QString CSystemEnvironmentBase::GetSystemVariableValue(const QString& variableName) const
 {
-	return istd::CString(::getenv(variableName.ToString().c_str()));
+	return QString(::getenv(variableName.toStdString().c_str()));
 }
 
 

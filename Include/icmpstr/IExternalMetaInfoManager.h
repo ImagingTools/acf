@@ -3,7 +3,7 @@
 
 
 #include "istd/IPolymorphic.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "icomp/CComponentAddress.h"
 
@@ -18,12 +18,12 @@ public:
 	/**
 		Get path of package info directory.
 	*/
-	virtual istd::CString GetPackageInfoPath(const std::string& packageId) const = 0;
+	virtual QString GetPackageInfoPath(const std::string& packageId) const = 0;
 
 	/**
 		Get path of component info directory.
 	*/
-	virtual istd::CString GetComponentInfoPath(const icomp::CComponentAddress& address) const = 0;
+	virtual QString GetComponentInfoPath(const icomp::CComponentAddress& address) const = 0;
 };
 
 

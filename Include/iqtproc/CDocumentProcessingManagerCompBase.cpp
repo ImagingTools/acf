@@ -57,11 +57,11 @@ void CDocumentProcessingManagerCompBase::OnComponentCreated()
 	QString menuName = tr("Processing");
 
 	if (m_menuNameAttrPtr.IsValid()){
-		menuName = iqt::GetQString(*m_menuNameAttrPtr);
+		menuName = *m_menuNameAttrPtr;
 	}
 
-	if (m_commandNameAttrPtr.IsValid() && !(*m_commandNameAttrPtr).IsEmpty()){
-		QString commandName = iqt::GetQString(*m_commandNameAttrPtr);
+	if (m_commandNameAttrPtr.IsValid() && !(*m_commandNameAttrPtr).isEmpty()){
+		QString commandName = *m_commandNameAttrPtr;
 
 		m_processingCommand.SetVisuals(commandName, commandName, commandName);
 		m_rootCommands.SetVisuals(menuName, menuName, tr("Document processing actions"));

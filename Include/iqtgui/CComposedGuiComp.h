@@ -8,7 +8,7 @@
 
 
 // ACF includes
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/IFileLoader.h"
 
@@ -65,10 +65,10 @@ private:
 
 private:
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
-	I_MULTIATTR(istd::CString, m_namesAttrPtr);
+	I_MULTIATTR(QString, m_namesAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
-	I_ATTR(istd::CString, m_settingsKeyAttrPtr);
+	I_ATTR(QString, m_settingsKeyAttrPtr);
 
 	QSplitter* m_splitterPtr;
 };

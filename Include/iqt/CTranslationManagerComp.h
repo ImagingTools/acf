@@ -61,8 +61,8 @@ public:
 	// reimplemented (iprm::ISelectionConstraints)
 	virtual int GetConstraintsFlags() const;
 	virtual int GetOptionsCount() const;
-	virtual istd::CString GetOptionName(int index) const;
-	virtual istd::CString GetOptionDescription(int index) const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
 	virtual std::string GetOptionId(int index) const;
 
 private:
@@ -80,9 +80,9 @@ private:
 	};
 
 private:
-	I_ATTR(istd::CString, m_translationFilePathAttrPtr);
-	I_ATTR(istd::CString, m_translationFilePrefixAttrPtr);
-	I_MULTIATTR(istd::CString, m_languagesAttrPtr);
+	I_ATTR(QString, m_translationFilePathAttrPtr);
+	I_ATTR(QString, m_translationFilePrefixAttrPtr);
+	I_MULTIATTR(QString, m_languagesAttrPtr);
 	I_REF(iqt::ITranslationManager, m_slaveTranslationManagerCompPtr);
 	I_REF(iprm::ISelectionParam, m_languageSelectionCompPtr);
 	I_REF(imod::IModel, m_languageSelectionModelCompPtr);

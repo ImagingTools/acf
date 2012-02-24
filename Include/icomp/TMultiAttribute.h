@@ -209,7 +209,7 @@ std::string TMultiAttribute<Value>::GetTypeName()
 typedef TMultiAttribute<int> CMultiIntAttribute;
 typedef TMultiAttribute<double> CMultiDoubleAttribute;
 typedef TMultiAttribute<bool> CMultiBoolAttribute;
-typedef TMultiAttribute<istd::CString> CMultiStringAttribute;
+typedef TMultiAttribute<QString> CMultiStringAttribute;
 typedef TMultiAttribute<std::string> CMultiStdStringAttribute;
 
 

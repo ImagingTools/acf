@@ -24,8 +24,8 @@ CSelectableFileConverterComp::CSelectableFileConverterComp()
 // reimplemented (ibase::IFileConvertCopy)
 
 bool CSelectableFileConverterComp::ConvertFile(
-			const istd::CString& inputFilePath,
-			const istd::CString& outputFilePath,
+			const QString& inputFilePath,
+			const QString& outputFilePath,
 			const iprm::IParamsSet* /*paramsPtr*/) const
 {
 	if (m_selectedOptionIndex >= 0){
@@ -116,7 +116,7 @@ int CSelectableFileConverterComp::GetOptionsCount() const
 }
 
 
-istd::CString CSelectableFileConverterComp::GetOptionName(int index) const
+QString CSelectableFileConverterComp::GetOptionName(int index) const
 {
 	I_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
 
@@ -124,13 +124,13 @@ istd::CString CSelectableFileConverterComp::GetOptionName(int index) const
 }
 
 
-istd::CString CSelectableFileConverterComp::GetOptionDescription(int index) const
+QString CSelectableFileConverterComp::GetOptionDescription(int index) const
 {
 	if (index >= 0 && index < m_slaveConverterDescriptionsAttrPtr.GetCount()){
 		return m_slaveConverterDescriptionsAttrPtr[index];
 	}
 
-	return istd::CString();
+	return QString();
 }
 
 

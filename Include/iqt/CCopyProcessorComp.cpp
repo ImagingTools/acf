@@ -66,14 +66,14 @@ bool CCopyProcessorComp::CopyFileTree(
 			int& counter) const
 {
 	if (!inputDir.exists()){
-		SendWarningMessage(MI_NO_INPUT, iqt::GetCString(tr("No input directory %1").arg(inputDir.absolutePath())));
+		SendWarningMessage(MI_NO_INPUT, tr("No input directory %1").arg(inputDir.absolutePath()));
 
 		return false;
 	}
 
 	outputDir.mkpath(outputDir.absolutePath());
 	if (!outputDir.exists()){
-		SendWarningMessage(MI_NO_OUTPUT, iqt::GetCString(tr("No output directory %1").arg(outputDir.absolutePath())));
+		SendWarningMessage(MI_NO_OUTPUT, tr("No output directory %1").arg(outputDir.absolutePath()));
 
 		return false;
 	}
@@ -96,7 +96,7 @@ bool CCopyProcessorComp::CopyFileTree(
 
 		I_ASSERT(m_fileCopyCompPtr.IsValid());	// it should be checked before whole process started
 
-		if (m_fileCopyCompPtr->ConvertFile(iqt::GetCString(inputFilePath), iqt::GetCString(outputFilePath))){
+		if (m_fileCopyCompPtr->ConvertFile(inputFilePath, outputFilePath)){
 			counter++;
 		}
 	}
@@ -150,38 +150,38 @@ void CCopyProcessorComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (!m_fileCopyCompPtr.IsValid()){
-		SendErrorMessage(MI_END_STATUS, iqt::GetCString(tr("File copy provider is not present")));
+		SendErrorMessage(MI_END_STATUS, tr("File copy provider is not present"));
 
 		return;
 	}
 
 	QStringList filters;
 	for (int filterIndex = 0; filterIndex < m_filtersAttrPtr.GetCount(); ++filterIndex){
-		const istd::CString& filter = m_filtersAttrPtr[filterIndex];
+		const QString& filter = m_filtersAttrPtr[filterIndex];
 
-		filters << iqt::GetQString(filter);
+		filters << filter;
 	}
 
 	QStringList excludeFilters;
 	for (int excludeIndex = 0; excludeIndex < m_excludeFiltersAttrPtr.GetCount(); ++excludeIndex){
-		const istd::CString& excludeFilter = m_excludeFiltersAttrPtr[excludeIndex];
+		const QString& excludeFilter = m_excludeFiltersAttrPtr[excludeIndex];
 
-		excludeFilters << iqt::GetQString(excludeFilter);
+		excludeFilters << excludeFilter;
 	}
 
 	int counter = 0;
 	if (CopyFileTree(
-				iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(*m_inputPathAttrPtr)),
-				iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(*m_outputPathAttrPtr)),
+				iqt::CFileSystem::GetEnrolledPath(*m_inputPathAttrPtr),
+				iqt::CFileSystem::GetEnrolledPath(*m_outputPathAttrPtr),
 				filters,
 				excludeFilters,
 				*m_recursionDepthAttrPtr,
 				counter)){
 
-		SendInfoMessage(MI_END_STATUS, iqt::GetCString(tr("Success: %1 files copied").arg(counter)));
+		SendInfoMessage(MI_END_STATUS, tr("Success: %1 files copied").arg(counter));
 	}
 	else{
-		SendErrorMessage(MI_END_STATUS, iqt::GetCString(tr("Failed: %1 files copied").arg(counter)));
+		SendErrorMessage(MI_END_STATUS, tr("Failed: %1 files copied").arg(counter));
 	}
 }
 

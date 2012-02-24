@@ -33,7 +33,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_ATTR(istd::CString, m_defaultNameAttrPtr);
+	I_ATTR(QString, m_defaultNameAttrPtr);
 };
 
 

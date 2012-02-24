@@ -42,7 +42,7 @@ void CTabContainerGuiComp::OnGuiCreated()
 	if (m_tabNamesAttrPtr.IsValid()){
 		int tabCount = istd::Min(m_tabNamesAttrPtr.GetCount(), m_slaveWidgetsCompPtr.GetCount());
 		for (int tabIndex = 0; tabIndex < tabCount; tabIndex++){
-			QString tabName = iqt::GetQString(m_tabNamesAttrPtr[tabIndex]);
+			QString tabName = m_tabNamesAttrPtr[tabIndex];
 
 			iqtgui::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[tabIndex];
 			if ((guiPtr == NULL) || !guiPtr->CreateGui(widgetPtr)){

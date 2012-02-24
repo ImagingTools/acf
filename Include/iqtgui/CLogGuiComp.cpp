@@ -45,12 +45,12 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const ibase::IMessage& message)
 		QString date = dateTime.toString();
 
 		treeItemPtr->setText(CT_TIME, date);
-		treeItemPtr->setText(CT_MESSAGE, iqt::GetQString(message.GetText()));
-		treeItemPtr->setText(CT_SOURCE, iqt::GetQString(message.GetSource()));
+		treeItemPtr->setText(CT_MESSAGE, message.GetText());
+		treeItemPtr->setText(CT_SOURCE, message.GetSource());
 
-		treeItemPtr->setToolTip(CT_TIME, iqt::GetQString(message.GetText()));
-		treeItemPtr->setToolTip(CT_MESSAGE, iqt::GetQString(message.GetText()));
-		treeItemPtr->setToolTip(CT_SOURCE, iqt::GetQString(message.GetText()));
+		treeItemPtr->setToolTip(CT_TIME, message.GetText());
+		treeItemPtr->setToolTip(CT_MESSAGE, message.GetText());
+		treeItemPtr->setToolTip(CT_SOURCE, message.GetText());
 		treeItemPtr->setData(0, DR_MESSAGE_ID, QVariant::fromValue((void*)&message));
 		treeItemPtr->setData(0, DR_CATEGORY, message.GetCategory());
 

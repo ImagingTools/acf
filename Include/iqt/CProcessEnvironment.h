@@ -20,12 +20,12 @@ public:
 	// reimplemented (isys::IProcessEnvironment)
 	virtual int GetMainThreadId() const;
 	virtual void Sleep(double seconds);
-	virtual istd::CString GetTempDirPath() const;
-	virtual istd::CString GetWorkingDirectory() const;
-	virtual istd::CStringList GetApplicationArguments() const;
-	virtual istd::CString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const;
+	virtual QString GetTempDirPath() const;
+	virtual QString GetWorkingDirectory() const;
+	virtual QStringList GetApplicationArguments() const;
+	virtual QString GetModulePath(bool useApplicationModule = false, bool onlyDirectory = false) const;
 	virtual EnvironmentVariables GetEnvironmentVariables() const;
-	virtual void SetEnvironmentVariableValue(const istd::CString& variableName, const istd::CString& value);
+	virtual void SetEnvironmentVariableValue(const QString& variableName, const QString& value);
 };
 
 

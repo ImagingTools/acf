@@ -17,7 +17,7 @@ namespace iqt
 
 // reimplemented (ibase::IFileListProvider)
 
-istd::CStringList CFileListProviderComp::GetFileList() const
+QStringList CFileListProviderComp::GetFileList() const
 {
 	return m_fileList;
 }
@@ -37,32 +37,32 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 		QStringList filters;
 
 		if (m_fileLoaderCompPtr.IsValid()){
-			istd::CStringList extensions;
+			QStringList extensions;
 			if (m_fileLoaderCompPtr->GetFileExtensions(extensions)){
-				for (		istd::CStringList::const_iterator extIter = extensions.begin();
+				for (		QStringList::const_iterator extIter = extensions.begin();
 							extIter != extensions.end();
 							++extIter){
-					const istd::CString& extension = *extIter;
+					const QString& extension = *extIter;
 
-					filters << "*." + iqt::GetQString(extension);
+					filters << "*." + extension;
 				}
 			}
 		}
 		else{
 			int filtersCount = m_filtersAttrPtr.GetCount();
 			for (int filterIndex = 0; filterIndex < filtersCount; ++filterIndex){
-				filters << iqt::GetQString(m_filtersAttrPtr[filterIndex]);
+				filters << m_filtersAttrPtr[filterIndex];
 			}
 		}
 
 		CFileList fileList;
 		fileList.Create(
-					iqt::GetQString(m_dirParamCompPtr->GetPath()),
+					m_dirParamCompPtr->GetPath(),
 					*m_minRecurDepthAttrPtr,
 					*m_maxRecurDepthAttrPtr,
 					filters);
 
-		m_fileList = iqt::GetCStringList(fileList);
+		m_fileList = (fileList);
 	}
 }
 

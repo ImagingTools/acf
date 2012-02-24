@@ -11,7 +11,7 @@ namespace iqtdoc
 
 // reimplemented (idoc::IHelpInfoProvider)
 
-double CHtmlHelpViewerComp::GetHelpQuality(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr) const
+double CHtmlHelpViewerComp::GetHelpQuality(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const
 {
 	if (m_helpFileProviderCompPtr.IsValid()){
 		return m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr);
@@ -23,13 +23,13 @@ double CHtmlHelpViewerComp::GetHelpQuality(const istd::CString& contextText, con
 
 // reimplemented (idoc::IHelpViewer)
 
-void CHtmlHelpViewerComp::ShowHelp(const istd::CString& contextText, const istd::IPolymorphic* contextObjectPtr)
+void CHtmlHelpViewerComp::ShowHelp(const QString& contextText, const istd::IPolymorphic* contextObjectPtr)
 {
 	if (		m_helpFileProviderCompPtr.IsValid() &&
 				(m_helpFileProviderCompPtr->GetHelpQuality(contextText, contextObjectPtr) > 0)){
-		istd::CString filePath = m_helpFileProviderCompPtr->GetHelpFilePath(contextText, contextObjectPtr);
+		QString filePath = m_helpFileProviderCompPtr->GetHelpFilePath(contextText, contextObjectPtr);
 
-		QUrl url = QUrl::fromLocalFile(iqt::GetQString(filePath));
+		QUrl url = QUrl::fromLocalFile(filePath);
 
 		if (!m_helpWidgetPtr.IsValid()){
 			m_helpWidgetPtr.SetPtr(new QTextBrowser(NULL));

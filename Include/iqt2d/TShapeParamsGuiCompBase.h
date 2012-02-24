@@ -35,7 +35,7 @@ protected:
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
 	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
 
-	I_ATTR(istd::CString, m_unitNameAttrPtr);
+	I_ATTR(QString, m_unitNameAttrPtr);
 	I_ATTR(double, m_zValueAttrPtr);
 };
 

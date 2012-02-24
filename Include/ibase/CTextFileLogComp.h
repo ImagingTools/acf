@@ -36,7 +36,7 @@ public:
 
 protected:
 	// reimplemented (CStreamLogCompBase)
-	virtual void WriteText(const istd::CString& text);
+	virtual void WriteText(const QString& text);
 	virtual void NewLine();
 
 	// reimplemented (icomp::CComponentBase)

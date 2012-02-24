@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<BasePck::VersionInfo> versionInfo;
 	versionInfo.SetIntAttr("VersionNumber", 1000);
 	versionInfo.InsertMultiAttr("KnownVersions", 1000);
-	versionInfo.InsertMultiAttr("KnownVersionNames", istd::CString("1.0.0"));
+	versionInfo.InsertMultiAttr("KnownVersionNames", QString("1.0.0"));
 	versionInfo.InitComponent();
 
 	icomp::TSimComponentWrap<BasePck::ApplicationInfo> applicationInfo;
@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentsFactory<TutorialPck::TextEditor> viewFactoryComp;
 
 	icomp::TSimComponentWrap<BasePck::BinaryFileSerializer> serializerComp;
-	serializerComp.InsertMultiAttr("FileExtensions", istd::CString("bin"));
-	serializerComp.InsertMultiAttr("TypeDescriptions", istd::CString("Binary text files"));
+	serializerComp.InsertMultiAttr("FileExtensions", QString("bin"));
+	serializerComp.InsertMultiAttr("TypeDescriptions", QString("Binary text files"));
 	serializerComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;

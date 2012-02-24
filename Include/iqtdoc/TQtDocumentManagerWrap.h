@@ -31,7 +31,7 @@ public:
 	virtual void OnSaveSettings(QSettings& settings) const;
 
 	// pseudo-reimplemented (idoc::CSingleDocumentManagerBase)
-	virtual istd::CString GetSaveFilePath(const std::string& documentTypeId) const;
+	virtual QString GetSaveFilePath(const std::string& documentTypeId) const;
 
 protected:
 	/**
@@ -75,7 +75,7 @@ void TQtDocumentManagerWrap<Base, Gui>::OnSaveSettings(QSettings& settings) cons
 // pseudo-reimplemented (idoc::CSingleDocumentManagerBase)
 
 template <class Base, class Gui>
-istd::CString TQtDocumentManagerWrap<Base, Gui>::GetSaveFilePath(const std::string& documentTypeId) const
+QString TQtDocumentManagerWrap<Base, Gui>::GetSaveFilePath(const std::string& documentTypeId) const
 {
 	QString filter = CreateFileDialogFilter(&documentTypeId, iser::IFileLoader::QF_FILE | iser::IFileLoader::QF_SAVE);
 
@@ -83,7 +83,7 @@ istd::CString TQtDocumentManagerWrap<Base, Gui>::GetSaveFilePath(const std::stri
 
 	UpdateLastDirectory(filePath);
 
-	return iqt::GetCString(filePath);
+	return filePath;
 }
 
 

@@ -4,7 +4,7 @@
 
 #include "iqt/iqt.h"
 
-#include "istd/CString.h"
+#include <QString>
 
 #include "isys/IFunctionsProvider.h"
 
@@ -25,10 +25,10 @@ public:
 		Construct this object opening specified DLL.
 		\param	dllPath	path to DLL or empty string if no DLL should be opened.
 	 */
-	CDllFunctionsProvider(const istd::CString& dllPath = "");
+	CDllFunctionsProvider(const QString& dllPath = "");
 	virtual ~CDllFunctionsProvider();
 
-	bool OpenDll(const istd::CString& dllPath);
+	bool OpenDll(const QString& dllPath);
 
 	void Reset();
 

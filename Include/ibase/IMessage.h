@@ -3,7 +3,7 @@
 
 
 #include "istd/ILogger.h"
-#include "istd/CString.h"
+#include <QString>
 
 #include "iser/ISerializable.h"
 
@@ -46,12 +46,12 @@ public:
 	/**
 		Get the text of the message.
 	*/
-	virtual istd::CString GetText() const = 0;
+	virtual QString GetText() const = 0;
 
 	/**
 		Get the source of the message.
 	*/
-	virtual istd::CString GetSource() const = 0;
+	virtual QString GetSource() const = 0;
 
 	/**
 		Get flags of the message.

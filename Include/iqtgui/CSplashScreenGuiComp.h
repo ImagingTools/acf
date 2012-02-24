@@ -48,14 +48,14 @@ protected:
 
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
-	I_ATTR(istd::CString, m_imagePathAttrPtr);
+	I_ATTR(QString, m_imagePathAttrPtr);
 	I_ATTR(bool, m_showProductNameAttrPtr);
 	I_ATTR(bool, m_showApplicationNameAttrPtr);
 	I_ATTR(bool, m_showApplicationSubnameAttrPtr);
 	I_ATTR(bool, m_showProductTypeAttrPtr);
 	I_ATTR(bool, m_showLegalCopyrightAttrPtr);
 	I_MULTIATTR(int, m_versionIdsAttrPtr);
-	I_MULTIATTR(istd::CString, m_versionNamesAttrPtr);
+	I_MULTIATTR(QString, m_versionNamesAttrPtr);
 
 	int m_mainVersionId;
 };

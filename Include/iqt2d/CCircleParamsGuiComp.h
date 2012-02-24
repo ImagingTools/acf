@@ -44,7 +44,7 @@ protected Q_SLOTS:
 	void OnParamsChanged(double value);
 
 private:
-	I_ATTR(istd::CString, m_unitNameAttrPtr);
+	I_ATTR(QString, m_unitNameAttrPtr);
 	I_ATTR(double, m_circleZValueAttrPtr);
 };
 

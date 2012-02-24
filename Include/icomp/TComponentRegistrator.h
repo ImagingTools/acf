@@ -27,17 +27,17 @@ public:
 	TComponentRegistrator(
 				const std::string& componentId,
 				icomp::CPackageStaticInfo& packageStaticInfo,
-				const istd::CString& description,
-				const istd::CString& keywords);
+				const QString& description,
+				const QString& keywords);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual const istd::CString& GetDescription() const;
-	virtual const istd::CString& GetKeywords() const;
+	virtual const QString& GetDescription() const;
+	virtual const QString& GetKeywords() const;
 
 private:
 	std::string m_logicalName;
-	istd::CString m_description;
-	istd::CString m_keywords;
+	QString m_description;
+	QString m_keywords;
 };
 
 
@@ -47,8 +47,8 @@ template <class Component>
 TComponentRegistrator<Component>::TComponentRegistrator(
 			const std::string& componentId,
 			icomp::CPackageStaticInfo& packageStaticInfo,
-			const istd::CString& description,
-			const istd::CString& keywords)
+			const QString& description,
+			const QString& keywords)
 :	BaseClass(&Component::InitStaticInfo(NULL)),
 	m_description(description),
 	m_keywords(keywords)
@@ -64,14 +64,14 @@ TComponentRegistrator<Component>::TComponentRegistrator(
 //	reimplemented (icomp::IComponentStaticInfo)
 
 template <class Component>
-const istd::CString& TComponentRegistrator<Component>::GetDescription() const
+const QString& TComponentRegistrator<Component>::GetDescription() const
 {
 	return m_description;
 }
 
 
 template <class Component>
-const istd::CString& TComponentRegistrator<Component>::GetKeywords() const
+const QString& TComponentRegistrator<Component>::GetKeywords() const
 {
 	return m_keywords;
 }

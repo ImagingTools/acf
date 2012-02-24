@@ -44,7 +44,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IFileListProvider)
-	virtual istd::CStringList GetFileList() const;
+	virtual QStringList GetFileList() const;
 
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
@@ -58,11 +58,11 @@ private:
 	I_REF(iprm::IFileNameParam, m_dirParamCompPtr);
 	I_REF(imod::IModel, m_dirParamModelCompPtr);
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
-	I_MULTIATTR(istd::CString, m_filtersAttrPtr);
+	I_MULTIATTR(QString, m_filtersAttrPtr);
 	I_ATTR(int, m_minRecurDepthAttrPtr);
 	I_ATTR(int, m_maxRecurDepthAttrPtr);
 
-	istd::CStringList m_fileList;
+	QStringList m_fileList;
 };
 
 

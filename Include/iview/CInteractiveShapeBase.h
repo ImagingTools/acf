@@ -69,7 +69,7 @@ protected:
 	/**
 		Draw text on a given position.
 	*/
-	void DrawText(QPainter& drawContext, istd::CIndex2d point, const istd::CString& text) const;
+	void DrawText(QPainter& drawContext, istd::CIndex2d point, const QString& text) const;
 
 	// reimplemented (iview::TShapeBase)
 	virtual int GetDisplayChangesMask();

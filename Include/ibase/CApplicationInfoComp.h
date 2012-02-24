@@ -37,24 +37,24 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IApplicationInfo)
-	virtual istd::CString GetApplicationAttribute(int attributeId) const;
+	virtual QString GetApplicationAttribute(int attributeId) const;
 	virtual int GetMainVersionId() const;
 	virtual const iser::IVersionInfo& GetVersionInfo() const;
 
 protected:
 	// reimplemented (iser::IVersionInfo)
 	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const;
-	virtual istd::CString GetVersionIdDescription(int versionId) const;
+	virtual QString GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
-	virtual istd::CString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
+	virtual QString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
 
 private:
-	I_ATTR(istd::CString, m_companyNameAttrPtr);
-	I_ATTR(istd::CString, m_productNameAttrPtr);
-	I_ATTR(istd::CString, m_applicationNameAttrPtr);
-	I_ATTR(istd::CString, m_applicationSubnameAttrPtr);
-	I_ATTR(istd::CString, m_applicationTypeAttrPtr);
-	I_ATTR(istd::CString, m_legalCopyrightAttrPtr);
+	I_ATTR(QString, m_companyNameAttrPtr);
+	I_ATTR(QString, m_productNameAttrPtr);
+	I_ATTR(QString, m_applicationNameAttrPtr);
+	I_ATTR(QString, m_applicationSubnameAttrPtr);
+	I_ATTR(QString, m_applicationTypeAttrPtr);
+	I_ATTR(QString, m_legalCopyrightAttrPtr);
 	I_ATTR(int, m_mainVersionIdAttrPtr);
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };

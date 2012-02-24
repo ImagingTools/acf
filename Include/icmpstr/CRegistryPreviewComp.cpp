@@ -39,13 +39,13 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 		return false;
 	}
 
-	iser::CXmlFileWriteArchive archive(m_tempFileName.toStdString(), m_versionInfoCompPtr.GetPtr());
+	iser::CXmlFileWriteArchive archive(m_tempFileName, m_versionInfoCompPtr.GetPtr());
 
 	if (!(const_cast<icomp::IRegistry&>(registry)).Serialize(archive)){
 		return false;
 	}
 
-	QString acfExeFile = iqt::CFileSystem::GetEnrolledPath(iqt::GetQString(m_commandFileNameCompPtr->GetPath()));
+	QString acfExeFile = iqt::CFileSystem::GetEnrolledPath(m_commandFileNameCompPtr->GetPath());
 
 	QDir applicationDir(QCoreApplication::applicationDirPath());
 	QString acfApplicationPath = applicationDir.absoluteFilePath(acfExeFile);
@@ -56,10 +56,10 @@ bool CRegistryPreviewComp::StartRegistry(const icomp::IRegistry& registry)
 	parameters << m_tempFileName;
 
 	if (m_envManagerCompPtr.IsValid()){
-		istd::CString configFilePath = m_envManagerCompPtr->GetConfigFilePath();
-		if (!configFilePath.IsEmpty()){
+		QString configFilePath = m_envManagerCompPtr->GetConfigFilePath();
+		if (!configFilePath.isEmpty()){
 			parameters << "-config";
-			parameters << iqt::GetQString(configFilePath);
+			parameters << configFilePath;
 		}
 	}
 

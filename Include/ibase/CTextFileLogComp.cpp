@@ -26,10 +26,10 @@ CTextFileLogComp:: CTextFileLogComp()
 
 // reimplemented (CStreamLogCompBase)
 
-void CTextFileLogComp::WriteText(const istd::CString& text)
+void CTextFileLogComp::WriteText(const QString& text)
 {
 	if (m_outputFileStream.is_open()){
-		m_outputFileStream << text.c_str();
+		m_outputFileStream << text.toStdWString().c_str();
 		m_outputFileStream.flush();
 	}
 }
@@ -85,14 +85,14 @@ void CTextFileLogComp::OpenFileStream()
 			fileMode = std::wofstream::out;
 		}
 
-		if (m_fileNameCompPtr->GetPath().IsEmpty()){
+		if (m_fileNameCompPtr->GetPath().isEmpty()){
 			return;
 		}
 
 #ifdef _MSC_VER
-		m_outputFileStream.open(m_fileNameCompPtr->GetPath().c_str(), fileMode);
+		m_outputFileStream.open(m_fileNameCompPtr->GetPath().toStdString().c_str(), fileMode);
 #else
-		m_outputFileStream.open(m_fileNameCompPtr->GetPath().ToString().c_str(), fileMode);
+		m_outputFileStream.open(m_fileNameCompPtr->GetPath().toStdString().c_str(), fileMode);
 #endif
 	}
 }

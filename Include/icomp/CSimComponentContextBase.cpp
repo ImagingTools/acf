@@ -75,8 +75,8 @@ bool CSimComponentContextBase::InsertMultiRef(const std::string& referenceId, IC
 	}
 
 	if (multiAttrPtr != NULL){
-		istd::CString indexString = istd::CString::FromNumber(multiAttrPtr->GetValuesCount());
-		std::string attributeId = referenceId + '#' + indexString.ToString();
+		QString indexString = QString("%1").arg(multiAttrPtr->GetValuesCount());
+		std::string attributeId = referenceId + '#' + indexString.toStdString();
 
 		std::string completeId = JoinId(attributeId, subelementId);
 		multiAttrPtr->InsertValue(attributeId);
@@ -123,9 +123,9 @@ bool CSimComponentContextBase::SetDoubleAttr(const std::string& attributeId, dou
 }
 
 
-bool CSimComponentContextBase::SetStringAttr(const std::string& attributeId, const istd::CString& value)
+bool CSimComponentContextBase::SetStringAttr(const std::string& attributeId, const QString& value)
 {
-	return SetSingleAttr<istd::CString>(attributeId, value);
+	return SetSingleAttr<QString>(attributeId, value);
 }
 
 

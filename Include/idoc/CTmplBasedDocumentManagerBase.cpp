@@ -37,7 +37,7 @@ int CTmplBasedDocumentManagerBase::GetAllowedOperationFlags(const istd::IPolymor
 		std::string docTypeId = GetDocumentTypeId(*documentPtr);
 		iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(docTypeId);
 		if (loaderPtr != NULL){
-			if (docInfo.filePath.IsEmpty() || loaderPtr->IsOperationSupported(
+			if (docInfo.filePath.isEmpty() || loaderPtr->IsOperationSupported(
 						documentPtr,
 						&docInfo.filePath,
 						iser::IFileLoader::QF_SAVE | iser::IFileLoader::QF_FILE)){
@@ -53,7 +53,7 @@ int CTmplBasedDocumentManagerBase::GetAllowedOperationFlags(const istd::IPolymor
 		}
 	}
 
-	if (!docInfo.filePath.IsEmpty()){
+	if (!docInfo.filePath.isEmpty()){
 		retVal |= OF_KNOWN_PATH;
 	}
 
@@ -83,7 +83,7 @@ IDocumentTypesInfo::Ids CTmplBasedDocumentManagerBase::GetDocumentTypeIds() cons
 }
 
 
-istd::CString CTmplBasedDocumentManagerBase::GetDocumentTypeName(const std::string& documentTypeId) const
+QString CTmplBasedDocumentManagerBase::GetDocumentTypeName(const std::string& documentTypeId) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->GetDocumentTypeName(documentTypeId);
@@ -103,7 +103,7 @@ iser::IFileTypeInfo* CTmplBasedDocumentManagerBase::GetDocumentFileTypeInfo(cons
 }
 
 
-IDocumentTypesInfo::Ids CTmplBasedDocumentManagerBase::GetDocumentTypeIdsForFile(const istd::CString& filePath) const
+IDocumentTypesInfo::Ids CTmplBasedDocumentManagerBase::GetDocumentTypeIdsForFile(const QString& filePath) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->GetDocumentTypeIdsForFile(filePath);
@@ -113,7 +113,7 @@ IDocumentTypesInfo::Ids CTmplBasedDocumentManagerBase::GetDocumentTypeIdsForFile
 }
 
 
-istd::CString CTmplBasedDocumentManagerBase::GetDefaultDirectory(const istd::CString& sugestedDir, const std::string* documentTypeIdPtr) const
+QString CTmplBasedDocumentManagerBase::GetDefaultDirectory(const QString& sugestedDir, const std::string* documentTypeIdPtr) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->GetDefaultDirectory(sugestedDir, documentTypeIdPtr);

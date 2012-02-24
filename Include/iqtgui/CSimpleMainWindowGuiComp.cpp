@@ -173,7 +173,7 @@ int CSimpleMainWindowGuiComp::SetupToolbar(const iqtgui::CHierarchicalCommand& c
 				if (hierarchicalPtr->GetChildsCount() > 0){
 					QMenu* newMenuPtr = new QMenu(&result);
 					if (newMenuPtr != NULL){
-						newMenuPtr->setTitle(iqt::GetQString(hierarchicalPtr->GetName()));
+						newMenuPtr->setTitle(hierarchicalPtr->GetName());
 
 						CreateMenu<QMenu>(*hierarchicalPtr, *newMenuPtr);
 
@@ -427,9 +427,9 @@ void CSimpleMainWindowGuiComp::OnRetranslate()
 	BaseClass::OnRetranslate();
 
 	// Main commands
-	m_viewCommand.SetName(iqt::GetCString(tr("&View")));
-	m_toolsCommand.SetName(iqt::GetCString(tr("&Tools")));
-	m_helpCommand.SetName(iqt::GetCString(tr("&Help")));
+	m_viewCommand.SetName(tr("&View"));
+	m_toolsCommand.SetName(tr("&Tools"));
+	m_helpCommand.SetName(tr("&Help"));
 	
 	// View commands
 	m_showToolBarsCommand.SetVisuals(tr("&Show Toolbars"), tr("Show Toolbars"), tr("Show and hide toolbars"));

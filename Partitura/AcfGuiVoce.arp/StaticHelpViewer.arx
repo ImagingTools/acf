@@ -39,7 +39,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               DefaultHelpFileDir
@@ -135,7 +135,7 @@
               ContextPrefix
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               ContextPrefix
@@ -151,7 +151,7 @@
               ContextSuffix
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               ContextSuffix
@@ -167,7 +167,7 @@
               DefaultHelpFileName
             </Id>
             <Type>
-              icomp::TAttribute&lt;istd::CString&gt;
+              icomp::TAttribute&lt;QString&gt;
             </Type>
             <ExportId>
               DefaultHelpFileName

@@ -7,9 +7,12 @@
 #include <map>
 
 
+// Qt includes
+#include <QString>
+
+
 // ACF includes
 #include "istd/IChangeable.h"
-#include "istd/CString.h"
 
 #include "imod/IUndoManager.h"
 
@@ -42,7 +45,7 @@ public:
 
 	struct DocumentInfo
 	{
-		istd::CString filePath;
+		QString filePath;
 		std::string documentTypeId;
 		bool isDirty;
 	};
@@ -62,7 +65,7 @@ public:
 	/**
 		Map from file path to ducument type ID's.
 	*/
-	typedef std::map<istd::CString, std::string> FileToTypeMap;
+	typedef std::map<QString, std::string> FileToTypeMap;
 
 	/**
 		Get flags of allowed operations.
@@ -148,7 +151,7 @@ public:
 	*/
 	virtual bool FileOpen(
 				const std::string* documentTypeIdPtr = NULL,
-				const istd::CString* fileNamePtr = NULL,
+				const QString* fileNamePtr = NULL,
 				bool createView = true,
 				const std::string& viewTypeId = "",
 				FileToTypeMap* loadedMapPtr = NULL) = 0;

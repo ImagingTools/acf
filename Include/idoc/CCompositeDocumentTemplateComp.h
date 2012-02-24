@@ -27,14 +27,14 @@ public:
 	// reimplemented (idoc::IDocumentTypesInfo)
 	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const;
 	virtual Ids GetDocumentTypeIds() const;
-	virtual istd::CString GetDocumentTypeName(const std::string& documentTypeId) const;
+	virtual QString GetDocumentTypeName(const std::string& documentTypeId) const;
 	virtual iser::IFileTypeInfo* GetDocumentFileTypeInfo(const std::string& documentTypeId) const;
-	virtual Ids GetDocumentTypeIdsForFile(const istd::CString& filePath) const;
-	virtual istd::CString GetDefaultDirectory(const istd::CString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
+	virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const;
+	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
 
 	// reimplemented (idoc::IDocumentTemplate)
 	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const;
-	virtual istd::CString GetViewTypeName(
+	virtual QString GetViewTypeName(
 				const std::string& documentTypeId,
 				const std::string& viewTypeId) const;
 	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId) const;
