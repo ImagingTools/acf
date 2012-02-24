@@ -20,7 +20,7 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const QString
 	int descriptionLength = int(metaDescription.length());
 	for (int i = 0; i <= descriptionLength; ++i){
 		if (i < descriptionLength){
-			QString::value_type ch = metaDescription[i];
+			QChar ch = metaDescription[i];
 
 			if (ch == '\''){
 				if (apostrophCount <= 0){
