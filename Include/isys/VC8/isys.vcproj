@@ -177,10 +177,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileSystemBase.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSimpleDateTime.cpp"
 				>
 			</File>
@@ -203,10 +199,6 @@
 			</File>
 			<File
 				RelativePath="..\CFileInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystemBase.h"
 				>
 			</File>
 			<File

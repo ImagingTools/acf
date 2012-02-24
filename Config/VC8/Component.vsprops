@@ -14,6 +14,7 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;"
 		OutputFile="$(OutDir)\$(ProjectName).arp"
 		SubSystem="1"
 	/>
