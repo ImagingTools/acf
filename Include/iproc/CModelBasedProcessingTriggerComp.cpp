@@ -92,7 +92,7 @@ CModelBasedProcessingTriggerComp::ParamsObserver::ParamsObserver(CModelBasedProc
 
 // reimplemented (imod::CSingleModelObserverBase)
 
-void CModelBasedProcessingTriggerComp::ParamsObserver::OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
+void CModelBasedProcessingTriggerComp::ParamsObserver::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_parent.DoProcessing();
 }

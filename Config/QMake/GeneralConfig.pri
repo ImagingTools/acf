@@ -17,6 +17,7 @@ win32-msvc*{
 		COMPILER_NAME = VC9
 	}
 	win32-msvc2010{
+		QMAKE_CXXFLAGS += /wd4996
 		COMPILER_NAME = VC10
 	}
 }
