@@ -604,7 +604,6 @@ bool CRegistryCodeSaverComp::WriteIncludes(
 	stream << "#include \"" << className << ".h\"" << std::endl;
 	stream << std::endl << std::endl;
 	stream << "// ACF includes" << std::endl;
-	stream << "#include \"istd/itr.h\"" << std::endl;
 	stream << "#include \"icomp/TAttribute.h\"" << std::endl;
 	stream << "#include \"icomp/TMultiAttribute.h\"" << std::endl;
 	stream << "#include \"icomp/CRegistryElement.h\"" << std::endl;
