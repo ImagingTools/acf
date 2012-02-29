@@ -7,6 +7,9 @@
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QWheelEvent>
+#include <QtGui/QScrollBar>
+#include <QtGui/QStatusBar>
+
 
 // ACF includes
 #include "iqtgui/CWidgetUpdateBlocker.h"

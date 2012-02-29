@@ -2,10 +2,6 @@
 #define _qqt_CConsoleGui_included
 
 
-// Qt includes
-#include <QtGui>
-
-
 // ACF includes
 #include "iqtgui/CHierarchicalCommand.h"
 
@@ -14,6 +10,15 @@
 #include "iview/TFrameBase.h"
 #include "iview/TCalibratedViewBase.h"
 #include "iview/CConsoleWidget.h"
+
+
+// Foirward declarations
+class QVBoxLayout;
+class QGridLayout;
+class QHBoxLayout;
+class QScrollBar;
+class QStatusBar;
+class QLabel;
 
 
 namespace iview

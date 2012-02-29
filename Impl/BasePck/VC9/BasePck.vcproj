@@ -45,8 +45,6 @@
 				RuntimeLibrary="2"
 				EnableEnhancedInstructionSet="2"
 				PrecompiledHeaderFile=""
-				WarningLevel="4"
-				DebugInformationFormat="0"
 				CompileAs="0"
 			/>
 			<Tool
@@ -115,8 +113,6 @@
 				PreprocessorDefinitions="UNICODE;WIN32"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				WarningLevel="4"
-				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
 			<Tool

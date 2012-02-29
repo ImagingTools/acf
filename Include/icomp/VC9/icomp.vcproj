@@ -53,8 +53,6 @@
 				EnableEnhancedInstructionSet="2"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=""
-				WarningLevel="4"
-				SuppressStartupBanner="true"
 				CompileAs="0"
 			/>
 			<Tool
@@ -124,9 +122,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				WarningLevel="4"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
 			<Tool
