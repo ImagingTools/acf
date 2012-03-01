@@ -20,7 +20,7 @@
 			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC8/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\..\..\Config\VC8\General.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Config\VC8\General.vsprops;..\..\..\..\..\Config\VC8\Release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>
@@ -105,7 +105,7 @@
 			OutputDirectory="../../../../../Bin/$(ConfigurationName)VC8/Tutorial"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\..\..\..\..\Config\VC8\General.vsprops"
+			InheritedPropertySheets="..\..\..\..\..\Config\VC8\General.vsprops;..\..\..\..\..\Config\VC8\Debug.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			>

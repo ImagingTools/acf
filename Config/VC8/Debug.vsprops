@@ -16,6 +16,8 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
+		AdditionalDependencies="qtmain.lib QtCored4.lib"
+		AdditionalLibraryDirectories="$(QTDIR)/lib"
 		GenerateDebugInformation="true"
 	/>
 </VisualStudioPropertySheet>

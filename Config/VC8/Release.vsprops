@@ -18,4 +18,9 @@
 		EnableEnhancedInstructionSet="2"
 		FloatingPointModel="2"
 	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="qtmain.lib QtCore4.lib"
+		AdditionalLibraryDirectories="$(QTDIR)/lib"
+	/>
 </VisualStudioPropertySheet>
