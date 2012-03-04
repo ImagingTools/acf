@@ -152,15 +152,7 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	UpdateButtonsState();
 	UpdateComponentsPosition();
 
-	#ifdef _DEBUG
-	bool slotsConnected = 
-	#endif
-
 	ConnectSignalSlots();
-
-	#ifdef _DEBUG
-	I_ASSERT(slotsConnected);
-	#endif
 }
 
 

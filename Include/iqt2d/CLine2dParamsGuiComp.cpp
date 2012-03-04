@@ -107,6 +107,8 @@ void CLine2dParamsGuiComp::OnParamsChanged(double /*value*/)
 		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
+
+		UpdateShapeView();
 	}
 }
 

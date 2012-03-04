@@ -1,27 +1,16 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1860
+          2211
         </Number>
         <Description>
           ACF
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          369
-        </Number>
-        <Description>
-          ACF-Solutions
         </Description>
       </Version>
     </VersionInfos>
@@ -126,16 +115,16 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              AllowWidgetResize
+              ShowControlButtons
             </Id>
             <Type>
               icomp::TAttribute&lt;bool&gt;
             </Type>
             <ExportId>
-              AllowWidgetResize
+              ShowControlButtons
             </ExportId>
             <Data>
               <IsEnabled>
@@ -145,7 +134,23 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              BackgroundMode
+              UseAntialiasing
+            </Id>
+            <Type>
+              icomp::TAttribute&lt;bool&gt;
+            </Type>
+            <ExportId>
+              UseAntialiasing
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ViewId
             </Id>
             <Type>
               icomp::TAttribute&lt;int&gt;
@@ -158,107 +163,8 @@
                 true
               </IsEnabled>
               <Value>
-                1
+                0
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              FitMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              FitMode
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ImagePositionMode
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              ImagePositionMode
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              IsotropyFactor
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;double&gt;
-            </Type>
-            <ExportId>
-              IsotropyFactor
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SceneController
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              SceneController
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SceneId
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;int&gt;
-            </Type>
-            <ExportId>
-              SceneId
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseAntialiasing
-            </Id>
-            <Type>
-              icomp::TAttribute&lt;bool&gt;
-            </Type>
-            <ExportId>
-              UseAntialiasing
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -267,15 +173,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="9">
-    <Interface>
-      <InterfaceId>
-        i2d::ISceneController
-      </InterfaceId>
-      <ComponentId>
-        ImageView
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
@@ -310,7 +208,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iqt2d::ISceneProvider
+        iqt2d::IViewProvider
       </InterfaceId>
       <ComponentId>
         ImageView

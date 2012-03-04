@@ -14,7 +14,7 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqt2d/ISceneExtender.h"
+#include "iqt2d/IViewExtender.h"
 
 #include "iqtprm/iqtprm.h"
 #include "iqtprm/Generated/ui_CComposedParamsSetGuiComp.h"
@@ -26,7 +26,7 @@ namespace iqtprm
 
 class CComposedParamsSetGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<Ui::CComposedParamsSetGuiComp, iprm::IParamsSet>,
-			public iqt2d::ISceneExtender
+			public iqt2d::IViewExtender
 {
 	Q_OBJECT
 
@@ -34,7 +34,7 @@ public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CComposedParamsSetGuiComp, iprm::IParamsSet> BaseClass;
 
 	I_BEGIN_COMPONENT(CComposedParamsSetGuiComp);
-		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
+		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for parameters edition", true);
 		I_ASSIGN_TO(m_guisCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
@@ -62,13 +62,13 @@ public:
 	virtual void OnGuiCreated();
 	virtual void OnGuiDestroyed();
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
-	void AttachToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	void DetachFromScene(iqt2d::ISceneProvider* providerPtr);
+	void AttachToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	void DetachFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected Q_SLOTS:
 	void OnEditorChanged(int index);
@@ -79,7 +79,7 @@ private:
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
-	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
+	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 	I_REF(iser::IFileLoader, m_paramsLoaderCompPtr);
 	I_MULTIATTR(QString, m_idsAttrPtr);
 	I_MULTIATTR(QString, m_namesAttrPtr);
@@ -93,7 +93,7 @@ private:
 
 	int m_currentGuiIndex;
 
-	typedef std::map<iqt2d::ISceneProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	typedef std::map<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
 };
 

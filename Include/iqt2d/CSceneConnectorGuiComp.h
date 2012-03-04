@@ -8,8 +8,8 @@
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
-#include "iqt2d/ISceneProvider.h"
-#include "iqt2d/ISceneExtender.h"
+#include "iqt2d/IViewProvider.h"
+#include "iqt2d/IViewExtender.h"
 #include "iqt2d/Generated/ui_CSceneConnectorGuiComp.h"
 
 
@@ -49,10 +49,10 @@ protected:
 private:
 	I_REF(iqtgui::IGuiObject, m_sceneGuiCompPtr);
 	I_REF(ibase::ICommandsProvider, m_sceneCommandsCompPtr);
-	I_REF(ISceneProvider, m_sceneProviderCompPtr);
+	I_REF(IViewProvider, m_sceneProviderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_extenderGuiCompPtr);
 	I_REF(ibase::ICommandsProvider, m_extenderCommandsCompPtr);
-	I_REF(ISceneExtender, m_extenderCompPtr);
+	I_REF(IViewExtender, m_extenderCompPtr);
 
 	mutable iqtgui::CHierarchicalCommand m_commands;
 };

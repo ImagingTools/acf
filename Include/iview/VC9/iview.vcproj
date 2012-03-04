@@ -208,10 +208,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CImageViewComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CInteractiveAnnulusSegmentShape.cpp"
 				>
 			</File>
@@ -391,10 +387,6 @@
 			</File>
 			<File
 				RelativePath="..\CImageShape.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CImageViewComp.h"
 				>
 			</File>
 			<File

@@ -5,7 +5,7 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
-#include "iqt2d/ISceneExtender.h"
+#include "iqt2d/IViewExtender.h"
 
 
 namespace iqt2d
@@ -15,30 +15,30 @@ namespace iqt2d
 template<class Base>
 class TSceneExtenderDelegatorCompWrap:
 			public Base,
-			virtual public iqt2d::ISceneExtender
+			virtual public iqt2d::IViewExtender
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(TSceneExtenderDelegatorCompWrap);
-		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
+		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
 		I_ASSIGN(m_slaveExtenderCompPtr, "SlaveSceneExtender", "Slave scene extender", false, "SlaveSceneExtender");
 	I_END_COMPONENT;
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 private:
-	I_REF(iqt2d::ISceneExtender, m_slaveExtenderCompPtr);
+	I_REF(iqt2d::IViewExtender, m_slaveExtenderCompPtr);
 };
 
 
 
-// reimplemented (iqt2d::ISceneExtender)
+// reimplemented (iqt2d::IViewExtender)
 
 template<class Base>
-void TSceneExtenderDelegatorCompWrap<Base>::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+void TSceneExtenderDelegatorCompWrap<Base>::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
 	if (m_slaveExtenderCompPtr.IsValid()){
 		m_slaveExtenderCompPtr->AddItemsToScene(providerPtr, flags);
@@ -47,7 +47,7 @@ void TSceneExtenderDelegatorCompWrap<Base>::AddItemsToScene(iqt2d::ISceneProvide
 
 
 template<class Base>
-void TSceneExtenderDelegatorCompWrap<Base>::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+void TSceneExtenderDelegatorCompWrap<Base>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	if (m_slaveExtenderCompPtr.IsValid()){
 		m_slaveExtenderCompPtr->RemoveItemsFromScene(providerPtr);

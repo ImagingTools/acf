@@ -11,7 +11,7 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqt2d/ISceneExtender.h"
+#include "iqt2d/IViewExtender.h"
 
 #include "iqtprm/iqtprm.h"
 #include "iqtprm/Generated/ui_CVariableParamGuiComp.h"
@@ -23,7 +23,7 @@ namespace iqtprm
 
 class CVariableParamGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<Ui::CVariableParamGuiComp, iprm::IVariableParam>,
-			public iqt2d::ISceneExtender
+			public iqt2d::IViewExtender
 {
 	Q_OBJECT
 
@@ -31,7 +31,7 @@ public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CVariableParamGuiComp, iprm::IVariableParam> BaseClass;
 
 	I_BEGIN_COMPONENT(CVariableParamGuiComp);
-		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
+		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of editor GUI's for each parameter type ID", true);
 		I_ASSIGN_TO(m_guisCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
@@ -46,9 +46,9 @@ public:
 	// reimplemented (imod::IObserver)
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
 	void AttachCurrentType();
@@ -68,11 +68,11 @@ private:
 	I_MULTIREF(imod::IModelEditor, m_editorsCompPtr);
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
-	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
+	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 	I_MULTIATTR(QString, m_typeIdsAttrPtr);
 	I_MULTIATTR(QString, m_typeNamesAttrPtr);
 
-	typedef std::map<iqt2d::ISceneProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	typedef std::map<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
 
 	imod::IModel* m_lastParamModelPtr;

@@ -4,10 +4,9 @@
 
 #include "i2d/CLine2d.h"
 
+#include "iview/CInteractiveArrowShape.h"
 
-#include "iqt2d/CLine2dShape.h"
 #include "iqt2d/TShapeParamsGuiCompBase.h"
-
 #include "iqt2d/Generated/ui_CLine2dParamsGuiComp.h"
 
 
@@ -18,7 +17,7 @@ namespace iqt2d
 class CLine2dParamsGuiComp:
 			public iqt2d::TShapeParamsGuiCompBase<
 						Ui::CLine2dParamsGuiComp,
-						iqt2d::CLine2dShape,
+						iview::CInteractiveArrowShape,
 						i2d::CLine2d>
 {
 	Q_OBJECT
@@ -26,7 +25,7 @@ class CLine2dParamsGuiComp:
 public:
 	typedef iqt2d::TShapeParamsGuiCompBase<
 				Ui::CLine2dParamsGuiComp,
-				iqt2d::CLine2dShape,
+				iview::CInteractiveArrowShape,
 				i2d::CLine2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CLine2dParamsGuiComp);

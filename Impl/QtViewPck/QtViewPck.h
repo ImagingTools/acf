@@ -18,8 +18,7 @@
 #include "iqt2d/CSceneControllerGuiComp.h"
 #include "iqt2d/CSceneBinderComp.h"
 #include "iqt2d/CSelectableSceneExtenderComp.h"
-
-#include "iview/CImageViewComp.h"
+#include "iqt2d/CViewProviderGuiComp.h"
 
 
 /**
@@ -42,8 +41,7 @@ typedef iqt2d::CQuadrangleParamsGuiComp QuadrangleParamsGui;
 typedef iqt2d::CSceneControllerGuiComp SceneControllerGui;
 typedef iqt2d::CSceneBinderComp SceneBinder;
 typedef iqt2d::CSelectableSceneExtenderComp SelectableSceneExtender;
-typedef iview::CImageViewComp ConsoleImageView;
-
+typedef iqt2d::CViewProviderGuiComp ViewProvider;
 
 
 } // namespace QtViewPck

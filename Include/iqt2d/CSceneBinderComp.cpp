@@ -14,7 +14,12 @@ void CSceneBinderComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_sceneProviderCompPtr.IsValid() && m_extenderCompPtr.IsValid()){
-		m_extenderCompPtr->AddItemsToScene(m_sceneProviderCompPtr.GetPtr(), ISceneExtender::SF_DIRECT);
+		m_extenderCompPtr->AddItemsToScene(m_sceneProviderCompPtr.GetPtr(), IViewExtender::SF_DIRECT);
+
+		iview::IShapeView* viewPtr = m_sceneProviderCompPtr->GetView();
+		if (viewPtr != NULL){
+			viewPtr->Update();
+		}
 	}
 }
 
@@ -23,6 +28,11 @@ void CSceneBinderComp::OnComponentDestroyed()
 {
 	if (m_sceneProviderCompPtr.IsValid() && m_extenderCompPtr.IsValid()){
 		m_extenderCompPtr->RemoveItemsFromScene(m_sceneProviderCompPtr.GetPtr());
+
+		iview::IShapeView* viewPtr = m_sceneProviderCompPtr->GetView();
+		if (viewPtr != NULL){
+			viewPtr->Update();
+		}
 	}
 
 	BaseClass::OnComponentDestroyed();

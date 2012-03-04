@@ -4,9 +4,9 @@
 
 #include "i2d/CAnnulus.h"
 
-#include "iqt2d/TShapeParamsGuiCompBase.h"
-#include "iqt2d/CAnnulusShape.h"
+#include "iview/CInteractiveAnnulusShape.h"
 
+#include "iqt2d/TShapeParamsGuiCompBase.h"
 #include "iqt2d/Generated/ui_CAnnulusParamsGuiComp.h"
 
 
@@ -17,7 +17,7 @@ namespace iqt2d
 class CAnnulusParamsGuiComp:
 			public iqt2d::TShapeParamsGuiCompBase<
 						Ui::CAnnulusParamsGuiComp,
-						iqt2d::CAnnulusShape,
+						iview::CInteractiveAnnulusShape,
 						i2d::CAnnulus>
 {
 	Q_OBJECT
@@ -25,7 +25,7 @@ class CAnnulusParamsGuiComp:
 public:
 	typedef iqt2d::TShapeParamsGuiCompBase<
 				Ui::CAnnulusParamsGuiComp,
-				iqt2d::CAnnulusShape,
+				iview::CInteractiveAnnulusShape,
 				i2d::CAnnulus> BaseClass;
 
 	I_BEGIN_COMPONENT(CAnnulusParamsGuiComp);

@@ -95,6 +95,8 @@ void CCircleParamsGuiComp::OnParamsChanged(double /*value*/)
 		UpdateBlocker updateBlocker(this);
 
 		UpdateModel();
+
+		UpdateShapeView();
 	}
 }
 

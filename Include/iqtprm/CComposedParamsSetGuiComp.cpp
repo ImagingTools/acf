@@ -265,9 +265,9 @@ void CComposedParamsSetGuiComp::OnGuiDestroyed()
 }
 
 
-// reimplemented (iqt2d::ISceneExtender)
+// reimplemented (iqt2d::IViewExtender)
 
-void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
 	I_ASSERT(providerPtr != NULL);
 
@@ -277,7 +277,7 @@ void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::ISceneProvider* providerP
 }
 
 
-void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr)
+void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	I_ASSERT(providerPtr != NULL);
 
@@ -289,52 +289,72 @@ void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::ISceneProvider* prov
 
 // protected methods
 
-void CComposedParamsSetGuiComp::AttachToScene(iqt2d::ISceneProvider* providerPtr, int flags)
+void CComposedParamsSetGuiComp::AttachToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
 	I_ASSERT(m_showAllShapesAttrPtr.IsValid());
 
 	int elementsCount = m_extendersCompPtr.GetCount();
 
+	iview::IShapeView* viewPtr = NULL;
+
 	if ((m_currentGuiIndex >= 0) && !*m_showAllShapesAttrPtr){
 		if (m_currentGuiIndex < elementsCount){
-			iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
+			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
 			if (extenderPtr != NULL){
 				extenderPtr->AddItemsToScene(providerPtr, flags);
+
+				viewPtr = providerPtr->GetView();
 			}
 		}
 	}
 	else{
 		for (int i = 0; i < elementsCount; ++i){
-			iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[i];
+			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[i];
 			if (extenderPtr != NULL){
 				extenderPtr->AddItemsToScene(providerPtr, flags);
+
+				viewPtr = providerPtr->GetView();
 			}
 		}
+	}
+
+	if (viewPtr != NULL){
+		viewPtr->Update();
 	}
 }
 
 
-void CComposedParamsSetGuiComp::DetachFromScene(iqt2d::ISceneProvider* providerPtr)
+void CComposedParamsSetGuiComp::DetachFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	I_ASSERT(providerPtr != NULL);
 
 	int elementsCount = m_extendersCompPtr.GetCount();
 
+	iview::IShapeView* viewPtr = NULL;
+
 	if ((m_currentGuiIndex >= 0) && !*m_showAllShapesAttrPtr){
 		if (m_currentGuiIndex < elementsCount){
-			iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
+			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[m_currentGuiIndex];
 			if (extenderPtr != NULL){
 				extenderPtr->RemoveItemsFromScene(providerPtr);
+
+				viewPtr = providerPtr->GetView();
 			}
 		}
 	}
 	else{
 		for (int i = 0; i < elementsCount; ++i){
-			iqt2d::ISceneExtender* extenderPtr = m_extendersCompPtr[i];
+			iqt2d::IViewExtender* extenderPtr = m_extendersCompPtr[i];
 			if (extenderPtr != NULL){
 				extenderPtr->RemoveItemsFromScene(providerPtr);
+
+				viewPtr = providerPtr->GetView();
 			}
 		}
+	}
+
+	if (viewPtr != NULL){
+		viewPtr->Update();
 	}
 }
 
@@ -347,7 +367,7 @@ void CComposedParamsSetGuiComp::OnEditorChanged(int index)
 		for (		ConnectedSceneFlags::const_iterator iter = m_connectedSceneFlags.begin();
 					iter != m_connectedSceneFlags.end();
 					++iter){
-			iqt2d::ISceneProvider* providerPtr = iter->first;
+			iqt2d::IViewProvider* providerPtr = iter->first;
 
 			DetachFromScene(providerPtr);
 		}
@@ -357,7 +377,7 @@ void CComposedParamsSetGuiComp::OnEditorChanged(int index)
 		for (		ConnectedSceneFlags::const_iterator iter = m_connectedSceneFlags.begin();
 					iter != m_connectedSceneFlags.end();
 					++iter){
-			iqt2d::ISceneProvider* providerPtr = iter->first;
+			iqt2d::IViewProvider* providerPtr = iter->first;
 			int flags = iter->second;
 
 			AttachToScene(providerPtr, flags);

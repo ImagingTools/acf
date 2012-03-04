@@ -4,20 +4,20 @@
 
 #include "istd/IPolymorphic.h"
 
-#include "iqt2d/iqt2d.h"
+#include "iqt2d/IViewProvider.h"
 
 
 namespace iqt2d
 {
 
 
-class ISceneProvider;
+class IViewProvider;
 
 
 /**
-	Interface for GUI objects presenting its results using extern scene objects.
+	Interface for GUI objects presenting its results using extern view objects.
 */
-class ISceneExtender: virtual public istd::IPolymorphic
+class IViewExtender: virtual public istd::IPolymorphic
 {
 public:
 	/**
@@ -37,12 +37,12 @@ public:
 	/**
 		Called when items should be added to specified scene.
 	*/
-	virtual void AddItemsToScene(ISceneProvider* providerPtr, int flags) = 0;
+	virtual void AddItemsToScene(IViewProvider* providerPtr, int flags) = 0;
 
 	/**
 		Called when items should be removed from specified scene.
 	*/
-	virtual void RemoveItemsFromScene(ISceneProvider* providerPtr) = 0;
+	virtual void RemoveItemsFromScene(IViewProvider* providerPtr) = 0;
 };
 
 

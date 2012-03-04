@@ -2,10 +2,17 @@
 #define iqt2d_CImageViewComp_included
 
 
+// ACF includes
+#include "icomp/CComponentBase.h"
+
+#include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TGuiObserverWrap.h"
 
-#include "iqt2d/CImageShape.h"
-#include "iqt2d/CSceneProviderGuiComp.h"
+#include "iview/CImageShape.h"
+#include "iview/CNoneCalibration.h"
+#include "iview/CNoneCalibrationShape.h"
+
+#include "iqt2d/CViewProviderGuiComp.h"
 
 
 namespace iqt2d
@@ -13,36 +20,40 @@ namespace iqt2d
 
 
 /**
-	Show observed bitmap on the scene.
-	This class extends standard scene provider to provide background bitmap object.
+	Show observed bitmap on the 2D-console.
+	This class extends standard 2D-console to provide background bitmap object.
 */
-class CImageViewComp: public iqtgui::TGuiObserverWrap<CSceneProviderGuiComp, CImageShape>
+class CImageViewComp:
+			public iqtgui::TGuiObserverWrap<
+						CViewProviderGuiComp,
+						iview::CImageShape>,
+			virtual public ibase::ICommandsProvider
 {
 public:
-	typedef iqtgui::TGuiObserverWrap<CSceneProviderGuiComp, CImageShape> BaseClass;
+	typedef iqtgui::TGuiObserverWrap<
+				CViewProviderGuiComp,
+				iview::CImageShape> BaseClass;
 
 	I_BEGIN_COMPONENT(CImageViewComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
-		I_ASSIGN(m_isFrameVisibleAttrPtr, "IsImageFrameVisible", "If true, image frame will be visible", true, false);
-		I_ASSIGN(m_imagePositionModeAttrPtr, "ImagePositionMode", "Mode of image position:\n 0 - corner\n 1 - center", true, 0);
-		I_ASSIGN(m_fitToViewOnChangeAttrPtr, "FitToViewOnImageChanges", "Fit the current image to view", false, false);
+		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
+		I_ASSIGN(m_showControlButtonsAttrPtr, "ShowControlButtons", "If true, control buttons will be shown", true, false);
 	I_END_COMPONENT;
 
-	// reimplemented (imod::IObserver)
-	virtual bool OnDetached(imod::IModel* modelPtr);
+	// reimplemented (ibase::ICommandsProvider)
+	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void UpdateGui(int updateFlags = 0);
+	virtual void UpdateGui(int updateFlags);
 
-	// reimplemented (iqtgui::CGuiComponentBase)
+	// reimplemented (iqtui::CComponentBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 private:
-	I_ATTR(bool, m_isFrameVisibleAttrPtr);
-	I_ATTR(int, m_imagePositionModeAttrPtr);
-	I_ATTR(bool, m_fitToViewOnChangeAttrPtr);
+	I_ATTR(bool, m_showControlButtonsAttrPtr);
+	iview::CNoneCalibration m_calibration;
+	iview::CNoneCalibrationShape m_calibrationShape;
 };
 
 

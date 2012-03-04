@@ -9,8 +9,10 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 
-#include "iqt2d/ISceneProvider.h"
-#include "iqt2d/ISceneExtender.h"
+#include "iview/IShape.h"
+
+#include "iqt2d/IViewProvider.h"
+#include "iqt2d/IViewExtender.h"
 
 
 namespace iqt2d
@@ -18,62 +20,67 @@ namespace iqt2d
 
 
 template <class Base>
-class TSceneExtenderCompBase: public Base, virtual public ISceneExtender
+class TSceneExtenderCompBase: public Base, virtual public IViewExtender
 {
 public:
 	typedef Base BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(TSceneExtenderCompBase);
-		I_REGISTER_INTERFACE(ISceneExtender);
+		I_REGISTER_INTERFACE(IViewExtender);
 		I_ASSIGN(m_slaveExtenderCompPtr, "SlaveSceneExtender", "Scene extender will be used to provide background shapes", false, "SlaveSceneExtender");
 		I_ASSIGN_MULTI_0(m_idFiltersAttrPtr, "SceneIdFilters", "Optional scene ID filters allowing to ignore some scene providers", false);
 	I_END_COMPONENT;
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(IViewProvider* providerPtr);
 
 protected:
-	typedef istd::TPointerVector<QGraphicsItem> Shapes;
-	typedef std::map<ISceneProvider*, Shapes> ShapesMap;
+	typedef istd::TPointerVector<iview::IShape> Shapes;
+	typedef std::map<IViewProvider*, Shapes> ShapesMap;
 
 	bool IsSceneIdSupported(int id) const;
 	const ShapesMap& GetShapesMap() const;
 
 	// abstract methods
-	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result) = 0;
+	virtual void CreateShapes(int sceneId, Shapes& result) = 0;
 
 private:
 	ShapesMap m_shapesMap;
 
-	I_REF(ISceneExtender, m_slaveExtenderCompPtr);
+	I_REF(IViewExtender, m_slaveExtenderCompPtr);
 	I_MULTIATTR(int, m_idFiltersAttrPtr);
 };
 
 
 // public methods
 
-// reimplemented (iqt2d::ISceneExtender)
+// reimplemented (iqt2d::IViewExtender)
 
 template <class Base>
-void TSceneExtenderCompBase<Base>::AddItemsToScene(ISceneProvider* providerPtr, int flags)
+void TSceneExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, int flags)
 {
 	I_ASSERT(providerPtr != NULL);
 
-	int id = providerPtr->GetSceneId();
-	QGraphicsScene* scenePtr = providerPtr->GetScene();
+	int id = providerPtr->GetViewId();
+	iview::IShapeView* viewPtr = providerPtr->GetView();
 
-	if ((scenePtr != NULL) && IsSceneIdSupported(id) && (m_shapesMap.find(providerPtr) == m_shapesMap.end())){
+	if ((viewPtr != NULL) && IsSceneIdSupported(id) && (m_shapesMap.find(providerPtr) == m_shapesMap.end())){
 		Shapes& shapes = m_shapesMap[providerPtr];
 
 		bool isBackground = ((flags & SF_BACKGROUND) != 0);
-		CreateShapes(id, isBackground, shapes);
+		CreateShapes(id, shapes);
 
 		int shapesCount = shapes.GetCount();
 		for (int i = 0; i < shapesCount; ++i){
-			QGraphicsItem* shapePtr = shapes.GetAt(i);
+			iview::IShape* shapePtr = shapes.GetAt(i);
 			if (shapePtr != NULL){
-				scenePtr->addItem(shapePtr);
+				if (isBackground){
+					viewPtr->ConnectBackgroundShape(shapePtr);
+				}
+				else{
+					viewPtr->ConnectShape(shapePtr);
+				}
 			}
 		}
 	}
@@ -85,7 +92,7 @@ void TSceneExtenderCompBase<Base>::AddItemsToScene(ISceneProvider* providerPtr, 
 
 
 template <class Base>
-void TSceneExtenderCompBase<Base>::RemoveItemsFromScene(ISceneProvider* providerPtr)
+void TSceneExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerPtr)
 {
 	I_ASSERT(providerPtr != NULL);
 
@@ -95,16 +102,16 @@ void TSceneExtenderCompBase<Base>::RemoveItemsFromScene(ISceneProvider* provider
 
 	ShapesMap::iterator iter = m_shapesMap.find(providerPtr);
 	if (iter != m_shapesMap.end()){
-		QGraphicsScene* scenePtr = providerPtr->GetScene();
+		iview::IShapeView* viewPtr = providerPtr->GetView();
 
-		if (scenePtr != NULL){
+		if (viewPtr != NULL){
 			Shapes& shapes = iter->second;
 
 			int shapesCount = shapes.GetCount();
 			for (int i = 0; i < shapesCount; ++i){
-				QGraphicsItem* shapePtr = shapes.GetAt(i);
+				iview::IShape* shapePtr = shapes.GetAt(i);
 				if (shapePtr != NULL){
-					scenePtr->removeItem(shapePtr);
+					viewPtr->DisconnectShape(shapePtr);
 				}
 			}
 		}

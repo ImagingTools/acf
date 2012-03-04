@@ -9,7 +9,7 @@
 
 #include "iprm/ISelectionParam.h"
 
-#include "iqt2d/ISceneExtender.h"
+#include "iqt2d/IViewExtender.h"
 
 
 namespace iqt2d
@@ -19,7 +19,7 @@ namespace iqt2d
 class CSelectableSceneExtenderComp:
 			public icomp::CComponentBase,
 			public imod::TSingleModelObserverBase<iprm::ISelectionParam>,
-			virtual public iqt2d::ISceneExtender
+			virtual public iqt2d::IViewExtender
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -28,7 +28,7 @@ public:
 	CSelectableSceneExtenderComp();
 
 	I_BEGIN_COMPONENT(CSelectableSceneExtenderComp);
-		I_REGISTER_INTERFACE(iqt2d::ISceneExtender);
+		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_ASSIGN_MULTI_0(m_extendersCompPtr, "SceneExtenders", "List of scene extenders", true);
 	I_END_COMPONENT;
@@ -37,9 +37,9 @@ public:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
 
-	// reimplemented (iqt2d::ISceneExtender)
-	virtual void AddItemsToScene(iqt2d::ISceneProvider* providerPtr, int flags);
-	virtual void RemoveItemsFromScene(iqt2d::ISceneProvider* providerPtr);
+	// reimplemented (iqt2d::IViewExtender)
+	virtual void AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags);
+	virtual void RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr);
 
 protected:
 	void AttachCurrent();
@@ -50,9 +50,9 @@ protected:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	I_MULTIREF(iqt2d::ISceneExtender, m_extendersCompPtr);
+	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 
-	typedef std::map<iqt2d::ISceneProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	typedef std::map<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
 
 	int m_currentSelectedIndex;

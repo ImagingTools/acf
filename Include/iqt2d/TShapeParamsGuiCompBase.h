@@ -4,6 +4,8 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
+#include "iview/CShapeControl.h"
+
 #include "iqt2d/TSceneExtenderCompBase.h"
 
 
@@ -32,8 +34,10 @@ protected:
 	typedef typename BaseClass::Shapes Shapes;
 	typedef typename BaseClass::ShapesMap ShapesMap;
 
+	virtual void UpdateShapeView();
+
 	// reimplemented (iqt2d::TSceneExtenderCompBase)
-	virtual void CreateShapes(int sceneId, bool inactiveOnly, Shapes& result);
+	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	I_ATTR(QString, m_unitNameAttrPtr);
 	I_ATTR(double, m_zValueAttrPtr);
@@ -58,7 +62,10 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnAttached(imod::IModel* mo
 				Shape* shapePtr = dynamic_cast<Shape*>(shapes.GetAt(shapeIndex));
 				if (shapePtr != NULL){
 					if (modelPtr->AttachObserver(shapePtr)){
-						shapePtr->setVisible(true);
+						iview::CShapeControl* shapeControllerPtr = dynamic_cast<iview::CShapeControl*>(shapePtr);
+						if (shapeControllerPtr != NULL){
+							shapeControllerPtr->SetVisible(true);
+						}
 					}
 				}
 			}
@@ -87,7 +94,10 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnDetached(imod::IModel* mo
 				if (shapePtr != NULL){
 					modelPtr->DetachObserver(shapePtr);
 
-					shapePtr->setVisible(false);
+					iview::CShapeControl* shapeControllerPtr = dynamic_cast<iview::CShapeControl*>(shapePtr);
+					if (shapeControllerPtr != NULL){
+						shapeControllerPtr->SetVisible(false);
+					}
 				}
 			}
 		}
@@ -102,31 +112,50 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnDetached(imod::IModel* mo
 
 // protected methods
 
+template <class Ui, class Shape, class ShapeModel>
+void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::UpdateShapeView()
+{
+	const ShapesMap& shapesMap = GetShapesMap();
+	for (		ShapesMap::const_iterator index = shapesMap.begin();
+				index != shapesMap.end();
+				index++){
+		IViewProvider* providerPtr = index->first;
+		I_ASSERT(providerPtr != NULL);
+
+		iview::IShapeView* viewPtr = providerPtr->GetView();
+		if (viewPtr != NULL){
+			viewPtr->Update();
+		}
+	}
+}
+
+
 // reimplemented (iqt2d::TSceneExtenderCompBase)
 
 template <class Ui, class Shape, class ShapeModel>
-void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShapes(int /*sceneId*/, bool inactiveOnly, Shapes& result)
+void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShapes(int /*sceneId*/, Shapes& result)
 {
 	I_ASSERT(m_zValueAttrPtr.IsValid());	// this attribute is obligatory
-	Shape* shapePtr = new Shape(!inactiveOnly);
+	Shape* shapePtr = new Shape();
 	if (shapePtr != NULL){
-		shapePtr->setZValue(*m_zValueAttrPtr);
-		shapePtr->setVisible(false);
 		result.PushBack(shapePtr);
 
 		imod::IModel* modelPtr = BaseClass::GetModelPtr();
 		if (modelPtr != NULL){
 			if (modelPtr->AttachObserver(shapePtr)){
-				shapePtr->setVisible(true);
+				iview::CShapeControl* shapeControllerPtr = dynamic_cast<iview::CShapeControl*>(shapePtr);
+				if (shapeControllerPtr != NULL){
+					shapeControllerPtr->SetVisible(true);
+				}
 			}
 		}
 	}
 }
 
 
-} // namespace iqt2d
+} // namespace iview
 
 
-#endif // !iqt2d_TShapeParamsGuiCompBase_included
+#endif // !iview_TShapeParamsGuiCompBase_included
 
 

@@ -1,34 +1,23 @@
 #include "iqt2d/CImageViewComp.h"
 
 
-// ACF includes
-#include <QtGui/QApplication>
-#include <QtGui/QGraphicsScene>
-#include <QtGui/QGraphicsSceneWheelEvent>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QMenu>
-
-
 namespace iqt2d
 {
 
 
 // public methods
 
-// reimplemented (imod::IObserver)
+// reimplemented (ibase::ICommandsProvider)
 
-bool CImageViewComp::OnDetached(imod::IModel* modelPtr)
+const ibase::IHierarchicalCommand* CImageViewComp::GetCommands() const
 {
-	if (BaseClass::OnDetached(modelPtr)){
-		QGraphicsScene* scenePtr = GetScene();
-		if (scenePtr != NULL){
-			scenePtr->update();
-		}
-
-		return true;
+	if (IsGuiCreated()){
+		iview::CConsoleGui* consolePtr = GetQtWidget();
+	
+		return consolePtr->GetCommands();
 	}
 
-	return false;
+	return NULL;
 }
 
 
@@ -38,57 +27,31 @@ bool CImageViewComp::OnDetached(imod::IModel* modelPtr)
 
 void CImageViewComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	iview::CConsoleGui* consolePtr = GetQtWidget();
+	I_ASSERT(consolePtr != NULL);
 
-	istd::CIndex2d imageSize = GetSize();
-	if (imageSize == istd::CIndex2d::GetZero() || imageSize == istd::CIndex2d::GetInvalid()){
-		QGraphicsScene* scenePtr = GetScene();
-		if (scenePtr != NULL){
-			scenePtr->update();
-		}
-
-		return;
-	}
-
-	QGraphicsScene* scenePtr = GetScene();
-	if (scenePtr != NULL){
-		scenePtr->setSceneRect(boundingRect());
-
-		if (m_fitToViewOnChangeAttrPtr.IsValid() && *m_fitToViewOnChangeAttrPtr){
-			OnFitToView();
-		}
-
-		SetFittedScale(GetFitMode());
-	}
+	consolePtr->UpdateView();
 }
 
 
-// reimplemented (iqtgui::CGuiComponentBase)
+// reimplemented (iqtui::CComponentBase)
 
 void CImageViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	SetFrameVisible(*m_isFrameVisibleAttrPtr);
-	SetPositionMode(*m_imagePositionModeAttrPtr);
+	iview::CConsoleGui* consolePtr = GetQtWidget();
+	I_ASSERT(consolePtr != NULL);
 
-	QGraphicsScene* scenePtr = GetScene();
-	if (scenePtr != NULL){
-		scenePtr->addItem(this);
-	}
+	iview::CConsoleGui::ViewImpl& view = consolePtr->GetViewRef();
+	view.SetViewDraggable();
+
+	view.ConnectBackgroundShape(this);
+	view.ConnectCalibrationShape(&m_calibrationShape);
+	view.SetCalibrationPtr(&m_calibration);
 }
 
 
-void CImageViewComp::OnGuiDestroyed()
-{
-	QGraphicsScene* scenePtr = GetScene();
-	if (scenePtr != NULL){
-		scenePtr->removeItem(this);
-	}
+} // namespace iview
 
-	BaseClass::OnGuiDestroyed();
-}
-
-
-} // namespace iqt2d
 

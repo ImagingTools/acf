@@ -63,7 +63,7 @@ void CImageShape::Draw(QPainter& drawContext) const
 
 // reimplemented (imod::IObserver)
 
-void CImageShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CImageShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(GetModelPtr());
 	istd::TDelPtr<iqt::CBitmap> qtBitmapPtr;
@@ -82,6 +82,8 @@ void CImageShape::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, i
 	}
 
 	m_pixmap = QPixmap::fromImage(image, Qt::AutoColor);
+
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
