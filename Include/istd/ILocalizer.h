@@ -5,7 +5,6 @@
 // STL includes
 #include <string>
 
-
 // ACF includes
 #include "istd/IPolymorphic.h"
 

@@ -18,10 +18,10 @@ namespace iview
 
 
 CCalibratedViewBase::CCalibratedViewBase()
-	:   m_calibrationPtr(&CNoneCalibration::GetInstance()),
-		m_isGridVisible(false),
-		m_isGridInMm(true),
-		m_minGridDistance(10)
+	:m_calibrationPtr(&CNoneCalibration::GetInstance()),
+	m_isGridVisible(false),
+	m_isGridInMm(true),
+	m_minGridDistance(10)
 {
 	m_calibrationLayerIndex = -1;
 }

@@ -1,38 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="2">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          1567
+          2213
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1
-        </Id>
-        <Number>
-          252
-        </Number>
-        <Description>
-          ACF-Solutions
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         Directory
       </ComponentName>
       <X>
-        275
+        450
       </X>
       <X>
         400
@@ -43,22 +32,13 @@
         DirectoryGui
       </ComponentName>
       <X>
-        900
+        750
       </X>
       <X>
-        425
-      </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        DirectoryModelBinder
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        225
+        400
       </X>
     </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>

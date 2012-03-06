@@ -2,6 +2,7 @@
 #define iqt2d_TShapeParamsGuiCompBase_included
 
 
+// ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "iview/CShapeControl.h"

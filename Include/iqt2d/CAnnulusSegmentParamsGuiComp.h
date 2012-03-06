@@ -2,12 +2,12 @@
 #define iqt2d_CAnnulusSegmentParamsGuiComp_included
 
 
+// ACF includes
 #include "i2d/CAnnulusSegment.h"
 
-
-#include "iqt2d/TShapeParamsGuiCompBase.h"
 #include "iview/CInteractiveAnnulusSegmentShape.h"
 
+#include "iqt2d/TShapeParamsGuiCompBase.h"
 #include "iqt2d/Generated/ui_CAnnulusSegmentParamsGuiComp.h"
 
 

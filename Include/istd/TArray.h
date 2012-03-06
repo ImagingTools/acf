@@ -5,7 +5,6 @@
 // STL includes
 #include <vector>
 
-
 // ACF includes
 #include "istd/TIndex.h"
 

@@ -5,7 +5,6 @@
 #include <assert.h>
 #include <iostream>
 
-
 // ACF includes
 #include "istd/ITrace.h"
 #include "istd/CStaticServicesProvider.h"

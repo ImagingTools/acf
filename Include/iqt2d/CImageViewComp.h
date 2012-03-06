@@ -37,6 +37,7 @@ public:
 	I_BEGIN_COMPONENT(CImageViewComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
+		I_ASSIGN(m_fitOnStartAttrPtr, "FitToViewOnStart", "If true, the image content will be fit to the view on start", false, true);
 		I_ASSIGN(m_showControlButtonsAttrPtr, "ShowControlButtons", "If true, control buttons will be shown", true, false);
 	I_END_COMPONENT;
 
@@ -52,6 +53,7 @@ protected:
 
 private:
 	I_ATTR(bool, m_showControlButtonsAttrPtr);
+	I_ATTR(bool, m_fitOnStartAttrPtr);
 	iview::CNoneCalibration m_calibration;
 	iview::CNoneCalibrationShape m_calibrationShape;
 };

@@ -4,8 +4,6 @@
 
 // STL includes 
 #include <vector>
-//#include <algorithm>
-
 
 // ACF includes
 #include "istd/istd.h"

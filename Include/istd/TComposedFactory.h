@@ -2,8 +2,10 @@
 #define istd_TComposedFactory_included
 
 
+// STL includes
 #include <list>
 
+// ACF includes
 #include "istd/TIFactory.h"
 #include "istd/TOptDelPtr.h"
 

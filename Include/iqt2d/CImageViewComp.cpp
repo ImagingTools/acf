@@ -31,6 +31,10 @@ void CImageViewComp::UpdateGui(int /*updateFlags*/)
 	I_ASSERT(consolePtr != NULL);
 
 	consolePtr->UpdateView();
+
+	if (m_fitOnStartAttrPtr.IsValid() && *m_fitOnStartAttrPtr){
+		consolePtr->SetZoomToFit();
+	}
 }
 
 
