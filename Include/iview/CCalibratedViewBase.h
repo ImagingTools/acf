@@ -2,10 +2,22 @@
 #define iview_CCalibratedViewBase_included
 
 
+// Qt includes
+#include <QtGui/QPainter>
+#include <QtGui/QWidget>
+
+
+// ACF includes
+#include "istd/TOptDelPtr.h"
+
+#include "i2d/CRect.h"
+
 #include "iview/ICalibration.h"
 #include "iview/IVisualCalibrationInfo.h"
 #include "iview/CNoneCalibration.h"
 #include "iview/CViewBase.h"
+#include "iview/CDrawBuffer.h"
+#include "iview/CColorShema.h"
 
 
 namespace iview
@@ -17,19 +29,21 @@ namespace iview
 	Calibrated view implements iview::ICalibrated interface,
 	and can automatically show calibration grid if supported.
 */
-class CCalibratedViewBase: 
+class CCalibratedViewBase:
+			public QWidget,
 			public iview::CViewBase,
 			virtual public IVisualCalibrationInfo
 {
 public:
 	typedef iview::CViewBase BaseClass;
+	typedef QWidget BaseClass2;
 
 	enum LayerType2
 	{
 		LT_CALIBRATION = 0x100
 	};
 
-	CCalibratedViewBase();
+	CCalibratedViewBase(QWidget* parentWidgetPtr = NULL);
 
 	/**
 		Set calibration object for this view.
@@ -59,7 +73,35 @@ public:
 
 	const iview::CSingleLayer& GetCalibrationLayer() const;
 
+	/**
+		Set default color shema object.
+		\param	colorShemaPtr	pointer to color shema object.
+		\param	releaseFlag		if its true, object will be automatically removed.
+	*/
+	void SetDefaultColorShema(const IColorShema* colorShemaPtr, bool releaseFlag = false);
+
+	bool IsBackgroundBufferActive() const;
+	void SetBackgroundBufferActive(bool state = true);
+	bool IsDoubleBufferActive() const;
+	void SetDoubleBufferActive(bool state = true);
+
+	const iview::CDrawBuffer& GetBackgroundBuffer() const;
+	iview::CDrawBuffer& GetBackgroundBuffer();
+	const iview::CDrawBuffer& GetDoubleBuffer() const;
+	iview::CDrawBuffer& GetDoubleBuffer();
+
+	/**
+		Called if found that display area was resized.
+	*/
+	virtual void OnResize();
+	
+	/**
+		Check if size size was changed and invalidation and OnResize() should be done.
+	*/
+	void CheckResize();
+
 	// reimplemented (iview::CViewBase)
+	virtual const iview::IColorShema& GetDefaultColorShema() const;
 	virtual void UpdateAllShapes(int changeFlag);
 	virtual void InsertDefaultLayers();
 
@@ -77,7 +119,21 @@ public:
 
 	using BaseClass::InvalidateBackground;
 
+protected:
+	virtual void DrawBuffers(QPaintDevice& nativeContext, const i2d::CRect& clipRect);
+	virtual void DrawToContext(QPaintDevice& nativeContext, QPainter& context, const i2d::CRect& invalidatedBox);
+
 private:
+	mutable istd::TOptDelPtr<const IColorShema> m_defaultColorShemaPtr;
+
+	iview::CDrawBuffer m_backgroundBuffer;
+	iview::CDrawBuffer m_doubleBuffer;
+
+	bool m_isBackgroundBufferActive;
+	bool m_isDoubleBufferActive;
+
+	i2d::CRect m_lastClientArea;
+
 	const ICalibration* m_calibrationPtr;
 	bool m_isGridVisible;
 	bool m_isGridInMm;

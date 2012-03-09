@@ -12,6 +12,8 @@
 
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
+
 #include "iqtgui/CWidgetUpdateBlocker.h"
 
 
@@ -81,68 +83,6 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 
 	m_viewPtr->setSizePolicy(expandingPolicy);
 
-	m_rootCommands.InsertChild(&m_commands);
-
-	// zoom commands
-	m_zoomInCommand.setIcon(QIcon(":/Icons/ZoomIn.svg"));
-	m_zoomInCommand.setToolTip(tr("Zoom In"));
-	m_commands.InsertChild(&m_zoomInCommand);
-
-	m_zoomOutCommand.setIcon(QIcon(":/Icons/ZoomOut.svg"));
-	m_zoomOutCommand.setToolTip(tr("Zoom Out"));
-	m_commands.InsertChild(&m_zoomOutCommand);
-
-	m_zoomResetCommand.setIcon(QIcon(":/Icons/ZoomReset.svg"));
-	m_zoomResetCommand.setToolTip(tr("Reset Zoom"));
-	m_commands.InsertChild(&m_zoomResetCommand);
-
-	m_zoomToFitCommand.setIcon(QIcon(":/Icons/ZoomToFit.svg"));
-	m_zoomToFitCommand.setToolTip(tr("Zoom to Fit"));
-	m_commands.InsertChild(&m_zoomToFitCommand);
-
-	// points commands
-	m_pointsSelectCommand.setIcon(QIcon(":/Icons/PointsNone"));
-	m_pointsSelectCommand.setToolTip(tr("Objects Selection Mode"));
-	m_commands.InsertChild(&m_pointsSelectCommand);
-
-	m_pointsMoveCommand.setIcon(QIcon(":/Icons/PointsMove"));
-	m_pointsMoveCommand.setToolTip(tr("Objects Modification Mode"));
-	m_commands.InsertChild(&m_pointsMoveCommand);
-
-	m_pointsAddCommand.setIcon(QIcon(":/Icons/PointsAdd"));
-	m_pointsAddCommand.setToolTip(tr("Points Adding Mode"));
-	m_commands.InsertChild(&m_pointsAddCommand);
-
-	m_pointsSubCommand.setIcon(QIcon(":/Icons/PointsSub"));
-	m_pointsSubCommand.setToolTip(tr("Points Removing Mode"));
-	m_commands.InsertChild(&m_pointsSubCommand);
-
-	// components visibility commands
-	m_gridVisibleCommand.setIcon(QIcon(":/Icons/ShowGrid"));
-	m_gridVisibleCommand.setToolTip(tr("Show/Hide Grid"));
-	m_gridVisibleCommand.setChecked(IsGridVisible());
-	m_commands.InsertChild(&m_gridVisibleCommand);
-
-	m_rulerVisibleCommand.setIcon(QIcon(":/Icons/ShowRuler"));
-	m_rulerVisibleCommand.setToolTip(tr("Show/Hide Ruler"));
-	m_rulerVisibleCommand.setChecked(IsRulerVisible());
-	m_commands.InsertChild(&m_rulerVisibleCommand);
-
-	m_gridInMmVisibleCommand.setIcon(QIcon(":/Icons/ShowMm"));
-	m_gridInMmVisibleCommand.setToolTip(tr("Show/Hide Millimeters"));
-	m_gridInMmVisibleCommand.setChecked(IsGridInMm());
-	m_commands.InsertChild(&m_gridInMmVisibleCommand);
-
-	m_scrollVisibleCommand.setIcon(QIcon(":/Icons/ShowScrollbar"));
-	m_scrollVisibleCommand.setToolTip(tr("Show/Hide Scrollbars"));
-	m_scrollVisibleCommand.setChecked(AreScrollbarsVisible());
-	m_commands.InsertChild(&m_scrollVisibleCommand);
-
-	m_statusVisibleCommand.setIcon(QIcon(":/Icons/ShowStatus"));
-	m_statusVisibleCommand.setToolTip(tr("Show/Hide Status"));
-	m_statusVisibleCommand.setChecked(IsStatusVisible());
-	m_commands.InsertChild(&m_statusVisibleCommand);
-
 	//    languageChange();
 	resize(QSize(604, 480).expandedTo(minimumSizeHint()));
 
@@ -151,6 +91,7 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	UpdateEditModeButtons();
 	UpdateButtonsState();
 	UpdateComponentsPosition();
+	UpdateCommands();
 
 	ConnectSignalSlots();
 }
@@ -169,6 +110,7 @@ const ibase::IHierarchicalCommand* CConsoleGui::GetCommands() const
 void CConsoleGui::OnZoomIn()
 {
 	m_viewPtr->SetZoom(iview::CViewBase::ZM_ZOOM_IN);
+
 	UpdateZoomInOutState();
 }
 
@@ -176,6 +118,7 @@ void CConsoleGui::OnZoomIn()
 void CConsoleGui::OnZoomOut()
 {
 	m_viewPtr->SetZoom(iview::CViewBase::ZM_ZOOM_OUT);
+
 	UpdateZoomInOutState();
 }
 
@@ -183,6 +126,7 @@ void CConsoleGui::OnZoomOut()
 void CConsoleGui::OnZoomReset()
 {
 	m_viewPtr->SetZoom(iview::CViewBase::ZM_RESET);
+
 	UpdateZoomInOutState();
 }
 
@@ -190,8 +134,17 @@ void CConsoleGui::OnZoomReset()
 void CConsoleGui::OnZoomToFit(bool state)
 {
 	SetZoomToFit(state);
+
 	UpdateZoomInOutState();
 }
+
+void CConsoleGui::OnFitContentstoView()
+{
+	m_viewPtr->SetZoom(iview::CViewBase::ZM_FIT);
+
+	UpdateZoomInOutState();
+}
+
 
 
 void CConsoleGui::OnPointsNone()
@@ -233,6 +186,7 @@ void CConsoleGui::OnShowStatus(bool state)
 void CConsoleGui::OnShowGrid(bool state)
 {
 	SetGridVisible(state);
+
 	m_viewPtr->Update();
 }
 
@@ -246,6 +200,7 @@ void CConsoleGui::OnShowRuler(bool state)
 void CConsoleGui::OnShowGridInMm(bool state)
 {
 	SetGridInMm(state);
+
 	m_viewPtr->Update();
 }
 
@@ -381,7 +336,7 @@ void CConsoleGui::UpdateScrollbarsValues()
 }
 
 
-// reimplemented (iview::TFrameBase)
+// reimplemented (iview::CConsoleBase)
 
 void CConsoleGui::UpdateCursorInfo(const BaseClass::CursorInfo& info)
 {
@@ -498,6 +453,83 @@ void CConsoleGui::UpdateComponentsPosition()
 	m_gridVisibleCommand.setVisible(areButtonsVisible && IsGridButtonVisible());
 	m_rulerVisibleCommand.setVisible(areButtonsVisible && IsRulerButtonVisible());
 	m_gridInMmVisibleCommand.setVisible(areButtonsVisible && IsMmButtonVisible());
+}
+
+
+void CConsoleGui::UpdateCommands()
+{
+	istd::CChangeNotifier changePtr(this, ibase::ICommandsProvider::CF_COMMANDS);
+
+	m_rootCommands.ResetChilds();
+	m_commands.ResetChilds();
+
+	m_rootCommands.InsertChild(&m_commands);
+
+	// zoom commands
+	m_zoomInCommand.setIcon(QIcon(":/Icons/ZoomIn.svg"));
+	m_zoomInCommand.setToolTip(tr("Zoom In"));
+	m_commands.InsertChild(&m_zoomInCommand);
+
+	m_zoomOutCommand.setIcon(QIcon(":/Icons/ZoomOut.svg"));
+	m_zoomOutCommand.setToolTip(tr("Zoom Out"));
+	m_commands.InsertChild(&m_zoomOutCommand);
+
+	m_zoomResetCommand.setIcon(QIcon(":/Icons/ZoomReset.svg"));
+	m_zoomResetCommand.setToolTip(tr("Reset Zoom"));
+	m_commands.InsertChild(&m_zoomResetCommand);
+
+	m_zoomToFitCommand.setIcon(QIcon(":/Icons/ZoomToFit.svg"));
+	m_zoomToFitCommand.setToolTip(tr("Zoom to Fit"));
+	m_commands.InsertChild(&m_zoomToFitCommand);
+
+	// points commands
+	if (ArePolylineButtonsVisible()){
+		m_pointsSelectCommand.setIcon(QIcon(":/Icons/PointsNone"));
+		m_pointsSelectCommand.setToolTip(tr("Objects Selection Mode"));
+		m_commands.InsertChild(&m_pointsSelectCommand);
+
+		m_pointsMoveCommand.setIcon(QIcon(":/Icons/PointsMove"));
+		m_pointsMoveCommand.setToolTip(tr("Objects Modification Mode"));
+		m_commands.InsertChild(&m_pointsMoveCommand);
+
+		m_pointsAddCommand.setIcon(QIcon(":/Icons/PointsAdd"));
+		m_pointsAddCommand.setToolTip(tr("Points Adding Mode"));
+		m_commands.InsertChild(&m_pointsAddCommand);
+
+		m_pointsSubCommand.setIcon(QIcon(":/Icons/PointsSub"));
+		m_pointsSubCommand.setToolTip(tr("Points Removing Mode"));
+		m_commands.InsertChild(&m_pointsSubCommand);
+	}
+
+	// components visibility commands
+	if (IsGridButtonVisible()){
+		m_gridVisibleCommand.setIcon(QIcon(":/Icons/ShowGrid"));
+		m_gridVisibleCommand.setToolTip(tr("Show/Hide Grid"));
+		m_gridVisibleCommand.setChecked(IsGridVisible());
+		m_commands.InsertChild(&m_gridVisibleCommand);
+	}
+
+	m_rulerVisibleCommand.setIcon(QIcon(":/Icons/ShowRuler"));
+	m_rulerVisibleCommand.setToolTip(tr("Show/Hide Ruler"));
+	m_rulerVisibleCommand.setChecked(IsRulerVisible());
+	m_commands.InsertChild(&m_rulerVisibleCommand);
+
+	if (IsMmButtonVisible()){
+		m_gridInMmVisibleCommand.setIcon(QIcon(":/Icons/ShowMm"));
+		m_gridInMmVisibleCommand.setToolTip(tr("Show/Hide Millimeters"));
+		m_gridInMmVisibleCommand.setChecked(IsGridInMm());
+		m_commands.InsertChild(&m_gridInMmVisibleCommand);
+	}
+
+	m_scrollVisibleCommand.setIcon(QIcon(":/Icons/ShowScrollbar"));
+	m_scrollVisibleCommand.setToolTip(tr("Show/Hide Scrollbars"));
+	m_scrollVisibleCommand.setChecked(AreScrollbarsVisible());
+	m_commands.InsertChild(&m_scrollVisibleCommand);
+
+	m_statusVisibleCommand.setIcon(QIcon(":/Icons/ShowStatus"));
+	m_statusVisibleCommand.setToolTip(tr("Show/Hide Status"));
+	m_statusVisibleCommand.setChecked(IsStatusVisible());
+	m_commands.InsertChild(&m_statusVisibleCommand);
 }
 
 
