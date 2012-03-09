@@ -199,6 +199,24 @@ int CBitmap::GetComponentsCount() const
 	}
 }
 
+icmm::CVarColor CBitmap::GetColorAt(const istd::CIndex2d& position) const
+{
+	int pixelFormat = GetPixelFormat();
+	if (pixelFormat == PF_RGB){
+		icmm::CVarColor rgbValue(3);
+		QColor color(m_image.pixel(position.GetX(), position.GetY()));
+
+		rgbValue[0] = color.red() / 255.0;
+		rgbValue[1] = color.green() / 255.0;
+		rgbValue[2] = color.blue() / 255.0;
+
+		return rgbValue;
+	}
+
+	return BaseClass::GetColorAt(position);
+}
+
+
 
 // reimplemented (istd::IChangeable)
 
