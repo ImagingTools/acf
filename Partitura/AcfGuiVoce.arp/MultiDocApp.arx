@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2195
+          2224
         </Number>
         <Description>
           ACF
@@ -319,11 +319,8 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                :/Style/Resources/Style/AcfStyle.ass
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

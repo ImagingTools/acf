@@ -5,7 +5,10 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
+#include "imod/CMultiModelDispatcherBase.h"
+
 #include "ibase/ICommandsProvider.h"
+#include "ibase/TCommandsProviderCompWrap.h"
 
 #include "iqtgui/CHierarchicalCommand.h"
 
@@ -17,13 +20,14 @@ namespace iqtgui
 /**
 	Component for binding of multiple command providers
 */
-class CCommandsBinderComp: public icomp::CComponentBase, virtual public ibase::ICommandsProvider
+class CCommandsBinderComp:
+			public ibase::TCommandsProviderCompWrap<icomp::CComponentBase>,
+			protected imod::CMultiModelDispatcherBase
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::TCommandsProviderCompWrap<icomp::CComponentBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CCommandsBinderComp);
-		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN_MULTI_0(m_commandProvidersCompPtr, "CommandProviders", "List of command providers", true);
 	I_END_COMPONENT;
 
@@ -31,9 +35,14 @@ public:
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
+	// reimplemented (imod::CMultiModelDispatcherBase)
+	void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 
+private:
+	void CreateCommands();
 private:
 	I_MULTIREF(ibase::ICommandsProvider, m_commandProvidersCompPtr);
 

@@ -465,6 +465,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TCommandsProviderCompWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TComposedFactoryComp.h"
 				>
 			</File>

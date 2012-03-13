@@ -586,6 +586,13 @@ void CMainWindowGuiComp::OnGuiCreated()
 			UpdateRecentFileList(fileMap);
 		}
 	}
+
+	if (m_documentManagerCommandsCompPtr.IsValid()){
+		imod::IModel* modelPtr = CompCastPtr<imod::IModel>(m_documentManagerCommandsCompPtr.GetPtr());
+		if (modelPtr != NULL){
+			m_commandsObserver.RegisterModel(modelPtr, CPI_DOCUMENT_MANAGER, ibase::ICommandsProvider::CF_COMMANDS);
+		}
+	}
 }
 
 
@@ -644,6 +651,24 @@ void CMainWindowGuiComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateP
 
 			bool isViewChanged = (activeViewPtr != m_activeViewPtr);
 			bool isDocumentChanged = (documentPtr != m_activeDocumentPtr);
+
+			if (isViewChanged){
+				m_commandsObserver.UnregisterModel(CPI_ACTIVE_VIEW);
+				ibase::ICommandsProvider* commandsProviderPtr = CompCastPtr<ibase::ICommandsProvider>(activeViewPtr);
+				imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(commandsProviderPtr);
+				if (modelPtr != NULL){
+					m_commandsObserver.RegisterModel(modelPtr, CPI_ACTIVE_VIEW, ibase::ICommandsProvider::CF_COMMANDS);
+				}
+			}
+
+			if (isDocumentChanged){
+				m_commandsObserver.UnregisterModel(CPI_ACTIVE_DOCUMENT);
+				ibase::ICommandsProvider* commandsProviderPtr = CompCastPtr<ibase::ICommandsProvider>(documentPtr);
+				imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(commandsProviderPtr);
+				if (modelPtr != NULL){
+					m_commandsObserver.RegisterModel(modelPtr, CPI_ACTIVE_DOCUMENT, ibase::ICommandsProvider::CF_COMMANDS);
+				}
+			}
 
 			m_activeViewPtr = activeViewPtr;
 			m_activeDocumentPtr = documentPtr;

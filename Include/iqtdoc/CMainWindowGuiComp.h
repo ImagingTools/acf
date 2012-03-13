@@ -54,6 +54,13 @@ public:
 		GI_RECENT_FILE
 	};
 
+	enum CommandProviderId
+	{
+		CPI_DOCUMENT_MANAGER = 100,
+		CPI_ACTIVE_VIEW,
+		CPI_ACTIVE_DOCUMENT
+	};
+
 	CMainWindowGuiComp();
 
 	// reimplemented (imod::IObserver)

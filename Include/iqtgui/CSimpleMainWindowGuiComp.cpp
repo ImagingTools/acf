@@ -18,7 +18,8 @@ namespace iqtgui
 CSimpleMainWindowGuiComp::CSimpleMainWindowGuiComp()
 :	m_menuCommands("Global"),
 	m_showToolBarsCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
-	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR)
+	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
+	m_commandsObserver(*this)
 {
 	connect(&m_showToolBarsCommand, SIGNAL(activated()), this, SLOT(OnShowToolbars()));
 	connect(&m_settingsCommand, SIGNAL(activated()), this, SLOT(OnSettings()));
@@ -185,6 +186,8 @@ int CSimpleMainWindowGuiComp::SetupToolbar(const iqtgui::CHierarchicalCommand& c
 					if ((groupId != prevGroupId) && (prevGroupId != ibase::ICommand::GI_NONE)){
 						result.addSeparator();
 					}
+
+					QString actionName = hierarchicalPtr->GetName();
 
 					result.addAction(hierarchicalPtr);
 
@@ -394,6 +397,24 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 	UpdateMenuActions();
 
 	SetupMainWindowComponents(*mainWindowPtr);
+
+	if (m_workspaceCommandsCompPtr.IsValid()){
+		imod::IModel* modelPtr = CompCastPtr<imod::IModel>(m_workspaceCommandsCompPtr.GetPtr());
+		if (modelPtr != NULL){
+			m_commandsObserver.RegisterModel(modelPtr, 0, ibase::ICommandsProvider::CF_COMMANDS);
+		}
+	}
+
+	if (m_mainWindowCommandsCompPtr.IsValid()){
+		int commandsProviderCount = m_mainWindowCommandsCompPtr.GetCount();
+
+		for (int index = 0; index < commandsProviderCount; index++){
+			imod::IModel* modelPtr = CompCastPtr<imod::IModel>(m_mainWindowCommandsCompPtr[index]);
+			if (modelPtr != NULL){
+				m_commandsObserver.RegisterModel(modelPtr, index + 1, ibase::ICommandsProvider::CF_COMMANDS);
+			}
+		}
+	}
 }
 
 
@@ -465,6 +486,24 @@ void CSimpleMainWindowGuiComp::OnSettings()
 	if (m_settingsDialogCompPtr.IsValid()){
 		m_settingsDialogCompPtr->ExecuteDialog(this);
 	}
+}
+
+
+// public methods of embedded class ActiveUndoManager
+
+CSimpleMainWindowGuiComp::CommandsObserver::CommandsObserver(CSimpleMainWindowGuiComp& parent)
+:	m_parent(parent)
+{
+}
+		
+
+// protected methods of embedded class ActiveUndoManager
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CSimpleMainWindowGuiComp::CommandsObserver::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_parent.UpdateMenuActions();
 }
 
 

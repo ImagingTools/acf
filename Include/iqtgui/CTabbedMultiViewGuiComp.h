@@ -6,7 +6,6 @@
 #include "imod/IModelEditor.h"
 #include "imod/CSingleModelObserverBase.h"
 
-#include "ibase/ICommandsProvider.h"
 
 #include "iqtgui/CHierarchicalCommand.h"
 #include "iqtgui/CTabContainerGuiComp.h"

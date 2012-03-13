@@ -23,26 +23,14 @@ namespace iqt2d
 	Show observed bitmap on the 2D-console.
 	This class extends standard 2D-console to provide background bitmap object.
 */
-class CImageViewComp:
-			public iqtgui::TGuiObserverWrap<
-						CViewProviderGuiComp,
-						iview::CImageShape>,
-			virtual public ibase::ICommandsProvider
+class CImageViewComp: public iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape>
 {
 public:
-	typedef iqtgui::TGuiObserverWrap<
-				CViewProviderGuiComp,
-				iview::CImageShape> BaseClass;
+	typedef iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape> BaseClass;
 
 	I_BEGIN_COMPONENT(CImageViewComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
-		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
-		I_ASSIGN(m_fitOnStartAttrPtr, "FitToViewOnStart", "If true, the image content will be fit to the view on start", false, true);
-		I_ASSIGN(m_showControlButtonsAttrPtr, "ShowControlButtons", "If true, control buttons will be shown", true, false);
 	I_END_COMPONENT;
-
-	// reimplemented (ibase::ICommandsProvider)
-	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
@@ -52,8 +40,6 @@ protected:
 	virtual void OnGuiCreated();
 
 private:
-	I_ATTR(bool, m_showControlButtonsAttrPtr);
-	I_ATTR(bool, m_fitOnStartAttrPtr);
 	iview::CNoneCalibration m_calibration;
 	iview::CNoneCalibrationShape m_calibrationShape;
 };
