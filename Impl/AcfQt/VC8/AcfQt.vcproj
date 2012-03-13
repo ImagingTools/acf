@@ -5,7 +5,6 @@
 	Name="AcfQt"
 	ProjectGUID="{B2B47BD3-CACC-40A8-8B4E-F06F8EA242C4}"
 	RootNamespace="AcfQt"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -126,7 +125,6 @@
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				DebugInformationFormat="3"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>

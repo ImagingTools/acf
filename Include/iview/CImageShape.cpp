@@ -63,14 +63,25 @@ void CImageShape::Draw(QPainter& drawContext) const
 
 // reimplemented (imod::IObserver)
 
+bool CImageShape::OnAttached(imod::IModel* modelPtr)
+{
+	iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(modelPtr);
+	if (bitmapPtr != NULL){
+		return BaseClass::OnAttached(modelPtr);
+	}
+
+	return false;
+}
+
+
 void CImageShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(GetModelPtr());
+	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(modelPtr);
 	istd::TDelPtr<iqt::CBitmap> qtBitmapPtr;
 	if (providerPtr == NULL){
 		qtBitmapPtr.SetPtr(new iqt::CBitmap);
 		providerPtr = qtBitmapPtr.GetPtr();
-		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(GetModelPtr());
+		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(modelPtr);
 		I_ASSERT(bitmapPtr != NULL);
 
 		qtBitmapPtr->CopyFrom(*bitmapPtr);

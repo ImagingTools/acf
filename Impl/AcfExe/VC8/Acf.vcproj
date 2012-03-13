@@ -4,7 +4,6 @@
 	Version="8,00"
 	Name="Acf"
 	ProjectGUID="{BD73E1BC-3B21-4F42-8F7F-A1950C98E852}"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -97,6 +96,9 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -137,8 +139,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				WarningLevel="4"
-				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
 			<Tool
@@ -178,6 +178,9 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"

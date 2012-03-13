@@ -5,7 +5,6 @@
 	Name="Arxc"
 	ProjectGUID="{470627A4-FE37-4A0E-AD07-62D6CF79F90A}"
 	RootNamespace="Arxc"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -31,7 +30,10 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -40,10 +42,7 @@
 				Name="QT Resources"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Qt Linguist"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -112,6 +111,9 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -128,7 +130,10 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="QT Designer Form"
+				Name="QT Moc Metafile"
+			/>
+			<Tool
+				Name="Qt Linguist"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -137,10 +142,7 @@
 				Name="QT Resources"
 			/>
 			<Tool
-				Name="QT Moc Metafile"
-			/>
-			<Tool
-				Name="Qt Linguist"
+				Name="QT Designer Form"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -164,7 +166,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=""
-				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
 			<Tool
@@ -204,6 +205,9 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"

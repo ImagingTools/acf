@@ -75,7 +75,7 @@ void TSceneExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, i
 			iview::IShape* shapePtr = shapes.GetAt(i);
 			if (shapePtr != NULL){
 				if (isBackground){
-					viewPtr->ConnectBackgroundShape(shapePtr);
+					viewPtr->ConnectInactiveShape(shapePtr);
 				}
 				else{
 					viewPtr->ConnectShape(shapePtr);

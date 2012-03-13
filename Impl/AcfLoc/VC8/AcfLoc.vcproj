@@ -5,7 +5,6 @@
 	Name="AcfLoc"
 	ProjectGUID="{BA9FD57D-F5B8-4565-B5F0-4E2BDBCAD017}"
 	RootNamespace="AcfLoc"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -171,7 +170,6 @@
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				DebugInformationFormat="4"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
 			<Tool

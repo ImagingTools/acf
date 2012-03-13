@@ -4,7 +4,6 @@
 	Version="8,00"
 	Name="AcfStd"
 	ProjectGUID="{AA94C676-48A9-4FCF-BC0F-96B0E910F463}"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -125,7 +124,6 @@
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
-				DebugInformationFormat="3"
 				CompileAs="0"
 				DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
 			/>
