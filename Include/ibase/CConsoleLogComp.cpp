@@ -4,9 +4,8 @@
 // STL includes
 #include <iostream>
 
-
 // ACF includes
-#include "ibase/IMessage.h"
+#include "istd/IInformation.h"
 
 
 namespace ibase

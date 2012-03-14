@@ -436,7 +436,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IMessage.h"
+				RelativePath="..\IInformation.h"
 				>
 			</File>
 			<File

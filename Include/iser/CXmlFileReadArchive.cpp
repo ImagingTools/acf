@@ -24,7 +24,7 @@ CXmlFileReadArchive::CXmlFileReadArchive(const QString& filePath, bool serialize
 // reimplemented (istd::ILogger)
 
 void CXmlFileReadArchive::DecorateMessage(
-			MessageCategory /*category*/,
+			istd::IInformation::InformationCategory /*category*/,
 			int /*id*/,
 			int /*flags*/,
 			QString& message,

@@ -318,6 +318,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IInformation.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ILocalizer.h"
 				>
 			</File>

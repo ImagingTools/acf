@@ -35,36 +35,36 @@ CLogGuiComp::CLogGuiComp()
 
 // protected methods
 	
-QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const ibase::IMessage& message)
+QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformation& message)
 {
 	QTreeWidgetItem* treeItemPtr = new QTreeWidgetItem;
 	if (treeItemPtr != NULL){
-		QDateTime dateTime = iqt::GetQDateTime(message.GetTimeStamp());
+		QDateTime timeStamp = message.GetTimeStamp();
 
-		QString date = dateTime.toString();
+		QString date = timeStamp.toString();
 
 		treeItemPtr->setText(CT_TIME, date);
-		treeItemPtr->setText(CT_MESSAGE, message.GetText());
+		treeItemPtr->setText(CT_MESSAGE, message.GetInformationDescription());
 		treeItemPtr->setText(CT_SOURCE, message.GetSource());
 
-		treeItemPtr->setToolTip(CT_TIME, message.GetText());
-		treeItemPtr->setToolTip(CT_MESSAGE, message.GetText());
-		treeItemPtr->setToolTip(CT_SOURCE, message.GetText());
+		treeItemPtr->setToolTip(CT_TIME, message.GetInformationDescription());
+		treeItemPtr->setToolTip(CT_MESSAGE, message.GetInformationDescription());
+		treeItemPtr->setToolTip(CT_SOURCE, message.GetInformationDescription());
 		treeItemPtr->setData(0, DR_MESSAGE_ID, QVariant::fromValue((void*)&message));
-		treeItemPtr->setData(0, DR_CATEGORY, message.GetCategory());
+		treeItemPtr->setData(0, DR_CATEGORY, message.GetInformationCategory());
 
 		QIcon messageIcon;
-		switch (message.GetCategory()){
-		case istd::ILogger::MC_WARNING:
+		switch (message.GetInformationCategory()){
+		case istd::IInformation::IC_WARNING:
 			messageIcon = m_warningIcon;
 			break;
 
-		case istd::ILogger::MC_ERROR:
-		case istd::ILogger::MC_CRITICAL:
+		case istd::IInformation::IC_ERROR:
+		case istd::IInformation::IC_CRITICAL:
 			messageIcon = m_errorIcon;
 			break;
 
-		case istd::ILogger::MC_INFO:
+		case istd::IInformation::IC_INFO:
 			messageIcon = m_infoIcon;
 			break;
 		}
@@ -84,21 +84,21 @@ void CLogGuiComp::UpdateItemState(QTreeWidgetItem& item) const
 }
 
 
-QIcon CLogGuiComp::GetIcon(istd::ILogger::MessageCategory mode)
+QIcon CLogGuiComp::GetIcon(istd::IInformation::InformationCategory mode)
 {
 	QIcon messageIcon;
 	switch (mode)
 	{
-	case istd::ILogger::MC_WARNING:
+	case istd::IInformation::IC_WARNING:
 		messageIcon = m_warningIcon;
 		break;
 
-	case istd::ILogger::MC_ERROR:
-	case istd::ILogger::MC_CRITICAL:
+	case istd::IInformation::IC_ERROR:
+	case istd::IInformation::IC_CRITICAL:
 		messageIcon = m_errorIcon;
 		break;
 
-	case istd::ILogger::MC_INFO:
+	case istd::IInformation::IC_INFO:
 		messageIcon = m_infoIcon;
 		break;
 	}
@@ -220,7 +220,7 @@ void CLogGuiComp::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IP
 		}
 
 		if (updateFlags & ibase::IMessageContainer::CF_MESSAGE_REMOVED){
-			ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(updateParamsPtr);
+			istd::IInformation* messagePtr = dynamic_cast<istd::IInformation*>(updateParamsPtr);
 			if (messagePtr != NULL){
 				Q_EMIT EmitRemoveMessage(QVariant::fromValue((void*)messagePtr));
 			}
@@ -234,7 +234,7 @@ void CLogGuiComp::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IP
 void CLogGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
 	if (((updateFlags & ibase::IMessageContainer::CF_MESSAGE_ADDED) != 0) && IsGuiCreated()){
-		ibase::IMessage* messagePtr = dynamic_cast<ibase::IMessage*>(updateParamsPtr);
+		istd::IInformation* messagePtr = dynamic_cast<istd::IInformation*>(updateParamsPtr);
 		if (messagePtr != NULL){
 			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
 			if (itemPtr != NULL){

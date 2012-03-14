@@ -7,6 +7,7 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
+#include "istd/IInformation.h"
 
 
 namespace istd
@@ -21,33 +22,11 @@ class ILogger: virtual public IPolymorphic
 {
 public:
 	/**
-		Category of message.
-	*/
-	enum MessageCategory
-	{
-		MC_INFO,
-		MC_WARNING,
-		MC_ERROR,
-		MC_CRITICAL
-	};
-
-	/**
-		Additionaly message flags.
-	*/
-	enum MessageFlags
-	{
-		MF_DEBUG = 0x1,
-		MF_SYSTEM = 0x2,
-		MF_USER = 0x4
-	};
-
-protected:
-	/**
 		Check if any log message is consumed.
 		Default implementation retuns false.
 	*/
 	virtual bool IsLogConsumed(
-				const MessageCategory* categoryPtr = NULL,
+				const IInformation::InformationCategory* categoryPtr = NULL,
 				const int* flagsPtr = NULL) const;
 
 	/**
@@ -60,17 +39,18 @@ protected:
 		\return	true, if it was possible to send this message and it is 'consumed'.
 	*/
 	virtual bool SendLogMessage(
-				MessageCategory category,
+				IInformation::InformationCategory category,
 				int id,
 				const QString& message,
 				const QString& messageSource,
 				int flags = 0) const;
 
+protected:
 	/**
 		Decorate message parts before outputting.
 	*/
 	virtual void DecorateMessage(
-				MessageCategory category,
+				IInformation::InformationCategory category,
 				int id,
 				int flags,
 				QString& message,
@@ -81,21 +61,28 @@ protected:
 // inline methods
 
 inline bool ILogger::IsLogConsumed(
-			const MessageCategory* /*categoryPtr*/,
+			const IInformation::InformationCategory* /*categoryPtr*/,
 			const int* /*flagsPtr*/) const
 {
 	return false;
 }
 
 
-inline bool ILogger::SendLogMessage(MessageCategory /*category*/, int /*id*/, const QString& /*message*/, const QString& /*messageSource*/, int /*flags*/) const
+inline bool ILogger::SendLogMessage(
+			IInformation::InformationCategory /*category*/,
+			int /*id*/,
+			const QString& /*message*/,
+			const QString& /*messageSource*/,
+			int /*flags*/) const
 {
 	return false;
 }
 
 
+// protected methods
+
 inline void ILogger::DecorateMessage(
-			MessageCategory /*category*/,
+			IInformation::InformationCategory /*category*/,
 			int /*id*/,
 			int /*flags*/,
 			QString& /*message*/,

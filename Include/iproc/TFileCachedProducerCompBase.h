@@ -90,7 +90,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
 			cacheFilePath = foundIter->second;
-			I_ASSERT(!cacheFilePath.IsEmpty());
+			I_ASSERT(!cacheFilePath.isEmpty());
 		}
 		else{
 			cacheFilePath = CalcCacheFilePath(key);

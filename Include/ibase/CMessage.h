@@ -2,14 +2,13 @@
 #define ibase_CMessage_included
 
 
-#include "istd/ILogger.h"
-#include "istd/TSmartPtr.h"
-
+// Qt includes
 #include <QtCore/QString>
 
-#include "isys/CSimpleDateTime.h"
+// ACF includes
+#include "istd/IInformation.h"
 
-#include "ibase/IMessage.h"
+#include "iser/ISerializable.h"
 
 
 namespace ibase
@@ -17,72 +16,69 @@ namespace ibase
 
 
 /**
-	Basic implementation of the ibase::IMessage interface
+	Basic implementation of the istd::IInformation interface
 */
-class CMessage: virtual public ibase::IMessage
+class CMessage:
+			virtual public istd::IInformation,
+			virtual public iser::ISerializable
 {
 public:
 	CMessage();
-	CMessage(	istd::ILogger::MessageCategory category,
+	CMessage(	istd::IInformation::InformationCategory category,
 				int id,
 				const QString& text,
 				const QString& source,
 				int flags = 0);
 
-	virtual void SetCategory(istd::ILogger::MessageCategory category);
+	virtual void SetCategory(istd::IInformation::InformationCategory category);
 	virtual void SetText(const QString& text);
 	virtual void SetSource(const QString& source);
 
-	// reimplemented (ibase::IMessage)
-	virtual const isys::IDateTime& GetTimeStamp() const;
-	virtual istd::ILogger::MessageCategory GetCategory() const;
-	virtual int GetId() const;
-	virtual QString GetText() const;
+	// reimplemented (istd::IInformation)
+	virtual QDateTime GetTimeStamp() const;
+	virtual InformationCategory GetInformationCategory() const;
+	virtual int GetInformationId() const;
+	virtual QString GetInformationDescription() const;
 	virtual QString GetSource() const;
 	virtual int GetFlags() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-private:
-	void InitializeMessageTime();
-
 protected:
-	typedef istd::TSmartPtr<isys::IDateTime> TimePtr;
-
-	istd::ILogger::MessageCategory m_category;
+	istd::IInformation::InformationCategory m_category;
 	int m_id;
 	QString m_text;
 	QString m_source;
 	int m_flags;
 
-	TimePtr m_timePtr;
+	QDateTime m_timeStamp;
 };
 
 
 // inline methods
 
-// reimplemented (ibase::IMessage)
+// reimplemented (istd::IInformation)
 
-inline const isys::IDateTime& CMessage::GetTimeStamp() const
+inline QDateTime CMessage::GetTimeStamp() const
 {
-	return *m_timePtr;
+	return m_timeStamp;
 }
 
 
-inline istd::ILogger::MessageCategory CMessage::GetCategory() const
+inline istd::IInformation::InformationCategory CMessage::GetInformationCategory() const
 {
 	return m_category;
 }
 
 
-inline int CMessage::GetId() const
+inline int CMessage::GetInformationId() const
 {
 	return m_id;
 }
 
 
-inline QString CMessage::GetText() const
+inline QString CMessage::GetInformationDescription() const
 {
 	return m_text;
 }

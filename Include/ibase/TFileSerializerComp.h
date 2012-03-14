@@ -72,14 +72,14 @@ protected:
 	protected:
 		// reimplemented (istd::ILogger)
 		virtual bool IsLogConsumed(
-					const MessageCategory* /*categoryPtr*/,
+					const istd::IInformation::InformationCategory* /*categoryPtr*/,
 					const int* flagsPtr = NULL) const
 		{
-			static const MessageCategory slaveCategory = MC_INFO;
+			static const istd::IInformation::InformationCategory slaveCategory = istd::IInformation::IC_INFO;
 
 			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(&slaveCategory, flagsPtr);
 		}
-		virtual bool SendLogMessage(MessageCategory category, int id, const QString& message, const QString& messageSource, int flags = 0) const
+		virtual bool SendLogMessage(istd::IInformation::InformationCategory category, int id, const QString& message, const QString& messageSource, int flags = 0) const
 		{
 			if (m_loggerPtr != NULL){
 				QString correctedMessage = message;
@@ -87,7 +87,7 @@ protected:
 
 				BaseClass::DecorateMessage(category, id, flags, correctedMessage, correctedMessageSource);
 
-				return m_loggerPtr->SendLogMessage(MC_INFO, id, correctedMessage, correctedMessageSource, flags);
+				return m_loggerPtr->SendLogMessage(istd::IInformation::IC_INFO, id, correctedMessage, correctedMessageSource, flags);
 			}
 
 			return false;
@@ -111,14 +111,14 @@ protected:
 	protected:
 		// reimplemented (istd::ILogger)
 		virtual bool IsLogConsumed(
-					const MessageCategory* /*categoryPtr*/,
+					const istd::IInformation::InformationCategory* /*categoryPtr*/,
 					const int* flagsPtr = NULL) const
 		{
-			static const MessageCategory slaveCategory = MC_INFO;
+			static const istd::IInformation::InformationCategory slaveCategory = istd::IInformation::IC_INFO;
 
 			return (m_loggerPtr != NULL) && m_loggerPtr->IsLogConsumed(&slaveCategory, flagsPtr);
 		}
-		virtual bool SendLogMessage(MessageCategory category, int id, const QString& message, const QString& messageSource, int flags = 0) const
+		virtual bool SendLogMessage(istd::IInformation::InformationCategory category, int id, const QString& message, const QString& messageSource, int flags = 0) const
 		{
 			if (m_loggerPtr != NULL){
 				QString correctedMessage = message;

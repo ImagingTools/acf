@@ -1,11 +1,9 @@
 #include "ibase/CMessage.h"
 
 
-#include "isys/IDateTime.h"
-
+// ACF includes
 #include "iser/IArchive.h"
-
-#include "istd/CStaticServicesProvider.h"
+#include "iser/CArchiveTag.h"
 
 
 namespace ibase
@@ -13,13 +11,13 @@ namespace ibase
 
 
 CMessage::CMessage()
+:	m_timeStamp(QDateTime::currentDateTime())
 {
-	InitializeMessageTime();
 }
 
 
 CMessage::CMessage(
-			istd::ILogger::MessageCategory category,
+			istd::IInformation::InformationCategory category,
 			int id,
 			const QString& text,
 			const QString& source,
@@ -28,13 +26,13 @@ CMessage::CMessage(
 	m_id(id),
 	m_text(text),
 	m_source(source),
-	m_flags(flags)
+	m_flags(flags),
+	m_timeStamp(QDateTime::currentDateTime())
 {
-	InitializeMessageTime();
 }
 
 
-void CMessage::SetCategory(istd::ILogger::MessageCategory category)
+void CMessage::SetCategory(istd::IInformation::InformationCategory category)
 {
 	m_category = category;
 }
@@ -56,6 +54,8 @@ void CMessage::SetSource(const QString& source)
 
 bool CMessage::Serialize(iser::IArchive& archive)
 {
+	bool isStoring = archive.IsStoring();
+
 	int category = m_category;
 
 	static iser::CArchiveTag categoryTag("Category", "Message category");
@@ -63,8 +63,8 @@ bool CMessage::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(category);
 	retVal = retVal && archive.EndTag(categoryTag);
 
-	if (!archive.IsStoring()){
-		m_category = istd::ILogger::MessageCategory(category);
+	if (!isStoring){
+		m_category = istd::IInformation::InformationCategory(category);
 	}
 
 	static iser::CArchiveTag textTag("Text", "Message text");
@@ -77,27 +77,17 @@ bool CMessage::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.Process(m_source);
 	retVal = retVal && archive.EndTag(sourceTag);
 
-	I_ASSERT(m_timePtr.IsValid());
 	static iser::CArchiveTag timeStampTag("Timestamp", "Message time stamp");
 	retVal = retVal && archive.BeginTag(timeStampTag);
-	retVal = retVal && m_timePtr->Serialize(archive);
+	QString timeStampString = m_timeStamp.toString(Qt::ISODate);
+	retVal = retVal && archive.Process(timeStampString);
 	retVal = retVal && archive.EndTag(timeStampTag);
 
-
-	return retVal;
-}
-
-
-// private methods
-
-void CMessage::InitializeMessageTime()
-{
-	m_timePtr = istd::CreateService<isys::IDateTime>();
-	if (!m_timePtr.IsValid()){
-		m_timePtr.SetPtr(new isys::CSimpleDateTime);
+	if (!isStoring){
+		m_timeStamp = QDateTime::fromString(timeStampString, Qt::ISODate);
 	}
 
-	m_timePtr->SetCurrentTime();
+	return retVal;
 }
 
 

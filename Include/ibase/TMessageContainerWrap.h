@@ -7,12 +7,12 @@
 
 
 // ACF includes
+#include "istd/IInformation.h"
 #include "istd/TChangeNotifier.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "ibase/IMessage.h"
 #include "ibase/IMessageContainer.h"
 #include "ibase/THierarchicalBase.h"
 
@@ -49,7 +49,7 @@ public:
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
-				const IMessage* messagePtr = NULL) const;
+				const istd::IInformation* messagePtr = NULL) const;
 	virtual void AddMessage(const IMessageConsumer::MessagePtr& messagePtr);
 
 	// pseudo-reimplemented (ibase::IHierarchicalMessageContainer)
@@ -123,10 +123,12 @@ bool TMessageContainerWrap<Base>::Serialize(iser::IArchive& archive)
 	for (		MessageList::const_iterator iter = m_messages.begin();
 				iter != m_messages.end();
 				++iter){
-		const IMessageContainer::MessagePtr& messagePtr = *iter;
+		const IMessageConsumer::MessagePtr& messagePtr = *iter;
+
+		iser::ISerializable* serMessagePtr = const_cast<iser::ISerializable*>(dynamic_cast<const iser::ISerializable*>(messagePtr.GetPtr()));
 
 		retVal = retVal && archive.BeginTag(messageTag);
-		retVal = retVal && const_cast<IMessage*>(messagePtr.GetPtr())->Serialize(archive);
+		retVal = retVal && serMessagePtr->Serialize(archive);
 		retVal = retVal && archive.EndTag(messageTag);
 	}
 
@@ -168,7 +170,7 @@ int TMessageContainerWrap<Base>::GetWorstCategory() const
 					++iter){
 			const IMessageContainer::MessagePtr& messagePtr = *iter;
 
-			int category = messagePtr->GetCategory();
+			int category = messagePtr->GetInformationCategory();
 			if (category > worstCategory){
 				worstCategory = category;
 			}
@@ -220,7 +222,7 @@ template <class Base>
 bool TMessageContainerWrap<Base>::IsMessageSupported(
 			int /*messageCategory*/,
 			int /*messageId*/,
-			const IMessage* /*messagePtr*/) const
+			const istd::IInformation* /*messagePtr*/) const
 {
 	return true;
 }
@@ -239,11 +241,11 @@ void TMessageContainerWrap<Base>::AddMessage(const IMessageConsumer::MessagePtr&
 		istd::TChangeNotifier<IMessageContainer> changePtr(
 					this,
 					IMessageContainer::CF_MESSAGE_ADDED,
-					const_cast<IMessage*>(messagePtr.GetPtr()));
+					const_cast<istd::IInformation*>(messagePtr.GetPtr()));
 
 		m_messages.push_back(messagePtr);
 
-		int messageCategory = messagePtr->GetCategory();
+		int messageCategory = messagePtr->GetInformationCategory();
 		if ((m_worstCategory >= 0) && (messageCategory > m_worstCategory)){
 			m_worstCategory = messageCategory;
 		}
@@ -257,9 +259,9 @@ void TMessageContainerWrap<Base>::AddMessage(const IMessageConsumer::MessagePtr&
 			istd::TChangeNotifier<IMessageContainer> changePtr(
 						this,
 						IMessageContainer::CF_MESSAGE_REMOVED,
-						const_cast<IMessage*>(messageToRemovePtr.GetPtr()));
+						const_cast<istd::IInformation*>(messageToRemovePtr.GetPtr()));
 
-			int removeCategory = messageToRemovePtr->GetCategory();
+			int removeCategory = messageToRemovePtr->GetInformationCategory();
 			if (removeCategory >= m_worstCategory){
 				m_worstCategory = -1;
 			}

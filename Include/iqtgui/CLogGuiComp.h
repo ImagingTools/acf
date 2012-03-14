@@ -52,10 +52,10 @@ protected:
 
 	enum MessageMode
 	{
-		MM_INFO = istd::ILogger::MC_INFO,
-		MM_WARNING = istd::ILogger::MC_WARNING,
-		MM_ERROR = istd::ILogger::MC_ERROR,
-		MM_ALL = istd::ILogger::MC_CRITICAL
+		MM_INFO = istd::IInformation::IC_INFO,
+		MM_WARNING = istd::IInformation::IC_WARNING,
+		MM_ERROR = istd::IInformation::IC_ERROR,
+		MM_ALL = istd::IInformation::IC_CRITICAL
 	};
 
 	enum DataRole
@@ -67,13 +67,13 @@ protected:
 	/**
 		Create GUI item corresponding to specified message.
 	*/
-	virtual QTreeWidgetItem* CreateGuiItem(const ibase::IMessage& message);
+	virtual QTreeWidgetItem* CreateGuiItem(const istd::IInformation& message);
 	virtual void UpdateItemState(QTreeWidgetItem& item) const;
 
 	/**
 		Get icons corresponding to specified MessageMode
 	*/
-	virtual QIcon GetIcon(istd::ILogger::MessageCategory mode);
+	virtual QIcon GetIcon(istd::IInformation::InformationCategory mode);
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void OnGuiModelAttached();

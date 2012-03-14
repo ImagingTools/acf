@@ -1,13 +1,12 @@
 #include "ibase/CTextFileLogComp.h"
 
 
-#include "imod/IModel.h"
-
-#include "ibase/IMessage.h"
-
-
 // STL includes
 #include <iostream>
+
+// ACF includes
+#include "istd/IInformation.h"
+#include "imod/IModel.h"
 
 
 namespace ibase

@@ -33,7 +33,7 @@ protected:
 
 	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
-				MessageCategory category,
+				istd::IInformation::InformationCategory category,
 				int id,
 				int flags,
 				QString& message,
@@ -141,7 +141,7 @@ bool TXmlStreamReadArchiveBase<StreamClass>::ReadToDelimeter(
 
 template <class StreamClass>
 void TXmlStreamReadArchiveBase<StreamClass>::DecorateMessage(
-			MessageCategory category,
+			istd::IInformation::InformationCategory category,
 			int id,
 			int flags,
 			QString& message,

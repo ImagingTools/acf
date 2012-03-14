@@ -33,7 +33,7 @@ public:
 protected:
 	/**
 		Send info message to log.
-		\sa ibase::IMessage for message meaning documentation.
+		\sa istd::IInformation for message meaning documentation.
 		\param	id				binary id identifying this message type for automatical processing.
 		\param	message			message text will be send.
 		\param	messageSource	source of the message
@@ -46,7 +46,7 @@ protected:
 
 	/**
 		Send warning message to log.
-		\sa ibase::IMessage for message meaning documentation.
+		\sa istd::IInformation for message meaning documentation.
 		\param	id				binary id identifying this message type for automatical processing.
 		\param	message			message text will be send.
 		\param	messageSource	source of the message
@@ -59,7 +59,7 @@ protected:
 
 	/**
 		Send error message to log.
-		\sa ibase::IMessage for message meaning documentation.
+		\sa istd::IInformation for message meaning documentation.
 		\param	id				binary id identifying this message type for automatical processing.
 		\param	message			message text will be send.
 		\param	messageSource	source of the message
@@ -72,7 +72,7 @@ protected:
 
 	/**
 		Send critical message to log.
-		\sa ibase::IMessage for message meaning documentation.
+		\sa istd::IInformation for message meaning documentation.
 		\param	id				binary id identifying this message type for automatical processing.
 		\param	message			message text will be send.
 		\param	messageSource	optional human readable description of message source.
@@ -85,10 +85,10 @@ protected:
 
 	// reimplemented (istd::ILogger)
 	virtual bool IsLogConsumed(
-				const MessageCategory* categoryPtr = NULL,
+				const istd::IInformation::InformationCategory* categoryPtr = NULL,
 				const int* flagsPtr = NULL) const;
 	virtual bool SendLogMessage(
-				MessageCategory category,
+				istd::IInformation::InformationCategory category,
 				int id,
 				const QString& message,
 				const QString& messageSource,
@@ -129,28 +129,28 @@ inline ibase::IMessageConsumer* TLoggerWrap<Base>::GetLogPtr() const
 template <class Base>
 bool TLoggerWrap<Base>::SendInfoMessage(int id, const QString& message, const QString& messageSource, int flags) const
 {
-	return SendLogMessage(istd::ILogger::MC_INFO, id, message, messageSource, flags);
+	return SendLogMessage(istd::IInformation::IC_INFO, id, message, messageSource, flags);
 }
 
 
 template <class Base>
 bool TLoggerWrap<Base>::SendWarningMessage(int id, const QString& message, const QString& messageSource, int flags) const
 {
-	return SendLogMessage(istd::ILogger::MC_WARNING, id, message, messageSource, flags);
+	return SendLogMessage(istd::IInformation::IC_WARNING, id, message, messageSource, flags);
 }
 
 
 template <class Base>
 bool TLoggerWrap<Base>::SendErrorMessage(int id, const QString& message, const QString& messageSource, int flags) const
 {
-	return SendLogMessage(istd::ILogger::MC_ERROR, id, message, messageSource, flags);
+	return SendLogMessage(istd::IInformation::IC_ERROR, id, message, messageSource, flags);
 }
 
 
 template <class Base>
 bool TLoggerWrap<Base>::SendCriticalMessage(int id, const QString& message, const QString& messageSource, int flags) const
 {
-	return SendLogMessage(istd::ILogger::MC_CRITICAL, id, message, messageSource, flags);
+	return SendLogMessage(istd::IInformation::IC_CRITICAL, id, message, messageSource, flags);
 }
 
 
@@ -158,7 +158,7 @@ bool TLoggerWrap<Base>::SendCriticalMessage(int id, const QString& message, cons
 
 template <class Base>
 bool TLoggerWrap<Base>::IsLogConsumed(
-			const MessageCategory* /*categoryPtr*/,
+			const istd::IInformation::InformationCategory* /*categoryPtr*/,
 			const int* /*flagsPtr*/) const
 {
 	return (m_logPtr != NULL);
@@ -167,7 +167,7 @@ bool TLoggerWrap<Base>::IsLogConsumed(
 
 template <class Base>
 bool TLoggerWrap<Base>::SendLogMessage(
-			istd::ILogger::MessageCategory category,
+			istd::IInformation::InformationCategory category,
 			int id,
 			const QString& message,
 			const QString& messageSource,
@@ -179,7 +179,7 @@ bool TLoggerWrap<Base>::SendLogMessage(
 
 		DecorateMessage(category, id, flags, correctedMessage, correctedMessageSource);
 
-		m_logPtr->AddMessage(istd::TSmartPtr<const IMessage>(new ibase::CMessage(category, id, correctedMessage, correctedMessageSource, flags)));
+		m_logPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(category, id, correctedMessage, correctedMessageSource, flags)));
 	
 		return true;
 	}

@@ -34,19 +34,19 @@ public:
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
-				const IMessage* messagePtr = NULL) const;
+				const istd::IInformation* messagePtr = NULL) const;
 	virtual void AddMessage(const MessagePtr& messagePtr);
 
 protected:
 	/**
 		Write formatted the message to the output stream.
 	*/
-	virtual void WriteMessageToStream(const ibase::IMessage& message);
+	virtual void WriteMessageToStream(const istd::IInformation& message);
 	
 	/**
 		Generate formatted message text for the output.
 	*/
-	virtual QString GenerateMessageText(const ibase::IMessage& message) const;
+	virtual QString GenerateMessageText(const istd::IInformation& message) const;
 
 	// abstract methods
 

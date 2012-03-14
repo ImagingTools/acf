@@ -28,11 +28,11 @@ bool CBinaryReadArchiveBase::BeginTag(const CArchiveTag& tag)
 	if (readId != tag.GetBinaryId()){
 		if (IsLogConsumed()){
 			SendLogMessage(
-						istd::ILogger::MC_ERROR,
+						istd::IInformation::IC_ERROR,
 						MI_TAG_ERROR,
 						QObject::tr("Bad tag begin code, is %1, should be %2 (tag '%3')").arg(readId).arg(tag.GetBinaryId()).arg(QString::fromStdString(tag.GetId())),
 						"iser::CBinaryReadArchiveBase",
-						MF_SYSTEM);
+						istd::IInformation::ITF_SYSTEM);
 		}
 
 		return false;
@@ -54,11 +54,11 @@ bool CBinaryReadArchiveBase::EndTag(const CArchiveTag& tag)
 	if (~readId != tag.GetBinaryId()){
 		if (IsLogConsumed()){
 			SendLogMessage(
-						istd::ILogger::MC_ERROR,
+						istd::IInformation::IC_ERROR,
 						MI_TAG_ERROR,
 						QObject::tr("Bad tag begin code, is %1, should be %2 (tag '%3')").arg(~readId).arg(tag.GetBinaryId()).arg(QString::fromStdString(tag.GetId())),
 						"iser::CBinaryReadArchiveBase",
-						MF_SYSTEM);
+						istd::IInformation::ITF_SYSTEM);
 		}
 
 		return false;
@@ -151,11 +151,11 @@ bool CBinaryReadArchiveBase::Process(std::string& value)
 			if (stringLength > MaxStringLength){
 				if (IsLogConsumed()){
 					SendLogMessage(
-								istd::ILogger::MC_ERROR,
+								istd::IInformation::IC_ERROR,
 								MI_STRING_TOO_LONG,
 								QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
 								"iser::CBinaryReadArchiveBase",
-								MF_SYSTEM);
+								istd::IInformation::ITF_SYSTEM);
 				}
 
 				return false;
@@ -190,11 +190,11 @@ bool CBinaryReadArchiveBase::Process(QString& value)
 			if (stringLength > MaxStringLength){
 				if (IsLogConsumed()){
 					SendLogMessage(
-								istd::ILogger::MC_ERROR,
+								istd::IInformation::IC_ERROR,
 								MI_STRING_TOO_LONG,
 								QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
 								"iser::CBinaryReadArchiveBase",
-								MF_SYSTEM);
+								istd::IInformation::ITF_SYSTEM);
 				}
 
 				return false;

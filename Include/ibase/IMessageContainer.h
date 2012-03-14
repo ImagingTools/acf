@@ -7,11 +7,11 @@
 
 
 // ACF includes
+#include "istd/IInformation.h"
 #include "istd/TIHierarchical.h"
 
 #include "iser/ISerializable.h"
 
-#include "ibase/IMessage.h"
 #include "ibase/IMessageConsumer.h"
 
 
@@ -51,7 +51,7 @@ public:
 
 	/**
 		Get worst message category.
-		\sa IMessage::Category
+		\sa IInformation::InformationCategory
 	*/
 	virtual int GetWorstCategory() const = 0;
 

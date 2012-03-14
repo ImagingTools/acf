@@ -40,7 +40,7 @@ protected:
 		virtual bool IsMessageSupported(
 					int messageCategory = -1,
 					int messageId = -1,
-					const ibase::IMessage* messagePtr = NULL) const;
+					const istd::IInformation* messagePtr = NULL) const;
 		virtual void AddMessage(const MessagePtr& messagePtr);
 	};
 
