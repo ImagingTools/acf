@@ -4,8 +4,6 @@ cd ..\..
 call Config\QMake\CopyProToSubdir.js VC10
 cd Impl\VC10
 
-pause
-
 set QMAKESPEC=%QTDIR%/mkspecs/win32-msvc2010
 qmake -recursive -tp vc AcfAll.pro
 

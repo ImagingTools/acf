@@ -3,6 +3,8 @@
 //*****************************************************************************************
 var projectExt = "pro";
 var projectExp = new RegExp(".*\." + projectExt + "$");
+var projectIncExt = "pri";
+var projectIncExp = new RegExp(".*\." + projectIncExt + "$");
 
 
 function ProcessFolder(shell, fileSystem, folder, subDirName)
@@ -13,22 +15,19 @@ function ProcessFolder(shell, fileSystem, folder, subDirName)
 	for (; !subFolderIter.atEnd(); subFolderIter.moveNext()){
 		var subfolder = subFolderIter.item();
 		if (subfolder.Name == subDirName) {
-		    var destDir = folder + "\\" + subDirName;
-		    if (!fileSystem.FolderExists(destDir)){
-		        fileSystem.CreateFolder(destDir);
-		    }
-
     		var fileIter = new Enumerator(subfolder.files);
     		for (; !fileIter.atEnd(); fileIter.moveNext()){
         		var file = fileIter.item();
 
-    		    if (projectExp.exec(file.Name)){
-                    // Move project to destination dir
-    		        var outputPath = destDir + "\\" + file.Name;
-
-                    fileSystem.DeleteFile(outputPath);
-    		    }
-    		}
+        		if (projectExp.exec(file.Name)) {
+        		    // Remove project file
+        		    fileSystem.DeleteFile(file);
+        		}
+        		else if (projectIncExp.exec(file.Name)) {
+        		    // Remove project file
+        		    fileSystem.DeleteFile(file);
+        		}
+            }
 	    }
 	    else{
 		    ProcessFolder(shell, fileSystem, subfolder, subDirName);
