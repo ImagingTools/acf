@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2088
+          2211
         </Number>
         <Description>
           ACF
@@ -21,10 +21,10 @@
         Application
       </ComponentName>
       <X>
-        275
+        325
       </X>
       <X>
-        725
+        700
       </X>
     </Element>
     <Element>
@@ -35,7 +35,7 @@
         650
       </X>
       <X>
-        550
+        500
       </X>
     </Element>
     <Element>
@@ -54,10 +54,10 @@
         CompositeTemplate
       </ComponentName>
       <X>
-        300
+        325
       </X>
       <X>
-        250
+        225
       </X>
     </Element>
     <Element>
@@ -68,7 +68,7 @@
         875
       </X>
       <X>
-        100
+        125
       </X>
     </Element>
     <Element>
@@ -98,7 +98,7 @@
         ImageFactory
       </ComponentName>
       <X>
-        300
+        325
       </X>
       <X>
         25
@@ -123,7 +123,7 @@
         600
       </X>
       <X>
-        100
+        125
       </X>
     </Element>
     <Element>
@@ -142,10 +142,10 @@
         MainWindow
       </ComponentName>
       <X>
-        275
+        325
       </X>
       <X>
-        550
+        475
       </X>
     </Element>
     <Element>
@@ -156,7 +156,7 @@
         650
       </X>
       <X>
-        650
+        625
       </X>
     </Element>
     <Element>
@@ -164,10 +164,10 @@
         ViewFactory
       </ComponentName>
       <X>
-        1100
+        1125
       </X>
       <X>
-        100
+        125
       </X>
     </Element>
     <Element>
@@ -175,11 +175,13 @@
         Workspace
       </ComponentName>
       <X>
-        300
+        325
       </X>
       <X>
-        400
+        350
       </X>
     </Element>
   </PositionMap>
+  <NotesMap count="0">
+  </NotesMap>
 </Acf>

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2199
+          2211
         </Number>
         <Description>
           ACF
@@ -144,7 +144,7 @@
         QtViewPck
       </PackageId>
       <ComponentId>
-        ConsoleImageView
+        ImageView
       </ComponentId>
       <Data>
         <IsEnabled>
