@@ -37,12 +37,12 @@ protected Q_SLOTS:
 	void OnShowDialog();
 
 private:
-	const CElementSelectionInfoManagerBase& m_elementSelectionInfoManager;
-
 	QItemDelegate& m_itemDelegate;
 	QLineEdit* m_textEditor;
 	std::string m_attributeId;
 	int m_attributeFlags;
+
+	const CElementSelectionInfoManagerBase& m_elementSelectionInfoManager;
 };
 
 

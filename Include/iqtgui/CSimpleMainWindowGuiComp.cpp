@@ -16,10 +16,10 @@ namespace iqtgui
 // public methods
 
 CSimpleMainWindowGuiComp::CSimpleMainWindowGuiComp()
-:	m_menuCommands("Global"),
+	:m_commandsObserver(*this),
+	m_menuCommands("Global"),
 	m_showToolBarsCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
-	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
-	m_commandsObserver(*this)
+	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR)
 {
 	connect(&m_showToolBarsCommand, SIGNAL(activated()), this, SLOT(OnShowToolbars()));
 	connect(&m_settingsCommand, SIGNAL(activated()), this, SLOT(OnSettings()));
