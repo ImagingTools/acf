@@ -70,13 +70,13 @@ protected:
 	void CalculateTextOriginSize(i2d::CRect& textBox) const;
 
 private:
-    mutable istd::CIndex2d m_drawOffset;
-    TextAlign   m_textAlign;
+	istd::CIndex2d m_referenceOffset;
+	TextAlign   m_textAlign;
+	mutable istd::CIndex2d m_drawOffset;
 	bool m_isPositionVisible;
 	bool m_isBackgroundTransparent;
     bool m_isEditableOffset;
-    istd::CIndex2d m_referenceOffset;
-    EditMode m_editMode;
+	EditMode m_editMode;
 
 	bool m_isAlignFixed;
 };

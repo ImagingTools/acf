@@ -108,9 +108,9 @@ private:
 	mutable bool m_blockBBoxEvent;
 	mutable i2d::CRect m_lastBoundingBox;
 
-	CConsoleBase* m_framePtr;
-	imath::CFixedPointManip m_logicalPositionFormatter;
 	imath::CFixedPointManip m_pixelPositionFormatter;
+	imath::CFixedPointManip m_logicalPositionFormatter;
+	CConsoleBase* m_framePtr;
 
 	friend class CConsoleBase;
 };

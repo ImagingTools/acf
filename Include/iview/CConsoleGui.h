@@ -138,6 +138,12 @@ private:
 	iqtgui::CHierarchicalCommand m_rootCommands;
 	iqtgui::CHierarchicalCommand m_commands;
 
+	iqtgui::CHierarchicalCommand m_gridVisibleCommand;
+	iqtgui::CHierarchicalCommand m_rulerVisibleCommand;
+	iqtgui::CHierarchicalCommand m_gridInMmVisibleCommand;
+	iqtgui::CHierarchicalCommand m_scrollVisibleCommand;
+	iqtgui::CHierarchicalCommand m_statusVisibleCommand;
+
 	iqtgui::CHierarchicalCommand m_zoomInCommand;
 	iqtgui::CHierarchicalCommand m_zoomOutCommand;
 	iqtgui::CHierarchicalCommand m_zoomResetCommand;
@@ -147,12 +153,6 @@ private:
 	iqtgui::CHierarchicalCommand m_pointsMoveCommand;
 	iqtgui::CHierarchicalCommand m_pointsAddCommand;
 	iqtgui::CHierarchicalCommand m_pointsSubCommand;
-
-	iqtgui::CHierarchicalCommand m_gridVisibleCommand;
-	iqtgui::CHierarchicalCommand m_rulerVisibleCommand;
-	iqtgui::CHierarchicalCommand m_gridInMmVisibleCommand;
-	iqtgui::CHierarchicalCommand m_scrollVisibleCommand;
-	iqtgui::CHierarchicalCommand m_statusVisibleCommand;
 };
 
 
