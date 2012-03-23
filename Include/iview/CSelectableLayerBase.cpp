@@ -170,7 +170,7 @@ bool CSelectableLayerBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButto
 	int keysState = GetKeysState();
 
 	for (iter = m_inactiveShapes.rbegin(); iter != m_inactiveShapes.rend(); ++iter){
-		iview::IInteractiveShape* uiShapePtr = static_cast<iview::IInteractiveShape*>((*iter).first);
+		iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(iter->first);
 		const i2d::CRect& boundingBox = (*iter).second;
 		if (			(uiShapePtr != m_focusedShapePtr) &&
 						uiShapePtr->IsVisible() &&
@@ -297,7 +297,7 @@ void CSelectableLayerBase::DeselectAllShapes()
 		ShapeMap::iterator iter = m_activeShapes.begin();
 		I_ASSERT(dynamic_cast<iview::IInteractiveShape*>((*iter).first) != NULL);
 
-		iview::IInteractiveShape* shapePtr = static_cast<iview::IInteractiveShape*>((*iter).first);
+		iview::IInteractiveShape* shapePtr = dynamic_cast<iview::IInteractiveShape*>(iter->first);
 		I_ASSERT(shapePtr != NULL);
 		I_ASSERT(shapePtr->IsSelected());
 

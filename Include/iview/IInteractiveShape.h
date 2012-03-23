@@ -17,13 +17,9 @@ class IShapeView;
 /**
 	Common interface for all display console shapes which can interacts with user.
 */
-class IInteractiveShape: public IShape, virtual public IMouseActionObserver, virtual public ITouchable
+class IInteractiveShape: virtual public IShape, virtual public IMouseActionObserver, virtual public ITouchable
 {
 public:
-	typedef IShape BaseClass;
-	typedef IMouseActionObserver BaseClass2;
-	typedef ITouchable BaseClass3;
-
 	/**
 		Check, if this shape is selected.
 	*/
