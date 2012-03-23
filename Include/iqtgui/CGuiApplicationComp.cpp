@@ -93,11 +93,8 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 		}
 
 		if (m_mainWidgetPtr.IsValid()){
-			QApplication* applicationPtr = GetQtApplication();
-			I_ASSERT(applicationPtr != NULL);	// application initialization was succesfull, it must be valid
-
 			// start application loop:
-			retVal = applicationPtr->exec();
+			retVal = QApplication::exec();
 
 			I_ASSERT(m_mainGuiCompPtr.IsValid());
 			m_mainGuiCompPtr->DestroyGui();

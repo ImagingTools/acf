@@ -5,8 +5,6 @@
 #include "istd/TSingleFactory.h"
 #include "istd/CStaticServicesProvider.h"
 
-#include "iqt/CTimer.h"
-#include "iqt/CDateTime.h"
 #include "iqt/CProcessEnvironment.h"
 #include "iqt/CCriticalSection.h"
 #include "iqt/CFileSystem.h"
@@ -39,12 +37,6 @@ void CDefaultServicesProvider::RegisterServices()
 
 	static iqt::CLocalizer localizer;
 	istd::CStaticServicesProvider::RegisterService<istd::ILocalizer>(&localizer);
-
-	static istd::TSingleFactory<isys::ITimer, iqt::CTimer> timerFactory("");
-	istd::CStaticServicesProvider::RegisterFactory(&timerFactory);
-
-	static istd::TSingleFactory<isys::IDateTime, iqt::CDateTime> dateTimeFactory("");
-	istd::CStaticServicesProvider::RegisterFactory(&dateTimeFactory);
 
 	static istd::TSingleFactory<isys::ICriticalSection, iqt::CCriticalSection> criticalSectionFactory("");
 	istd::CStaticServicesProvider::RegisterFactory(&criticalSectionFactory);

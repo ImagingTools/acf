@@ -3,13 +3,14 @@
 
 
 // ACF includes
+#include "istd/CGeneralTimeStamp.h"
+
 #include "icomp/CComponentBase.h"
 
 #include "ibase/IApplication.h"
 #include "ibase/IApplicationInfo.h"
 
 #include "iqt/ITranslationManager.h"
-#include "iqt/CTimer.h"
 
 #include "iqtgui/IGuiObject.h"
 
@@ -65,7 +66,7 @@ private:
 	I_ATTR(QString, m_titleFormatAttrPtr);
 
 	bool m_useSplashScreen;
-	iqt::CTimer m_splashScreenTimer;
+	istd::CGeneralTimeStamp m_splashScreenTimer;
 
 	istd::TDelPtr<QApplication> m_applicationPtr;
 };

@@ -264,10 +264,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRangeSerializer.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSelectableFileConverterComp.cpp"
 				>
 			</File>
@@ -366,10 +362,6 @@
 			</File>
 			<File
 				RelativePath="..\CObjectQueueComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRangeSerializer.h"
 				>
 			</File>
 			<File

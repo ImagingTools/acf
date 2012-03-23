@@ -17,8 +17,6 @@
 // ACF includes
 #include "istd/CIndex2d.h"
 
-#include "isys/CFileInfo.h"
-
 #include "i2d/CVector2d.h"
 #include "i2d/CRectangle.h"
 #include "i2d/CLine2d.h"
@@ -44,10 +42,6 @@ extern i2d::CLine2d GetCLine2d(const QLine& line);
 extern QLine GetQLine(const i2d::CLine2d& line);
 extern i2d::CLine2d GetCLine2d(const QLineF& line);
 extern QLineF GetQLineF(const i2d::CLine2d& line);
-extern isys::CFileInfo GetCFileInfo(const QFileInfo& fileInfo);
-extern QFileInfo GetQFileInfo(const isys::CFileInfo& fileInfo);
-extern QDateTime GetQDateTime(const isys::IDateTime& dateTime);
-extern isys::CSimpleDateTime GetCSimpleDateTime(const QDateTime& dateTime);
 extern QRect GetQRect(const i2d::CRect& rect);
 extern i2d::CRect GetCRect(const QRect& rect);
 

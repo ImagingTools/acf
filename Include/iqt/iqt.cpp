@@ -86,55 +86,6 @@ QLineF GetQLineF(const i2d::CLine2d& line)
 }
 
 
-isys::CFileInfo GetCFileInfo(const QFileInfo& fileInfo)
-{
-	isys::CSimpleDateTime modificationTime;
-
-	modificationTime.FromCTime(fileInfo.lastModified().toTime_t());
-
-	return isys::CFileInfo(
-				fileInfo.absoluteFilePath(),
-				fileInfo.permissions(),
-				modificationTime);
-}
-
-
-QFileInfo GetQFileInfo(const isys::CFileInfo& fileInfo)
-{
-	return QFileInfo(fileInfo.GetFilePath());
-}
-
-
-QDateTime GetQDateTime(const isys::IDateTime& dateTime)
-{
-	QDateTime qtDateTime;
-
-	QDate date(dateTime.GetComponent(isys::IDateTime::TC_YEAR),
-				dateTime.GetComponent(isys::IDateTime::TC_MONTH),
-				dateTime.GetComponent(isys::IDateTime::TC_DAY));
-
-	QTime time(dateTime.GetComponent(isys::IDateTime::TC_HOUR),
-				dateTime.GetComponent(isys::IDateTime::TC_MINUTE),
-				dateTime.GetComponent(isys::IDateTime::TC_SECOND),
-				dateTime.GetComponent(isys::IDateTime::TC_MILLISECOND));
-	
-	qtDateTime.setDate(date);
-	qtDateTime.setTime(time);
-
-	return qtDateTime;
-}
-
-
-isys::CSimpleDateTime GetCSimpleDateTime(const QDateTime& dateTime)
-{
-	isys::CSimpleDateTime simpleDateTime;
-
-	simpleDateTime.FromCTime(dateTime.toTime_t());
-
-	return simpleDateTime;
-}
-
-
 QRect GetQRect(const i2d::CRect& rect)
 {
 	return QRect(rect.GetLeft(), rect.GetTop(), rect.GetWidth(), rect.GetHeight());

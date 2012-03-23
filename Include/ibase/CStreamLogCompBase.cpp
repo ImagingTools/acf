@@ -1,9 +1,11 @@
 #include "ibase/CStreamLogCompBase.h"
 
 
+// Qt includes
+#include <QtCore/QDateTime.h>
+
 // ACF includes
 #include "istd/IInformation.h"
-#include "isys/IDateTime.h"
 
 
 namespace ibase

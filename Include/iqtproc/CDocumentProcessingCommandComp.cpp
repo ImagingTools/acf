@@ -1,10 +1,11 @@
 #include "iqtproc/CDocumentProcessingCommandComp.h"
 
 
+// Qt includes
+#include <QtCore/QElapsedTimer>
+
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
-#include "iqt/CTimer.h"
 
 #include "iqtgui/CGuiComponentDialog.h"
 
@@ -27,7 +28,7 @@ void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeabl
 
 	istd::CChangeNotifier changePtr(m_outputDataCompPtr.GetPtr());
 
-	iqt::CTimer timer;
+	QElapsedTimer timer;
 
 	int retVal = m_processorCompPtr->DoProcessing(
 				m_paramsSetCompPtr.GetPtr(),
@@ -41,9 +42,7 @@ void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeabl
 		return;
 	}
 
-	double processingTime = timer.GetElapsed();
-
-	SendInfoMessage(0, QString("Processing time: ") + QString("%1").arg(processingTime * 1000) + " ms", "Document processing manager");
+	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(timer.elapsed()), "Document processing manager");
 
 	changePtr.Reset();
 

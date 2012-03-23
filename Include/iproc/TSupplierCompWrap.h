@@ -18,8 +18,6 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-#include "isys/ITimer.h"
-
 
 // ACF includes
 #include "iproc/ISupplier.h"

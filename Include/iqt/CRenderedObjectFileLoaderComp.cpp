@@ -4,12 +4,12 @@
 // Qt includes
 #include <QtCore/QFileInfo>
 
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
+#include "iser/CPrimitiveTypesSerializer.h"
 
 
 namespace iqt
@@ -128,9 +128,11 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 {
 	int cacheSize = m_previewCache.size();
 
-	iser::CArchiveTag previewCacheTag("PreviewCacheElements", "Elements list in the preview cache");
-
-	iser::CArchiveTag previewCacheElementTag("PreviewCacheElement", "An element in the preview cache");
+	static iser::CArchiveTag previewCacheTag("PreviewCacheElements", "Elements list in the preview cache");
+	static iser::CArchiveTag previewCacheElementTag("PreviewCacheElement", "An element in the preview cache");
+	static iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
+	static iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
+	static iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
 
 	bool retVal = archive.BeginMultiTag(previewCacheTag, previewCacheElementTag, cacheSize);
 
@@ -138,19 +140,16 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 		for (PreviewCache::const_iterator index = m_previewCache.begin(); index != m_previewCache.end(); index++){
 			retVal = retVal && archive.BeginTag(previewCacheElementTag);
 	
-			iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
 			retVal = retVal && archive.BeginTag(filePathTag);
 			QString filePath = index->first;
 			retVal = retVal && archive.Process(filePath);
 			retVal = retVal && archive.EndTag(filePathTag);
 
-			iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
 			retVal = retVal && archive.BeginTag(fileTimeStampTag);
-			isys::CSimpleDateTime timeStamp = iqt::GetCSimpleDateTime(index->second.fileTimeStamp);
-			retVal = retVal && timeStamp.Serialize(archive);
+			QDateTime fileTimeStamp = index->second.fileTimeStamp;
+			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, fileTimeStamp);
 			retVal = retVal && archive.EndTag(fileTimeStampTag);
 
-			iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
 			retVal = retVal && archive.BeginTag(bitmapTag);
 			retVal = retVal && index->second.fileBitmapPtr->Serialize(archive);
 			retVal = retVal && archive.EndTag(bitmapTag);
@@ -160,22 +159,20 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 	}
 	else{
 		for (int elementIndex = 0; elementIndex < cacheSize; elementIndex++){
+			FileInfo fileInfo;
+
 			retVal = retVal && archive.BeginTag(previewCacheElementTag);
 	
-			iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
 			retVal = retVal && archive.BeginTag(filePathTag);
 			QString filePath;
 			retVal = retVal && archive.Process(filePath);
 			retVal = retVal && archive.EndTag(filePathTag);
 
-			iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
 			retVal = retVal && archive.BeginTag(fileTimeStampTag);
-			isys::CSimpleDateTime timeStamp;
-			retVal = retVal && timeStamp.Serialize(archive);
+			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, fileInfo.fileTimeStamp);
 			retVal = retVal && archive.EndTag(fileTimeStampTag);
 
 			istd::TSmartPtr<iqt::CBitmap> bitmapPtr(new iqt::CBitmap);
-			iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
 			retVal = retVal && archive.BeginTag(bitmapTag);
 			retVal = retVal && bitmapPtr->Serialize(archive);
 			retVal = retVal && archive.EndTag(bitmapTag);
@@ -183,10 +180,7 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.EndTag(previewCacheElementTag);
 
 			if (retVal){
-				FileInfo fileInfo;
-
 				fileInfo.fileBitmapPtr = bitmapPtr;
-				fileInfo.fileTimeStamp = iqt::GetQDateTime(timeStamp);
 				m_previewCache[filePath] = fileInfo;
 			}
 		}

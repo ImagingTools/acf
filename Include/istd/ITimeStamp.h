@@ -1,14 +1,14 @@
-#ifndef isys_ITimer_included
-#define isys_ITimer_included
+#ifndef istd_ITimeStamp_included
+#define istd_ITimeStamp_included
 
 
 // ACF includes
 #include "istd/IChangeable.h"
 
-#include "isys/isys.h"
+#include "istd/istd.h"
 
 
-namespace isys
+namespace istd
 {
 
 
@@ -17,7 +17,7 @@ namespace isys
 
 	\ingroup System
 */
-class ITimer: virtual public istd::IChangeable
+class ITimeStamp: virtual public istd::IChangeable
 {
 public:
 	/**
@@ -34,7 +34,7 @@ public:
 	/**
 		Get time difference to second timer.
 	*/
-	virtual double GetTimeTo(const ITimer& timer) const = 0;
+	virtual double GetTimeTo(const ITimeStamp& timer) const = 0;
 
 	/**
 		Wait for specific timer elapsed value is reached.
@@ -48,8 +48,8 @@ public:
 };
 
 
-} // namespace isys
+} // namespace istd
 
 
-#endif // !isys_ITimer_included
+#endif // !istd_ITimeStamp_included
 
