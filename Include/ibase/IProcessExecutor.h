@@ -2,8 +2,11 @@
 #define ibase_IProcessExecutor_included
 
 
-#include "istd/IPolymorphic.h"
+// Qt includes
 #include <QtCore/QString>
+
+// ACF includes
+#include "istd/IPolymorphic.h"
 
 #include "isys/IProcessEnvironment.h"
 
