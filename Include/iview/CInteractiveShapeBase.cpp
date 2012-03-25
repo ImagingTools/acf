@@ -130,11 +130,9 @@ void CInteractiveShapeBase::DrawText(QPainter& drawContext, istd::CIndex2d point
 {
 	QFontMetrics metrics(drawContext.font());
 
-	QString qText = text;
+	QRect textRect(iqt::GetQPoint(point), metrics.size(0, text));
 
-	QRect textRect(iqt::GetQPoint(point), metrics.size(0, qText));
-
-	drawContext.drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, qText);
+	drawContext.drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, text);
 }
 
 

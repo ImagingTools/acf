@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPrimitiveTypesSerializer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CReadArchiveBase.cpp"
 				>
 			</File>
@@ -312,6 +316,10 @@
 			</File>
 			<File
 				RelativePath="..\CMinimalVersionInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPrimitiveTypesSerializer.h"
 				>
 			</File>
 			<File

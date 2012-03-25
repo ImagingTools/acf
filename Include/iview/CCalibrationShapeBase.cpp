@@ -1,7 +1,7 @@
 #include "iview/CCalibrationShapeBase.h"
 
 
-#include "iview/ICalibrated.h"
+#include "i2d/ICalibrationProvider.h"
 
 
 namespace iview
@@ -21,14 +21,13 @@ void CCalibrationShapeBase::BeginDrag(const i2d::CVector2d& reference)
 	I_ASSERT(IsDisplayConnected());
 	I_ASSERT(m_calibPtr != NULL);
 
-	const iview::IIsomorphicCalibration& isomorphCalib = GetIsomorphCalib();
+	const i2d::ITransformation2d& isomorphCalib = GetIsomorphCalib();
 	const i2d::CAffine2d& transform = GetLogToViewTransform();
 
 	i2d::CVector2d logPos;
-	isomorphCalib.GetApplyToLog(transform.GetInvertedApply(reference), logPos);
+	isomorphCalib.GetPositionAt(transform.GetInvertedApply(reference), logPos);
 	BeginLogDrag(logPos);
 }
-
 
 
 void CCalibrationShapeBase::SetDragPosition(const i2d::CVector2d& position)
@@ -36,50 +35,51 @@ void CCalibrationShapeBase::SetDragPosition(const i2d::CVector2d& position)
 	I_ASSERT(IsDisplayConnected());
 	I_ASSERT(m_calibPtr != NULL);
 
-	const iview::IIsomorphicCalibration& isomorphCalib = GetIsomorphCalib();
+	const i2d::ITransformation2d& isomorphCalib = GetIsomorphCalib();
 	const i2d::CAffine2d& transform = GetLogToViewTransform();
 
 	i2d::CVector2d logPos;
-	isomorphCalib.GetApplyToLog(transform.GetInvertedApply(position), logPos);
+	isomorphCalib.GetPositionAt(transform.GetInvertedApply(position), logPos);
+
 	SetLogDragPosition(logPos);
 }
-
 
 
 // reimplement (iview::IVisualizable)
 
 bool CCalibrationShapeBase::IsDisplayAccepted(const iview::IDisplay& display) const
 {
-	return BaseClass::IsDisplayAccepted(display) && (FindCalib(display) != NULL);
+	return BaseClass::IsDisplayAccepted(display) && (FindCalibration(display) != NULL);
 }
-
 
 
 void CCalibrationShapeBase::OnConnectDisplay(iview::IDisplay* displayPtr)
 {
 	BaseClass::OnConnectDisplay(displayPtr);
-	m_calibPtr = FindCalib(*displayPtr);
+
+	m_calibPtr = FindCalibration(*displayPtr);
+
 	I_ASSERT(m_calibPtr != NULL);
 }
-
 
 
 void CCalibrationShapeBase::OnDisconnectDisplay(iview::IDisplay* displayPtr)
 {
 	BaseClass::OnDisconnectDisplay(displayPtr);
+
 	m_calibPtr = NULL;
 }
 
 
 // protected static methods
 
-const IIsomorphicCalibration* CCalibrationShapeBase::FindCalib(const iview::IDisplay& display)
+const i2d::ITransformation2d* CCalibrationShapeBase::FindCalibration(const iview::IDisplay& display)
 {
 	const iview::IDisplay* displayPtr = &display;
 	while (displayPtr != NULL){
-		const ICalibrated* calibratedPtr = dynamic_cast<const ICalibrated*>(displayPtr);
-		if (calibratedPtr != NULL){
-			const IIsomorphicCalibration* isomorphCalibPtr = dynamic_cast<const iview::IIsomorphicCalibration*>(&calibratedPtr->GetCalibration());
+		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(displayPtr);
+		if (calibrationProviderPtr != NULL){
+			const i2d::ITransformation2d* isomorphCalibPtr = dynamic_cast<const i2d::ITransformation2d*>(calibrationProviderPtr->GetCalibration());
 			if (isomorphCalibPtr != NULL){
 				return isomorphCalibPtr;
 			}
@@ -92,8 +92,6 @@ const IIsomorphicCalibration* CCalibrationShapeBase::FindCalib(const iview::IDis
 }
 
 
-
 } // namespace iview
-
 
 

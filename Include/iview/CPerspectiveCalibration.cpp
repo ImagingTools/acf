@@ -4,14 +4,10 @@
 // STL includes
 #include <math.h>
 
-
 // ACF includes
 #include "imath/CVarMatrix.h"
 
-#include "i2d/CLine2d.h"
-
-#include "iview/IVisualCalibrationInfo.h"
-#include "iview/CCalibratedViewBase.h"
+#include "ibase/CSize.h"
 
 
 namespace iview
@@ -113,27 +109,70 @@ bool CPerspectiveCalibration::DoCalibration(const i2d::CVector2d* logicalPoints,
 }
 
 
-ICalibration::CalcStatus CPerspectiveCalibration::GetLogDerivative(
+bool CPerspectiveCalibration::GetLogDerivative(
 				const i2d::CVector2d& viewPosition,
 				const i2d::CVector2d& viewDirection,
 				double& result) const
 {
-	i2d::CMatrix2d deform;
+	i2d::CAffine2d localTransform;
 
-	CalcStatus status = GetLogDeform(viewPosition, deform);
-	if (status != CS_FAILED){
-		i2d::CMatrix2d transposed = deform.GetTransposed();
+	if (GetLocalTransform(viewPosition, localTransform)){
+		i2d::CMatrix2d transposed = localTransform.GetDeformMatrixRef().GetTransposed();
+
 		result = transposed.GetMultiplied(viewDirection).GetLength();
+
+		return true;
 	}
-	return status;
+	
+	return false;
 }
 
 
-// reimplemented (iview::IIsomorphicCalibration)
-
-ICalibration::CalcStatus CPerspectiveCalibration::GetApplyToLog(const i2d::CVector2d& viewPosition, i2d::CVector2d& result) const
+bool CPerspectiveCalibration::operator==(const CPerspectiveCalibration& calib) const
 {
-	i2d::CVector2d normPosition = GetNormPosition(viewPosition);
+	return			(m_logAxisX == calib.m_logAxisX) &&
+					(m_logAxisY == calib.m_logAxisY) &&
+					(m_logCenter == calib.m_logCenter) &&
+					(m_bounds == calib.m_bounds) &&
+					(m_viewCenter == calib.m_viewCenter) &&
+					(m_pixelAngleTangents == calib.m_pixelAngleTangents);
+}
+
+
+// reimplemented (i2d::ITransformation2d)
+
+int CPerspectiveCalibration::GetTransformationFlags() const
+{
+	return TF_FORWARD | TF_INJECTIVE | TF_SURJECTIVE | TF_CONTINUES; 
+}
+
+
+bool CPerspectiveCalibration::GetDistance(
+				const i2d::CVector2d& origPos1,
+				const i2d::CVector2d& origPos2,
+				double& result,
+				ExactnessMode /*mode*/) const
+{
+	i2d::CVector2d log1;
+	i2d::CVector2d log2;
+
+	if (		GetPositionAt(origPos1, log1) &&
+				GetPositionAt(origPos2, log2)){
+		result = log1.GetDistance(log2);
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CPerspectiveCalibration::GetPositionAt(
+			const i2d::CVector2d& origPosition,
+			i2d::CVector2d& result,
+			ExactnessMode /*mode*/) const
+{
+	i2d::CVector2d normPosition = GetNormPosition(origPosition);
 
 	//	using determinant method to solve equation
 	//		Ab = -C,
@@ -149,14 +188,15 @@ ICalibration::CalcStatus CPerspectiveCalibration::GetApplyToLog(const i2d::CVect
 					m_logAxisX.GetX() * m_logAxisY.GetY() -
 					m_logAxisY.GetX() * normPosition.GetY() * m_logAxisX.GetZ() -
 					normPosition.GetX() * m_logAxisX.GetY() * m_logAxisY.GetZ();
-//	if (::fabs(detM) > I_EPSILON){
-		double detX =	m_logAxisY.GetX() * normPosition.GetY() * m_logCenter.GetZ() +
+
+	double detX =	m_logAxisY.GetX() * normPosition.GetY() * m_logCenter.GetZ() +
 						m_logAxisY.GetY() *					 m_logCenter.GetX() +
 						m_logAxisY.GetZ() * normPosition.GetX() * m_logCenter.GetY() -
 						m_logAxisY.GetX() *					 m_logCenter.GetY() -
 						m_logAxisY.GetY() * normPosition.GetX() * m_logCenter.GetZ() -
 						m_logAxisY.GetZ() * normPosition.GetY() * m_logCenter.GetX();
-		double detY =	m_logAxisX.GetX() *					 m_logCenter.GetY() +
+	
+	double detY =	m_logAxisX.GetX() *					 m_logCenter.GetY() +
 						m_logAxisX.GetY() * normPosition.GetX() * m_logCenter.GetZ() +
 						m_logAxisX.GetZ() * normPosition.GetY() * m_logCenter.GetX() -
 						m_logAxisX.GetX() * normPosition.GetY() * m_logCenter.GetZ() -
@@ -164,124 +204,129 @@ ICalibration::CalcStatus CPerspectiveCalibration::GetApplyToLog(const i2d::CVect
 						m_logAxisX.GetZ() * normPosition.GetX() * m_logCenter.GetY();
 
 
-		result.SetX(detX / detM);
-		result.SetY(detY / detM);
+	result.SetX(detX / detM);
+	result.SetY(detY / detM);
 
-		if (m_bounds.Contains(result)){
-			return CS_OK;
-		}
-		else{
-			return CS_INVALID;
-		}
-//	}
-//	else{
-//		return CS_FAILED;
-//	}
+	if (m_bounds.Contains(result)){
+		return true;
+	}
+	
+	return false;
 }
 
 
-ICalibration::CalcStatus CPerspectiveCalibration::GetApplyToView(const i2d::CVector2d& logPosition, i2d::CVector2d& result) const
+bool CPerspectiveCalibration::GetInvPositionAt(
+			const i2d::CVector2d& transfPosition,
+			i2d::CVector2d& result,
+			ExactnessMode /*mode*/) const
 {
-	i3d::CVector3d pos3d = m_logAxisX * logPosition.GetX() + m_logAxisY * logPosition.GetY() + m_logCenter;
+	i3d::CVector3d pos3d = m_logAxisX * transfPosition.GetX() + m_logAxisY * transfPosition.GetY() + m_logCenter;
 
 	if (pos3d.GetZ() > I_EPSILON){
 		i2d::CVector2d normPosition(pos3d.GetX() / pos3d.GetZ(), pos3d.GetY() / pos3d.GetZ());
 
 		result = GetViewPosition(normPosition);
 
-		if (m_bounds.Contains(logPosition)){
-			return CS_OK;
-		}
-		else{
-			return CS_INVALID;
+		if (m_bounds.Contains(transfPosition)){
+			return true;
 		}
 	}
-	else{
-		return CS_FAILED;
-	}
+
+	return false;
 }
 
 
-bool CPerspectiveCalibration::operator==(const CPerspectiveCalibration& calib) const
+bool CPerspectiveCalibration::GetLocalTransform(
+			const i2d::CVector2d& origPosition,
+			i2d::CAffine2d& result,
+			ExactnessMode /*mode*/) const
 {
-	return			(m_logAxisX == calib.m_logAxisX) &&
-					(m_logAxisY == calib.m_logAxisY) &&
-					(m_logCenter == calib.m_logCenter) &&
-					(m_bounds == calib.m_bounds) &&
-					(m_viewCenter == calib.m_viewCenter) &&
-					(m_pixelAngleTangents == calib.m_pixelAngleTangents);
-}
-
-
-
-// reimplemented (iview::ICalibration)
-
-ICalibration::CalcStatus CPerspectiveCalibration::GetLogLength(const i2d::CLine2d& line, double& result) const
-{
-	i2d::CVector2d log1;
-	i2d::CVector2d log2;
-
-	CalcStatus stat1;
-	CalcStatus stat2;
-
-	if (			((stat1 = GetApplyToLog(line.GetPoint1(), log1)) != CS_FAILED) &&
-					((stat2 = GetApplyToLog(line.GetPoint2(), log2)) != CS_FAILED)){
-		result = log1.GetDistance(log2);
-
-		if ((stat1 == CS_OK) && (stat2 == CS_OK)){
-			return CS_OK;
-		}
-		else{
-			return CS_INVALID;
-		}
-	}
-	else{
-		return CS_FAILED;
-	}
-}
-
-
-ICalibration::CalcStatus CPerspectiveCalibration::GetLogDeform(const i2d::CVector2d& logPosition, i2d::CMatrix2d& result) const
-{
-	i3d::CVector3d pos3d = m_logAxisX * logPosition.GetX() + m_logAxisY * logPosition.GetY() + m_logCenter;
+	i3d::CVector3d pos3d = m_logAxisX * origPosition.GetX() + m_logAxisY * origPosition.GetY() + m_logCenter;
 
 	if (pos3d.GetZ() > I_EPSILON){
 		i2d::CVector2d normPosition(pos3d.GetX() / pos3d.GetZ(), pos3d.GetY() / pos3d.GetZ());
 
 		if (pos3d.GetZ() <= I_EPSILON){
-			return CS_FAILED;
+			return false;
 		}
 
-		result.SetAt(0,0, (m_logAxisX.GetX() - normPosition.GetX() * m_logAxisX.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetX()));
-		result.SetAt(0,1, (m_logAxisY.GetX() - normPosition.GetX() * m_logAxisY.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetX()));
-		result.SetAt(1,0, (m_logAxisX.GetY() - normPosition.GetY() * m_logAxisX.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetY()));
-		result.SetAt(1,1, (m_logAxisY.GetY() - normPosition.GetY() * m_logAxisY.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetY()));
+		i2d::CMatrix2d resultMatrix;
+		resultMatrix.SetAt(0,0, (m_logAxisX.GetX() - normPosition.GetX() * m_logAxisX.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetX()));
+		resultMatrix.SetAt(0,1, (m_logAxisY.GetX() - normPosition.GetX() * m_logAxisY.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetX()));
+		resultMatrix.SetAt(1,0, (m_logAxisX.GetY() - normPosition.GetY() * m_logAxisX.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetY()));
+		resultMatrix.SetAt(1,1, (m_logAxisY.GetY() - normPosition.GetY() * m_logAxisY.GetZ()) / (pos3d.GetZ() * m_pixelAngleTangents.GetY()));
+		
+		result.SetDeformMatrix(resultMatrix);
+		result.SetTranslation(i2d::CVector2d(0, 0));
 
-		if (m_bounds.Contains(logPosition)){
-			return CS_OK;
-		}
-		else{
-			return CS_INVALID;
+		if (m_bounds.Contains(origPosition)){
+			return true;
 		}
 	}
-	else{
-		return CS_FAILED;
-	}
+
+	return false;
 }
 
 
-ICalibration::CalcStatus CPerspectiveCalibration::GetViewDeform(const i2d::CVector2d& viewPosition, i2d::CMatrix2d& result) const
+bool CPerspectiveCalibration::GetLocalInvTransform(
+			const i2d::CVector2d& transfPosition,
+			i2d::CAffine2d& result,
+			ExactnessMode /*mode*/) const
 {
 	i2d::CVector2d logPosition;
-	CalcStatus status = GetApplyToLog(viewPosition, logPosition);
-	if (status != CS_FAILED){
-		i2d::CMatrix2d deform;
+	bool status = GetPositionAt(transfPosition, logPosition);
+	if (status != false){
+		i2d::CAffine2d localTransform;
 
-		status = GetLogDeform(logPosition, deform);
-		deform.GetInverted(result);
+		GetLocalTransform(logPosition, localTransform);
+		
+		result.SetDeformMatrix(localTransform.GetDeformMatrix().GetInverted());
+		result.SetTranslation(i2d::CVector2d(0, 0));
 	}
 
 	return status;
+}
+
+
+const i2d::ITransformation2d* CPerspectiveCalibration::CreateCombinedTransformation(const i2d::ITransformation2d& /*transform*/) const
+{
+	return NULL;
+}
+
+
+// reimplemented (imath::TISurjectFunction)
+
+bool CPerspectiveCalibration::GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const
+{
+	return GetInvPositionAt(argument, result);
+}
+
+
+i2d::CVector2d CPerspectiveCalibration::GetInvValueAt(const i2d::CVector2d& argument) const
+{
+	i2d::CVector2d retVal;
+	
+	GetInvValueAt(argument, retVal);
+
+	return retVal;
+}
+
+
+// reimplemented (imath::TIMathFunction)
+
+bool CPerspectiveCalibration::GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const
+{
+	return GetPositionAt(argument, result);
+}
+
+
+i2d::CVector2d CPerspectiveCalibration::GetValueAt(const i2d::CVector2d& argument) const
+{
+	i2d::CVector2d retVal;
+	
+	GetValueAt(argument, retVal);
+
+	return retVal;
 }
 	
 	

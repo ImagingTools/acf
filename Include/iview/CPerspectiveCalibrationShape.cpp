@@ -125,13 +125,13 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 				logCorners[3] = transform.GetClientPosition(clientRect.GetRightBottom());
 
 				i2d::CVector2d viewLeftTop;
-				calibPtr->GetApplyToView(bounds.GetTopLeft(), viewLeftTop);
+				calibPtr->GetInvPositionAt(bounds.GetTopLeft(), viewLeftTop);
 				i2d::CVector2d viewLeftBottom;
-				calibPtr->GetApplyToView(bounds.GetBottomLeft(), viewLeftBottom);
+				calibPtr->GetInvPositionAt(bounds.GetBottomLeft(), viewLeftBottom);
 				i2d::CVector2d viewRightTop;
-				calibPtr->GetApplyToView(bounds.GetTopRight(), viewRightTop);
+				calibPtr->GetInvPositionAt(bounds.GetTopRight(), viewRightTop);
 				i2d::CVector2d viewRightBottom;
-				calibPtr->GetApplyToView(bounds.GetBottomRight(), viewRightBottom);
+				calibPtr->GetInvPositionAt(bounds.GetBottomRight(), viewRightBottom);
 
 				double perspScale = (
 								viewLeftTop.GetDistance(viewRightTop) / bounds.GetWidth() +
@@ -168,8 +168,8 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 					i2d::CVector2d logPos2(index * grid, bounds.GetBottom());
 					i2d::CVector2d viewPos1;
 					i2d::CVector2d viewPos2;
-					calibPtr->GetApplyToView(logPos1, viewPos1);
-					calibPtr->GetApplyToView(logPos2, viewPos2);
+					calibPtr->GetInvPositionAt(logPos1, viewPos1);
+					calibPtr->GetInvPositionAt(logPos2, viewPos2);
 					QPoint point1 = iqt::GetQPoint(transform.GetScreenPosition(viewPos1));
 					QPoint point2 = iqt::GetQPoint(transform.GetScreenPosition(viewPos2));
 
@@ -222,8 +222,8 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 					i2d::CVector2d logPos2(bounds.GetRight(), index * grid);
 					i2d::CVector2d viewPos1;
 					i2d::CVector2d viewPos2;
-					calibPtr->GetApplyToView(logPos1, viewPos1);
-					calibPtr->GetApplyToView(logPos2, viewPos2);
+					calibPtr->GetInvPositionAt(logPos1, viewPos1);
+					calibPtr->GetInvPositionAt(logPos2, viewPos2);
 
 					QPoint point1 = iqt::GetQPoint(transform.GetScreenPosition(viewPos1));
 					QPoint point2 = iqt::GetQPoint(transform.GetScreenPosition(viewPos2));

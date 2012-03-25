@@ -286,7 +286,9 @@ void CViewBase::SetLogToViewTransform(const i2d::CAffine2d& transform)
 {
 	if (m_logToViewTransform != transform){
 		m_logToViewTransform = transform;
+		
 		CalcInternalTransforms();
+		
 		UpdateAllShapes(CF_TRANSFORM);
 	}
 }

@@ -51,6 +51,10 @@ void CViewProviderGuiComp::OnGuiCreated()
 	iview::CConsoleGui* consolePtr = GetQtWidget();
 	I_ASSERT(consolePtr != NULL);
 
+	// Setup view and its calibration:
+	iview::CViewport& view = consolePtr->GetViewRef();
+	view.SetViewDraggable();
+
 	if (m_fitModeAttrPtr.IsValid()){
 		iview::CConsoleBase::FitMode fitMode = iview::CConsoleBase::FitMode(*m_fitModeAttrPtr);
 

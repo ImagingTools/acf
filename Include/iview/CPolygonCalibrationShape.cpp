@@ -12,7 +12,7 @@
 #include "iqt/iqt.h"
 
 #include "iview/CScreenTransform.h"
-#include "iview/IIsomorphicCalibration.h"
+#include "i2d/ITransformation2d.h"
 
 
 namespace iview
@@ -39,11 +39,11 @@ bool CPolygonCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseB
 
 		if (downFlag){
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 			i2d::CVector2d viewMouse = transform.GetClientPosition(position);
 			i2d::CVector2d logMouse;
-			calib.GetApplyToLog(viewMouse, logMouse);
+			calib.GetPositionAt(viewMouse, logMouse);
 
 			int nodesCount = polygonPtr->GetNodesCount();
 
@@ -62,7 +62,7 @@ bool CPolygonCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseB
 					for (int i = nodesCount - 1; i >= 0; --i){
 						const i2d::CVector2d& logPos = polygonPtr->GetNode(i);
 						i2d::CVector2d viewPos;
-						calib.GetApplyToView(logPos, viewPos);
+						calib.GetInvPositionAt(logPos, viewPos);
 						istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 						if (tickerBox.IsInside(screenPos - position)){
@@ -80,7 +80,7 @@ bool CPolygonCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseB
 				{
 					i2d::CVector2d logLast = GetSegmentMiddle(nodesCount - 1);
 					i2d::CVector2d viewLast;
-					calib.GetApplyToView(logLast, viewLast);
+					calib.GetInvPositionAt(logLast, viewLast);
 					istd::CIndex2d screenLast = transform.GetScreenPosition(viewLast);
 
 					const i2d::CRect& tickerBox = colorShema.GetTickerBox(iview::IColorShema::TT_INSERT);
@@ -98,7 +98,7 @@ bool CPolygonCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseB
 					for (int i = nodesCount - 2; i >= 0; --i){
 						i2d::CVector2d logMiddle = GetSegmentMiddle(i);
 						i2d::CVector2d viewMiddle;
-						calib.GetApplyToView(logMiddle, viewMiddle);
+						calib.GetInvPositionAt(logMiddle, viewMiddle);
 						istd::CIndex2d screenMiddle = transform.GetScreenPosition(viewMiddle);
 						if (tickerBox.IsInside(position - screenMiddle)){
 							BeginModelChanges();
@@ -121,7 +121,7 @@ bool CPolygonCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseB
 					for (int i = nodesCount - 1; i >= 0; --i){
 						const i2d::CVector2d& logPos = polygonPtr->GetNode(i);
 						i2d::CVector2d viewPos;
-						calib.GetApplyToView(logPos, viewPos);
+						calib.GetInvPositionAt(logPos, viewPos);
 						istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 						if (tickerBox.IsInside(position - screenPos)){
 							BeginModelChanges();
@@ -150,11 +150,11 @@ bool CPolygonCalibrationShape::OnMouseMove(istd::CIndex2d position)
 		int editMode = GetEditMode();
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		i2d::CVector2d viewMouse = transform.GetClientPosition(position);
 		i2d::CVector2d logMouse;
-		calib.GetApplyToLog(viewMouse, logMouse);
+		calib.GetPositionAt(viewMouse, logMouse);
 
 		if ((editMode == iview::ISelectable::EM_MOVE) || (editMode == iview::ISelectable::EM_ADD)){
 			i2d::CPolygon& polygon = *dynamic_cast<i2d::CPolygon*>(modelPtr);
@@ -199,7 +199,7 @@ void CPolygonCalibrationShape::Draw(QPainter& drawContext) const
         int nodesCount = polygonPtr->GetNodesCount();
         if (nodesCount > 0){
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
             DrawArea(drawContext);
             DrawCurve(drawContext);
@@ -212,7 +212,7 @@ void CPolygonCalibrationShape::Draw(QPainter& drawContext) const
 					const iview::IColorShema& colorShema = GetColorShema();
 
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(polygonPtr->GetNode(0), viewPos);
+					calib.GetInvPositionAt(polygonPtr->GetNode(0), viewPos);
                     istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
                     colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_INACTIVE);
                 }
@@ -277,18 +277,18 @@ void CPolygonCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
     const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
     if (IsDisplayConnected() && (polygonPtr != NULL)){
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
         const iview::IColorShema& colorShema = GetColorShema();
 
 		int nodesCount = polygonPtr->GetNodesCount();
 
 		if (nodesCount > 0){
 			i2d::CVector2d firstView;
-			calib.GetApplyToView(polygonPtr->GetNode(0), firstView);
+			calib.GetInvPositionAt(polygonPtr->GetNode(0), firstView);
 			istd::CIndex2d screenPos = transform.GetScreenPosition(firstView);
 			i2d::CRect boundingBox(screenPos, screenPos);
 			for (int i = 1; i < nodesCount; i++){
-				calib.GetApplyToView(polygonPtr->GetNode(i), firstView);
+				calib.GetInvPositionAt(polygonPtr->GetNode(i), firstView);
 				screenPos = transform.GetScreenPosition(firstView);
 				boundingBox.Union(screenPos);
 			}
@@ -354,7 +354,7 @@ void CPolygonCalibrationShape::DrawCurve(QPainter& drawContext) const
 		int nodesCount = polygonPtr->GetNodesCount();
 		if (nodesCount > 0){
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 			const iview::IColorShema& colorShema = GetColorShema();
 
 			drawContext.save();
@@ -367,12 +367,12 @@ void CPolygonCalibrationShape::DrawCurve(QPainter& drawContext) const
 			}
 
 			i2d::CVector2d viewFirst;
-			calib.GetApplyToView(polygonPtr->GetNode(nodesCount - 1), viewFirst);
+			calib.GetInvPositionAt(polygonPtr->GetNode(nodesCount - 1), viewFirst);
 			istd::CIndex2d point1 = transform.GetScreenPosition(viewFirst);
 
 			for (int i = 0; i < nodesCount; i++){
 				i2d::CVector2d viewPos;
-				calib.GetApplyToView(polygonPtr->GetNode(i), viewPos);
+				calib.GetInvPositionAt(polygonPtr->GetNode(i), viewPos);
 				istd::CIndex2d point2 = transform.GetScreenPosition(viewPos);
 
 				drawContext.drawLine(iqt::GetQPoint(point1), iqt::GetQPoint(point2));
@@ -400,7 +400,7 @@ void CPolygonCalibrationShape::DrawArea(QPainter& drawContext) const
 
 		if (nodesCount > 2){
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 			const iview::IColorShema& colorShema = GetColorShema();
 
 			if (m_screenPoints.size() != nodesCount){
@@ -409,7 +409,7 @@ void CPolygonCalibrationShape::DrawArea(QPainter& drawContext) const
 
 			for (int i = 0; i < m_screenPoints.size(); i++){
 				i2d::CVector2d viewPos;
-				calib.GetApplyToView(polygon.GetNode(i), viewPos);
+				calib.GetInvPositionAt(polygon.GetNode(i), viewPos);
 				m_screenPoints[i] = iqt::GetQPoint(transform.GetScreenPosition(viewPos));
 			}
 
@@ -438,7 +438,7 @@ void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) cons
 		I_ASSERT(&polygon != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 		istd::CIndex2d screenPos;
 
         const iview::IColorShema& colorShema = GetColorShema();
@@ -456,7 +456,7 @@ void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) cons
 		case iview::ISelectable::EM_MOVE:
 			for (i = 0; i < nodesCount; i++){
 				i2d::CVector2d viewPos;
-				calib.GetApplyToView(polygon.GetNode(i), viewPos);
+				calib.GetInvPositionAt(polygon.GetNode(i), viewPos);
 				istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 				colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_MOVE);
@@ -467,7 +467,7 @@ void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) cons
 			if (nodesCount > 2){
 				for (i = 0; i < nodesCount; i++){
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(polygon.GetNode(i), viewPos);
+					calib.GetInvPositionAt(polygon.GetNode(i), viewPos);
 					istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 					colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_DELETE);
@@ -478,7 +478,7 @@ void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) cons
 		case iview::ISelectable::EM_ADD:
 			for (i = 0; i < nodesCount; i++){
 				i2d::CVector2d viewPos;
-				calib.GetApplyToView(polygon.GetNode(i), viewPos);
+				calib.GetInvPositionAt(polygon.GetNode(i), viewPos);
 				istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 				colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_SELECTED_INACTIVE);
@@ -489,7 +489,7 @@ void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) cons
 		if ((nodesCount > 0) && (editMode == iview::ISelectable::EM_ADD)){
 			for (int i = 0; i < nodesCount; i++){
 				i2d::CVector2d viewPos;
-				calib.GetApplyToView(GetSegmentMiddle(i), viewPos);
+				calib.GetInvPositionAt(GetSegmentMiddle(i), viewPos);
 				istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 				colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_INSERT);
@@ -507,7 +507,7 @@ bool CPolygonCalibrationShape::IsTickerTouched(istd::CIndex2d position) const
 	if (IsDisplayConnected() && (polygonPtr != NULL)){
         const iview::IColorShema& colorShema = GetColorShema();
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		int nodesCount = polygonPtr->GetNodesCount();
 
@@ -530,7 +530,7 @@ bool CPolygonCalibrationShape::IsTickerTouched(istd::CIndex2d position) const
 								iview::IColorShema::TT_INACTIVE);
 				for (int i = 0; i < nodesCount; i++){
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(polygonPtr->GetNode(i), viewPos);
+					calib.GetInvPositionAt(polygonPtr->GetNode(i), viewPos);
 					istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return true;
@@ -546,7 +546,7 @@ bool CPolygonCalibrationShape::IsTickerTouched(istd::CIndex2d position) const
 								iview::IColorShema::TT_INACTIVE);
 				for (int i = 0; i < nodesCount; i++){
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(polygonPtr->GetNode(i), viewPos);
+					calib.GetInvPositionAt(polygonPtr->GetNode(i), viewPos);
 					istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return true;
@@ -562,7 +562,7 @@ bool CPolygonCalibrationShape::IsTickerTouched(istd::CIndex2d position) const
 								iview::IColorShema::TT_INACTIVE);
 				for (int i = 0; i < nodesCount; i++){
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(GetSegmentMiddle(i), viewPos);
+					calib.GetInvPositionAt(GetSegmentMiddle(i), viewPos);
 					istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return true;
@@ -596,12 +596,12 @@ bool CPolygonCalibrationShape::IsCurveTouched(istd::CIndex2d position) const
         int nodesCount = polygon.GetNodesCount();
         if (nodesCount > 0){
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
             double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
 
             i2d::CVector2d node1;
-			calib.GetApplyToView(polygon.GetNode(nodesCount - 1), node1);
+			calib.GetInvPositionAt(polygon.GetNode(nodesCount - 1), node1);
 
             double logicalLineWidth = colorShema.GetLogicalLineWidth();
 
@@ -609,7 +609,7 @@ bool CPolygonCalibrationShape::IsCurveTouched(istd::CIndex2d position) const
 
 			for (int i = 0; i < nodesCount; i++){
                 i2d::CVector2d node2;
-				calib.GetApplyToView(polygon.GetNode(i), node2);
+				calib.GetInvPositionAt(polygon.GetNode(i), node2);
 
                 i2d::CVector2d delta = node2 - node1;
 

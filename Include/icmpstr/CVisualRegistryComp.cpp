@@ -19,116 +19,6 @@ namespace icmpstr
 {
 
 
-bool CVisualRegistryComp::SerializeNotes(iser::IArchive& archive)
-{
-	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	I_DWORD frameworkVersion = 0;
-	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
-	if (frameworkVersion < 2192 && !archive.IsStoring()){
-		return true;
-	}
-
-	static iser::CArchiveTag noteMapTag("NotesMap", "Map of component name to its note");
-	static iser::CArchiveTag elementTag("Element", "Map element");
-
-	bool retVal = true;
-
-	Ids ids = GetElementIds();
-
-	if (archive.IsStoring()){
-		// calculate number of non-empty notes
-		int notesCount = 0;
-		for (		Ids::const_iterator iter = ids.begin();
-					iter != ids.end();
-					++iter){
-			const std::string& elementId = *iter;
-			const ElementInfo* infoPtr = GetElementInfo(elementId);
-			if (infoPtr != NULL){
-				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-				if ((elementPtr != NULL) && !elementPtr->GetNote().isEmpty()){
-					notesCount++;
-				}
-			}
-		}
-
-		retVal = retVal && archive.BeginMultiTag(noteMapTag, elementTag, notesCount);
-
-		for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); ++iter){
-			std::string elementId = *iter;
-
-			QString note;
-			const ElementInfo* infoPtr = GetElementInfo(elementId);
-			if (infoPtr != NULL){
-				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-				if (elementPtr != NULL){
-					note = elementPtr->GetNote();
-				}
-			}
-
-			if (!note.isEmpty()){
-				retVal = retVal && archive.BeginTag(elementTag);
-
-				retVal = retVal && SerializeComponentNote(archive, elementId, note);
-
-				retVal = retVal && archive.EndTag(elementTag);
-			}
-		}
-
-		retVal = retVal && archive.EndTag(noteMapTag);
-	}
-	else{
-		istd::CChangeNotifier notifier(this);
-
-		// at the first remove all notes be reading
-		for (		Ids::const_iterator iter = ids.begin();
-					iter != ids.end();
-					++iter){
-			const std::string& elementId = *iter;
-			const ElementInfo* infoPtr = GetElementInfo(elementId);
-			if (infoPtr != NULL){
-				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-				if (elementPtr != NULL){
-					elementPtr->SetNote(QString());
-				}
-			}
-		}
-
-		int notesCount = 0;
-		retVal = retVal && archive.BeginMultiTag(noteMapTag, elementTag, notesCount);
-
-		if (!retVal){
-			return false;
-		}
-
-		for (int i = 0; i < notesCount; ++i){
-			retVal = retVal && archive.BeginTag(elementTag);
-			
-			std::string elementId;
-			QString note;
-
-			retVal = retVal && SerializeComponentNote(archive, elementId, note);
-			if (!retVal){
-				return false;
-			}
-
-			const ElementInfo* infoPtr = GetElementInfo(elementId);
-			if (infoPtr != NULL){
-				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
-				if (elementPtr != NULL){
-					elementPtr->SetNote(note);
-				}
-			}
-
-			retVal = retVal && archive.EndTag(elementTag);
-		}
-
-		retVal = retVal && archive.EndTag(noteMapTag);
-	}
-
-	return retVal;
-}
-
-
 bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 {
 	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
@@ -150,17 +40,20 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 			std::string elementId = *iter;
 
 			i2d::CVector2d position(0, 0);
+			QString componentNote;
 			const ElementInfo* infoPtr = GetElementInfo(elementId);
 			if (infoPtr != NULL){
 				const CVisualRegistryElement* elementPtr = dynamic_cast<const CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 				if (elementPtr != NULL){
 					position = elementPtr->GetCenter();
+
+					componentNote = elementPtr->GetNote();
 				}
 			}
 
 			retVal = retVal && archive.BeginTag(elementTag);
 
-			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
+			retVal = retVal && SerializeComponentInfo(archive, elementId, position, componentNote);
 
 			retVal = retVal && archive.EndTag(elementTag);
 		}
@@ -173,8 +66,9 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 			
 			std::string elementId;
 			i2d::CVector2d position;
+			QString componentNote;
 
-			retVal = retVal && SerializeComponentPosition(archive, elementId, position);
+			retVal = retVal && SerializeComponentInfo(archive, elementId, position, componentNote);
 			if (!retVal){
 				return false;
 			}
@@ -184,6 +78,8 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 				CVisualRegistryElement* elementPtr = dynamic_cast<CVisualRegistryElement*>(infoPtr->elementPtr.GetPtr());
 				if (elementPtr != NULL){
 					elementPtr->MoveCenterTo(position);
+
+					elementPtr->SetNote(componentNote);
 				}
 			}
 
@@ -205,7 +101,7 @@ bool CVisualRegistryComp::SerializeRegistry(iser::IArchive& archive)
 
 bool CVisualRegistryComp::SerializeUserData(iser::IArchive& archive)
 {
-	return SerializeComponentsLayout(archive) && SerializeNotes(archive);
+	return SerializeComponentsLayout(archive);
 }
 
 
@@ -311,7 +207,11 @@ bool CVisualRegistryComp::Serialize(iser::IArchive& archive)
 
 // protected methods
 
-bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, std::string& componentRole, i2d::CVector2d& position)
+bool CVisualRegistryComp::SerializeComponentInfo(
+			iser::IArchive& archive,
+			std::string& componentRole,
+			i2d::CVector2d& position,
+			QString& componentNote)
 {
 	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
 	static iser::CArchiveTag positionXTag("X", "X position of component");
@@ -329,22 +229,19 @@ bool CVisualRegistryComp::SerializeComponentPosition(iser::IArchive& archive, st
 	retVal = retVal && archive.Process(position[1]);
 	retVal = retVal && archive.EndTag(positionXTag);
 
-	return retVal;
-}
-
-
-bool CVisualRegistryComp::SerializeComponentNote(iser::IArchive& archive, std::string& componentName, QString& componentNote)
-{
-	static iser::CArchiveTag nameTag("ComponentName", "Name of component");
-	static iser::CArchiveTag componentNoteTag("Note", "Component note");
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	I_DWORD frameworkVersion = 0;
+	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
+	if (!archive.IsStoring() && (frameworkVersion == iser::IVersionInfo::UnknownVersion)){
+		return true;
+	}
 	
-	bool retVal = archive.BeginTag(nameTag);
-	retVal = retVal && archive.Process(componentName);
-	retVal = retVal && archive.EndTag(nameTag);
-
-	retVal = retVal && archive.BeginTag(componentNoteTag);
-	retVal = retVal && archive.Process(componentNote);
-	retVal = retVal && archive.EndTag(componentNoteTag);
+	if (frameworkVersion >= 2246 || archive.IsStoring()){
+		static iser::CArchiveTag componentNoteTag("Note", "Component note");	
+		retVal = retVal && archive.BeginTag(componentNoteTag);
+		retVal = retVal && archive.Process(componentNote);
+		retVal = retVal && archive.EndTag(componentNoteTag);
+	}
 
 	return retVal;
 }

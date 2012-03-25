@@ -165,18 +165,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CDateTimeBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSimpleDateTime.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSystemEnvironmentBase.cpp"
 				>
 			</File>
@@ -190,19 +178,7 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CDateTimeBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileInfo.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSectionBlocker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSimpleDateTime.h"
 				>
 			</File>
 			<File
@@ -215,14 +191,6 @@
 			</File>
 			<File
 				RelativePath="..\ICriticalSection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\QDateTime.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IFileInfo.h"
 				>
 			</File>
 			<File

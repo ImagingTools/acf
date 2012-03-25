@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2211
+          2246
         </Number>
         <Description>
           ACF
@@ -15,28 +15,20 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         Bitmap
       </ComponentName>
       <X>
-        900
+        600
       </X>
       <X>
-        525
+        325
       </X>
-    </Element>
-    <Element>
-      <ComponentName>
-        ImageBinder
-      </ComponentName>
-      <X>
-        625
-      </X>
-      <X>
-        375
-      </X>
+      <Note>
+        
+      </Note>
     </Element>
     <Element>
       <ComponentName>
@@ -46,10 +38,11 @@
         350
       </X>
       <X>
-        525
+        325
       </X>
+      <Note>
+        
+      </Note>
     </Element>
   </PositionMap>
-  <NotesMap count="0">
-  </NotesMap>
 </Acf>

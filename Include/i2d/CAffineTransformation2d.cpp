@@ -1,8 +1,60 @@
 #include "i2d/CAffineTransformation2d.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
+
+
 namespace i2d
 {
+
+
+// public methods
+
+const i2d::CAffine2d& CAffineTransformation2d::GetTransformation() const
+{
+	return m_transformation;
+}
+
+
+void CAffineTransformation2d::SetTransformation(const i2d::CAffine2d& transformation)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_transformation = transformation;
+}
+
+
+void CAffineTransformation2d::Reset()
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_transformation.Reset();
+}
+
+
+void CAffineTransformation2d::Reset(const CVector2d& translation)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_transformation.Reset(translation);
+}
+
+
+void CAffineTransformation2d::Reset(const CVector2d& translation, double angle, double scale)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_transformation.Reset(translation, angle, scale);
+}
+
+
+void CAffineTransformation2d::Reset(const CVector2d& translation, double angle, const CVector2d& scale)
+{
+	istd::CChangeNotifier changePtr(this);
+
+	m_transformation.Reset(translation, angle, scale);
+}
 
 
 // reimplemented (i2d::ITransformation2d)
@@ -19,7 +71,7 @@ bool CAffineTransformation2d::GetDistance(
 			double& result,
 			ExactnessMode /*mode*/) const
 {
-	result = GetApply(origPos1).GetDistance(GetApply(origPos2));
+	result = m_transformation.GetApply(origPos1).GetDistance(m_transformation.GetApply(origPos2));
 
 	return true;
 }
@@ -30,7 +82,7 @@ bool CAffineTransformation2d::GetPositionAt(
 			CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	GetApply(origPosition, result);
+	m_transformation.GetApply(origPosition, result);
 
 	return true;
 }
@@ -41,7 +93,7 @@ bool CAffineTransformation2d::GetInvPositionAt(
 			CVector2d& result,
 			ExactnessMode /*mode*/) const
 {
-	return GetInvertedApply(transfPosition, result);
+	return m_transformation.GetInvertedApply(transfPosition, result);
 }
 
 
@@ -50,7 +102,7 @@ bool CAffineTransformation2d::GetLocalTransform(
 			CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	result = *this;
+	result = m_transformation;
 
 	return true;
 }
@@ -61,7 +113,7 @@ bool CAffineTransformation2d::GetLocalInvTransform(
 			CAffine2d& result,
 			ExactnessMode /*mode*/) const
 {
-	return GetInverted(result);
+	return m_transformation.GetInverted(result);
 }
 
 
@@ -71,7 +123,7 @@ const ITransformation2d* CAffineTransformation2d::CreateCombinedTransformation(c
 	if (affineTransformPtr != NULL){
 		CAffineTransformation2d* combinedPtr = new CAffineTransformation2d();
 
-		GetApply(*affineTransformPtr, *combinedPtr);
+		m_transformation.GetApply(affineTransformPtr->m_transformation, combinedPtr->m_transformation);
 
 		return combinedPtr;
 	}
@@ -84,13 +136,13 @@ const ITransformation2d* CAffineTransformation2d::CreateCombinedTransformation(c
 
 bool CAffineTransformation2d::GetInvValueAt(const CVector2d& argument, CVector2d& result) const
 {
-	return GetInvertedApply(argument, result);
+	return m_transformation.GetInvertedApply(argument, result);
 }
 
 
 CVector2d CAffineTransformation2d::GetInvValueAt(const CVector2d& argument) const
 {
-	return GetInvertedApply(argument);
+	return m_transformation.GetInvertedApply(argument);
 }
 
 
@@ -98,7 +150,7 @@ CVector2d CAffineTransformation2d::GetInvValueAt(const CVector2d& argument) cons
 
 bool CAffineTransformation2d::GetValueAt(const CVector2d& argument, CVector2d& result) const
 {
-	GetApply(argument, result);
+	m_transformation.GetApply(argument, result);
 
 	return true;
 }
@@ -106,7 +158,7 @@ bool CAffineTransformation2d::GetValueAt(const CVector2d& argument, CVector2d& r
 
 CVector2d CAffineTransformation2d::GetValueAt(const CVector2d& argument) const
 {
-	return GetApply(argument);
+	return m_transformation.GetApply(argument);
 }
 
 
@@ -114,7 +166,7 @@ CVector2d CAffineTransformation2d::GetValueAt(const CVector2d& argument) const
 
 bool CAffineTransformation2d::Serialize(iser::IArchive& archive)
 {
-	return BaseClass::Serialize(archive);
+	return m_transformation.Serialize(archive);
 }
 
 

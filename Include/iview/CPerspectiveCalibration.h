@@ -2,20 +2,17 @@
 #define iview_CPerspectiveCalibration_included
 
 
-#include "i2d/CRectangle.h"
-
+// ACF includes
 #include "i3d/CVector3d.h"
 
-#include "iview/IIsomorphicCalibration.h"
-
+#include "i2d/ITransformation2d.h"
 #include "i2d/CAffine2d.h"
+#include "i2d/CRectangle.h"
 
 
 namespace iview
 {
 
-
-// TODO: Redesign it to ACF transformation concept.
 
 /**	
 	Perspective calibration.
@@ -25,7 +22,7 @@ namespace iview
 	Please note, that logical coordination system represents only finite
 	rectangle area, you can set using SetBounds(const i2d::CRectangle&) method.
 */
-class CPerspectiveCalibration: public IIsomorphicCalibration
+class CPerspectiveCalibration: virtual public i2d::ITransformation2d
 {
 public:
 	CPerspectiveCalibration();
@@ -66,22 +63,46 @@ public:
 	*/
 	bool DoCalibration(const i2d::CVector2d* logicalPoints, const i2d::CVector2d* viewPoints, int pointsCount);
 
-	virtual CalcStatus GetLogDerivative(const i2d::CVector2d& viewPosition, const i2d::CVector2d& viewDirection, double& result) const;
+	virtual bool GetLogDerivative(const i2d::CVector2d& viewPosition, const i2d::CVector2d& viewDirection, double& result) const;
 
 	bool operator==(const CPerspectiveCalibration& calib) const;
 	bool operator!=(const CPerspectiveCalibration& calib) const;
 
-	// reimplemented (iview::ICalibration)
-	virtual CalcStatus GetLogLength(const i2d::CLine2d& line, double& result) const;
-	virtual CalcStatus GetLogDeform(const i2d::CVector2d& logPosition, i2d::CMatrix2d& result) const;
-	virtual CalcStatus GetViewDeform(const i2d::CVector2d& viewPosition, i2d::CMatrix2d& result) const;
+	// reimplemented (i2d::ITransformation2d)
+	virtual int GetTransformationFlags() const;
+	virtual bool GetDistance(
+				const i2d::CVector2d& origPos1,
+				const i2d::CVector2d& origPos2,
+				double& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetPositionAt(
+				const i2d::CVector2d& origPosition,
+				i2d::CVector2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetInvPositionAt(
+				const i2d::CVector2d& transfPosition,
+				i2d::CVector2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetLocalTransform(
+				const i2d::CVector2d& origPosition,
+				i2d::CAffine2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetLocalInvTransform(
+				const i2d::CVector2d& transfPosition,
+				i2d::CAffine2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual const i2d::ITransformation2d* CreateCombinedTransformation(const i2d::ITransformation2d& transform) const;
 
-	// reimplemented (iview::IIsomorphicCalibration)
-	virtual CalcStatus GetApplyToLog(const i2d::CVector2d& viewPosition, i2d::CVector2d& result) const;
-	virtual CalcStatus GetApplyToView(const i2d::CVector2d& logPosition, i2d::CVector2d& result) const;
+	// reimplemented (imath::TISurjectFunction)
+	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
+	virtual i2d::CVector2d GetInvValueAt(const i2d::CVector2d& argument) const;
+
+	// reimplemented (imath::TIMathFunction)
+	virtual bool GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
+	virtual i2d::CVector2d GetValueAt(const i2d::CVector2d& argument) const;
 
 	// reimplemented (iser::ISerializable)
-	bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
 	i2d::CVector2d GetNormPosition(const i2d::CVector2d& viewPosition) const;	
@@ -218,6 +239,5 @@ inline i2d::CVector2d CPerspectiveCalibration::GetViewPosition(const i2d::CVecto
 
 
 #endif // !iview_CPerspectiveCalibration_included
-
 
 

@@ -4,12 +4,9 @@
 // Qt includes
 #include <QtGui/QPainter>
 
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "iqt/iqt.h"
-
-
 
 #include "iview/IRuler.h"
 #include "iview/IViewRulersAccessor.h"

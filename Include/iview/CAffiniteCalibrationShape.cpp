@@ -13,7 +13,7 @@
 #include "iview/IRuler.h"
 #include "iview/IViewRulersAccessor.h"
 #include "iview/CCalibratedViewBase.h"
-#include "iview/CAffiniteCalibration.h"
+#include "i2d/CAffineTransformation2d.h"
 #include "iview/CScaleCalibration.h"
 
 
@@ -25,9 +25,9 @@ namespace iview
 
 void CAffiniteCalibrationShape::Draw(QPainter& drawContext) const
 {
-	const iview::ICalibration* calibrationPtr = GetCalibrationPtr();
-	const iview::CAffiniteCalibration* calibPtr = dynamic_cast<const CAffiniteCalibration*>(calibrationPtr);
-	const iview::CScaleCalibration* scaleCalibPtr = dynamic_cast<const CScaleCalibration*>(calibrationPtr);
+	const i2d::ITransformation2d* calibrationPtr = GetCalibrationPtr();
+	const i2d::CAffineTransformation2d* calibPtr = dynamic_cast<const i2d::CAffineTransformation2d*>(calibrationPtr);
+	const CScaleCalibration* scaleCalibPtr = dynamic_cast<const CScaleCalibration*>(calibrationPtr);
 	if (calibPtr == NULL && scaleCalibPtr == NULL){
 		BaseClass::Draw(drawContext);
 
@@ -93,7 +93,7 @@ void CAffiniteCalibrationShape::Draw(QPainter& drawContext) const
 
 				i2d::CAffine2d calibTransform;
 				if (calibPtr != NULL){
-					calibTransform = calibPtr->GetLogToViewTransform();
+					calibTransform = calibPtr->GetTransformation();
 				}
 				else {
 					if (scaleCalibPtr != NULL){
@@ -113,7 +113,7 @@ void CAffiniteCalibrationShape::Draw(QPainter& drawContext) const
 				double right = istd::Max(istd::Max(logCorners[0].GetX(), logCorners[1].GetX()), istd::Max(logCorners[2].GetX(), logCorners[3].GetX()));
 				double bottom = istd::Max(istd::Max(logCorners[0].GetY(), logCorners[1].GetY()), istd::Max(logCorners[2].GetY(), logCorners[3].GetY()));
 
-				i2d::CRectangle boundRectangle(left, top, right-left, bottom-top);
+				i2d::CRectangle boundRectangle(left, top, right - left, bottom - top);
 
 				double scale = transform.GetDeformMatrix().GetAxisX().GetLength();
 

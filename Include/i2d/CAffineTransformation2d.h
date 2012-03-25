@@ -14,12 +14,38 @@ namespace i2d
 /**
 	Affine transformation for 2D spaces.
 */
-class CAffineTransformation2d:
-			virtual public CAffine2d,
-			virtual public ITransformation2d
+class CAffineTransformation2d: virtual public ITransformation2d
 {
 public:
-	typedef CAffine2d BaseClass;
+	/**
+		Get used transformation object.
+	*/
+	const i2d::CAffine2d& GetTransformation() const;
+
+	/**
+		Set the tranformation object
+	*/
+	void SetTransformation(const i2d::CAffine2d& transformation);
+
+	/**
+		Set to identity transformation.
+	*/
+	void Reset();
+
+	/**
+		Set this transformation to translation.
+	*/
+	void Reset(const CVector2d& translation);
+
+	/**
+		Set this transformation to translation, rotation and scaling.
+	*/
+	void Reset(const CVector2d& translation, double angle, double scale = 1.0);
+
+	/**
+		Set this transformation to translation, rotation and both axis scaling.
+	*/
+	void Reset(const CVector2d& translation, double angle, const CVector2d& scale);
 
 	// reimplemented (i2d::ITransformation2d)
 	virtual int GetTransformationFlags() const;
@@ -56,6 +82,9 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+protected:
+	CAffine2d m_transformation;
 };
 
 

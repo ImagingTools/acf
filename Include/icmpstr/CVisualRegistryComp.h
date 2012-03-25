@@ -42,7 +42,6 @@ public:
 		MI_CANNOT_CREATE_ELEMENT = 650
 	};
 
-	virtual bool SerializeNotes(iser::IArchive& archive);
 	virtual bool SerializeComponentsLayout(iser::IArchive& archive);
 	virtual bool SerializeRegistry(iser::IArchive& archive);
 	virtual bool SerializeUserData(iser::IArchive& archive);
@@ -66,8 +65,11 @@ protected:
 	typedef istd::TDelPtr<QIcon> IconPtr;
 	typedef std::map<icomp::CComponentAddress, IconPtr> IconMap;
 
-	bool SerializeComponentPosition(iser::IArchive& archive, std::string& componentName, i2d::CVector2d& position);
-	bool SerializeComponentNote(iser::IArchive& archive, std::string& componentName, QString& componentNote);
+	bool SerializeComponentInfo(
+				iser::IArchive& archive,
+				std::string& componentName,
+				i2d::CVector2d& position,
+				QString& note);
 
 	// reimplemented (icomp::CRegistry)
 	virtual icomp::IRegistryElement* CreateRegistryElement(

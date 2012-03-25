@@ -284,6 +284,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStaticCalibrationProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVector2d.cpp"
 				>
 			</File>
@@ -417,11 +421,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStaticCalibrationProviderComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CVector2d.h"
 				>
 			</File>
 			<File
 				RelativePath="..\i2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ICalibrationProvider.h"
 				>
 			</File>
 			<File

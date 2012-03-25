@@ -2,29 +2,17 @@
 #define iview_CScaleCalibration_included
 
 
-#include "i2d/CRectangle.h"
+#include "istd/TChangeNotifier.h"
 
-#include "i3d/CVector3d.h"
-
-#include "iview/IIsomorphicCalibration.h"
-
+#include "i2d/ITransformation2d.h"
 #include "i2d/CAffine2d.h"
-
-
 
 
 namespace iview
 {
 
 
-// TODO: Redesign it to ACF transformation concept.
-
-/**
-	Isomorphic calibration.
-	You need this calibration when your logical coordination system is flat,
-	and orthogonal to camera axis.
-*/
-class CScaleCalibration: public IIsomorphicCalibration
+class CScaleCalibration: virtual public i2d::ITransformation2d
 {
 public:
 	CScaleCalibration();
@@ -42,7 +30,6 @@ public:
 	double GetScaleFactor() const;
 
 	/**
-	
 		Set scale factor.
 		This scale factor is multiplier used to calculate
 		view position from logical position.
@@ -70,22 +57,45 @@ public:
 	i2d::CAffine2d GetLogToViewTransform() const;
 	
 	/**
-		Get global transformation from logical into view units representing this calibration.
-		@overload
+		\overload
 	*/
 	void GetLogToViewTransform(i2d::CAffine2d& result) const;
 
-	// reimplemented (iview::ICalibration)
-	virtual CalcStatus GetLogLength(const i2d::CLine2d& line, double& result) const;
-	virtual CalcStatus GetLogDeform(const i2d::CVector2d& logPosition, i2d::CMatrix2d& result) const;
-	virtual CalcStatus GetViewDeform(const i2d::CVector2d& viewPosition, i2d::CMatrix2d& result) const;
+	// reimplemented (i2d::ITransformation2d)
+	virtual int GetTransformationFlags() const;
+	virtual bool GetDistance(
+				const i2d::CVector2d& origPos1,
+				const i2d::CVector2d& origPos2,
+				double& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetPositionAt(
+				const i2d::CVector2d& origPosition,
+				i2d::CVector2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetInvPositionAt(
+				const i2d::CVector2d& transfPosition,
+				i2d::CVector2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetLocalTransform(
+				const i2d::CVector2d& origPosition,
+				i2d::CAffine2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual bool GetLocalInvTransform(
+				const i2d::CVector2d& transfPosition,
+				i2d::CAffine2d& result,
+				ExactnessMode mode = EM_NONE) const;
+	virtual const i2d::ITransformation2d* CreateCombinedTransformation(const ITransformation2d& transform) const;
 
-	// reimplemented (iview::IIsomorphicCalibration)
-	virtual CalcStatus GetApplyToLog(const i2d::CVector2d& viewPosition, i2d::CVector2d& result) const;
-	virtual CalcStatus GetApplyToView(const i2d::CVector2d& logPosition, i2d::CVector2d& result) const;
+	// reimplemented (imath::TISurjectFunction)
+	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
+	virtual i2d::CVector2d GetInvValueAt(const i2d::CVector2d& argument) const;
+
+	// reimplemented (imath::TIMathFunction)
+	virtual bool GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
+	virtual i2d::CVector2d GetValueAt(const i2d::CVector2d& argument) const;
 
 	// reimplemented (iser::ISerializable)
-	bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive);
 
 private:
 	i2d::CVector2d m_viewCenter;
@@ -103,7 +113,11 @@ inline double CScaleCalibration::GetScaleFactor() const
 
 inline void CScaleCalibration::SetScaleFactor(double value)
 {
-	m_scaleFactor = value;
+	if (m_scaleFactor != value){
+		istd::CChangeNotifier changePtr(this);
+	
+		m_scaleFactor = value;
+	}
 }
 
 
@@ -115,7 +129,11 @@ inline const i2d::CVector2d& CScaleCalibration::GetViewCenter() const
 
 inline void CScaleCalibration::SetViewCenter(const i2d::CVector2d& center)
 {
-	m_viewCenter = center;
+	if (m_viewCenter != center){
+		istd::CChangeNotifier changePtr(this);
+
+		m_viewCenter = center;
+	}
 }
 
 

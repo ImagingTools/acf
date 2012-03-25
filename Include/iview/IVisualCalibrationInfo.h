@@ -2,7 +2,7 @@
 #define iview_IVisualCalibrationInfo_included
 
 
-#include "iview/ICalibrated.h"
+#include "i2d/ICalibrationProvider.h"
 
 
 namespace iview
@@ -12,7 +12,7 @@ namespace iview
 /**
 	Common interface for all objects which allow access to calibration info.
 */
-class IVisualCalibrationInfo: virtual public ICalibrated
+class IVisualCalibrationInfo: virtual public i2d::ICalibrationProvider
 {
 public:
 	/**

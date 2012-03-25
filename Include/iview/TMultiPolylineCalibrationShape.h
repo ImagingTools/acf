@@ -129,11 +129,11 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 		if (downFlag){
 			const iview::IColorShema& colorShema = GetColorShema();
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 			i2d::CVector2d viewMouse = transform.GetClientPosition(position);
 			i2d::CVector2d logMouse;
-			calib.GetApplyToLog(viewMouse, logMouse);
+			calib.GetPositionAt(viewMouse, logMouse);
 
 			int nodesCount = polylinePtr->GetNodesCount();
 			int editMode = GetEditMode();
@@ -155,7 +155,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 					for (int i = nodesCount - 1; i >= 0; --i){
 						const i2d::CVector2d& logPos = polylinePtr->GetNode(i);
 						i2d::CVector2d viewPos;
-						calib.GetApplyToView(logPos, viewPos);
+						calib.GetInvPositionAt(logPos, viewPos);
 						istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 						if (tickerBox.IsInside(position - screenPos)){
 							m_referencePosition = logPos - logMouse;
@@ -183,7 +183,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 						logLast = GetSegmentMiddle(nodesCount - 1);
 					}
 					i2d::CVector2d viewLast;
-					calib.GetApplyToView(logLast, viewLast);
+					calib.GetInvPositionAt(logLast, viewLast);
 					istd::CIndex2d screenLast = transform.GetScreenPosition(viewLast);
 					if (tickerBox.IsInside(position - screenLast)){
 						BeginModelChanges();
@@ -198,7 +198,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 					for (int i = nodesCount - 2; i >= 0; --i){
 						i2d::CVector2d logPos = GetSegmentMiddle(i);
 						i2d::CVector2d viewPos;
-						calib.GetApplyToView(logPos, viewPos);
+						calib.GetInvPositionAt(logPos, viewPos);
 						istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 						if (tickerBox.IsInside(position - screenPos)){
 							BeginModelChanges();
@@ -214,7 +214,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 					if (!polylinePtr->IsClosed()){
 						i2d::CVector2d logFirst = polylinePtr->GetNode(0);
 						i2d::CVector2d viewFirst;
-						calib.GetApplyToView(logFirst, viewFirst);
+						calib.GetInvPositionAt(logFirst, viewFirst);
 						istd::CIndex2d screenFirst = transform.GetScreenPosition(viewFirst);
 						if (tickerBox.IsInside(position - screenFirst)){
 							BeginModelChanges();
@@ -243,7 +243,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 						for (int i = 0; i < segmentsCount; i++){
 							CalculateRemovePoints(*polylinePtr, i, first, second);
 
-							calib.GetApplyToView(first, viewPos);
+							calib.GetInvPositionAt(first, viewPos);
 							screenPos = transform.GetScreenPosition(viewPos);
 							if (tickerBox.IsInside(position - screenPos)){
 								BeginModelChanges();
@@ -253,7 +253,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::OnMouseButton(istd::CIndex2d p
 								EndModelChanges();
 								return true;
 							}
-							calib.GetApplyToView(second, viewPos);
+							calib.GetInvPositionAt(second, viewPos);
 							screenPos = transform.GetScreenPosition(viewPos);
 							if (tickerBox.IsInside(position - screenPos)){
 								BeginModelChanges();
@@ -311,7 +311,7 @@ void TMultiPolylineCalibrationShape<SegmentData>::DrawCurve(QPainter& drawContex
 				i2d::CVector2d firstPoint = polylinePtr->GetNode(0);
 
 				const iview::CScreenTransform& transform = GetLogToScreenTransform();
-				const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+				const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 				bool showOrientation = IsOrientationVisible() && (parallelsCount > 0);
 
@@ -328,9 +328,9 @@ void TMultiPolylineCalibrationShape<SegmentData>::DrawCurve(QPainter& drawContex
 						parallelAverage += ::fabs(parallel);
 
 						i2d::CVector2d viewPos;
-						calib.GetApplyToView(firstPoint + firstKneeVector * parallel, viewPos);
+						calib.GetInvPositionAt(firstPoint + firstKneeVector * parallel, viewPos);
 						istd::CIndex2d screenPoint1 = transform.GetScreenPosition(viewPos);
-						calib.GetApplyToView(secondPoint + secondKneeVector * parallel, viewPos);
+						calib.GetInvPositionAt(secondPoint + secondKneeVector * parallel, viewPos);
 						istd::CIndex2d screenPoint2 = transform.GetScreenPosition(viewPos);
 
 						if (polylinePtr->IsSegmentSelected(segmentIndex)){
@@ -354,9 +354,9 @@ void TMultiPolylineCalibrationShape<SegmentData>::DrawCurve(QPainter& drawContex
 						i2d::CVector2d viewArrowBegin;
 						i2d::CVector2d viewArrowLeft;
 						i2d::CVector2d viewArrowRight;
-						calib.GetApplyToView(firstPoint, viewArrowBegin);
-						calib.GetApplyToView(firstPoint + delta + orthogonalized, viewArrowLeft);
-						calib.GetApplyToView(firstPoint + delta - orthogonalized, viewArrowRight);
+						calib.GetInvPositionAt(firstPoint, viewArrowBegin);
+						calib.GetInvPositionAt(firstPoint + delta + orthogonalized, viewArrowLeft);
+						calib.GetInvPositionAt(firstPoint + delta - orthogonalized, viewArrowRight);
 						istd::CIndex2d screenArrowBegin = transform.GetScreenPosition(viewArrowBegin);
 						istd::CIndex2d screenArrowLeft = transform.GetScreenPosition(viewArrowLeft);
 						istd::CIndex2d screenArrowRight = transform.GetScreenPosition(viewArrowRight);
@@ -389,11 +389,11 @@ void TMultiPolylineCalibrationShape<SegmentData>::DrawSelectionElements(QPainter
 		int editMode = GetEditMode();
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		for (int i = 0; i < nodesCount; i++){
 			i2d::CVector2d viewPos;
-			calib.GetApplyToView(polylinePtr->GetNode(i), viewPos);
+			calib.GetInvPositionAt(polylinePtr->GetNode(i), viewPos);
 			istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 			if ((editMode == iview::ISelectable::EM_MOVE)){
@@ -415,21 +415,21 @@ void TMultiPolylineCalibrationShape<SegmentData>::DrawSelectionElements(QPainter
 					istd::CIndex2d screenPos;
 					i2d::CVector2d viewPos;
 					if (!polylinePtr->IsClosed()){
-						calib.GetApplyToView(polylinePtr->GetNode(0), viewPos);
+						calib.GetInvPositionAt(polylinePtr->GetNode(0), viewPos);
 						screenPos = transform.GetScreenPosition(viewPos);
 						colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_INSERT);
 					}
 
 					int segmentsCount = polylinePtr->GetSegmentsCount();
 					for (int i = 0; i < segmentsCount; i++){
-						calib.GetApplyToView(GetSegmentMiddle(i), viewPos);
+						calib.GetInvPositionAt(GetSegmentMiddle(i), viewPos);
 						screenPos = transform.GetScreenPosition(viewPos);
 
 						colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_INSERT);
 					}
 
 					if (!polylinePtr->IsClosed()){
-						calib.GetApplyToView(polylinePtr->GetNode(nodesCount - 1), viewPos);
+						calib.GetInvPositionAt(polylinePtr->GetNode(nodesCount - 1), viewPos);
 						screenPos = transform.GetScreenPosition(viewPos);
 						colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_INSERT);
 					}
@@ -446,10 +446,10 @@ void TMultiPolylineCalibrationShape<SegmentData>::DrawSelectionElements(QPainter
 							CalculateRemovePoints(*polylinePtr, i, first, second);
 
 							i2d::CVector2d viewPos;
-							calib.GetApplyToView(first, viewPos);
+							calib.GetInvPositionAt(first, viewPos);
 							istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 							colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_DELETE);
-							calib.GetApplyToView(second, viewPos);
+							calib.GetInvPositionAt(second, viewPos);
 							screenPos = transform.GetScreenPosition(viewPos);
 							colorShema.DrawTicker(drawContext, screenPos, iview::IColorShema::TT_DELETE);
 						}
@@ -472,18 +472,18 @@ bool TMultiPolylineCalibrationShape<SegmentData>::IsCurveTouched(istd::CIndex2d 
 	if (polylinePtr != NULL){
         const iview::IColorShema& colorShema = GetColorShema();
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		int nodesCount = polylinePtr->GetNodesCount();
 
 		i2d::CVector2d node1;
 		int i;
 		if (polylinePtr->IsClosed()){
-			calib.GetApplyToView(polylinePtr->GetNode(nodesCount - 1), node1);
+			calib.GetInvPositionAt(polylinePtr->GetNode(nodesCount - 1), node1);
 			i = 0;
 		}
 		else{
-			calib.GetApplyToView(polylinePtr->GetNode(0), node1);
+			calib.GetInvPositionAt(polylinePtr->GetNode(0), node1);
 			i = 1;
 		}
 
@@ -494,7 +494,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::IsCurveTouched(istd::CIndex2d 
 
 		for (; i < nodesCount; i++){
 			i2d::CVector2d node2;
-			calib.GetApplyToView(polylinePtr->GetNode(i), node2);
+			calib.GetInvPositionAt(polylinePtr->GetNode(i), node2);
 			
 			i2d::CVector2d delta = node2 - node1;
 
@@ -525,18 +525,18 @@ bool TMultiPolylineCalibrationShape<SegmentData>::TrySelectSegments(
 
 		int nodesCount = polyline.GetNodesCount();
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
 
 		int nodeIndex;
 		i2d::CVector2d node1;
 		if (polyline.IsClosed()){
-			calib.GetApplyToView(polyline.GetNode(nodesCount - 1), node1);
+			calib.GetInvPositionAt(polyline.GetNode(nodesCount - 1), node1);
 			nodeIndex = 0;
 		}
 		else{
-			calib.GetApplyToView(polyline.GetNode(0), node1);
+			calib.GetInvPositionAt(polyline.GetNode(0), node1);
 			nodeIndex = 1;
 		}
 
@@ -544,7 +544,7 @@ bool TMultiPolylineCalibrationShape<SegmentData>::TrySelectSegments(
 
 		for (; nodeIndex < nodesCount; nodeIndex++){
 			i2d::CVector2d node2;
-			calib.GetApplyToView(polyline.GetNode(nodeIndex), node2);
+			calib.GetInvPositionAt(polyline.GetNode(nodeIndex), node2);
 			const i2d::CVector2d& viewMouse = transform.GetClientPosition(position);
 
 			i2d::CVector2d delta = node2 - node1;
@@ -612,7 +612,7 @@ iview::ITouchable::TouchState TMultiPolylineCalibrationShape<SegmentData>::IsTou
 		int editMode = GetEditMode();
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		switch (editMode){
 		case iview::ISelectable::EM_NONE:
@@ -635,7 +635,7 @@ iview::ITouchable::TouchState TMultiPolylineCalibrationShape<SegmentData>::IsTou
 
 				for (int i = 0; i < nodesCount; i++){
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(polylinePtr->GetNode(i), viewPos);
+					calib.GetInvPositionAt(polylinePtr->GetNode(i), viewPos);
 					istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return TS_TICKER;
@@ -653,7 +653,7 @@ iview::ITouchable::TouchState TMultiPolylineCalibrationShape<SegmentData>::IsTou
 					i2d::CVector2d viewPos;
 					if (i == 0 && !polylinePtr->IsClosed()){
 						i2d::CVector2d viewPos;
-						calib.GetApplyToView(polylinePtr->GetNode(i), viewPos);
+						calib.GetInvPositionAt(polylinePtr->GetNode(i), viewPos);
 						screenPos = transform.GetScreenPosition(viewPos);
 						if (tickerBox.IsInside(position - screenPos)){
 							return TS_TICKER;
@@ -661,14 +661,14 @@ iview::ITouchable::TouchState TMultiPolylineCalibrationShape<SegmentData>::IsTou
 					}
 
 					if (i == (nodesCount - 1) && !polylinePtr->IsClosed()){
-						calib.GetApplyToView(polylinePtr->GetNode(i), viewPos);
+						calib.GetInvPositionAt(polylinePtr->GetNode(i), viewPos);
 						screenPos = transform.GetScreenPosition(viewPos);
 						if (tickerBox.IsInside(position - screenPos)){
 							return TS_TICKER;
 						}
 					}
 
-					calib.GetApplyToView((polylinePtr->GetNode(i) + polylinePtr->GetNode((i+1) % nodesCount)) * 0.5, viewPos);
+					calib.GetInvPositionAt((polylinePtr->GetNode(i) + polylinePtr->GetNode((i+1) % nodesCount)) * 0.5, viewPos);
 					screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return TS_TICKER;
@@ -688,12 +688,12 @@ iview::ITouchable::TouchState TMultiPolylineCalibrationShape<SegmentData>::IsTou
 					CalculateRemovePoints(*polylinePtr, i, first, second);
 
 					i2d::CVector2d viewPos;
-					calib.GetApplyToView(first, viewPos);
+					calib.GetInvPositionAt(first, viewPos);
 					istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return TS_TICKER;
 					}
-					calib.GetApplyToView(second, viewPos);
+					calib.GetInvPositionAt(second, viewPos);
 					screenPos = transform.GetScreenPosition(viewPos);
 					if (tickerBox.IsInside(position - screenPos)){
 						return TS_TICKER;
@@ -754,7 +754,7 @@ void TMultiPolylineCalibrationShape<SegmentData>::CalcBoundingBox(i2d::CRect& re
 
 		if (segmentsCount > 0){
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 			for (int i = 0; i < nodesCount; i++){
 				const i2d::CVector2d& position = polylinePtr->GetNode(i);
@@ -764,7 +764,7 @@ void TMultiPolylineCalibrationShape<SegmentData>::CalcBoundingBox(i2d::CRect& re
 					double parallelValue = polylinePtr->GetParallel(segmentIndex, parallelIndex);
 					i2d::CVector2d edgePos = position + knee * parallelValue;
 					i2d::CVector2d edgeView;
-					calib.GetApplyToView(edgePos, edgeView);
+					calib.GetInvPositionAt(edgePos, edgeView);
 					result.Union(transform.GetScreenPosition(edgeView));
 				}
 				segmentIndex = (i + 1) % segmentsCount;
@@ -772,7 +772,7 @@ void TMultiPolylineCalibrationShape<SegmentData>::CalcBoundingBox(i2d::CRect& re
 					double parallelValue = polylinePtr->GetParallel(segmentIndex, parallelIndex);
 					i2d::CVector2d edgePos = position + knee * parallelValue;
 					i2d::CVector2d edgeView;
-					calib.GetApplyToView(edgePos, edgeView);
+					calib.GetInvPositionAt(edgePos, edgeView);
 					result.Union(transform.GetScreenPosition(edgeView));
 				}
 			}

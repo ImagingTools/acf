@@ -246,6 +246,11 @@ I_EXPORT_COMPONENT(
 			"Affine 2D Tranformation" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
 
 I_EXPORT_COMPONENT(
+			StaticCalibrationProvider,
+			"Provider of a static calibration object",
+			"2D Tranformation Calibration" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
+
+I_EXPORT_COMPONENT(
 			TextDocument,
 			"Simple text document",
 			IM_CATEGORY(I_DATA_MODEL) IM_TAG("Text Document"));

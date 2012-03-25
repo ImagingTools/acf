@@ -200,10 +200,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDateTime.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDefaultRegistryLoaderProvider.cpp"
 				>
 			</File>
@@ -304,10 +300,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTimer.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CTrace.cpp"
 				>
 			</File>
@@ -363,10 +355,6 @@
 			</File>
 			<File
 				RelativePath="..\CCriticalSection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDateTime.h"
 				>
 			</File>
 			<File
@@ -467,10 +455,6 @@
 			</File>
 			<File
 				RelativePath="..\CSystemEnvironment.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CTimer.h"
 				>
 			</File>
 			<File

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2211
+          2246
         </Number>
         <Description>
           ACF
@@ -15,7 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="2">
     <Element>
       <Id>
         Bitmap
@@ -39,67 +39,6 @@
     </Element>
     <Element>
       <Id>
-        ImageBinder
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ModelBinder
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              Model
-            </Id>
-            <Type>
-              icomp::CReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Bitmap
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Observers
-            </Id>
-            <Type>
-              icomp::CMultiReferenceAttribute
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ImageView
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         ImageView
       </Id>
       <PackageId>
@@ -118,18 +57,21 @@
         <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
-              ShowControlButtons
+              DefaultModel
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              icomp::CReferenceAttribute
             </Type>
             <ExportId>
-              ShowControlButtons
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                Bitmap
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

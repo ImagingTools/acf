@@ -6,7 +6,6 @@
 	ProjectGUID="{CE718FF3-10C8-40B7-BCFF-244511F3E1C4}"
 	RootNamespace="iview"
 	Keyword="Qt4VSv1.0"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -167,10 +166,6 @@
 			Filter="cpp"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath="..\CAffiniteCalibration.cpp"
-				>
-			</File>
 			<File
 				RelativePath="..\CAffiniteCalibrationShape.cpp"
 				>
@@ -354,10 +349,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\CAffiniteCalibration.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CAffiniteCalibrationShape.h"
 				>
 			</File>
@@ -534,11 +525,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ICalibrated.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ICalibration.h"
+				RelativePath="..\i2d::ITransformation2d.h"
 				>
 			</File>
 			<File
@@ -555,10 +542,6 @@
 			</File>
 			<File
 				RelativePath="..\IInteractiveShape.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IIsomorphicCalibration.h"
 				>
 			</File>
 			<File

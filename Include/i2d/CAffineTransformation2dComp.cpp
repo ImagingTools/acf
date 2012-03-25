@@ -13,8 +13,8 @@ void CAffineTransformation2dComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	CVector2d& translationRef = GetTranslationRef();
-	CMatrix2d& matrixRef = GetDeformMatrixRef();
+	CVector2d& translationRef = m_transformation.GetTranslationRef();
+	CMatrix2d& matrixRef = m_transformation.GetDeformMatrixRef();
 
 	if (m_m00AttrPtr.IsValid()){
 		matrixRef.GetAtRef(0, 0) = *m_m00AttrPtr;

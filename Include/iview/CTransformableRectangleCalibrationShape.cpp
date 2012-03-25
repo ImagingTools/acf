@@ -153,10 +153,10 @@ bool CTransformableRectangleCalibrationShape::OnMouseMove(istd::CIndex2d positio
 		const i2d::CAffine2d& parallTransform = parallelogramPtr->GetTransform();
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 		i2d::CVector2d viewPos = transform.GetClientPosition(position);
 		i2d::CVector2d logPos;
-		calib.GetApplyToLog(viewPos, logPos);
+		calib.GetPositionAt(viewPos, logPos);
 
 		parallelogramPtr->SetTransform(CalcMoveTransform(logPos, parallTransform).GetApply(parallTransform));
 
@@ -176,7 +176,7 @@ void CTransformableRectangleCalibrationShape::CalcNodes(const i2d::CAffine2d& pa
 {
 	if (IsDisplayConnected()){
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 		i2d::CVector2d viewPos;
 
 		const i2d::CMatrix2d& parallDeform = parallTransform.GetDeformMatrix();
@@ -195,27 +195,27 @@ void CTransformableRectangleCalibrationShape::CalcNodes(const i2d::CAffine2d& pa
 		const i2d::CVector2d& rotation1 = node1 + axisX * 0.5 + axisY * 0.25;
 		const i2d::CVector2d& rotation2 = node1 + axisX * 0.25 + axisY * 0.5;
 
-		calib.GetApplyToView(node1, viewPos);
+		calib.GetInvPositionAt(node1, viewPos);
 		m_nodes[EN_NODE1] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(node2, viewPos);
+		calib.GetInvPositionAt(node2, viewPos);
 		m_nodes[EN_NODE2] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(node3, viewPos);
+		calib.GetInvPositionAt(node3, viewPos);
 		m_nodes[EN_NODE3] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(node4, viewPos);
+		calib.GetInvPositionAt(node4, viewPos);
 		m_nodes[EN_NODE4] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(center, viewPos);
+		calib.GetInvPositionAt(center, viewPos);
 		m_nodes[EN_CENTER] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(middle12, viewPos);
+		calib.GetInvPositionAt(middle12, viewPos);
 		m_nodes[EN_MIDDLE12] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(middle23, viewPos);
+		calib.GetInvPositionAt(middle23, viewPos);
 		m_nodes[EN_MIDDLE23] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(middle34, viewPos);
+		calib.GetInvPositionAt(middle34, viewPos);
 		m_nodes[EN_MIDDLE34] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(middle41, viewPos);
+		calib.GetInvPositionAt(middle41, viewPos);
 		m_nodes[EN_MIDDLE41] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(rotation1, viewPos);
+		calib.GetInvPositionAt(rotation1, viewPos);
 		m_nodes[EN_ROTATION1] = transform.GetScreenPosition(viewPos);
-		calib.GetApplyToView(rotation2, viewPos);
+		calib.GetInvPositionAt(rotation2, viewPos);
 		m_nodes[EN_ROTATION2] = transform.GetScreenPosition(viewPos);
 
 		m_areNodesValid = true;

@@ -5,7 +5,6 @@
 	Name="i2d"
 	ProjectGUID="{CB5A8391-AB54-40F6-B721-74D8CC1A32CE}"
 	RootNamespace="i2d"
-	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -285,6 +284,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStaticCalibrationProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVector2d.cpp"
 				>
 			</File>
@@ -415,6 +418,10 @@
 			</File>
 			<File
 				RelativePath="..\CSplineSegment.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CStaticCalibrationProviderComp.h"
 				>
 			</File>
 			<File

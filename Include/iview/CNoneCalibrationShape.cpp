@@ -19,33 +19,7 @@ namespace iview
 {
 
 
-const ICalibration* CNoneCalibrationShape::GetCalibrationPtr() const
-{
-	const ICalibration* calibrationPtr = dynamic_cast<const ICalibration*>(GetModelPtr());
-
-	if (calibrationPtr == NULL){
-		const iview::IDisplay* displayPtr = GetDisplayPtr();
-		while (displayPtr != NULL){
-			const iview::ICalibrated* calibratedPtr = dynamic_cast<const iview::ICalibrated*>(displayPtr);
-			if ((calibratedPtr != NULL)){
-				return &calibratedPtr->GetCalibration();
-			}
-
-			displayPtr = displayPtr->GetParentDisplayPtr();
-		}
-	}
-
-	return calibrationPtr;
-}
-
-
-// reimplemented (iview::IInteractiveShape)
-
-iview::ITouchable::TouchState CNoneCalibrationShape::IsTouched(istd::CIndex2d /*position*/) const
-{
-	return TS_NONE;
-}
-
+// public methods
 
 // reimplemented (iview::IVisualizable)
 
@@ -233,6 +207,14 @@ void CNoneCalibrationShape::Draw(QPainter& drawContext) const
 }
 
 
+// reimplemented (iview::IInteractiveShape)
+
+iview::ITouchable::TouchState CNoneCalibrationShape::IsTouched(istd::CIndex2d /*position*/) const
+{
+	return TS_NONE;
+}
+
+
 // reimplemented (iview::IMouseActionObserver)
 
 bool CNoneCalibrationShape::OnMouseButton(istd::CIndex2d /*position*/, Qt::MouseButton /*buttonType*/, bool /*downFlag*/)
@@ -248,6 +230,25 @@ bool CNoneCalibrationShape::OnMouseMove(istd::CIndex2d /*position*/)
 
 
 // protected methods
+
+const i2d::ITransformation2d* CNoneCalibrationShape::GetCalibrationPtr() const
+{
+	const i2d::ITransformation2d* calibrationPtr = dynamic_cast<const i2d::ITransformation2d*>(GetModelPtr());
+	if (calibrationPtr == NULL){
+		const iview::IDisplay* displayPtr = GetDisplayPtr();
+		while (displayPtr != NULL){
+			const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(displayPtr);
+			if ((calibrationProviderPtr != NULL)){
+				return calibrationProviderPtr->GetCalibration();
+			}
+
+			displayPtr = displayPtr->GetParentDisplayPtr();
+		}
+	}
+
+	return calibrationPtr;
+}
+
 
 // reimplemented (iview::CInteractiveShapeBase)
 

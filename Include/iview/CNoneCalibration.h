@@ -2,7 +2,7 @@
 #define iview_CNoneCalibration
 
 
-#include "iview/IIsomorphicCalibration.h"
+#include "i2d/ITransformation2d.h"
 
 
 namespace iview
@@ -10,20 +10,32 @@ namespace iview
 
 
 // TODO: Redesign it to ACF transformation concept.
-class CNoneCalibration: virtual public IIsomorphicCalibration
+class CNoneCalibration: virtual public i2d::ITransformation2d
 {
 public:
-	// reimplemented (iview::ICalibration)
-	virtual CalcStatus GetLogLength(const i2d::CLine2d& line, double& result) const;
-	virtual CalcStatus GetLogDeform(const i2d::CVector2d& logPosition, i2d::CMatrix2d& result) const;
-	virtual CalcStatus GetViewDeform(const i2d::CVector2d& viewPosition, i2d::CMatrix2d& result) const;
+	// reimplemented (i2d::ITransformation2d)
+	virtual int GetTransformationFlags() const;
+	virtual bool GetDistance(
+				const i2d::CVector2d& origPos1,
+				const i2d::CVector2d& origPos2,
+				double& result,
+				i2d::ITransformation2d::ExactnessMode mode = EM_NONE) const;
+	virtual bool GetLocalTransform(const i2d::CVector2d& logPosition, i2d::CAffine2d& result, ExactnessMode mode = EM_NONE) const;
+	virtual bool GetLocalInvTransform(const i2d::CVector2d& viewPosition, i2d::CAffine2d& result, ExactnessMode mode = EM_NONE) const;
+	virtual bool GetPositionAt(const i2d::CVector2d& viewPosition, i2d::CVector2d& result, ExactnessMode mode = EM_NONE) const;
+	virtual bool GetInvPositionAt(const i2d::CVector2d& logPosition, i2d::CVector2d& result, ExactnessMode mode = EM_NONE) const;
+	virtual const ITransformation2d* CreateCombinedTransformation(const ITransformation2d& transform) const;
 
-	// reimplemented (iview::IIsomorphicCalibration)
-	virtual CalcStatus GetApplyToLog(const i2d::CVector2d& viewPosition, i2d::CVector2d& result) const;
-	virtual CalcStatus GetApplyToView(const i2d::CVector2d& logPosition, i2d::CVector2d& result) const;
+	// reimplemented (imath::TISurjectFunction)
+	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
+	virtual i2d::CVector2d GetInvValueAt(const i2d::CVector2d& argument) const;
+
+	// reimplemented (imath::TIMathFunction)
+	virtual bool GetValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
+	virtual i2d::CVector2d GetValueAt(const i2d::CVector2d& argument) const;
 
 	// reimplemented (iser::ISerializable)
-	bool Serialize(iser::IArchive& archive);
+	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
 	static const CNoneCalibration& GetInstance();

@@ -13,16 +13,16 @@ namespace i2d
 
 
 /**
-	Common interface for a calibration provider.
+	Common interface for an object, which delivers a 2D-calibration.
 */
 class ICalibrationProvider: virtual public istd::IChangeable
 {
 public:
 	/**
 		Get access to transformation object, which transforms a coordinate system to a logical one.
-		\return	pointer to transformation if it is accessible, or NULL.
+		\return		Pointer to transformation if it is accessible, or NULL.
 	*/
-	virtual const i2d::ITransformation2d* GetLogicalTransform() const = 0;
+	virtual const i2d::ITransformation2d* GetCalibration() const = 0;
 };
 
 

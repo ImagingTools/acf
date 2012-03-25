@@ -46,10 +46,10 @@ void CPinCalibrationShape::Draw(QPainter& drawContext) const
 	if (IsDisplayConnected() && (pinPtr != NULL)){
 	    const iview::IColorShema& colorShema = GetColorShema();
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		i2d::CVector2d viewPos;
-		calib.GetApplyToView(pinPtr->GetPosition(), viewPos);
+		calib.GetInvPositionAt(pinPtr->GetPosition(), viewPos);
 		istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 		if (IsSelected()){
@@ -93,16 +93,16 @@ bool CPinCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButto
 		if (downFlag){
 			const iview::IColorShema& colorShema = GetColorShema();
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 			const i2d::CVector2d& logPos = pinPtr->GetPosition();
 			i2d::CVector2d viewPos;
-			calib.GetApplyToView(logPos, viewPos);
+			calib.GetInvPositionAt(logPos, viewPos);
 			istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 			const i2d::CRect& tickerBox = colorShema.GetTickerBox(iview::IColorShema::TT_MOVE);
 			if (tickerBox.IsInside(position - screenPos)){
 				i2d::CVector2d logMouse;
-				calib.GetApplyToLog(transform.GetClientPosition(position), logMouse);
+				calib.GetPositionAt(transform.GetClientPosition(position), logMouse);
 				m_referencePosition = logPos - logMouse;
 				BeginModelChanges();
 
@@ -129,10 +129,10 @@ bool CPinCalibrationShape::OnMouseMove(istd::CIndex2d position)
 		I_ASSERT(&pin != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		i2d::CVector2d logMouse;
-		calib.GetApplyToLog(transform.GetClientPosition(position), logMouse);
+		calib.GetPositionAt(transform.GetClientPosition(position), logMouse);
 
 		pin.SetPosition(m_referencePosition + logMouse);
 
@@ -156,11 +156,11 @@ void CPinCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
 	if (IsDisplayConnected() && (pinPtr != NULL)){
 		const iview::IColorShema& colorShema = GetColorShema();
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const iview::IIsomorphicCalibration& calib = GetIsomorphCalib();
+		const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
 		const i2d::CVector2d& logPos = pinPtr->GetPosition();
 		i2d::CVector2d viewPos;
-		calib.GetApplyToView(logPos, viewPos);
+		calib.GetInvPositionAt(logPos, viewPos);
 		istd::CIndex2d screenPos = transform.GetScreenPosition(viewPos);
 
 		iview::IColorShema::TickerType tickerType;

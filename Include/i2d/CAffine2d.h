@@ -62,14 +62,17 @@ public:
 		Set to identity transformation.
 	*/
 	void Reset();
+
 	/**
 		Set this transformation to translation.
 	*/
 	void Reset(const CVector2d& translation);
+
 	/**
 		Set this transformation to translation, rotation and scaling.
 	*/
 	void Reset(const CVector2d& translation, double angle, double scale = 1.0);
+
 	/**
 		Set this transformation to translation, rotation and both axis scaling.
 	*/
