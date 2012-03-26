@@ -24,20 +24,20 @@ public:
 
 	CSpline();
 
-	/**	Get count of segments.
+	/**
+		Get count of segments.
 	 */
 	virtual int GetSegmentCount() const;
-	/**	Get segment in polynomial.
-	 *		@param	index	an index of segment.
+	
+	/**	
+		Get segment in polynomial.
+		\param	index	Index of segment.
 	 */
 	virtual const CSplineSegment& GetSplineSegment(int index) const;
 
 protected:
 	void CalcAllSegments() const;
 	
-	// reimplemented (i2d::CPolygon)
-	virtual void SetInconsistent();
-
 private:
 	static void SolveOpen(double* d,int count);
 

@@ -68,14 +68,6 @@ void CSpline::CalcAllSegments() const
 }
 
 
-// reimplemented (i2d::CPolygon)
-
-void CSpline::SetInconsistent()
-{
-	m_isInvalidated = true;
-}
-
-
 // private methods
 
 void CSpline::SolveOpen(double* d,int count)

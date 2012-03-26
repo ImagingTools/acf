@@ -9,8 +9,6 @@ void CPolyline::SetClosed(bool state)
 {
 	if (m_isClosed != state){
 		m_isClosed = state;
-	
-		SetInconsistent();
 	}
 }
 

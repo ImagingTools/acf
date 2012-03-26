@@ -17,42 +17,61 @@ class CSplineSegment: virtual public istd::IPolymorphic
 public:
 	typedef istd::IPolymorphic BaseClass;
 
-	/**	Get point.
-	 *		@param	position	a position in segment.
-	 *							Must be in range [0, 1], where 0 is begin, and 1 is end of segment.
-	 */
+	/**
+		Get point.
+		\param	position Position in segment. Must be in range [0, 1], where 0 is begin, and 1 is end of segment.
+	*/
 	virtual i2d::CVector2d GetPointInSegment(double position) const;
-	/**	Get derivation.
-	 *		@param	position	a position in segment.
-	 *							Must be in range [0, 1], where 0 is begin, and 1 is end of segment.
-	 */
+
+	/**
+		Get derivation.
+		\param	position Position in segment. Must be in range [0, 1], where 0 is begin, and 1 is end of segment.
+	*/
 	virtual i2d::CVector2d GetDerivationInSegment(double position) const;
-	/**	Get derivation in begin point.
-	 */
+	
+	/**
+		Get derivation in begin point.
+	*/
 	virtual i2d::CVector2d GetDerivationBegin() const;
-	/**	Get derivation in end point.
-	 */
+
+	/**
+		Get derivation in end point.
+	*/
 	virtual i2d::CVector2d GetDerivationEnd() const;
-	/**	Get begin point.
-	 */
+
+	/**
+		Get begin point.
+	*/
 	virtual i2d::CVector2d GetPointBegin() const;
-	/**	Get end point.
-	 */
+
+	/**
+		Get end point.
+	*/
 	virtual i2d::CVector2d GetPointEnd() const;
-	/**	Get first Bezier's control point.
-	 */
+	
+	/**
+		Get first Bezier's control point.
+	*/
 	virtual i2d::CVector2d GetBezierPointBegin() const;
-	/**	Get second Bezier's control point.
-	 */
+	
+	/**
+		Get second Bezier's control point.
+	*/
 	virtual i2d::CVector2d GetBezierPointEnd() const;
-	/**	Check, if segment is closer than specifier distance.
-	 */
+	
+	/**
+		Check, if segment is closer than specifier distance.
+	*/
 	virtual bool IsCloserThan(const i2d::CVector2d position, double distance) const;
-	/**	Get a first half segment.
-	 */
+	
+	/**
+		Get a first half segment.
+	*/
 	virtual void GetHalfSegmentFirst(CSplineSegment& result) const;
-	/**	Get a second half segment.
-	 */
+	
+	/**
+		Get a second half segment.
+	*/
 	virtual void GetHalfSegmentSecond(CSplineSegment& result) const;
 
 	// acces to members

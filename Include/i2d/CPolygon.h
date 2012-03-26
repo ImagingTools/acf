@@ -22,52 +22,70 @@ class CPolygon: public iser::ISerializable
 public:
 	CPolygon();
 
-	/**	Return node at specified index.
-	 *		@param	index	an index in node table.
+	/**
+		Return node at specified index.
+		\param	index	an index in node table.
 	 */
 	virtual const i2d::CVector2d& GetNode(int index) const;
-	/**	Set node at specified index.
-		@param	index	an index in node table.
-		@param	node	a new node value.
+	
+	/**
+		Set node at specified index.
+		\param	index	Index in node table.
+		\param	node	New node value.
 	*/
 	virtual void SetNode(int index, const i2d::CVector2d& node);
-	/**	Insert a node at the end of node table.
+	
+	/**
+		Insert a node at the end of node table.
 	*/
 	virtual bool InsertNode(const i2d::CVector2d& node);
-	/**	Insert a node at specified index.
+	
+	/**
+		Insert a node at specified index.
 	*/
 	virtual bool InsertNode(int index, const i2d::CVector2d& node);
-	/**	Removes all nodes.
+	
+	/**
+		Removes all nodes.
 	*/
 	virtual void Clear();
-	/**	Remove a node at specified index.
+	
+	/**
+		Remove a node at specified index.
 	*/
 	virtual bool RemoveNode(int index);
-	/**	Return size of node table.
+	
+	/**
+		Return size of node table.
 	*/
 	virtual int GetNodesCount() const;
-	/**	Get outline length of this polygon.
+	
+	/**
+		Get outline length of this polygon.
 	*/
 	virtual double GetOutlineLength() const;
-	/** Calculate bounding box.
+	
+	/**
+		Calculate bounding box.
 	*/
 	virtual void CalcBoundingBox(i2d::CRectangle& result) const;
 
+	/**
+		Assignment operator.
+	*/
 	const CPolygon& operator=(const CPolygon& polygon);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	/**	Set new nodes count.
+	/**
+		Set new nodes count.
 	*/
 	virtual void SetNodesCount(int nodesCount);
-	/**	It is called after every state change.
-	*/
-	virtual void SetInconsistent();
 
 private:
-	::std::vector<i2d::CVector2d> m_nodes;
+	std::vector<i2d::CVector2d> m_nodes;
 };
 
 
@@ -93,8 +111,6 @@ inline void CPolygon::SetNode(int index, const i2d::CVector2d& node)
 	I_ASSERT(index >= 0 && index < int(m_nodes.size()));
 
 	m_nodes[index] = node;
-
-	SetInconsistent();
 }
 
 
@@ -109,13 +125,6 @@ inline const CPolygon& CPolygon::operator=(const CPolygon& polygon)
 	m_nodes = polygon.m_nodes;
 
 	return *this;
-}
-
-
-// protected methods
-
-inline void CPolygon::SetInconsistent()
-{
 }
 
 
