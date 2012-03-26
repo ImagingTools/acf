@@ -6,6 +6,7 @@
 	ProjectGUID="{CE718FF3-10C8-40B7-BCFF-244511F3E1C4}"
 	RootNamespace="iview"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -243,10 +244,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CInteractivePolylineSegmentShadeShape.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CInteractivePolylineShape.cpp"
 				>
 			</File>
@@ -422,10 +419,6 @@
 			</File>
 			<File
 				RelativePath="..\CInteractivePolygonShape.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CInteractivePolylineSegmentShadeShape.h"
 				>
 			</File>
 			<File
@@ -609,19 +602,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TInteractiveMultiPolylineShape.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TLayerBase.h"
 				>
 			</File>
 			<File
 				RelativePath="..\TLayerBaseEx.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TMultiPolylineCalibrationShape.h"
 				>
 			</File>
 			<File

@@ -15,7 +15,7 @@ namespace iview
 /**
 	Base class for all shapes using i2d::ITransformation2d to transform between logical and physical positions.
 */
-class CCalibrationShapeBase: public iview::CInteractiveShapeBase
+class CCalibrationShapeBase: public CInteractiveShapeBase
 {
 public:
 	typedef iview::CInteractiveShapeBase BaseClass;
