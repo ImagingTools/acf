@@ -16,8 +16,8 @@ namespace iprm
 	Component for automatic creation of the Universally Unique Identifier (UUID)
 */
 class CNameParamComp:
-				public icomp::CComponentBase,
-				public iprm::CNameParam
+			public icomp::CComponentBase,
+			public iprm::CNameParam
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -25,6 +25,7 @@ public:
 	I_BEGIN_COMPONENT(CNameParamComp);
 		I_REGISTER_INTERFACE(iprm::INameParam);
 		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_defaultNameAttrPtr, "DefaultName", "Default name", false, "");
 	I_END_COMPONENT;
 

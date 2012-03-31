@@ -60,7 +60,6 @@ public:
 		I_ASSIGN(m_infoIconProviderCompPtr, "InfoIconProvider", "Provider of the info icon", false, "InfoIconProvider");
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of the used icons", false, 32);
 		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
-		I_ASSIGN(m_optionsManagerCompPtr, "OptionsManager", "Manager for editing of option list", false, "OptionsManager");
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -93,8 +92,6 @@ private:
 	I_ATTR(int, m_labelPositionAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_REF(iqtgui::IIconProvider, m_infoIconProviderCompPtr);
-
-	I_REF(iprm::IOptionsManager, m_optionsManagerCompPtr);
 };
 
 

@@ -46,6 +46,14 @@ void COptionsManagerGuiComp::OnGuiModelAttached()
 			}
 		}
 	}
+
+	iprm::IOptionsManager* optionManagerPtr = CompCastPtr<iprm::IOptionsManager>(GetObjectPtr());
+	if (optionManagerPtr != NULL){
+		Selector->setEditable(true);
+
+		connect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
+	}
+
 }
 
 
@@ -106,12 +114,6 @@ void COptionsManagerGuiComp::OnGuiCreated()
 	}
 
 	QObject::connect(Selector, SIGNAL(currentIndexChanged(int)), this, SLOT(OnSelectionChanged(int)));
-
-	if (m_optionsManagerCompPtr.IsValid()){
-		Selector->setEditable(true);
-
-		connect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
-	}
 }
 
 
@@ -195,8 +197,9 @@ void COptionsManagerGuiComp::OnEditingFinished()
 			}
 		}
 
-		if (m_optionsManagerCompPtr.IsValid() && addNewOption){
-			m_optionsManagerCompPtr->InsertOption(newOptionName, newOptionName.toStdString());
+		iprm::IOptionsManager* optionManagerPtr = CompCastPtr<iprm::IOptionsManager>(GetObjectPtr());
+		if (optionManagerPtr != NULL && addNewOption){
+			optionManagerPtr->InsertOption(newOptionName, newOptionName.toStdString());
 		}
 	}
 }
