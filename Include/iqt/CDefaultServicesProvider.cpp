@@ -8,7 +8,6 @@
 #include "iqt/CProcessEnvironment.h"
 #include "iqt/CFileSystem.h"
 #include "iqt/CDefaultRegistryLoaderProvider.h"
-#include "iqt/CSystemEnvironment.h"
 #include "iqt/CLocalizer.h"
 #include "iqt/CTrace.h"
 
@@ -27,9 +26,6 @@ void CDefaultServicesProvider::RegisterServices()
 
 	static iqt::CFileSystem fileSystem;
 	istd::CStaticServicesProvider::RegisterService<isys::IFileSystem>(&fileSystem);
-
-	static iqt::CSystemEnvironment systemEnvironment;
-	istd::CStaticServicesProvider::RegisterService<isys::ISystemEnvironment>(&systemEnvironment);
 
 	static iqt::CLocalizer localizer;
 	istd::CStaticServicesProvider::RegisterService<istd::ILocalizer>(&localizer);

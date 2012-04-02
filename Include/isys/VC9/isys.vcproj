@@ -165,10 +165,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CSystemEnvironmentBase.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSystemInfoBase.cpp"
 				>
 			</File>
@@ -177,10 +173,6 @@
 			Name="Header Files"
 			Filter="h"
 			>
-			<File
-				RelativePath="..\CSystemEnvironmentBase.h"
-				>
-			</File>
 			<File
 				RelativePath="..\CSystemInfoBase.h"
 				>
@@ -199,10 +191,6 @@
 			</File>
 			<File
 				RelativePath="..\isys.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ISystemEnvironment.h"
 				>
 			</File>
 			<File

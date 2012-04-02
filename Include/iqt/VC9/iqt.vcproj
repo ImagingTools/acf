@@ -292,10 +292,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystemEnvironment.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CTrace.cpp"
 				>
 			</File>
@@ -443,10 +439,6 @@
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSystemEnvironment.h"
 				>
 			</File>
 			<File
