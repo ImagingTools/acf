@@ -178,19 +178,11 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\CSectionBlocker.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSystemEnvironmentBase.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CSystemInfoBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ICriticalSection.h"
 				>
 			</File>
 			<File

@@ -6,7 +6,6 @@
 #include "istd/CStaticServicesProvider.h"
 
 #include "iqt/CProcessEnvironment.h"
-#include "iqt/CCriticalSection.h"
 #include "iqt/CFileSystem.h"
 #include "iqt/CDefaultRegistryLoaderProvider.h"
 #include "iqt/CSystemEnvironment.h"
@@ -26,9 +25,6 @@ void CDefaultServicesProvider::RegisterServices()
 	static iqt::CProcessEnvironment applicationEnvironment;
 	istd::CStaticServicesProvider::RegisterService<isys::IProcessEnvironment>(&applicationEnvironment);
 
-	static iqt::CCriticalSection criticalSection;
-	istd::CStaticServicesProvider::RegisterService<isys::ICriticalSection>(&criticalSection);
-
 	static iqt::CFileSystem fileSystem;
 	istd::CStaticServicesProvider::RegisterService<isys::IFileSystem>(&fileSystem);
 
@@ -37,9 +33,6 @@ void CDefaultServicesProvider::RegisterServices()
 
 	static iqt::CLocalizer localizer;
 	istd::CStaticServicesProvider::RegisterService<istd::ILocalizer>(&localizer);
-
-	static istd::TSingleFactory<isys::ICriticalSection, iqt::CCriticalSection> criticalSectionFactory("");
-	istd::CStaticServicesProvider::RegisterFactory(&criticalSectionFactory);
 }
 
 

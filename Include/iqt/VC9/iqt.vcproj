@@ -196,10 +196,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCriticalSection.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDefaultRegistryLoaderProvider.cpp"
 				>
 			</File>
@@ -351,10 +347,6 @@
 			</File>
 			<File
 				RelativePath="..\CCopyProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CCriticalSection.h"
 				>
 			</File>
 			<File

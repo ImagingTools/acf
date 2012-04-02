@@ -52,7 +52,7 @@ protected Q_SLOTS:
 
 private:
 	QProcess m_applicationProcess;
-	QMutex m_lock;
+	QMutex m_mutex;
 
 	bool m_isFailed;
 };
