@@ -208,10 +208,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDllFunctionsProvider.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileInfoCopyComp.cpp"
 				>
 			</File>
@@ -355,10 +351,6 @@
 			</File>
 			<File
 				RelativePath="..\CDirList.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDllFunctionsProvider.h"
 				>
 			</File>
 			<File

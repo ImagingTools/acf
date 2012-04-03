@@ -170,10 +170,6 @@
 			Filter="h"
 			>
 			<File
-				RelativePath="..\IFunctionsProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IProcessEnvironment.h"
 				>
 			</File>

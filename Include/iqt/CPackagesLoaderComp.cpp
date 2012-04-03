@@ -8,7 +8,6 @@
 #include <QtCore/QFileInfo>
 #include <QtGui/QMessageBox>
 
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
@@ -228,15 +227,15 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 	if (fileInfo.isFile()){
 		RealPackagesMap::const_iterator foundIter = m_realPackagesMap.find(packageId);
 		if (foundIter == m_realPackagesMap.end()){
-			CDllFunctionsProvider& provider = GetProviderRef(fileInfo);
-			if (provider.IsValid()){
+			QLibrary& provider = GetLibrary(fileInfo);
+			if (provider.isLoaded()){
 				// register services:
-				icomp::RegisterServicesFunc registerServicesInfoPtr = (icomp::RegisterServicesFunc)provider.GetFunction(I_EXPORT_SERVICES_FUNCTION_NAME);
+				icomp::RegisterServicesFunc registerServicesInfoPtr = (icomp::RegisterServicesFunc)provider.resolve(I_EXPORT_SERVICES_FUNCTION_NAME);
 				if (registerServicesInfoPtr != NULL){
 					registerServicesInfoPtr(&istd::CStaticServicesProvider::GetProviderInstance());
 				}
 
-				icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)provider.GetFunction(I_PACKAGE_EXPORT_FUNCTION_NAME);
+				icomp::GetPackageInfoFunc getInfoPtr = (icomp::GetPackageInfoFunc)provider.resolve(I_PACKAGE_EXPORT_FUNCTION_NAME);
 				if (getInfoPtr != NULL){
 					icomp::CPackageStaticInfo* infoPtr = getInfoPtr();
 					if (infoPtr != NULL){
@@ -421,7 +420,7 @@ bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 }
 
 
-CDllFunctionsProvider& CPackagesLoaderComp::GetProviderRef(const QFileInfo& fileInfo)
+QLibrary& CPackagesLoaderComp::GetLibrary(const QFileInfo& fileInfo)
 {
 	QString absolutePath = fileInfo.canonicalFilePath();
 
@@ -432,17 +431,15 @@ CDllFunctionsProvider& CPackagesLoaderComp::GetProviderRef(const QFileInfo& file
 		return *iter->second;
 	}
 
-	FunctionsProviderPtr& providerPtr = m_dllCacheMap[absolutePath];
-	providerPtr.SetPtr(new CDllFunctionsProvider(absolutePath));
-	I_ASSERT(providerPtr.IsValid());
-
-	if (!providerPtr->IsValid()){
+	LibraryPtr& libraryPtr = m_dllCacheMap[absolutePath];
+	libraryPtr.SetPtr(new QLibrary(absolutePath));
+	if (!libraryPtr.IsValid() || !libraryPtr->isLoaded()){
 		SendErrorMessage(
 					MI_CANNOT_REGISTER,
 					QObject::tr("Cannot register components from package %1").arg(fileInfo.fileName()));
 	}
 
-	return *providerPtr;
+	return *libraryPtr;
 }
 
 

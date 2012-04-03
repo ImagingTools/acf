@@ -5,10 +5,12 @@
 // Qt includes
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
+#include <QtCore/QLibrary>
 
 // STL includes
 #include <map>
 
+// ACF includes
 #include "istd/TDelPtr.h"
 
 #include "iser/IFileLoader.h"
@@ -22,8 +24,6 @@
 #include "ibase/TLoggerCompWrap.h"
 
 #include "iprm/IFileNameParam.h"
-
-#include "iqt/CDllFunctionsProvider.h"
 
 
 namespace iqt
@@ -102,13 +102,13 @@ protected:
 	virtual bool RegisterPackagesDir(const QString& subDir);
 	virtual bool LoadConfigFile(const QString& configFile);
 
-	CDllFunctionsProvider& GetProviderRef(const QFileInfo& fileInfo);
+	QLibrary& GetLibrary(const QFileInfo& fileInfo);
 
 	bool CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const;
 
 private:
-	typedef istd::TDelPtr<CDllFunctionsProvider> FunctionsProviderPtr;
-	typedef std::map<QString, FunctionsProviderPtr> DllCacheMap;
+	typedef istd::TDelPtr<QLibrary> LibraryPtr;
+	typedef std::map<QString, LibraryPtr> DllCacheMap;
 
 	DllCacheMap m_dllCacheMap;
 
