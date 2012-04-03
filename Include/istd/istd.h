@@ -2,7 +2,7 @@
 #define istd_included
 
 
-// QTL includes
+// STL includes
 #include <limits>
 
 // Qt includes
