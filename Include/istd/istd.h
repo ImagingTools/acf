@@ -6,7 +6,7 @@
 #include <limits>
 
 // Qt includes
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 
 
 /**
