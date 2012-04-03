@@ -8,7 +8,7 @@
 // ACF includes
 #include "istd/CClassInfo.h"
 
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 
 namespace iqtdoc
@@ -91,7 +91,7 @@ QString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo& class
 
 	retVal += ".html";
 
-	return iqt::CFileSystem::GetEnrolledPath(retVal);
+	return iqt::CSystem::GetEnrolledPath(retVal);
 }
 
 

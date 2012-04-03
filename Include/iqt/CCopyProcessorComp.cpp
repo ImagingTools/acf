@@ -6,7 +6,7 @@
 
 
 // ACF includes
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 
 namespace iqt
@@ -171,8 +171,8 @@ void CCopyProcessorComp::OnComponentCreated()
 
 	int counter = 0;
 	if (CopyFileTree(
-				iqt::CFileSystem::GetEnrolledPath(*m_inputPathAttrPtr),
-				iqt::CFileSystem::GetEnrolledPath(*m_outputPathAttrPtr),
+				iqt::CSystem::GetEnrolledPath(*m_inputPathAttrPtr),
+				iqt::CSystem::GetEnrolledPath(*m_outputPathAttrPtr),
 				filters,
 				excludeFilters,
 				*m_recursionDepthAttrPtr,

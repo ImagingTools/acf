@@ -1,4 +1,4 @@
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 
 // Qt includes
@@ -27,7 +27,7 @@ public:
 
 // static members
 
-QString CFileSystem::GetNormalizedPath(const QString& path)
+QString CSystem::GetNormalizedPath(const QString& path)
 {
 	QDir dir(GetEnrolledPath(path));
 
@@ -35,7 +35,7 @@ QString CFileSystem::GetNormalizedPath(const QString& path)
 }
 
 
-QString CFileSystem::GetEnrolledPath(const QString& path)
+QString CSystem::GetEnrolledPath(const QString& path)
 {
 	QString retVal = path;
 
@@ -60,7 +60,7 @@ QString CFileSystem::GetEnrolledPath(const QString& path)
 }
 
 
-QString CFileSystem::FindVariableValue(const QString& varName)
+QString CSystem::FindVariableValue(const QString& varName)
 {
 	if (varName == "ConfigurationName"){
 #if defined(_DEBUG) || defined(DEBUG) || defined(QT_DEBUG)
@@ -126,7 +126,7 @@ QString CFileSystem::FindVariableValue(const QString& varName)
 }
 
 
-CFileSystem::EnvironmentVariables CFileSystem::GetEnvironmentVariables()
+CSystem::EnvironmentVariables CSystem::GetEnvironmentVariables()
 {
 	QStringList processEnvironment = QProcess::systemEnvironment();
 	EnvironmentVariables environmentVariables;
@@ -147,7 +147,7 @@ CFileSystem::EnvironmentVariables CFileSystem::GetEnvironmentVariables()
 }
 
 
-void CFileSystem::Sleep(double seconds)
+void CSystem::Sleep(double seconds)
 {
 	CQtThread::usleep((unsigned long)seconds * 1000000);
 }

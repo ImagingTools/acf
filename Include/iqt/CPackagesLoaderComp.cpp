@@ -15,7 +15,7 @@
 
 #include "icomp/export.h"
 
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 
 namespace iqt
@@ -72,7 +72,7 @@ bool CPackagesLoaderComp::LoadPackages(const QString& configFilePath)
 		if (!path.isEmpty()){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
 
-			QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(path);
+			QString enrolledPath = iqt::CSystem::GetEnrolledPath(path);
 
 			m_configFilePath = applicationDir.absoluteFilePath(enrolledPath);
 		}
@@ -470,7 +470,7 @@ CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingReg
 
 bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const
 {
-	QString fullPath = QFileInfo(directory.filePath(iqt::CFileSystem::GetEnrolledPath(path))).canonicalFilePath();
+	QString fullPath = QFileInfo(directory.filePath(iqt::CSystem::GetEnrolledPath(path))).canonicalFilePath();
 	if (m_usedFilesList.find(fullPath) == m_usedFilesList.end()){
 		m_usedFilesList.insert(fullPath);
 

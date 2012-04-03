@@ -228,7 +228,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileSystem.cpp"
+				RelativePath="..\CSystem.cpp"
 				>
 			</File>
 			<File
@@ -386,7 +386,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileSystem.h"
+				RelativePath="..\CSystem.h"
 				>
 			</File>
 			<File

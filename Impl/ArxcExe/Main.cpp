@@ -12,7 +12,7 @@
 #include "icomp/TSimComponentWrap.h"
 #include "icomp/TSimComponentsFactory.h"
 #include "icomp/TModelCompWrap.h"
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 // ACF packages includes
 #include "QtPck/QtPck.h"
@@ -92,9 +92,9 @@ int main(int argc, char *argv[])
 	if (verboseEnabled){
 		std::cout << "ARX Compiler started in: " + QDir::currentPath().toStdString() << std::endl;
 
-		iqt::CFileSystem::EnvironmentVariables environmentVariables = iqt::CFileSystem::GetEnvironmentVariables();
+		iqt::CSystem::EnvironmentVariables environmentVariables = iqt::CSystem::GetEnvironmentVariables();
 
-		for (		iqt::CFileSystem::EnvironmentVariables::const_iterator index = environmentVariables.begin();
+		for (		iqt::CSystem::EnvironmentVariables::const_iterator index = environmentVariables.begin();
 					index != environmentVariables.end();
 					++index){
 			std::cout << index->first.toStdString() << " = " << index->second.toStdString() << std::endl;

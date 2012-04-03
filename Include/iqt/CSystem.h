@@ -1,5 +1,5 @@
-#ifndef iqt_CFileSystem_included
-#define iqt_CFileSystem_included
+#ifndef iqt_CSystem_included
+#define iqt_CSystem_included
 
 
 // STL includes
@@ -14,10 +14,9 @@ namespace iqt
 
 
 /**
-	Implementation of file system information based on QT.
-	This implementation is part of standard services if you use QT-based components.
+	Implementation of global system helpers based on QT.
 */
-class CFileSystem
+class CSystem
 {
 public:
 	typedef std::map<QString, QString> EnvironmentVariables;
@@ -46,6 +45,6 @@ public:
 } // namespace iqt
 
 
-#endif // !iqt_CFileSystem_included
+#endif // !iqt_CSystem_included
 
 

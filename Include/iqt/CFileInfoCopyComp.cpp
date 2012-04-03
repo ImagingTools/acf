@@ -10,7 +10,7 @@
 // ACF includes
 #include "iser/IVersionInfo.h"
 
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 
 namespace iqt
@@ -52,7 +52,7 @@ bool CFileInfoCopyComp::ConvertFile(
 	QTextStream outputStream(&outputFile);
 
 	if (m_licensePathAttrPtr.IsValid()){
-		QString licenseFileName = iqt::CFileSystem::GetEnrolledPath(*m_licensePathAttrPtr);
+		QString licenseFileName = iqt::CSystem::GetEnrolledPath(*m_licensePathAttrPtr);
 
 		QFile licenseFile(licenseFileName);
 		if (!licenseFile.open(QIODevice::ReadOnly)){
@@ -228,7 +228,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 			}
 		}
 
-		QString variable = CFileSystem::FindVariableValue(tag);
+		QString variable = CSystem::FindVariableValue(tag);
 		if (!variable.isEmpty()){
 			result = variable;
 

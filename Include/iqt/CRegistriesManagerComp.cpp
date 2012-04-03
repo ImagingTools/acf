@@ -10,7 +10,7 @@
 
 #include "icomp/CRegistry.h"
 
-#include "iqt/CFileSystem.h"
+#include "iqt/CSystem.h"
 
 
 namespace iqt
@@ -260,7 +260,7 @@ bool CRegistriesManagerComp::LoadConfigFile(const QString& configFile)
 		retVal = retVal && archive.BeginTag(filePathTag);
 		QString filePath;
 		retVal = retVal && archive.Process(filePath);
-		QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(filePath);
+		QString enrolledPath = iqt::CSystem::GetEnrolledPath(filePath);
 		LoadConfigFile(baseDir.absoluteFilePath(enrolledPath));
 
 		retVal = retVal && archive.EndTag(filePathTag);
@@ -327,7 +327,7 @@ bool CRegistriesManagerComp::LoadConfigFile(const QString& configFile)
 
 bool CRegistriesManagerComp::CheckAndMarkPath(PathList& pathList, const QDir& directory, const QString& path, QString& resultPath) const
 {
-	QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(path);
+	QString enrolledPath = iqt::CSystem::GetEnrolledPath(path);
 	QString fullPath = QFileInfo(directory.absoluteFilePath(enrolledPath)).canonicalFilePath();
 
 	if (pathList.find(fullPath) == pathList.end()){
@@ -356,7 +356,7 @@ void CRegistriesManagerComp::OnComponentCreated()
 		if (!path.isEmpty()){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
 
-			QString enrolledPath = iqt::CFileSystem::GetEnrolledPath(path);
+			QString enrolledPath = iqt::CSystem::GetEnrolledPath(path);
 
 			LoadConfigFile(applicationDir.absoluteFilePath(enrolledPath));
 		}
