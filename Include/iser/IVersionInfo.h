@@ -56,7 +56,7 @@ public:
 		\param	result		output version number. For unknown version it will be set to bigg number to indicate of using the newest version.
 		\return	true, if version is known.
 	 */
-	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const = 0;
+	virtual bool GetVersionNumber(int versionId, quint32& result) const = 0;
 
 	/**
 		Get description of version ID.
@@ -74,7 +74,7 @@ public:
 	/**
 		Encode version number to human readable form.
 	*/
-	virtual QString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const = 0;
+	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const = 0;
 };
 
 

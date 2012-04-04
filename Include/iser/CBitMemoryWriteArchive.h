@@ -25,7 +25,7 @@ public:
 	/**
 		Pushes a value of the \c word bounding by N \c bits into the stream.
 	*/
-	void WriteValue(I_DWORD inputValue, int bits);
+	void WriteValue(quint32 inputValue, int bits);
 
 	// reimplemented (iser::IArchive)
 	virtual bool ProcessData(void* data, int size);

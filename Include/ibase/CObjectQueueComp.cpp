@@ -297,7 +297,7 @@ void CObjectQueueComp::TryReductReserve()
 {
 	I_ASSERT(m_maxReserveObjectsAttrPtr.IsValid());	// This attribute is not optional
 
-	int maxReserveObjects = istd::Max(0, *m_maxReserveObjectsAttrPtr);
+	int maxReserveObjects = qMax(0, *m_maxReserveObjectsAttrPtr);
 
 	while (int(m_objectsReserve.size()) > maxReserveObjects){
 		delete m_objectsReserve.back();

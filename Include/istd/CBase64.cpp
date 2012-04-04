@@ -38,21 +38,21 @@ std::string CBase64::ConvertToBase64(const void* dataPtr, int size)
 		}
 
 		int index = i * 3;
-		I_BYTE b1 = ((I_BYTE*)dataPtr)[index];
-		I_BYTE b2 = pad2 ? (I_BYTE)0 : ((I_BYTE*)dataPtr)[index + 1];
-		I_BYTE b3 = pad1 ? (I_BYTE)0 : ((I_BYTE*)dataPtr)[index + 2];
+		quint8 b1 = ((quint8*)dataPtr)[index];
+		quint8 b2 = pad2 ? (quint8)0 : ((quint8*)dataPtr)[index + 1];
+		quint8 b3 = pad1 ? (quint8)0 : ((quint8*)dataPtr)[index + 2];
 
-		I_BYTE temp1 = (I_BYTE)((b1 & 0xFC) >> 2);
+		quint8 temp1 = (quint8)((b1 & 0xFC) >> 2);
 
-		I_BYTE temp = (I_BYTE)((b1 & 0x03) << 4);
-		I_BYTE temp2 = (I_BYTE)((b2 & 0xF0) >> 4);
-		temp2 = I_BYTE(temp2 + temp);
+		quint8 temp = (quint8)((b1 & 0x03) << 4);
+		quint8 temp2 = (quint8)((b2 & 0xF0) >> 4);
+		temp2 = quint8(temp2 + temp);
 
-		temp = (I_BYTE)((b2 & 0x0F) << 2);
-		I_BYTE temp3 = (I_BYTE)((b3 & 0xC0) >> 6);
-		temp3 = I_BYTE(temp3 + temp);
+		temp = (quint8)((b2 & 0x0F) << 2);
+		quint8 temp3 = (quint8)((b3 & 0xC0) >> 6);
+		temp3 = quint8(temp3 + temp);
 
-		I_BYTE temp4 = (I_BYTE)(b3 & 0x3F);
+		quint8 temp4 = (quint8)(b3 & 0x3F);
 
 		index = i * 4;
 		outputString[index] = SixBitToChar(temp1);
@@ -65,11 +65,11 @@ std::string CBase64::ConvertToBase64(const void* dataPtr, int size)
 }
 
 
-std::vector<I_BYTE> CBase64::ConvertFromBase64(const std::string& base64String)
+std::vector<quint8> CBase64::ConvertFromBase64(const std::string& base64String)
 {
 	int size = base64String.size();
 	if (size == 0){
-		return std::vector<I_BYTE>();
+		return std::vector<quint8>();
 	}
 
 	int padding = 0;
@@ -83,7 +83,7 @@ std::vector<I_BYTE> CBase64::ConvertFromBase64(const std::string& base64String)
 	int blocks = (size - 1) / 4 + 1;
 	int bytes = blocks * 3;
 
-	std::vector<I_BYTE> outputData;
+	std::vector<quint8> outputData;
 	outputData.resize(bytes - padding);
 
 	for (int i = 0; i < blocks; i++){
@@ -96,22 +96,22 @@ std::vector<I_BYTE> CBase64::ConvertFromBase64(const std::string& base64String)
 		}
 
 		int index = i * 4;
-		I_BYTE temp1 = CharToSixBit(base64String[index]);
-		I_BYTE temp2 = CharToSixBit(base64String[index + 1]);
-		I_BYTE temp3 = CharToSixBit(base64String[index + 2]);
-		I_BYTE temp4 = CharToSixBit(base64String[index + 3]);
+		quint8 temp1 = CharToSixBit(base64String[index]);
+		quint8 temp2 = CharToSixBit(base64String[index + 1]);
+		quint8 temp3 = CharToSixBit(base64String[index + 2]);
+		quint8 temp4 = CharToSixBit(base64String[index + 3]);
 
-		I_BYTE b = (I_BYTE)(temp1 << 2);
-		I_BYTE b1 = (I_BYTE)((temp2 & 0x30) >> 4);
-		b1 = I_BYTE(b1 + b);
+		quint8 b = (quint8)(temp1 << 2);
+		quint8 b1 = (quint8)((temp2 & 0x30) >> 4);
+		b1 = quint8(b1 + b);
 
-		b = (I_BYTE)((temp2 & 0x0F) << 4);
-		I_BYTE b2 = (I_BYTE)((temp3 & 0x3C) >> 2);
-		b2 = I_BYTE(b2 + b);
+		b = (quint8)((temp2 & 0x0F) << 4);
+		quint8 b2 = (quint8)((temp3 & 0x3C) >> 2);
+		b2 = quint8(b2 + b);
 
-		b = (I_BYTE)((temp3 & 0x03) << 6);
-		I_BYTE b3 = temp4;
-		b3 = I_BYTE(b3 + b);
+		b = (quint8)((temp3 & 0x03) << 6);
+		quint8 b3 = temp4;
+		b3 = quint8(b3 + b);
 
 		index = i * 3;
 		outputData[index] = b1;
@@ -130,7 +130,7 @@ std::vector<I_BYTE> CBase64::ConvertFromBase64(const std::string& base64String)
 
 // private static methods
 
-char CBase64::SixBitToChar(I_BYTE b)
+char CBase64::SixBitToChar(quint8 b)
 {
 	char c;
 	if (b < 26){
@@ -153,24 +153,24 @@ char CBase64::SixBitToChar(I_BYTE b)
 }
 
 
-I_BYTE CBase64::CharToSixBit(char c)
+quint8 CBase64::CharToSixBit(char c)
 {
-	I_BYTE b;
+	quint8 b;
 	
 	if (c >= 'A' && c <= 'Z'){
-		b = (I_BYTE)((int)c - (int)'A');
+		b = (quint8)((int)c - (int)'A');
 	}
 	else if (c >= 'a' && c <= 'z'){
-		b = (I_BYTE)((int)c - (int)'a' + 26);
+		b = (quint8)((int)c - (int)'a' + 26);
 	}
 	else if (c >= '0' && c <= '9'){
-		b = (I_BYTE)((int)c - (int)'0' + 52);
+		b = (quint8)((int)c - (int)'0' + 52);
 	}
 	else if (c == '+'){
-		b = (I_BYTE)62;
+		b = (quint8)62;
 	}
 	else{
-		b = (I_BYTE)63;
+		b = (quint8)63;
 	}
 
 	return b;

@@ -62,7 +62,7 @@ bool TVersionInfoSerializer<VersionInfo>::ReadVersion(VersionInfo* versionInfoPt
 			retVal = retVal && archive.Process(id);
 			retVal = retVal && archive.EndTag(s_versionIdTag);
 
-			I_DWORD version = 0;
+			quint32 version = 0;
 			retVal = retVal && archive.BeginTag(s_versionNumberTag);
 			retVal = retVal && archive.Process(version);
 			retVal = retVal && archive.EndTag(s_versionNumberTag);
@@ -118,7 +118,7 @@ bool TVersionInfoSerializer<VersionInfo>::WriteVersion(const VersionInfo* versio
 
 		int id = *iter;
 		I_IF_DEBUG(
-			I_DWORD dummyVersion;
+			quint32 dummyVersion;
 			I_ASSERT(versionInfoPtr->GetVersionNumber(id, dummyVersion)) // // all known IDs must have its version.
 		);
 
@@ -126,7 +126,7 @@ bool TVersionInfoSerializer<VersionInfo>::WriteVersion(const VersionInfo* versio
 		retVal = retVal && archive.Process(id);
 		retVal = retVal && archive.EndTag(s_versionIdTag);
 
-		I_DWORD versionNumber;
+		quint32 versionNumber;
 		versionInfoPtr->GetVersionNumber(id, versionNumber);
 		retVal = retVal && archive.BeginTag(s_versionNumberTag);
 		retVal = retVal && archive.Process(versionNumber);

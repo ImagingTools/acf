@@ -94,7 +94,7 @@ void CSelectableFileConverterComp::OnComponentCreated()
 	I_ASSERT(m_slaveConverterNamesAttrPtr.IsValid());
 	I_ASSERT(m_slaveConvertersCompPtr.IsValid());
 
-	m_optionsCount = istd::Min(m_slaveConvertersCompPtr.GetCount(), m_slaveConverterNamesAttrPtr.GetCount());
+	m_optionsCount = qMin(m_slaveConvertersCompPtr.GetCount(), m_slaveConverterNamesAttrPtr.GetCount());
 	if (m_optionsCount > 0){
 		m_selectedOptionIndex = 0;
 	}

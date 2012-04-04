@@ -22,11 +22,11 @@ class CBase64
 {
 public:
 	static std::string ConvertToBase64(const void* dataPtrPtr, int size);
-	static std::vector<I_BYTE> ConvertFromBase64(const std::string& base64String);
+	static std::vector<quint8> ConvertFromBase64(const std::string& base64String);
 
 private:
-	static char SixBitToChar(I_BYTE b);
-	static I_BYTE CharToSixBit(char c);
+	static char SixBitToChar(quint8 b);
+	static quint8 CharToSixBit(char c);
 };
 
 

@@ -100,8 +100,8 @@ void CGraphicsConnectorItem::Adjust()
 {
 	prepareGeometryChange();
 
-	double middleX = (istd::Max(m_sourceRect.left(), m_destRect.left()) + istd::Min(m_sourceRect.right(), m_destRect.right())) * 0.5;
-	double middleY = (istd::Max(m_sourceRect.top(), m_destRect.top()) + istd::Min(m_sourceRect.bottom(), m_destRect.bottom())) * 0.5;
+	double middleX = (qMax(m_sourceRect.left(), m_destRect.left()) + qMin(m_sourceRect.right(), m_destRect.right())) * 0.5;
+	double middleY = (qMax(m_sourceRect.top(), m_destRect.top()) + qMin(m_sourceRect.bottom(), m_destRect.bottom())) * 0.5;
 
 	double sourceMidY = (m_sourceRect.top() + m_sourceRect.bottom()) * 0.5;
 	double destMidX = (m_destRect.left() + m_destRect.right()) * 0.5;

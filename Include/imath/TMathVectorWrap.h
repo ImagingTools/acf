@@ -158,7 +158,7 @@ inline void TMathVectorWrap<Base>::Clear()
 template <typename Base>
 inline void TMathVectorWrap<Base>::Translate(const TMathVectorWrap<Base>& vector)
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		BaseClass::GetElementRef(i) += vector.GetElement(i);
 	}
@@ -191,7 +191,7 @@ inline typename Base::ElementType TMathVectorWrap<Base>::GetDotProduct(const TMa
 {
 	typename Base::ElementType retVal = 0.0;
 
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		retVal +=  BaseClass::GetElement(i) * vector.GetElement(i);
 	}
@@ -257,7 +257,7 @@ inline bool TMathVectorWrap<Base>::operator!=(const TMathVectorWrap<Base>& vecto
 template <typename Base>
 bool TMathVectorWrap<Base>::operator<(const TMathVectorWrap<Base>& vector) const
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		typename Base::ElementType firstElement = BaseClass::GetElement(i);
 		typename Base::ElementType secondElement = vector.GetElement(i);
@@ -277,7 +277,7 @@ bool TMathVectorWrap<Base>::operator<(const TMathVectorWrap<Base>& vector) const
 template <typename Base>
 bool TMathVectorWrap<Base>::operator>(const TMathVectorWrap<Base>& vector) const
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		typename Base::ElementType firstElement = BaseClass::GetElement(i);
 		typename Base::ElementType secondElement = vector.GetElement(i);
@@ -297,7 +297,7 @@ bool TMathVectorWrap<Base>::operator>(const TMathVectorWrap<Base>& vector) const
 template <typename Base>
 bool TMathVectorWrap<Base>::operator<=(const TMathVectorWrap<Base>& vector) const
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		typename Base::ElementType firstElement = BaseClass::GetElement(i);
 		typename Base::ElementType secondElement = vector.GetElement(i);
@@ -317,7 +317,7 @@ bool TMathVectorWrap<Base>::operator<=(const TMathVectorWrap<Base>& vector) cons
 template <typename Base>
 bool TMathVectorWrap<Base>::operator>=(const TMathVectorWrap<Base>& vector) const
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		typename Base::ElementType firstElement = BaseClass::GetElement(i);
 		typename Base::ElementType secondElement = vector.GetElement(i);
@@ -346,7 +346,7 @@ inline TMathVectorWrap<Base>& TMathVectorWrap<Base>::operator=(const TMathVector
 template <typename Base>
 inline TMathVectorWrap<Base>& TMathVectorWrap<Base>::operator+=(const TMathVectorWrap<Base>& vector)
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		BaseClass::GetElementRef(i) += vector.GetElement(i);
 	}
@@ -358,7 +358,7 @@ inline TMathVectorWrap<Base>& TMathVectorWrap<Base>::operator+=(const TMathVecto
 template <typename Base>
 inline TMathVectorWrap<Base>& TMathVectorWrap<Base>::operator-=(const TMathVectorWrap<Base>& vector)
 {
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	for (int i = 0; i < elementsCount; ++i){
 		BaseClass::GetElementRef(i) -= vector.GetElement(i);
 	}
@@ -411,7 +411,7 @@ inline TMathVectorWrap<Base> TMathVectorWrap<Base>::operator+(const TMathVectorW
 {
 	TMathVectorWrap<Base> retVal;
 
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	retVal.SetElementsCount(elementsCount);
 	for (int i = 0; i < elementsCount; ++i){
 		retVal.SetElement(i, BaseClass::GetElement(i) + vector.GetElement(i));
@@ -426,7 +426,7 @@ inline TMathVectorWrap<Base> TMathVectorWrap<Base>::operator-(const TMathVectorW
 {
 	TMathVectorWrap<Base> retVal;
 
-	int elementsCount = istd::Min(BaseClass::GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(BaseClass::GetElementsCount(), vector.GetElementsCount());
 	retVal.SetElementsCount(elementsCount);
 	for (int i = 0; i < elementsCount; ++i){
 		retVal.SetElement(i, BaseClass::GetElement(i) - vector.GetElement(i));

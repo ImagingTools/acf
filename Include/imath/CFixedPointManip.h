@@ -65,8 +65,8 @@ public:
 protected:
 	typedef double (*RoundingFuntionPtr)(double value);
 
-	virtual I_SDWORD GetInternalValue(double value) const;
-	virtual double GetNormalValue(I_SDWORD intValue) const;
+	virtual qint32 GetInternalValue(double value) const;
+	virtual double GetNormalValue(qint32 intValue) const;
 
 	QString GetString(const double& value, int precision) const;
 
@@ -130,15 +130,15 @@ inline double CFixedPointManip::GetBiggerValue(const double& value) const
 
 // protected methods
 
-inline I_SDWORD CFixedPointManip::GetInternalValue(double value) const
+inline qint32 CFixedPointManip::GetInternalValue(double value) const
 {
 	RoundingFuntionPtr function = m_roundingFuntionsPtr[m_roundingType];
 
-	return I_SDWORD(function(value * m_scaleToIntFactor + 0.5));
+	return qint32(function(value * m_scaleToIntFactor + 0.5));
 }
 
 
-inline double CFixedPointManip::GetNormalValue(I_SDWORD intValue) const
+inline double CFixedPointManip::GetNormalValue(qint32 intValue) const
 {
 	return intValue / m_scaleToIntFactor;
 }

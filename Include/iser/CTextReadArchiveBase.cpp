@@ -35,49 +35,49 @@ bool CTextReadArchiveBase::Process(char& value)
 }
 
 
-bool CTextReadArchiveBase::Process(I_BYTE& value)
+bool CTextReadArchiveBase::Process(quint8& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_SBYTE& value)
+bool CTextReadArchiveBase::Process(qint8& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_WORD& value)
+bool CTextReadArchiveBase::Process(quint16& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_SWORD& value)
+bool CTextReadArchiveBase::Process(qint16& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_DWORD& value)
+bool CTextReadArchiveBase::Process(quint32& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_SDWORD& value)
+bool CTextReadArchiveBase::Process(qint32& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_QWORD& value)
+bool CTextReadArchiveBase::Process(quint64& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextReadArchiveBase::Process(I_SQWORD& value)
+bool CTextReadArchiveBase::Process(qint64& value)
 {
 	return ProcessInternal(value);
 }
@@ -97,13 +97,13 @@ bool CTextReadArchiveBase::Process(double& value)
 
 bool CTextReadArchiveBase::ProcessData(void* dataPtr, int size)
 {
-	I_BYTE* data = (I_BYTE*)dataPtr;
+	quint8* data = (quint8*)dataPtr;
 
 	std::string text;
 	bool retVal = Process(text);
 
 	if (retVal){
-		std::vector<I_BYTE> decodedData = istd::CBase64::ConvertFromBase64(text);
+		std::vector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text);
 		I_ASSERT(size == int(decodedData.size()));
 
 		std::memcpy(data, &decodedData[0], size);

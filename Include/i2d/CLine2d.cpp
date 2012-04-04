@@ -292,10 +292,10 @@ CLine2d CLine2d::GetSwapped() const
 
 CRectangle CLine2d::GetBoundingBox() const
 {
-	double left = istd::Min(m_point1.GetX(), m_point2.GetX());
-	double top = istd::Min(m_point1.GetY(), m_point2.GetY());
-	double right = istd::Max(m_point1.GetX(), m_point2.GetX());
-	double bottom = istd::Max(m_point1.GetY(), m_point2.GetY());
+	double left = qMin(m_point1.GetX(), m_point2.GetX());
+	double top = qMin(m_point1.GetY(), m_point2.GetY());
+	double right = qMax(m_point1.GetX(), m_point2.GetX());
+	double bottom = qMax(m_point1.GetY(), m_point2.GetY());
 
 	return CRectangle(left, top, right - left, bottom - top);
 }

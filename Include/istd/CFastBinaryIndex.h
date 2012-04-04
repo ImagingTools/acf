@@ -56,7 +56,7 @@ public:
 		\param	size	number of components of index.
 		\param	dummy	not used parameter using to distinguish between this constructor and the previous one.
 	*/
-	explicit CFastBinaryIndex(I_DWORD bits, int size, int dummy);
+	explicit CFastBinaryIndex(quint32 bits, int size, int dummy);
 
 	/**
 		Copy constructor.
@@ -120,7 +120,7 @@ public:
 	/**
 		Get bit coded value of this index.
 	*/
-	I_DWORD GetBits() const;
+	quint32 GetBits() const;
 
 	/**
 		Set all components to specified value.
@@ -182,7 +182,7 @@ public:
 	bool operator!=(const CFastBinaryIndex& index) const;
 
 private:
-	I_DWORD m_bits;
+	quint32 m_bits;
 	int m_size;
 };
 
@@ -203,7 +203,7 @@ inline CFastBinaryIndex::CFastBinaryIndex(int size, int value)
 }
 
 
-inline CFastBinaryIndex::CFastBinaryIndex(I_DWORD bits, int size, int /*dummy*/)
+inline CFastBinaryIndex::CFastBinaryIndex(quint32 bits, int size, int /*dummy*/)
 :	m_bits(bits), m_size(size)
 {
 	I_ASSERT(CBitManip::instance.GetFirstBitIndex(bits) < size);
@@ -260,7 +260,7 @@ inline bool CFastBinaryIndex::SetDimensionsCount(int count)
 {
 	if (count <= MAX_ELEMENTS_COUNT){
 		m_size = count;
-		m_bits &= I_DWORD(1 << m_size) - 1;
+		m_bits &= quint32(1 << m_size) - 1;
 
 		return true;
 	}
@@ -284,15 +284,15 @@ inline void CFastBinaryIndex::SetAt(int index, int value)
 	I_ASSERT(index < m_size);
 
 	if (value > 0){
-		m_bits |= I_DWORD(1 << index);
+		m_bits |= quint32(1 << index);
 	}
 	else{
-		m_bits &= ~I_DWORD(1 << index);
+		m_bits &= ~quint32(1 << index);
 	}
 }
 
 
-inline I_DWORD CFastBinaryIndex::GetBits() const
+inline quint32 CFastBinaryIndex::GetBits() const
 {
 	return m_bits;
 }
@@ -301,7 +301,7 @@ inline I_DWORD CFastBinaryIndex::GetBits() const
 inline void CFastBinaryIndex::SetAllTo(int value)
 {
 	if (value){
-		m_bits = I_DWORD(1 << m_size) - 1;
+		m_bits = quint32(1 << m_size) - 1;
 	}
 	else{
 		m_bits = 0;
@@ -314,7 +314,7 @@ inline bool CFastBinaryIndex::IncreaseAt(int index)
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < m_size);
 
-	I_DWORD mask = I_DWORD(1 << index);
+	quint32 mask = quint32(1 << index);
 
 	bool retVal = ((m_bits & mask) == 0);
 
@@ -329,7 +329,7 @@ inline bool CFastBinaryIndex::DecreaseAt(int index)
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < m_size);
 
-	I_DWORD mask = I_DWORD(1 << index);
+	quint32 mask = quint32(1 << index);
 
 	bool retVal = ((m_bits & mask) != 0);
 
@@ -341,7 +341,7 @@ inline bool CFastBinaryIndex::DecreaseAt(int index)
 
 inline bool CFastBinaryIndex::IsInside(const CFastBinaryIndex& boundaries) const
 {
-	return (((boundaries.m_bits + 1) & I_DWORD(1 << m_size)) != 0);
+	return (((boundaries.m_bits + 1) & quint32(1 << m_size)) != 0);
 }
 
 

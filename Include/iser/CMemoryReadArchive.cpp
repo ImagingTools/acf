@@ -20,7 +20,7 @@ CMemoryReadArchive::CMemoryReadArchive(
 			const void* bufferPtr,
 			int bufferSize,
 			bool serializeHeader)
-:	m_bufferPtr((const I_BYTE*)bufferPtr),
+:	m_bufferPtr((const quint8*)bufferPtr),
 	m_bufferSize(bufferSize),
 	m_readPosition(0),
 	m_isValid(true)
@@ -34,7 +34,7 @@ CMemoryReadArchive::CMemoryReadArchive(
 CMemoryReadArchive::CMemoryReadArchive(
 			const CMemoryWriteArchive& writeArchive,
 			bool serializeHeader)
-:	m_bufferPtr((const I_BYTE*)writeArchive.GetBuffer()),
+:	m_bufferPtr((const quint8*)writeArchive.GetBuffer()),
 	m_bufferSize(writeArchive.GetBufferSize()),
 	m_readPosition(0),
 	m_isValid(true)

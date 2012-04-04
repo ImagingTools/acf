@@ -43,10 +43,10 @@ double CDirection2d::DistInRadian(const CDirection2d& dir2) const
 	I_ASSERT(Invariant());
 	I_ASSERT(dir2.Invariant());
 
-	const double w1( istd::Min(m_direction, dir2.m_direction )); 
-	const double w2( istd::Max(m_direction, dir2.m_direction ));
+	const double w1( qMin(m_direction, dir2.m_direction )); 
+	const double w2( qMax(m_direction, dir2.m_direction ));
 
-	const double dist = istd::Min(w2-w1, I_2PI - (w2-w1));
+	const double dist = qMin(w2-w1, I_2PI - (w2-w1));
 	
 	I_ASSERT(dist >= 0.0);
 	I_ASSERT(dist <= I_PI);

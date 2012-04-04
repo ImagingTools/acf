@@ -74,7 +74,7 @@ protected:
 				int pixelFormat);
 
 private:
-	istd::TOptDelPtr<I_BYTE, true> m_buffer;
+	istd::TOptDelPtr<quint8, true> m_buffer;
 
 	istd::CIndex2d m_size;
 	int m_linesDifference;

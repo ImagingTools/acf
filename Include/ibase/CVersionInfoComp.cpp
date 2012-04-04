@@ -12,7 +12,7 @@ namespace ibase
 
 // reimplemented (iser::IVersionInfo)
 
-bool CVersionInfoComp::GetVersionNumber(int versionId, I_DWORD& result) const
+bool CVersionInfoComp::GetVersionNumber(int versionId, quint32& result) const
 {
 	if (m_versionIdAttrPtr.IsValid() && (versionId == *m_versionIdAttrPtr)){
 		result = *m_versionNumberAttrPtr;
@@ -63,15 +63,15 @@ iser::IVersionInfo::VersionIds CVersionInfoComp::GetVersionIds() const
 }
 
 
-QString CVersionInfoComp::GetEncodedVersionName(int versionId, I_DWORD versionNumber) const
+QString CVersionInfoComp::GetEncodedVersionName(int versionId, quint32 versionNumber) const
 {
 	QString retVal;
 
 	if (m_versionIdAttrPtr.IsValid() && (versionId == *m_versionIdAttrPtr)){
-		I_DWORD lastBellowNumber = 0;
-		int knownVersionsCount = istd::Min(m_knownVersionsAttrPtr.GetCount(), m_knownVersionNamesAttrPtr.GetCount());
+		quint32 lastBellowNumber = 0;
+		int knownVersionsCount = qMin(m_knownVersionsAttrPtr.GetCount(), m_knownVersionNamesAttrPtr.GetCount());
 		for (int i = 0; i < knownVersionsCount; ++i){
-			I_DWORD knownNumber = I_DWORD(m_knownVersionsAttrPtr[i]);
+			quint32 knownNumber = quint32(m_knownVersionsAttrPtr[i]);
 
 			if ((knownNumber <= versionNumber) && (knownNumber >= lastBellowNumber)){
 				lastBellowNumber = knownNumber;

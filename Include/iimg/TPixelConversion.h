@@ -88,43 +88,43 @@ inline double TPixelConversion<SourcePixel, DestPixel, CalcPixel>::GetIntensity(
 
 
 template <>
-inline TPixelConversion<I_BYTE, I_BYTE, I_BYTE>::TPixelConversion()
+inline TPixelConversion<quint8, quint8, quint8>::TPixelConversion()
 :	whiteIntensity(255)
 {
 }
 
 
 template <>
-inline float TPixelConversion<I_BYTE, float, float>::operator()(const I_BYTE& pixel) const
+inline float TPixelConversion<quint8, float, float>::operator()(const quint8& pixel) const
 {
 	return pixel / 255.0f;
 }
 
 
 template <>
-inline float TPixelConversion<I_BYTE, float, float>::GetCalc(const I_BYTE& pixel) const
+inline float TPixelConversion<quint8, float, float>::GetCalc(const quint8& pixel) const
 {
 	return pixel / 255.0f;
 }
 
 
 template <>
-inline I_BYTE TPixelConversion<float, I_BYTE, float>::operator()(const float& pixel) const
+inline quint8 TPixelConversion<float, quint8, float>::operator()(const float& pixel) const
 {
-	return I_BYTE(pixel * 255);
+	return quint8(pixel * 255);
 }
 
 
 template <>
-inline I_BYTE TPixelConversion<float, I_BYTE, float>::GetDest(const float& pixel) const
+inline quint8 TPixelConversion<float, quint8, float>::GetDest(const float& pixel) const
 {
-	return I_BYTE(pixel * 255);
+	return quint8(pixel * 255);
 }
 
 
-typedef TPixelConversion<I_BYTE, I_BYTE> CGrayGrayPixelConversion;
-typedef TPixelConversion<float, I_BYTE, float> CFloatGrayPixelConversion;
-typedef TPixelConversion<I_BYTE, float, float> CGrayFloatPixelConversion;
+typedef TPixelConversion<quint8, quint8> CGrayGrayPixelConversion;
+typedef TPixelConversion<float, quint8, float> CFloatGrayPixelConversion;
+typedef TPixelConversion<quint8, float, float> CGrayFloatPixelConversion;
 typedef TPixelConversion<float, float> CFloatFloatPixelConversion;
 
 

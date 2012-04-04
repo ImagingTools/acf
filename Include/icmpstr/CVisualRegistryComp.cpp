@@ -230,7 +230,7 @@ bool CVisualRegistryComp::SerializeComponentInfo(
 	retVal = retVal && archive.EndTag(positionXTag);
 
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	I_DWORD frameworkVersion = 0;
+	quint32 frameworkVersion = 0;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 	
 	if (frameworkVersion >= 2246 || archive.IsStoring()){

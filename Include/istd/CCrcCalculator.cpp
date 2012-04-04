@@ -13,9 +13,9 @@ namespace istd
 
 // public methods
 
-I_DWORD CCrcCalculator::GetCrcFromData(const I_BYTE* dataPtr, int dataSize)
+quint32 CCrcCalculator::GetCrcFromData(const quint8* dataPtr, int dataSize)
 {
-	I_DWORD crcValue = 0xFFFFFFFF;
+	quint32 crcValue = 0xFFFFFFFF;
 
 	for (		int i = 0; i < dataSize; ++i){
 		UpdateCrc(dataPtr[i], crcValue);
@@ -25,9 +25,9 @@ I_DWORD CCrcCalculator::GetCrcFromData(const I_BYTE* dataPtr, int dataSize)
 }
 
 
-I_DWORD CCrcCalculator::GetCrcFromStream(const ByteStream& byteStream)
+quint32 CCrcCalculator::GetCrcFromStream(const ByteStream& byteStream)
 {
-	I_DWORD crcValue = 0xFFFFFFFF;
+	quint32 crcValue = 0xFFFFFFFF;
 
 	for (		ByteStream::const_iterator iterBeg = byteStream.begin();
 				iterBeg != byteStream.end();
@@ -40,11 +40,11 @@ I_DWORD CCrcCalculator::GetCrcFromStream(const ByteStream& byteStream)
 
 
 
-I_DWORD CCrcCalculator::GetCrcFromFile(const QString& fileName)
+quint32 CCrcCalculator::GetCrcFromFile(const QString& fileName)
 {
 	std::ifstream file;
 
-	I_DWORD crcValue = 0xFFFFFFFF;
+	quint32 crcValue = 0xFFFFFFFF;
 
 	file.open(fileName.toStdString().c_str(), std::fstream::in | std::fstream::binary);
 	if (file.is_open()){
@@ -67,7 +67,7 @@ I_DWORD CCrcCalculator::GetCrcFromFile(const QString& fileName)
 
 // private static members
 
-I_DWORD CCrcCalculator::s_crcTable[256] = {
+quint32 CCrcCalculator::s_crcTable[256] = {
 			0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA,
 			0x076DC419, 0x706AF48F, 0xE963A535, 0x9E6495A3,
 			0x0EDB8832, 0x79DCB8A4, 0xE0D5E91E, 0x97D2D988,

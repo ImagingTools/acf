@@ -33,7 +33,7 @@ void CSplashScreenGuiComp::OnGuiCreated()
 				for (int i = 0; i < versionsCount; ++i){
 					int versionId = m_versionIdsAttrPtr[i];
 
-					I_DWORD version;
+					quint32 version;
 					if (versionInfo.GetVersionNumber(versionId, version)){
 						QString description = (i < m_versionNamesAttrPtr.GetCount())?
 									m_versionNamesAttrPtr[i]:
@@ -59,7 +59,7 @@ void CSplashScreenGuiComp::OnGuiCreated()
 							++iter){
 					int versionId = *iter;
 
-					I_DWORD version;
+					quint32 version;
 					if ((versionId != m_mainVersionId) && versionInfo.GetVersionNumber(versionId, version)){
 						QString description = versionInfo.GetVersionIdDescription(versionId);
 						QString versionText = versionInfo.GetEncodedVersionName(versionId, version);
@@ -101,7 +101,7 @@ void CSplashScreenGuiComp::OnGuiRetranslate()
 		const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
 
 		if (m_mainVersionId >= 0){
-			I_DWORD mainVersionNumber;
+			quint32 mainVersionNumber;
 			if (versionInfo.GetVersionNumber(m_mainVersionId, mainVersionNumber)){
 				mainVersionText = versionInfo.GetEncodedVersionName(m_mainVersionId, mainVersionNumber);
 			}

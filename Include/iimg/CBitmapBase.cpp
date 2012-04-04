@@ -38,8 +38,8 @@ bool CBitmapBase::CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d:
 	istd::CIndex2d size = GetImageSize();
 	int lineBytesCount = GetLineBytesCount();
 	for (int y = 0; y < size.GetY(); ++y){
-		I_BYTE* destLinePtr = (I_BYTE*)GetLinePtr(y);
-		I_BYTE* sourceLinePtr = ((I_BYTE*)sourceBitmap.GetLinePtr(y + top)) + left;
+		quint8* destLinePtr = (quint8*)GetLinePtr(y);
+		quint8* sourceLinePtr = ((quint8*)sourceBitmap.GetLinePtr(y + top)) + left;
 
 		std::memcpy(destLinePtr, sourceLinePtr, lineBytesCount);
 	}
@@ -88,12 +88,12 @@ icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 
 	int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
 
-	I_BYTE* pixelPtr = (I_BYTE*)GetLinePtr(position.GetY());
+	quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
 	I_ASSERT(pixelPtr != NULL);
 	pixelPtr += byteOffsetX;
 
 	for (int i = 0; i < componentsCount; ++i){
-		I_BYTE componentValue;
+		quint8 componentValue;
 		if (GetComponentBitsCount(i) == 8){
 			componentValue = pixelPtr[i];
 		}
@@ -117,11 +117,11 @@ bool CBitmapBase::SetColorAt(const istd::CIndex2d& position, const icmm::CVarCol
 
 	int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
 
-	I_BYTE* pixelPtr = (I_BYTE*)GetLinePtr(position.GetY());
+	quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
 	I_ASSERT(pixelPtr != NULL);
 	pixelPtr += byteOffsetX;
 
-	int commonComponentsCount = istd::Min(color.GetElementsCount(), componentsCount);
+	int commonComponentsCount = qMin(color.GetElementsCount(), componentsCount);
 	for (int i = 0; i < commonComponentsCount; ++i){
 		if (GetComponentBitsCount(i) != 8){
 			return false;
@@ -130,7 +130,7 @@ bool CBitmapBase::SetColorAt(const istd::CIndex2d& position, const icmm::CVarCol
 		int componentValue = int(color.GetElement(i) * 255);
 		if (componentValue >= 0){
 			if (componentValue <= 255){
-				pixelPtr[i] = I_BYTE(componentValue);
+				pixelPtr[i] = quint8(componentValue);
 			}
 			else{
 				pixelPtr[i] = 255;

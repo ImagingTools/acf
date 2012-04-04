@@ -150,14 +150,14 @@ bool CParamsSet::Serialize(iser::IArchive& archive)
 }
 
 
-I_DWORD CParamsSet::GetMinimalVersion(int versionId) const
+quint32 CParamsSet::GetMinimalVersion(int versionId) const
 {
-	I_DWORD retVal = 0;
+	quint32 retVal = 0;
 	for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
 		const ParameterInfo* parameterInfoPtr = m_params.GetAt(parameterIndex);
 		I_ASSERT(parameterInfoPtr != NULL);
 
-		I_DWORD minimalVersion = parameterInfoPtr->parameterPtr->GetMinimalVersion(versionId);
+		quint32 minimalVersion = parameterInfoPtr->parameterPtr->GetMinimalVersion(versionId);
 		if (minimalVersion > retVal){
 			retVal = minimalVersion;
 		}

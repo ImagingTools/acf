@@ -117,12 +117,12 @@ bool CBitmap::CreateBitmap(int pixelFormat, const istd::CIndex2d& size, void* da
 
 	QImage::Format imageFormat = CalcQtFormat(pixelFormat);
 	if (imageFormat != QImage::Format_Invalid){
-		QImage image((I_BYTE*)dataPtr, size.GetX(), size.GetY(), imageFormat);
+		QImage image((quint8*)dataPtr, size.GetX(), size.GetY(), imageFormat);
 		if ((linesDifference != 0) && (linesDifference != image.scanLine(1) - image.scanLine(0))){
 			return false;	// requested format doesnt fit to internal Qt bitmap representation
 		}
 
-		m_externalBuffer.SetPtr((I_BYTE*)dataPtr, releaseFlag);
+		m_externalBuffer.SetPtr((quint8*)dataPtr, releaseFlag);
 
 		return SetQImage(image);
 	}
@@ -243,7 +243,7 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object)
 			istd::CChangeNotifier notifier(this);
 			istd::CIndex2d size = bitmapPtr->GetImageSize();
 			if (CreateBitmap(bitmapPtr->GetPixelFormat(), size)){
-				int lineBytesCount = istd::Min(GetLineBytesCount(), bitmapPtr->GetLineBytesCount());
+				int lineBytesCount = qMin(GetLineBytesCount(), bitmapPtr->GetLineBytesCount());
 				for (int y = 0; y < size.GetY(); ++y){
 					std::memcpy(GetLinePtr(y), bitmapPtr->GetLinePtr(y), lineBytesCount);
 				}

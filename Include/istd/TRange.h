@@ -362,23 +362,23 @@ template <typename ValueType>
 inline TRange<ValueType> TRange<ValueType>::GetValidated() const
 {
 	return TRange(
-				istd::Min(m_minValue, m_maxValue),
-				istd::Max(m_minValue, m_maxValue));
+				qMin(m_minValue, m_maxValue),
+				qMax(m_minValue, m_maxValue));
 }
 
 
 template <typename ValueType>
 inline void TRange<ValueType>::GetValidated(TRange& result) const
 {
-	result.SetMinValue(istd::Min(m_minValue, m_maxValue));
-	result.SetMaxValue(istd::Max(m_minValue, m_maxValue));
+	result.SetMinValue(qMin(m_minValue, m_maxValue));
+	result.SetMaxValue(qMax(m_minValue, m_maxValue));
 }
 
 
 template <typename ValueType>
 inline void TRange<ValueType>::Validate()
 {
-	*this = TRange(istd::Min(m_minValue, m_maxValue), istd::Max(m_minValue, m_maxValue));
+	*this = TRange(qMin(m_minValue, m_maxValue), qMax(m_minValue, m_maxValue));
 }
 
 
@@ -422,7 +422,7 @@ inline TRange<ValueType> TRange<ValueType>::GetIntersection(const TRange& range)
 		return *this;
 	}
 	else{
-		return TRange(Max(m_minValue, range.m_minValue), Min(m_maxValue, range.m_maxValue));
+		return TRange(qMax(m_minValue, range.m_minValue), qMin(m_maxValue, range.m_maxValue));
 	}
 }
 
@@ -447,7 +447,7 @@ TRange<ValueType> TRange<ValueType>::GetUnion(const TRange& range) const
 {
 	if (range.IsValid()){
 		if (IsValid()){
-			return TRange(Min(m_minValue, range.m_minValue), Max(m_maxValue, range.m_maxValue));
+			return TRange(qMin(m_minValue, range.m_minValue), qMax(m_maxValue, range.m_maxValue));
 		}
 		else{
 			return range;
@@ -463,7 +463,7 @@ template <typename ValueType>
 TRange<ValueType> TRange<ValueType>::GetUnion(double value) const
 {
 	if (IsValid()){
-		return TRange(Min(m_minValue, value), Max(m_maxValue, value));
+		return TRange(qMin(m_minValue, value), qMax(m_maxValue, value));
 	}
 	else{
 		return TRange(value, value);
@@ -693,7 +693,7 @@ inline TRange<ValueType> TRange<ValueType>::operator/(double value) const
 template <typename ValueType>
 inline TRange<ValueType> TRange<ValueType>::GetValid(ValueType value1, ValueType value2)
 {
-	return TRange(istd::Min(value1, value2), istd::Max(value1, value2));
+	return TRange(qMin(value1, value2), qMax(value1, value2));
 }
 
 

@@ -131,7 +131,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 				bool isNumOk;
 				int versionId = parameter.toInt(&isNumOk);
 
-				I_DWORD versionNumber;
+				quint32 versionNumber;
 				const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
 				if (isNumOk && (versionId >= 0) && versionInfo.GetVersionNumber(versionId, versionNumber)){
 					if (paramTag == acfRawVersionTag){
@@ -187,7 +187,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 				return true;
 			}
 			else if ((tag == acfVersionTag) || (tag == acfRawVersionTag) || (tag == acfRcVersionTag)){
-				I_DWORD versionNumber;
+				quint32 versionNumber;
 
 				const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
 				int versionId = m_applicationInfoCompPtr->GetMainVersionId();
@@ -219,7 +219,7 @@ bool CFileInfoCopyComp::ProcessSubstitutionTag(const QString& tag, QString& resu
 			return true;
 		}
 
-		int userTagsCount = istd::Min(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
+		int userTagsCount = qMin(m_userSubstitutionTagsAttrPtr.GetCount(), m_userSubstitutionValuesAttrPtr.GetCount());
 		for (int userTagIndex = 0; userTagIndex < userTagsCount; ++userTagIndex){
 			if (tag == m_userSubstitutionTagsAttrPtr[userTagIndex]){
 				result = m_userSubstitutionValuesAttrPtr[userTagIndex];

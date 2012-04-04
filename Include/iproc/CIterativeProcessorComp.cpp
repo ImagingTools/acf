@@ -160,7 +160,7 @@ void CIterativeProcessorComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	int optionsCount = istd::Max(int(0), *m_maxIterationsCountAttrPtr) + 1;
+	int optionsCount = qMax(int(0), *m_maxIterationsCountAttrPtr) + 1;
 	m_iterationNames.resize(optionsCount);
 
 	m_iterationNames[0] = "No iteration";

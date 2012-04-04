@@ -43,10 +43,10 @@ public:
 
 protected:
 	// reimplemented (iser::IVersionInfo)
-	virtual bool GetVersionNumber(int versionId, I_DWORD& result) const;
+	virtual bool GetVersionNumber(int versionId, quint32& result) const;
 	virtual QString GetVersionIdDescription(int versionId) const;
 	virtual VersionIds GetVersionIds() const;
-	virtual QString GetEncodedVersionName(int versionId, I_DWORD versionNumber) const;
+	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const;
 
 private:
 	I_ATTR(QString, m_companyNameAttrPtr);

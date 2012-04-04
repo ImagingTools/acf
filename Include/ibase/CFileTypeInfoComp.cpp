@@ -36,7 +36,7 @@ bool CFileTypeInfoComp::GetFileExtensions(QStringList& result, int /*flags*/, bo
 QString CFileTypeInfoComp::GetTypeDescription(const QString* extensionPtr) const
 {
 	if (extensionPtr != NULL){
-		int extensionsCount = istd::Min(m_fileExtensionsAttrPtr.GetCount(), m_typeDescriptionsAttrPtr.GetCount());
+		int extensionsCount = qMin(m_fileExtensionsAttrPtr.GetCount(), m_typeDescriptionsAttrPtr.GetCount());
 		for (int extIndex = 0; extIndex < extensionsCount; extIndex++){
 			if (m_fileExtensionsAttrPtr[extIndex] == *extensionPtr){
 				return m_typeDescriptionsAttrPtr[extIndex];

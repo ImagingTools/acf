@@ -229,8 +229,8 @@ void CInteractiveAnnulusSegmentShape::Draw(QPainter& drawContext) const
 	DrawAnnulusSegment(
 				drawContext,
 				screenCenter.ToIndex2d(), 
-				int(istd::Min(radius, radius2) * scale.GetX()), 
-				int(istd::Max(radius, radius2) * scale.GetY()),
+				int(qMin(radius, radius2) * scale.GetX()), 
+				int(qMax(radius, radius2) * scale.GetY()),
 				annulusSegment.GetBeginAngle(),
 				annulusSegment.GetEndAngle());
 	

@@ -43,7 +43,7 @@ public:
 	/**
 		Get automatic generated binary ID.
 	*/
-	I_DWORD GetBinaryId() const;
+	quint32 GetBinaryId() const;
 
 	/**
 		Get comment of this tag.
@@ -57,7 +57,7 @@ public:
 
 private:
 	std::string m_id;
-	I_DWORD m_binaryId;
+	quint32 m_binaryId;
 
 	std::string m_comment;
 

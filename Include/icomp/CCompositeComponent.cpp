@@ -246,7 +246,7 @@ void CCompositeComponent::SetComponentContext(
 			const IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementId);
 			I_ASSERT(infoPtr);	// ID must be valid, becouse it was taken using icomp::IRegistry::GetElementIds()!
 
-			I_DWORD flags = infoPtr->elementPtr->GetElementFlags();
+			quint32 flags = infoPtr->elementPtr->GetElementFlags();
 			if ((flags & IRegistryElement::EF_AUTO_INSTANCE) != 0){
 				m_autoInitComponentIds.insert(elementId);
 			}

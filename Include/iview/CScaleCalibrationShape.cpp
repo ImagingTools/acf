@@ -95,10 +95,10 @@ void CScaleCalibrationShape::Draw(QPainter& drawContext) const
 				logCorners[2] = transform.GetClientPosition(clientRect.GetLeftBottom());
 				logCorners[3] = transform.GetClientPosition(clientRect.GetRightBottom());
 
-				double left = istd::Min(istd::Min(logCorners[0].GetX(), logCorners[1].GetX()), istd::Min(logCorners[2].GetX(), logCorners[3].GetX()));
-				double top = istd::Min(istd::Min(logCorners[0].GetY(), logCorners[1].GetY()), istd::Min(logCorners[2].GetY(), logCorners[3].GetY()));
-				double right = istd::Max(istd::Max(logCorners[0].GetX(), logCorners[1].GetX()), istd::Max(logCorners[2].GetX(), logCorners[3].GetX()));
-				double bottom = istd::Max(istd::Max(logCorners[0].GetY(), logCorners[1].GetY()), istd::Max(logCorners[2].GetY(), logCorners[3].GetY()));
+				double left = qMin(qMin(logCorners[0].GetX(), logCorners[1].GetX()), qMin(logCorners[2].GetX(), logCorners[3].GetX()));
+				double top = qMin(qMin(logCorners[0].GetY(), logCorners[1].GetY()), qMin(logCorners[2].GetY(), logCorners[3].GetY()));
+				double right = qMax(qMax(logCorners[0].GetX(), logCorners[1].GetX()), qMax(logCorners[2].GetX(), logCorners[3].GetX()));
+				double bottom = qMax(qMax(logCorners[0].GetY(), logCorners[1].GetY()), qMax(logCorners[2].GetY(), logCorners[3].GetY()));
 
 				i2d::CRectangle boundRectangle(left, top, right-left, bottom-top);
 

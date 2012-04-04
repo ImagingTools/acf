@@ -478,10 +478,10 @@ inline void CRect::Union(istd::CIndex2d point)
 {
 	I_ASSERT(IsValid());
 
-	int left = istd::Min(GetLeft(), point.GetX());
-	int top = istd::Min(GetTop(), point.GetY());
-	int right = istd::Max(GetRight(), point.GetX());
-	int bottom = istd::Max(GetBottom(), point.GetY());
+	int left = qMin(GetLeft(), point.GetX());
+	int top = qMin(GetTop(), point.GetY());
+	int right = qMax(GetRight(), point.GetX());
+	int bottom = qMax(GetBottom(), point.GetY());
 
 	m_horizontalRange = istd::CIntRange(left, right);
 	m_verticalRange = istd::CIntRange(top, bottom);

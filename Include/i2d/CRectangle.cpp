@@ -255,10 +255,10 @@ bool CRectangle::IsIntersectedBy(const CLine2d& line) const
 
 CRectangle CRectangle::GetIntersection(const CRectangle& rect) const
 {
-	double outputLeft = istd::Max(rect.GetLeft(), GetLeft());
-	double outputTop = istd::Max(rect.GetTop(), GetTop());
-	double outputRight = istd::Min(rect.GetRight(), GetRight());
-	double outputBottom = istd::Min(rect.GetBottom(), GetBottom());
+	double outputLeft = qMax(rect.GetLeft(), GetLeft());
+	double outputTop = qMax(rect.GetTop(), GetTop());
+	double outputRight = qMin(rect.GetRight(), GetRight());
+	double outputBottom = qMin(rect.GetBottom(), GetBottom());
 
 	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
 }
@@ -278,10 +278,10 @@ void CRectangle::Intersect(const CRectangle& rectangle)
 
 CRectangle CRectangle::GetUnion(const CRectangle& rect) const
 {
-	double outputLeft = istd::Min(rect.GetLeft(), GetLeft());
-	double outputTop = istd::Min(rect.GetTop(), GetTop());
-	double outputRight = istd::Max(rect.GetRight(), GetRight());
-	double outputBottom = istd::Max(rect.GetBottom(), GetBottom());
+	double outputLeft = qMin(rect.GetLeft(), GetLeft());
+	double outputTop = qMin(rect.GetTop(), GetTop());
+	double outputRight = qMax(rect.GetRight(), GetRight());
+	double outputBottom = qMax(rect.GetBottom(), GetBottom());
 
 	return CRectangle(outputLeft, outputTop, outputRight - outputLeft, outputBottom - outputTop);
 }
@@ -291,10 +291,10 @@ void CRectangle::Unite(const CRectangle& rect)
 {
 	istd::CChangeNotifier changePtr(this);
 
-	double outputLeft = istd::Min(rect.GetLeft(), GetLeft());
-	double outputTop = istd::Min(rect.GetTop(), GetTop());
-	double outputRight = istd::Max(rect.GetRight(), GetRight());
-	double outputBottom = istd::Max(rect.GetBottom(), GetBottom());
+	double outputLeft = qMin(rect.GetLeft(), GetLeft());
+	double outputTop = qMin(rect.GetTop(), GetTop());
+	double outputRight = qMax(rect.GetRight(), GetRight());
+	double outputBottom = qMax(rect.GetBottom(), GetBottom());
 
 	m_horizontalRange = istd::CRange(outputLeft, outputRight);
 	m_verticalRange = istd::CRange(outputTop, outputBottom);

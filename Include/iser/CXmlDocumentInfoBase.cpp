@@ -24,7 +24,7 @@ void CXmlDocumentInfoBase::EncodeXml(const std::string& text, std::string& xmlTe
 			xmlText += c;
 		}
 		else{
-			xmlText +=  QString("&#%1;").arg(I_WORD((unsigned char)c)).toStdString();
+			xmlText +=  QString("&#%1;").arg(quint16((unsigned char)c)).toStdString();
 		}
 	}
 }
@@ -84,7 +84,7 @@ void CXmlDocumentInfoBase::EncodeXml(const QString& text, std::string& xmlText)
 			xmlText += c.toAscii();
 		}
 		else{
-			I_WORD unicodeChar = I_WORD(c.unicode());
+			quint16 unicodeChar = quint16(c.unicode());
 
 			xmlText +=  QString("&#%1;").arg(unicodeChar).toStdString();
 		}

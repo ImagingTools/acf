@@ -23,24 +23,24 @@ class TMsbWord
 {
 public:
 	TMsbWord();
-	TMsbWord(I_DWORD inputValue);
+	TMsbWord(quint32 inputValue);
 	TMsbWord(const TMsbWord& inputValue);
 	
 	/**
 		Returns value as MSB.
 	*/
-	operator I_DWORD() const;
+	operator quint32() const;
 
 	/**
 		Returns the value as LSB.
 	*/
-	I_DWORD GetLsb() const;
+	quint32 GetLsb() const;
 
 	// pseudo-reimplemented (iser::ISerializable)
 	bool Serialize(iser::IArchive& archive);
 
 private:
-	I_BYTE m_bytes[Size];
+	quint8 m_bytes[Size];
 };
 
 
@@ -58,13 +58,13 @@ inline TMsbWord<Size>::TMsbWord()
 
 
 template <int Size>
-inline TMsbWord<Size>::TMsbWord(I_DWORD inputValue)
+inline TMsbWord<Size>::TMsbWord(quint32 inputValue)
 {
 	I_ASSERT(Size > 0);
 	I_ASSERT(Size <= 4);
 
 	for (int i = 0; i < Size; i++){
-		m_bytes[i] = I_BYTE((inputValue >> (i * 8)) & 0xff);
+		m_bytes[i] = quint8((inputValue >> (i * 8)) & 0xff);
 	}
 }
 
@@ -80,12 +80,12 @@ inline TMsbWord<Size>::TMsbWord(const TMsbWord& inputValue)
 
 
 template <int Size>
-inline TMsbWord<Size>::operator I_DWORD() const
+inline TMsbWord<Size>::operator quint32() const
 {
-	I_DWORD retVal = 0;
+	quint32 retVal = 0;
 
 	for (int i = 0; i < Size; i++){
-		retVal += I_DWORD(m_bytes[i]) << (i * 8);
+		retVal += quint32(m_bytes[i]) << (i * 8);
 	}
 
 	return retVal;
@@ -93,12 +93,12 @@ inline TMsbWord<Size>::operator I_DWORD() const
 
 	
 template <int Size>
-inline I_DWORD TMsbWord<Size>::GetLsb() const
+inline quint32 TMsbWord<Size>::GetLsb() const
 {
-	I_DWORD retVal = 0;
+	quint32 retVal = 0;
 
 	for (int i = 0; i < Size; i++){
-		retVal += I_DWORD(m_bytes[Size - i - 1])  << (i * 8);
+		retVal += quint32(m_bytes[Size - i - 1])  << (i * 8);
 	}
 
 	return retVal;

@@ -139,7 +139,7 @@ void CComposedParamsSetComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	int setsCount = istd::Min(m_parametersCompPtr.GetCount(), m_parametersIdAttrPtr.GetCount());
+	int setsCount = qMin(m_parametersCompPtr.GetCount(), m_parametersIdAttrPtr.GetCount());
 
 	for (int i = 0; i < setsCount; ++i){
 		iser::ISerializable* paramPtr = m_parametersCompPtr[i];

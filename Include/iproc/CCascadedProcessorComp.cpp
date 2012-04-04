@@ -23,7 +23,7 @@ int CCascadedProcessorComp::GetProcessorState(const iprm::IParamsSet* paramsPtr)
 	for (int i = 0; i < processorsCount; ++i){
 		const iproc::IProcessor* processorPtr = m_processorsCompPtr[i];
 		if (processorPtr != NULL){
-			retVal = istd::Max(retVal, processorPtr->GetProcessorState(paramsPtr));
+			retVal = qMax(retVal, processorPtr->GetProcessorState(paramsPtr));
 		}
 	}
 
@@ -83,7 +83,7 @@ int CCascadedProcessorComp::DoProcessing(
 	progressDelegators.SetCount(processorsCount);
 
 	if (progressManagerPtr != NULL){
-		int managersCount = istd::Min(processorsCount, m_progressIdsAttrPtr.GetCount());
+		int managersCount = qMin(processorsCount, m_progressIdsAttrPtr.GetCount());
 		for (int i = 0; i < managersCount; ++i){
 			const std::string& progressId = m_progressIdsAttrPtr[i];
 			if (!progressId.empty()){

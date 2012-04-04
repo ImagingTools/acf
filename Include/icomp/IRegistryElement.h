@@ -65,12 +65,12 @@ public:
 		Get flags of this registry element.
 		\sa	ElementFlags
 	*/
-	virtual I_DWORD GetElementFlags() const = 0;
+	virtual quint32 GetElementFlags() const = 0;
 	/**
 		Set flags of this registry element.
 		\sa	ElementFlags
 	*/
-	virtual void SetElementFlags(I_DWORD flags) = 0;
+	virtual void SetElementFlags(quint32 flags) = 0;
 
 	/**
 		Get ID list of existing attributes.

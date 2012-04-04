@@ -23,49 +23,49 @@ bool CTextWriteArchiveBase::Process(char& value)
 }
 
 
-bool CTextWriteArchiveBase::Process(I_BYTE& value)
+bool CTextWriteArchiveBase::Process(quint8& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_SBYTE& value)
+bool CTextWriteArchiveBase::Process(qint8& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_WORD& value)
+bool CTextWriteArchiveBase::Process(quint16& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_SWORD& value)
+bool CTextWriteArchiveBase::Process(qint16& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_DWORD& value)
+bool CTextWriteArchiveBase::Process(quint32& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_SDWORD& value)
+bool CTextWriteArchiveBase::Process(qint32& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_QWORD& value)
+bool CTextWriteArchiveBase::Process(quint64& value)
 {
 	return ProcessInternal(value);
 }
 
 
-bool CTextWriteArchiveBase::Process(I_SQWORD& value)
+bool CTextWriteArchiveBase::Process(qint64& value)
 {
 	return ProcessInternal(value);
 }

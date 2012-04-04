@@ -83,7 +83,7 @@ bool CComposedParamsSetGuiComp::OnAttached(imod::IModel* modelPtr)
 	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
 	I_ASSERT(paramsSetPtr != NULL);
 
-	int elementsCount = istd::Min(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
+	int elementsCount = qMin(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
 	for (int i = 0; i < elementsCount; ++i){
 		const QString& paramId = m_idsAttrPtr[i];
 
@@ -113,7 +113,7 @@ bool CComposedParamsSetGuiComp::OnDetached(imod::IModel* modelPtr)
 
 	m_connectedEditors.clear();
 
-	int elementsCount = istd::Min(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
+	int elementsCount = qMin(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
 	for (int i = 0; i < elementsCount; ++i){
 		const QString& paramId = m_idsAttrPtr[i];
 

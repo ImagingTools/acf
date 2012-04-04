@@ -149,29 +149,29 @@ bool CXmlFileReadArchive::Process(char& value)
 }
 
 
-bool CXmlFileReadArchive::Process(I_BYTE& value)
+bool CXmlFileReadArchive::Process(quint8& value)
 {
 	QString text = PullTextNode();
 
 	bool retVal;
-	value = I_BYTE(text.toShort(&retVal));
+	value = quint8(text.toShort(&retVal));
 
 	return retVal;
 }
 
 
-bool CXmlFileReadArchive::Process(I_SBYTE& value)
+bool CXmlFileReadArchive::Process(qint8& value)
 {
 	QString text = PullTextNode();
 
 	bool retVal;
-	value = I_SBYTE(text.toShort(&retVal));
+	value = qint8(text.toShort(&retVal));
 
 	return retVal;
 }
 
 
-bool CXmlFileReadArchive::Process(I_WORD& value)
+bool CXmlFileReadArchive::Process(quint16& value)
 {
 	QString text = PullTextNode();
 
@@ -182,7 +182,7 @@ bool CXmlFileReadArchive::Process(I_WORD& value)
 }
 
 
-bool CXmlFileReadArchive::Process(I_SWORD& value)
+bool CXmlFileReadArchive::Process(qint16& value)
 {
 	QString text = PullTextNode();
 
@@ -193,7 +193,7 @@ bool CXmlFileReadArchive::Process(I_SWORD& value)
 }
 
 
-bool CXmlFileReadArchive::Process(I_DWORD& value)
+bool CXmlFileReadArchive::Process(quint32& value)
 {
 	QString text = PullTextNode();
 
@@ -204,7 +204,7 @@ bool CXmlFileReadArchive::Process(I_DWORD& value)
 }
 
 
-bool CXmlFileReadArchive::Process(I_SDWORD& value)
+bool CXmlFileReadArchive::Process(qint32& value)
 {
 	QString text = PullTextNode();
 
@@ -215,7 +215,7 @@ bool CXmlFileReadArchive::Process(I_SDWORD& value)
 }
 
 
-bool CXmlFileReadArchive::Process(I_QWORD& value)
+bool CXmlFileReadArchive::Process(quint64& value)
 {
 	QString text = PullTextNode();
 
@@ -226,7 +226,7 @@ bool CXmlFileReadArchive::Process(I_QWORD& value)
 }
 
 
-bool CXmlFileReadArchive::Process(I_SQWORD& value)
+bool CXmlFileReadArchive::Process(qint64& value)
 {
 	QString text = PullTextNode();
 
@@ -283,9 +283,9 @@ bool CXmlFileReadArchive::ProcessData(void* dataPtr, int size)
 {
 	QString text = PullTextNode();
 
-	I_BYTE* data = (I_BYTE*)dataPtr;
+	quint8* data = (quint8*)dataPtr;
 
-	std::vector<I_BYTE> decodedData = istd::CBase64::ConvertFromBase64(text.toStdString());
+	std::vector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toStdString());
 
 	I_ASSERT(size == int(decodedData.size()));
 

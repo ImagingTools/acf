@@ -92,42 +92,42 @@ public:
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_BYTE& value) = 0;
+	virtual bool Process(quint8& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_SBYTE& value) = 0;
+	virtual bool Process(qint8& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_WORD& value) = 0;
+	virtual bool Process(quint16& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_SWORD& value) = 0;
+	virtual bool Process(qint16& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_DWORD& value) = 0;
+	virtual bool Process(quint32& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_SDWORD& value) = 0;
+	virtual bool Process(qint32& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_QWORD& value) = 0;
+	virtual bool Process(quint64& value) = 0;
 
 	/**
 		Process primitive type.
 	 */
-	virtual bool Process(I_SQWORD& value) = 0;
+	virtual bool Process(qint64& value) = 0;
 
 	/**
 		Process primitive type.

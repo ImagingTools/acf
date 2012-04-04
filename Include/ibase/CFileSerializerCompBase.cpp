@@ -84,9 +84,9 @@ bool CFileSerializerCompBase::CheckMinimalVersion(const iser::ISerializable& obj
 				++iter){
 		int id = *iter;
 
-		I_DWORD objectMinimalVersion = object.GetMinimalVersion(id);
+		quint32 objectMinimalVersion = object.GetMinimalVersion(id);
 
-		I_DWORD versionNumber;
+		quint32 versionNumber;
 		if (versionInfo.GetVersionNumber(id, versionNumber)){
 			if (versionNumber < objectMinimalVersion){
 				return false;

@@ -26,7 +26,7 @@ bool CWizardDocumentComp::IsPageSelectionAllowed(int pageIndex) const
 		return false;
 	}
 
-	for (		int checkPageIndex = istd::Max(currentPageIndex, 0);
+	for (		int checkPageIndex = qMax(currentPageIndex, 0);
 				checkPageIndex < pageIndex;
 				++checkPageIndex){
 		const iproc::IStateController* checkedPageInfoPtr = CompCastPtr<const iproc::IStateController>(GetParamsSet(checkPageIndex));

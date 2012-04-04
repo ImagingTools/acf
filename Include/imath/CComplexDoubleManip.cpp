@@ -45,7 +45,7 @@ bool CComplexDoubleManip::GetParsed(const QString& text, double& result) const
 
 // reimplemented (imath::TIValueManip)
 
-I_SDWORD CComplexDoubleManip::GetInternalValue(double value) const
+qint32 CComplexDoubleManip::GetInternalValue(double value) const
 {
 	value = m_range.GetNearestInside(value);
 

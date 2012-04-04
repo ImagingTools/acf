@@ -11,7 +11,7 @@ namespace iser
 
 // public methods
 
-CBitMemoryReadArchive::CBitMemoryReadArchive(const std::vector<I_BYTE>& data, bool serializeHeader)
+CBitMemoryReadArchive::CBitMemoryReadArchive(const std::vector<quint8>& data, bool serializeHeader)
 :	BaseClass(&data[0], data.size(), serializeHeader)	
 {
 	m_bitPosition = 0;
@@ -32,13 +32,13 @@ CBitMemoryReadArchive::CBitMemoryReadArchive(const CMemoryWriteArchive& writeArc
 }
 
 
-I_DWORD CBitMemoryReadArchive::ReadValue(int bits)
+quint32 CBitMemoryReadArchive::ReadValue(int bits)
 {
 	if (!IsValid()){
 		return 0;
 	}
 
-	I_DWORD retVal = 0;
+	quint32 retVal = 0;
 
 	for (int bitIndex = m_bitPosition, localBitIndex = 0; bitIndex < m_bitPosition + bits; bitIndex++, localBitIndex++){
 		int localByteIndex = bitIndex / 8;
@@ -78,7 +78,7 @@ bool CBitMemoryReadArchive::ProcessBits(void* dataPtr, int bitsCount, int bytesC
 		return false;
 	}
 
-	I_DWORD retVal = ReadValue(bitsCount);
+	quint32 retVal = ReadValue(bitsCount);
 	
 	std::memcpy(dataPtr, &retVal, bytesCount);
 

@@ -17,7 +17,7 @@ namespace iser
 
 bool CBinaryWriteArchiveBase::BeginTag(const CArchiveTag& tag)
 {
-	I_DWORD binaryId = tag.GetBinaryId();
+	quint32 binaryId = tag.GetBinaryId();
 
 	return Process(binaryId);
 }
@@ -25,7 +25,7 @@ bool CBinaryWriteArchiveBase::BeginTag(const CArchiveTag& tag)
 
 bool CBinaryWriteArchiveBase::EndTag(const CArchiveTag& tag)
 {
-	I_DWORD binaryId = ~tag.GetBinaryId();
+	quint32 binaryId = ~tag.GetBinaryId();
 
 	return Process(binaryId);
 }
@@ -43,51 +43,51 @@ bool CBinaryWriteArchiveBase::Process(char& value)
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_BYTE& value)
+bool CBinaryWriteArchiveBase::Process(quint8& value)
 {
-	return ProcessData(&value, int(sizeof(I_BYTE)));
+	return ProcessData(&value, int(sizeof(quint8)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_SBYTE& value)
+bool CBinaryWriteArchiveBase::Process(qint8& value)
 {
-	return ProcessData(&value, int(sizeof(I_SBYTE)));
+	return ProcessData(&value, int(sizeof(qint8)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_WORD& value)
+bool CBinaryWriteArchiveBase::Process(quint16& value)
 {
-	return ProcessData(&value, int(sizeof(I_WORD)));
+	return ProcessData(&value, int(sizeof(quint16)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_SWORD& value)
+bool CBinaryWriteArchiveBase::Process(qint16& value)
 {
-	return ProcessData(&value, int(sizeof(I_SWORD)));
+	return ProcessData(&value, int(sizeof(qint16)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_DWORD& value)
+bool CBinaryWriteArchiveBase::Process(quint32& value)
 {
-	return ProcessData(&value, int(sizeof(I_DWORD)));
+	return ProcessData(&value, int(sizeof(quint32)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_SDWORD& value)
+bool CBinaryWriteArchiveBase::Process(qint32& value)
 {
-	return ProcessData(&value, int(sizeof(I_SDWORD)));
+	return ProcessData(&value, int(sizeof(qint32)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_QWORD& value)
+bool CBinaryWriteArchiveBase::Process(quint64& value)
 {
-	return ProcessData(&value, int(sizeof(I_QWORD)));
+	return ProcessData(&value, int(sizeof(quint64)));
 }
 
 
-bool CBinaryWriteArchiveBase::Process(I_SQWORD& value)
+bool CBinaryWriteArchiveBase::Process(qint64& value)
 {
-	return ProcessData(&value, int(sizeof(I_SQWORD)));
+	return ProcessData(&value, int(sizeof(qint64)));
 }
 
 

@@ -53,10 +53,10 @@ bool CFileWriteArchive::BeginTag(const CArchiveTag& tag)
 
 	element.tagBinaryId = tag.GetBinaryId();
 	element.endFieldPosition = (tag.IsTagSkippingUsed() && m_supportTagSkipping)?
-				I_DWORD(m_stream.tellp()):
-				I_DWORD(0);
+				quint32(m_stream.tellp()):
+				quint32(0);
 
-	I_DWORD dummyPos = 0;
+	quint32 dummyPos = 0;
 	retVal = retVal && Process(dummyPos);
 
 	return retVal;
@@ -76,7 +76,7 @@ bool CFileWriteArchive::EndTag(const CArchiveTag& tag)
 	}
 
 	if (element.endFieldPosition != 0){	// add position of the file tag end to the tag begin
-		I_DWORD endPosition = m_stream.tellp();
+		quint32 endPosition = m_stream.tellp();
 
 		m_stream.seekp(element.endFieldPosition);
 

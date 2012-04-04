@@ -26,8 +26,8 @@ public:
 	virtual AttributeInfo* GetAttributeInfo(const std::string& attributeId);
 
 	// reimplemented (icomp::IRegistryElement)
-	virtual I_DWORD GetElementFlags() const;
-	virtual void SetElementFlags(I_DWORD flags);
+	virtual quint32 GetElementFlags() const;
+	virtual void SetElementFlags(quint32 flags);
 	virtual Ids GetAttributeIds() const;
 	virtual AttributeInfo* InsertAttributeInfo(const std::string& attributeId, const std::string& attributeType);
 	virtual iser::IObject* CreateAttribute(const std::string& attributeType) const;
@@ -38,7 +38,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	I_DWORD m_elementFlags;
+	quint32 m_elementFlags;
 
 	typedef std::map< std::string, AttributeInfo> AttributeInfoMap;
 	AttributeInfoMap m_attributeInfos;

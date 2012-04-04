@@ -135,49 +135,49 @@ bool CXmlFileWriteArchive::Process(char& value)
 }
 
 
-bool CXmlFileWriteArchive::Process(I_BYTE& value)
+bool CXmlFileWriteArchive::Process(quint8& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_SBYTE& value)
+bool CXmlFileWriteArchive::Process(qint8& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_WORD& value)
+bool CXmlFileWriteArchive::Process(quint16& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_SWORD& value)
+bool CXmlFileWriteArchive::Process(qint16& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_DWORD& value)
+bool CXmlFileWriteArchive::Process(quint32& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_SDWORD& value)
+bool CXmlFileWriteArchive::Process(qint32& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_QWORD& value)
+bool CXmlFileWriteArchive::Process(quint64& value)
 {
 	return PushTextNode(QString::number(value));
 }
 
 
-bool CXmlFileWriteArchive::Process(I_SQWORD& value)
+bool CXmlFileWriteArchive::Process(qint64& value)
 {
 	return PushTextNode(QString::number(value));
 }

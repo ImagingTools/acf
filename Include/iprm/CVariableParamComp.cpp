@@ -15,7 +15,7 @@ IVariableParam::TypeIds CVariableParamComp::GetKnownTypeIds() const
 {
 	TypeIds retVal;
 
-	int typesCount = istd::Min(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
+	int typesCount = qMin(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
 		retVal.insert(m_factoryIdsAttrPtr[i].toStdString());
 	}
@@ -49,7 +49,7 @@ bool CVariableParamComp::AssignTypeId(const std::string& typeId)
 		return true;
 	}
 
-	int typesCount = istd::Min(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
+	int typesCount = qMin(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
 		if (m_factoryIdsAttrPtr[i].toStdString() == typeId){
 			iser::ISerializable* newParamPtr = m_factoriesFact.CreateInstance(i);
@@ -103,11 +103,11 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 }
 
 
-I_DWORD CVariableParamComp::GetMinimalVersion(int versionId) const
+quint32 CVariableParamComp::GetMinimalVersion(int versionId) const
 {
-	I_DWORD retVal = (versionId == iser::IVersionInfo::AcfVersionId)? 1582: 0;
+	quint32 retVal = (versionId == iser::IVersionInfo::AcfVersionId)? 1582: 0;
 	if (m_paramPtr.IsValid()){
-		retVal = istd::Max(retVal, m_paramPtr->GetMinimalVersion(versionId));
+		retVal = qMax(retVal, m_paramPtr->GetMinimalVersion(versionId));
 	}
 
 	return retVal;

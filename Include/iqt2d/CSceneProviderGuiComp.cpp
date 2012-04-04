@@ -338,7 +338,7 @@ void CSceneProviderGuiComp::SetFittedScale(FitMode mode)
 	double scaleY = SceneView->height() / sceneRect.height();
 
 	if (mode <= FM_ISOTROPIC){
-		double newScale = istd::Min(scaleX, scaleY) * (1 - m_isotropyFactor) + istd::Max(scaleX, scaleY) * m_isotropyFactor;
+		double newScale = qMin(scaleX, scaleY) * (1 - m_isotropyFactor) + qMax(scaleX, scaleY) * m_isotropyFactor;
 
 		if ((mode == FM_ISOTROPIC_REDUCTION) && newScale >= 1){
 			newScale = 1;

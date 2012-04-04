@@ -54,7 +54,7 @@ QString CApplicationInfoComp::GetApplicationAttribute(int attributeId) const
 
 	case AA_MAIN_VERSION:
 		if (m_mainVersionIdAttrPtr.IsValid() && m_versionInfoCompPtr.IsValid()){
-			I_DWORD versionNumber;
+			quint32 versionNumber;
 			if (m_versionInfoCompPtr->GetVersionNumber(*m_mainVersionIdAttrPtr, versionNumber)){
 				return m_versionInfoCompPtr->GetEncodedVersionName(*m_mainVersionIdAttrPtr, versionNumber);
 			}
@@ -95,7 +95,7 @@ const iser::IVersionInfo& CApplicationInfoComp::GetVersionInfo() const
 
 // reimplemented (iser::IVersionInfo)
 
-bool CApplicationInfoComp::GetVersionNumber(int /*versionId*/, I_DWORD& result) const
+bool CApplicationInfoComp::GetVersionNumber(int /*versionId*/, quint32& result) const
 {
 	result = 0xffffffff;
 
@@ -115,7 +115,7 @@ iser::IVersionInfo::VersionIds CApplicationInfoComp::GetVersionIds() const
 }
 
 
-QString CApplicationInfoComp::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
+QString CApplicationInfoComp::GetEncodedVersionName(int /*versionId*/, quint32 /*versionNumber*/) const
 {
 	return "";
 }

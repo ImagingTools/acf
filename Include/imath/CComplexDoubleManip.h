@@ -45,7 +45,7 @@ public:
 
 protected:
 	// reimplemented (imath::TIValueManip)
-	virtual I_SDWORD GetInternalValue(double value) const;
+	virtual qint32 GetInternalValue(double value) const;
 
 private:
 	double m_scaleFactor;

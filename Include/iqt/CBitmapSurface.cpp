@@ -52,7 +52,7 @@ void CBitmapSurface::CreateSurfaceFromBitmap()
 	int bufferIncrement = 	pixelBitsCount >> 3;
 
 	for (int y = 0; y < GetImageSize().GetY(); y++){
-		I_BYTE* bufferPtr = (I_BYTE*)GetLinePtr(y);
+		quint8* bufferPtr = (quint8*)GetLinePtr(y);
 
 		for (int x = 0; x < GetImageSize().GetX(); x++){
 			double functionValue = 0;

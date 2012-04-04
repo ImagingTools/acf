@@ -407,7 +407,7 @@ void CRegistry::SetKeywords(const QString& keywords)
 bool CRegistry::Serialize(iser::IArchive& archive)
 {
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	I_DWORD frameworkVersion = 0;
+	quint32 frameworkVersion = 0;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 
 	istd::CChangeNotifier changePtr(archive.IsStoring()? NULL: this);
@@ -447,7 +447,7 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 }
 
 
-I_DWORD CRegistry::GetMinimalVersion(int versionId) const
+quint32 CRegistry::GetMinimalVersion(int versionId) const
 {
 	if (versionId == iser::IVersionInfo::AcfVersionId){
 		if (!m_embeddedRegistriesMap.empty()){
@@ -590,7 +590,7 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 	bool isStoring = archive.IsStoring();
 
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	I_DWORD frameworkVersion = 0;
+	quint32 frameworkVersion = 0;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 	if (frameworkVersion < 1637){
 		if (!isStoring){

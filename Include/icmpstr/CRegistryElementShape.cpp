@@ -118,7 +118,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	// draw component icon:
 	if (!m_icon.isNull() && (mainRect.width() > mainRect.height())){
-		int minSideSize = int(istd::Min(mainRect.width(), mainRect.height()));
+		int minSideSize = int(qMin(mainRect.width(), mainRect.height()));
 
 		QRectF iconRect(
 					mainRect.left(),
@@ -169,7 +169,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 	}
 
 	// draw element flags icon:
-	I_DWORD elementFlags = objectPtr->GetElementFlags();
+	quint32 elementFlags = objectPtr->GetElementFlags();
 	if ((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0){
 		QRectF iconRect(
 					mainRect.right() - (attributeIconSize + SIDE_OFFSET) * ++iconsCount,
@@ -320,7 +320,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 
 	int attributeIconSize = nameFontInfo.height();
 
-	I_DWORD elementFlags = element.GetElementFlags();
+	quint32 elementFlags = element.GetElementFlags();
 	if (((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0)){
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
@@ -333,7 +333,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 
-	int width = istd::Max(titleWidth, detailFontInfo.width(m_addressString)) + SIDE_OFFSET * 2;
+	int width = qMax(titleWidth, detailFontInfo.width(m_addressString)) + SIDE_OFFSET * 2;
 
 	width += SIDE_OFFSET * 2;
 	height += SIDE_OFFSET * 2;

@@ -7,7 +7,7 @@ namespace istd
 
 CBitManip::CBitManip()
 {
-	I_SBYTE firstBitIndex = -1;
+	qint8 firstBitIndex = -1;
 	for (int i = 0; i < 256; ++i){
 		if (i >= int(2 << firstBitIndex)){
 			++firstBitIndex;

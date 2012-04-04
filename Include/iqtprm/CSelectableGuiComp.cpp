@@ -23,7 +23,7 @@ void CSelectableGuiComp::OnGuiModelAttached()
 		if (constraintsPtr != NULL){
 			int optionsCont = constraintsPtr->GetOptionsCount();
 
-			int guisCount = istd::Min(m_slaveGuisCompPtr.GetCount(), optionsCont);
+			int guisCount = qMin(m_slaveGuisCompPtr.GetCount(), optionsCont);
 	
 			for (int i = 0; i < guisCount; i++){
 				QWidget* newPage = new QWidget();

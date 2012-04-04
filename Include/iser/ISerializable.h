@@ -34,13 +34,13 @@ public:
 		Get minimal needed version to correct storing of this data.
 		In implementation shold be calculated maximum version of this and composed component.
 	*/
-	virtual I_DWORD GetMinimalVersion(int versionId) const;
+	virtual quint32 GetMinimalVersion(int versionId) const;
 };
 
 
 // inline methods
 
-inline I_DWORD ISerializable::GetMinimalVersion(int /*versionId*/) const
+inline quint32 ISerializable::GetMinimalVersion(int /*versionId*/) const
 {
 	return 0;
 }

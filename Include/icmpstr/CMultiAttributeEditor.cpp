@@ -92,7 +92,7 @@ void CMultiAttributeEditor::OnItemRemove()
 
 		delete itemPtr;
 
-		m_dialog.AttributeValuesTree->setItemSelected(m_dialog.AttributeValuesTree->item(istd::Max(rowIndex - 1, 0)), true);
+		m_dialog.AttributeValuesTree->setItemSelected(m_dialog.AttributeValuesTree->item(qMax(rowIndex - 1, 0)), true);
 	}
 
 	UpdateButtonStates();

@@ -217,7 +217,7 @@ void CInteractiveAnnulusShape::Draw(QPainter& drawContext) const
 		drawContext.setBrush(colorShema.GetBrush(IColorShema::SB_HALF_TRANSPARENT2));
 	}
 
-	DrawAnnulus(drawContext, screenCenter.ToIndex2d(), int(istd::Min(radius, radius2) * scale.GetX()), int(istd::Max(radius, radius2) * scale.GetY()));
+	DrawAnnulus(drawContext, screenCenter.ToIndex2d(), int(qMin(radius, radius2) * scale.GetX()), int(qMax(radius, radius2) * scale.GetY()));
 
 	drawContext.restore();
 	drawContext.restore();

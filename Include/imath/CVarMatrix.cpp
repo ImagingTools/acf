@@ -267,7 +267,7 @@ bool CVarMatrix::GetTriangleDecomposed(
 		result = *this;
 	}
 
-	int columnsCount = istd::Min(size[1] - 1, size[0]);
+	int columnsCount = qMin(size[1] - 1, size[0]);
 	if ((maxColumns >= 0) && (maxColumns < columnsCount)){
 		columnsCount = maxColumns;
 	}
@@ -538,7 +538,7 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 	int columnsCount = size[0];
 	int matrixYColumnsCount = matrixY.GetSize(0);
 
-	int maxStepsCount = istd::Min(size[1], columnsCount);
+	int maxStepsCount = qMin(size[1], columnsCount);
 
 	std::vector<double> columnNorms2(columnsCount);
 	std::vector<int> realColumnIndices(columnsCount);
@@ -669,7 +669,7 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 			}
 		}
 		else{
-			for (int i = istd::Max(stepIndex - 1, 0); i < columnsCount; ++i){
+			for (int i = qMax(stepIndex - 1, 0); i < columnsCount; ++i){
 				resultIndex[1] = realColumnIndices[i];
 
 				matrixX.SetAt(resultIndex, 0);

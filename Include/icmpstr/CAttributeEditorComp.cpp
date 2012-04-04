@@ -252,7 +252,7 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 			continue;
 		}
 
-		I_DWORD flags = elementPtr->GetElementFlags();
+		quint32 flags = elementPtr->GetElementFlags();
 
 		flags = checked?
 					(flags | icomp::IRegistryElement::EF_AUTO_INSTANCE):
@@ -659,7 +659,7 @@ void CAttributeEditorComp::UpdateFlagsView()
 
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 		if (elementPtr != NULL){
-			I_DWORD elementFlags = elementPtr->GetElementFlags();
+			quint32 elementFlags = elementPtr->GetElementFlags();
 			if ((elementFlags & icomp::IRegistryElement::EF_AUTO_INSTANCE) != 0){
 				autoInstanceOn = true;
 			}

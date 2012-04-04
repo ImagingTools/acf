@@ -30,10 +30,10 @@ const IVersionInfo& CWriteArchiveBase::GetVersionInfo() const
 
 bool CWriteArchiveBase::ProcessBits(void* dataPtr, int bitsCount, int bytesCount)
 {
-	if (bytesCount == int(sizeof(I_DWORD))){
-		I_DWORD mask = (1 << bitsCount) - 1;
-		I_DWORD word = *((I_DWORD*)dataPtr);
-		I_DWORD result = word & mask;
+	if (bytesCount == int(sizeof(quint32))){
+		quint32 mask = (1 << bitsCount) - 1;
+		quint32 word = *((quint32*)dataPtr);
+		quint32 result = word & mask;
 
 		return Process(result);
 	}
@@ -60,7 +60,7 @@ bool CWriteArchiveBase::SerializeAcfHeader()
 
 // reimplemented (iser::IVersionInfo)
 
-bool CWriteArchiveBase::EmptyVersionInfo::GetVersionNumber(int /*versionId*/, I_DWORD& result) const
+bool CWriteArchiveBase::EmptyVersionInfo::GetVersionNumber(int /*versionId*/, quint32& result) const
 {
 	result = 0xffffffff;
 
@@ -80,7 +80,7 @@ iser::IVersionInfo::VersionIds CWriteArchiveBase::EmptyVersionInfo::GetVersionId
 }
 
 
-QString CWriteArchiveBase::EmptyVersionInfo::GetEncodedVersionName(int /*versionId*/, I_DWORD /*versionNumber*/) const
+QString CWriteArchiveBase::EmptyVersionInfo::GetEncodedVersionName(int /*versionId*/, quint32 /*versionNumber*/) const
 {
 	return "";
 }

@@ -1090,7 +1090,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 		icomp::IRegistryElement& component = *componentInfo.elementPtr;
 		icomp::IRegistryElement::Ids attributeIds = component.GetAttributeIds();
 
-		I_DWORD componentFlags = component.GetElementFlags();
+		quint32 componentFlags = component.GetElementFlags();
 
 		NextLine(stream);
 		if (!attributeIds.empty() || (componentFlags != 0)){

@@ -121,7 +121,7 @@ void CBitmapRegion::CreateFromCircle(const i2d::CCircle& circle)
 	istd::CRange imageLineRange(0, m_bitmapPtr->GetImageSize().GetX() - 1);
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		const I_BYTE* basePtr = (const I_BYTE*)m_bitmapPtr->GetLinePtr(lineIndex) + lineSize * boundingTop;
+		const quint8* basePtr = (const quint8*)m_bitmapPtr->GetLinePtr(lineIndex) + lineSize * boundingTop;
 	
 		PixelRanges& rangeList = m_rangesContainer[lineIndex];
 		PixelRange pixelRange;
@@ -174,7 +174,7 @@ void CBitmapRegion::CreateFromRectangle(const i2d::CRectangle& rect)
 	int boundingTop = int(m_boundingBox.GetTop());
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		const I_BYTE* basePtr = (const I_BYTE*)m_bitmapPtr->GetLinePtr(lineIndex) + lineSize * boundingTop;
+		const quint8* basePtr = (const quint8*)m_bitmapPtr->GetLinePtr(lineIndex) + lineSize * boundingTop;
 	
 		PixelRanges& rangeList = m_rangesContainer[lineIndex];
 		PixelRange pixelRange;
@@ -218,7 +218,7 @@ void CBitmapRegion::CreateFromAnnulus(const i2d::CAnnulus& annulus)
 	m_rangesContainer.resize(linesCount);
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		const I_BYTE* basePtr = (const I_BYTE*)m_bitmapPtr->GetLinePtr(lineIndex) + lineSize * boundingTop;
+		const quint8* basePtr = (const quint8*)m_bitmapPtr->GetLinePtr(lineIndex) + lineSize * boundingTop;
 	
 		PixelRanges& rangeList = m_rangesContainer[lineIndex];
 		double y = (lineIndex + boundingTop - centerY);

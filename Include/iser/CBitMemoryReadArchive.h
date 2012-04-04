@@ -26,7 +26,7 @@ public:
 	/**
 		Constructs a bit stream from a vector of bytes. 
 	*/
-	CBitMemoryReadArchive(const std::vector<I_BYTE>& data, 	bool serializeHeader = true);
+	CBitMemoryReadArchive(const std::vector<quint8>& data, 	bool serializeHeader = true);
 
 	CBitMemoryReadArchive(
 				const void* bufferPtr,
@@ -40,7 +40,7 @@ public:
 	/**
 		Gets the value of the next \c bits in the stream.
 	*/
-	virtual I_DWORD ReadValue(int bits);
+	virtual quint32 ReadValue(int bits);
 
 	// reimplemented (iser::IArchive)
 	virtual bool ProcessData(void* data, int size);

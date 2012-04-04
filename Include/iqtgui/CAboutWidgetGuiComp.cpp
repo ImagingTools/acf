@@ -37,7 +37,7 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 	if (m_applicationInfoCompPtr.IsValid()){
 		const iser::IVersionInfo& versionInfo = m_applicationInfoCompPtr->GetVersionInfo();
 
-		I_DWORD mainVersionNumber;
+		quint32 mainVersionNumber;
 
 		int mainVersionId = m_applicationInfoCompPtr->GetMainVersionId();
 		if (mainVersionId >= 0){
@@ -55,7 +55,7 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 				for (int i = 0; i < versionsCount; ++i){
 					int versionId = m_versionIdsAttrPtr[i];
 
-					I_DWORD version;
+					quint32 version;
 					if (versionInfo.GetVersionNumber(versionId, version)){
 						QString description = (i < m_versionNamesAttrPtr.GetCount())?
 									m_versionNamesAttrPtr[i]:
@@ -79,7 +79,7 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 							++iter){
 					int versionId = *iter;
 
-					I_DWORD version;
+					quint32 version;
 					if ((versionId != mainVersionId) && versionInfo.GetVersionNumber(versionId, version)){
 						QString description = versionInfo.GetVersionIdDescription(versionId);
 						QString versionText = versionInfo.GetEncodedVersionName(versionId, version);

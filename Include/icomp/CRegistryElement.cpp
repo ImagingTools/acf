@@ -39,13 +39,13 @@ IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const std::s
 
 // reimplemented (icomp::IRegistryElement)
 
-I_DWORD CRegistryElement::GetElementFlags() const
+quint32 CRegistryElement::GetElementFlags() const
 {
 	return m_elementFlags;
 }
 
 
-void CRegistryElement::SetElementFlags(I_DWORD flags)
+void CRegistryElement::SetElementFlags(quint32 flags)
 {
 	if (flags != m_elementFlags){
 		istd::CChangeNotifier notifier(this);
@@ -189,7 +189,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	bool isStoring = archive.IsStoring();
 
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
-	I_DWORD versionNumber = 0xffffffff;
+	quint32 versionNumber = 0xffffffff;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, versionNumber);
 
 	if (versionNumber >= 1052){

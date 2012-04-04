@@ -14,7 +14,7 @@ CBitMemoryWriteArchive::CBitMemoryWriteArchive(const IVersionInfo* versionInfoPt
 }
 
 
-void CBitMemoryWriteArchive::WriteValue(I_DWORD inputValue, int bitsCount)
+void CBitMemoryWriteArchive::WriteValue(quint32 inputValue, int bitsCount)
 {
 	I_ASSERT(bitsCount >= 1);
 	I_ASSERT(bitsCount <= 32);
@@ -59,8 +59,8 @@ bool CBitMemoryWriteArchive::ProcessBits(void* data, int bitsCount, int bytesCou
 {	
 	I_ASSERT(bitsCount <= bytesCount * 8); 
 
-	if (bytesCount == int(sizeof(I_DWORD))){
-		WriteValue(*(I_DWORD*)data, bitsCount);
+	if (bytesCount == int(sizeof(quint32))){
+		WriteValue(*(quint32*)data, bitsCount);
 	}
 
 	return true;

@@ -67,7 +67,7 @@ protected:
 	bool SetQImage(const QImage& image);
 
 private:
-	istd::TOptDelPtr<I_BYTE, true> m_externalBuffer;
+	istd::TOptDelPtr<quint8, true> m_externalBuffer;
 	QImage m_image;
 };
 

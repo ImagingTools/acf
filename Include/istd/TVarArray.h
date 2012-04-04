@@ -259,7 +259,7 @@ inline int TVarArray<Element>::GetElementIndex(const IndexType& index) const
 	int indexDimensionsCount = index.GetDimensionsCount();
 	int dimensionsCount = m_sizes.GetDimensionsCount();
 
-	int minDimensionsCount = istd::Min(indexDimensionsCount, dimensionsCount);
+	int minDimensionsCount = qMin(indexDimensionsCount, dimensionsCount);
 
 	int elementIndex = 0;
 	int cumulatedSizes = 1;

@@ -54,7 +54,7 @@ public:
 	static bool CloneObjectByArchive(const ISerializable& source, ISerializable& result);
 	
 protected:
-	const I_BYTE* m_bufferPtr;
+	const quint8* m_bufferPtr;
 	int m_bufferSize;
 	int m_readPosition;
 	bool m_isValid;

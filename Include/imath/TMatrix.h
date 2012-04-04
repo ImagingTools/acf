@@ -813,7 +813,7 @@ bool TMatrix<Width, Height, Element>::GetTriangleDecomposed(
 		result = *this;
 	}
 
-	int columnsCount = istd::Min(Height - 1, Width);
+	int columnsCount = qMin(Height - 1, Width);
 	if ((maxColumns >= 0) && (maxColumns < columnsCount)){
 		columnsCount = maxColumns;
 	}

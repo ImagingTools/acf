@@ -65,8 +65,8 @@ QString CFixedPointManip::GetString(const double& value, int /*precision*/) cons
 	typedef std::vector<char> CharacterList;
 	CharacterList rotatedString;
 
-	I_SDWORD intValue = GetInternalValue(value);
-	I_DWORD intAbsValue = (intValue > 0)? I_DWORD(intValue): I_DWORD(-intValue);
+	qint32 intValue = GetInternalValue(value);
+	quint32 intAbsValue = (intValue > 0)? quint32(intValue): quint32(-intValue);
 
 	if (m_precision > 0){
 		for (int i = 0; i < m_precision; ++i){

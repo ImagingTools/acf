@@ -150,7 +150,7 @@ bool CGeneralBitmap::CopyFrom(const istd::IChangeable& object)
 
 		istd::CIndex2d size = bitmapPtr->GetImageSize();
 		if (CreateBitmap(bitmapPtr->GetPixelFormat(), size)){
-			int lineBytesCount = istd::Min(GetLineBytesCount(), bitmapPtr->GetLineBytesCount());
+			int lineBytesCount = qMin(GetLineBytesCount(), bitmapPtr->GetLineBytesCount());
 			for (int y = 0; y < size.GetY(); ++y){
 				std::memcpy(GetLinePtr(y), bitmapPtr->GetLinePtr(y), lineBytesCount);
 			}
@@ -203,7 +203,7 @@ bool CGeneralBitmap::CreateBitmap(
 
 	int bufferSize = m_linesDifference * size.GetY();
 	if (bufferSize > 0){
-		m_buffer.SetPtr(new I_BYTE[bufferSize], true);
+		m_buffer.SetPtr(new quint8[bufferSize], true);
 
 		return m_buffer.IsValid();
 	}
@@ -246,7 +246,7 @@ bool CGeneralBitmap::CreateBitmap(
 		m_linesDifference = (pixelBitsCount * size.GetX() + 7) >> 3;
 	}
 
-	m_buffer.SetPtr((I_BYTE*)dataPtr, releaseFlag);
+	m_buffer.SetPtr((quint8*)dataPtr, releaseFlag);
 
 	return true;
 }

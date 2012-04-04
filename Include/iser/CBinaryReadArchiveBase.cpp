@@ -18,7 +18,7 @@ namespace iser
 
 bool CBinaryReadArchiveBase::BeginTag(const CArchiveTag& tag)
 {
-	I_DWORD readId;
+	quint32 readId;
 	bool retVal = Process(readId);
 
 	if (!retVal){
@@ -44,7 +44,7 @@ bool CBinaryReadArchiveBase::BeginTag(const CArchiveTag& tag)
 
 bool CBinaryReadArchiveBase::EndTag(const CArchiveTag& tag)
 {
-	I_DWORD readId;
+	quint32 readId;
 	bool retVal = Process(readId);
 
 	if (!retVal){
@@ -80,51 +80,51 @@ bool CBinaryReadArchiveBase::Process(char& value)
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_BYTE& value)
+bool CBinaryReadArchiveBase::Process(quint8& value)
 {
-	return ProcessData(&value, int(sizeof(I_BYTE)));
+	return ProcessData(&value, int(sizeof(quint8)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_SBYTE& value)
+bool CBinaryReadArchiveBase::Process(qint8& value)
 {
-	return ProcessData(&value, int(sizeof(I_SBYTE)));
+	return ProcessData(&value, int(sizeof(qint8)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_WORD& value)
+bool CBinaryReadArchiveBase::Process(quint16& value)
 {
-	return ProcessData(&value, int(sizeof(I_WORD)));
+	return ProcessData(&value, int(sizeof(quint16)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_SWORD& value)
+bool CBinaryReadArchiveBase::Process(qint16& value)
 {
-	return ProcessData(&value, int(sizeof(I_SWORD)));
+	return ProcessData(&value, int(sizeof(qint16)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_DWORD& value)
+bool CBinaryReadArchiveBase::Process(quint32& value)
 {
-	return ProcessData(&value, int(sizeof(I_DWORD)));
+	return ProcessData(&value, int(sizeof(quint32)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_SDWORD& value)
+bool CBinaryReadArchiveBase::Process(qint32& value)
 {
-	return ProcessData(&value, int(sizeof(I_SDWORD)));
+	return ProcessData(&value, int(sizeof(qint32)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_QWORD& value)
+bool CBinaryReadArchiveBase::Process(quint64& value)
 {
-	return ProcessData(&value, int(sizeof(I_QWORD)));
+	return ProcessData(&value, int(sizeof(quint64)));
 }
 
 
-bool CBinaryReadArchiveBase::Process(I_SQWORD& value)
+bool CBinaryReadArchiveBase::Process(qint64& value)
 {
-	return ProcessData(&value, int(sizeof(I_SQWORD)));
+	return ProcessData(&value, int(sizeof(qint64)));
 }
 
 

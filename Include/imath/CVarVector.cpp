@@ -15,7 +15,7 @@ namespace imath
 void CVarVector::SetElementsFrom(const CVarVector& vector, double expansionValue)
 {
 	int elementsCount = GetElementsCount();
-	int minElements = istd::Min(elementsCount, vector.GetElementsCount());
+	int minElements = qMin(elementsCount, vector.GetElementsCount());
 
 	for (int i = 0; i < minElements; ++i){
 		SetElement(i, vector[i]);
@@ -64,24 +64,24 @@ bool CVarVector::Normalize(double length)
 
 void CVarVector::GetMinimal(const CVarVector& vector, CVarVector& result) const
 {
-	int elementsCount = istd::Min(GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(GetElementsCount(), vector.GetElementsCount());
 
 	result.SetElementsCount(elementsCount);
 
 	for (int i = 0; i < elementsCount; ++i){
-		result.SetElement(i, istd::Min(GetElement(i), vector.GetElement(i)));
+		result.SetElement(i, qMin(GetElement(i), vector.GetElement(i)));
 	}
 }
 
 
 void CVarVector::GetMaximal(const CVarVector& vector, CVarVector& result) const
 {
-	int elementsCount = istd::Min(GetElementsCount(), vector.GetElementsCount());
+	int elementsCount = qMin(GetElementsCount(), vector.GetElementsCount());
 
 	result.SetElementsCount(elementsCount);
 
 	for (int i = 0; i < elementsCount; ++i){
-		result.SetElement(i, istd::Max(GetElement(i), vector.GetElement(i)));
+		result.SetElement(i, qMax(GetElement(i), vector.GetElement(i)));
 	}
 }
 

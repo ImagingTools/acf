@@ -65,7 +65,7 @@ void CSelectableParamsSetGuiComp::EnsureDetachLastEditor()
 {
 	int observersCount = m_slaveObserversCompPtr.GetCount();
 
-	int observerIndex = istd::Min(m_currentParamsSetIndex, observersCount - 1);
+	int observerIndex = qMin(m_currentParamsSetIndex, observersCount - 1);
 
 	iprm::IParamsSet* paramsSetPtr = dynamic_cast<iprm::IParamsSet*>(GetObjectPtr());
 	if (paramsSetPtr != NULL && observerIndex >= 0){
@@ -96,7 +96,7 @@ void CSelectableParamsSetGuiComp::ConnectCurrentEditor()
 			if (m_slaveObserversCompPtr.IsValid()){	
 				int observersCount = m_slaveObserversCompPtr.GetCount();
 
-				int observerIndex = istd::Min(m_currentParamsSetIndex, observersCount - 1);
+				int observerIndex = qMin(m_currentParamsSetIndex, observersCount - 1);
 
 				iprm::IParamsSet* paramsSetPtr = dynamic_cast<iprm::IParamsSet*>(selectionPtr);
 				if (paramsSetPtr != NULL && observerIndex >= 0){

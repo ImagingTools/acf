@@ -121,7 +121,7 @@ void TMemCachedProducerComp<Key, CacheObject>::UnlockObject(const CacheObject* o
 template <class Key, class CacheObject>
 void TMemCachedProducerComp<Key, CacheObject>::CleanElementList()
 {
-	int maxCachedObjects = istd::Max(0, *m_maxCachedObjectsAttrPtr);
+	int maxCachedObjects = qMax(0, *m_maxCachedObjectsAttrPtr);
 
 	typename CachedList::iterator iter = m_cachedList.begin();
 	while (		(int(m_cachedList.size()) > maxCachedObjects) &&

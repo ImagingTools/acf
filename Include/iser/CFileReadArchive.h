@@ -49,8 +49,8 @@ public:
 protected:
 	struct TagStackElement
 	{
-		I_DWORD tagBinaryId;
-		I_DWORD endPosition;
+		quint32 tagBinaryId;
+		quint32 endPosition;
 		bool useTagSkipping;
 	};
 
