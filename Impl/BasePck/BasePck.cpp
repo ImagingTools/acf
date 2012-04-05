@@ -9,7 +9,7 @@ namespace BasePck
 
 
 I_EXPORT_PACKAGE(
-			"Base",
+			"Acf/Base",
 			"Base system-undependent general package",
 			IM_PROJECT("ACF") IM_TAG("Basic") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

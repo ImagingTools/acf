@@ -12,7 +12,7 @@ I_REGISTER_QT_RESOURCE(iqtgui);
 I_REGISTER_QT_RESOURCE(icmpstr);
 
 I_EXPORT_PACKAGE(
-			"Cmpstr",
+			"Acf/Compositor",
 			"Compositor package",
 			IM_PROJECT("ACF") IM_TAG("Compositor Qt") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 

@@ -8,7 +8,7 @@ namespace TutorialPck
 
 
 I_EXPORT_PACKAGE(
-			"Tutorial",
+			"Acf/Tutorial",
 			"ACF Tutorial package",
 			IM_TAG("Qt Tutorial") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
