@@ -16,7 +16,7 @@ namespace iproc
 	Template interface for providers of cached data.
 	Cached data are accessible in transaction blocks between lock and unlock operation.
 	This data are accessed using abstract key object.
-	Please note that \c Key class must implement standard STL operators needed to use it as std::map key.
+	Please note that \c Key class must implement standard STL operators needed to use it as QMap key.
 */
 template <class Key, class CacheObject>
 class TILockedProducer: virtual public istd::IPolymorphic

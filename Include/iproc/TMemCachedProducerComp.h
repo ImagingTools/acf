@@ -58,7 +58,7 @@ private:
 	};
 
 	typedef std::list<ListElement> CachedList;
-	typedef std::map<const CacheObject*, typename CachedList::reverse_iterator> ObjectToListMap;
+	typedef QMap<const CacheObject*, typename CachedList::reverse_iterator> ObjectToListMap;
 
 	CachedList m_cachedList;
 	ObjectToListMap m_objectToListMap;
@@ -107,7 +107,7 @@ void TMemCachedProducerComp<Key, CacheObject>::UnlockObject(const CacheObject* o
 	typename ObjectToListMap::iterator foundIter = m_objectToListMap.find(objectPtr);
 	I_ASSERT(foundIter != m_objectToListMap.end());	// if locked is done correctly, this element must exist.
 
-	typename CachedList::reverse_iterator objectIter = foundIter->second;
+	typename CachedList::reverse_iterator objectIter = foundIter.value();
 	I_ASSERT(objectIter != m_cachedList.rend());
 
 	objectIter->lockedCount--;

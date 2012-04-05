@@ -17,7 +17,7 @@ bool CMultiModelDispatcherBase::RegisterModel(IModel* modelPtr, int modelId, int
 	}
 
 	if (!modelPtr->AttachObserver(proxyPtr.GetPtr())){
-		m_modelMap.erase(modelId);
+		m_modelMap.remove(modelId);
 
 		return false;
 	}
@@ -28,7 +28,7 @@ bool CMultiModelDispatcherBase::RegisterModel(IModel* modelPtr, int modelId, int
 
 void CMultiModelDispatcherBase::UnregisterModel(int modelId)
 {
-	m_modelMap.erase(modelId);
+	m_modelMap.remove(modelId);
 }
 
 

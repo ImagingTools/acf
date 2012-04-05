@@ -46,7 +46,7 @@ public:
 	virtual const QString& GetKeywords() const;
 
 private:
-	typedef std::map<std::string, const IComponentStaticInfo*> EmbeddedComponentInfos;
+	typedef QMap<std::string, const IComponentStaticInfo*> EmbeddedComponentInfos;
 	EmbeddedComponentInfos m_embeddedComponentInfos;
 
 	QString m_description;

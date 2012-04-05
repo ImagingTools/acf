@@ -204,7 +204,7 @@ private:
 	iqtgui::CHierarchicalCommand m_packagesCommand;
 	iqtgui::CHierarchicalCommand m_reloadCommand;
 
-	typedef std::map<std::string, RootInfo> RootInfos;
+	typedef QMap<std::string, RootInfo> RootInfos;
 	RootInfos m_roots;
 
 	RegistryObserver m_registryObserver;
@@ -218,7 +218,7 @@ private:
 	QIcon m_compositeComponentIcon;
 	QIcon m_mixedComponentIcon;
 
-	typedef std::map<QString, QTreeWidget*> CategoryWidgetsMap;
+	typedef QMap<QString, QTreeWidget*> CategoryWidgetsMap;
 	CategoryWidgetsMap m_categoryWidgetsMap;
 
 	icomp::IMetaInfoManager::ComponentAddresses m_shownAddresses;

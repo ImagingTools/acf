@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -46,8 +46,8 @@ private:
 	const Attribute* m_defaultValuePtr;
 	int m_attributeFlags;
 
-	typedef std::map<std::string, int> IdsToFlagsMap;
-	typedef std::map<int, IdsToFlagsMap> RelatedIdsMap;
+	typedef QMap<std::string, int> IdsToFlagsMap;
+	typedef QMap<int, IdsToFlagsMap> RelatedIdsMap;
 	RelatedIdsMap m_relatedInterfacesMap;
 };
 
@@ -91,10 +91,10 @@ void TAttributeStaticInfo<Attribute>::AddRelatedMetaId(int metaGroupId, const st
 
 	IdsToFlagsMap::iterator foundIter = groupMap.find(id);
 	if (foundIter != groupMap.end()){
-		I_ASSERT((flags & (AF_REFERENCE | AF_FACTORY)) == (foundIter->second & (AF_REFERENCE | AF_FACTORY)));	// factory can be combined with factory only and reference with reference
+		I_ASSERT((flags & (AF_REFERENCE | AF_FACTORY)) == (foundIter.value() & (AF_REFERENCE | AF_FACTORY)));	// factory can be combined with factory only and reference with reference
 
-		foundIter->second |= flags & AF_OBLIGATORY;	// is obligatory if once obligatory registred is
-		foundIter->second &= flags | ~AF_NULLABLE;	// is nullable if always nullable registred is
+		foundIter.value() |= flags & AF_OBLIGATORY;	// is obligatory if once obligatory registred is
+		foundIter.value() &= flags | ~AF_NULLABLE;	// is nullable if always nullable registred is
 	}
 	else{
 		groupMap[id] = flags;
@@ -137,13 +137,13 @@ IElementStaticInfo::Ids TAttributeStaticInfo<Attribute>::GetRelatedMetaIds(int m
 
 	RelatedIdsMap::const_iterator foundGroupIter = m_relatedInterfacesMap.find(metaGroupId);
 	if (foundGroupIter != m_relatedInterfacesMap.end()){
-		const IdsToFlagsMap& groupMap = foundGroupIter->second;
+		const IdsToFlagsMap& groupMap = foundGroupIter.value();
 
 		for (		IdsToFlagsMap::const_iterator iter = groupMap.begin();
 					iter != groupMap.end();
 					++iter){
-						const std::string& id = iter->first;
-			int idFlags = iter->second;
+						const std::string& id = iter.key();
+			int idFlags = iter.value();
 
 			if (((idFlags & flagsMask) == flags)){
 				retVal.insert(id);

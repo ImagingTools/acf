@@ -71,7 +71,7 @@ IComponent* TSimComponentWrap<Base>::GetSubcomponent(const std::string& componen
 	BaseClass2::ComponentsMap::const_iterator iter = BaseClass2::m_componentsMap.find(componentId);
 
 	if (iter != BaseClass2::m_componentsMap.end()){
-		return iter->second;
+		return iter.value();
 	}
 
 	return NULL;
@@ -90,9 +90,9 @@ IComponent* TSimComponentWrap<Base>::CreateSubcomponent(const std::string& compo
 {
 	FactoriesMap::const_iterator iter = m_factoriesMap.find(componentId);
 	if (iter != m_factoriesMap.end()){
-		I_ASSERT(iter->second != NULL);
+		I_ASSERT(iter.value() != NULL);
 
-		return iter->second->CreateInstance();
+		return iter.value()->CreateInstance();
 	}
 
 	return NULL;

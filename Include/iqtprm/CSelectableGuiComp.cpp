@@ -63,7 +63,7 @@ void CSelectableGuiComp::OnGuiModelDetached()
 		WidgetGuiMap::iterator foundGuiIter = m_widgetToGuiMap.find(pagePtr);
 		I_ASSERT(foundGuiIter != m_widgetToGuiMap.end());
 		if (foundGuiIter != m_widgetToGuiMap.end()){
-			foundGuiIter->second->DestroyGui();
+			foundGuiIter.value()->DestroyGui();
 		}
 	}
 

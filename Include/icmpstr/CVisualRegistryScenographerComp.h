@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 // Qt includes
 #include <QtCore/QObject>

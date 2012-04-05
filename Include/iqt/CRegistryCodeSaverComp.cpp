@@ -521,7 +521,7 @@ bool CRegistryCodeSaverComp::WriteHeader(
 
 	NextLine(stream);
 	stream << "typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;";
-	stream << "typedef std::map<icomp::CComponentAddress, RegistryPtr> RegistriesMap;";
+	stream << "typedef QMap<icomp::CComponentAddress, RegistryPtr> RegistriesMap;";
 
 	stream << std::endl;
 	ChangeIndent(-1);
@@ -879,7 +879,7 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 	ChangeIndent(1);
 
 	NextLine(stream);
-	stream << "return findIter->second.GetPtr();";
+	stream << "return findIter.value().GetPtr();";
 
 	ChangeIndent(-1);
 	NextLine(stream);
@@ -1010,8 +1010,8 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 		for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator interfaceIter = interfacesMap.begin();
 					interfaceIter != interfacesMap.end();
 					++interfaceIter){
-			const std::string& interfaceName = interfaceIter->first;
-			const std::string& componentName = interfaceIter->second;
+			const std::string& interfaceName = interfaceIter.key();
+			const std::string& componentName = interfaceIter.value();
 
 			NextLine(stream);
 			stream << registryCallPrefix << "SetElementInterfaceExported(";
@@ -1032,8 +1032,8 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 		for (		icomp::IRegistry::ExportedComponentsMap::const_iterator componentIter = componentsMap.begin();
 					componentIter != componentsMap.end();
 					++componentIter){
-			const std::string& exportedName = componentIter->first;
-			const std::string& componentName = componentIter->second;
+			const std::string& exportedName = componentIter.key();
+			const std::string& componentName = componentIter.value();
 
 			NextLine(stream);
 			stream << registryCallPrefix << "SetElementExported(";

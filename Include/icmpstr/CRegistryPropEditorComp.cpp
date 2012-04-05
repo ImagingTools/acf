@@ -39,8 +39,8 @@ void CRegistryPropEditorComp::CreateOverview()
 						iter != exportedInterfaces.end();
 						iter++){
 				QTreeWidgetItem* exportedInterfaceItemPtr = new QTreeWidgetItem();
-				exportedInterfaceItemPtr->setText(0, QString(iter->second.c_str()));
-				exportedInterfaceItemPtr->setText(1, QString(iter->first.c_str()));
+				exportedInterfaceItemPtr->setText(0, QString(iter.value().c_str()));
+				exportedInterfaceItemPtr->setText(1, QString(iter.key().c_str()));
 				exportedInterfacesItemPtr->addChild(exportedInterfaceItemPtr);		
 			}
 
@@ -59,8 +59,8 @@ void CRegistryPropEditorComp::CreateOverview()
 						iter != exportedComponents.end();
 						iter++){
 				QTreeWidgetItem* exportedComponentItemPtr = new QTreeWidgetItem();
-				exportedComponentItemPtr->setText(0, QString(iter->second.c_str()));
-				exportedComponentItemPtr->setText(1, QString(iter->first.c_str()));
+				exportedComponentItemPtr->setText(0, QString(iter.value().c_str()));
+				exportedComponentItemPtr->setText(1, QString(iter.key().c_str()));
 				exportedComponentsItemPtr->addChild(exportedComponentItemPtr);		
 			}
 

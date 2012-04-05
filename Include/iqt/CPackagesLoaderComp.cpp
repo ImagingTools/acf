@@ -32,7 +32,7 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistryFromFile(const QString& 
 	RegistriesMap::const_iterator iter = m_registriesMap.find(correctedPath);
 
 	if (iter != m_registriesMap.end()){
-		return iter->second.GetPtr();
+		return iter.value().GetPtr();
 	}
 
 	RegistryPtr& mapValue = m_registriesMap[correctedPath];
@@ -121,12 +121,12 @@ QString CPackagesLoaderComp::GetPackagePath(const std::string& packageId) const
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
-		return foundNormalIter->second;
+		return foundNormalIter.value();
 	}
 
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		return foundCompositeIter->second.directory.absolutePath();
+		return foundCompositeIter.value().directory.absolutePath();
 	}
 
 	return QString();
@@ -139,7 +139,7 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistry(const icomp::CComponent
 {
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		QString filePath = foundCompositeIter->second.directory.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
+		QString filePath = foundCompositeIter.value().directory.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
 
 		return GetRegistryFromFile(filePath);
 	}
@@ -158,7 +158,7 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 		for (		RealPackagesMap::const_iterator packageIter = m_realPackagesMap.begin();
 					packageIter != m_realPackagesMap.end();
 					++packageIter){
-			const std::string packageId = packageIter->first;
+			const std::string packageId = packageIter.key();
 
 			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageId);
 			if (packageInfoPtr != NULL){
@@ -182,7 +182,7 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 		for (		CompositePackagesMap::const_iterator packageIter = m_compositePackagesMap.begin();
 					packageIter != m_compositePackagesMap.end();
 					++packageIter){
-			const std::string packageId = packageIter->first;
+			const std::string packageId = packageIter.key();
 
 			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageId);
 			if (packageInfoPtr != NULL){
@@ -242,12 +242,12 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 				}
 			}
 		}
-		else if (foundIter->second != fileInfo.canonicalFilePath()){
+		else if (foundIter.value() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
 						QObject::tr("Second real package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter->second));
+									.arg(foundIter.value()));
 		}
 	}
 	else if (fileInfo.isDir()){
@@ -290,12 +290,12 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 
 			return true;
 		}
-		else if (foundIter->second.directory.canonicalPath() != fileInfo.canonicalFilePath()){
+		else if (foundIter.value().directory.canonicalPath() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
 						QObject::tr("Second composed package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter->second.directory.canonicalPath()));
+									.arg(foundIter.value().directory.canonicalPath()));
 		}
 	}
 
@@ -420,9 +420,9 @@ QLibrary& CPackagesLoaderComp::GetLibrary(const QFileInfo& fileInfo)
 
 	DllCacheMap::iterator iter = m_dllCacheMap.find(absolutePath);
 	if (iter != m_dllCacheMap.end()){
-		I_ASSERT(iter->second.IsValid());
+		I_ASSERT(iter.value().IsValid());
 
-		return *iter->second;
+		return *iter.value();
 	}
 
 	LibraryPtr& libraryPtr = m_dllCacheMap[absolutePath];

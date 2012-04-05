@@ -31,7 +31,7 @@ IRegistry::Ids CRegistry::GetElementIds() const
 	for (		ComponentsMap::const_iterator iter = m_componentsMap.begin();
 				iter != m_componentsMap.end();
 				++iter){
-		retVal.insert(iter->first);
+		retVal.insert(iter.key());
 	}
 
 	return retVal;
@@ -42,7 +42,7 @@ const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& eleme
 {
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
 	if (iter != m_componentsMap.end()){
-		return &(iter->second);
+		return &(iter.value());
 	}
 
 	return NULL;
@@ -88,7 +88,7 @@ bool CRegistry::RemoveElementInfo(const std::string& elementId)
 		isDone = true;      
 		for (		ExportedInterfacesMap::iterator iter = m_exportedInterfacesMap.begin();
 					iter != m_exportedInterfacesMap.end();){
-			if (iter->second == elementId){                         
+			if (iter.value() == elementId){                         
 				m_exportedInterfacesMap.erase(iter);
 				isDone = false;
 				break;
@@ -102,7 +102,7 @@ bool CRegistry::RemoveElementInfo(const std::string& elementId)
 		isDone = true;      
 		for (		ExportedComponentsMap::iterator iter = m_exportedComponentsMap.begin();
 					iter != m_exportedComponentsMap.end();){
-			if (iter->second == elementId){
+			if (iter.value() == elementId){
 				m_exportedComponentsMap.erase(iter);
 				isDone = false;
 				break;
@@ -112,7 +112,7 @@ bool CRegistry::RemoveElementInfo(const std::string& elementId)
 		}
 	}
 
-	if (m_componentsMap.erase(elementId) <= 0){
+	if (m_componentsMap.remove(elementId) <= 0){
 		return false;
 	}
 
@@ -126,7 +126,7 @@ IRegistry::Ids CRegistry::GetEmbeddedRegistryIds() const
 	for (		EmbeddedRegistriesMap::const_iterator iter = m_embeddedRegistriesMap.begin();
 				iter != m_embeddedRegistriesMap.end();
 				++iter){
-		retVal.insert(iter->first);
+		retVal.insert(iter.key());
 	}
 
 	return retVal;
@@ -137,9 +137,9 @@ IRegistry* CRegistry::GetEmbeddedRegistry(const std::string& registryId) const
 {
 	EmbeddedRegistriesMap::const_iterator iter = m_embeddedRegistriesMap.find(registryId);
 	if (iter != m_embeddedRegistriesMap.end()){
-		I_ASSERT(iter->second.IsValid());
+		I_ASSERT(iter.value().IsValid());
 
-		return iter->second.GetPtr();
+		return iter.value().GetPtr();
 	}
 
 	return NULL;
@@ -163,7 +163,7 @@ IRegistry* CRegistry::InsertEmbeddedRegistry(const std::string& registryId)
 
 bool CRegistry::RemoveEmbeddedRegistry(const std::string& registryId)
 {
-	if (m_embeddedRegistriesMap.erase(registryId) <= 0){
+	if (m_embeddedRegistriesMap.remove(registryId) <= 0){
 		return false;
 	}
 
@@ -187,7 +187,7 @@ bool CRegistry::RenameEmbeddedRegistry(const std::string& oldRegistryId, const s
 		return NULL;	// such ID exists yet!
 	}
 
-	newRegistryPtr.TakeOver(oldIter->second);
+	newRegistryPtr.TakeOver(oldIter.value());
 
 	m_embeddedRegistriesMap.erase(oldIter);
 
@@ -220,7 +220,7 @@ void CRegistry::SetElementInterfaceExported(
 	}
 	else{
 		ExportedInterfacesMap::iterator foundIter = m_exportedInterfacesMap.find(interfaceName);
-		if ((foundIter != m_exportedInterfacesMap.end()) && (foundIter->second == elementId)){
+		if ((foundIter != m_exportedInterfacesMap.end()) && (foundIter.value() == elementId)){
 			m_exportedInterfacesMap.erase(foundIter);
 		}
 	}
@@ -235,7 +235,7 @@ void CRegistry::SetElementExported(
 		m_exportedComponentsMap[exportId] = elementId;
 	}
 	else{
-		m_exportedComponentsMap.erase(exportId);
+		m_exportedComponentsMap.remove(exportId);
 	}
 }
 
@@ -266,13 +266,13 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 				index++){
 		std::string exportComponentId;
 		std::string subId;
-		std::string newExportId = index->second;
+		std::string newExportId = index.value();
 		istd::CIdManipBase::SplitId(newExportId, exportComponentId, subId);
 		if (exportComponentId == oldElementId){
 			newExportId = istd::CIdManipBase::JoinId(newElementId, subId);
 		}
 
-		newExportedComponentsMap[index->first] = newExportId;
+		newExportedComponentsMap[index.key()] = newExportId;
 	}
 
 	// calculate new interface exports:
@@ -280,19 +280,19 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 	for (		IRegistry::ExportedInterfacesMap::const_iterator index = m_exportedInterfacesMap.begin();
 				index != m_exportedInterfacesMap.end();
 				index++){
-		std::string elementId = index->second;
+		std::string elementId = index.value();
 		if (elementId == oldElementId){
 			elementId = newElementId;
 		}
 
-		newExportedInterfacesMap[index->first] = elementId;
+		newExportedInterfacesMap[index.key()] = elementId;
 	}
 
 	// execute rename transaction:
 	ComponentsMap::iterator oldElementIter = m_componentsMap.find(oldElementId);
 
-	CComponentAddress oldAdress = oldElementIter->second.address;
-	IRegistryElement* oldElementPtr = oldElementIter->second.elementPtr.GetPtr();
+	CComponentAddress oldAdress = oldElementIter.value().address;
+	IRegistryElement* oldElementPtr = oldElementIter.value().elementPtr.GetPtr();
 
 	if (InsertElementInfo(newElementId, oldAdress)){
 		ElementInfo& newElement = m_componentsMap[newElementId];
@@ -500,12 +500,12 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 		for (		ComponentsMap::iterator iter = m_componentsMap.begin();
 					iter != m_componentsMap.end();
 					++iter){
-			ElementInfo& element = iter->second;
+			ElementInfo& element = iter.value();
 
 			retVal = retVal && archive.BeginTag(elementTag);
 
 			retVal = retVal && archive.BeginTag(elementIdTag);
-			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< std::string&>(iter.key()));
 			retVal = retVal && archive.EndTag(elementIdTag);
 
 			retVal = retVal && element.address.Serialize(archive);
@@ -610,13 +610,13 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 		for (		EmbeddedRegistriesMap::iterator iter = m_embeddedRegistriesMap.begin();
 					iter != m_embeddedRegistriesMap.end();
 					++iter){
-			RegistryPtr& registryPtr = iter->second;
+			RegistryPtr& registryPtr = iter.value();
 			I_ASSERT(registryPtr.IsValid());
 
 			retVal = retVal && archive.BeginTag(registryTag);
 
 			retVal = retVal && archive.BeginTag(registryIdTag);
-			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< std::string&>(iter.key()));
 			retVal = retVal && archive.EndTag(registryIdTag);
 
 			retVal = retVal && archive.BeginTag(dataTag);
@@ -678,12 +678,12 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(interfaceTag);
 
 			retVal = retVal && archive.BeginTag(interfaceIdTag);
-			std::string interfaceName = iter->first;
+			std::string interfaceName = iter.key();
 			retVal = retVal && archive.Process(interfaceName);
 			retVal = retVal && archive.EndTag(interfaceIdTag);
 
 			retVal = retVal && archive.BeginTag(componentIdTag);
-			retVal = retVal && archive.Process(iter->second);
+			retVal = retVal && archive.Process(iter.value());
 			retVal = retVal && archive.EndTag(componentIdTag);
 
 			retVal = retVal && archive.EndTag(interfaceTag);
@@ -739,11 +739,11 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(componentTag);
 
 			retVal = retVal && archive.BeginTag(exportedIdTag);
-			retVal = retVal && archive.Process(const_cast< std::string&>(iter->first));
+			retVal = retVal && archive.Process(const_cast< std::string&>(iter.key()));
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
 			retVal = retVal && archive.BeginTag(componentIdTag);
-			retVal = retVal && archive.Process(iter->second);
+			retVal = retVal && archive.Process(iter.value());
 			retVal = retVal && archive.EndTag(componentIdTag);
 
 			retVal = retVal && archive.EndTag(componentTag);

@@ -206,7 +206,7 @@ private:
 	AttributeItemDelegate m_attributeItemDelegate;
 	RegistryObserver m_registryObserver;
 
-	typedef std::map<std::string, QString> AttributeTypesMap;
+	typedef QMap<std::string, QString> AttributeTypesMap;
 	AttributeTypesMap m_attributeTypesMap;
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_attributesTreeFilter;
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_interfacesTreeFilter;

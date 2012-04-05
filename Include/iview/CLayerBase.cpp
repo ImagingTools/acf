@@ -34,7 +34,7 @@ void CLayerBase::CalcBoundingBox(i2d::CRect& result) const
 	result.Reset();
 
 	for (ShapeMap::const_iterator iter = m_shapes.begin(); iter != m_shapes.end(); ++iter){
-		const i2d::CRect& boundingBox = iter->second;
+		const i2d::CRect& boundingBox = iter.value();
 		
 		result.Union(boundingBox);
 	}
@@ -74,8 +74,8 @@ void CLayerBase::UpdateAllShapes(int changeFlag)
 
 	if (IsVisible()){
 		for (ShapeMap::iterator iter = m_shapes.begin(); iter != m_shapes.end(); ++iter){
-			IShape* shapePtr = (*iter).first;
-			i2d::CRect& shapeBox = (*iter).second;
+			IShape* shapePtr = iter.key();
+			i2d::CRect& shapeBox = iter.value();
 
 			if (shapePtr->OnDisplayChange(changeFlag)){
 				shapeBox = shapePtr->GetBoundingBox();
@@ -100,9 +100,9 @@ void CLayerBase::DrawShapes(QPainter& drawContext)
 {
 	if (IsVisible()){
 		for (ShapeMap::iterator iter = m_shapes.begin(); iter != m_shapes.end(); ++iter){
-			iview::IShape* shapePtr = iter->first;
+			iview::IShape* shapePtr = iter.key();
 			if (shapePtr->IsVisible()){
-				const i2d::CRect& boundingBox = iter->second;
+				const i2d::CRect& boundingBox = iter.value();
 				i2d::CRect updateRect = iqt::GetCRect(drawContext.clipRegion().boundingRect());
 
 				if (!updateRect.IsOutside(boundingBox)){
@@ -123,7 +123,7 @@ void CLayerBase::OnChangeShape(IShape* shapePtr)
 	ShapeMap::iterator iter = m_shapes.find(shapePtr);
 	I_ASSERT(iter != m_shapes.end());
 
-	OnChangeShapeElement(*iter);
+	OnChangeShapeElement(iter);
 }
 
 

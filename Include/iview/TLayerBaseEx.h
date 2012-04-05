@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 // ACF includes
 #include "iview/IShape.h"
@@ -35,14 +35,13 @@ public:
 	virtual void OnAreaInvalidated(const i2d::CRect& prevArea, const i2d::CRect& newArea);
 
 protected:
-	typedef std::map<IShape*, i2d::CRect> ShapeMap;
-	typedef ShapeMap::value_type ShapeMapElement;
+	typedef QMap<IShape*, i2d::CRect> ShapeMap;
 
 	/**
 		\internal
 		Internal invalidate shape method.
 	*/
-	bool OnChangeShapeElement(ShapeMapElement& element);
+	bool OnChangeShapeElement(ShapeMap::Iterator elementIter);
 	
 	/**
 		\internal
@@ -124,15 +123,18 @@ void TLayerBaseEx<Layer, View>::OnAreaInvalidated(const i2d::CRect& prevArea, co
 // protected methods
 
 template <class Layer, class View>
-bool TLayerBaseEx<Layer, View>::OnChangeShapeElement(ShapeMapElement& element)
+bool TLayerBaseEx<Layer, View>::OnChangeShapeElement(ShapeMap::Iterator elementIter)
 {
-	I_ASSERT(element.first != NULL);
-	I_ASSERT(GetBoundingBox().IsInside(element.second));
+	I_ASSERT(elementIter.key() != NULL);
+	I_ASSERT(GetBoundingBox().IsInside(elementIter.value()));
 
-	const i2d::CRect oldBoundingBox = element.second;
-	element.second = element.first->GetBoundingBox();
+	const i2d::CRect oldBoundingBox = elementIter.value();
+	const iview::IShape* shapePtr = elementIter.key();
+	I_ASSERT(shapePtr != NULL);
 
-	OnAreaInvalidated(oldBoundingBox, element.second);
+	elementIter.value() = shapePtr->GetBoundingBox();
+
+	OnAreaInvalidated(oldBoundingBox, elementIter.value());
 
 	return true;
 }
@@ -141,8 +143,8 @@ bool TLayerBaseEx<Layer, View>::OnChangeShapeElement(ShapeMapElement& element)
 template <class Layer, class View>
 void TLayerBaseEx<Layer, View>::DisconnectShapeElement(ShapeMap& map, ShapeMap::iterator iter)
 {
-	iview::IShape* shapePtr = (*iter).first;
-	const i2d::CRect boundingBox = (*iter).second;
+	iview::IShape* shapePtr = iter.key();
+	const i2d::CRect boundingBox = iter.value();
 	map.erase(iter);
 
 	OnAreaInvalidated(i2d::CRect::GetEmpty(), boundingBox);

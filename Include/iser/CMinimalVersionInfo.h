@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -56,7 +56,7 @@ private:
 		QString description;
 	};
 
-	typedef std::map<int, Info> Versions;
+	typedef QMap<int, Info> Versions;
 
 	Versions m_versions;
 

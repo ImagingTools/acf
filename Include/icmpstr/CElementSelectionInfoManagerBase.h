@@ -51,10 +51,10 @@ protected:
 		istd::TPointerBase<const icomp::IAttributeStaticInfo> staticInfoPtr;
 	};
 
-	typedef std::map<std::string, AttrInfo> ElementIdToAttrInfoMap;
-	typedef std::map<std::string, ElementIdToAttrInfoMap> AttrInfosMap;
+	typedef QMap<std::string, AttrInfo> ElementIdToAttrInfoMap;
+	typedef QMap<std::string, ElementIdToAttrInfoMap> AttrInfosMap;
 
-	typedef std::map<icomp::CComponentAddress, istd::TOptDelPtr<const icomp::IComponentStaticInfo> > AddressToInfoMap;
+	typedef QMap<icomp::CComponentAddress, istd::TOptDelPtr<const icomp::IComponentStaticInfo> > AddressToInfoMap;
 
 	AddressToInfoMap m_adressToMetaInfoMap;
 };

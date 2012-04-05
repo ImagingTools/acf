@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -47,7 +47,7 @@ private:
 		bool isInitialized;
 	};
 
-	typedef std::map<std::string, ComponentInfo> EmbeddedComponentInfos;
+	typedef QMap<std::string, ComponentInfo> EmbeddedComponentInfos;
 	mutable EmbeddedComponentInfos m_embeddedComponentInfos;
 
 	std::string m_packageId;

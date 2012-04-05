@@ -32,7 +32,7 @@ const IComponentStaticInfo* CCompositePackageStaticInfo::GetEmbeddedComponentInf
 {
 	EmbeddedComponentInfos::iterator infoIter = m_embeddedComponentInfos.find(embeddedId);
 	if (infoIter != m_embeddedComponentInfos.end()){
-		ComponentInfo& info = infoIter->second;
+		ComponentInfo& info = infoIter.value();
 
 		if (!info.isInitialized){
 			info.isInitialized = true;
@@ -60,7 +60,7 @@ IElementStaticInfo::Ids CCompositePackageStaticInfo::GetMetaIds(int metaGroupId)
 		for (		EmbeddedComponentInfos::const_iterator iter = m_embeddedComponentInfos.begin();
 					iter != m_embeddedComponentInfos.end();
 					++iter){
-			retVal.insert(iter->first);
+			retVal.insert(iter.key());
 		}
 	}
 

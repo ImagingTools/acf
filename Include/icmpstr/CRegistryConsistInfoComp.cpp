@@ -365,7 +365,7 @@ QIcon CRegistryConsistInfoComp::GetComponentIcon(const icomp::CComponentAddress&
 		if (!infoPath.isEmpty()){
 			IconCache::const_iterator cachedIter = m_iconCache.find(address);
 			if (cachedIter != m_iconCache.end()){
-				return cachedIter->second;
+				return cachedIter.value();
 			}
 			else{
 				QIcon& icon = m_iconCache[address];

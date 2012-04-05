@@ -54,7 +54,7 @@ protected:
 private:
 	I_MULTIREF(idoc::IDocumentTemplate, m_slaveTemplatesCompPtr);
 
-	typedef std::map<std::string, const idoc::IDocumentTemplate*> IdToTemplateMap;
+	typedef QMap<std::string, const idoc::IDocumentTemplate*> IdToTemplateMap;
 	IdToTemplateMap m_idToTemplateMap;
 };
 

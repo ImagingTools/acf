@@ -39,7 +39,7 @@ QString CPackagesLoaderExtComp::GetPackageInfoPath(const std::string& packageId)
 {
 	PackageInfosMap::const_iterator foundPackageIter = m_packageInfosMap.find(packageId);
 	if (foundPackageIter != m_packageInfosMap.end()){
-		return foundPackageIter->second.absolutePath();
+		return foundPackageIter.value().absolutePath();
 	}
 
 	return "";
@@ -50,7 +50,7 @@ QString CPackagesLoaderExtComp::GetComponentInfoPath(const icomp::CComponentAddr
 {
 	PackageInfosMap::const_iterator foundPackageIter = m_packageInfosMap.find(address.GetPackageId());
 	if (foundPackageIter != m_packageInfosMap.end()){
-		return foundPackageIter->second.filePath(address.GetComponentId().c_str());
+		return foundPackageIter.value().filePath(address.GetComponentId().c_str());
 	}
 
 	return "";

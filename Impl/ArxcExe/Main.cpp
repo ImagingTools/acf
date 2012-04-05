@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 		for (		iqt::CSystem::EnvironmentVariables::const_iterator index = environmentVariables.begin();
 					index != environmentVariables.end();
 					++index){
-			std::cout << index->first.toStdString() << " = " << index->second.toStdString() << std::endl;
+			std::cout << index.key().toStdString() << " = " << index.value().toStdString() << std::endl;
 		}
 	}
 

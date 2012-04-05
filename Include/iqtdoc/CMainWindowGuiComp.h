@@ -205,7 +205,7 @@ private:
 	iqtgui::CHierarchicalCommand m_openDocumentFolderCommand;
 
 	typedef istd::TDelPtr<iqtgui::CHierarchicalCommand> RecentGroupCommandPtr;
-	typedef std::map<std::string, RecentGroupCommandPtr> RecentFilesMap;
+	typedef QMap<std::string, RecentGroupCommandPtr> RecentFilesMap;
 	RecentFilesMap m_recentFilesMap;
 
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);

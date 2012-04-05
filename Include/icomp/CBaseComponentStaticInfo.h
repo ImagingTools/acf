@@ -65,13 +65,13 @@ public:
 private:
 	const IRealComponentStaticInfo* m_baseComponentPtr;
 
-	typedef std::map<std::string, InterfaceExtractorPtr> InterfaceExtractors;
+	typedef QMap<std::string, InterfaceExtractorPtr> InterfaceExtractors;
 	InterfaceExtractors m_interfaceExtractors;
 
-	typedef std::map<std::string, const IElementStaticInfo*> SubelementInfos;
+	typedef QMap<std::string, const IElementStaticInfo*> SubelementInfos;
 	SubelementInfos m_subelementInfos;
 
-	typedef std::map<std::string, const IAttributeStaticInfo*> AttributeInfos;
+	typedef QMap<std::string, const IAttributeStaticInfo*> AttributeInfos;
 	AttributeInfos m_attributeInfos;
 };
 

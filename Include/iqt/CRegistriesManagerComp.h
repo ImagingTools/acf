@@ -6,7 +6,7 @@
 #include <QtCore/QDir>
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 #include "istd/TDelPtr.h"
 
@@ -81,17 +81,17 @@ private:
 	/**
 		Map package ID to package file path.
 	*/
-	typedef std::map<std::string, QString> RealPackagesMap;
+	typedef QMap<std::string, QString> RealPackagesMap;
 	RealPackagesMap m_realPackagesMap;
 
 	/**
 		Map package ID to directory.
 	*/
-	typedef std::map<std::string, QDir> CompositePackagesMap;
+	typedef QMap<std::string, QDir> CompositePackagesMap;
 	CompositePackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
-	typedef std::map<QString, RegistryPtr> RegistriesMap;
+	typedef QMap<QString, RegistryPtr> RegistriesMap;
 
 	mutable RegistriesMap m_registriesMap;
 

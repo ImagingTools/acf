@@ -55,7 +55,7 @@ protected:
 	I_REF(imod::IObserver, m_selectorObserverCompPtr);
 
 private:
-	typedef std::map<QWidget*, iqtgui::IGuiObject*> WidgetGuiMap;
+	typedef QMap<QWidget*, iqtgui::IGuiObject*> WidgetGuiMap;
 
 	WidgetGuiMap m_widgetToGuiMap;
 };

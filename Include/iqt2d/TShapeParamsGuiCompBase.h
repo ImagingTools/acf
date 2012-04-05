@@ -55,7 +55,7 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnAttached(imod::IModel* mo
 		for (		typename ShapesMap::const_iterator iter = shapesMap.begin();
 					iter != shapesMap.end();
 					++iter){
-			const Shapes& shapes = iter->second;
+			const Shapes& shapes = iter.value();
 			int shapesCount = shapes.GetCount();
 			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
 				Shape* shapePtr = dynamic_cast<Shape*>(shapes.GetAt(shapeIndex));
@@ -86,7 +86,7 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnDetached(imod::IModel* mo
 		for (		typename ShapesMap::const_iterator iter = shapesMap.begin();
 					iter != shapesMap.end();
 					++iter){
-			const Shapes& shapes = iter->second;
+			const Shapes& shapes = iter.value();
 			int shapesCount = shapes.GetCount();
 			for (int shapeIndex = 0; shapeIndex < shapesCount; ++shapeIndex){
 				Shape* shapePtr = dynamic_cast<Shape*>(shapes.GetAt(shapeIndex));
@@ -118,7 +118,7 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::UpdateShapeView()
 	for (		typename ShapesMap::const_iterator index = shapesMap.begin();
 				index != shapesMap.end();
 				index++){
-		IViewProvider* providerPtr = index->first;
+		IViewProvider* providerPtr = index.key();
 		I_ASSERT(providerPtr != NULL);
 
 		iview::IShapeView* viewPtr = providerPtr->GetView();

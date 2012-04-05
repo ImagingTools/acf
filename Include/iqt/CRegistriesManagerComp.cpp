@@ -63,12 +63,12 @@ QString CRegistriesManagerComp::GetPackagePath(const std::string& packageId) con
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
-		return foundNormalIter->second;
+		return foundNormalIter.value();
 	}
 
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(packageId);
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		return foundCompositeIter->second.absolutePath();
+		return foundCompositeIter.value().absolutePath();
 	}
 
 	return QString();
@@ -116,7 +116,7 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CCompon
 
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		QString filePath = foundCompositeIter->second.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
+		QString filePath = foundCompositeIter.value().absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
 
 		return GetRegistryFromFile(filePath);
 	}
@@ -135,7 +135,7 @@ const icomp::IRegistry* CRegistriesManagerComp::GetRegistryFromFile(const QStrin
 	RegistriesMap::const_iterator iter = m_registriesMap.find(correctedPath);
 
 	if (iter != m_registriesMap.end()){
-		return iter->second.GetPtr();
+		return iter.value().GetPtr();
 	}
 
 	RegistryPtr& mapValue = m_registriesMap[correctedPath];
@@ -167,12 +167,12 @@ void CRegistriesManagerComp::RegisterPackageFile(const QString& file)
 		if (foundIter == m_realPackagesMap.end()){
 			m_realPackagesMap[packageId] = fileInfo.canonicalFilePath();
 		}
-		else if (foundIter->second != fileInfo.canonicalFilePath()){
+		else if (foundIter.value() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
 						QObject::tr("Second real package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter->second));
+									.arg(foundIter.value()));
 		}
 	}
 	else if (fileInfo.isDir()){
@@ -192,12 +192,12 @@ void CRegistriesManagerComp::RegisterPackageFile(const QString& file)
 
 			m_compositePackagesMap[packageId] = packageDir;
 		}
-		else if (foundIter->second != fileInfo.canonicalFilePath()){
+		else if (foundIter.value() != fileInfo.canonicalFilePath()){
 			SendWarningMessage(
 						MI_CANNOT_REGISTER,
 						QObject::tr("Second composed package definition was ignored %1 (previous: %2)")
 									.arg(fileInfo.canonicalFilePath())
-									.arg(foundIter->second.canonicalPath()));
+									.arg(foundIter.value().canonicalPath()));
 		}
 	}
 }

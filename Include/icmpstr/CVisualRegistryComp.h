@@ -63,7 +63,7 @@ public:
 protected:
 	typedef imod::TModelWrap<istd::TChangeDelegator<CVisualRegistryElement> > Element;
 	typedef istd::TDelPtr<QIcon> IconPtr;
-	typedef std::map<icomp::CComponentAddress, IconPtr> IconMap;
+	typedef QMap<icomp::CComponentAddress, IconPtr> IconMap;
 
 	bool SerializeComponentInfo(
 				iser::IArchive& archive,

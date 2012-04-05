@@ -68,7 +68,7 @@ private:
 	I_REF(iser::IFileLoader, m_cacheLoaderCompPtr);
 	I_TREF(LockedProducerType, m_slaveCacheEngineCompPtr);
 
-	typedef std::map<Key, QString> KeyToFileNameMap;
+	typedef QMap<Key, QString> KeyToFileNameMap;
 	typedef std::list<Key> RecentlyUsedKeys;
 	typedef std::set<const CacheObject*> OwnedObjects;
 
@@ -89,7 +89,7 @@ const CacheObject* TFileCachedProducerCompBase<Key, CacheObject>::ProduceLockedO
 		QString cacheFilePath;
 		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
-			cacheFilePath = foundIter->second;
+			cacheFilePath = foundIter.value();
 			I_ASSERT(!cacheFilePath.isEmpty());
 		}
 		else{
@@ -191,7 +191,7 @@ void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 
 		typename KeyToFileNameMap::iterator foundIter = m_keyToFileNameMap.find(key);
 		if (foundIter != m_keyToFileNameMap.end()){
-			const QString& cacheFilePath = foundIter->second;
+			const QString& cacheFilePath = foundIter.value();
 
 			if (remove(cacheFilePath.toStdString().c_str()) != 0){
 				OnCacheFileRemoved(key, cacheFilePath);

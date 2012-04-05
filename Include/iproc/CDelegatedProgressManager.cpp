@@ -84,7 +84,7 @@ void CDelegatedProgressManager::EndProgressSession(int sessionId)
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
 	I_ASSERT(iter != m_progressMap.end());
 
-	const ProgressInfo& info = iter->second;
+	const ProgressInfo& info = iter.value();
 	m_progressSum -= info.progress;
 
 	if (info.isCancelable){
@@ -106,8 +106,8 @@ void CDelegatedProgressManager::OnProgress(int sessionId, double currentProgress
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
 	I_ASSERT(iter != m_progressMap.end());
 
-	m_progressSum += currentProgress - iter->second.progress;
-	iter->second.progress = currentProgress;
+	m_progressSum += currentProgress - iter.value().progress;
+	iter.value().progress = currentProgress;
 }
 
 

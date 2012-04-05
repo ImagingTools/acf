@@ -160,7 +160,7 @@ int CSimpleMainWindowGuiComp::SetupToolbar(const iqtgui::CHierarchicalCommand& c
 {
 	int childsCount = command.GetChildsCount();
 
-	std::map<int, QActionGroup*> groups;
+	QMap<int, QActionGroup*> groups;
 
 	for (int i = 0; i < childsCount; ++i){
 		iqtgui::CHierarchicalCommand* hierarchicalPtr = const_cast<iqtgui::CHierarchicalCommand*>(

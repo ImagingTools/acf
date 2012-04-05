@@ -67,9 +67,9 @@ protected:
 	virtual bool SerializeExportedComponents(iser::IArchive& archive);
 
 private:
-	typedef std::map<std::string, ElementInfo> ComponentsMap;
+	typedef QMap<std::string, ElementInfo> ComponentsMap;
 	typedef istd::TDelPtr<IRegistry> RegistryPtr;
-	typedef std::map<std::string, RegistryPtr> EmbeddedRegistriesMap;
+	typedef QMap<std::string, RegistryPtr> EmbeddedRegistriesMap;
 
 	ComponentsMap m_componentsMap;
 	EmbeddedRegistriesMap m_embeddedRegistriesMap;

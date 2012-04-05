@@ -4,7 +4,7 @@
 
 // STL includes
 #include <string>
-#include <map>
+#include <QtCore/QMap>
 
 
 // Qt includes
@@ -65,7 +65,7 @@ public:
 	/**
 		Map from file path to ducument type ID's.
 	*/
-	typedef std::map<QString, std::string> FileToTypeMap;
+	typedef QMap<QString, std::string> FileToTypeMap;
 
 	/**
 		Get flags of allowed operations.

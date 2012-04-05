@@ -375,7 +375,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 	for (		RootInfos::const_iterator toolTipIter = m_roots.begin();
 				toolTipIter != m_roots.end();
 				++toolTipIter){
-		const RootInfo& info = toolTipIter->second;
+		const RootInfo& info = toolTipIter.value();
 		if (info.itemPtr != NULL){
 			QString typeName;
 			if (info.hasRealComponents){

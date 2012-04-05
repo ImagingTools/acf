@@ -164,7 +164,7 @@ void CSimpleMainWindowGuiComp::CreateMenu(const iqtgui::CHierarchicalCommand& co
 
 	int childsCount = command.GetChildsCount();
 
-	std::map<int, QActionGroup*> groups;
+	QMap<int, QActionGroup*> groups;
 
 	for (int i = 0; i < childsCount; ++i){
 		QString text = command.text();

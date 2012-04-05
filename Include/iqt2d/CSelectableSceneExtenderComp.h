@@ -52,7 +52,7 @@ protected:
 private:
 	I_MULTIREF(iqt2d::IViewExtender, m_extendersCompPtr);
 
-	typedef std::map<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	typedef QMap<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
 
 	int m_currentSelectedIndex;

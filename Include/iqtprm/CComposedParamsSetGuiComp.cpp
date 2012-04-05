@@ -283,7 +283,7 @@ void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* provi
 
 	DetachFromScene(providerPtr);
 
-	m_connectedSceneFlags.erase(providerPtr);
+	m_connectedSceneFlags.remove(providerPtr);
 }
 
 
@@ -367,7 +367,7 @@ void CComposedParamsSetGuiComp::OnEditorChanged(int index)
 		for (		ConnectedSceneFlags::const_iterator iter = m_connectedSceneFlags.begin();
 					iter != m_connectedSceneFlags.end();
 					++iter){
-			iqt2d::IViewProvider* providerPtr = iter->first;
+			iqt2d::IViewProvider* providerPtr = iter.key();
 
 			DetachFromScene(providerPtr);
 		}
@@ -377,8 +377,8 @@ void CComposedParamsSetGuiComp::OnEditorChanged(int index)
 		for (		ConnectedSceneFlags::const_iterator iter = m_connectedSceneFlags.begin();
 					iter != m_connectedSceneFlags.end();
 					++iter){
-			iqt2d::IViewProvider* providerPtr = iter->first;
-			int flags = iter->second;
+			iqt2d::IViewProvider* providerPtr = iter.key();
+			int flags = iter.value();
 
 			AttachToScene(providerPtr, flags);
 		}

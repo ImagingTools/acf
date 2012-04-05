@@ -5,7 +5,7 @@
 // STL includes
 #include <string>
 #include <set>
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -58,12 +58,12 @@ public:
 	/**
 		Map assigning interface ID (undecorated) to component ID exporting this interface.
 	*/
-	typedef std::map<std::string, std::string> ExportedInterfacesMap;
+	typedef QMap<std::string, std::string> ExportedInterfacesMap;
 
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/
-	typedef std::map<std::string, std::string> ExportedComponentsMap;
+	typedef QMap<std::string, std::string> ExportedComponentsMap;
 
 	/**
 		Get ID list of existing elements.

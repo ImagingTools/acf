@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // Qt includes
@@ -39,7 +39,7 @@ public:
 	const QStringList& GetUnassignedKeywords() const;
 
 private:
-	typedef std::map<QString, QStringList> MetaValuesMap;
+	typedef QMap<QString, QStringList> MetaValuesMap;
 
 	MetaValuesMap m_metaValuesMap;
 	QStringList m_metaKeys;

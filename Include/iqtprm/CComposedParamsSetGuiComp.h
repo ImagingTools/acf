@@ -93,7 +93,7 @@ private:
 
 	int m_currentGuiIndex;
 
-	typedef std::map<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	typedef QMap<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
 };
 

@@ -63,7 +63,7 @@ void CVariableParamGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerP
 		}
 	}
 
-	m_connectedSceneFlags.erase(providerPtr);
+	m_connectedSceneFlags.remove(providerPtr);
 }
 
 
@@ -96,10 +96,10 @@ void CVariableParamGuiComp::AttachCurrentType()
 				for (		ConnectedSceneFlags::const_iterator sceneIter = m_connectedSceneFlags.begin();
 							sceneIter != m_connectedSceneFlags.end();
 							++sceneIter){
-					iqt2d::IViewProvider* providerPtr = sceneIter->first;
+					iqt2d::IViewProvider* providerPtr = sceneIter.key();
 					I_ASSERT(providerPtr != NULL);
 
-					extenderPtr->AddItemsToScene(providerPtr, sceneIter->second);
+					extenderPtr->AddItemsToScene(providerPtr, sceneIter.value());
 					iview::IShapeView* viewPtr = providerPtr->GetView();
 					if (viewPtr != NULL){
 						viewPtr->Update();
@@ -120,7 +120,7 @@ void CVariableParamGuiComp::DetachCurrentType()
 				for (		ConnectedSceneFlags::const_iterator sceneIter = m_connectedSceneFlags.begin();
 							sceneIter != m_connectedSceneFlags.end();
 							++sceneIter){
-					iqt2d::IViewProvider* providerPtr = sceneIter->first;
+					iqt2d::IViewProvider* providerPtr = sceneIter.key();
 					I_ASSERT(providerPtr != NULL);
 
 					extenderPtr->RemoveItemsFromScene(providerPtr);

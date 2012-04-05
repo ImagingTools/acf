@@ -3,7 +3,7 @@
 
 
 // STL incldues
-#include <map>
+#include <QtCore/QMap>
 #include <string>
 
 

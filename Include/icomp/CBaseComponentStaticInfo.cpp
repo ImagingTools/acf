@@ -70,7 +70,7 @@ void* CBaseComponentStaticInfo::GetComponentInterface(
 
 		InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(interfaceType.GetName());
 		if (foundIter != m_interfaceExtractors.end()){
-			InterfaceExtractorPtr extractorPtr = foundIter->second;
+			InterfaceExtractorPtr extractorPtr = foundIter.value();
 
 			return extractorPtr(component);
 		}
@@ -80,7 +80,7 @@ void* CBaseComponentStaticInfo::GetComponentInterface(
 
 			InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(nonConstType.GetName());
 			if (foundIter != m_interfaceExtractors.end()){
-				InterfaceExtractorPtr extractorPtr = foundIter->second;
+				InterfaceExtractorPtr extractorPtr = foundIter.value();
 
 				return extractorPtr(component);
 			}
@@ -101,7 +101,7 @@ const IAttributeStaticInfo* CBaseComponentStaticInfo::GetAttributeInfo(const std
 {
 	AttributeInfos::const_iterator fondIter = m_attributeInfos.find(attributeId);
 	if (fondIter != m_attributeInfos.end()){
-		return fondIter->second;
+		return fondIter.value();
 	}
 	else if (m_baseComponentPtr != NULL){
 		return m_baseComponentPtr->GetAttributeInfo(attributeId);
@@ -118,7 +118,7 @@ const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const std:
 {
 	SubelementInfos::const_iterator fondIter = m_subelementInfos.find(subcomponentId);
 	if (fondIter != m_subelementInfos.end()){
-		return fondIter->second;
+		return fondIter.value();
 	}
 	else if (m_baseComponentPtr != NULL){
 		return m_baseComponentPtr->GetSubelementInfo(subcomponentId);
@@ -141,21 +141,21 @@ IElementStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) co
 		for (		InterfaceExtractors::const_iterator iter = m_interfaceExtractors.begin();
 					iter != m_interfaceExtractors.end();
 					++iter){
-			retVal.insert(iter->first);
+			retVal.insert(iter.key());
 		}
 	}
 	else if (metaGroupId == MGI_ATTRIBUTES){
 		for (		AttributeInfos::const_iterator iter = m_attributeInfos.begin();
 					iter != m_attributeInfos.end();
 					++iter){
-			retVal.insert(iter->first);
+			retVal.insert(iter.key());
 		}
 	}
 	else if (metaGroupId == MGI_SUBELEMENTS){
 		for (		SubelementInfos::const_iterator iter = m_subelementInfos.begin();
 					iter != m_subelementInfos.end();
 					++iter){
-			retVal.insert(iter->first);
+			retVal.insert(iter.key());
 		}
 	}
 

@@ -48,8 +48,8 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const Q
 
 			PreviewCache::iterator foundCacheIter = m_previewCache.find(filePath);
 			if (foundCacheIter != m_previewCache.end()){
-				if (fileTimeStamp == foundCacheIter->second.fileTimeStamp){
-					if (bitmapPtr->CopyFrom(*foundCacheIter->second.fileBitmapPtr.GetPtr())){
+				if (fileTimeStamp == foundCacheIter.value().fileTimeStamp){
+					if (bitmapPtr->CopyFrom(*foundCacheIter.value().fileBitmapPtr.GetPtr())){
 						return StateOk;
 					}
 
@@ -141,17 +141,17 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(previewCacheElementTag);
 	
 			retVal = retVal && archive.BeginTag(filePathTag);
-			QString filePath = index->first;
+			QString filePath = index.key();
 			retVal = retVal && archive.Process(filePath);
 			retVal = retVal && archive.EndTag(filePathTag);
 
 			retVal = retVal && archive.BeginTag(fileTimeStampTag);
-			QDateTime fileTimeStamp = index->second.fileTimeStamp;
+			QDateTime fileTimeStamp = index.value().fileTimeStamp;
 			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, fileTimeStamp);
 			retVal = retVal && archive.EndTag(fileTimeStampTag);
 
 			retVal = retVal && archive.BeginTag(bitmapTag);
-			retVal = retVal && index->second.fileBitmapPtr->Serialize(archive);
+			retVal = retVal && index.value().fileBitmapPtr->Serialize(archive);
 			retVal = retVal && archive.EndTag(bitmapTag);
 
 			retVal = retVal && archive.EndTag(previewCacheElementTag);

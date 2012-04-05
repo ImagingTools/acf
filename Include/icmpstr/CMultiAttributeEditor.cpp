@@ -221,7 +221,7 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 	for (		IElementSelectionInfo::Elements::const_iterator elemIter = selectedElements.begin();
 				elemIter != selectedElements.end();
 				++elemIter){
-		const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter->second;
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter.value();
 		I_ASSERT(elementInfoPtr != NULL);
 		if (!elementInfoPtr->elementPtr.IsValid()){
 			continue;

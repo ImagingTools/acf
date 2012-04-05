@@ -72,7 +72,7 @@ private:
 	I_MULTIATTR(QString, m_typeIdsAttrPtr);
 	I_MULTIATTR(QString, m_typeNamesAttrPtr);
 
-	typedef std::map<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
+	typedef QMap<iqt2d::IViewProvider*, int> ConnectedSceneFlags;	// maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
 
 	imod::IModel* m_lastParamModelPtr;

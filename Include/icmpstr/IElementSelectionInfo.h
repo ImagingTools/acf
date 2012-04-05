@@ -35,7 +35,7 @@ public:
 		CF_SELECTION = 1 << 31
 	};
 
-	typedef std::map<std::string, const icomp::IRegistry::ElementInfo*> Elements;
+	typedef QMap<std::string, const icomp::IRegistry::ElementInfo*> Elements;
 
 	/**
 		Get registry containing selected element.

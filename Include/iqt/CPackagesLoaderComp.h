@@ -8,7 +8,7 @@
 #include <QtCore/QLibrary>
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 // ACF includes
 #include "istd/TDelPtr.h"
@@ -108,7 +108,7 @@ protected:
 
 private:
 	typedef istd::TDelPtr<QLibrary> LibraryPtr;
-	typedef std::map<QString, LibraryPtr> DllCacheMap;
+	typedef QMap<QString, LibraryPtr> DllCacheMap;
 
 	DllCacheMap m_dllCacheMap;
 
@@ -120,18 +120,18 @@ private:
 	/**
 		Map package ID to package file path.
 	*/
-	typedef std::map<std::string, QString> RealPackagesMap;
+	typedef QMap<std::string, QString> RealPackagesMap;
 	RealPackagesMap m_realPackagesMap;
 
 	/**
 		Map package ID to structure CompositePackageInfo.
 	*/
-	typedef std::map<std::string, CompositePackageInfo> CompositePackagesMap;
+	typedef QMap<std::string, CompositePackageInfo> CompositePackagesMap;
 	CompositePackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
-	typedef std::map<QString, RegistryPtr> RegistriesMap;
-	typedef std::map<const icomp::IRegistry*, QFileInfo> InvRegistriesMap;
+	typedef QMap<QString, RegistryPtr> RegistriesMap;
+	typedef QMap<const icomp::IRegistry*, QFileInfo> InvRegistriesMap;
 
 	mutable RegistriesMap m_registriesMap;
 	mutable InvRegistriesMap m_invRegistriesMap;

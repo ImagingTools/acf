@@ -3,7 +3,7 @@
 
 
 // STL includes
-#include <map>
+#include <QtCore/QMap>
 
 
 // ACF includes
@@ -40,25 +40,25 @@ public:
 	static const QString& GetElementSeparator();
 
 protected:
-	class CharToEntityMap: public std::map<char, std::string>
+	class CharToEntityMap: public QMap<char, std::string>
 	{
 	public:
 		CharToEntityMap();
 	};
 
-	class EntityToChartMap: public std::map<std::string, char>
+	class EntityToChartMap: public QMap<std::string, char>
 	{
 	public:
 		EntityToChartMap();
 	};
 
-	class WideCharToEntityMap: public std::map<QChar, std::string >
+	class WideCharToEntityMap: public QMap<QChar, std::string >
 	{
 	public:
 		WideCharToEntityMap();
 	};
 
-	class EntityToWideChartMap: public std::map<std::string, QChar>
+	class EntityToWideChartMap: public QMap<std::string, QChar>
 	{
 	public:
 		EntityToWideChartMap();

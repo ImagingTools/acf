@@ -90,7 +90,7 @@ void CAttributeEditorComp::on_AttributeTree_itemSelectionChanged()
 			if (selectionInfoPtr != NULL){
 				IElementSelectionInfo::Elements selectedElements = selectionInfoPtr->GetSelectedElements();
 				if (!selectedElements.empty()){
-					const icomp::IRegistry::ElementInfo* firstElementInfo = selectedElements.begin()->second;
+					const icomp::IRegistry::ElementInfo* firstElementInfo = selectedElements.begin().value();
 					I_ASSERT(firstElementInfo != NULL);
 
 					const icomp::IComponentStaticInfo* componentInfoPtr = GetComponentMetaInfo(firstElementInfo->address);
@@ -139,7 +139,7 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 		for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 					iter != selectedElements.end();
 					++iter){
-			const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+			const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 			I_ASSERT(selectedInfoPtr != NULL);
 
 			icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.Cast<icomp::IRegistryElement*>();
@@ -243,7 +243,7 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 	for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 				iter != selectedElements.end();
 				++iter){
-		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 		I_ASSERT(selectedInfoPtr != NULL);
 
 		istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(selectedInfoPtr->elementPtr.GetPtr(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
@@ -281,12 +281,12 @@ void CAttributeEditorComp::UpdateGeneralView()
 	for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 				iter != selectedElements.end();
 				++iter){
-		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 		I_ASSERT(selectedInfoPtr != NULL);
 
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 		if (elementPtr != NULL){
-			const std::string& elementId = iter->first;
+			const std::string& elementId = iter.key();
 
 			if (!names.isEmpty()){
 				names += "\n";
@@ -309,8 +309,8 @@ void CAttributeEditorComp::UpdateGeneralView()
 	for (		AddressToInfoMap::const_iterator infoIter = m_adressToMetaInfoMap.begin();
 				infoIter != m_adressToMetaInfoMap.end();
 				++infoIter){
-		const icomp::CComponentAddress& address = infoIter->first;
-		const icomp::IComponentStaticInfo* infoPtr = infoIter->second.GetPtr();
+		const icomp::CComponentAddress& address = infoIter.key();
+		const icomp::IComponentStaticInfo* infoPtr = infoIter.value().GetPtr();
 		if (infoPtr != NULL){
 			description = infoPtr->GetDescription();
 			
@@ -412,7 +412,7 @@ void CAttributeEditorComp::UpdateAttributesView()
 			for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 						iter != selectedElements.end();
 						++iter){
-				const std::string& elementId = iter->first;
+				const std::string& elementId = iter.key();
 
 				// check general element consistency
 				if (m_consistInfoCompPtr.IsValid()){
@@ -424,7 +424,7 @@ void CAttributeEditorComp::UpdateAttributesView()
 								NULL);
 				}
 
-				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 				I_ASSERT(selectedInfoPtr != NULL);
 
 				// creating map of attributes based on registry element data
@@ -464,8 +464,8 @@ void CAttributeEditorComp::UpdateAttributesView()
 			for (		AttrInfosMap::const_iterator treeIter = attrInfosMap.begin();
 						treeIter != attrInfosMap.end();
 						++treeIter, ++itemIndex){
-				const std::string& attributeId = treeIter->first;
-				const ElementIdToAttrInfoMap& attrInfos = treeIter->second;
+				const std::string& attributeId = treeIter.key();
+				const ElementIdToAttrInfoMap& attrInfos = treeIter.value();
 
 				QTreeWidgetItem* attributeItemPtr = NULL;
 				if (itemIndex < AttributeTree->topLevelItemCount()){
@@ -539,20 +539,20 @@ void CAttributeEditorComp::UpdateInterfacesView()
 			for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 						iter != selectedElements.end();
 						++iter){
-				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 				I_ASSERT(selectedInfoPtr != NULL);
 
 				const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 				if (elementPtr != NULL){
-					const std::string& elementId = iter->first;
+					const std::string& elementId = iter.key();
 
 					// create list of all interfaces exported by element
 					icomp::IElementStaticInfo::Ids elementInterfaceIds;
 					for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator regInterfaceIter = registryInterfaces.begin();
 								regInterfaceIter != registryInterfaces.end();
 								++regInterfaceIter){
-						if (regInterfaceIter->second == elementId){
-							elementInterfaceIds.insert(regInterfaceIter->first);
+						if (regInterfaceIter.value() == elementId){
+							elementInterfaceIds.insert(regInterfaceIter.key());
 						}
 					}
 
@@ -654,7 +654,7 @@ void CAttributeEditorComp::UpdateFlagsView()
 	for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 				iter != selectedElements.end();
 				++iter){
-		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 		I_ASSERT(selectedInfoPtr != NULL);
 
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
@@ -709,8 +709,8 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 			for (		IElementSelectionInfo::Elements::const_iterator iter = selectedElements.begin();
 						iter != selectedElements.end();
 						++iter){
-				const std::string& elementId = iter->first;
-				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter->second;
+				const std::string& elementId = iter.key();
+				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
 				I_ASSERT(selectedInfoPtr != NULL);
 
 				const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
@@ -795,8 +795,8 @@ bool CAttributeEditorComp::SetAttributeToItem(
 	for (		ElementIdToAttrInfoMap::const_iterator attrsIter = infos.begin();
 				attrsIter != infos.end();
 				++attrsIter){
-		const std::string& elementId = attrsIter->first;
-		const AttrInfo& attrInfo = attrsIter->second;
+		const std::string& elementId = attrsIter.key();
+		const AttrInfo& attrInfo = attrsIter.value();
 
 		if (m_consistInfoCompPtr.IsValid() && !m_consistInfoCompPtr->IsAttributeValid(
 						attributeId,
@@ -909,7 +909,7 @@ bool CAttributeEditorComp::SetAttributeToItem(
 		QString attributeTypeDescription;
 		AttributeTypesMap::const_iterator foundTypeName = m_attributeTypesMap.find(attributeTypeId);
 		if (foundTypeName != m_attributeTypesMap.end()){
-			attributeTypeDescription = foundTypeName->second;
+			attributeTypeDescription = foundTypeName.value();
 		}
 		else{
 			attributeTypeDescription = tr("unsupported attribute of type '%1'").arg(attributeTypeId.c_str());
@@ -1030,7 +1030,7 @@ bool CAttributeEditorComp::SetInterfaceToItem(
 	icomp::IRegistry::ExportedInterfacesMap::const_iterator foundExportIter = interfacesMap.find(interfaceName);
 	bool isInterfaceExported = false;
 	if (foundExportIter != interfacesMap.end()){
-		isInterfaceExported = (foundExportIter->second == elementId);
+		isInterfaceExported = (foundExportIter.value() == elementId);
 
 		if (isInterfaceExported && (hasExportPtr != NULL)){
 			*hasExportPtr = true;
@@ -1664,7 +1664,7 @@ void CAttributeEditorComp::AttributeItemDelegate::setModelData(QWidget* editor, 
 		for (		IElementSelectionInfo::Elements::const_iterator elemIter = selectedElements.begin();
 					elemIter != selectedElements.end();
 					++elemIter){
-			const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter->second;
+			const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter.value();
 			I_ASSERT(elementInfoPtr != NULL);
 
 			istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(elementInfoPtr->elementPtr.GetPtr(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
@@ -1754,7 +1754,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 	for (		IElementSelectionInfo::Elements::const_iterator elemIter = selectedElements.begin();
 				elemIter != selectedElements.end();
 				++elemIter){
-		const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter->second;
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter.value();
 		I_ASSERT(elementInfoPtr != NULL);
 		if (!elementInfoPtr->elementPtr.IsValid()){
 			continue;
@@ -1969,8 +1969,8 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentExportData(const s
 		for (icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
 					iter != exportedMap.end();
 					++iter){
-			if (iter->second == attributeId){
-				registryPtr->SetElementExported(iter->first, "");
+			if (iter.value() == attributeId){
+				registryPtr->SetElementExported(iter.key(), "");
 			}
 		}
 

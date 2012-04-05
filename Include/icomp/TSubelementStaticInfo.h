@@ -3,7 +3,7 @@
 
 
 // STL incldues
-#include <map>
+#include <QtCore/QMap>
 #include <string>
 
 
@@ -61,7 +61,7 @@ public:
 	};
 
 private:
-	typedef std::map<std::string, InterfaceExtractorPtr> InterfaceExtractors;
+	typedef QMap<std::string, InterfaceExtractorPtr> InterfaceExtractors;
 	InterfaceExtractors m_interfaceExtractors;
 };
 
@@ -100,7 +100,7 @@ IElementStaticInfo::Ids TSubelementStaticInfo<ComponentType>::GetMetaIds(int met
 		for (		typename InterfaceExtractors::const_iterator iter = m_interfaceExtractors.begin();
 					iter != m_interfaceExtractors.end();
 					++iter){
-			retVal.insert(iter->first);
+			retVal.insert(iter.key());
 		}
 	}
 
@@ -126,7 +126,7 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 
 		typename InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(interfaceType.GetName());
 		if (foundIter != m_interfaceExtractors.end()){
-			InterfaceExtractorPtr extractorPtr = foundIter->second;
+			InterfaceExtractorPtr extractorPtr = foundIter.value();
 
 			return extractorPtr(*nativeTypePtr);
 		}
@@ -136,7 +136,7 @@ void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 
 			typename InterfaceExtractors::const_iterator foundIter = m_interfaceExtractors.find(nonConstType.GetName());
 			if (foundIter != m_interfaceExtractors.end()){
-				InterfaceExtractorPtr extractorPtr = foundIter->second;
+				InterfaceExtractorPtr extractorPtr = foundIter.value();
 
 				return extractorPtr(*nativeTypePtr);
 			}

@@ -59,7 +59,7 @@ const IComponentStaticInfo* CPackageStaticInfo::GetEmbeddedComponentInfo(const s
 {
 	EmbeddedComponentInfos::const_iterator foundIter = m_embeddedComponentInfos.find(embeddedId);
 	if (foundIter != m_embeddedComponentInfos.end()){
-		return foundIter->second;
+		return foundIter.value();
 	}
 	else{
 		return NULL;
@@ -75,7 +75,7 @@ IElementStaticInfo::Ids CPackageStaticInfo::GetMetaIds(int metaGroupId) const
 		for (		EmbeddedComponentInfos::const_iterator iter = m_embeddedComponentInfos.begin();
 					iter != m_embeddedComponentInfos.end();
 					++iter){
-			retVal.insert(iter->first);
+			retVal.insert(iter.key());
 		}
 	}
 

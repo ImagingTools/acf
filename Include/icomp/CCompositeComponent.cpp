@@ -66,7 +66,7 @@ IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId)
 	else{
 		ComponentMap::const_iterator iter = m_componentMap.find(componentId);
 		if (iter != m_componentMap.end()){
-			return iter->second.componentPtr.GetPtr();
+			return iter.value().componentPtr.GetPtr();
 		}
 		else{
 			return NULL;
@@ -90,7 +90,7 @@ const IComponentContext* CCompositeComponent::GetSubcomponentContext(const std::
 	else{
 		ComponentMap::const_iterator iter = m_componentMap.find(componentId);
 		if (iter != m_componentMap.end()){
-			return iter->second.contextPtr.GetPtr();
+			return iter.value().contextPtr.GetPtr();
 		}
 		else{
 			return NULL;
@@ -123,7 +123,7 @@ void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPt
 	for (		ComponentMap::iterator iter = m_componentMap.begin();
 				iter != m_componentMap.end();
 				++iter){
-		ComponentInfo& info = iter->second;
+		ComponentInfo& info = iter.value();
 		if (info.componentPtr == subcomponentPtr){
 			I_ASSERT(info.isComponentInitialized);
 
@@ -183,7 +183,7 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		if (iter != interfaceInfos.end()){
 			std::string componentId;
 			std::string restId;
-			SplitId(iter->second, componentId, restId);
+			SplitId(iter.value(), componentId, restId);
 
 			IComponent* subComponentPtr = GetSubcomponent(componentId);
 			if (subComponentPtr != NULL){
@@ -200,7 +200,7 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 
 		IRegistry::ExportedComponentsMap::const_iterator iter = subcomponentMap.find(componentId);
 		if (iter != subcomponentMap.end()){
-			const std::string& realComponentId = iter->second;
+			const std::string& realComponentId = iter.value();
 			std::string subComponentId;
 			std::string subRestId;
 			SplitId(realComponentId, subComponentId, subRestId);
@@ -260,7 +260,7 @@ void CCompositeComponent::SetComponentContext(
 		for (		ComponentMap::iterator iter = m_componentMap.begin();
 					iter != m_componentMap.end();
 					++iter){
-			ComponentInfo& info = iter->second;
+			ComponentInfo& info = iter.value();
 
 			if (info.isComponentInitialized){
 				if (info.componentPtr.IsValid()){

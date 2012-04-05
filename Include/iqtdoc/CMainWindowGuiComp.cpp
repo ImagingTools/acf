@@ -329,14 +329,14 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 		for (		RecentFilesMap::const_iterator index = m_recentFilesMap.begin();
 					index != m_recentFilesMap.end();
 					index++){
-			std::string documentTypeId = index->first;
+			std::string documentTypeId = index.key();
 			I_ASSERT(!documentTypeId.empty());
 
 			retVal = retVal && archive.BeginTag(documentTypeIdTag);
 			retVal = retVal && archive.Process(documentTypeId);
 			retVal = retVal && archive.EndTag(documentTypeIdTag);
 
-			const RecentGroupCommandPtr& groupCommandPtr = index->second;
+			const RecentGroupCommandPtr& groupCommandPtr = index.value();
 
 			int elementsCount = groupCommandPtr.IsValid()? groupCommandPtr->GetChildsCount(): 0;
 
@@ -419,10 +419,10 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 	for (		idoc::IDocumentManager::FileToTypeMap::const_iterator iter = fileToTypeMap.begin();
 				iter != fileToTypeMap.end();
 				++iter){
-		QFileInfo fileInfo(iter->first);
+		QFileInfo fileInfo(iter.key());
 
 		QString filePath = fileInfo.absoluteFilePath();
-		const std::string documentTypeId = iter->second;
+		const std::string documentTypeId = iter.value();
 		I_ASSERT(!documentTypeId.empty());
 
 		RemoveFromRecentFileList(filePath);
@@ -452,7 +452,7 @@ void CMainWindowGuiComp::RemoveFromRecentFileList(const QString& filePath)
 	for (		RecentFilesMap::iterator iter = m_recentFilesMap.begin();
 				iter != m_recentFilesMap.end();
 				++iter){
-		RecentGroupCommandPtr& groupCommandPtr = iter->second;
+		RecentGroupCommandPtr& groupCommandPtr = iter.value();
 
 		if (!groupCommandPtr.IsValid()){
 			continue;
