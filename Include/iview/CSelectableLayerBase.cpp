@@ -396,12 +396,14 @@ bool CSelectableLayerBase::IsShapeConnected(IShape* shapePtr)
 }
 
 
-void CSelectableLayerBase::ConnectShape(IShape* shapePtr)
+bool CSelectableLayerBase::ConnectShape(IShape* shapePtr)
 {
 	IInteractiveShape* uiShapePtr = dynamic_cast<IInteractiveShape*>(shapePtr);
 	if (uiShapePtr != NULL){
-		ConnectInteractiveShape(uiShapePtr);
+		return ConnectInteractiveShape(uiShapePtr);
 	}
+
+	return false;
 }
 
 

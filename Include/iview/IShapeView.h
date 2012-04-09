@@ -12,14 +12,11 @@
 
 #include "iview/IDisplay.h"
 #include "iview/ISelectable.h"
+#include "iview/ISelectableLayer.h"
 
 
 namespace iview
 {
-
-
-class ILayer;
-class ISelectableLayer;
 
 
 /**
@@ -32,13 +29,6 @@ class IShapeView:
 public:
 	typedef IShapeObserver BaseClass;
 
-	enum LayerType
-	{
-		LT_NONE = 0,
-		LT_BACKGROUND = 1,
-		LT_INACTIVE = 2,
-		LT_ACTIVE = 4
-	};
 
 	/**
 		Set a screen transformation.
@@ -80,7 +70,7 @@ public:
 		\param	layerType	used to set standard layers. \sa iview::IShapeView::LayerType
 		\return	index of this layer.
 	*/
-	virtual int InsertLayer(ILayer* layerPtr, int index = -1, int layerType = LT_NONE) = 0;
+	virtual int InsertLayer(ILayer* layerPtr, int index = -1, int layerType = ILayer::LT_NONE) = 0;
 	
 	/**
 		Get index of layer.
@@ -108,22 +98,7 @@ public:
 		\param	shape	a shape object.
 		\return	true, if it was possible to connect this shape.
 	*/
-	virtual void ConnectShape(IShape* shapePtr, int layerIndex = -1) = 0;
-	
-	/**
-		Connect shape to default background layer.
-	*/
-	virtual void ConnectBackgroundShape(iview::IShape* shapePtr) = 0;
-	
-	/**
-		Connect shape to default inactive layer.
-	*/
-	virtual void ConnectInactiveShape(iview::IShape* shapePtr) = 0;
-	
-	/**
-		Connect shape to default active layer.
-	*/
-	virtual void ConnectActiveShape(iview::IInteractiveShape* shapePtr) = 0;
+	virtual bool ConnectShape(IShape* shapePtr) = 0;
 	
 	/**
 		Get focused layer.

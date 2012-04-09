@@ -60,7 +60,7 @@ void CCalibratedViewBase::InsertDefaultLayers()
 {
 	BaseClass::InsertDefaultLayers();
 
-	int layerIndex = InsertLayer(&m_calibrationLayer, 1, LT_CALIBRATION);
+	int layerIndex = InsertLayer(&m_calibrationLayer, 1, ILayer::LT_CALIBRATION);
 	SetLastBackgroundLayerIndex(layerIndex);
 }
 
@@ -71,7 +71,7 @@ int CCalibratedViewBase::InsertLayer(iview::ILayer* layerPtr, int index, int lay
 {
 	int result = BaseClass::InsertLayer(layerPtr, index, layerType);
 
-	if ((layerType & LT_CALIBRATION) != 0){
+	if (layerType == ILayer::LT_CALIBRATION){
 		m_calibrationLayerIndex = result;
 	}
 	else if (m_calibrationLayerIndex >= result){

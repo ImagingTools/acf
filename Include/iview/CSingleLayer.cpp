@@ -43,9 +43,12 @@ i2d::CRect CSingleLayer::GetBoundingBox() const
 }
 
 
-void CSingleLayer::ConnectShape(IShape* shapePtr)
+bool CSingleLayer::ConnectShape(IShape* shapePtr)
 {
 	I_ASSERT(m_shapePtr == NULL);
+	if (m_shapePtr != NULL){
+		return false;
+	}
 
 	shapePtr->OnConnectDisplay(this);
 	shapePtr->OnDisplayChange(CF_ALL);
@@ -54,6 +57,8 @@ void CSingleLayer::ConnectShape(IShape* shapePtr)
 	m_boundingBox = shapePtr->GetBoundingBox();
 
 	OnAreaInvalidated(i2d::CRect::GetEmpty(), m_boundingBox);
+
+	return true;
 }
 
 

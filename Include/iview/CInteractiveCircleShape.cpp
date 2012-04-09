@@ -1,15 +1,15 @@
 #include "iview/CInteractiveCircleShape.h"
 
 
-
-#include "i2d/CCircle.h"
-#include "iview/CScreenTransform.h"
-
+// Qt includes
 #include <QtGui/QPainter>
-
 
 // ACF includes
 #include "imod/IModel.h"
+
+#include "i2d/CCircle.h"
+
+#include "iview/CScreenTransform.h"
 
 
 namespace iview

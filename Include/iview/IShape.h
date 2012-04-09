@@ -9,6 +9,7 @@
 #include "i2d/CRect.h"
 
 #include "iview/IVisualizable.h"
+#include "iview/ILayer.h"
 
 
 namespace iview
@@ -32,6 +33,15 @@ public:
 		CF_CALIB = 1 << 20
 	};
 
+	/**
+		Get layer type of this shape object.
+		\sa ILayer::LayerType
+	*/
+	virtual int GetLayerType() const = 0;
+
+	/**
+		Get the model object associated with this shape.
+	*/
 	virtual imod::IModel* GetShapeModelPtr() const = 0;
 
 	/**	

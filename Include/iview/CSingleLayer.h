@@ -21,7 +21,7 @@ public:
 
 	// reimplemented (iview::ILayer)
 	virtual bool IsShapeConnected(IShape* shapePtr);
-	virtual void ConnectShape(IShape* shapePtr);
+	virtual bool ConnectShape(IShape* shapePtr);
 	virtual int GetShapesCount() const;
 	virtual void UpdateAllShapes(int changeFlag);
 	virtual void DisconnectAllShapes();

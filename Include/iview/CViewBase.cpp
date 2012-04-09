@@ -274,9 +274,9 @@ void CViewBase::RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr)
 
 void CViewBase::InsertDefaultLayers()
 {
-	InsertLayer(&m_backgroundLayer, -1, LT_BACKGROUND);
-	InsertLayer(&m_inactiveLayer, -1, LT_INACTIVE);
-	InsertLayer(&m_activeLayer, -1, LT_ACTIVE);
+	InsertLayer(&m_backgroundLayer, -1, ILayer::LT_BACKGROUND);
+	InsertLayer(&m_inactiveLayer, -1, ILayer::LT_INACTIVE);
+	InsertLayer(&m_activeLayer, -1, ILayer::LT_ACTIVE);
 }
 
 
@@ -319,21 +319,21 @@ int CViewBase::InsertLayer(ILayer* layerPtr, int index, int layerType)
 		m_layers.push_back(layerPtr);
 	}
 
-	if ((layerType & LT_INACTIVE) != 0){
+	if (layerType == ILayer::LT_INACTIVE){
 		m_inactiveLayerIndex = index;
 	}
 	else if (m_inactiveLayerIndex >= index){
 		m_inactiveLayerIndex++;
 	}
 
-	if ((layerType & LT_BACKGROUND) != 0){
+	if (layerType == ILayer::LT_BACKGROUND){
 		m_backgroundLayerIndex = index;
 	}
 	else if (m_backgroundLayerIndex >= index){
 		m_backgroundLayerIndex++;
 	}
 
-	if ((layerType & LT_ACTIVE) != 0){
+	if (layerType == ILayer::LT_ACTIVE){
 		m_activeLayerIndex = index;
 	}
 	else if (m_activeLayerIndex >= index){
@@ -402,7 +402,7 @@ void CViewBase::RemoveLayer(int index)
 }
 
 
-void CViewBase::ConnectShape(IShape* shapePtr, int layerIndex)
+bool CViewBase::ConnectShape(IShape* shapePtr)
 {
 	I_ASSERT(shapePtr != NULL);
 
@@ -410,23 +410,44 @@ void CViewBase::ConnectShape(IShape* shapePtr, int layerIndex)
 		InsertDefaultLayers();
 	}
 
-	I_ASSERT(layerIndex < GetLayersCount());
+	int layerType = shapePtr->GetLayerType();
+	int layerIndex = -1;
 
-	iview::IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(shapePtr);
+	iview::IInteractiveShape* activeShapePtr = dynamic_cast<iview::IInteractiveShape*>(shapePtr);
 
-	if (layerIndex < 0){
-		if ((uiShapePtr != NULL) && (m_activeLayerIndex >= 0)){
-			layerIndex = m_activeLayerIndex;
-		}
-		else if (m_inactiveLayerIndex >= 0){
+	switch (layerType){
+		case ILayer::LT_ACTIVE:
+			if (activeShapePtr != NULL){
+				layerIndex = m_activeLayerIndex;
+			}
+			else{
+				layerIndex = m_inactiveLayerIndex;
+			}
+
+			break;
+		
+		case ILayer::LT_INACTIVE:
 			layerIndex = m_inactiveLayerIndex;
-		}
+			break;
+		
+		case ILayer::LT_BACKGROUND:
+			layerIndex = m_backgroundLayerIndex;
+			break;
+		default:
+			return false;
 	}
 
-	I_ASSERT((layerIndex >= 0) && (layerIndex < GetLayersCount()));
+	if (layerIndex < 0){
+		return false;
+	}
+
+	I_ASSERT(layerIndex < GetLayersCount());
 
 	ILayer& layer = GetLayer(layerIndex);
+
 	layer.ConnectShape(shapePtr);
+
+	return true;
 }
 
 
@@ -540,51 +561,6 @@ void CViewBase::SetTransform(const i2d::CAffine2d& transform)
 void CViewBase::UpdateMousePointer()
 {
 	SetMousePointer(CalcMousePointer(m_lastMousePosition));
-}
-
-
-void CViewBase::ConnectBackgroundShape(iview::IShape* shapePtr)
-{
-	I_ASSERT(shapePtr != NULL);
-
-	if (GetLayersCount() <= 0){
-		InsertDefaultLayers();
-	}
-
-	I_ASSERT(m_backgroundLayerIndex >= 0);
-
-	ILayer& layer = GetLayer(m_backgroundLayerIndex);
-	layer.ConnectShape(shapePtr);
-}
-
-
-void CViewBase::ConnectInactiveShape(iview::IShape* shapePtr)
-{
-	I_ASSERT(shapePtr != NULL);
-
-	if (GetLayersCount() <= 0){
-		InsertDefaultLayers();
-	}
-
-	I_ASSERT(m_inactiveLayerIndex >= 0);
-
-	ILayer& layer = GetLayer(m_inactiveLayerIndex);
-	layer.ConnectShape(shapePtr);
-}
-
-
-void CViewBase::ConnectActiveShape(iview::IInteractiveShape* shapePtr)
-{
-	I_ASSERT(shapePtr != NULL);
-
-	if (GetLayersCount() <= 0){
-		InsertDefaultLayers();
-	}
-
-	I_ASSERT(m_activeLayerIndex >= 0);
-
-	ILayer& layer = GetLayer(m_activeLayerIndex);
-	layer.ConnectShape(shapePtr);
 }
 
 

@@ -56,7 +56,9 @@ void CImageViewComp::OnGuiCreated()
 	iview::CViewport& view = consolePtr->GetViewRef();
 	view.SetViewDraggable();
 
-	view.ConnectBackgroundShape(this);
+	AssignToLayer(iview::ILayer::LT_BACKGROUND);
+
+	view.ConnectShape(this);
 	view.ConnectCalibrationShape(&m_calibrationShape);
 }
 

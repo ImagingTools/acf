@@ -15,9 +15,41 @@ class IShape;
 class IShapeView;
 
 
+/**
+	Interface for a logical layer in the console view.
+
+*/
 class ILayer: virtual public IDisplay
 {
 public:
+	enum LayerType
+	{
+		/**
+			Layer type is not set.
+		*/
+		LT_NONE,
+
+		/**
+			Background layer.
+		*/
+		LT_BACKGROUND,
+
+		/**
+			Layer with inactive shapes. The user interaction with the shapes is impossible.
+		*/
+		LT_INACTIVE,
+
+		/**
+			Layer with active shapes.
+		*/
+		LT_ACTIVE,
+		
+		/**
+			Calibration layer.
+		*/
+		LT_CALIBRATION
+	};
+
 	/**
 		Called after layer is connected to view.
 	*/
@@ -45,7 +77,7 @@ public:
 		\param	active	if true, shape will be active, if false it will be only visible.
 		\return	true, if it was possible to connect this shape.
 	*/
-	virtual void ConnectShape(IShape* shapePtr) = 0;
+	virtual bool ConnectShape(IShape* shapePtr) = 0;
 	
 	/**
 		Get count of all shapes on this layer.

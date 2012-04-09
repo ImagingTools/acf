@@ -22,7 +22,8 @@ public:
 	/**
 		Standard flags for items .
 	*/
-	enum SceneFlags{
+	enum SceneFlags
+	{
 		/**
 			This flag is active if only shown elements will be used as background for other elements.
 		*/
@@ -30,7 +31,7 @@ public:
 		/**
 			This flag is set if this objects are added in direct call and will be reseted by delegation call to slave GUI's.
 		 */
-		SF_DIRECT = 2,
+		SF_DIRECT = 2
 	};
 
 	/**

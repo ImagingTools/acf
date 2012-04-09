@@ -5,12 +5,10 @@
 // ACF includes
 #include "i2d/CRectangle.h"
 
-
-#include "iview/CScreenTransform.h"
-
 #include "iview/ILogicalView.h"
 #include "iview/IDraggable.h"
 #include "iview/IMouseActionObserver.h"
+#include "iview/CScreenTransform.h"
 #include "iview/CSingleLayer.h"
 #include "iview/CLayerBase.h"
 #include "iview/CSelectableLayerBase.h"
@@ -128,15 +126,12 @@ public:
 	virtual void Update();
 	virtual bool IsViewDraggable() const;
 	virtual bool IsMultiselectable() const;
-	virtual int InsertLayer(ILayer* layerPtr, int index = -1, int layerType = LT_NONE);
+	virtual int InsertLayer(ILayer* layerPtr, int index = -1, int layerType = ILayer::LT_NONE);
 	virtual int GetLayerIndex(const ILayer& layer) const;
 	virtual void RemoveLayer(int index);
 	virtual int GetLayersCount() const;
 	virtual ILayer& GetLayer(int index) const;
-	virtual void ConnectShape(IShape* shapePtr, int layerIndex = -1);
-	virtual void ConnectBackgroundShape(iview::IShape* shapePtr);
-	virtual void ConnectInactiveShape(iview::IShape* shapePtr);
-	virtual void ConnectActiveShape(iview::IInteractiveShape* shapePtr);
+	virtual bool ConnectShape(IShape* shapePtr);
 	virtual ISelectableLayer* GetFocusedLayerPtr() const;
 	virtual void OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
 	virtual void OnShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);

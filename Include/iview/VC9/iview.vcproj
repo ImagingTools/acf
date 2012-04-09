@@ -518,10 +518,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\i2d::ITransformation2d.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IColorShema.h"
 				>
 			</File>

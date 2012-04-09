@@ -49,7 +49,7 @@ bool CLayerBase::IsShapeConnected(IShape* shapePtr)
 }
 
 
-void CLayerBase::ConnectShape(IShape* shapePtr)
+bool CLayerBase::ConnectShape(IShape* shapePtr)
 {
 	shapePtr->OnConnectDisplay(this);
 	shapePtr->OnDisplayChange(CF_ALL);
@@ -58,6 +58,8 @@ void CLayerBase::ConnectShape(IShape* shapePtr)
 	m_shapes[shapePtr] = boundingBox;
 
 	OnAreaInvalidated(i2d::CRect::GetEmpty(), boundingBox);
+
+	return true;
 }
 
 
