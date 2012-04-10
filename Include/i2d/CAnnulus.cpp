@@ -89,8 +89,8 @@ CRectangle CAnnulus::GetBoundingBox() const
 
 bool CAnnulus::operator == (const CAnnulus & ref) const
 {
-	double deltaInner = fabs( ref.GetInnerRadius() - GetInnerRadius() );
-	double deltaOuter = fabs( ref.GetOuterRadius() - GetOuterRadius() );
+	double deltaInner = qAbs( ref.GetInnerRadius() - GetInnerRadius() );
+	double deltaOuter = qAbs( ref.GetOuterRadius() - GetOuterRadius() );
 
 	return (deltaInner < I_BIG_EPSILON && deltaOuter < I_BIG_EPSILON) ? true : false;
 }

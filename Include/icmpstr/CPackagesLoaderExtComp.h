@@ -2,10 +2,8 @@
 #define icmpstr_CPackagesLoaderExtComp_included
 
 
-// STL includes
-#include <QtCore/QMap>
-
 // Qt includes
+#include <QtCore/QMap>
 #include <QtCore/QDir>
 
 // ACF includes
@@ -33,11 +31,11 @@ public:
 	virtual bool RegisterPackagesDir(const QString& subDir);
 
 	// reimplemented (icmpstr::IExternalMetaInfoManager)
-	virtual QString GetPackageInfoPath(const std::string& packageId) const;
+	virtual QString GetPackageInfoPath(const QByteArray& packageId) const;
 	virtual QString GetComponentInfoPath(const icomp::CComponentAddress& address) const;
 
 private:
-	typedef QMap<std::string, QDir> PackageInfosMap;
+	typedef QMap<QByteArray, QDir> PackageInfosMap;
 	PackageInfosMap m_packageInfosMap;
 };
 

@@ -39,7 +39,7 @@
               AllowedDockAreas
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DockAreas
@@ -58,7 +58,7 @@
               DockArea
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DockArea
@@ -74,7 +74,7 @@
               DockFeatures
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DockFeatures
@@ -90,7 +90,7 @@
               DockTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               DockTitle
@@ -109,7 +109,7 @@
               SlaveGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -149,7 +149,7 @@
               AllowOpenFile
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               AllowOpenFile
@@ -165,7 +165,7 @@
               FilterInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               FilterInfo
@@ -181,7 +181,7 @@
               ShowFileType
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowFileType
@@ -197,7 +197,7 @@
               ShowUserFilter
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowUserFilter
@@ -213,7 +213,7 @@
               UseSystemDecoratedIcons
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               UseSystemDecoratedIcons

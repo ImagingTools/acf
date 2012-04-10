@@ -2,9 +2,8 @@
 #define icomp_IComponent_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "istd/IPolymorphic.h"
@@ -46,7 +45,7 @@ public:
 		\param	interfaceType	requested interface.
 		\param	subId			some additional ID to identify subelement of this component.
 	*/
-	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "") = 0;
+	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId = "") = 0;
 
 	/**
 		Get access to component context describing all application-specified

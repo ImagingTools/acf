@@ -2,8 +2,8 @@
 #define istd_CCrcCalculator_included
 
 
-// STL includes
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/istd.h"
@@ -18,7 +18,7 @@ namespace istd
 class CCrcCalculator
 {
 public:
-	typedef std::vector<quint8> ByteStream;
+	typedef QVector<quint8> ByteStream;
 
 	static quint32 GetCrcFromData(const quint8* dataPtr, int dataSize);
 	static quint32 GetCrcFromStream(const ByteStream& byteStream);

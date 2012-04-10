@@ -50,7 +50,7 @@ bool CCompositeComponent::EndAutoInitBlock()
 
 // reimplemented (icomp::ICompositeComponent)
 
-IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId) const
+IComponent* CCompositeComponent::GetSubcomponent(const QByteArray& componentId) const
 {
 	if (m_contextPtr != NULL){
 		ComponentInfo& componentInfo = m_componentMap[componentId];
@@ -75,7 +75,7 @@ IComponent* CCompositeComponent::GetSubcomponent(const std::string& componentId)
 }
 
 
-const IComponentContext* CCompositeComponent::GetSubcomponentContext(const std::string& componentId) const
+const IComponentContext* CCompositeComponent::GetSubcomponentContext(const QByteArray& componentId) const
 {
 	if (m_contextPtr != NULL){
 		ComponentInfo& componentInfo = m_componentMap[componentId];
@@ -99,7 +99,7 @@ const IComponentContext* CCompositeComponent::GetSubcomponentContext(const std::
 }
 
 
-IComponent* CCompositeComponent::CreateSubcomponent(const std::string& componentId) const
+IComponent* CCompositeComponent::CreateSubcomponent(const QByteArray& componentId) const
 {
 	if (m_contextPtr != NULL){
 		ComponentPtr retVal;
@@ -155,7 +155,7 @@ const ICompositeComponent* CCompositeComponent::GetParentComponent(bool ownerOnl
 }
 
 
-void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId)
+void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId)
 {
 	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
 	if (contextPtr == NULL){
@@ -164,7 +164,7 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 
 	const IRegistry& registry = contextPtr->GetRegistry();
 
-	if (subId.empty()){
+	if (subId.isEmpty()){
 		const IRegistry::ExportedInterfacesMap& interfaceInfos = registry.GetExportedInterfacesMap();
 
 		IRegistry::ExportedInterfacesMap::const_iterator iter;
@@ -181,8 +181,8 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		}
 
 		if (iter != interfaceInfos.end()){
-			std::string componentId;
-			std::string restId;
+			QByteArray componentId;
+			QByteArray restId;
 			SplitId(iter.value(), componentId, restId);
 
 			IComponent* subComponentPtr = GetSubcomponent(componentId);
@@ -192,17 +192,17 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		}
 	}
 	else{
-		std::string componentId;
-		std::string restId;
+		QByteArray componentId;
+		QByteArray restId;
 		SplitId(subId, componentId, restId);
 
 		const IRegistry::ExportedComponentsMap& subcomponentMap = registry.GetExportedComponentsMap();
 
 		IRegistry::ExportedComponentsMap::const_iterator iter = subcomponentMap.find(componentId);
 		if (iter != subcomponentMap.end()){
-			const std::string& realComponentId = iter.value();
-			std::string subComponentId;
-			std::string subRestId;
+			const QByteArray& realComponentId = iter.value();
+			QByteArray subComponentId;
+			QByteArray subRestId;
 			SplitId(realComponentId, subComponentId, subRestId);
 
 			IComponent* subComponentPtr = GetSubcomponent(subComponentId);
@@ -242,7 +242,7 @@ void CCompositeComponent::SetComponentContext(
 		for (		IRegistry::Ids::const_iterator iter = elementIds.begin();
 					iter != elementIds.end();
 					++iter){
-			const std::string& elementId = *iter;
+			const QByteArray& elementId = *iter;
 			const IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementId);
 			I_ASSERT(infoPtr);	// ID must be valid, becouse it was taken using icomp::IRegistry::GetElementIds()!
 
@@ -277,7 +277,7 @@ void CCompositeComponent::SetComponentContext(
 // protected methods
 
 bool CCompositeComponent::CreateSubcomponentInfo(
-			const std::string& componentId,
+			const QByteArray& componentId,
 			ContextPtr& subContextPtr,
 			ComponentPtr* subComponentPtr,
 			bool isOwned) const
@@ -297,7 +297,7 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 		const IComponentEnvironmentManager& envManager = contextPtr->GetEnvironmentManager();
 
 		const IComponentStaticInfo* subComponentInfoPtr = NULL;
-		if (!elementAddress.GetPackageId().empty()){
+		if (!elementAddress.GetPackageId().isEmpty()){
 			subComponentInfoPtr = envManager.GetComponentMetaInfo(elementAddress);
 		}
 		else{
@@ -359,8 +359,8 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 bool CCompositeComponent::EnsureAutoInitComponentsCreated() const
 {
 	if (m_contextPtr != NULL){
-		while ((m_isAutoInitBlockCount <= 0) && !m_autoInitComponentIds.empty()){
-			std::string autoInitId = *m_autoInitComponentIds.begin();
+		while ((m_isAutoInitBlockCount <= 0) && !m_autoInitComponentIds.isEmpty()){
+			QByteArray autoInitId = *m_autoInitComponentIds.begin();
 
 			m_autoInitComponentIds.erase(m_autoInitComponentIds.begin());
 
@@ -374,7 +374,7 @@ bool CCompositeComponent::EnsureAutoInitComponentsCreated() const
 		}
 	}
 
-	return m_autoInitComponentIds.empty();
+	return m_autoInitComponentIds.isEmpty();
 }
 
 

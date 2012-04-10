@@ -2,9 +2,8 @@
 #define iprm_CParamsManagerComp_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/TSmartPtr.h"
@@ -73,7 +72,7 @@ public:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -92,7 +91,7 @@ private:
 		QString name;
 	};
 
-	typedef std::vector<ParamSet> ParamSets;
+	typedef QVector<ParamSet> ParamSets;
 
 	ParamSets m_paramSets;
 

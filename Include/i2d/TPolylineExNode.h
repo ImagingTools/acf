@@ -38,7 +38,7 @@ protected:
 	virtual void SetNodesCount(int count);
 
 private:
-	typedef ::std::vector<NodeData> NodesData;
+	typedef ::QVector<NodeData> NodesData;
 	NodesData m_nodesData;
 };
 

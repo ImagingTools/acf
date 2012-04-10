@@ -2,9 +2,8 @@
 #define iser_CArchiveTag_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "istd/istd.h"
@@ -31,14 +30,14 @@ public:
 		\param	comment				human readable and are used for diagnostic.
 		\param	isTagSkippingUsed	true if it is needed to support tag skipping for this tag.
 	*/
-	CArchiveTag(	const std::string& id,
-					const std::string& comment,
+	CArchiveTag(	const QByteArray& id,
+					const QByteArray& comment,
 					bool isTagSkippingUsed = false);
 
 	/**
 		Get ID of this tag.
 	*/
-	const std::string& GetId() const;
+	const QByteArray& GetId() const;
 
 	/**
 		Get automatic generated binary ID.
@@ -49,17 +48,17 @@ public:
 		Get comment of this tag.
 		Comments are human readable and are used for diagnostic.
 	*/
-	const std::string& GetComment() const;
+	const QByteArray& GetComment() const;
 	/**
 		Check if it is needed to support tag skipping for this tag.
 	*/
 	bool IsTagSkippingUsed() const;
 
 private:
-	std::string m_id;
+	QByteArray m_id;
 	quint32 m_binaryId;
 
-	std::string m_comment;
+	QByteArray m_comment;
 
 	bool m_isTagSkippingUsed;
 };

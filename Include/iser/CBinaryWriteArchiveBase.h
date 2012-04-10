@@ -33,7 +33,7 @@ public:
 	virtual bool Process(qint64& value);
 	virtual bool Process(float& value);
 	virtual bool Process(double& value);
-	virtual bool Process(std::string& value);
+	virtual bool Process(QByteArray& value);
 	virtual bool Process(QString& value);
 
 protected:

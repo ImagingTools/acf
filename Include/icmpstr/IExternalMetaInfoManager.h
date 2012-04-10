@@ -18,7 +18,7 @@ public:
 	/**
 		Get path of package info directory.
 	*/
-	virtual QString GetPackageInfoPath(const std::string& packageId) const = 0;
+	virtual QString GetPackageInfoPath(const QByteArray& packageId) const = 0;
 
 	/**
 		Get path of component info directory.

@@ -39,7 +39,7 @@
               Editors
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -60,7 +60,7 @@
               Ids
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -102,7 +102,7 @@
               FileTypeInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -142,7 +142,7 @@
               FileExtensions
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -163,7 +163,7 @@
               TypeDescriptions
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -205,7 +205,7 @@
               ParamsGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

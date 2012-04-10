@@ -2,6 +2,10 @@
 #define icmm_TComposedColorGradient_included	
 
 
+// Qt includes
+#include <QtCore/QPair>
+
+// ACF includes
 #include "imath/TColorGradient.h"
 
 
@@ -24,8 +28,8 @@ public:
 	virtual Result GetValueAt(const Argument& argument) const;
 
 private:
-	typedef std::pair<istd::CRange, Gradient> IntervallGradient;
-	typedef std::vector<IntervallGradient> Gradients;
+	typedef QPair<istd::CRange, Gradient> IntervallGradient;
+	typedef QVector<IntervallGradient> Gradients;
 	
 	Gradients m_gradients;
 };

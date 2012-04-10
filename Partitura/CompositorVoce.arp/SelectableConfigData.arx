@@ -39,7 +39,7 @@
               Parameters
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -60,7 +60,7 @@
               ParametersId
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -81,7 +81,7 @@
               SlaveSets
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               SlaveSets
@@ -118,7 +118,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               DefaultPath
@@ -134,7 +134,7 @@
               PathType
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               

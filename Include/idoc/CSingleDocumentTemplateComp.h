@@ -35,13 +35,13 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (idoc::IDocumentTemplate)
-	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId) const;
-	virtual istd::IChangeable* CreateDocument(const std::string& documentTypeId) const;
+	virtual iser::IFileLoader* GetFileLoader(const QByteArray& documentTypeId) const;
+	virtual istd::IChangeable* CreateDocument(const QByteArray& documentTypeId) const;
 	virtual istd::IPolymorphic* CreateView(
-				const std::string& documentTypeId,
+				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
-				const std::string& viewTypeId = std::string()) const;
-	imod::IUndoManager* CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const;
+				const QByteArray& viewTypeId = QByteArray()) const;
+	imod::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const;
 
 protected:
 	/**
@@ -59,7 +59,7 @@ protected:
 private:
 	I_ATTR(bool, m_isNewSupportedAttrPtr);
 	I_ATTR(bool, m_isEditSupportedAttrPtr);
-	I_ATTR(std::string, m_documentTypeIdAttrPtr);
+	I_ATTR(QByteArray, m_documentTypeIdAttrPtr);
 	I_ATTR(QString, m_documentTypeNameAttrPtr);
 	I_ATTR(QString, m_defaultDirectoryAttrPtr);
 	I_FACT(istd::IChangeable, m_documentCompFact);

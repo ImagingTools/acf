@@ -2,12 +2,11 @@
 #define iser_CXmlFileReadArchive_included
 
 
-// STL includes
-#include <fstream>
-
+// Qt includes
+#include <QtCore/QFile>
 
 // ACF includes
-#include "iser/TXmlStreamReadArchiveBase.h"
+#include "iser/CXmlStreamReadArchiveBase.h"
 #include "iser/CFileArchiveInfo.h"
 
 
@@ -25,11 +24,11 @@ namespace iser
 	\ingroup Persistence
 */
 class CXmlFileReadArchive:
-			public TXmlStreamReadArchiveBase<std::ifstream>,
+			public CXmlStreamReadArchiveBase,
 			public CFileArchiveInfo
 {
 public:
-	typedef TXmlStreamReadArchiveBase<std::ifstream> BaseClass;
+	typedef CXmlStreamReadArchiveBase BaseClass;
 	typedef CFileArchiveInfo BaseClass2;
 
 	explicit CXmlFileReadArchive(const QString& filePath, bool serializeHeader = true, const CArchiveTag& rootTag = s_acfRootTag);
@@ -42,6 +41,9 @@ protected:
 				int flags,
 				QString& message,
 				QString& messageSource) const;
+
+private:
+	QFile m_file;
 };
 
 

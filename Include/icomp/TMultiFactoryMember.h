@@ -58,7 +58,7 @@ public:
 		\param	subId			optionally ID parameter identifing subcomponent.
 		\return	pointer to interface or NULL, if such interface could not be extracted.
 	*/
-	static Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "");
+	static Interface* ExtractInterface(IComponent* componentPtr, const QByteArray& subId = "");
 
 protected:
 	TMultiFactoryMember(const TMultiFactoryMember& ptr);
@@ -98,12 +98,12 @@ IComponent* TMultiFactoryMember<Interface>::CreateComponent(int index) const
 	if ((m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
-			const std::string& componentId = BaseClass::operator[](index);
+			const QByteArray& componentId = BaseClass::operator[](index);
 
-			std::string baseId;
-			std::string subId;
+			QByteArray baseId;
+			QByteArray subId;
 			BaseClass2::SplitId(componentId, baseId, subId);
-			I_ASSERT(subId.empty());	// explicit subelement ID are not implemented correctly
+			I_ASSERT(subId.isEmpty());	// explicit subelement ID are not implemented correctly
 
 			return parentPtr->CreateSubcomponent(baseId);
 		}
@@ -133,7 +133,7 @@ Interface* TMultiFactoryMember<Interface>::CreateInstance(int index) const
 // static methods
 
 template <class Interface>
-Interface* TMultiFactoryMember<Interface>::ExtractInterface(IComponent* componentPtr, const std::string& subId)
+Interface* TMultiFactoryMember<Interface>::ExtractInterface(IComponent* componentPtr, const QByteArray& subId)
 {
 	return BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
 }

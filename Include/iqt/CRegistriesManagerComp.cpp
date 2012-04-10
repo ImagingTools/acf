@@ -43,7 +43,7 @@ bool CRegistriesManagerComp::LoadPackages(const QString& configFilePath)
 }
 
 
-int CRegistriesManagerComp::GetPackageType(const std::string& packageId) const
+int CRegistriesManagerComp::GetPackageType(const QByteArray& packageId) const
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
@@ -59,7 +59,7 @@ int CRegistriesManagerComp::GetPackageType(const std::string& packageId) const
 }
 
 
-QString CRegistriesManagerComp::GetPackagePath(const std::string& packageId) const
+QString CRegistriesManagerComp::GetPackagePath(const QByteArray& packageId) const
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
@@ -97,10 +97,10 @@ icomp::IExtPackagesManager::PathList CRegistriesManagerComp::GetConfigurationPat
 	}
 
 	PathList retVal;
-	retVal.insert(m_usedConfigFilesList.begin(), m_usedConfigFilesList.end());
-	retVal.insert(m_usedPackageDirsList.begin(), m_usedPackageDirsList.end());
-	retVal.insert(m_usedPackageFilesList.begin(), m_usedPackageFilesList.end());
-	retVal.insert(m_usedRegistryFilesList.begin(), m_usedRegistryFilesList.end());
+	retVal += m_usedConfigFilesList;
+	retVal += m_usedPackageDirsList;
+	retVal += m_usedPackageFilesList;
+	retVal += m_usedRegistryFilesList;
 
 	return retVal;
 }
@@ -110,13 +110,13 @@ icomp::IExtPackagesManager::PathList CRegistriesManagerComp::GetConfigurationPat
 
 const icomp::IRegistry* CRegistriesManagerComp::GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr) const
 {
-	if ((contextRegistryPtr != NULL) && address.GetPackageId().empty()){
+	if ((contextRegistryPtr != NULL) && address.GetPackageId().isEmpty()){
 		return contextRegistryPtr->GetEmbeddedRegistry(address.GetComponentId());
 	}
 
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		QString filePath = foundCompositeIter.value().absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
+		QString filePath = foundCompositeIter.value().absoluteFilePath(QString(address.GetComponentId()) + ".arx");
 
 		return GetRegistryFromFile(filePath);
 	}
@@ -158,7 +158,7 @@ void CRegistriesManagerComp::RegisterPackageFile(const QString& file)
 {
 	QFileInfo fileInfo(file);
 
-	std::string packageId(fileInfo.baseName().toStdString());
+	QByteArray packageId(fileInfo.baseName().toLocal8Bit());
 
 	SendVerboseMessage(QString("Register package file: ") + file);
 

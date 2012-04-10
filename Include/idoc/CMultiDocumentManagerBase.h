@@ -2,9 +2,8 @@
 #define idoc_CMultiDocumentManagerBase_included
 
 
-// STL includes
-#include <list>
-
+// Qt includes
+#include <QtCore/QList>
 
 // ACF includes
 #include "istd/TPointerVector.h"
@@ -34,18 +33,18 @@ public:
 	virtual istd::IPolymorphic* GetViewFromIndex(int documentIndex, int viewIndex) const;
 	virtual istd::IPolymorphic* GetActiveView() const;
 	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const;
-	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId = std::string());
-	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const;
+	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const QByteArray& viewTypeId = QByteArray());
+	virtual QByteArray GetDocumentTypeId(const istd::IChangeable& document) const;
 	virtual bool FileNew(
-				const std::string& documentTypeId, 
+				const QByteArray& documentTypeId, 
 				bool createView = true, 
-				const std::string& viewTypeId = "",
+				const QByteArray& viewTypeId = "",
 				istd::IChangeable** newDocumentPtr = NULL);
 	virtual bool FileOpen(
-				const std::string* documentTypeIdPtr,
+				const QByteArray* documentTypeIdPtr,
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
-				const std::string& viewTypeId = "",
+				const QByteArray& viewTypeId = "",
 				FileToTypeMap* loadedMapPtr = NULL);
 	virtual bool FileSave(
 				int documentIndex = -1,
@@ -58,13 +57,13 @@ protected:
 	typedef istd::TDelPtr<imod::IUndoManager> UndoManagerPtr;
 	typedef istd::TDelPtr<IDocumentStateComparator> StateComparatorPtr;
 	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
-	typedef std::list<ViewPtr> Views;
+	typedef QList<ViewPtr> Views;
 
 	struct SingleDocumentData: public DocumentInfo, public imod::CSingleModelObserverBase
 	{
 		SingleDocumentData(
 					CMultiDocumentManagerBase* parentPtr,
-					const std::string& documentTypeId,
+					const QByteArray& documentTypeId,
 					istd::IChangeable* documentPtr,
 					imod::IUndoManager* undoManagerPtr,
 					IDocumentStateComparator* stateComparatorPtr)
@@ -108,8 +107,8 @@ protected:
 	virtual istd::IChangeable* OpenDocument(
 				const QString& filePath,
 				bool createView,
-				const std::string& viewTypeId,
-				std::string& documentTypeId);
+				const QByteArray& viewTypeId,
+				QByteArray& documentTypeId);
 
 	virtual void CloseAllDocuments();
 
@@ -133,7 +132,7 @@ protected:
 	/**
 		Create instance of specified document without attaching to this manager.
 	*/
-	SingleDocumentData* CreateDocument(const std::string& documentTypeId, bool createView, const std::string& viewTypeId) const;
+	SingleDocumentData* CreateDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId) const;
 
 	/**
 		Register (attach) created document as new working document.
@@ -155,12 +154,12 @@ protected:
 	/**
 		Gets open file names.
 	*/
-	virtual QStringList GetOpenFilePaths(const std::string* documentTypeIdPtr = NULL) const  = 0;
+	virtual QStringList GetOpenFilePaths(const QByteArray* documentTypeIdPtr = NULL) const  = 0;
 
 	/**
 		Gets save file name.
 	*/
-	virtual QString GetSaveFilePath(const std::string& documentTypeId) const = 0;
+	virtual QString GetSaveFilePath(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Query user if this document can be closed.

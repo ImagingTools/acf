@@ -14,7 +14,7 @@ CComponentContext::CComponentContext(
 			const IRegistryElement* elementPtr,
 			const IComponentStaticInfo* staticInfoPtr,
 			const IComponentContext* parentPtr,
-			const std::string& contextId)
+			const QByteArray& contextId)
 :	m_registryElement(*elementPtr),
 	m_staticInfo(*staticInfoPtr),
 	m_parentPtr(parentPtr),
@@ -45,13 +45,13 @@ const IComponentContext* CComponentContext::GetParentContext() const
 }
 
 
-const iser::IObject* CComponentContext::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
+const iser::IObject* CComponentContext::GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr) const
 {
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);
 
 	if (infoPtr  != NULL){
-		const std::string& exportId = infoPtr->exportId;
-		if (!exportId.empty() && (m_parentPtr != NULL)){
+		const QByteArray& exportId = infoPtr->exportId;
+		if (!exportId.isEmpty() && (m_parentPtr != NULL)){
 			const iser::IObject* parentAttributePtr = NULL;
 			if (definitionLevelPtr != NULL){
 				int parentLevel = -1;

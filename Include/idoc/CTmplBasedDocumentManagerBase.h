@@ -25,12 +25,12 @@ public:
 	virtual int GetAllowedOperationFlags(const istd::IPolymorphic* viewPtr = NULL) const;
 
 	// reimplemented (idoc::IDocumentTypesInfo)
-	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const;
+	virtual bool IsFeatureSupported(int featureFlags, const QByteArray& documentTypeId) const;
 	virtual Ids GetDocumentTypeIds() const;
-	virtual QString GetDocumentTypeName(const std::string& documentTypeId) const;
-	virtual iser::IFileTypeInfo* GetDocumentFileTypeInfo(const std::string& documentTypeId) const;
+	virtual QString GetDocumentTypeName(const QByteArray& documentTypeId) const;
+	virtual iser::IFileTypeInfo* GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const;
 	virtual Ids GetDocumentTypeIdsForFile(const QString& filePath) const;
-	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const;
+	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const QByteArray* documentTypeIdPtr = NULL) const;
 
 protected:
 	virtual const idoc::IDocumentTemplate* GetDocumentTemplate() const;

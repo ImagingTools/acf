@@ -36,8 +36,8 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::IParamsSet)
-	virtual const iser::ISerializable* GetParameter(const std::string& id) const;
-	virtual iser::ISerializable* GetEditableParameter(const std::string& id);
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
 	// reimplemented (istd::IHierarchical)
 	virtual int GetHierarchicalFlags() const;

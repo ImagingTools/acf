@@ -59,7 +59,7 @@ protected:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 private:
 	I_MULTIREF(ibase::IFileConvertCopy, m_slaveConvertersCompPtr);

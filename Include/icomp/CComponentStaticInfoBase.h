@@ -3,9 +3,8 @@
 
 
 // STL incldues
+#include <QtCore/QByteArray>
 #include <QtCore/QMap>
-#include <string>
-
 
 // ACF includes
 #include "icomp/IComponentStaticInfo.h"
@@ -20,13 +19,13 @@ class CComponentStaticInfoBase: virtual public IComponentStaticInfo
 public:
 	// reimplemented (icomp::IComponentStaticInfo)
 	virtual int GetComponentType() const;
-	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const;
-	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
+	virtual const IAttributeStaticInfo* GetAttributeInfo(const QByteArray& attributeId) const;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
 	virtual const QString& GetDescription() const;
 	virtual const QString& GetKeywords() const;
 
 	//	reimplemented (icomp::IElementStaticInfo)
-	virtual const IElementStaticInfo* GetSubelementInfo(const std::string& subcomponentId) const;
+	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
 };
 

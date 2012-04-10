@@ -121,10 +121,10 @@ bool TReferenceMember<Interface>::EnsureInitialized() const
 	if (!m_isInitialized && (m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
-			const std::string& componentId = BaseClass::operator*();
+			const QByteArray& componentId = BaseClass::operator*();
 
-			std::string baseId;
-			std::string subId;
+			QByteArray baseId;
+			QByteArray subId;
 			BaseClass2::SplitId(componentId, baseId, subId);
 
 			IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);

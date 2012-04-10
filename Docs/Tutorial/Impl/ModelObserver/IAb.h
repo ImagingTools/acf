@@ -2,9 +2,8 @@
 #define IAb_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "iser/ISerializable.h"
@@ -54,12 +53,12 @@ public:
 	/**
 		Get the value of B
 	*/
-	virtual std::string GetB() const = 0;
+	virtual QByteArray GetB() const = 0;
 
 	/**
 		Set the value of B
 	*/
-	virtual void SetB(const std::string& b) = 0;
+	virtual void SetB(const QByteArray& b) = 0;
 };
 
 

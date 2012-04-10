@@ -41,8 +41,8 @@ public:
 	virtual const IAConstraints& GetAConstraints() const;
 	virtual int GetA() const;
 	virtual bool SetA(int a);
-	virtual std::string GetB() const;
-	virtual void SetB(const std::string& b);
+	virtual QByteArray GetB() const;
+	virtual void SetB(const QByteArray& b);
 
 	// reimplemented (IAConstraints)
 	virtual const istd::CRange& GetARange() const;
@@ -65,7 +65,7 @@ private:
 	/**
 		B
 	*/
-	std::string m_b;
+	QByteArray m_b;
 
 	/**
 		Constraints of A
@@ -80,7 +80,7 @@ private:
 	/**
 		Attribute for default value of B.
 	*/
-	I_ATTR(std::string, m_defaultBValueAttrPtr);
+	I_ATTR(QByteArray, m_defaultBValueAttrPtr);
 };
 
 

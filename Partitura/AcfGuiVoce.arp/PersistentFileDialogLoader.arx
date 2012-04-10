@@ -39,7 +39,7 @@
               Loaders
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               Loaders
@@ -55,7 +55,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -71,7 +71,7 @@
               StartupDirectory
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -111,7 +111,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -127,7 +127,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -143,7 +143,7 @@
               Object
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -162,7 +162,7 @@
               RootKey
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LastPathSettingsKey
@@ -199,7 +199,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               StartupDirectory
@@ -215,7 +215,7 @@
               PathType
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               

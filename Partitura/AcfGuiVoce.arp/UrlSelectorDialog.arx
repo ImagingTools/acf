@@ -39,7 +39,7 @@
               DialogIconPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               IconPath
@@ -55,7 +55,7 @@
               DialogTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               Title
@@ -71,7 +71,7 @@
               Gui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -90,7 +90,7 @@
               Model
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -109,7 +109,7 @@
               WorkingDataFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -149,7 +149,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -165,7 +165,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -181,7 +181,7 @@
               Object
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -200,7 +200,7 @@
               RootKey
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               SettingsRootKey
@@ -237,7 +237,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               DefaultUrl
@@ -253,7 +253,7 @@
               PathType
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               

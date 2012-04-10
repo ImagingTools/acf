@@ -139,12 +139,12 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 
 	painterPtr->setPen(Qt::black);
 
-	std::string componentName = objectPtr->GetName();
+	QByteArray componentName = objectPtr->GetName();
 
 	// draw component name:
 	const QFont& nameFont = m_registryView.GetElementNameFont();
 	painterPtr->setFont(nameFont);
-	painterPtr->drawText(mainRect, componentName.c_str(), Qt::AlignTop | Qt::AlignLeft);
+	painterPtr->drawText(mainRect, componentName, Qt::AlignTop | Qt::AlignLeft);
 
 	const QFont& detailFont = m_registryView.GetElementDetailFont();
 	painterPtr->setFont(detailFont);
@@ -159,7 +159,7 @@ void CRegistryElementShape::paint(QPainter* painterPtr, const QStyleOptionGraphi
 	int attributeIconSize = nameFontInfo.height();
 
 	// draw export interfaces icon:
-	if (!m_exportedInterfacesList.empty()){
+	if (!m_exportedInterfacesList.isEmpty()){
 		QRectF iconRect(
 					mainRect.right() - (attributeIconSize + SIDE_OFFSET) * ++iconsCount,
 					mainRect.top(),
@@ -236,14 +236,14 @@ void CRegistryElementShape::CalcExportedInteraces(const CVisualRegistryElement& 
 	const icomp::IRegistry* registryPtr = element.GetRegistry();
 
 	if (registryPtr != NULL){
-		const std::string& componentName = element.GetName();
+		const QByteArray& componentName = element.GetName();
 
 		const icomp::IRegistry::ExportedInterfacesMap& interfacesMap = registryPtr->GetExportedInterfacesMap();
 		for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator iter = interfacesMap.begin();
 					iter != interfacesMap.end();
 					++iter){
 			if (iter.value() == componentName){
-				m_exportedInterfacesList.push_back(iter.key().c_str());
+				m_exportedInterfacesList.push_back(iter.key());
 			}
 		}
 	}
@@ -263,9 +263,9 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	QString toolTip;
 
 	const icomp::CComponentAddress& address = element.GetAddress();
-	const std::string& packageId = address.GetPackageId();
-	if (!packageId.empty()){
-		m_addressString = QString(packageId.c_str()) + QString("/") + address.GetComponentId().c_str();
+	const QByteArray& packageId = address.GetPackageId();
+	if (!packageId.isEmpty()){
+		m_addressString = QString(packageId) + QString("/") + address.GetComponentId();
 
 		const IRegistryConsistInfo* constistInfoPtr = m_registryView.GetRegistryConsistInfo();
 		if (constistInfoPtr != NULL){
@@ -292,7 +292,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		}
 	}
 	else{
-		m_addressString = tr("Embedded: %1").arg(address.GetComponentId().c_str());
+		m_addressString = tr("Embedded: %1").arg(QString(address.GetComponentId()));
 		m_icon = QIcon(":/Icons/EmbeddedComponent.svg");
 
 		m_backgroundColor = QColor(200, 220, 255, 255);
@@ -313,9 +313,9 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	QFontMetrics nameFontInfo(m_registryView.GetElementNameFont());
 	QFontMetrics detailFontInfo(m_registryView.GetElementDetailFont());
 
-	const std::string& componentName = element.GetName();
+	const QByteArray& componentName = element.GetName();
 
-	int titleWidth = nameFontInfo.width(componentName.c_str());
+	int titleWidth = nameFontInfo.width(componentName);
 	int height = nameFontInfo.height() + detailFontInfo.height();
 
 	int attributeIconSize = nameFontInfo.height();
@@ -325,7 +325,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 
-	if ((!m_exportedInterfacesList.empty())){
+	if ((!m_exportedInterfacesList.isEmpty())){
 		titleWidth += attributeIconSize + SIDE_OFFSET;
 	}
 

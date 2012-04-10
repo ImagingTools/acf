@@ -2,10 +2,9 @@
 #define idoc_IDocumentManager_included
 
 
-// STL includes
-#include <string>
+// Qt includes
+#include <QtCore/QByteArray>
 #include <QtCore/QMap>
-
 
 // Qt includes
 #include <QtCore/QString>
@@ -46,7 +45,7 @@ public:
 	struct DocumentInfo
 	{
 		QString filePath;
-		std::string documentTypeId;
+		QByteArray documentTypeId;
 		bool isDirty;
 	};
 
@@ -65,7 +64,7 @@ public:
 	/**
 		Map from file path to ducument type ID's.
 	*/
-	typedef QMap<QString, std::string> FileToTypeMap;
+	typedef QMap<QString, QByteArray> FileToTypeMap;
 
 	/**
 		Get flags of allowed operations.
@@ -119,13 +118,13 @@ public:
 		\param	viewTypeId		ID of view type, if it will be created.
 		\return					Created view object
 	*/
-	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId = std::string()) = 0;
+	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const QByteArray& viewTypeId = QByteArray()) = 0;
 
 	/**
 		Get ID of document type managed by this object.
 		\return	ID of document type or empty string if no document is found.
 	*/
-	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const = 0;
+	virtual QByteArray GetDocumentTypeId(const istd::IChangeable& document) const = 0;
 
 	/**
 		Creates a new document with the document ID \c documentTypeId.
@@ -136,9 +135,9 @@ public:
 		\return	true, if success.
 	*/
 	virtual bool FileNew(
-				const std::string& documentTypeId, 
+				const QByteArray& documentTypeId, 
 				bool createView = true, 
-				const std::string& viewTypeId = "",
+				const QByteArray& viewTypeId = "",
 				istd::IChangeable** newDocumentPtr = NULL) = 0;
 
 	/**
@@ -150,10 +149,10 @@ public:
 		\param	loadedMapPtr		optional list of loaded files and its document type ID's.
 	*/
 	virtual bool FileOpen(
-				const std::string* documentTypeIdPtr = NULL,
+				const QByteArray* documentTypeIdPtr = NULL,
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
-				const std::string& viewTypeId = "",
+				const QByteArray& viewTypeId = "",
 				FileToTypeMap* loadedMapPtr = NULL) = 0;
 
 	/**

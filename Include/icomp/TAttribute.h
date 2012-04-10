@@ -42,13 +42,13 @@ public:
 	virtual void SetValue(const Value& value);
 
 	// reimplemented (iser::IObject)
-	virtual std::string GetFactoryId() const;
+	virtual QByteArray GetFactoryId() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
-	static std::string GetTypeName();
+	static QByteArray GetTypeName();
 
 protected:
 	Value m_value;
@@ -94,7 +94,7 @@ void TAttribute<Value>::SetValue(const Value& value)
 // reimplemented (iser::IObject)
 
 template <typename Value>
-std::string TAttribute<Value>::GetFactoryId() const
+QByteArray TAttribute<Value>::GetFactoryId() const
 {
 	return GetTypeName();
 }
@@ -121,23 +121,54 @@ bool TAttribute<Value>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value>
-std::string TAttribute<Value>::GetTypeName()
+QByteArray TAttribute<Value>::GetTypeName()
 {
-	if (typeid(Value) == typeid(std::string)){
-		return "icomp::TAttribute<std::string>";
-	}
-
 	return istd::CClassInfo::GetName<TAttribute<Value> >();
+}
+
+
+template <>
+inline QByteArray TAttribute<int>::GetTypeName()
+{
+	return "Integer";
+}
+
+
+template <>
+inline QByteArray TAttribute<double>::GetTypeName()
+{
+	return "Real";
+}
+
+
+template <>
+inline QByteArray TAttribute<bool>::GetTypeName()
+{
+	return "Boolean";
+}
+
+
+template <>
+inline QByteArray TAttribute<QString>::GetTypeName()
+{
+	return "String";
+}
+
+
+template <>
+inline QByteArray TAttribute<QByteArray>::GetTypeName()
+{
+	return "Id";
 }
 
 
 // typedefs
 
-typedef TAttribute<int> CIntAttribute;
-typedef TAttribute<double> CDoubleAttribute;
-typedef TAttribute<bool> CBoolAttribute;
+typedef TAttribute<int> CIntegerAttribute;
+typedef TAttribute<double> CRealAttribute;
+typedef TAttribute<bool> CBooleanAttribute;
 typedef TAttribute<QString> CStringAttribute;
-typedef TAttribute<std::string> CStdStringAttribute;
+typedef TAttribute<QByteArray> CIdAttribute;
 
 
 } // namespace icomp

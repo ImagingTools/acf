@@ -140,7 +140,7 @@ inline void CScaleCalibration::SetViewCenter(const i2d::CVector2d& center)
 inline bool CScaleCalibration::IsIdentity() const
 {
 	return	(m_viewCenter.GetLength2() < I_EPSILON) &&
-			(::fabs(m_scaleFactor) < I_EPSILON);
+			(qAbs(m_scaleFactor) < I_EPSILON);
 }
 
 

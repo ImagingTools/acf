@@ -1,10 +1,6 @@
 #include "iqt/CXmlFileReadArchive.h"
 
 
-// STL includes
-#include <sstream>
-#include <cstring>
-
 // Qt includes
 #include <QtCore/QFile>
 #include <QtXml/QDomNodeList>
@@ -33,7 +29,7 @@ CXmlFileReadArchive::CXmlFileReadArchive(
 bool CXmlFileReadArchive::OpenDocument(const QString& filePath)
 {
 	QFile file(filePath);
-	if (!file.open(QIODevice::ReadOnly)){
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
 		return false;
 	}
 
@@ -43,7 +39,7 @@ bool CXmlFileReadArchive::OpenDocument(const QString& filePath)
 		return false;
 	}
 
-	if (m_currentNode.nodeValue() != QString::fromStdString(m_rootTag.GetId())){
+	if (m_currentNode.nodeValue() != m_rootTag.GetId()){
 		QDomElement mainElement = m_document.documentElement();
 
 		m_currentNode = mainElement;
@@ -69,7 +65,7 @@ bool CXmlFileReadArchive::IsTagSkippingSupported() const
 
 bool CXmlFileReadArchive::BeginTag(const iser::CArchiveTag& tag)
 {
-	QString tagId(tag.GetId().c_str());
+	QString tagId(tag.GetId());
 
 	QDomElement element = m_currentNode.firstChildElement(tagId);
 	if (!element.isNull()){
@@ -81,7 +77,7 @@ bool CXmlFileReadArchive::BeginTag(const iser::CArchiveTag& tag)
 
 bool CXmlFileReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count)
 {
-	QString tagId(tag.GetId().c_str());
+	QString tagId(tag.GetId());
 
 	QDomElement element = m_currentNode.firstChildElement(tagId);
 	if (!element.isNull()){
@@ -92,10 +88,10 @@ bool CXmlFileReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, const iser
 	}
 
 	int tempCount = 0;
-	QDomElement child = element.firstChildElement(QString(subTag.GetId().c_str()));
+	QDomElement child = element.firstChildElement(QString(subTag.GetId()));
 	while (!child.isNull()){
 		tempCount++;
-		child = child.nextSiblingElement(QString(subTag.GetId().c_str()));
+		child = child.nextSiblingElement(QString(subTag.GetId()));
 	}
 	count = tempCount;
 
@@ -259,11 +255,11 @@ bool CXmlFileReadArchive::Process(double& value)
 }
 
 
-bool CXmlFileReadArchive::Process(std::string& value)
+bool CXmlFileReadArchive::Process(QByteArray& value)
 {
 	QString text = PullTextNode();
 
-	value = text.toStdString();
+	value = text.toLocal8Bit();
 
 	return true;
 }
@@ -285,7 +281,7 @@ bool CXmlFileReadArchive::ProcessData(void* dataPtr, int size)
 
 	quint8* data = (quint8*)dataPtr;
 
-	std::vector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toStdString());
+	QVector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text.toLocal8Bit());
 
 	I_ASSERT(size == int(decodedData.size()));
 

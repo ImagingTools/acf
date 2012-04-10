@@ -60,7 +60,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -97,7 +97,7 @@
               FitMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -137,7 +137,7 @@
               FileLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -156,7 +156,7 @@
               Object
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -175,7 +175,7 @@
               ObjectView
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

@@ -39,7 +39,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ApplicationName
@@ -55,7 +55,7 @@
               ApplicationSubname
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ApplicationSubname
@@ -71,7 +71,7 @@
               ApplicationType
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ApplicationType
@@ -87,7 +87,7 @@
               CompanyName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               CompanyName
@@ -103,7 +103,7 @@
               LegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LegalCopyright
@@ -119,7 +119,7 @@
               MainVersionId
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               MainVersionId
@@ -135,7 +135,7 @@
               ProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ProductName
@@ -151,7 +151,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               VersionInfo
@@ -188,7 +188,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -207,7 +207,7 @@
               FrameSpaceSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               FrameSpaceSize
@@ -223,7 +223,7 @@
               IconPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               IconPath
@@ -239,7 +239,7 @@
               MainGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               SplashScreen
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               SplashScreen
@@ -274,7 +274,7 @@
               SplashTime
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               SplashTime
@@ -290,7 +290,7 @@
               StyleSheet
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               StyleSheet
@@ -306,7 +306,7 @@
               TitleFormat
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               TitleFormat
@@ -325,7 +325,7 @@
               TranslationManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               TranslationManager
@@ -341,7 +341,7 @@
               UiStartMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               UiStartMode
@@ -378,7 +378,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -418,7 +418,7 @@
               AboutDialog
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               AboutDialog
@@ -434,7 +434,7 @@
               IconSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               IconSize
@@ -450,7 +450,7 @@
               IsMenuVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsMenuVisible
@@ -469,7 +469,7 @@
               IsToolbarVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsToolbarVisible
@@ -488,7 +488,7 @@
               MainWindowComponents
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               MainWindowComponents
@@ -504,7 +504,7 @@
               SettingsDialog
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               SettingsDialog
@@ -520,7 +520,7 @@
               SettingsProvider
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -539,7 +539,7 @@
               UseIconText
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               UseIconText
@@ -555,7 +555,7 @@
               Workspace
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MainView

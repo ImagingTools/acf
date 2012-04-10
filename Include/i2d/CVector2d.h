@@ -2,9 +2,8 @@
 #define i2d_CVector2d_included
 
 
-// STL includes
-#include <cmath>
-
+// Qt includes
+#include <QtCore/QtGlobal>
 
 // ACF includes
 #include "istd/CIndex2d.h"
@@ -228,7 +227,7 @@ inline CVector2d CVector2d::operator*(double scalar) const
 
 inline CVector2d CVector2d::operator/(double scalar) const
 {
-	if (::fabs(scalar) < I_BIG_EPSILON){
+	if (qAbs(scalar) < I_BIG_EPSILON){
 		scalar = (scalar > 0)? I_BIG_EPSILON: -I_BIG_EPSILON;
 	}
 

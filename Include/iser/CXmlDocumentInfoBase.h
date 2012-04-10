@@ -2,12 +2,9 @@
 #define iser_CXmlDocumentInfoBase_included
 
 
-// STL includes
-#include <QtCore/QMap>
-
-
-// ACF includes
+// Qt includes
 #include <QtCore/QString>
+#include <QtCore/QMap>
 
 
 namespace iser
@@ -33,32 +30,32 @@ public:
 	void SetCommentEnabled(bool state = true);
 
 	// static methods
-	static void EncodeXml(const std::string& text, std::string& xmlText);
-	static void DecodeXml(const std::string& xmlText, std::string& text);
-	static void EncodeXml(const QString& text, std::string& xmlText);
-	static void DecodeXml(const std::string& xmlText, QString& text);
+	static void EncodeXml(const QByteArray& text, QByteArray& xmlText);
+	static void DecodeXml(const QByteArray& xmlText, QByteArray& text);
+	static void EncodeXml(const QString& text, QByteArray& xmlText);
+	static void DecodeXml(const QByteArray& xmlText, QString& text);
 	static const QString& GetElementSeparator();
 
 protected:
-	class CharToEntityMap: public QMap<char, std::string>
+	class CharToEntityMap: public QMap<char, QByteArray>
 	{
 	public:
 		CharToEntityMap();
 	};
 
-	class EntityToChartMap: public QMap<std::string, char>
+	class EntityToChartMap: public QMap<QByteArray, char>
 	{
 	public:
 		EntityToChartMap();
 	};
 
-	class WideCharToEntityMap: public QMap<QChar, std::string >
+	class WideCharToEntityMap: public QMap<QChar, QByteArray >
 	{
 	public:
 		WideCharToEntityMap();
 	};
 
-	class EntityToWideChartMap: public QMap<std::string, QChar>
+	class EntityToWideChartMap: public QMap<QByteArray, QChar>
 	{
 	public:
 		EntityToWideChartMap();

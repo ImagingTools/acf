@@ -42,8 +42,8 @@ public:
 	CSelectableParamsSetComp();
 
 	// reimplemented (iprm::IParamsSet)
-	virtual const iser::ISerializable* GetParameter(const std::string& id) const;
-	virtual iser::ISerializable* GetEditableParameter(const std::string& id);
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
 	// reimplemented (iprm::ISelectionParam)
 	virtual const ISelectionConstraints* GetSelectionConstraints() const;
@@ -67,7 +67,7 @@ protected:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -94,7 +94,7 @@ private:
 	int m_selectedIndex;
 	CurrentParamsSetObserver m_currentParamsSetObserver;
 
-	I_ATTR(std::string, m_selectionIdAttrPtr);
+	I_ATTR(QByteArray, m_selectionIdAttrPtr);
 	I_ATTR(int, m_defaultIndexAttrPtr);
 	I_REF(IParamsManager, m_paramsManagerCompPtr);
 };

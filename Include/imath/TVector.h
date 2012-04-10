@@ -2,9 +2,7 @@
 #define imath_TVector_included
 
 
-// STL includes
-#include <cmath>
-
+// ACF includes
 #include "iser/IArchive.h"
 
 #include "imath/imath.h"
@@ -597,7 +595,7 @@ bool TVector<Size, Element>::Normalize(Element length)
 
     Element proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
         for (int i = 0; i < Size; ++i){
             m_elements[i] = m_elements[i] / proportion;
         }
@@ -617,7 +615,7 @@ bool TVector<Size, Element>::GetNormalized(TVector<Size, Element>& result, Eleme
 
     Element proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
         for (int i = 0; i < Size; ++i){
             result.m_elements[i] = m_elements[i] / proportion;
         }

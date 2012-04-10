@@ -89,7 +89,7 @@ bool CComposedParamsSetGuiComp::OnAttached(imod::IModel* modelPtr)
 
 		imod::IModel* parameterModelPtr = GetModelPtr();
 		if (!paramId.isEmpty() && (paramId != "*")){
-			parameterModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->GetEditableParameter(paramId.toStdString()));
+			parameterModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->GetEditableParameter(paramId.toLocal8Bit()));
 		}
 
 		imod::IObserver* observerPtr = m_observersCompPtr[i];
@@ -117,7 +117,7 @@ bool CComposedParamsSetGuiComp::OnDetached(imod::IModel* modelPtr)
 	for (int i = 0; i < elementsCount; ++i){
 		const QString& paramId = m_idsAttrPtr[i];
 
-		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->GetEditableParameter(paramId.toStdString()));
+		imod::IModel* parameterModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr->GetEditableParameter(paramId.toLocal8Bit()));
 		imod::IObserver* observerPtr = m_observersCompPtr[i];
 
 		if ((parameterModelPtr != NULL) && (observerPtr != NULL) && parameterModelPtr->IsAttached(observerPtr)){

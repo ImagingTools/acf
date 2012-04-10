@@ -7,14 +7,17 @@ namespace iser
 
 CXmlFileReadArchive::CXmlFileReadArchive(const QString& filePath, bool serializeHeader, const CArchiveTag& rootTag)
 :	BaseClass(rootTag),
-	BaseClass2(filePath)
+	BaseClass2(filePath),
+	m_file(filePath)
 {
-	m_stream.open(filePath.toStdString().c_str(), std::fstream::in);
+	if (m_file.open(QIODevice::ReadOnly | QIODevice::Text)){
+		m_stream.setDevice(&m_file);
 
-	SerializeXmlHeader();
+		SerializeXmlHeader();
 
-	if (serializeHeader){
-		SerializeAcfHeader();
+		if (serializeHeader){
+			SerializeAcfHeader();
+		}
 	}
 }
 
@@ -30,7 +33,7 @@ void CXmlFileReadArchive::DecorateMessage(
 			QString& message,
 			QString& /*messageSource*/) const
 {
-	message = m_filePath + "(" + QString("%1").arg(m_lastReadLine) + ") : " + message;
+	message = m_filePath + "(" + QString("%1").arg(GetLastReadLine()) + ") : " + message;
 }
 
 

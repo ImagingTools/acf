@@ -1,9 +1,6 @@
 #include "i2d/CDirection2d.h"
 
 
-// STL includes
-#include <math.h>
-
 // ACF includes
 #include "imath/imath.h"
 
@@ -13,14 +10,14 @@ namespace i2d
 
 
 CDirection2d::CDirection2d()
-	:m_direction(0.0)
+:	m_direction(0.0)
 {
 	I_ASSERT(Invariant());
 }
 
 
 CDirection2d::CDirection2d(const CDirection2d& direction)
-	:m_direction(direction.m_direction)
+:	m_direction(direction.m_direction)
 {
 	I_ASSERT(direction.Invariant());
 
@@ -29,7 +26,7 @@ CDirection2d::CDirection2d(const CDirection2d& direction)
 
 
 CDirection2d::CDirection2d(double radian)
-	:m_direction(radian)
+:	m_direction(radian)
 {
 	I_ASSERT(radian >= -I_PI - I_BIG_EPSILON);
 	I_ASSERT(radian <= I_PI + I_BIG_EPSILON);
@@ -43,10 +40,10 @@ double CDirection2d::DistInRadian(const CDirection2d& dir2) const
 	I_ASSERT(Invariant());
 	I_ASSERT(dir2.Invariant());
 
-	const double w1( qMin(m_direction, dir2.m_direction )); 
-	const double w2( qMax(m_direction, dir2.m_direction ));
+	double w1 = qMin(m_direction, dir2.m_direction); 
+	double w2 = qMax(m_direction, dir2.m_direction);
 
-	const double dist = qMin(w2-w1, I_2PI - (w2-w1));
+	double dist = qMin(w2 - w1, I_2PI - (w2 - w1));
 	
 	I_ASSERT(dist >= 0.0);
 	I_ASSERT(dist <= I_PI);
@@ -60,7 +57,7 @@ double CDirection2d::DistInDegree(const CDirection2d& dir2) const
 	I_ASSERT(Invariant());
 	I_ASSERT(dir2.Invariant());
 
-	const double dist(DistInRadian(dir2) / I_2PI * 360.0);
+	double dist = DistInRadian(dir2) / I_2PI * 360.0;
 
 	I_ASSERT(dist >= 0.0);
 	I_ASSERT(dist <= 180.0);
@@ -74,7 +71,7 @@ bool CDirection2d::operator==(const CDirection2d& dir2) const
 	I_ASSERT(Invariant());
 	I_ASSERT(dir2.Invariant());
 
-	return fabs(DistInRadian(dir2)) < I_BIG_EPSILON;
+	return qAbs(DistInRadian(dir2)) < I_BIG_EPSILON;
 }
 
 

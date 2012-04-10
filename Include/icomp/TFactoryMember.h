@@ -57,10 +57,10 @@ public:
 		\param	subId			optionally ID parameter identifing subcomponent.
 		\return	pointer to interface or NULL, if such interface could not be extracted.
 	*/
-	static Interface* ExtractInterface(istd::IPolymorphic* instancePtr, const std::string& subId = "");
+	static Interface* ExtractInterface(istd::IPolymorphic* instancePtr, const QByteArray& subId = "");
 
 	// reimplemented (istd::TIFactory)
-	virtual Interface* CreateInstance(const std::string& keyId = "") const;
+	virtual Interface* CreateInstance(const QByteArray& keyId = "") const;
 
 	// reimplemented (istd::IFactoryInfo)
 	virtual KeyList GetFactoryKeys() const;
@@ -103,12 +103,12 @@ IComponent* TFactoryMember<Interface>::CreateComponent() const
 	if ((m_definitionComponentPtr != NULL) && BaseClass::IsValid()){
 		const ICompositeComponent* parentPtr = m_definitionComponentPtr->GetParentComponent();
 		if (parentPtr != NULL){
-			const std::string& componentId = BaseClass::operator*();
+			const QByteArray& componentId = BaseClass::operator*();
 
-			std::string baseId;
-			std::string subId;
+			QByteArray baseId;
+			QByteArray subId;
 			BaseClass2::SplitId(componentId, baseId, subId);
-			I_ASSERT(subId.empty());	// explicit subelement ID are not implemented correctly
+			I_ASSERT(subId.isEmpty());	// explicit subelement ID are not implemented correctly
 
 			return parentPtr->CreateSubcomponent(baseId);
 		}
@@ -119,7 +119,7 @@ IComponent* TFactoryMember<Interface>::CreateComponent() const
 
 
 template <class Interface>
-Interface* TFactoryMember<Interface>::CreateInstance(const std::string& /*keyId*/) const
+Interface* TFactoryMember<Interface>::CreateInstance(const QByteArray& /*keyId*/) const
 {
 	istd::TDelPtr<IComponent> newComponentPtr(CreateComponent());
 	if (newComponentPtr.IsValid()){
@@ -149,7 +149,7 @@ istd::IFactoryInfo::KeyList TFactoryMember<Interface>::GetFactoryKeys() const
 // static methods
 
 template <class Interface>
-Interface* TFactoryMember<Interface>::ExtractInterface(istd::IPolymorphic* instancePtr, const std::string& subId)
+Interface* TFactoryMember<Interface>::ExtractInterface(istd::IPolymorphic* instancePtr, const QByteArray& subId)
 {
 	if (instancePtr != NULL){
 		icomp::IComponent* componentPtr = dynamic_cast<icomp::IComponent*>(instancePtr);

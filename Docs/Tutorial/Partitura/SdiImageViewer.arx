@@ -81,7 +81,7 @@
               DocumentFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -100,7 +100,7 @@
               DocumentLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -119,7 +119,7 @@
               ViewFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -180,7 +180,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -199,7 +199,7 @@
               ApplicationType
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -218,7 +218,7 @@
               CompanyName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -237,7 +237,7 @@
               DocumentTemplates
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               IsNestingEnabled
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -277,7 +277,7 @@
               LegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -296,7 +296,7 @@
               MainVersionId
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -315,7 +315,7 @@
               ProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -334,7 +334,7 @@
               ShowSplashProductType
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -353,7 +353,7 @@
               SplashScreenImage
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -372,7 +372,7 @@
               StyleSheet
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -391,7 +391,7 @@
               UiStartMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -410,7 +410,7 @@
               UseIconText
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -429,7 +429,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

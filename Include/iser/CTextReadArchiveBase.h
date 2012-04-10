@@ -2,9 +2,8 @@
 #define iser_CTextReadArchiveBase_included
 
 
-// STL includes
-#include <sstream>
-
+// Qt includes
+#include <QtCore/QTextStream>
 
 // ACF includes
 #include "iser/CReadArchiveBase.h"
@@ -50,10 +49,10 @@ protected:
 template <typename Type>
 bool CTextReadArchiveBase::ProcessInternal(Type& value)
 {
-	std::string elementText;
+	QByteArray elementText;
 
-	if (Process(elementText) && !elementText.empty()){
-		std::istringstream stream(elementText);
+	if (Process(elementText) && !elementText.isEmpty()){
+		QTextStream stream(&elementText, QIODevice::ReadOnly);
 
 		stream >> value;
 

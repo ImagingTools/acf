@@ -39,7 +39,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -55,7 +55,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -76,7 +76,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -95,7 +95,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -111,7 +111,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -130,7 +130,7 @@
               UseSubstitution
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -170,7 +170,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -186,7 +186,7 @@
               ExcludeFilters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               OtherExcludeFilters
@@ -202,7 +202,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -244,7 +244,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -263,7 +263,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -279,7 +279,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -298,7 +298,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -338,7 +338,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -354,7 +354,7 @@
               ExcludeFilters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -375,7 +375,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -432,7 +432,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -451,7 +451,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -467,7 +467,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -486,7 +486,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -526,7 +526,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -542,7 +542,7 @@
               ExcludeFilters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               SourceExcludeFilters
@@ -558,7 +558,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -579,7 +579,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -598,7 +598,7 @@
               LicensePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LicensePath
@@ -614,7 +614,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -630,7 +630,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -649,7 +649,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -689,7 +689,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -705,7 +705,7 @@
               ExcludeFilters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               SourceExcludeFilters
@@ -721,7 +721,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -745,7 +745,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -764,7 +764,7 @@
               LicensePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LicensePath
@@ -780,7 +780,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -796,7 +796,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -815,7 +815,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -855,7 +855,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -871,7 +871,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -892,7 +892,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -911,7 +911,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -927,7 +927,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -946,7 +946,7 @@
               UseSubstitution
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -986,7 +986,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1002,7 +1002,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1023,7 +1023,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1042,7 +1042,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1058,7 +1058,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1077,7 +1077,7 @@
               UseSubstitution
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -1096,7 +1096,7 @@
               UserSubstitutionTags
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               InstallScriptTags
@@ -1112,7 +1112,7 @@
               UserSubstitutionValues
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               InstallScriptValues
@@ -1149,7 +1149,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1165,7 +1165,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1186,7 +1186,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LicenseInputDir
@@ -1202,7 +1202,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1218,7 +1218,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1258,7 +1258,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1274,7 +1274,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1313,7 +1313,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1332,7 +1332,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1348,7 +1348,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1367,7 +1367,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -1407,7 +1407,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1423,7 +1423,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1444,7 +1444,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1463,7 +1463,7 @@
               LicensePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LicensePath
@@ -1479,7 +1479,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1495,7 +1495,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1535,7 +1535,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1551,7 +1551,7 @@
               ExcludeFilters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1593,7 +1593,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1617,7 +1617,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1636,7 +1636,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1652,7 +1652,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1671,7 +1671,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -1711,7 +1711,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1727,7 +1727,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1790,7 +1790,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1809,7 +1809,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1825,7 +1825,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1844,7 +1844,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -1884,7 +1884,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -1900,7 +1900,7 @@
               ExcludeFilters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               SourceExcludeFilters
@@ -1916,7 +1916,7 @@
               Filters
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -1943,7 +1943,7 @@
               InputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -1962,7 +1962,7 @@
               LicensePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LicensePath
@@ -1978,7 +1978,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -1994,7 +1994,7 @@
               OutputDir
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -2013,7 +2013,7 @@
               RecursionDepth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -2053,7 +2053,7 @@
               Instances
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               

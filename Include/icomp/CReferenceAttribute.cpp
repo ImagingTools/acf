@@ -7,7 +7,7 @@ namespace icomp
 
 // reimplemented (iser::IObject)
 
-std::string CReferenceAttribute::GetFactoryId() const
+QByteArray CReferenceAttribute::GetFactoryId() const
 {
 	return GetTypeName();
 }
@@ -15,9 +15,9 @@ std::string CReferenceAttribute::GetFactoryId() const
 
 // static methods
 
-std::string CReferenceAttribute::GetTypeName()
+QByteArray CReferenceAttribute::GetTypeName()
 {
-	return "icomp::CReferenceAttribute";
+	return "Reference";
 }
 
 

@@ -236,7 +236,7 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 	InterfaceFilter filter;
 
 	if (attributeStaticInfoPtr != NULL){
-		const std::string attributeType = attributeStaticInfoPtr->GetAttributeTypeName();
+		const QByteArray attributeType = attributeStaticInfoPtr->GetAttributeTypeName();
 		bool isReference = (attributeType == icomp::CReferenceAttribute::GetTypeName());
 		bool isMultiReference = (attributeType == icomp::CMultiReferenceAttribute::GetTypeName());
 		bool isFactory = (attributeType == icomp::CFactoryAttribute::GetTypeName());
@@ -247,14 +247,14 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 						icomp::IComponentStaticInfo::MGI_INTERFACES,
 						0,
 						icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
-			if (interfaceNames.empty()){
+			if (interfaceNames.isEmpty()){
 				interfaceNames = attributeStaticInfoPtr->GetRelatedMetaIds(
 							icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interfaces
 			}
 
-			if (!interfaceNames.empty()){
-				const std::string& interfaceName = *interfaceNames.begin();
-				int index = InterfaceCB->findText(interfaceName.c_str());
+			if (!interfaceNames.isEmpty()){
+				const QByteArray& interfaceName = *interfaceNames.begin();
+				int index = InterfaceCB->findText(interfaceName);
 				if (index > 0){
 					filter.insert(interfaceName);
 
@@ -267,7 +267,7 @@ void CPackageOverviewComp::OnAttributeSelected(const icomp::IAttributeStaticInfo
 	if (filter != m_interfaceFilter){
 		m_interfaceFilter = filter;
 
-		if (filter.empty()){
+		if (filter.isEmpty()){
 			iqt::CSignalBlocker blocker(InterfaceCB);
 
 			InterfaceCB->setCurrentIndex(0);
@@ -305,9 +305,9 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 		}
 
 		QStringList groupIds;
-		std::string elementName;
+		QByteArray elementName;
 
-		if (!address.GetPackageId().empty()){
+		if (!address.GetPackageId().isEmpty()){
 			elementName += address.GetPackageId() + "/";
 		}
 		else{
@@ -322,8 +322,8 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 			break;
 
 		case GM_PACKAGE:
-			if (!address.GetPackageId().empty()){
-				groupIds.push_back(address.GetPackageId().c_str());
+			if (!address.GetPackageId().isEmpty()){
+				groupIds.push_back(address.GetPackageId());
 			}
 
 			elementName = address.GetComponentId();
@@ -363,9 +363,9 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 						address,
 						metaInfoPtr,
 						icon);
-			itemPtr->setText(0, elementName.c_str());
+			itemPtr->setText(0, elementName);
 
-			RootInfo& rootInfo = EnsureRoot(iter->toStdString(), address, metaInfoPtr);
+			RootInfo& rootInfo = EnsureRoot(iter->toLocal8Bit(), address, metaInfoPtr);
 			I_ASSERT(rootInfo.itemPtr != NULL);
 
 			rootInfo.itemPtr->addChild(itemPtr);
@@ -470,9 +470,9 @@ void CPackageOverviewComp::UpdateInterfaceList()
 		for (		InterfaceFilter::const_iterator iterfaceIter = knownInterfaces.begin();
 					iterfaceIter != knownInterfaces.end();
 					++iterfaceIter){
-			const std::string& interfaceName = *iterfaceIter;
+			const QByteArray& interfaceName = *iterfaceIter;
 
-			InterfaceCB->addItem(interfaceName.c_str());
+			InterfaceCB->addItem(interfaceName);
 		}
 
 		InterfaceLabel->setVisible(true);
@@ -512,7 +512,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
 
 		QStringList keywords;
-		keywords << address.GetComponentId().c_str();
+		keywords << address.GetComponentId();
 
 		if (metaInfoPtr != NULL){
 			icomp::CComponentMetaDescriptionEncoder encoder(metaInfoPtr->GetKeywords());
@@ -528,7 +528,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 				for (		InterfaceFilter::const_iterator iterfaceIter = m_interfaceFilter.begin();
 							iterfaceIter != m_interfaceFilter.end();
 							++iterfaceIter){
-					const std::string& filteredInterfaceName = *iterfaceIter;
+					const QByteArray& filteredInterfaceName = *iterfaceIter;
 					if (interfaces.find(filteredInterfaceName) == interfaces.end()){
 						isFilterMatched = false;
 						break;
@@ -575,7 +575,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 			for (		icomp::IRegistry::Ids::const_iterator embeddedIter = embeddedIds.begin();
 						embeddedIter != embeddedIds.end();
 						++embeddedIter){
-				const std::string& embeddedId = *embeddedIter;
+				const QByteArray& embeddedId = *embeddedIter;
 
 				const icomp::IRegistry* embeddedRegistryPtr = registryPtr->GetEmbeddedRegistry(embeddedId);
 				if (embeddedRegistryPtr == NULL){
@@ -583,7 +583,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 				}
 
 				QStringList keywords;
-				keywords << embeddedId.c_str();
+				keywords << embeddedId;
 
 				icomp::CComponentMetaDescriptionEncoder encoder(embeddedRegistryPtr->GetKeywords());
 				keywords << (encoder.GetValues());
@@ -596,7 +596,7 @@ icomp::IMetaInfoManager::ComponentAddresses CPackageOverviewComp::GetFilteredCom
 					for (		InterfaceFilter::const_iterator iterfaceIter = m_interfaceFilter.begin();
 								iterfaceIter != m_interfaceFilter.end();
 								++iterfaceIter){
-						const std::string& filteredInterfaceName = *iterfaceIter;
+						const QByteArray& filteredInterfaceName = *iterfaceIter;
 						if (exportedInterfaces.find(filteredInterfaceName) == exportedInterfaces.end()){
 							isFilterMatched = false;
 							break;
@@ -726,7 +726,7 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
 			QDir packageDir(m_envManagerCompPtr->GetPackagePath(address.GetPackageId()));
-			QString filePath = packageDir.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
+			QString filePath = packageDir.absoluteFilePath(QString(address.GetComponentId()) + ".arx");
 
 			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
 		}
@@ -736,7 +736,7 @@ void CPackageOverviewComp::on_PackagesList_itemDoubleClicked(QTreeWidgetItem* it
 
 void CPackageOverviewComp::on_FilterGB_toggled(bool /*on*/)
 {
-	if (!m_interfaceFilter.empty() || !m_keywordsFilter.isEmpty()){
+	if (!m_interfaceFilter.isEmpty() || !m_keywordsFilter.isEmpty()){
 		GenerateComponentTree(false);
 	}
 }
@@ -747,7 +747,7 @@ void CPackageOverviewComp::on_InterfaceCB_currentIndexChanged(int index)
 	InterfaceFilter filter;
 
 	if (index > 0){
-		filter.insert(InterfaceCB->itemText(index).toStdString());
+		filter.insert(InterfaceCB->itemText(index).toLocal8Bit());
 	}
 
 	if (filter != m_interfaceFilter){
@@ -811,7 +811,7 @@ QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentA
 }
 
 
-CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const std::string& path, const icomp::CComponentAddress& address, const icomp::IComponentStaticInfo* staticInfoPtr)
+CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const QByteArray& path, const icomp::CComponentAddress& address, const icomp::IComponentStaticInfo* staticInfoPtr)
 {
 	RootInfo& rootInfo = m_roots[path];
 
@@ -831,17 +831,17 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const std::stri
 	}
 
 	if (rootInfo.itemPtr == NULL){
-		if (path.empty()){
+		if (path.isEmpty()){
 			rootInfo.itemPtr = PackagesList->invisibleRootItem();
 		}
 		else{
-			std::string groupName;
-			std::string elementName = path;
+			QByteArray groupName;
+			QByteArray elementName = path;
 
-			std::string::size_type slashPos = path.rfind('/');
-			if (slashPos != std::string::npos){
-				groupName = path.substr(0, slashPos);
-				elementName = path.substr(slashPos + 1);
+			int slashPos = path.lastIndexOf('/');
+			if (slashPos >= 0){
+				groupName = path.left(slashPos);
+				elementName = path.mid(slashPos + 1);
 			}
 
 			RootInfo& groupRoot = EnsureRoot(groupName, address, staticInfoPtr);
@@ -856,7 +856,7 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const std::stri
 			}
 
 			rootInfo.itemPtr = new PackageItem(*this, packageDescription, QIcon());
-			rootInfo.itemPtr->setText(0, elementName.c_str());
+			rootInfo.itemPtr->setText(0, elementName);
 			groupRoot.itemPtr->addChild(rootInfo.itemPtr);
 		}
 	}
@@ -908,7 +908,7 @@ bool CPackageOverviewComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 					icomp::CComponentAddress address = selectedItemPtr->GetAddress();
 					iser::CXmlStringWriteArchive archive(NULL, false);
 					if (address.Serialize(archive)){
-						mimeDataPtr->setText(archive.GetString().c_str());
+						mimeDataPtr->setText(archive.GetString());
 
 						QDrag *drag = new QDrag(sourceWidgetPtr);
 						drag->setMimeData(mimeDataPtr);
@@ -1073,11 +1073,11 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 	m_address(address)
 {
 	QString toolTip;
-	if (!address.GetPackageId().empty()){
-		toolTip = tr("Component %1.%2").arg(address.GetPackageId().c_str()).arg(address.GetComponentId().c_str());
+	if (!address.GetPackageId().isEmpty()){
+		toolTip = tr("Component %1").arg(address.ToString());
 	}
 	else{
-		toolTip = tr("Local composite component %2").arg(address.GetComponentId().c_str());
+		toolTip = tr("Local composite component %2").arg(QString(address.GetComponentId()));
 	}
 
 	if (!m_description.isEmpty()){
@@ -1086,7 +1086,7 @@ CPackageOverviewComp::PackageComponentItem::PackageComponentItem(
 	}
 	setToolTip(0, toolTip);
 
-	if ((staticInfoPtr != NULL) || address.GetPackageId().empty()){
+	if ((staticInfoPtr != NULL) || address.GetPackageId().isEmpty()){
 		setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 	}
 	else{

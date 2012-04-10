@@ -2,9 +2,9 @@
 #define ibase_CTextFileLogComp_included
 
 
-// STL includes
-#include <fstream>
-
+// Qt includes
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 
 // ACF includes
 #include "imod/CSingleModelObserverBase.h"
@@ -29,7 +29,7 @@ public:
 	I_BEGIN_COMPONENT(CTextFileLogComp);
 		I_ASSIGN(m_fileNameCompPtr, "LogFile", "Name of the log file", true, "LogFile");
 		I_ASSIGN_TO(m_fileNameModelCompPtr, m_fileNameCompPtr, true);
-		I_ASSIGN(m_isAppendAttrPtr, "AppendToExisting", "Don't overwrite existing log file", false, true);
+		I_ASSIGN(m_isAppendAttrPtr, "AppendToExisting", "Don't overwrite existing log file", true, false);
 	I_END_COMPONENT;
 
 	CTextFileLogComp();
@@ -51,7 +51,8 @@ private:
 	I_REF(imod::IModel, m_fileNameModelCompPtr);
 	I_ATTR(bool, m_isAppendAttrPtr);
 
-	std::wofstream m_outputFileStream;
+	QFile m_outputFile;
+	QTextStream m_outputFileStream;
 
 	class FilePathObserver: public imod::CSingleModelObserverBase
 	{

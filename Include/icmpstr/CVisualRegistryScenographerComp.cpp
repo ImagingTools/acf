@@ -116,9 +116,9 @@ bool CVisualRegistryScenographerComp::TryOpenComponent(const CVisualRegistryElem
 		const icomp::IComponentStaticInfo* metaInfoPtr = managerPtr->GetComponentMetaInfo(registryElement.GetAddress());
 
 		if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
-			QDir packageDir(managerPtr->GetPackagePath(registryElement.GetAddress().GetPackageId().c_str()));
+			QDir packageDir(managerPtr->GetPackagePath(registryElement.GetAddress().GetPackageId()));
 		
-			QString filePath = packageDir.absoluteFilePath(QString::fromStdString(registryElement.GetAddress().GetComponentId()) + ".arx");
+			QString filePath = packageDir.absoluteFilePath(registryElement.GetAddress().GetComponentId() + ".arx");
 
 			m_documentManagerCompPtr->FileOpen(NULL, &filePath);
 
@@ -150,7 +150,7 @@ QGraphicsItem* CVisualRegistryScenographerComp::AddShapeToScene(iser::ISerializa
 	if (elementModelPtr != NULL){
 		CVisualRegistryElement* registryElementPtr = dynamic_cast<CVisualRegistryElement*>(elementPtr);
 		if (registryElementPtr != NULL){
-			const std::string& elementName = registryElementPtr->GetName();
+			const QByteArray& elementName = registryElementPtr->GetName();
 			CRegistryElementShape* shapePtr = new CRegistryElementShape(this, m_sceneProviderCompPtr.GetPtr());
 
 			bool isElementSelected = (m_selectedElementIds.find(elementName) != m_selectedElementIds.end());
@@ -190,14 +190,14 @@ void CVisualRegistryScenographerComp::AddConnectorsToScene()
 		for (		icomp::IRegistryElement::Ids::const_iterator iter = attributeIds.begin(); 
 					iter != attributeIds.end(); 
 					iter++){
-			std::string attributeId = *iter;
+			QByteArray attributeId = *iter;
 
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = elementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr != NULL){
 				iser::ISerializable* attributePtr = attributeInfoPtr->attributePtr.GetPtr();
 				const icomp::CReferenceAttribute* referenceAttributePtr = dynamic_cast<icomp::CReferenceAttribute*>(attributePtr);
 				if (referenceAttributePtr != NULL){		
-					const std::string& componentId = referenceAttributePtr->GetValue();
+					const QByteArray& componentId = referenceAttributePtr->GetValue();
 				
 					AddConnector(*sourceShapePtr, componentId, attributeId);
 				}
@@ -205,7 +205,7 @@ void CVisualRegistryScenographerComp::AddConnectorsToScene()
 				const icomp::CMultiReferenceAttribute* multiReferenceAttributePtr = dynamic_cast<icomp::CMultiReferenceAttribute*>(attributePtr);
 				if (multiReferenceAttributePtr != NULL){
 					for (int referenceIndex = 0; referenceIndex < multiReferenceAttributePtr->GetValuesCount(); referenceIndex++){
-						const std::string& componentId = multiReferenceAttributePtr->GetValueAt(referenceIndex);
+						const QByteArray& componentId = multiReferenceAttributePtr->GetValueAt(referenceIndex);
 						
 						AddConnector(*sourceShapePtr, componentId, attributeId);
 					}
@@ -213,7 +213,7 @@ void CVisualRegistryScenographerComp::AddConnectorsToScene()
 
 				const icomp::CFactoryAttribute* factoryAttributePtr = dynamic_cast<icomp::CFactoryAttribute*>(attributePtr);
 				if (factoryAttributePtr != NULL){		
-					const std::string& componentId = factoryAttributePtr->GetValue();
+					const QByteArray& componentId = factoryAttributePtr->GetValue();
 
 					AddConnector(*sourceShapePtr, componentId, attributeId, true);
 				}
@@ -221,7 +221,7 @@ void CVisualRegistryScenographerComp::AddConnectorsToScene()
 				const icomp::CMultiFactoryAttribute* multiFactoryAttributePtr = dynamic_cast<icomp::CMultiFactoryAttribute*>(attributePtr);
 				if (multiFactoryAttributePtr != NULL){
 					for (int referenceIndex = 0; referenceIndex < multiFactoryAttributePtr->GetValuesCount(); referenceIndex++){
-						const std::string& componentId = multiFactoryAttributePtr->GetValueAt(referenceIndex);
+						const QByteArray& componentId = multiFactoryAttributePtr->GetValueAt(referenceIndex);
 
 						AddConnector(*sourceShapePtr, componentId, attributeId, true);
 					}
@@ -234,8 +234,8 @@ void CVisualRegistryScenographerComp::AddConnectorsToScene()
 
 void CVisualRegistryScenographerComp::AddConnector(
 			CRegistryElementShape& sourceShape,
-			const std::string& referenceComponentId,
-			const std::string& attributeId,
+			const QByteArray& referenceComponentId,
+			const QByteArray& attributeId,
 			bool isFactory)
 {
 	if (m_scenePtr == NULL){
@@ -244,8 +244,8 @@ void CVisualRegistryScenographerComp::AddConnector(
 
 	I_ASSERT(m_sceneProviderCompPtr.IsValid());
 
-	std::string baseId;
-	std::string subId;
+	QByteArray baseId;
+	QByteArray subId;
 	bool isEmbedded = icomp::CInterfaceManipBase::SplitId(referenceComponentId, baseId, subId);
 
 	QList<QGraphicsItem*> items = m_scenePtr->items();
@@ -270,8 +270,8 @@ void CVisualRegistryScenographerComp::AddConnector(
 		CGraphicsConnectorItem* connectorPtr = new CGraphicsConnectorItem(*m_sceneProviderCompPtr.GetPtr(), connectFlags);
 
 		connectorPtr->setToolTip(isFactory?
-					tr("Factory of '%1'").arg(attributeId.c_str()):
-					tr("Reference of '%1'").arg(attributeId.c_str()));
+					tr("Factory of '%1'").arg(QString(attributeId)):
+					tr("Reference of '%1'").arg(QString(attributeId)));
 
 		connectorPtr->InitEnds(&sourceShape, destShapePtr);
 
@@ -283,15 +283,15 @@ void CVisualRegistryScenographerComp::AddConnector(
 
 
 icomp::IRegistryElement* CVisualRegistryScenographerComp::TryCreateComponent(
-			const std::string& elementId,
+			const QByteArray& elementId,
 			const icomp::CComponentAddress& address,
 			const i2d::CVector2d& position)
 {
-	if (!elementId.empty()){
+	if (!elementId.isEmpty()){
 		istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_ADDED);
 		if (registryPtr.IsValid()){
 			QRegExp exp("^(\\w*)_(\\d+)$");
-			QString elementIdString = elementId.c_str();
+			QString elementIdString = elementId;
 
 			int elementValue = 0;
 			QString elementBase = elementIdString;
@@ -301,10 +301,10 @@ icomp::IRegistryElement* CVisualRegistryScenographerComp::TryCreateComponent(
 				elementValue = exp.cap(2).toInt();
 			}
 
-			std::string realElementId = elementId;
+			QByteArray realElementId = elementId;
 			icomp::IRegistry::Ids elementIds = registryPtr->GetElementIds();
 			while (elementIds.find(realElementId) != elementIds.end()){
-				realElementId = QString("%1_%2").arg(elementBase).arg(++elementValue).toStdString();
+				realElementId = QString("%1_%2").arg(elementBase).arg(++elementValue).toLocal8Bit();
 			}
 
 			icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(realElementId, address);
@@ -325,7 +325,7 @@ icomp::IRegistryElement* CVisualRegistryScenographerComp::TryCreateComponent(
 }
 
 
-void CVisualRegistryScenographerComp::ConnectReferences(const std::string& componentRole)
+void CVisualRegistryScenographerComp::ConnectReferences(const QByteArray& componentRole)
 {
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr == NULL){
@@ -351,7 +351,7 @@ void CVisualRegistryScenographerComp::ConnectReferences(const std::string& compo
 		for (		icomp::IElementStaticInfo::Ids::const_iterator attrIter = attributeIds.begin();
 					attrIter != attributeIds.end();
 					++attrIter){
-			const std::string& attributeId = *attrIter;
+			const QByteArray& attributeId = *attrIter;
 
 			const icomp::IAttributeStaticInfo* staticAttributeInfoPtr = compMetaInfoPtr->GetAttributeInfo(attributeId);
 			if (staticAttributeInfoPtr == NULL){
@@ -392,7 +392,7 @@ void CVisualRegistryScenographerComp::ConnectReferences(const std::string& compo
 			icomp::IRegistryElement* registryElementPtr = elementInfoPtr->elementPtr.GetPtr();
 			const icomp::IRegistryElement::AttributeInfo* attributeInfoPtr = registryElementPtr->GetAttributeInfo(attributeId);
 			if (attributeInfoPtr == NULL && createAttribute){
-				std::string attrType = staticAttributeInfoPtr->GetAttributeTypeName();
+				QByteArray attrType = staticAttributeInfoPtr->GetAttributeTypeName();
 				icomp::IRegistryElement::AttributeInfo* newAttributeInfoPtr = registryElementPtr->InsertAttributeInfo(attributeId, attrType);
 				if (newAttributeInfoPtr != NULL){
 					newAttributeInfoPtr->attributePtr.SetPtr(registryElementPtr->CreateAttribute(attrType));
@@ -405,14 +405,14 @@ void CVisualRegistryScenographerComp::ConnectReferences(const std::string& compo
 
 void CVisualRegistryScenographerComp::UpdateComponentSelection()
 {
-	bool isElementSelected = !m_selectedElementIds.empty();
+	bool isElementSelected = !m_selectedElementIds.isEmpty();
 
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
 		// update component selection and related menu actions:
 		if (m_quickHelpViewerCompPtr.IsValid()){
 			if (isElementSelected){
-				const std::string& elementName = *m_selectedElementIds.begin();
+				const QByteArray& elementName = *m_selectedElementIds.begin();
 
 				const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementName);
 				if (elementInfoPtr != NULL){
@@ -505,7 +505,7 @@ bool CVisualRegistryScenographerComp::OnDropObject(const QMimeData& mimeData, QG
 		return false;
 	}
 
-	iser::CXmlStringReadArchive archive(mimeData.text().toStdString(), false);
+	iser::CXmlStringReadArchive archive(mimeData.text().toLocal8Bit(), false);
 
 	icomp::CComponentAddress address;
 
@@ -540,7 +540,7 @@ void CVisualRegistryScenographerComp::UpdateScene(int /*updateFlags*/)
 		for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
 					iter != elementIds.end();
 					iter++){
-			const std::string& elementId = *iter;
+			const QByteArray& elementId = *iter;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
 			if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
 				AddShapeToScene(elementInfoPtr->elementPtr.GetPtr());
@@ -705,7 +705,7 @@ void CVisualRegistryScenographerComp::OnCopyCommand()
 		for (		ElementIds::iterator iter = m_selectedElementIds.begin();
 					iter != m_selectedElementIds.end();
 					++iter){
-			std::string elementId = *iter;
+			QByteArray elementId = *iter;
 
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementId);
 			if ((elementInfoPtr == NULL) || (!elementInfoPtr->elementPtr.IsValid())){
@@ -739,7 +739,7 @@ void CVisualRegistryScenographerComp::OnCopyCommand()
 		retVal = retVal && archive.EndTag(s_elementsListTag);
 
 		QMimeData* mimeDataPtr = new QMimeData;
-		mimeDataPtr->setText(archive.GetString().c_str());
+		mimeDataPtr->setText(archive.GetString());
 
 		clipboardPtr->setMimeData(mimeDataPtr);
 	}
@@ -763,7 +763,7 @@ void CVisualRegistryScenographerComp::OnPasteCommand()
 		return;
 	}
 
-	iser::CXmlStringReadArchive archive(mimeDataPtr->text().toStdString(), false);
+	iser::CXmlStringReadArchive archive(mimeDataPtr->text().toLocal8Bit(), false);
 
 	int elementsCount = 0;
 
@@ -773,7 +773,7 @@ void CVisualRegistryScenographerComp::OnPasteCommand()
 	for (int i = 0; i < elementsCount; ++i){
 		retVal = retVal && archive.BeginTag(s_elementTag);
 
-		std::string elementId;
+		QByteArray elementId;
 		retVal = retVal && archive.BeginTag(s_elementIdTag);
 		retVal = retVal && archive.Process(elementId);
 		retVal = retVal && archive.EndTag(s_elementIdTag);
@@ -815,7 +815,7 @@ void CVisualRegistryScenographerComp::OnRemoveComponent()
 		for (		ElementIds::const_iterator iter = m_selectedElementIds.begin();
 					iter != m_selectedElementIds.end();
 					++iter){
-			const std::string& elementName = *iter;
+			const QByteArray& elementName = *iter;
 
 			registryPtr->RemoveElementInfo(elementName);
 		}
@@ -835,17 +835,17 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 		return;
 	}
 
-	const std::string& oldName = *firstIter;
+	const QByteArray& oldName = *firstIter;
 
 	bool isOk = false;
-	std::string newName = QInputDialog::getText(
+	QByteArray newName = QInputDialog::getText(
 				NULL,
 				tr("ACF Compositor"),
 				tr("New component name"),
 				QLineEdit::Normal,
-				QString::fromStdString(oldName),
-				&isOk).toStdString();
-	if (!isOk || newName.empty() || (oldName == newName)){
+				oldName,
+				&isOk).toLocal8Bit();
+	if (!isOk || newName.isEmpty() || (oldName == newName)){
 		return;
 	}
 
@@ -861,14 +861,14 @@ void CVisualRegistryScenographerComp::InsertEmbeddedComponent()
 	}
 
 	bool isOk = false;
-	std::string newName = QInputDialog::getText(
+	QByteArray newName = QInputDialog::getText(
 				NULL,
 				tr("ACF Compositor"),
 				tr("New embedded component name"),
 				QLineEdit::Normal,
 				"",
-				&isOk).toStdString();
-	if (!isOk || newName.empty()){
+				&isOk).toLocal8Bit();
+	if (!isOk || newName.isEmpty()){
 		return;
 	}
 
@@ -893,14 +893,14 @@ void CVisualRegistryScenographerComp::ToEmbeddedComponent()
 	}
 
 	bool isOk = false;
-	std::string newName = QInputDialog::getText(
+	QByteArray newName = QInputDialog::getText(
 				NULL,
 				tr("ACF Compositor"),
 				tr("New embedded component name"),
 				QLineEdit::Normal,
 				"",
-				&isOk).toStdString();
-	if (!isOk || newName.empty()){
+				&isOk).toLocal8Bit();
+	if (!isOk || newName.isEmpty()){
 		return;
 	}
 
@@ -918,7 +918,7 @@ void CVisualRegistryScenographerComp::ToEmbeddedComponent()
 	for (		ElementIds::const_iterator iter = m_selectedElementIds.begin();
 				iter != m_selectedElementIds.end();
 				++iter){
-		const std::string& elementName = *iter;
+		const QByteArray& elementName = *iter;
 
 		icomp::IRegistry::ElementInfo* oldInfoPtr = const_cast<icomp::IRegistry::ElementInfo*>(registryPtr->GetElementInfo(elementName));
 		if (oldInfoPtr == NULL){
@@ -1058,7 +1058,7 @@ IElementSelectionInfo::Elements CVisualRegistryScenographerComp::SelectionInfoIm
 		for (		ElementIds::const_iterator iter = m_parentPtr->m_selectedElementIds.begin();
 					iter != m_parentPtr->m_selectedElementIds.end();
 					++iter){
-			const std::string& elementName = *iter;
+			const QByteArray& elementName = *iter;
 
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->GetElementInfo(elementName);
 			if (elementInfoPtr != NULL){

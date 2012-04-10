@@ -31,18 +31,18 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 	int retVal = -1;
 
 	if (BaseClass::InitializeApplication(argc, argv)){
-		std::string appStyle;
+		QByteArray appStyle;
 
 		// parse arguments:
 		for (int index = 1; index < argc; index++){
-			std::string arg = argv[index];
+			QByteArray arg = argv[index];
 			if (arg == "-style"){
 				if (index+1 < argc){
 					appStyle = argv[index+1];
 				}
 			}
 		}
-		QApplication::setStyle(appStyle.c_str());
+		QApplication::setStyle(appStyle);
 
 		TryShowSplashScreen();
 

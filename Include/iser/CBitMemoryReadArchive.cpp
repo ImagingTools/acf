@@ -1,17 +1,13 @@
 #include "iser/CBitMemoryReadArchive.h"
 
 
-// STL includes
-#include <cstring>
-
-
 namespace iser
 {
 
 
 // public methods
 
-CBitMemoryReadArchive::CBitMemoryReadArchive(const std::vector<quint8>& data, bool serializeHeader)
+CBitMemoryReadArchive::CBitMemoryReadArchive(const QVector<quint8>& data, bool serializeHeader)
 :	BaseClass(&data[0], data.size(), serializeHeader)	
 {
 	m_bitPosition = 0;

@@ -2,9 +2,8 @@
 #define i2d_CPolypoint_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "iser/CArchiveTag.h"
@@ -24,13 +23,13 @@ public:
 
 	void Insert(const i2d::CVector2d& vector);
 	void Clear();
-	const ::std::vector<i2d::CVector2d>& GetPoints() const;
+	const ::QVector<i2d::CVector2d>& GetPoints() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	::std::vector<i2d::CVector2d> m_points;
+	::QVector<i2d::CVector2d> m_points;
 };
 
 
@@ -53,7 +52,7 @@ inline void CPolypoint::Clear()
 }
 
 
-inline const ::std::vector<i2d::CVector2d>& CPolypoint::GetPoints() const
+inline const ::QVector<i2d::CVector2d>& CPolypoint::GetPoints() const
 {
 	return m_points;
 }

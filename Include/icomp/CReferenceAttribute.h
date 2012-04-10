@@ -2,9 +2,8 @@
 #define icomp_CReferenceAttribute_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "icomp/TAttribute.h"
@@ -17,10 +16,10 @@ namespace icomp
 /**
 	Special attribute used to store referenced component ID.
 */
-class CReferenceAttribute: public CStdStringAttribute
+class CReferenceAttribute: public CIdAttribute
 {
 public:
-	typedef CStdStringAttribute BaseClass;
+	typedef CIdAttribute BaseClass;
 
 	enum DefaultAttributeFlags
 	{
@@ -30,13 +29,13 @@ public:
 
 	CReferenceAttribute(){}
 	CReferenceAttribute(const CReferenceAttribute& attribute):BaseClass(attribute){}
-	explicit CReferenceAttribute(const std::string& value):BaseClass(value){}
+	explicit CReferenceAttribute(const QByteArray& value):BaseClass(value){}
 
 	// reimplemented (iser::IObject)
-	std::string GetFactoryId() const;
+	QByteArray GetFactoryId() const;
 
 	// static methods
-	static std::string GetTypeName();
+	static QByteArray GetTypeName();
 };
 
 

@@ -2,9 +2,10 @@
 #define iproc_CDelegatedProgressManager_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
 
+// ACF includes
 #include "istd/IChangeable.h"
 
 #include "iproc/IProgressManager.h"
@@ -40,7 +41,7 @@ public:
 	*/
 	CDelegatedProgressManager(
 				IProgressManager* slaveManagerPtr,
-				const std::string& progressId,
+				const QByteArray& progressId,
 				const QString& description,
 				bool isCancelable = false);
 	virtual ~CDelegatedProgressManager();
@@ -48,7 +49,7 @@ public:
 	double GetCumulatedProgress() const;
 
 	// reimplemented (iproc::IProgressManager)
-	virtual int BeginProgressSession(const std::string& progressId, const QString& description, bool isCancelable = false);
+	virtual int BeginProgressSession(const QByteArray& progressId, const QString& description, bool isCancelable = false);
 	virtual void EndProgressSession(int sessionId);
 	virtual void OnProgress(int sessionId, double currentProgress);
 	virtual bool IsCanceled(int sessionId) const;

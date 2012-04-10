@@ -2,8 +2,8 @@
 #define istd_TComposedFactory_included
 
 
-// STL includes
-#include <list>
+// Qt includes
+#include <QtCore/QList>
 
 // ACF includes
 #include "istd/TIFactory.h"
@@ -35,11 +35,11 @@ public:
 	virtual IFactoryInfo::KeyList GetFactoryKeys() const;
 
 	// reimplemented (istd::TIFactory)
-	virtual InterfaceType* CreateInstance(const std::string& keyId = "") const;
+	virtual InterfaceType* CreateInstance(const QByteArray& keyId = "") const;
 
 protected:
 	typedef istd::TOptDelPtr<FactoryInterface> FactoryPtr;
-	typedef std::list<FactoryPtr> FactoryList;
+	typedef QList<FactoryPtr> FactoryList;
 
 	FactoryList m_factoryList;
 };
@@ -52,7 +52,7 @@ bool TComposedFactory<InterfaceType>::RegisterFactory(FactoryInterface* factoryP
 {
 	I_ASSERT(factoryPtr != NULL);
 
-	if ((factoryPtr == NULL) || factoryPtr->GetFactoryKeys().empty()){
+	if ((factoryPtr == NULL) || factoryPtr->GetFactoryKeys().isEmpty()){
 		return false;
 	}
 
@@ -76,7 +76,7 @@ IFactoryInfo::KeyList TComposedFactory<InterfaceType>::GetFactoryKeys() const
 
 		IFactoryInfo::KeyList factoryKeys = factoryPtr->GetFactoryKeys();
 
-		retVal.insert(retVal.end(), factoryKeys.begin(), factoryKeys.end());
+		retVal += factoryKeys;
 	}
 
 	return retVal;
@@ -86,7 +86,7 @@ IFactoryInfo::KeyList TComposedFactory<InterfaceType>::GetFactoryKeys() const
 // reimplemented (istd::TIFactory)
 
 template <class InterfaceType>
-InterfaceType* TComposedFactory<InterfaceType>::CreateInstance(const std::string& keyId) const
+InterfaceType* TComposedFactory<InterfaceType>::CreateInstance(const QByteArray& keyId) const
 {
 	for (		typename FactoryList::const_iterator iter = m_factoryList.begin();
 				iter != m_factoryList.end();

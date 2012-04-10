@@ -16,9 +16,10 @@ CFileWriteArchive::CFileWriteArchive(
 			bool serializeHeader)
 :	BaseClass(versionInfoPtr),
 	BaseClass2(filePath),
+	m_file(filePath),
 	m_supportTagSkipping(supportTagSkipping)
 {
-	m_stream.open(filePath.toStdString().c_str(), std::fstream::out | std::fstream::binary);
+	m_file.open(QIODevice::WriteOnly | QIODevice::Truncate);
 
 	if (serializeHeader){
 		SerializeAcfHeader();
@@ -28,7 +29,7 @@ CFileWriteArchive::CFileWriteArchive(
 
 void CFileWriteArchive::Flush()
 {
-	m_stream.flush();
+	m_file.flush();
 }
 
 
@@ -53,7 +54,7 @@ bool CFileWriteArchive::BeginTag(const CArchiveTag& tag)
 
 	element.tagBinaryId = tag.GetBinaryId();
 	element.endFieldPosition = (tag.IsTagSkippingUsed() && m_supportTagSkipping)?
-				quint32(m_stream.tellp()):
+				quint32(m_file.pos()):
 				quint32(0);
 
 	quint32 dummyPos = 0;
@@ -76,13 +77,13 @@ bool CFileWriteArchive::EndTag(const CArchiveTag& tag)
 	}
 
 	if (element.endFieldPosition != 0){	// add position of the file tag end to the tag begin
-		quint32 endPosition = m_stream.tellp();
+		quint32 endPosition = m_file.pos();
 
-		m_stream.seekp(element.endFieldPosition);
+		retVal = retVal && m_file.seek(element.endFieldPosition);
 
 		retVal = retVal && Process(endPosition);
 
-		m_stream.seekp(endPosition);
+		retVal = retVal && m_file.seek(endPosition);
 	}
 
 	m_tagStack.pop_back();
@@ -101,9 +102,9 @@ bool CFileWriteArchive::ProcessData(void* data, int size)
 		return false;
 	}
 
-	m_stream.write((char*)data, size);
+	m_file.write((char*)data, size);
 
-	return !m_stream.fail();
+	return m_file.error() == QFile::NoError;
 }
 
 

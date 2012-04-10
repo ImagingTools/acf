@@ -38,7 +38,7 @@ IRegistry::Ids CRegistry::GetElementIds() const
 }
 
 
-const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& elementId) const
+const IRegistry::ElementInfo* CRegistry::GetElementInfo(const QByteArray& elementId) const
 {
 	ComponentsMap::const_iterator iter = m_componentsMap.find(elementId);
 	if (iter != m_componentsMap.end()){
@@ -50,7 +50,7 @@ const IRegistry::ElementInfo* CRegistry::GetElementInfo(const std::string& eleme
 
 
 IRegistry::ElementInfo* CRegistry::InsertElementInfo(
-			const std::string& elementId,
+			const QByteArray& elementId,
 			const CComponentAddress& address,
 			bool ensureElementCreated)
 {
@@ -78,7 +78,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 }
 
 
-bool CRegistry::RemoveElementInfo(const std::string& elementId)
+bool CRegistry::RemoveElementInfo(const QByteArray& elementId)
 {
 	istd::TChangeNotifier<IRegistry> changePtr(this, CF_COMPONENT_REMOVED | CF_MODEL);
 
@@ -133,7 +133,7 @@ IRegistry::Ids CRegistry::GetEmbeddedRegistryIds() const
 }
 
 
-IRegistry* CRegistry::GetEmbeddedRegistry(const std::string& registryId) const
+IRegistry* CRegistry::GetEmbeddedRegistry(const QByteArray& registryId) const
 {
 	EmbeddedRegistriesMap::const_iterator iter = m_embeddedRegistriesMap.find(registryId);
 	if (iter != m_embeddedRegistriesMap.end()){
@@ -146,7 +146,7 @@ IRegistry* CRegistry::GetEmbeddedRegistry(const std::string& registryId) const
 }
 
 
-IRegistry* CRegistry::InsertEmbeddedRegistry(const std::string& registryId)
+IRegistry* CRegistry::InsertEmbeddedRegistry(const QByteArray& registryId)
 {
 	RegistryPtr newRegistryPtr(new CRegistry());
 
@@ -161,7 +161,7 @@ IRegistry* CRegistry::InsertEmbeddedRegistry(const std::string& registryId)
 }
 
 
-bool CRegistry::RemoveEmbeddedRegistry(const std::string& registryId)
+bool CRegistry::RemoveEmbeddedRegistry(const QByteArray& registryId)
 {
 	if (m_embeddedRegistriesMap.remove(registryId) <= 0){
 		return false;
@@ -171,7 +171,7 @@ bool CRegistry::RemoveEmbeddedRegistry(const std::string& registryId)
 }
 
 
-bool CRegistry::RenameEmbeddedRegistry(const std::string& oldRegistryId, const std::string& newRegistryId)
+bool CRegistry::RenameEmbeddedRegistry(const QByteArray& oldRegistryId, const QByteArray& newRegistryId)
 {
 	if (oldRegistryId == newRegistryId){
 		return true;
@@ -208,12 +208,12 @@ const IRegistry::ExportedComponentsMap& CRegistry::GetExportedComponentsMap() co
 
 
 void CRegistry::SetElementInterfaceExported(
-			const std::string& elementId,
-			const std::string& interfaceName,
+			const QByteArray& elementId,
+			const QByteArray& interfaceName,
 			bool state)
 {
-	I_ASSERT(!elementId.empty());
-	I_ASSERT(!interfaceName.empty());
+	I_ASSERT(!elementId.isEmpty());
+	I_ASSERT(!interfaceName.isEmpty());
 
 	if (state){
 		m_exportedInterfacesMap[interfaceName] = elementId;
@@ -228,10 +228,10 @@ void CRegistry::SetElementInterfaceExported(
 
 
 void CRegistry::SetElementExported(
-			const std::string& exportId,
-			const std::string& elementId)
+			const QByteArray& exportId,
+			const QByteArray& elementId)
 {
-	if (!elementId.empty()){
+	if (!elementId.isEmpty()){
 		m_exportedComponentsMap[exportId] = elementId;
 	}
 	else{
@@ -240,7 +240,7 @@ void CRegistry::SetElementExported(
 }
 
 
-bool CRegistry::RenameElement(const std::string& oldElementId, const std::string& newElementId)
+bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& newElementId)
 {
 	if (newElementId == oldElementId){
 		return true;
@@ -264,9 +264,9 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 	for (		IRegistry::ExportedComponentsMap::const_iterator index = m_exportedComponentsMap.begin();
 				index != m_exportedComponentsMap.end();
 				index++){
-		std::string exportComponentId;
-		std::string subId;
-		std::string newExportId = index.value();
+		QByteArray exportComponentId;
+		QByteArray subId;
+		QByteArray newExportId = index.value();
 		istd::CIdManipBase::SplitId(newExportId, exportComponentId, subId);
 		if (exportComponentId == oldElementId){
 			newExportId = istd::CIdManipBase::JoinId(newElementId, subId);
@@ -280,7 +280,7 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 	for (		IRegistry::ExportedInterfacesMap::const_iterator index = m_exportedInterfacesMap.begin();
 				index != m_exportedInterfacesMap.end();
 				index++){
-		std::string elementId = index.value();
+		QByteArray elementId = index.value();
 		if (elementId == oldElementId){
 			elementId = newElementId;
 		}
@@ -306,7 +306,7 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 			for (		Ids::iterator compIdIter = elementIds.begin();
 						compIdIter != elementIds.end();
 						++compIdIter){
-				const std::string& componentId = *compIdIter;
+				const QByteArray& componentId = *compIdIter;
 				const IRegistry::ElementInfo* infoPtr = GetElementInfo(componentId);
 				if (infoPtr == NULL){
 					continue;
@@ -321,7 +321,7 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 				for (		IRegistryElement::Ids::iterator attrIdIter = attrIds.begin();
 							attrIdIter != attrIds.end();
 							++attrIdIter){
-					const std::string& attributeId = *attrIdIter;
+					const QByteArray& attributeId = *attrIdIter;
 					const IRegistryElement::AttributeInfo* attrInfoPtr = elementPtr->GetAttributeInfo(attributeId);
 					if (attrInfoPtr == NULL){
 						continue;
@@ -331,8 +331,8 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 
 					CReferenceAttribute* referenceAttrPtr = dynamic_cast<CReferenceAttribute*>(attributePtr);
 					if (referenceAttrPtr != NULL){
-						std::string baseId;
-						std::string subId;
+						QByteArray baseId;
+						QByteArray subId;
 						CInterfaceManipBase::SplitId(referenceAttrPtr->GetValue(), baseId, subId);
 						if (baseId == oldElementId){
 							referenceAttrPtr->SetValue(CInterfaceManipBase::JoinId(newElementId, subId));
@@ -343,8 +343,8 @@ bool CRegistry::RenameElement(const std::string& oldElementId, const std::string
 					if (multiRefAttrPtr != NULL){
 						int valuesCount = multiRefAttrPtr->GetValuesCount();
 						for (int i = 0; i < valuesCount; ++i){
-							std::string baseId;
-							std::string subId;
+							QByteArray baseId;
+							QByteArray subId;
 							CInterfaceManipBase::SplitId(multiRefAttrPtr->GetValueAt(i), baseId, subId);
 							if (baseId == oldElementId){
 								multiRefAttrPtr->SetValueAt(i, CInterfaceManipBase::JoinId(newElementId, subId));
@@ -450,7 +450,7 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 quint32 CRegistry::GetMinimalVersion(int versionId) const
 {
 	if (versionId == iser::IVersionInfo::AcfVersionId){
-		if (!m_embeddedRegistriesMap.empty()){
+		if (!m_embeddedRegistriesMap.isEmpty()){
 			return 1637;
 		}
 
@@ -466,7 +466,7 @@ quint32 CRegistry::GetMinimalVersion(int versionId) const
 // protected methods
 
 IRegistryElement* CRegistry::CreateRegistryElement(
-			const std::string& /*elementId*/,
+			const QByteArray& /*elementId*/,
 			const CComponentAddress& /*address*/) const
 {
 	Element* registryElementPtr = new Element;
@@ -505,7 +505,7 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(elementTag);
 
 			retVal = retVal && archive.BeginTag(elementIdTag);
-			retVal = retVal && archive.Process(const_cast< std::string&>(iter.key()));
+			retVal = retVal && archive.Process(const_cast< QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(elementIdTag);
 
 			retVal = retVal && element.address.Serialize(archive);
@@ -532,7 +532,7 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(elementTag);
 
-			std::string elementId;
+			QByteArray elementId;
 			retVal = retVal && archive.BeginTag(elementIdTag);
 			retVal = retVal && archive.Process(elementId);
 			retVal = retVal && archive.EndTag(elementIdTag);
@@ -616,7 +616,7 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(registryTag);
 
 			retVal = retVal && archive.BeginTag(registryIdTag);
-			retVal = retVal && archive.Process(const_cast< std::string&>(iter.key()));
+			retVal = retVal && archive.Process(const_cast< QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(registryIdTag);
 
 			retVal = retVal && archive.BeginTag(dataTag);
@@ -632,7 +632,7 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(registryTag);
 
-			std::string elementId;
+			QByteArray elementId;
 			retVal = retVal && archive.BeginTag(registryIdTag);
 			retVal = retVal && archive.Process(elementId);
 			retVal = retVal && archive.EndTag(registryIdTag);
@@ -678,7 +678,7 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(interfaceTag);
 
 			retVal = retVal && archive.BeginTag(interfaceIdTag);
-			std::string interfaceName = iter.key();
+			QByteArray interfaceName = iter.key();
 			retVal = retVal && archive.Process(interfaceName);
 			retVal = retVal && archive.EndTag(interfaceIdTag);
 
@@ -695,12 +695,12 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(interfaceTag);
 
-			std::string interfaceName;
+			QByteArray interfaceName;
 			retVal = retVal && archive.BeginTag(interfaceIdTag);
 			retVal = retVal && archive.Process(interfaceName);
 			retVal = retVal && archive.EndTag(interfaceIdTag);
 
-			std::string componentId;
+			QByteArray componentId;
 			retVal = retVal && archive.BeginTag(componentIdTag);
 			retVal = retVal && archive.Process(componentId);
 			retVal = retVal && archive.EndTag(componentIdTag);
@@ -739,7 +739,7 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(componentTag);
 
 			retVal = retVal && archive.BeginTag(exportedIdTag);
-			retVal = retVal && archive.Process(const_cast< std::string&>(iter.key()));
+			retVal = retVal && archive.Process(const_cast< QByteArray&>(iter.key()));
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
 			retVal = retVal && archive.BeginTag(componentIdTag);
@@ -755,12 +755,12 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 		for (int i = 0; i < count; ++i){
 			retVal = retVal && archive.BeginTag(componentTag);
 
-			std::string exportedId;
+			QByteArray exportedId;
 			retVal = retVal && archive.BeginTag(exportedIdTag);
 			retVal = retVal && archive.Process(exportedId);
 			retVal = retVal && archive.EndTag(exportedIdTag);
 
-			std::string componentId;
+			QByteArray componentId;
 			retVal = retVal && archive.BeginTag(componentIdTag);
 			retVal = retVal && archive.Process(componentId);
 			retVal = retVal && archive.EndTag(componentIdTag);

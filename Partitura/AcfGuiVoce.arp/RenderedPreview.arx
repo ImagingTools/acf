@@ -39,7 +39,7 @@
               FileLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               FilePath
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -77,7 +77,7 @@
               Object
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -96,7 +96,7 @@
               RestoreonBegin
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -115,7 +115,7 @@
               StoreOnEnd
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -197,7 +197,7 @@
               DefaultPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               RenderingPreviewCacheFilePath
@@ -216,7 +216,7 @@
               PathType
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -256,7 +256,7 @@
               FitMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -296,7 +296,7 @@
               FileLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -315,7 +315,7 @@
               Object
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -334,7 +334,7 @@
               ObjectView
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -374,7 +374,7 @@
               BitmapHeight
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               BitmapHeight
@@ -390,7 +390,7 @@
               BitmapWidth
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               BitmapWidth
@@ -406,7 +406,7 @@
               FileData
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Object
@@ -422,7 +422,7 @@
               FileLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ObjectLoader
@@ -438,7 +438,7 @@
               MaxCacheSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -457,7 +457,7 @@
               ObjectSnap
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ObjectSnap

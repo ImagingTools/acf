@@ -15,7 +15,7 @@ namespace icmpstr
 
 CMultiAttributeEditor::CMultiAttributeEditor(
 			const CElementSelectionInfoManagerBase& elementSelectionInfoManager,
-			const std::string& attributeId,
+			const QByteArray& attributeId,
 			int attributeFlags)
 	:m_elementSelectionInfoManager(elementSelectionInfoManager),
 	m_attributeId(attributeId),
@@ -210,13 +210,13 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 	}
 
 	IElementSelectionInfo::Elements selectedElements = selectionInfoPtr->GetSelectedElements();
-	if (selectedElements.empty()){
+	if (selectedElements.isEmpty()){
 		return;
 	}
 
 	const IRegistryConsistInfo* consistInfoPtr = m_parent.m_elementSelectionInfoManager.GetConsistencyInfoPtr();
 
-	std::string attributeId = m_parent.m_attributeId;
+	QByteArray attributeId = m_parent.m_attributeId;
 
 	for (		IElementSelectionInfo::Elements::const_iterator elemIter = selectedElements.begin();
 				elemIter != selectedElements.end();
@@ -246,7 +246,7 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 							icomp::IComponentStaticInfo::MGI_INTERFACES,
 							0,
 							icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
-				if (obligatoryInterfaces.empty()){
+				if (obligatoryInterfaces.isEmpty()){
 					obligatoryInterfaces = staticInfoPtr->GetRelatedMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES, 0, 0);	// All asked interface names
 					queryFlags = IRegistryConsistInfo::QF_ANY_INTERFACE;	// for optional interfaces only we are looking for any of them
 				}
@@ -258,7 +258,7 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 				for (		icomp::IRegistry::Ids::const_iterator iter = compatIds.begin();
 							iter != compatIds.end();
 							++iter){
-					comboEditor->addItem(iter->c_str());
+					comboEditor->addItem(*iter);
 				}
 			}
 

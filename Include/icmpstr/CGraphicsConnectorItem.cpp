@@ -1,9 +1,6 @@
 #include "icmpstr/CGraphicsConnectorItem.h"
 
 
-// STL includes
-#include <cmath>
-
 // Qt includes
 #include <QtGui/QPainter>
 #include <QtGui/QPainterPath>

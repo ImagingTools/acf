@@ -2,9 +2,10 @@
 #define icomp_CMultiFactoryAttribute_included
 
 
-// STL includes
-#include <string>
+// Qt includes
+#include <QtCore/QByteArray>
 
+// ACF includes
 #include "icomp/CMultiReferenceAttribute.h"
 
 
@@ -28,13 +29,13 @@ public:
 
 	CMultiFactoryAttribute(){}
 	CMultiFactoryAttribute(const CMultiFactoryAttribute& attribute):BaseClass(attribute){}
-	CMultiFactoryAttribute(int elementsCount, std::string* valuesPtr):BaseClass(elementsCount, valuesPtr){}
+	CMultiFactoryAttribute(int elementsCount, QByteArray* valuesPtr):BaseClass(elementsCount, valuesPtr){}
 
 	// reimplemented (iser::IObject)
-	std::string GetFactoryId() const;
+	QByteArray GetFactoryId() const;
 
 	// static methods
-	static std::string GetTypeName();
+	static QByteArray GetTypeName();
 };
 
 

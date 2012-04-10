@@ -1,10 +1,6 @@
 #include "idoc/CMultiDocumentManagerBase.h"
 
 
-// STL includes
-#include <algorithm>
-
-
 // Qt includes
 #include <QtCore/QStringList>
 
@@ -91,12 +87,9 @@ istd::IPolymorphic* CMultiDocumentManagerBase::GetViewFromIndex(int documentInde
 	SingleDocumentData* infoPtr = m_documentInfos.GetAt(documentIndex);
 	I_ASSERT(infoPtr != NULL);
 
-	Views::iterator iter = infoPtr->views.begin();
-	for (int i = 0; i < viewIndex; ++i){
-		++iter;
-	}
+	ViewPtr viewPtr = infoPtr->views.at(viewIndex);
 
-	return iter->GetPtr();
+	return viewPtr.GetPtr();
 }
 
 
@@ -124,7 +117,7 @@ istd::IChangeable* CMultiDocumentManagerBase::GetDocumentFromView(const istd::IP
 }
 
 
-istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId)
+istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::IChangeable& document, const QByteArray& viewTypeId)
 {
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
 	if (documentTemplatePtr == NULL){
@@ -158,7 +151,7 @@ istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::ICh
 
 
 
-std::string CMultiDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable& document) const
+QByteArray CMultiDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable& document) const
 {
 	int documentsCount = GetDocumentsCount();
 	for (int i = 0; i < documentsCount; ++i){
@@ -169,14 +162,14 @@ std::string CMultiDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable
 		}
 	}
 
-	return std::string();
+	return QByteArray();
 }
 
 
 bool CMultiDocumentManagerBase::FileNew(
-			const std::string& documentTypeId, 
+			const QByteArray& documentTypeId, 
 			bool createView, 
-			const std::string& viewTypeId,
+			const QByteArray& viewTypeId,
 			istd::IChangeable** newDocumentPtr)
 {
 	istd::TDelPtr<SingleDocumentData> newInfoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
@@ -197,10 +190,10 @@ bool CMultiDocumentManagerBase::FileNew(
 
 
 bool CMultiDocumentManagerBase::FileOpen(
-			const std::string* documentTypeIdPtr,
+			const QByteArray* documentTypeIdPtr,
 			const QString* fileNamePtr,
 			bool createView,
-			const std::string& viewTypeId,
+			const QByteArray& viewTypeId,
 			FileToTypeMap* loadedMapPtr)
 {
 	bool retVal = true;
@@ -219,7 +212,7 @@ bool CMultiDocumentManagerBase::FileOpen(
 				++iter){
 		const QString& fileName = *iter;
 
-		std::string documentTypeId;
+		QByteArray documentTypeId;
 		if (OpenDocument(fileName, createView, viewTypeId, documentTypeId)){
 			if (loadedMapPtr != NULL){
 				loadedMapPtr->operator[](fileName) = documentTypeId;
@@ -350,7 +343,7 @@ void CMultiDocumentManagerBase::FileClose(int documentIndex, bool* ignoredPtr)
 			SingleDocumentData* infoPtr = m_documentInfos.GetAt(i);
 			I_ASSERT(infoPtr != NULL);
 
-			Views::iterator findIter = std::find(infoPtr->views.begin(), infoPtr->views.end(), m_activeViewPtr);
+			Views::iterator findIter = qFind(infoPtr->views.begin(), infoPtr->views.end(), m_activeViewPtr);
 			if (findIter != infoPtr->views.end()){
 				if (infoPtr->isDirty){
 					QueryDocumentClose(*infoPtr, ignoredPtr);
@@ -366,7 +359,7 @@ void CMultiDocumentManagerBase::FileClose(int documentIndex, bool* ignoredPtr)
 
 				m_activeViewPtr = NULL;
 
-				if (infoPtr->views.empty()){	// last view was removed
+				if (infoPtr->views.isEmpty()){	// last view was removed
 					int changeFlags = CF_DOCUMENT_REMOVED | CF_DOCUMENT_COUNT_CHANGED;
 					// if last document was closed, force view activation update:
 					if (m_documentInfos.GetCount() == 1){
@@ -400,8 +393,8 @@ void CMultiDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
 istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 			const QString& filePath,
 			bool createView,
-			const std::string& viewTypeId,
-			std::string& documentTypeId)
+			const QByteArray& viewTypeId,
+			QByteArray& documentTypeId)
 {
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
 	if (filePath.isEmpty() || (documentTemplatePtr == NULL)){
@@ -425,7 +418,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 			}
 		}
 		else{
-			if (!existingInfoPtr->views.empty()){
+			if (!existingInfoPtr->views.isEmpty()){
 				istd::IPolymorphic* viewPtr = existingInfoPtr->views.front().GetPtr();
 				I_ASSERT(viewPtr != NULL);
 
@@ -440,7 +433,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 
 	IDocumentTemplate::Ids documentIds = documentTemplatePtr->GetDocumentTypeIdsForFile(filePath);
 
-	if (!documentIds.empty()){
+	if (!documentIds.isEmpty()){
 		istd::CChangeNotifier changePtr(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED);
 
 		documentTypeId = documentIds.front();
@@ -512,7 +505,7 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::GetDoc
 	for (int i = 0; i < documentsCount; ++i){
 		SingleDocumentData& info = GetSingleDocumentData(i);
 
-		Views::iterator findIter = std::find(info.views.begin(), info.views.end(), &view);
+		Views::iterator findIter = qFind(info.views.begin(), info.views.end(), &view);
 		if (findIter != info.views.end()){
 			return &info;
 		}
@@ -537,7 +530,7 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::GetDoc
 }
 
 
-CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::CreateDocument(const std::string& documentTypeId, bool createView, const std::string& viewTypeId) const
+CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::CreateDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId) const
 {
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
 	if (documentTemplatePtr != NULL){

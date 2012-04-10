@@ -2,10 +2,9 @@
 #define iprm_IVariableParam_included
 
 
-// STL includes
-#include <string>
-#include <set>
-
+// Qt includes
+#include <QtCore/QByteArray>
+#include <QtCore/QSet>
 
 // ACF includes
 #include "iser/ISerializable.h"
@@ -23,7 +22,7 @@ namespace iprm
 class IVariableParam: virtual public iser::ISerializable
 {
 public:
-	typedef std::set<std::string> TypeIds;
+	typedef QSet<QByteArray> TypeIds;
 
 	/**
 		Get lilst of all known type ID's.
@@ -34,7 +33,7 @@ public:
 		Get type ID of current stored parameter.
 		\return	type ID of current stored parameter or empty string if no type is assigned.
 	*/
-	virtual std::string GetParameterTypeId() const = 0;
+	virtual QByteArray GetParameterTypeId() const = 0;
 	/**
 		Get current parameter.
 		\return	current stored parameter or NULL if no type is assigned.
@@ -45,7 +44,7 @@ public:
 		Assign type ID to this object.
 		Assigning of type ID creates internal instance of parameter object.
 	*/
-	virtual bool AssignTypeId(const std::string& typeId) = 0;
+	virtual bool AssignTypeId(const QByteArray& typeId) = 0;
 };
 
 

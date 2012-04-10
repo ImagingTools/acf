@@ -2,9 +2,8 @@
 #define imod_CModelProxy_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "imod/IModel.h"
@@ -73,7 +72,7 @@ private:
 	};
 
 	typedef PendingObserver Observer;
-	typedef std::vector<Observer> Observers;
+	typedef QVector<Observer> Observers;
 
 	Observers m_proxyObservers;
 	ModelObserver m_modelObserver;

@@ -2,9 +2,10 @@
 #define imod_CMultiModelBridgeBase_included
 
 
-// STL includes
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
+// ACF includes
 #include "istd/IChangeable.h"
 
 #include "imod/IModel.h"
@@ -46,7 +47,7 @@ public:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 private:
-	typedef std::vector<imod::IModel*> Models;
+	typedef QVector<imod::IModel*> Models;
 
 	Models m_models;
 };

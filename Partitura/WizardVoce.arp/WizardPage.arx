@@ -39,7 +39,7 @@
               Parameters
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               PageData
@@ -55,7 +55,7 @@
               ParametersId
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               PageDataId
@@ -71,7 +71,7 @@
               SlaveControllers
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               SlaveControllers

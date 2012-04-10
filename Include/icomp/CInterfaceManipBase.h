@@ -2,9 +2,8 @@
 #define icomp_CInterfaceManipBase_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "istd/CIdManipBase.h"
@@ -24,14 +23,14 @@ protected:
 		Extract interface from component.
 	*/
 	template <class Interface>
-	static Interface* ExtractInterface(IComponent* componentPtr, const std::string& subId = "");
+	static Interface* ExtractInterface(IComponent* componentPtr, const QByteArray& subId = "");
 };
 
 
 // protected template methods
 
 template <class Interface>
-Interface* CInterfaceManipBase::ExtractInterface(IComponent* componentPtr, const std::string& subId)
+Interface* CInterfaceManipBase::ExtractInterface(IComponent* componentPtr, const QByteArray& subId)
 {
 	if (componentPtr != NULL){
 		static istd::CClassInfo info = istd::CClassInfo::GetInfo<Interface>();

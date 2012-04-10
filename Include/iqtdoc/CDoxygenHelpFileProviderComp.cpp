@@ -63,7 +63,7 @@ istd::CClassInfo CDoxygenHelpFileProviderComp::CalcClassInfo(const QString& cont
 		}
 	}
 	else{
-		return istd::CClassInfo(contextText.toStdString());
+		return istd::CClassInfo(contextText.toLocal8Bit());
 	}
 }
 
@@ -72,8 +72,8 @@ QString CDoxygenHelpFileProviderComp::CalcFilePath(const istd::CClassInfo& class
 {
 	QString retVal = *m_doxygenDirectoryAttrPtr + "/class";
 
-	std::string className = classInfo.GetName();
-	for (		std::string::const_iterator iter = className.begin();
+	QByteArray className = classInfo.GetName();
+	for (		QByteArray::const_iterator iter = className.begin();
 				iter != className.end();
 				++iter){
 		char c = *iter;

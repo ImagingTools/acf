@@ -39,7 +39,7 @@
               LanguageSelection
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               LanguageSelection

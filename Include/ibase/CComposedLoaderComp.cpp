@@ -1,9 +1,6 @@
 #include "ibase/CComposedLoaderComp.h"
 
 
-// STL includes
-#include <algorithm>
-
 // Qt includes
 #include <QtCore/QStringList>
 
@@ -108,7 +105,7 @@ QString CComposedLoaderComp::GetTypeDescription(const QString* extensionPtr) con
 				QStringList extensions;
 				loaderPtr->GetFileExtensions(extensions);
 
-				if (std::find(extensions.begin(), extensions.end(), *extensionPtr) != extensions.end()){
+				if (extensions.contains(*extensionPtr)){
 					return loaderPtr->GetTypeDescription(extensionPtr);
 				}
 			}

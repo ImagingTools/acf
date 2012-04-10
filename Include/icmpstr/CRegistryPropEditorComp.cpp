@@ -28,7 +28,7 @@ void CRegistryPropEditorComp::CreateOverview()
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
 		const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = registryPtr->GetExportedInterfacesMap();
-		if (!exportedInterfaces.empty()){
+		if (!exportedInterfaces.isEmpty()){
 			QTreeWidgetItem* exportedInterfacesItemPtr = new QTreeWidgetItem();
 			exportedInterfacesItemPtr->setText(0, tr("Exported Interfaces"));
 			exportedInterfacesItemPtr->setFont(0, boldFont);
@@ -39,8 +39,8 @@ void CRegistryPropEditorComp::CreateOverview()
 						iter != exportedInterfaces.end();
 						iter++){
 				QTreeWidgetItem* exportedInterfaceItemPtr = new QTreeWidgetItem();
-				exportedInterfaceItemPtr->setText(0, QString(iter.value().c_str()));
-				exportedInterfaceItemPtr->setText(1, QString(iter.key().c_str()));
+				exportedInterfaceItemPtr->setText(0, QString(iter.value()));
+				exportedInterfaceItemPtr->setText(1, QString(iter.key()));
 				exportedInterfacesItemPtr->addChild(exportedInterfaceItemPtr);		
 			}
 
@@ -48,7 +48,7 @@ void CRegistryPropEditorComp::CreateOverview()
 		}
 
 		const icomp::IRegistry::ExportedComponentsMap& exportedComponents = registryPtr->GetExportedComponentsMap();
-		if (!exportedComponents.empty()){
+		if (!exportedComponents.isEmpty()){
 			QTreeWidgetItem* exportedComponentsItemPtr = new QTreeWidgetItem();
 			exportedComponentsItemPtr->setText(0, tr("Exported Components"));
 			exportedComponentsItemPtr->setFont(0, boldFont);
@@ -59,8 +59,8 @@ void CRegistryPropEditorComp::CreateOverview()
 						iter != exportedComponents.end();
 						iter++){
 				QTreeWidgetItem* exportedComponentItemPtr = new QTreeWidgetItem();
-				exportedComponentItemPtr->setText(0, QString(iter.value().c_str()));
-				exportedComponentItemPtr->setText(1, QString(iter.key().c_str()));
+				exportedComponentItemPtr->setText(0, QString(iter.value()));
+				exportedComponentItemPtr->setText(1, QString(iter.key()));
 				exportedComponentsItemPtr->addChild(exportedComponentItemPtr);		
 			}
 

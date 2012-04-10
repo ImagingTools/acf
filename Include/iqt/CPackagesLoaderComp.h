@@ -3,12 +3,10 @@
 
 
 // Qt includes
+#include <QtCore/QMap>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QLibrary>
-
-// STL includes
-#include <QtCore/QMap>
 
 // ACF includes
 #include "istd/TDelPtr.h"
@@ -68,8 +66,8 @@ public:
 
 	// reimplemented (icomp::IPackagesManager)
 	virtual bool LoadPackages(const QString& configFilePath = QString());
-	virtual int GetPackageType(const std::string& packageId) const;
-	virtual QString GetPackagePath(const std::string& packageId) const;
+	virtual int GetPackageType(const QByteArray& packageId) const;
+	virtual QString GetPackagePath(const QByteArray& packageId) const;
 
 	// reimplemented (icomp::IRegistriesManager)
 	virtual const icomp::IRegistry* GetRegistry(const icomp::CComponentAddress& address, const icomp::IRegistry* contextRegistryPtr = NULL) const;
@@ -90,7 +88,7 @@ protected:
 
 		// reimplemented (icomp::IRegistry)
 		virtual ElementInfo* InsertElementInfo(
-					const std::string& elementId,
+					const QByteArray& elementId,
 					const icomp::CComponentAddress& address,
 					bool ensureElementCreated = true);
 
@@ -120,13 +118,13 @@ private:
 	/**
 		Map package ID to package file path.
 	*/
-	typedef QMap<std::string, QString> RealPackagesMap;
+	typedef QMap<QByteArray, QString> RealPackagesMap;
 	RealPackagesMap m_realPackagesMap;
 
 	/**
 		Map package ID to structure CompositePackageInfo.
 	*/
-	typedef QMap<std::string, CompositePackageInfo> CompositePackagesMap;
+	typedef QMap<QByteArray, CompositePackageInfo> CompositePackagesMap;
 	CompositePackagesMap m_compositePackagesMap;
 
 	typedef istd::TDelPtr<icomp::IRegistry> RegistryPtr;
@@ -139,7 +137,7 @@ private:
 	/**
 		List of pathes.
 	*/
-	typedef std::set<QString> PathList;
+	typedef QSet<QString> PathList;
 	mutable PathList m_usedFilesList;
 
 	QString m_configFilePath;

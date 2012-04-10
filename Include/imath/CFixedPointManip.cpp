@@ -1,9 +1,9 @@
 #include "imath/CFixedPointManip.h"
 
 
-// STL includes
-#include <cmath>
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
+#include <QtCore/qmath.h>
 
 
 namespace imath
@@ -20,7 +20,7 @@ CFixedPointManip::CFixedPointManip(int precision, RoundingType roundingType)
 void CFixedPointManip::SetPrecision(int precision)
 {
 	m_precision = precision;
-	m_scaleToIntFactor = std::pow(10.0, m_precision);
+	m_scaleToIntFactor = qPow(10.0, m_precision);
 }
 
 
@@ -62,7 +62,7 @@ bool CFixedPointManip::GetParsed(const QString& text, double& result) const
 
 QString CFixedPointManip::GetString(const double& value, int /*precision*/) const
 {
-	typedef std::vector<char> CharacterList;
+	typedef QVector<char> CharacterList;
 	CharacterList rotatedString;
 
 	qint32 intValue = GetInternalValue(value);

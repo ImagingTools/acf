@@ -21,7 +21,7 @@ CDelegatedProgressManager::CDelegatedProgressManager()
 
 CDelegatedProgressManager::CDelegatedProgressManager(
 			IProgressManager* slaveManagerPtr,
-			const std::string& progressId,
+			const QByteArray& progressId,
 			const QString& description,
 			bool isCancelable)
 :	m_slaveManagerPtr(slaveManagerPtr)
@@ -53,7 +53,7 @@ double CDelegatedProgressManager::GetCumulatedProgress() const
 // reimplemented (iproc::IProgressManager)
 
 int CDelegatedProgressManager::BeginProgressSession(
-			const std::string& /*progressId*/,
+			const QByteArray& /*progressId*/,
 			const QString& /*description*/,
 			bool isCancelable)
 {

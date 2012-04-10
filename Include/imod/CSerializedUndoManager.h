@@ -2,8 +2,10 @@
 #define imod_CSerializedUndoManager_included
 
 
-#include <list>
+// Qt includes
+#include <QtCore/QList>
 
+// ACF includes
 #include "istd/TDelPtr.h"
 
 #include "iser/ISerializable.h"
@@ -44,7 +46,7 @@ protected:
 
 private:
 	typedef istd::TDelPtr<iser::CMemoryWriteArchive> UndoArchivePtr;
-	typedef std::list<UndoArchivePtr> UndoList;
+	typedef QList<UndoArchivePtr> UndoList;
 	UndoList m_undoList;
 	UndoList m_redoList;
 

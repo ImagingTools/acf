@@ -17,19 +17,19 @@ CBaseComponentStaticInfo::CBaseComponentStaticInfo(const IRealComponentStaticInf
 }
 
 
-void CBaseComponentStaticInfo::RegisterInterfaceExtractor(const std::string& interfaceName, InterfaceExtractorPtr extractorPtr)
+void CBaseComponentStaticInfo::RegisterInterfaceExtractor(const QByteArray& interfaceName, InterfaceExtractorPtr extractorPtr)
 {
 	m_interfaceExtractors[interfaceName] = extractorPtr;
 }
 
 
-void CBaseComponentStaticInfo::RegisterAttributeInfo(const std::string& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
+void CBaseComponentStaticInfo::RegisterAttributeInfo(const QByteArray& attributeId, const IAttributeStaticInfo* attributeInfoPtr)
 {
 	m_attributeInfos[attributeId] = attributeInfoPtr;
 }
 
 
-void CBaseComponentStaticInfo::RegisterSubelementInfo(const std::string& embeddedId, const IElementStaticInfo* staticInfoPtr)
+void CBaseComponentStaticInfo::RegisterSubelementInfo(const QByteArray& embeddedId, const IElementStaticInfo* staticInfoPtr)
 {
 	m_subelementInfos[embeddedId] = staticInfoPtr;
 }
@@ -50,11 +50,11 @@ IComponent* CBaseComponentStaticInfo::CreateComponent() const
 void* CBaseComponentStaticInfo::GetComponentInterface(
 			const istd::CClassInfo& interfaceType,
 			IComponent& component,
-			const std::string& subId) const
+			const QByteArray& subId) const
 {
-	if (!subId.empty()){
-		std::string componentId;
-		std::string restId;
+	if (!subId.isEmpty()){
+		QByteArray componentId;
+		QByteArray restId;
 		istd::CIdManipBase::SplitId(subId, componentId, restId);
 		const IComponentInterfaceExtractor* subelementInfoPtr = dynamic_cast<const IComponentInterfaceExtractor*>(GetSubelementInfo(componentId));
 		if (subelementInfoPtr != NULL){
@@ -97,7 +97,7 @@ void* CBaseComponentStaticInfo::GetComponentInterface(
 
 //	reimplemented (icomp::IComponentStaticInfo)
 
-const IAttributeStaticInfo* CBaseComponentStaticInfo::GetAttributeInfo(const std::string& attributeId) const
+const IAttributeStaticInfo* CBaseComponentStaticInfo::GetAttributeInfo(const QByteArray& attributeId) const
 {
 	AttributeInfos::const_iterator fondIter = m_attributeInfos.find(attributeId);
 	if (fondIter != m_attributeInfos.end()){
@@ -114,7 +114,7 @@ const IAttributeStaticInfo* CBaseComponentStaticInfo::GetAttributeInfo(const std
 
 //	reimplemented (icomp::IElementStaticInfo)
 
-const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const std::string& subcomponentId) const
+const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const QByteArray& subcomponentId) const
 {
 	SubelementInfos::const_iterator fondIter = m_subelementInfos.find(subcomponentId);
 	if (fondIter != m_subelementInfos.end()){

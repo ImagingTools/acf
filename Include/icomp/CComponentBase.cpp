@@ -28,7 +28,7 @@ const ICompositeComponent* CComponentBase::GetParentComponent(bool ownerOnly) co
 }
 
 
-void* CComponentBase::GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId)
+void* CComponentBase::GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId)
 {
 	if (m_contextPtr != NULL){
 		const IRealComponentStaticInfo& staticInfo = GetComponentStaticInfo();

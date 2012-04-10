@@ -39,7 +39,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -55,7 +55,7 @@
               LogoPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LogoPath
@@ -71,7 +71,7 @@
               ShowApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowApplicationName
@@ -87,7 +87,7 @@
               ShowApplicationSubName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowApplicationSubName
@@ -103,7 +103,7 @@
               ShowLegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowLegalCopyright
@@ -119,7 +119,7 @@
               ShowProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowProductName
@@ -135,7 +135,7 @@
               ShowProductType
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowProductType
@@ -151,7 +151,7 @@
               VersionIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;int&gt;
+              Integer[]
             </Type>
             <ExportId>
               VersionIds
@@ -167,7 +167,7 @@
               VersionNames
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               VersionNames
@@ -204,7 +204,7 @@
               DialogIconPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               DialogIconPath
@@ -220,7 +220,7 @@
               DialogTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               DialogTitle
@@ -239,7 +239,7 @@
               Gui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

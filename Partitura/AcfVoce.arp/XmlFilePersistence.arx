@@ -39,7 +39,7 @@
               FileLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               FilePath
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               FilePath
@@ -74,7 +74,7 @@
               Object
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Object
@@ -90,7 +90,7 @@
               RestoreonBegin
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               RestoreonBegin
@@ -109,7 +109,7 @@
               StoreOnEnd
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               StoreOnEnd
@@ -149,7 +149,7 @@
               FileExtensions
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               FileExtensions
@@ -165,7 +165,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -181,7 +181,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               VersionInfo

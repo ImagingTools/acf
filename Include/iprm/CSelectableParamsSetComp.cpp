@@ -20,11 +20,11 @@ CSelectableParamsSetComp::CSelectableParamsSetComp()
 
 // reimplemented (iprm::IParamsSet)
 
-const iser::ISerializable* CSelectableParamsSetComp::GetParameter(const std::string& id) const
+const iser::ISerializable* CSelectableParamsSetComp::GetParameter(const QByteArray& id) const
 {
 	I_ASSERT(m_selectionIdAttrPtr.IsValid());
 
-	const std::string& selectionId = *m_selectionIdAttrPtr;
+	const QByteArray& selectionId = *m_selectionIdAttrPtr;
 	if (id == selectionId){
 		return static_cast<const ISelectionParam*>(this);
 	}
@@ -40,11 +40,11 @@ const iser::ISerializable* CSelectableParamsSetComp::GetParameter(const std::str
 }
 
 
-iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const std::string& id)
+iser::ISerializable* CSelectableParamsSetComp::GetEditableParameter(const QByteArray& id)
 {
 	I_ASSERT(m_selectionIdAttrPtr.IsValid());
 
-	const std::string& selectionId = *m_selectionIdAttrPtr;
+	const QByteArray& selectionId = *m_selectionIdAttrPtr;
 	if (id == selectionId){
 		return static_cast<ISelectionParam*>(this);
 	}
@@ -193,9 +193,9 @@ QString CSelectableParamsSetComp::GetOptionDescription(int index) const
 }
 
 
-std::string CSelectableParamsSetComp::GetOptionId(int /*index*/) const
+QByteArray CSelectableParamsSetComp::GetOptionId(int /*index*/) const
 {
-	return std::string();
+	return QByteArray();
 }
 
 

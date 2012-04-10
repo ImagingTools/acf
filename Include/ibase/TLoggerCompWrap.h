@@ -91,10 +91,10 @@ void TLoggerCompWrap<Base>::DecorateMessage(
 	const icomp::CComponentContext* contextPtr = dynamic_cast<const icomp::CComponentContext*>(BaseClass::GetComponentContext());
 	if (contextPtr != NULL){
 		if (messageSource.isEmpty()){
-			messageSource = contextPtr->GetContextId().c_str();
+			messageSource = contextPtr->GetContextId();
 		}
 		else{
-			messageSource = QString(contextPtr->GetContextId().c_str()) + " (" + messageSource + ")";
+			messageSource = QString(contextPtr->GetContextId()) + " (" + messageSource + ")";
 		}
 	}
 }

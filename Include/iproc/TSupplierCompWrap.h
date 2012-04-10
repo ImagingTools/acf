@@ -2,10 +2,8 @@
 #define iproc_TSupplierCompWrap_included
 
 
-// STL includes
-#include <set>
-#include <list>
-
+// Qt includes
+#include <QtCore/QSet>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"

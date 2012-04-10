@@ -34,7 +34,7 @@ int CTmplBasedDocumentManagerBase::GetAllowedOperationFlags(const istd::IPolymor
 	}
 
 	if ((m_documentTemplatePtr != NULL) && (documentPtr != NULL)){
-		std::string docTypeId = GetDocumentTypeId(*documentPtr);
+		QByteArray docTypeId = GetDocumentTypeId(*documentPtr);
 		iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(docTypeId);
 		if (loaderPtr != NULL){
 			if (docInfo.filePath.isEmpty() || loaderPtr->IsOperationSupported(
@@ -63,7 +63,7 @@ int CTmplBasedDocumentManagerBase::GetAllowedOperationFlags(const istd::IPolymor
 
 // reimplemented (idoc::IDocumentTypesInfo)
 
-bool CTmplBasedDocumentManagerBase::IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const
+bool CTmplBasedDocumentManagerBase::IsFeatureSupported(int featureFlags, const QByteArray& documentTypeId) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->IsFeatureSupported(featureFlags, documentTypeId);
@@ -83,7 +83,7 @@ IDocumentTypesInfo::Ids CTmplBasedDocumentManagerBase::GetDocumentTypeIds() cons
 }
 
 
-QString CTmplBasedDocumentManagerBase::GetDocumentTypeName(const std::string& documentTypeId) const
+QString CTmplBasedDocumentManagerBase::GetDocumentTypeName(const QByteArray& documentTypeId) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->GetDocumentTypeName(documentTypeId);
@@ -93,7 +93,7 @@ QString CTmplBasedDocumentManagerBase::GetDocumentTypeName(const std::string& do
 }
 
 
-iser::IFileTypeInfo* CTmplBasedDocumentManagerBase::GetDocumentFileTypeInfo(const std::string& documentTypeId) const
+iser::IFileTypeInfo* CTmplBasedDocumentManagerBase::GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->GetFileLoader(documentTypeId);
@@ -113,7 +113,7 @@ IDocumentTypesInfo::Ids CTmplBasedDocumentManagerBase::GetDocumentTypeIdsForFile
 }
 
 
-QString CTmplBasedDocumentManagerBase::GetDefaultDirectory(const QString& sugestedDir, const std::string* documentTypeIdPtr) const
+QString CTmplBasedDocumentManagerBase::GetDefaultDirectory(const QString& sugestedDir, const QByteArray* documentTypeIdPtr) const
 {
 	if (m_documentTemplatePtr != NULL){
 		return m_documentTemplatePtr->GetDefaultDirectory(sugestedDir, documentTypeIdPtr);
@@ -144,7 +144,7 @@ void CTmplBasedDocumentManagerBase::SetDocumentTemplate(const IDocumentTemplate*
 		for (		IDocumentTemplate::Ids::const_iterator iter = docTypeIds.begin();
 					iter != docTypeIds.end();
 					++iter){
-			const std::string& docTypeId = *iter;
+			const QByteArray& docTypeId = *iter;
 
 			iser::IFileLoader* loaderPtr = m_documentTemplatePtr->GetFileLoader(docTypeId);
 			if (		(loaderPtr != NULL) &&

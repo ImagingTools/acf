@@ -2,6 +2,7 @@
 
 
 // Qt includes
+#include <QtCore/qmath.h>
 #include <QtGui/QGraphicsView>
 
 // ACF includes
@@ -58,7 +59,7 @@ void CSceneControllerGuiComp::OnZoomIncrement()
 		QGraphicsView* viewPtr = scenePtr->views().at(0);
 
 		QMatrix sceneMatrix = viewPtr->matrix();
-		double scaleFactor = pow((double)2, 0.5);
+		double scaleFactor = qPow((double)2, 0.5);
 		sceneMatrix.scale(scaleFactor, scaleFactor);
 
 		viewPtr->setMatrix(sceneMatrix);
@@ -83,7 +84,7 @@ void CSceneControllerGuiComp::OnZoomDecrement()
 		QGraphicsView* viewPtr = scenePtr->views().at(0);
 
 		QMatrix sceneMatrix = viewPtr->matrix();
-		double scaleFactor = pow((double)2, -0.5);
+		double scaleFactor = qPow((double)2, -0.5);
 		sceneMatrix.scale(scaleFactor, scaleFactor);
 
 		viewPtr->setMatrix(sceneMatrix);

@@ -2,10 +2,6 @@
 #define icmm_TComposedColor_included
 
 
-// STL includes
-#include <cstring>
-
-
 // ACF includes
 #include "iser/ISerializable.h"
 #include "iser/CArchiveTag.h"

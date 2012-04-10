@@ -1,13 +1,10 @@
 #include "ibase/CTextFileLoaderComp.h"
 
 
-// STL includes
-#include <fstream>
-
-
 // Qt includes
 #include <QtCore/QStringList>
-
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 
 // ACF includes
 #include "ibase/ITextDocument.h"
@@ -41,30 +38,23 @@ int CTextFileLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fi
 		return StateFailed;
 	}
 
-	std::basic_ifstream<wchar_t> fileStream(filePath.toStdString().c_str(), std::ios::in);
-	if (!fileStream.is_open()){
-		return StateFailed;
-	}
-
 	int retVal = StateFailed;
 
 	ibase::ITextDocument* documentPtr = dynamic_cast<ITextDocument*>(&data);
-	I_ASSERT(documentPtr != NULL);
-
-	QString documentText;
 	if (documentPtr != NULL){
-		while(!fileStream.eof()){
-			wchar_t textCharBuffer;
-			fileStream.get(textCharBuffer);
-
-			documentText.append(QChar(textCharBuffer));
+		QFile file(filePath);
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+			return StateFailed;
 		}
+
+		QTextStream fileStream(&file);
+
+		QString documentText = fileStream.readAll();
 		
 		documentPtr->SetText(documentText);
+
 		retVal = StateOk;
 	}
-
-	fileStream.close();
 
 
 	return retVal;
@@ -77,23 +67,21 @@ int CTextFileLoaderComp::SaveToFile(const istd::IChangeable& data, const QString
 		return StateFailed;
 	}
 
-	std::basic_ofstream<wchar_t> fileStream(filePath.toStdString().c_str(), std::ios::out);
-	if (!fileStream.is_open()){
-		return StateFailed;
-	}
-
 	int retVal = StateFailed;
 
 	const ibase::ITextDocument* documentPtr = dynamic_cast<const ITextDocument*>(&data);
-	I_ASSERT(documentPtr != NULL);
-
 	if (documentPtr != NULL){
-		fileStream << documentPtr->GetText().toStdWString();
+		QFile file(filePath);
+		if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)){
+			return StateFailed;
+		}
 
-		retVal = fileStream.good() ? StateOk : StateFailed;
+		QTextStream fileStream(&file);
+
+		fileStream << documentPtr->GetText();
+
+		retVal = StateOk;
 	}
-
-	fileStream.close();
 
 	return retVal;
 }

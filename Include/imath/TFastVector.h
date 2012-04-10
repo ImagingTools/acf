@@ -2,11 +2,6 @@
 #define imath_TFastVector_included
 
 
-// STL includes
-#include <cmath>
-#include <cstring>
-
-
 // ACF includes
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -722,7 +717,7 @@ bool TFastVector<MaxSize, Element>::Normalize(Element length)
 
     Element proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
 		for (int i = 0; i < m_elementsCount; ++i){
             m_elements[i] = m_elements[i] / proportion;
         }

@@ -4,8 +4,8 @@
 // Old C includes
 #include <stdio.h>
 
-// STL includes
-#include <list>
+// Qt includes
+#include <QtCore/QList>
 
 // ACF includes
 #include "iser/IFileLoader.h"
@@ -69,8 +69,8 @@ private:
 	I_TREF(LockedProducerType, m_slaveCacheEngineCompPtr);
 
 	typedef QMap<Key, QString> KeyToFileNameMap;
-	typedef std::list<Key> RecentlyUsedKeys;
-	typedef std::set<const CacheObject*> OwnedObjects;
+	typedef QList<Key> RecentlyUsedKeys;
+	typedef QSet<const CacheObject*> OwnedObjects;
 
 	mutable KeyToFileNameMap m_keyToFileNameMap;
 	mutable RecentlyUsedKeys m_recentlyUsedKeys;
@@ -193,7 +193,7 @@ void TFileCachedProducerCompBase<Key, CacheObject>::CleanFileList()
 		if (foundIter != m_keyToFileNameMap.end()){
 			const QString& cacheFilePath = foundIter.value();
 
-			if (remove(cacheFilePath.toStdString().c_str()) != 0){
+			if (remove(cacheFilePath.toLocal8Bit()) != 0){
 				OnCacheFileRemoved(key, cacheFilePath);
 			}
 

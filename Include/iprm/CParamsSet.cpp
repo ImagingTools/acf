@@ -20,9 +20,9 @@ CParamsSet::CParamsSet(const IParamsSet* slaveSetPtr)
 }
 
 
-bool CParamsSet::SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr, bool releaseFlag)
+bool CParamsSet::SetEditableParameter(const QByteArray& id, iser::ISerializable* parameterPtr, bool releaseFlag)
 {
-	if (!id.empty()){
+	if (!id.isEmpty()){
 		const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
 		if (parameterInfoPtr == NULL){
 			m_params.PushBack(new ParameterInfo(id, parameterPtr, releaseFlag));
@@ -48,7 +48,7 @@ const CParamsSet::ParameterInfos& CParamsSet::GetParameterInfos() const
 
 // reimplemented (iprm::IParamsSet)
 
-const iser::ISerializable* CParamsSet::GetParameter(const std::string& id) const
+const iser::ISerializable* CParamsSet::GetParameter(const QByteArray& id) const
 {
 	const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
 	if (parameterInfoPtr != NULL){
@@ -63,7 +63,7 @@ const iser::ISerializable* CParamsSet::GetParameter(const std::string& id) const
 }
 
 
-iser::ISerializable* CParamsSet::GetEditableParameter(const std::string& id)
+iser::ISerializable* CParamsSet::GetEditableParameter(const QByteArray& id)
 {
 	const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
 	if (parameterInfoPtr != NULL){
@@ -124,7 +124,7 @@ bool CParamsSet::Serialize(iser::IArchive& archive)
 		for (int i = 0; i < paramsCount; ++i){
 			retVal = retVal && archive.BeginTag(parameterTag);
 
-			std::string id;
+			QByteArray id;
 			retVal = retVal && archive.BeginTag(parameterIdTag);
 			retVal = retVal && archive.Process(id);
 			retVal = retVal && archive.EndTag(parameterIdTag);
@@ -209,7 +209,7 @@ bool CParamsSet::CopyFrom(const IChangeable& object)
 
 // protected methods
 
-const CParamsSet::ParameterInfo* CParamsSet::FindParameterInfo(const std::string& parameterId) const
+const CParamsSet::ParameterInfo* CParamsSet::FindParameterInfo(const QByteArray& parameterId) const
 {
 	for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
 		const ParameterInfo* parameterPtr = m_params.GetAt(parameterIndex);

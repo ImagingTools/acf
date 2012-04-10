@@ -167,18 +167,18 @@ void CVariableParamGuiComp::UpdateGui(int updateFlags)
 		return;
 	}
 
-	std::string currentId;
+	QByteArray currentId;
 	if (m_currentTypeIndex >= 0){
-		currentId = m_typeIdsAttrPtr[m_currentTypeIndex].toStdString();
+		currentId = m_typeIdsAttrPtr[m_currentTypeIndex].toLocal8Bit();
 	}
 
-	std::string typeId = variableParamPtr->GetParameterTypeId();
+	QByteArray typeId = variableParamPtr->GetParameterTypeId();
 	if (typeId != currentId){
 		DetachCurrentType();
 
 		int typeIdsCount = m_typeIdsAttrPtr.GetCount();
 		for (int i = 0; i < typeIdsCount; ++i){
-			if (typeId == m_typeIdsAttrPtr[i].toStdString()){
+			if (typeId == m_typeIdsAttrPtr[i].toLocal8Bit()){
 				m_currentTypeIndex = i;
 
 				AttachCurrentType();
@@ -254,7 +254,7 @@ void CVariableParamGuiComp::on_TypeSelectorCB_currentIndexChanged(int index)
 	}
 
 	if ((index >= 0) && (index < m_typeIdsAttrPtr.GetCount())){
-		variableParamPtr->AssignTypeId(m_typeIdsAttrPtr[index].toStdString());
+		variableParamPtr->AssignTypeId(m_typeIdsAttrPtr[index].toLocal8Bit());
 	}
 }
 

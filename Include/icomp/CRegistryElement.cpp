@@ -26,7 +26,7 @@ CRegistryElement::CRegistryElement()
 }
 
 
-IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const std::string& attributeId)
+IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const QByteArray& attributeId)
 {
 	AttributeInfoMap::iterator iter = m_attributeInfos.find(attributeId);
 	if (iter != m_attributeInfos.end()){
@@ -70,8 +70,8 @@ IRegistryElement::Ids CRegistryElement::GetAttributeIds() const
 
 
 IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(
-			const std::string& attributeId,
-			const std::string& attributeType)
+			const QByteArray& attributeId,
+			const QByteArray& attributeType)
 {
 	if (m_attributeInfos.find(attributeId) != m_attributeInfos.end()){
 		return NULL;
@@ -84,54 +84,54 @@ IRegistryElement::AttributeInfo* CRegistryElement::InsertAttributeInfo(
 }
 
 
-iser::IObject* CRegistryElement::CreateAttribute(const std::string& attributeType) const
+iser::IObject* CRegistryElement::CreateAttribute(const QByteArray& attributeType) const
 {
-	static std::string intAttrTypeName = icomp::CIntAttribute::GetTypeName();
-	static std::string doubleAttrTypeName = icomp::CDoubleAttribute::GetTypeName();
-	static std::string boolAttrTypeName = icomp::CBoolAttribute::GetTypeName();
-	static std::string stringAttrTypeName = icomp::CStringAttribute::GetTypeName();
-	static std::string stdStringAttrTypeName = icomp::CStdStringAttribute::GetTypeName();
+	static QByteArray integerAttrTypeName = icomp::CIntegerAttribute::GetTypeName();
+	static QByteArray realAttrTypeName = icomp::CRealAttribute::GetTypeName();
+	static QByteArray booleanAttrTypeName = icomp::CBooleanAttribute::GetTypeName();
+	static QByteArray stringAttrTypeName = icomp::CStringAttribute::GetTypeName();
+	static QByteArray idAttrTypeName = icomp::CIdAttribute::GetTypeName();
 
-	static std::string multiBoolAttrTypeName = icomp::CMultiBoolAttribute::GetTypeName();
-	static std::string multiDoubleAttrTypeName = icomp::CMultiDoubleAttribute::GetTypeName();
-	static std::string multiIntAttrTypeName = icomp::CMultiIntAttribute::GetTypeName();
-	static std::string multiStdStringAttrTypeName = icomp::CMultiStdStringAttribute::GetTypeName();
-	static std::string multiStringAttrTypeName = icomp::CMultiStringAttribute::GetTypeName();
+	static QByteArray boolListAttrTypeName = icomp::CBooleanListAttribute::GetTypeName();
+	static QByteArray realListAttrTypeName = icomp::CRealListAttribute::GetTypeName();
+	static QByteArray integerListAttrTypeName = icomp::CIntegerListAttribute::GetTypeName();
+	static QByteArray stringListAttrTypeName = icomp::CStringListAttribute::GetTypeName();
+	static QByteArray idListAttrTypeName = icomp::CIdListAttribute::GetTypeName();
 
-	static std::string referenceAttrTypeName = icomp::CReferenceAttribute::GetTypeName();
-	static std::string multiReferenceAttrTypeName = icomp::CMultiReferenceAttribute::GetTypeName();
-	static std::string factoryAttrTypeName = icomp::CFactoryAttribute::GetTypeName();
-	static std::string multiFactoryAttrTypeName = icomp::CMultiFactoryAttribute::GetTypeName();
+	static QByteArray referenceAttrTypeName = icomp::CReferenceAttribute::GetTypeName();
+	static QByteArray multiReferenceAttrTypeName = icomp::CMultiReferenceAttribute::GetTypeName();
+	static QByteArray factoryAttrTypeName = icomp::CFactoryAttribute::GetTypeName();
+	static QByteArray multiFactoryAttrTypeName = icomp::CMultiFactoryAttribute::GetTypeName();
 
-	if (attributeType == intAttrTypeName){
-		return new icomp::CIntAttribute();
+	if (attributeType == integerAttrTypeName){
+		return new icomp::CIntegerAttribute();
 	}
-	else if (attributeType == doubleAttrTypeName){
-		return new icomp::CDoubleAttribute();
+	else if (attributeType == realAttrTypeName){
+		return new icomp::CRealAttribute();
 	}
-	else if (attributeType == boolAttrTypeName){
-		return new icomp::CBoolAttribute();
+	else if (attributeType == booleanAttrTypeName){
+		return new icomp::CBooleanAttribute();
 	}
 	else if (attributeType == stringAttrTypeName){
 		return new icomp::CStringAttribute();
 	}
-	else if (attributeType == stdStringAttrTypeName){
-		return new icomp::CStdStringAttribute();
+	else if (attributeType == idAttrTypeName){
+		return new icomp::CIdAttribute();
 	}
-	else if (attributeType == multiIntAttrTypeName){
-		return new icomp::CMultiIntAttribute();
+	else if (attributeType == integerListAttrTypeName){
+		return new icomp::CIntegerListAttribute();
 	}
-	else if (attributeType == multiDoubleAttrTypeName){
-		return new icomp::CMultiDoubleAttribute();
+	else if (attributeType == realListAttrTypeName){
+		return new icomp::CRealListAttribute();
 	}
-	else if (attributeType == multiBoolAttrTypeName){
-		return new icomp::CMultiBoolAttribute();
+	else if (attributeType == boolListAttrTypeName){
+		return new icomp::CBooleanListAttribute();
 	}
-	else if (attributeType == multiStringAttrTypeName){
-		return new icomp::CMultiStringAttribute();
+	else if (attributeType == stringListAttrTypeName){
+		return new icomp::CStringListAttribute();
 	}
-	else if (attributeType == multiStdStringAttrTypeName){
-		return new icomp::CMultiStdStringAttribute();
+	else if (attributeType == idListAttrTypeName){
+		return new icomp::CIdListAttribute();
 	}
 	else if (attributeType == referenceAttrTypeName){
 		return new icomp::CReferenceAttribute();
@@ -151,7 +151,7 @@ iser::IObject* CRegistryElement::CreateAttribute(const std::string& attributeTyp
 }
 
 
-const IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const std::string& attributeId) const
+const IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const QByteArray& attributeId) const
 {
 	AttributeInfoMap::const_iterator iter = m_attributeInfos.find(attributeId);
 
@@ -163,7 +163,7 @@ const IRegistryElement::AttributeInfo* CRegistryElement::GetAttributeInfo(const 
 }
 
 
-bool CRegistryElement::RemoveAttribute(const std::string& attributeId)
+bool CRegistryElement::RemoveAttribute(const QByteArray& attributeId)
 {
 	istd::CChangeNotifier notifier(this);
 
@@ -208,7 +208,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 					++checkInfoIter){
 			const AttributeInfo& info = checkInfoIter.value();
 
-			if (info.exportId.empty() && !info.attributePtr.IsValid()){
+			if (info.exportId.isEmpty() && !info.attributePtr.IsValid()){
 				continue;
 			}
 
@@ -222,19 +222,19 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 					++iter){
 			AttributeInfo& info = iter.value();
 
-			if (info.exportId.empty() && !info.attributePtr.IsValid()){
+			if (info.exportId.isEmpty() && !info.attributePtr.IsValid()){
 				continue;
 			}
 
 			retVal = retVal && archive.BeginTag(attributeInfoTag);
 
 			retVal = retVal && archive.BeginTag(attributeIdTag);
-			std::string attributeId = iter.key();
+			QByteArray attributeId = iter.key();
 			retVal = retVal && archive.Process(attributeId);
 			retVal = retVal && archive.EndTag(attributeIdTag);
 
 			bool isEnabled = info.attributePtr.IsValid();
-			std::string attributeType = isEnabled? info.attributePtr->GetFactoryId(): info.attributeTypeName;
+			QByteArray attributeType = isEnabled? info.attributePtr->GetFactoryId(): info.attributeTypeName;
 
 			retVal = retVal && archive.BeginTag(attributeTypeTag);
 			retVal = retVal && archive.Process(attributeType);
@@ -273,7 +273,7 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.BeginTag(attributeInfoTag);
 
 			retVal = retVal && archive.BeginTag(attributeIdTag);
-			std::string attributeId;
+			QByteArray attributeId;
 			retVal = retVal && archive.Process(attributeId);
 			retVal = retVal && archive.EndTag(attributeIdTag);
 
@@ -281,13 +281,13 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 				return false;
 			}
 
-			std::string attributeType;
+			QByteArray attributeType;
 			retVal = retVal && archive.BeginTag(attributeTypeTag);
 			retVal = retVal && archive.Process(attributeType);
 			retVal = retVal && archive.EndTag(attributeTypeTag);
 
 			retVal = retVal && archive.BeginTag(exportIdTag);
-			std::string exportId;
+			QByteArray exportId;
 			retVal = retVal && archive.Process(exportId);
 			retVal = retVal && archive.EndTag(exportIdTag);
 

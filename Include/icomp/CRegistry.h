@@ -22,27 +22,27 @@ class CRegistry: virtual public IRegistry
 public:
 	// reimplemented (icomp::IRegistry)
 	virtual Ids GetElementIds() const;
-	virtual const ElementInfo* GetElementInfo(const std::string& elementId) const;
+	virtual const ElementInfo* GetElementInfo(const QByteArray& elementId) const;
 	virtual ElementInfo* InsertElementInfo(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::CComponentAddress& address,
 				bool ensureElementCreated = true);
-	virtual bool RemoveElementInfo(const std::string& elementId);
-	virtual bool RenameElement(const std::string& oldElementId, const std::string& newElementId);
+	virtual bool RemoveElementInfo(const QByteArray& elementId);
+	virtual bool RenameElement(const QByteArray& oldElementId, const QByteArray& newElementId);
 	virtual Ids GetEmbeddedRegistryIds() const;
-	virtual IRegistry* GetEmbeddedRegistry(const std::string& registryId) const;
-	virtual IRegistry* InsertEmbeddedRegistry(const std::string& registryId);
-	virtual bool RemoveEmbeddedRegistry(const std::string& registryId);
-	virtual bool RenameEmbeddedRegistry(const std::string& oldRegistryId, const std::string& newRegistryId);
+	virtual IRegistry* GetEmbeddedRegistry(const QByteArray& registryId) const;
+	virtual IRegistry* InsertEmbeddedRegistry(const QByteArray& registryId);
+	virtual bool RemoveEmbeddedRegistry(const QByteArray& registryId);
+	virtual bool RenameEmbeddedRegistry(const QByteArray& oldRegistryId, const QByteArray& newRegistryId);
 	virtual const ExportedInterfacesMap& GetExportedInterfacesMap() const;
 	virtual const ExportedComponentsMap& GetExportedComponentsMap() const;
 	virtual void SetElementInterfaceExported(
-				const std::string& elementId,
-				const std::string& interfaceName,
+				const QByteArray& elementId,
+				const QByteArray& interfaceName,
 				bool state = true);
 	virtual void SetElementExported(
-				const std::string& exportId,
-				const std::string& elementId);
+				const QByteArray& exportId,
+				const QByteArray& elementId);
 	virtual const QString& GetDescription() const;
 	virtual void SetDescription(const QString& description);
 	virtual const QString& GetKeywords() const;
@@ -59,7 +59,7 @@ protected:
 		Called to create instance of registry element.
 	*/
 	virtual icomp::IRegistryElement* CreateRegistryElement(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::CComponentAddress& address) const;
 	virtual bool SerializeComponents(iser::IArchive& archive);
 	virtual bool SerializeEmbeddedRegistries(iser::IArchive& archive);
@@ -67,9 +67,9 @@ protected:
 	virtual bool SerializeExportedComponents(iser::IArchive& archive);
 
 private:
-	typedef QMap<std::string, ElementInfo> ComponentsMap;
+	typedef QMap<QByteArray, ElementInfo> ComponentsMap;
 	typedef istd::TDelPtr<IRegistry> RegistryPtr;
-	typedef QMap<std::string, RegistryPtr> EmbeddedRegistriesMap;
+	typedef QMap<QByteArray, RegistryPtr> EmbeddedRegistriesMap;
 
 	ComponentsMap m_componentsMap;
 	EmbeddedRegistriesMap m_embeddedRegistriesMap;

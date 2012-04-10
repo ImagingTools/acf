@@ -1,9 +1,6 @@
 #include "iview/CViewBase.h"
 
 
-// STL includes
-#include <algorithm>
-
 // ACF includes
 #include "imod/IModel.h"
 
@@ -256,7 +253,7 @@ void CViewBase::SetScreenPosition(const i2d::CVector2d& client, istd::CIndex2d s
 
 void CViewBase::AddViewEventObserver(iview::IViewEventObserver* listenerPtr)
 {
-	std::vector<iview::IViewEventObserver*>::iterator foundIter = std::find(m_viewListeners.begin(), m_viewListeners.end(), listenerPtr);
+	QVector<iview::IViewEventObserver*>::iterator foundIter = qFind(m_viewListeners.begin(), m_viewListeners.end(), listenerPtr);
 	if (foundIter == m_viewListeners.end()){
 		m_viewListeners.push_back(listenerPtr);
 	}
@@ -265,7 +262,7 @@ void CViewBase::AddViewEventObserver(iview::IViewEventObserver* listenerPtr)
 
 void CViewBase::RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr)
 {
-	std::vector<iview::IViewEventObserver*>::iterator foundIter = std::find(m_viewListeners.begin(), m_viewListeners.end(), listenerPtr);
+	QVector<iview::IViewEventObserver*>::iterator foundIter = qFind(m_viewListeners.begin(), m_viewListeners.end(), listenerPtr);
 	if (foundIter != m_viewListeners.end()){
 		m_viewListeners.erase(foundIter);
 	}
@@ -529,17 +526,15 @@ int CViewBase::GetEditMode() const
 
 ITouchable::TouchState CViewBase::IsTouched(istd::CIndex2d position) const
 {
-	Layers::const_reverse_iterator iter = m_layers.rbegin();
-	while (iter != m_layers.rend()){
-		ITouchable* layerPtr = dynamic_cast<ITouchable*>(*iter);
+	int layersCont = m_layers.size();
+	for (int i = layersCont - 1; i >= 0; --i){
+		ITouchable* layerPtr = dynamic_cast<ITouchable*>(m_layers[i]);
 		if (layerPtr != NULL){
 			TouchState touchState = layerPtr->IsTouched(position);
 			if (touchState != iview::IInteractiveShape::TS_NONE){
 				return touchState;
 			}
 		}
-
-		++iter;
 	}
 
 	return TS_NONE;
@@ -566,7 +561,7 @@ void CViewBase::UpdateMousePointer()
 
 void CViewBase::OnLayerInvalidated(const ILayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea)
 {
-	I_ASSERT(!m_layers.empty());
+	I_ASSERT(!m_layers.isEmpty());
 
 	m_isBoundingBoxValid = false;
 
@@ -737,7 +732,7 @@ void CViewBase::DisconnectAllShapes()
 void CViewBase::InvalidateBackground()
 {
 	SetBackgroundBufferValid(false);
-	if (!m_layers.empty()){
+	if (!m_layers.isEmpty()){
 		ILayer* backgroundLayerPtr = m_layers[0];
 		I_ASSERT(backgroundLayerPtr != NULL);
 
@@ -778,9 +773,9 @@ void CViewBase::CalcMouseShape() const
 {
 	m_mouseShapePtr = NULL;
 
-	Layers::const_reverse_iterator iter = m_layers.rbegin();
-	while (iter != m_layers.rend()){
-		ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(*iter);
+	int layersCont = m_layers.size();
+	for (int i = layersCont - 1; i >= 0; --i){
+		ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(m_layers[i]);
 		if (layerPtr != NULL){
 			IInteractiveShape* shapePtr;
 			ITouchable::TouchState touchState = layerPtr->IsTouched(m_lastMousePosition, &shapePtr);
@@ -789,8 +784,6 @@ void CViewBase::CalcMouseShape() const
 				return;
 			}
 		}
-
-		++iter;
 	}
 }
 
@@ -816,17 +809,15 @@ bool CViewBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTyp
 			}
 		}
 
-		Layers::reverse_iterator iter = m_layers.rbegin();
-		while (iter != m_layers.rend()){
-			ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(*iter);
+		int layersCont = m_layers.size();
+		for (int i = layersCont - 1; i >= 0; --i){
+			ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(m_layers[i]);
 			if (layerPtr != NULL){
 				if (layerPtr->OnMouseButton(position, buttonType, downFlag)){
 					m_isSelectEventActive = false;
 					return true;
 				}
 			}
-
-			++iter;
 		}
 
 		if (downFlag && (buttonType == Qt::LeftButton)){
@@ -892,9 +883,9 @@ ISelectable::MousePointerMode CViewBase::CalcMousePointer(istd::CIndex2d positio
 {
 	bool areSelected = false;
 
-	Layers::const_reverse_iterator iter = m_layers.rbegin();
-	while (iter != m_layers.rend()){
-		ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(*iter);
+	int layersCont = m_layers.size();
+	for (int i = layersCont - 1; i >= 0; --i){
+		ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(m_layers[i]);
 		if (layerPtr != NULL){
 
 			IInteractiveShape* shapePtr = NULL;
@@ -926,8 +917,6 @@ ISelectable::MousePointerMode CViewBase::CalcMousePointer(istd::CIndex2d positio
 
 			areSelected = areSelected || (layerPtr->GetSelectedShapesCount() > 0);
 		}
-
-		++iter;
 	}
 
 	MousePointerMode result = MPM_DEFAULT;

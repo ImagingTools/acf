@@ -2,13 +2,9 @@
 #define idoc_IDocumentTypesInfo_included
 
 
-// STL includes
-#include <vector>
-
-
 // Qt includes
 #include <QtCore/QString>
-
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/IPolymorphic.h"
@@ -26,7 +22,7 @@ namespace idoc
 class IDocumentTypesInfo: virtual public istd::IPolymorphic
 {
 public:
-	typedef std::vector<std::string> Ids;
+	typedef QVector<QByteArray> Ids;
 
 	/**
 		Enumeration for supported types of operation with the document.
@@ -52,7 +48,7 @@ public:
 	/**
 		Return \c true, if the feature(s) is supported by this document template.
 	*/
-	virtual bool IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const = 0;
+	virtual bool IsFeatureSupported(int featureFlags, const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Get list of supported document ID's can be created for specified file.
@@ -63,13 +59,13 @@ public:
 		Get human readable name of some document type ID.
 		\param	documentTypeId	ID of document type as returned by \c GetDocumentTypeIds().
 	*/
-	virtual QString GetDocumentTypeName(const std::string& documentTypeId) const = 0;
+	virtual QString GetDocumentTypeName(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Get file type information object for some selected document type.
 		\param	documentTypeId	ID of document type as returned by \c GetDocumentTypeIds().
 	*/
-	virtual iser::IFileTypeInfo* GetDocumentFileTypeInfo(const std::string& documentTypeId) const = 0;
+	virtual iser::IFileTypeInfo* GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Get list of supported document ID's can be created for specified file.
@@ -81,7 +77,7 @@ public:
 		\param	sugestedDir			template directory sugested by user.
 		\param	documentTypeIdPtr	optional ID of document type.
 	*/
-	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const std::string* documentTypeIdPtr = NULL) const = 0;
+	virtual QString GetDefaultDirectory(const QString& sugestedDir = "", const QByteArray* documentTypeIdPtr = NULL) const = 0;
 };
 
 

@@ -2,10 +2,9 @@
 #define icomp_CComponentContext_included
 
 
-// STL includes
+// Qt includes
+#include <QtCore/QByteArray>
 #include <QtCore/QMap>
-#include <string>
-
 
 // ACF includes
 #include "icomp/IComponentContext.h"
@@ -30,15 +29,15 @@ public:
 				const IRegistryElement* elementPtr,
 				const IComponentStaticInfo* staticInfoPtr,
 				const IComponentContext* parentPtr = NULL,
-				const std::string& contextId = "");
+				const QByteArray& contextId = "");
 
-	const std::string& GetContextId() const;
+	const QByteArray& GetContextId() const;
 
 	// reimplemented (icomp::IComponentContext)
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentStaticInfo& GetStaticInfo() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
+	virtual const iser::IObject* GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr = NULL) const;
 
 private:
 	const IRegistryElement& m_registryElement;
@@ -46,15 +45,15 @@ private:
 
 	const IComponentContext* m_parentPtr;
 
-	typedef QMap<std::string, const iser::IObject*> AttributeMap;
+	typedef QMap<QByteArray, const iser::IObject*> AttributeMap;
 	AttributeMap m_attributeMap;
-	std::string m_contextId;
+	QByteArray m_contextId;
 };
 
 
 // inline methods
 
-inline const std::string& CComponentContext::GetContextId() const
+inline const QByteArray& CComponentContext::GetContextId() const
 {
 	return m_contextId;
 }

@@ -27,7 +27,7 @@ public:
 				QItemDelegate& itemDelegate,
 				const CElementSelectionInfoManagerBase& elementSelectionInfoManager,
 				QWidget* parentWidget,
-				const std::string& attributeId,
+				const QByteArray& attributeId,
 				int attributeFlags);
 
 	QString GetText() const;
@@ -39,7 +39,7 @@ protected Q_SLOTS:
 private:
 	QItemDelegate& m_itemDelegate;
 	QLineEdit* m_textEditor;
-	std::string m_attributeId;
+	QByteArray m_attributeId;
 	int m_attributeFlags;
 
 	const CElementSelectionInfoManagerBase& m_elementSelectionInfoManager;

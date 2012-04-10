@@ -20,7 +20,7 @@ idoc::IDocumentTemplate::Ids CExtendedDocumentTemplateComp::GetDocumentTypeIdsFo
 	for (		IDocumentTemplate::Ids::const_iterator documentIdIter = allIds.begin();
 				documentIdIter != allIds.end();
 				++documentIdIter){
-		const std::string& id = *documentIdIter;
+		const QByteArray& id = *documentIdIter;
 
 		QStringList extensions;
 		iser::IFileLoader* loaderPtr = GetFileLoader(id);

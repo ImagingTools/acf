@@ -58,7 +58,7 @@ private:
 	QPen m_pens[int(IColorShema::SP_LAST) + 1];
 	QBrush m_brushes[int(IColorShema::SB_LAST) + 1];
 	QPen* m_pensSets[int(IColorShema::SPS_LAST) + 1];
-	std::vector<const QPen*> m_pensPtrSets[int(IColorShema::SPS_LAST) + 1];
+	QVector<const QPen*> m_pensPtrSets[int(IColorShema::SPS_LAST) + 1];
 	QFont m_fonts[int(IColorShema::SF_LAST) + 1];
 };
 

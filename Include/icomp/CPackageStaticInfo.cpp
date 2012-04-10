@@ -47,7 +47,7 @@ bool CPackageStaticInfo::SerializeMeta(iser::IArchive& archive)
 }
 
 
-void CPackageStaticInfo::RegisterEmbeddedComponentInfo(const std::string& embeddedId, const IComponentStaticInfo* componentInfoPtr)
+void CPackageStaticInfo::RegisterEmbeddedComponentInfo(const QByteArray& embeddedId, const IComponentStaticInfo* componentInfoPtr)
 {
 	m_embeddedComponentInfos[embeddedId] = componentInfoPtr;
 }
@@ -55,7 +55,7 @@ void CPackageStaticInfo::RegisterEmbeddedComponentInfo(const std::string& embedd
 
 // reimplemented (icomp::IPackageStaticInfo)
 
-const IComponentStaticInfo* CPackageStaticInfo::GetEmbeddedComponentInfo(const std::string& embeddedId) const
+const IComponentStaticInfo* CPackageStaticInfo::GetEmbeddedComponentInfo(const QByteArray& embeddedId) const
 {
 	EmbeddedComponentInfos::const_iterator foundIter = m_embeddedComponentInfos.find(embeddedId);
 	if (foundIter != m_embeddedComponentInfos.end()){

@@ -54,13 +54,13 @@ public:
 				bool allReasons,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	virtual bool IsElementValid(
-				const std::string& elementName,
+				const QByteArray& elementName,
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	virtual bool IsElementWithInfoValid(
-				const std::string& elementName,
+				const QByteArray& elementName,
 				const icomp::IRegistry::ElementInfo& elementInfo,
 				const icomp::IComponentStaticInfo* metaInfoPtr,
 				const icomp::IRegistry& registry,
@@ -68,8 +68,8 @@ public:
 				bool allReasons,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	virtual bool IsAttributeValid(
-				const std::string& attributeName,
-				const std::string& elementName,
+				const QByteArray& attributeName,
+				const QByteArray& elementName,
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
@@ -82,33 +82,33 @@ protected:
 		It include also pointed element.
 	*/
 	icomp::IRegistry::Ids GetCompatibleIds(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::IElementStaticInfo& elementStaticInfo,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
 				bool subcomponentsFlag) const;
 	bool CheckAttributeCompatibility(
 				const iser::IObject& attribute,
 				const icomp::IAttributeStaticInfo& attributeMetaInfo,
-				const std::string& attributeName,
-				const std::string& elementName,
+				const QByteArray& attributeName,
+				const QByteArray& elementName,
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				bool allReasons,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementCompatibility(
-				const std::string& pointedElementName,
+				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
-				const std::string& attributeName,
-				const std::string& elementName,
+				const QByteArray& attributeName,
+				const QByteArray& elementName,
 				const icomp::IRegistry& registry,
 				bool ignoreUndef,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 	bool CheckPointedElementInfoCompatibility(
-				const std::string& pointedElementName,
+				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo* pointedMetaInfoPtr,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
-				const std::string& attributeName,
-				const std::string& elementName,
+				const QByteArray& attributeName,
+				const QByteArray& elementName,
 				bool ignoreUndef,
 				ibase::IMessageConsumer* reasonConsumerPtr) const;
 

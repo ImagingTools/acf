@@ -2,9 +2,10 @@
 #define iproc_IProgressManager_included
 
 
-// STL includes
-#include <string>
+// Qt includes
+#include <QtCore/QByteArray>
 
+// ACF includes
 #include "istd/IPolymorphic.h"
 #include <QtCore/QString>
 
@@ -24,7 +25,7 @@ public:
 		\return	session ID or negative value if failed.
 	*/
 	virtual int BeginProgressSession(
-				const std::string& progressId,
+				const QByteArray& progressId,
 				const QString& description,
 				bool isCancelable = false) = 0;
 	/**

@@ -134,9 +134,9 @@ QString CSelectableFileConverterComp::GetOptionDescription(int index) const
 }
 
 
-std::string CSelectableFileConverterComp::GetOptionId(int /*index*/) const
+QByteArray CSelectableFileConverterComp::GetOptionId(int /*index*/) const
 {
-	return std::string();
+	return QByteArray();
 }
 
 

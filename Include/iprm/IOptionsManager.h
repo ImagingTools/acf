@@ -33,7 +33,7 @@ public:
 	*/
 	virtual bool InsertOption(
 				QString& optionName,
-				const std::string& optionId,
+				const QByteArray& optionId,
 				const QString& optionDescription = QString(),
 				int index = -1) = 0;
 };

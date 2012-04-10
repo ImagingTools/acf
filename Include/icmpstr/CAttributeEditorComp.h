@@ -114,7 +114,7 @@ protected:
 	bool SetAttributeToItem(
 				QTreeWidgetItem& attributeItem,
 				const icomp::IRegistry& registry,
-				const std::string& attributeId,
+				const QByteArray& attributeId,
 				const ElementIdToAttrInfoMap& infos,
 				bool* hasErrorPtr = NULL,
 				bool* hasWarningPtr = NULL,
@@ -122,8 +122,8 @@ protected:
 	bool SetInterfaceToItem(
 				QTreeWidgetItem& item,
 				const icomp::IRegistry& registry,
-				const std::string& elementId,
-				const std::string& interfaceName,
+				const QByteArray& elementId,
+				const QByteArray& interfaceName,
 				bool useFullPath,
 				bool* hasWarningPtr = NULL,
 				bool* hasExportPtr = NULL) const;
@@ -137,8 +137,8 @@ protected:
 				iser::ISerializable& result) const;
 
 	void CreateExportedComponentsTree(
-				const std::string& elementId,
-				const std::string& globalElementId,
+				const QByteArray& elementId,
+				const QByteArray& globalElementId,
 				const icomp::IElementStaticInfo* elementMetaInfoPtr,
 				QTreeWidgetItem& item,
 				bool* hasWarningPtr = NULL,
@@ -173,11 +173,11 @@ private:
 		virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
 
 	protected:
-		bool SetComponentExportEditor(const std::string& attributeId, const QString& defaultValue, QWidget& editor) const;
-		bool SetAttributeExportEditor(const std::string& id, const std::string& exportId, QWidget& editor) const;
-		bool SetAttributeValueEditor(const std::string& id, int propertyMining, QWidget& editor) const;
+		bool SetComponentExportEditor(const QByteArray& attributeId, const QString& defaultValue, QWidget& editor) const;
+		bool SetAttributeExportEditor(const QByteArray& id, const QByteArray& exportId, QWidget& editor) const;
+		bool SetAttributeValueEditor(const QByteArray& id, int propertyMining, QWidget& editor) const;
 
-		bool SetComponentExportData(const std::string& attributeId, const QWidget& editor) const;
+		bool SetComponentExportData(const QByteArray& attributeId, const QWidget& editor) const;
 
 	private:
 		CAttributeEditorComp& m_parent;
@@ -206,7 +206,7 @@ private:
 	AttributeItemDelegate m_attributeItemDelegate;
 	RegistryObserver m_registryObserver;
 
-	typedef QMap<std::string, QString> AttributeTypesMap;
+	typedef QMap<QByteArray, QString> AttributeTypesMap;
 	AttributeTypesMap m_attributeTypesMap;
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_attributesTreeFilter;
 	istd::TDelPtr<iqtgui::CTreeWidgetFilter> m_interfacesTreeFilter;
@@ -232,7 +232,7 @@ QString CAttributeEditorComp::AttributeItemDelegate::GetMultiAttributeValueAsStr
 			valuesString += ";";
 		}
 
-		valuesString += QString::fromStdString(attribute.GetValueAt(index));
+		valuesString += attribute.GetValueAt(index);
 	}
 
 	return valuesString;

@@ -1,10 +1,6 @@
 #include "imod/CMultiModelObserverBase.h"
 
 
-// STL includes
-#include <algorithm>
-
-
 namespace imod
 {
 
@@ -37,10 +33,10 @@ int CMultiModelObserverBase::GetModelCount() const
 bool CMultiModelObserverBase::IsModelAttached(const imod::IModel* modelPtr) const
 {
 	if (modelPtr == NULL){
-		return !m_models.empty();
+		return !m_models.isEmpty();
 	}
 
-	Models::const_iterator foundIter = std::find(m_models.begin(), m_models.end(), modelPtr);
+	Models::const_iterator foundIter = qFind(m_models.begin(), m_models.end(), modelPtr);
 
 	return (foundIter != m_models.end());
 }
@@ -62,7 +58,7 @@ bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
 
 bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
 {
-	Models::iterator iter = std::find(m_models.begin(), m_models.end(), modelPtr);
+	Models::iterator iter = qFind(m_models.begin(), m_models.end(), modelPtr);
 	if (iter != m_models.end()){
 		m_models.erase(iter);
 		
@@ -93,7 +89,7 @@ void CMultiModelObserverBase::AfterUpdate(IModel* modelPtr, int updateFlags, ist
 
 void CMultiModelObserverBase::EnsureModelsDetached()
 {
-	while (!m_models.empty()){
+	while (!m_models.isEmpty()){
 		imod::IModel* modelPtr = m_models.front();
 		I_ASSERT(modelPtr != NULL);
 

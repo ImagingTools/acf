@@ -101,7 +101,7 @@ bool CPackagesLoaderComp::LoadPackages(const QString& configFilePath)
 }
 
 
-int CPackagesLoaderComp::GetPackageType(const std::string& packageId) const
+int CPackagesLoaderComp::GetPackageType(const QByteArray& packageId) const
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
@@ -117,7 +117,7 @@ int CPackagesLoaderComp::GetPackageType(const std::string& packageId) const
 }
 
 
-QString CPackagesLoaderComp::GetPackagePath(const std::string& packageId) const
+QString CPackagesLoaderComp::GetPackagePath(const QByteArray& packageId) const
 {
 	RealPackagesMap::const_iterator foundNormalIter = m_realPackagesMap.find(packageId);
 	if (foundNormalIter != m_realPackagesMap.end()){
@@ -139,7 +139,7 @@ const icomp::IRegistry* CPackagesLoaderComp::GetRegistry(const icomp::CComponent
 {
 	CompositePackagesMap::const_iterator foundCompositeIter = m_compositePackagesMap.find(address.GetPackageId());
 	if (foundCompositeIter != m_compositePackagesMap.end()){
-		QString filePath = foundCompositeIter.value().directory.absoluteFilePath(QString(address.GetComponentId().c_str()) + ".arx");
+		QString filePath = foundCompositeIter.value().directory.absoluteFilePath(QString(address.GetComponentId()) + ".arx");
 
 		return GetRegistryFromFile(filePath);
 	}
@@ -158,7 +158,7 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 		for (		RealPackagesMap::const_iterator packageIter = m_realPackagesMap.begin();
 					packageIter != m_realPackagesMap.end();
 					++packageIter){
-			const std::string packageId = packageIter.key();
+			const QByteArray packageId = packageIter.key();
 
 			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageId);
 			if (packageInfoPtr != NULL){
@@ -182,7 +182,7 @@ CPackagesLoaderComp::ComponentAddresses CPackagesLoaderComp::GetComponentAddress
 		for (		CompositePackagesMap::const_iterator packageIter = m_compositePackagesMap.begin();
 					packageIter != m_compositePackagesMap.end();
 					++packageIter){
-			const std::string packageId = packageIter.key();
+			const QByteArray packageId = packageIter.key();
 
 			const IComponentStaticInfo* packageInfoPtr = GetEmbeddedComponentInfo(packageId);
 			if (packageInfoPtr != NULL){
@@ -222,7 +222,7 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 {
 	QFileInfo fileInfo(file);
 
-	std::string packageId(fileInfo.baseName().toStdString());
+	QByteArray packageId(fileInfo.baseName().toLocal8Bit());
 
 	if (fileInfo.isFile()){
 		RealPackagesMap::const_iterator foundIter = m_realPackagesMap.find(packageId);
@@ -270,7 +270,7 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 						iter != componentFiles.end();
 						++iter){
 				QFileInfo componentFileInfo(*iter);
-				infoPtr->RegisterEmbeddedComponent(componentFileInfo.baseName().toStdString());
+				infoPtr->RegisterEmbeddedComponent(componentFileInfo.baseName().toLocal8Bit());
 			}
 
 			packageInfo.staticInfoPtr.SetPtr(infoPtr);
@@ -282,7 +282,7 @@ bool CPackagesLoaderComp::RegisterPackageFile(const QString& file)
 				SendErrorMessage(
 							iser::IFileLoader::MI_CANNOT_LOAD,
 							QObject::tr("Cannot load meta description for registry %1 (%2)")
-										.arg(packageId.c_str())
+										.arg(QString(packageId))
 										.arg(metaInfoFile));
 			}
 
@@ -449,7 +449,7 @@ CPackagesLoaderComp::LogingRegistry::LogingRegistry(CPackagesLoaderComp* parentP
 // reimplemented (icomp::IRegistry)
 
 CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingRegistry::InsertElementInfo(
-			const std::string& elementId,
+			const QByteArray& elementId,
 			const icomp::CComponentAddress& address,
 			bool ensureElementCreated)
 {
@@ -458,10 +458,9 @@ CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingReg
 	if (retVal == NULL){
 		m_parent.SendErrorMessage(
 					MI_CANNOT_CREATE_ELEMENT,
-					QObject::tr("Cannot create %1 (%2: %3)").
-								arg(elementId.c_str()).
-								arg(address.GetPackageId().c_str()).
-								arg(address.GetComponentId().c_str()));
+					QObject::tr("Cannot create %1 (%2)").
+								arg(QString(elementId)).
+								arg(address.ToString()));
 	}
 
 	return retVal;

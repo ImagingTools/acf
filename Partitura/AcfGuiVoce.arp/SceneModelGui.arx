@@ -39,7 +39,7 @@
               Model
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Model
@@ -55,7 +55,7 @@
               SlaveEditorGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Gui
@@ -92,7 +92,7 @@
               SlaveSceneExtender
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Gui

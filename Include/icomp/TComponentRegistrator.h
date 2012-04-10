@@ -2,9 +2,8 @@
 #define icomp_TComponentRegistrator_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "icomp/TComponentStaticInfo.h"
@@ -25,7 +24,7 @@ public:
 	typedef icomp::TComponentStaticInfo<Component> BaseClass;
 
 	TComponentRegistrator(
-				const std::string& componentId,
+				const QByteArray& componentId,
 				icomp::CPackageStaticInfo& packageStaticInfo,
 				const QString& description,
 				const QString& keywords);
@@ -35,7 +34,7 @@ public:
 	virtual const QString& GetKeywords() const;
 
 private:
-	std::string m_logicalName;
+	QByteArray m_logicalName;
 	QString m_description;
 	QString m_keywords;
 };
@@ -45,7 +44,7 @@ private:
 
 template <class Component>
 TComponentRegistrator<Component>::TComponentRegistrator(
-			const std::string& componentId,
+			const QByteArray& componentId,
 			icomp::CPackageStaticInfo& packageStaticInfo,
 			const QString& description,
 			const QString& keywords)

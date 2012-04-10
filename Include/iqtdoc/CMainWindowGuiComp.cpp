@@ -84,8 +84,8 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 				for (		idoc::IDocumentTypesInfo::Ids::const_iterator iter = ids.begin();
 							iter != ids.end();
 							++iter){
-					const std::string& documentTypeId = *iter;
-					I_ASSERT(!documentTypeId.empty());
+					const QByteArray& documentTypeId = *iter;
+					I_ASSERT(!documentTypeId.isEmpty());
 
 					RecentGroupCommandPtr& groupCommandPtr = m_recentFilesMap[documentTypeId];
 
@@ -228,7 +228,7 @@ void CMainWindowGuiComp::OnDropEvent(QDropEvent* dropEventPtr)
 
 			if (m_documentManagerCompPtr.IsValid()){
 				idoc::IDocumentTypesInfo::Ids availableDocumentIds = m_documentManagerCompPtr->GetDocumentTypeIdsForFile(filePath);
-				if (!availableDocumentIds.empty()){
+				if (!availableDocumentIds.isEmpty()){
 
 					OpenFile(filePath);
 				}
@@ -245,7 +245,7 @@ void CMainWindowGuiComp::SetupNewCommand()
 	}
 	
 	idoc::IDocumentTypesInfo::Ids ids = m_documentManagerCompPtr->GetDocumentTypeIds();
-	if (ids.empty()){
+	if (ids.isEmpty()){
 		return;
 	}
 
@@ -257,7 +257,7 @@ void CMainWindowGuiComp::SetupNewCommand()
 		for (		idoc::IDocumentTypesInfo::Ids::const_iterator iter = ids.begin();
 					iter != ids.end();
 					++iter){
-			const std::string& documentTypeId = *iter;
+			const QByteArray& documentTypeId = *iter;
 
 			if (m_documentManagerCompPtr->IsFeatureSupported(idoc::IDocumentTypesInfo::SF_NEW_DOCUMENT, documentTypeId)){
 				NewDocumentCommand* newCommandPtr = new NewDocumentCommand(this, documentTypeId);
@@ -285,7 +285,7 @@ bool CMainWindowGuiComp::HasDocumentTemplate() const
 	}
 
 	idoc::IDocumentTypesInfo::Ids documentTypeIds = m_documentManagerCompPtr->GetDocumentTypeIds();
-	if (documentTypeIds.empty()){
+	if (documentTypeIds.isEmpty()){
 		return false;
 	}
 
@@ -303,7 +303,7 @@ void CMainWindowGuiComp::UpdateUndoMenu()
 }
 
 
-void CMainWindowGuiComp::OnNewDocument(const std::string& documentFactoryId)
+void CMainWindowGuiComp::OnNewDocument(const QByteArray& documentFactoryId)
 {
 	if (m_documentManagerCompPtr.IsValid()){
 		if (!m_documentManagerCompPtr->FileNew(documentFactoryId)){
@@ -329,8 +329,8 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 		for (		RecentFilesMap::const_iterator index = m_recentFilesMap.begin();
 					index != m_recentFilesMap.end();
 					index++){
-			std::string documentTypeId = index.key();
-			I_ASSERT(!documentTypeId.empty());
+			QByteArray documentTypeId = index.key();
+			I_ASSERT(!documentTypeId.isEmpty());
 
 			retVal = retVal && archive.BeginTag(documentTypeIdTag);
 			retVal = retVal && archive.Process(documentTypeId);
@@ -368,13 +368,13 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 	}
 	else{
 		for (int typeIndex = 0; typeIndex < documentTypeIdsCount; typeIndex++){
-			std::string documentTypeId;
+			QByteArray documentTypeId;
 
 			retVal = retVal && archive.BeginTag(documentTypeIdTag);
 			retVal = retVal && archive.Process(documentTypeId);
 			retVal = retVal && archive.EndTag(documentTypeIdTag);
 
-			if (documentTypeId.empty()){
+			if (documentTypeId.isEmpty()){
 				return false;
 			}
 
@@ -422,8 +422,8 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 		QFileInfo fileInfo(iter.key());
 
 		QString filePath = fileInfo.absoluteFilePath();
-		const std::string documentTypeId = iter.value();
-		I_ASSERT(!documentTypeId.empty());
+		const QByteArray documentTypeId = iter.value();
+		I_ASSERT(!documentTypeId.isEmpty());
 
 		RemoveFromRecentFileList(filePath);
 
@@ -431,7 +431,7 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 
 		if (groupCommandPtr.IsValid()){
 			if (groupCommandPtr->GetChildsCount() == 0){
-				RecentFileCommand* commandPtr = new RecentFileCommand(this, tr("Clear List"), QString::fromStdString(documentTypeId), false);
+				RecentFileCommand* commandPtr = new RecentFileCommand(this, tr("Clear List"), documentTypeId, false);
 				groupCommandPtr->InsertChild(commandPtr, true);
 			}
 
@@ -484,7 +484,7 @@ void CMainWindowGuiComp::UpdateFixedCommands(iqtgui::CHierarchicalCommand& fixed
 
 		if (m_activeDocumentPtr != NULL){
 			if (m_documentManagerCompPtr.IsValid()){
-				std::string documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
+				QByteArray documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
 					
 				if (m_documentManagerCompPtr->IsFeatureSupported(idoc::IDocumentTypesInfo::SF_EDIT_DOCUMENT, documentTypeId)){
 					fixedCommands.InsertChild(&m_editCommand, false, 1);
@@ -754,8 +754,8 @@ void CMainWindowGuiComp::OnNew()
 	for (		idoc::IDocumentTypesInfo::Ids::const_iterator iter = ids.begin();
 				iter != ids.end();
 				++iter){
-		const std::string& documentTypeId = *iter;
-		I_ASSERT(!documentTypeId.empty());
+		const QByteArray& documentTypeId = *iter;
+		I_ASSERT(!documentTypeId.isEmpty());
 
 		if (m_documentManagerCompPtr->IsFeatureSupported(idoc::IDocumentTypesInfo::SF_NEW_DOCUMENT, documentTypeId)){
 			OnNewDocument(documentTypeId);
@@ -806,7 +806,7 @@ void CMainWindowGuiComp::OnSaveAs()
 }
 
 
-void CMainWindowGuiComp::OnOpenDocument(const std::string* documentTypeIdPtr)
+void CMainWindowGuiComp::OnOpenDocument(const QByteArray* documentTypeIdPtr)
 {
 	idoc::IDocumentManager::FileToTypeMap fileMap;
 
@@ -949,7 +949,7 @@ bool CMainWindowGuiComp::RecentFileCommand::Execute(istd::IPolymorphic* /*contex
 		m_parent.OpenFile(m_actionString);
 	}
 	else{
-		RecentGroupCommandPtr& groupCommandPtr = m_parent.m_recentFilesMap[m_actionString.toStdString()];
+		RecentGroupCommandPtr& groupCommandPtr = m_parent.m_recentFilesMap[m_actionString.toLocal8Bit()];
 		if (groupCommandPtr.IsValid()){
 			groupCommandPtr->ResetChilds();
 		}

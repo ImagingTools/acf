@@ -2,9 +2,8 @@
 #define ibase_IMessageContainer_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/IInformation.h"
@@ -25,7 +24,7 @@ namespace ibase
 class IMessageContainer: virtual public IMessageConsumer, virtual public iser::ISerializable
 {
 public:
-	typedef std::vector<MessagePtr> Messages;
+	typedef QVector<MessagePtr> Messages;
 
 	enum ChangeFlags
 	{

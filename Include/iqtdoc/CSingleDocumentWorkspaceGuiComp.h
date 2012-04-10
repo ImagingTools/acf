@@ -61,7 +61,7 @@ protected:
 	void UpdateTitle();
 
 	// reimplemented (idoc::CSingleDocumentManagerBase)
-	virtual QString GetOpenFilePath(const std::string* documentTypeIdPtr = NULL) const;
+	virtual QString GetOpenFilePath(const QByteArray* documentTypeIdPtr = NULL) const;
 	virtual void OnViewRegistered(istd::IPolymorphic* viewPtr);
 	virtual void OnViewRemoved(istd::IPolymorphic* viewPtr);
 	virtual void QueryDocumentClose(bool* ignoredPtr);

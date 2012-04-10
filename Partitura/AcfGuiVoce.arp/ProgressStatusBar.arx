@@ -39,7 +39,7 @@
               AutomaticHide
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               Description
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -98,7 +98,7 @@
               StatusBarWidget
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

@@ -2,9 +2,10 @@
 #define icomp_CComponentAddress_included
 
 
-// STL includes
-#include <string>
+// Qt includes
+#include <QtCore/QByteArray>
 
+// ACF includes
 #include "iser/ISerializable.h"
 
 
@@ -22,18 +23,18 @@ class CComponentAddress: public iser::ISerializable
 {
 public:
 	CComponentAddress();
-	CComponentAddress(const std::string& packageId, const std::string& componentId);
+	CComponentAddress(const QByteArray& packageId, const QByteArray& componentId);
 
 	/**
 		Check if this address is valid.
 	*/
 	bool IsValid() const;
 
-	const std::string& GetPackageId() const;
-	void SetPackageId(const std::string& id);
+	const QByteArray& GetPackageId() const;
+	void SetPackageId(const QByteArray& id);
 
-	const std::string& GetComponentId() const;
-	void SetComponentId(const std::string& id);
+	const QByteArray& GetComponentId() const;
+	void SetComponentId(const QByteArray& id);
 
 	QString ToString() const;
 
@@ -44,33 +45,35 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	friend int qHash(const CComponentAddress& address);
+
 private:
-	std::string m_packageId;
-	std::string m_componentId;
+	QByteArray m_packageId;
+	QByteArray m_componentId;
 };
 
 
 // inline methods
 
-inline const std::string& CComponentAddress::GetPackageId() const
+inline const QByteArray& CComponentAddress::GetPackageId() const
 {
 	return m_packageId;
 }
 
 
-inline void CComponentAddress::SetPackageId(const std::string& id)
+inline void CComponentAddress::SetPackageId(const QByteArray& id)
 {
 	m_packageId = id;
 }
 
 
-inline const std::string& CComponentAddress::GetComponentId() const
+inline const QByteArray& CComponentAddress::GetComponentId() const
 {
 	return m_componentId;
 }
 
 
-inline void CComponentAddress::SetComponentId(const std::string& id)
+inline void CComponentAddress::SetComponentId(const QByteArray& id)
 {
 	m_componentId = id;
 }
@@ -95,6 +98,14 @@ inline bool CComponentAddress::operator<(const CComponentAddress& address) const
 	}
 
 	return m_packageId < address.m_packageId;
+}
+
+
+// related functions
+
+inline int qHash(const icomp::CComponentAddress& address)
+{
+	return qHash(address.m_packageId) + qHash(address.m_packageId);
 }
 
 

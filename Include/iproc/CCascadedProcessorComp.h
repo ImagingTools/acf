@@ -49,7 +49,7 @@ public:
 private:
 	I_MULTIREF(iproc::IProcessor, m_processorsCompPtr);
 	I_MULTIREF(istd::IChangeable, m_buffersCompPtr);
-	I_MULTIATTR(std::string, m_progressIdsAttrPtr);
+	I_MULTIATTR(QByteArray, m_progressIdsAttrPtr);
 	I_MULTIATTR(QString, m_progressDescriptionsAttrPtr);
 };
 

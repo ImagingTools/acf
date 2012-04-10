@@ -48,7 +48,7 @@ protected:
 	/**
 		Set selection index according to a given option ID.
 	*/
-	bool SetSelectedOptionIndexById(const std::string& selectedOptionId);
+	bool SetSelectedOptionIndexById(const QByteArray& selectedOptionId);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

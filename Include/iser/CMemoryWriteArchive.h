@@ -2,9 +2,8 @@
 #define iser_CMemoryWriteArchive_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "iser/CBinaryWriteArchiveBase.h"
@@ -44,7 +43,7 @@ public:
 	virtual bool ProcessData(void* data, int size);
 	
 protected:
-	typedef std::vector<unsigned char> DataBuffer;
+	typedef QVector<unsigned char> DataBuffer;
 
 	DataBuffer m_dataBuffer;
 

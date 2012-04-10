@@ -2,10 +2,9 @@
 #define istd_CBase64_included
 
 
-// STL includes
-#include <vector>
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
+#include <QtCore/QVector>
 
 // ACF includes
 #include <istd/istd.h>
@@ -21,8 +20,8 @@ namespace istd
 class CBase64
 {
 public:
-	static std::string ConvertToBase64(const void* dataPtrPtr, int size);
-	static std::vector<quint8> ConvertFromBase64(const std::string& base64String);
+	static QByteArray ConvertToBase64(const void* dataPtrPtr, int size);
+	static QVector<quint8> ConvertFromBase64(const QByteArray& base64String);
 
 private:
 	static char SixBitToChar(quint8 b);

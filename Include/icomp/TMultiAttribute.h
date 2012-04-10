@@ -2,9 +2,8 @@
 #define icomp_TMultiAttribute_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/CClassInfo.h"
@@ -55,20 +54,20 @@ public:
 	virtual void Reset();
 
 	// reimplemented (iser::IObject)
-	std::string GetFactoryId() const;
+	QByteArray GetFactoryId() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
-	static std::string GetTypeName();
+	static QByteArray GetTypeName();
 
 protected:
 	struct Wrap
 	{
 		Value value;
 	};
-	std::vector<Wrap> m_values;
+	QVector<Wrap> m_values;
 
 };
 
@@ -145,7 +144,7 @@ void TMultiAttribute<Value>::Reset()
 // reimplemented (iser::IObject)
 
 template <typename Value>
-std::string TMultiAttribute<Value>::GetFactoryId() const
+QByteArray TMultiAttribute<Value>::GetFactoryId() const
 {
 	return GetTypeName();
 }
@@ -194,23 +193,58 @@ bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)
 // static methods
 
 template <typename Value>
-std::string TMultiAttribute<Value>::GetTypeName()
+QByteArray TMultiAttribute<Value>::GetTypeName()
 {
-	if (typeid(Value) == typeid(std::string)){
-		return "icomp::TMultiAttribute<std::string>";
+	if (typeid(Value) == typeid(QByteArray)){
+		return "icomp::TMultiAttribute<QByteArray>";
 	}
 
 	return istd::CClassInfo::GetName<TMultiAttribute<Value> >();
 }
 
 
+template <>
+inline QByteArray TMultiAttribute<int>::GetTypeName()
+{
+	return "Integer[]";
+}
+
+
+template <>
+inline QByteArray TMultiAttribute<double>::GetTypeName()
+{
+	return "Real[]";
+}
+
+
+template <>
+inline QByteArray TMultiAttribute<bool>::GetTypeName()
+{
+	return "Boolean[]";
+}
+
+
+template <>
+inline QByteArray TMultiAttribute<QString>::GetTypeName()
+{
+	return "String[]";
+}
+
+
+template <>
+inline QByteArray TMultiAttribute<QByteArray>::GetTypeName()
+{
+	return "Id[]";
+}
+
+
 // typedefs
 
-typedef TMultiAttribute<int> CMultiIntAttribute;
-typedef TMultiAttribute<double> CMultiDoubleAttribute;
-typedef TMultiAttribute<bool> CMultiBoolAttribute;
-typedef TMultiAttribute<QString> CMultiStringAttribute;
-typedef TMultiAttribute<std::string> CMultiStdStringAttribute;
+typedef TMultiAttribute<int> CIntegerListAttribute;
+typedef TMultiAttribute<double> CRealListAttribute;
+typedef TMultiAttribute<bool> CBooleanListAttribute;
+typedef TMultiAttribute<QString> CStringListAttribute;
+typedef TMultiAttribute<QByteArray> CIdListAttribute;
 
 
 } // namespace icomp

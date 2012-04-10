@@ -124,7 +124,7 @@ void CDocumentProcessingManagerCompBase::OnDoProcessing()
 		return;
 	}
 	
-	std::string documentTypeId;
+	QByteArray documentTypeId;
 	if (inputDocumentPtr != NULL){
 		documentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*inputDocumentPtr);
 	}

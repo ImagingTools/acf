@@ -25,7 +25,7 @@ public:
 
 protected:
 	// reimplemented (iqtproc::CDocumentProcessingManagerCompBase)
-	void DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const std::string& documentTypeId);
+	void DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId);
 
 private:
 	I_REF(istd::IChangeable, m_outputDataCompPtr);

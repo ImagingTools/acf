@@ -18,7 +18,7 @@ namespace iqtproc
 
 // reimplemented (iqtproc::CDocumentProcessingManagerCompBase)
 
-void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const std::string& /*documentTypeId*/)
+void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const QByteArray& /*documentTypeId*/)
 {
 	if (!m_outputDataCompPtr.IsValid()){
 		SendErrorMessage(0, "Processing result data model not set");

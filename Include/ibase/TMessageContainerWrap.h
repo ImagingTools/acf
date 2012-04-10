@@ -2,9 +2,8 @@
 #define ibase_TMessageContainerWrap_included
 
 
-// STL includes
-#include <list>
-
+// Qt includes
+#include <QtCore/QList>
 
 // ACF includes
 #include "istd/IInformation.h"
@@ -57,13 +56,13 @@ public:
 	virtual IMessageContainer* GetChild(int index) const;
 
 protected:
-	typedef std::list<IMessageContainer::MessagePtr> MessageList;
+	typedef QList<IMessageContainer::MessagePtr> MessageList;
 	MessageList m_messages;
 
 	int m_worstCategory;
 
 private:
-	typedef std::vector<IMessageContainer*> Childs;
+	typedef QVector<IMessageContainer*> Childs;
 	Childs m_childContainers;
 
 	int m_maxMessageCount;
@@ -211,7 +210,7 @@ IMessageContainer::Messages TMessageContainerWrap<Base>::GetMessages() const
 
 		IMessageContainer::Messages childMessages = childPtr->GetMessages();
 
-		messages.insert(messages.end(), childMessages.begin(), childMessages.end());
+		messages += childMessages;
 	}
 
 	return messages;
@@ -253,7 +252,7 @@ void TMessageContainerWrap<Base>::AddMessage(const IMessageConsumer::MessagePtr&
 
 	if (m_maxMessageCount >= 0){
 		while (int(m_messages.size()) > m_maxMessageCount){
-			I_ASSERT(!m_messages.empty());
+			I_ASSERT(!m_messages.isEmpty());
 			const IMessageContainer::MessagePtr& messageToRemovePtr = m_messages.back();
 
 			istd::TChangeNotifier<IMessageContainer> changePtr(

@@ -20,15 +20,15 @@ int main(int argc, char *argv[])
 
 	QString configFile;
 
-	QString registryFile = "default.arx";
+	QString registryFilePath = "default.arx";
 	bool showApplicationInfo = false;
-	std::string componentId;
+	QByteArray componentId;
 	bool waitOnEnd = false;
 
 	for (int index = 1; index < argc; index++){
-		std::string argument = argv[index];
-		if (!argument.empty() && (argument[0] == '-')){
-			std::string option = argument.substr(1);
+		QByteArray argument = argv[index];
+		if (argument.startsWith('-')){
+			QByteArray option = argument.mid(1);
 
 			if ((option == "h") || (option == "help")){
 				std::cout << "Usage";
@@ -59,13 +59,13 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if (index == 1){
-			registryFile = QString::fromStdString(argument);
+			registryFilePath = argument;
 		}
 	}
 
 	int retVal = 0;
 
-	iqt::CComponentAccessor componentAccessor(registryFile, configFile);
+	iqt::CComponentAccessor componentAccessor(registryFilePath, configFile);
 
 	ibase::IApplication* applicationPtr = componentAccessor.GetComponentInterface<ibase::IApplication>(componentId);
 	if (applicationPtr == NULL){

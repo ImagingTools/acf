@@ -230,7 +230,7 @@ ITouchable::TouchState CInteractiveCircleShape::IsTouched(istd::CIndex2d positio
 		}
 
 		double distance = center.GetDistance(cp);
-		double delta = ::fabs(radius - distance);
+		double delta = qAbs(radius - distance);
 
 		double logicalLineWidth = colorShema.GetLogicalLineWidth();
 

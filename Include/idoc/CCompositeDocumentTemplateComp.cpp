@@ -7,7 +7,7 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentTypesInfo)
 
-bool CCompositeDocumentTemplateComp::IsFeatureSupported(int featureFlags, const std::string& documentTypeId) const
+bool CCompositeDocumentTemplateComp::IsFeatureSupported(int featureFlags, const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator foundTemplateIter = m_idToTemplateMap.find(documentTypeId);
 	if (foundTemplateIter != m_idToTemplateMap.end()){
@@ -25,8 +25,8 @@ IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetDocumentTypeIds() cons
 	for (		IdToTemplateMap::const_iterator iter = m_idToTemplateMap.begin();
 				iter != m_idToTemplateMap.end();
 				++iter){
-		const std::string& documentTypeId = iter.key();
-		if (!documentTypeId.empty()){
+		const QByteArray& documentTypeId = iter.key();
+		if (!documentTypeId.isEmpty()){
 			retVal.push_back(iter.key());
 		}
 	}
@@ -35,7 +35,7 @@ IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetDocumentTypeIds() cons
 }
 
 
-QString CCompositeDocumentTemplateComp::GetDocumentTypeName(const std::string& documentTypeId) const
+QString CCompositeDocumentTemplateComp::GetDocumentTypeName(const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -49,7 +49,7 @@ QString CCompositeDocumentTemplateComp::GetDocumentTypeName(const std::string& d
 }
 
 
-iser::IFileTypeInfo* CCompositeDocumentTemplateComp::GetDocumentFileTypeInfo(const std::string& documentTypeId) const
+iser::IFileTypeInfo* CCompositeDocumentTemplateComp::GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -73,7 +73,7 @@ IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetDocumentTypeIdsForFile
 		if (slavePtr != NULL){
 			Ids slaveIds = slavePtr->GetDocumentTypeIdsForFile(filePath);
 
-			retVal.insert(retVal.end(), slaveIds.begin(), slaveIds.end());
+			retVal += slaveIds;
 		}
 	}
 
@@ -81,7 +81,7 @@ IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetDocumentTypeIdsForFile
 }
 
 
-QString CCompositeDocumentTemplateComp::GetDefaultDirectory(const QString& sugestedDir, const std::string* documentTypeIdPtr) const
+QString CCompositeDocumentTemplateComp::GetDefaultDirectory(const QString& sugestedDir, const QByteArray* documentTypeIdPtr) const
 {
 	if (documentTypeIdPtr != NULL){
 		IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(*documentTypeIdPtr);
@@ -112,7 +112,7 @@ QString CCompositeDocumentTemplateComp::GetDefaultDirectory(const QString& suges
 
 // reimplemented (idoc::IDocumentTemplate)
 
-IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetViewTypeIds(const std::string& documentTypeId) const
+IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetViewTypeIds(const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -127,8 +127,8 @@ IDocumentTemplate::Ids CCompositeDocumentTemplateComp::GetViewTypeIds(const std:
 
 
 QString CCompositeDocumentTemplateComp::GetViewTypeName(
-			const std::string& documentTypeId,
-			const std::string& viewTypeId) const
+			const QByteArray& documentTypeId,
+			const QByteArray& viewTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -142,7 +142,7 @@ QString CCompositeDocumentTemplateComp::GetViewTypeName(
 }
 
 
-iser::IFileLoader* CCompositeDocumentTemplateComp::GetFileLoader(const std::string& documentTypeId) const
+iser::IFileLoader* CCompositeDocumentTemplateComp::GetFileLoader(const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -156,7 +156,7 @@ iser::IFileLoader* CCompositeDocumentTemplateComp::GetFileLoader(const std::stri
 }
 
 
-istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(const std::string& documentTypeId) const
+istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -171,9 +171,9 @@ istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(const std::str
 
 
 istd::IPolymorphic* CCompositeDocumentTemplateComp::CreateView(
-			const std::string& documentTypeId,
+			const QByteArray& documentTypeId,
 			istd::IChangeable* documentPtr,
-			const std::string& viewTypeId) const
+			const QByteArray& viewTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -187,7 +187,7 @@ istd::IPolymorphic* CCompositeDocumentTemplateComp::CreateView(
 }
 
 
-imod::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const
+imod::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -201,7 +201,7 @@ imod::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const std:
 }
 
 
-IDocumentStateComparator* CCompositeDocumentTemplateComp::CreateStateComparator(const std::string& documentTypeId) const
+IDocumentStateComparator* CCompositeDocumentTemplateComp::CreateStateComparator(const QByteArray& documentTypeId) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){
@@ -234,7 +234,7 @@ void CCompositeDocumentTemplateComp::OnComponentCreated()
 		if (slavePtr != NULL){
 			Ids ids = slavePtr->GetDocumentTypeIds();
 			for (Ids::const_iterator idIter = ids.begin(); idIter != ids.end(); ++idIter){
-				const std::string& documentTypeId = *idIter;
+				const QByteArray& documentTypeId = *idIter;
 				m_idToTemplateMap[documentTypeId] = slavePtr;
 			}
 		}

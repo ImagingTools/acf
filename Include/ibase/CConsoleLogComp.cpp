@@ -18,7 +18,7 @@ namespace ibase
 
 void CConsoleLogComp::WriteText(const QString& text)
 {
-	std::wcout << text.toStdWString().c_str();
+	std::wcout << text.toStdWString();
 }
 
 

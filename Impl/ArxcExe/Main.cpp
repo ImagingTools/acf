@@ -54,9 +54,9 @@ int main(int argc, char *argv[])
 	QString baseDependsPath;
 
 	for (int index = 1; index < argc; index++){
-		std::string argument = argv[index];
-		if (!argument.empty() && (argument[0] == '-')){
-			std::string option = argument.substr(1);
+		QByteArray argument = argv[index];
+		if (!argument.isEmpty() && (argument[0] == '-')){
+			QByteArray option = argument.mid(1);
 
 			if (option == "v"){
 				verboseEnabled = true;
@@ -73,12 +73,12 @@ int main(int argc, char *argv[])
 				}
 
 				if (option == "sources"){
-					std::string switchText = argv[++index];
+					QByteArray switchText = argv[++index];
 					sourcesEnabled = (switchText == "on") || (switchText == "ON");
 				}
 
 				if (option == "depends"){
-					std::string switchText = argv[++index];
+					QByteArray switchText = argv[++index];
 					depandenciesEnabled = (switchText == "on") || (switchText == "ON");
 				}
 
@@ -90,14 +90,14 @@ int main(int argc, char *argv[])
 	}
 
 	if (verboseEnabled){
-		std::cout << "ARX Compiler started in: " + QDir::currentPath().toStdString() << std::endl;
+		std::cout << "ARX Compiler started in: " << QDir::currentPath().toStdString() << std::endl;
 
 		iqt::CSystem::EnvironmentVariables environmentVariables = iqt::CSystem::GetEnvironmentVariables();
 
 		for (		iqt::CSystem::EnvironmentVariables::const_iterator index = environmentVariables.begin();
 					index != environmentVariables.end();
 					++index){
-			std::cout << index.key().toStdString() << " = " << index.value().toStdString() << std::endl;
+			std::cout << index.key().toStdString() << " = " << index.value().toLocal8Bit().constData() << std::endl;
 		}
 	}
 

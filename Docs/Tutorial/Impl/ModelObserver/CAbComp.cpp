@@ -50,13 +50,13 @@ bool CAbComp::SetA(int a)
 }
 
 
-std::string CAbComp::GetB() const
+QByteArray CAbComp::GetB() const
 {
 	return m_b;
 }
 
 
-void CAbComp::SetB(const std::string& b)
+void CAbComp::SetB(const QByteArray& b)
 {
 	// If new value of B differs from the old,
 	// set the new value and fire notification about this change:

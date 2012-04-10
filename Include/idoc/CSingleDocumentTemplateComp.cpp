@@ -14,7 +14,7 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentTemplate)
 
-iser::IFileLoader* CSingleDocumentTemplateComp::GetFileLoader(const std::string& documentTypeId) const
+iser::IFileLoader* CSingleDocumentTemplateComp::GetFileLoader(const QByteArray& documentTypeId) const
 {
 	if (IsDocumentTypeSupported(documentTypeId)){
 		return m_fileLoaderCompPtr.GetPtr();
@@ -25,7 +25,7 @@ iser::IFileLoader* CSingleDocumentTemplateComp::GetFileLoader(const std::string&
 }
 
 
-istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(const std::string& documentTypeId) const
+istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(const QByteArray& documentTypeId) const
 {
 	if (m_documentCompFact.IsValid() && IsDocumentTypeSupported(documentTypeId)){
 		return m_documentCompFact.CreateInstance();
@@ -36,9 +36,9 @@ istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(const std::string
 
 
 istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
-			const std::string& documentTypeId,
+			const QByteArray& documentTypeId,
 			istd::IChangeable* documentPtr,
-			const std::string& viewTypeId) const
+			const QByteArray& viewTypeId) const
 {
 	I_ASSERT(documentPtr != NULL);
 
@@ -66,7 +66,7 @@ istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
 }
 
 
-imod::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const
+imod::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
 {
 	if (IsDocumentTypeSupported(documentTypeId)){
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(documentPtr);
@@ -105,7 +105,7 @@ void CSingleDocumentTemplateComp::OnComponentCreated()
 		SetDocumentTypeName(*m_documentTypeNameAttrPtr);
 	}
 	else{
-		SetDocumentTypeName((*m_documentTypeIdAttrPtr).c_str());
+		SetDocumentTypeName((*m_documentTypeIdAttrPtr));
 	}
 
 	I_ASSERT(m_defaultDirectoryAttrPtr.IsValid());

@@ -352,8 +352,8 @@ ITouchable::TouchState CInteractiveAnnulusSegmentShape::IsTouched(istd::CIndex2d
 		}
 	}
 
-	double delta = ::fabs(radius - distance);
-	double delta2 = ::fabs(radius2 - distance);
+	double delta = qAbs(radius - distance);
+	double delta2 = qAbs(radius2 - distance);
 
 	double logicalLineWidth = colorShema.GetLogicalLineWidth();
 

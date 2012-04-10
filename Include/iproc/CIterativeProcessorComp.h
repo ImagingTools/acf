@@ -2,11 +2,11 @@
 #define iproc_CIterativeProcessorComp_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
 #include <QtCore/QString>
+#include <QtCore/QVector>
 
+// ACF includes
 #include "ibase/TLoggerCompWrap.h"
 
 #include "iprm/ISelectionConstraints.h"
@@ -57,7 +57,7 @@ public:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 protected:
 	int ProcessSlave(
@@ -69,12 +69,12 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_ATTR(std::string, m_paramsIdAttrPtr);
+	I_ATTR(QByteArray, m_paramsIdAttrPtr);
 	I_ATTR(int, m_maxIterationsCountAttrPtr);
 	I_REF(istd::IChangeable, m_bufferObjectCompPtr);
 	I_REF(iproc::IProcessor, m_slaveProcessorCompPtr);
 
-	std::vector<QString> m_iterationNames;
+	QVector<QString> m_iterationNames;
 };
 
 

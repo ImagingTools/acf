@@ -36,7 +36,7 @@
 							KnownVersionNames
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;QString&gt;
+							String[]
 						</Type>
 						<ExportId>
 
@@ -45,7 +45,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="22">
+							<Values count="23">
 								<Value>
 									0.9.0
 								</Value>
@@ -112,6 +112,9 @@
                 <Value>
                   1.5.4
                 </Value>
+                <Value>
+                  1.6.0
+                </Value>
               </Values>
 						</Data>
 					</AttributeInfo>
@@ -120,7 +123,7 @@
 							KnownVersions
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;int&gt;
+							Integer[]
 						</Type>
 						<ExportId>
 
@@ -129,7 +132,7 @@
 							<IsEnabled>
 								true
 							</IsEnabled>
-							<Values count="22">
+							<Values count="23">
 								<Value>
 									940
 								</Value>
@@ -196,6 +199,9 @@
                 <Value>
                   2203
                 </Value>
+                <Value>
+                  2281
+                </Value>
               </Values>
 						</Data>
 					</AttributeInfo>
@@ -204,7 +210,7 @@
 							SlaveVersionInfo
 						</Id>
 						<Type>
-							icomp::CReferenceAttribute
+							Component
 						</Type>
 						<ExportId>
 							SlaveVersionInfo
@@ -220,7 +226,7 @@
 							VersionId
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 
@@ -239,7 +245,7 @@
 							VersionIdDesc
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;QString&gt;
+							String
 						</Type>
 						<ExportId>
 
@@ -258,7 +264,7 @@
 							VersionNumber
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 
@@ -277,7 +283,7 @@
 							IsExtensionUsed
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;bool&gt;
+							Boolean
 						</Type>
 						<ExportId>
 
@@ -314,7 +320,7 @@
 							IsExtensionUsed
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;bool&gt;
+							Boolean
 						</Type>
 						<ExportId>
 							IsExtensionUsed
@@ -330,7 +336,7 @@
 							KnownVersionNames
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;QString&gt;
+							String[]
 						</Type>
 						<ExportId>
 							KnownVersionNames
@@ -346,7 +352,7 @@
 							KnownVersions
 						</Id>
 						<Type>
-							icomp::TMultiAttribute&lt;int&gt;
+							Integer[]
 						</Type>
 						<ExportId>
 							KnownVersions
@@ -362,7 +368,7 @@
 							SlaveVersionInfo
 						</Id>
 						<Type>
-							icomp::CReferenceAttribute
+							Component
 						</Type>
 						<ExportId>
 
@@ -381,7 +387,7 @@
 							VersionId
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 							VersionId
@@ -397,7 +403,7 @@
 							VersionIdDesc
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;QString&gt;
+							String
 						</Type>
 						<ExportId>
               VersionIdDesc
@@ -413,7 +419,7 @@
 							VersionNumber
 						</Id>
 						<Type>
-							icomp::TAttribute&lt;int&gt;
+							Integer
 						</Type>
 						<ExportId>
 							VersionNumber

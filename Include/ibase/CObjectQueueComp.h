@@ -2,9 +2,8 @@
 #define ibase_CObjectQueueComp_included
 
 
-// STL includes
-#include <deque>
-
+// Qt includes
+#include <QtCore/QList>
 
 // ACF includes
 #include "iser/ISerializable.h"
@@ -37,21 +36,21 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IObjectQueue)
-	virtual int GetObjectsCount(const std::string* typeIdPtr = NULL) const;
+	virtual int GetObjectsCount(const QByteArray* typeIdPtr = NULL) const;
 	virtual void ClearQueue();
-	virtual istd::IChangeable* CreateFrontObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
-	virtual istd::IChangeable* CreateBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
-	virtual void RemoveFrontObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
-	virtual void RemoveBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
-	virtual istd::IChangeable* GetFrontObject(int offsetPos = 0, const std::string* typeIdPtr = NULL) const;
-	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL) const;
+	virtual istd::IChangeable* CreateFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
+	virtual istd::IChangeable* CreateBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
+	virtual void RemoveFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
+	virtual void RemoveBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
+	virtual istd::IChangeable* GetFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const;
+	virtual istd::IChangeable* GetBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL) const;
 	virtual void SelectObjects(
 				ObjectList& result,
 				bool doAppend = false,
 				int offsetPos = 0,
-				const std::string* typeIdPtr = NULL) const;
-	virtual istd::IChangeable* PopFrontObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
-	virtual istd::IChangeable* PopBackObject(int offsetPos = 0, const std::string* typeIdPtr = NULL);
+				const QByteArray* typeIdPtr = NULL) const;
+	virtual istd::IChangeable* PopFrontObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
+	virtual istd::IChangeable* PopBackObject(int offsetPos = 0, const QByteArray* typeIdPtr = NULL);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -67,7 +66,7 @@ private:
 	I_FACT(istd::IChangeable, m_objectFactoryFactPtr);
 	I_ATTR(int, m_maxReserveObjectsAttrPtr);
 
-	typedef std::deque<istd::IChangeable*> ObjectQueue;
+	typedef QList<istd::IChangeable*> ObjectQueue;
 
 	ObjectQueue m_objectsQueue;
 	ObjectQueue m_objectsReserve;

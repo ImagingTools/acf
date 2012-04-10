@@ -12,10 +12,10 @@ namespace iprm
 
 // reimplemented (iprm::IParamsSet)
 
-const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::string& id) const
+const iser::ISerializable* CComposedParamsSetComp::GetParameter(const QByteArray& id) const
 {
-	std::string baseId;
-	std::string subId;
+	QByteArray baseId;
+	QByteArray subId;
 	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
 
 	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
@@ -47,10 +47,10 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const std::strin
 }
 
 
-iser::ISerializable* CComposedParamsSetComp::GetEditableParameter(const std::string& id)
+iser::ISerializable* CComposedParamsSetComp::GetEditableParameter(const QByteArray& id)
 {
-	std::string baseId;
-	std::string subId;
+	QByteArray baseId;
+	QByteArray subId;
 	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
 
 	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
@@ -143,7 +143,7 @@ void CComposedParamsSetComp::OnComponentCreated()
 
 	for (int i = 0; i < setsCount; ++i){
 		iser::ISerializable* paramPtr = m_parametersCompPtr[i];
-		std::string id = m_parametersIdAttrPtr[i].toStdString();
+		QByteArray id = m_parametersIdAttrPtr[i].toLocal8Bit();
 
 		SetEditableParameter(id, paramPtr);
 	}

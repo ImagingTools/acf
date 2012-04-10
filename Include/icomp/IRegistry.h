@@ -2,11 +2,10 @@
 #define icomp_IRegistry_included
 
 
-// STL includes
-#include <string>
-#include <set>
+// Qt includes
+#include <QtCore/QByteArray>
+#include <QtCore/QSet>
 #include <QtCore/QMap>
-
 
 // ACF includes
 #include "istd/TDelPtr.h"
@@ -31,7 +30,7 @@ namespace icomp
 class IRegistry: virtual public iser::ISerializable
 {
 public:
-	typedef std::set<std::string> Ids;
+	typedef QSet<QByteArray> Ids;
 	typedef istd::TDelPtr<IRegistryElement> ElementPtr;
 
 	/**
@@ -58,12 +57,12 @@ public:
 	/**
 		Map assigning interface ID (undecorated) to component ID exporting this interface.
 	*/
-	typedef QMap<std::string, std::string> ExportedInterfacesMap;
+	typedef QMap<QByteArray, QByteArray> ExportedInterfacesMap;
 
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/
-	typedef QMap<std::string, std::string> ExportedComponentsMap;
+	typedef QMap<QByteArray, QByteArray> ExportedComponentsMap;
 
 	/**
 		Get ID list of existing elements.
@@ -73,7 +72,7 @@ public:
 	/**
 		Get access to stored attribute info structure.
 	*/
-	virtual const ElementInfo* GetElementInfo(const std::string& elementId) const = 0;
+	virtual const ElementInfo* GetElementInfo(const QByteArray& elementId) const = 0;
 
 	/**
 		Insert new attribute info object to collection of attributes.
@@ -82,21 +81,21 @@ public:
 		\param	ensureElementCreated	if true new element will be created.
 	*/
 	virtual ElementInfo* InsertElementInfo(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::CComponentAddress& address,
 				bool ensureElementCreated = true) = 0;
 
 	/**
 		Removes attribute info structure from this collection.
 	*/
-	virtual bool RemoveElementInfo(const std::string& elementId) = 0;
+	virtual bool RemoveElementInfo(const QByteArray& elementId) = 0;
 
 	/**
 		Rename an registry element.
 		\param	oldElementId		ID of element to be renamed.
 		\param	newElementId		the new ID of element.
 	*/
-	virtual bool RenameElement(const std::string& oldElementId, const std::string& newElementId) = 0;
+	virtual bool RenameElement(const QByteArray& oldElementId, const QByteArray& newElementId) = 0;
 
 	/**
 		Get list of IDs of embedded registries.
@@ -109,26 +108,26 @@ public:
 		Get access to embedded registry using its ID.
 		Embedded registries are used to manage local composite components.
 	*/
-	virtual IRegistry* GetEmbeddedRegistry(const std::string& registryId) const = 0;
+	virtual IRegistry* GetEmbeddedRegistry(const QByteArray& registryId) const = 0;
 
 	/**
 		Insert embedded registry with specified ID.
 		\return	instance of new created embedded registry.
 	*/
-	virtual IRegistry* InsertEmbeddedRegistry(const std::string& registryId) = 0;
+	virtual IRegistry* InsertEmbeddedRegistry(const QByteArray& registryId) = 0;
 
 	/**
 		Remove embedded registry with specified ID.
 		\return	true, if registry could be removed.
 	*/
-	virtual bool RemoveEmbeddedRegistry(const std::string& registryId) = 0;
+	virtual bool RemoveEmbeddedRegistry(const QByteArray& registryId) = 0;
 
 	/**
 		Rename a embedded registry.
 		\param	oldElementId		ID of element to be renamed.
 		\param	newElementId		the new ID of element.
 	*/
-	virtual bool RenameEmbeddedRegistry(const std::string& oldRegistryId, const std::string& newRegistryId) = 0;
+	virtual bool RenameEmbeddedRegistry(const QByteArray& oldRegistryId, const QByteArray& newRegistryId) = 0;
 
 	/**
 		Get access to information structure of exported interfaces.
@@ -147,8 +146,8 @@ public:
 		\param	state				the export state. If \c false, the existing export will be removed.
 	*/
 	virtual void SetElementInterfaceExported(
-				const std::string& elementId,
-				const std::string& interfaceName,
+				const QByteArray& elementId,
+				const QByteArray& interfaceName,
 				bool state = true) = 0;
 
 	/**
@@ -157,8 +156,8 @@ public:
 		\param	elementId		ID of element or its subelement (with dot separated) or empty string, if this export should be removed.
 	*/
 	virtual void SetElementExported(
-				const std::string& exportId,
-				const std::string& elementId) = 0;
+				const QByteArray& exportId,
+				const QByteArray& elementId) = 0;
 
 	/**
 		Get human readable description of this registry.

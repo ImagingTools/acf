@@ -2,9 +2,8 @@
 #define imath_IDoubleManip_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "istd/IPolymorphic.h"

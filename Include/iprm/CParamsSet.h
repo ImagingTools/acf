@@ -2,9 +2,8 @@
 #define iprm_CParamsSet_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
-
 
 // ACF includes
 #include "istd/TChangeDelegator.h"
@@ -30,13 +29,13 @@ class CParamsSet:
 public:
 	struct ParameterInfo
 	{
-		ParameterInfo(const std::string& parameterId, iser::ISerializable* parameterPtr, bool releaseFlag = false)
+		ParameterInfo(const QByteArray& parameterId, iser::ISerializable* parameterPtr, bool releaseFlag = false)
 		{
 			this->parameterPtr.SetPtr(parameterPtr, releaseFlag);
 			this->parameterId = parameterId;
 		}
 
-		std::string parameterId;
+		QByteArray parameterId;
 		istd::TOptDelPtr<iser::ISerializable> parameterPtr;
 	};
 	typedef istd::TPointerVector<ParameterInfo> ParameterInfos;
@@ -60,7 +59,7 @@ public:
 		Set editable parameter in this set.
 		Editable parameters are stored in set directly, the non editable in slave sets.
 	*/
-	virtual bool SetEditableParameter(const std::string& id, iser::ISerializable* parameterPtr, bool releaseFlag = false);
+	virtual bool SetEditableParameter(const QByteArray& id, iser::ISerializable* parameterPtr, bool releaseFlag = false);
 
 	/**
 		Get access to all parameters.
@@ -68,8 +67,8 @@ public:
 	const ParameterInfos& GetParameterInfos() const;
 
 	// reimplemented (iprm::IParamsSet)
-	virtual const iser::ISerializable* GetParameter(const std::string& id) const;
-	virtual iser::ISerializable* GetEditableParameter(const std::string& id);
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -79,7 +78,7 @@ public:
 	virtual bool CopyFrom(const IChangeable& object);
 
 protected:
-	const ParameterInfo* FindParameterInfo(const std::string& parameterId) const;
+	const ParameterInfo* FindParameterInfo(const QByteArray& parameterId) const;
 
 private:
 	ParameterInfos m_params;

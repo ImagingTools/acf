@@ -2,10 +2,9 @@
 #define icomp_IElementStaticInfo_included
 
 
-// STL includes
-#include <set>
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
+#include <QtCore/QSet>
 
 // ACF includes
 #include "istd/IPolymorphic.h"
@@ -39,14 +38,14 @@ public:
 		MGI_LAST = MGI_SUBELEMENTS
 	};
 
-	typedef std::set<std::string> Ids;
+	typedef QSet<QByteArray> Ids;
 
 	/**
 		Return number of interfaces for specific slot.
 		\param	subcomponentId	ID of subcomponent.
 								\sa	GetMetaIds() and MGI_SUBELEMENTS.
 	*/
-	virtual const IElementStaticInfo* GetSubelementInfo(const std::string& subcomponentId) const = 0;
+	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const = 0;
 
 	/**
 		Get list of meta IDs associated with some meta key.

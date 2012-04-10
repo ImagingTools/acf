@@ -2,9 +2,8 @@
 #define iproc_TSyncProcessorWrap_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
-
 
 // ACF includes
 #include "iprm/IParamsSet.h"
@@ -149,7 +148,7 @@ void TSyncProcessorWrap<Base>::CancelTask(int taskId)
 template <class Base>
 int TSyncProcessorWrap<Base>::GetReadyTask()
 {
-	if (!m_taskToStateMap.empty()){
+	if (!m_taskToStateMap.isEmpty()){
 		return m_taskToStateMap.begin().key();
 	}
 	else{

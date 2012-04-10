@@ -24,7 +24,7 @@ class CMultiAttributeEditor: public QDialog
 public:
 	CMultiAttributeEditor(
 				const CElementSelectionInfoManagerBase& elementSelectionInfoManager,
-				const std::string& attributeId,
+				const QByteArray& attributeId,
 				int attributeFlags);
 
 	/**
@@ -66,7 +66,7 @@ private:
 
 
 	const CElementSelectionInfoManagerBase& m_elementSelectionInfoManager;
-	std::string m_attributeId;
+	QByteArray m_attributeId;
 	int m_attributeFlags;
 
 	Ui::CMultiAttributeEditor m_dialog;

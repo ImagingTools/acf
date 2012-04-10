@@ -22,7 +22,7 @@ public:
 		CTF_ALL = CTF_REAL | CTF_COMPOSITE
 	};
 
-	typedef std::set<CComponentAddress> ComponentAddresses;
+	typedef QSet<CComponentAddress> ComponentAddresses;
 
 	/**
 		Get addresses of known components.
@@ -41,7 +41,7 @@ public:
 		\param	package ID.
 		\return	static info of the package or NULL, if no package for specified ID was found.
 	*/
-	virtual const IComponentStaticInfo* GetPackageMetaInfo(const std::string& packageId) const = 0;
+	virtual const IComponentStaticInfo* GetPackageMetaInfo(const QByteArray& packageId) const = 0;
 
 };
 

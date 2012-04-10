@@ -15,9 +15,10 @@ namespace iser
 
 CFileReadArchive::CFileReadArchive(const QString& filePath, bool supportTagSkipping, bool serializeHeader)
 :	BaseClass2(filePath),
+	m_file(filePath),
 	m_supportTagSkipping(supportTagSkipping)
 {
-	m_stream.open(m_filePath.toStdString().c_str(), std::fstream::in | std::fstream::binary);
+	m_file.open(QIODevice::ReadOnly);
 
 	if (serializeHeader){
 		SerializeAcfHeader();
@@ -64,7 +65,7 @@ bool CFileReadArchive::EndTag(const CArchiveTag& tag)
 	}
 
 	if (element.useTagSkipping && (element.endPosition != 0)){
-		m_stream.seekg(element.endPosition);
+		retVal = retVal && m_file.seek(element.endPosition);
 	}
 
 	m_tagStack.pop_back();
@@ -83,9 +84,9 @@ bool CFileReadArchive::ProcessData(void* data, int size)
 		return false;
 	}
 
-	m_stream.read((char*)data, size);
+	m_file.read((char*)data, size);
 
-	return !m_stream.fail();
+	return m_file.error() == QFile::NoError;
 }
 
 

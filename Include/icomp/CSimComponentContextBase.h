@@ -2,11 +2,11 @@
 #define icomp_CSimComponentContextBase_included
 
 
-// STL includes
+// Qt includes
+#include <QtCore/QString>
 #include <QtCore/QMap>
 
-#include <QtCore/QString>
-
+// ACF includes
 #include "istd/TIFactory.h"
 #include "istd/CIdManipBase.h"
 
@@ -36,48 +36,48 @@ public:
 		\param	attributeId		ID of attribute.
 		\param	attributePtr	pointer to attribute instance. It will be automatically deleted.
 	*/
-	bool SetAttr(const std::string& attributeId, const iser::IObject* attributePtr);
+	bool SetAttr(const QByteArray& attributeId, const iser::IObject* attributePtr);
 
 	/**
 		Set named reference to some component.
 	*/
-	bool SetRef(const std::string& referenceId, IComponent* componentPtr, const std::string& subelementId = "");
+	bool SetRef(const QByteArray& referenceId, IComponent* componentPtr, const QByteArray& subelementId = "");
 
 	/**
 		Set named reference to some component.
 	*/
-	bool InsertMultiRef(const std::string& referenceId, IComponent* componentPtr, const std::string& subelementId = "");
+	bool InsertMultiRef(const QByteArray& referenceId, IComponent* componentPtr, const QByteArray& subelementId = "");
 
 	/**
 		Set factory of component instance.
 	*/
-	bool SetFactory(const std::string& factoryId, const ComponentsFactory* factoryPtr);
+	bool SetFactory(const QByteArray& factoryId, const ComponentsFactory* factoryPtr);
 
 	/**
 		Set instance of \c bool attribute.
 	*/
-	bool SetBoolAttr(const std::string& attributeId, bool value);
+	bool SetBoolAttr(const QByteArray& attributeId, bool value);
 
 	/**
 		Set instance of \c int attribute.
 	*/
-	bool SetIntAttr(const std::string& attributeId, int value);
+	bool SetIntAttr(const QByteArray& attributeId, int value);
 
 	/**
 		Set instance of \c double attribute.
 	*/
-	bool SetDoubleAttr(const std::string& attributeId, double value);
+	bool SetDoubleAttr(const QByteArray& attributeId, double value);
 
 	/**
 		Set instance of \c QString attribute.
 	*/
-	bool SetStringAttr(const std::string& attributeId, const QString& value);
+	bool SetStringAttr(const QByteArray& attributeId, const QString& value);
 
 	/**
 		Set instance of simple attribute.
 	*/
 	template <class Attribute>
-	bool SetSingleAttr(const std::string& attributeId, const Attribute& attribute)
+	bool SetSingleAttr(const QByteArray& attributeId, const Attribute& attribute)
 	{
 		I_ASSERT(IsAttributeTypeCorrect<TAttribute<Attribute> >(attributeId));
 
@@ -90,7 +90,7 @@ public:
 		\param	attribute		single attribute value.
 	*/
 	template <class Attribute>
-	bool InsertMultiAttr(const std::string& attributeId, const Attribute& attribute)
+	bool InsertMultiAttr(const QByteArray& attributeId, const Attribute& attribute)
 	{
 		I_ASSERT(IsAttributeTypeCorrect<TMultiAttribute<Attribute> >(attributeId));
 
@@ -125,19 +125,19 @@ public:
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentStaticInfo& GetStaticInfo() const;
 	virtual const IComponentContext* GetParentContext() const;
-	virtual const iser::IObject* GetAttribute(const std::string& attributeId, int* definitionLevelPtr = NULL) const;
+	virtual const iser::IObject* GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr = NULL) const;
 
 protected:
 	/**
 		Check if attribute type is corrected.
 	*/
 	template <class AttrType>
-	bool IsAttributeTypeCorrect(const std::string& attributeId);
+	bool IsAttributeTypeCorrect(const QByteArray& attributeId);
 
-	typedef QMap<std::string, IComponent*> ComponentsMap;
+	typedef QMap<QByteArray, IComponent*> ComponentsMap;
 	ComponentsMap m_componentsMap;
 
-	typedef QMap< std::string, const ComponentsFactory* > FactoriesMap;
+	typedef QMap< QByteArray, const ComponentsFactory* > FactoriesMap;
 	FactoriesMap m_factoriesMap;
 
 private:
@@ -149,11 +149,11 @@ private:
 // protected methods
 
 template <class AttrType>
-bool CSimComponentContextBase::IsAttributeTypeCorrect(const std::string& attributeId)
+bool CSimComponentContextBase::IsAttributeTypeCorrect(const QByteArray& attributeId)
 {
 	const IAttributeStaticInfo* attributeInfoPtr = m_metaInfo.GetAttributeInfo(attributeId);
 	if (attributeInfoPtr != NULL){
-		std::string attributeType = attributeInfoPtr->GetAttributeTypeName();
+		QByteArray attributeType = attributeInfoPtr->GetAttributeTypeName();
 
 		return attributeType == AttrType::GetTypeName();
 	}

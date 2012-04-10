@@ -179,7 +179,7 @@ public:
 	virtual const IColorShema& GetDefaultColorShema() const = 0;
 
 protected:
-	typedef std::vector<ILayer*> Layers;
+	typedef QVector<ILayer*> Layers;
 
 	/**
 		Draw Background layer.
@@ -322,7 +322,7 @@ private:
 	bool m_isViewDraggable;
 	bool m_isDraggable;
 
-	std::vector<iview::IViewEventObserver*> m_viewListeners;
+	QVector<iview::IViewEventObserver*> m_viewListeners;
 
 	ISelectableLayer* m_focusedLayerPtr;
 	int m_backgroundLayerIndex;

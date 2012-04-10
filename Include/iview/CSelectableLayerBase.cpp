@@ -303,7 +303,7 @@ void CSelectableLayerBase::InsertSelectedShapes(SelectedShapes& result) const
 
 void CSelectableLayerBase::DeselectAllShapes()
 {
-	while (!m_activeShapes.empty()){
+	while (!m_activeShapes.isEmpty()){
 		ShapeMap::iterator iter = m_activeShapes.begin();
 		I_ASSERT(dynamic_cast<iview::IInteractiveShape*>(iter.key()) != NULL);
 

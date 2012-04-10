@@ -47,7 +47,7 @@ bool CSettingsWriteArchive::EndTag(const iser::CArchiveTag& tag)
 }
 
 
-bool CSettingsWriteArchive::Process(std::string& value)
+bool CSettingsWriteArchive::Process(QByteArray& value)
 {
 	QString registryKey = CreateNextValueKey();
 
@@ -55,7 +55,7 @@ bool CSettingsWriteArchive::Process(std::string& value)
 		return false;
 	}
 
-	BaseClass2::setValue(registryKey, QString(value.c_str()));
+	BaseClass2::setValue(registryKey, QString(value));
 
 	return true;
 }

@@ -39,7 +39,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               MainGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -77,7 +77,7 @@
               SplashScreen
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -96,7 +96,7 @@
               SplashTime
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               
@@ -136,7 +136,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -155,7 +155,7 @@
               ApplicationType
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -174,7 +174,7 @@
               CompanyName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -193,7 +193,7 @@
               LegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -212,7 +212,7 @@
               MainVersionId
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -231,7 +231,7 @@
               ProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -250,7 +250,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -311,7 +311,7 @@
               SlaveTemplates
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -356,7 +356,7 @@
               DefaultText
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -396,7 +396,7 @@
               FileExtensions
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -417,7 +417,7 @@
               TypeDescriptions
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               
@@ -438,7 +438,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -478,7 +478,7 @@
               DocumentFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -497,7 +497,7 @@
               DocumentLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -516,7 +516,7 @@
               DocumentTypeId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               
@@ -535,7 +535,7 @@
               IsEditSupported
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -554,7 +554,7 @@
               IsNewSupported
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -573,7 +573,7 @@
               ViewFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -634,7 +634,7 @@
               DocumentFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -653,7 +653,7 @@
               DocumentLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -672,7 +672,7 @@
               DocumentTypeId
             </Id>
             <Type>
-              icomp::TAttribute&lt;std::string&gt;
+              Id
             </Type>
             <ExportId>
               
@@ -691,7 +691,7 @@
               IsEditSupported
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -710,7 +710,7 @@
               IsNewSupported
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -729,7 +729,7 @@
               ViewFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -811,7 +811,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -830,7 +830,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -849,7 +849,7 @@
               IconSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -868,7 +868,7 @@
               UseIconText
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -887,7 +887,7 @@
               Workspace
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -927,7 +927,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -946,7 +946,7 @@
               ImagePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -965,7 +965,7 @@
               ShowProductType
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -1026,7 +1026,7 @@
               DocumentTemplate
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

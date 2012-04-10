@@ -71,7 +71,7 @@ public:
 	/**
 		Process the current document.
 	*/
-	virtual void DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const std::string& documentTypeId) = 0;
+	virtual void DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId) = 0;
 
 protected:
 	// reimplemented (imod::CMultiModelDispatcherBase)

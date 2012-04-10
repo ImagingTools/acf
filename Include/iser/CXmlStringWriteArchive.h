@@ -2,12 +2,11 @@
 #define iser_CXmlStringWriteArchive_included
 
 
-// STL includes
-#include <sstream>
-
+// Qt includes
+#include <QtCore/QBuffer>
 
 // ACF includes
-#include "iser/TXmlStreamWriteArchiveBase.h"
+#include "iser/CXmlStreamWriteArchiveBase.h"
 
 
 namespace iser
@@ -19,18 +18,21 @@ namespace iser
 
 	\ingroup Persistence
 */
-class CXmlStringWriteArchive: public TXmlStreamWriteArchiveBase<std::ostringstream>
+class CXmlStringWriteArchive: public CXmlStreamWriteArchiveBase
 {
 public:
-	typedef TXmlStreamWriteArchiveBase<std::ostringstream> BaseClass;
+	typedef CXmlStreamWriteArchiveBase BaseClass;
 
 	CXmlStringWriteArchive(
 				const IVersionInfo* versionInfoPtr = NULL,
 				bool serializeHeader = true,
 				const CArchiveTag& rootTag = s_acfRootTag);
+	virtual ~CXmlStringWriteArchive();
 
+	virtual const QByteArray& GetString() const;
 
-	virtual std::string GetString() const;
+private:
+	QBuffer m_buffer;
 };
 
 

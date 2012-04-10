@@ -80,7 +80,7 @@ bool TAttributeMember<Attribute>::Init(
 {
 	I_ASSERT(ownerPtr != NULL);
 
-	const std::string& attributeId = staticInfo.GetAttributeId();
+	const QByteArray& attributeId = staticInfo.GetAttributeId();
 	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
 	if (componentContextPtr != NULL){
 		int definitionLevel = -1;

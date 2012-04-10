@@ -1,10 +1,6 @@
 #include "iser/CTextReadArchiveBase.h"
 
 
-// STL includes
-#include <cstring>
-
-
 // ACF includes
 #include "istd/CBase64.h"
 
@@ -17,7 +13,7 @@ namespace iser
 
 bool CTextReadArchiveBase::Process(bool& value)
 {
-	std::string elementText;
+	QByteArray elementText;
 
 	if (Process(elementText)){
 		value = (elementText == "true");
@@ -37,13 +33,37 @@ bool CTextReadArchiveBase::Process(char& value)
 
 bool CTextReadArchiveBase::Process(quint8& value)
 {
-	return ProcessInternal(value);
+	QByteArray elementText;
+
+	if (Process(elementText) && !elementText.isEmpty()){
+		QTextStream stream(&elementText, QIODevice::ReadOnly);
+
+		int val;
+		stream >> val;
+		value = (quint8)val;
+
+		return true;
+	}
+
+	return false;
 }
 
 
 bool CTextReadArchiveBase::Process(qint8& value)
 {
-	return ProcessInternal(value);
+	QByteArray elementText;
+
+	if (Process(elementText) && !elementText.isEmpty()){
+		QTextStream stream(&elementText, QIODevice::ReadOnly);
+
+		int val;
+		stream >> val;
+		value = (qint8)val;
+
+		return true;
+	}
+
+	return false;
 }
 
 
@@ -99,11 +119,11 @@ bool CTextReadArchiveBase::ProcessData(void* dataPtr, int size)
 {
 	quint8* data = (quint8*)dataPtr;
 
-	std::string text;
+	QByteArray text;
 	bool retVal = Process(text);
 
 	if (retVal){
-		std::vector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text);
+		QVector<quint8> decodedData = istd::CBase64::ConvertFromBase64(text);
 		I_ASSERT(size == int(decodedData.size()));
 
 		std::memcpy(data, &decodedData[0], size);

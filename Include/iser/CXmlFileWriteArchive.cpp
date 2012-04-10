@@ -11,15 +11,25 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 			bool serializeHeader,
 			const CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, rootTag),
-	BaseClass2(filePath)
+	BaseClass2(filePath),
+	m_file(filePath)
 {
-	m_stream.open(filePath.toStdString().c_str(), std::fstream::out);
+	if (m_file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)){
+		m_stream.setDevice(&m_file);
 
-	SerializeXmlHeader();
+		SerializeXmlHeader();
 
-	if (serializeHeader){
-		SerializeAcfHeader();
+		if (serializeHeader){
+			SerializeAcfHeader();
+		}
 	}
+}
+
+
+CXmlFileWriteArchive::~CXmlFileWriteArchive()
+{
+	m_stream.setDevice(NULL);
+	m_file.close();
 }
 
 

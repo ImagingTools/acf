@@ -2,11 +2,12 @@
 #define idoc_CSingleDocumentManagerBase_included
 
 
-// STL includes
-#include <string>
-
-#include "istd/TDelPtr.h"
+// Qt includes
+#include <QtCore/QByteArray>
 #include <QtCore/QString>
+
+// ACF includes
+#include "istd/TDelPtr.h"
 
 #include "iser/IArchive.h"
 
@@ -33,18 +34,18 @@ public:
 	virtual istd::IPolymorphic* GetViewFromIndex(int documentIndex, int viewIndex) const;
 	virtual istd::IPolymorphic* GetActiveView() const;
 	virtual istd::IChangeable* GetDocumentFromView(const istd::IPolymorphic& view, DocumentInfo* documentInfoPtr = NULL) const;
-	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const std::string& viewTypeId = std::string());
-	virtual std::string GetDocumentTypeId(const istd::IChangeable& document) const;
+	virtual istd::IPolymorphic* AddViewToDocument(const istd::IChangeable& document, const QByteArray& viewTypeId = QByteArray());
+	virtual QByteArray GetDocumentTypeId(const istd::IChangeable& document) const;
 	virtual bool FileNew(
-				const std::string& documentTypeId, 
+				const QByteArray& documentTypeId, 
 				bool createView = true, 
-				const std::string& viewTypeId = "",
+				const QByteArray& viewTypeId = "",
 				istd::IChangeable** newDocumentPtr = NULL);
 	virtual bool FileOpen(
-				const std::string* documentTypeIdPtr,
+				const QByteArray* documentTypeIdPtr,
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
-				const std::string& viewTypeId = "",
+				const QByteArray& viewTypeId = "",
 				FileToTypeMap* loadedMapPtr = NULL);
 	virtual bool FileSave(
 				int documentIndex = -1,
@@ -64,13 +65,13 @@ protected:
 	virtual bool OpenDocument(
 				const QString& filePath,
 				bool createView,
-				const std::string& viewTypeId,
-				std::string& documentTypeId);
+				const QByteArray& viewTypeId,
+				QByteArray& documentTypeId);
 
 	/**
 		Create instance of specified document without attaching to this manager.
 	*/
-	bool NewDocument(const std::string& documentTypeId, bool createView, const std::string& viewTypeId);
+	bool NewDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId);
 	void EnsureViewRemoved();
 
 	// reimplemented (imod::CSingleModelObserverBase)
@@ -91,12 +92,12 @@ protected:
 	/**
 		Gets open file names.
 	*/
-	virtual QString GetOpenFilePath(const std::string* documentTypeIdPtr = NULL) const  = 0;
+	virtual QString GetOpenFilePath(const QByteArray* documentTypeIdPtr = NULL) const  = 0;
 
 	/**
 		Gets save file name.
 	*/
-	virtual QString GetSaveFilePath(const std::string& documentTypeId) const = 0;
+	virtual QString GetSaveFilePath(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Query user if this document can be closed.
@@ -106,8 +107,8 @@ protected:
 
 private:
 	QString m_filePath;
-	std::string m_documentTypeId;
-	std::string m_viewTypeId;
+	QByteArray m_documentTypeId;
+	QByteArray m_viewTypeId;
 	istd::TDelPtr<istd::IChangeable> m_documentPtr;
 	istd::TDelPtr<imod::IUndoManager> m_undoManagerPtr;
 	istd::TDelPtr<IDocumentStateComparator> m_stateComparatorPtr;

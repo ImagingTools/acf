@@ -82,7 +82,7 @@ void CQuickHelpGuiComp::ShowHelp(const QString& contextText, const istd::IPolymo
 						QDir infoDir(infoPath);
 						QFile file(infoDir.absoluteFilePath("CompositorInfo.xml"));
 						QDomDocument domDocument;
-						if (file.open(QIODevice::ReadOnly) && domDocument.setContent(&file)){
+						if (file.open(QIODevice::ReadOnly | QIODevice::Text) && domDocument.setContent(&file)){
 							QDomElement root = domDocument.firstChildElement("CompositorInfo");
 
 							if (root.isElement()){
@@ -113,8 +113,8 @@ QString CQuickHelpGuiComp::CalcDoxygenFileName(const istd::CClassInfo& classInfo
 {
 	QString retVal = "class";
 
-	std::string className = classInfo.GetName();
-	for (		std::string::const_iterator iter = className.begin();
+	QByteArray className = classInfo.GetName();
+	for (		QByteArray::const_iterator iter = className.begin();
 				iter != className.end();
 				++iter){
 		char c = *iter;

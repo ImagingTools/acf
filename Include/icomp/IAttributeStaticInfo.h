@@ -2,9 +2,8 @@
 #define icomp_IAttributeStaticInfo_included
 
 
-// STL includes
-#include <string>
-
+// Qt includes
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "istd/IPolymorphic.h"
@@ -57,7 +56,7 @@ public:
 	/**
 		Get description of this attribute.
 	 */
-	virtual const std::string& GetAttributeDescription() const = 0;
+	virtual const QByteArray& GetAttributeDescription() const = 0;
 
 	/**
 		Get default attribute value.
@@ -68,7 +67,7 @@ public:
 	/**
 		Return attribute type description.
 	 */
-	virtual std::string GetAttributeTypeName() const = 0;
+	virtual QByteArray GetAttributeTypeName() const = 0;
 
 	/**
 		Get related meta information.

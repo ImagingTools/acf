@@ -46,7 +46,7 @@ quint32 CCrcCalculator::GetCrcFromFile(const QString& fileName)
 
 	quint32 crcValue = 0xFFFFFFFF;
 
-	file.open(fileName.toStdString().c_str(), std::fstream::in | std::fstream::binary);
+	file.open(fileName.toLocal8Bit().constData(), std::fstream::in | std::fstream::binary);
 	if (file.is_open()){
 		char buffer[1024];
 		int readBytes = file.read(buffer, sizeof(buffer)).gcount();

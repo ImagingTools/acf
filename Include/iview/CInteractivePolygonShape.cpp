@@ -562,7 +562,7 @@ bool CInteractivePolygonShape::IsCurveTouched(istd::CIndex2d position) const
 
                 if ((delta.GetDotProduct(cp - node1) >= 0) && (delta.GetDotProduct(cp - node2) <= 0)){
                     i2d::CVector2d ortonormal = delta.GetOrthogonal().GetNormalized();
-                    double distance = ::fabs(ortonormal.GetDotProduct(cp - node1));
+                    double distance = qAbs(ortonormal.GetDotProduct(cp - node1));
                     if (proportions * distance < logicalLineWidth){
                         return true;
                     }

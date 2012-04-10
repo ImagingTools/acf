@@ -2,9 +2,10 @@
 #define iproc_TMemCachedProducerComp_included
 
 
-// STL includes
-#include <list>
+// Qt includes
+#include <QtCore/QList>
 
+// ACF includes
 #include "iproc/TILockedProducer.h"
 
 
@@ -57,7 +58,7 @@ private:
 		int lockedCount;
 	};
 
-	typedef std::list<ListElement> CachedList;
+	typedef QList<ListElement> CachedList;
 	typedef QMap<const CacheObject*, typename CachedList::reverse_iterator> ObjectToListMap;
 
 	CachedList m_cachedList;
@@ -72,7 +73,7 @@ private:
 template <class Key, class CacheObject>
 const CacheObject* TMemCachedProducerComp<Key, CacheObject>::ProduceLockedObject(const Key& key)
 {
-	typename CachedList::iterator foundIter = std::find(m_cachedList.begin(), m_cachedList.end(), key);
+	typename CachedList::iterator foundIter = qFind(m_cachedList.begin(), m_cachedList.end(), key);
 	if (foundIter != m_cachedList.end()){
 		foundIter->lockedCount++;
 

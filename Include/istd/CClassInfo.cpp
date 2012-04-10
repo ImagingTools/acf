@@ -19,11 +19,11 @@ static int ParseToNumber(const char* buffer, int maxLength, int& nextPosition)
 }
 
 
-std::string ParseRecursive(const std::string& rawName, std::string ns, int& position)
+QByteArray ParseRecursive(const QByteArray& rawName, QByteArray ns, int& position)
 {
-	std::string retVal;
+	QByteArray retVal;
 	
-	std::string separator;
+	QByteArray separator;
 
 	position = position;
 
@@ -58,7 +58,7 @@ std::string ParseRecursive(const std::string& rawName, std::string ns, int& posi
 				substrLength = nameSize - position - substrPos;
 			}
 
-			std::string ns = rawName.substr(position + substrPos, substrLength);
+			QByteArray ns = rawName.substr(position + substrPos, substrLength);
 			
 			position += substrPos + substrLength;
 
@@ -81,7 +81,7 @@ std::string ParseRecursive(const std::string& rawName, std::string ns, int& posi
 		else if (code == 'S'){
 			position += 2;
 
-			if (!ns.empty()){
+			if (!ns.isEmpty()){
 				retVal += ns + "::";
 			}
 
@@ -231,7 +231,7 @@ namespace istd
 
 bool CClassInfo::IsConst() const
 {
-	return (m_name.substr(0, 6) == "const ");
+	return (m_name.left(6) == "const ");
 }
 
 
@@ -244,7 +244,7 @@ CClassInfo CClassInfo::GetConstCasted(bool enableConst) const
 	}
 	else{
 		if (IsConst()){
-			return CClassInfo(m_name.substr(6));
+			return CClassInfo(m_name.mid(6));
 		}
 	}
 
@@ -263,7 +263,7 @@ bool CClassInfo::ConstCast(bool enableConst)
 	}
 	else{
 		if (IsConst()){
-			m_name = m_name.substr(6);
+			m_name = m_name.mid(6);
 
 			return true;
 		}
@@ -275,10 +275,10 @@ bool CClassInfo::ConstCast(bool enableConst)
 
 bool CClassInfo::IsTemplateClass() const
 {
-	std::string::size_type ltPos = m_name.find_first_of('<');
-	if (ltPos != std::string::npos){
-		std::string::size_type gtPos = m_name.find_last_of('>');
-		if ((gtPos != std::string::npos) && (ltPos < gtPos)){
+	int ltPos = m_name.indexOf('<');
+	if (ltPos >= 0){
+		int gtPos = m_name.lastIndexOf('>');
+		if ((gtPos >= 0) && (ltPos < gtPos)){
 			return true;
 		}
 	}
@@ -289,12 +289,12 @@ bool CClassInfo::IsTemplateClass() const
 
 int CClassInfo::GetTemplateParamsCount() const
 {
-	std::string::size_type beginPos = m_name.find_first_of('<');
-	if (beginPos != std::string::npos){
-		std::string::size_type gtPos = m_name.find_last_of('>');
-		if ((gtPos != std::string::npos) && (beginPos < gtPos)){
+	int beginPos = m_name.indexOf('<');
+	if (beginPos >= 0){
+		int gtPos = m_name.lastIndexOf('>');
+		if ((gtPos >= 0) && (beginPos < gtPos)){
 			int counter;
-			for (counter = 0; (beginPos = m_name.find_first_of(',', beginPos)) != std::string::npos; ++counter);
+			for (counter = 0; (beginPos = m_name.indexOf(',', beginPos + 1)) >= 0; ++counter);
 
 			return counter;
 		}
@@ -306,20 +306,20 @@ int CClassInfo::GetTemplateParamsCount() const
 
 CClassInfo CClassInfo::GetTemplateParam(int paramIndex) const
 {
-	std::string::size_type beginPos = m_name.find_first_of('<');
-	if (beginPos != std::string::npos){
-		std::string::size_type gtPos = m_name.find_last_of('>');
-		if ((gtPos != std::string::npos) && (beginPos < gtPos)){
+	int beginPos = m_name.indexOf('<');
+	if (beginPos >= 0){
+		int gtPos = m_name.lastIndexOf('>');
+		if ((gtPos >= 0) && (beginPos < gtPos)){
 			int counter;
 			for (counter = 0; counter < paramIndex; ++counter){
-				beginPos = m_name.find_first_of(',', beginPos);
+				beginPos = m_name.indexOf(',', beginPos + 1);
 
-				if ((beginPos == std::string::npos) || (beginPos < gtPos)){
+				if ((beginPos >= 0) || (beginPos < gtPos)){
 					return CClassInfo();
 				}
 			}
 
-			return CClassInfo(m_name.substr(beginPos + 1, gtPos - beginPos - 1));
+			return CClassInfo(m_name.mid(beginPos + 1, gtPos - beginPos - 1));
 		}
 	}
 
@@ -327,13 +327,13 @@ CClassInfo CClassInfo::GetTemplateParam(int paramIndex) const
 }
 
 
-std::string CClassInfo::GetName(const std::type_info& info)
+QByteArray CClassInfo::GetName(const std::type_info& info)
 {
 	return GetUndecoratedName(info.name());
 }
 
 
-std::string CClassInfo::GetName(const istd::IPolymorphic& object)
+QByteArray CClassInfo::GetName(const istd::IPolymorphic& object)
 {
 	return GetUndecoratedName(typeid(object).name());
 }
@@ -341,13 +341,13 @@ std::string CClassInfo::GetName(const istd::IPolymorphic& object)
 
 // protected methods
 
-std::string CClassInfo::GetUndecoratedName(const std::string& rawName)
+QByteArray CClassInfo::GetUndecoratedName(const QByteArray& rawName)
 {
 #ifdef _MSC_VER
-	std::string retVal = rawName;
-	std::string::size_type position;
-	while ((position = retVal.find("class ")) != std::string::npos){
-		retVal = retVal.substr(0, position) + retVal.substr(position + 6);
+	QByteArray retVal = rawName;
+	int position;
+	while ((position = retVal.indexOf("class ")) >= 0){
+		retVal = retVal.left(position) + retVal.mid(position + 6);
 	}
 
 	return retVal;

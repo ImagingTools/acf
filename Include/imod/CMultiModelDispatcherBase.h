@@ -2,9 +2,8 @@
 #define imod_CMultiModelDispatcherBase_included
 
 
-// STL includes
+// Qt includes
 #include <QtCore/QMap>
-
 
 // ACF includes
 #include "istd/TDelPtr.h"

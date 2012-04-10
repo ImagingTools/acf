@@ -22,18 +22,18 @@ public:
 	/**
 		Get access to subcomponent using its ID.
 	*/
-	virtual IComponent* GetSubcomponent(const std::string& componentId) const = 0;
+	virtual IComponent* GetSubcomponent(const QByteArray& componentId) const = 0;
 
 	/**
 		Get access to context of subcomponent using its ID.
 		Please note, that this does'n create component instance.
 	*/
-	virtual const IComponentContext* GetSubcomponentContext(const std::string& componentId) const = 0;
+	virtual const IComponentContext* GetSubcomponentContext(const QByteArray& componentId) const = 0;
 
 	/**
 		Create instance of subcomponent using its ID.
 	*/
-	virtual IComponent* CreateSubcomponent(const std::string& componentId) const = 0;
+	virtual IComponent* CreateSubcomponent(const QByteArray& componentId) const = 0;
 
 	/**
 		Called if subcomponent is removed from memory.

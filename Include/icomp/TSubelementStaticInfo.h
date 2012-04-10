@@ -2,10 +2,9 @@
 #define icomp_TSubelementStaticInfo_included
 
 
-// STL incldues
+// Qt includes
+#include <QtCore/QByteArray>
 #include <QtCore/QMap>
-#include <string>
-
 
 // ACF includes
 #include "icomp/IElementStaticInfo.h"
@@ -27,24 +26,24 @@ public:
 	/**
 		Constructor attaching this subelement info to the component.
 	*/
-	TSubelementStaticInfo(const std::string& name, CBaseComponentStaticInfo& owner);
+	TSubelementStaticInfo(const QByteArray& name, CBaseComponentStaticInfo& owner);
 
 	/**
 		Register interface ID for this static component info.
 		This interface ID is used for static check
 		if this component can be used to resolve reference dependecy of second one.
 	*/
-	virtual void RegisterInterfaceExtractor(const std::string& interfaceName, InterfaceExtractorPtr extractorPtr);
+	virtual void RegisterInterfaceExtractor(const QByteArray& interfaceName, InterfaceExtractorPtr extractorPtr);
 
 	//	reimplemented (icomp::IElementStaticInfo)
-	virtual const IElementStaticInfo* GetSubelementInfo(const std::string& subcomponentId) const;
+	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
 
 	//	reimplemented (icomp::IComponentInterfaceExtractor)
 	virtual void* GetComponentInterface(
 				const istd::CClassInfo& interfaceType,
 				IComponent& component,
-				const std::string& subId) const;
+				const QByteArray& subId) const;
 
 	template <class InterfaceType>
 	class Registrator
@@ -53,7 +52,7 @@ public:
 		typedef InterfaceType* (*ExtractorPtr)(ComponentType& component);
 
 		Registrator(TSubelementStaticInfo& staticInfo,
-					const std::string& interfaceName,
+					const QByteArray& interfaceName,
 					ExtractorPtr extractorPtr)
 		{
 			staticInfo.RegisterInterfaceExtractor(interfaceName, reinterpret_cast<InterfaceExtractorPtr>(extractorPtr));
@@ -61,7 +60,7 @@ public:
 	};
 
 private:
-	typedef QMap<std::string, InterfaceExtractorPtr> InterfaceExtractors;
+	typedef QMap<QByteArray, InterfaceExtractorPtr> InterfaceExtractors;
 	InterfaceExtractors m_interfaceExtractors;
 };
 
@@ -69,14 +68,14 @@ private:
 // public methods
 
 template <class ComponentType>
-TSubelementStaticInfo<ComponentType>::TSubelementStaticInfo(const std::string& name, CBaseComponentStaticInfo& owner)
+TSubelementStaticInfo<ComponentType>::TSubelementStaticInfo(const QByteArray& name, CBaseComponentStaticInfo& owner)
 {
 	owner.RegisterSubelementInfo(name, this);
 }
 
 
 template <class ComponentType>
-void TSubelementStaticInfo<ComponentType>::RegisterInterfaceExtractor(const std::string& interfaceName, InterfaceExtractorPtr extractorPtr)
+void TSubelementStaticInfo<ComponentType>::RegisterInterfaceExtractor(const QByteArray& interfaceName, InterfaceExtractorPtr extractorPtr)
 {
 	m_interfaceExtractors[interfaceName] = extractorPtr;
 }
@@ -85,7 +84,7 @@ void TSubelementStaticInfo<ComponentType>::RegisterInterfaceExtractor(const std:
 //	reimplemented (icomp::IElementStaticInfo)
 
 template <class ComponentType>
-const IElementStaticInfo* TSubelementStaticInfo<ComponentType>::GetSubelementInfo(const std::string& /*subcomponentId*/) const
+const IElementStaticInfo* TSubelementStaticInfo<ComponentType>::GetSubelementInfo(const QByteArray& /*subcomponentId*/) const
 {
 	return NULL;
 }
@@ -114,10 +113,10 @@ template <class ComponentType>
 void* TSubelementStaticInfo<ComponentType>::GetComponentInterface(
 			const istd::CClassInfo& interfaceType,
 			IComponent& component,
-			const std::string& subId) const
+			const QByteArray& subId) const
 {
 	ComponentType* nativeTypePtr = dynamic_cast<ComponentType*>(&component);
-	if ((nativeTypePtr != NULL) && subId.empty()){
+	if ((nativeTypePtr != NULL) && subId.isEmpty()){
 		static istd::CClassInfo compInterfaceType(typeid(icomp::IComponent));
 
 		if (!interfaceType.IsValid() || interfaceType.IsVoid() || (interfaceType == compInterfaceType)){

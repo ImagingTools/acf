@@ -120,7 +120,7 @@ bool CAffine2d::GetInvertedApply(const i2d::CVector2d& position, i2d::CVector2d&
 bool CAffine2d::GetInverted(CAffine2d& result) const
 {
 	double det = m_deformMatrix.GetAt(0, 0) * m_deformMatrix.GetAt(1, 1) - m_deformMatrix.GetAt(0, 1) * m_deformMatrix.GetAt(1, 0);
-	if (std::fabs(det) < I_BIG_EPSILON){
+	if (qAbs(det) < I_BIG_EPSILON){
 		return false;
 	}
 

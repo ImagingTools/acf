@@ -83,7 +83,7 @@ bool CMatrix2d::GetInvMultiplied(const CVector2d& position, CVector2d& result) c
 {
 	double det = GetDet();
 
-	if (std::fabs(det) > I_BIG_EPSILON){
+	if (qAbs(det) > I_BIG_EPSILON){
 		result.SetX((GetAt(1, 1) * position.GetX() - GetAt(1, 0) * position.GetY()) / det);
 		result.SetY((GetAt(0, 0) * position.GetY() - GetAt(0, 1) * position.GetX()) / det);
 
@@ -98,7 +98,7 @@ bool CMatrix2d::GetInvMultiplied(const CVector2d& position, CVector2d& result) c
 bool CMatrix2d::GetInverted(CMatrix2d& result) const
 {
 	double det = GetDet();
-	if (std::fabs(det) < I_BIG_EPSILON){
+	if (qAbs(det) < I_BIG_EPSILON){
 		return false;
 	}
 

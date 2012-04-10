@@ -19,7 +19,7 @@ void CAbGuiComp::UpdateModel() const
 	istd::TChangeNotifier<IAb> changePtr(objectPtr);
 
 	changePtr->SetA(AValueSpinBox->value());
-	changePtr->SetB(BValueEdit->text().toStdString());
+	changePtr->SetB(BValueEdit->text().toLocal8Bit());
 }
 
 
@@ -35,7 +35,7 @@ void CAbGuiComp::UpdateGui(int /*updateFlags*/)
 	if (objectPtr != NULL){
 		AValueSpinBox->setValue(objectPtr->GetA());
 
-		BValueEdit->setText(objectPtr->GetB().c_str());
+		BValueEdit->setText(objectPtr->GetB());
 	}
 }
 

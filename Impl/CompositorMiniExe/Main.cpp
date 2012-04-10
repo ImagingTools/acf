@@ -61,7 +61,7 @@ public:
 	}
 
 	// reimplemented (icomp::IComponent)
-	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "")
+	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId = "")
 	{
 		if (interfaceType.IsType<imod::IObserver>() || interfaceType.IsType<iqtgui::IDropConsumer>()){
 			return scenographer.GetInterface(interfaceType, subId);
@@ -147,9 +147,9 @@ int main(int argc, char *argv[])
 	QString configFile;
 	QString registryFile;
 	for (int index = 1; index < argc; index++){
-		std::string argument = argv[index];
-		if (!argument.empty() && (argument[0] == '-')){
-			std::string option = argument.substr(1);
+		QByteArray argument = argv[index];
+		if (!argument.isEmpty() && (argument[0] == '-')){
+			QByteArray option = argument.mid(1);
 
 			if ((option == "h") || (option == "help")){
 				QMessageBox::information(NULL, QObject::tr("Parameter help"), QObject::tr(
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if (index == 1){
-			registryFile = QString::fromStdString(argument);
+			registryFile = argument;
 		}
 	}
 
@@ -255,7 +255,7 @@ int main(int argc, char *argv[])
 	application.SetStringAttr("StyleSheet", ":/Style/Resources/Style/AcfStyle.ass");
 	application.InitComponent();
 
-/*	if (!registryFile.empty()){
+/*	if (!registryFile.isEmpty()){
 		if (!workspaceComp.FileOpen(NULL, &registryFile)){
 			QMessageBox::information(
 						NULL,

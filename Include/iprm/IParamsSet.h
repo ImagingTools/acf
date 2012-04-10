@@ -23,13 +23,13 @@ public:
 		\param	id	ID of parameter. It is application specified.
 		\return		pointer to parameter instance or NULL if there is no parameter with this ID.
 	*/
-	virtual const iser::ISerializable* GetParameter(const std::string& id) const = 0;
+	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const = 0;
 	/**
 		Get access to editable parameter.
 		\param	id	ID of parameter. It is application specified.
 		\return		pointer to parameter instance or NULL if there is no editable parameter with this ID.
 	*/
-	virtual iser::ISerializable* GetEditableParameter(const std::string& id) = 0;
+	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id) = 0;
 };
 
 

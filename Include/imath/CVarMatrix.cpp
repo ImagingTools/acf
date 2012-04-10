@@ -1,10 +1,10 @@
 #include "imath/CVarMatrix.h"
 
 
-// STL includes
-#include <cmath>
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
+// ACF includes
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -355,7 +355,7 @@ bool CVarMatrix::TransformR(int firstPartWidth)
 			normA2 += element * element;
 		}
 
-		if (::fabs(normA2) < I_EPSILON){
+		if (qAbs(normA2) < I_EPSILON){
 			return false;
 		}
 
@@ -422,7 +422,7 @@ bool CVarMatrix::GetSolvedTriangle(const CVarMatrix& vector, CVarMatrix& result,
 	for (resultIndex[0] = 0; resultIndex[0] < columnsCount; ++resultIndex[0]){
 		for (resultIndex[1] = size[0] - 1; resultIndex[1] >= 0; --resultIndex[1]){
 			double diagonalElement = GetAt(istd::CIndex2d(resultIndex[1], resultIndex[1]));
-			if (std::fabs(diagonalElement) < accuracy){
+			if (qAbs(diagonalElement) < accuracy){
 				return false;
 			}
 
@@ -540,8 +540,8 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 
 	int maxStepsCount = qMin(size[1], columnsCount);
 
-	std::vector<double> columnNorms2(columnsCount);
-	std::vector<int> realColumnIndices(columnsCount);
+	QVector<double> columnNorms2(columnsCount);
+	QVector<int> realColumnIndices(columnsCount);
 
 	int maxNormColumnIndex = -1;
 	double maxNorm2 = 0;
@@ -655,7 +655,7 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 
 	istd::CIndex2d resultIndex;
 	for (resultIndex[0] = 0; resultIndex[0] < matrixYColumnsCount; ++resultIndex[0]){
-		if (std::fabs(restNorm2) >= accuracy){
+		if (qAbs(restNorm2) >= accuracy){
 			I_ASSERT(stepIndex > 0);	// restNorm is positive only if it was calculated -> there are non-zero elemens
 
 			double valueY = matrixY.GetAt(istd::CIndex2d(resultIndex[0], stepIndex - 1));
@@ -680,7 +680,7 @@ void CVarMatrix::SolveRobustLSP(CVarMatrix matrixA, CVarMatrix& matrixY, CVarMat
 			resultIndex[1] = realColumnIndices[i];
 
 			double diagonalElement = matrixA.GetAt(istd::CIndex2d(resultIndex[1], i));
-			I_ASSERT(std::fabs(diagonalElement) >= accuracy);	// was sorted previously and this condition was filled
+			I_ASSERT(qAbs(diagonalElement) >= accuracy);	// was sorted previously and this condition was filled
 
 			double previousProduct = 0.0;
 			for (int columnIndex = size[0] - 1; columnIndex > i; columnIndex--){

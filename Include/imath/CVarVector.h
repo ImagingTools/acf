@@ -2,9 +2,10 @@
 #define imath_CVarVector_included
 
 
-// STL includes
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
+// ACF includes
 #include "imath/TVector.h"
 
 
@@ -24,7 +25,7 @@ namespace imath
 class CVarVector
 {
 public:
-	typedef std::vector<double> Elements;
+	typedef QVector<double> Elements;
 
 	/**
 		Create the vector without components.
@@ -53,7 +54,7 @@ public:
 		Set number of elements.
 		\return	always true, this value is provided for template implementations.
 	*/
-	bool SetElementsCount(int size, double value = 0);
+	bool SetElementsCount(int count, double value = 0);
 
 	/**
 		Get element at specified i.
@@ -237,11 +238,17 @@ inline int CVarVector::GetElementsCount() const
 }
 
 
-inline bool CVarVector::SetElementsCount(int size, double value)
+inline bool CVarVector::SetElementsCount(int count, double value)
 {
-	I_ASSERT(size >= 0);
+	I_ASSERT(count >= 0);
 
-	m_elements.resize(size, value);
+	int oldCount = m_elements.size();
+
+	m_elements.resize(count);
+
+	for (int i = oldCount; i < count; ++i){
+		m_elements[i] = value;
+	}
 
 	return true;
 }
@@ -282,12 +289,11 @@ inline void CVarVector::Clear()
 
 inline void CVarVector::Reset(int elementsCount, double value)
 {
-	int oldCount = GetElementsCount();
-	for (int i = 0; i < oldCount; ++i){
+	m_elements.resize(elementsCount);
+
+	for (int i = 0; i < elementsCount; ++i){
 		m_elements[i] = value;
 	}
-
-	m_elements.resize(elementsCount, value);
 }
 
 
@@ -398,25 +404,69 @@ inline bool CVarVector::operator!=(const CVarVector& vector) const
 
 inline bool CVarVector::operator<(const CVarVector& vector) const
 {
-	return m_elements < vector.m_elements;
+	int count = m_elements.size();
+	int vectorCount = vector.m_elements.size();
+	int commonSize = qMin(count, vectorCount);
+	for (int i = 0; i < commonSize; ++i){
+		int element = m_elements[i];
+		int vectorElement = vector.m_elements[i];
+		if (element != vectorElement){
+			return element < vectorElement;
+		}
+	}
+
+	return count < vectorCount;
 }
 
 
 inline bool CVarVector::operator>(const CVarVector& vector) const
 {
-	return m_elements > vector.m_elements;
+	int count = m_elements.size();
+	int vectorCount = vector.m_elements.size();
+	int commonSize = qMin(count, vectorCount);
+	for (int i = 0; i < commonSize; ++i){
+		int element = m_elements[i];
+		int vectorElement = vector.m_elements[i];
+		if (element != vectorElement){
+			return element > vectorElement;
+		}
+	}
+
+	return count > vectorCount;
 }
 
 
 inline bool CVarVector::operator<=(const CVarVector& vector) const
 {
-	return m_elements <= vector.m_elements;
+	int count = m_elements.size();
+	int vectorCount = vector.m_elements.size();
+	int commonSize = qMin(count, vectorCount);
+	for (int i = 0; i < commonSize; ++i){
+		int element = m_elements[i];
+		int vectorElement = vector.m_elements[i];
+		if (element != vectorElement){
+			return element < vectorElement;
+		}
+	}
+
+	return count <= vectorCount;
 }
 
 
 inline bool CVarVector::operator>=(const CVarVector& vector) const
 {
-	return m_elements >= vector.m_elements;
+	int count = m_elements.size();
+	int vectorCount = vector.m_elements.size();
+	int commonSize = qMin(count, vectorCount);
+	for (int i = 0; i < commonSize; ++i){
+		int element = m_elements[i];
+		int vectorElement = vector.m_elements[i];
+		if (element != vectorElement){
+			return element > vectorElement;
+		}
+	}
+
+	return count >= vectorCount;
 }
 
 

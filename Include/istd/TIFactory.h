@@ -23,7 +23,7 @@ public:
 		\param	keyId		
 		\return			pointer to created object or NULL if it was not possible to create it or keyId does not exist.
 	*/
-	virtual Interface* CreateInstance(const std::string& keyId = "") const = 0;
+	virtual Interface* CreateInstance(const QByteArray& keyId = "") const = 0;
 };
 
 

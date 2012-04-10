@@ -27,9 +27,9 @@ public:
 
 	// reimplemented (iprm::IParamsSet)
 	virtual TypeIds GetKnownTypeIds() const;
-	virtual std::string GetParameterTypeId() const;
+	virtual QByteArray GetParameterTypeId() const;
 	virtual iser::ISerializable* GetParameter() const;
-	virtual bool AssignTypeId(const std::string& typeId);
+	virtual bool AssignTypeId(const QByteArray& typeId);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -39,7 +39,7 @@ private:
 	I_MULTIFACT(iser::ISerializable, m_factoriesFact);
 	I_MULTIATTR(QString, m_factoryIdsAttrPtr);
 
-	std::string m_paramTypeId;
+	QByteArray m_paramTypeId;
 	istd::TDelPtr<iser::ISerializable> m_paramPtr;
 };
 

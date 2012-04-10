@@ -17,7 +17,7 @@ public:
 				const QString& configFile = QString());
 
 	template <class InterfaceType>
-	InterfaceType* GetComponentInterface(const std::string& componentId = std::string());
+	InterfaceType* GetComponentInterface(const QByteArray& componentId = QByteArray());
 
 private:
 	QString m_registryFile;
@@ -29,7 +29,7 @@ private:
 
 
 template <class InterfaceType>
-InterfaceType* CComponentAccessor::GetComponentInterface(const std::string& componentId)
+InterfaceType* CComponentAccessor::GetComponentInterface(const QByteArray& componentId)
 {
 	InterfaceType* interfacePtr = m_composite.GetComponentInterface<InterfaceType>(componentId);
 

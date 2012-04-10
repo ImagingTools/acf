@@ -29,10 +29,10 @@ public:
 	CElementSelectionInfoManagerBase();
 
 	icomp::IRegistry* GetRegistry() const;
-	QStringList GetExportAliases(const std::string& attributeName) const;
+	QStringList GetExportAliases(const QByteArray& attributeName) const;
 	const icomp::IComponentStaticInfo* GetComponentMetaInfo(const icomp::CComponentAddress& address) const;
-	const iser::IObject* GetAttributeObject(const std::string& attributeId, const icomp::IRegistry::ElementInfo& elementInfo) const;
-	const icomp::IAttributeStaticInfo* GetAttributeStaticInfo(const std::string& attributeId, const icomp::IRegistry::ElementInfo& elementInfo) const;
+	const iser::IObject* GetAttributeObject(const QByteArray& attributeId, const icomp::IRegistry::ElementInfo& elementInfo) const;
+	const icomp::IAttributeStaticInfo* GetAttributeStaticInfo(const QByteArray& attributeId, const icomp::IRegistry::ElementInfo& elementInfo) const;
 
 	// abstract methods
 	virtual const icomp::IComponentEnvironmentManager* GetMetaInfoManagerPtr() const = 0;
@@ -51,8 +51,8 @@ protected:
 		istd::TPointerBase<const icomp::IAttributeStaticInfo> staticInfoPtr;
 	};
 
-	typedef QMap<std::string, AttrInfo> ElementIdToAttrInfoMap;
-	typedef QMap<std::string, ElementIdToAttrInfoMap> AttrInfosMap;
+	typedef QMap<QByteArray, AttrInfo> ElementIdToAttrInfoMap;
+	typedef QMap<QByteArray, ElementIdToAttrInfoMap> AttrInfosMap;
 
 	typedef QMap<icomp::CComponentAddress, istd::TOptDelPtr<const icomp::IComponentStaticInfo> > AddressToInfoMap;
 

@@ -39,7 +39,7 @@
               DocumentFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               DocumentLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -77,7 +77,7 @@
               IsEditSupported
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -96,7 +96,7 @@
               IsNewSupported
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -115,7 +115,7 @@
               ViewFactory
             </Id>
             <Type>
-              icomp::CFactoryAttribute
+              Factory
             </Type>
             <ExportId>
               
@@ -155,7 +155,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -171,7 +171,7 @@
               RegistryLoader
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -211,7 +211,7 @@
               CommandFileName
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               PreviewCommandFile
@@ -227,7 +227,7 @@
               EnvironmentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -246,7 +246,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               VersionInfo
@@ -283,7 +283,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -299,7 +299,7 @@
               PackagesManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -318,7 +318,7 @@
               RegistriesManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -358,7 +358,7 @@
               EnvironmentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -398,7 +398,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -414,7 +414,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               VersionInfo
@@ -451,7 +451,7 @@
               Log
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Log
@@ -467,7 +467,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -507,7 +507,7 @@
               ConsistencyInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -526,7 +526,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocumentManager
@@ -542,7 +542,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -561,7 +561,7 @@
               QuickHelpGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               QuickHelpGui
@@ -577,7 +577,7 @@
               RegistryCodeSaver
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -596,7 +596,7 @@
               RegistryPreview
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -615,7 +615,7 @@
               RegistrySelectionObservers
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               RegistrySelectionObservers

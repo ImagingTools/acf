@@ -11,10 +11,10 @@ namespace istd
 
 // public static methods
 
-std::string CBase64::ConvertToBase64(const void* dataPtr, int size)
+QByteArray CBase64::ConvertToBase64(const void* dataPtr, int size)
 {
 	if (size == 0){
-		return std::string();
+		return QByteArray();
 	}
 
 	int padding = size % 3;
@@ -24,7 +24,7 @@ std::string CBase64::ConvertToBase64(const void* dataPtr, int size)
 
 	int blocks = (size - 1) / 3 + 1;
 
-	std::string outputString;
+	QByteArray outputString;
 	
 	outputString.resize(blocks * 4);
 
@@ -65,11 +65,11 @@ std::string CBase64::ConvertToBase64(const void* dataPtr, int size)
 }
 
 
-std::vector<quint8> CBase64::ConvertFromBase64(const std::string& base64String)
+QVector<quint8> CBase64::ConvertFromBase64(const QByteArray& base64String)
 {
 	int size = base64String.size();
 	if (size == 0){
-		return std::vector<quint8>();
+		return QVector<quint8>();
 	}
 
 	int padding = 0;
@@ -83,7 +83,7 @@ std::vector<quint8> CBase64::ConvertFromBase64(const std::string& base64String)
 	int blocks = (size - 1) / 4 + 1;
 	int bytes = blocks * 3;
 
-	std::vector<quint8> outputData;
+	QVector<quint8> outputData;
 	outputData.resize(bytes - padding);
 
 	for (int i = 0; i < blocks; i++){

@@ -39,7 +39,7 @@
               OptionNames
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               OptionNames
@@ -76,7 +76,7 @@
               Model
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -95,7 +95,7 @@
               SlaveEditorGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -135,7 +135,7 @@
               Constraints
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -154,7 +154,7 @@
               DefaultIndex
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DefaultSelectedIndex
@@ -191,7 +191,7 @@
               OptionsLabel
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               OptionsLabel
@@ -207,7 +207,7 @@
               UiMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               SelectionGuiLayout

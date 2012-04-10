@@ -16,7 +16,7 @@ namespace iqtproc
 
 // reimplemented (iqtproc::CDocumentProcessingManagerCompBase)
 
-void CDocumentProcessingManagerComp::DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const std::string& documentTypeId)
+void CDocumentProcessingManagerComp::DoDocumentProcessing(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId)
 {
 	if (m_inPlaceProcessingAttrPtr.IsValid() && *m_inPlaceProcessingAttrPtr){
 		DoInPlaceProcessing(const_cast<istd::IChangeable*>(inputDocumentPtr));
@@ -29,7 +29,7 @@ void CDocumentProcessingManagerComp::DoDocumentProcessing(const istd::IChangeabl
 
 // private methods
 
-void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeable* inputDocumentPtr, const std::string& documentTypeId)
+void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeable* inputDocumentPtr, const QByteArray& documentTypeId)
 {
 	istd::IChangeable* outputDocumentPtr = NULL;
 	if (!m_documentManagerCompPtr->FileNew(documentTypeId, false, "", &outputDocumentPtr)){

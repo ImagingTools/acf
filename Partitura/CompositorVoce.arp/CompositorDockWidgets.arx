@@ -39,7 +39,7 @@
               AttributeSelectionObserver
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               ConsistencyInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ConsistencyInfo
@@ -74,7 +74,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MetaInfoManager
@@ -90,7 +90,7 @@
               QuickHelpGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -151,7 +151,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ApplicationInfo
@@ -167,7 +167,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               VersionInfo
@@ -204,7 +204,7 @@
               ConfigFilePath
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ConfigFilePath
@@ -220,7 +220,7 @@
               ConsistencyInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ConsistencyInfo
@@ -236,7 +236,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocumentManager
@@ -252,7 +252,7 @@
               EnvironmentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               EnvironmentManager
@@ -268,7 +268,7 @@
               QuickHelpGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -308,7 +308,7 @@
               DocuEditorFileParam
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocuEditorFileParam
@@ -324,7 +324,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MetaInfoManager
@@ -340,7 +340,7 @@
               TechDocuViewerFileParam
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               TechDocuViewerFileParam

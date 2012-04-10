@@ -337,7 +337,7 @@ int CParamsManagerGuiComp::GetSelectedIndex() const
 
 	int retVal = -1;
 	QList<QTreeWidgetItem*> items = ParamsTree->selectedItems();
-	if (!items.empty()){
+	if (!items.isEmpty()){
 		QTreeWidgetItem* itemPtr = items.first();
 
 		if (itemPtr != NULL){

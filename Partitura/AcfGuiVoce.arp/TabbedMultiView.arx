@@ -39,7 +39,7 @@
               CornerWidget
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               CornerWidget
@@ -55,7 +55,7 @@
               Editors
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               SlaveGuiComponents
@@ -71,7 +71,7 @@
               Guis
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               SlaveGuiComponents
@@ -87,7 +87,7 @@
               IconSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               IconSize
@@ -103,7 +103,7 @@
               IconsProvider
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               IconsProvider
@@ -119,7 +119,7 @@
               Names
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               Names
@@ -135,7 +135,7 @@
               TabBarOrientation
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               TabOrientation
@@ -154,7 +154,7 @@
               UseTriangularTabs
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               UseTriangularTabs

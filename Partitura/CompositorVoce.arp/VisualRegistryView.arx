@@ -39,7 +39,7 @@
               CommandProviders
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -84,7 +84,7 @@
               AllowSelectAll
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -103,7 +103,7 @@
               BackgroundMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -122,7 +122,7 @@
               DropConsumers
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               
@@ -143,7 +143,7 @@
               GridSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               
@@ -162,7 +162,7 @@
               IsAlignmentEnabled
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               
@@ -181,7 +181,7 @@
               SceneHeight
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               
@@ -200,7 +200,7 @@
               SceneWidth
             </Id>
             <Type>
-              icomp::TAttribute&lt;double&gt;
+              Real
             </Type>
             <ExportId>
               
@@ -240,7 +240,7 @@
               ActivationObject
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -259,7 +259,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocumentManager
@@ -275,7 +275,7 @@
               Model
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -294,7 +294,7 @@
               Observers
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               RegistrySelectionObservers
@@ -331,7 +331,7 @@
               ConsistencyInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ConsistencyInfo
@@ -347,7 +347,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocumentManager
@@ -363,7 +363,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MetaInfoManager
@@ -379,7 +379,7 @@
               QuickHelpGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               QuickHelpGui
@@ -395,7 +395,7 @@
               RegistryCodeSaver
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               RegistryCodeSaver
@@ -411,7 +411,7 @@
               RegistryPreview
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               RegistryPreview
@@ -427,7 +427,7 @@
               SceneProvider
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

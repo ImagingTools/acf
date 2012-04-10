@@ -32,7 +32,7 @@ public:
 	virtual bool BeginTag(const CArchiveTag& tag);
 	virtual bool BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& subTag, int& count);
 	virtual bool EndTag(const CArchiveTag& tag);
-	virtual bool Process(std::string& value);
+	virtual bool Process(QByteArray& value);
 	virtual bool Process(QString& value);
 	using BaseClass::Process;
 
@@ -58,8 +58,8 @@ protected:
 		\param	foundDelimeter	optional found delimeter will be returned in this character (it means 1 byte, it is not C string).
 	*/
 	virtual bool ReadToDelimeter(
-				const std::string& delimeters,
-				std::string& result,
+				const QByteArray& delimeters,
+				QByteArray& result,
 				bool skipDelimeter = true,
 				char* foundDelimeterPtr = NULL) = 0;
 

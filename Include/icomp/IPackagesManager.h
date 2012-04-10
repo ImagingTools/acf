@@ -39,14 +39,14 @@ public:
 	/**
 		Get type of package as defined in \c PackageType.
 	*/
-	virtual int GetPackageType(const std::string& packageId) const = 0;
+	virtual int GetPackageType(const QByteArray& packageId) const = 0;
 
 	/**
 		Get directory path of specified component package.
 		\param	packageId	ID of component package.
 		\return				package path or empty string if specified package is not registered.
 	*/
-	virtual QString GetPackagePath(const std::string& packageId) const = 0;
+	virtual QString GetPackagePath(const QByteArray& packageId) const = 0;
 };
 
 

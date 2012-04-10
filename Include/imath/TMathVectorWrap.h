@@ -2,10 +2,6 @@
 #define imath_TMathVectorWrap_included
 
 
-// STL includes
-#include <cmath>
-
-
 // ACF includes
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -475,7 +471,7 @@ bool TMathVectorWrap<Base>::Normalize(typename Base::ElementType length)
 
     typename Base::ElementType proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
 		int elementsCount = BaseClass::GetElementsCount();
 		for (int i = 0; i < elementsCount; ++i){
 			BaseClass::SetElement(i, BaseClass::GetElement(i) / proportion);
@@ -496,7 +492,7 @@ bool TMathVectorWrap<Base>::GetNormalized(TMathVectorWrap<Base>& result, typenam
 
     typename Base::ElementType proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
 		int elementsCount = BaseClass::GetElementsCount();
 		result.SetElementsCount(elementsCount);
 		for (int i = 0; i < elementsCount; ++i){

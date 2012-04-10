@@ -14,7 +14,7 @@ CComponentAddress::CComponentAddress()
 }
 
 
-CComponentAddress::CComponentAddress(const std::string& packageId, const std::string& componentId)
+CComponentAddress::CComponentAddress(const QByteArray& packageId, const QByteArray& componentId)
 :	m_packageId(packageId),
 	m_componentId(componentId)
 {
@@ -23,13 +23,13 @@ CComponentAddress::CComponentAddress(const std::string& packageId, const std::st
 
 bool CComponentAddress::IsValid() const
 {
-	return !m_packageId.empty() && !m_componentId.empty();
+	return !m_packageId.isEmpty() && !m_componentId.isEmpty();
 }
 
 
 QString CComponentAddress::ToString() const
 {
-	return QString(QString::fromStdString(m_packageId) + "/" + QString::fromStdString(m_componentId));
+	return m_packageId + "/" + m_componentId;
 }
 
 

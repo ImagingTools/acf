@@ -2,11 +2,9 @@
 #define iqt_CSystem_included
 
 
-// STL includes
-#include <QtCore/QMap>
-
 // Qt includes
 #include <QtCore/QString>
+#include <QtCore/QMap>
 
 
 namespace iqt

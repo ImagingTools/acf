@@ -19,7 +19,7 @@ CSimComponentContextBase::CSimComponentContextBase(const IComponentStaticInfo* i
 }
 
 
-bool CSimComponentContextBase::SetAttr(const std::string& attributeId, const iser::IObject* attributePtr)
+bool CSimComponentContextBase::SetAttr(const QByteArray& attributeId, const iser::IObject* attributePtr)
 {
 	I_ASSERT(attributePtr != NULL);
 
@@ -36,12 +36,12 @@ bool CSimComponentContextBase::SetAttr(const std::string& attributeId, const ise
 }
 
 
-bool CSimComponentContextBase::SetRef(const std::string& referenceId, IComponent* componentPtr, const std::string& subelementId)
+bool CSimComponentContextBase::SetRef(const QByteArray& referenceId, IComponent* componentPtr, const QByteArray& subelementId)
 {
 	I_ASSERT(IsAttributeTypeCorrect<CReferenceAttribute>(referenceId));
 	I_ASSERT(componentPtr != NULL);
 
-	std::string completeId = JoinId(referenceId, subelementId);
+	QByteArray completeId = JoinId(referenceId, subelementId);
 	if (SetAttr(referenceId, new CReferenceAttribute(completeId))){
 		m_componentsMap[referenceId] = componentPtr;
 
@@ -52,7 +52,7 @@ bool CSimComponentContextBase::SetRef(const std::string& referenceId, IComponent
 }
 
 
-bool CSimComponentContextBase::InsertMultiRef(const std::string& referenceId, IComponent* componentPtr, const std::string& subelementId)
+bool CSimComponentContextBase::InsertMultiRef(const QByteArray& referenceId, IComponent* componentPtr, const QByteArray& subelementId)
 {
 	I_ASSERT(IsAttributeTypeCorrect<CMultiReferenceAttribute>(referenceId));
 
@@ -76,9 +76,9 @@ bool CSimComponentContextBase::InsertMultiRef(const std::string& referenceId, IC
 
 	if (multiAttrPtr != NULL){
 		QString indexString = QString("%1").arg(multiAttrPtr->GetValuesCount());
-		std::string attributeId = referenceId + '#' + indexString.toStdString();
+		QByteArray attributeId = referenceId + '#' + indexString.toLocal8Bit();
 
-		std::string completeId = JoinId(attributeId, subelementId);
+		QByteArray completeId = JoinId(attributeId, subelementId);
 		multiAttrPtr->InsertValue(attributeId);
 
 		m_componentsMap[attributeId] = componentPtr;
@@ -90,7 +90,7 @@ bool CSimComponentContextBase::InsertMultiRef(const std::string& referenceId, IC
 }
 
 
-bool CSimComponentContextBase::SetFactory(const std::string& factoryId, const ComponentsFactory* factoryPtr)
+bool CSimComponentContextBase::SetFactory(const QByteArray& factoryId, const ComponentsFactory* factoryPtr)
 {
 	I_ASSERT(IsAttributeTypeCorrect<CFactoryAttribute>(factoryId));
 	I_ASSERT(factoryPtr != NULL);
@@ -105,25 +105,25 @@ bool CSimComponentContextBase::SetFactory(const std::string& factoryId, const Co
 }
 
 
-bool CSimComponentContextBase::SetBoolAttr(const std::string& attributeId, bool value)
+bool CSimComponentContextBase::SetBoolAttr(const QByteArray& attributeId, bool value)
 {
 	return SetSingleAttr<bool>(attributeId, value);
 }
 
 
-bool CSimComponentContextBase::SetIntAttr(const std::string& attributeId, int value)
+bool CSimComponentContextBase::SetIntAttr(const QByteArray& attributeId, int value)
 {
 	return SetSingleAttr<int>(attributeId, value);
 }
 
 
-bool CSimComponentContextBase::SetDoubleAttr(const std::string& attributeId, double value)
+bool CSimComponentContextBase::SetDoubleAttr(const QByteArray& attributeId, double value)
 {
 	return SetSingleAttr<double>(attributeId, value);
 }
 
 
-bool CSimComponentContextBase::SetStringAttr(const std::string& attributeId, const QString& value)
+bool CSimComponentContextBase::SetStringAttr(const QByteArray& attributeId, const QString& value)
 {
 	return SetSingleAttr<QString>(attributeId, value);
 }
@@ -149,7 +149,7 @@ const IComponentContext* CSimComponentContextBase::GetParentContext() const
 }
 
 
-const iser::IObject* CSimComponentContextBase::GetAttribute(const std::string& attributeId, int* definitionLevelPtr) const
+const iser::IObject* CSimComponentContextBase::GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr) const
 {
 	// try to find registered attribute
 	const IRegistryElement::AttributeInfo* infoPtr = m_registryElement.GetAttributeInfo(attributeId);

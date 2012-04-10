@@ -39,7 +39,7 @@
               ConfigFilePath
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ConfigFilePath
@@ -55,7 +55,7 @@
               ConsistencyInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               ConsistencyInfo
@@ -71,7 +71,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocumentManager
@@ -87,7 +87,7 @@
               EnvironmentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               EnvironmentManager
@@ -103,7 +103,7 @@
               QuickHelpGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               QuickHelpGui
@@ -140,7 +140,7 @@
               DockTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -159,7 +159,7 @@
               SlaveGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

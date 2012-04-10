@@ -23,7 +23,7 @@ CMultiAttributeDelegateWidget::CMultiAttributeDelegateWidget(
 			QItemDelegate& itemDelegate,
 			const CElementSelectionInfoManagerBase& elementSelectionInfoManager,
 			QWidget* parentWidget,
-			const std::string& attributeId,
+			const QByteArray& attributeId,
 			int attributeFlags)
 	:BaseClass(parentWidget),
 	m_itemDelegate(itemDelegate),
@@ -70,7 +70,7 @@ void CMultiAttributeDelegateWidget::SetText(const QString& text)
 void CMultiAttributeDelegateWidget::OnShowDialog()
 {
 	istd::TDelPtr<CMultiAttributeEditor> multiEditorDialogPtr(new CMultiAttributeEditor(m_elementSelectionInfoManager, m_attributeId, m_attributeFlags));
-	multiEditorDialogPtr->setWindowTitle(m_attributeId.c_str());
+	multiEditorDialogPtr->setWindowTitle(m_attributeId);
 
 	multiEditorDialogPtr->SetEditorText(m_textEditor->text());
 

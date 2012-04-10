@@ -2,9 +2,10 @@
 #define istd_TIMap_included
 
 
-// STL includes
-#include <set>
+// Qt includes
+#include <QtCore/QSet>
 
+// ACF includes
 #include "istd/IPolymorphic.h"
 
 
@@ -18,7 +19,7 @@ class TIMap: virtual public istd::IPolymorphic
 public:
 	typedef Key KeyType;
 	typedef Value ValueType;
-	typedef std::set<KeyType> Keys;
+	typedef QSet<KeyType> Keys;
 
 	/**
 		Get number of elements.

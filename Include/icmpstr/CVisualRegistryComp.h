@@ -47,15 +47,15 @@ public:
 	virtual bool SerializeUserData(iser::IArchive& archive);
 
 	// reimplemented (IComponentNoteController)
-	virtual QString GetComponentNote(const std::string& componentName);
-	virtual void SetComponentNote(const std::string& componentName, const QString& componentNote);
+	virtual QString GetComponentNote(const QByteArray& componentName);
+	virtual void SetComponentNote(const QByteArray& componentName, const QString& componentNote);
 
 	// reimplemented (icomp::IRegistry)
 	virtual ElementInfo* InsertElementInfo(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::CComponentAddress& address,
 				bool ensureElementCreated = true);
-	virtual bool RenameElement(const std::string& oldElementId, const std::string& newElementId);
+	virtual bool RenameElement(const QByteArray& oldElementId, const QByteArray& newElementId);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -67,13 +67,13 @@ protected:
 
 	bool SerializeComponentInfo(
 				iser::IArchive& archive,
-				std::string& componentName,
+				QByteArray& componentName,
 				i2d::CVector2d& position,
 				QString& note);
 
 	// reimplemented (icomp::CRegistry)
 	virtual icomp::IRegistryElement* CreateRegistryElement(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::CComponentAddress& address) const;
 
 private:

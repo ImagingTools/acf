@@ -85,9 +85,9 @@ int CCascadedProcessorComp::DoProcessing(
 	if (progressManagerPtr != NULL){
 		int managersCount = qMin(processorsCount, m_progressIdsAttrPtr.GetCount());
 		for (int i = 0; i < managersCount; ++i){
-			const std::string& progressId = m_progressIdsAttrPtr[i];
-			if (!progressId.empty()){
-				QString description = QString::fromStdString(progressId);
+			const QByteArray& progressId = m_progressIdsAttrPtr[i];
+			if (!progressId.isEmpty()){
+				QString description = progressId;
 				if (i < m_progressDescriptionsAttrPtr.GetCount()){
 					description = m_progressDescriptionsAttrPtr[i];
 				}

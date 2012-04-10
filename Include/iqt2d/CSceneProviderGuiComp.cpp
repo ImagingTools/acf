@@ -2,6 +2,7 @@
 
 
 // Qt includes
+#include <QtCore/qmath.h>
 #include <QtCore/QVarLengthArray>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QPrinter>
@@ -264,7 +265,7 @@ bool CSceneProviderGuiComp::OnResize(QResizeEvent* /*eventPtr*/)
 bool CSceneProviderGuiComp::OnWheelEvent(QGraphicsSceneWheelEvent* eventPtr)
 {
 	if (m_fitMode == FM_NONE){
-		ScaleView(pow((double)2, eventPtr->delta() / 240.0));
+		ScaleView(qPow((double)2, eventPtr->delta() / 240.0));
 
 		return true;
 	}
@@ -632,13 +633,13 @@ void CSceneProviderGuiComp::OnPrint()
 
 void CSceneProviderGuiComp::OnZoomIncrement()
 {
-	 ScaleView(pow((double)2, 0.5));  
+	 ScaleView(qPow((double)2, 0.5));  
 }
 
 
 void CSceneProviderGuiComp::OnZoomDecrement()
 {
-	ScaleView(pow((double)2, -0.5));  
+	ScaleView(qPow((double)2, -0.5));  
 }
 
 

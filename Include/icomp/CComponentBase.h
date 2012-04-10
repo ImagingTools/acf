@@ -44,7 +44,7 @@ public:
 
 	// reimplemented (icomp::IComponent)
 	virtual const ICompositeComponent* GetParentComponent(bool ownerOnly = false) const;
-	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const std::string& subId = "");
+	virtual void* GetInterface(const istd::CClassInfo& interfaceType, const QByteArray& subId = "");
 	virtual const IComponentContext* GetComponentContext() const;
 	virtual void SetComponentContext(
 				const icomp::IComponentContext* contextPtr,
@@ -186,7 +186,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\li \c bool
 	\li \c int
 	\li \c double
-	\li \c std::string
+	\li \c QByteArray
 	\li \c QString (will be compiled by ARX compiler using translation function 'tr')
 	\ingroup Main
 	\ingroup ComponentConcept
@@ -208,7 +208,7 @@ inline bool CComponentBase::IsComponentActive() const
 	\li \c bool
 	\li \c int
 	\li \c double
-	\li \c std::string
+	\li \c QByteArray
 	\li \c QString (will be compiled by ARX compiler using translation function 'tr')
 	\ingroup ComponentConcept
 */

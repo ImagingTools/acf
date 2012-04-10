@@ -180,9 +180,9 @@ QString CTranslationManagerComp::GetOptionDescription(int /*index*/) const
 }
 
 
-std::string CTranslationManagerComp::GetOptionId(int /*index*/) const
+QByteArray CTranslationManagerComp::GetOptionId(int /*index*/) const
 {
-	return std::string();
+	return QByteArray();
 }
 
 

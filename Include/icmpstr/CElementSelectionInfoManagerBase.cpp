@@ -27,7 +27,7 @@ icomp::IRegistry* CElementSelectionInfoManagerBase::GetRegistry() const
 }
 
 
-QStringList CElementSelectionInfoManagerBase::GetExportAliases(const std::string& attributeName) const
+QStringList CElementSelectionInfoManagerBase::GetExportAliases(const QByteArray& attributeName) const
 {
 	const IElementSelectionInfo* selectionInfoPtr = GetObjectPtr();
 	if (selectionInfoPtr == NULL){
@@ -43,7 +43,7 @@ QStringList CElementSelectionInfoManagerBase::GetExportAliases(const std::string
 					iter != exportedMap.end();
 					++iter){
 			if (iter.value() == attributeName){
-				exportedAliases.append(QString::fromStdString(iter.key()));
+				exportedAliases.append(iter.key());
 			}
 		}
 	}
@@ -64,7 +64,7 @@ const icomp::IComponentStaticInfo* CElementSelectionInfoManagerBase::GetComponen
 
 
 const iser::IObject* CElementSelectionInfoManagerBase::GetAttributeObject(
-			const std::string& attributeId,
+			const QByteArray& attributeId,
 			const icomp::IRegistry::ElementInfo& elementInfo) const
 {
 	const icomp::IComponentStaticInfo* componentInfoPtr = GetComponentMetaInfo(elementInfo.address);
@@ -88,7 +88,7 @@ const iser::IObject* CElementSelectionInfoManagerBase::GetAttributeObject(
 
 
 const icomp::IAttributeStaticInfo* CElementSelectionInfoManagerBase::GetAttributeStaticInfo(
-			const std::string& attributeId,
+			const QByteArray& attributeId,
 			const icomp::IRegistry::ElementInfo& elementInfo) const
 {
 	const icomp::IComponentStaticInfo* componentInfoPtr = GetComponentMetaInfo(elementInfo.address);
@@ -133,7 +133,7 @@ void CElementSelectionInfoManagerBase::UpdateAddressToMetaInfoMap()
 			const icomp::CComponentAddress& componentAddress = selectedInfoPtr->address;
 
 			istd::TOptDelPtr<const icomp::IComponentStaticInfo>& infoPtr = m_adressToMetaInfoMap[componentAddress];
-			if (!componentAddress.GetPackageId().empty()){
+			if (!componentAddress.GetPackageId().isEmpty()){
 				const icomp::IComponentStaticInfo* staticInfoPtr = metaInfoManagerPtr->GetComponentMetaInfo(componentAddress);
 				if (staticInfoPtr != NULL){
 					infoPtr.SetPtr(staticInfoPtr, false);

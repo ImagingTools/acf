@@ -2,9 +2,8 @@
 #define ibase_TFactorisableContainer_included
 
 
-// STL incldues
-#include <memory>
-
+// Qt includes
+#include <QtCore/QPair>
 
 // ACF includes
 #include "istd/TSmartPtr.h"
@@ -27,10 +26,10 @@ namespace ibase
 template <class InterfaceClass>
 class TFactorisableContainer:
 			public ibase::TSerializableContainer<
-						std::pair<istd::TSmartPtr<InterfaceClass>, std::string> >
+						QPair<istd::TSmartPtr<InterfaceClass>, QByteArray> >
 {
 public:
-	typedef std::pair<istd::TSmartPtr<InterfaceClass>, std::string> ItemClass;
+	typedef QPair<istd::TSmartPtr<InterfaceClass>, QByteArray> ItemClass;
 	typedef ibase::TSerializableContainer<ItemClass> BaseClass;
 
 	TFactorisableContainer();
@@ -39,12 +38,12 @@ public:
 	/**
 		Insert the element to the container at the given index. 
 	*/
-	InterfaceClass* InsertElement(int index, const std::string& elementFactoryKey);
+	InterfaceClass* InsertElement(int index, const QByteArray& elementFactoryKey);
 
 	/**
 		Add the element to container. 
 	*/
-	InterfaceClass* AddElement(const std::string& elementFactoryKey);
+	InterfaceClass* AddElement(const QByteArray& elementFactoryKey);
 
 	/**
 		Gets the element with the index \c elementIndex from container. 
@@ -60,7 +59,7 @@ public:
 	/**
 		Gets the element key associated with the element the index \c elementIndex from container. 
 	*/
-	std::string GetElementKey(int elementIndex) const;
+	QByteArray GetElementKey(int elementIndex) const;
 
 	void RegisterItemFactory(istd::TIFactory<InterfaceClass>* itemFactoryPtr);
 
@@ -68,7 +67,7 @@ public:
 	bool Serialize(iser::IArchive& archive);
 
 protected:
-	virtual InterfaceClass* CreateElement(const std::string& itemKey);
+	virtual InterfaceClass* CreateElement(const QByteArray& itemKey);
 	virtual void OnElementCreated(InterfaceClass* elementPtr);
 
 	// reimplemented (ibase::TContainer)
@@ -94,7 +93,7 @@ TFactorisableContainer<InterfaceClass>::~TFactorisableContainer()
 
 
 template <class InterfaceClass>
-InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const std::string& elementFactoryKey)
+InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const QByteArray& elementFactoryKey)
 {
 	InterfaceClass* elementPtr = CreateElement(elementFactoryKey);
 	if (elementPtr != NULL){
@@ -106,7 +105,7 @@ InterfaceClass* TFactorisableContainer<InterfaceClass>::AddElement(const std::st
 
 
 template <class InterfaceClass>
-InterfaceClass* TFactorisableContainer<InterfaceClass>::InsertElement(int index, const std::string& elementFactoryKey)
+InterfaceClass* TFactorisableContainer<InterfaceClass>::InsertElement(int index, const QByteArray& elementFactoryKey)
 {
 	InterfaceClass* elementPtr = CreateElement(elementFactoryKey);
 	if (elementPtr != NULL){
@@ -143,13 +142,13 @@ int TFactorisableContainer<InterfaceClass>::GetElementIndex(const InterfaceClass
 
 
 template <class InterfaceClass>
-std::string TFactorisableContainer<InterfaceClass>::GetElementKey(int elementIndex) const
+QByteArray TFactorisableContainer<InterfaceClass>::GetElementKey(int elementIndex) const
 {
 	if (elementIndex < BaseClass::GetItemsCount() &&  elementIndex >= 0){
 		return BaseClass::GetAt(elementIndex).second;
 	}
 
-	return std::string();
+	return QByteArray();
 }
 
 
@@ -181,7 +180,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 
 	for (int index = 0; index < itemCount; index++){
 		ItemClass item;
-		std::string itemKey;
+		QByteArray itemKey;
 
 		if (archive.IsStoring()){
 			itemKey = BaseClass::GetAt(index).second;
@@ -222,7 +221,7 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 // protected methods
 
 template <class InterfaceClass>
-InterfaceClass* TFactorisableContainer<InterfaceClass>::CreateElement(const std::string& itemKey)
+InterfaceClass* TFactorisableContainer<InterfaceClass>::CreateElement(const QByteArray& itemKey)
 {
 	if (m_itemFactoryPtr != NULL){
 		istd::IPolymorphic* polymorphicPtr = m_itemFactoryPtr->CreateInstance(itemKey);

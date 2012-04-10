@@ -39,7 +39,7 @@
               LanguageIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               LanguageIds
@@ -69,7 +69,7 @@
               LanguageSelection
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               LanguageSelection
@@ -85,7 +85,7 @@
               SlaveTranslationManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -104,7 +104,7 @@
               TranslationFilePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -123,7 +123,7 @@
               TranslationFilePrefix
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -163,7 +163,7 @@
               LanguageIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               LanguageIds
@@ -193,7 +193,7 @@
               SlaveTranslationManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               SlaveTranslationManager
@@ -209,7 +209,7 @@
               TranslationFilePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -228,7 +228,7 @@
               TranslationFilePrefix
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               

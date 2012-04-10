@@ -68,14 +68,14 @@ public:
 	/**
 		Get set of attributes.
 	*/
-	virtual const IAttributeStaticInfo* GetAttributeInfo(const std::string& attributeId) const = 0;
+	virtual const IAttributeStaticInfo* GetAttributeInfo(const QByteArray& attributeId) const = 0;
 
 	/**
 		Return number of interfaces for specific slot.
 		\param	subcomponentId	ID of subcomponent.
 								\sa	GetMetaIds() and MGI_EMBEDDED_COMPONENTS.
 	*/
-	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const = 0;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const = 0;
 
 	/**
 		Get human readable description of this component.

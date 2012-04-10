@@ -105,9 +105,9 @@ bool CLine2d::IsParalell(const CLine2d& line) const
 	CVector2d diff = GetDiffVector();
 	CVector2d lineDiff = line.GetDiffVector();
 
-	double scale = fabs(diff.GetCrossProductZ(lineDiff));
+	double scale = qAbs(diff.GetCrossProductZ(lineDiff));
 
-	return (fabs(scale) < I_EPSILON);
+	return (qAbs(scale) < I_EPSILON);
 }
 
 
@@ -143,8 +143,8 @@ bool CLine2d::GetIntersection(const CLine2d& line, CVector2d& result) const
 		return false;	// both points of first line lie on the same side of the second one
 	}
 
-	double scale = fabs(diff.GetCrossProductZ(lineDiff));
-	if (fabs(scale) > I_EPSILON){
+	double scale = qAbs(diff.GetCrossProductZ(lineDiff));
+	if (qAbs(scale) > I_EPSILON){
 		CVector2d point1Diff = line.m_point1 - m_point1;
 
 		result = m_point1 + diff * ((point1Diff.GetCrossProductZ(lineDiff) * diff.GetCrossProductZ(lineDiff)) / (scale * scale));
@@ -162,8 +162,8 @@ bool CLine2d::GetExtendedIntersection(const CLine2d& line, CVector2d& result) co
 	CVector2d diff = GetDiffVector();
 	CVector2d lineDiff = line.GetDiffVector();
 
-	double scale = fabs(diff.GetCrossProductZ(lineDiff));
-	if (fabs(scale) < I_EPSILON){
+	double scale = qAbs(diff.GetCrossProductZ(lineDiff));
+	if (qAbs(scale) < I_EPSILON){
 		return false;
 	}
 
@@ -189,7 +189,7 @@ double CLine2d::GetDistance(const CVector2d& position) const
 		return m_point2.GetDistance(position);
 	}
 
-	return fabs(diff.GetCrossProductZ(point1Diff) / diffLength);	// return distance to the line
+	return qAbs(diff.GetCrossProductZ(point1Diff) / diffLength);	// return distance to the line
 }
 
 
@@ -200,7 +200,7 @@ double CLine2d::GetExtendedDistance(const CVector2d& position) const
 
 	CVector2d point1Diff = position - m_point1;
 
-	return fabs(diff.GetCrossProductZ(point1Diff) / diffLength);	// return distance to the line
+	return qAbs(diff.GetCrossProductZ(point1Diff) / diffLength);	// return distance to the line
 }
 
 
@@ -346,12 +346,12 @@ bool CLine2d::GetCutPoint(const CLine2d& otherLine, i2d::CVector2d& cutPoint) co
 	}
 
 	double dx1 = x2 - x1;
-	if (fabs(dx1) < I_BIG_EPSILON){
+	if (qAbs(dx1) < I_BIG_EPSILON){
 		dx1 = I_BIG_EPSILON;
 	}
 
 	double dx2 = x4 - x3;
-	if (fabs(dx2) < I_BIG_EPSILON){
+	if (qAbs(dx2) < I_BIG_EPSILON){
 		dx2 = I_BIG_EPSILON;
 	}
 
@@ -359,7 +359,7 @@ bool CLine2d::GetCutPoint(const CLine2d& otherLine, i2d::CVector2d& cutPoint) co
 	double m2 = (y4 - y3) / dx2;
 
 	// no intersection was found:
-	if ( fabs(m2 - m1) < I_BIG_EPSILON){
+	if ( qAbs(m2 - m1) < I_BIG_EPSILON){
 		return false;
 	}
 

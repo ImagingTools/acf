@@ -103,13 +103,13 @@ bool CBinaryWriteArchiveBase::Process(double& value)
 }
 
 
-bool CBinaryWriteArchiveBase::Process(std::string& value)
+bool CBinaryWriteArchiveBase::Process(QByteArray& value)
 {			
 	int stringLength = value.size();
 
 	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.c_str(), stringLength * int(sizeof(char)));
+	retVal = retVal && ProcessData((void*)value.constData(), stringLength * int(sizeof(char)));
 
 	return retVal;
 }
@@ -121,7 +121,7 @@ bool CBinaryWriteArchiveBase::Process(QString& value)
 
 	bool retVal = Process(stringLength);
 
-	retVal = retVal && ProcessData((void*)value.toStdWString().c_str(), stringLength * int(sizeof(wchar_t)));	
+	retVal = retVal && ProcessData((void*)value.constData(), stringLength * int(sizeof(QChar)));	
 
 	return retVal;
 }

@@ -60,7 +60,7 @@
               StatusBarWidget
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               

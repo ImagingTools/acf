@@ -39,7 +39,7 @@
               DefaultMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               DefaultMode
@@ -55,7 +55,7 @@
               DefaultModel
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -74,7 +74,7 @@
               Exporter
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               Exporter
@@ -111,7 +111,7 @@
               MaxMessageCount
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               MaxMessageCount

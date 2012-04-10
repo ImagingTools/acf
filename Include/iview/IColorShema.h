@@ -2,15 +2,11 @@
 #define iview_IColorShema_included
 
 
-// STL includes
-#include <vector>
-
-
 // Qt includes
+#include <QtCore/QVector>
 #include <QtGui/QPen>
 #include <QtGui/QBrush>
 #include <QtGui/QFont>
-
 
 // ACF includes
 #include "istd/IPolymorphic.h"
@@ -129,7 +125,7 @@ public:
 		TT_LAST = TT_CHECKBOX_OFF
 	};
 
-	typedef std::vector<const QPen*> PensPtrSet;
+	typedef QVector<const QPen*> PensPtrSet;
 
     virtual void Assign(const IColorShema& colorShema) = 0;
     virtual const QPen& GetPen(StandardPen penType) const = 0;

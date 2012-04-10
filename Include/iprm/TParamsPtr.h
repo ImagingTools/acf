@@ -20,12 +20,12 @@ public:
 
 	TParamsPtr();
 
-	TParamsPtr(const IParamsSet* parameterSetPtr, const std::string& parameterId);
+	TParamsPtr(const IParamsSet* parameterSetPtr, const QByteArray& parameterId);
 
 	/**
 		Initialize the pointer with the given parameter set and parameter ID.
 	*/
-	void Init(const IParamsSet* parameterSetPtr, const std::string& parameterId);
+	void Init(const IParamsSet* parameterSetPtr, const QByteArray& parameterId);
 };
 
 
@@ -39,18 +39,18 @@ TParamsPtr<ParameterInterace>::TParamsPtr()
 
 
 template <class ParameterInterace>
-TParamsPtr<ParameterInterace>::TParamsPtr(const IParamsSet* parameterSetPtr, const std::string& parameterId)
+TParamsPtr<ParameterInterace>::TParamsPtr(const IParamsSet* parameterSetPtr, const QByteArray& parameterId)
 {
 	Init(parameterSetPtr, parameterId);
 }
 
 
 template <class ParameterInterace>
-void TParamsPtr<ParameterInterace>::Init(const IParamsSet* parameterSetPtr, const std::string& parameterId)
+void TParamsPtr<ParameterInterace>::Init(const IParamsSet* parameterSetPtr, const QByteArray& parameterId)
 {
 	BaseClass::Reset();
 
-	if (parameterSetPtr != NULL && !parameterId.empty()){
+	if (parameterSetPtr != NULL && !parameterId.isEmpty()){
 		const ParameterInterace* parameterPtr = dynamic_cast<const ParameterInterace*>(parameterSetPtr->GetParameter(parameterId));
 		if (parameterPtr != NULL){
 			BaseClass::SetPtr(const_cast<ParameterInterace*>(parameterPtr));

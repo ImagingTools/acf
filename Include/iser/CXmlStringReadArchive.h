@@ -2,12 +2,11 @@
 #define iser_CXmlStringReadArchive_included
 
 
-// STL includes
-#include <sstream>
-
+// Qt includes
+#include <QtCore/QBuffer>
 
 // ACF includes
-#include "iser/TXmlStreamReadArchiveBase.h"
+#include "iser/CXmlStreamReadArchiveBase.h"
 
 
 namespace iser
@@ -21,12 +20,15 @@ namespace iser
 
 	\ingroup Persistence
 */
-class CXmlStringReadArchive: public TXmlStreamReadArchiveBase<std::istringstream> 
+class CXmlStringReadArchive: public CXmlStreamReadArchiveBase
 {
 public:
-	typedef TXmlStreamReadArchiveBase<std::istringstream> BaseClass;
+	typedef CXmlStreamReadArchiveBase BaseClass;
 
-	CXmlStringReadArchive(const std::string& inputString, bool serializeHeader = true, const CArchiveTag& rootTag = s_acfRootTag);
+	CXmlStringReadArchive(const QByteArray& inputString, bool serializeHeader = true, const CArchiveTag& rootTag = s_acfRootTag);
+
+private:
+	QBuffer m_buffer;
 };
 
 

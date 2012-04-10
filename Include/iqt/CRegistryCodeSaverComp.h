@@ -2,9 +2,10 @@
 #define iqt_CRegistryCodeSaverComp_included
 
 
-// STL includes
-#include <list>
-#include <set>
+// Qt includes
+#include <QtCore/QList>
+#include <QtCore/QSet>
+#include <QtCore/QTextStream>
 
 // ACF includes
 #include "iser/IFileLoader.h"
@@ -82,11 +83,11 @@ public:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 protected:
-	typedef std::set<icomp::CComponentAddress> Addresses;
-	typedef std::set<std::string> Ids;
+	typedef QSet<icomp::CComponentAddress> Addresses;
+	typedef QSet<QByteArray> Ids;
 
 	/**
 		Get set of used addresses used by this registry and its subcomponents.
@@ -96,85 +97,85 @@ protected:
 				Addresses& realAddresses,
 				Addresses& composedAddresses) const;
 	Ids ExtractPackageIds(const Addresses& addresses) const;
-	Ids ExtractComponentIds(const Addresses& addresses, const std::string& packageId) const;
+	Ids ExtractComponentIds(const Addresses& addresses, const QByteArray& packageId) const;
 
 	bool WriteHeader(
-				const std::string& className,
+				const QByteArray& className,
 				const icomp::IRegistry& registry,
 				const Addresses& composedAddresses,
 				const Addresses& realAddresses,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 	bool WriteIncludes(
-				const std::string& className,
+				const QByteArray& className,
 				const Addresses& addresses,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 	bool WriteClassDefinitions(
-				const std::string& className,
+				const QByteArray& className,
 				const icomp::IRegistry& registry,
 				const Addresses& composedAddresses,
 				const Addresses& realAddresses,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 	bool WriteDependencies(
-				const std::string& className,
+				const QByteArray& className,
 				const Addresses& composedAddresses,
 				const Addresses& realAddresses,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 	bool WriteRegistryInfo(
 				const icomp::IRegistry& registry,
-				const std::string& registryCallPrefix,
-				std::ofstream& stream) const;
+				const QByteArray& registryCallPrefix,
+				QTextStream& stream) const;
 	bool WriteComponentInfo(
 				const icomp::IRegistry& registry,
-				const std::string& registryCallPrefix,
-				const std::string& componentId,
+				const QByteArray& registryCallPrefix,
+				const QByteArray& componentId,
 				const icomp::IRegistry::ElementInfo& componentInfo,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 	bool WriteAttribute(
-				const std::string& attributeId,
-				const std::string& componentId,
-				const std::string& attributeName,
+				const QByteArray& attributeId,
+				const QByteArray& componentId,
+				const QByteArray& attributeName,
 				const iser::IObject& attribute,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 
 	bool WriteRegistryClassDeclaration(
-				const std::string& baseClassName,
-				const std::string& registryClassName,
+				const QByteArray& baseClassName,
+				const QByteArray& registryClassName,
 				const icomp::IRegistry& registry,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 	bool WriteRegistryClassBody(
-				const std::string& baseClassName,
-				const std::string& registryClassName,
+				const QByteArray& baseClassName,
+				const QByteArray& registryClassName,
 				const icomp::IRegistry& registry,
-				std::ofstream& stream) const;
+				QTextStream& stream) const;
 
 	bool GetAttributeValue(
-				const std::string& attributeId,
-				const std::string& componentId,
+				const QByteArray& attributeId,
+				const QByteArray& componentId,
 				const iser::ISerializable& attribute,
-				std::string& valueString,
-				std::string& typeName) const;
+				QByteArray& valueString,
+				QByteArray& typeName) const;
 	bool GetMultiAttributeValue(
-				const std::string& attributeId,
-				const std::string& componentId,
+				const QByteArray& attributeId,
+				const QByteArray& componentId,
 				const iser::ISerializable& attribute,
-				std::list<std::string>& valueStrings,
-				std::string& typeName) const;
+				QList<QByteArray>& valueStrings,
+				QByteArray& typeName) const;
 
-	bool NextLine(std::ofstream& stream) const;
+	bool NextLine(QTextStream& stream) const;
 	int ChangeIndent(int difference) const;
 
-	bool ExtractInfoFromFile(const QString& filePath, std::string& className, QString& baseFilePath) const;
+	bool ExtractInfoFromFile(const QString& filePath, QByteArray& className, QString& baseFilePath) const;
 
-	std::string GetPackageName(const std::string& packageId) const;
+	QByteArray GetPackageName(const QByteArray& packageId) const;
 
 	/**
 		Get some wide string as C++ string literal.
 	*/
-	std::string GetStringLiteral(const QString& text) const;
+	QByteArray GetStringLiteral(const QString& text) const;
 	/**
 		Get some string as C++ string literal.
 	*/
-	std::string GetStdStringLiteral(const std::string& text) const;
+	QByteArray GetIdValueLiteral(const QByteArray& text) const;
 
 private:
 	I_REF(icomp::IPackagesManager, m_packagesManagerCompPtr);

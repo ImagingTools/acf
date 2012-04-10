@@ -2,12 +2,11 @@
 #define imod_CModelBase_included
 
 
+// Qt includes
+#include <QtCore/QVector>
+
+// ACF includes
 #include "imod/imod.h"
-
-
-#include <vector>
-
-
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
 
@@ -61,7 +60,7 @@ protected:
 private:
 	CModelBase(const CModelBase& modelBase);
 
-	typedef std::vector<IObserver*> Observers;
+	typedef QVector<IObserver*> Observers;
 	Observers m_observers;
 };
 

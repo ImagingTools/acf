@@ -1,10 +1,6 @@
 #include "iser/CXmlWriteArchiveBase.h"
 
 
-// STL includes
-#include <sstream>
-
-
 namespace iser
 {
 
@@ -31,10 +27,7 @@ bool CXmlWriteArchiveBase::BeginTag(const CArchiveTag& tag)
 
 bool CXmlWriteArchiveBase::BeginMultiTag(const CArchiveTag& tag, const CArchiveTag& /*subTag*/, int& count)
 {
-	std::ostringstream stream;
-	stream << count;
-
-	bool retVal = MakeIndent() && WriteString("<" + tag.GetId() + " count=\"" + stream.str() + "\">\n");
+	bool retVal = MakeIndent() && WriteString("<" + tag.GetId() + " count=\"" + QByteArray::number(count) + "\">\n");
 
 	++m_indent;
 
@@ -52,13 +45,13 @@ bool CXmlWriteArchiveBase::EndTag(const CArchiveTag& tag)
 }
 
 
-bool CXmlWriteArchiveBase::Process(std::string& value)
+bool CXmlWriteArchiveBase::Process(QByteArray& value)
 {
 	bool retVal = true;
 
 	if (m_isSeparatorNeeded){
 		retVal = retVal && MakeIndent();
-		retVal = retVal && WriteString("<" + GetElementSeparator().toStdString() + "/>\n");
+		retVal = retVal && WriteString("<" + GetElementSeparator().toLocal8Bit() + "/>\n");
 	}
 	else{
 		m_isSeparatorNeeded = true;
@@ -66,7 +59,7 @@ bool CXmlWriteArchiveBase::Process(std::string& value)
 
 	retVal = retVal && MakeIndent();
 
-	std::string xmlText;
+	QByteArray xmlText;
 	EncodeXml(value, xmlText);
 
 	retVal = retVal && WriteString(xmlText) && WriteString("\n");
@@ -81,7 +74,7 @@ bool CXmlWriteArchiveBase::Process(QString& value)
 
 	if (m_isSeparatorNeeded){
 		retVal = retVal && MakeIndent();
-		retVal = retVal && WriteString("<" + GetElementSeparator().toStdString() + "/>\n");
+		retVal = retVal && WriteString("<" + GetElementSeparator().toLocal8Bit() + "/>\n");
 	}
 	else{
 		m_isSeparatorNeeded = true;
@@ -89,9 +82,9 @@ bool CXmlWriteArchiveBase::Process(QString& value)
 
 	retVal = retVal && MakeIndent();
 
-	std::string xmlText;
+	QByteArray xmlText;
 
-	EncodeXml(value.toStdString(), xmlText);
+	EncodeXml(value.toLocal8Bit(), xmlText);
 
 	retVal = retVal && WriteString(xmlText) && WriteString("\n");
 
@@ -126,7 +119,7 @@ bool CXmlWriteArchiveBase::Flush()
 
 bool CXmlWriteArchiveBase::MakeIndent()
 {
-	return WriteString(std::string(m_indent * 2, ' '));
+	return WriteString(QByteArray(m_indent * 2, ' '));
 }
 
 

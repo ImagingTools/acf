@@ -2,9 +2,12 @@
 #define i2d_CLine2d_included
 
 
-#include "i2d/CVector2d.h"
+// Qt includes
+#include <QtCore/QPair>
 
+// ACF includes
 #include "i2d/IObject2d.h"
+#include "i2d/CVector2d.h"
 
 
 namespace i2d
@@ -183,7 +186,7 @@ public:
 
 	bool CutDisk(const i2d::CVector2d& center, double radius) const;
 
-	::std::pair<double, double> GetAlphaAndCastDistance(const i2d::CVector2d& point) const;
+	QPair<double, double> GetAlphaAndCastDistance(const i2d::CVector2d& point) const;
 
 	bool GetCutPoint(const CLine2d& otherLine, i2d::CVector2d& cutPoint) const;
 
@@ -362,7 +365,7 @@ inline bool CLine2d::CutDisk(const i2d::CVector2d& center, double radius) const
 }
 
 
-inline ::std::pair<double, double> CLine2d::GetAlphaAndCastDistance(const i2d::CVector2d& point) const
+inline QPair<double, double> CLine2d::GetAlphaAndCastDistance(const i2d::CVector2d& point) const
 {
 	i2d::CVector2d delta = m_point2 - m_point1;
 	i2d::CVector2d deltaToPoint = point - m_point1;
@@ -370,7 +373,8 @@ inline ::std::pair<double, double> CLine2d::GetAlphaAndCastDistance(const i2d::C
 	double dotProduct = delta.GetDotProduct(deltaToPoint);
 	double field = delta.GetCrossProductZ(deltaToPoint);
 	double deltaLength2 = delta.GetLength2();
-	return ::std::pair<double, double>(dotProduct / deltaLength2, field / ::sqrt(deltaLength2));
+
+	return QPair<double, double>(dotProduct / deltaLength2, field / ::sqrt(deltaLength2));
 }
 
 

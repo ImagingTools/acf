@@ -24,7 +24,7 @@ CSettingsArchiveBase::CSettingsArchiveBase(
 
 // protected methods
 
-bool CSettingsArchiveBase::EnterTag(const std::string& tagId)
+bool CSettingsArchiveBase::EnterTag(const QByteArray& tagId)
 {
 	m_openTagsList.push_back(TagInfo(tagId, m_valuesCount));
 
@@ -34,9 +34,9 @@ bool CSettingsArchiveBase::EnterTag(const std::string& tagId)
 }
 
 
-bool CSettingsArchiveBase::LeaveTag(const std::string& tagId)
+bool CSettingsArchiveBase::LeaveTag(const QByteArray& tagId)
 {
-	if (m_openTagsList.empty()){
+	if (m_openTagsList.isEmpty()){
 		return false;
 	}
 
@@ -84,7 +84,7 @@ QString CSettingsArchiveBase::GetBaseKey() const
 
 		static const QString separator("_");
 
-		registryKey += QString::number(tagInfo.siblingsCount + 1) + separator + QString::fromStdString(tagInfo.tagId);
+		registryKey += QString::number(tagInfo.siblingsCount + 1) + separator + tagInfo.tagId;
 
 		registryKey += "/";
 	}

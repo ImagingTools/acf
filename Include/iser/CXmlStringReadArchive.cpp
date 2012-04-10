@@ -6,12 +6,16 @@ namespace iser
 
 
 CXmlStringReadArchive::CXmlStringReadArchive(
-			const std::string& inputString,
+			const QByteArray& inputString,
 			bool serializeHeader,
 			const CArchiveTag& rootTag)
 :	BaseClass(rootTag)
 {
-	m_stream.str(inputString);
+	m_buffer.setData(inputString);
+
+	m_buffer.open(QIODevice::ReadOnly | QIODevice::Text);
+
+	m_stream.setDevice(&m_buffer);
 
 	SerializeXmlHeader();
 

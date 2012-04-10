@@ -47,7 +47,7 @@ protected:
 private:
 	const IComponent* m_definitionComponentPtr;
 
-	typedef std::vector<Interface*> Components;
+	typedef QVector<Interface*> Components;
 	mutable Components m_components;
 	mutable bool m_isInitialized;
 };
@@ -113,15 +113,15 @@ bool TMultiReferenceMember<Interface>::EnsureInitialized() const
 		if (parentPtr != NULL){
 			int attributesCount = BaseClass::GetCount();
 
-			m_components.resize(attributesCount, NULL);
+			m_components.resize(attributesCount);
 
 			retVal = true;
 
 			for (int i = 0; i < attributesCount; ++i){
-				const std::string& componentId = BaseClass::operator[](i);
+				const QByteArray& componentId = BaseClass::operator[](i);
 
-				std::string baseId;
-				std::string subId;
+				QByteArray baseId;
+				QByteArray subId;
 				BaseClass2::SplitId(componentId, baseId, subId);
 
 				IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);

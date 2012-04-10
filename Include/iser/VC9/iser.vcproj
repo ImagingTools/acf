@@ -250,6 +250,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CXmlStreamReadArchiveBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CXmlStreamWriteArchiveBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CXmlStringReadArchive.cpp"
 				>
 			</File>
@@ -359,6 +367,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CXmlStreamReadArchiveBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CXmlStreamWriteArchiveBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CXmlStringReadArchive.h"
 				>
 			</File>
@@ -412,14 +428,6 @@
 			</File>
 			<File
 				RelativePath="..\TVersionInfoSerializer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TXmlStreamReadArchiveBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TXmlStreamWriteArchiveBase.h"
 				>
 			</File>
 		</Filter>

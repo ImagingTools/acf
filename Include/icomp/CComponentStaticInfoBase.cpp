@@ -13,13 +13,13 @@ int CComponentStaticInfoBase::GetComponentType() const
 }
 
 
-const IAttributeStaticInfo* CComponentStaticInfoBase::GetAttributeInfo(const std::string& /*attributeId*/) const
+const IAttributeStaticInfo* CComponentStaticInfoBase::GetAttributeInfo(const QByteArray& /*attributeId*/) const
 {
 	return NULL;
 }
 
 
-const IComponentStaticInfo* CComponentStaticInfoBase::GetEmbeddedComponentInfo(const std::string& /*embeddedId*/) const
+const IComponentStaticInfo* CComponentStaticInfoBase::GetEmbeddedComponentInfo(const QByteArray& /*embeddedId*/) const
 {
 	return NULL;
 }
@@ -27,7 +27,7 @@ const IComponentStaticInfo* CComponentStaticInfoBase::GetEmbeddedComponentInfo(c
 
 //	reimplemented (icomp::IElementStaticInfo)
 
-const IElementStaticInfo* CComponentStaticInfoBase::GetSubelementInfo(const std::string& /*subcomponentId*/) const
+const IElementStaticInfo* CComponentStaticInfoBase::GetSubelementInfo(const QByteArray& /*subcomponentId*/) const
 {
 	return NULL;
 }

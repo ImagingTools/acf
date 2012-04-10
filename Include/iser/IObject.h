@@ -18,15 +18,15 @@ namespace iser
 class IObject: virtual public iser::ISerializable
 {
 public:
-	virtual std::string GetFactoryId() const;
+	virtual QByteArray GetFactoryId() const;
 };
 
 
 // public methods 
 
-inline std::string IObject::GetFactoryId() const
+inline QByteArray IObject::GetFactoryId() const
 {
-	static std::string emptyId;
+	static QByteArray emptyId;
 
 	return emptyId;
 }

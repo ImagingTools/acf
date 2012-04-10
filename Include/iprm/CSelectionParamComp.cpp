@@ -59,7 +59,7 @@ ISelectionParam* CSelectionParamComp::GetActiveSubselection() const
 bool CSelectionParamComp::Serialize(iser::IArchive& archive)
 {
 	int selectionOptionIndex = m_selectedOptionIndex;
-	std::string selectedOptionId;
+	QByteArray selectedOptionId;
 
 	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index");
 	bool retVal = archive.BeginTag(selectedOptionIndexTag);
@@ -82,7 +82,7 @@ bool CSelectionParamComp::Serialize(iser::IArchive& archive)
 	if (retVal && !archive.IsStoring()){
 		if (		m_constraintsCompPtr.IsValid() &&
 					((m_constraintsCompPtr->GetConstraintsFlags() & iprm::ISelectionConstraints::SCF_SUPPORT_UNIQUE_ID) != 0) &&
-					!selectedOptionId.empty()){
+					!selectedOptionId.isEmpty()){
 			if (!SetSelectedOptionIndexById(selectedOptionId) && !SetSelectedOptionIndex(selectionOptionIndex)){
 				SetSelectedOptionIndex(-1);
 			}
@@ -98,16 +98,16 @@ bool CSelectionParamComp::Serialize(iser::IArchive& archive)
 
 // protected methods
 
-bool CSelectionParamComp::SetSelectedOptionIndexById(const std::string& selectedOptionId)
+bool CSelectionParamComp::SetSelectedOptionIndexById(const QByteArray& selectedOptionId)
 {
-	I_ASSERT(!selectedOptionId.empty());
+	I_ASSERT(!selectedOptionId.isEmpty());
 	I_ASSERT(m_constraintsCompPtr.IsValid());
 
 	if (m_constraintsCompPtr.IsValid()){
 		int optionsCount = m_constraintsCompPtr->GetOptionsCount();
 
 		for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
-			std::string optionId = m_constraintsCompPtr->GetOptionId(optionIndex);
+			QByteArray optionId = m_constraintsCompPtr->GetOptionId(optionIndex);
 
 			if (optionId == selectedOptionId){
 				return SetSelectedOptionIndex(optionIndex);

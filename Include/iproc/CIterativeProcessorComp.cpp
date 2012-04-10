@@ -128,9 +128,9 @@ QString CIterativeProcessorComp::GetOptionDescription(int /*index*/) const
 }
 
 
-std::string CIterativeProcessorComp::GetOptionId(int /*index*/) const
+QByteArray CIterativeProcessorComp::GetOptionId(int /*index*/) const
 {
-	return std::string();
+	return QByteArray();
 }
 
 

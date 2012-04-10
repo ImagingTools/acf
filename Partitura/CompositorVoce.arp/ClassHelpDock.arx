@@ -39,7 +39,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MetaInfoManager
@@ -76,7 +76,7 @@
               DockArea
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               
@@ -95,7 +95,7 @@
               DockTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               
@@ -114,7 +114,7 @@
               SlaveGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -154,7 +154,7 @@
               DocuEditorFileParam
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               DocuEditorFileParam
@@ -170,7 +170,7 @@
               HelpFileProvider
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -189,7 +189,7 @@
               MetaInfoManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               MetaInfoManager
@@ -205,7 +205,7 @@
               TechDocuViewerParam
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               TechDocuViewerFileParam

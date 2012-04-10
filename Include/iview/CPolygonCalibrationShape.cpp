@@ -615,7 +615,7 @@ bool CPolygonCalibrationShape::IsCurveTouched(istd::CIndex2d position) const
 
                 if ((delta.GetDotProduct(viewMouse - node1) >= 0) && (delta.GetDotProduct(viewMouse - node2) <= 0)){
                     i2d::CVector2d ortonormal = delta.GetOrthogonal().GetNormalized();
-                    double distance = ::fabs(ortonormal.GetDotProduct(viewMouse - node1));
+                    double distance = qAbs(ortonormal.GetDotProduct(viewMouse - node1));
                     if (proportions * distance < logicalLineWidth){
                         return true;
                     }

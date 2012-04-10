@@ -54,7 +54,7 @@ bool CSettingsReadArchive::EndTag(const iser::CArchiveTag& tag)
 }
 
 
-bool CSettingsReadArchive::Process(std::string& value)
+bool CSettingsReadArchive::Process(QByteArray& value)
 {
 	QString registryKey = CreateNextValueKey();
 
@@ -62,7 +62,7 @@ bool CSettingsReadArchive::Process(std::string& value)
 		return false;
 	}
 
-	value = BaseClass2::value(registryKey).toString().toStdString();
+	value = BaseClass2::value(registryKey).toString().toLocal8Bit();
 
 	return true;
 }

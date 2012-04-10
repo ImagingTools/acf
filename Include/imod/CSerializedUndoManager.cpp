@@ -20,13 +20,13 @@ CSerializedUndoManager::CSerializedUndoManager()
 
 bool CSerializedUndoManager::IsUndoAvailable() const
 {
-	return !m_undoList.empty();
+	return !m_undoList.isEmpty();
 }
 
 
 bool CSerializedUndoManager::IsRedoAvailable() const
 {
-	return !m_redoList.empty();
+	return !m_redoList.isEmpty();
 }
 
 
@@ -108,7 +108,7 @@ void CSerializedUndoManager::BeforeUpdate(imod::IModel* modelPtr, int updateFlag
 
 			if (		archivePtr.IsValid() &&
 						objectPtr->Serialize(*archivePtr) &&
-						(m_undoList.empty() || *archivePtr != *m_undoList.back())){
+						(m_undoList.isEmpty() || *archivePtr != *m_undoList.back())){
 				m_beginStateArchivePtr.TakeOver(archivePtr);
 			}
 		}

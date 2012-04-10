@@ -7,12 +7,12 @@ namespace istd
 
 // static methods
 
-bool CIdManipBase::SplitId(const std::string& complexId, std::string& baseId, std::string& subId)
+bool CIdManipBase::SplitId(const QByteArray& complexId, QByteArray& baseId, QByteArray& subId)
 {
-	std::string::size_type separatorPos = complexId.find('/');
-	if (separatorPos != std::string::npos){
-		baseId = complexId.substr(0, separatorPos);
-		subId = complexId.substr(separatorPos + 1);
+	int separatorPos = complexId.indexOf('/');
+	if (separatorPos >= 0){
+		baseId = complexId.left(separatorPos);
+		subId = complexId.mid(separatorPos + 1);
 
 		return true;
 	}
@@ -25,9 +25,9 @@ bool CIdManipBase::SplitId(const std::string& complexId, std::string& baseId, st
 }
 
 
-std::string CIdManipBase::JoinId(const std::string& baseId, const std::string& subId)
+QByteArray CIdManipBase::JoinId(const QByteArray& baseId, const QByteArray& subId)
 {
-	if (!subId.empty()){
+	if (!subId.isEmpty()){
 		return baseId + "/" + subId;
 	}
 	else{

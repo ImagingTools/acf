@@ -29,8 +29,8 @@ public:
 
 	const icomp::IRegistry* GetRegistry() const;
 	const icomp::CComponentAddress& GetAddress() const;
-	const std::string& GetName() const;
-	void SetName(const std::string& name);
+	const QByteArray& GetName() const;
+	void SetName(const QByteArray& name);
 	const QString& GetNote() const;
 	void SetNote(const QString& note);
 
@@ -65,7 +65,7 @@ private:
 	i2d::CVector2d m_center;
 	const icomp::IRegistry* m_registryPtr;
 	icomp::CComponentAddress m_addess;
-	std::string m_name;
+	QByteArray m_name;
 	QString m_note;
 };
 
@@ -84,7 +84,7 @@ inline const icomp::CComponentAddress& CVisualRegistryElement::GetAddress() cons
 }
 
 
-inline const std::string& CVisualRegistryElement::GetName() const
+inline const QByteArray& CVisualRegistryElement::GetName() const
 {
 	return m_name;
 }

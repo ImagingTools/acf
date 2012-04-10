@@ -81,7 +81,7 @@ bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
 		return true;
 	}
 
-	if ( fabs(phi) > I_2PI)
+	if ( qAbs(phi) > I_2PI)
 		phi = fmod(phi, I_2PI);
 
 	if (phi < 0)

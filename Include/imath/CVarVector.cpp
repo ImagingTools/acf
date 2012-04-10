@@ -1,9 +1,10 @@
 #include "imath/CVarVector.h"
 
 
-// STL includes
-#include <cmath>
+// Qt includes
+#include <QtCore/QtGlobal>
 
+// ACF includes
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -47,7 +48,7 @@ bool CVarVector::Normalize(double length)
 
     double proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
 		int elementsCount = GetElementsCount();
 
         for (int i = 0; i < elementsCount; ++i){
@@ -92,7 +93,7 @@ bool CVarVector::GetNormalized(CVarVector& result, double length) const
 
     double proportion = isLength / length;
 
-	if (::fabs(proportion) > I_BIG_EPSILON){
+	if (qAbs(proportion) > I_BIG_EPSILON){
 		int elementsCount = GetElementsCount();
 
 		result.m_elements.resize(elementsCount);

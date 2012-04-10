@@ -1,10 +1,6 @@
 #include "iview/CScaleCalibration.h"
 
 
-// STL includes
-#include <math.h>
-
-
 namespace iview
 {
 
@@ -56,7 +52,7 @@ bool CScaleCalibration::GetDistance(
 			double& result,
 			ExactnessMode /*mode*/) const
 {
-	if (::fabs(m_scaleFactor) > I_EPSILON){
+	if (qAbs(m_scaleFactor) > I_EPSILON){
 		result = origPos1.GetDistance(origPos2) / m_scaleFactor;
 
 		return true;
@@ -68,7 +64,7 @@ bool CScaleCalibration::GetDistance(
 
 bool CScaleCalibration::GetPositionAt(const i2d::CVector2d& viewPosition, i2d::CVector2d& result, ExactnessMode /*mode*/) const
 {
-	if (::fabs(m_scaleFactor) > I_EPSILON){
+	if (qAbs(m_scaleFactor) > I_EPSILON){
 		result = (viewPosition - m_viewCenter) / m_scaleFactor;
 
 		return true;
@@ -96,7 +92,7 @@ bool CScaleCalibration::GetLocalTransform(const i2d::CVector2d& /*logPosition*/,
 
 bool CScaleCalibration::GetLocalInvTransform(const i2d::CVector2d& /*viewPosition*/, i2d::CAffine2d& result, ExactnessMode /*mode*/) const
 {
-	if (::fabs(m_scaleFactor) > I_EPSILON){
+	if (qAbs(m_scaleFactor) > I_EPSILON){
 		result.Reset(i2d::CVector2d(0, 0), 0, 1.0 / m_scaleFactor);
 
 		return true;

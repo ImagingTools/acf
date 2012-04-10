@@ -89,7 +89,7 @@ protected:
 	*/
 	QPixmap CreateComponentDragPixmap(const icomp::CComponentAddress &address) const;
 
-	RootInfo& EnsureRoot(const std::string& path, const icomp::CComponentAddress& address, const icomp::IComponentStaticInfo* staticInfoPtr);
+	RootInfo& EnsureRoot(const QByteArray& path, const icomp::CComponentAddress& address, const icomp::IComponentStaticInfo* staticInfoPtr);
 
 	void SetCommandNames();
 
@@ -204,13 +204,13 @@ private:
 	iqtgui::CHierarchicalCommand m_packagesCommand;
 	iqtgui::CHierarchicalCommand m_reloadCommand;
 
-	typedef QMap<std::string, RootInfo> RootInfos;
+	typedef QMap<QByteArray, RootInfo> RootInfos;
 	RootInfos m_roots;
 
 	RegistryObserver m_registryObserver;
 	ConfigObserver m_configObserver;
 
-	typedef std::set<std::string> InterfaceFilter;
+	typedef QSet<QByteArray> InterfaceFilter;
 	InterfaceFilter m_interfaceFilter;
 	QStringList m_keywordsFilter;
 

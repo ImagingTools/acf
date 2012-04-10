@@ -2,8 +2,8 @@
 #define istd_TArray_included
 
 
-// STL includes
-#include <vector>
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/TIndex.h"
@@ -145,7 +145,7 @@ public:
 	Element& operator[](const IndexType& index);
 
 protected:
-	typedef std::vector<Element> Elements;
+	typedef QVector<Element> Elements;
 
 	/**
 		Get index of element in one dimensional array.

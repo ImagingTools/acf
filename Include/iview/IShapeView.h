@@ -2,9 +2,8 @@
 #define iview_IShapeView_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "i2d/CRect.h"

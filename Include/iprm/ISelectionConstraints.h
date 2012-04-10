@@ -75,7 +75,7 @@ public:
 		Get option ID. The option ID must be unique, if flag SCF_SUPPORT_UNIQUE_ID is set.
 		\sa SelectionConstraintsFlags
 	*/
-	virtual std::string GetOptionId(int index) const = 0;
+	virtual QByteArray GetOptionId(int index) const = 0;
 };
 
 

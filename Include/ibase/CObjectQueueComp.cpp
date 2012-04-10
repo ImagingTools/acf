@@ -14,7 +14,7 @@ namespace ibase
 
 // reimplemented (ibase::IObjectQueue)
 
-int CObjectQueueComp::GetObjectsCount(const std::string* typeIdPtr) const
+int CObjectQueueComp::GetObjectsCount(const QByteArray* typeIdPtr) const
 {
 	if (typeIdPtr != NULL){
 		return 0;
@@ -27,7 +27,7 @@ int CObjectQueueComp::GetObjectsCount(const std::string* typeIdPtr) const
 
 void CObjectQueueComp::ClearQueue()
 {
-	while (!m_objectsQueue.empty()){
+	while (!m_objectsQueue.isEmpty()){
 		m_objectsReserve.push_front(m_objectsQueue.back());
 
 		m_objectsQueue.pop_back();
@@ -37,7 +37,7 @@ void CObjectQueueComp::ClearQueue()
 }
 
 
-istd::IChangeable* CObjectQueueComp::CreateFrontObject(int offsetPos, const std::string* typeIdPtr)
+istd::IChangeable* CObjectQueueComp::CreateFrontObject(int offsetPos, const QByteArray* typeIdPtr)
 {
 	if (typeIdPtr == NULL){
 		int objectsCount = int(m_objectsQueue.size());
@@ -58,7 +58,7 @@ istd::IChangeable* CObjectQueueComp::CreateFrontObject(int offsetPos, const std:
 }
 
 
-istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const std::string* typeIdPtr)
+istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const QByteArray* typeIdPtr)
 {
 	if (typeIdPtr == NULL){
 		int objectsCount = int(m_objectsQueue.size());
@@ -79,7 +79,7 @@ istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const std::
 }
 
 
-void CObjectQueueComp::RemoveFrontObject(int offsetPos, const std::string* typeIdPtr)
+void CObjectQueueComp::RemoveFrontObject(int offsetPos, const QByteArray* typeIdPtr)
 {
 	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
@@ -96,7 +96,7 @@ void CObjectQueueComp::RemoveFrontObject(int offsetPos, const std::string* typeI
 }
 
 
-void CObjectQueueComp::RemoveBackObject(int offsetPos, const std::string* typeIdPtr)
+void CObjectQueueComp::RemoveBackObject(int offsetPos, const QByteArray* typeIdPtr)
 {
 	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
@@ -115,7 +115,7 @@ void CObjectQueueComp::RemoveBackObject(int offsetPos, const std::string* typeId
 }
 
 
-istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const std::string* typeIdPtr) const
+istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const QByteArray* typeIdPtr) const
 {
 	I_ASSERT(offsetPos >= 0);
 	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
@@ -131,7 +131,7 @@ istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const std::st
 }
 
 
-istd::IChangeable* CObjectQueueComp::GetBackObject(int offsetPos, const std::string* typeIdPtr) const
+istd::IChangeable* CObjectQueueComp::GetBackObject(int offsetPos, const QByteArray* typeIdPtr) const
 {
 	I_ASSERT(offsetPos >= 0);
 	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
@@ -154,7 +154,7 @@ void CObjectQueueComp::SelectObjects(
 			ObjectList& result,
 			bool doAppend,
 			int offsetPos,
-			const std::string* typeIdPtr) const
+			const QByteArray* typeIdPtr) const
 {
 	if (!doAppend){
 		result.clear();
@@ -174,7 +174,7 @@ void CObjectQueueComp::SelectObjects(
 }
 
 
-istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const std::string* typeIdPtr)
+istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const QByteArray* typeIdPtr)
 {
 	I_ASSERT(offsetPos >= 0);
 	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
@@ -194,7 +194,7 @@ istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const std::st
 }
 
 
-istd::IChangeable* CObjectQueueComp::PopBackObject(int offsetPos, const std::string* typeIdPtr)
+istd::IChangeable* CObjectQueueComp::PopBackObject(int offsetPos, const QByteArray* typeIdPtr)
 {
 	I_ASSERT(offsetPos >= 0);
 	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
@@ -280,7 +280,7 @@ istd::IChangeable* CObjectQueueComp::CreateObject()
 		return NULL;
 	}
 
-	if (m_objectsReserve.empty()){
+	if (m_objectsReserve.isEmpty()){
 		return m_objectFactoryFactPtr.CreateInstance();
 	}
 	else{
@@ -311,13 +311,13 @@ void CObjectQueueComp::TryReductReserve()
 
 void CObjectQueueComp::OnComponentDestroyed()
 {
-	while (!m_objectsReserve.empty()){
+	while (!m_objectsReserve.isEmpty()){
 		delete m_objectsReserve.back();
 
 		m_objectsReserve.pop_back();
 	}
 
-	while (!m_objectsQueue.empty()){
+	while (!m_objectsQueue.isEmpty()){
 		delete m_objectsQueue.back();
 
 		m_objectsQueue.pop_back();

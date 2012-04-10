@@ -35,13 +35,13 @@ public:
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
-	virtual std::string GetOptionId(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
 
 	// reimplemented (iprm::IOptionsManager)
 	virtual void RemoveOption(int index);
 	virtual bool InsertOption(
 					QString& optionName,
-					const std::string& optionId,
+					const QByteArray& optionId,
 					const QString& optionDescription = QString(), 
 					int index = -	1);
 
@@ -59,7 +59,7 @@ private:
 		{
 		}
 
-		OptionInfo(const QString& optionName, std::string optionId, const QString& optionDescription)
+		OptionInfo(const QString& optionName, QByteArray optionId, const QString& optionDescription)
 			:optionName(optionName),
 			optionId(optionId),
 			optionDescription(optionDescription)
@@ -67,11 +67,11 @@ private:
 		}
 
 		QString optionName;
-		std::string optionId;
+		QByteArray optionId;
 		QString optionDescription;
 	};
 
-	typedef std::vector<OptionInfo> Options;
+	typedef QVector<OptionInfo> Options;
 
 	Options m_options;
 

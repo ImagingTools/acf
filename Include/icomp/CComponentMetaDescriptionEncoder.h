@@ -2,13 +2,10 @@
 #define icomp_CComponentMetaDescriptionEncoder_included
 
 
-// STL includes
-#include <QtCore/QMap>
-
-
 // Qt includes
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include <QtCore/QMap>
 
 
 namespace icomp

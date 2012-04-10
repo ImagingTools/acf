@@ -17,14 +17,14 @@ IVariableParam::TypeIds CVariableParamComp::GetKnownTypeIds() const
 
 	int typesCount = qMin(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
-		retVal.insert(m_factoryIdsAttrPtr[i].toStdString());
+		retVal.insert(m_factoryIdsAttrPtr[i].toLocal8Bit());
 	}
 
 	return retVal;
 }
 
 
-std::string CVariableParamComp::GetParameterTypeId() const
+QByteArray CVariableParamComp::GetParameterTypeId() const
 {
 	return m_paramTypeId;
 }
@@ -36,13 +36,13 @@ iser::ISerializable* CVariableParamComp::GetParameter() const
 }
 
 
-bool CVariableParamComp::AssignTypeId(const std::string& typeId)
+bool CVariableParamComp::AssignTypeId(const QByteArray& typeId)
 {
 	if (typeId == m_paramTypeId){
 		return true;
 	}
 
-	if (typeId.empty()){
+	if (typeId.isEmpty()){
 		m_paramPtr.Reset();
 		m_paramTypeId = typeId;
 
@@ -51,7 +51,7 @@ bool CVariableParamComp::AssignTypeId(const std::string& typeId)
 
 	int typesCount = qMin(m_factoryIdsAttrPtr.GetCount(), m_factoriesFact.GetCount());
 	for (int i = 0; i < typesCount; ++i){
-		if (m_factoryIdsAttrPtr[i].toStdString() == typeId){
+		if (m_factoryIdsAttrPtr[i].toLocal8Bit() == typeId){
 			iser::ISerializable* newParamPtr = m_factoriesFact.CreateInstance(i);
 			if (newParamPtr != NULL){
 				if (m_paramPtr.IsValid()){
@@ -78,7 +78,7 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	std::string paramTypeId = m_paramTypeId;
+	QByteArray paramTypeId = m_paramTypeId;
 	static iser::CArchiveTag paramTypeIdTag("TypeId", "Paramter type ID used to create specified type object");
 	retVal = retVal && archive.BeginTag(paramTypeIdTag);
 	retVal = retVal && archive.Process(paramTypeId);

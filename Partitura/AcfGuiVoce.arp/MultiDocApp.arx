@@ -39,7 +39,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -58,7 +58,7 @@
               DialogIconPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               AboutDialogIconPath
@@ -74,7 +74,7 @@
               DialogTitle
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               AboutDialogTitle
@@ -90,7 +90,7 @@
               LogoPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LogoPath
@@ -106,7 +106,7 @@
               ShowApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowAboutApplicationName
@@ -122,7 +122,7 @@
               ShowApplicationSubName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowAboutApplicationSubName
@@ -138,7 +138,7 @@
               ShowLegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowAboutLegalCopyright
@@ -154,7 +154,7 @@
               ShowProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowAboutProductName
@@ -170,7 +170,7 @@
               ShowProductType
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowAboutProductType
@@ -186,7 +186,7 @@
               VersionIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;int&gt;
+              Integer[]
             </Type>
             <ExportId>
               DisplayVersionIds
@@ -202,7 +202,7 @@
               VersionNames
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               DisplayVersionNames
@@ -239,7 +239,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -258,7 +258,7 @@
               IconPath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               IconPath
@@ -274,7 +274,7 @@
               MainGui
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -293,7 +293,7 @@
               SplashScreen
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -312,7 +312,7 @@
               StyleSheet
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               StyleSheet
@@ -328,7 +328,7 @@
               TranslationManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               TranslationManager
@@ -344,7 +344,7 @@
               UiStartMode
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               UiStartMode
@@ -381,7 +381,7 @@
               ApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ApplicationName
@@ -397,7 +397,7 @@
               ApplicationSubname
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ApplicationSubname
@@ -413,7 +413,7 @@
               ApplicationType
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ApplicationType
@@ -429,7 +429,7 @@
               CompanyName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               CompanyName
@@ -445,7 +445,7 @@
               LegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               LegalCopyright
@@ -461,7 +461,7 @@
               MainVersionId
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               MainVersionId
@@ -477,7 +477,7 @@
               ProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               ProductName
@@ -493,7 +493,7 @@
               VersionInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               VersionInfo
@@ -530,7 +530,7 @@
               SlaveTemplates
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               DocumentTemplates
@@ -567,7 +567,7 @@
               AboutDialog
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -586,7 +586,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -605,7 +605,7 @@
               DocumentManager
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -624,7 +624,7 @@
               IconSize
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               IconSize
@@ -643,7 +643,7 @@
               IsCopyPathVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsCopyPathVisible
@@ -659,7 +659,7 @@
               IsNestingEnabled
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsNestingEnabled
@@ -675,7 +675,7 @@
               IsOpenContainingFolderVisible
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsOpenContainingFolderVisible
@@ -691,7 +691,7 @@
               IsTabbedDockAllowed
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               IsTabbedDockAllowed
@@ -707,7 +707,7 @@
               MainWindowComponents
             </Id>
             <Type>
-              icomp::CMultiReferenceAttribute
+              Reference[]
             </Type>
             <ExportId>
               MainWindowComponents
@@ -723,7 +723,7 @@
               MaxRecentFiles
             </Id>
             <Type>
-              icomp::TAttribute&lt;int&gt;
+              Integer
             </Type>
             <ExportId>
               MaxRecentFiles
@@ -742,7 +742,7 @@
               SettingsDialog
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               SettingsDialog
@@ -758,7 +758,7 @@
               SettingsProvider
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -777,7 +777,7 @@
               UseIconText
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               UseIconText
@@ -793,7 +793,7 @@
               Workspace
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -833,7 +833,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -873,7 +873,7 @@
               ApplicationInfo
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -892,7 +892,7 @@
               ImagePath
             </Id>
             <Type>
-              icomp::TAttribute&lt;QString&gt;
+              String
             </Type>
             <ExportId>
               SplashScreenImage
@@ -908,7 +908,7 @@
               ShowApplicationName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowSplashApplicationName
@@ -924,7 +924,7 @@
               ShowApplicationSubName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowSplashApplicationSubName
@@ -940,7 +940,7 @@
               ShowLegalCopyright
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowSplashLegalCopyright
@@ -956,7 +956,7 @@
               ShowProductName
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowSplashProductName
@@ -972,7 +972,7 @@
               ShowProductType
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               ShowSplashProductType
@@ -988,7 +988,7 @@
               VersionIds
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;int&gt;
+              Integer[]
             </Type>
             <ExportId>
               DisplayVersionIds
@@ -1004,7 +1004,7 @@
               VersionNames
             </Id>
             <Type>
-              icomp::TMultiAttribute&lt;QString&gt;
+              String[]
             </Type>
             <ExportId>
               DisplayVersionNames
@@ -1041,7 +1041,7 @@
               AllowViewRepeating
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               AllowViewRepeating
@@ -1057,7 +1057,7 @@
               DocumentTemplate
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -1076,7 +1076,7 @@
               SettingsProvider
             </Id>
             <Type>
-              icomp::CReferenceAttribute
+              Reference
             </Type>
             <ExportId>
               
@@ -1095,7 +1095,7 @@
               ShowViewMaximized
             </Id>
             <Type>
-              icomp::TAttribute&lt;bool&gt;
+              Boolean
             </Type>
             <ExportId>
               

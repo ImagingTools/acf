@@ -1,9 +1,6 @@
 #include "idoc/CSingleDocumentTemplateBase.h"
 
 
-// STL includes
-#include <algorithm>
-
 // ACF includes
 #include "iser/ISerializable.h"
 
@@ -21,7 +18,7 @@ void CSingleDocumentTemplateBase::SetSupportedFeatures(int featureFlags)
 }
 
 
-void CSingleDocumentTemplateBase::SetDocumentTypeId(const std::string& id)
+void CSingleDocumentTemplateBase::SetDocumentTypeId(const QByteArray& id)
 {
 	m_documentTypeId = id;
 }
@@ -33,7 +30,7 @@ void CSingleDocumentTemplateBase::SetDocumentTypeName(const QString& name)
 }
 
 
-void CSingleDocumentTemplateBase::SetViewTypeId(const std::string& id)
+void CSingleDocumentTemplateBase::SetViewTypeId(const QByteArray& id)
 {
 	m_viewTypeId = id;
 }
@@ -53,7 +50,7 @@ void CSingleDocumentTemplateBase::SetDefaultDirectory(const QString& defaultDire
 
 // reimplemented (idoc::IDocumentTypesInfo)
 
-bool CSingleDocumentTemplateBase::IsFeatureSupported(int featureFlags, const std::string& documentId) const
+bool CSingleDocumentTemplateBase::IsFeatureSupported(int featureFlags, const QByteArray& documentId) const
 {
 	if (documentId == m_documentTypeId){
 		return ((m_supportedFeatures & featureFlags) != 0);
@@ -73,14 +70,14 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIds() const
 }
 
 
-QString CSingleDocumentTemplateBase::GetDocumentTypeName(const std::string& documentTypeId) const
+QString CSingleDocumentTemplateBase::GetDocumentTypeName(const QByteArray& documentTypeId) const
 {
 	if (documentTypeId == m_documentTypeId){
 		if (!m_documentTypeName.isEmpty()){
 			return m_documentTypeName;
 		}
 		else{
-			return QString::fromStdString(documentTypeId);
+			return documentTypeId;
 		}
 	}
 	else{
@@ -89,7 +86,7 @@ QString CSingleDocumentTemplateBase::GetDocumentTypeName(const std::string& docu
 }
 
 
-iser::IFileTypeInfo* CSingleDocumentTemplateBase::GetDocumentFileTypeInfo(const std::string& documentTypeId) const
+iser::IFileTypeInfo* CSingleDocumentTemplateBase::GetDocumentFileTypeInfo(const QByteArray& documentTypeId) const
 {
 	return GetFileLoader(documentTypeId);
 }
@@ -103,7 +100,7 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(co
 	for (		Ids::const_iterator iter = docTypeIds.begin();
 				iter != docTypeIds.end();
 				++iter){
-		const std::string& id = *iter;
+		const QByteArray& id = *iter;
 
 		iser::IFileLoader* loaderPtr = GetFileLoader(*iter);
 		if (loaderPtr->IsOperationSupported(NULL, &filePath)){
@@ -115,7 +112,7 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetDocumentTypeIdsForFile(co
 }
 
 
-QString CSingleDocumentTemplateBase::GetDefaultDirectory(const QString& sugestedDir, const std::string* documentTypeIdPtr) const
+QString CSingleDocumentTemplateBase::GetDefaultDirectory(const QString& sugestedDir, const QByteArray* documentTypeIdPtr) const
 {
 	if (sugestedDir.isEmpty()){
 		if ((documentTypeIdPtr == NULL) || IsDocumentTypeSupported(*documentTypeIdPtr)){
@@ -132,7 +129,7 @@ QString CSingleDocumentTemplateBase::GetDefaultDirectory(const QString& sugested
 
 // reimplemented (idoc::IDocumentTemplate)
 
-IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetViewTypeIds(const std::string& documentTypeId) const
+IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetViewTypeIds(const QByteArray& documentTypeId) const
 {
 	IDocumentTemplate::Ids retVal;
 
@@ -145,15 +142,15 @@ IDocumentTemplate::Ids CSingleDocumentTemplateBase::GetViewTypeIds(const std::st
 
 
 QString CSingleDocumentTemplateBase::GetViewTypeName(
-			const std::string& documentTypeId,
-			const std::string& viewTypeId) const
+			const QByteArray& documentTypeId,
+			const QByteArray& viewTypeId) const
 {
 	if ((documentTypeId == m_documentTypeId) && (viewTypeId == m_viewTypeId)){
 		if (!m_viewTypeName.isEmpty()){
 			return m_viewTypeName;
 		}
 		else{
-			return QString::fromStdString(m_viewTypeId);
+			return m_viewTypeId;
 		}
 	}
 
@@ -161,7 +158,7 @@ QString CSingleDocumentTemplateBase::GetViewTypeName(
 }
 
 
-IDocumentStateComparator* CSingleDocumentTemplateBase::CreateStateComparator(const std::string& documentTypeId) const
+IDocumentStateComparator* CSingleDocumentTemplateBase::CreateStateComparator(const QByteArray& documentTypeId) const
 {
 	if (IsDocumentTypeSupported(documentTypeId)){
 		return new CSerializedStateComparator;

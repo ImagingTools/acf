@@ -26,7 +26,7 @@ public:
 	virtual void* GetComponentInterface(
 				const istd::CClassInfo& interfaceType,
 				IComponent& component,
-				const std::string& subId) const = 0;
+				const QByteArray& subId) const = 0;
 };
 
 

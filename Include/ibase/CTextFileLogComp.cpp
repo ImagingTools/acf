@@ -1,9 +1,6 @@
 #include "ibase/CTextFileLogComp.h"
 
 
-// STL includes
-#include <iostream>
-
 // ACF includes
 #include "istd/IInformation.h"
 #include "imod/IModel.h"
@@ -16,7 +13,9 @@ namespace ibase
 // public methods
 
 CTextFileLogComp:: CTextFileLogComp()
-	:m_filePathObserver(*this)
+:	m_outputFile(),
+	m_outputFileStream(&m_outputFile),
+	m_filePathObserver(*this)
 {
 }
 
@@ -27,8 +26,8 @@ CTextFileLogComp:: CTextFileLogComp()
 
 void CTextFileLogComp::WriteText(const QString& text)
 {
-	if (m_outputFileStream.is_open()){
-		m_outputFileStream << text.toStdWString().c_str();
+	if (m_outputFile.isOpen()){
+		m_outputFileStream << text;
 		m_outputFileStream.flush();
 	}
 }
@@ -36,8 +35,8 @@ void CTextFileLogComp::WriteText(const QString& text)
 
 void CTextFileLogComp::NewLine()
 {
-	if (m_outputFileStream.is_open()){
-		m_outputFileStream << std::endl;
+	if (m_outputFile.isOpen()){
+		m_outputFileStream << "\n";
 		m_outputFileStream.flush();
 	}
 }
@@ -63,7 +62,7 @@ void CTextFileLogComp::OnComponentDestroyed()
 		m_fileNameModelCompPtr->DetachObserver(&m_filePathObserver);
 	}
 
-	m_outputFileStream.close();
+	m_outputFile.close();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -71,28 +70,25 @@ void CTextFileLogComp::OnComponentDestroyed()
 
 void CTextFileLogComp::OpenFileStream()
 {
-	if (m_outputFileStream.is_open()){
-		m_outputFileStream.flush();
+	if (m_outputFile.isOpen()){
+		m_outputFile.flush();
 
-		m_outputFileStream.close();
+		m_outputFile.close();
 	}
 
 	if (m_fileNameCompPtr.IsValid()){
-		std::ios::openmode fileMode = std::wofstream::out | std::wofstream::app;
+		QIODevice::OpenMode openMode = QIODevice::WriteOnly | QIODevice::Truncate;
 
-		if (m_isAppendAttrPtr.IsValid() && !*m_isAppendAttrPtr){
-			fileMode = std::wofstream::out;
+		if (*m_isAppendAttrPtr){
+			openMode = QIODevice::WriteOnly | QIODevice::Append;
 		}
 
 		if (m_fileNameCompPtr->GetPath().isEmpty()){
 			return;
 		}
 
-#ifdef _MSC_VER
-		m_outputFileStream.open(m_fileNameCompPtr->GetPath().toStdString().c_str(), fileMode);
-#else
-		m_outputFileStream.open(m_fileNameCompPtr->GetPath().toStdString().c_str(), fileMode);
-#endif
+		m_outputFile.setFileName(m_fileNameCompPtr->GetPath());
+		m_outputFile.open(openMode);
 	}
 }
 

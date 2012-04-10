@@ -2,9 +2,9 @@
 #define iser_CTextWriteArchiveBase_included
 
 
-// STL includes
-#include <sstream>
-
+// Qt includes
+#include <QtCore/QTextStream>
+#include <QtCore/QIODevice>
 
 // ACF includes
 #include "iser/CWriteArchiveBase.h"
@@ -53,17 +53,15 @@ protected:
 template <typename Type>
 bool CTextWriteArchiveBase::ProcessInternal(const Type& value)
 {
-	bool retVal = true;
+	QByteArray string;
 
-	std::ostringstream stream;
+	{
+		QTextStream stream(&string,  QIODevice::WriteOnly);
 
-	stream << value;
+		stream << value;
+	}
 
-	std::string str(stream.str());
-
-	retVal = retVal && Process(str);
-
-	return retVal;
+	return Process(string);
 }
 
 

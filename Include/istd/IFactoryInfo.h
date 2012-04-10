@@ -2,9 +2,9 @@
 #define istd_IFactoryInfo_included
 
 
-// STL includes
-#include <string>
-#include <vector>
+// Qt includes
+#include <QtCore/QByteArray>
+#include <QtCore/QVector>
 
 // ACF includes
 #include "istd/IPolymorphic.h"
@@ -20,7 +20,7 @@ namespace istd
 class IFactoryInfo: virtual public istd::IPolymorphic  
 {
 public:
-	typedef std::vector<std::string> KeyList;
+	typedef QVector<QByteArray> KeyList;
 
 	/**
 		Returns all posible keys for this factory.

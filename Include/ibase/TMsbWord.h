@@ -2,9 +2,7 @@
 #define ibase_TMsbWord_included
 
 
-// STL includes
-#include <cstring>
-
+// ACF includes
 #include "iser/IArchive.h"
 
 

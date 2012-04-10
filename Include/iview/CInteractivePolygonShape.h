@@ -2,9 +2,8 @@
 #define iview_CInteractivePolygonShape_included
 
 
-// STL includes
-#include <vector>
-
+// Qt includes
+#include <QtCore/QVector>
 
 // ACF includes
 #include "i2d/CVector2d.h"
@@ -76,7 +75,7 @@ protected:
 
 	i2d::CVector2d m_referencePosition;
 	int m_referenceIndex;
-	std::vector<i2d::CVector2d> m_references;
+	QVector<i2d::CVector2d> m_references;
 
 	i2d::CVector2d m_castAxis;
 	mutable i2d::CAffine2d m_castTransform;

@@ -72,7 +72,7 @@ QString COptionsManagerComp::GetOptionDescription(int index) const
 }
 
 
-std::string COptionsManagerComp::GetOptionId(int index) const
+QByteArray COptionsManagerComp::GetOptionId(int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < COptionsManagerComp::GetOptionsCount());
@@ -107,7 +107,7 @@ void COptionsManagerComp::RemoveOption(int index)
 
 bool COptionsManagerComp::InsertOption(
 					QString& optionName,
-					const std::string& optionId,
+					const QByteArray& optionId,
 					const QString& optionDescription, 
 					int index)
 {

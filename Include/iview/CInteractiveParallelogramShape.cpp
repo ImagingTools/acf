@@ -147,9 +147,9 @@ bool CInteractiveParallelogramShape::OnMouseMove(istd::CIndex2d position)
 				}
 				else{
 					double axisYLength = axisY.GetLength();
-					if (::fabs(axisYLength) > I_EPSILON){
+					if (qAbs(axisYLength) > I_EPSILON){
 						double newAxisYLength = axisY.GetDotProduct(cp - parallPos) / axisYLength;
-						if (::fabs(newAxisYLength) > I_EPSILON * 2){
+						if (qAbs(newAxisYLength) > I_EPSILON * 2){
 							newAxisY = i2d::CVector2d(axisY * newAxisYLength / axisYLength);
 						}
 						else{
@@ -171,7 +171,7 @@ bool CInteractiveParallelogramShape::OnMouseMove(istd::CIndex2d position)
 			}
 
 			if (m_isProportionalScaled){
-				if (::fabs(axisY.GetLength()) > I_EPSILON){
+				if (qAbs(axisY.GetLength()) > I_EPSILON){
 					newAxisX *= newAxisY.GetLength() / axisY.GetLength();
 				}
 			}
@@ -188,9 +188,9 @@ bool CInteractiveParallelogramShape::OnMouseMove(istd::CIndex2d position)
 				}
 				else{
 					double axisXLength = axisX.GetLength();
-					if (::fabs(axisXLength) > I_EPSILON){
+					if (qAbs(axisXLength) > I_EPSILON){
 						double newAxisXLength = axisX.GetDotProduct(cp - parallPos) / axisXLength;
-						if (::fabs(newAxisXLength) > I_EPSILON * 2){
+						if (qAbs(newAxisXLength) > I_EPSILON * 2){
 							newAxisX = i2d::CVector2d(axisX * newAxisXLength / axisXLength);
 						}
 						else{
@@ -208,7 +208,7 @@ bool CInteractiveParallelogramShape::OnMouseMove(istd::CIndex2d position)
 			}
 
 			if (m_isProportionalScaled){
-				if (::fabs(axisX.GetLength()) > I_EPSILON){
+				if (qAbs(axisX.GetLength()) > I_EPSILON){
 					newAxisY *= newAxisX.GetLength() / axisX.GetLength();
 				}
 			}

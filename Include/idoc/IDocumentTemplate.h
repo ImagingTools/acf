@@ -30,26 +30,26 @@ public:
 		Return supported view type IDs for specified document type.
 		\param	documentTypeId	ID of document type.
 	*/
-	virtual Ids GetViewTypeIds(const std::string& documentTypeId) const = 0;
+	virtual Ids GetViewTypeIds(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Get human readable name of some view type ID.
 	*/
 	virtual QString GetViewTypeName(
-				const std::string& documentTypeId,
-				const std::string& viewTypeId) const = 0;
+				const QByteArray& documentTypeId,
+				const QByteArray& viewTypeId) const = 0;
 
 	/**
 		Get file loader/saver for spacified document ID.
 		\param	documentTypeId	type ID of document will be loaded/saved.
 	*/
-	virtual iser::IFileLoader* GetFileLoader(const std::string& documentTypeId) const = 0;
+	virtual iser::IFileLoader* GetFileLoader(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Creates a document instance for document type \c documentTypeId.
 		\param	documentTypeId	ID of document type.
 	*/
-	virtual istd::IChangeable* CreateDocument(const std::string& documentTypeId) const = 0;
+	virtual istd::IChangeable* CreateDocument(const QByteArray& documentTypeId) const = 0;
 
 	/**
 		Creates a view instance for document \c document of type \c viewTypeId.
@@ -58,9 +58,9 @@ public:
 		\param	viewTypeId		optional ID specifying view type if more view types are supported.
 	*/
 	virtual istd::IPolymorphic* CreateView(
-				const std::string& documentTypeId,
+				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
-				const std::string& viewTypeId = std::string()) const = 0;
+				const QByteArray& viewTypeId = QByteArray()) const = 0;
 
 	/**
 		Creates an undo manger for a given document \c documentPtr.
@@ -68,12 +68,12 @@ public:
 		\param	documentPtr	pointer to document object.
 		\return	pointer to created instance of undo manager or NULL, if creating of undo manager was impossible.
 	*/
-	virtual imod::IUndoManager* CreateUndoManager(const std::string& documentTypeId, istd::IChangeable* documentPtr) const = 0;
+	virtual imod::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const = 0;
 
 	/**
 		Creates a document state comparator.
 	*/
-	virtual IDocumentStateComparator* CreateStateComparator(const std::string& documentTypeId) const = 0;
+	virtual IDocumentStateComparator* CreateStateComparator(const QByteArray& documentTypeId) const = 0;
 };
 
 

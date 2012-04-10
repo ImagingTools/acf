@@ -2,9 +2,6 @@
 #define istd_TRange_included
 
 
-// STL includes
-#include <cmath>
-
 // ACF includes
 #include "istd/istd.h"
 
@@ -544,8 +541,8 @@ template <typename ValueType>
 ValueType TRange<ValueType>::GetClipped(ValueType value) const
 {
 	if (!Contains(value)){
-		ValueType distanceMin = (ValueType)std::fabs(value - m_minValue);
-		ValueType distanceMax = (ValueType)std::fabs(value - m_maxValue);
+		ValueType distanceMin = (ValueType)qAbs(value - m_minValue);
+		ValueType distanceMax = (ValueType)qAbs(value - m_maxValue);
 
 		return distanceMin < distanceMax ? m_minValue : m_maxValue;
 	}

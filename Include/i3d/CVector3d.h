@@ -2,9 +2,10 @@
 #define i3d_CVector3d_included
 
 
-// STL includes
-#include <cmath>
+// Qt includes
+#include <QtCore/QtGlobal>
 
+// ACF includes
 #include "imath/TVector.h"
 
 #include "i3d/i3d.h"
@@ -182,7 +183,7 @@ inline CVector3d CVector3d::operator*(double scalar) const
 
 inline CVector3d CVector3d::operator/(double scalar) const
 {
-	if (::fabs(scalar) < I_BIG_EPSILON){
+	if (qAbs(scalar) < I_BIG_EPSILON){
 		scalar = (scalar > 0)? I_BIG_EPSILON: -I_BIG_EPSILON;
 	}
 

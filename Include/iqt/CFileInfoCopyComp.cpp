@@ -55,7 +55,7 @@ bool CFileInfoCopyComp::ConvertFile(
 		QString licenseFileName = iqt::CSystem::GetEnrolledPath(*m_licensePathAttrPtr);
 
 		QFile licenseFile(licenseFileName);
-		if (!licenseFile.open(QIODevice::ReadOnly)){
+		if (!licenseFile.open(QIODevice::ReadOnly | QIODevice::Text)){
 			SendWarningMessage(MI_LICENSE_OPEN, QObject::tr("Opening license file failed (%1)").arg(licenseFileName));
 
 			return false;

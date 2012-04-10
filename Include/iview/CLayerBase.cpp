@@ -92,7 +92,7 @@ void CLayerBase::UpdateAllShapes(int changeFlag)
 
 void CLayerBase::DisconnectAllShapes()
 {
-	while (!m_shapes.empty()){
+	while (!m_shapes.isEmpty()){
 		DisconnectShapeElement(m_shapes, m_shapes.begin());
 	}
 }

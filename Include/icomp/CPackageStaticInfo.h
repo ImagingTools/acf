@@ -37,16 +37,16 @@ public:
 		\param	componentInfoPtr	embedded component static info object used to describe its type.
 									It cannot be NULL.
 	*/
-	virtual void RegisterEmbeddedComponentInfo(const std::string& embeddedId, const IComponentStaticInfo* componentInfoPtr);
+	virtual void RegisterEmbeddedComponentInfo(const QByteArray& embeddedId, const IComponentStaticInfo* componentInfoPtr);
 
 	// reimplemented (icomp::IComponentStaticInfo)
-	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const std::string& embeddedId) const;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
 	virtual const QString& GetDescription() const;
 	virtual const QString& GetKeywords() const;
 
 private:
-	typedef QMap<std::string, const IComponentStaticInfo*> EmbeddedComponentInfos;
+	typedef QMap<QByteArray, const IComponentStaticInfo*> EmbeddedComponentInfos;
 	EmbeddedComponentInfos m_embeddedComponentInfos;
 
 	QString m_description;

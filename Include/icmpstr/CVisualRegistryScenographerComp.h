@@ -2,11 +2,9 @@
 #define icmpstr_CVisualRegistryScenographerComp_included
 
 
-// STL includes
-#include <QtCore/QMap>
-
 // Qt includes
 #include <QtCore/QObject>
+#include <QtCore/QMap>
 #include <QtCore/QTimer>
 #include <QtGui/QGraphicsView>
 #include <QtGui/QGraphicsScene>
@@ -122,14 +120,14 @@ protected:
 	void AddConnectorsToScene();
 	void AddConnector(
 				CRegistryElementShape& sourceShape,
-				const std::string& referenceComponentId,
-				const std::string& attributeId,
+				const QByteArray& referenceComponentId,
+				const QByteArray& attributeId,
 				bool isFactory = false);
 	icomp::IRegistryElement* TryCreateComponent(
-				const std::string& elementId,
+				const QByteArray& elementId,
 				const icomp::CComponentAddress& address,
 				const i2d::CVector2d& position);
-	void ConnectReferences(const std::string& componentRole);
+	void ConnectReferences(const QByteArray& componentRole);
 	void UpdateComponentSelection();
 
 	void DoRetranslate();
@@ -205,7 +203,7 @@ private:
 	QFont m_elementNameFont;
 	QFont m_elementDetailFont;
 
-	typedef std::set<std::string> ElementIds;
+	typedef QSet<QByteArray> ElementIds;
 	ElementIds m_selectedElementIds;
 
 	EnvironmentObserver m_environmentObserver;

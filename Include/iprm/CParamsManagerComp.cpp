@@ -75,7 +75,7 @@ int CParamsManagerComp::GetIndexOperationFlags(int index) const
 		retVal |= MF_NO_DELETE;
 		retVal |= MF_NO_INSERT;
 	}
-	else if (m_paramSets.empty()){
+	else if (m_paramSets.isEmpty()){
 		retVal |= MF_NO_DELETE;
 	}
 
@@ -340,9 +340,9 @@ QString CParamsManagerComp::GetOptionDescription(int /*index*/) const
 }
 
 
-std::string CParamsManagerComp::GetOptionId(int index) const
+QByteArray CParamsManagerComp::GetOptionId(int index) const
 {
-	return GetParamsSetName(index).toStdString();
+	return GetParamsSetName(index).toLocal8Bit();
 }
 
 

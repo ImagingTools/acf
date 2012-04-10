@@ -2,8 +2,8 @@
 #define iqt_CSettingsArchiveBase_included
 
 
-// STL includes
-#include <vector>
+// Qt includes
+#include <QtCore/QList>
 
 // Qt includes
 #include <QtCore/QSettings>
@@ -25,25 +25,25 @@ public:
 				const QString& rootKey);
 
 protected:
-	bool EnterTag(const std::string& tagId);
-	bool LeaveTag(const std::string& tagId);
+	bool EnterTag(const QByteArray& tagId);
+	bool LeaveTag(const QByteArray& tagId);
 	QString GetCurrentCountKey() const;
 	QString CreateNextValueKey();
 	QString GetBaseKey() const;
 
 	struct TagInfo
 	{
-		TagInfo(const std::string& tagId, int siblingsCount)
+		TagInfo(const QByteArray& tagId, int siblingsCount)
 		{
 			this->tagId = tagId;
 			this->siblingsCount = siblingsCount;
 		}
 	
-		std::string tagId;
+		QByteArray tagId;
 		int siblingsCount;
 	};
 
-	typedef std::vector<TagInfo> OpenTagsList;
+	typedef QList<TagInfo> OpenTagsList;
 	OpenTagsList m_openTagsList;
 
 	QString m_rootKey;
