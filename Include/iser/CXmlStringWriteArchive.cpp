@@ -11,14 +11,14 @@ CXmlStringWriteArchive::CXmlStringWriteArchive(
 			const CArchiveTag& rootTag)
 :	BaseClass(versionInfoPtr, rootTag)
 {
-	m_buffer.open(QIODevice::WriteOnly | QIODevice::Text);
+	if (m_buffer.open(QIODevice::WriteOnly | QIODevice::Text)){
+		m_stream.setDevice(&m_buffer);
 
-	m_stream.setDevice(&m_buffer);
+		SerializeXmlHeader();
 
-	SerializeXmlHeader();
-
-	if (serializeHeader){
-		SerializeAcfHeader();
+		if (serializeHeader){
+			SerializeAcfHeader();
+		}
 	}
 }
 
@@ -31,9 +31,20 @@ CXmlStringWriteArchive::~CXmlStringWriteArchive()
 
 const QByteArray& CXmlStringWriteArchive::GetString() const
 {
+	const_cast<CXmlStringWriteArchive*>(this)->Flush();
+
 	return m_buffer.data();
 }
 
+
+void CXmlStringWriteArchive::Flush()
+{
+	BaseClass::Flush();
+
+	if (m_buffer.isOpen()){
+		m_buffer.close();
+	}
+}
 
 
 } // namespace iser

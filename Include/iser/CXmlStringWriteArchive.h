@@ -29,7 +29,16 @@ public:
 				const CArchiveTag& rootTag = s_acfRootTag);
 	virtual ~CXmlStringWriteArchive();
 
+	/**
+		Close the archive and get the created XML string.
+	*/
 	virtual const QByteArray& GetString() const;
+
+protected:
+	/**
+		Force internal buffer to flush.
+	*/
+	void Flush();
 
 private:
 	QBuffer m_buffer;

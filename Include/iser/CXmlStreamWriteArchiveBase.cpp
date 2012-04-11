@@ -23,7 +23,7 @@ CXmlStreamWriteArchiveBase::CXmlStreamWriteArchiveBase(const IVersionInfo* versi
 
 bool CXmlStreamWriteArchiveBase::WriteString(const QByteArray& value)
 {
-	m_stream << value.constData();
+	m_stream << value;
 
 	return m_stream.status() == QTextStream::Ok;
 }

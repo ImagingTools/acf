@@ -13,14 +13,14 @@ CXmlStringReadArchive::CXmlStringReadArchive(
 {
 	m_buffer.setData(inputString);
 
-	m_buffer.open(QIODevice::ReadOnly | QIODevice::Text);
+	if (m_buffer.open(QIODevice::ReadOnly | QIODevice::Text)){
+		m_stream.setDevice(&m_buffer);
 
-	m_stream.setDevice(&m_buffer);
+		SerializeXmlHeader();
 
-	SerializeXmlHeader();
-
-	if (serializeHeader){
-		SerializeAcfHeader();
+		if (serializeHeader){
+			SerializeAcfHeader();
+		}
 	}
 }
 
