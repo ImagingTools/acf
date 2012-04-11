@@ -41,7 +41,7 @@ protected:
 private:
 	static void SolveOpen(double* d,int count);
 
-	mutable ::QVector<CSplineSegment> m_segments;
+	mutable QVector<CSplineSegment> m_segments;
 	mutable bool m_isInvalidated;
 };
 
