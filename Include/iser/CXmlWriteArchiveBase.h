@@ -31,10 +31,16 @@ public:
 protected:
 	CXmlWriteArchiveBase(const IVersionInfo* versionInfoPtr, const CArchiveTag& rootTag);
 
-	bool Flush();
 	bool MakeIndent();
 
-	bool SerializeXmlHeader();
+	/**
+		Write XML header.
+	*/
+	bool WriteXmlHeader();
+	/**
+		Write XML footer.
+	*/
+	bool WriteXmlFooter();
 
 	// abstract methods
 	virtual bool WriteString(const QByteArray& value) = 0;
@@ -43,7 +49,6 @@ private:
 	CArchiveTag m_rootTag;
 
 	int m_indent;
-	bool m_isHeaderSerialized;
 
 	bool m_isSeparatorNeeded;
 };

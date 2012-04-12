@@ -13,11 +13,23 @@ CXmlFileReadArchive::CXmlFileReadArchive(const QString& filePath, bool serialize
 	if (m_file.open(QIODevice::ReadOnly | QIODevice::Text)){
 		m_stream.setDevice(&m_file);
 
-		SerializeXmlHeader();
+		ReadXmlHeader();
 
 		if (serializeHeader){
 			SerializeAcfHeader();
 		}
+	}
+}
+
+
+CXmlFileReadArchive::~CXmlFileReadArchive()
+{
+	if (m_file.isOpen()){
+		ReadXmlFooter();
+
+		m_stream.setDevice(NULL);
+
+		m_file.close();
 	}
 }
 

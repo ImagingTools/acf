@@ -32,6 +32,7 @@ public:
 	typedef CFileArchiveInfo BaseClass2;
 
 	explicit CXmlFileReadArchive(const QString& filePath, bool serializeHeader = true, const CArchiveTag& rootTag = s_acfRootTag);
+	virtual ~CXmlFileReadArchive();
 
 protected:
 	// reimplemented (istd::ILogger)

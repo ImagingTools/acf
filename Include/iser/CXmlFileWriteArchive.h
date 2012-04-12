@@ -6,7 +6,7 @@
 #include <QtCore/QFile>
 
 // ACF includes
-#include "iser/CXmlStreamWriteArchiveBase.h"
+#include "iser/CXmlWriteArchiveBase.h"
 #include "iser/CFileArchiveInfo.h"
 
 
@@ -23,11 +23,11 @@ namespace iser
 	\ingroup Persistence
 */
 class CXmlFileWriteArchive:
-			public CXmlStreamWriteArchiveBase,
+			public CXmlWriteArchiveBase,
 			public CFileArchiveInfo
 {
 public:
-	typedef CXmlStreamWriteArchiveBase BaseClass;
+	typedef CXmlWriteArchiveBase BaseClass;
 	typedef CFileArchiveInfo BaseClass2;
 
 	explicit CXmlFileWriteArchive(
@@ -37,7 +37,12 @@ public:
 				const CArchiveTag& rootTag = s_acfRootTag);
 	virtual ~CXmlFileWriteArchive();
 
+protected:
+	// reimplemented (iser::CXmlWriteArchiveBase)
+	virtual bool WriteString(const QByteArray& value);
+
 private:
+	QTextStream m_stream;
 	QFile m_file;
 };
 

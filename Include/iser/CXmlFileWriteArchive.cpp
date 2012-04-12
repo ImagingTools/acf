@@ -17,7 +17,7 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 	if (m_file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)){
 		m_stream.setDevice(&m_file);
 
-		SerializeXmlHeader();
+		WriteXmlHeader();
 
 		if (serializeHeader){
 			SerializeAcfHeader();
@@ -28,8 +28,23 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 
 CXmlFileWriteArchive::~CXmlFileWriteArchive()
 {
-	m_stream.setDevice(NULL);
-	m_file.close();
+	if (m_file.isOpen()){
+		WriteXmlFooter();
+
+		m_file.close();
+	}
+}
+
+
+// protected methods
+
+// reimplemented (iser::CXmlWriteArchiveBase)
+
+bool CXmlFileWriteArchive::WriteString(const QByteArray& value)
+{
+	m_stream << value;
+
+	return m_stream.status() == QTextStream::Ok;
 }
 
 

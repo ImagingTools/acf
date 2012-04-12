@@ -14,7 +14,7 @@ CXmlStringWriteArchive::CXmlStringWriteArchive(
 	if (m_buffer.open(QIODevice::WriteOnly | QIODevice::Text)){
 		m_stream.setDevice(&m_buffer);
 
-		SerializeXmlHeader();
+		WriteXmlHeader();
 
 		if (serializeHeader){
 			SerializeAcfHeader();
@@ -25,25 +25,39 @@ CXmlStringWriteArchive::CXmlStringWriteArchive(
 
 CXmlStringWriteArchive::~CXmlStringWriteArchive()
 {
-	m_stream.setDevice(NULL);
+	EnsureArchiveClosed();
 }
 
 
 const QByteArray& CXmlStringWriteArchive::GetString() const
 {
-	const_cast<CXmlStringWriteArchive*>(this)->Flush();
+	const_cast<CXmlStringWriteArchive*>(this)->EnsureArchiveClosed();
 
 	return m_buffer.data();
 }
 
 
-void CXmlStringWriteArchive::Flush()
-{
-	BaseClass::Flush();
+// protected methods
 
+void CXmlStringWriteArchive::EnsureArchiveClosed()
+{
 	if (m_buffer.isOpen()){
+		BaseClass::WriteXmlFooter();
+		
+		m_stream.setDevice(NULL);
+
 		m_buffer.close();
 	}
+}
+
+
+// reimplemented (iser::CXmlWriteArchiveBase)
+
+bool CXmlStringWriteArchive::WriteString(const QByteArray& value)
+{
+	m_stream << value;
+
+	return m_stream.status() == QTextStream::Ok;
 }
 
 
