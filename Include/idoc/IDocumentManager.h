@@ -13,8 +13,7 @@
 // ACF includes
 #include "istd/IChangeable.h"
 
-#include "imod/IUndoManager.h"
-
+#include "idoc/IUndoManager.h"
 #include "idoc/IDocumentTypesInfo.h"
 
 
@@ -74,7 +73,7 @@ public:
 	/**
 		Return undo mananger for document \c documenPtr.
 	*/
-	virtual imod::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const = 0;
+	virtual idoc::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const = 0;
 
 	/**
 		Get number of opened documents.

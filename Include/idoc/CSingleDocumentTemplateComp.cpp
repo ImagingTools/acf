@@ -4,8 +4,9 @@
 #include "istd/TDelPtr.h"
 
 #include "imod/IModel.h"
-#include "imod/CSerializedUndoManager.h"
 #include "imod/TModelWrap.h"
+
+#include "idoc/IUndoManager.h"
 
 
 namespace idoc
@@ -66,16 +67,18 @@ istd::IPolymorphic* CSingleDocumentTemplateComp::CreateView(
 }
 
 
-imod::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
+idoc::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
 {
 	if (IsDocumentTypeSupported(documentTypeId)){
 		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(documentPtr);
 		imod::IModel* modelPtr = CompCastPtr<imod::IModel>(documentPtr);
 		if ((serializablePtr != NULL) && (modelPtr != NULL)){
-			istd::TDelPtr<imod::TModelWrap<imod::CSerializedUndoManager> > undoManagerModelPtr(new imod::TModelWrap<imod::CSerializedUndoManager>);
-			if (		undoManagerModelPtr.IsValid() &&
-						modelPtr->AttachObserver(undoManagerModelPtr.GetPtr())){
-				return undoManagerModelPtr.PopPtr();
+			istd::TDelPtr< idoc::IUndoManager > undoManagerModelPtr(m_undoManagerCompFact.CreateInstance());
+			if (undoManagerModelPtr.IsValid()){
+				imod::IObserver* observerPtr = m_undoManagerObserverCompFact.ExtractInterface(undoManagerModelPtr.GetPtr());
+				if ((observerPtr != NULL) && modelPtr->AttachObserver(observerPtr)){
+					return undoManagerModelPtr.PopPtr();
+				}
 			}
 		}
 	}

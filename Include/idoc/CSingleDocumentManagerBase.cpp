@@ -18,7 +18,7 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentManager)
 
-imod::IUndoManager* CSingleDocumentManagerBase::GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const
+idoc::IUndoManager* CSingleDocumentManagerBase::GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const
 {
 	if (documentPtr == m_documentPtr.GetPtr()){
 		return m_undoManagerPtr.GetPtr();
@@ -332,7 +332,7 @@ bool CSingleDocumentManagerBase::OpenDocument(
 		if (NewDocument(documentTypeId, createView, viewTypeId)){
 			I_ASSERT(m_documentPtr.IsValid());
 
-			istd::CChangeNotifier documentNotifier(m_documentPtr.GetPtr(), imod::IUndoManager::CF_NO_UNDO);
+			istd::CChangeNotifier documentNotifier(m_documentPtr.GetPtr(), istd::IChangeable::CF_NO_UNDO);
 
 			iser::IFileLoader* loaderPtr = documentTemplatePtr->GetFileLoader(documentTypeId);
 			if (		(loaderPtr != NULL) &&

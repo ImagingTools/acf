@@ -36,7 +36,11 @@ public:
 		/**
 			Change flag indicate that this change was delegated (is indirect) for example from agregated object.
 		*/
-		CF_DELEGATED = 1 << 3
+		CF_DELEGATED = 1 << 3,
+		/**
+			Used to avoid adding of changes to undo list.
+		*/
+		CF_NO_UNDO = 1 << 5
 	};
 
 	/**

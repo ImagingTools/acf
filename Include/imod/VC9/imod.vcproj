@@ -181,10 +181,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSerializedUndoManager.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSingleModelObserverBase.cpp"
 				>
 			</File>
@@ -214,10 +210,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSerializedUndoManager.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSingleModelObserverBase.h"
 				>
 			</File>
@@ -239,10 +231,6 @@
 			</File>
 			<File
 				RelativePath="..\IObserver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IUndoManager.h"
 				>
 			</File>
 			<File

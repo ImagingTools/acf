@@ -2,16 +2,17 @@
 #define idoc_IDocumentTemplate_included
 
 
+// ACF includes
 #include "istd/IChangeable.h"
 #include <QtCore/QString>
 
 #include "iser/IFileLoader.h"
 
 #include "imod/IObserver.h"
-#include "imod/IUndoManager.h"
 
 #include "ibase/ICommand.h"
 
+#include "idoc/IUndoManager.h"
 #include "idoc/IDocumentTypesInfo.h"
 #include "idoc/IDocumentStateComparator.h"
 
@@ -68,7 +69,7 @@ public:
 		\param	documentPtr	pointer to document object.
 		\return	pointer to created instance of undo manager or NULL, if creating of undo manager was impossible.
 	*/
-	virtual imod::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const = 0;
+	virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const = 0;
 
 	/**
 		Creates a document state comparator.

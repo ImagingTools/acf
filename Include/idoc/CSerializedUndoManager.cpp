@@ -1,4 +1,4 @@
-#include "imod/CSerializedUndoManager.h"
+#include "idoc/CSerializedUndoManager.h"
 
 
 // ACF includes
@@ -7,7 +7,7 @@
 #include "iser/CMemoryReadArchive.h"
 
 
-namespace imod
+namespace idoc
 {
 
 
@@ -16,7 +16,7 @@ CSerializedUndoManager::CSerializedUndoManager()
 }
 
 
-// reimplemented (imod::IUndoManager)
+// reimplemented (idoc::IUndoManager)
 
 bool CSerializedUndoManager::IsUndoAvailable() const
 {
@@ -41,7 +41,7 @@ bool CSerializedUndoManager::DoUndo()
 {
 	UndoArchivePtr redoArchivePtr(new iser::CMemoryWriteArchive());
 	if (IsUndoAvailable() && redoArchivePtr.IsValid()){
-		istd::TChangeNotifier<iser::ISerializable> objectPtr(GetObjectPtr(), CF_NO_UNDO);
+		istd::TChangeNotifier<iser::ISerializable> objectPtr(GetObjectPtr(), istd::IChangeable::CF_NO_UNDO);
 		if (objectPtr.IsValid()){
 			if (objectPtr->Serialize(*redoArchivePtr)){
 				m_redoList.push_back(UndoArchivePtr());
@@ -69,7 +69,7 @@ bool CSerializedUndoManager::DoRedo()
 {
 	UndoArchivePtr undoArchivePtr(new iser::CMemoryWriteArchive());
 	if (IsRedoAvailable() && undoArchivePtr.IsValid()){
-		istd::TChangeNotifier<iser::ISerializable> objectPtr(GetObjectPtr(), CF_NO_UNDO);
+		istd::TChangeNotifier<iser::ISerializable> objectPtr(GetObjectPtr(), istd::IChangeable::CF_NO_UNDO);
 		if (objectPtr.IsValid()){
 			if (objectPtr->Serialize(*undoArchivePtr)){
 				m_undoList.push_back(UndoArchivePtr());
@@ -101,7 +101,7 @@ void CSerializedUndoManager::BeforeUpdate(imod::IModel* modelPtr, int updateFlag
 {
 	BaseClass::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);
 
-	if (((updateFlags & CF_NO_UNDO) == 0) && !m_beginStateArchivePtr.IsValid()){
+	if (((updateFlags & istd::IChangeable::CF_NO_UNDO) == 0) && !m_beginStateArchivePtr.IsValid()){
 		iser::ISerializable* objectPtr = GetObjectPtr();
 		if (objectPtr != NULL){
 			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
@@ -118,7 +118,7 @@ void CSerializedUndoManager::BeforeUpdate(imod::IModel* modelPtr, int updateFlag
 
 void CSerializedUndoManager::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	if (((updateFlags & CF_NO_UNDO) == 0) && m_beginStateArchivePtr.IsValid()){
+	if (((updateFlags & istd::IChangeable::CF_NO_UNDO) == 0) && m_beginStateArchivePtr.IsValid()){
 		iser::ISerializable* objectPtr = GetObjectPtr();
 		if (objectPtr != NULL){
 			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
@@ -139,6 +139,6 @@ void CSerializedUndoManager::AfterUpdate(imod::IModel* modelPtr, int updateFlags
 }
 
 
-} // namespace imod
+} // namespace idoc
 
 

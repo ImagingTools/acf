@@ -1,5 +1,5 @@
-#ifndef imod_CSerializedUndoManager_included
-#define imod_CSerializedUndoManager_included
+#ifndef idoc_CSerializedUndoManager_included
+#define idoc_CSerializedUndoManager_included
 
 
 // Qt includes
@@ -11,11 +11,12 @@
 #include "iser/ISerializable.h"
 #include "iser/CMemoryWriteArchive.h"
 
-#include "imod/IUndoManager.h"
 #include "imod/TSingleModelObserverBase.h"
 
+#include "idoc/IUndoManager.h"
 
-namespace imod
+
+namespace idoc
 {
 
 
@@ -23,7 +24,7 @@ namespace imod
 	Implements multi level UNDO mechanism based on storing complete objects state at each step using serialization.
 	To trace if UNDO is available you can use ACF model/observer.
 */
-class CSerializedUndoManager: public TSingleModelObserverBase<iser::ISerializable>, virtual public IUndoManager
+class CSerializedUndoManager: public imod::TSingleModelObserverBase<iser::ISerializable>, virtual public IUndoManager
 {
 public:
 	/**
@@ -32,7 +33,7 @@ public:
 	*/
 	CSerializedUndoManager();
 
-	// reimplemented (imod::IUndoManager)
+	// reimplemented (idoc::IUndoManager)
 	virtual bool IsUndoAvailable() const;
 	virtual bool IsRedoAvailable() const;
 	virtual void ResetUndo();
@@ -54,9 +55,9 @@ private:
 };
 
 
-} // namespace imod
+} // namespace idoc
 
 
-#endif // !imod_CSerializedUndoManager_included
+#endif // !idoc_CSerializedUndoManager_included
 
 

@@ -1,11 +1,11 @@
-#ifndef imod_IUndoManager_included
-#define imod_IUndoManager_included
+#ifndef idoc_IUndoManager_included
+#define idoc_IUndoManager_included
 
 
 #include "istd/IChangeable.h"
 
 
-namespace imod
+namespace idoc
 {
 
 
@@ -15,13 +15,6 @@ namespace imod
 class IUndoManager: virtual public istd::IChangeable
 {
 public:
-	enum ChangeFlags{
-		/**
-			Used to avoid adding of changes to undo list.
-		*/
-		CF_NO_UNDO = 1 << 5
-	};
-
 	/**
 		Check, if UNDO operation is available.
 	*/
@@ -45,9 +38,9 @@ public:
 };
 
 
-} // namespace imod
+} // namespace idoc
 
 
-#endif // !imod_IUndoManager_included
+#endif // !idoc_IUndoManager_included
 
 

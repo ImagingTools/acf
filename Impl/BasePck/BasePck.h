@@ -2,9 +2,7 @@
 #define BasePck_included
 
 
-#include "imod/IUndoManager.h"
 #include "imod/IObserver.h"
-#include "imod/CSerializedUndoManager.h"
 
 #include "iser/CXmlFileReadArchive.h"
 #include "iser/CXmlFileWriteArchive.h"
@@ -18,6 +16,7 @@
 #include "idoc/CCompositeDocumentTemplateComp.h"
 #include "idoc/CDocumentManagerListenerComp.h"
 #include "idoc/CSelectedDocModelBinderComp.h"
+#include "idoc/CSerializedUndoManager.h"
 
 #include "ibase/CComposedLoaderComp.h"
 #include "ibase/CTextFileLoaderComp.h"
@@ -79,10 +78,6 @@ namespace BasePck
 {
 
 
-typedef icomp::TMakeComponentWrap<
-			imod::CSerializedUndoManager,
-			imod::IUndoManager,
-			imod::IObserver> SerializedUndoManager;
 typedef ibase::CFileTypeInfoComp FileTypeInfo;
 typedef ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> XmlFileSerializer;
 typedef ibase::TFileSerializerComp<iser::CFileReadArchive, iser::CFileWriteArchive> BinaryFileSerializer;
@@ -122,6 +117,11 @@ typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
 typedef icomp::TModelCompWrap<idoc::CDocumentManagerListenerComp> DocumentManagerListener;
 typedef idoc::CSelectedDocModelBinderComp SelectedDocModelBinder;
+typedef icomp::TMakeComponentWrap<
+			imod::TModelWrap<idoc::CSerializedUndoManager>,
+			idoc::IUndoManager,
+			imod::IObserver,
+			imod::IModel> SerializedUndoManager;
 
 typedef icomp::TModelCompWrap<i2d::CPosition2dComp> Position2d;
 typedef icomp::TModelCompWrap<i2d::CRectangleComp> Rectangle;

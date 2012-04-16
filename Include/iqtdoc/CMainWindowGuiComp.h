@@ -8,12 +8,12 @@
 
 // ACF includes
 #include "imod/IModel.h"
-#include "imod/IUndoManager.h"
 #include "imod/TSingleModelObserverBase.h"
 
 #include "ibase/IApplicationInfo.h"
 #include "ibase/ICommandsProvider.h"
 
+#include "idoc/IUndoManager.h"
 #include "idoc/IDocumentManager.h"
 
 #include "iqtgui/CSimpleMainWindowGuiComp.h"
@@ -163,10 +163,10 @@ private:
 		bool m_isOpenCommand;
 	};
 
-	class ActiveUndoManager: public imod::TSingleModelObserverBase<imod::IUndoManager>
+	class ActiveUndoManager: public imod::TSingleModelObserverBase<idoc::IUndoManager>
 	{
 	public:
-		typedef imod::TSingleModelObserverBase<imod::IUndoManager> BaseClass;
+		typedef imod::TSingleModelObserverBase<idoc::IUndoManager> BaseClass;
 
 		ActiveUndoManager(CMainWindowGuiComp& parent);
 		

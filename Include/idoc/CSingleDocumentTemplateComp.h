@@ -30,6 +30,8 @@ public:
 		I_ASSIGN_TO(m_modelCompFact, m_documentCompFact, true);
 		I_ASSIGN(m_viewCompFact, "ViewFactory", "Create of document GUI", true, "ViewFactory");
 		I_ASSIGN(m_fileLoaderCompPtr, "DocumentLoader", "Provide document loading and saving", true, "DocumentLoader");
+		I_ASSIGN(m_undoManagerCompFact, "UndoManager", "Undo manager providing undo functionality", false, "UndoManager");
+		I_ASSIGN_TO(m_undoManagerObserverCompFact, m_undoManagerCompFact, true);
 		I_ASSIGN(m_isNewSupportedAttrPtr, "IsNewSupported", "Template supports the new operation", true, false);
 		I_ASSIGN(m_isEditSupportedAttrPtr, "IsEditSupported", "Template supports the edit operation", true, false);
 	I_END_COMPONENT;
@@ -41,7 +43,7 @@ public:
 				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,
 				const QByteArray& viewTypeId = QByteArray()) const;
-	imod::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const;
+	idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const;
 
 protected:
 	/**
@@ -66,6 +68,8 @@ private:
 	I_FACT(imod::IModel, m_modelCompFact);
 	I_FACT(imod::IObserver, m_viewCompFact);
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
+	I_FACT(idoc::IUndoManager, m_undoManagerCompFact);
+	I_FACT(imod::IObserver, m_undoManagerObserverCompFact);
 
 	int m_featureFlags;
 };

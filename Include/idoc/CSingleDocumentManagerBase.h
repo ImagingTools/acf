@@ -27,7 +27,7 @@ class CSingleDocumentManagerBase:
 {
 public:
 	// reimplemented (idoc::IDocumentManager)
-	virtual imod::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const;
+	virtual idoc::IUndoManager* GetUndoManagerForDocument(const istd::IChangeable* documentPtr) const;
 	virtual int GetDocumentsCount() const;
 	virtual istd::IChangeable& GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr = NULL) const;
 	virtual int GetViewsCount(int documentIndex) const;
@@ -110,7 +110,7 @@ private:
 	QByteArray m_documentTypeId;
 	QByteArray m_viewTypeId;
 	istd::TDelPtr<istd::IChangeable> m_documentPtr;
-	istd::TDelPtr<imod::IUndoManager> m_undoManagerPtr;
+	istd::TDelPtr<idoc::IUndoManager> m_undoManagerPtr;
 	istd::TDelPtr<IDocumentStateComparator> m_stateComparatorPtr;
 	istd::TDelPtr<istd::IPolymorphic> m_viewPtr;
 

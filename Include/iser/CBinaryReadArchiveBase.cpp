@@ -4,7 +4,7 @@
 // Qt includes
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QtCore/QVarLengthArray>
 
 // ACF includes
 #include "iser/CArchiveTag.h"
@@ -159,12 +159,12 @@ bool CBinaryReadArchiveBase::Process(QByteArray& value)
 				return false;
 			}
 
-			QVector<char> buffer(stringLength + 1, 0);
+			QVarLengthArray<char> buffer(stringLength);
 
-			retVal = ProcessData(&buffer[0], stringLength * int(sizeof(char)));	
+			retVal = ProcessData(buffer.data(), stringLength * int(sizeof(char)));	
 
 			if (retVal){
-				value = QByteArray(&buffer[0]);
+				value = QByteArray(buffer.constData(), stringLength);
 			}
 		}
 		else {
@@ -198,12 +198,12 @@ bool CBinaryReadArchiveBase::Process(QString& value)
 				return false;
 			}
 
-			QVector<wchar_t> buffer(stringLength + 1, 0);
+			QVarLengthArray<QChar> buffer(stringLength);
 
-			retVal = ProcessData(&buffer[0], stringLength * int(sizeof(wchar_t)));	
+			retVal = ProcessData(buffer.data(), stringLength * int(sizeof(QChar)));	
 
 			if (retVal){
-				value = QString::fromStdWString(std::wstring(&buffer[0]));
+				value = QString(buffer.constData(), stringLength);
 			}
 		}
 		else {

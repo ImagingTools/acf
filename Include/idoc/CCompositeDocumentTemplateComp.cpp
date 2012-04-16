@@ -187,7 +187,7 @@ istd::IPolymorphic* CCompositeDocumentTemplateComp::CreateView(
 }
 
 
-imod::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
+idoc::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const
 {
 	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
 	if (iter != m_idToTemplateMap.end()){

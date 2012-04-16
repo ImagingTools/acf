@@ -181,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSerializedUndoManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSingleDocumentManagerBase.cpp"
 				>
 			</File>
@@ -219,6 +223,10 @@
 			</File>
 			<File
 				RelativePath="..\CSerializedStateComparator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSerializedUndoManager.h"
 				>
 			</File>
 			<File
@@ -267,6 +275,10 @@
 			</File>
 			<File
 				RelativePath="..\IHelpViewer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IUndoManager.h"
 				>
 			</File>
 		</Filter>

@@ -295,7 +295,7 @@ bool CMainWindowGuiComp::HasDocumentTemplate() const
 
 void CMainWindowGuiComp::UpdateUndoMenu()
 {
-	imod::IUndoManager* undoManagerPtr = m_activeUndoManager.GetObjectPtr();
+	idoc::IUndoManager* undoManagerPtr = m_activeUndoManager.GetObjectPtr();
 	if (undoManagerPtr != NULL){
 		m_undoCommand.SetEnabled(undoManagerPtr->IsUndoAvailable());
 		m_redoCommand.SetEnabled(undoManagerPtr->IsRedoAvailable());
