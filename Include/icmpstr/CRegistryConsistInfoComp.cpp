@@ -144,8 +144,8 @@ bool CRegistryConsistInfoComp::IsElementValid(
 			}
 			else{
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-								istd::IInformation::IC_WARNING,
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+								istd::IInformationProvider::IC_WARNING,
 								MI_COMPONENT_INACTIVE,
 								tr("Element %1 uses unknown embedded composite component %2").arg(QString(elementName)).arg(QString(elementAddress.GetComponentId())),
 								tr("Element Consistency Check"),
@@ -162,8 +162,8 @@ bool CRegistryConsistInfoComp::IsElementValid(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-						istd::IInformation::IC_ERROR,
+			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+						istd::IInformationProvider::IC_ERROR,
 						MI_NO_ELEMENT_INFO,
 						tr("No element info available for %1").arg(QString(elementName)),
 						tr("Element Consistency Check"),
@@ -205,8 +205,8 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	else{
 		if (!ignoreUndef){
 			if (reasonConsumerPtr != NULL){
-				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-							istd::IInformation::IC_WARNING,
+				reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+							istd::IInformationProvider::IC_WARNING,
 							MI_COMPONENT_INACTIVE,
 							tr("Element %1 uses inactive component %2").arg(QString(elementName)).arg(elementInfo.address.ToString()),
 							tr("Element Consistency Check"),
@@ -241,8 +241,8 @@ bool CRegistryConsistInfoComp::IsElementWithInfoValid(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-						istd::IInformation::IC_WARNING,
+			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+						istd::IInformationProvider::IC_WARNING,
 						MI_COMPONENT_INACTIVE,
 						tr("Element %1 is not loaded").arg(QString(elementName)),
 						tr("Element Consistency Check"),
@@ -278,8 +278,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 				if (attrInfoPtr != NULL){
 					if (attrMetaInfoPtr->GetAttributeTypeName() != attrInfoPtr->attributeTypeName){
 						if (reasonConsumerPtr != NULL){
-							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-										istd::IInformation::IC_ERROR,
+							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+										istd::IInformationProvider::IC_ERROR,
 										MI_BAD_ATTRIBUTE_TYPE,
 										tr("Attribute %1 in %2 is defined as %3, but in registry it has type %4")
 													.arg(QString(attributeName))
@@ -309,8 +309,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 					else if (	attrInfoPtr->exportId.isEmpty() &&
 								((attrMetaInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0)){
 						if (reasonConsumerPtr != NULL){
-							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-										istd::IInformation::IC_ERROR,
+							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+										istd::IInformationProvider::IC_ERROR,
 										MI_REF_NOT_RESOLVED,
 										tr("Reference or factory %1 in %2 cannot be undefined")
 													.arg(QString(attributeName))
@@ -324,8 +324,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 				}
 				else if ((attrMetaInfoPtr->GetAttributeFlags() & icomp::IAttributeStaticInfo::AF_NULLABLE) == 0){
 					if (reasonConsumerPtr != NULL){
-						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-									istd::IInformation::IC_ERROR,
+						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+									istd::IInformationProvider::IC_ERROR,
 									MI_REF_NOT_RESOLVED,
 									tr("Reference or factory %1 in %2 cannot be undefined")
 												.arg(QString(attributeName))
@@ -339,8 +339,8 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			}
 			else if (!ignoreUndef){
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-								istd::IInformation::IC_ERROR,
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+								istd::IInformationProvider::IC_ERROR,
 								MI_UNDEF_ATTRIBUTE,
 								tr("Attribute %1 in %2 not exists in component specification")
 											.arg(QString(attributeName))
@@ -538,8 +538,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			const icomp::IElementStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedElementAddress);
 			if (pointedMetaInfoPtr == NULL){
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-								istd::IInformation::IC_ERROR,
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
 								tr("Reference or factory '%1' in '%2' is set to %3, but it cannot be resolved")
 											.arg(QString(attributeName))
@@ -557,8 +557,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 
 				if (pointedMetaInfoPtr == NULL){
 					if (reasonConsumerPtr != NULL){
-						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-									istd::IInformation::IC_ERROR,
+						reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+									istd::IInformationProvider::IC_ERROR,
 									MI_COMPONENT_NOT_FOUND,
 									tr("Reference or factory '%1' in '%2' is set to %3, but its subelement cannot be found")
 												.arg(QString(attributeName))
@@ -596,8 +596,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			}
 			else{
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-								istd::IInformation::IC_ERROR,
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
 								tr("Reference or factory '%1' in '%2' uses embedded type '%3', but this type is undefined")
 											.arg(QString(attributeName))
@@ -613,8 +613,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 	}
 	else{
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-						istd::IInformation::IC_ERROR,
+			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+						istd::IInformationProvider::IC_ERROR,
 						MI_COMPONENT_NOT_FOUND,
 						tr("Reference or factory '%1' in '%2' contains '%3', but this element doesn't exist")
 									.arg(QString(attributeName))
@@ -662,8 +662,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 						(supportedInterfaces.find(nonConstInterfaceName) != supportedInterfaces.end());
 			if (!isInterfaceCompatible){
 				if (reasonConsumerPtr != NULL){
-					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-								istd::IInformation::IC_ERROR,
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+								istd::IInformationProvider::IC_ERROR,
 								MI_WRONG_INTERFACE,
 								tr("Reference or factory '%1' in '%2' point at '%3', but it doesn't implement interface %4")
 											.arg(QString(attributeName))
@@ -680,8 +680,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 	}
 	else if (!ignoreUndef){
 		if (reasonConsumerPtr != NULL){
-			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformation>(new ibase::CMessage(
-						istd::IInformation::IC_WARNING,
+			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+						istd::IInformationProvider::IC_WARNING,
 						MI_COMPOSITE_FOUND,
 						tr("Reference or factory '%1' in '%2' point at '%3', but it is not accessible in actual configuration")
 									.arg(QString(attributeName))

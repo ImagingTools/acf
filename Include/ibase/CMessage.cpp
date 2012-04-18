@@ -17,7 +17,7 @@ CMessage::CMessage()
 
 
 CMessage::CMessage(
-			istd::IInformation::InformationCategory category,
+			istd::IInformationProvider::InformationCategory category,
 			int id,
 			const QString& text,
 			const QString& source,
@@ -32,7 +32,7 @@ CMessage::CMessage(
 }
 
 
-void CMessage::SetCategory(istd::IInformation::InformationCategory category)
+void CMessage::SetCategory(istd::IInformationProvider::InformationCategory category)
 {
 	m_category = category;
 }
@@ -64,7 +64,7 @@ bool CMessage::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(categoryTag);
 
 	if (!isStoring){
-		m_category = istd::IInformation::InformationCategory(category);
+		m_category = istd::IInformationProvider::InformationCategory(category);
 	}
 
 	static iser::CArchiveTag textTag("Text", "Message text");

@@ -513,6 +513,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IVisualStatusProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TDesignerBasicGui.h"
 				>
 			</File>

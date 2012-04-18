@@ -47,6 +47,7 @@ public:
 		I_ASSIGN(m_diagnosticNameAttrPtr, "DiagnosticName", "Name of this supplier for diagnostic, if it is not set, no diagnostic log message will be send", false, "");
 		I_ASSIGN(m_paramsSetCompPtr, "ParamsSet", "Parameters set describing model parameter used to produce results", false, "ParamsSet");
 		I_ASSIGN_TO(m_paramsSetModelCompPtr, m_paramsSetCompPtr, false);
+		I_ASSIGN_MULTI_0(m_additionalTriggerInputsCompPtr, "AdditionalTriggerInputs", "Additional observed trigger inputs, the supplier will be invalidated if some input signal the change", false);
 	I_END_COMPONENT;
 
 	TSupplierCompWrap();
@@ -106,6 +107,7 @@ private:
 	I_ATTR(QString, m_diagnosticNameAttrPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
+	I_MULTIREF(imod::IModel, m_additionalTriggerInputsCompPtr);
 
 	istd::TDelPtr<Product> m_productPtr;
 	int m_workStatus;
@@ -229,6 +231,14 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 
 	if (m_paramsSetModelCompPtr.IsValid()){
 		m_paramsSetModelCompPtr->AttachObserver(&m_inputObserver);
+	}
+
+	int inputsCount = m_additionalTriggerInputsCompPtr.GetCount();
+	for (int i = 0; i < inputsCount; ++i){
+		imod::IModel* inputModelPtr = m_additionalTriggerInputsCompPtr[i];
+		if (inputModelPtr != NULL){
+			RegisterSupplierInput(inputModelPtr);
+		}
 	}
 
 	m_workStatus = ISupplier::WS_NONE;

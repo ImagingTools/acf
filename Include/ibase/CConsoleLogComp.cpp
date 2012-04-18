@@ -5,7 +5,7 @@
 #include <iostream>
 
 // ACF includes
-#include "istd/IInformation.h"
+#include "istd/IInformationProvider.h"
 
 
 namespace ibase

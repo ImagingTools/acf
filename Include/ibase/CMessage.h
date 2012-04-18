@@ -6,7 +6,7 @@
 #include <QtCore/QString>
 
 // ACF includes
-#include "istd/IInformation.h"
+#include "istd/IInformationProvider.h"
 
 #include "iser/ISerializable.h"
 
@@ -16,37 +16,37 @@ namespace ibase
 
 
 /**
-	Basic implementation of the istd::IInformation interface
+	Basic implementation of the istd::IInformationProvider interface
 */
 class CMessage:
-			virtual public istd::IInformation,
+			virtual public istd::IInformationProvider,
 			virtual public iser::ISerializable
 {
 public:
 	CMessage();
-	CMessage(	istd::IInformation::InformationCategory category,
+	CMessage(	istd::IInformationProvider::InformationCategory category,
 				int id,
 				const QString& text,
 				const QString& source,
 				int flags = 0);
 
-	virtual void SetCategory(istd::IInformation::InformationCategory category);
+	virtual void SetCategory(istd::IInformationProvider::InformationCategory category);
 	virtual void SetText(const QString& text);
 	virtual void SetSource(const QString& source);
 
-	// reimplemented (istd::IInformation)
-	virtual QDateTime GetTimeStamp() const;
+	// reimplemented (istd::IInformationProvider)
+	virtual QDateTime GetInformationTimeStamp() const;
 	virtual InformationCategory GetInformationCategory() const;
 	virtual int GetInformationId() const;
 	virtual QString GetInformationDescription() const;
-	virtual QString GetSource() const;
-	virtual int GetFlags() const;
+	virtual QString GetInformationSource() const;
+	virtual int GetInformationFlags() const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	istd::IInformation::InformationCategory m_category;
+	istd::IInformationProvider::InformationCategory m_category;
 	int m_id;
 	QString m_text;
 	QString m_source;
@@ -58,15 +58,15 @@ protected:
 
 // inline methods
 
-// reimplemented (istd::IInformation)
+// reimplemented (istd::IInformationProvider)
 
-inline QDateTime CMessage::GetTimeStamp() const
+inline QDateTime CMessage::GetInformationTimeStamp() const
 {
 	return m_timeStamp;
 }
 
 
-inline istd::IInformation::InformationCategory CMessage::GetInformationCategory() const
+inline istd::IInformationProvider::InformationCategory CMessage::GetInformationCategory() const
 {
 	return m_category;
 }
@@ -84,13 +84,13 @@ inline QString CMessage::GetInformationDescription() const
 }
 
 
-inline QString CMessage::GetSource() const
+inline QString CMessage::GetInformationSource() const
 {
 	return m_source;
 }
 
 
-inline int CMessage::GetFlags() const
+inline int CMessage::GetInformationFlags() const
 {
 	return m_flags;
 }

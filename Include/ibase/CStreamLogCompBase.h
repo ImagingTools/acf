@@ -34,19 +34,19 @@ public:
 	virtual bool IsMessageSupported(
 				int messageCategory = -1,
 				int messageId = -1,
-				const istd::IInformation* messagePtr = NULL) const;
+				const istd::IInformationProvider* messagePtr = NULL) const;
 	virtual void AddMessage(const MessagePtr& messagePtr);
 
 protected:
 	/**
 		Write formatted the message to the output stream.
 	*/
-	virtual void WriteMessageToStream(const istd::IInformation& message);
+	virtual void WriteMessageToStream(const istd::IInformationProvider& message);
 	
 	/**
 		Generate formatted message text for the output.
 	*/
-	virtual QString GenerateMessageText(const istd::IInformation& message) const;
+	virtual QString GenerateMessageText(const istd::IInformationProvider& message) const;
 
 	// abstract methods
 

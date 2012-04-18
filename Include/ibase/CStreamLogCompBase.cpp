@@ -5,7 +5,7 @@
 #include <QtCore/QDateTime.h>
 
 // ACF includes
-#include "istd/IInformation.h"
+#include "istd/IInformationProvider.h"
 
 
 namespace ibase
@@ -25,7 +25,7 @@ CStreamLogCompBase::CStreamLogCompBase()
 bool CStreamLogCompBase::IsMessageSupported(
 			int /*messageCategory*/,
 			int /*messageId*/,
-			const istd::IInformation* /*messagePtr*/) const
+			const istd::IInformationProvider* /*messagePtr*/) const
 {
 	return true;
 }
@@ -54,7 +54,7 @@ void CStreamLogCompBase::AddMessage(const MessagePtr& messagePtr)
 
 // protected methods
 
-void CStreamLogCompBase::WriteMessageToStream(const istd::IInformation& message)
+void CStreamLogCompBase::WriteMessageToStream(const istd::IInformationProvider& message)
 {
 	QString messageText = GenerateMessageText(message);
 	
@@ -64,12 +64,12 @@ void CStreamLogCompBase::WriteMessageToStream(const istd::IInformation& message)
 }
 
 
-QString CStreamLogCompBase::GenerateMessageText(const istd::IInformation& message) const
+QString CStreamLogCompBase::GenerateMessageText(const istd::IInformationProvider& message) const
 {
 	QString messageText = message.GetInformationDescription();
 
 	if (m_useTimeStampAttrPtr.IsValid() && *m_useTimeStampAttrPtr){
-		messageText = QObject::tr("[%1] %2").arg(message.GetTimeStamp().toString()).arg(messageText);
+		messageText = QObject::tr("[%1] %2").arg(message.GetInformationTimeStamp().toString()).arg(messageText);
 	}
 
 	return messageText;

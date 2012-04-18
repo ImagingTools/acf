@@ -7,7 +7,7 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-#include "istd/IInformation.h"
+#include "istd/IInformationProvider.h"
 
 
 namespace istd
@@ -26,7 +26,7 @@ public:
 		Default implementation retuns false.
 	*/
 	virtual bool IsLogConsumed(
-				const IInformation::InformationCategory* categoryPtr = NULL,
+				const IInformationProvider::InformationCategory* categoryPtr = NULL,
 				const int* flagsPtr = NULL) const;
 
 	/**
@@ -39,7 +39,7 @@ public:
 		\return	true, if it was possible to send this message and it is 'consumed'.
 	*/
 	virtual bool SendLogMessage(
-				IInformation::InformationCategory category,
+				IInformationProvider::InformationCategory category,
 				int id,
 				const QString& message,
 				const QString& messageSource,
@@ -50,7 +50,7 @@ protected:
 		Decorate message parts before outputting.
 	*/
 	virtual void DecorateMessage(
-				IInformation::InformationCategory category,
+				IInformationProvider::InformationCategory category,
 				int id,
 				int flags,
 				QString& message,
@@ -61,7 +61,7 @@ protected:
 // inline methods
 
 inline bool ILogger::IsLogConsumed(
-			const IInformation::InformationCategory* /*categoryPtr*/,
+			const IInformationProvider::InformationCategory* /*categoryPtr*/,
 			const int* /*flagsPtr*/) const
 {
 	return false;
@@ -69,7 +69,7 @@ inline bool ILogger::IsLogConsumed(
 
 
 inline bool ILogger::SendLogMessage(
-			IInformation::InformationCategory /*category*/,
+			IInformationProvider::InformationCategory /*category*/,
 			int /*id*/,
 			const QString& /*message*/,
 			const QString& /*messageSource*/,
@@ -82,7 +82,7 @@ inline bool ILogger::SendLogMessage(
 // protected methods
 
 inline void ILogger::DecorateMessage(
-			IInformation::InformationCategory /*category*/,
+			IInformationProvider::InformationCategory /*category*/,
 			int /*id*/,
 			int /*flags*/,
 			QString& /*message*/,

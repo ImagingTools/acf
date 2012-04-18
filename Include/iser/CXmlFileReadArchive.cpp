@@ -39,7 +39,7 @@ CXmlFileReadArchive::~CXmlFileReadArchive()
 // reimplemented (istd::ILogger)
 
 void CXmlFileReadArchive::DecorateMessage(
-			istd::IInformation::InformationCategory /*category*/,
+			istd::IInformationProvider::InformationCategory /*category*/,
 			int /*id*/,
 			int /*flags*/,
 			QString& message,

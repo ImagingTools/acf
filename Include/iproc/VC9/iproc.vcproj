@@ -198,10 +198,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IBitmapAcquisition.h"
-				>
-			</File>
-			<File
 				RelativePath="..\iproc.h"
 				>
 			</File>

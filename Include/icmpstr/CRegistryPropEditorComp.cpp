@@ -248,7 +248,7 @@ QString CRegistryPropEditorComp::ConvertToKeyword(const QString& input, const QS
 bool CRegistryPropEditorComp::TextLog::IsMessageSupported(
 			int /*messageCategory*/,
 			int /*messageId*/,
-			const istd::IInformation* /*messagePtr*/) const
+			const istd::IInformationProvider* /*messagePtr*/) const
 {
 	return true;
 }

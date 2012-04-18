@@ -43,7 +43,7 @@ protected:
 
 	// reimplemented (istd::ILogger)
 	virtual void DecorateMessage(
-				istd::IInformation::InformationCategory category,
+				istd::IInformationProvider::InformationCategory category,
 				int id,
 				int flags,
 				QString& message,
@@ -80,7 +80,7 @@ void TLoggerCompWrap<Base>::SendVerboseMessage(const QString& message, const QSt
 
 template <class Base>
 void TLoggerCompWrap<Base>::DecorateMessage(
-			istd::IInformation::InformationCategory category,
+			istd::IInformationProvider::InformationCategory category,
 			int id,
 			int flags,
 			QString& message,
