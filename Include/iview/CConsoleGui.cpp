@@ -338,10 +338,10 @@ void CConsoleGui::UpdateScrollbarsValues()
 
 // reimplemented (iview::CConsoleBase)
 
-void CConsoleGui::UpdateCursorInfo(const BaseClass::CursorInfo& info)
+void CConsoleGui::UpdateCursorInfo(const i2d::CVector2d& pixelPos, const i2d::CVector2d& logicalPos, const QString& infoText)
 {
 	if (IsPixelPositionVisible()){
-		m_positionLabelPtr->setText(tr("X: %1  Y: %2").arg(info.pixelPos.GetX()).arg(info.pixelPos.GetY()));		
+		m_positionLabelPtr->setText(tr("X: %1  Y: %2").arg(pixelPos.GetX()).arg(pixelPos.GetY()));		
 		m_positionLabelPtr->show();
 	}
 	else{
@@ -349,23 +349,15 @@ void CConsoleGui::UpdateCursorInfo(const BaseClass::CursorInfo& info)
 	}
 
 	if (IsMmPositionVisible()){
-		m_positionMmLabelPtr->setText(tr("LogX: %1mm  LogY: %2mm").arg(info.logicalPos.GetX()).arg(info.logicalPos.GetY()));
+		m_positionMmLabelPtr->setText(tr("LogX: %1mm  LogY: %2mm").arg(logicalPos.GetX()).arg(logicalPos.GetY()));
 		m_positionMmLabelPtr->show();
 	}
 	else{
 		m_positionMmLabelPtr->hide();
 	}
 
-	if (IsPixelValueVisible()){
-		if (info.pixelBrightness >= 0){
-			m_colorLabelPtr->setText(tr("PixelBrightness: %1").arg(info.pixelBrightness));
-		}
-		else if (info.red >= 0 && info.green >= 0 && info.blue >= 0){
-			m_colorLabelPtr->setText(tr("PixelColor: %1:%2:%3").arg(info.red).arg(info.green).arg(info.blue));
-		}
-		else{
-			m_colorLabelPtr->clear();
-		}
+	if (IsPixelValueVisible() && !infoText.isEmpty()){
+		m_colorLabelPtr->setText(infoText);
 		m_colorLabelPtr->show();
 	}
 	else{
@@ -389,7 +381,7 @@ void CConsoleGui::UpdateButtonsState()
 {
 	UpdateZoomInOutState();
 	
-	const iview::ILayer& gridLayer = m_viewPtr->GetCalibrationLayer();
+	const iview::IViewLayer& gridLayer = m_viewPtr->GetCalibrationLayer();
 	bool isGridLayerActive = !gridLayer.GetBoundingBox().IsEmpty();
 
 	m_zoomToFitCommand.setChecked(IsZoomToFit());

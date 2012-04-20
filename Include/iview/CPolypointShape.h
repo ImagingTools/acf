@@ -20,7 +20,7 @@ public:
 	void SetSmallTickersMode(bool state = true);
 
 	// reimplemented (iview::TShapeBase)
-	virtual void CalcBoundingBox(i2d::CRect& result) const;
+	virtual i2d::CRect CalcBoundingBox() const;
 
 	// reimplemented (iview::IShape)
 	virtual void Draw(QPainter& drawContext) const;

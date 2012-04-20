@@ -4,7 +4,6 @@
 
 #include "iview/IShape.h"
 #include "iview/IMouseActionObserver.h"
-#include "iview/ITouchable.h"
 
 
 namespace iview
@@ -17,7 +16,7 @@ class IShapeView;
 /**
 	Common interface for all display console shapes which can interacts with user.
 */
-class IInteractiveShape: virtual public IShape, virtual public IMouseActionObserver, virtual public ITouchable
+class IInteractiveShape: virtual public IShape, virtual public IMouseActionObserver
 {
 public:
 	/**

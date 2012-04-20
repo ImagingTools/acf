@@ -524,7 +524,7 @@ i2d::CAffine2d CInteractiveTransformableRectangleShape::CalcRotatedTransform(
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractiveTransformableRectangleShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractiveTransformableRectangleShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -534,14 +534,15 @@ void CInteractiveTransformableRectangleShape::CalcBoundingBox(i2d::CRect& result
 	EnsureValidNodes();
 	const istd::CIndex2d* nodes = GetNodes();
 
-	i2d::CRect bbox(nodes[EN_NODE1], nodes[EN_NODE1]);
+	i2d::CRect boundingBox(nodes[EN_NODE1], nodes[EN_NODE1]);
 	for (int nodeIndex = 0; nodeIndex <= EN_LAST; ++nodeIndex){
-		bbox.Union(nodes[nodeIndex]);
+		boundingBox.Union(nodes[nodeIndex]);
 	}
 
-	result = bbox.GetExpanded(tickerBox);
+	boundingBox.Expand(tickerBox);
+	boundingBox.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
 
-	result.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
+	return boundingBox;
 }
 
 

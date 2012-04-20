@@ -30,7 +30,7 @@ bool CInteractiveSplineShape::OnAttached(imod::IModel* modelPtr)
 }
 
 
-void CInteractiveSplineShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractiveSplineShape::CalcBoundingBox() const
 {
 	const i2d::CSpline* splinePtr = dynamic_cast<const i2d::CSpline*>(GetModelPtr());
 	if (IsDisplayConnected() && (splinePtr != NULL)){
@@ -55,9 +55,6 @@ void CInteractiveSplineShape::CalcBoundingBox(i2d::CRect& result) const
 				sp = transform.GetScreenPosition(segment.GetBezierPointEnd());
 				boundingBox.Union(sp);
 			}
-
-			i2d::CRect polylineBoundingBox;
-			CInteractivePolylineShape::CalcBoundingBox(polylineBoundingBox);
 
 			IColorShema::TickerType tickerType;
 
@@ -88,13 +85,16 @@ void CInteractiveSplineShape::CalcBoundingBox(i2d::CRect& result) const
 			}
 
 			const i2d::CRect& tickerBox = colorShema.GetTickerBox(tickerType);
-			result = polylineBoundingBox.GetUnion(boundingBox.GetExpanded(tickerBox));
 
-			return;
+			boundingBox.Expand(tickerBox);
+
+			boundingBox.Union(CInteractivePolylineShape::CalcBoundingBox());
+
+			return boundingBox;
 		}
 	}
 
-	result.Reset();
+	return i2d::CRect();
 }
 
 

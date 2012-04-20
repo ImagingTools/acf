@@ -1,8 +1,10 @@
-#ifndef iview_ILayer_included
-#define iview_ILayer_included
+#ifndef iview_IViewLayer_included
+#define iview_IViewLayer_included
 
 
+// ACF includes
 #include "iview/IDisplay.h"
+#include "iview/ITouchable.h"
 
 
 class QPainter;
@@ -19,7 +21,9 @@ class IShapeView;
 	Interface for a logical layer in the console view.
 
 */
-class ILayer: virtual public IDisplay
+class IViewLayer:
+			virtual public IDisplay,
+			virtual public ITouchable
 {
 public:
 	enum LayerType
@@ -114,6 +118,6 @@ public:
 } // namespace iview
 
 
-#endif // !iview_ILayer_included
+#endif // !iview_IViewLayer_included
 
 

@@ -322,7 +322,7 @@ bool CInteractivePolygonShape::IsDraggable() const
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractivePolygonShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractivePolygonShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -361,20 +361,18 @@ void CInteractivePolygonShape::CalcBoundingBox(i2d::CRect& result) const
 					break;
 
 				default:
-					BaseClass::CalcBoundingBox(result);
-					return;
+					return BaseClass::CalcBoundingBox();
 				}
 			}
 			else{
 				tickerType = IColorShema::TT_INACTIVE;
 			}
 
-			result = boundingBox.GetExpanded(colorShema.GetTickerBox(tickerType));
-			return;
+			return boundingBox.GetExpanded(colorShema.GetTickerBox(tickerType));
 		}
 	}
 
-	result.Reset();
+	return i2d::CRect();
 }
 
 

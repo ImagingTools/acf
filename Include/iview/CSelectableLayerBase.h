@@ -4,23 +4,26 @@
 
 #include "iview/ISelectableLayer.h"
 #include "iview/IShapeView.h"
-#include "iview/TLayerBaseEx.h"
+#include "iview/CViewLayer.h"
 
 
 namespace iview
 {
 
 
-class CSelectableLayerBase: public TLayerBaseEx<ISelectableLayer>
+class CSelectableLayerBase:
+			public CViewLayer,
+			virtual public ISelectableLayer
 {
 public:
-	typedef TLayerBaseEx<ISelectableLayer> BaseClass;
+	typedef CViewLayer BaseClass;
 
 	CSelectableLayerBase();
 	virtual ~CSelectableLayerBase();
 
-	// reimplemented (iview::TLayerBase)
-	void CalcBoundingBox(i2d::CRect& result) const;
+	// reimplemented (iview::CViewLayer)
+	virtual i2d::CRect RecalcAllShapes(int changeFlag);
+	i2d::CRect CalcBoundingBox() const;
 
 	// reimplemented (iview::ISelectableLayer)
 	virtual bool ConnectInteractiveShape(IInteractiveShape* shapePtr);
@@ -44,22 +47,25 @@ public:
 	virtual void OnShapeDefocused(IInteractiveShape* shapePtr);
 	virtual void OnShapeSelected(IInteractiveShape& shape, bool state = true);
 
-	// reimplemented (iview::ILayer)
+	// reimplemented (iview::IViewLayer)
 	virtual bool IsShapeConnected(IShape* shapePtr);
 	virtual bool ConnectShape(IShape* shapePtr);
 	virtual int GetShapesCount() const;
-	virtual void UpdateAllShapes(int changeFlag);
 	virtual void DisconnectAllShapes();
 	virtual void DrawShapes(QPainter& drawContext);
 
 	// reimplemented (iview::IShapeObserver)
 	virtual void OnChangeShape(IShape* shapePtr);
-	virtual void DisconnectShape(IShape* shapePtr);
+	virtual bool DisconnectShape(IShape* shapePtr);
+
+	// reimplemented (iview::ITouchable)
+	virtual TouchState IsTouched(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
 
 protected:
 	ShapeMap m_activeShapes;
-	ShapeMap m_inactiveShapes;
 
+private:
 	IInteractiveShape* m_focusedShapePtr;
 };
 

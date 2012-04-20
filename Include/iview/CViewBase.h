@@ -9,8 +9,7 @@
 #include "iview/IDraggable.h"
 #include "iview/IMouseActionObserver.h"
 #include "iview/CScreenTransform.h"
-#include "iview/CSingleLayer.h"
-#include "iview/CLayerBase.h"
+#include "iview/CViewLayer.h"
 #include "iview/CSelectableLayerBase.h"
 
 
@@ -27,8 +26,8 @@ class IInteractiveShape;
 
 
 class CViewBase:
-			public ILogicalView,
-			public IDraggable,
+			virtual public ILogicalView,
+			virtual public IDraggable,
 			protected IMouseActionObserver
 {
 public:
@@ -42,8 +41,7 @@ public:
 		ZM_FIT_COVER,
 		ZM_FIT_UNPROP,
 		ZM_FIT_H,
-		ZM_FIT_V,
-        ZM_FIT_BACKGROUND
+		ZM_FIT_V
 	};
 
 	CViewBase();
@@ -126,16 +124,16 @@ public:
 	virtual void Update();
 	virtual bool IsViewDraggable() const;
 	virtual bool IsMultiselectable() const;
-	virtual int InsertLayer(ILayer* layerPtr, int index = -1, int layerType = ILayer::LT_NONE);
-	virtual int GetLayerIndex(const ILayer& layer) const;
+	virtual int InsertLayer(IViewLayer* layerPtr, int index = -1, int layerType = IViewLayer::LT_NONE);
+	virtual int GetLayerIndex(const IViewLayer& layer) const;
 	virtual void RemoveLayer(int index);
 	virtual int GetLayersCount() const;
-	virtual ILayer& GetLayer(int index) const;
+	virtual IViewLayer& GetLayer(int index) const;
 	virtual bool ConnectShape(IShape* shapePtr);
 	virtual ISelectableLayer* GetFocusedLayerPtr() const;
 	virtual void OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
 	virtual void OnShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
-	virtual void OnLayerInvalidated(const ILayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea);
+	virtual void OnLayerInvalidated(const IViewLayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea);
 
 	// reimplemented (iview::ISelectable)
 	virtual int GetSelectedShapesCount() const;
@@ -148,6 +146,7 @@ public:
 
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
 
 	// reimplemented (iview::IShapeView)
 	virtual void SetTransform(const i2d::CAffine2d& transform);
@@ -166,7 +165,7 @@ public:
 
 	// reimplemented (iview::IShapeObserver)
 	virtual void OnChangeShape(IShape* shapePtr);
-	virtual void DisconnectShape(IShape* shapePtr);
+	virtual bool DisconnectShape(IShape* shapePtr);
 	virtual void OnShapeSelected(IInteractiveShape& shape, bool state = true);
 
 	// reimplemented (iview::IDraggable)
@@ -179,7 +178,7 @@ public:
 	virtual const IColorShema& GetDefaultColorShema() const = 0;
 
 protected:
-	typedef QVector<ILayer*> Layers;
+	typedef QVector<IViewLayer*> Layers;
 
 	/**
 		Draw Background layer.
@@ -337,8 +336,8 @@ private:
 	int m_lastBackgroundLayerIndex;
 
 	// default layers
-	iview::CSingleLayer m_backgroundLayer;
-	iview::CLayerBase m_inactiveLayer;
+	iview::CViewLayer m_backgroundLayer;
+	iview::CViewLayer m_inactiveLayer;
 	iview::CSelectableLayerBase m_activeLayer;
 
 	// help objects
@@ -431,7 +430,7 @@ inline int CViewBase::GetLayersCount() const
 }
 
 
-inline ILayer& CViewBase::GetLayer(int index) const
+inline IViewLayer& CViewBase::GetLayer(int index) const
 {
 	if (GetLayersCount() <= 0){
 		CViewBase* view = const_cast<CViewBase*> (this);
@@ -440,7 +439,7 @@ inline ILayer& CViewBase::GetLayer(int index) const
 
 	I_ASSERT((index >= 0) && (index < int(m_layers.size())));
 
-	ILayer* layerPtr = m_layers[index];
+	IViewLayer* layerPtr = m_layers[index];
 	I_ASSERT(layerPtr != NULL);
 
 	return *layerPtr;

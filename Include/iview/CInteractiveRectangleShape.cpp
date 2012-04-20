@@ -284,7 +284,7 @@ void CInteractiveRectangleShape::CalcPoints(const i2d::CRectangle& rectangle, co
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractiveRectangleShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractiveRectangleShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -297,20 +297,20 @@ void CInteractiveRectangleShape::CalcBoundingBox(i2d::CRect& result) const
 			CalcPoints(*framePtr, transform);
 		}
 
-		i2d::CRect bbox(m_corners[0][0], m_corners[0][0]);
-		bbox.Union(m_corners[0][1]);
-		bbox.Union(m_corners[1][0]);
-		bbox.Union(m_corners[1][1]);
+		i2d::CRect boundingBox(m_corners[0][0], m_corners[0][0]);
+		boundingBox.Union(m_corners[0][1]);
+		boundingBox.Union(m_corners[1][0]);
+		boundingBox.Union(m_corners[1][1]);
 
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(IsSelected()? IColorShema::TT_MOVE: IColorShema::TT_INACTIVE);
 		
-		result = bbox.GetExpanded(tickerBox);
+		boundingBox.Expand(tickerBox);
+		boundingBox.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
 
-		result.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
+		return boundingBox;
 	}
-	else{
-		result.Reset();
-	}
+
+	return i2d::CRect();
 }
 
 

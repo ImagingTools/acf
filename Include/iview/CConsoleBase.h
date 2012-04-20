@@ -157,24 +157,7 @@ public:
 	*/
 	virtual void SetStatusText(const QString& message) = 0;
 
-	struct CursorInfo
-	{
-		CursorInfo()
-		:	pixelPos(), logicalPos(),
-			pixelBrightness(-1), 
-			red(-1), green(-1), blue(-1)
-		{}
-
-		i2d::CVector2d pixelPos;
-		i2d::CVector2d logicalPos;
-		int pixelBrightness;
-		int red;
-		int green;
-		int blue;
-		int alpha;
-	};
-
-	virtual void UpdateCursorInfo(const CursorInfo& info) = 0;
+	virtual void UpdateCursorInfo(const i2d::CVector2d& pixelPos, const i2d::CVector2d& logicalPos, const QString& infoText) = 0;
 
 protected:
 	// events

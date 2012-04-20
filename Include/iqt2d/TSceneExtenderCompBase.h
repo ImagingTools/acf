@@ -79,7 +79,7 @@ void TSceneExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, i
 				if (isBackground){
 					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
 					if (shapeImplPtr != NULL){
-						shapeImplPtr->AssignToLayer(iview::ILayer::LT_INACTIVE);
+						shapeImplPtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);
 					}
 				}
 

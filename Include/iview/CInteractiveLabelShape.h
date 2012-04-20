@@ -57,7 +57,7 @@ public:
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
 
 	// reimplemented (iview::CInteractiveShapeBase)
-	virtual void CalcBoundingBox(i2d::CRect& result) const;
+	virtual i2d::CRect CalcBoundingBox() const;
 
 protected:
 	enum EditMode

@@ -21,7 +21,7 @@ namespace iview
 
 
 CSelectableLayerBase::CSelectableLayerBase()
-	:BaseClass(),
+:	BaseClass(),
 	m_focusedShapePtr(NULL)
 {
 }
@@ -33,22 +33,38 @@ CSelectableLayerBase::~CSelectableLayerBase()
 }
 
 
-// reimplemented (iview::TLayerBase)
+// reimplemented (iview::CViewLayer)
 
-void CSelectableLayerBase::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CSelectableLayerBase::RecalcAllShapes(int changeFlag)
 {
-	result.Reset();
+	i2d::CRect boundingBox = BaseClass::RecalcAllShapes(changeFlag);
 
-	ShapeMap::const_iterator iter;
+	ShapeMap::iterator iter;
 	for (iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
-		const i2d::CRect& boundingBox = iter.value();
-		result.Union(boundingBox);
+		iview::IShape* shapePtr = iter.key();
+		i2d::CRect& shapeBox = iter.value();
+
+		if (shapePtr->OnDisplayChange(changeFlag)){
+			shapeBox = shapePtr->GetBoundingBox();
+		}
+		boundingBox.Union(shapeBox);
 	}
 
-	for (iter = m_inactiveShapes.begin(); iter != m_inactiveShapes.end(); ++iter){
-		const i2d::CRect& boundingBox = iter.value();
-		result.Union(boundingBox);
+	return boundingBox;
+}
+
+
+i2d::CRect CSelectableLayerBase::CalcBoundingBox() const
+{
+	i2d::CRect boundingBox = BaseClass::CalcBoundingBox();
+
+	for (ShapeMap::ConstIterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+		const i2d::CRect& shapeBox = iter.value();
+
+		boundingBox.Union(shapeBox);
 	}
+
+	return boundingBox;
 }
 
 
@@ -56,27 +72,27 @@ void CSelectableLayerBase::CalcBoundingBox(i2d::CRect& result) const
 
 bool CSelectableLayerBase::ConnectInteractiveShape(IInteractiveShape* shapePtr)
 {
-	shapePtr->OnConnectDisplay(this);
-	shapePtr->OnDisplayChange(CF_ALL);
-
-	i2d::CRect boundingBox = shapePtr->GetBoundingBox();
-
 	if (shapePtr->IsSelected()){
+		shapePtr->OnConnectDisplay(this);
+		shapePtr->OnDisplayChange(CF_ALL);
+
+		i2d::CRect boundingBox = shapePtr->GetBoundingBox();
+
 		m_activeShapes[shapePtr] = boundingBox;
+
+		OnAreaInvalidated(i2d::CRect::GetEmpty(), boundingBox);
+
+		return true;
 	}
 	else{
-		m_inactiveShapes[shapePtr] = boundingBox;
+		return BaseClass::ConnectShape(shapePtr);
 	}
-
-	OnAreaInvalidated(i2d::CRect::GetEmpty(), boundingBox);
-
-	return true;
 }
 
 
 int CSelectableLayerBase::GetUnselectedShapesCount() const
 {
-	return int(m_inactiveShapes.size());
+	return BaseClass::GetShapesCount();
 }
 
 
@@ -168,7 +184,7 @@ bool CSelectableLayerBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButto
 
 	int keysState = GetKeysState();
 
-	QMapIterator<IShape*, i2d::CRect> inactiveIter(m_inactiveShapes);
+	QMapIterator<IShape*, i2d::CRect> inactiveIter(m_shapes);
 	inactiveIter.toBack();
 	while (inactiveIter.hasPrevious()){
 		inactiveIter.previous();
@@ -249,7 +265,7 @@ ITouchable::TouchState CSelectableLayerBase::IsTouched(istd::CIndex2d position, 
 
 		if (boundingBox.IsInside(position)){
 			ITouchable::TouchState touchState = uiShapePtr->IsTouched(position);
-			if (touchState != iview::IInteractiveShape::TS_NONE){
+			if (touchState != TS_NONE){
 				if (shapePtrPtr != NULL){
 					*shapePtrPtr = uiShapePtr;
 				}
@@ -258,7 +274,7 @@ ITouchable::TouchState CSelectableLayerBase::IsTouched(istd::CIndex2d position, 
 		}
 	}
 
-	QMapIterator<IShape*, i2d::CRect> inactiveIter(m_inactiveShapes);
+	QMapIterator<IShape*, i2d::CRect> inactiveIter(m_shapes);
 	inactiveIter.toBack();
 	while (inactiveIter.hasPrevious()){
 		inactiveIter.previous();
@@ -269,7 +285,7 @@ ITouchable::TouchState CSelectableLayerBase::IsTouched(istd::CIndex2d position, 
 
 		if (boundingBox.IsInside(position)){
 			ITouchable::TouchState touchState = uiShapePtr->IsTouched(position);
-			if (touchState != iview::IInteractiveShape::TS_NONE){
+			if (touchState != TS_NONE){
 				if (shapePtrPtr != NULL){
 					*shapePtrPtr = uiShapePtr;
 				}
@@ -286,13 +302,13 @@ ITouchable::TouchState CSelectableLayerBase::IsTouched(istd::CIndex2d position, 
 
 int CSelectableLayerBase::GetSelectedShapesCount() const
 {
-	return int(m_activeShapes.size());
+	return m_activeShapes.size();
 }
 
 
 void CSelectableLayerBase::InsertSelectedShapes(SelectedShapes& result) const
 {
-	for (ShapeMap::const_iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+	for (ShapeMap::ConstIterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
 		IInteractiveShape* uiShape = dynamic_cast<IInteractiveShape*>(iter.key());
 		I_ASSERT(uiShape != NULL);	// only iview::IInteractiveShape object are accepted.
 
@@ -348,12 +364,12 @@ void CSelectableLayerBase::OnShapeDefocused(IInteractiveShape* shapePtr)
 void CSelectableLayerBase::OnShapeSelected(IInteractiveShape& shape, bool state)
 {
 	if (state){
-		ShapeMap::iterator iter = m_inactiveShapes.find(&shape);
-		if (iter != m_inactiveShapes.end()){
+		ShapeMap::iterator iter = m_shapes.find(&shape);
+		if (iter != m_shapes.end()){
 			i2d::CRect newBoundingBox = shape.GetBoundingBox();
 			i2d::CRect prevBoundingBox = iter.value();
 
-			m_inactiveShapes.erase(iter);
+			m_shapes.erase(iter);
 			m_activeShapes[&shape] = newBoundingBox;
 
 			OnAreaInvalidated(prevBoundingBox, newBoundingBox);
@@ -372,7 +388,7 @@ void CSelectableLayerBase::OnShapeSelected(IInteractiveShape& shape, bool state)
 			i2d::CRect prevBoundingBox = iter.value();
 
 			m_activeShapes.erase(iter);
-			m_inactiveShapes[&shape] = newBoundingBox;
+			m_shapes[&shape] = newBoundingBox;
 
 			OnAreaInvalidated(prevBoundingBox, newBoundingBox);
 		}
@@ -387,12 +403,11 @@ void CSelectableLayerBase::OnShapeSelected(IInteractiveShape& shape, bool state)
 }
 
 
-// reimplemented (iview::ILayer)
+// reimplemented (iview::IViewLayer)
 
 bool CSelectableLayerBase::IsShapeConnected(IShape* shapePtr)
 {
-	return	(m_activeShapes.find(shapePtr) != m_activeShapes.end()) ||
-			(m_inactiveShapes.find(shapePtr) != m_inactiveShapes.end());
+	return (m_activeShapes.find(shapePtr) != m_activeShapes.end()) || BaseClass::IsShapeConnected(shapePtr);
 }
 
 
@@ -409,43 +424,15 @@ bool CSelectableLayerBase::ConnectShape(IShape* shapePtr)
 
 int CSelectableLayerBase::GetShapesCount() const
 {
-	return GetUnselectedShapesCount() + GetSelectedShapesCount();
-}
-
-
-void CSelectableLayerBase::UpdateAllShapes(int changeFlag)
-{
-	i2d::CRect& boundingBox = GetBoundingBoxRef();
-	boundingBox.Reset();
-	ShapeMap::iterator iter;
-	for (iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
-		iview::IShape* shapePtr = iter.key();
-		i2d::CRect& shapeBox = iter.value();
-
-		if (shapePtr->OnDisplayChange(changeFlag)){
-			shapeBox = shapePtr->GetBoundingBox();
-		}
-		boundingBox.Union(shapeBox);
-	}
-
-	for (iter = m_inactiveShapes.begin(); iter != m_inactiveShapes.end(); ++iter){
-		iview::IShape* shapePtr = iter.key();
-		i2d::CRect& shapeBox = iter.value();
-
-		if (shapePtr->OnDisplayChange(changeFlag)){
-			shapeBox = shapePtr->GetBoundingBox();
-		}
-		boundingBox.Union(shapeBox);
-	}
-
-	SetBoundingBoxValid();
+	return BaseClass::GetShapesCount() + m_activeShapes.size();
 }
 
 
 void CSelectableLayerBase::DisconnectAllShapes()
 {
-	ShapeMap::iterator iter;
-	for (iter = m_inactiveShapes.begin(); iter != m_inactiveShapes.end(); ++iter){
+	BaseClass::DisconnectAllShapes();
+
+	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
 		IShape* shapePtr = iter.key();
 		I_ASSERT(shapePtr != NULL);
 
@@ -453,35 +440,15 @@ void CSelectableLayerBase::DisconnectAllShapes()
 		shapePtr->OnDisconnectDisplay(this);
 	}
 
-	for (iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
-		IShape* shapePtr = iter.key();
-		I_ASSERT(shapePtr != NULL);
-
-		OnAreaInvalidated(iter.value(), i2d::CRect::GetEmpty());
-		shapePtr->OnDisconnectDisplay(this);
-	}
-
-	m_inactiveShapes.clear();
 	m_activeShapes.clear();
 }
 
 
 void CSelectableLayerBase::DrawShapes(QPainter& drawContext)
 {
-	ShapeMap::iterator pos;
-	for (pos = m_inactiveShapes.begin(); pos != m_inactiveShapes.end(); ++pos){
-		iview::IShape* shapePtr = pos.key();
-		if (shapePtr->IsVisible()){
-			const i2d::CRect& boundingBox = pos.value();
-			i2d::CRect updateRect = iqt::GetCRect(drawContext.clipRegion().boundingRect());
+	BaseClass::DrawShapes(drawContext);
 
-			if (!updateRect.IsOutside(boundingBox)){
-				shapePtr->Draw(drawContext);
-			}
-		}
-	}
-
-	for (pos = m_activeShapes.begin(); pos != m_activeShapes.end(); ++pos){
+	for (ShapeMap::iterator pos = m_activeShapes.begin(); pos != m_activeShapes.end(); ++pos){
 		iview::IShape* shapePtr = pos.key();
 		if (shapePtr->IsVisible() && (shapePtr != m_focusedShapePtr)){
 			const i2d::CRect& boundingBox = pos.value();
@@ -504,26 +471,23 @@ void CSelectableLayerBase::OnChangeShape(IShape* shapePtr)
 	ShapeMap::iterator iter = m_activeShapes.find(shapePtr);
 	if (iter != m_activeShapes.end()){
 		OnChangeShapeElement(iter);
-	}
-	
-	iter = m_inactiveShapes.find(shapePtr);
-	if (iter != m_inactiveShapes.end()){
-		OnChangeShapeElement(iter);
-	}
-}
 
-
-void CSelectableLayerBase::DisconnectShape(IShape* shapePtr)
-{
-	I_ASSERT(shapePtr != NULL);
-
-	ShapeMap::iterator iter = m_inactiveShapes.find(shapePtr);
-	if (iter != m_inactiveShapes.end()){
-		DisconnectShapeElement(m_inactiveShapes, iter);
 		return;
 	}
 
-	iter = m_activeShapes.find(shapePtr);
+	BaseClass::OnChangeShape(shapePtr);
+}
+
+
+bool CSelectableLayerBase::DisconnectShape(IShape* shapePtr)
+{
+	I_ASSERT(shapePtr != NULL);
+
+	if (BaseClass::DisconnectShape(shapePtr)){
+		return true;
+	}
+
+	ShapeMap::Iterator iter = m_activeShapes.find(shapePtr);
 	if (iter != m_activeShapes.end()){
 		if (m_focusedShapePtr == shapePtr){
 			IInteractiveShape* uiShapePtr = dynamic_cast<IInteractiveShape*>(shapePtr);
@@ -531,10 +495,51 @@ void CSelectableLayerBase::DisconnectShape(IShape* shapePtr)
 			OnShapeDefocused(uiShapePtr);
 		}
 		DisconnectShapeElement(m_activeShapes, iter);
-		return;
+
+		return true;
 	}
 
-	I_CRITICAL();	// shape was not connected to this layer!
+	return false;
+}
+
+
+// reimplemented (iview::ITouchable)
+
+ITouchable::TouchState CSelectableLayerBase::IsTouched(istd::CIndex2d position) const
+{
+	if (IsVisible()){
+		for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+			const iview::IShape* shapePtr = iter.key();
+			const i2d::CRect& boundingBox = iter.value();
+			if (boundingBox.IsInside(position) && shapePtr->IsVisible()){
+				ITouchable::TouchState touchState = shapePtr->IsTouched(position);
+				if (touchState > ITouchable::TS_NONE){
+					return touchState;
+				}
+			}
+		}
+	}
+
+	return BaseClass::IsTouched(position);
+}
+
+
+QString CSelectableLayerBase::GetShapeDescriptionAt(istd::CIndex2d position) const
+{
+	if (IsVisible()){
+		for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+			const iview::IShape* shapePtr = iter.key();
+			const i2d::CRect& boundingBox = iter.value();
+			if (boundingBox.IsInside(position) && shapePtr->IsVisible()){
+				ITouchable::TouchState touchState = shapePtr->IsTouched(position);
+				if (touchState > ITouchable::TS_NONE){
+					return shapePtr->GetShapeDescriptionAt(position);
+				}
+			}
+		}
+	}
+
+	return BaseClass::GetShapeDescriptionAt(position);
 }
 
 

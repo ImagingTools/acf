@@ -29,7 +29,11 @@ public:
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// reimplemented (iview::CShapeBase)
-	virtual void CalcBoundingBox(i2d::CRect& result) const;
+	virtual i2d::CRect CalcBoundingBox() const;
+
+	// reimplemented (iview::ITouchable)
+	virtual TouchState IsTouched(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
 
 protected:
 	virtual void DrawBitmap(

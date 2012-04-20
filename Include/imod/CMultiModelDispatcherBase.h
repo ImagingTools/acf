@@ -22,6 +22,7 @@ namespace imod
 	You will get a notification event on each change in the observed data model via OnModelChanged method call of your notification consumer.  
 	\note Notification consumer class must implement the method
 	void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr) to support the notification callback.
+	\sa imod::CMultiModelBridgeBase.
 */
 class CMultiModelDispatcherBase: virtual public istd::IPolymorphic
 {

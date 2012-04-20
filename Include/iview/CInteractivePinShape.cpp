@@ -27,9 +27,8 @@ CInteractivePinShape::CInteractivePinShape()
 
 ITouchable::TouchState CInteractivePinShape::IsTouched(istd::CIndex2d position) const
 {
-	i2d::CRect boundingBox;
-	CInteractivePinShape::CalcBoundingBox(boundingBox);
-	if (boundingBox.IsInside(position) != 0){
+	i2d::CRect boundingBox = CInteractivePinShape::GetBoundingBox();
+	if (boundingBox.IsInside(position)){
 		if (IsEditablePosition()){
 			return TS_TICKER;
 		}
@@ -143,7 +142,7 @@ bool CInteractivePinShape::OnMouseMove(istd::CIndex2d position)
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractivePinShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractivePinShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -168,10 +167,11 @@ void CInteractivePinShape::CalcBoundingBox(i2d::CRect& result) const
 		}
 
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(tickerType);
-		result = tickerBox.GetTranslated(sp);
+
+		return tickerBox.GetTranslated(sp);
 	}
 
-	result.Reset();
+	return i2d::CRect();
 }
 
 

@@ -240,7 +240,7 @@ ITouchable::TouchState CInteractiveLabelShape::IsTouched(istd::CIndex2d position
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractiveLabelShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractiveLabelShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -248,7 +248,8 @@ void CInteractiveLabelShape::CalcBoundingBox(i2d::CRect& result) const
 	if (labelPtr != NULL){
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
-		i2d::CRect boundingBox;
+		i2d::CRect boundingBox = i2d::CRect::GetEmpty();
+
 		CalculateTextOriginSize(boundingBox);
 		boundingBox.Expand(i2d::CRect(-3, -3, 3, 3));
 
@@ -263,13 +264,12 @@ void CInteractiveLabelShape::CalcBoundingBox(i2d::CRect& result) const
 				boundingBox.Union(tickerBox.GetTranslated(offsetSp));
 		}
 
-		result = boundingBox;
-	
-		result.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
+		boundingBox.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
+
+		return boundingBox;
 	}
-	else{
-		result.Reset();
-	}
+
+	return i2d::CRect();
 }
 
 

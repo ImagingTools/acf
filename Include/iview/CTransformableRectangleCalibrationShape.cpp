@@ -548,7 +548,7 @@ i2d::CAffine2d CTransformableRectangleCalibrationShape::CalcRotatedTransform(
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CTransformableRectangleCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CTransformableRectangleCalibrationShape::CalcBoundingBox() const
 {
 	if (IsDisplayConnected()){
 		EnsureValidNodes();
@@ -556,19 +556,23 @@ void CTransformableRectangleCalibrationShape::CalcBoundingBox(i2d::CRect& result
 		const istd::CIndex2d* nodes = GetNodes();
 		const iview::IColorShema& colorShema = GetColorShema();
 
-		result = i2d::CRect(nodes[EN_NODE1], nodes[EN_NODE1]);
+		i2d::CRect boundingBox(nodes[EN_NODE1], nodes[EN_NODE1]);
 		for (int nodeIndex = 0; nodeIndex <= EN_LAST; ++nodeIndex){
-			result.Union(nodes[nodeIndex]);
+			boundingBox.Union(nodes[nodeIndex]);
 		}
 
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(IsSelected()?
 						iview::IColorShema::TT_NORMAL:
 						iview::IColorShema::TT_INACTIVE);
 
-		result.Expand(tickerBox);
+		boundingBox.Expand(tickerBox);
 
-		result.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
+		boundingBox.Expand(i2d::CRect(istd::CIndex2d(-1, -1), istd::CIndex2d(1, 1)));
+
+		return boundingBox;
 	}
+
+	return i2d::CRect();
 }
 
 

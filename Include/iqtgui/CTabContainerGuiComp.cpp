@@ -10,7 +10,42 @@ namespace iqtgui
 {
 
 
-// public methods
+// protected methods
+
+void CTabContainerGuiComp::UpdateVisualElements()
+{
+	QTabWidget* widgetPtr = GetQtWidget();
+	I_ASSERT(widgetPtr != NULL);
+
+	int visualProvidersCount = m_slaveWidgetsVisualCompPtr.GetCount();
+
+	for (		TabToGuiIndexMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
+				iter != m_tabToGuiIndexMap.end();
+				++iter){
+		int tabIndex = iter.key();
+		I_ASSERT(tabIndex >= 0);
+		I_ASSERT(tabIndex < widgetPtr->count());
+
+		int guiIndex = iter.value();
+		I_ASSERT(guiIndex >= 0);
+		I_ASSERT(guiIndex < m_slaveWidgetsCompPtr.GetCount());
+
+		QIcon tabIcon;
+		QString toolTip;
+
+		if (guiIndex < visualProvidersCount){
+			const IVisualStatusProvider* visualProviderPtr = m_slaveWidgetsVisualCompPtr[guiIndex];
+			if (visualProviderPtr != NULL){
+				tabIcon = visualProviderPtr->GetStatusIcon();
+				toolTip = visualProviderPtr->GetStatusText();
+			}
+		}
+
+		widgetPtr->setTabIcon(tabIndex, tabIcon);
+		widgetPtr->setTabToolTip(tabIndex, toolTip);
+	}
+}
+
 
 // reimplemented (iqtgui::CComponentBase)
 
@@ -41,10 +76,10 @@ void CTabContainerGuiComp::OnGuiCreated()
 
 	if (m_tabNamesAttrPtr.IsValid()){
 		int tabCount = qMin(m_tabNamesAttrPtr.GetCount(), m_slaveWidgetsCompPtr.GetCount());
-		for (int tabIndex = 0; tabIndex < tabCount; tabIndex++){
-			QString tabName = m_tabNamesAttrPtr[tabIndex];
+		for (int guiIndex = 0; guiIndex < tabCount; guiIndex++){
+			QString tabName = m_tabNamesAttrPtr[guiIndex];
 
-			iqtgui::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[tabIndex];
+			iqtgui::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[guiIndex];
 			if ((guiPtr == NULL) || !guiPtr->CreateGui(widgetPtr)){
 				continue;
 			}
@@ -54,14 +89,13 @@ void CTabContainerGuiComp::OnGuiCreated()
 
 			pageLayout->addWidget(guiPtr->GetWidget());
 
-			int addTabIndex = widgetPtr->addTab(pageWidget, tabName);
+			int tabIndex = widgetPtr->addTab(pageWidget, tabName);
+			m_tabToGuiIndexMap[tabIndex] = guiIndex;
 
-			if (m_iconsProviderCompPtr.IsValid()){
-				int iconCount = m_iconsProviderCompPtr->GetIconCount();			
-				if (tabIndex < iconCount){
-					QIcon icon = m_iconsProviderCompPtr->GetIcon(tabIndex);
-
-					widgetPtr->setTabIcon(addTabIndex, icon);
+			if (guiIndex < m_slaveWidgetsModelCompPtr.GetCount()){
+				imod::IModel* modelPtr = m_slaveWidgetsModelCompPtr[guiIndex];
+				if (modelPtr != NULL){
+					RegisterModel(modelPtr);
 				}
 			}
 		}
@@ -73,12 +107,16 @@ void CTabContainerGuiComp::OnGuiCreated()
 			widgetPtr->setCornerWidget(m_cornerGuiCompPtr->GetWidget());
 		}
 	}
+
+	UpdateVisualElements();
 }
 
 
 void CTabContainerGuiComp::OnGuiDestroyed()
 {
 	I_ASSERT(m_slaveWidgetsCompPtr.IsValid());
+
+	m_tabToGuiIndexMap.clear();
 
 	if (m_slaveWidgetsCompPtr.IsValid()){
 		int slaveWidgetsCount = m_slaveWidgetsCompPtr.GetCount();
@@ -88,6 +126,14 @@ void CTabContainerGuiComp::OnGuiDestroyed()
 	}
 
 	BaseClass::OnGuiDestroyed();
+}
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CTabContainerGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	UpdateVisualElements();
 }
 
 

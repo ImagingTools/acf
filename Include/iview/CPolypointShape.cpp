@@ -44,7 +44,7 @@ void CPolypointShape::SetSmallTickersMode(bool state)
 
 // reimplemented (iview::TShapeBase)
 
-void CPolypointShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CPolypointShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -70,12 +70,12 @@ void CPolypointShape::CalcBoundingBox(i2d::CRect& result) const
 				boundingBox.Union(sp);
 			}
 			const i2d::CRect& tickerBox = colorShema.GetTickerBox(IColorShema::TT_INACTIVE);
-			result = boundingBox.GetExpanded(tickerBox);
-			return;
+
+			return boundingBox.GetExpanded(tickerBox);
 		}
 	}
 
-	result.Reset();
+	return i2d::CRect();
 }
 
 

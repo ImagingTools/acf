@@ -20,7 +20,7 @@ public:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 
 	// reimplemented (iview::CInteractiveShapeBase)
-	virtual void CalcBoundingBox(i2d::CRect& result) const;
+	virtual i2d::CRect CalcBoundingBox() const;
 
 protected:
 	virtual void DrawPolyBezier(QPainter& drawContext, const istd::CIndex2d* pointsPtr, int pointsCount) const;

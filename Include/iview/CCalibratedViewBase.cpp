@@ -39,7 +39,7 @@ void CCalibratedViewBase::ConnectCalibrationShape(iview::IShape* shapePtr)
 	}
 	I_ASSERT(m_calibrationLayerIndex >= 0);
 
-	iview::ILayer& layer = GetLayer(m_calibrationLayerIndex);
+	iview::IViewLayer& layer = GetLayer(m_calibrationLayerIndex);
 	layer.ConnectShape(shapePtr);
 }
 
@@ -60,18 +60,18 @@ void CCalibratedViewBase::InsertDefaultLayers()
 {
 	BaseClass::InsertDefaultLayers();
 
-	int layerIndex = InsertLayer(&m_calibrationLayer, 1, ILayer::LT_CALIBRATION);
+	int layerIndex = InsertLayer(&m_calibrationLayer, 1, IViewLayer::LT_CALIBRATION);
 	SetLastBackgroundLayerIndex(layerIndex);
 }
 
 
 // reimplemented (iview::IShapeView)
 
-int CCalibratedViewBase::InsertLayer(iview::ILayer* layerPtr, int index, int layerType)
+int CCalibratedViewBase::InsertLayer(iview::IViewLayer* layerPtr, int index, int layerType)
 {
 	int result = BaseClass::InsertLayer(layerPtr, index, layerType);
 
-	if (layerType == ILayer::LT_CALIBRATION){
+	if (layerType == IViewLayer::LT_CALIBRATION){
 		m_calibrationLayerIndex = result;
 	}
 	else if (m_calibrationLayerIndex >= result){

@@ -29,7 +29,7 @@ public:
 
 protected:
 	// reimplemented (iview::CInteractiveShapeBase)
-	virtual void CalcBoundingBox(i2d::CRect& result) const;
+	virtual i2d::CRect CalcBoundingBox() const;
 
 	i2d::CVector2d m_referencePosition;
 };

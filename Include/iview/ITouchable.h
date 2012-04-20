@@ -60,6 +60,11 @@ public:
 		\return	touch state for the shape, or iview::IInteractiveShape::TS_NONE, when nothing found.
 	*/
 	virtual TouchState IsTouched(istd::CIndex2d position) const = 0;
+
+	/**
+		Get description to shape at specified position.
+	*/
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const = 0;
 };
 
 

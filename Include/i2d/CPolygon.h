@@ -63,11 +63,6 @@ public:
 		Get outline length of this polygon.
 	*/
 	virtual double GetOutlineLength() const;
-	
-	/**
-		Calculate bounding box.
-	*/
-	virtual void CalcBoundingBox(i2d::CRectangle& result) const;
 
 	/**
 		Calculate bounding box (the same as above but returns result directly).

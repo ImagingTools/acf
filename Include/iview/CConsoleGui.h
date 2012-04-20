@@ -101,7 +101,7 @@ protected:
 	void UpdateScrollbarsValues();
 
 	// reimplemented (iview::CConsoleBase)
-	virtual void UpdateCursorInfo(const BaseClass::CursorInfo& info);
+	virtual void UpdateCursorInfo(const i2d::CVector2d& pixelPos, const i2d::CVector2d& logicalPos, const QString& infoText);
 	virtual void UpdateEditModeButtons();
 	virtual void UpdateButtonsState();
 	virtual void UpdateComponentsPosition();

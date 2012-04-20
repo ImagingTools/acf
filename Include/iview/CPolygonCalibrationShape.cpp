@@ -272,7 +272,7 @@ bool CPolygonCalibrationShape::IsDraggable() const
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CPolygonCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CPolygonCalibrationShape::CalcBoundingBox() const
 {
     const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
     if (IsDisplayConnected() && (polygonPtr != NULL)){
@@ -311,20 +311,18 @@ void CPolygonCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
 					break;
 
 				default:
-					BaseClass::CalcBoundingBox(result);
-					return;
+					return BaseClass::CalcBoundingBox();
 				}
 			}
 			else{
 				tickerType = iview::IColorShema::TT_INACTIVE;
 			}
 
-			result = boundingBox.GetExpanded(colorShema.GetTickerBox(tickerType));
-			return;
+			return boundingBox.GetExpanded(colorShema.GetTickerBox(tickerType));
 		}
 	}
 
-	result.Reset();
+	return i2d::CRect();
 }
 
 

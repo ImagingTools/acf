@@ -77,7 +77,7 @@ protected:
 	// abstract methods
 	virtual void BeginLogDrag(const i2d::CVector2d& reference) = 0;
 	virtual void SetLogDragPosition(const i2d::CVector2d& position) = 0;
-	virtual void CalcBoundingBox(i2d::CRect& result) const = 0;
+	virtual i2d::CRect CalcBoundingBox() const = 0;
 
 private:
 	bool m_isSelected;

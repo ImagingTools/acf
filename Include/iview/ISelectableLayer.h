@@ -9,7 +9,7 @@
 // ACF includes
 #include "i2d/CVector2d.h"
 
-#include "iview/ILayer.h"
+#include "iview/IViewLayer.h"
 #include "iview/ISelectable.h"
 #include "iview/IMouseActionObserver.h"
 
@@ -22,7 +22,7 @@ class IInteractiveShape;
 
 
 class ISelectableLayer:
-			virtual public ILayer,
+			virtual public IViewLayer,
 			virtual public ISelectable
 {
 public:

@@ -2,10 +2,15 @@
 #define iqtgui_CGuiComponentBase_included
 
 
+// Qt includes
+#include <QtCore/QString>
+#include <QtGui/QIcon>
+
 // ACF includes
 #include "icomp/CComponentBase.h"
 
 #include "iqtgui/IGuiObject.h"
+#include "iqtgui/IVisualStatusProvider.h"
 
 
 namespace iqtgui
@@ -18,13 +23,17 @@ namespace iqtgui
 class CGuiComponentBase:
 			public QObject, 
 			public icomp::CComponentBase,
-			virtual public IGuiObject
+			virtual public IGuiObject,
+			virtual public IVisualStatusProvider
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_BASE_COMPONENT(CGuiComponentBase);
 		I_REGISTER_INTERFACE(IGuiObject);
+		I_REGISTER_INTERFACE(IVisualStatusProvider);
+		I_ASSIGN(m_defaultStatusIconPathAttrPtr, "DefaultStatusIcon", "Path of status icon used by default", false, "");
+		I_ASSIGN(m_defaultStatusTextAttrPtr, "DefaultStatusText", "Status text used by default", true, "");
 	I_END_COMPONENT;
 
 	CGuiComponentBase();
@@ -37,6 +46,10 @@ public:
 	virtual bool DestroyGui();
 	virtual QWidget* GetWidget() const;
 	virtual void OnTryClose(bool* ignoredPtr = NULL);
+
+	// reimplemented (iqtgui::IVisualStatusProvider)
+	virtual QIcon GetStatusIcon() const;
+	virtual QString GetStatusText() const;
 
 protected:
 	/**
@@ -106,9 +119,14 @@ private:
 	};
 
 private:
+	I_ATTR(QString, m_defaultStatusIconPathAttrPtr);
+	I_ATTR(QString, m_defaultStatusTextAttrPtr);
+
 	QWidget* m_widgetPtr;
 	bool m_isGuiShown;
 	LanguageChangeEventFilter m_languageChangeEventFilter;
+
+	QIcon m_defaultStatusIcon;
 };
 
 

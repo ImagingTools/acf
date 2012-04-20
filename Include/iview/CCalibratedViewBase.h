@@ -66,7 +66,7 @@ public:
 	*/
 	void SetGridInMm(bool state = true);
 
-	const iview::CSingleLayer& GetCalibrationLayer() const;
+	const iview::IViewLayer& GetCalibrationLayer() const;
 
 	/**
 		Set default color shema object.
@@ -101,7 +101,7 @@ public:
 	virtual void InsertDefaultLayers();
 
 	// reimplemented (iview::IShapeView)
-	virtual int InsertLayer(iview::ILayer* layerPtr, int index = -1, int layerType = ILayer::LT_NONE);
+	virtual int InsertLayer(iview::IViewLayer* layerPtr, int index = -1, int layerType = IViewLayer::LT_NONE);
 	virtual void RemoveLayer(int index);
 
 	// reimplemented (iview::IVisualCalibrationInfo)
@@ -137,7 +137,7 @@ private:
 	int m_calibrationLayerIndex;
 
 	// default layers
-	iview::CSingleLayer m_calibrationLayer;
+	iview::CViewLayer m_calibrationLayer;
 };
 
 
@@ -189,7 +189,7 @@ inline void CCalibratedViewBase::SetGridInMm(bool state)
 }
 
 
-inline const iview::CSingleLayer& CCalibratedViewBase::GetCalibrationLayer() const
+inline const iview::IViewLayer& CCalibratedViewBase::GetCalibrationLayer() const
 {
 	return m_calibrationLayer;
 }

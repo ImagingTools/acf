@@ -370,38 +370,6 @@ ITouchable::TouchState CInteractiveAnnulusSegmentShape::IsTouched(istd::CIndex2d
 }
 
 
-// reimplemented (iview::CInteractiveShapeBase)
-
-void CInteractiveAnnulusSegmentShape::CalcBoundingBox(i2d::CRect& result) const
-{
-	I_ASSERT(IsDisplayConnected());
-
-	const i2d::CAnnulusSegment* annulusPtr = dynamic_cast<const i2d::CAnnulusSegment*>(GetModelPtr());
-	if (annulusPtr != NULL){
-		const IColorShema& colorShema = GetColorShema();
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
-		i2d::CVector2d center;
-		transform.GetApply(annulusPtr->GetPosition(), center);
-		double radius = annulusPtr->GetOuterRadius();
-
-		const i2d::CMatrix2d& deform = transform.GetDeformMatrix();
-		i2d::CVector2d scale;
-		deform.GetAxesLengths(scale);
-
-		const i2d::CRect& tickerBox = colorShema.GetTickerBox(IsSelected()? IColorShema::TT_NORMAL: IColorShema::TT_INACTIVE);
-
-		i2d::CRect boundingBox(	int(center.GetX() - radius * scale.GetX()), int(center.GetY() - radius * scale.GetY()),
-							int(center.GetX() + radius * scale.GetX()), int(center.GetY() + radius * scale.GetY()));
-
-		result = boundingBox.GetExpanded(tickerBox);
-	}
-	else{
-		result.Reset();
-	}
-}
-
-
 // protected methods
 
 void CInteractiveAnnulusSegmentShape::DrawAnnulusSegment(

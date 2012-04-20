@@ -9,8 +9,7 @@
 #include "iview/IInteractiveShape.h"
 #include "iview/ISelectable.h"
 #include "iview/IViewEventObserver.h"
-#include "iview/CSingleLayer.h"
-#include "iview/CLayerBase.h"
+#include "iview/CViewLayer.h"
 #include "iview/CSelectableLayerBase.h"
 
 
@@ -56,7 +55,7 @@ CViewBase::CViewBase()
 CViewBase::~CViewBase()
 {
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		ILayer* layerPtr = *iter;
+		IViewLayer* layerPtr = *iter;
 		I_ASSERT(layerPtr != NULL);
 
 		layerPtr->OnDisconnectView(this);
@@ -78,35 +77,17 @@ void CViewBase::SetZoom(ZoomMode zoom)
 	case ZM_FIT_COVER:
 	case ZM_FIT_H:
 	case ZM_FIT_V:
-	case ZM_FIT_BACKGROUND:
 		{
-			i2d::CRectangle fitArea = m_fitArea;
-			if ((fitArea.IsEmpty() || (zoom == ZM_FIT_BACKGROUND))){
-				int layersCount = GetLayersCount();
-				if (layersCount > 0){
-					CSingleLayer* layerPtr = dynamic_cast<CSingleLayer*>(&GetLayer(0));
-					if (layerPtr != NULL){
-						IShape* shapePtr = layerPtr->GetShapePtr();
-						if (shapePtr != NULL){
-							const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(shapePtr->GetShapeModelPtr());
-							if (bitmapPtr != NULL){
-								ibase::CSize backgroundSize = bitmapPtr->GetImageSize();
-								fitArea = i2d::CRectangle(0, 0, backgroundSize.GetX(), backgroundSize.GetY());
-							}
-						}
-					}
-				}
-			}
 			ibase::CSize clientSize = clientRect.GetSize();
-			if (!fitArea.IsEmpty() && !clientSize.IsNull()){
-				i2d::CVector2d fitSize = fitArea.GetSize();
+			if (!m_fitArea.IsEmpty() && !clientSize.IsNull()){
+				i2d::CVector2d fitSize = m_fitArea.GetSize();
 				double scaleX = clientSize.GetX() / fitSize.GetX();
 				double scaleY = clientSize.GetY() / fitSize.GetY();
 				i2d::CVector2d deltaPos;
 				double scale;
 				if (zoom == ZM_FIT_H){
 					scale = scaleX;
-					deltaPos.SetX(-fitArea.GetLeft() * scale);
+					deltaPos.SetX(-m_fitArea.GetLeft() * scale);
 					istd::CIndex2d clientCenter = clientRect.GetCenter();
 					i2d::CVector2d prevCenter = m_transform.GetClientPosition(clientCenter);
 					deltaPos.SetY(clientCenter.GetY() - prevCenter.GetY() * scale);
@@ -116,30 +97,30 @@ void CViewBase::SetZoom(ZoomMode zoom)
 					istd::CIndex2d clientCenter = clientRect.GetCenter();
 					i2d::CVector2d prevCenter = m_transform.GetClientPosition(clientCenter);
 					deltaPos.SetX(clientCenter.GetX() - prevCenter.GetX() * scale);
-					deltaPos.SetY(-fitArea.GetTop() * scale);
+					deltaPos.SetY(-m_fitArea.GetTop() * scale);
 				}
 				else if (zoom == ZM_FIT_COVER){
 					if (scaleX < scaleY){
 						scale = scaleY;
-						deltaPos.SetX((clientSize.GetX() - fitSize.GetX() * scale) * 0.5 - fitArea.GetLeft() * scale);
-						deltaPos.SetY(-fitArea.GetTop() * scale);
+						deltaPos.SetX((clientSize.GetX() - fitSize.GetX() * scale) * 0.5 - m_fitArea.GetLeft() * scale);
+						deltaPos.SetY(-m_fitArea.GetTop() * scale);
 					}
 					else{
 						scale = scaleX;
-						deltaPos.SetX(-fitArea.GetLeft() * scale);
-						deltaPos.SetY((clientSize.GetY() - fitSize.GetY() * scale) * 0.5 - fitArea.GetTop() * scale);
+						deltaPos.SetX(-m_fitArea.GetLeft() * scale);
+						deltaPos.SetY((clientSize.GetY() - fitSize.GetY() * scale) * 0.5 - m_fitArea.GetTop() * scale);
 					}
 				}
 				else{
 					if (scaleX < scaleY){
 						scale = scaleX;
-						deltaPos.SetX(-fitArea.GetLeft() * scale);
-						deltaPos.SetY((clientSize.GetY() - fitSize.GetY() * scale) * 0.5 - fitArea.GetTop() * scale);
+						deltaPos.SetX(-m_fitArea.GetLeft() * scale);
+						deltaPos.SetY((clientSize.GetY() - fitSize.GetY() * scale) * 0.5 - m_fitArea.GetTop() * scale);
 					}
 					else{
 						scale = scaleY;
-						deltaPos.SetX((clientSize.GetX() - fitSize.GetX() * scale) * 0.5 - fitArea.GetLeft() * scale);
-						deltaPos.SetY(-fitArea.GetTop() * scale);
+						deltaPos.SetX((clientSize.GetX() - fitSize.GetX() * scale) * 0.5 - m_fitArea.GetLeft() * scale);
+						deltaPos.SetY(-m_fitArea.GetTop() * scale);
 					}
 				}
 				m_transform.Reset(deltaPos, 0, i2d::CVector2d(scale, scale));
@@ -149,29 +130,12 @@ void CViewBase::SetZoom(ZoomMode zoom)
 
 	case ZM_FIT_UNPROP:
 		{
-			i2d::CRectangle fitArea = m_fitArea;
-			if (fitArea.IsEmpty()){
-				int layersCount = GetLayersCount();
-				if (layersCount > 0){
-					CSingleLayer* layerPtr = dynamic_cast<CSingleLayer*>(&GetLayer(0));
-					if (layerPtr != NULL){
-						IShape* shapePtr = layerPtr->GetShapePtr();
-						if (shapePtr != NULL){
-							const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(shapePtr->GetShapeModelPtr());
-							if (bitmapPtr != NULL){
-								ibase::CSize backgroundSize = bitmapPtr->GetImageSize();
-								fitArea = i2d::CRectangle(0, 0, backgroundSize.GetX(), backgroundSize.GetY());
-							}
-						}
-					}
-				}
-			}
 			ibase::CSize clientSize = clientRect.GetSize();
-			if (!fitArea.IsEmpty() && !clientSize.IsNull()){
-				i2d::CVector2d fitSize = fitArea.GetSize();
+			if (!m_fitArea.IsEmpty() && !clientSize.IsNull()){
+				i2d::CVector2d fitSize = m_fitArea.GetSize();
 				double scaleX = clientSize.GetX() / fitSize.GetX();
 				double scaleY = clientSize.GetY() / fitSize.GetY();
-				i2d::CVector2d deltaPos(-fitArea.GetLeft() * scaleX, -fitArea.GetTop() * scaleY);
+				i2d::CVector2d deltaPos(-m_fitArea.GetLeft() * scaleX, -m_fitArea.GetTop() * scaleY);
 				m_transform.Reset(deltaPos, 0, i2d::CVector2d(scaleX, scaleY));
 			}
 		}
@@ -228,7 +192,7 @@ void CViewBase::UpdateAllShapes(int changeFlag)
 	}
 
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		ILayer* layerPtr = *iter;
+		IViewLayer* layerPtr = *iter;
 		I_ASSERT(layerPtr != NULL);
 		layerPtr->UpdateAllShapes(changeFlag);
 	}
@@ -271,9 +235,9 @@ void CViewBase::RemoveViewEventObserver(iview::IViewEventObserver* listenerPtr)
 
 void CViewBase::InsertDefaultLayers()
 {
-	InsertLayer(&m_backgroundLayer, -1, ILayer::LT_BACKGROUND);
-	InsertLayer(&m_inactiveLayer, -1, ILayer::LT_INACTIVE);
-	InsertLayer(&m_activeLayer, -1, ILayer::LT_ACTIVE);
+	InsertLayer(&m_backgroundLayer, -1, IViewLayer::LT_BACKGROUND);
+	InsertLayer(&m_inactiveLayer, -1, IViewLayer::LT_INACTIVE);
+	InsertLayer(&m_activeLayer, -1, IViewLayer::LT_ACTIVE);
 }
 
 
@@ -304,7 +268,7 @@ void CViewBase::Update()
 }
 
 
-int CViewBase::InsertLayer(ILayer* layerPtr, int index, int layerType)
+int CViewBase::InsertLayer(IViewLayer* layerPtr, int index, int layerType)
 {
 	if (index >= 0){
 		Layers::iterator iter = m_layers.begin();
@@ -316,21 +280,21 @@ int CViewBase::InsertLayer(ILayer* layerPtr, int index, int layerType)
 		m_layers.push_back(layerPtr);
 	}
 
-	if (layerType == ILayer::LT_INACTIVE){
+	if (layerType == IViewLayer::LT_INACTIVE){
 		m_inactiveLayerIndex = index;
 	}
 	else if (m_inactiveLayerIndex >= index){
 		m_inactiveLayerIndex++;
 	}
 
-	if (layerType == ILayer::LT_BACKGROUND){
+	if (layerType == IViewLayer::LT_BACKGROUND){
 		m_backgroundLayerIndex = index;
 	}
 	else if (m_backgroundLayerIndex >= index){
 		m_backgroundLayerIndex++;
 	}
 
-	if (layerType == ILayer::LT_ACTIVE){
+	if (layerType == IViewLayer::LT_ACTIVE){
 		m_activeLayerIndex = index;
 	}
 	else if (m_activeLayerIndex >= index){
@@ -350,7 +314,7 @@ int CViewBase::InsertLayer(ILayer* layerPtr, int index, int layerType)
 }
 
 
-int CViewBase::GetLayerIndex(const ILayer& layer) const
+int CViewBase::GetLayerIndex(const IViewLayer& layer) const
 {
 	int index = 0;
 	for (Layers::const_iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
@@ -413,7 +377,7 @@ bool CViewBase::ConnectShape(IShape* shapePtr)
 	iview::IInteractiveShape* activeShapePtr = dynamic_cast<iview::IInteractiveShape*>(shapePtr);
 
 	switch (layerType){
-		case ILayer::LT_ACTIVE:
+		case IViewLayer::LT_ACTIVE:
 			if (activeShapePtr != NULL){
 				layerIndex = m_activeLayerIndex;
 			}
@@ -423,11 +387,11 @@ bool CViewBase::ConnectShape(IShape* shapePtr)
 
 			break;
 		
-		case ILayer::LT_INACTIVE:
+		case IViewLayer::LT_INACTIVE:
 			layerIndex = m_inactiveLayerIndex;
 			break;
 		
-		case ILayer::LT_BACKGROUND:
+		case IViewLayer::LT_BACKGROUND:
 			layerIndex = m_backgroundLayerIndex;
 			break;
 		default:
@@ -440,7 +404,7 @@ bool CViewBase::ConnectShape(IShape* shapePtr)
 
 	I_ASSERT(layerIndex < GetLayersCount());
 
-	ILayer& layer = GetLayer(layerIndex);
+	IViewLayer& layer = GetLayer(layerIndex);
 
 	layer.ConnectShape(shapePtr);
 
@@ -528,16 +492,33 @@ ITouchable::TouchState CViewBase::IsTouched(istd::CIndex2d position) const
 {
 	int layersCont = m_layers.size();
 	for (int i = layersCont - 1; i >= 0; --i){
-		ITouchable* layerPtr = dynamic_cast<ITouchable*>(m_layers[i]);
+		const IViewLayer* layerPtr = m_layers[i];
 		if (layerPtr != NULL){
 			TouchState touchState = layerPtr->IsTouched(position);
-			if (touchState != iview::IInteractiveShape::TS_NONE){
+			if (touchState != TS_NONE){
 				return touchState;
 			}
 		}
 	}
 
 	return TS_NONE;
+}
+
+
+QString CViewBase::GetShapeDescriptionAt(istd::CIndex2d position) const
+{
+	int layersCont = m_layers.size();
+	for (int i = layersCont - 1; i >= 0; --i){
+		const IViewLayer* layerPtr = m_layers[i];
+		if (layerPtr != NULL){
+			TouchState touchState = layerPtr->IsTouched(position);
+			if (touchState != TS_NONE){
+				return layerPtr->GetShapeDescriptionAt(position);
+			}
+		}
+	}
+
+	return "";
 }
 
 
@@ -559,7 +540,7 @@ void CViewBase::UpdateMousePointer()
 }
 
 
-void CViewBase::OnLayerInvalidated(const ILayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea)
+void CViewBase::OnLayerInvalidated(const IViewLayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea)
 {
 	I_ASSERT(!m_layers.isEmpty());
 
@@ -607,7 +588,7 @@ void CViewBase::OnAreaInvalidated(const i2d::CRect& beforeBox, const i2d::CRect&
 void CViewBase::OnChangeShape(IShape* shapePtr)
 {
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		ILayer* layerPtr = *iter;
+		IViewLayer* layerPtr = *iter;
 		I_ASSERT(layerPtr != NULL);
 
 		if (layerPtr->IsShapeConnected(shapePtr)){
@@ -617,19 +598,22 @@ void CViewBase::OnChangeShape(IShape* shapePtr)
 }
 
 
-void CViewBase::DisconnectShape(IShape* shapePtr)
+bool CViewBase::DisconnectShape(IShape* shapePtr)
 {
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		ILayer* layerPtr = *iter;
+		IViewLayer* layerPtr = *iter;
 		I_ASSERT(layerPtr != NULL);
 
-		if (layerPtr->IsShapeConnected(shapePtr)){
-			layerPtr->DisconnectShape(shapePtr);
+		if (layerPtr->DisconnectShape(shapePtr)){
 			if (iter == m_layers.begin()){
 				InvalidateBackground();
 			}
+
+			return true;
 		}
 	}
+
+	return false;
 }
 
 
@@ -697,7 +681,7 @@ void CViewBase::DrawLayers(QPainter& drawContext, int firstLayer, int lastLayer)
 	bool drawFocused = false;
 
 	for (int index = firstLayer; index <= lastLayer; ++index){
-		ILayer& layer = GetLayer(index);
+		IViewLayer& layer = GetLayer(index);
 		layer.DrawShapes(drawContext);
 
 		if (&layer == m_focusedLayerPtr){
@@ -721,7 +705,7 @@ void CViewBase::CalcInternalTransforms()
 void CViewBase::DisconnectAllShapes()
 {
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		ILayer* layerPtr = *iter;
+		IViewLayer* layerPtr = *iter;
 		I_ASSERT(layerPtr != NULL);
 
 		layerPtr->DisconnectAllShapes();
@@ -733,7 +717,7 @@ void CViewBase::InvalidateBackground()
 {
 	SetBackgroundBufferValid(false);
 	if (!m_layers.isEmpty()){
-		ILayer* backgroundLayerPtr = m_layers[0];
+		IViewLayer* backgroundLayerPtr = m_layers[0];
 		I_ASSERT(backgroundLayerPtr != NULL);
 
 		const i2d::CRect& clientRect = backgroundLayerPtr->GetBoundingBox();
@@ -753,7 +737,7 @@ void CViewBase::CalcBoundingBox() const
 	m_boundingBox.Reset();
 
 	for (Layers::const_iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
-		ILayer* layerPtr = *iter;
+		IViewLayer* layerPtr = *iter;
 		I_ASSERT(layerPtr != NULL);
 
 		m_boundingBox.Union(layerPtr->GetBoundingBox());
@@ -779,7 +763,7 @@ void CViewBase::CalcMouseShape() const
 		if (layerPtr != NULL){
 			IInteractiveShape* shapePtr;
 			ITouchable::TouchState touchState = layerPtr->IsTouched(m_lastMousePosition, &shapePtr);
-			if (touchState != iview::IInteractiveShape::TS_NONE){
+			if (touchState != TS_NONE){
 				m_mouseShapePtr = shapePtr;
 				return;
 			}
@@ -891,7 +875,7 @@ ISelectable::MousePointerMode CViewBase::CalcMousePointer(istd::CIndex2d positio
 			IInteractiveShape* shapePtr = NULL;
 
 			ITouchable::TouchState touchState = layerPtr->IsTouched(position, &shapePtr);
-			if (touchState != iview::IInteractiveShape::TS_NONE){
+			if (touchState != TS_NONE){
 				ISelectable::MousePointerMode result;
 				switch (touchState){
 				case iview::IInteractiveShape::TS_TICKER:

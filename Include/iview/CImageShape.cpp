@@ -100,8 +100,10 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPo
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CImageShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CImageShape::CalcBoundingBox() const
 {
+	i2d::CRect boundingBox = i2d::CRect::GetEmpty();
+
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const iview::CScreenTransform& transform = GetViewToScreenTransform();
@@ -118,14 +120,83 @@ void CImageShape::CalcBoundingBox(i2d::CRect& result) const
 		corners[2] = transform.GetScreenPosition(i2d::CVector2d(0, size.GetY()));
 		corners[3] = transform.GetScreenPosition(i2d::CVector2d(size.GetX(), size.GetY()));
 
-		result = i2d::CRect(corners[0], corners[0]);
-		result.Union(corners[1]);
-		result.Union(corners[2]);
-		result.Union(corners[3]);
+		boundingBox = i2d::CRect(corners[0], corners[0]);
+		boundingBox.Union(corners[1]);
+		boundingBox.Union(corners[2]);
+		boundingBox.Union(corners[3]);
 	}
-	else{
-		result.Reset();
+
+	return boundingBox;
+}
+
+
+// reimplemented (iview::ITouchable)
+
+ITouchable::TouchState CImageShape::IsTouched(istd::CIndex2d position) const
+{
+	const imod::IModel* modelPtr = GetModelPtr();
+	if (modelPtr != NULL){
+		const iview::CScreenTransform& transform = GetViewToScreenTransform();
+
+		const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(modelPtr);
+		I_ASSERT(bitmapPtr != NULL);
+
+		ibase::CSize size = bitmapPtr->GetImageSize();
+
+		istd::CIndex2d bitmapPosition = transform.GetClientPosition(position).ToIndex2d();
+		if (		(bitmapPosition.GetX() >= 0) &&
+					(bitmapPosition.GetY() >= 0) &&
+					(bitmapPosition.GetX() < size.GetX()) &&
+					(bitmapPosition.GetY() < size.GetY())){
+			return TS_INACTIVE;
+		}
 	}
+
+	return TS_NONE;
+}
+
+
+QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
+{
+	const imod::IModel* modelPtr = GetModelPtr();
+	if (modelPtr != NULL){
+		const iview::CScreenTransform& transform = GetViewToScreenTransform();
+
+		const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(modelPtr);
+		I_ASSERT(bitmapPtr != NULL);
+
+		ibase::CSize size = bitmapPtr->GetImageSize();
+
+		istd::CIndex2d bitmapPosition = transform.GetClientPosition(position).ToIndex2d();
+		if (		(bitmapPosition.GetX() >= 0) &&
+					(bitmapPosition.GetY() >= 0) &&
+					(bitmapPosition.GetX() < size.GetX()) &&
+					(bitmapPosition.GetY() < size.GetY())){
+			int pixelMode = bitmapPtr->GetPixelFormat();
+
+			icmm::CVarColor pixelValue = bitmapPtr->GetColorAt(bitmapPosition);
+			
+			switch (pixelMode){
+			case iimg::IBitmap::PF_GRAY:
+				return QObject::tr("Gray value %1%").arg(int(pixelValue[0] * 100));
+
+			case iimg::IBitmap::PF_RGB:
+				return QObject::tr("RGB value %1%, %2%, %3%")
+							.arg(int(pixelValue[0] * 100))
+							.arg(int(pixelValue[1] * 100))
+							.arg(int(pixelValue[2] * 100));
+
+			case iimg::IBitmap::PF_RGBA:
+				return QObject::tr("RGB value %1%, %2%, %3%, %4%")
+							.arg(int(pixelValue[0] * 100))
+							.arg(int(pixelValue[1] * 100))
+							.arg(int(pixelValue[2] * 100))
+							.arg(int(pixelValue[3] * 100));
+			}
+		}
+	}
+
+	return "";
 }
 
 

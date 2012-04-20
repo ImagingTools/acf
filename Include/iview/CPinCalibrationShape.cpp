@@ -27,8 +27,7 @@ CPinCalibrationShape::CPinCalibrationShape()
 
 iview::ITouchable::TouchState CPinCalibrationShape::IsTouched(istd::CIndex2d position) const
 {
-	i2d::CRect boundingBox;
-	CPinCalibrationShape::CalcBoundingBox(boundingBox);
+	i2d::CRect boundingBox = CPinCalibrationShape::GetBoundingBox();
 	if (boundingBox.IsInside(position) != 0){
 		return TS_TICKER;
 	}
@@ -150,7 +149,7 @@ bool CPinCalibrationShape::OnMouseMove(istd::CIndex2d position)
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CPinCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CPinCalibrationShape::CalcBoundingBox() const
 {
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (IsDisplayConnected() && (pinPtr != NULL)){
@@ -177,11 +176,11 @@ void CPinCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
 		}
 
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(tickerType);
-		result = tickerBox.GetTranslated(screenPos);
+
+		return tickerBox.GetTranslated(screenPos);
 	}
-	else{
-		result.Reset();
-	}
+
+	return i2d::CRect();
 }
 
 

@@ -252,15 +252,14 @@ const i2d::ITransformation2d* CNoneCalibrationShape::GetCalibrationPtr() const
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CNoneCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CNoneCalibrationShape::CalcBoundingBox() const
 {
 	iview::IDisplay* displayPtr = GetDisplayPtr();
 	if (displayPtr != NULL){
-		result = displayPtr->GetClientRect();
+		return displayPtr->GetClientRect();
 	}
-	else{
-		result.Reset();
-	}
+
+	return i2d::CRect();
 }
  
 

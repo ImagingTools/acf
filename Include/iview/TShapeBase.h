@@ -7,6 +7,7 @@
 #include "iview/IDisplay.h"
 #include "iview/IColorShema.h"
 #include "iview/ILogicalCoords.h"
+#include "iview/IViewLayer.h"
 #include "iview/CShapeControl.h"
 
 
@@ -35,7 +36,6 @@ public:
 	TShapeBase(const TShapeBase<Base>& shape);
 	virtual ~TShapeBase();
 
-	virtual const i2d::CRect& GetBoundingBoxRef() const;
 	virtual void DisconnectFromModel();
 	virtual bool AssignToLayer(int layerType);
 
@@ -56,6 +56,10 @@ public:
 	virtual void OnConnectDisplay(IDisplay* displayPtr);
 	virtual void OnDisconnectDisplay(IDisplay* displayPtr);
 	virtual bool OnDisplayChange(int flags);
+
+	// reimplemented (iview::ITouchable)
+	virtual ITouchable::TouchState IsTouched(istd::CIndex2d position) const;
+	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
 
 	// reimplemented (imod::IObserver)
 	virtual void OnUpdate(int changeFlags, istd::IPolymorphic* updateParamsPtr);
@@ -105,7 +109,7 @@ protected:
 		Calculate bounding box.
 		You have to implement this method in your shapes implementations.
 	*/
-	virtual void CalcBoundingBox(i2d::CRect& result) const = 0;
+	virtual i2d::CRect CalcBoundingBox() const = 0;
 
 private:
 	const IColorShema* m_userColorShemaPtr;
@@ -149,13 +153,6 @@ template <class Base>
 imod::IModel* TShapeBase<Base>::GetShapeModelPtr() const
 {
 	return BaseClass3::GetModelPtr();
-}
-
-
-template <class Base>
-inline const i2d::CRect& TShapeBase<Base>::GetBoundingBoxRef() const
-{
-	return m_boundingBox;
 }
 
 
@@ -228,7 +225,7 @@ TShapeBase<Base>::TShapeBase()
 	m_displayPtr = NULL;
 	m_isBoundingBoxValid = false;
 	
-	m_layerType = iview::ILayer::LT_INACTIVE;
+	m_layerType = iview::IViewLayer::LT_INACTIVE;
 }
 
 
@@ -298,16 +295,16 @@ void TShapeBase<Base>::OnUpdate(int changeFlags, istd::IPolymorphic* /*updatePar
 template <class Base>
 i2d::CRect TShapeBase<Base>::GetBoundingBox() const
 {
-	if (IsVisible()){
-		if (!m_isBoundingBoxValid){
-			CalcBoundingBox(m_boundingBox);
+	if (!m_isBoundingBoxValid){
+		if (IsVisible()){
+			m_boundingBox = CalcBoundingBox();
 		}
-	}
-	else{
-		m_boundingBox.Reset();
-	}
+		else{
+			m_boundingBox.Reset();
+		}
 
-	m_isBoundingBoxValid = true;
+		m_isBoundingBoxValid = true;
+	}
 
 	return m_boundingBox;
 }
@@ -356,6 +353,21 @@ bool TShapeBase<Base>::OnDisplayChange(int flags)
 		return true;
 	}
 	return false;
+}
+
+
+// reimplemented (iview::ITouchable)
+template <class Base>
+ITouchable::TouchState TShapeBase<Base>::IsTouched(istd::CIndex2d /*position*/) const
+{
+	return TS_NONE;
+}
+
+
+template <class Base>
+QString TShapeBase<Base>::GetShapeDescriptionAt(istd::CIndex2d /*position*/) const
+{
+	return "";
 }
 
 

@@ -63,25 +63,6 @@ double CPolygon::GetOutlineLength() const
 }
 
 
-void CPolygon::CalcBoundingBox(i2d::CRectangle& result) const
-{
-	int nodesCount = GetNodesCount();
-
-	if (nodesCount > 0){
-		i2d::CVector2d sp = GetNode(0);
-		i2d::CRectangle boundingBox(sp, sp);
-		for (int i = 1; i < nodesCount; i++){
-			sp = GetNode(i);
-			boundingBox.Unite(sp);
-		}
-		result = boundingBox;
-		return;
-	}
-
-	result.Reset();
-}
-
-
 i2d::CRectangle CPolygon::GetBoundingBox() const
 {
 	int nodesCount = GetNodesCount();

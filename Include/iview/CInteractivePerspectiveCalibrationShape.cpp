@@ -221,13 +221,14 @@ bool CInteractivePerspectiveCalibrationShape::OnMouseMove(istd::CIndex2d positio
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractivePerspectiveCalibrationShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractivePerspectiveCalibrationShape::CalcBoundingBox() const
 {
-	result.Reset();
 	iview::IDisplay* displayPtr = GetDisplayPtr();
 	if (displayPtr != NULL){
-		result = displayPtr->GetClientRect();
+		return displayPtr->GetClientRect();
 	}
+
+	return i2d::CRect();
 }
 
 

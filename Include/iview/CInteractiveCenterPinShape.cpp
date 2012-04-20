@@ -112,7 +112,7 @@ bool CInteractiveCenterPinShape::OnMouseMove(istd::CIndex2d position)
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractiveCenterPinShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractiveCenterPinShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -137,11 +137,11 @@ void CInteractiveCenterPinShape::CalcBoundingBox(i2d::CRect& result) const
 		}
 
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(tickerType);
-		result = tickerBox.GetTranslated(sp);
+
+		return tickerBox.GetTranslated(sp);
 	}
-	else{
-		result.Reset();
-	}
+
+	return i2d::CRect();
 }
 
 

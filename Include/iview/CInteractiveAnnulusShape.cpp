@@ -336,7 +336,7 @@ ITouchable::TouchState CInteractiveAnnulusShape::IsTouched(istd::CIndex2d positi
 
 // reimplemented (iview::CInteractiveShapeBase)
 
-void CInteractiveAnnulusShape::CalcBoundingBox(i2d::CRect& result) const
+i2d::CRect CInteractiveAnnulusShape::CalcBoundingBox() const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -355,14 +355,16 @@ void CInteractiveAnnulusShape::CalcBoundingBox(i2d::CRect& result) const
 
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(IsSelected()? IColorShema::TT_NORMAL: IColorShema::TT_INACTIVE);
 
-		i2d::CRect boundingBox(	int(center.GetX() - radius * scale.GetX()), int(center.GetY() - radius * scale.GetY()),
-							int(center.GetX() + radius * scale.GetX()), int(center.GetY() + radius * scale.GetY()));
+		i2d::CRect boundingBox(
+					int(center.GetX() - radius * scale.GetX() - 1), int(center.GetY() - radius * scale.GetY() + 1),
+					int(center.GetX() + radius * scale.GetX() - 1), int(center.GetY() + radius * scale.GetY() + 1));
 
-		result = boundingBox.GetExpanded(tickerBox);
+		boundingBox.Expand(tickerBox);
+
+		return boundingBox;
 	}
-	else{
-		result.Reset();
-	}
+
+	return i2d::CRect();
 }
 
 

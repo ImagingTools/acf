@@ -69,13 +69,13 @@ public:
 		\param	layerType	used to set standard layers. \sa iview::IShapeView::LayerType
 		\return	index of this layer.
 	*/
-	virtual int InsertLayer(ILayer* layerPtr, int index = -1, int layerType = ILayer::LT_NONE) = 0;
+	virtual int InsertLayer(IViewLayer* layerPtr, int index = -1, int layerType = IViewLayer::LT_NONE) = 0;
 	
 	/**
 		Get index of layer.
 		\return	layer index, or -1 if not found.
 	*/
-	virtual int GetLayerIndex(const ILayer& layer) const = 0;
+	virtual int GetLayerIndex(const IViewLayer& layer) const = 0;
 	
 	/**
 		Remove layer from view.
@@ -90,7 +90,7 @@ public:
 	/**
 		Get layer with the given index.
 	*/
-	virtual ILayer& GetLayer(int index) const = 0;
+	virtual IViewLayer& GetLayer(int index) const = 0;
 
 	/**
 		Connect shape object to view.
@@ -117,7 +117,7 @@ public:
 	/**
 		Inform that layer was invalidated.
 	*/
-	virtual void OnLayerInvalidated(const ILayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea) = 0;
+	virtual void OnLayerInvalidated(const IViewLayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea) = 0;
 
 	// reimplemented (iview::ISelectable)
 	virtual void OnShapeFocused(IInteractiveShape* /*shapePtr*/){}

@@ -85,6 +85,20 @@ void CGuiComponentBase::OnTryClose(bool* ignoredPtr)
 }
 
 
+// reimplemented (iqtgui::IVisualStatusProvider)
+
+QIcon CGuiComponentBase::GetStatusIcon() const
+{
+	return m_defaultStatusIcon;
+}
+
+
+QString CGuiComponentBase::GetStatusText() const
+{
+	return *m_defaultStatusTextAttrPtr;
+}
+
+
 // protected methods
 
 void CGuiComponentBase::OnGuiShown()
@@ -179,6 +193,10 @@ void CGuiComponentBase::OnComponentCreated()
 	QCoreApplication* applicationPtr = QCoreApplication::instance();
 	if (applicationPtr != NULL){
 		applicationPtr->installEventFilter(&m_languageChangeEventFilter);
+	}
+
+	if (m_defaultStatusIconPathAttrPtr.IsValid()){
+		m_defaultStatusIcon = QIcon(*m_defaultStatusIconPathAttrPtr);
 	}
 
 	OnRetranslate();
