@@ -204,6 +204,8 @@ public:
 	CVarVector& operator*=(double scalar);
 	CVarVector& operator/=(double scalar);
 
+	CVarVector& operator=(const CVarVector& vector);
+
 	double operator[](int i) const;
 	double& operator[](int i);
 
@@ -514,6 +516,15 @@ inline CVarVector& CVarVector::operator/=(double scalar)
 	for (int i = 0; i < elementsCount; ++i){
 		m_elements[i] /= scalar;
 	}
+
+	return *this;
+}
+
+
+inline CVarVector& CVarVector::operator=(const CVarVector& vector)
+{
+	SetElementsCount(vector.GetElementsCount(), 0);
+	SetElementsFrom(vector);
 
 	return *this;
 }
