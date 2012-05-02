@@ -1,4 +1,4 @@
-#include "iqt2d/CSceneProviderGuiComp.h"
+#include "icmpstr/CSceneProviderGuiComp.h"
 
 
 // Qt includes
@@ -13,7 +13,7 @@
 #include "iqtdoc/CMainWindowGuiComp.h"
 
 
-namespace iqt2d
+namespace icmpstr
 {
 
 
@@ -82,7 +82,7 @@ const ibase::IHierarchicalCommand* CSceneProviderGuiComp::GetCommands() const
 }
 
 
-// reimplemented (iqt2d::ISceneProvider)
+// reimplemented (icmpstr::ISceneProvider)
 
 int CSceneProviderGuiComp::GetSceneId() const
 {
@@ -824,7 +824,7 @@ void CSceneProviderGuiComp::CScene::dragMoveEvent(QGraphicsSceneDragDropEvent* /
 }
 
 
-} // namespace iqt2d
+} // namespace icmpstr
 
 
 

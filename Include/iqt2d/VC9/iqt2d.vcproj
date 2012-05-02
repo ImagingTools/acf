@@ -208,14 +208,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSceneControllerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSceneProviderGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSelectableSceneExtenderComp.cpp"
 				>
 			</File>
@@ -292,14 +284,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSceneControllerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSceneProviderGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSelectableSceneExtenderComp.h"
 				>
 			</File>
@@ -312,10 +296,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ISceneProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IViewExtender.h"
 				>
 			</File>
@@ -324,27 +304,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TObjectShapeBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSceneExtenderCompBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TSceneExtenderDelegatorCompWrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TScenographerCompBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\TShapeBase.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TShapeParamsGuiCompBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TViewExtenderCompBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TViewExtenderDelegatorCompWrap.h"
 				>
 			</File>
 		</Filter>
@@ -382,14 +350,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSceneControllerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CSceneProviderGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\ui_CAnnulusParamsGuiComp.h"
 				>
 			</File>
@@ -419,14 +379,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CSceneConnectorGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CSceneControllerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CSceneProviderGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -466,14 +418,6 @@
 				RelativePath="..\CSceneConnectorGuiComp.ui"
 				>
 			</File>
-			<File
-				RelativePath="..\CSceneControllerGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CSceneProviderGuiComp.ui"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Moc Files"
@@ -504,14 +448,6 @@
 			</File>
 			<File
 				RelativePath="..\CRectangleParamsGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSceneControllerGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSceneProviderGuiComp.moc"
 				>
 			</File>
 		</Filter>

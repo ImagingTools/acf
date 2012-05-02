@@ -27,7 +27,7 @@ static icomp::TSimComponentWrap<CompositorPck::AttributeEditor>* modelObserverPt
 // dirty work-around to simulate composed components
 class RegistryView: public icomp::CComponentBase
 {
-	icomp::TSimComponentWrap<QtViewPck::SceneProvider>* sceneProviderPtr;
+	icomp::TSimComponentWrap<CompositorPck::SceneProvider>* sceneProviderPtr;
 	icomp::TSimComponentWrap<CompositorPck::VisualRegistryScenographer> scenographer;
 	icomp::TSimComponentWrap<BasePck::ModelBinder> binder;
 
@@ -38,7 +38,7 @@ public:
 	I_END_COMPONENT;
 
 	RegistryView()
-	:	sceneProviderPtr(new icomp::TSimComponentWrap<QtViewPck::SceneProvider>())
+	:	sceneProviderPtr(new icomp::TSimComponentWrap<CompositorPck::SceneProvider>())
 	{
 		scenographer.SetRef("SceneProvider", this);
 		scenographer.SetRef("MetaInfoManager", metaInfoManagerPtr);
@@ -66,8 +66,8 @@ public:
 		if (interfaceType.IsType<imod::IObserver>() || interfaceType.IsType<iqtgui::IDropConsumer>()){
 			return scenographer.GetInterface(interfaceType, subId);
 		}
-		else if (interfaceType.IsType<iqt2d::ISceneProvider>()){
-			return dynamic_cast<iqt2d::ISceneProvider*>(sceneProviderPtr);
+		else if (interfaceType.IsType<icmpstr::ISceneProvider>()){
+			return dynamic_cast<icmpstr::ISceneProvider*>(sceneProviderPtr);
 		}
 		else{
 			return sceneProviderPtr->GetInterface(interfaceType, subId);

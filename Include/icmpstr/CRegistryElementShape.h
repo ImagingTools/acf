@@ -7,8 +7,7 @@
 
 #include "imod/TSingleModelObserverBase.h"
 
-#include "iqt2d/TObjectShapeBase.h"
-
+#include "icmpstr/TObjectShapeBase.h"
 #include "icmpstr/CVisualRegistryElement.h"
 
 
@@ -22,16 +21,16 @@ class CVisualRegistryScenographerComp;
 /**
 	Visualization of geometrical registry elements.
 */
-class CRegistryElementShape: public iqt2d::TObjectShapeBase<QGraphicsRectItem, CVisualRegistryElement>
+class CRegistryElementShape: public icmpstr::TObjectShapeBase<QGraphicsRectItem, CVisualRegistryElement>
 {
 	Q_OBJECT
 
 public:
-	typedef iqt2d::TObjectShapeBase<QGraphicsRectItem, CVisualRegistryElement> BaseClass;
+	typedef icmpstr::TObjectShapeBase<QGraphicsRectItem, CVisualRegistryElement> BaseClass;
 
 	CRegistryElementShape(
 				const CVisualRegistryScenographerComp* registryViewPtr,
-				const iqt2d::ISceneProvider* providerPtr = NULL);
+				const icmpstr::ISceneProvider* providerPtr = NULL);
 
 	QRectF GetViewRect() const;
 
@@ -62,7 +61,7 @@ protected:
 
 	void CalcExportedInteraces(const CVisualRegistryElement& element);
 
-	// reimplemented (iqt2d::TObjectShapeBase)
+	// reimplemented (icmpstr::TObjectShapeBase)
 	void UpdateGraphicsItem(const CVisualRegistryElement& element);
 
 	// reimplemented (TShapeBase)

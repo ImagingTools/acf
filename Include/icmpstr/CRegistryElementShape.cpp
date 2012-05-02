@@ -21,7 +21,7 @@ namespace icmpstr
 
 CRegistryElementShape::CRegistryElementShape(
 			const CVisualRegistryScenographerComp* registryViewPtr,
-			const iqt2d::ISceneProvider* providerPtr)
+			const icmpstr::ISceneProvider* providerPtr)
 :	BaseClass(true, providerPtr),
 	m_registryView(*registryViewPtr),
 	m_exportIcon(":/Icons/Export.svg"),
@@ -250,7 +250,7 @@ void CRegistryElementShape::CalcExportedInteraces(const CVisualRegistryElement& 
 }
 
 
-// reimplemented (iqt2d::TObjectShapeBase)
+// reimplemented (icmpstr::TObjectShapeBase)
 
 void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& element)
 {
@@ -348,7 +348,7 @@ void CRegistryElementShape::UpdateGraphicsItem(const CVisualRegistryElement& ele
 	}
 
 	double gridSize;
-	const iqt2d::ISceneProvider* providerPtr = GetSceneProvider();
+	const icmpstr::ISceneProvider* providerPtr = GetSceneProvider();
 	if ((providerPtr != NULL) && providerPtr->GetSceneAlignment(gridSize)){
 		width = qCeil(width / gridSize) * gridSize;
 		height = qCeil(height / gridSize) * gridSize;

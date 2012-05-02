@@ -17,6 +17,7 @@
 #include "icmpstr/CQuickHelpGuiComp.h"
 #include "icmpstr/CPackagesLoaderExtComp.h"
 #include "icmpstr/CComponentNoteEditorComp.h"
+#include "icmpstr/CSceneProviderGuiComp.h"
 
 
 /**
@@ -45,6 +46,7 @@ typedef icmpstr::CRegistryPropEditorComp RegistryPropEditor;
 typedef icmpstr::CQuickHelpGuiComp QuickHelpGui;
 typedef icomp::TModelCompWrap<icmpstr::CPackagesLoaderExtComp> PackagesLoaderExt;
 typedef icmpstr::CComponentNoteEditorComp ComponentNoteEditor;
+typedef icomp::TModelCompWrap<icmpstr::CSceneProviderGuiComp> SceneProvider;
 
 
 } // namespace CompositorPck

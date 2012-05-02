@@ -1,5 +1,5 @@
-#ifndef iqt2d_TShapeBase_included
-#define iqt2d_TShapeBase_included
+#ifndef icmpstr_TShapeBase_included
+#define icmpstr_TShapeBase_included
 
 
 // Qt includes
@@ -15,10 +15,10 @@
 #include <QtGui/QStyleOptionGraphicsItem>
 
 // ACF includes
-#include "iqt2d/ISceneProvider.h"
+#include "icmpstr/ISceneProvider.h"
 
 
-namespace iqt2d
+namespace icmpstr
 {
 
 
@@ -245,7 +245,7 @@ template <class GraphicsItemClass>
 QVariant TShapeBase<GraphicsItemClass>::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
 	if (change == BaseClass::ItemPositionChange){
-		if (m_providerPtr != NULL && ((m_providerPtr->GetSceneFlags() & iqt2d::ISceneProvider::SF_FIXED_SIZE) != 0)){
+		if (m_providerPtr != NULL && ((m_providerPtr->GetSceneFlags() & icmpstr::ISceneProvider::SF_FIXED_SIZE) != 0)){
 			QGraphicsScene* scenePtr = m_providerPtr->GetScene();
 
 			if (scenePtr != NULL){
@@ -336,9 +336,9 @@ inline void TShapeBase<QAbstractGraphicsShapeItem>::paint(QPainter* /*painter*/,
 }
 
 
-} // namespace iqt2d
+} // namespace icmpstr
 
 
-#endif // !iqt2d_TShapeBase_included
+#endif // !icmpstr_TShapeBase_included
 
 

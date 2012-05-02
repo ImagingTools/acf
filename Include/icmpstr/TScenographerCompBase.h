@@ -1,5 +1,5 @@
-#ifndef iqt2d_TScenographerCompBase_included
-#define iqt2d_TScenographerCompBase_included
+#ifndef icmpstr_TScenographerCompBase_included
+#define icmpstr_TScenographerCompBase_included
 
 
 // Qt includes
@@ -12,10 +12,10 @@
 
 #include "iqtgui/IDropConsumer.h"
 
-#include "iqt2d/ISceneProvider.h"
+#include "icmpstr/ISceneProvider.h"
 
 
-namespace iqt2d
+namespace icmpstr
 {
 
 
@@ -76,7 +76,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 protected:
-	I_REF(iqt2d::ISceneProvider, m_sceneProviderCompPtr);
+	I_REF(icmpstr::ISceneProvider, m_sceneProviderCompPtr);
 
 	QGraphicsScene* m_scenePtr;
 
@@ -194,9 +194,9 @@ void TScenographerCompBase<Observer>::OnComponentDestroyed()
 }
 
 
-} // namespace iqt2d
+} // namespace icmpstr
 
 
-#endif // !iqt2d_TScenographerCompBase_included
+#endif // !icmpstr_TScenographerCompBase_included
 
 

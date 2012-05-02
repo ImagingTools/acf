@@ -76,6 +76,11 @@ I_EXPORT_COMPONENT(
 			"Editor for user notes in the component diagram",
 			"Help Technical Documentation Note Component" IM_TAG("GUI Help"));
 
+I_EXPORT_COMPONENT(
+			SceneProvider,
+			"Obsolete scene provider used in compositor only",
+			"Scene Provider Extender Display Console" IM_TAG("Deprecated"));
+
 
 } // namespace CompositorPck
 

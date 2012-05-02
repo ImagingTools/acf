@@ -66,7 +66,7 @@
         SceneProvider
       </Id>
       <PackageId>
-        QtViewPck
+        CompositorPck
       </PackageId>
       <ComponentId>
         SceneProvider
@@ -474,7 +474,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iqt2d::ISceneProvider
+        icmpstr::ISceneProvider
       </InterfaceId>
       <ComponentId>
         SceneProvider

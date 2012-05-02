@@ -1,5 +1,5 @@
-#ifndef iqt2d_CSceneProviderGuiComp_included
-#define iqt2d_CSceneProviderGuiComp_included
+#ifndef icmpstr_CSceneProviderGuiComp_included
+#define icmpstr_CSceneProviderGuiComp_included
 
 
 // Qt includes
@@ -17,11 +17,11 @@
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
-#include "iqt2d/ISceneProvider.h"
-#include "iqt2d/Generated/ui_CSceneProviderGuiComp.h"
+#include "icmpstr/ISceneProvider.h"
+#include "icmpstr/Generated/ui_CSceneProviderGuiComp.h"
 
 
-namespace iqt2d
+namespace icmpstr
 {
 
 
@@ -95,7 +95,7 @@ public:
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
-	// reimplemented (iqt2d::ISceneProvider)
+	// reimplemented (icmpstr::ISceneProvider)
 	virtual int GetSceneId() const;
 	virtual QGraphicsScene* GetScene() const;
 	virtual bool GetSceneAlignment(double& distance) const;
@@ -222,9 +222,9 @@ inline iqtgui::CHierarchicalCommand& CSceneProviderGuiComp::GetCommandsRootRef()
 }
 
 
-} // namespace iqt2d
+} // namespace icmpstr
 
 
-#endif // !iqt2d_CSceneProviderGuiComp_included
+#endif // !icmpstr_CSceneProviderGuiComp_included
 
 

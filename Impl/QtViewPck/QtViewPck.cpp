@@ -27,11 +27,6 @@ I_EXPORT_COMPONENT(
 			"Scene Connector Provider Extender Display Console" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
-			SceneProvider,
-			"Standard scene provider",
-			"Scene Provider Extender Display Console" IM_TAG("GUI"));
-
-I_EXPORT_COMPONENT(
 			ImageView,
 			"Display bitmap using observer pattern",
 			"Bitmap Display Viewer Observer" IM_TAG("GUI Image 2D"));
@@ -70,11 +65,6 @@ I_EXPORT_COMPONENT(
 			PolygonParamsGui,
 			"Polygon parameter GUI displaying a polygon using scene",
 			"Polygon Parameters Observer Display" IM_TAG("GUI Editor 2D"));
-
-I_EXPORT_COMPONENT(
-			SceneControllerGui,
-			"Scene controller allowing to control scale and other scene properties",
-			"Observer Display GUI Scene Controller Zoom Rotate" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			SceneBinder,

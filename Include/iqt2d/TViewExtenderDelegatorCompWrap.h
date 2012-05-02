@@ -1,5 +1,5 @@
-#ifndef iqt2d_TSceneExtenderDelegatorCompWrap_included
-#define iqt2d_TSceneExtenderDelegatorCompWrap_included
+#ifndef iqt2d_TViewExtenderDelegatorCompWrap_included
+#define iqt2d_TViewExtenderDelegatorCompWrap_included
 
 
 // ACF includes
@@ -13,14 +13,14 @@ namespace iqt2d
 
 
 template<class Base>
-class TSceneExtenderDelegatorCompWrap:
+class TViewExtenderDelegatorCompWrap:
 			public Base,
 			virtual public iqt2d::IViewExtender
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
-	I_BEGIN_COMPONENT(TSceneExtenderDelegatorCompWrap);
+	I_BEGIN_COMPONENT(TViewExtenderDelegatorCompWrap);
 		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
 		I_ASSIGN(m_slaveExtenderCompPtr, "SlaveSceneExtender", "Slave scene extender", false, "SlaveSceneExtender");
 	I_END_COMPONENT;
@@ -38,7 +38,7 @@ private:
 // reimplemented (iqt2d::IViewExtender)
 
 template<class Base>
-void TSceneExtenderDelegatorCompWrap<Base>::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
+void TViewExtenderDelegatorCompWrap<Base>::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
 	if (m_slaveExtenderCompPtr.IsValid()){
 		m_slaveExtenderCompPtr->AddItemsToScene(providerPtr, flags);
@@ -47,7 +47,7 @@ void TSceneExtenderDelegatorCompWrap<Base>::AddItemsToScene(iqt2d::IViewProvider
 
 
 template<class Base>
-void TSceneExtenderDelegatorCompWrap<Base>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
+void TViewExtenderDelegatorCompWrap<Base>::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
 	if (m_slaveExtenderCompPtr.IsValid()){
 		m_slaveExtenderCompPtr->RemoveItemsFromScene(providerPtr);
@@ -55,12 +55,12 @@ void TSceneExtenderDelegatorCompWrap<Base>::RemoveItemsFromScene(iqt2d::IViewPro
 }
 
 
-typedef TSceneExtenderDelegatorCompWrap<icomp::CComponentBase> CSceneExtenderDelegatorComp;
+typedef TViewExtenderDelegatorCompWrap<icomp::CComponentBase> CViewExtenderDelegatorComp;
 
 
 } // namespace iqt2d
 
 
-#endif // !iqt2d_TSceneExtenderDelegatorCompWrap_included
+#endif // !iqt2d_TViewExtenderDelegatorCompWrap_included
 
 

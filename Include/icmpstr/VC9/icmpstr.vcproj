@@ -216,6 +216,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSceneProviderGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVisualRegistryComp.cpp"
 				>
 			</File>
@@ -294,6 +298,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSceneProviderGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CVisualRegistryComp.h"
 				>
 			</File>
@@ -327,6 +335,22 @@
 			</File>
 			<File
 				RelativePath="..\IRegistryPreview.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ISceneProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TObjectShapeBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TScenographerCompBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TShapeBase.h"
 				>
 			</File>
 		</Filter>
@@ -387,6 +411,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CSceneProviderGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CVisualRegistryScenographerComp.cpp"
 				>
 			</File>
@@ -416,6 +444,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CRegistryPropEditorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CSceneProviderGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -493,10 +525,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSceneProviderGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CVisualRegistryScenographerComp.moc"
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\CSceneProviderGuiComp.ui"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

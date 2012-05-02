@@ -7,7 +7,7 @@
 
 #include "iview/CShapeControl.h"
 
-#include "iqt2d/TSceneExtenderCompBase.h"
+#include "iqt2d/TViewExtenderCompBase.h"
 
 
 namespace iqt2d
@@ -16,11 +16,11 @@ namespace iqt2d
 
 template <class Ui, class Shape, class ShapeModel>
 class TShapeParamsGuiCompBase:
-			public iqt2d::TSceneExtenderCompBase<
+			public iqt2d::TViewExtenderCompBase<
 						iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> >
 {
 public:
-	typedef iqt2d::TSceneExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> > BaseClass;
+	typedef iqt2d::TViewExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> > BaseClass;
 
 	I_BEGIN_COMPONENT(TShapeParamsGuiCompBase);
 		I_ASSIGN(m_unitNameAttrPtr, "UnitName", "Name of geometric units e.g. mm", false, "mm");
@@ -36,7 +36,7 @@ protected:
 
 	virtual void UpdateShapeView();
 
-	// reimplemented (iqt2d::TSceneExtenderCompBase)
+	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
 	I_ATTR(QString, m_unitNameAttrPtr);
@@ -129,7 +129,7 @@ void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::UpdateShapeView()
 }
 
 
-// reimplemented (iqt2d::TSceneExtenderCompBase)
+// reimplemented (iqt2d::TViewExtenderCompBase)
 
 template <class Ui, class Shape, class ShapeModel>
 void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShapes(int /*sceneId*/, Shapes& result)

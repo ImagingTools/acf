@@ -19,12 +19,12 @@ namespace iqt2d
 
 
 template <class Base>
-class TSceneExtenderCompBase: public Base, virtual public IViewExtender
+class TViewExtenderCompBase: public Base, virtual public IViewExtender
 {
 public:
 	typedef Base BaseClass;
 
-	I_BEGIN_BASE_COMPONENT(TSceneExtenderCompBase);
+	I_BEGIN_BASE_COMPONENT(TViewExtenderCompBase);
 		I_REGISTER_INTERFACE(IViewExtender);
 		I_ASSIGN(m_slaveExtenderCompPtr, "SlaveSceneExtender", "Scene extender will be used to provide background shapes", false, "SlaveSceneExtender");
 		I_ASSIGN_MULTI_0(m_idFiltersAttrPtr, "SceneIdFilters", "Optional scene ID filters allowing to ignore some scene providers", false);
@@ -59,7 +59,7 @@ private:
 // reimplemented (iqt2d::IViewExtender)
 
 template <class Base>
-void TSceneExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, int flags)
+void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, int flags)
 {
 	I_ASSERT(providerPtr != NULL);
 
@@ -95,7 +95,7 @@ void TSceneExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, i
 
 
 template <class Base>
-void TSceneExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerPtr)
+void TViewExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerPtr)
 {
 	I_ASSERT(providerPtr != NULL);
 
@@ -127,7 +127,7 @@ void TSceneExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerP
 // protected methods
 
 template <class Base>
-bool TSceneExtenderCompBase<Base>::IsSceneIdSupported(int id) const
+bool TViewExtenderCompBase<Base>::IsSceneIdSupported(int id) const
 {
 	if (m_idFiltersAttrPtr.IsValid()){
 		int filtersCount = m_idFiltersAttrPtr.GetCount();
@@ -146,14 +146,14 @@ bool TSceneExtenderCompBase<Base>::IsSceneIdSupported(int id) const
 
 
 template <class Base>
-const typename TSceneExtenderCompBase<Base>::ShapesMap& TSceneExtenderCompBase<Base>::GetShapesMap() const
+const typename TViewExtenderCompBase<Base>::ShapesMap& TViewExtenderCompBase<Base>::GetShapesMap() const
 {
 	return m_shapesMap;
 }
 
 
 template <class Base>
-void TSceneExtenderCompBase<Base>::UpdateAllViews()
+void TViewExtenderCompBase<Base>::UpdateAllViews()
 {
 	for (ShapesMap::iterator index = m_shapesMap.begin(); index != m_shapesMap.end(); index++){
 		IViewProvider* viewProvderPtr = index.key();

@@ -1,5 +1,5 @@
-#ifndef iqt2d_ISceneProvider_included
-#define iqt2d_ISceneProvider_included
+#ifndef icmpstr_ISceneProvider_included
+#define icmpstr_ISceneProvider_included
 
 
 // Qt includes
@@ -8,10 +8,10 @@
 // ACF includes
 #include "istd/IPolymorphic.h"
 
-#include "iqt2d/iqt2d.h"
+#include "icmpstr/icmpstr.h"
 
 
-namespace iqt2d
+namespace icmpstr
 {
 
 
@@ -64,9 +64,9 @@ public:
 };
 
 
-} // namespace iqt2d
+} // namespace icmpstr
 
 
-#endif // !iqt2d_ISceneProvider_included
+#endif // !icmpstr_ISceneProvider_included
 
 

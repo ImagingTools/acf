@@ -7,7 +7,7 @@
 #include <QtGui/QGraphicsItem>
 
 // ACF includes
-#include "iqt2d/ISceneProvider.h"
+#include "icmpstr/ISceneProvider.h"
 
 
 namespace icmpstr
@@ -41,7 +41,7 @@ public:
 	};
 
     CGraphicsConnectorItem(
-				const iqt2d::ISceneProvider& sceneProvider,
+				const icmpstr::ISceneProvider& sceneProvider,
 				int connectFlags = 0,
 				QGraphicsItem* parent = NULL);
 
@@ -66,7 +66,7 @@ protected Q_SLOTS:
 	void OnDestSelected(bool state);
 
 private:
-	const iqt2d::ISceneProvider& m_sceneProvider;
+	const icmpstr::ISceneProvider& m_sceneProvider;
 
 	int m_connectFlags;
 

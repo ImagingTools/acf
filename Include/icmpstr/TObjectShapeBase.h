@@ -1,5 +1,5 @@
-#ifndef iqt2d_TObjectShapeBase_included
-#define iqt2d_TObjectShapeBase_included
+#ifndef icmpstr_TObjectShapeBase_included
+#define icmpstr_TObjectShapeBase_included
 
 
 // Qt includes
@@ -12,10 +12,10 @@
 
 #include "i2d/IObject2d.h"
 
-#include "iqt2d/TShapeBase.h"
+#include "icmpstr/TShapeBase.h"
 
 
-namespace iqt2d
+namespace icmpstr
 {
 
 
@@ -187,9 +187,9 @@ void TObjectShapeBase<GraphicsItemClass, ObjectClass>::AfterUpdate(imod::IModel*
 }
 
 
-} // namespace iqt2d
+} // namespace icmpstr
 
 
-#endif // !iqt2d_TObjectShapeBase_included
+#endif // !icmpstr_TObjectShapeBase_included
 
 
