@@ -42,7 +42,7 @@ QIcon CLogGuiComp::GetStatusIcon() const
 	static QIcon errorIcon(":/Icons/Error.svg");
 	static QIcon logIcon(":/Icons/Log");
 
-	int worstCategory = -1;
+	int worstCategory = istd::IInformationProvider::IC_NONE;
 	
 	ibase::IMessageContainer* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -68,7 +68,7 @@ QIcon CLogGuiComp::GetStatusIcon() const
 
 QString CLogGuiComp::GetStatusText() const
 {
-	int worstCategory = -1;
+	int worstCategory = istd::IInformationProvider::IC_NONE;
 	
 	ibase::IMessageContainer* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
