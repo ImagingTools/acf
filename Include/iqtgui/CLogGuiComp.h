@@ -7,10 +7,10 @@
 
 
 // ACF includes
+#include "iser/IFileLoader.h"
+
 #include "ibase/IMessageContainer.h"
 #include "ibase/CMessage.h"
-
-#include "iser/IFileLoader.h"
 
 #include "iqtgui/IVisualStatusProvider.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
@@ -26,8 +26,7 @@ namespace iqtgui
 	Message container displaying messages as log list.
 */
 class CLogGuiComp:
-			public iqtgui::TDesignerGuiObserverCompBase<Ui::CLogGuiComp, ibase::IMessageContainer>,
-			virtual public IVisualStatusProvider
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CLogGuiComp, ibase::IMessageContainer>
 {
 	Q_OBJECT
 
@@ -35,7 +34,6 @@ public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CLogGuiComp, ibase::IMessageContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CLogGuiComp);
-		I_REGISTER_INTERFACE(iqtgui::IVisualStatusProvider);
 		I_ASSIGN(m_fileLoaderCompPtr, "Exporter", "File loader used for log export", false, "Exporter");
 		I_ASSIGN(m_defaultModeAttrPtr, "DefaultMode", "Default display mode,\n 0 - info,\n 1 - warning,\n 2 - error", true, 0);
 		I_ASSIGN(m_showLogDescriptionAttrPtr, "ShowLogDescription", "Sets the log tables description visible", false, false);
@@ -74,7 +72,6 @@ protected:
 		Create GUI item corresponding to specified message.
 	*/
 	virtual QTreeWidgetItem* CreateGuiItem(const istd::IInformationProvider& message);
-	virtual void UpdateItemState(QTreeWidgetItem& item) const;
 
 	/**
 		Get icons corresponding to specified MessageMode
@@ -118,6 +115,8 @@ private:
 	I_ATTR(bool, m_showLogDescriptionAttrPtr);
 
 	int m_currentMessageMode;
+
+	int m_statusCategory;
 };
 
 

@@ -92,9 +92,10 @@ void CTabContainerGuiComp::OnGuiCreated()
 			int tabIndex = widgetPtr->addTab(pageWidget, tabName);
 			m_tabToGuiIndexMap[tabIndex] = guiIndex;
 
-			if (guiIndex < m_slaveWidgetsModelCompPtr.GetCount()){
+			if (		(guiIndex < m_slaveWidgetsVisualCompPtr.GetCount()) &&
+						(guiIndex < m_slaveWidgetsModelCompPtr.GetCount())){
 				imod::IModel* modelPtr = m_slaveWidgetsModelCompPtr[guiIndex];
-				if (modelPtr != NULL){
+				if ((m_slaveWidgetsVisualCompPtr[guiIndex] != NULL) && (modelPtr != NULL)){
 					RegisterModel(modelPtr);
 				}
 			}

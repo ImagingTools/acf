@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2301
         </Number>
         <Description>
           ACF
@@ -15,33 +15,33 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        Log
+        LogGui
       </ComponentName>
       <X>
-        550
+        325
       </X>
       <X>
-        275
+        250
       </X>
       <Note>
-        Log UI and data model
+        GUI representation of LOG model container
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        LogDock
+        LogModel
       </ComponentName>
       <X>
-        550
+        825
       </X>
       <X>
-        150
+        250
       </X>
       <Note>
-        Dock widget where the log window is placed.
+        Container of log messages
       </Note>
     </Element>
     <Element>
@@ -49,7 +49,7 @@
         PersistentFileDialogLoader
       </ComponentName>
       <X>
-        275
+        325
       </X>
       <X>
         375
@@ -60,16 +60,30 @@
     </Element>
     <Element>
       <ComponentName>
-        XmlFileSerializer
+        LogDock
       </ComponentName>
       <X>
-        825
+        325
       </X>
       <X>
-        375
+        150
       </X>
       <Note>
-        XML based file serializer using by persistency components for loading/saving the log data
+        Dock widget where the log window is placed.
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        XmlLogSerializer
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        500
+      </X>
+      <Note>
+        
       </Note>
     </Element>
   </PositionMap>

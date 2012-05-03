@@ -8,6 +8,7 @@
 #include <QtGui/QPainter>
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
 #include "iqtgui/CItemDelegate.h"
 
 
@@ -23,7 +24,8 @@ CLogGuiComp::CLogGuiComp()
 	m_errorAction(NULL),
 	m_clearAction(NULL),
 	m_exportAction(NULL),
-	m_currentMessageMode(MM_ALL)
+	m_currentMessageMode(MM_ALL),
+	m_statusCategory(istd::IInformationProvider::IC_NONE)
 {
 	qRegisterMetaType<QVariant>("QVariant");
 
@@ -42,14 +44,7 @@ QIcon CLogGuiComp::GetStatusIcon() const
 	static QIcon errorIcon(":/Icons/Error.svg");
 	static QIcon logIcon(":/Icons/Log");
 
-	int worstCategory = istd::IInformationProvider::IC_NONE;
-	
-	ibase::IMessageContainer* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		worstCategory = objectPtr->GetWorstCategory();
-	}
-
-	switch (worstCategory){
+	switch (m_statusCategory){
 	case istd::IInformationProvider::IC_INFO:
 		return infoIcon;
 
@@ -68,14 +63,7 @@ QIcon CLogGuiComp::GetStatusIcon() const
 
 QString CLogGuiComp::GetStatusText() const
 {
-	int worstCategory = istd::IInformationProvider::IC_NONE;
-	
-	ibase::IMessageContainer* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL){
-		worstCategory = objectPtr->GetWorstCategory();
-	}
-
-	switch (worstCategory){
+	switch (m_statusCategory){
 	case istd::IInformationProvider::IC_INFO:
 		return tr("New informations available");
 
@@ -123,14 +111,6 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformationProvider& me
 }
 
 
-void CLogGuiComp::UpdateItemState(QTreeWidgetItem& item) const
-{
-	int itemCategory = item.data(0, DR_CATEGORY).toInt();
-
-	item.setHidden(itemCategory < m_currentMessageMode);
-}
-
-
 QIcon CLogGuiComp::GetIcon(istd::IInformationProvider::InformationCategory mode)
 {
 	QIcon infoIcon = QIcon(":/Icons/Info.svg").pixmap(QSize(12, 12),QIcon::Normal, QIcon::On);
@@ -166,6 +146,8 @@ void CLogGuiComp::OnGuiModelAttached()
 
 	ibase::IMessageContainer* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
+		istd::CChangeNotifier notfier(this);
+
 		ibase::IMessageContainer::Messages messages = objectPtr->GetMessages();
 		for (		ibase::IMessageContainer::Messages::const_iterator iter = messages.begin();
 					iter != messages.end();
@@ -300,6 +282,8 @@ void CLogGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPo
 }
 
 
+// reimplemented (imod::CMultiModelDispatcherBase)
+
 // protected slots
 
 void CLogGuiComp::OnAddMessage(QTreeWidgetItem* itemPtr)
@@ -309,7 +293,15 @@ void CLogGuiComp::OnAddMessage(QTreeWidgetItem* itemPtr)
 	// add message item to the list
 	LogView->addTopLevelItem(itemPtr);
 
-	UpdateItemState(*itemPtr);
+	int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
+
+	itemPtr->setHidden(itemCategory < m_currentMessageMode);
+
+	if (itemCategory > m_statusCategory){
+		istd::CChangeNotifier notifier(this);
+
+		m_statusCategory = itemCategory;
+	}
 }
 
 
@@ -342,11 +334,25 @@ void CLogGuiComp::OnMessageModeChanged()
 	
 	}
 
+	int worstCategory = istd::IInformationProvider::IC_NONE;
+	
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
 		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
 		I_ASSERT(itemPtr != NULL);
 
-		UpdateItemState(*itemPtr);
+		int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
+
+		itemPtr->setHidden(itemCategory < m_currentMessageMode);
+
+		if (itemCategory > worstCategory){
+			worstCategory = itemCategory;
+		}
+	}
+
+	if (worstCategory != m_statusCategory){
+		istd::CChangeNotifier notifier(this);
+
+		m_statusCategory = worstCategory;
 	}
 }
 
@@ -356,6 +362,12 @@ void CLogGuiComp::OnClearAction()
 	ibase::IMessageContainer* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		objectPtr->ClearMessages();
+	}
+
+	if (m_statusCategory != istd::IInformationProvider::IC_NONE){
+		istd::CChangeNotifier notifier(this);
+
+		m_statusCategory = istd::IInformationProvider::IC_NONE;
 	}
 }
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2301
         </Number>
         <Description>
           ACF
@@ -15,47 +15,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
-    <Element>
-      <Id>
-        Log
-      </Id>
-      <PackageId>
-        AcfGuiVoce
-      </PackageId>
-      <ComponentId>
-        Log
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Exporter
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                PersistentFileDialogLoader
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="5">
     <Element>
       <Id>
         LogDock
@@ -146,8 +106,120 @@
                 true
               </IsEnabled>
               <Value>
-                Log
+                LogGui
               </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        LogGui
+      </Id>
+      <PackageId>
+        QtGuiPck
+      </PackageId>
+      <ComponentId>
+        LogGui
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              DefaultMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DefaultMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DefaultModel
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LogModel
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Exporter
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Exporter
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                PersistentFileDialogLoader
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        LogModel
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        Log
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
+          <AttributeInfo>
+            <Id>
+              MaxMessageCount
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              MaxMessageCount
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -170,7 +242,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -214,7 +286,7 @@
               Reference[]
             </Type>
             <ExportId>
-              
+              LogSerializer
             </ExportId>
             <Data>
               <IsEnabled>
@@ -222,28 +294,9 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  XmlFileSerializer
+                  XmlLogSerializer
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Log
-              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -251,7 +304,7 @@
     </Element>
     <Element>
       <Id>
-        XmlFileSerializer
+        XmlLogSerializer
       </Id>
       <PackageId>
         BasePck
@@ -266,7 +319,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               FileExtensions
@@ -286,25 +339,6 @@
                   xlog
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              Log
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Log
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -350,21 +384,37 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="3">
+  <ExportedInterfaces count="7">
     <Interface>
       <InterfaceId>
         ibase::IMessageConsumer
       </InterfaceId>
       <ComponentId>
-        Log
+        LogModel
       </ComponentId>
     </Interface>
     <Interface>
       <InterfaceId>
-        ibase::IMessageContainer
+        imod::IModel
       </InterfaceId>
       <ComponentId>
-        Log
+        LogGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModelEditor
+      </InterfaceId>
+      <ComponentId>
+        LogGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IGuiObject
+      </InterfaceId>
+      <ComponentId>
+        LogGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -375,8 +425,32 @@
         LogDock
       </ComponentId>
     </Interface>
+    <Interface>
+      <InterfaceId>
+        iqtgui::IVisualStatusProvider
+      </InterfaceId>
+      <ComponentId>
+        LogGui
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IChangeable
+      </InterfaceId>
+      <ComponentId>
+        LogGui
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="1">
+    <Component>
+      <ExportedId>
+        XmlLogSerializer
+      </ExportedId>
+      <ComponentId>
+        XmlLogSerializer
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Log widget used as dock window
