@@ -115,6 +115,8 @@ protected Q_SLOTS:
 	void on_FilterGB_toggled(bool on);
 	void on_InterfaceCB_currentIndexChanged(int index);
 	void OnReloadPackages();
+	void on_KeywordClearButton_clicked();
+	void on_InterfaceClearButton_clicked();
 
 private:
 	class PackageItemBase: public QTreeWidgetItem

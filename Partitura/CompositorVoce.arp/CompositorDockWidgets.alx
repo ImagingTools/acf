@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2286
         </Number>
         <Description>
           ACF
@@ -16,20 +16,6 @@
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="5">
-    <Element>
-      <ComponentName>
-        AttributeEditorDock
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <X>
-        125
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         ComponentNoteEditorDock
@@ -60,10 +46,10 @@
     </Element>
     <Element>
       <ComponentName>
-        PackageOverviewDock
+        QuickHelpDock
       </ComponentName>
       <X>
-        200
+        1000
       </X>
       <X>
         400
@@ -74,10 +60,24 @@
     </Element>
     <Element>
       <ComponentName>
-        QuickHelpDock
+        AttributeEditorDock
       </ComponentName>
       <X>
         1000
+      </X>
+      <X>
+        125
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        PackageOverviewDock
+      </ComponentName>
+      <X>
+        200
       </X>
       <X>
         400

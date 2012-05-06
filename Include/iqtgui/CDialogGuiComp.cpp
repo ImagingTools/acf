@@ -40,7 +40,7 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, 
 								parentWidgetPtr));
 
 		if (m_dialogTitleAttrPtr.IsValid()){
-			dialogPtr->setWindowTitle(*m_dialogTitleAttrPtr);
+			dialogPtr->setWindowTitle(QObject::tr((*m_dialogTitleAttrPtr).toAscii()));
 		}
 		else{
 			dialogPtr->setWindowTitle(QCoreApplication::applicationName());

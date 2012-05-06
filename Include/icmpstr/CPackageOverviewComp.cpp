@@ -777,6 +777,20 @@ void CPackageOverviewComp::OnReloadPackages()
 }
 
 
+void CPackageOverviewComp::on_KeywordClearButton_clicked()
+{
+	FilterEdit->clear();
+
+	on_FilterEdit_editingFinished();
+}
+
+
+void CPackageOverviewComp::on_InterfaceClearButton_clicked()
+{
+	InterfaceCB->setCurrentIndex(0);
+}
+
+
 // protected methods
 
 QPixmap CPackageOverviewComp::CreateComponentDragPixmap(const icomp::CComponentAddress &address) const

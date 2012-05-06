@@ -91,7 +91,7 @@ void CDockWidgetGuiComp::OnGuiCreated()
 
 	if (m_slaveGuiCompPtr.IsValid() && m_slaveGuiCompPtr->CreateGui(containerWidgetPtr.GetPtr())){
 		dockWidgetPtr->setWidget(containerWidgetPtr.PopPtr());
-	}
+	} 
 
 	if (m_dockFeaturesAttrPtr.IsValid()){
 		dockWidgetPtr->setFeatures(QDockWidget::DockWidgetFeature(*m_dockFeaturesAttrPtr));
@@ -128,7 +128,8 @@ void CDockWidgetGuiComp::OnGuiRetranslate()
 
 	if (m_dockTitleAttrPtr.IsValid()){
 		QString title = *m_dockTitleAttrPtr;
-		dockWidgetPtr->setWindowTitle(tr(title.toAscii()));
+
+		dockWidgetPtr->setWindowTitle(QObject::tr(title.toAscii()));
 	}
 }
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2286
         </Number>
         <Description>
           ACF
@@ -145,7 +145,26 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              AllowedDockAreas
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                15
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ApplicationInfo

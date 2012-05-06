@@ -95,23 +95,23 @@ void CAboutWidgetGuiComp::OnGuiRetranslate()
 		}
 
 		if (*m_showProductNameAttrPtr){
-			productName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME);
+			productName = QObject::tr(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_PRODUCT_NAME).toAscii());
 		}
 
 		if (*m_showApplicationNameAttrPtr){
-			applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
+			applicationName = QObject::tr(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME).toAscii());
 		}
 
 		if (*m_showApplicationSubnameAttrPtr){
-			applicationSubname = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME);
+			applicationSubname = QObject::tr(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_SUBNAME).toAscii());
 		}
 
 		if (*m_showProductTypeAttrPtr){
-			applicationType = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE);
+			applicationType = QObject::tr(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_TYPE).toAscii());
 		}
 
 		if (*m_showLegalCopyrightAttrPtr){
-			legalCopyright = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT);
+			legalCopyright = QObject::tr(m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_LEGAL_COPYRIGHT).toAscii());
 		}
 	}
 
