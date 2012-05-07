@@ -174,7 +174,7 @@ IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 }
 
 
-const QString& CParamsManagerComp::GetParamsSetName(int index) const
+QString CParamsManagerComp::GetParamsSetName(int index) const
 {
 	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 

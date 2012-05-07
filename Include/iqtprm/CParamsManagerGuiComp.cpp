@@ -279,7 +279,7 @@ void CParamsManagerGuiComp::UpdateTree()
 				itemFlags |= Qt::ItemIsEditable;
 			}
 
-			const QString& name = objectPtr->GetParamsSetName(paramSetIndex);
+			QString name = objectPtr->GetParamsSetName(paramSetIndex);
 			QTreeWidgetItem* paramsSetItemPtr = new QTreeWidgetItem();
 			paramsSetItemPtr->setText(0, name);
 			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);

@@ -82,7 +82,7 @@ public:
 	/**
 		Get name of specified parameter set.
 	*/
-	virtual const QString& GetParamsSetName(int index) const = 0;
+	virtual QString GetParamsSetName(int index) const = 0;
 
 	/**
 		Set name of specified parameter set.

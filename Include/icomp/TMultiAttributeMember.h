@@ -17,13 +17,13 @@ namespace icomp
 	Don't use direct this class, use macros \c I_ATTR and \c I_ASSIGN_MULTI_* instead.
 */
 template <typename Attribute>
-class TMultiAttributeMember
+class TMultiAttributeMemberBase
 {
 public:
 	typedef Attribute AttributeType;
 	typedef void InterfaceType;
 
-	TMultiAttributeMember();
+	TMultiAttributeMemberBase();
 
 	bool Init(	const IComponent* ownerPtr,
 				const IRealAttributeStaticInfo& staticInfo,
@@ -42,7 +42,7 @@ public:
 	/**
 		Access to object pointed by internal pointer.
 	*/
-	typename Attribute::ValueType operator[](int index) const;
+	typename const Attribute::ValueType& operator[](int index) const;
 
 private:
 	const Attribute* m_attributePtr;
@@ -52,14 +52,14 @@ private:
 // public methods
 
 template <typename Attribute>
-TMultiAttributeMember<Attribute>::TMultiAttributeMember()
+TMultiAttributeMemberBase<Attribute>::TMultiAttributeMemberBase()
 :	m_attributePtr(NULL)
 {
 }
 
 
 template <typename Attribute>
-bool TMultiAttributeMember<Attribute>::Init(
+bool TMultiAttributeMemberBase<Attribute>::Init(
 			const IComponent* ownerPtr,
 			const IRealAttributeStaticInfo& staticInfo,
 			const IComponent** definitionComponentPtr)
@@ -99,14 +99,14 @@ bool TMultiAttributeMember<Attribute>::Init(
 
 
 template <typename Attribute>
-bool TMultiAttributeMember<Attribute>::IsValid() const
+bool TMultiAttributeMemberBase<Attribute>::IsValid() const
 {
 	return (m_attributePtr != NULL);
 }
 
 
 template <typename Attribute>
-int TMultiAttributeMember<Attribute>::GetCount() const
+int TMultiAttributeMemberBase<Attribute>::GetCount() const
 {
 	if (m_attributePtr != NULL){
 		return m_attributePtr->GetValuesCount();
@@ -118,7 +118,7 @@ int TMultiAttributeMember<Attribute>::GetCount() const
 
 
 template <typename Attribute>
-typename Attribute::ValueType TMultiAttributeMember<Attribute>::operator[](int index) const
+typename const Attribute::ValueType& TMultiAttributeMemberBase<Attribute>::operator[](int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetCount());
@@ -129,16 +129,28 @@ typename Attribute::ValueType TMultiAttributeMember<Attribute>::operator[](int i
 }
 
 
-template <>
-inline QString TMultiAttributeMember< TMultiAttribute<QString> >::operator[](int index) const
-{
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetCount());
-	I_ASSERT(m_attributePtr != NULL);	// operator* was called for invalid object, or no IsValid() check was called.
-	I_ASSERT(m_attributePtr->GetValuesCount() == GetCount());
+// other constructs used for special template for QString attribute
 
-	return QCoreApplication::translate("Attribute", m_attributePtr->GetValueAt(index).toAscii());
-}
+template <typename Attribute>
+class TMultiAttributeMember: public TMultiAttributeMemberBase<Attribute>
+{
+};
+
+
+template <>
+class TMultiAttributeMember< TMultiAttribute<QString> >: public TMultiAttributeMemberBase< TMultiAttribute<QString> >
+{
+public:
+	QString operator[](int index) const
+	{
+		I_ASSERT(index >= 0);
+		I_ASSERT(index < GetCount());
+		I_ASSERT(m_attributePtr != NULL);	// operator* was called for invalid object, or no IsValid() check was called.
+		I_ASSERT(m_attributePtr->GetValuesCount() == GetCount());
+
+		return QCoreApplication::translate("Attribute", TMultiAttributeMemberBase< TMultiAttribute<QString> >::operator[](index).toAscii());
+	}
+};
 
 
 } // namespace icomp

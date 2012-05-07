@@ -55,7 +55,7 @@ public:
 	virtual int InsertParamsSet(int index = -1);
 	virtual bool RemoveParamsSet(int index);
 	virtual IParamsSet* GetParamsSet(int index) const;
-	virtual const QString& GetParamsSetName(int index) const;
+	virtual QString GetParamsSetName(int index) const;
 	virtual bool SetParamsSetName(int index, const QString& name);
 
 	// reimplemented (iprm::ISelectionParam)
