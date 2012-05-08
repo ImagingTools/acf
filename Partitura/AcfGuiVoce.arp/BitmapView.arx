@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2298
+          2317
         </Number>
         <Description>
           ACF
@@ -54,7 +54,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               CalibrationProvider
@@ -163,22 +163,6 @@
             </Type>
             <ExportId>
               UseShapeEditCommands
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              UseStatusBarCommands
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              UseStatusBarCommands
             </ExportId>
             <Data>
               <IsEnabled>

@@ -105,13 +105,7 @@ void CLine2dParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CLine2dParamsGuiComp::OnParamsChanged(double /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateShapeView();
-	}
+	DoUpdateModel();
 }
 
 

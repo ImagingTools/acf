@@ -80,11 +80,7 @@ void CTextEditorComp::OnSelectionChanged()
 
 void CTextEditorComp::OnTextChanged()
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
@@ -102,11 +98,7 @@ void CTextEditorComp::OnToLowercase()
 
 	OnSelectionChanged();
 
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 
@@ -124,11 +116,7 @@ void CTextEditorComp::OnToUppercase()
 
 	OnSelectionChanged();
 
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

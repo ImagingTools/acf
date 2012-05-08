@@ -93,13 +93,7 @@ void CCircleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CCircleParamsGuiComp::OnParamsChanged(double /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateShapeView();
-	}
+	DoUpdateModel();
 }
 
 

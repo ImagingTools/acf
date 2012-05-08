@@ -128,13 +128,7 @@ void CQuadrangleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CQuadrangleParamsGuiComp::OnParamsChanged(double /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateShapeView();
-	}
+	DoUpdateModel();
 }
 
 

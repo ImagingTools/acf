@@ -81,11 +81,7 @@ void CWizardOptionsListGuiComp::OnGuiCreated()
 
 void CWizardOptionsListGuiComp::on_OptionsList_itemSelectionChanged()
 {
-	if (!IsUpdateBlocked() && IsModelAttached()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

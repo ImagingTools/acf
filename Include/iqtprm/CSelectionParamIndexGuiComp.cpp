@@ -61,11 +61,7 @@ void CSelectionParamIndexGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CSelectionParamIndexGuiComp::on_OptionIndexSlider_valueChanged(int /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

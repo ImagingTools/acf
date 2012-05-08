@@ -230,6 +230,12 @@ void CConsoleGui::OnVScrollbarChanged(int newPos)
 }
 
 
+void CConsoleGui::UpdateView()
+{
+	BaseClass::UpdateView();
+}
+
+
 // protected methods
 
 void CConsoleGui::UpdateZoomInOutState()
@@ -581,20 +587,21 @@ bool CConsoleGui::ConnectSignalSlots()
 {
 	bool retVal = true;
 
-	retVal = retVal && connect(&m_zoomInCommand, SIGNAL(activated()), this, SLOT(OnZoomIn()));
-	retVal = retVal && connect(&m_zoomOutCommand, SIGNAL(activated()), this, SLOT(OnZoomOut()));
-	retVal = retVal && connect(&m_zoomResetCommand, SIGNAL(activated()), this, SLOT(OnZoomReset()));
-	retVal = retVal && connect(&m_zoomToFitCommand, SIGNAL(toggled(bool)), this, SLOT(OnZoomToFit(bool)));
-	retVal = retVal && connect(&m_pointsSelectCommand, SIGNAL(activated()), this, SLOT(OnPointsNone()));
-	retVal = retVal && connect(&m_pointsMoveCommand, SIGNAL(activated()), this, SLOT(OnPoinsMove()));
-	retVal = retVal && connect(&m_pointsAddCommand, SIGNAL(activated()), this, SLOT(OnPointsAdd()));
-	retVal = retVal && connect(&m_pointsSubCommand, SIGNAL(activated()), this, SLOT(OnPointsSub()));
-	retVal = retVal && connect(&m_scrollVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowScrollbars(bool)));
-	retVal = retVal && connect(&m_gridVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowGrid(bool)));
-	retVal = retVal && connect(&m_rulerVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowRuler(bool)));
-	retVal = retVal && connect(&m_gridInMmVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowGridInMm(bool)));
-	retVal = retVal && connect(m_horizontalScrollbarPtr, SIGNAL(sliderMoved(int)), this, SLOT(OnHScrollbarChanged(int)));
-	retVal = retVal && connect(m_verticalScrollbarPtr, SIGNAL(sliderMoved(int)), this, SLOT(OnVScrollbarChanged(int)));
+	retVal = connect(&m_zoomInCommand, SIGNAL(activated()), this, SLOT(OnZoomIn())) && retVal;
+	retVal = connect(&m_zoomOutCommand, SIGNAL(activated()), this, SLOT(OnZoomOut())) && retVal;
+	retVal = connect(&m_zoomResetCommand, SIGNAL(activated()), this, SLOT(OnZoomReset())) && retVal;
+	retVal = connect(&m_zoomToFitCommand, SIGNAL(toggled(bool)), this, SLOT(OnZoomToFit(bool))) && retVal;
+	retVal = connect(&m_pointsSelectCommand, SIGNAL(activated()), this, SLOT(OnPointsNone())) && retVal;
+	retVal = connect(&m_pointsMoveCommand, SIGNAL(activated()), this, SLOT(OnPoinsMove())) && retVal;
+	retVal = connect(&m_pointsAddCommand, SIGNAL(activated()), this, SLOT(OnPointsAdd())) && retVal;
+	retVal = connect(&m_pointsSubCommand, SIGNAL(activated()), this, SLOT(OnPointsSub())) && retVal;
+	retVal = connect(&m_scrollVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowScrollbars(bool))) && retVal;
+	retVal = connect(&m_gridVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowGrid(bool))) && retVal;
+	retVal = connect(&m_rulerVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowRuler(bool))) && retVal;
+	retVal = connect(&m_gridInMmVisibleCommand, SIGNAL(toggled(bool)), this, SLOT(OnShowGridInMm(bool))) && retVal;
+	retVal = connect(m_horizontalScrollbarPtr, SIGNAL(sliderMoved(int)), this, SLOT(OnHScrollbarChanged(int))) && retVal;
+	retVal = connect(m_verticalScrollbarPtr, SIGNAL(sliderMoved(int)), this, SLOT(OnVScrollbarChanged(int))) && retVal;
+	retVal = connect(m_viewPtr, SIGNAL(ShapesChanged()), this, SLOT(UpdateView()), Qt::QueuedConnection) && retVal;
 
 	return retVal;
 }

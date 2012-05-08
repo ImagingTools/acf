@@ -34,8 +34,6 @@ protected:
 	typedef typename BaseClass::Shapes Shapes;
 	typedef typename BaseClass::ShapesMap ShapesMap;
 
-	virtual void UpdateShapeView();
-
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
@@ -110,24 +108,6 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnDetached(imod::IModel* mo
 
 
 // protected methods
-
-template <class Ui, class Shape, class ShapeModel>
-void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::UpdateShapeView()
-{
-	const ShapesMap& shapesMap = BaseClass::GetShapesMap();
-	for (		typename ShapesMap::const_iterator index = shapesMap.begin();
-				index != shapesMap.end();
-				index++){
-		IViewProvider* providerPtr = index.key();
-		I_ASSERT(providerPtr != NULL);
-
-		iview::IShapeView* viewPtr = providerPtr->GetView();
-		if (viewPtr != NULL){
-			viewPtr->Update();
-		}
-	}
-}
-
 
 // reimplemented (iqt2d::TViewExtenderCompBase)
 

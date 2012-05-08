@@ -75,21 +75,22 @@ public:
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 public Q_SLOTS:
-	virtual void OnZoomIn();
-	virtual void OnZoomOut();
-	virtual void OnZoomReset();
-	virtual void OnZoomToFit(bool state);
-	virtual void OnFitContentsToView();
-	virtual void OnPointsNone();
-	virtual void OnPoinsMove();
-	virtual void OnPointsAdd();
-	virtual void OnPointsSub();
-	virtual void OnShowScrollbars(bool state);
-	virtual void OnShowGrid(bool state);
-	virtual void OnShowRuler(bool state);
-	virtual void OnShowGridInMm(bool state);
-	virtual void OnHScrollbarChanged(int newPos);
-	virtual void OnVScrollbarChanged(int newPos);
+	void OnZoomIn();
+	void OnZoomOut();
+	void OnZoomReset();
+	void OnZoomToFit(bool state);
+	void OnFitContentsToView();
+	void OnPointsNone();
+	void OnPoinsMove();
+	void OnPointsAdd();
+	void OnPointsSub();
+	void OnShowScrollbars(bool state);
+	void OnShowGrid(bool state);
+	void OnShowRuler(bool state);
+	void OnShowGridInMm(bool state);
+	void OnHScrollbarChanged(int newPos);
+	void OnVScrollbarChanged(int newPos);
+	void UpdateView();
 
 Q_SIGNALS:
 	bool selectionChanged(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state);
@@ -119,7 +120,6 @@ protected:
 private:
 	bool ConnectSignalSlots();
 
-private:
 	QVBoxLayout* m_mainLayoutPtr;
 	QGridLayout* m_centerLayoutPtr;
 

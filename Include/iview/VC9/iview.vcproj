@@ -624,6 +624,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CViewport.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CShapeInfoGuiComp.h"
 				>
 			</File>
@@ -637,6 +641,10 @@
 			</File>
 			<File
 				RelativePath="..\CShapeInfoGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CViewport.moc"
 				>
 			</File>
 		</Filter>

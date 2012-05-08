@@ -418,6 +418,8 @@ void CViewport::OnAreaInvalidated(const i2d::CRect& beforeBox, const i2d::CRect&
 
 		m_blockBBoxEvent = false;
 	}
+
+	Q_EMIT ShapesChanged();
 }
 
 

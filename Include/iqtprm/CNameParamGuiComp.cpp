@@ -85,11 +85,7 @@ void CNameParamGuiComp::OnGuiCreated()
 
 void CNameParamGuiComp::OnNameChanged(const QString& /*text*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-	}
+	DoUpdateModel();
 }
 
 

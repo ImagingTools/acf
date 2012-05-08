@@ -162,11 +162,7 @@ void COptionsManagerGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/
 
 void COptionsManagerGuiComp::OnSelectionChanged(int /*index*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
+	if (DoUpdateModel()){
 		UpdateDescriptionFrame();
 	}
 }

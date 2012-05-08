@@ -226,7 +226,7 @@ bool TGuiObserverWrap<Gui, Observer>::IsUpdateBlocked() const
 template <class Gui, class Observer>
 bool TGuiObserverWrap<Gui, Observer>::DoUpdateModel()
 {
-	if (!IsUpdateBlocked() && Observer::IsModelAttached(NULL)){
+	if (!IsUpdateBlocked() && Observer::IsModelAttached()){
 		UpdateBlocker blockUpdates(this);
 
 		UpdateModel();

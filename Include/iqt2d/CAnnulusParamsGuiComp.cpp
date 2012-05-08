@@ -103,13 +103,7 @@ void CAnnulusParamsGuiComp::OnGuiDestroyed()
 
 void CAnnulusParamsGuiComp::OnParamsChanged(double /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateShapeView();
-	}
+	DoUpdateModel();
 }
 
 

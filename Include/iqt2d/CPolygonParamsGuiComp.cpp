@@ -84,8 +84,6 @@ void CPolygonParamsGuiComp::UpdateGui(int /*updateFlags*/)
 			CoordsTable->setItem(i, 0, new QTableWidgetItem(QString::number(coord.GetX())));
 			CoordsTable->setItem(i, 1, new QTableWidgetItem(QString::number(coord.GetY())));
 		}
-
-		UpdateShapeView();
 	}
 }
 
@@ -94,13 +92,7 @@ void CPolygonParamsGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CPolygonParamsGuiComp::OnParamsChanged()
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateShapeView();
-	}
+	DoUpdateModel();
 }
 
 

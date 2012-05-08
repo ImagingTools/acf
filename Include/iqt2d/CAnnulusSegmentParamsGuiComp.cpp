@@ -120,13 +120,7 @@ void CAnnulusSegmentParamsGuiComp::OnGuiDestroyed()
 
 void CAnnulusSegmentParamsGuiComp::OnParamsChanged(double /*value*/)
 {
-	if (!IsUpdateBlocked()){
-		UpdateBlocker updateBlocker(this);
-
-		UpdateModel();
-
-		UpdateShapeView();
-	}
+	DoUpdateModel();
 }
 
 
