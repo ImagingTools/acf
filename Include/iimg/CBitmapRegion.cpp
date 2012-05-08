@@ -303,7 +303,6 @@ void CBitmapRegion::CreateFromPolygon(const i2d::CPolygon& polygon)
 	}
 
 	int bitmapWidth = m_bitmapPtr->GetImageSize().GetX();
-	int bitmapHeight = m_bitmapPtr->GetImageSize().GetY();
 
 	int linesCount = int(m_boundingBox.GetHeight());
 	int lineSize = m_bitmapPtr->GetLinesDifference();
