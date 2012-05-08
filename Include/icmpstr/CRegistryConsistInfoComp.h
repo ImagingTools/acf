@@ -80,11 +80,14 @@ protected:
 	/**
 		Get list of compatible element ID's.
 		It include also pointed element.
+		\param	queryFlags			flags of query, see icmpstr::IRegistryConsistInfo::QueryFlags.
+		\param	subcomponentsFlag	if true, subcomponents should be included.
 	*/
 	icomp::IRegistry::Ids GetCompatibleIds(
 				const QByteArray& elementId,
 				const icomp::IElementStaticInfo& elementStaticInfo,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
+				int queryFlags,
 				bool subcomponentsFlag) const;
 	bool CheckAttributeCompatibility(
 				const iser::IObject& attribute,
@@ -98,6 +101,7 @@ protected:
 	bool CheckPointedElementCompatibility(
 				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
 				const QByteArray& attributeName,
 				const QByteArray& elementName,
 				const icomp::IRegistry& registry,
@@ -107,6 +111,7 @@ protected:
 				const QByteArray& pointedElementName,
 				const icomp::IElementStaticInfo* pointedMetaInfoPtr,
 				const icomp::IElementStaticInfo::Ids& interfaceNames,
+				const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
 				const QByteArray& attributeName,
 				const QByteArray& elementName,
 				bool ignoreUndef,

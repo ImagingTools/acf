@@ -46,6 +46,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 								elementId,
 								*infoPtr,
 								interfaceNames,
+								queryFlags,
 								true);
 				}
 				else if (includeUndefined){
@@ -67,6 +68,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 							elementId,
 							info,
 							interfaceNames,
+							queryFlags,
 							true);
 			}
 
@@ -353,6 +355,18 @@ bool CRegistryConsistInfoComp::IsAttributeValid(
 			}
 		}
 	}
+	else{
+		if (reasonConsumerPtr != NULL){
+			reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+						istd::IInformationProvider::IC_ERROR,
+						MI_NO_ELEMENT_INFO,
+						tr("No element %1 found").arg(QString(elementName)),
+						tr("Attribute Consistency Check"),
+						0)));
+		}
+
+		return false;
+	}
 
 	return true;
 }
@@ -393,11 +407,13 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 			const QByteArray& elementId,
 			const icomp::IElementStaticInfo& elementStaticInfo,
 			const icomp::IElementStaticInfo::Ids& interfaceNames,
+			int queryFlags,
 			bool subcomponentsFlag) const
 {
 	icomp::IRegistry::Ids retVal;
 
-	bool areInterfacesSupported = true;
+	bool areInterfacesSupported = ((queryFlags & QF_ANY_INTERFACE) != 0)? false: true;
+
 	for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
 				interfaceIter != interfaceNames.end();
 				++interfaceIter){
@@ -418,10 +434,20 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 		bool isInterfaceCompatible =
 					(supportedInterfaces.find(interfaceName) != supportedInterfaces.end()) ||
 					(supportedInterfaces.find(nonConstInterfaceName) != supportedInterfaces.end());
-		if (!isInterfaceCompatible){
-			areInterfacesSupported = false;
 
-			break;
+		if (isInterfaceCompatible){
+			if ((queryFlags & QF_ANY_INTERFACE) != 0){
+				areInterfacesSupported = true;
+
+				break;
+			}
+		}
+		else{
+			if ((queryFlags & QF_ANY_INTERFACE) == 0){
+				areInterfacesSupported = false;
+
+				break;
+			}
 		}
 	}
 
@@ -443,6 +469,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 							icomp::CInterfaceManipBase::JoinId(elementId, subcomponentId),
 							*subcomponentInfoPtr,
 							interfaceNames,
+							queryFlags,
 							false);
 
 				retVal += subIds;
@@ -470,11 +497,16 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 					icomp::IComponentStaticInfo::MGI_INTERFACES,
 					0,
 					icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
+		icomp::IElementStaticInfo::Ids optionalInterfaceNames = attributeMetaInfo.GetRelatedMetaIds(
+					icomp::IComponentStaticInfo::MGI_INTERFACES,
+					icomp::IAttributeStaticInfo::AF_NULLABLE,
+					icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the rest interfaces
 		const QByteArray& componentId = idPtr->GetValue();
 
 		if (!CheckPointedElementCompatibility(
 					componentId,
 					interfaceNames,
+					optionalInterfaceNames,
 					attributeName,
 					elementName,
 					registry,
@@ -492,6 +524,10 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 					icomp::IComponentStaticInfo::MGI_INTERFACES,
 					0,
 					icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the interfaces which must be set
+		icomp::IElementStaticInfo::Ids optionalInterfaceNames = attributeMetaInfo.GetRelatedMetaIds(
+					icomp::IComponentStaticInfo::MGI_INTERFACES,
+					icomp::IAttributeStaticInfo::AF_NULLABLE,
+					icomp::IAttributeStaticInfo::AF_NULLABLE);	// Names of the rest interfaces
 		int idsCount = multiIdPtr->GetValuesCount();
 		for (int idIndex = 0; idIndex < idsCount; idIndex++){
 			const QByteArray& componentId = multiIdPtr->GetValueAt(idIndex);
@@ -499,6 +535,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 			if (!CheckPointedElementCompatibility(
 						componentId,
 						interfaceNames,
+						optionalInterfaceNames,
 						attributeName,
 						elementName,
 						registry,
@@ -521,6 +558,7 @@ bool CRegistryConsistInfoComp::CheckAttributeCompatibility(
 bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			const QByteArray& pointedElementName,
 			const icomp::IElementStaticInfo::Ids& interfaceNames,
+			const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
 			const QByteArray& attributeName,
 			const QByteArray& elementName,
 			const icomp::IRegistry& registry,
@@ -537,7 +575,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 		if (!pointedElementAddress.GetPackageId().isEmpty()){
 			const icomp::IElementStaticInfo* pointedMetaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(pointedElementAddress);
 			if (pointedMetaInfoPtr == NULL){
-				if (reasonConsumerPtr != NULL){
+				if (!ignoreUndef && (reasonConsumerPtr != NULL)){
 					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
 								istd::IInformationProvider::IC_ERROR,
 								MI_COMPONENT_NOT_FOUND,
@@ -576,6 +614,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 						baseId,
 						pointedMetaInfoPtr,
 						interfaceNames,
+						optionalInterfaceNames,
 						attributeName,
 						elementName,
 						ignoreUndef,
@@ -589,6 +628,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 							pointedElementName,
 							&info,
 							interfaceNames,
+							optionalInterfaceNames,
 							attributeName,
 							elementName,
 							ignoreUndef,
@@ -635,6 +675,7 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 			const QByteArray& pointedElementName,
 			const icomp::IElementStaticInfo* pointedMetaInfoPtr,
 			const icomp::IElementStaticInfo::Ids& interfaceNames,
+			const icomp::IElementStaticInfo::Ids& optionalInterfaceNames,
 			const QByteArray& attributeName,
 			const QByteArray& elementName,
 			bool ignoreUndef,
@@ -642,6 +683,8 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 {
 	if (pointedMetaInfoPtr != NULL){
 		const icomp::IElementStaticInfo::Ids& supportedInterfaces = pointedMetaInfoPtr->GetMetaIds(icomp::IComponentStaticInfo::MGI_INTERFACES);
+
+		// check obligatory attributes
 		for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = interfaceNames.begin();
 					interfaceIter != interfaceNames.end();
 					++interfaceIter){
@@ -670,6 +713,54 @@ bool CRegistryConsistInfoComp::CheckPointedElementInfoCompatibility(
 											.arg(QString(elementName))
 											.arg(QString(pointedElementName))
 											.arg(QString(interfaceName)),
+								tr("Attribute Consistency Check"),
+								0)));
+				}
+
+				return false;
+			}
+		}
+
+		// check optional attributes
+		if (interfaceNames.isEmpty()){	// if there is at least one obligatory interface, none of optional must be found
+			bool isCompatibleInterfaceFound = false;
+
+			for (		icomp::IElementStaticInfo::Ids::const_iterator interfaceIter = optionalInterfaceNames.begin();
+						interfaceIter != optionalInterfaceNames.end();
+						++interfaceIter){
+				const QByteArray& interfaceName = *interfaceIter;
+				istd::CClassInfo interfaceType(interfaceName);
+
+				if (		interfaceType.IsVoid() ||
+							(interfaceName == "icomp::IComponent") ||
+							(interfaceName == "const icomp::IComponent") ||
+							(interfaceName == "void") ||
+							(interfaceName == "const void")){
+					isCompatibleInterfaceFound = true;
+
+					break;
+				}
+
+				QByteArray nonConstInterfaceName = interfaceType.GetConstCasted(false).GetName();
+				bool isInterfaceCompatible =
+							(supportedInterfaces.find(interfaceName) != supportedInterfaces.end()) ||
+							(supportedInterfaces.find(nonConstInterfaceName) != supportedInterfaces.end());
+				if (isInterfaceCompatible){
+					isCompatibleInterfaceFound = true;
+
+					break;
+				}
+			}
+
+			if (!isCompatibleInterfaceFound){
+				if (reasonConsumerPtr != NULL){
+					reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+								istd::IInformationProvider::IC_ERROR,
+								MI_WRONG_INTERFACE,
+								tr("Reference or factory '%1' in '%2' point at '%3', but it doesn't implement any optional interface")
+											.arg(QString(attributeName))
+											.arg(QString(elementName))
+											.arg(QString(pointedElementName)),
 								tr("Attribute Consistency Check"),
 								0)));
 				}
