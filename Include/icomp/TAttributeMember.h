@@ -63,7 +63,7 @@ public:
 protected:
 	void SetAttribute(const Attribute* attributePtr);
 
-private:
+protected:
 	const Attribute* m_attributePtr;
 };
 

@@ -44,7 +44,7 @@ public:
 	*/
 	typename const Attribute::ValueType& operator[](int index) const;
 
-private:
+protected:
 	const Attribute* m_attributePtr;
 };
 
