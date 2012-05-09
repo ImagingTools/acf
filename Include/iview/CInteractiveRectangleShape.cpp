@@ -338,7 +338,7 @@ i2d::CRect CInteractiveRectangleShape::CalcBoundingBox() const
 		return boundingBox;
 	}
 
-	return i2d::CRect();
+	return i2d::CRect::GetEmpty();
 }
 
 

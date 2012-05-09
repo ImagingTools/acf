@@ -121,7 +121,7 @@ i2d::CRect CPolypointShape::CalcBoundingBox() const
 		}
 	}
 
-	return i2d::CRect();
+	return i2d::CRect::GetEmpty();
 }
 
 

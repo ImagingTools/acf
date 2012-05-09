@@ -213,7 +213,7 @@ i2d::CRect CPinCalibrationShape::CalcBoundingBox() const
 		return tickerBox.GetTranslated(screenPos);
 	}
 
-	return i2d::CRect();
+	return i2d::CRect::GetEmpty();
 }
 
 
