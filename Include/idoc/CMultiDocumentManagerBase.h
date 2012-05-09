@@ -12,7 +12,6 @@
 #include "imod/CSingleModelObserverBase.h"
 
 #include "idoc/IUndoManager.h"
-#include "idoc/IDocumentStateComparator.h"
 #include "idoc/CTmplBasedDocumentManagerBase.h"
 
 
@@ -55,7 +54,6 @@ public:
 protected:
 	typedef istd::TDelPtr<istd::IChangeable> DocumentPtr;
 	typedef istd::TDelPtr<idoc::IUndoManager> UndoManagerPtr;
-	typedef istd::TDelPtr<IDocumentStateComparator> StateComparatorPtr;
 	typedef istd::TDelPtr<istd::IPolymorphic> ViewPtr;
 	typedef QList<ViewPtr> Views;
 
@@ -65,25 +63,22 @@ protected:
 					CMultiDocumentManagerBase* parentPtr,
 					const QByteArray& documentTypeId,
 					istd::IChangeable* documentPtr,
-					idoc::IUndoManager* undoManagerPtr,
-					IDocumentStateComparator* stateComparatorPtr)
+					idoc::IUndoManager* undoManagerPtr)
 		{
 			this->parentPtr = parentPtr;
 			this->documentTypeId = documentTypeId;
 			this->documentPtr.SetPtr(documentPtr);
 			this->undoManagerPtr.SetPtr(undoManagerPtr);
-			this->stateComparatorPtr.SetPtr(stateComparatorPtr);
 			isDirty = false;
 
-			if ((documentPtr != NULL) && (stateComparatorPtr != NULL)){
-				stateComparatorPtr->StoreState(*documentPtr);
+			if ((documentPtr != NULL) && (undoManagerPtr != NULL)){
+				undoManagerPtr->StoreDocumentState();
 			}
 		}
 
 		CMultiDocumentManagerBase* parentPtr;
 		DocumentPtr documentPtr;
 		UndoManagerPtr undoManagerPtr;
-		StateComparatorPtr stateComparatorPtr;
 		Views views;
 
 	protected:

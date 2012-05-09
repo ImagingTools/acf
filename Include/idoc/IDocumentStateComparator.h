@@ -2,6 +2,7 @@
 #define idoc_IDocumentStateComparator_included
 
 
+// ACF includes
 #include "istd/IChangeable.h"
 
 
@@ -12,17 +13,41 @@ namespace idoc
 /**
 	Allows to store some document state used as reference for comarision.
 */
-class IDocumentStateComparator: virtual public istd::IPolymorphic
+class IDocumentStateComparator: virtual public istd::IChangeable
 {
 public:
+	enum DocumentChangeFlag
+	{
+		/**
+			There is no information about document change.
+		*/
+		DCF_UNKNOWN,
+		/**
+			Current document state equals the stored one.
+		*/
+		DCF_EQUAL,
+		/**
+			Current document state equals the stored one.
+		*/
+		DCF_DIFFERENT
+	};
+
 	/**
-		Store state of some document for later comarision.
+		Check if there is stored document available.
 	*/
-	virtual void StoreState(const istd::IChangeable& document) = 0;
+	virtual bool HasStoredDocumentState() const = 0;
+	/**
+		Store state of some document.
+	*/
+	virtual bool StoreDocumentState() = 0;
+	/**
+		Restore last stored document state.
+	*/
+	virtual bool RestoreDocumentState() = 0;
 	/**
 		Check if document state is the same as stored state.
 	*/
-	virtual bool CheckStateEquals(const istd::IChangeable& document) const = 0;
+	virtual DocumentChangeFlag GetDocumentChangeFlag() const = 0;
 };
 
 

@@ -115,11 +115,11 @@ typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
 typedef icomp::TModelCompWrap<idoc::CDocumentManagerListenerComp> DocumentManagerListener;
 typedef idoc::CSelectedDocModelBinderComp SelectedDocModelBinder;
-typedef icomp::TMakeComponentWrap<
-			imod::TModelWrap<idoc::CSerializedUndoManager>,
+typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
+			idoc::CSerializedUndoManager,
 			idoc::IUndoManager,
-			imod::IObserver,
-			imod::IModel> SerializedUndoManager;
+			idoc::IDocumentStateComparator,
+			imod::IObserver> > SerializedUndoManager;
 
 typedef icomp::TModelCompWrap<i2d::CPosition2dComp> Position2d;
 typedef icomp::TModelCompWrap<i2d::CRectangleComp> Rectangle;

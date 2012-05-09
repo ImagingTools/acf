@@ -5,7 +5,6 @@
 #include "iser/ISerializable.h"
 
 #include "idoc/IDocumentManager.h"
-#include "idoc/CSerializedStateComparator.h"
 
 
 namespace idoc
@@ -155,16 +154,6 @@ QString CSingleDocumentTemplateBase::GetViewTypeName(
 	}
 
 	return QString();
-}
-
-
-IDocumentStateComparator* CSingleDocumentTemplateBase::CreateStateComparator(const QByteArray& documentTypeId) const
-{
-	if (IsDocumentTypeSupported(documentTypeId)){
-		return new CSerializedStateComparator;
-	}
-
-	return NULL;
 }
 
 

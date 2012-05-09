@@ -44,7 +44,6 @@ public:
 				istd::IChangeable* documentPtr,
 				const QByteArray& viewTypeId = QByteArray()) const;
 	virtual idoc::IUndoManager* CreateUndoManager(const QByteArray& documentTypeId, istd::IChangeable* documentPtr) const;
-	virtual IDocumentStateComparator* CreateStateComparator(const QByteArray& documentTypeId) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)

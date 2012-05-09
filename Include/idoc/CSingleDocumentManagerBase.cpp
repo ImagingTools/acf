@@ -229,8 +229,8 @@ bool CSingleDocumentManagerBase::FileSave(
 			m_filePath = filePath;
 			m_isDirty = false;
 
-			if (m_stateComparatorPtr.IsValid()){
-				m_stateComparatorPtr->StoreState(*m_documentPtr);
+			if (m_undoManagerPtr.IsValid()){
+				m_undoManagerPtr->StoreDocumentState();
 			}
 		}
 
@@ -268,7 +268,6 @@ void CSingleDocumentManagerBase::FileClose(int /*documentIndex*/, bool* ignoredP
 		m_documentTypeId = "";
 		m_documentPtr.Reset();
 		m_undoManagerPtr.Reset();
-		m_stateComparatorPtr.Reset();
 	}
 }
 
@@ -342,8 +341,8 @@ bool CSingleDocumentManagerBase::OpenDocument(
 
 				m_isDirty = false;
 
-				if (m_stateComparatorPtr.IsValid()){
-					m_stateComparatorPtr->StoreState(*m_documentPtr);
+				if (m_undoManagerPtr.IsValid()){
+					m_undoManagerPtr->StoreDocumentState();
 				}
 
 				return true;
@@ -388,7 +387,6 @@ bool CSingleDocumentManagerBase::NewDocument(
 
 			m_documentPtr.TakeOver(documentPtr);
 			m_undoManagerPtr.SetPtr(documentTemplatePtr->CreateUndoManager(documentTypeId, m_documentPtr.GetPtr()));
-			m_stateComparatorPtr.SetPtr(documentTemplatePtr->CreateStateComparator(documentTypeId));
 
 			imod::IModel* documentModelPtr = CompCastPtr<imod::IModel>(m_documentPtr.GetPtr());
 			if (documentModelPtr != NULL){
@@ -399,8 +397,8 @@ bool CSingleDocumentManagerBase::NewDocument(
 
 			m_isDirty = false;
 
-			if (m_stateComparatorPtr.IsValid()){
-				m_stateComparatorPtr->StoreState(*m_documentPtr);
+			if (m_undoManagerPtr.IsValid()){
+				m_undoManagerPtr->StoreDocumentState();
 			}
 
 			return true;
@@ -428,8 +426,8 @@ void CSingleDocumentManagerBase::EnsureViewRemoved()
 void CSingleDocumentManagerBase::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	bool newDirty = true;
-	if (m_documentPtr.IsValid() && m_stateComparatorPtr.IsValid()){
-		newDirty = !m_stateComparatorPtr->CheckStateEquals(*m_documentPtr);
+	if (m_documentPtr.IsValid() && m_undoManagerPtr.IsValid()){
+		newDirty = (m_undoManagerPtr->GetDocumentChangeFlag() != IDocumentStateComparator::DCF_EQUAL);
 	}
 
 	if (m_isDirty != newDirty){

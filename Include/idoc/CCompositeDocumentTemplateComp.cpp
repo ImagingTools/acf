@@ -201,20 +201,6 @@ idoc::IUndoManager* CCompositeDocumentTemplateComp::CreateUndoManager(const QByt
 }
 
 
-IDocumentStateComparator* CCompositeDocumentTemplateComp::CreateStateComparator(const QByteArray& documentTypeId) const
-{
-	IdToTemplateMap::const_iterator iter = m_idToTemplateMap.find(documentTypeId);
-	if (iter != m_idToTemplateMap.end()){
-		I_ASSERT(iter.value() != NULL);
-
-		return iter.value()->CreateStateComparator(documentTypeId);
-	}
-	else{
-		return NULL;
-	}
-}
-
-
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
