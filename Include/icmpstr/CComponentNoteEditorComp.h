@@ -35,7 +35,7 @@ public:
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int updateFlags = 0);
-	virtual void UpdateModel();
+	virtual void UpdateModel() const;
 	virtual void OnGuiModelAttached();
 	virtual void OnGuiModelDetached();
 

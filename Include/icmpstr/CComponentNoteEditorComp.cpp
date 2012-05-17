@@ -57,7 +57,7 @@ void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
 }
 
 
-void CComponentNoteEditorComp::UpdateModel()
+void CComponentNoteEditorComp::UpdateModel() const
 {
 	IElementSelectionInfo* objectPtr = GetObjectPtr();
 	I_ASSERT(objectPtr != NULL);
