@@ -5,6 +5,7 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
+#include "iprm/ISelectionConstraints.h"
 #include "iprm/CSelectionParam.h"
 
 

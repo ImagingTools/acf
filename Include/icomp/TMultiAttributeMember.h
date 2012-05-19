@@ -20,8 +20,9 @@ template <typename Attribute>
 class TMultiAttributeMemberBase
 {
 public:
-	typedef Attribute AttributeType;
-	typedef void InterfaceType;
+    typedef Attribute AttributeType;
+    typedef typename Attribute::ValueType AttributeValueType;
+    typedef void InterfaceType;
 
 	TMultiAttributeMemberBase();
 
@@ -42,7 +43,7 @@ public:
 	/**
 		Access to object pointed by internal pointer.
 	*/
-	typename const Attribute::ValueType& operator[](int index) const;
+    const AttributeValueType& operator[](int index) const;
 
 private:
 	const Attribute* m_attributePtr;
@@ -118,7 +119,7 @@ int TMultiAttributeMemberBase<Attribute>::GetCount() const
 
 
 template <typename Attribute>
-typename const Attribute::ValueType& TMultiAttributeMemberBase<Attribute>::operator[](int index) const
+const typename TMultiAttributeMemberBase<Attribute>::AttributeValueType& TMultiAttributeMemberBase<Attribute>::operator[](int index) const
 {
 	I_ASSERT(index >= 0);
 	I_ASSERT(index < GetCount());

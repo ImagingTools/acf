@@ -2,6 +2,9 @@
 #define imath_CComplexDoubleManip_included
 
 
+// STD includes
+#include <math.h>
+
 // ACF includes
 #include "istd/CRange.h"
 

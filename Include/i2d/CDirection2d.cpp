@@ -1,6 +1,9 @@
 #include "i2d/CDirection2d.h"
 
 
+// STD includes
+#include <math.h>
+
 // ACF includes
 #include "imath/imath.h"
 

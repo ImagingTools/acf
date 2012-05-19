@@ -33,14 +33,14 @@ QByteArray ParseRecursive(const QByteArray& rawName, QByteArray ns, int& positio
 		if ((code >= '0') && (code <= '9')){
 			int substrPos;
 			int substrLength = ParseToNumber(
-						&rawName[position],
+                        rawName.constData() + position,
 						nameSize - position,
 						substrPos);
 			if (substrLength > nameSize - position - substrPos){
 				substrLength = nameSize - position - substrPos;
 			}
 
-			retVal += rawName.substr(position + substrPos, substrLength);
+            retVal += rawName.mid(position + substrPos, substrLength);
 
 			position += substrPos + substrLength;
 
@@ -51,14 +51,14 @@ QByteArray ParseRecursive(const QByteArray& rawName, QByteArray ns, int& positio
 
 			int substrPos;
 			int substrLength = ParseToNumber(
-						&rawName[position],
+                        rawName.constData() + position,
 						nameSize - position,
 						substrPos);
 			if (substrLength > nameSize - position - substrPos){
 				substrLength = nameSize - position - substrPos;
 			}
 
-			QByteArray ns = rawName.substr(position + substrPos, substrLength);
+            QByteArray ns = rawName.mid(position + substrPos, substrLength);
 			
 			position += substrPos + substrLength;
 

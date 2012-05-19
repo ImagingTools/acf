@@ -4,12 +4,13 @@
 #include "icomp/export.h"
 
 
+I_REGISTER_QT_RESOURCE(iqtgui);
+I_REGISTER_QT_RESOURCE(icmpstr);
+
+
 namespace CompositorPck
 {
 
-
-I_REGISTER_QT_RESOURCE(iqtgui);
-I_REGISTER_QT_RESOURCE(icmpstr);
 
 I_EXPORT_PACKAGE(
 			"Acf/Compositor",
