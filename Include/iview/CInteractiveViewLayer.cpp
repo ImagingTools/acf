@@ -508,7 +508,7 @@ bool CInteractiveViewLayer::DisconnectShape(IShape* shapePtr)
 ITouchable::TouchState CInteractiveViewLayer::IsTouched(istd::CIndex2d position) const
 {
 	if (IsVisible()){
-        for (ShapeMap::const_iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+		for (ShapeMap::const_iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
 			const iview::IShape* shapePtr = iter.key();
 			const i2d::CRect& boundingBox = iter.value();
 			if (boundingBox.IsInside(position) && shapePtr->IsVisible()){
@@ -527,7 +527,7 @@ ITouchable::TouchState CInteractiveViewLayer::IsTouched(istd::CIndex2d position)
 QString CInteractiveViewLayer::GetShapeDescriptionAt(istd::CIndex2d position) const
 {
 	if (IsVisible()){
-        for (ShapeMap::const_iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+		for (ShapeMap::const_iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
 			const iview::IShape* shapePtr = iter.key();
 			const i2d::CRect& boundingBox = iter.value();
 			if (boundingBox.IsInside(position) && shapePtr->IsVisible()){

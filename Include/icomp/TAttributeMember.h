@@ -24,9 +24,9 @@ template <typename Attribute>
 class TAttributeMemberBase
 {
 public:
-    typedef Attribute AttributeType;
-    typedef typename Attribute::ValueType AttributeValueType;
-    typedef void InterfaceType;
+	typedef Attribute AttributeType;
+	typedef typename Attribute::ValueType AttributeValueType;
+	typedef void InterfaceType;
 
 	TAttributeMemberBase();
 
@@ -59,7 +59,7 @@ public:
 	/**
 		Access to object pointed by internal pointer.
 	*/
-    const AttributeValueType& operator*() const;
+	const AttributeValueType& operator*() const;
 
 protected:
 	void SetAttribute(const Attribute* attributePtr);

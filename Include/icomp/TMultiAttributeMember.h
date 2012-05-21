@@ -20,9 +20,9 @@ template <typename Attribute>
 class TMultiAttributeMemberBase
 {
 public:
-    typedef Attribute AttributeType;
-    typedef typename Attribute::ValueType AttributeValueType;
-    typedef void InterfaceType;
+	typedef Attribute AttributeType;
+	typedef typename Attribute::ValueType AttributeValueType;
+	typedef void InterfaceType;
 
 	TMultiAttributeMemberBase();
 
@@ -43,7 +43,7 @@ public:
 	/**
 		Access to object pointed by internal pointer.
 	*/
-    const AttributeValueType& operator[](int index) const;
+	const AttributeValueType& operator[](int index) const;
 
 private:
 	const Attribute* m_attributePtr;
