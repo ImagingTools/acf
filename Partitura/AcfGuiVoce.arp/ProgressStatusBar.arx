@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2332
         </Number>
         <Description>
           ACF
@@ -95,10 +95,10 @@
         <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              StatusBarWidget
+              StatusBarWidgets
             </Id>
             <Type>
-              Reference
+              Reference[]
             </Type>
             <ExportId>
               
@@ -107,9 +107,11 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Value>
-                ProgressManagerGui
-              </Value>
+              <Values count="1">
+                <Value>
+                  ProgressManagerGui
+                </Value>
+              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

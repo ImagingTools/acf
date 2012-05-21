@@ -23,7 +23,7 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(CStreamLogCompBase);
 		I_REGISTER_INTERFACE(IMessageConsumer);
-		I_ASSIGN(m_minPriorityAttrPtr, "MinCategory", "Minimal category of message to print it out", true, 0);
+		I_ASSIGN(m_minPriorityAttrPtr, "MinCategory", "Minimal category of message to print it out:\n *1-Information\n *2-Warning\n *3-Error\n *4-Critical", true, 0);
 		I_ASSIGN(m_isDotEnabledAttrPtr, "ShowDots", "If it's true, dot will be shown for each ignored message", true, false);
 		I_ASSIGN(m_useTimeStampAttrPtr, "UseTimeStamp", "Use time stamp for the messsages", false, true);
 	I_END_COMPONENT;

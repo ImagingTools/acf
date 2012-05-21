@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2329
         </Number>
         <Description>
           ACF
@@ -32,13 +32,13 @@
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
+        Log
       </ComponentName>
       <X>
-        375
+        650
       </X>
       <X>
-        200
+        325
       </X>
       <Note>
         
@@ -60,13 +60,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Log
+        ApplicationInfo
       </ComponentName>
       <X>
-        650
+        375
       </X>
       <X>
-        325
+        200
       </X>
       <Note>
         

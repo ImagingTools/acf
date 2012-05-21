@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2329
         </Number>
         <Description>
           ACF
@@ -18,13 +18,13 @@
   <PositionMap count="9">
     <Element>
       <ComponentName>
-        CopyBuild
+        CopyIncludeResources
       </ComponentName>
       <X>
-        1000
+        650
       </X>
       <X>
-        350
+        625
       </X>
       <Note>
         
@@ -32,13 +32,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyCommon
+        CopyBuild
       </ComponentName>
       <X>
-        125
+        1000
       </X>
       <X>
-        525
+        350
       </X>
       <Note>
         
@@ -60,20 +60,6 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyImplResources
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <X>
-        225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         CopyImplSources
       </ComponentName>
       <X>
@@ -88,13 +74,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyIncludeOther
+        InitSequence
       </ComponentName>
       <X>
-        825
+        125
       </X>
       <X>
-        475
+        350
       </X>
       <Note>
         
@@ -102,13 +88,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyIncludeResources
+        CopyImplResources
       </ComponentName>
       <X>
         650
       </X>
       <X>
-        625
+        225
       </X>
       <Note>
         
@@ -130,13 +116,27 @@
     </Element>
     <Element>
       <ComponentName>
-        InitSequence
+        CopyCommon
       </ComponentName>
       <X>
         125
       </X>
       <X>
-        350
+        525
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyIncludeOther
+      </ComponentName>
+      <X>
+        825
+      </X>
+      <X>
+        475
       </X>
       <Note>
         
