@@ -654,7 +654,7 @@ void CViewBase::EndDrag()
 		}
 	}
 
-	m_viewMode = VM_DRAG;
+	m_viewMode = VM_NONE;
 }
 
 
@@ -780,10 +780,20 @@ bool CViewBase::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTyp
 
 		m_isSelectEventActive = true;
 
-		if (((m_viewMode == VM_DRAG) || (m_viewMode == VM_MOVE)) && !downFlag){
-			m_viewMode = VM_NONE;
-			m_isSelectEventActive = false;
-			return true;
+		if (!downFlag){
+			if (m_viewMode == VM_DRAG){
+				EndDrag();
+
+				m_isSelectEventActive = false;
+				return true;
+			}
+
+			if (m_viewMode == VM_MOVE){
+				m_viewMode = VM_NONE;
+
+				m_isSelectEventActive = false;
+				return true;
+			}
 		}
 
 		if ((m_focusedLayerPtr != NULL) && (buttonType == Qt::LeftButton)){
