@@ -106,17 +106,20 @@ bool CAnnulus::operator != (const CAnnulus & ref) const
 
 bool CAnnulus::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag innerRadiusTag("InnerRadius", "Inner radius");
+	static iser::CArchiveTag outerRadiusTag("OuterRadius", "Outer radius");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
 	bool retVal = BaseClass::Serialize(archive);
 
 	double innerRadius = m_radiusRange.GetMinValue();
 	double outerRadius = m_radiusRange.GetMaxValue();
 
-	static iser::CArchiveTag innerRadiusTag("InnerRadius", "Inner radius");
 	retVal = retVal && archive.BeginTag(innerRadiusTag);
 	retVal = retVal && archive.Process(innerRadius);
 	retVal = retVal && archive.EndTag(innerRadiusTag);
 
-	static iser::CArchiveTag outerRadiusTag("OuterRadius", "Outer radius");
 	retVal = retVal && archive.BeginTag(outerRadiusTag);
 	retVal = retVal && archive.Process(outerRadius);
 	retVal = retVal && archive.EndTag(outerRadiusTag);

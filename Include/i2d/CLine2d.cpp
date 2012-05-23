@@ -475,7 +475,7 @@ void CLine2d::MoveCenterTo(const CVector2d& position)
 	i2d::CVector2d offset = position - GetCenter();
 
 	if (offset != i2d::CVector2d(0, 0)){
-		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 		SetPoint1(GetPoint1() + offset);
 		SetPoint2(GetPoint2() + offset);
@@ -648,12 +648,14 @@ bool CLine2d::GetInvTransformed(
 bool CLine2d::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag beginPointTag("BeginPoint", "BeginPoint");
+	static iser::CArchiveTag endPointTag("EndPoint", "EndPoint");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 	bool retVal = archive.BeginTag(beginPointTag);
 	retVal = retVal && m_point1.Serialize(archive);
 	retVal = retVal && archive.EndTag(beginPointTag);
 
-	static iser::CArchiveTag endPointTag("EndPoint", "EndPoint");
 	retVal = retVal && archive.BeginTag(endPointTag);
 	retVal = retVal && m_point2.Serialize(archive);
 	retVal = retVal && archive.EndTag(endPointTag);

@@ -126,13 +126,13 @@ QString CRenderedObjectFileLoaderComp::GetTypeDescription(const QString* extensi
 
 bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 {
-	int cacheSize = m_previewCache.size();
-
 	static iser::CArchiveTag previewCacheTag("PreviewCacheElements", "Elements list in the preview cache");
 	static iser::CArchiveTag previewCacheElementTag("PreviewCacheElement", "An element in the preview cache");
 	static iser::CArchiveTag filePathTag("FilePath", "Path of the rendered file");
 	static iser::CArchiveTag fileTimeStampTag("TimeStamp", "Time stamp of the last file update");
 	static iser::CArchiveTag bitmapTag("Bitmap", "Rendered bitmap");
+
+	int cacheSize = m_previewCache.size();
 
 	bool retVal = archive.BeginMultiTag(previewCacheTag, previewCacheElementTag, cacheSize);
 
@@ -158,6 +158,8 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
+		istd::CChangeNotifier notifier(this);
+
 		for (int elementIndex = 0; elementIndex < cacheSize; elementIndex++){
 			FileInfo fileInfo;
 

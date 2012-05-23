@@ -105,11 +105,14 @@ bool CCircle::GetInvTransformed(
 
 bool CCircle::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag radiusTag("Radius", "Circle radius");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
 	bool retVal = true;
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
-	static iser::CArchiveTag radiusTag("Radius", "Circle radius");
 	retVal = retVal && archive.BeginTag(radiusTag);
 	retVal = retVal && archive.Process(m_radius);
 	retVal = retVal && archive.EndTag(radiusTag);

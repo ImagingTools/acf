@@ -5,6 +5,8 @@
 #include <QtCore/QVector>
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
+
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -484,10 +486,10 @@ void CVarMatrix::GetRowVector(int rowIndex, CVarVector& result)
 
 bool CVarMatrix::Serialize(iser::IArchive& archive)
 {
-	bool retVal = true;
-
 	static iser::CArchiveTag sizeTag("Size", "Size of matrix");
 	static iser::CArchiveTag cellsTag("Cells", "Values of matrix cells");
+
+	bool retVal = true;
 
 	retVal = retVal && archive.BeginTag(sizeTag);
 	if (archive.IsStoring()){

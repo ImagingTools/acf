@@ -403,7 +403,7 @@ void CRectangle::MoveCenterTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
 	if (offset != i2d::CVector2d(0, 0)){
-		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 		m_verticalRange.SetMinValue(m_verticalRange.GetMinValue() + offset.GetY());
 		m_verticalRange.SetMaxValue(m_verticalRange.GetMaxValue() + offset.GetY());
@@ -460,27 +460,30 @@ bool CRectangle::GetInvTransformed(
 
 bool CRectangle::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag topTag("Top", "Rectangle top edge position");
+	static iser::CArchiveTag bottomTag("Bottom", "Rectangle bottom edge position");
+	static iser::CArchiveTag leftTag("Left", "Rectangle left edge position");
+	static iser::CArchiveTag rightTag("Right", "Rectangle right edge position");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
 	double& top = m_verticalRange.GetMinValueRef();
 	double& bottom = m_verticalRange.GetMaxValueRef();
 	double& left = m_horizontalRange.GetMinValueRef();
 	double& right = m_horizontalRange.GetMaxValueRef();
 
-	static iser::CArchiveTag topTag("Top", "Rectangle top edge position");
 	bool retVal = archive.BeginTag(topTag);
 	retVal = retVal && archive.Process(top);
 	retVal = retVal && archive.EndTag(topTag);
 
-	static iser::CArchiveTag bottomTag("Bottom", "Rectangle bottom edge position");
 	retVal = retVal && archive.BeginTag(bottomTag);
 	retVal = retVal && archive.Process(bottom);
 	retVal = retVal && archive.EndTag(bottomTag);
 
-	static iser::CArchiveTag leftTag("Left", "Rectangle left edge position");
 	retVal = retVal && archive.BeginTag(leftTag);
 	retVal = retVal && archive.Process(left);
 	retVal = retVal && archive.EndTag(leftTag);
 
-	static iser::CArchiveTag rightTag("Right", "Rectangle right edge position");
 	retVal = retVal && archive.BeginTag(rightTag);
 	retVal = retVal && archive.Process(right);
 	retVal = retVal && archive.EndTag(rightTag);

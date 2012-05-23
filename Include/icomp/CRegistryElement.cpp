@@ -184,6 +184,8 @@ bool CRegistryElement::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag dataTag("Data", "ID used for export", true);
 	static iser::CArchiveTag isEnabledTag("IsEnabled", "Is attribute enabled");
 
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
 	bool isStoring = archive.IsStoring();

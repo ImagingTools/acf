@@ -87,10 +87,16 @@ ISelectionParam* CSelectionParam::GetActiveSubselection() const
 
 bool CSelectionParam::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index");
+	static iser::CArchiveTag selectedOptionIdTag("OptionId", "Selected option identifier");
+
+	bool isStoring = archive.IsStoring();
+
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	int selectionOptionIndex = m_selectedOptionIndex;
 	QByteArray selectedOptionId;
 
-	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index");
 	bool retVal = archive.BeginTag(selectedOptionIndexTag);
 	retVal = retVal && archive.Process(selectionOptionIndex);
 	retVal = retVal && archive.EndTag(selectedOptionIndexTag);
@@ -103,12 +109,11 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 		}
 	}
 
-	static iser::CArchiveTag selectedOptionIdTag("OptionId", "Selected option identifier");
 	retVal = retVal && archive.BeginTag(selectedOptionIdTag);
 	retVal = retVal && archive.Process(selectedOptionId);
 	retVal = retVal && archive.EndTag(selectedOptionIdTag);
 
-	if (retVal && !archive.IsStoring()){
+	if (retVal && !isStoring){
 		if (		(m_constraintsPtr != NULL) &&
 					((m_constraintsPtr->GetConstraintsFlags() & iprm::ISelectionConstraints::SCF_SUPPORT_UNIQUE_ID) != 0) &&
 					!selectedOptionId.isEmpty()){

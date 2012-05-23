@@ -93,7 +93,7 @@ void CPolygon::MoveCenterTo(const CVector2d& position)
 {
 	i2d::CVector2d offset = position - GetCenter();
 	if (offset != i2d::CVector2d(0, 0)){
-		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 		int nodesCount = GetNodesCount();
 		for (int i = 0; i < nodesCount; i++){
@@ -151,6 +151,8 @@ bool CPolygon::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag polygonTag("Polygon", "Polygon");
 	static iser::CArchiveTag vectorTag("V", "Vector");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 	int nodesCount = m_nodes.size();
 	bool retVal = true;

@@ -1,6 +1,9 @@
 #include "icmm/CVarColor.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
+
 #include "iser/CArchiveTag.h"
 
 
@@ -143,10 +146,12 @@ const CVarColor& CVarColor::operator/=(const CVarColor& color)
 
 bool CVarColor::Serialize(iser::IArchive& archive)
 {
-	bool retVal = true;
-
 	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components");
 	static iser::CArchiveTag componentTag("Component", "Single component");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
+	bool retVal = true;
 
 	int elementsCount = GetElementsCount();
 

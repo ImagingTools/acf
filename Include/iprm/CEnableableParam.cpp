@@ -47,13 +47,17 @@ bool CEnableableParam::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag enabledTag("IsEnabled", "Object enabled state");
 
+	bool isStoring = archive.IsStoring();
+
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	bool isEnabled = m_isEnabled;
 
 	bool retVal = archive.BeginTag(enabledTag);
 	retVal = retVal && archive.Process(isEnabled);
 	retVal = retVal && archive.EndTag(enabledTag);
 
-	if (!archive.IsStoring()){
+	if (!isStoring){
 		SetEnabled(isEnabled);
 	}
 

@@ -35,6 +35,9 @@ void CTextDocumentComp::SetText(const QString& text)
 bool CTextDocumentComp::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag textTag("Text", "Text");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = archive.BeginTag(textTag);
 	retVal = retVal && archive.Process(m_text);
 	retVal = retVal && archive.EndTag(textTag);

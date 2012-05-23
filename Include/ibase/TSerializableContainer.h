@@ -43,14 +43,16 @@ protected:
 template <typename ItemClass, typename ContainerClass>
 bool TSerializableContainer<ItemClass, ContainerClass>::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag itemsTag("Items", "List of items");
+	static iser::CArchiveTag itemTag("Item", "Item");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	if (!archive.IsStoring()){
 		this->Reset();
 	}
 
 	int itemCount = int(BaseClass::m_items.size());
-
-	static iser::CArchiveTag itemsTag("Items", "List of items");
-	static iser::CArchiveTag itemTag("Item", "Item");
 
 	bool retVal = archive.BeginMultiTag(itemsTag, itemTag, itemCount);
 	if (!retVal){

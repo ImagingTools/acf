@@ -7,8 +7,8 @@
 
 // ACF includes
 #include "iser/CArchiveTag.h"
-#include "iser/ISerializable.h"
 
+#include "i2d/IObject2d.h"
 #include "i2d/CVector2d.h"
 
 
@@ -16,7 +16,7 @@ namespace i2d
 {
 
 
-class CPolypoint: public iser::ISerializable
+class CPolypoint: virtual public IObject2d
 {
 public:
 	CPolypoint();
@@ -25,11 +25,35 @@ public:
 	void Clear();
 	const QVector<i2d::CVector2d>& GetPoints() const;
 
+	// reimplemented (i2d::IObject2d)
+	virtual CVector2d GetCenter() const;
+	virtual void MoveCenterTo(const CVector2d& position);
+	virtual bool Transform(
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool InvTransform(
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+	virtual bool GetTransformed(
+				const ITransformation2d& transformation,
+				IObject2d& result,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+	virtual bool GetInvTransformed(
+				const ITransformation2d& transformation,
+				IObject2d& result,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL) const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
 private:
-	QVector<i2d::CVector2d> m_points;
+	typedef QVector<i2d::CVector2d> Points;
+
+	Points m_points;
 };
 
 

@@ -106,10 +106,12 @@ bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
 
 bool CAnnulusSegment::Serialize(iser::IArchive& archive)
 {
-	bool retVal = BaseClass::Serialize(archive);
-
 	static iser::CArchiveTag beginAngleTag("BeginAngle", "Start angle of the segment");
 	static iser::CArchiveTag endAngleTag("EndAngle", "End angle of the segment");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+	bool retVal = BaseClass::Serialize(archive);
 
 	if (archive.IsStoring()){
 		double beginAngle = GetBeginAngle();

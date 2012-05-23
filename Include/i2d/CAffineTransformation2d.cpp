@@ -166,6 +166,8 @@ CVector2d CAffineTransformation2d::GetValueAt(const CVector2d& argument) const
 
 bool CAffineTransformation2d::Serialize(iser::IArchive& archive)
 {
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	return m_transformation.Serialize(archive);
 }
 

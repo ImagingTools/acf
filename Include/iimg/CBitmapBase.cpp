@@ -161,11 +161,16 @@ bool CBitmapBase::SetColorAt(const istd::CIndex2d& position, const icmm::CVarCol
 
 bool CBitmapBase::Serialize(iser::IArchive& archive)
 {
-	bool retVal = true;
+	static iser::CArchiveTag headerTag("BitmapHeader", "Header of bitmap");
+	static iser::CArchiveTag sizeTag("Size", "Size of bitmap");
+	static iser::CArchiveTag sizeXTag("X", "Bitmap width");
+	static iser::CArchiveTag sizeYTag("Y", "Bitmap height");
+	static iser::CArchiveTag pixelFormatTag("PixelFormat", "Pixel format");
 
 	bool isStoring = archive.IsStoring();
 
-	static iser::CArchiveTag headerTag("BitmapHeader", "Header of bitmap");
+	bool retVal = true;
+
 	retVal = retVal && archive.BeginTag(headerTag);
 
 	istd::CIndex2d size;
@@ -176,22 +181,18 @@ bool CBitmapBase::Serialize(iser::IArchive& archive)
 		pixelFormat =  GetPixelFormat();
 	}
 
-	static iser::CArchiveTag sizeTag("Size", "Size of bitmap");
 	retVal = retVal && archive.BeginTag(sizeTag);
 
-	static iser::CArchiveTag sizeXTag("X", "Bitmap width");
 	retVal = retVal && archive.BeginTag(sizeXTag);
 	retVal = retVal && archive.Process(size[0]);
 	retVal = retVal && archive.EndTag(sizeXTag);
 
-	static iser::CArchiveTag sizeYTag("Y", "Bitmap height");
 	retVal = retVal && archive.BeginTag(sizeYTag);
 	retVal = retVal && archive.Process(size[1]);
 	retVal = retVal && archive.EndTag(sizeYTag);
 
 	retVal = retVal && archive.EndTag(sizeTag);
 
-	static iser::CArchiveTag pixelFormatTag("PixelFormat", "Pixel format");
 	retVal = retVal && archive.BeginTag(pixelFormatTag);
 	retVal = retVal && archive.Process(pixelFormat);
 	retVal = retVal && archive.EndTag(pixelFormatTag);

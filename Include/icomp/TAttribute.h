@@ -2,6 +2,8 @@
 #define icomp_TAttribute_included
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
 #include "istd/CClassInfo.h"
 
 #include "iser/IArchive.h"
@@ -105,13 +107,14 @@ QByteArray TAttribute<Value>::GetFactoryId() const
 template <typename Value>
 bool TAttribute<Value>::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag valueTag("Value", "Value of attribute");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag valueTag("Value", "Value of attribute");
 	retVal = retVal && archive.BeginTag(valueTag);
-
 	retVal = retVal && archive.Process(m_value);
-
 	retVal = retVal && archive.EndTag(valueTag);
 
 	return retVal;

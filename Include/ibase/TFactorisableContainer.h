@@ -164,14 +164,16 @@ void TFactorisableContainer<InterfaceClass>::RegisterItemFactory(istd::TIFactory
 template <class InterfaceClass>
 bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag itemsTag("Items", "List of items");
+	static iser::CArchiveTag itemTag("Item", "Item");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	if (!archive.IsStoring()){
 		this->Reset();
 	}
 
 	int itemCount = BaseClass::GetItemsCount();
-
-	static iser::CArchiveTag itemsTag("Items", "List of items");
-	static iser::CArchiveTag itemTag("Item", "Item");
 
 	bool retVal = archive.BeginMultiTag(itemsTag, itemTag, itemCount);
 	if (!retVal){

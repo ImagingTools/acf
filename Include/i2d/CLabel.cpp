@@ -1,6 +1,10 @@
 #include "i2d/CLabel.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
+
+
 namespace i2d
 {
 
@@ -22,11 +26,14 @@ void CLabel::SetText(const QString& labelText)
 
 bool CLabel::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag textTag("Text", "Text of label");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
 	bool retVal = true;
 
 	retVal = retVal && BaseClass::Serialize(archive);
 
-	static iser::CArchiveTag textTag("Text", "Text of label");
 	retVal = retVal && archive.BeginTag(textTag);
 	retVal = retVal && archive.Process(m_text);
 	retVal = retVal && archive.EndTag(textTag);

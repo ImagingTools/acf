@@ -2,6 +2,8 @@
 
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
+
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
@@ -54,11 +56,14 @@ void CMessage::SetSource(const QString& source)
 
 bool CMessage::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag categoryTag("Category", "Message category");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
 	bool isStoring = archive.IsStoring();
 
 	int category = m_category;
 
-	static iser::CArchiveTag categoryTag("Category", "Message category");
 	bool retVal = archive.BeginTag(categoryTag);
 	retVal = retVal && archive.Process(category);
 	retVal = retVal && archive.EndTag(categoryTag);

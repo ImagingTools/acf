@@ -1,6 +1,9 @@
 #include "i2d/CParallelogram.h"
 
 
+// ACF includes
+#include "istd/TChangeNotifier.h"
+
 
 namespace i2d
 {
@@ -86,9 +89,12 @@ bool CParallelogram::GetInvTransformed(
 
 bool CParallelogram::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag transformTag("Transform", "Transformation used in parallelogram");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag transformTag("Transform", "Transformation used in parallelogram");
 	retVal = retVal && archive.BeginTag(transformTag);
 	retVal = retVal && m_transform.Serialize(archive);
 	retVal = retVal && archive.EndTag(transformTag);

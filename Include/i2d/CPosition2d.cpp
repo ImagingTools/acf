@@ -28,7 +28,7 @@ CPosition2d::CPosition2d(const CVector2d& position)
 void CPosition2d::SetPosition(const CVector2d& position)
 {
 	if (position != m_position){
-		istd::CChangeNotifier notifier(this, i2d::IObject2d::CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 		m_position = position;
 	}
@@ -145,9 +145,12 @@ bool CPosition2d::GetInvTransformed(
 
 bool CPosition2d::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag centerTag("Center", "Center position");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag centerTag("Center", "Center position");
 	retVal = retVal && archive.BeginTag(centerTag);
 	retVal = retVal && m_position.Serialize(archive);
 	retVal = retVal && archive.EndTag(centerTag);

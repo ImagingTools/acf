@@ -219,10 +219,12 @@ istd::IChangeable* CObjectQueueComp::PopBackObject(int offsetPos, const QByteArr
 
 bool CObjectQueueComp::Serialize(iser::IArchive& archive)
 {
-	bool retVal = true;
-
 	static iser::CArchiveTag queueTag("Queue", "Set of objects in some queue");
 	static iser::CArchiveTag objectTag("Object", "Single queue object");
+
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+
+	bool retVal = true;
 
 	if (archive.IsStoring()){
 		int objectsCount = int(m_objectsQueue.size());

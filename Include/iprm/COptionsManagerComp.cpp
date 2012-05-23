@@ -130,42 +130,46 @@ bool COptionsManagerComp::InsertOption(
 
 bool COptionsManagerComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag optionsTag("Options", "List of dynamic options");
+	static iser::CArchiveTag optionTag("OptionInfo", "Meta-information about an option");
+	static iser::CArchiveTag optionNameTag("Name", "Name of the option");
+	static iser::CArchiveTag optionDescriptionTag("Description", "Description of the option");
+	static iser::CArchiveTag optionIdTag("ID", "ID of the option");
+
+	bool isStoring = archive.IsStoring();
+
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	bool retVal = true;
 
-	if (!archive.IsStoring()){
+	if (!isStoring){
 		m_options.clear();
 	}
 
 	int optionsCount = int(m_options.size());
-
-	static iser::CArchiveTag optionsTag("Options", "List of dynamic options");
-	static iser::CArchiveTag optionTag("OptionInfo", "Meta-information about an option");
 
 	retVal = retVal && archive.BeginMultiTag(optionsTag, optionTag, optionsCount);
 
 	for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
 		OptionInfo option;
 
-		if (archive.IsStoring()){
+		if (isStoring){
 			option = m_options[optionIndex];
 		}
 
-		static iser::CArchiveTag optionNameTag("Name", "Name of the option");
 		retVal = retVal && archive.BeginTag(optionNameTag);
 		retVal = retVal && archive.Process(option.optionName);
 		retVal = retVal && archive.EndTag(optionNameTag);
 
-		static iser::CArchiveTag optionDescriptionTag("Description", "Description of the option");
 		retVal = retVal && archive.BeginTag(optionDescriptionTag);
 		retVal = retVal && archive.Process(option.optionDescription);
 		retVal = retVal && archive.EndTag(optionDescriptionTag);
 
-		static iser::CArchiveTag optionIdTag("ID", "ID of the option");
 		retVal = retVal && archive.BeginTag(optionIdTag);
 		retVal = retVal && archive.Process(option.optionId);
 		retVal = retVal && archive.EndTag(optionIdTag);
 
-		if (!archive.IsStoring() && retVal){
+		if (!isStoring && retVal){
 			m_options.push_back(option);
 		}
 	}
