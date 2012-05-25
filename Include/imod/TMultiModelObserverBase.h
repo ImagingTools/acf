@@ -36,7 +36,7 @@ public:
 template<class ModelInterface>
 ModelInterface* TMultiModelObserverBase<ModelInterface>::GetObjectPtr(int objectIndex) const
 {
-	I_ASSERT(objectIndex >= 0)
+	I_ASSERT(objectIndex >= 0);
 	I_ASSERT(objectIndex < GetModelCount());
 
 	return dynamic_cast<ModelInterface*>(GetModelPtr(objectIndex));

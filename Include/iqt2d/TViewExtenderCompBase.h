@@ -27,6 +27,7 @@ public:
 	I_BEGIN_BASE_COMPONENT(TViewExtenderCompBase);
 		I_REGISTER_INTERFACE(IViewExtender);
 		I_ASSIGN(m_slaveExtenderCompPtr, "SlaveSceneExtender", "Scene extender will be used to provide background shapes", false, "SlaveSceneExtender");
+		I_ASSIGN(m_sceneExtenderModeAttrPtr, "ViewExtenderMode", "Control how the view extender works:\n\t0 - combine slave with current shapes\n\t1 - use slave by direct calls only\n\t2 - use slave always and current shapes indirect only\n\t3 - use slave by direct calls only and current shapes indirect only", true, 0);
 		I_ASSIGN_MULTI_0(m_idFiltersAttrPtr, "SceneIdFilters", "Optional scene ID filters allowing to ignore some scene providers", false);
 	I_END_COMPONENT;
 
@@ -35,6 +36,14 @@ public:
 	virtual void RemoveItemsFromScene(IViewProvider* providerPtr);
 
 protected:
+	enum ExtenderMode
+	{
+		EM_COMBINE,
+		EM_SLAVE_DIRECT_ONLY,
+		EM_OWN_SHAPES_INDIRECT,
+		EM_SLAVE_DIRECT_ONLY_OWN_SHAPES_INDIRECT
+	};
+
 	typedef istd::TPointerVector<iview::IShape> Shapes;
 	typedef QMap<IViewProvider*, Shapes> ShapesMap;
 
@@ -48,8 +57,10 @@ protected:
 
 private:
 	ShapesMap m_shapesMap;
+	bool m_isSlaveShown;
 
 	I_REF(IViewExtender, m_slaveExtenderCompPtr);
+	I_ATTR(int, m_sceneExtenderModeAttrPtr);
 	I_MULTIATTR(int, m_idFiltersAttrPtr);
 };
 
@@ -66,7 +77,32 @@ void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, in
 	int id = providerPtr->GetViewId();
 	iview::IShapeView* viewPtr = providerPtr->GetView();
 
-	if ((viewPtr != NULL) && IsSceneIdSupported(id) && (m_shapesMap.find(providerPtr) == m_shapesMap.end())){
+	bool showOwnShapes = true;
+	bool showSlaveShapes = true;
+
+	switch (*m_sceneExtenderModeAttrPtr){
+	case EM_SLAVE_DIRECT_ONLY:
+		showSlaveShapes = ((flags & SF_DIRECT) != 0);
+		break;
+
+	case EM_OWN_SHAPES_INDIRECT:
+		showOwnShapes = ((flags & SF_DIRECT) == 0);
+		break;
+
+	case EM_SLAVE_DIRECT_ONLY_OWN_SHAPES_INDIRECT:
+		showOwnShapes = ((flags & SF_DIRECT) == 0);
+		showSlaveShapes = ((flags & SF_DIRECT) != 0);
+		break;
+
+	default:
+		break;
+	};
+
+
+	if (		showOwnShapes &&
+				(viewPtr != NULL) &&
+				IsSceneIdSupported(id) &&
+				(m_shapesMap.find(providerPtr) == m_shapesMap.end())){
 		Shapes& shapes = m_shapesMap[providerPtr];
 
 		bool isBackground = ((flags & SF_BACKGROUND) != 0);
@@ -88,8 +124,13 @@ void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, in
 		}
 	}
 
-	if (m_slaveExtenderCompPtr.IsValid()){
+	if (showSlaveShapes && m_slaveExtenderCompPtr.IsValid()){
 		m_slaveExtenderCompPtr->AddItemsToScene(providerPtr, (flags | SF_BACKGROUND) & ~SF_DIRECT);
+
+		m_isSlaveShown = true;
+	}
+	else{
+		m_isSlaveShown = false;
 	}
 }
 
@@ -99,7 +140,9 @@ void TViewExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerPt
 {
 	I_ASSERT(providerPtr != NULL);
 
-	if (m_slaveExtenderCompPtr.IsValid()){
+	if (m_isSlaveShown){
+		I_ASSERT(m_slaveExtenderCompPtr.IsValid());
+
 		m_slaveExtenderCompPtr->RemoveItemsFromScene(providerPtr);
 	}
 

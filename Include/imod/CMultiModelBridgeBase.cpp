@@ -15,7 +15,7 @@ CMultiModelBridgeBase::~CMultiModelBridgeBase()
 
 IModel* CMultiModelBridgeBase::GetModelPtr(int modelIndex) const
 {
-	I_ASSERT(modelIndex >= 0)
+	I_ASSERT(modelIndex >= 0);
 	I_ASSERT(modelIndex < GetModelCount());
 
 	return m_models.at(modelIndex);

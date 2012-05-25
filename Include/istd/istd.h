@@ -44,7 +44,7 @@ static const double I_BIG_EPSILON = 1.0e-8;
 
 
 #define I_IF_DEBUG(instructions) instructions
-#define I_ASSERT(condition) if (!(condition)){qFatal("assertion error %s: (%s)", __FILE__, __LINE__);}
+#define I_ASSERT(condition) Q_ASSERT(condition)
 #define I_CRITICAL() qFatal("fatal error %s: (%s)", __FILE__, __LINE__)
 
 

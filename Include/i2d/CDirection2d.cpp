@@ -138,7 +138,7 @@ CDirection2d CDirection2d::Avg(const CDirection2d& dir2) const
 CDirection2d CDirection2d::Avg(double weight, const CDirection2d& dir2) const
 {
 	I_ASSERT(Invariant());
-	I_ASSERT(dir2.Invariant())
+	I_ASSERT(dir2.Invariant());
 	I_ASSERT(weight >= 0.0);
 	I_ASSERT(weight <= 1.0);
 
