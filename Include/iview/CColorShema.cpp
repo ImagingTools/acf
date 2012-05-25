@@ -1,6 +1,11 @@
 #include "iview/CColorShema.h"
 
 
+// Qt includes
+#include <QtGui/QApplication>
+#include <QtGui/QPalette>
+
+
 namespace iview
 {
 
@@ -45,7 +50,7 @@ CColorShema::CColorShema()
 	m_brushes[SB_TICKER] = QBrush(QColor(128, 128, 255));
 	m_brushes[SB_SELECTED_TICKER] = QBrush(QColor(255, 128, 128));
 	m_brushes[SB_IMPORTANT] = QBrush(QColor(0, 0, 255));
-	m_brushes[SB_BACKGROUND] = QBrush(QColor(192, 192, 192));
+	m_brushes[SB_BACKGROUND] = qApp->palette().color(QPalette::Window);
 	m_brushes[SB_HALF_TRANSPARENT] = QBrush(QColor(255, 0, 0, 50));
 	m_brushes[SB_HALF_TRANSPARENT2] = QBrush(QColor(0, 0, 255, 50));
 	m_brushes[SB_TRANSPARENT] = QBrush(QColor(0, 0, 0), Qt::NoBrush);

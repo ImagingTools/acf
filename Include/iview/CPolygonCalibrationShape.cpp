@@ -324,9 +324,10 @@ void CPolygonCalibrationShape::DrawCurve(QPainter& drawContext) const
 				point1 = point2;
 			}
 		}
-	}
 
-	drawContext.restore();
+		drawContext.restore();
+
+	}
 }
 
 
