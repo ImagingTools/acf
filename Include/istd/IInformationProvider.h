@@ -74,7 +74,7 @@ public:
 
 	/**
 		Get flags of the information.
-		\sa InformationFlags
+		\sa InformationTypeFlags
 	*/
 	virtual int GetInformationFlags() const = 0;
 };
