@@ -6,6 +6,7 @@
 #include <QtCore/QSet>
 
 // ACF includes
+#include "istd/IChangeable.h"
 #include "istd/TChangeNotifier.h"
 
 #include "imod/IModel.h"
@@ -31,7 +32,8 @@ namespace iproc
 template <class Product>
 class TSupplierCompWrap:
 			public ibase::CLoggerComponentBase,
-			virtual public ISupplier
+			virtual public ISupplier,
+			virtual public istd::IChangeable
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -54,12 +56,19 @@ public:
 
 	// reimplemented (iproc::ISupplier)
 	virtual void InvalidateSupplier();
+	virtual void EnsureWorkInitialized();
 	virtual void EnsureWorkFinished();
 	virtual void ClearWorkResults();
 	virtual int GetWorkStatus() const;
 	virtual iprm::IParamsSet* GetModelParametersSet() const;
 
 protected:
+	/**
+		Called if the new work should be initiliazed.
+		Default implementation do nothing. It is dedicated to be overriden.
+	*/
+	virtual bool InitializeWork();
+
 	/**
 		Get current work product, if work was done correctly.
 	*/
@@ -97,7 +106,7 @@ protected:
 
 	protected:
 		// reimplemented (imod::CMultiModelObserverBase)
-		virtual void OnUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	private:
 		TSupplierCompWrap<Product>& m_parent;
@@ -113,6 +122,8 @@ private:
 	int m_workStatus;
 
 	InputObserver m_inputObserver;
+
+	istd::CChangeNotifier m_productChangeNotifier;
 };
 
 
@@ -120,8 +131,9 @@ private:
 
 template <class Product>
 TSupplierCompWrap<Product>::TSupplierCompWrap()
-:	m_workStatus(WS_NONE),
-	m_inputObserver(this)
+:	m_workStatus(WS_INVALID),
+	m_inputObserver(this),
+	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL)
 {
 }
 
@@ -142,10 +154,28 @@ void TSupplierCompWrap<Product>::InvalidateSupplier()
 		return;
 	}
 
-	if (m_workStatus != ISupplier::WS_INIT){
-		istd::CChangeNotifier notifier(this);
+	if (m_workStatus != ISupplier::WS_INVALID){
+		m_productChangeNotifier.SetPtr(this);
 
-		m_workStatus = ISupplier::WS_INIT;
+		m_workStatus = ISupplier::WS_INVALID;
+	}
+}
+
+
+template <class Product>
+void TSupplierCompWrap<Product>::EnsureWorkInitialized()
+{
+	if (m_workStatus < ISupplier::WS_INIT){
+		m_productChangeNotifier.SetPtr(this);
+
+		if (InitializeWork()){
+			m_workStatus = WS_INIT;
+		}
+		else{
+			m_workStatus = WS_CRITICAL;
+
+			m_productChangeNotifier.SetPtr(NULL);
+		}
 	}
 }
 
@@ -154,7 +184,7 @@ template <class Product>
 void TSupplierCompWrap<Product>::EnsureWorkFinished()
 {
 	if (m_workStatus <= ISupplier::WS_INIT){
-		istd::CChangeNotifier notifier(this, ISupplier::CF_SUPPLIER_RESULTS | CF_MODEL);
+		TSupplierCompWrap<Product>::EnsureWorkInitialized();
 
 		m_workStatus = WS_LOCKED;
 
@@ -164,6 +194,8 @@ void TSupplierCompWrap<Product>::EnsureWorkFinished()
 
 		m_workStatus = ProduceObject(*m_productPtr);
 		I_ASSERT(m_workStatus >= WS_OK);	// No initial states are possible
+
+		m_productChangeNotifier.SetPtr(NULL);
 	}
 }
 
@@ -171,12 +203,16 @@ void TSupplierCompWrap<Product>::EnsureWorkFinished()
 template <class Product>
 void TSupplierCompWrap<Product>::ClearWorkResults()
 {
-	if (m_workStatus != ISupplier::WS_NONE){
-		istd::CChangeNotifier notifier(this);
+	if (m_workStatus == ISupplier::WS_LOCKED){
+		return;
+	}
+
+	if (m_workStatus != ISupplier::WS_INVALID){
+		m_productChangeNotifier.SetPtr(this);
 
 		m_productPtr.Reset();
 
-		m_workStatus = ISupplier::WS_NONE;
+		m_workStatus = ISupplier::WS_INVALID;
 	}
 }
 
@@ -189,6 +225,13 @@ int TSupplierCompWrap<Product>::GetWorkStatus() const
 
 
 // protected methods
+
+template <class Product>
+bool TSupplierCompWrap<Product>::InitializeWork()
+{
+	return true;
+}
+
 
 template <class Product>
 const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
@@ -241,7 +284,7 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 		}
 	}
 
-	m_workStatus = ISupplier::WS_NONE;
+	m_workStatus = ISupplier::WS_INVALID;
 }
 
 
@@ -269,7 +312,7 @@ TSupplierCompWrap<Product>::InputObserver::InputObserver(TSupplierCompWrap<Produ
 // reimplemented (imod::CMultiModelObserverBase)
 
 template <class Product>
-void TSupplierCompWrap<Product>::InputObserver::OnUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void TSupplierCompWrap<Product>::InputObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_parent.InvalidateSupplier();
 }

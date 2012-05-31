@@ -2,7 +2,8 @@
 #define iproc_ISupplier_included
 
 
-#include "istd/IChangeable.h"
+// ACF includes
+#include "istd/IPolymorphic.h"
 
 #include "iprm/IParamsSet.h"
 
@@ -19,15 +20,15 @@ namespace iproc
 	For example image provider should provide method \c{const iimg::IBitmap* GetBitmap() const}.
 	The internal stored object should be created on demand.
 */
-class ISupplier: virtual public istd::IChangeable
+class ISupplier: virtual public istd::IPolymorphic
 {
 public:
 	enum WorkStatus
 	{
 		/**
-			No status is provided, no work was done.
+			Supplier is invalidated and will produce new result on demand.
 		*/
-		WS_NONE,
+		WS_INVALID,
 		/**
 			New work is initialized.
 		*/
@@ -56,14 +57,23 @@ public:
 
 	enum ChangeFlags
 	{
-		CF_SUPPLIER_RESULTS = 1 << 21
+		/**
+			Supplier result chenged.
+		*/
+		CF_SUPPLIER_RESULTS = 1 << 22
 	};
 
 	/**
 		Called to signalize that this supplier is invalid.
 		This signal will be transfered to all supplier which are registered as output.
+		\return	true, if initialization could be done.
 	*/
 	virtual void InvalidateSupplier() = 0;
+
+	/**
+		Force the supplier to initialize its work.
+	*/
+	virtual void EnsureWorkInitialized() = 0;
 
 	/**
 		Ensure that all objects are produced.
