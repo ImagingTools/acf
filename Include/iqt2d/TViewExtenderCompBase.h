@@ -31,6 +31,8 @@ public:
 		I_ASSIGN_MULTI_0(m_idFiltersAttrPtr, "SceneIdFilters", "Optional scene ID filters allowing to ignore some scene providers", false);
 	I_END_COMPONENT;
 
+	TViewExtenderCompBase();
+
 	// reimplemented (iqt2d::IViewExtender)
 	virtual void AddItemsToScene(IViewProvider* providerPtr, int flags);
 	virtual void RemoveItemsFromScene(IViewProvider* providerPtr);
@@ -66,6 +68,13 @@ private:
 
 
 // public methods
+
+template <class Base>
+TViewExtenderCompBase<Base>::TViewExtenderCompBase()
+:	m_isSlaveShown(false)
+{
+}
+
 
 // reimplemented (iqt2d::IViewExtender)
 
