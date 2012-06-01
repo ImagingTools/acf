@@ -88,6 +88,9 @@ protected:
 	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
+private:
+	void UpdateVisualStatus();
+
 protected Q_SLOTS:
 	virtual void OnAddMessage(QTreeWidgetItem* itemPtr);
 	virtual void OnRemoveMessage(QVariant messageId);
