@@ -23,6 +23,9 @@ public:
 		I_REGISTER_INTERFACE(IShapeStatusInfo);
 	I_END_COMPONENT;
 
+	CShapeStatusInfoComp();
+
+	// reimplemented (IShapeStatusInfo)
 	virtual i2d::CVector2d GetLogicalPosition() const;
 	virtual void SetLogicalPosition(const i2d::CVector2d& logicalPosition);
 	virtual i2d::CVector2d GetPixelPosition() const;

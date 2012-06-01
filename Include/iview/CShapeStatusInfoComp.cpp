@@ -9,6 +9,17 @@ namespace iview
 {
 
 
+// public methods
+
+CShapeStatusInfoComp::CShapeStatusInfoComp()
+	:m_logicalPosition(0, 0),
+	m_pixelPosition(0, 0)
+{
+}
+
+
+// reimplemented (IShapeStatusInfo)
+
 i2d::CVector2d CShapeStatusInfoComp::GetLogicalPosition() const
 {
 	return m_logicalPosition;
