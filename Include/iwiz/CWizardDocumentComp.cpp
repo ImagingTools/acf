@@ -67,7 +67,7 @@ int CWizardDocumentComp::GetPrevPageIndex() const
 		}
 	}
 
-	return -1;
+	return currentPageIndex;
 }
 
 
@@ -79,7 +79,7 @@ int CWizardDocumentComp::GetNextPageIndex() const
 	if (currentPageIndex >= 0){
 		const iproc::IStateController* currentPageInfoPtr = CompCastPtr<const iproc::IStateController>(GetParamsSet(currentPageIndex));
 		if ((currentPageInfoPtr != NULL) && !currentPageInfoPtr->IsLeaveAllowed()){
-			return -1;
+			return currentPageIndex;
 		}
 	}
 
