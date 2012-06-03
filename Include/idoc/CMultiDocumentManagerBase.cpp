@@ -194,6 +194,7 @@ bool CMultiDocumentManagerBase::FileOpen(
 			const QString* fileNamePtr,
 			bool createView,
 			const QByteArray& viewTypeId,
+			istd::IChangeable** documentPtr,
 			FileToTypeMap* loadedMapPtr)
 {
 	bool retVal = true;
@@ -213,13 +214,18 @@ bool CMultiDocumentManagerBase::FileOpen(
 		const QString& fileName = *iter;
 
 		QByteArray documentTypeId;
-		if (OpenDocument(fileName, createView, viewTypeId, documentTypeId)){
+		istd::IChangeable* openDocumentPtr = OpenDocument(fileName, createView, viewTypeId, documentTypeId);
+		if (openDocumentPtr != NULL){
 			if (loadedMapPtr != NULL){
 				loadedMapPtr->operator[](fileName) = documentTypeId;
 			}
 		}
 		else{
 			retVal = false;
+		}
+
+		if (documentPtr != NULL){
+			*documentPtr = openDocumentPtr;
 		}
 	}
 

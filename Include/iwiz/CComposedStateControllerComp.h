@@ -28,8 +28,10 @@ public:
 
 	I_BEGIN_COMPONENT(CComposedStateControllerComp);
 		I_REGISTER_INTERFACE(iproc::IStateController);
-		I_ASSIGN_MULTI_0(m_slaveControllersCompPtr, "SlaveControllers", "State controllers used to calculation general page state", true);
-		I_ASSIGN_TO(m_slaveControllerModelsCompPtr, m_slaveControllersCompPtr, true);
+		I_ASSIGN_MULTI_0(m_slaveControllersCompPtr, "SlaveControllers", "State controllers used to calculation general page state", false);
+		I_ASSIGN_TO(m_slaveControllerModelsCompPtr, m_slaveControllersCompPtr, false);
+		I_ASSIGN(m_processOnEnterCompPtr, "EnterProcessor", "Processor called on enter", false, "EnterProcessor");
+		I_ASSIGN(m_processOnLeaveCompPtr, "LeaveProcessor", "Processor called on exit", false, "LeaveProcessor");
 	I_END_COMPONENT;
 
 	CComposedStateControllerComp();

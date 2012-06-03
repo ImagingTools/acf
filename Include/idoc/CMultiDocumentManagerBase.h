@@ -44,6 +44,7 @@ public:
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
 				const QByteArray& viewTypeId = "",
+				istd::IChangeable** documentPtr = NULL,
 				FileToTypeMap* loadedMapPtr = NULL);
 	virtual bool FileSave(
 				int documentIndex = -1,
@@ -127,7 +128,7 @@ protected:
 	/**
 		Create instance of specified document without attaching to this manager.
 	*/
-	SingleDocumentData* CreateDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId) const;
+	virtual SingleDocumentData* CreateDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId) const;
 
 	/**
 		Register (attach) created document as new working document.

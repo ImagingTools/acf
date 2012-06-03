@@ -152,6 +152,7 @@ public:
 				const QString* fileNamePtr = NULL,
 				bool createView = true,
 				const QByteArray& viewTypeId = "",
+				istd::IChangeable** documentPtr = NULL,
 				FileToTypeMap* loadedMapPtr = NULL) = 0;
 
 	/**
