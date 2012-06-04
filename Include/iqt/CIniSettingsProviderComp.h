@@ -36,7 +36,7 @@ protected:
 	virtual void OnComponentCreated();
 	
 private:
-	I_ATTR(QString, m_iniFilePathAttrPtr);
+	I_ATTR(QByteArray, m_iniFilePathAttrPtr);
 
 	istd::TDelPtr<QSettings> m_settingsPtr;
 };

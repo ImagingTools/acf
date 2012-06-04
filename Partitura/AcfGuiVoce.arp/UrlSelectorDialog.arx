@@ -200,7 +200,7 @@
               RootKey
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               SettingsRootKey
