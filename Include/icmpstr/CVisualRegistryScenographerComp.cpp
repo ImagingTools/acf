@@ -569,17 +569,17 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	connect(&m_cutCommand, SIGNAL(activated()), this, SLOT(OnCutCommand()));
-	connect(&m_copyCommand, SIGNAL(activated()), this, SLOT(OnCopyCommand()));
-	connect(&m_pasteCommand, SIGNAL(activated()), this, SLOT(OnPasteCommand()));
-	connect(&m_removeComponentCommand, SIGNAL(activated()), this, SLOT(OnRemoveComponent()));
-	connect(&m_renameComponentCommand, SIGNAL(activated()), this, SLOT(OnRenameComponent()));
+	connect(&m_cutCommand, SIGNAL(triggered()), this, SLOT(OnCutCommand()));
+	connect(&m_copyCommand, SIGNAL(triggered()), this, SLOT(OnCopyCommand()));
+	connect(&m_pasteCommand, SIGNAL(triggered()), this, SLOT(OnPasteCommand()));
+	connect(&m_removeComponentCommand, SIGNAL(triggered()), this, SLOT(OnRemoveComponent()));
+	connect(&m_renameComponentCommand, SIGNAL(triggered()), this, SLOT(OnRenameComponent()));
 
-	connect(&m_insertEmbeddedRegistryCommand, SIGNAL(activated()), this, SLOT(InsertEmbeddedComponent()));
-	connect(&m_toEmbeddedRegistryCommand, SIGNAL(activated()), this, SLOT(ToEmbeddedComponent()));
-	connect(&m_exportToCodeCommand, SIGNAL(activated()), this, SLOT(OnExportToCode()));
-	connect(&m_executeRegistryCommand, SIGNAL(activated()), this, SLOT(OnExecute()));
-	connect(&m_abortRegistryCommand, SIGNAL(activated()), this, SLOT(OnAbort()));
+	connect(&m_insertEmbeddedRegistryCommand, SIGNAL(triggered()), this, SLOT(InsertEmbeddedComponent()));
+	connect(&m_toEmbeddedRegistryCommand, SIGNAL(triggered()), this, SLOT(ToEmbeddedComponent()));
+	connect(&m_exportToCodeCommand, SIGNAL(triggered()), this, SLOT(OnExportToCode()));
+	connect(&m_executeRegistryCommand, SIGNAL(triggered()), this, SLOT(OnExecute()));
+	connect(&m_abortRegistryCommand, SIGNAL(triggered()), this, SLOT(OnAbort()));
 	
 	m_exportToCodeCommand.setVisible(m_registryCodeSaverCompPtr.IsValid());
 	m_executeRegistryCommand.setVisible(m_registryPreviewCompPtr.IsValid());

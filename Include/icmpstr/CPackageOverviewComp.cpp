@@ -200,11 +200,11 @@ private:
 
 		QLinearGradient selectedComponentGradient(rect.left(), rect.top(), rect.right(), rect.top());
 		double iconFactor = 16 / rect.width();
-		double mainFactor = qMax(1.0, 200 / rect.width());
+		double mainFactor = qMin(1.0, 200 / rect.width());
 
 		selectedComponentGradient.setColorAt(0, transparentColor);
-		selectedComponentGradient.setColorAt(iconFactor, transparentColor);
-		selectedComponentGradient.setColorAt(4 * iconFactor, QColor(10, 242, 126));
+		selectedComponentGradient.setColorAt(qMin(1.0, iconFactor), transparentColor);
+		selectedComponentGradient.setColorAt(qMin(1.0, 4 * iconFactor), QColor(10, 242, 126));
 		selectedComponentGradient.setColorAt(mainFactor, QColor(10, 242, 126, 128));
 		selectedComponentGradient.setColorAt(1.0, transparentColor);
 		m_selectedItemBrush =  selectedComponentGradient;
@@ -230,7 +230,7 @@ CPackageOverviewComp::CPackageOverviewComp()
 	m_startDrag(false),
 	m_starDragPosition(0, 0)
 {
-	connect(&m_reloadCommand, SIGNAL(activated()), this, SLOT(OnReloadPackages()));
+	connect(&m_reloadCommand, SIGNAL(triggered()), this, SLOT(OnReloadPackages()));
 	m_packagesCommand.InsertChild(&m_reloadCommand);
 	m_commands.InsertChild(&m_packagesCommand);
 }

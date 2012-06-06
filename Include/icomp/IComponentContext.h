@@ -34,6 +34,11 @@ class IComponentContext: virtual public istd::IPolymorphic
 {
 public:
 	/**
+		Get ID of this component in the context tree.
+		This should be unique for all elements in the same tree level.
+	*/
+	virtual const QByteArray& GetContextId() const = 0;
+	/**
 		Get access to component registry element object.
 		State of the component context is based on this registry element
 		(part of registry document describing component) and context parent.

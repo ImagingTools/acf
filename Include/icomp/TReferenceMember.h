@@ -128,10 +128,14 @@ bool TReferenceMember<Interface>::EnsureInitialized() const
 			BaseClass2::SplitId(componentId, baseId, subId);
 
 			IComponent* componentPtr = parentPtr->GetSubcomponent(baseId);
-
-			m_componentPtr = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+			if (componentPtr != NULL){
+				m_componentPtr = BaseClass2::ExtractInterface<Interface>(componentPtr, subId);
+			}
 
 			m_isInitialized = true;
+		}
+		else{
+			qCritical("Component %s is defined, but definition component has no parent", BaseClass::operator*().constData());
 		}
 	}
 

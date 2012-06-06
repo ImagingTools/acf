@@ -14,8 +14,9 @@ CCompositeComponentContext::CCompositeComponentContext(
 			const IComponentStaticInfo* staticInfoPtr,
 			const IRegistry* registryPtr,
 			const IComponentEnvironmentManager* environmentManagerPtr,
-			const CCompositeComponentContext* parentPtr)
-:	BaseClass(elementPtr, staticInfoPtr, parentPtr),
+			const CCompositeComponentContext* parentPtr,
+			const QByteArray& contextId)
+:	BaseClass(elementPtr, staticInfoPtr, parentPtr, contextId),
 	m_registry(*registryPtr),
 	m_environmentManager(*environmentManagerPtr)
 {

@@ -28,11 +28,11 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 {
 	m_printCommand.SetGroupId(iqtdoc::CMainWindowGuiComp::GI_DOCUMENT);
 	m_printCommand.setShortcut(tr("Ctrl+P"));
-	connect(&m_printCommand, SIGNAL(activated()), this, SLOT(OnPrint()));
+	connect(&m_printCommand, SIGNAL(triggered()), this, SLOT(OnPrint()));
 	m_fileMenu.InsertChild(&m_printCommand);
 
 	m_selectAllCommand.setShortcut(Qt::CTRL + Qt::Key_A);
-	connect(&m_selectAllCommand, SIGNAL(activated()), this, SLOT(OnSelectAllShapes()));
+	connect(&m_selectAllCommand, SIGNAL(triggered()), this, SLOT(OnSelectAllShapes()));
 	m_editMenu.InsertChild(&m_selectAllCommand);
 
 	m_autoFitToViewCommand.SetStaticFlags(
@@ -41,13 +41,13 @@ CSceneProviderGuiComp::CSceneProviderGuiComp()
 	connect(&m_autoFitToViewCommand, SIGNAL(toggled(bool)), this, SLOT(OnAutoFit(bool)));
 	m_viewMenu.InsertChild(&m_autoFitToViewCommand);
 
-	connect(&m_fitToViewCommand, SIGNAL(activated()), this, SLOT(OnFitToView()));
+	connect(&m_fitToViewCommand, SIGNAL(triggered()), this, SLOT(OnFitToView()));
 	m_viewMenu.InsertChild(&m_fitToViewCommand);
 
-	connect(&m_fitToImageCommand, SIGNAL(activated()), this, SLOT(OnFitToShapes()));
+	connect(&m_fitToImageCommand, SIGNAL(triggered()), this, SLOT(OnFitToShapes()));
 	m_viewMenu.InsertChild(&m_fitToImageCommand);
 
-	connect(&m_resetZoomCommand, SIGNAL(activated()), this, SLOT(OnResetScale()));
+	connect(&m_resetZoomCommand, SIGNAL(triggered()), this, SLOT(OnResetScale()));
 	m_viewMenu.InsertChild(&m_resetZoomCommand);
 
 	m_commands.InsertChild(&m_fileMenu);

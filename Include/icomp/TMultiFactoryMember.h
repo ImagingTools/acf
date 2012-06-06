@@ -107,6 +107,9 @@ IComponent* TMultiFactoryMember<Interface>::CreateComponent(int index) const
 
 			return parentPtr->CreateSubcomponent(baseId);
 		}
+		else{
+			qCritical("Component %s is defined, but definition component has no parent", BaseClass::operator[](index).constData());
+		}
 	}
 
 	return NULL;

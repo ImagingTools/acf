@@ -15,8 +15,8 @@ CTextEditorComp::CTextEditorComp()
 	m_editorCommand.InsertChild(&m_uppercaseCommand, false);
 	m_rootCommand.InsertChild(&m_editorCommand, false);
 
-	connect(&m_lowercaseCommand, SIGNAL(activated()), this, SLOT(OnToLowercase()));
-	connect(&m_uppercaseCommand, SIGNAL(activated()), this, SLOT(OnToUppercase()));
+	connect(&m_lowercaseCommand, SIGNAL(triggered()), this, SLOT(OnToLowercase()));
+	connect(&m_uppercaseCommand, SIGNAL(triggered()), this, SLOT(OnToUppercase()));
 }
 
 

@@ -43,16 +43,16 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 {
 	m_quitCommand.setMenuRole(QAction::QuitRole);
 
-	connect(&m_newCommand, SIGNAL(activated()), this, SLOT(OnNew()));
-	connect(&m_openCommand, SIGNAL(activated()), this, SLOT(OnOpen()));
-	connect(&m_saveCommand, SIGNAL(activated()), this, SLOT(OnSave()));
-	connect(&m_saveAsCommand, SIGNAL(activated()), this, SLOT(OnSaveAs()));
-	connect(&m_quitCommand, SIGNAL(activated()), this, SLOT(OnQuit()));
-	connect(&m_undoCommand, SIGNAL(activated()), this, SLOT(OnUndo()));
-	connect(&m_redoCommand, SIGNAL(activated()), this, SLOT(OnRedo()));
-	connect(&m_fullScreenCommand, SIGNAL(activated()), this, SLOT(OnFullScreen()));
-	connect(&m_copyPathToClipboardCommand, SIGNAL(activated()), this, SLOT(OnCopyPathToClipboard()));
-	connect(&m_openDocumentFolderCommand, SIGNAL(activated()), this, SLOT(OnOpenDocumentFolder()));
+	connect(&m_newCommand, SIGNAL(triggered()), this, SLOT(OnNew()));
+	connect(&m_openCommand, SIGNAL(triggered()), this, SLOT(OnOpen()));
+	connect(&m_saveCommand, SIGNAL(triggered()), this, SLOT(OnSave()));
+	connect(&m_saveAsCommand, SIGNAL(triggered()), this, SLOT(OnSaveAs()));
+	connect(&m_quitCommand, SIGNAL(triggered()), this, SLOT(OnQuit()));
+	connect(&m_undoCommand, SIGNAL(triggered()), this, SLOT(OnUndo()));
+	connect(&m_redoCommand, SIGNAL(triggered()), this, SLOT(OnRedo()));
+	connect(&m_fullScreenCommand, SIGNAL(triggered()), this, SLOT(OnFullScreen()));
+	connect(&m_copyPathToClipboardCommand, SIGNAL(triggered()), this, SLOT(OnCopyPathToClipboard()));
+	connect(&m_openDocumentFolderCommand, SIGNAL(triggered()), this, SLOT(OnOpenDocumentFolder()));
 }
 
 

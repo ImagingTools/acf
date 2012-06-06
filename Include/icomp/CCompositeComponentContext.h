@@ -33,7 +33,8 @@ public:
 				const IComponentStaticInfo* staticInfoPtr,
 				const IRegistry* registryPtr,
 				const IComponentEnvironmentManager* environmentManagerPtr,
-				const CCompositeComponentContext* parentPtr);
+				const CCompositeComponentContext* parentPtr,
+				const QByteArray& contextId);
 
 	const IRegistry& GetRegistry() const;
 	const IComponentEnvironmentManager& GetEnvironmentManager() const;

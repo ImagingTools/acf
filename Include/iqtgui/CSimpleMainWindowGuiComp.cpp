@@ -21,9 +21,9 @@ CSimpleMainWindowGuiComp::CSimpleMainWindowGuiComp()
 	m_showToolBarsCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
 	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR)
 {
-	connect(&m_showToolBarsCommand, SIGNAL(activated()), this, SLOT(OnShowToolbars()));
-	connect(&m_settingsCommand, SIGNAL(activated()), this, SLOT(OnSettings()));
-	connect(&m_aboutCommand, SIGNAL(activated()), this, SLOT(OnAbout()));
+	connect(&m_showToolBarsCommand, SIGNAL(triggered()), this, SLOT(OnShowToolbars()));
+	connect(&m_settingsCommand, SIGNAL(triggered()), this, SLOT(OnSettings()));
+	connect(&m_aboutCommand, SIGNAL(triggered()), this, SLOT(OnAbout()));
 }
 
 

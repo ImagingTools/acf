@@ -28,16 +28,25 @@ public:
 	CComponentContext(
 				const IRegistryElement* elementPtr,
 				const IComponentStaticInfo* staticInfoPtr,
-				const IComponentContext* parentPtr = NULL,
-				const QByteArray& contextId = "");
-
-	const QByteArray& GetContextId() const;
+				const IComponentContext* parentPtr,
+				const QByteArray& contextId);
 
 	// reimplemented (icomp::IComponentContext)
+	virtual const QByteArray& GetContextId() const;
 	virtual const IRegistryElement& GetRegistryElement() const;
 	virtual const IComponentStaticInfo& GetStaticInfo() const;
 	virtual const IComponentContext* GetParentContext() const;
 	virtual const iser::IObject* GetAttribute(const QByteArray& attributeId, int* definitionLevelPtr = NULL) const;
+
+protected:
+	struct AttributeInfo
+	{
+		const iser::IObject* attributePtr;
+		int definitionLevel;
+	};
+
+	bool CalcAttributeInfo(const QByteArray& attributeId, AttributeInfo& result) const;
+	QByteArray GetCompleteContextId() const;
 
 private:
 	const IRegistryElement& m_registryElement;
@@ -45,18 +54,11 @@ private:
 
 	const IComponentContext* m_parentPtr;
 
-	typedef QMap<QByteArray, const iser::IObject*> AttributeMap;
-	AttributeMap m_attributeMap;
+	typedef QMap<QByteArray, AttributeInfo> AttributeMap;
+	mutable AttributeMap m_attributeMap;
+
 	QByteArray m_contextId;
 };
-
-
-// inline methods
-
-inline const QByteArray& CComponentContext::GetContextId() const
-{
-	return m_contextId;
-}
 
 
 } // namespace icomp

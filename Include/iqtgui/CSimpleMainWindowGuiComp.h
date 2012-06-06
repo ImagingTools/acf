@@ -37,8 +37,8 @@ public:
 		I_ASSIGN_TO(m_workspaceCompPtr, m_workspaceCommandsCompPtr, true);
 		I_ASSIGN(m_aboutDialogCompPtr, "AboutDialog", "Gui displayed if 'About' action is triggered", false, "AboutDialog");
 		I_ASSIGN(m_settingsDialogCompPtr, "SettingsDialog", "Dialog window displayed if 'Settings' action is triggered", false, "SettingsDialog");
-		I_ASSIGN_MULTI_0(m_mainWindowCommandsCompPtr, "MainWindowComponents", "Additional GUI components", false);
-		I_ASSIGN_TO(m_mainWindowComponentsCompPtr, m_mainWindowCommandsCompPtr, false);
+		I_ASSIGN_MULTI_0(m_mainWindowComponentsCompPtr, "MainWindowComponents", "Additional GUI components", false);
+		I_ASSIGN_TO(m_mainWindowCommandsCompPtr, m_mainWindowComponentsCompPtr, false);
 		I_ASSIGN(m_isNestingEnabledAttrPtr, "IsNestingEnabled", "If true, docking nesting is enabled,\nmore than one docking widget is allowed on the same size", true, false);
 		I_ASSIGN(m_isAllowTabbedDockAttrPtr, "IsTabbedDockAllowed", "If true, stacking docking windows on each other is enabled", true, false);
 		I_ASSIGN(m_isMenuVisibleAttrPtr, "IsMenuVisible", "If true, menu bar will be visible", true, true);

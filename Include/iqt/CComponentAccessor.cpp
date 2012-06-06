@@ -45,7 +45,8 @@ CComponentAccessor::CComponentAccessor(
 					staticInfoPtr,
 					registryPtr,
 					managerPtr,
-					NULL);
+					NULL,
+					"");
 				m_composite.SetComponentContext(&compositeContext, NULL, false);
 			}
 		}

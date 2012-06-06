@@ -47,14 +47,14 @@ CMultiDocumentWorkspaceGuiComp::CMultiDocumentWorkspaceGuiComp()
 	m_windowCommand.InsertChild(&m_closeAllDocumentsCommand, false);
 	m_workspaceModeCommand.SetGroupId(GI_VIEW);
 
-	connect(&m_cascadeCommand, SIGNAL(activated()), this, SLOT(OnCascade()));
-	connect(&m_tileHorizontallyCommand, SIGNAL(activated()), this, SLOT(OnTileHorizontally()));
-	connect(&m_tileVerticallyCommand, SIGNAL(activated()), this, SLOT(OnTile()));
-	connect(&m_closeAllDocumentsCommand, SIGNAL(activated()), this, SLOT(OnCloseAllViews()));
+	connect(&m_cascadeCommand, SIGNAL(triggered()), this, SLOT(OnCascade()));
+	connect(&m_tileHorizontallyCommand, SIGNAL(triggered()), this, SLOT(OnTileHorizontally()));
+	connect(&m_tileVerticallyCommand, SIGNAL(triggered()), this, SLOT(OnTile()));
+	connect(&m_closeAllDocumentsCommand, SIGNAL(triggered()), this, SLOT(OnCloseAllViews()));
 
 	m_subWindowCommand.setChecked(true);
-	connect(&m_subWindowCommand, SIGNAL(activated()), this, SLOT(OnWorkspaceModeChanged()));
-	connect(&m_tabbedCommand, SIGNAL(activated()), this, SLOT(OnWorkspaceModeChanged()));
+	connect(&m_subWindowCommand, SIGNAL(triggered()), this, SLOT(OnWorkspaceModeChanged()));
+	connect(&m_tabbedCommand, SIGNAL(triggered()), this, SLOT(OnWorkspaceModeChanged()));
 }
 
 

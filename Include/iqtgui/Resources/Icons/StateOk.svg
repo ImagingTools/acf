@@ -206,14 +206,6 @@
        id="path2434"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
-    <use
-       x="0"
-       y="0"
-       xlink:href="#path3259"
-       id="use3299"
-       transform="translate(183.2039,-533.59478)"
-       width="320"
-       height="320" />
     <path
        sodipodi:type="arc"
        style="opacity:0.4;fill:url(#radialGradient3782);fill-opacity:1;stroke:none"

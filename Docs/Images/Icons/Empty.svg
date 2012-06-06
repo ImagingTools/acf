@@ -160,13 +160,5 @@
        style="opacity:0.25;fill:url(#radialGradient3231);fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.36267603999999998"
        d="M 301.8125,194.5 C 242.7351,194.88655 187.67993,240.57204 176.49224,298.50526 C 175.5281,303.10776 174.85722,307.88834 174.375,312.59375 C 237.3529,345.17788 313.20037,348.1153 381.05197,330.12021 C 399.97102,324.71068 418.35736,317.04123 435.09375,306.5625 C 427.41043,248.23606 375.65578,198.9162 316.65625,195 C 311.7244,194.55035 306.76417,194.37306 301.8125,194.5 z"
        id="path2434" />
-    <use
-       x="0"
-       y="0"
-       xlink:href="#path3259"
-       id="use3299"
-       transform="translate(183.2039,-533.59478)"
-       width="320"
-       height="320" />
   </g>
 </svg>

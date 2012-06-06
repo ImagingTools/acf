@@ -9,6 +9,7 @@
 #include "icomp/IComponentContext.h"
 #include "icomp/IRealAttributeStaticInfo.h"
 #include "icomp/TAttribute.h"
+#include "icomp/CComponentContext.h"
 
 
 namespace icomp
@@ -89,25 +90,45 @@ bool TAttributeMemberBase<Attribute>::Init(
 	const QByteArray& attributeId = staticInfo.GetAttributeId();
 	const IComponentContext* componentContextPtr = ownerPtr->GetComponentContext();
 	if (componentContextPtr != NULL){
-		int definitionLevel = -1;
-		const iser::IObject* attributePtr = componentContextPtr->GetAttribute(attributeId, &definitionLevel);
-		m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
+		if (definitionComponentPtr != NULL){
+			int definitionLevel = -1;
+			const iser::IObject* attributePtr = componentContextPtr->GetAttribute(attributeId, &definitionLevel);
+			if (attributePtr != NULL){
+				m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
 
-		if (m_attributePtr != NULL){
-			I_ASSERT(definitionLevel >= 0);
+				if (m_attributePtr != NULL){
+					I_ASSERT(definitionLevel >= 0);
 
-			if (definitionComponentPtr != NULL){
-				while (definitionLevel > 0){
-					ownerPtr = ownerPtr->GetParentComponent();
-					I_ASSERT(ownerPtr != NULL);
+					while (definitionLevel > 0){
+						ownerPtr = ownerPtr->GetParentComponent();
+						I_ASSERT(ownerPtr != NULL);
 
-					--definitionLevel;
+						--definitionLevel;
+					}
+
+					*definitionComponentPtr = ownerPtr;
+
+					return true;
 				}
+				else{
+					QByteArray completeIdPath = componentContextPtr->GetContextId();
+					for (		const IComponentContext* partContextPtr = componentContextPtr->GetParentContext();
+								partContextPtr != NULL;
+								partContextPtr = partContextPtr->GetParentContext()){
+						completeIdPath = partContextPtr->GetContextId() + "/" + completeIdPath;
+					}
 
-				*definitionComponentPtr = ownerPtr;
+					qCritical(	"Component %s: Attribute %s type inconsistence!",
+								completeIdPath.constData(),
+								attributeId.constData());
+				}
 			}
+		}
+		else{
+			const iser::IObject* attributePtr = componentContextPtr->GetAttribute(attributeId, NULL);
+			m_attributePtr = dynamic_cast<const Attribute*>(attributePtr);
 
-			return true;
+			return (m_attributePtr != NULL);
 		}
 	}
 	else{

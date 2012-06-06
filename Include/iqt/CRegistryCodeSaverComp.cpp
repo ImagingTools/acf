@@ -659,7 +659,7 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 	stream << "static CLocalEnvironmentManager localEnvironmentManager;";
 	stream << "\n";
 	NextLine(stream);
-	stream << "m_mainContextPtr.SetPtr(new icomp::CCompositeComponentContext(&mainElement, &localEnvironmentManager, &mainRegistry, &localEnvironmentManager, NULL));";
+	stream << "m_mainContextPtr.SetPtr(new icomp::CCompositeComponentContext(&mainElement, &localEnvironmentManager, &mainRegistry, &localEnvironmentManager, NULL, \"\"));";
 	stream << "\n";
 	NextLine(stream);
 	stream << "SetComponentContext(m_mainContextPtr.GetPtr(), NULL, false);";

@@ -316,7 +316,7 @@
                 true
               </IsEnabled>
               <Value>
-                %1 by %2
+                $(AppName) by $(CompanyName)
               </Value>
             </Data>
           </AttributeInfo>
