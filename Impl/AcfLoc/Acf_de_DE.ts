@@ -9,316 +9,289 @@
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1169"/>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1207"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1262"/>
         <source>xlog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1275"/>
         <source>Log XML file</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1354"/>
-        <source>qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1365"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1417"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1371"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1429"/>
         <source>:/Translations</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1385"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1448"/>
-        <source>en_US</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1386"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1449"/>
-        <source>de_DE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1387"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1450"/>
-        <source>ru_RU</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1388"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1451"/>
-        <source>pl_PL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1406"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3604"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3616"/>
         <source>Acf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1506"/>
-        <source>0.9.0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1507"/>
-        <source>0.9.1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1508"/>
-        <source>0.9.2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1509"/>
-        <source>0.9.3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1510"/>
-        <source>0.9.4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1511"/>
-        <source>0.9.5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1512"/>
-        <source>0.9.6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1513"/>
-        <source>0.9.7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1514"/>
-        <source>0.9.8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1515"/>
-        <source>0.9.9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1516"/>
-        <source>1.0.0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1517"/>
-        <source>1.0.1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1518"/>
-        <source>1.1.0</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.0</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1519"/>
-        <source>1.2.0</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.1</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1520"/>
-        <source>1.3.0</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.2</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1521"/>
-        <source>1.4.0</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.3</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1522"/>
-        <source>1.4.1</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.4</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1523"/>
-        <source>1.5.0</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.5</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1524"/>
-        <source>1.5.1</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.6</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1525"/>
-        <source>1.5.2</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.7</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1526"/>
-        <source>1.5.3</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.8</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1527"/>
-        <source>1.5.4</source>
-        <translation type="unfinished"></translation>
+        <source>0.9.9</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/generated/CCompositor.cpp" line="1528"/>
+        <source>1.0.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1529"/>
+        <source>1.0.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1530"/>
+        <source>1.1.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1531"/>
+        <source>1.2.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1532"/>
+        <source>1.3.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1533"/>
+        <source>1.4.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1534"/>
+        <source>1.4.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1535"/>
+        <source>1.5.0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1536"/>
+        <source>1.5.1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1537"/>
+        <source>1.5.2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1538"/>
+        <source>1.5.3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1539"/>
+        <source>1.5.4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1540"/>
         <source>1.6.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1591"/>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2418"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1603"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2430"/>
         <source>ACF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1761"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1773"/>
         <source>xpc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1774"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="1786"/>
         <source>ACF component configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>ACF Komponentenkonfiguration</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2279"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2291"/>
         <source>Compositor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2290"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2302"/>
         <source>ImagingTools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2301"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2313"/>
         <source>:/Images/CompositorLogo.svg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2312"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2324"/>
         <source>About Compositor</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Compositor</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2378"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2390"/>
         <source>:/Images/CompositorSplashScreen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2389"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2401"/>
         <source>� Copyright 2012 Witold Gantzke &amp; Kirill Lepskiy
 All rights reserved
 
 This tool is a part of ACF project
 See &apos;License.txt&apos; for license information</source>
-        <translation type="unfinished"></translation>
+        <translation> Copyright 2012 Witold Gantzke &amp; Kirill Lepskiy
+Alle Rechte vorbehalten
+
+Dieses Programm ist Bestandteil von ACF project
+Lesen Sie  &apos;License.txt&apos; für weitere Informationen</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2429"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2441"/>
         <source>ACF Registry Editor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2463"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="2475"/>
         <source>:/Icons/CompositorIcon.svg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3067"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3079"/>
         <source>:/Icons/Settings.svg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3100"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3112"/>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3120"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3132"/>
         <source>exe</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3121"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3133"/>
         <source>bat</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3134"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3146"/>
         <source>Windows executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführbare Datei</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3135"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3147"/>
         <source>Script file</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriptdatei</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3155"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3167"/>
         <source>Configuration File</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurationsdatei</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3156"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3168"/>
         <source>ACF Command Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zu ACF-Runtime</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3157"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3169"/>
         <source>HTML Browser</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3158"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3170"/>
         <source>HTML Editor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3159"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3171"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3360"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3372"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3462"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3474"/>
         <source>../../Config/Full.xpc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3712"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3724"/>
         <source>Quick Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnellhilfe</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3772"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3784"/>
         <source>Selected component</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte Komponente</translation>
     </message>
     <message>
-        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3924"/>
+        <location filename="../CompositorExe/generated/CCompositor.cpp" line="3936"/>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakete</translation>
     </message>
 </context>
 <context>
@@ -369,7 +342,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqtgui/CAboutWidgetGuiComp.ui" line="183"/>
         <location filename="../../Include/iqtgui/Generated/ui_CAboutWidgetGuiComp.h" line="201"/>
         <source>Version</source>
-        <translation></translation>
+        <translation>Version</translation>
     </message>
 </context>
 <context>
@@ -438,7 +411,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.ui" line="30"/>
         <location filename="../../Include/icmpstr/generated/ui_CAttributeEditorComp.h" line="362"/>
         <source>Info</source>
-        <translation></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.ui" line="112"/>
@@ -585,7 +558,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/icmpstr/CComponentNoteEditorComp.ui" line="28"/>
         <location filename="../../Include/icmpstr/generated/ui_CComponentNoteEditorComp.h" line="66"/>
         <source>Update Note</source>
-        <translation>Anmerkungen aktualisieren</translation>
+        <translation>Notizen aktualisieren</translation>
     </message>
 </context>
 <context>
@@ -888,7 +861,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.ui" line="47"/>
         <location filename="../../Include/icmpstr/generated/ui_CPackageOverviewComp.h" line="156"/>
         <source>Package</source>
-        <translation></translation>
+        <translation>Paket</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.ui" line="57"/>
@@ -900,7 +873,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.ui" line="88"/>
         <location filename="../../Include/icmpstr/generated/ui_CPackageOverviewComp.h" line="159"/>
         <source>Name</source>
-        <translation></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.ui" line="96"/>
@@ -959,19 +932,19 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqtprm/CParamsManagerGuiComp.ui" line="62"/>
         <location filename="../../Include/iqtprm/generated/ui_CParamsManagerGuiComp.h" line="157"/>
         <source>Insert new item</source>
-        <translation></translation>
+        <translation>Neuen Eintrag hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/iqtprm/CParamsManagerGuiComp.ui" line="65"/>
         <location filename="../../Include/iqtprm/generated/ui_CParamsManagerGuiComp.h" line="159"/>
         <source>Add</source>
-        <translation></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/iqtprm/CParamsManagerGuiComp.ui" line="76"/>
         <location filename="../../Include/iqtprm/generated/ui_CParamsManagerGuiComp.h" line="161"/>
         <source>Remove selected item</source>
-        <translation>Ausgewähten Eintrag entfernen</translation>
+        <translation>Ausgewählten Eintrag entfernen</translation>
     </message>
     <message>
         <location filename="../../Include/iqtprm/CParamsManagerGuiComp.ui" line="79"/>
@@ -997,7 +970,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqtprm/CParamsManagerGuiComp.ui" line="126"/>
         <location filename="../../Include/iqtprm/generated/ui_CParamsManagerGuiComp.h" line="169"/>
         <source>Move selected item down</source>
-        <translation>Ausgewähten Eintrag nach unten verscheiben</translation>
+        <translation>Ausgewählten Eintrag nach unten verschieben</translation>
     </message>
 </context>
 <context>
@@ -1031,13 +1004,13 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="63"/>
         <location filename="../../Include/iqt2d/generated/ui_CPolygonParamsGuiComp.h" line="113"/>
         <source>Add new point</source>
-        <translation>Neuen Punkt hinzufügen</translation>
+        <translation>Einen neuen Punkt hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="66"/>
         <location filename="../../Include/iqt2d/generated/ui_CPolygonParamsGuiComp.h" line="115"/>
         <source>Append</source>
-        <translation>Neuen Punkt hinzufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="73"/>
@@ -1049,13 +1022,13 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="80"/>
         <location filename="../../Include/iqt2d/generated/ui_CPolygonParamsGuiComp.h" line="118"/>
         <source>Insert new point before current</source>
-        <translation>Neuen Punkt hinzufügen</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="83"/>
         <location filename="../../Include/iqt2d/generated/ui_CPolygonParamsGuiComp.h" line="120"/>
         <source>Insert</source>
-        <translation>Hinzufügen</translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="90"/>
@@ -1067,7 +1040,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="97"/>
         <location filename="../../Include/iqt2d/generated/ui_CPolygonParamsGuiComp.h" line="123"/>
         <source>Remove current point</source>
-        <translation>Ausgewählten Punkt entfernen</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../Include/iqt2d/CPolygonParamsGuiComp.ui" line="100"/>
@@ -1300,7 +1273,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/icmpstr/CRegistryPropEditorComp.ui" line="39"/>
         <location filename="../../Include/icmpstr/generated/ui_CRegistryPropEditorComp.h" line="242"/>
         <source>Registry Info</source>
-        <translation></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CRegistryPropEditorComp.ui" line="48"/>
@@ -1469,7 +1442,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iview/CShapeInfoGuiComp.ui" line="32"/>
         <location filename="../../Include/iview/Generated/ui_CShapeInfoGuiComp.h" line="96"/>
         <source>Logical [</source>
-        <translation>Logisch[</translation>
+        <translation>Logisch [</translation>
     </message>
     <message>
         <location filename="../../Include/iview/CShapeInfoGuiComp.ui" line="46"/>
@@ -1580,7 +1553,7 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqtwiz/CWizardOptionsListGuiComp.ui" line="14"/>
         <location filename="../../Include/iqtwiz/generated/ui_CWizardOptionsListGuiComp.h" line="71"/>
         <source>Options</source>
-        <translation></translation>
+        <translation>Optionen</translation>
     </message>
 </context>
 <context>
@@ -1608,12 +1581,12 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location filename="../CompositorMiniExe/Main.cpp" line="155"/>
         <source>Parameter help</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorMiniExe/Main.cpp" line="155"/>
         <source>Usage	CompositorMini.exe [registryName] {options}      - registry editor	-h or -help              - showing this help	-config configFile       - load config file</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>About</source>
@@ -1628,52 +1601,52 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location filename="../../Include/ibase/CFileSerializerCompBase.cpp" line="22"/>
         <source>Object is not serializable</source>
-        <translation type="unfinished">Objekt ist nicht serialisierbar</translation>
+        <translation>Objekt ist nicht serialisierbar</translation>
     </message>
     <message>
         <location filename="../../Include/ibase/CFileSerializerCompBase.cpp" line="59"/>
         <source>File extension is not supported</source>
-        <translation type="unfinished">Dateierweiterung wird nicht unterstützt</translation>
+        <translation>Dateierweiterung wird nicht unterstützt</translation>
     </message>
     <message>
         <location filename="../../Include/ibase/TFileSerializerComp.h" line="162"/>
         <source>Archive version is not supported, possible lost of data</source>
-        <translation type="unfinished">Version des Dateiarchives wird nicht unterstützt, moglicher Datenverlust</translation>
+        <translation>Version des Dateiarchives wird nicht unterstützt, moglicher Datenverlust</translation>
     </message>
     <message>
         <location filename="../../Include/ibase/TFileSerializerComp.h" line="169"/>
         <source>Cannot serialize object to file</source>
-        <translation type="unfinished">Das Objekt kann nicht in die Datei serialisiert werden</translation>
+        <translation>Das Objekt kann nicht in die Datei serialisiert werden</translation>
     </message>
     <message>
         <location filename="../../Include/ibase/TFileSerializerComp.h" line="182"/>
         <source>Cannot load object from file </source>
-        <translation type="unfinished">Das Objekt kann nicht von der Datei geladen werden</translation>
+        <translation>Das Objekt kann nicht von der Datei geladen werden</translation>
     </message>
     <message>
         <location filename="../../Include/ibase/CStreamLogCompBase.cpp" line="72"/>
         <source>[%1] %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CFileInfoCopyComp.cpp" line="30"/>
         <source>Processing file %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrbeite Datei %1 zu %2</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CFileInfoCopyComp.cpp" line="40"/>
         <source>Opening input file failed (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen der Eingangsdatei (%1) fehlgeschagen</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CFileInfoCopyComp.cpp" line="46"/>
         <source>Opening output file failed (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen der Ergebnisdatei (%1) fehlgeschagen</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CFileInfoCopyComp.cpp" line="59"/>
         <source>Opening license file failed (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen der Lizenzdatei (%1) fehlgeschagen</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CFileInfoCopyComp.cpp" line="80"/>
@@ -1740,22 +1713,22 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/iqt/CRegistryCodeSaverComp.cpp" line="143"/>
         <location filename="../../Include/iqt/CRegistryCodeSaverComp.cpp" line="149"/>
         <source>C++ source file</source>
-        <translation type="unfinished"></translation>
+        <translation>C++ Quellcode Datei</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CRegistryCodeSaverComp.cpp" line="177"/>
         <source>Dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Abhängigkeiten</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CRegistryCodeSaverComp.cpp" line="180"/>
         <source>Sources and dependencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Abhängigkeiten und Quellcode</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CRegistryCodeSaverComp.cpp" line="183"/>
         <source>Sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellcode</translation>
     </message>
     <message>
         <location filename="../../Include/iqt/CRegistryCodeSaverComp.cpp" line="192"/>
@@ -1798,16 +1771,16 @@ See &apos;License.txt&apos; for license information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Include/iqtgui/CApplicationCompBase.cpp" line="45"/>
+        <location filename="../../Include/iqtgui/CApplicationCompBase.cpp" line="49"/>
         <source>ACF application</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../Include/iqtproc/CDocumentProcessingCommandComp.cpp" line="45"/>
         <location filename="../../Include/iqtproc/CDocumentProcessingManagerComp.cpp" line="66"/>
         <location filename="../../Include/iqtproc/CDocumentProcessingManagerComp.cpp" line="113"/>
         <source>Processing time: %1 ms</source>
-        <translation type="unfinished"></translation>
+        <translation>Verarbeitungszeit: %1 ms</translation>
     </message>
     <message>
         <location filename="../../Include/iser/CBinaryReadArchiveBase.cpp" line="31"/>
@@ -1823,17 +1796,17 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location filename="../../Include/iview/CImageShape.cpp" line="181"/>
         <source>Gray value %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Grauwert %1%</translation>
     </message>
     <message>
         <location filename="../../Include/iview/CImageShape.cpp" line="184"/>
         <source>RGB value %1%, %2%, %3%</source>
-        <translation type="unfinished"></translation>
+        <translation>RGB-Wert %1%, %2%, %3%</translation>
     </message>
     <message>
         <location filename="../../Include/iview/CImageShape.cpp" line="190"/>
         <source>RGBA value %1%, %2%, %3%, %4%</source>
-        <translation type="unfinished"></translation>
+        <translation>RGBA-Wert %1%, %2%, %3%, %4%</translation>
     </message>
 </context>
 <context>
@@ -1878,52 +1851,52 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="38"/>
         <source>Boolean value</source>
-        <translation></translation>
+        <translation>Bool&apos;scher Wert</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="39"/>
         <source>String</source>
-        <translation type="unfinished">Zeichenkette</translation>
+        <translation>Zeichenkette</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="40"/>
         <source>ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikator</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="41"/>
         <source>List of integer numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste von Ganzzahlen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="42"/>
         <source>List of real numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste von reelen Zahlen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="43"/>
         <source>List of boolean values</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste von Bool&apos;schen Werten</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="44"/>
         <source>List of strings</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste von Zeichenketten</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="45"/>
         <source>List of ID&apos;s</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste von Identifikatoren</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="46"/>
         <source>Component reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Referenz zu einer Komponente</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="47"/>
         <source>List of component reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste von Komponentenreferenzen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="48"/>
@@ -1943,12 +1916,12 @@ See &apos;License.txt&apos; for license information</source>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="330"/>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="331"/>
         <source>&lt;unknown&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;unbekannt&gt;</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="353"/>
         <source>&lt;multiple component types&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;zusammengesetzte Komponententypen&gt;</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="830"/>
@@ -2019,27 +1992,27 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="877"/>
         <source>Optional %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionell %1</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="882"/>
         <source>%1
 Type: %2</source>
-        <translation type="unfinished">%1
+        <translation>%1
 Typ: %2</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="885"/>
         <source>
 Interfaces:</source>
-        <translation type="unfinished">
+        <translation>
 Schnittstellen:</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="771"/>
         <location filename="../../Include/icmpstr/CAttributeEditorComp.cpp" line="791"/>
         <source>&lt;multi selection&gt;</source>
-        <translation type="unfinished">&lt;multiauswahl&gt;</translation>
+        <translation>&lt;multiauswahl&gt;</translation>
     </message>
 </context>
 <context>
@@ -2067,12 +2040,12 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.cpp" line="1046"/>
         <source>&amp;Packages</source>
-        <translation></translation>
+        <translation>&amp;Pakete</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.cpp" line="1046"/>
         <source>Packages</source>
-        <translation></translation>
+        <translation>Pakete</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CPackageOverviewComp.cpp" line="1047"/>
@@ -2381,17 +2354,17 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CSceneProviderGuiComp.cpp" line="530"/>
         <source>&amp;Select All</source>
-        <translation>&amp;Alle Auswählen</translation>
+        <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CSceneProviderGuiComp.cpp" line="530"/>
         <source>Select All</source>
-        <translation>Alle Auswählen</translation>
+        <translation>Alles auswählen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CSceneProviderGuiComp.cpp" line="530"/>
         <source>Select all shapes</source>
-        <translation>Alles auswählen</translation>
+        <translation>Alle Elemente auswählen</translation>
     </message>
 </context>
 <context>
@@ -2399,7 +2372,7 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryComp.cpp" line="158"/>
         <source>Cannot create %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2) konnte nicht erzeugt werden</translation>
     </message>
 </context>
 <context>
@@ -2407,12 +2380,12 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="274"/>
         <source>Factory of &apos;%1&apos;</source>
-        <translation type="unfinished">Factory von &apos;%1&apos;</translation>
+        <translation>Factory von &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="275"/>
         <source>Reference of &apos;%1&apos;</source>
-        <translation type="unfinished">Referenz von &apos;%1&apos;</translation>
+        <translation>Referenz von &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Application Compositor</source>
@@ -2431,19 +2404,19 @@ Schnittstellen:</translation>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="915"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="950"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="523"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="883"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="915"/>
         <source>Component could not be added</source>
-        <translation type="unfinished">Komponente konnte nicht hinzugefügt werden</translation>
+        <translation>Komponente konnte nicht hinzugefügt werden</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="468"/>
         <source>Set of commands manipulating registry</source>
-        <translation type="unfinished">Satz von Befehlen für Registrymanipulationen</translation>
+        <translation>Satz von Befehlen für Registrymanipulationen</translation>
     </message>
     <message>
         <source>&amp;Remove Component</source>
@@ -2452,7 +2425,7 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="458"/>
         <source>Remove</source>
-        <translation type="unfinished">Komponente entfernen</translation>
+        <translation>Komponente entfernen</translation>
     </message>
     <message>
         <source>Remove the selected component from the registry</source>
@@ -2461,13 +2434,13 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="443"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Bearbeiten</translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="445"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="446"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausschneiden</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="447"/>
@@ -2478,7 +2451,7 @@ Schnittstellen:</translation>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="449"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="450"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="451"/>
@@ -2489,7 +2462,7 @@ Schnittstellen:</translation>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="453"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="454"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="455"/>
@@ -2499,7 +2472,7 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="457"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Entfernen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="459"/>
@@ -2509,17 +2482,17 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="462"/>
         <source>&amp;Rename Component</source>
-        <translation type="unfinished">&amp;Komponente umbenennen</translation>
+        <translation>&amp;Komponente umbenennen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="463"/>
         <source>Rename</source>
-        <translation type="unfinished">Komponente umbenennen</translation>
+        <translation>Komponente umbenennen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="464"/>
         <source>Allow to assign new name to selected component</source>
-        <translation type="unfinished">Ausgewählte Komponente umbenennen</translation>
+        <translation>Ausgewählte Komponente umbenennen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="466"/>
@@ -2534,83 +2507,83 @@ Schnittstellen:</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="470"/>
         <source>&amp;Insert Embedded Composition</source>
-        <translation type="unfinished">&amp;Embedded Kompositum hinzufügen</translation>
+        <translation>&amp;Embedded Kompositum hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="471"/>
         <source>Insert Embedded</source>
-        <translation type="unfinished">Einen neuen eingebettenen Kompositum hinzufügen</translation>
+        <translation>Einen neuen eingebettenen Kompositum hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="472"/>
         <source>Insert new embedded component composition used to group set of components and manage it as single one</source>
-        <translation type="unfinished">Einen neuen eingebettenen Kompositum hinzufügen</translation>
+        <translation>Einen neuen eingebettenen Kompositum hinzufügen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="474"/>
         <source>To &amp;Embedded Composition</source>
-        <translation type="unfinished">Zum &amp;eingebettenen Kompositum konvertieren</translation>
+        <translation>Zum &amp;eingebettenen Kompositum konvertieren</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="475"/>
         <source>To Embedded</source>
-        <translation type="unfinished">Zum eingebettenen Kompositum konvertieren</translation>
+        <translation>Zum eingebettenen Kompositum konvertieren</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="476"/>
         <source>Make embedded component composition from selected elements.
 It allows to group set of components and manage it as single one</source>
-        <translation type="unfinished">Eingebetteten Kompositum aus den ausgewählten Komponenten erzeugen.
+        <translation>Eingebetteten Kompositum aus den ausgewählten Komponenten erzeugen.
 Dient der Umgruppierung mehrerer Komponenten zu einer einzelnen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="479"/>
         <source>&amp;Export To Code...</source>
-        <translation type="unfinished">&amp;Quellcode generieren...</translation>
+        <translation>&amp;Quellcode generieren...</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="480"/>
         <source>Export</source>
-        <translation type="unfinished">Quellcode generieren</translation>
+        <translation>Quellcode generieren</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="481"/>
         <source>Generates C++ code according to this registry</source>
-        <translation type="unfinished">Generiert C++ Quellcode aus der Registry</translation>
+        <translation>Generiert C++ Quellcode aus der Registry</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="484"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="485"/>
         <source>&amp;Execute Registry</source>
-        <translation type="unfinished">&amp;Registry ausführen</translation>
+        <translation>&amp;Registry ausführen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="486"/>
         <source>Start registry execution</source>
-        <translation type="unfinished">Startet Registryausführung</translation>
+        <translation>Startet Registryausführung</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="489"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="490"/>
         <source>&amp;Abort Registry</source>
-        <translation type="unfinished">&amp;Registryausführung abbrechen</translation>
+        <translation>&amp;Registryausführung abbrechen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="491"/>
         <source>Abort registry execution</source>
-        <translation type="unfinished">Registryausführung abbrechen</translation>
+        <translation>Registryausführung abbrechen</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="806"/>
         <source>Some components could not be added</source>
-        <translation type="unfinished"></translation>
+        <translation>Komponenten konnten nicht hinzugefügt werden</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="844"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="867"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="899"/>
         <source>ACF Compositor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Add Note</source>
@@ -2631,35 +2604,35 @@ Dient der Umgruppierung mehrerer Komponenten zu einer einzelnen</translation>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="845"/>
         <source>New component name</source>
-        <translation type="unfinished">Neuer Komponentenname</translation>
+        <translation>Neuer Komponentenname</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="868"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="900"/>
         <source>New embedded component name</source>
-        <translation type="unfinished">Neuer Name für die einbebettete Komponente</translation>
+        <translation>Neuer Name für die einbebettete Komponente</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="878"/>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="910"/>
         <source>Embedded component could not be created!</source>
-        <translation type="unfinished">Eingebettete Komponente konnte nicht erzeugt werden!</translation>
+        <translation>Eingebettete Komponente konnte nicht erzeugt werden!</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="946"/>
         <source>C++ code file (*.cpp)</source>
-        <translation type="unfinished">C++ Quellcode Dateien (*.cpp)</translation>
+        <translation>C++ Quellcode Dateien (*.cpp)</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="947"/>
         <source>Export registry to code</source>
-        <translation type="unfinished">Quellcode generieren</translation>
+        <translation>Quellcode generieren</translation>
     </message>
     <message>
         <location filename="../../Include/icmpstr/CVisualRegistryScenographerComp.cpp" line="950"/>
         <source>Cannot export to file
 %1</source>
-        <translation type="unfinished">Quellcode konnte nicht
+        <translation>Quellcode konnte nicht
 in %1 generiert werden</translation>
     </message>
 </context>
@@ -2950,7 +2923,7 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iqtdoc/CMainWindowGuiComp.cpp" line="632"/>
         <source>Copy current document path to system clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktullen Dokumentpfad zu der Zwischenablage kopieren</translation>
     </message>
     <message>
         <source>&amp;Print...</source>
@@ -3105,7 +3078,7 @@ in %1 generiert werden</translation>
         <location filename="../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="366"/>
         <source>Do you want to save your changes made in document
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie die Änderungen im Dokument %1 abspeichern?</translation>
     </message>
     <message>
         <location filename="../../Include/iqtdoc/CMultiDocumentWorkspaceGuiComp.cpp" line="425"/>
@@ -3228,13 +3201,13 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="135"/>
         <source>Close document</source>
-        <translation></translation>
+        <translation>Dokument schließen</translation>
     </message>
     <message>
         <location filename="../../Include/iqtdoc/CSingleDocumentWorkspaceGuiComp.cpp" line="136"/>
         <source>Do you want to save your changes made in document
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie die Änderungen im Dokument %1 abspeichern?</translation>
     </message>
     <message>
         <source>All known documents (%1)
@@ -3264,17 +3237,17 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="233"/>
         <source>All known file types (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle bekannte Datentypen (%1)</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="244"/>
         <source>Enter file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie den Dateinamen ein</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CFileDialogLoaderComp.cpp" line="270"/>
         <source>Select a file to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie eine Datei</translation>
     </message>
 </context>
 <context>
@@ -3282,7 +3255,7 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iqtgui/CFileSystemExplorerGuiComp.cpp" line="99"/>
         <source>Enter text to filter file items</source>
-        <translation type="unfinished">Geben Sie den Text ein, um Dateien zu filtern</translation>
+        <translation>Geben Sie den Text ein, um Dateien zu filtern</translation>
     </message>
 </context>
 <context>
@@ -3308,27 +3281,27 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iqtgui/CLogGuiComp.cpp" line="96"/>
         <source>New informations available</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Informationen vorhanden</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CLogGuiComp.cpp" line="99"/>
         <source>There are warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnungen vorhanden</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CLogGuiComp.cpp" line="102"/>
         <source>There are errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler vorhanden</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CLogGuiComp.cpp" line="105"/>
         <source>There are critical errors!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritische Fehler aufgetreten!</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CLogGuiComp.cpp" line="165"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../../Include/iqtgui/CLogGuiComp.cpp" line="175"/>
@@ -3478,17 +3451,17 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="63"/>
         <source>Cannot save the output</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisse können nicht abgespeichert werden</translation>
     </message>
     <message>
         <location filename="../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="76"/>
         <source>Cannot load parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter konnten nicht geladen werden</translation>
     </message>
     <message>
         <location filename="../../Include/iqtproc/CProcessorControlGuiComp.cpp" line="89"/>
         <source>Cannot save parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter konnten nicht abgespeichert werden</translation>
     </message>
 </context>
 <context>
@@ -3526,7 +3499,7 @@ in %1 generiert werden</translation>
     <message>
         <location filename="../../Include/iview/CConsoleGui.cpp" line="466"/>
         <source>Zoom to Fit</source>
-        <translation>Autoskalierung</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../Include/iview/CConsoleGui.cpp" line="473"/>

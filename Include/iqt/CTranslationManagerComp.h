@@ -19,18 +19,20 @@
 
 #include "iqt/ITranslationManager.h"
 
+#include "ibase/TLoggerCompWrap.h"
+
 
 namespace iqt
 {
 
 
 class CTranslationManagerComp:
-			public icomp::CComponentBase, 
+			public ibase::CLoggerComponentBase, 
 			virtual public iqt::ITranslationManager,
 			virtual public iprm::ISelectionConstraints
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CTranslationManagerComp);
 		I_REGISTER_INTERFACE(iqt::ITranslationManager);
@@ -80,7 +82,7 @@ private:
 
 private:
 	I_ATTR(QString, m_translationFilePathAttrPtr);
-	I_ATTR(QString, m_translationFilePrefixAttrPtr);
+	I_ATTR(QByteArray, m_translationFilePrefixAttrPtr);
 	I_MULTIATTR(QByteArray, m_languagesAttrPtr);
 	I_REF(iqt::ITranslationManager, m_slaveTranslationManagerCompPtr);
 	I_REF(iprm::ISelectionParam, m_languageSelectionCompPtr);

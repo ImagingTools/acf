@@ -46,7 +46,9 @@ void CTranslationManagerComp::OnComponentCreated()
 			
 			istd::TDelPtr<QTranslator> qtTranslatorPtr(new QTranslator(qApp));
 			
-			qtTranslatorPtr->load(translatorFile);
+			if (!qtTranslatorPtr->load(translatorFile)){
+				SendErrorMessage(0, QString("Cannot load translator for: %1").arg(translatorFile), "TranslationManager");
+			}
 
 			m_translatorsList.PushBack(qtTranslatorPtr.PopPtr());
 		}
@@ -58,6 +60,9 @@ void CTranslationManagerComp::OnComponentCreated()
 		int languageIndex = m_languageSelectionCompPtr->GetSelectedOptionIndex();
 
 		SwitchLanguage(languageIndex);
+	}
+	else{
+		SetSystemLanguage();
 	}
 }
 
@@ -115,11 +120,11 @@ void CTranslationManagerComp::SwitchLanguage(int languageIndex)
 		QCoreApplication::removeTranslator(m_translatorsList.GetAt(m_currentLanguageIndex));
 	}
 
-	if (languageIndex >= 0){
+	if (languageIndex >= 0 && languageIndex < m_translatorsList.GetCount()){
 		QCoreApplication::installTranslator(m_translatorsList.GetAt(languageIndex));
-	}
 
-	m_currentLanguageIndex = languageIndex;
+		m_currentLanguageIndex = languageIndex;
+	}
 
 	if (m_slaveTranslationManagerCompPtr.IsValid()){
 		m_slaveTranslationManagerCompPtr->SwitchLanguage(languageIndex);

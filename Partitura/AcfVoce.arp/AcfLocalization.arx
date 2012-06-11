@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2363
         </Number>
         <Description>
           ACF
@@ -33,7 +33,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               LanguageIds
@@ -73,6 +73,22 @@
             </Type>
             <ExportId>
               LanguageSelection
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
@@ -123,7 +139,7 @@
               TranslationFilePrefix
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               
@@ -157,7 +173,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               LanguageIds
@@ -186,6 +202,22 @@
                   pl_PL
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -228,7 +260,7 @@
               TranslationFilePrefix
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               
