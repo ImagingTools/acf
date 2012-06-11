@@ -60,12 +60,14 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 		}
 		m_applicationPtr->setWindowIcon(icon);
 
-		// set up version
-		QString mainVersionText;
 		if (m_applicationInfoCompPtr.IsValid()){
-			mainVersionText = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_MAIN_VERSION);
+			// set up application data
+			QString mainVersionText = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_MAIN_VERSION);
+			m_applicationPtr->setApplicationVersion(mainVersionText);
+
+			QString companyNameText = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
+			m_applicationPtr->setOrganizationName(companyNameText);
 		}
-		m_applicationPtr->setApplicationVersion(mainVersionText);
 
 		// set up palette
 		m_applicationPtr->setPalette(QApplication::style()->standardPalette());
