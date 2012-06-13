@@ -22,7 +22,8 @@ public:
 	CSettingsArchiveBase(
 				const QString& organizationName,
 				const QString& applicationName,
-				const QString& rootKey);
+				const QString& rootKey,
+				QSettings::Scope settingsScope = QSettings::UserScope);
 
 protected:
 	bool EnterTag(const QByteArray& tagId);

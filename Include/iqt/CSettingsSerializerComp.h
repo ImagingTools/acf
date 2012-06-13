@@ -2,6 +2,9 @@
 #define iqt_CSettingsSerializerComp_included
 
 
+// Qt includes
+#include <QtCore/QSettings>
+
 // ACF includes
 #include "iser/IFileLoader.h"
 
@@ -31,6 +34,7 @@ public:
 		I_REGISTER_INTERFACE(iser::IFileLoader);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
 		I_ASSIGN(m_rootKeyAttrPtr, "RootKey", "The root key in the file/registry for the serialized object", true, "Data");
+		I_ASSIGN(m_scopeAttrPtr, "Scope", "The scope for the settingsin the registry. 0 - User scope.\n1 - System scope", false, QSettings::UserScope);
 	I_END_COMPONENT;
 
 	// reimplemented (iser::IFileLoader)
@@ -49,6 +53,7 @@ public:
 private:
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 	I_ATTR(QByteArray, m_rootKeyAttrPtr);
+	I_ATTR(int, m_scopeAttrPtr);
 };
 
 

@@ -20,7 +20,8 @@ public:
 	CSettingsReadArchive(
 				const QString& organizationName,
 				const QString& applicationName,
-				const QString& rootKey);
+				const QString& rootKey,
+				QSettings::Scope settingsScope = QSettings::UserScope);
 
 	// reimplemented (iser::IArchive)
 	virtual bool BeginTag(const iser::CArchiveTag& tag);

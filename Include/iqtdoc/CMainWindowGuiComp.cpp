@@ -135,6 +135,7 @@ bool CMainWindowGuiComp::OnDetached(imod::IModel* modelPtr)
 						companyName,
 						applicationName,
 						"RecentFileList",
+						QSettings::UserScope,
 						&m_applicationInfoCompPtr->GetVersionInfo());
 
 			SerializeRecentFileList(archive);

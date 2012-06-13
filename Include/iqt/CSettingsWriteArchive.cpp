@@ -15,9 +15,10 @@ CSettingsWriteArchive::CSettingsWriteArchive(
 			const QString& organizationName, 
 			const QString& productName,
 			const QString& rootKey,
+			QSettings::Scope settingsScope,
 			const iser::IVersionInfo* versionInfoPtr)
 :	BaseClass(versionInfoPtr),
-	BaseClass2(organizationName, productName, rootKey)
+	BaseClass2(organizationName, productName, rootKey, settingsScope)
 {
 	SerializeAcfHeader();
 }

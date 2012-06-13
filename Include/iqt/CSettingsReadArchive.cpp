@@ -5,9 +5,6 @@
 #include <QtCore/QStringList>
 
 
-// ACF includes
-#include "iqt/iqt.h"
-
 
 namespace iqt
 {
@@ -18,8 +15,9 @@ namespace iqt
 CSettingsReadArchive::CSettingsReadArchive(
 			const QString& organizationName,
 			const QString& applicationName,
-			const QString& rootKey)
-:	BaseClass2(organizationName, applicationName, rootKey)
+			const QString& rootKey,
+			QSettings::Scope settingsScope)
+:	BaseClass2(organizationName, applicationName, rootKey, settingsScope)
 {
 	SerializeAcfHeader();
 }

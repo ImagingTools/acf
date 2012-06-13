@@ -14,8 +14,9 @@ namespace iqt
 CSettingsArchiveBase::CSettingsArchiveBase(
 			const QString& organizationName,
 			const QString& applicationName,
-			const QString& rootKey)
-:	BaseClass(organizationName, applicationName),
+			const QString& rootKey,
+			QSettings::Scope settingsScope)
+	:BaseClass(settingsScope, organizationName, applicationName),
 	m_rootKey(rootKey),
 	m_valuesCount(0)
 {

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2358
+          2366
         </Number>
         <Description>
           ACF
@@ -167,7 +167,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -209,6 +209,22 @@
             </Type>
             <ExportId>
               RootKey
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Scope
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              Scope
             </ExportId>
             <Data>
               <IsEnabled>
