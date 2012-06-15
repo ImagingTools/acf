@@ -4,6 +4,7 @@ CONFIG += stl
 CONFIG -= exceptions
 CONFIG += silent
 CONFIG += rtti
+CONFIG += debug_and_release
 
 COMPILER_NAME = QMake
 PLATFORM_NAME = Unix
@@ -24,12 +25,12 @@ win32-msvc*{
 		COMPILER_NAME = VC10
 	}
 
-    !contains(QMAKE_HOST.arch, x86_64){
+	!contains(QMAKE_HOST.arch, x86_64){
 		PLATFORM_NAME = Win64
-    }
-    else{
+	}
+	else{
 		PLATFORM_NAME = Win32
-    }
+	}
 }
 else{
 	QMAKE_CXXFLAGS_WARN_ON = -Wall
