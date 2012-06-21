@@ -44,7 +44,6 @@ public:
 	void UpdateFitTransform();
 
 	virtual void SetEditMode(int mode);
-	virtual void SetFitArea(const i2d::CRectangle& area);
 
 	/**
 		Get number of digits after point used to display mouse position in pixel.
@@ -57,6 +56,7 @@ public:
 	int GetLogicalPositionExact() const;
 
 	// reimplemented (iview::IShapeView)
+	virtual void SetFitArea(const i2d::CRectangle& area);
 	virtual i2d::CRect GetClientRect() const;
 
 	// reimplemented (IViewEventObserver)

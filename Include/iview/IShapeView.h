@@ -28,6 +28,10 @@ class IShapeView:
 public:
 	typedef IShapeObserver BaseClass;
 
+	/**
+		Set area used for fitting of the view contents.
+	*/
+	virtual void SetFitArea(const i2d::CRectangle& area) = 0;
 
 	/**
 		Set a screen transformation.

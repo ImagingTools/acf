@@ -104,6 +104,8 @@ void CViewport::SetEditMode(int mode)
 }
 
 
+// reimplemented (iview::IShapeView)
+
 void CViewport::SetFitArea(const i2d::CRectangle& area)
 {
 	i2d::CRectangle prevFitArea = GetFitArea();
@@ -115,8 +117,6 @@ void CViewport::SetFitArea(const i2d::CRectangle& area)
 	}
 }
 
-
-// reimplemented (iview::IShapeView)
 
 i2d::CRect CViewport::GetClientRect() const
 {
