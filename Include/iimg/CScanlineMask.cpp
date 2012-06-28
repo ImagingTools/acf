@@ -432,7 +432,7 @@ void CScanlineMask::IntersectLine(const PixelRanges& line, PixelRanges& result)
 		if (range.GetMaxValue() > resultIter->GetMinValue()){	// our new range overlaps range in result
 			if (range.GetMaxValue() < resultIter->GetMaxValue()){	// our new range cuts the range on the left side
 				// divide the result range into 2 segments
-				resultIter = result.insert(resultIter, istd::CRange(resultIter->GetMinValue(), range.GetMaxValue()));
+				resultIter = result.insert(resultIter, istd::CIntRange(resultIter->GetMinValue(), range.GetMaxValue()));
 				++resultIter;
 				resultIter->SetMinValue(range.GetMaxValue() + 1);
 

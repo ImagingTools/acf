@@ -72,6 +72,7 @@ public:
 
 	/**
 		Force the supplier to initialize its work.
+		First if work is initialized, new calculation can be done.
 	*/
 	virtual void EnsureWorkInitialized() = 0;
 

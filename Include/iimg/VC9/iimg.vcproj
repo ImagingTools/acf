@@ -165,11 +165,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmapRegion.cpp"
+				RelativePath="..\CGeneralBitmap.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\CGeneralBitmap.cpp"
+				RelativePath="..\CScanlineMask.cpp"
 				>
 			</File>
 		</Filter>
@@ -182,11 +182,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmapRegion.h"
+				RelativePath="..\CGeneralBitmap.h"
 				>
 			</File>
 			<File
-				RelativePath="..\CGeneralBitmap.h"
+				RelativePath="..\CScanlineMask.h"
 				>
 			</File>
 			<File
