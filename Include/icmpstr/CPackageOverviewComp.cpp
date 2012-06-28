@@ -477,12 +477,16 @@ void CPackageOverviewComp::UpdateInterfaceList()
 			}
 		}
 
+		QList<QByteArray> knownInterfacesList = knownInterfaces.toList();
+
+		qSort(knownInterfacesList);
+
 		InterfaceCB->setMaxCount(0);
-		InterfaceCB->setMaxCount(int(knownInterfaces.size()));
+		InterfaceCB->setMaxCount(int(knownInterfacesList.size()));
 
 		InterfaceCB->addItem(tr("Any"));
-		for (		InterfaceFilter::const_iterator iterfaceIter = knownInterfaces.begin();
-					iterfaceIter != knownInterfaces.end();
+		for (		QList<QByteArray>::ConstIterator iterfaceIter = knownInterfacesList.constBegin();
+					iterfaceIter != knownInterfacesList.constEnd();
 					++iterfaceIter){
 			const QByteArray& interfaceName = *iterfaceIter;
 
