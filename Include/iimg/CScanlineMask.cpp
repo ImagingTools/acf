@@ -1,4 +1,4 @@
-#include "iimg/CBitmapRegion.h"
+#include "iimg/CScanlineMask.h"
 
 
 // STL includes
@@ -14,25 +14,25 @@ namespace iimg
 
 // public methods
 
-CBitmapRegion::CBitmapRegion()
+CScanlineMask::CScanlineMask()
 :	m_isEmpty(true)
 {
 }
 
 
-bool CBitmapRegion::IsBitmapRegionEmpty() const
+bool CScanlineMask::IsBitmapRegionEmpty() const
 {
 	return m_isEmpty;
 }
 
 
-i2d::CRect CBitmapRegion::GetBoundingBox() const
+i2d::CRect CScanlineMask::GetBoundingBox() const
 {
 	return m_boundingBox;
 }
 
 
-const CBitmapRegion::PixelRanges* CBitmapRegion::GetPixelRanges(int lineIndex) const
+const CScanlineMask::PixelRanges* CScanlineMask::GetPixelRanges(int lineIndex) const
 {
 	int rangeIndex = lineIndex - m_boundingBox.GetTop();
 
@@ -44,7 +44,7 @@ const CBitmapRegion::PixelRanges* CBitmapRegion::GetPixelRanges(int lineIndex) c
 }
 
 
-void CBitmapRegion::ResetBitmapRegion()
+void CScanlineMask::ResetBitmapRegion()
 {
 	m_rangesContainer.clear();
 	m_lineRangePtr.clear();
@@ -55,7 +55,7 @@ void CBitmapRegion::ResetBitmapRegion()
 }
 
 
-bool CBitmapRegion::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d::CRect* clipAreaPtr)
+bool CScanlineMask::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d::CRect* clipAreaPtr)
 {
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(&geometry);
 	if (annulusPtr != NULL){
@@ -89,7 +89,7 @@ bool CBitmapRegion::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d
 }
 
 
-void CBitmapRegion::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRect* clipAreaPtr)
+void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRect* clipAreaPtr)
 {
 	SetBoundingBox(circle.GetBoundingBox(), clipAreaPtr);
 	if (!m_boundingBox.IsValidNonEmpty()){
@@ -142,7 +142,7 @@ void CBitmapRegion::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 }
 
 
-void CBitmapRegion::CreateFromRectangle(const i2d::CRectangle& rect, const i2d::CRect* clipAreaPtr)
+void CScanlineMask::CreateFromRectangle(const i2d::CRectangle& rect, const i2d::CRect* clipAreaPtr)
 {
 	SetBoundingBox(rect, clipAreaPtr);
 	if (!m_boundingBox.IsValidNonEmpty()){
@@ -167,7 +167,7 @@ void CBitmapRegion::CreateFromRectangle(const i2d::CRectangle& rect, const i2d::
 }
 
 
-void CBitmapRegion::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::CRect* clipAreaPtr)
+void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::CRect* clipAreaPtr)
 {
 	SetBoundingBox(annulus.GetBoundingBox(), clipAreaPtr);
 	if (!m_boundingBox.IsValidNonEmpty()){
@@ -253,7 +253,7 @@ void CBitmapRegion::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 }
 
 
-void CBitmapRegion::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::CRect* clipAreaPtr)
+void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::CRect* clipAreaPtr)
 {
 	SetBoundingBox(polygon.GetBoundingBox(), clipAreaPtr);
 	if (!m_boundingBox.IsValidNonEmpty()){
@@ -362,7 +362,7 @@ void CBitmapRegion::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 
 // static methods
 
-void CBitmapRegion::UnionLine(const PixelRanges& line, PixelRanges& result)
+void CScanlineMask::UnionLine(const PixelRanges& line, PixelRanges& result)
 {
 	PixelRanges::Iterator resultIter = result.begin();
 
@@ -411,15 +411,47 @@ void CBitmapRegion::UnionLine(const PixelRanges& line, PixelRanges& result)
 }
 
 
-void CBitmapRegion::IntersectLine(const PixelRanges& /*line*/, PixelRanges& /*result*/)
+void CScanlineMask::IntersectLine(const PixelRanges& line, PixelRanges& result)
 {
-	// TODO: implement CBitmapRegion::IntersectLine
+	PixelRanges::Iterator resultIter = result.begin();
+
+	for (		PixelRanges::ConstIterator iter = line.constBegin();
+				iter != line.constEnd();){
+		const istd::CIntRange& range = *iter;
+
+		// remove non colliding ranges
+		for (; (resultIter != result.end()) && (range.GetMinValue() > resultIter->GetMaxValue()); resultIter = result.erase(resultIter));
+
+		if (resultIter == result.end()){
+			// no more elements in result - finish
+			return;
+		}
+
+		Q_ASSERT(range.GetMinValue() <= resultIter->GetMaxValue());
+
+		if (range.GetMaxValue() > resultIter->GetMinValue()){	// our new range overlaps range in result
+			if (range.GetMaxValue() < resultIter->GetMaxValue()){	// our new range cuts the range on the left side
+				// divide the result range into 2 segments
+				resultIter = result.insert(resultIter, istd::CRange(resultIter->GetMinValue(), range.GetMaxValue()));
+				++resultIter;
+				resultIter->SetMinValue(range.GetMaxValue() + 1);
+
+				++iter;
+			}
+			else if (range.GetMaxValue() > resultIter->GetMaxValue()){	// our new range contains the result range
+				++resultIter;
+			}
+		}
+		else{
+			++iter;
+		}
+	}
 }
 
 
 // protected methods
 
-void CBitmapRegion::SetBoundingBox(const i2d::CRectangle& objectBoundingBox, const i2d::CRect* clipAreaPtr)
+void CScanlineMask::SetBoundingBox(const i2d::CRectangle& objectBoundingBox, const i2d::CRect* clipAreaPtr)
 {
 	m_boundingBox.SetLeft(int(qFloor(objectBoundingBox.GetLeft())));
 	m_boundingBox.SetRight(int(qCeil(objectBoundingBox.GetRight())));

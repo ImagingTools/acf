@@ -11,6 +11,8 @@
 #include "iser/CArchiveTag.h"
 #include "iser/CPrimitiveTypesSerializer.h"
 
+#include "iimg/IBitmap.h"
+
 
 namespace iqt
 {

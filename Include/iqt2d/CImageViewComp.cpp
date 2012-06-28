@@ -1,6 +1,10 @@
 #include "iqt2d/CImageViewComp.h"
 
 
+// ACF includes
+#include "iimg/IRasterImage.h"
+
+
 namespace iqt2d
 {
 

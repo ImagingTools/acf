@@ -1,5 +1,5 @@
-#ifndef iimg_CBitmapRegion_included
-#define iimg_CBitmapRegion_included
+#ifndef iimg_CScanlineMask_included
+#define iimg_CScanlineMask_included
 
 
 // Qt includes
@@ -21,12 +21,12 @@ namespace iimg
 /**
 	Representation of a 2D-region as container of bitmap line scans.
 */
-class CBitmapRegion: virtual public istd::IPolymorphic
+class CScanlineMask: virtual public istd::IPolymorphic
 {
 public:
 	typedef QList<istd::CIntRange> PixelRanges;
 
-	CBitmapRegion();
+	CScanlineMask();
 
 	/**
 		Check if region is empty.
@@ -95,7 +95,7 @@ private:
 } // namespace iimg
 
 
-#endif // !iimg_CBitmapRegion_included
+#endif // !iimg_CScanlineMask_included
 
 
 

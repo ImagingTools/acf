@@ -4,8 +4,6 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 
-#include "iimg/CGeneralBitmap.h"
-
 #include "iproc/CDelegatedProgressManager.h"
 
 
