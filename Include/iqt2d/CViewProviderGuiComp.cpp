@@ -88,7 +88,65 @@ void CViewProviderGuiComp::OnGuiCreated()
 		useScrollBarCommands = *m_useScollBarCommandsAttrPtr;
 	}
 	consolePtr->SetScrollbarsButtonVisible(useScrollBarCommands);
+
+	if (m_calibrationProviderCompPtr.IsValid()){
+		view.ConnectCalibrationShape(&m_calibrationShape);
+	}
 }
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CViewProviderGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if (!IsGuiCreated()){
+		return;
+	}
+
+	iview::CConsoleGui* consolePtr = GetQtWidget();
+	I_ASSERT(consolePtr != NULL);
+
+	iview::CViewport& view = consolePtr->GetViewRef();
+
+	if (m_calibrationProviderCompPtr.IsValid()){
+		const i2d::ITransformation2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+
+		view.SetCalibrationPtr(calibrationPtr);
+
+		i2d::CAffine2d logToViewTransform;
+
+		if (calibrationPtr != NULL){
+			calibrationPtr->GetLocalInvTransform(i2d::CVector2d(0, 0), logToViewTransform);
+		}
+		else{
+			logToViewTransform.Reset();
+		}
+
+		view.SetLogToViewTransform(logToViewTransform);
+	}
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CViewProviderGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_calibrationProviderModelCompPtr.IsValid()){
+		BaseClass2::RegisterModel(m_calibrationProviderModelCompPtr.GetPtr());
+	}
+}
+
+
+void CViewProviderGuiComp::OnComponentDestroyed()
+{
+	BaseClass2::UnregisterAllModels();
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 
 
 } // namespace iqt2d

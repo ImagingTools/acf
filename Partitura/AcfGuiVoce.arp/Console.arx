@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2366
+          2374
         </Number>
         <Description>
           ACF
@@ -212,7 +212,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="11">
+          <AttributeInfo>
+            <Id>
+              CalibrationProvider
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              CalibrationProvider
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DefaultStatusIcon

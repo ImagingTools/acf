@@ -176,9 +176,8 @@ bool CViewport::OnMouseMove(istd::CIndex2d position)
 
 	const iview::CScreenTransform& logToScreenTransform = GetLogToScreenTransform();
 	const i2d::ITransformation2d* calibrationPtr = GetCalibration();
-	const i2d::ITransformation2d* isomorphCalibPtr = dynamic_cast<const i2d::ITransformation2d*>(calibrationPtr);
-	if (isomorphCalibPtr != NULL){
-		isomorphCalibPtr->GetPositionAt(pixelPosition, logPosition);
+	if (calibrationPtr != NULL){
+		calibrationPtr->GetPositionAt(pixelPosition, logPosition);
 	}
 	else{
 		logPosition = logToScreenTransform.GetClientPosition(position);
