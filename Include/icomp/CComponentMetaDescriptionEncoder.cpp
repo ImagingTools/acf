@@ -51,6 +51,10 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const QString
 				continue;
 			}
 			else if ((ch != ' ') || (quoteCount > 0)){
+				if ((quoteCount == 0) && (apostrophCount == 0)){
+					currentKey.clear();
+				}
+
 				continue;
 			}
 		}
