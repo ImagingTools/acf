@@ -22,43 +22,43 @@ public:
 	CPolygon();
 
 	/**
+		Removes all nodes.
+	*/
+	virtual void Clear();
+
+	/**
+		Return size of node table.
+	*/
+	virtual int GetNodesCount() const;
+
+	/**
 		Return node at specified index.
 		\param	index	an index in node table.
 	 */
 	virtual const i2d::CVector2d& GetNode(int index) const;
-	
+
 	/**
 		Set node at specified index.
 		\param	index	Index in node table.
 		\param	node	New node value.
 	*/
 	virtual void SetNode(int index, const i2d::CVector2d& node);
-	
+
 	/**
 		Insert a node at the end of node table.
 	*/
 	virtual bool InsertNode(const i2d::CVector2d& node);
-	
+
 	/**
 		Insert a node at specified index.
 	*/
 	virtual bool InsertNode(int index, const i2d::CVector2d& node);
-	
-	/**
-		Removes all nodes.
-	*/
-	virtual void Clear();
-	
+
 	/**
 		Remove a node at specified index.
 	*/
 	virtual bool RemoveNode(int index);
-	
-	/**
-		Return size of node table.
-	*/
-	virtual int GetNodesCount() const;
-	
+
 	/**
 		Get outline length of this polygon.
 	*/
@@ -119,6 +119,12 @@ inline CPolygon::CPolygon()
 
 // inline functions
 
+inline int CPolygon::GetNodesCount() const
+{
+	return int(m_nodes.size());
+}
+
+
 inline const i2d::CVector2d& CPolygon::GetNode(int index) const
 {
 	I_ASSERT(index >= 0 && index < int(m_nodes.size()));
@@ -132,12 +138,6 @@ inline void CPolygon::SetNode(int index, const i2d::CVector2d& node)
 	I_ASSERT(index >= 0 && index < int(m_nodes.size()));
 
 	m_nodes[index] = node;
-}
-
-
-inline int CPolygon::GetNodesCount() const
-{
-	return int(m_nodes.size());
 }
 
 

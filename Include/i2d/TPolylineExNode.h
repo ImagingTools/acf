@@ -32,9 +32,9 @@ public:
     virtual iser::ISerializable& GetNodeDataRef(int nodeIndex);
 
     // reimplement (i2d::CPolygon)
+	virtual void Clear();
 	virtual bool InsertNode(const i2d::CVector2d& node);
 	virtual bool InsertNode(int index, const i2d::CVector2d& node);
-	virtual void Clear();
 	virtual bool RemoveNode(int index);
 	
 protected:
@@ -92,6 +92,14 @@ inline iser::ISerializable& TPolylineExNode<NodeData>::GetNodeDataRef(int nodeIn
 // reimplement (i2d::CPolygon)
 
 template<class NodeData>
+inline void TPolylineExNode<NodeData>::Clear()
+{
+	m_nodesData.clear();
+	BaseClass::Clear();
+}
+
+
+template<class NodeData>
 inline bool TPolylineExNode<NodeData>::InsertNode(const i2d::CVector2d& node)
 {
 	m_nodesData.insert(m_nodesData.end(), NodeData());
@@ -108,14 +116,6 @@ inline bool TPolylineExNode<NodeData>::InsertNode(int index, const i2d::CVector2
 	m_nodesData.insert(iter, NodeData());
 
 	return BaseClass::InsertNode(index, node);
-}
-
-
-template<class NodeData>
-inline void TPolylineExNode<NodeData>::Clear()
-{
-	m_nodesData.clear();
-	BaseClass::Clear();
 }
 
 
