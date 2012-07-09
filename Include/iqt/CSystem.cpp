@@ -155,28 +155,28 @@ void CSystem::Sleep(double seconds)
 
 bool CSystem::RemoveDirectory(const QString& directoryPath)
 {
-    bool retVal = true;
-    QDir dir(directoryPath);
+	bool retVal = true;
+	QDir dir(directoryPath);
  
-    if (dir.exists(directoryPath)){
+	if (dir.exists(directoryPath)){
 		QFileInfoList fileInfoList = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
 		for (QFileInfoList::ConstIterator fileItemIter = fileInfoList.constBegin(); fileItemIter != fileInfoList.constEnd(); fileItemIter++){
-            if ((*fileItemIter).isDir()){
-                retVal = RemoveDirectory((*fileItemIter).absoluteFilePath());
-            }
-            else {
-                retVal = QFile::remove((*fileItemIter).absoluteFilePath());
-            }
+			if ((*fileItemIter).isDir()){
+				retVal = RemoveDirectory((*fileItemIter).absoluteFilePath());
+			}
+			else {
+				retVal = QFile::remove((*fileItemIter).absoluteFilePath());
+			}
  
-            if (!retVal){
-                return retVal;
-            }
-        }
+			if (!retVal){
+				return retVal;
+			}
+		}
 
-        retVal = dir.rmdir(directoryPath);
-    }
+		retVal = dir.rmdir(directoryPath);
+	}
  
-    return retVal;
+	return retVal;
 }
 
 
