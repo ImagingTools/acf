@@ -67,6 +67,7 @@ public:
 	const ParameterInfos& GetParameterInfos() const;
 
 	// reimplemented (iprm::IParamsSet)
+	virtual Ids GetParamIds(bool editableOnly = false) const;
 	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
 	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 

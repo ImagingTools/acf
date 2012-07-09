@@ -3,8 +3,9 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-#include "istd/CChangeDelegator.h"
 #include "istd/TDelPtr.h"
+#include "istd/CChangeDelegator.h"
+#include "istd/CIdManipBase.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -48,11 +49,45 @@ const CParamsSet::ParameterInfos& CParamsSet::GetParameterInfos() const
 
 // reimplemented (iprm::IParamsSet)
 
+IParamsSet::Ids CParamsSet::GetParamIds(bool editableOnly) const
+{
+	Ids retVal;
+
+	if (!editableOnly){
+		if (m_slaveSetPtr != NULL){
+			retVal = m_slaveSetPtr->GetParamIds(false);
+		}
+	}
+
+	for (int parameterIndex = 0; parameterIndex < m_params.GetCount(); parameterIndex++){
+		const ParameterInfo* parameterPtr = m_params.GetAt(parameterIndex);
+		I_ASSERT(parameterPtr != NULL);
+
+		retVal.insert(parameterPtr->parameterId);
+	}
+
+	return retVal;
+}
+
+
 const iser::ISerializable* CParamsSet::GetParameter(const QByteArray& id) const
 {
-	const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+	QByteArray baseId;
+	QByteArray subId;
+	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
+
+	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
 	if (parameterInfoPtr != NULL){
-		return parameterInfoPtr->parameterPtr.GetPtr();
+		const iser::ISerializable* paramPtr = parameterInfoPtr->parameterPtr.GetPtr();
+		if (isSubelement){
+			const IParamsSet* subSetPtr = dynamic_cast<const IParamsSet*>(paramPtr);
+			if (subSetPtr != NULL){
+				return subSetPtr->GetParameter(subId);
+			}
+		}
+		else{
+			return paramPtr;
+		}
 	}
 
 	if (m_slaveSetPtr != NULL){
@@ -65,9 +100,22 @@ const iser::ISerializable* CParamsSet::GetParameter(const QByteArray& id) const
 
 iser::ISerializable* CParamsSet::GetEditableParameter(const QByteArray& id)
 {
-	const ParameterInfo* parameterInfoPtr = FindParameterInfo(id);
+	QByteArray baseId;
+	QByteArray subId;
+	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
+
+	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
 	if (parameterInfoPtr != NULL){
-		return parameterInfoPtr->parameterPtr.GetPtr();
+		iser::ISerializable* paramPtr = parameterInfoPtr->parameterPtr.GetPtr();
+		if (isSubelement){
+			IParamsSet* subSetPtr = dynamic_cast<IParamsSet*>(paramPtr);
+			if (subSetPtr != NULL){
+				return subSetPtr->GetEditableParameter(subId);
+			}
+		}
+		else{
+			return paramPtr;
+		}
 	}
 
 	return NULL;

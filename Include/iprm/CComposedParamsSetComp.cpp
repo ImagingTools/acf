@@ -12,24 +12,29 @@ namespace iprm
 
 // reimplemented (iprm::IParamsSet)
 
-const iser::ISerializable* CComposedParamsSetComp::GetParameter(const QByteArray& id) const
+IParamsSet::Ids CComposedParamsSetComp::GetParamIds(bool editableOnly) const
 {
-	QByteArray baseId;
-	QByteArray subId;
-	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
+	Ids retVal = BaseClass2::GetParamIds(editableOnly);
 
-	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
-	if (parameterInfoPtr != NULL){
-		const iser::ISerializable* paramPtr = parameterInfoPtr->parameterPtr.GetPtr();
-		if (isSubelement){
-			const IParamsSet* subSetPtr = dynamic_cast<const IParamsSet*>(paramPtr);
-			if (subSetPtr != NULL){
-				return subSetPtr->GetParameter(subId);
+	if (!editableOnly){
+		int slavesCount = m_slaveParamsCompPtr.GetCount();
+		for (int i = 0; i < slavesCount; ++i){
+			const IParamsSet* slavePtr = m_slaveParamsCompPtr[i];
+			if (slavePtr != NULL){
+				retVal += slavePtr->GetParamIds(false);
 			}
 		}
-		else{
-			return paramPtr;
-		}
+	}
+
+	return retVal;
+}
+
+
+const iser::ISerializable* CComposedParamsSetComp::GetParameter(const QByteArray& id) const
+{
+	const iser::ISerializable* paramPtr = BaseClass2::GetParameter(id);
+	if (paramPtr != NULL){
+		return paramPtr;
 	}
 
 	int slavesCount = m_slaveParamsCompPtr.GetCount();
@@ -40,30 +45,6 @@ const iser::ISerializable* CComposedParamsSetComp::GetParameter(const QByteArray
 			if (paramPtr != NULL){
 				return paramPtr;
 			}
-		}
-	}
-
-	return NULL;
-}
-
-
-iser::ISerializable* CComposedParamsSetComp::GetEditableParameter(const QByteArray& id)
-{
-	QByteArray baseId;
-	QByteArray subId;
-	bool isSubelement = istd::CIdManipBase::SplitId(id, baseId, subId);
-
-	const iprm::CParamsSet::ParameterInfo* parameterInfoPtr = FindParameterInfo(baseId);
-	if (parameterInfoPtr != NULL){
-		iser::ISerializable* paramPtr = parameterInfoPtr->parameterPtr.GetPtr();
-		if (isSubelement){
-			IParamsSet* subSetPtr = dynamic_cast<IParamsSet*>(paramPtr);
-			if (subSetPtr != NULL){
-				return subSetPtr->GetEditableParameter(subId);
-			}
-		}
-		else{
-			return paramPtr;
 		}
 	}
 

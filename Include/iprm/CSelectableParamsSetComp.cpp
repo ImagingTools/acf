@@ -20,6 +20,24 @@ CSelectableParamsSetComp::CSelectableParamsSetComp()
 
 // reimplemented (iprm::IParamsSet)
 
+IParamsSet::Ids CSelectableParamsSetComp::GetParamIds(bool editableOnly) const
+{
+	Ids retVal;
+
+	I_ASSERT(m_selectionIdAttrPtr.IsValid());
+	retVal.insert(*m_selectionIdAttrPtr);
+
+	if (m_paramsManagerCompPtr.IsValid() && (m_selectedIndex >= 0) && (m_selectedIndex < m_paramsManagerCompPtr->GetParamsSetsCount())){
+		const IParamsSet* paramsSetPtr = m_paramsManagerCompPtr->GetParamsSet(m_selectedIndex);
+		if (paramsSetPtr != NULL){
+			retVal += paramsSetPtr->GetParamIds(editableOnly);
+		}
+	}
+
+	return retVal;
+}
+
+
 const iser::ISerializable* CSelectableParamsSetComp::GetParameter(const QByteArray& id) const
 {
 	I_ASSERT(m_selectionIdAttrPtr.IsValid());

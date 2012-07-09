@@ -25,7 +25,7 @@ public:
 		I_ASSIGN_MULTI_0(m_factoryIdsAttrPtr, "TypeIds", "List of factory ID for each factory object", true);
 	I_END_COMPONENT;
 
-	// reimplemented (iprm::IParamsSet)
+	// reimplemented (iprm::IVariableParam)
 	virtual TypeIds GetKnownTypeIds() const;
 	virtual QByteArray GetParameterTypeId() const;
 	virtual iser::ISerializable* GetParameter() const;
