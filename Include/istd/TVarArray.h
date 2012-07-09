@@ -116,6 +116,11 @@ public:
 	*/
 	void SetAt(const IndexType& index, const Element& value);
 
+	/**
+		Set some value to all elements.
+	*/
+	void SetAllElements(const Element& value);
+
 	// iterator support
 	/**
 		Get begin value of element access iterator.
@@ -322,6 +327,17 @@ bool TVarArray<Element>::SetSize(int dimension, int size)
 	UpdateElementsSize();
 
 	return true;
+}
+
+
+template <class Element>
+void TVarArray<Element>::SetAllElements(const Element& value)
+{
+	for (		Elements::Iterator iter = m_elements.begin();
+				iter != m_elements.end();
+				++iter){
+		*iter = value;
+	}
 }
 
 

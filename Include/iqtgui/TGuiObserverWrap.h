@@ -344,6 +344,7 @@ void TGuiObserverWrap<Gui, Observer>::SetReadOnly(bool state)
 
 
 // private methods
+
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::DoPostponedUpdate(int updateFlags)
 {

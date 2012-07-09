@@ -129,6 +129,11 @@ public:
 	*/
 	void SetAt(const IndexType& index, const Element& value);
 
+	/**
+		Set some value to all elements.
+	*/
+	void SetAllElements(const Element& value);
+
 	// iterator support
 	/**
 		Get begin value of element access iterator.
@@ -352,6 +357,17 @@ bool TArray<Element, Dimensions>::SetSize(int dimension, int size)
 	UpdateElementsSize();
 
 	return true;
+}
+
+
+template <class Element, int Dimensions>
+void TArray<Element, Dimensions>::SetAllElements(const Element& value)
+{
+	for (		Elements::Iterator iter = m_elements.begin();
+				iter != m_elements.end();
+				++iter){
+		*iter = value;
+	}
 }
 
 
