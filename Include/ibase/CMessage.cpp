@@ -96,5 +96,26 @@ bool CMessage::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CMessage::CopyFrom(const istd::IChangeable& object)
+{
+	const CMessage* sourcePtr = dynamic_cast<const CMessage*>(&object);
+	if (sourcePtr){
+		m_category = sourcePtr->m_category;
+		m_id = sourcePtr->m_id;
+		m_text = sourcePtr->m_text;
+		m_source = sourcePtr->m_source;
+		m_flags = sourcePtr->m_flags;
+		m_timeStamp = sourcePtr->m_timeStamp;
+		
+		return true;
+	}
+
+	return false;
+}
+
+
+
 } // namespace ibase
 

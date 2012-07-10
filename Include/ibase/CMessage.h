@@ -45,6 +45,9 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object);
+
 protected:
 	istd::IInformationProvider::InformationCategory m_category;
 	int m_id;

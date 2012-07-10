@@ -92,7 +92,7 @@ private:
 	void UpdateVisualStatus();
 
 protected Q_SLOTS:
-	virtual void OnAddMessage(QTreeWidgetItem* itemPtr);
+	virtual void OnAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag);
 	virtual void OnRemoveMessage(QVariant messageId);
 	virtual void OnReset();
 	virtual void OnMessageModeChanged();
@@ -101,7 +101,7 @@ protected Q_SLOTS:
 	virtual void OnExportAction();
 
 Q_SIGNALS:
-	void EmitAddMessage(QTreeWidgetItem* itemPtr);
+	void EmitAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag);
 	void EmitRemoveMessage(QVariant);
 	void EmitReset();
 

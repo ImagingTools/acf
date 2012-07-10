@@ -8,7 +8,6 @@
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
 #include "iqtgui/CItemDelegate.h"
 
 
@@ -29,7 +28,7 @@ CLogGuiComp::CLogGuiComp()
 {
 	qRegisterMetaType<QVariant>("QVariant");
 
-	connect(this, SIGNAL(EmitAddMessage(QTreeWidgetItem*)), this, SLOT(OnAddMessage(QTreeWidgetItem*)), Qt::QueuedConnection);
+	connect(this, SIGNAL(EmitAddMessage(const istd::IInformationProvider*, bool)), this, SLOT(OnAddMessage(const istd::IInformationProvider*, bool)), Qt::QueuedConnection);
 	connect(this, SIGNAL(EmitRemoveMessage(QVariant)), this, SLOT(OnRemoveMessage(QVariant)), Qt::QueuedConnection);
 	connect(this, SIGNAL(EmitReset()), this, SLOT(OnReset()), Qt::QueuedConnection);
 }
@@ -124,10 +123,7 @@ void CLogGuiComp::OnGuiModelAttached()
 					++iter){
 			const ibase::IMessageContainer::MessagePtr& messagePtr = *iter;
 			if (messagePtr.IsValid()){
-				QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
-				if (itemPtr != NULL){
-					OnAddMessage(itemPtr);
-				}
+				OnAddMessage(messagePtr.GetPtr(), false);
 			}
 		}
 	}
@@ -241,10 +237,11 @@ void CLogGuiComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPo
 	if (((updateFlags & ibase::IMessageContainer::CF_MESSAGE_ADDED) != 0) && IsGuiCreated()){
 		istd::IInformationProvider* messagePtr = dynamic_cast<istd::IInformationProvider*>(updateParamsPtr);
 		if (messagePtr != NULL){
-			QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
-			if (itemPtr != NULL){
-				Q_EMIT EmitAddMessage(itemPtr);
-			}
+
+			iser::TCopySerializedWrap<ibase::CMessage>* transferMessagePtr = new iser::TCopySerializedWrap<ibase::CMessage>;
+			transferMessagePtr->CopyFrom(*messagePtr);
+
+			Q_EMIT EmitAddMessage(transferMessagePtr, true);
 		}
 	}
 
@@ -265,9 +262,11 @@ void CLogGuiComp::UpdateVisualStatus()
 
 // protected slots
 
-void CLogGuiComp::OnAddMessage(QTreeWidgetItem* itemPtr)
+void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag)
 {	
-	I_ASSERT(itemPtr != NULL);
+	I_ASSERT(messagePtr != NULL);
+
+	QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
 
 	// add message item to the list
 	LogView->addTopLevelItem(itemPtr);
@@ -280,6 +279,10 @@ void CLogGuiComp::OnAddMessage(QTreeWidgetItem* itemPtr)
 		m_statusCategory = itemCategory;
 
 		UpdateVisualStatus();
+	}
+
+	if (releaseFlag){
+		delete messagePtr;
 	}
 }
 
