@@ -17,11 +17,11 @@ namespace ibase
 	Common implementation for an abstract serializable container. 
 	Derived class must only reimplement the SerializeItem(). 
 */
-template <typename ItemClass, typename ContainerClass = QVector<ItemClass> >
-class TSerializableContainer: public TContainer<ItemClass, ContainerClass>, virtual public iser::ISerializable
+template <typename ItemClass>
+class TSerializableContainer: public TContainer<ItemClass>, virtual public iser::ISerializable
 {
 public:
-	typedef TContainer<ItemClass, ContainerClass> BaseClass;
+	typedef TContainer<ItemClass> BaseClass;
 
 	// reimplemented (iser::Serializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -40,17 +40,13 @@ protected:
 
 // reimplemented (iser::Serializable)
 
-template <typename ItemClass, typename ContainerClass>
-bool TSerializableContainer<ItemClass, ContainerClass>::Serialize(iser::IArchive& archive)
+template <typename ItemClass>
+bool TSerializableContainer<ItemClass>::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag itemsTag("Items", "List of items");
 	static iser::CArchiveTag itemTag("Item", "Item");
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
-
-	if (!archive.IsStoring()){
-		this->Reset();
-	}
 
 	int itemCount = int(BaseClass::m_items.size());
 
@@ -60,17 +56,31 @@ bool TSerializableContainer<ItemClass, ContainerClass>::Serialize(iser::IArchive
 	}
 
 	if (!archive.IsStoring()){
-		BaseClass::m_items.resize(itemCount);
+		BaseClass::Reset();
+		BaseClass::m_items.reserve(itemCount);
+
+		for (int index = 0; index < itemCount; index++){
+			BaseClass::PushBack(ItemClass());
+
+			ItemClass& item = GetAt(index);
+
+			bool retVal = archive.BeginTag(itemTag);
+
+			retVal = retVal && SerializeItem(item, archive);
+
+			retVal = retVal && archive.EndTag(itemTag);
+		}
 	}
+	else{
+		for (int index = 0; index < itemCount; index++){
+			ItemClass& item = GetAt(index);
 
-	for (int index = 0; index < itemCount; index++){
-		ItemClass& item = BaseClass::m_items.at(index);
+			bool retVal = archive.BeginTag(itemTag);
 
-		bool retVal = archive.BeginTag(itemTag);
+			retVal = retVal && SerializeItem(item, archive);
 
-		retVal = retVal && SerializeItem(item, archive);
-
-		retVal = retVal && archive.EndTag(itemTag);
+			retVal = retVal && archive.EndTag(itemTag);
+		}
 	}
 
 	return retVal;

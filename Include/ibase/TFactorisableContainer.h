@@ -24,9 +24,8 @@ namespace ibase
 	\li Serialization mechanism with automatic item allocation.
 */
 template <class InterfaceClass>
-class TFactorisableContainer:
-			public ibase::TSerializableContainer<
-						QPair<istd::TSmartPtr<InterfaceClass>, QByteArray> >
+class TFactorisableContainer: public ibase::TSerializableContainer<
+			QPair<istd::TSmartPtr<InterfaceClass>, QByteArray> >
 {
 public:
 	typedef QPair<istd::TSmartPtr<InterfaceClass>, QByteArray> ItemClass;
