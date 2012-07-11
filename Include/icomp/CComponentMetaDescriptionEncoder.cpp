@@ -22,7 +22,7 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const QString
 		if (i < descriptionLength){
 			QChar ch = metaDescription[i];
 
-			if (ch == '\''){
+			if ((quoteCount <= 0) && (ch == '\'')){
 				if (apostrophCount <= 0){
 					++apostrophCount;
 					wordBegin = i + 1;
@@ -50,35 +50,33 @@ CComponentMetaDescriptionEncoder::CComponentMetaDescriptionEncoder(const QString
 				wordBegin = i + 1;
 				continue;
 			}
-			else if ((ch != ' ') || (quoteCount > 0)){
-				if ((quoteCount == 0) && (apostrophCount == 0)){
-					currentKey.clear();
-				}
-
+			else if (ch != ' '){
 				continue;
 			}
 		}
 
-		if (i > wordBegin){
-			QString keyword = metaDescription.mid(wordBegin, i - wordBegin);
-			m_keywords.push_back(keyword);
-			if (!currentKey.isEmpty()){
-				if (m_metaValuesMap.find(currentKey) == m_metaValuesMap.end()){
-					m_metaKeys.push_back(currentKey);
-				}
+		if (quoteCount <= 0){
+			if (i > wordBegin){
+				QString keyword = metaDescription.mid(wordBegin, i - wordBegin);
+				m_keywords.push_back(keyword);
+				if (!currentKey.isEmpty()){
+					if (m_metaValuesMap.find(currentKey) == m_metaValuesMap.end()){
+						m_metaKeys.push_back(currentKey);
+					}
 
-				m_metaValuesMap[currentKey].push_back(keyword);
-			}
-			else{
-				m_unassignedKeywords.push_back(keyword);
+					m_metaValuesMap[currentKey].push_back(keyword);
+				}
+				else{
+					m_unassignedKeywords.push_back(keyword);
+				}
 			}
 
 			if (apostrophCount <= 0){
 				currentKey = "";
 			}
-		}
 
-		wordBegin = i + 1;
+			wordBegin = i + 1;
+		}
 	}
 }
 
