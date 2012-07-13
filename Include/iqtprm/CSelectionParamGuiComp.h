@@ -74,13 +74,22 @@ public:
 		LP_TOP
 	};
 
+	enum LabelAlignment
+	{
+		LA_LEFT_TOP, LA_CENTER_TOP, LA_RIGHT_TOP,
+		LA_LEFT_CENTER, LA_CENTER, LA_RIGHT_CENTER,
+		LA_LEFT_BOTTOM, LA_CENTER_BOTTOM, LA_RIGHT_BOTTOM
+	};
+
 	I_BEGIN_COMPONENT(CSelectionParamGuiComp);
 		I_ASSIGN(m_optionsLabelAttrPtr, "OptionsLabel", "Command label for the options selector", false, "Select");
 		I_ASSIGN(m_infoLabelAttrPtr, "InfoLabel", "Information label for the options selector", false, "Info");
 		I_ASSIGN(m_infoIconProviderCompPtr, "InfoIconProvider", "Provider of the info icon", false, "InfoIconProvider");
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of the used icons", false, 32);
-		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode. 0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", true, UM_COMBOBOX);
-		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
+		I_ASSIGN(m_uiModeAttrPtr, "UiMode", "Selection representation mode.\n0 - Combo box,\n1 - Horizonal layouted radio button group\n2 - Vertical layouted radio button group", true, UM_COMBOBOX);
+		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position.\n0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
+		I_ASSIGN(m_labelAlignAttrPtr, "LabelAlignment", "Selection label alignment.\n0 - Left-Top,\n1 - Center-Top,\n2 - Right-Top,\n3 - Left-Center,\n4 - Center,\n5 - Right-Center,\n6 - Left-Bottom,\n7 - Center-Bottom,\n8 - Right-Bottom", false, LA_LEFT_CENTER);
+		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -114,6 +123,8 @@ private:
 	I_ATTR(QString, m_infoLabelAttrPtr);
 	I_ATTR(int, m_uiModeAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
+	I_ATTR(int, m_labelAlignAttrPtr);
+	I_ATTR(int, m_labelWidthAttrPtr);
 	I_REF(iqtgui::IIconProvider, m_infoIconProviderCompPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 

@@ -35,10 +35,13 @@ public:
 		I_ASSIGN(m_pathLabelAttrPtr, "PathLabel", "Label for the file editor", false, "Directory");
 		I_ASSIGN(m_startHintAttrPtr, "StartHint", "Start hint for the editor", false, "<Enter path>");
 		I_ASSIGN(m_fileTypeInfoPtr, "FileTypeInfo", "Allows to retrive optional file type information for file selection dialog", false, "FileTypeInfo");
+		I_ASSIGN(m_readOnlyAttrPtr, "ReadOnly", "True if read only", true, false);
+		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+	virtual void OnGuiRetranslate();
 
 	// reimplemented (imod::IModelEditor)
 	virtual void UpdateModel() const;
@@ -63,6 +66,8 @@ private:
 private:
 	I_ATTR(QString, m_pathLabelAttrPtr);
 	I_ATTR(QString, m_startHintAttrPtr);
+	I_ATTR(bool, m_readOnlyAttrPtr);
+	I_ATTR(int, m_labelWidthAttrPtr);
 	I_REF(iser::IFileTypeInfo, m_fileTypeInfoPtr);
 
 	QDirModel m_directoryModel;

@@ -92,7 +92,6 @@ void CSelectionParamGuiComp::OnGuiCreated()
 		QLayout* selectorLayoutPtr = NULL;
 		if (labelPosition == LP_LEFT){
 			selectorLayoutPtr = new QHBoxLayout(SelectionFrame);
-			
 		}
 		else{
 			selectorLayoutPtr = new QVBoxLayout(SelectionFrame);			
@@ -103,6 +102,60 @@ void CSelectionParamGuiComp::OnGuiCreated()
 		QLabel* selectorLabelPtr = new QLabel(SelectionFrame);
 		selectorLabelPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
 		selectorLabelPtr->setText(*m_optionsLabelAttrPtr);
+
+		if (m_labelWidthAttrPtr.IsValid()){
+			int width = *m_labelWidthAttrPtr;
+			if (width > 0){
+				selectorLabelPtr->setFixedWidth(width);
+			}
+		}
+
+		if (m_labelAlignAttrPtr.IsValid()){
+			int align = *m_labelAlignAttrPtr;
+			if (align >= LA_LEFT_TOP && align <= LA_RIGHT_BOTTOM){
+				Qt::Alignment qtAlign = 0;
+
+				switch (align){
+				case LA_LEFT_TOP:	
+					qtAlign = Qt::AlignLeft | Qt::AlignTop;
+					break;
+
+				case LA_CENTER_TOP:	
+					qtAlign = Qt::AlignHCenter | Qt::AlignTop;
+					break;
+
+				case LA_RIGHT_TOP:	
+					qtAlign = Qt::AlignRight | Qt::AlignTop;
+					break;
+
+				case LA_LEFT_CENTER:	
+					qtAlign = Qt::AlignLeft | Qt::AlignVCenter;
+					break;
+
+				case LA_CENTER:	
+					qtAlign = Qt::AlignCenter;
+					break;
+
+				case LA_RIGHT_CENTER:	
+					qtAlign = Qt::AlignRight | Qt::AlignVCenter;
+					break;
+
+				case LA_LEFT_BOTTOM:	
+					qtAlign = Qt::AlignLeft | Qt::AlignBottom;
+					break;
+
+				case LA_CENTER_BOTTOM:	
+					qtAlign = Qt::AlignHCenter | Qt::AlignBottom;
+					break;
+
+				case LA_RIGHT_BOTTOM:	
+					qtAlign = Qt::AlignRight | Qt::AlignBottom;
+					break;
+				}
+
+				selectorLabelPtr->setAlignment(qtAlign);
+			}
+		}
 
 		selectorLayoutPtr->addWidget(selectorLabelPtr);
 	}
