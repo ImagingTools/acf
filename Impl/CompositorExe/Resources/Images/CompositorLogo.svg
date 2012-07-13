@@ -17,9 +17,9 @@
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="CompositorLogo.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="E:\Work\Projects\Developement\ACF\Docs\Images\Logo\CompositorLogo3d.png"
-   inkscape:export-xdpi="88.68"
-   inkscape:export-ydpi="88.68"
+   inkscape:export-filename="CompositorLogo.png"
+   inkscape:export-xdpi="600.18127"
+   inkscape:export-ydpi="600.18127"
    version="1.0"
    style="enable-background:new">
   <defs
@@ -1645,14 +1645,6 @@
        fx="230.85291"
        fy="183.28302"
        r="15.18579" />
-    <filter
-       inkscape:collect="always"
-       id="filter3508">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.75637612"
-         id="feGaussianBlur3510" />
-    </filter>
     <linearGradient
        id="linearGradient3174-5">
       <stop
@@ -2062,11 +2054,11 @@
     </linearGradient>
     <filter
        inkscape:collect="always"
-       id="filter4326">
+       id="filter4152">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="3.6310321"
-         id="feGaussianBlur4328" />
+         stdDeviation="0.20417956"
+         id="feGaussianBlur4154" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -2076,11 +2068,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="-676.95539"
-     inkscape:cy="31.524329"
+     inkscape:zoom="2"
+     inkscape:cx="-98.080153"
+     inkscape:cy="131.24369"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer5"
      showgrid="true"
      inkscape:snap-global="false"
      showguides="true"
@@ -2104,6 +2096,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2116,7 +2109,7 @@
     <g
        id="g4455"
        transform="matrix(0.93463874,0,0,1.0359552,92.17628,-10.214447)"
-       style="display:inline;filter:url(#filter4326);enable-background:new">
+       style="display:inline;enable-background:new;">
       <path
          transform="matrix(-0.37948612,-0.04721799,-0.11921633,0.26017611,314.482,584.21936)"
          sodipodi:nodetypes="csscscc"
@@ -2205,7 +2198,7 @@
     <g
        id="NoteSmall"
        transform="matrix(0.9744072,-0.1915613,0.485236,1.6490463,116.2775,391.85555)"
-       style="display:inline;filter:url(#filter3508)"
+       style="display:inline;"
        inkscape:label="The smaller note">
       <path
          style="fill:url(#radialGradient3148);fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient3150);stroke-width:1.15970755;stroke-linejoin:round;marker-start:none;marker-mid:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -2226,7 +2219,8 @@
     <g
        id="NoteBig"
        transform="matrix(2.0441246,-0.3933233,1.0952155,2.8669127,-331.6513,173.18871)"
-       inkscape:label="The bigger note">
+       inkscape:label="The bigger note"
+       style="filter:url(#filter4152)">
       <path
          transform="matrix(1.3626841,0,0,1.3626841,-162.73306,-673.4404)"
          sodipodi:nodetypes="csscccczssssccczsss"
