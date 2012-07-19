@@ -5,6 +5,9 @@
 // STL includes
 #include <set>
 
+// QT includes
+#include <QList>
+
 // ACF includes
 #include "istd/TRange.h"
 
@@ -475,11 +478,11 @@ void TRanges<ValueType>::Union(const TRange<ValueType>& range, bool isInverted)
 	if (firstIter != secondIter){
 		// if there are some points in range...
 		if (isInverted){
-			m_switchPoints.remove(m_switchPoints.begin(), firstIter);	// remove all points before
-			m_switchPoints.remove(m_switchPoints.begin(), secondIter);	// remove all points after
+			m_switchPoints.erase(m_switchPoints.begin(), firstIter);	// remove all points before
+			m_switchPoints.erase(m_switchPoints.begin(), secondIter);	// remove all points after
 		}
 		else{
-			m_switchPoints.remove(firstIter, secondIter);	// remove all points before
+			m_switchPoints.erase(firstIter, secondIter);	// remove all points before
 		}
 	}
 	else{
