@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2397
         </Number>
         <Description>
           ACF
@@ -18,6 +18,20 @@
   <PositionMap count="8">
     <Element>
       <ComponentName>
+        SettingsProvider
+      </ComponentName>
+      <X>
+        375
+      </X>
+      <X>
+        275
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         AboutDialog
       </ComponentName>
       <X>
@@ -25,34 +39,6 @@
       </X>
       <X>
         700
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        App
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <X>
-        150
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ApplicationInfo
-      </ComponentName>
-      <X>
-        925
-      </X>
-      <X>
-        425
       </X>
       <Note>
         
@@ -74,6 +60,34 @@
     </Element>
     <Element>
       <ComponentName>
+        ApplicationInfo
+      </ComponentName>
+      <X>
+        925
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        App
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <X>
+        150
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         MainGui
       </ComponentName>
       <X>
@@ -88,13 +102,13 @@
     </Element>
     <Element>
       <ComponentName>
-        SettingsProvider
+        Workspace
       </ComponentName>
       <X>
-        375
+        200
       </X>
       <X>
-        275
+        425
       </X>
       <Note>
         
@@ -109,20 +123,6 @@
       </X>
       <X>
         150
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Workspace
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <X>
-        425
       </X>
       <Note>
         

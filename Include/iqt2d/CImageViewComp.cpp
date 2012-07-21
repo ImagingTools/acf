@@ -25,6 +25,16 @@ void CImageViewComp::UpdateGui(int /*updateFlags*/)
 		consolePtr->GetViewRef().SetFitArea(areaRect);
 	}
 
+	const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetModelPtr());
+	const i2d::ITransformation2d* transformationPtr = NULL;
+	if (calibrationProviderPtr != NULL){
+		transformationPtr = calibrationProviderPtr->GetCalibration();
+	}
+
+	if (!m_calibrationProviderCompPtr.IsValid()){
+		SetConsoleCalibration(transformationPtr);
+	}
+
 	consolePtr->UpdateView();
 }
 

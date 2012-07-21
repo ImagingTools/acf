@@ -440,43 +440,89 @@ void CRectangle::MoveCenterTo(const CVector2d& position)
 
 
 bool CRectangle::Transform(
-			const ITransformation2d& /*transformation*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/)
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
 {
-	// TODO: implement geometrical transformations for rectangle.
+	i2d::CVector2d leftTop (m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue());
+	i2d::CVector2d rightBottom (m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue());
+
+	i2d::CVector2d transLeftTop;
+	i2d::CVector2d transRightBottom;
+
+	if (		transformation.GetPositionAt(leftTop, transLeftTop, mode) &&
+				transformation.GetPositionAt(rightBottom, transRightBottom, mode)){
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+		
+		if (errorFactorPtr != NULL){
+			*errorFactorPtr = 0;
+		}
+
+		m_horizontalRange = istd::CRange(transLeftTop.GetX(), transRightBottom.GetX());
+		m_verticalRange = istd::CRange(transLeftTop.GetY(), transRightBottom.GetY());
+
+		return true;
+	}
+
 	return false;
 }
 
 
 bool CRectangle::InvTransform(
-			const ITransformation2d& /*transformation*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/)
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
 {
-	// TODO: implement geometrical transformations for rectangle.
+	i2d::CVector2d leftTop (m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue());
+	i2d::CVector2d rightBottom (m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue());
+
+	i2d::CVector2d transLeftTop;
+	i2d::CVector2d transRightBottom;
+
+	if (		transformation.GetInvPositionAt(leftTop, transLeftTop, mode) &&
+				transformation.GetInvPositionAt(rightBottom, transRightBottom, mode)){
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+		
+		if (errorFactorPtr != NULL){
+			*errorFactorPtr = 0;
+		}
+
+		m_horizontalRange = istd::CRange(transLeftTop.GetX(), transRightBottom.GetX());
+		m_verticalRange = istd::CRange(transLeftTop.GetY(), transRightBottom.GetY());
+
+		return true;
+	}
+
 	return false;
 }
 
 
 bool CRectangle::GetTransformed(
-			const ITransformation2d& /*transformation*/,
-			IObject2d& /*result*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/) const
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
 {
-	// TODO: implement geometrical transformations for rectangle.
+	CRectangle* resultRectanglePtr = dynamic_cast<CRectangle*>(&result);
+	if (resultRectanglePtr != NULL){
+		return resultRectanglePtr->Transform(transformation, mode, errorFactorPtr);
+	}
+
 	return false;
 }
 
 
 bool CRectangle::GetInvTransformed(
-			const ITransformation2d& /*transformation*/,
-			IObject2d& /*result*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/) const
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
 {
-	// TODO: implement geometrical transformations for rectangle.
+	CRectangle* resultRectanglePtr = dynamic_cast<CRectangle*>(&result);
+	if (resultRectanglePtr != NULL){
+		return resultRectanglePtr->InvTransform(transformation, mode, errorFactorPtr);
+	}
+
 	return false;
 }
 

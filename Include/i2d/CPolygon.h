@@ -106,7 +106,27 @@ protected:
 	virtual void SetNodesCount(int nodesCount);
 
 private:
-	QVector<i2d::CVector2d> m_nodes;
+	typedef QVector<i2d::CVector2d> Nodes;
+
+	/**
+		Apply 2D-transformation to the list of nodes.
+	*/
+	static bool ApplyTransform(Nodes& nodes,
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+
+	/**
+		Apply inverse 2D-transformation to the list of nodes.
+	*/
+	static bool ApplyInverseTransform(
+				Nodes& nodes,
+				const ITransformation2d& transformation,
+				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+				double* errorFactorPtr = NULL);
+
+private:
+	Nodes m_nodes;
 };
 
 

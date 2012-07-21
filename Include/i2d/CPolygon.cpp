@@ -104,43 +104,73 @@ void CPolygon::MoveCenterTo(const CVector2d& position)
 
 
 bool CPolygon::Transform(
-						   const ITransformation2d& /*transformation*/,
-						   ITransformation2d::ExactnessMode /*mode*/,
-						   double* /*errorFactorPtr*/)
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
 {
-	// TODO: implement geometrical transformations for rectangle.
+	if (ApplyTransform(m_nodes, transformation, mode, errorFactorPtr)){
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+		return true;
+	}
+
 	return false;
 }
 
 
 bool CPolygon::InvTransform(
-							  const ITransformation2d& /*transformation*/,
-							  ITransformation2d::ExactnessMode /*mode*/,
-							  double* /*errorFactorPtr*/)
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
 {
-	// TODO: implement geometrical transformations for rectangle.
+	if (ApplyInverseTransform(m_nodes, transformation, mode, errorFactorPtr)){
+		istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+		return true;
+	}
+
 	return false;
 }
 
 
 bool CPolygon::GetTransformed(
-								const ITransformation2d& /*transformation*/,
-								IObject2d& /*result*/,
-								ITransformation2d::ExactnessMode /*mode*/,
-								double* /*errorFactorPtr*/) const
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
 {
-	// TODO: implement geometrical transformations for rectangle.
+	CPolygon* polygonPtr = dynamic_cast<CPolygon*>(&result);
+	if (polygonPtr != NULL){
+		polygonPtr->m_nodes = m_nodes;
+
+		if (ApplyTransform(polygonPtr->m_nodes, transformation, mode, errorFactorPtr)){
+			istd::CChangeNotifier notifier(polygonPtr, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+			return true;
+		}
+	}
+		
 	return false;
 }
 
 
 bool CPolygon::GetInvTransformed(
-								   const ITransformation2d& /*transformation*/,
-								   IObject2d& /*result*/,
-								   ITransformation2d::ExactnessMode /*mode*/,
-								   double* /*errorFactorPtr*/) const
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
 {
-	// TODO: implement geometrical transformations for rectangle.
+	CPolygon* polygonPtr = dynamic_cast<CPolygon*>(&result);
+	if (polygonPtr != NULL){
+		polygonPtr->m_nodes = m_nodes;
+
+		if (ApplyInverseTransform(polygonPtr->m_nodes, transformation, mode, errorFactorPtr)){
+			istd::CChangeNotifier notifier(polygonPtr, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
+
+			return true;
+		}
+	}
+		
 	return false;
 }
 
@@ -178,6 +208,65 @@ bool CPolygon::Serialize(iser::IArchive& archive)
 void CPolygon::SetNodesCount(int nodesCount)
 {
 	m_nodes.resize(nodesCount);
+}
+
+
+// private static methods
+
+bool CPolygon::ApplyTransform(Nodes& nodes,
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	int nodesCount = nodes.count();
+	
+	QVector<i2d::CVector2d> transPoints;
+
+	for (int nodeIndex = 0; nodeIndex < nodesCount; nodeIndex++){
+		i2d::CVector2d transPoint;
+		if (!transformation.GetPositionAt(nodes[nodeIndex], transPoint, mode)){
+			return false;
+		}
+
+		transPoints.push_back(transPoint);
+	}
+
+	nodes = transPoints;
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	return true;
+}
+
+
+bool CPolygon::ApplyInverseTransform(
+			Nodes& nodes,
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	int nodesCount = nodes.count();
+	
+	QVector<i2d::CVector2d> transPoints;
+
+	for (int nodeIndex = 0; nodeIndex < nodesCount; nodeIndex++){
+		i2d::CVector2d transPoint;
+		if (!transformation.GetInvPositionAt(nodes[nodeIndex], transPoint, mode)){
+			return false;
+		}
+
+		transPoints.push_back(transPoint);
+	}
+
+	nodes = transPoints;
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	return true;
 }
 
 

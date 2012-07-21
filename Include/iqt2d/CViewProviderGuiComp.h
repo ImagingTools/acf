@@ -82,6 +82,11 @@ public:
 	virtual iview::IShapeView* GetView() const;
 
 protected:
+	/**
+		Do console calibration.
+	*/
+	virtual void SetConsoleCalibration(const i2d::ITransformation2d* calibrationPtr);
+	
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 
@@ -92,7 +97,7 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-private:
+protected:
 	I_REF(iview::IShapeStatusInfo, m_shapeStatusInfoCompPtr);
 	I_REF(i2d::ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_calibrationProviderModelCompPtr);

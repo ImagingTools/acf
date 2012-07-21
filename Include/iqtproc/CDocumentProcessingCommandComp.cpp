@@ -29,6 +29,7 @@ void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeabl
 	istd::CChangeNotifier changePtr(m_outputDataCompPtr.GetPtr());
 
 	QElapsedTimer timer;
+	timer.start();
 
 	int retVal = m_processorCompPtr->DoProcessing(
 				m_paramsSetCompPtr.GetPtr(),
@@ -42,7 +43,9 @@ void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeabl
 		return;
 	}
 
-	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(timer.elapsed()), "Document processing manager");
+	double processingTime = timer.nsecsElapsed() / 1000000.0;
+
+	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
 
 	changePtr.Reset();
 

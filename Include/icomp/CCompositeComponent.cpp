@@ -336,7 +336,7 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 							componentId));
 			}
 			else{
-				qCritical("Unknown component type, instance of %s could not be created", elementAddress.ToString().toLocal8Bit().constData());
+				qCritical("Unknown component type, instance of %s could not be created. Possible I_BEGIN_COMPONENT macro missing in the component implementation", elementAddress.ToString().toLocal8Bit().constData());
 			}
 		}
 

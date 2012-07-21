@@ -32,6 +32,8 @@ CMultiDocumentWorkspaceGuiComp::CMultiDocumentWorkspaceGuiComp()
 	m_tabbedCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF | ibase::ICommand::CF_EXCLUSIVE),
 	m_viewsCount(0)
 {
+	m_documentSelectionInfo.SetParent(*this);
+
 	m_workspaceModeCommand.InsertChild(&m_subWindowCommand, false);
 	m_workspaceModeCommand.InsertChild(&m_tabbedCommand, false);
 	m_commands.InsertChild(&m_windowCommand, false);
@@ -205,8 +207,18 @@ void CMultiDocumentWorkspaceGuiComp::SetActiveView(istd::IPolymorphic* viewPtr)
 				}
 			}
 		}
+
+		idoc::CMultiDocumentManagerBase::SingleDocumentData* activeDocumentInfoPtr = GetDocumentInfoFromView(*viewPtr);
+		if (activeDocumentInfoPtr == NULL){	
+			m_documentSelectionInfo.SetSelectedOptionIndex(iprm::ISelectionParam::NO_SELECTION);
+		}
+		else{
+			int documentIndex = GetDocumentIndex(*activeDocumentInfoPtr);
+
+			m_documentSelectionInfo.SetSelectedOptionIndex(documentIndex);
+		}
 	}
-		
+	
 	BaseClass::SetActiveView(viewPtr);
 }
 
@@ -461,6 +473,16 @@ void CMultiDocumentWorkspaceGuiComp::OnEndChanges(int changeFlags, istd::IPolymo
 	if (IsGuiCreated()){
 		UpdateAllTitles();
 	}
+
+	idoc::CMultiDocumentManagerBase::SingleDocumentData* activeDocumentInfoPtr = GetActiveDocumentInfo();
+	if (activeDocumentInfoPtr == NULL){	
+		m_documentSelectionInfo.SetSelectedOptionIndex(iprm::ISelectionParam::NO_SELECTION);
+	}
+	else{
+		int documentIndex = GetDocumentIndex(*activeDocumentInfoPtr);
+
+		m_documentSelectionInfo.SetSelectedOptionIndex(documentIndex);
+	}
 }
 
 
@@ -541,6 +563,8 @@ void CMultiDocumentWorkspaceGuiComp::OnCloseAllViews()
 		return;
 	}
 
+	m_documentSelectionInfo.SetSelectedOptionIndex(iprm::ISelectionParam::NO_SELECTION);
+
 	workspacePtr->closeAllSubWindows();
 }
 
@@ -561,6 +585,140 @@ void CMultiDocumentWorkspaceGuiComp::OnWorkspaceModeChanged()
 #endif
 }
 
+
+// public methods of the embedded class DocumentSelectionInfo
+
+CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::DocumentSelectionInfo()
+	:m_selectedDocumentIndex(iprm::ISelectionParam::NO_SELECTION)
+{
+}
+
+
+void CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::SetParent(CMultiDocumentWorkspaceGuiComp& parent)
+{
+	m_parent = &parent;
+}
+
+
+// reimplemented (iprm::ISelectionParam)
+
+const iprm::ISelectionConstraints* CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetSelectionConstraints() const
+{
+	return this;
+}
+
+
+int CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetSelectedOptionIndex() const
+{
+	return m_selectedDocumentIndex;
+}
+
+
+bool CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::SetSelectedOptionIndex(int index)
+{
+	if (index >= GetOptionsCount()){
+		return false;
+	}
+
+	if (m_selectedDocumentIndex != index){
+		istd::CChangeNotifier changePtr(this, CF_SELECTION_CHANGED);
+
+		m_selectedDocumentIndex = index;
+
+		istd::IPolymorphic* viewPtr = NULL;
+		if (m_selectedDocumentIndex >= 0){
+			viewPtr = m_parent->GetViewFromIndex(m_selectedDocumentIndex, 0);
+
+			m_parent->SetActiveView(viewPtr);
+		}
+	}
+
+	return true;
+}
+
+
+iprm::ISelectionParam* CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetActiveSubselection() const
+{
+	return NULL;
+}
+
+
+// reimplemented (iprm::ISelectionConstraints)
+
+int CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetConstraintsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetOptionsCount() const
+{
+	I_ASSERT(m_parent != NULL);
+
+	return m_parent->GetDocumentsCount();
+}
+
+
+QString CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetOptionName(int index) const
+{
+	SingleDocumentData& documentData = m_parent->GetSingleDocumentData(index);
+
+	if (!documentData.filePath.isEmpty()){
+		QFileInfo fileInfo(documentData.filePath);
+
+		return fileInfo.fileName();
+	}
+
+	return QString(tr("<no name>"));
+}
+
+
+QString CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetOptionDescription(int /*index*/) const
+{
+	return QString();
+}
+
+
+QByteArray CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetOptionId(int index) const
+{
+	return GetOptionName(index).toLatin1();
+}
+
+
+// reimplemented (iser::ISerializable)
+
+bool CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::Serialize(iser::IArchive& /*archive*/)
+{
+	I_CRITICAL(); // NOT IMPLEMENTED
+
+	return false;
+}
+
+
+// private static methods
+
+iprm::ISelectionParam* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterface(CMultiDocumentWorkspaceGuiComp& parent)
+{
+	return &parent.m_documentSelectionInfo;
+}
+
+
+imod::IModel* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterfaceModel(CMultiDocumentWorkspaceGuiComp& parent)
+{
+	return &parent.m_documentSelectionInfo;
+}
+
+
+istd::IChangeable* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterfaceChangeable(CMultiDocumentWorkspaceGuiComp& parent)
+{
+	return &parent.m_documentSelectionInfo;
+}
+
+
+iprm::ISelectionConstraints* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterfaceConstraints(CMultiDocumentWorkspaceGuiComp& parent)
+{
+	return &parent.m_documentSelectionInfo;
+}
 
 
 } // namespace iqtdoc

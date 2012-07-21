@@ -275,8 +275,8 @@ i2d::CRect CInteractiveCircleShape::CalcBoundingBox() const
 		const i2d::CRect& tickerBox = colorShema.GetTickerBox(IsSelected()? IColorShema::TT_NORMAL: IColorShema::TT_INACTIVE);
 
 		i2d::CRect boundingBox(
-					int(center.GetX() - radius * scale.GetX() - 1), int(center.GetY() - radius * scale.GetY() + 1),
-					int(center.GetX() + radius * scale.GetX() - 1), int(center.GetY() + radius * scale.GetY() + 1));
+					int(center.GetX() - radius * scale.GetX() - 1), int(center.GetY() - radius * scale.GetY() - 1),
+					int(center.GetX() + radius * scale.GetX() + 1), int(center.GetY() + radius * scale.GetY() + 1));
 
 		boundingBox.Expand(tickerBox);
 

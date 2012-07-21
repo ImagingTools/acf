@@ -1,8 +1,10 @@
 #include "i2d/CAnnulus.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "i2d/CAffine2d.h"
 #include "i2d/CRectangle.h"
 
 #include "iser/IArchive.h"
@@ -99,6 +101,108 @@ bool CAnnulus::operator == (const CAnnulus & ref) const
 bool CAnnulus::operator != (const CAnnulus & ref) const
 {
 	return !operator ==(ref);
+}
+
+
+// reimplemented (i2d::IObject2d)
+
+bool CAnnulus::Transform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	CVector2d transPos;
+	if (!transformation.GetPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	CAffine2d affine;
+	if (!transformation.GetLocalTransform(m_position, affine, mode)){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(this);
+
+	double scale = affine.GetDeformMatrix().GetApproxScale();
+
+	m_position = transPos;
+	m_radiusRange = m_radiusRange * scale;
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	return true;
+}
+
+
+bool CAnnulus::InvTransform(
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
+{
+	CVector2d transPos;
+	if (!transformation.GetInvPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	CAffine2d affine;
+	if (!transformation.GetLocalInvTransform(m_position, affine, mode)){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(this);
+
+	double scale = affine.GetDeformMatrix().GetApproxScale();
+
+	m_position = transPos;
+	m_radiusRange = m_radiusRange * scale;
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	return true;
+}
+
+
+bool CAnnulus::GetTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CAnnulus* annulusPtr = dynamic_cast<CAnnulus*>(&result);
+	if (annulusPtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(annulusPtr);
+
+	annulusPtr->m_position = m_position;
+	annulusPtr->m_radiusRange = m_radiusRange;
+
+	return annulusPtr->Transform(transformation, mode, errorFactorPtr);
+}
+
+
+bool CAnnulus::GetInvTransformed(
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
+{
+	CAnnulus* annulusPtr = dynamic_cast<CAnnulus*>(&result);
+	if (annulusPtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(annulusPtr);
+
+	annulusPtr->m_position = m_position;
+	annulusPtr->m_radiusRange = m_radiusRange;
+
+	return annulusPtr->Transform(transformation, mode, errorFactorPtr);
 }
 
 

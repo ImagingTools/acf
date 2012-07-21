@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2286
+          2399
         </Number>
         <Description>
           ACF
@@ -15,7 +15,21 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="5">
+  <PositionMap count="6">
+    <Element>
+      <ComponentName>
+        WindowsListCommands
+      </ComponentName>
+      <X>
+        900
+      </X>
+      <X>
+        675
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         ComponentNoteEditorDock

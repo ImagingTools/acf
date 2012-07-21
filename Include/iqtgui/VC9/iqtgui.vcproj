@@ -297,6 +297,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectableCommandsProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
@@ -469,6 +473,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSelectableCommandsProviderComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.h"
 				>
 			</File>
@@ -626,6 +634,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CSelectableCommandsProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
@@ -747,6 +759,10 @@
 			</File>
 			<File
 				RelativePath="..\CObjectPreviewGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSelectableCommandsProviderComp.moc"
 				>
 			</File>
 			<File

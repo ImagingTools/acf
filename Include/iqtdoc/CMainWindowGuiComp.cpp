@@ -542,7 +542,12 @@ void CMainWindowGuiComp::UpdateMenuActions(iqtgui::CHierarchicalCommand& menuCom
 		}
 	}
 
-	const ibase::ICommandsProvider* viewProviderPtr = CompCastPtr<ibase::ICommandsProvider>(m_activeViewPtr);
+	istd::IPolymorphic* activeViewPtr = m_activeViewPtr;
+	if (m_documentManagerCompPtr.IsValid()){
+		activeViewPtr = m_documentManagerCompPtr->GetActiveView();
+	}
+
+	const ibase::ICommandsProvider* viewProviderPtr = CompCastPtr<ibase::ICommandsProvider>(activeViewPtr);
 	if (viewProviderPtr != NULL){
 		const ibase::IHierarchicalCommand* commandsPtr = viewProviderPtr->GetCommands();
 		if (commandsPtr != NULL){
@@ -550,7 +555,17 @@ void CMainWindowGuiComp::UpdateMenuActions(iqtgui::CHierarchicalCommand& menuCom
 		}
 	}
 
-	const ibase::ICommandsProvider* documentProviderPtr = CompCastPtr<ibase::ICommandsProvider>(m_activeDocumentPtr);
+	istd::IChangeable* activeDocumentPtr = m_activeDocumentPtr;
+	if (m_documentManagerCompPtr.IsValid()){
+		if (activeViewPtr != NULL){
+			activeDocumentPtr = m_documentManagerCompPtr->GetDocumentFromView(*activeViewPtr);
+		}
+		else{		
+			activeDocumentPtr = NULL;
+		}
+	}
+
+	const ibase::ICommandsProvider* documentProviderPtr = CompCastPtr<ibase::ICommandsProvider>(activeDocumentPtr);
 	if (documentProviderPtr != NULL){
 		const ibase::IHierarchicalCommand* commandsPtr = documentProviderPtr->GetCommands();
 		if (commandsPtr != NULL){

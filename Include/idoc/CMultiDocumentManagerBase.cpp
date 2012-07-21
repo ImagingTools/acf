@@ -87,9 +87,7 @@ istd::IPolymorphic* CMultiDocumentManagerBase::GetViewFromIndex(int documentInde
 	SingleDocumentData* infoPtr = m_documentInfos.GetAt(documentIndex);
 	I_ASSERT(infoPtr != NULL);
 
-	ViewPtr viewPtr = infoPtr->views.at(viewIndex);
-
-	return viewPtr.GetPtr();
+	return infoPtr->views.at(viewIndex).GetPtr();
 }
 
 
@@ -536,6 +534,21 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::GetDoc
 	}
 
 	return NULL;
+}
+
+
+int CMultiDocumentManagerBase::GetDocumentIndex(const SingleDocumentData& document) const
+{
+	int documentsCount = GetDocumentsCount();
+	for (int i = 0; i < documentsCount; ++i){
+		SingleDocumentData& info = GetSingleDocumentData(i);
+
+		if (&info == &document){
+			return i;
+		}
+	}
+
+	return -1;
 }
 
 

@@ -511,7 +511,7 @@ bool CLine2d::Transform(
 		}
 	}
 
-	istd::CChangeNotifier notifier(this);
+	istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 	m_point1 = transPos1;
 	m_point2 = transPos2;
@@ -548,7 +548,7 @@ bool CLine2d::InvTransform(
 		}
 	}
 
-	istd::CChangeNotifier notifier(this);
+	istd::CChangeNotifier notifier(this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 	m_point1 = transPos1;
 	m_point2 = transPos2;
@@ -591,7 +591,7 @@ bool CLine2d::GetTransformed(
 		}
 	}
 
-	istd::CChangeNotifier notifier(resultLinePtr);
+	istd::CChangeNotifier notifier(resultLinePtr, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 	resultLinePtr->SetPoint1(transPos1);
 	resultLinePtr->SetPoint2(transPos2);
@@ -634,7 +634,7 @@ bool CLine2d::GetInvTransformed(
 		}
 	}
 
-	istd::CChangeNotifier notifier(resultLinePtr);
+	istd::CChangeNotifier notifier(resultLinePtr, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 
 	resultLinePtr->SetPoint1(transPos1);
 	resultLinePtr->SetPoint2(transPos2);

@@ -40,9 +40,28 @@ public:
 	bool operator == (const CAnnulus & annulus) const;
 	bool operator != (const CAnnulus & annulus) const;
 
+	// reimplemented (i2d::IObject2d)
+	virtual bool Transform(
+		const ITransformation2d& transformation,
+		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL);
+	virtual bool InvTransform(
+		const ITransformation2d& transformation,
+		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL);
+	virtual bool GetTransformed(
+		const ITransformation2d& transformation,
+		IObject2d& result,
+		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL) const;
+	virtual bool GetInvTransformed(
+		const ITransformation2d& transformation,
+		IObject2d& result,
+		ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
+		double* errorFactorPtr = NULL) const;
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
-
 
 protected:
 	istd::CRange m_radiusRange;

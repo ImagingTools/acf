@@ -8,6 +8,9 @@
 
 #include "ibase/IObjectSnap.h"
 
+#include "i2d/ICalibrationProvider.h"
+#include "i2d/CAffineTransformation2d.h"
+
 #include "iqt/IQImageProvider.h"
 
 
@@ -18,7 +21,11 @@ namespace iqt
 /**
 	Bitmap implementation based on Qt QImage.
 */
-class CBitmap: public iimg::CBitmapBase, virtual public IQImageProvider, virtual public ibase::IObjectSnap
+class CBitmap:
+			public iimg::CBitmapBase,
+			virtual public IQImageProvider,
+			virtual public ibase::IObjectSnap,
+			virtual public i2d::ICalibrationProvider
 {
 public:
 	typedef iimg::CBitmapBase BaseClass;
@@ -38,6 +45,9 @@ public:
 				const istd::IChangeable& data,
 				iimg::IBitmap& objectSnap,
 				const istd::CIndex2d& size) const;
+
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ITransformation2d* GetCalibration() const;
 
 	// reimplemented (iimg::IBitmap)
 	virtual bool IsFormatSupported(PixelFormat pixelFormat) const;
@@ -67,8 +77,13 @@ protected:
 	bool SetQImage(const QImage& image);
 
 private:
+	void EnsureLogTransformCalculated() const;
+
+private:
 	istd::TOptDelPtr<quint8, true> m_externalBuffer;
 	QImage m_image;
+
+	mutable i2d::CAffineTransformation2d m_logTransform;
 };
 
 

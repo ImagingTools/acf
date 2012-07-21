@@ -19,19 +19,29 @@ public:
 	CPolyline();
 
 	virtual bool IsClosed() const;
-	/**	Set polyline to be opened or closed.
+
+	/**
+		Set polyline to be opened or closed.
 	*/
 	virtual void SetClosed(bool state = true);
-	/**	Return number of line segments.
+	
+	/**
+		Return number of line segments.
 	*/
 	virtual int GetSegmentsCount() const;
-	/**	Return number of line segments.
+	
+	/**
+		Return number of line segments.
 	*/
 	virtual i2d::CLine2d GetSegmentLine(int segmentIndex) const;
-	/**	Get length of this polyline.
+	
+	/**
+		Get length of this polyline.
 	*/
 	virtual double GetLength() const;
-	/**	Return vector for knee, that has the same angle to both neighbor segments.
+	
+	/**
+		Return vector for knee, that has the same angle to both neighbor segments.
 	*/
 	virtual i2d::CVector2d GetKneeVector(int nodeIndex) const;
 

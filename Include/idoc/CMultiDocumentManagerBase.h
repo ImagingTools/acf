@@ -126,6 +126,11 @@ protected:
 	SingleDocumentData* GetDocumentInfoFromPath(const QString& filePath) const;
 
 	/**
+		Get position index of the given document in the document list.
+	*/
+	int GetDocumentIndex(const SingleDocumentData& document) const;
+
+	/**
 		Create instance of specified document without attaching to this manager.
 	*/
 	virtual SingleDocumentData* CreateDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId) const;

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2397
         </Number>
         <Description>
           ACF
@@ -1149,7 +1149,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="3">
+    <Component>
+      <ExportedId>
+        DocumentSelection
+      </ExportedId>
+      <ComponentId>
+        Workspace/DocumentSelection
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         SettingsProvider

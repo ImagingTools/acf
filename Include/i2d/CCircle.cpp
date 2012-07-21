@@ -1,8 +1,10 @@
 #include "i2d/CCircle.h"
 
 
+// ACF includes
 #include "istd/TChangeNotifier.h"
 
+#include "i2d/CAffine2d.h"
 #include "i2d/CRectangle.h"
 
 #include "iser/IArchive.h"
@@ -60,44 +62,102 @@ bool CCircle::operator !=(const CCircle & ref) const
 // reimplemented (i2d::IObject2d)
 
 bool CCircle::Transform(
-			const ITransformation2d& /*transformation*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/)
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
 {
-	// TODO: implement geometrical transformations for circle.
-	return false;
+	CVector2d transPos;
+	if (!transformation.GetPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	CAffine2d affine;
+	if (!transformation.GetLocalTransform(m_position, affine, mode)){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(this);
+
+	double scale = affine.GetDeformMatrix().GetApproxScale();
+
+	SetPosition(transPos);
+	SetRadius(m_radius * scale);
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	return true;
 }
 
 
 bool CCircle::InvTransform(
-			const ITransformation2d& /*transformation*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/)
+			const ITransformation2d& transformation,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr)
 {
-	// TODO: implement geometrical transformations for circle.
-	return false;
+	CVector2d transPos;
+	if (!transformation.GetInvPositionAt(m_position, transPos, mode)){
+		return false;
+	}
+
+	CAffine2d affine;
+	if (!transformation.GetLocalInvTransform(m_position, affine, mode)){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(this);
+
+	double scale = affine.GetDeformMatrix().GetApproxScale();
+
+	SetPosition(transPos);
+	SetRadius(m_radius * scale);
+
+	if (errorFactorPtr != NULL){
+		*errorFactorPtr = 0;
+	}
+
+	return true;
 }
 
 
 bool CCircle::GetTransformed(
-			const ITransformation2d& /*transformation*/,
-			IObject2d& /*result*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/) const
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
 {
-	// TODO: implement geometrical transformations for circle.
-	return false;
+	CCircle* circlePtr = dynamic_cast<CCircle*>(&result);
+	if (circlePtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(circlePtr);
+
+	circlePtr->SetPosition(m_position);
+	circlePtr->SetRadius(m_radius);
+
+	return circlePtr->Transform(transformation, mode, errorFactorPtr);
 }
 
 
 bool CCircle::GetInvTransformed(
-			const ITransformation2d& /*transformation*/,
-			IObject2d& /*result*/,
-			ITransformation2d::ExactnessMode /*mode*/,
-			double* /*errorFactorPtr*/) const
+			const ITransformation2d& transformation,
+			IObject2d& result,
+			ITransformation2d::ExactnessMode mode,
+			double* errorFactorPtr) const
 {
-	// TODO: implement geometrical transformations for circle.
-	return false;
+	CCircle* circlePtr = dynamic_cast<CCircle*>(&result);
+	if (circlePtr == NULL){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(circlePtr);
+
+	circlePtr->SetPosition(m_position);
+	circlePtr->SetRadius(m_radius);
+
+	return circlePtr->InvTransform(transformation, mode, errorFactorPtr);
 }
 
 

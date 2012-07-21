@@ -9,6 +9,9 @@
 // ACF includes
 #include "ibase/ICommandsProvider.h"
 
+#include "iprm/ISelectionParam.h"
+#include "iprm/ISelectionConstraints.h"
+
 #include "idoc/CMultiDocumentManagerBase.h"
 #include "idoc/IDocumentTemplate.h"
 
@@ -47,6 +50,11 @@ public:
 		I_REGISTER_INTERFACE(idoc::IDocumentManager);
 		I_REGISTER_INTERFACE(idoc::IDocumentTypesInfo);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
+		I_REGISTER_SUBELEMENT(DocumentSelection);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionParam, ExtractSelectionInterface);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, imod::IModel, ExtractSelectionInterfaceModel);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, istd::IChangeable, ExtractSelectionInterfaceChangeable);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionConstraints, ExtractSelectionInterfaceConstraints);
 		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate");
 		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true);
 		I_ASSIGN(m_allowViewRepeatingAttrPtr, "AllowViewRepeating", "If enabled, multiple views for the same document are allowed", false, true);
@@ -135,6 +143,42 @@ protected Q_SLOTS:
 	void OnWorkspaceModeChanged();
 
 private:
+	class DocumentSelectionInfo: virtual public iprm::ISelectionParam, virtual public iprm::ISelectionConstraints
+	{
+	public:
+		DocumentSelectionInfo();
+
+		void SetParent(CMultiDocumentWorkspaceGuiComp& parent);
+
+		// reimplemented (iprm::ISelectionParam)
+		virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
+		virtual int GetSelectedOptionIndex() const;
+		virtual bool SetSelectedOptionIndex(int index);
+		virtual iprm::ISelectionParam* GetActiveSubselection() const;
+
+		// reimplemented (iprm::ISelectionConstraints)
+		virtual int GetConstraintsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
+	private:
+		int m_selectedDocumentIndex;
+		CMultiDocumentWorkspaceGuiComp* m_parent;
+	};
+
+	friend class imod::TModelWrap<DocumentSelectionInfo>;
+
+	static iprm::ISelectionParam* ExtractSelectionInterface(CMultiDocumentWorkspaceGuiComp& parent);
+	static imod::IModel* ExtractSelectionInterfaceModel(CMultiDocumentWorkspaceGuiComp& parent);
+	static istd::IChangeable* ExtractSelectionInterfaceChangeable(CMultiDocumentWorkspaceGuiComp& parent);
+	static iprm::ISelectionConstraints* ExtractSelectionInterfaceConstraints(CMultiDocumentWorkspaceGuiComp& parent);
+
+
 	iqtgui::CHierarchicalCommand m_commands;
 
 	// global commands
@@ -156,6 +200,8 @@ private:
 	mutable QString m_lastDirectory;
 
 	int m_viewsCount;
+
+	imod::TModelWrap<DocumentSelectionInfo> m_documentSelectionInfo;
 };
 
 

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2397
         </Number>
         <Description>
           ACF
@@ -91,7 +91,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="13">
+        <AttributeInfoMap count="16">
           <AttributeInfo>
             <Id>
               AllowOpenFile
@@ -101,6 +101,22 @@
             </Type>
             <ExportId>
               AllowOpenFile
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AllowedDockAreas
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              AllowedDockAreas
             </ExportId>
             <Data>
               <IsEnabled>
@@ -133,6 +149,38 @@
             </Type>
             <ExportId>
               DefaultPath
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DockArea
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DockArea
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DockFeatures
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DockFeatures
             </ExportId>
             <Data>
               <IsEnabled>
@@ -196,7 +244,7 @@
               PathPersistenceSettingsKey
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               PathPersistenceSettingsKey
@@ -332,22 +380,52 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="0">
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              FitMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                1
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ZoomToFitEnabled
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="9">
-    <Interface>
-      <InterfaceId>
-        ibase::ICommandsProvider
-      </InterfaceId>
-      <ComponentId>
-        ImageView
-      </ComponentId>
-    </Interface>
+  <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
         imod::IModel

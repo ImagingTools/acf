@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2191
+          2399
         </Number>
         <Description>
           ACF
@@ -88,7 +88,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="6">
                 <Value>
                   MainWindowComponents/AttributeEditorDock
                 </Value>
@@ -103,6 +103,9 @@
                 </Value>
                 <Value>
                   MainWindowComponents/ComponentNoteEditorDock
+                </Value>
+                <Value>
+                  MainWindowComponents/WindowsListCommands
                 </Value>
               </Values>
             </Data>
@@ -270,7 +273,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -439,6 +442,25 @@
               </IsEnabled>
               <Value>
                 Application
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              WindowsList
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/DocumentSelection
               </Value>
             </Data>
           </AttributeInfo>

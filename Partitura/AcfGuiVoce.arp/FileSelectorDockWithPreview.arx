@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2397
         </Number>
         <Description>
           ACF
@@ -33,7 +33,55 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              AllowedDockAreas
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              AllowedDockAreas
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DockArea
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DockArea
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              DockFeatures
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              DockFeatures
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DockTitle

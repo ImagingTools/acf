@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2317
+          2399
         </Number>
         <Description>
           ACF
@@ -652,7 +652,7 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="5">
+  <ExportedComponents count="6">
     <Component>
       <ExportedId>
         ConfigFile
@@ -667,6 +667,14 @@
       </ExportedId>
       <ComponentId>
         Application/Workspace
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        DocumentSelection
+      </ExportedId>
+      <ComponentId>
+        Application/DocumentSelection
       </ComponentId>
     </Component>
     <Component>

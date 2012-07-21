@@ -70,6 +70,17 @@ bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, 
 }
 
 
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ITransformation2d* CBitmap::GetCalibration() const
+{
+	EnsureLogTransformCalculated();
+
+	return &m_logTransform;
+}
+
+
+
 // reimplemented (iimg::IBitmap)
 
 bool CBitmap::IsFormatSupported(PixelFormat pixelFormat) const
@@ -322,6 +333,21 @@ bool CBitmap::SetQImage(const QImage& image)
 	}
 
 	return true;
+}
+
+
+// private methods
+
+void CBitmap::EnsureLogTransformCalculated() const 
+{
+	int pixelPerMmX = m_image.dotsPerMeterX() / 1000;
+	int pixelPerMmY = m_image.dotsPerMeterY() / 1000;
+
+	i2d::CVector2d scale(1.0 / pixelPerMmX, 1.0 / pixelPerMmY);
+
+	i2d::CVector2d center(GetImageSize().GetX() * 0.5 * scale.GetX(), GetImageSize().GetY() * 0.5 * scale.GetY());
+	
+	m_logTransform.Reset(-center, 0.0, scale);
 }
 
 

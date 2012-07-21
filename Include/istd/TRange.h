@@ -238,6 +238,8 @@ public:
 	bool operator!=(const TRange& range) const;
 	TRange operator*(double value) const;
 	TRange operator/(double value) const;
+	TRange& operator*=(double value);
+	TRange& operator/=(double value);
 
 	// static methods
 	/**
@@ -694,6 +696,26 @@ inline TRange<ValueType> TRange<ValueType>::operator/(double value) const
 	result.m_maxValue /= value;
 
 	return result;
+}
+
+
+template <typename ValueType>
+inline TRange<ValueType>& TRange<ValueType>::operator*=(double value)
+{
+	m_minValue *= value;
+	m_maxValue *= value;
+
+	return this;
+}
+
+
+template <typename ValueType>
+inline TRange<ValueType>& TRange<ValueType>::operator/=(double value)
+{
+	m_minValue /= value;
+	m_maxValue /= value;
+
+	return this;
 }
 
 
