@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2317
+          2402
         </Number>
         <Description>
           ACF
@@ -54,7 +54,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="13">
+          <AttributeInfo>
+            <Id>
+              BackgroundMode
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              BackgroundMode
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               CalibrationProvider
@@ -140,6 +156,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              ShapeStatusInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              ShapeStatusInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               UseAntialiasing
             </Id>
             <Type>
@@ -147,6 +179,38 @@
             </Type>
             <ExportId>
               UseAntialiasing
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseGridCommands
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              UseGridCommands
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseScrollBarCommands
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              UseScrollBarCommands
             </ExportId>
             <Data>
               <IsEnabled>

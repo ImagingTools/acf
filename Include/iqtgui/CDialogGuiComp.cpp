@@ -23,6 +23,14 @@ void CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 }
 
 
+// reimpemented (ibase::ICommandsProvider)
+
+const ibase::IHierarchicalCommand* CDialogGuiComp::GetCommands() const
+{
+	return &m_rootCommand;
+}
+
+
 // protected methods
 
 iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, IGuiObject* parentPtr) const
@@ -55,6 +63,30 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, 
 	}
 
 	return dialogPtr.PopPtr();
+}
+
+
+// reimplemented (icomp::CComponentBase)
+
+void CDialogGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_rootMenuCommand.SetName(*m_rootMenuNameAttrPtr);
+	m_dialogCommand.SetVisuals(*m_menuNameAttrPtr, *m_menuNameAttrPtr, *m_menuDescriptionAttrPtr);
+
+	m_rootMenuCommand.InsertChild(&m_dialogCommand);
+	m_rootCommand.InsertChild(&m_rootMenuCommand);
+
+	connect(&m_dialogCommand, SIGNAL(activated()), this, SLOT(OnCommandActivated()));
+}
+
+
+// protected slots
+
+void CDialogGuiComp::OnCommandActivated()
+{
+	ExecuteDialog(NULL);
 }
 
 

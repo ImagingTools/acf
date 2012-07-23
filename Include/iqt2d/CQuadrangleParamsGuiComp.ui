@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>CQuadrangleParamsGuiComp</class>
- <widget class="QWidget" name="CQuadrangleParamsGuiComp" >
-  <property name="geometry" >
+ <widget class="QWidget" name="CQuadrangleParamsGuiComp">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,131 +10,131 @@
     <height>188</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <property name="margin" >
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
       <string>First Diagonal</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="Point1Label_2" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="Point1Label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>First point</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="QDoubleSpinBox" name="FirstDiagPoint1XSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="FirstDiagPoint1XSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" >
-       <widget class="QDoubleSpinBox" name="FirstDiagPoint1YSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="0" column="2">
+       <widget class="QDoubleSpinBox" name="FirstDiagPoint1YSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" >
-       <widget class="QLabel" name="FirstDiagPoint1UnitLabel" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+      <item row="0" column="3">
+       <widget class="QLabel" name="FirstDiagPoint1UnitLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string/>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="Point2Label_2" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+      <item row="1" column="0">
+       <widget class="QLabel" name="Point2Label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>Second point</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="QDoubleSpinBox" name="FirstDiagPoint2XSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="FirstDiagPoint2XSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="1" column="2" >
-       <widget class="QDoubleSpinBox" name="FirstDiagPoint2YSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="1" column="2">
+       <widget class="QDoubleSpinBox" name="FirstDiagPoint2YSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="1" column="3" >
-       <widget class="QLabel" name="FirstDiagPoint2UnitLabel" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+      <item row="1" column="3">
+       <widget class="QLabel" name="FirstDiagPoint2UnitLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string/>
         </property>
        </widget>
@@ -142,123 +143,123 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2" >
-     <property name="title" >
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
       <string>Second Diagonal</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="Point1Label" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="Point1Label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>First point</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="QDoubleSpinBox" name="SecondDiagPoint1XSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="SecondDiagPoint1XSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" >
-       <widget class="QDoubleSpinBox" name="SecondDiagPoint1YSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="0" column="2">
+       <widget class="QDoubleSpinBox" name="SecondDiagPoint1YSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" >
-       <widget class="QLabel" name="SecondDiagPoint1UnitLabel" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+      <item row="0" column="3">
+       <widget class="QLabel" name="SecondDiagPoint1UnitLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string/>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="Point2Label" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+      <item row="1" column="0">
+       <widget class="QLabel" name="Point2Label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>Second point</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="QDoubleSpinBox" name="SecondDiagPoint2XSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="SecondDiagPoint2XSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="1" column="2" >
-       <widget class="QDoubleSpinBox" name="SecondDiagPoint2YSpin" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+      <item row="1" column="2">
+       <widget class="QDoubleSpinBox" name="SecondDiagPoint2YSpin">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimum" >
+        <property name="minimum">
          <double>-10000.000000000000000</double>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <double>10000.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item row="1" column="3" >
-       <widget class="QLabel" name="SecondDiagPoint2UnitLabel" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+      <item row="1" column="3">
+       <widget class="QLabel" name="SecondDiagPoint2UnitLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string/>
         </property>
        </widget>

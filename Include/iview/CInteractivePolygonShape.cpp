@@ -639,7 +639,7 @@ i2d::CRect CInteractivePolygonShape::CalcBoundingBox() const
 				boundingBox.Union(sp);
 			}
 
-			boundingBox.Expand(i2d::CRect(0,0,1,1));
+			boundingBox.Expand(i2d::CRect(-1,-1, 1, 1));
 
 			IColorShema::TickerType tickerType;
 

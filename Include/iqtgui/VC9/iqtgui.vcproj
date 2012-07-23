@@ -598,6 +598,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CDialogGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CDockWidgetGuiComp.cpp"
 				>
 			</File>
@@ -723,6 +727,10 @@
 			</File>
 			<File
 				RelativePath="..\CCheckableComboBox.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CDialogGuiComp.moc"
 				>
 			</File>
 			<File

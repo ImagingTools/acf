@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>CLine2dParamsGuiComp</class>
- <widget class="QWidget" name="CLine2dParamsGuiComp" >
-  <property name="geometry" >
+ <widget class="QWidget" name="CLine2dParamsGuiComp">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,125 +10,125 @@
     <height>70</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" >
-   <property name="margin" >
+  <layout class="QGridLayout">
+   <property name="margin">
     <number>0</number>
    </property>
-   <item row="0" column="0" >
-    <widget class="QLabel" name="Point1Label" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+   <item row="0" column="0">
+    <widget class="QLabel" name="Point1Label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>First point</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1" >
-    <widget class="QDoubleSpinBox" name="Point1XSB" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+   <item row="0" column="1">
+    <widget class="QDoubleSpinBox" name="Point1XSB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <double>-10000.000000000000000</double>
      </property>
-     <property name="maximum" >
+     <property name="maximum">
       <double>10000.000000000000000</double>
      </property>
     </widget>
    </item>
-   <item row="0" column="2" >
-    <widget class="QDoubleSpinBox" name="Point1YSB" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+   <item row="0" column="2">
+    <widget class="QDoubleSpinBox" name="Point1YSB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <double>-10000.000000000000000</double>
      </property>
-     <property name="maximum" >
+     <property name="maximum">
       <double>10000.000000000000000</double>
      </property>
     </widget>
    </item>
-   <item row="0" column="3" >
-    <widget class="QLabel" name="Point1UnitLabel" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+   <item row="0" column="3">
+    <widget class="QLabel" name="Point1UnitLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string/>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <widget class="QLabel" name="Point2Label" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
+   <item row="1" column="0">
+    <widget class="QLabel" name="Point2Label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Second point</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QDoubleSpinBox" name="Point2XSB" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+   <item row="1" column="1">
+    <widget class="QDoubleSpinBox" name="Point2XSB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <double>-10000.000000000000000</double>
      </property>
-     <property name="maximum" >
+     <property name="maximum">
       <double>10000.000000000000000</double>
      </property>
     </widget>
    </item>
-   <item row="1" column="2" >
-    <widget class="QDoubleSpinBox" name="Point2YSB" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+   <item row="1" column="2">
+    <widget class="QDoubleSpinBox" name="Point2YSB">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimum" >
+     <property name="minimum">
       <double>-10000.000000000000000</double>
      </property>
-     <property name="maximum" >
+     <property name="maximum">
       <double>10000.000000000000000</double>
      </property>
     </widget>
    </item>
-   <item row="1" column="3" >
-    <widget class="QLabel" name="Point2UnitLabel" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+   <item row="1" column="3">
+    <widget class="QLabel" name="Point2UnitLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="text" >
+     <property name="text">
       <string/>
      </property>
     </widget>
