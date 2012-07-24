@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2403
         </Number>
         <Description>
           ACF
@@ -466,18 +466,18 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        imod::IObserver
-      </InterfaceId>
-      <ComponentId>
-        VisualRegistryScenographer
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
         icmpstr::ISceneProvider
       </InterfaceId>
       <ComponentId>
         SceneProvider
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IObserver
+      </InterfaceId>
+      <ComponentId>
+        VisualRegistryScenographer
       </ComponentId>
     </Interface>
     <Interface>
@@ -492,9 +492,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    
+    Component diagram view
   </Description>
   <Keywords>
-    
+    Diagram View Scene Tag='GUI'
   </Keywords>
 </Acf>
