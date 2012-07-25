@@ -5,6 +5,7 @@
 	Name="ACF General"
 	OutputDirectory="$(ConfigurationName)"
 	IntermediateDirectory="$(ConfigurationName)"
+  BuildLogFile="$(IntDir)\$(ProjectName)-$(ConfigurationName).htm"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
