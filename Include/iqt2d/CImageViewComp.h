@@ -23,18 +23,16 @@ namespace iqt2d
 	Show observed bitmap on the 2D-console.
 	This class extends standard 2D-console to provide background bitmap object.
 */
-class CImageViewComp:
-	public ibase::TModelObserverCompWrap<
-				iqtgui::TGuiObserverWrap<
-							CViewProviderGuiComp, iview::CImageShape> >
+class CImageViewComp: public ibase::TModelObserverCompWrap<
+			iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape> >
 {
 public:
 	typedef ibase::TModelObserverCompWrap<
-					iqtgui::TGuiObserverWrap<
-								CViewProviderGuiComp, iview::CImageShape> > BaseClass;
+				iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape> > BaseClass;
 
 	I_BEGIN_COMPONENT(CImageViewComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
+		I_REGISTER_INTERFACE(imod::IModelEditor);
 	I_END_COMPONENT;
 
 protected:
