@@ -149,7 +149,9 @@ void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, in
 		}
 	}
 
-	UpdateViewCalibration(viewPtr);
+	if (flags & SF_DIRECT){
+		UpdateViewCalibration(viewPtr);
+	}
 
 	if (showSlaveShapes && m_slaveExtenderCompPtr.IsValid()){
 		m_slaveExtenderCompPtr->AddItemsToScene(providerPtr, (flags | SF_BACKGROUND) & ~SF_DIRECT);
@@ -263,26 +265,29 @@ void TViewExtenderCompBase<Base>::UpdateViewCalibration(iview::IShapeView* viewP
 		const i2d::ITransformation2d* viewCalibrationPtr = m_viewCalibrationProviderCompPtr->GetCalibration();
 
 		iview::CCalibratedViewBase* calibratedViewPtr = dynamic_cast<iview::CCalibratedViewBase*>(viewPtr);
-		if (calibratedViewPtr != NULL && viewCalibrationPtr != NULL){
-			m_viewCalibrationPtr.SetCastedOrRemove(viewCalibrationPtr->CloneMe());
+		if (calibratedViewPtr != NULL){
+			if (viewCalibrationPtr != NULL){
+				m_viewCalibrationPtr.SetCastedOrRemove(viewCalibrationPtr->CloneMe());
+			}
+			else{
+				m_viewCalibrationPtr.Reset();
+			}
 
 			calibratedViewPtr->SetCalibrationPtr(m_viewCalibrationPtr.GetPtr());
 		}
 		
+		i2d::CAffine2d logToViewTransform;
+
 		if (viewCalibrationPtr != NULL){
-			i2d::CAffine2d logToViewTransform;
+			viewCalibrationPtr->GetLocalInvTransform(i2d::CVector2d(0, 0), logToViewTransform);
+		}
+		else{
+			logToViewTransform.Reset();
+		}
 
-			if (viewCalibrationPtr != NULL){
-				viewCalibrationPtr->GetLocalInvTransform(i2d::CVector2d(0, 0), logToViewTransform);
-			}
-			else{
-				logToViewTransform.Reset();
-			}
-
-			iview::ILogicalView* logicalViewPtr = dynamic_cast<iview::ILogicalView*>(viewPtr);
-			if (logicalViewPtr != NULL){
-				logicalViewPtr->SetLogToViewTransform(logToViewTransform);
-			}
+		iview::ILogicalView* logicalViewPtr = dynamic_cast<iview::ILogicalView*>(viewPtr);
+		if (logicalViewPtr != NULL){
+			logicalViewPtr->SetLogToViewTransform(logToViewTransform);
 		}
 	}
 }
