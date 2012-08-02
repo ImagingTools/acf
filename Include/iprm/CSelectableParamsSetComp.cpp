@@ -129,6 +129,7 @@ ISelectionParam* CSelectableParamsSetComp::GetActiveSubselection() const
 bool CSelectableParamsSetComp::Serialize(iser::IArchive& archive)
 {
 	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index");
+	static iser::CArchiveTag paramsManagerTag("Parameters", "All parameters");
 
 	bool isStoring = archive.IsStoring();
 
@@ -144,6 +145,14 @@ bool CSelectableParamsSetComp::Serialize(iser::IArchive& archive)
 
 	if (!isStoring && selectedIndex != m_selectedIndex){
 		retVal = retVal && SetSelectedOptionIndex(selectedIndex);
+	}
+
+	if (m_serializeParamsManagerAttrPtr.IsValid() && *m_serializeParamsManagerAttrPtr){
+		if (m_paramsManagerCompPtr.IsValid()){
+			retVal = retVal && archive.BeginTag(paramsManagerTag);
+			retVal = retVal && m_paramsManagerCompPtr->Serialize(archive);
+			retVal = retVal && archive.EndTag(paramsManagerTag);
+		}
 	}
 
 	return retVal;
