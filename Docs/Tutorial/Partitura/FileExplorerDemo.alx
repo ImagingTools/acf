@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2410
         </Number>
         <Description>
           ACF
@@ -18,13 +18,13 @@
   <PositionMap count="5">
     <Element>
       <ComponentName>
-        BitmapFileExplorer
+        FileNameParamGui
       </ComponentName>
       <X>
         250
       </X>
       <X>
-        225
+        575
       </X>
       <Note>
         
@@ -46,13 +46,13 @@
     </Element>
     <Element>
       <ComponentName>
-        FileNameParamGui
+        StandaloneApp
       </ComponentName>
       <X>
-        250
+        625
       </X>
       <X>
-        575
+        225
       </X>
       <Note>
         
@@ -60,10 +60,10 @@
     </Element>
     <Element>
       <ComponentName>
-        StandaloneApp
+        BitmapFileExplorer
       </ComponentName>
       <X>
-        625
+        250
       </X>
       <X>
         225

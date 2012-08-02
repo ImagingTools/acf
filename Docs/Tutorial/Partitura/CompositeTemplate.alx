@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2410
         </Number>
         <Description>
           ACF
@@ -32,52 +32,10 @@
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <X>
-        500
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         BitmapLoader
       </ComponentName>
       <X>
         100
-      </X>
-      <X>
-        125
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CompositeTemplate
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentFactory
-      </ComponentName>
-      <X>
-        875
       </X>
       <X>
         125
@@ -102,20 +60,6 @@
     </Element>
     <Element>
       <ComponentName>
-        DocumentTemplate
-      </ComponentName>
-      <X>
-        1000
-      </X>
-      <X>
-        250
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         ImageFactory
       </ComponentName>
       <X>
@@ -130,13 +74,83 @@
     </Element>
     <Element>
       <ComponentName>
-        ImageTemplate
+        CompositeTemplate
       </ComponentName>
       <X>
         325
       </X>
       <X>
+        225
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        MainWindow
+      </ComponentName>
+      <X>
+        325
+      </X>
+      <X>
+        475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Splash
+      </ComponentName>
+      <X>
+        775
+      </X>
+      <X>
+        700
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DocumentTemplate
+      </ComponentName>
+      <X>
+        1000
+      </X>
+      <X>
+        250
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ViewFactory
+      </ComponentName>
+      <X>
+        1125
+      </X>
+      <X>
         125
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ApplicationInfo
+      </ComponentName>
+      <X>
+        650
+      </X>
+      <X>
+        500
       </X>
       <Note>
         
@@ -172,13 +186,13 @@
     </Element>
     <Element>
       <ComponentName>
-        MainWindow
+        Workspace
       </ComponentName>
       <X>
         325
       </X>
       <X>
-        475
+        350
       </X>
       <Note>
         
@@ -186,24 +200,10 @@
     </Element>
     <Element>
       <ComponentName>
-        Splash
+        DocumentFactory
       </ComponentName>
       <X>
-        650
-      </X>
-      <X>
-        625
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        ViewFactory
-      </ComponentName>
-      <X>
-        1125
+        875
       </X>
       <X>
         125
@@ -214,13 +214,13 @@
     </Element>
     <Element>
       <ComponentName>
-        Workspace
+        ImageTemplate
       </ComponentName>
       <X>
         325
       </X>
       <X>
-        350
+        125
       </X>
       <Note>
         

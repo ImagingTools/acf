@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2410
         </Number>
         <Description>
           ACF
@@ -32,34 +32,6 @@
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
-      </ComponentName>
-      <X>
-        350
-      </X>
-      <X>
-        475
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentFactory
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        725
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         DocumentLoader
       </ComponentName>
       <X>
@@ -67,34 +39,6 @@
       </X>
       <X>
         600
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentTemplate
-      </ComponentName>
-      <X>
-        600
-      </X>
-      <X>
-        600
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Info
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <X>
-        350
       </X>
       <Note>
         
@@ -130,6 +74,20 @@
     </Element>
     <Element>
       <ComponentName>
+        DocumentTemplate
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        600
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         ViewFactory
       </ComponentName>
       <X>
@@ -144,6 +102,34 @@
     </Element>
     <Element>
       <ComponentName>
+        ApplicationInfo
+      </ComponentName>
+      <X>
+        350
+      </X>
+      <X>
+        475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Info
+      </ComponentName>
+      <X>
+        125
+      </X>
+      <X>
+        350
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
         Workspace
       </ComponentName>
       <X>
@@ -151,6 +137,20 @@
       </X>
       <X>
         475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        DocumentFactory
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        725
       </X>
       <Note>
         

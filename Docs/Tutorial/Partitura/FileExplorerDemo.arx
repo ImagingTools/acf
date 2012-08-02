@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2246
+          2410
         </Number>
         <Description>
           ACF
@@ -68,7 +68,7 @@
                 true
               </IsEnabled>
               <Value>
-                StandaloneApp
+                StandaloneApp/ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -96,7 +96,7 @@
               PathPersistenceSettingsKey
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
               
@@ -125,7 +125,7 @@
                 true
               </IsEnabled>
               <Value>
-                StandaloneApp
+                StandaloneApp/SettingsProvider
               </Value>
             </Data>
           </AttributeInfo>
@@ -246,7 +246,7 @@
                 true
               </IsEnabled>
               <Value>
-                StandaloneApp
+                StandaloneApp/SettingsProvider
               </Value>
             </Data>
           </AttributeInfo>
