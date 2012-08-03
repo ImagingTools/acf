@@ -124,6 +124,11 @@ I_EXPORT_COMPONENT(
 			"Multi Model Observer Binder" IM_TAG("Model") IM_AUTHOR("\"Krzysztof Gantzke\""));
 
 I_EXPORT_COMPONENT(
+			SingletonApplication,
+			"General singleton application",
+			"Application Singleton Process" IM_TAG("Application"));
+
+I_EXPORT_COMPONENT(
 			SelectableParamsSet,
 			"Composed set of parameters",
 			"Parameters Set Selection Options List" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Parameter"));

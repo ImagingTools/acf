@@ -40,6 +40,7 @@
 #include "ibase/CFileConvertOverProcessorComp.h"
 #include "ibase/CLogComp.h"
 #include "ibase/CMultiObserverBinderComp.h"
+#include "ibase/CSingletonApplicationComp.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
@@ -99,6 +100,7 @@ typedef icomp::TModelCompWrap<ibase::CSelectableFileConverterComp> SelectableFil
 typedef ibase::CFileConvertOverProcessorComp FileConvertOverProcessor;
 typedef icomp::TModelCompWrap<ibase::CLogComp> Log;
 typedef ibase::CMultiObserverBinderComp MultiObserverBinder;
+typedef ibase::CSingletonApplicationComp SingletonApplication;
 
 typedef icomp::TModelCompWrap<iprm::CSelectableParamsSetComp> SelectableParamsSet;
 typedef icomp::TModelCompWrap<iprm::CParamsManagerComp> ParamsManager;

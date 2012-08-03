@@ -29,22 +29,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\..\..\Partitura\AcfVoce.arp"
-				SubVersionPath="..\..\.."
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -116,22 +110,16 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="FileConvertCopy"
-			/>
-			<Tool
-				Name="SubVersionTransform"
-				AdditionalDependencies="..\svnflag"
-				OutputDir="..\..\..\Partitura\AcfVoce.arp"
-				SubVersionPath="..\..\.."
+				Name="DeployCopy"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="DeployCopy"
+				Name="Arxc"
 			/>
 			<Tool
-				Name="Arxc"
+				Name="FileConvertCopy"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -269,6 +257,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSingletonApplicationComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSize.cpp"
 				>
 			</File>
@@ -371,6 +363,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectableFileConverterComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSingletonApplicationComp.h"
 				>
 			</File>
 			<File

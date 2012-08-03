@@ -12,9 +12,7 @@ namespace iqtgui
 
 
 /**
-	Standard component for a Qt based GUI application.
-	You have several attributes to control the appearance and decoration of the application window,
-	you can define the splash screen and set some information about your application.
+	Standard component for a dialog based GUI application.
 */
 class CDialogApplicationComp: public CApplicationCompBase
 {
