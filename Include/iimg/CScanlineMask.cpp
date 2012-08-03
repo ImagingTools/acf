@@ -495,7 +495,7 @@ void CScanlineMask::Translate(int dx, int dy)
 	m_boundingBox.SetTop(m_boundingBox.GetTop() + dy);
 	m_boundingBox.SetBottom(m_boundingBox.GetBottom() + dy);
 
-	if (dx != NULL){
+    if (dx != 0){
 		m_boundingBox.SetLeft(m_boundingBox.GetLeft() + dx);
 		m_boundingBox.SetRight(m_boundingBox.GetRight() + dx);
 

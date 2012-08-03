@@ -363,7 +363,7 @@ bool TArray<Element, Dimensions>::SetSize(int dimension, int size)
 template <class Element, int Dimensions>
 void TArray<Element, Dimensions>::SetAllElements(const Element& value)
 {
-	for (		Elements::Iterator iter = m_elements.begin();
+    for (		typename Elements::Iterator iter = m_elements.begin();
 				iter != m_elements.end();
 				++iter){
 		*iter = value;
