@@ -16,6 +16,10 @@ namespace ibase
 {
 
 
+/**
+	Singleton application component.
+	This component wraps a "real" application component implementation and allows only a single execution of the application instance. 
+*/
 class CSingletonApplicationComp:
 			public icomp::CComponentBase, 
 			virtual public ibase::IApplication
