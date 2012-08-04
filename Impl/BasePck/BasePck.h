@@ -52,6 +52,7 @@
 #include "iprm/CManagerParamsSetShadowerComp.h"
 #include "iprm/CSelectionConstraintsComp.h"
 #include "iprm/CNameParamComp.h"
+#include "iprm/CSelectionDelegatorComp.h"
 
 #include "i2d/CPosition2dComp.h"
 #include "i2d/CRectangleComp.h"
@@ -112,6 +113,7 @@ typedef icomp::TModelCompWrap<iprm::CSelectionParamComp> SelectionParam;
 typedef iprm::CManagerParamsSetShadowerComp ManagerParamsSetShadower;
 typedef iprm::CSelectionConstraintsComp SelectionConstraints;
 typedef icomp::TModelCompWrap<iprm::CNameParamComp> NameParam;
+typedef iprm::CSelectionDelegatorComp SelectionDelegator;
 
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
