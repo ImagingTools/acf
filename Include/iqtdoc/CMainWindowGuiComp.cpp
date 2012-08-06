@@ -593,7 +593,7 @@ void CMainWindowGuiComp::OnGuiCreated()
 	mainWindowPtr->installEventFilter(this);
 
 	// load the document from command line:
-    QStringList applicationArguments = qApp->arguments();
+	QStringList applicationArguments = qApp->arguments();
 	if (applicationArguments.count() > 1 && m_documentManagerCompPtr.IsValid()){
 		QString documentFileName = applicationArguments[1];
 		idoc::IDocumentManager::FileToTypeMap fileMap;
