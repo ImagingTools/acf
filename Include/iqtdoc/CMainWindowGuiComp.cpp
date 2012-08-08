@@ -922,7 +922,7 @@ void CMainWindowGuiComp::OnOpenDocumentFolder()
 		if (m_documentManagerCompPtr->GetDocumentFromView(*m_activeViewPtr, &info) != NULL){
 			QFileInfo fileInfo(info.filePath);
 			if (fileInfo.absoluteDir().exists()){
-				QDesktopServices::openUrl(fileInfo.absoluteDir().absolutePath());
+				QDesktopServices::openUrl(QString("file:///") + fileInfo.absoluteDir().absolutePath());
 			}
 		}
 	}
