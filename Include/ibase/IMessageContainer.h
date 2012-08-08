@@ -21,10 +21,10 @@ namespace ibase
 /**
 	Common interface for an message container.
 */
-class IMessageContainer: virtual public IMessageConsumer, virtual public iser::ISerializable
+class IMessageContainer: virtual public iser::ISerializable
 {
 public:
-	typedef QVector<MessagePtr> Messages;
+	typedef QVector<ibase::IMessageConsumer::MessagePtr> Messages;
 
 	enum ChangeFlags
 	{

@@ -121,7 +121,7 @@ void CLogGuiComp::OnGuiModelAttached()
 		for (		ibase::IMessageContainer::Messages::const_iterator iter = messages.begin();
 					iter != messages.end();
 					++iter){
-			const ibase::IMessageContainer::MessagePtr& messagePtr = *iter;
+			const ibase::IMessageConsumer::MessagePtr& messagePtr = *iter;
 			if (messagePtr.IsValid()){
 				OnAddMessage(messagePtr.GetPtr(), false);
 			}

@@ -9,6 +9,7 @@
 #include "istd/IInformationProvider.h"
 
 #include "ibase/IMessageContainer.h"
+#include "ibase/IMessageConsumer.h"
 #include "ibase/THierarchicalBase.h"
 
 
@@ -19,7 +20,9 @@ namespace ibase
 /**
 	Basic implementation of a message container.
 */
-class CMessageContainer: public ibase::THierarchicalBase<IHierarchicalMessageContainer>
+class CMessageContainer:
+			public ibase::THierarchicalBase<IHierarchicalMessageContainer>,
+			virtual public IMessageConsumer
 {
 public:
 	CMessageContainer();
@@ -46,10 +49,10 @@ public:
 
 	// reimplemented (ibase::IHierarchicalMessageContainer)
 	virtual int GetChildsCount() const;
-	virtual IMessageContainer* GetChild(int index) const;
+	virtual IHierarchicalMessageContainer* GetChild(int index) const;
 
 private:
-	typedef QList<IMessageContainer::MessagePtr> MessageList;
+	typedef QList<IMessageConsumer::MessagePtr> MessageList;
 	MessageList m_messages;
 
 	typedef QVector<IHierarchicalMessageContainer*> Childs;
