@@ -8,7 +8,7 @@
 
 // ACF includes
 #include "icomp/IComponentEnvironmentManager.h"
-#include "icomp/CComponentBase.h"
+#include "ibase/TLoggerCompWrap.h"
 
 #include "iprm/IFileNameParam.h"
 
@@ -21,12 +21,12 @@ namespace icmpstr
 
 class CRegistryPreviewComp:
 			public QObject,
-			public icomp::CComponentBase,
+			public ibase::CLoggerComponentBase,
 			public IRegistryPreview
 {
 	Q_OBJECT
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CRegistryPreviewComp);
 		I_REGISTER_INTERFACE(icmpstr::IRegistryPreview);
@@ -49,6 +49,8 @@ protected:
 
 protected Q_SLOTS:
 	void OnStateChanged(QProcess::ProcessState state);
+	void OnReadyReadStandardError();
+	void OnReadyReadStandardOutput();
 
 private:
 	QString m_tempFileName;

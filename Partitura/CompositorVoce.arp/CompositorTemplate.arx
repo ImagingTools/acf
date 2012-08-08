@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2290
+          2426
         </Number>
         <Description>
           ACF
@@ -224,7 +224,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
           <AttributeInfo>
             <Id>
               CommandFileName
@@ -234,6 +234,22 @@
             </Type>
             <ExportId>
               PreviewCommandFile
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -258,6 +274,22 @@
               <Value>
                 PackagesLoaderExt
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
