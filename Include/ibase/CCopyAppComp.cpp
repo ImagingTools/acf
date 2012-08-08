@@ -31,17 +31,17 @@ int CCopyAppComp::Execute(int argc, char** argv)
 
 			if (index < argc - 1){
 				if (option == "o"){
-					outputFilePath = argv[index + 1];
+					outputFilePath = QString::fromLocal8Bit(argv[index + 1]);
 					++index;
 				}
 				else if ((option == "input") && *m_needExplicitInputAttrPtr){
-					inputFilePath = argv[index + 1];
+					inputFilePath = QString::fromLocal8Bit(argv[index + 1]);
 					++index;
 				}
 			}
 		}
 		else if (!*m_needExplicitInputAttrPtr && (index == 1)){
-			inputFilePath = argument;
+			inputFilePath = QString::fromLocal8Bit(argument);
 		}
 	}
 

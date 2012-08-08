@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 {
 	QApplication::setStyle("plastique");
 
-	QString configFile;
+	QString configFilePath;
 
 	QString registryFilePath = "default.arx";
 	bool showApplicationInfo = false;
@@ -54,18 +54,18 @@ int main(int argc, char *argv[])
 					componentId = argv[++index];
 				}
 				else if (option == "config"){
-					configFile = argv[++index];
+					configFilePath = QString::fromLocal8Bit(argv[++index]);
 				}
 			}
 		}
 		else if (index == 1){
-			registryFilePath = argument;
+			registryFilePath = QString::fromLocal8Bit(argument);
 		}
 	}
 
 	int retVal = 0;
 
-	iqt::CComponentAccessor componentAccessor(registryFilePath, configFile);
+	iqt::CComponentAccessor componentAccessor(registryFilePath, configFilePath);
 
 	ibase::IApplication* applicationPtr = componentAccessor.GetComponentInterface<ibase::IApplication>(componentId);
 	if (applicationPtr == NULL){

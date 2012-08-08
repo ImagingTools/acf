@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 	packagesLoaderComp.SetRef("Log", &log);
 	packagesLoaderComp.InitComponent();
 
-	QString configFile;
+	QString configFilePath;
 	QString registryFile;
 	for (int index = 1; index < argc; index++){
 		QByteArray argument = argv[index];
@@ -162,16 +162,16 @@ int main(int argc, char *argv[])
 			}
 			else if (index < argc - 1){
 				if (option == "config"){
-					configFile = argv[++index];
+					configFilePath = QString::fromLocal8Bit(argv[++index]);
 				}
 			}
 		}
 		else if (index == 1){
-			registryFile = argument;
+			registryFile = QString::fromLocal8Bit(argument);
 		}
 	}
 
-	packagesLoaderComp.LoadPackages(configFile);
+	packagesLoaderComp.LoadPackages(configFilePath);
 
 	icomp::TSimComponentWrap<CompositorPck::RegistryConsistInfo> registryConsistInfoComp;
 	registryConsistInfoComp.SetRef("EnvironmentManager", &packagesLoaderComp);
