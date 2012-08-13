@@ -64,10 +64,14 @@ void CDocumentProcessingManagerComp::DoProcessingToOutput(const istd::IChangeabl
 				outputDocumentPtr,
 				m_progressManagerCompPtr.GetPtr());
 
+#if QT_VERSION > 0x040800
 	double processingTime = timer.nsecsElapsed() / 1000000.0;
+#else
+	double processingTime = timer.elapsed();
+#endif
 
 	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
-	
+
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing was failed", "Document processing manager");
 
@@ -114,10 +118,14 @@ void CDocumentProcessingManagerComp::DoInPlaceProcessing(istd::IChangeable* inpu
 				outputDocumentPtr.GetPtr(),
 				m_progressManagerCompPtr.GetPtr());
 
+#if QT_VERSION > 0x040800
 	double processingTime = timer.nsecsElapsed() / 1000000.0;
+#else
+	double processingTime = timer.elapsed();
+#endif
 
 	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
-	
+
 	if (retVal != iproc::IProcessor::TS_OK){
 		SendErrorMessage(0, "Processing was failed", "Document processing manager");
 

@@ -43,7 +43,11 @@ void CDocumentProcessingCommandComp::DoDocumentProcessing(const istd::IChangeabl
 		return;
 	}
 
+#if QT_VERSION > 0x040800
 	double processingTime = timer.nsecsElapsed() / 1000000.0;
+#else
+	double processingTime = timer.elapsed();
+#endif
 
 	SendInfoMessage(0, QObject::tr("Processing time: %1 ms").arg(processingTime, 2, 'f', 2), "Document processing manager");
 
