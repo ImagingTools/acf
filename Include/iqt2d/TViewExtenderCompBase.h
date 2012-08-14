@@ -137,7 +137,9 @@ void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, in
 		for (int i = 0; i < shapesCount; ++i){
 			iview::IShape* shapePtr = shapes.GetAt(i);
 			if (shapePtr != NULL){
-				if (isBackground){
+				// If the shape should be placed in the scene background
+				// and is not already a background shape, move it to inactive layer:
+				if (isBackground && (shapePtr->GetLayerType() != iview::IViewLayer::LT_BACKGROUND)){
 					iview::CShapeBase* shapeImplPtr = dynamic_cast<iview::CShapeBase*>(shapePtr);
 					if (shapeImplPtr != NULL){
 						shapeImplPtr->AssignToLayer(iview::IViewLayer::LT_INACTIVE);

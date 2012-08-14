@@ -80,7 +80,6 @@ const i2d::ITransformation2d* CBitmap::GetCalibration() const
 }
 
 
-
 // reimplemented (iimg::IBitmap)
 
 bool CBitmap::IsFormatSupported(PixelFormat pixelFormat) const
@@ -113,6 +112,9 @@ bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size)
 	if (imageFormat != QImage::Format_Invalid){
 		QImage image(size.GetX(), size.GetY(), imageFormat);
 
+		image.setDotsPerMeterX(1000);
+		image.setDotsPerMeterY(1000);
+
 		m_externalBuffer.Reset();
 
 		return SetQImage(image);
@@ -132,6 +134,9 @@ bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, 
 		if ((linesDifference != 0) && (linesDifference != image.scanLine(1) - image.scanLine(0))){
 			return false;	// requested format doesnt fit to internal Qt bitmap representation
 		}
+
+		image.setDotsPerMeterX(1000);
+		image.setDotsPerMeterY(1000);
 
 		m_externalBuffer.SetPtr((quint8*)dataPtr, releaseFlag);
 
@@ -185,6 +190,10 @@ void CBitmap::ResetImage()
 	istd::CChangeNotifier changePtr(this);
 
 	m_image = QImage();
+
+	m_image.setDotsPerMeterX(1000);
+	m_image.setDotsPerMeterY(1000);
+
 	m_externalBuffer.Reset();
 }
 

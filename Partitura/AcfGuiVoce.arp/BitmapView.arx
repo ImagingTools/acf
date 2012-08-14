@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2402
+          2444
         </Number>
         <Description>
           ACF
@@ -275,7 +275,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="8">
+  <ExportedInterfaces count="4">
     <Interface>
       <InterfaceId>
         ibase::ICommandsProvider
@@ -286,26 +286,10 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iimg::IBitmap
+        imod::IObserver
       </InterfaceId>
       <ComponentId>
-        Bitmap
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        iimg::IRasterImage
-      </InterfaceId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        Bitmap
+        ImageView
       </ComponentId>
     </Interface>
     <Interface>
@@ -324,24 +308,24 @@
         ImageView
       </ComponentId>
     </Interface>
-    <Interface>
-      <InterfaceId>
-        iser::ISerializable
-      </InterfaceId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        istd::IChangeable
-      </InterfaceId>
-      <ComponentId>
-        Bitmap
-      </ComponentId>
-    </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="2">
+    <Component>
+      <ExportedId>
+        Bitmap
+      </ExportedId>
+      <ComponentId>
+        Bitmap
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        VisualStatus
+      </ExportedId>
+      <ComponentId>
+        ImageView/VisualStatus
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
     Bitmap viewer with integrated bitmap object
