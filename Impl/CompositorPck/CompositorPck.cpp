@@ -78,9 +78,20 @@ I_EXPORT_COMPONENT(
 			"Help Technical Documentation Note Component" IM_TAG("GUI Help"));
 
 I_EXPORT_COMPONENT(
-			SceneProvider,
-			"Obsolete scene provider used in compositor only",
-			"Scene Provider Extender Display Console" IM_TAG("Deprecated"));
+			Registry,
+			"Model of ACF registry (ARX)",
+			"Registry Components Data Connection Diagram ARP ARX" IM_TAG("Model"));
+
+I_EXPORT_COMPONENT(
+			XpcModel,
+			"Model of ACF configuration (XPC)",
+			"Registry Components Configuration Packages ARP ARX XPC Data Connection" IM_TAG("Model"));
+
+I_EXPORT_COMPONENT(
+			XpcEditorGui,
+			"Display a GUI for editing XPC configurations",
+			IM_TAG("XPC GUI"));
+
 
 
 } // namespace CompositorPck
