@@ -590,8 +590,6 @@ void CMainWindowGuiComp::OnGuiCreated()
 	
  	mainWindowPtr->setAcceptDrops(true);
 
-	mainWindowPtr->installEventFilter(this);
-
 	// load the document from command line:
 	QStringList applicationArguments = qApp->arguments();
 	if (applicationArguments.count() > 1 && m_documentManagerCompPtr.IsValid()){
@@ -609,12 +607,8 @@ void CMainWindowGuiComp::OnGuiCreated()
 			m_commandsObserver.RegisterModel(modelPtr, CPI_DOCUMENT_MANAGER, ibase::ICommandsProvider::CF_COMMANDS);
 		}
 	}
-}
 
-
-void CMainWindowGuiComp::OnGuiDestroyed()
-{
-	BaseClass::OnGuiDestroyed();
+	mainWindowPtr->installEventFilter(this);
 }
 
 
