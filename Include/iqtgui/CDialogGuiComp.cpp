@@ -62,9 +62,7 @@ iqtgui::CGuiComponentDialog* CDialogGuiComp::CreateComponentDialog(int buttons, 
 			dialogPtr->setWindowIcon(QApplication::windowIcon());
 		}
 
-		QSize dialogSize = GetInitialDialogSize();
-
-		dialogPtr->resize(dialogSize.width(), dialogSize.height());
+		SetInitialDialogSize(*dialogPtr);
 	}
 
 	return dialogPtr.PopPtr();
@@ -97,16 +95,18 @@ void CDialogGuiComp::OnCommandActivated()
 
 // private methods
 
-QSize CDialogGuiComp::GetInitialDialogSize() const
+void CDialogGuiComp::SetInitialDialogSize(QDialog& dialog) const
 {
-	const QDesktopWidget* desktopPtr = QApplication::desktop();
-	I_ASSERT(desktopPtr != NULL);
+	if (m_initialDialogSizeAttrPtr.IsValid()){
+		const QDesktopWidget* desktopPtr = QApplication::desktop();
+		I_ASSERT(desktopPtr != NULL);
 
-	QRect screenRect = desktopPtr->screenGeometry();
+		QRect screenRect = desktopPtr->screenGeometry();
 
-	double screenFactor = qMin(0.99, *m_initialDialogSizeAttrPtr);
+		double screenFactor = qMin(0.99, *m_initialDialogSizeAttrPtr);
 
-	return QSize(screenRect.width() * screenFactor, screenRect.height() * screenFactor);
+		dialog.resize(int(screenRect.width() * screenFactor), int(screenRect.height() * screenFactor));
+	}
 }
 
 

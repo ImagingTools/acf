@@ -37,7 +37,7 @@ public:
 		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "MenuName");
 		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "MenuDescription");
 		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "RootMenu");
-		I_ASSIGN(m_initialDialogSizeAttrPtr, "DialogSize", "Initial size of the dialog. The value is factor of the monitor resolution", true, 0.5);
+		I_ASSIGN(m_initialDialogSizeAttrPtr, "DialogSize", "Initial size of the dialog. The value is proportion of dialog size to desktop size", false, 0.5);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IDialog)
@@ -56,7 +56,7 @@ protected Q_SLOTS:
 	void OnCommandActivated();
 
 private:
-	QSize GetInitialDialogSize() const;
+	void SetInitialDialogSize(QDialog& dialog) const;
 
 private:
 	I_REF(iqtgui::IGuiObject, m_guiCompPtr);
