@@ -239,6 +239,10 @@ const typename TPointerVector<Pointer, AccessAdapter>::ElementType& TPointerVect
 template <typename Pointer, class AccessAdapter>
 void TPointerVector<Pointer, AccessAdapter>::SetElementAt(int index, const ElementType& element)
 {
+	typename Elements::iterator delIter = (m_elements.begin() + index);
+
+	AccessAdapter::Delete(*delIter);
+
 	m_elements[index] = element;
 }
 
