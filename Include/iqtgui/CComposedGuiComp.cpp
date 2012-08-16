@@ -105,9 +105,11 @@ void CComposedGuiComp::OnGuiCreated()
 		layoutPtr->addWidget(toolBoxPtr);
 	}
 	else if (*m_designTypeAttrPtr == 2){
-		widgetPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+		widgetPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
 		QTabWidget* tabWidgetPtr = new QTabWidget(widgetPtr);
+		tabWidgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
+
 		int elementsCount = m_guisCompPtr.GetCount();
 		for (int i = 0; i < elementsCount; ++i){
 			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];
@@ -123,11 +125,6 @@ void CComposedGuiComp::OnGuiCreated()
 				guiPtr->CreateGui(panelPtr);
 
 				tabWidgetPtr->addTab(panelPtr, name);
-
-				// TODO: candidate to remove
-				QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-				panelLayoutPtr->addItem(spacerPtr);
 
 				if (*m_insertSpacerAttrPtr){
 					panelLayoutPtr->insertStretch(-1);

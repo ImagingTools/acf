@@ -45,6 +45,7 @@ public:
 		I_ASSIGN(m_insertSpacerAttrPtr, "InsertSpacer", "If enabled, spacer will be added to fill whole available area", true, false);
 		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - simple\n* 1 - tool box\n* 2 - tab\n* 3 - splitter\n* 4 - tool box\n* 5 - tab widget", true, false);
 		I_ASSIGN(m_settingsKeyAttrPtr, "SettingsKey", "Key for saving/restoring of the layout information in the registry", false, "SettingsKey");
+		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
 	I_END_COMPONENT;
 
 	CComposedGuiComp();
@@ -70,6 +71,7 @@ private:
 	I_ATTR(bool, m_insertSpacerAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(QString, m_settingsKeyAttrPtr);
+	I_ATTR(int, m_tabOrientationAttrPtr);
 
 	QSplitter* m_splitterPtr;
 };
