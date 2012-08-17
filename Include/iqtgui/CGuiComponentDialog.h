@@ -52,6 +52,10 @@ public:
 	*/
 	const iqtgui::IGuiObject* GetGuiPtr() const;
 
+protected:
+	// reimplemented (QWidget)
+	virtual void closeEvent(QCloseEvent* eventPtr);
+
 private:
 	QDialogButtonBox* m_buttonsBox;
 	iqtgui::IGuiObject* m_guiObjectPtr;

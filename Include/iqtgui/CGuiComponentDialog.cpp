@@ -3,6 +3,7 @@
 
 // Qt includes
 #include <QtGui/QVBoxLayout>
+#include <QtGui/QCloseEvent>
 
 
 namespace iqtgui
@@ -66,6 +67,28 @@ CGuiComponentDialog::~CGuiComponentDialog()
 		}
 	}
 }
+
+
+// protected methods
+
+// reimplemented (QWidget)
+
+void CGuiComponentDialog::closeEvent(QCloseEvent* eventPtr)
+{
+	if (m_guiObjectPtr != NULL){
+		bool ignoreClosing = false;
+		m_guiObjectPtr->OnTryClose(&ignoreClosing);
+
+		if (ignoreClosing){
+			  eventPtr->ignore();
+
+			  return;
+		}
+	}
+
+	BaseClass::closeEvent(eventPtr);
+}
+
 
 
 } // namespace iqtgui

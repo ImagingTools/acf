@@ -16,7 +16,6 @@
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TRestorableGuiWrap.h"
 #include "iqtgui/CCommandTools.h"
-#include "iqtgui/CGuiComponentDialog.h"
 
 
 namespace iqtgui
