@@ -2,13 +2,18 @@
 #define icmpstr_CXpcEditorComp_included
 
 
-#include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "icomp/CXpcModel.h"
-#include "generated/ui_CXpcEditorComp.h"
+// QT includes
 #include <QtGui/QStringListModel>
-#include "idoc/IDocumentManager.h"
 #include <QtCore/QDir>
 #include <QtGui/QMenu>
+
+// ACF includes
+#include "idoc/IDocumentManager.h"
+#include "iqtgui/TDesignerGuiObserverCompBase.h"
+#include "icomp/CXpcModel.h"
+
+#include "Generated/ui_CXpcEditorComp.h"
+
 
 namespace icmpstr
 {
