@@ -37,7 +37,7 @@ public:
 	/**
 		Get the command line arguments of this application.
 	*/
-	virtual QStringList GetCommandLine() const = 0;
+	virtual QStringList GetApplicationArguments() const = 0;
 };
 
 

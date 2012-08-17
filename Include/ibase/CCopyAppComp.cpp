@@ -76,7 +76,7 @@ QString CCopyAppComp::GetHelpText() const
 }
 
 
-QStringList CCopyAppComp::GetCommandLine() const
+QStringList CCopyAppComp::GetApplicationArguments() const
 {
 	return m_applicationArguments;
 }

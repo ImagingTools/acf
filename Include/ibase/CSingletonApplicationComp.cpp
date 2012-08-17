@@ -61,10 +61,10 @@ QString CSingletonApplicationComp::GetHelpText() const
 }
 
 
-QStringList CSingletonApplicationComp::GetCommandLine() const
+QStringList CSingletonApplicationComp::GetApplicationArguments() const
 {
 	if (m_slaveApplicationCompPtr.IsValid()){
-		return m_slaveApplicationCompPtr->GetCommandLine();
+		return m_slaveApplicationCompPtr->GetApplicationArguments();
 	}
 
 	return QStringList();

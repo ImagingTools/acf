@@ -592,7 +592,7 @@ void CMainWindowGuiComp::OnGuiCreated()
 
 	// load the document from command line:
 	if (m_applicationCompPtr.IsValid()){
-		QStringList applicationArguments = m_applicationCompPtr->GetCommandLine();
+		QStringList applicationArguments = m_applicationCompPtr->GetApplicationArguments();
 		if (applicationArguments.count() > 1 && m_documentManagerCompPtr.IsValid()){
 			QString documentFileName = applicationArguments[1];
 			idoc::IDocumentManager::FileToTypeMap fileMap;

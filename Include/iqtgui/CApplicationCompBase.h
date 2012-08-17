@@ -44,7 +44,7 @@ public:
 
 	// reimplemented (ibase::IApplication)
 	virtual bool InitializeApplication(int argc, char** argv);
-	virtual QStringList GetCommandLine() const;
+	virtual QStringList GetApplicationArguments() const;
 
 protected:
 	QApplication* GetQtApplication() const;

@@ -97,7 +97,7 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 }
 
 
-QStringList CApplicationCompBase::GetCommandLine() const
+QStringList CApplicationCompBase::GetApplicationArguments() const
 {
 	return m_applicationArguments;
 }
