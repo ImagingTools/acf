@@ -4,7 +4,8 @@
 
 // Qt includes
 #include <QtCore/QString>
-
+#include <QtCore/QSet>
+#include <QtCore/QByteArray>
 
 // ACF includes
 #include "iprm/ISelectionParam.h"
@@ -23,6 +24,7 @@ class IParamsSet;
 class IParamsManager: virtual public iprm::ISelectionParam
 {
 public:
+	typedef QSet<QByteArray> TypeIds;
 	/**
 		Bitwise coded flags used to find out supported features.
 	*/
@@ -78,12 +80,22 @@ public:
 	virtual int GetParamsSetsCount() const = 0;
 
 	/**
+		Get list of IDs of supported parameters types for insert.
+		The IDs are context specified.
+		Please note, that some existing parameters can use IDs outside this list.
+	*/
+	virtual TypeIds GetSupportedTypeIds() const = 0;
+
+	/**
 		Insert new parameters set at selected position.
 		\param	index	position in list of parameters or negative value to use default position.
+		\param	typeid	ID of parameter type.
+						This ID is context specified and is used to indicate type of parameters should be added.
+						If no ID is specified, type will be automatically selected.
 		\return			position of inserted new entry or negative value if no insert was possible.
 						For specified index positions (positive \c index value) it will return the same index or negative value.
 	*/
-	virtual int InsertParamsSet(int index = -1) = 0;
+	virtual int InsertParamsSet(const QByteArray& typeId = "", int index = -1) = 0;
 
 	/**
 		Remove parameters set at selected position.
@@ -99,6 +111,13 @@ public:
 		Get selected parameter set.
 	*/
 	virtual IParamsSet* GetParamsSet(int index) const = 0;
+
+	/**
+		Get ID of type of parameter set.
+		This ID is context specified. In some cases returned ID can be outside of list of supported IDs.
+		\sa InsertParamsSet
+	*/
+	virtual QByteArray GetParamsSetTypeId(int index) const = 0;
 
 	/**
 		Get name of specified parameter set.

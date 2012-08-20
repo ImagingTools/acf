@@ -98,8 +98,22 @@ int CParamsManagerComp::GetParamsSetsCount() const
 }
 
 
-int CParamsManagerComp::InsertParamsSet(int index)
+IParamsManager::TypeIds CParamsManagerComp::GetSupportedTypeIds() const
 {
+	IParamsManager::TypeIds retVal;
+
+	retVal.insert(*m_paramsSetTypeIdCompPtr);
+
+	return retVal;
+}
+
+
+int CParamsManagerComp::InsertParamsSet(const QByteArray& typeId, int index)
+{
+	if (!typeId.isEmpty() && (typeId != *m_paramsSetTypeIdCompPtr)){
+		return -1;
+	}
+
 	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
 
 	if (		!m_paramSetsFactPtr.IsValid() ||
@@ -193,10 +207,7 @@ bool CParamsManagerComp::SwapParamsSet(int index1, int index2)
 
 IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 {
-	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
-	if ((index < 0) || (index >= GetParamsSetsCount())){
-		return NULL;
-	}
+	I_ASSERT((index >= 0) && (index < CParamsManagerComp::GetParamsSetsCount()));
 
 	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedCount){
@@ -207,20 +218,41 @@ IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 }
 
 
+QByteArray CParamsManagerComp::GetParamsSetTypeId(int index) const
+{
+	I_ASSERT((index >= 0) && (index < CParamsManagerComp::GetParamsSetsCount()));
+
+	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
+	if (index < fixedCount){
+		int typeIdsCount = m_fixedSetTypeIdsCompPtr.GetCount();
+		if (typeIdsCount > 0){
+			int realIndex = qMin(index, typeIdsCount);
+
+			return m_fixedSetTypeIdsCompPtr[realIndex];
+		}
+	}
+
+	return *m_paramsSetTypeIdCompPtr;
+}
+
+
 QString CParamsManagerComp::GetParamsSetName(int index) const
 {
 	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
-	int fixedCount = m_fixedSetNamesCompPtr.GetCount();
+	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedCount){
-		return m_fixedSetNamesCompPtr[index];
+		int namesCount = m_fixedSetNamesCompPtr.GetCount();
+
+		if (index < namesCount){
+			return m_fixedSetNamesCompPtr[index];
+		}
+		else{
+			return QObject::tr("%1_%2").arg(*m_defaultSetNameCompPtr).arg(index - namesCount + 1);
+		}
 	}
 
-	if (index < fixedCount + int(m_paramSets.size())){
-		return m_paramSets[index - fixedCount].name;
-	}
-
-	return *m_defaultSetNameCompPtr;
+	return m_paramSets[index - fixedCount].name;
 }
 
 
