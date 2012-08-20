@@ -38,9 +38,13 @@ public:
 		I_ASSIGN(m_defaultIndexAttrPtr, "DefaultIndex", "Default selected index", false, 0);
 		I_ASSIGN(m_paramsManagerCompPtr, "ParamsManager", "Manager of parameter set used to realize selection", true, "ParamsManager");
 		I_ASSIGN(m_serializeParamsManagerAttrPtr, "SerializeManager", "If enabled, the connected parameter manager will be part of the object persistence", false, false);
+		I_ASSIGN(m_typeIdAttrPtr, "TypeId", "ID of this parameter set", true, "Default");
 	I_END_COMPONENT;
 
 	CSelectableParamsSetComp();
+
+	// reimplemented (iser::IObject)
+	virtual QByteArray GetFactoryId() const;
 
 	// reimplemented (iprm::IParamsSet)
 	virtual Ids GetParamIds(bool editableOnly = false) const;
@@ -100,6 +104,7 @@ private:
 	I_ATTR(int, m_defaultIndexAttrPtr);
 	I_REF(IParamsManager, m_paramsManagerCompPtr);
 	I_ATTR(bool, m_serializeParamsManagerAttrPtr);
+	I_ATTR(QByteArray, m_typeIdAttrPtr);
 };
 
 

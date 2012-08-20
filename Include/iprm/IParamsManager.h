@@ -113,13 +113,6 @@ public:
 	virtual IParamsSet* GetParamsSet(int index) const = 0;
 
 	/**
-		Get ID of type of parameter set.
-		This ID is context specified. In some cases returned ID can be outside of list of supported IDs.
-		\sa InsertParamsSet
-	*/
-	virtual QByteArray GetParamsSetTypeId(int index) const = 0;
-
-	/**
 		Get name of specified parameter set.
 	*/
 	virtual QString GetParamsSetName(int index) const = 0;

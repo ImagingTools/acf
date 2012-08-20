@@ -33,6 +33,7 @@ public:
 		I_ASSIGN_MULTI_0(m_slaveParamsCompPtr, "SlaveSets", "List of slave parameter sets", false);
 		I_ASSIGN_MULTI_0(m_parametersCompPtr, "Parameters", "Parameters", true);
 		I_ASSIGN_MULTI_0(m_parametersIdAttrPtr, "ParametersId", "ID of each paremeter in 'Parameters'", true);
+		I_ASSIGN(m_typeIdAttrPtr, "TypeId", "ID of this parameter set", true, "Default");
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::IParamsSet)
@@ -59,6 +60,7 @@ private:
 	I_MULTIREF(IParamsSet, m_slaveParamsCompPtr);
 	I_MULTIREF(iser::ISerializable, m_parametersCompPtr);
 	I_MULTIATTR(QByteArray, m_parametersIdAttrPtr);
+	I_ATTR(QByteArray, m_typeIdAttrPtr);
 };
 
 

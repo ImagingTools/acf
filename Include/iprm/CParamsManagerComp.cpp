@@ -52,7 +52,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 			ParamSet& paramsSet = m_paramSets.back();
 
 			paramsSet.paramSetPtr.SetPtr(newParamsSetPtr);
-			paramsSet.name = *m_defaultSetNameCompPtr;
+			paramsSet.name = *m_defaultSetNameAttrPtr;
 
 			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 			if (modelPtr != NULL){
@@ -102,7 +102,7 @@ IParamsManager::TypeIds CParamsManagerComp::GetSupportedTypeIds() const
 {
 	IParamsManager::TypeIds retVal;
 
-	retVal.insert(*m_paramsSetTypeIdCompPtr);
+	retVal.insert(*m_paramsSetTypeIdAttrPtr);
 
 	return retVal;
 }
@@ -110,7 +110,7 @@ IParamsManager::TypeIds CParamsManagerComp::GetSupportedTypeIds() const
 
 int CParamsManagerComp::InsertParamsSet(const QByteArray& typeId, int index)
 {
-	if (!typeId.isEmpty() && (typeId != *m_paramsSetTypeIdCompPtr)){
+	if (!typeId.isEmpty() && (typeId != *m_paramsSetTypeIdAttrPtr)){
 		return -1;
 	}
 
@@ -128,7 +128,7 @@ int CParamsManagerComp::InsertParamsSet(const QByteArray& typeId, int index)
 
 	istd::CChangeNotifier notifier(this, CF_SET_INSERTED | CF_OPTIONS_CHANGED);
 
-	QString defaultSetName = m_defaultSetNameCompPtr.IsValid() ? *m_defaultSetNameCompPtr: "unnamed";
+	QString defaultSetName = m_defaultSetNameAttrPtr.IsValid() ? *m_defaultSetNameAttrPtr: "unnamed";
 
 	ParamSet paramSet;
 	
@@ -224,15 +224,15 @@ QByteArray CParamsManagerComp::GetParamsSetTypeId(int index) const
 
 	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedCount){
-		int typeIdsCount = m_fixedSetTypeIdsCompPtr.GetCount();
+		int typeIdsCount = m_fixedSetTypeIdsAttrPtr.GetCount();
 		if (typeIdsCount > 0){
 			int realIndex = qMin(index, typeIdsCount);
 
-			return m_fixedSetTypeIdsCompPtr[realIndex];
+			return m_fixedSetTypeIdsAttrPtr[realIndex];
 		}
 	}
 
-	return *m_paramsSetTypeIdCompPtr;
+	return *m_paramsSetTypeIdAttrPtr;
 }
 
 
@@ -242,13 +242,13 @@ QString CParamsManagerComp::GetParamsSetName(int index) const
 
 	int fixedCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedCount){
-		int namesCount = m_fixedSetNamesCompPtr.GetCount();
+		int namesCount = m_fixedSetNamesAttrPtr.GetCount();
 
 		if (index < namesCount){
-			return m_fixedSetNamesCompPtr[index];
+			return m_fixedSetNamesAttrPtr[index];
 		}
 		else{
-			return QObject::tr("%1_%2").arg(*m_defaultSetNameCompPtr).arg(index - namesCount + 1);
+			return QObject::tr("%1_%2").arg(*m_defaultSetNameAttrPtr).arg(index - namesCount + 1);
 		}
 	}
 
@@ -260,7 +260,7 @@ bool CParamsManagerComp::SetParamsSetName(int index, const QString& name)
 {
 	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
-	int fixedCount = m_fixedSetNamesCompPtr.GetCount();
+	int fixedCount = m_fixedSetNamesAttrPtr.GetCount();
 	if (index < fixedCount){
 		return false;
 	}

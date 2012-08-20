@@ -120,13 +120,15 @@ void CComposedParamsSetComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	BaseClass2::SetParametersTypeId(*m_typeIdAttrPtr);
+
 	int setsCount = qMin(m_parametersCompPtr.GetCount(), m_parametersIdAttrPtr.GetCount());
 
 	for (int i = 0; i < setsCount; ++i){
 		iser::ISerializable* paramPtr = m_parametersCompPtr[i];
 		const QByteArray& id = m_parametersIdAttrPtr[i];
 
-		SetEditableParameter(id, paramPtr);
+		BaseClass2::SetEditableParameter(id, paramPtr);
 	}
 }
 

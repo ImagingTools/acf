@@ -66,6 +66,18 @@ public:
 	*/
 	const ParameterInfos& GetParameterInfos() const;
 
+	/**
+		Get ID of this parameters type.
+	*/
+	const QByteArray& GetParametersTypeId() const;
+	/**
+		Set ID of this parameters type.
+	*/
+	void SetParametersTypeId(const QByteArray& id);
+
+	// reimplemented (iser::IObject)
+	virtual QByteArray GetFactoryId() const;
+
 	// reimplemented (iprm::IParamsSet)
 	virtual Ids GetParamIds(bool editableOnly = false) const;
 	virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
@@ -83,6 +95,8 @@ protected:
 
 private:
 	ParameterInfos m_params;
+
+	QByteArray m_paramsTypeId;
 
 	const IParamsSet* m_slaveSetPtr;
 };
