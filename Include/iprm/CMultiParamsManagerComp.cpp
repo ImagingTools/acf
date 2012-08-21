@@ -434,6 +434,7 @@ void CMultiParamsManagerComp::OnComponentDestroyed()
 	BaseClass::OnComponentDestroyed();
 }
 
+
 int CMultiParamsManagerComp::DeserializeParamsSet(const QByteArray& typeId, int index, const QString& name)
 {
 	if (!typeId.isEmpty()){
