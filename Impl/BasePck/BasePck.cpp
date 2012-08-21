@@ -288,6 +288,11 @@ I_EXPORT_COMPONENT(
 			"Model-based processing trigger",
 			"Processor Model Trigger" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processing"));
 
+I_EXPORT_COMPONENT(
+			MultiParamsManager,
+			"Manager of multi parameters set",
+			"Parameters Set Multi Manager" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition Parameter"));
+
 
 } // namespace BasePck
 
