@@ -2,6 +2,10 @@
 #define iqtprm_CParamsManagerGuiComp_included
 
 
+//Qt includes
+#include <QtGui/QMenu>
+
+// ACF includes
 #include "iprm/IParamsManager.h"
 #include "iprm/ISelectionParam.h"
 
@@ -41,6 +45,7 @@ protected Q_SLOTS:
 	void on_DownButton_clicked();
 	void on_ParamsTree_itemSelectionChanged();
 	void on_ParamsTree_itemChanged(QTreeWidgetItem* item, int column);
+	void OnAddMenuOptionClicked(QAction* action);
 
 protected:
 	void UpdateActions();
@@ -65,6 +70,7 @@ private:
 	I_ATTR(bool, m_allowUpDownAttrPtr);
 
 	imod::IModel* m_lastConnectedModelPtr;
+	QMenu m_startVariableMenus;
 };
 
 

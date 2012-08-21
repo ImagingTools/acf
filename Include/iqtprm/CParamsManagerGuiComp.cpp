@@ -315,6 +315,26 @@ void CParamsManagerGuiComp::OnGuiModelAttached()
 		if (*m_allowUpDownAttrPtr){
 			areUpDownButtonsNeeded = ((flags & iprm::IParamsManager::MF_SUPPORT_SWAP) != 0);
 		}
+
+		iprm::IParamsManager::TypeIds typeIds = objectPtr->GetSupportedTypeIds();
+
+		if (typeIds.size() > 1){
+			iprm::IParamsManager::TypeIds::iterator i;
+			// fill the menu
+			for (i = typeIds.begin(); i != typeIds.end(); ++i){
+				//translate
+				QString typeName(*i);
+				QString translatedTypeName = tr(*i);
+
+				QAction* action = m_startVariableMenus.addAction(translatedTypeName);
+
+				//store original type name
+				action->setData(typeName);
+			}
+
+			AddButton->setMenu(&m_startVariableMenus);
+			QObject::connect(&m_startVariableMenus, SIGNAL(triggered(QAction*)), this, SLOT(OnAddMenuOptionClicked(QAction*)));
+		}
 	}
 
 	AddRemoveButtonsFrame->setVisible(areAddRemoveButtonsNeeded);
@@ -364,6 +384,17 @@ void CParamsManagerGuiComp::OnGuiDestroyed()
 	}
 
 	BaseClass::OnGuiDestroyed();
+}
+
+
+void CParamsManagerGuiComp::OnAddMenuOptionClicked(QAction* action)
+{
+	iprm::IParamsManager* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		QByteArray typeName = action->data().toByteArray();
+
+		objectPtr->InsertParamsSet(typeName, -1);
+	}
 }
 
 
