@@ -509,6 +509,10 @@
 				RelativePath="..\TSerializableContainer.h"
 				>
 			</File>
+			<File
+				RelativePath="..\TVersionInfoBase.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
