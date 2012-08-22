@@ -250,8 +250,13 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			Polygon,
-			"Polygon object",
+			"Polygon 2D object",
 			"Polygon2D Object Parameter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
+
+I_EXPORT_COMPONENT(
+			Polyline,
+			"Polyline 2D object",
+			"Polyline2D Object Parameter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
 
 I_EXPORT_COMPONENT(
 			AffineTransformation2d,

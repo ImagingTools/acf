@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPolylineComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPolylineExNodeBase.cpp"
 				>
 			</File>
@@ -371,6 +375,10 @@
 			</File>
 			<File
 				RelativePath="..\CPolyline.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CPolylineComp.h"
 				>
 			</File>
 			<File

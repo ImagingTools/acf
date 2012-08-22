@@ -1,4 +1,4 @@
-#include "i2d/CPolygonComp.h"
+#include "i2d/CPolylineComp.h"
 
 
 namespace i2d
@@ -9,7 +9,7 @@ namespace i2d
 
 // reimplemented (icomp::CComponentBase)
 
-void CPolygonComp::OnComponentCreated()
+void CPolylineComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
@@ -20,6 +20,8 @@ void CPolygonComp::OnComponentCreated()
 	for (int i = 0; i < count; i++){
 		BaseClass2::InsertNode(i2d::CVector2d(m_xAttrPtr[i], m_yAttrPtr[i]));
 	}
+
+	BaseClass2::SetClosed(*m_isClosedAttrPtr);
 }
 
 

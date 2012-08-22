@@ -20,6 +20,7 @@ class CPolygonComp: public icomp::CComponentBase, public CPolygon
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef CPolygon BaseClass2;
 
 	I_BEGIN_COMPONENT(CPolygonComp);
 		I_REGISTER_INTERFACE(CPolygon);
