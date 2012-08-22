@@ -13,25 +13,20 @@ namespace ibase
 /**
 	Component representation of the Qt module version.
 */
-class CQtVersionInfoComp: public ibase::CVersionInfoCompBase
+class CQtVersionInfoComp: public ibase::CVersionInfoLoggerCompBase
 {
 public:
-	typedef ibase::CVersionInfoCompBase BaseClass;
+	typedef ibase::CVersionInfoLoggerCompBase BaseClass;
 
 	I_BEGIN_COMPONENT(CQtVersionInfoComp);
 	I_END_COMPONENT;
 
-	enum QtVersionIds
+	enum VersionId
 	{
 		/**
 			Version of Qt framework against the actual module was compiled.
 		*/
-		QVI_COMPILED = IVersionInfo::UserVersionId + 1,
-
-		/**
-			Version of Qt framework registered in the current runtime system.
-		*/
-		QVI_RUNTIME
+		VI_QT_VERSION = QtVersionId
 	};
 
 	// reimplemented (iser::IVersionInfo)
@@ -39,6 +34,16 @@ public:
 	virtual bool GetVersionNumber(int versionId, quint32& result) const;
 	virtual QString GetVersionIdDescription(int versionId) const;
 	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const;
+
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
+private:
+	/**
+		Get used runtime version of the Qt framework
+	*/
+	static quint32 GetRuntimeVersion();
 };
 
 

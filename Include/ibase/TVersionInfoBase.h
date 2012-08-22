@@ -34,10 +34,6 @@ private:
 };
 
 
-typedef ibase::TVersionInfoBase<icomp::CComponentBase> CVersionInfoCompBase;
-typedef ibase::TVersionInfoBase<ibase::CLoggerComponentBase> CVersionInfoLoggerCompBase;
-
-
 // public methods
 
 // reimplemented (iser::IVersionInfo)
@@ -99,7 +95,14 @@ QString TVersionInfoBase<BaseComponent>::GetEncodedVersionName(int versionId, qu
 }
 
 
+// Standard definitions
+typedef TVersionInfoBase<icomp::CComponentBase> CVersionInfoCompBase;
+typedef TVersionInfoBase<CLoggerComponentBase> CVersionInfoLoggerCompBase;
+
+
 } // namespace ibase
 
 
 #endif // !ibase_TVersionInfoBase_included
+
+

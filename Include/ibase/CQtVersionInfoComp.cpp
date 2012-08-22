@@ -11,7 +11,7 @@ iser::IVersionInfo::VersionIds CQtVersionInfoComp::GetVersionIds() const
 {
 	IVersionInfo::VersionIds ids = BaseClass::GetVersionIds();
 
-		ids << QVI_COMPILED << QVI_RUNTIME;
+	ids << VI_QT_VERSION;
 
 	return ids;
 }
@@ -20,18 +20,8 @@ iser::IVersionInfo::VersionIds CQtVersionInfoComp::GetVersionIds() const
 bool CQtVersionInfoComp::GetVersionNumber(int versionId, quint32& result) const
 {
 	switch (versionId){
-		case QVI_COMPILED:
+		case VI_QT_VERSION:
 			result = QT_VERSION;
-			return true;
-
-		case QVI_RUNTIME:
-			QString qtVersionString = qVersion();
-			int major = qtVersionString.mid(0, 1).toInt();
-			int minor = qtVersionString.mid(2, 1).toInt();
-			int fix = qtVersionString.mid(4, 1).toInt();
-			
-			result = (major << 16) | (minor << 8) | fix;
-
 			return true;
 	}
 
@@ -42,11 +32,8 @@ bool CQtVersionInfoComp::GetVersionNumber(int versionId, quint32& result) const
 QString CQtVersionInfoComp::GetVersionIdDescription(int versionId) const
 {
 	switch (versionId){
-		case QVI_COMPILED:
-			return "Qt Compiled Version";
-
-		case QVI_RUNTIME:
-			return "Qt Runtime Version";
+		case VI_QT_VERSION:
+			return "Qt Framework";
 	}
 
 	return BaseClass::GetVersionIdDescription(versionId);
@@ -56,14 +43,39 @@ QString CQtVersionInfoComp::GetVersionIdDescription(int versionId) const
 QString CQtVersionInfoComp::GetEncodedVersionName(int versionId, quint32 versionNumber) const
 {
 	switch (versionId){
-		case QVI_COMPILED:
+		case VI_QT_VERSION:
 			return QT_VERSION_STR;
-
-		case QVI_RUNTIME:
-			return qVersion();
 	}
 
 	return BaseClass::GetEncodedVersionName(versionId, versionNumber);
+}
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CQtVersionInfoComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (QT_VERSION != GetRuntimeVersion()){
+		SendWarningMessage(0, QObject::tr("The runtime version of Qt framework doesn't match the version used by creation of ACF"));
+	}
+}
+
+
+
+// private static methods
+
+quint32 CQtVersionInfoComp::GetRuntimeVersion()
+{
+	QString qtVersionString = qVersion();
+	int major = qtVersionString.mid(0, 1).toInt();
+	int minor = qtVersionString.mid(2, 1).toInt();
+	int fix = qtVersionString.mid(4, 1).toInt();
+			
+	return (major << 16) | (minor << 8) | fix;
 }
 
 

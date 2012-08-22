@@ -31,6 +31,7 @@ public:
 	enum VersionId
 	{
 		AcfVersionId = 0,
+		QtVersionId = 1023,
 		UserVersionId = 1024
 	};
 
