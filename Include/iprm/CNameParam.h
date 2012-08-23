@@ -11,8 +11,7 @@ namespace iprm
 
 
 /**
-	Template based implementation of a named object. 
-	This class is a pseudo-implementation of iprm::INameParam interface.
+	Implementation of a named object over iprm::INameParam interface.
 
 	\ingroup Helpers
 */
