@@ -1,57 +1,21 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="3">
+    <VersionInfos count="1">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2470
+          2476
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
-      <Version>
-        <Id>
-          1025
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Compiled Version
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1026
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Runtime Version
-        </Description>
-      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
-    <Element>
-      <ComponentName>
-        QtVersionInfo
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        150
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         BaseInfo
