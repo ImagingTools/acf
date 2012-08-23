@@ -20,6 +20,9 @@ namespace imod
 	Allow to connect as observer to multiple models and call BeginChanges and EndChanges on some its changes.
 	In other words: it reflects the changes of observed objects as its own changes.
 	\sa imod::CMultiModelDispatcherBase.
+
+	\ingroup ModelObserver
+
 */
 class CMultiModelBridgeBase: virtual public IObserver, virtual public istd::IChangeable
 {

@@ -21,6 +21,8 @@ namespace iqtgui
 
 /**
 	Base class for all Qt GUI componentes.
+
+	\ingroup ModelObserver
  */
 template <class UI, class Model, class WidgetType = QWidget>
 class TDesignerGuiObserverCompBase:

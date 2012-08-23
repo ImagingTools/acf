@@ -23,6 +23,8 @@ namespace imod
 	\note Notification consumer class must implement the method
 	void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr) to support the notification callback.
 	\sa imod::CMultiModelBridgeBase.
+
+	\ingroup ModelObserver
 */
 class CMultiModelDispatcherBase: virtual public istd::IPolymorphic
 {
