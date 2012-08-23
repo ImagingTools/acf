@@ -15,7 +15,7 @@ namespace iqt
 
 
 /**
-	Bitmap implementation based on Qt QImage.
+	Union of a bitmap objects and its samples represented as a 2D sampled function.
 */
 class CBitmapSurface: public iqt::CBitmap, public imath::CSampledFunction2d
 {
