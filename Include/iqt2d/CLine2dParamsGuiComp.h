@@ -5,7 +5,7 @@
 // ACF includes
 #include "i2d/CLine2d.h"
 
-#include "iview/CInteractiveArrowShape.h"
+#include "iview/CInteractiveLineShape.h"
 
 #include "iqt2d/TShapeParamsGuiCompBase.h"
 #include "iqt2d/Generated/ui_CLine2dParamsGuiComp.h"
@@ -18,7 +18,7 @@ namespace iqt2d
 class CLine2dParamsGuiComp:
 			public iqt2d::TShapeParamsGuiCompBase<
 						Ui::CLine2dParamsGuiComp,
-						iview::CInteractiveArrowShape,
+						iview::CInteractiveLineShape,
 						i2d::CLine2d>
 {
 	Q_OBJECT
@@ -26,7 +26,7 @@ class CLine2dParamsGuiComp:
 public:
 	typedef iqt2d::TShapeParamsGuiCompBase<
 				Ui::CLine2dParamsGuiComp,
-				iview::CInteractiveArrowShape,
+				iview::CInteractiveLineShape,
 				i2d::CLine2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CLine2dParamsGuiComp);

@@ -228,6 +228,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CInteractiveLineShape.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CInteractiveParallelogramShape.cpp"
 				>
 			</File>
@@ -407,6 +411,10 @@
 			</File>
 			<File
 				RelativePath="..\CInteractiveLabelShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CInteractiveLineShape.h"
 				>
 			</File>
 			<File
