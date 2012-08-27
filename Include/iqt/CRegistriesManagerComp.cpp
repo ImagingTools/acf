@@ -9,6 +9,7 @@
 #include "iser/CXmlFileReadArchive.h"
 
 #include "icomp/CRegistry.h"
+#include "icomp/CXpcModel.h"
 
 #include "iqt/CSystem.h"
 
@@ -230,95 +231,44 @@ bool CRegistriesManagerComp::LoadConfigFile(const QString& configFile)
 	}
 
 	QFileInfo fileInfo(correctedPath);
+
 	QDir baseDir = fileInfo.absoluteDir();
+
 	QString configFilePath = fileInfo.absoluteFilePath();
 
 	SendVerboseMessage(QObject::tr("Load configuration file: %1").arg(configFilePath));
 
 	iser::CXmlFileReadArchive archive(configFilePath);
 
+	icomp::CXpcModel configurationData;
+	if (!configurationData.Serialize(archive)){
+		SendErrorMessage(iser::IFileLoader::MI_CANNOT_LOAD, QObject::tr("Cannot open configuration file: %1").arg(configFilePath));
+
+		return false;
+	}
+
 	bool retVal = true;
 
-	iser::CArchiveTag packageDirsTag("PackageDirs", "List of package directories", true);
-	iser::CArchiveTag dirPathTag("Dir", "List of package directories", true);
-	iser::CArchiveTag packageFilesTag("PackageFiles", "List of package files", true);
-	iser::CArchiveTag filePathTag("FilePath", "Path of single file", true);
-
-	iser::CArchiveTag configFilesTag("ConfigFiles", "List of included config files", true);
-
-	int configFilesCount = 0;
-
-	retVal = retVal && archive.BeginMultiTag(configFilesTag, filePathTag, configFilesCount);
-
-	if (!retVal){
-		SendVerboseMessage(QObject::tr("Load of configuration file: %1 failed").arg(configFilePath));
-	
-		return false;
-	}
-
+	int configFilesCount = configurationData.GetConfigFilesCount();
 	for (int i = 0; i < configFilesCount; ++i){
-		retVal = retVal && archive.BeginTag(filePathTag);
-		QString filePath;
-		retVal = retVal && archive.Process(filePath);
-		QString enrolledPath = iqt::CSystem::GetEnrolledPath(filePath);
-		LoadConfigFile(baseDir.absoluteFilePath(enrolledPath));
-
-		retVal = retVal && archive.EndTag(filePathTag);
+		QString configFilePath = iqt::CSystem::GetEnrolledPath(configurationData.GetConfFile(i));
+		retVal = LoadConfigFile(baseDir.absoluteFilePath(configFilePath)) && retVal;
 	}
 
-	retVal = retVal && archive.EndTag(configFilesTag);
-
-
-	int dirsCount = 0;
-	retVal = retVal && archive.BeginMultiTag(packageDirsTag, dirPathTag, dirsCount);
-
-	if (!retVal){
-		SendVerboseMessage(QObject::tr("Load of configuration file: %1 failed").arg(configFilePath));
-
-		return false;
-	}
-
-	for (int i = 0; i < dirsCount; ++i){
-		retVal = retVal && archive.BeginTag(dirPathTag);
-		QString dirPath;
-		retVal = retVal && archive.Process(dirPath);
+	int packageDirsCount = configurationData.GetPackageDirsCount();
+	for (int i = 0; i < packageDirsCount; ++i){
 		QString correctedPath;
-		if (retVal && CheckAndMarkPath(m_usedPackageDirsList, baseDir, dirPath, correctedPath)){
+		if (CheckAndMarkPath(m_usedPackageDirsList, baseDir, configurationData.GetPackageDir(i), correctedPath)){
 			RegisterPackagesDir(correctedPath);
 		}
-
-		retVal = retVal && archive.EndTag(dirPathTag);
 	}
 
-	retVal = retVal && archive.EndTag(packageDirsTag);
-
-	int filesCount = 0;
-	retVal = retVal && archive.BeginMultiTag(packageFilesTag, filePathTag, filesCount);
-
-	if (!retVal){
-		SendVerboseMessage(QObject::tr("Load of configuration file: %1 failed").arg(configFilePath));
-
-		return false;
-	}
-
-	for (int i = 0; i < filesCount; ++i){
-		retVal = retVal && archive.BeginTag(filePathTag);
-		QString filePath;
-		retVal = retVal && archive.Process(filePath);
+	int packagesCount = configurationData.GetPackagesCount();
+	for (int i = 0; i < packagesCount; ++i){
 		QString correctedPath;
-		if (retVal && CheckAndMarkPath(m_usedPackageFilesList, baseDir, filePath, correctedPath)){
+		if (CheckAndMarkPath(m_usedPackageFilesList, baseDir, configurationData.GetPackage(i), correctedPath)){
 			RegisterPackageFile(correctedPath);
 		}
-
-		retVal = retVal && archive.EndTag(filePathTag);
-	}
-
-	retVal = retVal && archive.EndTag(packageFilesTag);
-
-	if (!retVal){
-		SendVerboseMessage(QObject::tr("Load of configuration file: %1 failed").arg(configFilePath));
-
-		return false;
 	}
 
 	return retVal;

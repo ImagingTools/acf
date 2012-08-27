@@ -13,9 +13,11 @@
 
 #include "iser/CXmlFileReadArchive.h"
 
-#include "icomp/export.h"
+#include "icomp/CXpcModel.h"
 
 #include "iqt/CSystem.h"
+
+#include "icomp/export.h"
 
 
 namespace iqt
@@ -326,7 +328,12 @@ bool CPackagesLoaderComp::RegisterPackagesDir(const QString& path)
 
 bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 {
-	QFileInfo fileInfo(configFile);
+	QString correctedPath;
+	if (!CheckAndMarkPath(QDir(), configFile, correctedPath)){
+		return true;
+	}
+
+	QFileInfo fileInfo(correctedPath);
 
 	QDir baseDir = fileInfo.absoluteDir();
 
@@ -336,79 +343,36 @@ bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 
 	iser::CXmlFileReadArchive archive(configFilePath);
 
+	icomp::CXpcModel configurationData;
+	if (!configurationData.Serialize(archive)){
+		SendErrorMessage(iser::IFileLoader::MI_CANNOT_LOAD, tr("Cannot open configuration file: %1").arg(configFilePath));
+
+		return false;
+	}
+
 	bool retVal = true;
 
-	iser::CArchiveTag packageDirsTag("PackageDirs", "List of package directories", true);
-	iser::CArchiveTag dirPathTag("Dir", "List of package directories", true);
-	iser::CArchiveTag packageFilesTag("PackageFiles", "List of package files", true);
-	iser::CArchiveTag filePathTag("FilePath", "Path of single file", true);
-
-	iser::CArchiveTag configFilesTag("ConfigFiles", "List of included config files", true);
-
-	int configFilesCount = 0;
-
-	retVal = retVal && archive.BeginMultiTag(configFilesTag, filePathTag, configFilesCount);
-
-	if (!retVal){
-		return false;
-	}
-
+	int configFilesCount = configurationData.GetConfigFilesCount();
 	for (int i = 0; i < configFilesCount; ++i){
-		retVal = retVal && archive.BeginTag(filePathTag);
-		QString filePath;
-		retVal = retVal && archive.Process(filePath);
-		QString correctedPath;
-		if (retVal && CheckAndMarkPath(baseDir, filePath, correctedPath)){
-			LoadConfigFile(correctedPath);
-		}
-
-		retVal = retVal && archive.EndTag(filePathTag);
+		QString configFilePath = iqt::CSystem::GetEnrolledPath(configurationData.GetConfFile(i));
+		retVal = LoadConfigFile(baseDir.absoluteFilePath(configFilePath)) && retVal;
 	}
 
-	retVal = retVal && archive.EndTag(configFilesTag);
-
-
-	int dirsCount = 0;
-	retVal = retVal && archive.BeginMultiTag(packageDirsTag, dirPathTag, dirsCount);
-
-	if (!retVal){
-		return false;
-	}
-
-	for (int i = 0; i < dirsCount; ++i){
-		retVal = retVal && archive.BeginTag(dirPathTag);
-		QString dirPath;
-		retVal = retVal && archive.Process(dirPath);
+	int packageDirsCount = configurationData.GetPackageDirsCount();
+	for (int i = 0; i < packageDirsCount; ++i){
 		QString correctedPath;
-		if (retVal && CheckAndMarkPath(baseDir, dirPath, correctedPath)){
+		if (CheckAndMarkPath(baseDir, configurationData.GetPackageDir(i), correctedPath)){
 			RegisterPackagesDir(correctedPath);
 		}
-
-		retVal = retVal && archive.EndTag(dirPathTag);
 	}
 
-	retVal = retVal && archive.EndTag(packageDirsTag);
-
-	int filesCount = 0;
-	retVal = retVal && archive.BeginMultiTag(packageFilesTag, filePathTag, filesCount);
-
-	if (!retVal){
-		return false;
-	}
-
-	for (int i = 0; i < filesCount; ++i){
-		retVal = retVal && archive.BeginTag(filePathTag);
-		QString filePath;
-		retVal = retVal && archive.Process(filePath);
+	int packagesCount = configurationData.GetPackagesCount();
+	for (int i = 0; i < packagesCount; ++i){
 		QString correctedPath;
-		if (retVal && CheckAndMarkPath(baseDir, filePath, correctedPath)){
+		if (CheckAndMarkPath(baseDir, configurationData.GetPackage(i), correctedPath)){
 			RegisterPackageFile(correctedPath);
 		}
-
-		retVal = retVal && archive.EndTag(filePathTag);
 	}
-
-	retVal = retVal && archive.EndTag(packageFilesTag);
 
 	return retVal;
 }
@@ -470,7 +434,7 @@ CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingReg
 bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const
 {
 	QString fullPath = QFileInfo(directory.filePath(iqt::CSystem::GetEnrolledPath(path))).canonicalFilePath();
-	if (m_usedFilesList.find(fullPath) == m_usedFilesList.end()){
+	if (!fullPath.isEmpty() && (m_usedFilesList.find(fullPath) == m_usedFilesList.end())){
 		m_usedFilesList.insert(fullPath);
 
 		resultPath = fullPath;

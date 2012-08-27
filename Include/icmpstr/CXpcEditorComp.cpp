@@ -359,6 +359,16 @@ void CXpcEditorComp::on_ConfigPathView_doubleClicked(const QModelIndex& index)
 }
 
 
+void CXpcEditorComp::on_RegistryPathView_doubleClicked(const QModelIndex& index)
+{
+	QDir baseDir = GetCurrentDocumentDir();
+	QString unrolledPath = iqt::CSystem::GetEnrolledPath(index.data().toString());
+	QString absolutePath = baseDir.absoluteFilePath(unrolledPath);
+
+	m_docMgrPtr->FileOpen(NULL, &absolutePath);
+}
+
+
 void CXpcEditorComp::on_ConfigPathEdit_editingFinished()
 {
 	QModelIndex index = ConfigPathView->currentIndex();
@@ -390,6 +400,7 @@ void CXpcEditorComp::on_PackagePathEdit_editingFinished()
 
 	PackagePathView->model()->setData(index, PackagePathEdit->text());
 }
+
 
 void CXpcEditorComp::on_RegistryPathEdit_editingFinished()
 {

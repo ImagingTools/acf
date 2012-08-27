@@ -74,6 +74,7 @@ private Q_SLOTS:
 
 	// navigation
 	void on_ConfigPathView_doubleClicked(const QModelIndex& index);
+	void on_RegistryPathView_doubleClicked(const QModelIndex& index);
 
 	// update selected table row
 	void on_ConfigPathEdit_editingFinished();

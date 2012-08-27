@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2484
+          2486
         </Number>
         <Description>
           ACF
@@ -37,16 +37,16 @@
   </PackageFiles>
   <RegistryFiles count="4">
     <FilePath>
-      ../Docs/Tutorial/Partitura/CompositeTemplate.arx
+      ../Partitura/CompositeTemplate.arx
     </FilePath>
     <FilePath>
-      ../Docs/Tutorial/Partitura/DocView.arx
+      ../Partitura/DocView.arx
     </FilePath>
     <FilePath>
-      ../Docs/Tutorial/Partitura/FileExplorerDemo.arx
+      ../Partitura/FileExplorerDemo.arx
     </FilePath>
     <FilePath>
-      ../Docs/Tutorial/Partitura/SdiImageViewer.arx
+      ../Partitura/SdiImageViewer.arx
     </FilePath>
   </RegistryFiles>
 </Acf>
