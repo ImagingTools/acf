@@ -192,7 +192,7 @@ int qHash(const istd::CVarIndex& index)
 	for (		QVector<int>::ConstIterator iter = index.m_elements.begin();
 				iter != index.m_elements.end();
 				++iter){
-		retVal = (retVal *3) ^ *iter;
+		retVal = (retVal * 3) ^ *iter;
 	}
 
 	return retVal;
