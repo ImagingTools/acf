@@ -38,10 +38,10 @@ public:
 	*/
 	enum ChangeFlags
 	{
-		CF_COMPONENT_ADDED = 1 << 24,
-		CF_COMPONENT_REMOVED = 1 << 25,
-		CF_COMPONENT_EXPORTED = 1 << 26,
-		CF_COMPONENT_RENAMED = 1 << 27,
+		CF_ELEMENT_ADDED = 1 << 24,
+		CF_ELEMENT_REMOVED = 1 << 25,
+		CF_ELEMENT_EXPORTED = 1 << 26,
+		CF_ELEMENT_RENAMED = 1 << 27,
 		CF_EMBEDDED = 1 << 28
 	};
 
@@ -62,7 +62,7 @@ public:
 	/**
 		Map assigning exported sub-component names to internal subcomponent ID's.
 	*/
-	typedef QMap<QByteArray, QByteArray> ExportedComponentsMap;
+	typedef QMap<QByteArray, QByteArray> ExportedElementsMap;
 
 	/**
 		Get ID list of existing elements.
@@ -135,12 +135,12 @@ public:
 	virtual const ExportedInterfacesMap& GetExportedInterfacesMap() const = 0;
 
 	/**
-		Get access to map used to convert exported sub-components to internal sub-component ID's.
+		Get access to map used to convert exported sub-elements to internal sub-element ID's.
 	*/
-	virtual const ExportedComponentsMap& GetExportedComponentsMap() const = 0;
+	virtual const ExportedElementsMap& GetExportedElementsMap() const = 0;
 
 	/**
-		Enable or disable exporting single or all interfaces of component.
+		Enable or disable exporting single or all interfaces of element.
 		\param	elementId			ID of element in registry.
 		\param	exportInterfaceInfo	specify interface. If must be invalid.
 		\param	state				the export state. If \c false, the existing export will be removed.
@@ -153,7 +153,7 @@ public:
 	/**
 		Set element to be exported.
 		\param	exportId		ID of exported name, or NULL if this export should be removed.
-		\param	elementId		ID of element or its subelement (with dot separated) or empty string, if this export should be removed.
+		\param	elementId		ID of element or its subelement (separated with slash) or empty string, if this export should be removed.
 	*/
 	virtual void SetElementExported(
 				const QByteArray& exportId,

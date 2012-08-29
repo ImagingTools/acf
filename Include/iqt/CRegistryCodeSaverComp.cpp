@@ -1031,12 +1031,12 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 		}
 	}
 
-	const icomp::IRegistry::ExportedComponentsMap& componentsMap = registry.GetExportedComponentsMap();
+	const icomp::IRegistry::ExportedElementsMap& componentsMap = registry.GetExportedElementsMap();
 	if (!componentsMap.isEmpty()){
 		stream << "\n";
 		NextLine(stream);
 		stream << "// component export";
-		for (		icomp::IRegistry::ExportedComponentsMap::const_iterator componentIter = componentsMap.begin();
+		for (		icomp::IRegistry::ExportedElementsMap::const_iterator componentIter = componentsMap.begin();
 					componentIter != componentsMap.end();
 					++componentIter){
 			const QByteArray& exportedName = componentIter.key();

@@ -38,8 +38,8 @@ QStringList CElementSelectionInfoManagerBase::GetExportAliases(const QByteArray&
 
 	const icomp::IRegistry* registryPtr = selectionInfoPtr->GetSelectedRegistry();
 	if (registryPtr != NULL){
-		const icomp::IRegistry::ExportedComponentsMap& exportedMap = registryPtr->GetExportedComponentsMap();
-		for (		icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
+		const icomp::IRegistry::ExportedElementsMap& exportedMap = registryPtr->GetExportedElementsMap();
+		for (		icomp::IRegistry::ExportedElementsMap::const_iterator iter = exportedMap.begin();
 					iter != exportedMap.end();
 					++iter){
 			if (iter.value() == attributeName){

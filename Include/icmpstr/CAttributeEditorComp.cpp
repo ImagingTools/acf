@@ -2088,12 +2088,12 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 
 bool CAttributeEditorComp::AttributeItemDelegate::SetComponentExportData(const QByteArray& attributeId, const QWidget& editor) const
 {
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(m_parent.GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_COMPONENT_EXPORTED);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(m_parent.GetRegistry(), istd::IChangeable::CF_MODEL | icomp::IRegistry::CF_ELEMENT_EXPORTED);
 	if (registryPtr.IsValid()){
 		QByteArray exportId = editor.property("text").toString().toLocal8Bit();
 
-		icomp::IRegistry::ExportedComponentsMap exportedMap = registryPtr->GetExportedComponentsMap();
-		for (icomp::IRegistry::ExportedComponentsMap::const_iterator iter = exportedMap.begin();
+		icomp::IRegistry::ExportedElementsMap exportedMap = registryPtr->GetExportedElementsMap();
+		for (icomp::IRegistry::ExportedElementsMap::const_iterator iter = exportedMap.begin();
 					iter != exportedMap.end();
 					++iter){
 			if (iter.value() == attributeId){

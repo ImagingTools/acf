@@ -27,8 +27,8 @@ CCompositeComponentStaticInfo::CCompositeComponentStaticInfo(
 	}
 
 	// register exported subcomponents
-	const IRegistry::ExportedComponentsMap& exportedComponentsMap = registry.GetExportedComponentsMap();
-	for (		IRegistry::ExportedComponentsMap::const_iterator subcomponentIter = exportedComponentsMap.begin();
+	const IRegistry::ExportedElementsMap& exportedComponentsMap = registry.GetExportedElementsMap();
+	for (		IRegistry::ExportedElementsMap::const_iterator subcomponentIter = exportedComponentsMap.begin();
 				subcomponentIter != exportedComponentsMap.end();
 				++subcomponentIter){
 		const QByteArray& subcomponentId = subcomponentIter.key();
@@ -190,8 +190,8 @@ const IRegistry::ElementInfo* CCompositeComponentStaticInfo::GetElementInfoFromR
 			const icomp::IRegistry* subRegistryPtr = manager.GetRegistry(subElementInfoPtr->address, &registry);
 			if (subRegistryPtr != NULL){
 				// get right component path for exported components:
-				const IRegistry::ExportedComponentsMap& exportedComponentsMap = subRegistryPtr->GetExportedComponentsMap();
-				const IRegistry::ExportedComponentsMap::const_iterator foundComponentExportIter = exportedComponentsMap.find(subId);
+				const IRegistry::ExportedElementsMap& exportedComponentsMap = subRegistryPtr->GetExportedElementsMap();
+				const IRegistry::ExportedElementsMap::const_iterator foundComponentExportIter = exportedComponentsMap.find(subId);
 				if (foundComponentExportIter != exportedComponentsMap.end()){
 					subId = foundComponentExportIter.value();
 				}

@@ -68,7 +68,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 		}
 	}
 
-	istd::TChangeNotifier<IRegistry> changePtr(this, CF_COMPONENT_ADDED);
+	istd::TChangeNotifier<IRegistry> changePtr(this, CF_ELEMENT_ADDED);
 
 	ElementInfo& newElement = m_componentsMap[elementId];
 	newElement.address = address;
@@ -80,7 +80,7 @@ IRegistry::ElementInfo* CRegistry::InsertElementInfo(
 
 bool CRegistry::RemoveElementInfo(const QByteArray& elementId)
 {
-	istd::TChangeNotifier<IRegistry> changePtr(this, CF_COMPONENT_REMOVED | CF_MODEL);
+	istd::TChangeNotifier<IRegistry> changePtr(this, CF_ELEMENT_REMOVED | CF_MODEL);
 
 	// remove interfaces exported by this component:
 	bool isDone = false;
@@ -100,7 +100,7 @@ bool CRegistry::RemoveElementInfo(const QByteArray& elementId)
 	isDone = false;
 	while(!isDone){
 		isDone = true;      
-		for (		ExportedComponentsMap::iterator iter = m_exportedComponentsMap.begin();
+		for (		ExportedElementsMap::iterator iter = m_exportedComponentsMap.begin();
 					iter != m_exportedComponentsMap.end();){
 			if (iter.value() == elementId){
 				m_exportedComponentsMap.erase(iter);
@@ -201,7 +201,7 @@ const IRegistry::ExportedInterfacesMap& CRegistry::GetExportedInterfacesMap() co
 }
 
 
-const IRegistry::ExportedComponentsMap& CRegistry::GetExportedComponentsMap() const
+const IRegistry::ExportedElementsMap& CRegistry::GetExportedElementsMap() const
 {
 	return m_exportedComponentsMap;
 }
@@ -257,11 +257,11 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 		return false;
 	}
 
-	istd::TChangeNotifier<IRegistry> changePtr(this, CF_MODEL | CF_COMPONENT_RENAMED);
+	istd::TChangeNotifier<IRegistry> changePtr(this, CF_MODEL | CF_ELEMENT_RENAMED);
 
 	// calculate new component exports:
-	IRegistry::ExportedComponentsMap newExportedComponentsMap;
-	for (		IRegistry::ExportedComponentsMap::const_iterator index = m_exportedComponentsMap.begin();
+	IRegistry::ExportedElementsMap newExportedComponentsMap;
+	for (		IRegistry::ExportedElementsMap::const_iterator index = m_exportedComponentsMap.begin();
 				index != m_exportedComponentsMap.end();
 				index++){
 		QByteArray exportComponentId;
@@ -733,7 +733,7 @@ bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 	retVal = retVal && archive.BeginMultiTag(exportedComponentsTag, componentTag, count);
 
 	if (isStoring){
-		for (		ExportedComponentsMap::iterator iter = m_exportedComponentsMap.begin();
+		for (		ExportedElementsMap::iterator iter = m_exportedComponentsMap.begin();
 					iter != m_exportedComponentsMap.end();
 					++iter){
 			retVal = retVal && archive.BeginTag(componentTag);

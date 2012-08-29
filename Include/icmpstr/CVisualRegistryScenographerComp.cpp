@@ -289,7 +289,7 @@ icomp::IRegistryElement* CVisualRegistryScenographerComp::TryCreateComponent(
 			const i2d::CVector2d& position)
 {
 	if (!elementId.isEmpty()){
-		istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_ADDED);
+		istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_ELEMENT_ADDED);
 		if (registryPtr.IsValid()){
 			QRegExp exp("^(\\w*)_(\\d+)$");
 			QString elementIdString = elementId;
@@ -501,7 +501,7 @@ bool CVisualRegistryScenographerComp::OnDropObject(const QMimeData& mimeData, QG
 		return false;
 	}
 
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_ADDED | istd::IChangeable::CF_MODEL);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_ELEMENT_ADDED | istd::IChangeable::CF_MODEL);
 	if (!registryPtr.IsValid()){
 		return false;
 	}
@@ -759,7 +759,7 @@ void CVisualRegistryScenographerComp::OnPasteCommand()
 		return;
 	}
 
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_ADDED | istd::IChangeable::CF_MODEL);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_ELEMENT_ADDED | istd::IChangeable::CF_MODEL);
 	if (!registryPtr.IsValid()){
 		return;
 	}
@@ -811,7 +811,7 @@ void CVisualRegistryScenographerComp::OnPasteCommand()
 
 void CVisualRegistryScenographerComp::OnRemoveComponent()
 {
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_COMPONENT_REMOVED | istd::IChangeable::CF_MODEL);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_ELEMENT_REMOVED | istd::IChangeable::CF_MODEL);
 	if (registryPtr.IsValid()){
 		for (		ElementIds::const_iterator iter = m_selectedElementIds.begin();
 					iter != m_selectedElementIds.end();
@@ -856,7 +856,7 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 
 void CVisualRegistryScenographerComp::InsertEmbeddedComponent()
 {
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_EMBEDDED | icomp::IRegistry::CF_COMPONENT_ADDED);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_EMBEDDED | icomp::IRegistry::CF_ELEMENT_ADDED);
 	if (!registryPtr.IsValid()){
 		return;
 	}
@@ -888,7 +888,7 @@ void CVisualRegistryScenographerComp::InsertEmbeddedComponent()
 
 void CVisualRegistryScenographerComp::ToEmbeddedComponent()
 {
-	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_EMBEDDED | icomp::IRegistry::CF_COMPONENT_ADDED | icomp::IRegistry::CF_COMPONENT_REMOVED);
+	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_EMBEDDED | icomp::IRegistry::CF_ELEMENT_ADDED | icomp::IRegistry::CF_ELEMENT_REMOVED);
 	if (!registryPtr.IsValid()){
 		return;
 	}
@@ -916,6 +916,9 @@ void CVisualRegistryScenographerComp::ToEmbeddedComponent()
 		return;
 	}
 
+	icomp::IRegistry::ExportedInterfacesMap exportedInterfacesMap = registryPtr->GetExportedInterfacesMap();
+	icomp::IRegistry::ExportedElementsMap exportedComponentsMap = registryPtr->GetExportedElementsMap();
+
 	for (		ElementIds::const_iterator iter = m_selectedElementIds.begin();
 				iter != m_selectedElementIds.end();
 				++iter){
@@ -932,6 +935,32 @@ void CVisualRegistryScenographerComp::ToEmbeddedComponent()
 		}
 
 		newInfoPtr->elementPtr.TakeOver(oldInfoPtr->elementPtr);
+
+		for (		icomp::IRegistry::ExportedInterfacesMap::Iterator interfaceIter = exportedInterfacesMap.constBegin();
+					interfaceIter != exportedInterfacesMap.constEnd();
+					++interfaceIter){
+			QByteArray baseId;
+			QByteArray subId;
+			istd::CIdManipBase::SplitId(interfaceIter.value(), baseId, subId);
+			if (baseId == elementName){
+				QByteArray completeElementId = istd::CIdManipBase::JoinId(elementName, subId);
+
+				newEbeddedRegistryPtr->SetElementInterfaceExported(completeElementId, interfaceIter.key(), true);
+			}
+		}
+
+		for (		icomp::IRegistry::ExportedElementsMap::Iterator subcomponentIter = exportedComponentsMap.constBegin();
+					subcomponentIter != exportedComponentsMap.constEnd();
+					++subcomponentIter){
+			QByteArray baseId;
+			QByteArray subId;
+			istd::CIdManipBase::SplitId(subcomponentIter.value(), baseId, subId);
+			if (baseId == elementName){
+				QByteArray completeElementId = istd::CIdManipBase::JoinId(elementName, subId);
+
+				newEbeddedRegistryPtr->SetElementExported(subcomponentIter.key(), elementName);
+			}
+		}
 
 		registryPtr->RemoveElementInfo(elementName);
 	}

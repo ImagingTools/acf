@@ -196,9 +196,9 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 		QByteArray restId;
 		SplitId(subId, componentId, restId);
 
-		const IRegistry::ExportedComponentsMap& subcomponentMap = registry.GetExportedComponentsMap();
+		const IRegistry::ExportedElementsMap& subcomponentMap = registry.GetExportedElementsMap();
 
-		IRegistry::ExportedComponentsMap::const_iterator iter = subcomponentMap.find(componentId);
+		IRegistry::ExportedElementsMap::const_iterator iter = subcomponentMap.find(componentId);
 		if (iter != subcomponentMap.end()){
 			const QByteArray& realComponentId = iter.value();
 			QByteArray subComponentId;

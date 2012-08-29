@@ -175,7 +175,7 @@ bool CVisualRegistryComp::RenameElement(const QByteArray& oldElementId, const QB
 		}
 	}
 
-	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_MODEL | CF_COMPONENT_RENAMED);
+	istd::TChangeNotifier<icomp::IRegistry> changePtr(this, CF_MODEL | CF_ELEMENT_RENAMED);
 
 	if (BaseClass2::RenameElement(oldElementId, newElementId)){
 		const ElementInfo* newElementInfoPtr = GetElementInfo(newElementId);
