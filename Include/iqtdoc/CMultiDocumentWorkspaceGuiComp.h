@@ -178,7 +178,6 @@ private:
 	static istd::IChangeable* ExtractSelectionInterfaceChangeable(CMultiDocumentWorkspaceGuiComp& parent);
 	static iprm::ISelectionConstraints* ExtractSelectionInterfaceConstraints(CMultiDocumentWorkspaceGuiComp& parent);
 
-
 	iqtgui::CHierarchicalCommand m_commands;
 
 	// global commands
