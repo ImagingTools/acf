@@ -77,6 +77,12 @@ protected:
 	virtual bool InitializeWork();
 
 	/**
+		Called if the supplier parameters was changed.
+		Default implementation do nothing. It is dedicated to be overriden.
+	*/
+	virtual void OnParametersChanged();
+
+	/**
 		Get current work product, if work was done correctly.
 	*/
 	const Product* GetWorkProduct() const;
@@ -104,10 +110,10 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	class InputObserver: public imod::CMultiModelObserverBase
+	class InputsObserver: public imod::CMultiModelObserverBase
 	{
 	public:
-		InputObserver(TSupplierCompWrap<Product>* parentPtr);
+		InputsObserver(TSupplierCompWrap<Product>* parentPtr);
 
 		using imod::CMultiModelObserverBase::EnsureModelsDetached;
 
@@ -115,7 +121,20 @@ protected:
 		// reimplemented (imod::CMultiModelObserverBase)
 		virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
-	private:
+		TSupplierCompWrap<Product>& m_parent;
+	};
+
+	class ParamsObserver: public imod::CMultiModelObserverBase
+	{
+	public:
+		ParamsObserver(TSupplierCompWrap<Product>* parentPtr);
+
+		using imod::CMultiModelObserverBase::EnsureModelsDetached;
+
+	protected:
+		// reimplemented (imod::CMultiModelObserverBase)
+		virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
 		TSupplierCompWrap<Product>& m_parent;
 	};
 
@@ -128,11 +147,14 @@ private:
 	istd::TDelPtr<Product> m_productPtr;
 	int m_workStatus;
 
-	InputObserver m_inputObserver;
+	InputsObserver m_inputsObserver;
+	ParamsObserver m_paramsObserver;
 
 	istd::CChangeNotifier m_productChangeNotifier;
 
 	double m_elapsedTime;
+
+	bool m_areParametersValid;
 };
 
 
@@ -141,9 +163,11 @@ private:
 template <class Product>
 TSupplierCompWrap<Product>::TSupplierCompWrap()
 :	m_workStatus(WS_INVALID),
-	m_inputObserver(this),
+	m_inputsObserver(this),
+	m_paramsObserver(this),
 	m_productChangeNotifier(NULL, CF_SUPPLIER_RESULTS | CF_MODEL),
-	m_elapsedTime(0)
+	m_elapsedTime(0),
+	m_areParametersValid(false)
 {
 }
 
@@ -172,6 +196,12 @@ void TSupplierCompWrap<Product>::EnsureWorkInitialized()
 {
 	if (m_workStatus < ISupplier::WS_INIT){
 		m_productChangeNotifier.SetPtr(this);
+
+		if (!m_areParametersValid){
+			m_areParametersValid = true;
+
+			OnParametersChanged();
+		}
 
 		if (InitializeWork()){
 			m_workStatus = WS_INIT;
@@ -262,6 +292,12 @@ bool TSupplierCompWrap<Product>::InitializeWork()
 
 
 template <class Product>
+void TSupplierCompWrap<Product>::OnParametersChanged()
+{
+}
+
+
+template <class Product>
 const Product* TSupplierCompWrap<Product>::GetWorkProduct() const
 {
 	const_cast< TSupplierCompWrap<Product>* >(this)->EnsureWorkFinished();
@@ -279,7 +315,7 @@ template <class Product>
 void TSupplierCompWrap<Product>::RegisterSupplierInput(imod::IModel* modelPtr)
 {
 	I_ASSERT(modelPtr != NULL);
-	modelPtr->AttachObserver(&m_inputObserver);
+	modelPtr->AttachObserver(&m_inputsObserver);
 }
 
 
@@ -287,8 +323,8 @@ template <class Product>
 void TSupplierCompWrap<Product>::UnregisterSupplierInput(imod::IModel* modelPtr)
 {
 	I_ASSERT(modelPtr != NULL);
-	if (m_inputObserver.IsModelAttached(modelPtr)){
-		modelPtr->DetachObserver(&m_inputObserver);
+	if (m_inputsObserver.IsModelAttached(modelPtr)){
+		modelPtr->DetachObserver(&m_inputsObserver);
 	}
 }
 
@@ -301,7 +337,7 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_paramsSetModelCompPtr.IsValid()){
-		m_paramsSetModelCompPtr->AttachObserver(&m_inputObserver);
+		m_paramsSetModelCompPtr->AttachObserver(&m_paramsObserver);
 	}
 
 	int inputsCount = m_additionalTriggerInputsCompPtr.GetCount();
@@ -319,29 +355,53 @@ void TSupplierCompWrap<Product>::OnComponentCreated()
 template <class Product>
 void TSupplierCompWrap<Product>::OnComponentDestroyed()
 {
-	m_inputObserver.EnsureModelsDetached();
+	m_inputsObserver.EnsureModelsDetached();
+	m_paramsObserver.EnsureModelsDetached();
 
 	BaseClass::OnComponentDestroyed();
 }
 
 
-// public methods of embedded class InputObserver
+// public methods of embedded class InputsObserver
 
 template <class Product>
-TSupplierCompWrap<Product>::InputObserver::InputObserver(TSupplierCompWrap<Product>* parentPtr)
+TSupplierCompWrap<Product>::InputsObserver::InputsObserver(TSupplierCompWrap<Product>* parentPtr)
 :	m_parent(*parentPtr)
 {
 	I_ASSERT(parentPtr != NULL);
 }
 
 
-// protected methods of embedded class InputObserver
+// protected methods of embedded class InputsObserver
 
 // reimplemented (imod::CMultiModelObserverBase)
 
 template <class Product>
-void TSupplierCompWrap<Product>::InputObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void TSupplierCompWrap<Product>::InputsObserver::BeforeUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
+	m_parent.InvalidateSupplier();
+}
+
+
+// public methods of embedded class ParamsObserver
+
+template <class Product>
+TSupplierCompWrap<Product>::ParamsObserver::ParamsObserver(TSupplierCompWrap<Product>* parentPtr)
+:	m_parent(*parentPtr)
+{
+	I_ASSERT(parentPtr != NULL);
+}
+
+
+// protected methods of embedded class ParamsObserver
+
+// reimplemented (imod::CMultiModelObserverBase)
+
+template <class Product>
+void TSupplierCompWrap<Product>::ParamsObserver::AfterUpdate(imod::IModel* /*modelPtr*/, int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_parent.m_areParametersValid = false;
+
 	m_parent.InvalidateSupplier();
 }
 
