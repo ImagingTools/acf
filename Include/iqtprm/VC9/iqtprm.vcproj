@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEnableableParamGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamGuiComp.cpp"
 				>
 			</File>
@@ -227,6 +231,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CEnableableParamGuiComp.h"
 				>
 			</File>
 			<File
@@ -288,6 +296,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CEnableableParamGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CFileNameParamGuiComp.cpp"
 				>
 			</File>
@@ -296,7 +308,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_COptionsManagerGuiComp.cpp"
+				RelativePath="..\Generated\moc_COptionsManagerGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -304,11 +316,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSelectableGuiComp.cpp"
+				RelativePath="..\Generated\moc_CSelectableGuiComp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CSelectionParamGuiComp.cpp"
+				RelativePath="..\Generated\moc_CSelectionParamGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -325,6 +337,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\ui_CComposedParamsSetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CEnableableParamGuiComp.h"
 				>
 			</File>
 			<File
@@ -372,6 +388,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CEnableableParamGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamGuiComp.ui"
 				>
 			</File>
@@ -413,6 +433,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedParamsSetGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CEnableableParamGuiComp.moc"
 				>
 			</File>
 			<File

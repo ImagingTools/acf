@@ -81,7 +81,7 @@ inline bool CIndex2d::operator<(const CIndex2d& index) const
 	if (GetY() < index.GetY()){
 		return true;
 	}
-	else if(GetY() > index.GetY()){
+	else if (GetY() > index.GetY()){
 		return false;
 	}
 	else if (GetX() < index.GetX()){

@@ -24,7 +24,7 @@ CGuiComponentDialog::CGuiComponentDialog(
 
 	// GUI must not be created:
 	I_ASSERT(!guiObjectPtr->IsGuiCreated());
-	if(!guiObjectPtr->IsGuiCreated()){
+	if (!guiObjectPtr->IsGuiCreated()){
 		BaseClass::setModal(isModal);
 
 		QVBoxLayout* dialogLayout = new QVBoxLayout(this);

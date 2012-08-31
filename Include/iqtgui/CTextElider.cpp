@@ -151,7 +151,7 @@ void CTextElider::UpdateElidedText(QObject& elideObject)
 	}
 	newName.resize(newSize);
 
-	if((!info.baseString.contains(elideText) && !info.baseString.contains(newName)) || !elideText.contains(m_elideSuffix)){
+	if ((!info.baseString.contains(elideText) && !info.baseString.contains(newName)) || !elideText.contains(m_elideSuffix)){
 		info.baseString = elideText;
 	}
 
@@ -163,7 +163,7 @@ void CTextElider::UpdateElidedText(QObject& elideObject)
 				elideObject.property("size").toSize().width());
 	newName = info.baseString;
 
-	if(info.baseString != formattedName && m_elideSuffix.size() < formattedName.size()){
+	if (info.baseString != formattedName && m_elideSuffix.size() < formattedName.size()){
 		// formattedName is only used to get max displayable text length
 		newName.resize(formattedName.size() - m_elideSuffix.size());
 		newName += m_elideSuffix;

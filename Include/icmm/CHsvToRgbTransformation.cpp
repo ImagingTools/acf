@@ -34,17 +34,17 @@ bool CHsvToRgbTransformation::GetValueAt(const ArgumentType& argument, ResultTyp
 	double red = 0.0;
 	double green = 0.0;
 	double blue = 0.0;
-	
+
 	// color is on black-and-white center line 
-	if(saturation == 0.0f){
+	if (saturation == 0.0f){
 		red = value;		// achromatic: shades of gray 
 		green = value;	// supposedly invalid for hue=0 but who cares 
 		blue = value;
 	}
 	// chromatic color 
-	else {
+	else{
 		double hTemp;
-		if(hue == 360.0){		// 360 degrees same as 0 degrees 
+		if (hue == 360.0){		// 360 degrees same as 0 degrees 
 			hTemp = 0.0;
 		}
 		else{ 

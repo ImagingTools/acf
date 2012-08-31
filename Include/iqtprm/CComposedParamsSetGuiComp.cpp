@@ -47,12 +47,12 @@ void CComposedParamsSetGuiComp::UpdateModel() const
 		}
 
 		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-		if (m_connectedEditors.find(editorPtr) == m_connectedEditors.end()){
-			continue;
-		}
-		I_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditors
+		ConnectedEditorsMap::ConstIterator findIter = m_connectedEditorsMap.constFind(editorPtr);
+		if (findIter != m_connectedEditorsMap.constEnd() && (findIter.value() == true)){
+			I_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
 
-		editorPtr->UpdateModel();
+			editorPtr->UpdateModel();
+		}
 	}
 }
 
@@ -70,11 +70,13 @@ void CComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 			}
 
 			imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-			if (editorPtr == NULL){
-				continue;
-			}
+			if (m_connectedEditorsMap.contains(editorPtr)){
+				I_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
 
-			editorPtr->UpdateEditor(updateFlags);
+				m_connectedEditorsMap[editorPtr] = true;
+
+				editorPtr->UpdateEditor(updateFlags);
+			}
 		}
 	}
 }
@@ -297,7 +299,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 		if ((parameterModelPtr != NULL) && (observerPtr != NULL) && parameterModelPtr->AttachObserver(observerPtr)){
 			imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
 			if (editorPtr != NULL){
-				m_connectedEditors.insert(editorPtr);
+				m_connectedEditorsMap[editorPtr] = false;
 			}
 		}
 
@@ -429,7 +431,7 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 		}
 	}
 
-	m_connectedEditors.clear();
+	m_connectedEditorsMap.clear();
 
 	int elementsCount = qMin(m_observersCompPtr.GetCount(), m_idsAttrPtr.GetCount());
 	for (int i = 0; i < elementsCount; ++i){

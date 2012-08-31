@@ -77,7 +77,7 @@ bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
 		return false;
 	}
 
-	if(m_angleRange.IsEmpty()){
+	if (m_angleRange.IsEmpty()){
 		return true;
 	}
 
@@ -88,12 +88,12 @@ bool CAnnulusSegment::Contains(const i2d::CVector2d& point) const
 		phi += I_2PI;
 
 	if (GetBeginAngle() < GetEndAngle()){
-		if(phi > GetBeginAngle() && phi < GetEndAngle()){
+		if (phi > GetBeginAngle() && phi < GetEndAngle()){
 			return true;
 		}
 	}
 	else if (GetBeginAngle() > GetEndAngle()){
-		if(phi > GetBeginAngle() && phi > GetEndAngle()){
+		if (phi > GetBeginAngle() && phi > GetEndAngle()){
 			return true;
 		}
 	}

@@ -94,7 +94,7 @@ void CCheckableComboBox::paintEvent(QPaintEvent* /*eventPtr*/)
 
 bool CCheckableComboBox::eventFilter(QObject* object, QEvent* eventPtr)
 {
-	if(eventPtr->type() == QEvent::MouseButtonRelease && object == view()->viewport()){
+	if (eventPtr->type() == QEvent::MouseButtonRelease && object == view()->viewport()){
 		return true;
 	}
 

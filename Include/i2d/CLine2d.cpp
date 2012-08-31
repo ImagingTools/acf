@@ -77,7 +77,7 @@ double CLine2d::GetSlope() const
 	double x1 = m_point1.GetX();
 	double x2 = m_point2.GetX();
 
-	if(x2 == x1){
+	if (x2 == x1){
 		return I_INFINITY;
 	}
 
@@ -92,7 +92,7 @@ double CLine2d::GetIntercept() const
 	double x1 = m_point1.GetX();
 	double x2 = m_point2.GetX();
 
-	if(x2 == x1){
+	if (x2 == x1){
 		return I_INFINITY;
 	}
 

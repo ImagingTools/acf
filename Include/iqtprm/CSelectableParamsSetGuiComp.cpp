@@ -102,7 +102,7 @@ void CSelectableParamsSetGuiComp::ConnectCurrentEditor()
 				if (paramsSetPtr != NULL && observerIndex >= 0){
 					imod::IObserver* observerPtr = m_slaveObserversCompPtr[observerIndex];
 					imod::IModel* paramsSetModelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr);
-					if(paramsSetModelPtr != NULL && observerPtr != NULL){
+					if (paramsSetModelPtr != NULL && observerPtr != NULL){
 						paramsSetModelPtr->AttachObserver(observerPtr);
 					}
 				}	

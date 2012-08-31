@@ -44,6 +44,7 @@
 #include "iqtprm/CNameParamGuiComp.h"
 #include "iqtprm/COptionsManagerGuiComp.h"
 #include "iqtprm/CComboParamsManagerGuiComp.h"
+#include "iqtprm/CEnableableParamGuiComp.h"
 
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CSingleDocumentWorkspaceGuiComp.h"
@@ -103,6 +104,7 @@ typedef iqtprm::CSelectableParamsSetGuiComp SelectableParamsSetGui;
 typedef iqtprm::CNameParamGuiComp NameParamGui;
 typedef iqtprm::COptionsManagerGuiComp OptionsManagerGui;
 typedef iqtprm::CComboParamsManagerGuiComp ComboParamsManagerGui;
+typedef iqtprm::CEnableableParamGuiComp EnableableParamGui;
 
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CSingleDocumentWorkspaceGuiComp> SingleDocWorkspaceGui;

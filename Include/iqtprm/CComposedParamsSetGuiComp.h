@@ -89,8 +89,8 @@ private:
 	I_ATTR(bool, m_showAllShapesAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
 
-	typedef QSet<imod::IModelEditor*> ConnectedEditors;
-	ConnectedEditors m_connectedEditors;
+	typedef QMap<imod::IModelEditor*, bool> ConnectedEditorsMap;
+	ConnectedEditorsMap m_connectedEditorsMap;
 
 	int m_currentGuiIndex;
 

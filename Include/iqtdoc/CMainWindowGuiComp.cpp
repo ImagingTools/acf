@@ -709,7 +709,7 @@ bool CMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 
 		return true;
 	}
-	else if(eventPtr->type() == QEvent::Drop){
+	else if (eventPtr->type() == QEvent::Drop){
 		QDropEvent* dropEventPtr = dynamic_cast<QDropEvent*>(eventPtr);
 		I_ASSERT(dropEventPtr != NULL);
 

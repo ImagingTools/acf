@@ -34,7 +34,7 @@ idoc::IUndoManager* CMultiDocumentManagerBase::GetUndoManagerForDocument(const i
 	for (int i = 0; i < documentsCount; ++i){
 		const SingleDocumentData& info = GetSingleDocumentData(i);
 		
-		if(info.documentPtr == documentPtr){
+		if (info.documentPtr == documentPtr){
 			return info.undoManagerPtr.GetPtr();
 		}
 	}
@@ -126,7 +126,7 @@ istd::IPolymorphic* CMultiDocumentManagerBase::AddViewToDocument(const istd::ICh
 	for (int i = 0; i < documentsCount; ++i){
 		SingleDocumentData& info = GetSingleDocumentData(i);
 		
-		if(info.documentPtr == &document){
+		if (info.documentPtr == &document){
 			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
 				info.documentTypeId,
 				info.documentPtr.GetPtr(),

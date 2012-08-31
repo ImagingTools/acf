@@ -430,7 +430,8 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.Process(m_keywords);
 		retVal = retVal && archive.EndTag(keywordsTag);
 
-		if(frameworkVersion >= 1422 && frameworkVersion < 1431){
+		// TODO: remove it when back compatibility to specified versions range will be no more important
+		if (frameworkVersion >= 1422 && frameworkVersion < 1431){
 			static iser::CArchiveTag categoryTag("Category", "Logical category of the registry");
 			retVal = retVal && archive.BeginTag(categoryTag);
 			int dummy;
