@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="7">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
         WindowsListCommands
@@ -106,20 +106,6 @@
       </X>
       <X>
         400
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        RegistryOverviewDialog
-      </ComponentName>
-      <X>
-        300
-      </X>
-      <X>
-        550
       </X>
       <Note>
         

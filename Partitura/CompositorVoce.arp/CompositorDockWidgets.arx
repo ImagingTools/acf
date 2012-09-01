@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="7">
+  <ElementsList count="6">
     <Element>
       <Id>
         AttributeEditorDock
@@ -386,75 +386,6 @@
     </Element>
     <Element>
       <Id>
-        RegistryOverviewDialog
-      </Id>
-      <PackageId>
-        CompositorVoce
-      </PackageId>
-      <ComponentId>
-        RegistryOverviewDialog
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="3">
-          <AttributeInfo>
-            <Id>
-              ConsistencyInfo
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              ConsistencyInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              DocumentManager
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              DocumentManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              MetaInfoManager
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              MetaInfoManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
         WindowsListCommands
       </Id>
       <PackageId>
@@ -552,7 +483,7 @@
   </EmbeddedRegistriesList>
   <ExportedInterfaces count="0">
   </ExportedInterfaces>
-  <ExportedComponents count="7">
+  <ExportedComponents count="6">
     <Component>
       <ExportedId>
         AttributeEditorDock
@@ -591,14 +522,6 @@
       </ExportedId>
       <ComponentId>
         QuickHelpDock
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        RegistryOverviewDialog
-      </ExportedId>
-      <ComponentId>
-        RegistryOverviewDialog
       </ComponentId>
     </Component>
     <Component>

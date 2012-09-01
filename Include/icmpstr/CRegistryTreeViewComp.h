@@ -71,9 +71,9 @@ public:
 	
 	void AddSubcomponents(
 				const icomp::CComponentAddress& address,
-				QTreeWidgetItem* registryElementItemPtr) const;
+				QTreeWidgetItem* registryElementItemPtr);
 
-	void CreateRegistryTree(const icomp::IRegistry& registry, QTreeWidgetItem* registryRootItemPtr) const;
+	void CreateRegistryTree(const icomp::IRegistry& registry, QTreeWidgetItem* registryRootItemPtr);
 
 protected:
 	class EnvironmentObserver: public imod::TSingleModelObserverBase<icomp::IComponentEnvironmentManager>
@@ -98,15 +98,24 @@ protected:
 				const icomp::IRegistry& registry,
 				const icomp::IRegistry::ElementInfo* elementPtr,
 				const QByteArray& elementId,
-				QTreeWidgetItem* parentItemPtr) const;
+				QTreeWidgetItem* parentItemPtr);
 
-	void UpdateComponentSelection();
+	/**
+		Calculate visual status of the entire registry tree.
+	*/
+	bool IsRegistryValid(const icomp::IRegistry& registry) const;
+
+	void UpdateRegistryStatus();
 
 	// reimplemented (iqtgui::TGuiObserverWrap)
 	virtual void UpdateGui(int updateFlags);
+	virtual void OnGuiModelDetached();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+
+	// reimplemented (imod::CSingleModelObserverBase)
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

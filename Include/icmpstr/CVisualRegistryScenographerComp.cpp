@@ -8,6 +8,7 @@
 #include <QtGui/QFileDialog>
 #include <QtGui/QApplication>
 #include <QtGui/QClipboard>
+#include <QtGui/QDesktopWidget>
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
@@ -20,6 +21,7 @@
 
 #include "iqtgui/IDropConsumer.h"
 #include "iqtgui/TDesignerBasicGui.h"
+#include "iqtgui/CGuiComponentDialog.h"
 
 #include "icmpstr/CRegistryElementShape.h"
 #include "icmpstr/CGraphicsConnectorItem.h"
@@ -70,6 +72,10 @@ CVisualRegistryScenographerComp::CVisualRegistryScenographerComp()
 	m_abortRegistryCommand.SetStaticFlags(lightToolFlags);
 	m_abortRegistryCommand.setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
 
+	m_showRegistryTopologyCommand.SetStaticFlags(lightToolFlags | ibase::IHierarchicalCommand::CF_TOOLBAR);
+	m_showRegistryTopologyCommand.SetGroupId(GI_TOOLS);
+	m_showRegistryTopologyCommand.setShortcut(QKeySequence(Qt::Key_F3));
+
 	m_editMenu.InsertChild(&m_cutCommand);
 	m_editMenu.InsertChild(&m_copyCommand);
 	m_editMenu.InsertChild(&m_pasteCommand);
@@ -81,6 +87,7 @@ CVisualRegistryScenographerComp::CVisualRegistryScenographerComp()
 	m_registryMenu.InsertChild(&m_exportToCodeCommand);
 	m_registryMenu.InsertChild(&m_executeRegistryCommand);
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
+	m_registryMenu.InsertChild(&m_showRegistryTopologyCommand);
 
 	m_registryCommand.InsertChild(&m_editMenu);
 	m_registryCommand.InsertChild(&m_registryMenu);
@@ -490,6 +497,11 @@ void CVisualRegistryScenographerComp::DoRetranslate()
 				tr("&Abort Registry"), 
 				tr("Abort registry execution"),
 				QIcon(":/Icons/Stop.svg"));
+	m_showRegistryTopologyCommand.SetVisuals(
+				tr("&Show Component Toplogy..."), 
+				tr("&Show Component Topology"), 
+				tr("Show entire component topology of the current registry"),
+				m_registryValidationStatusCompPtr.IsValid() ? m_registryValidationStatusCompPtr->GetStatusIcon() : QIcon());
 }
 
 
@@ -563,6 +575,50 @@ void CVisualRegistryScenographerComp::UpdateScene(int /*updateFlags*/)
 }
 
 
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CVisualRegistryScenographerComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	m_showRegistryTopologyCommand.setIcon(m_registryValidationStatusCompPtr->GetStatusIcon());
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+	
+bool CVisualRegistryScenographerComp::OnAttached(imod::IModel* modelPtr)
+{
+	if (BaseClass::OnAttached(modelPtr)){
+		if (m_registryObserverCompPtr.IsValid()){
+			imod::IModel* registryModelPtr = GetModelPtr();
+			if (registryModelPtr != NULL && !registryModelPtr->IsAttached(m_registryObserverCompPtr.GetPtr())){
+				registryModelPtr->AttachObserver(m_registryObserverCompPtr.GetPtr());
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
+bool CVisualRegistryScenographerComp::OnDetached(imod::IModel* modelPtr)
+{
+	if (BaseClass::OnDetached(modelPtr)){
+		if (m_registryObserverCompPtr.IsValid()){
+			imod::IModel* registryModelPtr = GetModelPtr();
+			if (registryModelPtr != NULL && registryModelPtr->IsAttached(m_registryObserverCompPtr.GetPtr())){
+				registryModelPtr->DetachObserver(m_registryObserverCompPtr.GetPtr());
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CVisualRegistryScenographerComp::OnComponentCreated()
@@ -580,6 +636,7 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 	connect(&m_exportToCodeCommand, SIGNAL(triggered()), this, SLOT(OnExportToCode()));
 	connect(&m_executeRegistryCommand, SIGNAL(triggered()), this, SLOT(OnExecute()));
 	connect(&m_abortRegistryCommand, SIGNAL(triggered()), this, SLOT(OnAbort()));
+	connect(&m_showRegistryTopologyCommand, SIGNAL(triggered()), this, SLOT(OnShowRegistryTopology()));
 	
 	m_exportToCodeCommand.setVisible(m_registryCodeSaverCompPtr.IsValid());
 	m_executeRegistryCommand.setVisible(m_registryPreviewCompPtr.IsValid());
@@ -606,6 +663,10 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 		m_envManagerModelCompPtr->AttachObserver(&m_environmentObserver);
 	}
 
+	if (m_registryValidationStatusModelCompPtr.IsValid()){
+		RegisterModel(m_registryValidationStatusModelCompPtr.GetPtr());
+	}
+
 	DoRetranslate();
 }
 
@@ -615,6 +676,8 @@ void CVisualRegistryScenographerComp::OnComponentDestroyed()
 	if (m_envManagerModelCompPtr.IsValid() && m_envManagerModelCompPtr->IsAttached(&m_environmentObserver)){
 		m_envManagerModelCompPtr->DetachObserver(&m_environmentObserver);
 	}
+
+	UnregisterAllModels();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -1029,6 +1092,23 @@ void CVisualRegistryScenographerComp::OnExecutionTimerTick()
 
 	m_executeRegistryCommand.setEnabled(!isRunning && isExecutable);
 	m_abortRegistryCommand.setEnabled(isRunning);
+}
+
+
+void CVisualRegistryScenographerComp::OnShowRegistryTopology()
+{
+	if (m_registryTopologyGuiCompPtr.IsValid()){
+		iqtgui::CGuiComponentDialog dialog(m_registryTopologyGuiCompPtr.GetPtr());
+
+		const QDesktopWidget* desktopPtr = QApplication::desktop();
+		I_ASSERT(desktopPtr != NULL);
+
+		QRect screenRect = desktopPtr->screenGeometry();
+
+		dialog.resize(int(screenRect.width() * 0.5), int(screenRect.height() * 0.5));
+
+		dialog.exec();
+	}
 }
 
 

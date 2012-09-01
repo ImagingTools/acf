@@ -224,7 +224,7 @@ private:
 
 CPackageOverviewComp::CPackageOverviewComp()
 :	m_packagesCommand("", 110, ibase::ICommand::CF_GLOBAL_MENU),
-	m_reloadCommand("", 110, ibase::ICommand::CF_GLOBAL_MENU),
+	m_reloadCommand("", 110, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
 	m_registryObserver(this),
 	m_configObserver(this),
 	m_startDrag(false),

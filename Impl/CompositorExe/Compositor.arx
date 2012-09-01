@@ -102,7 +102,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="7">
+              <Values count="6">
                 <Value>
                   MainWindowComponents/AttributeEditorDock
                 </Value>
@@ -120,9 +120,6 @@
                 </Value>
                 <Value>
                   MainWindowComponents/WindowsListCommands
-                </Value>
-                <Value>
-                  MainWindowComponents/RegistryOverviewDialog
                 </Value>
               </Values>
             </Data>
@@ -147,7 +144,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               DocumentManager
@@ -222,27 +219,6 @@
               <Value>
                 MainWindowComponents/QuickHelpDock
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegistryObservers
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  MainWindowComponents/RegistryOverviewDialog
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

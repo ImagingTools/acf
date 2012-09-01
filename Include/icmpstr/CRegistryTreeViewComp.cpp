@@ -26,7 +26,7 @@ CRegistryTreeViewComp::CRegistryTreeViewComp()
 
 void CRegistryTreeViewComp::AddSubcomponents(
 			const icomp::CComponentAddress& address,
-			QTreeWidgetItem* registryElementItemPtr) const
+			QTreeWidgetItem* registryElementItemPtr)
 {
 	if (m_envManagerCompPtr.IsValid()){
 		const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
@@ -43,7 +43,7 @@ void CRegistryTreeViewComp::AddSubcomponents(
 }
 
 
-void CRegistryTreeViewComp::CreateRegistryTree(const icomp::IRegistry& registry, QTreeWidgetItem* registryRootItemPtr) const
+void CRegistryTreeViewComp::CreateRegistryTree(const icomp::IRegistry& registry, QTreeWidgetItem* registryRootItemPtr)
 {
 	icomp::IRegistry::Ids elementIds = registry.GetElementIds();
 	for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
@@ -64,7 +64,7 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 			const icomp::IRegistry& registry,
 			const icomp::IRegistry::ElementInfo* elementPtr,
 			const QByteArray& elementId,
-			QTreeWidgetItem* parentItemPtr) const
+			QTreeWidgetItem* parentItemPtr)
 {
 	icomp::CRegistryElement* registryElementPtr = dynamic_cast<icomp::CRegistryElement*>(elementPtr->elementPtr.GetPtr());
 	if (registryElementPtr != NULL){
@@ -115,6 +115,10 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 			while (parentItemPtr != NULL){
 				parentItemPtr->setIcon(CT_NAME, errorIcon);
 
+				if (parentItemPtr->parent() == NULL){
+					SetStatusIcon(errorIcon);
+				}
+
 				QString parentMessages = parentItemPtr->data(CT_NAME, DR_MESSAGE_LIST).toString();
 				parentItemPtr->setData(CT_NAME, DR_MESSAGE_LIST, parentMessages + messageText);
 
@@ -131,8 +135,66 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 }
 
 
-void CRegistryTreeViewComp::UpdateComponentSelection()
+bool CRegistryTreeViewComp::IsRegistryValid(const icomp::IRegistry& registry) const
 {
+	bool retVal = true;
+
+	icomp::IRegistry::Ids elementIds = registry.GetElementIds();
+	for (		icomp::IRegistry::Ids::iterator iter = elementIds.begin();
+				iter != elementIds.end();
+				iter++){
+		const QByteArray& elementId = *iter;
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
+		if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
+			icomp::CRegistryElement* registryElementPtr = dynamic_cast<icomp::CRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
+			if (registryElementPtr != NULL){
+				bool isConsistent = true;
+
+				if (m_consistInfoCompPtr.IsValid()){
+					isConsistent = m_consistInfoCompPtr->IsElementValid(
+								elementId,
+								registry,
+								false,
+								true,
+								NULL);
+				}
+
+				if (!isConsistent){
+					return false;
+				}
+
+				if (m_envManagerCompPtr.IsValid()){
+					const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
+
+					if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+						const icomp::CCompositeComponentStaticInfo* compositeMetaInfoPtr = dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(metaInfoPtr);
+						if (compositeMetaInfoPtr != NULL){
+							const icomp::IRegistry& registry = compositeMetaInfoPtr->GetRegistry();
+
+							retVal = retVal && IsRegistryValid(registry);
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return retVal;
+}
+
+
+void CRegistryTreeViewComp::UpdateRegistryStatus()
+{
+	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){		
+		bool isValid = IsRegistryValid(*registryPtr);
+			
+		static QIcon errorIcon(":/Icons/Warning.svg");
+		static QIcon okIcon(":/Icons/Ok");
+
+		SetStatusIcon(isValid ? okIcon : errorIcon);
+	}
 }
 
 
@@ -144,6 +206,13 @@ void CRegistryTreeViewComp::UpdateGui(int /*updateFlags*/)
 
 	QTreeWidgetItem* rootItem = new QTreeWidgetItem();
 	rootItem->setText(0, "Root");
+	rootItem->setSelected(true);
+
+	static QIcon okIcon(":/Icons/Ok");
+
+	rootItem->setIcon(CT_NAME, okIcon);
+
+	SetStatusIcon(okIcon);
 
 	RegistryTree->addTopLevelItem(rootItem);
 
@@ -151,8 +220,14 @@ void CRegistryTreeViewComp::UpdateGui(int /*updateFlags*/)
 	if (registryPtr != NULL){
 		CreateRegistryTree(*registryPtr, rootItem);
 	}
+}
 
-	UpdateComponentSelection();
+
+void CRegistryTreeViewComp::OnGuiModelDetached()
+{
+	RegistryTree->clear();
+
+	BaseClass::OnGuiModelDetached();
 }
 
 
@@ -165,6 +240,16 @@ void CRegistryTreeViewComp::OnGuiCreated()
 //	RegistryTree->setItemDelegate(new iqtgui::CItemDelegate);
 
 	RegistryTree->header()->setResizeMode(QHeaderView::Stretch);
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CRegistryTreeViewComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	UpdateRegistryStatus();
+	
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
@@ -273,6 +358,8 @@ CRegistryTreeViewComp::EnvironmentObserver::EnvironmentObserver(CRegistryTreeVie
 
 void CRegistryTreeViewComp::EnvironmentObserver::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
+	m_parent.UpdateRegistryStatus();
+
 	if (m_parent.IsGuiCreated()){
 		m_parent.UpdateGui(updateFlags);
 	}

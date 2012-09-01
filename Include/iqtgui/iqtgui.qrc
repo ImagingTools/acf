@@ -28,6 +28,7 @@
     <file alias="Cancel.svg">Resources/Icons/Cancel.svg</file>
     <file alias="Copy">Resources/Icons/copy_128.png</file>
     <file alias="Paste">Resources/Icons/paste_128.png</file>
+    <file alias="Ok">Resources/Icons/ok_128.png</file>
     <file alias="Delete.svg">Resources/Icons/Delete.svg</file>
     <file alias="Play.svg">Resources/Icons/Play.svg</file>
     <file alias="Stop.svg">Resources/Icons/Stop.svg</file>

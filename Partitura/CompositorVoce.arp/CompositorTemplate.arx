@@ -554,7 +554,7 @@
         VisualRegistry
       </Id>
       <PackageId>
-        CompositorVoce
+        CompositorPck
       </PackageId>
       <ComponentId>
         VisualRegistry
@@ -566,23 +566,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="4">
-          <AttributeInfo>
-            <Id>
-              DocumentManager
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              DocumentManager
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               Log
@@ -618,22 +602,6 @@
               </Value>
             </Data>
           </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegistryObservers
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              RegistryObservers
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -654,7 +622,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ConsistencyInfo
@@ -777,6 +745,44 @@
               <IsEnabled>
                 false
               </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryTopologyGui
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryTreeView
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RegistryValidationStatus
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                RegistryTreeView/VisualStatus
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

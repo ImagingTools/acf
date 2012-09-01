@@ -15,6 +15,7 @@
 
 #include "imod/TSingleModelObserverBase.h"
 #include "imod/TModelWrap.h"
+#include "imod/CMultiModelDispatcherBase.h"
 
 #include "icomp/IRegistry.h"
 #include "icomp/IComponentEnvironmentManager.h"
@@ -47,7 +48,8 @@ class CVisualRegistryScenographerComp:
 			public QObject,
 			public icmpstr::TScenographerCompBase<
 						imod::TSingleModelObserverBase<icomp::IRegistry> >,
-			virtual public ibase::ICommandsProvider
+			virtual public ibase::ICommandsProvider,
+			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
@@ -68,6 +70,10 @@ public:
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpGui", "Show help of selected component using its address", false, "QuickHelpGui");
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager allowing to load files on double click", false, "DocumentManager");
 		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
+		I_ASSIGN(m_registryTopologyGuiCompPtr, "RegistryTopologyGui", "GUI for showing the registry component topology", false, "RegistryTopologyGui");
+		I_ASSIGN_TO(m_registryObserverCompPtr, m_registryTopologyGuiCompPtr, false);
+		I_ASSIGN(m_registryValidationStatusCompPtr, "RegistryValidationStatus", "Visual status of registry validation", false, "RegistryValidationStatus");
+		I_ASSIGN_TO(m_registryValidationStatusModelCompPtr, m_registryValidationStatusCompPtr, false);
 	I_END_COMPONENT;
 
 	CVisualRegistryScenographerComp();
@@ -94,7 +100,8 @@ protected:
 		GI_EMBEDDED_REGISTRY,
 		GI_CODEGEN,
 		GI_PREVIEW,
-		GI_EDIT
+		GI_EDIT,
+		GI_TOOLS
 	};
 
 	class EnvironmentObserver: public imod::TSingleModelObserverBase<icomp::IComponentEnvironmentManager>
@@ -135,6 +142,13 @@ protected:
 	virtual bool OnDropObject(const QMimeData& data, QGraphicsSceneDragDropEvent* eventPtr);
 	virtual void UpdateScene(int updateFlags);
 
+	// reimplemented (imod::CMultiModelDispatcherBase)
+	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// reimplemented (imod::CSingleModelObserverBase)
+	virtual bool OnAttached(imod::IModel* modelPtr);
+	virtual bool OnDetached(imod::IModel* modelPtr);
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
@@ -158,6 +172,7 @@ protected Q_SLOTS:
 	void OnExecute();
 	void OnAbort();
 	void OnExecutionTimerTick();
+	void OnShowRegistryTopology();
 
 private:
 	class SelectionInfoImpl: virtual public IElementSelectionInfo
@@ -182,6 +197,10 @@ private:
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
+	I_REF(iqtgui::IGuiObject, m_registryTopologyGuiCompPtr);
+	I_REF(imod::IObserver, m_registryObserverCompPtr);
+	I_REF(iqtgui::IVisualStatusProvider, m_registryValidationStatusCompPtr);
+	I_REF(imod::IModel, m_registryValidationStatusModelCompPtr);
 	
 	iqtgui::CHierarchicalCommand m_registryCommand;
 	iqtgui::CHierarchicalCommand m_editMenu;
@@ -196,6 +215,7 @@ private:
 	iqtgui::CHierarchicalCommand m_exportToCodeCommand;
 	iqtgui::CHierarchicalCommand m_executeRegistryCommand;
 	iqtgui::CHierarchicalCommand m_abortRegistryCommand;
+	iqtgui::CHierarchicalCommand m_showRegistryTopologyCommand;
 
 	QTimer m_executionObserverTimer;
 
