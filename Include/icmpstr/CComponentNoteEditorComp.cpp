@@ -15,6 +15,7 @@ namespace icmpstr
 
 
 CComponentNoteEditorComp::CComponentNoteEditorComp()
+	:m_textWasChanged(false)
 {
 }
 
@@ -48,6 +49,7 @@ void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
 
 		NoteEditor->setReadOnly(elements.size() != 1);
 		NoteEditor->setPlainText(notes.join("\n"));
+		NoteEditor->setTextCursor(m_lastCursorPosition);
 
 		return;
 	}
@@ -92,9 +94,26 @@ void CComponentNoteEditorComp::OnGuiModelDetached()
 {
 	UnregisterAllModels();
 
-	CommitButton->setEnabled(false);
-
 	BaseClass::OnGuiModelDetached();
+}
+
+
+
+// reimplemented (QObject)
+
+bool CComponentNoteEditorComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
+{
+	if (sourcePtr->objectName() == NoteEditor->objectName()){
+		if (eventPtr->type() == QEvent::FocusOut){
+			if (m_textWasChanged){
+				DoUpdateModel();
+
+				m_textWasChanged = false;
+			}
+		}
+	}
+
+	return BaseClass::eventFilter(sourcePtr, eventPtr);
 }
 
 
@@ -105,8 +124,9 @@ void CComponentNoteEditorComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	NoteEditor->setReadOnly(true);
-	CommitButton->setFocusPolicy(Qt::NoFocus);
-	CommitButton->setEnabled(false);
+	m_lastCursorPosition = NoteEditor->textCursor();
+
+	NoteEditor->installEventFilter(this);
 }
 
 
@@ -122,15 +142,7 @@ void CComponentNoteEditorComp::OnModelChanged(int /*modelId*/, int /*changeFlags
 
 void CComponentNoteEditorComp::on_NoteEditor_textChanged()
 {
-	CommitButton->setEnabled(!NoteEditor->isReadOnly());
-}
-
-
-void CComponentNoteEditorComp::on_CommitButton_clicked()
-{
-	DoUpdateModel();
-
-	CommitButton->setEnabled(false);
+	m_textWasChanged = true;
 }
 
 

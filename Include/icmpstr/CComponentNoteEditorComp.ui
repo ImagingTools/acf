@@ -20,17 +20,6 @@
    <item>
     <widget class="QTextEdit" name="NoteEditor"/>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="CommitButton">
-       <property name="text">
-        <string>Update Note</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <resources>
