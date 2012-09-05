@@ -74,7 +74,7 @@ QTreeWidgetItem* CRegistryTreeViewComp::AddRegistryElementItem(
 		elementItemPtr->setData(CT_NAME, DR_ELEMENT_NAME, elementId);
 		elementItemPtr->setData(CT_NAME, DR_ELEMENT_ID, elementPtr->address.GetComponentId());
 		elementItemPtr->setData(CT_NAME, DR_ELEMENT_PACKAGE_ID, elementPtr->address.GetPackageId());
-		elementItemPtr->setData(CT_NAME, DR_REGISTRY, int(&registry));
+        elementItemPtr->setData(CT_NAME, DR_REGISTRY, quintptr(&registry));
 		elementItemPtr->setText(CT_ID, elementPtr->address.GetComponentId());
 		elementItemPtr->setText(CT_PACKAGE, elementPtr->address.GetPackageId());
 
@@ -370,7 +370,7 @@ void CRegistryTreeViewComp::on_RegistryTree_itemSelectionChanged()
 		MessagesList->setPlainText(messageText);
 
 		m_selectedElements.selectedElementIds.insert(itemPtr->data(CT_NAME, DR_ELEMENT_ID).toByteArray());
-		int registryPointerAddress = itemPtr->data(CT_NAME, DR_REGISTRY).toInt();
+        int registryPointerAddress = itemPtr->data(CT_NAME, DR_REGISTRY).toUInt();
 		m_selectedElements.registryPtr = reinterpret_cast<icomp::IRegistry*>(registryPointerAddress);
 	}
 

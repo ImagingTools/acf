@@ -55,6 +55,10 @@ protected:
 	virtual void OnGuiCreated();
 
 protected:
+    using BaseClass::GetObjectPtr;
+    using BaseClass::DoUpdateModel;
+    using Ui::CPolygonParamsGuiComp::CoordsTable;
+
 	/** 
 		Internal item delegate class for input validation
 	*/
@@ -86,7 +90,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateMod
 
 	istd::CChangeNotifier changePtr(objectPtr);
 
-	int count = CoordsTable->rowCount();
+    int count = CoordsTable->rowCount();
 	objectPtr->Clear();
 
 	for (int i = 0; i < count; i++){
