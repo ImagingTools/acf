@@ -86,7 +86,7 @@ void CComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 
 void CComposedParamsSetGuiComp::OnGuiCreated()
 {
-	int guiMode = *m_designTypeAttrPtr;
+	DesignType guiMode = DesignType(*m_designTypeAttrPtr);
 
 	if (!m_paramsLoaderCompPtr.IsValid()){
 		LoaderFrame->hide();
@@ -107,7 +107,7 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 	QToolBox* toolBoxPtr;
 	QTabWidget* tabWidgetPtr;
 	switch (guiMode){
-	case 2:
+	case DT_TAB_WIDGET:
 		ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 		m_guiContainerPtr = tabWidgetPtr = new QTabWidget(ParamsFrame);
 		QObject::connect(tabWidgetPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
@@ -115,7 +115,7 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 		m_currentGuiIndex = 0;
 		break;
 
-	case 1:
+	case DT_TOOL_BOX:
 		ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 		m_guiContainerPtr = toolBoxPtr = new QToolBox(ParamsFrame);
 		QObject::connect(toolBoxPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
@@ -146,12 +146,6 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 		}
 
 		m_guiNames[guiPtr] = name;
-	}
-
-	if (*m_useVerticalSpacerAttrPtr){
-		QSpacerItem* VerticalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-		layoutPtr->layout()->addItem(VerticalSpacer);
 	}
 
 	BaseClass::OnGuiCreated();
@@ -315,7 +309,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 			if (keepVisible){
 				QString name = m_guiNames[guiObject];
 				QWidget* panelPtr;
-				if (guiMode == 2){
+				if (guiMode == DT_TAB_WIDGET){
 					panelPtr = new QWidget(m_guiContainerPtr);
 					new QVBoxLayout(panelPtr);
 					QTabWidget* tabWidgetPtr = static_cast<QTabWidget*> (m_guiContainerPtr);
@@ -323,7 +317,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 
 					addSpacer = true;
 				}
-				else if (guiMode == 1){
+				else if (guiMode == DT_TOOL_BOX){
 					panelPtr = new QWidget(m_guiContainerPtr);
 					QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 					panelLayoutPtr->setContentsMargins(6, 0, 6, 0);
@@ -370,14 +364,14 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 				QWidget* guiWidgetPtr = guiObject->GetWidget();
 				QWidget* framePtr = guiWidgetPtr->parentWidget();
 				if (framePtr){
-					if (guiMode == 2){
+					if (guiMode == DT_TAB_WIDGET){
 						QTabWidget* tabWidgetPtr = static_cast<QTabWidget*> (m_guiContainerPtr);
 						int index = tabWidgetPtr->indexOf(framePtr);
 						if (index >= 0){
 							tabWidgetPtr->removeTab(index);
 						}
 					}
-					else if (guiMode == 1){
+					else if (guiMode == DT_TOOL_BOX){
 						QToolBox* toolBoxPtr = static_cast<QToolBox*> (m_guiContainerPtr);
 						int index = toolBoxPtr->indexOf(framePtr);
 						if (index >= 0){
@@ -396,13 +390,22 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 	}
 
 	// restore selection
-	if (guiMode == 2){
+	if (guiMode == DT_TAB_WIDGET){
 		QTabWidget* tabWidgetPtr = static_cast<QTabWidget*> (m_guiContainerPtr);
 		tabWidgetPtr->setCurrentIndex(m_currentGuiIndex);
 	}
-	else if (guiMode == 1){
+	else if (guiMode == DT_TOOL_BOX){
 		QToolBox* toolBoxPtr = static_cast<QToolBox*> (m_guiContainerPtr);
 		toolBoxPtr->setCurrentIndex(m_currentGuiIndex);
+	}
+
+	if (*m_useVerticalSpacerAttrPtr){
+		QLayout* layoutPtr = m_guiContainerPtr->layout();
+		I_ASSERT(layoutPtr != NULL);
+
+		QSpacerItem* verticalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+		layoutPtr->layout()->addItem(verticalSpacer);
 	}
 
 	GetWidget()->setVisible(keepGlobalVisible);
@@ -418,13 +421,13 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 
 	// clear the gui container
 	int guiMode = *m_designTypeAttrPtr;
-	if (guiMode == 2){
+	if (guiMode == DT_TAB_WIDGET){
 		QTabWidget* tabWidget = static_cast<QTabWidget*> (m_guiContainerPtr);
 		for (int i = tabWidget->count() - 1; i >= 0; i--){
 			tabWidget->removeTab(i);
 		}
 	}
-	else if (guiMode == 1){
+	else if (guiMode == DT_TOOL_BOX){
 		QToolBox* toolBox = static_cast<QToolBox*> (m_guiContainerPtr);
 		for (int i = toolBox->count() - 1; i >= 0; i--){
 			toolBox->removeItem(i);
