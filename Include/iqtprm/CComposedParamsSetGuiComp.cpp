@@ -312,7 +312,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 				if (guiMode == DT_TAB_WIDGET){
 					panelPtr = new QWidget(m_guiContainerPtr);
 					new QVBoxLayout(panelPtr);
-					QTabWidget* tabWidgetPtr = static_cast<QTabWidget*> (m_guiContainerPtr);
+					QTabWidget* tabWidgetPtr = static_cast<QTabWidget*>(m_guiContainerPtr);
 					tabWidgetPtr->addTab(panelPtr, name);
 
 					addSpacer = true;
@@ -401,11 +401,11 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 
 	if (*m_useVerticalSpacerAttrPtr){
 		QLayout* layoutPtr = m_guiContainerPtr->layout();
-		I_ASSERT(layoutPtr != NULL);
+		if (layoutPtr != NULL){
+			QSpacerItem* verticalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-		QSpacerItem* verticalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-		layoutPtr->layout()->addItem(verticalSpacer);
+			layoutPtr->addItem(verticalSpacer);
+		}
 	}
 
 	GetWidget()->setVisible(keepGlobalVisible);

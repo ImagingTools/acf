@@ -4,9 +4,9 @@
 // Qt includes
 #include <QtCore/QDir>
 
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
+#include "istd/TChangeDelegator.h"
 #include "istd/CClassInfo.h"
 
 #include "icomp/CInterfaceManipBase.h"
@@ -23,6 +23,9 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 {
 	static iser::CArchiveTag positionMapTag("PositionMap", "Map of component name to its positions");
 	static iser::CArchiveTag elementTag("Element", "Map element");
+	static iser::CArchiveTag embeddedRegistriesTag("EmbeddedRegistries", "List of embedded registries for recursive layout loading");
+	static iser::CArchiveTag embeddedRegistryTag("EmbededRegistry", "Layout information of embedded registry");
+	static iser::CArchiveTag embeddedRegistryIdTag("Id", "ID of embedded registry");
 
 	bool retVal = true;
 
@@ -88,6 +91,64 @@ bool CVisualRegistryComp::SerializeComponentsLayout(iser::IArchive& archive)
 	}
 
 	retVal = retVal && archive.EndTag(positionMapTag);
+
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
+	quint32 frameworkVersion = 0;
+	if (		!versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion) ||
+				(frameworkVersion >= 2516)){
+		// process embedded registries
+		ids = GetEmbeddedRegistryIds();
+		positionsCount = ids.size();
+
+		retVal = retVal && archive.BeginMultiTag(embeddedRegistriesTag, embeddedRegistryTag, positionsCount);
+
+		if (!retVal){
+			return false;
+		}
+
+		if (archive.IsStoring()){
+			for (Ids::const_iterator iter = ids.begin(); iter != ids.end(); iter++){
+				QByteArray id = *iter;
+				CVisualRegistryComp* embeddedRegPtr = dynamic_cast<CVisualRegistryComp*> (GetEmbeddedRegistry(id));
+				if (embeddedRegPtr != NULL){
+					retVal = retVal && archive.BeginTag(embeddedRegistryTag);
+					retVal = retVal && archive.BeginTag(embeddedRegistryIdTag);
+					archive.Process(id);
+					retVal = retVal && archive.EndTag(embeddedRegistryIdTag);
+
+					// serialize embedded PositionMap etc.
+					embeddedRegPtr->SerializeComponentsLayout(archive);
+
+					retVal = retVal && archive.EndTag(embeddedRegistryTag);
+				}
+			}
+		}
+		else{
+			for (int i = 0; i < positionsCount; i++){
+				retVal = retVal && archive.BeginTag(embeddedRegistryTag);
+				retVal = retVal && archive.BeginTag(embeddedRegistryIdTag);
+				QByteArray id;
+
+				archive.Process(id);
+
+				retVal = retVal && archive.EndTag(embeddedRegistryIdTag);
+
+				if (!retVal){
+					return false;
+				}
+
+				CVisualRegistryComp* embeddedRegPtr = dynamic_cast<CVisualRegistryComp*> (GetEmbeddedRegistry(id));
+				if (embeddedRegPtr != NULL){
+					// serialize embedded PositionMap etc.
+					embeddedRegPtr->SerializeComponentsLayout(archive);
+				}
+
+				retVal = retVal && archive.EndTag(embeddedRegistryTag);
+			}
+		}
+
+		retVal = retVal && archive.EndTag(embeddedRegistriesTag);
+	}
 
 	return retVal;
 }
@@ -260,6 +321,23 @@ icomp::IRegistryElement* CVisualRegistryComp::CreateRegistryElement(
 	}
 
 	return NULL;
+}
+
+
+icomp::IRegistry* CVisualRegistryComp::InsertEmbeddedRegistry(const QByteArray& registryId)
+{
+	// A specialization of this method is needed to enable component layout support in embedded compositions.
+
+	RegistryPtr newRegistryPtr(new istd::TChangeDelegator<CVisualRegistryComp>(this));
+
+	RegistryPtr& registryPtr = m_embeddedRegistriesMap[registryId];
+	if (registryPtr.IsValid()){
+		return NULL; // such ID exists yet!
+	}
+
+	registryPtr.TakeOver(newRegistryPtr);
+
+	return registryPtr.GetPtr();
 }
 
 

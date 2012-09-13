@@ -75,6 +75,7 @@ protected:
 	virtual icomp::IRegistryElement* CreateRegistryElement(
 				const QByteArray& elementId,
 				const icomp::CComponentAddress& address) const;
+	virtual icomp::IRegistry* InsertEmbeddedRegistry(const QByteArray& registryId);
 
 private:
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);

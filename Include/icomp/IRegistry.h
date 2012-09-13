@@ -22,8 +22,8 @@ namespace icomp
 
 /**
 	Interface representing information stored in component registry.
-	Registry is model representating smallest component topology unit.
-	Registry can be imagined as representation of arx files.
+	Registry is a model representing smallest component topology unit.
+	Registry can be imagined as a representation of an arx file.
 
 	\ingroup ComponentConcept
 */

@@ -69,7 +69,7 @@ public:
 		I_ASSIGN_TO(m_envManagerModelCompPtr, m_envManagerCompPtr, false);
 		I_ASSIGN(m_quickHelpViewerCompPtr, "QuickHelpGui", "Show help of selected component using its address", false, "QuickHelpGui");
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager allowing to load files on double click", false, "DocumentManager");
-		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
+		I_ASSIGN(m_consistencyInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
 		I_ASSIGN(m_registryTopologyGuiCompPtr, "RegistryTopologyGui", "GUI for showing the registry component topology", false, "RegistryTopologyGui");
 		I_ASSIGN_TO(m_registryObserverCompPtr, m_registryTopologyGuiCompPtr, false);
 		I_ASSIGN(m_registryValidationStatusCompPtr, "RegistryValidationStatus", "Visual status of registry validation", false, "RegistryValidationStatus");
@@ -118,8 +118,12 @@ protected:
 	};
 
 	/**
+		Get root or embedded registry that is currently selected in the editor.
+	*/
+	icomp::IRegistry* GetSelectedRegistry() const;
+	/**
 		Create instance of shape representing some element.
-		The shape will be automatically conncted to element using model/observer pattern.
+		The shape will be automatically connected to element using model/observer pattern.
 		\sa imod.
 	*/
 	QGraphicsItem* AddShapeToScene(iser::ISerializable* elementPtr) const;
@@ -129,11 +133,18 @@ protected:
 				const QByteArray& referenceComponentId,
 				const QByteArray& attributeId,
 				bool isFactory = false);
+
+	/**
+		Used on drop/paste action
+	*/
 	icomp::IRegistryElement* TryCreateComponent(
 				const QByteArray& elementId,
 				const icomp::CComponentAddress& address,
 				const i2d::CVector2d& position);
 	void ConnectReferences(const QByteArray& componentRole);
+	/**
+		Update component selection and related menu actions.
+	*/
 	void UpdateComponentSelection();
 
 	void DoRetranslate();
@@ -173,6 +184,12 @@ protected Q_SLOTS:
 	void OnAbort();
 	void OnExecutionTimerTick();
 	void OnShowRegistryTopology();
+	/**
+		Updates the scene and fills it with currently selected registry.
+		\param id valid component id of an embedded registry; otherwise will switch to root level
+	*/
+	void OnEmbeddedRegistrySelected(const QByteArray& id);
+	void UpdateEmbeddedRegistriesList();
 
 private:
 	class SelectionInfoImpl: virtual public IElementSelectionInfo
@@ -196,7 +213,7 @@ private:
 	I_REF(imod::IModel, m_envManagerModelCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
-	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
+	I_REF(IRegistryConsistInfo, m_consistencyInfoCompPtr);
 	I_REF(iqtgui::IGuiObject, m_registryTopologyGuiCompPtr);
 	I_REF(imod::IObserver, m_registryObserverCompPtr);
 	I_REF(iqtgui::IVisualStatusProvider, m_registryValidationStatusCompPtr);
@@ -229,6 +246,8 @@ private:
 
 	imod::TModelWrap<SelectionInfoImpl> m_selectionInfo;
 
+	QByteArray m_embeddedRegistryId;
+
 	// static attributes
 	static iser::CArchiveTag s_elementsListTag;
 	static iser::CArchiveTag s_elementTag;
@@ -248,7 +267,7 @@ inline const icomp::IComponentEnvironmentManager* CVisualRegistryScenographerCom
 
 inline const IRegistryConsistInfo* CVisualRegistryScenographerComp::GetRegistryConsistInfo() const
 {
-	return m_consistInfoCompPtr.GetPtr();
+	return m_consistencyInfoCompPtr.GetPtr();
 }
 
 

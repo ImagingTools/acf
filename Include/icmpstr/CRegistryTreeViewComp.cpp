@@ -52,7 +52,13 @@ void CRegistryTreeViewComp::CreateRegistryTree(const icomp::IRegistry& registry,
 		const QByteArray& elementId = *iter;
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
 		if ((elementInfoPtr != NULL) && elementInfoPtr->elementPtr.IsValid()){
-			AddRegistryElementItem(registry, elementInfoPtr, elementId, registryRootItemPtr);
+			QTreeWidgetItem* elementItem = AddRegistryElementItem(registry, elementInfoPtr, elementId, registryRootItemPtr);
+			
+			// fill a subtree for an embedded composition
+			icomp::IRegistry* embeddedRegistry = registry.GetEmbeddedRegistry(elementId);
+			if (embeddedRegistry != NULL && elementItem != NULL){
+				CreateRegistryTree(*embeddedRegistry, elementItem);
+			}
 		}
 	}
 }

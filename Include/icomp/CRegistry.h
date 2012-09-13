@@ -66,13 +66,14 @@ protected:
 	virtual bool SerializeExportedInterfaces(iser::IArchive& archive);
 	virtual bool SerializeExportedComponents(iser::IArchive& archive);
 
-private:
-	typedef QMap<QByteArray, ElementInfo> ComponentsMap;
 	typedef istd::TDelPtr<IRegistry> RegistryPtr;
 	typedef QMap<QByteArray, RegistryPtr> EmbeddedRegistriesMap;
+	EmbeddedRegistriesMap m_embeddedRegistriesMap;
+
+private:
+	typedef QMap<QByteArray, ElementInfo> ComponentsMap;
 
 	ComponentsMap m_componentsMap;
-	EmbeddedRegistriesMap m_embeddedRegistriesMap;
 	ExportedInterfacesMap m_exportedInterfacesMap;
 	ExportedElementsMap m_exportedComponentsMap;
 

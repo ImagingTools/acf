@@ -91,7 +91,7 @@ protected:
 
 	/**
 		Create instance of shape representing some element.
-		The shape will be automatically conncted to element using model/observer pattern.
+		The shape will be automatically connected to element using model/observer pattern.
 		\sa imod.
 	*/
 	QTreeWidgetItem* AddRegistryElementItem(
@@ -106,12 +106,12 @@ protected:
 	bool IsRegistryValid(const icomp::IRegistry& registry) const;
 
 	/**
-		Update visual state of the reistry validation.
+		Update visual state of the registry validation.
 	*/
 	void UpdateRegistryStatus();
 
 	/**
-		Update visibiliy state of the registry tree elemens according to the settings of the item filter
+		Update visibility state of the registry tree elements according to the settings of the item filter
 	*/
 	void UpdateTreeItemsVisibility();
 

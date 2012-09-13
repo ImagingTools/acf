@@ -12,6 +12,8 @@
 // ACF includes
 #include "iqtdoc/CMainWindowGuiComp.h"
 
+#include "iqt/CSignalBlocker.h"
+
 
 namespace icmpstr
 {
@@ -73,8 +75,62 @@ void CSceneProviderGuiComp::SetIsotropyFactor(double factor)
 	}
 }
 
+int CSceneProviderGuiComp::GetEmbeddedListSize() const
+{
+	return LocalCompositionSelectorList->count();
+}
 
-// reimplemented (ibase::ICommandsProvider)
+
+void CSceneProviderGuiComp::ClearEmbeddedList()
+{
+	LocalCompositionSelectorGroupBox->setVisible(false);
+	iqt::CSignalBlocker blocker(LocalCompositionSelectorList);
+	LocalCompositionSelectorList->clear();
+	LocalCompositionSelectorList->addItem("<< root >>");
+	LocalCompositionSelectorList->setCurrentItem(0);
+}
+
+
+void CSceneProviderGuiComp::InsertEmbeddedIntoList(QByteArray id)
+{
+	if (LocalCompositionSelectorList->count() == 0){
+		ClearEmbeddedList();
+	}
+	QList<QListWidgetItem *> items = LocalCompositionSelectorList->findItems(id, Qt::MatchExactly);
+	if (items.empty()){
+		LocalCompositionSelectorList->addItem(id);
+	}
+	LocalCompositionSelectorGroupBox->setVisible(true);
+}
+
+
+void CSceneProviderGuiComp::RemoveEmbeddedFromList(QByteArray id)
+{
+	QList<QListWidgetItem *> items = LocalCompositionSelectorList->findItems(id, Qt::MatchExactly);
+	if (items.empty()){
+		return;
+	}
+	int row = LocalCompositionSelectorList->row(items[0]);
+	LocalCompositionSelectorList->model()->removeRow(row);
+	if (LocalCompositionSelectorList->count() == 1){ // just root
+		LocalCompositionSelectorGroupBox->setVisible(false);
+	}
+}
+
+
+void CSceneProviderGuiComp::SelectEmbeddedInList(QByteArray id, bool propagateEvent /* = true */)
+{
+	QList<QListWidgetItem *> items = LocalCompositionSelectorList->findItems(id, Qt::MatchExactly);
+
+	if (items.empty()){
+		return;
+	}
+
+	LocalCompositionSelectorList->blockSignals(!propagateEvent);
+	LocalCompositionSelectorList->setCurrentItem(items[0]);
+	LocalCompositionSelectorList->blockSignals(false);
+}
+
 
 const ibase::IHierarchicalCommand* CSceneProviderGuiComp::GetCommands() const
 {
@@ -427,6 +483,8 @@ void CSceneProviderGuiComp::ResetScene()
 
 void CSceneProviderGuiComp::OnGuiCreated()
 {
+	ClearEmbeddedList(); // hide
+
 	BaseClass::OnGuiCreated();
 
 	if (m_dropConsumersCompPtr.IsValid() && m_dropConsumersCompPtr.GetCount() > 0){
@@ -695,6 +753,13 @@ void CSceneProviderGuiComp::OnSelectAllShapes()
 			}
 		}
 	}
+}
+
+
+void CSceneProviderGuiComp::on_LocalCompositionSelectorList_itemSelectionChanged()
+{
+	QByteArray itemLabel = LocalCompositionSelectorList->currentItem()->data(0).toByteArray();
+	embeddedRegistrySelected(itemLabel);
 }
 
 

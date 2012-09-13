@@ -92,6 +92,27 @@ public:
 	double GetIsotropyFactor() const;
 	void SetIsotropyFactor(double factor);
 
+	// embedded compositions list support
+	int GetEmbeddedListSize() const;
+	/**
+		Remove all elements from the embedded compositions list and hide it
+	*/
+	void ClearEmbeddedList();
+	/**
+		Show the embedded composition list and add an item with given id.
+		First added element inserts <<root>> as well and makes the list visible.
+		Each element is added only once.
+	*/
+	void InsertEmbeddedIntoList(QByteArray id);
+	/**
+		Remove an element from the embedded compositions list. If it was the last one, hide the list
+	*/
+	void RemoveEmbeddedFromList(QByteArray id);
+	/**
+		Select embedded composition list element with given id
+	*/
+	void SelectEmbeddedInList(QByteArray id, bool propagateEvent = true);
+
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
@@ -162,6 +183,7 @@ protected:
 
 Q_SIGNALS:
 	void zoomChanged(double);
+	void embeddedRegistrySelected(const QByteArray&);
 
 protected Q_SLOTS:
 	void OnPrint();
@@ -172,6 +194,8 @@ protected Q_SLOTS:
 	void OnResetScale();
 	void OnAutoFit(bool isAutoScale);
 	void OnSelectAllShapes();
+	// propagate list selection signal to externally accessible signal
+	void on_LocalCompositionSelectorList_itemSelectionChanged();
 
 private:
 	istd::TDelPtr<QGraphicsScene> m_scenePtr;
