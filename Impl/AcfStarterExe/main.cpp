@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 			QMessageBox::warning(
 						NULL,
 						QObject::tr("ACF Starter"),
-						QObject::tr("File '%1' does not exist").arg(confFile),
+						QObject::tr("File '%1' does not exist").arg(confFile.absolutePath()),
 						QMessageBox::Ok);		
 			return 1;
 		}
