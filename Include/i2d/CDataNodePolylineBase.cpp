@@ -1,4 +1,4 @@
-#include "i2d/CPolylineExNodeBase.h"
+#include "i2d/CDataNodePolylineBase.h"
 
 
 // ACF includes
@@ -13,10 +13,10 @@ namespace i2d
 
 // reimplemented (iser::ISerializable)
 
-bool CPolylineExNodeBase::Serialize(iser::IArchive& archive)
+bool CDataNodePolylineBase::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag nodesDataTag("NodesExtraData", "Nodes Extra Data");
-	static iser::CArchiveTag nodeDataTag("Node", "Node Data");
+	static iser::CArchiveTag nodesDataTag("UserData", "User data stored in the nodes of polyline");
+	static iser::CArchiveTag nodeDataTag("Node", "Data stored in the polyline node");
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, CF_OBJECT_POSITION | istd::IChangeable::CF_MODEL);
 

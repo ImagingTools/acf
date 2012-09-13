@@ -241,7 +241,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CPolylineExNodeBase.cpp"
+				RelativePath="..\CDataNodePolylineBase.cpp"
 				>
 			</File>
 			<File
@@ -382,7 +382,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CPolylineExNodeBase.h"
+				RelativePath="..\CDataNodePolylineBase.h"
 				>
 			</File>
 			<File
@@ -458,7 +458,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\TPolylineExNode.h"
+				RelativePath="..\TDataNodePolyline.h"
 				>
 			</File>
 		</Filter>
