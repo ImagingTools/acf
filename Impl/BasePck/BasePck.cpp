@@ -269,6 +269,11 @@ I_EXPORT_COMPONENT(
 			"2D Tranformation Calibration" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
 
 I_EXPORT_COMPONENT(
+			TubePolyline,
+			"Tube representation",
+			"2D Tube Polyline Region" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
+
+I_EXPORT_COMPONENT(
 			TextDocument,
 			"Simple text document",
 			IM_CATEGORY(I_DATA_MODEL) IM_TAG("Text Document"));

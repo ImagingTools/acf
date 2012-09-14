@@ -30,7 +30,7 @@ public:
     */
     NodeData& GetTNodeDataRef(int nodeIndex);
 
-    // reimplement (i2d::CDataNodePolylineBase)
+    // reimplemented (i2d::CDataNodePolylineBase)
     virtual const iser::ISerializable& GetNodeData(int nodeIndex) const;
     virtual iser::ISerializable& GetNodeDataRef(int nodeIndex);
 
@@ -70,7 +70,7 @@ inline NodeData& TDataNodePolyline<NodeData>::GetTNodeDataRef(int nodeIndex)
 }
 
 
-// reimplement (i2d::CDataNodePolylineBase)
+// reimplemented (i2d::CDataNodePolylineBase)
 
 template<class NodeData>
 inline const iser::ISerializable& TDataNodePolyline<NodeData>::GetNodeData(int nodeIndex) const
@@ -92,7 +92,7 @@ inline iser::ISerializable& TDataNodePolyline<NodeData>::GetNodeDataRef(int node
 }
 
 
-// reimplement (i2d::CPolygon)
+// reimplemented (i2d::CPolygon)
 
 template<class NodeData>
 inline void TDataNodePolyline<NodeData>::Clear()
@@ -135,7 +135,7 @@ bool TDataNodePolyline<NodeData>::RemoveNode(int index)
 
 // protected methods
 
-// reimplement (i2d::CPolygon)
+// reimplemented (i2d::CPolygon)
 
 template<class NodeData>
 void TDataNodePolyline<NodeData>::SetNodesCount(int count)
@@ -150,6 +150,5 @@ void TDataNodePolyline<NodeData>::SetNodesCount(int count)
 
 
 #endif // !i2d_TDataNodePolyline_included
-
 
 

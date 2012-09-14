@@ -197,6 +197,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDataNodePolylineBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirection2d.cpp"
 				>
 			</File>
@@ -238,10 +242,6 @@
 			</File>
 			<File
 				RelativePath="..\CPolylineComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataNodePolylineBase.cpp"
 				>
 			</File>
 			<File
@@ -293,6 +293,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTubeNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTubePolylineComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVector2d.cpp"
 				>
 			</File>
@@ -338,6 +346,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CDataNodePolylineBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CDirection2d.h"
 				>
 			</File>
@@ -379,10 +391,6 @@
 			</File>
 			<File
 				RelativePath="..\CPolylineComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDataNodePolylineBase.h"
 				>
 			</File>
 			<File
@@ -431,6 +439,14 @@
 			</File>
 			<File
 				RelativePath="..\CStaticCalibrationProviderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTubeNode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTubePolylineComp.h"
 				>
 			</File>
 			<File
