@@ -5,7 +5,7 @@ namespace i2d
 {
 
 
-bool CTubeProjectionsGenerator::CreateNodes(const i2d::CTubePolyline& tube, int projectionsCount, ProjectionLines& projections)
+bool CTubeProjectionsGenerator::GeneratorProjections(const i2d::CTubePolyline& tube, int projectionsCount, ProjectionLines& projections)
 {
 	int nodesCount = tube.GetNodesCount();
 

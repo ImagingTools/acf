@@ -23,7 +23,7 @@ public:
 		\param projectionsCount Number of projections to be generated
 		\param projections	List of generated projection lines.
 	*/
-	static bool CreateNodes(const i2d::CTubePolyline& tube, int projectionsCount, ProjectionLines& projections);
+	static bool GeneratorProjections(const i2d::CTubePolyline& tube, int projectionsCount, ProjectionLines& projections);
 };
 
 
