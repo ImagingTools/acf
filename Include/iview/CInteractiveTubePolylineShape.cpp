@@ -58,7 +58,6 @@ void CInteractiveTubePolylineShape::DrawCurve(QPainter& drawContext) const
 
 			if (isSelected){
 				drawContext.setPen(colorShema.GetPen(iview::IColorShema::SP_SELECTED));
-				drawContext.drawLine(iqt::GetQPoint(prevLeftScreenPoint), iqt::GetQPoint(prevRightScreenPoint));
 			}
 			else{
 				drawContext.setPen(colorShema.GetPen(iview::IColorShema::SP_NORMAL));
@@ -73,43 +72,33 @@ void CInteractiveTubePolylineShape::DrawCurve(QPainter& drawContext) const
 
 				drawContext.drawLine(iqt::GetQPoint(prevScreenPoint), iqt::GetQPoint(screenPoint));
 
-				if (isSelected){
-					const i2d::CTubeNode& nodeData = polylinePtr->GetTNodeData(nodeIndex);
-					istd::CRange range = nodeData.GetTubeRange();
-					const QPen& edgePen = colorShema.GetPen(iview::IColorShema::SP_YELLOW);
+				const i2d::CTubeNode& nodeData = polylinePtr->GetTNodeData(nodeIndex);
+				istd::CRange range = nodeData.GetTubeRange();
 
-					leftPos = nodePosition - kneeVector * range.GetMinValue();
-					rightPos = nodePosition - kneeVector * range.GetMaxValue();
-					istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
-					istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
+				leftPos = nodePosition - kneeVector * range.GetMinValue();
+				rightPos = nodePosition - kneeVector * range.GetMaxValue();
+				istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
+				istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
 
-					drawContext.save();
-					drawContext.setPen(edgePen);
-					drawContext.drawLine(iqt::GetQPoint(prevLeftScreenPoint), iqt::GetQPoint(leftScreenPoint));
-					drawContext.drawLine(iqt::GetQPoint(prevRightScreenPoint), iqt::GetQPoint(rightScreenPoint));
-					drawContext.restore();
+				drawContext.drawLine(iqt::GetQPoint(prevLeftScreenPoint), iqt::GetQPoint(leftScreenPoint));
+				drawContext.drawLine(iqt::GetQPoint(prevRightScreenPoint), iqt::GetQPoint(rightScreenPoint));
 
-					if (true){
-						drawContext.drawLine(iqt::GetQPoint(leftScreenPoint), iqt::GetQPoint(rightScreenPoint));
-					}
+				if ((nodePosition.GetDistance(centerPos) > I_BIG_EPSILON) && showOrientation){
+					double arrowWidth = qMin(leftPos.GetDistance(nodePosition), rightPos.GetDistance(nodePosition)) * 0.5;
 
-					if ((nodePosition.GetDistance(centerPos) > I_BIG_EPSILON) && showOrientation){
-						double arrowWidth = qMin(leftPos.GetDistance(nodePosition), rightPos.GetDistance(nodePosition)) * 0.5;
+					i2d::CVector2d delta = (nodePosition - centerPos).GetNormalized(arrowWidth);
+					i2d::CVector2d orthogonalized = delta.GetOrthogonal();
 
-						i2d::CVector2d delta = (nodePosition - centerPos).GetNormalized(arrowWidth);
-						i2d::CVector2d orthogonalized = delta.GetOrthogonal();
+					istd::CIndex2d screenArrowBegin = transform.GetScreenPosition(nodePosition);
+					istd::CIndex2d screenArrowLeft = transform.GetScreenPosition(nodePosition - delta + orthogonalized);
+					istd::CIndex2d screenArrowRight = transform.GetScreenPosition(nodePosition - delta - orthogonalized);
 
-						istd::CIndex2d screenArrowBegin = transform.GetScreenPosition(nodePosition);
-						istd::CIndex2d screenArrowLeft = transform.GetScreenPosition(nodePosition - delta + orthogonalized);
-						istd::CIndex2d screenArrowRight = transform.GetScreenPosition(nodePosition - delta - orthogonalized);
-
-						drawContext.drawLine(iqt::GetQPoint(screenArrowBegin), iqt::GetQPoint(screenArrowLeft));
-						drawContext.drawLine(iqt::GetQPoint(screenArrowBegin), iqt::GetQPoint(screenArrowRight));
-					}
-
-					prevLeftScreenPoint = leftScreenPoint;
-					prevRightScreenPoint = rightScreenPoint;
+					drawContext.drawLine(iqt::GetQPoint(screenArrowBegin), iqt::GetQPoint(screenArrowLeft));
+					drawContext.drawLine(iqt::GetQPoint(screenArrowBegin), iqt::GetQPoint(screenArrowRight));
 				}
+
+				prevLeftScreenPoint = leftScreenPoint;
+				prevRightScreenPoint = rightScreenPoint;
 
 				prevScreenPoint = screenPoint;
 				centerPos = nodePosition;
@@ -210,8 +199,8 @@ bool CInteractiveTubePolylineShape::IsTickerTouched(istd::CIndex2d position) con
 						return true;
 					}
 				}
-				if (			tickerBoxMove.GetTranslated(rightScreenPoint).IsInside(position) ||
-								tickerBoxMove.GetTranslated(leftScreenPoint).IsInside(position)){
+				if (		tickerBoxMove.GetTranslated(rightScreenPoint).IsInside(position) ||
+							tickerBoxMove.GetTranslated(leftScreenPoint).IsInside(position)){
 					return true;
 				}
 			}

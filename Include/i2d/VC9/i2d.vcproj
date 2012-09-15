@@ -301,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTubeProjectionsGenerator.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVector2d.cpp"
 				>
 			</File>
@@ -451,6 +455,10 @@
 			</File>
 			<File
 				RelativePath="..\CTubePolylineComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTubeProjectionsGenerator.h"
 				>
 			</File>
 			<File

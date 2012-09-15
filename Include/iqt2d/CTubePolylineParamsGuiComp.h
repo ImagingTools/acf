@@ -41,7 +41,6 @@ protected:
 	virtual void UpdateGui(int updateFlags = 0);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();
 	virtual void OnGuiRetranslate();
 };
 

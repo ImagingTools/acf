@@ -98,12 +98,6 @@ void CTubePolylineParamsGuiComp::UpdateGui(int updateFlags)
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
-void CTubePolylineParamsGuiComp::OnGuiCreated()
-{
-	BaseClass::OnGuiCreated();
-}
-
-
 void CTubePolylineParamsGuiComp::OnGuiRetranslate()
 {
 	BaseClass::OnGuiRetranslate();
