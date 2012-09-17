@@ -440,9 +440,18 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 	}
 	else{
 		QLayout* layout = m_guiContainerPtr->layout();
-		for (int i = layout->count() - 1; i >= 0; i--){
-			layout->itemAt(i)->widget()->hide();
+		int layoutWidgetsCount = layout->count();
+		for (int i = layoutWidgetsCount - 1; i >= 0; i--){
+			QLayoutItem* layoutItemPtr = layout->itemAt(i);
+			I_ASSERT(layoutItemPtr != NULL);
+
+			QWidget* widgetPtr = layoutItemPtr->widget();
+
+			if (widgetPtr != NULL){
+				widgetPtr->hide();
+			}
 		}
+
 		qDeleteAll(layout->children());
 	}
 
