@@ -139,7 +139,7 @@ void CTranslationManagerComp::SetSystemLanguage()
 
 	int languagesCount = GetLanguagesCount();
 
-	for(int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
+	for (int translatorIndex = 0; translatorIndex < languagesCount; translatorIndex++){
 		QString languageId = m_languagesAttrPtr[translatorIndex];
 		if (languageId == defaultSystemLanguage){
 			SwitchLanguage(translatorIndex);

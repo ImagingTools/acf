@@ -295,15 +295,14 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 		#endif
 	}
 
-	if(m_rememberOpenDocumentsParamPtr.IsValid() && m_rememberOpenDocumentsParamPtr->IsEnabled()){
-	
+	if (m_rememberOpenDocumentsParamPtr.IsValid() && m_rememberOpenDocumentsParamPtr->IsEnabled()){
 		m_organizationName = settings.organizationName();
 		m_applicationName = settings.applicationName();
 
 		iqt::CSettingsReadArchive archive(
-							m_organizationName,
-							m_applicationName,
-							"OpenDocumentList");
+					m_organizationName,
+					m_applicationName,
+					"OpenDocumentList");
 		
 		SerializeOpenDocumentList(archive);
 	}

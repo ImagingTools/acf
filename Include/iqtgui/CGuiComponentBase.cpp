@@ -231,7 +231,7 @@ void CGuiComponentBase::MakeAutoSlotConnection()
         if (slot[0] != 'o' || slot[1] != 'n' || slot[2] != '_')
             continue;
         bool foundIt = false;
-        for(int j = 0; j < list.count(); ++j) {
+        for (int j = 0; j < list.count(); ++j) {
             const QObject *co = list.at(j);
             QByteArray objName = co->objectName().toAscii();
             int len = objName.length();

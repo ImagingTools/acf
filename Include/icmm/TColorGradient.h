@@ -61,7 +61,7 @@ bool TColorGradient<GradientFunction>::GetValueAt(const ArgumentType& argument, 
 
 	double argumentValue = normRange.GetClipped(argument[0]);
 	
-	for(int componentIndex = 0; componentIndex < result.GetElementsCount(); componentIndex++){
+	for (int componentIndex = 0; componentIndex < result.GetElementsCount(); componentIndex++){
 		double startValue = m_startColor[componentIndex];
 		double endValue = m_endColor[componentIndex];
 

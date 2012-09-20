@@ -300,7 +300,7 @@ void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 			QDir dir(directory);
 			QFileInfoList subDirs = dir.entryInfoList(filters);
 
-			for(int dirIndex = 0; dirIndex < subDirs.count(); dirIndex++){
+			for (int dirIndex = 0; dirIndex < subDirs.count(); dirIndex++){
 				QString filePath = subDirs[dirIndex].absoluteFilePath();
 
 				DirEdit->addItem(QDir::toNativeSeparators(filePath));
