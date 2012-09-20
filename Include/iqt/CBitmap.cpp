@@ -149,7 +149,7 @@ bool CBitmap::CreateBitmap(PixelFormat pixelFormat, const istd::CIndex2d& size, 
 
 int CBitmap::GetLinesDifference() const
 {
-	return m_image.scanLine(1) - m_image.scanLine(0);
+	return m_image.bytesPerLine();
 }
 
 

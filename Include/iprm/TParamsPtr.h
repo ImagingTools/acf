@@ -60,7 +60,7 @@ TParamsPtr<ParameterInterace>::TParamsPtr(const IParamsSet* parameterSetPtr, con
 
 
 template <class ParameterInterace>
-void TParamsPtr<ParameterInterace>::Init(const IParamsSet* parameterSetPtr, const QByteArray& parameterId, bool isObligatory)
+void TParamsPtr<ParameterInterace>::Init(const IParamsSet* parameterSetPtr, const QByteArray& parameterId, bool I_IF_DEBUG(isObligatory))
 {
 	if ((parameterSetPtr != NULL) && !parameterId.isEmpty()){
 		BaseClass::SetPtr(dynamic_cast<const ParameterInterace*>(parameterSetPtr->GetParameter(parameterId)));
