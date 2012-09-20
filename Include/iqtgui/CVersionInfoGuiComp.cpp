@@ -22,7 +22,10 @@ void CVersionInfoGuiComp::OnGuiCreated()
 			QTreeWidgetItem* itemPtr = new QTreeWidgetItem(Tree);
 			
 			itemPtr->setText(0, infoPtr->GetVersionIdDescription(*it));
-			itemPtr->setText(1, infoPtr->GetEncodedVersionName(*it, 0));
+		
+			quint32 number = 0;
+			infoPtr->GetVersionNumber(*it, number);
+			itemPtr->setText(1, infoPtr->GetEncodedVersionName(*it, number));		
 		}
 	}
 }
