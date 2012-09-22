@@ -277,6 +277,9 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 	
 	QVariant valueNotSet = QVariant(-1);
 
+	m_organizationName = settings.organizationName();
+	m_applicationName = settings.applicationName();
+
 	QVariant viewModeEntry = settings.value("MDIWorkspace/ViewMode", valueNotSet);
 	if (viewModeEntry != valueNotSet){
 		QMdiArea* workspacePtr = GetQtWidget();
@@ -296,9 +299,6 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 	}
 
 	if (m_rememberOpenDocumentsParamPtr.IsValid() && m_rememberOpenDocumentsParamPtr->IsEnabled()){
-		m_organizationName = settings.organizationName();
-		m_applicationName = settings.applicationName();
-
 		iqt::CSettingsReadArchive archive(
 					m_organizationName,
 					m_applicationName,

@@ -6,7 +6,6 @@
 #include <QtCore/QFileInfo>
 #include <QtGui/QVBoxLayout>
 
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
@@ -16,9 +15,11 @@
 #include "iqt/CSettingsReadArchive.h"
 
 
-
 namespace iqtdoc
 {
+
+
+// public methods
 
 
 CSingleDocumentWorkspaceGuiComp::CSingleDocumentWorkspaceGuiComp()
@@ -212,7 +213,6 @@ void CSingleDocumentWorkspaceGuiComp::OnComponentCreated()
 
 	if (m_documentTemplateCompPtr.IsValid()){
 		idoc::IDocumentTemplate::Ids ids = m_documentTemplateCompPtr->GetDocumentTypeIds();
-
 		if (!ids.isEmpty()){
 			FileNew(ids.front());
 		}
@@ -239,17 +239,16 @@ void CSingleDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& setting
 	BaseClass::OnRestoreSettings(settings);
 
 	Q_ASSERT(IsGuiCreated());
-	
-	if (m_rememberOpenDocumentParamPtr.IsValid() && m_rememberOpenDocumentParamPtr->IsEnabled()){
-	
-		m_organizationName = settings.organizationName();
-		m_applicationName = settings.applicationName();
 
+	m_organizationName = settings.organizationName();
+	m_applicationName = settings.applicationName();
+
+	if (m_rememberOpenDocumentParamPtr.IsValid() && m_rememberOpenDocumentParamPtr->IsEnabled()){
 		iqt::CSettingsReadArchive archive(
-							m_organizationName,
-							m_applicationName,
-							"OpenDocument");
-		
+					m_organizationName,
+					m_applicationName,
+					"OpenDocument");
+
 		SerializeOpenDocument(archive);
 	}
 }

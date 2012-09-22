@@ -5,7 +5,6 @@
 // Qt includes
 #include <QtGui/QWidget>
 
-
 // ACF includes
 #include "ibase/ICommandsProvider.h"
 #include "idoc/CSingleDocumentManagerBase.h"

@@ -188,15 +188,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMainWindowGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CMultiDocumentWorkspaceGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiDocumentWorkspaceGuiComp.moc"
 				>
 			</File>
 			<File
@@ -265,6 +257,18 @@
 			</File>
 			<File
 				RelativePath="..\Generated\moc_CMultiDocumentWorkspaceGuiComp.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Moc Files"
+			>
+			<File
+				RelativePath="..\CMainWindowGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiDocumentWorkspaceGuiComp.moc"
 				>
 			</File>
 		</Filter>
