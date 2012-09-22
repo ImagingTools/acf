@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2329
+          2535
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -35,7 +46,7 @@
         Log
       </ComponentName>
       <X>
-        650
+        675
       </X>
       <X>
         325
@@ -73,4 +84,6 @@
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

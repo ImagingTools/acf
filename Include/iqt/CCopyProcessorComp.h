@@ -44,7 +44,7 @@ public:
 		I_ASSIGN(m_outputPathAttrPtr, "OutputDir", "Path of input file or directory", true, "./Copy");
 		I_ASSIGN_MULTI_1(m_filtersAttrPtr, "Filters", "List of file filters will be copied", true, "*");
 		I_ASSIGN_MULTI_0(m_excludeFiltersAttrPtr, "ExcludeFilters", "List of file filters will be exclude from copy", false);
-		I_ASSIGN(m_recursionDepthAttrPtr, "RecursionDepth", "Depth of recursion", true, 0);
+		I_ASSIGN(m_recursionDepthAttrPtr, "RecursionDepth", "Depth of recursion. Negative value means no depth limitation", true, 0);
 	I_END_COMPONENT;
 
 protected:

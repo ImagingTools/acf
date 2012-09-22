@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2329
+          2535
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -33,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -43,6 +54,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -338,7 +365,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -348,6 +375,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -515,7 +558,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -525,6 +568,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -686,7 +745,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -696,6 +755,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -852,7 +927,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -862,6 +937,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1029,7 +1120,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1039,6 +1130,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1200,7 +1307,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1210,6 +1317,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1412,7 +1535,15 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="0">
+  <ExportedInterfaces count="1">
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
+      </InterfaceId>
+      <ComponentId>
+        InitSequence
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>

@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2535
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -18,13 +29,27 @@
   <PositionMap count="4">
     <Element>
       <ComponentName>
-        CopyBins
+        CopyOpenSources
       </ComponentName>
       <X>
-        475
+        125
       </X>
       <X>
         475
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        InitSequence
+      </ComponentName>
+      <X>
+        125
+      </X>
+      <X>
+        350
       </X>
       <Note>
         
@@ -46,31 +71,19 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyOpenSources
+        CopyBins
       </ComponentName>
       <X>
-        125
+        475
       </X>
       <X>
-        525
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        InitSequence
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <X>
-        350
+        475
       </X>
       <Note>
         
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

@@ -101,6 +101,10 @@ bool CCopyProcessorComp::CopyFileTree(
 		}
 	}
 
+	if (recursionDepth < 0){
+		recursionDepth = INT_MAX;
+	}
+
 	if (recursionDepth > 0){
 		QFileInfoList dirList = inputDir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
 		for (		QFileInfoList::const_iterator dirIter = dirList.begin();
@@ -169,10 +173,15 @@ void CCopyProcessorComp::OnComponentCreated()
 		excludeFilters << excludeFilter;
 	}
 
+	QString inputPath = iqt::CSystem::GetEnrolledPath(*m_inputPathAttrPtr);
+	QString outputPath = iqt::CSystem::GetEnrolledPath(*m_outputPathAttrPtr);
+
+	SendVerboseMessage(QString("Copy files from %1 to %2").arg(inputPath).arg(outputPath));
+
 	int counter = 0;
 	if (CopyFileTree(
-				iqt::CSystem::GetEnrolledPath(*m_inputPathAttrPtr),
-				iqt::CSystem::GetEnrolledPath(*m_outputPathAttrPtr),
+				inputPath,
+				outputPath,
 				filters,
 				excludeFilters,
 				*m_recursionDepthAttrPtr,

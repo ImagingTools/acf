@@ -44,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -54,6 +54,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -175,7 +191,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -185,6 +201,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -346,7 +378,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -356,6 +388,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -534,7 +582,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -544,6 +592,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -697,7 +761,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -707,6 +771,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -863,7 +943,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -873,6 +953,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -994,7 +1090,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1004,6 +1100,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1157,7 +1269,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1167,6 +1279,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1266,7 +1394,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1276,6 +1404,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1415,7 +1559,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1425,6 +1569,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1543,7 +1703,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1553,6 +1713,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1719,7 +1895,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1729,6 +1905,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
@@ -1892,7 +2084,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1902,6 +2094,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>

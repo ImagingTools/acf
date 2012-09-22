@@ -44,7 +44,23 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ExcludeFilters
@@ -180,7 +196,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -190,6 +206,22 @@
             </Type>
             <ExportId>
               ApplicationInfo
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>

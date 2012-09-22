@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2329
+          2535
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -206,7 +217,7 @@
         <Flags>
           1
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -224,6 +235,22 @@
               <Value>
                 ApplicationInfo
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -339,12 +366,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   Generated
                 </Value>
                 <Value>
                   generated
+                </Value>
+                <Value>
+                  3rdParty
                 </Value>
               </Values>
             </Data>
@@ -363,12 +393,15 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   Generated
                 </Value>
                 <Value>
                   generated
+                </Value>
+                <Value>
+                  3rdParty
                 </Value>
               </Values>
             </Data>
