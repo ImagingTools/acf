@@ -9,6 +9,21 @@ namespace iqt2d
 {
 
 
+// public methods
+
+// reimplemented (i2d::ICalibrationProvider)
+
+const i2d::ITransformation2d* CImageViewComp::GetCalibration() const
+{
+	const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetModelPtr());
+	if (calibrationProviderPtr != NULL){
+		return calibrationProviderPtr->GetCalibration();
+	}
+
+	return NULL;
+}
+
+
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
