@@ -30,6 +30,8 @@ public:
 
 	virtual void AddChildContainer(IHierarchicalMessageContainer* childContainerPtr);
 
+	void SetSlaveConsumer(ibase::IMessageConsumer* consumerPtr);
+
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
@@ -58,7 +60,9 @@ private:
 	typedef QVector<IHierarchicalMessageContainer*> Childs;
 	Childs m_childContainers;
 
-	int m_maxMessageCount;
+	ibase::IMessageConsumer* m_slaveConsumerPtr;
+
+	int m_maxMessagesCount;
 	int m_maxLiveTime;
 
 	int m_worstCategory;
