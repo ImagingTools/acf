@@ -212,6 +212,7 @@ int CBitmap::GetComponentsCount() const
 
 	case QImage::Format_RGB32:
 	case QImage::Format_ARGB32:
+	case QImage::Format_ARGB32_Premultiplied:
 		return 4;
 
 	default:
@@ -315,6 +316,7 @@ iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat)
 		return PF_RGB;
 
 	case QImage::Format_ARGB32:
+	case QImage::Format_ARGB32_Premultiplied:
 		return PF_RGBA;
 
 	case QImage::Format_Indexed8:
