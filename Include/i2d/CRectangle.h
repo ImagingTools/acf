@@ -96,6 +96,7 @@ public:
 
 	/**
 		Returns \c true, if this rectangle is intersected by the line \c rect.
+		Rectangle is intersected, if there is any point belonging to line and rectangle (filled).
 	*/
 	bool IsIntersectedBy(const CLine2d& line) const;
 

@@ -258,6 +258,34 @@ bool CRectangle::IsIntersectedBy(const CRectangle& rect) const
 
 bool CRectangle::IsIntersectedBy(const CLine2d& line) const
 {
+	const i2d::CVector2d& point1 = line.GetPoint1();
+	const i2d::CVector2d& point2 = line.GetPoint2();
+
+	bool isPoint1OutsideLeft = point1.GetX() < m_horizontalRange.GetMinValue();
+	bool isPoint1OutsideRight = point1.GetX() > m_horizontalRange.GetMaxValue();
+	bool isPoint1OutsideTop = point1.GetY() < m_verticalRange.GetMinValue();
+	bool isPoint1OutsideBottom = point1.GetY() > m_verticalRange.GetMaxValue();
+
+	if (!isPoint1OutsideLeft && !isPoint1OutsideRight && !isPoint1OutsideTop && !isPoint1OutsideBottom){
+		return true;
+	}
+
+	bool isPoint2OutsideLeft = point2.GetX() < m_horizontalRange.GetMinValue();
+	bool isPoint2OutsideRight = point2.GetX() > m_horizontalRange.GetMaxValue();
+	bool isPoint2OutsideTop = point2.GetY() < m_verticalRange.GetMinValue();
+	bool isPoint2OutsideBottom = point2.GetY() > m_verticalRange.GetMaxValue();
+
+	if (!isPoint2OutsideLeft && !isPoint2OutsideRight && !isPoint2OutsideTop && !isPoint2OutsideBottom){
+		return true;
+	}
+
+	if (		(isPoint1OutsideLeft && isPoint2OutsideLeft) ||
+				(isPoint1OutsideRight && isPoint2OutsideRight) ||
+				(isPoint1OutsideTop && isPoint2OutsideTop) ||
+				(isPoint1OutsideBottom && isPoint2OutsideBottom)){
+		return false;
+	}
+
 	i2d::CLine2d topLine(m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue(), m_horizontalRange.GetMaxValue(), m_verticalRange.GetMinValue());
 	i2d::CLine2d bottomLine(m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue(), m_horizontalRange.GetMaxValue(), m_verticalRange.GetMaxValue());
 	i2d::CLine2d leftLine(m_horizontalRange.GetMinValue(), m_verticalRange.GetMinValue(), m_horizontalRange.GetMinValue(), m_verticalRange.GetMaxValue());
