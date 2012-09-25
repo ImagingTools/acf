@@ -41,6 +41,20 @@ void CMessageContainer::SetSlaveConsumer(ibase::IMessageConsumer* consumerPtr)
 }
 
 
+void CMessageContainer::SetMaxMessageCount(int maxMessageCount)
+{
+	I_ASSERT(m_maxMessagesCount != 0);
+
+	m_maxMessagesCount = maxMessageCount;
+}
+
+
+void CMessageContainer::SetMaxLiveTime(int maxLiveTime)
+{
+	m_maxLiveTime = maxLiveTime;
+}
+
+
 // reimplemented (iser::ISerializable)
 
 bool CMessageContainer::Serialize(iser::IArchive& archive)
@@ -81,20 +95,6 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 
 
 // reimplemented (ibase::IMessageContainer)
-
-void CMessageContainer::SetMaxMessageCount(int maxMessageCount)
-{
-	I_ASSERT(m_maxMessagesCount != 0);
-
-	m_maxMessagesCount = maxMessageCount;
-}
-
-
-void CMessageContainer::SetMaxLiveTime(int maxLiveTime)
-{
-	m_maxLiveTime = maxLiveTime;
-}
-
 
 int CMessageContainer::GetWorstCategory() const
 {
