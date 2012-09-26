@@ -30,6 +30,11 @@ public:
 	virtual void Clear();
 
 	/**
+		Set new nodes count.
+	*/
+	virtual void SetNodesCount(int nodesCount);
+
+	/**
 		Return size of node table.
 	*/
 	virtual int GetNodesCount() const;
@@ -101,12 +106,6 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
-
-protected:
-	/**
-		Set new nodes count.
-	*/
-	virtual void SetNodesCount(int nodesCount);
 
 private:
 	typedef QVector<i2d::CVector2d> Nodes;

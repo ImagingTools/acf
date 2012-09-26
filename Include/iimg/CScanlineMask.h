@@ -11,6 +11,7 @@
 #include "i2d/CCircle.h"
 #include "i2d/CAnnulus.h"
 #include "i2d/CPolygon.h"
+#include "i2d/CTubePolyline.h"
 
 #include "iimg/IRasterImage.h"
 
@@ -63,16 +64,22 @@ public:
 	void CreateFromRectangle(const i2d::CRectangle& rect, const i2d::CRect* clipAreaPtr);
 	/**
 		Create 2D-region from annulus.
-		\param	rect		annulus object.
+		\param	annulus		annulus object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
 	void CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::CRect* clipAreaPtr);
 	/**
 		Create 2D-region from polygon.
-		\param	rect		polygon object.
+		\param	polygon		polygon object.
 		\param	clipAreaPtr	optional clipping area.
 	*/
 	void CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::CRect* clipAreaPtr);
+	/**
+		Create 2D-region from tube.
+		\param	tube		tube object.
+		\param	clipAreaPtr	optional clipping area.
+	*/
+	void CreateFromTube(const i2d::CTubePolyline& tube, const i2d::CRect* clipAreaPtr);
 
 	/**
 		Get union of two masks.

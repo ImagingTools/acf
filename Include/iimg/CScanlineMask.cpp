@@ -49,6 +49,13 @@ const istd::CIntRanges* CScanlineMask::GetPixelRanges(int lineIndex) const
 
 bool CScanlineMask::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d::CRect* clipAreaPtr)
 {
+	const i2d::CTubePolyline* polylinePtr = dynamic_cast<const i2d::CTubePolyline*>(&geometry);
+	if (polylinePtr != NULL){
+		CreateFromTube(*polylinePtr, clipAreaPtr);
+
+		return true;
+	}
+
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(&geometry);
 	if (annulusPtr != NULL){
 		CreateFromAnnulus(*annulusPtr, clipAreaPtr);
@@ -351,6 +358,34 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 			m_scanlines[lineIndex] =  NULL;
 		}
 	}
+}
+
+
+void CScanlineMask::CreateFromTube(const i2d::CTubePolyline& tube, const i2d::CRect* clipAreaPtr)
+{
+	i2d::CPolygon polygon;
+
+	int nodesCount = tube.GetNodesCount();
+	if (nodesCount >= 1){
+		polygon.SetNodesCount(nodesCount * 2);
+		int leftIndex = 0;
+		int rightIndex = nodesCount * 2 - 1;
+
+		for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
+			i2d::CVector2d kneeVector = tube.GetKneeVector(nodeIndex);
+			const i2d::CVector2d& nodePosition = tube.GetNode(nodeIndex);
+			const i2d::CTubeNode& tubeNode = tube.GetTNodeData(nodeIndex);
+			istd::CRange range = tubeNode.GetTubeRange();
+
+			i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
+			i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
+		
+			polygon.SetNode(leftIndex++, leftPos);
+			polygon.SetNode(rightIndex--, rightPos);
+		}
+	}
+
+	return CreateFromPolygon(polygon, clipAreaPtr);
 }
 
 

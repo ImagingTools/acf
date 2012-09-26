@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2332
+          2546
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -33,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="2">
+        <AttributeInfoMap count="3">
           <AttributeInfo>
             <Id>
               AutomaticHide
@@ -42,7 +53,7 @@
               Boolean
             </Type>
             <ExportId>
-              
+              AutomaticHide
             </ExportId>
             <Data>
               <IsEnabled>
@@ -61,7 +72,7 @@
               String
             </Type>
             <ExportId>
-              
+              Description
             </ExportId>
             <Data>
               <IsEnabled>
@@ -70,6 +81,22 @@
               <Value>
                 Progress
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowCancel
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowCancel
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

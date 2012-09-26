@@ -19,6 +19,12 @@ void CPolygon::Clear()
 }
 
 
+void CPolygon::SetNodesCount(int nodesCount)
+{
+	m_nodes.resize(nodesCount);
+}
+
+
 bool CPolygon::InsertNode(const i2d::CVector2d& node)
 {
 	m_nodes.push_back(node);
@@ -200,14 +206,6 @@ bool CPolygon::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(polygonTag);
 
 	return retVal;
-}
-
-
-// protected methods
-
-void CPolygon::SetNodesCount(int nodesCount)
-{
-	m_nodes.resize(nodesCount);
 }
 
 
