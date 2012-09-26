@@ -56,6 +56,7 @@
 #include "iqtproc/CProcessorControlGuiComp.h"
 #include "iqtproc/CDocumentProcessingManagerComp.h"
 #include "iqtproc/CDocumentProcessingCommandComp.h"
+#include "iqtproc/CProcessorCommandComp.h"
 
 
 /**
@@ -116,7 +117,7 @@ typedef iqtproc::CProgressManagerGuiComp ProgressManagerGui;
 typedef iqtproc::CProcessorControlGuiComp ProcessorControlGui;
 typedef iqtproc::CDocumentProcessingManagerComp DocumentProcessingManager;
 typedef iqtproc::CDocumentProcessingCommandComp DocumentProcessingCommand;
-
+typedef iqtproc::CProcessorCommandComp ProcessorCommand;
 
 
 } // namespace QtGuiPck

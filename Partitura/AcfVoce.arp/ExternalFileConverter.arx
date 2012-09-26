@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2500
+          2546
         </Number>
         <Description>
           ACF
@@ -44,7 +44,39 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="5">
+          <AttributeInfo>
+            <Id>
+              DefaultProcessArguments
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              DefaultProcessArguments
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ExecutablePath
@@ -82,13 +114,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ProcessArguments
+              ProcessArgumentsParamsId
             </Id>
             <Type>
-              String
+              Id
             </Type>
             <ExportId>
-              ProcessArguments
+              ProcessArgumentsParamsId
             </ExportId>
             <Data>
               <IsEnabled>

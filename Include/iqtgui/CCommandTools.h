@@ -19,9 +19,11 @@ namespace iqtgui
 {
 
 
+/**
+	Helper class to manage menu and toolbar using CHierarchicalCommand.
+*/
 class CCommandTools
 {
-
 public:
 	template <class MenuType>
 	static void CreateMenu(const iqtgui::CHierarchicalCommand& command, MenuType& result);

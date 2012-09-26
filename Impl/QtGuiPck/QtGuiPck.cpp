@@ -256,6 +256,11 @@ I_EXPORT_COMPONENT(
 			"Enableable parameter editor",
 			"Enableable Parameter");
 
+I_EXPORT_COMPONENT(
+			ProcessorCommand,
+			"Binding of any processor to menu command",
+			"Menu Processor Command Action");
+
 
 } // namespace QtGuiPck
 
