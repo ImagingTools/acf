@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileListProviderGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFilePersistenceGuiComp.cpp"
 				>
 			</File>
@@ -392,6 +396,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileDialogLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileListProviderGuiComp.h"
 				>
 			</File>
 			<File
@@ -618,6 +626,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CFileListProviderGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CFilePersistenceGuiComp.cpp"
 				>
 			</File>
@@ -663,6 +675,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CAboutWidgetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CFileListProviderGuiComp.h"
 				>
 			</File>
 			<File
@@ -754,6 +770,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFileListProviderGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CFilePersistenceGuiComp.moc"
 				>
 			</File>
@@ -794,6 +814,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\CFileListProviderGuiComp.ui"
+			>
+		</File>
 	</Files>
 	<Globals>
 		<Global

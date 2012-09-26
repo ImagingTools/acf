@@ -9,6 +9,7 @@
 #include "ibase/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
+#include "iprm/INameParam.h"
 #include "iprm/IFileNameParam.h"
 
 
@@ -34,6 +35,7 @@ public:
 		I_ASSIGN(m_executablePathCompPtr, "ExecutablePath", "Path to the application's binary", true, "ExecutablePath");
 		I_ASSIGN(m_defaultProcessArgumentsAttrPtr, "DefaultProcessArguments", "Application conversion arguments.\nUse $(Input) to specify the input and $(Output) for output file name", false, "$(Input) $(Output)");
 		I_ASSIGN(m_processArgumentsParamsIdAttrPtr, "ProcessArgumentsParamsId", "ID of the command line parameter (given as a INameParam object) in the parameter set", true, "ProcessArgumentsParamsId");
+		I_ASSIGN_MULTI_0(m_additionalArgumentsCompPtr, "AdditionalArguments", "Additional command line arguments", false);
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IFileConvertCopy)
@@ -54,6 +56,7 @@ private:
 	I_REF(iprm::IFileNameParam, m_executablePathCompPtr);
 	I_ATTR(QString, m_defaultProcessArgumentsAttrPtr);
 	I_ATTR(QByteArray, m_processArgumentsParamsIdAttrPtr);
+	I_MULTIREF(iprm::INameParam, m_additionalArgumentsCompPtr);
 
 	mutable QProcess m_conversionProcess;
 };

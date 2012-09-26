@@ -8,7 +8,6 @@
 
 // ACF includes
 #include "iprm/TParamsPtr.h"
-#include "iprm/INameParam.h"
 
 
 namespace ibase
@@ -58,6 +57,17 @@ bool CExternalFileConverterComp::ConvertFile(
 	for (int argIndex = 0; argIndex < int(arguments.size()); argIndex++){
 		arguments[argIndex].replace("$(Input)", inputFilePath);
 		arguments[argIndex].replace("$(Output)", outputFilePath);
+	}
+
+	if (m_additionalArgumentsCompPtr.IsValid()){
+		int additionalArgumentsCount = m_additionalArgumentsCompPtr.GetCount();
+
+		for (int addIndex = 0; addIndex < additionalArgumentsCount; addIndex){
+			iprm::INameParam* argumentPtr = m_additionalArgumentsCompPtr[addIndex];
+			if (argumentPtr != NULL){
+				arguments.push_back(argumentPtr->GetName());
+			}
+		}
 	}
 
 	m_conversionProcess.start(m_executablePathCompPtr->GetPath(), arguments);

@@ -216,10 +216,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystem.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CIniSettingsProviderComp.cpp"
 				>
 			</File>
@@ -269,6 +265,10 @@
 			</File>
 			<File
 				RelativePath="..\CSignalBlocker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystem.cpp"
 				>
 			</File>
 			<File
@@ -342,10 +342,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystem.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CIniSettingsProviderComp.h"
 				>
 			</File>
@@ -398,6 +394,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSystem.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CTranslationManagerComp.h"
 				>
 			</File>
@@ -440,6 +440,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CFileListProviderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CNetworkWriteArchive.cpp"
 				>
 			</File>
@@ -457,6 +461,10 @@
 			</File>
 			<File
 				RelativePath="..\CFileList.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileListProviderComp.moc"
 				>
 			</File>
 			<File

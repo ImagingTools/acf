@@ -2,6 +2,9 @@
 #define iqt_CFileListProviderComp_included
 
 
+// Qt includes
+#include <QtCore/QFileSystemWatcher>
+
 #include "iser/IFileLoader.h"
 
 #include "imod/IModel.h"
@@ -24,10 +27,12 @@ namespace iqt
 	Provide list of file pathes using recursive search of some file directory.
 */
 class CFileListProviderComp:
+			public QObject,
 			public icomp::CComponentBase,
 			virtual public ibase::IFileListProvider,
 			protected imod::CSingleModelObserverBase
 {
+	Q_OBJECT
 public:
 	typedef icomp::CComponentBase BaseClass;
 
@@ -54,6 +59,9 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
+private Q_SLOTS:
+	void OnDirectoryContentChanged(const QString& directoryPath);
+
 private:
 	I_REF(iprm::IFileNameParam, m_dirParamCompPtr);
 	I_REF(imod::IModel, m_dirParamModelCompPtr);
@@ -63,6 +71,9 @@ private:
 	I_ATTR(int, m_maxRecurDepthAttrPtr);
 
 	QStringList m_fileList;
+
+	QFileSystemWatcher m_directoryWatcher;
+
 };
 
 

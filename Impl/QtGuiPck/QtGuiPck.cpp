@@ -261,6 +261,11 @@ I_EXPORT_COMPONENT(
 			"Binding of any processor to menu command",
 			"Menu Processor Command Action");
 
+I_EXPORT_COMPONENT(
+			FileListProviderGui,
+			"UI for showing a list of files",
+			"File List");
+
 
 } // namespace QtGuiPck
 

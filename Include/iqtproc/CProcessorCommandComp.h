@@ -38,6 +38,7 @@ public:
 		I_ASSIGN(m_processorParamsCompPtr, "ProcessingParams", "Parameter set used for processor execution", false, "ProcessingParams");
 		I_ASSIGN(m_processorInputCompPtr, "ProcessingInput", "Input object used for processor execution", false, "ProcessingInput");
 		I_ASSIGN(m_processorOutputCompPtr, "ProcessingOutput", "Output object used for processor execution", false, "ProcessingOutput");
+		I_ASSIGN(m_progressManagerCompPtr, "ProgressManager", "Progress manager used for processor execution", false, "ProgressManager");
 		I_ASSIGN(m_actionIconAttrPtr, "ActionIcon", "Icon used command menu", true, ":/Icons");
 		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "MenuName");
 		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "MenuDescription");
@@ -60,6 +61,7 @@ protected:
 	I_REF(iprm::IParamsSet, m_processorParamsCompPtr);
 	I_REF(istd::IPolymorphic, m_processorInputCompPtr);
 	I_REF(istd::IChangeable, m_processorOutputCompPtr);
+	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
 	I_ATTR(QByteArray, m_actionIconAttrPtr);
 	I_ATTR(QString, m_menuNameAttrPtr);
 	I_ATTR(QString, m_menuDescriptionAttrPtr);

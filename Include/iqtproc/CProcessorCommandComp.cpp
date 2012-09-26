@@ -51,7 +51,11 @@ void CProcessorCommandComp::OnCommandActivated()
 {
 	I_ASSERT(m_processorCompPtr.IsValid());
 
-	m_processorCompPtr->DoProcessing(m_processorParamsCompPtr.GetPtr(), m_processorInputCompPtr.GetPtr(), m_processorOutputCompPtr.GetPtr());
+	m_processorCompPtr->DoProcessing(
+				m_processorParamsCompPtr.GetPtr(),
+				m_processorInputCompPtr.GetPtr(),
+				m_processorOutputCompPtr.GetPtr(),
+				m_progressManagerCompPtr.GetPtr());
 }
 
 

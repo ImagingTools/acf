@@ -44,7 +44,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="5">
+        <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              AdditionalArguments
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              AdditionalArguments
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DefaultProcessArguments

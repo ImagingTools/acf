@@ -82,7 +82,7 @@ void CDelegatedProgressManager::EndProgressSession(int sessionId)
 	istd::CChangeNotifier notifier(this, CF_SESSIONS_NUMBER | CF_PROGRESS_CHANGED);
 
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
-	I_ASSERT(iter != m_progressMap.end());
+	I_ASSERT(iter != m_progressMap.constEnd());
 
 	const ProgressInfo& info = iter.value();
 	m_progressSum -= info.progress;
@@ -104,7 +104,7 @@ void CDelegatedProgressManager::OnProgress(int sessionId, double currentProgress
 	istd::CChangeNotifier notifier(this, CF_PROGRESS_CHANGED);
 
 	ProgressMap::iterator iter = m_progressMap.find(sessionId);
-	I_ASSERT(iter != m_progressMap.end());
+	I_ASSERT(iter != m_progressMap.constEnd());
 
 	m_progressSum += currentProgress - iter.value().progress;
 	iter.value().progress = currentProgress;
