@@ -336,6 +336,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSimpleShapeFactoryComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CTransformableRectangleCalibrationShape.cpp"
 				>
 			</File>
@@ -526,6 +530,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSimpleShapeFactoryComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CTransformableRectangleCalibrationShape.h"
 				>
 			</File>
@@ -583,6 +591,10 @@
 			</File>
 			<File
 				RelativePath="..\IShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IShapeFactory.h"
 				>
 			</File>
 			<File

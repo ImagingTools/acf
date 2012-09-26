@@ -27,6 +27,11 @@ I_EXPORT_COMPONENT(
 			"Display Console Shape Info" IM_TAG("GUI 2D"));
 
 I_EXPORT_COMPONENT(
+			SimpleShapeFactory,
+			"Shape factory for common 2D-primitives",
+			"View Display Console Shape Factory" IM_TAG("GUI 2D"));
+
+I_EXPORT_COMPONENT(
 			SceneExtenderDelegator,
 			"Delegate a scene extender",
 			"Scene Connector Provider Extender Display Console" IM_TAG("GUI"));
