@@ -129,7 +129,7 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::LoadFromFile(istd::IChangeab
 
 		I_ASSERT(!archive.IsStoring());
 
-		iser::ISerializable* serializablePtr = dynamic_cast<iser::ISerializable*>(&data);
+		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		I_ASSERT(serializablePtr != NULL);
 
 		istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
@@ -155,7 +155,7 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(const istd::IChan
 		WriteArchiveEx archive(filePath, GetVersionInfo(), this);
 		I_ASSERT(archive.IsStoring());
 
-		const iser::ISerializable* serializablePtr = dynamic_cast<const iser::ISerializable*>(&data);
+		const iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
 		I_ASSERT(serializablePtr != NULL);
 
 		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){
