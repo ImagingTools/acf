@@ -391,6 +391,21 @@ i2d::CVector2d CLine2d::GetNearestPoint(const i2d::CVector2d& point) const
 }
 
 
+i2d::CVector2d CLine2d::GetExtendedNearestPoint(const i2d::CVector2d& point) const
+{
+	double x1 = m_point1.GetX();		double y1 = m_point1.GetY();
+	double x2 = m_point2.GetX();		double y2 = m_point2.GetY();
+	double x3 = point.GetX();			double y3 = point.GetY();
+
+	double x = ((x1 - x2) * x3 / (y2 - y1) - (y2 - y1) * x1 / (x2 - x1) + y1 - y3 ) /
+		((x1 - x2) / (y2 - y1) - (y2 - y1) / (x2 - x1));
+
+	double y = (x1 - x2) * x / (y2 - y1) - (x1 - x2) * x3 / (y2 - y1) + y3;
+
+	return i2d::CVector2d(x, y);
+}
+
+
 CLine2d CLine2d::GetShortestEndConnection(const CLine2d& line) const
 {
 	double dist1 = m_point1.GetDistance(line.m_point1);

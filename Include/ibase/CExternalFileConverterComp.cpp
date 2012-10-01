@@ -65,7 +65,36 @@ bool CExternalFileConverterComp::ConvertFile(
 		for (int addIndex = 0; addIndex < additionalArgumentsCount; addIndex++){
 			iprm::INameParam* argumentPtr = m_additionalArgumentsCompPtr[addIndex];
 			if (argumentPtr != NULL){
-				arguments.push_back(argumentPtr->GetName());
+				QString argument = argumentPtr->GetName();
+
+				bool placeHolderFound = false;
+				for (int argIndex = 0; argIndex < int(arguments.size()); argIndex++){
+					QString& existingArgument = arguments[argIndex];
+					QRegExp additionArgumentExpression("\\$\\(A[0-9]");
+					if (existingArgument.contains(additionArgumentExpression)){
+						int numberIndex = existingArgument.indexOf(QRegExp("[0-9]"));
+						int bracketIndex = existingArgument.indexOf(")");
+						QString numberString = existingArgument.mid(numberIndex, bracketIndex - numberIndex);
+						int argumentNumber = numberString.toInt() - 1;
+						if (argumentNumber >= 0){
+							placeHolderFound = true;
+
+							if (argumentNumber < additionalArgumentsCount){
+								iprm::INameParam* addArgumentPtr = m_additionalArgumentsCompPtr[argumentNumber];
+								if (addArgumentPtr != NULL){
+									existingArgument = addArgumentPtr->GetName();
+								}
+							}
+							else{
+								SendVerboseMessage("Addition command line argument doesn't exist");
+							}
+						}
+					}
+				}
+
+				if (!placeHolderFound){
+					arguments.push_back(argument);
+				}
 			}
 		}
 	}

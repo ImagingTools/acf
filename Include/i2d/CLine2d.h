@@ -162,6 +162,7 @@ public:
 		Get Y position of cutting this line by specified horizontal line.
 	*/
 	double GetCutXPos(double linePosY) const;
+
 	/**
 		Get X position of cutting this line by specified vertical line.
 	*/
@@ -194,7 +195,13 @@ public:
 		Return a line point, which is the nearest to the specified point.
 	*/
 	i2d::CVector2d GetNearestPoint(const i2d::CVector2d& point) const;
-	
+
+	/**
+		Return a point on the straight line in a mathematical sense,
+		which is the nearest to the specified point.
+	*/
+	i2d::CVector2d GetExtendedNearestPoint(const i2d::CVector2d& point) const;
+
 	/**
 		Return a line, which connects the nearest end points of two lines.
 	*/

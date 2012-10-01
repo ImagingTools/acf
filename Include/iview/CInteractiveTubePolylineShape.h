@@ -69,8 +69,8 @@ private:
 	bool m_isAlwaysDraggable;
 	bool m_isOrientationVisible;
 
-	mutable int m_draggedTickerType;
-	mutable int m_draggedTickerIndex;
+	int m_draggedTickerType;
+	int m_draggedTickerIndex;
 };
 
 
