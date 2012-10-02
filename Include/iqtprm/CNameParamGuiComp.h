@@ -43,6 +43,7 @@ public:
 	I_BEGIN_COMPONENT(CNameParamGuiComp);
 		I_ASSIGN(m_labelAttrPtr, "Label", "Label for the named object", false, "");
 		I_ASSIGN(m_labelPositionAttrPtr, "LabelPosition", "Selection label position. 0 - Left from the selector,\n1 - On top of the selector", false, LP_LEFT);
+		I_ASSIGN(m_regularExpressionAttrPtr, "InputFilter", "Input filter in form of a regular expression", false, "");
 	I_END_COMPONENT;
 
 	// reimplemented (imod::IModelEditor)
@@ -60,6 +61,7 @@ private Q_SLOTS:
 private:
 	I_ATTR(QString, m_labelAttrPtr);
 	I_ATTR(int, m_labelPositionAttrPtr);
+	I_ATTR(QByteArray, m_regularExpressionAttrPtr);
 };
 
 

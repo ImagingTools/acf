@@ -41,9 +41,13 @@ void CProgressManagerGuiComp::UpdateProgressBar()
 		ProgressBar->setEnabled(false);
 	}
 	else{
-		ProgressBar->setValue(1000 * GetCumulatedProgress());
+		int pogressValue = 1000 * GetCumulatedProgress();
+
+		ProgressBar->setValue(pogressValue);
 		ProgressBar->setEnabled(true);
 	}
+
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
 }
 
 
