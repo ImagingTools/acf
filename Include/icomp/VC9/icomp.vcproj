@@ -417,10 +417,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IRegistryLoaderProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\TAttribute.h"
 				>
 			</File>

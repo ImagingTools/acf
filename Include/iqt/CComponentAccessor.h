@@ -2,6 +2,10 @@
 #define iqt_CComponentAccessor_included
 
 
+// ACF includes
+#include "istd/TDelPtr.h"
+#include "icomp/IComponentStaticInfo.h"
+#include "icomp/IComponentContext.h"
 #include "icomp/CCompositeComponent.h"
 
 
@@ -20,9 +24,10 @@ public:
 	InterfaceType* GetComponentInterface(const QByteArray& componentId = QByteArray());
 
 private:
-	QString m_registryFile;
+	icomp::CCompositeComponent m_mainComponent;
 
-	icomp::CCompositeComponent m_composite;
+	istd::TDelPtr<icomp::IComponentStaticInfo> m_mainComponentStaticInfoPtr;
+	istd::TDelPtr<icomp::IComponentContext> m_mainComponentContextPtr;
 
 	bool m_isAutoInitBlocked;
 };
@@ -31,10 +36,10 @@ private:
 template <class InterfaceType>
 InterfaceType* CComponentAccessor::GetComponentInterface(const QByteArray& componentId)
 {
-	InterfaceType* interfacePtr = m_composite.GetComponentInterface<InterfaceType>(componentId);
+	InterfaceType* interfacePtr = m_mainComponent.GetComponentInterface<InterfaceType>(componentId);
 
 	if ((interfacePtr != NULL) && m_isAutoInitBlocked){
-		m_composite.EndAutoInitBlock();
+		m_mainComponent.EndAutoInitBlock();
 
 		m_isAutoInitBlocked = false;
 	}

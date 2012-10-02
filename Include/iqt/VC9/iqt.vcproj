@@ -196,10 +196,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDefaultRegistryLoaderProvider.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDirList.cpp"
 				>
 			</File>
@@ -319,10 +315,6 @@
 			</File>
 			<File
 				RelativePath="..\CCopyProcessorComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDefaultRegistryLoaderProvider.h"
 				>
 			</File>
 			<File

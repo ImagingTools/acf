@@ -1,13 +1,38 @@
 #include "iqt/CComponentAccessor.h"
 
 
-#include "icomp/IRegistryLoaderProvider.h"
+// ACF includes
+#include "iser/CXmlFileReadArchive.h"
+#include "iser/CXmlFileWriteArchive.h"
 #include "icomp/IComponentEnvironmentManager.h"
 #include "icomp/IRegistryLoader.h"
+#include "icomp/TSimComponentWrap.h"
 #include "icomp/CCompositeComponentContext.h"
 #include "icomp/CRegistryElement.h"
+#include "ibase/TFileSerializerComp.h"
+#include "iqt/CPackagesLoaderComp.h"
 
-#include "iqt/CDefaultRegistryLoaderProvider.h"
+
+namespace
+{
+
+	
+struct Loader
+{
+	icomp::TSimComponentWrap< ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> > registryLoaderComp;
+	icomp::TSimComponentWrap<iqt::CPackagesLoaderComp> packagesLoaderComp;
+
+	Loader()
+	{
+		registryLoaderComp.InitComponent();
+
+		packagesLoaderComp.SetRef("RegistryLoader", &registryLoaderComp);
+		packagesLoaderComp.InitComponent();
+	}
+};
+
+
+}
 
 
 namespace iqt
@@ -17,39 +42,32 @@ namespace iqt
 CComponentAccessor::CComponentAccessor(
 			const QString& registryFile,
 			const QString& configFile)
-:	m_registryFile(registryFile),
-	m_isAutoInitBlocked(false)
+:	m_isAutoInitBlocked(false)
 {
-	if (m_registryFile.isEmpty()){
-		m_registryFile = "default.arx";
-	}
+	static Loader loader;
+	loader.packagesLoaderComp.LoadPackages(configFile);
 
-	static iqt::CDefaultRegistryLoaderProvider registryProvider;
+	QString usedRegistryFile = registryFile.isEmpty()? QString("default.arx"): registryFile;
+	const icomp::IRegistry* registryPtr = loader.packagesLoaderComp.GetRegistryFromFile(usedRegistryFile);
+	if (registryPtr != NULL){
+		static icomp::CRegistryElement dummyElement;
 
-	icomp::IComponentEnvironmentManager* managerPtr = registryProvider.GetEnvironmentManager();
-	if (managerPtr != NULL){
-		managerPtr->LoadPackages(configFile);
+		m_mainComponent.BeginAutoInitBlock();
+		m_isAutoInitBlocked = true;
 
-		const icomp::IComponentStaticInfo* staticInfoPtr = dynamic_cast<const icomp::IComponentStaticInfo*>(managerPtr);
-		const icomp::IRegistryLoader* registryLoaderPtr = registryProvider.GetRegistryLoader();
-		if ((registryLoaderPtr != NULL) && (staticInfoPtr != NULL)){
-			const icomp::IRegistry* registryPtr = registryLoaderPtr->GetRegistryFromFile(m_registryFile);
-			if (registryPtr != NULL){
-				static icomp::CRegistryElement dummyElement;
+		m_mainComponentStaticInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(
+					*registryPtr,
+					loader.packagesLoaderComp,
+					NULL));
 
-				m_composite.BeginAutoInitBlock();
-				m_isAutoInitBlocked = true;
-
-				static icomp::CCompositeComponentContext compositeContext(
+		m_mainComponentContextPtr.SetPtr(new icomp::CCompositeComponentContext(
 					&dummyElement,
-					staticInfoPtr,
+					m_mainComponentStaticInfoPtr.GetPtr(),
 					registryPtr,
-					managerPtr,
+					&loader.packagesLoaderComp,
 					NULL,
-					"");
-				m_composite.SetComponentContext(&compositeContext, NULL, false);
-			}
-		}
+					""));
+		m_mainComponent.SetComponentContext(m_mainComponentContextPtr.GetPtr(), NULL, false);
 	}
 }
 
