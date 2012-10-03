@@ -90,7 +90,7 @@ protected:
 	typedef QSet<QByteArray> Ids;
 
 	/**
-		Get set of used addresses used by this registry and its subcomponents.
+		Get component addresses used by given registry and its elements (recursively).
 	*/
 	bool AppendAddresses(
 				const icomp::IRegistry& registry,
@@ -157,11 +157,20 @@ protected:
 				QList<QByteArray>& valueStrings,
 				QByteArray& typeName) const;
 
+	/** 
+		Insert a new line and indentation tabs.
+	*/
 	bool NextLine(QTextStream& stream) const;
 	int ChangeIndent(int difference) const;
 
+	/**
+		Extract class name and absolute header path from a file name.
+	*/
 	bool ExtractInfoFromFile(const QString& filePath, QByteArray& className, QString& baseFilePath) const;
 
+	/**
+		Ensure that a package name ends with 'Pck'.
+	*/
 	QByteArray GetPackageName(const QByteArray& packageId) const;
 
 	/**

@@ -201,7 +201,7 @@ Q_SLOTS:
 	void OnPasteCommand();
 	void OnRemoveComponent();
 	void OnRenameComponent();
-	void InsertEmbeddedComponent();
+	void NewEmbeddedComponent();
 	void ToEmbeddedComponent();
 	void RemoveEmbeddedComponent();
 	void OnExportToCode();

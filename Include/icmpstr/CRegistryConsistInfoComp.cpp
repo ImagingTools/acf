@@ -624,9 +624,32 @@ bool CRegistryConsistInfoComp::CheckPointedElementCompatibility(
 			icomp::IRegistry* embeddedRegistryPtr = registry.GetEmbeddedRegistry(pointedElementAddress.GetComponentId());
 			if (embeddedRegistryPtr != NULL){
 				icomp::CCompositeComponentStaticInfo info(*embeddedRegistryPtr, *m_envManagerCompPtr);
+
+				const icomp::IElementStaticInfo* pointedMetaInfoPtr = &info;
+
+				if (!subId.isEmpty()){
+					pointedMetaInfoPtr = pointedMetaInfoPtr->GetSubelementInfo(subId);
+
+					if (pointedMetaInfoPtr == NULL){
+						if (reasonConsumerPtr != NULL){
+							reasonConsumerPtr->AddMessage(istd::TSmartPtr<const istd::IInformationProvider>(new ibase::CMessage(
+										istd::IInformationProvider::IC_ERROR,
+										MI_COMPONENT_NOT_FOUND,
+										tr("Reference or factory '%1' in '%2' is set to %3, but its subelement cannot be found")
+													.arg(QString(attributeName))
+													.arg(QString(elementName))
+													.arg(QString(pointedElementName)),
+										tr("Attribute Consistency Check"),
+										0)));
+						}
+
+						return false;
+					}
+				}
+
 				return CheckPointedElementInfoCompatibility(
 							pointedElementName,
-							&info,
+							pointedMetaInfoPtr,
 							interfaceNames,
 							optionalInterfaceNames,
 							attributeName,

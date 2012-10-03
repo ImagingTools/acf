@@ -316,15 +316,15 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 		const icomp::CComponentAddress& address = *addressIter;
 
 		const icomp::IComponentStaticInfo* metaInfoPtr = NULL;
-		if (m_envManagerCompPtr.IsValid()){
-			metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
-		}
 
-		QStringList groupIds;
 		QByteArray elementName;
-
+		QStringList groupIds;
 		if (!address.GetPackageId().isEmpty()){
-			elementName += address.GetPackageId() + "/";
+			elementName = address.GetPackageId() + "/";
+			if (m_envManagerCompPtr.IsValid()){
+				metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(address);
+			}
+
 		}
 		else{
 			groupIds.push_back(tr("<< Local >>"));
@@ -359,14 +359,20 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 			icon = m_consistInfoCompPtr->GetComponentIcon(address);
 		}
 
-		if (icon.isNull() && (metaInfoPtr != NULL)){
-			switch (metaInfoPtr->GetComponentType()){
+		if (icon.isNull()){
+			if (metaInfoPtr != NULL){
+				switch (metaInfoPtr->GetComponentType()){
 				case icomp::IComponentStaticInfo::CT_COMPOSITE:
 					icon = m_compositeComponentIcon.pixmap(QSize(64, 64), QIcon::Disabled);
 					break;
+
 				case icomp::IComponentStaticInfo::CT_REAL:
 					icon = m_realComponentIcon.pixmap(QSize(64, 64), QIcon::Disabled);
 					break;
+				}
+			}
+			else if (address.GetPackageId().isEmpty()){
+				icon = m_embeddedComponentIcon.pixmap(QSize(64, 64), QIcon::Disabled);
 			}
 		}
 
@@ -1016,6 +1022,7 @@ void CPackageOverviewComp::OnGuiCreated()
 	m_realComponentIcon = QIcon(":/Icons/RealComponent.svg");
 	m_compositeComponentIcon = QIcon(":/Icons/CompositeComponent.svg");
 	m_mixedComponentIcon = QIcon(":/Icons/MixedComponent.svg");
+	m_embeddedComponentIcon = QIcon(":/Icons/EmbeddedComponent.svg");
 
 	// set up the tree view:
 	PackagesList->setColumnCount(1);

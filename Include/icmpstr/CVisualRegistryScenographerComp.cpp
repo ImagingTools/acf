@@ -378,15 +378,6 @@ icomp::IRegistryElement* CVisualRegistryScenographerComp::TryCreateComponent(
 		realElementId = QString("%1_%2").arg(elementBase).arg(++elementValue).toLocal8Bit();
 	}
 
-	// if the new element has empty package_id, assume it's a local composition
-	if (address.GetPackageId().isEmpty() && registryPtr.GetPtr() == GetObjectPtr()){
-		icomp::IRegistry* newEmbeddedRegistryPtr = registryPtr->InsertEmbeddedRegistry(realElementId);
-		if (newEmbeddedRegistryPtr == NULL){
-			QMessageBox::critical(NULL, tr("Error"), tr("Embedded component could not be created!"));
-			return NULL;
-		}
-	}
-
 	icomp::IRegistry::ElementInfo* elementInfoPtr = registryPtr->InsertElementInfo(realElementId, address);
 	if (elementInfoPtr != NULL){
 		CVisualRegistryElement* visualElementPtr = dynamic_cast<CVisualRegistryElement*>(elementInfoPtr->elementPtr.GetPtr());
@@ -659,7 +650,6 @@ void CVisualRegistryScenographerComp::UpdateScene(int /*updateFlags*/)
 
 // reimplemented (imod::CMultiModelDispatcherBase)
 
-
 void CVisualRegistryScenographerComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_showRegistryTopologyCommand.setIcon(m_registryValidationStatusCompPtr->GetStatusIcon());
@@ -667,7 +657,6 @@ void CVisualRegistryScenographerComp::OnModelChanged(int /*modelId*/, int /*chan
 
 
 // reimplemented (imod::CSingleModelObserverBase)
-	
 
 bool CVisualRegistryScenographerComp::OnAttached(imod::IModel* modelPtr)
 {
@@ -705,7 +694,6 @@ bool CVisualRegistryScenographerComp::OnDetached(imod::IModel* modelPtr)
 
 // namespace icmpstr
 
-
 void CVisualRegistryScenographerComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
@@ -722,7 +710,7 @@ void CVisualRegistryScenographerComp::OnComponentCreated()
 	connect(&m_removeComponentCommand, SIGNAL(triggered()), this, SLOT(OnRemoveComponent()));
 	connect(&m_renameComponentCommand, SIGNAL(triggered()), this, SLOT(OnRenameComponent()));
 
-	connect(&m_newEmbeddedRegistryCommand, SIGNAL(triggered()), this, SLOT(InsertEmbeddedComponent()));
+	connect(&m_newEmbeddedRegistryCommand, SIGNAL(triggered()), this, SLOT(NewEmbeddedComponent()));
 	connect(&m_toEmbeddedRegistryCommand, SIGNAL(triggered()), this, SLOT(ToEmbeddedComponent()));
 	connect(&m_removeEmbeddedRegistryCommand, SIGNAL(triggered()), this, SLOT(RemoveEmbeddedComponent()));
 	connect(&m_exportToCodeCommand, SIGNAL(triggered()), this, SLOT(OnExportToCode()));
@@ -779,7 +767,6 @@ void CVisualRegistryScenographerComp::OnComponentDestroyed()
 
 // static methods
 
-
 IElementSelectionInfo* CVisualRegistryScenographerComp::ExtractSelectionInterface(CVisualRegistryScenographerComp& component)
 {
 	return &component.m_selectionInfo;
@@ -828,8 +815,8 @@ void CVisualRegistryScenographerComp::AfterUpdate(imod::IModel* /*modelPtr*/, in
 	m_isUpdating = false;
 }
 
-// protected slots
 
+// protected slots
 
 void CVisualRegistryScenographerComp::OnSelectionChanged()
 {
@@ -1043,7 +1030,7 @@ void CVisualRegistryScenographerComp::OnRenameComponent()
 }
 
 
-void CVisualRegistryScenographerComp::InsertEmbeddedComponent()
+void CVisualRegistryScenographerComp::NewEmbeddedComponent()
 {
 	istd::TChangeNotifier<icomp::IRegistry> registryPtr(GetObjectPtr(), icomp::IRegistry::CF_EMBEDDED | icomp::IRegistry::CF_ELEMENT_ADDED);
 	if (!registryPtr.IsValid()){
@@ -1065,11 +1052,6 @@ void CVisualRegistryScenographerComp::InsertEmbeddedComponent()
 	icomp::IRegistry* newEmbeddedRegistryPtr = registryPtr->InsertEmbeddedRegistry(newName);
 	if (newEmbeddedRegistryPtr == NULL){
 		QMessageBox::critical(NULL, tr("Error"), tr("Embedded component could not be created!")); 
-		return;
-	}
-
-	if (registryPtr->InsertElementInfo(newName, icomp::CComponentAddress("", newName)) == NULL){
-		QMessageBox::critical(NULL, tr("Error"), tr("Component could not be added")); 
 		return;
 	}
 }
@@ -1395,6 +1377,8 @@ void CVisualRegistryScenographerComp::UpdateEmbeddedRegistryView(const QByteArra
 		m_embeddedRegistryId = id;
 
 		UpdateScene(0);
+
+		istd::CChangeNotifier selectionNotifier(&m_selectionInfo, IElementSelectionInfo::CF_SELECTION);
 	}
 }
 

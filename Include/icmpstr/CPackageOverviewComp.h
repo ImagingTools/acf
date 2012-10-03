@@ -217,6 +217,7 @@ private:
 	QIcon m_realComponentIcon;
 	QIcon m_compositeComponentIcon;
 	QIcon m_mixedComponentIcon;
+	QIcon m_embeddedComponentIcon;
 
 	typedef QMap<QString, QTreeWidget*> CategoryWidgetsMap;
 	CategoryWidgetsMap m_categoryWidgetsMap;
