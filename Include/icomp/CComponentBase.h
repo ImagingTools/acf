@@ -67,7 +67,7 @@ protected:
 	*/
 	virtual const icomp::IRealComponentStaticInfo& GetComponentStaticInfo() const = 0;
 
-	// static methods
+	// static protected methods
 	static const icomp::IRealComponentStaticInfo& InitStaticInfo(IComponent* componentPtr);
 
 private:
