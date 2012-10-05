@@ -206,15 +206,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRelativeFileNameParamComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableParamsSetComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CSelectionConstraintsComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionDelegatorComp.cpp"
 				>
 			</File>
 			<File
@@ -279,15 +279,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRelativeFileNameParamComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableParamsSetComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CSelectionConstraintsComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSelectionDelegatorComp.h"
 				>
 			</File>
 			<File

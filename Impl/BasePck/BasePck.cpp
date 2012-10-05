@@ -134,6 +134,11 @@ I_EXPORT_COMPONENT(
 			"Application Version Qt" IM_TAG("Application"));
 
 I_EXPORT_COMPONENT(
+			ObjectSynchronizer,
+			"Data object synchronization",
+			"Synchronization Data Object" IM_TAG("Model"));
+
+I_EXPORT_COMPONENT(
 			SelectableParamsSet,
 			"Composed set of parameters",
 			"Parameters Set Selection Options List" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Parameter"));
@@ -182,11 +187,6 @@ I_EXPORT_COMPONENT(
 			NameParam,
 			"Name parameter",
 			"Name Parameter" IM_CATEGORY(I_DATA_MODEL));
-
-I_EXPORT_COMPONENT(
-			SelectionDelegator,
-			"Selection delegator",
-			"Selection Delegator" IM_TAG("Model"));
 
 I_EXPORT_COMPONENT(
 			SingleDocumentTemplate,
@@ -302,6 +302,11 @@ I_EXPORT_COMPONENT(
 			MultiParamsManager,
 			"Manager of multi parameters set",
 			"Parameters Set Multi Manager" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition Parameter"));
+
+I_EXPORT_COMPONENT(
+			RelativeFileNameParam,
+			"Provide file name relative to some other optional directory",
+			"Name Relative Directory Parameters URL" IM_CATEGORY(I_DATA_MODEL) IM_TAG("File Model Parameter"));
 
 
 } // namespace BasePck

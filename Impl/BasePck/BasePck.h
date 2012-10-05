@@ -42,6 +42,7 @@
 #include "ibase/CMultiObserverBinderComp.h"
 #include "ibase/CSingletonApplicationComp.h"
 #include "ibase/CQtVersionInfoComp.h"
+#include "ibase/CObjectSynchronizerComp.h"
 
 #include "iprm/CSelectableParamsSetComp.h"
 #include "iprm/CParamsManagerComp.h"
@@ -53,8 +54,8 @@
 #include "iprm/CManagerParamsSetShadowerComp.h"
 #include "iprm/CSelectionConstraintsComp.h"
 #include "iprm/CNameParamComp.h"
-#include "iprm/CSelectionDelegatorComp.h"
 #include "iprm/CMultiParamsManagerComp.h"
+#include "iprm/CRelativeFileNameParamComp.h"
 
 #include "i2d/CPosition2dComp.h"
 #include "i2d/CRectangleComp.h"
@@ -107,6 +108,7 @@ typedef icomp::TModelCompWrap<ibase::CLogComp> Log;
 typedef ibase::CMultiObserverBinderComp MultiObserverBinder;
 typedef ibase::CSingletonApplicationComp SingletonApplication;
 typedef ibase::CQtVersionInfoComp QtVersionInfo;
+typedef ibase::CObjectSynchronizerComp ObjectSynchronizer;
 
 typedef icomp::TModelCompWrap<iprm::CSelectableParamsSetComp> SelectableParamsSet;
 typedef icomp::TModelCompWrap<iprm::CParamsManagerComp> ParamsManager;
@@ -118,7 +120,6 @@ typedef icomp::TModelCompWrap<iprm::CSelectionParamComp> SelectionParam;
 typedef iprm::CManagerParamsSetShadowerComp ManagerParamsSetShadower;
 typedef iprm::CSelectionConstraintsComp SelectionConstraints;
 typedef icomp::TModelCompWrap<iprm::CNameParamComp> NameParam;
-typedef iprm::CSelectionDelegatorComp SelectionDelegator;
 
 typedef idoc::CSingleDocumentTemplateComp SingleDocumentTemplate;
 typedef idoc::CCompositeDocumentTemplateComp CompositeDocumentTemplate;
@@ -155,6 +156,7 @@ typedef iproc::CCascadedProcessorComp CascadedProcessor;
 typedef iproc::CIterativeProcessorComp IterativeProcessor;
 typedef iproc::CModelBasedProcessingTriggerComp ModelBasedProcessingTrigger;
 typedef icomp::TModelCompWrap<iprm::CMultiParamsManagerComp> MultiParamsManager;
+typedef icomp::TModelCompWrap<iprm::CRelativeFileNameParamComp> RelativeFileNameParam;
 
 
 } // namespace BasePck

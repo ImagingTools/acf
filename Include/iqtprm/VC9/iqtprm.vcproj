@@ -196,10 +196,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CRelativeFileNameParamComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSelectableGuiComp.cpp"
 				>
 			</File>
@@ -251,10 +247,6 @@
 			</File>
 			<File
 				RelativePath="..\CParamsManagerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRelativeFileNameParamComp.h"
 				>
 			</File>
 			<File

@@ -1,13 +1,13 @@
-#ifndef iqtprm_CRelativeFileNameParamComp_included
-#define iqtprm_CRelativeFileNameParamComp_included
+#ifndef iprm_CRelativeFileNameParamComp_included
+#define iprm_CRelativeFileNameParamComp_included
 
 
 #include "iprm/CFileNameParamComp.h"
 
-#include "iqtprm/iqtprm.h"
+#include "iprm/iprm.h"
 
 
-namespace iqtprm
+namespace iprm
 {
 
 
@@ -34,9 +34,9 @@ private:
 };
 
 
-} // namespace iqtprm
+} // namespace iprm
 
 
-#endif // !iqtprm_CRelativeFileNameParamComp_included
+#endif // !iprm_CRelativeFileNameParamComp_included
 
 
