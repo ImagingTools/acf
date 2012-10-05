@@ -5,6 +5,7 @@
 // ACF includes
 #include "iser/ISerializable.h"
 #include "i2d/ITransformation2d.h"
+#include "i2d/ICalibrationProvider.h"
 
 
 namespace i2d
@@ -17,19 +18,15 @@ class CVector2d;
 /**
 	Common interface for describing the 2D-objects.
 */
-class IObject2d: virtual public iser::ISerializable
+class IObject2d:
+			virtual public iser::ISerializable,
+			virtual public ICalibrationProvider
 {
 public:
 	enum ChangeFlags
 	{
 		CF_OBJECT_POSITION = 1 << 20
 	};
-
-	/**
-		Get calibration of this 2D object.
-		If no calibration is set, it returns \c NULL.
-	*/
-	virtual const ITransformation2d* GetCalibration() const = 0;
 
 	/**
 		Returns center of this 2D-object.

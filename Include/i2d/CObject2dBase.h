@@ -25,8 +25,10 @@ public:
 	*/
 	virtual void SetCalibration(const ITransformation2d* calibrationPtr);
 
-	// reimplemented (i2d::IObject2d)
+	// reimplemented (i2d::ICalibrationProvider)
 	virtual const ITransformation2d* GetCalibration() const;
+
+	// reimplemented (i2d::IObject2d)
 	virtual bool Transform(
 				const ITransformation2d& transformation,
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,

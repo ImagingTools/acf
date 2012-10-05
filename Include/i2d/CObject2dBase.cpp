@@ -23,13 +23,15 @@ void CObject2dBase::SetCalibration(const ITransformation2d* calibrationPtr)
 }
 
 
-// reimplemented (i2d::IObject2d)
+// reimplemented (i2d::ICalibrationProvider)
 
 const ITransformation2d* CObject2dBase::GetCalibration() const
 {
 	return m_calibrationPtr;
 }
 
+
+// reimplemented (i2d::IObject2d)
 
 bool CObject2dBase::Transform(
 			const ITransformation2d& /*transformation*/,
