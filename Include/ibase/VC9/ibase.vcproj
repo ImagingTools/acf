@@ -284,6 +284,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CObjectSynchronizerComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CQtVersionInfoComp.cpp"
 				>
 			</File>
@@ -398,6 +402,10 @@
 			</File>
 			<File
 				RelativePath="..\CObjectQueueComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CObjectSynchronizerComp.h"
 				>
 			</File>
 			<File
