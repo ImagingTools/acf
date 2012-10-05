@@ -189,10 +189,6 @@
 				RelativePath="..\CProcessorControlGuiComp.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\CProgressManagerGuiComp.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -220,10 +216,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CProgressManagerGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\iqtproc.h"
 				>
 			</File>
@@ -241,10 +233,6 @@
 			</File>
 			<File
 				RelativePath="..\CProcessorControlGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CProgressManagerGuiComp.moc"
 				>
 			</File>
 		</Filter>
@@ -266,15 +254,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\generated\moc_CProgressManagerGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\generated\ui_CProcessorControlGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CProgressManagerGuiComp.h"
 				>
 			</File>
 		</Filter>
@@ -283,10 +263,6 @@
 			>
 			<File
 				RelativePath="..\CProcessorControlGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CProgressManagerGuiComp.ui"
 				>
 			</File>
 		</Filter>

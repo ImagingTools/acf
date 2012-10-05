@@ -1,11 +1,11 @@
-#include "iqtproc/CProgressManagerGuiComp.h"
+#include "iqtgui/CProgressManagerGuiComp.h"
 
 
 // Qt includes
 #include <QtCore/QCoreApplication>
 
 
-namespace iqtproc
+namespace iqtgui
 {
 
 
@@ -141,6 +141,6 @@ void CProgressManagerGuiComp::on_CancelButton_clicked()
 }
 
 
-} // namespace iqtproc
+} // namespace iqtgui
 
 

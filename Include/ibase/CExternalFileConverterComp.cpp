@@ -76,24 +76,16 @@ bool CExternalFileConverterComp::ConvertFile(
 				bool placeHolderFound = false;
 				for (int argIndex = 0; argIndex < int(arguments.size()); argIndex++){
 					QString& existingArgument = arguments[argIndex];
-					QRegExp additionArgumentExpression("\\$\\(A[0-9]");
-					if (existingArgument.contains(additionArgumentExpression)){
-						int numberIndex = existingArgument.indexOf(QRegExp("[0-9]"));
-						int bracketIndex = existingArgument.indexOf(")");
-						QString numberString = existingArgument.mid(numberIndex, bracketIndex - numberIndex);
-						int argumentNumber = numberString.toInt() - 1;
-						if (argumentNumber >= 0){
-							placeHolderFound = true;
+					QString expressionString = QString("$(A%1)").arg(addIndex + 1);
 
-							if (argumentNumber < additionalArgumentsCount){
-								iprm::INameParam* addArgumentPtr = m_additionalArgumentsCompPtr[argumentNumber];
-								if (addArgumentPtr != NULL){
-									existingArgument = addArgumentPtr->GetName();
-								}
-							}
-							else{
-								SendVerboseMessage("Addition command line argument doesn't exist");
-							}
+					iprm::INameParam* additionalArgumentPtr = m_additionalArgumentsCompPtr[addIndex];
+					if (additionalArgumentPtr != NULL){
+						QString replacement = additionalArgumentPtr->GetName();
+
+						if (existingArgument.contains(expressionString)){
+							existingArgument.replace(expressionString, replacement);
+							
+							placeHolderFound = true;
 						}
 					}
 				}
@@ -104,6 +96,8 @@ bool CExternalFileConverterComp::ConvertFile(
 			}
 		}
 	}
+
+	SendVerboseMessage(QString("Process started as %1 %2").arg(m_executablePathCompPtr->GetPath()).arg(arguments.join(" ")));
 
 	m_conversionProcess.start(m_executablePathCompPtr->GetPath(), arguments);
 

@@ -301,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProgressManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableCommandsProviderComp.cpp"
 				>
 			</File>
@@ -485,6 +489,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProgressManagerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableCommandsProviderComp.h"
 				>
 			</File>
@@ -658,6 +666,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CProgressManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CSelectableCommandsProviderComp.cpp"
 				>
 			</File>
@@ -702,6 +714,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\ui_CProgressManagerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\ui_CSplashScreenGuiComp.h"
 				>
 			</File>
@@ -711,6 +727,10 @@
 			>
 			<File
 				RelativePath="..\CAboutWidgetGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CFileListProviderGuiComp.ui"
 				>
 			</File>
 			<File
@@ -735,6 +755,10 @@
 			</File>
 			<File
 				RelativePath="..\CObjectPreviewGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CProgressManagerGuiComp.ui"
 				>
 			</File>
 			<File
@@ -802,6 +826,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CProgressManagerGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CSelectableCommandsProviderComp.moc"
 				>
 			</File>
@@ -814,10 +842,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\CFileListProviderGuiComp.ui"
-			>
-		</File>
 	</Files>
 	<Globals>
 		<Global
