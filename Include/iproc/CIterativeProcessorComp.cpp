@@ -5,7 +5,7 @@
 #include "iprm/ISelectionParam.h"
 #include "iprm/TParamsPtr.h"
 
-#include "iproc/IProgressManager.h"
+#include "ibase/IProgressManager.h"
 
 
 namespace iproc
@@ -18,7 +18,7 @@ int CIterativeProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			IProgressManager* progressManagerPtr)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	if (outputPtr == NULL){
 		return TS_OK;

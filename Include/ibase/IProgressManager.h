@@ -1,5 +1,5 @@
-#ifndef iproc_IProgressManager_included
-#define iproc_IProgressManager_included
+#ifndef ibase_IProgressManager_included
+#define ibase_IProgressManager_included
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #include <QtCore/QString>
 
 
-namespace iproc
+namespace ibase
 {
 
 
@@ -47,9 +47,9 @@ public:
 };
 
 
-} // namespace iproc
+} // namespace ibase
 
 
-#endif // !iproc_IProgressManager_included
+#endif // !ibase_IProgressManager_included
 
 

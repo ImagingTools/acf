@@ -13,7 +13,7 @@
 #include "ibase/IFileConvertCopy.h"
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iproc/IProgressManager.h"
+#include "ibase/IProgressManager.h"
 #include "iproc/IProcessor.h"
 
 
@@ -56,7 +56,7 @@ private:
 	I_REF(iproc::IProcessor, m_processorCompPtr);
 	I_REF(istd::IChangeable, m_inputDataCompPtr);
 	I_REF(istd::IChangeable, m_outputDataCompPtr);
-	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
+	I_REF(ibase::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iprm::IParamsSet, m_processingParamsSetCompPtr);
 
 	int m_progressSessionId;

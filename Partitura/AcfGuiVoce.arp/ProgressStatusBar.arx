@@ -150,7 +150,7 @@
   <ExportedInterfaces count="3">
     <Interface>
       <InterfaceId>
-        iproc::IProgressManager
+        ibase::IProgressManager
       </InterfaceId>
       <ComponentId>
         ProgressManagerGui

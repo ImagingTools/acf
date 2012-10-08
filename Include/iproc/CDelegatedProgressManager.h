@@ -8,7 +8,7 @@
 // ACF includes
 #include "istd/IChangeable.h"
 
-#include "iproc/IProgressManager.h"
+#include "ibase/IProgressManager.h"
 
 
 namespace iproc
@@ -19,7 +19,7 @@ namespace iproc
 	Progress manager delegating cumulated progress result to another manager.
 */
 class CDelegatedProgressManager:
-			virtual public IProgressManager,
+			virtual public ibase::IProgressManager,
 			virtual public istd::IChangeable
 {
 public:
@@ -48,7 +48,7 @@ public:
 
 	double GetCumulatedProgress() const;
 
-	// reimplemented (iproc::IProgressManager)
+	// reimplemented (ibase::IProgressManager)
 	virtual int BeginProgressSession(const QByteArray& progressId, const QString& description, bool isCancelable = false);
 	virtual void EndProgressSession(int sessionId);
 	virtual void OnProgress(int sessionId, double currentProgress);

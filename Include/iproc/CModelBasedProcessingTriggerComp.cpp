@@ -6,7 +6,7 @@
 
 #include "imod/IModel.h"
 
-#include "iproc/IProgressManager.h"
+#include "ibase/IProgressManager.h"
 
 
 namespace iproc

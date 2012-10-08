@@ -43,7 +43,7 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL);
 	virtual void InitProcessor(const iprm::IParamsSet* paramsPtr);
 
 private:

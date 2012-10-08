@@ -497,6 +497,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IProgressManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ITextDocument.h"
 				>
 			</File>

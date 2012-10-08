@@ -62,7 +62,7 @@ private:
 
 private:
 	I_REF(iproc::IProcessor, m_processorCompPtr);
-	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
+	I_REF(ibase::IProgressManager, m_progressManagerCompPtr);
 	I_REF(iprm::IParamsSet, m_paramsSetCompPtr);
 	I_REF(imod::IModel, m_paramsSetModelCompPtr);
 	I_REF(istd::IChangeable, m_outputDataCompPtr);

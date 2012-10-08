@@ -63,7 +63,7 @@ void CProgressManagerGuiComp::OnCancelable(bool cancelState)
 }
 
 
-// reimplemented (iproc::IProgressManager)
+// reimplemented (ibase::IProgressManager)
 
 int CProgressManagerGuiComp::BeginProgressSession(
 			const QByteArray& progressId,

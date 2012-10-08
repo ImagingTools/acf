@@ -74,7 +74,7 @@ int CCascadedProcessorComp::DoProcessing(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			IProgressManager* progressManagerPtr)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	int processorsCount = m_processorsCompPtr.GetCount();
 	istd::TPointerVector<CDelegatedProgressManager> progressDelegators;

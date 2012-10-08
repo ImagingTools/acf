@@ -38,7 +38,7 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				IProgressManager* progressManagerPtr = NULL);
+				ibase::IProgressManager* progressManagerPtr = NULL);
 	virtual int WaitTaskFinished(
 					int taskId = -1,
 					double timeoutTime = -1,
@@ -89,7 +89,7 @@ int TSyncProcessorWrap<Base>::BeginTask(
 			const iprm::IParamsSet* paramsPtr,
 			const istd::IPolymorphic* inputPtr,
 			istd::IChangeable* outputPtr,
-			IProgressManager* progressManagerPtr)
+			ibase::IProgressManager* progressManagerPtr)
 {
 	int retVal = m_nextTaskId;
 	m_taskToStateMap[retVal] = this->DoProcessing(paramsPtr, inputPtr, outputPtr, progressManagerPtr);

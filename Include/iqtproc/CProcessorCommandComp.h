@@ -64,7 +64,7 @@ protected:
 	I_REF(iprm::IParamsSet, m_processorParamsCompPtr);
 	I_REF(istd::IPolymorphic, m_processorInputCompPtr);
 	I_REF(istd::IChangeable, m_processorOutputCompPtr);
-	I_REF(iproc::IProgressManager, m_progressManagerCompPtr);
+	I_REF(ibase::IProgressManager, m_progressManagerCompPtr);
 	I_ATTR(QByteArray, m_actionIconAttrPtr);
 	I_ATTR(QString, m_menuNameAttrPtr);
 	I_ATTR(QString, m_menuDescriptionAttrPtr);

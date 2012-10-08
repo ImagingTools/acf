@@ -4,7 +4,7 @@
 
 #include "iprm/IParamsSet.h"
 
-#include "iproc/IProgressManager.h"
+#include "ibase/IProgressManager.h"
 
 
 namespace iproc
@@ -109,7 +109,7 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				IProgressManager* progressManagerPtr = NULL) = 0;
+				ibase::IProgressManager* progressManagerPtr = NULL) = 0;
 
 	/**
 		Begin new task for this processor and add them to queue.
@@ -130,7 +130,7 @@ public:
 				const iprm::IParamsSet* paramsPtr,
 				const istd::IPolymorphic* inputPtr,
 				istd::IChangeable* outputPtr,
-				IProgressManager* progressManagerPtr = NULL) = 0;
+				ibase::IProgressManager* progressManagerPtr = NULL) = 0;
 
 	/**
 		Wait for task is finished.

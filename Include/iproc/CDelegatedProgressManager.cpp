@@ -57,7 +57,7 @@ double CDelegatedProgressManager::GetCumulatedProgress() const
 }
 
 
-// reimplemented (iproc::IProgressManager)
+// reimplemented (ibase::IProgressManager)
 
 int CDelegatedProgressManager::BeginProgressSession(
 			const QByteArray& /*progressId*/,

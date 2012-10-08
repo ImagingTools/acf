@@ -40,7 +40,7 @@ protected:
 	// reimplemented (iproc::CDelegatedProgressManager)
 	void OnCancelable(bool cancelState);
 
-	// reimplemented (iproc::IProgressManager)
+	// reimplemented (ibase::IProgressManager)
 	virtual int BeginProgressSession(
 				const QByteArray& progressId,
 				const QString& description,
