@@ -192,10 +192,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCopyProcessorComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CDirList.cpp"
 				>
 			</File>
@@ -311,10 +307,6 @@
 			</File>
 			<File
 				RelativePath="..\CComponentAccessor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CCopyProcessorComp.h"
 				>
 			</File>
 			<File

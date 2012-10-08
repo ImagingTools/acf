@@ -182,11 +182,6 @@ I_EXPORT_COMPONENT(
 			"Progress Manager" IM_TAG("Processing"));
 
 I_EXPORT_COMPONENT(
-			ProcessorControlGui,
-			"Processor acquisition GUI",
-			"Acquisition Processor Parameter View" IM_TAG("Image Processing"));
-
-I_EXPORT_COMPONENT(
 			ImagePropertyGui,
 			"Image property viewer",
 			"Observer Display GUI Image Bitmap Property");
@@ -195,11 +190,6 @@ I_EXPORT_COMPONENT(
 			ObjectPreviewGui,
 			"Object preview GUI",
 			"Observer Display GUI Preview");
-
-I_EXPORT_COMPONENT(
-			DocumentProcessingManager,
-			"Document processing manager",
-			"Processing Document" IM_TAG("Processing"));
 
 I_EXPORT_COMPONENT(
 			ImagePropertiesFrame,
@@ -220,11 +210,6 @@ I_EXPORT_COMPONENT(
 			VersionInfoGui,
 			"Module version info overview",
 			"Version Info Application Module Components");
-
-I_EXPORT_COMPONENT(
-			DocumentProcessingCommand,
-			"Document processing command",
-			"Processing Document Command" IM_TAG("Processing"));
 
 I_EXPORT_COMPONENT(
 			SelectableGui,
@@ -255,11 +240,6 @@ I_EXPORT_COMPONENT(
 			EnableableParamGui,
 			"Enableable parameter editor",
 			"Enableable Parameter");
-
-I_EXPORT_COMPONENT(
-			ProcessorCommand,
-			"Binding of any processor to menu command",
-			"Menu Processor Command Action");
 
 I_EXPORT_COMPONENT(
 			FileListProviderGui,

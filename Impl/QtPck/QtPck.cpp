@@ -59,11 +59,6 @@ I_EXPORT_COMPONENT(
 			"Copy Move Attach License Version Tags" IM_TAG("File Processing"));
 
 I_EXPORT_COMPONENT(
-			CopyProcessor,
-			"Copy files from one directory to another one",
-			"Copy Dir Filter Installation Tool" IM_TAG("File Processing"));
-
-I_EXPORT_COMPONENT(
 			FileListProvider,
 			"Provide list of file synchronized with some directory",
 			"List Provider Directory" IM_TAG("File"));

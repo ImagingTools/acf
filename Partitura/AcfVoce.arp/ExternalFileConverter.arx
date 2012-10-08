@@ -32,7 +32,7 @@
         Converter
       </Id>
       <PackageId>
-        BasePck
+        FileProcessingPck
       </PackageId>
       <ComponentId>
         ExternalFileConverter

@@ -1,5 +1,5 @@
-#ifndef iproc_CDelegatedProgressManager_included
-#define iproc_CDelegatedProgressManager_included
+#ifndef ibase_CDelegatedProgressManager_included
+#define ibase_CDelegatedProgressManager_included
 
 
 // Qt includes
@@ -11,7 +11,7 @@
 #include "ibase/IProgressManager.h"
 
 
-namespace iproc
+namespace ibase
 {
 
 
@@ -86,9 +86,9 @@ private:
 };
 
 
-} // namespace iproc
+} // namespace ibase
 
 
-#endif // !iproc_CDelegatedProgressManager_included
+#endif // !ibase_CDelegatedProgressManager_included
 
 

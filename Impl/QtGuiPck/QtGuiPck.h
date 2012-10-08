@@ -54,11 +54,6 @@
 #include "iqtdoc/CHtmlHelpGuiComp.h"
 #include "iqtdoc/CHtmlHelpViewerComp.h"
 
-#include "iqtproc/CProcessorControlGuiComp.h"
-#include "iqtproc/CDocumentProcessingManagerComp.h"
-#include "iqtproc/CDocumentProcessingCommandComp.h"
-#include "iqtproc/CProcessorCommandComp.h"
-
 
 /**
 	Standard Qt package.
@@ -115,11 +110,6 @@ typedef icomp::TModelCompWrap<iqtdoc::CSingleDocumentWorkspaceGuiComp> SingleDoc
 typedef icomp::TModelCompWrap<iqtdoc::CMultiDocumentWorkspaceGuiComp> MultiDocWorkspaceGui;
 typedef iqtdoc::CHtmlHelpGuiComp HtmlHelpGui;
 typedef iqtdoc::CHtmlHelpViewerComp HtmlHelpViewer;
-
-typedef iqtproc::CProcessorControlGuiComp ProcessorControlGui;
-typedef iqtproc::CDocumentProcessingManagerComp DocumentProcessingManager;
-typedef iqtproc::CDocumentProcessingCommandComp DocumentProcessingCommand;
-typedef iqtproc::CProcessorCommandComp ProcessorCommand;
 
 
 } // namespace QtGuiPck

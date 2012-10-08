@@ -32,7 +32,7 @@
         CopyProcessor
       </Id>
       <PackageId>
-        QtPck
+        FileProcessingPck
       </PackageId>
       <ComponentId>
         CopyProcessor

@@ -32,12 +32,9 @@
 #include "ibase/CConsoleLogComp.h"
 #include "ibase/CTextFileLogComp.h"
 #include "ibase/CFileCopyOverLoaderComp.h"
-#include "ibase/CExternalFileConverterComp.h"
 #include "ibase/CCopyAppComp.h"
 #include "ibase/CUuidComp.h"
 #include "ibase/CObjectQueueComp.h"
-#include "ibase/CSelectableFileConverterComp.h"
-#include "ibase/CFileConvertOverProcessorComp.h"
 #include "ibase/CLogComp.h"
 #include "ibase/CMultiObserverBinderComp.h"
 #include "ibase/CSingletonApplicationComp.h"
@@ -72,10 +69,6 @@
 
 #include "imath/CSampledFunction2d.h"
 
-#include "iproc/CCascadedProcessorComp.h"
-#include "iproc/CIterativeProcessorComp.h"
-#include "iproc/CModelBasedProcessingTriggerComp.h"
-
 
 /**
 	Base system-undependent general package.
@@ -98,12 +91,9 @@ typedef ibase::CAutoPersistenceComp AutoPersistence;
 typedef ibase::CConsoleLogComp ConsoleLog;
 typedef ibase::CTextFileLogComp TextFileLog;
 typedef ibase::CFileCopyOverLoaderComp FileCopyOverLoader;
-typedef ibase::CExternalFileConverterComp ExternalFileConverter;
 typedef ibase::CCopyAppComp CopyApp;
 typedef icomp::TModelCompWrap<ibase::CUuidComp> Uuid;
 typedef ibase::CObjectQueueComp ObjectQueue;
-typedef icomp::TModelCompWrap<ibase::CSelectableFileConverterComp> SelectableFileConverter;
-typedef ibase::CFileConvertOverProcessorComp FileConvertOverProcessor;
 typedef icomp::TModelCompWrap<ibase::CLogComp> Log;
 typedef ibase::CMultiObserverBinderComp MultiObserverBinder;
 typedef ibase::CSingletonApplicationComp SingletonApplication;
@@ -152,9 +142,6 @@ typedef icomp::TMakeComponentWrap<
 			istd::IChangeable,
 			imod::IModel> SampledFunction2d;
 
-typedef iproc::CCascadedProcessorComp CascadedProcessor;
-typedef iproc::CIterativeProcessorComp IterativeProcessor;
-typedef iproc::CModelBasedProcessingTriggerComp ModelBasedProcessingTrigger;
 typedef icomp::TModelCompWrap<iprm::CMultiParamsManagerComp> MultiParamsManager;
 typedef icomp::TModelCompWrap<iprm::CRelativeFileNameParamComp> RelativeFileNameParam;
 

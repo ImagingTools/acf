@@ -84,11 +84,6 @@ I_EXPORT_COMPONENT(
 			"Copy Compile Transform Saver" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("File Loader"));
 
 I_EXPORT_COMPONENT(
-			ExternalFileConverter,
-			"General file copy or transform using loaders and any object",
-			"File Converter External Application" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("File Converter"));
-
-I_EXPORT_COMPONENT(
 			CopyApp,
 			"Copy application transforming files",
 			"Copy Compile Transform Application" IM_CATEGORY(I_DATA_PROCESSING I_APPLICATION) IM_TAG("File"));
@@ -102,16 +97,6 @@ I_EXPORT_COMPONENT(
 			ObjectQueue,
 			"Queue of any objects",
 			"Objects Queue List FIFO Stack Elements Serial Delay Line" IM_CATEGORY(I_SERVICE));
-
-I_EXPORT_COMPONENT(
-			SelectableFileConverter,
-			"Selectable file converter",
-			"File Converter" IM_CATEGORY(I_DATA_PROCESSING I_SERVICE));
-
-I_EXPORT_COMPONENT(
-			FileConvertOverProcessor,
-			"File conversion over processor",
-			"File Converter" IM_CATEGORY(I_DATA_PROCESSING I_SERVICE));
 
 I_EXPORT_COMPONENT(
 			Log,
@@ -282,21 +267,6 @@ I_EXPORT_COMPONENT(
 			SampledFunction2d,
 			"Sampled function with 2-dimensional input",
 			"Function Sample" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Sampling Model"));
-
-I_EXPORT_COMPONENT(
-			CascadedProcessor,
-			"Sequence processing using slave processors",
-			"Processor Sequence Buffer Cascade" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processing Composition"));
-
-I_EXPORT_COMPONENT(
-			IterativeProcessor,
-			"Iterative Processor",
-			"Iterative Loop Sequence Processor" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processing"));
-
-I_EXPORT_COMPONENT(
-			ModelBasedProcessingTrigger,
-			"Model-based processing trigger",
-			"Processor Model Trigger" IM_CATEGORY(I_DATA_PROCESSING) IM_TAG("Processing"));
 
 I_EXPORT_COMPONENT(
 			MultiParamsManager,

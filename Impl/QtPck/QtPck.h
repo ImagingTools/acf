@@ -14,7 +14,6 @@
 #include "iqt/CApplicationSettingsProviderComp.h"
 #include "iqt/CIniSettingsProviderComp.h"
 #include "iqt/CFileInfoCopyComp.h"
-#include "iqt/CCopyProcessorComp.h"
 #include "iqt/CFileListProviderComp.h"
 #include "iqt/CClipboardSerializerComp.h"
 #include "iqt/CRenderedObjectFileLoaderComp.h"
@@ -58,7 +57,6 @@ typedef iqt::CSettingsSerializerComp SettingsSerializer;
 typedef iqt::CApplicationSettingsProviderComp ApplicationSettingsProvider;
 typedef iqt::CIniSettingsProviderComp IniSettingsProvider;
 typedef iqt::CFileInfoCopyComp FileInfoCopy;
-typedef iqt::CCopyProcessorComp CopyProcessor;
 typedef icomp::TModelCompWrap<iqt::CFileListProviderComp> FileListProvider;
 typedef iqt::CClipboardSerializerComp ClipboardSerializer;
 typedef iqt::CRenderedObjectFileLoaderComp RenderedObjectFileLoader;

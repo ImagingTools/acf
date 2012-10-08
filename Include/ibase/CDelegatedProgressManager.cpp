@@ -1,11 +1,11 @@
-#include "iproc/CDelegatedProgressManager.h"
+#include "ibase/CDelegatedProgressManager.h"
 
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 
-namespace iproc
+namespace ibase
 {
 
 
@@ -153,6 +153,6 @@ void CDelegatedProgressManager::OnEndChanges(int /*changeFlags*/, istd::IPolymor
 }
 
 
-} // namespace iproc
+} // namespace ibase
 
 

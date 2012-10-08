@@ -18,7 +18,7 @@ set COMPILER_EXT=VC9
 call Create_TechnicalDoc.bat
 
 echo Copying files to Temp directory...
-"../bin/Debug%COMPILER_EXT%/Acf.exe" Create_FromQMake_VC9_OpenSource.arx -config ../Config/Core.xpc
+"../Bin/Debug%COMPILER_EXT%/Acf.exe" Create_FromQMake_VC9_OpenSource.arx -config $(ACFSLNDIR)/Config/Core.xpc
 
 call MakeVCProjects.bat
 

@@ -5,7 +5,7 @@
 // ACF includes
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "iproc/CDelegatedProgressManager.h"
+#include "ibase/CDelegatedProgressManager.h"
 
 #include "iqtgui/Generated/ui_CProgressManagerGuiComp.h"
 
@@ -16,13 +16,13 @@ namespace iqtgui
 
 class CProgressManagerGuiComp:
 			public iqtgui::TDesignerGuiCompBase<Ui::CProgressManagerGuiComp>,
-			public iproc::CDelegatedProgressManager
+			public ibase::CDelegatedProgressManager
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiCompBase<Ui::CProgressManagerGuiComp> BaseClass;
-	typedef iproc::CDelegatedProgressManager BaseClass2;
+	typedef ibase::CDelegatedProgressManager BaseClass2;
 
 	I_BEGIN_COMPONENT(CProgressManagerGuiComp);
 		I_REGISTER_INTERFACE(IProgressManager);
@@ -37,7 +37,7 @@ protected:
 	void UpdateVisibleComponents();
 	void UpdateProgressBar();
 
-	// reimplemented (iproc::CDelegatedProgressManager)
+	// reimplemented (ibase::CDelegatedProgressManager)
 	void OnCancelable(bool cancelState);
 
 	// reimplemented (ibase::IProgressManager)
