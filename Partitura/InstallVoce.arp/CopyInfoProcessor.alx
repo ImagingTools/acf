@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2584
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -43,13 +43,13 @@
     </Element>
     <Element>
       <ComponentName>
-        CopyProcessor
+        CopyFilesTree
       </ComponentName>
       <X>
-        825
+        550
       </X>
       <X>
-        350
+        475
       </X>
       <Note>
         

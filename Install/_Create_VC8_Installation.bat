@@ -11,10 +11,13 @@ rmdir /Q /S TempExcl
 :DelTempExclSkip
 
 set COMPILER_EXT=VC8
+set LICENSE_TYPE=LGPL
 
 call Rebuild.bat
 
 call CopyDlls.bat
+
+call CreateScripts.bat
 
 call Create_TechnicalDoc.bat
 

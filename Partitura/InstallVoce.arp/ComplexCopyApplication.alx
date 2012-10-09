@@ -1,30 +1,69 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2584
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="5">
     <Element>
       <ComponentName>
-        Application
+        Log
       </ComponentName>
       <X>
-        325
+        800
       </X>
       <X>
-        125
+        150
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyAll
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        300
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyApp
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        150
       </X>
       <Note>
         
@@ -35,24 +74,10 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        325
+        800
       </X>
       <X>
-        225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Copy
-      </ComponentName>
-      <X>
-        325
-      </X>
-      <X>
-        350
+        575
       </X>
       <Note>
         
@@ -60,17 +85,19 @@
     </Element>
     <Element>
       <ComponentName>
-        Log
+        VersionInfo
       </ComponentName>
       <X>
-        650
+        800
       </X>
       <X>
-        350
+        375
       </X>
       <Note>
         
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

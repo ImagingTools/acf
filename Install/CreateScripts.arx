@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="3">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2467
+          2584
         </Number>
         <Description>
           ACF
@@ -15,38 +15,27 @@
       </Version>
       <Version>
         <Id>
-          1025
+          1023
         </Id>
         <Number>
           264194
         </Number>
         <Description>
-          Created with Qt version
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1026
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Runtime Version
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="2">
     <Element>
       <Id>
         Application
       </Id>
       <PackageId>
-        QtGuiPck
+        InstallVoce
       </PackageId>
       <ComponentId>
-        GuiApplication
+        ComplexCopyApplication
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -55,13 +44,13 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="1">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              ApplicationName
             </Id>
             <Type>
-              Reference
+              String
             </Type>
             <ExportId>
               
@@ -71,37 +60,16 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                ACF
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        ApplicationInfo
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ApplicationInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              VersionInfo
+              ApplicationType
             </Id>
             <Type>
-              Reference
+              String
             </Type>
             <ExportId>
               
@@ -111,7 +79,85 @@
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                LGPL
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileCopiers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="1">
+                <Value>
+                  CopyScriptFiles
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                10
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProductName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF
               </Value>
             </Data>
           </AttributeInfo>
@@ -120,7 +166,7 @@
     </Element>
     <Element>
       <Id>
-        DoxyfileCopy
+        CopyScriptFiles
       </Id>
       <PackageId>
         InstallVoce
@@ -133,9 +179,9 @@
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="6">
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -151,7 +197,7 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Application/ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -169,30 +215,17 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="1">
+              <Values count="3">
                 <Value>
                   Doxyfile
                 </Value>
+                <Value>
+                  *.iss
+                </Value>
+                <Value>
+                  Commit.log
+                </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InputDir
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                .
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -210,26 +243,7 @@
                 true
               </IsEnabled>
               <Value>
-                Log
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              OutputDir
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                TempExcl
+                Application/Log
               </Value>
             </Data>
           </AttributeInfo>
@@ -255,93 +269,21 @@
         </AttributeInfoMap>
       </Data>
     </Element>
-    <Element>
-      <Id>
-        Log
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        ConsoleLog
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="2">
-          <AttributeInfo>
-            <Id>
-              MinCategory
-            </Id>
-            <Type>
-              Integer
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                1
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ShowDots
-            </Id>
-            <Type>
-              Boolean
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                true
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        VersionInfo
-      </Id>
-      <PackageId>
-        AcfVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="0">
-        </AttributeInfoMap>
-      </Data>
-    </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         ibase::IApplication
+      </InterfaceId>
+      <ComponentId>
+        Application
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
       </InterfaceId>
       <ComponentId>
         Application

@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
 
 		retVal = -1;
 	}
-	
 	else if (showApplicationInfo){
 		std::cout << applicationPtr->GetHelpText().toLocal8Bit().constData();
 

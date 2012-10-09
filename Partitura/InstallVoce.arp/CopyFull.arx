@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2584
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -27,6 +27,86 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="4">
+    <Element>
+      <Id>
+        CopyAllFiles
+      </Id>
+      <PackageId>
+        FileProcessingPck
+      </PackageId>
+      <ComponentId>
+        ComposedCopyFiles
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileCopiers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  CopyLibs
+                </Value>
+                <Value>
+                  CopyBins
+                </Value>
+                <Value>
+                  CopyOpenSources
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         CopyBins
@@ -109,7 +189,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -122,7 +202,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Bin
+                Bin
               </Value>
             </Data>
           </AttributeInfo>
@@ -144,7 +224,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -157,7 +237,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Bin
+                Bin
               </Value>
             </Data>
           </AttributeInfo>
@@ -259,7 +339,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -272,7 +352,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Lib
+                Lib
               </Value>
             </Data>
           </AttributeInfo>
@@ -294,7 +374,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -307,7 +387,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Lib
+                Lib
               </Value>
             </Data>
           </AttributeInfo>
@@ -350,7 +430,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -360,38 +440,6 @@
             </Type>
             <ExportId>
               ApplicationInfo
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptTags
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              InstallScriptValues
             </ExportId>
             <Data>
               <IsEnabled>
@@ -477,54 +525,6 @@
               <IsEnabled>
                 false
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InitSequence
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        Instantiator
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              Instances
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="3">
-                <Value>
-                  CopyLibs
-                </Value>
-                <Value>
-                  CopyBins
-                </Value>
-                <Value>
-                  CopyOpenSources
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -533,7 +533,23 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="0">
+  <ExportedInterfaces count="2">
+    <Interface>
+      <InterfaceId>
+        ibase::IFileConvertCopy
+      </InterfaceId>
+      <ComponentId>
+        CopyAllFiles
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
+      </InterfaceId>
+      <ComponentId>
+        CopyAllFiles
+      </ComponentId>
+    </Interface>
   </ExportedInterfaces>
   <ExportedComponents count="0">
   </ExportedComponents>

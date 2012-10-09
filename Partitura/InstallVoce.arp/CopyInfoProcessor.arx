@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2584
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -29,13 +29,13 @@
   <ElementsList count="2">
     <Element>
       <Id>
-        CopyProcessor
+        CopyFilesTree
       </Id>
       <PackageId>
         FileProcessingPck
       </PackageId>
       <ComponentId>
-        CopyProcessor
+        CopyFilesTree
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -114,13 +114,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
             </Type>
             <ExportId>
-              InputDir
+              InputSubDir
             </ExportId>
             <Data>
               <IsEnabled>
@@ -146,13 +146,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
             </Type>
             <ExportId>
-              OutputDir
+              OutputSubDir
             </ExportId>
             <Data>
               <IsEnabled>
@@ -315,13 +315,21 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
+    <Interface>
+      <InterfaceId>
+        ibase::IFileConvertCopy
+      </InterfaceId>
+      <ComponentId>
+        CopyFilesTree
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         istd::IPolymorphic
       </InterfaceId>
       <ComponentId>
-        CopyProcessor
+        CopyFilesTree
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

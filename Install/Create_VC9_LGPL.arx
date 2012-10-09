@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="3">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2470
+          2584
         </Number>
         <Description>
           ACF
@@ -15,29 +15,18 @@
       </Version>
       <Version>
         <Id>
-          1025
+          1023
         </Id>
         <Number>
           264194
         </Number>
         <Description>
-          Qt Compiled Version
-        </Description>
-      </Version>
-      <Version>
-        <Id>
-          1026
-        </Id>
-        <Number>
-          264194
-        </Number>
-        <Description>
-          Qt Runtime Version
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="2">
+  <ElementsList count="3">
     <Element>
       <Id>
         Application
@@ -46,7 +35,7 @@
         InstallVoce
       </PackageId>
       <ComponentId>
-        CreateInstallationLGPL
+        ComplexCopyApplication
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -56,6 +45,25 @@
           0
         </Flags>
         <AttributeInfoMap count="6">
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               ApplicationType
@@ -72,6 +80,127 @@
               </IsEnabled>
               <Value>
                 LGPL
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileCopiers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="2">
+                <Value>
+                  CopyAll
+                </Value>
+                <Value>
+                  CopyScriptFiles
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                10
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProductName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CopyAll
+      </Id>
+      <PackageId>
+        InstallVoce
+      </PackageId>
+      <ComponentId>
+        CopyFull
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="7">
+          <AttributeInfo>
+            <Id>
+              ApplicationInfo
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -97,9 +226,66 @@
                   *QMake
                 </Value>
                 <Value>
-                  *VC8
+                  *VC9
                 </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicenseInputDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LGPL
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LicensePath
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                LGPL/Header.txt
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/Log
+              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -130,28 +316,9 @@
                   QMake
                 </Value>
                 <Value>
-                  VC8
+                  VC9
                 </Value>
               </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              ProductName
-            </Id>
-            <Type>
-              String
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ACF
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -182,14 +349,35 @@
                   QMake
                 </Value>
                 <Value>
-                  VC8
+                  VC9
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CopyScriptFiles
+      </Id>
+      <PackageId>
+        InstallVoce
+      </PackageId>
+      <ComponentId>
+        CopyInfoProcessor
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              VersionInfo
+              ApplicationInfo
             </Id>
             <Type>
               Reference
@@ -202,34 +390,97 @@
                 true
               </IsEnabled>
               <Value>
-                VersionInfo
+                Application/ApplicationInfo
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        VersionInfo
-      </Id>
-      <PackageId>
-        AcfVoce
-      </PackageId>
-      <ComponentId>
-        VersionInfo
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              IsExtensionUsed
+              Filters
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="3">
+                <Value>
+                  Doxyfile
+                </Value>
+                <Value>
+                  *.iss
+                </Value>
+                <Value>
+                  Commit.log
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              InputSubDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Install
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Application/Log
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OutputSubDir
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ..\TempExcl
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UseSubstitution
             </Id>
             <Type>
               Boolean
@@ -242,7 +493,7 @@
                 true
               </IsEnabled>
               <Value>
-                false
+                true
               </Value>
             </Data>
           </AttributeInfo>
@@ -252,10 +503,18 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         ibase::IApplication
+      </InterfaceId>
+      <ComponentId>
+        Application
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
       </InterfaceId>
       <ComponentId>
         Application

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2584
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -27,6 +27,101 @@
     </VersionInfos>
   </AcfHeader>
   <ElementsList count="9">
+    <Element>
+      <Id>
+        CopyAllFiles
+      </Id>
+      <PackageId>
+        FileProcessingPck
+      </PackageId>
+      <ComponentId>
+        ComposedCopyFiles
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="3">
+          <AttributeInfo>
+            <Id>
+              EnableVerbose
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              EnableVerbose
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FileCopiers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Values count="8">
+                <Value>
+                  CopyCommon
+                </Value>
+                <Value>
+                  CopyIncludeSources
+                </Value>
+                <Value>
+                  CopyIncludeOther
+                </Value>
+                <Value>
+                  CopyImplSources
+                </Value>
+                <Value>
+                  CopyImplOther
+                </Value>
+                <Value>
+                  CopyIncludeResources
+                </Value>
+                <Value>
+                  CopyImplResources
+                </Value>
+                <Value>
+                  CopyBuild
+                </Value>
+              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              Log
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
     <Element>
       <Id>
         CopyBuild
@@ -44,7 +139,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -125,7 +220,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -138,7 +233,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Build
+                Build
               </Value>
             </Data>
           </AttributeInfo>
@@ -160,7 +255,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -173,7 +268,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Build
+                Build
               </Value>
             </Data>
           </AttributeInfo>
@@ -194,6 +289,38 @@
               <Value>
                 2
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -365,7 +492,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -467,7 +594,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -480,7 +607,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Impl
+                Impl
               </Value>
             </Data>
           </AttributeInfo>
@@ -502,7 +629,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -515,7 +642,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Impl
+                Impl
               </Value>
             </Data>
           </AttributeInfo>
@@ -538,6 +665,38 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -558,7 +717,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -654,7 +813,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -667,7 +826,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Impl
+                Impl
               </Value>
             </Data>
           </AttributeInfo>
@@ -689,7 +848,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -702,7 +861,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Impl
+                Impl
               </Value>
             </Data>
           </AttributeInfo>
@@ -725,6 +884,38 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -745,7 +936,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -820,7 +1011,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -833,7 +1024,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Impl
+                Impl
               </Value>
             </Data>
           </AttributeInfo>
@@ -871,7 +1062,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -884,7 +1075,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Impl
+                Impl
               </Value>
             </Data>
           </AttributeInfo>
@@ -907,6 +1098,38 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -927,7 +1150,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1029,7 +1252,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -1042,7 +1265,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Include
+                Include
               </Value>
             </Data>
           </AttributeInfo>
@@ -1064,7 +1287,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -1077,7 +1300,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Include
+                Include
               </Value>
             </Data>
           </AttributeInfo>
@@ -1100,6 +1323,38 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1120,7 +1375,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="10">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1216,7 +1471,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -1229,7 +1484,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Include
+                Include
               </Value>
             </Data>
           </AttributeInfo>
@@ -1251,7 +1506,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -1264,7 +1519,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Include
+                Include
               </Value>
             </Data>
           </AttributeInfo>
@@ -1287,6 +1542,38 @@
               </Value>
             </Data>
           </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionTags
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptTags
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
         </AttributeInfoMap>
       </Data>
     </Element>
@@ -1307,7 +1594,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -1379,7 +1666,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              InputDir
+              InputSubDir
             </Id>
             <Type>
               String
@@ -1392,7 +1679,7 @@
                 true
               </IsEnabled>
               <Value>
-                ../Include
+                Include
               </Value>
             </Data>
           </AttributeInfo>
@@ -1430,7 +1717,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OutputDir
+              OutputSubDir
             </Id>
             <Type>
               String
@@ -1443,7 +1730,7 @@
                 true
               </IsEnabled>
               <Value>
-                Temp/Include
+                Include
               </Value>
             </Data>
           </AttributeInfo>
@@ -1466,67 +1753,36 @@
               </Value>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        InitSequence
-      </Id>
-      <PackageId>
-        BasePck
-      </PackageId>
-      <ComponentId>
-        Instantiator
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          1
-        </Flags>
-        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              Instances
+              UserSubstitutionTags
             </Id>
             <Type>
-              Reference[]
+              String[]
             </Type>
             <ExportId>
-              
+              InstallScriptTags
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Values count="8">
-                <Value>
-                  CopyCommon
-                </Value>
-                <Value>
-                  CopyIncludeSources
-                </Value>
-                <Value>
-                  CopyIncludeOther
-                </Value>
-                <Value>
-                  CopyImplSources
-                </Value>
-                <Value>
-                  CopyImplOther
-                </Value>
-                <Value>
-                  CopyIncludeResources
-                </Value>
-                <Value>
-                  CopyImplResources
-                </Value>
-                <Value>
-                  CopyBuild
-                </Value>
-              </Values>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              UserSubstitutionValues
+            </Id>
+            <Type>
+              String[]
+            </Type>
+            <ExportId>
+              InstallScriptValues
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -1535,13 +1791,21 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
+    <Interface>
+      <InterfaceId>
+        ibase::IFileConvertCopy
+      </InterfaceId>
+      <ComponentId>
+        CopyAllFiles
+      </ComponentId>
+    </Interface>
     <Interface>
       <InterfaceId>
         istd::IPolymorphic
       </InterfaceId>
       <ComponentId>
-        InitSequence
+        CopyAllFiles
       </ComponentId>
     </Interface>
   </ExportedInterfaces>

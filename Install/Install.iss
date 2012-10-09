@@ -7,7 +7,7 @@ AppVersion=$AcfVersion:0$
 AppPublisher=Witold Gantzke & Kirill Lepskiy
 AppPublisherURL=http://www.ilena.org/
 AppName=ACF
-OutputBaseFilename=Setup_$AcfProductName$_$AcfApplicationType$_v$AcfVersion:0$_$CompilerName$
+OutputBaseFilename=Setup_$AcfProductName$_$LICENSE_TYPE$_v$AcfVersion:0$_$CompilerName$
 
 DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:0$
 WizardImageFile=..\WizardImageFile.bmp

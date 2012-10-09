@@ -12,9 +12,9 @@ namespace ibase
 
 // reimplemented (ibase::IFileConvertCopy)
 
-bool CFileCopyOverLoaderComp::ConvertFile(
-			const QString& inputFilePath,
-			const QString& outputFilePath,
+bool CFileCopyOverLoaderComp::ConvertFiles(
+			const QString& inputPath,
+			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
 	if (!m_inputLoaderCompPtr.IsValid()){
@@ -35,7 +35,7 @@ bool CFileCopyOverLoaderComp::ConvertFile(
 		return false;
 	}
 
-	QString usedOutputPath = outputFilePath;
+	QString usedOutputPath = outputPath;
 
 	if (usedOutputPath.isEmpty()){
 		QStringList extensions;
@@ -47,21 +47,21 @@ bool CFileCopyOverLoaderComp::ConvertFile(
 			return false;
 		}
 
-		int pointPos = inputFilePath.lastIndexOf(".");
+		int pointPos = inputPath.lastIndexOf(".");
 		if (pointPos != -1){
-			usedOutputPath = inputFilePath.left(pointPos + 1) + extensions.front();
+			usedOutputPath = inputPath.left(pointPos + 1) + extensions.front();
 		}
 		else{
-			usedOutputPath = inputFilePath + extensions.front();
+			usedOutputPath = inputPath + extensions.front();
 		}
 	}
 
-	QFileInfo inputFileInfo(inputFilePath);
+	QFileInfo inputFileInfo(inputPath);
 	if (!inputFileInfo.exists()){
-		SendWarningMessage(0, QString("Input file %1 doesn't exist").arg(inputFilePath));
+		SendWarningMessage(0, QString("Input file %1 doesn't exist").arg(inputPath));
 	}
 
-	int loadState = m_inputLoaderCompPtr->LoadFromFile(*m_objectCompPtr, inputFilePath);
+	int loadState = m_inputLoaderCompPtr->LoadFromFile(*m_objectCompPtr, inputPath);
 	if (loadState != iser::IFileLoader::StateOk){
 		SendErrorMessage(0, "Data could not be loaded", "FileCopyOverLoader");
 

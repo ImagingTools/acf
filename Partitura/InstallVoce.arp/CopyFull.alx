@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2584
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -32,10 +32,10 @@
         CopyOpenSources
       </ComponentName>
       <X>
-        125
+        250
       </X>
       <X>
-        475
+        500
       </X>
       <Note>
         
@@ -43,13 +43,13 @@
     </Element>
     <Element>
       <ComponentName>
-        InitSequence
+        CopyAllFiles
       </ComponentName>
       <X>
-        125
+        250
       </X>
       <X>
-        350
+        325
       </X>
       <Note>
         
@@ -60,10 +60,10 @@
         CopyLibs
       </ComponentName>
       <X>
-        475
+        850
       </X>
       <X>
-        225
+        250
       </X>
       <Note>
         
@@ -74,10 +74,10 @@
         CopyBins
       </ComponentName>
       <X>
-        475
+        825
       </X>
       <X>
-        475
+        500
       </X>
       <Note>
         

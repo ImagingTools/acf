@@ -25,11 +25,12 @@ class IFileConvertCopy: virtual public istd::IPolymorphic
 {
 public:
 	/**
-		Copy a file \c inputFilePath to destination \c outputFilePath. Optionally, you can use \c paramsPtr to control the copy process.
+		Copy a file or files from \c inputPath to destination \c outputPath.
+		Optionally, you can use \c paramsPtr to control the copy process.
 	*/
-	virtual bool ConvertFile(
-				const QString& inputFilePath,
-				const QString& outputFilePath,
+	virtual bool ConvertFiles(
+				const QString& inputPath,
+				const QString& outputPath,
 				const iprm::IParamsSet* paramsPtr = NULL) const = 0;
 };
 

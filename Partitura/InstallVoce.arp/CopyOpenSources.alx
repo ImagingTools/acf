@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2535
+          2584
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264194
         </Number>
         <Description>
           Qt Framework
@@ -36,6 +36,20 @@
       </X>
       <X>
         625
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        CopyAllFiles
+      </ComponentName>
+      <X>
+        150
+      </X>
+      <X>
+        350
       </X>
       <Note>
         
@@ -85,20 +99,6 @@
     </Element>
     <Element>
       <ComponentName>
-        InitSequence
-      </ComponentName>
-      <X>
-        125
-      </X>
-      <X>
-        350
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         CopyImplResources
       </ComponentName>
       <X>
@@ -130,7 +130,7 @@
         CopyCommon
       </ComponentName>
       <X>
-        125
+        150
       </X>
       <X>
         525

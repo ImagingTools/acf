@@ -19,13 +19,13 @@ namespace iqt
 
 // reimplemented (ibase::IFileConvertCopy)
 
-bool CFileInfoCopyComp::ConvertFile(
-			const QString& inputFilePath,
-			const QString& outputFilePath,
+bool CFileInfoCopyComp::ConvertFiles(
+			const QString& inputPath,
+			const QString& outputPath,
 			const iprm::IParamsSet* /*paramsSetPtr*/) const
 {
-	QString inputFileName = inputFilePath;
-	QString outputFileName = outputFilePath;
+	QString inputFileName = inputPath;
+	QString outputFileName = outputPath;
 
 	SendInfoMessage(MI_FILE_INFO, QObject::tr("Processing file %1 to %2").arg(inputFileName).arg(outputFileName));
 

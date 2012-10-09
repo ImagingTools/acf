@@ -1,61 +1,32 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2584
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="4">
-    <Element>
-      <Id>
-        Application
-      </Id>
-      <PackageId>
-        QtGuiPck
-      </PackageId>
-      <ComponentId>
-        GuiApplication
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="1">
-          <AttributeInfo>
-            <Id>
-              ApplicationInfo
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                ApplicationInfo
-              </Value>
-            </Data>
-          </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
+  <ElementsList count="5">
     <Element>
       <Id>
         ApplicationInfo
@@ -73,7 +44,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationName
@@ -147,6 +118,22 @@
             </Type>
             <ExportId>
               LegalCopyright
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainVersionId
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              MainVersionId
             </ExportId>
             <Data>
               <IsEnabled>
@@ -182,8 +169,11 @@
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
+              <Value>
+                VersionInfo
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -191,25 +181,41 @@
     </Element>
     <Element>
       <Id>
-        Copy
+        CopyAll
       </Id>
       <PackageId>
-        InstallVoce
+        FileProcessingPck
       </PackageId>
       <ComponentId>
-        CopyPublic
+        ComposedCopyFiles
       </ComponentId>
       <Data>
         <IsEnabled>
           true
         </IsEnabled>
         <Flags>
-          1
+          0
         </Flags>
-        <AttributeInfoMap count="9">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
-              ApplicationInfo
+              FileCopiers
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              FileCopiers
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
             </Id>
             <Type>
               Reference
@@ -222,74 +228,37 @@
                 true
               </IsEnabled>
               <Value>
-                ApplicationInfo
+                Log
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        CopyApp
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        CopyApp
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
-              BinaryExcludeFilters
+              EnableVerbose
             </Id>
             <Type>
-              String[]
-            </Type>
-            <ExportId>
-              BinaryExcludeFilters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptTags
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  LicensePath
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              InstallScriptValues
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="1">
-                <Value>
-                  ../Commercial/License.txt
-                </Value>
-              </Values>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              LicenseInputDir
-            </Id>
-            <Type>
-              String
+              Boolean
             </Type>
             <ExportId>
               
@@ -299,16 +268,16 @@
                 true
               </IsEnabled>
               <Value>
-                Commercial
+                true
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              LicensePath
+              FileCopy
             </Id>
             <Type>
-              String
+              Reference
             </Type>
             <ExportId>
               
@@ -318,7 +287,7 @@
                 true
               </IsEnabled>
               <Value>
-                Commercial/Header.txt
+                CopyAll
               </Value>
             </Data>
           </AttributeInfo>
@@ -343,34 +312,21 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              OtherExcludeFilters
+              NeedExplicitInput
             </Id>
             <Type>
-              String[]
+              Boolean
             </Type>
             <ExportId>
-              OtherExcludeFilters
+              
             </ExportId>
             <Data>
               <IsEnabled>
-                false
+                true
               </IsEnabled>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              SourceExcludeFilters
-            </Id>
-            <Type>
-              String[]
-            </Type>
-            <ExportId>
-              SourceExcludeFilters
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                false
-              </IsEnabled>
+              <Value>
+                true
+              </Value>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
@@ -435,25 +391,116 @@
         </AttributeInfoMap>
       </Data>
     </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              IsExtensionUsed
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              Log
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                Log
+              </Value>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="1">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         ibase::IApplication
       </InterfaceId>
       <ComponentId>
-        Application
+        CopyApp
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        istd::IPolymorphic
+      </InterfaceId>
+      <ComponentId>
+        CopyApp
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="0">
+  <ExportedComponents count="3">
+    <Component>
+      <ExportedId>
+        ApplicationInfo
+      </ExportedId>
+      <ComponentId>
+        ApplicationInfo
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        Log
+      </ExportedId>
+      <ComponentId>
+        Log
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        VersionInfo
+      </ExportedId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+    </Component>
   </ExportedComponents>
   <Description>
-    Complete application template for commercial installation with distributed sources
+    Application framework used to create some complex file copy
   </Description>
   <Keywords>
-    Setup Installation Framework Binaries Distribution Commercial Proprietary Closed ClosedSource Category='Application'
+    "Convertion Copy Application Complex" Company='ImagingTools' Project='ACF' Author='"Witold Gantzke"' Tag='File'
   </Keywords>
 </Acf>
