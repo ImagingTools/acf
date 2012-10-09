@@ -102,7 +102,6 @@ protected:
 	virtual void SetReadOnly(bool state);
 
 private:
-	void DoPostponedUpdate(int updateFlags);
 	void DoUpdate(int updateFlags);
 
 private:
@@ -251,7 +250,16 @@ void TGuiObserverWrap<Gui, Observer>::UpdateGui(int /*updateFlags*/)
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::UpdateEditor(int updateFlags)
 {
-	DoPostponedUpdate(updateFlags);
+	if (Gui::IsGuiShown()){
+		DoUpdate(updateFlags);
+	}
+	else{
+		// prepare postponed update
+		m_updateOnShow = true;
+		m_updateOnShowFlags = m_updateOnShowFlags | updateFlags;
+
+		return;
+	}
 }
 
 
@@ -270,7 +278,11 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiShown()
 
 	if (Observer::IsModelAttached(NULL)){
 		if (m_updateOnShow){
-			UpdateEditor(m_updateOnShowFlags);
+			// skip update if the UI is not visible:
+			DoUpdate(m_updateOnShowFlags);
+
+			m_updateOnShowFlags = 0;
+			m_updateOnShow = false;
 		}
 
 		OnGuiModelShown();
@@ -357,21 +369,6 @@ void TGuiObserverWrap<Gui, Observer>::SetReadOnly(bool state)
 // private methods
 
 template <class Gui, class Observer>
-void TGuiObserverWrap<Gui, Observer>::DoPostponedUpdate(int updateFlags)
-{
-	// skip update if the UI is not visible:
-	if (!Gui::IsGuiShown()){
-		m_updateOnShow = true;
-		m_updateOnShowFlags = m_updateOnShowFlags | updateFlags;
-
-		return;
-	}
-
-	DoUpdate(updateFlags);
-}
-
-
-template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::DoUpdate(int updateFlags)
 {
 	bool skipUpdate = false;
@@ -388,9 +385,6 @@ void TGuiObserverWrap<Gui, Observer>::DoUpdate(int updateFlags)
 			UpdateGui(updateFlags);
 		}
 	}
-
-	m_updateOnShow = false;
-	m_updateOnShowFlags = 0;
 }
 
 
