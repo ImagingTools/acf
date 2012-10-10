@@ -21,13 +21,19 @@ class CNameParamComp:
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef iprm::CNameParam BaseClass2;
 
 	I_BEGIN_COMPONENT(CNameParamComp);
 		I_REGISTER_INTERFACE(iprm::INameParam);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_defaultNameAttrPtr, "DefaultName", "Default name", false, "");
+		I_ASSIGN(m_isNameFixedAttrPtr, "IsNameFixed", "When enabled, the name is fixed and cannot be changed during run tume", true, false);
 	I_END_COMPONENT;
+
+	// reimplemented (iprm::INameParam)
+	virtual void SetName(const QString& name);
+	virtual bool IsNameFixed() const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -35,6 +41,7 @@ protected:
 
 private:
 	I_ATTR(QString, m_defaultNameAttrPtr);
+	I_ATTR(bool, m_isNameFixedAttrPtr);
 };
 
 

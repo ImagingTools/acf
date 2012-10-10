@@ -5,6 +5,24 @@ namespace iprm
 {
 
 
+// public methods
+
+// reimplemented (iprm::INameParam)
+
+void CNameParamComp::SetName(const QString& name)
+{
+	if (!*m_isNameFixedAttrPtr){
+		BaseClass2::SetName(name);
+	}
+}
+
+
+bool CNameParamComp::IsNameFixed() const
+{
+	return *m_isNameFixedAttrPtr;
+}
+
+
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
