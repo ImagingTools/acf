@@ -27,9 +27,9 @@ public:
 		DAF_OPTIONAL = IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_SINGLE | IAttributeStaticInfo::AF_FACTORY
 	};
 
-	CFactoryAttribute(){}
-	CFactoryAttribute(const CFactoryAttribute& attribute):BaseClass(attribute){}
-	explicit CFactoryAttribute(const QByteArray& value):BaseClass(value){}
+	CFactoryAttribute();
+	CFactoryAttribute(const CFactoryAttribute& attribute);
+	explicit CFactoryAttribute(const QByteArray& value);
 
 	// reimplemented (iser::IObject)
 	QByteArray GetFactoryId() const;

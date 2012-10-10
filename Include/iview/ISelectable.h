@@ -18,7 +18,7 @@ namespace iview
 class IInteractiveShape;
 
 
-class ISelectable: public ITouchable
+class ISelectable: virtual public ITouchable
 {
 public:
 	typedef QSet<IInteractiveShape*> SelectedShapes;

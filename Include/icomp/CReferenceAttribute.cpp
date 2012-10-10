@@ -5,6 +5,25 @@ namespace icomp
 {
 
 
+// public methods
+	
+CReferenceAttribute::CReferenceAttribute()
+{
+}
+
+
+CReferenceAttribute::CReferenceAttribute(const CReferenceAttribute& attribute)
+	:BaseClass(attribute)
+{
+}
+
+
+CReferenceAttribute::CReferenceAttribute(const QByteArray& value)
+	:BaseClass(value)
+{
+}
+
+
 // reimplemented (iser::IObject)
 
 QByteArray CReferenceAttribute::GetFactoryId() const

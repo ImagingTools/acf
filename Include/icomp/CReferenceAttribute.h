@@ -27,9 +27,9 @@ public:
 		DAF_OPTIONAL = IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_SINGLE | IAttributeStaticInfo::AF_REFERENCE
 	};
 
-	CReferenceAttribute(){}
-	CReferenceAttribute(const CReferenceAttribute& attribute):BaseClass(attribute){}
-	explicit CReferenceAttribute(const QByteArray& value):BaseClass(value){}
+	CReferenceAttribute();
+	CReferenceAttribute(const CReferenceAttribute& attribute);
+	explicit CReferenceAttribute(const QByteArray& value);
 
 	// reimplemented (iser::IObject)
 	QByteArray GetFactoryId() const;

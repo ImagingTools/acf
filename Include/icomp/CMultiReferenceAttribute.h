@@ -27,9 +27,9 @@ public:
 		DAF_OPTIONAL = IAttributeStaticInfo::AF_NULLABLE | IAttributeStaticInfo::AF_MULTIPLE | IAttributeStaticInfo::AF_REFERENCE
 	};
 
-	CMultiReferenceAttribute(){}
-	CMultiReferenceAttribute(const CMultiReferenceAttribute& attribute):BaseClass(attribute){}
-	CMultiReferenceAttribute(int elementsCount, QByteArray* valuesPtr):BaseClass(elementsCount, valuesPtr){}
+	CMultiReferenceAttribute();
+	CMultiReferenceAttribute(const CMultiReferenceAttribute& attribute);
+	CMultiReferenceAttribute(int elementsCount, QByteArray* valuesPtr);
 
 	// reimplemented (iser::IObject)
 	QByteArray GetFactoryId() const;
