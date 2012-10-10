@@ -26,7 +26,8 @@ call CreateScripts.bat
 
 call Create_TechnicalDoc.bat
 
-call Create_VC_LGPL.bat
+echo Copying files to Temp directory...
+"../Bin/Debug%COMPILER_EXT%/Acf.exe" Create_%COMPILER_EXT%_LGPL.arx -config $(ACFSLNDIR)/Config/Core.xpc -input .. -output Temp
 
 call Compile_Setup.bat
 

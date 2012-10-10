@@ -12,7 +12,7 @@ for creation of very complex applications. ACF contains many standard implementa
 such Serialization, Model/Observer, Factory and so on. ACF implements a component concept 
 and includes many standard components, which you can directly use in your application.
 
-See http://www.imagingtools.de, write info@imagingtools.de or contact
+See http://www.ilena.org, write info@imagingtools.de or contact
 by Skype to ACF_infoline for further information about the ACF.
 
 \section Example

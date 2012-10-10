@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2584
+          2585
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="3">
+  <PositionMap count="2">
     <Element>
       <ComponentName>
         Application
@@ -50,20 +50,6 @@
       </X>
       <X>
         225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        CopyScriptFiles
-      </ComponentName>
-      <X>
-        750
-      </X>
-      <X>
-        425
       </X>
       <Note>
         
