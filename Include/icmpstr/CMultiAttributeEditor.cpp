@@ -256,8 +256,11 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 							*registryPtr,
 							queryFlags);
 
-				for (		icomp::IRegistry::Ids::const_iterator iter = compatIds.begin();
-							iter != compatIds.end();
+				QList< QByteArray> compatIdList = compatIds.toList();	
+				qSort(compatIdList);
+				
+				for(		QList< QByteArray>::const_iterator iter = compatIdList.begin();
+							iter != compatIdList.end();
 							++iter){
 					comboEditor->addItem(*iter);
 				}
