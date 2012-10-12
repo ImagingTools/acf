@@ -50,23 +50,15 @@ int CMultiParamsManagerComp::GetParamsSetsCount() const
 }
 
 
-IParamsManager::TypeIds CMultiParamsManagerComp::GetSupportedTypeIds() const
+const ISelectionConstraints* CMultiParamsManagerComp::GetParamsTypeConstraints() const
 {
-	IParamsManager::TypeIds retVal;
-	
-	for (		QMap<QByteArray,int>::const_iterator iter = m_factoryIdFactoryIndexMap.constBegin();
-				iter != m_factoryIdFactoryIndexMap.constEnd();
-				++iter) {
-		retVal.insert(iter.key());
-	}
-
-	return retVal;
+	return &m_typeInfoList;
 }
 
 
-int CMultiParamsManagerComp::InsertParamsSet(const QByteArray& typeId, int index)
+int CMultiParamsManagerComp::InsertParamsSet(int typeIndex, int index)
 {
-	if (!typeId.isEmpty() && !m_factoryIdFactoryIndexMap.contains(typeId)){
+	if (typeIndex >= m_typeInfoList.typeInfos.size()){
 		return -1;
 	}
 
@@ -76,20 +68,22 @@ int CMultiParamsManagerComp::InsertParamsSet(const QByteArray& typeId, int index
 		return -1;
 	}
 
-	IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(m_factoryIdFactoryIndexMap.value(typeId));
+	const TypeInfo& info = (typeIndex >= 0)? m_typeInfoList.typeInfos[typeIndex]: m_typeInfoList.typeInfos[0];
+
+	IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(info.factoryIndex);
 	if (newParamsSetPtr == NULL){
 		return -1;
 	}
 
 	istd::CChangeNotifier notifier(this, CF_SET_INSERTED | CF_OPTIONS_CHANGED);
 
-	QString defaultSetName = m_defaultSetNameCompPtr.IsValid() ? *m_defaultSetNameCompPtr: "unnamed";
+	QString defaultSetName = m_defaultSetNameAttrPtr.IsValid() ? *m_defaultSetNameAttrPtr: "unnamed";
 
 	ParamSet paramSet;
 	
 	paramSet.paramSetPtr.SetPtr(newParamsSetPtr);
 	paramSet.name = defaultSetName;
-	paramSet.typeId = typeId;
+	paramSet.typeId = info.id;
 
 	imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 	if (modelPtr != NULL){
@@ -179,13 +173,13 @@ QString CMultiParamsManagerComp::GetParamsSetName(int index) const
 
 	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedSetsCount){
-		int namesCount = m_fixedSetNamesCompPtr.GetCount();
+		int namesCount = m_fixedSetNamesAttrPtr.GetCount();
 
 		if (index < namesCount){
-			return m_fixedSetNamesCompPtr[index];
+			return m_fixedSetNamesAttrPtr[index];
 		}
 		else{
-			return QObject::tr("%1_%2").arg(*m_defaultSetNameCompPtr).arg(index - namesCount + 1);
+			return QObject::tr("%1_%2").arg(*m_defaultSetNameAttrPtr).arg(index - namesCount + 1);
 		}
 	}
 
@@ -197,7 +191,7 @@ bool CMultiParamsManagerComp::SetParamsSetName(int index, const QString& name)
 {
 	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
-	int fixedSetsCount = m_fixedSetNamesCompPtr.GetCount();
+	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
 	if (index < fixedSetsCount){
 		return false;
 	}
@@ -399,7 +393,7 @@ void CMultiParamsManagerComp::OnComponentCreated()
 		}
 	}
 
-	//Obtaining factory ids
+	// Obtaining factory ids
 	for (int factoryIndex = 0; factoryIndex < m_paramSetsFactoriesPtr.GetCount(); factoryIndex++){		
 		istd::TDelPtr<IParamsSet> paramsSetPtr(m_paramSetsFactoriesPtr.CreateInstance(factoryIndex));
 		
@@ -407,7 +401,20 @@ void CMultiParamsManagerComp::OnComponentCreated()
 			QByteArray factoryId = paramsSetPtr->GetFactoryId();
 				
 			if (!factoryId.isEmpty()){
-				m_factoryIdFactoryIndexMap.insert(factoryId, factoryIndex);
+				TypeInfo typeInfo;
+
+				typeInfo.factoryIndex = factoryIndex;
+				typeInfo.id = factoryId;
+				typeInfo.name = factoryId;
+				if (factoryIndex < m_factoryNameNameAttrPtr.GetCount()){
+					typeInfo.name = m_factoryNameNameAttrPtr[factoryIndex];
+				}
+				if (factoryIndex < m_factoryDescriptionAttrPtr.GetCount()){
+					typeInfo.description = m_factoryDescriptionAttrPtr[factoryIndex];
+				}
+
+				m_typeInfoList.typeInfos.push_back(typeInfo);
+				m_typeInfoList.typeIdToIndexMap[factoryId] = m_typeInfoList.typeInfos.size() - 1;
 			}
 		}
 	}
@@ -426,6 +433,9 @@ void CMultiParamsManagerComp::OnComponentDestroyed()
 			modelPtr->DetachObserver(this);
 		}
 	}
+
+	m_typeInfoList.typeInfos.clear();
+	m_typeInfoList.typeIdToIndexMap.clear();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -456,7 +466,20 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 		}
 
 		if (typeId != paramSet.typeId){
-			IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(m_factoryIdFactoryIndexMap.value(typeId));
+			QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
+			if (typeListIter == m_typeInfoList.typeIdToIndexMap.constEnd()){
+				return false;
+			}
+
+			int typeListIndex = typeListIter.value();
+			Q_ASSERT(typeListIndex >= 0);
+			Q_ASSERT(typeListIndex < m_typeInfoList.typeInfos.size());
+
+			const TypeInfo& typeInfo = m_typeInfoList.typeInfos[typeListIndex];
+			Q_ASSERT(typeInfo.factoryIndex >= 0);
+			Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
+
+			IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
 			if (newParamsSetPtr == NULL){
 				return false;
 			}
@@ -472,7 +495,20 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 		}
 	}
 	else{
-		IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(m_factoryIdFactoryIndexMap.value(typeId));
+		QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
+		if (typeListIter == m_typeInfoList.typeIdToIndexMap.constEnd()){
+			return false;
+		}
+
+		int typeListIndex = typeListIter.value();
+		Q_ASSERT(typeListIndex >= 0);
+		Q_ASSERT(typeListIndex < m_typeInfoList.typeInfos.size());
+
+		const TypeInfo& typeInfo = m_typeInfoList.typeInfos[typeListIndex];
+		Q_ASSERT(typeInfo.factoryIndex >= 0);
+		Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
+
+		IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
 		if (newParamsSetPtr == NULL){
 			return false;
 		}
@@ -494,6 +530,55 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 	}
 
 	return true;
+}
+
+
+// public methods of embedded class TypeInfoList
+
+// reimplemented (iprm::ISelectionConstraints)
+
+int CMultiParamsManagerComp::TypeInfoList::GetConstraintsFlags() const
+{
+	return SCF_SUPPORT_UNIQUE_ID;
+}
+
+
+int CMultiParamsManagerComp::TypeInfoList::GetOptionsCount() const
+{
+	return typeInfos.size();
+}
+
+
+QString CMultiParamsManagerComp::TypeInfoList::GetOptionName(int index) const
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < typeInfos.size());
+
+	const TypeInfo& info = typeInfos[index];
+
+	return info.name;
+}
+
+
+QString CMultiParamsManagerComp::TypeInfoList::GetOptionDescription(int index) const
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < typeInfos.size());
+
+	const TypeInfo& info = typeInfos[index];
+
+	return info.description;
+}
+
+
+QByteArray CMultiParamsManagerComp::TypeInfoList::GetOptionId(int index) const
+{
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < typeInfos.size());
+
+	const TypeInfo& info = typeInfos[index];
+
+	return info.id;
 }
 
 

@@ -53,8 +53,8 @@ public:
 	// reimplemented (iprm::IParamsManager)
 	virtual int GetIndexOperationFlags(int index = -1) const;
 	virtual int GetParamsSetsCount() const;
-	virtual TypeIds GetSupportedTypeIds() const;
-	virtual int InsertParamsSet(const QByteArray& typeId = "", int index = -1);
+	virtual const ISelectionConstraints* GetParamsTypeConstraints() const;
+	virtual int InsertParamsSet(int typeIndex = -1, int index = -1);
 	virtual bool RemoveParamsSet(int index);
 	virtual bool SwapParamsSet(int index1, int index2);
 	virtual IParamsSet* GetParamsSet(int index) const;

@@ -40,9 +40,11 @@ public:
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(ISelectionConstraints);
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
-		I_ASSIGN_MULTI_0(m_fixedSetNamesCompPtr, "FixedSetNames", "List of fixed parameter names", false);
-		I_ASSIGN(m_defaultSetNameCompPtr, "DefaultSetName", "Default name of parameter set", true, "<noname>");		
+		I_ASSIGN_MULTI_0(m_fixedSetNamesAttrPtr, "FixedSetNames", "List of fixed parameter names", false);
+		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set", true, "<noname>");		
 		I_ASSIGN_MULTI_0(m_paramSetsFactoriesPtr, "ParamSetsFactories", "List of factories for parameter sets creation", true);		
+		I_ASSIGN_MULTI_0(m_factoryNameNameAttrPtr, "ParamSetsFactorieNames", "List of names associated with the parameter factories", true);
+		I_ASSIGN_MULTI_0(m_factoryDescriptionAttrPtr, "ParamSetsFactorieDesciption", "List of descriptions associated with the parameter factories", true);
 	I_END_COMPONENT;
 
 	CMultiParamsManagerComp();	
@@ -50,8 +52,8 @@ public:
 	// reimplemented (iprm::IParamsManager)
 	virtual int GetIndexOperationFlags(int index = -1) const;
 	virtual int GetParamsSetsCount() const;
-	virtual TypeIds GetSupportedTypeIds() const;
-	virtual int InsertParamsSet(const QByteArray& typeId = "", int index = -1);
+	virtual const ISelectionConstraints* GetParamsTypeConstraints() const;
+	virtual int InsertParamsSet(int typeIndex = -1, int index = -1);
 	virtual bool RemoveParamsSet(int index);
 	virtual bool SwapParamsSet(int index1, int index2);
 	virtual IParamsSet* GetParamsSet(int index) const;
@@ -75,6 +77,28 @@ public:
 	virtual QByteArray GetOptionId(int index) const;
 
 protected:
+	struct TypeInfo
+	{
+		int factoryIndex;
+		QByteArray id;
+		QString name;
+		QString description;
+	};
+
+	struct TypeInfoList: public ISelectionConstraints
+	{
+		// reimplemented (iprm::ISelectionConstraints)
+		virtual int GetConstraintsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+
+		QVector<TypeInfo> typeInfos;
+
+		QMap<QByteArray, int> typeIdToIndexMap;
+	};
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
@@ -89,9 +113,11 @@ protected:
 
 private:
 	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
-	I_MULTIATTR(QString, m_fixedSetNamesCompPtr);
-	I_ATTR(QString, m_defaultSetNameCompPtr);	
+	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
+	I_ATTR(QString, m_defaultSetNameAttrPtr);	
 	I_MULTIFACT(iprm::IParamsSet, m_paramSetsFactoriesPtr);
+	I_MULTIATTR(QString, m_factoryNameNameAttrPtr);	
+	I_MULTIATTR(QString, m_factoryDescriptionAttrPtr);	
 
 	struct ParamSet
 	{
@@ -106,7 +132,7 @@ private:
 
 	int m_selectedIndex;
 
-	QMap<QByteArray, int> m_factoryIdFactoryIndexMap;
+	TypeInfoList m_typeInfoList;
 };
 
 

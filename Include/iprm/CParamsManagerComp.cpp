@@ -100,22 +100,14 @@ int CParamsManagerComp::GetParamsSetsCount() const
 }
 
 
-IParamsManager::TypeIds CParamsManagerComp::GetSupportedTypeIds() const
+const ISelectionConstraints* CParamsManagerComp::GetParamsTypeConstraints() const
 {
-	IParamsManager::TypeIds retVal;
-
-	retVal.insert(*m_paramsSetTypeIdAttrPtr);
-
-	return retVal;
+	return NULL;
 }
 
 
-int CParamsManagerComp::InsertParamsSet(const QByteArray& typeId, int index)
+int CParamsManagerComp::InsertParamsSet(int /*typeIndex*/, int index)
 {
-	if (!typeId.isEmpty() && (typeId != *m_paramsSetTypeIdAttrPtr)){
-		return -1;
-	}
-
 	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
 
 	if (		!m_paramSetsFactPtr.IsValid() ||

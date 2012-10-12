@@ -80,22 +80,21 @@ public:
 	virtual int GetParamsSetsCount() const = 0;
 
 	/**
-		Get list of IDs of supported parameters types for insert.
-		The IDs are context specified.
-		Please note, that some existing parameters can use IDs outside this list.
+		Get selection contraints describing each supported type.
+		\return	NULL, if only one annonymed type is supported.
 	*/
-	virtual TypeIds GetSupportedTypeIds() const = 0;
+	virtual const ISelectionConstraints* GetParamsTypeConstraints() const = 0;
 
 	/**
 		Insert new parameters set at selected position.
-		\param	index	position in list of parameters or negative value to use default position.
-		\param	typeid	ID of parameter type.
-						This ID is context specified and is used to indicate type of parameters should be added.
-						If no ID is specified, type will be automatically selected.
-		\return			position of inserted new entry or negative value if no insert was possible.
-						For specified index positions (positive \c index value) it will return the same index or negative value.
+		\param	index		position in list of parameters or negative value to use default position.
+		\param	typeIndex	Index of parameter type.
+							This index is context specified and is used to indicate type of parameters should be added.
+							If equals negative value the type will be automatically selected.
+		\return				position of inserted new entry or negative value if no insert was possible.
+							For specified index positions (positive \c index value) it will return the same index or negative value.
 	*/
-	virtual int InsertParamsSet(const QByteArray& typeId = "", int index = -1) = 0;
+	virtual int InsertParamsSet(int typeIndex = -1, int index = -1) = 0;
 
 	/**
 		Remove parameters set at selected position.
