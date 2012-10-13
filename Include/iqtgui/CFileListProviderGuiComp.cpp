@@ -1,11 +1,6 @@
 #include "iqtgui/CFileListProviderGuiComp.h"
 
 
-// ACF includes
-#include "i2d/ICalibrationProvider.h"
-#include "i2d/CAffine2d.h"
-
-
 namespace iqtgui
 {
 

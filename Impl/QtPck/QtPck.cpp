@@ -103,6 +103,10 @@ I_EXPORT_COMPONENT(
 			"Provide html help file path converting class type using doxygen format",
 			"Doxygen File Provider Document Html Description Class Interface Qt" IM_TAG("Help"));
 
+I_EXPORT_COMPONENT(
+			SystemLocation,
+			"System locations provider",
+			"System Path File Location Temp Documents Media Cache" IM_TAG("Model"));
 
 } // namespace QtPck
 

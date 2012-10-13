@@ -80,7 +80,7 @@ void CFileNameParamGuiComp::UpdateGui(int /*updateFlags*/)
 		BrowseButton->setVisible((pathType == iprm::IFileNameParam::PT_DIRECTORY) || (pathType == iprm::IFileNameParam::PT_FILE));
 
 		if (*m_readOnlyAttrPtr){
-			BrowseButton->hide();
+			BrowseButton->setVisible(false);
 		}
 	}
 	else{
@@ -118,16 +118,17 @@ void CFileNameParamGuiComp::OnGuiCreated()
 	iqtgui::CExtLineEdit* lineEdit = new iqtgui::CExtLineEdit(startHint, 2, DirEdit);
 
 	// add "cd up" button:
-	QToolButton* cdUpButton = new QToolButton(lineEdit);
-	cdUpButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
-	cdUpButton->setIcon(QIcon(":/Icons/UpDir.svg"));
-	connect(cdUpButton, SIGNAL(clicked()), this, SLOT(OnDirectoryUp()));
+	if (!*m_readOnlyAttrPtr){
+		QToolButton* cdUpButton = new QToolButton(lineEdit);
+		cdUpButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+		cdUpButton->setIcon(QIcon(":/Icons/UpDir.svg"));
+		connect(cdUpButton, SIGNAL(clicked()), this, SLOT(OnDirectoryUp()));
 
-	lineEdit->AddWidget(cdUpButton, Qt::AlignRight);
+		lineEdit->AddWidget(cdUpButton, Qt::AlignRight);
+	}
 
 	lineEdit->setReadOnly(*m_readOnlyAttrPtr);
 	BrowseButton->setHidden(*m_readOnlyAttrPtr);
-	cdUpButton->setDisabled(*m_readOnlyAttrPtr);
 
 	DirEdit->setLineEdit(lineEdit);
 	DirEdit->setCompleter(NULL);
@@ -257,6 +258,10 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 
 void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 {
+	if (*m_readOnlyAttrPtr){
+		return;
+	}
+
 	iprm::IFileNameParam* objectPtr = GetObjectPtr();
 	I_ASSERT(objectPtr != NULL);
 	if (objectPtr != NULL){

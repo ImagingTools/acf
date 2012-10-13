@@ -264,6 +264,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSystemLocationComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CTranslationManagerComp.cpp"
 				>
 			</File>
@@ -379,6 +383,10 @@
 			</File>
 			<File
 				RelativePath="..\CSystem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSystemLocationComp.h"
 				>
 			</File>
 			<File
