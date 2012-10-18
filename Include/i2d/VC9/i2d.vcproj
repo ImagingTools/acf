@@ -474,6 +474,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IMultiCalibrationProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IObject2d.h"
 				>
 			</File>
