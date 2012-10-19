@@ -17,6 +17,7 @@
 #include "iser/CMemoryReadArchive.h"
 
 #include "i2d/CPolygon.h"
+#include "i2d/CPolyline.h"
 
 #include "iqt/CSignalBlocker.h"
 
@@ -30,39 +31,39 @@ namespace iqt2d
 
 template <class PolygonBasedShape, class PolygonBasedModel>
 class TPolygonBasedParamsGuiComp:
-	public iqt2d::TShapeParamsGuiCompBase<
-				Ui::CPolygonParamsGuiComp,
-				PolygonBasedShape,
-				PolygonBasedModel>
+public iqt2d::TShapeParamsGuiCompBase<
+Ui::CPolygonParamsGuiComp,
+PolygonBasedShape,
+PolygonBasedModel>
 {
 public:
 
 	/**
 		Cell index
-	*/
+	 */
 	enum CellIndex
 	{
 		/**
 			Index of the table cell for the X coordinate of the polygon node
-		*/
+		 */
 		CI_X,
 
 		/**
 			Index of the table cell for the X coordinate of the polygon node
-		*/
+		 */
 		CI_Y,
 
 		/**
 			Last used cell index
-		*/
+		 */
 		CI_LAST = CI_Y
 	};
 
 
 	typedef iqt2d::TShapeParamsGuiCompBase<
-				Ui::CPolygonParamsGuiComp,
-				PolygonBasedShape,
-				PolygonBasedModel> BaseClass;
+	Ui::CPolygonParamsGuiComp,
+	PolygonBasedShape,
+	PolygonBasedModel> BaseClass;
 
 	I_BEGIN_COMPONENT(TPolygonBasedParamsGuiComp);
 	I_END_COMPONENT;
@@ -74,7 +75,7 @@ protected:
 
 	/**
 		Get the table with the node data.
-	*/
+	 */
 	QTableWidget* GetNodeTable();
 
 	virtual void OnInsertNode();
@@ -97,7 +98,7 @@ protected:
 
 	/** 
 		Internal item delegate class for input validation
-	*/
+	 */
 	class CPolygonParamsGuiItemDelegate: public QItemDelegate
 	{
 	public:
@@ -107,10 +108,15 @@ protected:
 			editorPtr->setValidator(new QDoubleValidator());
 			return editorPtr;
 		}
-	};
-};
+	} ; // CPolygonParamsGuiItemDelegate
 
+private:
+	/** Change state of a line close check box: disabled and hidden, according 
+	 to the attached model type (only visible for CPolyline) and list selection 
+	 (uncheckable if a list element is selected, always checkable). */
+	void updateClosedLineCheckBox(bool forceEnabled, bool forceHidden);
 
+} ; // TPolygonBasedParamsGuiComp
 
 // public methods
 
@@ -132,7 +138,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateMod
 	for (int i = 0; i < count; i++){
 		double x = NodeParamsTable->item(i, CI_X)->text().toDouble();
 		double y = NodeParamsTable->item(i, CI_Y)->text().toDouble();
-	
+
 		objectPtr->InsertNode(i2d::CVector2d(x, y));
 	}
 }
@@ -155,7 +161,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnInsertN
 	int row = NodeParamsTable->currentRow();
 	if (row < 0){
 		row = NodeParamsTable->rowCount();
-		
+
 		NodeParamsTable->setRowCount(row + 1);
 	}
 	else{
@@ -233,13 +239,17 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiMode
 {
 	BaseClass::OnGuiModelAttached();
 
-	QObject::connect(NodeParamsTable, SIGNAL(cellChanged(int,int)), this, SLOT(OnParamsChanged()));
+	QObject::connect(NodeParamsTable, SIGNAL(cellChanged(int, int)), this, SLOT(OnParamsChanged()));
+
+	updateClosedLineCheckBox(false, false);
 }
 
 
 template <class PolygonBasedShape, class PolygonBasedModel>
 void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiModelDetached()
 {
+	updateClosedLineCheckBox(false, true);
+
 	NodeParamsTable->disconnect();
 
 	BaseClass::OnGuiModelDetached();
@@ -279,6 +289,23 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiCrea
 	CPolygonParamsGuiItemDelegate* columnDelegate = new CPolygonParamsGuiItemDelegate();
 	NodeParamsTable->setItemDelegateForColumn(0, columnDelegate);
 	NodeParamsTable->setItemDelegateForColumn(1, columnDelegate);
+
+	updateClosedLineCheckBox(false, false);
+}
+
+
+template <class PolygonBasedShape, class PolygonBasedModel>
+void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::updateClosedLineCheckBox(bool forceEnabled, bool forceHidden)
+{
+	CloseLineCheckBox->setHidden(true);
+	CloseLineCheckBox->setDisabled(true);
+
+	i2d::CPolyline* polylinePtr = dynamic_cast<i2d::CPolyline*>(GetModelPtr());
+	if (!forceHidden && polylinePtr != NULL){
+		CloseLineCheckBox->setChecked(polylinePtr->IsClosed());
+		CloseLineCheckBox->setHidden(false);
+		CloseLineCheckBox->setEnabled(forceEnabled || !polylinePtr->IsClosed());
+	}
 }
 
 
