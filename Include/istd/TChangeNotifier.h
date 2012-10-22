@@ -23,7 +23,8 @@ class TChangeNotifier: public istd::TPointerBase<Changeable>
 public:
 	typedef istd::TPointerBase<Changeable> BaseClass;
 
-	explicit TChangeNotifier(Changeable* changeablePtr, int changeFlags = IChangeable::CF_MODEL, istd::IPolymorphic* updateParamsPtr = NULL);
+	explicit TChangeNotifier(Changeable* changeablePtr = NULL, int changeFlags = IChangeable::CF_MODEL, istd::IPolymorphic* updateParamsPtr = NULL);
+	TChangeNotifier(const TChangeNotifier& notifier);
 	virtual  ~TChangeNotifier();
 
 	/**
@@ -67,6 +68,18 @@ TChangeNotifier<Changeable>::TChangeNotifier(Changeable* changeablePtr, int chan
 {
 	if (changeablePtr != NULL){
 		changeablePtr->BeginChanges(m_changeFlags, m_updateParamsPtr);
+	}
+}
+
+
+template <class Changeable>
+TChangeNotifier<Changeable>::TChangeNotifier(const TChangeNotifier& notifier)
+:	BaseClass(notifier),
+	m_changeFlags(notifier.m_changeFlags),
+	m_updateParamsPtr(notifier.m_updateParamsPtr)
+{
+	if (BaseClass::IsValid()){
+		BaseClass::operator->()->BeginChanges(notifier.m_changeFlags, notifier.m_updateParamsPtr);
 	}
 }
 
