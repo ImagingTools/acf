@@ -34,6 +34,8 @@ protected:
 	typedef typename BaseClass::Shapes Shapes;
 	typedef typename BaseClass::ShapesMap ShapesMap;
 
+	virtual Shape* CreateShape() const;
+
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
@@ -103,12 +105,19 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnDetached(imod::IModel* mo
 
 // protected methods
 
+template <class Ui, class Shape, class ShapeModel>
+Shape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape() const
+{
+	return new Shape();
+}
+
+
 // reimplemented (iqt2d::TViewExtenderCompBase)
 
 template <class Ui, class Shape, class ShapeModel>
 void TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShapes(int /*sceneId*/, Shapes& result)
 {
-	Shape* shapePtr = new Shape();
+	Shape* shapePtr = CreateShape();
 	if (shapePtr != NULL){
 		result.PushBack(shapePtr);
 

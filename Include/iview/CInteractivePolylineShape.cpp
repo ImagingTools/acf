@@ -1,16 +1,10 @@
 #include "iview/CInteractivePolylineShape.h"
 
 
-// Qt includes
-#include <QtGui/QPainter>
-
 // ACF includes
 #include "imod/IModel.h"
-
 #include "i2d/CPolyline.h"
-
 #include "iqt/iqt.h"
-
 #include "iview/IColorShema.h"
 #include "iview/CScreenTransform.h"
 
@@ -168,91 +162,70 @@ namespace
 {
 
 
-template<typename T> T lerp(T t1, T t2, double x)
-{
-	return t1 * (1 - x) + t2 * x;
-}
-
-
-void drawOrientationMarkers(
-			QPainter& drawContext,
-			QPen brightPen,
-			QPen darkPen,
-			istd::CIndex2d point1,
-			istd::CIndex2d point2,
-			double scale)
-{
-	scale = sqrt(scale);
-
-	// arbitrary marker dimensions in pixels, multiplied by scale
-	double markerSizeX = 8.5 * scale;
-	double markerSizeY = 50 * scale;
-
-	// calculate beginning, end and center of the line
-	QPoint bol(point1.GetX(), point1.GetY());
-	QPoint eol(point2.GetX(), point2.GetY());
-	QPoint lineCenter = (bol + eol) / 2;
-
-	// calculate line length
-	double Dx = bol.x() - eol.x();
-	double Dy = bol.y() - eol.y();
-	double lineLength = sqrt(Dx * Dx + Dy * Dy);
-
-	// limit marker size to half line length
-	if (markerSizeY > lineLength / 2){
-		double correction = markerSizeY / lineLength * 2;
-		markerSizeX /= correction;
-		markerSizeY /= correction;
-	}
-
-	// two points common to both markers
-	QPoint markerPoint1 = lerp(lineCenter, bol, markerSizeX / lineLength);
-	QPoint markerPoint2 = lerp(lineCenter, eol, markerSizeX / lineLength);
-
-	// marker top: point on a line, which will be rotated 90 degrees
-	QPoint top = lerp(lineCenter, bol, markerSizeY / lineLength) - lineCenter;
-
-	QPoint markerTopLeft(lineCenter.x() + top.y(), lineCenter.y() - top.x());
-	QPoint markerTopRight(lineCenter.x() - top.y(), lineCenter.y() + top.x());
- 
-	QPolygonF leftMarker(3);
-	leftMarker[0] = markerPoint1;
-	leftMarker[1] = markerPoint2;
-	leftMarker[2] = markerTopLeft;
-
-	QPolygonF rightMarker(3);
-	rightMarker[0] = markerPoint1;
-	rightMarker[1] = markerPoint2;
-	rightMarker[2] = markerTopRight;
-
-	drawContext.save();
-
-	// reduce line opacity for the pens; the border is only used to increase visibility on black/white backgrounds
-	QColor darkColor = darkPen.color();
-	QColor brightColor = brightPen.color();
-	QColor color = darkColor;
-	color.setAlphaF(0.25);
-	darkPen.setColor(color);
-	color = brightColor;
-	color.setAlphaF(0.25);
-	brightPen.setColor(color);
-
-	// draw the markers
-	drawContext.setPen(darkPen);
-	drawContext.setBrush(brightColor);
-	drawContext.drawPolygon(leftMarker);
-
-	drawContext.setPen(brightPen);
-	drawContext.setBrush(darkColor);
-	drawContext.drawPolygon(rightMarker);
-
-	drawContext.restore();
-}
-
 } // namespace
 
 
 // protected methods
+
+void CInteractivePolylineShape::DrawOrientationMarker(
+			QPainter& drawContext,
+			const QPen& rightPen,
+			const QBrush& rightBrush,
+			const QPen& leftPen,
+			const QBrush& leftBrush,
+			const i2d::CLine2d& segmentLine,
+			double scale) const
+{
+	double lineLength = segmentLine.GetLength();
+	if (lineLength < I_BIG_EPSILON){
+		return;
+	}
+
+	scale = sqrt(scale);
+
+	// arbitrary marker dimensions in pixels, multiplied by scale
+	double markerSizeX = 8 * scale;
+	double markerSizeY = 30 * scale;
+
+	double maxMarkerLength = qMin(20.0, lineLength * 0.2);
+
+	// limit marker size to half line length
+	if (markerSizeY > maxMarkerLength){
+		markerSizeX *= maxMarkerLength / markerSizeY;
+		markerSizeY = maxMarkerLength;
+	}
+
+	i2d::CVector2d lineCenter = segmentLine.GetCenter();
+
+	i2d::CVector2d segmentDelta = segmentLine.GetDiffVector();
+	i2d::CVector2d segmentBaseX = segmentDelta.GetNormalized(markerSizeX);
+	i2d::CVector2d segmentBaseY = segmentDelta.GetOrthogonal().GetNormalized(markerSizeY);
+	// two points common to both markers
+	i2d::CVector2d markerPoint1 = lineCenter - segmentBaseX;
+	i2d::CVector2d markerPoint2 = lineCenter + segmentBaseX;
+	i2d::CVector2d markerPoint3 = lineCenter - segmentBaseY;
+	i2d::CVector2d markerPoint4 = lineCenter + segmentBaseY;
+ 
+	drawContext.save();
+
+	// draw the markers
+	QPolygonF markerPolygon(3);
+	markerPolygon[0] = markerPoint1;
+	markerPolygon[1] = markerPoint2;
+	markerPolygon[2] = markerPoint3;
+	drawContext.setPen(leftPen);
+	drawContext.setBrush(leftBrush);
+	drawContext.drawPolygon(markerPolygon);
+
+	markerPolygon[2] = markerPoint4;
+
+	drawContext.setPen(rightPen);
+	drawContext.setBrush(rightBrush);
+	drawContext.drawPolygon(markerPolygon);
+
+	drawContext.restore();
+}
+
 
 void CInteractivePolylineShape::DrawCurve(QPainter& drawContext) const
 {
@@ -266,30 +239,39 @@ void CInteractivePolylineShape::DrawCurve(QPainter& drawContext) const
 		int nodesCount = polylinePtr->GetNodesCount();
 		if (nodesCount > 0){
 			int secondPointIndex;
-			int pointIndex;
-			istd::CIndex2d firstPoint;
-			istd::CIndex2d point1;
+			i2d::CVector2d firstPoint;
+
+			i2d::CLine2d segmentLine;
 
 			if (polylinePtr->IsClosed()){
-				firstPoint = transform.GetScreenPosition(polylinePtr->GetNode(nodesCount - 1));
+				firstPoint = transform.GetApply(polylinePtr->GetNode(nodesCount - 1));
 				secondPointIndex = 0;
 			}
 			else{
-				firstPoint = transform.GetScreenPosition(polylinePtr->GetNode(0));
+				firstPoint = transform.GetApply(polylinePtr->GetNode(0));
 				secondPointIndex = 1;
 			}
 			if (m_isOrientationVisible && IsSelected()){
 				const QPen& darkPen = colorShema.GetPen(IColorShema::SP_ORIENT_DARK);
 				const QPen& brightPen = colorShema.GetPen(IColorShema::SP_ORIENT_BRIGHT);
 
-				point1 = firstPoint;
+				// reduce line opacity for the pens; the border is only used to increase visibility on black/white backgrounds
+				QColor brightColor = brightPen.color();
+				QBrush brightBrush(brightColor);
+				brightColor.setAlphaF(0.25);
+				QPen softBrightPen(brightColor);
 
-				for (pointIndex = secondPointIndex; pointIndex < nodesCount; ++pointIndex){
-					istd::CIndex2d point2 = transform.GetScreenPosition(polylinePtr->GetNode(pointIndex));
+				QColor darkColor = darkPen.color();
+				QBrush darkBrush(darkColor);
+				darkColor.setAlphaF(0.25);
+				QPen softDarkPen(darkColor);
 
-					drawOrientationMarkers(drawContext, brightPen, darkPen, point1, point2, transform.GetDeformMatrix().GetApproxScale());
+				segmentLine.SetPoint2(firstPoint);
 
-					point1 = point2;
+				for (int pointIndex = secondPointIndex; pointIndex < nodesCount; ++pointIndex){
+					segmentLine.PushEndPoint(transform.GetApply(polylinePtr->GetNode(pointIndex)));
+
+					DrawOrientationMarker(drawContext, softBrightPen, darkBrush, softDarkPen, brightBrush, segmentLine, transform.GetDeformMatrix().GetApproxScale());
 				}
 			}
 
@@ -303,12 +285,12 @@ void CInteractivePolylineShape::DrawCurve(QPainter& drawContext) const
 				drawContext.setPen(colorShema.GetPen(IColorShema::SP_NORMAL));
 			}
 
-			point1 = firstPoint;
-			for (pointIndex = secondPointIndex; pointIndex < nodesCount; ++pointIndex){
-				istd::CIndex2d point2 = transform.GetScreenPosition(polylinePtr->GetNode(pointIndex));
-				drawContext.drawLine(iqt::GetQPoint(point1), iqt::GetQPoint(point2));
+			segmentLine.SetPoint2(firstPoint);
 
-				point1 = point2;
+			for (int pointIndex = secondPointIndex; pointIndex < nodesCount; ++pointIndex){
+				segmentLine.PushEndPoint(transform.GetApply(polylinePtr->GetNode(pointIndex)));
+
+				drawContext.drawLine(segmentLine.GetPoint1(), segmentLine.GetPoint2());
 			}
 
 			drawContext.restore();
@@ -538,6 +520,20 @@ ITouchable::TouchState CInteractivePolylineShape::IsTouched(istd::CIndex2d posit
 	}
 
 	return TS_NONE;
+}
+
+
+// reimplemented (iview::CShapeBase)
+
+i2d::CRect CInteractivePolylineShape::CalcBoundingBox() const
+{
+	i2d::CRect retVal = BaseClass::CalcBoundingBox();
+
+	if (m_isOrientationVisible){
+		retVal.Expand(i2d::CRect(-21, -21, 21, 21));
+	}
+
+	return retVal;
 }
 
 

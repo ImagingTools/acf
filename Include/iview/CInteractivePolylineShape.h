@@ -2,6 +2,10 @@
 #define iview_CInteractivePolylineShape_included
 
 
+// Qt includes
+#include <QtGui/QPainter>
+
+// ACF includes
 #include "iview/CInteractivePolygonShape.h"
 
 
@@ -29,11 +33,22 @@ public:
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
 
 protected:
+	virtual void DrawOrientationMarker(
+				QPainter& drawContext,
+				const QPen& rightPen,
+				const QBrush& rightBrush,
+				const QPen& leftPen,
+				const QBrush& leftBrush,
+				const i2d::CLine2d& segmentLine,
+				double scale) const;
 	// reimplemented (iview::CInteractivePolygonShape)
 	virtual void DrawCurve(QPainter& drawContext) const;
 	virtual void DrawArea(QPainter& drawContext) const;
 	virtual void DrawSelectionElements(QPainter& drawContext) const;
 	virtual bool IsCurveTouched(istd::CIndex2d position) const;
+
+	// reimplemented (iview::CShapeBase)
+	virtual i2d::CRect CalcBoundingBox() const;
 
 private:
 	bool m_isOrientationVisible;

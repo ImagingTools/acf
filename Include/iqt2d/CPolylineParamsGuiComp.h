@@ -22,7 +22,12 @@ public:
 	typedef TPolygonBasedParamsGuiComp<iview::CInteractivePolylineShape, i2d::CPolyline> BaseClass;
 
 	I_BEGIN_COMPONENT(CPolylineParamsGuiComp);
+		I_ASSIGN(m_showOrientationAttrPtr, "ShowOrientation", "Show orientation on display console", true, false);
 	I_END_COMPONENT;
+
+protected:
+	// reimplemented (iqt2d::TShapeParamsGuiCompBase)
+	virtual iview::CInteractivePolylineShape* CreateShape() const;
 
 protected Q_SLOTS:
 	void OnParamsChanged();
@@ -40,10 +45,14 @@ protected Q_SLOTS:
 	void OnGuiCreated();
 
 private:
-	/** Change state of a line close check box: disabled and hidden, according 
- to the attached model type (only visible for CPolyline) and list selection 
- (uncheckable if a list element is selected, always checkable). */
-	void updateClosedLineCheckBox(bool forceEnabled, bool forceHidden);
+	/**
+		Change state of a line close check box: disabled and hidden, according 
+		to the attached model type (only visible for CPolyline) and list selection 
+		(uncheckable if a list element is selected, always checkable).
+	*/
+	void UpdateClosedLineCheckBox(bool forceEnabled, bool forceHidden);
+
+	I_ATTR(bool, m_showOrientationAttrPtr);
 };
 
 

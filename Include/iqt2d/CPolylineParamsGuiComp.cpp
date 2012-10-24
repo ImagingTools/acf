@@ -5,6 +5,22 @@ namespace iqt2d
 {
 
 
+// protected methods
+
+// reimplemented (iqt2d::TShapeParamsGuiCompBase)
+
+iview::CInteractivePolylineShape* CPolylineParamsGuiComp::CreateShape() const
+{
+	iview::CInteractivePolylineShape* shapePtr = new iview::CInteractivePolylineShape();
+
+	if (*m_showOrientationAttrPtr){
+		shapePtr->SetOrientationVisible(true);
+	}
+
+	return shapePtr;
+}
+
+
 // protected slots
 
 void CPolylineParamsGuiComp::OnParamsChanged()
@@ -59,7 +75,7 @@ void CPolylineParamsGuiComp::on_CloseLineCheckBox_stateChanged(int state)
 			if (polylinePtr->IsClosed()){
 				// get selected node coordinates from the table
 				int row = NodeParamsTable->currentRow();
-				if (row >= 0){
+				if (row > 0){
 					double x = NodeParamsTable->item(row, 0)->data(Qt::DisplayRole).toDouble();
 					double y = NodeParamsTable->item(row, 1)->data(Qt::DisplayRole).toDouble();
 
@@ -79,13 +95,14 @@ void CPolylineParamsGuiComp::on_CloseLineCheckBox_stateChanged(int state)
 
 					// replace existing nodes with offset nodes
 					polylinePtr->Clear();
-					polylinePtr->SetClosed(false);
 
 					for (int i = 0; i < count; i++){
-						int offsetI = (i + offset) % count;
-						polylinePtr->InsertNode(nodes[offsetI]);
+						int insertIndex = (i + offset) % count;
+						polylinePtr->InsertNode(nodes[insertIndex]);
 					}
 				}
+
+				polylinePtr->SetClosed(false);
 			}
 		}
 	}
@@ -95,26 +112,26 @@ void CPolylineParamsGuiComp::on_CloseLineCheckBox_stateChanged(int state)
 void CPolylineParamsGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
-	updateClosedLineCheckBox(false, false);
+	UpdateClosedLineCheckBox(false, false);
 }
 
 
 void CPolylineParamsGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
-	updateClosedLineCheckBox(false, false);
+	UpdateClosedLineCheckBox(false, false);
 }
 
 
 void CPolylineParamsGuiComp::OnGuiModelDetached()
 {
-	updateClosedLineCheckBox(false, true);
+	UpdateClosedLineCheckBox(false, true);
 
 	BaseClass::OnGuiModelDetached();
 }
 
 
-void CPolylineParamsGuiComp::updateClosedLineCheckBox(bool forceEnabled, bool forceHidden)
+void CPolylineParamsGuiComp::UpdateClosedLineCheckBox(bool forceEnabled, bool forceHidden)
 {
 	CloseLineCheckBox->setHidden(true);
 	CloseLineCheckBox->setDisabled(true);
