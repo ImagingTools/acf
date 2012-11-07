@@ -77,7 +77,6 @@ public:
 		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false);
 		I_ASSIGN(m_fitModeAttrPtr, "FitMode", "Set fit automatic mode for the scene\n 0 - no fit (default)\n 1 - isotropic (reduction)\n 2 - isotropic\n 3 - anisotropic", false, 0);
 		I_ASSIGN(m_isotropyFactorAttrPtr, "IsotropyFactor", "Describe type of isotropic transformation: 0 - letterbox, 1 - full", true, 0);
-		I_ASSIGN(m_sceneControllerGuiCompPtr, "SceneController", "Scene controller", false, "SceneController");
 		I_ASSIGN_MULTI_0(m_dropConsumersCompPtr, "DropConsumers", "List of consumers for the drop event", false);
 		I_ASSIGN(m_backgroundModeAttrPtr, "BackgroundMode", "Mode of background drawing:\n 0 - normal window\n 1 - solid color\n 2 - grid\n 3 - checkerboard\n 4 - dot grid\n 5 - transparent", true, 0);	
 		I_ASSIGN(m_gridSizeAttrPtr, "GridSize", "Size of grid, it is used also for background", true, 20);	
@@ -91,27 +90,6 @@ public:
 
 	double GetIsotropyFactor() const;
 	void SetIsotropyFactor(double factor);
-
-	// embedded compositions list support
-	int GetEmbeddedListSize() const;
-	/**
-		Remove all elements from the embedded compositions list and hide it
-	*/
-	void ClearEmbeddedList();
-	/**
-		Show the embedded composition list and add an item with given id.
-		First added element inserts <<root>> as well and makes the list visible.
-		Each element is added only once.
-	*/
-	void InsertEmbeddedIntoList(QByteArray id);
-	/**
-		Remove an element from the embedded compositions list. If it was the last one, hide the list
-	*/
-	void RemoveEmbeddedFromList(QByteArray id);
-	/**
-		Select embedded composition list element with given id
-	*/
-	void SelectEmbeddedInList(QByteArray id, bool propagateEvent = true);
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -171,7 +149,6 @@ protected:
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 	virtual void OnRetranslate();
 
 	// reimplemented (icomp::CComponentBase)
@@ -194,8 +171,6 @@ protected Q_SLOTS:
 	void OnResetScale();
 	void OnAutoFit(bool isAutoScale);
 	void OnSelectAllShapes();
-	// propagate list selection signal to externally accessible signal
-	void on_LocalCompositionSelectorList_itemSelectionChanged();
 
 private:
 	istd::TDelPtr<QGraphicsScene> m_scenePtr;
@@ -216,7 +191,6 @@ private:
 	iqtgui::CHierarchicalCommand m_fitToImageCommand;
 	iqtgui::CHierarchicalCommand m_resetZoomCommand;
 
-	I_REF(iqtgui::IGuiObject, m_sceneControllerGuiCompPtr);
 	I_MULTIREF(iqtgui::IDropConsumer, m_dropConsumersCompPtr);
 
 	I_ATTR(bool, m_allowWidgetResizeAttrPtr);

@@ -291,7 +291,8 @@ private:
 	bool m_isUpdating;
 	QStringList m_acceptedMimeTypes;
 
-	istd::TPointerVector<QPushButton> m_embeddedButtons;
+	istd::TPointerVector<QToolButton> m_embeddedButtons;
+	QSpacerItem* m_buttonSpacerPtr;
 
 	// static attributes
 	static iser::CArchiveTag s_elementsListTag;

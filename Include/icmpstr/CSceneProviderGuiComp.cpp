@@ -75,62 +75,6 @@ void CSceneProviderGuiComp::SetIsotropyFactor(double factor)
 	}
 }
 
-int CSceneProviderGuiComp::GetEmbeddedListSize() const
-{
-	return LocalCompositionSelectorList->count();
-}
-
-
-void CSceneProviderGuiComp::ClearEmbeddedList()
-{
-	LocalCompositionSelectorGroupBox->setVisible(false);
-	iqt::CSignalBlocker blocker(LocalCompositionSelectorList);
-	LocalCompositionSelectorList->clear();
-	LocalCompositionSelectorList->addItem("<< root >>");
-	LocalCompositionSelectorList->setCurrentItem(0);
-}
-
-
-void CSceneProviderGuiComp::InsertEmbeddedIntoList(QByteArray id)
-{
-	if (LocalCompositionSelectorList->count() == 0){
-		ClearEmbeddedList();
-	}
-	QList<QListWidgetItem *> items = LocalCompositionSelectorList->findItems(id, Qt::MatchExactly);
-	if (items.empty()){
-		LocalCompositionSelectorList->addItem(id);
-	}
-	LocalCompositionSelectorGroupBox->setVisible(true);
-}
-
-
-void CSceneProviderGuiComp::RemoveEmbeddedFromList(QByteArray id)
-{
-	QList<QListWidgetItem *> items = LocalCompositionSelectorList->findItems(id, Qt::MatchExactly);
-	if (items.empty()){
-		return;
-	}
-	int row = LocalCompositionSelectorList->row(items[0]);
-	LocalCompositionSelectorList->model()->removeRow(row);
-	if (LocalCompositionSelectorList->count() == 1){ // just root
-		LocalCompositionSelectorGroupBox->setVisible(false);
-	}
-}
-
-
-void CSceneProviderGuiComp::SelectEmbeddedInList(QByteArray id, bool propagateEvent /* = true */)
-{
-	QList<QListWidgetItem *> items = LocalCompositionSelectorList->findItems(id, Qt::MatchExactly);
-
-	if (items.empty()){
-		return;
-	}
-
-	LocalCompositionSelectorList->blockSignals(!propagateEvent);
-	LocalCompositionSelectorList->setCurrentItem(items[0]);
-	LocalCompositionSelectorList->blockSignals(false);
-}
-
 
 const ibase::IHierarchicalCommand* CSceneProviderGuiComp::GetCommands() const
 {
@@ -233,28 +177,25 @@ bool CSceneProviderGuiComp::SetFullScreenMode(bool fullScreenMode)
 	if (fullScreenMode != m_isFullScreenMode){
 		m_isFullScreenMode = fullScreenMode;
 
-		if (m_isFullScreenMode != CompleteFrame->isFullScreen()){
+		if (m_isFullScreenMode != SceneView->isFullScreen()){
 			if (m_isFullScreenMode){
-				m_savedParentWidgetPtr = CompleteFrame->parentWidget();
+				m_savedParentWidgetPtr = SceneView->parentWidget();
 				m_savedViewTransform = SceneView->matrix();
-				CompleteFrame->setParent(NULL);
+				SceneView->setParent(NULL);
 
-				BottomFrame->setVisible(false);
-				CompleteFrame->showFullScreen();
+				SceneView->showFullScreen();
 
 				SetFittedScale(m_fitMode != FM_NONE? m_fitMode: FM_ISOTROPIC);
 			}
 			else{
 				if (m_savedParentWidgetPtr != NULL){
-					CompleteFrame->setParent(m_savedParentWidgetPtr);
-					m_savedParentWidgetPtr->layout()->addWidget(CompleteFrame);
+					SceneView->setParent(m_savedParentWidgetPtr);
+					m_savedParentWidgetPtr->layout()->addWidget(SceneView);
 				}
 				
 				m_savedParentWidgetPtr = NULL;
 
-				BottomFrame->setVisible(m_sceneControllerGuiCompPtr.IsValid());
-
-				CompleteFrame->showNormal();
+				SceneView->showNormal();
 
 				SceneView->setMatrix(m_savedViewTransform);
 			}
@@ -483,8 +424,6 @@ void CSceneProviderGuiComp::ResetScene()
 
 void CSceneProviderGuiComp::OnGuiCreated()
 {
-	ClearEmbeddedList(); // hide
-
 	BaseClass::OnGuiCreated();
 
 	if (m_dropConsumersCompPtr.IsValid() && m_dropConsumersCompPtr.GetCount() > 0){
@@ -538,39 +477,7 @@ void CSceneProviderGuiComp::OnGuiCreated()
 	}
 
 	m_scenePtr->installEventFilter(this);
-
-	// try to place the scene controller:
-	if (m_sceneControllerGuiCompPtr.IsValid()){
-		m_sceneControllerGuiCompPtr->CreateGui(ControllerFrame);
-
-		if (*m_backgroundModeAttrPtr == BM_SOLID){
-			QPalette viewPalette = SceneView->palette();
-			viewPalette.setColor(QPalette::Window, SceneView->backgroundBrush().color());
-
-			QColor backgroundColor = SceneView->backgroundBrush().color();
-			QString backgroundColorString = QString("background-color: rgb(%1,%2,%3)").arg(backgroundColor.red()).arg(backgroundColor.green()).arg(backgroundColor.blue());
-			BottomFrame->setStyleSheet(backgroundColorString);
-			ControllerFrame->setStyleSheet(backgroundColorString);
-			GetWidget()->setStyleSheet(backgroundColorString);
-			m_sceneControllerGuiCompPtr->GetWidget()->setStyleSheet(backgroundColorString);
-		}
-
-		BottomFrame->setVisible(true);
-	}
-	else{
-		BottomFrame->setVisible(false);
-	}
 } 
-
-
-void CSceneProviderGuiComp::OnGuiDestroyed()
-{
-	if (m_sceneControllerGuiCompPtr.IsValid()){
-		m_sceneControllerGuiCompPtr->DestroyGui();
-	}
-
-	BaseClass::OnGuiDestroyed();
-}
 
 
 void CSceneProviderGuiComp::OnRetranslate()
@@ -627,7 +534,6 @@ bool CSceneProviderGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 
 	if (IsGuiCreated()){
 		switch(eventPtr->type()){
-//		case QEvent::MouseButtonDblClick:
 		case QEvent::GraphicsSceneMouseDoubleClick:
 			if (OnMouseDoubleClickEvent(eventPtr)){
 				return true;
@@ -753,13 +659,6 @@ void CSceneProviderGuiComp::OnSelectAllShapes()
 			}
 		}
 	}
-}
-
-
-void CSceneProviderGuiComp::on_LocalCompositionSelectorList_itemSelectionChanged()
-{
-	QByteArray itemLabel = LocalCompositionSelectorList->currentItem()->data(0).toByteArray();
-	embeddedRegistrySelected(itemLabel);
 }
 
 
