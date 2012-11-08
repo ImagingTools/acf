@@ -297,6 +297,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnGuiCrea
 	NodeParamsTable->setItemDelegateForColumn(0, columnDelegate);
 	NodeParamsTable->setItemDelegateForColumn(1, columnDelegate);
 
+	CloseLineCheckBox->setHidden(true);
 	UpdateToolsMenuButton();
 }
 
