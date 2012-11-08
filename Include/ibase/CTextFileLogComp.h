@@ -9,7 +9,7 @@
 // ACF includes
 #include "imod/CSingleModelObserverBase.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "ibase/CStreamLogCompBase.h"
 
@@ -47,7 +47,7 @@ private:
 	void OpenFileStream();
 
 private:
-	I_REF(iprm::IFileNameParam, m_fileNameCompPtr);
+	I_REF(ifile::IFileNameParam, m_fileNameCompPtr);
 	I_REF(imod::IModel, m_fileNameModelCompPtr);
 	I_ATTR(bool, m_isAppendAttrPtr);
 

@@ -16,7 +16,7 @@
 
 #include "iprm/ISelectionParam.h"
 #include "iprm/ISelectionConstraints.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "ibase/TLoggerCompWrap.h"
 
@@ -187,7 +187,7 @@ private:
 	I_REF(icomp::IExtPackagesManager, m_extPackagesManagerCompPtr);
 	I_REF(icomp::IRegistriesManager, m_registriesManagerCompPtr);
 	I_REF(iprm::ISelectionParam, m_workingModeParamCompPtr);
-	I_REF(iprm::IFileNameParam, m_baseDependenciesPathCompPtr);
+	I_REF(ifile::IFileNameParam, m_baseDependenciesPathCompPtr);
 	I_ATTR(int, m_workingModeAttrPtr);
 
 	mutable int m_indentCount;

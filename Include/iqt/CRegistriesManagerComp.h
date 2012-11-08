@@ -18,7 +18,7 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 
 namespace iqt
@@ -100,7 +100,7 @@ private:
 	mutable PathList m_usedRegistryFilesList;
 
 	I_REF(iser::IFileLoader, m_registryLoaderCompPtr);
-	I_REF(iprm::IFileNameParam, m_configFilePathCompPtr);
+	I_REF(ifile::IFileNameParam, m_configFilePathCompPtr);
 };
 
 

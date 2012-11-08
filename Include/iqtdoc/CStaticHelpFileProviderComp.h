@@ -4,7 +4,7 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 #include "idoc/IHelpFileProvider.h"
 
 
@@ -32,7 +32,7 @@ public:
 	virtual QString GetHelpFilePath(const QString& contextText, const istd::IPolymorphic* contextObjectPtr) const;
 
 private:
-	I_REF(iprm::IFileNameParam, m_helpFileDirCompPtr);
+	I_REF(ifile::IFileNameParam, m_helpFileDirCompPtr);
 	I_ATTR(QString, m_defaultFileNameAttrPtr);
 	I_ATTR(QString, m_contextPrefixAttrPtr);
 	I_ATTR(QString, m_contextSuffixAttrPtr);

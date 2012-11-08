@@ -311,7 +311,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IFileNameParam
+        ifile::IFileNameParam
       </InterfaceId>
       <ComponentId>
         DirectorySelector

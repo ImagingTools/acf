@@ -222,7 +222,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::IFileNameParam
+        ifile::IFileNameParam
       </InterfaceId>
       <ComponentId>
         FileNameParam

@@ -6,7 +6,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 
 namespace iprm
@@ -14,7 +14,7 @@ namespace iprm
 
 
 /**
-	Basic implementation of interface iprm::IFileNameParam as component.
+	Basic implementation of interface ifile::IFileNameParam as component.
 */
 class CFileNameParamComp:
 			public icomp::CComponentBase,
@@ -30,7 +30,7 @@ public:
 		I_ASSIGN(m_pathTypeAttrPtr, "PathType", "Type of path: 0 - unknown, 1 - PT_FILE, 2 - PT_DIRECTORY, 3 - PT_URL", true, PT_UNKNOWN);
 	I_END_COMPONENT;
 
-	// reimplemented (iprm::IFileNameParam)
+	// reimplemented (ifile::IFileNameParam)
 	virtual int GetPathType() const;
 	virtual const QString& GetPath() const;
 	virtual void SetPath(const QString& path);

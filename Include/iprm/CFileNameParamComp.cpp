@@ -12,7 +12,7 @@ namespace iprm
 {
 
 
-// reimplemented (iprm::IFileNameParam)
+// reimplemented (ifile::IFileNameParam)
 
 int CFileNameParamComp::GetPathType() const
 {

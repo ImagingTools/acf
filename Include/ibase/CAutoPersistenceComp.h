@@ -8,7 +8,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 
 namespace ibase
@@ -40,7 +40,7 @@ protected:
 private:
 	I_REF(istd::IChangeable, m_objectCompPtr);
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
-	I_REF(iprm::IFileNameParam, m_filePathCompPtr);
+	I_REF(ifile::IFileNameParam, m_filePathCompPtr);
 	I_ATTR(bool, m_restoreOnBeginAttrPtr);
 	I_ATTR(bool, m_storeOnEndAttrPtr);
 };

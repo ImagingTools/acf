@@ -28,7 +28,7 @@ void CFileNameParamGuiComp::UpdateModel() const
 {
 	I_ASSERT(IsGuiCreated());
 
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	I_ASSERT(objectPtr != NULL);
 
 	UpdateBlocker updateBlocker(const_cast<CFileNameParamGuiComp*>(this));
@@ -50,7 +50,7 @@ void CFileNameParamGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		SetPathToEditor(objectPtr->GetPath());
 	}
@@ -61,7 +61,7 @@ void CFileNameParamGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int pathType = objectPtr->GetPathType();
 
@@ -71,12 +71,12 @@ void CFileNameParamGuiComp::UpdateGui(int /*updateFlags*/)
 		}
 
 		if (IsLabelNeeded()){
-			DirectoryLabel->setVisible(pathType == iprm::IFileNameParam::PT_DIRECTORY);
-			PathLabel->setVisible(pathType == iprm::IFileNameParam::PT_FILE);
-			UrlLabel->setVisible(pathType == iprm::IFileNameParam::PT_URL);
+			DirectoryLabel->setVisible(pathType == ifile::IFileNameParam::PT_DIRECTORY);
+			PathLabel->setVisible(pathType == ifile::IFileNameParam::PT_FILE);
+			UrlLabel->setVisible(pathType == ifile::IFileNameParam::PT_URL);
 		}
 
-		BrowseButton->setVisible((pathType == iprm::IFileNameParam::PT_DIRECTORY) || (pathType == iprm::IFileNameParam::PT_FILE));
+		BrowseButton->setVisible((pathType == ifile::IFileNameParam::PT_DIRECTORY) || (pathType == ifile::IFileNameParam::PT_FILE));
 
 		if (*m_readOnlyAttrPtr){
 			BrowseButton->setVisible(false);
@@ -150,17 +150,17 @@ void CFileNameParamGuiComp::OnGuiRetranslate()
 
 void CFileNameParamGuiComp::on_BrowseButton_clicked()
 {
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int pathType = objectPtr->GetPathType();
 
-		if (pathType == iprm::IFileNameParam::PT_DIRECTORY){
+		if (pathType == ifile::IFileNameParam::PT_DIRECTORY){
 			QString filePath = QFileDialog::getExistingDirectory(GetQtWidget(), tr("Select directory"), GetPathFromEditor());
 			if (!filePath.isEmpty()){
 				OnPathEdited(filePath);
 			}
 		}
-		else if (pathType == iprm::IFileNameParam::PT_FILE){
+		else if (pathType == ifile::IFileNameParam::PT_FILE){
 			QStringList filterList;
 
 			if (m_fileTypeInfoPtr.IsValid()){
@@ -219,7 +219,7 @@ void CFileNameParamGuiComp::OnDirectoryUp()
 
 void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 {
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
 	}
@@ -235,7 +235,7 @@ void CFileNameParamGuiComp::SetPathToEditor(const QString& path) const
 	I_ASSERT(lineEdit != NULL);
 
 	int pathType = objectPtr->GetPathType();
-	if (pathType == iprm::IFileNameParam::PT_URL){
+	if (pathType == ifile::IFileNameParam::PT_URL){
 		normalizedPath = path;
 	}
 	else{
@@ -261,10 +261,10 @@ void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 		return;
 	}
 
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	I_ASSERT(objectPtr != NULL);
 	if (objectPtr != NULL){
-		if (objectPtr->GetPathType() == iprm::IFileNameParam::PT_URL){
+		if (objectPtr->GetPathType() == ifile::IFileNameParam::PT_URL){
 			return;
 		}
 
@@ -293,11 +293,11 @@ void CFileNameParamGuiComp::MakeSelectionHint(const QString& text) const
 
 			QDir::Filters filters = QDir::AllEntries;
 
-			if (objectPtr->GetPathType() == iprm::IFileNameParam::PT_DIRECTORY){
+			if (objectPtr->GetPathType() == ifile::IFileNameParam::PT_DIRECTORY){
 				filters = QDir::Dirs | QDir::Drives | QDir::NoDotAndDotDot;
 			}
 
-			if (objectPtr->GetPathType() == iprm::IFileNameParam::PT_FILE){
+			if (objectPtr->GetPathType() == ifile::IFileNameParam::PT_FILE){
 				filters = QDir::Files;
 			}
 

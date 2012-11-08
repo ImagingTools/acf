@@ -16,7 +16,7 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iqtgui/iqtgui.h"
 
@@ -90,7 +90,7 @@ protected:
 private:
 	I_ATTR(bool, m_useNativeAttrPtr);
 	I_MULTIREF(iser::IFileLoader, m_loadersCompPtr);
-	I_REF(iprm::IFileNameParam, m_statupDirectoryCompPtr);
+	I_REF(ifile::IFileNameParam, m_statupDirectoryCompPtr);
 
 	mutable QFileInfo m_lastOpenInfo;
 	mutable QFileInfo m_lastSaveInfo;

@@ -10,7 +10,7 @@
 #include "icomp/IComponentEnvironmentManager.h"
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "icmpstr/IRegistryPreview.h"
 
@@ -58,7 +58,7 @@ private:
 
 	bool m_isRunning;
 
-	I_REF(iprm::IFileNameParam, m_commandFileNameCompPtr);
+	I_REF(ifile::IFileNameParam, m_commandFileNameCompPtr);
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(iser::IVersionInfo, m_versionInfoCompPtr);
 };

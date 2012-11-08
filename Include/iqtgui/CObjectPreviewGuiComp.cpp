@@ -49,7 +49,7 @@ void CObjectPreviewGuiComp::UpdateGui(int /*updateFlags*/)
 		return;
 	}
 
-	iprm::IFileNameParam* objectPtr = GetObjectPtr();
+	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		QString newFilePath = objectPtr->GetPath();
 

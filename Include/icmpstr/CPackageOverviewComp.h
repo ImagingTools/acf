@@ -14,7 +14,7 @@
 
 #include "ibase/ICommandsProvider.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "idoc/IHelpViewer.h"
 #include "idoc/IDocumentManager.h"
@@ -197,7 +197,7 @@ private:
 	I_REF(IRegistryConsistInfo, m_consistInfoCompPtr);
 	I_REF(idoc::IHelpViewer, m_quickHelpViewerCompPtr);
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
-	I_REF(iprm::IFileNameParam, m_configFilePathCompPtr);
+	I_REF(ifile::IFileNameParam, m_configFilePathCompPtr);
 	I_REF(imod::IModel, m_configFilePathModelCompPtr);
 
 	iqtgui::CHierarchicalCommand m_commands;

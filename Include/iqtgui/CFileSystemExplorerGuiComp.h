@@ -10,7 +10,7 @@
 
 // ACF includes
 #include "iser/IFileTypeInfo.h"
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CExtLineEdit.h"
@@ -31,12 +31,12 @@ namespace iqtgui
 */
 class CFileSystemExplorerGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CFileSystemExplorerGuiComp, iprm::IFileNameParam>
+						Ui::CFileSystemExplorerGuiComp, ifile::IFileNameParam>
 {
 	Q_OBJECT
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CFileSystemExplorerGuiComp, iprm::IFileNameParam> BaseClass;
+				Ui::CFileSystemExplorerGuiComp, ifile::IFileNameParam> BaseClass;
 	
 	I_BEGIN_COMPONENT(CFileSystemExplorerGuiComp);
 		I_ASSIGN(m_filterInfoCompPtr, "FilterInfo", "Provides information about supported files used to filter shown files", false, "FilterInfo");

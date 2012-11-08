@@ -9,7 +9,7 @@
 // ACF includes
 #include "iser/IFileLoader.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/Generated/ui_CObjectPreviewGuiComp.h"
@@ -21,13 +21,13 @@ namespace iqtgui
 
 class CObjectPreviewGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CObjectPreviewGuiComp, iprm::IFileNameParam>
+						Ui::CObjectPreviewGuiComp, ifile::IFileNameParam>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CObjectPreviewGuiComp, iprm::IFileNameParam> BaseClass;
+				Ui::CObjectPreviewGuiComp, ifile::IFileNameParam> BaseClass;
 
 	I_BEGIN_COMPONENT(CObjectPreviewGuiComp);
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "Object loader", true, "FileLoader");

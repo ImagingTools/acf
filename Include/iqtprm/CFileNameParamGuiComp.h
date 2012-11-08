@@ -8,7 +8,7 @@
 // ACF includes
 #include "iser/IFileTypeInfo.h"
 
-#include "iprm/IFileNameParam.h"
+#include "ifile/IFileNameParam.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
@@ -21,14 +21,14 @@ namespace iqtprm
 
 class CFileNameParamGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::CFileNameParamGuiComp,
-			iprm::IFileNameParam>
+			ifile::IFileNameParam>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::CFileNameParamGuiComp,
-				iprm::IFileNameParam> BaseClass;
+				ifile::IFileNameParam> BaseClass;
 
 	I_BEGIN_COMPONENT(CFileNameParamGuiComp);
 		I_ASSIGN(m_pathLabelAttrPtr, "PathLabel", "Label for the file editor", false, "Directory");
