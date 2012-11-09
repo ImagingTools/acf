@@ -1,4 +1,4 @@
-#include "iqt/CComponentAccessor.h"
+#include "icmpstr/CComponentAccessor.h"
 
 
 // ACF includes
@@ -10,7 +10,7 @@
 #include "icomp/CCompositeComponentContext.h"
 #include "icomp/CRegistryElement.h"
 #include "ibase/TFileSerializerComp.h"
-#include "iqt/CPackagesLoaderComp.h"
+#include "icmpstr/CPackagesLoaderComp.h"
 
 
 namespace
@@ -20,7 +20,7 @@ namespace
 struct Loader
 {
 	icomp::TSimComponentWrap< ibase::TFileSerializerComp<iser::CXmlFileReadArchive, iser::CXmlFileWriteArchive> > registryLoaderComp;
-	icomp::TSimComponentWrap<iqt::CPackagesLoaderComp> packagesLoaderComp;
+	icomp::TSimComponentWrap<icmpstr::CPackagesLoaderComp> packagesLoaderComp;
 
 	Loader()
 	{
@@ -35,7 +35,7 @@ struct Loader
 }
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -72,6 +72,6 @@ CComponentAccessor::CComponentAccessor(
 }
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 

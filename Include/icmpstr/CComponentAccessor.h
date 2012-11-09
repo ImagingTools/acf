@@ -1,5 +1,5 @@
-#ifndef iqt_CComponentAccessor_included
-#define iqt_CComponentAccessor_included
+#ifndef icmpstr_CComponentAccessor_included
+#define icmpstr_CComponentAccessor_included
 
 
 // ACF includes
@@ -9,7 +9,7 @@
 #include "icomp/CCompositeComponent.h"
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -48,9 +48,9 @@ InterfaceType* CComponentAccessor::GetComponentInterface(const QByteArray& compo
 }
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 
-#endif // !iqt_CComponentAccessor_included
+#endif // !icmpstr_CComponentAccessor_included
 
 

@@ -70,7 +70,7 @@ int CRenderedObjectFileLoaderComp::LoadFromFile(istd::IChangeable& data, const Q
 					FileInfo fileInfo;
 					fileInfo.fileTimeStamp = fileTimeStamp;
 
-					istd::TSmartPtr<iqt::CBitmap> cachedBitmapPtr(new iqt::CBitmap);
+					istd::TSmartPtr<iimg::CBitmap> cachedBitmapPtr(new iimg::CBitmap);
 
 					if (cachedBitmapPtr->CopyFrom(*bitmapPtr)){
 						fileInfo.fileBitmapPtr = cachedBitmapPtr;
@@ -176,7 +176,7 @@ bool CRenderedObjectFileLoaderComp::Serialize(iser::IArchive& archive)
 			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, fileInfo.fileTimeStamp);
 			retVal = retVal && archive.EndTag(fileTimeStampTag);
 
-			istd::TSmartPtr<iqt::CBitmap> bitmapPtr(new iqt::CBitmap);
+			istd::TSmartPtr<iimg::CBitmap> bitmapPtr(new iimg::CBitmap);
 			retVal = retVal && archive.BeginTag(bitmapTag);
 			retVal = retVal && bitmapPtr->Serialize(archive);
 			retVal = retVal && archive.EndTag(bitmapTag);

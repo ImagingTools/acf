@@ -14,31 +14,6 @@ I_EXPORT_PACKAGE(
 			IM_PROJECT("ACF") IM_TAG("Qt") IM_COMPANY("ImagingTools") IM_AUTHOR("\"Witold Gantzke\" \"Kirill Lepskiy\""));
 
 I_EXPORT_COMPONENT(
-			PackagesLoader,
-			"Load and cache packages from files",
-			"Component Registry Cache Package Load File Configuration Components" IM_TAG("Loader"));
-
-I_EXPORT_COMPONENT(
-			RegistriesManager,
-			"Load and cache registries from files",
-			"Registry Manager Load File Configuration Components");
-
-I_EXPORT_COMPONENT(
-			Bitmap,
-			"QImage based bitmap implementation",
-			"QImage Bitmap" IM_TAG("Image Model"));
-
-I_EXPORT_COMPONENT(
-			BitmapSurface,
-			"QImage based bitmap implementation with surface extension",
-			"Sampled Function QImage Bitmap Surface" IM_TAG("Image Model 3D"));
-
-I_EXPORT_COMPONENT(
-			BitmapLoader,
-			"Loader loading bitmaps using Qt standard implementations",
-			"Bitmap" IM_TAG("Image File Loader"));
-
-I_EXPORT_COMPONENT(
 			SettingsSerializer,
 			"Load and save objects using QSettings as storage",
 			"QSettings Registry Serializer Saver" IM_TAG("Persistence Loader"));
@@ -77,11 +52,6 @@ I_EXPORT_COMPONENT(
 		   QtXmlFileSerializer,
 		   "File loader serializing objects using simplified XML format using Qt",
 		   "Save Serializer Archive Format" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("XML Loader File"));
-
-I_EXPORT_COMPONENT(
-			RegistryCodeSaver,
-			"Stores registry as C++ code",
-			"Code C++ File Store Save Registry Compile" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Loader"));
 
 I_EXPORT_COMPONENT(
 			ExtendedDocumentTemplate,

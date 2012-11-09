@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 
 namespace iqtgui
@@ -79,7 +79,7 @@ void CSplashScreenGuiComp::OnGuiCreated()
 
 	QSplashScreen* splashScreenPtr = GetQtWidget();
 	if (m_imagePathAttrPtr.IsValid() && (splashScreenPtr != NULL)){
-		QString imagePath = iqt::CSystem::GetEnrolledPath(*m_imagePathAttrPtr);
+		QString imagePath = istd::CSystem::GetEnrolledPath(*m_imagePathAttrPtr);
 
 		splashScreenPtr->setPixmap(QPixmap(imagePath));
 	}

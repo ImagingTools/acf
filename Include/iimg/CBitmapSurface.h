@@ -1,5 +1,5 @@
-#ifndef iqt_CBitmapSurface_included
-#define iqt_CBitmapSurface_included
+#ifndef iimg_CBitmapSurface_included
+#define iimg_CBitmapSurface_included
 
 
 
@@ -7,20 +7,20 @@
 
 #include "imath/CSampledFunction2d.h"
 
-#include "iqt/CBitmap.h"
+#include "iimg/CBitmap.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
 /**
 	Union of a bitmap objects and its samples represented as a 2D sampled function.
 */
-class CBitmapSurface: public iqt::CBitmap, public imath::CSampledFunction2d
+class CBitmapSurface: public iimg::CBitmap, public imath::CSampledFunction2d
 {
 public:
-	typedef iqt::CBitmap BaseClass;
+	typedef iimg::CBitmap BaseClass;
 	typedef imath::CSampledFunction2d BaseClass2;
 
 	CBitmapSurface();
@@ -34,9 +34,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace iimg
 
 
-#endif //!iqt_CBitmapSurface_included
+#endif //!iimg_CBitmapSurface_included
 
 

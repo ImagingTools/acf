@@ -1,15 +1,15 @@
-#ifndef iqt_CReflectedBitmapBase_included
-#define iqt_CReflectedBitmapBase_included
+#ifndef iimg_CReflectedBitmapBase_included
+#define iimg_CReflectedBitmapBase_included
 
 
 #include "istd/TCachedUpdateManagerWrap.h"
 
 #include "iimg/CGeneralBitmap.h"
 
-#include "iqt/IQImageProvider.h"
+#include "iimg/IQImageProvider.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -27,7 +27,7 @@ public:
 		CF_BLOCK_BITMAP_CONVERSION = 1 << 21
 	};
 
-	// reimplemented (iqt::IQImageProvider)
+	// reimplemented (iimg::IQImageProvider)
 	virtual const QImage& GetQImage() const;
 	virtual bool CopyImageFrom(const QImage& image);
 
@@ -43,9 +43,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace iimg
 
 
-#endif // !iqt_CReflectedBitmapBase_included
+#endif // !iimg_CReflectedBitmapBase_included
 
 

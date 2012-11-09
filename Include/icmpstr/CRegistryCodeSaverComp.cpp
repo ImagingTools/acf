@@ -1,4 +1,4 @@
-#include "iqt/CRegistryCodeSaverComp.h"
+#include "icmpstr/CRegistryCodeSaverComp.h"
 
 
 // Qt includes
@@ -6,7 +6,7 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "iqt/iqt.h"
+#include "icomp/icomp.h"
 
 
 namespace
@@ -36,7 +36,7 @@ QByteArray MakeValidIdentifier(const QByteArray & identifier)
 } // unnamed namespace
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -1670,6 +1670,6 @@ QByteArray CRegistryCodeSaverComp::GetIdValueLiteral(const QByteArray& text) con
 }
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 

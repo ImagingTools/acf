@@ -365,7 +365,7 @@
         RegistryCodeSaver
       </Id>
       <PackageId>
-        QtPck
+        CompositorPck
       </PackageId>
       <ComponentId>
         RegistryCodeSaver

@@ -1,15 +1,15 @@
-#include "iqt/CReflectedBitmapBase.h"
+#include "iimg/CReflectedBitmapBase.h"
 
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
-// reimplemented (iqt::IQImageProvider)
+// reimplemented (iimg::IQImageProvider)
 
 const QImage& CReflectedBitmapBase::GetQImage() const
 {
@@ -49,6 +49,6 @@ bool CReflectedBitmapBase::CalculateCache(int changeFlags)
 }
 
 
-} // namespace iqt
+} // namespace iimg
 
 

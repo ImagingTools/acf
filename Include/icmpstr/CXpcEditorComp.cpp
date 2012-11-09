@@ -8,7 +8,7 @@
 #include <QtGui/QMessageBox>
 
 // ACF includes
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 
 namespace
@@ -229,7 +229,7 @@ void CXpcEditorComp::PickFileNameForLineEdit(
 	// try to access IDocumentManager and ask it for the file name
 	QDir baseDir = GetCurrentDocumentDir();
 
-	QString unrolledPath = iqt::CSystem::GetEnrolledPath(lineEdit.text());
+	QString unrolledPath = istd::CSystem::GetEnrolledPath(lineEdit.text());
 	QFileInfo fileInfo(baseDir.absoluteFilePath(unrolledPath));
 	dialog.setDirectory(fileInfo.absoluteDir());
 
@@ -352,7 +352,7 @@ void CXpcEditorComp::OnRegistryPathViewSelected(const QItemSelection& selected, 
 void CXpcEditorComp::on_ConfigPathView_doubleClicked(const QModelIndex& index)
 {
 	QDir baseDir = GetCurrentDocumentDir();
-	QString unrolledPath = iqt::CSystem::GetEnrolledPath(index.data().toString());
+	QString unrolledPath = istd::CSystem::GetEnrolledPath(index.data().toString());
 	QString absolutePath = baseDir.absoluteFilePath(unrolledPath);
 
 	m_docMgrPtr->FileOpen(NULL, &absolutePath);
@@ -362,7 +362,7 @@ void CXpcEditorComp::on_ConfigPathView_doubleClicked(const QModelIndex& index)
 void CXpcEditorComp::on_RegistryPathView_doubleClicked(const QModelIndex& index)
 {
 	QDir baseDir = GetCurrentDocumentDir();
-	QString unrolledPath = iqt::CSystem::GetEnrolledPath(index.data().toString());
+	QString unrolledPath = istd::CSystem::GetEnrolledPath(index.data().toString());
 	QString absolutePath = baseDir.absoluteFilePath(unrolledPath);
 
 	m_docMgrPtr->FileOpen(NULL, &absolutePath);
@@ -420,7 +420,7 @@ void CXpcEditorComp::SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& m
 	bool allowFilePath = (sectionIndex == S_CONFIG_PATH) || (sectionIndex == S_PACKAGE_PATH);
 
 	if (isBegin){
-		QMap<QString, QString> envVariables = iqt::CSystem::GetEnvironmentVariables();
+		QMap<QString, QString> envVariables = istd::CSystem::GetEnvironmentVariables();
 		for (		QMap<QString, QString>::ConstIterator i = envVariables.constBegin();
 					i != envVariables.constEnd();
 					i++){
@@ -440,7 +440,7 @@ void CXpcEditorComp::SetupVariablesMenu(bool isBegin, int sectionIndex, QMenu& m
 		for (int i = 0; i < 2; i++){
 			QAction* newAction = menu.addAction(specialVariables[i]);
 			newAction->setData(sectionIndex);
-			newAction->setStatusTip(iqt::CSystem::FindVariableValue(specialVariables[i]));
+			newAction->setStatusTip(istd::CSystem::FindVariableValue(specialVariables[i]));
 		}
 	}
 }

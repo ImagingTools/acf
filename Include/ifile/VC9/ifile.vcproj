@@ -254,6 +254,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IFileListProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IFileNameParam.h"
 				>
 			</File>

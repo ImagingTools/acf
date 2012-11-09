@@ -1,5 +1,5 @@
-#ifndef iqt_CBitmapLoaderComp_included
-#define iqt_CBitmapLoaderComp_included
+#ifndef iimg_CBitmapLoaderComp_included
+#define iimg_CBitmapLoaderComp_included
 
 
 // Qt includes
@@ -14,10 +14,10 @@
 
 #include "ibase/TLoggerCompWrap.h"
 
-#include "iqt/iqt.h"
+#include "iimg/iimg.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -67,9 +67,9 @@ protected:
 };
 
 
-} // namespace iqt
+} // namespace iimg
 
 
-#endif // !iqt_CBitmapLoaderComp_included
+#endif // !iimg_CBitmapLoaderComp_included
 
 

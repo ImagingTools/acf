@@ -7,9 +7,8 @@
 #include <QtCore/QDir>
 
 // ACF includes
-#include "iqt/CPackagesLoaderComp.h"
-
 #include "icmpstr/IExternalMetaInfoManager.h"
+#include "icmpstr/CPackagesLoaderComp.h"
 
 
 namespace icmpstr
@@ -17,11 +16,11 @@ namespace icmpstr
 
 
 class CPackagesLoaderExtComp:
-			public iqt::CPackagesLoaderComp,
+			public icmpstr::CPackagesLoaderComp,
 			virtual public IExternalMetaInfoManager
 {
 public:
-	typedef iqt::CPackagesLoaderComp BaseClass;
+	typedef icmpstr::CPackagesLoaderComp BaseClass;
 
 	I_BEGIN_COMPONENT(CPackagesLoaderComp);
 		I_REGISTER_INTERFACE(IExternalMetaInfoManager);

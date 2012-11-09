@@ -1,4 +1,4 @@
-#include "iqt/CPackagesLoaderComp.h"
+#include "icmpstr/CPackagesLoaderComp.h"
 
 
 // Qt includes
@@ -15,12 +15,12 @@
 
 #include "icomp/CXpcModel.h"
 
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 #include "icomp/export.h"
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -73,7 +73,7 @@ bool CPackagesLoaderComp::LoadPackages(const QString& configFilePath)
 		if (!path.isEmpty()){
 			QDir applicationDir = QCoreApplication::applicationDirPath();
 
-			QString enrolledPath = iqt::CSystem::GetEnrolledPath(path);
+			QString enrolledPath = istd::CSystem::GetEnrolledPath(path);
 
 			m_configFilePath = applicationDir.absoluteFilePath(enrolledPath);
 		}
@@ -354,7 +354,7 @@ bool CPackagesLoaderComp::LoadConfigFile(const QString& configFile)
 
 	int configFilesCount = configurationData.GetConfigFilesCount();
 	for (int i = 0; i < configFilesCount; ++i){
-		QString configFilePath = iqt::CSystem::GetEnrolledPath(configurationData.GetConfFile(i));
+		QString configFilePath = istd::CSystem::GetEnrolledPath(configurationData.GetConfFile(i));
 		retVal = LoadConfigFile(baseDir.absoluteFilePath(configFilePath)) && retVal;
 	}
 
@@ -433,7 +433,7 @@ CPackagesLoaderComp::LogingRegistry::ElementInfo* CPackagesLoaderComp::LogingReg
 
 bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const QString& path, QString& resultPath) const
 {
-	QString fullPath = QFileInfo(directory.filePath(iqt::CSystem::GetEnrolledPath(path))).canonicalFilePath();
+	QString fullPath = QFileInfo(directory.filePath(istd::CSystem::GetEnrolledPath(path))).canonicalFilePath();
 	if (!fullPath.isEmpty() && (m_usedFilesList.find(fullPath) == m_usedFilesList.end())){
 		m_usedFilesList.insert(fullPath);
 
@@ -446,6 +446,6 @@ bool CPackagesLoaderComp::CheckAndMarkPath(const QDir& directory, const QString&
 }
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 

@@ -1,4 +1,4 @@
-#include "iqt/CBitmapLoaderComp.h"
+#include "iimg/CBitmapLoaderComp.h"
 
 
 // Qt includes
@@ -10,11 +10,11 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iqt/IQImageProvider.h"
-#include "iqt/CBitmap.h"
+#include "iimg/IQImageProvider.h"
+#include "iimg/CBitmap.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -26,7 +26,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 			int flags,
 			bool beQuiet) const
 {
-	if ((dataObjectPtr != NULL) && (dynamic_cast<const iqt::IQImageProvider*>(dataObjectPtr) == NULL)){
+	if ((dataObjectPtr != NULL) && (dynamic_cast<const iimg::IQImageProvider*>(dataObjectPtr) == NULL)){
 		if (!beQuiet){
 			SendInfoMessage(MI_BAD_OBJECT_TYPE, tr("Object is not Qt image"));
 		}
@@ -113,7 +113,7 @@ int CBitmapLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& file
 
 int CBitmapLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
-	const iqt::IQImageProvider* imageProviderPtr = dynamic_cast<const iqt::IQImageProvider*>(&data);
+	const iimg::IQImageProvider* imageProviderPtr = dynamic_cast<const iimg::IQImageProvider*>(&data);
 
 	CBitmap qtBitmap;
 	if (imageProviderPtr == NULL){
@@ -177,6 +177,6 @@ QString CBitmapLoaderComp::GetTypeDescription(const QString* extensionPtr) const
 }
 
 
-} // namespace iqt
+} // namespace iimg
 
 

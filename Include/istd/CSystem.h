@@ -1,5 +1,5 @@
-#ifndef iqt_CSystem_included
-#define iqt_CSystem_included
+#ifndef istd_CSystem_included
+#define istd_CSystem_included
 
 
 // Qt includes
@@ -7,7 +7,7 @@
 #include <QtCore/QMap>
 
 
-namespace iqt
+namespace istd
 {
 
 
@@ -58,9 +58,9 @@ public:
 };
 
 
-} // namespace iqt
+} // namespace istd
 
 
-#endif // !iqt_CSystem_included
+#endif // !istd_CSystem_included
 
 

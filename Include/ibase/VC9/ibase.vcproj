@@ -457,10 +457,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IFileListProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\ILoggable.h"
 				>
 			</File>

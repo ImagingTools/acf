@@ -1,5 +1,5 @@
-#ifndef iqt_CRegistryCodeSaverComp_included
-#define iqt_CRegistryCodeSaverComp_included
+#ifndef icmpstr_CRegistryCodeSaverComp_included
+#define icmpstr_CRegistryCodeSaverComp_included
 
 
 // Qt includes
@@ -21,7 +21,7 @@
 #include "ibase/TLoggerCompWrap.h"
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -194,9 +194,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 
-#endif // !iqt_CRegistryCodeSaverComp_included
+#endif // !icmpstr_CRegistryCodeSaverComp_included
 
 

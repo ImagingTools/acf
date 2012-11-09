@@ -14,7 +14,7 @@
 #include "iser/CXmlFileReadArchive.h"
 #include "icomp/CXpcModel.h"
 #include "icomp/CRegistry.h"
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 
 CAcfStarter::CAcfStarter(/*int argc,*/ char**argv)
@@ -22,7 +22,7 @@ CAcfStarter::CAcfStarter(/*int argc,*/ char**argv)
 	setupUi(this);
 	buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 	timer = new QTimer(this);
-	acfDir = iqt::CSystem::GetNormalizedPath("$(ACFDIR)");
+	acfDir = istd::CSystem::GetNormalizedPath("$(ACFDIR)");
 
 	connect(browseButton, SIGNAL(clicked()), this, SLOT(GetPath())); 
 	connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(GetRegistryPath(QListWidgetItem*)));
@@ -46,7 +46,7 @@ CAcfStarter::CAcfStarter()
 	setupUi(this);
 	timer = new QTimer(this);
 	buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);	
-	acfDir = iqt::CSystem::GetNormalizedPath("$(ACFDIR)");
+	acfDir = istd::CSystem::GetNormalizedPath("$(ACFDIR)");
 	
 	connect(browseButton, SIGNAL(clicked()), this, SLOT(GetPath())); 
 	connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),
@@ -102,7 +102,7 @@ void CAcfStarter::RunACF()
 	QString pathAcf = "/Bin/$(ConfigurationName)/Acf.exe";
 
 	pathAcf = acfDir + pathAcf;
-	pathAcf = iqt::CSystem::GetNormalizedPath(pathAcf);	
+	pathAcf = istd::CSystem::GetNormalizedPath(pathAcf);	
 	std::cout << " Acf.exe path :" << std::endl  << pathAcf.toStdString() << std::endl;				
 
 	if (activeRegistryFilePath.isEmpty() || configFilePath.isEmpty()){
@@ -170,7 +170,7 @@ bool CAcfStarter::InitApplicationRegistriesList()
 
 		packageDir.setCurrent(configFileInfo.absolutePath());		
 		for (int i=0; i<configurationData.GetPackageDirsCount(); i++){
-			packageDir.setPath(iqt::CSystem::GetNormalizedPath(configurationData.GetPackageDir(i)));
+			packageDir.setPath(istd::CSystem::GetNormalizedPath(configurationData.GetPackageDir(i)));
 			if (!packageDir.exists()){
 				std::cout << i + 1 << " Package dir doesn't exist:" << std::endl  << packageDir.absolutePath().toStdString() << std::endl;		
 				QMessageBox::warning(0, "ACF Starter",

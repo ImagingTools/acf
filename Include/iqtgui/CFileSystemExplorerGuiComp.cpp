@@ -7,7 +7,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 #include "iqtgui/CFileSystemExplorerGuiComp.h"
 
@@ -45,7 +45,7 @@ void CFileSystemExplorerGuiComp::UpdateGui(int /*updateFlags*/)
 
 	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		QString currentFilePath = iqt::CSystem::GetEnrolledPath(objectPtr->GetPath());
+		QString currentFilePath = istd::CSystem::GetEnrolledPath(objectPtr->GetPath());
 
 		InvalidateFileSystemModel(currentFilePath);
 

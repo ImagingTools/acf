@@ -1110,7 +1110,7 @@
               BitmapLoader
             </Id>
             <PackageId>
-              QtPck
+              BitmapPck
             </PackageId>
             <ComponentId>
               BitmapLoader
@@ -1163,7 +1163,7 @@
               ImageFactory
             </Id>
             <PackageId>
-              QtPck
+              BitmapPck
             </PackageId>
             <ComponentId>
               Bitmap

@@ -1,4 +1,4 @@
-#include "iqt/CBitmap.h"
+#include "iimg/CBitmap.h"
 
 
 // include STL
@@ -13,7 +13,7 @@
 #include "istd/TDelPtr.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -34,7 +34,7 @@ CBitmap::CBitmap(const QImage& image)
 }
 
 
-// reimplemented (iqt::IQImageProvider)
+// reimplemented (iimg::IQImageProvider)
 
 const QImage& CBitmap::GetQImage() const
 {
@@ -56,12 +56,12 @@ bool CBitmap::CopyImageFrom(const QImage& image)
 
 bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, const istd::CIndex2d& size) const
 {
-	const iqt::CBitmap* bitmapPtr = dynamic_cast<const iqt::CBitmap*>(&data);
+	const iimg::CBitmap* bitmapPtr = dynamic_cast<const iimg::CBitmap*>(&data);
 	if (bitmapPtr == NULL){
 		return false;
 	}
 
-	iqt::CBitmap snapBitmap;
+	iimg::CBitmap snapBitmap;
 	snapBitmap.CopyImageFrom(bitmapPtr->GetQImage().scaled(size.GetX(), size.GetY(), Qt::KeepAspectRatioByExpanding));
 
 	objectSnap.CopyFrom(snapBitmap);
@@ -200,7 +200,7 @@ void CBitmap::ResetImage()
 
 istd::CIndex2d CBitmap::GetImageSize() const
 {
-	return GetCIndex2d(m_image.size());
+	return m_image.size();
 }
 
 
@@ -358,6 +358,6 @@ void CBitmap::EnsureLogTransformCalculated() const
 }
 
 
-} // namespace iqt
+} // namespace iimg
 
 

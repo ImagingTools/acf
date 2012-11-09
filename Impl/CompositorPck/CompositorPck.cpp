@@ -102,6 +102,21 @@ I_EXPORT_COMPONENT(
 			"Obsolete scene provider used in compositor only",
 			"Scene Provider Extender Display Console" IM_TAG("Deprecated"));
 
+I_EXPORT_COMPONENT(
+			PackagesLoader,
+			"Load and cache packages from files",
+			"Component Registry Cache Package Load File Configuration Components" IM_TAG("Loader"));
+
+I_EXPORT_COMPONENT(
+			RegistriesManager,
+			"Load and cache registries from files",
+			"Registry Manager Load File Configuration Components");
+
+I_EXPORT_COMPONENT(
+			RegistryCodeSaver,
+			"Stores registry as C++ code",
+			"Code C++ File Store Save Registry Compile" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Loader"));
+
 
 } // namespace CompositorPck
 

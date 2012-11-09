@@ -172,23 +172,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmap.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CBitmapLoaderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CBitmapSurface.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CClipboardSerializerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CComponentAccessor.cpp"
 				>
 			</File>
 			<File
@@ -201,22 +185,6 @@
 			</File>
 			<File
 				RelativePath="..\CNetworkWriteArchive.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CPackagesLoaderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CReflectedBitmapBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistriesManagerComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryCodeSaverComp.cpp"
 				>
 			</File>
 			<File
@@ -248,10 +216,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystem.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CTranslationManagerComp.cpp"
 				>
 			</File>
@@ -278,23 +242,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CBitmapLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CBitmapSurface.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CClipboardSerializerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CComponentAccessor.h"
 				>
 			</File>
 			<File
@@ -307,22 +255,6 @@
 			</File>
 			<File
 				RelativePath="..\CNetworkWriteArchive.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CPackagesLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CReflectedBitmapBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistriesManagerComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CRegistryCodeSaverComp.h"
 				>
 			</File>
 			<File
@@ -354,10 +286,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSystem.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CTranslationManagerComp.h"
 				>
 			</File>
@@ -367,10 +295,6 @@
 			</File>
 			<File
 				RelativePath="..\CXmlFileWriteArchive.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IQImageProvider.h"
 				>
 			</File>
 			<File

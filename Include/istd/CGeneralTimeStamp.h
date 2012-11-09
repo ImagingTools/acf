@@ -1,5 +1,5 @@
-#ifndef iqt_CGeneralTimeStamp_included
-#define iqt_CGeneralTimeStamp_included
+#ifndef istd_CGeneralTimeStamp_included
+#define istd_CGeneralTimeStamp_included
 
 
 #include <QtCore/QObject>
@@ -48,6 +48,6 @@ private:
 } // namespace istd
 
 
-#endif // !iqt_CGeneralTimeStamp_included
+#endif // !istd_CGeneralTimeStamp_included
 
 

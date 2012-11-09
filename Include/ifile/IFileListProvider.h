@@ -1,5 +1,5 @@
-#ifndef ibase_IFileListProvider_included
-#define ibase_IFileListProvider_included
+#ifndef ifile_IFileListProvider_included
+#define ifile_IFileListProvider_included
 
 
 #include "istd/IChangeable.h"
@@ -7,7 +7,7 @@
 #include <QtCore/QString>
 
 
-namespace ibase
+namespace ifile
 {
 
 
@@ -24,9 +24,9 @@ public:
 };
 
 
-} // namespace ibase
+} // namespace ifile
 
 
-#endif //!ibase_IFileListProvider_included
+#endif //!ifile_IFileListProvider_included
 
 

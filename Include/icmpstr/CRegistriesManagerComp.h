@@ -1,5 +1,5 @@
-#ifndef iqt_CRegistriesManagerComp_included
-#define iqt_CRegistriesManagerComp_included
+#ifndef icmpstr_CRegistriesManagerComp_included
+#define icmpstr_CRegistriesManagerComp_included
 
 
 // Qt includes
@@ -21,7 +21,7 @@
 #include "ifile/IFileNameParam.h"
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -104,9 +104,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 
-#endif // !iqt_CRegistriesManagerComp_included
+#endif // !icmpstr_CRegistriesManagerComp_included
 
 

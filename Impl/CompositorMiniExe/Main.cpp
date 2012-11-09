@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 	registryLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	registryLoaderComp.InitComponent();
 
-	icomp::TSimComponentWrap<QtPck::PackagesLoader> packagesLoaderComp;
+	icomp::TSimComponentWrap<CompositorPck::PackagesLoader> packagesLoaderComp;
 	packagesLoaderComp.SetRef("RegistryLoader", &registryLoaderComp);
 	packagesLoaderComp.SetRef("Log", &log);
 	packagesLoaderComp.InitComponent();

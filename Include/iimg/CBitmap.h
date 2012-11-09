@@ -1,5 +1,5 @@
-#ifndef iqt_CBitmap_included
-#define iqt_CBitmap_included
+#ifndef iimg_CBitmap_included
+#define iimg_CBitmap_included
 
 
 #include "istd/TOptDelPtr.h"
@@ -11,10 +11,10 @@
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CAffineTransformation2d.h"
 
-#include "iqt/IQImageProvider.h"
+#include "iimg/IQImageProvider.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -36,7 +36,7 @@ public:
 
 	QImage& GetQImageRef();
 
-	// reimplemented (iqt::IQImageProvider)
+	// reimplemented (iimg::IQImageProvider)
 	virtual const QImage& GetQImage() const;
 	virtual bool CopyImageFrom(const QImage& image);
 
@@ -95,9 +95,9 @@ inline QImage& CBitmap::GetQImageRef()
 }
 
 
-} // namespace iqt
+} // namespace iimg
 
 
-#endif //!iqt_CBitmap_included
+#endif //!iimg_CBitmap_included
 
 

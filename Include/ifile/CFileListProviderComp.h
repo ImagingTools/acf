@@ -14,7 +14,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "ibase/IFileListProvider.h"
+#include "ifile/IFileListProvider.h"
 
 #include "ifile/IFileNameParam.h"
 
@@ -31,7 +31,7 @@ namespace ifile
 class CFileListProviderComp:
 			public QObject,
 			public icomp::CComponentBase,
-			virtual public ibase::IFileListProvider,
+			virtual public ifile::IFileListProvider,
 			protected imod::CSingleModelObserverBase
 {
 	Q_OBJECT
@@ -40,7 +40,7 @@ public:
 
 	I_BEGIN_COMPONENT(CFileListProviderComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
-		I_REGISTER_INTERFACE(ibase::IFileListProvider);
+		I_REGISTER_INTERFACE(ifile::IFileListProvider);
 
 		I_ASSIGN(m_dirParamCompPtr, "DirParam", "Parameter storing root directory", true, "DirParam");
 		I_ASSIGN(m_dirParamModelCompPtr, "DirParam", "Parameter storing root directory", false, "DirParam");
@@ -50,7 +50,7 @@ public:
 		I_ASSIGN(m_maxRecurDepthAttrPtr, "MaxRecurDepth", "Maximal recursion depth for file search, negative value means no depth limit", true, 0);
 	I_END_COMPONENT;
 
-	// reimplemented (ibase::IFileListProvider)
+	// reimplemented (ifile::IFileListProvider)
 	virtual QStringList GetFileList() const;
 
 protected:

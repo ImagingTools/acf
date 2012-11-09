@@ -1,5 +1,5 @@
-#ifndef iqt_IQImageProvider_included
-#define iqt_IQImageProvider_included
+#ifndef iimg_IQImageProvider_included
+#define iimg_IQImageProvider_included
 
 
 // Qt includes
@@ -8,10 +8,10 @@
 // ACF includes
 #include "istd/IPolymorphic.h"
 
-#include "iqt/iqt.h"
+#include "iimg/iimg.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -23,9 +23,9 @@ public:
 };
 
 
-} // namespace iqt
+} // namespace iimg
 
 
-#endif // !iqt_IQImageProvider_included
+#endif // !iimg_IQImageProvider_included
 
 

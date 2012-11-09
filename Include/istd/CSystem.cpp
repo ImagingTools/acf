@@ -1,4 +1,4 @@
-#include "iqt/CSystem.h"
+#include "istd/CSystem.h"
 
 
 // STD includes
@@ -13,7 +13,7 @@
 #include <istd/istd.h>
 
 
-namespace iqt
+namespace istd
 {
 
 
@@ -190,6 +190,6 @@ bool CSystem::RemoveDirectory(const QString& directoryPath)
 }
 
 
-} // namespace iqt
+} // namespace istd
 
 

@@ -1,5 +1,5 @@
-#ifndef iqt_CPackagesLoaderComp_included
-#define iqt_CPackagesLoaderComp_included
+#ifndef icmpstr_CPackagesLoaderComp_included
+#define icmpstr_CPackagesLoaderComp_included
 
 
 // Qt includes
@@ -24,7 +24,7 @@
 #include "ifile/IFileNameParam.h"
 
 
-namespace iqt
+namespace icmpstr
 {
 
 
@@ -147,9 +147,9 @@ private:
 };
 
 
-} // namespace iqt
+} // namespace icmpstr
 
 
-#endif // !iqt_CPackagesLoaderComp_included
+#endif // !icmpstr_CPackagesLoaderComp_included
 
 

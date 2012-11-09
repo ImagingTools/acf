@@ -10,9 +10,7 @@
 
 #include "imod/IModel.h"
 
-#include "iimg/IBitmap.h"
-
-#include "iqt/CBitmap.h"
+#include "iimg/CBitmap.h"
 
 #include "iview/CScreenTransform.h"
 
@@ -76,10 +74,10 @@ bool CImageShape::OnAttached(imod::IModel* modelPtr)
 
 void CImageShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	const iqt::IQImageProvider* providerPtr = dynamic_cast<const iqt::IQImageProvider*>(modelPtr);
-	istd::TDelPtr<iqt::CBitmap> qtBitmapPtr;
+	const iimg::IQImageProvider* providerPtr = dynamic_cast<const iimg::IQImageProvider*>(modelPtr);
+	istd::TDelPtr<iimg::CBitmap> qtBitmapPtr;
 	if (providerPtr == NULL){
-		qtBitmapPtr.SetPtr(new iqt::CBitmap);
+		qtBitmapPtr.SetPtr(new iimg::CBitmap);
 		providerPtr = qtBitmapPtr.GetPtr();
 		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(modelPtr);
 		I_ASSERT(bitmapPtr != NULL);
@@ -208,7 +206,7 @@ void CImageShape::DrawBitmap(
 			const i2d::CRect& bitmapArea,
 			const i2d::CAffine2d& destTransform) const
 {
-	const iqt::CBitmap* bitmapPtr = dynamic_cast<const iqt::CBitmap*>(&bitmap);
+	const iimg::CBitmap* bitmapPtr = dynamic_cast<const iimg::CBitmap*>(&bitmap);
 
 	if (bitmapPtr != NULL){
 		const i2d::CMatrix2d& deform = destTransform.GetDeformMatrix();

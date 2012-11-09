@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="iimg"
 	ProjectGUID="{DBED1B2F-3F60-4CA1-AF11-1E7FE7763E33}"
+	RootNamespace="iimg"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -161,11 +162,27 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CBitmap.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitmapBase.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\CBitmapLoaderComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CBitmapSurface.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CGeneralBitmap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CReflectedBitmapBase.cpp"
 				>
 			</File>
 			<File
@@ -178,11 +195,27 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CBitmap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitmapBase.h"
 				>
 			</File>
 			<File
+				RelativePath="..\CBitmapLoaderComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CBitmapSurface.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CGeneralBitmap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CReflectedBitmapBase.h"
 				>
 			</File>
 			<File
@@ -195,6 +228,10 @@
 			</File>
 			<File
 				RelativePath="..\iimg.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IQImageProvider.h"
 				>
 			</File>
 			<File

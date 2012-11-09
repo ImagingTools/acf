@@ -1,4 +1,4 @@
-#include "iqt/CBitmapSurface.h"
+#include "iimg/CBitmapSurface.h"
 
 
 // Qt includes
@@ -10,7 +10,7 @@
 #include "istd/TChangeNotifier.h"
 
 
-namespace iqt
+namespace iimg
 {
 
 
@@ -76,6 +76,6 @@ void CBitmapSurface::CreateSurfaceFromBitmap()
 }
 
 
-} // namespace iqt
+} // namespace iimg
 
 

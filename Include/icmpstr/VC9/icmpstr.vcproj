@@ -160,6 +160,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentAccessor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComponentHelpFileProviderComp.cpp"
 				>
 			</File>
@@ -188,11 +192,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPackagesLoaderComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPackagesLoaderExtComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CQuickHelpGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistriesManagerComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryCodeSaverComp.cpp"
 				>
 			</File>
 			<File
@@ -250,6 +266,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentAccessor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CComponentHelpFileProviderComp.h"
 				>
 			</File>
@@ -278,11 +298,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CPackagesLoaderComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CPackagesLoaderExtComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CQuickHelpGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistriesManagerComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRegistryCodeSaverComp.h"
 				>
 			</File>
 			<File
