@@ -209,6 +209,11 @@ I_EXPORT_COMPONENT(
 			"Circle Position Radius 2D Object Parameter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
 
 I_EXPORT_COMPONENT(
+			OrientedCircle,
+			"Circle 2D object with orientation (inside or outside)",
+			"Circle Position Radius 2D Object Oriented Inside Outside Direction Parameter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));
+
+I_EXPORT_COMPONENT(
 			Rectangle,
 			"Rectangle (orthogonal to axis) object",
 			"Rectangle Orthogonal Object Parameter" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D Model"));

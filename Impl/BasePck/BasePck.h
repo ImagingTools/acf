@@ -55,6 +55,7 @@
 #include "i2d/CPosition2dComp.h"
 #include "i2d/CRectangleComp.h"
 #include "i2d/CCircleComp.h"
+#include "i2d/COrientedCircleComp.h"
 #include "i2d/CAnnulusComp.h"
 #include "i2d/CAnnulusSegmentComp.h"
 #include "i2d/CLine2dComp.h"
@@ -121,6 +122,7 @@ typedef icomp::TModelCompWrap< icomp::TMakeComponentWrap<
 typedef icomp::TModelCompWrap<i2d::CPosition2dComp> Position2d;
 typedef icomp::TModelCompWrap<i2d::CRectangleComp> Rectangle;
 typedef icomp::TModelCompWrap<i2d::CCircleComp> Circle;
+typedef icomp::TModelCompWrap<i2d::COrientedCircleComp> OrientedCircle;
 typedef icomp::TModelCompWrap<i2d::CAnnulusComp> Annulus;
 typedef icomp::TModelCompWrap<i2d::CAnnulusSegmentComp> AnnulusSegment;
 typedef icomp::TModelCompWrap<i2d::CLine2dComp> Line;
