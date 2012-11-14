@@ -129,7 +129,7 @@ template <class Type, class Accessor>
 TSmartPtr<Type, Accessor>::TSmartPtr(const TSmartPtr& pointer)
 	:BaseClass()
 {
-	BaseClass::m_counterPtr = GetInternalCounter(pointer);
+	BaseClass::m_counterPtr = BaseClass::GetInternalCounter(pointer);
 
 	if (BaseClass::m_counterPtr != NULL){
 		BaseClass::m_counterPtr->OnAttached();
@@ -175,7 +175,7 @@ TSmartPtr<Type, Accessor>& TSmartPtr<Type, Accessor>::operator=(const TTransPtr<
 template <class Type, class Accessor>
 TSmartPtr<Type, Accessor>& TSmartPtr<Type, Accessor>::operator=(const TSmartPtr& pointer)
 {
-	RefCountBase* pointerInternalCounter = GetInternalCounter(pointer);
+	RefCountBase* pointerInternalCounter = BaseClass::GetInternalCounter(pointer);
 
 	if (pointerInternalCounter != BaseClass::m_counterPtr){
 		I_ASSERT((pointerInternalCounter == NULL) || (BaseClass::m_counterPtr == NULL) || (*pointerInternalCounter != *BaseClass::m_counterPtr)); // two different reference counters cannot shown at the same destination object

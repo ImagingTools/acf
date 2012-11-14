@@ -311,7 +311,7 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateToo
 		BaseClass::ToolsButton->setHidden(false);
 		if (BaseClass::ToolsButton->menu() == NULL){
 			BaseClass::ToolsButton->setMenu(new QMenu(BaseClass::ToolsButton));
-			connect(BaseClass::ToolsButton->menu(), SIGNAL(triggered(QAction*)),
+			BaseClass::connect(BaseClass::ToolsButton->menu(), SIGNAL(triggered(QAction*)),
 					this, SLOT(OnToolsButtonMenuActionTriggered(QAction*)));
 		}
 

@@ -453,7 +453,7 @@ Element* TArray<Element, Dimensions>::Iterator::operator->()
 template <class Element, int Dimensions>
 typename TArray<Element, Dimensions>::Iterator& TArray<Element, Dimensions>::Iterator::operator++()
 {
-	if ((m_arrayPtr != NULL) && !Increase(m_arrayPtr->GetSizes())){
+	if ((m_arrayPtr != NULL) && !BaseClass::Increase(m_arrayPtr->GetSizes())){
 		m_arrayPtr = NULL;
 	}
 
@@ -466,7 +466,7 @@ typename TArray<Element, Dimensions>::Iterator TArray<Element, Dimensions>::Iter
 {
 	Iterator retVal = *this;
 
-	if ((m_arrayPtr != NULL) && !Increase(m_arrayPtr->GetSizes())){
+	if ((m_arrayPtr != NULL) && !BaseClass::Increase(m_arrayPtr->GetSizes())){
 		m_arrayPtr = NULL;
 	}
 
@@ -531,7 +531,7 @@ template <class Element, int Dimensions>
 TArray<Element, Dimensions>::Iterator::Iterator(TArray* arrayPtr)
 :	BaseClass(0), m_arrayPtr(arrayPtr)
 {
-	if ((m_arrayPtr != NULL) && !IsInside(m_arrayPtr->GetSizes())){
+	if ((m_arrayPtr != NULL) && !BaseClass::IsInside(m_arrayPtr->GetSizes())){
 		m_arrayPtr = NULL;	// if it is not inside of array set it directly to the end iterator state
 	}
 }
