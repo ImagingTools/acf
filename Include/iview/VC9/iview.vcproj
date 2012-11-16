@@ -284,6 +284,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COrientedCircleShape.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPerspectiveCalibration.cpp"
 				>
 			</File>
@@ -475,6 +479,10 @@
 			</File>
 			<File
 				RelativePath="..\CNoneCalibrationShape.h"
+				>
+			</File>
+			<File
+				RelativePath="..\COrientedCircleShape.h"
 				>
 			</File>
 			<File
