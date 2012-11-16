@@ -48,12 +48,12 @@ public:
 	void SetTranslation(const CVector2d& translation);
 
 	/**
-		Get rotation, skew and skale part of this affine transformation.
+		Get rotation, skew and scale part of this affine transformation.
 	*/
 	const CMatrix2d& GetDeformMatrix() const;
 
 	/**
-		Set rotation, skew and skale part of this affine transformation.
+		Set rotation, skew and scale part of this affine transformation.
 	*/
 	void SetDeformMatrix(const CMatrix2d& deform);
 

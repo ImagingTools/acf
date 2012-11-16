@@ -12,7 +12,7 @@ namespace i2d
 
 
 /**
-	2D-object representing a polyine.
+	2D-object representing a polyline.
 	A polyline is a connected series of line segments and is normally used to approximate curved paths.
 */
 class CPolyline: public CPolygon

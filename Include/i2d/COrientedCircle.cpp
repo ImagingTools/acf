@@ -13,36 +13,36 @@ namespace i2d
 
 
 COrientedCircle::COrientedCircle()
-:	m_orientatedOutside(false)
+:	m_orientedOutside(false)
 {
 }
 
 
 COrientedCircle::COrientedCircle(double radius, const CVector2d& center, bool orientatedOutside)
-:	BaseClass(radius, center), m_orientatedOutside(orientatedOutside)
+:	BaseClass(radius, center), m_orientedOutside(orientatedOutside)
 {
 }
 
 
 void COrientedCircle::SetOrientedOutside(bool orientatedOutside)
 {
-	if (orientatedOutside != m_orientatedOutside){
+	if (orientatedOutside != m_orientedOutside){
 		istd::CChangeNotifier notifier(this);
 
-		m_orientatedOutside = orientatedOutside;
+		m_orientedOutside = orientatedOutside;
 	}
 }
 
 
 bool COrientedCircle::operator==(const COrientedCircle& ref) const
 {
-	return BaseClass::operator==(ref) && (ref.m_orientatedOutside == m_orientatedOutside);
+	return BaseClass::operator==(ref) && (ref.m_orientedOutside == m_orientedOutside);
 }
 
 
 bool COrientedCircle::operator!=(const COrientedCircle& ref) const
 {
-	return BaseClass::operator!=(ref) || (ref.m_orientatedOutside != m_orientatedOutside);
+	return BaseClass::operator!=(ref) || (ref.m_orientedOutside != m_orientedOutside);
 }
 
 
@@ -59,7 +59,7 @@ bool COrientedCircle::Serialize(iser::IArchive& archive)
 	retVal = retVal && BaseClass::Serialize(archive);
 
 	retVal = retVal && archive.BeginTag(orientatedOutsideTag);
-	retVal = retVal && archive.Process(m_orientatedOutside);
+	retVal = retVal && archive.Process(m_orientedOutside);
 	retVal = retVal && archive.EndTag(orientatedOutsideTag);
 
 	return retVal;
