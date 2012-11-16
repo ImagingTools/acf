@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COrientedCircleEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CPolygonParamsGuiComp.cpp"
 				>
 			</File>
@@ -362,6 +366,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_COrientedCircleEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CPolygonParamsGuiComp.cpp"
 				>
 			</File>
@@ -439,6 +447,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COrientedCircleEditorComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CPolygonParamsGuiComp.ui"
 				>
 			</File>
@@ -472,6 +484,10 @@
 			</File>
 			<File
 				RelativePath="..\CLine2dParamsGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\COrientedCircleEditorComp.moc"
 				>
 			</File>
 			<File
