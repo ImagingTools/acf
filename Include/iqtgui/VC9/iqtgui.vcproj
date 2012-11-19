@@ -329,6 +329,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTableBasedModelEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CTextElider.cpp"
 				>
 			</File>
@@ -517,6 +521,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CTableBasedModelEditorComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CTextElider.h"
 				>
 			</File>
@@ -590,6 +598,10 @@
 			</File>
 			<File
 				RelativePath="..\TGuiObserverWrap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TItemModelEditorCompBase.h"
 				>
 			</File>
 			<File

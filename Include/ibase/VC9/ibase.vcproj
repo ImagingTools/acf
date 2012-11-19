@@ -481,6 +481,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IQtItemModelProvider.h"
+				>
+			</File>
+			<File
 				RelativePath="..\ITextDocument.h"
 				>
 			</File>

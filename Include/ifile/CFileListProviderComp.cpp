@@ -3,6 +3,8 @@
 
 // Qt includes
 #include <QtCore/QStringList>
+#include <QtCore/QDateTime>
+#include <QtGui/QFileIconProvider>
 
 
 // ACF includes
@@ -23,6 +25,14 @@ QStringList CFileListProviderComp::GetFileList() const
 }
 
 
+// reimplemented (ibase::IQtItemModelProvider)
+
+const QAbstractItemModel* CFileListProviderComp::GetItemModel() const
+{
+	return &m_itemModel;
+}
+
+
 // protected methods
 
 // reimplemented (imod::CSingleModelObserverBase)
@@ -32,6 +42,11 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 	istd::CChangeNotifier notifier(this);
 
 	m_fileList.clear();
+	m_itemModel.clear();
+
+	m_itemModel.setColumnCount(2);
+	m_itemModel.setHorizontalHeaderItem(0, new QStandardItem(tr("File")));
+	m_itemModel.setHorizontalHeaderItem(1, new QStandardItem(tr("Modification time")));
 
 	if (m_dirParamCompPtr.IsValid()){
 		QStringList filters;
@@ -39,9 +54,9 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 		m_directoryWatcher.removePaths(m_directoryWatcher.directories());
 		m_directoryWatcher.addPath(m_dirParamCompPtr->GetPath());
 
-		if (m_fileLoaderCompPtr.IsValid()){
+		if (m_fileTypeInfoCompPtr.IsValid()){
 			QStringList extensions;
-			if (m_fileLoaderCompPtr->GetFileExtensions(extensions)){
+			if (m_fileTypeInfoCompPtr->GetFileExtensions(extensions)){
 				for (		QStringList::const_iterator extIter = extensions.begin();
 							extIter != extensions.end();
 							++extIter){
@@ -65,7 +80,24 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 					*m_maxRecurDepthAttrPtr,
 					filters);
 
-		m_fileList = (fileList);
+		m_fileList = fileList;
+
+		m_itemModel.setRowCount(fileList.count());
+		QFileIconProvider fileIconProvider;
+		for (int fileIndex = 0; fileIndex < fileList.count(); fileIndex++){
+			QFileInfo fileInfo(fileList[fileIndex]);
+			QIcon fileIcon = fileIconProvider.icon(fileInfo);
+		
+			QStandardItem* fileItemPtr = new QStandardItem(fileList[fileIndex]);
+			fileItemPtr->setEditable(false);
+			fileItemPtr->setIcon(fileIcon);
+
+			QStandardItem* fileTimeItemPtr = new QStandardItem(fileInfo.lastModified().toString());
+			fileTimeItemPtr->setEditable(false);
+
+			m_itemModel.setItem(fileIndex, 0, fileItemPtr);
+			m_itemModel.setItem(fileIndex, 1, fileTimeItemPtr);
+		}
 	}
 }
 

@@ -5,6 +5,7 @@
 // Qt includes
 #include <QtCore/QFileSystemWatcher>
 #include <QtCore/QStringList>
+#include <QtGui/QStandardItemModel>
 
 // ACF includes
 #include "iser/IFileLoader.h"
@@ -14,11 +15,10 @@
 
 #include "icomp/CComponentBase.h"
 
+#include "ibase/IQtItemModelProvider.h"
+
 #include "ifile/IFileListProvider.h"
-
 #include "ifile/IFileNameParam.h"
-
-#include "ifile/ifile.h"
 
 
 namespace ifile
@@ -32,6 +32,7 @@ class CFileListProviderComp:
 			public QObject,
 			public icomp::CComponentBase,
 			virtual public ifile::IFileListProvider,
+			virtual public ibase::IQtItemModelProvider,
 			protected imod::CSingleModelObserverBase
 {
 	Q_OBJECT
@@ -41,10 +42,10 @@ public:
 	I_BEGIN_COMPONENT(CFileListProviderComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_REGISTER_INTERFACE(ifile::IFileListProvider);
-
+		I_REGISTER_INTERFACE(ibase::IQtItemModelProvider);
 		I_ASSIGN(m_dirParamCompPtr, "DirParam", "Parameter storing root directory", true, "DirParam");
 		I_ASSIGN(m_dirParamModelCompPtr, "DirParam", "Parameter storing root directory", false, "DirParam");
-		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "File loader used to create file filters", false, "FileLoader");
+		I_ASSIGN(m_fileTypeInfoCompPtr, "FileTypeInfo", "File type info used to create file filters", false, "FileTypeInfo");
 		I_ASSIGN_MULTI_0(m_filtersAttrPtr, "Filters", "List of filters if no loader is specified", false);
 		I_ASSIGN(m_minRecurDepthAttrPtr, "MinRecurDepth", "Minimal recursion depth for file search", true, 0);
 		I_ASSIGN(m_maxRecurDepthAttrPtr, "MaxRecurDepth", "Maximal recursion depth for file search, negative value means no depth limit", true, 0);
@@ -52,6 +53,9 @@ public:
 
 	// reimplemented (ifile::IFileListProvider)
 	virtual QStringList GetFileList() const;
+
+	// reimplemented (ibase::IQtItemModelProvider)
+	virtual const QAbstractItemModel* GetItemModel() const;
 
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
@@ -67,7 +71,7 @@ private Q_SLOTS:
 private:
 	I_REF(ifile::IFileNameParam, m_dirParamCompPtr);
 	I_REF(imod::IModel, m_dirParamModelCompPtr);
-	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
+	I_REF(iser::IFileTypeInfo, m_fileTypeInfoCompPtr);
 	I_MULTIATTR(QString, m_filtersAttrPtr);
 	I_ATTR(int, m_minRecurDepthAttrPtr);
 	I_ATTR(int, m_maxRecurDepthAttrPtr);
@@ -76,6 +80,7 @@ private:
 
 	QFileSystemWatcher m_directoryWatcher;
 
+	QStandardItemModel m_itemModel;
 };
 
 
