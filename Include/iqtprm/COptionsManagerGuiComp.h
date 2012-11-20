@@ -8,15 +8,11 @@
 
 // ACF includes
 #include "istd/TPointerVector.h"
-
 #include "imod/CMultiModelDispatcherBase.h"
-
 #include "iprm/ISelectionParam.h"
 #include "iprm/IOptionsManager.h"
 #include "iqtgui/IIconProvider.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 #include "iqtprm/Generated/ui_COptionsManagerGuiComp.h"
 
 

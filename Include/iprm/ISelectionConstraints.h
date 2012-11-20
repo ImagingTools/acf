@@ -82,12 +82,6 @@ public:
 		\sa SetOptionEnabled
 	*/
 	virtual bool IsOptionEnabled(int index) const = 0;
-
-	/**
-		Enables a given option. Only enabled options can be selected.
-		\sa GetOptionEnabled
-	*/
-	virtual void SetOptionEnabled(int index, bool isEnabled = true) = 0;
 };
 
 

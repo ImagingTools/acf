@@ -197,11 +197,6 @@ bool CTranslationManagerComp::IsOptionEnabled(int /*index*/) const
 }
 
 
-void CTranslationManagerComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
-{
-}
-
-
 // public methods embedded class LanguageSelectionObserver
 
 CTranslationManagerComp::LanguageSelectionObserver::LanguageSelectionObserver(CTranslationManagerComp& parent)

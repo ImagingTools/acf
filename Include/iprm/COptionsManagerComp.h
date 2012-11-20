@@ -2,10 +2,9 @@
 #define iprm_COptionsManagerComp_included
 
 
+// ACF includes
 #include "icomp/CComponentBase.h"
-
 #include "iprm/IOptionsManager.h"
-#include "iprm/ISelectionConstraints.h"
 
 
 namespace iprm
@@ -18,8 +17,7 @@ namespace iprm
 class COptionsManagerComp:
 			public icomp::CComponentBase,
 			virtual public iprm::IOptionsManager,
-			virtual public iser::ISerializable,
-			virtual public iprm::ISelectionConstraints
+			virtual public iser::ISerializable
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -37,9 +35,9 @@ public:
 	virtual QString GetOptionDescription(int index) const;
 	virtual QByteArray GetOptionId(int index) const;
 	virtual bool IsOptionEnabled(int index) const;
-	virtual void SetOptionEnabled(int index, bool isEnabled = true);
 
 	// reimplemented (iprm::IOptionsManager)
+	virtual void SetOptionEnabled(int index, bool isEnabled = true);
 	virtual void RemoveOption(int index);
 	virtual bool InsertOption(
 					QString& optionName,

@@ -54,11 +54,6 @@ bool CSelectionConstraintsComp::IsOptionEnabled(int /*index*/) const
 }
 
 
-void CSelectionConstraintsComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
-{
-}
-
-
 } // namespace iprm
 
 

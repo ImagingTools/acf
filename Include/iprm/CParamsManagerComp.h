@@ -77,7 +77,6 @@ public:
 	virtual QString GetOptionDescription(int index) const;
 	virtual QByteArray GetOptionId(int index) const;
 	virtual bool IsOptionEnabled(int index) const;
-	virtual void SetOptionEnabled(int index, bool isEnabled = true);
 
 protected:
 	// reimplemented (icomp::CComponentBase)

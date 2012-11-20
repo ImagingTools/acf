@@ -3,7 +3,7 @@
 
 
 // ACF includes
-#include "iprm/ISelectionParam.h"
+#include "iprm/ISelectionConstraints.h"
 
 
 namespace iprm
@@ -13,7 +13,7 @@ namespace iprm
 /**
 	Common interface for the management of the dynamic selection constraints.
 */
-class IOptionsManager: virtual public istd::IChangeable
+class IOptionsManager: virtual public ISelectionConstraints
 {
 public:
 	enum ChangeFlags
@@ -22,6 +22,11 @@ public:
 		CF_OPTION_REMOVED = 1 << 8
 	};
 
+	/**
+		Enables a given option. Only enabled options can be selected.
+		\sa GetOptionEnabled
+	*/
+	virtual void SetOptionEnabled(int index, bool isEnabled = true) = 0;
 
 	/**
 		Remove an option at the given index.

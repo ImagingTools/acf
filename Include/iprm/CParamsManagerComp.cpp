@@ -392,11 +392,6 @@ bool CParamsManagerComp::IsOptionEnabled(int /*index*/) const
 }
 
 
-void CParamsManagerComp::SetOptionEnabled(int /*index*/, bool /*isEnabled*/)
-{
-}
-
-
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
