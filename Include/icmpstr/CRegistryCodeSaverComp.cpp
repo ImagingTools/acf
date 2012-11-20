@@ -252,7 +252,7 @@ QByteArray CRegistryCodeSaverComp::GetOptionId(int index) const
 }
 
 
-bool CRegistryCodeSaverComp::IsOptionEnabled(int index) const
+bool CRegistryCodeSaverComp::IsOptionEnabled(int /*index*/) const
 {
 	return true;
 }
