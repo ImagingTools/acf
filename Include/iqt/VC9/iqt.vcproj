@@ -192,10 +192,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSafeNotifier.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSettingsArchiveBase.cpp"
 				>
 			</File>
@@ -262,10 +258,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSafeNotifier.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSettingsArchiveBase.h"
 				>
 			</File>
@@ -319,20 +311,12 @@
 				RelativePath="..\generated\moc_CNetworkWriteArchive.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\generated\moc_CSafeNotifier.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Moc Files"
 			>
 			<File
 				RelativePath="..\CNetworkWriteArchive.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CSafeNotifier.moc"
 				>
 			</File>
 		</Filter>

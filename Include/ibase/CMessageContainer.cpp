@@ -2,7 +2,8 @@
 
 
 // ACF includes
-#include "istd/TChangeNotifier.h"
+#include "istd/CEventBasedNotifier.h"
+#include "istd/TDelPtr.h"
 
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
@@ -21,14 +22,10 @@ CMessageContainer::CMessageContainer()
 }
 
 
-CMessageContainer::~CMessageContainer()
-{
-	ClearMessages();
-}
-
-
 void CMessageContainer::AddChildContainer(IHierarchicalMessageContainer* childContainerPtr)
 {
+	QMutexLocker lock(&m_lock);
+
 	I_ASSERT(childContainerPtr != NULL);
 
 	m_childContainers.push_back(childContainerPtr);
@@ -37,6 +34,8 @@ void CMessageContainer::AddChildContainer(IHierarchicalMessageContainer* childCo
 
 void CMessageContainer::SetSlaveConsumer(ibase::IMessageConsumer* consumerPtr)
 {
+	QMutexLocker lock(&m_lock);
+
 	m_slaveConsumerPtr = consumerPtr;
 }
 
@@ -45,12 +44,16 @@ void CMessageContainer::SetMaxMessageCount(int maxMessageCount)
 {
 	I_ASSERT(m_maxMessagesCount != 0);
 
+	QMutexLocker lock(&m_lock);
+
 	m_maxMessagesCount = maxMessageCount;
 }
 
 
 void CMessageContainer::SetMaxLiveTime(int maxLiveTime)
 {
+	QMutexLocker lock(&m_lock);
+
 	m_maxLiveTime = maxLiveTime;
 }
 
@@ -59,6 +62,8 @@ void CMessageContainer::SetMaxLiveTime(int maxLiveTime)
 
 bool CMessageContainer::Serialize(iser::IArchive& archive)
 {
+	QMutexLocker lock(&m_lock);
+
 	static iser::CArchiveTag messagesTag("Messages", "List of messages");
 	static iser::CArchiveTag messageTag("Message", "Message");
 
@@ -76,8 +81,8 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 		return false;
 	}
 
-	for (		MessageList::const_iterator iter = m_messages.begin();
-				iter != m_messages.end();
+	for (		MessageList::ConstIterator iter = m_messages.constBegin();
+				iter != m_messages.constEnd();
 				++iter){
 		const IMessageConsumer::MessagePtr& messagePtr = *iter;
 
@@ -98,15 +103,17 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 
 int CMessageContainer::GetWorstCategory() const
 {
+	QMutexLocker lock(&m_lock);
+
 	int worstCategory = m_worstCategory;
 	int childCount = GetChildsCount();
 
 	if (worstCategory < 0){
 		worstCategory = 0;
 
-		for (		MessageList::const_iterator iter = m_messages.begin();
-					iter != m_messages.end();
-					++iter){
+	for (		MessageList::ConstIterator iter = m_messages.constBegin();
+				iter != m_messages.constEnd();
+				++iter){
 			const IMessageConsumer::MessagePtr& messagePtr = *iter;
 
 			int category = messagePtr->GetInformationCategory();
@@ -132,10 +139,12 @@ int CMessageContainer::GetWorstCategory() const
 
 IMessageContainer::Messages CMessageContainer::GetMessages() const
 {
+	QMutexLocker lock(&m_lock);
+
 	IMessageContainer::Messages messages;
 
-	for (		MessageList::const_iterator iter = m_messages.begin();
-				iter != m_messages.end();
+	for (		MessageList::ConstIterator iter = m_messages.constBegin();
+				iter != m_messages.constEnd();
 				++iter){
 		const IMessageConsumer::MessagePtr& messagePtr = *iter;
 
@@ -167,6 +176,8 @@ bool CMessageContainer::IsMessageSupported(
 
 void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePtr)
 {
+	QMutexLocker lock(&m_lock);
+
 	I_ASSERT(messagePtr.IsValid());
 
 	if (m_maxMessagesCount == 0){
@@ -174,7 +185,7 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 	}
 
 	{
-		istd::TChangeNotifier<IMessageContainer> changePtr(
+		istd::CEventBasedNotifier changePtr(
 					this,
 					CF_MODEL | CF_MESSAGE_ADDED,
 					const_cast<istd::IInformationProvider*>(messagePtr.GetPtr()));
@@ -192,7 +203,7 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 			I_ASSERT(!m_messages.isEmpty());
 			const IMessageConsumer::MessagePtr& messageToRemovePtr = m_messages.back();
 
-			istd::TChangeNotifier<IMessageContainer> changePtr(
+			istd::CEventBasedNotifier changePtr(
 						this,
 						CF_MODEL | CF_MESSAGE_REMOVED,
 						const_cast<istd::IInformationProvider*>(messageToRemovePtr.GetPtr()));
@@ -214,7 +225,9 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 
 void CMessageContainer::ClearMessages()
 {
-	istd::TChangeNotifier<IMessageContainer> changePtr(this, CF_MODEL | CF_RESET);
+	QMutexLocker lock(&m_lock);
+
+	istd::CEventBasedNotifier changePtr(this, CF_MODEL | CF_RESET);
 	
 	m_messages.clear();
 
@@ -236,6 +249,38 @@ IHierarchicalMessageContainer* CMessageContainer::GetChild(int index) const
 	I_ASSERT(index < int(m_childContainers.size()));
 
 	return m_childContainers.at(index);
+}
+
+
+// reimplemented (istd::IChangeable)
+
+bool CMessageContainer::CopyFrom(const istd::IChangeable& object)
+{
+	QMutexLocker lock(&m_lock);
+
+	m_messages.clear();
+	istd::CEventBasedNotifier changePtr(this, CF_MODEL | CF_RESET | CF_MESSAGE_ADDED);
+
+	const CMessageContainer* sourcePtr = dynamic_cast<const CMessageContainer*>(&object);
+	if (sourcePtr != NULL){
+		int sourceMessageCount = sourcePtr->m_messages.count();
+		for (int messageIndex = 0; messageIndex < sourceMessageCount; messageIndex++){
+			const MessagePtr& sourceMessage = sourcePtr->m_messages[messageIndex];
+			I_ASSERT(sourceMessage.IsValid());
+
+			istd::TDelPtr<istd::IInformationProvider> newMessagePtr;
+			newMessagePtr.SetCastedOrRemove<istd::IChangeable>(sourceMessage->CloneMe());
+
+			MessagePtr messagePtr(newMessagePtr.PopPtr());
+			if (messagePtr.IsValid()){
+				m_messages.push_back(messagePtr);
+			}
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 

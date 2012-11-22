@@ -1,9 +1,6 @@
 #include "istd/CSystem.h"
 
 
-// STD includes
-#include <cstdlib>
-
 // Qt includes
 #include <QtCore/QDir>
 #include <QtCore/QThread>
@@ -187,6 +184,61 @@ bool CSystem::RemoveDirectory(const QString& directoryPath)
 	}
  
 	return retVal;
+}
+
+
+bool CSystem::FileCopy(const QString& source, const QString& result, bool overWrite)
+{
+	QFileInfo sourceFile(source);
+	if (!sourceFile.exists())
+	{
+		return false;
+	}
+
+	if (result.isEmpty())
+	{
+		return false;
+	}
+
+	QFileInfo resultFile(result);
+	const QDir&  resultDir = resultFile.absoluteDir();
+	if (!resultDir.exists())
+	{
+		if (!resultDir.mkpath(resultDir.absolutePath()))
+		{
+			return false;
+		}
+	}
+	I_ASSERT(resultDir.exists());
+
+	if (resultFile.exists())
+	{
+		if (overWrite)
+		{
+			QFile::remove(resultFile.absoluteFilePath());
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	I_ASSERT(!resultFile.exists());
+	if (!QFile::copy(source, resultFile.absoluteFilePath()))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+
+bool CSystem::EnsurePathExists(const QString& filePath)
+{
+	QFileInfo inputInfo(filePath);
+	QDir dirPath(inputInfo.absolutePath());
+
+	return dirPath.mkpath(filePath);
 }
 
 

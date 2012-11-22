@@ -55,6 +55,16 @@ public:
 		Remove a given directory with all contents.
 	*/
 	static bool RemoveDirectory(const QString& directoryPath);
+
+	/**
+		Copy file to directory. When result directory doesn't exist create it.
+	*/
+	static bool FileCopy(const QString& source, const QString& result, bool overWrite = false);
+
+	/**
+		Ensure that the given path exists.
+	*/
+	static bool EnsurePathExists(const QString& filePath);
 };
 
 

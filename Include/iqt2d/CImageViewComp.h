@@ -39,6 +39,7 @@ public:
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
+		I_ASSIGN(m_useBitmapCalibrationAttrPtr, "UseBitmapCalibration", "If set, the bitmap calibration is used to calibrate the view", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
@@ -50,6 +51,9 @@ protected:
 
 	// reimplemented (iqtui::CGuiComponentBase)
 	virtual void OnGuiCreated();
+
+private:
+	I_ATTR(bool, m_useBitmapCalibrationAttrPtr);
 };
 
 
