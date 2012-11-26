@@ -544,7 +544,7 @@ bool CPolygonCalibrationShape::IsCurveTouched(istd::CIndex2d position) const
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
 			const i2d::ITransformation2d& calib = GetIsomorphCalib();
 
-			double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+			double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 			i2d::CVector2d node1;
 			calib.GetInvPositionAt(polygon.GetNode(nodesCount - 1), node1);

@@ -118,7 +118,7 @@ bool CInteractiveSplineShape::IsCurveTouched(istd::CIndex2d position) const
 		const IColorShema& colorShema = GetColorShema();
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
-		double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 		double minDistance = colorShema.GetLogicalLineWidth() / proportions;
 		i2d::CVector2d cp = transform.GetClientPosition(position);

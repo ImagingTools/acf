@@ -185,11 +185,11 @@ bool CInteractiveLineShape::OnMouseMove(istd::CIndex2d position)
 
 void CInteractiveLineShape::CalcPoints(const i2d::CLine2d& line) const
 {
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
+	const i2d::ITransformation2d* calibrationPtr = line.GetCalibration();
 
 	i2d::CLine2d screenLine(
-					transform.GetApply(line.GetPoint1()),
-					transform.GetApply(line.GetPoint2()));
+					GetScreenPosition(line.GetPoint1(), calibrationPtr),
+					GetScreenPosition(line.GetPoint2(), calibrationPtr));
 
 	m_points[0] = screenLine.GetPoint1().ToIndex2d();
 	m_points[1] = screenLine.GetPoint2().ToIndex2d();

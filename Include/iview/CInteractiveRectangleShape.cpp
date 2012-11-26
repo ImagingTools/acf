@@ -61,7 +61,8 @@ ITouchable::TouchState CInteractiveRectangleShape::IsTouched(istd::CIndex2d posi
 		}
 
 		i2d::CVector2d cp = transform.GetClientPosition(position);
-		double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+
+		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 		double logicalLineWidth = colorShema.GetLogicalLineWidth();
 

@@ -208,7 +208,8 @@ ITouchable::TouchState CInteractiveCircleShape::IsTouched(istd::CIndex2d positio
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const IColorShema& colorShema = GetColorShema();
 
-		double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
+
 		i2d::CVector2d cp = transform.GetClientPosition(position);
 
 		i2d::CVector2d center = circlePtr->GetPosition();

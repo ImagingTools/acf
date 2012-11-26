@@ -41,7 +41,8 @@ iview::ITouchable::TouchState CInteractivePerspectiveCalibrationShape::IsTouched
 		i2d::CLine2d viewTop(viewLeftTop, viewRightTop);
 		i2d::CLine2d viewBottom(viewLeftBottom, viewRightBottom);
 
-		double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
+
 		double maxDistance = colorShema.GetLogicalLineWidth() / proportions;
 
 		if (			(viewLeft.GetDistance(viewPos) < maxDistance) ||
@@ -125,7 +126,8 @@ bool CInteractivePerspectiveCalibrationShape::OnMouseButton(istd::CIndex2d posit
 			i2d::CLine2d viewTop(viewLeftTop, viewRightTop);
 			i2d::CLine2d viewBottom(viewLeftBottom, viewRightBottom);
 
-			double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+			double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
+
 			double maxDistance = colorShema.GetLogicalLineWidth() / proportions;
 
 			if (viewLeft.GetDistance(viewPos) < maxDistance){

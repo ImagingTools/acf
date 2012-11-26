@@ -343,7 +343,8 @@ bool CInteractiveParallelogramShape::IsFigureTouched(istd::CIndex2d position) co
 		const i2d::CVector2d& axisY  = parallDeform.GetAxisY();
 
 		i2d::CVector2d cp = transform.GetClientPosition(position);
-		double proportions = ::sqrt(transform.GetDeformMatrix().GetDet());
+
+		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 		double logicalLineWidth = colorShema.GetLogicalLineWidth();
 
