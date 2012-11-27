@@ -15,7 +15,6 @@
 #include "iview/IRuler.h"
 #include "iview/IViewRulersAccessor.h"
 #include "iview/CCalibratedViewBase.h"
-#include "iview/CScaleCalibration.h"
 
 
 namespace iview
@@ -26,10 +25,9 @@ namespace iview
 
 void CAffiniteCalibrationShape::Draw(QPainter& drawContext) const
 {
-	const i2d::ITransformation2d* calibrationPtr = GetCalibrationPtr();
+	const i2d::ICalibration2d* calibrationPtr = GetCalibrationPtr();
 	const i2d::CAffineTransformation2d* calibPtr = dynamic_cast<const i2d::CAffineTransformation2d*>(calibrationPtr);
-	const CScaleCalibration* scaleCalibPtr = dynamic_cast<const CScaleCalibration*>(calibrationPtr);
-	if (calibPtr == NULL && scaleCalibPtr == NULL){
+	if (calibPtr == NULL){
 		BaseClass::Draw(drawContext);
 
 		return;
@@ -92,15 +90,8 @@ void CAffiniteCalibrationShape::Draw(QPainter& drawContext) const
 				const iview::IColorShema& colorShema = GetColorShema();
 				iview::CScreenTransform transform = GetViewToScreenTransform();
 
-				i2d::CAffine2d calibTransform;
-				if (calibPtr != NULL){
-					calibTransform = calibPtr->GetTransformation();
-				}
-				else {
-					if (scaleCalibPtr != NULL){
-						calibTransform = scaleCalibPtr->GetLogToViewTransform();
-					}
-				}
+				const i2d::CAffine2d& calibTransform = calibPtr->GetTransformation();
+
 				transform.Apply(calibTransform);
 
 				i2d::CVector2d logCorners[4];

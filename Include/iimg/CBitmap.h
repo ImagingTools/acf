@@ -2,15 +2,12 @@
 #define iimg_CBitmap_included
 
 
+// ACF includes
 #include "istd/TOptDelPtr.h"
-
-#include "iimg/CBitmapBase.h"
-
 #include "ibase/IObjectSnap.h"
-
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CAffineTransformation2d.h"
-
+#include "iimg/CBitmapBase.h"
 #include "iimg/IQImageProvider.h"
 
 
@@ -47,7 +44,7 @@ public:
 				const istd::CIndex2d& size) const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	// reimplemented (iimg::IBitmap)
 	virtual bool IsFormatSupported(PixelFormat pixelFormat) const;

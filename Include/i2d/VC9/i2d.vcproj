@@ -221,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNoneCalibration2d.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CObject2dBase.cpp"
 				>
 			</File>
@@ -382,6 +386,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CNoneCalibration2d.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CObject2dBase.h"
 				>
 			</File>
@@ -483,6 +491,10 @@
 			</File>
 			<File
 				RelativePath="..\i2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\ICalibration2d.h"
 				>
 			</File>
 			<File

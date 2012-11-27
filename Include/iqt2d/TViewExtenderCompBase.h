@@ -4,14 +4,12 @@
 
 // ACF includes
 #include "istd/TPointerVector.h"
-
+#include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
-
 #include "iview/IShapeView.h"
 #include "iview/ILogicalView.h"
 #include "iview/CShapeBase.h"
 #include "iview/CCalibratedViewBase.h"
-
 #include "iqt2d/IViewProvider.h"
 #include "iqt2d/IViewExtender.h"
 
@@ -79,7 +77,7 @@ private:
 	I_ATTR(int, m_sceneExtenderModeAttrPtr);
 	I_MULTIATTR(int, m_idFiltersAttrPtr);
 
-	istd::TDelPtr<i2d::ITransformation2d> m_viewCalibrationPtr;
+	istd::TDelPtr<i2d::ICalibration2d> m_viewCalibrationPtr;
 };
 
 
@@ -264,7 +262,7 @@ template <class Base>
 void TViewExtenderCompBase<Base>::UpdateViewCalibration(iview::IShapeView* viewPtr)
 {
 	if (m_viewCalibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* viewCalibrationPtr = m_viewCalibrationProviderCompPtr->GetCalibration();
+		const i2d::ICalibration2d* viewCalibrationPtr = m_viewCalibrationProviderCompPtr->GetCalibration();
 
 		iview::CCalibratedViewBase* calibratedViewPtr = dynamic_cast<iview::CCalibratedViewBase*>(viewPtr);
 		if (calibratedViewPtr != NULL){

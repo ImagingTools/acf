@@ -56,7 +56,7 @@ bool CInteractiveAnnulusSegmentShape::OnMouseButton(istd::CIndex2d position, Qt:
 			i2d::CVector2d tickerDirection;
 			tickerDirection.Init((objectPtr->GetBeginAngle() + objectPtr->GetEndAngle()) * 0.5);
 
-			const i2d::ITransformation2d* calibrationPtr = objectPtr->GetCalibration();
+			const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
 			istd::CIndex2d ticker1 = GetScreenPosition(center + tickerDirection * radius, calibrationPtr).ToIndex2d();
 			istd::CIndex2d ticker2 = GetScreenPosition(center + tickerDirection * radius2, calibrationPtr).ToIndex2d();
@@ -94,7 +94,7 @@ bool CInteractiveAnnulusSegmentShape::OnMouseButton(istd::CIndex2d position, Qt:
 			i2d::CVector2d delta2;
 			delta2.Init(objectPtr->GetEndAngle(), middleRadius);
 
-			const i2d::ITransformation2d* calibrationPtr = objectPtr->GetCalibration();
+			const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
 			istd::CIndex2d ticker3 = GetScreenPosition(center + delta1, calibrationPtr).ToIndex2d();
 			istd::CIndex2d ticker4 = GetScreenPosition(center + delta2, calibrationPtr).ToIndex2d();
@@ -133,7 +133,7 @@ bool CInteractiveAnnulusSegmentShape::OnMouseMove(istd::CIndex2d position)
 		i2d::CAnnulusSegment* objectPtr = dynamic_cast<i2d::CAnnulusSegment*>(modelPtr);
 		I_ASSERT(objectPtr != NULL);
 
-		const i2d::ITransformation2d* calibrationPtr = objectPtr->GetCalibration();
+		const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
 		i2d::CVector2d cp = GetLogPosition(position, calibrationPtr);
 
@@ -205,7 +205,7 @@ void CInteractiveAnnulusSegmentShape::Draw(QPainter& drawContext) const
 	const i2d::CAnnulusSegment* objectPtr = dynamic_cast<const i2d::CAnnulusSegment*>(modelPtr);
 	I_ASSERT(objectPtr != NULL);
 
-	const i2d::ITransformation2d* calibrationPtr = objectPtr->GetCalibration();
+	const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
 	const IColorShema& colorShema = GetColorShema();
 	const i2d::CVector2d& center = objectPtr->GetPosition();
@@ -287,7 +287,7 @@ ITouchable::TouchState CInteractiveAnnulusSegmentShape::IsTouched(istd::CIndex2d
 	const i2d::CAnnulusSegment* objectPtr = dynamic_cast<const i2d::CAnnulusSegment*>(modelPtr);
 	I_ASSERT(objectPtr != NULL);
 
-	const i2d::ITransformation2d* calibrationPtr = objectPtr->GetCalibration();
+	const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
 	const IColorShema& colorShema = GetColorShema();
 

@@ -173,6 +173,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralUnitInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSampledFunction2d.cpp"
 				>
 			</File>
@@ -206,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CGeneralUnitInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSampledFunction2d.h"
 				>
 			</File>
@@ -223,6 +231,10 @@
 			</File>
 			<File
 				RelativePath="..\imath.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IUnitInfo.h"
 				>
 			</File>
 			<File

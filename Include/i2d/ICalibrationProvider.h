@@ -5,7 +5,7 @@
 // ACF includes
 #include "istd/IChangeable.h"
 
-#include "i2d/ITransformation2d.h"
+#include "i2d/ICalibration2d.h"
 
 
 namespace i2d
@@ -22,7 +22,7 @@ public:
 		Get access to transformation object, which transforms a local logical coordinate system to global one.
 		\return		Pointer to transformation if it is accessible, or NULL.
 	*/
-	virtual const i2d::ITransformation2d* GetCalibration() const = 0;
+	virtual const ICalibration2d* GetCalibration() const = 0;
 };
 
 

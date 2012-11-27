@@ -99,7 +99,7 @@ bool CInteractiveAnnulusShape::OnMouseButton(istd::CIndex2d position, Qt::MouseB
 
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(GetModelPtr());
 	if (annulusPtr != NULL){
-		const i2d::ITransformation2d* calibrationPtr = annulusPtr->GetCalibration();
+		const i2d::ICalibration2d* calibrationPtr = annulusPtr->GetCalibration();
 
 		if (downFlag && IsEditableRadius()){
 			const IColorShema& colorShema = GetColorShema();
@@ -163,7 +163,7 @@ bool CInteractiveAnnulusShape::OnMouseMove(istd::CIndex2d position)
 	i2d::CAnnulus& annulus = *dynamic_cast<i2d::CAnnulus*>(modelPtr);
 	I_ASSERT(&annulus != NULL);
 
-	const i2d::ITransformation2d* calibrationPtr = annulus.GetCalibration();
+	const i2d::ICalibration2d* calibrationPtr = annulus.GetCalibration();
 
 	const i2d::CVector2d& cp = GetLogPosition(position, calibrationPtr);
 	const i2d::CVector2d& center = annulus.GetPosition();
@@ -194,7 +194,7 @@ void CInteractiveAnnulusShape::Draw(QPainter& drawContext) const
 	const i2d::CAnnulus& annulus = *dynamic_cast<const i2d::CAnnulus*>(modelPtr);
 	I_ASSERT(&annulus != NULL);
 
-	const i2d::ITransformation2d* calibrationPtr = annulus.GetCalibration();
+	const i2d::ICalibration2d* calibrationPtr = annulus.GetCalibration();
 	const iview::CScreenTransform& viewToScreenTransform = GetViewToScreenTransform();
 
 	const IColorShema& colorShema = GetColorShema();
@@ -289,7 +289,7 @@ ITouchable::TouchState CInteractiveAnnulusShape::IsTouched(istd::CIndex2d positi
 	const i2d::CAnnulus& annulus = *dynamic_cast<const i2d::CAnnulus*>(modelPtr);
 	I_ASSERT(&annulus != NULL);
 
-	const i2d::ITransformation2d* calibrationPtr = annulus.GetCalibration();
+	const i2d::ICalibration2d* calibrationPtr = annulus.GetCalibration();
 
 	const IColorShema& colorShema = GetColorShema();
 
@@ -385,7 +385,7 @@ i2d::CRect CInteractiveAnnulusShape::CalcBoundingBox() const
 	if (annulusPtr != NULL){
 		const IColorShema& colorShema = GetColorShema();
 
-		const i2d::ITransformation2d* calibrationPtr = annulusPtr->GetCalibration();
+		const i2d::ICalibration2d* calibrationPtr = annulusPtr->GetCalibration();
 		const iview::CScreenTransform& viewToScreenTransform = GetViewToScreenTransform();
 
 		i2d::CVector2d center = annulusPtr->GetPosition();

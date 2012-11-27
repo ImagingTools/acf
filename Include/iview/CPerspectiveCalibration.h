@@ -5,7 +5,7 @@
 // ACF includes
 #include "i3d/CVector3d.h"
 
-#include "i2d/ITransformation2d.h"
+#include "i2d/CNoneCalibration2d.h"
 #include "i2d/CAffine2d.h"
 #include "i2d/CRectangle.h"
 
@@ -22,7 +22,7 @@ namespace iview
 	Please note, that logical coordination system represents only finite
 	rectangle area, you can set using SetBounds(const i2d::CRectangle&) method.
 */
-class CPerspectiveCalibration: virtual public i2d::ITransformation2d
+class CPerspectiveCalibration: virtual public i2d::CNoneCalibration2d
 {
 public:
 	CPerspectiveCalibration();
@@ -91,7 +91,6 @@ public:
 				const i2d::CVector2d& transfPosition,
 				i2d::CAffine2d& result,
 				ExactnessMode mode = EM_NONE) const;
-	virtual const i2d::ITransformation2d* CreateCombinedTransformation(const i2d::ITransformation2d& transform) const;
 
 	// reimplemented (imath::TISurjectFunction)
 	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;

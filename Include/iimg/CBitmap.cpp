@@ -72,7 +72,7 @@ bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, 
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CBitmap::GetCalibration() const
+const i2d::ICalibration2d* CBitmap::GetCalibration() const
 {
 	EnsureLogTransformCalculated();
 

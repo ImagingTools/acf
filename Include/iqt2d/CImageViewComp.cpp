@@ -13,7 +13,7 @@ namespace iqt2d
 
 // reimplemented (i2d::ICalibrationProvider)
 
-const i2d::ITransformation2d* CImageViewComp::GetCalibration() const
+const i2d::ICalibration2d* CImageViewComp::GetCalibration() const
 {
 	const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetModelPtr());
 	if (calibrationProviderPtr != NULL){
@@ -41,7 +41,7 @@ void CImageViewComp::UpdateGui(int /*updateFlags*/)
 	}
 
 	if (*m_useBitmapCalibrationAttrPtr){
-		const i2d::ITransformation2d* transformationPtr = NULL;
+		const i2d::ICalibration2d* transformationPtr = NULL;
 		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetModelPtr());
 		if (calibrationProviderPtr != NULL){
 			transformationPtr = calibrationProviderPtr->GetCalibration();

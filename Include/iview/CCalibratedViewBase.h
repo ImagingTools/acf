@@ -7,12 +7,9 @@
 
 // ACF includes
 #include "istd/TOptDelPtr.h"
-
 #include "i2d/CRect.h"
-
-#include "i2d/ITransformation2d.h"
+#include "i2d/ICalibration2d.h"
 #include "iview/IVisualCalibrationInfo.h"
-#include "iview/CNoneCalibration.h"
 #include "iview/CViewBase.h"
 #include "iview/CDrawBuffer.h"
 #include "iview/CColorShema.h"
@@ -40,7 +37,7 @@ public:
 	/**
 		Set calibration object for this view.
 	*/
-	void SetCalibrationPtr(const i2d::ITransformation2d* calibrationPtr);
+	void SetCalibrationPtr(const i2d::ICalibration2d* calibrationPtr);
 
 	/**
 		Set grid visibility state.
@@ -107,7 +104,7 @@ public:
 	virtual bool IsGridInMm() const;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 	using BaseClass::InvalidateBackground;
 
@@ -126,7 +123,7 @@ private:
 
 	i2d::CRect m_lastClientArea;
 
-	const i2d::ITransformation2d* m_calibrationPtr;
+	const i2d::ICalibration2d* m_calibrationPtr;
 	bool m_isGridVisible;
 	bool m_isGridInMm;
 	double m_minGridDistance;
@@ -195,7 +192,7 @@ inline bool CCalibratedViewBase::IsGridInMm() const
 
 // reimplemented (i2d::ICalibrationProvider)
 
-inline const i2d::ITransformation2d* CCalibratedViewBase::GetCalibration() const
+inline const i2d::ICalibration2d* CCalibratedViewBase::GetCalibration() const
 {
 	return m_calibrationPtr;
 }

@@ -276,10 +276,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNoneCalibration.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CNoneCalibrationShape.cpp"
 				>
 			</File>
@@ -309,14 +305,6 @@
 			</File>
 			<File
 				RelativePath="..\CPolypointShape.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibration.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibrationShape.cpp"
 				>
 			</File>
 			<File
@@ -474,10 +462,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CNoneCalibration.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CNoneCalibrationShape.h"
 				>
 			</File>
@@ -507,14 +491,6 @@
 			</File>
 			<File
 				RelativePath="..\CPolypointShape.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibration.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CScaleCalibrationShape.h"
 				>
 			</File>
 			<File

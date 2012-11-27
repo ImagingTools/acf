@@ -73,15 +73,15 @@ void CCalibrationShapeBase::OnDisconnectDisplay(iview::IDisplay* displayPtr)
 
 // protected static methods
 
-const i2d::ITransformation2d* CCalibrationShapeBase::FindCalibration(const iview::IDisplay& display)
+const i2d::ICalibration2d* CCalibrationShapeBase::FindCalibration(const iview::IDisplay& display)
 {
 	const iview::IDisplay* displayPtr = &display;
 	while (displayPtr != NULL){
 		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(displayPtr);
 		if (calibrationProviderPtr != NULL){
-			const i2d::ITransformation2d* isomorphCalibPtr = dynamic_cast<const i2d::ITransformation2d*>(calibrationProviderPtr->GetCalibration());
-			if (isomorphCalibPtr != NULL){
-				return isomorphCalibPtr;
+			const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
+			if (calibrationPtr != NULL){
+				return calibrationPtr;
 			}
 		}
 

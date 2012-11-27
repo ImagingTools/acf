@@ -44,7 +44,7 @@ iview::IShapeView* CViewProviderGuiComp::GetView() const
 
 // protected methods
 
-void CViewProviderGuiComp::SetConsoleCalibration(const i2d::ITransformation2d* calibrationPtr)
+void CViewProviderGuiComp::SetConsoleCalibration(const i2d::ICalibration2d* calibrationPtr)
 {
 	if (!IsGuiCreated()){
 		return;
@@ -138,7 +138,7 @@ void CViewProviderGuiComp::OnGuiCreated()
 void CViewProviderGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	if (m_calibrationProviderCompPtr.IsValid()){
-		const i2d::ITransformation2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+		const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
 		SetConsoleCalibration(calibrationPtr);
 	}

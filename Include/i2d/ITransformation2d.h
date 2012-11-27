@@ -155,13 +155,6 @@ public:
 				const CVector2d& transfPosition,
 				CAffine2d& result,
 				ExactnessMode mode = EM_NONE) const = 0;
-
-	/**
-		Create new transformation being combination of this transformation and the second one.
-		Please note, that created object is owned by the caller and the caller must remove them.
-		\return	new transformation object (owned by the caller) or NULL if creatiion was not possible.
-	*/
-	virtual const ITransformation2d* CreateCombinedTransformation(const ITransformation2d& transform) const = 0;
 };
 
 

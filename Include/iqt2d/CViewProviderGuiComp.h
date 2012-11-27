@@ -85,7 +85,7 @@ protected:
 	/**
 		Do console calibration.
 	*/
-	virtual void SetConsoleCalibration(const i2d::ITransformation2d* calibrationPtr);
+	virtual void SetConsoleCalibration(const i2d::ICalibration2d* calibrationPtr);
 	
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();

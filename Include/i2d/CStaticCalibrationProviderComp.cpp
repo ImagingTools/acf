@@ -9,7 +9,7 @@ namespace i2d
 
 // reimplemented (ICalibrationProvider)
 
-const i2d::ITransformation2d* CStaticCalibrationProviderComp::GetCalibration() const
+const ICalibration2d* CStaticCalibrationProviderComp::GetCalibration() const
 {
 	if (m_calibrationCompPtr.IsValid()){
 		return m_calibrationCompPtr.GetPtr();

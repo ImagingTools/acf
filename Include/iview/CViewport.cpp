@@ -177,7 +177,7 @@ bool CViewport::OnMouseMove(istd::CIndex2d position)
 	i2d::CVector2d logPosition;
 
 	const iview::CScreenTransform& logToScreenTransform = GetLogToScreenTransform();
-	const i2d::ITransformation2d* calibrationPtr = GetCalibration();
+	const i2d::ICalibration2d* calibrationPtr = GetCalibration();
 	if (calibrationPtr != NULL){
 		calibrationPtr->GetInvPositionAt(pixelPosition, logPosition);
 	}

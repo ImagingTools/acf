@@ -23,10 +23,10 @@ public:
 	/**
 		Set calibration of this object.
 	*/
-	virtual void SetCalibration(const ITransformation2d* calibrationPtr);
+	virtual void SetCalibration(const ICalibration2d* calibrationPtr);
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const ITransformation2d* GetCalibration() const;
+	virtual const ICalibration2d* GetCalibration() const;
 
 	// reimplemented (i2d::IObject2d)
 	virtual bool Transform(
@@ -49,7 +49,7 @@ public:
 				double* errorFactorPtr = NULL) const;
 
 private:
-	const ITransformation2d* m_calibrationPtr;
+	const ICalibration2d* m_calibrationPtr;
 };
 
 

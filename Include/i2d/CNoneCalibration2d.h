@@ -1,18 +1,27 @@
-#ifndef iview_CNoneCalibration
-#define iview_CNoneCalibration
+#ifndef i2d_CNoneCalibration2d
+#define i2d_CNoneCalibration2d
 
 
-#include "i2d/ITransformation2d.h"
+// ACF includes
+#include "i2d/ICalibration2d.h"
 
 
-namespace iview
+namespace i2d
 {
 
 
-// TODO: Redesign it to ACF transformation concept.
-class CNoneCalibration: virtual public i2d::ITransformation2d
+// TODO: Redesign it to ACF calibration concept.
+/**
+	Identity calibration, no transformation will be done.
+*/
+class CNoneCalibration2d: virtual public i2d::ICalibration2d
 {
 public:
+	// reimplemented (i2d::ICalibration2d)
+	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const;
+	virtual const imath::IUnitInfo* GetResultUnitInfo() const;
+	virtual const ICalibration2d* CreateCombinedCalibration(const ICalibration2d& calibration) const;
+
 	// reimplemented (i2d::ITransformation2d)
 	virtual int GetTransformationFlags() const;
 	virtual bool GetDistance(
@@ -24,7 +33,6 @@ public:
 	virtual bool GetLocalInvTransform(const i2d::CVector2d& viewPosition, i2d::CAffine2d& result, ExactnessMode mode = EM_NONE) const;
 	virtual bool GetPositionAt(const i2d::CVector2d& viewPosition, i2d::CVector2d& result, ExactnessMode mode = EM_NONE) const;
 	virtual bool GetInvPositionAt(const i2d::CVector2d& logPosition, i2d::CVector2d& result, ExactnessMode mode = EM_NONE) const;
-	virtual const ITransformation2d* CreateCombinedTransformation(const ITransformation2d& transform) const;
 
 	// reimplemented (imath::TISurjectFunction)
 	virtual bool GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const;
@@ -38,17 +46,17 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
-	static const CNoneCalibration& GetInstance();
+	static const CNoneCalibration2d& GetInstance();
 
 private:
 	// static attributes
-	static CNoneCalibration s_defaultInstance;
+	static CNoneCalibration2d s_defaultInstance;
 };
 
 
-} // namespace iview
+} // namespace i2d
 
 
-#endif // !iview_CNoneCalibration
+#endif // !i2d_CNoneCalibration2d
 
 

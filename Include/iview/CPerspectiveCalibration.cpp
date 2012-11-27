@@ -287,12 +287,6 @@ bool CPerspectiveCalibration::GetLocalInvTransform(
 }
 
 
-const i2d::ITransformation2d* CPerspectiveCalibration::CreateCombinedTransformation(const i2d::ITransformation2d& /*transform*/) const
-{
-	return NULL;
-}
-
-
 // reimplemented (imath::TISurjectFunction)
 
 bool CPerspectiveCalibration::GetInvValueAt(const i2d::CVector2d& argument, i2d::CVector2d& result) const

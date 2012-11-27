@@ -2,9 +2,10 @@
 #define i2d_CStaticCalibrationProviderComp_included
 
 
-#include "i2d/ICalibrationProvider.h"
-
+// ACF includes
 #include "icomp/CComponentBase.h"
+#include "i2d/ICalibration2d.h"
+#include "i2d/ICalibrationProvider.h"
 
 
 namespace i2d
@@ -28,10 +29,10 @@ public:
 
 protected:
 	// reimplemented (ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const ICalibration2d* GetCalibration() const;
 
 private:
-	I_REF(ITransformation2d, m_calibrationCompPtr);
+	I_REF(ICalibration2d, m_calibrationCompPtr);
 };
 
 

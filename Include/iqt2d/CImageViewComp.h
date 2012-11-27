@@ -4,16 +4,12 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-
-#include "i2d/ICalibrationProvider.h"
-
 #include "ibase/TModelObserverCompWrap.h"
-
+#include "i2d/ICalibration2d.h"
+#include "i2d/ICalibrationProvider.h"
 #include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TGuiObserverWrap.h"
-
 #include "iview/CImageShape.h"
-
 #include "iqt2d/CViewProviderGuiComp.h"
 
 
@@ -43,7 +39,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ITransformation2d* GetCalibration() const;
+	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)

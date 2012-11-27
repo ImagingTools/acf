@@ -12,13 +12,17 @@ namespace i2d
 // public methods
 
 CAffineTransformation2d::CAffineTransformation2d()
+:	m_argumentUnitInfoPtr(NULL),
+	m_resultUnitInfoPtr(NULL)
 {
 	m_transformation.Reset();
 }
 
 
 CAffineTransformation2d::CAffineTransformation2d(const i2d::CAffine2d& transformation)
-	:m_transformation(transformation)
+:	m_transformation(transformation),
+	m_argumentUnitInfoPtr(NULL),
+	m_resultUnitInfoPtr(NULL)
 {
 }
 
@@ -66,6 +70,47 @@ void CAffineTransformation2d::Reset(const CVector2d& translation, double angle, 
 	istd::CChangeNotifier changePtr(this);
 
 	m_transformation.Reset(translation, angle, scale);
+}
+
+
+void CAffineTransformation2d::SetArgumentUnitInfo(const imath::IUnitInfo* unitInfoPtr)
+{
+	m_argumentUnitInfoPtr = unitInfoPtr;
+}
+
+
+void CAffineTransformation2d::SetResultUnitInfo(const imath::IUnitInfo* unitInfoPtr)
+{
+	m_resultUnitInfoPtr = unitInfoPtr;
+}
+
+
+// reimplemented (i2d::ICalibration2d)
+
+const imath::IUnitInfo* CAffineTransformation2d::GetArgumentUnitInfo() const
+{
+	return m_argumentUnitInfoPtr;
+}
+
+
+const imath::IUnitInfo* CAffineTransformation2d::GetResultUnitInfo() const
+{
+	return m_resultUnitInfoPtr;
+}
+
+
+const ICalibration2d* CAffineTransformation2d::CreateCombinedCalibration(const ICalibration2d& calibration) const
+{
+	const CAffineTransformation2d* affineTransformPtr = dynamic_cast<const CAffineTransformation2d*>(&calibration);
+	if (affineTransformPtr != NULL){
+		i2d::CAffine2d combinedTransform;
+
+		m_transformation.GetApply(affineTransformPtr->m_transformation, combinedTransform);
+
+		return new CAffineTransformation2d(combinedTransform);;
+	}
+
+	return NULL;
 }
 
 
@@ -126,21 +171,6 @@ bool CAffineTransformation2d::GetLocalInvTransform(
 			ExactnessMode /*mode*/) const
 {
 	return m_transformation.GetInverted(result);
-}
-
-
-const ITransformation2d* CAffineTransformation2d::CreateCombinedTransformation(const ITransformation2d& transform) const
-{
-	const CAffineTransformation2d* affineTransformPtr = dynamic_cast<const CAffineTransformation2d*>(&transform);
-	if (affineTransformPtr != NULL){
-		CAffineTransformation2d* combinedPtr = new CAffineTransformation2d();
-
-		m_transformation.GetApply(affineTransformPtr->m_transformation, combinedPtr->m_transformation);
-
-		return combinedPtr;
-	}
-
-	return NULL;
 }
 
 

@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
 #include "i2d/CAffine2d.h"
 
@@ -23,7 +24,7 @@ void CImagePropertiesFrameComp::UpdateGui(int /*updateFlags*/)
 		SizeLabel->setText(QString("%1x%2").arg(bitmapPtr->GetImageSize().GetX()).arg(bitmapPtr->GetImageSize().GetY()));
 		DepthLabel->setText(QString("%1 bits").arg(bitmapPtr->GetComponentBitsCount() * bitmapPtr->GetComponentsCount()));
 
-		const i2d::ITransformation2d* calibrationPtr = NULL;
+		const i2d::ICalibration2d* calibrationPtr = NULL;
 		i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<i2d::ICalibrationProvider*>(bitmapPtr);
 		if (calibrationProviderPtr != NULL){
 			calibrationPtr = calibrationProviderPtr->GetCalibration();

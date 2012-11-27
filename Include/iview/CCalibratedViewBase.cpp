@@ -6,7 +6,7 @@
 
 // ACF includes
 #include "i2d/CRectangle.h"
-
+#include "i2d/CNoneCalibration2d.h"
 #include "iview/IViewRulersAccessor.h"
 #include "iview/IColorShema.h"
 #include "iview/IVisualizable.h"
@@ -19,7 +19,7 @@ namespace iview
 // public methods
 
 CCalibratedViewBase::CCalibratedViewBase()
-:	m_calibrationPtr(&CNoneCalibration::GetInstance()),
+:	m_calibrationPtr(&i2d::CNoneCalibration2d::GetInstance()),
 	m_isGridVisible(false),
 	m_isGridInMm(true),
 	m_minGridDistance(10)
@@ -31,14 +31,14 @@ CCalibratedViewBase::CCalibratedViewBase()
 }
 
 
-void CCalibratedViewBase::SetCalibrationPtr(const i2d::ITransformation2d* calibrationPtr)
+void CCalibratedViewBase::SetCalibrationPtr(const i2d::ICalibration2d* calibrationPtr)
 {
 	if (calibrationPtr != m_calibrationPtr){
 		if (calibrationPtr != NULL){
 			m_calibrationPtr = calibrationPtr;
 		}
 		else{
-			m_calibrationPtr = &CNoneCalibration::GetInstance();
+			m_calibrationPtr = &i2d::CNoneCalibration2d::GetInstance();
 		}
 
 		InvalidateBackground();
