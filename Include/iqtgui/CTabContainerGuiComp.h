@@ -8,6 +8,8 @@
 
 // ACF includes
 #include "imod/CMultiModelDispatcherBase.h"
+#include "iprm/CSelectionParam.h"
+#include "iprm/COptionsManager.h"
 
 #include "iqtgui/TGuiComponentBase.h"
 
@@ -29,6 +31,13 @@ public:
 	typedef iqtgui::TGuiComponentBase<QTabWidget> BaseClass;
 
 	I_BEGIN_COMPONENT(CTabContainerGuiComp);
+		I_REGISTER_SUBELEMENT(TabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::ISelectionParam, ExtractTabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::ISelectionConstraints, ExtractTabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::IOptionsManager, ExtractTabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iser::ISerializable, ExtractTabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, imod::IModel, ExtractTabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, istd::IChangeable, ExtractTabModel);
 		I_ASSIGN_MULTI_0(m_slaveWidgetsCompPtr, "Guis", "Slave widgets for tab window", true);
 		I_ASSIGN_MULTI_0(m_slaveWidgetsVisualCompPtr, "GuiVisualInfos", "Provide visual information for each GUI", false);
 		I_ASSIGN_TO(m_slaveWidgetsModelCompPtr, m_slaveWidgetsVisualCompPtr, false);
@@ -49,6 +58,47 @@ protected:
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
 
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
+private:
+	class TabModel:
+				public iprm::CSelectionParam,
+				public iprm::COptionsManager
+	{
+	public:
+		typedef iprm::CSelectionParam BaseClass;
+		typedef iprm::COptionsManager BaseClass2;
+
+		TabModel();
+
+		void SetParent(CTabContainerGuiComp* parentPtr);
+
+		// reimplemented (iprm::ISelectionParam)
+		virtual bool SetSelectedOptionIndex(int index);
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
+		// reimplemented (iprm::IOptionsManager)
+		virtual void SetOptionEnabled(int index, bool isEnabled = true);
+		virtual bool RemoveOption(int index);
+		virtual bool InsertOption(
+					QString& optionName,
+					const QByteArray& optionId,
+					const QString& optionDescription = QString(), 
+					int index = -1);
+
+	private:
+		CTabContainerGuiComp* m_parentPtr;
+	};
+
+	template <class InterfaceType>
+	static InterfaceType* ExtractTabModel(CTabContainerGuiComp& component)
+	{
+		return &component.m_tabModel;
+	}
+
 private:
 	I_MULTIREF(IGuiObject, m_slaveWidgetsCompPtr);
 	I_MULTIREF(IVisualStatusProvider, m_slaveWidgetsVisualCompPtr);
@@ -61,6 +111,8 @@ private:
 
 	typedef QMap<int, int> TabToGuiIndexMap;
 	TabToGuiIndexMap m_tabToGuiIndexMap;
+
+	imod::TModelWrap<TabModel> m_tabModel;
 };
 
 

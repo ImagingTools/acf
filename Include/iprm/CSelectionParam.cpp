@@ -15,7 +15,8 @@ namespace iprm
 
 
 CSelectionParam::CSelectionParam()
-:	m_selectedOptionIndex(-1)
+:	m_selectedOptionIndex(-1),
+	m_constraintsPtr(NULL)
 {
 }
 
@@ -37,7 +38,7 @@ bool CSelectionParam::SetSelectedOptionById(const QByteArray& selectedOptionId)
 		for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
 			QByteArray optionId = m_constraintsPtr->GetOptionId(optionIndex);
 
-			if (optionId == selectedOptionId){
+			if (optionId == selectedOptionId && m_constraintsPtr->IsOptionEnabled(optionIndex)){
 				return SetSelectedOptionIndex(optionIndex);
 			}
 		}
@@ -68,6 +69,10 @@ bool CSelectionParam::SetSelectedOptionIndex(int index)
 	}
 
 	if (m_selectedOptionIndex != index){
+		if ((m_constraintsPtr != NULL) && !m_constraintsPtr->IsOptionEnabled(index)){
+			return false;
+		}
+
 		istd::CChangeNotifier changeNotifier(this, CF_SELECTION_CHANGED | CF_MODEL);
 
 		m_selectedOptionIndex = index;

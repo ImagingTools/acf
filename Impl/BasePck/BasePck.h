@@ -51,6 +51,7 @@
 #include "iprm/CSelectionConstraintsComp.h"
 #include "iprm/CNameParamComp.h"
 #include "iprm/CMultiParamsManagerComp.h"
+#include "iprm/COptionsManagerComp.h"
 
 #include "i2d/CPosition2dComp.h"
 #include "i2d/CRectangleComp.h"
@@ -142,6 +143,7 @@ typedef icomp::TMakeComponentWrap<
 			imod::IModel> SampledFunction2d;
 
 typedef icomp::TModelCompWrap<iprm::CMultiParamsManagerComp> MultiParamsManager;
+typedef icomp::TModelCompWrap<iprm::COptionsManagerComp> OptionsManager;
 
 
 } // namespace BasePck

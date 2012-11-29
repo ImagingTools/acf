@@ -4,7 +4,8 @@
 
 // ACF includes
 #include "icomp/CComponentBase.h"
-#include "iprm/IOptionsManager.h"
+
+#include "iprm/COptionsManager.h"
 
 
 namespace iprm
@@ -16,66 +17,22 @@ namespace iprm
 */
 class COptionsManagerComp:
 			public icomp::CComponentBase,
-			virtual public iprm::IOptionsManager,
-			virtual public iser::ISerializable
+			public COptionsManager
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(COptionsManagerComp);
 		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
+		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(iprm::IOptionsManager);
 		I_ASSIGN(m_slaveSelectionConstraintsCompPtr, "SlaveConstraints", "Slave constraints object", false, "SlaveConstraints");
 	I_END_COMPONENT;
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
-	virtual int GetOptionsCount() const;
-	virtual QString GetOptionName(int index) const;
-	virtual QString GetOptionDescription(int index) const;
-	virtual QByteArray GetOptionId(int index) const;
-	virtual bool IsOptionEnabled(int index) const;
-
-	// reimplemented (iprm::IOptionsManager)
-	virtual void SetOptionEnabled(int index, bool isEnabled = true);
-	virtual void RemoveOption(int index);
-	virtual bool InsertOption(
-					QString& optionName,
-					const QByteArray& optionId,
-					const QString& optionDescription = QString(), 
-					int index = -	1);
-
-	// reimplemented (iser::ISerializable)
-	virtual bool Serialize(iser::IArchive& archive);
-
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
-
-private:
-	struct OptionInfo
-	{
-		OptionInfo()
-		{
-		}
-
-		OptionInfo(const QString& optionName, QByteArray optionId, const QString& optionDescription)
-			:optionName(optionName),
-			optionId(optionId),
-			optionDescription(optionDescription)
-		{
-		}
-
-		QString optionName;
-		QByteArray optionId;
-		QString optionDescription;
-		bool isEnabled;
-	};
-
-	typedef QVector<OptionInfo> Options;
-
-	Options m_options;
-
+	virtual void OnComponentDestroyed();
 
 private:
 	I_REF(iprm::ISelectionConstraints, m_slaveSelectionConstraintsCompPtr);

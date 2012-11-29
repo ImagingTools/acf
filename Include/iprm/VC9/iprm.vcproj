@@ -190,6 +190,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\COptionsManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\COptionsManagerComp.cpp"
 				>
 			</File>
@@ -256,6 +260,10 @@
 			</File>
 			<File
 				RelativePath="..\CNameParamComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\COptionsManager.h"
 				>
 			</File>
 			<File

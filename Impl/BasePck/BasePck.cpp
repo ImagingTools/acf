@@ -273,6 +273,11 @@ I_EXPORT_COMPONENT(
 			"Manager of multi parameters set",
 			"Parameters Set Multi Manager" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model Composition Parameter"));
 
+I_EXPORT_COMPONENT(
+			OptionsManager,
+			"Simple manager for a list of options",
+			"Manager Option Selection" IM_CATEGORY(I_DATA_MODEL) IM_TAG("Model"));
+
 
 } // namespace BasePck
 

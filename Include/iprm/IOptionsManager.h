@@ -1,5 +1,5 @@
-#ifndef iprm_ISelectionConstraintsController_included
-#define iprm_ISelectionConstraintsController_included
+#ifndef iprm_IOptionsManager_included
+#define iprm_IOptionsManager_included
 
 
 // ACF includes
@@ -30,11 +30,13 @@ public:
 
 	/**
 		Remove an option at the given index.
+		Returns \c true if the operation was successull.
 	*/
-	virtual void RemoveOption(int index) = 0;
+	virtual bool RemoveOption(int index) = 0;
 
 	/**
 		Insert an option with the at the given option name and ID.
+		Returns \c true if the operation was successull.
 	*/
 	virtual bool InsertOption(
 				QString& optionName,
@@ -47,6 +49,6 @@ public:
 } // namespace iprm
 
 
-#endif // !iprm_ISelectionConstraintsController_included
+#endif // !iprm_IOptionsManager_included
 
 
