@@ -360,10 +360,19 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 	retVal = retVal && archive.EndTag(paramsSetListTag);
 
+	int selectedIndex = -1;
+	if (*m_serializeSelectionAttrPtr){
+		selectedIndex = m_selectedIndex;
+	}
+
 	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index");
 	retVal = retVal && archive.BeginTag(selectedIndexTag);
-	retVal = retVal && archive.Process(m_selectedIndex);
+	retVal = retVal && archive.Process(selectedIndex);
 	retVal = retVal && archive.EndTag(selectedIndexTag);
+
+	if (*m_serializeSelectionAttrPtr && !archive.IsStoring()){
+		m_selectedIndex = selectedIndex;
+	}
 
 	return retVal;
 }

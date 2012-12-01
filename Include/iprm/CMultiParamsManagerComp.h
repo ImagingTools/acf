@@ -45,6 +45,7 @@ public:
 		I_ASSIGN_MULTI_0(m_paramSetsFactoriesPtr, "ParamSetsFactories", "List of factories for parameter sets creation", true);		
 		I_ASSIGN_MULTI_0(m_factoryNameNameAttrPtr, "ParamSetsFactorieNames", "List of names associated with the parameter factories", true);
 		I_ASSIGN_MULTI_0(m_factoryDescriptionAttrPtr, "ParamSetsFactorieDesciption", "List of descriptions associated with the parameter factories", true);
+		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
 	I_END_COMPONENT;
 
 	CMultiParamsManagerComp();	
@@ -114,13 +115,6 @@ protected:
 	bool EnsureParamExist(const QByteArray& typeId, int index, const QString& name);
 
 private:
-	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
-	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
-	I_ATTR(QString, m_defaultSetNameAttrPtr);	
-	I_MULTIFACT(iprm::IParamsSet, m_paramSetsFactoriesPtr);
-	I_MULTIATTR(QString, m_factoryNameNameAttrPtr);	
-	I_MULTIATTR(QString, m_factoryDescriptionAttrPtr);	
-
 	struct ParamSet
 	{
 		istd::TSmartPtr<IParamsSet> paramSetPtr;
@@ -137,6 +131,15 @@ private:
 	int m_selectedIndex;
 
 	TypeInfoList m_typeInfoList;
+
+private:
+	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
+	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
+	I_ATTR(QString, m_defaultSetNameAttrPtr);
+	I_MULTIFACT(iprm::IParamsSet, m_paramSetsFactoriesPtr);
+	I_MULTIATTR(QString, m_factoryNameNameAttrPtr);
+	I_MULTIATTR(QString, m_factoryDescriptionAttrPtr);
+	I_ATTR(bool, m_serializeSelectionAttrPtr);
 };
 
 
