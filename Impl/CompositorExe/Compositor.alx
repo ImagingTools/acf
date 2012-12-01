@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2630
+          2675
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="4">
+  <PositionMap count="3">
     <Element>
       <ComponentName>
         Application
@@ -64,20 +64,6 @@
       </X>
       <X>
         175
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        XpcTemplate
-      </ComponentName>
-      <X>
-        225
-      </X>
-      <X>
-        725
       </X>
       <Note>
         

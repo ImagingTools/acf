@@ -26,16 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="3">
+  <ElementsList count="6">
     <Element>
       <Id>
         Application
       </Id>
       <PackageId>
-        CompositorVoce
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        CompositorApplication
+        MultiDocApp
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -44,7 +44,83 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="22">
+          <AttributeInfo>
+            <Id>
+              AboutDialogTitle
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                About XPC Editor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              AllowViewRepeating
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ApplicationName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF Package Configuration Editor
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              CompanyName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ImagingTools
+              </Value>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DocumentTemplates
@@ -61,17 +137,17 @@
               </IsEnabled>
               <Values count="1">
                 <Value>
-                  CompositorTemplate
+                  XpcTemplate
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Log
+              IconPath
             </Id>
             <Type>
-              Reference
+              String
             </Type>
             <ExportId>
               
@@ -81,13 +157,127 @@
                 true
               </IsEnabled>
               <Value>
-                MainWindowComponents/LogDock
+                :/Icons/XpcEditorIcon.svg
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MainWindowsComponents
+              IconSize
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                32
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsCopyPathVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsOpenContainingFolderVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsTabbedDockAllowed
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                true
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LegalCopyright
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                &#169; Copyright 2012 Witold Gantzke &amp; Kirill Lepskiy&#10;All rights reserved&#10;&#10;This tool is a part of ACF project&#10;See 'License.txt' for license information
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              LogoPath
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Images/XpcEditorIcon.svg
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowComponents
             </Id>
             <Type>
               Reference[]
@@ -99,52 +289,54 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="6">
+              <Values count="1">
                 <Value>
-                  MainWindowComponents/AttributeEditorDock
-                </Value>
-                <Value>
-                  MainWindowComponents/LogDock
-                </Value>
-                <Value>
-                  MainWindowComponents/PackageOverviewDock
-                </Value>
-                <Value>
-                  MainWindowComponents/QuickHelpDock
-                </Value>
-                <Value>
-                  MainWindowComponents/ComponentNoteEditorDock
-                </Value>
-                <Value>
-                  MainWindowComponents/WindowsListCommands
+                  LogDock
                 </Value>
               </Values>
             </Data>
           </AttributeInfo>
-        </AttributeInfoMap>
-      </Data>
-    </Element>
-    <Element>
-      <Id>
-        CompositorTemplate
-      </Id>
-      <PackageId>
-        CompositorVoce
-      </PackageId>
-      <ComponentId>
-        CompositorTemplate
-      </ComponentId>
-      <Data>
-        <IsEnabled>
-          true
-        </IsEnabled>
-        <Flags>
-          0
-        </Flags>
-        <AttributeInfoMap count="6">
           <AttributeInfo>
             <Id>
-              DocumentManager
+              MaxRecentFiles
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                20
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ProductName
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                ACF
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              RememberOpenDocumentsOnExit
             </Id>
             <Type>
               Reference
@@ -157,13 +349,89 @@
                 true
               </IsEnabled>
               <Value>
-                Application/DocumentManager
+                RememberDocumentList
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              Log
+              ShowAboutProductName
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowSplashApplicationName
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowSplashProductName
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                false
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashScreenImage
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                :/Images/CompositorSplashScreen
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TranslationManager
             </Id>
             <Type>
               Reference
@@ -176,73 +444,8 @@
                 true
               </IsEnabled>
               <Value>
-                MainWindowComponents/LogDock
+                TranslationManager
               </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              PreviewCommandFile
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application/PreviewCommandFile
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              QuickHelpGui
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                MainWindowComponents/QuickHelpDock
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              RegistrySelectionObservers
-            </Id>
-            <Type>
-              Reference[]
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Values count="3">
-                <Value>
-                  MainWindowComponents/AttributeEditorDock
-                </Value>
-                <Value>
-                  MainWindowComponents/PackageOverviewDock
-                </Value>
-                <Value>
-                  MainWindowComponents/ComponentNoteEditorDock
-                </Value>
-              </Values>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -260,7 +463,7 @@
                 true
               </IsEnabled>
               <Value>
-                Application
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -269,13 +472,13 @@
     </Element>
     <Element>
       <Id>
-        MainWindowComponents
+        LogDock
       </Id>
       <PackageId>
-        CompositorVoce
+        AcfGuiVoce
       </PackageId>
       <ComponentId>
-        CompositorDockWidgets
+        LogDock
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -284,7 +487,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="2">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -306,7 +509,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              ConfigFilePath
+              VersionInfo
             </Id>
             <Type>
               Reference
@@ -319,16 +522,37 @@
                 true
               </IsEnabled>
               <Value>
-                Application/ConfigFile
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        RememberDocumentList
+      </Id>
+      <PackageId>
+        BasePck
+      </PackageId>
+      <ComponentId>
+        EnableableParam
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              ConsistencyInfo
+              DefaultEnabled
             </Id>
             <Type>
-              Reference
+              Boolean
             </Type>
             <ExportId>
               
@@ -338,29 +562,89 @@
                 true
               </IsEnabled>
               <Value>
-                CompositorTemplate
+                true
               </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        TranslationManager
+      </Id>
+      <PackageId>
+        CompositorVoce
+      </PackageId>
+      <ComponentId>
+        CompositorTranslationManager
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="0">
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        VersionInfo
+      </Id>
+      <PackageId>
+        AcfVoce
+      </PackageId>
+      <ComponentId>
+        VersionInfo
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="1">
           <AttributeInfo>
             <Id>
-              DocuEditorFileParam
+              Log
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                Application/HtmlEditorFile
-              </Value>
             </Data>
           </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        XpcTemplate
+      </Id>
+      <PackageId>
+        CompositorVoce
+      </PackageId>
+      <ComponentId>
+        XpcTemplate
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="4">
           <AttributeInfo>
             <Id>
               DocumentManager
@@ -376,65 +660,40 @@
                 true
               </IsEnabled>
               <Value>
-                Application/DocumentManager
+                Application/Workspace
               </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              EnvironmentManager
+              EnableVerbose
             </Id>
             <Type>
-              Reference
+              Boolean
             </Type>
             <ExportId>
-              
+              EnableVerbose
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                CompositorTemplate
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              MetaInfoManager
+              Log
             </Id>
             <Type>
               Reference
             </Type>
             <ExportId>
-              
+              Log
             </ExportId>
             <Data>
               <IsEnabled>
-                true
+                false
               </IsEnabled>
-              <Value>
-                CompositorTemplate
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              TechDocuViewerFileParam
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application/HtmlBrowserFile
-              </Value>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
@@ -452,26 +711,7 @@
                 true
               </IsEnabled>
               <Value>
-                Application
-              </Value>
-            </Data>
-          </AttributeInfo>
-          <AttributeInfo>
-            <Id>
-              WindowsList
-            </Id>
-            <Type>
-              Reference
-            </Type>
-            <ExportId>
-              
-            </ExportId>
-            <Data>
-              <IsEnabled>
-                true
-              </IsEnabled>
-              <Value>
-                Application/DocumentSelection
+                VersionInfo
               </Value>
             </Data>
           </AttributeInfo>
@@ -494,9 +734,9 @@
   <ExportedComponents count="0">
   </ExportedComponents>
   <Description>
-    Compositor tool - graphical editor for ACF registry files
+    
   </Description>
   <Keywords>
-    ACF Editor ARX Company='ImagingTools' Project='ACF' Author='"Witold Gantzke" "Kirill Lepskiy"' Category='Tool' Tag='Compositor'
+    
   </Keywords>
 </Acf>

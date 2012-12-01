@@ -26,58 +26,16 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="11">
+  <PositionMap count="6">
     <Element>
       <ComponentName>
-        HtmlBrowserFileGui
+        Application
       </ComponentName>
-      <X>
-        500
-      </X>
-      <X>
-        500
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        DocumentPersistenceGui
-      </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        500
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Settings
-      </ComponentName>
-      <X>
-        500
-      </X>
       <X>
         675
       </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SettingsDialog
-      </ComponentName>
       <X>
-        200
-      </X>
-      <X>
-        675
+        325
       </X>
       <Note>
         
@@ -85,10 +43,10 @@
     </Element>
     <Element>
       <ComponentName>
-        PreviewCommandFileInfo
+        XpcTemplate
       </ComponentName>
       <X>
-        775
+        350
       </X>
       <X>
         175
@@ -99,55 +57,27 @@
     </Element>
     <Element>
       <ComponentName>
-        SettingsGui
+        LogDock
       </ComponentName>
+      <X>
+        975
+      </X>
       <X>
         175
       </X>
-      <X>
-        400
-      </X>
       <Note>
         
       </Note>
     </Element>
     <Element>
       <ComponentName>
-        LanguageSelectionGui
+        TranslationManager
       </ComponentName>
-      <X>
-        1050
-      </X>
-      <X>
-        275
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SettingsPersistence
-      </ComponentName>
-      <X>
-        800
-      </X>
       <X>
         675
       </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        HtmlEditorFileGui
-      </ComponentName>
       <X>
-        775
-      </X>
-      <X>
-        500
+        525
       </X>
       <Note>
         
@@ -155,13 +85,13 @@
     </Element>
     <Element>
       <ComponentName>
-        PreviewCommandFileGui
+        RememberDocumentList
       </ComponentName>
       <X>
-        775
+        975
       </X>
       <X>
-        275
+        525
       </X>
       <Note>
         
@@ -169,13 +99,13 @@
     </Element>
     <Element>
       <ComponentName>
-        ConfigEditor
+        VersionInfo
       </ComponentName>
       <X>
-        450
+        675
       </X>
       <X>
-        275
+        50
       </X>
       <Note>
         
