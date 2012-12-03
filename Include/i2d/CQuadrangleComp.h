@@ -2,9 +2,9 @@
 #define i2d_CQuadrangleComp_included
 
 
+// ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CQuadrangle.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -15,10 +15,10 @@ namespace i2d
 	Implementation of a quadrangle as a component.
 	It gives the possibility to define a quadrangle model via component attributes.
 */
-class CQuadrangleComp: public icomp::CComponentBase, public CQuadrangle
+class CQuadrangleComp: public TObject2dCompWrap<CQuadrangle>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TObject2dCompWrap<CQuadrangle> BaseClass;
 
 	I_BEGIN_COMPONENT(CQuadrangleComp);
 		I_REGISTER_INTERFACE(CQuadrangle);

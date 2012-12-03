@@ -3,8 +3,7 @@
 
 
 // ACF includes
-#include "icomp/CComponentBase.h"
-
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CTubePolyline.h"
 
 
@@ -15,17 +14,13 @@ namespace i2d
 /**
 	Component definition of the tube region based on a polyline.
 */
-class CTubePolylineComp:
-			public icomp::CComponentBase,
-			public CTubePolyline
+class CTubePolylineComp: public TObject2dCompWrap<CTubePolyline>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-	typedef CTubePolyline BaseClass2;
+	typedef TObject2dCompWrap<CTubePolyline> BaseClass;
 
 	I_BEGIN_COMPONENT(CTubePolylineComp);
-		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_REGISTER_INTERFACE(IObject2d);
+		I_REGISTER_INTERFACE(CTubePolyline);
 		I_ASSIGN(m_minTubeRangeValueAttrPtr, "DefaultLeftTubeRange", "Default left tube range value", false, -10);
 		I_ASSIGN(m_maxTubeRangeValueAttrPtr, "DefaultRightTubeRange", "Default right tube range value", false, 10);
 	I_END_COMPONENT;

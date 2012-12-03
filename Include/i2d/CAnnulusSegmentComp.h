@@ -2,9 +2,9 @@
 #define i2d_CAnnulusSegmentComp_included
 
 
+// ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CAnnulusSegment.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -15,10 +15,10 @@ namespace i2d
 	Implementation of a annulus segment as a component.
 	It gives the possibility to define a annulus segment model via component attributes.
 */
-class CAnnulusSegmentComp: public icomp::CComponentBase, public CAnnulusSegment
+class CAnnulusSegmentComp: public TObject2dCompWrap<CAnnulusSegment>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TObject2dCompWrap<CAnnulusSegment> BaseClass;
 
 	I_BEGIN_COMPONENT(CAnnulusSegmentComp);
 		I_REGISTER_INTERFACE(CAnnulusSegment);

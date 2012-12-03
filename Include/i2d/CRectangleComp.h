@@ -2,9 +2,9 @@
 #define i2d_CRectangleComp_included
 
 
+// ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CRectangle.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -15,10 +15,10 @@ namespace i2d
 	Implementation of a rectangle as a component.
 	It gives the possibility to define a rectangle model via component attributes.
 */
-class CRectangleComp: public icomp::CComponentBase, public CRectangle
+class CRectangleComp: public TObject2dCompWrap<CRectangle>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TObject2dCompWrap<CRectangle> BaseClass;
 
 	I_BEGIN_COMPONENT(CRectangleComp);
 		I_REGISTER_INTERFACE(CRectangle);

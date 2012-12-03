@@ -3,9 +3,8 @@
 
 
 // ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CPolyline.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -16,11 +15,10 @@ namespace i2d
 	Implementation of a poly-line as a component.
 	It gives the possibility to define a list of polyline points via component attributes.
 */
-class CPolylineComp: public icomp::CComponentBase, public CPolyline
+class CPolylineComp: public TObject2dCompWrap<CPolyline>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-	typedef CPolyline BaseClass2;
+	typedef TObject2dCompWrap<CPolyline> BaseClass;
 
 	I_BEGIN_COMPONENT(CPolylineComp);
 		I_REGISTER_INTERFACE(CPolyline);

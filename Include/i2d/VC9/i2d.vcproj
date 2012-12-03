@@ -521,6 +521,10 @@
 				RelativePath="..\TDataNodePolyline.h"
 				>
 			</File>
+			<File
+				RelativePath="..\TObject2dCompWrap.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

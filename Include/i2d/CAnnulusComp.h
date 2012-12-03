@@ -2,9 +2,9 @@
 #define i2d_CAnnulusComp_included
 
 
+// ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CAnnulus.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -15,16 +15,14 @@ namespace i2d
 	Implementation of a annulus as a component.
 	It gives the possibility to define a annulus model via component attributes.
 */
-class CAnnulusComp: public icomp::CComponentBase, public i2d::CAnnulus
+class CAnnulusComp: public TObject2dCompWrap<CAnnulus>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TObject2dCompWrap<CAnnulus> BaseClass;
 
 	I_BEGIN_COMPONENT(CAnnulusComp);
 		I_REGISTER_INTERFACE(i2d::CAnnulus);
 		I_REGISTER_INTERFACE(CPosition2d);
-		I_REGISTER_INTERFACE(IObject2d);
-		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_centerXAttrPtr, "X", "X-Position of the annulus center", true, 0);
 		I_ASSIGN(m_centerYAttrPtr, "Y", "X-Position of the annulus center", true, 0);
 		I_ASSIGN(m_innerRadiusAttrPtr, "InnerRadius", "Inner radius of the annulus", true, 0);

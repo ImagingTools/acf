@@ -3,9 +3,8 @@
 
 
 // ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CPolygon.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -16,16 +15,13 @@ namespace i2d
 	Implementation of a polygon as a component.
 	It gives the possibility to define a polygonal model via component attributes.
 */
-class CPolygonComp: public icomp::CComponentBase, public CPolygon
+class CPolygonComp: public TObject2dCompWrap<CPolygon>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
-	typedef CPolygon BaseClass2;
+	typedef TObject2dCompWrap<CPolygon> BaseClass;
 
 	I_BEGIN_COMPONENT(CPolygonComp);
 		I_REGISTER_INTERFACE(CPolygon);
-		I_REGISTER_INTERFACE(IObject2d);
-		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_xAttrPtr, "X", "X-Positions of the polygon points", true);
 		I_ASSIGN_MULTI_0(m_yAttrPtr, "Y", "Y-Positions of the polygon points", true);
 	I_END_COMPONENT;

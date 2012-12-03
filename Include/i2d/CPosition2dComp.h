@@ -2,9 +2,9 @@
 #define i2d_CPosition2dComp_included
 
 
+// ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CPosition2d.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -15,15 +15,13 @@ namespace i2d
 	Implementation of a 2D-position as a component.
 	It gives the possibility to define a 2D-position model via component attributes.
 */
-class CPosition2dComp: public icomp::CComponentBase, public i2d::CPosition2d
+class CPosition2dComp: public TObject2dCompWrap<CPosition2d>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TObject2dCompWrap<CPosition2d> BaseClass;
 
 	I_BEGIN_COMPONENT(CPosition2dComp);
 		I_REGISTER_INTERFACE(i2d::CPosition2d);
-		I_REGISTER_INTERFACE(IObject2d);
-		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_xAttrPtr, "X", "X-Position", true, 0);
 		I_ASSIGN(m_yAttrPtr, "Y", "Y-Position", true, 0);
 	I_END_COMPONENT;

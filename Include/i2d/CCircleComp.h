@@ -2,9 +2,9 @@
 #define i2d_CCircleComp_included
 
 
+// ACF includes
+#include "i2d/TObject2dCompWrap.h"
 #include "i2d/CCircle.h"
-
-#include "icomp/CComponentBase.h"
 
 
 namespace i2d
@@ -15,16 +15,14 @@ namespace i2d
 	Implementation of a circle as a component.
 	It gives the possibility to define a circle model via component attributes.
 */
-class CCircleComp: public icomp::CComponentBase, public CCircle
+class CCircleComp: public TObject2dCompWrap<CCircle>
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef TObject2dCompWrap<CCircle> BaseClass;
 
 	I_BEGIN_COMPONENT(CCircleComp);
 		I_REGISTER_INTERFACE(CCircle);
 		I_REGISTER_INTERFACE(CPosition2d);
-		I_REGISTER_INTERFACE(IObject2d);
-		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN(m_centerXAttrPtr, "X", "X-Position of the circle center", true, 0);
 		I_ASSIGN(m_centerYAttrPtr, "Y", "Y-Position of the circle center", true, 0);
 		I_ASSIGN(m_radiusAttrPtr, "Radius", "Radius of the circle", true, 0);
