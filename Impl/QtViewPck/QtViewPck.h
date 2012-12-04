@@ -15,6 +15,7 @@
 #include "iqt2d/CLine2dParamsGuiComp.h"
 #include "iqt2d/CRectangleParamsGuiComp.h"
 #include "iqt2d/CCircleParamsGuiComp.h"
+#include "iqt2d/COrientedCircleEditorComp.h"
 #include "iqt2d/CAnnulusParamsGuiComp.h"
 #include "iqt2d/CAnnulusSegmentParamsGuiComp.h"
 #include "iqt2d/CQuadrangleParamsGuiComp.h"
@@ -44,6 +45,7 @@ typedef icomp::TModelCompWrap<iqt2d::CImageViewComp> ImageView;
 typedef iqt2d::CLine2dParamsGuiComp Line2dParamsGui;
 typedef iqt2d::CRectangleParamsGuiComp RectangleParamsGui;
 typedef iqt2d::CCircleParamsGuiComp CircleParamsGui;
+typedef iqt2d::COrientedCircleEditorComp OrientedCircleEditor;
 typedef iqt2d::CAnnulusParamsGuiComp AnnulusParamsGui;
 typedef iqt2d::CAnnulusSegmentParamsGuiComp AnnulusSegmentParamsGui;
 typedef iqt2d::CQuadrangleParamsGuiComp QuadrangleParamsGui;

@@ -58,8 +58,13 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			CircleParamsGui,
-			"Circle parameter GUI displaying a cicle using scene",
+			"Circle parameter GUI displaying a circle using scene",
 			"Circle Parameters Observer Display" IM_TAG("GUI Editor 2D"));
+
+I_EXPORT_COMPONENT(
+			OrientedCircleEditor,
+			"Oriented circle parameter GUI displaying a circle with orientation, using scene",
+			"Circle Parameters Observer Display Oriented" IM_TAG("GUI Editor 2D"));
 
 I_EXPORT_COMPONENT(
 			AnnulusParamsGui,
