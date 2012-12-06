@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2335
+          2694
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -582,29 +593,13 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="4">
+  <ExportedComponents count="2">
     <Component>
       <ExportedId>
         ApplicationInfo
       </ExportedId>
       <ComponentId>
         ApplicationInfo
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        BasePath
-      </ExportedId>
-      <ComponentId>
-        Parameters/BasePath
-      </ComponentId>
-    </Component>
-    <Component>
-      <ExportedId>
-        ClassPath
-      </ExportedId>
-      <ComponentId>
-        Parameters/ClassPath
       </ComponentId>
     </Component>
     <Component>

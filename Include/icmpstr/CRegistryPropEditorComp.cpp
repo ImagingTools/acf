@@ -5,7 +5,7 @@
 #include "istd/TChangeNotifier.h"
 
 #include "icomp/CComponentMetaDescriptionEncoder.h"
-
+#include "icomp/CCompositeComponentStaticInfo.h"
 
 // public methods
 	
@@ -27,6 +27,8 @@ void CRegistryPropEditorComp::CreateOverview()
 	// create overview infos:
 	icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr != NULL){
+		static QIcon warningIcon(":/Icons/Warning.svg");
+	
 		const icomp::IRegistry::ExportedInterfacesMap& exportedInterfaces = registryPtr->GetExportedInterfacesMap();
 		if (!exportedInterfaces.isEmpty()){
 			QTreeWidgetItem* exportedInterfacesItemPtr = new QTreeWidgetItem();
@@ -38,10 +40,16 @@ void CRegistryPropEditorComp::CreateOverview()
 			for (		icomp::IRegistry::ExportedInterfacesMap::const_iterator iter = exportedInterfaces.begin();
 						iter != exportedInterfaces.end();
 						iter++){
+
+				QByteArray componentId = iter.value();
+				QByteArray exportId = iter.key();
+					
 				QTreeWidgetItem* exportedInterfaceItemPtr = new QTreeWidgetItem();
-				exportedInterfaceItemPtr->setText(0, QString(iter.value()));
-				exportedInterfaceItemPtr->setText(1, QString(iter.key()));
-				exportedInterfacesItemPtr->addChild(exportedInterfaceItemPtr);		
+				exportedInterfaceItemPtr->setText(0, QString(componentId));
+				exportedInterfaceItemPtr->setText(1, QString(exportId));
+				exportedInterfacesItemPtr->addChild(exportedInterfaceItemPtr);
+
+				UpdateConsistencyStatus(exportedInterfaceItemPtr, *registryPtr, componentId, exportId, IT_EXPORTED_INTERFACE);
 			}
 
 			exportedInterfacesItemPtr->setExpanded(true);
@@ -58,14 +66,22 @@ void CRegistryPropEditorComp::CreateOverview()
 			for (		icomp::IRegistry::ExportedElementsMap::const_iterator iter = exportedComponents.begin();
 						iter != exportedComponents.end();
 						iter++){
+
+				QByteArray componentId = iter.value();
+				QByteArray exportId = iter.key();
+
 				QTreeWidgetItem* exportedComponentItemPtr = new QTreeWidgetItem();
-				exportedComponentItemPtr->setText(0, QString(iter.value()));
-				exportedComponentItemPtr->setText(1, QString(iter.key()));
-				exportedComponentsItemPtr->addChild(exportedComponentItemPtr);		
+				exportedComponentItemPtr->setText(0, QString(componentId));
+				exportedComponentItemPtr->setText(1, QString(exportId));
+				exportedComponentsItemPtr->addChild(exportedComponentItemPtr);
+
+				UpdateConsistencyStatus(exportedComponentItemPtr, *registryPtr, componentId, exportId, IT_EXPORTED_COMPONENT);
 			}
 
 			exportedComponentsItemPtr->setExpanded(true);
 		}
+
+		OverviewTree->sortByColumn(0, Qt::AscendingOrder);
 
 		if (m_consistInfoCompPtr.IsValid()){
 			TextLog textLog;
@@ -156,6 +172,7 @@ void CRegistryPropEditorComp::OnGuiCreated()
 	connect(CategoryEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
 	connect(TagsEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
 	connect(KeywordsEdit, SIGNAL(editingFinished()), this, SLOT(OnUpdateKeywords()));
+	connect(this, SIGNAL(AfterExportsChanged()), this, SLOT(OnUpdateExportsTree()), Qt::QueuedConnection);
 
 	OverviewTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 	OverviewTree->setStyleSheet("QTreeView {background: palette(window)} QTreeView::branch {background: palette(window);} QTreeView::item {min-height: 25px}");
@@ -164,18 +181,9 @@ void CRegistryPropEditorComp::OnGuiCreated()
 
 // protected slots
 
-void CRegistryPropEditorComp::on_DescriptionEdit_editingFinished()
+void CRegistryPropEditorComp::OnUpdateExportsTree()
 {
-	icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		QString description = DescriptionEdit->text();
-
-		if (description != registryPtr->GetDescription()){
-			istd::CChangeNotifier notifier(registryPtr);
-
-			registryPtr->SetDescription(description);
-		}
-	}
+	UpdateEditor();
 }
 
 
@@ -205,6 +213,120 @@ void CRegistryPropEditorComp::OnUpdateKeywords()
 
 			registryPtr->SetKeywords(keywords);
 		}
+	}
+}
+
+
+void CRegistryPropEditorComp::on_DescriptionEdit_editingFinished()
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		QString description = DescriptionEdit->text();
+
+		if (description != registryPtr->GetDescription()){
+			istd::CChangeNotifier notifier(registryPtr);
+
+			registryPtr->SetDescription(description);
+		}
+	}
+}
+
+
+void CRegistryPropEditorComp::on_OverviewTree_itemChanged(QTreeWidgetItem* itemPtr, int column)
+{
+	icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr == NULL){
+		return;
+	}
+
+	if (column != 0){
+		return;
+	}
+
+	if (IsUpdateBlocked()){
+		return;
+	}
+
+	UpdateBlocker updateBlocker(this);
+
+	if (itemPtr->checkState(0) == Qt::Unchecked){
+		ItemType itemType = ItemType(itemPtr->data(0, DR_ITEM_TYPE).toInt());
+		QByteArray componentId = itemPtr->data(0, DR_COMPONENT_ID).toByteArray();
+		QByteArray exportId = itemPtr->data(0, DR_EXPORT_ID).toByteArray();
+
+		if (itemType == IT_EXPORTED_INTERFACE){
+			istd::CChangeNotifier changePtr(registryPtr);
+
+			registryPtr->SetElementInterfaceExported(componentId, exportId, false);
+		}
+
+		if (itemType == IT_EXPORTED_COMPONENT){
+			istd::CChangeNotifier changePtr(registryPtr);
+
+			registryPtr->SetElementExported(exportId, "");
+		}
+	}
+
+	Q_EMIT AfterExportsChanged();
+}
+
+
+// private methods
+
+void CRegistryPropEditorComp::UpdateConsistencyStatus(
+			QTreeWidgetItem* exportedtemPtr,
+			const icomp::IRegistry& registry,
+			const QByteArray& componentId,
+			const QByteArray& exportId,
+			ItemType itemType)
+{
+	QByteArray baseId;
+	QByteArray subId;
+	istd::CIdManipBase::SplitId(componentId, baseId, subId);
+
+	bool isExportInvalid = false;
+
+	const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(baseId);
+	if (elementInfoPtr == NULL){
+		isExportInvalid = true;
+	}
+	else if (!subId.isEmpty()){
+		const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(baseId);
+		if (elementInfoPtr != NULL){
+			if (m_envManagerCompPtr.IsValid()){
+				const icomp::IComponentStaticInfo* metaInfoPtr = m_envManagerCompPtr->GetComponentMetaInfo(elementInfoPtr->address);
+
+				if (metaInfoPtr != NULL &&(metaInfoPtr->GetComponentType() == icomp::IComponentStaticInfo::CT_COMPOSITE)){
+					const icomp::CCompositeComponentStaticInfo* compositeMetaInfoPtr = dynamic_cast<const icomp::CCompositeComponentStaticInfo*>(metaInfoPtr);
+					if (compositeMetaInfoPtr != NULL){
+						const icomp::IRegistry& registry = compositeMetaInfoPtr->GetRegistry();
+						
+						if (itemType == IT_EXPORTED_INTERFACE){
+							const icomp::IRegistry::ExportedElementsMap& exportedInterfaces = registry.GetExportedInterfacesMap();
+							if (!exportedInterfaces.contains(exportId)){
+								isExportInvalid = true;
+							}
+						}
+						else if(itemType == IT_EXPORTED_COMPONENT){
+							const icomp::IRegistry::ExportedElementsMap& exportedComponents = registry.GetExportedElementsMap();
+							if (!exportedComponents.contains(subId)){
+								isExportInvalid = true;
+							}	
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (isExportInvalid){
+		exportedtemPtr->setBackgroundColor(0, Qt::yellow);
+		exportedtemPtr->setBackgroundColor(1, Qt::yellow);
+		exportedtemPtr->setFlags(exportedtemPtr->flags() | Qt::ItemIsUserCheckable);
+		exportedtemPtr->setCheckState(0, Qt::Checked);
+		exportedtemPtr->setData(0, DR_COMPONENT_ID, componentId);
+		exportedtemPtr->setData(0, DR_EXPORT_ID, exportId);
+		exportedtemPtr->setData(0, DR_ITEM_TYPE, itemType);
 	}
 }
 

@@ -37,6 +37,7 @@ public:
 	void SetComponentId(const QByteArray& id);
 
 	QString ToString() const;
+	bool FromString(const QString& address);
 
 	bool operator==(const CComponentAddress& address) const;
 	bool operator!=(const CComponentAddress& address) const;

@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="2">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2694
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264192
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -32,20 +43,6 @@
     </Element>
     <Element>
       <ComponentName>
-        AttributeEditor
-      </ComponentName>
-      <X>
-        675
-      </X>
-      <X>
-        450
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
         RegistryPropEditor
       </ComponentName>
       <X>
@@ -58,5 +55,21 @@
         
       </Note>
     </Element>
+    <Element>
+      <ComponentName>
+        AttributeEditor
+      </ComponentName>
+      <X>
+        675
+      </X>
+      <X>
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>
