@@ -188,6 +188,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CColorShemaComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CConsoleBase.cpp"
 				>
 			</File>
@@ -371,6 +375,10 @@
 			</File>
 			<File
 				RelativePath="..\CColorShemaBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CColorShemaComp.h"
 				>
 			</File>
 			<File
