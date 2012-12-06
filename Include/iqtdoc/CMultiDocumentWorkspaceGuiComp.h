@@ -51,10 +51,10 @@ public:
 		I_REGISTER_INTERFACE(idoc::IDocumentTypesInfo);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_REGISTER_SUBELEMENT(DocumentSelection);
-		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionParam, ExtractSelectionInterface);
-		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, imod::IModel, ExtractSelectionInterfaceModel);
-		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, istd::IChangeable, ExtractSelectionInterfaceChangeable);
-		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionConstraints, ExtractSelectionInterfaceConstraints);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionParam, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, imod::IModel, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, istd::IChangeable, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionConstraints, ExtractSelectionInfo);
 		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate");
 		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true);
 		I_ASSIGN(m_allowViewRepeatingAttrPtr, "AllowViewRepeating", "If enabled, multiple views for the same document are allowed", false, true);
@@ -175,11 +175,12 @@ private:
 
 	friend class imod::TModelWrap<DocumentSelectionInfo>;
 
-	static iprm::ISelectionParam* ExtractSelectionInterface(CMultiDocumentWorkspaceGuiComp& parent);
-	static imod::IModel* ExtractSelectionInterfaceModel(CMultiDocumentWorkspaceGuiComp& parent);
-	static istd::IChangeable* ExtractSelectionInterfaceChangeable(CMultiDocumentWorkspaceGuiComp& parent);
-	static iprm::ISelectionConstraints* ExtractSelectionInterfaceConstraints(CMultiDocumentWorkspaceGuiComp& parent);
-
+	// static template methods for subelement access
+	template <class InterfaceType>
+	static InterfaceType* ExtractSelectionInfo(CMultiDocumentWorkspaceGuiComp& component)
+	{
+		return &component.m_documentSelectionInfo;
+	}
 
 	iqtgui::CHierarchicalCommand m_commands;
 

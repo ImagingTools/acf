@@ -332,26 +332,6 @@ void CRegistryTreeViewComp::OnComponentDestroyed()
 }
 
 
-// static methods
-
-IElementSelectionInfo* CRegistryTreeViewComp::ExtractSelectionInterface(CRegistryTreeViewComp& component)
-{
-	return &component.m_selectionInfo;
-}
-
-
-imod::IModel* CRegistryTreeViewComp::ExtractSelectionInterfaceModel(CRegistryTreeViewComp& component)
-{
-	return &component.m_selectionInfo;
-}
-
-
-istd::IChangeable* CRegistryTreeViewComp::ExtractSelectionInterfaceChangeable(CRegistryTreeViewComp& component)
-{
-	return &component.m_selectionInfo;
-}
-
-
 // protected slots
 
 void CRegistryTreeViewComp::on_RegistryTree_itemSelectionChanged()

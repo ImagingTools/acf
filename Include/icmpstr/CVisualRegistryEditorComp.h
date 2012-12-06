@@ -51,9 +51,9 @@ public:
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(iqtgui::IGuiObject);
 		I_REGISTER_SUBELEMENT(SelectionInfo);
-		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, IElementSelectionInfo, ExtractSelectionInterface);
-		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, imod::IModel, ExtractSelectionInterfaceModel);
-		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, istd::IChangeable, ExtractSelectionInterfaceChangeable);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, IElementSelectionInfo, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, imod::IModel, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, istd::IChangeable, ExtractSelectionInfo);
 		I_ASSIGN(m_sceneProviderCompPtr, "SceneProvider", "Display view where graphical objects will be shown", true, "SceneProvider");
 		I_ASSIGN_TO(m_sceneProviderGuiCompPtr, m_sceneProviderCompPtr, true);
 		I_ASSIGN(m_registryCodeSaverCompPtr, "RegistryCodeSaver", "Export registry to C++ code file", false, "RegistryCodeSaver");
@@ -183,11 +183,6 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	// static methods
-	static IElementSelectionInfo* ExtractSelectionInterface(CVisualRegistryEditorComp& component);
-	static imod::IModel* ExtractSelectionInterfaceModel(CVisualRegistryEditorComp& component);
-	static istd::IChangeable* ExtractSelectionInterfaceChangeable(CVisualRegistryEditorComp& component);
-
 protected Q_SLOTS:
 	void OnSelectionChanged();
 
@@ -237,6 +232,13 @@ private:
 	};
 
 	friend class imod::TModelWrap<SelectionInfoImpl>;
+
+	// static template methods for subelement access
+	template <class InterfaceType>
+	static InterfaceType* ExtractSelectionInfo(CVisualRegistryEditorComp& component)
+	{
+		return &component.m_selectionInfo;
+	}
 
 	I_REF(iser::IFileLoader, m_registryCodeSaverCompPtr);
 	I_REF(IRegistryPreview, m_registryPreviewCompPtr);

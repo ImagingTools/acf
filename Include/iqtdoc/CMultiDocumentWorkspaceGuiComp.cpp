@@ -727,32 +727,6 @@ bool CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::Serialize(iser::IArc
 }
 
 
-// private static methods
-
-iprm::ISelectionParam* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterface(CMultiDocumentWorkspaceGuiComp& parent)
-{
-	return &parent.m_documentSelectionInfo;
-}
-
-
-imod::IModel* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterfaceModel(CMultiDocumentWorkspaceGuiComp& parent)
-{
-	return &parent.m_documentSelectionInfo;
-}
-
-
-istd::IChangeable* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterfaceChangeable(CMultiDocumentWorkspaceGuiComp& parent)
-{
-	return &parent.m_documentSelectionInfo;
-}
-
-
-iprm::ISelectionConstraints* CMultiDocumentWorkspaceGuiComp::ExtractSelectionInterfaceConstraints(CMultiDocumentWorkspaceGuiComp& parent)
-{
-	return &parent.m_documentSelectionInfo;
-}
-
-
 } // namespace iqtdoc
 
 

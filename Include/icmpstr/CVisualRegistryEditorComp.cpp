@@ -765,26 +765,6 @@ void CVisualRegistryEditorComp::OnComponentDestroyed()
 }
 
 
-// static methods
-
-IElementSelectionInfo* CVisualRegistryEditorComp::ExtractSelectionInterface(CVisualRegistryEditorComp& component)
-{
-	return &component.m_selectionInfo;
-}
-
-
-imod::IModel* CVisualRegistryEditorComp::ExtractSelectionInterfaceModel(CVisualRegistryEditorComp& component)
-{
-	return &component.m_selectionInfo;
-}
-
-
-istd::IChangeable* CVisualRegistryEditorComp::ExtractSelectionInterfaceChangeable(CVisualRegistryEditorComp& component)
-{
-	return &component.m_selectionInfo;
-}
-
-
 void CVisualRegistryEditorComp::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	int filteredFlags = (updateFlags & ~m_ignoreUpdateFlags);

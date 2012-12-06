@@ -58,9 +58,9 @@ public:
 
 	I_BEGIN_COMPONENT(CRegistryTreeViewComp);
 		I_REGISTER_SUBELEMENT(SelectionInfo);
-		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, IElementSelectionInfo, ExtractSelectionInterface);
-		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, imod::IModel, ExtractSelectionInterfaceModel);
-		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, istd::IChangeable, ExtractSelectionInterfaceChangeable);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, IElementSelectionInfo, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, imod::IModel, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(SelectionInfo, istd::IChangeable, ExtractSelectionInfo);
 		I_ASSIGN(m_envManagerCompPtr, "MetaInfoManager", "Allows access to component meta information", true, "MetaInfoManager");
 		I_ASSIGN_TO(m_envManagerModelCompPtr, m_envManagerCompPtr, false);
 		I_ASSIGN(m_consistInfoCompPtr, "ConsistencyInfo", "Allows to check consistency of registries and attributes", false, "ConsistencyInfo");
@@ -129,11 +129,6 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	// static methods
-	static IElementSelectionInfo* ExtractSelectionInterface(CRegistryTreeViewComp& component);
-	static imod::IModel* ExtractSelectionInterfaceModel(CRegistryTreeViewComp& component);
-	static istd::IChangeable* ExtractSelectionInterfaceChangeable(CRegistryTreeViewComp& component);
-
 protected Q_SLOTS:
 	void on_RegistryTree_itemSelectionChanged();
 	void on_RegistryTree_itemDoubleClicked(QTreeWidgetItem* itemPtr, int column);
@@ -155,6 +150,13 @@ private:
 	};
 
 	friend class imod::TModelWrap<SelectionInfoImpl>;
+
+	// static template methods for subelement access
+	template <class InterfaceType>
+	static InterfaceType* ExtractSelectionInfo(CRegistryTreeViewComp& component)
+	{
+		return &component.m_selectionInfo;
+	}
 
 	I_REF(icomp::IComponentEnvironmentManager, m_envManagerCompPtr);
 	I_REF(imod::IModel, m_envManagerModelCompPtr);
