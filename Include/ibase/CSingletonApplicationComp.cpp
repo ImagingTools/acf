@@ -105,8 +105,8 @@ void CSingletonApplicationComp::OnComponentCreated()
 				m_processData->unlock();
 			}
 		}
-		else	
-			RunningProcessInfo* dataPtr = (RunningProcessInfo*)m_processData->data	
+		else{
+			RunningProcessInfo* dataPtr = (RunningProcessInfo*)(m_processData->data());
 			if (dataPtr->processId == 0){
 				dataPtr->processId = QCoreApplication::applicationPid();
 			}
