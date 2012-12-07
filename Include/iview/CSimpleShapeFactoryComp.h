@@ -25,6 +25,7 @@ public:
 	I_BEGIN_COMPONENT(CSimpleShapeFactoryComp);
 		I_REGISTER_INTERFACE(IShapeFactory);
 		I_ASSIGN(m_useInteractiveShapesAttrPtr, "UseInteractiveShapes", "If true, the created shapes will be editable", true, true);
+		I_ASSIGN(m_colorSchemaCompPtr, "ShapeColorShema", "Color shema used by displayed shape", false, "ShapeColorShema");
 	I_END_COMPONENT;
 
 	// reimplemented (IShapeFactory)
@@ -35,6 +36,7 @@ protected:
 
 private:
 	I_ATTR(bool, m_useInteractiveShapesAttrPtr);
+	I_REF(iview::IColorShema, m_colorSchemaCompPtr);
 };
 
 

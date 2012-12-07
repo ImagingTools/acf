@@ -24,12 +24,17 @@ IShape* CSimpleShapeFactoryComp::CreateShape(const i2d::IObject2d& object, bool 
 {
 	istd::TDelPtr<IShape> shapePtr(CreateShapeInstance(object));
 
+	if (shapePtr.IsValid()){
+		if (m_colorSchemaCompPtr.IsValid()){
+			shapePtr->SetUserColorShema(m_colorSchemaCompPtr.GetPtr());
+		}
 
-	if (connectToModel){
-		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<i2d::IObject2d*>(&object));
-		if (modelPtr != NULL){
-			if (!modelPtr->AttachObserver(shapePtr.GetPtr())){
-				return NULL;
+		if (connectToModel){
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(const_cast<i2d::IObject2d*>(&object));
+			if (modelPtr != NULL){
+				if (!modelPtr->AttachObserver(shapePtr.GetPtr())){
+					return NULL;
+				}
 			}
 		}
 	}
