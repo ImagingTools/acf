@@ -32,7 +32,7 @@ void CNameParamComp::OnComponentCreated()
 	BaseClass::OnComponentCreated();
 
 	if (m_defaultNameAttrPtr.IsValid()){
-		SetName(*m_defaultNameAttrPtr);
+		BaseClass2::SetName(*m_defaultNameAttrPtr);
 	}
 }
 
