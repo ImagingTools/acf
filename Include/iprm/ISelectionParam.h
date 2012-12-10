@@ -54,7 +54,7 @@ public:
 		Get subselection for specified option.
 		Please note, that returned options tree belongs to selection data model.
 	*/
-	virtual ISelectionParam* GetActiveSubselection() const = 0;
+	virtual ISelectionParam* GetSubselection(int index) const = 0;
 };
 
 

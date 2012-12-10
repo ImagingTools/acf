@@ -168,6 +168,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CButtonBasedSelectionParamGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComboParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -221,6 +225,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CButtonBasedSelectionParamGuiComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CComboParamsManagerGuiComp.h"
 				>
@@ -280,6 +288,10 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\generated\moc_CButtonBasedSelectionParamGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CComboParamsManagerGuiComp.cpp"
 				>
 			</File>
@@ -321,6 +333,10 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CVariableParamGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\generated\ui_CButtonBasedSelectionParamGuiComp.h"
 				>
 			</File>
 			<File
@@ -372,6 +388,10 @@
 			Name="Qt Designer Files"
 			>
 			<File
+				RelativePath="..\CButtonBasedSelectionParamGuiComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CComboParamsManagerGuiComp.ui"
 				>
 			</File>
@@ -419,6 +439,10 @@
 		<Filter
 			Name="Moc Files"
 			>
+			<File
+				RelativePath="..\CButtonBasedSelectionParamGuiComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CComboParamsManagerGuiComp.moc"
 				>

@@ -258,7 +258,7 @@ bool CMultiParamsManagerComp::SetSelectedOptionIndex(int index)
 }
 
 
-ISelectionParam* CMultiParamsManagerComp::GetActiveSubselection() const
+ISelectionParam* CMultiParamsManagerComp::GetSubselection(int /*index*/) const
 {
 	return NULL;
 }

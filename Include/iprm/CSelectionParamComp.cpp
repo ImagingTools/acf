@@ -14,7 +14,7 @@ namespace iprm
 
 // reimplemented (iprm::ISelectionParam)
 
-ISelectionParam* CSelectionParamComp::GetActiveSubselection() const
+ISelectionParam* CSelectionParamComp::GetSubselection(int /*index*/) const
 {
 	return m_subselectionCompPtr.GetPtr();
 }

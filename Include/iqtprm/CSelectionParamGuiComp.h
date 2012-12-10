@@ -117,6 +117,7 @@ private:
 	void UpdateDescriptionFrame();
 	void UpdateSelectorLabel();
 	void ResetWidgets();
+	iprm::ISelectionParam* GetActiveSubselection(const iprm::ISelectionParam* selectionPtr) const;
 
 private:
 	I_ATTR(QString, m_optionsLabelAttrPtr);

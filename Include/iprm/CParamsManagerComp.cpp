@@ -302,7 +302,7 @@ bool CParamsManagerComp::SetSelectedOptionIndex(int index)
 }
 
 
-ISelectionParam* CParamsManagerComp::GetActiveSubselection() const
+ISelectionParam* CParamsManagerComp::GetSubselection(int /*index*/) const
 {
 	return NULL;
 }

@@ -1,12 +1,11 @@
-#ifndef qstdgui_CVersionInfoGuiComp_included
-#define qstdgui_CVersionInfoGuiComp_included
+#ifndef iqtgui_CVersionInfoGuiComp_included
+#define iqtgui_CVersionInfoGuiComp_included
 
 
 // ACF includes
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iser/IVersionInfo.h"
 
-// QSF includes
 #include "Generated/ui_CVersionInfoGuiComp.h"
 
 
@@ -38,6 +37,6 @@ private:
 } // namespace iqtgui
 
 
-#endif // !qstdgui_CVersionInfoGuiComp_included
+#endif // !iqtgui_CVersionInfoGuiComp_included
 
 

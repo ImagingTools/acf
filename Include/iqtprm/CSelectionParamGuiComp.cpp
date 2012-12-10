@@ -171,7 +171,7 @@ void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
 					return;
 				}
 
-				selectionPtr = selectionPtr->GetActiveSubselection();
+				selectionPtr = GetActiveSubselection(selectionPtr);
 			}
 
 			UpdateDescriptionFrame();
@@ -230,7 +230,7 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 	int switchIndex = 0;
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 				selectionPtr != NULL;
-				selectionPtr = selectionPtr->GetActiveSubselection(), ++switchIndex){
+				selectionPtr = GetActiveSubselection(selectionPtr), ++switchIndex){
 		QComboBox* switchBoxPtr = NULL;
 		if (switchIndex < m_comboBoxes.GetCount()){
 			switchBoxPtr = m_comboBoxes.GetAt(switchIndex);
@@ -283,7 +283,7 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 				selectionPtr != NULL;
-				selectionPtr = selectionPtr->GetActiveSubselection()){
+				selectionPtr = GetActiveSubselection(selectionPtr)){
 		QLayout* mainLayoutPtr = SelectionFrame->layout();
 		if (mainLayoutPtr == NULL){
 			mainLayoutPtr = new QVBoxLayout(SelectionFrame);
@@ -463,6 +463,16 @@ void CSelectionParamGuiComp::ResetWidgets()
 	m_radioButtons.Reset();
 	m_radioButtonFramePtr.Reset();
 	m_selectorLabelPtr.Reset();
+}
+
+
+iprm::ISelectionParam* CSelectionParamGuiComp::GetActiveSubselection(const iprm::ISelectionParam* selectionPtr) const
+{
+	if (selectionPtr == NULL){
+		return NULL;
+	}
+
+	return selectionPtr->GetSubselection(selectionPtr->GetSelectedOptionIndex());
 }
 
 

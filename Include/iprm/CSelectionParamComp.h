@@ -33,7 +33,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual ISelectionParam* GetActiveSubselection() const;
+	virtual ISelectionParam* GetSubselection(int index) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)

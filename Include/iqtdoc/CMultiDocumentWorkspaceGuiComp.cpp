@@ -663,7 +663,7 @@ bool CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::SetSelectedOptionInd
 }
 
 
-iprm::ISelectionParam* CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetActiveSubselection() const
+iprm::ISelectionParam* CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetSubselection(int /*index*/) const
 {
 	return NULL;
 }

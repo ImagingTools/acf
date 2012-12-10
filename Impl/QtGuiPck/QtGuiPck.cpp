@@ -256,6 +256,11 @@ I_EXPORT_COMPONENT(
 			"UI for showing a list of files",
 			"File List");
 
+I_EXPORT_COMPONENT(
+			ButtonBasedSelectionEditor,
+			"Selection parameter editor over list of buttons",
+			"Selection List Options Parameter");
+
 
 } // namespace QtGuiPck
 

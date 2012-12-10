@@ -65,7 +65,7 @@ public:
 	virtual const ISelectionConstraints* GetSelectionConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
-	virtual ISelectionParam* GetActiveSubselection() const;
+	virtual ISelectionParam* GetSubselection(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
