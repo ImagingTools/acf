@@ -3,6 +3,7 @@
 
 // ACF includes
 #include "iprm/ISelectionConstraints.h"
+#include "iqt/CSignalBlocker.h"
 
 
 namespace iqtprm
@@ -34,42 +35,10 @@ void CButtonBasedSelectionParamGuiComp::OnGuiModelAttached()
 
 			QLayout* layoutPtr = SelectionFrame->layout();
 			layoutPtr->setContentsMargins(0,0,0,0);
+			layoutPtr->setSpacing(1);
 
-			bool useCompactDescription = *m_compactDescriptionAttrPtr;
-
-			QFont buttonFont(SelectionFrame->font().family(), *m_fontSizeAttrPtr);
-			bool setFont = m_fontSizeAttrPtr.IsValid();
-
-			int iconsCount = m_iconProviderCompPtr.IsValid() ? m_iconProviderCompPtr->GetIconCount() : 0;
-			QSize iconSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr);
-
-			int count = constraintsPtr->GetOptionsCount();
-			for (int i = 0; i < count; i++){
-				QCommandLinkButton* buttonPtr = new QCommandLinkButton(
-							constraintsPtr->GetOptionName(i),
-							useCompactDescription ? "" : constraintsPtr->GetOptionDescription(i),
-							SelectionFrame);
-
-				buttonPtr->setCheckable(true);
-
-				if (i < iconsCount){
-					buttonPtr->setIcon(m_iconProviderCompPtr->GetIcon(i));
-					buttonPtr->setIconSize(iconSize);
-				}
-
-				if (setFont){
-					buttonPtr->setFont(buttonFont);
-				}
-
-				m_buttonsGroup.addButton(buttonPtr, i);
-
-				if (columns > 1){
-					((QGridLayout*)layoutPtr)->addWidget(buttonPtr, i / columns, i % columns);
-				} 
-				else {
-					layoutPtr->addWidget(buttonPtr);
-				}
-			}
+			int totalButtons = 0;
+			CreateButtons(paramPtr, NULL, totalButtons);
 
 			connect(&m_buttonsGroup, SIGNAL(buttonClicked(int)), this, SLOT(OnButtonClicked(int)));
 		}
@@ -90,6 +59,11 @@ void CButtonBasedSelectionParamGuiComp::OnGuiModelDetached()
 		delete buttonPtr;
 	}
 
+	m_selectionInfos.clear();
+
+	qDeleteAll(m_allSelectionInfos);
+	m_allSelectionInfos.clear();
+
 	BaseClass::OnGuiModelDetached();
 }
 
@@ -98,50 +72,68 @@ void CButtonBasedSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	I_ASSERT(IsGuiCreated());
 
-	const iprm::ISelectionParam* paramPtr = GetObjectPtr();
-	if (paramPtr != NULL){
-		int selectedIndex = paramPtr->GetSelectedOptionIndex();
+	bool isCompactDescription = (*m_descriptionTypeAttrPtr == 2);
+	bool useHorizontalLayout = (*m_layoutTypeAttrPtr) < 1;
+	int minWidth = *m_iconSizeAttrPtr + 24;
 
-		if (*m_compactDescriptionAttrPtr){
-			bool useHorizontalLayout = (*m_layoutTypeAttrPtr) < 1;
-			int minWidth = *m_iconSizeAttrPtr + 24;
+	QList<QAbstractButton*> buttons = m_buttonsGroup.buttons();
+	for (int i = 0; i < buttons.count(); i++){
+		bool isChecked = true;
 
-			const iprm::ISelectionConstraints* constraintsPtr = paramPtr->GetSelectionConstraints();
-			if (constraintsPtr != NULL){
-				int count = constraintsPtr->GetOptionsCount();
-				for (int i = 0; i < count; i++){
-					QCommandLinkButton* buttonPtr = static_cast<QCommandLinkButton*>(m_buttonsGroup.button(i));
-					if (i == selectedIndex){
-						buttonPtr->setChecked(true);
-						buttonPtr->setDescription(constraintsPtr->GetOptionDescription(i));
+		SelectionInfo* selectionInfo = m_selectionInfos.at(i);
+		while (selectionInfo != NULL){
+			I_ASSERT(selectionInfo->paramPtr != NULL);
 
-						if (useHorizontalLayout){
-							QSizePolicy sizePolicy = buttonPtr->sizePolicy();
-							sizePolicy.setHorizontalStretch(0);
-							buttonPtr->setSizePolicy(sizePolicy);
-							buttonPtr->setMinimumWidth(minWidth);
-						}
-					}
-					else{
-						buttonPtr->setChecked(false);
-						buttonPtr->setDescription(QString::null);
+			if (selectionInfo->paramPtr->GetSelectedOptionIndex() != selectionInfo->index){
+				isChecked = false;
+				break;
+			}
 
-						if (useHorizontalLayout){
-							QSizePolicy sizePolicy = buttonPtr->sizePolicy();
-							sizePolicy.setHorizontalStretch(1);
-							buttonPtr->setSizePolicy(sizePolicy);
-							buttonPtr->setMinimumWidth(
-								minWidth + 
-								QFontMetrics(buttonPtr->font()).width(buttonPtr->text()));						
-						}
-					}
+			selectionInfo = selectionInfo->parentInfoPtr;
+		}
+
+		// restore selectionInfo
+		selectionInfo = m_selectionInfos.at(i);
+
+		QCommandLinkButton* buttonPtr = static_cast<QCommandLinkButton*>(buttons.at(i));
+
+		I_ASSERT(buttonPtr != NULL && selectionInfo != NULL);
+
+		// should this button be checked?
+		if (isChecked){
+			buttonPtr->setChecked(true);
+
+			if (isCompactDescription){
+				const iprm::ISelectionConstraints* constraintsPtr = selectionInfo->paramPtr->GetSelectionConstraints();
+				if (constraintsPtr != NULL){
+					buttonPtr->setDescription(constraintsPtr->GetOptionDescription(selectionInfo->index));
 				}
+
+				if (useHorizontalLayout){
+					QSizePolicy sizePolicy = buttonPtr->sizePolicy();
+					sizePolicy.setHorizontalStretch(0);
+					buttonPtr->setSizePolicy(sizePolicy);
+					buttonPtr->setMinimumWidth(minWidth);
+				}
+			}
+			else{
+				break;
 			}
 		}
 		else{
-			QAbstractButton* buttonPtr = m_buttonsGroup.button(selectedIndex);
-			if (buttonPtr != NULL){
-				buttonPtr->setChecked(true);
+			buttonPtr->setChecked(false);
+
+			if (isCompactDescription){
+				buttonPtr->setDescription(QString::null);
+
+				if (useHorizontalLayout){
+					QSizePolicy sizePolicy = buttonPtr->sizePolicy();
+					sizePolicy.setHorizontalStretch(1);
+					buttonPtr->setSizePolicy(sizePolicy);
+					buttonPtr->setMinimumWidth(
+						minWidth + 
+						QFontMetrics(buttonPtr->font()).width(buttonPtr->text()));						
+				}
 			}
 		}
 	}
@@ -154,8 +146,110 @@ void CButtonBasedSelectionParamGuiComp::OnButtonClicked(int index)
 {
 	iprm::ISelectionParam* paramPtr = GetObjectPtr();
 	if (paramPtr != NULL){
-		paramPtr->SetSelectedOptionIndex(index);
+		UpdateBlocker updateBlocker(this);
+
+		SelectionInfo* selectionInfo = m_selectionInfos.at(index);
+		while (selectionInfo != NULL){
+			selectionInfo->paramPtr->SetSelectedOptionIndex(selectionInfo->index);
+			selectionInfo = selectionInfo->parentInfoPtr;
+		}
 	}
+
+	UpdateGui(0);
+}
+
+
+// private methods
+
+void CButtonBasedSelectionParamGuiComp::CreateButtons(
+			const iprm::ISelectionParam* paramPtr, 
+			SelectionInfo* parentSelectionInfoPtr,
+			int& totalButtons)
+{
+	int columns = *m_layoutTypeAttrPtr;
+
+	bool useTooltip = *m_showTooltipAttrPtr;
+
+	QFont buttonFont(SelectionFrame->font().family(), *m_fontSizeAttrPtr);
+	bool setFont = m_fontSizeAttrPtr.IsValid();
+
+	int iconsCount = m_iconProviderCompPtr.IsValid() ? m_iconProviderCompPtr->GetIconCount() : 0;
+	QSize iconSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr);
+
+	QLayout* layoutPtr = SelectionFrame->layout();
+
+	const iprm::ISelectionConstraints* constraintsPtr = paramPtr->GetSelectionConstraints();
+	if (constraintsPtr != NULL){
+		int count = constraintsPtr->GetOptionsCount();
+		for (int i = 0; i < count; i++){
+			SelectionInfo* selectionInfo = new SelectionInfo();
+			selectionInfo->paramPtr = const_cast<iprm::ISelectionParam*>(paramPtr);
+			selectionInfo->index = i;
+			selectionInfo->parentInfoPtr = parentSelectionInfoPtr;
+			m_allSelectionInfos.append(selectionInfo);
+
+			iprm::ISelectionParam* subParamPtr = paramPtr->GetSubselection(i);
+			if (subParamPtr != NULL){
+				CreateButtons(subParamPtr, selectionInfo, totalButtons);
+
+				continue;
+			}
+
+			QAbstractButton* buttonPtr = CreateButton(SelectionFrame, constraintsPtr->GetOptionDescription(i));
+			buttonPtr->setText(constraintsPtr->GetOptionName(i));
+			buttonPtr->setCheckable(true);
+			buttonPtr->setEnabled(constraintsPtr->IsOptionEnabled(i));
+
+			if (totalButtons < iconsCount){
+				buttonPtr->setIcon(m_iconProviderCompPtr->GetIcon(totalButtons));
+				buttonPtr->setIconSize(iconSize);
+			}
+
+			if (setFont){
+				buttonPtr->setFont(buttonFont);
+			}
+
+			if (useTooltip){
+				buttonPtr->setToolTip(constraintsPtr->GetOptionDescription(i));
+			}
+
+			if (columns > 1){
+				((QGridLayout*)layoutPtr)->addWidget(buttonPtr, totalButtons / columns, totalButtons % columns);
+			} 
+			else {
+				layoutPtr->addWidget(buttonPtr);
+			}
+
+			m_buttonsGroup.addButton(buttonPtr, totalButtons);
+
+			m_selectionInfos.append(selectionInfo);
+
+			totalButtons++;
+		}
+	}
+}
+
+
+QAbstractButton* CButtonBasedSelectionParamGuiComp::CreateButton(QWidget* parentPtr, const QString& description)
+{
+	QCommandLinkButton* commandButtonPtr = new QCommandLinkButton(parentPtr);
+	switch (*m_descriptionTypeAttrPtr){
+		case 1:
+			commandButtonPtr->setDescription(description);
+			break;
+
+		default:
+		{
+			QSizePolicy sizePolicy = commandButtonPtr->sizePolicy();
+			sizePolicy.setHorizontalStretch(0);
+			commandButtonPtr->setSizePolicy(sizePolicy);
+
+			int minWidth = *m_iconSizeAttrPtr + 24;
+			commandButtonPtr->setMinimumWidth(minWidth);
+		}
+	}
+
+	return commandButtonPtr;
 }
 
 
