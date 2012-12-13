@@ -35,10 +35,6 @@ win32-msvc*{
 	}
 }
 
-*-g++*{
-        QMAKE_CXXFLAGS_WARN_ON = -Wall
-}
-
 *-clang*{
         QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
         QMAKE_CXXFLAGS_WARN_ON += -Wno-overloaded-virtual
