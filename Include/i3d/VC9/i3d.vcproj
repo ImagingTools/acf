@@ -160,6 +160,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CMatrix3d.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVector3d.cpp"
 				>
 			</File>
@@ -168,6 +172,10 @@
 			Name="Header Files"
 			Filter="h"
 			>
+			<File
+				RelativePath="..\CMatrix3d.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CVector3d.h"
 				>
