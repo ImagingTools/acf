@@ -10,8 +10,6 @@
 #include "iprm/ISelectionConstraints.h"
 #include "iprm/INameParam.h"
 
-#include "iqt/CSignalBlocker.h"
-
 
 namespace iqtprm
 {
@@ -34,10 +32,10 @@ void COptionsManagerGuiComp::UpdateModel() const
 		return;
 	}
 
-	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
-	I_ASSERT(selectionPtr != NULL);
-
-	selectionPtr->SetSelectedOptionIndex(Selector->currentIndex());
+	iprm::ISelectionParam* selectionPtr = CompCastPtr<iprm::ISelectionParam>(GetObjectPtr());
+	if (selectionPtr != NULL){
+		selectionPtr->SetSelectedOptionIndex(Selector->currentIndex());
+	}
 }
 
 
@@ -49,9 +47,9 @@ void COptionsManagerGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
-	iprm::ISelectionParam* selectionParamsPtr = GetObjectPtr();
-	if (selectionParamsPtr != NULL){
-		const iprm::ISelectionConstraints* constraintsPtr = selectionParamsPtr->GetSelectionConstraints();
+	iprm::ISelectionParam* selectionPtr = CompCastPtr<iprm::ISelectionParam>(GetObjectPtr());
+	if (selectionPtr != NULL){
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			const imod::IModel* constraintsModelPtr = dynamic_cast<const imod::IModel*>(constraintsPtr);
 			if (constraintsModelPtr != NULL){
@@ -60,13 +58,16 @@ void COptionsManagerGuiComp::OnGuiModelAttached()
 		}
 	}
 
-	iprm::IOptionsManager* optionManagerPtr = CompCastPtr<iprm::IOptionsManager>(GetObjectPtr());
+	iprm::IOptionsManager* optionManagerPtr = GetObjectPtr();
 	if (optionManagerPtr != NULL){
 		Selector->setEditable(true);
 
-		connect(Selector->lineEdit(), SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
-		connect(Selector->lineEdit(), SIGNAL(textEdited(const QString&)), this, SLOT(OnTextEdited(const QString&)));
-		connect(Selector->lineEdit(), SIGNAL(textChanged(const QString&)), this, SLOT(OnTextChanged(const QString&)));
+		QLineEdit* editorPtr = Selector->lineEdit();
+		I_ASSERT(editorPtr != NULL);
+
+		connect(editorPtr, SIGNAL(editingFinished()), this, SLOT(OnEditingFinished()));
+		connect(editorPtr, SIGNAL(textEdited(const QString&)), this, SLOT(OnTextEdited(const QString&)));
+		connect(editorPtr, SIGNAL(textChanged(const QString&)), this, SLOT(OnTextChanged(const QString&)));
 	}
 }
 
@@ -228,9 +229,9 @@ void COptionsManagerGuiComp::OnEditingFinished()
 	}
 
 	bool addNewOption = true;
-	iprm::ISelectionParam* selectionParamsPtr = GetObjectPtr();
-	if (selectionParamsPtr != NULL){
-		const iprm::ISelectionConstraints* constraintsPtr = selectionParamsPtr->GetSelectionConstraints();
+	iprm::ISelectionParam* selectionPtr = CompCastPtr<iprm::ISelectionParam>(GetObjectPtr());
+	if (selectionPtr != NULL){
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 
@@ -238,7 +239,7 @@ void COptionsManagerGuiComp::OnEditingFinished()
 				QString name = constraintsPtr->GetOptionName(i);
 
 				if (newOptionName == name){
-					selectionParamsPtr->SetSelectedOptionIndex(i);
+					selectionPtr->SetSelectedOptionIndex(i);
 
 					addNewOption = false;
 
@@ -247,7 +248,7 @@ void COptionsManagerGuiComp::OnEditingFinished()
 			}
 		}
 
-		iprm::IOptionsManager* optionManagerPtr = CompCastPtr<iprm::IOptionsManager>(GetObjectPtr());
+		iprm::IOptionsManager* optionManagerPtr = GetObjectPtr();
 		if (optionManagerPtr != NULL && addNewOption){
 			optionManagerPtr->InsertOption(newOptionName, newOptionName.toLocal8Bit());
 		}
@@ -259,10 +260,10 @@ void COptionsManagerGuiComp::OnEditingFinished()
 
 void COptionsManagerGuiComp::OnTextChanged(const QString& text)
 {
-	iqt::CSignalBlocker signalBlocker(this, true);
 	iprm::INameParam* nameParamsPtr = CompCastPtr<iprm::INameParam>(GetObjectPtr());
 	if (nameParamsPtr != NULL){
 		UpdateBlocker updateBlocker(this);
+		
 		nameParamsPtr->SetName(text);
 	}
 }
@@ -278,18 +279,17 @@ void COptionsManagerGuiComp::OnTextEdited(const QString& /*text*/)
 
 void COptionsManagerGuiComp::UpdateComboBox()
 {
-	iqt::CSignalBlocker signalBlocker(Selector, true);
-
 	Selector->clear();
 	
-	iprm::ISelectionParam* selectionParamsPtr = GetObjectPtr();
-	if (selectionParamsPtr != NULL){
-		int selectedIndex = selectionParamsPtr->GetSelectedOptionIndex();
-		const iprm::ISelectionConstraints* constraintsPtr = selectionParamsPtr->GetSelectionConstraints();
+	iprm::ISelectionParam* selectionPtr = CompCastPtr<iprm::ISelectionParam>(GetObjectPtr());
+	if (selectionPtr != NULL){
+		int selectedIndex = selectionPtr->GetSelectedOptionIndex();
+		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 			for (int i = 0; i < optionsCount; ++i){
-				QString name = constraintsPtr->GetOptionName(i);
+				const QString& name = constraintsPtr->GetOptionName(i);
+				
 				Selector->addItem(name);
 			}
 		}
@@ -309,7 +309,7 @@ void COptionsManagerGuiComp::UpdateDescriptionFrame()
 {
 	DescriptionFrame->setVisible(false);
 
-	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
+	iprm::ISelectionParam* selectionPtr = CompCastPtr<iprm::ISelectionParam>(GetObjectPtr());
 	if (selectionPtr != NULL){
 		int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 		

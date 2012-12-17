@@ -25,14 +25,14 @@ namespace iqtprm
 */
 class COptionsManagerGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::COptionsManagerGuiComp, iprm::ISelectionParam>,
+						Ui::COptionsManagerGuiComp, iprm::IOptionsManager>,
 			protected imod::CMultiModelDispatcherBase
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::COptionsManagerGuiComp, iprm::ISelectionParam> BaseClass;
+				Ui::COptionsManagerGuiComp, iprm::IOptionsManager> BaseClass;
 
 	/**
 		Command label position
