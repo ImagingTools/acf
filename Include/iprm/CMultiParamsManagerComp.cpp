@@ -75,6 +75,8 @@ int CMultiParamsManagerComp::InsertParamsSet(int typeIndex, int index)
 		return -1;
 	}
 
+	I_ASSERT(newParamsSetPtr->GetFactoryId() == info.id);
+
 	istd::CChangeNotifier notifier(this, CF_SET_INSERTED | CF_OPTIONS_CHANGED | CF_MODEL);
 
 	QString defaultSetName;
@@ -171,6 +173,9 @@ bool CMultiParamsManagerComp::SwapParamsSet(int index1, int index2)
 	paramsSet1.paramSetPtr.Swap(paramsSet2.paramSetPtr);
 	qSwap(paramsSet1.name, paramsSet2.name);
 	qSwap(paramsSet1.typeId, paramsSet2.typeId);
+
+	I_ASSERT(paramsSet1.paramSetPtr->GetFactoryId() == paramsSet1.typeId);
+	I_ASSERT(paramsSet2.paramSetPtr->GetFactoryId() == paramsSet2.typeId);
 
 	return true;
 }
@@ -276,10 +281,19 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
+	bool isStoring = archive.IsStoring();
+
+	// Delete all dynamically created parameter sets:
+	if (!isStoring){
+		int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+
+		while (m_paramSets.size() > fixedSetsCount){
+			m_paramSets.removeLast();
+		}
+	}
+
 	int paramsCount = GetParamsSetsCount();
 	retVal = retVal && archive.BeginMultiTag(paramsSetListTag, paramsSetTag, paramsCount);
-
-	bool isStoring = archive.IsStoring();
 
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
 
@@ -348,14 +362,6 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.EndTag(valueTag);
 
 		retVal = retVal && archive.EndTag(paramsSetTag);
-	}
-
-	if (!isStoring){
-		int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
-
-		while (m_paramSets.size() > paramsCount - fixedSetsCount){
-			m_paramSets.removeLast();
-		}
 	}
 
 	retVal = retVal && archive.EndTag(paramsSetListTag);
@@ -522,6 +528,8 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 				return false;
 			}
 
+			I_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
+
 			notifier.SetPtr(this);
 
 			paramSet.typeId = typeId;
@@ -550,6 +558,8 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 		if (newParamsSetPtr == NULL){
 			return false;
 		}
+		
+		I_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
 
 		istd::CChangeNotifier notifier(this, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
 

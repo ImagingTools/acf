@@ -110,7 +110,7 @@ protected:
 		Ensure some parameter exist and has correct type. 
 		\param	index	position in list of parameters.
 		\param	typeid	ID of parameter type.
-		\return			\c true - deserialization was successfull or \c false - no deserialization was possible.
+		\return	\c true - de-serialization was successful or \c false - no de-serialization was possible.
 	*/
 	bool EnsureParamExist(const QByteArray& typeId, int index, const QString& name);
 
