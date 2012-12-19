@@ -99,8 +99,8 @@ int main(int argc, char *argv[])
 		istd::CSystem::EnvironmentVariables environmentVariables = istd::CSystem::GetEnvironmentVariables();
 
 		for (		istd::CSystem::EnvironmentVariables::const_iterator index = environmentVariables.begin();
-					index != environmentVariables.end();
-					++index){
+				index != environmentVariables.end();
+				++index){
 			std::cout << index.key().toLocal8Bit().constData() << " = " << index.value().toLocal8Bit().constData() << std::endl;
 		}
 	}
@@ -112,8 +112,8 @@ int main(int argc, char *argv[])
 	}
 
 	icomp::TSimComponentWrap<BasePck::ApplicationInfo> applicationInfo;
-	applicationInfo.SetStringAttr("ApplicationName", "ARX Compiler");
-	applicationInfo.SetStringAttr("CompanyName", "ImagingTools");
+	applicationInfo.SetIdAttr("ApplicationName", "ARX Compiler");
+	applicationInfo.SetIdAttr("CompanyName", "ImagingTools");
 	applicationInfo.InitComponent();
 
 	icomp::TSimComponentWrap<BasePck::ConsoleLog> log;
