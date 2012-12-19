@@ -382,7 +382,7 @@ See &apos;License.txt&apos; for license information</source>
     <message>
         <location filename="../CompositorExe/Generated/CCompositor.cpp" line="2459"/>
         <source>Compositor</source>
-        <translation>Kompozytor</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../CompositorExe/Generated/CCompositor.cpp" line="2470"/>
