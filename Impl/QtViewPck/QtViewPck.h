@@ -11,6 +11,7 @@
 #include "iview/CColorSchemaComp.h"
 
 #include "iqt2d/TViewExtenderDelegatorCompWrap.h"
+#include "iqt2d/TMultiViewExtenderDelegatorCompWrap.h"
 #include "iqt2d/CSceneConnectorGuiComp.h"
 #include "iqt2d/CImageViewComp.h"
 #include "iqt2d/CLine2dParamsGuiComp.h"
@@ -42,6 +43,7 @@ typedef iview::CSimpleShapeFactoryComp SimpleShapeFactory;
 typedef iview::CColorSchemaComp ColorSchema;
 
 typedef iqt2d::CViewExtenderDelegatorComp SceneExtenderDelegator;
+typedef iqt2d::CMultiViewExtenderDelegatorComp MultiSceneExtenderDelegator;
 typedef iqt2d::CSceneConnectorGuiComp SceneConnector;
 typedef icomp::TModelCompWrap<iqt2d::CImageViewComp> ImageView;
 typedef iqt2d::CLine2dParamsGuiComp Line2dParamsGui;

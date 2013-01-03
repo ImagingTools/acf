@@ -38,8 +38,13 @@ I_EXPORT_COMPONENT(
 
 I_EXPORT_COMPONENT(
 			SceneExtenderDelegator,
-			"Delegate a scene extender",
+			"Delegates a scene extender",
 			"Scene Connector Provider Extender Display Console" IM_TAG("GUI"));
+
+I_EXPORT_COMPONENT(
+			MultiSceneExtenderDelegator,
+			"Delegates several scene extenders",
+			"Multi Scene Connector Provider Extender Display Console" IM_TAG("GUI"));
 
 I_EXPORT_COMPONENT(
 			SceneConnector,

@@ -332,6 +332,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\TMultiViewExtenderDelegatorCompWrap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\TShapeParamsGuiCompBase.h"
 				>
 			</File>
