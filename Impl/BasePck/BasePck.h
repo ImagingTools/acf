@@ -66,6 +66,7 @@
 #include "i2d/CAffineTransformation2dComp.h"
 #include "i2d/CStaticCalibrationProviderComp.h"
 #include "i2d/CTubePolylineComp.h"
+#include "i2d/CCalibration2dProxyComp.h"
 
 #include "imath/CSampledFunction2d.h"
 
@@ -133,6 +134,7 @@ typedef icomp::TModelCompWrap<i2d::CPolylineComp> Polyline;
 typedef icomp::TModelCompWrap<i2d::CAffineTransformation2dComp> AffineTransformation2d;
 typedef icomp::TModelCompWrap<i2d::CStaticCalibrationProviderComp> StaticCalibrationProvider;
 typedef icomp::TModelCompWrap<i2d::CTubePolylineComp> TubePolyline;
+typedef icomp::TModelCompWrap<i2d::CCalibration2dProxyComp> Calibration2dProxy;
 
 typedef icomp::TModelCompWrap<ibase::CTextDocumentComp> TextDocument;
 

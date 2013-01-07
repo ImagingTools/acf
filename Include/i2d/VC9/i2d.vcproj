@@ -187,6 +187,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCalibration2dProxyComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CCircle.cpp"
 				>
 			</File>
@@ -349,6 +353,10 @@
 			</File>
 			<File
 				RelativePath="..\CAnnulusSegmentComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCalibration2dProxyComp.h"
 				>
 			</File>
 			<File

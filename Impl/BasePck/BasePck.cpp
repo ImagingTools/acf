@@ -259,6 +259,11 @@ I_EXPORT_COMPONENT(
 			"2D Tube Polyline Region" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
 
 I_EXPORT_COMPONENT(
+			Calibration2dProxy,
+			"Proxy of a 2D calibration using calibration provider",
+			"2D Tranformation Calibration Proxy Provider" IM_CATEGORY(I_DATA_MODEL) IM_TAG("2D"));
+
+I_EXPORT_COMPONENT(
 			TextDocument,
 			"Simple text document",
 			IM_CATEGORY(I_DATA_MODEL) IM_TAG("Text Document"));

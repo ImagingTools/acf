@@ -19,6 +19,28 @@ const ICalibration2d* CStaticCalibrationProviderComp::GetCalibration() const
 }
 
 
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CStaticCalibrationProviderComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_calibrationModelCompPtr.IsValid()){
+		m_calibrationModelCompPtr->AttachObserver(this);
+	}
+}
+
+
+void CStaticCalibrationProviderComp::OnComponentDestroyed()
+{
+	EnsureModelsDetached();
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 } // namespace i2d
 
 
