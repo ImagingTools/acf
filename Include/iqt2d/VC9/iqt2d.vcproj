@@ -168,6 +168,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CAffineTransformationParamsGui.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CAnnulusParamsGuiComp.cpp"
 				>
 			</File>
@@ -237,6 +241,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CAffineTransformationParamsGui.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CAnnulusParamsGuiComp.h"
 				>
@@ -354,6 +362,10 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\generated\moc_CAffineTransformationParamsGui.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CAnnulusParamsGuiComp.cpp"
 				>
 			</File>
@@ -394,6 +406,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\ui_CAffineTransformationParamsGui.h"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CAnnulusParamsGuiComp.h"
 				>
 			</File>
@@ -430,6 +446,10 @@
 			Name="Qt Designer Files"
 			Filter="ui"
 			>
+			<File
+				RelativePath="..\CAffineTransformationParamsGui.ui"
+				>
+			</File>
 			<File
 				RelativePath="..\CAnnulusParamsGuiComp.ui"
 				>
@@ -474,6 +494,10 @@
 		<Filter
 			Name="Moc Files"
 			>
+			<File
+				RelativePath="..\CAffineTransformationParamsGui.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CAnnulusParamsGuiComp.moc"
 				>

@@ -126,6 +126,11 @@ I_EXPORT_COMPONENT(
 			"Tube region parameter GUI displaying a polyline and its tube using 2D-view",
 			"View Console Polyline Shape" IM_TAG("2D"));
 
+I_EXPORT_COMPONENT(
+			AffineTransformationParamsGui,
+			"Affine transformations parameter GUI displaying",
+			"Affine Transformations Parameters" IM_TAG("GUI Editor 2D"));
+
 
 } // namespace QtViewPck
 

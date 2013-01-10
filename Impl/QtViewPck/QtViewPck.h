@@ -28,6 +28,9 @@
 #include "iqt2d/CExtendedConsoleGuiComp.h"
 #include "iqt2d/CPolylineParamsGuiComp.h"
 #include "iqt2d/CTubePolylineParamsGuiComp.h"
+#include "iqt2d/CAffineTransformationParamsGui.h"
+
+
 
 
 /**
@@ -60,6 +63,7 @@ typedef icomp::TModelCompWrap<iqt2d::CViewProviderGuiComp> ViewProvider;
 typedef iqt2d::CExtendedConsoleGuiComp ExtendedConsoleGui;
 typedef iqt2d::CPolylineParamsGuiComp PolylineParamsGui;
 typedef iqt2d::CTubePolylineParamsGuiComp TubePolylineParamsGui;
+typedef iqt2d::CAffineTransformationParamsGui AffineTransformationParamsGui;
 
 
 } // namespace QtViewPck
