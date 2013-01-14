@@ -14,7 +14,7 @@ namespace i2d
 
 /**
 	Base class for all components implementing 2D objects.
-	The template paramter \c BaseObject2d should be set to non-component 2D object implementing interface \c i2d::IObject2d.
+	The template parameter \c BaseObject2d should be set to non-component 2D object implementing interface \c i2d::IObject2d.
 */
 template <class BaseObject2d>
 class TObject2dCompWrap: public icomp::CComponentBase, public BaseObject2d
@@ -27,7 +27,7 @@ public:
 		I_REGISTER_INTERFACE(IObject2d);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(istd::IChangeable);
-		I_ASSIGN(m_calibrationCompPtr, "Calibration", "Calibaration associated with this 2d object", false, "Calibration");
+		I_ASSIGN(m_calibrationCompPtr, "Calibration", "Calibration associated with this 2d object", false, "Calibration");
 	I_END_COMPONENT;
 
 protected:

@@ -12,7 +12,7 @@ namespace i2d
 
 
 /**
-	This class defines an affinite 2D transformation.
+	This class defines an affine 2D transformation.
 */
 class CAffine2d
 {
@@ -33,7 +33,7 @@ public:
 	explicit CAffine2d(const CMatrix2d& deform, const CVector2d& translation = CVector2d(0.0, 0.0));
 
 	/**
-		Constructs a transform with translation.
+		Constructs a transform with translation only.
 	*/
 	explicit CAffine2d(const CVector2d& translation);
 
@@ -103,26 +103,26 @@ public:
 
 	/**
 		Get difference vector after this transformation.
-		Please note, that the translation will be not concidered for this transformation.
+		Please note that the translation will be not considered for this transformation.
 	*/
 	CVector2d GetApplyToDelta(const CVector2d& delta) const;
 
 	/**
 		Get vector after this transformation.
-		Please note, that the translation will be not concidered for this transformation.
+		Please note that the translation will be not considered for this transformation.
 	*/
 	void GetApplyToDelta(const CVector2d& delta, CVector2d& result) const;
 
 	/**
 		Get combined transformation.
-		\param	transform	local transformation used on right side of transformation multiplication.
+		\param	transform	local transformation used on the right side of transformation multiplication.
 		\return	combined transform.
 	*/
 	CAffine2d GetApply(const CAffine2d& transform) const;
 
 	/**
 		Get combined transformation.
-		\param	transform	local transformation used on right side of transformation multiplication.
+		\param	transform	local transformation used on the right side of transformation multiplication.
 		\return	combined transformation, it is equal to thisTranform * parameterTransform.
 	*/
 	void GetApply(const CAffine2d& transform, CAffine2d& result) const;

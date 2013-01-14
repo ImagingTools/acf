@@ -7,7 +7,6 @@
 
 #include "i2d/CAffineTransformation2d.h"
 
-
 namespace i2d
 {
 
@@ -25,6 +24,7 @@ public:
 		I_REGISTER_INTERFACE(ICalibration2d);
 		I_REGISTER_INTERFACE(ITransformation2d);
 		I_REGISTER_INTERFACE(iser::ISerializable);
+		I_REGISTER_INTERFACE(i2d::CAffineTransformation2d);
 		I_ASSIGN(m_m00AttrPtr, "M00", "Matrix value at the position (0, 0)", false, 1.0);
 		I_ASSIGN(m_m10AttrPtr, "M10", "Matrix value at the position (1, 0)", false, 0);
 		I_ASSIGN(m_m01AttrPtr, "M01", "Matrix value at the position (0, 1)", false, 0);
