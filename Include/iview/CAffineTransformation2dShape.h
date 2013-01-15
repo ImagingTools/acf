@@ -1,4 +1,4 @@
-#include "CInteractivePinShape.h"
+#include "CInteractiveShapeBase.h"
 
 
 namespace iview
@@ -8,7 +8,7 @@ namespace iview
 /**
 	Interactive shape to visualize i2d::CAffineTransformation2d
  */
-class CAffineTransformation2dShape: public CInteractivePinShape
+class CAffineTransformation2dShape: public CInteractiveShapeBase
 {
 public:
 	CAffineTransformation2dShape();
@@ -41,7 +41,13 @@ public:
 protected:
 	// reimplemented (iview::CShapeBase)
 	virtual i2d::CRect CalcBoundingBox() const;
+
+	// reimplemented (iview::CInteractiveShapeBase)
+	virtual void BeginLogDrag(const i2d::CVector2d& reference);
+	virtual void SetLogDragPosition(const i2d::CVector2d& position);
+
 private:
+	i2d::CVector2d m_referencePosition;
 	int m_activeControlPoints;
 	ControlPoint m_currentPoint; ///< point pressed by mouse
 };

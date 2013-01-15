@@ -11,6 +11,7 @@ namespace iview
 
 
 CAffineTransformation2dShape::CAffineTransformation2dShape(void)
+//: m_activeControlPoints(POINT1 | POINT2), m_currentPoint(NO_POINT)
 : m_activeControlPoints(ALL_POINTS), m_currentPoint(NO_POINT)
 {
 }
@@ -103,6 +104,26 @@ struct ControlPoints
 		return points[index];
 	}
 
+
+	/**
+		Modify all points to follow a single point movement.
+ 
+		\param point
+		\value POINT1 translate
+		\value POINT2 scale in X axis
+		\value POINT3 scale in Y axis
+		\value POINT4 scale in both axes
+		\value POINT5 rotate around POINT1 position
+		\param offset movement relative to the current point position
+	 
+		After using this method, call ResetTransformation() to apply changes to 
+		the model.
+	 */
+	void MovePoint(int point, i2d::CVector2d offset)
+	{
+		
+	}
+
 private:
 	i2d::CVector2d points[11];
 }; // struct CControlPoints
@@ -118,6 +139,10 @@ bool CAffineTransformation2dShape::OnMouseButton(istd::CIndex2d position, Qt::Mo
 	const i2d::CAffineTransformation2d* transformationPtr =
 			dynamic_cast<const i2d::CAffineTransformation2d*>(GetModelPtr());
 	if (transformationPtr == NULL){
+		return false;
+	}
+
+	if (buttonType != Qt::LeftButton){
 		return false;
 	}
 
@@ -182,7 +207,7 @@ bool CAffineTransformation2dShape::OnMouseMove(istd::CIndex2d position)
 }
 
 
-void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
+void CAffineTransformation2dShape::Draw(QPainter & drawContext) const
 {
 	I_ASSERT(IsDisplayConnected());
 
@@ -217,10 +242,10 @@ void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
 	// draw base coordinate system
 	drawContext.setPen(baseSystemPen);
 	drawContext.setBrush(baseSystemPen.color());
+	drawContext.drawLine(sp[0].GetX(), sp[0].GetY(), sp[1].GetX(), sp[1].GetY());
 	i2d::CVector2d sap1 = transform.GetApply(arrowPoint1);
 	i2d::CVector2d sap2 = transform.GetApply(arrowPoint2);
 	i2d::CVector2d sap3 = transform.GetApply(arrowPoint3);
-	drawContext.drawLine(sp[0].GetX(), sp[0].GetY(), sp[1].GetX(), sp[1].GetY());
 	QPointF points[4];
 	points[0] = QPointF(sp[1].GetX(), sp[1].GetY());
 	points[1] = QPointF(sap1.GetX(), sap1.GetY());
@@ -303,7 +328,7 @@ void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
 }
 
 
-bool CAffineTransformation2dShape::OnAttached(imod::IModel* modelPtr)
+bool CAffineTransformation2dShape::OnAttached(imod::IModel * modelPtr)
 {
 	I_ASSERT(dynamic_cast<i2d::CAffineTransformation2d*>(modelPtr) != NULL);
 
@@ -346,26 +371,69 @@ i2d::CRect CAffineTransformation2dShape::CalcBoundingBox() const
 	ControlPoints screenPoints = ControlPoints(100).ToScreen(transform);
 	ControlPoints transformedScreenPoints = ControlPoints(100, transformationPtr).ToScreen(transform);
 
-	i2d::CRect result(screenPoints[0].GetX(), screenPoints[0].GetY(), screenPoints[0].GetX(), screenPoints[0].GetY());
+	i2d::CRect boundingBox(screenPoints[0].GetX(), screenPoints[0].GetY(), screenPoints[0].GetX(), screenPoints[0].GetY());
 
 	for (int i = 2; i < 5; i++){
-		result.Union(istd::CIndex2d(screenPoints[i].GetX(), screenPoints[i].GetY()));
+		boundingBox.Union(istd::CIndex2d(screenPoints[i].GetX(), screenPoints[i].GetY()));
 	}
 
 	for (int i = 0; i < 5; i++){
-		result.Union(istd::CIndex2d(transformedScreenPoints[i].GetX(), transformedScreenPoints[i].GetY()));
+		boundingBox.Union(istd::CIndex2d(transformedScreenPoints[i].GetX(), transformedScreenPoints[i].GetY()));
 	}
 
 	double pointMaxRadius = ceil(5 * transform.GetDeformMatrix().GetApproxScale());
 
-	result.SetLeft(result.GetLeft() - pointMaxRadius);
-	result.SetRight(result.GetRight() + pointMaxRadius);
-	result.SetTop(result.GetRight() - pointMaxRadius);
-	result.SetBottom(result.GetRight() + pointMaxRadius);
+	// expand bounding box to include control point circles
+	boundingBox.SetLeft(boundingBox.GetLeft() - pointMaxRadius);
+	boundingBox.SetRight(boundingBox.GetRight() + pointMaxRadius);
+	boundingBox.SetTop(boundingBox.GetTop() - pointMaxRadius);
+	boundingBox.SetBottom(boundingBox.GetBottom() + pointMaxRadius);
 
-	return result;
+	return boundingBox;
 }
 
 
+void CAffineTransformation2dShape::BeginLogDrag(const i2d::CVector2d& reference)
+{
+	m_referencePosition = reference;
 }
+
+
+void CAffineTransformation2dShape::SetLogDragPosition(const i2d::CVector2d& position)
+{
+	if (!IsEditablePosition()){
+		return;
+	}
+
+	i2d::CAffineTransformation2d* transformationPtr = dynamic_cast<i2d::CAffineTransformation2d*>(GetModelPtr());
+	if (transformationPtr == NULL){
+		return;
+	}
+
+	BeginModelChanges();
+
+	i2d::CVector2d offset = position - m_referencePosition;
+	ControlPoints points(100, transformationPtr);
+
+	switch (m_currentPoint){
+		case POINT1:
+		case POINT2:
+		case POINT3:
+		case POINT4:
+		case POINT5:
+			points.MovePoint(m_currentPoint, offset);
+			points.ResetTransformation(transformationPtr);
+			break;
+		default:
+			break;
+	}
+
+	EndModelChanges();
+
+	m_referencePosition = position;
+}
+
+
+} // namespace iview
+
 
