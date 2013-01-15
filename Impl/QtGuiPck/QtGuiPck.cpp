@@ -261,6 +261,11 @@ I_EXPORT_COMPONENT(
 			"Selection parameter editor over list of buttons",
 			"Selection List Options Parameter");
 
+I_EXPORT_COMPONENT(
+			MultiParamsManagerGui,
+			"Allows to manage different types of parameter sets",
+			"Model Observer Parameters Set Manager");
+
 
 } // namespace QtGuiPck
 
