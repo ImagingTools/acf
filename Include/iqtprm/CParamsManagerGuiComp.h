@@ -5,8 +5,6 @@
 // ACF includes
 #include "iqtprm/CParamsManagerGuiCompBase.h"
 
-#include "iqtprm/Generated/ui_CParamsManagerGuiComp.h"
-
 
 namespace iqtprm
 {

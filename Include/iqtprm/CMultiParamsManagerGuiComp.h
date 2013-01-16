@@ -9,7 +9,6 @@
 #include "iqt2d/IViewExtender.h"
 
 #include "iqtprm/CParamsManagerGuiCompBase.h"
-#include "iqtprm/Generated/ui_CParamsManagerGuiComp.h"
 
 
 namespace iqtprm
