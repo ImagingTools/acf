@@ -157,7 +157,7 @@ private:
 
 	bool m_isFullScreenMode;
 	bool m_isViewMaximized;
-	QWidget* m_savedParentWidgetPtr;
+	QWidget* m_viewWidget;	
 	iview::CScreenTransform m_savedTransform;	
 };
 

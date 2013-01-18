@@ -38,11 +38,13 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	m_pointsSubCommand("Remove Points", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR | ibase::ICommand::CF_EXCLUSIVE | ibase::ICommand::CF_ONOFF, CGI_SHAPE_EDITOR),
 	m_shapeStatusInfoPtr(NULL),
 	m_isFullScreenMode(false),
-	m_isViewMaximized(false)
-{
-	m_viewPtr = new iview::CViewport(this);
+	m_isViewMaximized(false)	
+{		
+	m_viewWidget = new QWidget();
 
-	m_mainLayoutPtr = new QVBoxLayout(this);
+	m_viewPtr = new iview::CViewport(this, m_viewWidget);	
+
+	m_mainLayoutPtr = new QVBoxLayout(m_viewWidget);
 	m_centerLayoutPtr = new QGridLayout();
 
 	m_verticalScrollbarPtr = new QScrollBar(Qt::Vertical);
@@ -58,7 +60,7 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	m_centerLayoutPtr->addWidget(m_verticalScrollbarPtr, 0, 1);
 	m_centerLayoutPtr->addWidget(m_horizontalScrollbarPtr, 1, 0);
 	m_centerLayoutPtr->setMargin(0);
-	m_centerLayoutPtr->setSpacing(1);
+	m_centerLayoutPtr->setSpacing(1);	
 
 	QSizePolicy emptyPolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Ignored);
 	QSizePolicy buttonPolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -76,9 +78,15 @@ CConsoleGui::CConsoleGui(QWidget* parent)
 	UpdateComponentsPosition();
 	UpdateCommands();
 
-	ConnectSignalSlots();
+	ConnectSignalSlots();	
 
 	m_viewPtr->installEventFilter(this);
+
+	//Add widget view wrapper - to persist layout when switching from full screen
+	QVBoxLayout* vLayout = new QVBoxLayout(this);
+	vLayout->setMargin(0);
+	m_viewWidget->setParent(this);
+	vLayout->addWidget(m_viewWidget);
 }
 
 
@@ -348,27 +356,20 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 
 			m_savedTransform = m_viewPtr->GetTransform();
 			m_isViewMaximized = isMaximized();
-			m_savedParentWidgetPtr = parentWidget();
-
-			setParent(NULL);
-			showFullScreen();
-
-			layout()->update();
+						
+			m_viewWidget->setParent(NULL);			
+			m_viewWidget->showFullScreen();
 
 			//center image on screen
 			m_viewPtr->SetZoom(iview::CViewBase::ZM_FIT);
 			m_viewPtr->Update();
-
 		}
 		else{
-			if (m_savedParentWidgetPtr != NULL){
-				setParent(m_savedParentWidgetPtr);
-
-				m_savedParentWidgetPtr->layout()->addWidget(this);
-				m_savedParentWidgetPtr = NULL;
-			}
+			m_viewWidget->setParent(this);
+			layout()->addWidget(m_viewWidget);
 
 			showNormal();
+
 			if(m_isViewMaximized){
 				showMaximized();
 			}
