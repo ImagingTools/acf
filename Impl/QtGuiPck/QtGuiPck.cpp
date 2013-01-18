@@ -5,6 +5,7 @@
 
 
 I_REGISTER_QT_RESOURCE(iqtgui);
+I_REGISTER_QT_RESOURCE(iqt2d);
 
 
 namespace QtGuiPck

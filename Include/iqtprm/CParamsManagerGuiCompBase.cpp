@@ -192,6 +192,11 @@ void CParamsManagerGuiCompBase::UpdateTree()
 
 	int selectedIndex = -1;
 
+	int iconsCount = 0;
+	if (m_iconProviderCompPtr.IsValid()){
+		iconsCount = m_iconProviderCompPtr->GetIconCount();
+	}
+
 	iprm::IParamsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
 		int setsCount = objectPtr->GetParamsSetsCount();
@@ -214,6 +219,21 @@ void CParamsManagerGuiCompBase::UpdateTree()
 			paramsSetItemPtr->setText(0, name);
 			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);
 			paramsSetItemPtr->setFlags(itemFlags);
+
+			if (iconsCount > 0){
+				iprm::IParamsSet* paramsSetPtr = objectPtr->GetParamsSet(paramSetIndex);
+				if (paramsSetPtr != NULL){
+					QByteArray id = paramsSetPtr->GetFactoryId();
+					if (m_factoryIconIndexMap.contains(id)){
+						int iconIndex = m_factoryIconIndexMap[id];
+						if (iconIndex < iconsCount){
+							QIcon icon = m_iconProviderCompPtr->GetIcon(iconIndex);
+							paramsSetItemPtr->setIcon(0, icon);
+						}
+					}
+				}
+			}
+
 			ParamsTree->addTopLevelItem(paramsSetItemPtr);
 
 			paramsSetItemPtr->setSelected(paramSetIndex == selectedIndex);	
@@ -338,6 +358,12 @@ void CParamsManagerGuiCompBase::OnGuiModelAttached()
 		}
 
 		m_startVariableMenus.clear();
+		m_factoryIconIndexMap.clear();
+
+		int iconsCount = 0;
+		if (m_iconProviderCompPtr.IsValid()){
+			iconsCount = m_iconProviderCompPtr->GetIconCount();
+		}
 
 		const iprm::ISelectionConstraints* typeConstraintsPtr = objectPtr->GetParamsTypeConstraints();
 		if (typeConstraintsPtr != NULL){
@@ -347,13 +373,21 @@ void CParamsManagerGuiCompBase::OnGuiModelAttached()
 				Q_ASSERT(typeConstraintsPtr != NULL);
 
 				for (int i = 0; i < typesCount; ++i){
-					//translate
+					// translate
 					QString typeName = typeConstraintsPtr->GetOptionName(i);
 
 					QAction* action = m_startVariableMenus.addAction(typeName);
 
-					//store original type index
+					// store original type index
 					action->setData(i);
+
+					// update icon
+					if (iconsCount > i){
+						QIcon icon = m_iconProviderCompPtr->GetIcon(i);
+						action->setIcon(icon);
+					}
+
+					m_factoryIconIndexMap[typeConstraintsPtr->GetOptionId(i)] = i;
 				}
 
 				AddButton->setMenu(&m_startVariableMenus);

@@ -406,6 +406,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\qrc_iqt2d.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\ui_CAffineTransformationParamsGui.h"
 				>
 			</File>
@@ -536,6 +540,14 @@
 			</File>
 			<File
 				RelativePath="..\CTubePolylineParamsGuiComp.moc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			>
+			<File
+				RelativePath="..\iqt2d.qrc"
 				>
 			</File>
 		</Filter>
