@@ -288,6 +288,10 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 		int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
 
 		while (m_paramSets.size() > fixedSetsCount){
+			ParamSet& parameterSetToRemove = m_paramSets.back();
+
+			EnsureParamsSetModelDetached(parameterSetToRemove.paramSetPtr.GetPtr());
+
 			m_paramSets.removeLast();
 		}
 	}
@@ -469,10 +473,10 @@ void CMultiParamsManagerComp::OnComponentCreated()
 
 void CMultiParamsManagerComp::OnComponentDestroyed()
 {
-	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+	int setsCount = GetParamsSetsCount();
 
-	for (int setIndex = 0; setIndex < fixedSetsCount; setIndex++){
-		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(m_fixedParamSetsCompPtr[setIndex]);
+	for (int setIndex = 0; setIndex < setsCount; setIndex++){
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(GetParamsSet(setIndex));
 		if (modelPtr != NULL && modelPtr->IsAttached(this)){
 			modelPtr->DetachObserver(this);
 		}
@@ -579,6 +583,15 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 	}
 
 	return true;
+}
+
+
+void CMultiParamsManagerComp::EnsureParamsSetModelDetached(iprm::IParamsSet* paramsSetPtr) const
+{
+	imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(paramsSetPtr);
+	if (modelPtr != NULL){
+		modelPtr->DetachAllObservers();				
+	}
 }
 
 
