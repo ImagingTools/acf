@@ -62,7 +62,29 @@ protected:
 private:
 	CModelBase(const CModelBase& modelBase);
 
-	typedef QVector<IObserver*> Observers;
+	/**
+		Observer connection state.
+	*/
+	enum StateFlag
+	{
+		/**
+			Observer is connected to the model.
+		*/
+		SF_CONNECTED,
+
+		/**
+			Observer is in detaching stage.
+		*/
+		SF_DETACHING_STAGE
+	};
+
+	struct ObserverInfo
+	{
+		IObserver* observerPtr;
+		StateFlag connectionState;
+	};
+
+	typedef QVector<ObserverInfo> Observers;
 	Observers m_observers;
 };
 
