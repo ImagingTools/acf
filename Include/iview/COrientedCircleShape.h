@@ -21,6 +21,9 @@ public:
 
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
+	
+	// reimplemented (iview::CInteractiveCircleShape)
+	virtual i2d::CRect CalcBoundingBox() const;
 };
 
 

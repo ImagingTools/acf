@@ -158,6 +158,20 @@ bool COrientedCircleShape::OnAttached(imod::IModel* modelPtr)
 }
 
 
+i2d::CRect COrientedCircleShape::CalcBoundingBox() const
+{
+	i2d::CRect result = BaseClass::CalcBoundingBox();
+	const iview::CScreenTransform& transform = GetLogToScreenTransform();
+	const i2d::CMatrix2d& deform = transform.GetDeformMatrix();
+	double directionIndicatorWidth = 10 * deform.GetApproxScale();
+	result.SetLeft(result.GetLeft() - directionIndicatorWidth);
+	result.SetRight(result.GetRight() + directionIndicatorWidth);
+	result.SetTop(result.GetTop() - directionIndicatorWidth);
+	result.SetBottom(result.GetBottom() + directionIndicatorWidth);
+
+	return result;
+}
+
 } // namespace iview
 
 
