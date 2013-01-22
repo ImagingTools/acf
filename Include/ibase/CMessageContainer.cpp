@@ -150,7 +150,9 @@ IMessageContainer::Messages CMessageContainer::GetMessages() const
 		
 		istd::TDelPtr<istd::IInformationProvider> messagePtr;
 
-		messagePtr.SetCastedOrRemove<istd::IChangeable>((*iter)->CloneMe());
+		istd::IChangeable *cloned = (*iter)->CloneMe();
+		cloned->CopyFrom(*(*iter));
+		messagePtr.SetCastedOrRemove<istd::IChangeable>(cloned);		
 		if (messagePtr.IsValid()){
 			IMessageConsumer::MessagePtr messageCopyPtr(messagePtr.PopPtr());
 	
