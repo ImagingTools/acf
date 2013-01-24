@@ -107,6 +107,28 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 }
 
 
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CRelativeFileNameParamComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_relativeToModelCompPtr.IsValid()){
+		m_relativeToModelCompPtr->AttachObserver(this);
+	}
+}
+
+
+void CRelativeFileNameParamComp::OnComponentDestroyed()
+{
+	EnsureModelsDetached();
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 } // namespace ifile
 
 
