@@ -27,7 +27,7 @@ CLogGuiComp::CLogGuiComp()
 	m_exportAction(NULL),
 	m_currentMessageMode(MM_ALL),
 	m_statusCategory(istd::IInformationProvider::IC_NONE),
-	m_maxScrollBarValue(0)
+	m_messagesWereRemoved(false)
 {
 	connect(this, SIGNAL(EmitAddMessage(const istd::IInformationProvider*, bool)), this, SLOT(OnAddMessage(const istd::IInformationProvider*, bool)), Qt::QueuedConnection);
 	connect(this, SIGNAL(EmitRemoveMessage(qint64)), this, SLOT(OnRemoveMessage(qint64)), Qt::QueuedConnection);
@@ -55,6 +55,8 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformationProvider& me
 		treeItemPtr->setToolTip(CT_SOURCE, message.GetInformationSource());
 		treeItemPtr->setData(0, DR_MESSAGE_ID, messageTimeStamp);
 		treeItemPtr->setData(0, DR_CATEGORY, message.GetInformationCategory());
+
+		treeItemPtr->setData(0, DR_IS_MESSAGE_REMOVED_FLAG, false);
 
 		istd::IInformationProvider::InformationCategory category = message.GetInformationCategory();
 		QIcon messageIcon = GetCategoryIcon(category).pixmap(QSize(12, 12), QIcon::Normal, QIcon::On);
@@ -208,14 +210,9 @@ void CLogGuiComp::OnGuiCreated()
 		toolBar->insertSeparator(m_exportAction);
 	}
 
-	QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(LogView);
-	if(scrollArea != NULL){
-		QScrollBar *scrollBar = scrollArea->verticalScrollBar();
-		
-		if(scrollBar != NULL){
-			connect(scrollBar, SIGNAL(rangeChanged(int,int)), this, SLOT(rangeChanged(int,int)));
-		}
-	}
+	connect(&m_removeMessagesTimer, SIGNAL(timeout()), this, SLOT(OnRemoveMessagesTimer()));
+
+	m_removeMessagesTimer.start(5000);
 
 	BaseClass::OnGuiCreated();
 }
@@ -234,6 +231,7 @@ void CLogGuiComp::BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IP
 			istd::IInformationProvider* messagePtr = dynamic_cast<istd::IInformationProvider*>(updateParamsPtr);
 			if (messagePtr != NULL){
 				qint64 messageTimeStamp = messagePtr->GetInformationTimeStamp().toMSecsSinceEpoch();
+			
 				Q_EMIT EmitRemoveMessage(messageTimeStamp);
 			}
 		}
@@ -275,6 +273,8 @@ void CLogGuiComp::UpdateVisualStatus()
 
 void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag)
 {	
+	iqtgui::CWidgetUpdateBlocker widgetUpdateBlocker(LogView);
+
 	I_ASSERT(messagePtr != NULL);
 
 	QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
@@ -300,8 +300,6 @@ void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, boo
 
 void CLogGuiComp::OnRemoveMessage(qint64 messageId)
 {
-	iqtgui::CWidgetUpdateBlocker widgetUpdateBlocker(LogView);
-
 	int itemsCount = LogView->topLevelItemCount();
 
 	for (int itemIndex = itemsCount - 1; itemIndex >= 0; itemIndex--){
@@ -310,7 +308,10 @@ void CLogGuiComp::OnRemoveMessage(qint64 messageId)
 
 		qint64 itemTimeStamp = itemPtr->data(0, DR_MESSAGE_ID).toLongLong();
 		if (itemTimeStamp == messageId){
-			delete LogView->takeTopLevelItem(itemIndex);
+			itemPtr->setData(0, DR_IS_MESSAGE_REMOVED_FLAG, true);
+			itemPtr->setHidden(true);
+			
+			m_messagesWereRemoved = true;
 		}
 	}
 }
@@ -372,6 +373,50 @@ void CLogGuiComp::OnExportAction()
 	if (objectPtr != NULL && m_fileLoaderCompPtr.IsValid()){
 		m_fileLoaderCompPtr->SaveToFile(*objectPtr);
 	}
+}
+
+
+void CLogGuiComp::OnRemoveMessagesTimer()
+{
+	if (!m_messagesWereRemoved){
+		return;
+	}
+
+	iqtgui::CWidgetUpdateBlocker widgetUpdateBlocker(LogView);
+
+	int itemsCount = LogView->topLevelItemCount();
+	QAbstractItemView::SelectionMode selectionMode = LogView->selectionMode();
+
+	LogView->setVisible(false);
+	LogView->setSortingEnabled(false);
+	LogView->setSelectionMode(QAbstractItemView::NoSelection);
+
+	int scrollBarPosition = 0; 
+	QScrollBar* vScrollBar = LogView->verticalScrollBar();
+	if (vScrollBar != NULL){
+		scrollBarPosition = vScrollBar->value();
+	}
+
+	for (int itemIndex = itemsCount - 1; itemIndex >= 0; itemIndex--){
+		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
+		I_ASSERT(itemPtr != NULL);
+
+		bool isMessageRemoved = itemPtr->data(0, DR_IS_MESSAGE_REMOVED_FLAG).toBool();
+		if (isMessageRemoved){
+			delete LogView->takeTopLevelItem(itemIndex);
+		}
+	}
+
+	LogView->setVisible(true);
+	LogView->setSortingEnabled(true);
+	LogView->setSelectionMode(selectionMode);
+
+	vScrollBar = LogView->verticalScrollBar();
+	if (vScrollBar != NULL){
+		vScrollBar->setValue(scrollBarPosition);
+	}
+
+	m_messagesWereRemoved = false;
 }
 
 

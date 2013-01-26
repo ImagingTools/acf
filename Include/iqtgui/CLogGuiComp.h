@@ -3,6 +3,7 @@
 
 
 // Qt includes
+#include <QtCore/QTimer>
 #include <QtGui/QAction>
 
 
@@ -61,7 +62,8 @@ protected:
 	enum DataRole
 	{
 		DR_MESSAGE_ID = Qt::UserRole,
-		DR_CATEGORY
+		DR_CATEGORY,
+		DR_IS_MESSAGE_REMOVED_FLAG
 	};
 
 	/**
@@ -100,6 +102,8 @@ protected Q_SLOTS:
 	virtual void OnClearAction();
 	virtual void OnExportAction();
 
+	void OnRemoveMessagesTimer();
+
 Q_SIGNALS:
 	void EmitAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag);
 	void EmitRemoveMessage(qint64);
@@ -121,7 +125,8 @@ private:
 
 	int m_statusCategory;
 
-	int m_maxScrollBarValue;
+	QTimer m_removeMessagesTimer;
+	bool m_messagesWereRemoved;
 };
 
 
