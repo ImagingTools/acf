@@ -43,7 +43,15 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformationProvider& me
 	if (treeItemPtr != NULL){
 		QDateTime timeStamp = message.GetInformationTimeStamp();
 
-		QString messageTimeString = timeStamp.toString();
+		QString messageTimeString;
+		
+		if (!(*m_logTimeFormatAttrPtr).isEmpty()){
+			messageTimeString = timeStamp.toString(*m_logTimeFormatAttrPtr);
+		}
+		else{
+			messageTimeString = timeStamp.toString();
+		}
+
 		qint64 messageTimeStamp = timeStamp.toMSecsSinceEpoch();
 
 		treeItemPtr->setText(CT_TIME, messageTimeString);
@@ -275,7 +283,9 @@ void CLogGuiComp::UpdateVisualStatus()
 
 void CLogGuiComp::UpdateItemVisibility(QTreeWidgetItem* itemPtr, const QString& filterText) const
 {
-	bool hideItem = false;
+	int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
+
+	bool hideItem = (itemCategory < m_currentMessageMode);
 
 	QString messageText = itemPtr->text(CT_MESSAGE);
 	if (!filterText.isEmpty() && !messageText.contains(filterText, Qt::CaseInsensitive)){
@@ -299,12 +309,9 @@ void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, boo
 	// add message item to the list
 	LogView->insertTopLevelItem(0, itemPtr);
 
-	int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
-
-	itemPtr->setHidden(itemCategory < m_currentMessageMode);
-
 	UpdateItemVisibility(itemPtr, FilterText->text());
 
+	int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
 	if (itemCategory > m_statusCategory){
 		m_statusCategory = itemCategory;
 
@@ -351,6 +358,8 @@ void CLogGuiComp::OnMessageModeChanged()
 	}
 
 	int worstCategory = istd::IInformationProvider::IC_NONE;
+
+	QString filterText = FilterText->text();
 	
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
 		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
@@ -358,7 +367,7 @@ void CLogGuiComp::OnMessageModeChanged()
 
 		int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
 
-		itemPtr->setHidden(itemCategory < m_currentMessageMode);
+		UpdateItemVisibility(itemPtr, filterText);
 
 		if (itemCategory > worstCategory){
 			worstCategory = itemCategory;

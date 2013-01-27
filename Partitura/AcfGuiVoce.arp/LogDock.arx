@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2691
+          2783
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264192
         </Number>
         <Description>
           Qt Framework
@@ -141,7 +141,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="3">
+        <AttributeInfoMap count="7">
           <AttributeInfo>
             <Id>
               DefaultMode
@@ -194,6 +194,70 @@
               <Value>
                 PersistentFileDialogLoader
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowLogDescription
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowLogDescription
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ShowMessageTextFilter
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              ShowMessageTextFilter
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StyleSheet
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              StyleSheet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              TimeFormat
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              TimeFormat
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>
