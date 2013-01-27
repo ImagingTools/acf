@@ -33,9 +33,10 @@ public:
 
 	I_BEGIN_BASE_COMPONENT(CApplicationCompBase);
 		I_REGISTER_INTERFACE(ibase::IApplication);
-		I_ASSIGN(m_translationManagerCompPtr, "TranslationManager", "Translation manager", false, "TranslationManager");
 		I_ASSIGN(m_splashScreenCompPtr, "SplashScreen", "Splash screen shown before application is launched", false, "SplashScreen");
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info used to set main window title", false, "ApplicationInfo");
+		I_ASSIGN(m_translationManagerCompPtr, "TranslationManager", "Translation manager", false, "TranslationManager");
+		I_ASSIGN_MULTI_0(m_standAloneComponentsCompPtr, "StandAloneComponents", "List of components that are not connected to other components, and must be initialized after the start of application loop", false);
 		I_ASSIGN(m_splashTimeAttrPtr, "SplashTime", "Minimal time splash screen will be shown", true, 2);
 		I_ASSIGN(m_styleSheetAttrPtr, "StyleSheet", "Style sheet for the GUI", false, "");
 		I_ASSIGN(m_iconPathAttrPtr, "IconPath", "file path for the application icon", true, ":/Icons/AcfLogo.svg");
@@ -60,6 +61,7 @@ private:
 	I_REF(IGuiObject, m_splashScreenCompPtr);
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
 	I_REF(iqt::ITranslationManager, m_translationManagerCompPtr);
+	I_MULTIREF(istd::IPolymorphic, m_standAloneComponentsCompPtr);
 	I_ATTR(double, m_splashTimeAttrPtr);
 	I_ATTR(QString, m_styleSheetAttrPtr);
 	I_ATTR(QString, m_iconPathAttrPtr);

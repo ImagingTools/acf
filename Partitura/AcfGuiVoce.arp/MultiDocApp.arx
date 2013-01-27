@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2507
+          2777
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264192
         </Number>
         <Description>
           Qt Framework
@@ -244,7 +244,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -316,6 +316,22 @@
               <Value>
                 SplashScreen
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StandAloneComponents
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              StandAloneComponents
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

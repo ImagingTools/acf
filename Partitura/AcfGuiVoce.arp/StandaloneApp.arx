@@ -193,7 +193,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="10">
+        <AttributeInfoMap count="11">
           <AttributeInfo>
             <Id>
               ApplicationInfo
@@ -289,6 +289,22 @@
             </Type>
             <ExportId>
               SplashTime
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StandAloneComponents
+            </Id>
+            <Type>
+              Reference[]
+            </Type>
+            <ExportId>
+              StandAloneComponents
             </ExportId>
             <Data>
               <IsEnabled>
