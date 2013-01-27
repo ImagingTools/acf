@@ -214,6 +214,10 @@ void CLogGuiComp::OnGuiCreated()
 
 	m_removeMessagesTimer.start(5000);
 
+	if (!*m_showMessageTextFilterAttrPtr){
+		FilterFrame->setVisible(false);
+	}
+
 	BaseClass::OnGuiCreated();
 }
 
@@ -269,6 +273,19 @@ void CLogGuiComp::UpdateVisualStatus()
 }
 
 
+void CLogGuiComp::UpdateItemVisibility(QTreeWidgetItem* itemPtr, const QString& filterText) const
+{
+	bool hideItem = false;
+
+	QString messageText = itemPtr->text(CT_MESSAGE);
+	if (!filterText.isEmpty() && !messageText.contains(filterText, Qt::CaseInsensitive)){
+		hideItem = true;
+	}
+
+	itemPtr->setHidden(hideItem);
+}
+
+
 // protected slots
 
 void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag)
@@ -285,6 +302,8 @@ void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, boo
 	int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
 
 	itemPtr->setHidden(itemCategory < m_currentMessageMode);
+
+	UpdateItemVisibility(itemPtr, FilterText->text());
 
 	if (itemCategory > m_statusCategory){
 		m_statusCategory = itemCategory;
@@ -417,6 +436,23 @@ void CLogGuiComp::OnRemoveMessagesTimer()
 	}
 
 	m_messagesWereRemoved = false;
+}
+
+
+void CLogGuiComp::on_FilterText_textChanged(const QString& filterText)
+{
+	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
+		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
+		I_ASSERT(itemPtr != NULL);
+
+		UpdateItemVisibility(itemPtr, filterText);
+	}
+}
+
+
+void CLogGuiComp::on_FilterClearButton_clicked()
+{
+	FilterText->clear();
 }
 
 

@@ -57,11 +57,13 @@
     <file alias="Down.svg">Resources/Icons/Down.svg</file>
     <file alias="PointsAdd">Resources/Icons/PointsAdd.svg</file>
     <file alias="PointsSub">Resources/Icons/PointsSub.svg</file>
+    <file alias="Luppe">Resources/Icons/Luppe.svg</file>
     <file alias="PointsNone">Resources/Icons/PointsNone.svg</file>
     <file alias="PointsMove">Resources/Icons/PointsMove.svg</file>
     <file alias="Grid">Resources/Icons/Grid.svg</file>
     <file alias="LogicalUnit">Resources/Icons/LogicalUnit.svg</file>
   </qresource>
+  <qresource prefix="newPrefix"/>
   <qresource prefix="Style">
     <file>Resources/Style/AcfStyle.ass</file>
   </qresource>

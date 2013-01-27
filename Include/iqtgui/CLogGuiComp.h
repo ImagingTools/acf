@@ -38,6 +38,7 @@ public:
 		I_ASSIGN(m_fileLoaderCompPtr, "Exporter", "File loader used for log export", false, "Exporter");
 		I_ASSIGN(m_defaultModeAttrPtr, "DefaultMode", "Default display mode,\n 0 - info,\n 1 - warning,\n 2 - error", true, 0);
 		I_ASSIGN(m_showLogDescriptionAttrPtr, "ShowLogDescription", "Sets the log tables description visible", false, false);
+		I_ASSIGN(m_showMessageTextFilterAttrPtr, "ShowMessageTextFilter", "If enabled, the text filter for the messages will be shown", true, true);
 	I_END_COMPONENT;
 
 	CLogGuiComp();
@@ -92,6 +93,7 @@ protected:
 
 private:
 	void UpdateVisualStatus();
+	void UpdateItemVisibility(QTreeWidgetItem* itemPtr, const QString& filterText) const;
 
 protected Q_SLOTS:
 	virtual void OnAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag);
@@ -103,6 +105,9 @@ protected Q_SLOTS:
 	virtual void OnExportAction();
 
 	void OnRemoveMessagesTimer();
+
+	void on_FilterText_textChanged(const QString& filterText);
+	void on_FilterClearButton_clicked();
 
 Q_SIGNALS:
 	void EmitAddMessage(const istd::IInformationProvider* messagePtr, bool releaseFlag);
@@ -120,6 +125,7 @@ private:
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 	I_ATTR(int, m_defaultModeAttrPtr);
 	I_ATTR(bool, m_showLogDescriptionAttrPtr);
+	I_ATTR(bool, m_showMessageTextFilterAttrPtr);
 
 	int m_currentMessageMode;
 
