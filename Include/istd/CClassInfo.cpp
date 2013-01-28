@@ -303,7 +303,7 @@ int CClassInfo::GetTemplateParamsCount() const
 		int gtPos = m_name.lastIndexOf('>');
 		if ((gtPos >= 0) && (beginPos < gtPos)){
 			int counter;
-			for (counter = 0; (beginPos = m_name.indexOf(',', beginPos + 1)) >= 0; ++counter);
+			for (counter = 0; (beginPos = m_name.indexOf(',', beginPos + 1)) >= 0; ++counter) ;
 
 			return counter;
 		}

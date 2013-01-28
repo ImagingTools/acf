@@ -1,6 +1,5 @@
 TEMPLATE = subdirs
 CONFIG += ordered
-CONFIG += debug_and_release
 
 SUBDIRS += Static
 SUBDIRS += Component

@@ -54,7 +54,7 @@ bool TCopySerializedWrap<Base>::CopyFrom(const istd::IChangeable& object)
 template <class Base>
 bool TCopySerializedWrap<Base>::IsEqual(const istd::IChangeable& object) const
 {
-	if ((GetSupportedOperations() & SO_COMPARE) && (object.GetSupportedOperations() & SO_COMPARE)){
+	if ((BaseClass::GetSupportedOperations() & istd::IChangeable::SO_COMPARE) && (object.GetSupportedOperations() & istd::IChangeable::SO_COMPARE)){
 		return BaseClass::IsEqual(object);
 	}
 
