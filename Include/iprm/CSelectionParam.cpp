@@ -7,7 +7,7 @@
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 
 namespace iprm
@@ -21,7 +21,7 @@ CSelectionParam::CSelectionParam()
 }
 
 
-void CSelectionParam::SetSelectionConstraints(const ISelectionConstraints* constraintsPtr)
+void CSelectionParam::SetSelectionConstraints(const IOptionsList* constraintsPtr)
 {
 	m_constraintsPtr = constraintsPtr;
 }
@@ -62,7 +62,7 @@ ISelectionParam* CSelectionParam::GetActiveSubselection() const
 
 // reimplemented (iprm::ISelectionParam)
 
-const ISelectionConstraints* CSelectionParam::GetSelectionConstraints() const
+const IOptionsList* CSelectionParam::GetSelectionConstraints() const
 {
 	return m_constraintsPtr;
 }
@@ -136,7 +136,7 @@ bool CSelectionParam::Serialize(iser::IArchive& archive)
 
 	if (retVal && !isStoring){
 		if (		(m_constraintsPtr != NULL) &&
-					((m_constraintsPtr->GetConstraintsFlags() & iprm::ISelectionConstraints::SCF_SUPPORT_UNIQUE_ID) != 0) &&
+					((m_constraintsPtr->GetOptionsFlags() & iprm::IOptionsList::SCF_SUPPORT_UNIQUE_ID) != 0) &&
 					!selectedOptionId.isEmpty()){
 			if (!SetSelectedOptionById(selectedOptionId) && !SetSelectedOptionIndex(selectionOptionIndex)){
 				SetSelectedOptionIndex(-1);

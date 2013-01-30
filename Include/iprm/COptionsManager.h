@@ -14,7 +14,7 @@ namespace iprm
 {
 
 
-class ISelectionConstraints;
+class IOptionsList;
 
 
 /**
@@ -27,10 +27,10 @@ class COptionsManager:
 public:
 	COptionsManager();
 
-	void SetSlaveSelectionConstraints(const iprm::ISelectionConstraints* slaveSelectionConstraintsPtr);
+	void SetSlaveSelectionConstraints(const iprm::IOptionsList* slaveSelectionConstraintsPtr);
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
@@ -74,7 +74,7 @@ private:
 	Options m_options;
 
 private:
-	const iprm::ISelectionConstraints* m_slaveSelectionConstraintsPtr;
+	const iprm::IOptionsList* m_slaveSelectionConstraintsPtr;
 };
 
 

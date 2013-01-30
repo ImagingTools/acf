@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "iqt/CSignalBlocker.h"
 
 
@@ -20,7 +20,7 @@ void CButtonBasedSelectionParamGuiComp::OnGuiModelAttached()
 
 	const iprm::ISelectionParam* paramPtr = GetObjectPtr();
 	if (paramPtr != NULL){
-		const iprm::ISelectionConstraints* constraintsPtr = paramPtr->GetSelectionConstraints();
+		const iprm::IOptionsList* constraintsPtr = paramPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int columns = *m_layoutTypeAttrPtr;
 			if (columns < 1){
@@ -104,7 +104,7 @@ void CButtonBasedSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 			buttonPtr->setChecked(true);
 
 			if (isCompactDescription){
-				const iprm::ISelectionConstraints* constraintsPtr = selectionInfo->paramPtr->GetSelectionConstraints();
+				const iprm::IOptionsList* constraintsPtr = selectionInfo->paramPtr->GetSelectionConstraints();
 				if (constraintsPtr != NULL){
 					buttonPtr->setDescription(constraintsPtr->GetOptionDescription(selectionInfo->index));
 				}
@@ -180,7 +180,7 @@ void CButtonBasedSelectionParamGuiComp::CreateButtons(
 
 	QLayout* layoutPtr = SelectionFrame->layout();
 
-	const iprm::ISelectionConstraints* constraintsPtr = paramPtr->GetSelectionConstraints();
+	const iprm::IOptionsList* constraintsPtr = paramPtr->GetSelectionConstraints();
 	if (constraintsPtr != NULL){
 		int count = constraintsPtr->GetOptionsCount();
 		for (int i = 0; i < count; i++){

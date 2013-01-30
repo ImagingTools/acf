@@ -15,7 +15,7 @@
 #include "icomp/IRegistriesManager.h"
 
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "ifile/IFileNameParam.h"
 
 #include "ibase/TLoggerCompWrap.h"
@@ -31,7 +31,7 @@ namespace icmpstr
 class CRegistryCodeSaverComp:
 			public ibase::CLoggerComponentBase,
 			public iser::IFileLoader,
-			public iprm::ISelectionConstraints
+			public iprm::IOptionsList
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
@@ -54,7 +54,7 @@ public:
 	I_BEGIN_COMPONENT(CRegistryCodeSaverComp);
 		I_REGISTER_INTERFACE(iser::IFileTypeInfo);
 		I_REGISTER_INTERFACE(iser::IFileLoader);
-		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
+		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_ASSIGN(m_packagesManagerCompPtr, "PackagesManager", "Packages manager providing access to package informations", true, "PackagesManager");
 		I_ASSIGN_TO(m_extPackagesManagerCompPtr, m_packagesManagerCompPtr, false);
 		I_ASSIGN(m_registriesManagerCompPtr, "RegistriesManager", "Registries manager providing access to all composite component registries", true, "RegistriesManager");
@@ -78,8 +78,8 @@ public:
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

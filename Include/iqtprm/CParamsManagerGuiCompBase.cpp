@@ -6,7 +6,7 @@
 #include "istd/CChangeDelegator.h"
 
 #include "iprm/IParamsSet.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 #include "iqtgui/CItemDelegate.h"
 #include "iqtgui/CWidgetUpdateBlocker.h"
@@ -107,7 +107,7 @@ void CParamsManagerGuiCompBase::on_ParamsTree_itemSelectionChanged()
 		return;
 	}
 
-	const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
+	const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
 
 	if (		(constraintsPtr != NULL) &&
 				(selectedIndex < constraintsPtr->GetOptionsCount()) &&
@@ -358,7 +358,7 @@ void CParamsManagerGuiCompBase::OnGuiModelAttached()
 			iconsCount = m_iconProviderCompPtr->GetIconCount();
 		}
 
-		const iprm::ISelectionConstraints* typeConstraintsPtr = objectPtr->GetParamsTypeConstraints();
+		const iprm::IOptionsList* typeConstraintsPtr = objectPtr->GetParamsTypeConstraints();
 		if (typeConstraintsPtr != NULL){
 			int typesCount = typeConstraintsPtr->GetOptionsCount();
 

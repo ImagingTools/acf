@@ -10,7 +10,7 @@
 #include "ibase/ICommandsProvider.h"
 
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 #include "idoc/CMultiDocumentManagerBase.h"
 #include "idoc/IDocumentTemplate.h"
@@ -54,7 +54,7 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionParam, ExtractSelectionInfo);
 		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, imod::IModel, ExtractSelectionInfo);
 		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, istd::IChangeable, ExtractSelectionInfo);
-		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::ISelectionConstraints, ExtractSelectionInfo);
+		I_REGISTER_SUBELEMENT_INTERFACE(DocumentSelection, iprm::IOptionsList, ExtractSelectionInfo);
 		I_ASSIGN(m_documentTemplateCompPtr, "DocumentTemplate", "Document template", true, "DocumentTemplate");
 		I_ASSIGN(m_showMaximizedAttrPtr, "ShowViewMaximized", "At start shows the document view maximized", false, true);
 		I_ASSIGN(m_allowViewRepeatingAttrPtr, "AllowViewRepeating", "If enabled, multiple views for the same document are allowed", false, true);
@@ -144,7 +144,7 @@ protected Q_SLOTS:
 	void OnWorkspaceModeChanged();
 
 private:
-	class DocumentSelectionInfo: virtual public iprm::ISelectionParam, virtual public iprm::ISelectionConstraints
+	class DocumentSelectionInfo: virtual public iprm::ISelectionParam, virtual public iprm::IOptionsList
 	{
 	public:
 		DocumentSelectionInfo();
@@ -152,13 +152,13 @@ private:
 		void SetParent(CMultiDocumentWorkspaceGuiComp& parent);
 
 		// reimplemented (iprm::ISelectionParam)
-		virtual const iprm::ISelectionConstraints* GetSelectionConstraints() const;
+		virtual const iprm::IOptionsList* GetSelectionConstraints() const;
 		virtual int GetSelectedOptionIndex() const;
 		virtual bool SetSelectedOptionIndex(int index);
 		virtual iprm::ISelectionParam* GetSubselection(int index) const;
 
-		// reimplemented (iprm::ISelectionConstraints)
-		virtual int GetConstraintsFlags() const;
+		// reimplemented (iprm::IOptionsList)
+		virtual int GetOptionsFlags() const;
 		virtual int GetOptionsCount() const;
 		virtual QString GetOptionName(int index) const;
 		virtual QString GetOptionDescription(int index) const;

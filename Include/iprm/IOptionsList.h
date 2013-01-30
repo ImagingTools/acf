@@ -1,5 +1,5 @@
-#ifndef iprm_ISelectionContstraints_included
-#define iprm_ISelectionContstraints_included
+#ifndef iprm_IOptionsList_included
+#define iprm_IOptionsList_included
 
 
 // Qt includes
@@ -19,7 +19,7 @@ namespace iprm
 /**
 	Constraints of selection from set of possibilities.
 */
-class ISelectionConstraints: virtual public istd::IChangeable
+class IOptionsList: virtual public istd::IChangeable
 {
 public:
 	/**
@@ -41,20 +41,25 @@ public:
 	/**
 		Flags for control constraints behavior.
 	*/
-	enum SelectionConstraintsFlags
+	enum OptionsFlags
 	{
 		SCF_NONE = 0,
 
 		/**
 			If set, every option must have an unique ID.
 		*/
-		SCF_SUPPORT_UNIQUE_ID = 1 << 0
+		SCF_SUPPORT_UNIQUE_ID = 1 << 0,
+
+		/**
+			If set, some options can be disabled.
+		*/
+		SCF_SUPPORT_DISABLED = 1 << 1
 	};
 
 	/**
 		Get constraints flags. The flags describes how the constraints object mantainance
 	*/
-	virtual int GetConstraintsFlags() const = 0;
+	virtual int GetOptionsFlags() const = 0;
 
 	/**
 		Get number of managed options.
@@ -73,7 +78,7 @@ public:
 
 	/**
 		Get option ID. The option ID must be unique, if flag SCF_SUPPORT_UNIQUE_ID is set.
-		\sa SelectionConstraintsFlags
+		\sa OptionsFlags
 	*/
 	virtual QByteArray GetOptionId(int index) const = 0;
 
@@ -88,6 +93,6 @@ public:
 } // namespace iprm
 
 
-#endif // !iprm_ISelectionContstraints_included
+#endif // !iprm_IOptionsList_included
 
 

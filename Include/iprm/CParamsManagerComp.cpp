@@ -100,7 +100,7 @@ int CParamsManagerComp::GetParamsSetsCount() const
 }
 
 
-const ISelectionConstraints* CParamsManagerComp::GetParamsTypeConstraints() const
+const IOptionsList* CParamsManagerComp::GetParamsTypeConstraints() const
 {
 	return NULL;
 }
@@ -274,7 +274,7 @@ bool CParamsManagerComp::SetParamsSetName(int index, const QString& name)
 
 // reimplemented (iprm::ISelectionParam)
 
-const ISelectionConstraints* CParamsManagerComp::GetSelectionConstraints() const
+const IOptionsList* CParamsManagerComp::GetSelectionConstraints() const
 {
 	return this;
 }
@@ -377,9 +377,9 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 }
 
 
-// reimplemented (iprm::ISelectionConstraints)
+// reimplemented (iprm::IOptionsList)
 
-int CParamsManagerComp::GetConstraintsFlags() const
+int CParamsManagerComp::GetOptionsFlags() const
 {
 	return SCF_NONE;
 }

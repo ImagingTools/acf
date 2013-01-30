@@ -15,7 +15,7 @@
 #include "imod/TSingleModelObserverBase.h"
 
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 #include "iqt/ITranslationManager.h"
 
@@ -29,14 +29,14 @@ namespace iqt
 class CTranslationManagerComp:
 			public ibase::CLoggerComponentBase, 
 			virtual public iqt::ITranslationManager,
-			virtual public iprm::ISelectionConstraints
+			virtual public iprm::IOptionsList
 {
 public:
 	typedef ibase::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CTranslationManagerComp);
 		I_REGISTER_INTERFACE(iqt::ITranslationManager);
-		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
+		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_ASSIGN(m_translationFilePathAttrPtr, "TranslationFilePath", "Base file path got translations", true, "");
 		I_ASSIGN(m_translationFilePrefixAttrPtr, "TranslationFilePrefix", "Prefix of the translation file", true, "");
 		I_ASSIGN_MULTI_0(m_languagesAttrPtr, "LanguageIds", "List of language IDs in ISO-format", true);
@@ -59,8 +59,8 @@ public:
 	virtual void SwitchLanguage(int languageIndex);
 	virtual void SetSystemLanguage();
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

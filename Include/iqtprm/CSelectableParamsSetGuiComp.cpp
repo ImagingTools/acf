@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "iprm/IParamsSet.h"
 
 

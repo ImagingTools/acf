@@ -275,7 +275,7 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        iprm::ISelectionConstraints
+        iprm::IOptionsList
       </InterfaceId>
       <ComponentId>
         AcfLocalization

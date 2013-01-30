@@ -23,7 +23,7 @@ public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(COptionsManagerComp);
-		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
+		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_REGISTER_INTERFACE(iprm::IOptionsManager);
 		I_ASSIGN(m_slaveSelectionConstraintsCompPtr, "SlaveConstraints", "Slave constraints object", false, "SlaveConstraints");
@@ -35,7 +35,7 @@ protected:
 	virtual void OnComponentDestroyed();
 
 private:
-	I_REF(iprm::ISelectionConstraints, m_slaveSelectionConstraintsCompPtr);
+	I_REF(iprm::IOptionsList, m_slaveSelectionConstraintsCompPtr);
 };
 
 

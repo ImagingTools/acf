@@ -33,7 +33,7 @@ public:
 	I_BEGIN_COMPONENT(CTabContainerGuiComp);
 		I_REGISTER_SUBELEMENT(TabModel);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::ISelectionParam, ExtractTabModel);
-		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::ISelectionConstraints, ExtractTabModel);
+		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::IOptionsList, ExtractTabModel);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iprm::IOptionsManager, ExtractTabModel);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, iser::ISerializable, ExtractTabModel);
 		I_REGISTER_SUBELEMENT_INTERFACE_T(TabModel, imod::IModel, ExtractTabModel);

@@ -6,7 +6,7 @@
 
 #include "icomp/CComponentBase.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 
 namespace iprm
@@ -18,20 +18,20 @@ namespace iprm
 */
 class CSelectionConstraintsComp:
 			public icomp::CComponentBase,
-			virtual public iprm::ISelectionConstraints
+			virtual public iprm::IOptionsList
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CSelectionConstraintsComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
-		I_REGISTER_INTERFACE(iprm::ISelectionConstraints);
+		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_ASSIGN_MULTI_0(m_optionNamesAttrPtr, "OptionNames", "Names of selectable options", true);
 		I_ASSIGN_MULTI_0(m_optionDescriptionsAttrPtr, "OptionDescriptions", "Descriptions of selectable options", true);
 	I_END_COMPONENT;
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

@@ -5,7 +5,7 @@
 // ACF includes
 #include "icomp/CComponentBase.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "iprm/CSelectionParam.h"
 
 
@@ -40,7 +40,7 @@ protected:
 	virtual void OnComponentCreated();
 
 private:
-	I_REF(ISelectionConstraints, m_constraintsCompPtr);
+	I_REF(IOptionsList, m_constraintsCompPtr);
 	I_REF(ISelectionParam, m_subselectionCompPtr);
 	I_ATTR(int, m_defaultIndexAttrPtr);
 };

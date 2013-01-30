@@ -7,7 +7,7 @@
 #include "imod/CSingleModelObserverBase.h"
 #include "imod/CMultiModelBridgeBase.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "iprm/IParamsSet.h"
 #include "iprm/ISelectionParam.h"
 #include "iprm/IParamsManager.h"
@@ -25,7 +25,7 @@ class CSelectableParamsSetComp:
 			protected imod::CMultiModelBridgeBase,
 			virtual public iprm::IParamsSet,
 			virtual public iprm::ISelectionParam,
-			virtual protected iprm::ISelectionConstraints
+			virtual protected iprm::IOptionsList
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
@@ -52,7 +52,7 @@ public:
 	virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual const ISelectionConstraints* GetSelectionConstraints() const;
+	virtual const IOptionsList* GetSelectionConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
 	virtual ISelectionParam* GetSubselection(int index) const;
@@ -68,8 +68,8 @@ protected:
 	*/
 	void SetupCurrentParamsSetBridge();
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;

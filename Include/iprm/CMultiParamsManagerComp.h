@@ -14,7 +14,7 @@
 
 #include "iprm/IParamsSet.h"
 #include "iprm/ISelectionParam.h"
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 #include "iprm/IParamsManager.h"
 
 
@@ -28,7 +28,7 @@ namespace iprm
 class CMultiParamsManagerComp:
 			public icomp::CComponentBase,
 			virtual public IParamsManager,
-			virtual public ISelectionConstraints,
+			virtual public IOptionsList,
 			protected imod::CMultiModelBridgeBase
 {
 public:
@@ -38,7 +38,7 @@ public:
 		I_REGISTER_INTERFACE(ISelectionParam);
 		I_REGISTER_INTERFACE(IParamsManager);
 		I_REGISTER_INTERFACE(iser::ISerializable);
-		I_REGISTER_INTERFACE(ISelectionConstraints);
+		I_REGISTER_INTERFACE(IOptionsList);
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
 		I_ASSIGN_MULTI_0(m_fixedSetNamesAttrPtr, "FixedSetNames", "List of fixed parameter names", false);
 		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set. Use %1 to insert automatic enumeration ", true, "<noname>");		
@@ -53,7 +53,7 @@ public:
 	// reimplemented (iprm::IParamsManager)
 	virtual int GetIndexOperationFlags(int index = -1) const;
 	virtual int GetParamsSetsCount() const;
-	virtual const ISelectionConstraints* GetParamsTypeConstraints() const;
+	virtual const IOptionsList* GetParamsTypeConstraints() const;
 	virtual int InsertParamsSet(int typeIndex = -1, int index = -1);
 	virtual bool RemoveParamsSet(int index);
 	virtual bool SwapParamsSet(int index1, int index2);
@@ -62,7 +62,7 @@ public:
 	virtual bool SetParamsSetName(int index, const QString& name);
 
 	// reimplemented (iprm::ISelectionParam)
-	virtual const ISelectionConstraints* GetSelectionConstraints() const;
+	virtual const IOptionsList* GetSelectionConstraints() const;
 	virtual int GetSelectedOptionIndex() const;
 	virtual bool SetSelectedOptionIndex(int index);
 	virtual ISelectionParam* GetSubselection(int index) const;
@@ -70,8 +70,8 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-	// reimplemented (iprm::ISelectionConstraints)
-	virtual int GetConstraintsFlags() const;
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
 	virtual QString GetOptionName(int index) const;
 	virtual QString GetOptionDescription(int index) const;
@@ -87,10 +87,10 @@ protected:
 		QString description;
 	};
 
-	struct TypeInfoList: public ISelectionConstraints
+	struct TypeInfoList: public IOptionsList
 	{
-		// reimplemented (iprm::ISelectionConstraints)
-		virtual int GetConstraintsFlags() const;
+		// reimplemented (iprm::IOptionsList)
+		virtual int GetOptionsFlags() const;
 		virtual int GetOptionsCount() const;
 		virtual QString GetOptionName(int index) const;
 		virtual QString GetOptionDescription(int index) const;

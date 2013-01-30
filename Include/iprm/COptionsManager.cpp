@@ -20,17 +20,17 @@ COptionsManager::COptionsManager()
 }
 
 
-void COptionsManager::SetSlaveSelectionConstraints(const iprm::ISelectionConstraints* slaveSelectionConstraintsPtr)
+void COptionsManager::SetSlaveSelectionConstraints(const iprm::IOptionsList* slaveSelectionConstraintsPtr)
 {
 	m_slaveSelectionConstraintsPtr = slaveSelectionConstraintsPtr;
 }
 
 
-// reimplemented (iprm::ISelectionConstraints)
+// reimplemented (iprm::IOptionsList)
 
-int COptionsManager::GetConstraintsFlags() const
+int COptionsManager::GetOptionsFlags() const
 {
-	return SCF_SUPPORT_UNIQUE_ID;
+	return SCF_SUPPORT_UNIQUE_ID | SCF_SUPPORT_DISABLED;
 }
 
 

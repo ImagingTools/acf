@@ -149,9 +149,9 @@ void CTranslationManagerComp::SetSystemLanguage()
 }
 
 
-// reimplemented (iprm::ISelectionConstraints)
+// reimplemented (iprm::IOptionsList)
 
-int CTranslationManagerComp::GetConstraintsFlags() const
+int CTranslationManagerComp::GetOptionsFlags() const
 {
 	return SCF_NONE;
 }

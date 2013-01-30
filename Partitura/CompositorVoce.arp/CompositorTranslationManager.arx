@@ -59,7 +59,7 @@
   <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
-        iprm::ISelectionConstraints
+        iprm::IOptionsList
       </InterfaceId>
       <ComponentId>
         CompositorTranslationManager

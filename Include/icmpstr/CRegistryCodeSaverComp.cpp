@@ -193,9 +193,9 @@ QString CRegistryCodeSaverComp::GetTypeDescription(const QString* extensionPtr) 
 }
 
 
-// reimplemented (iprm::ISelectionConstraints)
+// reimplemented (iprm::IOptionsList)
 
-int CRegistryCodeSaverComp::GetConstraintsFlags() const
+int CRegistryCodeSaverComp::GetOptionsFlags() const
 {
 	return SCF_SUPPORT_UNIQUE_ID;
 }

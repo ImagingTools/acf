@@ -83,7 +83,7 @@ public:
 		Get selection contraints describing each supported type.
 		\return	NULL, if only one annonymed type is supported.
 	*/
-	virtual const ISelectionConstraints* GetParamsTypeConstraints() const = 0;
+	virtual const IOptionsList* GetParamsTypeConstraints() const = 0;
 
 	/**
 		Insert new parameters set at selected position.

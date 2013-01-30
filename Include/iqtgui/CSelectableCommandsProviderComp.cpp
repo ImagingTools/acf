@@ -2,7 +2,7 @@
 
 
 // ACF includes
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 
 namespace iqtgui
@@ -67,7 +67,7 @@ void CSelectableCommandsProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolym
 
 	int currentSelection = selectionPtr->GetSelectedOptionIndex();
 
-	const iprm::ISelectionConstraints* selectionConstrainsPtr = selectionPtr->GetSelectionConstraints();
+	const iprm::IOptionsList* selectionConstrainsPtr = selectionPtr->GetSelectionConstraints();
 	if (selectionConstrainsPtr != NULL){
 		int optionsCount = selectionConstrainsPtr->GetOptionsCount();
 		int indexOffset = m_noSelectionCommandAttrPtr.IsValid() ? 1 : 0;

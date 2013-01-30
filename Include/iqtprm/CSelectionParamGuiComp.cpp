@@ -4,7 +4,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iprm/ISelectionConstraints.h"
+#include "iprm/IOptionsList.h"
 
 #include "iqt/CSignalBlocker.h"
 
@@ -23,7 +23,7 @@ void CSelectionParamGuiComp::OnGuiModelAttached()
 
 	iprm::ISelectionParam* selectionParamsPtr = GetObjectPtr();
 	if (selectionParamsPtr != NULL){
-		const iprm::ISelectionConstraints* constraintsPtr = selectionParamsPtr->GetSelectionConstraints();
+		const iprm::IOptionsList* constraintsPtr = selectionParamsPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			const imod::IModel* constraintsModelPtr = dynamic_cast<const imod::IModel*>(constraintsPtr);
 			if (constraintsModelPtr != NULL){
@@ -263,7 +263,7 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 			switchBoxPtr->removeItem(0);
 		}
 
-		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
+		const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 
@@ -316,7 +316,7 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 		buttonLayoutPtr->setContentsMargins(0, 0, 0, 0);
 
 		QRadioButton* selectedButtonPtr = NULL;
-		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
+		const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
@@ -362,7 +362,7 @@ void CSelectionParamGuiComp::UpdateDescriptionFrame()
 	if (selectionPtr != NULL){
 		int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 		
-		const iprm::ISelectionConstraints* constraintsPtr = selectionPtr->GetSelectionConstraints();
+		const iprm::IOptionsList* constraintsPtr = selectionPtr->GetSelectionConstraints();
 		if (constraintsPtr != NULL && selectedIndex >= 0){
 
 			QString optionDescription = constraintsPtr->GetOptionDescription(selectedIndex);
