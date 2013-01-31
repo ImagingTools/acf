@@ -30,17 +30,17 @@ public:
 	CCompositeComponent();
 	virtual ~CCompositeComponent();
 
+	/**
+		Get interface implemented by this composite component.
+	*/
 	template <class InterfaceType>
 	InterfaceType* GetComponentInterface(const QByteArray& subId = "");
 
 	/**
-		Begin of blocking of automatic component initialization.
+		Make sure, all components with flag 'AutoInit' are initialized.
+		\return	true, if there were components needed to be initialized.
 	*/
-	void BeginAutoInitBlock();
-	/**
-		End of blocking of automatic component initialization.
-	*/
-	bool EndAutoInitBlock();
+	bool EnsureAutoInitComponentsCreated() const;
 
 	// reimplemented (icomp::ICompositeComponent)
 	virtual IComponent* GetSubcomponent(const QByteArray& componentId) const;
@@ -75,8 +75,6 @@ protected:
 				ComponentPtr* subComponentPtr,
 				bool isOwned) const;
 
-	bool EnsureAutoInitComponentsCreated() const;
-
 private:
 	struct ComponentInfo
 	{
@@ -105,12 +103,12 @@ private:
 
 	mutable ComponentMap m_componentMap;
 
-	mutable IRegistry::Ids m_autoInitComponentIds;
-	int m_isAutoInitBlockCount;
-
 	const IComponentContext* m_contextPtr;
 	const ICompositeComponent* m_parentPtr;
 	bool m_isParentOwner;
+
+	mutable bool m_autoInitialized;
+	mutable IRegistry::Ids m_autoInitComponentIds;
 };
 
 

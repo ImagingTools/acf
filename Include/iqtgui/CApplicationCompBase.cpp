@@ -38,16 +38,16 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 			InitializeComponentApplication();
 		}
 
-		icomp::ICompositeComponent* parentPtr = const_cast<icomp::ICompositeComponent*>(GetParentComponent(true));
-		icomp::CCompositeComponent* compositePtr = dynamic_cast<icomp::CCompositeComponent*>(parentPtr);
-
-		if (compositePtr != NULL){
-			compositePtr->EndAutoInitBlock();
+		icomp::CCompositeComponent* rootComponentPtr = NULL;
+		
+		for (		icomp::ICompositeComponent* componentPtr = const_cast<icomp::ICompositeComponent*>(GetParentComponent(true));
+					componentPtr != NULL;
+					componentPtr = const_cast<icomp::ICompositeComponent*>(componentPtr->GetParentComponent(true))){
+			rootComponentPtr = dynamic_cast<icomp::CCompositeComponent*>(componentPtr);
 		}
 
-		int standaloneComponentsCount = m_standAloneComponentsCompPtr.GetCount();
-		for (int i = 0; i < standaloneComponentsCount; i++){
-			m_standAloneComponentsCompPtr[i];
+		if (rootComponentPtr != NULL){
+			rootComponentPtr->EnsureAutoInitComponentsCreated();
 		}
 	}
 
@@ -168,13 +168,6 @@ void CApplicationCompBase::InitializeComponentApplication()
 
 void CApplicationCompBase::OnComponentCreated()
 {
-	icomp::ICompositeComponent* parentPtr = const_cast<icomp::ICompositeComponent*>(GetParentComponent(true));
-	icomp::CCompositeComponent* compositePtr = dynamic_cast<icomp::CCompositeComponent*>(parentPtr);
-
-	if (compositePtr != NULL){
-		compositePtr->BeginAutoInitBlock();
-	}
-
 	BaseClass::OnComponentCreated();
 
 	if (m_applicationPtr.IsValid()){

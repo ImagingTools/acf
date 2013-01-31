@@ -52,7 +52,6 @@ CComponentAccessor::CComponentAccessor(
 	if (registryPtr != NULL){
 		static icomp::CRegistryElement dummyElement;
 
-		m_mainComponent.BeginAutoInitBlock();
 		m_isAutoInitBlocked = true;
 
 		m_mainComponentStaticInfoPtr.SetPtr(new icomp::CCompositeComponentStaticInfo(

@@ -13,10 +13,10 @@ namespace icomp
 
 
 CCompositeComponent::CCompositeComponent()
-:	m_isAutoInitBlockCount(0),
-	m_contextPtr(NULL),
+:	m_contextPtr(NULL),
 	m_parentPtr(NULL),
-	m_isParentOwner(false)
+	m_isParentOwner(false),
+	m_autoInitialized(false)
 {
 }
 
@@ -31,20 +31,42 @@ CCompositeComponent::~CCompositeComponent()
 }
 
 
-void CCompositeComponent::BeginAutoInitBlock()
+bool CCompositeComponent::EnsureAutoInitComponentsCreated() const
 {
-	++m_isAutoInitBlockCount;
-}
+	bool retVal = false;
 
+	if ((m_contextPtr != NULL) && !m_autoInitialized){
+		while (!m_autoInitComponentIds.isEmpty()){
+			QByteArray autoInitId = *m_autoInitComponentIds.begin();
 
-bool CCompositeComponent::EndAutoInitBlock()
-{
-	I_ASSERT(m_isAutoInitBlockCount > 0);
-	if (--m_isAutoInitBlockCount <= 0){
-		return EnsureAutoInitComponentsCreated();
+			m_autoInitComponentIds.erase(m_autoInitComponentIds.begin());
+
+			ComponentInfo& autoInitInfo = m_componentMap[autoInitId];
+			if (!autoInitInfo.isComponentInitialized){
+				autoInitInfo.isComponentInitialized = true;
+				autoInitInfo.isContextInitialized = true;
+
+				CreateSubcomponentInfo(autoInitId, autoInitInfo.contextPtr, &autoInitInfo.componentPtr, true);
+
+				retVal = true;
+			}
+		}
+
+		for (		ComponentMap::iterator iter = m_componentMap.begin();
+					iter != m_componentMap.end();
+					++iter){
+			ComponentInfo& info = iter.value();
+
+			icomp::CCompositeComponent* compositeComponentPtr = dynamic_cast<icomp::CCompositeComponent*>(info.componentPtr.GetPtr());
+			if (compositeComponentPtr != NULL){
+				retVal = compositeComponentPtr->EnsureAutoInitComponentsCreated() || retVal;
+			}
+		}
+
+		m_autoInitialized = true;
 	}
 
-	return false;
+	return retVal;
 }
 
 
@@ -380,32 +402,15 @@ bool CCompositeComponent::CreateSubcomponentInfo(
 			}
 
 			(*subComponentPtr)->SetComponentContext(subContextPtr.GetPtr(), this, isOwned);
-		}
-	}
 
-	return true;
-}
-
-
-bool CCompositeComponent::EnsureAutoInitComponentsCreated() const
-{
-	if (m_contextPtr != NULL){
-		while ((m_isAutoInitBlockCount <= 0) && !m_autoInitComponentIds.isEmpty()){
-			QByteArray autoInitId = *m_autoInitComponentIds.begin();
-
-			m_autoInitComponentIds.erase(m_autoInitComponentIds.begin());
-
-			ComponentInfo& autoInitInfo = m_componentMap[autoInitId];
-			if (!autoInitInfo.isComponentInitialized){
-				autoInitInfo.isComponentInitialized = true;
-				autoInitInfo.isContextInitialized = true;
-
-				CreateSubcomponentInfo(autoInitId, autoInitInfo.contextPtr, &autoInitInfo.componentPtr, true);
+			icomp::CCompositeComponent* compositeComponentPtr = dynamic_cast<icomp::CCompositeComponent*>((*subComponentPtr).GetPtr());
+			if (compositeComponentPtr != NULL){
+				compositeComponentPtr->EnsureAutoInitComponentsCreated();
 			}
 		}
 	}
 
-	return m_autoInitComponentIds.isEmpty();
+	return true;
 }
 
 
