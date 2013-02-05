@@ -26,7 +26,7 @@ private:
 inline CWidgetUpdateBlocker::CWidgetUpdateBlocker(QWidget* widgetPtr)
 	:m_widgetPtr(widgetPtr)
 {
-	I_ASSERT(widgetPtr != NULL);
+	Q_ASSERT(widgetPtr != NULL);
 
 	m_widgetPtr->setUpdatesEnabled(false);
 }

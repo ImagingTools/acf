@@ -75,7 +75,7 @@ bool CApplicationCompBase::TryShowSplashScreen()
 	m_useSplashScreen = m_splashScreenCompPtr.IsValid() && m_splashScreenCompPtr->CreateGui(NULL);
 	if (m_useSplashScreen){
 		QWidget* splashWidgetPtr = m_splashScreenCompPtr->GetWidget();
-		I_ASSERT(splashWidgetPtr != NULL);
+		Q_ASSERT(splashWidgetPtr != NULL);
 
 		splashWidgetPtr->show();
 
@@ -91,13 +91,13 @@ bool CApplicationCompBase::TryShowSplashScreen()
 void CApplicationCompBase::HideSplashScreen()
 {
 	if (m_useSplashScreen){
-		I_ASSERT(m_splashScreenCompPtr.IsValid());
+		Q_ASSERT(m_splashScreenCompPtr.IsValid());
 
-		I_ASSERT(m_splashTimeAttrPtr.IsValid());
+		Q_ASSERT(m_splashTimeAttrPtr.IsValid());
 		m_splashScreenTimer.WaitTo(m_splashTimeAttrPtr->GetValue());
 
 		QWidget* splashWidgetPtr = m_splashScreenCompPtr->GetWidget();
-		I_ASSERT(splashWidgetPtr != NULL);
+		Q_ASSERT(splashWidgetPtr != NULL);
 
 		splashWidgetPtr->hide();
 

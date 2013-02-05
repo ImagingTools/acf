@@ -103,7 +103,7 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 			m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_SHUTDOWN);
 
-			I_ASSERT(m_mainGuiCompPtr.IsValid());
+			Q_ASSERT(m_mainGuiCompPtr.IsValid());
 			m_mainGuiCompPtr->DestroyGui();
 
 			m_mainWidgetPtr.Reset();

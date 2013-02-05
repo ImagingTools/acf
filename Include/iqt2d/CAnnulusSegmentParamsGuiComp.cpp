@@ -15,10 +15,10 @@ namespace iqt2d
 
 void CAnnulusSegmentParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CAnnulusSegment* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(NULL);
 
@@ -60,7 +60,7 @@ void CAnnulusSegmentParamsGuiComp::UpdateModel() const
 
 void CAnnulusSegmentParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CAnnulusSegment* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

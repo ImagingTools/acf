@@ -207,7 +207,7 @@ typename TCascadedMap<Key, Value>::ValueType* TCascadedMap<Key, Value>::FindLoca
 template <typename Key, typename Value>
 const typename TCascadedMap<Key, Value>::KeyType& TCascadedMap<Key, Value>::GetLocalKeyAt(int index) const
 {
-	I_ASSERT(index < int(m_pairList.size()));
+	Q_ASSERT(index < int(m_pairList.size()));
 
 	return m_pairList[index].first;
 }
@@ -216,7 +216,7 @@ const typename TCascadedMap<Key, Value>::KeyType& TCascadedMap<Key, Value>::GetL
 template <typename Key, typename Value>
 typename TCascadedMap<Key, Value>::KeyType& TCascadedMap<Key, Value>::GetLocalKeyAt(int index)
 {
-	I_ASSERT(index < int(m_pairList.size()));
+	Q_ASSERT(index < int(m_pairList.size()));
 
 	return m_pairList[index].first;
 }
@@ -225,7 +225,7 @@ typename TCascadedMap<Key, Value>::KeyType& TCascadedMap<Key, Value>::GetLocalKe
 template <typename Key, typename Value>
 typename TCascadedMap<Key, Value>::ValueType& TCascadedMap<Key, Value>::GetLocalValueAt(int index)
 {
-	I_ASSERT(index < int(m_pairList.size()));
+	Q_ASSERT(index < int(m_pairList.size()));
 
 	return m_pairList[index].second;
 }
@@ -234,7 +234,7 @@ typename TCascadedMap<Key, Value>::ValueType& TCascadedMap<Key, Value>::GetLocal
 template <typename Key, typename Value>
 const typename TCascadedMap<Key, Value>::ValueType& TCascadedMap<Key, Value>::GetLocalValueAt(int index) const
 {
-	I_ASSERT(index < int(m_pairList.size()));
+	Q_ASSERT(index < int(m_pairList.size()));
 
 	return m_pairList[index].second;
 }
@@ -375,7 +375,7 @@ const typename TCascadedMap<Key, Value>::KeyType& TCascadedMap<Key, Value>::GetK
 		return GetLocalKeyAt(index);
 	}
 
-	I_ASSERT(m_parentPtr != NULL);	// Index from outside this map!
+	Q_ASSERT(m_parentPtr != NULL);	// Index from outside this map!
 
 	return m_parentPtr->GetKeyAt(index - elementsCount);
 }
@@ -389,7 +389,7 @@ const typename TCascadedMap<Key, Value>::ValueType& TCascadedMap<Key, Value>::Ge
 		return GetLocalValueAt(index);
 	}
 
-	I_ASSERT(m_parentPtr != NULL);	// Index from outside this map!
+	Q_ASSERT(m_parentPtr != NULL);	// Index from outside this map!
 
 	return m_parentPtr->GetValueAt(index - elementsCount);
 }

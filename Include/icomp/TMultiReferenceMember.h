@@ -81,11 +81,11 @@ bool TMultiReferenceMember<Interface>::IsValid() const
 template <class Interface>
 Interface* TMultiReferenceMember<Interface>::operator[](int index) const
 {
-	I_ASSERT(index >= 0);
+	Q_ASSERT(index >= 0);
 
 	EnsureInitialized();
 
-	I_ASSERT(index < int(m_components.size()));
+	Q_ASSERT(index < int(m_components.size()));
 
 	return m_components[index];
 }

@@ -15,10 +15,10 @@ namespace iqt2d
 
 void CRectangleParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CRectangle* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(NULL);
 
@@ -72,7 +72,7 @@ void CRectangleParamsGuiComp::OnGuiModelDetached()
 
 void CRectangleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CRectangle* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

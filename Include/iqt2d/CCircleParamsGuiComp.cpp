@@ -15,10 +15,10 @@ namespace iqt2d
 
 void CCircleParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CCircle* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(NULL);
 
@@ -71,7 +71,7 @@ void CCircleParamsGuiComp::OnGuiModelDetached()
 
 void CCircleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CCircle* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

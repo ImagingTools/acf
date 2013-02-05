@@ -59,7 +59,7 @@ void CInteractiveCircleShape::SetCenterVisible(bool state)
 
 bool CInteractiveCircleShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetModelPtr());
 	if (circlePtr != NULL){
@@ -105,7 +105,7 @@ bool CInteractiveCircleShape::OnMouseMove(istd::CIndex2d position)
 	if (m_editRadiusMode){
 		imod::IModel* modelPtr = GetModelPtr();
 		i2d::CCircle& circle = *dynamic_cast<i2d::CCircle*>(modelPtr);
-		I_ASSERT(&circle != NULL);
+		Q_ASSERT(&circle != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const i2d::CVector2d& cp = transform.GetClientPosition(position);
@@ -134,7 +134,7 @@ bool CInteractiveCircleShape::OnMouseMove(istd::CIndex2d position)
 
 void CInteractiveCircleShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	if (IsCenterVisible()){
 		BaseClass::Draw(drawContext);
@@ -142,7 +142,7 @@ void CInteractiveCircleShape::Draw(QPainter& drawContext) const
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	const i2d::CCircle& circle = *dynamic_cast<const i2d::CCircle*>(modelPtr);
-	I_ASSERT(&circle != NULL);
+	Q_ASSERT(&circle != NULL);
 
 	const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
@@ -193,7 +193,7 @@ void CInteractiveCircleShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveCircleShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CCircle*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CCircle*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -257,7 +257,7 @@ ITouchable::TouchState CInteractiveCircleShape::IsTouched(istd::CIndex2d positio
 
 i2d::CRect CInteractiveCircleShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetModelPtr());
 	if (circlePtr != NULL){

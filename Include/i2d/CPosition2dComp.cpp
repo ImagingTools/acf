@@ -13,8 +13,8 @@ void CPosition2dComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_xAttrPtr.IsValid());
-	I_ASSERT(m_yAttrPtr.IsValid());
+	Q_ASSERT(m_xAttrPtr.IsValid());
+	Q_ASSERT(m_yAttrPtr.IsValid());
 
 	SetPosition(i2d::CVector2d(*m_xAttrPtr, *m_yAttrPtr));
 }

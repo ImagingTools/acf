@@ -31,8 +31,8 @@ int CPolyline::GetSegmentsCount() const
 
 i2d::CLine2d CPolyline::GetSegmentLine(int segmentIndex) const
 {
-	I_ASSERT(segmentIndex >= 0);
-	I_ASSERT(segmentIndex < GetSegmentsCount());
+	Q_ASSERT(segmentIndex >= 0);
+	Q_ASSERT(segmentIndex < GetSegmentsCount());
 
 	int size = GetNodesCount();
 	return i2d::CLine2d(GetNode(segmentIndex), GetNode((segmentIndex + 1) % size));
@@ -63,11 +63,11 @@ double CPolyline::GetLength() const
 
 i2d::CVector2d CPolyline::GetKneeVector(int nodeIndex) const
 {
-	I_ASSERT(nodeIndex >= 0);
+	Q_ASSERT(nodeIndex >= 0);
 
 	int nodesCount = GetNodesCount();
 	bool isClosed = IsClosed();
-	I_ASSERT(nodeIndex <= nodesCount);
+	Q_ASSERT(nodeIndex <= nodesCount);
 
 	if (nodesCount <= 1){
 		return i2d::CVector2d(0, 0);

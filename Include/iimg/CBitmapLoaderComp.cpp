@@ -127,7 +127,7 @@ int CBitmapLoaderComp::SaveToFile(const istd::IChangeable& data, const QString& 
 		}
 	}
 
-	I_ASSERT(imageProviderPtr != NULL);
+	Q_ASSERT(imageProviderPtr != NULL);
 
 	const QImage& image = imageProviderPtr->GetQImage();
 	if (image.save(filePath)){

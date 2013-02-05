@@ -27,7 +27,7 @@ CComponentNoteEditorComp::CComponentNoteEditorComp()
 void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
 {
 	IElementSelectionInfo* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	iqt::CSignalBlocker blockTextEditor(NoteEditor);
 	
@@ -62,7 +62,7 @@ void CComponentNoteEditorComp::UpdateGui(int /*updateFlags*/)
 void CComponentNoteEditorComp::UpdateModel() const
 {
 	IElementSelectionInfo* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	icmpstr::IComponentNoteController* componentNoteControllerPtr = dynamic_cast<icmpstr::IComponentNoteController*>(objectPtr->GetSelectedRegistry());
 	if (componentNoteControllerPtr != NULL){
@@ -81,7 +81,7 @@ void CComponentNoteEditorComp::OnGuiModelAttached()
 	BaseClass::OnGuiModelAttached();
 
 	IElementSelectionInfo* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 	
 	imod::IModel* registryModelPtr = dynamic_cast<imod::IModel*>(objectPtr->GetSelectedRegistry());
 	if (registryModelPtr != NULL){

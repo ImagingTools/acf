@@ -167,8 +167,8 @@ int CBitmap::GetPixelBitsCount() const
 
 const void* CBitmap::GetLinePtr(int positionY) const
 {
-	I_ASSERT(positionY >= 0);
-	I_ASSERT(positionY < GetImageSize().GetY());
+	Q_ASSERT(positionY >= 0);
+	Q_ASSERT(positionY < GetImageSize().GetY());
 
 	return m_image.scanLine(positionY);
 }
@@ -176,8 +176,8 @@ const void* CBitmap::GetLinePtr(int positionY) const
 
 void* CBitmap::GetLinePtr(int positionY)
 {
-	I_ASSERT(positionY >= 0);
-	I_ASSERT(positionY < GetImageSize().GetY());
+	Q_ASSERT(positionY >= 0);
+	Q_ASSERT(positionY < GetImageSize().GetY());
 
 	return m_image.scanLine(positionY);
 }

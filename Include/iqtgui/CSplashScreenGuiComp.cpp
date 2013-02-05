@@ -15,7 +15,7 @@ namespace iqtgui
 
 void CSplashScreenGuiComp::OnGuiCreated()
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	QPalette palette = GetQtWidget()->palette();
 
 	if (m_applicationInfoCompPtr.IsValid()){

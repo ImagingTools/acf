@@ -40,7 +40,7 @@ void CModelDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 	if (workingDataPtr != NULL){
 		if (workingDataPtr->CopyFrom(*sourceDataPtr)){
 			imod::IModel* workingModelPtr = m_workingModelFactoryCompPtr.ExtractInterface(m_workingObjectPtr.GetPtr());
-			I_ASSERT(workingModelPtr != NULL);
+			Q_ASSERT(workingModelPtr != NULL);
 			if (workingModelPtr != NULL){
 				bool isAttached = workingModelPtr->AttachObserver(m_editorCompPtr.GetPtr());
 				if (isAttached){

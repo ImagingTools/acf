@@ -113,8 +113,8 @@ int TMultiAttribute<Value>::GetValuesCount() const
 template <typename Value>
 const Value& TMultiAttribute<Value>::GetValueAt(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetValuesCount());
 
 	return m_values[index].value;
 }
@@ -123,8 +123,8 @@ const Value& TMultiAttribute<Value>::GetValueAt(int index) const
 template <typename Value>
 void TMultiAttribute<Value>::SetValueAt(int index, const Value& value)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetValuesCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetValuesCount());
 
 	m_values[index].value = value;
 }

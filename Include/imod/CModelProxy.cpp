@@ -23,7 +23,7 @@ void CModelProxy::SetModelPtr(imod::IModel* modelPtr)
 	if (m_modelPtr != NULL){
 		DetachProxyObservers();
 
-		I_ASSERT(m_modelPtr->IsAttached(&m_modelObserver));
+		Q_ASSERT(m_modelPtr->IsAttached(&m_modelObserver));
 		m_modelPtr->DetachObserver(&m_modelObserver);
 	}
 
@@ -45,7 +45,7 @@ void CModelProxy::ResetModel()
 
 bool CModelProxy::AttachObserver(IObserver* observerPtr)
 {
-	I_ASSERT(observerPtr != NULL);
+	Q_ASSERT(observerPtr != NULL);
 	if (observerPtr == NULL){
 		return false;
 	}
@@ -155,7 +155,7 @@ CModelProxy::ModelObserver::ModelObserver(CModelProxy& parent)
 
 bool CModelProxy::ModelObserver::OnDetached(imod::IModel* modelPtr)
 {
-	I_ASSERT(modelPtr == m_parent.m_modelPtr);
+	Q_ASSERT(modelPtr == m_parent.m_modelPtr);
 
 	if (modelPtr == m_parent.m_modelPtr){
 		m_parent.ResetModel();

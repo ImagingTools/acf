@@ -134,8 +134,8 @@ void CColorSchemaBase::DrawTicker(QPainter& drawContext, istd::CIndex2d point, T
 
 const i2d::CRect& CColorSchemaBase::GetTickerBox(TickerType tickerType) const
 {
-	I_ASSERT(tickerType >= 0);
-	I_ASSERT(tickerType <= TT_LAST);
+	Q_ASSERT(tickerType >= 0);
+	Q_ASSERT(tickerType <= TT_LAST);
 
 	return s_tickersBoxes[tickerType];
 }

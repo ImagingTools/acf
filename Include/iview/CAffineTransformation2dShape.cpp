@@ -202,7 +202,7 @@ void CAffineTransformation2dShape::SetActiveControlPoints(ControlPoint points)
 
 void CAffineTransformation2dShape::Draw(QPainter & drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const IColorSchema& schema = GetColorSchema();
 
@@ -307,7 +307,7 @@ void CAffineTransformation2dShape::Draw(QPainter & drawContext) const
 
 bool CAffineTransformation2dShape::OnAttached(imod::IModel * modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CAffineTransformation2d*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CAffineTransformation2d*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -340,7 +340,7 @@ ITouchable::TouchState CAffineTransformation2dShape::IsTouched(istd::CIndex2d po
 
 i2d::CRect CAffineTransformation2dShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	i2d::CAffineTransformation2d* transformationPtr = dynamic_cast<i2d::CAffineTransformation2d*>(GetModelPtr());
 	const iview::CScreenTransform& transform = GetLogToScreenTransform();

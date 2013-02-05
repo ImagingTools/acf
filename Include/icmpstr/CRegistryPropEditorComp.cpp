@@ -131,7 +131,7 @@ void CRegistryPropEditorComp::OnGuiModelDetached()
 
 void CRegistryPropEditorComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	const icomp::IRegistry* registryPtr = GetObjectPtr();
 	if (registryPtr == NULL){

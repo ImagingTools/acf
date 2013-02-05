@@ -25,7 +25,7 @@ CInteractiveCenterPinShape::CInteractiveCenterPinShape()
 
 void CInteractiveCenterPinShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
@@ -53,7 +53,7 @@ void CInteractiveCenterPinShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveCenterPinShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	if (!IsEditablePosition()){
 		EndModelChanges();
@@ -91,7 +91,7 @@ bool CInteractiveCenterPinShape::OnMouseMove(istd::CIndex2d position)
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		i2d::CPosition2d& pin = *dynamic_cast<i2d::CPosition2d*>(modelPtr);
-		I_ASSERT(&pin != NULL);
+		Q_ASSERT(&pin != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		
@@ -112,7 +112,7 @@ bool CInteractiveCenterPinShape::OnMouseMove(istd::CIndex2d position)
 
 i2d::CRect CInteractiveCenterPinShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){

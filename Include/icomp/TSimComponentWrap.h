@@ -104,7 +104,7 @@ IComponent* TSimComponentWrap<Base>::CreateSubcomponent(const QByteArray& compon
 {
 	FactoriesMap::ConstIterator iter = m_factoriesMap.constFind(componentId);
 	if (iter != m_factoriesMap.constEnd()){
-		I_ASSERT(iter.value() != NULL);
+		Q_ASSERT(iter.value() != NULL);
 
 		return iter.value()->CreateInstance();
 	}

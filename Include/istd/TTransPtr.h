@@ -76,7 +76,7 @@ protected:
 		RefCountBase(Type* pointer)
 		:	BaseClass(pointer)
 		{
-			I_ASSERT(pointer != NULL);
+			Q_ASSERT(pointer != NULL);
 		}
 		virtual ~RefCountBase(){}
 
@@ -190,8 +190,8 @@ TTransPtr<Type>& TTransPtr<Type>::operator=(const TTransPtr& pointer)
 template <class Type>
 inline Type& TTransPtr<Type>::operator*() const
 {
-	I_ASSERT(m_counterPtr != NULL);
-	I_ASSERT(m_counterPtr->GetPtr() != NULL);
+	Q_ASSERT(m_counterPtr != NULL);
+	Q_ASSERT(m_counterPtr->GetPtr() != NULL);
 
 	return *m_counterPtr->GetPtr();
 }
@@ -200,8 +200,8 @@ inline Type& TTransPtr<Type>::operator*() const
 template <class Type>
 inline Type* TTransPtr<Type>::operator->() const
 {
-	I_ASSERT(m_counterPtr != NULL);
-	I_ASSERT(m_counterPtr->GetPtr() != NULL);
+	Q_ASSERT(m_counterPtr != NULL);
+	Q_ASSERT(m_counterPtr->GetPtr() != NULL);
 
 	return m_counterPtr->GetPtr();
 }

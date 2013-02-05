@@ -9,7 +9,7 @@ namespace iview
 
 void CShapeInfoGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	IShapeStatusInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

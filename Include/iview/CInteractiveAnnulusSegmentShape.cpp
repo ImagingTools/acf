@@ -43,7 +43,7 @@ void CInteractiveAnnulusSegmentShape::SetEditableAngles(bool editable)
 
 bool CInteractiveAnnulusSegmentShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CAnnulusSegment* objectPtr = dynamic_cast<const i2d::CAnnulusSegment*>(GetModelPtr());
 	if (objectPtr != NULL){
@@ -131,7 +131,7 @@ bool CInteractiveAnnulusSegmentShape::OnMouseMove(istd::CIndex2d position)
 	if (m_editRadiusMode || m_editRadius2Mode || m_editAngle1Mode || m_editAngle2Mode){
 		imod::IModel* modelPtr = GetModelPtr();
 		i2d::CAnnulusSegment* objectPtr = dynamic_cast<i2d::CAnnulusSegment*>(modelPtr);
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
@@ -197,13 +197,13 @@ bool CInteractiveAnnulusSegmentShape::OnMouseMove(istd::CIndex2d position)
 
 void CInteractiveAnnulusSegmentShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 
 	const i2d::CAnnulusSegment* objectPtr = dynamic_cast<const i2d::CAnnulusSegment*>(modelPtr);
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 
@@ -271,7 +271,7 @@ void CInteractiveAnnulusSegmentShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveAnnulusSegmentShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CAnnulusSegment*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CAnnulusSegment*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -281,11 +281,11 @@ bool CInteractiveAnnulusSegmentShape::OnAttached(imod::IModel* modelPtr)
 
 ITouchable::TouchState CInteractiveAnnulusSegmentShape::IsTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	const i2d::CAnnulusSegment* objectPtr = dynamic_cast<const i2d::CAnnulusSegment*>(modelPtr);
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	const i2d::ICalibration2d* calibrationPtr = objectPtr->GetCalibration();
 

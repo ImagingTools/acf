@@ -73,16 +73,16 @@ protected:
 		// reimplemented (RefCountBase)
 		virtual void OnAttached()
 		{
-			I_ASSERT(IsValid());
-			I_ASSERT(m_count > 0);
+			Q_ASSERT(IsValid());
+			Q_ASSERT(m_count > 0);
 
 			++m_count;
 		}
 
 		virtual void OnDetached()
 		{
-			I_ASSERT(IsValid());
-			I_ASSERT(m_count > 0);
+			Q_ASSERT(IsValid());
+			Q_ASSERT(m_count > 0);
 
 			if (--m_count <= 0){
 				Accessor::Delete(BaseClass::GetPtr());
@@ -157,7 +157,7 @@ TSmartPtr<Type, Accessor>& TSmartPtr<Type, Accessor>::operator=(const TTransPtr<
 	RefCountBase* pointerInternalCounter = BaseClass::GetInternalCounter(pointer);
 
 	if (pointerInternalCounter != BaseClass::m_counterPtr){
-		I_ASSERT((pointerInternalCounter == NULL) || (BaseClass::m_counterPtr == NULL) || (*pointerInternalCounter != *BaseClass::m_counterPtr)); // two different reference counters cannot shown at the same destination object
+		Q_ASSERT((pointerInternalCounter == NULL) || (BaseClass::m_counterPtr == NULL) || (*pointerInternalCounter != *BaseClass::m_counterPtr)); // two different reference counters cannot shown at the same destination object
 
 		BaseClass::Detach();
 
@@ -178,7 +178,7 @@ TSmartPtr<Type, Accessor>& TSmartPtr<Type, Accessor>::operator=(const TSmartPtr&
 	RefCountBase* pointerInternalCounter = BaseClass::GetInternalCounter(pointer);
 
 	if (pointerInternalCounter != BaseClass::m_counterPtr){
-		I_ASSERT((pointerInternalCounter == NULL) || (BaseClass::m_counterPtr == NULL) || (*pointerInternalCounter != *BaseClass::m_counterPtr)); // two different reference counters cannot shown at the same destination object
+		Q_ASSERT((pointerInternalCounter == NULL) || (BaseClass::m_counterPtr == NULL) || (*pointerInternalCounter != *BaseClass::m_counterPtr)); // two different reference counters cannot shown at the same destination object
 
 		BaseClass::Detach();
 

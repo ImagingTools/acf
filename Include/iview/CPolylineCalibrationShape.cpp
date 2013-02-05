@@ -159,7 +159,7 @@ bool CPolylineCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::Mouse
 
 bool CPolylineCalibrationShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CPolyline*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CPolyline*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }

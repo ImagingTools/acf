@@ -15,8 +15,8 @@ CMultiModelObserverBase::~CMultiModelObserverBase()
 
 IModel* CMultiModelObserverBase::GetModelPtr(int modelIndex) const
 {
-	I_ASSERT(modelIndex >= 0);
-	I_ASSERT(modelIndex < GetModelCount());
+	Q_ASSERT(modelIndex >= 0);
+	Q_ASSERT(modelIndex < GetModelCount());
 
 	return m_models.at(modelIndex);
 }
@@ -44,7 +44,7 @@ bool CMultiModelObserverBase::IsModelAttached(const imod::IModel* modelPtr) cons
 
 bool CMultiModelObserverBase::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 
 	if (IsModelAttached(modelPtr)){
 		return false;
@@ -71,13 +71,13 @@ bool CMultiModelObserverBase::OnDetached(IModel* modelPtr)
 
 void CMultiModelObserverBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	I_ASSERT(IsModelAttached(modelPtr));
+	Q_ASSERT(IsModelAttached(modelPtr));
 }
 
 
 void CMultiModelObserverBase::AfterUpdate(IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(IsModelAttached(modelPtr));
+	Q_ASSERT(IsModelAttached(modelPtr));
 
 	if (IsModelAttached(modelPtr)){
 		OnUpdate(modelPtr, updateFlags, updateParamsPtr);
@@ -91,7 +91,7 @@ void CMultiModelObserverBase::EnsureModelsDetached()
 {
 	while (!m_models.isEmpty()){
 		imod::IModel* modelPtr = m_models.front();
-		I_ASSERT(modelPtr != NULL);
+		Q_ASSERT(modelPtr != NULL);
 
 		modelPtr->DetachObserver(this);
 	}

@@ -44,14 +44,12 @@ static const double I_BIG_EPSILON = 1.0e-8;
 
 
 #define I_IF_DEBUG(instructions) instructions
-#define I_ASSERT(condition) Q_ASSERT(condition)
 #define I_CRITICAL() Q_ASSERT(false)
 
 
 #else // _DEBUG || DEBUG
 
 
-#define I_ASSERT(test)
 #define I_CRITICAL()
 #define I_IF_DEBUG(instructions)
 

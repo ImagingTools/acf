@@ -195,7 +195,7 @@ bool CGeneralBitmap::CreateBitmap(
 	istd::CChangeNotifier notifier(this);
 
 	m_linesDifference = (pixelBitsCount * size.GetX() + 7) >> 3;
-	I_ASSERT(m_linesDifference >= 0);
+	Q_ASSERT(m_linesDifference >= 0);
 
 	m_size = size;
 	m_pixelBitsCount = pixelBitsCount;

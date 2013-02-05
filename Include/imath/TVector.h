@@ -543,8 +543,8 @@ inline TVector<Size, Element> TVector<Size, Element>::operator/(Element scalar) 
 template <int Size, class Element>
 const Element& TVector<Size, Element>::operator[](int i) const
 {
-	I_ASSERT(i >= 0);
-	I_ASSERT(i < Size);
+	Q_ASSERT(i >= 0);
+	Q_ASSERT(i < Size);
 
 	return m_elements[i];
 }
@@ -553,8 +553,8 @@ const Element& TVector<Size, Element>::operator[](int i) const
 template <int Size, class Element>
 Element& TVector<Size, Element>::operator[](int i)
 {
-	I_ASSERT(i >= 0);
-	I_ASSERT(i < Size);
+	Q_ASSERT(i >= 0);
+	Q_ASSERT(i < Size);
 
 	return m_elements[i];
 }

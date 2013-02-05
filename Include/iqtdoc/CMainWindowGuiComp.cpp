@@ -85,7 +85,7 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 							iter != ids.end();
 							++iter){
 					const QByteArray& documentTypeId = *iter;
-					I_ASSERT(!documentTypeId.isEmpty());
+					Q_ASSERT(!documentTypeId.isEmpty());
 
 					RecentGroupCommandPtr& groupCommandPtr = m_recentFilesMap[documentTypeId];
 
@@ -331,7 +331,7 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 					index != m_recentFilesMap.end();
 					index++){
 			QByteArray documentTypeId = index.key();
-			I_ASSERT(!documentTypeId.isEmpty());
+			Q_ASSERT(!documentTypeId.isEmpty());
 
 			retVal = retVal && archive.BeginTag(documentTypeIdTag);
 			retVal = retVal && archive.Process(documentTypeId);
@@ -352,7 +352,7 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 			retVal = retVal && archive.BeginMultiTag(fileListTag, filePathTag, filesCount);
 
 			for (int i = filesCount - 1; i >= 0; --i){
-				I_ASSERT(groupCommandPtr.IsValid());
+				Q_ASSERT(groupCommandPtr.IsValid());
 
 				RecentFileCommand* commandPtr = dynamic_cast<RecentFileCommand*>(groupCommandPtr->GetChild(i));
 				if ((commandPtr != NULL) && commandPtr->IsOpenCommand()){
@@ -424,7 +424,7 @@ void CMainWindowGuiComp::UpdateRecentFileList(const idoc::IDocumentManager::File
 
 		QString filePath = fileInfo.absoluteFilePath();
 		const QByteArray documentTypeId = iter.value();
-		I_ASSERT(!documentTypeId.isEmpty());
+		Q_ASSERT(!documentTypeId.isEmpty());
 
 		RemoveFromRecentFileList(filePath);
 
@@ -703,7 +703,7 @@ bool CMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
 	if (eventPtr->type() == QEvent::DragEnter){
 		QDragEnterEvent* dragEnterEventPtr = dynamic_cast<QDragEnterEvent*>(eventPtr);
-		I_ASSERT(dragEnterEventPtr != NULL);
+		Q_ASSERT(dragEnterEventPtr != NULL);
 
 		OnDragEnterEvent(dragEnterEventPtr);
 
@@ -711,7 +711,7 @@ bool CMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 	}
 	else if (eventPtr->type() == QEvent::Drop){
 		QDropEvent* dropEventPtr = dynamic_cast<QDropEvent*>(eventPtr);
-		I_ASSERT(dropEventPtr != NULL);
+		Q_ASSERT(dropEventPtr != NULL);
 
 		OnDropEvent(dropEventPtr);
 
@@ -767,7 +767,7 @@ void CMainWindowGuiComp::OnNew()
 				iter != ids.end();
 				++iter){
 		const QByteArray& documentTypeId = *iter;
-		I_ASSERT(!documentTypeId.isEmpty());
+		Q_ASSERT(!documentTypeId.isEmpty());
 
 		if (m_documentManagerCompPtr->IsFeatureSupported(idoc::IDocumentTypesInfo::SF_NEW_DOCUMENT, documentTypeId)){
 			OnNewDocument(documentTypeId);
@@ -843,7 +843,7 @@ void CMainWindowGuiComp::OnQuit()
 
 void CMainWindowGuiComp::OnUndo()
 {
-	I_ASSERT(m_activeUndoManager.GetObjectPtr() != NULL);
+	Q_ASSERT(m_activeUndoManager.GetObjectPtr() != NULL);
 
 	m_activeUndoManager.GetObjectPtr()->DoUndo();
 
@@ -853,7 +853,7 @@ void CMainWindowGuiComp::OnUndo()
 
 void CMainWindowGuiComp::OnRedo()
 {
-	I_ASSERT(m_activeUndoManager.GetObjectPtr() != NULL);
+	Q_ASSERT(m_activeUndoManager.GetObjectPtr() != NULL);
 
 	m_activeUndoManager.GetObjectPtr()->DoRedo();
 
@@ -865,7 +865,7 @@ void CMainWindowGuiComp::OnFullScreen()
 {
 	QMainWindow* mainWidgetPtr = GetQtWidget();
 
-	I_ASSERT(mainWidgetPtr != NULL);
+	Q_ASSERT(mainWidgetPtr != NULL);
 
 	QWidget* parentWidgetPtr = mainWidgetPtr->parentWidget();
 	if (parentWidgetPtr == NULL){

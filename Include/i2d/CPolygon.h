@@ -153,7 +153,7 @@ inline int CPolygon::GetNodesCount() const
 
 inline const i2d::CVector2d& CPolygon::GetNode(int index) const
 {
-	I_ASSERT(index >= 0 && index < int(m_nodes.size()));
+	Q_ASSERT(index >= 0 && index < int(m_nodes.size()));
 
 	return m_nodes[index];
 }
@@ -161,7 +161,7 @@ inline const i2d::CVector2d& CPolygon::GetNode(int index) const
 
 inline void CPolygon::SetNode(int index, const i2d::CVector2d& node)
 {
-	I_ASSERT(index >= 0 && index < int(m_nodes.size()));
+	Q_ASSERT(index >= 0 && index < int(m_nodes.size()));
 
 	m_nodes[index] = node;
 }

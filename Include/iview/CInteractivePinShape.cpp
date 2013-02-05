@@ -43,7 +43,7 @@ ITouchable::TouchState CInteractivePinShape::IsTouched(istd::CIndex2d position) 
 
 bool CInteractivePinShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CPosition2d*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CPosition2d*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -53,7 +53,7 @@ bool CInteractivePinShape::OnAttached(imod::IModel* modelPtr)
 
 void CInteractivePinShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
@@ -81,7 +81,7 @@ void CInteractivePinShape::Draw(QPainter& drawContext) const
 
 bool CInteractivePinShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	if (!IsEditablePosition()){
 		EndModelChanges();
@@ -120,7 +120,7 @@ bool CInteractivePinShape::OnMouseMove(istd::CIndex2d position)
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		i2d::CPosition2d& pin = *dynamic_cast<i2d::CPosition2d*>(modelPtr);
-		I_ASSERT(&pin != NULL);
+		Q_ASSERT(&pin != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		
@@ -142,7 +142,7 @@ bool CInteractivePinShape::OnMouseMove(istd::CIndex2d position)
 
 i2d::CRect CInteractivePinShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
@@ -180,7 +180,7 @@ void CInteractivePinShape::BeginLogDrag(const i2d::CVector2d& reference)
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPosition2d& pin = *dynamic_cast<const i2d::CPosition2d*>(modelPtr);
-		I_ASSERT(&pin != NULL);
+		Q_ASSERT(&pin != NULL);
 
 		m_referencePosition = pin.GetPosition() - reference;
 	}
@@ -195,7 +195,7 @@ void CInteractivePinShape::SetLogDragPosition(const i2d::CVector2d& position)
 			BeginModelChanges();
 
 			i2d::CPosition2d& pin = *dynamic_cast<i2d::CPosition2d*>(modelPtr);
-			I_ASSERT(&pin != NULL);
+			Q_ASSERT(&pin != NULL);
 
 			pin.SetPosition(m_referencePosition + position);
 

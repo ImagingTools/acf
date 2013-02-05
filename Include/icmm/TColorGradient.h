@@ -55,7 +55,7 @@ TColorGradient<GradientFunction>::TColorGradient(const GradientColor& startColor
 template <class GradientFunction>
 bool TColorGradient<GradientFunction>::GetValueAt(const ArgumentType& argument, ResultType& result) const
 {
-	I_ASSERT(argument.GetElementsCount() == 1);
+	Q_ASSERT(argument.GetElementsCount() == 1);
 
 	static istd::CRange normRange(0.0, 1.0);
 

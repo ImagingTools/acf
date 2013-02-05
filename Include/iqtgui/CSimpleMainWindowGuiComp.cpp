@@ -128,7 +128,7 @@ void CSimpleMainWindowGuiComp::RemoveMainComponent(iqtgui::IMainWindowComponent*
 
 void CSimpleMainWindowGuiComp::CreateMenuBar()
 {
-	I_ASSERT(m_isMenuVisibleAttrPtr.IsValid());	// is obligatory attribute
+	Q_ASSERT(m_isMenuVisibleAttrPtr.IsValid());	// is obligatory attribute
 	if (*m_isMenuVisibleAttrPtr){
 		QMainWindow* mainWindowPtr = GetQtWidget();
 		if (mainWindowPtr != NULL){
@@ -140,7 +140,7 @@ void CSimpleMainWindowGuiComp::CreateMenuBar()
 
 void CSimpleMainWindowGuiComp::CreateDefaultToolBar()
 {
-	I_ASSERT(m_isToolbarVisibleAttrPtr.IsValid());	// is obligatory attribute
+	Q_ASSERT(m_isToolbarVisibleAttrPtr.IsValid());	// is obligatory attribute
 	if (*m_isToolbarVisibleAttrPtr){
 		QMainWindow* mainWindowPtr = GetQtWidget();
 		if (mainWindowPtr != NULL){
@@ -159,7 +159,7 @@ void CSimpleMainWindowGuiComp::CreateDefaultToolBar()
 void CSimpleMainWindowGuiComp::SetToolBarsVisible(bool isVisible)
 {
 	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
+	Q_ASSERT(mainWindowPtr != NULL);
 
 	if (mainWindowPtr != NULL){
 		for (int toolbarIndex = 0; toolbarIndex < m_toolBarsList.GetCount(); toolbarIndex++){
@@ -264,9 +264,9 @@ void CSimpleMainWindowGuiComp::UpdateMenuActions(iqtgui::CHierarchicalCommand& m
 
 void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
+	Q_ASSERT(mainWindowPtr != NULL);
 
 	QByteArray windowState = settings.value("MainWindow/State").toByteArray();
 	QByteArray windowGeometry = settings.value("MainWindow/Geometry").toByteArray();
@@ -278,9 +278,9 @@ void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 
 void CSimpleMainWindowGuiComp::OnSaveSettings(QSettings& settings) const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	QMainWindow* mainWindowPtr = GetQtWidget();
-	I_ASSERT(mainWindowPtr != NULL);
+	Q_ASSERT(mainWindowPtr != NULL);
 
 	QByteArray windowState = mainWindowPtr->saveState();
 	QByteArray windowGeometry = mainWindowPtr->saveGeometry();
@@ -307,11 +307,11 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 
 	int dockOptions = 0;
 
-	I_ASSERT(m_isNestingEnabledAttrPtr.IsValid());
+	Q_ASSERT(m_isNestingEnabledAttrPtr.IsValid());
 	if (*m_isNestingEnabledAttrPtr){
 		dockOptions |= QMainWindow::AllowNestedDocks;
 	}
-	I_ASSERT(m_isAllowTabbedDockAttrPtr.IsValid());
+	Q_ASSERT(m_isAllowTabbedDockAttrPtr.IsValid());
 	if (*m_isAllowTabbedDockAttrPtr){
 		dockOptions |= QMainWindow::AllowTabbedDocks;
 	}

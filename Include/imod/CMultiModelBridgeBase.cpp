@@ -15,8 +15,8 @@ CMultiModelBridgeBase::~CMultiModelBridgeBase()
 
 IModel* CMultiModelBridgeBase::GetModelPtr(int modelIndex) const
 {
-	I_ASSERT(modelIndex >= 0);
-	I_ASSERT(modelIndex < GetModelCount());
+	Q_ASSERT(modelIndex >= 0);
+	Q_ASSERT(modelIndex < GetModelCount());
 
 	return m_models.at(modelIndex);
 }
@@ -32,7 +32,7 @@ void CMultiModelBridgeBase::EnsureModelsDetached()
 {
 	while (!m_models.isEmpty()){
 		imod::IModel* modelPtr = m_models.front();
-		I_ASSERT(modelPtr != NULL);
+		Q_ASSERT(modelPtr != NULL);
 
 		modelPtr->DetachObserver(this);
 	}
@@ -55,7 +55,7 @@ bool CMultiModelBridgeBase::IsModelAttached(const imod::IModel* modelPtr) const
 
 bool CMultiModelBridgeBase::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 
 	if (IsModelAttached(modelPtr)){
 		return false;
@@ -82,7 +82,7 @@ bool CMultiModelBridgeBase::OnDetached(IModel* modelPtr)
 
 void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(IsModelAttached(modelPtr));
+	Q_ASSERT(IsModelAttached(modelPtr));
 
 	BeginChanges(updateFlags | CF_DELEGATED, updateParamsPtr);
 }
@@ -90,7 +90,7 @@ void CMultiModelBridgeBase::BeforeUpdate(IModel* I_IF_DEBUG(modelPtr), int updat
 
 void CMultiModelBridgeBase::AfterUpdate(IModel* I_IF_DEBUG(modelPtr), int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(IsModelAttached(modelPtr));
+	Q_ASSERT(IsModelAttached(modelPtr));
 
 	EndChanges(updateFlags | CF_DELEGATED, updateParamsPtr);
 }

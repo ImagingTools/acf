@@ -33,7 +33,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleElements(
 					index++){
 			const QByteArray& elementId = *index;
 			const icomp::IRegistry::ElementInfo* elementInfoPtr = registry.GetElementInfo(elementId);
-			I_ASSERT(elementInfoPtr != NULL);	// element ID was taken from this registry, it must exist
+			Q_ASSERT(elementInfoPtr != NULL);	// element ID was taken from this registry, it must exist
 
 			icomp::IRegistry::Ids subIds;
 
@@ -114,7 +114,7 @@ bool CRegistryConsistInfoComp::IsElementValid(
 			bool allReasons,
 			ibase::IMessageConsumer* reasonConsumerPtr) const
 {
-	I_ASSERT(m_envManagerCompPtr.IsValid());
+	Q_ASSERT(m_envManagerCompPtr.IsValid());
 
 	bool retVal = true;
 

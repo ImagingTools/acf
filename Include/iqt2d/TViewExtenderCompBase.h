@@ -95,7 +95,7 @@ TViewExtenderCompBase<Base>::TViewExtenderCompBase()
 template <class Base>
 void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, int flags)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	int viewId = providerPtr->GetViewId();
 	iview::IShapeView* viewPtr = providerPtr->GetView();
@@ -167,10 +167,10 @@ void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, in
 template <class Base>
 void TViewExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerPtr)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	if (m_isSlaveShown){
-		I_ASSERT(m_slaveExtenderCompPtr.IsValid());
+		Q_ASSERT(m_slaveExtenderCompPtr.IsValid());
 
 		m_slaveExtenderCompPtr->RemoveItemsFromScene(providerPtr);
 	}
@@ -246,10 +246,10 @@ void TViewExtenderCompBase<Base>::UpdateAllViews()
 {
 	for (ShapesMap::iterator index = m_shapesMap.begin(); index != m_shapesMap.end(); index++){
 		IViewProvider* viewProvderPtr = index.key();
-		I_ASSERT(viewProvderPtr != NULL);
+		Q_ASSERT(viewProvderPtr != NULL);
 
 		iview::IShapeView* viewPtr = viewProvderPtr->GetView();
-		I_ASSERT(viewPtr != NULL);
+		Q_ASSERT(viewPtr != NULL);
 
 		UpdateViewCalibration(viewPtr);
 

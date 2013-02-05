@@ -86,7 +86,7 @@ const ibase::IHierarchicalCommand* CSceneProviderGuiComp::GetCommands() const
 
 int CSceneProviderGuiComp::GetSceneId() const
 {
-	I_ASSERT(m_sceneIdAttrPtr.IsValid());
+	Q_ASSERT(m_sceneIdAttrPtr.IsValid());
 
 	return *m_sceneIdAttrPtr;
 }
@@ -509,9 +509,9 @@ void CSceneProviderGuiComp::OnComponentCreated()
 		m_scenePtr->setSceneRect(0, 0, *m_sceneWidthAttrPtr, *m_sceneHeightAttrPtr);
 	}
 
-	I_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
+	Q_ASSERT(m_allowWidgetResizeAttrPtr.IsValid());	// this attribute is obligatory
 	m_fitToImageCommand.setVisible(*m_allowWidgetResizeAttrPtr);
-	I_ASSERT(m_allowSelectAllAttrPtr.IsValid());	// this attribute is obligatory
+	Q_ASSERT(m_allowSelectAllAttrPtr.IsValid());	// this attribute is obligatory
 	m_selectAllCommand.setVisible(*m_allowSelectAllAttrPtr);
 }
 
@@ -652,7 +652,7 @@ void CSceneProviderGuiComp::OnSelectAllShapes()
 		QList<QGraphicsItem*> itemList = m_scenePtr->items();
 		for (int itemIndex = 0; itemIndex < itemList.count(); itemIndex++){
 			QGraphicsItem* itemPtr = itemList.at(itemIndex);
-			I_ASSERT(itemPtr != NULL);
+			Q_ASSERT(itemPtr != NULL);
 
 			if ((itemPtr->flags() & QGraphicsItem::ItemIsSelectable) != 0){
 				itemPtr->setSelected(true);
@@ -667,7 +667,7 @@ void CSceneProviderGuiComp::OnSelectAllShapes()
 CSceneProviderGuiComp::CScene::CScene(CSceneProviderGuiComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 

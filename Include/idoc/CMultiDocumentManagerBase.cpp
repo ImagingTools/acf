@@ -51,12 +51,12 @@ int CMultiDocumentManagerBase::GetDocumentsCount() const
 
 istd::IChangeable& CMultiDocumentManagerBase::GetDocumentFromIndex(int index, DocumentInfo* documentInfoPtr) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_documentInfos.GetCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_documentInfos.GetCount());
 
 	SingleDocumentData* infoPtr = m_documentInfos.GetAt(index);
-	I_ASSERT(infoPtr != NULL);
-	I_ASSERT(infoPtr->documentPtr.IsValid());
+	Q_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr->documentPtr.IsValid());
 
 	if (documentInfoPtr != NULL){
 		*documentInfoPtr = *infoPtr;
@@ -68,11 +68,11 @@ istd::IChangeable& CMultiDocumentManagerBase::GetDocumentFromIndex(int index, Do
 
 int CMultiDocumentManagerBase::GetViewsCount(int documentIndex) const
 {
-	I_ASSERT(documentIndex >= 0);
-	I_ASSERT(documentIndex < m_documentInfos.GetCount());
+	Q_ASSERT(documentIndex >= 0);
+	Q_ASSERT(documentIndex < m_documentInfos.GetCount());
 
 	SingleDocumentData* infoPtr = m_documentInfos.GetAt(documentIndex);
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 
 	return int(infoPtr->views.size());
 }
@@ -80,12 +80,12 @@ int CMultiDocumentManagerBase::GetViewsCount(int documentIndex) const
 
 istd::IPolymorphic* CMultiDocumentManagerBase::GetViewFromIndex(int documentIndex, int viewIndex) const
 {
-	I_ASSERT(documentIndex >= 0);
-	I_ASSERT(documentIndex < m_documentInfos.GetCount());
-	I_ASSERT(viewIndex < GetViewsCount(documentIndex));
+	Q_ASSERT(documentIndex >= 0);
+	Q_ASSERT(documentIndex < m_documentInfos.GetCount());
+	Q_ASSERT(viewIndex < GetViewsCount(documentIndex));
 
 	SingleDocumentData* infoPtr = m_documentInfos.GetAt(documentIndex);
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 
 	return infoPtr->views.at(viewIndex).GetPtr();
 }
@@ -101,8 +101,8 @@ istd::IChangeable* CMultiDocumentManagerBase::GetDocumentFromView(const istd::IP
 {
 	const SingleDocumentData* infoPtr = GetDocumentInfoFromView(view);
 	if (infoPtr != NULL){
-		I_ASSERT(infoPtr != NULL);
-		I_ASSERT(infoPtr->documentPtr.IsValid());
+		Q_ASSERT(infoPtr != NULL);
+		Q_ASSERT(infoPtr->documentPtr.IsValid());
 
 		if (documentInfoPtr != NULL){
 			*documentInfoPtr = *infoPtr;
@@ -174,7 +174,7 @@ bool CMultiDocumentManagerBase::FileNew(
 	istd::TDelPtr<SingleDocumentData> newInfoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
 	if (newInfoPtr.IsValid() && RegisterDocument(newInfoPtr.PopPtr())){
 		SingleDocumentData* newDocumentDataPtr = m_documentInfos.GetAt(m_documentInfos.GetCount() - 1);
-		I_ASSERT(newDocumentDataPtr != NULL);
+		Q_ASSERT(newDocumentDataPtr != NULL);
 
 		newDocumentDataPtr->isDirty = false;
 		if (newDocumentPtr != NULL){
@@ -245,7 +245,7 @@ bool CMultiDocumentManagerBase::FileSave(
 	SingleDocumentData* infoPtr = NULL;
 	
 	if (documentIndex >= 0){
-		I_ASSERT(documentIndex < GetDocumentsCount());
+		Q_ASSERT(documentIndex < GetDocumentsCount());
 
 		infoPtr = &GetSingleDocumentData(documentIndex);
 	}
@@ -257,7 +257,7 @@ bool CMultiDocumentManagerBase::FileSave(
 		return false;
 	}
 
-	I_ASSERT(infoPtr->documentPtr.IsValid());
+	Q_ASSERT(infoPtr->documentPtr.IsValid());
 
 	QString filePath = infoPtr->filePath;
 
@@ -309,7 +309,7 @@ void CMultiDocumentManagerBase::FileClose(int documentIndex, bool* ignoredPtr)
 
 	if (documentIndex >= 0){
 		SingleDocumentData* infoPtr = m_documentInfos.GetAt(documentIndex);
-		I_ASSERT(infoPtr != NULL);
+		Q_ASSERT(infoPtr != NULL);
 
 		while (!infoPtr->views.empty()){
 			for (Views::iterator iter = infoPtr->views.begin(); iter != infoPtr->views.end(); ++iter){
@@ -320,10 +320,10 @@ void CMultiDocumentManagerBase::FileClose(int documentIndex, bool* ignoredPtr)
 					}
 				}
 
-				I_ASSERT(iter->IsValid());
+				Q_ASSERT(iter->IsValid());
 
 				istd::IPolymorphic* viewPtr = iter->GetPtr();
-				I_ASSERT(viewPtr != NULL);
+				Q_ASSERT(viewPtr != NULL);
 
 				OnViewRemoved(viewPtr);
 
@@ -351,7 +351,7 @@ void CMultiDocumentManagerBase::FileClose(int documentIndex, bool* ignoredPtr)
 	else{
 		for (int i = 0; i < documentsCount; ++i){
 			SingleDocumentData* infoPtr = m_documentInfos.GetAt(i);
-			I_ASSERT(infoPtr != NULL);
+			Q_ASSERT(infoPtr != NULL);
 
 			Views::iterator findIter = qFind(infoPtr->views.begin(), infoPtr->views.end(), m_activeViewPtr);
 			if (findIter != infoPtr->views.end()){
@@ -362,7 +362,7 @@ void CMultiDocumentManagerBase::FileClose(int documentIndex, bool* ignoredPtr)
 					}
 				}
 
-				I_ASSERT(findIter->IsValid());
+				Q_ASSERT(findIter->IsValid());
 				OnViewRemoved(findIter->GetPtr());
 				
 				infoPtr->viewTypeIds.removeAt(findIter - infoPtr->views.begin());
@@ -414,7 +414,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 
 	SingleDocumentData* existingInfoPtr = GetDocumentInfoFromPath(filePath);
 	if (existingInfoPtr != NULL){
-		I_ASSERT(existingInfoPtr->documentPtr.IsValid());
+		Q_ASSERT(existingInfoPtr->documentPtr.IsValid());
 
 		if (createView){
 			istd::IPolymorphic* viewPtr = documentTemplatePtr->CreateView(
@@ -432,7 +432,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 		else{
 			if (!existingInfoPtr->views.isEmpty()){
 				istd::IPolymorphic* viewPtr = existingInfoPtr->views.front().GetPtr();
-				I_ASSERT(viewPtr != NULL);
+				Q_ASSERT(viewPtr != NULL);
 
 				SetActiveView(viewPtr);
 			}
@@ -451,7 +451,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 		documentTypeId = documentIds.front();
 		istd::TDelPtr<SingleDocumentData> infoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
 		if (infoPtr.IsValid()){
-			I_ASSERT(infoPtr->documentPtr.IsValid());
+			Q_ASSERT(infoPtr->documentPtr.IsValid());
 
 			infoPtr->filePath = filePath;
 			infoPtr->documentTypeId = documentTypeId;
@@ -490,11 +490,11 @@ void CMultiDocumentManagerBase::CloseAllDocuments()
 
 CMultiDocumentManagerBase::SingleDocumentData& CMultiDocumentManagerBase::GetSingleDocumentData(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetDocumentsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetDocumentsCount());
 
 	SingleDocumentData* retVal = const_cast<SingleDocumentData*>(m_documentInfos.GetAt(index));
-	I_ASSERT(retVal != NULL);
+	Q_ASSERT(retVal != NULL);
 
 	return *retVal;
 }
@@ -599,7 +599,7 @@ CMultiDocumentManagerBase::SingleDocumentData* CMultiDocumentManagerBase::Create
 
 bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 {
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 
 	istd::CChangeNotifier changePtr(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED | CF_MODEL);
 
@@ -608,7 +608,7 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 	for (		Views::iterator iter = infoPtr->views.begin();
 				iter != infoPtr->views.end();
 				++iter){
-		I_ASSERT(iter->IsValid());
+		Q_ASSERT(iter->IsValid());
 
 		OnViewRegistered(iter->GetPtr());
 	}

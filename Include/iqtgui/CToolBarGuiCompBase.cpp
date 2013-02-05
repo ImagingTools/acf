@@ -50,7 +50,7 @@ bool CToolBarGuiCompBase::AddToMainWindow(QMainWindow& mainWindow)
 	}
 
 	QToolBar* toolBarPtr = GetQtWidget();
-	I_ASSERT(toolBarPtr != NULL); 
+	Q_ASSERT(toolBarPtr != NULL); 
 	if (toolBarPtr != NULL){
 		toolBarPtr->setIconSize(mainWindow.iconSize());
 		mainWindow.addToolBar(area, toolBarPtr);
@@ -77,7 +77,7 @@ void CToolBarGuiCompBase::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	QToolBar* widgetPtr = GetQtWidget();
-	I_ASSERT(widgetPtr != NULL);
+	Q_ASSERT(widgetPtr != NULL);
 	if (widgetPtr == NULL){
 		return;
 	}

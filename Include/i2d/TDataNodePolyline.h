@@ -58,8 +58,8 @@ private:
 template<class NodeData>
 inline const NodeData& TDataNodePolyline<NodeData>::GetTNodeData(int nodeIndex) const
 {
-	I_ASSERT(nodeIndex >= 0);
-	I_ASSERT(nodeIndex < int(m_nodesData.size()));
+	Q_ASSERT(nodeIndex >= 0);
+	Q_ASSERT(nodeIndex < int(m_nodesData.size()));
 
 	return m_nodesData[nodeIndex];
 }
@@ -68,8 +68,8 @@ inline const NodeData& TDataNodePolyline<NodeData>::GetTNodeData(int nodeIndex) 
 template<class NodeData>
 inline NodeData& TDataNodePolyline<NodeData>::GetTNodeDataRef(int nodeIndex)
 {
-	I_ASSERT(nodeIndex >= 0);
-	I_ASSERT(nodeIndex < int(m_nodesData.size()));
+	Q_ASSERT(nodeIndex >= 0);
+	Q_ASSERT(nodeIndex < int(m_nodesData.size()));
 
 	return m_nodesData[nodeIndex];
 }
@@ -80,8 +80,8 @@ inline NodeData& TDataNodePolyline<NodeData>::GetTNodeDataRef(int nodeIndex)
 template<class NodeData>
 inline const iser::ISerializable& TDataNodePolyline<NodeData>::GetNodeData(int nodeIndex) const
 {
-	I_ASSERT(nodeIndex >= 0);
-	I_ASSERT(nodeIndex < int(m_nodesData.size()));
+	Q_ASSERT(nodeIndex >= 0);
+	Q_ASSERT(nodeIndex < int(m_nodesData.size()));
 
 	return m_nodesData[nodeIndex];
 }
@@ -90,8 +90,8 @@ inline const iser::ISerializable& TDataNodePolyline<NodeData>::GetNodeData(int n
 template<class NodeData>
 inline iser::ISerializable& TDataNodePolyline<NodeData>::GetNodeDataRef(int nodeIndex)
 {
-	I_ASSERT(nodeIndex >= 0);
-	I_ASSERT(nodeIndex < int(m_nodesData.size()));
+	Q_ASSERT(nodeIndex >= 0);
+	Q_ASSERT(nodeIndex < int(m_nodesData.size()));
 
 	return m_nodesData[nodeIndex];
 }

@@ -384,7 +384,7 @@ QLibrary& CPackagesLoaderComp::GetLibrary(const QFileInfo& fileInfo)
 
 	DllCacheMap::iterator iter = m_dllCacheMap.find(absolutePath);
 	if (iter != m_dllCacheMap.end()){
-		I_ASSERT(iter.value().IsValid());
+		Q_ASSERT(iter.value().IsValid());
 
 		return *iter.value();
 	}
@@ -406,7 +406,7 @@ QLibrary& CPackagesLoaderComp::GetLibrary(const QFileInfo& fileInfo)
 CPackagesLoaderComp::LogingRegistry::LogingRegistry(CPackagesLoaderComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 

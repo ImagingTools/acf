@@ -16,7 +16,7 @@ namespace ifile
 
 int CFileNameParamComp::GetPathType() const
 {
-	I_ASSERT(m_pathTypeAttrPtr.IsValid());
+	Q_ASSERT(m_pathTypeAttrPtr.IsValid());
 
 	return *m_pathTypeAttrPtr;
 }

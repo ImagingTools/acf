@@ -206,7 +206,7 @@ inline CRect::CRect(int left, int top, int right, int bottom)
 	m_horizontalRange = istd::CIntRange(left, right);
 	m_verticalRange = istd::CIntRange(top, bottom);
 
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 }
 
 
@@ -215,7 +215,7 @@ inline CRect::CRect(const istd::CIndex2d& leftTop, const istd::CIndex2d& rightBo
 	m_horizontalRange = istd::CIntRange(leftTop.GetX(), rightBottom.GetX());
 	m_verticalRange = istd::CIntRange(leftTop.GetY(), rightBottom.GetY());
 
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 }
 
 
@@ -224,7 +224,7 @@ inline CRect::CRect(const istd::CIndex2d& leftTop, const ibase::CSize& size)
 	m_horizontalRange = istd::CIntRange(leftTop.GetX(), leftTop.GetX() + size.GetX());
 	m_verticalRange = istd::CIntRange(leftTop.GetY(), leftTop.GetY() + size.GetY());
 
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 }
 
 
@@ -233,7 +233,7 @@ inline CRect::CRect(const i2d::CRectangle& rect)
 	m_horizontalRange = istd::CIntRange(int(rect.GetLeft()), int(rect.GetRight()));
 	m_verticalRange = istd::CIntRange(int(rect.GetTop()), int(rect.GetBottom()));
 
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 }
 
 
@@ -242,7 +242,7 @@ inline CRect::CRect(const ibase::CSize& size)
 	m_horizontalRange = istd::CIntRange(0, size.GetX());
 	m_verticalRange = istd::CIntRange(0, size.GetY());
 
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 }
 
 
@@ -443,7 +443,7 @@ inline ibase::CSize CRect::GetSize() const
 
 inline bool CRect::IsInside(const istd::CIndex2d& point) const
 {
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 
 	return m_horizontalRange.Contains(point.GetX()) && m_verticalRange.Contains(point.GetY());
 }
@@ -451,8 +451,8 @@ inline bool CRect::IsInside(const istd::CIndex2d& point) const
 
 inline bool CRect::IsInside(const CRect& rect) const
 {
-	I_ASSERT(IsValid());
-	I_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
 
 	if (rect.IsEmpty()){
 		return true;
@@ -465,8 +465,8 @@ inline bool CRect::IsInside(const CRect& rect) const
 
 inline bool CRect::IsOutside(const CRect& rect) const
 {
-	I_ASSERT(IsValid());
-	I_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
 
 	if (rect.IsEmpty()){
 		return true;
@@ -486,8 +486,8 @@ inline void CRect::Reset()
 
 inline void CRect::Union(const CRect& rect)
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	if (IsEmpty()){
 		*this = rect;
@@ -501,8 +501,8 @@ inline void CRect::Union(const CRect& rect)
 
 inline void CRect::GetUnion(const CRect& rect, CRect& result) const
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	if (IsEmpty()){
 		result = rect;
@@ -521,8 +521,8 @@ inline void CRect::GetUnion(const CRect& rect, CRect& result) const
 
 inline CRect CRect::GetUnion(const CRect& rect) const
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	CRect result;
 
@@ -534,7 +534,7 @@ inline CRect CRect::GetUnion(const CRect& rect) const
 
 inline void CRect::Union(istd::CIndex2d point)
 {
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 
 	int left = qMin(GetLeft(), point.GetX());
 	int top = qMin(GetTop(), point.GetY());
@@ -548,7 +548,7 @@ inline void CRect::Union(istd::CIndex2d point)
 
 inline CRect CRect::GetUnion(istd::CIndex2d point) const
 {
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 
 	CRect result = *this;
 
@@ -560,8 +560,8 @@ inline CRect CRect::GetUnion(istd::CIndex2d point) const
 
 inline void CRect::Expand(const CRect& rect)
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	m_horizontalRange.Expand(rect.m_horizontalRange);
 	m_verticalRange.Expand(rect.m_verticalRange);
@@ -570,8 +570,8 @@ inline void CRect::Expand(const CRect& rect)
 
 inline CRect CRect::GetExpanded(const CRect& rect) const
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	CRect result = *this;
 
@@ -583,8 +583,8 @@ inline CRect CRect::GetExpanded(const CRect& rect) const
 
 inline void CRect::Intersection(const CRect& rect)
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	m_horizontalRange.Intersection(rect.m_horizontalRange);
 	m_verticalRange.Intersection(rect.m_verticalRange);
@@ -597,8 +597,8 @@ inline void CRect::Intersection(const CRect& rect)
 
 inline CRect CRect::GetIntersection(const CRect& rect) const
 {
-	I_ASSERT(rect.IsValid());
-	I_ASSERT(IsValid());
+	Q_ASSERT(rect.IsValid());
+	Q_ASSERT(IsValid());
 
 	CRect result = *this;
 
@@ -619,7 +619,7 @@ inline void CRect::Translate(istd::CIndex2d point)
 
 inline CRect CRect::GetTranslated(istd::CIndex2d point) const
 {
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 
 	CRect result = *this;
 

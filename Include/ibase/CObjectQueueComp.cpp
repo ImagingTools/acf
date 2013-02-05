@@ -81,12 +81,12 @@ istd::IChangeable* CObjectQueueComp::CreateBackObject(int offsetPos, const QByte
 
 void CObjectQueueComp::RemoveFrontObject(int offsetPos, const QByteArray* typeIdPtr)
 {
-	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+	Q_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
 	if (typeIdPtr == NULL){
 		ObjectQueue::iterator iter = m_objectsQueue.begin() + offsetPos;
 		istd::IChangeable* objectPtr = *iter;
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		m_objectsQueue.erase(iter);
 		m_objectsReserve.push_front(objectPtr);
@@ -98,14 +98,14 @@ void CObjectQueueComp::RemoveFrontObject(int offsetPos, const QByteArray* typeId
 
 void CObjectQueueComp::RemoveBackObject(int offsetPos, const QByteArray* typeIdPtr)
 {
-	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+	Q_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
 	if (typeIdPtr == NULL){
 		int objectsCount = int(m_objectsQueue.size());
 
 		ObjectQueue::iterator iter = m_objectsQueue.begin() + objectsCount - 1 - offsetPos;
 		istd::IChangeable* objectPtr = *iter;
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		m_objectsQueue.erase(iter);
 		m_objectsReserve.push_front(objectPtr);
@@ -117,12 +117,12 @@ void CObjectQueueComp::RemoveBackObject(int offsetPos, const QByteArray* typeIdP
 
 istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const QByteArray* typeIdPtr) const
 {
-	I_ASSERT(offsetPos >= 0);
-	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+	Q_ASSERT(offsetPos >= 0);
+	Q_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
 	if (typeIdPtr == NULL){
 		istd::IChangeable* objectPtr = m_objectsQueue.at(offsetPos);
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		return objectPtr;
 	}
@@ -133,13 +133,13 @@ istd::IChangeable* CObjectQueueComp::GetFrontObject(int offsetPos, const QByteAr
 
 istd::IChangeable* CObjectQueueComp::GetBackObject(int offsetPos, const QByteArray* typeIdPtr) const
 {
-	I_ASSERT(offsetPos >= 0);
-	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+	Q_ASSERT(offsetPos >= 0);
+	Q_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
 	if (typeIdPtr == NULL){
 		int objectsCount = int(m_objectsQueue.size());
 		istd::IChangeable* objectPtr = m_objectsQueue.at(objectsCount - 1 - offsetPos);
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		return objectPtr;
 
@@ -176,14 +176,14 @@ void CObjectQueueComp::SelectObjects(
 
 istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const QByteArray* typeIdPtr)
 {
-	I_ASSERT(offsetPos >= 0);
-	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+	Q_ASSERT(offsetPos >= 0);
+	Q_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
 	if (typeIdPtr == NULL){
 		ObjectQueue::iterator iter = m_objectsQueue.begin() + offsetPos;
 
 		istd::IChangeable* objectPtr = *iter;
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		m_objectsQueue.erase(iter);
 
@@ -196,15 +196,15 @@ istd::IChangeable* CObjectQueueComp::PopFrontObject(int offsetPos, const QByteAr
 
 istd::IChangeable* CObjectQueueComp::PopBackObject(int offsetPos, const QByteArray* typeIdPtr)
 {
-	I_ASSERT(offsetPos >= 0);
-	I_ASSERT(offsetPos < int(m_objectsQueue.size()));
+	Q_ASSERT(offsetPos >= 0);
+	Q_ASSERT(offsetPos < int(m_objectsQueue.size()));
 
 	if (typeIdPtr == NULL){
 		int objectsCount = int(m_objectsQueue.size());
 		ObjectQueue::iterator iter = m_objectsQueue.begin() + objectsCount - 1 - offsetPos;
 
 		istd::IChangeable* objectPtr = *iter;
-		I_ASSERT(objectPtr != NULL);
+		Q_ASSERT(objectPtr != NULL);
 
 		m_objectsQueue.erase(iter);
 
@@ -297,7 +297,7 @@ istd::IChangeable* CObjectQueueComp::CreateObject()
 
 void CObjectQueueComp::TryReductReserve()
 {
-	I_ASSERT(m_maxReserveObjectsAttrPtr.IsValid());	// This attribute is not optional
+	Q_ASSERT(m_maxReserveObjectsAttrPtr.IsValid());	// This attribute is not optional
 
 	int maxReserveObjects = qMax(0, *m_maxReserveObjectsAttrPtr);
 

@@ -437,10 +437,10 @@ inline IViewLayer& CViewBase::GetLayer(int index) const
 		view->InsertDefaultLayers();
 	}
 
-	I_ASSERT((index >= 0) && (index < int(m_layers.size())));
+	Q_ASSERT((index >= 0) && (index < int(m_layers.size())));
 
 	IViewLayer* layerPtr = m_layers[index];
-	I_ASSERT(layerPtr != NULL);
+	Q_ASSERT(layerPtr != NULL);
 
 	return *layerPtr;
 }

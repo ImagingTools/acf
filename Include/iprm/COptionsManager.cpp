@@ -46,8 +46,8 @@ int COptionsManager::GetOptionsCount() const
 
 QString COptionsManager::GetOptionName(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < COptionsManager::GetOptionsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < COptionsManager::GetOptionsCount());
 
 	if (m_slaveSelectionConstraintsPtr != NULL){
 		int fixedOptionsCount = m_slaveSelectionConstraintsPtr->GetOptionsCount();
@@ -66,8 +66,8 @@ QString COptionsManager::GetOptionName(int index) const
 
 QString COptionsManager::GetOptionDescription(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < COptionsManager::GetOptionsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < COptionsManager::GetOptionsCount());
 
 	if (m_slaveSelectionConstraintsPtr != NULL){
 		int fixedOptionsCount = m_slaveSelectionConstraintsPtr->GetOptionsCount();
@@ -86,8 +86,8 @@ QString COptionsManager::GetOptionDescription(int index) const
 
 QByteArray COptionsManager::GetOptionId(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < COptionsManager::GetOptionsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < COptionsManager::GetOptionsCount());
 
 	if (m_slaveSelectionConstraintsPtr != NULL){
 		int fixedOptionsCount = m_slaveSelectionConstraintsPtr->GetOptionsCount();
@@ -106,8 +106,8 @@ QByteArray COptionsManager::GetOptionId(int index) const
 
 bool COptionsManager::IsOptionEnabled(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < COptionsManager::GetOptionsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < COptionsManager::GetOptionsCount());
 
 	return m_options[index].isEnabled;
 }
@@ -115,8 +115,8 @@ bool COptionsManager::IsOptionEnabled(int index) const
 
 void COptionsManager::SetOptionEnabled(int index, bool isEnabled)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < COptionsManager::GetOptionsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < COptionsManager::GetOptionsCount());
 
 	if (m_options[index].isEnabled != isEnabled){
 		istd::CChangeNotifier changePtr(this, CF_OPTIONS_CHANGED | CF_MODEL);
@@ -130,8 +130,8 @@ void COptionsManager::SetOptionEnabled(int index, bool isEnabled)
 
 bool COptionsManager::RemoveOption(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_options.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_options.size()));
 
 	istd::CChangeNotifier changePtr(this, CF_OPTION_REMOVED | CF_OPTIONS_CHANGED | CF_MODEL);
 

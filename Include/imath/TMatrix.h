@@ -767,8 +767,8 @@ double TMatrix<Width, Height, Element>::GetFrobeniusNorm() const
 template <int Width, int Height, typename Element>
 void TMatrix<Width, Height, Element>::GetColumnVector(int columnIndex, TVector<Height, Element>& result)
 {
-	I_ASSERT(columnIndex < Width);
-	I_ASSERT(columnIndex >= 0);
+	Q_ASSERT(columnIndex < Width);
+	Q_ASSERT(columnIndex >= 0);
 
 	for (int y = 0; y < Height; ++y){
 		result[y] = m_elements[columnIndex][y];
@@ -779,8 +779,8 @@ void TMatrix<Width, Height, Element>::GetColumnVector(int columnIndex, TVector<H
 template <int Width, int Height, typename Element>
 void TMatrix<Width, Height, Element>::SetColumnVector(int columnIndex, const TVector<Height, Element>& columnVector)
 {
-	I_ASSERT(columnIndex < Width);
-	I_ASSERT(columnIndex >= 0);
+	Q_ASSERT(columnIndex < Width);
+	Q_ASSERT(columnIndex >= 0);
 
 	for (int y = 0; y < Height; ++y){
 		m_elements[columnIndex][y] = columnVector[y];
@@ -791,7 +791,7 @@ void TMatrix<Width, Height, Element>::SetColumnVector(int columnIndex, const TVe
 template <int Width, int Height, typename Element>
 void TMatrix<Width, Height, Element>::GetRowVector(int rowIndex, TVector<Width, Element>& result)
 {
-	I_ASSERT(rowIndex < Height);
+	Q_ASSERT(rowIndex < Height);
 
 	for (int x = 0; x < Width; ++x){
 		result[rowIndex] = m_elements[x][rowIndex];

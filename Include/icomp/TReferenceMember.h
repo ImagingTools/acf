@@ -98,7 +98,7 @@ template <class Interface>
 Interface* TReferenceMember<Interface>::operator->() const
 {
 	EnsureInitialized();
-	I_ASSERT(m_componentPtr != NULL);
+	Q_ASSERT(m_componentPtr != NULL);
 
 	return GetPtr();
 }

@@ -77,7 +77,7 @@ private:
 inline int CInteractiveViewLayer::GetKeysState() const
 {
 	const IShapeView* viewPtr = GetViewPtr();
-	I_ASSERT(viewPtr != NULL);
+	Q_ASSERT(viewPtr != NULL);
 
 	return viewPtr->GetKeysState();
 }
@@ -86,7 +86,7 @@ inline int CInteractiveViewLayer::GetKeysState() const
 inline int CInteractiveViewLayer::GetEditMode() const
 {
 	const IShapeView* viewPtr = GetViewPtr();
-	I_ASSERT(viewPtr != NULL);
+	Q_ASSERT(viewPtr != NULL);
 
 	return viewPtr->GetEditMode();
 }

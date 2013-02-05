@@ -126,7 +126,7 @@ void CElementSelectionInfoManagerBase::UpdateAddressToMetaInfoMap()
 				iter != selectedElements.end();
 				++iter){
 		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-		I_ASSERT(selectedInfoPtr != NULL);
+		Q_ASSERT(selectedInfoPtr != NULL);
 
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 		if (elementPtr != NULL){

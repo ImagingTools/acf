@@ -13,12 +13,12 @@ void CAnnulusSegmentComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_centerXAttrPtr.IsValid());
-	I_ASSERT(m_centerYAttrPtr.IsValid());
-	I_ASSERT(m_innerRadiusAttrPtr.IsValid());
-	I_ASSERT(m_outerRadiusAttrPtr.IsValid());
-	I_ASSERT(m_beginAngleAttrPtr.IsValid());
-	I_ASSERT(m_endAngleAttrPtr.IsValid());
+	Q_ASSERT(m_centerXAttrPtr.IsValid());
+	Q_ASSERT(m_centerYAttrPtr.IsValid());
+	Q_ASSERT(m_innerRadiusAttrPtr.IsValid());
+	Q_ASSERT(m_outerRadiusAttrPtr.IsValid());
+	Q_ASSERT(m_beginAngleAttrPtr.IsValid());
+	Q_ASSERT(m_endAngleAttrPtr.IsValid());
 
 
 	SetPosition(i2d::CVector2d(*m_centerXAttrPtr, *m_centerXAttrPtr));

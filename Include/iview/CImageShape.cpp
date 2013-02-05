@@ -80,7 +80,7 @@ void CImageShape::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPo
 		qtBitmapPtr.SetPtr(new iimg::CBitmap);
 		providerPtr = qtBitmapPtr.GetPtr();
 		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(modelPtr);
-		I_ASSERT(bitmapPtr != NULL);
+		Q_ASSERT(bitmapPtr != NULL);
 
 		qtBitmapPtr->CopyFrom(*bitmapPtr);
 	}
@@ -107,7 +107,7 @@ i2d::CRect CImageShape::CalcBoundingBox() const
 		const iview::CScreenTransform& transform = GetViewToScreenTransform();
 
 		const iimg::IBitmap& model = *dynamic_cast<const iimg::IBitmap*>(modelPtr);
-		I_ASSERT(&model != NULL);
+		Q_ASSERT(&model != NULL);
 
 		ibase::CSize size = model.GetImageSize();
 
@@ -137,7 +137,7 @@ ITouchable::TouchState CImageShape::IsTouched(istd::CIndex2d position) const
 		const iview::CScreenTransform& transform = GetViewToScreenTransform();
 
 		const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(modelPtr);
-		I_ASSERT(bitmapPtr != NULL);
+		Q_ASSERT(bitmapPtr != NULL);
 
 		ibase::CSize size = bitmapPtr->GetImageSize();
 
@@ -161,7 +161,7 @@ QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 		const iview::CScreenTransform& transform = GetViewToScreenTransform();
 
 		const iimg::IBitmap* bitmapPtr = dynamic_cast<const iimg::IBitmap*>(modelPtr);
-		I_ASSERT(bitmapPtr != NULL);
+		Q_ASSERT(bitmapPtr != NULL);
 
 		ibase::CSize size = bitmapPtr->GetImageSize();
 

@@ -47,7 +47,7 @@ QString CSystem::GetEnrolledPath(const QString& path)
 			break;
 		}
 
-		I_ASSERT(endIndex >= beginIndex + 2);
+		Q_ASSERT(endIndex >= beginIndex + 2);
 
 		QString varName = retVal.mid(beginIndex + 2, endIndex - beginIndex - 2);
 
@@ -209,7 +209,7 @@ bool CSystem::FileCopy(const QString& source, const QString& result, bool overWr
 			return false;
 		}
 	}
-	I_ASSERT(resultDir.exists());
+	Q_ASSERT(resultDir.exists());
 
 	if (resultFile.exists())
 	{
@@ -223,7 +223,7 @@ bool CSystem::FileCopy(const QString& source, const QString& result, bool overWr
 		}
 	}
 
-	I_ASSERT(!resultFile.exists());
+	Q_ASSERT(!resultFile.exists());
 	if (!QFile::copy(source, resultFile.absoluteFilePath()))
 	{
 		return false;

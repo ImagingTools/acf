@@ -61,13 +61,13 @@ void CComponentBase::SetComponentContext(
 
 void CComponentBase::OnComponentCreated()
 {
-	I_ASSERT(m_contextPtr != NULL);
+	Q_ASSERT(m_contextPtr != NULL);
 }
 
 
 void CComponentBase::OnComponentDestroyed()
 {
-	I_ASSERT(m_contextPtr != NULL);
+	Q_ASSERT(m_contextPtr != NULL);
 }
 
 

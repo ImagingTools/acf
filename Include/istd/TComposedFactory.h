@@ -50,7 +50,7 @@ protected:
 template <class InterfaceType>
 bool TComposedFactory<InterfaceType>::RegisterFactory(FactoryInterface* factoryPtr, bool releaseFlag)
 {
-	I_ASSERT(factoryPtr != NULL);
+	Q_ASSERT(factoryPtr != NULL);
 
 	if ((factoryPtr == NULL) || factoryPtr->GetFactoryKeys().isEmpty()){
 		return false;

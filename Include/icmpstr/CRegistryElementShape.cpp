@@ -30,7 +30,7 @@ CRegistryElementShape::CRegistryElementShape(
 	m_isConsistent(false),
 	m_componentType(0)
 {
-	I_ASSERT(registryViewPtr != NULL);
+	Q_ASSERT(registryViewPtr != NULL);
 }
 
 

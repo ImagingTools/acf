@@ -45,7 +45,7 @@ CMultiModelDispatcherBase::ObserverProxy::ObserverProxy(CMultiModelDispatcherBas
 	m_modelId(modelId),
 	m_relevantFlags(relevantFlags)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 

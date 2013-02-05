@@ -70,7 +70,7 @@ void CTransformableRectangleCalibrationShape::Draw(QPainter& drawContext) const
 
 bool CTransformableRectangleCalibrationShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CParallelogram*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CParallelogram*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }

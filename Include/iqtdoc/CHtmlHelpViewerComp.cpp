@@ -35,7 +35,7 @@ void CHtmlHelpViewerComp::ShowHelp(const QString& contextText, const istd::IPoly
 			m_helpWidgetPtr.SetPtr(new QTextBrowser(NULL));
 			m_helpWidgetPtr->showMaximized();
 		}
-		I_ASSERT(m_helpWidgetPtr.IsValid());
+		Q_ASSERT(m_helpWidgetPtr.IsValid());
 
 		m_helpWidgetPtr->setSource(url);
 		m_helpWidgetPtr->setVisible(true);

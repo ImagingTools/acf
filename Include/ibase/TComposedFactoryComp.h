@@ -44,7 +44,7 @@ void TComposedFactoryComp<Interface>::OnComponentCreated()
 	int slaveFactoriesCount = m_slaveFactoriesCompPtr.GetCount();
 
 	for (int factoryIndex = 0; factoryIndex < slaveFactoriesCount; ++factoryIndex){
-		I_ASSERT(m_slaveFactoriesCompPtr.IsValid(factoryIndex));	// isObligatory was set to true
+		Q_ASSERT(m_slaveFactoriesCompPtr.IsValid(factoryIndex));	// isObligatory was set to true
 
 		RegisterFactory(m_slaveFactoriesCompPtr[factoryIndex]);
 	}

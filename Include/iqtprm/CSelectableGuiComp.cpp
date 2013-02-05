@@ -31,7 +31,7 @@ void CSelectableGuiComp::OnGuiModelAttached()
 				pageLayoutPtr->setMargin(0);
 
 				iqtgui::IGuiObject* guiPtr = m_slaveGuisCompPtr[i];
-				I_ASSERT(guiPtr);
+				Q_ASSERT(guiPtr);
 
 				if (guiPtr->CreateGui(newPage)){
 					SelectionStack->insertWidget(i + 1, newPage);
@@ -43,7 +43,7 @@ void CSelectableGuiComp::OnGuiModelAttached()
 	}
 
 	imod::IModel* selectionModelPtr = GetModelPtr();
-	I_ASSERT(selectionModelPtr != NULL);
+	Q_ASSERT(selectionModelPtr != NULL);
 
 	if (m_selectorObserverCompPtr.IsValid()){
 		selectionModelPtr->AttachObserver(m_selectorObserverCompPtr.GetPtr());
@@ -61,7 +61,7 @@ void CSelectableGuiComp::OnGuiModelDetached()
 		QWidget* pagePtr = SelectionStack->widget(pageIndex);
 
 		WidgetGuiMap::iterator foundGuiIter = m_widgetToGuiMap.find(pagePtr);
-		I_ASSERT(foundGuiIter != m_widgetToGuiMap.end());
+		Q_ASSERT(foundGuiIter != m_widgetToGuiMap.end());
 		if (foundGuiIter != m_widgetToGuiMap.end()){
 			foundGuiIter.value()->DestroyGui();
 		}
@@ -74,7 +74,7 @@ void CSelectableGuiComp::OnGuiModelDetached()
 	m_widgetToGuiMap.clear();
 
 	imod::IModel* selectionModelPtr = GetModelPtr();
-	I_ASSERT(selectionModelPtr != NULL);
+	Q_ASSERT(selectionModelPtr != NULL);
 
 	if (m_selectorObserverCompPtr.IsValid() && selectionModelPtr->IsAttached(m_selectorObserverCompPtr.GetPtr())){
 		selectionModelPtr->DetachObserver(m_selectorObserverCompPtr.GetPtr());
@@ -86,7 +86,7 @@ void CSelectableGuiComp::OnGuiModelDetached()
 
 void CSelectableGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	if (selectionPtr != NULL){

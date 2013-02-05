@@ -174,8 +174,8 @@ int CParamsManagerComp::InsertParamsSet(int /*typeIndex*/, int index)
 
 bool CParamsManagerComp::RemoveParamsSet(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < CParamsManagerComp::GetParamsSetsCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < CParamsManagerComp::GetParamsSetsCount());
 
 	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
 
@@ -197,10 +197,10 @@ bool CParamsManagerComp::RemoveParamsSet(int index)
 
 bool CParamsManagerComp::SwapParamsSet(int index1, int index2)
 {
-	I_ASSERT(index1 >= 0);
-	I_ASSERT(index1 < CParamsManagerComp::GetParamsSetsCount());
-	I_ASSERT(index2 >= 0);
-	I_ASSERT(index2 < CParamsManagerComp::GetParamsSetsCount());
+	Q_ASSERT(index1 >= 0);
+	Q_ASSERT(index1 < CParamsManagerComp::GetParamsSetsCount());
+	Q_ASSERT(index2 >= 0);
+	Q_ASSERT(index2 < CParamsManagerComp::GetParamsSetsCount());
 
 	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
 
@@ -222,7 +222,7 @@ bool CParamsManagerComp::SwapParamsSet(int index1, int index2)
 
 IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 {
-	I_ASSERT((index >= 0) && (index < CParamsManagerComp::GetParamsSetsCount()));
+	Q_ASSERT((index >= 0) && (index < CParamsManagerComp::GetParamsSetsCount()));
 
 	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedSetsCount){
@@ -235,7 +235,7 @@ IParamsSet* CParamsManagerComp::GetParamsSet(int index) const
 
 QString CParamsManagerComp::GetParamsSetName(int index) const
 {
-	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
 	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
 	if (index < fixedSetsCount){
@@ -255,7 +255,7 @@ QString CParamsManagerComp::GetParamsSetName(int index) const
 
 bool CParamsManagerComp::SetParamsSetName(int index, const QString& name)
 {
-	I_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
 	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
 	if (index < fixedSetsCount){

@@ -206,15 +206,15 @@ inline CFastBinaryIndex::CFastBinaryIndex(int size, int value)
 inline CFastBinaryIndex::CFastBinaryIndex(quint32 bits, int size, int /*dummy*/)
 :	m_bits(bits), m_size(size)
 {
-	I_ASSERT(CBitManip::instance.GetFirstBitIndex(bits) < size);
+	Q_ASSERT(CBitManip::instance.GetFirstBitIndex(bits) < size);
 }
 
 
 inline CFastBinaryIndex::CFastBinaryIndex(const CFastBinaryIndex& index)
 :	m_bits(index.m_bits), m_size(index.m_size)
 {
-	I_ASSERT(m_size <= MAX_ELEMENTS_COUNT);
-	I_ASSERT((m_bits >> m_size) == 0);
+	Q_ASSERT(m_size <= MAX_ELEMENTS_COUNT);
+	Q_ASSERT((m_bits >> m_size) == 0);
 }
 
 
@@ -271,8 +271,8 @@ inline bool CFastBinaryIndex::SetDimensionsCount(int count)
 
 inline int CFastBinaryIndex::GetAt(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_size);
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_size);
 
 	return int(m_bits >> index) & 1;
 }
@@ -280,8 +280,8 @@ inline int CFastBinaryIndex::GetAt(int index) const
 
 inline void CFastBinaryIndex::SetAt(int index, int value)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_size);
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_size);
 
 	if (value > 0){
 		m_bits |= quint32(1 << index);
@@ -311,8 +311,8 @@ inline void CFastBinaryIndex::SetAllTo(int value)
 
 inline bool CFastBinaryIndex::IncreaseAt(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_size);
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_size);
 
 	quint32 mask = quint32(1 << index);
 
@@ -326,8 +326,8 @@ inline bool CFastBinaryIndex::IncreaseAt(int index)
 
 inline bool CFastBinaryIndex::DecreaseAt(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_size);
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_size);
 
 	quint32 mask = quint32(1 << index);
 
@@ -415,7 +415,7 @@ inline CFastBinaryIndex::Iterator::Iterator(const Iterator& iter)
 
 inline int CFastBinaryIndex::Iterator::operator*()
 {
-	I_ASSERT(m_indexPtr != NULL);
+	Q_ASSERT(m_indexPtr != NULL);
 
 	return m_indexPtr->GetAt(m_position);
 }

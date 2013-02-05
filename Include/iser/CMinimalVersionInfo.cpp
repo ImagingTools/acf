@@ -12,7 +12,7 @@ namespace iser
 CMinimalVersionInfo::CMinimalVersionInfo(const ISerializable* serializablePtr, bool addStandardIds)
 :	m_serializable(*serializablePtr)
 {
-	I_ASSERT(serializablePtr != NULL);
+	Q_ASSERT(serializablePtr != NULL);
 
 	if (addStandardIds){
 		AddId(AcfVersionId, "ACF Framework");

@@ -194,8 +194,8 @@ inline const typename TVarArray<Element>::SizesType& TVarArray<Element>::GetSize
 template <class Element>
 inline int TVarArray<Element>::GetSize(int dimension) const
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < m_sizes.GetDimensionsCount());
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < m_sizes.GetDimensionsCount());
 
 	return m_sizes[dimension];
 }
@@ -204,10 +204,10 @@ inline int TVarArray<Element>::GetSize(int dimension) const
 template <class Element>
 inline const Element& TVarArray<Element>::GetAt(const IndexType& index) const
 {
-	I_ASSERT(index.IsInside(m_sizes));
+	Q_ASSERT(index.IsInside(m_sizes));
 
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	return m_elements[elementIndex];
 }
@@ -216,10 +216,10 @@ inline const Element& TVarArray<Element>::GetAt(const IndexType& index) const
 template <class Element>
 inline void TVarArray<Element>::SetAt(const IndexType& index, const Element& value)
 {
-	I_ASSERT(index.IsInside(m_sizes));
+	Q_ASSERT(index.IsInside(m_sizes));
 
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	m_elements[elementIndex] = value;
 }
@@ -252,7 +252,7 @@ template <class Element>
 inline Element& TVarArray<Element>::operator[](const IndexType& index)
 {
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	return m_elements[elementIndex];
 }
@@ -269,8 +269,8 @@ inline int TVarArray<Element>::GetElementIndex(const IndexType& index) const
 	int elementIndex = 0;
 	int cumulatedSizes = 1;
 	for (int i = 0; i < minDimensionsCount; ++i){
-		I_ASSERT(index[i] >= 0);
-		I_ASSERT(index[i] < m_sizes[i]);
+		Q_ASSERT(index[i] >= 0);
+		Q_ASSERT(index[i] < m_sizes[i]);
 
 		elementIndex += index[i] * cumulatedSizes;
 
@@ -319,8 +319,8 @@ bool TVarArray<Element>::SetSizes(const SizesType& sizes)
 template <class Element>
 bool TVarArray<Element>::SetSize(int dimension, int size)
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < m_sizes.GetDimensionsCount());
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < m_sizes.GetDimensionsCount());
 
 	m_sizes[dimension] = size;
 
@@ -374,8 +374,8 @@ TVarArray<Element>::Iterator::Iterator(const Iterator& iterator)
 template <class Element>
 const Element& TVarArray<Element>::Iterator::operator*() const
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return m_arrayPtr->GetAt(*this);
 }
@@ -384,8 +384,8 @@ const Element& TVarArray<Element>::Iterator::operator*() const
 template <class Element>
 Element& TVarArray<Element>::Iterator::operator*()
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return m_arrayPtr->operator[](*this);
 }
@@ -394,8 +394,8 @@ Element& TVarArray<Element>::Iterator::operator*()
 template <class Element>
 const Element* TVarArray<Element>::Iterator::operator->() const
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return &m_arrayPtr->GetAt(*this);
 }
@@ -404,8 +404,8 @@ const Element* TVarArray<Element>::Iterator::operator->() const
 template <class Element>
 Element* TVarArray<Element>::Iterator::operator->()
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return &m_arrayPtr->operator[](*this);
 }

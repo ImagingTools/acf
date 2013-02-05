@@ -35,8 +35,8 @@ void CSelectionParam::SetSubselection(int selectionIndex, ISelectionParam* selec
 
 bool CSelectionParam::SetSelectedOptionById(const QByteArray& selectedOptionId)
 {
-	I_ASSERT(!selectedOptionId.isEmpty());
-	I_ASSERT(m_constraintsPtr != NULL);
+	Q_ASSERT(!selectedOptionId.isEmpty());
+	Q_ASSERT(m_constraintsPtr != NULL);
 
 	if (m_constraintsPtr != NULL){
 		int optionsCount = m_constraintsPtr->GetOptionsCount();

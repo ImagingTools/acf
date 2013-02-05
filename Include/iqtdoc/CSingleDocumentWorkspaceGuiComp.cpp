@@ -99,7 +99,7 @@ QString CSingleDocumentWorkspaceGuiComp::GetOpenFilePath(const QByteArray* docum
 
 void CSingleDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPtr)
 {
-	I_ASSERT(viewPtr != NULL);
+	Q_ASSERT(viewPtr != NULL);
 
 	istd::CChangeNotifier changePtr(this, CF_VIEW_ACTIVATION_CHANGED);
 
@@ -119,7 +119,7 @@ void CSingleDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewP
 
 void CSingleDocumentWorkspaceGuiComp::OnViewRemoved(istd::IPolymorphic* viewPtr)
 {
-	I_ASSERT(viewPtr != NULL);
+	Q_ASSERT(viewPtr != NULL);
 
 	if (m_lastViewPtr == viewPtr){
 		m_lastViewPtr->DestroyGui();
@@ -175,7 +175,7 @@ void CSingleDocumentWorkspaceGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	QWidget* widgetPtr = GetQtWidget();
-	I_ASSERT(widgetPtr != NULL);
+	Q_ASSERT(widgetPtr != NULL);
 
 	QVBoxLayout* layoutPtr = new QVBoxLayout(widgetPtr);
 	layoutPtr->setContentsMargins(0, 0, 0, 0);
@@ -187,7 +187,7 @@ void CSingleDocumentWorkspaceGuiComp::OnGuiCreated()
 
 		for (int viewIndex = 0; viewIndex < viewsCount; ++viewIndex){
 			istd::IPolymorphic* viewPtr = GetViewFromIndex(docIndex, viewIndex);
-			I_ASSERT(viewPtr != NULL);
+			Q_ASSERT(viewPtr != NULL);
 
 			OnViewRegistered(viewPtr);
 		}

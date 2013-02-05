@@ -11,7 +11,7 @@ namespace iqtgui
 
 void CImagePropertyGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	PropertyTree->clear();
 

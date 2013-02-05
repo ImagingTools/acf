@@ -56,7 +56,7 @@ void CAffineTransformationParamsGuiComp::OnGuiModelDetached()
 
 void CAffineTransformationParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CAffineTransformation2d* objectPtr = dynamic_cast<i2d::CAffineTransformation2d*>(GetObjectPtr());
 	if (objectPtr != NULL){

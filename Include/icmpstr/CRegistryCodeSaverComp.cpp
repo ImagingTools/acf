@@ -276,7 +276,7 @@ bool CRegistryCodeSaverComp::AppendAddresses(
 		const QByteArray& componentId = *elementIter;
 
 		const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentId);
-		I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
+		Q_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
 
 		const QByteArray& packageId = infoPtr->address.GetPackageId();
 
@@ -1066,7 +1066,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 		const QByteArray& componentId = *elementIter;
 
 		const icomp::IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(componentId);
-		I_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
+		Q_ASSERT(infoPtr != NULL);	// used element ID was returned by registry, info must exist.
 
 		NextLine(stream);
 		stream << "// element '" << componentId << "' of type " << infoPtr->address.GetPackageId() << "::" << infoPtr->address.GetComponentId();
@@ -1266,13 +1266,13 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 		stream << attributeInfoName << "->attributePtr.SetPtr(new " << attributeType << ");";
 
 		NextLine(stream);
-		stream << "I_ASSERT(" << attributeInfoName << "->attributePtr.IsValid());";
+		stream << "Q_ASSERT(" << attributeInfoName << "->attributePtr.IsValid());";
 		stream << "\n";
 
 		NextLine(stream);
 		stream << attributeType << "* " << attributeName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
 		NextLine(stream);
-		stream << "I_ASSERT(" << attributeName << " != NULL);";
+		stream << "Q_ASSERT(" << attributeName << " != NULL);";
 		NextLine(stream);
 		stream << attributeName << "->SetValue(" << valueString << ");";
 	}
@@ -1281,14 +1281,14 @@ bool CRegistryCodeSaverComp::WriteAttribute(
 		stream << attributeInfoName << "->attributePtr.SetPtr(new " << attributeType << ");";
 
 		NextLine(stream);
-		stream << "I_ASSERT(" << attributeInfoName << "->attributePtr.IsValid());";
+		stream << "Q_ASSERT(" << attributeInfoName << "->attributePtr.IsValid());";
 		stream << "\n";
 
 		if (!valueStrings.isEmpty()){
 			NextLine(stream);
 			stream << attributeType << "* n" << attributeInfoName << " = dynamic_cast<" << attributeType << "*>(" << attributeInfoName << "->attributePtr.GetPtr());";
 			NextLine(stream);
-			stream << "I_ASSERT(n" << attributeInfoName << " != NULL);";
+			stream << "Q_ASSERT(n" << attributeInfoName << " != NULL);";
 			stream << "\n";
 			NextLine(stream);
 			stream << "n" << attributeInfoName << "->Reset();";
@@ -1541,7 +1541,7 @@ int CRegistryCodeSaverComp::ChangeIndent(int difference) const
 {
 	m_indentCount += difference;
 
-	I_ASSERT(m_indentCount >= 0);
+	Q_ASSERT(m_indentCount >= 0);
 
 	return m_indentCount;
 }

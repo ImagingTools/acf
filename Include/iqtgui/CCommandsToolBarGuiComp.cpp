@@ -21,7 +21,7 @@ void CCommandsToolBarGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	QToolBar* toolBarPtr = GetQtWidget();
-	I_ASSERT(toolBarPtr != NULL);
+	Q_ASSERT(toolBarPtr != NULL);
 	if (toolBarPtr == NULL){
 		return;
 	}

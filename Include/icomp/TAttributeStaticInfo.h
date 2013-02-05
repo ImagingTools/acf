@@ -90,7 +90,7 @@ void TAttributeStaticInfo<Attribute>::AddRelatedMetaId(int metaGroupId, const QB
 
 	IdsToFlagsMap::iterator foundIter = groupMap.find(id);
 	if (foundIter != groupMap.end()){
-		I_ASSERT((flags & (AF_REFERENCE | AF_FACTORY)) == (foundIter.value() & (AF_REFERENCE | AF_FACTORY)));	// factory can be combined with factory only and reference with reference
+		Q_ASSERT((flags & (AF_REFERENCE | AF_FACTORY)) == (foundIter.value() & (AF_REFERENCE | AF_FACTORY)));	// factory can be combined with factory only and reference with reference
 
 		foundIter.value() |= flags & AF_OBLIGATORY;	// is obligatory if once obligatory registred is
 		foundIter.value() &= flags | ~AF_NULLABLE;	// is nullable if always nullable registred is

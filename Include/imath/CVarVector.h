@@ -243,7 +243,7 @@ inline int CVarVector::GetElementsCount() const
 
 inline bool CVarVector::SetElementsCount(int count, double value)
 {
-	I_ASSERT(count >= 0);
+	Q_ASSERT(count >= 0);
 
 	int oldCount = m_elements.size();
 
@@ -314,7 +314,7 @@ inline CVarVector::Elements& CVarVector::GetElementsRef()
 
 inline void CVarVector::Translate(const CVarVector& vector)
 {
-	I_ASSERT(GetElementsCount() == vector.GetElementsCount());
+	Q_ASSERT(GetElementsCount() == vector.GetElementsCount());
 
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
@@ -337,7 +337,7 @@ inline void CVarVector::GetTranslated(const CVarVector& vector, CVarVector& resu
 
 inline void CVarVector::ScaledCumulate(const CVarVector& vector, double scale)
 {
-	I_ASSERT(GetElementsCount() == vector.GetElementsCount());
+	Q_ASSERT(GetElementsCount() == vector.GetElementsCount());
 
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
@@ -354,7 +354,7 @@ inline bool CVarVector::IsNull(double tolerance) const
 
 inline double CVarVector::GetDotProduct(const CVarVector& vector) const
 {
-	I_ASSERT(GetElementsCount() == vector.GetElementsCount());
+	Q_ASSERT(GetElementsCount() == vector.GetElementsCount());
 
 	double retVal = 0.0;
 
@@ -475,7 +475,7 @@ inline bool CVarVector::operator>=(const CVarVector& vector) const
 
 inline CVarVector& CVarVector::operator+=(const CVarVector& vector)
 {
-	I_ASSERT(GetElementsCount() == vector.GetElementsCount());
+	Q_ASSERT(GetElementsCount() == vector.GetElementsCount());
 
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
@@ -488,7 +488,7 @@ inline CVarVector& CVarVector::operator+=(const CVarVector& vector)
 
 inline CVarVector& CVarVector::operator-=(const CVarVector& vector)
 {
-	I_ASSERT(GetElementsCount() == vector.GetElementsCount());
+	Q_ASSERT(GetElementsCount() == vector.GetElementsCount());
 
 	int elementsCount = GetElementsCount();
 	for (int i = 0; i < elementsCount; ++i){
@@ -586,8 +586,8 @@ inline CVarVector CVarVector::operator/(double scalar) const
 
 inline double CVarVector::operator[](int i) const
 {
-	I_ASSERT(i >= 0);
-	I_ASSERT(i < GetElementsCount());
+	Q_ASSERT(i >= 0);
+	Q_ASSERT(i < GetElementsCount());
 
 	return m_elements[i];
 }
@@ -595,8 +595,8 @@ inline double CVarVector::operator[](int i) const
 
 inline double& CVarVector::operator[](int i)
 {
-	I_ASSERT(i >= 0);
-	I_ASSERT(i < GetElementsCount());
+	Q_ASSERT(i >= 0);
+	Q_ASSERT(i < GetElementsCount());
 
 	return m_elements[i];
 }

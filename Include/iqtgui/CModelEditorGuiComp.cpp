@@ -65,7 +65,7 @@ void CModelEditorGuiComp::OnTryClose(bool* ignoredPtr)
 
 void CModelEditorGuiComp::UpdateEditor(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if (m_slaveEditorCompPtr.IsValid()){
 		m_slaveEditorCompPtr->UpdateEditor(updateFlags);
@@ -75,7 +75,7 @@ void CModelEditorGuiComp::UpdateEditor(int updateFlags)
 
 void CModelEditorGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if (m_slaveEditorCompPtr.IsValid()){
 		m_slaveEditorCompPtr->UpdateModel();
@@ -109,7 +109,7 @@ void CModelEditorGuiComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(!m_isConnected);
+	Q_ASSERT(!m_isConnected);
 
 	if (m_slaveObserverCompPtr.IsValid() && m_modelCompPtr.IsValid()){
 		m_isConnected = m_modelCompPtr->AttachObserver(m_slaveObserverCompPtr.GetPtr());
@@ -120,8 +120,8 @@ void CModelEditorGuiComp::OnComponentCreated()
 void CModelEditorGuiComp::OnComponentDestroyed()
 {
 	if (m_isConnected){
-		I_ASSERT(m_slaveObserverCompPtr.IsValid());
-		I_ASSERT(m_modelCompPtr.IsValid());
+		Q_ASSERT(m_slaveObserverCompPtr.IsValid());
+		Q_ASSERT(m_modelCompPtr.IsValid());
 
 		m_modelCompPtr->DetachObserver(m_slaveObserverCompPtr.GetPtr());
 	}

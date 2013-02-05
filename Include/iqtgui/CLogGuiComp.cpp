@@ -302,7 +302,7 @@ void CLogGuiComp::OnAddMessage(const istd::IInformationProvider* messagePtr, boo
 {	
 	iqtgui::CWidgetUpdateBlocker widgetUpdateBlocker(LogView);
 
-	I_ASSERT(messagePtr != NULL);
+	Q_ASSERT(messagePtr != NULL);
 
 	QTreeWidgetItem* itemPtr = CreateGuiItem(*messagePtr);
 
@@ -330,7 +330,7 @@ void CLogGuiComp::OnRemoveMessage(qint64 messageId)
 
 	for (int itemIndex = itemsCount - 1; itemIndex >= 0; itemIndex--){
 		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		qint64 itemTimeStamp = itemPtr->data(0, DR_MESSAGE_ID).toLongLong();
 		if (itemTimeStamp == messageId){
@@ -363,7 +363,7 @@ void CLogGuiComp::OnMessageModeChanged()
 	
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
 		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		int itemCategory = itemPtr->data(0, DR_CATEGORY).toInt();
 
@@ -427,7 +427,7 @@ void CLogGuiComp::OnRemoveMessagesTimer()
 
 	for (int itemIndex = itemsCount - 1; itemIndex >= 0; itemIndex--){
 		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		bool isMessageRemoved = itemPtr->data(0, DR_IS_MESSAGE_REMOVED_FLAG).toBool();
 		if (isMessageRemoved){
@@ -452,7 +452,7 @@ void CLogGuiComp::on_FilterText_textChanged(const QString& filterText)
 {
 	for (int itemIndex = 0; itemIndex < LogView->topLevelItemCount(); itemIndex++){
 		QTreeWidgetItem* itemPtr = LogView->topLevelItem(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		UpdateItemVisibility(itemPtr, filterText);
 	}

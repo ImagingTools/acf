@@ -27,7 +27,7 @@ void CMessageContainer::AddChildContainer(IHierarchicalMessageContainer* childCo
 {
 	QMutexLocker lock(&m_lock);
 
-	I_ASSERT(childContainerPtr != NULL);
+	Q_ASSERT(childContainerPtr != NULL);
 
 	m_childContainers.push_back(childContainerPtr);
 }
@@ -43,7 +43,7 @@ void CMessageContainer::SetSlaveConsumer(ibase::IMessageConsumer* consumerPtr)
 
 void CMessageContainer::SetMaxMessageCount(int maxMessageCount)
 {
-	I_ASSERT(m_maxMessagesCount != 0);
+	Q_ASSERT(m_maxMessagesCount != 0);
 
 	QMutexLocker lock(&m_lock);
 
@@ -163,7 +163,7 @@ IMessageContainer::Messages CMessageContainer::GetMessages() const
 	int childsCount = GetChildsCount();
 	for (int childIndex = 0; childIndex < childsCount; childIndex++){
 		IMessageContainer* childPtr = GetChild(childIndex);
-		I_ASSERT(childPtr != NULL);
+		Q_ASSERT(childPtr != NULL);
 
 		IMessageContainer::Messages childMessages = childPtr->GetMessages();
 
@@ -187,7 +187,7 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 {
 	QMutexLocker lock(&m_lock);
 
-	I_ASSERT(messagePtr.IsValid());
+	Q_ASSERT(messagePtr.IsValid());
 
 	if (m_maxMessagesCount == 0){
 		return;
@@ -209,7 +209,7 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 
 	if (m_maxMessagesCount >= 0){
 		while (int(m_messages.size()) > m_maxMessagesCount){
-			I_ASSERT(!m_messages.isEmpty());
+			Q_ASSERT(!m_messages.isEmpty());
 			const IMessageConsumer::MessagePtr& messageToRemovePtr = m_messages.back();
 
 			istd::CEventBasedNotifier changePtr(
@@ -255,8 +255,8 @@ int CMessageContainer::GetChildsCount() const
 
 IHierarchicalMessageContainer* CMessageContainer::GetChild(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_childContainers.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_childContainers.size()));
 
 	return m_childContainers.at(index);
 }
@@ -276,7 +276,7 @@ bool CMessageContainer::CopyFrom(const istd::IChangeable& object)
 		int sourceMessageCount = sourcePtr->m_messages.count();
 		for (int messageIndex = 0; messageIndex < sourceMessageCount; messageIndex++){
 			const MessagePtr& sourceMessage = sourcePtr->m_messages[messageIndex];
-			I_ASSERT(sourceMessage.IsValid());
+			Q_ASSERT(sourceMessage.IsValid());
 
 			istd::TDelPtr<istd::IInformationProvider> newMessagePtr;
 			newMessagePtr.SetCastedOrRemove<istd::IChangeable>(sourceMessage->CloneMe());

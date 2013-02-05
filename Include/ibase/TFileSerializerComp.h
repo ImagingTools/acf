@@ -133,10 +133,10 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::LoadFromFile(istd::IChangeab
 	if (IsOperationSupported(&data, &filePath, QF_LOAD | QF_FILE, false)){
 		ReadArchiveEx archive(filePath, this);
 
-		I_ASSERT(!archive.IsStoring());
+		Q_ASSERT(!archive.IsStoring());
 
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
-		I_ASSERT(serializablePtr != NULL);
+		Q_ASSERT(serializablePtr != NULL);
 
 		istd::CChangeNotifier changePtr(NULL, istd::IChangeable::CF_MODEL);
 
@@ -167,10 +167,10 @@ int TFileSerializerComp<ReadArchive, WriteArchive>::SaveToFile(const istd::IChan
 
 	if (IsOperationSupported(&data, &filePath, QF_SAVE | QF_FILE, false)){
 		WriteArchiveEx archive(filePath, GetVersionInfo(), this);
-		I_ASSERT(archive.IsStoring());
+		Q_ASSERT(archive.IsStoring());
 
 		const iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(&data);
-		I_ASSERT(serializablePtr != NULL);
+		Q_ASSERT(serializablePtr != NULL);
 
 		if (!CheckMinimalVersion(*serializablePtr, archive.GetVersionInfo())){
 			SendWarningMessage(MI_UNSUPPORTED_VERSION, QObject::tr("Archive version is not supported, possible lost of data"));

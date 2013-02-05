@@ -32,7 +32,7 @@ void CSceneConnectorGuiComp::OnGuiCreated()
 	if (m_extenderGuiCompPtr.IsValid()){
 		if (m_extenderGuiCompPtr->CreateGui(ParamsFrame)){
 			QWidget* widgetPtr = m_extenderGuiCompPtr->GetWidget();
-			I_ASSERT(widgetPtr != NULL);	// GUI was created correctly
+			Q_ASSERT(widgetPtr != NULL);	// GUI was created correctly
 
 			QSizePolicy policy = widgetPtr->sizePolicy();
 

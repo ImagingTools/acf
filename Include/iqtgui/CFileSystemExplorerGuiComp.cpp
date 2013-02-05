@@ -41,7 +41,7 @@ QStringList CFileSystemExplorerGuiComp::GetDefaultFilters() const
 
 void CFileSystemExplorerGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	ifile::IFileNameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

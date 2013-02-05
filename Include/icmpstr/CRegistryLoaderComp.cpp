@@ -31,7 +31,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fi
 	CVisualRegistry* geometricalRegistryPtr = dynamic_cast<CVisualRegistry*>(&data);
 	if (geometricalRegistryPtr != NULL){
 		ReadArchiveEx registryArchive(filePath, this);
-		I_ASSERT(!registryArchive.IsStoring());
+		Q_ASSERT(!registryArchive.IsStoring());
 
 		if (!geometricalRegistryPtr->SerializeRegistry(registryArchive)){
 			OnReadError(registryArchive, data, filePath);
@@ -40,7 +40,7 @@ int CRegistryLoaderComp::LoadFromFile(istd::IChangeable& data, const QString& fi
 		}
 
 		ReadArchiveEx layoutArchive(GetLayoutPath(filePath), this);
-		I_ASSERT(!layoutArchive.IsStoring());
+		Q_ASSERT(!layoutArchive.IsStoring());
 
 		if (!geometricalRegistryPtr->SerializeUserData(layoutArchive)){
 			SendInfoMessage(
@@ -67,7 +67,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const QString
 	const CVisualRegistry* geometricalRegistryPtr = dynamic_cast<const CVisualRegistry*>(&data);
 	if (geometricalRegistryPtr != NULL){
 		WriteArchiveEx registryArchive(filePath, GetVersionInfo(), this);
-		I_ASSERT(registryArchive.IsStoring());
+		Q_ASSERT(registryArchive.IsStoring());
 
 		if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeRegistry(registryArchive)){
 			SendErrorMessage(
@@ -78,7 +78,7 @@ int CRegistryLoaderComp::SaveToFile(const istd::IChangeable& data, const QString
 		}
 
 		WriteArchiveEx layoutArchive(GetLayoutPath(filePath), GetVersionInfo(), this);
-		I_ASSERT(layoutArchive.IsStoring());
+		Q_ASSERT(layoutArchive.IsStoring());
 
 		if (!const_cast<CVisualRegistry*>(geometricalRegistryPtr)->SerializeUserData(layoutArchive)){
 			SendInfoMessage(

@@ -45,7 +45,7 @@ NotificationTarget::NotificationTarget(istd::IChangeable* slavePtr, int changeFl
 	QThread* applicationThreadPtr = NULL;
 	if (QCoreApplication::instance() != NULL){
 		applicationThreadPtr = QCoreApplication::instance()->thread();
-		I_ASSERT(applicationThreadPtr != NULL);
+		Q_ASSERT(applicationThreadPtr != NULL);
 	}
 
 	QThread* objectThread = thread();
@@ -84,7 +84,7 @@ void NotificationTarget::Reset()
 
 void NotificationTarget::DoBeginChanges()
 {
-	I_ASSERT(m_isBeginPending == true);
+	Q_ASSERT(m_isBeginPending == true);
 
 	m_isBeginPending = false;
 
@@ -96,7 +96,7 @@ void NotificationTarget::DoBeginChanges()
 
 void NotificationTarget::DoEndChanges()
 {
-	I_ASSERT(!m_isBeginPending);
+	Q_ASSERT(!m_isBeginPending);
 
 	if (m_slavePtr != NULL && !m_isBeginPending){
 		m_slavePtr->EndChanges(m_changeFlags, m_changeParamsPtr.GetPtr());

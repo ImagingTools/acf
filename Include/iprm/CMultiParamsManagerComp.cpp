@@ -75,7 +75,7 @@ int CMultiParamsManagerComp::InsertParamsSet(int typeIndex, int index)
 		return -1;
 	}
 
-	I_ASSERT(newParamsSetPtr->GetFactoryId() == info.id);
+	Q_ASSERT(newParamsSetPtr->GetFactoryId() == info.id);
 
 	istd::CChangeNotifier notifier(this, CF_SET_INSERTED | CF_OPTIONS_CHANGED | CF_MODEL);
 
@@ -174,8 +174,8 @@ bool CMultiParamsManagerComp::SwapParamsSet(int index1, int index2)
 	qSwap(paramsSet1.name, paramsSet2.name);
 	qSwap(paramsSet1.typeId, paramsSet2.typeId);
 
-	I_ASSERT(paramsSet1.paramSetPtr->GetFactoryId() == paramsSet1.typeId);
-	I_ASSERT(paramsSet2.paramSetPtr->GetFactoryId() == paramsSet2.typeId);
+	Q_ASSERT(paramsSet1.paramSetPtr->GetFactoryId() == paramsSet1.typeId);
+	Q_ASSERT(paramsSet2.paramSetPtr->GetFactoryId() == paramsSet2.typeId);
 
 	return true;
 }
@@ -533,7 +533,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 				return false;
 			}
 
-			I_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
+			Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
 
 			notifier.SetPtr(this);
 
@@ -564,7 +564,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int ind
 			return false;
 		}
 		
-		I_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
+		Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
 
 		istd::CChangeNotifier notifier(this, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
 

@@ -81,7 +81,7 @@ void CMultiAttributeDelegateWidget::OnShowDialog()
 		clearFocus();
 
 		// reset focus to the parent widget
-		I_ASSERT(parentWidget() != NULL);
+		Q_ASSERT(parentWidget() != NULL);
 		parentWidget()->setFocus();
 
 		// Send focus out event, to enforce the closing of the attribute editor:

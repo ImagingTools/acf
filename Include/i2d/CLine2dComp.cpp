@@ -13,10 +13,10 @@ void CLine2dComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_x1AttrPtr.IsValid());
-	I_ASSERT(m_y1AttrPtr.IsValid());
-	I_ASSERT(m_x2AttrPtr.IsValid());
-	I_ASSERT(m_y2AttrPtr.IsValid());
+	Q_ASSERT(m_x1AttrPtr.IsValid());
+	Q_ASSERT(m_y1AttrPtr.IsValid());
+	Q_ASSERT(m_x2AttrPtr.IsValid());
+	Q_ASSERT(m_y2AttrPtr.IsValid());
 
 	SetPoint1(i2d::CVector2d(*m_x1AttrPtr, *m_y1AttrPtr));
 	SetPoint2(i2d::CVector2d(*m_x2AttrPtr, *m_y2AttrPtr));

@@ -25,7 +25,7 @@ CAnnulus::CAnnulus(const i2d::CVector2d& center, double innerRadius, double oute
 :	BaseClass(center),
 	m_radiusRange(innerRadius, outerRadius)
 {
-	I_ASSERT(IsAnnulusValid());
+	Q_ASSERT(IsAnnulusValid());
 }
 
 

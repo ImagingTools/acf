@@ -62,12 +62,12 @@ void TItemModelEditorCompBase<ItemWidgetClass>::OnGuiModelAttached()
 	BaseClass::OnGuiModelAttached();
 
 	ibase::IQtItemModelProvider* objectPtr = BaseClass::GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	QAbstractItemModel* itemModelPtr = const_cast<QAbstractItemModel*>(objectPtr->GetItemModel());
 	if (itemModelPtr != NULL){
 		ItemWidgetClass* viewPtr = BaseClass::GetQtWidget();
-		I_ASSERT(viewPtr != NULL);
+		Q_ASSERT(viewPtr != NULL);
 
 		viewPtr->setModel(itemModelPtr);
 	}
@@ -83,8 +83,8 @@ void TItemModelEditorCompBase<ItemWidgetClass>::OnGuiCreated()
 
 	ItemWidgetClass* viewPtr = BaseClass::GetQtWidget();
 
-	I_ASSERT(viewPtr != NULL);
-	I_ASSERT(m_sortingEnabledAttrPtr.IsValid());
+	Q_ASSERT(viewPtr != NULL);
+	Q_ASSERT(m_sortingEnabledAttrPtr.IsValid());
 
 	viewPtr->setSortingEnabled(*m_sortingEnabledAttrPtr);
 }

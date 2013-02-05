@@ -160,7 +160,7 @@ bool CPolygonCalibrationShape::OnMouseMove(istd::CIndex2d position)
 
 		if ((editMode == iview::ISelectable::EM_MOVE) || (editMode == iview::ISelectable::EM_ADD)){
 			i2d::CPolygon& polygon = *dynamic_cast<i2d::CPolygon*>(modelPtr);
-			I_ASSERT(&polygon != NULL);
+			Q_ASSERT(&polygon != NULL);
 
 			polygon.SetNode(m_referenceIndex, m_referencePosition + logMouse);
 
@@ -175,7 +175,7 @@ bool CPolygonCalibrationShape::OnMouseMove(istd::CIndex2d position)
 			m_castAxis = moveTransform.GetDeformMatrix().GetMultiplied(m_castAxis);
 
 			i2d::CPolygon& polygon = *dynamic_cast<i2d::CPolygon*>(modelPtr);
-			I_ASSERT(&polygon != NULL);
+			Q_ASSERT(&polygon != NULL);
 
 			int nodesCount = polygon.GetNodesCount();
 			for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
@@ -228,7 +228,7 @@ void CPolygonCalibrationShape::Draw(QPainter& drawContext) const
 
 bool CPolygonCalibrationShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CPolygon*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CPolygon*>(modelPtr) != NULL);
 
 	return CCalibrationShapeBase::OnAttached(modelPtr);
 }
@@ -333,12 +333,12 @@ void CPolygonCalibrationShape::DrawCurve(QPainter& drawContext) const
 
 void CPolygonCalibrationShape::DrawArea(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		int nodesCount = polygon.GetNodesCount();
 
@@ -376,12 +376,12 @@ void CPolygonCalibrationShape::DrawArea(QPainter& drawContext) const
 
 void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const i2d::ITransformation2d& calib = GetIsomorphCalib();
@@ -447,7 +447,7 @@ void CPolygonCalibrationShape::DrawSelectionElements(QPainter& drawContext) cons
 
 bool CPolygonCalibrationShape::IsTickerTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
 	if (IsDisplayConnected() && (polygonPtr != NULL)){
@@ -524,12 +524,12 @@ bool CPolygonCalibrationShape::IsTickerTouched(istd::CIndex2d position) const
 
 bool CPolygonCalibrationShape::IsCurveTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		int editMode = GetEditMode();
 		if (editMode == iview::ISelectable::EM_NONE){
@@ -584,7 +584,7 @@ void CPolygonCalibrationShape::EnsureValidNodes() const
 		const imod::IModel* modelPtr = GetModelPtr();
 		if (modelPtr != NULL){
 			const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-			I_ASSERT(&polygon != NULL);
+			Q_ASSERT(&polygon != NULL);
 
 			i2d::CVector2d axisX = m_castAxis.GetNormalized();
 			i2d::CVector2d axisY = axisX.GetOrthogonal();
@@ -637,7 +637,7 @@ void CPolygonCalibrationShape::BeginLogDrag(const i2d::CVector2d& reference)
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		int nodesCount = polygon.GetNodesCount();
 		m_references.resize(nodesCount);
@@ -653,7 +653,7 @@ void CPolygonCalibrationShape::SetLogDragPosition(const i2d::CVector2d& position
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		i2d::CPolygon& polygon = *dynamic_cast<i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		BeginModelChanges();
 

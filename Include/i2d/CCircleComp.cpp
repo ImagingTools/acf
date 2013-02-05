@@ -13,9 +13,9 @@ void CCircleComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_centerXAttrPtr.IsValid());
-	I_ASSERT(m_centerYAttrPtr.IsValid());
-	I_ASSERT(m_radiusAttrPtr.IsValid());
+	Q_ASSERT(m_centerXAttrPtr.IsValid());
+	Q_ASSERT(m_centerYAttrPtr.IsValid());
+	Q_ASSERT(m_radiusAttrPtr.IsValid());
 
 	SetPosition(i2d::CVector2d(*m_centerXAttrPtr, *m_centerXAttrPtr));
 	SetRadius(*m_radiusAttrPtr);

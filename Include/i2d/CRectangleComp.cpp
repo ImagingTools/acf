@@ -13,10 +13,10 @@ void CRectangleComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_leftAttrPtr.IsValid());
-	I_ASSERT(m_topAttrPtr.IsValid());
-	I_ASSERT(m_widthAttrPtr.IsValid());
-	I_ASSERT(m_heightAttrPtr.IsValid());
+	Q_ASSERT(m_leftAttrPtr.IsValid());
+	Q_ASSERT(m_topAttrPtr.IsValid());
+	Q_ASSERT(m_widthAttrPtr.IsValid());
+	Q_ASSERT(m_heightAttrPtr.IsValid());
 
 	SetLeft(*m_leftAttrPtr);
 	SetTop(*m_topAttrPtr);

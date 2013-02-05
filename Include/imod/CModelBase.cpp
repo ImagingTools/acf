@@ -24,7 +24,7 @@ int CModelBase::GetObserverCount() const
 
 IObserver* CModelBase::GetObserverPtr(int index) const
 {
-	I_ASSERT(index >= 0 && index < int(m_observers.size()));
+	Q_ASSERT(index >= 0 && index < int(m_observers.size()));
 
 	return m_observers.at(index).observerPtr;
 }
@@ -96,8 +96,8 @@ void CModelBase::DetachAllObservers()
 	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
 		ObserverInfo& observerInfo = m_observers[observerIndex];
 
-		I_ASSERT(observerInfo.observerPtr != NULL);
-		I_ASSERT(observerInfo.connectionState != SF_DETACHING_STAGE);
+		Q_ASSERT(observerInfo.observerPtr != NULL);
+		Q_ASSERT(observerInfo.connectionState != SF_DETACHING_STAGE);
 
 		observerInfo.connectionState = SF_DETACHING_STAGE;
 		
@@ -112,7 +112,7 @@ bool CModelBase::IsAttached(const IObserver* observerPtr) const
 {
 	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
 		const ObserverInfo& observerInfo = m_observers[observerIndex];
-		I_ASSERT(observerInfo.observerPtr != NULL);
+		Q_ASSERT(observerInfo.observerPtr != NULL);
 
 		if ((observerInfo.observerPtr == observerPtr)){
 			return true;
@@ -129,7 +129,7 @@ void CModelBase::NotifyBeforeUpdate(int updateFlags, istd::IPolymorphic* updateP
 {
 	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
 		ObserverInfo& observerInfo = m_observers[observerIndex];
-		I_ASSERT(observerInfo.observerPtr != NULL);
+		Q_ASSERT(observerInfo.observerPtr != NULL);
 
 		if (observerInfo.connectionState != SF_DETACHING_STAGE){
 			observerInfo.observerPtr->BeforeUpdate(this, updateFlags, updateParamsPtr);
@@ -142,7 +142,7 @@ void CModelBase::NotifyAfterUpdate(int updateFlags, istd::IPolymorphic* updatePa
 {
 	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
 		ObserverInfo& observerInfo = m_observers[observerIndex];
-		I_ASSERT(observerInfo.observerPtr != NULL);
+		Q_ASSERT(observerInfo.observerPtr != NULL);
 
 		if (observerInfo.connectionState != SF_DETACHING_STAGE){
 			observerInfo.observerPtr->AfterUpdate(this, updateFlags, updateParamsPtr);

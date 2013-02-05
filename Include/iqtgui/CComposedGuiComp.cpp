@@ -26,7 +26,7 @@ CComposedGuiComp::CComposedGuiComp()
 
 void CComposedGuiComp::OnRestoreSettings(const QSettings& settings)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if (m_splitterPtr != NULL){
 		// preserve overriding of splitter orientation:
@@ -43,7 +43,7 @@ void CComposedGuiComp::OnRestoreSettings(const QSettings& settings)
 
 void CComposedGuiComp::OnSaveSettings(QSettings& settings) const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if (m_splitterPtr != NULL){
 		QByteArray splitterState = m_splitterPtr->saveState();
@@ -58,7 +58,7 @@ void CComposedGuiComp::OnSaveSettings(QSettings& settings) const
 void CComposedGuiComp::OnGuiCreated()
 {
 	QWidget* widgetPtr = GetWidget();
-	I_ASSERT(widgetPtr != NULL);	// GUI was created, main widget must be present
+	Q_ASSERT(widgetPtr != NULL);	// GUI was created, main widget must be present
 
 	QBoxLayout* layoutPtr = NULL;
 	if (*m_useHorizontalLayoutAttrPtr){

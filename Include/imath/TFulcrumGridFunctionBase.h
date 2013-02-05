@@ -178,8 +178,8 @@ inline int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetDimensionsCo
 template <class Argument, class Result, class Fulcrums>
 inline int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetLayersCount(int dimension) const
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < int(m_layers.size()));
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < int(m_layers.size()));
 
 	return m_layers[dimension].size();
 }
@@ -188,13 +188,13 @@ inline int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetLayersCount(
 template <class Argument, class Result, class Fulcrums>
 inline double TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetLayerPosition(int dimension, int layerIndex) const
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < int(m_layers.size()));
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < int(m_layers.size()));
 
 	const LayerPositions& positions = m_layers[dimension];
 
-	I_ASSERT(layerIndex >= 0);
-	I_ASSERT(layerIndex < int(positions.size()));
+	Q_ASSERT(layerIndex >= 0);
+	Q_ASSERT(layerIndex < int(positions.size()));
 
 	return positions[layerIndex];
 }
@@ -229,8 +229,8 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetDimensionsCount(in
 template <class Argument, class Result, class Fulcrums>
 void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetLayersCount(int dimension, int count)
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < int(m_layers.size()));
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < int(m_layers.size()));
 
 	m_layers[dimension].resize(count);
 	m_fulcrums.SetSize(dimension, count);
@@ -240,13 +240,13 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetLayersCount(int di
 template <class Argument, class Result, class Fulcrums>
 void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetLayerPosition(int dimension, int layerIndex, double position)
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < int(m_layers.size()));
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < int(m_layers.size()));
 
 	LayerPositions& positions = m_layers[dimension];
 
-	I_ASSERT(layerIndex >= 0);
-	I_ASSERT(layerIndex < int(positions.size()));
+	Q_ASSERT(layerIndex >= 0);
+	Q_ASSERT(layerIndex < int(positions.size()));
 
 	istd::CChangeNotifier notifier(this, CF_SORT_LAYERS | CF_MODEL);
 
@@ -258,15 +258,15 @@ template <class Argument, class Result, class Fulcrums>
 void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::GetFulcrumPosition(const FulcrumIndex& index, ArgumentType& result) const
 {
 	int layersCount = int(m_layers.size());
-	I_ASSERT(layersCount <= index.GetDimensionsCount());
+	Q_ASSERT(layersCount <= index.GetDimensionsCount());
 
 	result.SetElementsCount(layersCount);
 
 	for (int i = 0; i < layersCount; ++i){
 		const LayerPositions& positions = m_layers[i];
 
-		I_ASSERT(index[i] >= 0);
-		I_ASSERT(index[i] < int(positions.size()));
+		Q_ASSERT(index[i] >= 0);
+		Q_ASSERT(index[i] < int(positions.size()));
 
 		result[i] = positions[index[i]];
 	}
@@ -293,8 +293,8 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SetFulcrumAtIndex(con
 template <class Argument, class Result, class Fulcrums>
 int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::InsertLayer(int dimension, double position)
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < m_fulcrums.GetDimensionsCount());
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < m_fulcrums.GetDimensionsCount());
 
 	Fulcrums newFulcrums = m_fulcrums;
 
@@ -314,20 +314,20 @@ int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::InsertLayer(int dimens
 			nextPosition = positions[layerIndex + 1];
 		}
 	}
-	I_ASSERT(position >= prevPosition);
-	I_ASSERT(position <= nextPosition);
+	Q_ASSERT(position >= prevPosition);
+	Q_ASSERT(position <= nextPosition);
 
 	double prevFactor = 0.5;
 	if (nextPosition - prevPosition > I_BIG_EPSILON){
 		prevFactor = (position - prevPosition) / (nextPosition - prevPosition);
 
-		I_ASSERT(prevFactor >= 0);
-		I_ASSERT(prevFactor - I_EPSILON <= 1.0);
+		Q_ASSERT(prevFactor >= 0);
+		Q_ASSERT(prevFactor - I_EPSILON <= 1.0);
 	}
 	double nextFactor = 1 - prevFactor;
 
 	int oldLayersCount = int(positions.size());
-	I_ASSERT(oldLayersCount == m_fulcrums.GetSize(dimension));
+	Q_ASSERT(oldLayersCount == m_fulcrums.GetSize(dimension));
 
 	for (		typename Fulcrums::Iterator destIter = newFulcrums.Begin();
 				destIter != newFulcrums.End();
@@ -364,9 +364,9 @@ int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::InsertLayer(int dimens
 template <class Argument, class Result, class Fulcrums>
 void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::RemoveLayer(int dimension, int layerIndex)
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < GetDimensionsCount());
-	I_ASSERT(m_fulcrums.GetSize(dimension) > 0);
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < GetDimensionsCount());
+	Q_ASSERT(m_fulcrums.GetSize(dimension) > 0);
 
 	Fulcrums newFulcrums = m_fulcrums;
 
@@ -408,7 +408,7 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 	istd::CChangeNotifier notifier(isStoring? NULL: this);
 
 	int dimensionsCount = m_fulcrums.GetDimensionsCount();
-	I_ASSERT(dimensionsCount == int(m_layers.size()));
+	Q_ASSERT(dimensionsCount == int(m_layers.size()));
 
 	retVal = retVal && archive.BeginMultiTag(gridTag, positionsTag, dimensionsCount);
 
@@ -419,13 +419,13 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 	}
 
 	FulcrumSizes sizes = m_fulcrums.GetSizes();
-	I_ASSERT(sizes.GetDimensionsCount() >= dimensionsCount);
+	Q_ASSERT(sizes.GetDimensionsCount() >= dimensionsCount);
 
 	for (int dimensionIndex = 0; dimensionIndex < dimensionsCount; ++dimensionIndex){
 		LayerPositions& positions = m_layers[dimensionIndex];
 
 		int& positionsCount = sizes[dimensionIndex];
-		I_ASSERT(positionsCount == int(positions.size()));
+		Q_ASSERT(positionsCount == int(positions.size()));
 
 		retVal = retVal && archive.BeginMultiTag(positionsTag, positionTag, positionsCount);
 
@@ -484,8 +484,8 @@ void TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::SortFulcrums()
 template <class Argument, class Result, class Fulcrums>
 int TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::FindLayerIndex(int dimension, double value) const
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < GetDimensionsCount());
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < GetDimensionsCount());
 
 	EnsureCacheValid();
 

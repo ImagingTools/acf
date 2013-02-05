@@ -35,7 +35,7 @@ CInteractiveLabelShape::CInteractiveLabelShape(TextAlign align, const istd::CInd
 
 bool CInteractiveLabelShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CLabel* labelPtr = dynamic_cast<const i2d::CLabel*>(GetModelPtr());
 	if (labelPtr != NULL){
@@ -84,7 +84,7 @@ bool CInteractiveLabelShape::OnMouseMove(istd::CIndex2d position)
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		i2d::CLabel& label = *dynamic_cast<i2d::CLabel*>(modelPtr);
-		I_ASSERT(&label != NULL);
+		Q_ASSERT(&label != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
@@ -119,7 +119,7 @@ bool CInteractiveLabelShape::OnMouseMove(istd::CIndex2d position)
 
 void CInteractiveLabelShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CLabel* labelPtr = dynamic_cast<const i2d::CLabel*>(GetModelPtr());
 	if (labelPtr != NULL){
@@ -193,7 +193,7 @@ void CInteractiveLabelShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveLabelShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CLabel*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CLabel*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -203,7 +203,7 @@ bool CInteractiveLabelShape::OnAttached(imod::IModel* modelPtr)
 
 ITouchable::TouchState CInteractiveLabelShape::IsTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CLabel* labelPtr = dynamic_cast<const i2d::CLabel*>(GetModelPtr());
 	if (labelPtr != NULL){
@@ -348,7 +348,7 @@ void CInteractiveLabelShape::CalculateTextOriginSize(i2d::CRect& textBox) const
 
 i2d::CRect CInteractiveLabelShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CLabel* labelPtr = dynamic_cast<const i2d::CLabel*>(GetModelPtr());
 	if (labelPtr != NULL){

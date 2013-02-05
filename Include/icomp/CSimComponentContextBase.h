@@ -84,7 +84,7 @@ public:
 	template <class Attribute>
 	bool SetSingleAttr(const QByteArray& attributeId, const Attribute& attribute)
 	{
-		I_ASSERT(IsAttributeTypeCorrect<TAttribute<Attribute> >(attributeId));
+		Q_ASSERT(IsAttributeTypeCorrect<TAttribute<Attribute> >(attributeId));
 
 		return SetAttr(attributeId, new TAttribute<Attribute>(attribute));
 	}
@@ -97,7 +97,7 @@ public:
 	template <class Attribute>
 	bool InsertMultiAttr(const QByteArray& attributeId, const Attribute& attribute)
 	{
-		I_ASSERT(IsAttributeTypeCorrect<TMultiAttribute<Attribute> >(attributeId));
+		Q_ASSERT(IsAttributeTypeCorrect<TMultiAttribute<Attribute> >(attributeId));
 
 		TMultiAttribute<Attribute>* multiAttrPtr = NULL;
 

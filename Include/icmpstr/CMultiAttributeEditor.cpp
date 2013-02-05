@@ -89,7 +89,7 @@ void CMultiAttributeEditor::OnItemRemove()
 		int rowIndex = m_dialog.AttributeValuesTree->row(itemPtr);
 
 		itemPtr = m_dialog.AttributeValuesTree->takeItem(rowIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		delete itemPtr;
 
@@ -109,7 +109,7 @@ void CMultiAttributeEditor::OnItemMoveUp()
 		int rowIndex = m_dialog.AttributeValuesTree->row(itemPtr);
 
 		itemPtr = m_dialog.AttributeValuesTree->takeItem(rowIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		m_dialog.AttributeValuesTree->insertItem(rowIndex - 1, itemPtr);
 
@@ -127,7 +127,7 @@ void CMultiAttributeEditor::OnItemMoveDown()
 		int rowIndex = m_dialog.AttributeValuesTree->row(itemPtr);
 
 		itemPtr = m_dialog.AttributeValuesTree->takeItem(rowIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		m_dialog.AttributeValuesTree->insertItem(rowIndex + 1, itemPtr);
 
@@ -223,7 +223,7 @@ void CMultiAttributeEditor::ValueItemDelegate::setEditorData(QWidget* editor, co
 				elemIter != selectedElements.end();
 				++elemIter){
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter.value();
-		I_ASSERT(elementInfoPtr != NULL);
+		Q_ASSERT(elementInfoPtr != NULL);
 		if (!elementInfoPtr->elementPtr.IsValid()){
 			continue;
 		}

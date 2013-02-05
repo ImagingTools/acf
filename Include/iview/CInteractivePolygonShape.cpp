@@ -31,7 +31,7 @@ CInteractivePolygonShape::CInteractivePolygonShape()
 
 bool CInteractivePolygonShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	imod::IModel* modelPtr = GetModelPtr();
 	i2d::CPolygon* polygonPtr = dynamic_cast<i2d::CPolygon*>(modelPtr);
@@ -149,7 +149,7 @@ bool CInteractivePolygonShape::OnMouseMove(istd::CIndex2d position)
 
 		if ((editMode == ISelectable::EM_MOVE) || (editMode == ISelectable::EM_ADD)){
 			istd::TChangeNotifier<i2d::CPolygon> polygonPtr(dynamic_cast<i2d::CPolygon*>(modelPtr));
-			I_ASSERT(polygonPtr.IsValid());
+			Q_ASSERT(polygonPtr.IsValid());
 
 			const iview::CScreenTransform& transform = GetLogToScreenTransform();
 			polygonPtr->SetNode(m_referenceIndex, m_referencePosition + transform.GetClientPosition(position));
@@ -167,7 +167,7 @@ bool CInteractivePolygonShape::OnMouseMove(istd::CIndex2d position)
 			m_castAxis = moveTransform.GetDeformMatrix().GetMultiplied(m_castAxis);
 
 			istd::TChangeNotifier<i2d::CPolygon> polygonPtr(dynamic_cast<i2d::CPolygon*>(modelPtr));
-			I_ASSERT(polygonPtr.IsValid());
+			Q_ASSERT(polygonPtr.IsValid());
 
 			int nodesCount = polygonPtr->GetNodesCount();
 			for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
@@ -226,7 +226,7 @@ void CInteractivePolygonShape::Draw(QPainter& drawContext) const
 
 bool CInteractivePolygonShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CPolygon*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CPolygon*>(modelPtr) != NULL);
 
 	return CInteractiveShapeBase::OnAttached(modelPtr);
 }
@@ -334,7 +334,7 @@ i2d::CVector2d CInteractivePolygonShape::GetSegmentMiddle(int index) const
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		if (index + 1 == polygon.GetNodesCount()){
 			return (polygon.GetNode(index) + polygon.GetNode(0)) / 2;
@@ -351,12 +351,12 @@ i2d::CVector2d CInteractivePolygonShape::GetSegmentMiddle(int index) const
 
 void CInteractivePolygonShape::DrawCurve(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		const IColorSchema& colorSchema = GetColorSchema();
 		if (IsSelected()){
@@ -390,7 +390,7 @@ void CInteractivePolygonShape::DrawCurve(QPainter& drawContext) const
 
 void CInteractivePolygonShape::DrawArea(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
 	if (polygonPtr != NULL){
@@ -427,7 +427,7 @@ void CInteractivePolygonShape::DrawArea(QPainter& drawContext) const
 
 void CInteractivePolygonShape::DrawSelectionElements(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
 	if (polygonPtr != NULL){
@@ -486,7 +486,7 @@ void CInteractivePolygonShape::DrawSelectionElements(QPainter& drawContext) cons
 
 bool CInteractivePolygonShape::IsCurveTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
 	if (polygonPtr != NULL){
@@ -525,7 +525,7 @@ void CInteractivePolygonShape::EnsureValidNodes() const
 		const imod::IModel* modelPtr = GetModelPtr();
 		if (modelPtr != NULL){
 			const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-			I_ASSERT(&polygon != NULL);
+			Q_ASSERT(&polygon != NULL);
 
 			i2d::CVector2d axisX = m_castAxis.GetNormalized();
 			i2d::CVector2d axisY = axisX.GetOrthogonal();
@@ -581,7 +581,7 @@ void CInteractivePolygonShape::BeginLogDrag(const i2d::CVector2d& reference)
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolygon& polygon = *dynamic_cast<const i2d::CPolygon*>(modelPtr);
-		I_ASSERT(&polygon != NULL);
+		Q_ASSERT(&polygon != NULL);
 
 		int nodesCount = polygon.GetNodesCount();
 		m_references.resize(nodesCount);
@@ -597,7 +597,7 @@ void CInteractivePolygonShape::SetLogDragPosition(const i2d::CVector2d& position
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		istd::TChangeNotifier<i2d::CPolygon> polygonPtr(dynamic_cast<i2d::CPolygon*>(modelPtr));
-		I_ASSERT(polygonPtr.IsValid());
+		Q_ASSERT(polygonPtr.IsValid());
 
 		BeginModelChanges();
 
@@ -617,7 +617,7 @@ void CInteractivePolygonShape::SetLogDragPosition(const i2d::CVector2d& position
 
 i2d::CRect CInteractivePolygonShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
 	if (polygonPtr != NULL){

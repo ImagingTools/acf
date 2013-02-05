@@ -19,7 +19,7 @@ namespace iqtprm
 
 void CNameParamGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iprm::INameParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -54,7 +54,7 @@ void CNameParamGuiComp::OnGuiCreated()
 	}
 
 	QLayout* selectorLayoutPtr = NULL;
-	I_ASSERT(NameFrame->layout() == NULL);
+	Q_ASSERT(NameFrame->layout() == NULL);
 
 	if (labelPosition == LP_LEFT){
 		selectorLayoutPtr = new QHBoxLayout(NameFrame);

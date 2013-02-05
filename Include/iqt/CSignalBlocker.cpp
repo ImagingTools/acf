@@ -38,7 +38,7 @@ CSignalBlocker::~CSignalBlocker()
 
 void CSignalBlocker::BlockChilds(QObject* objectPtr, bool block)
 {
-	I_ASSERT(m_objectPtr != NULL);
+	Q_ASSERT(m_objectPtr != NULL);
 
 	QObjectList childs = objectPtr->children();
 	QObject* childObjectPtr = NULL;

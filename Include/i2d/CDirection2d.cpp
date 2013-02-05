@@ -15,41 +15,41 @@ namespace i2d
 CDirection2d::CDirection2d()
 :	m_direction(0.0)
 {
-	I_ASSERT(Invariant());
+	Q_ASSERT(Invariant());
 }
 
 
 CDirection2d::CDirection2d(const CDirection2d& direction)
 :	m_direction(direction.m_direction)
 {
-	I_ASSERT(direction.Invariant());
+	Q_ASSERT(direction.Invariant());
 
-	I_ASSERT(Invariant());
+	Q_ASSERT(Invariant());
 }
 
 
 CDirection2d::CDirection2d(double radian)
 :	m_direction(radian)
 {
-	I_ASSERT(radian >= -I_PI - I_BIG_EPSILON);
-	I_ASSERT(radian <= I_PI + I_BIG_EPSILON);
+	Q_ASSERT(radian >= -I_PI - I_BIG_EPSILON);
+	Q_ASSERT(radian <= I_PI + I_BIG_EPSILON);
 
-	I_ASSERT(Invariant());
+	Q_ASSERT(Invariant());
 }
 
 
 double CDirection2d::DistInRadian(const CDirection2d& dir2) const
 {
-	I_ASSERT(Invariant());
-	I_ASSERT(dir2.Invariant());
+	Q_ASSERT(Invariant());
+	Q_ASSERT(dir2.Invariant());
 
 	double w1 = qMin(m_direction, dir2.m_direction); 
 	double w2 = qMax(m_direction, dir2.m_direction);
 
 	double dist = qMin(w2 - w1, I_2PI - (w2 - w1));
 	
-	I_ASSERT(dist >= 0.0);
-	I_ASSERT(dist <= I_PI);
+	Q_ASSERT(dist >= 0.0);
+	Q_ASSERT(dist <= I_PI);
 		
 	return dist;
 }
@@ -57,13 +57,13 @@ double CDirection2d::DistInRadian(const CDirection2d& dir2) const
 
 double CDirection2d::DistInDegree(const CDirection2d& dir2) const
 {
-	I_ASSERT(Invariant());
-	I_ASSERT(dir2.Invariant());
+	Q_ASSERT(Invariant());
+	Q_ASSERT(dir2.Invariant());
 
 	double dist = DistInRadian(dir2) / I_2PI * 360.0;
 
-	I_ASSERT(dist >= 0.0);
-	I_ASSERT(dist <= 180.0);
+	Q_ASSERT(dist >= 0.0);
+	Q_ASSERT(dist <= 180.0);
 		
 	return dist;
 }
@@ -71,8 +71,8 @@ double CDirection2d::DistInDegree(const CDirection2d& dir2) const
 
 bool CDirection2d::operator==(const CDirection2d& dir2) const
 {
-	I_ASSERT(Invariant());
-	I_ASSERT(dir2.Invariant());
+	Q_ASSERT(Invariant());
+	Q_ASSERT(dir2.Invariant());
 
 	return qAbs(DistInRadian(dir2)) < I_BIG_EPSILON;
 }
@@ -90,7 +90,7 @@ double CDirection2d::Normalize(double radian)
 					::fmod(radian + I_PI, I_2PI) - I_PI:
 					I_PI - ::fmod(I_PI - radian, I_2PI);
 					
-	I_ASSERT((retVal >= -I_PI - I_BIG_EPSILON) && (retVal <= I_PI + I_BIG_EPSILON));
+	Q_ASSERT((retVal >= -I_PI - I_BIG_EPSILON) && (retVal <= I_PI + I_BIG_EPSILON));
 
 	return retVal;
 }
@@ -129,7 +129,7 @@ CDirection2d CDirection2d::Avg(const CDirection2d& dir2) const
 
 	CDirection2d& res = dir2.DistInRadian(res1) <= dir2.DistInRadian(res2) ? res1 : res2;	
 
-	I_ASSERT(res.DistInRadian(*this) + res.DistInRadian(dir2) == DistInRadian(dir2));
+	Q_ASSERT(res.DistInRadian(*this) + res.DistInRadian(dir2) == DistInRadian(dir2));
 
 	return res;
 }
@@ -137,10 +137,10 @@ CDirection2d CDirection2d::Avg(const CDirection2d& dir2) const
 
 CDirection2d CDirection2d::Avg(double weight, const CDirection2d& dir2) const
 {
-	I_ASSERT(Invariant());
-	I_ASSERT(dir2.Invariant());
-	I_ASSERT(weight >= 0.0);
-	I_ASSERT(weight <= 1.0);
+	Q_ASSERT(Invariant());
+	Q_ASSERT(dir2.Invariant());
+	Q_ASSERT(weight >= 0.0);
+	Q_ASSERT(weight <= 1.0);
 
 	double dist(DistInRadian(dir2) * weight);
 	
@@ -153,10 +153,10 @@ CDirection2d CDirection2d::Avg(double weight, const CDirection2d& dir2) const
 		const double a(res.DistInRadian(*this));
 		const double b(res.DistInRadian(dir2));
 		const double c(DistInRadian(dir2));
-		I_ASSERT((a + b < c + I_BIG_EPSILON) && (a + b > c - I_BIG_EPSILON));
+		Q_ASSERT((a + b < c + I_BIG_EPSILON) && (a + b > c - I_BIG_EPSILON));
 	);
 	
-	I_ASSERT(res.Invariant());
+	Q_ASSERT(res.Invariant());
 
 	return res;
 }
@@ -164,11 +164,11 @@ CDirection2d CDirection2d::Avg(double weight, const CDirection2d& dir2) const
 
 CDirection2d CDirection2d::TurnByRadian(double turn) const
 {
-	I_ASSERT(Invariant()); 
+	Q_ASSERT(Invariant()); 
 
 	const CDirection2d& res = CDirection2d::FromRadian(this->ToRadian()+turn);
 
-	I_ASSERT(res.Invariant());
+	Q_ASSERT(res.Invariant());
 
 	return res;
 }

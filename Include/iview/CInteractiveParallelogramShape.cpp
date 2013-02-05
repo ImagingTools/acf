@@ -73,7 +73,7 @@ void CInteractiveParallelogramShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveParallelogramShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CParallelogram*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CParallelogram*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -83,7 +83,7 @@ bool CInteractiveParallelogramShape::OnAttached(imod::IModel* modelPtr)
 
 bool CInteractiveParallelogramShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	if (downFlag){
 		EnsureValidNodes();
@@ -422,7 +422,7 @@ void CInteractiveParallelogramShape::DrawFigure(QPainter& drawContext) const
 
 i2d::CRect CInteractiveParallelogramShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const IColorSchema& colorSchema = GetColorSchema();
 	const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);

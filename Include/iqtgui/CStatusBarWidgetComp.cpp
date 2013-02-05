@@ -17,7 +17,7 @@ bool CStatusBarWidgetComp::AddToMainWindow(QMainWindow& mainWindow)
 {
 	if (m_statusBarWidgetsCompPtr.IsValid()){
 		QStatusBar* statusBar = mainWindow.statusBar();
-		I_ASSERT(statusBar != NULL);
+		Q_ASSERT(statusBar != NULL);
 
 		int widgetsCount = m_statusBarWidgetsCompPtr.GetCount();
 

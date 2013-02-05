@@ -50,11 +50,11 @@ void CCalibratedViewBase::SetCalibrationPtr(const i2d::ICalibration2d* calibrati
 
 void CCalibratedViewBase::ConnectCalibrationShape(iview::IShape* shapePtr)
 {
-	I_ASSERT(shapePtr != NULL);
+	Q_ASSERT(shapePtr != NULL);
 	if (GetLayersCount() <= 0){
 		InsertDefaultLayers();
 	}
-	I_ASSERT(m_calibrationLayerIndex >= 0);
+	Q_ASSERT(m_calibrationLayerIndex >= 0);
 
 	iview::IViewLayer& layer = GetLayer(m_calibrationLayerIndex);
 	layer.ConnectShape(shapePtr);
@@ -221,7 +221,7 @@ void CCalibratedViewBase::DrawToContext(
 			QPainter& context,
 			const i2d::CRect& invalidatedBox)
 {
-	I_ASSERT(!invalidatedBox.IsEmpty());
+	Q_ASSERT(!invalidatedBox.IsEmpty());
 	// TODO: Implement drawing without background buffer
 
 	iview::CDrawBuffer& backgroundBuffer = GetBackgroundBuffer();
@@ -259,7 +259,7 @@ void CCalibratedViewBase::DrawToContext(
 	context.setClipRegion(iqt::GetQRect(invalidatedBox));
 	backgroundBuffer.CopyRectTo(invalidatedBox, context, invalidatedBox.GetLeftTop());
 
-	I_ASSERT(lastBackgroundLayerIndex >= -1);
+	Q_ASSERT(lastBackgroundLayerIndex >= -1);
 	if (lastBackgroundLayerIndex + 1 < layersCount){
 		DrawLayers(context, lastBackgroundLayerIndex + 1, layersCount - 1);
 	}

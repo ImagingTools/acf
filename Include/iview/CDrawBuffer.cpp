@@ -31,7 +31,7 @@ void CDrawBuffer::Create(const QPaintDevice& /*device*/, ibase::CSize size)
 
 void CDrawBuffer::CopyRectTo(const i2d::CRect& source, QPaintDevice& device, istd::CIndex2d devicePos) const
 {
-	I_ASSERT(!hasAlpha());
+	Q_ASSERT(!hasAlpha());
 
 	m_drawContextPtr.Reset();
 
@@ -45,7 +45,7 @@ void CDrawBuffer::CopyRectTo(const i2d::CRect& source, QPainter& drawContext, is
 {
 	m_drawContextPtr.Reset();
 
-	I_ASSERT(!hasAlpha());
+	Q_ASSERT(!hasAlpha());
 
 	drawContext.drawPixmap(iqt::GetQPoint(contextPos), *this, iqt::GetQRect(source));
 }

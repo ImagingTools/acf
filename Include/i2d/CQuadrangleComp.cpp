@@ -12,14 +12,14 @@ void CQuadrangleComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_diag1X1AttrPtr.IsValid());
-	I_ASSERT(m_diag1Y1AttrPtr.IsValid());
-	I_ASSERT(m_diag1X2AttrPtr.IsValid());
-	I_ASSERT(m_diag1Y2AttrPtr.IsValid());
-	I_ASSERT(m_diag2X1AttrPtr.IsValid());
-	I_ASSERT(m_diag2Y1AttrPtr.IsValid());
-	I_ASSERT(m_diag2X2AttrPtr.IsValid());
-	I_ASSERT(m_diag2Y2AttrPtr.IsValid());
+	Q_ASSERT(m_diag1X1AttrPtr.IsValid());
+	Q_ASSERT(m_diag1Y1AttrPtr.IsValid());
+	Q_ASSERT(m_diag1X2AttrPtr.IsValid());
+	Q_ASSERT(m_diag1Y2AttrPtr.IsValid());
+	Q_ASSERT(m_diag2X1AttrPtr.IsValid());
+	Q_ASSERT(m_diag2Y1AttrPtr.IsValid());
+	Q_ASSERT(m_diag2X2AttrPtr.IsValid());
+	Q_ASSERT(m_diag2Y2AttrPtr.IsValid());
 
 	i2d::CLine2d firstDiagonal(
 				i2d::CVector2d(*m_diag1X1AttrPtr, *m_diag1Y1AttrPtr),

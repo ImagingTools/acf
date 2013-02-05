@@ -15,7 +15,7 @@ int CSelectionConstraintsComp::GetOptionsFlags() const
 
 int CSelectionConstraintsComp::GetOptionsCount() const
 {
-	I_ASSERT(m_optionNamesAttrPtr.IsValid());
+	Q_ASSERT(m_optionNamesAttrPtr.IsValid());
 
 	return m_optionNamesAttrPtr.GetCount();
 }
@@ -23,8 +23,8 @@ int CSelectionConstraintsComp::GetOptionsCount() const
 
 QString CSelectionConstraintsComp::GetOptionName(int index) const
 {
-	I_ASSERT(m_optionNamesAttrPtr.GetCount() > index);
-	I_ASSERT(index >= 0);
+	Q_ASSERT(m_optionNamesAttrPtr.GetCount() > index);
+	Q_ASSERT(index >= 0);
 
 	return m_optionNamesAttrPtr[index];
 }
@@ -32,7 +32,7 @@ QString CSelectionConstraintsComp::GetOptionName(int index) const
 
 QString CSelectionConstraintsComp::GetOptionDescription(int index) const
 {
-	I_ASSERT(index >= 0);
+	Q_ASSERT(index >= 0);
 
 	if (index < m_optionDescriptionsAttrPtr.GetCount()){
 		return m_optionDescriptionsAttrPtr[index];

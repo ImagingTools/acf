@@ -19,7 +19,7 @@ namespace iview
 
 iview::ITouchable::TouchState CInteractivePerspectiveCalibrationShape::IsTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const CPerspectiveCalibration* calibPtr = dynamic_cast<const CPerspectiveCalibration*>(GetModelPtr());
 	if (calibPtr != NULL){
@@ -61,7 +61,7 @@ iview::ITouchable::TouchState CInteractivePerspectiveCalibrationShape::IsTouched
 
 void CInteractivePerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const CPerspectiveCalibration* calibPtr = dynamic_cast<const CPerspectiveCalibration*>(GetModelPtr());
 	if (calibPtr != NULL){
@@ -99,7 +99,7 @@ void CInteractivePerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 
 bool CInteractivePerspectiveCalibrationShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	if (!IsEditablePosition()){
 		return false;

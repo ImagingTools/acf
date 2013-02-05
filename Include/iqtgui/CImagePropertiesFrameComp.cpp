@@ -17,7 +17,7 @@ namespace iqtgui
 
 void CImagePropertiesFrameComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	iimg::IBitmap* bitmapPtr = GetObjectPtr();
 	if (bitmapPtr != NULL && IsGuiCreated()){

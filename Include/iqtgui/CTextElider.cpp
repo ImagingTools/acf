@@ -38,7 +38,7 @@ bool CTextElider::RegisterElideObject(QObject* elideObject)
 {
 	bool insertPossible = !m_objectPtrMap.contains(elideObject);
 	insertPossible = insertPossible && elideObject != NULL;
-	I_ASSERT(insertPossible);
+	Q_ASSERT(insertPossible);
 
 	if (insertPossible){
 		ElideObjectInfo info;
@@ -65,7 +65,7 @@ void CTextElider::UnregisterElideObject(QObject* elideObject)
 		return;
 	}
 
-	I_ASSERT(m_objectPtrMap.contains(elideObject));
+	Q_ASSERT(m_objectPtrMap.contains(elideObject));
 	if (m_objectPtrMap.contains(elideObject)){
 		elideObject->removeEventFilter(this);
 	}

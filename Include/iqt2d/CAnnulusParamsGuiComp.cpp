@@ -15,10 +15,10 @@ namespace iqt2d
 
 void CAnnulusParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CAnnulus* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	istd::CChangeNotifier notifier(NULL);
 
@@ -48,7 +48,7 @@ void CAnnulusParamsGuiComp::UpdateModel() const
 
 void CAnnulusParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CAnnulus* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

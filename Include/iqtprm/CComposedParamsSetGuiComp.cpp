@@ -38,7 +38,7 @@ m_guiContainerPtr(NULL)
 
 void CComposedParamsSetGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
+	Q_ASSERT(IsGuiCreated() && (GetObjectPtr() != NULL));
 
 	int editorsCount = m_editorsCompPtr.GetCount();
 	for (int i = 0; i < editorsCount; ++i){
@@ -50,7 +50,7 @@ void CComposedParamsSetGuiComp::UpdateModel() const
 		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
 		ConnectedEditorsMap::ConstIterator findIter = m_connectedEditorsMap.constFind(editorPtr);
 		if (findIter != m_connectedEditorsMap.constEnd() && (findIter.value() == true)){
-			I_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
+			Q_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
 
 			editorPtr->UpdateModel();
 		}
@@ -60,7 +60,7 @@ void CComposedParamsSetGuiComp::UpdateModel() const
 
 void CComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if ((updateFlags & istd::CChangeDelegator::CF_DELEGATED) == 0){
 		int editorsCount = m_editorsCompPtr.GetCount();
@@ -72,7 +72,7 @@ void CComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 
 			imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
 			if (m_connectedEditorsMap.contains(editorPtr)){
-				I_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
+				Q_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
 
 				m_connectedEditorsMap[editorPtr] = true;
 
@@ -174,7 +174,7 @@ void CComposedParamsSetGuiComp::OnGuiDestroyed()
 
 void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	m_connectedSceneFlags[providerPtr] = flags;
 
@@ -184,7 +184,7 @@ void CComposedParamsSetGuiComp::AddItemsToScene(iqt2d::IViewProvider* providerPt
 
 void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* providerPtr)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	DetachFromScene(providerPtr);
 
@@ -197,7 +197,7 @@ void CComposedParamsSetGuiComp::RemoveItemsFromScene(iqt2d::IViewProvider* provi
 
 void CComposedParamsSetGuiComp::AttachToScene(iqt2d::IViewProvider* providerPtr, int flags)
 {
-	I_ASSERT(m_showAllShapesAttrPtr.IsValid());
+	Q_ASSERT(m_showAllShapesAttrPtr.IsValid());
 
 	int elementsCount = m_extendersCompPtr.GetCount();
 
@@ -232,7 +232,7 @@ void CComposedParamsSetGuiComp::AttachToScene(iqt2d::IViewProvider* providerPtr,
 
 void CComposedParamsSetGuiComp::DetachFromScene(iqt2d::IViewProvider* providerPtr)
 {
-	I_ASSERT(providerPtr != NULL);
+	Q_ASSERT(providerPtr != NULL);
 
 	int elementsCount = m_extendersCompPtr.GetCount();
 
@@ -275,7 +275,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 	iqt::CSignalBlocker blocker(m_guiContainerPtr);
 
 	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
-	I_ASSERT(paramsSetPtr != NULL);
+	Q_ASSERT(paramsSetPtr != NULL);
 
 	int guiMode = *m_designTypeAttrPtr;
 
@@ -422,7 +422,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 void CComposedParamsSetGuiComp::OnGuiModelDetached()
 {
 	iprm::IParamsSet* paramsSetPtr = GetObjectPtr();
-	I_ASSERT(paramsSetPtr != NULL);
+	Q_ASSERT(paramsSetPtr != NULL);
 
 	iqt::CSignalBlocker blocker(m_guiContainerPtr);
 
@@ -445,7 +445,7 @@ void CComposedParamsSetGuiComp::OnGuiModelDetached()
 		int layoutWidgetsCount = layout->count();
 		for (int i = layoutWidgetsCount - 1; i >= 0; i--){
 			QLayoutItem* layoutItemPtr = layout->itemAt(i);
-			I_ASSERT(layoutItemPtr != NULL);
+			Q_ASSERT(layoutItemPtr != NULL);
 
 			QWidget* widgetPtr = layoutItemPtr->widget();
 

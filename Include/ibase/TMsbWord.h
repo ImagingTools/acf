@@ -50,16 +50,16 @@ private:
 template <int Size>
 inline TMsbWord<Size>::TMsbWord()
 {
-	I_ASSERT(Size > 0);
-	I_ASSERT(Size <= 4);
+	Q_ASSERT(Size > 0);
+	Q_ASSERT(Size <= 4);
 }
 
 
 template <int Size>
 inline TMsbWord<Size>::TMsbWord(quint32 inputValue)
 {
-	I_ASSERT(Size > 0);
-	I_ASSERT(Size <= 4);
+	Q_ASSERT(Size > 0);
+	Q_ASSERT(Size <= 4);
 
 	for (int i = 0; i < Size; i++){
 		m_bytes[i] = quint8((inputValue >> (i * 8)) & 0xff);
@@ -70,8 +70,8 @@ inline TMsbWord<Size>::TMsbWord(quint32 inputValue)
 template <int Size>
 inline TMsbWord<Size>::TMsbWord(const TMsbWord& inputValue)
 {
-	I_ASSERT(Size > 0);
-	I_ASSERT(Size <= 4);
+	Q_ASSERT(Size > 0);
+	Q_ASSERT(Size <= 4);
 
 	std::memcpy(m_bytes, &inputValue.m_bytes, sizeof(m_bytes));
 }

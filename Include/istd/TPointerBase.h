@@ -19,7 +19,7 @@ class DefaultAccessor
 public:
 	static void Delete(Type* ptr)
 	{
-		I_ASSERT(ptr != NULL);
+		Q_ASSERT(ptr != NULL);
 		if (ptr != NULL){
 			delete ptr;
 		}
@@ -37,7 +37,7 @@ class ArrayAccessor
 public:
 	static void Delete(Type* ptr)
 	{
-		I_ASSERT(ptr != NULL);
+		Q_ASSERT(ptr != NULL);
 		if (ptr != NULL){
 			delete[] ptr;
 		}
@@ -139,7 +139,7 @@ inline bool TPointerBase<Type>::IsValid() const
 template <class Type>
 inline Type& TPointerBase<Type>::operator*() const
 {
-	I_ASSERT(m_ptr != NULL);
+	Q_ASSERT(m_ptr != NULL);
 	
 	return *m_ptr;
 }

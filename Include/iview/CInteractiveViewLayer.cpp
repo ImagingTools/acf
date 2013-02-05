@@ -140,7 +140,7 @@ void CInteractiveViewLayer::EndDrag()
 bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
 	IShapeView* viewPtr = GetViewPtr();
-	I_ASSERT(viewPtr != NULL);
+	Q_ASSERT(viewPtr != NULL);
 
 	IViewEventObserver* listenerPtr = dynamic_cast<IViewEventObserver*>(viewPtr);
 
@@ -260,7 +260,7 @@ ITouchable::TouchState CInteractiveViewLayer::IsTouched(istd::CIndex2d position,
 		iter.previous();
 
 		IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(iter.key());
-		I_ASSERT(uiShapePtr != NULL);
+		Q_ASSERT(uiShapePtr != NULL);
 		const i2d::CRect& boundingBox = iter.value();
 
 		if (boundingBox.IsInside(position)){
@@ -280,7 +280,7 @@ ITouchable::TouchState CInteractiveViewLayer::IsTouched(istd::CIndex2d position,
 		inactiveIter.previous();
 
 		IInteractiveShape* uiShapePtr = dynamic_cast<iview::IInteractiveShape*>(inactiveIter.key());
-		I_ASSERT(uiShapePtr != NULL);
+		Q_ASSERT(uiShapePtr != NULL);
 		const i2d::CRect& boundingBox = inactiveIter.value();
 
 		if (boundingBox.IsInside(position)){
@@ -310,7 +310,7 @@ void CInteractiveViewLayer::InsertSelectedShapes(SelectedShapes& result) const
 {
 	for (ShapeMap::ConstIterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
 		IInteractiveShape* uiShape = dynamic_cast<IInteractiveShape*>(iter.key());
-		I_ASSERT(uiShape != NULL);	// only iview::IInteractiveShape object are accepted.
+		Q_ASSERT(uiShape != NULL);	// only iview::IInteractiveShape object are accepted.
 
 		result.insert(uiShape);
 	}
@@ -321,11 +321,11 @@ void CInteractiveViewLayer::DeselectAllShapes()
 {
 	while (!m_activeShapes.isEmpty()){
 		ShapeMap::iterator iter = m_activeShapes.begin();
-		I_ASSERT(dynamic_cast<iview::IInteractiveShape*>(iter.key()) != NULL);
+		Q_ASSERT(dynamic_cast<iview::IInteractiveShape*>(iter.key()) != NULL);
 
 		iview::IInteractiveShape* shapePtr = dynamic_cast<iview::IInteractiveShape*>(iter.key());
-		I_ASSERT(shapePtr != NULL);
-		I_ASSERT(shapePtr->IsSelected());
+		Q_ASSERT(shapePtr != NULL);
+		Q_ASSERT(shapePtr->IsSelected());
 
 		shapePtr->SetSelected(false);
 	}
@@ -334,14 +334,14 @@ void CInteractiveViewLayer::DeselectAllShapes()
 
 void CInteractiveViewLayer::OnShapeFocused(IInteractiveShape* shapePtr)
 {
-	I_ASSERT(shapePtr != NULL);
-	I_ASSERT(m_activeShapes.find(shapePtr) != m_activeShapes.end());
+	Q_ASSERT(shapePtr != NULL);
+	Q_ASSERT(m_activeShapes.find(shapePtr) != m_activeShapes.end());
 
 	if (m_focusedShapePtr != shapePtr){
 		m_focusedShapePtr = shapePtr;
 
 		IShapeView* viewPtr = GetViewPtr();
-		I_ASSERT(viewPtr != NULL);
+		Q_ASSERT(viewPtr != NULL);
 		viewPtr->OnShapeFocused(shapePtr, this);
 	}
 }
@@ -349,13 +349,13 @@ void CInteractiveViewLayer::OnShapeFocused(IInteractiveShape* shapePtr)
 
 void CInteractiveViewLayer::OnShapeDefocused(IInteractiveShape* shapePtr)
 {
-	I_ASSERT(shapePtr != NULL);
+	Q_ASSERT(shapePtr != NULL);
 
 	if (m_focusedShapePtr == shapePtr){
 		m_focusedShapePtr = NULL;
 
 		IShapeView* viewPtr = GetViewPtr();
-		I_ASSERT(viewPtr != NULL);
+		Q_ASSERT(viewPtr != NULL);
 		viewPtr->OnShapeDefocused(shapePtr, this);
 	}
 }
@@ -434,7 +434,7 @@ void CInteractiveViewLayer::DisconnectAllShapes()
 
 	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
 		IShape* shapePtr = iter.key();
-		I_ASSERT(shapePtr != NULL);
+		Q_ASSERT(shapePtr != NULL);
 
 		OnAreaInvalidated(iter.value(), i2d::CRect::GetEmpty());
 		shapePtr->OnDisconnectDisplay(this);
@@ -466,7 +466,7 @@ void CInteractiveViewLayer::DrawShapes(QPainter& drawContext)
 
 void CInteractiveViewLayer::OnChangeShape(IShape* shapePtr)
 {
-	I_ASSERT(shapePtr != NULL);
+	Q_ASSERT(shapePtr != NULL);
 
 	ShapeMap::iterator iter = m_activeShapes.find(shapePtr);
 	if (iter != m_activeShapes.end()){
@@ -481,7 +481,7 @@ void CInteractiveViewLayer::OnChangeShape(IShape* shapePtr)
 
 bool CInteractiveViewLayer::DisconnectShape(IShape* shapePtr)
 {
-	I_ASSERT(shapePtr != NULL);
+	Q_ASSERT(shapePtr != NULL);
 
 	if (BaseClass::DisconnectShape(shapePtr)){
 		return true;
@@ -491,7 +491,7 @@ bool CInteractiveViewLayer::DisconnectShape(IShape* shapePtr)
 	if (iter != m_activeShapes.end()){
 		if (m_focusedShapePtr == shapePtr){
 			IInteractiveShape* uiShapePtr = dynamic_cast<IInteractiveShape*>(shapePtr);
-			I_ASSERT(uiShapePtr != NULL);
+			Q_ASSERT(uiShapePtr != NULL);
 			OnShapeDefocused(uiShapePtr);
 		}
 		DisconnectShapeElement(m_activeShapes, iter);

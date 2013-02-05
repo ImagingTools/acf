@@ -31,7 +31,7 @@ const i2d::ICalibration2d* CImageViewComp::GetCalibration() const
 void CImageViewComp::UpdateGui(int /*updateFlags*/)
 {
 	iview::CConsoleGui* consolePtr = GetQtWidget();
-	I_ASSERT(consolePtr != NULL);
+	Q_ASSERT(consolePtr != NULL);
 
 	const iimg::IRasterImage* imagePtr = dynamic_cast<const iimg::IRasterImage*>(GetModelPtr());
 	if (imagePtr != NULL){
@@ -61,7 +61,7 @@ void CImageViewComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	iview::CConsoleGui* consolePtr = GetQtWidget();
-	I_ASSERT(consolePtr != NULL);
+	Q_ASSERT(consolePtr != NULL);
 
 	iview::CViewport& view = consolePtr->GetViewRef();
 	view.SetViewDraggable();

@@ -62,7 +62,7 @@ void CHierarchicalCommand::RemoveChild(int index)
 
 void CHierarchicalCommand::JoinLinkFrom(const ibase::IHierarchicalCommand* rootPtr)
 {
-	I_ASSERT(rootPtr != NULL);
+	Q_ASSERT(rootPtr != NULL);
 
 	int commandsCount = rootPtr->GetChildsCount();
 	for (int commandIndex = 0; commandIndex < commandsCount; ++commandIndex){
@@ -71,7 +71,7 @@ void CHierarchicalCommand::JoinLinkFrom(const ibase::IHierarchicalCommand* rootP
 			int sameCommandIndex = FindTheSameCommand(*childCommandPtr);
 			if (sameCommandIndex >= 0){
 				const Childs::ElementType& element = m_childs.GetElementAt(sameCommandIndex);
-				I_ASSERT(element.pointer != NULL);
+				Q_ASSERT(element.pointer != NULL);
 
 				if (element.pointer != childCommandPtr){
 					if (element.releaseFlag){
@@ -154,8 +154,8 @@ int CHierarchicalCommand::GetChildsCount() const
 
 ibase::ICommand* CHierarchicalCommand::GetChild(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_childs.GetCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_childs.GetCount());
 
 	return m_childs.GetAt(index);
 }
@@ -204,7 +204,7 @@ int CHierarchicalCommand::FindTheSameCommand(const ibase::IHierarchicalCommand& 
 	int childsCount = m_childs.GetCount();
 	for (int i = 0; i < childsCount; ++i){
 		CHierarchicalCommand* childPtr = m_childs.GetAt(i);
-		I_ASSERT(childPtr != NULL);
+		Q_ASSERT(childPtr != NULL);
 
 		if (childPtr->GetName().compare(elementName, Qt::CaseInsensitive) == 0){
 			return i;
@@ -221,7 +221,7 @@ int CHierarchicalCommand::FindInsertingIndex(int priority) const
 
 	for (int i = 0; i < childsCount; ++i){
 		CHierarchicalCommand* childPtr = m_childs.GetAt(i);
-		I_ASSERT(childPtr != NULL);
+		Q_ASSERT(childPtr != NULL);
 
 		if (priority < childPtr->GetPriority()){
 			return i;

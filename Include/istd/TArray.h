@@ -212,8 +212,8 @@ inline const typename TArray<Element, Dimensions>::SizesType& TArray<Element, Di
 template <class Element, int Dimensions>
 inline int TArray<Element, Dimensions>::GetSize(int dimension) const
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < Dimensions);
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < Dimensions);
 
 	return m_sizes[dimension];
 }
@@ -222,10 +222,10 @@ inline int TArray<Element, Dimensions>::GetSize(int dimension) const
 template <class Element, int Dimensions>
 inline const Element& TArray<Element, Dimensions>::GetAt(const IndexType& index) const
 {
-	I_ASSERT(index.IsInside(m_sizes));
+	Q_ASSERT(index.IsInside(m_sizes));
 
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	return m_elements[elementIndex];
 }
@@ -234,10 +234,10 @@ inline const Element& TArray<Element, Dimensions>::GetAt(const IndexType& index)
 template <class Element, int Dimensions>
 inline Element& TArray<Element, Dimensions>::GetAtRef(const IndexType& index)
 {
-	I_ASSERT(index.IsInside(m_sizes));
+	Q_ASSERT(index.IsInside(m_sizes));
 
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	return m_elements[elementIndex];
 }
@@ -246,10 +246,10 @@ inline Element& TArray<Element, Dimensions>::GetAtRef(const IndexType& index)
 template <class Element, int Dimensions>
 inline void TArray<Element, Dimensions>::SetAt(const IndexType& index, const Element& value)
 {
-	I_ASSERT(index.IsInside(m_sizes));
+	Q_ASSERT(index.IsInside(m_sizes));
 
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	m_elements[elementIndex] = value;
 }
@@ -282,7 +282,7 @@ template <class Element, int Dimensions>
 inline Element& TArray<Element, Dimensions>::operator[](const IndexType& index)
 {
 	int elementIndex = GetElementIndex(index);
-	I_ASSERT(elementIndex < int(m_elements.size()));
+	Q_ASSERT(elementIndex < int(m_elements.size()));
 
 	return m_elements[elementIndex];
 }
@@ -296,8 +296,8 @@ inline int TArray<Element, Dimensions>::GetElementIndex(const IndexType& index) 
 	int elementIndex = 0;
 	int cumulatedSizes = 1;
 	for (int i = 0; i < Dimensions; ++i){
-		I_ASSERT(index[i] >= 0);
-		I_ASSERT(index[i] < m_sizes[i]);
+		Q_ASSERT(index[i] >= 0);
+		Q_ASSERT(index[i] < m_sizes[i]);
 
 		elementIndex += index[i] * cumulatedSizes;
 
@@ -349,8 +349,8 @@ bool TArray<Element, Dimensions>::SetSizes(const SizesType& sizes)
 template <class Element, int Dimensions>
 bool TArray<Element, Dimensions>::SetSize(int dimension, int size)
 {
-	I_ASSERT(dimension >= 0);
-	I_ASSERT(dimension < Dimensions);
+	Q_ASSERT(dimension >= 0);
+	Q_ASSERT(dimension < Dimensions);
 
 	m_sizes[dimension] = size;
 
@@ -388,7 +388,7 @@ void TArray<Element, Dimensions>::UpdateElementsSize()
 template <class Element, int Dimensions>
 void TArray<Element, Dimensions>::DeepCopy(const Elements& elements, const SizesType& sizes)
 {
-	I_ASSERT(int(elements.size()) == sizes[0] * sizes[1]);
+	Q_ASSERT(int(elements.size()) == sizes[0] * sizes[1]);
 
 	m_elements = elements;
 	m_sizes = sizes;
@@ -413,8 +413,8 @@ TArray<Element, Dimensions>::Iterator::Iterator(const Iterator& iterator)
 template <class Element, int Dimensions>
 const Element& TArray<Element, Dimensions>::Iterator::operator*() const
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return m_arrayPtr->GetAt(*this);
 }
@@ -423,8 +423,8 @@ const Element& TArray<Element, Dimensions>::Iterator::operator*() const
 template <class Element, int Dimensions>
 Element& TArray<Element, Dimensions>::Iterator::operator*()
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return m_arrayPtr->operator[](*this);
 }
@@ -433,8 +433,8 @@ Element& TArray<Element, Dimensions>::Iterator::operator*()
 template <class Element, int Dimensions>
 const Element* TArray<Element, Dimensions>::Iterator::operator->() const
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return &m_arrayPtr->GetAt(*this);
 }
@@ -443,8 +443,8 @@ const Element* TArray<Element, Dimensions>::Iterator::operator->() const
 template <class Element, int Dimensions>
 Element* TArray<Element, Dimensions>::Iterator::operator->()
 {
-	I_ASSERT(m_arrayPtr != NULL);
-	I_ASSERT(IsInside(m_arrayPtr->GetSizes()));
+	Q_ASSERT(m_arrayPtr != NULL);
+	Q_ASSERT(IsInside(m_arrayPtr->GetSizes()));
 
 	return &m_arrayPtr->operator[](*this);
 }

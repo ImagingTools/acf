@@ -47,7 +47,7 @@ void CSystemLocationComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	I_ASSERT(m_locationTypeAttrPtr.IsValid());
+	Q_ASSERT(m_locationTypeAttrPtr.IsValid());
 
 	m_storagePath = QDesktopServices::storageLocation(QDesktopServices::StandardLocation(*m_locationTypeAttrPtr));
 }

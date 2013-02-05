@@ -15,13 +15,13 @@ namespace icomp
 CSimComponentContextBase::CSimComponentContextBase(const IComponentStaticInfo* infoPtr)
 :	m_metaInfo(*infoPtr)
 {
-	I_ASSERT(infoPtr != NULL);
+	Q_ASSERT(infoPtr != NULL);
 }
 
 
 bool CSimComponentContextBase::SetAttr(const QByteArray& attributeId, const iser::IObject* attributePtr)
 {
-	I_ASSERT(attributePtr != NULL);
+	Q_ASSERT(attributePtr != NULL);
 
 	IRegistryElement::AttributeInfo* infoPtr = m_registryElement.InsertAttributeInfo(attributeId, attributePtr->GetFactoryId());
 	if (infoPtr != NULL){
@@ -38,8 +38,8 @@ bool CSimComponentContextBase::SetAttr(const QByteArray& attributeId, const iser
 
 bool CSimComponentContextBase::SetRef(const QByteArray& referenceId, IComponent* componentPtr, const QByteArray& subelementId)
 {
-	I_ASSERT(IsAttributeTypeCorrect<CReferenceAttribute>(referenceId));
-	I_ASSERT(componentPtr != NULL);
+	Q_ASSERT(IsAttributeTypeCorrect<CReferenceAttribute>(referenceId));
+	Q_ASSERT(componentPtr != NULL);
 
 	QByteArray completeId = JoinId(referenceId, subelementId);
 	if (SetAttr(referenceId, new CReferenceAttribute(completeId))){
@@ -54,7 +54,7 @@ bool CSimComponentContextBase::SetRef(const QByteArray& referenceId, IComponent*
 
 bool CSimComponentContextBase::InsertMultiRef(const QByteArray& referenceId, IComponent* componentPtr, const QByteArray& subelementId)
 {
-	I_ASSERT(IsAttributeTypeCorrect<CMultiReferenceAttribute>(referenceId));
+	Q_ASSERT(IsAttributeTypeCorrect<CMultiReferenceAttribute>(referenceId));
 
 	CMultiReferenceAttribute* multiAttrPtr = NULL;
 
@@ -92,8 +92,8 @@ bool CSimComponentContextBase::InsertMultiRef(const QByteArray& referenceId, ICo
 
 bool CSimComponentContextBase::SetFactory(const QByteArray& factoryId, const ComponentsFactory* factoryPtr)
 {
-	I_ASSERT(IsAttributeTypeCorrect<CFactoryAttribute>(factoryId));
-	I_ASSERT(factoryPtr != NULL);
+	Q_ASSERT(IsAttributeTypeCorrect<CFactoryAttribute>(factoryId));
+	Q_ASSERT(factoryPtr != NULL);
 
 	if (SetAttr(factoryId, new CFactoryAttribute(factoryId))){
 		m_factoriesMap[factoryId] = factoryPtr;

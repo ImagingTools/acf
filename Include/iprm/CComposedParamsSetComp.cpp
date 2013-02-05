@@ -68,8 +68,8 @@ int CComposedParamsSetComp::GetChildsCount() const
 
 istd::IPolymorphic* CComposedParamsSetComp::GetChild(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < m_parametersCompPtr.GetCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < m_parametersCompPtr.GetCount());
 
 	return m_parametersCompPtr[index];
 }
@@ -116,8 +116,8 @@ iprm::IParamsSet* CComposedParamsSetComp::GetSlaveParamsSet(int index) const
 		return NULL;
 	}
 
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < GetSlaveParamsSetCount());
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < GetSlaveParamsSetCount());
 
 	return m_slaveParamsCompPtr[index];
 }

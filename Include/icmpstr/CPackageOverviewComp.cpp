@@ -387,7 +387,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 			itemPtr->setText(0, elementName);
 
 			RootInfo& rootInfo = EnsureRoot(iter->toLocal8Bit(), address, metaInfoPtr);
-			I_ASSERT(rootInfo.itemPtr != NULL);
+			Q_ASSERT(rootInfo.itemPtr != NULL);
 
 			rootInfo.itemPtr->addChild(itemPtr);
 		}
@@ -421,7 +421,7 @@ void CPackageOverviewComp::GenerateComponentTree(bool forceUpdate)
 
 	// sort keywords alphabetically:
 	QAbstractItemModel* keywordsListModelPtr = PackagesList->model();
-	I_ASSERT(keywordsListModelPtr != NULL);
+	Q_ASSERT(keywordsListModelPtr != NULL);
 	if (keywordsListModelPtr != NULL){
 		keywordsListModelPtr->sort(0);
 	}
@@ -884,7 +884,7 @@ CPackageOverviewComp::RootInfo& CPackageOverviewComp::EnsureRoot(const QByteArra
 			}
 
 			RootInfo& groupRoot = EnsureRoot(groupName, address, staticInfoPtr);
-			I_ASSERT(groupRoot.itemPtr != NULL);
+			Q_ASSERT(groupRoot.itemPtr != NULL);
 
 			QString packageDescription;
 			if ((GroupByCB->currentIndex() == GM_PACKAGE) && m_envManagerCompPtr.IsValid()){
@@ -986,7 +986,7 @@ bool CPackageOverviewComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 
 void CPackageOverviewComp::UpdateGui(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	const IElementSelectionInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
@@ -1158,7 +1158,7 @@ CPackageOverviewComp::PackageItem::PackageItem(
 CPackageOverviewComp::RegistryObserver::RegistryObserver(CPackageOverviewComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 
@@ -1185,7 +1185,7 @@ void CPackageOverviewComp::RegistryObserver::OnUpdate(int updateFlags, istd::IPo
 CPackageOverviewComp::ConfigObserver::ConfigObserver(CPackageOverviewComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 

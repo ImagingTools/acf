@@ -70,7 +70,7 @@ void CButtonBasedSelectionParamGuiComp::OnGuiModelDetached()
 
 void CButtonBasedSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	bool isCompactDescription = (*m_descriptionTypeAttrPtr == 2);
 	bool useHorizontalLayout = (*m_layoutTypeAttrPtr) < 1;
@@ -82,7 +82,7 @@ void CButtonBasedSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 
 		SelectionInfo* selectionInfo = m_selectionInfos.at(i);
 		while (selectionInfo != NULL){
-			I_ASSERT(selectionInfo->paramPtr != NULL);
+			Q_ASSERT(selectionInfo->paramPtr != NULL);
 
 			if (selectionInfo->paramPtr->GetSelectedOptionIndex() != selectionInfo->index){
 				isChecked = false;
@@ -97,7 +97,7 @@ void CButtonBasedSelectionParamGuiComp::UpdateGui(int /*updateFlags*/)
 
 		QCommandLinkButton* buttonPtr = static_cast<QCommandLinkButton*>(buttons.at(i));
 
-		I_ASSERT(buttonPtr != NULL && selectionInfo != NULL);
+		Q_ASSERT(buttonPtr != NULL && selectionInfo != NULL);
 
 		// should this button be checked?
 		if (isChecked){

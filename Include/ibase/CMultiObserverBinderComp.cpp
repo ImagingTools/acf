@@ -21,7 +21,7 @@ bool CMultiObserverBinderComp::IsModelAttached(const imod::IModel* modelPtr) con
 
 bool CMultiObserverBinderComp::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(m_attachedModelPtr == NULL);
+	Q_ASSERT(m_attachedModelPtr == NULL);
 
 	bool retVal = true;
 
@@ -43,7 +43,7 @@ bool CMultiObserverBinderComp::OnAttached(imod::IModel* modelPtr)
 
 bool CMultiObserverBinderComp::OnDetached(imod::IModel* modelPtr)
 {
-	I_ASSERT(m_attachedModelPtr == modelPtr);
+	Q_ASSERT(m_attachedModelPtr == modelPtr);
 
 	int count = m_observersCompPtr.GetCount();
 	for (int i = 0; i < count; ++i){

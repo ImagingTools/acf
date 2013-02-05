@@ -72,7 +72,7 @@ bool CBitMemoryReadArchive::ProcessData(void* data, int size)
 
 bool CBitMemoryReadArchive::ProcessBits(void* dataPtr, int bitsCount, int bytesCount)
 {
-	I_ASSERT(bytesCount >= 1);
+	Q_ASSERT(bytesCount >= 1);
 
 	if (bytesCount > 4){
 		return false;

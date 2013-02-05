@@ -24,7 +24,7 @@ namespace iview
 
 bool CInteractiveSplineShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CSpline*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CSpline*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -34,8 +34,8 @@ bool CInteractiveSplineShape::OnAttached(imod::IModel* modelPtr)
 
 void CInteractiveSplineShape::DrawPolyBezier(QPainter& drawContext, const istd::CIndex2d* pointsPtr, int pointsCount) const
 {
-	I_ASSERT(pointsPtr != NULL);
-	I_ASSERT(pointsCount > 0);
+	Q_ASSERT(pointsPtr != NULL);
+	Q_ASSERT(pointsCount > 0);
 
 	drawContext.save();
 	drawContext.setBrush(QBrush(QColor(0,0,0,0)));
@@ -62,7 +62,7 @@ i2d::CVector2d CInteractiveSplineShape::GetSegmentMiddle(int index) const
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CSpline& model = *dynamic_cast<const i2d::CSpline*>(modelPtr);
-		I_ASSERT(&model != NULL);
+		Q_ASSERT(&model != NULL);
 
 		const i2d::CSplineSegment& segment = model.GetSplineSegment(index);
 

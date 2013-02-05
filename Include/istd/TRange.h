@@ -408,7 +408,7 @@ inline void TRange<ValueType>::Validate()
 template <typename ValueType>
 inline bool TRange<ValueType>::Contains(ValueType value) const
 {
-	I_ASSERT(IsValid());
+	Q_ASSERT(IsValid());
 
 	return (value  >= m_minValue) && (value <= m_maxValue);
 }
@@ -417,8 +417,8 @@ inline bool TRange<ValueType>::Contains(ValueType value) const
 template <typename ValueType>
 inline bool TRange<ValueType>::Contains(const TRange& range) const
 {
-	I_ASSERT(IsValid());
-	I_ASSERT(range.IsValid());
+	Q_ASSERT(IsValid());
+	Q_ASSERT(range.IsValid());
 
 	return (range.m_minValue >= m_minValue) && (range.m_maxValue <= m_maxValue);
 }

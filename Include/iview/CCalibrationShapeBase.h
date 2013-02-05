@@ -51,8 +51,8 @@ private:
 
 inline const i2d::ICalibration2d& CCalibrationShapeBase::GetIsomorphCalib() const
 {
-	I_ASSERT(IsDisplayConnected());
-	I_ASSERT(m_calibPtr != NULL);
+	Q_ASSERT(IsDisplayConnected());
+	Q_ASSERT(m_calibPtr != NULL);
 
 	return *m_calibPtr;
 }

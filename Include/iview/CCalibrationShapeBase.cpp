@@ -18,8 +18,8 @@ CCalibrationShapeBase::CCalibrationShapeBase()
 
 void CCalibrationShapeBase::BeginDrag(const i2d::CVector2d& reference)
 {
-	I_ASSERT(IsDisplayConnected());
-	I_ASSERT(m_calibPtr != NULL);
+	Q_ASSERT(IsDisplayConnected());
+	Q_ASSERT(m_calibPtr != NULL);
 
 	const i2d::ITransformation2d& isomorphCalib = GetIsomorphCalib();
 	const i2d::CAffine2d& transform = GetLogToViewTransform();
@@ -32,8 +32,8 @@ void CCalibrationShapeBase::BeginDrag(const i2d::CVector2d& reference)
 
 void CCalibrationShapeBase::SetDragPosition(const i2d::CVector2d& position)
 {
-	I_ASSERT(IsDisplayConnected());
-	I_ASSERT(m_calibPtr != NULL);
+	Q_ASSERT(IsDisplayConnected());
+	Q_ASSERT(m_calibPtr != NULL);
 
 	const i2d::ITransformation2d& isomorphCalib = GetIsomorphCalib();
 	const i2d::CAffine2d& transform = GetLogToViewTransform();
@@ -59,7 +59,7 @@ void CCalibrationShapeBase::OnConnectDisplay(iview::IDisplay* displayPtr)
 
 	m_calibPtr = FindCalibration(*displayPtr);
 
-	I_ASSERT(m_calibPtr != NULL);
+	Q_ASSERT(m_calibPtr != NULL);
 }
 
 

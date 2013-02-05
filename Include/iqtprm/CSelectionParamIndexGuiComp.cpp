@@ -19,9 +19,9 @@ namespace iqtprm
 
 void CSelectionParamIndexGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	iprm::ISelectionParam* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	int iterationCount = OptionIndexSpin->value();
 
@@ -39,7 +39,7 @@ void CSelectionParamIndexGuiComp::UpdateModel() const
 
 void CSelectionParamIndexGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	const iprm::ISelectionParam* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

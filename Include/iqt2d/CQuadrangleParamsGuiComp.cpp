@@ -17,10 +17,10 @@ namespace iqt2d
 
 void CQuadrangleParamsGuiComp::UpdateModel() const
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CQuadrangle* objectPtr = GetObjectPtr();
-	I_ASSERT(objectPtr != NULL);
+	Q_ASSERT(objectPtr != NULL);
 
 	i2d::CVector2d point1(FirstDiagPoint1XSpin->value(), FirstDiagPoint1YSpin->value());
 	i2d::CVector2d point2(FirstDiagPoint2XSpin->value(), FirstDiagPoint2YSpin->value());
@@ -98,7 +98,7 @@ void CQuadrangleParamsGuiComp::OnGuiModelDetached()
 
 void CQuadrangleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CQuadrangle* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

@@ -15,7 +15,7 @@ void CVersionInfoGuiComp::OnGuiCreated()
 
 	for (int i = 0; i < m_versionInfosCompPtr.GetCount(); i++){
 		iser::IVersionInfo* infoPtr = m_versionInfosCompPtr[i];
-		I_ASSERT(infoPtr != NULL);
+		Q_ASSERT(infoPtr != NULL);
 
 		iser::IVersionInfo::VersionIds ids = infoPtr->GetVersionIds();
 		for (iser::IVersionInfo::VersionIds::const_iterator it = ids.begin(); it != ids.end(); it++){	

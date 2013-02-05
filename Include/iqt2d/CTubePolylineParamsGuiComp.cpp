@@ -100,7 +100,7 @@ void CTubePolylineParamsGuiComp::UpdateGui(int updateFlags)
 {
 	BaseClass::UpdateGui(updateFlags);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	i2d::CTubePolyline* objectPtr = dynamic_cast<i2d::CTubePolyline*>(GetObjectPtr());
 	if (objectPtr != NULL){

@@ -248,8 +248,8 @@ CCompositeComponentStaticInfo::AttrAsOptionalDelegator::AttrAsOptionalDelegator(
 :	m_slave(*slavePtr),
 	m_defaultValuePtr(defaultValuePtr)
 {
-	I_ASSERT(slavePtr != NULL);
-	I_ASSERT(defaultValuePtr != NULL);
+	Q_ASSERT(slavePtr != NULL);
+	Q_ASSERT(defaultValuePtr != NULL);
 }
 
 

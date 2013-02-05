@@ -48,7 +48,7 @@ bool CGuiComponentBase::CreateGui(QWidget* parentPtr)
 			m_widgetPtr->installEventFilter(this);
 
 			QCoreApplication* applicationPtr = QCoreApplication::instance();
-			I_ASSERT(applicationPtr != NULL);
+			Q_ASSERT(applicationPtr != NULL);
 			if (applicationPtr != NULL){
 				applicationPtr->installEventFilter(&m_languageChangeEventFilter);
 			}
@@ -223,11 +223,11 @@ void CGuiComponentBase::OnComponentCreated()
 void CGuiComponentBase::MakeAutoSlotConnection()
 {
 	const QMetaObject *mo = metaObject();
-	I_ASSERT(mo != NULL);
+	Q_ASSERT(mo != NULL);
 	const QObjectList list = qFindChildren<QObject *>(m_widgetPtr, QString());
 	for (int i = 0; i < mo->methodCount(); ++i) {
 		const char *slot = mo->method(i).signature();
-		I_ASSERT(slot != NULL);
+		Q_ASSERT(slot != NULL);
 		if (slot[0] != 'o' || slot[1] != 'n' || slot[2] != '_')
 			continue;
 		bool foundIt = false;

@@ -91,8 +91,8 @@ bool CBitmapBase::IsEmpty() const
 
 icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 {
-	I_ASSERT(position.IsValid());
-	I_ASSERT(position.IsInside(GetImageSize()));
+	Q_ASSERT(position.IsValid());
+	Q_ASSERT(position.IsInside(GetImageSize()));
 
 	int componentsCount = GetComponentsCount();
 
@@ -101,7 +101,7 @@ icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 	int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
 
 	quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
-	I_ASSERT(pixelPtr != NULL);
+	Q_ASSERT(pixelPtr != NULL);
 	pixelPtr += byteOffsetX;
 
 	for (int i = 0; i < componentsCount; ++i){
@@ -122,15 +122,15 @@ icmm::CVarColor CBitmapBase::GetColorAt(const istd::CIndex2d& position) const
 
 bool CBitmapBase::SetColorAt(const istd::CIndex2d& position, const icmm::CVarColor& color)
 {
-	I_ASSERT(position.IsValid());
-	I_ASSERT(position.IsInside(GetImageSize()));
+	Q_ASSERT(position.IsValid());
+	Q_ASSERT(position.IsInside(GetImageSize()));
 
 	int componentsCount = GetComponentsCount();
 
 	int byteOffsetX = (GetPixelBitsCount() * position.GetX()) >> 3;
 
 	quint8* pixelPtr = (quint8*)GetLinePtr(position.GetY());
-	I_ASSERT(pixelPtr != NULL);
+	Q_ASSERT(pixelPtr != NULL);
 	pixelPtr += byteOffsetX;
 
 	int commonComponentsCount = qMin(color.GetElementsCount(), componentsCount);

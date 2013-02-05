@@ -39,12 +39,12 @@ protected:
 template <class UI, class WidgetType>
 QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* parentPtr)
 {
-	I_ASSERT(!BaseClass::IsGuiCreated());
+	Q_ASSERT(!BaseClass::IsGuiCreated());
 
 	QWidget* widgetPtr = BaseClass::InitWidgetToParent(parentPtr);
 
 	WidgetType* concreteWidgetPtr = dynamic_cast<WidgetType*>(widgetPtr);
-	I_ASSERT(concreteWidgetPtr != NULL);
+	Q_ASSERT(concreteWidgetPtr != NULL);
 
 	UI::setupUi(concreteWidgetPtr);
 

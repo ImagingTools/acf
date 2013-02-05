@@ -33,7 +33,7 @@ bool CDirList::Create(
 			int maxRecursionDepth,
 			bool doAppend)
 {
-	I_ASSERT(minRecursionDepth >= 0);
+	Q_ASSERT(minRecursionDepth >= 0);
 
 	if (!doAppend){
 		clear();

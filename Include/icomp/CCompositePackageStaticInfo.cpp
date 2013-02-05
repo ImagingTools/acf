@@ -16,7 +16,7 @@ CCompositePackageStaticInfo::CCompositePackageStaticInfo(
 :	m_packageId(packageId),
 	m_envManager(*managerPtr)
 {
-	I_ASSERT(managerPtr != NULL);
+	Q_ASSERT(managerPtr != NULL);
 }
 
 

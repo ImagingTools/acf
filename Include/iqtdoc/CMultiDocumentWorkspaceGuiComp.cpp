@@ -128,12 +128,12 @@ void CMultiDocumentWorkspaceGuiComp::UpdateAllTitles()
 					viewIter != info.views.end();
 					++viewIter){
 			const ViewPtr& viewPtr = *viewIter;
-			I_ASSERT(viewPtr.IsValid());
+			Q_ASSERT(viewPtr.IsValid());
 
 			const iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewPtr.GetPtr());
 			if (guiObjectPtr != NULL){
 				QWidget* widgetPtr = guiObjectPtr->GetWidget();
-				I_ASSERT(widgetPtr != NULL);
+				Q_ASSERT(widgetPtr != NULL);
 
 				widgetPtr->setWindowTitle(titleName);
 			}
@@ -205,7 +205,7 @@ void CMultiDocumentWorkspaceGuiComp::SetActiveView(istd::IPolymorphic* viewPtr)
 {
 	if (viewPtr != GetActiveView()){
 		QMdiArea* workspacePtr = GetQtWidget();
-		I_ASSERT(workspacePtr != NULL);
+		Q_ASSERT(workspacePtr != NULL);
 
 		QList<QMdiSubWindow *> windows = workspacePtr->subWindowList();
 		for (int viewIndex = 0; viewIndex < windows.count(); viewIndex++){
@@ -272,7 +272,7 @@ void CMultiDocumentWorkspaceGuiComp::OnRestoreSettings(const QSettings& settings
 {
 	BaseClass::OnRestoreSettings(settings);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	
 	QVariant valueNotSet = QVariant(-1);
 
@@ -312,7 +312,7 @@ void CMultiDocumentWorkspaceGuiComp::OnSaveSettings(QSettings& settings) const
 {
 	BaseClass::OnSaveSettings(settings);
 
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 	
 	QMdiArea* workspacePtr = GetQtWidget();	
 	
@@ -349,11 +349,11 @@ void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPt
 	if ((guiObjectPtr != NULL) && (workspacePtr != NULL)){
 		if (guiObjectPtr->CreateGui(workspacePtr)){
 			QWidget* widgetPtr = guiObjectPtr->GetWidget();
-			I_ASSERT(widgetPtr != NULL);
+			Q_ASSERT(widgetPtr != NULL);
 
 			widgetPtr->installEventFilter(this);
 			QMdiSubWindow* subWindow = workspacePtr->addSubWindow(widgetPtr);
-			I_ASSERT(subWindow != NULL);
+			Q_ASSERT(subWindow != NULL);
 
 			QIcon windowIcon = widgetPtr->windowIcon();
 			if (!windowIcon.isNull()){
@@ -433,14 +433,14 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 
 		for (int viewIndex = 0; viewIndex < viewsCount; ++viewIndex){
 			istd::IPolymorphic* viewPtr = GetViewFromIndex(docIndex, viewIndex);
-			I_ASSERT(viewPtr != NULL);
+			Q_ASSERT(viewPtr != NULL);
 
 			OnViewRegistered(viewPtr);
 		}
 	}
 
 	QMdiArea* mdiAreaPtr = GetQtWidget();
-	I_ASSERT(mdiAreaPtr != NULL);
+	Q_ASSERT(mdiAreaPtr != NULL);
 
 	mdiAreaPtr->setActivationOrder(QMdiArea::ActivationHistoryOrder);
 
@@ -517,7 +517,7 @@ void CMultiDocumentWorkspaceGuiComp::OnEndChanges(int changeFlags, istd::IPolymo
 void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QMdiSubWindow* /*window*/)
 {
 	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
+	Q_ASSERT(workspacePtr != NULL);
 
 	QMdiSubWindow* currentWindow = workspacePtr->currentSubWindow();
 
@@ -536,7 +536,7 @@ void CMultiDocumentWorkspaceGuiComp::OnWindowActivated(QMdiSubWindow* /*window*/
 void CMultiDocumentWorkspaceGuiComp::OnTileHorizontally()
 {
 	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
+	Q_ASSERT(workspacePtr != NULL);
 	if (workspacePtr == NULL){
 		return;
 	}
@@ -560,7 +560,7 @@ void CMultiDocumentWorkspaceGuiComp::OnTileHorizontally()
 void CMultiDocumentWorkspaceGuiComp::OnTile()
 {
 	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
+	Q_ASSERT(workspacePtr != NULL);
 	if (workspacePtr == NULL){
 		return;
 	}
@@ -572,7 +572,7 @@ void CMultiDocumentWorkspaceGuiComp::OnTile()
 void CMultiDocumentWorkspaceGuiComp::OnCascade()
 {
 	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
+	Q_ASSERT(workspacePtr != NULL);
 	if (workspacePtr == NULL){
 		return;
 	}
@@ -584,7 +584,7 @@ void CMultiDocumentWorkspaceGuiComp::OnCascade()
 void CMultiDocumentWorkspaceGuiComp::OnCloseAllViews()
 {
 	QMdiArea* workspacePtr = GetQtWidget();
-	I_ASSERT(workspacePtr != NULL);
+	Q_ASSERT(workspacePtr != NULL);
 	if (workspacePtr == NULL){
 		return;
 	}
@@ -679,7 +679,7 @@ int CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetOptionsFlags() con
 
 int CMultiDocumentWorkspaceGuiComp::DocumentSelectionInfo::GetOptionsCount() const
 {
-	I_ASSERT(m_parent != NULL);
+	Q_ASSERT(m_parent != NULL);
 
 	return m_parent->GetDocumentsCount();
 }

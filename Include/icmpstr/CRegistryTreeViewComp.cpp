@@ -347,7 +347,7 @@ void CRegistryTreeViewComp::on_RegistryTree_itemSelectionChanged()
 	
 	for (int itemIndex = 0; itemIndex < itemsCount; itemIndex++){
 		QTreeWidgetItem* itemPtr = selectedItems.at(itemIndex);
-		I_ASSERT(itemPtr != NULL);
+		Q_ASSERT(itemPtr != NULL);
 
 		QString messageText = itemPtr->data(CT_NAME, DR_MESSAGE_LIST).toString();
 
@@ -412,7 +412,7 @@ void CRegistryTreeViewComp::on_ShowOnlyErrorsCheck_stateChanged(int /*state*/)
 CRegistryTreeViewComp::EnvironmentObserver::EnvironmentObserver(CRegistryTreeViewComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 
@@ -442,7 +442,7 @@ void CRegistryTreeViewComp::SelectionInfoImpl::SetParent(CRegistryTreeViewComp* 
 
 icomp::IRegistry* CRegistryTreeViewComp::SelectionInfoImpl::GetSelectedRegistry() const
 {
-	I_ASSERT(m_parentPtr != NULL);	// parent should be set before any subelement can be accessed
+	Q_ASSERT(m_parentPtr != NULL);	// parent should be set before any subelement can be accessed
 
 	return m_parentPtr->m_selectedElements.registryPtr;
 }
@@ -450,7 +450,7 @@ icomp::IRegistry* CRegistryTreeViewComp::SelectionInfoImpl::GetSelectedRegistry(
 
 IElementSelectionInfo::Elements CRegistryTreeViewComp::SelectionInfoImpl::GetSelectedElements() const
 {
-	I_ASSERT(m_parentPtr != NULL);	// parent should be set before any subelement can be accessed
+	Q_ASSERT(m_parentPtr != NULL);	// parent should be set before any subelement can be accessed
 
 	IElementSelectionInfo::Elements retVal;
 

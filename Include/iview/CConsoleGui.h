@@ -168,7 +168,7 @@ private:
 
 inline const CViewport& CConsoleGui::GetView() const
 {
-	I_ASSERT(m_viewPtr != NULL);
+	Q_ASSERT(m_viewPtr != NULL);
 
 	return *m_viewPtr;
 }
@@ -176,7 +176,7 @@ inline const CViewport& CConsoleGui::GetView() const
 
 inline CViewport& CConsoleGui::GetViewRef()
 {
-	I_ASSERT(m_viewPtr != NULL);
+	Q_ASSERT(m_viewPtr != NULL);
 
 	return *m_viewPtr;
 }

@@ -290,7 +290,7 @@ void TWeightedNumber<ValueT, WeightT>::SetWeight(const WeightType& weight)
 template <class ValueT, class WeightT>
 typename TWeightedNumber<ValueT, WeightT>::ValueType TWeightedNumber<ValueT, WeightT>::GetValue() const
 {
-	I_ASSERT(IsImportant());
+	Q_ASSERT(IsImportant());
 
 	return (m_sum / m_weight);
 }

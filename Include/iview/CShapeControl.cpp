@@ -34,7 +34,7 @@ void CShapeControl::SetTransformMode(ShapeTransformMode mode)
 void CShapeControl::CalcTransforms() const
 {
 	const IDisplay* displayPtr = GetDisplayPtr();
-	I_ASSERT(displayPtr != NULL);
+	Q_ASSERT(displayPtr != NULL);
 
 	if (m_shapeTransformMode == STM_SHAPE){
 		displayPtr->GetTransform().GetApply(m_shapeTransform, m_logToScreenTransform);

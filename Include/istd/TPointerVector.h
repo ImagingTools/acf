@@ -153,7 +153,7 @@ inline TPointerVector<Pointer, AccessAdapter>::TPointerVector()
 template <typename Pointer, class AccessAdapter>
 inline TPointerVector<Pointer, AccessAdapter>::TPointerVector(const TPointerVector& I_IF_DEBUG(otherVector))
 {
-	I_ASSERT(otherVector.IsEmpty());
+	Q_ASSERT(otherVector.IsEmpty());
 }
 
 
@@ -219,8 +219,8 @@ int TPointerVector<Pointer, AccessAdapter>::HasElement(const Pointer* elementPtr
 template <typename Pointer, class AccessAdapter>
 Pointer* TPointerVector<Pointer, AccessAdapter>::GetAt(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_elements.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_elements.size()));
 
 	return AccessAdapter::GetPtr(m_elements[index]);
 }
@@ -229,8 +229,8 @@ Pointer* TPointerVector<Pointer, AccessAdapter>::GetAt(int index) const
 template <typename Pointer, class AccessAdapter>
 const typename TPointerVector<Pointer, AccessAdapter>::ElementType& TPointerVector<Pointer, AccessAdapter>::GetElementAt(int index) const
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_elements.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_elements.size()));
 
 	return m_elements[index];
 }
@@ -250,8 +250,8 @@ void TPointerVector<Pointer, AccessAdapter>::SetElementAt(int index, const Eleme
 template <typename Pointer, class AccessAdapter>
 void TPointerVector<Pointer, AccessAdapter>::RemoveAt(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_elements.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_elements.size()));
 
 	typename Elements::iterator delIter = (m_elements.begin() + index);
 
@@ -282,8 +282,8 @@ bool TPointerVector<Pointer, AccessAdapter>::Remove(Pointer* elementPtr)
 template <typename Pointer, class AccessAdapter>
 Pointer* TPointerVector<Pointer, AccessAdapter>::PopAt(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_elements.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_elements.size()));
 
 	Pointer* popPtr = AccessAdapter::PopPtr(m_elements[index]);
 
@@ -303,9 +303,9 @@ void TPointerVector<Pointer, AccessAdapter>::PushBack(const ElementType& element
 template <typename Pointer, class AccessAdapter>
 void TPointerVector<Pointer, AccessAdapter>::InsertElementAt(int index, const ElementType& element)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index <= GetCount());
-	I_ASSERT(HasElement(AccessAdapter::GetPtr(element)) == InvalidIndex);
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index <= GetCount());
+	Q_ASSERT(HasElement(AccessAdapter::GetPtr(element)) == InvalidIndex);
 
 	m_elements.insert(m_elements.begin() + index, element);
 }

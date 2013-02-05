@@ -38,7 +38,7 @@ void CInteractiveRectangleShape::InvalidateBoundingBox()
 
 ITouchable::TouchState CInteractiveRectangleShape::IsTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CRectangle* rectanglePtr = dynamic_cast<const i2d::CRectangle*>(GetModelPtr());
 	if (rectanglePtr != NULL){
@@ -96,7 +96,7 @@ ITouchable::TouchState CInteractiveRectangleShape::IsTouched(istd::CIndex2d posi
 
 void CInteractiveRectangleShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CRectangle* framePtr = dynamic_cast<const i2d::CRectangle*>(GetModelPtr());
 	if (framePtr != NULL){
@@ -137,7 +137,7 @@ void CInteractiveRectangleShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveRectangleShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CRectangle*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CRectangle*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -147,7 +147,7 @@ bool CInteractiveRectangleShape::OnAttached(imod::IModel* modelPtr)
 
 bool CInteractiveRectangleShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CRectangle* framePtr = dynamic_cast<const i2d::CRectangle*>(GetModelPtr());
 	if (framePtr != NULL){
@@ -197,7 +197,7 @@ bool CInteractiveRectangleShape::OnMouseMove(istd::CIndex2d position)
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		i2d::CRectangle& modelArea = *dynamic_cast<i2d::CRectangle*>(modelPtr);
-		I_ASSERT(&modelArea != NULL);
+		Q_ASSERT(&modelArea != NULL);
 
 		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
@@ -299,7 +299,7 @@ void CInteractiveRectangleShape::SetLogDragPosition(const i2d::CVector2d& positi
 	imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		i2d::CRectangle& rectangle = *dynamic_cast<i2d::CRectangle*>(modelPtr);
-		I_ASSERT(&rectangle != NULL);
+		Q_ASSERT(&rectangle != NULL);
 
 		BeginModelChanges();
 
@@ -315,7 +315,7 @@ void CInteractiveRectangleShape::SetLogDragPosition(const i2d::CVector2d& positi
 
 i2d::CRect CInteractiveRectangleShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CRectangle* framePtr = dynamic_cast<const i2d::CRectangle*>(GetModelPtr());
 	if (framePtr != NULL){

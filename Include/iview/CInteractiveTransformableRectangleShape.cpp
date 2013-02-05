@@ -70,7 +70,7 @@ void CInteractiveTransformableRectangleShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveTransformableRectangleShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CParallelogram*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CParallelogram*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -552,7 +552,7 @@ void CInteractiveTransformableRectangleShape::SetLogDragPosition(const i2d::CVec
 
 i2d::CRect CInteractiveTransformableRectangleShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const IColorSchema& colorSchema = GetColorSchema();
 	const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);

@@ -108,7 +108,7 @@ IComponent* TFactoryMember<Interface>::CreateComponent() const
 			QByteArray baseId;
 			QByteArray subId;
 			BaseClass2::SplitId(componentId, baseId, subId);
-			I_ASSERT(subId.isEmpty());	// explicit subelement ID are not implemented correctly
+			Q_ASSERT(subId.isEmpty());	// explicit subelement ID are not implemented correctly
 
 			return parentPtr->CreateSubcomponent(baseId);
 		}
@@ -156,7 +156,7 @@ Interface* TFactoryMember<Interface>::ExtractInterface(istd::IPolymorphic* insta
 {
 	if (instancePtr != NULL){
 		icomp::IComponent* componentPtr = dynamic_cast<icomp::IComponent*>(instancePtr);
-		I_ASSERT(componentPtr != NULL);	// Only objects returned by \b CreateComponent should be used as input
+		Q_ASSERT(componentPtr != NULL);	// Only objects returned by \b CreateComponent should be used as input
 
 		if (componentPtr != NULL){
 			return BaseClass2::ExtractInterface<Interface>(componentPtr, subId);

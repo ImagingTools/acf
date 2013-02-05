@@ -95,7 +95,7 @@ void CInteractiveAnnulusShape::SetCenterVisible(bool state)
 
 bool CInteractiveAnnulusShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(GetModelPtr());
 	if (annulusPtr != NULL){
@@ -161,7 +161,7 @@ bool CInteractiveAnnulusShape::OnMouseMove(istd::CIndex2d position)
 
 	imod::IModel* modelPtr = GetModelPtr();
 	i2d::CAnnulus& annulus = *dynamic_cast<i2d::CAnnulus*>(modelPtr);
-	I_ASSERT(&annulus != NULL);
+	Q_ASSERT(&annulus != NULL);
 
 	const i2d::ICalibration2d* calibrationPtr = annulus.GetCalibration();
 
@@ -186,13 +186,13 @@ bool CInteractiveAnnulusShape::OnMouseMove(istd::CIndex2d position)
 
 void CInteractiveAnnulusShape::Draw(QPainter& drawContext) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
-	I_ASSERT(modelPtr != NULL);
+	Q_ASSERT(modelPtr != NULL);
 
 	const i2d::CAnnulus& annulus = *dynamic_cast<const i2d::CAnnulus*>(modelPtr);
-	I_ASSERT(&annulus != NULL);
+	Q_ASSERT(&annulus != NULL);
 
 	const i2d::ICalibration2d* calibrationPtr = annulus.GetCalibration();
 	const iview::CScreenTransform& viewToScreenTransform = GetViewToScreenTransform();
@@ -273,7 +273,7 @@ void CInteractiveAnnulusShape::Draw(QPainter& drawContext) const
 
 bool CInteractiveAnnulusShape::OnAttached(imod::IModel* modelPtr)
 {
-	I_ASSERT(dynamic_cast<i2d::CAnnulus*>(modelPtr) != NULL);
+	Q_ASSERT(dynamic_cast<i2d::CAnnulus*>(modelPtr) != NULL);
 
 	return BaseClass::OnAttached(modelPtr);
 }
@@ -283,11 +283,11 @@ bool CInteractiveAnnulusShape::OnAttached(imod::IModel* modelPtr)
 
 ITouchable::TouchState CInteractiveAnnulusShape::IsTouched(istd::CIndex2d position) const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const imod::IModel* modelPtr = GetModelPtr();
 	const i2d::CAnnulus& annulus = *dynamic_cast<const i2d::CAnnulus*>(modelPtr);
-	I_ASSERT(&annulus != NULL);
+	Q_ASSERT(&annulus != NULL);
 
 	const i2d::ICalibration2d* calibrationPtr = annulus.GetCalibration();
 
@@ -359,7 +359,7 @@ ITouchable::TouchState CInteractiveAnnulusShape::IsTouched(istd::CIndex2d positi
 
 void CInteractiveAnnulusShape::DrawAnnulus(QPainter& painter, istd::CIndex2d center, int minRadius, int maxRadius, bool /*fillFlag*/) const
 {
-	I_ASSERT(minRadius <= maxRadius);
+	Q_ASSERT(minRadius <= maxRadius);
 
 	i2d::CRect maxBox1(center.GetX() - maxRadius, center.GetY() - maxRadius, center.GetX() + maxRadius + 1, center.GetY() + maxRadius + 1);
 	i2d::CRect minBox1(center.GetX() - minRadius, center.GetY() - minRadius, center.GetX() + minRadius + 1, center.GetY() + minRadius + 1);
@@ -379,7 +379,7 @@ void CInteractiveAnnulusShape::DrawAnnulus(QPainter& painter, istd::CIndex2d cen
 
 i2d::CRect CInteractiveAnnulusShape::CalcBoundingBox() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(GetModelPtr());
 	if (annulusPtr != NULL){

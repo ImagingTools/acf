@@ -76,7 +76,7 @@ inline CPolypoint::CPolypoint()
 
 inline const i2d::CVector2d& CPolypoint::GetPoint(int index) const
 {
-	I_ASSERT(index >= 0 && index < int(m_points.size()));
+	Q_ASSERT(index >= 0 && index < int(m_points.size()));
 
 	return m_points[index];
 }

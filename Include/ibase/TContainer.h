@@ -54,7 +54,7 @@ protected:
 template <typename ItemClass>
 ItemClass& TContainer<ItemClass>::GetAt(int index)
 {
-	I_ASSERT(TContainer<ItemClass>::IsIndexValid(index));
+	Q_ASSERT(TContainer<ItemClass>::IsIndexValid(index));
 
 	return m_items[index];
 }
@@ -63,7 +63,7 @@ ItemClass& TContainer<ItemClass>::GetAt(int index)
 template <typename ItemClass>
 const ItemClass& TContainer<ItemClass>::GetAt(int index) const
 {
-	I_ASSERT(TContainer<ItemClass>::IsIndexValid(index));
+	Q_ASSERT(TContainer<ItemClass>::IsIndexValid(index));
 
 	return m_items[index];
 }
@@ -130,8 +130,8 @@ void TContainer<ItemClass>::PopFront()
 template <typename ItemClass>
 void TContainer<ItemClass>::RemoveAt(int index)
 {
-	I_ASSERT(index >= 0);
-	I_ASSERT(index < int(m_items.size()));
+	Q_ASSERT(index >= 0);
+	Q_ASSERT(index < int(m_items.size()));
 
 	if (index < int(m_items.size())){
 		istd::CChangeNotifier changePtr(this, CF_MODEL | CF_ELEMENT_REMOVED);

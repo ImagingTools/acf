@@ -50,7 +50,7 @@ int CClipboardSerializerComp::LoadFromFile(istd::IChangeable& data, const QStrin
 {
 	if (IsOperationSupported(&data, NULL, QF_LOAD | QF_ANONYMOUS, false)){
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(const_cast<istd::IChangeable*>(&data));
-		I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
+		Q_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
 		const QClipboard* clipboardPtr = QApplication::clipboard();
 		const QMimeData* mimeDataPtr = clipboardPtr->mimeData();
@@ -93,7 +93,7 @@ int CClipboardSerializerComp::SaveToFile(const istd::IChangeable& data, const QS
 		istd::TDelPtr<QMimeData> mimeDataPtr(new QMimeData);
 		if (mimeDataPtr.IsValid()){
 			iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(const_cast<istd::IChangeable*>(&data));
-			I_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
+			Q_ASSERT(serializablePtr != NULL);	// it was checked in IsOperationSupported
 
 			iser::CMemoryWriteArchive archive(m_versionInfoCompPtr.GetPtr());
 			if (serializablePtr->Serialize(archive)){

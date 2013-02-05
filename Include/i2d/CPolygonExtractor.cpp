@@ -7,8 +7,8 @@ namespace i2d
 
 i2d::CPolygon CPolygonExtractor::CreatePolygon(const i2d::CAnnulus& annulus, int innerNodesCount, int outerNodesCount)
 {
-	I_ASSERT(innerNodesCount > 0);
-	I_ASSERT(outerNodesCount > 0);
+	Q_ASSERT(innerNodesCount > 0);
+	Q_ASSERT(outerNodesCount > 0);
 
 	i2d::CPolygon result;
 	result.Clear();

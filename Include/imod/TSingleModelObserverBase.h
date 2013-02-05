@@ -90,7 +90,7 @@ bool TSingleModelObserverBase<ModelInterface>::OnDetached(imod::IModel* modelPtr
 {
 	if (BaseClass::OnDetached(modelPtr)){
 		// If model was correctly attached m_objectPtr cannot be NULL. OnDetach returns true only if model was correctly attached.
-		I_ASSERT(m_objectPtr != NULL);
+		Q_ASSERT(m_objectPtr != NULL);
 
 		m_objectPtr = NULL;
 

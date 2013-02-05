@@ -149,7 +149,7 @@ bool TGuiObserverWrap<Gui, Observer>::OnAttached(imod::IModel* modelPtr)
 	}
 
 	if (retVal && Gui::IsGuiCreated()){
-		I_ASSERT(Observer::IsModelAttached(NULL));
+		Q_ASSERT(Observer::IsModelAttached(NULL));
 
 		OnGuiModelAttached();
 	}
@@ -201,8 +201,8 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiModelHidden()
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::OnGuiModelAttached()
 {
-	I_ASSERT(Gui::IsGuiCreated());
-	I_ASSERT(Observer::IsModelAttached(NULL));
+	Q_ASSERT(Gui::IsGuiCreated());
+	Q_ASSERT(Observer::IsModelAttached(NULL));
 
 	UpdateEditor(CF_INIT_EDITOR);
 }
@@ -339,8 +339,8 @@ void TGuiObserverWrap<Gui, Observer>::OnGuiDestroyed()
 template <class Gui, class Observer>
 void TGuiObserverWrap<Gui, Observer>::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	I_ASSERT(modelPtr != NULL);
-	I_ASSERT(Observer::IsModelAttached(modelPtr));
+	Q_ASSERT(modelPtr != NULL);
+	Q_ASSERT(Observer::IsModelAttached(modelPtr));
 
 	Observer::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 
@@ -369,7 +369,7 @@ void TGuiObserverWrap<Gui, Observer>::SetReadOnly(bool state)
 	if (Gui::IsGuiCreated())
 	{
 		QWidget* widgetPtr = Gui::GetWidget();
-		I_ASSERT(widgetPtr != NULL);
+		Q_ASSERT(widgetPtr != NULL);
 
 		widgetPtr->setEnabled(!m_isReadOnly);
 	}

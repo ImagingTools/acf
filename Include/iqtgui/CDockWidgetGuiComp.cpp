@@ -51,7 +51,7 @@ bool CDockWidgetGuiComp::AddToMainWindow(QMainWindow& mainWindow)
 	}
 
 	QDockWidget* dockWidgetPtr = GetQtWidget();
-	I_ASSERT(dockWidgetPtr != NULL);
+	Q_ASSERT(dockWidgetPtr != NULL);
 	if (dockWidgetPtr != NULL){
 		mainWindow.addDockWidget(area, dockWidgetPtr, orientation);
 
@@ -77,7 +77,7 @@ void CDockWidgetGuiComp::OnGuiCreated()
 	BaseClass::OnGuiCreated();
 
 	QDockWidget* dockWidgetPtr = GetQtWidget();
-	I_ASSERT(dockWidgetPtr != NULL);
+	Q_ASSERT(dockWidgetPtr != NULL);
 
 	if (m_dockTitleAttrPtr.IsValid()){
 		dockWidgetPtr->setWindowTitle(*m_dockTitleAttrPtr);
@@ -124,7 +124,7 @@ void CDockWidgetGuiComp::OnGuiRetranslate()
 	BaseClass::OnGuiRetranslate();
 
 	QDockWidget* dockWidgetPtr = GetQtWidget();
-	I_ASSERT(dockWidgetPtr != NULL);
+	Q_ASSERT(dockWidgetPtr != NULL);
 
 	if (m_dockTitleAttrPtr.IsValid()){
 		dockWidgetPtr->setWindowTitle(*m_dockTitleAttrPtr);

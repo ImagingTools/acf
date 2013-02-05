@@ -22,7 +22,7 @@ CShapeBase::CShapeBase()
 CShapeBase::CShapeBase(const CShapeBase& shape)
 :	BaseClass2(shape)
 {
-	I_ASSERT(shape.m_displayPtr == NULL);	// Copy contructor not allowed for shapes connected to view
+	Q_ASSERT(shape.m_displayPtr == NULL);	// Copy contructor not allowed for shapes connected to view
 
 	m_displayPtr = NULL;
 
@@ -137,9 +137,9 @@ bool CShapeBase::IsDisplayAccepted(const IDisplay& /*display*/) const
 
 void CShapeBase::OnConnectDisplay(IDisplay* displayPtr)
 {
-	I_ASSERT(displayPtr != NULL);
-	I_ASSERT(m_displayPtr == NULL);
-	I_ASSERT(IsDisplayAccepted(*displayPtr));
+	Q_ASSERT(displayPtr != NULL);
+	Q_ASSERT(m_displayPtr == NULL);
+	Q_ASSERT(IsDisplayAccepted(*displayPtr));
 
 	m_displayPtr = displayPtr;
 }
@@ -147,8 +147,8 @@ void CShapeBase::OnConnectDisplay(IDisplay* displayPtr)
 
 void CShapeBase::OnDisconnectDisplay(IDisplay* I_IF_DEBUG(displayPtr))
 {
-	I_ASSERT(displayPtr != NULL);
-	I_ASSERT(displayPtr == m_displayPtr);
+	Q_ASSERT(displayPtr != NULL);
+	Q_ASSERT(displayPtr == m_displayPtr);
 	m_displayPtr = NULL;
 }
 
@@ -212,7 +212,7 @@ void CShapeBase::OnUpdate(int changeFlags, istd::IPolymorphic* /*updateParamsPtr
 
 i2d::CVector2d CShapeBase::GetScreenPosition(const i2d::CVector2d& logPosition, const i2d::ITransformation2d* calibrationPtr) const
 {
-	I_ASSERT(m_displayPtr != NULL);
+	Q_ASSERT(m_displayPtr != NULL);
 
 	if (calibrationPtr != NULL){
 		i2d::CVector2d calibratedPosition;
@@ -230,7 +230,7 @@ i2d::CVector2d CShapeBase::GetScreenPosition(const i2d::CVector2d& logPosition, 
 
 i2d::CVector2d CShapeBase::GetLogPosition(const i2d::CVector2d& screenPosition, const i2d::ITransformation2d* calibrationPtr) const
 {
-	I_ASSERT(m_displayPtr != NULL);
+	Q_ASSERT(m_displayPtr != NULL);
 
 	i2d::CVector2d logPosition = m_displayPtr->GetTransform().GetInvertedApply(screenPosition);
 	if (calibrationPtr != NULL){
@@ -259,7 +259,7 @@ void CShapeBase::InvalidateBoundingBox()
 
 bool CShapeBase::IsDisplayConnected() const
 {
-	I_ASSERT((m_displayPtr == NULL) || IsDisplayAccepted(*m_displayPtr));
+	Q_ASSERT((m_displayPtr == NULL) || IsDisplayAccepted(*m_displayPtr));
 
 	return (m_displayPtr != NULL);
 }
@@ -271,7 +271,7 @@ const IColorSchema& CShapeBase::GetColorSchema() const
 		return *m_userColorSchemaPtr;
 	}
 	else{
-		I_ASSERT(IsDisplayConnected());
+		Q_ASSERT(IsDisplayConnected());
 	
 		return m_displayPtr->GetColorSchema();
 	}
@@ -280,7 +280,7 @@ const IColorSchema& CShapeBase::GetColorSchema() const
 
 i2d::CRect CShapeBase::GetClientRect() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	return m_displayPtr->GetClientRect();
 }
@@ -307,7 +307,7 @@ void CShapeBase::DisconnectDisplay()
 
 const iview::CScreenTransform& CShapeBase::GetViewToScreenTransform() const
 {
-	I_ASSERT(IsDisplayConnected());
+	Q_ASSERT(IsDisplayConnected());
 
 	return m_displayPtr->GetTransform();
 }

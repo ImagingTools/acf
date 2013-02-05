@@ -75,7 +75,7 @@ inline QPainter& CDrawBuffer::GetDrawContext()
 {
 	EnsureDrawContext();
 
-	I_ASSERT(m_drawContextPtr.IsValid());
+	Q_ASSERT(m_drawContextPtr.IsValid());
 
 	return *m_drawContextPtr;
 }

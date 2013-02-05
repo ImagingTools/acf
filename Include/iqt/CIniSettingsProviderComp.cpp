@@ -10,7 +10,7 @@ namespace iqt
 
 QSettings& CIniSettingsProviderComp::GetSettings() const
 {
-	I_ASSERT(m_settingsPtr.IsValid());
+	Q_ASSERT(m_settingsPtr.IsValid());
 
 	return *m_settingsPtr.GetPtr();
 }

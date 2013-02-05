@@ -267,7 +267,7 @@ bool CViewport::CanBeMoved() const
 
 void CViewport::paintEvent(QPaintEvent* eventPtr)
 {
-	I_ASSERT(eventPtr != NULL);
+	Q_ASSERT(eventPtr != NULL);
 
 	DrawBuffers(*this, iqt::GetCRect(eventPtr->rect()));
 }
@@ -281,7 +281,7 @@ void CViewport::resizeEvent(QResizeEvent* /*eventPtr*/)
 
 void CViewport::mousePressEvent(QMouseEvent* eventPtr)
 {
-	I_ASSERT(eventPtr != NULL);
+	Q_ASSERT(eventPtr != NULL);
 
 	SetKeysState(GetKeysState(*eventPtr));
 
@@ -300,7 +300,7 @@ void CViewport::mousePressEvent(QMouseEvent* eventPtr)
 
 void CViewport::mouseReleaseEvent(QMouseEvent* eventPtr)
 {
-	I_ASSERT(eventPtr != NULL);
+	Q_ASSERT(eventPtr != NULL);
 
 	SetKeysState(GetKeysState(*eventPtr));
 
@@ -320,7 +320,7 @@ void CViewport::mouseReleaseEvent(QMouseEvent* eventPtr)
 
 void CViewport::mouseMoveEvent(QMouseEvent* eventPtr)
 {
-	I_ASSERT(eventPtr != NULL);
+	Q_ASSERT(eventPtr != NULL);
 
 	SetKeysState(GetKeysState(*eventPtr));
 
@@ -336,8 +336,8 @@ void CViewport::mouseMoveEvent(QMouseEvent* eventPtr)
 
 void CViewport::SetMousePointer(MousePointerMode mode)
 {
-	I_ASSERT(mode >= 0);
-	I_ASSERT(mode < MPM_LAST);
+	Q_ASSERT(mode >= 0);
+	Q_ASSERT(mode < MPM_LAST);
 
 	BaseClass2::setCursor(m_mousePointerModes[mode]);
 }

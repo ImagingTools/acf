@@ -57,7 +57,7 @@ inline istd::CIndex2d CSampledFunction2d::GetGridSize2d() const
 
 inline double CSampledFunction2d::GetSampleValue(const istd::CIndex2d& index) const
 {
-	I_ASSERT(index.IsInside(m_samplesContainer.GetSizes()));
+	Q_ASSERT(index.IsInside(m_samplesContainer.GetSizes()));
 
 	return m_samplesContainer.GetAt(index);
 }
@@ -65,7 +65,7 @@ inline double CSampledFunction2d::GetSampleValue(const istd::CIndex2d& index) co
 
 inline void CSampledFunction2d::SetSampleValue(const istd::CIndex2d& index, double value)
 {
-	I_ASSERT(index.IsInside(m_samplesContainer.GetSizes()));
+	Q_ASSERT(index.IsInside(m_samplesContainer.GetSizes()));
 
 	m_samplesContainer.SetAt(index, value);
 }

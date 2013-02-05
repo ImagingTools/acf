@@ -90,7 +90,7 @@ void CAttributeEditorComp::on_AttributeTree_itemSelectionChanged()
 				IElementSelectionInfo::Elements selectedElements = selectionInfoPtr->GetSelectedElements();
 				if (!selectedElements.isEmpty()){
 					const icomp::IRegistry::ElementInfo* firstElementInfo = selectedElements.begin().value();
-					I_ASSERT(firstElementInfo != NULL);
+					Q_ASSERT(firstElementInfo != NULL);
 
 					const icomp::IComponentStaticInfo* componentInfoPtr = GetComponentMetaInfo(firstElementInfo->address);
 					if (componentInfoPtr != NULL){
@@ -139,7 +139,7 @@ void CAttributeEditorComp::on_AttributeTree_itemChanged(QTreeWidgetItem* item, i
 					iter != selectedElements.constEnd();
 					++iter){
 			const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-			I_ASSERT(selectedInfoPtr != NULL);
+			Q_ASSERT(selectedInfoPtr != NULL);
 
 			icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.Cast<icomp::IRegistryElement*>();
 			if (elementPtr == NULL){
@@ -186,7 +186,7 @@ void CAttributeEditorComp::on_InterfacesTree_itemSelectionChanged()
 
 void CAttributeEditorComp::on_InterfacesTree_itemChanged(QTreeWidgetItem* item, int column)
 {
-	I_ASSERT(item != NULL);
+	Q_ASSERT(item != NULL);
 
 	if (IsUpdateBlocked()){
 		return;
@@ -243,7 +243,7 @@ void CAttributeEditorComp::on_AutoInstanceCB_toggled(bool checked)
 				iter != selectedElements.constEnd();
 				++iter){
 		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-		I_ASSERT(selectedInfoPtr != NULL);
+		Q_ASSERT(selectedInfoPtr != NULL);
 
 		istd::TChangeNotifier<icomp::IRegistryElement> elementPtr(selectedInfoPtr->elementPtr.GetPtr(), istd::IChangeable::CF_MODEL | icomp::IRegistryElement::CF_ATTRIBUTE_CHANGED);
 
@@ -281,7 +281,7 @@ void CAttributeEditorComp::UpdateGeneralView()
 				iter != selectedElements.constEnd();
 				++iter){
 		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-		I_ASSERT(selectedInfoPtr != NULL);
+		Q_ASSERT(selectedInfoPtr != NULL);
 
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 		if (elementPtr != NULL){
@@ -425,7 +425,7 @@ void CAttributeEditorComp::UpdateAttributesView()
 				}
 
 				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-				I_ASSERT(selectedInfoPtr != NULL);
+				Q_ASSERT(selectedInfoPtr != NULL);
 
 				// creating map of attributes based on registry element data
 				icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
@@ -541,7 +541,7 @@ void CAttributeEditorComp::UpdateInterfacesView()
 						iter != selectedElements.constEnd();
 						++iter){
 				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-				I_ASSERT(selectedInfoPtr != NULL);
+				Q_ASSERT(selectedInfoPtr != NULL);
 
 				const QByteArray& elementId = iter.key();
 
@@ -555,7 +555,7 @@ void CAttributeEditorComp::UpdateInterfacesView()
 						InterfacesTree->addTopLevelItem(itemPtr);
 					}
 					itemIndex++;
-					I_ASSERT(itemPtr != NULL);
+					Q_ASSERT(itemPtr != NULL);
 
 					ResetItem(*itemPtr);
 					itemPtr->setText(0, elementId);
@@ -617,7 +617,7 @@ void CAttributeEditorComp::UpdateFlagsView()
 				iter != selectedElements.constEnd();
 				++iter){
 		const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-		I_ASSERT(selectedInfoPtr != NULL);
+		Q_ASSERT(selectedInfoPtr != NULL);
 
 		const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 		if (elementPtr != NULL){
@@ -673,7 +673,7 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 						++iter){
 				const QByteArray& elementId = iter.key();
 				const icomp::IRegistry::ElementInfo* selectedInfoPtr = iter.value();
-				I_ASSERT(selectedInfoPtr != NULL);
+				Q_ASSERT(selectedInfoPtr != NULL);
 
 				const icomp::IRegistryElement* elementPtr = selectedInfoPtr->elementPtr.GetPtr();
 				if (elementPtr != NULL){
@@ -685,7 +685,7 @@ void CAttributeEditorComp::UpdateSubcomponentsView()
 						componentRootPtr = new QTreeWidgetItem();
 						ComponentsTree->addTopLevelItem(componentRootPtr);
 					}
-					I_ASSERT(componentRootPtr != NULL);
+					Q_ASSERT(componentRootPtr != NULL);
 
 					const icomp::IComponentStaticInfo* infoPtr = GetComponentMetaInfo(selectedInfoPtr->address);
 
@@ -1376,7 +1376,7 @@ void CAttributeEditorComp::CreateInterfacesTree(
 				}
 			}
 			itemIndex++;
-			I_ASSERT(itemPtr != NULL);
+			Q_ASSERT(itemPtr != NULL);
 
 			bool warningFlag = false;
 			bool exportFlag = false;
@@ -1420,7 +1420,7 @@ void CAttributeEditorComp::CreateInterfacesTree(
 					}
 				}
 				itemIndex++;
-				I_ASSERT(itemPtr != NULL);
+				Q_ASSERT(itemPtr != NULL);
 
 				ResetItem(*itemPtr);
 				itemPtr->setText(AC_NAME, sublementId);
@@ -1458,7 +1458,7 @@ void CAttributeEditorComp::CreateInterfacesTree(
 				InterfacesTree->addTopLevelItem(itemPtr);
 			}
 			itemIndex++;
-			I_ASSERT(itemPtr != NULL);
+			Q_ASSERT(itemPtr != NULL);
 
 			bool warningFlag = false;
 			bool exportFlag = false;
@@ -1545,7 +1545,7 @@ void CAttributeEditorComp::CreateExportedComponentsTree(
 			itemPtr->setExpanded(true);
 
 /*
-			I_ASSERT(itemPtr != NULL);
+			Q_ASSERT(itemPtr != NULL);
 
 			const icomp::IElementStaticInfo* subcomponentInfoPtr = elementMetaInfoPtr->GetSubelementInfo(sublementId);
 
@@ -1588,7 +1588,7 @@ void CAttributeEditorComp::OnGuiModelDetached()
 
 void CAttributeEditorComp::UpdateGui(int updateFlags)
 {
-	I_ASSERT(IsGuiCreated());
+	Q_ASSERT(IsGuiCreated());
 
 	if ((updateFlags & IElementSelectionInfo::CF_SELECTION) != 0){
 		AttributeTree->reset();
@@ -1719,7 +1719,7 @@ QString CAttributeEditorComp::EncodeToEdit(const QString& text)
 CAttributeEditorComp::AttributeItemDelegate::AttributeItemDelegate(CAttributeEditorComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 
@@ -1875,7 +1875,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetAttributeValueEditor(
 				elemIter != selectedElements.constEnd();
 				++elemIter){
 		const icomp::IRegistry::ElementInfo* elementInfoPtr = elemIter.value();
-		I_ASSERT(elementInfoPtr != NULL);
+		Q_ASSERT(elementInfoPtr != NULL);
 		if (!elementInfoPtr->elementPtr.IsValid()){
 			continue;
 		}
@@ -2174,7 +2174,7 @@ bool CAttributeEditorComp::AttributeItemDelegate::SetComponentExportData(const Q
 CAttributeEditorComp::RegistryObserver::RegistryObserver(CAttributeEditorComp* parentPtr)
 :	m_parent(*parentPtr)
 {
-	I_ASSERT(parentPtr != NULL);
+	Q_ASSERT(parentPtr != NULL);
 }
 
 

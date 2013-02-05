@@ -140,14 +140,14 @@ IComponent* CCompositeComponent::CreateSubcomponent(const QByteArray& componentI
 
 void CCompositeComponent::OnSubcomponentDeleted(const IComponent* subcomponentPtr)
 {
-	I_ASSERT(subcomponentPtr != NULL);
+	Q_ASSERT(subcomponentPtr != NULL);
 
 	for (		ComponentMap::iterator iter = m_componentMap.begin();
 				iter != m_componentMap.end();
 				++iter){
 		ComponentInfo& info = iter.value();
 		if (info.componentPtr == subcomponentPtr){
-			I_ASSERT(info.isComponentInitialized);
+			Q_ASSERT(info.isComponentInitialized);
 
 			info.componentPtr->SetComponentContext(NULL, NULL, false);
 
@@ -286,7 +286,7 @@ void CCompositeComponent::SetComponentContext(
 					++iter){
 			const QByteArray& elementId = *iter;
 			const IRegistry::ElementInfo* infoPtr = registry.GetElementInfo(elementId);
-			I_ASSERT(infoPtr);	// ID must be valid, becouse it was taken using icomp::IRegistry::GetElementIds()!
+			Q_ASSERT(infoPtr);	// ID must be valid, becouse it was taken using icomp::IRegistry::GetElementIds()!
 
 			quint32 flags = infoPtr->elementPtr->GetElementFlags();
 			if ((flags & IRegistryElement::EF_AUTO_INSTANCE) != 0){
