@@ -332,9 +332,9 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 					if (referenceAttrPtr != NULL){
 						QByteArray baseId;
 						QByteArray subId;
-						CInterfaceManipBase::SplitId(referenceAttrPtr->GetValue(), baseId, subId);
+						istd::CIdManipBase::SplitId(referenceAttrPtr->GetValue(), baseId, subId);
 						if (baseId == oldElementId){
-							referenceAttrPtr->SetValue(CInterfaceManipBase::JoinId(newElementId, subId));
+							referenceAttrPtr->SetValue(istd::CIdManipBase::JoinId(newElementId, subId));
 						}
 					}
 
@@ -344,9 +344,9 @@ bool CRegistry::RenameElement(const QByteArray& oldElementId, const QByteArray& 
 						for (int i = 0; i < valuesCount; ++i){
 							QByteArray baseId;
 							QByteArray subId;
-							CInterfaceManipBase::SplitId(multiRefAttrPtr->GetValueAt(i), baseId, subId);
+							istd::CIdManipBase::SplitId(multiRefAttrPtr->GetValueAt(i), baseId, subId);
 							if (baseId == oldElementId){
-								multiRefAttrPtr->SetValueAt(i, CInterfaceManipBase::JoinId(newElementId, subId));
+								multiRefAttrPtr->SetValueAt(i, istd::CIdManipBase::JoinId(newElementId, subId));
 							}
 						}
 					}

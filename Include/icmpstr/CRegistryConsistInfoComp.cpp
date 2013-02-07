@@ -466,7 +466,7 @@ icomp::IRegistry::Ids CRegistryConsistInfoComp::GetCompatibleIds(
 			const icomp::IElementStaticInfo* subcomponentInfoPtr = elementStaticInfo.GetSubelementInfo(subcomponentId);
 			if (subcomponentInfoPtr != NULL){
 				icomp::IRegistry::Ids subIds = GetCompatibleIds(
-							icomp::CInterfaceManipBase::JoinId(elementId, subcomponentId),
+							istd::CIdManipBase::JoinId(elementId, subcomponentId),
 							*subcomponentInfoPtr,
 							interfaceNames,
 							queryFlags,
