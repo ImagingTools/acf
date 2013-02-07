@@ -76,6 +76,12 @@ void CTabContainerGuiComp::OnGuiCreated()
 
 	int tabsCount = m_tabModel.GetOptionsCount();
 
+	bool isFlat = *m_flatStyleAttrPtr;
+
+	if (isFlat){
+		widgetPtr->setStyleSheet("QTabWidget::pane{border:0px none;}");
+	}
+
 	for (int guiIndex = 0; guiIndex < tabsCount; guiIndex++){
 		QString tabName = m_tabNamesAttrPtr[guiIndex];
 
@@ -90,6 +96,10 @@ void CTabContainerGuiComp::OnGuiCreated()
 		QVBoxLayout* pageLayout = new QVBoxLayout(pageWidget);
 
 		pageLayout->addWidget(guiPtr->GetWidget());
+
+		if (isFlat){
+			pageLayout->setContentsMargins(0, 0, 0, 0);
+		}
 
 		int tabIndex = widgetPtr->addTab(pageWidget, tabName);
 		m_tabToGuiIndexMap[tabIndex] = guiIndex;
