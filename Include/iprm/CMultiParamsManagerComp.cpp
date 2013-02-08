@@ -294,6 +294,8 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 			m_paramSets.removeLast();
 		}
+
+		m_selectedIndex = -1;
 	}
 
 	int paramsCount = GetParamsSetsCount();
