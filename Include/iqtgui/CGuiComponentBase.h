@@ -39,6 +39,7 @@ public:
 		I_ASSIGN(m_defaultStatusIconPathAttrPtr, "DefaultStatusIcon", "Path of status icon used by default", false, "");
 		I_ASSIGN(m_defaultStatusTextAttrPtr, "DefaultStatusText", "Status text used by default", true, "");
 		I_ASSIGN(m_styleSheetPathAttrPtr, "StyleSheet", "Path to the style sheet file used for this UI component.", false, "");
+		I_ASSIGN(m_objectIdAttrPtr, "ObjectId", "ID of the widget", false, "");
 	I_END_COMPONENT;
 
 	CGuiComponentBase();
@@ -153,6 +154,7 @@ private:
 	I_ATTR(QString, m_defaultStatusIconPathAttrPtr);
 	I_ATTR(QString, m_defaultStatusTextAttrPtr);
 	I_ATTR(QString, m_styleSheetPathAttrPtr);
+	I_ATTR(QByteArray, m_objectIdAttrPtr);
 
 	QWidget* m_widgetPtr;
 	bool m_isGuiShown;

@@ -37,6 +37,10 @@ bool CGuiComponentBase::CreateGui(QWidget* parentPtr)
 		m_widgetPtr = InitWidgetToParent(parentPtr);
 
 		if (m_widgetPtr != NULL){
+			if (m_objectIdAttrPtr.IsValid() && m_widgetPtr->objectName().isEmpty()){
+				m_widgetPtr->setObjectName(QString::fromUtf8(*m_objectIdAttrPtr));
+			}
+
 			if (parentPtr != NULL){
 				QLayout* layoutPtr = parentPtr->layout();
 
