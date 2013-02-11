@@ -5,13 +5,9 @@
 
 // ACF includes
 #include "imod/TSingleModelObserverBase.h"
-
 #include "icomp/CComponentBase.h"
-
-#include "iprm/ISelectionParam.h"
-
 #include "ibase/ICommandsProvider.h"
-
+#include "iprm/ISelectionParam.h"
 #include "iqtgui/IIconProvider.h"
 #include "iqtgui/CHierarchicalCommand.h"
 
@@ -51,13 +47,13 @@ public:
 	// reimpemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
-	// reimpemented (icomp::IComponent)
-	virtual void OnComponentCreated();
-	virtual void OnComponentDestroyed();
-
 protected:
 	// reimpemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// reimpemented (icomp::IComponent)
+	virtual void OnComponentCreated();
+	virtual void OnComponentDestroyed();
 
 private Q_SLOTS:
 	void OnCommandActivated();

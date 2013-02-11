@@ -25,32 +25,6 @@ const ibase::IHierarchicalCommand* CSelectableCommandsProviderComp::GetCommands(
 }
 
 
-// reimpemented (icomp::IComponent)
-
-void CSelectableCommandsProviderComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	if (m_commandSelectionModelCompPtr.IsValid()){
-		m_commandSelectionModelCompPtr->AttachObserver(this);
-	}
-
-	m_mainMenuCommand.SetName(*m_rootMenuNameAttrPtr);
-	m_commandsList.SetVisuals(*m_menuNameAttrPtr, *m_menuNameAttrPtr, *m_menuDescriptionAttrPtr);
-
-	m_rootMenuCommand.InsertChild(&m_mainMenuCommand);
-	m_mainMenuCommand.InsertChild(&m_commandsList);
-}
-
-
-void CSelectableCommandsProviderComp::OnComponentDestroyed()
-{
-	EnsureModelDetached();
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
 // protected methods
 
 // reimpemented (imod::CSingleModelObserverBase)
@@ -122,6 +96,32 @@ void CSelectableCommandsProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolym
 			}
 		}
 	}
+}
+
+
+// reimpemented (icomp::IComponent)
+
+void CSelectableCommandsProviderComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_commandSelectionModelCompPtr.IsValid()){
+		m_commandSelectionModelCompPtr->AttachObserver(this);
+	}
+
+	m_mainMenuCommand.SetName(*m_rootMenuNameAttrPtr);
+	m_commandsList.SetVisuals(*m_menuNameAttrPtr, *m_menuNameAttrPtr, *m_menuDescriptionAttrPtr);
+
+	m_rootMenuCommand.InsertChild(&m_mainMenuCommand);
+	m_mainMenuCommand.InsertChild(&m_commandsList);
+}
+
+
+void CSelectableCommandsProviderComp::OnComponentDestroyed()
+{
+	EnsureModelDetached();
+
+	BaseClass::OnComponentDestroyed();
 }
 
 

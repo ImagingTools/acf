@@ -73,7 +73,7 @@ public:
 		Get related meta information.
 		This information in normally used by references and factories to provide information about related interfaces.
 
-		\param	metaGroupId	ID of data group of asked meta ID's.
+		\param	metaGroupId	ID of data group of asked meta ID's. @sa icomp::IComponentStaticInfo::MetaGroupId
 		\param	flags		flag value of element.
 		\param	flagsMask	mask value of element.
 							Each element has flags. Only elements where element_flag & flagsMask == flags will be returned.

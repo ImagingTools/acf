@@ -65,7 +65,7 @@ public:
 private:
 	i2d::CVector2d m_center;
 	const icomp::IRegistry* m_registryPtr;
-	icomp::CComponentAddress m_addess;
+	icomp::CComponentAddress m_address;
 	QByteArray m_name;
 	QString m_note;
 };
@@ -81,7 +81,7 @@ inline const icomp::IRegistry* CVisualRegistryElement::GetRegistry() const
 
 inline const icomp::CComponentAddress& CVisualRegistryElement::GetAddress() const
 {
-	return m_addess;
+	return m_address;
 }
 
 
