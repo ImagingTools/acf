@@ -37,9 +37,7 @@ namespace icmpstr
 
 CVisualRegistryEditorComp::CVisualRegistryEditorComp()
 :	m_environmentObserver(this),
-	m_ignoreUpdateFlags(0),
 	m_scenePtr(NULL),
-	m_isUpdating(false),
 	m_buttonSpacerPtr(NULL)
 {
 	int lightToolFlags = ibase::IHierarchicalCommand::CF_GLOBAL_MENU | ibase::IHierarchicalCommand::CF_TOOLBAR;
@@ -97,16 +95,16 @@ CVisualRegistryEditorComp::CVisualRegistryEditorComp()
 	m_registryMenu.InsertChild(&m_abortRegistryCommand);
 	m_registryMenu.InsertChild(&m_showRegistryTopologyCommand);
 
-	m_registryCommand.InsertChild(&m_editMenu);
-	m_registryCommand.InsertChild(&m_registryMenu);
+	m_rootMenuCommand.InsertChild(&m_editMenu);
+	m_rootMenuCommand.InsertChild(&m_registryMenu);
 
 	SetAcceptedMimeTypes(QStringList() << "text/plain");
 
-	SetIgnoreChanges(i2d::IObject2d::CF_OBJECT_POSITION |
+	SetUpdateFilter(~(i2d::IObject2d::CF_OBJECT_POSITION |
 				CF_MODEL |
 				istd::IChangeable::CF_ACF_INTERNAL |
 				istd::CChangeDelegator::CF_DELEGATED |
-				icomp::IRegistryElement::CF_FLAGS_CHANGED);
+				icomp::IRegistryElement::CF_FLAGS_CHANGED));
 
 	m_selectionInfo.SetParent(this);
 }
@@ -161,7 +159,7 @@ bool CVisualRegistryEditorComp::TryOpenComponent(const CVisualRegistryElement& r
 
 const ibase::IHierarchicalCommand* CVisualRegistryEditorComp::GetCommands() const
 {
-	return &m_registryCommand;
+	return &m_rootMenuCommand;
 }
 
 
@@ -656,6 +654,27 @@ void CVisualRegistryEditorComp::OnModelChanged(int /*modelId*/, int /*changeFlag
 }
 
 
+void CVisualRegistryEditorComp::UpdateGui(int updateFlags)
+{
+	if (m_scenePtr == NULL){
+		return;
+	}
+
+	// check if current edited embedded ID still exists
+	icomp::IRegistry::Ids embeddedIds;
+	const icomp::IRegistry* registryPtr = GetObjectPtr();
+	if (registryPtr != NULL){
+		embeddedIds = registryPtr->GetEmbeddedRegistryIds();
+	}
+
+	if (!embeddedIds.contains(m_embeddedRegistryId)){
+		m_embeddedRegistryId = "";
+	}
+
+	UpdateScene(updateFlags);
+}
+
+
 // reimplemented (imod::CSingleModelObserverBase)
 
 bool CVisualRegistryEditorComp::OnAttached(imod::IModel* modelPtr)
@@ -765,37 +784,6 @@ void CVisualRegistryEditorComp::OnComponentDestroyed()
 }
 
 
-void CVisualRegistryEditorComp::AfterUpdate(imod::IModel* /*modelPtr*/, int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	int filteredFlags = (updateFlags & ~m_ignoreUpdateFlags);
-	if (filteredFlags == 0){
-		// some unimportant model changes
-		return;
-	}
-
-	if (m_scenePtr == NULL){
-		return;
-	}
-
-	m_isUpdating = true;
-
-	// check if current edited embedded ID still exists
-	icomp::IRegistry::Ids embeddedIds;
-	const icomp::IRegistry* registryPtr = GetObjectPtr();
-	if (registryPtr != NULL){
-		embeddedIds = registryPtr->GetEmbeddedRegistryIds();
-	}
-
-	if (!embeddedIds.contains(m_embeddedRegistryId)){
-		m_embeddedRegistryId = "";
-	}
-
-	UpdateScene(filteredFlags);
-
-	m_isUpdating = false;
-}
-
-
 // protected slots
 
 void CVisualRegistryEditorComp::OnSelectionChanged()
@@ -804,7 +792,7 @@ void CVisualRegistryEditorComp::OnSelectionChanged()
 		return;
 	}
 
-	if (m_isUpdating){
+	if (IsUpdateBlocked()){
 		return;
 	}
 
@@ -1421,12 +1409,6 @@ IElementSelectionInfo::Elements CVisualRegistryEditorComp::SelectionInfoImpl::Ge
 	}
 
 	return retVal;
-}
-
-
-void CVisualRegistryEditorComp::SetIgnoreChanges(int ignoreUpdateFlags)
-{
-	m_ignoreUpdateFlags = ignoreUpdateFlags;
 }
 
 

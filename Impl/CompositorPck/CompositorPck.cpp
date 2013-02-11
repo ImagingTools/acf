@@ -117,6 +117,11 @@ I_EXPORT_COMPONENT(
 			"Stores registry as C++ code",
 			"Code C++ File Store Save Registry Compile" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Loader"));
 
+I_EXPORT_COMPONENT(
+			ComponentPromotorDialog,
+			"Provide commands to promote selected components to another component type",
+			"Component Promote Promotor Change Address Commands Dialog" IM_TAG("GUI"));
+
 
 } // namespace CompositorPck
 

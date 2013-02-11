@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2558
+          2796
         </Number>
         <Description>
           ACF
@@ -26,7 +26,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <ElementsList count="5">
+  <ElementsList count="6">
     <Element>
       <Id>
         CommandsBinder
@@ -59,14 +59,73 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="2">
+              <Values count="3">
                 <Value>
                   VisualRegistryScenographer
                 </Value>
                 <Value>
                   SceneProvider
                 </Value>
+                <Value>
+                  ComponentPromotorDialog
+                </Value>
               </Values>
+            </Data>
+          </AttributeInfo>
+        </AttributeInfoMap>
+      </Data>
+    </Element>
+    <Element>
+      <Id>
+        ComponentPromotorDialog
+      </Id>
+      <PackageId>
+        CompositorPck
+      </PackageId>
+      <ComponentId>
+        ComponentPromotorDialog
+      </ComponentId>
+      <Data>
+        <IsEnabled>
+          true
+        </IsEnabled>
+        <Flags>
+          0
+        </Flags>
+        <AttributeInfoMap count="2">
+          <AttributeInfo>
+            <Id>
+              DefaultModel
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                true
+              </IsEnabled>
+              <Value>
+                VisualRegistryScenographer/SelectionInfo
+              </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MetaInfoManager
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              MetaInfoManager
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
         </AttributeInfoMap>

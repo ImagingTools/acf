@@ -172,6 +172,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentPromotorDialogComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CElementSelectionInfoManagerBase.cpp"
 				>
 			</File>
@@ -275,6 +279,10 @@
 			</File>
 			<File
 				RelativePath="..\CComponentNoteEditorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CComponentPromotorDialogComp.h"
 				>
 			</File>
 			<File
@@ -423,6 +431,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\generated\moc_CComponentPromotorDialogComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CGraphicsConnectorItem.cpp"
 				>
 			</File>
@@ -528,6 +540,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CComponentPromotorDialogComp.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiAttributeEditor.ui"
 				>
 			</File>
@@ -570,6 +586,10 @@
 			</File>
 			<File
 				RelativePath="..\CComponentNoteEditorComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CComponentPromotorDialogComp.moc"
 				>
 			</File>
 			<File

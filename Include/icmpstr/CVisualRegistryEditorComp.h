@@ -85,11 +85,6 @@ public:
 	bool TryOpenComponent(const CVisualRegistryElement& registryElement);
 
 	/**
-		Specify the flags that will be ignored by the update logic of the scene.
-	 */
-	void SetIgnoreChanges(int ignoreUpdateFlags);
-
-	/**
 		Set accepted mime types.
 		For this types drag'n'drop functionality is enabled.
 	 */
@@ -101,9 +96,6 @@ public:
 	// reimplemented (iqtgui::IDropConsumer)
 	virtual QStringList GetAcceptedMimeIds() const;
 	virtual void OnDropFinished(const QMimeData& mimeData, QEvent* eventPtr);
-
-	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:
 	enum GroupId
@@ -174,6 +166,9 @@ protected:
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// reimplemented (iqtgui::TGuiObserverWrap)
+	virtual void UpdateGui(int updateFlags);
 
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual bool OnAttached(imod::IModel* modelPtr);
@@ -254,7 +249,7 @@ private:
 	I_REF(ISceneProvider, m_sceneProviderCompPtr);
 	I_REF(iqtgui::IGuiObject, m_sceneProviderGuiCompPtr);
 
-	iqtgui::CHierarchicalCommand m_registryCommand;
+	iqtgui::CHierarchicalCommand m_rootMenuCommand;
 	iqtgui::CHierarchicalCommand m_editMenu;
 	iqtgui::CHierarchicalCommand m_cutCommand;
 	iqtgui::CHierarchicalCommand m_copyCommand;
@@ -283,9 +278,7 @@ private:
 	imod::TModelWrap<SelectionInfoImpl> m_selectionInfo;
 
 	QByteArray m_embeddedRegistryId;
-	int m_ignoreUpdateFlags;
 	QGraphicsScene* m_scenePtr;
-	bool m_isUpdating;
 	QStringList m_acceptedMimeTypes;
 
 	istd::TPointerVector<QToolButton> m_embeddedButtons;
