@@ -21,9 +21,9 @@ bool CRgbToCmykTransformation::GetValueAt(const ArgumentType& argument, ResultTy
 		return false;
 	}
 
-	double r = argument.GetElement(icmm::CRgb::Red);
-	double g = argument.GetElement(icmm::CRgb::Green);
-	double b = argument.GetElement(icmm::CRgb::Blue);
+	double r = argument.GetElement(icmm::CRgb::CI_RED);
+	double g = argument.GetElement(icmm::CRgb::CI_GREEN);
+	double b = argument.GetElement(icmm::CRgb::CI_BLUE);
 
 	double c = 1.0 - r;
 	double m = 1.0 - g;

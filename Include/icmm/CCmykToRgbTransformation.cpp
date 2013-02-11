@@ -34,9 +34,9 @@ bool CCmykToRgbTransformation::GetValueAt(const ArgumentType& argument, ResultTy
 	double green = 1.0 - m;
 	double blue = 1.0 - y;
 
-	result.SetElement(icmm::CRgb::Red, red);
-	result.SetElement(icmm::CRgb::Green, green);
-	result.SetElement(icmm::CRgb::Blue, blue);
+	result.SetElement(icmm::CRgb::CI_RED, red);
+	result.SetElement(icmm::CRgb::CI_GREEN, green);
+	result.SetElement(icmm::CRgb::CI_BLUE, blue);
 
 	return true;
 }

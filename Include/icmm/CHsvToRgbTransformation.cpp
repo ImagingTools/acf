@@ -98,9 +98,9 @@ bool CHsvToRgbTransformation::GetValueAt(const ArgumentType& argument, ResultTyp
 		}
 	}
 
-	result.SetElement(icmm::CRgb::Red, red);
-	result.SetElement(icmm::CRgb::Green, green);
-	result.SetElement(icmm::CRgb::Blue, blue);
+	result.SetElement(icmm::CRgb::CI_RED, red);
+	result.SetElement(icmm::CRgb::CI_GREEN, green);
+	result.SetElement(icmm::CRgb::CI_BLUE, blue);
 
 	return true;
 }

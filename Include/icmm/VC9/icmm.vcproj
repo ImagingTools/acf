@@ -196,6 +196,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CRgbToHsvTranformation.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CVarColor.cpp"
 				>
 			</File>
@@ -238,6 +242,10 @@
 			</File>
 			<File
 				RelativePath="..\CRgbToCmykTransformation.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CRgbToHsvTranformation.h"
 				>
 			</File>
 			<File

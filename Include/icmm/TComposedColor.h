@@ -115,9 +115,7 @@ inline TComposedColor<Size>::TComposedColor(const BaseClass& value)
 
 template <int Size>
 inline TComposedColor<Size>::TComposedColor(const imath::CVarVector& vector)
-:	BaseClass(vector)
 {
-	Elements& elements = BaseClass::GetElementsRef();
 	int commonSize = qMin(vector.GetElementsCount(), Size);
 	for (int copyIndex = 0; copyIndex < commonSize; ++copyIndex){
 		BaseClass::SetElement(copyIndex, vector[copyIndex]);

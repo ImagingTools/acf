@@ -22,10 +22,10 @@ public:
 
 	enum ComponentIndex
 	{
-		Red,
-		Green,
-		Blue,
-		Last = Blue
+		CI_RED,
+		CI_GREEN,
+		CI_BLUE,
+		CI_LAST = CI_BLUE
 	};
 
 	CRgb(double r = 0.0, double g = 0.0, double b = 0.0);
@@ -66,9 +66,9 @@ public:
 
 inline CRgb::CRgb(double r, double g, double b)
 {
-	SetElement(Red, r);
-	SetElement(Green, g);
-	SetElement(Blue, b);
+	SetElement(CI_RED, r);
+	SetElement(CI_GREEN, g);
+	SetElement(CI_BLUE, b);
 }
 
 
@@ -82,37 +82,37 @@ inline CRgb::CRgb(const CRgb& color)
 
 inline double CRgb::GetRed() const
 {
-	return GetElement(Red);
+	return GetElement(CI_RED);
 }
 
 
 inline void CRgb::SetRed(double value)
 {
-	SetElement(Red, value);
+	SetElement(CI_RED, value);
 }
 
 
 inline double CRgb::GetGreen() const
 {
-	return GetElement(Green);
+	return GetElement(CI_GREEN);
 }
 
 
 inline void CRgb::SetGreen(double value)
 {
-	SetElement(Green, value);
+	SetElement(CI_GREEN, value);
 }
 
 
 inline double CRgb::GetBlue() const
 {
-	return GetElement(Blue);
+	return GetElement(CI_BLUE);
 }
 
 
 inline void CRgb::SetBlue(double value)
 {
-	SetElement(Blue, value);
+	SetElement(CI_BLUE, value);
 }
 
 
