@@ -119,25 +119,26 @@ bool CArrowShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*butto
 {
 	Q_ASSERT(IsDisplayConnected());
 
+	EnsurePointsAreValid();
+
 	const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(GetModelPtr());
 	if (linePtr != NULL){
-		EnsurePointsAreValid(*linePtr);
-
 		if (downFlag && IsSelected() && IsEditablePosition()){
+			const i2d::ICalibration2d* calibrationPtr = linePtr->GetCalibration();
+
 			const IColorSchema& colorSchema = GetColorSchema();
 
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE);
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 			if (tickerBox.IsInside(position - m_points[1])){
-				m_referencePosition = linePtr->GetPoint2() - transform.GetClientPosition(position);
+				m_referencePosition = linePtr->GetPoint2() - GetLogPosition(position, calibrationPtr);
 				m_referenceIndex = 1;
 
 				BeginModelChanges();
 				return true;
 			}
 			else  if (tickerBox.IsInside(position - m_points[0])){
-				m_referencePosition = linePtr->GetPoint1() - transform.GetClientPosition(position);
+				m_referencePosition = linePtr->GetPoint1() - GetLogPosition(position, calibrationPtr);
 				m_referenceIndex = 0;
 
 				BeginModelChanges();
@@ -164,15 +165,15 @@ bool CArrowShape::OnMouseMove(istd::CIndex2d position)
 		i2d::CLine2d& line = *dynamic_cast<i2d::CLine2d*>(modelPtr);
 		Q_ASSERT(&line != NULL);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		
+		const i2d::ICalibration2d* calibrationPtr = line.GetCalibration();
+
 		switch (m_referenceIndex){
 		case 0:
-			line.SetPoint1(m_referencePosition + transform.GetClientPosition(position));
+			line.SetPoint1(m_referencePosition + GetLogPosition(position, calibrationPtr));
 			break;
 
 		case 1:
-			line.SetPoint2(m_referencePosition + transform.GetClientPosition(position));
+			line.SetPoint2(m_referencePosition + GetLogPosition(position, calibrationPtr));
 			break;
 		}
 
@@ -188,13 +189,11 @@ bool CArrowShape::OnMouseMove(istd::CIndex2d position)
 
 // protected methods
 
-void CArrowShape::CalcPoints(const i2d::CLine2d& line) const
+void CArrowShape::CalcPoints(const i2d::CLine2d& line, const i2d::ICalibration2d* calibrationPtr) const
 {
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 	i2d::CLine2d screenLine(
-					transform.GetApply(line.GetPoint1()),
-					transform.GetApply(line.GetPoint2()));
+					GetScreenPosition(line.GetPoint1(), calibrationPtr),
+					GetScreenPosition(line.GetPoint2(), calibrationPtr));
 	i2d::CVector2d delta = screenLine.GetDiffVector() * m_arrowLinesProportion;
 	if (delta.GetLength2() > m_maxArrowLines * m_maxArrowLines){
 		delta.Normalize(m_maxArrowLines);

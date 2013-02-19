@@ -64,15 +64,16 @@ bool CCircleShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton button
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetModelPtr());
 	if (circlePtr != NULL){
 		if (downFlag && m_isEditableRadius){
+			const i2d::ICalibration2d* calibrationPtr = circlePtr->GetCalibration();
+
 			const IColorSchema& colorSchema = GetColorSchema();
 			i2d::CVector2d center = circlePtr->GetPosition();
 			double radius = circlePtr->GetRadius();
 
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			istd::CIndex2d ticker1 = transform.GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()));
-			istd::CIndex2d ticker2 = transform.GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()));
-			istd::CIndex2d ticker3 = transform.GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
-			istd::CIndex2d ticker4 = transform.GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
+			istd::CIndex2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()), calibrationPtr).ToIndex2d();
+			istd::CIndex2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()), calibrationPtr).ToIndex2d();
+			istd::CIndex2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius), calibrationPtr).ToIndex2d();
+			istd::CIndex2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius), calibrationPtr).ToIndex2d();
 
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
@@ -107,8 +108,9 @@ bool CCircleShape::OnMouseMove(istd::CIndex2d position)
 		i2d::CCircle& circle = *dynamic_cast<i2d::CCircle*>(modelPtr);
 		Q_ASSERT(&circle != NULL);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		const i2d::CVector2d& cp = transform.GetClientPosition(position);
+		const i2d::ICalibration2d* calibrationPtr = circle.GetCalibration();
+
+		const i2d::CVector2d& cp = GetLogPosition(position, calibrationPtr);
 		const i2d::CVector2d& center = circle.GetPosition();
 		
 		double newRaduis = center.GetDistance(cp);
@@ -144,19 +146,24 @@ void CCircleShape::Draw(QPainter& drawContext) const
 	const i2d::CCircle& circle = *dynamic_cast<const i2d::CCircle*>(modelPtr);
 	Q_ASSERT(&circle != NULL);
 
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
+	const i2d::ICalibration2d* calibrationPtr = circle.GetCalibration();
 
-	i2d::CVector2d screenCenter;
 	const i2d::CVector2d& center = circle.GetPosition();
-	transform.GetApply(center, screenCenter);
 	double radius = circle.GetRadius();
 
-	const i2d::CMatrix2d& deform = transform.GetDeformMatrix();
-	i2d::CVector2d scale;
-	deform.GetAxesLengths(scale);
+	i2d::CVector2d screenCenter = GetScreenPosition(center, calibrationPtr);
+	i2d::CVector2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()), calibrationPtr);
+	i2d::CVector2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()), calibrationPtr);
+	i2d::CVector2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius), calibrationPtr);
+	i2d::CVector2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius), calibrationPtr);
+
+	double screenRadius = (
+				screenCenter.GetDistance(ticker1) +
+				screenCenter.GetDistance(ticker2) +
+				screenCenter.GetDistance(ticker3) +
+				screenCenter.GetDistance(ticker4)) * 0.25;
 
 	const IColorSchema& colorSchema = GetColorSchema();
-	drawContext.save();
 
 	if (IsSelected()){
 		drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
@@ -169,22 +176,14 @@ void CCircleShape::Draw(QPainter& drawContext) const
 	drawContext.setBrush(emptyBrush);
 
 	drawContext.drawEllipse(QRect(
-					QPoint(int(screenCenter.GetX() - radius * scale.GetX()),
-					int(screenCenter.GetY() - radius * scale.GetY())),
-					QPoint(int(screenCenter.GetX() + radius * scale.GetX()),
-					int(screenCenter.GetY() + radius * scale.GetY()))));
-	drawContext.restore();
+				QPoint(int(screenCenter.GetX() - screenRadius), int(screenCenter.GetY() - screenRadius)),
+				QPoint(int(screenCenter.GetX() + screenRadius), int(screenCenter.GetY() + screenRadius))));
 
 	if (IsEditableRadius() && IsSelected()){
-		istd::CIndex2d ticker1 = transform.GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()));
-		istd::CIndex2d ticker2 = transform.GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()));
-		istd::CIndex2d ticker3 = transform.GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
-		istd::CIndex2d ticker4 = transform.GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
-
-		colorSchema.DrawTicker(drawContext, ticker1, IColorSchema::TT_NORMAL);
-		colorSchema.DrawTicker(drawContext, ticker2, IColorSchema::TT_NORMAL);
-		colorSchema.DrawTicker(drawContext, ticker3, IColorSchema::TT_NORMAL);
-		colorSchema.DrawTicker(drawContext, ticker4, IColorSchema::TT_NORMAL);
+		colorSchema.DrawTicker(drawContext, ticker1.ToIndex2d(), IColorSchema::TT_NORMAL);
+		colorSchema.DrawTicker(drawContext, ticker2.ToIndex2d(), IColorSchema::TT_NORMAL);
+		colorSchema.DrawTicker(drawContext, ticker3.ToIndex2d(), IColorSchema::TT_NORMAL);
+		colorSchema.DrawTicker(drawContext, ticker4.ToIndex2d(), IColorSchema::TT_NORMAL);
 	}
 }
 
@@ -205,21 +204,20 @@ ITouchable::TouchState CCircleShape::IsTouched(istd::CIndex2d position) const
 {
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetModelPtr());
 	if (IsDisplayConnected() && (circlePtr != NULL)){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+		const i2d::ICalibration2d* calibrationPtr = circlePtr->GetCalibration();
+
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
-
-		i2d::CVector2d cp = transform.GetClientPosition(position);
 
 		i2d::CVector2d center = circlePtr->GetPosition();
 		double radius = circlePtr->GetRadius();
 
 		if (m_isEditableRadius && IsSelected()){
-			istd::CIndex2d ticker1 = transform.GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()));
-			istd::CIndex2d ticker2 = transform.GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()));
-			istd::CIndex2d ticker3 = transform.GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius));
-			istd::CIndex2d ticker4 = transform.GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius));
+			istd::CIndex2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()), calibrationPtr).ToIndex2d();
+			istd::CIndex2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()), calibrationPtr).ToIndex2d();
+			istd::CIndex2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius), calibrationPtr).ToIndex2d();
+			istd::CIndex2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius), calibrationPtr).ToIndex2d();
 
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
@@ -230,6 +228,8 @@ ITouchable::TouchState CCircleShape::IsTouched(istd::CIndex2d position) const
 				return TS_TICKER;
 			}
 		}
+
+		i2d::CVector2d cp = GetLogPosition(position, calibrationPtr);
 
 		double distance = center.GetDistance(cp);
 		double delta = qAbs(radius - distance);
@@ -261,25 +261,35 @@ i2d::CRect CCircleShape::CalcBoundingBox() const
 
 	const i2d::CCircle* circlePtr = dynamic_cast<const i2d::CCircle*>(GetModelPtr());
 	if (circlePtr != NULL){
-		const IColorSchema& colorSchema = GetColorSchema();
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+		const i2d::ICalibration2d* calibrationPtr = circlePtr->GetCalibration();
 
-		i2d::CVector2d center;
-		const i2d::CAffine2d& test = transform;
-		test.GetApply(circlePtr->GetPosition(), center);
+		const IColorSchema& colorSchema = GetColorSchema();
+
+		const i2d::CVector2d& center = circlePtr->GetPosition();
 		double radius = circlePtr->GetRadius();
 
-		const i2d::CMatrix2d& deform = transform.GetDeformMatrix();
-		i2d::CVector2d scale;
-		deform.GetAxesLengths(scale);
+		i2d::CVector2d screenCenter = GetScreenPosition(center, calibrationPtr);
+		i2d::CVector2d ticker1 = GetScreenPosition(i2d::CVector2d(center.GetX() + radius, center.GetY()), calibrationPtr);
+		i2d::CVector2d ticker2 = GetScreenPosition(i2d::CVector2d(center.GetX() - radius, center.GetY()), calibrationPtr);
+		i2d::CVector2d ticker3 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() + radius), calibrationPtr);
+		i2d::CVector2d ticker4 = GetScreenPosition(i2d::CVector2d(center.GetX(), center.GetY() - radius), calibrationPtr);
+
+		double screenRadius = (
+					screenCenter.GetDistance(ticker1) +
+					screenCenter.GetDistance(ticker2) +
+					screenCenter.GetDistance(ticker3) +
+					screenCenter.GetDistance(ticker4)) * 0.25;
+
+		i2d::CRect boundingBox(
+					int(screenCenter.GetX() - screenRadius - 1), int(screenCenter.GetY() - screenRadius - 1),
+					int(screenCenter.GetX() + screenRadius + 1), int(screenCenter.GetY() + screenRadius + 1));
 
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
-		i2d::CRect boundingBox(
-					int(center.GetX() - radius * scale.GetX() - 1), int(center.GetY() - radius * scale.GetY() - 1),
-					int(center.GetX() + radius * scale.GetX() + 1), int(center.GetY() + radius * scale.GetY() + 1));
-
-		boundingBox.Expand(tickerBox);
+		boundingBox.Union(tickerBox.GetTranslated(ticker1.ToIndex2d()));
+		boundingBox.Union(tickerBox.GetTranslated(ticker2.ToIndex2d()));
+		boundingBox.Union(tickerBox.GetTranslated(ticker3.ToIndex2d()));
+		boundingBox.Union(tickerBox.GetTranslated(ticker4.ToIndex2d()));
 
 		return boundingBox;
 	}

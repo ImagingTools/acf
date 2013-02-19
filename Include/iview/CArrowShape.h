@@ -37,8 +37,7 @@ public:
 
 protected:
 	void EnsurePointsAreValid() const;
-	void EnsurePointsAreValid(const i2d::CLine2d& line) const;
-	void CalcPoints(const i2d::CLine2d& line) const;
+	void CalcPoints(const i2d::CLine2d& line, const i2d::ICalibration2d* calibrationPtr) const;
 	void ResetPoints() const;
 
 	// reimplemented (iview::CShapeBase)
@@ -71,20 +70,13 @@ inline void CArrowShape::EnsurePointsAreValid() const
 	if (!m_arePointsValid){
 		const i2d::CLine2d* linePtr = dynamic_cast<const i2d::CLine2d*>(GetModelPtr());
 		if (linePtr != NULL){
-			CalcPoints(*linePtr);
+			const i2d::ICalibration2d* calibrationPtr = linePtr->GetCalibration();
+
+			CalcPoints(*linePtr, calibrationPtr);
 		}
 		else{
 			ResetPoints();
 		}
-		m_arePointsValid = true;
-	}
-}
-
-
-inline void CArrowShape::EnsurePointsAreValid(const i2d::CLine2d& line) const
-{
-	if (!m_arePointsValid){
-		CalcPoints(line);
 		m_arePointsValid = true;
 	}
 }

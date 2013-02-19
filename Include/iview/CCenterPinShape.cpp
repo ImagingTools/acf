@@ -29,10 +29,11 @@ void CCenterPinShape::Draw(QPainter& drawContext) const
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+		const i2d::ICalibration2d* calibrationPtr = pinPtr->GetCalibration();
+
 		const IColorSchema& colorSchema = GetColorSchema();
 
-		istd::CIndex2d sp = transform.GetScreenPosition(pinPtr->GetPosition());
+		istd::CIndex2d sp = GetScreenPosition(pinPtr->GetPosition(), calibrationPtr).ToIndex2d();
 
 		if (IsSelected()){
 			if (IsEditablePosition()){
@@ -57,27 +58,32 @@ bool CCenterPinShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*b
 
 	if (!IsEditablePosition()){
 		EndModelChanges();
+
 		return false;
 	}
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (IsDisplayConnected() && (pinPtr != NULL)){
 		if (downFlag){
+			const i2d::ICalibration2d* calibrationPtr = pinPtr->GetCalibration();
+
 			const IColorSchema& colorSchema = GetColorSchema();
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 			const i2d::CVector2d& cp = pinPtr->GetPosition();
-			istd::CIndex2d sp = transform.GetScreenPosition(cp);
+			istd::CIndex2d sp = GetScreenPosition(cp, calibrationPtr).ToIndex2d();
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE_CENTER);
 			if (tickerBox.IsInside(position - sp)){
-				m_referencePosition = cp - transform.GetClientPosition(position);
+				m_referencePosition = cp - GetLogPosition(position, calibrationPtr);
+
 				BeginModelChanges();
+
 				return true;
 			}
 		}
 	}
 
 	EndModelChanges();
+
 	return false;
 }
 
@@ -93,9 +99,9 @@ bool CCenterPinShape::OnMouseMove(istd::CIndex2d position)
 		i2d::CPosition2d& pin = *dynamic_cast<i2d::CPosition2d*>(modelPtr);
 		Q_ASSERT(&pin != NULL);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		
-		pin.SetPosition(m_referencePosition + transform.GetClientPosition(position));
+		const i2d::ICalibration2d* calibrationPtr = pin.GetCalibration();
+
+		pin.SetPosition(m_referencePosition + GetLogPosition(position, calibrationPtr));
 
 		UpdateModelChanges();
 
@@ -116,10 +122,11 @@ i2d::CRect CCenterPinShape::CalcBoundingBox() const
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+		const i2d::ICalibration2d* calibrationPtr = pinPtr->GetCalibration();
+
 		const IColorSchema& colorSchema = GetColorSchema();
 
-		istd::CIndex2d sp = transform.GetScreenPosition(pinPtr->GetPosition());
+		istd::CIndex2d sp = GetScreenPosition(pinPtr->GetPosition(), calibrationPtr).ToIndex2d();
 
 		IColorSchema::TickerType tickerType;
 		if (IsSelected()){
