@@ -81,7 +81,7 @@ void CDialogGuiComp::OnComponentCreated()
 	m_rootMenuCommand.InsertChild(&m_dialogCommand);
 	m_rootCommand.InsertChild(&m_rootMenuCommand);
 
-	connect(&m_dialogCommand, SIGNAL(activated()), this, SLOT(OnCommandActivated()));
+	connect(&m_dialogCommand, SIGNAL(triggered()), this, SLOT(OnCommandActivated()));
 }
 
 
