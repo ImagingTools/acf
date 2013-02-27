@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QtCore/QVector>
+#include <QtCore/QMap>
 
 // ACF includes
 #include "imod/imod.h"
@@ -23,6 +23,8 @@ namespace imod
 class CModelBase: virtual public imod::IModel
 {
 public:
+	typedef QSet<IObserver*> Observers;
+
 	CModelBase();
 	virtual ~CModelBase();
 
@@ -32,9 +34,9 @@ public:
 	virtual int GetObserverCount() const;
 
 	/**
-		Returns pointer to a given observer.
+		Returns set of all observers.
 	*/
-	virtual IObserver* GetObserverPtr(int index) const;
+	virtual Observers GetObservers() const;
 
 	// reimplemented (imod::IModel)
 	virtual bool AttachObserver(imod::IObserver* observerPtr);
@@ -65,27 +67,32 @@ private:
 	/**
 		Observer connection state.
 	*/
-	enum StateFlag
+	enum AttachingState
 	{
+		AS_NONE = 0,
+		/**
+			Observer is beeng to attached.
+		*/
+		AS_ATTACHING,
+
 		/**
 			Observer is connected to the model.
 		*/
-		SF_CONNECTED,
+		AS_ATTACHED,
 
 		/**
 			Observer is in detaching stage.
 		*/
-		SF_DETACHING_STAGE
+		AS_DETACHING,
+
+		/**
+			Observer is in detached and connection will be removed.
+		*/
+		AS_DETACHED
 	};
 
-	struct ObserverInfo
-	{
-		IObserver* observerPtr;
-		StateFlag connectionState;
-	};
-
-	typedef QVector<ObserverInfo> Observers;
-	Observers m_observers;
+	typedef QMap<IObserver*, AttachingState> ObserversMap;
+	ObserversMap m_observers;
 };
 
 

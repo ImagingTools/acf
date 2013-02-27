@@ -30,6 +30,11 @@ public:
 
 	ModelInterface* GetObjectPtr() const;
 
+	/**
+		Attach to model of object or set object pointer, if no connection is possible.
+	*/
+	bool AttachOrSetObject(ModelInterface* objectPtr);
+
 	// reimplemented (imod::IObserver)
 	virtual bool OnAttached(imod::IModel* modelPtr);
 	virtual bool OnDetached(imod::IModel* modelPtr);
@@ -55,6 +60,24 @@ template <class ModelInterface>
 ModelInterface* TSingleModelObserverBase<ModelInterface>::GetObjectPtr() const
 {
 	return m_objectPtr;
+}
+
+
+template <class ModelInterface>
+bool TSingleModelObserverBase<ModelInterface>::AttachOrSetObject(ModelInterface* objectPtr)
+{
+	EnsureModelDetached();
+
+	imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(objectPtr);
+
+	bool retVal = false;
+	if ((modelPtr != NULL) && modelPtr->AttachObserver(this)){
+		retVal = true;
+	}
+
+	m_objectPtr = objectPtr;
+
+	return retVal;
 }
 
 

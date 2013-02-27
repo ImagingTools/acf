@@ -1,6 +1,11 @@
 #include "imod/CModelBase.h"
 
 
+// Qt includes
+#include <QtCore/QList>
+#include <QtCore/QSet>
+
+
 namespace imod
 {		
 
@@ -22,13 +27,13 @@ int CModelBase::GetObserverCount() const
 }
 
 
-IObserver* CModelBase::GetObserverPtr(int index) const
+CModelBase::Observers CModelBase::GetObservers() const
 {
-	Q_ASSERT(index >= 0 && index < int(m_observers.size()));
-
-	return m_observers.at(index).observerPtr;
+	return m_observers.keys().toSet();
 }
 
+
+// reimplemented (imod::IModel)
 
 bool CModelBase::AttachObserver(IObserver* observerPtr)
 {
@@ -36,72 +41,74 @@ bool CModelBase::AttachObserver(IObserver* observerPtr)
 		return false;
 	}
 
-	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
-		if (m_observers.at(observerIndex).observerPtr == observerPtr){
-			qFatal("Observer is already connected to this model");
+	if (m_observers.contains(observerPtr)){
+		qFatal("Observer is already connected to this model");
 
-			return false;
-		}
+		return false;
 	}
 
-	ObserverInfo observerInfo;
-	observerInfo.observerPtr = observerPtr;
+	AttachingState& state = m_observers[observerPtr];
+	state = AS_ATTACHING;
 
 	if (observerPtr->OnAttached(this)){
-		observerInfo.connectionState = SF_CONNECTED;
-
-		m_observers.push_back(observerInfo);
+		state = AS_ATTACHED;
 
 		return true;
 	}
+	else{
+		m_observers.remove(observerPtr);
 
-	return false;
+		return false;
+	}
 }
 
 
 void CModelBase::DetachObserver(IObserver* observerPtr)
 {
-	for (int detachIndex = 0; detachIndex < int(m_observers.size()); detachIndex++){
-		ObserverInfo& observerInfo = m_observers[detachIndex];
+	ObserversMap::Iterator findIter = m_observers.find(observerPtr);
+	if (findIter == m_observers.end()){
+		qFatal("Observer doesn't exist");
 
-		if (observerInfo.observerPtr == observerPtr){
-			// Observer will be already detached:
-			if (observerInfo.connectionState == SF_DETACHING_STAGE){
-				return;
-			}
-			
-			observerInfo.connectionState = SF_DETACHING_STAGE;
-
-			observerPtr->OnDetached(this);
-			
-			break;
-		}
+		return;
 	}
 
-	for (int eraseIndex = 0; eraseIndex < int(m_observers.size()); eraseIndex++){
-		ObserverInfo& observerInfo = m_observers[eraseIndex];
-		if (observerInfo.observerPtr == observerPtr){
-			m_observers.erase(m_observers.begin() + eraseIndex);
-			
-			return;
-		}
-	}
+	AttachingState& state = findIter.value();
+	if (state != AS_ATTACHED){
+		qFatal("Observer is not attached");
 
-	qFatal("Observer doesn't exist");
+		// Observer was already detached or is not correctly attached
+		return;
+	}
+	
+	state = AS_DETACHING;
+
+	observerPtr->OnDetached(this);
+	
+	state = AS_DETACHED;
+
+	m_observers.erase(findIter);
 }
 
 
 void CModelBase::DetachAllObservers()
 {
-	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
-		ObserverInfo& observerInfo = m_observers[observerIndex];
+	for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
+		AttachingState& state = iter.value();
+		if (state == AS_ATTACHED){
+			state = AS_DETACHING;
+		}
+	}
 
-		Q_ASSERT(observerInfo.observerPtr != NULL);
-		Q_ASSERT(observerInfo.connectionState != SF_DETACHING_STAGE);
+	for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
+		AttachingState& state = iter.value();
+		if (state == AS_DETACHING){
+			IObserver* observerPtr = iter.key();
+			Q_ASSERT(observerPtr != NULL);
 
-		observerInfo.connectionState = SF_DETACHING_STAGE;
-		
-		observerInfo.observerPtr->OnDetached(this);
+			observerPtr->OnDetached(this);
+		}
+
+		state = AS_DETACHED;
 	}
 
 	m_observers.clear();
@@ -110,13 +117,9 @@ void CModelBase::DetachAllObservers()
 
 bool CModelBase::IsAttached(const IObserver* observerPtr) const
 {
-	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
-		const ObserverInfo& observerInfo = m_observers[observerIndex];
-		Q_ASSERT(observerInfo.observerPtr != NULL);
-
-		if ((observerInfo.observerPtr == observerPtr)){
-			return true;
-		}
+	ObserversMap::ConstIterator findIter = m_observers.constFind(const_cast<IObserver*>(observerPtr));
+	if (findIter != m_observers.end()){
+		return findIter.value() == AS_ATTACHED;
 	}
 
 	return false;
@@ -127,12 +130,13 @@ bool CModelBase::IsAttached(const IObserver* observerPtr) const
 
 void CModelBase::NotifyBeforeUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
-		ObserverInfo& observerInfo = m_observers[observerIndex];
-		Q_ASSERT(observerInfo.observerPtr != NULL);
+	for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
+		AttachingState& state = iter.value();
 
-		if (observerInfo.connectionState != SF_DETACHING_STAGE){
-			observerInfo.observerPtr->BeforeUpdate(this, updateFlags, updateParamsPtr);
+		if (state == AS_ATTACHED){
+			IObserver* observerPtr = iter.key();
+
+			observerPtr->BeforeUpdate(this, updateFlags, updateParamsPtr);
 		}
 	}
 }
@@ -140,12 +144,13 @@ void CModelBase::NotifyBeforeUpdate(int updateFlags, istd::IPolymorphic* updateP
 
 void CModelBase::NotifyAfterUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
-	for (int observerIndex = 0; observerIndex < int(m_observers.size()); observerIndex++){
-		ObserverInfo& observerInfo = m_observers[observerIndex];
-		Q_ASSERT(observerInfo.observerPtr != NULL);
+	for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
+		AttachingState& state = iter.value();
 
-		if (observerInfo.connectionState != SF_DETACHING_STAGE){
-			observerInfo.observerPtr->AfterUpdate(this, updateFlags, updateParamsPtr);
+		if (state == AS_ATTACHED){
+			IObserver* observerPtr = iter.key();
+
+			observerPtr->AfterUpdate(this, updateFlags, updateParamsPtr);
 		}
 	}
 }
