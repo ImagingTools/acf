@@ -44,8 +44,8 @@ public:
 
 	// reimplemented (iview::IDraggable)
 	virtual bool IsDraggable() const;
-	virtual void BeginDrag(const i2d::CVector2d& position);
-	virtual void SetDragPosition(const i2d::CVector2d& position);
+	virtual void BeginDrag(const istd::CIndex2d& position);
+	virtual void SetDragPosition(const istd::CIndex2d& position);
 	virtual void EndDrag();
 
 	// reimplemented (imod::IObserver)
@@ -73,19 +73,6 @@ protected:
 		Draw text on a given position.
 	*/
 	void DrawText(QPainter& drawContext, istd::CIndex2d point, const QString& text) const;
-
-	/** 
-		Draw an orientation marker consisting of two triangles (black for 
-		outside and white for inside)
-	 */
-	virtual void DrawOrientationMarker(
-				QPainter& drawContext,
-				const QPen& rightPen,
-				const QBrush& rightBrush,
-				const QPen& leftPen,
-				const QBrush& leftBrush,
-				const i2d::CLine2d& segmentLine,
-				double scale) const;
 
 	// reimplemented (iview::CShapeBase)
 	virtual int GetDisplayChangesMask();
@@ -122,19 +109,15 @@ inline bool CInteractiveShapeBase::IsDraggable() const
 }
 
 
-inline void CInteractiveShapeBase::BeginDrag(const i2d::CVector2d& position)
+inline void CInteractiveShapeBase::BeginDrag(const istd::CIndex2d& position)
 {
-	const i2d::CAffine2d& invert = GetLogToViewTransform().GetInverted();
-
-	BeginLogDrag(invert.GetApply(position));
+	BeginLogDrag(GetLogPosition(position));
 }
 
 
-inline void CInteractiveShapeBase::SetDragPosition(const i2d::CVector2d& position)
+inline void CInteractiveShapeBase::SetDragPosition(const istd::CIndex2d& position)
 {
-	const i2d::CAffine2d& invert = GetLogToViewTransform().GetInverted();
-
-	SetLogDragPosition(invert.GetApply(position));
+	SetLogDragPosition(GetLogPosition(position));
 }
 
 

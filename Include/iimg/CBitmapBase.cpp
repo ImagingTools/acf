@@ -20,6 +20,31 @@ namespace iimg
 {
 
 
+// reimplemented (i2d::IObject2d)
+
+i2d::CVector2d CBitmapBase::GetCenter() const
+{
+	istd::CIndex2d imageSize = GetImageSize();
+
+	return i2d::CVector2d(imageSize.GetX() * 0.5, imageSize.GetY() * 0.5);
+}
+
+
+void CBitmapBase::MoveCenterTo(const i2d::CVector2d& /*position*/)
+{
+}
+
+
+i2d::CRectangle CBitmapBase::GetBoundingBox() const
+{
+	istd::CIndex2d imageSize = GetImageSize();
+
+	return i2d::CRectangle(0, 0, imageSize.GetX(), imageSize.GetY());
+}
+
+
+// reimplemented (iimg::IBitmap)
+
 bool CBitmapBase::CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRectangle& area)
 {
 	istd::CIndex2d sourceImageSize = sourceBitmap.GetImageSize();
@@ -54,8 +79,6 @@ bool CBitmapBase::CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d:
 	return true;
 }
 
-
-// reimplemented (iimg::IBitmap)
 
 int CBitmapBase::GetLineBytesCount() const
 {

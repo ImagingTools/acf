@@ -104,47 +104,12 @@ void CInteractiveViewLayer::DrawFocusedShape(QPainter& drawContext)
 }
 
 
-void CInteractiveViewLayer::BeginDrag(const i2d::CVector2d& position)
-{
-	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
-		IDraggable* draggablePtr = dynamic_cast<IDraggable*>(iter.key());
-		if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
-			draggablePtr->BeginDrag(position);
-		}
-	}
-}
-
-
-void CInteractiveViewLayer::SetDragPosition(const i2d::CVector2d& position)
-{
-	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
-		IDraggable* draggablePtr = dynamic_cast<IDraggable*>(iter.key());
-		if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
-			draggablePtr->SetDragPosition(position);
-		}
-	}
-}
-
-
-void CInteractiveViewLayer::EndDrag()
-{
-	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
-		IDraggable* draggablePtr = dynamic_cast<IDraggable*>(iter.key());
-		if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
-			draggablePtr->EndDrag();
-		}
-	}
-}
-
-
 bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
 	IShapeView* viewPtr = GetViewPtr();
 	Q_ASSERT(viewPtr != NULL);
 
 	IViewEventObserver* listenerPtr = dynamic_cast<IViewEventObserver*>(viewPtr);
-
-	const iview::CScreenTransform& transform = GetTransform();
 
 	QMapIterator<IShape*, i2d::CRect> iter(m_activeShapes);
 	iter.toBack();
@@ -165,10 +130,9 @@ bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButt
 				if (buttonType == Qt::LeftButton){
 					if (touchState == IInteractiveShape::TS_DRAGGABLE){
 						if (downFlag){
-							const i2d::CVector2d& pos = transform.GetClientPosition(position);
 							IDraggable* draggablePtr = dynamic_cast<IDraggable*>(viewPtr);
 							if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
-								draggablePtr->BeginDrag(pos);
+								draggablePtr->BeginDrag(position);
 							}
 						}
 					}
@@ -210,14 +174,12 @@ bool CInteractiveViewLayer::OnMouseButton(istd::CIndex2d position, Qt::MouseButt
 						uiShapePtr->SetSelected();
 						consumed = true;
 					}
-					const i2d::CVector2d& pos = transform.GetClientPosition(position);
-
 					viewPtr->UpdateMousePointer();
 
 					if (touchState == IInteractiveShape::TS_DRAGGABLE){
 						IDraggable*  draggablePtr = dynamic_cast<IDraggable*>(viewPtr);
 						if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
-							draggablePtr->BeginDrag(pos);
+							draggablePtr->BeginDrag(position);
 						}
 					}
 				}
@@ -540,6 +502,47 @@ QString CInteractiveViewLayer::GetShapeDescriptionAt(istd::CIndex2d position) co
 	}
 
 	return BaseClass::GetShapeDescriptionAt(position);
+}
+
+
+// reimplemented (iview::IDraggable)
+
+void CInteractiveViewLayer::BeginDrag(const istd::CIndex2d& position)
+{
+	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+		IDraggable* draggablePtr = dynamic_cast<IDraggable*>(iter.key());
+		if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
+			draggablePtr->BeginDrag(position);
+		}
+	}
+}
+
+
+void CInteractiveViewLayer::SetDragPosition(const istd::CIndex2d& position)
+{
+	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+		IDraggable* draggablePtr = dynamic_cast<IDraggable*>(iter.key());
+		if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
+			draggablePtr->SetDragPosition(position);
+		}
+	}
+}
+
+
+void CInteractiveViewLayer::EndDrag()
+{
+	for (ShapeMap::iterator iter = m_activeShapes.begin(); iter != m_activeShapes.end(); ++iter){
+		IDraggable* draggablePtr = dynamic_cast<IDraggable*>(iter.key());
+		if ((draggablePtr != NULL) && draggablePtr->IsDraggable()){
+			draggablePtr->EndDrag();
+		}
+	}
+}
+
+
+bool CInteractiveViewLayer::IsDraggable() const
+{
+	return !m_activeShapes.isEmpty();
 }
 
 

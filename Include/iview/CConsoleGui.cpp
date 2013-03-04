@@ -96,6 +96,17 @@ void CConsoleGui::SetShapeStatusInfo(IShapeStatusInfo* shapeStatusInfoPtr)
 }
 
 
+// reimplemented (iview::CConsoleBase)
+
+void CConsoleGui::UpdateCursorInfo(const QString& infoText)
+{
+	istd::TChangeNotifier<IShapeStatusInfo> shapeInfoPtr(m_shapeStatusInfoPtr);
+	if (shapeInfoPtr.IsValid()){
+		m_shapeStatusInfoPtr->SetInfoText(infoText);
+	}
+}
+
+
 // reimplemented (ibase::ICommandsProvider)
 
 const ibase::IHierarchicalCommand* CConsoleGui::GetCommands() const
@@ -381,43 +392,69 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 }
 
 
-// reimplemented (iview::CConsoleBase)
-
-void CConsoleGui::UpdateCursorInfo(const i2d::CVector2d& pixelPos, const i2d::CVector2d& logicalPos, const QString& infoText)
+bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
 {
-	istd::TChangeNotifier<IShapeStatusInfo> shapeInfoPtr(m_shapeStatusInfoPtr);
-	if (shapeInfoPtr.IsValid()){
-		m_shapeStatusInfoPtr->SetLogicalPosition(logicalPos);
-		m_shapeStatusInfoPtr->SetPixelPosition(pixelPos);
-		m_shapeStatusInfoPtr->SetInfoText(infoText);
-	}
-/*
-	if (IsPixelPositionVisible()){
-		m_positionLabelPtr->setText(tr("X: %1  Y: %2").arg(pixelPos.GetX()).arg(pixelPos.GetY()));
-		m_positionLabelPtr->show();
-	}
-	else{
-		m_positionLabelPtr->hide();
+	bool isZoomToFit = IsZoomToFit();
+	if ((m_viewPtr != NULL) && !isZoomToFit){
+		iview::CScreenTransform transform = m_viewPtr->GetTransform();
+
+		int factor = eventPtr->delta() / 120;
+		double actualScale = transform.GetDeformMatrix().GetFrobeniusNorm() / ::sqrt(2.0);
+		double scale;
+
+		if (factor > 0 && actualScale < 100){
+			scale = double(1 << factor);
+		}
+		else if (factor < 0 && actualScale > 0.01){
+			scale = 1.0 / double(1 << -factor);
+		}
+		else{
+			return true;
+		}
+
+		istd::CIndex2d screenPos = iqt::GetCIndex2d(eventPtr->pos());
+		i2d::CVector2d logPos = transform.GetClientPosition(screenPos);
+
+		i2d::CAffine2d zoomTransform;
+		zoomTransform.Reset(logPos * (1 - scale), 0, scale);
+
+		transform.Apply(zoomTransform);
+
+		m_viewPtr->SetTransform(transform);
+
+		UpdateZoomInOutState();
 	}
 
-	if (IsMmPositionVisible()){
-		m_positionMmLabelPtr->setText(tr("LogX: %1mm  LogY: %2mm").arg(logicalPos.GetX()).arg(logicalPos.GetY()));
-		m_positionMmLabelPtr->show();
-	}
-	else{
-		m_positionMmLabelPtr->hide();
-	}
-
-	if (IsPixelValueVisible() && !infoText.isEmpty()){
-		m_colorLabelPtr->setText(infoText);
-		m_colorLabelPtr->show();
-	}
-	else{
-		m_colorLabelPtr->hide();
-	}
-	*/
+	return true;
 }
 
+
+bool CConsoleGui::OnMouseDoubleClickEvent(QEvent* /*eventPtr*/)
+{
+	SetFullScreenMode(!IsFullScreenMode());
+
+	return true;
+}
+
+
+bool CConsoleGui::OnKeyReleaseEvent(QKeyEvent* eventPtr)
+{
+	switch(eventPtr->key()){
+
+	case Qt::Key_Escape:
+		if (IsFullScreenMode()){
+			SetFullScreenMode(false);
+
+			return true;
+		}
+		break;
+	}
+
+	return false;
+}
+
+
+// reimplemented (iview::CConsoleBase)
 
 void CConsoleGui::UpdateEditModeButtons()
 {
@@ -606,67 +643,6 @@ bool CConsoleGui::OnMouseButton(
 void CConsoleGui::OnBoundingBoxChanged()
 {
 	UpdateScrollbarsValues();
-}
-
-
-bool CConsoleGui::OnMouseDoubleClickEvent(QEvent* /*eventPtr*/)
-{
-	SetFullScreenMode(!IsFullScreenMode());
-
-	return true;
-}
-
-
-bool CConsoleGui::OnKeyReleaseEvent(QKeyEvent* eventPtr)
-{
-	switch(eventPtr->key()){
-
-	case Qt::Key_Escape:
-		if (IsFullScreenMode()){
-			SetFullScreenMode(false);
-
-			return true;
-		}
-		break;
-	}
-
-	return false;
-}
-
-bool CConsoleGui::OnWheelEvent(QWheelEvent* eventPtr)
-{
-	bool isZoomToFit = IsZoomToFit();
-	if ((m_viewPtr != NULL) && !isZoomToFit){
-		iview::CScreenTransform transform = m_viewPtr->GetTransform();
-
-		int factor = eventPtr->delta() / 120;
-		double actualScale = transform.GetDeformMatrix().GetFrobeniusNorm() / ::sqrt(2.0);
-		double scale;
-
-		if (factor > 0 && actualScale < 100){
-			scale = double(1 << factor);
-		}
-		else if (factor < 0 && actualScale > 0.01){
-			scale = 1.0 / double(1 << -factor);
-		}
-		else{
-			return true;
-		}
-
-		istd::CIndex2d screenPos = iqt::GetCIndex2d(eventPtr->pos());
-		i2d::CVector2d logPos = transform.GetClientPosition(screenPos);
-
-		i2d::CAffine2d zoomTransform;
-		zoomTransform.Reset(logPos * (1 - scale), 0, scale);
-
-		transform.Apply(zoomTransform);
-
-		m_viewPtr->SetTransform(transform);
-
-		UpdateZoomInOutState();
-	}
-
-	return true;
 }
 
 

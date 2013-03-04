@@ -2,6 +2,9 @@
 #define i2d_CRectangle_included
 
 
+// Qt includes
+#include <QtCore/QRectF>
+
 // ACF includes
 #include "istd/TRange.h"
 #include "istd/CIndex2d.h"
@@ -24,11 +27,10 @@ class CRectangle: public CObject2dBase
 {
 public:
 	CRectangle();
-	CRectangle(const CRectangle& rect);
 	CRectangle(double left, double top, double width, double height);
 	CRectangle(const CVector2d& topLeft, const CVector2d& bottomRight);
 	CRectangle(const istd::CRange& horizontalRange, const istd::CRange& verticalRange);
-	explicit CRectangle(const i2d::CRect& rect);
+	CRectangle(const i2d::CRect& rect);
 	explicit CRectangle(const istd::CIndex2d& size);
 
 	/**
@@ -123,10 +125,6 @@ public:
 	CRectangle GetExpanded(const CRectangle& rect) const;
 	void Expand(const CRectangle& rect);
 
-	const CRectangle& operator=(const CRectangle& rect);
-	bool operator==(const CRectangle& rect) const;
-	bool operator!=(const CRectangle& rect) const;
-
 	/**
 		Get the nearest point in the rectangle for the some given point.
 	*/
@@ -135,6 +133,11 @@ public:
 	void Translate(const i2d::CVector2d& delta); 
 	CRectangle GetTranslated(const i2d::CVector2d& delta) const;
 	
+	bool operator==(const CRectangle& rect) const;
+	bool operator!=(const CRectangle& rect) const;
+
+	operator QRectF() const;
+
 	// reimplemented (i2d::IObject2d)
 	virtual CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const CVector2d& position);
@@ -166,9 +169,15 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// static methods
+	static const i2d::CRectangle& CRectangle::GetEmpty();
+
 private:
 	istd::CRange m_horizontalRange;
 	istd::CRange m_verticalRange;
+
+	// static atributes
+	static CRectangle s_empty;
 };
 
 
@@ -219,6 +228,14 @@ inline const istd::CRange& CRectangle::GetVerticalRange() const
 inline istd::CRange& CRectangle::GetVerticalRangeRef()
 {
 	return m_verticalRange;
+}
+
+
+// static methods
+
+inline const i2d::CRectangle& CRectangle::GetEmpty()
+{
+	return s_empty;
 }
 
 

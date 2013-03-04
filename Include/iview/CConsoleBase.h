@@ -142,7 +142,8 @@ public:
 	*/
 	virtual void UpdateCommands() = 0;
 
-	virtual void UpdateCursorInfo(const i2d::CVector2d& pixelPos, const i2d::CVector2d& logicalPos, const QString& infoText) = 0;
+	// abstract methods
+	virtual void UpdateCursorInfo(const QString& infoText) = 0;
 
 protected:
 	// events

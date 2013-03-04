@@ -22,13 +22,6 @@ CQuadrangle::CQuadrangle()
 }
 
 
-CQuadrangle::CQuadrangle(const CQuadrangle& quadrangle)
-:	m_firstDiagonal(quadrangle.m_firstDiagonal),
-	m_secondDiagonal(quadrangle.m_secondDiagonal)
-{
-}
-
-
 CQuadrangle::CQuadrangle(const CLine2d& firstDiagonal, const CLine2d& secondDiagonal)
 :	m_firstDiagonal(firstDiagonal),
 	m_secondDiagonal(secondDiagonal)
@@ -36,26 +29,15 @@ CQuadrangle::CQuadrangle(const CLine2d& firstDiagonal, const CLine2d& secondDiag
 }
 
 
-CQuadrangle& CQuadrangle::operator = (const CQuadrangle& quadrangle)
-{
-	istd::CChangeNotifier changePtr(this);
-
-	m_firstDiagonal = quadrangle.m_firstDiagonal;
-	m_secondDiagonal = quadrangle.m_secondDiagonal;
-
-	return *this;
-}
-
-
-bool CQuadrangle::operator == (const CQuadrangle& quadrangle) const
+bool CQuadrangle::operator==(const CQuadrangle& quadrangle) const
 {
 	return ((m_firstDiagonal == quadrangle.m_firstDiagonal) && (m_secondDiagonal == quadrangle.m_secondDiagonal));
 }
 
 
-bool CQuadrangle::operator != (const CQuadrangle& quadrangle) const
+bool CQuadrangle::operator!=(const CQuadrangle& quadrangle) const
 {
-	return !operator == (quadrangle);
+	return !operator==(quadrangle);
 }
 
 

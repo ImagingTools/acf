@@ -27,11 +27,9 @@ public:
 	CLine2d();
 	CLine2d(const CVector2d& p1, const CVector2d& p2);
 	CLine2d(double x1, double y1, double x2, double y2);
-	CLine2d(const CLine2d& line);
 
-	CLine2d operator = (const CLine2d& line);
-	bool operator == (const CLine2d& line) const;
-	bool operator != (const CLine2d& line) const;
+	bool operator==(const CLine2d& line) const;
+	bool operator!=(const CLine2d& line) const;
 
 	/**
 		Returns \c true, if the line has a length equal 0.
@@ -174,7 +172,7 @@ public:
 	void PushEndPoint(const i2d::CVector2d& newEndPoint);
 
 	/**
-		Get a proportion of lines cut point to line length.
+		Get a proportion of lines cut point to line length (called also 'alpha value').
 	*/
 	double GetCutAlpha(const CLine2d& line) const;
 
@@ -182,8 +180,17 @@ public:
 
 	bool CutDisk(const i2d::CVector2d& center, double radius) const;
 
+	/**
+		Get projection position 'alpha value' and orthogonal distance to line.
+		\return first value equals result of \c GetCastAlpha, the second is \c GetExtendedDistance,
+				but it can be negative for positions on the left size.
+	*/
 	QPair<double, double> GetAlphaAndCastDistance(const i2d::CVector2d& point) const;
 
+	/**
+		Get position where this line intersects the second one.
+		\return	true, if this lines intersect and intersection position can be calculated.
+	*/
 	bool GetCutPoint(const CLine2d& otherLine, i2d::CVector2d& cutPoint) const;
 
 	/**

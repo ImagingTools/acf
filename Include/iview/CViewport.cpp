@@ -161,34 +161,38 @@ bool CViewport::OnMouseMove(istd::CIndex2d position)
 
 	// info text
 	QString infoText;
+
+	// pixel position
+	const iview::CScreenTransform& transform = GetTransform();
+	i2d::CVector2d  pixelPosition = transform.GetClientPosition(position);
+
+	// logical position
+	const i2d::ICalibration2d* calibrationPtr = GetCalibration();
+	if (calibrationPtr != NULL){
+		i2d::CVector2d logPosition;
+		if (calibrationPtr->GetInvPositionAt(pixelPosition, logPosition)){
+			const imath::IUnitInfo* logicalUnitInfoPtr = calibrationPtr->GetArgumentUnitInfo();
+
+			QString textX = QString::number(logPosition.GetX(), 'f', 1);
+			QString textY = QString::number(logPosition.GetX(), 'f', 1);
+			QString logicalUnitName = (logicalUnitInfoPtr != NULL)?
+						logicalUnitInfoPtr->GetUnitName():
+						tr("mm");
+			infoText += tr("[%1, %2] %3").arg(textX, 6).arg(textY, 6).arg(logicalUnitName);
+		}
+	}
+
 	for (int i = 0; i < GetLayersCount(); i++){
 		QString infoPart = GetLayer(i).GetShapeDescriptionAt(position);
 		if (!infoPart.isEmpty()){
 			if (!infoText.isEmpty()){
-				infoText += ", ";
+				infoText += tr(", ");
 			}
 			infoText += infoPart;
 		}
 	}
 
-	// pixel position
-	i2d::CVector2d pixelPosition;
-	const iview::CScreenTransform& transform = GetTransform();
-	pixelPosition = transform.GetClientPosition(position);
-
-	// logical position
-	i2d::CVector2d logPosition;
-
-	const iview::CScreenTransform& logToScreenTransform = GetLogToScreenTransform();
-	const i2d::ICalibration2d* calibrationPtr = GetCalibration();
-	if (calibrationPtr != NULL){
-		calibrationPtr->GetInvPositionAt(pixelPosition, logPosition);
-	}
-	else{
-		logPosition = logToScreenTransform.GetClientPosition(position);
-	}
-
-	m_framePtr->UpdateCursorInfo(pixelPosition, logPosition, infoText);
+	m_framePtr->UpdateCursorInfo(infoText);
 
 	return retVal;
 }

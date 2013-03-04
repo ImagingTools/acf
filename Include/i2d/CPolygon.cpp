@@ -97,16 +97,18 @@ i2d::CRectangle CPolygon::GetBoundingBox() const
 	int nodesCount = GetNodesCount();
 
 	if (nodesCount > 0){
-		i2d::CVector2d sp = GetNode(0);
-		i2d::CRectangle boundingBox(sp, sp);
+		const i2d::CVector2d& firstPoint = GetNode(0);
+		i2d::CRectangle boundingBox(firstPoint, firstPoint);
 		for (int i = 1; i < nodesCount; i++){
-			sp = GetNode(i);
-			boundingBox.Unite(sp);
+			const i2d::CVector2d& point = GetNode(i);
+
+			boundingBox.Unite(point);
 		}
+
 		return boundingBox;
 	}
 
-	return i2d::CRectangle();
+	return i2d::CRectangle::GetEmpty();
 }
 
 

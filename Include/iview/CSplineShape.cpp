@@ -32,7 +32,7 @@ bool CSplineShape::OnAttached(imod::IModel* modelPtr)
 
 // protected methods
 
-void CSplineShape::DrawPolyBezier(QPainter& drawContext, const istd::CIndex2d* pointsPtr, int pointsCount) const
+void CSplineShape::DrawPolyBezier(QPainter& drawContext, const i2d::CVector2d* pointsPtr, int pointsCount) const
 {
 	Q_ASSERT(pointsPtr != NULL);
 	Q_ASSERT(pointsCount > 0);
@@ -41,11 +41,13 @@ void CSplineShape::DrawPolyBezier(QPainter& drawContext, const istd::CIndex2d* p
 	drawContext.setBrush(QBrush(QColor(0,0,0,0)));
 
 	if (pointsCount >= 4){
-		QPainterPath qtPatch(iqt::GetQPoint(pointsPtr[0]));
+		QPainterPath qtPatch(pointsPtr[0]);
+
 		for (int i = 3; i < pointsCount; i += 3){
-			qtPatch.cubicTo(iqt::GetQPoint(pointsPtr[i - 2]),
-							iqt::GetQPoint(pointsPtr[i - 1]),
-							iqt::GetQPoint(pointsPtr[i]));
+			qtPatch.cubicTo(
+						pointsPtr[i - 2],
+						pointsPtr[i - 1],
+						pointsPtr[i]);
 		}
 
 		drawContext.drawPath(qtPatch);
@@ -78,7 +80,6 @@ void CSplineShape::DrawCurve(QPainter& drawContext) const
 {
 	const i2d::CSpline* splinePtr = dynamic_cast<const i2d::CSpline*>(GetModelPtr());
 	if (IsDisplayConnected() && (splinePtr != NULL)){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		drawContext.save();
@@ -91,14 +92,14 @@ void CSplineShape::DrawCurve(QPainter& drawContext) const
 
 		int segmentsCount = splinePtr->GetSegmentCount();
 		if (segmentsCount > 0){
-			istd::CIndex2d points[4];
-			points[0] = transform.GetScreenPosition(splinePtr->GetNode(0));
+			i2d::CVector2d points[4];
+			points[0] = GetScreenPosition(splinePtr->GetNode(0));
 			for (int i = 0; i < segmentsCount; i++){
 				const i2d::CSplineSegment& segment = splinePtr->GetSplineSegment(i);
 
-				points[1] = transform.GetScreenPosition(segment.GetBezierPointBegin());
-				points[2] = transform.GetScreenPosition(segment.GetBezierPointEnd());
-				points[3] = transform.GetScreenPosition(segment.GetPointEnd());
+				points[1] = GetScreenPosition(segment.GetBezierPointBegin());
+				points[2] = GetScreenPosition(segment.GetBezierPointEnd());
+				points[3] = GetScreenPosition(segment.GetPointEnd());
 
 				DrawPolyBezier(drawContext, points, 4);
 
@@ -116,12 +117,10 @@ bool CSplineShape::IsCurveTouched(istd::CIndex2d position) const
 	const i2d::CSpline* splinePtr = dynamic_cast<const i2d::CSpline*>(GetModelPtr());
 	if (IsDisplayConnected() && (splinePtr != NULL)){
 		const IColorSchema& colorSchema = GetColorSchema();
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
 
 		double minDistance = colorSchema.GetLogicalLineWidth() / proportions;
-		i2d::CVector2d cp = transform.GetClientPosition(position);
+		i2d::CVector2d cp = GetLogPosition(position);
 
 		int segmentCount = splinePtr->GetSegmentCount();
 		for (int i = 0; i < segmentCount; i++){
@@ -143,25 +142,24 @@ i2d::CRect CSplineShape::CalcBoundingBox() const
 {
 	const i2d::CSpline* splinePtr = dynamic_cast<const i2d::CSpline*>(GetModelPtr());
 	if (IsDisplayConnected() && (splinePtr != NULL)){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		int segmentCount = splinePtr->GetSegmentCount();
 		if (segmentCount > 0){
 			const i2d::CSplineSegment& segment = splinePtr->GetSplineSegment(0);
 
-			istd::CIndex2d sp = transform.GetScreenPosition(segment.GetBezierPointBegin());
+			istd::CIndex2d sp = GetScreenPosition(segment.GetBezierPointBegin()).ToIndex2d();
 			i2d::CRect boundingBox(sp, sp);
 
-			sp = transform.GetScreenPosition(segment.GetBezierPointEnd());
+			sp = GetScreenPosition(segment.GetBezierPointEnd()).ToIndex2d();
 			boundingBox.Union(sp);
 
 			for (int i = 1; i < segmentCount; ++i){
 				const i2d::CSplineSegment& segment = splinePtr->GetSplineSegment(i);
 
-				sp = transform.GetScreenPosition(segment.GetBezierPointBegin());
+				sp = GetScreenPosition(segment.GetBezierPointBegin()).ToIndex2d();
 				boundingBox.Union(sp);
-				sp = transform.GetScreenPosition(segment.GetBezierPointEnd());
+				sp = GetScreenPosition(segment.GetBezierPointEnd()).ToIndex2d();
 				boundingBox.Union(sp);
 			}
 

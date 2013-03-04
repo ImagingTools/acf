@@ -2,13 +2,12 @@
 #define iview_CSplineShape_included
 
 
-
+// ACF includes
+#include "i2d/CVector2d.h"
 #include "iview/CPolylineShape.h"
 
 
-
 namespace iview{
-
 
 
 class CSplineShape: public CPolylineShape
@@ -20,7 +19,7 @@ public:
 	virtual bool OnAttached(imod::IModel* modelPtr);
 
 protected:
-	virtual void DrawPolyBezier(QPainter& drawContext, const istd::CIndex2d* pointsPtr, int pointsCount) const;
+	virtual void DrawPolyBezier(QPainter& drawContext, const i2d::CVector2d* pointsPtr, int pointsCount) const;
 
 	// reimplemented (iview::CPolygonShape)
 	virtual i2d::CVector2d GetSegmentMiddle(int index) const;
@@ -32,12 +31,9 @@ protected:
 };
 
 
-
 } // namespace iview
 
 
-
 #endif // !iview_CSplineShape_included
-
 
 

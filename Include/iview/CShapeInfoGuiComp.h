@@ -14,14 +14,12 @@ namespace iview
 
 
 class CShapeInfoGuiComp:
-			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CShapeInfoGuiComp, IShapeStatusInfo>
+			public iqtgui::TDesignerGuiObserverCompBase<Ui::CShapeInfoGuiComp, IShapeStatusInfo>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CShapeInfoGuiComp, IShapeStatusInfo> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CShapeInfoGuiComp, IShapeStatusInfo> BaseClass;
 
 	I_BEGIN_COMPONENT(CShapeInfoGuiComp);
 	I_END_COMPONENT;

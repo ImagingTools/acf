@@ -296,10 +296,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CShapeControl.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CShapeInfoGuiComp.cpp"
 				>
 			</File>
@@ -470,10 +466,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CShapeControl.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CShapeInfoGuiComp.h"
 				>
 			</File>
@@ -523,14 +515,6 @@
 			</File>
 			<File
 				RelativePath="..\IInteractiveShape.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ILogicalCoords.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ILogicalView.h"
 				>
 			</File>
 			<File

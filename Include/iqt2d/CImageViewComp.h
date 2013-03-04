@@ -23,8 +23,7 @@ namespace iqt2d
 */
 class CImageViewComp:
 			public ibase::TModelObserverCompWrap<
-						iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape> >,
-						virtual public i2d::ICalibrationProvider
+						iqtgui::TGuiObserverWrap<CViewProviderGuiComp, iview::CImageShape> >
 
 {
 public:
@@ -34,12 +33,7 @@ public:
 	I_BEGIN_COMPONENT(CImageViewComp);
 		I_REGISTER_INTERFACE(imod::IObserver);
 		I_REGISTER_INTERFACE(imod::IModelEditor);
-		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
-		I_ASSIGN(m_useBitmapCalibrationAttrPtr, "UseBitmapCalibration", "If set, the bitmap calibration is used to calibrate the view", true, false);
 	I_END_COMPONENT;
-
-	// reimplemented (i2d::ICalibrationProvider)
-	virtual const i2d::ICalibration2d* GetCalibration() const;
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
@@ -47,9 +41,6 @@ protected:
 
 	// reimplemented (iqtui::CGuiComponentBase)
 	virtual void OnGuiCreated();
-
-private:
-	I_ATTR(bool, m_useBitmapCalibrationAttrPtr);
 };
 
 

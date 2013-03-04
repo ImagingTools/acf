@@ -36,7 +36,7 @@ protected:
 };
 
 
-// protected members
+// public methods
 
 // reimplemented (iser::Serializable)
 

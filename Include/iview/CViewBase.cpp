@@ -22,7 +22,6 @@ namespace iview
 CViewBase::CViewBase()
 {
 	m_transform.Reset();
-	m_logToViewTransform.Reset();
 
 	m_invalidatedBox.Reset();
 	m_isBackgroundBufferValid = false;
@@ -47,8 +46,6 @@ CViewBase::CViewBase()
 	m_backgroundLayerIndex = -1;
 	m_inactiveLayerIndex = -1;
 	m_activeLayerIndex = -1;
-
-	CalcInternalTransforms();
 }
 
 
@@ -167,8 +164,6 @@ void CViewBase::SetZoom(ZoomMode zoom)
 		return;
 	}
 
-	CalcInternalTransforms();
-
 	UpdateAllShapes(CF_TRANSFORM);
 }
 
@@ -238,20 +233,6 @@ void CViewBase::InsertDefaultLayers()
 	InsertLayer(&m_backgroundLayer, -1, IViewLayer::LT_BACKGROUND);
 	InsertLayer(&m_inactiveLayer, -1, IViewLayer::LT_INACTIVE);
 	InsertLayer(&m_activeLayer, -1, IViewLayer::LT_ACTIVE);
-}
-
-
-// reimplemented (iview::ILogicalView)
-
-void CViewBase::SetLogToViewTransform(const i2d::CAffine2d& transform)
-{
-	if (m_logToViewTransform != transform){
-		m_logToViewTransform = transform;
-		
-		CalcInternalTransforms();
-		
-		UpdateAllShapes(CF_TRANSFORM);
-	}
 }
 
 
@@ -426,7 +407,7 @@ void CViewBase::OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* la
 		m_focusedLayerPtr = layerPtr;
 	}
 
-	BaseClass::OnShapeFocused(shapePtr);
+	CViewBase::OnShapeFocused(shapePtr);
 }
 
 
@@ -438,7 +419,7 @@ void CViewBase::OnShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* 
 		m_focusedLayerPtr = NULL;
 	}
 
-	BaseClass::OnShapeDefocused(shapePtr);
+	CViewBase::OnShapeDefocused(shapePtr);
 }
 
 
@@ -528,7 +509,7 @@ void CViewBase::SetTransform(const i2d::CAffine2d& transform)
 {
 	if (m_transform != transform){
 		m_transform = transform;
-		CalcInternalTransforms();
+
 		UpdateAllShapes(CF_TRANSFORM);
 	}
 }
@@ -632,7 +613,7 @@ void CViewBase::OnShapeSelected(IInteractiveShape& shape, bool state)
 
 // reimplemented (iview::IDraggable)
 
-void CViewBase::BeginDrag(const i2d::CVector2d& position)
+void CViewBase::BeginDrag(const istd::CIndex2d& position)
 {
 	for (Layers::iterator iter = m_layers.begin(); iter != m_layers.end(); ++iter){
 		ISelectableLayer* layerPtr = dynamic_cast<ISelectableLayer*>(*iter);
@@ -658,7 +639,7 @@ void CViewBase::EndDrag()
 }
 
 
-void CViewBase::SetDragPosition(const i2d::CVector2d& position)
+void CViewBase::SetDragPosition(const istd::CIndex2d& position)
 {
 	Q_ASSERT(m_viewMode == VM_DRAG);
 
@@ -693,12 +674,6 @@ void CViewBase::DrawLayers(QPainter& drawContext, int firstLayer, int lastLayer)
 
 		m_focusedLayerPtr->DrawFocusedShape(drawContext);
 	}
-}
-
-
-void CViewBase::CalcInternalTransforms()
-{
-	m_transform.GetApply(m_logToViewTransform, m_logToScreenTransform);
 }
 
 
@@ -846,13 +821,11 @@ bool CViewBase::OnMouseMove(istd::CIndex2d position)
 
 	bool result = false;
 
-	const i2d::CVector2d& pos = m_transform.GetClientPosition(position);
-
 	if ((m_keysState & Qt::LeftButton) == 0){
 		m_viewMode = VM_NONE;
 	}
 	else if (m_viewMode == VM_DRAG){
-		SetDragPosition(pos);
+		SetDragPosition(position);
 		Update();
 		result = true;
 	}

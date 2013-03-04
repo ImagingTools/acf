@@ -5,7 +5,6 @@
 // ACF includes
 #include "i2d/CRectangle.h"
 
-#include "iview/ILogicalView.h"
 #include "iview/IDraggable.h"
 #include "iview/IMouseActionObserver.h"
 #include "iview/CScreenTransform.h"
@@ -26,13 +25,11 @@ class IInteractiveShape;
 
 
 class CViewBase:
-			virtual public ILogicalView,
+			virtual public IShapeView,
 			virtual public IDraggable,
 			protected IMouseActionObserver
 {
 public:
-	typedef ILogicalView BaseClass;
-
 	enum ZoomMode{
 		ZM_RESET,
 		ZM_ZOOM_IN,
@@ -115,11 +112,6 @@ public:
 	*/
 	IInteractiveShape* GetMouseShapePtr() const;
 
-	// reimplemented (iview::ILogicalView)
-	virtual const i2d::CAffine2d& GetLogToViewTransform() const;
-	virtual void SetLogToViewTransform(const i2d::CAffine2d& transform);
-	virtual const iview::CScreenTransform& GetLogToScreenTransform() const;
-
 	// reimplemented (iview::IShapeView)
 	virtual void Update();
 	virtual bool IsViewDraggable() const;
@@ -141,8 +133,8 @@ public:
 	virtual void DeselectAllShapes();
 	virtual int GetKeysState() const;
 	virtual int GetEditMode() const;
-	using BaseClass::OnShapeFocused;
-	using BaseClass::OnShapeDefocused;
+	virtual void OnShapeFocused(IInteractiveShape* /*shapePtr*/){}
+	virtual void OnShapeDefocused(IInteractiveShape* /*shapePtr*/){}
 
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
@@ -170,8 +162,8 @@ public:
 
 	// reimplemented (iview::IDraggable)
 	virtual bool IsDraggable() const;
-	virtual void BeginDrag(const i2d::CVector2d& reference);
-	virtual void SetDragPosition(const i2d::CVector2d& position);
+	virtual void BeginDrag(const istd::CIndex2d& reference);
+	virtual void SetDragPosition(const istd::CIndex2d& position);
 	virtual void EndDrag();
 
 	// abstract methods
@@ -208,11 +200,6 @@ protected:
 		Get index of default active layer.
 	*/
 	int GetActiveLayerIndex() const;
-
-	/**
-		Calculate internal transformations.
-	*/
-	void CalcInternalTransforms();
 
 	/**
 		This method is internal used to check, if drag mode is allowed.
@@ -310,8 +297,6 @@ private:
 	bool m_isBackgroundBufferValid;
 
 	iview::CScreenTransform m_transform;
-	i2d::CAffine2d m_logToViewTransform;
-	iview::CScreenTransform m_logToScreenTransform;
 
 	ViewMode m_viewMode;
 	int m_editMode;
@@ -393,20 +378,6 @@ inline IInteractiveShape* CViewBase::GetMouseShapePtr() const
 		m_isMouseShapeValid = true;
 	}
 	return m_mouseShapePtr;
-}
-
-
-// reimplemented (iview::ILogicalView)
-
-inline const i2d::CAffine2d& CViewBase::GetLogToViewTransform() const
-{
-	return m_logToViewTransform;
-}
-
-
-inline const iview::CScreenTransform& CViewBase::GetLogToScreenTransform() const
-{
-	return m_logToScreenTransform;
 }
 
 

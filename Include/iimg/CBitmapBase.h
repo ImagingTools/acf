@@ -2,6 +2,8 @@
 #define iimg_CBitmapBase_included
 
 
+// ACF includes
+#include "i2d/CObject2dBase.h"
 #include "iimg/IBitmap.h"
 
 
@@ -12,9 +14,18 @@ namespace iimg
 /**
 	Base implementation of some \c iimg::IBitmap methods.
 */
-class CBitmapBase: virtual public IBitmap
+class CBitmapBase:
+			public i2d::CObject2dBase,
+			virtual public IBitmap
 {
 public:
+	typedef i2d::CObject2dBase BaseClass;
+
+	// reimplemented (i2d::IObject2d)
+	virtual i2d::CVector2d GetCenter() const;
+	virtual void MoveCenterTo(const i2d::CVector2d& position);
+	virtual i2d::CRectangle GetBoundingBox() const;
+
 	// reimplemented (iimg::IBitmap)
 	virtual bool CopyBitmapRegion(const iimg::IBitmap& sourceBitmap, const i2d::CRectangle& area);
 	virtual int GetLineBytesCount() const;

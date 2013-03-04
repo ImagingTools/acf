@@ -35,9 +35,9 @@ public:
 	CCalibratedViewBase();
 
 	/**
-		Set calibration object for this view.
+		Set calibration using to display logical coordinates.
 	*/
-	void SetCalibrationPtr(const i2d::ICalibration2d* calibrationPtr);
+	void SetDisplayCalibration(const i2d::ICalibration2d* calibrationPtr);
 
 	/**
 		Set grid visibility state.

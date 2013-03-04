@@ -11,6 +11,7 @@
 #include "i2d/COrientedCircle.h"
 #include "iview/IColorSchema.h"
 #include "iview/CScreenTransform.h"
+#include "iview/CPolylineShape.h"
 
 
 namespace iview
@@ -28,13 +29,9 @@ void COrientedCircleShape::Draw(QPainter& drawContext) const
 {
 	Q_ASSERT(IsDisplayConnected());
 
-	BaseClass::Draw(drawContext);
-
 	const imod::IModel* modelPtr = GetModelPtr();
 	const i2d::COrientedCircle& circle = *dynamic_cast<const i2d::COrientedCircle*>(modelPtr);
 	Q_ASSERT(&circle != NULL);
-
-	const i2d::ICalibration2d* calibrationPtr = circle.GetCalibration();
 
 	const i2d::CVector2d& center = circle.GetCenter();
 	double radius = circle.GetRadius();
@@ -62,7 +59,7 @@ void COrientedCircleShape::Draw(QPainter& drawContext) const
 	double viewScale = transform.GetDeformMatrix().GetApproxScale();
 
 	for (int pointIndex = 0; pointIndex < nodesCount; ++pointIndex){
-		double angle = pointIndex * I_2PI / nodesCount;
+		double angle = (pointIndex + 0.5) * I_2PI / nodesCount;
 
 		i2d::CVector2d vector;
 		vector.Init(angle, radius);
@@ -78,16 +75,18 @@ void COrientedCircleShape::Draw(QPainter& drawContext) const
 		i2d::CVector2d segmentCenter = center + vector;
 
 		i2d::CLine2d segmentLine(
-					GetScreenPosition(segmentCenter - tangent, calibrationPtr),
-					GetScreenPosition(segmentCenter + tangent, calibrationPtr));
+					GetScreenPosition(segmentCenter - tangent),
+					GetScreenPosition(segmentCenter + tangent));
 
-		DrawOrientationMarker(
+		CPolylineShape::DrawOrientationMarker(
 					drawContext,
 					softBrightPen, darkBrush,
 					softDarkPen, brightBrush,
 					segmentLine,
 					viewScale);
 	}
+
+	BaseClass::Draw(drawContext);
 }
 
 
@@ -102,16 +101,18 @@ bool COrientedCircleShape::OnAttached(imod::IModel* modelPtr)
 i2d::CRect COrientedCircleShape::CalcBoundingBox() const
 {
 	i2d::CRect result = BaseClass::CalcBoundingBox();
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
-	const i2d::CMatrix2d& deform = transform.GetDeformMatrix();
-	double directionIndicatorWidth = 10 * deform.GetApproxScale();
-	result.SetLeft(result.GetLeft() - directionIndicatorWidth);
-	result.SetRight(result.GetRight() + directionIndicatorWidth);
-	result.SetTop(result.GetTop() - directionIndicatorWidth);
-	result.SetBottom(result.GetBottom() + directionIndicatorWidth);
+
+	// correct bounding box of circle considering maximal size of direction markers
+	const iview::CScreenTransform& transform = GetViewToScreenTransform();
+	double scale = transform.GetDeformMatrix().GetApproxScale();
+
+	int maxMarkDistance = int(20 * scale);
+
+	result.Expand(i2d::CRect(-maxMarkDistance, -maxMarkDistance, maxMarkDistance, maxMarkDistance));
 
 	return result;
 }
+
 
 } // namespace iview
 

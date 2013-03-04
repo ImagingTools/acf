@@ -97,7 +97,6 @@ protected:
 	void CalcNodes(const i2d::CAffine2d& parallTransform) const;
 	void ResetNodes() const;
 	bool AreNodesValid() const;
-	const istd::CIndex2d* GetNodes() const;
 
 	virtual void EnsureValidNodes() const;
 	i2d::CAffine2d CalcMoveTransform(i2d::CVector2d position, const i2d::CAffine2d& transform);
@@ -136,7 +135,7 @@ private:
 	bool m_isEditableHeight;
 	bool m_isProportionalScaled;
 
-	mutable istd::CIndex2d m_nodes[EN_LAST + 1];
+	mutable i2d::CVector2d m_screenNodes[EN_LAST + 1];
 	mutable bool m_areNodesValid;
 };
 
@@ -196,12 +195,6 @@ inline void CTransformableRectangleShape::SetProportionalScaled(bool state)
 inline bool CTransformableRectangleShape::AreNodesValid() const
 {
 	return m_areNodesValid;
-}
-
-
-inline const istd::CIndex2d* CTransformableRectangleShape::GetNodes() const
-{
-	return m_nodes;
 }
 
 

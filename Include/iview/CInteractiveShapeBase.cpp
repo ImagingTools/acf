@@ -79,7 +79,7 @@ bool CInteractiveShapeBase::OnMouseMove(istd::CIndex2d)
 
 bool CInteractiveShapeBase::OnAttached(imod::IModel* modelPtr)
 {
-	if (BaseClass3::OnAttached(modelPtr)){
+	if (BaseClass::OnAttached(modelPtr)){
 		Invalidate(CS_CONSOLE);
 
 		return true;
@@ -93,7 +93,7 @@ bool CInteractiveShapeBase::OnDetached(imod::IModel* modelPtr)
 {
 	Invalidate(CS_CONSOLE);
 
-	return BaseClass3::OnDetached(modelPtr);
+	return BaseClass::OnDetached(modelPtr);
 }
 
 
@@ -135,67 +135,6 @@ void CInteractiveShapeBase::DrawText(QPainter& drawContext, istd::CIndex2d point
 
 	drawContext.drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, text);
 }
-
-
-void CInteractiveShapeBase::DrawOrientationMarker(
-			QPainter& drawContext,
-			const QPen& rightPen,
-			const QBrush& rightBrush,
-			const QPen& leftPen,
-			const QBrush& leftBrush,
-			const i2d::CLine2d& segmentLine,
-			double scale) const
-{
-	double lineLength = segmentLine.GetLength();
-	if (lineLength < I_BIG_EPSILON){
-		return;
-	}
-
-	scale = sqrt(scale);
-
-	// arbitrary marker dimensions in pixels, multiplied by scale
-	double markerSizeX = 8 * scale;
-	double markerSizeY = 30 * scale;
-
-	double maxMarkerLength = qMin(20.0, lineLength * 0.2);
-
-	// limit marker size to half line length
-	if (markerSizeY > maxMarkerLength){
-		markerSizeX *= maxMarkerLength / markerSizeY;
-		markerSizeY = maxMarkerLength;
-	}
-
-	i2d::CVector2d lineCenter = segmentLine.GetCenter();
-
-	i2d::CVector2d segmentDelta = segmentLine.GetDiffVector();
-	i2d::CVector2d segmentBaseX = segmentDelta.GetNormalized(markerSizeX);
-	i2d::CVector2d segmentBaseY = segmentDelta.GetOrthogonal().GetNormalized(markerSizeY);
-	// two points common to both markers
-	i2d::CVector2d markerPoint1 = lineCenter - segmentBaseX;
-	i2d::CVector2d markerPoint2 = lineCenter + segmentBaseX;
-	i2d::CVector2d markerPoint3 = lineCenter - segmentBaseY;
-	i2d::CVector2d markerPoint4 = lineCenter + segmentBaseY;
- 
-	drawContext.save();
-
-	// draw the markers
-	QPolygonF markerPolygon(3);
-	markerPolygon[0] = markerPoint1;
-	markerPolygon[1] = markerPoint2;
-	markerPolygon[2] = markerPoint3;
-	drawContext.setPen(leftPen);
-	drawContext.setBrush(leftBrush);
-	drawContext.drawPolygon(markerPolygon);
-
-	markerPolygon[2] = markerPoint4;
-
-	drawContext.setPen(rightPen);
-	drawContext.setBrush(rightBrush);
-	drawContext.drawPolygon(markerPolygon);
-
-	drawContext.restore();
-}
-
 
 
 } // namespace iview

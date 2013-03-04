@@ -31,7 +31,7 @@ iview::ITouchable::TouchState CPerspectiveCalibrationBoundsShape::IsTouched(istd
 		calibPtr->GetInvPositionAt(bounds.GetLeftBottom(), viewLeftBottom);
 		calibPtr->GetInvPositionAt(bounds.GetRightBottom(), viewRightBottom);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+		const iview::CScreenTransform& transform = GetViewToScreenTransform();
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
 		i2d::CVector2d viewPos = transform.GetClientPosition(position);
@@ -73,7 +73,7 @@ void CPerspectiveCalibrationBoundsShape::Draw(QPainter& drawContext) const
 		calibPtr->GetInvPositionAt(bounds.GetLeftBottom(), viewLeftBottom);
 		calibPtr->GetInvPositionAt(bounds.GetRightBottom(), viewRightBottom);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+		const iview::CScreenTransform& transform = GetViewToScreenTransform();
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
 		bool isSelected = IsSelected();
@@ -116,7 +116,7 @@ bool CPerspectiveCalibrationBoundsShape::OnMouseButton(istd::CIndex2d position, 
 			calibPtr->GetInvPositionAt(bounds.GetLeftBottom(), viewLeftBottom);
 			calibPtr->GetInvPositionAt(bounds.GetRightBottom(), viewRightBottom);
 
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
+			const iview::CScreenTransform& transform = GetViewToScreenTransform();
 			const iview::IColorSchema& colorSchema = GetColorSchema();
 
 			i2d::CVector2d viewPos = transform.GetClientPosition(position);
@@ -170,7 +170,7 @@ bool CPerspectiveCalibrationBoundsShape::OnMouseMove(istd::CIndex2d position)
 	if (calibPtr != NULL){
 		i2d::CRectangle bounds = calibPtr->GetBounds();
 
-		iview::CScreenTransform transform = GetLogToScreenTransform();
+		iview::CScreenTransform transform = GetViewToScreenTransform();
 		i2d::CVector2d viewPos = transform.GetClientPosition(position);
 
 		i2d::CVector2d logPos;

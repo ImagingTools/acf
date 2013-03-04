@@ -72,11 +72,6 @@ public:
 	*/
 	virtual double GetOutlineLength() const;
 
-	/**
-		Assignment operator.
-	*/
-	const CPolygon& operator=(const CPolygon& polygon);
-
 	// reimplemented (i2d::IObject2d)
 	virtual CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const CVector2d& position);
@@ -164,14 +159,6 @@ inline void CPolygon::SetNode(int index, const i2d::CVector2d& node)
 	Q_ASSERT(index >= 0 && index < int(m_nodes.size()));
 
 	m_nodes[index] = node;
-}
-
-
-inline const CPolygon& CPolygon::operator=(const CPolygon& polygon)
-{
-	m_nodes = polygon.m_nodes;
-
-	return *this;
 }
 
 

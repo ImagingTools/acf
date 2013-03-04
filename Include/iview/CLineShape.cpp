@@ -122,17 +122,16 @@ bool CLineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*button
 			const IColorSchema& colorSchema = GetColorSchema();
 
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE);
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 			if (tickerBox.IsInside(position - m_points[1])){
-				m_referencePosition = linePtr->GetPoint2() - transform.GetClientPosition(position);
+				m_referencePosition = linePtr->GetPoint2() - GetLogPosition(position);
 				m_referenceIndex = 1;
 
 				BeginModelChanges();
 				return true;
 			}
 			else  if (tickerBox.IsInside(position - m_points[0])){
-				m_referencePosition = linePtr->GetPoint1() - transform.GetClientPosition(position);
+				m_referencePosition = linePtr->GetPoint1() - GetLogPosition(position);
 				m_referenceIndex = 0;
 
 				BeginModelChanges();
@@ -159,15 +158,13 @@ bool CLineShape::OnMouseMove(istd::CIndex2d position)
 		i2d::CLine2d& line = *dynamic_cast<i2d::CLine2d*>(modelPtr);
 		Q_ASSERT(&line != NULL);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		
 		switch (m_referenceIndex){
 		case 0:
-			line.SetPoint1(m_referencePosition + transform.GetClientPosition(position));
+			line.SetPoint1(m_referencePosition + GetLogPosition(position));
 			break;
 
 		case 1:
-			line.SetPoint2(m_referencePosition + transform.GetClientPosition(position));
+			line.SetPoint2(m_referencePosition + GetLogPosition(position));
 			break;
 		}
 
@@ -185,11 +182,9 @@ bool CLineShape::OnMouseMove(istd::CIndex2d position)
 
 void CLineShape::CalcPoints(const i2d::CLine2d& line) const
 {
-	const i2d::ICalibration2d* calibrationPtr = line.GetCalibration();
-
 	i2d::CLine2d screenLine(
-					GetScreenPosition(line.GetPoint1(), calibrationPtr),
-					GetScreenPosition(line.GetPoint2(), calibrationPtr));
+					GetScreenPosition(line.GetPoint1()),
+					GetScreenPosition(line.GetPoint2()));
 
 	m_points[0] = screenLine.GetPoint1().ToIndex2d();
 	m_points[1] = screenLine.GetPoint2().ToIndex2d();

@@ -29,9 +29,6 @@ public:
 	virtual bool ConnectInteractiveShape(IInteractiveShape* shapePtr);
 	virtual int GetUnselectedShapesCount() const;
 	virtual void DrawFocusedShape(QPainter& drawContext);
-	virtual void BeginDrag(const i2d::CVector2d& reference);
-	virtual void SetDragPosition(const i2d::CVector2d& position);
-	virtual void EndDrag();
 	virtual bool OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag);
 	virtual bool OnFocusedMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag);
 	virtual bool OnFocusedMouseMove(istd::CIndex2d position);
@@ -61,6 +58,12 @@ public:
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
 	virtual QString GetShapeDescriptionAt(istd::CIndex2d position) const;
+
+	// reimplemented (iview::IDraggable)
+	virtual void BeginDrag(const istd::CIndex2d& reference);
+	virtual void SetDragPosition(const istd::CIndex2d& position);
+	virtual void EndDrag();
+	virtual bool IsDraggable() const;
 
 protected:
 	ShapeMap m_activeShapes;

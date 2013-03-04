@@ -107,7 +107,7 @@ void CAffiniteCalibrationShape::Draw(QPainter& drawContext) const
 
 				i2d::CRectangle boundRectangle(left, top, right - left, bottom - top);
 
-				double scale = transform.GetDeformMatrix().GetAxisX().GetLength();
+				double scale = transform.GetDeformMatrix().GetApproxScale();
 
 				int levels[2];
 				double minGridDistance = calibInfoPtr->GetMinGridDistance() / scale;

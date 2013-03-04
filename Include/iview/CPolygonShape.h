@@ -82,7 +82,7 @@ protected:
 
 	i2d::CVector2d m_castAxis;
 	mutable i2d::CAffine2d m_castTransform;
-	mutable QPolygon m_screenPoints;
+	mutable QPolygonF m_screenPoints;
 
 private:
 	bool m_isFirstVisible;

@@ -87,26 +87,25 @@ bool CParallelogramShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton
 
 	if (downFlag){
 		EnsureValidNodes();
-		const istd::CIndex2d* nodes = GetNodes();
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 		
-		if ((m_isEditableHeight || m_isEditableAngle) && tickerBox.IsInside(position - nodes[EN_NODE12])){
+		if ((m_isEditableHeight || m_isEditableAngle) && tickerBox.IsInside(position - m_nodes[EN_NODE12].ToIndex2d())){
 			m_editNode = EN_NODE12;
 
 			BeginModelChanges();
 
 			return true;
 		}
-		if ((m_isEditableWidth || m_isEditableAngle) && tickerBox.IsInside(position - nodes[EN_NODE21])){
+		if ((m_isEditableWidth || m_isEditableAngle) && tickerBox.IsInside(position - m_nodes[EN_NODE21].ToIndex2d())){
 			m_editNode = EN_NODE21;
 
 			BeginModelChanges();
 
 			return true;
 		}
-		if (m_isEditableRotation && tickerBox.IsInside(position - nodes[EN_NODE22])){
+		if (m_isEditableRotation && tickerBox.IsInside(position - m_nodes[EN_NODE22].ToIndex2d())){
 			m_editNode = EN_NODE22;
 
 			BeginModelChanges();
@@ -130,11 +129,9 @@ bool CParallelogramShape::OnMouseMove(istd::CIndex2d position)
 		const i2d::CMatrix2d& parallDeform= parallTransform.GetDeformMatrix();
 		const i2d::CVector2d& parallPos = parallTransform.GetTranslation();
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		
 		const i2d::CVector2d& axisX  = parallDeform.GetAxisX();
 		const i2d::CVector2d& axisY  = parallDeform.GetAxisY();
-		i2d::CVector2d cp = transform.GetClientPosition(position);
+		i2d::CVector2d cp = GetLogPosition(position);
 
 		i2d::CVector2d newAxisX = axisX;
 		i2d::CVector2d newAxisY = axisY;
@@ -258,17 +255,16 @@ bool CParallelogramShape::OnMouseMove(istd::CIndex2d position)
 
 void CParallelogramShape::CalcNodes(const i2d::CAffine2d& parallTransform) const
 {
-		const i2d::CMatrix2d& parallDeform= parallTransform.GetDeformMatrix();
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
+	const i2d::CMatrix2d& parallDeform = parallTransform.GetDeformMatrix();
 
-		const i2d::CVector2d& cp11 = parallTransform.GetTranslation();
-		m_nodes[EN_NODE11] = transform.GetScreenPosition(cp11);
-		const i2d::CVector2d& cp12 = cp11 + parallDeform.GetAxisY();
-		m_nodes[EN_NODE12] = transform.GetScreenPosition(cp12);
-		const i2d::CVector2d& cp21 = cp11 + parallDeform.GetAxisX();
-		m_nodes[EN_NODE21] = transform.GetScreenPosition(cp21);
-		const i2d::CVector2d& cp22 = cp12 + parallDeform.GetAxisX();
-		m_nodes[EN_NODE22] = transform.GetScreenPosition(cp22);
+	const i2d::CVector2d& cp11 = parallTransform.GetTranslation();
+	m_nodes[EN_NODE11] = GetScreenPosition(cp11);
+	const i2d::CVector2d& cp12 = cp11 + parallDeform.GetAxisY();
+	m_nodes[EN_NODE12] = GetScreenPosition(cp12);
+	const i2d::CVector2d& cp21 = cp11 + parallDeform.GetAxisX();
+	m_nodes[EN_NODE21] = GetScreenPosition(cp21);
+	const i2d::CVector2d& cp22 = cp12 + parallDeform.GetAxisX();
+	m_nodes[EN_NODE22] = GetScreenPosition(cp22);
 }
 
 
@@ -306,19 +302,18 @@ bool CParallelogramShape::IsTickerTouched(istd::CIndex2d position) const
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
 		EnsureValidNodes();
-		const istd::CIndex2d* nodes = GetNodes();
 
-		if (tickerBox.IsInside(position - nodes[EN_NODE12])){
+		if (tickerBox.IsInside(position - m_nodes[EN_NODE12].ToIndex2d())){
 			if (m_isEditableHeight || m_isEditableAngle){
 				return true;
 			}
 		}
-		if (tickerBox.IsInside(position - nodes[EN_NODE21])){
+		if (tickerBox.IsInside(position - m_nodes[EN_NODE21].ToIndex2d())){
 			if (m_isEditableWidth || m_isEditableAngle){
 				return true;
 			}
 		}
-		if (tickerBox.IsInside(position - nodes[EN_NODE22])){
+		if (tickerBox.IsInside(position - m_nodes[EN_NODE22].ToIndex2d())){
 			if (m_isEditableRotation){
 				return true;
 			}
@@ -337,14 +332,14 @@ bool CParallelogramShape::IsFigureTouched(istd::CIndex2d position) const
 
 		const i2d::CVector2d& parallPosition = parallelogramPtr->GetCenter();
 		const i2d::CMatrix2d& parallDeform = parallelogramPtr->GetDeformMatrix();
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 		const i2d::CVector2d& axisX  = parallDeform.GetAxisX();
 		const i2d::CVector2d& axisY  = parallDeform.GetAxisY();
 
-		i2d::CVector2d cp = transform.GetClientPosition(position);
+		i2d::CVector2d cp = GetLogPosition(position);
 
-		double proportions = GetViewToScreenTransform().GetDeformMatrix().GetApproxScale();
+		const CScreenTransform& transform = GetViewToScreenTransform();
+		double proportions = transform.GetDeformMatrix().GetApproxScale();
 
 		double logicalLineWidth = colorSchema.GetLogicalLineWidth();
 
@@ -377,14 +372,14 @@ void CParallelogramShape::DrawTickers(QPainter& drawContext) const
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		EnsureValidNodes();
-		const istd::CIndex2d* nodes = GetNodes();
 
 		if (IsSelected()){
-			colorSchema.DrawTicker(drawContext, nodes[EN_NODE11], IColorSchema::TT_SELECTED_INACTIVE);
-			colorSchema.DrawTicker(drawContext, nodes[EN_NODE12], (m_isEditableHeight || m_isEditableAngle)? IColorSchema::TT_NORMAL: IColorSchema::TT_SELECTED_INACTIVE);
-			colorSchema.DrawTicker(drawContext, nodes[EN_NODE21], (m_isEditableWidth || m_isEditableAngle)? IColorSchema::TT_NORMAL: IColorSchema::TT_SELECTED_INACTIVE);
+			colorSchema.DrawTicker(drawContext, m_nodes[EN_NODE11].ToIndex2d(), IColorSchema::TT_SELECTED_INACTIVE);
+			colorSchema.DrawTicker(drawContext, m_nodes[EN_NODE12].ToIndex2d(), (m_isEditableHeight || m_isEditableAngle)? IColorSchema::TT_NORMAL: IColorSchema::TT_SELECTED_INACTIVE);
+			colorSchema.DrawTicker(drawContext, m_nodes[EN_NODE21].ToIndex2d(), (m_isEditableWidth || m_isEditableAngle)? IColorSchema::TT_NORMAL: IColorSchema::TT_SELECTED_INACTIVE);
+
 			if (m_isEditableRotation){
-				colorSchema.DrawTicker(drawContext, nodes[EN_NODE22], IColorSchema::TT_ROTATE);
+				colorSchema.DrawTicker(drawContext, m_nodes[EN_NODE22].ToIndex2d(), IColorSchema::TT_ROTATE);
 			}
 		}
 	}
@@ -397,7 +392,6 @@ void CParallelogramShape::DrawFigure(QPainter& drawContext) const
 		EnsureValidNodes();
 
 		const IColorSchema& colorSchema = GetColorSchema();
-		const istd::CIndex2d* nodes = GetNodes();
 
 		if (IsSelected()){
 			drawContext.save();
@@ -408,10 +402,10 @@ void CParallelogramShape::DrawFigure(QPainter& drawContext) const
 			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
 		}
 
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE11]), iqt::GetQPoint(nodes[EN_NODE12]));
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE12]), iqt::GetQPoint(nodes[EN_NODE22]));
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE22]), iqt::GetQPoint(nodes[EN_NODE21]));
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE21]), iqt::GetQPoint(nodes[EN_NODE11]));
+		drawContext.drawLine(m_nodes[EN_NODE11], m_nodes[EN_NODE12]);
+		drawContext.drawLine(m_nodes[EN_NODE12], m_nodes[EN_NODE22]);
+		drawContext.drawLine(m_nodes[EN_NODE22], m_nodes[EN_NODE21]);
+		drawContext.drawLine(m_nodes[EN_NODE21], m_nodes[EN_NODE11]);
 
 		drawContext.restore();
 	}
@@ -428,11 +422,10 @@ i2d::CRect CParallelogramShape::CalcBoundingBox() const
 	const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
 	EnsureValidNodes();
-	const istd::CIndex2d* nodes = GetNodes();
 
-	i2d::CRect boundingBox(nodes[EN_NODE11], nodes[EN_NODE11]);
+	i2d::CRect boundingBox(m_nodes[EN_NODE11].ToIndex2d(), m_nodes[EN_NODE11].ToIndex2d());
 	for (int nodeIndex = EN_NODE11 + 1; nodeIndex <= EN_LAST; ++nodeIndex){
-		boundingBox.Union(nodes[nodeIndex]);
+		boundingBox.Union(m_nodes[nodeIndex].ToIndex2d());
 	}
 
 	boundingBox.Expand(tickerBox);

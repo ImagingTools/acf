@@ -85,7 +85,6 @@ bool CTransformableRectangleShape::OnMouseButton(istd::CIndex2d position, Qt::Mo
 
 		if (downFlag && IsSelected()){
 			EnsureValidNodes();
-			const istd::CIndex2d* nodes = GetNodes();
 			const IColorSchema& colorSchema = GetColorSchema();
 
 			const i2d::CRect& normalBox = colorSchema.GetTickerBox(IColorSchema::TT_NORMAL);
@@ -93,41 +92,41 @@ bool CTransformableRectangleShape::OnMouseButton(istd::CIndex2d position, Qt::Mo
 			if (m_isEditableRotation){
 				const i2d::CRect& rotateBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_ROTATE: IColorSchema::TT_INACTIVE);
 
-				if (rotateBox.IsInside(position - nodes[EN_ROTATION1])){
+				if (rotateBox.IsInside(position - m_screenNodes[EN_ROTATION1].ToIndex2d())){
 					m_mouseMode = MM_ROTATION1;
 				}
-				else if (rotateBox.IsInside(position - nodes[EN_ROTATION2])){
+				else if (rotateBox.IsInside(position - m_screenNodes[EN_ROTATION2].ToIndex2d())){
 					m_mouseMode = MM_ROTATION2;
 				}
 			}
 			if ((m_isEditableWidth && m_isEditableHeight) || m_isProportionalScaled){
-				if (normalBox.IsInside(position - nodes[EN_NODE1])){
+				if (normalBox.IsInside(position - m_screenNodes[EN_NODE1].ToIndex2d())){
 					m_mouseMode = MM_SIZE1;
 				}
-				else if (normalBox.IsInside(position - nodes[EN_NODE2])){
+				else if (normalBox.IsInside(position - m_screenNodes[EN_NODE2].ToIndex2d())){
 					m_mouseMode = MM_SIZE2;
 				}
-				else if (normalBox.IsInside(position - nodes[EN_NODE3])){
+				else if (normalBox.IsInside(position - m_screenNodes[EN_NODE3].ToIndex2d())){
 					m_mouseMode = MM_SIZE3;
 				}
-				else if (normalBox.IsInside(position - nodes[EN_NODE4])){
+				else if (normalBox.IsInside(position - m_screenNodes[EN_NODE4].ToIndex2d())){
 					m_mouseMode = MM_SIZE4;
 				}
 			}
 			if (!m_isProportionalScaled){
 				if (m_isEditableWidth){
-					if (normalBox.IsInside(position - nodes[EN_MIDDLE12])){
+					if (normalBox.IsInside(position - m_screenNodes[EN_MIDDLE12].ToIndex2d())){
 						m_mouseMode = MM_HEIGHT1;
 					}
-					else if (normalBox.IsInside(position - nodes[EN_MIDDLE34])){
+					else if (normalBox.IsInside(position - m_screenNodes[EN_MIDDLE34].ToIndex2d())){
 						m_mouseMode = MM_HEIGHT2;
 					}
 				}
 				if (m_isEditableHeight){
-					if (normalBox.IsInside(position - nodes[EN_MIDDLE23])){
+					if (normalBox.IsInside(position - m_screenNodes[EN_MIDDLE23].ToIndex2d())){
 						m_mouseMode = MM_WIDTH1;
 					}
-					else if (normalBox.IsInside(position - nodes[EN_MIDDLE41])){
+					else if (normalBox.IsInside(position - m_screenNodes[EN_MIDDLE41].ToIndex2d())){
 						m_mouseMode = MM_WIDTH2;
 					}
 				}
@@ -153,8 +152,7 @@ bool CTransformableRectangleShape::OnMouseMove(istd::CIndex2d position)
 	if (parallelogramPtr != NULL){
 		const i2d::CAffine2d& parallTransform = parallelogramPtr->GetTransform();
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		i2d::CVector2d cp = transform.GetClientPosition(position);
+		i2d::CVector2d cp = GetLogPosition(position);
 
 		parallelogramPtr->SetTransform(CalcMoveTransform(cp, parallTransform).GetApply(parallTransform));
 
@@ -186,17 +184,17 @@ void CTransformableRectangleShape::CalcNodes(const i2d::CAffine2d& parallTransfo
 	const i2d::CVector2d& middle41 = (node4 + node1) * 0.5;
 	const i2d::CVector2d& rotation1 = node1 + axisX * 0.5 + axisY * 0.25;
 	const i2d::CVector2d& rotation2 = node1 + axisX * 0.25 + axisY * 0.5;
-	m_nodes[EN_NODE1] = node1.ToIndex2d();
-	m_nodes[EN_NODE2] = node2.ToIndex2d();
-	m_nodes[EN_NODE3] = node3.ToIndex2d();
-	m_nodes[EN_NODE4] = node4.ToIndex2d();
-	m_nodes[EN_CENTER] = center.ToIndex2d();
-	m_nodes[EN_MIDDLE12] = middle12.ToIndex2d();
-	m_nodes[EN_MIDDLE23] = middle23.ToIndex2d();
-	m_nodes[EN_MIDDLE34] = middle34.ToIndex2d();
-	m_nodes[EN_MIDDLE41] = middle41.ToIndex2d();
-	m_nodes[EN_ROTATION1] = rotation1.ToIndex2d();
-	m_nodes[EN_ROTATION2] = rotation2.ToIndex2d();
+	m_screenNodes[EN_NODE1] = GetScreenPosition(node1);
+	m_screenNodes[EN_NODE2] = GetScreenPosition(node2);
+	m_screenNodes[EN_NODE3] = GetScreenPosition(node3);
+	m_screenNodes[EN_NODE4] = GetScreenPosition(node4);
+	m_screenNodes[EN_CENTER] = GetScreenPosition(center);
+	m_screenNodes[EN_MIDDLE12] = GetScreenPosition(middle12);
+	m_screenNodes[EN_MIDDLE23] = GetScreenPosition(middle23);
+	m_screenNodes[EN_MIDDLE34] = GetScreenPosition(middle34);
+	m_screenNodes[EN_MIDDLE41] = GetScreenPosition(middle41);
+	m_screenNodes[EN_ROTATION1] = GetScreenPosition(rotation1);
+	m_screenNodes[EN_ROTATION2] = GetScreenPosition(rotation2);
 
 	m_areNodesValid = true;
 }
@@ -205,7 +203,7 @@ void CTransformableRectangleShape::CalcNodes(const i2d::CAffine2d& parallTransfo
 void CTransformableRectangleShape::ResetNodes() const
 {
 	for (int i = 0; i < EN_LAST; ++i){
-		m_nodes[i].Reset();
+		m_screenNodes[i].Reset();
 	}
 	m_areNodesValid = true;
 }
@@ -218,8 +216,8 @@ void CTransformableRectangleShape::EnsureValidNodes() const
 		const i2d::CParallelogram* parallelogramPtr = dynamic_cast<const i2d::CParallelogram*>(modelPtr);
 		if (parallelogramPtr != NULL){
 			const i2d::CAffine2d& parallTransform = parallelogramPtr->GetTransform();
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-			CalcNodes(transform.GetApply(parallTransform));
+
+			CalcNodes(parallTransform);
 		}
 		else{
 			ResetNodes();
@@ -281,34 +279,33 @@ bool CTransformableRectangleShape::IsTickerTouched(istd::CIndex2d position) cons
 
 		const i2d::CRect& normalBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 		EnsureValidNodes();
-		const istd::CIndex2d* nodes = GetNodes();
 
 		if (m_isEditableRotation){
 			const i2d::CRect& rotateBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_ROTATE: IColorSchema::TT_INACTIVE);
 
-			if (			rotateBox.IsInside(position - nodes[EN_ROTATION1]) ||
-							rotateBox.IsInside(position - nodes[EN_ROTATION2])){
+			if (			rotateBox.IsInside(position - m_screenNodes[EN_ROTATION1].ToIndex2d()) ||
+							rotateBox.IsInside(position - m_screenNodes[EN_ROTATION2].ToIndex2d())){
 				return true;
 			}
 		}
 		if ((m_isEditableWidth && m_isEditableHeight) || m_isProportionalScaled){
-			if (			normalBox.IsInside(position - nodes[EN_NODE1]) ||
-							normalBox.IsInside(position - nodes[EN_NODE2]) ||
-							normalBox.IsInside(position - nodes[EN_NODE3]) ||
-							normalBox.IsInside(position - nodes[EN_NODE4])){
+			if (			normalBox.IsInside(position - m_screenNodes[EN_NODE1].ToIndex2d()) ||
+							normalBox.IsInside(position - m_screenNodes[EN_NODE2].ToIndex2d()) ||
+							normalBox.IsInside(position - m_screenNodes[EN_NODE3].ToIndex2d()) ||
+							normalBox.IsInside(position - m_screenNodes[EN_NODE4].ToIndex2d())){
 				return true;
 			}
 		}
 		if (!m_isProportionalScaled){
 			if (m_isEditableWidth){
-				if (			normalBox.IsInside(position - nodes[EN_MIDDLE12]) ||
-								normalBox.IsInside(position - nodes[EN_MIDDLE34])){
+				if (			normalBox.IsInside(position - m_screenNodes[EN_MIDDLE12].ToIndex2d()) ||
+								normalBox.IsInside(position - m_screenNodes[EN_MIDDLE34].ToIndex2d())){
 					return true;
 				}
 			}
 			if (m_isEditableHeight){
-				if (			normalBox.IsInside(position - nodes[EN_MIDDLE23]) ||
-								normalBox.IsInside(position - nodes[EN_MIDDLE41])){
+				if (			normalBox.IsInside(position - m_screenNodes[EN_MIDDLE23].ToIndex2d()) ||
+								normalBox.IsInside(position - m_screenNodes[EN_MIDDLE41].ToIndex2d())){
 					return true;
 				}
 			}
@@ -336,34 +333,33 @@ void CTransformableRectangleShape::DrawTickers(QPainter& drawContext) const
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		EnsureValidNodes();
-		const istd::CIndex2d* nodes = GetNodes();
 
 		if (IsSelected()){
 			drawContext.save();
 			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_SELECTED));
 			if (m_isEditableRotation){
-				drawContext.drawLine(iqt::GetQPoint(nodes[EN_CENTER]), iqt::GetQPoint(nodes[EN_ROTATION1]));
-				drawContext.drawLine(iqt::GetQPoint(nodes[EN_CENTER]), iqt::GetQPoint(nodes[EN_ROTATION2]));
-				colorSchema.DrawTicker(drawContext, nodes[EN_ROTATION1], IColorSchema::TT_ROTATE);
-				colorSchema.DrawTicker(drawContext, nodes[EN_ROTATION2], IColorSchema::TT_ROTATE);
+				drawContext.drawLine(m_screenNodes[EN_CENTER], m_screenNodes[EN_ROTATION1]);
+				drawContext.drawLine(m_screenNodes[EN_CENTER], m_screenNodes[EN_ROTATION2]);
+				colorSchema.DrawTicker(drawContext, m_screenNodes[EN_ROTATION1].ToIndex2d(), IColorSchema::TT_ROTATE);
+				colorSchema.DrawTicker(drawContext, m_screenNodes[EN_ROTATION2].ToIndex2d(), IColorSchema::TT_ROTATE);
 			}
 
-			colorSchema.DrawTicker(drawContext, nodes[EN_CENTER], IColorSchema::TT_SELECTED_INACTIVE);
+			colorSchema.DrawTicker(drawContext, m_screenNodes[EN_CENTER].ToIndex2d(), IColorSchema::TT_SELECTED_INACTIVE);
 
 			if ((m_isEditableWidth && m_isEditableHeight) || m_isProportionalScaled){
-				colorSchema.DrawTicker(drawContext, nodes[EN_NODE1], IColorSchema::TT_NORMAL);
-				colorSchema.DrawTicker(drawContext, nodes[EN_NODE2], IColorSchema::TT_NORMAL);
-				colorSchema.DrawTicker(drawContext, nodes[EN_NODE3], IColorSchema::TT_NORMAL);
-				colorSchema.DrawTicker(drawContext, nodes[EN_NODE4], IColorSchema::TT_NORMAL);
+				colorSchema.DrawTicker(drawContext, m_screenNodes[EN_NODE1].ToIndex2d(), IColorSchema::TT_NORMAL);
+				colorSchema.DrawTicker(drawContext, m_screenNodes[EN_NODE2].ToIndex2d(), IColorSchema::TT_NORMAL);
+				colorSchema.DrawTicker(drawContext, m_screenNodes[EN_NODE3].ToIndex2d(), IColorSchema::TT_NORMAL);
+				colorSchema.DrawTicker(drawContext, m_screenNodes[EN_NODE4].ToIndex2d(), IColorSchema::TT_NORMAL);
 			}
 			if (!m_isProportionalScaled){
 				if (m_isEditableWidth){
-					colorSchema.DrawTicker(drawContext, nodes[EN_MIDDLE12], IColorSchema::TT_NORMAL);
-					colorSchema.DrawTicker(drawContext, nodes[EN_MIDDLE34], IColorSchema::TT_NORMAL);
+					colorSchema.DrawTicker(drawContext, m_screenNodes[EN_MIDDLE12].ToIndex2d(), IColorSchema::TT_NORMAL);
+					colorSchema.DrawTicker(drawContext, m_screenNodes[EN_MIDDLE34].ToIndex2d(), IColorSchema::TT_NORMAL);
 				}
 				if (m_isEditableHeight){
-					colorSchema.DrawTicker(drawContext, nodes[EN_MIDDLE23], IColorSchema::TT_NORMAL);
-					colorSchema.DrawTicker(drawContext, nodes[EN_MIDDLE41], IColorSchema::TT_NORMAL);
+					colorSchema.DrawTicker(drawContext, m_screenNodes[EN_MIDDLE23].ToIndex2d(), IColorSchema::TT_NORMAL);
+					colorSchema.DrawTicker(drawContext, m_screenNodes[EN_MIDDLE41].ToIndex2d(), IColorSchema::TT_NORMAL);
 				}
 			}
 
@@ -379,7 +375,6 @@ void CTransformableRectangleShape::DrawFigure(QPainter& drawContext) const
 		const IColorSchema& colorSchema = GetColorSchema();
 
 		EnsureValidNodes();
-		const istd::CIndex2d* nodes = GetNodes();
 
 		if (IsSelected()){
 			drawContext.save();
@@ -390,10 +385,10 @@ void CTransformableRectangleShape::DrawFigure(QPainter& drawContext) const
 			drawContext.setPen(colorSchema.GetPen(IColorSchema::SP_NORMAL));
 		}
 
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE1]), iqt::GetQPoint(nodes[EN_NODE2]));
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE2]), iqt::GetQPoint(nodes[EN_NODE3]));
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE3]), iqt::GetQPoint(nodes[EN_NODE4]));
-		drawContext.drawLine(iqt::GetQPoint(nodes[EN_NODE4]), iqt::GetQPoint(nodes[EN_NODE1]));
+		drawContext.drawLine(m_screenNodes[EN_NODE1], m_screenNodes[EN_NODE2]);
+		drawContext.drawLine(m_screenNodes[EN_NODE2], m_screenNodes[EN_NODE3]);
+		drawContext.drawLine(m_screenNodes[EN_NODE3], m_screenNodes[EN_NODE4]);
+		drawContext.drawLine(m_screenNodes[EN_NODE4], m_screenNodes[EN_NODE1]);
 
 		drawContext.restore();
 	}
@@ -409,7 +404,6 @@ bool CTransformableRectangleShape::IsParallTouched(
 
 		const i2d::CVector2d& parallPosition = parallTransform.GetTranslation();
 		const i2d::CMatrix2d& parallDeform = parallTransform.GetDeformMatrix();
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 		const i2d::CVector2d& axisX  = parallDeform.GetAxisX();
 		const i2d::CVector2d& axisY  = parallDeform.GetAxisY();
@@ -418,32 +412,32 @@ bool CTransformableRectangleShape::IsParallTouched(
 
 		double logicalLineWidth = colorSchema.GetLogicalLineWidth();
 
-		i2d::CLine2d line(transform.GetApply(parallPosition), transform.GetApply(parallPosition + axisX));
+		i2d::CLine2d line(GetScreenPosition(parallPosition), GetScreenPosition(parallPosition + axisX));
 
 		if (line.GetDistance(screenPosition) < logicalLineWidth){
 			return true;
 		}
-		line.SetPoint1(transform.GetApply(parallPosition + axisX + axisY));
+		line.SetPoint1(GetScreenPosition(parallPosition + axisX + axisY));
 		if (line.GetDistance(screenPosition) < logicalLineWidth){
 			return true;
 		}
-		line.SetPoint2(transform.GetApply(parallPosition + axisY));
+		line.SetPoint2(GetScreenPosition(parallPosition + axisY));
 		if (line.GetDistance(screenPosition) < logicalLineWidth){
 			return true;
 		}
-		line.SetPoint1(transform.GetApply(parallPosition));
+		line.SetPoint1(GetScreenPosition(parallPosition));
 		if (line.GetDistance(screenPosition) < logicalLineWidth){
 			return true;
 		}
 
 		if (IsSelected()){
-			line.SetPoint1(transform.GetApply(parallPosition + (axisX + axisY) * 0.5));
-			line.SetPoint2(transform.GetApply(parallPosition + axisX * 0.5 + axisY * 0.25));
+			line.SetPoint1(GetScreenPosition(parallPosition + (axisX + axisY) * 0.5));
+			line.SetPoint2(GetScreenPosition(parallPosition + axisX * 0.5 + axisY * 0.25));
 			if (line.GetDistance(screenPosition) < logicalLineWidth){
 				return true;
 			}
 
-			line.SetPoint2(transform.GetApply(parallPosition + axisX * 0.25 + axisY * 0.5));
+			line.SetPoint2(GetScreenPosition(parallPosition + axisX * 0.25 + axisY * 0.5));
 			if (line.GetDistance(screenPosition) < logicalLineWidth){
 				return true;
 			}
@@ -558,11 +552,10 @@ i2d::CRect CTransformableRectangleShape::CalcBoundingBox() const
 	const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_NORMAL: IColorSchema::TT_INACTIVE);
 
 	EnsureValidNodes();
-	const istd::CIndex2d* nodes = GetNodes();
 
-	i2d::CRect boundingBox(nodes[EN_NODE1], nodes[EN_NODE1]);
+	i2d::CRect boundingBox(m_screenNodes[EN_NODE1].ToIndex2d(), m_screenNodes[EN_NODE1].ToIndex2d());
 	for (int nodeIndex = 0; nodeIndex <= EN_LAST; ++nodeIndex){
-		boundingBox.Union(nodes[nodeIndex]);
+		boundingBox.Union(m_screenNodes[nodeIndex].ToIndex2d());
 	}
 
 	boundingBox.Expand(tickerBox);

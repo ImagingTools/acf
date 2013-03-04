@@ -7,6 +7,7 @@
 
 // ACF includes
 #include "istd/TRanges.h"
+#include "i2d/CObject2dBase.h"
 #include "i2d/CRect.h"
 #include "i2d/CCircle.h"
 #include "i2d/CAnnulus.h"
@@ -23,7 +24,9 @@ namespace iimg
 /**
 	Representation of a 2D-region as container of bitmap line scans.
 */
-class CScanlineMask: virtual public IRasterImage
+class CScanlineMask:
+			public i2d::CObject2dBase,
+			virtual public IRasterImage
 {
 public:
 	CScanlineMask();
@@ -32,11 +35,6 @@ public:
 		Check if region is empty.
 	*/
 	bool IsBitmapRegionEmpty() const;
-
-	/**
-		Get bounding box of this region.
-	*/
-	i2d::CRect GetBoundingBox() const;
 
 	/**
 		Get the list of pixel ranges per given line.
@@ -123,6 +121,11 @@ public:
 		Translated (move) this mask.
 	*/
 	void Translate(int dx, int dy);
+
+	// reimplemented (i2d::IObject2d)
+	virtual i2d::CVector2d GetCenter() const;
+	virtual void MoveCenterTo(const i2d::CVector2d& position);
+	virtual i2d::CRectangle GetBoundingBox() const;
 
 	// reimplemented (iimg::IRasterImage)
 	virtual bool IsEmpty() const;

@@ -5,9 +5,7 @@
 // ACF includes
 #include "istd/TPointerVector.h"
 #include "i2d/ICalibration2d.h"
-#include "i2d/ICalibrationProvider.h"
 #include "iview/IShapeView.h"
-#include "iview/ILogicalView.h"
 #include "iview/CShapeBase.h"
 #include "iview/CCalibratedViewBase.h"
 #include "iqt2d/IViewProvider.h"
@@ -29,7 +27,6 @@ public:
 		I_ASSIGN(m_slaveExtenderCompPtr, "SlaveSceneExtender", "Scene extender will be used to provide background shapes", false, "SlaveSceneExtender");
 		I_ASSIGN(m_sceneExtenderModeAttrPtr, "ViewExtenderMode", "Control how the view extender works:\n\t0 - combine slave with current shapes\n\t1 - use slave by direct calls only\n\t2 - use slave always and current shapes indirect only\n\t3 - use slave by direct calls only and current shapes indirect only", true, 0);
 		I_ASSIGN_MULTI_0(m_idFiltersAttrPtr, "SceneIdFilters", "Optional scene ID filters allowing to ignore some scene providers", false);
-		I_ASSIGN(m_viewCalibrationProviderCompPtr, "ViewCalibrationProvider", "Calibration provider for the view", false, "ViewCalibrationProvider");
 	I_END_COMPONENT;
 
 	TViewExtenderCompBase();
@@ -55,13 +52,7 @@ protected:
 
 	void UpdateAllViews();
 
-	/**
-		Update console calibration.
-	*/
-	void UpdateViewCalibration(iview::IShapeView* viewPtr);
-
 	// abstract methods
-
 	/**
 		Create shapes for the view.
 		\param 
@@ -73,7 +64,6 @@ private:
 	bool m_isSlaveShown;
 
 	I_REF(IViewExtender, m_slaveExtenderCompPtr);
-	I_REF(i2d::ICalibrationProvider, m_viewCalibrationProviderCompPtr);
 	I_ATTR(int, m_sceneExtenderModeAttrPtr);
 	I_MULTIATTR(int, m_idFiltersAttrPtr);
 
@@ -157,10 +147,6 @@ void TViewExtenderCompBase<Base>::AddItemsToScene(IViewProvider* providerPtr, in
 	else{
 		m_isSlaveShown = false;
 	}
-
-	if (flags & SF_DIRECT){
-		UpdateViewCalibration(viewPtr);
-	}
 }
 
 
@@ -192,23 +178,6 @@ void TViewExtenderCompBase<Base>::RemoveItemsFromScene(IViewProvider* providerPt
 		}
 
 		m_shapesMap.erase(iter);
-
-		if (m_viewCalibrationProviderCompPtr.IsValid()){
-			iview::CCalibratedViewBase* calibratedViewPtr = dynamic_cast<iview::CCalibratedViewBase*>(viewPtr);
-			if (calibratedViewPtr != NULL){
-				m_viewCalibrationPtr.Reset();
-
-				calibratedViewPtr->SetCalibrationPtr(NULL);
-			}
-
-			iview::ILogicalView* logicalViewPtr = dynamic_cast<iview::ILogicalView*>(viewPtr);
-			if (logicalViewPtr != NULL){
-				i2d::CAffine2d logToViewTransform;
-				logToViewTransform.Reset();
-
-				logicalViewPtr->SetLogToViewTransform(logToViewTransform);
-			}
-		}
 	}
 }
 
@@ -251,44 +220,7 @@ void TViewExtenderCompBase<Base>::UpdateAllViews()
 		iview::IShapeView* viewPtr = viewProvderPtr->GetView();
 		Q_ASSERT(viewPtr != NULL);
 
-		UpdateViewCalibration(viewPtr);
-
 		viewPtr->Update();
-	}
-}
-
-
-template <class Base>
-void TViewExtenderCompBase<Base>::UpdateViewCalibration(iview::IShapeView* viewPtr)
-{
-	if (m_viewCalibrationProviderCompPtr.IsValid()){
-		const i2d::ICalibration2d* viewCalibrationPtr = m_viewCalibrationProviderCompPtr->GetCalibration();
-
-		iview::CCalibratedViewBase* calibratedViewPtr = dynamic_cast<iview::CCalibratedViewBase*>(viewPtr);
-		if (calibratedViewPtr != NULL){
-			if (viewCalibrationPtr != NULL){
-				m_viewCalibrationPtr.SetCastedOrRemove(viewCalibrationPtr->CloneMe());
-			}
-			else{
-				m_viewCalibrationPtr.Reset();
-			}
-
-			calibratedViewPtr->SetCalibrationPtr(m_viewCalibrationPtr.GetPtr());
-		}
-		
-		i2d::CAffine2d logToViewTransform;
-
-		if (viewCalibrationPtr != NULL){
-			viewCalibrationPtr->GetLocalTransform(i2d::CVector2d(0, 0), logToViewTransform);
-		}
-		else{
-			logToViewTransform.Reset();
-		}
-
-		iview::ILogicalView* logicalViewPtr = dynamic_cast<iview::ILogicalView*>(viewPtr);
-		if (logicalViewPtr != NULL){
-			logicalViewPtr->SetLogToViewTransform(logToViewTransform);
-		}
 	}
 }
 

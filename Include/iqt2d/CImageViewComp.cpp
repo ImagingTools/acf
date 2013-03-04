@@ -9,21 +9,6 @@ namespace iqt2d
 {
 
 
-// public methods
-
-// reimplemented (i2d::ICalibrationProvider)
-
-const i2d::ICalibration2d* CImageViewComp::GetCalibration() const
-{
-	const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetModelPtr());
-	if (calibrationProviderPtr != NULL){
-		return calibrationProviderPtr->GetCalibration();
-	}
-
-	return NULL;
-}
-
-
 // protected methods
 
 // reimplemented (iqtgui::TGuiObserverWrap)
@@ -38,16 +23,6 @@ void CImageViewComp::UpdateGui(int /*updateFlags*/)
 		i2d::CRectangle areaRect(imagePtr->GetImageSize());
 
 		consolePtr->GetViewRef().SetFitArea(areaRect);
-	}
-
-	if (*m_useBitmapCalibrationAttrPtr){
-		const i2d::ICalibration2d* transformationPtr = NULL;
-		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(GetModelPtr());
-		if (calibrationProviderPtr != NULL){
-			transformationPtr = calibrationProviderPtr->GetCalibration();
-		}
-
-		SetConsoleCalibration(transformationPtr);
 	}
 
 	consolePtr->UpdateView();

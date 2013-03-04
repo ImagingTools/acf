@@ -48,13 +48,17 @@ protected:
 
 	bool m_isCenterVisible;
 
-	bool m_editRadiusMode;
 	bool m_isEditableRadius;
-
-	// true when the outer radius is being edited
-	bool m_editRadius2Mode;
-	// true when the outer radius is editable
 	bool m_isEditableRadius2;
+
+	enum EditMode
+	{
+		EM_NONE,
+		EM_INNER_RADIUS,
+		EM_OUTER_RADIUS
+	};
+
+	int m_editMode;
 };
 
 

@@ -10,17 +10,19 @@ namespace iview
 
 
 CShapeBase::CShapeBase()
+:	m_displayPtr(NULL),
+	m_calibrationObserver(this)
 {
 	m_isVisible = true;
 	m_userColorSchemaPtr = NULL;
-	m_displayPtr = NULL;
 	m_isBoundingBoxValid = false;
 	m_layerType = iview::IViewLayer::LT_INACTIVE;
+	m_shapeTransformMode = STM_SHAPE;
 }
 
 
 CShapeBase::CShapeBase(const CShapeBase& shape)
-:	BaseClass2(shape)
+:	m_calibrationObserver(this)
 {
 	Q_ASSERT(shape.m_displayPtr == NULL);	// Copy contructor not allowed for shapes connected to view
 
@@ -30,6 +32,7 @@ CShapeBase::CShapeBase(const CShapeBase& shape)
 	m_isVisible = shape.m_isVisible;
 	m_isBoundingBoxValid = false;
 	m_layerType = shape.m_layerType;
+	m_shapeTransformMode = shape.m_shapeTransformMode;
 }
 
 
@@ -63,8 +66,6 @@ bool CShapeBase::AssignToLayer(int layerType)
 }
 
 
-// reimplemented (iview::CShapeControl)
-
 void CShapeBase::Invalidate(int /*changeFlags*/)
 {
 	InvalidateBoundingBox();
@@ -78,6 +79,22 @@ void CShapeBase::Invalidate(int /*changeFlags*/)
 IDisplay* CShapeBase::GetDisplayPtr() const
 {
 	return m_displayPtr;
+}
+
+
+CShapeBase::ShapeTransformMode CShapeBase::GetTransformMode() const
+{
+	return m_shapeTransformMode;
+}
+
+
+void CShapeBase::SetTransformMode(ShapeTransformMode mode)
+{
+	if (m_shapeTransformMode != mode){
+		m_shapeTransformMode = mode;
+
+		Invalidate(CS_CONSOLE);
+	}
 }
 
 
@@ -157,9 +174,7 @@ bool CShapeBase::OnDisplayChange(int flags)
 {
 	if (flags & GetDisplayChangesMask()){
 		InvalidateBoundingBox();
-		if ((flags & CF_TRANSFORM) != 0){
-			InvalidateTransforms();
-		}
+
 		return true;
 	}
 	return false;
@@ -184,7 +199,15 @@ QString CShapeBase::GetShapeDescriptionAt(istd::CIndex2d /*position*/) const
 
 bool CShapeBase::OnAttached(imod::IModel* modelPtr)
 {
-	bool retVal = BaseClass3::OnAttached(modelPtr);
+	bool retVal = BaseClass::OnAttached(modelPtr);
+
+	const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(modelPtr);
+	if (object2dPtr != NULL){
+		i2d::ICalibration2d* calibrationPtr = const_cast<i2d::ICalibration2d*>(object2dPtr->GetCalibration());
+		if (calibrationPtr != NULL){
+			m_calibrationObserver.AttachOrSetObject(calibrationPtr);
+		}
+	}
 
 	Invalidate(CS_CONSOLE);
 
@@ -194,7 +217,9 @@ bool CShapeBase::OnAttached(imod::IModel* modelPtr)
 
 bool CShapeBase::OnDetached(imod::IModel* modelPtr)
 {
-	bool retVal = BaseClass3::OnDetached(modelPtr);
+	m_calibrationObserver.EnsureModelDetached();
+
+	bool retVal = BaseClass::OnDetached(modelPtr);
 
 	Invalidate(CS_CONSOLE);
 
@@ -204,11 +229,74 @@ bool CShapeBase::OnDetached(imod::IModel* modelPtr)
 
 void CShapeBase::OnUpdate(int changeFlags, istd::IPolymorphic* /*updateParamsPtr*/)
 {
+	const i2d::IObject2d* object2dPtr = dynamic_cast<const i2d::IObject2d*>(GetModelPtr());
+	if (object2dPtr != NULL){
+		i2d::ICalibration2d* calibrationPtr = const_cast<i2d::ICalibration2d*>(object2dPtr->GetCalibration());
+		if ((calibrationPtr != NULL) && (calibrationPtr != m_calibrationObserver.GetObjectPtr())){
+			m_calibrationObserver.AttachOrSetObject(calibrationPtr);
+		}
+	}
+
 	Invalidate(changeFlags);
 }
 
 
 // protected methods
+
+i2d::CVector2d CShapeBase::GetScreenPosition(const i2d::CVector2d& logPosition) const
+{
+	const iview::CScreenTransform& transform = GetViewToScreenTransform();
+
+	switch (m_shapeTransformMode){
+	case STM_SHAPE:
+		{
+			const i2d::ITransformation2d* calibrationPtr = m_calibrationObserver.GetObjectPtr();
+
+			if (calibrationPtr != NULL){
+				i2d::CVector2d calibratedPosition;
+				if (!calibrationPtr->GetValueAt(logPosition, calibratedPosition)){
+					calibratedPosition = logPosition;
+				}
+
+				return transform.GetApply(calibratedPosition);
+			}
+			else{
+				return transform.GetApply(logPosition);
+			}
+		}
+
+	default:
+		return transform.GetApply(logPosition);
+	}
+}
+
+
+i2d::CVector2d CShapeBase::GetLogPosition(const i2d::CVector2d& screenPosition) const
+{
+	const iview::CScreenTransform& transform = GetViewToScreenTransform();
+
+	i2d::CVector2d logPosition = transform.GetInvertedApply(screenPosition);
+
+	switch (m_shapeTransformMode){
+	case STM_SHAPE:
+		{
+			const i2d::ITransformation2d* calibrationPtr = m_calibrationObserver.GetObjectPtr();
+
+			if (calibrationPtr != NULL){
+				i2d::CVector2d calibratedPosition;
+				if (calibrationPtr->GetInvValueAt(logPosition, calibratedPosition)){
+					return calibratedPosition;
+				}
+			}
+		}
+
+	default:
+		break;
+	}
+
+	return logPosition;
+}
+
 
 int CShapeBase::GetDisplayChangesMask()
 {
@@ -218,7 +306,6 @@ int CShapeBase::GetDisplayChangesMask()
 
 void CShapeBase::InvalidateBoundingBox()
 {
-	InvalidateTransforms();
 	m_isBoundingBoxValid = false;
 }
 
@@ -269,13 +356,30 @@ void CShapeBase::DisconnectDisplay()
 }
 
 
-// reimplemented (iview::CShapeControl)
-
 const iview::CScreenTransform& CShapeBase::GetViewToScreenTransform() const
 {
 	Q_ASSERT(IsDisplayConnected());
 
 	return m_displayPtr->GetTransform();
+}
+
+
+// public methods of embedded class CalibrationObserver
+
+CShapeBase::CalibrationObserver::CalibrationObserver(CShapeBase* parentPtr)
+:	m_parentPtr(parentPtr)
+{
+	Q_ASSERT(m_parentPtr != NULL);
+}
+
+
+// reimplemented (imod::CSingleModelObserverBase)
+
+void CShapeBase::CalibrationObserver::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	m_parentPtr->Invalidate(CS_CONSOLE);
 }
 
 

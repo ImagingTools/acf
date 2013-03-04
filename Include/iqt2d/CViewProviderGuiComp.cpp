@@ -42,33 +42,22 @@ iview::IShapeView* CViewProviderGuiComp::GetView() const
 }
 
 
-// protected methods
+// reimplemented (i2d::ICalibrationProvider)
 
-void CViewProviderGuiComp::SetConsoleCalibration(const i2d::ICalibration2d* calibrationPtr)
+const i2d::ICalibration2d* CViewProviderGuiComp::GetCalibration() const
 {
-	if (!IsGuiCreated()){
-		return;
-	}
-
 	iview::CConsoleGui* consolePtr = GetQtWidget();
-	Q_ASSERT(consolePtr != NULL);
+	if (consolePtr != NULL){
+		const iview::CViewport& view = consolePtr->GetView();
 
-	iview::CViewport& view = consolePtr->GetViewRef();
-
-	view.SetCalibrationPtr(calibrationPtr);
-
-	i2d::CAffine2d logToViewTransform;
-
-	if (calibrationPtr != NULL){
-		calibrationPtr->GetLocalInvTransform(i2d::CVector2d(0, 0), logToViewTransform);
-	}
-	else{
-		logToViewTransform.Reset();
+		return view.GetCalibration();
 	}
 
-	view.SetLogToViewTransform(logToViewTransform);
+	return NULL;
 }
 
+
+// protected methods
 
 void CViewProviderGuiComp::OnGuiCreated()
 {
@@ -142,10 +131,15 @@ void CViewProviderGuiComp::OnGuiCreated()
 
 void CViewProviderGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
-	if (m_calibrationProviderCompPtr.IsValid()){
+	if (IsGuiCreated() && m_calibrationProviderCompPtr.IsValid()){
 		const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 
-		SetConsoleCalibration(calibrationPtr);
+		iview::CConsoleGui* consolePtr = GetQtWidget();
+		Q_ASSERT(consolePtr != NULL);
+
+		iview::CViewport& view = consolePtr->GetViewRef();
+
+		view.SetDisplayCalibration(calibrationPtr);
 	}
 }
 

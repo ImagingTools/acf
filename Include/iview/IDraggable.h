@@ -21,13 +21,13 @@ public:
 		Called before dragging is begin.
 		It set also reference value for dragging position.
 	*/
-	virtual void BeginDrag(const i2d::CVector2d& reference) = 0;
+	virtual void BeginDrag(const istd::CIndex2d& reference) = 0;
 
 	/**
 		Set new drag position.
 		It must be enclosed using BeginDrag() and EndDrag() methods.
 	*/
-	virtual void SetDragPosition(const i2d::CVector2d& position) = 0;
+	virtual void SetDragPosition(const istd::CIndex2d& position) = 0;
 	
 	/**
 		Called after dragging.

@@ -65,7 +65,7 @@ protected:
 		
 		\param transform LogToScreenTransform assigned to the view
 	*/
-	void ToScreen(const ControlPoints& points, ControlPoints& result, const i2d::ITransformation2d* calibrationPtr) const;
+	void GetScreenPoints(const ControlPoints& points, ControlPoints& result) const;
 	static void GetTransformedPoints(const ControlPoints& points, ControlPoints& result, const i2d::CAffineTransformation2d& transformation);
 
 	// reimplemented (iview::CShapeBase)

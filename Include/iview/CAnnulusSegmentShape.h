@@ -44,9 +44,11 @@ protected:
 
 	bool m_editableAngle;
 
-	bool m_editRadius2Mode;
-	bool m_editAngle1Mode;
-	bool m_editAngle2Mode;
+	enum EditMode
+	{
+		EM_ANGLE1 = EM_OUTER_RADIUS + 1,
+		EM_ANGLE2
+	};
 };
 
 

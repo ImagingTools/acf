@@ -14,7 +14,7 @@ namespace i2d
 // public methods
 
 CLabel::CLabel(const i2d::CVector2d& position, const QString& labelText)
-	:BaseClass(position), 
+:	BaseClass(position), 
 	m_text(labelText)
 {
 }

@@ -5,10 +5,7 @@
 #include <QtGui/QPainter>
 
 // ACF includes
-#include "i2d/CTubePolylineComp.h"
-
-#include "iqt/iqt.h"
-
+#include "i2d/CTubePolyline.h"
 #include "iview/IColorSchema.h"
 
 
@@ -20,8 +17,8 @@ CTubePolylineShape::CTubePolylineShape()
 {
 	m_isOrientationVisible = false;
 	m_isAlwaysDraggable = false;
-	m_draggedTickerIndex = -1;
-	m_draggedTickerType = TT_NONE;
+	m_editedNodeIndex = -1;
+	m_editMode = EM_NONE;
 }
  
 
@@ -32,14 +29,13 @@ void CTubePolylineShape::DrawCurve(QPainter& drawContext) const
 	const i2d::CTubePolyline* polylinePtr = dynamic_cast<const i2d::CTubePolyline*>(GetModelPtr());
 	if (IsDisplayConnected() && (polylinePtr != NULL)){
 		const iview::IColorSchema& colorSchema = GetColorSchema();
+
 		int nodesCount = polylinePtr->GetNodesCount();
 		if (nodesCount > 1){
 			int segmentsCount = polylinePtr->GetSegmentsCount();
 
 			i2d::CVector2d firstKneeVector = polylinePtr->GetKneeVector(0);
 			i2d::CVector2d firstPos = polylinePtr->GetNode(0);
-
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 			bool showOrientation = IsOrientationVisible();
 
@@ -50,9 +46,9 @@ void CTubePolylineShape::DrawCurve(QPainter& drawContext) const
 			i2d::CVector2d leftPos = firstPos - firstKneeVector * firstRange.GetMinValue();
 			i2d::CVector2d rightPos = firstPos - firstKneeVector * firstRange.GetMaxValue();
 
-			istd::CIndex2d prevScreenPoint = transform.GetScreenPosition(centerPos);
-			istd::CIndex2d prevLeftScreenPoint = transform.GetScreenPosition(leftPos);
-			istd::CIndex2d prevRightScreenPoint = transform.GetScreenPosition(rightPos);
+			i2d::CVector2d prevScreenPoint = GetScreenPosition(centerPos);
+			i2d::CVector2d prevLeftScreenPoint = GetScreenPosition(leftPos);
+			i2d::CVector2d prevRightScreenPoint = GetScreenPosition(rightPos);
 
 			bool isSelected = IsSelected();
 			
@@ -66,22 +62,23 @@ void CTubePolylineShape::DrawCurve(QPainter& drawContext) const
 				i2d::CVector2d kneeVector = polylinePtr->GetKneeVector(nodeIndex);
 				const i2d::CVector2d& nodePosition = polylinePtr->GetNode(nodeIndex);
 
-				istd::CIndex2d screenPoint = transform.GetScreenPosition(nodePosition);
+				i2d::CVector2d screenPoint = GetScreenPosition(nodePosition);
 
 				drawContext.setPen(linePen);
-				drawContext.drawLine(iqt::GetQPoint(prevScreenPoint), iqt::GetQPoint(screenPoint));
+				drawContext.drawLine(prevScreenPoint, screenPoint);
 
 				const i2d::CTubeNode& nodeData = polylinePtr->GetTNodeData(nodeIndex);
 				istd::CRange range = nodeData.GetTubeRange();
 
 				leftPos = nodePosition - kneeVector * range.GetMinValue();
 				rightPos = nodePosition - kneeVector * range.GetMaxValue();
-				istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
-				istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
+
+				i2d::CVector2d leftScreenPoint = GetScreenPosition(leftPos);
+				i2d::CVector2d rightScreenPoint = GetScreenPosition(rightPos);
 
 				drawContext.setPen(tubePen);
-				drawContext.drawLine(iqt::GetQPoint(prevLeftScreenPoint), iqt::GetQPoint(leftScreenPoint));
-				drawContext.drawLine(iqt::GetQPoint(prevRightScreenPoint), iqt::GetQPoint(rightScreenPoint));
+				drawContext.drawLine(prevLeftScreenPoint, leftScreenPoint);
+				drawContext.drawLine(prevRightScreenPoint, rightScreenPoint);
 
 				if ((nodePosition.GetDistance(centerPos) > I_BIG_EPSILON) && showOrientation){
 					double arrowWidth = qMin(leftPos.GetDistance(nodePosition), rightPos.GetDistance(nodePosition)) * 0.5;
@@ -89,12 +86,12 @@ void CTubePolylineShape::DrawCurve(QPainter& drawContext) const
 					i2d::CVector2d delta = (nodePosition - centerPos).GetNormalized(arrowWidth);
 					i2d::CVector2d orthogonalized = delta.GetOrthogonal();
 
-					istd::CIndex2d screenArrowBegin = transform.GetScreenPosition(nodePosition);
-					istd::CIndex2d screenArrowLeft = transform.GetScreenPosition(nodePosition - delta + orthogonalized);
-					istd::CIndex2d screenArrowRight = transform.GetScreenPosition(nodePosition - delta - orthogonalized);
+					i2d::CVector2d screenArrowBegin = GetScreenPosition(nodePosition);
+					i2d::CVector2d screenArrowLeft = GetScreenPosition(nodePosition - delta + orthogonalized);
+					i2d::CVector2d screenArrowRight = GetScreenPosition(nodePosition - delta - orthogonalized);
 
-					drawContext.drawLine(iqt::GetQPoint(screenArrowBegin), iqt::GetQPoint(screenArrowLeft));
-					drawContext.drawLine(iqt::GetQPoint(screenArrowBegin), iqt::GetQPoint(screenArrowRight));
+					drawContext.drawLine(screenArrowBegin, screenArrowLeft);
+					drawContext.drawLine(screenArrowBegin, screenArrowRight);
 				}
 
 				prevLeftScreenPoint = leftScreenPoint;
@@ -123,13 +120,7 @@ void CTubePolylineShape::DrawSelectionElements(QPainter& drawContext) const
 	if (IsDisplayConnected() && (polylinePtr != NULL)){
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 		int nodesCount = polylinePtr->GetNodesCount();
-
-		i2d::CVector2d centerPos;
-		i2d::CVector2d leftPos;
-		i2d::CVector2d rightPos;
 
 		for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
 			i2d::CVector2d kneeVector = polylinePtr->GetKneeVector(nodeIndex);
@@ -138,22 +129,23 @@ void CTubePolylineShape::DrawSelectionElements(QPainter& drawContext) const
 			const i2d::CTubeNode& nodeData = polylinePtr->GetTNodeData(nodeIndex);
 			istd::CRange range = nodeData.GetTubeRange();
 
-			istd::CIndex2d screenPoint = transform.GetScreenPosition(nodePosition);
+			i2d::CVector2d screenPoint = GetScreenPosition(nodePosition);
 
-			leftPos = nodePosition - kneeVector * range.GetMinValue();
-			rightPos = nodePosition - kneeVector * range.GetMaxValue();
-			istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
-			istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
+			i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
+			i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
+			i2d::CVector2d leftScreenPoint = GetScreenPosition(leftPos);
+			i2d::CVector2d rightScreenPoint = GetScreenPosition(rightPos);
 
 			if (true){
-				colorSchema.DrawTicker(drawContext, leftScreenPoint, iview::IColorSchema::TT_MOVE);
-				colorSchema.DrawTicker(drawContext, rightScreenPoint, iview::IColorSchema::TT_MOVE);
+				colorSchema.DrawTicker(drawContext, leftScreenPoint.ToIndex2d(), iview::IColorSchema::TT_MOVE);
+				colorSchema.DrawTicker(drawContext, rightScreenPoint.ToIndex2d(), iview::IColorSchema::TT_MOVE);
+
 				if ((nodeIndex > 0) && (nodeIndex < nodesCount - 1)){
-					colorSchema.DrawTicker(drawContext, screenPoint, iview::IColorSchema::TT_CHECKBOX_ON);
+					colorSchema.DrawTicker(drawContext, screenPoint.ToIndex2d(), iview::IColorSchema::TT_CHECKBOX_ON);
 				}
 			}
 			else{
-				colorSchema.DrawTicker(drawContext, screenPoint, iview::IColorSchema::TT_CHECKBOX_OFF);
+				colorSchema.DrawTicker(drawContext, screenPoint.ToIndex2d(), iview::IColorSchema::TT_CHECKBOX_OFF);
 			}
 		}
 	}
@@ -171,8 +163,6 @@ i2d::CRect CTubePolylineShape::CalcBoundingBox() const
 		if (nodesCount >= 1){
 			i2d::CVector2d firstPos = polylinePtr->GetNode(0);
 
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 			bool isSelected = IsSelected();
 
 			const iview::IColorSchema& colorSchema = GetColorSchema();
@@ -184,17 +174,18 @@ i2d::CRect CTubePolylineShape::CalcBoundingBox() const
 				const i2d::CTubeNode& tubeNode = polylinePtr->GetTNodeData(nodeIndex);
 				istd::CRange range = tubeNode.GetTubeRange();
 
-				istd::CIndex2d screenPoint = transform.GetScreenPosition(nodePosition);
-				result.Union(screenPoint);
+				i2d::CVector2d screenPoint = GetScreenPosition(nodePosition);
+				result.Union(screenPoint.ToIndex2d());
 
 				if (isSelected){
 					i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
 					i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
-					istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
-					istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
 
-					result.Union(leftScreenPoint);
-					result.Union(rightScreenPoint);
+					i2d::CVector2d leftScreenPoint = GetScreenPosition(leftPos);
+					i2d::CVector2d rightScreenPoint = GetScreenPosition(rightPos);
+
+					result.Union(leftScreenPoint.ToIndex2d());
+					result.Union(rightScreenPoint.ToIndex2d());
 				}
 			}
 			
@@ -214,16 +205,15 @@ i2d::CRect CTubePolylineShape::CalcBoundingBox() const
 
 bool CTubePolylineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
-	m_draggedTickerType = TT_NONE;
+	m_editMode = EM_NONE;
 
 	i2d::CTubePolyline* polylinePtr = dynamic_cast<i2d::CTubePolyline*>(GetModelPtr());
 
 	int editMode = GetEditMode();
 	if (editMode == iview::ISelectable::EM_MOVE){
 		if (IsDisplayConnected() && (polylinePtr != NULL)){
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 			const iview::IColorSchema& colorSchema = GetColorSchema();
+
 			const i2d::CRect& tickerBoxMove = colorSchema.GetTickerBox(iview::IColorSchema::TT_MOVE);
 
 			int nodesCount = polylinePtr->GetNodesCount();
@@ -234,27 +224,28 @@ bool CTubePolylineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton 
 				const i2d::CTubeNode& nodeData = polylinePtr->GetTNodeData(nodeIndex);
 				istd::CRange range = nodeData.GetTubeRange();
 
-				istd::CIndex2d screenPoint = transform.GetScreenPosition(nodePosition);
-
 				i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
 				i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
-				istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
-				istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
 
-				if (tickerBoxMove.GetTranslated(rightScreenPoint).IsInside(position)){
-					m_draggedTickerType = TT_RIGHT;
-					m_draggedTickerIndex = nodeIndex;
+				i2d::CVector2d leftScreenPoint = GetScreenPosition(leftPos);
+				i2d::CVector2d rightScreenPoint = GetScreenPosition(rightPos);
+
+				if (tickerBoxMove.IsInside(position - rightScreenPoint.ToIndex2d())){
+					m_editMode = EM_RIGHT;
+					m_editedNodeIndex = nodeIndex;
+
 					break;
 				}
 
-				if (tickerBoxMove.GetTranslated(leftScreenPoint).IsInside(position)){
-					m_draggedTickerType = TT_LEFT;
-					m_draggedTickerIndex = nodeIndex;
+				if (tickerBoxMove.IsInside(position - leftScreenPoint.ToIndex2d())){
+					m_editMode = EM_LEFT;
+					m_editedNodeIndex = nodeIndex;
+
 					break;
 				}
 			}
 
-			if (m_draggedTickerIndex >= 0 && (m_draggedTickerType == TT_LEFT || m_draggedTickerType == TT_RIGHT)){
+			if (m_editedNodeIndex >= 0 && (m_editMode == EM_LEFT || m_editMode == EM_RIGHT)){
 				if (downFlag){
 					BeginModelChanges();
 
@@ -269,7 +260,7 @@ bool CTubePolylineShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton 
 	}
 
 	if (BaseClass::OnMouseButton(position, buttonType, downFlag)){
-		m_draggedTickerType = TT_BASIC;
+		m_editMode = EM_BASIC;
 
 		if (editMode == iview::ISelectable::EM_ADD){
 			i2d::CTubeNode& nodeData = polylinePtr->GetTNodeDataRef(m_referenceIndex);
@@ -306,17 +297,16 @@ bool CTubePolylineShape::OnMouseMove(istd::CIndex2d position)
 	if (modelPtr != NULL){
 		int editMode = GetEditMode();
 		if (editMode == iview::ISelectable::EM_MOVE){
-			if (m_draggedTickerType == TT_LEFT || m_draggedTickerType == TT_RIGHT){
+			if (m_editMode == EM_LEFT || m_editMode == EM_RIGHT){
 				i2d::CTubePolyline* polylinePtr = dynamic_cast<i2d::CTubePolyline*>(GetModelPtr());
 				if (IsDisplayConnected() && (polylinePtr != NULL)){
-					i2d::CVector2d kneeVector = polylinePtr->GetKneeVector(m_draggedTickerIndex);
-					const i2d::CVector2d& nodePosition = polylinePtr->GetNode(m_draggedTickerIndex);
+					i2d::CVector2d kneeVector = polylinePtr->GetKneeVector(m_editedNodeIndex);
+					const i2d::CVector2d& nodePosition = polylinePtr->GetNode(m_editedNodeIndex);
 
-					i2d::CTubeNode& nodeData = polylinePtr->GetTNodeDataRef(m_draggedTickerIndex);
+					i2d::CTubeNode& nodeData = polylinePtr->GetTNodeDataRef(m_editedNodeIndex);
 					istd::CRange range = nodeData.GetTubeRange();
 
-					const iview::CScreenTransform& transform = GetLogToScreenTransform();
-					i2d::CVector2d currentPosition = transform.GetClientPosition(position);
+					i2d::CVector2d currentPosition = GetLogPosition(position);
 
 					i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
 					i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
@@ -324,7 +314,7 @@ bool CTubePolylineShape::OnMouseMove(istd::CIndex2d position)
 					int keysState = GetKeysState();
 					bool isSynchronized = ((keysState & Qt::ControlModifier) != 0);
 
-					if (m_draggedTickerType == TT_LEFT){
+					if (m_editMode == EM_LEFT){
 						i2d::CVector2d newPoint = i2d::CLine2d(leftPos, nodePosition).GetExtendedNearestPoint(currentPosition);
 						double newWidth = qMax(0.1, newPoint.GetDistance(nodePosition));
 
@@ -369,7 +359,7 @@ bool CTubePolylineShape::OnMouseMove(istd::CIndex2d position)
 		}
 	}
 
-	if (m_draggedTickerType == TT_NONE){
+	if (m_editMode == EM_NONE){
 		return true;
 	}
 
@@ -399,10 +389,6 @@ ITouchable::TouchState CTubePolylineShape::IsTouched(istd::CIndex2d position) co
 	if (IsDisplayConnected() && (polylinePtr != NULL)){
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
-		//const i2d::CRect& tickerBoxCheckboxOn = colorSchema.GetTickerBox(iview::IColorSchema::TT_CHECKBOX_ON);
-		//const i2d::CRect& tickerBoxCheckboxOff = colorSchema.GetTickerBox(iview::IColorSchema::TT_CHECKBOX_OFF);
 		const i2d::CRect& tickerBoxMove = colorSchema.GetTickerBox(iview::IColorSchema::TT_MOVE);
 
 		int nodesCount = polylinePtr->GetNodesCount();
@@ -415,33 +401,21 @@ ITouchable::TouchState CTubePolylineShape::IsTouched(istd::CIndex2d position) co
 			istd::CRange range = nodeData.GetTubeRange();
 			bool isActive = true;
 
-			istd::CIndex2d screenPoint = transform.GetScreenPosition(nodePosition);
-
 			i2d::CVector2d leftPos = nodePosition - kneeVector * range.GetMinValue();
 			i2d::CVector2d rightPos = nodePosition - kneeVector * range.GetMaxValue();
-			istd::CIndex2d leftScreenPoint = transform.GetScreenPosition(leftPos);
-			istd::CIndex2d rightScreenPoint = transform.GetScreenPosition(rightPos);
+
+			i2d::CVector2d leftScreenPoint = GetScreenPosition(leftPos);
+			i2d::CVector2d rightScreenPoint = GetScreenPosition(rightPos);
 
 			if (isActive){
-				//if ((nodeIndex > 0) && (nodeIndex < nodesCount - 1)){
-				//	if (tickerBoxCheckboxOn.GetTranslated(screenPoint).IsInside(position)){
-				//		return TS_TICKER;
-				//	}
-				//}
-
-				if (tickerBoxMove.GetTranslated(rightScreenPoint).IsInside(position)){
+				if (tickerBoxMove.IsInside(position - rightScreenPoint.ToIndex2d())){
 					return TS_TICKER;
 				}
 
-				if (tickerBoxMove.GetTranslated(leftScreenPoint).IsInside(position)){
+				if (tickerBoxMove.IsInside(position - leftScreenPoint.ToIndex2d())){
 					return TS_TICKER;
 				}
 			}
-			//else{
-			//	if (tickerBoxCheckboxOff.GetTranslated(screenPoint).IsInside(position)){
-			//		return TS_TICKER;
-			//	}
-			//}
 		}
 	}
 

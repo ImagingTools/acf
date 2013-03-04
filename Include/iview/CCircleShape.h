@@ -41,7 +41,13 @@ protected:
 	bool m_isEditableRadius;
 	bool m_isCenterVisible;
 
-	bool m_editRadiusMode;
+	enum EditMode
+	{
+		EM_NONE,
+		EM_RADIUS
+	};
+
+	int m_editMode;
 };
 
 

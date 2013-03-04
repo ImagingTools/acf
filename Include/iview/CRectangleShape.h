@@ -36,7 +36,7 @@ public:
 	virtual bool OnMouseMove(istd::CIndex2d position);
 
 protected:
-	void CalcPoints(const i2d::CRectangle& rectangle, const iview::CScreenTransform& transform) const;
+	void CalcPoints(const i2d::CRectangle& rectangle) const;
 
 	// reimplemented (iview::CInteractiveShapeBase)
 	virtual void BeginLogDrag(const i2d::CVector2d& reference);

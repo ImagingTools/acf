@@ -59,18 +59,19 @@ protected:
 	virtual void DrawSelectionElements(QPainter& drawContext) const;
 
 private:
-	enum TickerType{
-		TT_NONE,
-		TT_BASIC,
-		TT_LEFT,
-		TT_RIGHT
+	enum EditMode
+	{
+		EM_NONE,
+		EM_BASIC,
+		EM_LEFT,
+		EM_RIGHT
 	};
 
 	bool m_isAlwaysDraggable;
 	bool m_isOrientationVisible;
 
-	int m_draggedTickerType;
-	int m_draggedTickerIndex;
+	int m_editMode;
+	int m_editedNodeIndex;
 };
 
 

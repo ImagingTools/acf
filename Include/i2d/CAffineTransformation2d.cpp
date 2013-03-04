@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include "imod/TModelWrap.h"
 #include "istd/TChangeNotifier.h"
 
 
@@ -103,11 +104,11 @@ const ICalibration2d* CAffineTransformation2d::CreateCombinedCalibration(const I
 {
 	const CAffineTransformation2d* affineTransformPtr = dynamic_cast<const CAffineTransformation2d*>(&calibration);
 	if (affineTransformPtr != NULL){
-		i2d::CAffine2d combinedTransform;
+		i2d::CAffineTransformation2d* combinedTransformPtr = new imod::TModelWrap<CAffineTransformation2d>();
 
-		m_transformation.GetApply(affineTransformPtr->m_transformation, combinedTransform);
+		m_transformation.GetApply(affineTransformPtr->m_transformation, combinedTransformPtr->m_transformation);
 
-		return new CAffineTransformation2d(combinedTransform);;
+		return combinedTransformPtr;
 	}
 
 	return NULL;

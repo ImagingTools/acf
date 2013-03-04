@@ -19,7 +19,7 @@ namespace iview
 // public methods
 
 CCalibratedViewBase::CCalibratedViewBase()
-:	m_calibrationPtr(&i2d::CNoneCalibration2d::GetInstance()),
+:	m_calibrationPtr(NULL),
 	m_isGridVisible(false),
 	m_isGridInMm(true),
 	m_minGridDistance(10)
@@ -31,20 +31,15 @@ CCalibratedViewBase::CCalibratedViewBase()
 }
 
 
-void CCalibratedViewBase::SetCalibrationPtr(const i2d::ICalibration2d* calibrationPtr)
+void CCalibratedViewBase::SetDisplayCalibration(const i2d::ICalibration2d* calibrationPtr)
 {
 	if (calibrationPtr != m_calibrationPtr){
-		if (calibrationPtr != NULL){
-			m_calibrationPtr = calibrationPtr;
-		}
-		else{
-			m_calibrationPtr = &i2d::CNoneCalibration2d::GetInstance();
-		}
+		m_calibrationPtr = calibrationPtr;
 
 		InvalidateBackground();
-	}
 
-	UpdateAllShapes(iview::IShape::CF_CALIB);
+		UpdateAllShapes(iview::IShape::CF_CALIB);
+	}
 }
 
 

@@ -2,9 +2,9 @@
 #define iimg_IBitmap_included
 
 
-#include "iimg/IRasterImage.h"
-
+// ACF includes
 #include "i2d/CRectangle.h"
+#include "iimg/IRasterImage.h"
 
 
 namespace iimg

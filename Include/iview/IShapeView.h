@@ -122,10 +122,6 @@ public:
 		Inform that layer was invalidated.
 	*/
 	virtual void OnLayerInvalidated(const IViewLayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea) = 0;
-
-	// reimplemented (iview::ISelectable)
-	virtual void OnShapeFocused(IInteractiveShape* /*shapePtr*/){}
-	virtual void OnShapeDefocused(IInteractiveShape* /*shapePtr*/){}
 };
 
 

@@ -3,10 +3,11 @@
 
 
 // ACF includes
+#include "imod/TSingleModelObserverBase.h"
 #include "imod/CSingleModelObserverBase.h"
 #include "iview/IShape.h"
-#include "iview/CShapeControl.h"
-
+#include "iview/IDisplay.h"
+#include "iview/CScreenTransform.h"
 
 namespace iview
 {
@@ -14,13 +15,31 @@ namespace iview
 
 class CShapeBase:
 			public imod::CSingleModelObserverBase,
-			public CShapeControl,
 			virtual public IShape
-
 {
 public:
-	typedef CShapeControl BaseClass2;
-	typedef imod::CSingleModelObserverBase BaseClass3;
+	typedef imod::CSingleModelObserverBase BaseClass;
+
+	/**
+		Describe how shape tranformation is interpreted.
+	*/
+	enum ShapeTransformMode
+	{
+		/**
+			Shape transformation will be ignored, view transformation will be used.
+		*/
+		STM_VIEW,
+		
+		/**
+			View transformation will be ignored, shape transformation will be used.
+		*/
+		STM_SHAPE,
+		
+		/**
+			Both transformation will be used, shape transformation will be used as local transformation.
+		*/
+		STM_COMBINE
+	};
 
 	CShapeBase();
 	CShapeBase(const CShapeBase& shape);
@@ -32,9 +51,24 @@ public:
 	virtual void SetVisible(bool state = true);
 	virtual bool AssignToLayer(int layerType);
 
-	// reimplemented (iview::CShapeControl)
 	virtual void Invalidate(int changeFlags = 0);
-	virtual iview::IDisplay* GetDisplayPtr() const;
+
+	/**
+		Get access to currently connected display.
+	*/
+	iview::IDisplay* GetDisplayPtr() const;
+
+	/**
+		Get shape transformation mode.
+		This mode describes which transformation will be used to display shape.
+	*/
+	ShapeTransformMode GetTransformMode() const;
+	
+	/**
+		Set shape transformation mode.
+		This mode describes which transformation will be used to display shape.
+	*/
+	void SetTransformMode(ShapeTransformMode mode);
 
 	// reimplemented (iview::IShape)
 	virtual int GetLayerType() const;
@@ -60,11 +94,20 @@ public:
 
 protected:
 	/**
+		Get screen position based on logical position.
+	*/
+	i2d::CVector2d GetScreenPosition(const i2d::CVector2d& logPosition) const;
+	/**
+		Get logical position based on screen position.
+	*/
+	i2d::CVector2d GetLogPosition(const i2d::CVector2d& screenPosition) const;
+
+	/**
 		Get display changes mask.
 		Only changes there are in mask will be accepted, rest will be ignored.
 	*/
 	virtual int GetDisplayChangesMask();
-	
+
 	/**
 		Invalidate bounding box.
 		You can overload this method to provide validation of your internal attributes,
@@ -94,7 +137,6 @@ protected:
 
 	void DisconnectDisplay();
 
-	// reimplemented (iview::CShapeControl)
 	virtual const iview::CScreenTransform& GetViewToScreenTransform() const;
 
 	// abstract methods
@@ -105,12 +147,34 @@ protected:
 	virtual i2d::CRect CalcBoundingBox() const = 0;
 
 private:
-	const IColorSchema* m_userColorSchemaPtr;
+	class CalibrationObserver: public imod::TSingleModelObserverBase<i2d::ICalibration2d>
+	{
+	public:
+		CalibrationObserver(CShapeBase* parentPtr);
+
+		// reimplemented (imod::CSingleModelObserverBase)
+		virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	private:
+		CShapeBase* m_parentPtr;
+	};
+
 	IDisplay* m_displayPtr;
+
+	// calibration management
+	CalibrationObserver m_calibrationObserver;
+
+	// display meta information
+	const IColorSchema* m_userColorSchemaPtr;
+
+	// managemant of bounding box
 	mutable bool m_isBoundingBoxValid;
 	mutable i2d::CRect m_boundingBox;
-	int m_layerType;
+
+	// attributes
 	bool m_isVisible;
+	int m_layerType;
+	ShapeTransformMode m_shapeTransformMode;
 };
 
 

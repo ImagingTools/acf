@@ -37,8 +37,6 @@ void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
 		return;
 	}
 
-	const i2d::ICalibration2d* calibrationPtr = dynamic_cast<const i2d::ICalibration2d*>(transformationPtr);
-
 	const IColorSchema& colorSchema = GetColorSchema();
 
 	QPen baseSystemPen = colorSchema.GetPen(IColorSchema::SP_CYAN);
@@ -54,7 +52,7 @@ void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
 
 	const ControlPoints& cp = GetControlPoints();
 	ControlPoints sp;
-	ToScreen(cp, sp, calibrationPtr);
+	GetScreenPoints(cp, sp);
 
 	// draw base coordinate system
 	drawContext.setPen(baseSystemPen);
@@ -87,7 +85,7 @@ void CAffineTransformation2dShape::Draw(QPainter& drawContext) const
 	GetTransformedPoints(cp, tp, *transformationPtr);
 
 	ControlPoints tsp;
-	ToScreen(tp, tsp, calibrationPtr);
+	GetScreenPoints(tp, tsp);
 
 	drawContext.drawLine(tsp[0].GetX(), tsp[0].GetY(), tsp[1].GetX(), tsp[1].GetY());
 	points[0] = tsp[1];
@@ -154,12 +152,10 @@ ITouchable::TouchState CAffineTransformation2dShape::IsTouched(istd::CIndex2d po
 {
 	const i2d::CAffineTransformation2d* transformationPtr = dynamic_cast<const i2d::CAffineTransformation2d*>(GetModelPtr());
 	if (IsDisplayConnected() && (transformationPtr != NULL)){
-		const i2d::ICalibration2d* calibrationPtr = dynamic_cast<const i2d::ICalibration2d*>(transformationPtr);
-
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_NORMAL);
 
-		i2d::CVector2d cp = GetLogPosition(position, calibrationPtr);
+		i2d::CVector2d cp = GetLogPosition(position);
 
 		ControlPoints screenPoints;
 		GetTransformedPoints(GetControlPoints(), screenPoints, *transformationPtr);
@@ -208,13 +204,12 @@ const CAffineTransformation2dShape::ControlPoints& CAffineTransformation2dShape:
 }
 
 
-void CAffineTransformation2dShape::ToScreen(
+void CAffineTransformation2dShape::GetScreenPoints(
 			const ControlPoints& points,
-			ControlPoints& result,
-			const i2d::ITransformation2d* calibrationPtr) const
+			ControlPoints& result) const
 {
 	for (int i = 0; i < CONTROL_POINTS_COUNT; ++i){
-		result[i] = GetScreenPosition(points[i], calibrationPtr);
+		result[i] = GetScreenPosition(points[i]);
 	}
 }
 
@@ -239,18 +234,16 @@ i2d::CRect CAffineTransformation2dShape::CalcBoundingBox() const
 		return i2d::CRect::GetEmpty();
 	}
 
-	const i2d::ICalibration2d* calibrationPtr = dynamic_cast<const i2d::ICalibration2d*>(transformationPtr);
-
 	const ControlPoints& cp = GetControlPoints();
 
 	ControlPoints screenPoints;
-	ToScreen(cp, screenPoints, calibrationPtr);
+	GetScreenPoints(cp, screenPoints);
 
 	ControlPoints transformedPoints;
 	GetTransformedPoints(cp, transformedPoints, *transformationPtr);
 
 	ControlPoints transformedScreenPoints;
-	ToScreen(transformedPoints, transformedScreenPoints, calibrationPtr);
+	GetScreenPoints(transformedPoints, transformedScreenPoints);
 
 	i2d::CRect boundingBox(screenPoints[0].GetX(), screenPoints[0].GetY(), screenPoints[0].GetX(), screenPoints[0].GetY());
 

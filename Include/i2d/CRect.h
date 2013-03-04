@@ -175,11 +175,11 @@ public:
 	static const i2d::CRect& GetEmpty();
 
 private:
-	// static atributes
-	static CRect s_empty;
-
 	istd::CIntRange m_horizontalRange;
 	istd::CIntRange m_verticalRange;
+
+	// static atributes
+	static CRect s_empty;
 };
 
 

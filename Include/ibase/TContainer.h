@@ -39,6 +39,8 @@ public:
 	void RemoveAt(int index);
 	virtual void Reset();
 
+	TContainer& operator=(const TContainer& container);
+
 	// reimplemented (istd::IContainerInfo)
 	virtual int GetItemsCount() const;
 	virtual bool IsEmpty() const;
@@ -147,6 +149,15 @@ void TContainer<ItemClass>::Reset()
 	istd::CChangeNotifier changePtr(this, CF_MODEL | CF_RESET);
 
 	m_items.clear();
+}
+
+
+template <typename ItemClass>
+TContainer<ItemClass>& TContainer<ItemClass>::operator=(const TContainer& container)
+{
+	m_items = container.m_items;
+
+	return *this;
 }
 
 

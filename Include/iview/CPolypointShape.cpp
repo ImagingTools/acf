@@ -48,8 +48,6 @@ void CPolypointShape::Draw(QPainter& drawContext) const
 {
 	Q_ASSERT(IsDisplayConnected());
 
-	const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const i2d::CPolypoint& polypoint = *dynamic_cast<const i2d::CPolypoint*>(modelPtr);
@@ -62,7 +60,7 @@ void CPolypointShape::Draw(QPainter& drawContext) const
 
 		int pointsCount = points.size();
 		for (int pointIndex = 0; pointIndex < pointsCount; ++pointIndex){
-			istd::CIndex2d sp = transform.GetScreenPosition(points[pointIndex]);
+			istd::CIndex2d sp = GetScreenPosition(points[pointIndex]).ToIndex2d();
 			if (clientArea.IsInside(sp)){
 				if (m_isSmallTickersMode){
 					colorSchema.DrawTicker(drawContext, sp, IColorSchema::TT_INACTIVE | IColorSchema::TT_SMALL);
@@ -103,15 +101,13 @@ i2d::CRect CPolypointShape::CalcBoundingBox() const
 		const QVector<i2d::CVector2d>& points = polypoint.GetPoints();
 
 		if (!points.isEmpty()){
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
-
-			istd::CIndex2d sp = transform.GetScreenPosition(points[0]);
+			istd::CIndex2d sp = GetScreenPosition(points[0]).ToIndex2d();
 
 			i2d::CRect boundingBox(sp, sp);
 
 			int pointsCount = points.size();
 			for (int pointIndex = 1; pointIndex < pointsCount; ++pointIndex){
-				sp = transform.GetScreenPosition(points[pointIndex]);
+				sp = GetScreenPosition(points[pointIndex]).ToIndex2d();
 
 				boundingBox.Union(sp);
 			}

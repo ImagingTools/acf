@@ -23,11 +23,13 @@ namespace iqt2d
 
 /**
 	Standard 2D-View provider.
+	It allows setting of display calibration and supports \c i2d::ICalibrationProvider to get it.
 */
 class CViewProviderGuiComp: 
 			public	iqtgui::TGuiComponentBase<iview::CConsoleGui>,
 			virtual public ibase::ICommandsProvider,
 			virtual public IViewProvider,
+			virtual public i2d::ICalibrationProvider,
 			protected imod::CMultiModelDispatcherBase
 {
 public:
@@ -63,6 +65,7 @@ public:
 	I_BEGIN_COMPONENT(CViewProviderGuiComp);	
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_REGISTER_INTERFACE(IViewProvider);
+		I_REGISTER_INTERFACE(i2d::ICalibrationProvider);
 		I_ASSIGN(m_shapeStatusInfoCompPtr, "ShapeStatusInfo", "Shape status info consumer", false, "ShapeStatusInfo");
 		I_ASSIGN(m_viewIdAttrPtr, "ViewId", "ID allowing identifying this view", true, 0);
 		I_ASSIGN(m_useAntialiasingAttrPtr, "UseAntialiasing", "Enables using of antialiasing", false, false);
@@ -84,12 +87,10 @@ public:
 	virtual int GetViewId() const;
 	virtual iview::IShapeView* GetView() const;
 
+	// reimplemented (i2d::ICalibrationProvider)
+	virtual const i2d::ICalibration2d* GetCalibration() const;
+
 protected:
-	/**
-		Do console calibration.
-	*/
-	virtual void SetConsoleCalibration(const i2d::ICalibration2d* calibrationPtr);
-	
 	// reimplemented (CGuiComponentBase)
 	virtual void OnGuiCreated();
 

@@ -16,14 +16,14 @@ namespace i2d
 
 
 CLine2d::CLine2d()
-	:m_point1(0, 0),
+:	m_point1(0, 0),
 	m_point2(0, 0)
 {
 }
 
 
 CLine2d::CLine2d(const CVector2d& point1, const CVector2d& point2)
-	:m_point1(point1),
+:	m_point1(point1),
 	m_point2(point2)
 {
 }
@@ -32,13 +32,6 @@ CLine2d::CLine2d(const CVector2d& point1, const CVector2d& point2)
 CLine2d::CLine2d(double x1, double y1, double x2, double y2)
 	:m_point1(x1,y1),
 	m_point2(x2,y2)
-{
-}
-
-
-CLine2d::CLine2d(const CLine2d& line)
-	:m_point1(line.m_point1), 
-	m_point2(line.m_point2)
 {
 }
 
@@ -60,15 +53,6 @@ void CLine2d::SetPoint2(const CVector2d& point)
 
 		m_point2 = point;
 	}
-}
-
-
-CLine2d CLine2d::operator=(const CLine2d& inl)
-{
-	m_point1 = inl.m_point1;
-	m_point2 = inl.m_point2;
-
-	return *this;
 }
 
 

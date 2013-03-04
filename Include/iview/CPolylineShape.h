@@ -32,6 +32,20 @@ public:
 	// reimplemented (iview::ITouchable)
 	virtual TouchState IsTouched(istd::CIndex2d position) const;
 
+	// static methods
+	/**
+		Draw an orientation marker consisting of two triangles (black for 
+		outside and white for inside)
+	*/
+	static void DrawOrientationMarker(
+				QPainter& drawContext,
+				const QPen& rightPen,
+				const QBrush& rightBrush,
+				const QPen& leftPen,
+				const QBrush& leftBrush,
+				const i2d::CLine2d& segmentLine,
+				double scale);
+
 protected:
 	// reimplemented (iview::CPolygonShape)
 	virtual void DrawCurve(QPainter& drawContext) const;

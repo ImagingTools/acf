@@ -57,10 +57,9 @@ void CPinShape::Draw(QPainter& drawContext) const
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const IColorSchema& colorSchema = GetColorSchema();
 
-		istd::CIndex2d sp = transform.GetScreenPosition(pinPtr->GetPosition());
+		istd::CIndex2d sp = GetScreenPosition(pinPtr->GetPosition()).ToIndex2d();
 
 		if (IsSelected()){
 			if (IsEditablePosition()){
@@ -92,13 +91,13 @@ bool CPinShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonT
 	if (IsDisplayConnected() && (pinPtr != NULL)){
 		if (downFlag){
 			const IColorSchema& colorSchema = GetColorSchema();
-			const iview::CScreenTransform& transform = GetLogToScreenTransform();
+			const i2d::CVector2d& center = pinPtr->GetPosition();
 
-			const i2d::CVector2d& cp = pinPtr->GetPosition();
-			istd::CIndex2d sp = transform.GetScreenPosition(cp);
+			i2d::CVector2d screenCenter = GetScreenPosition(center);
 			const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE);
-			if (tickerBox.IsInside(position - sp)){
-				m_referencePosition = cp - transform.GetClientPosition(position);
+			if (tickerBox.IsInside(position - screenCenter.ToIndex2d())){
+				m_referencePosition = center - GetLogPosition(position);
+
 				BeginModelChanges();
 				return true;
 			}
@@ -122,9 +121,7 @@ bool CPinShape::OnMouseMove(istd::CIndex2d position)
 		i2d::CPosition2d& pin = *dynamic_cast<i2d::CPosition2d*>(modelPtr);
 		Q_ASSERT(&pin != NULL);
 
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
-		
-		pin.SetPosition(m_referencePosition + transform.GetClientPosition(position));
+		pin.SetPosition(m_referencePosition + GetLogPosition(position));
 
 		UpdateModelChanges();
 
@@ -146,10 +143,9 @@ i2d::CRect CPinShape::CalcBoundingBox() const
 
 	const i2d::CPosition2d* pinPtr = dynamic_cast<const i2d::CPosition2d*>(GetModelPtr());
 	if (pinPtr != NULL){
-		const iview::CScreenTransform& transform = GetLogToScreenTransform();
 		const IColorSchema& colorSchema = GetColorSchema();
 
-		istd::CIndex2d sp = transform.GetScreenPosition(pinPtr->GetPosition());
+		istd::CIndex2d sp = GetScreenPosition(pinPtr->GetPosition()).ToIndex2d();
 
 		IColorSchema::TickerType tickerType;
 		if (IsSelected()){

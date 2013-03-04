@@ -2,8 +2,9 @@
 #define iview_CParallelogramShape_included
 
 
+// ACF includes
 #include "i2d/CParallelogram.h"
-
+#include "i2d/CVector2d.h"
 #include "iview/CInteractiveShapeBase.h"
 
 
@@ -93,7 +94,7 @@ protected:
 	void CalcNodes(const i2d::CAffine2d& parallTransform) const;
 	void ResetNodes() const;
 	bool AreNodesValid() const;
-	const istd::CIndex2d* GetNodes() const;
+	const i2d::CVector2d* GetNodes() const;
 
 	virtual void EnsureValidNodes() const;
 
@@ -118,7 +119,7 @@ private:
 	bool m_areAxesEqual;
 	bool m_areAxesOrthogonal;
 
-	mutable istd::CIndex2d m_nodes[EN_LAST + 1];
+	mutable i2d::CVector2d m_nodes[EN_LAST + 1];
 	mutable bool m_areNodesValid;
 };
 
@@ -217,7 +218,7 @@ inline bool CParallelogramShape::AreNodesValid() const
 }
 
 
-inline const istd::CIndex2d* CParallelogramShape::GetNodes() const
+inline const i2d::CVector2d* CParallelogramShape::GetNodes() const
 {
 	return m_nodes;
 }

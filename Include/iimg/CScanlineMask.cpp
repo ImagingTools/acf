@@ -29,12 +29,6 @@ bool CScanlineMask::IsBitmapRegionEmpty() const
 }
 
 
-i2d::CRect CScanlineMask::GetBoundingBox() const
-{
-	return m_boundingBox;
-}
-
-
 const istd::CIntRanges* CScanlineMask::GetPixelRanges(int lineIndex) const
 {
 	int rangeIndex = lineIndex - m_boundingBox.GetTop();
@@ -542,6 +536,25 @@ void CScanlineMask::Translate(int dx, int dy)
 			lineRanges.ShiftRanges(dx);
 		}
 	}
+}
+
+
+// reimplemented (i2d::IObject2d)
+
+i2d::CVector2d CScanlineMask::GetCenter() const
+{
+	return i2d::CRectangle(m_boundingBox).GetCenter();
+}
+
+
+void CScanlineMask::MoveCenterTo(const i2d::CVector2d& /*position*/)
+{
+}
+
+
+i2d::CRectangle CScanlineMask::GetBoundingBox() const
+{
+	return m_boundingBox;
 }
 
 

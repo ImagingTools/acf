@@ -38,11 +38,30 @@ void CPolypoint::MoveCenterTo(const CVector2d& position)
 	}
 }
 
+
 CRectangle CPolypoint::GetBoundingBox() const
 {	
-	//TODO
-	return CRectangle();
+	if (!m_points.isEmpty()){
+		Points::ConstIterator iter = m_points.constBegin();
+		Q_ASSERT(iter != m_points.constEnd());
+
+		const i2d::CVector2d& firstPoint = *iter;
+		i2d::CRectangle boundingBox(firstPoint, firstPoint);
+
+		for (		++iter;
+					iter != m_points.end();
+					++iter){
+			const i2d::CVector2d& point = *iter;
+
+			boundingBox.Unite(point);
+		}
+
+		return boundingBox;
+	}
+
+	return i2d::CRectangle::GetEmpty();
 }
+
 
 bool CPolypoint::Transform(
 		const ITransformation2d& transformation,

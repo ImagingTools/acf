@@ -11,6 +11,7 @@
 
 #include "iview/IViewLayer.h"
 #include "iview/ISelectable.h"
+#include "iview/IDraggable.h"
 #include "iview/IMouseActionObserver.h"
 
 
@@ -23,7 +24,8 @@ class IInteractiveShape;
 
 class ISelectableLayer:
 			virtual public IViewLayer,
-			virtual public ISelectable
+			virtual public ISelectable,
+			virtual public IDraggable
 {
 public:
 	/**
@@ -40,21 +42,6 @@ public:
 		Draw only focused shape.
 	*/
 	virtual void DrawFocusedShape(QPainter& drawContext) = 0;
-
-	/**
-		Set reference position for dragging for all selected shapes.
-	*/
-	virtual void BeginDrag(const i2d::CVector2d& reference) = 0;
-
-	/**
-		Set dragging position for all selected shapes.
-	*/
-	virtual void SetDragPosition(const i2d::CVector2d& position) = 0;
-	
-	/**
-		Called after dragging process.
-	*/
-	virtual void EndDrag() = 0;
 
 	/**
 		Called, when mouse button was pushed down or up.

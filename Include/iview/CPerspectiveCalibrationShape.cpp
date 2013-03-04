@@ -116,13 +116,12 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 				}
 
 				const iview::IColorSchema& colorSchema = GetColorSchema();
-				const iview::CScreenTransform& transform = GetLogToScreenTransform();
 
 				i2d::CVector2d logCorners[4];
-				logCorners[0] = transform.GetClientPosition(clientRect.GetLeftTop());
-				logCorners[1] = transform.GetClientPosition(clientRect.GetRightTop());
-				logCorners[2] = transform.GetClientPosition(clientRect.GetLeftBottom());
-				logCorners[3] = transform.GetClientPosition(clientRect.GetRightBottom());
+				logCorners[0] = GetLogPosition(clientRect.GetLeftTop());
+				logCorners[1] = GetLogPosition(clientRect.GetRightTop());
+				logCorners[2] = GetLogPosition(clientRect.GetLeftBottom());
+				logCorners[3] = GetLogPosition(clientRect.GetRightBottom());
 
 				i2d::CVector2d viewLeftTop;
 				calibPtr->GetInvPositionAt(bounds.GetLeftTop(), viewLeftTop);
@@ -138,7 +137,9 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 								viewLeftBottom.GetDistance(viewRightBottom) / bounds.GetWidth() + 
 								viewLeftTop.GetDistance(viewLeftBottom) / bounds.GetHeight() +
 								viewRightTop.GetDistance(viewRightBottom) / bounds.GetHeight()) * 0.25;
-				double scale = transform.GetDeformMatrix().GetAxisX().GetLength() * perspScale;
+
+				const CScreenTransform& transform = GetViewToScreenTransform();
+				double scale = transform.GetDeformMatrix().GetApproxScale() * perspScale;
 
 				int levels[2];
 				double minGridDistance = calibInfoPtr->GetMinGridDistance() / scale;
@@ -170,8 +171,8 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 					i2d::CVector2d viewPos2;
 					calibPtr->GetInvPositionAt(logPos1, viewPos1);
 					calibPtr->GetInvPositionAt(logPos2, viewPos2);
-					QPoint point1 = iqt::GetQPoint(transform.GetScreenPosition(viewPos1));
-					QPoint point2 = iqt::GetQPoint(transform.GetScreenPosition(viewPos2));
+					QPointF point1 = GetScreenPosition(viewPos1);
+					QPointF point2 = GetScreenPosition(viewPos2);
 
 					int levelIndex = 0;
 
@@ -225,8 +226,8 @@ void CPerspectiveCalibrationShape::Draw(QPainter& drawContext) const
 					calibPtr->GetInvPositionAt(logPos1, viewPos1);
 					calibPtr->GetInvPositionAt(logPos2, viewPos2);
 
-					QPoint point1 = iqt::GetQPoint(transform.GetScreenPosition(viewPos1));
-					QPoint point2 = iqt::GetQPoint(transform.GetScreenPosition(viewPos2));
+					QPointF point1 = GetScreenPosition(viewPos1);
+					QPointF point2 = GetScreenPosition(viewPos2);
 
 					int levelIndex = 0;
 

@@ -160,6 +160,8 @@ ITouchable::TouchState CImageShape::IsTouched(istd::CIndex2d position) const
 
 QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 {
+	QString retVal;
+
 	const imod::IModel* modelPtr = GetModelPtr();
 	if (modelPtr != NULL){
 		const iview::CScreenTransform& transform = GetViewToScreenTransform();
@@ -178,43 +180,59 @@ QString CImageShape::GetShapeDescriptionAt(istd::CIndex2d position) const
 
 			icmm::CVarColor pixelValue = bitmapPtr->GetColorAt(bitmapPosition);
 			
+			retVal = QObject::tr("[%1, %2] px").arg(bitmapPosition.GetX()).arg(bitmapPosition.GetY());
+
+			QString pixelValueInfo;
+
 			switch (pixelMode){
 			case iimg::IBitmap::PF_GRAY:
-				return QObject::tr("Gray value %1%").arg(int(pixelValue[0] * 100));
+				pixelValueInfo = QObject::tr("Gray value %1%").arg(int(pixelValue[0] * 100));
+				break;
 
-			case iimg::IBitmap::PF_RGB:{
-				icmm::CRgbToHsvTranformation rgbToHsvTransformation;
-				icmm::CRgb rgb(pixelValue[2], pixelValue[1], pixelValue[0]);
-				icmm::CHsv hsv;
-				
-				icmm::CVarColor rgbColor(rgb);
-				icmm::CVarColor hsvColor(hsv.GetElementsCount());
-				rgbToHsvTransformation.GetValueAt(rgbColor, hsvColor);
-				hsv = hsvColor;
+			case iimg::IBitmap::PF_RGB:
+				{
+					icmm::CRgbToHsvTranformation rgbToHsvTransformation;
+					icmm::CRgb rgb(pixelValue[2], pixelValue[1], pixelValue[0]);
+					icmm::CHsv hsv;
+					
+					icmm::CVarColor rgbColor(rgb);
+					icmm::CVarColor hsvColor(hsv.GetElementsCount());
+					rgbToHsvTransformation.GetValueAt(rgbColor, hsvColor);
+					hsv = hsvColor;
 
-				return QObject::tr("  Red:%1% (%2), Green:%3% (%4), Blue:%5% (%6) Hue: %7°, Saturation: %8, Value: %9")
-							.arg(int(rgb.GetElement(icmm::CRgb::CI_RED)* 100))
-							.arg(int(rgb.GetElement(icmm::CRgb::CI_RED)* 255))
-							.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE)* 100))
-							.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE)* 255))
-							.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN)* 100))
-							.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN)* 255))
-							.arg(int(hsv.GetElement(icmm::CHsv::CI_HUE)))
-							.arg(int(hsv.GetElement(icmm::CHsv::CI_SATURATION)* 255))
-							.arg(int(hsv.GetElement(icmm::CHsv::CI_VALUE)* 255));
-			}
+					pixelValueInfo = QObject::tr("[Red:%1% (%2), Green:%3% (%4), Blue:%5% (%6) Hue: %7°, Saturation: %8, Value: %9]")
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED)* 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_RED)* 255))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE)* 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_BLUE)* 255))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN)* 100))
+								.arg(int(rgb.GetElement(icmm::CRgb::CI_GREEN)* 255))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_HUE)))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_SATURATION)* 255))
+								.arg(int(hsv.GetElement(icmm::CHsv::CI_VALUE)* 255));
+				}
+				break;
 
 			case iimg::IBitmap::PF_RGBA:
-				return QObject::tr("RGBA value %1%, %2%, %3%, %4%")
+				pixelValueInfo = QObject::tr("RGBA value %1%, %2%, %3%, %4%")
 							.arg(int(pixelValue[3] * 100))
 							.arg(int(pixelValue[2] * 100))
 							.arg(int(pixelValue[1] * 100))
 							.arg(int(pixelValue[0] * 100));
+				break;
+
+			default:
+				break;
+			}
+
+			if (!pixelValueInfo.isEmpty()){
+				retVal += QObject::tr(", ");
+				retVal += pixelValueInfo;
 			}
 		}
 	}
 
-	return "";
+	return retVal;
 }
 
 

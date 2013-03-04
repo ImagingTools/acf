@@ -70,6 +70,7 @@ public:
 	// reimplemented (iview::CConsoleBase)
 	virtual const CViewport& GetView() const;
 	virtual CViewport& GetViewRef();
+	virtual void UpdateCursorInfo(const QString& infoText);
 
 	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
@@ -102,20 +103,19 @@ protected:
 	bool IsFullScreenMode() const;
 	void SetFullScreenMode(bool isFullScreen);	
 
+	// events
+	virtual bool OnWheelEvent(QWheelEvent* eventPtr);
+	virtual bool OnMouseDoubleClickEvent(QEvent* eventPtr);
+	virtual bool OnKeyReleaseEvent(QKeyEvent* eventPtr);
+
 	// reimplemented (iview::CConsoleBase)
-	virtual void UpdateCursorInfo(const i2d::CVector2d& pixelPos, const i2d::CVector2d& logicalPos, const QString& infoText);
 	virtual void UpdateEditModeButtons();
 	virtual void UpdateButtonsState();
 	virtual void UpdateComponentsPosition();
 	virtual void UpdateCommands();
-
-	// events
 	virtual bool OnSelectChange(const iview::IShapeView& view, const istd::CIndex2d& position, const iview::IInteractiveShape& shape, bool state);
 	virtual bool OnMouseButton(const iview::IShapeView& view, const istd::CIndex2d& position, Qt::MouseButton buttonType, bool state, const iview::IInteractiveShape* shapePtr);
 	virtual void OnBoundingBoxChanged();
-	virtual bool OnWheelEvent(QWheelEvent* eventPtr);
-	virtual bool OnMouseDoubleClickEvent(QEvent* eventPtr);
-	virtual bool OnKeyReleaseEvent(QKeyEvent* eventPtr);
 
 	// reimplemented Qt (QWidget)
 	void keyReleaseEvent(QKeyEvent* event);	

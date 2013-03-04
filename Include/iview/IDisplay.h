@@ -27,7 +27,6 @@ public:
 	/**
 		Return a screen transformation.
 		This transformation converts view units to screen units.
-		\sa	iview::ILogicalView::GetLogToViewTransform(), iview::ILogicalView::GetLogToScreenTransform()
 	*/
 	virtual const iview::CScreenTransform& GetTransform() const = 0;
 
