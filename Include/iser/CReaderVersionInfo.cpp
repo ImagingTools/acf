@@ -79,7 +79,7 @@ QString CReaderVersionInfo::GetEncodedVersionName(int /*versionId*/, quint32 /*v
 
 // reimplemented (istd::IChangeable)
 
-bool CReaderVersionInfo::CopyFrom(const istd::IChangeable& object)
+bool CReaderVersionInfo::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const iser::IVersionInfo* versionInfoPtr = dynamic_cast<const iser::IVersionInfo*>(&object);
 	if (versionInfoPtr == NULL){

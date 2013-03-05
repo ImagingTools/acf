@@ -47,7 +47,7 @@ public:
 	virtual QString GetEncodedVersionName(int versionId, quint32 versionNumber) const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 protected:
 	struct VersionIdElement

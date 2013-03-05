@@ -112,14 +112,14 @@ int CPolyline::GetSupportedOperations() const
 }
 
 
-bool CPolyline::CopyFrom(const IChangeable& object)
+bool CPolyline::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CPolyline* polylinePtr = dynamic_cast<const CPolyline*>(&object);
 
 	if (polylinePtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
-		BaseClass::CopyFrom(object);
+		BaseClass::CopyFrom(object, mode);
 
 		SetClosed(polylinePtr->IsClosed());
 
@@ -130,11 +130,11 @@ bool CPolyline::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CPolyline::CloneMe() const 
+istd::IChangeable* CPolyline::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CPolyline> clonePtr(new CPolyline);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

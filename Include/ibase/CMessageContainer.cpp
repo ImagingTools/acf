@@ -150,9 +150,7 @@ IMessageContainer::Messages CMessageContainer::GetMessages() const
 		
 		istd::TDelPtr<istd::IInformationProvider> messagePtr;
 
-		istd::IChangeable *cloned = (*iter)->CloneMe();
-		cloned->CopyFrom(*(*iter));
-		messagePtr.SetCastedOrRemove<istd::IChangeable>(cloned);		
+		messagePtr.SetCastedOrRemove<istd::IChangeable>((*iter)->CloneMe(istd::IChangeable::CM_CONVERT));		
 		if (messagePtr.IsValid()){
 			IMessageConsumer::MessagePtr messageCopyPtr(messagePtr.PopPtr());
 	
@@ -264,7 +262,7 @@ IHierarchicalMessageContainer* CMessageContainer::GetChild(int index) const
 
 // reimplemented (istd::IChangeable)
 
-bool CMessageContainer::CopyFrom(const istd::IChangeable& object)
+bool CMessageContainer::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
 	QMutexLocker lock(&m_lock);
 

@@ -157,15 +157,16 @@ int CPosition2d::GetSupportedOperations() const
 }
 
 
-bool CPosition2d::CopyFrom(const IChangeable& object)
+bool CPosition2d::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CPosition2d* position2dPtr = dynamic_cast<const CPosition2d*>(&object);
 
 	if (position2dPtr != NULL){
 		istd::CChangeNotifier notifier(this);
-		
-		SetCalibration(position2dPtr->GetCalibration());
+
 		SetPosition(position2dPtr->GetPosition());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}
@@ -185,11 +186,11 @@ bool CPosition2d::IsEqual(const istd::IChangeable& object) const
 }
 
 
-istd::IChangeable* CPosition2d::CloneMe() const 
+istd::IChangeable* CPosition2d::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CPosition2d> clonePtr(new CPosition2d);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

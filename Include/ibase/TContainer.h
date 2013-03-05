@@ -46,6 +46,9 @@ public:
 	virtual bool IsEmpty() const;
 	virtual bool IsIndexValid(int index) const;
 
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+
 protected:
 	typedef QList<ItemClass> Items;
 
@@ -181,6 +184,22 @@ template <typename ItemClass>
 bool TContainer<ItemClass>::IsIndexValid(int index) const
 {
 	return (index >= 0 && index < int(m_items.size()));
+}
+
+
+// reimplemented (istd::IChangeable)
+
+template <typename ItemClass>
+bool TContainer<ItemClass>::CopyFrom(const IChangeable& object, CompatibilityMode /*mode*/)
+{
+	const TContainer* containerPtr = dynamic_cast<const TContainer*>(&object);
+	if (containerPtr != NULL){
+		m_items = containerPtr->m_items;
+
+		return true;
+	}
+
+	return false;
 }
 
 

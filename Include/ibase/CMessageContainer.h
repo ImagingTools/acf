@@ -67,7 +67,7 @@ public:
 	virtual IHierarchicalMessageContainer* GetChild(int index) const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 private:
 	typedef QList<IMessageConsumer::MessagePtr> MessageList;

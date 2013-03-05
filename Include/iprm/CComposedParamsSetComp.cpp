@@ -83,7 +83,7 @@ istd::IPolymorphic* CComposedParamsSetComp::GetParent() const
 
 // reimplemented (istd::IChangeable)
 
-bool CComposedParamsSetComp::CopyFrom(const IChangeable& object)
+bool CComposedParamsSetComp::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	// Copy all fixed parameters from external parameter set
 	const iprm::IParamsSet* objectParamsSetPtr = dynamic_cast<const iprm::IParamsSet*>(&object);
@@ -98,7 +98,7 @@ bool CComposedParamsSetComp::CopyFrom(const IChangeable& object)
 		iser::ISerializable* paramPtr = m_parametersCompPtr[i];
 		if (paramPtr != NULL){
 			const iser::ISerializable* objectParamPtr = objectParamsSetPtr->GetParameter(id);
-			if ((objectParamPtr == NULL) || !paramPtr->CopyFrom(*objectParamPtr)){
+			if ((objectParamPtr == NULL) || !paramPtr->CopyFrom(*objectParamPtr, mode)){
 				return false;
 			}
 		}

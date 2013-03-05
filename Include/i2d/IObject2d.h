@@ -47,6 +47,7 @@ public:
 
 	/**
 		Transform this object using some transformation.
+		Please note, that this operation transforms logical coordinates, it means that the calibration will be ignored.
 		\param	mode			controls needed transformation exactness.
 		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
 								Value 0 means that transformation is exactly done.
@@ -59,6 +60,7 @@ public:
 
 	/**
 		Do inverse transformation of this object.
+		Please note, that this operation transforms logical coordinates, it means that the calibration will be ignored.
 		\param	mode			controls needed transformation exactness.
 		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
 								Value 0 means that transformation is exactly done.
@@ -71,6 +73,7 @@ public:
 
 	/**
 		Calulate transformation of the object into second one.
+		Please note, that this operation transforms logical coordinates, it means that the calibration will be ignored.
 		\param	mode			controls needed transformation exactness.
 		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
 								Value 0 means that transformation is exactly done.
@@ -85,6 +88,7 @@ public:
 
 	/**
 		Calulate inverse transformation of the object into second one.
+		Please note, that this operation transforms logical coordinates, it means that the calibration will be ignored.
 		\param	mode			controls needed transformation exactness.
 		\param	errorFactorPtr	optional output where approximated length of transformation error vector will be stored.
 								Value 0 means that transformation is exactly done.

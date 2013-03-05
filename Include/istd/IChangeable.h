@@ -76,6 +76,35 @@ public:
 	};
 
 	/**
+		Control how relationship betweeen objects are interpreted.
+		It is also used to define how objects are copied.
+	*/
+	enum CompatibilityMode
+	{
+		/**
+			If external references are different this object are not compatible and cannot be compared or copied.
+			Copy without references to external objects only if objects are compatible.
+		*/
+		CM_STRICT,
+		/**
+			External references are simple ignored.
+			Copy without references to external objects.
+		*/
+		CM_WITHOUT_REFS,
+		/**
+			External references are part of object integrity.
+			For comparation external references must be equal, for copy operations they will be copied.
+		*/
+		CM_WITH_REFS,
+		/**
+			Data of object are interpreted in context of external references.
+			For comparation the meaning of object (e.g. after transformation using externals) will be compared.
+			Copying will converting the data to be compatible according to existing references to external objects.
+		*/
+		CM_CONVERT
+	};
+
+	/**
 		Starts the change transaction. 
 		\note Please note that the \c changeFlags and \c changeParamsPtr must not be identical with the
 		corresponded parameters in EndChanges().
@@ -101,7 +130,7 @@ public:
 		Copy this object from another one.
 		Default implementation in istd::IChangeable do nothing.
 	*/
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 	/**
 		Compare this object with another object.
@@ -114,7 +143,7 @@ public:
 		Make a copy of this object.
 		\return	new instance or NULL, if this operation is not supported.
 	*/
-	virtual IChangeable* CloneMe() const;
+	virtual IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 protected:
 	/**
@@ -152,7 +181,7 @@ inline int IChangeable::GetSupportedOperations() const
 }
 
 
-inline bool IChangeable::CopyFrom(const IChangeable& /*object*/)
+inline bool IChangeable::CopyFrom(const IChangeable& /*object*/, CompatibilityMode /*mode*/)
 {
 	return false;
 }
@@ -164,7 +193,7 @@ inline bool IChangeable::IsEqual(const IChangeable& /*object*/) const
 }
 
 
-inline IChangeable* IChangeable::CloneMe() const
+inline IChangeable* IChangeable::CloneMe(CompatibilityMode /*mode*/) const
 {
 	return NULL;
 }

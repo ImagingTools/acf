@@ -55,18 +55,18 @@ int COrientedCircle::GetSupportedOperations() const
 }
 
 
-bool COrientedCircle::CopyFrom(const IChangeable& object)
+bool COrientedCircle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const COrientedCircle* orientedCirclePtr = dynamic_cast<const COrientedCircle*>(&object);
 
 	if (orientedCirclePtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
 		
-		SetCalibration(orientedCirclePtr->GetCalibration());		
 		SetPosition(orientedCirclePtr->GetPosition());
 		SetRadius(orientedCirclePtr->GetRadius());
 		SetOrientedOutside(orientedCirclePtr->IsOrientedOutside());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -75,11 +75,11 @@ bool COrientedCircle::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* COrientedCircle::CloneMe() const 
+istd::IChangeable* COrientedCircle::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<COrientedCircle> clonePtr(new COrientedCircle);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

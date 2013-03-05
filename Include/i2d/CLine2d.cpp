@@ -651,17 +651,17 @@ int CLine2d::GetSupportedOperations() const
 }
 
 
-bool CLine2d::CopyFrom(const IChangeable& object)
+bool CLine2d::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CLine2d* line2dPtr = dynamic_cast<const CLine2d*>(&object);
 
 	if (line2dPtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
 		
-		SetCalibration(line2dPtr->GetCalibration());
 		SetPoint1(line2dPtr->GetPoint1());
 		SetPoint2(line2dPtr->GetPoint2());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -670,11 +670,11 @@ bool CLine2d::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CLine2d::CloneMe() const 
+istd::IChangeable* CLine2d::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CLine2d> clonePtr(new CLine2d);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

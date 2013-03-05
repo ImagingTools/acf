@@ -12,7 +12,7 @@ namespace istd
 /**
 	Common interface for all container implementations.
 */
-class IContainerInfo: virtual public istd::IChangeable
+class IContainerInfo: virtual public IChangeable
 {
 public:
 	/**

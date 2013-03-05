@@ -113,20 +113,20 @@ int CAnnulusSegment::GetSupportedOperations() const
 }
 
 
-bool CAnnulusSegment::CopyFrom(const IChangeable& object)
+bool CAnnulusSegment::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CAnnulusSegment* annulusSegmentPtr = dynamic_cast<const CAnnulusSegment*>(&object);
 
 	if (annulusSegmentPtr != NULL){
-		
 		istd::CChangeNotifier notifier(this);
 
-		SetCalibration(annulusSegmentPtr->GetCalibration());
 		SetPosition(annulusSegmentPtr->GetPosition());
 		SetInnerRadius(annulusSegmentPtr->GetInnerRadius());
 		SetOuterRadius(annulusSegmentPtr->GetOuterRadius());
 		SetBeginAngle(annulusSegmentPtr->GetBeginAngle());
 		SetEndAngle(annulusSegmentPtr->GetEndAngle());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -135,11 +135,11 @@ bool CAnnulusSegment::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CAnnulusSegment::CloneMe() const 
+istd::IChangeable* CAnnulusSegment::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CAnnulusSegment> clonePtr(new CAnnulusSegment);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

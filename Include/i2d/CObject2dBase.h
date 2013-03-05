@@ -48,6 +48,9 @@ public:
 				ITransformation2d::ExactnessMode mode = ITransformation2d::EM_NONE,
 				double* errorFactorPtr = NULL) const;
 
+	// reimplemented (istd::IChangeable)
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+
 private:
 	const ICalibration2d* m_calibrationPtr;
 };

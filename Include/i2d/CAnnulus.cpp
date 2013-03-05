@@ -215,18 +215,18 @@ int CAnnulus::GetSupportedOperations() const
 }
 
 
-bool CAnnulus::CopyFrom(const IChangeable& object)
+bool CAnnulus::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CAnnulus* annulusPtr = dynamic_cast<const CAnnulus*>(&object);
 
 	if (annulusPtr != NULL){
-		
 		istd::CChangeNotifier notifier(this);
 
-		SetCalibration(annulusPtr->GetCalibration());
 		SetPosition(annulusPtr->GetPosition());
 		SetInnerRadius(annulusPtr->GetInnerRadius());
 		SetOuterRadius(annulusPtr->GetOuterRadius());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -235,11 +235,11 @@ bool CAnnulus::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CAnnulus::CloneMe() const 
+istd::IChangeable* CAnnulus::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CAnnulus> clonePtr(new CAnnulus);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

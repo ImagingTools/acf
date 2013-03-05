@@ -3,7 +3,6 @@
 
 // Qt includes
 #include <QtCore/QString>
-#include <QtCore/QThread>
 #include <QtGui/QApplication>
 
 #ifdef Q_OS_MAC

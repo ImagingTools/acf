@@ -53,8 +53,8 @@ public:
 
 	//reimplemented istd::IChangeable
 	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const IChangeable& object);
-	virtual istd::IChangeable* CloneMe() const;
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

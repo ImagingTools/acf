@@ -71,6 +71,45 @@ bool CObject2dBase::GetInvTransformed(
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CObject2dBase::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
+{
+	bool retVal = true;
+
+	const CObject2dBase* object2dPtr = dynamic_cast<const CObject2dBase*>(&object);
+	if (object2dPtr != NULL){
+		switch (mode){
+		case CM_STRICT:
+			if (m_calibrationPtr != object2dPtr->m_calibrationPtr){
+				return false;
+			}
+			break;
+
+		case CM_WITH_REFS:
+			m_calibrationPtr = object2dPtr->m_calibrationPtr;
+			break;
+
+		case CM_CONVERT:
+			if (object2dPtr->m_calibrationPtr != NULL){
+				retVal = Transform(*object2dPtr->m_calibrationPtr) && retVal;
+			}
+
+			if (m_calibrationPtr != NULL){
+				retVal = InvTransform(*m_calibrationPtr) && retVal;
+			}
+
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	return retVal;
+}
+
+
 } // namespace i2d
 
 

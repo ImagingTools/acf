@@ -170,17 +170,17 @@ int CCircle::GetSupportedOperations() const
 }
 
 
-bool CCircle::CopyFrom(const IChangeable& object)
+bool CCircle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CCircle* circlePtr = dynamic_cast<const CCircle*>(&object);
 
 	if (circlePtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
 		
-		SetCalibration(circlePtr->GetCalibration());
 		SetPosition(circlePtr->GetPosition());
 		SetRadius(circlePtr->GetRadius());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -189,11 +189,11 @@ bool CCircle::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CCircle::CloneMe() const 
+istd::IChangeable* CCircle::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CCircle> clonePtr(new CCircle);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

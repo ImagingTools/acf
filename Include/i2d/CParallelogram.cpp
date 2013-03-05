@@ -110,16 +110,16 @@ int CParallelogram::GetSupportedOperations() const
 }
 
 
-bool CParallelogram::CopyFrom(const IChangeable& object)
+bool CParallelogram::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CParallelogram* parallelogramPtr = dynamic_cast<const CParallelogram*>(&object);
 
 	if (parallelogramPtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
 		
-		SetCalibration(parallelogramPtr->GetCalibration());
 		SetTransform(parallelogramPtr->GetTransform());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -128,11 +128,11 @@ bool CParallelogram::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CParallelogram::CloneMe() const 
+istd::IChangeable* CParallelogram::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CParallelogram> clonePtr(new CParallelogram);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

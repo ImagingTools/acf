@@ -21,8 +21,8 @@ void CObjectSynchronizerComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* 
 		istd::IChangeable* slaveObjectPtr = m_slaveObjectsCompPtr[slaveIndex];
 		
 		if ((slaveObjectPtr != NULL) && m_referenceObjectCompPtr.IsValid()){
-			if (!slaveObjectPtr->IsEqual(*m_referenceObjectCompPtr.GetPtr())){
-				slaveObjectPtr->CopyFrom(*m_referenceObjectCompPtr.GetPtr());
+			if (!slaveObjectPtr->IsEqual(*m_referenceObjectCompPtr)){
+				slaveObjectPtr->CopyFrom(*m_referenceObjectCompPtr);
 			}
 		}
 	}

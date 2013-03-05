@@ -236,17 +236,17 @@ int CQuadrangle::GetSupportedOperations() const
 }
 
 
-bool CQuadrangle::CopyFrom(const IChangeable& object)
+bool CQuadrangle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CQuadrangle* quadranglesPtr = dynamic_cast<const CQuadrangle*>(&object);
 
 	if (quadranglesPtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
 		
-		SetCalibration(quadranglesPtr->GetCalibration());
 		SetFirstDiagonal(quadranglesPtr->GetFirstDiagonal());
 		SetSecondDiagonal(quadranglesPtr->GetSecondDiagonal());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -255,11 +255,11 @@ bool CQuadrangle::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CQuadrangle::CloneMe() const 
+istd::IChangeable* CQuadrangle::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CQuadrangle> clonePtr(new CQuadrangle);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

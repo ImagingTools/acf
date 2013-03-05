@@ -47,8 +47,8 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object);
-	virtual istd::IChangeable* CloneMe() const;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 protected:
 	istd::IInformationProvider::InformationCategory m_category;

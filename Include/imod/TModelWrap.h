@@ -32,7 +32,7 @@ public:
 
 	// pseudo-reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;
-	virtual istd::IChangeable* CloneMe() const;
+	virtual istd::IChangeable* CloneMe(istd::IChangeable::CompatibilityMode mode = istd::IChangeable::CM_WITHOUT_REFS) const;
 
 protected:
 	// pseudo-reimplemented (istd::IChangeable)
@@ -67,11 +67,11 @@ int TModelWrap<Base>::GetSupportedOperations() const
 
 
 template <class Base>
-istd::IChangeable* TModelWrap<Base>::CloneMe() const
+istd::IChangeable* TModelWrap<Base>::CloneMe(istd::IChangeable::CompatibilityMode mode) const
 {
 	istd::TDelPtr< TModelWrap<Base> > clonePtr(new TModelWrap<Base>());
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

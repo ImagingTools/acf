@@ -131,7 +131,7 @@ int CPolypoint::GetSupportedOperations() const
 }
 
 
-bool CPolypoint::CopyFrom(const IChangeable& object)
+bool CPolypoint::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CPolypoint* polypointPtr = dynamic_cast<const CPolypoint*>(&object);
 
@@ -139,12 +139,12 @@ bool CPolypoint::CopyFrom(const IChangeable& object)
 
 		istd::CChangeNotifier notifier(this);
 
-		SetCalibration(polypointPtr->GetCalibration());
-
 		int sourcePolypointCount = polypointPtr->GetPointsCount();
 		for (int pointIndex = 0; pointIndex < sourcePolypointCount; pointIndex++){		
 			Insert(polypointPtr->GetPoint(pointIndex));
 		}
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -153,11 +153,11 @@ bool CPolypoint::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CPolypoint::CloneMe() const 
+istd::IChangeable* CPolypoint::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CPolypoint> clonePtr(new CPolypoint);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

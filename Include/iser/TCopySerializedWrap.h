@@ -30,7 +30,7 @@ public:
 	typedef istd::TUpdateManagerWrap<Base> BaseClass;
 
 	// pseudo-reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object);
+	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS);
 	virtual bool IsEqual(const istd::IChangeable& object) const;
 };
 
@@ -40,13 +40,16 @@ public:
 // pseudo-reimplemented (istd::IChangeable)
 
 template <class Base>
-bool TCopySerializedWrap<Base>::CopyFrom(const istd::IChangeable& object)
+bool TCopySerializedWrap<Base>::CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode)
 {
-	if (BaseClass::CopyFrom(object)){
+	if (BaseClass::CopyFrom(object, mode)){
 		return true;
 	}
-	else{
+	else if (mode == CM_WITHOUT_REFS){
 		return CopyByArchive(object, *this);
+	}
+	else{
+		return false;
 	}
 }
 

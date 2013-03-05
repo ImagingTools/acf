@@ -192,19 +192,19 @@ int CPolygon::GetSupportedOperations() const
 }
 
 
-bool CPolygon::CopyFrom(const IChangeable& object)
+bool CPolygon::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CPolygon* polygonPtr = dynamic_cast<const CPolygon*>(&object);
 
 	if (polygonPtr != NULL){		
 		istd::CChangeNotifier notifier(this);
 
-		SetCalibration(polygonPtr->GetCalibration());
-
 		int sourceNodesCount = polygonPtr->GetNodesCount();
 		for (int nodesIndex = 0; nodesIndex < sourceNodesCount; nodesIndex++){		
 			InsertNode(polygonPtr->GetNode(nodesIndex));
 		}
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -213,11 +213,11 @@ bool CPolygon::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CPolygon::CloneMe() const 
+istd::IChangeable* CPolygon::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CPolygon> clonePtr(new CPolygon);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

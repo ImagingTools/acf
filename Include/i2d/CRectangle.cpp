@@ -565,17 +565,17 @@ int CRectangle::GetSupportedOperations() const
 }
 
 
-bool CRectangle::CopyFrom(const IChangeable& object)
+bool CRectangle::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const CRectangle* rectanglePtr = dynamic_cast<const CRectangle*>(&object);
 
 	if (rectanglePtr != NULL){
-
 		istd::CChangeNotifier notifier(this);
-		
-		SetCalibration(rectanglePtr->GetCalibration());
+
 		SetHorizontalRange(rectanglePtr->GetHorizontalRange());
 		SetVerticalRange(rectanglePtr->GetVerticalRange());
+
+		CObject2dBase::CopyFrom(object, mode);
 
 		return true;
 	}	
@@ -584,11 +584,11 @@ bool CRectangle::CopyFrom(const IChangeable& object)
 }
 
 
-istd::IChangeable* CRectangle::CloneMe() const 
+istd::IChangeable* CRectangle::CloneMe(CompatibilityMode mode) const 
 {
 	istd::TDelPtr<CRectangle> clonePtr(new CRectangle);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 

@@ -250,11 +250,18 @@ quint32 CParamsSet::GetMinimalVersion(int versionId) const
 
 // reimplemented (istd::IChangeable)
 
-bool CParamsSet::CopyFrom(const IChangeable& object)
+bool CParamsSet::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 {
 	const iprm::CParamsSet* inputParamsSetPtr = dynamic_cast<const iprm::CParamsSet*>(&object);
 	if (inputParamsSetPtr == NULL){
 		return false;
+	}
+
+	if (mode == CM_STRICT){
+		// check if external references are compatible
+		if (m_slaveSetPtr != inputParamsSetPtr->m_slaveSetPtr){
+			return false;
+		}
 	}
 
 	CParamsSet tempSet;
@@ -265,7 +272,7 @@ bool CParamsSet::CopyFrom(const IChangeable& object)
 
 		istd::TDelPtr<iser::ISerializable> parameterCopyPtr;
 		
-		parameterCopyPtr.SetCastedOrRemove(parameterInfoPtr->parameterPtr->CloneMe());
+		parameterCopyPtr.SetCastedOrRemove(parameterInfoPtr->parameterPtr->CloneMe(mode));
 
 		if (parameterCopyPtr.IsValid()){
 			tempSet.SetEditableParameter(parameterInfoPtr->parameterId, parameterCopyPtr.PopPtr(), true);

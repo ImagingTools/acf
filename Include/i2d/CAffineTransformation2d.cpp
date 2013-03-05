@@ -217,13 +217,54 @@ bool CAffineTransformation2d::Serialize(iser::IArchive& archive)
 
 // reimplemented (istd::IChangeable)
 
-bool CAffineTransformation2d::CopyFrom(const istd::IChangeable& object)
+bool CAffineTransformation2d::CopyFrom(const istd::IChangeable& object, CompatibilityMode mode)
 {
 	const CAffineTransformation2d* sourcePtr = dynamic_cast<const CAffineTransformation2d*>(&object);
 	if (sourcePtr != NULL){
+		if ((mode == CM_STRICT) || (mode == CM_CONVERT)){	// we cannot convert different units, we do than strict check
+			// check argument compatibility
+			if (m_argumentUnitInfoPtr != sourcePtr->m_argumentUnitInfoPtr){
+				QString unitName;
+				if (m_argumentUnitInfoPtr != NULL){
+					unitName = m_argumentUnitInfoPtr->GetUnitName();
+				}
+
+				QString sourceUnitName;
+				if (sourcePtr->m_argumentUnitInfoPtr != NULL){
+					sourceUnitName = sourcePtr->m_argumentUnitInfoPtr->GetUnitName();
+				}
+
+				if (unitName != sourceUnitName){
+					return false;
+				}
+			}
+
+			// check result compatibility
+			if (m_resultUnitInfoPtr != sourcePtr->m_resultUnitInfoPtr){
+				QString unitName;
+				if (m_resultUnitInfoPtr != NULL){
+					unitName = m_resultUnitInfoPtr->GetUnitName();
+				}
+
+				QString sourceUnitName;
+				if (sourcePtr->m_resultUnitInfoPtr != NULL){
+					sourceUnitName = sourcePtr->m_resultUnitInfoPtr->GetUnitName();
+				}
+
+				if (unitName != sourceUnitName){
+					return false;
+				}
+			}
+		}
+
 		istd::CChangeNotifier changePtr(this);
 		
 		m_transformation = sourcePtr->m_transformation;
+
+		if (mode == CM_WITH_REFS){
+			m_argumentUnitInfoPtr = sourcePtr->m_argumentUnitInfoPtr;
+			m_resultUnitInfoPtr = sourcePtr->m_resultUnitInfoPtr;
+		}
 
 		return true;
 	}
@@ -232,7 +273,7 @@ bool CAffineTransformation2d::CopyFrom(const istd::IChangeable& object)
 }
 
 
-istd::IChangeable* CAffineTransformation2d::CloneMe() const
+istd::IChangeable* CAffineTransformation2d::CloneMe(CompatibilityMode mode) const
 {
 	return new CAffineTransformation2d(m_transformation);
 }

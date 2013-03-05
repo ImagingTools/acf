@@ -17,14 +17,14 @@ class TComponentCloneWrap: virtual public BaseClass, protected CInterfaceManipBa
 {
 public:
 	// pseudo-reimplemented (istd::IChangeable)
-	virtual istd::IChangeable* CloneMe() const;
+	virtual istd::IChangeable* CloneMe(istd::IChangeable::CompatibilityMode mode = CM_WITHOUT_REFS) const;
 };
 
 
 // pseudo-reimplemented (istd::IChangeable)
 	
 template <class BaseClass>
-istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe() const
+istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe(istd::IChangeable::CompatibilityMode mode) const
 {
 	const CComponentContext* contextPtr = dynamic_cast<const CComponentContext*>(BaseClass::GetComponentContext());
 	if (contextPtr != NULL){
@@ -35,7 +35,7 @@ istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe() const
 			clonedPtr.SetCastedOrRemove(ExtractInterface<istd::IChangeable>(parentComponentPtr->CreateSubcomponent(contextPtr->GetContextId())));
 
 			if (clonedPtr.IsValid()){
-				if (clonedPtr->CopyFrom(*this)){
+				if (clonedPtr->CopyFrom(*this, mode)){
 					return clonedPtr.PopPtr();
 				}
 			}

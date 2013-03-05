@@ -61,8 +61,8 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object);
-	virtual istd::IChangeable* CloneMe() const;
+	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 protected:
 	QImage::Format CalcQtFormat(PixelFormat pixelFormat) const;

@@ -47,7 +47,7 @@ public:
 	virtual istd::IPolymorphic* GetParent() const;
 
 	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const IChangeable& object);
+	virtual bool CopyFrom(const IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 
 protected:
 	iprm::IParamsSet* GetSlaveParamsSet(int index) const;

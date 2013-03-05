@@ -64,7 +64,7 @@ bool CBitmap::GetSnap(const istd::IChangeable& data, iimg::IBitmap& objectSnap, 
 	iimg::CBitmap snapBitmap;
 	snapBitmap.CopyImageFrom(bitmapPtr->GetQImage().scaled(size.GetX(), size.GetY(), Qt::KeepAspectRatioByExpanding));
 
-	objectSnap.CopyFrom(snapBitmap);
+	objectSnap.CopyFrom(snapBitmap, istd::IChangeable::CM_WITH_REFS);
 
 	return true;
 }
@@ -236,7 +236,7 @@ int CBitmap::GetSupportedOperations() const
 }
 
 
-bool CBitmap::CopyFrom(const istd::IChangeable& object)
+bool CBitmap::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
 {
 	const CBitmap* bitmapPtr = dynamic_cast<const CBitmap*>(&object);
 
@@ -267,11 +267,11 @@ bool CBitmap::CopyFrom(const istd::IChangeable& object)
 }
 
 
-istd::IChangeable* CBitmap::CloneMe() const
+istd::IChangeable* CBitmap::CloneMe(CompatibilityMode mode) const
 {
 	istd::TDelPtr<CBitmap> clonePtr(new CBitmap);
 
-	if (clonePtr->CopyFrom(*this)){
+	if (clonePtr->CopyFrom(*this, mode)){
 		return clonePtr.PopPtr();
 	}
 
