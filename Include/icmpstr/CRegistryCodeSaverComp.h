@@ -182,6 +182,10 @@ protected:
 		Get some string as C++ string literal.
 	*/
 	QByteArray GetIdValueLiteral(const QByteArray& text) const;
+	/**
+		Get valid C++ identifier (used for variable names) from arbitrary string.
+	*/
+	QByteArray GetValidIdentifier(const QByteArray& identifier) const;
 
 private:
 	I_REF(icomp::IPackagesManager, m_packagesManagerCompPtr);

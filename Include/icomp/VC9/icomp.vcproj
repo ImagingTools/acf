@@ -166,6 +166,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CCachedEnvironmentManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComponentAddress.cpp"
 				>
 			</File>
@@ -252,6 +256,10 @@
 			>
 			<File
 				RelativePath="..\CBaseComponentStaticInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CCachedEnvironmentManager.h"
 				>
 			</File>
 			<File

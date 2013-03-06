@@ -9,33 +9,6 @@
 #include "icomp/icomp.h"
 
 
-namespace
-{
-
-
-/**
-	Make valid C identifiers from arbitrary strings.
- */
-QByteArray MakeValidIdentifier(const QByteArray & identifier)
-{
-	QByteArray result = identifier;
-
-	if (!isalpha(identifier[0])){
-		result[0] = '_';
-	}
-
-	for (int c = 1; c < identifier.size(); c++){
-		if (!isalnum(identifier[c])){
-			result[c] = '_';
-		}
-	}
-
-	return result;
-}
-
-} // unnamed namespace
-
-
 namespace icmpstr
 {
 
@@ -894,8 +867,8 @@ bool CRegistryCodeSaverComp::WriteClassDefinitions(
 			stream << "m_registriesMap[icomp::CComponentAddress(\"" <<
 					address.GetPackageId() << "\", \"" <<
 					address.GetComponentId() << "\")].SetPtr(new C" <<
-					MakeValidIdentifier(GetPackageName(address.GetPackageId())) <<
-					"::C" << MakeValidIdentifier(address.GetComponentId()) << "Registry());";
+					GetValidIdentifier(GetPackageName(address.GetPackageId())) <<
+					"::C" << GetValidIdentifier(address.GetComponentId()) << "Registry());";
 		}
 	}
 
@@ -1128,7 +1101,7 @@ bool CRegistryCodeSaverComp::WriteRegistryInfo(
 		if (embeddedRegistryPtr != NULL){
 			stream << "\n";
 
-			QByteArray embeddedRegName = "embedded" + MakeValidIdentifier(id) + "Ptr";
+			QByteArray embeddedRegName = "embedded" + GetValidIdentifier(id) + "Ptr";
 
 			NextLine(stream);
 			stream << "icomp::IRegistry* " << embeddedRegName << " = " << registryCallPrefix << "InsertEmbeddedRegistry(\"" << id << "\");";
@@ -1157,7 +1130,7 @@ bool CRegistryCodeSaverComp::WriteComponentInfo(
 			const icomp::IRegistry::ElementInfo& componentInfo,
 			QTextStream& stream) const
 {
-	QByteArray elementInfoName = "info" + MakeValidIdentifier(componentId) + "Ptr";
+	QByteArray elementInfoName = "info" + GetValidIdentifier(componentId) + "Ptr";
 
 	if (componentInfo.elementPtr.IsValid()){
 		icomp::IRegistryElement& component = *componentInfo.elementPtr;
@@ -1673,6 +1646,23 @@ QByteArray CRegistryCodeSaverComp::GetIdValueLiteral(const QByteArray& text) con
 	retVal += "\"";
 
 	return retVal;
+}
+
+
+QByteArray CRegistryCodeSaverComp::GetValidIdentifier(const QByteArray& identifier) const
+{
+	QByteArray result = identifier;
+
+	for (int i = 0; i < identifier.size(); i++){
+		char c = identifier[0];
+		if (!isalpha(c)){
+			if ((i == 0) || !isdigit(c)){	// if first character or not numeric -> we set some legal character
+				result[i] = '_';
+			}
+		}
+	}
+
+	return result;
 }
 
 
