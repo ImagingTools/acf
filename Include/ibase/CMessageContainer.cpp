@@ -16,8 +16,17 @@ namespace ibase
 CMessageContainer::CMessageContainer()
 :	m_slaveConsumerPtr(NULL),
 	m_maxMessagesCount(-1),
-	m_maxLiveTime(-1),
 	m_worstCategory(-1),
+	m_lock(QMutex::Recursive)
+{
+}
+
+
+CMessageContainer::CMessageContainer(const CMessageContainer& container)
+:	m_messages(container.m_messages),
+	m_slaveConsumerPtr(NULL),
+	m_maxMessagesCount(container.m_maxMessagesCount),
+	m_worstCategory(container.m_worstCategory),
 	m_lock(QMutex::Recursive)
 {
 }
@@ -48,14 +57,6 @@ void CMessageContainer::SetMaxMessageCount(int maxMessageCount)
 	QMutexLocker lock(&m_lock);
 
 	m_maxMessagesCount = maxMessageCount;
-}
-
-
-void CMessageContainer::SetMaxLiveTime(int maxLiveTime)
-{
-	QMutexLocker lock(&m_lock);
-
-	m_maxLiveTime = maxLiveTime;
 }
 
 

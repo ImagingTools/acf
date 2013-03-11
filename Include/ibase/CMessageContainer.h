@@ -27,6 +27,7 @@ class CMessageContainer:
 {
 public:
 	CMessageContainer();
+	CMessageContainer(const CMessageContainer& container);
 
 	virtual void AddChildContainer(IHierarchicalMessageContainer* childContainerPtr);
 
@@ -39,13 +40,6 @@ public:
 		no limit is set for.
 	*/
 	void SetMaxMessageCount(int maxMessageCount = -1);
-
-	/**
-		Set maximum time difference between the oldest and newest message. If calculated value is grated then this threshold,
-		the oldest message will be removed if a new message will be added.
-		\param maxLiveTime maximal time difference in seconds
-	*/
-	void SetMaxLiveTime(int maxLiveTime = -1);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -79,7 +73,6 @@ private:
 	ibase::IMessageConsumer* m_slaveConsumerPtr;
 
 	int m_maxMessagesCount;
-	int m_maxLiveTime;
 
 	int m_worstCategory;
 
