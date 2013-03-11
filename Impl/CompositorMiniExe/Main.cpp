@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 	applicationInfo.SetStringAttr("ApplicationName", "CompositorMini");
 	applicationInfo.SetStringAttr("CompanyName", "ImagingTools");
 	applicationInfo.SetRef("VersionInfo", &versionInfo);
-	applicationInfo.SetStringAttr("LegalCopyright", "Copyright 2009-2011 Witold Gantzke & Kirill Lepskiy\n\nThis tool is a part of ACF project\nSee 'License.txt' for license information");
+	applicationInfo.SetStringAttr("LegalCopyright", "\xA9 2013 Witold Gantzke & Kirill Lepskiy\n\nThis tool is a part of ACF project\nSee 'License.txt' for license information");
 	applicationInfo.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::ApplicationSettingsProvider> applicationSettingsProvider;
