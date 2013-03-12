@@ -9,6 +9,8 @@
 #include "ModelObserver/CAbComp.h"
 #include "ModelObserver/CAbGuiComp.h"
 
+#include "itutacf/CInterpolationTestComp.h"
+
 
 /**
 	Base system-undependent general package.
@@ -21,6 +23,8 @@ typedef CTextEditorComp TextEditor;
 
 typedef icomp::TModelCompWrap<CAbComp> AB;
 typedef CAbGuiComp AbGui;
+
+typedef itutacf::CInterpolationTestComp InterpolationTest;
 
 
 } // namespace TutorialPck

@@ -22,6 +22,7 @@ public:
 
 	I_BEGIN_COMPONENT(CPolylineComp);
 		I_REGISTER_INTERFACE(CPolyline);
+		I_REGISTER_INTERFACE(CPolygon);
 		I_REGISTER_INTERFACE(IObject2d);
 		I_REGISTER_INTERFACE(iser::ISerializable);
 		I_ASSIGN_MULTI_0(m_xAttrPtr, "X", "X-Positions of the poly-line points", true);

@@ -2,10 +2,11 @@
 #define imath_TSplineGridFunctionBase_included
 
 
+// ACF includes
 #include "istd/TArray.h"
-
 #include "imath/TVector.h"
 #include "imath/TFulcrumGridFunctionBase.h"
+#include "imath/CSplineSegmentFunction.h"
 
 
 namespace imath
@@ -60,10 +61,6 @@ protected:
 				double cumulationFactor,
 				Result& result) const;
 
-	// static methods
-	static double GetValueKernelAt(double alpha);
-	static double GetDerivativeKernelAt(double alpha);
-
 	// abstract methods
 	/**
 		Get derivative of specified degree at specified index position.
@@ -77,23 +74,6 @@ protected:
 	*/
 	virtual bool IsDerivativeDegreeSupported(const DerivativeDegreeType& degree) const = 0;
 };
-
-
-// static protected inline methods
-
-template <class Argument, class Result, class Fulcrums, class Degree>
-inline double TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetValueKernelAt(double alpha)
-{
-	return (2 * alpha - 3) * alpha * alpha + 1;
-}
-
-
-template <class Argument, class Result, class Fulcrums, class Degree>
-inline double TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::GetDerivativeKernelAt(double alpha)
-{
-	double beta = 1 - alpha;
-	return alpha * beta * beta;
-}
 
 
 // public methods
@@ -178,7 +158,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 
 			double alpha = (argument[dimension] - firstPosition) / layersDistance;
 
-			double firstValueFactor = useDerivative? GetValueKernelAt(alpha): (1 - alpha);	// use linear interpolation if no derivative is available
+			double firstValueFactor = useDerivative? CSplineSegmentFunction::GetValueKernelAt(alpha): (1 - alpha);	// use linear interpolation if no derivative is available
 			if (firstValueFactor > I_BIG_EPSILON){
 				CumulateRecursiveValueAt(
 							argument,
@@ -190,7 +170,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 							result);
 			}
 
-			double secondValueFactor = useDerivative? GetValueKernelAt(1.0 - alpha): alpha;	// use linear interpolation if no derivative is available
+			double secondValueFactor = useDerivative? CSplineSegmentFunction::GetValueKernelAt(1.0 - alpha): alpha;	// use linear interpolation if no derivative is available
 
 			if (secondValueFactor > I_BIG_EPSILON){
 				++indexElement;
@@ -208,7 +188,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 			if (useDerivative){
 				derivativeDegree.IncreaseAt(dimension);
 
-				double firstDerivativeFactor = GetDerivativeKernelAt(alpha) * layersDistance;
+				double firstDerivativeFactor = CSplineSegmentFunction::GetDerivativeKernelAt(alpha) * layersDistance;
 				if (firstDerivativeFactor > I_BIG_EPSILON){
 					CumulateRecursiveValueAt(
 								argument,
@@ -222,7 +202,7 @@ void TSplineGridFunctionBase<Argument, Result, Fulcrums, Degree>::CumulateRecurs
 
 				++indexElement;
 
-				double secondDerivativeFactor = -GetDerivativeKernelAt(1.0 - alpha) * layersDistance;
+				double secondDerivativeFactor = -CSplineSegmentFunction::GetDerivativeKernelAt(1.0 - alpha) * layersDistance;
 				if (secondDerivativeFactor < -I_BIG_EPSILON){
 					CumulateRecursiveValueAt(
 								argument,

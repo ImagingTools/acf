@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<Acf>
+  <AcfHeader>
+    <VersionInfos count="2">
+      <Version>
+        <Id>
+          0
+        </Id>
+        <Number>
+          2812
+        </Number>
+        <Description>
+          ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
+    </VersionInfos>
+  </AcfHeader>
+  <PositionMap count="10">
+    <Element>
+      <ComponentName>
+        Console
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        600
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        InterpolatedPolylgonGui
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        ColorSchema
+      </ComponentName>
+      <X>
+        625
+      </X>
+      <X>
+        75
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        InterpolatedObject
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        200
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SceneConnector
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        400
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SourceObject
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        400
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        StandaloneApp
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        250
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        InterpolationTest
+      </ComponentName>
+      <X>
+        975
+      </X>
+      <X>
+        300
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SourcePolygonEditor
+      </ComponentName>
+      <X>
+        600
+      </X>
+      <X>
+        400
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        VersionInfo
+      </ComponentName>
+      <X>
+        275
+      </X>
+      <X>
+        75
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+  </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
+</Acf>

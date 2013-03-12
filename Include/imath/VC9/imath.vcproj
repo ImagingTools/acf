@@ -159,6 +159,10 @@
 			Filter="cpp"
 			>
 			<File
+				RelativePath="..\CAkimaInterpolator.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CComplexDoubleManip.cpp"
 				>
 			</File>
@@ -192,6 +196,10 @@
 			Filter="h"
 			>
 			<File
+				RelativePath="..\CAkimaInterpolator.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CComplexDoubleManip.h"
 				>
 			</File>
@@ -213,6 +221,10 @@
 			</File>
 			<File
 				RelativePath="..\CSampledFunction2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CSplineSegmentFunction.h"
 				>
 			</File>
 			<File

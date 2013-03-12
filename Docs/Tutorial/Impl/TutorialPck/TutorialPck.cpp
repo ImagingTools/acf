@@ -27,6 +27,11 @@ I_EXPORT_COMPONENT(
 			"Editor for AB data model",
 			"Data Model AB Editor GUI");
 
+I_EXPORT_COMPONENT(
+			InterpolationTest,
+			"Test of polyline interpolation",
+			"Data Model Polyline Polygon Interpolation Nodes Function");
+
 
 } // namespace TutorialPck
 
