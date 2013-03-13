@@ -98,7 +98,7 @@ void NotificationTarget::DoEndChanges()
 {
 	Q_ASSERT(!m_isBeginPending);
 
-	if (m_slavePtr != NULL && !m_isBeginPending){
+	if ((m_slavePtr != NULL) && !m_isBeginPending){
 		m_slavePtr->EndChanges(m_changeFlags, m_changeParamsPtr.GetPtr());
 	}
 }
