@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include "istd/IInformationProvider.h"
 #include "iview/IViewLayer.h"
 
 
@@ -191,6 +192,11 @@ ITouchable::TouchState CShapeBase::IsTouched(istd::CIndex2d /*position*/) const
 
 QString CShapeBase::GetShapeDescriptionAt(istd::CIndex2d /*position*/) const
 {
+	const istd::IInformationProvider* infoPtr = dynamic_cast<const istd::IInformationProvider*>(GetModelPtr());
+	if (infoPtr != NULL){
+		return infoPtr->GetInformationDescription();
+	}
+
 	return "";
 }
 
