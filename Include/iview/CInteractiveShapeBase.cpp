@@ -27,7 +27,8 @@ CInteractiveShapeBase::CInteractiveShapeBase()
 }
 
 
-CInteractiveShapeBase::CInteractiveShapeBase(const CInteractiveShapeBase& /*shape*/)
+CInteractiveShapeBase::CInteractiveShapeBase(const CInteractiveShapeBase& shape)
+	:BaseClass(shape)
 {
 }
 

@@ -6,7 +6,6 @@ TEMPLATE = app
 
 CONFIG += link_prl
 CONFIG += app_bundle
-CONFIG += debug_and_release
 
 INCLUDEPATH += $$PWD/../../Impl
 

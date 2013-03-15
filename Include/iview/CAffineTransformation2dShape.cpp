@@ -155,8 +155,6 @@ ITouchable::TouchState CAffineTransformation2dShape::IsTouched(istd::CIndex2d po
 		const iview::IColorSchema& colorSchema = GetColorSchema();
 		const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_NORMAL);
 
-		i2d::CVector2d cp = GetLogPosition(position);
-
 		ControlPoints screenPoints;
 		GetTransformedPoints(GetControlPoints(), screenPoints, *transformationPtr);
 		for (int i = 0; i < ACTIVE_POINTS_COUNT; i++){

@@ -161,8 +161,6 @@ i2d::CRect CTubePolylineShape::CalcBoundingBox() const
 	if (IsDisplayConnected() && (polylinePtr != NULL)){
 		int nodesCount = polylinePtr->GetNodesCount();
 		if (nodesCount >= 1){
-			i2d::CVector2d firstPos = polylinePtr->GetNode(0);
-
 			bool isSelected = IsSelected();
 
 			const iview::IColorSchema& colorSchema = GetColorSchema();
