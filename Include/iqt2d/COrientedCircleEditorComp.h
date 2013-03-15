@@ -36,9 +36,12 @@ public:
 
 protected:
 	// reimplemented (iqtgui::TGuiObserverWrap)
-	virtual void OnGuiModelAttached();
-	virtual void OnGuiModelDetached();
 	virtual void UpdateGui(int updateFlags = 0);
+
+	// reimplemented (iqtgui::CGuiComponentBase)
+	virtual void OnGuiCreated();
+	virtual void OnGuiDestroyed();
+	virtual void OnGuiRetranslate();
 
 protected Q_SLOTS:
 	void OnParamsChanged(double value);

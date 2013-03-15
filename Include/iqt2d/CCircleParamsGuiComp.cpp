@@ -40,35 +40,6 @@ void CCircleParamsGuiComp::UpdateModel() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CCircleParamsGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	QObject::connect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	if (m_unitNameAttrPtr.IsValid()){
-		PositionUnitLabel->setVisible(true);
-		RadiusUnitLabel->setText(*m_unitNameAttrPtr);
-	}
-	else{
-		PositionUnitLabel->setVisible(false);
-		RadiusUnitLabel->setVisible(false);
-	}
-}
-
-
-void CCircleParamsGuiComp::OnGuiModelDetached()
-{
-	QObject::disconnect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	BaseClass::OnGuiModelDetached();
-}
-
-
 void CCircleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	Q_ASSERT(IsGuiCreated());
@@ -83,6 +54,45 @@ void CCircleParamsGuiComp::UpdateGui(int /*updateFlags*/)
 		RadiusSpin->setValue(objectPtr->GetRadius());
 
 		UpdateAllViews();
+	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CCircleParamsGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	QObject::connect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+}
+
+
+void CCircleParamsGuiComp::OnGuiDestroyed()
+{
+	QObject::disconnect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
+void CCircleParamsGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	QString unitName = GetUnitName();
+
+	if (!unitName.isEmpty()){
+		PositionUnitLabel->setVisible(true);
+		RadiusUnitLabel->setText(unitName);
+	}
+	else{
+		PositionUnitLabel->setVisible(false);
+		RadiusUnitLabel->setVisible(false);
 	}
 }
 

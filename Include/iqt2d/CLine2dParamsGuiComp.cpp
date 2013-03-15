@@ -40,39 +40,6 @@ void CLine2dParamsGuiComp::UpdateModel() const
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CLine2dParamsGuiComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	QObject::connect(Point1XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(Point1YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(Point2XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(Point2YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	if (m_unitNameAttrPtr.IsValid()){
-		Point1UnitLabel->setVisible(true);
-		Point1UnitLabel->setText(*m_unitNameAttrPtr);
-		Point2UnitLabel->setVisible(true);
-		Point2UnitLabel->setText(*m_unitNameAttrPtr);
-	}
-	else{
-		Point1UnitLabel->setVisible(false);
-		Point2UnitLabel->setVisible(false);
-	}
-}
-
-
-void CLine2dParamsGuiComp::OnGuiModelDetached()
-{
-	QObject::disconnect(Point1XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(Point1YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(Point2XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(Point2YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	BaseClass::OnGuiModelDetached();
-}
-
-
 void CLine2dParamsGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	Q_ASSERT(IsGuiCreated());
@@ -90,6 +57,49 @@ void CLine2dParamsGuiComp::UpdateGui(int /*updateFlags*/)
 		Point2YSB->setValue(point2.GetY());
 
 		UpdateAllViews();
+	}
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void CLine2dParamsGuiComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	QObject::connect(Point1XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(Point1YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(Point2XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(Point2YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+}
+
+
+void CLine2dParamsGuiComp::OnGuiDestroyed()
+{
+	QObject::disconnect(Point1XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(Point1YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(Point2XSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(Point2YSB, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
+void CLine2dParamsGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	QString unitName = GetUnitName();
+
+	if (!unitName.isEmpty()){
+		Point1UnitLabel->setVisible(true);
+		Point1UnitLabel->setText(unitName);
+		Point2UnitLabel->setVisible(true);
+		Point2UnitLabel->setText(unitName);
+	}
+	else{
+		Point1UnitLabel->setVisible(false);
+		Point2UnitLabel->setVisible(false);
 	}
 }
 

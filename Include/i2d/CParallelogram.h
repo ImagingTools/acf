@@ -8,7 +8,7 @@
 
 // ACF includes
 #include "i2d/CObject2dBase.h"
-#include "i2d/CAffineTransformation2d.h"
+#include "i2d/CAffine2d.h"
 #include "i2d/CRectangle.h"
 
 

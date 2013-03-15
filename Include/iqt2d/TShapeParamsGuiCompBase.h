@@ -3,6 +3,7 @@
 
 
 // ACF includes
+#include "i2d/ICalibration2d.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iview/IColorSchema.h"
 #include "iqt2d/TViewExtenderCompBase.h"
@@ -21,7 +22,7 @@ public:
 	typedef iqt2d::TViewExtenderCompBase<iqtgui::TDesignerGuiObserverCompBase<Ui, ShapeModel> > BaseClass;
 
 	I_BEGIN_COMPONENT(TShapeParamsGuiCompBase);
-		I_ASSIGN(m_unitNameAttrPtr, "UnitName", "Name of geometric units e.g. mm", false, "mm");
+		I_ASSIGN(m_defaultUnitInfoAttrPtr, "DefaultUnitInfo", "Provide default information about the logical value units e.g. mm, this will be used if no unit information found in model", false, "DefaultUnitInfo");
 		I_ASSIGN(m_colorSchemaCompPtr, "ShapeColorSchema", "Color schema used by displayed shape", false, "ShapeColorSchema");
 	I_END_COMPONENT;
 
@@ -33,12 +34,14 @@ protected:
 	typedef typename BaseClass::Shapes Shapes;
 	typedef typename BaseClass::ShapesMap ShapesMap;
 
+	QString GetUnitName() const;
+
 	virtual Shape* CreateShape() const;
 
 	// reimplemented (iqt2d::TViewExtenderCompBase)
 	virtual void CreateShapes(int sceneId, Shapes& result);
 
-	I_ATTR(QString, m_unitNameAttrPtr);
+	I_REF(imath::IUnitInfo, m_defaultUnitInfoAttrPtr);
 	I_REF(iview::IColorSchema, m_colorSchemaCompPtr);
 };
 
@@ -106,6 +109,30 @@ bool TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::OnDetached(imod::IModel* mo
 
 
 // protected methods
+
+template <class Ui, class Shape, class ShapeModel>
+QString TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::GetUnitName() const
+{
+	const imath::IUnitInfo* unitInfoPtr = m_defaultUnitInfoAttrPtr.GetPtr();
+
+	const ShapeModel* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(objectPtr);
+		if (calibrationProviderPtr != NULL){
+			const i2d::ICalibration2d* calibrationPtr = calibrationProviderPtr->GetCalibration();
+			if (calibrationPtr != NULL){
+				unitInfoPtr = calibrationPtr->GetArgumentUnitInfo();
+			}
+		}
+	}
+
+	if (unitInfoPtr != NULL){
+		return unitInfoPtr->GetUnitName();
+	}
+
+	return "";
+}
+
 
 template <class Ui, class Shape, class ShapeModel>
 Shape* TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::CreateShape() const

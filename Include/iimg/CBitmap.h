@@ -6,7 +6,6 @@
 #include "istd/TOptDelPtr.h"
 #include "ibase/IObjectSnap.h"
 #include "i2d/ICalibrationProvider.h"
-#include "i2d/CAffineTransformation2d.h"
 #include "iimg/CBitmapBase.h"
 #include "iimg/IQImageProvider.h"
 

@@ -7,9 +7,6 @@
 #include <QtGui/QStatusBar>
 #include <QtGui/QGroupBox>
 
-// ACF includes
-#include "i2d/CAffineTransformation2d.h"
-
 
 namespace iqtgui
 {

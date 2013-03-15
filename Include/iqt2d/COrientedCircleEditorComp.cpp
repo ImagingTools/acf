@@ -8,6 +8,8 @@ namespace iqt2d
 {
 
 
+// reimplemented (imod::IModelEditor)
+
 void COrientedCircleEditorComp::UpdateModel() const
 {
 	Q_ASSERT(IsGuiCreated());
@@ -34,34 +36,7 @@ void COrientedCircleEditorComp::UpdateModel() const
 }
 
 
-void COrientedCircleEditorComp::OnGuiModelAttached()
-{
-	BaseClass::OnGuiModelAttached();
-
-	QObject::connect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::connect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	if (m_unitNameAttrPtr.IsValid()){
-		PositionUnitLabel->setVisible(true);
-		RadiusUnitLabel->setText(*m_unitNameAttrPtr);
-	}
-	else{
-		PositionUnitLabel->setVisible(false);
-		RadiusUnitLabel->setVisible(false);
-	}
-}
-
-
-void COrientedCircleEditorComp::OnGuiModelDetached()
-{
-	QObject::disconnect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-	QObject::disconnect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	BaseClass::OnGuiModelDetached();
-}
-
+// protected methods
 
 void COrientedCircleEditorComp::UpdateGui(int /*updateFlags*/)
 {
@@ -83,9 +58,52 @@ void COrientedCircleEditorComp::UpdateGui(int /*updateFlags*/)
 }
 
 
+// reimplemented (iqtgui::TGuiObserverWrap)
+
 void COrientedCircleEditorComp::OnParamsChanged(double /*value*/)
 {
 	DoUpdateModel();
+}
+
+
+// reimplemented (iqtgui::CGuiComponentBase)
+
+void COrientedCircleEditorComp::OnGuiCreated()
+{
+	BaseClass::OnGuiCreated();
+
+	QObject::connect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::connect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+}
+
+
+void COrientedCircleEditorComp::OnGuiDestroyed()
+{
+	QObject::disconnect(XSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+	QObject::disconnect(RadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
+
+	BaseClass::OnGuiDestroyed();
+}
+
+
+void COrientedCircleEditorComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	QString unitName = GetUnitName();
+
+	if (!unitName.isEmpty()){
+		PositionUnitLabel->setText(unitName);
+		RadiusUnitLabel->setText(unitName);
+		PositionUnitLabel->setVisible(true);
+		RadiusUnitLabel->setVisible(true);
+	}
+	else{
+		PositionUnitLabel->setVisible(false);
+		RadiusUnitLabel->setVisible(false);
+	}
 }
 
 

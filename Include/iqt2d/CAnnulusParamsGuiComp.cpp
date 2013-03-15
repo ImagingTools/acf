@@ -74,15 +74,6 @@ void CAnnulusParamsGuiComp::OnGuiCreated()
 	QObject::connect(YSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
 	QObject::connect(InnerRadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
 	QObject::connect(OuterRadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
-
-	if (m_unitNameAttrPtr.IsValid()){
-		PositionUnitLabel->setVisible(true);
-		RadiusUnitLabel->setText(*m_unitNameAttrPtr);
-	}
-	else{
-		PositionUnitLabel->setVisible(false);
-		RadiusUnitLabel->setVisible(false);
-	}
 }
 
 
@@ -94,6 +85,25 @@ void CAnnulusParamsGuiComp::OnGuiDestroyed()
 	QObject::disconnect(OuterRadiusSpin, SIGNAL(valueChanged(double)), this, SLOT(OnParamsChanged(double)));
 
 	BaseClass::OnGuiDestroyed();
+}
+
+
+void CAnnulusParamsGuiComp::OnGuiRetranslate()
+{
+	BaseClass::OnGuiRetranslate();
+
+	QString unitName = GetUnitName();
+
+	if (!unitName.isEmpty()){
+		PositionUnitLabel->setText(unitName);
+		RadiusUnitLabel->setText(unitName);
+		PositionUnitLabel->setVisible(true);
+		RadiusUnitLabel->setVisible(true);
+	}
+	else{
+		PositionUnitLabel->setVisible(false);
+		RadiusUnitLabel->setVisible(false);
+	}
 }
 
 
