@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2813
+          2821
         </Number>
         <Description>
           ACF
@@ -141,7 +141,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="7">
+        <AttributeInfoMap count="8">
           <AttributeInfo>
             <Id>
               DefaultMode
@@ -218,6 +218,22 @@
             </Type>
             <ExportId>
               ShowMessageTextFilter
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SlaveMessageConsumer
+            </Id>
+            <Type>
+              Reference
+            </Type>
+            <ExportId>
+              SlaveMessageConsumer
             </ExportId>
             <Data>
               <IsEnabled>
