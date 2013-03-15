@@ -243,6 +243,11 @@ I_EXPORT_COMPONENT(
 			"Parameter Manager Selection");
 
 I_EXPORT_COMPONENT(
+			OptionsListEditor,
+			"Editor for a list of options",
+			"Options Manager List Editor");
+
+I_EXPORT_COMPONENT(
 			ComboParamsManagerGui,
 			"Parameter manager editor as a combo box",
 			"Parameter Manager Selection");

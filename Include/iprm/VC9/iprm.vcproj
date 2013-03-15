@@ -305,6 +305,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IOptionsList.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IOptionsManager.h"
 				>
 			</File>
@@ -318,10 +322,6 @@
 			</File>
 			<File
 				RelativePath="..\iprm.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IOptionsList.h"
 				>
 			</File>
 			<File

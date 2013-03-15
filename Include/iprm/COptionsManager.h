@@ -41,10 +41,13 @@ public:
 	virtual void SetOptionEnabled(int index, bool isEnabled = true);
 	virtual bool RemoveOption(int index);
 	virtual bool InsertOption(
-					QString& optionName,
+					const QString& optionName,
 					const QByteArray& optionId,
 					const QString& optionDescription = QString(), 
 					int index = -	1);
+	virtual bool SwapOptions(int index1, int index2);
+	virtual bool SetOptionName(int index, const QString& optionName);
+	virtual bool SetOptionDescription(int index, const QString& optionDescription);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

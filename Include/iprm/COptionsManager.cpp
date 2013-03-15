@@ -142,7 +142,7 @@ bool COptionsManager::RemoveOption(int index)
 
 
 bool COptionsManager::InsertOption(
-					QString& optionName,
+					const QString& optionName,
 					const QByteArray& optionId,
 					const QString& optionDescription, 
 					int index)
@@ -156,6 +156,54 @@ bool COptionsManager::InsertOption(
 	}
 	else{
 		m_options.insert(m_options.begin() + index, optionInfo);
+	}
+
+	return true;
+}
+
+
+bool COptionsManager::SwapOptions(int index1, int index2)
+{
+	if (index1 >= m_options.size() || index2 >= m_options.size()){
+		return false;
+	}
+
+	istd::CChangeNotifier changePtr(this, CF_OPTIONS_CHANGED | CF_MODEL);
+
+	OptionInfo optionInfo1 = m_options.value(index1);
+	m_options.remove(index1);
+	m_options.insert(index2, optionInfo1);
+
+	return true;
+}
+
+
+bool COptionsManager::SetOptionName(int index, const QString& optionName)
+{
+	if (index >= m_options.size()){
+		return false;
+	}
+
+	if (m_options[index].optionName != optionName){
+		istd::CChangeNotifier changePtr(this, CF_OPTION_RENAMED | CF_MODEL);
+
+		m_options[index].optionName = optionName;
+	}
+
+	return true;
+}
+
+
+bool COptionsManager::SetOptionDescription(int index, const QString& optionDescription)
+{
+	if (index >= m_options.size()){
+		return false;
+	}
+
+	if (m_options[index].optionDescription != optionDescription){
+		istd::CChangeNotifier changePtr(this, CF_OPTIONS_CHANGED | CF_MODEL);
+
+		m_options[index].optionDescription = optionDescription;
 	}
 
 	return true;
