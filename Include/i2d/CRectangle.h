@@ -170,7 +170,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// static methods
-	static const i2d::CRectangle& CRectangle::GetEmpty();
+	static const i2d::CRectangle& GetEmpty();
 
 private:
 	istd::CRange m_horizontalRange;
