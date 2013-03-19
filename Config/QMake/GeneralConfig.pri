@@ -41,6 +41,10 @@ win32-msvc*{
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-overloaded-virtual
 }
 
+*-gcc*{
+	QMAKE_CXXFLAGS_WARN_ON += -wformat-security
+}
+
 CONFIG(debug, debug|release){
 	COMPILER_DIR = Debug$$COMPILER_NAME
 }

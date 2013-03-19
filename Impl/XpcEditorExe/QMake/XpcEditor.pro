@@ -13,7 +13,7 @@ LIBS += -lAcfLoc
 HEADERS -= ../*.h
 
 win32-msvc*{
-		QMAKE_CXXFLAGS += /wd4264
+	QMAKE_CXXFLAGS += /wd4264
 }
 
 QT += xml

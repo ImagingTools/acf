@@ -115,7 +115,7 @@ QString TShapeParamsGuiCompBase<Ui, Shape, ShapeModel>::GetUnitName() const
 {
 	const imath::IUnitInfo* unitInfoPtr = m_defaultUnitInfoAttrPtr.GetPtr();
 
-	const ShapeModel* objectPtr = GetObjectPtr();
+	const ShapeModel* objectPtr = BaseClass::GetObjectPtr();
 	if (objectPtr != NULL){
 		const i2d::ICalibrationProvider* calibrationProviderPtr = dynamic_cast<const i2d::ICalibrationProvider*>(objectPtr);
 		if (calibrationProviderPtr != NULL){
