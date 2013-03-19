@@ -27,8 +27,6 @@ QByteArray ParseRecursive(const QByteArray& rawName, QByteArray ns, int& positio
 	
 	QByteArray separator;
 
-	position = position;
-
 	int nameSize = int(rawName.size());
 	while (position < nameSize - 2){
 		char code = rawName[position];

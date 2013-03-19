@@ -34,9 +34,10 @@ win32-msvc*{
 	}
 }
 
-*-clang*{
+*-clang* | *-llvm*{
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
 	QMAKE_CXXFLAGS_WARN_ON += -Wno-overloaded-virtual
+	QMAKE_CXXFLAGS_WARN_ON += -Wno-format-security
 }
 
 *-gcc*{

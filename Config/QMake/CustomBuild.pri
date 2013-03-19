@@ -20,7 +20,7 @@ win32{
 # custom build for ACF Registry Compiler (Arxc)
 arxCompiler.name = ACF-Components
 arxCompiler.CONFIG += target_predeps
-arxCompiler.output = ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.cpp
+arxCompiler.output = ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.cpp ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.h
 CONFIG(debug, debug|release){
 	arxCompiler.commands = $$PWD/../../Bin/$$COMPILER_DIR/$$ARX_COMPILER ${QMAKE_FILE_IN} -o ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.cpp -config $${ARXC_CONFIG} -depends on -dependsPath ${QMAKE_FILE_IN_PATH}/Generated -v
 }
