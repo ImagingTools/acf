@@ -2,9 +2,9 @@
 #define icmm_TColorGradient_included
 
 
+// ACF includes
 #include "imath/TIMathFunction.h"
-
-#include "icmm/CVarColor.h"
+#include "icmm/IColorTransformation.h"
 
 
 namespace icmm

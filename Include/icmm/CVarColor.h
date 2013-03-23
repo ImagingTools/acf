@@ -20,7 +20,7 @@ namespace icmm
 
 	The dimension of used colorspace can be set at the construction time of CVarColor object,
 */
-class CVarColor: public imath::CVarVector, public iser::ISerializable
+class CVarColor: public imath::CVarVector, virtual public iser::ISerializable
 {
 public:
 	typedef imath::CVarVector BaseClass;

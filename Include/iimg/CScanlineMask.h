@@ -13,7 +13,6 @@
 #include "i2d/CAnnulus.h"
 #include "i2d/CPolygon.h"
 #include "i2d/CTubePolyline.h"
-
 #include "iimg/IRasterImage.h"
 
 
