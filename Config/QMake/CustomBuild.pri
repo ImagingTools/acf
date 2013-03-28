@@ -25,6 +25,7 @@ win*{
 # custom build for ACF Registry Compiler (Arxc)
 
 arxCompiler.name = ARX-Compiler
+arxCompiler.CONFIG += no_link target_predeps
 arxCompiler.output = ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.cpp ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.h
 CONFIG(debug, debug|release){
 	arxCompiler.commands = $$PWD/../../Bin/$$COMPILER_DIR/$$ARX_COMPILER ${QMAKE_FILE_IN} -o ${QMAKE_FILE_IN_PATH}/Generated/C${QMAKE_FILE_BASE}.cpp -config $${ARXC_CONFIG} -v
@@ -68,5 +69,5 @@ copyQmToGenerate.input = COPYQMTOGENERATE
 copyQmToGenerate.output = ../Generated/${QMAKE_FILE_BASE}.qm
 win32:copyQmToGenerate.commands = xcopy ${QMAKE_FILE_IN} ../Generated/${QMAKE_FILE_BASE}.qm
 else:copyQmToGenerate.commands = cp ${QMAKE_FILE_IN} ../Generated/${QMAKE_FILE_BASE}.qm
-copyQmToGenerate.CONFIG += no_link
+copyQmToGenerate.CONFIG += no_link target_predeps
 QMAKE_EXTRA_COMPILERS += copyQmToGenerate

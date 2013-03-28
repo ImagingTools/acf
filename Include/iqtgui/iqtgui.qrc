@@ -62,7 +62,6 @@
     <file alias="PointsMove">Resources/Icons/PointsMove.svg</file>
     <file alias="Grid">Resources/Icons/Grid.svg</file>
     <file alias="LogicalUnit">Resources/Icons/LogicalUnit.svg</file>
-    <file alias="LogicalUnit">Resources/Icons/LogicalUnit.svg</file>
     <file alias="ColorRing">Resources/Icons/ColorRing.svg</file>
   </qresource>
   <qresource prefix="newPrefix"/>
