@@ -31,7 +31,7 @@ win32-msvc*{
 		COMPILER_NAME = VC10
 	}
 
-	!contains(QMAKE_HOST.arch, x86_64){
+	contains(QMAKE_HOST.arch, x86_64){
 		PLATFORM_NAME = Win64
 	}
 	else{
@@ -63,5 +63,4 @@ CONFIG(release, debug|release){
 }
 
 INCLUDEPATH += $$PWD/../../Include
-LIBS += -L$$PWD/../../Lib/$$COMPILER_DIR
 

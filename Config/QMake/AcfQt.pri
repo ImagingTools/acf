@@ -1,2 +1,2 @@
 # static libs for the GCC compiler
-LIBS += -liqtdoc -liview -liqt2d -liqtprm -liqtgui
+LIBS += -L$$PWD/../../Lib/$$COMPILER_DIR -liqtdoc -liview -liqt2d -liqtprm -liqtgui
