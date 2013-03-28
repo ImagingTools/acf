@@ -460,6 +460,10 @@
 			Name="Moc Files"
 			>
 			<File
+				RelativePath="..\CButtonBasedSelectionParamGuiComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CComposedParamsSetGuiComp.moc"
 				>
 			</File>
