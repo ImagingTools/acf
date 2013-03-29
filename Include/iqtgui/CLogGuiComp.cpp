@@ -248,6 +248,10 @@ void CLogGuiComp::OnComponentCreated()
 	if (m_slaveMessageConsumerCompPtr.IsValid()){
 		BaseClass2::SetSlaveConsumer(m_slaveMessageConsumerCompPtr.GetPtr());
 	}
+
+	if (m_slaveMessageContainerCompPtr.IsValid()){
+		BaseClass2::AddChildContainer(m_slaveMessageContainerCompPtr.GetPtr());
+	}
 }
 
 

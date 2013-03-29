@@ -45,6 +45,7 @@ public:
 		I_ASSIGN(m_showMessageTextFilterAttrPtr, "ShowMessageTextFilter", "If enabled, the text filter for the messages will be shown", true, true);
 		I_ASSIGN(m_logTimeFormatAttrPtr, "TimeFormat", "Format of the date/time used for displaing message's time stamp", true, "");
 		I_ASSIGN(m_slaveMessageConsumerCompPtr, "SlaveMessageConsumer", "Slave message consumer", false, "SlaveMessageConsumer");
+		I_ASSIGN_TO(m_slaveMessageContainerCompPtr, m_slaveMessageConsumerCompPtr, false);
 	I_END_COMPONENT;
 
 	CLogGuiComp();
@@ -131,6 +132,7 @@ protected:
 private:
 	I_REF(iser::IFileLoader, m_fileLoaderCompPtr);
 	I_REF(ibase::IMessageConsumer, m_slaveMessageConsumerCompPtr);
+	I_REF(ibase::IHierarchicalMessageContainer, m_slaveMessageContainerCompPtr);
 	I_ATTR(int, m_defaultModeAttrPtr);
 	I_ATTR(int, m_maxMessagesCountAttrPtr);
 	I_ATTR(bool, m_showLogDescriptionAttrPtr);

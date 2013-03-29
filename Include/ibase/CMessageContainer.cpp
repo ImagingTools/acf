@@ -210,6 +210,12 @@ void CMessageContainer::ClearMessages()
 
 		m_worstCategory = 0;
 	}
+
+	for (		Childs::ConstIterator childIter = m_childContainers.constBegin();
+				childIter != m_childContainers.constEnd();
+				childIter++){
+		(*childIter)->ClearMessages();
+	}
 }
 
 
