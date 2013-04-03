@@ -32,7 +32,7 @@ namespace imath
 						\li \c IndexType	type of index used to address elements,
 						\li \c SizesType	type using to represent array size. This type muss define public typedef \c IndexType.
 */
-	template <class Argument, class Result, class Fulcrums>
+template <class Argument, class Result, class Fulcrums>
 class TFulcrumGridFunctionBase:
 			public istd::TCachedUpdateManagerWrap<iser::ISerializable>,
 			public TIMathFunction<Argument, Result>
