@@ -83,7 +83,6 @@ private:
 
 	Options m_options;
 
-private:
 	const iprm::IOptionsList* m_slaveSelectionConstraintsPtr;
 };
 

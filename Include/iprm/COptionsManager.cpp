@@ -26,6 +26,12 @@ void COptionsManager::SetFixedOptionsList(const iprm::IOptionsList* slaveSelecti
 }
 
 
+void COptionsManager::ResetOptions()
+{
+	m_options.clean();
+}
+
+
 // reimplemented (iprm::IOptionsList)
 
 int COptionsManager::GetOptionsFlags() const
