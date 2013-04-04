@@ -309,6 +309,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSettingsContainerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
@@ -505,6 +509,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSettingsContainerGuiComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.h"
 				>
 			</File>
@@ -694,6 +702,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CSettingsContainerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\generated\moc_CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
@@ -851,6 +863,10 @@
 			</File>
 			<File
 				RelativePath="..\CSelectableCommandsProviderComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSettingsContainerGuiComp.moc"
 				>
 			</File>
 			<File

@@ -16,8 +16,7 @@ namespace iqtgui
 
 void CSettingsContainerGuiComp::UpdateVisualElements()
 {
-	QStackedWidget* widgetPtr = m_stackedWidgetPtr;
-	Q_ASSERT(widgetPtr != NULL);
+	Q_ASSERT(m_stackedWidgetPtr != NULL);
 
 	int visualProvidersCount = m_slaveWidgetsVisualCompPtr.GetCount();
 
