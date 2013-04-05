@@ -217,6 +217,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CContainerGuiBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDialogApplicationComp.cpp"
 				>
 			</File>
@@ -392,6 +396,10 @@
 			</File>
 			<File
 				RelativePath="..\CComposedGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CContainerGuiBase.h"
 				>
 			</File>
 			<File
@@ -739,6 +747,10 @@
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CLogGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Generated\ui_CNumpadGui.h"
 				>
 			</File>
 			<File

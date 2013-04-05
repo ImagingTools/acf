@@ -12,53 +12,14 @@ namespace iqtgui
 
 // protected methods
 
-void CTabContainerGuiComp::UpdateVisualElements()
+// reimplemented (CContainerGuiBase)
+
+bool CTabContainerGuiComp::CreateMainGui(QSize iconSize)
 {
-	QTabWidget* widgetPtr = GetQtWidget();
-	Q_ASSERT(widgetPtr != NULL);
-
-	int visualProvidersCount = m_slaveWidgetsVisualCompPtr.GetCount();
-
-	for (		TabToGuiIndexMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
-				iter != m_tabToGuiIndexMap.end();
-				++iter){
-		int tabIndex = iter.key();
-		Q_ASSERT(tabIndex >= 0);
-		Q_ASSERT(tabIndex < widgetPtr->count());
-
-		int guiIndex = iter.value();
-		Q_ASSERT(guiIndex >= 0);
-		Q_ASSERT(guiIndex < m_slaveWidgetsCompPtr.GetCount());
-
-		QIcon tabIcon;
-		QString toolTip;
-
-		if (guiIndex < visualProvidersCount){
-			const IVisualStatusProvider* visualProviderPtr = m_slaveWidgetsVisualCompPtr[guiIndex];
-			if (visualProviderPtr != NULL){
-				tabIcon = visualProviderPtr->GetStatusIcon();
-				toolTip = visualProviderPtr->GetStatusText();
-			}
-		}
-
-		widgetPtr->setTabIcon(tabIndex, tabIcon);
-		widgetPtr->setTabToolTip(tabIndex, toolTip);
-	}
-}
-
-
-// reimplemented (iqtgui::CComponentBase)
-
-void CTabContainerGuiComp::OnGuiCreated()
-{
-	BaseClass::OnGuiCreated();
-
-	Q_ASSERT(IsGuiCreated());
-
 	QTabWidget* widgetPtr = GetQtWidget();
 	Q_ASSERT(widgetPtr != NULL);
 	if (widgetPtr == NULL){
-		return;
+		return false;
 	}
 
 	if (*m_useTriangularTabsAttrPtr){
@@ -66,191 +27,85 @@ void CTabContainerGuiComp::OnGuiCreated()
 	}
 
 	widgetPtr->setTabPosition(QTabWidget::TabPosition(*m_tabOrientationAttrPtr));
-
-	if (m_iconSizeAttrPtr.IsValid()){
-		QSize iconSize = QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue());
-		if (!iconSize.isNull() && iconSize.isValid() && !iconSize.isEmpty()){
-			widgetPtr->setIconSize(iconSize);
-		}
-	}
-
-	int tabsCount = m_tabModel.GetOptionsCount();
+	widgetPtr->setIconSize(iconSize);
 
 	bool isFlat = *m_flatStyleAttrPtr;
-
 	if (isFlat){
 		widgetPtr->setStyleSheet("QTabWidget::pane{border:0px none;}");
 	}
 
-	for (int guiIndex = 0; guiIndex < tabsCount; guiIndex++){
-		QString tabName = m_tabNamesAttrPtr[guiIndex];
-
-		iqtgui::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[guiIndex];
-		if ((guiPtr == NULL) || !guiPtr->CreateGui(widgetPtr)){
-			m_tabModel.SetOptionEnabled(guiIndex, false);
-
-			continue;
-		}
-
-		QWidget* pageWidget = new QWidget(widgetPtr);
-		QVBoxLayout* pageLayout = new QVBoxLayout(pageWidget);
-
-		pageLayout->addWidget(guiPtr->GetWidget());
-
-		if (isFlat){
-			pageLayout->setContentsMargins(0, 0, 0, 0);
-		}
-
-		int tabIndex = widgetPtr->addTab(pageWidget, tabName);
-		m_tabToGuiIndexMap[tabIndex] = guiIndex;
-
-		if (		(guiIndex < m_slaveWidgetsVisualCompPtr.GetCount()) &&
-					(guiIndex < m_slaveWidgetsModelCompPtr.GetCount())){
-			imod::IModel* modelPtr = m_slaveWidgetsModelCompPtr[guiIndex];
-			if ((m_slaveWidgetsVisualCompPtr[guiIndex] != NULL) && (modelPtr != NULL)){
-				RegisterModel(modelPtr, guiIndex);
-			}
-		}
-	}
-
-	widgetPtr->setCurrentIndex(m_tabModel.GetSelectedOptionIndex());
-
-	// setup the corner widget:
+	// setup the corner widget
 	if (m_cornerGuiCompPtr.IsValid()){
 		if (m_cornerGuiCompPtr->CreateGui(NULL)){
 			widgetPtr->setCornerWidget(m_cornerGuiCompPtr->GetWidget());
 		}
 	}
 
-	UpdateVisualElements();
+	return true;
 }
 
 
-void CTabContainerGuiComp::OnGuiDestroyed()
+int CTabContainerGuiComp::CreatePageGui(const QString& name, QSize /*iconSize*/, iqtgui::IGuiObject* guiPtr)
 {
-	Q_ASSERT(m_slaveWidgetsCompPtr.IsValid());
-
-	m_tabToGuiIndexMap.clear();
-
-	if (m_slaveWidgetsCompPtr.IsValid()){
-		int slaveWidgetsCount = m_slaveWidgetsCompPtr.GetCount();
-		for (int widgetIndex = 0; widgetIndex < slaveWidgetsCount; widgetIndex++){
-			iqtgui::IGuiObject* guiPtr = m_slaveWidgetsCompPtr[widgetIndex];
-			if (guiPtr != NULL){
-				guiPtr->DestroyGui();
-			}
-		}
+	QTabWidget* widgetPtr = GetQtWidget();
+	if (guiPtr == NULL || widgetPtr == NULL){
+		return -1;
 	}
 
-	BaseClass::OnGuiDestroyed();
-}
-
-
-// reimplemented (imod::CMultiModelDispatcherBase)
-
-void CTabContainerGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
-{
-	if (IsGuiCreated()){
-		UpdateVisualElements();
+	if (!guiPtr->CreateGui(widgetPtr)){
+		return -1;
 	}
-}
 
-// reimplemented (icomp::CComponentBase)
+	QWidget* pageWidget = new QWidget(widgetPtr);
+	QVBoxLayout* pageLayout = new QVBoxLayout(pageWidget);
 
-void CTabContainerGuiComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
+	pageLayout->addWidget(guiPtr->GetWidget());
 
-	m_tabModel.SetParent(this);
-}
+	if (*m_flatStyleAttrPtr){
+		pageLayout->setContentsMargins(0, 0, 0, 0);
+	}
 
-
-// public methods of the embedded class TabModel
-
-CTabContainerGuiComp::TabModel::TabModel()
-	:m_parentPtr(NULL)
-{
-	m_selectedOptionIndex = 0;
-
-	BaseClass::SetSelectionConstraints(this);
+	return widgetPtr->addTab(pageWidget, name);
 }
 
 
-void CTabContainerGuiComp::TabModel::SetParent(CTabContainerGuiComp* parentPtr)
+void CTabContainerGuiComp::UpdateItem(int index, const QIcon& icon, const QString& toolTip)
 {
-	Q_ASSERT(parentPtr != NULL);
+	QTabWidget* widgetPtr = GetQtWidget();
+	Q_ASSERT(widgetPtr != NULL);
 
-	m_parentPtr = parentPtr;
-
-	if ((m_parentPtr != NULL) && m_parentPtr->m_tabNamesAttrPtr.IsValid()){
-		int tabsCount = qMin(m_parentPtr->m_tabNamesAttrPtr.GetCount(), m_parentPtr->m_slaveWidgetsCompPtr.GetCount());
-
-		for(int tabIndex = 0; tabIndex < tabsCount; tabIndex++){
-			QString tabName = m_parentPtr->m_tabNamesAttrPtr[tabIndex];
-
-			BaseClass2::InsertOption(tabName, tabName.toLocal8Bit());
-		}
+	if (widgetPtr != NULL){
+		widgetPtr->setTabIcon(index, icon);
+		widgetPtr->setTabToolTip(index, toolTip);
 	}
 }
 
 
-// reimplemented (iprm::ISelectionParam)
-
-bool CTabContainerGuiComp::TabModel::SetSelectedOptionIndex(int index)
+bool CTabContainerGuiComp::SetSelectedIndex(int index)
 {
-	if (BaseClass::SetSelectedOptionIndex(index)){
-		if (m_parentPtr != NULL && m_parentPtr->IsGuiCreated()){
-			QTabWidget* tabWidgetPtr = m_parentPtr->GetQtWidget();
-			Q_ASSERT(tabWidgetPtr != NULL);
-
-			tabWidgetPtr->setCurrentIndex(index);
-		}
+	QTabWidget* widgetPtr = GetQtWidget();
+	Q_ASSERT(widgetPtr != NULL);
+	if (widgetPtr == NULL){
+		return false;
 	}
 
-	return false;
+	widgetPtr->setCurrentIndex(index);
+
+	return true;
 }
 
 
-// reimplemented (iser::ISerializable)
-
-bool CTabContainerGuiComp::TabModel::Serialize(iser::IArchive& archive)
+bool CTabContainerGuiComp::SetEnabled(int index, bool isEnabled)
 {
-	return BaseClass::Serialize(archive) && BaseClass2::Serialize(archive);
-}
-
-
-// reimplemented (iprm::IOptionsManager)
-
-bool CTabContainerGuiComp::TabModel::SetOptionEnabled(int index, bool isEnabled)
-{
-	if (		(m_parentPtr != NULL) &&
-				m_parentPtr->IsGuiCreated() &&
-				BaseClass2::SetOptionEnabled(index, isEnabled)){
-		QTabWidget* tabWidgetPtr = m_parentPtr->GetQtWidget();
-		Q_ASSERT(tabWidgetPtr != NULL);
-
-		tabWidgetPtr->setTabEnabled(index, isEnabled);
-
-		return true;
+	QTabWidget* widgetPtr = GetQtWidget();
+	Q_ASSERT(widgetPtr != NULL);
+	if (widgetPtr == NULL){
+		return false;
 	}
 
-	return false;
-}
+	widgetPtr->setTabEnabled(index, isEnabled);
 
-
-bool CTabContainerGuiComp::TabModel::RemoveOption(int /*index*/)
-{
-	return false;
-}
-
-
-bool CTabContainerGuiComp::TabModel::InsertOption(
-			QString& /*optionName*/,
-			const QByteArray& /*optionId*/,
-			const QString& /*optionDescription*/, 
-			int /*index*/)
-{
-	return false;
+	return true;
 }
 
 
