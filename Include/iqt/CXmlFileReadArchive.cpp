@@ -8,9 +8,6 @@
 #include <QtCore/QFile>
 #include <QtXml/QDomNodeList>
 
-// ACF includes
-#include "istd/CBase64.h"
-
 
 namespace iqt
 {

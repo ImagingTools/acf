@@ -6,10 +6,6 @@
 #include <QtCore/QTextStream>
 
 
-// ACF includes
-#include "istd/CBase64.h"
-
-
 namespace iqt
 {
 
