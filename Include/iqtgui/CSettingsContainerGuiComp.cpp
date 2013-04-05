@@ -21,32 +21,32 @@ void CSettingsContainerGuiComp::UpdateVisualElements()
 	int visualProvidersCount = m_slaveWidgetsVisualCompPtr.GetCount();
 
 	for (		TabToGuiIndexMap::ConstIterator iter = m_tabToGuiIndexMap.begin();
-		iter != m_tabToGuiIndexMap.end();
-		++iter){
-			int tabIndex = iter.key();
-			Q_ASSERT(tabIndex >= 0);
-			Q_ASSERT(tabIndex < widgetPtr->count());
+				iter != m_tabToGuiIndexMap.end();
+				++iter){
+		int tabIndex = iter.key();
+		Q_ASSERT(tabIndex >= 0);
+		Q_ASSERT(tabIndex < m_stackedWidgetPtr->count());
 
-			int guiIndex = iter.value();
-			Q_ASSERT(guiIndex >= 0);
-			Q_ASSERT(guiIndex < m_slaveWidgetsCompPtr.GetCount());
+		int guiIndex = iter.value();
+		Q_ASSERT(guiIndex >= 0);
+		Q_ASSERT(guiIndex < m_slaveWidgetsCompPtr.GetCount());
 
-			QIcon tabIcon;
-			QString toolTip;
+		QIcon tabIcon;
+		QString toolTip;
 
-			if (guiIndex < visualProvidersCount){
-				const IVisualStatusProvider* visualProviderPtr = m_slaveWidgetsVisualCompPtr[guiIndex];
-				if (visualProviderPtr != NULL){
-					tabIcon = visualProviderPtr->GetStatusIcon();
-					toolTip = visualProviderPtr->GetStatusText();
-				}
+		if (guiIndex < visualProvidersCount){
+			const IVisualStatusProvider* visualProviderPtr = m_slaveWidgetsVisualCompPtr[guiIndex];
+			if (visualProviderPtr != NULL){
+				tabIcon = visualProviderPtr->GetStatusIcon();
+				toolTip = visualProviderPtr->GetStatusText();
 			}
+		}
 
-			QListWidgetItem* itemPtr = m_menuListPtr->item(tabIndex);
-			if (itemPtr != NULL){
-				itemPtr->setIcon(tabIcon);
-				itemPtr->setToolTip(toolTip);
-			}
+		QListWidgetItem* itemPtr = m_menuListPtr->item(tabIndex);
+		if (itemPtr != NULL){
+			itemPtr->setIcon(tabIcon);
+			itemPtr->setToolTip(toolTip);
+		}
 	}
 }
 
