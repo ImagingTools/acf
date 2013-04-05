@@ -211,10 +211,6 @@
 			Filter="cpp"
 			>
 			<File
-				RelativePath="..\CBase64.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CBitManip.cpp"
 				>
 			</File>
@@ -261,10 +257,6 @@
 			>
 			<File
 				RelativePath="..\AcfVersion.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CBase64.h"
 				>
 			</File>
 			<File

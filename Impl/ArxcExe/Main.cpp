@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	icomp::TSimComponentWrap<BasePck::ConsoleLog> log;
 	log.InitComponent();
 
-	icomp::TSimComponentWrap<CompositorPck::RegistryLoader> registryLoaderComp;
+	icomp::TSimComponentWrap<BasePck::XmlFileSerializer> registryLoaderComp;
 	registryLoaderComp.SetRef("Log", &log);
 	registryLoaderComp.SetRef("VersionInfo", &applicationInfo);
 	registryLoaderComp.SetBoolAttr("EnableVerbose", verboseEnabled);

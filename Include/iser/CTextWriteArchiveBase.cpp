@@ -85,7 +85,7 @@ bool CTextWriteArchiveBase::Process(double& value)
 
 bool CTextWriteArchiveBase::ProcessData(void* dataPtr, int size)
 {
-	QByteArray encodedString = istd::CBase64::ConvertToBase64(dataPtr, size);
+	QByteArray encodedString = QByteArray((const char*)dataPtr, size).toBase64();
 
 	return Process(encodedString);
 }
