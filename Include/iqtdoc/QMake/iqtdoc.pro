@@ -3,5 +3,3 @@ include(../../../Config/QMake/QtBaseConfig.pri)
 
 TARGET = iqtdoc
 
-LIBS += -liqt
-LIBS += -lidoc

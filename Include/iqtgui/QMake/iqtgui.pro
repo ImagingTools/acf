@@ -4,5 +4,3 @@ include(../../../Config/QMake/QtGuiBaseConfig.pri)
 TARGET = iqtgui
 
 RESOURCES += ../*.qrc
-
-LIBS += -liqt
