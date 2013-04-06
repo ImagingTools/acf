@@ -60,8 +60,8 @@ protected:
 	virtual void OnGuiDestroyed();
 
 	// reimplemented (icomp::CComponentBase)
-	virtual void CTabContainerGuiComp::OnComponentCreated();
-	virtual void CTabContainerGuiComp::OnComponentDestroyed();
+    virtual void OnComponentCreated();
+    virtual void OnComponentDestroyed();
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);

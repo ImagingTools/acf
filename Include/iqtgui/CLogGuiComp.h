@@ -69,8 +69,7 @@ protected:
 
 	enum DataRole
 	{
-		DR_MESSAGE_ID = Qt::UserRole,
-		DR_CATEGORY
+        DR_CATEGORY = Qt::UserRole
 	};
 
 	/**

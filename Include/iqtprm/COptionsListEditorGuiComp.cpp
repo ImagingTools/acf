@@ -35,7 +35,12 @@ void COptionsListEditorGuiComp::on_AddButton_clicked()
 {
 	static QString defaultOptionName= "Option";
 	static QString defaultOptionDescription;
-	QByteArray defaultOptionId = QUuid::createUuid().toByteArray();
+
+#if QT_VERSION >= 0x040800
+    QByteArray defaultOptionId = QUuid::createUuid().toByteArray();
+#else
+    QByteArray defaultOptionId = QUuid::createUuid().toString().toLatin1();
+#endif
 
 	iprm::IOptionsManager* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){

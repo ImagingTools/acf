@@ -81,7 +81,7 @@ void CNameParamGuiComp::OnGuiCreated()
 	if (m_regularExpressionAttrPtr.IsValid()){
 		QRegExp expression(*m_regularExpressionAttrPtr);
 
-		QRegExpValidator* validatorPtr = new QRegExpValidator(expression);
+        QRegExpValidator* validatorPtr = new QRegExpValidator(expression, NameEdit);
 
 		NameEdit->setValidator(validatorPtr);
 	}

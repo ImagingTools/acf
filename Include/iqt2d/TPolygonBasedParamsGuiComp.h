@@ -109,7 +109,7 @@ protected:
 		virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem&, const QModelIndex&) const
 		{
 			QLineEdit* editorPtr = new QLineEdit(parent);
-			editorPtr->setValidator(new QDoubleValidator());
+            editorPtr->setValidator(new QDoubleValidator(editorPtr));
 			return editorPtr;
 		}
 	}; // CPolygonParamsGuiItemDelegate
@@ -396,7 +396,6 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::OnToolsBu
 		}
 	}
 }
-
 
 
 } // namespace iqt2d

@@ -56,8 +56,6 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformationProvider& me
 			messageTimeString = timeStamp.toString();
 		}
 
-		qint64 messageTimeStamp = timeStamp.toMSecsSinceEpoch();
-
 		treeItemPtr->setText(CT_TIME, messageTimeString);
 		treeItemPtr->setText(CT_MESSAGE, message.GetInformationDescription());
 		treeItemPtr->setText(CT_SOURCE, message.GetInformationSource());
@@ -65,7 +63,6 @@ QTreeWidgetItem* CLogGuiComp::CreateGuiItem(const istd::IInformationProvider& me
 		treeItemPtr->setToolTip(CT_TIME, messageTimeString);
 		treeItemPtr->setToolTip(CT_MESSAGE, message.GetInformationDescription());
 		treeItemPtr->setToolTip(CT_SOURCE, message.GetInformationSource());
-		treeItemPtr->setData(0, DR_MESSAGE_ID, messageTimeStamp);
 		treeItemPtr->setData(0, DR_CATEGORY, message.GetInformationCategory());
 
 		istd::IInformationProvider::InformationCategory category = message.GetInformationCategory();
