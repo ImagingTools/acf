@@ -167,7 +167,7 @@ class TMultiAttributeMember< TMultiAttribute<QString> >: public TMultiAttributeM
 public:
 	QString operator[](int index) const
 	{
-        return QCoreApplication::translate("Attribute", TMultiAttributeMemberBase< TMultiAttribute<QString> >::operator[](index).toLatin1());
+		return QCoreApplication::translate("Attribute", TMultiAttributeMemberBase< TMultiAttribute<QString> >::operator[](index).toLatin1());
 	}
 };
 

@@ -3,9 +3,9 @@
 
 // Qt includes
 #if QT_VERSION < 0x050000
-    #include <QtGui/QDesktopServices>
+	#include <QtGui/QDesktopServices>
 #else
-    #include <QtCore/QStandardPaths>
+	#include <QtCore/QStandardPaths>
 #endif
 
 
@@ -56,7 +56,7 @@ void CSystemLocationComp::OnComponentCreated()
 #if QT_VERSION < 0x05000
 	m_storagePath = QDesktopServices::storageLocation(QDesktopServices::StandardLocation(*m_locationTypeAttrPtr));
 #else
-    m_storagePath = QStandardPaths::writableLocation(QStandardPaths::StandardLocation(*m_locationTypeAttrPtr));
+	m_storagePath = QStandardPaths::writableLocation(QStandardPaths::StandardLocation(*m_locationTypeAttrPtr));
 
 #endif
 }

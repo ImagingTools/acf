@@ -82,7 +82,7 @@ void CXmlDocumentInfoBase::EncodeXml(const QString& text, QByteArray& xmlText)
 			xmlText += iter.value();
 		}
 		else if ((c >= ' ') && (c <= '}')){
-            xmlText += c.toLatin1();
+			xmlText += c.toLatin1();
 		}
 		else{
 			quint16 unicodeChar = quint16(c.unicode());

@@ -59,7 +59,7 @@ bool TSerializableContainer<ItemClass>::Serialize(iser::IArchive& archive)
 		BaseClass::Reset();
 
 #if QT_VERSION >= 0x040700
-        BaseClass::m_items.reserve(itemCount);
+		BaseClass::m_items.reserve(itemCount);
 #endif
 		for (int index = 0; index < itemCount; index++){
 			BaseClass::PushBack(ItemClass());

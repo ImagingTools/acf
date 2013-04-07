@@ -136,7 +136,7 @@ bool CXmlFileReadArchive::Process(char& value)
 	QString text = PullTextNode();
 
 	if (!text.isEmpty()){
-        value = text.at(0).toLatin1();
+		value = text.at(0).toLatin1();
 
 		return true;
 	}
