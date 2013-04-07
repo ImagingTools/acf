@@ -4,21 +4,17 @@
 
 // Qt includes
 #include <QtCore/QFileSystemWatcher>
-#include <QtCore/QStringList>
+#include <QtCore/QDir>
 #include <QtGui/QStandardItemModel>
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "ibase/IQtItemModelProvider.h"
-
 #include "ifile/IFileListProvider.h"
 #include "ifile/IFileNameParam.h"
+#include "ifile/IFileTypeInfo.h"
 
 
 namespace ifile
@@ -52,7 +48,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFileListProvider)
-	virtual QStringList GetFileList() const;
+	virtual const QFileInfoList& GetFileList() const;
 
 	// reimplemented (ibase::IQtItemModelProvider)
 	virtual const QAbstractItemModel* GetItemModel() const;
@@ -69,6 +65,37 @@ private Q_SLOTS:
 	void OnDirectoryContentChanged(const QString& directoryPath);
 
 private:
+	/**
+		Creates the list of files in a root directory \c root.
+		Several filters can be applied to the \c root before call of this function.
+		So you can do a separate filtering of files and directories.
+		\param	minRecursionDepth	minimal recursion depth.
+		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
+	*/
+	static bool CreateFileList(const QDir& root,
+				int minRecursionDepth,
+				int maxRecursionDepth,
+				const QStringList& nameFilters,
+				QDir::SortFlags sortSpec,
+				QFileInfoList& fileList);
+
+	/**
+		Several filters can be applied to the QDir object before call of this function.
+		\param	minRecursionDepth	minimal recursion depth. If it is 0, root will be included.
+		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
+	*/
+	static bool CreateDirectoryList(const QDir& root,
+				int minRecursionDepth,
+				int maxRecursionDepth,
+				QFileInfoList& directoryList);
+
+	static void EnumerateDirectory(
+				const QDir& root,
+				int minRecursionDepth,
+				int maxRecursionDepth,
+				QFileInfoList& directoryList);
+
+private:
 	I_REF(ifile::IFileNameParam, m_dirParamCompPtr);
 	I_REF(imod::IModel, m_dirParamModelCompPtr);
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoCompPtr);
@@ -76,7 +103,7 @@ private:
 	I_ATTR(int, m_minRecurDepthAttrPtr);
 	I_ATTR(int, m_maxRecurDepthAttrPtr);
 
-	QStringList m_fileList;
+	QFileInfoList m_fileList;
 
 	QFileSystemWatcher m_directoryWatcher;
 

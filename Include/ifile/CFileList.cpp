@@ -46,8 +46,6 @@ bool CFileList::Create(
 			QString filePath = dir.absoluteFilePath(fileName);
 
 			push_back(filePath);	
-
-			Q_EMIT currentFile(filePath);
 		}
 	}
 

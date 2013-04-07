@@ -6,11 +6,8 @@
 #include <QtCore/QDateTime>
 #include <QtGui/QFileIconProvider>
 
-
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
-#include "ifile/CFileList.h"
 
 
 namespace ifile
@@ -19,7 +16,7 @@ namespace ifile
 
 // reimplemented (ifile::IFileListProvider)
 
-QStringList CFileListProviderComp::GetFileList() const
+const QFileInfoList& CFileListProviderComp::GetFileList() const
 {
 	return m_fileList;
 }
@@ -34,6 +31,103 @@ const QAbstractItemModel* CFileListProviderComp::GetItemModel() const
 
 
 // protected methods
+
+bool CFileListProviderComp::CreateFileList(
+			const QDir& root,
+			int minRecursionDepth,
+			int maxRecursionDepth,
+			const QStringList& nameFilters,
+			QDir::SortFlags sortSpec,
+			QFileInfoList& fileList)
+{
+	QFileInfoList directories;
+	if (!CreateDirectoryList(root, minRecursionDepth, maxRecursionDepth, directories)){
+		return false;
+	}
+
+	for (		QFileInfoList::const_iterator dirIter = directories.begin();
+				dirIter != directories.end();
+				++dirIter){
+		QString dirPath = dirIter->absoluteFilePath();
+
+		QDir dir(dirPath);
+		dir.setFilter(QDir::Files);
+
+		QStringList files = dir.entryList(nameFilters, QDir::Files, sortSpec);
+
+		for (		QStringList::const_iterator fileIter = files.begin();
+					fileIter != files.end();
+					++fileIter){
+			const QString& fileName = *fileIter;
+
+			QString filePath = dir.absoluteFilePath(fileName);
+
+			fileList.push_back(QFileInfo(filePath));
+		}
+	}
+
+	return true;
+}
+
+
+
+bool CFileListProviderComp::CreateDirectoryList(
+			const QDir& root,
+			int minRecursionDepth,
+			int maxRecursionDepth,
+			QFileInfoList& directoryList)
+{
+	Q_ASSERT(minRecursionDepth >= 0);
+
+	QString rootPath = root.absolutePath();
+
+	if (rootPath.isEmpty()){
+		return false;
+	}
+
+	QFileInfo fileInfo(rootPath);
+	if (!fileInfo.isDir()){
+		return false;
+	}
+
+	EnumerateDirectory(root, minRecursionDepth, maxRecursionDepth, directoryList);
+
+	return true;
+}
+
+
+// protected methods
+
+void CFileListProviderComp::EnumerateDirectory(
+			const QDir& root,
+			int minRecursionDepth,
+			int maxRecursionDepth,
+			QFileInfoList& directories)
+{
+	if (minRecursionDepth <= 0){
+		QString rootPath = root.absolutePath();
+
+		directories.push_back(QFileInfo(rootPath));
+	}
+
+	if (maxRecursionDepth == 0){
+		return;
+	}
+
+	QStringList entries = root.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+
+	for (		QStringList::const_iterator iter = entries.begin();
+				iter != entries.end();
+				++iter){
+		const QString& subDirName = *iter;
+
+		QDir subDir = root;
+		subDir.setPath(root.absoluteFilePath(subDirName));
+
+		EnumerateDirectory(subDir, minRecursionDepth - 1, maxRecursionDepth - 1, directories);
+	}
+}
+
 
 // reimplemented (imod::CSingleModelObserverBase)
 
@@ -73,22 +167,21 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 			}
 		}
 
-		CFileList fileList;
-		fileList.Create(
-					m_dirParamCompPtr->GetPath(),
+		CreateFileList(m_dirParamCompPtr->GetPath(),
 					*m_minRecurDepthAttrPtr,
 					*m_maxRecurDepthAttrPtr,
-					filters);
+					filters,
+					QDir::Name | QDir::IgnoreCase,
+					m_fileList);
 
-		m_fileList = fileList;
 
-		m_itemModel.setRowCount(fileList.count());
+		m_itemModel.setRowCount(m_fileList.count());
 		QFileIconProvider fileIconProvider;
-		for (int fileIndex = 0; fileIndex < fileList.count(); fileIndex++){
-			QFileInfo fileInfo(fileList[fileIndex]);
+		for (int fileIndex = 0; fileIndex < m_fileList.count(); fileIndex++){
+			const QFileInfo& fileInfo = m_fileList[fileIndex];
 			QIcon fileIcon = fileIconProvider.icon(fileInfo);
 		
-			QStandardItem* fileItemPtr = new QStandardItem(fileList[fileIndex]);
+			QStandardItem* fileItemPtr = new QStandardItem(fileInfo.absoluteFilePath());
 			fileItemPtr->setEditable(false);
 			fileItemPtr->setIcon(fileIcon);
 

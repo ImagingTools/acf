@@ -2,9 +2,11 @@
 #define ifile_IFileListProvider_included
 
 
-#include "istd/IChangeable.h"
+// Qt includes
+#include <QtCore/QFileInfoList>
 
-#include <QtCore/QString>
+// ACF includes
+#include "istd/IChangeable.h"
 
 
 namespace ifile
@@ -12,7 +14,7 @@ namespace ifile
 
 
 /**
-	Provide access to some parameter list.
+	Provide access to a list of files.
 */
 class IFileListProvider: virtual public istd::IChangeable
 {
@@ -20,7 +22,7 @@ public:
 	/**
 		Get list of files.
 	*/
-	virtual QStringList GetFileList() const = 0;
+	virtual const QFileInfoList& GetFileList() const = 0;
 };
 
 
