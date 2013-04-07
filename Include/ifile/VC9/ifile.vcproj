@@ -195,15 +195,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDirList.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileArchiveInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileList.cpp"
 				>
 			</File>
 			<File
@@ -268,15 +260,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDirList.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileArchiveInfo.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileList.h"
 				>
 			</File>
 			<File
@@ -364,14 +348,6 @@
 			Name="Moc Files"
 			>
 			<File
-				RelativePath="..\CDirList.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileList.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileListProviderComp.moc"
 				>
 			</File>
@@ -379,14 +355,6 @@
 		<Filter
 			Name="Generated Files"
 			>
-			<File
-				RelativePath="..\Generated\moc_CDirList.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CFileList.cpp"
-				>
-			</File>
 			<File
 				RelativePath="..\Generated\moc_CFileListProviderComp.cpp"
 				>
