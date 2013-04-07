@@ -70,8 +70,6 @@ private:
 	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
 	I_FACT(idoc::IUndoManager, m_undoManagerCompFact);
 	I_FACT(imod::IObserver, m_undoManagerObserverCompFact);
-
-	int m_featureFlags;
 };
 
 
