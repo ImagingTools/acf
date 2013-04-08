@@ -76,6 +76,8 @@ void CComposedGuiComp::OnGuiCreated()
 		widgetPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
 
 		QToolBox* toolBoxPtr = new QToolBox(widgetPtr);
+		toolBoxPtr->setBackgroundRole(QPalette::Window);
+
 		int elementsCount = m_guisCompPtr.GetCount();
 		for (int i = 0; i < elementsCount; ++i){
 			iqtgui::IGuiObject* guiPtr = m_guisCompPtr[i];

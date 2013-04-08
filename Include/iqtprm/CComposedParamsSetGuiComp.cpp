@@ -121,6 +121,7 @@ void CComposedParamsSetGuiComp::OnGuiCreated()
 		case DT_TOOL_BOX:
 			ParamsFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 			m_guiContainerPtr = toolBoxPtr = new QToolBox(ParamsFrame);
+			toolBoxPtr->setBackgroundRole(QPalette::Window);
 			QObject::connect(toolBoxPtr, SIGNAL(currentChanged(int)), this, SLOT(OnEditorChanged(int)));
 			layoutPtr->addWidget(toolBoxPtr);
 			m_currentGuiIndex = 0;
