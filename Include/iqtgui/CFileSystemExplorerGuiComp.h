@@ -40,6 +40,7 @@ public:
 	
 	I_BEGIN_COMPONENT(CFileSystemExplorerGuiComp);
 		I_ASSIGN(m_filterInfoCompPtr, "FilterInfo", "Provides information about supported files used to filter shown files", false, "FilterInfo");
+		I_ASSIGN(m_rootPathParamCompPtr, "RootPath", "Sets the root path", false, "RootPath");
 		I_ASSIGN(m_showUserFilterAttrPtr, "ShowUserFilter", "If activated user filter line will be shown", true, false);
 		I_ASSIGN(m_showFileTypeAttrPtr, "ShowFileType", "Show file type description", true, false);
 		I_ASSIGN(m_showFileModificationTimeAttrPtr, "ShowFileModificationTime", "If activated file modification time stamp will be shown for each file", true, false);
@@ -70,6 +71,7 @@ private:
 
 private:
 	I_REF(ifile::IFileTypeInfo, m_filterInfoCompPtr);
+	I_REF(ifile::IFileNameParam, m_rootPathParamCompPtr);
 	I_ATTR(bool, m_showUserFilterAttrPtr);
 	I_ATTR(bool, m_showFileTypeAttrPtr);
 	I_ATTR(bool, m_showFileModificationTimeAttrPtr);

@@ -76,7 +76,20 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 
 	FileTree->setModel(&m_fileSystemModel);
 
-	QModelIndex rootIndex = m_fileSystemModel.setRootPath(m_fileSystemModel.myComputer().toString());
+	QModelIndex rootIndex;
+
+	QString currentRootFilePath;
+	
+	if (m_rootPathParamCompPtr.IsValid()){
+		currentRootFilePath = istd::CSystem::GetEnrolledPath(m_rootPathParamCompPtr->GetPath());
+	}
+
+	if (!currentRootFilePath.isEmpty() && QFile::exists(currentRootFilePath)){
+		rootIndex = m_fileSystemModel.setRootPath(currentRootFilePath);
+	}
+	else {
+		rootIndex = m_fileSystemModel.setRootPath(m_fileSystemModel.myComputer().toString());
+	}
 	
 	FileTree->setRootIndex(rootIndex);
 
