@@ -37,6 +37,7 @@ win32-msvc*{
 	else{
 		PLATFORM_NAME = Win32
 	}
+	QMAKE_CXXFLAGS += /openmp
 }
 
 *-clang* | *-llvm*{
@@ -47,6 +48,8 @@ win32-msvc*{
 
 *-gcc*{
 	QMAKE_CXXFLAGS_WARN_ON += -wformat-security
+	QMAKE_CXXFLAGS += /openmp
+	LIBS += -lgomp
 }
 
 LIBRARY_SUFIX =
