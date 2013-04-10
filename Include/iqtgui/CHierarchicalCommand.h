@@ -95,7 +95,7 @@ public:
 	virtual void SetName(const QString& name);
 
 	// reimplemented (iprm::IEnableableParam)
-	virtual void SetEnabled(bool isEnabled = true);
+	virtual bool SetEnabled(bool isEnabled = true);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

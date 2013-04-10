@@ -172,10 +172,11 @@ void CHierarchicalCommand::SetName(const QString& name)
 
 // reimplemented (iprm::IEnableableParam)
 
-void CHierarchicalCommand::SetEnabled(bool isEnabled)
+bool CHierarchicalCommand::SetEnabled(bool isEnabled)
 {
 	BaseClass::setEnabled(isEnabled);
-	BaseClass2::SetEnabled(isEnabled);
+	
+	return BaseClass2::SetEnabled(isEnabled);
 }
 
 

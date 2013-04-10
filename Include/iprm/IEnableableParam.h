@@ -27,9 +27,9 @@ public:
 
 	/**
 		Set something to \c isEnabled state.
+		The method returns \c true if the changing of the enabling status was allowed, otherwise \c false.
 	*/
-	virtual void SetEnabled(bool isEnabled = true) = 0;
-
+	virtual bool SetEnabled(bool isEnabled = true) = 0;
 };
 
 

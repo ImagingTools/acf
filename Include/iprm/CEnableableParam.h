@@ -23,7 +23,7 @@ public:
 	// reimplemented (iprm::IEnableableParam)
 	virtual bool IsEnabled() const;
 	virtual bool IsEnablingAllowed() const;
-	virtual void SetEnabled(bool isEnabled = true);
+	virtual bool SetEnabled(bool isEnabled = true);
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);

@@ -31,13 +31,19 @@ bool CEnableableParam::IsEnablingAllowed() const
 }
 
 
-void CEnableableParam::SetEnabled(bool isEnabled)
+bool CEnableableParam::SetEnabled(bool isEnabled)
 {
-	if (IsEnablingAllowed() && (isEnabled != m_isEnabled)){
+	if (!IsEnablingAllowed()){
+		return false;
+	}
+
+	if (isEnabled != m_isEnabled){
 		istd::CChangeNotifier changePtr(this);
 	
 		m_isEnabled = isEnabled;
 	}
+
+	return true;
 }
 
 
