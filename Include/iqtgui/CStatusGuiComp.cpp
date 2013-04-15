@@ -17,7 +17,7 @@ namespace iqtgui
 void CStatusGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	static QIcon stateUnknownIcon(":/Icons/StateUnknown.svg");
-	static QIcon stateOkIcon(":/Icons/OS_OK.svg");
+	static QIcon stateOkIcon(":/Icons/StateOk.svg");
 	static QIcon stateWarningIcon(":/Icons/StateWarning.svg");
 	static QIcon stateInvalidIcon(":/Icons/StateInvalid.svg");
 
