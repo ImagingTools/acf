@@ -175,7 +175,7 @@ void CHierarchicalCommand::SetName(const QString& name)
 bool CHierarchicalCommand::SetEnabled(bool isEnabled)
 {
 	BaseClass::setEnabled(isEnabled);
-	
+
 	return BaseClass2::SetEnabled(isEnabled);
 }
 
