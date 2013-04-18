@@ -44,6 +44,13 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 {
 	m_quitCommand.setMenuRole(QAction::QuitRole);
 
+	m_newCommand.setShortcut(Qt::CTRL + Qt::Key_N);
+	m_openCommand.setShortcut(Qt::CTRL + Qt::Key_O);
+	m_saveCommand.setShortcut(Qt::CTRL + Qt::Key_S);
+	m_undoCommand.setShortcut(Qt::CTRL + Qt::Key_Z);
+	m_redoCommand.setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_Z);
+	m_fullScreenCommand.setShortcut(Qt::Key_F11);
+
 	connect(&m_newCommand, SIGNAL(triggered()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(triggered()), this, SLOT(OnOpen()));
 	connect(&m_saveCommand, SIGNAL(triggered()), this, SLOT(OnSave()));
@@ -625,21 +632,15 @@ void CMainWindowGuiComp::OnRetranslate()
 
 	// File commands
 	m_newCommand.SetVisuals(tr("&New"), tr("New"), tr("Creates new document"), QIcon(":/Icons/New"));
-	m_newCommand.setShortcut(tr("Ctrl+N"));
 	m_openCommand.SetVisuals(tr("&Open..."), tr("Open"), tr("Opens document from file"), QIcon(":/Icons/Open.svg"));
-	m_openCommand.setShortcut(tr("Ctrl+O"));
 	m_saveCommand.SetVisuals(tr("&Save"), tr("Save"), tr("Saves document to actual working file"), QIcon(":/Icons/Save.svg"));
-	m_saveCommand.setShortcut(tr("Ctrl+S"));
 	m_saveAsCommand.SetVisuals(tr("&Save As..."), tr("Save As"), tr("Saves document into selected file"));
 	m_quitCommand.SetVisuals(tr("&Quit"), tr("Quit"), tr("Quits this application"), QIcon(":/Icons/Shutdown.svg"));
 	m_undoCommand.SetVisuals(tr("&Undo"), tr("Undo"), tr("Undo last document changes"), QIcon(":/Icons/Undo.svg"));
-	m_undoCommand.setShortcut(tr("Ctrl+Z"));
 	m_redoCommand.SetVisuals(tr("&Redo"), tr("Redo"), tr("Redo last document changes"), QIcon(":/Icons/Redo.svg"));
-	m_redoCommand.setShortcut(tr("Ctrl+Shift+Z"));
 
 	// View commands
 	m_fullScreenCommand.SetVisuals(tr("&Full Screen"), tr("Full Screen"), tr("Turn full screen mode on/off"));
-	m_fullScreenCommand.setShortcut(tr("F11"));
 
 	// Tools commands
 	m_copyPathToClipboardCommand.SetVisuals(tr("&Copy Document Path"), tr("Copy Path"), tr("Copy current document path to system clipboard"));
