@@ -122,14 +122,12 @@ void CTextFileLogStreamerComp::NewLine()
 void CTextFileLogStreamerComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
-
-	OpenFileStream();
 }
 
 
 void CTextFileLogStreamerComp::OnComponentDestroyed()
 {
-	m_outputFile.close();
+	CloseFileStream();
 
 	BaseClass::OnComponentDestroyed();
 }
