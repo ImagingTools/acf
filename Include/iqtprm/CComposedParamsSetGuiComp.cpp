@@ -304,7 +304,7 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 			}
 		}
 
-		iqtgui::IGuiObject* guiObject = dynamic_cast<iqtgui::IGuiObject*>(m_observersCompPtr[i]);
+		iqtgui::IGuiObject* guiObject = m_guisCompPtr[i];
 		if (guiObject){
 			iprm::IParamsSet::Ids::const_iterator iter;
 
