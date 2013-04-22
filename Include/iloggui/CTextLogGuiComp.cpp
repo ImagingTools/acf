@@ -9,7 +9,7 @@ namespace iloggui
 
 // reimplemented (iqtgui::TGuiObserverWrap)
 
-void CTextLogGuiComp::UpdateGui()
+void CTextLogGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	QString document;
 
