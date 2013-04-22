@@ -37,9 +37,10 @@ void CTextLogGuiComp::OnGuiCreated()
 
 	m_tableFormat.setBorder(0);
 	m_tableFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
-	m_tableFormat.setCellPadding(4);
+	m_tableFormat.setCellPadding(2);
 	m_tableFormat.setCellSpacing(0);
 
+	m_okCellFormat.setRightPadding(8);
 	m_okEvenCellFormat.setBackground(QColor(0xf0f0ff));
 
 	connect(SeverityFilterCB, SIGNAL(currentIndexChanged(int)), this, SLOT(DoFilter()));
@@ -95,7 +96,9 @@ void CTextLogGuiComp::UpdateFilters()
 			sources.insert(messagePtr->GetInformationSource());
 		}
 
-		SourceFilterCB->addItems(sources.toList());
+		if (!sources.isEmpty()){
+			SourceFilterCB->addItems(sources.toList());
+		}
 	}
 
 	SourceFilterCB->blockSignals(false);
@@ -150,7 +153,8 @@ void CTextLogGuiComp::GenerateDocument(int severityFilter, const QString& source
 			continue;
 		}
 
-		QTextTableCellFormat& cellFormat = i % 2 ? m_okEvenCellFormat : m_okCellFormat;
+		//QTextTableCellFormat& cellFormat = i % 2 ? m_okEvenCellFormat : m_okCellFormat;
+		QTextTableCellFormat& cellFormat = m_okCellFormat;
 
 		int tableRow = tablePtr->rows()-1;
 
@@ -176,7 +180,6 @@ void CTextLogGuiComp::GenerateDocument(int severityFilter, const QString& source
 #endif
 
 	LogEditor->setUpdatesEnabled(true);
-
 }
 
 
