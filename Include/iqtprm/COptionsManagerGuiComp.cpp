@@ -86,6 +86,13 @@ void COptionsManagerGuiComp::UpdateGui(int updateFlags)
 {
 	Q_ASSERT(IsGuiCreated());
 
+	iprm::IOptionsManager* optionManagerPtr = GetObjectPtr();
+	if (optionManagerPtr != NULL){
+		int supplortedFlags = optionManagerPtr->GetIndexOperationFlags();
+		
+		Selector->setEditable(supplortedFlags & iprm::IOptionsManager::OOF_SUPPORT_INSERT);
+	}
+
 	if ((updateFlags & (imod::IModelEditor::CF_INIT_EDITOR | iprm::IOptionsManager::CF_OPTION_ADDED | iprm::IOptionsManager::CF_OPTION_REMOVED | iprm::ISelectionParam::CF_SELECTION_CHANGED)) != 0)
 	{
 		UpdateComboBox();
