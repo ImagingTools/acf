@@ -222,7 +222,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
           <AttributeInfo>
             <Id>
               AllowClose
@@ -310,6 +310,22 @@
               <Value>
                 SplashScreen
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SplashTime
+            </Id>
+            <Type>
+              Real
+            </Type>
+            <ExportId>
+              SplashTime
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

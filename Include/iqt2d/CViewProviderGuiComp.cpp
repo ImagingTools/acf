@@ -70,6 +70,10 @@ void CViewProviderGuiComp::OnGuiCreated()
 
 	// Setup view and its calibration:
 	iview::CViewport& view = consolePtr->GetViewRef();
+
+	// Delegate the style sheet of the parent window to the viewport:
+	view.setStyleSheet(consolePtr->styleSheet());
+
 	view.SetViewDraggable();
 
 	if (m_fitModeAttrPtr.IsValid()){
