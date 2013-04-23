@@ -41,7 +41,6 @@ void CTextLogGuiComp::OnGuiCreated()
 	m_tableFormat.setCellSpacing(0);
 
 	m_okCellFormat.setRightPadding(8);
-	m_okEvenCellFormat.setBackground(QColor(0xf0f0ff));
 
 	connect(SeverityFilterCB, SIGNAL(currentIndexChanged(int)), this, SLOT(DoFilter()));
 	connect(SourceFilterCB, SIGNAL(currentIndexChanged(int)), this, SLOT(DoFilter()));
@@ -153,7 +152,6 @@ void CTextLogGuiComp::GenerateDocument(int severityFilter, const QString& source
 			continue;
 		}
 
-		//QTextTableCellFormat& cellFormat = i % 2 ? m_okEvenCellFormat : m_okCellFormat;
 		QTextTableCellFormat& cellFormat = m_okCellFormat;
 
 		int tableRow = tablePtr->rows()-1;
