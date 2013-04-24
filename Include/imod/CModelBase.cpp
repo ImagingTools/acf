@@ -42,7 +42,7 @@ bool CModelBase::AttachObserver(IObserver* observerPtr)
 		return false;
 	}
 
-	if (m_observers.contains(observerPtr)){
+	if (m_observers.contains(observerPtr) && (m_observers[observerPtr] != AS_DETACHED)){
 		qFatal("Observer is already connected to this model");
 
 		return false;
