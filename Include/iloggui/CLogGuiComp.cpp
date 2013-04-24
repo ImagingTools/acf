@@ -390,11 +390,10 @@ void CLogGuiComp::OnRemoveMessagesTimer()
 
 	if (m_maxMessagesCountAttrPtr.IsValid() && (*m_maxMessagesCountAttrPtr > 0)){
 		int count = LogView->topLevelItemCount();
-		while (count > *m_maxMessagesCountAttrPtr){
-			QTreeWidgetItem* lastItem = LogView->takeTopLevelItem (count - 1);
-			delete lastItem;
-			
-			count = LogView->topLevelItemCount();
+
+		int itemsToRemove = count - *m_maxMessagesCountAttrPtr;
+		if (itemsToRemove > 0){
+			LogView->model()->removeRows(*m_maxMessagesCountAttrPtr - 1, itemsToRemove);
 		}
 	}
 }
