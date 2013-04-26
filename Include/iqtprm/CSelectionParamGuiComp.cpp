@@ -3,9 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
 #include "iprm/IOptionsList.h"
-
 #include "iqt/CSignalBlocker.h"
 
 
@@ -75,7 +73,7 @@ void CSelectionParamGuiComp::OnGuiCreated()
 
 	DescriptionFrame->hide();
 
-	if (!m_infoLabelAttrPtr.IsValid()){
+	if (!m_infoLabelAttrPtr.IsValid() || (*m_uiModeAttrPtr > UM_COMBOBOX)){
 		InfoFrame->hide();
 	}
 }
@@ -93,25 +91,10 @@ void CSelectionParamGuiComp::OnGuiShown()
 {
 	BaseClass::OnGuiShown();
 
-	int iconSize = 32;
-	if (m_iconSizeAttrPtr.IsValid()){
-		iconSize = *m_iconSizeAttrPtr;
-	}
-
 	if (m_infoLabelAttrPtr.IsValid()){
 		InfoLabel->setText(*m_infoLabelAttrPtr);
 
-		InfoIcon->setScaledContents(true);
-		InfoIcon->setMaximumWidth(iconSize);
-		InfoIcon->setMaximumHeight(iconSize);
-		InfoIcon->setMinimumWidth(iconSize);
-		InfoIcon->setMinimumHeight(iconSize);
-		if (m_infoIconProviderCompPtr.IsValid() && m_infoIconProviderCompPtr->GetIconCount() > 0){
-			InfoIcon->setPixmap(m_infoIconProviderCompPtr->GetIcon(0).pixmap(iconSize, iconSize, QIcon::Normal, QIcon::On));
-		}
-		else{
-			InfoIcon->setPixmap(QPixmap(":/Icons/About"));
-		}
+		SetupInfoLabelIcon(*InfoIcon);
 	}
 
 	UpdateSelectorLabel();
@@ -198,7 +181,7 @@ void CSelectionParamGuiComp::OnRadioButtonSelectionChanged(bool isSelected)
 			UpdateBlocker updateBlocker(this);
 
 			for (int selectionIndex = 0; selectionIndex < m_radioButtons.GetCount(); selectionIndex++){
-				if (senderPtr == m_radioButtons.GetAt(selectionIndex)){
+				if (senderPtr == m_radioButtons.GetAt(selectionIndex)->GetRadionButton()){
 					needUpdateGui = !objectPtr->SetSelectedOptionIndex(selectionIndex);
 
 					break;
@@ -227,12 +210,6 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 		mainLayoutPtr->setMargin(0);
 	}
 
-	QFont f;
-	bool setFontSize = false;
-	if (m_fontSizeAttrPtr.IsValid()){
-		f.setPointSize(*m_fontSizeAttrPtr);
-		setFontSize = true;
-	}
 
 	int switchIndex = 0;
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
@@ -245,10 +222,6 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 		else{
 			switchBoxPtr = new QComboBox(SelectionFrame);
 			switchBoxPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-
-			if (setFontSize){
-				switchBoxPtr->setFont(f);
-			}
 
 			m_comboBoxes.PushBack(switchBoxPtr);
 
@@ -289,6 +262,7 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 	bool useVerticalLayout = (*m_uiModeAttrPtr == UM_RADIOBUTTON_VERTICAL);
 
 	m_radioButtons.Reset();
+	m_radioButtonGroups.Reset();
 	m_radioButtonFramePtr.Reset();
 
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
@@ -304,7 +278,6 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 		m_radioButtonFramePtr = new QFrame(SelectionFrame);
 		m_radioButtonFramePtr->setFrameShape(QFrame::NoFrame);
 		mainLayoutPtr->addWidget(m_radioButtonFramePtr.GetPtr());
-
 		QLayout* buttonLayoutPtr = NULL;
 		if (useVerticalLayout){
 			buttonLayoutPtr = new QVBoxLayout(m_radioButtonFramePtr.GetPtr());
@@ -322,21 +295,30 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 			bool isOptionEnabled = constraintsPtr->IsOptionEnabled(selectedIndex);
 
+			QButtonGroup* groupPtr = new QButtonGroup;
+			m_radioButtonGroups.PushBack(groupPtr);
+
 			for (int i = 0; i < optionsCount; ++i){
 				QString name = constraintsPtr->GetOptionName(i);
+				QString description = constraintsPtr->GetOptionDescription(i);
 
-				QRadioButton* radioButtonPtr = new QRadioButton(SelectionFrame);
+				RadioButtonWidget* radioButtonWidget = new RadioButtonWidget(
+							GetInfoIcon(),
+							name,
+							description,
+							groupPtr,
+							*m_radioButtonFramePtr.GetPtr());
+
+				buttonLayoutPtr->addWidget(radioButtonWidget);
+
+				m_radioButtons.PushBack(radioButtonWidget);
+
+				radioButtonWidget->setEnabled(isOptionEnabled);
 				if (selectedIndex == i){
-					selectedButtonPtr = radioButtonPtr;
+					selectedButtonPtr = radioButtonWidget->GetRadionButton();
 				}
 
-				radioButtonPtr->setText(name);
-				radioButtonPtr->setEnabled(isOptionEnabled);
-				m_radioButtons.PushBack(radioButtonPtr);
-
-				buttonLayoutPtr->addWidget(radioButtonPtr);
-
-				QObject::connect(radioButtonPtr, SIGNAL(toggled(bool)), this, SLOT(OnRadioButtonSelectionChanged(bool)));
+				QObject::connect(radioButtonWidget->GetRadionButton(), SIGNAL(toggled(bool)), this, SLOT(OnRadioButtonSelectionChanged(bool)));
 			}
 
 			QSizePolicy::Policy vPolicy = useVerticalLayout ? QSizePolicy::Expanding : QSizePolicy::Preferred;
@@ -346,17 +328,18 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 			if (selectedButtonPtr != NULL){
 				selectedButtonPtr->setChecked(true);
 			}
-	
 		}
 	}
-
-	UpdateDescriptionFrame();
 }
 
 
 void CSelectionParamGuiComp::UpdateDescriptionFrame()
 {
 	DescriptionFrame->setVisible(false);
+
+	if (*m_uiModeAttrPtr > UM_COMBOBOX){
+		return;
+	}
 
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	if (selectionPtr != NULL){
@@ -471,6 +454,7 @@ void CSelectionParamGuiComp::ResetWidgets()
 {
 	m_comboBoxes.Reset();
 	m_radioButtons.Reset();
+	m_radioButtonGroups.Reset();
 	m_radioButtonFramePtr.Reset();
 	m_selectorLabelPtr.Reset();
 }
@@ -483,6 +467,93 @@ iprm::ISelectionParam* CSelectionParamGuiComp::GetActiveSubselection(const iprm:
 	}
 
 	return selectionPtr->GetSubselection(selectionPtr->GetSelectedOptionIndex());
+}
+
+
+void CSelectionParamGuiComp::SetupInfoLabelIcon(QLabel& label)
+{
+	int iconSize = 32;
+	if (m_iconSizeAttrPtr.IsValid()){
+		iconSize = *m_iconSizeAttrPtr;
+	}
+
+	if (m_infoIconProviderCompPtr.IsValid() && m_infoIconProviderCompPtr->GetIconCount() > 0){
+		label.setScaledContents(true);
+		label.setMaximumWidth(iconSize);
+		label.setMaximumHeight(iconSize);
+		label.setMinimumWidth(iconSize);
+		label.setMinimumHeight(iconSize);
+	}
+
+	label.setPixmap(GetInfoIcon());
+}
+
+
+QPixmap CSelectionParamGuiComp::GetInfoIcon() const
+{
+	QPixmap infoIconPixmap;
+
+	int iconSize = 32;
+	if (m_iconSizeAttrPtr.IsValid()){
+		iconSize = *m_iconSizeAttrPtr;
+	}
+
+	if (m_infoIconProviderCompPtr.IsValid() && m_infoIconProviderCompPtr->GetIconCount() > 0){
+		infoIconPixmap = m_infoIconProviderCompPtr->GetIcon(0).pixmap(iconSize, iconSize, QIcon::Normal, QIcon::On);
+	}
+
+	return infoIconPixmap;
+}
+
+
+CSelectionParamGuiComp::RadioButtonWidget::RadioButtonWidget(
+			const QPixmap& infoIcon,
+			const QString& optionName, 
+			const QString& optionDescription,
+			QButtonGroup* buttonGroupPtr,
+			QWidget& parentFrame)
+	:BaseClass(&parentFrame),
+	m_buttonGroupPtr(buttonGroupPtr)
+{
+	setFrameShape(QFrame::NoFrame);
+
+	QVBoxLayout* mainLayoutPtr = new QVBoxLayout(this);
+	mainLayoutPtr->setMargin(0);
+
+	// Radio button
+	m_radioButtonPtr = new QRadioButton(this);
+	m_radioButtonPtr->setText(optionName);
+
+	// Insert widget into the main layout:
+	mainLayoutPtr->addWidget(m_radioButtonPtr);
+
+	if (!optionDescription.isEmpty()){
+		// Description [Icon Text]
+		QFrame* descriptionFramePtr = new QFrame(this);
+		QHBoxLayout* descriptionFrameLayoutPtr = new QHBoxLayout(descriptionFramePtr);
+		descriptionFrameLayoutPtr->setMargin(0);
+
+		QLabel* infoIconLabelPtr = new QLabel(descriptionFramePtr);
+		infoIconLabelPtr->setPixmap(infoIcon);
+		infoIconLabelPtr->setSizePolicy(QSizePolicy::Maximum, infoIconLabelPtr->sizePolicy().verticalPolicy());
+		QLabel* descriptionLabelPtr = new QLabel(descriptionFramePtr);
+		descriptionLabelPtr->setText(optionDescription);
+		descriptionFrameLayoutPtr->addSpacing(5);
+		descriptionFrameLayoutPtr->addWidget(infoIconLabelPtr);
+		descriptionFrameLayoutPtr->addWidget(descriptionLabelPtr);
+
+		// Insert widget into the main layout:
+		mainLayoutPtr->addWidget(descriptionFramePtr);
+	}
+
+	// Add radio button to the exclusive button group:
+	m_buttonGroupPtr->addButton(m_radioButtonPtr);
+}
+
+
+QRadioButton* CSelectionParamGuiComp::RadioButtonWidget::GetRadionButton() const
+{
+	return m_radioButtonPtr;
 }
 
 
