@@ -1,35 +1,43 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2934
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="2">
-    <Element>
-      <ComponentName>
-        ModelEditorGui
-      </ComponentName>
-      <X>
-        475
-      </X>
-      <X>
-        375
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         SceneExtenderDelegator
@@ -44,5 +52,21 @@
         
       </Note>
     </Element>
+    <Element>
+      <ComponentName>
+        ModelEditorGui
+      </ComponentName>
+      <X>
+        475
+      </X>
+      <X>
+        375
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

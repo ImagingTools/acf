@@ -1,21 +1,57 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2246
+          2934
         </Number>
         <Description>
           ACF
         </Description>
       </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
+        </Description>
+      </Version>
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="4">
+    <Element>
+      <ComponentName>
+        SelectionParamGui
+      </ComponentName>
+      <X>
+        400
+      </X>
+      <X>
+        425
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
     <Element>
       <ComponentName>
         SelectionConstraints
@@ -25,20 +61,6 @@
       </X>
       <X>
         125
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SelectionGui
-      </ComponentName>
-      <X>
-        750
-      </X>
-      <X>
-        325
       </X>
       <Note>
         
@@ -60,17 +82,19 @@
     </Element>
     <Element>
       <ComponentName>
-        SelectionParamGui
+        SelectionGui
       </ComponentName>
       <X>
-        400
+        750
       </X>
       <X>
-        425
+        325
       </X>
       <Note>
         
       </Note>
     </Element>
   </PositionMap>
+  <EmbeddedRegistries count="0">
+  </EmbeddedRegistries>
 </Acf>

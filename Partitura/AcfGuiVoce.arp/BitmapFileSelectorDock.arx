@@ -1,16 +1,38 @@
 <?xml version="1.0"?>
 <Acf>
   <AcfHeader>
-    <VersionInfos count="1">
+    <VersionInfos count="3">
       <Version>
         <Id>
           0
         </Id>
         <Number>
-          2397
+          2934
         </Number>
         <Description>
           ACF
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1
+        </Id>
+        <Number>
+          920
+        </Number>
+        <Description>
+          ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264194
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -428,7 +450,7 @@
   <ExportedInterfaces count="8">
     <Interface>
       <InterfaceId>
-        imod::IModel
+        ifile::IFileNameParam
       </InterfaceId>
       <ComponentId>
         FileSelectorDockWithPreview
@@ -436,7 +458,15 @@
     </Interface>
     <Interface>
       <InterfaceId>
-        ifile::IFileNameParam
+        ifile::IFileTypeInfo
+      </InterfaceId>
+      <ComponentId>
+        BitmapLoader
+      </ComponentId>
+    </Interface>
+    <Interface>
+      <InterfaceId>
+        imod::IModel
       </InterfaceId>
       <ComponentId>
         FileSelectorDockWithPreview
@@ -464,14 +494,6 @@
       </InterfaceId>
       <ComponentId>
         FileSelectorDockWithPreview
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        ifile::IFileTypeInfo
-      </InterfaceId>
-      <ComponentId>
-        BitmapLoader
       </ComponentId>
     </Interface>
     <Interface>
