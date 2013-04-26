@@ -130,11 +130,7 @@ void CTextLogGuiComp::GenerateDocument(int severityFilter, const QString& source
 	QTextCursor textCursor(documentPtr);
 	textCursor.beginEditBlock();
 
-	QTextTable* tablePtr = textCursor.insertTable(1, 3, m_tableFormat);
-
 	for (int i = 0; i < messagesCount; i++){
-		int column = 0;
-
 		const ilog::IMessageConsumer::MessagePtr messagePtr = messages.at(i);
 
 		// filter the message
@@ -152,22 +148,18 @@ void CTextLogGuiComp::GenerateDocument(int severityFilter, const QString& source
 			continue;
 		}
 
-		QTextTableCellFormat& cellFormat = m_okCellFormat;
-
-		int tableRow = tablePtr->rows()-1;
-
 		// category
 		QImage categoryIcon = GetCategoryImage(category);		
-		InsertImage(tablePtr->cellAt(tableRow, column++), categoryIcon);
+		textCursor.insertImage(categoryIcon);
+		textCursor.insertText("  ");
 
 		// timestamp
-		InsertText(tablePtr->cellAt(tableRow, column++), messagePtr->GetInformationTimeStamp().toString(), cellFormat);
+		textCursor.insertText(messagePtr->GetInformationTimeStamp().toString());
+		textCursor.insertText("\t");
 
 		// text
-		InsertText(tablePtr->cellAt(tableRow, column++), messagePtr->GetInformationDescription(), cellFormat);
-
-		// add message row
-		tablePtr->appendRows(1);
+		textCursor.insertText(messagePtr->GetInformationDescription());
+		textCursor.insertText("\n");
 	}
 
 	textCursor.endEditBlock();

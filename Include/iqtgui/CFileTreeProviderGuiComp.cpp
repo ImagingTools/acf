@@ -7,6 +7,28 @@ namespace iqtgui
 
 // protected methods
 
+// reimplemented (icomp::CComponentBase)
+
+void CFileTreeProviderGuiComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	m_fileModelUpdateAllowed = true;
+
+	if (m_currentFileCompPtr.IsValid() && m_currentFileModelCompPtr.IsValid()){
+		RegisterModel(m_currentFileModelCompPtr.GetPtr());
+	}
+}
+
+
+void CFileTreeProviderGuiComp::OnComponentDestroyed()
+{
+	UnregisterAllModels();
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
 // reimplemented (CGuiComponentBase)
 
 void CFileTreeProviderGuiComp::OnGuiCreated()
@@ -34,10 +56,45 @@ void CFileTreeProviderGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	Q_ASSERT(IsGuiCreated());
 
-	//ibase::IQtItemModelProvider* objectPtr = GetObjectPtr();
-	//if (objectPtr != NULL){
-	//	FileList->setModel(const_cast<QAbstractItemModel*>(objectPtr->GetItemModel()));
-	//}
+	// update selection
+	OnModelChanged(0, 0, NULL);
+}
+
+
+// reimplemented (imod::IModelEditor)
+
+void CFileTreeProviderGuiComp::UpdateModel() const
+{
+	istd::CChangeNotifier updatePtr(dynamic_cast<istd::IChangeable*>(GetObjectPtr()));
+}
+
+
+// reimplemented (imod::CMultiModelDispatcherBase)
+
+void CFileTreeProviderGuiComp::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	if (!m_fileModelUpdateAllowed){
+		return;
+	}
+
+	UpdateBlocker updateBlocker(this);
+
+	ibase::IQtItemModelProvider* objectPtr = GetObjectPtr();
+	if (objectPtr != NULL){
+		const QAbstractItemModel* modelPtr = objectPtr->GetItemModel();
+		if (modelPtr != NULL){
+			QString currentPath = m_currentFileCompPtr->GetPath();
+
+			QModelIndexList indexes = modelPtr->match(modelPtr->index(0,0), DR_PATH, currentPath, 1, 
+				Qt::MatchFixedString | Qt::MatchRecursive | Qt::MatchWrap);
+			if (!indexes.isEmpty()){
+				QItemSelectionModel* selectionModelPtr = FileList->selectionModel();
+				if (selectionModelPtr != NULL){
+					selectionModelPtr->setCurrentIndex(indexes.first(), QItemSelectionModel::ClearAndSelect);
+				}			
+			}
+		}
+	}
 }
 
 
@@ -45,16 +102,16 @@ void CFileTreeProviderGuiComp::UpdateGui(int /*updateFlags*/)
 
 void CFileTreeProviderGuiComp::OnSelectionChanged(const QItemSelection& selected, const QItemSelection&/* deselected*/)
 {
-	if (!selected.indexes().isEmpty() && m_currentFileCompPtr.IsValid()){
-		m_currentFileCompPtr->SetPath(QString());
+	UpdateBlocker updateBlocker(this);
 
+	if (!selected.indexes().isEmpty() && m_currentFileCompPtr.IsValid()){
 		ibase::IQtItemModelProvider* objectPtr = GetObjectPtr();
 		if (objectPtr != NULL){
 			const QAbstractItemModel* modelPtr = objectPtr->GetItemModel();
 			if (modelPtr != NULL){
 				QModelIndex selectedIndex = selected.indexes().at(0);
 
-				QString currentFilePath = modelPtr->data(selectedIndex, Qt::UserRole+100).toString();
+				QString currentFilePath = modelPtr->data(selectedIndex, DR_PATH).toString();
 				QFileInfo fileInfo(currentFilePath);
 
 				bool isFile = fileInfo.isFile();
@@ -72,12 +129,31 @@ void CFileTreeProviderGuiComp::OnSelectionChanged(const QItemSelection& selected
 
 				int supportedPathType = m_currentFileCompPtr->GetPathType();
 				if ((supportedPathType == ifile::IFileNameParam::PT_UNKNOWN) || (supportedPathType == selectedFileType)){
+					m_fileModelUpdateAllowed = false;
+
 					m_currentFileCompPtr->SetPath(currentFilePath);
+
+					m_fileModelUpdateAllowed = true;
+
+					return;
 				}
 			}
 		}
 	}
+
+	m_currentFileCompPtr->SetPath("");
 }
+
+
+void CFileTreeProviderGuiComp::on_Refresh_clicked()
+{
+	// update model
+	DoUpdateModel();
+
+	// update selection
+	OnModelChanged(0, 0, NULL);
+}
+
 
 
 } // namespace iqtgui

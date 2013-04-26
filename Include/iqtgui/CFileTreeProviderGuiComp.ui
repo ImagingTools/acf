@@ -24,6 +24,68 @@
     <number>0</number>
    </property>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QToolButton" name="Refresh">
+       <property name="toolTip">
+        <string>Refresh view</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="iqtgui.qrc">
+         <normaloff>:/Icons/Reload.svg</normaloff>:/Icons/Reload.svg</iconset>
+       </property>
+       <property name="shortcut">
+        <string>F5</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="ExpandAll">
+       <property name="toolTip">
+        <string>Expand all items</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="iqtgui.qrc">
+         <normaloff>:/Icons/Down</normaloff>:/Icons/Down</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="CollapseAll">
+       <property name="toolTip">
+        <string>Collapse all items</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="iqtgui.qrc">
+         <normaloff>:/Icons/Up</normaloff>:/Icons/Up</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QTreeView" name="FileList">
      <property name="alternatingRowColors">
       <bool>true</bool>
@@ -37,7 +99,39 @@
  </widget>
  <resources>
   <include location="iqtgui.qrc"/>
-  <include location="iqtgui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>ExpandAll</sender>
+   <signal>clicked()</signal>
+   <receiver>FileList</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>322</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CollapseAll</sender>
+   <signal>clicked()</signal>
+   <receiver>FileList</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>426</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

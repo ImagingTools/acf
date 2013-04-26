@@ -43,12 +43,19 @@ public:
 		I_ASSIGN_MULTI_0(m_filtersAttrPtr, "Filters", "List of filters if no loader is specified", false);
 	I_END_COMPONENT;
 
+	enum DataRoles{
+		DR_PATH = Qt::UserRole + 1
+	};
+
 	// reimplemented (ibase::IQtItemModelProvider)
 	virtual const QAbstractItemModel* GetItemModel() const;
 
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
+	// pseudo-reimplemented (istd::IChangeable)
+	virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

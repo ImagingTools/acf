@@ -35,6 +35,7 @@ public:
 		I_ASSIGN(m_startHintAttrPtr, "StartHint", "Start hint for the editor", false, "<Enter path>");
 		I_ASSIGN(m_fileTypeInfoPtr, "FileTypeInfo", "Allows to retrieve optional file type information for file selection dialog", false, "FileTypeInfo");
 		I_ASSIGN(m_readOnlyAttrPtr, "ReadOnly", "True if read only", true, false);
+		I_ASSIGN(m_filesComboAttrPtr, "FilesComboBox", "Show combobox with files", true, true);
 		I_ASSIGN(m_labelWidthAttrPtr, "LabelWidth", "Fixed label width (in pixels)", false, 100);
 		I_ASSIGN(m_defaultDirPtr, "DefaultPath", "Default path to search", false, "C:/");
 	I_END_COMPONENT;
@@ -67,6 +68,7 @@ private:
 	I_ATTR(QString, m_pathLabelAttrPtr);
 	I_ATTR(QString, m_startHintAttrPtr);
 	I_ATTR(bool, m_readOnlyAttrPtr);
+	I_ATTR(bool, m_filesComboAttrPtr);
 	I_ATTR(int, m_labelWidthAttrPtr);
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoPtr);
 	I_REF(ifile::IFileNameParam, m_defaultDirPtr);
