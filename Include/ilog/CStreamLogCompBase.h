@@ -2,6 +2,7 @@
 #define ilog_CStreamLogCompBase_included
 
 
+// ACF includes
 #include "ilog/TMessageDelegatorComp.h"
 
 
@@ -11,6 +12,8 @@ namespace ilog
 
 /**
 	Basic implementation for a log written to an output stream.
+
+	\ingroup Logging
 */
 class CStreamLogCompBase:
 			public ilog::TMessageDelegatorComp<icomp::CComponentBase>

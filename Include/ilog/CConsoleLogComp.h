@@ -2,6 +2,7 @@
 #define ilog_CConsoleLogComp_included
 
 
+// ACF includes
 #include "ilog/CStreamLogCompBase.h"
 
 
@@ -11,6 +12,8 @@ namespace ilog
 
 /**
 	Message container displaying messages as log list.
+
+	\ingroup Logging
 */
 class CConsoleLogComp: public CStreamLogCompBase
 {

@@ -18,6 +18,8 @@ namespace ilog
 
 /**
 	Message container displaying messages as log list.
+
+	\ingroup Logging
 */
 class CTextFileLogComp: public CStreamLogCompBase
 {

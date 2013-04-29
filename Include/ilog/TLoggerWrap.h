@@ -2,15 +2,15 @@
 #define ilog_TLoggerWrap_included
 
 
+// ACF includes
 #include "istd/ILogger.h"
-
 #include "ilog/IMessageConsumer.h"
 #include "ilog/ILoggable.h"
 #include "ilog/CMessage.h"
 
 
 namespace ilog
-{		
+{
 
 
 /**
@@ -18,7 +18,7 @@ namespace ilog
 	Access to interface ilog::IMessageConsumer must be registered by user.
 	To register it use interface ilog::ILoggable implemented by this wrapper.
 
-	\ingroup Helpers
+	\ingroup Logging
 */
 template <class Base>
 class TLoggerWrap: public Base, virtual public ILoggable, virtual public istd::ILogger

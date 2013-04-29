@@ -18,11 +18,13 @@
 
 
 namespace ilog
-{		
+{
 
 
 /**
 	Basic implementation of a message container.
+
+	\ingroup Logging
 */
 class CMessageContainer:
 			public istd::THierarchicalBase<IHierarchicalMessageContainer>,
@@ -110,7 +112,6 @@ bool CMessageContainer::RegisterMessageType(const QByteArray& messageTypeId)
 	
 	return s_messageFactory.RegisterFactory(new istd::TSingleFactory<iser::IObject, MessageType>(realTypeId), true);
 }
-
 
 
 } // namespace ilog

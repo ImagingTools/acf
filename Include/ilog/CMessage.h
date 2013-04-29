@@ -16,6 +16,8 @@ namespace ilog
 
 /**
 	Basic implementation of the istd::IInformationProvider interface
+
+	\ingroup Logging
 */
 class CMessage:
 			virtual public istd::IInformationProvider,
