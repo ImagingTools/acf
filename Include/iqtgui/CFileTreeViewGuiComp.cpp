@@ -1,6 +1,14 @@
 #include "iqtgui/CFileTreeViewGuiComp.h"
 
 
+#define PERFORMANCE_TEST
+
+// Qt includes
+#ifdef PERFORMANCE_TEST
+#include <QElapsedTimer>
+#endif
+
+
 namespace iqtgui
 {
 
@@ -15,9 +23,7 @@ void CFileTreeViewGuiComp::OnComponentCreated()
 
 	m_fileModelUpdateAllowed = true;
 
-	if (m_currentFileCompPtr.IsValid() && m_currentFileModelCompPtr.IsValid()){
-		RegisterModel(m_currentFileModelCompPtr.GetPtr());
-	}
+	RegisterModel(&m_currentFile);
 }
 
 
@@ -73,7 +79,7 @@ void CFileTreeViewGuiComp::OnSelectionChanged(const QItemSelection& selected, co
 {
 	UpdateBlocker updateBlocker(this);
 
-	if (!selected.indexes().isEmpty() && m_currentFileCompPtr.IsValid()){
+	if (!selected.indexes().isEmpty()){
 			QModelIndex selectedIndex = selected.indexes().at(0);
 
 			QString currentFilePath = m_itemModel.data(selectedIndex, DR_PATH).toString();
@@ -92,11 +98,11 @@ void CFileTreeViewGuiComp::OnSelectionChanged(const QItemSelection& selected, co
 				selectedFileType = ifile::IFileNameParam::PT_DIRECTORY;
 			}
 
-			int supportedPathType = m_currentFileCompPtr->GetPathType();
+			int supportedPathType = m_currentFile.GetPathType();
 			if ((supportedPathType == ifile::IFileNameParam::PT_UNKNOWN) || (supportedPathType == selectedFileType)){
 				m_fileModelUpdateAllowed = false;
 
-				m_currentFileCompPtr->SetPath(currentFilePath);
+				m_currentFile.SetPath(currentFilePath);
 
 				m_fileModelUpdateAllowed = true;
 
@@ -104,7 +110,7 @@ void CFileTreeViewGuiComp::OnSelectionChanged(const QItemSelection& selected, co
 			}
 	}
 
-	m_currentFileCompPtr->SetPath("");
+	m_currentFile.SetPath("");
 }
 
 
@@ -122,10 +128,20 @@ void CFileTreeViewGuiComp::on_Refresh_clicked()
 
 void CFileTreeViewGuiComp::RebuildTreeModel()
 {
+#ifdef PERFORMANCE_TEST
+	QElapsedTimer timeout;
+	timeout.start();
+#endif
+
+	FileList->setUpdatesEnabled(false);
+
 	m_itemModel.clear();
+	m_filesCount = m_dirsCount = 0;
 
 	ifile::IFileNameParam* rootDirPtr = GetObjectPtr();
 	if (rootDirPtr == NULL){
+		FileList->setUpdatesEnabled(true);
+
 		return;
 	}
 
@@ -157,6 +173,16 @@ void CFileTreeViewGuiComp::RebuildTreeModel()
 		filters,
 		QDir::Name | QDir::IgnoreCase,
 		NULL);
+
+	FileList->setUpdatesEnabled(true);
+
+	QString infoText = QString("Files: %1  Dirs: %2").arg(m_filesCount).arg(m_dirsCount);
+
+#ifdef PERFORMANCE_TEST
+	infoText += QString("  Time: %1 ms").arg(timeout.nsecsElapsed() / 1000000.0);
+#endif
+
+	InfoLabel->setText(infoText);
 }
 
 
@@ -168,7 +194,7 @@ void CFileTreeViewGuiComp::UpdateCurrentSelection()
 
 	UpdateBlocker updateBlocker(this);
 
-	QString currentPath = m_currentFileCompPtr->GetPath();
+	QString currentPath = m_currentFile.GetPath();
 
 	QModelIndexList indexes = m_itemModel.match(m_itemModel.index(0,0), DR_PATH, currentPath, 1, 
 		Qt::MatchFixedString | Qt::MatchRecursive | Qt::MatchWrap);
@@ -208,6 +234,8 @@ bool CFileTreeViewGuiComp::CreateFileList(
 				parentItemPtr->appendRow(fileItemPtr);
 			else
 				m_itemModel.appendRow(fileItemPtr);
+
+			m_filesCount++;
 	}
 
 	return true;
@@ -267,6 +295,8 @@ void CFileTreeViewGuiComp::EnumerateDirectory(
 			else{
 				m_itemModel.appendRow(dirItemPtr);
 			}
+
+			m_dirsCount++;
 
 			EnumerateDirectory(subDir, nameFilters, sortSpec, dirItemPtr);
 

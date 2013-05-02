@@ -11,6 +11,7 @@
 // ACF includes
 #include "ifile/IFileNameParam.h"
 #include "ifile/IFileTypeInfo.h"
+#include "ifile/CFileNameParamComp.h"
 
 #include "ibase/IQtItemModelProvider.h"
 #include "imod/CMultiModelDispatcherBase.h"
@@ -24,6 +25,11 @@ namespace iqtgui
 {
 
 
+/** 
+	File system explorer-like component. 
+	Observes a directory which is to be the root of the tree view.
+	Provides on-demand refresh of the view (i.e. via button click).
+*/
 class CFileTreeViewGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
 						Ui::CFileTreeViewGuiComp, ifile::IFileNameParam>,
@@ -35,10 +41,13 @@ public:
 				Ui::CFileTreeViewGuiComp, ifile::IFileNameParam> BaseClass;
 
 	I_BEGIN_COMPONENT(CFileTreeViewGuiComp);
-		I_ASSIGN(m_currentFileCompPtr, "CurrentFile", "Write name of the currently selected file to", false, "CurrentFile");
-		I_ASSIGN_TO(m_currentFileModelCompPtr, m_currentFileCompPtr, false);
+		I_REGISTER_SUBELEMENT(CurrentFile);
+		I_REGISTER_SUBELEMENT_INTERFACE(CurrentFile, ifile::IFileNameParam, ExtractCurrentFile);
+		I_REGISTER_SUBELEMENT_INTERFACE(CurrentFile, imod::IModel, ExtractCurrentFile);
+		I_REGISTER_SUBELEMENT_INTERFACE(CurrentFile, istd::IChangeable, ExtractCurrentFile);
+		I_REGISTER_SUBELEMENT_INTERFACE(CurrentFile, iser::ISerializable, ExtractCurrentFile);
 		I_ASSIGN(m_fileTypeInfoCompPtr, "FileTypeInfo", "File type info used to create file filters", false, "FileTypeInfo");
-		I_ASSIGN_MULTI_0(m_filtersAttrPtr, "Filters", "List of filters if no loader is specified", false);
+		I_ASSIGN_MULTI_0(m_filtersAttrPtr, "Filters", "List of filters if no FileTypeInfo is specified", false);
 	I_END_COMPONENT;
 
 	enum DataRoles{
@@ -93,13 +102,32 @@ private:
 		QStandardItem* parentItemPtr);
 
 private:
+	class CurrentFile: public ifile::CFileNameParamComp
+	{
+	public:
+		// reimplemented (ifile::IFileNameParam)
+		virtual int GetPathType() const
+		{
+			return PT_FILE;
+		}
+	};
+
+	imod::TModelWrap<CurrentFile> m_currentFile;
+
+	// static template methods for subelement access
+	template <class InterfaceType>
+	static InterfaceType* ExtractCurrentFile(CFileTreeViewGuiComp& component)
+	{
+		return &component.m_currentFile;
+	}
+
 	bool m_fileModelUpdateAllowed;
+	int m_filesCount;
+	int m_dirsCount;
 
 	mutable QStandardItemModel m_itemModel;
 	QFileIconProvider m_iconProvider;
 
-	I_REF(ifile::IFileNameParam, m_currentFileCompPtr);
-	I_REF(imod::IModel, m_currentFileModelCompPtr);
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoCompPtr);
 	I_MULTIATTR(QString, m_filtersAttrPtr);
 };
