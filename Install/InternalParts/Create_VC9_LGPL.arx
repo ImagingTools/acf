@@ -254,7 +254,7 @@
                 true
               </IsEnabled>
               <Value>
-                LGPL/Header.txt
+                Install/LGPL/Header.txt
               </Value>
             </Data>
           </AttributeInfo>

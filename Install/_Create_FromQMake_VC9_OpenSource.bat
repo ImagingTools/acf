@@ -1,29 +1,21 @@
 echo off
 
-if not exist Temp goto DelTempSkip
-echo Removing old temporary files...
-rmdir /Q /S Temp
-:DelTempSkip
-
-if not exist TempExcl goto DelTempExclSkip
-echo Removing old temporary scripts...
-rmdir /Q /S TempExcl
-:DelTempExclSkip
-
-mkdir Temp
-mkdir TempExcl
-
 set COMPILER_EXT=VC9
-set LICENSE_TYPE=LGPL
+set LICENSE_TYPE=OpenSource
 set LICENSE_DIR=Install/LGPL
-set LICENSE_INSTALL_PATH=..\LGPL\License.txt
+set LICENSE_INSTALL_PATH=../LGPL/License.txt
 
-call CreateScripts.bat
+cd ..
 
-call Create_TechnicalDoc.bat
+call Install\InternalParts\CreateTempDirs.bat
 
-echo Copying files to Temp directory...
-"../Bin/Debug%COMPILER_EXT%/Acf.exe" Create_FromQMake_VC9_OpenSource.arx -config $(ACFSLNDIR)/Config/Core.xpc -input .. -output Temp
+call Install\InternalParts\CreateScripts.bat
 
-call MakeVCProjects.bat
+call Install\InternalParts\Create_TechnicalDoc.bat
+
+call Install\InternalParts\CopyTempFiles.bat
+
+call Install\InternalParts\MakeVCProjects.bat
+
+call Install\InternalParts\RemoveTempDirs.bat
 

@@ -1,11 +1,11 @@
 echo Creation of technical documentation...
 
-del /q /s ..\Docs\TechnicalDoc\*
+del /q /s Docs\TechnicalDoc\*
 
-cd TempExcl
+cd Install\TempExcl
 
 doxygen
 
-cd ..
+cd ..\..
 
 echo Technical documentation created

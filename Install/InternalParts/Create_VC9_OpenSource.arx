@@ -269,7 +269,7 @@
                 true
               </IsEnabled>
               <Value>
-                LGPL/Header.txt
+                Install/LGPL/Header.txt
               </Value>
             </Data>
           </AttributeInfo>
@@ -306,7 +306,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="4">
                 <Value>
                   Generated
                 </Value>
@@ -317,10 +317,7 @@
                   Xcd
                 </Value>
                 <Value>
-                  QMake
-                </Value>
-                <Value>
-                  VC9
+                  VC8
                 </Value>
               </Values>
             </Data>
@@ -339,7 +336,7 @@
               <IsEnabled>
                 true
               </IsEnabled>
-              <Values count="5">
+              <Values count="4">
                 <Value>
                   Generated
                 </Value>
@@ -350,10 +347,7 @@
                   Xcd
                 </Value>
                 <Value>
-                  QMake
-                </Value>
-                <Value>
-                  VC9
+                  VC8
                 </Value>
               </Values>
             </Data>
