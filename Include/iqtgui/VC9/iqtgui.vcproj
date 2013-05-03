@@ -850,10 +850,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileTreeProviderGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CFileTreeViewGuiComp.moc"
 				>
 			</File>
