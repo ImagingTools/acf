@@ -41,8 +41,7 @@ void CFileTreeViewGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	m_filterModel.setSourceModel(&m_itemModel);
-	FileList->setModel(&m_filterModel);
+	FileList->setModel(&m_itemModel);
 
 	QItemSelectionModel* selectionModelPtr = FileList->selectionModel();
 	if (selectionModelPtr != NULL){
@@ -51,6 +50,8 @@ void CFileTreeViewGuiComp::OnGuiCreated()
 			this,
 			SLOT(OnSelectionChanged(const QItemSelection&, const QItemSelection&)));
 	}
+
+	connect(&m_filterTimer, SIGNAL(timeout()), this, SLOT(on_Refresh_clicked()));
 }
 
 
@@ -83,7 +84,7 @@ void CFileTreeViewGuiComp::OnSelectionChanged(const QItemSelection& selected, co
 	if (!selected.indexes().isEmpty()){
 		QModelIndex selectedIndex = selected.indexes().at(0);
 
-		QString currentFilePath = m_filterModel.data(selectedIndex, DR_PATH).toString();
+		QString currentFilePath = m_itemModel.data(selectedIndex, DR_PATH).toString();
 		QFileInfo fileInfo(currentFilePath);
 
 		bool isFile = fileInfo.isFile();
@@ -127,7 +128,9 @@ void CFileTreeViewGuiComp::on_Refresh_clicked()
 
 void CFileTreeViewGuiComp::on_FilterText_textChanged(QString filterText)
 {
-	m_filterModel.setFilterFixedString(filterText);
+	m_userFilter = filterText.trimmed();
+
+	m_filterTimer.start(250);
 }
 
 
@@ -135,6 +138,8 @@ void CFileTreeViewGuiComp::on_FilterText_textChanged(QString filterText)
 
 void CFileTreeViewGuiComp::RebuildTreeModel()
 {
+	m_filterTimer.stop();
+
 #ifdef PERFORMANCE_TEST
 	QElapsedTimer timeout;
 	timeout.start();
@@ -181,8 +186,6 @@ void CFileTreeViewGuiComp::RebuildTreeModel()
 		QDir::Name | QDir::IgnoreCase,
 		NULL);
 
-	m_filterModel.setFilterFixedString(FilterText->text());
-
 	FileList->setUpdatesEnabled(true);
 
 	QString infoText = QString("Files: %1  Dirs: %2").arg(m_filesCount).arg(m_dirsCount);
@@ -205,7 +208,7 @@ void CFileTreeViewGuiComp::UpdateCurrentSelection()
 
 	QString currentPath = m_currentFile.GetPath();
 
-	QModelIndexList indexes = m_filterModel.match(m_filterModel.index(0,0), DR_PATH, currentPath, 1, 
+	QModelIndexList indexes = m_itemModel.match(m_itemModel.index(0,0), DR_PATH, currentPath, 1, 
 		Qt::MatchFixedString | Qt::MatchRecursive | Qt::MatchWrap);
 	if (!indexes.isEmpty()){
 		QItemSelectionModel* selectionModelPtr = FileList->selectionModel();
@@ -227,33 +230,38 @@ bool CFileTreeViewGuiComp::CreateFileList(
 
 	QFileInfoList files = dir.entryInfoList(nameFilters, QDir::Files, sortSpec);
 
-	for (		QFileInfoList::const_iterator fileIter = files.begin();
-		fileIter != files.end();
-		++fileIter){
-			const QFileInfo& fileInfo = *fileIter;
-			const QString& fileName = fileInfo.completeBaseName();
-			const QString& filePath = fileInfo.absoluteFilePath();
+	for (QFileInfoList::const_iterator fileIter = files.begin(); fileIter != files.end(); ++fileIter){
+		const QFileInfo& fileInfo = *fileIter;
+		const QString& fileName = fileInfo.completeBaseName();
 
-			QStandardItem* fileItemPtr = new QStandardItem(fileName);
-			fileItemPtr->setEditable(false);
-			fileItemPtr->setData(filePath, DR_PATH);
-			fileItemPtr->setData(false, DR_ISDIR);
+		// check if can be filtered
+		if (!m_userFilter.isEmpty()){
+			if (!fileName.contains(m_userFilter))
+				continue;
+		}
 
-			const QString& fileExtension = fileInfo.suffix();
-			if (m_extToIconMap.contains(fileExtension)){
-				fileItemPtr->setIcon(m_extToIconMap[fileExtension]);
-			} else {
-				QIcon icon(m_iconProvider.icon(filePath));
-				m_extToIconMap[fileExtension] = icon;
-				fileItemPtr->setIcon(icon);
-			}
+		const QString& filePath = fileInfo.absoluteFilePath();
 
-			if (parentItemPtr != NULL)
-				parentItemPtr->appendRow(fileItemPtr);
-			else
-				m_itemModel.appendRow(fileItemPtr);
+		QStandardItem* fileItemPtr = new QStandardItem(fileName);
+		fileItemPtr->setEditable(false);
+		fileItemPtr->setData(filePath, DR_PATH);
+		fileItemPtr->setData(false, DR_ISDIR);
 
-			m_filesCount++;
+		const QString& fileExtension = fileInfo.suffix();
+		if (m_extToIconMap.contains(fileExtension)){
+			fileItemPtr->setIcon(m_extToIconMap[fileExtension]);
+		} else {
+			QIcon icon(m_iconProvider.icon(filePath));
+			m_extToIconMap[fileExtension] = icon;
+			fileItemPtr->setIcon(icon);
+		}
+
+		if (parentItemPtr != NULL)
+			parentItemPtr->appendRow(fileItemPtr);
+		else
+			m_itemModel.appendRow(fileItemPtr);
+
+		m_filesCount++;
 	}
 
 	return true;
@@ -295,20 +303,29 @@ void CFileTreeViewGuiComp::EnumerateDirectory(
 
 	QStringList entries = root.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
 
-	for (		QStringList::const_iterator iter = entries.begin();
-		iter != entries.end();
-		++iter){
-			const QString& subDirName = *iter;
+	for (QStringList::const_iterator iter = entries.begin(); iter != entries.end();	++iter){
+		const QString& subDirName = *iter;
 
-			QDir subDir = root;
-			subDir.setPath(root.absoluteFilePath(subDirName));
+		QDir subDir = root;
+		subDir.setPath(root.absoluteFilePath(subDirName));
 
-			QStandardItem* dirItemPtr = new QStandardItem(subDirName);
-			dirItemPtr->setEditable(false);
-			dirItemPtr->setIcon(m_iconProvider.icon(QFileIconProvider::Folder));
-			dirItemPtr->setData(subDir.absolutePath(), DR_PATH);
-			dirItemPtr->setData(true, DR_ISDIR);
+		QStandardItem* dirItemPtr = new QStandardItem(subDirName);
+		dirItemPtr->setEditable(false);
+		dirItemPtr->setIcon(m_iconProvider.icon(QFileIconProvider::Folder));
+		dirItemPtr->setData(subDir.absolutePath(), DR_PATH);
+		dirItemPtr->setData(true, DR_ISDIR);
 
+		EnumerateDirectory(subDir, nameFilters, sortSpec, dirItemPtr);
+
+		CreateFileList(subDir, nameFilters, sortSpec, dirItemPtr);
+
+		// remove if empty
+		if (!dirItemPtr->hasChildren() && *m_noEmptyDirsAttrPtr){
+			delete dirItemPtr;
+
+			continue;
+		}
+		else{
 			if (parentItemPtr != NULL)
 				parentItemPtr->appendRow(dirItemPtr);
 			else{
@@ -316,10 +333,7 @@ void CFileTreeViewGuiComp::EnumerateDirectory(
 			}
 
 			m_dirsCount++;
-
-			EnumerateDirectory(subDir, nameFilters, sortSpec, dirItemPtr);
-
-			CreateFileList(subDir, nameFilters, sortSpec, dirItemPtr);
+		}
 	}
 }
 

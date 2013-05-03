@@ -4,8 +4,8 @@
 
 // Qt includes
 #include <QtCore/QDir>
+#include <QtCore/QTimer>
 #include <QtGui/QStandardItemModel>
-#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QFileIconProvider>
 
 
@@ -49,6 +49,7 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(CurrentFile, iser::ISerializable, ExtractCurrentFile);
 		I_ASSIGN(m_fileTypeInfoCompPtr, "FileTypeInfo", "File type info used to create file filters", false, "FileTypeInfo");
 		I_ASSIGN_MULTI_0(m_filtersAttrPtr, "Filters", "List of filters if no FileTypeInfo is specified", false);
+		I_ASSIGN(m_noEmptyDirsAttrPtr, "NoEmptyFolders", "Recursively skip folder which containing no files", true, true);
 	I_END_COMPONENT;
 
 	enum DataRoles{
@@ -111,7 +112,7 @@ private:
 		// reimplemented (ifile::IFileNameParam)
 		virtual int GetPathType() const
 		{
-			return PT_FILE;
+			return PT_UNKNOWN;
 		}
 	};
 
@@ -124,32 +125,21 @@ private:
 		return &component.m_currentFile;
 	}
 
-	class FilterProxyModel: public QSortFilterProxyModel
-	{
-	protected:
-		virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
-		{
-			QModelIndex itemIndex = sourceModel()->index(source_row, 0, source_parent);
-			if (itemIndex.data(DR_ISDIR).toBool() && sourceModel()->hasChildren(itemIndex)){
-				return true;
-			}
-
-			return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
-		}
-	};
-
 	bool m_fileModelUpdateAllowed;
 	int m_filesCount;
 	int m_dirsCount;
 
 	mutable QStandardItemModel m_itemModel;
-	mutable FilterProxyModel m_filterModel;
 	QFileIconProvider m_iconProvider;
 
 	mutable QMap<QString, QIcon> m_extToIconMap;
 
+	QString m_userFilter;
+	QTimer m_filterTimer;
+
 	I_REF(ifile::IFileTypeInfo, m_fileTypeInfoCompPtr);
 	I_MULTIATTR(QString, m_filtersAttrPtr);
+	I_ATTR(bool, m_noEmptyDirsAttrPtr);
 };
 
 
