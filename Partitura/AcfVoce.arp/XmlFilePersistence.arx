@@ -109,13 +109,13 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              RestoreonBegin
+              RestoreOnBegin
             </Id>
             <Type>
               Boolean
             </Type>
             <ExportId>
-              RestoreonBegin
+              RestoreOnBegin
             </ExportId>
             <Data>
               <IsEnabled>

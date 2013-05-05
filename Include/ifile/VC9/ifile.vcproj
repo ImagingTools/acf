@@ -340,6 +340,10 @@
 			Name="Moc Files"
 			>
 			<File
+				RelativePath="..\CAutoPersistenceComp.moc"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileListProviderComp.moc"
 				>
 			</File>
@@ -347,6 +351,10 @@
 		<Filter
 			Name="Generated Files"
 			>
+			<File
+				RelativePath="..\Generated\moc_CAutoPersistenceComp.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\Generated\moc_CFileListProviderComp.cpp"
 				>

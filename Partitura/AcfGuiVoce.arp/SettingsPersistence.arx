@@ -112,7 +112,7 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
-              RestoreonBegin
+              RestoreOnBegin
             </Id>
             <Type>
               Boolean
