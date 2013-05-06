@@ -10,8 +10,8 @@ AppName=ACF
 OutputBaseFilename=Setup_$AcfProductName$_$LICENSE_TYPE$_v$AcfVersion:0$_$CompilerName$
 
 DefaultDirName={pf}\ImagingTools\$AcfProductName$_v$AcfVersion:0$
-WizardImageFile=..\WizardImageFile.bmp
-WizardSmallImageFile=..\WizardSmallImageFile.bmp
+WizardImageFile=..\Resources\WizardImageFile.bmp
+WizardSmallImageFile=..\Resources\WizardSmallImageFile.bmp
 SetupIconFile=..\..\Docs\Images\Icons\Logo.ico
 AlwaysShowDirOnReadyPage=True
 DefaultGroupName=ImagingTools\ACF
