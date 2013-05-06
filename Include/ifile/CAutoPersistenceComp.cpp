@@ -15,7 +15,7 @@ CAutoPersistenceComp::CAutoPersistenceComp()
 
 // protected methods
 
-void CAutoPersistenceComp::SaveObjectSnapshot() const
+void CAutoPersistenceComp::SaveObjectSnapshot()
 {
 	bool skipStoring = false;
 

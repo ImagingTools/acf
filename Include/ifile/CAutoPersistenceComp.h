@@ -3,9 +3,9 @@
 
 
 // Qt includes
-#include <QtCore>
 #include <QtCore/QObject>
 #include <QtCore/QTimer>
+#include <QtCore/QFuture>
 
 // ACF includes
 #include "istd/IChangeable.h"
@@ -29,7 +29,7 @@ namespace ifile
 	Enable \c StoreOnChange attribute if you want to save the object to the file each time if the object data was changed.
 	Also you can specify some time interval for permanently data storing.
 	If this parameter is set, then the object will be stored to the file in the given time interval,
-	but only if the object data was changed. 
+	but only if the object data was changed.
 	\note If time interval for object storing is set, the \c StoreOnChange attribute will be ignored.
 */
 class CAutoPersistenceComp:
@@ -57,7 +57,7 @@ public:
 	CAutoPersistenceComp();
 
 protected:
-	void SaveObjectSnapshot() const;
+	void SaveObjectSnapshot();
 
 	virtual void StoreObject(const istd::IChangeable& object) const;
 
@@ -82,8 +82,8 @@ private:
 	I_ATTR(bool, m_storeOnChangeAttrPtr);
 	I_ATTR(double, m_storeIntervalAttrPtr);
 
-	mutable iser::CMemoryWriteArchive m_lastStoredObjectState;
-	mutable bool m_isDataWasChanged;
+	iser::CMemoryWriteArchive m_lastStoredObjectState;
+	bool m_isDataWasChanged;
 
 	QTimer m_storingTimer;
 
