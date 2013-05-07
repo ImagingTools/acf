@@ -36,6 +36,7 @@ void CFileTreeViewGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
+	FileList->header()->setResizeMode(QHeaderView::Stretch);
 	FileList->setModel(&m_itemModel);
 
 	QItemSelectionModel* selectionModelPtr = FileList->selectionModel();
@@ -49,7 +50,7 @@ void CFileTreeViewGuiComp::OnGuiCreated()
 	connect(&m_filterTimer, SIGNAL(timeout()), this, SLOT(on_Refresh_clicked()));
 
 	m_internalThreadPtr = new InternalThread(this);
-	connect(m_internalThreadPtr, SIGNAL(finished()), this, SLOT(OnTreeModelUpdated()));
+	connect(m_internalThreadPtr, SIGNAL(finished()), this, SLOT(OnTreeModelUpdated()), Qt::QueuedConnection);
 }
 
 
@@ -131,8 +132,8 @@ void CFileTreeViewGuiComp::OnTreeModelUpdated()
 
 	GetQtWidget()->setEnabled(true);
 
-	FileList->expandAll();
 	FileList->setUpdatesEnabled(true);
+	FileList->expandAll();
 
 	FilterText->setFocus();
 
