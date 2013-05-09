@@ -63,7 +63,7 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag messageTag("Message", "Message");
 	static iser::CArchiveTag messageTypeIdTag("TypeId", "ID of the message type");
 
-	istd::IFactoryInfo::KeyList knownMessageTypes = s_messageFactory.GetFactoryKeys();
+	istd::IFactoryInfo::KeyList knownMessageTypes = GetMessageFactory().GetFactoryKeys();
 
 	bool retVal = true;
 
@@ -126,7 +126,7 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 
 			if (retVal){
 				if (knownMessageTypes.indexOf(messageTypeId) >= 0){
-					istd::TDelPtr<iser::IObject> objectPtr(s_messageFactory.CreateInstance(messageTypeId));
+					istd::TDelPtr<iser::IObject> objectPtr(GetMessageFactory().CreateInstance(messageTypeId));
 
 					if (objectPtr.IsValid()){
 						retVal = retVal && archive.BeginTag(messageTag);
@@ -334,11 +334,17 @@ bool CMessageContainer::CopyFrom(const istd::IChangeable& object, CompatibilityM
 }
 
 
-// private static members
+// private static methods
 
-CMessageContainer::MessageFactory CMessageContainer::s_messageFactory;
+CMessageContainer::MessageFactory& CMessageContainer::GetMessageFactory()
+{
+	static MessageFactory messageFactory;
 
-I_REGISTER_MESSAGE_TYPE(CMessage)
+	return messageFactory;
+}
+
+
+I_REGISTER_MESSAGE_TYPE(CMessage);
 
 
 } // namespace ilog
