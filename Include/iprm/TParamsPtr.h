@@ -112,9 +112,8 @@ void TParamsPtr<ParameterInterace>::Init(const IParamsSet* parameterSetPtr, cons
 				}
 
 				QString idList = existingIds.join(", ");
-				QString debugMessage = QString("Parameter %1 was not found in the parameter set. Following parameter IDs are registered: %2").arg(QString(parameterId)).arg(idList);
 
-				qDebug(debugMessage.toLocal8Bit().constData());
+				qDebug("Parameter %s was not found in the parameter set. Following parameter IDs are registered: %s", qPrintable(parameterId), qPrintable(idList));
 			}
 		)
 	}
@@ -141,9 +140,7 @@ void TParamsPtr<ParameterInterace>::Init(
 
 			I_IF_DEBUG(
 				if ((paramImplPtr != NULL) && (paramPtr == NULL)){
-					QString debugMessage = QString("Parameter %1 in parameter set is not compatible, should be %2").arg(QString(*parameterIdAttribute)).arg(QString(istd::CClassInfo::GetName<ParameterInterace>()));
-
-					qDebug(debugMessage.toLocal8Bit().constData());
+					qDebug("Parameter %s in parameter set is not compatible, should be %s", qPrintable(*parameterIdAttribute), qPrintable(istd::CClassInfo::GetName<ParameterInterace>()));
 				}
 			)
 		}
@@ -171,7 +168,7 @@ void TParamsPtr<ParameterInterace>::Init(
 				debugMessage = QString("Parameter was not specified and no default parameter is active");
 			}
 
-			qDebug(debugMessage.toLocal8Bit().constData());
+			qDebug(qPrintable(debugMessage));
 		}
 	)
 }

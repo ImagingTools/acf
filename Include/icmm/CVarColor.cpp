@@ -23,7 +23,10 @@ CVarColor::CVarColor(int componentsCount, double value)
 
 
 CVarColor::CVarColor(const CVarColor& color)
-:	BaseClass(color)
+:	istd::IPolymorphic(),
+	istd::IChangeable(),
+	iser::ISerializable(),
+	BaseClass(color)
 {
 }
 

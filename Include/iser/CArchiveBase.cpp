@@ -31,6 +31,16 @@ const CArchiveTag& CArchiveBase::GetAcfRootTag()
 }
 
 
+// private methods
+
+CArchiveBase::CArchiveBase(const CArchiveBase&)
+:	istd::IPolymorphic(),
+	iser::IArchive(),
+	istd::ILogger()
+{
+}
+
+
 // static attributes
 
 CArchiveTag CArchiveBase::s_acfRootTag("Acf", "Root tag of ACF");

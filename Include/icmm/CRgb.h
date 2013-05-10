@@ -73,7 +73,10 @@ inline CRgb::CRgb(double r, double g, double b)
 
 
 inline CRgb::CRgb(const CRgb& color)
-:	BaseClass(color)
+:	istd::IPolymorphic(),
+	istd::IChangeable(),
+	iser::ISerializable(),
+	BaseClass(color)
 {
 }
 

@@ -95,9 +95,7 @@ bool TSingleModelObserverBase<ModelInterface>::OnAttached(imod::IModel* modelPtr
 		if (m_objectPtr == NULL){
 			QString exptectedObjectInterface = typeid(ModelInterface).name();
 
-			QString debugMessage = QString("Data model interface is not supported by this observer. Expected interface is: %1").arg(exptectedObjectInterface);
-
-			qDebug(debugMessage.toUtf8());
+			qDebug("Data model interface is not supported by this observer. Expected interface is: %s", qPrintable(exptectedObjectInterface));
 		}
 	)
 

@@ -135,8 +135,8 @@ void CModelBase::NotifyBeforeUpdate(int updateFlags, istd::IPolymorphic* updateP
 {
 	LockInternalData();
 
-	for (ObserversMap::Iterator iter = m_observers.constBegin(); iter != m_observers.constEnd(); ++iter){
-		AttachingState& state = iter.value();
+	for (ObserversMap::ConstIterator iter = m_observers.constBegin(); iter != m_observers.constEnd(); ++iter){
+		const AttachingState& state = iter.value();
 
 		if (state == AS_ATTACHED){
 			IObserver* observerPtr = iter.key();
@@ -153,8 +153,8 @@ void CModelBase::NotifyAfterUpdate(int updateFlags, istd::IPolymorphic* updatePa
 {
 	LockInternalData();
 
-	for (ObserversMap::Iterator iter = m_observers.constBegin(); iter != m_observers.constEnd(); ++iter){
-		AttachingState& state = iter.value();
+	for (ObserversMap::ConstIterator iter = m_observers.constBegin(); iter != m_observers.constEnd(); ++iter){
+		const AttachingState& state = iter.value();
 
 		if (state == AS_ATTACHED){
 			IObserver* observerPtr = iter.key();
@@ -197,7 +197,7 @@ void CModelBase::UnlockInternalData()
 void CModelBase::CleanupDetachedObservers()
 {
 	for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
-		AttachingState& state = iter.value();
+		const AttachingState& state = iter.value();
 
 		if (state == AS_DETACHED){
 			m_observers.erase(iter);
