@@ -801,6 +801,23 @@ bool TFastVector<MaxSize, Element>::Serialize(iser::IArchive& archive)
 } // namespace imath
 
 
+
+template <int MaxSize, class Element>
+inline uint qHash(const imath::TFastVector<MaxSize, Element>& v)
+{
+	uint retVal = 0;
+
+	int elementsCount = v.GetElementsCount();
+	for (int i = 0; i < elementsCount; ++i){
+		double element = v[i];
+
+		retVal = (retVal << 1) ^ *((uint*)&element) + 1;
+	}
+
+	return retVal;
+}
+
+
 #endif // !imath_TFastVector_included
 
 
