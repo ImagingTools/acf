@@ -260,6 +260,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IDocumentMetaInfo.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IDocumentStateComparator.h"
 				>
 			</File>
