@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CFastColor.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHsv.cpp"
 				>
 			</File>
@@ -222,6 +226,10 @@
 			</File>
 			<File
 				RelativePath="..\CColorTransformationProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CFastColor.h"
 				>
 			</File>
 			<File
