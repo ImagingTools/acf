@@ -165,6 +165,7 @@ private:
 
 	mutable QMap<QString, QIcon> m_extToIconMap;
 
+	QRegExp m_filterMatcher;
 	QString m_userFilter;
 	QTimer m_filterTimer;
 	QElapsedTimer m_performanceTimer;

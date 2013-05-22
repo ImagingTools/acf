@@ -16,6 +16,9 @@ void CFileTreeViewGuiComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
+	m_filterMatcher.setCaseSensitivity(Qt::CaseInsensitive);
+	m_filterMatcher.setPatternSyntax(QRegExp::Wildcard);
+
 	m_fileModelUpdateAllowed = true;
 
 	RegisterModel(&m_currentFile);
@@ -207,6 +210,8 @@ void CFileTreeViewGuiComp::DoTreeModelUpdate()
 		}
 	}
 
+	m_filterMatcher.setPattern(m_userFilter);
+
 	CreateDirectoryList(rootDirPtr->GetPath(),
 		filters,
 		QDir::Name | QDir::IgnoreCase,
@@ -220,19 +225,21 @@ void CFileTreeViewGuiComp::UpdateCurrentSelection()
 		return;
 	}
 
-	QMutexLocker lock(&m_lock);
+	if (m_lock.tryLock(100)){
+		UpdateBlocker updateBlocker(this);
 
-	UpdateBlocker updateBlocker(this);
+		QString currentPath = m_currentFile.GetPath();
 
-	QString currentPath = m_currentFile.GetPath();
+		QModelIndexList indexes = m_itemModel.match(m_itemModel.index(0,0), DR_PATH, currentPath, 1, 
+			Qt::MatchFixedString | Qt::MatchRecursive | Qt::MatchWrap);
+		if (!indexes.isEmpty()){
+			QItemSelectionModel* selectionModelPtr = FileList->selectionModel();
+			if (selectionModelPtr != NULL){
+				selectionModelPtr->setCurrentIndex(indexes.first(), QItemSelectionModel::ClearAndSelect);
+			}			
+		}
 
-	QModelIndexList indexes = m_itemModel.match(m_itemModel.index(0,0), DR_PATH, currentPath, 1, 
-		Qt::MatchFixedString | Qt::MatchRecursive | Qt::MatchWrap);
-	if (!indexes.isEmpty()){
-		QItemSelectionModel* selectionModelPtr = FileList->selectionModel();
-		if (selectionModelPtr != NULL){
-			selectionModelPtr->setCurrentIndex(indexes.first(), QItemSelectionModel::ClearAndSelect);
-		}			
+		m_lock.unlock();
 	}
 }
 
@@ -254,7 +261,7 @@ bool CFileTreeViewGuiComp::CreateFileList(
 
 		// check if can be filtered
 		if (!m_userFilter.isEmpty()){
-			if (!fileName.contains(m_userFilter))
+			if (m_filterMatcher.indexIn(fileName) < 0)
 				continue;
 		}
 
