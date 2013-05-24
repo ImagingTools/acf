@@ -117,7 +117,7 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 
 	bool retVal = true;
 
-	int metaInfosCount = 0;
+	int metaInfosCount = m_infosMap.size();
 	retVal = retVal && archive.BeginMultiTag(metaInfoMapTag, metaInfoTag, metaInfosCount);
 
 	if (archive.IsStoring()){
@@ -131,9 +131,11 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 			retVal = retVal && archive.Process(type);
 			retVal = retVal && archive.EndTag(typeTag);
 
+
 			QByteArray variantData;
-			QDataStream variantStream(variantData);
-			variantStream << index.value();
+			QDataStream variantStream(&variantData, QIODevice::ReadWrite);
+			QVariant value = index.value();
+			variantStream << value;
 
 			retVal = retVal && archive.BeginTag(valueTag);
 			retVal = retVal && archive.Process(variantData);
@@ -171,6 +173,20 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
+}
+
+
+// reimplemented (istd::IChangeable)
+
+bool CStandardDocumentMetaInfo::IsEqual(const IChangeable& object) const
+{
+	const CStandardDocumentMetaInfo* infoPtr = dynamic_cast<const CStandardDocumentMetaInfo*>(&object);
+	if (infoPtr != NULL)
+	{
+		return (m_infosMap == infoPtr->m_infosMap);
+	}
+
+	return false;
 }
 
 
