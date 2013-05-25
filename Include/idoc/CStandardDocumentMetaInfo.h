@@ -32,6 +32,9 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// reimplemented (istd::IChangeable)
+	virtual bool IsEqual(const IChangeable& object) const;
+
 private:
 	typedef QMap<int, QVariant> MetaInfoMap;
 
