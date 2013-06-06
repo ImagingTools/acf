@@ -63,6 +63,7 @@
     <file alias="Grid">Resources/Icons/Grid.svg</file>
     <file alias="LogicalUnit">Resources/Icons/LogicalUnit.svg</file>
     <file alias="ColorRing">Resources/Icons/ColorRing.svg</file>
+    <file alias="Statistics">Resources/Icons/Statistics.svg</file>
   </qresource>
   <qresource prefix="Style">
     <file>Resources/Style/AcfStyle.ass</file>
