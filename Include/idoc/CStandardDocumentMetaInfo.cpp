@@ -172,6 +172,8 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 		}
 	}
 
+	retVal = retVal && archive.EndTag(metaInfoMapTag);
+
 	return retVal;
 }
 
