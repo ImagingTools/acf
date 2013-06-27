@@ -6,15 +6,14 @@
 #include <QtCore/QVector>
 
 // ACF includes
-#include "istd/TSmartPtr.h"
-
+#include "istd/TDelPtr.h"
+#include "imod/TModelWrap.h"
 #include "imod/CMultiModelBridgeBase.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "iprm/IParamsSet.h"
 #include "iprm/ISelectionParam.h"
 #include "iprm/IOptionsList.h"
+#include "iprm/INameParam.h"
 #include "iprm/IParamsManager.h"
 
 
@@ -41,7 +40,9 @@ public:
 		I_REGISTER_INTERFACE(IOptionsList);
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
 		I_ASSIGN_MULTI_0(m_fixedSetNamesAttrPtr, "FixedSetNames", "List of fixed parameter names", false);
-		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set. Use %1 to insert automatic enumeration", true, "<noname>");
+		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set. Use %1 to insert automatic enumeration", true, "unnamed_%1");
+		I_ASSIGN(m_elementIndexParamId, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
+		I_ASSIGN(m_elementNameParamId, "ElementNameParamId", "ID of index of returned parameter set in manager list", false, "Name");
 		I_ASSIGN(m_paramsSetTypeIdAttrPtr, "ParamsSetTypeId", "ID of factorisied parameter set", true, "Default");
 		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet");
 	I_END_COMPONENT;
@@ -79,6 +80,8 @@ public:
 	virtual bool IsOptionEnabled(int index) const;
 
 protected:
+	QString GetNewSetName() const;
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
@@ -88,17 +91,48 @@ private:
 	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
 	I_ATTR(QString, m_defaultSetNameAttrPtr);
 	I_ATTR(QByteArray, m_paramsSetTypeIdAttrPtr);
+	I_ATTR(QByteArray, m_elementIndexParamId);
+	I_ATTR(QByteArray, m_elementNameParamId);
 	I_FACT(IParamsSet, m_paramSetsFactPtr);
 
-	struct ParamSet
+	class ParamSet:
+				public CMultiModelBridgeBase,
+				virtual public IParamsSet,
+				virtual public ISelectionParam,
+				virtual public INameParam
 	{
-		istd::TSmartPtr<IParamsSet> paramSetPtr;
+	public:
+		ParamSet();
+
+		// reimplemented (iprm::IParamsSet)
+		virtual Ids GetParamIds(bool editableOnly = false) const;
+		virtual const iser::ISerializable* GetParameter(const QByteArray& id) const;
+		virtual iser::ISerializable* GetEditableParameter(const QByteArray& id);
+
+		// reimplemented (iprm::ISelectionParam)
+		virtual const IOptionsList* GetSelectionConstraints() const;
+		virtual int GetSelectedOptionIndex() const;
+		virtual bool SetSelectedOptionIndex(int index);
+		virtual ISelectionParam* GetSubselection(int index) const;
+
+		// reimplemented (iser::INameParam)
+		virtual const QString& GetName() const;
+		virtual void SetName(const QString& name);
+		virtual bool IsNameFixed() const;
+
+		// reimplemented (iser::ISerializable)
+		virtual bool Serialize(iser::IArchive& archive);
+
+		istd::TDelPtr<IParamsSet> paramSetPtr;
 		QString name;
+		const CParamsManagerComp* parentPtr;
 	};
 	
 	int FindParamSetIndex(const QString& name) const;
 
-	typedef QList<ParamSet> ParamSets;
+	typedef istd::TDelPtr<ParamSet> ParamSetPtr;
+
+	typedef QVector<ParamSetPtr> ParamSets;
 
 	ParamSets m_paramSets;
 

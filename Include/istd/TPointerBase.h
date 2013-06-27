@@ -76,6 +76,12 @@ public:
 		\return	true, if internal pointer not NULL and can be used to access pointed members.
 	*/
 	bool IsValid() const;
+
+	/**
+		Swap two pointers.
+	*/
+	void Swap(TPointerBase& ptr);
+
 	/**
 		Get an access to object pointed at.
 	*/
@@ -133,6 +139,13 @@ template <class Type>
 inline bool TPointerBase<Type>::IsValid() const
 {
 	return (m_ptr != NULL);
+}
+
+
+template <class Type>
+void TPointerBase<Type>::Swap(TPointerBase& ptr)
+{
+	qSwap(m_ptr, ptr.m_ptr);
 }
 
 

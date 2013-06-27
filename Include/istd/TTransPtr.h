@@ -166,9 +166,7 @@ void TTransPtr<Type>::Reset()
 template <class Type>
 void TTransPtr<Type>::Swap(TTransPtr& pointer)
 {
-	RefCountBase* tempCounterPtr = m_counterPtr;
-	m_counterPtr = pointer.m_counterPtr;
-	pointer.m_counterPtr = tempCounterPtr;
+	qSwap(m_counterPtr, pointer.m_counterPtr);
 }
 
 
