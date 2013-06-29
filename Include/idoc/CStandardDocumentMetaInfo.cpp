@@ -29,7 +29,7 @@ CStandardDocumentMetaInfo::MetaInfoTypes CStandardDocumentMetaInfo::GetSupported
 }
 
 
-QVariant CStandardDocumentMetaInfo::GetDocumentMetaInfo(MetaInfoType metaInfoType) const
+QVariant CStandardDocumentMetaInfo::GetDocumentMetaInfo(int metaInfoType) const
 {
 	static QVariant emptyValue;
 
@@ -41,7 +41,7 @@ QVariant CStandardDocumentMetaInfo::GetDocumentMetaInfo(MetaInfoType metaInfoTyp
 }
 
 
-bool CStandardDocumentMetaInfo::SetDocumentMetaInfo(MetaInfoType metaInfoType, const QVariant& metaInfo)
+bool CStandardDocumentMetaInfo::SetDocumentMetaInfo(int metaInfoType, const QVariant& metaInfo)
 {
 	MetaInfoTypes registeredTypes = GetSupportedMetaInfoTypes();
 
@@ -62,7 +62,7 @@ bool CStandardDocumentMetaInfo::SetDocumentMetaInfo(MetaInfoType metaInfoType, c
 }
 
 
-QString CStandardDocumentMetaInfo::GetMetaInfoName(MetaInfoType metaInfoType) const
+QString CStandardDocumentMetaInfo::GetMetaInfoName(int metaInfoType) const
 {
 	static QString emptyName;
 
@@ -83,7 +83,7 @@ QString CStandardDocumentMetaInfo::GetMetaInfoName(MetaInfoType metaInfoType) co
 }
 
 
-QString CStandardDocumentMetaInfo::GetMetaInfoDescription(MetaInfoType metaInfoType) const
+QString CStandardDocumentMetaInfo::GetMetaInfoDescription(int metaInfoType) const
 {
 	static QString emptyName;
 

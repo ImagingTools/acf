@@ -53,7 +53,7 @@ public:
 		MIT_USER = 1024
 	};
 
-	typedef QSet<MetaInfoType> MetaInfoTypes;
+	typedef QSet<int> MetaInfoTypes;
 
 	/**
 		Get list of supported meta info types.
@@ -63,22 +63,22 @@ public:
 	/**
 		Get document's meta info.
 	*/
-	virtual QVariant GetDocumentMetaInfo(MetaInfoType metaInfoType) const = 0;
+	virtual QVariant GetDocumentMetaInfo(int metaInfoType) const = 0;
 
 	/**
 		Set new document's meta information for a given meta type.
 	*/
-	virtual bool SetDocumentMetaInfo(MetaInfoType metaInfoType, const QVariant& metaInfo) = 0;
+	virtual bool SetDocumentMetaInfo(int metaInfoType, const QVariant& metaInfo) = 0;
 
 	/**
 		Get a human readable name for a given meta information type.
 	*/
-	virtual QString GetMetaInfoName(MetaInfoType metaInfoType) const = 0;
+	virtual QString GetMetaInfoName(int metaInfoType) const = 0;
 
 	/**
 		Get a human readable description for a given meta information type.
 	*/
-	virtual QString GetMetaInfoDescription(MetaInfoType metaInfoType) const = 0;
+	virtual QString GetMetaInfoDescription(int metaInfoType) const = 0;
 };
 
 

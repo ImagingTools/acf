@@ -24,10 +24,10 @@ class CStandardDocumentMetaInfo:
 public:
 	// reimplemented (IDocumentMetaInfo)
 	virtual MetaInfoTypes GetSupportedMetaInfoTypes() const;
-	virtual QVariant GetDocumentMetaInfo(MetaInfoType metaInfoType) const;
-	virtual bool SetDocumentMetaInfo(MetaInfoType metaInfoType, const QVariant& metaInfo);
-	virtual QString GetMetaInfoName(MetaInfoType metaInfoType) const;
-	virtual QString GetMetaInfoDescription(MetaInfoType metaInfoType) const;
+	virtual QVariant GetDocumentMetaInfo(int metaInfoType) const;
+	virtual bool SetDocumentMetaInfo(int metaInfoType, const QVariant& metaInfo);
+	virtual QString GetMetaInfoName(int metaInfoType) const;
+	virtual QString GetMetaInfoDescription(int metaInfoType) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
