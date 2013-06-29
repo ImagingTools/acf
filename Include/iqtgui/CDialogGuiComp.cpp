@@ -15,11 +15,11 @@ namespace iqtgui
 
 // reimplemented (iqtgui::IDialog)
 
-void CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
+int CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 {
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog(QDialogButtonBox::Close, parentPtr));
 	if (dialogPtr.IsValid()){
-		dialogPtr->exec();
+		return dialogPtr->exec();
 	}
 }
 

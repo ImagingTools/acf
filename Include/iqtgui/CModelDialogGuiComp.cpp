@@ -13,10 +13,10 @@ namespace iqtgui
 
 // reimplemented (iqtgui::IDialog)
 
-void CModelDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
+int CModelDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 {
 	if (!m_workingDataFactoryCompPtr.IsValid() || !m_workingModelFactoryCompPtr.IsValid()){
-		return;
+		return QDialog::Rejected;
 	}
 
 	istd::IChangeable* sourceDataPtr = m_dataCompPtr.GetPtr();
@@ -26,15 +26,17 @@ void CModelDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 	}
 
 	if (sourceDataPtr == NULL){
-		return;
+		return QDialog::Rejected;
 	}
 
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, parentPtr));
 	if (!dialogPtr.IsValid()){
-		return;
+		return QDialog::Rejected;
 	}
 
 	m_workingObjectPtr.SetPtr(m_workingDataFactoryCompPtr.CreateComponent());
+
+	int retVal = QDialog::Rejected;
 
 	istd::IChangeable* workingDataPtr = m_workingDataFactoryCompPtr.ExtractInterface(m_workingObjectPtr.GetPtr());
 	if (workingDataPtr != NULL){
@@ -44,7 +46,7 @@ void CModelDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 			if (workingModelPtr != NULL){
 				bool isAttached = workingModelPtr->AttachObserver(m_editorCompPtr.GetPtr());
 				if (isAttached){
-					int retVal = dialogPtr->exec();
+					retVal = dialogPtr->exec();
 
 					if (retVal == QDialog::Accepted){
 						sourceDataPtr->CopyFrom(*workingDataPtr);
@@ -58,6 +60,8 @@ void CModelDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 	}
 
 	m_workingObjectPtr.Reset();
+
+	return retVal;
 }
 
 

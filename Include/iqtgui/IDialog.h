@@ -4,7 +4,6 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-
 #include "iqtgui/IGuiObject.h"
 
 
@@ -20,8 +19,9 @@ class IDialog: virtual public istd::IPolymorphic
 public:
 	/**
 		Execute dialog instance.
+		\return Status of the dialog execution. \sa QDialog
 	*/
-	virtual void ExecuteDialog(IGuiObject* parentPtr) = 0;
+	virtual int ExecuteDialog(IGuiObject* parentPtr) = 0;
 };
 
 

@@ -41,7 +41,7 @@ public:
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IDialog)
-	virtual void ExecuteDialog(IGuiObject* parentPtr);
+	virtual int ExecuteDialog(IGuiObject* parentPtr);
 
 	// reimpemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
