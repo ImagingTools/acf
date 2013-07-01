@@ -21,6 +21,8 @@ int CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 	if (dialogPtr.IsValid()){
 		return dialogPtr->exec();
 	}
+
+	return -1;
 }
 
 

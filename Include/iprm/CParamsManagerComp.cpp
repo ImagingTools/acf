@@ -27,7 +27,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 		return false;
 	}
 
-	int actualSetsCount = m_paramSets.size();
+	int actualSetsCount = GetParamsSetsCount();
 	if (count != actualSetsCount){
 		if (!m_paramSetsFactPtr.IsValid()){
 			return false;
