@@ -150,7 +150,12 @@ void CSelectionParamGuiComp::OnSelectionChanged(int /*index*/)
 						(selectionPtr != NULL) && switchIndex < switchesCount;
 						++switchIndex){
 				const QComboBox* switchBoxPtr = m_comboBoxes.GetAt(switchIndex);
-				if (!selectionPtr->SetSelectedOptionIndex(switchBoxPtr->currentIndex()) && (switchIndex == 0)){
+				Q_ASSERT(switchBoxPtr != NULL);
+
+				int currentIndex = switchBoxPtr->currentIndex();
+				int selectonIndex = switchBoxPtr->itemData(currentIndex, Qt::UserRole).toInt();
+
+				if (!selectionPtr->SetSelectedOptionIndex(selectonIndex) && (switchIndex == 0)){
 					UpdateComboBoxesView();
 
 					return;
@@ -212,7 +217,6 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 		mainLayoutPtr->setMargin(0);
 	}
 
-
 	int switchIndex = 0;
 	for (		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 				selectionPtr != NULL;
@@ -242,13 +246,20 @@ void CSelectionParamGuiComp::UpdateComboBoxesView()
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 
-			for (int i = 0; i < optionsCount; ++i){
-				QString name = constraintsPtr->GetOptionName(i);
+			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 
-				switchBoxPtr->addItem(name);
+			for (int i = 0, itemIndex = 0; i < optionsCount; ++i){
+				if (constraintsPtr->IsOptionEnabled(i)){
+					QString name = constraintsPtr->GetOptionName(i);
+
+					switchBoxPtr->addItem(name);
+					switchBoxPtr->setItemData(itemIndex++, i);
+				}
+				else if(i == selectedIndex){
+					selectedIndex = -1;
+				}
 			}
 
-			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
 			switchBoxPtr->setCurrentIndex(selectedIndex);
 		}
 	}
