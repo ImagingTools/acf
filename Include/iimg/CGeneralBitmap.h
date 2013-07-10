@@ -32,6 +32,7 @@ public:
 
 	// reimplemented (iimg::IRasterImage)
 	virtual void ResetImage();
+	virtual void ClearImage();
 	virtual istd::CIndex2d GetImageSize() const;
 	virtual int GetComponentsCount() const;
 

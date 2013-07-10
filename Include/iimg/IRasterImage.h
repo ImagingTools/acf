@@ -31,6 +31,12 @@ public:
 	virtual void ResetImage() = 0;
 
 	/**
+		Cleat this image.
+		After this operation all the image pixels will be set to the default value (black by default).
+	*/
+	virtual void ClearImage() = 0;
+
+	/**
 		Get size of this raster image.
 	*/
 	virtual istd::CIndex2d GetImageSize() const = 0;

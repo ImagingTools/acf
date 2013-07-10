@@ -123,6 +123,21 @@ void CGeneralBitmap::ResetImage()
 }
 
 
+void CGeneralBitmap::ClearImage()
+{
+	if (m_size.IsSizeEmpty() || !m_buffer.IsValid()){
+		return;
+	}
+
+	// we have to do this line by line because line addresses are not obligatory plain.
+	int lineSize = GetLineBytesCount();
+	for (int y = 0; y < m_size.GetY(); y ++){
+		quint8* lineBufferPtr = (quint8*)GetLinePtr(y);
+		std::memset(lineBufferPtr, 0, lineSize); 
+	}
+}
+
+
 istd::CIndex2d CGeneralBitmap::GetImageSize() const
 {
 	return m_size;

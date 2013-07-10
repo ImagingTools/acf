@@ -15,7 +15,7 @@ namespace iqtgui
 
 
 /**
-	Dialog based represenation of any UI-Component.
+	Dialog based representation of any UI-Component.
 	This component provides also a menu command and can be integrated into a consumer of ibase::ICommandsProvider interface.
 */
 class CDialogGuiComp:
@@ -38,12 +38,13 @@ public:
 		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "MenuDescription");
 		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "RootMenu");
 		I_ASSIGN(m_initialDialogSizeAttrPtr, "DialogSize", "Initial size of the dialog. The value is proportion of dialog size to desktop size", false, 0.5);
+		I_ASSIGN(m_isModalAttrPtr, "IsModal", "Modality of the dialog", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IDialog)
 	virtual int ExecuteDialog(IGuiObject* parentPtr);
 
-	// reimpemented (ibase::ICommandsProvider)
+	// reimplemented (ibase::ICommandsProvider)
 	virtual const ibase::IHierarchicalCommand* GetCommands() const;
 
 protected:
@@ -66,6 +67,7 @@ private:
 	I_ATTR(QString, m_menuDescriptionAttrPtr);
 	I_ATTR(QString, m_rootMenuNameAttrPtr);
 	I_ATTR(double, m_initialDialogSizeAttrPtr);
+	I_ATTR(bool, m_isModalAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_rootCommand;
 	iqtgui::CHierarchicalCommand m_rootMenuCommand;

@@ -594,6 +594,12 @@ void CScanlineMask::ResetImage()
 }
 
 
+void CScanlineMask::ClearImage()
+{
+	// placeholder
+}
+
+
 istd::CIndex2d CScanlineMask::GetImageSize() const
 {
 	return m_boundingBox.GetRightBottom();

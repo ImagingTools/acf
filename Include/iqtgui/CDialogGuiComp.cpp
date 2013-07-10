@@ -19,14 +19,25 @@ int CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)
 {
 	istd::TDelPtr<iqtgui::CGuiComponentDialog> dialogPtr(CreateComponentDialog(QDialogButtonBox::Close, parentPtr));
 	if (dialogPtr.IsValid()){
-		return dialogPtr->exec();
+		if (*m_isModalAttrPtr){
+			return dialogPtr->exec();
+		} else {
+			dialogPtr->setModal(false);
+			dialogPtr->setAttribute(Qt::WA_DeleteOnClose);
+
+			dialogPtr->show();
+
+			dialogPtr.PopPtr();
+
+			return QDialog::Accepted;
+		}
 	}
 
 	return QDialog::Rejected;
 }
 
 
-// reimpemented (ibase::ICommandsProvider)
+// reimplemented (ibase::ICommandsProvider)
 
 const ibase::IHierarchicalCommand* CDialogGuiComp::GetCommands() const
 {
