@@ -3,6 +3,8 @@
 
 
 // ACF includes
+#include "istd/TChangeNotifier.h"
+#include "istd/TPointerVector.h"
 #include "idoc/IMultiPageDocument.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
 
@@ -22,9 +24,9 @@ class TMultiDocumentWrap:
 public:
 	typedef Base BaseClass;
 	typedef CStandardDocumentMetaInfo BaseClass2;
-	typedef typename PageInterface PageInterface;
+	typedef typename PageInterface PageInterfaceType;
 
-	const PageInterface* GetPageObject(int pageIndex) const;
+	const PageInterfaceType* GetPageObject(int pageIndex) const;
 
 	// pseudo-reimplemented (IMultiPageDocument)
 	virtual int GetPagesCount() const;
@@ -43,7 +45,7 @@ protected:
 // public methods
 
 template <class Base, class PageInterface>
-const PageInterface* TMultiDocumentWrap<Base, PageInterface>::GetPageObject(int pageIndex) const
+const typename TMultiDocumentWrap<Base, PageInterface>::PageInterfaceType* TMultiDocumentWrap<Base, PageInterface>::GetPageObject(int pageIndex) const
 {
 	Q_ASSERT(pageIndex < m_documentPages.GetCount());
 	Q_ASSERT(pageIndex >= 0);
