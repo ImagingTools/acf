@@ -74,7 +74,7 @@ int CSimpleGuiContainerDelegate::GetPagesCount(const QWidget& containerWidget) c
 QWidget* CSimpleGuiContainerDelegate::GetPageWidgetPtr(const QWidget& containerWidget, int pageIndex) const
 {
 	Q_ASSERT(pageIndex >= 0);
-	Q_ASSERT(pageIndex < GetPagesCount());
+	Q_ASSERT(pageIndex < GetPagesCount(containerWidget));
 
 	QLayout* containerLayoutPtr = containerWidget.layout();
 	Q_ASSERT(containerLayoutPtr != NULL);

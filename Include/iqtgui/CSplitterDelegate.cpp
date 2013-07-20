@@ -6,6 +6,7 @@
 #include <QtGui/QSplitter>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QIcon>
+#include <QtGui/QGroupBox>
 
 
 namespace iqtgui
@@ -27,7 +28,7 @@ QWidget* CSplitterDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int 
 int CSplitterDelegate::InsertPage(
 		QWidget& containerWidget,
 		QWidget* pageWidgetPtr,
-		const QString& /*pageTitle*/,
+		const QString& pageTitle,
 		int pageIndex)
 {
 	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(&containerWidget);
@@ -35,7 +36,7 @@ int CSplitterDelegate::InsertPage(
 		return -1;
 	}
 
-	QWidget* panelPtr = new QWidget(splitterPtr);
+	QWidget* panelPtr = pageTitle.isEmpty() ? new QWidget(splitterPtr) : new QGroupBox(pageTitle, splitterPtr);
 	QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 	panelLayoutPtr->setMargin(0);
 	panelLayoutPtr->addWidget(pageWidgetPtr);

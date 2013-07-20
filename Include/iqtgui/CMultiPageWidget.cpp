@@ -10,6 +10,12 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QSplitter>
 
+// ACF includes
+#include <iqtgui/CTabWidgetDelegate.h>
+#include <iqtgui/CToolBoxDelegate.h>
+#include <iqtgui/CSplitterDelegate.h>
+#include <iqtgui/CSimpleGuiContainerDelegate.h>
+
 
 namespace iqtgui
 {
@@ -22,6 +28,13 @@ CMultiPageWidget::CMultiPageWidget(int designMode, bool useHorizontalLayout)
 	m_designMode(designMode),
 	m_useHorizontalLayout(useHorizontalLayout)
 {
+	// Register default delegates:
+	RegisterMultiPageWidgetDelegate<iqtgui::CSimpleGuiContainerDelegate>(DT_SIMPLE);
+	RegisterMultiPageWidgetDelegate<iqtgui::CTabWidgetDelegate>(DT_TAB_WIDGET);
+	RegisterMultiPageWidgetDelegate<iqtgui::CToolBoxDelegate>(DT_TOOL_BOX);
+	RegisterMultiPageWidgetDelegate<iqtgui::CSplitterDelegate>(DT_SPLITTER);
+
+	CreateContainerGui();
 }
 
 
@@ -30,7 +43,7 @@ int CMultiPageWidget::InsertPage(
 			const QString& pageTitle,
 			int pageIndex)
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created, page could not be inserted.");
 
 		return -1;
@@ -46,58 +59,12 @@ int CMultiPageWidget::InsertPage(
 	Q_ASSERT(delegatePtr.IsValid());
 
 	return delegatePtr->InsertPage(*m_guiContainerPtr, pageWidgetPtr, pageTitle, pageIndex);
-
-	bool addSpacer = false;
-
-	QWidget* panelPtr = NULL;
-
-	if (m_designMode == DT_SPLITTER){
-		QSplitter* splitterPtr = static_cast<QSplitter*>(m_guiContainerPtr);
-		panelPtr = new QWidget(m_guiContainerPtr);
-		QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-		panelLayoutPtr->setMargin(0);
-		splitterPtr->addWidget(panelPtr);
-	}
-	else{
-		if (!pageTitle.isEmpty()){
-			panelPtr = new QGroupBox(pageTitle, m_guiContainerPtr);
-			new QVBoxLayout(panelPtr);
-		}
-		else{
-			panelPtr = new QWidget(this);
-			QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-			panelLayoutPtr->setContentsMargins(0, 0, 0, 0);
-		}
-
-		QLayout* parentLayoutPtr = m_guiContainerPtr->layout();
-		if (parentLayoutPtr != NULL){
-			parentLayoutPtr->addWidget(panelPtr);
-		}
-	}
-
-	QLayout* panelLayoutPtr = panelPtr->layout();
-	if (panelLayoutPtr != NULL){
-		panelLayoutPtr->addWidget(pageWidgetPtr);
-	}
-	else{
-		pageWidgetPtr->setParent(panelPtr);
-	}
-
-	if (addSpacer){
-		QLayout* panelLayoutPtr = panelPtr->layout();
-		if (panelLayoutPtr != NULL){
-			QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
-			panelLayoutPtr->addItem(spacerPtr);
-		}
-	}
-
-	return pageIndex;
 }
 
 
 void CMultiPageWidget::RemovePage(int pageIndex)
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created, page could not be removed.");
 
 		return;
@@ -118,7 +85,7 @@ void CMultiPageWidget::RemovePage(int pageIndex)
 
 void CMultiPageWidget::SetPageEnabled(int pageIndex, bool isEnabled)
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created, page could not be enabled.");
 
 		return;
@@ -139,7 +106,7 @@ void CMultiPageWidget::SetPageEnabled(int pageIndex, bool isEnabled)
 
 void CMultiPageWidget::SetPageVisible(int pageIndex, bool isVisible)
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created, page could not be set visible\\hidden.");
 
 		return;
@@ -160,7 +127,7 @@ void CMultiPageWidget::SetPageVisible(int pageIndex, bool isVisible)
 
 int CMultiPageWidget::GetPagesCount() const
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created");
 
 		return 0;
@@ -181,7 +148,7 @@ int CMultiPageWidget::GetPagesCount() const
 
 QWidget* CMultiPageWidget::GetPageWidgetPtr(int pageIndex) const
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created");
 
 		return NULL;
@@ -204,7 +171,7 @@ QWidget* CMultiPageWidget::GetPageWidgetPtr(int pageIndex) const
 
 int CMultiPageWidget::GetCurrentPageIndex() const
 {
-	if (m_guiContainerPtr != NULL){
+	if (m_guiContainerPtr == NULL){
 		qWarning("Container GUI was not created");
 
 		return 0;
@@ -243,12 +210,7 @@ bool CMultiPageWidget::CreateContainerGui()
 	// initialize the GUI container
 	QLayout* layoutPtr = layout();
 	if (layoutPtr == NULL){
-		if (m_useHorizontalLayout){
-			layoutPtr = new QHBoxLayout(this);
-		}
-		else{
-			layoutPtr = new QVBoxLayout(this);
-		}
+		layoutPtr = new QVBoxLayout(this);
 	}
 
 	layoutPtr->setMargin(0);
@@ -264,32 +226,6 @@ bool CMultiPageWidget::CreateContainerGui()
 	return (m_guiContainerPtr != NULL);
 }
 
-
-/*
-
-bool CMultiPageWidget::SetPageEnabled(QWidget& containerWidget, int pageIndex, bool isPageEnabled) const
-{
-	QToolBox* toolBoxPtr = dynamic_cast<QToolBox*>(&containerWidget);
-	if (toolBoxPtr != NULL){
-		toolBoxPtr->setItemEnabled(pageIndex, isPageEnabled);
-
-		return true;
-	}
-
-	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(&containerWidget);
-	if (splitterPtr != NULL){
-		QWidget* pageWidgetPtr = splitterPtr->widget(pageIndex);
-		Q_ASSERT(pageWidgetPtr != NULL);
-
-		pageWidgetPtr->setEnabled(isPageEnabled);
-
-		return true;
-	}
-
-	return false;
-}
-
-*/
 
 } // namespace iqtgui
 
