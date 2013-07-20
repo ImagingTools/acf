@@ -309,6 +309,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiPageWidget.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CObjectPreviewGuiComp.cpp"
 				>
 			</File>
@@ -350,6 +354,10 @@
 			</File>
 			<File
 				RelativePath="..\CTableBasedModelEditorComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CTabWidgetDelegate.cpp"
 				>
 			</File>
 			<File
@@ -521,6 +529,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiPageWidget.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CObjectPreviewGuiComp.h"
 				>
 			</File>
@@ -562,6 +574,10 @@
 			</File>
 			<File
 				RelativePath="..\CTableBasedModelEditorComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CTabWidgetDelegate.h"
 				>
 			</File>
 			<File
@@ -610,6 +626,10 @@
 			</File>
 			<File
 				RelativePath="..\IMainWindowComponent.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMultiPageWidgetDelegate.h"
 				>
 			</File>
 			<File
