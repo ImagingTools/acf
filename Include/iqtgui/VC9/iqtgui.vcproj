@@ -337,6 +337,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSplitterDelegate.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CStatusBarWidgetComp.cpp"
 				>
 			</File>
@@ -370,6 +374,10 @@
 			</File>
 			<File
 				RelativePath="..\CToolBarWidgetGuiComp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CToolBoxDelegate.cpp"
 				>
 			</File>
 			<File
@@ -557,6 +565,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSplitterDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CStatusBarWidgetComp.h"
 				>
 			</File>
@@ -590,6 +602,10 @@
 			</File>
 			<File
 				RelativePath="..\CToolBarWidgetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CToolBoxDelegate.h"
 				>
 			</File>
 			<File

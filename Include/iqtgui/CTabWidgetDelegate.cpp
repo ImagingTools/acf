@@ -193,4 +193,3 @@ bool CTabWidgetDelegate::SetPageIconSize(QWidget& containerWidget, const QSize& 
 } // namespace iqtgui
 
 
-s

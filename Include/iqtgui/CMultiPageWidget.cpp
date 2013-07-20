@@ -51,24 +51,7 @@ int CMultiPageWidget::InsertPage(
 
 	QWidget* panelPtr = NULL;
 
-	if (m_designMode == DT_TAB_WIDGET){
-		panelPtr = new QWidget(m_guiContainerPtr);
-		new QVBoxLayout(panelPtr);
-		QTabWidget* tabWidgetPtr = static_cast<QTabWidget*>(m_guiContainerPtr);
-		pageIndex = tabWidgetPtr->insertTab(pageIndex, panelPtr, pageTitle);
-
-		addSpacer = true;
-	}
-	else if (m_designMode == DT_TOOL_BOX){
-		panelPtr = new QWidget(m_guiContainerPtr);
-		QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-		panelLayoutPtr->setContentsMargins(6, 0, 6, 0);
-		QToolBox* toolBoxPtr = static_cast<QToolBox*>(m_guiContainerPtr);
-		pageIndex = toolBoxPtr->insertItem(pageIndex, panelPtr, pageTitle);
-
-		addSpacer = true;
-	}
-	else if (m_designMode == DT_SPLITTER){
+	if (m_designMode == DT_SPLITTER){
 		QSplitter* splitterPtr = static_cast<QSplitter*>(m_guiContainerPtr);
 		panelPtr = new QWidget(m_guiContainerPtr);
 		QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
