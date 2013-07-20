@@ -184,13 +184,13 @@ QWidget* CMultiPageWidget::GetPageWidgetPtr(int pageIndex) const
 	if (m_guiContainerPtr != NULL){
 		qWarning("Container GUI was not created");
 
-		return 0;
+		return NULL;
 	}
 
 	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
 		qWarning("No container delegate registered for the current UI mode");
 
-		return 0;
+		return NULL;
 	}
 
 	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];

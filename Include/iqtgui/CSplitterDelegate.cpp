@@ -72,7 +72,7 @@ QWidget* CSplitterDelegate::GetPageWidgetPtr(const QWidget& containerWidget, int
 		return splitterPtr->widget(pageIndex);
 	}
 
-	return 0;
+	return NULL;
 }
 
 

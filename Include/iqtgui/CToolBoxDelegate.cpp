@@ -73,7 +73,7 @@ QWidget* CToolBoxDelegate::GetPageWidgetPtr(const QWidget& containerWidget, int 
 		return toolBoxPtr->widget(pageIndex);
 	}
 
-	return 0;
+	return NULL;
 }
 
 

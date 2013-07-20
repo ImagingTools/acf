@@ -72,7 +72,7 @@ QWidget* CTabWidgetDelegate::GetPageWidgetPtr(const QWidget& containerWidget, in
 		return tabWidgetPtr->widget(pageIndex);
 	}
 
-	return 0;
+	return NULL;
 }
 
 
