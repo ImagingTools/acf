@@ -1,5 +1,5 @@
-#ifndef iqtgui_CSplitterDelegate_included
-#define iqtgui_CSplitterDelegate_included
+#ifndef iqtgui_CStackWidgetDelegate_included
+#define iqtgui_CStackWidgetDelegate_included
 
 
 // ACF includes
@@ -13,7 +13,7 @@ namespace iqtgui
 /**
 	Implementation of the IMultiPageWidgetDelegate interface for QTabWidget.
 */
-class CSplitterDelegate: virtual public IMultiPageWidgetDelegate
+class CStackWidgetDelegate: virtual public IMultiPageWidgetDelegate
 {
 public:
 	// reimplemented (IMultiPageWidgetDelegate)
@@ -49,6 +49,6 @@ private:
 } // namespace iqtgui
 
 
-#endif // !iqtgui_CSplitterDelegate_included
+#endif // !iqtgui_CStackWidgetDelegate_included
 
 

@@ -1,6 +1,6 @@
 Advanced Component Framework ("ACF") Toolkit
 
-Copyright (C) 2007-2012 Witold Gantzke & Kirill Lepskiy
+Copyright (C) 2007-2013 Witold Gantzke & Kirill Lepskiy
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public

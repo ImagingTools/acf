@@ -6,6 +6,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QMap>
 #include <QtGui/QWidget>
+#include <QtGui/QIcon>
 
 // ACF includes
 #include <istd/TSmartPtr.h>
@@ -23,7 +24,7 @@ namespace iqtgui
 class CMultiPageWidget: public QWidget
 {
 public:
-	typedef QObject BaseClass;
+	typedef QWidget BaseClass;
 
 	enum DesignType
 	{
@@ -58,7 +59,15 @@ public:
 		DT_USER = 1024
 	};
 
-	CMultiPageWidget(int designMode = DT_SIMPLE, bool useHorizontalLayout = true);
+	/**
+		Construct the multi page widget.
+		\param designMode Specify the type of the underlying page container widget. \sa DesignType
+		\param useHorizontalLayout	If set, the container will try
+	*/
+	CMultiPageWidget(
+		int designMode = DT_SIMPLE,
+		Qt::Orientation orientation = Qt::Vertical,
+		QWidget* parentWidgetPtr = NULL);
 
 	/**
 		Add a new page to the container. If \c pageIndex is negative, the new page will be inserted after the last page.
@@ -66,7 +75,7 @@ public:
 		\return Position of the inserted page.
 	*/
 	virtual int InsertPage(
-				QWidget* widgetPtr,
+				QWidget* pageWidgetPtr,
 				const QString& pageTitle,
 				int pageIndex = -1);
 
@@ -76,24 +85,84 @@ public:
 	virtual void RemovePage(int pageIndex);
 
 	/**
-		Set the page with the given index enabled/disabled.
+		Get the number of the pages in the container.
 	*/
-	virtual void SetPageEnabled(int pageIndex, bool isEnabled = true);
+	virtual int GetPagesCount() const; 
 
 	/**
-		Set the page with the given index visible/hidden.
+		Get page's widget from the container.
 	*/
-	virtual void SetPageVisible(int pageIndex, bool isVisible = true);
+	virtual QWidget* GetPageWidgetPtr(int pageIndex) const; 
 
 	/**
-		Get number of the page in the container.
+		Get currently active page in the container.
 	*/
-	virtual int GetPagesCount() const;
+	virtual int GetCurrentPage() const;
 
 	/**
-		Get the page widget.
+		Set active page in the container.
 	*/
-	virtual QWidget* GetPageWidgetPtr(int pageIndex) const;
+	virtual bool SetCurrentPage(int pageIndex);
+
+	/**
+		Get the title of the given page.
+	*/
+	virtual QString GetPageTitle(int pageIndex) const;
+
+	/**
+		Set the page title.
+	*/
+	virtual void SetPageTitle(int pageIndex, const QString& pageTitle);
+
+	/**
+		Get the page icon.
+	*/
+	virtual QIcon GetPageIcon(int pageIndex) const;
+
+	/**
+		Set the page icon.
+	*/
+	virtual void SetPageIcon(int pageIndex, const QIcon& pageIcon);
+
+	/**
+		Get the page tool tip.
+	*/
+	virtual QString GetPageToolTip(int pageIndex) const;
+
+	/**
+		Set the page tool tip.
+	*/
+	virtual void SetPageToolTip(int pageIndex, const QString& pageToolTip);
+
+	/**
+		Get if the page enabled/disabled.
+	*/
+	virtual bool IsPageEnabled(int pageIndex) const;
+
+	/**
+		Set page enabled/disabled.
+	*/
+	virtual bool SetPageEnabled(int pageIndex, bool isPageEnabled = true);
+
+	/**
+		Get if the page visible/hidden.
+	*/
+	virtual bool IsPageVisible(int pageIndex) const;
+
+	/**
+		Set page visible/hidden.
+	*/
+	virtual bool SetPageVisible(int pageIndex, bool isPageVisible = true);
+
+	/**
+		Get the size page icon.
+	*/
+	virtual QSize GetPageIconSize() const;
+
+	/**
+		Set the size of the icon for all pages in the container.
+	*/
+	virtual bool SetPageIconSize(const QSize& pageIconSize);
 
 	/**
 		Register your own page widget delegate objects for the given UI mode.
@@ -112,13 +181,20 @@ protected:
 	*/
 	virtual QWidget* GetGuiContainerPtr() const;
 
+private:
+	typedef istd::TSmartPtr<IMultiPageWidgetDelegate> MultiPageWidgetDelegatePtr;
+
 	/**
 		Create container GUI in some parent widget.
 	*/
-	virtual bool CreateContainerGui();
+	bool CreateContainerGui();
+
+	/**
+		Get container delegate for the currently selected UI mode.
+	*/
+	MultiPageWidgetDelegatePtr GetCurrentDelegate() const;
 
 private:
-	typedef istd::TSmartPtr<IMultiPageWidgetDelegate> MultiPageWidgetDelegatePtr;
 	typedef QMap<int, MultiPageWidgetDelegatePtr> ContainerWidgetDelegateMap;
 		
 	ContainerWidgetDelegateMap m_containerWidgetDelegateMap;
@@ -130,7 +206,7 @@ private:
 
 	int m_designMode;
 
-	bool m_useHorizontalLayout;
+	Qt::Orientation m_orientation;
 
 	QSize m_pageIconSize;
 };

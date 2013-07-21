@@ -345,6 +345,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CStackWidgetDelegate.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CStatusBarWidgetComp.cpp"
 				>
 			</File>
@@ -574,6 +578,10 @@
 			</File>
 			<File
 				RelativePath="..\CSplitterDelegate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CStackWidgetDelegate.h"
 				>
 			</File>
 			<File

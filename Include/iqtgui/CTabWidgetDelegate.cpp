@@ -3,7 +3,6 @@
 
 // Qt includes
 #include <QtCore/QVariant>
-#include <QtGui/QTabWidget>
 #include <QtGui/QVBoxLayout>
 
 
@@ -13,9 +12,24 @@ namespace iqtgui
 
 // public methods
 
+CTabWidgetDelegate::CTabWidgetDelegate(QTabWidget::TabPosition tabPosition, bool useDocumentMode)
+	:m_tabPosition(tabPosition),
+	m_useDocumentMode(useDocumentMode)
+{
+}
+
+
+// reimplemented (IMultiPageWidgetDelegate)
+
 QWidget* CTabWidgetDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int /*orientation*/)
 {	
-	return new QTabWidget(parentWidgetPtr);
+	QTabWidget* tabWidgetPtr = new QTabWidget(parentWidgetPtr);
+
+	// Setup tab widget:
+	tabWidgetPtr->setTabPosition(m_tabPosition);
+	tabWidgetPtr->setDocumentMode(m_useDocumentMode);
+
+	return tabWidgetPtr;
 }
 
 
@@ -76,7 +90,7 @@ QWidget* CTabWidgetDelegate::GetPageWidgetPtr(const QWidget& containerWidget, in
 }
 
 
-int CTabWidgetDelegate::GetCurrentPage(QWidget& containerWidget) const
+int CTabWidgetDelegate::GetCurrentPage(const QWidget& containerWidget) const
 {
 	return containerWidget.property("currentIndex").toInt();
 }
@@ -88,9 +102,9 @@ bool CTabWidgetDelegate::SetCurrentPage(QWidget& containerWidget, int pageIndex)
 }
 
 
-QString CTabWidgetDelegate::GetPageTitle(QWidget& containerWidget, int pageIndex) const
+QString CTabWidgetDelegate::GetPageTitle(const QWidget& containerWidget, int pageIndex) const
 {
-	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(&containerWidget);
+	const QTabWidget* tabWidgetPtr = dynamic_cast<const QTabWidget*>(&containerWidget);
 	if (tabWidgetPtr != NULL){
 		return tabWidgetPtr->tabText(pageIndex);
 	}
@@ -108,9 +122,9 @@ void CTabWidgetDelegate::SetPageTitle(QWidget& containerWidget, int pageIndex, c
 }
 
 
-QIcon CTabWidgetDelegate::GetPageIcon(QWidget& containerWidget, int pageIndex) const
+QIcon CTabWidgetDelegate::GetPageIcon(const QWidget& containerWidget, int pageIndex) const
 {
-	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(&containerWidget);
+	const QTabWidget* tabWidgetPtr = dynamic_cast<const QTabWidget*>(&containerWidget);
 	if (tabWidgetPtr != NULL){
 		return tabWidgetPtr->tabIcon(pageIndex);
 	}
@@ -128,9 +142,9 @@ void CTabWidgetDelegate::SetPageIcon(QWidget& containerWidget, int pageIndex, co
 }
 
 
-QString CTabWidgetDelegate::GetPageToolTip(QWidget& containerWidget, int pageIndex) const
+QString CTabWidgetDelegate::GetPageToolTip(const QWidget& containerWidget, int pageIndex) const
 {
-	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(&containerWidget);
+	const QTabWidget* tabWidgetPtr = dynamic_cast<const QTabWidget*>(&containerWidget);
 	if (tabWidgetPtr != NULL){
 		return tabWidgetPtr->tabToolTip(pageIndex);
 	}
@@ -148,9 +162,9 @@ void CTabWidgetDelegate::SetPageToolTip(QWidget& containerWidget, int pageIndex,
 }
 
 
-bool CTabWidgetDelegate::IsPageEnabled(QWidget& containerWidget, int pageIndex) const
+bool CTabWidgetDelegate::IsPageEnabled(const QWidget& containerWidget, int pageIndex) const
 {
-	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(&containerWidget);
+	const QTabWidget* tabWidgetPtr = dynamic_cast<const QTabWidget*>(&containerWidget);
 	if (tabWidgetPtr != NULL){
 		return tabWidgetPtr->isTabEnabled(pageIndex);
 	}
@@ -172,7 +186,7 @@ bool CTabWidgetDelegate::SetPageEnabled(QWidget& containerWidget, int pageIndex,
 }
 
 
-bool CTabWidgetDelegate::IsPageVisible(QWidget& /*containerWidget*/, int /*pageIndex*/) const
+bool CTabWidgetDelegate::IsPageVisible(const QWidget& /*containerWidget*/, int /*pageIndex*/) const
 {
 	return true;
 }
@@ -184,7 +198,7 @@ bool CTabWidgetDelegate::SetPageVisible(QWidget& /*containerWidget*/, int /*page
 }
 
 
-QSize CTabWidgetDelegate::GetPageIconSize(QWidget& containerWidget) const
+QSize CTabWidgetDelegate::GetPageIconSize(const QWidget& containerWidget) const
 {
 	return containerWidget.property("iconSize").toSize();
 }

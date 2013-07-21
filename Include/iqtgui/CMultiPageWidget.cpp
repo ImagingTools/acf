@@ -23,10 +23,11 @@ namespace iqtgui
 
 // public methods
 
-CMultiPageWidget::CMultiPageWidget(int designMode, bool useHorizontalLayout)
-	:m_guiContainerPtr(NULL),
+CMultiPageWidget::CMultiPageWidget(int designMode, Qt::Orientation orientation, QWidget* parentWidgetPtr)
+	:BaseClass(parentWidgetPtr),
+	m_guiContainerPtr(NULL),
 	m_designMode(designMode),
-	m_useHorizontalLayout(useHorizontalLayout)
+	m_orientation(orientation)
 {
 	// Register default delegates:
 	RegisterMultiPageWidgetDelegate<iqtgui::CSimpleGuiContainerDelegate>(DT_SIMPLE);
@@ -43,152 +44,195 @@ int CMultiPageWidget::InsertPage(
 			const QString& pageTitle,
 			int pageIndex)
 {
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created, page could not be inserted.");
-
-		return -1;
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->InsertPage(*m_guiContainerPtr, pageWidgetPtr, pageTitle, pageIndex);
 	}
 
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode. The page could not be inserted");
-
-		return -1;
-	}
-
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
-
-	return delegatePtr->InsertPage(*m_guiContainerPtr, pageWidgetPtr, pageTitle, pageIndex);
+	return -1;
 }
 
 
 void CMultiPageWidget::RemovePage(int pageIndex)
 {
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created, page could not be removed.");
-
-		return;
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		delegatePtr->RemovePage(*m_guiContainerPtr, pageIndex);
 	}
-
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode. The page could not be removed");
-
-		return;
-	}
-
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
-
-	delegatePtr->RemovePage(*m_guiContainerPtr, pageIndex);
-}
-
-
-void CMultiPageWidget::SetPageEnabled(int pageIndex, bool isEnabled)
-{
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created, page could not be enabled.");
-
-		return;
-	}
-
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode. The page could not be enabled");
-
-		return;
-	}
-
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
-
-	delegatePtr->SetPageEnabled(*m_guiContainerPtr, pageIndex, isEnabled);
-}
-
-
-void CMultiPageWidget::SetPageVisible(int pageIndex, bool isVisible)
-{
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created, page could not be set visible\\hidden.");
-
-		return;
-	}
-
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode. The page could not be set visible\\hidden");
-
-		return;
-	}
-
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
-
-	delegatePtr->SetPageVisible(*m_guiContainerPtr, pageIndex, isVisible);
 }
 
 
 int CMultiPageWidget::GetPagesCount() const
 {
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created");
-
-		return 0;
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetPagesCount(*m_guiContainerPtr);
 	}
 
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode");
-
-		return 0;
-	}
-
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
-
-	return delegatePtr->GetPagesCount(*m_guiContainerPtr);
+	return 0;
 }
 
 
 QWidget* CMultiPageWidget::GetPageWidgetPtr(int pageIndex) const
 {
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created");
-
-		return NULL;
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetPageWidgetPtr(*m_guiContainerPtr, pageIndex);
 	}
 
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode");
+	return NULL;
+}
 
-		return NULL;
+
+int CMultiPageWidget::GetCurrentPage() const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetCurrentPage(*m_guiContainerPtr);
 	}
 
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
+	return -1;
+}
 
-	return delegatePtr->GetPageWidgetPtr(*m_guiContainerPtr, pageIndex);
+
+bool CMultiPageWidget::SetCurrentPage(int pageIndex)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->SetCurrentPage(*m_guiContainerPtr, pageIndex);
+	}
+
+	return false;
+}
+
+
+QString CMultiPageWidget::GetPageTitle(int pageIndex) const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetPageTitle(*m_guiContainerPtr, pageIndex);
+	}
+
+	return QString();
+}
+
+
+void CMultiPageWidget::SetPageTitle(int pageIndex, const QString& pageTitle)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		delegatePtr->SetPageTitle(*m_guiContainerPtr, pageIndex, pageTitle);
+	}
+}
+
+
+QIcon CMultiPageWidget::GetPageIcon(int pageIndex) const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetPageIcon(*m_guiContainerPtr, pageIndex);
+	}
+
+	return QIcon();
+}
+
+
+void CMultiPageWidget::SetPageIcon(int pageIndex, const QIcon& pageIcon)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		delegatePtr->SetPageIcon(*m_guiContainerPtr, pageIndex, pageIcon);
+	}
+}
+
+
+QString CMultiPageWidget::GetPageToolTip(int pageIndex) const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetPageToolTip(*m_guiContainerPtr, pageIndex);
+	}
+
+	return QString();
+}
+
+
+void CMultiPageWidget::SetPageToolTip(int pageIndex, const QString& pageToolTip)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		delegatePtr->SetPageToolTip(*m_guiContainerPtr, pageIndex, pageToolTip);
+	}
+}
+
+
+bool CMultiPageWidget::IsPageEnabled(int pageIndex) const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->IsPageEnabled(*m_guiContainerPtr, pageIndex);
+	}
+
+	return false;
+}
+
+
+bool CMultiPageWidget::SetPageEnabled(int pageIndex, bool isEnabled)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->SetPageEnabled(*m_guiContainerPtr, pageIndex, isEnabled);
+	}
+
+	return false;
+}
+
+
+bool CMultiPageWidget::IsPageVisible(int pageIndex) const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->IsPageVisible(*m_guiContainerPtr, pageIndex);
+	}
+
+	return false;
+}
+
+
+bool CMultiPageWidget::SetPageVisible(int pageIndex, bool isVisible)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->SetPageVisible(*m_guiContainerPtr, pageIndex, isVisible);
+	}
+
+	return false;
+}
+
+
+QSize CMultiPageWidget::GetPageIconSize() const
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->GetPageIconSize(*m_guiContainerPtr);
+	}
+
+	return QSize();
+}
+
+
+bool CMultiPageWidget::SetPageIconSize(const QSize& pageIconSize)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		return delegatePtr->SetPageIconSize(*m_guiContainerPtr, pageIconSize);
+	}
+
+	return false;
 }
 
 
 // protected methods
-
-int CMultiPageWidget::GetCurrentPageIndex() const
-{
-	if (m_guiContainerPtr == NULL){
-		qWarning("Container GUI was not created");
-
-		return 0;
-	}
-
-	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode");
-
-		return 0;
-	}
-
-	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
-	Q_ASSERT(delegatePtr.IsValid());
-
-	return delegatePtr->GetCurrentPage(*m_guiContainerPtr);
-}
-
 
 QWidget* CMultiPageWidget::GetGuiContainerPtr() const
 {
@@ -196,10 +240,12 @@ QWidget* CMultiPageWidget::GetGuiContainerPtr() const
 }
 
 
+// private methods
+
 bool CMultiPageWidget::CreateContainerGui()
 {
 	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
-		qWarning("No container delegate registered for the current UI mode. The container UI could not be created");
+		qWarning("No container delegate registered for the current UI mode");
 
 		return false;
 	}
@@ -216,7 +262,7 @@ bool CMultiPageWidget::CreateContainerGui()
 	layoutPtr->setMargin(0);
 	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 
-	m_guiContainerPtr = delegatePtr->CreateContainerWidget(this, m_useHorizontalLayout ? Qt::Horizontal : Qt::Vertical);
+	m_guiContainerPtr = delegatePtr->CreateContainerWidget(this, m_orientation);
 	layoutPtr->addWidget(m_guiContainerPtr);
 
 	if (!m_pageIconSize.isNull() && m_pageIconSize.isValid() && !m_pageIconSize.isEmpty()){
@@ -224,6 +270,27 @@ bool CMultiPageWidget::CreateContainerGui()
 	}
 
 	return (m_guiContainerPtr != NULL);
+}
+
+
+CMultiPageWidget::MultiPageWidgetDelegatePtr CMultiPageWidget::GetCurrentDelegate() const
+{
+	if (m_guiContainerPtr == NULL){
+		qWarning("Container GUI was not created");
+
+		return MultiPageWidgetDelegatePtr();
+	}
+
+	if (!m_containerWidgetDelegateMap.contains(m_designMode)){
+		qWarning("No container delegate registered for the current UI mode");
+
+		return MultiPageWidgetDelegatePtr();
+	}
+
+	MultiPageWidgetDelegatePtr delegatePtr = m_containerWidgetDelegateMap[m_designMode];
+	Q_ASSERT(delegatePtr.IsValid());
+
+	return delegatePtr;
 }
 
 
