@@ -15,6 +15,7 @@
 #include <iqtgui/CToolBoxDelegate.h>
 #include <iqtgui/CSplitterDelegate.h>
 #include <iqtgui/CSimpleGuiContainerDelegate.h>
+#include <iqtgui/CStackWidgetDelegate.h>
 
 
 namespace iqtgui
@@ -34,6 +35,7 @@ CMultiPageWidget::CMultiPageWidget(int designMode, Qt::Orientation orientation, 
 	RegisterMultiPageWidgetDelegate<iqtgui::CTabWidgetDelegate>(DT_TAB_WIDGET);
 	RegisterMultiPageWidgetDelegate<iqtgui::CToolBoxDelegate>(DT_TOOL_BOX);
 	RegisterMultiPageWidgetDelegate<iqtgui::CSplitterDelegate>(DT_SPLITTER);
+	RegisterMultiPageWidgetDelegate<iqtgui::CStackWidgetDelegate>(DT_STACK);
 
 	CreateContainerGui();
 }
