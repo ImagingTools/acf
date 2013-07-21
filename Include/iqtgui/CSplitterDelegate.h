@@ -11,7 +11,7 @@ namespace iqtgui
 
 
 /**
-	Implementation of the IMultiPageWidgetDelegate interface for QTabWidget.
+	Implementation of the IMultiPageWidgetDelegate interface for QSplitter.
 */
 class CSplitterDelegate: virtual public IMultiPageWidgetDelegate
 {

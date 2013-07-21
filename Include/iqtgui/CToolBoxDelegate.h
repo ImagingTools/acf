@@ -11,7 +11,7 @@ namespace iqtgui
 
 
 /**
-	Implementation of the IMultiPageWidgetDelegate interface for QTabWidget.
+	Implementation of the IMultiPageWidgetDelegate interface for QToolBox.
 */
 class CToolBoxDelegate: virtual public IMultiPageWidgetDelegate
 {
