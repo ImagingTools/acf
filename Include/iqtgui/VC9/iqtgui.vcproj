@@ -241,26 +241,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileDialogLoaderComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileListProviderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFilePersistenceGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystemExplorerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileTreeViewGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFlowLayout.cpp"
 				>
 			</File>
@@ -310,10 +290,6 @@
 			</File>
 			<File
 				RelativePath="..\CMultiPageWidget.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CObjectPreviewGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -455,26 +431,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileDialogLoaderComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileListProviderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFilePersistenceGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystemExplorerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileTreeViewGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CFlowLayout.h"
 				>
 			</File>
@@ -546,10 +502,6 @@
 			</File>
 			<File
 				RelativePath="..\CMultiPageWidget.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CObjectPreviewGuiComp.h"
 				>
 			</File>
 			<File
@@ -742,22 +694,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\moc_CFileListProviderGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CFilePersistenceGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CFileSystemExplorerGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\moc_CFileTreeViewGuiComp.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\Generated\moc_CHierarchicalCommand.cpp"
 				>
 			</File>
@@ -767,10 +703,6 @@
 			</File>
 			<File
 				RelativePath="..\generated\moc_CImagePropertyGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\moc_CObjectPreviewGuiComp.cpp"
 				>
 			</File>
 			<File
@@ -806,31 +738,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Generated\ui_CFileListProviderGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CFilePersistenceGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CFileSystemExplorerGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Generated\ui_CFileTreeViewGuiComp.h"
-				>
-			</File>
-			<File
 				RelativePath="..\Generated\ui_CImagePropertiesFrameComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\Generated\ui_CNumpadGui.h"
-				>
-			</File>
-			<File
-				RelativePath="..\generated\ui_CObjectPreviewGuiComp.h"
 				>
 			</File>
 			<File
@@ -854,31 +766,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileListProviderGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CFilePersistenceGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystemExplorerGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileTreeViewGuiComp.ui"
-				>
-			</File>
-			<File
 				RelativePath="..\CImagePropertiesFrameComp.ui"
 				>
 			</File>
 			<File
 				RelativePath="..\CImagePropertyGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CObjectPreviewGuiComp.ui"
 				>
 			</File>
 			<File
@@ -922,22 +814,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CFileListProviderGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFilePersistenceGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileSystemExplorerGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CFileTreeViewGuiComp.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CHierarchicalCommand.moc"
 				>
 			</File>
@@ -947,10 +823,6 @@
 			</File>
 			<File
 				RelativePath="..\CImagePropertyGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CObjectPreviewGuiComp.moc"
 				>
 			</File>
 			<File

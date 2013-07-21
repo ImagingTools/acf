@@ -1,7 +1,7 @@
-#include "iqtgui/CFileListProviderGuiComp.h"
+#include "ifilegui/CFileListProviderGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -30,6 +30,6 @@ void CFileListProviderGuiComp::UpdateGui(int /*updateFlags*/)
 }
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 

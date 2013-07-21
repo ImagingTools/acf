@@ -1,7 +1,7 @@
-#include "iqtgui/CFilePersistenceGuiComp.h"
+#include "ifilegui/CFilePersistenceGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -45,6 +45,6 @@ void CFilePersistenceGuiComp::OnGuiCreated()
 }
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 

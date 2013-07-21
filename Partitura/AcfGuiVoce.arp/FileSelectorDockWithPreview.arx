@@ -281,7 +281,7 @@
         QtGuiPck
       </PackageId>
       <ComponentId>
-        ObjectPreviewGui
+        FilePreviewGui
       </ComponentId>
       <Data>
         <IsEnabled>

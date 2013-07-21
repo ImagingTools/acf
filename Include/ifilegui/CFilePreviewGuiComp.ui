@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CObjectPreviewGuiComp</class>
- <widget class="QWidget" name="CObjectPreviewGuiComp">
+ <class>CFilePreviewGuiComp</class>
+ <widget class="QWidget" name="CFilePreviewGuiComp">
   <property name="geometry">
    <rect>
     <x>0</x>

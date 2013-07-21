@@ -1,4 +1,4 @@
-#include "iqtgui/CObjectPreviewGuiComp.h"
+#include "ifilegui/CFilePreviewGuiComp.h"
 
 
 // Qt includes
@@ -8,7 +8,7 @@
 #include "istd/TChangeNotifier.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -16,7 +16,7 @@ namespace iqtgui
 
 // reimplemented (imod::TGuiObserverWrap)
 
-void CObjectPreviewGuiComp::OnGuiModelAttached()
+void CFilePreviewGuiComp::OnGuiModelAttached()
 {
 	BaseClass::OnGuiModelAttached();
 
@@ -28,7 +28,7 @@ void CObjectPreviewGuiComp::OnGuiModelAttached()
 }
 
 
-void CObjectPreviewGuiComp::OnGuiModelDetached()
+void CFilePreviewGuiComp::OnGuiModelDetached()
 {
 	if (		m_objectModelCompPtr.IsValid() &&
 				m_objectObserverCompPtr.IsValid() &&
@@ -40,7 +40,7 @@ void CObjectPreviewGuiComp::OnGuiModelDetached()
 }
 
 
-void CObjectPreviewGuiComp::UpdateGui(int /*updateFlags*/)
+void CFilePreviewGuiComp::UpdateGui(int /*updateFlags*/)
 {
 	Q_ASSERT(IsGuiCreated());
 
@@ -83,7 +83,7 @@ void CObjectPreviewGuiComp::UpdateGui(int /*updateFlags*/)
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
-void CObjectPreviewGuiComp::OnGuiCreated()
+void CFilePreviewGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
@@ -95,7 +95,7 @@ void CObjectPreviewGuiComp::OnGuiCreated()
 }
 
 
-void CObjectPreviewGuiComp::OnGuiDestroyed()
+void CFilePreviewGuiComp::OnGuiDestroyed()
 {
 	if (m_objectGuiCompPtr.IsValid()){
 		m_objectGuiCompPtr->DestroyGui();	
@@ -107,7 +107,7 @@ void CObjectPreviewGuiComp::OnGuiDestroyed()
 
 // private slots
 
-void CObjectPreviewGuiComp::OnFileChanged(const QString&/* filePath*/)
+void CFilePreviewGuiComp::OnFileChanged(const QString&/* filePath*/)
 {
 	UpdateObjectFromFile();
 }
@@ -115,7 +115,7 @@ void CObjectPreviewGuiComp::OnFileChanged(const QString&/* filePath*/)
 
 // private methods
 
-void CObjectPreviewGuiComp::UpdateObjectFromFile()
+void CFilePreviewGuiComp::UpdateObjectFromFile()
 {
 	QFileInfo fileInfo(m_lastFilePath);
 
@@ -149,6 +149,6 @@ void CObjectPreviewGuiComp::UpdateObjectFromFile()
 }
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 

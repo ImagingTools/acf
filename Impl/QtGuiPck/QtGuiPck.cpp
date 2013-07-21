@@ -53,11 +53,6 @@ I_EXPORT_COMPONENT(
 			"Icons GUI" IM_CATEGORY(I_SERVICE));
 
 I_EXPORT_COMPONENT(
-			FileDialogLoader,
-			"File dialog loader",
-			"Serialization Serializer Dialog" IM_TAG("File Loader"));
-
-I_EXPORT_COMPONENT(
 			DockWidgetGui,
 			"Allows to use GUI object as docked views",
 			"View Dock Document" IM_TAG("Application"));
@@ -108,11 +103,6 @@ I_EXPORT_COMPONENT(
 			"Widget Observer View Model" IM_TAG("Editor Composition"));
 
 I_EXPORT_COMPONENT(
-			FilePersistenceGui,
-			"Show load and save button for specified object persistence",
-			"Widget Layout Load Save Object Loader" IM_TAG("Persistence"));
-
-I_EXPORT_COMPONENT(
 			SimpleMainGui,
 			"Simple UI for a main window based application",
 			"Simple Main" IM_TAG("Application"));
@@ -131,11 +121,6 @@ I_EXPORT_COMPONENT(
 			CommandsBinder,
 			"Component for binding of several commands provider into a single one",
 			"GUI Menu Action" IM_CATEGORY(I_SERVICE) IM_TAG("Command Composition"));
-
-I_EXPORT_COMPONENT(
-			FileSystemExplorerGui,
-			"Component for file system visualization",
-			"File Path Directory Observer" IM_CATEGORY(I_GUI));
 
 I_EXPORT_COMPONENT(
 			FileNameParamGui,
@@ -208,11 +193,6 @@ I_EXPORT_COMPONENT(
 			"Observer Display GUI Image Bitmap Property");
 
 I_EXPORT_COMPONENT(
-			ObjectPreviewGui,
-			"Object preview GUI",
-			"Observer Display GUI Preview");
-
-I_EXPORT_COMPONENT(
 			ImagePropertiesFrame,
 			"Frame with image properties",
 			"Image Properties");
@@ -268,11 +248,6 @@ I_EXPORT_COMPONENT(
 			"Enableable Parameter");
 
 I_EXPORT_COMPONENT(
-			FileListProviderGui,
-			"UI for showing a list of files",
-			"File List");
-
-I_EXPORT_COMPONENT(
 			ButtonBasedSelectionEditor,
 			"Selection parameter editor over list of buttons",
 			"Selection List Options Parameter");
@@ -282,10 +257,37 @@ I_EXPORT_COMPONENT(
 			"Allows to manage different types of parameter sets",
 			"Model Observer Parameters Set Manager");
 
+// FileGuiPck
+
 I_EXPORT_COMPONENT(
 			FileTreeViewGui,
 			"UI for showing a tree of files",
 			"File Tree View");
+
+I_EXPORT_COMPONENT(
+			FileSystemExplorerGui,
+			"Component for file system visualization",
+			"File Path Directory Observer" IM_CATEGORY(I_GUI));
+
+I_EXPORT_COMPONENT(
+			FilePersistenceGui,
+			"Show load and save button for specified object persistence",
+			"Widget Layout Load Save Object Loader" IM_TAG("Persistence"));
+
+I_EXPORT_COMPONENT(
+			FileDialogLoader,
+			"File dialog loader",
+			"Serialization Serializer Dialog" IM_TAG("File Loader"));
+
+I_EXPORT_COMPONENT(
+			FilePreviewGui,
+			"File preview",
+			"Observer Display GUI Preview");
+
+I_EXPORT_COMPONENT(
+			FileListProviderGui,
+			"UI for showing a list of files",
+			"File List");
 
 } // namespace QtGuiPck
 

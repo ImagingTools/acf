@@ -10,33 +10,35 @@
 #include "iqtgui/CSplashScreenGuiComp.h"
 #include "iqtgui/CComposedGuiComp.h"
 #include "iqtgui/CIconProviderComp.h" 
-#include "iqtgui/CFileDialogLoaderComp.h"
 #include "iqtgui/CDockWidgetGuiComp.h"
 #include "iqtgui/CToolBarWidgetGuiComp.h"
 #include "iqtgui/CFreeWidgetGuiComp.h"
 #include "iqtgui/CTabContainerGuiComp.h"
 #include "iqtgui/CAboutWidgetGuiComp.h"
 #include "iqtgui/CTabbedMultiViewGuiComp.h"
-#include "iqtgui/CFilePersistenceGuiComp.h"
 #include "iqtgui/CSimpleMainWindowGuiComp.h"
 #include "iqtgui/CDialogGuiComp.h"
 #include "iqtgui/CModelDialogGuiComp.h"
 #include "iqtgui/CStatusBarWidgetComp.h"
 #include "iqtgui/CCommandsBinderComp.h"
-#include "iqtgui/CFileSystemExplorerGuiComp.h"
 #include "iqtgui/CImagePropertyGuiComp.h"
-#include "iqtgui/CObjectPreviewGuiComp.h"
 #include "iqtgui/CModelEditorGuiComp.h"
 #include "iqtgui/CImagePropertiesFrameComp.h"
 #include "iqtgui/CCommandsToolBarGuiComp.h"
 #include "iqtgui/CSelectableCommandsProviderComp.h"
 #include "iqtgui/CVersionInfoGuiComp.h"
-#include "iqtgui/CFileListProviderGuiComp.h"
 #include "iqtgui/CProgressManagerGuiComp.h"
 #include "iqtgui/CTableBasedModelEditorComp.h"
 #include "iqtgui/CStatusGuiComp.h"
 #include "iqtgui/CSettingsContainerGuiComp.h"
-#include "iqtgui/CFileTreeViewGuiComp.h"
+
+// FileGuiPck
+#include "ifilegui/CFileTreeViewGuiComp.h"
+#include "ifilegui/CFileSystemExplorerGuiComp.h"
+#include "ifilegui/CFilePersistenceGuiComp.h"
+#include "ifilegui/CFileDialogLoaderComp.h"
+#include "ifilegui/CFilePreviewGuiComp.h"
+#include "ifilegui/CFileListProviderGuiComp.h"
 
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
@@ -76,7 +78,6 @@ typedef iqtgui::CDialogApplicationComp DialogApplication;
 typedef iqtgui::CSplashScreenGuiComp SplashScreen;
 typedef iqtgui::CComposedGuiComp ComposedGui;
 typedef iqtgui::CIconProviderComp IconProvider;
-typedef iqtgui::CFileDialogLoaderComp FileDialogLoader;
 typedef iqtgui::CDockWidgetGuiComp DockWidgetGui;
 typedef iqtgui::CToolBarWidgetGuiComp ToolBarWidgetGui;
 typedef iqtgui::CStatusBarWidgetComp StatusBarWidget;
@@ -84,25 +85,27 @@ typedef iqtgui::CFreeWidgetGuiComp FreeWidgetGui;
 typedef iqtgui::CTabContainerGuiComp TabContainer;
 typedef iqtgui::CAboutWidgetGuiComp AboutGui;
 typedef iqtgui::CTabbedMultiViewGuiComp TabbedMultiViewGui;
-typedef iqtgui::CFilePersistenceGuiComp FilePersistenceGui;
 typedef iqtgui::CSimpleMainWindowGuiComp SimpleMainGui;
 typedef iqtgui::CDialogGuiComp DialogGui;
 typedef iqtgui::CModelDialogGuiComp ModelDialogGui;
 typedef icomp::TModelCompWrap<iqtgui::CCommandsBinderComp> CommandsBinder;
-typedef iqtgui::CFileSystemExplorerGuiComp FileSystemExplorerGui;
 typedef iqtgui::CImagePropertyGuiComp ImagePropertyGui;
-typedef iqtgui::CObjectPreviewGuiComp ObjectPreviewGui;
 typedef iqtgui::CModelEditorGuiComp ModelEditorGui;
 typedef iqtgui::CImagePropertiesFrameComp ImagePropertiesFrame;
 typedef iqtgui::CCommandsToolBarGuiComp CommandsToolBar;
 typedef icomp::TModelCompWrap<iqtgui::CSelectableCommandsProviderComp> SelectableCommandsProvider;
 typedef iqtgui::CVersionInfoGuiComp VersionInfoGui;
-typedef iqtgui::CFileListProviderGuiComp FileListProviderGui;
 typedef iqtgui::CProgressManagerGuiComp ProgressManagerGui;
 typedef iqtgui::CTableBasedModelEditorComp TableBasedModelEditor;
 typedef iqtgui::CStatusGuiComp StatusGui;
 typedef iqtgui::CSettingsContainerGuiComp SettingsContainerGui;
-typedef iqtgui::CFileTreeViewGuiComp FileTreeViewGui;
+
+typedef ifilegui::CFileTreeViewGuiComp FileTreeViewGui;
+typedef ifilegui::CFileSystemExplorerGuiComp FileSystemExplorerGui;
+typedef ifilegui::CFilePersistenceGuiComp FilePersistenceGui;
+typedef ifilegui::CFileDialogLoaderComp FileDialogLoader;
+typedef ifilegui::CFilePreviewGuiComp FilePreviewGui;
+typedef ifilegui::CFileListProviderGuiComp FileListProviderGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CVariableParamGuiComp VariableParamGui;

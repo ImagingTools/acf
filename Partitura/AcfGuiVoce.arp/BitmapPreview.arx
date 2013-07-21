@@ -282,13 +282,13 @@
     </Element>
     <Element>
       <Id>
-        ObjectPreviewGui
+        FilePreviewGui
       </Id>
       <PackageId>
         QtGuiPck
       </PackageId>
       <ComponentId>
-        ObjectPreviewGui
+        FilePreviewGui
       </ComponentId>
       <Data>
         <IsEnabled>
@@ -471,7 +471,7 @@
         imod::IModelEditor
       </InterfaceId>
       <ComponentId>
-        ObjectPreviewGui
+        FilePreviewGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -479,7 +479,7 @@
         imod::IObserver
       </InterfaceId>
       <ComponentId>
-        ObjectPreviewGui
+        FilePreviewGui
       </ComponentId>
     </Interface>
     <Interface>
@@ -495,7 +495,7 @@
         iqtgui::IGuiObject
       </InterfaceId>
       <ComponentId>
-        ObjectPreviewGui
+        FilePreviewGui
       </ComponentId>
     </Interface>
     <Interface>

@@ -1,5 +1,5 @@
-#ifndef iqtgui_CFileSystemExplorerGuiComp_included
-#define iqtgui_CFileSystemExplorerGuiComp_included
+#ifndef ifilegui_CFileSystemExplorerGuiComp_included
+#define ifilegui_CFileSystemExplorerGuiComp_included
 
 
 // Qt includes
@@ -23,10 +23,10 @@
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iqtgui/CExtLineEdit.h"
 
-#include "iqtgui/Generated/ui_CFileSystemExplorerGuiComp.h"
+#include "ifilegui/Generated/ui_CFileSystemExplorerGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -103,9 +103,9 @@ private:
 };
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 
-#endif // !iqtgui_CFileSystemExplorerGuiComp_included
+#endif // !ifilegui_CFileSystemExplorerGuiComp_included
 
 

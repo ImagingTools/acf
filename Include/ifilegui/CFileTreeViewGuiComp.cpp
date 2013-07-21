@@ -1,10 +1,10 @@
-#include "iqtgui/CFileTreeViewGuiComp.h"
+#include "ifilegui/CFileTreeViewGuiComp.h"
 
 
 #define PERFORMANCE_TEST
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -377,6 +377,6 @@ void CFileTreeViewGuiComp::EnumerateDirectory(
 }
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 

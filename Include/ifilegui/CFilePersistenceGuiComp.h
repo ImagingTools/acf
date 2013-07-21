@@ -1,5 +1,5 @@
-#ifndef iqtgui_CFilePersistenceGuiComp_included
-#define iqtgui_CFilePersistenceGuiComp_included
+#ifndef ifilegui_CFilePersistenceGuiComp_included
+#define ifilegui_CFilePersistenceGuiComp_included
 
 
 // ACF includes
@@ -7,10 +7,10 @@
 
 #include "iqtgui/TDesignerGuiCompBase.h"
 
-#include "iqtgui/Generated/ui_CFilePersistenceGuiComp.h"
+#include "ifilegui/Generated/ui_CFilePersistenceGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -43,9 +43,9 @@ private:
 	I_ATTR(bool, m_showSaveAttrPtr);
 };
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 
-#endif // !iqtgui_CFilePersistenceGuiComp_included
+#endif // !ifilegui_CFilePersistenceGuiComp_included
 
 

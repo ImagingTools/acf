@@ -1,5 +1,5 @@
-#ifndef iqtgui_CFileTreeViewGuiComp_included
-#define iqtgui_CFileTreeViewGuiComp_included
+#ifndef ifilegui_CFileTreeViewGuiComp_included
+#define ifilegui_CFileTreeViewGuiComp_included
 
 
 // Qt includes
@@ -26,10 +26,10 @@
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
-#include "iqtgui/Generated/ui_CFileTreeViewGuiComp.h"
+#include "ifilegui/Generated/ui_CFileTreeViewGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -179,9 +179,9 @@ private:
 };
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 
-#endif // !iqtgui_CFileTreeProviderGuiComp_included
+#endif // !ifilegui_CFileTreeProviderGuiComp_included
 
 

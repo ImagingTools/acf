@@ -1,5 +1,5 @@
-#ifndef iqtgui_CObjectPreviewGuiComp_included
-#define iqtgui_CObjectPreviewGuiComp_included
+#ifndef ifilegui_CFilePreviewGuiComp_included
+#define ifilegui_CFilePreviewGuiComp_included
 
 
 // Qt includes
@@ -10,10 +10,10 @@
 #include "ifile/IFilePersistence.h"
 #include "ifile/IFileNameParam.h"
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/Generated/ui_CObjectPreviewGuiComp.h"
+#include "ifilegui/Generated/ui_CFilePreviewGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -21,20 +21,18 @@ namespace iqtgui
 	Component for the preview of the file contents.
 
 	The component also observers the file system changes and updates the file preview automatically, if the file was changed.
-
-	//TODO: Must be renamed into CFilePreviewGuiComp and probably moved to ifilegui library.
 */
-class CObjectPreviewGuiComp:
+class CFilePreviewGuiComp:
 			public iqtgui::TDesignerGuiObserverCompBase<
-						Ui::CObjectPreviewGuiComp, ifile::IFileNameParam>
+						Ui::CFilePreviewGuiComp, ifile::IFileNameParam>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
-				Ui::CObjectPreviewGuiComp, ifile::IFileNameParam> BaseClass;
+				Ui::CFilePreviewGuiComp, ifile::IFileNameParam> BaseClass;
 
-	I_BEGIN_COMPONENT(CObjectPreviewGuiComp);
+	I_BEGIN_COMPONENT(CFilePreviewGuiComp);
 		I_ASSIGN(m_fileLoaderCompPtr, "FileLoader", "Object loader", true, "FileLoader");
 		I_ASSIGN(m_objectCompPtr, "Object", "Object", true, "Object");
 		I_ASSIGN_TO(m_objectModelCompPtr, m_objectCompPtr, true);
@@ -72,9 +70,9 @@ private:
 };
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 
-#endif // !iqtgui_CObjectPreviewGuiComp_included
+#endif // !ifilegui_CFilePreviewGuiComp_included
 
 

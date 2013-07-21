@@ -1,3 +1,6 @@
+#include "ifilegui/CFileSystemExplorerGuiComp.h"
+
+
 // Qt includes
 #include <QtCore/QUrl>
 #include <QtGui/QDesktopServices>
@@ -12,10 +15,9 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/CSystem.h"
-#include "iqtgui/CFileSystemExplorerGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -245,6 +247,6 @@ QIcon CFileSystemExplorerGuiComp::FileIconProvider::icon(const QFileInfo& fileIn
 }
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 

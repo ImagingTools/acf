@@ -1,4 +1,4 @@
-#include "iqtgui/CFileDialogLoaderComp.h"
+#include "ifilegui/CFileDialogLoaderComp.h"
 
 
 // Qt includes
@@ -12,7 +12,7 @@
 #endif
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -199,7 +199,7 @@ QString CFileDialogLoaderComp::GetFileName(const QString& filePath, bool isSavin
 		for (int i = 0; i < loadersCount; ++i){
 			ifile::IFilePersistence* loaderPtr = m_loadersCompPtr[i];
 			if (loaderPtr != NULL){
-				iqtgui::CFileDialogLoaderComp::AppendLoaderFilterList(*loaderPtr, isSaving? QF_SAVE: QF_LOAD, allExt, filterList);
+				ifilegui::CFileDialogLoaderComp::AppendLoaderFilterList(*loaderPtr, isSaving? QF_SAVE: QF_LOAD, allExt, filterList);
 			}
 		}
 
@@ -341,6 +341,6 @@ void CFileDialogLoaderComp::OnComponentCreated()
 }
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 

@@ -62,6 +62,9 @@ iqtdoc.file = ../../Include/iqtdoc/QMake/iqtdoc.pro
 SUBDIRS += iqtgui
 iqtgui.file = ../../Include/iqtgui/QMake/iqtgui.pro
 
+SUBDIRS += ifilegui
+ifilegui.file = ../../Include/ifilegui/QMake/ifilegui.pro
+
 SUBDIRS += iloggui
 iloggui.file = ../../Include/iloggui/QMake/iloggui.pro
 

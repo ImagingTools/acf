@@ -1,5 +1,5 @@
-#ifndef iqtgui_CFileDialogSerializerComp_included
-#define iqtgui_CFileDialogSerializerComp_included
+#ifndef ifilegui_CFileDialogSerializerComp_included
+#define ifilegui_CFileDialogSerializerComp_included
 
 
 // Qt includes
@@ -13,10 +13,10 @@
 #include "ifile/IFilePersistence.h"
 #include "ifile/IFilePersistenceInfo.h"
 #include "ifile/IFileNameParam.h"
-#include "iqtgui/iqtgui.h"
+#include "ifilegui/ifilegui.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 /**
@@ -92,8 +92,8 @@ private:
 };
 	  
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 
-#endif // !iqtgui_CFileDialogSerializerComp_included
+#endif // !ifilegui_CFileDialogSerializerComp_included
 

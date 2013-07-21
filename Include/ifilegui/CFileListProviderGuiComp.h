@@ -1,14 +1,14 @@
-#ifndef iqtgui_CFileListProviderGuiComp_included
-#define iqtgui_CFileListProviderGuiComp_included
+#ifndef ifilegui_CFileListProviderGuiComp_included
+#define ifilegui_CFileListProviderGuiComp_included
 
 
 #include "ifile/IFileListProvider.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/Generated/ui_CFileListProviderGuiComp.h"
+#include "ifilegui/Generated/ui_CFileListProviderGuiComp.h"
 
 
-namespace iqtgui
+namespace ifilegui
 {
 
 
@@ -31,9 +31,9 @@ protected:
 };
 
 
-} // namespace iqtgui
+} // namespace ifilegui
 
 
-#endif // !iqtgui_CFileListProviderGuiComp_included
+#endif // !ifilegui_CFileListProviderGuiComp_included
 
 
