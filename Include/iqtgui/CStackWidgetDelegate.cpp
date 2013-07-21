@@ -21,6 +21,12 @@ QWidget* CStackWidgetDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, i
 }
 
 
+bool CStackWidgetDelegate::SetPageHeaderPosition(QWidget& /*containerWidget*/, PageHeaderPosition /*pageHeaderPosition*/)
+{
+	return false;
+}
+
+
 int CStackWidgetDelegate::InsertPage(
 		QWidget& containerWidget,
 		QWidget* pageWidgetPtr,

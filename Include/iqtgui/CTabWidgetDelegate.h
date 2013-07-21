@@ -23,8 +23,12 @@ public:
 				QTabWidget::TabPosition tabPosition = QTabWidget::North,
 				bool useDocumentMode = false);
 
+	void SetTabPosition(QWidget& containerWidget, QTabWidget::TabPosition tabPosition);
+	void SetDocumentModeEnabled(QWidget& containerWidget, bool isDocumentModeEnabled = true);
+
 	// reimplemented (IMultiPageWidgetDelegate)
 	virtual QWidget* CreateContainerWidget(QWidget* parentWidgetPtr, int orientation = Qt::Horizontal);
+	virtual bool SetPageHeaderPosition(QWidget& containerWidget, PageHeaderPosition pageHeaderPosition);
 	virtual int InsertPage(
 		QWidget& containerWidget,
 		QWidget* pageWidgetPtr,

@@ -23,9 +23,45 @@ class IMultiPageWidgetDelegate: virtual public istd::IPolymorphic
 {
 public:
 	/**
+		Enum for describing of page header bar position on the container widget.
+	*/
+	enum PageHeaderPosition
+	{
+		/**
+			Default page header position (decided by container implementation)
+		*/
+		PHP_AUTO,
+
+		/**
+			The page header will be placed on the left side of the container if possible.
+		*/
+		PHP_LEFT,
+
+		/**
+			The page header will be placed on the top side of the container if possible.
+		*/
+		PHP_TOP,
+
+		/**
+			The page header will be placed on the right side of the container if possible.
+		*/
+		PHP_RIGHT,
+
+		/**
+			The page header will be placed on the bottom side of the container if possible.
+		*/
+		PHP_BOTTOM
+	};
+
+	/**
 		Create container for the page widgets.
 	*/
 	virtual QWidget* CreateContainerWidget(QWidget* parentWidgetPtr, int orientation = Qt::Horizontal) = 0;
+
+	/**
+		Set the position of the page header bar on the container UI.
+	*/
+	virtual bool SetPageHeaderPosition(QWidget& containerWidget, PageHeaderPosition pageHeaderPosition) = 0;
 
 	/**
 		Add a new page to the container. If \c pageIndex is negative, the new page will be inserted after the last page.

@@ -23,6 +23,12 @@ QWidget* CToolBoxDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int /
 }
 
 
+bool CToolBoxDelegate::SetPageHeaderPosition(QWidget& /*containerWidget*/, PageHeaderPosition /*pageHeaderPosition*/)
+{
+	return false;
+}
+
+
 int CToolBoxDelegate::InsertPage(
 		QWidget& containerWidget,
 		QWidget* pageWidgetPtr,

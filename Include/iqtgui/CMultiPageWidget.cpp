@@ -24,7 +24,7 @@ namespace iqtgui
 
 // public methods
 
-CMultiPageWidget::CMultiPageWidget(int designMode, Qt::Orientation orientation, QWidget* parentWidgetPtr)
+CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, Qt::Orientation orientation)
 	:BaseClass(parentWidgetPtr),
 	m_guiContainerPtr(NULL),
 	m_designMode(designMode),
@@ -38,6 +38,23 @@ CMultiPageWidget::CMultiPageWidget(int designMode, Qt::Orientation orientation, 
 	RegisterMultiPageWidgetDelegate<iqtgui::CStackWidgetDelegate>(DT_STACK);
 
 	CreateContainerGui();
+}
+
+
+void CMultiPageWidget::ResetPages()
+{
+	while (GetPagesCount() > 0){
+		RemovePage(0);
+	}
+}
+
+
+void CMultiPageWidget::SetPageHeaderPosition(PageHeaderPosition pageHeaderPosition)
+{
+	MultiPageWidgetDelegatePtr delegatePtr = GetCurrentDelegate();
+	if (delegatePtr.IsValid()){
+		delegatePtr->SetPageHeaderPosition(*m_guiContainerPtr, pageHeaderPosition);
+	}
 }
 
 

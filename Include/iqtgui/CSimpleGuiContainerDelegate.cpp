@@ -32,6 +32,12 @@ QWidget* CSimpleGuiContainerDelegate::CreateContainerWidget(QWidget* parentWidge
 }
 
 
+bool CSimpleGuiContainerDelegate::SetPageHeaderPosition(QWidget& /*containerWidget*/, PageHeaderPosition /*pageHeaderPosition*/)
+{
+	return false;
+}
+
+
 int CSimpleGuiContainerDelegate::InsertPage(
 		QWidget& containerWidget,
 		QWidget* pageWidgetPtr,

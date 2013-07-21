@@ -25,6 +25,7 @@ class CMultiPageWidget: public QWidget
 {
 public:
 	typedef QWidget BaseClass;
+	typedef IMultiPageWidgetDelegate::PageHeaderPosition PageHeaderPosition; 
 
 	enum DesignType
 	{
@@ -65,9 +66,19 @@ public:
 		\param useHorizontalLayout	If set, the container will try
 	*/
 	CMultiPageWidget(
+		QWidget* parentWidgetPtr = NULL,
 		int designMode = DT_SIMPLE,
-		Qt::Orientation orientation = Qt::Vertical,
-		QWidget* parentWidgetPtr = NULL);
+		Qt::Orientation orientation = Qt::Vertical);
+
+	/**
+		Remove all pages from the container widget.
+	*/
+	virtual void ResetPages();
+
+	/**
+		Set the position of the page header on the container UI.
+	*/
+	virtual void SetPageHeaderPosition(PageHeaderPosition pageHeaderPosition);
 
 	/**
 		Add a new page to the container. If \c pageIndex is negative, the new page will be inserted after the last page.

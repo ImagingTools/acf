@@ -289,6 +289,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiPageGuiCompBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CMultiPageWidget.cpp"
 				>
 			</File>
@@ -498,6 +502,10 @@
 			</File>
 			<File
 				RelativePath="..\CModelEditorGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiPageGuiCompBase.h"
 				>
 			</File>
 			<File
