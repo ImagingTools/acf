@@ -26,7 +26,6 @@ namespace iqtgui
 
 CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, Qt::Orientation orientation)
 	:BaseClass(parentWidgetPtr),
-	m_guiContainerPtr(NULL),
 	m_designMode(designMode),
 	m_orientation(orientation)
 {
@@ -38,6 +37,26 @@ CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, Qt:
 	RegisterMultiPageWidgetDelegate<iqtgui::CStackWidgetDelegate>(DT_STACK);
 
 	CreateContainerGui();
+}
+
+
+QWidget* CMultiPageWidget::GetContainerWidgetPtr() const
+{
+	return m_guiContainerPtr.GetPtr();
+}
+
+
+void CMultiPageWidget::SetDesignMode(int designMode)
+{
+	if (GetPagesCount() > 0){
+		// TODO: reparent all pages and add to the new container.
+	}
+	else{
+		m_guiContainerPtr.Reset();
+		m_designMode = designMode;
+
+		CreateContainerGui();
+	}
 }
 
 
@@ -251,14 +270,6 @@ bool CMultiPageWidget::SetPageIconSize(const QSize& pageIconSize)
 }
 
 
-// protected methods
-
-QWidget* CMultiPageWidget::GetGuiContainerPtr() const
-{
-	return m_guiContainerPtr;
-}
-
-
 // private methods
 
 bool CMultiPageWidget::CreateContainerGui()
@@ -281,11 +292,11 @@ bool CMultiPageWidget::CreateContainerGui()
 	layoutPtr->setMargin(0);
 	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 
-	m_guiContainerPtr = delegatePtr->CreateContainerWidget(this, m_orientation);
-	layoutPtr->addWidget(m_guiContainerPtr);
+	m_guiContainerPtr.SetPtr(delegatePtr->CreateContainerWidget(this, m_orientation));
+	layoutPtr->addWidget(m_guiContainerPtr.GetPtr());
 
 	if (!m_pageIconSize.isNull() && m_pageIconSize.isValid() && !m_pageIconSize.isEmpty()){
-		delegatePtr->SetPageIconSize(*m_guiContainerPtr, m_pageIconSize);
+		delegatePtr->SetPageIconSize(*m_guiContainerPtr.GetPtr(), m_pageIconSize);
 	}
 
 	return (m_guiContainerPtr != NULL);
@@ -294,7 +305,7 @@ bool CMultiPageWidget::CreateContainerGui()
 
 CMultiPageWidget::MultiPageWidgetDelegatePtr CMultiPageWidget::GetCurrentDelegate() const
 {
-	if (m_guiContainerPtr == NULL){
+	if (!m_guiContainerPtr.IsValid()){
 		qWarning("Container GUI was not created");
 
 		return MultiPageWidgetDelegatePtr();

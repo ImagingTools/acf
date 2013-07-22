@@ -10,6 +10,7 @@
 
 // ACF includes
 #include <istd/TSmartPtr.h>
+#include <istd/TDelPtr.h>
 #include <iqtgui/IMultiPageWidgetDelegate.h>
 
 
@@ -69,6 +70,16 @@ public:
 		QWidget* parentWidgetPtr = NULL,
 		int designMode = DT_SIMPLE,
 		Qt::Orientation orientation = Qt::Vertical);
+
+	/**
+		Get page container widget.
+	*/
+	virtual QWidget* GetContainerWidgetPtr() const;
+
+	/**
+		Set design mode. Existing pages will be re-integrated into the new container widget.
+	*/
+	void SetDesignMode(int designMode);
 
 	/**
 		Remove all pages from the container widget.
@@ -187,11 +198,6 @@ protected:
 	*/
 	int GetCurrentPageIndex() const;
 
-	/**
-		Get page container widget.
-	*/
-	virtual QWidget* GetGuiContainerPtr() const;
-
 private:
 	typedef istd::TSmartPtr<IMultiPageWidgetDelegate> MultiPageWidgetDelegatePtr;
 
@@ -213,7 +219,7 @@ private:
 	/**
 		A container that depends on \c DesignType, i.e. QWidget, QToolBox or QTabWidget
 	*/
-	QWidget* m_guiContainerPtr;
+	istd::TDelPtr<QWidget> m_guiContainerPtr;
 
 	int m_designMode;
 

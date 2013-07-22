@@ -41,7 +41,7 @@ public:
 		I_ASSIGN_MULTI_0(m_pageNamesAttrPtr, "Names", "List of the page titles", true);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size for page icons", false, 16);
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout", true, false);
-		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - simple\n* 1 - tool box\n* 2 - tab\n* 3 - widget stack\n* 4 - splitter", true, CMultiPageWidget::DT_SIMPLE);
+//		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - simple\n* 1 - tool box\n* 2 - tab\n* 3 - widget stack\n* 4 - splitter", true, CMultiPageWidget::DT_SIMPLE);
 		I_ASSIGN(m_useSameStretchingFactorAttrPtr, "UseSameStretchingFactor", "Set the same stretching factor for all widgets. Only for group box mode", false, false);
 		I_ASSIGN(m_insertSpacerAttrPtr, "InsertSpacer", "If enabled, spacer will be added to fill whole available area", true, false);
 	I_END_COMPONENT;
@@ -56,6 +56,12 @@ protected:
 		Get the UI component for a given page.
 	*/
 	virtual iqtgui::IGuiObject* GetPageGuiComponent(int pageIndex) const = 0;
+
+	/**
+		Get the container UI mode.
+		\sa iqtgui::CMultiPageWidget::DesignType
+	*/
+	virtual int GetDesignType() const = 0;
 
 protected:
 	/**
@@ -139,7 +145,7 @@ protected:
 	I_MULTIATTR(QString, m_pageNamesAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
-	I_ATTR(int, m_designTypeAttrPtr);
+//	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(bool, m_useSameStretchingFactorAttrPtr);
 	I_ATTR(bool, m_insertSpacerAttrPtr);
 
