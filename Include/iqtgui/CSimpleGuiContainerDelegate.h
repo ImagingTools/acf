@@ -16,6 +16,8 @@ namespace iqtgui
 class CSimpleGuiContainerDelegate: virtual public IMultiPageWidgetDelegate
 {
 public:
+	CSimpleGuiContainerDelegate(bool useUniformSizes = false, bool isCompactModeEnabled = false);
+
 	// reimplemented (IMultiPageWidgetDelegate)
 	virtual QWidget* CreateContainerWidget(QWidget* parentWidgetPtr, int orientation = Qt::Horizontal);
 	virtual bool SetPageHeaderPosition(QWidget& containerWidget, PageHeaderPosition pageHeaderPosition);
@@ -44,6 +46,8 @@ public:
 
 private:
 	QSize m_iconSize;
+	bool m_useUniformSizes;
+	bool m_isCompactModeEnabled;
 };
 
 

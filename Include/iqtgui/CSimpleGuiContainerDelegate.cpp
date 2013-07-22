@@ -13,19 +13,36 @@ namespace iqtgui
 {
 
 
+CSimpleGuiContainerDelegate::CSimpleGuiContainerDelegate(bool useUniformSizes, bool isCompactModeEnabled)
+	:m_useUniformSizes(useUniformSizes),
+	m_isCompactModeEnabled(isCompactModeEnabled)
+{
+}
+
+
 // public methods
+
+// reimplemented (IMultiPageWidgetDelegate)
 
 QWidget* CSimpleGuiContainerDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int orientation)
 {	
 	QWidget* containerPtr = new QWidget(parentWidgetPtr);
 
+	QBoxLayout* boxLayoutPtr = NULL;
+
 	switch (orientation){
 		case Qt::Vertical:
-			new QVBoxLayout(containerPtr);
+			boxLayoutPtr = new QVBoxLayout(containerPtr);
 			break;
 		case Qt::Horizontal:
-			new QHBoxLayout(containerPtr);
+			boxLayoutPtr = new QHBoxLayout(containerPtr);
 			break;
+	}
+
+	Q_ASSERT(boxLayoutPtr != NULL);
+
+	if (m_isCompactModeEnabled){
+		boxLayoutPtr->insertStretch(-1);
 	}
 
 	return containerPtr;
@@ -54,6 +71,21 @@ int CSimpleGuiContainerDelegate::InsertPage(
 	panelLayoutPtr->addWidget(pageWidgetPtr);
 
 	containerLayoutPtr->addWidget(panelPtr);
+
+	QBoxLayout* boxLayoutPtr = dynamic_cast<QBoxLayout*>(containerLayoutPtr);
+	Q_ASSERT(boxLayoutPtr != NULL);
+
+	int elementsCount = containerLayoutPtr->count();
+	for (int i = 0; i < elementsCount; ++i){
+		QLayoutItem* layoutItemPtr = boxLayoutPtr->itemAt(i);
+
+		if ((layoutItemPtr != NULL) && m_useUniformSizes){
+			QWidget* widgetPtr = layoutItemPtr->widget();
+			if (widgetPtr != NULL){
+				boxLayoutPtr->setStretchFactor(widgetPtr, 1);
+			}
+		}
+	}
 
 	return containerLayoutPtr->count() - 1;
 }
