@@ -173,6 +173,11 @@ I_EXPORT_COMPONENT(
 			"Viewer Window Dialog Document Html Description" IM_TAG("Help"));
 
 I_EXPORT_COMPONENT(
+			DocumentMetaInfoEditor,
+			"Document's meta information editor",
+			"Document Meta Information Editor" IM_TAG("Document"));
+
+I_EXPORT_COMPONENT(
 			ProgressManagerGui,
 			"Progress manager GUI using progress bar widget to visualize progress",
 			"Progress Manager" IM_TAG("Processing"));

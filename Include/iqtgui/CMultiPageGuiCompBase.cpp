@@ -116,7 +116,6 @@ QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
 				GetDesignType(),
 				*m_useHorizontalLayoutAttrPtr ? Qt::Horizontal : Qt::Vertical);
 
-
 	if (m_iconSizeAttrPtr.IsValid()){
 		widgetPtr->SetPageIconSize(QSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr));
 	}

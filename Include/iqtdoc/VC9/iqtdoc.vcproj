@@ -168,6 +168,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\CDocumentMetaInfoEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CDoxygenHelpFileProviderComp.cpp"
 				>
 			</File>
@@ -205,6 +209,10 @@
 			Filter="h"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\CDocumentMetaInfoEditorComp.h"
+				>
+			</File>
 			<File
 				RelativePath="..\CDoxygenHelpFileProviderComp.h"
 				>
@@ -252,6 +260,10 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
+				RelativePath="..\Generated\moc_CDocumentMetaInfoEditorComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CMainWindowGuiComp.cpp"
 				>
 			</File>
@@ -263,6 +275,10 @@
 		<Filter
 			Name="Moc Files"
 			>
+			<File
+				RelativePath="..\CDocumentMetaInfoEditorComp.moc"
+				>
+			</File>
 			<File
 				RelativePath="..\CMainWindowGuiComp.moc"
 				>

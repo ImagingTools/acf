@@ -52,7 +52,7 @@ bool CStandardDocumentMetaInfo::SetDocumentMetaInfo(int metaInfoType, const QVar
 	if (registeredTypes.contains(metaInfoType)){
 
 		if (m_infosMap[metaInfoType] != metaInfo){
-			istd::CChangeNotifier changePtr(this);
+			istd::CChangeNotifier changePtr(this, CF_METAINFO | CF_MODEL);
 
 			m_infosMap[metaInfoType] = metaInfo;
 		}
@@ -149,6 +149,8 @@ bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 		}
 	}
 	else{
+		istd::CChangeNotifier changePtr(this, CF_METAINFO | CF_MODEL);
+
 		m_infosMap.clear();
 
 		for (int itemIndex = 0; itemIndex < metaInfosCount; ++itemIndex){
