@@ -24,7 +24,7 @@ class TMultiDocumentWrap:
 public:
 	typedef Base BaseClass;
 	typedef CStandardDocumentMetaInfo BaseClass2;
-	typedef typename PageInterface PageInterfaceType;
+	typedef PageInterface PageInterfaceType;
 
 	const PageInterfaceType* GetPageObject(int pageIndex) const;
 
