@@ -3,8 +3,14 @@
 
 
 // Qt includes
+#include <QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#else
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
+#endif
 
 // ACF includes
 #include "idoc/IDocumentMetaInfo.h"

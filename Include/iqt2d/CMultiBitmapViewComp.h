@@ -3,9 +3,16 @@
 
 
 // Qt includes
+#include <QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QBoxLayout>
+#include <QtWidgets/QLabel>
+#else
 #include <QtGui/QGroupBox>
 #include <QtGui/QBoxLayout>
 #include <QtGui/QLabel>
+#endif
 
 // ACF includes
 #include <istd/TPointerVector.h>

@@ -3,7 +3,12 @@
 
 
 // Qt includes
+#include <QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QTabWidget>
+#else
 #include <QtGui/QTabWidget>
+#endif
 
 // ACF includes
 #include <iqtgui/IMultiPageWidgetDelegate.h>

@@ -5,8 +5,14 @@
 // Qt includes
 #include <QtCore/QSize>
 #include <QtCore/QMap>
-#include <QtGui/QWidget>
+#include <QtGlobal>
 #include <QtGui/QIcon>
+
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#else
+#include <QtGui/QWidget>
+#endif
 
 // ACF includes
 #include <istd/TSmartPtr.h>

@@ -3,8 +3,13 @@
 
 
 // Qt includes
+#include <QtGlobal>
 #include <QtCore/QSize>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QWidget>
+#else
 #include <QtGui/QWidget>
+#endif
 
 // ACF includes
 #include <istd/IPolymorphic.h>

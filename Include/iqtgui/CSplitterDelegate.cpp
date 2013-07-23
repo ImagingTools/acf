@@ -2,12 +2,18 @@
 
 
 // Qt includes
+#include <QtGLobal>
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QGroupBox>
+#else
 #include <QtGui/QSplitter>
 #include <QtGui/QVBoxLayout>
-#include <QtGui/QIcon>
 #include <QtGui/QGroupBox>
-
+#endif
 
 namespace iqtgui
 {

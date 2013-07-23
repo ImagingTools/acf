@@ -5,6 +5,22 @@
 #include "iser/CArchiveTag.h"
 
 
+
+inline int qHash(const icmm::CFastColor& color)
+{
+	int elementsCount = color.GetElementsCount();
+
+	int hashValue = 0;
+
+	for (int colorIndex = 0; colorIndex < elementsCount; ++colorIndex)
+	{
+		hashValue = qHash(hashValue + qHash(qint64(color[colorIndex] * 10000000)));
+	}
+
+	return hashValue;
+}
+
+
 namespace icmm
 {
 

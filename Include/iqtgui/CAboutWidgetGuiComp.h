@@ -4,9 +4,7 @@
 
 // ACF includes
 #include "ibase/IApplicationInfo.h"
-
 #include "iqtgui/TDesignerGuiCompBase.h"
-
 #include "Generated/ui_CAboutWidgetGuiComp.h"
 
 

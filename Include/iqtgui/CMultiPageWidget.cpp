@@ -2,13 +2,23 @@
 
 
 // Qt includes
+#include <QtGlobal>
 #include <QtCore/QVariant>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QToolBox>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QSplitter>
+#else
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QToolBox>
 #include <QtGui/QTabWidget>
 #include <QtGui/QGroupBox>
 #include <QtGui/QSplitter>
+#endif
 
 // ACF includes
 #include <iqtgui/CTabWidgetDelegate.h>

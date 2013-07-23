@@ -498,6 +498,9 @@ inline const CFastColor& CFastColor::operator/=(double value)
 } // namespace icmm
 
 
+int qHash(const icmm::CFastColor& color);
+
+
 #endif // !icmm_CFastColor_included
 
 
