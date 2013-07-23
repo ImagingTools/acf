@@ -1,5 +1,5 @@
-#ifndef idoc_TMultiDocumentWrap_included
-#define idoc_TMultiDocumentWrap_included
+#ifndef idoc_TMultiPageDocumentWrap_included
+#define idoc_TMultiPageDocumentWrap_included
 
 
 // ACF includes
@@ -17,7 +17,7 @@ namespace idoc
 	Generic implementation of IMultiPageDocument interface.
 */
 template <class Base, class PageInterface>
-class TMultiDocumentWrap:
+class TMultiPageDocumentWrap:
 			virtual public Base,
 			public CStandardDocumentMetaInfo
 {
@@ -45,7 +45,7 @@ protected:
 // public methods
 
 template <class Base, class PageInterface>
-const typename TMultiDocumentWrap<Base, PageInterface>::PageInterfaceType* TMultiDocumentWrap<Base, PageInterface>::GetPageObject(int pageIndex) const
+const typename TMultiPageDocumentWrap<Base, PageInterface>::PageInterfaceType* TMultiPageDocumentWrap<Base, PageInterface>::GetPageObject(int pageIndex) const
 {
 	Q_ASSERT(pageIndex < m_documentPages.GetCount());
 	Q_ASSERT(pageIndex >= 0);
@@ -57,21 +57,21 @@ const typename TMultiDocumentWrap<Base, PageInterface>::PageInterfaceType* TMult
 // pseudo-reimplemented (IMultiPageDocument)
 
 template <class Base, class PageInterface>
-int TMultiDocumentWrap<Base, PageInterface>::GetPagesCount() const
+int TMultiPageDocumentWrap<Base, PageInterface>::GetPagesCount() const
 {
 	return m_documentPages.GetCount();
 }
 
 
 template <class Base, class PageInterface>
-const istd::IChangeable& TMultiDocumentWrap<Base, PageInterface>::GetDocumentPage(int pageIndex) const
+const istd::IChangeable& TMultiPageDocumentWrap<Base, PageInterface>::GetDocumentPage(int pageIndex) const
 {
 	return *GetPageObject(pageIndex);
 }
 
 
 template <class Base, class PageInterface>
-void TMultiDocumentWrap<Base, PageInterface>::ResetPages()
+void TMultiPageDocumentWrap<Base, PageInterface>::ResetPages()
 {
 	istd::CChangeNotifier changePtr(this);
 
@@ -80,7 +80,7 @@ void TMultiDocumentWrap<Base, PageInterface>::ResetPages()
 
 
 template <class Base, class PageInterface>
-bool TMultiDocumentWrap<Base, PageInterface>::RemovePage(int pageIndex)
+bool TMultiPageDocumentWrap<Base, PageInterface>::RemovePage(int pageIndex)
 {
 	Q_ASSERT(pageIndex < m_documentPages.GetCount());
 	Q_ASSERT(pageIndex >= 0);
@@ -94,7 +94,7 @@ bool TMultiDocumentWrap<Base, PageInterface>::RemovePage(int pageIndex)
 
 
 template <class Base, class PageInterface>
-const IDocumentMetaInfo& TMultiDocumentWrap<Base, PageInterface>::GetDocumentMetaInfo() const
+const IDocumentMetaInfo& TMultiPageDocumentWrap<Base, PageInterface>::GetDocumentMetaInfo() const
 {
 	return *this;
 }
@@ -103,6 +103,6 @@ const IDocumentMetaInfo& TMultiDocumentWrap<Base, PageInterface>::GetDocumentMet
 } // namespace idoc
 
 
-#endif // !idoc_TMultiDocumentWrap_included
+#endif // !idoc_TMultiPageDocumentWrap_included
 
 
