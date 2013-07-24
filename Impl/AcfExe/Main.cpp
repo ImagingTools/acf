@@ -1,16 +1,18 @@
 // STL includes
 #include <iostream>
 
-
 // Qt includes
 #include <QtCore/QString>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QApplication>
+#else
 #include <QtGui/QMessageBox>
 #include <QtGui/QApplication>
-
+#endif
 
 // ACF includes
 #include "ipackage/CComponentAccessor.h"
-
 #include "ibase/IApplication.h"
 
 

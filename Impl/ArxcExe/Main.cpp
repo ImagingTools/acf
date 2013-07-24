@@ -1,11 +1,15 @@
 // STL includes
 #include <iostream>
 
-
 // Qt includes
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
+
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QApplication>
+#else
 #include <QtGui/QApplication>
+#endif
 
 // ACF includes
 #include "istd/CSystem.h"

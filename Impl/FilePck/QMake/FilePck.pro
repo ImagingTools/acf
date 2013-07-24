@@ -1,6 +1,7 @@
 include(../../../Config/QMake/ComponentConfig.pri)
-include(../../../Config/QMake/QtBaseConfig.pri)
 
 TARGET = FilePck
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 include(../../../Config/QMake/AcfStd.pri)

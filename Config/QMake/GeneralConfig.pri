@@ -74,4 +74,3 @@ win32-msvc*{
 }
 
 INCLUDEPATH += $$PWD/../../Include
-
