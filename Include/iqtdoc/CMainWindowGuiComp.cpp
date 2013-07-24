@@ -343,17 +343,20 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 {
 	int documentTypeIdsCount = m_recentFilesMap.size();
 
-	static iser::CArchiveTag documentTypeIdsTag("DocumentIds", "List of document ID's");
+	static iser::CArchiveTag documentGroupsTag("DocumentGroups", "List of document ID's");
+	static iser::CArchiveTag groupTag("Group", "Group of documents with the same ID");
 	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID");
 	static iser::CArchiveTag fileListTag("FileList", "List of recent files");
 	static iser::CArchiveTag filePathTag("FilePath", "File path");
 
-	bool retVal = archive.BeginMultiTag(documentTypeIdsTag, documentTypeIdTag, documentTypeIdsCount);
+	bool retVal = archive.BeginMultiTag(documentGroupsTag, groupTag, documentTypeIdsCount);
 
 	if (archive.IsStoring()){
 		for (		RecentFilesMap::const_iterator index = m_recentFilesMap.begin();
 					index != m_recentFilesMap.end();
 					index++){
+			retVal = retVal && archive.BeginTag(groupTag);
+
 			QByteArray documentTypeId = index.key();
 			Q_ASSERT(!documentTypeId.isEmpty());
 
@@ -389,10 +392,14 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 			}
 
 			retVal = retVal && archive.EndTag(fileListTag);
+
+			retVal = retVal && archive.EndTag(groupTag);
 		}
 	}
 	else{
 		for (int typeIndex = 0; typeIndex < documentTypeIdsCount; typeIndex++){
+			retVal = retVal && archive.BeginTag(groupTag);
+
 			QByteArray documentTypeId;
 
 			retVal = retVal && archive.BeginTag(documentTypeIdTag);
@@ -428,12 +435,14 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 			}
 
 			retVal = retVal && archive.EndTag(fileListTag);
+
+			retVal = retVal && archive.EndTag(groupTag);
 		}
 
 		BaseClass::UpdateMenuActions();
 	}
 
-	retVal = retVal && archive.EndTag(documentTypeIdsTag);
+	retVal = retVal && archive.EndTag(documentGroupsTag);
 
 	return retVal;
 }
@@ -754,7 +763,7 @@ void CMainWindowGuiComp::OnComponentCreated()
 		QString applicationName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_APPLICATION_NAME);
 		QString companyName = m_applicationInfoCompPtr->GetApplicationAttribute(ibase::IApplicationInfo::AA_COMPANY_NAME);
 
-		iqt::CSettingsReadArchive archive(companyName, applicationName, "RecentFileList");
+		iqt::CSettingsReadArchive archive(companyName, applicationName, "RecentFileList", QSettings::UserScope);
 
 		SerializeRecentFileList(archive);
 	}

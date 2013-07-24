@@ -33,16 +33,18 @@ bool CSettingsReadArchive::BeginTag(const iser::CArchiveTag& tag)
 
 bool CSettingsReadArchive::BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& /*subTag*/, int& count)
 {
-	QString countRegistryKey = GetCurrentCountKey();
+	if (EnterTag(tag.GetId())){
+		QString countRegistryKey = GetCurrentCountKey();
 
-	bool isOk = true;
-	count = BaseClass2::value(countRegistryKey).toInt(&isOk);
+		bool isOk = true;
+		count = BaseClass2::value(countRegistryKey).toInt(&isOk);
 
-	if (!isOk){
-		return false;
+		if (isOk){
+			return true;
+		}
 	}
 
-	return EnterTag(tag.GetId());
+	return false;
 }
 
 

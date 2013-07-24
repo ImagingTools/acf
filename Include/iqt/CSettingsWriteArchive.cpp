@@ -12,7 +12,7 @@ namespace iqt
 // public methods
 
 CSettingsWriteArchive::CSettingsWriteArchive(
-			const QString& organizationName, 
+			const QString& organizationName,
 			const QString& productName,
 			const QString& rootKey,
 			QSettings::Scope settingsScope,
@@ -34,11 +34,15 @@ bool CSettingsWriteArchive::BeginTag(const iser::CArchiveTag& tag)
 
 bool CSettingsWriteArchive::BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& /*subTag*/, int& count)
 {
-	QString countRegistryKey = GetCurrentCountKey();
+	if (EnterTag(tag.GetId())){
+		QString countRegistryKey = GetCurrentCountKey();
 
-	BaseClass2::setValue(countRegistryKey, count);
+		BaseClass2::setValue(countRegistryKey, count);
 
-	return EnterTag(tag.GetId());
+		return true;
+	}
+
+	return false;
 }
 
 
