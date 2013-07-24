@@ -129,8 +129,42 @@ void CFileTreeViewGuiComp::on_Refresh_clicked()
 }
 
 
+void CFileTreeViewGuiComp::UpdateChildItems(QStandardItem* itemPtr)
+{
+	if (itemPtr->data(DR_ISDIR).toBool()){
+		itemPtr->setIcon(m_iconProvider.icon(QFileIconProvider::Folder));
+	} else {
+		QString filePath = itemPtr->data(DR_PATH).toString();
+		const QString& fileExtension = QFileInfo(filePath).suffix();
+		if (m_extToIconMap.contains(fileExtension)){
+			itemPtr->setIcon(m_extToIconMap[fileExtension]);
+		} else {
+			QIcon icon(m_iconProvider.icon(filePath));
+			m_extToIconMap[fileExtension] = icon;
+			itemPtr->setIcon(icon);
+		}
+
+	}
+
+	if (itemPtr->hasChildren()){
+		int rows = itemPtr->rowCount();
+		for (int r = 0; r < rows; r++){
+			QStandardItem* childItemPtr = itemPtr->child(r);
+			UpdateChildItems(childItemPtr);
+		}
+	}
+}
+
+
 void CFileTreeViewGuiComp::OnTreeModelUpdated()
 {
+	// update item icons etc.
+	int rows = m_itemModel.rowCount();
+	for (int r = 0; r < rows; r++){
+		QStandardItem* itemPtr = m_itemModel.item(r);
+		UpdateChildItems(itemPtr);
+	}
+
 	QString infoText = QString("Files: %1  Dirs: %2").arg(m_filesCount).arg(m_dirsCount);
 
 #ifdef PERFORMANCE_TEST
@@ -286,15 +320,6 @@ bool CFileTreeViewGuiComp::CreateFileList(
 		fileItemPtr->setData(filePath, DR_PATH);
 		fileItemPtr->setData(false, DR_ISDIR);
 
-		const QString& fileExtension = fileInfo.suffix();
-		if (m_extToIconMap.contains(fileExtension)){
-			fileItemPtr->setIcon(m_extToIconMap[fileExtension]);
-		} else {
-			QIcon icon(m_iconProvider.icon(filePath));
-			m_extToIconMap[fileExtension] = icon;
-			fileItemPtr->setIcon(icon);
-		}
-
 		if (parentItemPtr != NULL)
 			parentItemPtr->appendRow(fileItemPtr);
 		else
@@ -350,7 +375,6 @@ void CFileTreeViewGuiComp::EnumerateDirectory(
 
 		QStandardItem* dirItemPtr = new QStandardItem(subDirName);
 		dirItemPtr->setEditable(false);
-		dirItemPtr->setIcon(m_iconProvider.icon(QFileIconProvider::Folder));
 		dirItemPtr->setData(subDir.absolutePath(), DR_PATH);
 		dirItemPtr->setData(true, DR_ISDIR);
 

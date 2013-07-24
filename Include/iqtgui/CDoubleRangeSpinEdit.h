@@ -28,6 +28,7 @@ public:
 	void SetMaxLabelText(const QString& text);
 
 	void EnableMaxValue(bool enable = true);
+	void EnableValdation(bool enable = true);
 
 	void SetValues(double minValue, double maxValue);
 	double GetMinValue() const;
@@ -36,10 +37,15 @@ public:
 Q_SIGNALS:
 	void ValuesChanged();
 
+protected Q_SLOTS:
+	void OnMinValueChanged(double);
+	void OnMaxValueChanged(double);
+
 protected:
 	Ui::CDoubleRangeSpinEdit m_ui;
 
 	bool m_maxValueEnabled;
+	bool m_validateRangesEnabled;
 };
 
 

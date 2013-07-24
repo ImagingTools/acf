@@ -88,6 +88,7 @@ private:
 	void RebuildTreeModel();
 	void DoTreeModelUpdate();
 	void UpdateCurrentSelection();
+	void UpdateChildItems(QStandardItem* itemPtr);
 
 	/**
 		Creates the list of files in a root directory \c root.
