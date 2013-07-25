@@ -56,7 +56,7 @@ protected:
 template <class Base, class PageInterface>
 const typename TMultiPageDocumentWrap<Base, PageInterface>::PageInterfaceType* TMultiPageDocumentWrap<Base, PageInterface>::GetPageObject(int pageIndex) const
 {
-	Q_ASSERT(pageIndex < m_documentPages.GetCount());
+	Q_ASSERT(pageIndex < m_documentPages.count());
 	Q_ASSERT(pageIndex >= 0);
 
 	return m_documentPages.at(pageIndex).pagePtr.GetPtr();
@@ -91,7 +91,7 @@ void TMultiPageDocumentWrap<Base, PageInterface>::ResetPages()
 template <class Base, class PageInterface>
 bool TMultiPageDocumentWrap<Base, PageInterface>::RemovePage(int pageIndex)
 {
-	Q_ASSERT(pageIndex < m_documentPages.GetCount());
+	Q_ASSERT(pageIndex < m_documentPages.count());
 	Q_ASSERT(pageIndex >= 0);
 
 	istd::CChangeNotifier changePtr(this);
