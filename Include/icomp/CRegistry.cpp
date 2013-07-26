@@ -183,7 +183,7 @@ bool CRegistry::RenameEmbeddedRegistry(const QByteArray& oldRegistryId, const QB
 
 	RegistryPtr& newRegistryPtr = m_embeddedRegistriesMap[newRegistryId];
 	if (newRegistryPtr.IsValid()){
-		return NULL;	// such ID exists yet!
+		return false;	// such ID exists yet!
 	}
 
 	newRegistryPtr.TakeOver(oldIter.value());
