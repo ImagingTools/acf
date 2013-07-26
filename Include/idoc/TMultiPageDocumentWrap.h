@@ -8,9 +8,10 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 #include "istd/TSmartPtr.h"
+#include "iser/CArchiveTag.h"
+#include "iprm/IOptionsList.h"
 #include "idoc/IMultiPageDocument.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
-#include "iser/CArchiveTag.h"
 
 
 namespace idoc
@@ -23,7 +24,8 @@ namespace idoc
 template <class Base>
 class TMultiPageDocumentWrap:
 			virtual public Base,
-			public CStandardDocumentMetaInfo
+			public CStandardDocumentMetaInfo,
+			virtual public iprm::IOptionsList
 {
 public:
 	typedef Base BaseClass;
@@ -36,6 +38,14 @@ public:
 	virtual void ResetPages();
 	virtual bool RemovePage(int pageIndex);
 	virtual const IDocumentMetaInfo& GetDocumentMetaInfo() const;
+
+	// reimplemented (iprm::IOptionsList)
+	virtual int GetOptionsFlags() const;
+	virtual int GetOptionsCount() const;
+	virtual QString GetOptionName(int index) const;
+	virtual QString GetOptionDescription(int index) const;
+	virtual QByteArray GetOptionId(int index) const;
+	virtual bool IsOptionEnabled(int index) const;
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
@@ -119,6 +129,53 @@ template <class Base>
 const IDocumentMetaInfo& TMultiPageDocumentWrap<Base>::GetDocumentMetaInfo() const
 {
 	return *this;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+template <class Base>
+int TMultiPageDocumentWrap<Base>::GetOptionsFlags() const
+{
+	return SCF_NONE;
+}
+
+
+template <class Base>
+int TMultiPageDocumentWrap<Base>::GetOptionsCount() const
+{
+	return GetPagesCount();
+}
+
+
+template <class Base>
+QString TMultiPageDocumentWrap<Base>::GetOptionName(int index) const
+{
+	Q_ASSERT(index < m_documentPages.count());
+	Q_ASSERT(index>= 0);
+
+	return m_documentPages[index].pageMetaInfo.GetDocumentMetaInfo(MIT_TITLE).toString();
+}
+
+
+template <class Base>
+QString TMultiPageDocumentWrap<Base>::GetOptionDescription(int /*index*/) const
+{
+	return QString();
+}
+
+
+template <class Base>
+QByteArray TMultiPageDocumentWrap<Base>::GetOptionId(int index) const
+{
+	return GetOptionName(index).toUtf8();
+}
+
+
+template <class Base>
+bool TMultiPageDocumentWrap<Base>::IsOptionEnabled(int /*index*/) const
+{
+	return true;
 }
 
 
