@@ -18,20 +18,39 @@ namespace iimg
 // public methods
 
 CScanlineMask::CScanlineMask()
-:	m_isEmpty(true)
 {
 }
 
 
 bool CScanlineMask::IsBitmapRegionEmpty() const
 {
-	return m_isEmpty;
+	return m_rangesContainer.empty();
+}
+
+
+void CScanlineMask::ResetScanlines(const istd::CIntRange& verticalRange)
+{
+	Q_ASSERT(verticalRange.IsValid());
+
+	m_firstLinePos = verticalRange.GetMinValue();
+
+	int linesCount = verticalRange.GetLength();
+	Q_ASSERT(linesCount >= 0);
+
+	m_rangesContainer.clear();
+	m_scanlines.resize(linesCount);
+
+	for (int i = 0; i < linesCount; ++i){
+		m_scanlines[i] = NULL;
+	}
+
+	m_isBoundingBoxValid = false;
 }
 
 
 const istd::CIntRanges* CScanlineMask::GetPixelRanges(int lineIndex) const
 {
-	int rangeIndex = lineIndex - m_boundingBox.GetTop();
+	int rangeIndex = lineIndex - m_firstLinePos;
 
 	if ((rangeIndex >= 0) && (rangeIndex < int(m_scanlines.size()))){
 		return m_scanlines[rangeIndex];
@@ -84,8 +103,11 @@ bool CScanlineMask::CreateFromGeometry(const i2d::IObject2d& geometry, const i2d
 
 void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRect* clipAreaPtr)
 {
-	SetBoundingBox(circle.GetBoundingBox(), clipAreaPtr);
-	if (!m_boundingBox.IsValidNonEmpty()){
+	InitFromBoudingBox(circle.GetBoundingBox(), clipAreaPtr);
+
+	int linesCount = m_scanlines.size();
+
+	if (linesCount <= 0){
 		ResetImage();
 
 		return;
@@ -94,10 +116,6 @@ void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 	const i2d::CVector2d& center = circle.GetPosition();
 	double radius = circle.GetRadius();
 	double radius2 = radius * radius;
-
-	int linesCount = m_boundingBox.GetHeight();
-
-	m_scanlines.resize(linesCount);
 
 #if QT_VERSION >= 0x040700
     m_rangesContainer.reserve(linesCount);
@@ -109,7 +127,7 @@ void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 
 		m_scanlines[lineIndex] =  NULL;
 
-		double y = (lineIndex + m_boundingBox.GetTop() - center.GetY());
+		double y = (lineIndex + m_firstLinePos - center.GetY());
 		double radiusDiff2 = radius2 - y * y;
 
 		if (radiusDiff2 >= 0){
@@ -132,8 +150,6 @@ void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 				rangeList.InsertSwitchPoint(right);
 
 				m_scanlines[lineIndex] = &rangeList;
-
-				m_isEmpty = false;
 			}
 		}
 	}
@@ -142,23 +158,20 @@ void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 
 void CScanlineMask::CreateFromRectangle(const i2d::CRectangle& rect, const i2d::CRect* clipAreaPtr)
 {
-	SetBoundingBox(rect, clipAreaPtr);
-	if (!m_boundingBox.IsValidNonEmpty()){
+	InitFromBoudingBox(rect, clipAreaPtr);
+
+	int linesCount = m_scanlines.size();
+
+	if (linesCount <= 0){
 		ResetImage();
 
 		return;
 	}
 
-	m_isEmpty = false;
-
-	int linesCount = m_boundingBox.GetHeight();
-
-	m_scanlines.resize(linesCount);
-
 	m_rangesContainer.push_back(istd::CIntRanges());
 	istd::CIntRanges& rangeList = m_rangesContainer.back();
-	rangeList.InsertSwitchPoint(m_boundingBox.GetLeft());
-	rangeList.InsertSwitchPoint(m_boundingBox.GetRight());
+	rangeList.InsertSwitchPoint(int(rect.GetLeft() + 0.5));
+	rangeList.InsertSwitchPoint(int(rect.GetRight() + 0.5));
 
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
@@ -169,8 +182,10 @@ void CScanlineMask::CreateFromRectangle(const i2d::CRectangle& rect, const i2d::
 
 void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::CRect* clipAreaPtr)
 {
-	SetBoundingBox(annulus.GetBoundingBox(), clipAreaPtr);
-	if (!m_boundingBox.IsValidNonEmpty()){
+	InitFromBoudingBox(annulus.GetBoundingBox(), clipAreaPtr);
+	int linesCount = m_scanlines.size();
+
+	if (linesCount <= 0){
 		ResetImage();
 
 		return;
@@ -182,8 +197,6 @@ void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 
 	double innerRadius = annulus.GetInnerRadius();
 	double innerRadius2 = innerRadius * innerRadius;
-
-	int linesCount = int(m_boundingBox.GetHeight());
 
 	double centerX = center.GetX();
 	double centerY = center.GetY();
@@ -198,7 +211,7 @@ void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 		m_rangesContainer.push_back(istd::CIntRanges());
 		istd::CIntRanges& rangeList = m_rangesContainer.back();
 
-		double y = (lineIndex + m_boundingBox.GetTop() - centerY);
+		double y = (lineIndex + m_firstLinePos - centerY);
 
 		double outputRadiusDiff2 = outerRadius2 - y * y;
 
@@ -242,8 +255,6 @@ void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 
 		if (!rangeList.IsEmpty()){
 			m_scanlines[lineIndex] = &rangeList;
-
-			m_isEmpty = false;
 		}
 		else{
 			m_scanlines[lineIndex] =  NULL;
@@ -254,14 +265,14 @@ void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 
 void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::CRect* clipAreaPtr)
 {
-	SetBoundingBox(polygon.GetBoundingBox(), clipAreaPtr);
-	if (!m_boundingBox.IsValidNonEmpty()){
+	InitFromBoudingBox(polygon.GetBoundingBox(), clipAreaPtr);
+	int linesCount = m_scanlines.size();
+
+	if (linesCount <= 0){
 		ResetImage();
 
 		return;
 	}
-
-	int linesCount = m_boundingBox.GetHeight();
 
 	// QVector of lines by Y coordinates;
 	// every line is QList of X coordinates of the polygon lines points 
@@ -277,8 +288,8 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 		i2d::CVector2d startPoint = polygon.GetNode(i);
 		i2d::CVector2d endPoint = polygon.GetNode(nextIndex);
 
-		double y1 = startPoint.GetY() - m_boundingBox.GetTop();
-		double y2 = endPoint.GetY() - m_boundingBox.GetTop();
+		double y1 = startPoint.GetY() - m_firstLinePos;
+		double y2 = endPoint.GetY() - m_firstLinePos;
 
 		double x1 = startPoint.GetX();
 		double x2 = endPoint.GetX();
@@ -355,7 +366,6 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 
 		if (!rangeList.IsEmpty()){
 			m_scanlines[lineIndex] = &rangeList;
-			m_isEmpty = false;
 		}
 		else{
 			m_scanlines[lineIndex] =  NULL;
@@ -404,21 +414,25 @@ CScanlineMask CScanlineMask::GetUnion(const CScanlineMask& mask) const
 
 void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) const
 {
-	result.m_boundingBox = m_boundingBox.GetUnion(mask.m_boundingBox);
-	result.m_isEmpty = m_isEmpty || mask.m_isEmpty;
+	result.m_isBoundingBoxValid = false;
 
-	result.m_scanlines.resize(result.m_boundingBox.GetHeight());
+	result.m_firstLinePos = qMin(m_firstLinePos, mask.m_firstLinePos);
+	int endLineY = qMax(m_firstLinePos + m_scanlines.size(), mask.m_firstLinePos + mask.m_scanlines.size());
 
-	for (int y = result.m_boundingBox.GetTop(); y < result.m_boundingBox.GetBottom(); ++y){
+	result.m_scanlines.resize(endLineY - m_firstLinePos);
+
+	for (int resultLineIndex = 0; resultLineIndex < result.m_scanlines.size(); ++resultLineIndex){
+		int y = resultLineIndex + result.m_firstLinePos;
+
 		const istd::CIntRanges* rangesPtr = NULL;
 		const istd::CIntRanges* maskRangesPtr = NULL;
 
-		int lineIndex = y - m_boundingBox.GetTop();
+		int lineIndex = y - m_firstLinePos;
 		if ((lineIndex >= 0) && (lineIndex < m_scanlines.size())){
 			rangesPtr = m_scanlines[lineIndex];
 		}
 
-		int maskLineIndex = y - mask.m_boundingBox.GetTop();
+		int maskLineIndex = y - mask.m_firstLinePos;
 		if ((maskLineIndex >= 0) && (maskLineIndex < mask.m_scanlines.size())){
 			maskRangesPtr = mask.m_scanlines[lineIndex];
 		}
@@ -434,7 +448,7 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 				unionRanges = *rangesPtr;
 			}
 
-			result.m_scanlines[y - result.m_boundingBox.GetTop()] = &unionRanges;
+			result.m_scanlines[resultLineIndex] = &unionRanges;
 		}
 		else if (maskRangesPtr != NULL){
 			result.m_rangesContainer.push_back(istd::CIntRanges());
@@ -442,10 +456,10 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 
 			unionRanges = *maskRangesPtr;
 
-			result.m_scanlines[y - result.m_boundingBox.GetTop()] = &unionRanges;
+			result.m_scanlines[resultLineIndex] = &unionRanges;
 		}
 		else{
-			result.m_scanlines[y - result.m_boundingBox.GetTop()] = NULL;
+			result.m_scanlines[resultLineIndex] = NULL;
 		}
 	}
 }
@@ -469,14 +483,24 @@ CScanlineMask CScanlineMask::GetIntersection(const CScanlineMask& mask) const
 
 void CScanlineMask::GetIntersection(const CScanlineMask& mask, CScanlineMask& result) const
 {
-	result.m_boundingBox = m_boundingBox.GetUnion(mask.m_boundingBox);
-	result.m_isEmpty = true;
+	result.m_isBoundingBoxValid = false;
 
-	result.m_scanlines.resize(result.m_boundingBox.GetHeight());
+	result.m_firstLinePos = qMax(m_firstLinePos, mask.m_firstLinePos);
+	int endLineY = qMin(m_firstLinePos + m_scanlines.size(), mask.m_firstLinePos + mask.m_scanlines.size());
 
-	for (int y = result.m_boundingBox.GetTop(); y < result.m_boundingBox.GetBottom(); ++y){
-		int lineIndex = y - m_boundingBox.GetTop();
-		int maskLineIndex = y - mask.m_boundingBox.GetTop();
+	if (endLineY >= result.m_firstLinePos){
+		result.ResetImage();
+
+		return;
+	}
+
+	result.m_scanlines.resize(endLineY - m_firstLinePos);
+
+	for (int resultLineIndex = 0; resultLineIndex < result.m_scanlines.size(); ++resultLineIndex){
+		int y = resultLineIndex + result.m_firstLinePos;
+
+		int lineIndex = y - m_firstLinePos;
+		int maskLineIndex = y - mask.m_firstLinePos;
 		if (		(lineIndex >= 0) && (lineIndex < m_scanlines.size()) &&
 					(maskLineIndex >= 0) && (maskLineIndex < mask.m_scanlines.size())){
 			const istd::CIntRanges* rangesPtr = m_scanlines[lineIndex];
@@ -489,16 +513,14 @@ void CScanlineMask::GetIntersection(const CScanlineMask& mask, CScanlineMask& re
 				result.m_rangesContainer.push_back(resultRanges);
 				istd::CIntRanges& intersectedRanges = result.m_rangesContainer.back();
 
-				result.m_scanlines[y - result.m_boundingBox.GetTop()] = &intersectedRanges;
-
-				result.m_isEmpty = false;
+				result.m_scanlines[y - result.m_firstLinePos] = &intersectedRanges;
 			}
 			else{
-				result.m_scanlines[y - result.m_boundingBox.GetTop()] = NULL;
+				result.m_scanlines[y - result.m_firstLinePos] = NULL;
 			}
 		}
 		else{
-			result.m_scanlines[y - result.m_boundingBox.GetTop()] = NULL;
+			result.m_scanlines[y - result.m_firstLinePos] = NULL;
 		}
 	}
 }
@@ -530,6 +552,8 @@ void CScanlineMask::GetTranslated(int dx, int dy, CScanlineMask& result) const
 
 void CScanlineMask::Translate(int dx, int dy)
 {
+	m_firstLinePos += dy;
+
 	m_boundingBox.SetTop(m_boundingBox.GetTop() + dy);
 	m_boundingBox.SetBottom(m_boundingBox.GetBottom() + dy);
 
@@ -556,13 +580,52 @@ i2d::CVector2d CScanlineMask::GetCenter() const
 }
 
 
-void CScanlineMask::MoveCenterTo(const i2d::CVector2d& /*position*/)
+void CScanlineMask::MoveCenterTo(const i2d::CVector2d& position)
 {
+	i2d::CVector2d diff = position - GetCenter();
+
+	Translate(int(diff.GetX() + 0.5), int(diff.GetY() + 0.5));
 }
 
 
 i2d::CRectangle CScanlineMask::GetBoundingBox() const
 {
+	if (!m_isBoundingBoxValid){
+		istd::CIntRange rangeX = istd::CIntRange::GetInvalid();
+
+		for (int i = 0; i < m_scanlines.size(); ++i){
+			const istd::CIntRanges* scanLinePtr = m_scanlines[i];
+
+			if (scanLinePtr != NULL){
+				const istd::CIntRanges::SwitchPoints& points = scanLinePtr->GetSwitchPoints();
+
+				if (!points.empty()){
+					int minX = *points.begin();
+					int maxX = *points.rbegin();
+
+					if (rangeX.IsValid()){
+						rangeX.Unite(istd::CIntRange(minX, maxX));
+					}
+					else{
+						rangeX = istd::CIntRange(minX, maxX);
+					}
+				}
+			}
+		}
+
+		if (rangeX.IsEmpty()){
+			m_boundingBox = i2d::CRect::GetEmpty();
+		}
+		else{
+			m_boundingBox.SetTop(m_firstLinePos);
+			m_boundingBox.SetLeft(rangeX.GetMinValue());
+			m_boundingBox.SetBottom(m_firstLinePos + m_scanlines.size());
+			m_boundingBox.SetRight(rangeX.GetMaxValue());
+		}
+
+		m_isBoundingBoxValid = true;
+	}
+
 	return m_boundingBox;
 }
 
@@ -571,15 +634,7 @@ i2d::CRectangle CScanlineMask::GetBoundingBox() const
 
 bool CScanlineMask::IsEmpty() const
 {
-	for (		Scanlines::ConstIterator iter = m_scanlines.constBegin();
-				iter != m_scanlines.constEnd();
-				++iter){
-		if (*iter != NULL){
-			return false;
-		}
-	}
-
-	return true;
+	return CScanlineMask::GetBoundingBox().IsEmpty();
 }
 
 
@@ -589,8 +644,6 @@ void CScanlineMask::ResetImage()
 	m_scanlines.clear();
 
 	m_boundingBox = i2d::CRect::GetEmpty();
-
-	m_isEmpty = true;
 }
 
 
@@ -602,7 +655,7 @@ void CScanlineMask::ClearImage()
 
 istd::CIndex2d CScanlineMask::GetImageSize() const
 {
-	return m_boundingBox.GetRightBottom();
+	return CScanlineMask::GetBoundingBox().GetRightBottom().ToIndex2d();
 }
 
 
@@ -614,7 +667,7 @@ int CScanlineMask::GetComponentsCount() const
 
 icmm::CVarColor CScanlineMask::GetColorAt(const istd::CIndex2d& position) const
 {
-	int scanLine = position.GetY() - m_boundingBox.GetTop();
+	int scanLine = position.GetY() - m_firstLinePos;
 	if ((scanLine >= 0) && (scanLine < m_scanlines.size())){
 		const istd::CIntRanges* rangesPtr = m_scanlines[scanLine];
 		if (rangesPtr != NULL){
@@ -646,7 +699,7 @@ bool CScanlineMask::Serialize(iser::IArchive& archive)
 	bool retVal = true;
 
 	if (archive.IsStoring()){
-		int minY = m_boundingBox.GetTop();
+		int minY = m_firstLinePos;
 
 		retVal = retVal && archive.BeginTag(minYTag);
 		retVal = retVal && archive.Process(minY);
@@ -724,16 +777,17 @@ bool CScanlineMask::Serialize(iser::IArchive& archive)
 
 // protected methods
 
-void CScanlineMask::SetBoundingBox(const i2d::CRectangle& objectBoundingBox, const i2d::CRect* clipAreaPtr)
+void CScanlineMask::InitFromBoudingBox(const i2d::CRectangle& objectBoundingBox, const i2d::CRect* clipAreaPtr)
 {
-	m_boundingBox.SetLeft(int(qFloor(objectBoundingBox.GetLeft())));
-	m_boundingBox.SetRight(int(qCeil(objectBoundingBox.GetRight())));
-	m_boundingBox.SetTop(int(qFloor(objectBoundingBox.GetTop())));
-	m_boundingBox.SetBottom(int(qCeil(objectBoundingBox.GetBottom())));
+	int firstLinePos = int(qFloor(objectBoundingBox.GetTop()));
+	int endLinePos = int(qCeil(objectBoundingBox.GetBottom()));
 
 	if (clipAreaPtr != NULL){
-		m_boundingBox.Intersection(*clipAreaPtr);
+		firstLinePos = qMax(clipAreaPtr->GetTop(), firstLinePos);
+		endLinePos = qMax(clipAreaPtr->GetBottom(), endLinePos);
 	}
+
+	ResetScanlines(istd::CIntRange(firstLinePos, endLinePos));
 }
 
 

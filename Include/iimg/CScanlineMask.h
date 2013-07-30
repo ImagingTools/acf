@@ -28,12 +28,20 @@ class CScanlineMask:
 			virtual public IRasterImage
 {
 public:
+	typedef QList<istd::CIntRanges> RangesContainer;
+	typedef QVector<const istd::CIntRanges*> Scanlines;
+
 	CScanlineMask();
 
 	/**
 		Check if region is empty.
 	*/
 	bool IsBitmapRegionEmpty() const;
+
+	/**
+		Set this mask to empty set for some vertical range.
+	*/
+	void ResetScanlines(const istd::CIntRange& verticalRange);
 
 	/**
 		Get the list of pixel ranges per given line.
@@ -121,6 +129,15 @@ public:
 	*/
 	void Translate(int dx, int dy);
 
+	/**
+		Get access to internal range container.
+	*/
+	RangesContainer& GetRangesContainer();
+	/**
+		Get access to internal scan lines.
+	*/
+	Scanlines& GetScanLines();
+
 	// reimplemented (i2d::IObject2d)
 	virtual i2d::CVector2d GetCenter() const;
 	virtual void MoveCenterTo(const i2d::CVector2d& position);
@@ -139,19 +156,32 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 protected:
-	void SetBoundingBox(const i2d::CRectangle& objectBoundingBox, const i2d::CRect* clipAreaPtr);
+	void InitFromBoudingBox(const i2d::CRectangle& objectBoundingBox, const i2d::CRect* clipAreaPtr);
 
 private:
-	typedef QList<istd::CIntRanges> RangesContainer;
 	RangesContainer m_rangesContainer;
 
-	typedef QVector<const istd::CIntRanges*> Scanlines;
 	Scanlines m_scanlines;
 
-	i2d::CRect m_boundingBox;
+	int m_firstLinePos;
 
-	bool m_isEmpty;
+	mutable i2d::CRect m_boundingBox;
+	mutable bool m_isBoundingBoxValid;
 };
+
+
+// public inline methods
+
+inline CScanlineMask::RangesContainer& CScanlineMask::GetRangesContainer()
+{
+	return m_rangesContainer;
+}
+
+
+inline CScanlineMask::Scanlines& CScanlineMask::GetScanLines()
+{
+	return m_scanlines;
+}
 
 
 } // namespace iimg
