@@ -72,12 +72,12 @@ private:
 	/**
 		Maximal length of a document file path.
 	*/
-	static const int MAX_DOCUMENT_PATH = 1024;
+	static const int MAX_DOCUMENT_PATH_LENGTH = 1024;
 
 	/**
 		Maximal number of document, which can be opened from the shell.
 	*/
-	static const int MAX_DOCUMENTS = 100;
+	static const int MAX_DOCUMENTS_COUNT = 100;
 
 	/**
 		Info about running application.
@@ -85,7 +85,7 @@ private:
 	struct RunningProcessInfo
 	{
 		qint64 processId;
-		char requestedDocuments[MAX_DOCUMENTS][MAX_DOCUMENT_PATH];
+		char requestedDocuments[MAX_DOCUMENTS_COUNT][MAX_DOCUMENT_PATH_LENGTH];
 	};
 
 	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);

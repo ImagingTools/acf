@@ -186,7 +186,7 @@ void CSingletonApplicationComp::ShareDocumentsForOpening(int argc, char** argv)
 			for (int argIndex = 1; argIndex < argc; ++argIndex){
 				QFileInfo filePath(argv[argIndex]);
 				if (filePath.exists()){
-					int pathLength = qMin<int>(filePath.size(), MAX_DOCUMENT_PATH);
+					int pathLength = qMin<int>(filePath.size(), MAX_DOCUMENT_PATH_LENGTH);
 
 					memcpy(
 								dataPtr->requestedDocuments[argIndex - 1],
@@ -209,7 +209,7 @@ QStringList CSingletonApplicationComp::PopDocumentsForOpening() const
 	if (m_processData->lock()){
 		RunningProcessInfo* dataPtr = (RunningProcessInfo*)m_processData->data();
 		if (dataPtr != NULL){
-			for (int documentIndex = 0; documentIndex < MAX_DOCUMENTS; ++documentIndex){
+			for (int documentIndex = 0; documentIndex < MAX_DOCUMENTS_COUNT; ++documentIndex){
 				QString filePath(dataPtr->requestedDocuments[documentIndex]);
 
 				if (!filePath.isEmpty()){
