@@ -43,6 +43,11 @@ I_EXPORT_COMPONENT(
 			"Provider of the composed bitmap list",
 			IM_TAG("Image Bitmap List Multi"));
 
+I_EXPORT_COMPONENT(
+			BitmapDocumentLoader,
+			"Multi bitmap serializer",
+			"Bitmap Multi Loader File Serializer" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Bitmap Loader"));
+
 
 } // namespace BitmapPck
 

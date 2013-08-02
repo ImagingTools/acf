@@ -172,6 +172,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CBitmapDocumentFilePersistenceComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CBitmapLoaderComp.cpp"
 				>
 			</File>
@@ -210,6 +214,10 @@
 			</File>
 			<File
 				RelativePath="..\CBitmapDocument.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CBitmapDocumentFilePersistenceComp.h"
 				>
 			</File>
 			<File

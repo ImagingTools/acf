@@ -25,6 +25,7 @@ typedef icomp::TModelCompWrap<ifile::CRelativeFileNameParamComp> RelativeFileNam
 typedef icomp::TModelCompWrap<ifile::CSystemLocationComp> SystemLocation;
 typedef icomp::TModelCompWrap<ifile::CGeneratedFileNameParamComp> GeneratedFileNameParam;
 typedef icomp::TModelCompWrap<ifile::CFileListProviderComp> FileListProvider;
+typedef icomp::TModelCompWrap<ifile::CFileListProviderComp> FileListProvider;
 typedef ifile::CAutoPersistenceComp AutoPersistence;
 
 

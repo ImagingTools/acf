@@ -11,6 +11,7 @@
 #include "iimg/CGeneralBitmap.h"
 #include "iimg/CBitmapDocument.h"
 #include "iimg/CComposedBitmapProviderComp.h"
+#include "iimg/CBitmapDocumentFilePersistenceComp.h"
 
 
 /**
@@ -54,6 +55,8 @@ typedef icomp::TModelCompWrap<
 						iser::ISerializable> > BitmapDocument;
 
 typedef icomp::TModelCompWrap<iimg::CComposedBitmapProviderComp> ComposedBitmapProvider;
+
+typedef iimg::CBitmapDocumentFilePersistenceComp BitmapDocumentLoader;
 
 
 } // namespace BitmapPck
