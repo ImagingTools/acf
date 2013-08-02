@@ -31,6 +31,7 @@
 #include "iqtgui/CTableBasedModelEditorComp.h"
 #include "iqtgui/CStatusGuiComp.h"
 #include "iqtgui/CSettingsContainerGuiComp.h"
+#include "iqtgui/CSingletonApplicationComp.h"
 
 // FileGuiPck
 #include "ifilegui/CFileTreeViewGuiComp.h"
@@ -100,6 +101,7 @@ typedef iqtgui::CProgressManagerGuiComp ProgressManagerGui;
 typedef iqtgui::CTableBasedModelEditorComp TableBasedModelEditor;
 typedef iqtgui::CStatusGuiComp StatusGui;
 typedef iqtgui::CSettingsContainerGuiComp SettingsContainerGui;
+typedef iqtgui::CSingletonApplicationComp SingletonApplication;
 
 typedef ifilegui::CFileTreeViewGuiComp FileTreeViewGui;
 typedef ifilegui::CFileSystemExplorerGuiComp FileSystemExplorerGui;

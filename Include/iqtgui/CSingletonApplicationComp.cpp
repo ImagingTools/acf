@@ -1,4 +1,4 @@
-#include "ibase/CSingletonApplicationComp.h"
+#include "iqtgui/CSingletonApplicationComp.h"
 
 
 // Qt includes
@@ -14,8 +14,11 @@
 #include <Carbon/Carbon.h>
 #endif
 
+// ACF includes
+#include <iqtgui/IGuiApplication.h>
 
-namespace ibase
+
+namespace iqtgui
 {
 
 
@@ -235,10 +238,23 @@ void CSingletonApplicationComp::OnUpdateDocumentList()
 	for (int documentIndex = 0; documentIndex < documentsToOpen.count(); ++documentIndex){
 		m_documentManagerCompPtr->OpenDocument(NULL, &documentsToOpen[documentIndex]);
 	}
+
+	if ((documentsToOpen.count() > 0) && m_slaveApplicationCompPtr.IsValid()){
+		iqtgui::IGuiApplication* guiAppPtr = dynamic_cast<iqtgui::IGuiApplication*>(m_slaveApplicationCompPtr.GetPtr());
+		if (guiAppPtr != NULL){
+			const iqtgui::IGuiObject* guiPtr = guiAppPtr->GetApplicationGui();
+			if (guiPtr != NULL){
+				QWidget* widgetPtr = guiPtr->GetWidget();
+
+				widgetPtr->activateWindow();
+				widgetPtr->raise();
+			}
+		}
+	}
 }
 
 
-} // namespace ibase
+} // namespace iqtgui
 
 
 

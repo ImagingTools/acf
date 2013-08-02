@@ -317,6 +317,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSingletonApplicationComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CSplashScreenGuiComp.cpp"
 				>
 			</File>
@@ -533,6 +537,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CSingletonApplicationComp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CSplashScreenGuiComp.h"
 				>
 			</File>
@@ -734,6 +742,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Generated\moc_CSingletonApplicationComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Generated\moc_CTabbedMultiViewGuiComp.cpp"
 				>
 			</File>
@@ -855,6 +867,10 @@
 			</File>
 			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CSingletonApplicationComp.moc"
 				>
 			</File>
 			<File

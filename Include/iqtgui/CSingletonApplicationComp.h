@@ -1,5 +1,5 @@
-#ifndef ibase_CSingletonApplicationComp_included
-#define ibase_CSingletonApplicationComp_included
+#ifndef iqtgui_CSingletonApplicationComp_included
+#define iqtgui_CSingletonApplicationComp_included
 
 
 // Qt includes
@@ -17,7 +17,7 @@
 #include "ibase/IRuntimeStatusProvider.h"
 
 
-namespace ibase
+namespace iqtgui
 {
 
 
@@ -101,8 +101,8 @@ private:
 };
 
 
-} // namespace ibase
+} // namespace iqtgui
 
 
-#endif // ibase_CSingletonApplicationComp_included
+#endif // iqtgui_CSingletonApplicationComp_included
 

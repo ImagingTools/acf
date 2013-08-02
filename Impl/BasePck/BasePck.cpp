@@ -99,11 +99,6 @@ I_EXPORT_COMPONENT(
 			"Multi Model Observer Binder" IM_TAG("Model") IM_AUTHOR("\"Krzysztof Gantzke\""));
 
 I_EXPORT_COMPONENT(
-			SingletonApplication,
-			"General singleton application",
-			"Application Singleton Process" IM_TAG("Application"));
-
-I_EXPORT_COMPONENT(
 			QtVersionInfo,
 			"Version information about underlaying Qt framework",
 			"Application Version Qt" IM_TAG("Application"));
