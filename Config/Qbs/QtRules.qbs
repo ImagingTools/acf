@@ -11,7 +11,7 @@ Module{
 	Rule{
 		inputs: ["ui"]
 
-		Artifact {
+		Artifact{
 			fileName: 'Generated/' + product.name + '/ui_' + input.completeBaseName + '.h'
 			fileTags: ["hpp"]
 		}
