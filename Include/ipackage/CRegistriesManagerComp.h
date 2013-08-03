@@ -8,12 +8,12 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-#include "ifile/IFilePersistence.h"
 #include "icomp/IExtPackagesManager.h"
 #include "icomp/IRegistriesManager.h"
 #include "icomp/IRegistryLoader.h"
 #include "icomp/CComponentBase.h"
 #include "ilog/TLoggerCompWrap.h"
+#include "ifile/IFilePersistence.h"
 #include "ifile/IFileNameParam.h"
 
 
