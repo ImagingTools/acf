@@ -21,8 +21,8 @@ namespace iimg
 bool CBitmapDocumentFilePersistenceComp::IsOperationSupported(
 	const istd::IChangeable* dataObjectPtr,
 	const QString* filePathPtr,
-	int flags,
-	bool beQuiet) const
+	int /*flags*/,
+	bool /*beQuiet*/) const
 {
 	if (dynamic_cast<const iimg::CBitmapDocument*>(dataObjectPtr) == NULL){
 		return false;
@@ -40,6 +40,12 @@ bool CBitmapDocumentFilePersistenceComp::IsOperationSupported(
 
 int CBitmapDocumentFilePersistenceComp::LoadFromFile(istd::IChangeable& data, const QString& filePath) const
 {
+	if (!m_bitmapPersistenceCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component configuration! Component 'BitmapPersistence' was not set");
+
+		return OS_FAILED;
+	}
+
 	iimg::CBitmapDocument* docPtr = dynamic_cast<iimg::CBitmapDocument*>(&data);
 	if (docPtr == NULL){
 		return OS_FAILED;
@@ -56,13 +62,18 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(istd::IChangeable& data, co
 
 int CBitmapDocumentFilePersistenceComp::SaveToFile(const istd::IChangeable& data, const QString& filePath) const
 {
+	if (!m_bitmapPersistenceCompPtr.IsValid()){
+		SendCriticalMessage(0, "Bad component configuration! Component 'BitmapPersistence' was not set");
+
+		return OS_FAILED;
+	}
+
 	const iimg::CBitmapDocument* docPtr = dynamic_cast<const iimg::CBitmapDocument*>(&data);
 	if (docPtr == NULL){
 		return OS_FAILED;
 	}
-	iimg::CBitmapDocument* documentPtr = const_cast<iimg::CBitmapDocument*>(docPtr);
 
-	// ensure if output path exists
+	// Ensure that the output path exists:
 	if (filePath.isEmpty()){
 		return OS_FAILED;
 	}
@@ -75,58 +86,55 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(const istd::IChangeable& data
 		}
 	}
 
-	// Serialization
 	iqt::CXmlFileWriteArchive archive(filePath);
+	bool retVal = true;
 	
-	iimg::CBitmapLoaderComp imageWriter;
-
 	// Serialize meta info:
 	static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document");
-	bool retVal = archive.BeginTag(metaInfoTag);
-	retVal = retVal && documentPtr->idoc::CStandardDocumentMetaInfo::Serialize(archive);
+
+	iser::ISerializable* metaInfoSerializablePtr = dynamic_cast<iser::ISerializable*>(const_cast<idoc::IDocumentMetaInfo*>(&docPtr->GetDocumentMetaInfo()));
+	if (metaInfoSerializablePtr != NULL){
+		static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document");
+		retVal = retVal && archive.BeginTag(metaInfoTag);
+		retVal = retVal && metaInfoSerializablePtr->Serialize(archive);
+	}
+
 	retVal = retVal && archive.EndTag(metaInfoTag);
 
 	// Serialize document pages:
 	static iser::CArchiveTag pagesTag("Pages", "Container of the document pages");
-	static iser::CArchiveTag pageTag("Page", "Single document page");
+	static iser::CArchiveTag pageFileTag("PageFile", "Single document page");
 
-	int pagesCount = documentPtr->GetPagesCount();
+	int pagesCount = docPtr->GetPagesCount();
 
-	retVal = retVal && archive.BeginMultiTag(pagesTag, pageTag, pagesCount);
+	retVal = retVal && archive.BeginMultiTag(pagesTag, pageFileTag, pagesCount);
 
 	for (int pageIndex = 0; pageIndex < pagesCount; ++pageIndex){
-		QString pageName = documentPtr->GetOptionName(pageIndex);
+		QString pageName = docPtr->GetOptionName(pageIndex);
 		if (pageName.isEmpty()){
 			pageName = QString::number(pageIndex+1);
 		}
 
 		QString pageFileName = QString("%1_%2.bmp").arg(filePathInfo.completeBaseName()).arg(pageName);
 
-		retVal = retVal && archive.BeginTag(pageTag);
+		retVal = retVal && archive.BeginTag(pageFileTag);
 		retVal = retVal && archive.Process(pageFileName);
-		retVal = retVal && archive.EndTag(pageTag);
+		retVal = retVal && archive.EndTag(pageFileTag);
 
-		const iimg::IBitmap* bitmapPtr = documentPtr->GetBitmap(pageIndex);
-		if (bitmapPtr == NULL){
+		const iimg::IBitmap* bitmapPtr = docPtr->GetBitmap(pageIndex);
+		if ((bitmapPtr != NULL) && retVal){
+			int saveState = (m_bitmapPersistenceCompPtr->SaveToFile(*bitmapPtr, outDir.absoluteFilePath(pageFileName)));
+
+			retVal = retVal && (saveState == ifile::IFilePersistence::OS_OK);
+		}
+		else{
 			retVal = false;
-		} else {
-			retVal = retVal && 
-				(imageWriter.SaveToFile(
-					*bitmapPtr, 
-					outDir.absoluteFilePath(pageFileName)) == ifile::IFilePersistence::OS_OK);
 		}
 	}
 
 	retVal = retVal && archive.EndTag(pagesTag);
 
-	//if (documentPtr->Serialize(metaWriter)){
-	//	return OS_OK;
-	//}
-
-	if (retVal)
-		return OS_OK;
-
-	return OS_FAILED;
+	return retVal ? OS_OK : OS_FAILED;
 }
 
 
@@ -150,12 +158,14 @@ QString CBitmapDocumentFilePersistenceComp::GetTypeDescription(const QString* ex
 {
 	if (extensionPtr != NULL){
 		if (extensionPtr->toLower() == "bdm"){
-			return "Bitmap Document Metainformation";
+			return "Bitmap Document Meta Information";
 		}
 	}
 
-	return "";
+	return QString();
 }
 
 
 } // namespace iimg
+
+

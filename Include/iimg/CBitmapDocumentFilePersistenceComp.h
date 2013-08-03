@@ -4,8 +4,7 @@
 
 // ACF includes
 #include "ifile/IFilePersistence.h"
-
-#include "icomp/CComponentBase.h"
+#include "ilog/TLoggerCompWrap.h"
 
 
 namespace iimg
@@ -13,15 +12,16 @@ namespace iimg
 
 
 class CBitmapDocumentFilePersistenceComp:
-			public icomp::CComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifile::IFilePersistence
 {
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CBitmapDocumentFilePersistenceComp);
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
+		I_ASSIGN(m_bitmapPersistenceCompPtr, "BitmapPersistence", "Component used for persistence of the single page of the bitmap document", true, "BitmapPersistence");
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFilePersistence)
@@ -36,6 +36,9 @@ public:
 	// reimplemented (ifile::IFileTypeInfo)
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
+
+private:
+	I_REF(ifile::IFilePersistence, m_bitmapPersistenceCompPtr);
 };
 
 
