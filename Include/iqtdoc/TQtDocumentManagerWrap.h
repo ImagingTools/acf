@@ -36,7 +36,7 @@ public:
 	virtual void OnSaveSettings(QSettings& settings) const;
 
 	// pseudo-reimplemented (idoc::CSingleDocumentManagerBase)
-	virtual QString GetSaveFilePath(const QByteArray& documentTypeId) const;
+	virtual QString GetSaveFilePath(const QByteArray& documentTypeId, const QString& currentFilePath) const;
 
 protected:
 	/**
@@ -80,13 +80,20 @@ void TQtDocumentManagerWrap<Base, Gui>::OnSaveSettings(QSettings& settings) cons
 // pseudo-reimplemented (idoc::CSingleDocumentManagerBase)
 
 template <class Base, class Gui>
-QString TQtDocumentManagerWrap<Base, Gui>::GetSaveFilePath(const QByteArray& documentTypeId) const
+QString TQtDocumentManagerWrap<Base, Gui>::GetSaveFilePath(const QByteArray& documentTypeId, const QString& currentFilePath) const
 {
 	QStringList filters = CreateFileDialogFilters(&documentTypeId, ifile::IFilePersistence::QF_FILE | ifile::IFilePersistence::QF_SAVE);
 
-	QString filePath = QFileDialog::getSaveFileName(NULL, Gui::tr("Save..."), m_lastDirectory, filters.join("\n"));
+	QString defaultFilter = "*." + QFileInfo(currentFilePath).completeSuffix();
+	QString filePath = QFileDialog::getSaveFileName(
+				Gui::GetWidget(),
+				Gui::tr("Save..."),
+				currentFilePath.isEmpty()? m_lastDirectory: currentFilePath, filters.join(";;"),
+				&defaultFilter);
 
-	UpdateLastDirectory(filePath);
+	if (!filePath.isEmpty()){
+		UpdateLastDirectory(filePath);
+	}
 
 	return filePath;
 }
@@ -141,7 +148,7 @@ QStringList TQtDocumentManagerWrap<Base, Gui>::GetOpenFilePathesFromDialog(const
 {
 	QStringList filters = CreateFileDialogFilters(documentTypeIdPtr, ifile::IFilePersistence::QF_FILE | ifile::IFilePersistence::QF_LOAD);
 
-	return QFileDialog::getOpenFileNames(Gui::GetWidget(), Gui::tr("Open Files..."), m_lastDirectory, filters.join("\n"));
+	return QFileDialog::getOpenFileNames(Gui::GetWidget(), Gui::tr("Open Files..."), m_lastDirectory, filters.join(";;"));
 }
 
 

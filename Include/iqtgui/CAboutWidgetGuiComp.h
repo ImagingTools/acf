@@ -32,7 +32,7 @@ public:
 		I_ASSIGN_MULTI_1(m_versionIdsAttrPtr, "VersionIds", "List of version ID's for version infor should be displayed", false, 0);
 		I_ASSIGN_MULTI_1(m_versionNamesAttrPtr, "VersionNames", "List of version names will be used as version description", false, "Version");
 	I_END_COMPONENT;
-	
+
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();

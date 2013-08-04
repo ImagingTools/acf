@@ -99,7 +99,7 @@ protected:
 	/**
 		Gets save file name.
 	*/
-	virtual QString GetSaveFilePath(const QByteArray& documentTypeId) const = 0;
+	virtual QString GetSaveFilePath(const QByteArray& documentTypeId, const QString& currentFilePath) const = 0;
 
 	/**
 		Query user if this document can be closed.
