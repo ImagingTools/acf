@@ -7,7 +7,7 @@
 #include <QtWidgets/QCheckbox>
 #include <QtWidgets/QBoxLayout>
 #else
-#include <QtGui/QCheckbox>
+#include <QtGui/QCheckBox>
 #include <QtGui/QBoxLayout>
 #endif
 

@@ -1,3 +1,4 @@
+import qbs.base 1.0
 import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
 
 StaticProduct{
@@ -5,9 +6,10 @@ StaticProduct{
 
 	files: ["../*.h", "../*.cpp"]
 
-	Export{
+    Depends{ name: "ifile" }
+
+    Export{
 		Depends{ name: "ilog" }
-		Depends{ name: "ifile" }
 		Depends{ name: "iprm" }
 	}
 }

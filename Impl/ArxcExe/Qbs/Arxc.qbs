@@ -1,3 +1,4 @@
+import qbs.base 1.0
 import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
 
 ApplicationProduct{
@@ -5,6 +6,8 @@ ApplicationProduct{
 
 	files: ["../*.cpp"]
 
-	Depends{ name: "ipackage" }
 	Depends{ name: "iqt" }
+	Depends{ name: "ipackage" }
+	Depends{ name: "Qt.widgets" }
+	Depends{ name: "Qt.gui" }
 }

@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <QtCore/QVariant>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QHBoxLayout>

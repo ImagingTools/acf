@@ -1,13 +1,17 @@
 import qbs.base 1.0
 
 Project{
-	SubProject {
+	name: "Acf"
+
+	property path acfDir: "../.."
+
+	SubProject{
 		filePath: "Static.qbs"
 	}
-	SubProject {
+	SubProject{
 		filePath: "Component.qbs"
 	}
-	SubProject {
+	SubProject{
 		filePath: "Tool.qbs"
 	}
 }

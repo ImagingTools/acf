@@ -1,3 +1,4 @@
+import qbs.base 1.0
 // Standard settings for a Qt based project
 
 Module{

@@ -3,7 +3,7 @@
 
 // Qt includes
 #include <QtCore/QVariant>
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <QtGui/QIcon>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QVBoxLayout>

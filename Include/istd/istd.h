@@ -6,7 +6,7 @@
 #include <limits>
 
 // Qt includes
-#include <QtCore/QtGlobal>
+#include rangeX
 
 
 /**

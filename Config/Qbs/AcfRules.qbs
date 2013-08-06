@@ -1,6 +1,5 @@
-// Custom build settings
-
 import qbs.base 1.0
+// Custom build settings
 
 Module{
 	name: "AcfRules"

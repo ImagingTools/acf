@@ -1,3 +1,4 @@
+import qbs.base 1.0
 import "../../../Config/Qbs/ComponentProduct.qbs" as ComponentProduct
 
 ComponentProduct{
@@ -5,6 +6,6 @@ ComponentProduct{
 
 	files: ["../*.h", "../*.cpp"]
 
-	Depends{ name: "ilog" }
-	Depends{ name: "ipackage" }
+    Depends{ name: "ipackage" }
+    Depends{ name: "ilog" }
 }

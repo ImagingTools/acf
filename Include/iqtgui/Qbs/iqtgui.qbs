@@ -8,6 +8,7 @@ StaticProduct{
 	files: ["../*.h", "../*.cpp", "../*.ui", "../*.qrc"]
 
 	Depends{ name: "Qt.gui" }
+	Depends{ name: "Qt.widgets" }
 
 	Export{
 		Depends{ name: "icomp" }
@@ -15,5 +16,6 @@ StaticProduct{
 		Depends{ name: "iprm" }
 		Depends{ name: "iqt" }
 		Depends{ name: "Qt.gui" }
+		Depends{ name: "Qt.widgets" }
 	}
 }

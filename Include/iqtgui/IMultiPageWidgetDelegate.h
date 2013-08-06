@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <QtCore/QSize>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QWidget>

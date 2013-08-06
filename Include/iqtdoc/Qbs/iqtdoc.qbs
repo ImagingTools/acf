@@ -1,3 +1,4 @@
+import qbs.base 1.0
 import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
 
 StaticProduct{
@@ -7,10 +8,12 @@ StaticProduct{
 
 	Depends{ name: "iqtgui" }
 	Depends{ name: "Qt.gui" }
+	Depends{ name: "Qt.widgets" }
 
 	Export{
 		Depends{ name: "idoc" }
 		Depends{ name: "iqtgui" }
 		Depends{ name: "Qt.gui" }
+		Depends{ name: "Qt.widgets" }
 	}
 }

@@ -1,7 +1,5 @@
-// General base configuration should be included from all ACF-based projects
-
 import qbs.base 1.0
-
+// General base configuration should be included from all ACF-based projects
 
 Product{
 	Depends{ name: "Qt.core" }
