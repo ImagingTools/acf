@@ -4,10 +4,9 @@
 
 // ACF includes
 #include "i2d/CAnnulusSegment.h"
-
 #include "iview/CAnnulusSegmentShape.h"
-
 #include "iqt2d/TShapeParamsGuiCompBase.h"
+
 #include "iqt2d/Generated/ui_CAnnulusSegmentParamsGuiComp.h"
 
 

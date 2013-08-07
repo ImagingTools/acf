@@ -25,8 +25,8 @@
 #include "i2d/CPolyline.h"
 #include "i2d/CAffineTransformation2d.h"
 #include "iqt/CSignalBlocker.h"
-
 #include "iqt2d/TShapeParamsGuiCompBase.h"
+
 #include "iqt2d/Generated/ui_CPolygonParamsGuiComp.h"
 
 

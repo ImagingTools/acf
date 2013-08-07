@@ -4,13 +4,12 @@
 
 // ACF includes
 #include "ibase/ICommandsProvider.h"
-
 #include "iqtgui/IGuiObject.h"
 #include "iqtgui/TDesignerGuiCompBase.h"
 #include "iqtgui/CHierarchicalCommand.h"
-
 #include "iqt2d/IViewProvider.h"
 #include "iqt2d/IViewExtender.h"
+
 #include "iqt2d/Generated/ui_CSceneConnectorGuiComp.h"
 
 
