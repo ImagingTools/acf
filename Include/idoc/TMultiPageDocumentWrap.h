@@ -25,12 +25,10 @@ namespace idoc
 template <class Base>
 class TMultiPageDocumentWrap:
 			virtual public Base,
-			public CStandardDocumentMetaInfo,
 			virtual public iprm::IOptionsList
 {
 public:
 	typedef Base BaseClass;
-	typedef CStandardDocumentMetaInfo BaseClass2;
 
 	// pseudo-reimplemented (IMultiPageDocument)
 	virtual int GetPagesCount() const;
@@ -68,6 +66,8 @@ protected:
 	typedef QVector<Page> Pages;
 
 	Pages m_documentPages;
+
+	CStandardDocumentMetaInfo m_metaInfo;
 };
 
 
@@ -129,7 +129,7 @@ bool TMultiPageDocumentWrap<Base>::RemovePage(int pageIndex)
 template <class Base>
 const IDocumentMetaInfo& TMultiPageDocumentWrap<Base>::GetDocumentMetaInfo() const
 {
-	return *this;
+	return m_metaInfo;
 }
 
 
@@ -155,7 +155,7 @@ QString TMultiPageDocumentWrap<Base>::GetOptionName(int index) const
 	Q_ASSERT(index < m_documentPages.count());
 	Q_ASSERT(index>= 0);
 
-	return m_documentPages[index].pageMetaInfo.GetDocumentMetaInfo(MIT_TITLE).toString();
+	return m_documentPages[index].pageMetaInfo.GetDocumentMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE).toString();
 }
 
 
@@ -188,7 +188,7 @@ bool TMultiPageDocumentWrap<Base>::Serialize(iser::IArchive& archive)
 	// Serialize meta info:
 	static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document");
 	bool retVal = archive.BeginTag(metaInfoTag);
-	retVal = retVal && BaseClass2::Serialize(archive);
+	retVal = retVal && m_metaInfo.Serialize(archive);
 	retVal = retVal && archive.EndTag(metaInfoTag);
 
 	// Serialize document pages:

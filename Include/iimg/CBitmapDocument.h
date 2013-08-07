@@ -27,7 +27,7 @@ public:
 
 	enum
 	{
-		MIT_CAMERA_MODEL = MIT_USER + 1
+		MIT_CAMERA_MODEL = idoc::IDocumentMetaInfo::MIT_USER + 1
 	};
 
 	// reimplemented (idoc::IMultiPageDocument)

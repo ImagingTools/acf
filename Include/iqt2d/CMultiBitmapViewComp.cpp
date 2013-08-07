@@ -96,17 +96,29 @@ void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 		viewPtr->UpdateImage(objectPtr->GetBitmap(viewIndex));
 	}
 
-	usedViewsCount = qMin(viewsCount, m_viewExtendersCompPtr.GetCount());
+	if (m_optionsListCompPtr.IsValid()){
+		usedViewsCount = qMin(viewsCount, m_optionsListCompPtr->GetOptionsCount());
 
-	for (int index = 0; index < usedViewsCount; index++){
-		iqt2d::IViewExtender* viewExtenderPtr = m_viewExtendersCompPtr[index];
-		Q_ASSERT(viewExtenderPtr != NULL);
+		for (int viewIndex = 0; viewIndex < usedViewsCount; viewIndex++){
+			CSingleView* viewPtr = m_views.GetAt(viewIndex);
 
-		CSingleView* viewPtr = m_views.GetAt(index);
-		Q_ASSERT(viewPtr != NULL);
+			viewPtr->setTitle(m_optionsListCompPtr->GetOptionName(viewIndex));
+		}
+	}
 
-		viewExtenderPtr->RemoveItemsFromScene(viewPtr);
-		viewExtenderPtr->AddItemsToScene(viewPtr, updateFlags);
+	if (m_viewExtendersCompPtr.IsValid()){
+		usedViewsCount = qMin(viewsCount, m_viewExtendersCompPtr.GetCount());
+
+		for (int index = 0; index < usedViewsCount; index++){
+			iqt2d::IViewExtender* viewExtenderPtr = m_viewExtendersCompPtr[index];
+			Q_ASSERT(viewExtenderPtr != NULL);
+
+			CSingleView* viewPtr = m_views.GetAt(index);
+			Q_ASSERT(viewPtr != NULL);
+
+			viewExtenderPtr->RemoveItemsFromScene(viewPtr);
+			viewExtenderPtr->AddItemsToScene(viewPtr, updateFlags);
+		}
 	}
 }
 

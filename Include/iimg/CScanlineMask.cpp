@@ -787,6 +787,10 @@ void CScanlineMask::InitFromBoudingBox(const i2d::CRectangle& objectBoundingBox,
 		endLinePos = qMin(clipAreaPtr->GetBottom(), endLinePos);
 	}
 
+	if (endLinePos < firstLinePos){
+		endLinePos = firstLinePos;
+	}
+
 	ResetScanlines(istd::CIntRange(firstLinePos, endLinePos));
 }
 

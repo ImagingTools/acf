@@ -60,6 +60,7 @@ public:
 		I_ASSIGN(m_showStatusLabelAttrPtr, "ShowStatusLabel", "If active then status will be shown in the view's header", true, false);
 		I_ASSIGN(m_showStatusBackgroundAttrPtr, "ShowStatusBackground", "If active then status will be shown as the view's background color", true, false);
 		I_ASSIGN(m_viewBackgroundColorAttrPtr, "BackgroundColor", "Background color of the console", false, "black");
+		I_ASSIGN(m_optionsListCompPtr, "OptionsList", "List to provide dynamic descriptions", false, "");
 	I_END_COMPONENT;
 
 protected:
@@ -131,6 +132,7 @@ private:
 	I_ATTR(bool, m_showStatusLabelAttrPtr);
 	I_ATTR(bool, m_showStatusBackgroundAttrPtr);
 	I_ATTR(QByteArray, m_viewBackgroundColorAttrPtr);
+	I_REF(iprm::IOptionsList, m_optionsListCompPtr);
 	
 	int m_rowCount;
 	int m_columnCount;

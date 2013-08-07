@@ -20,7 +20,7 @@ istd::IChangeable* CBitmapDocument::InsertPage(
 
 	Bitmap* bitmapPtr = new Bitmap;
 
-	newPage.pageMetaInfo.SetDocumentMetaInfo(MIT_TITLE, pageTitle);
+	newPage.pageMetaInfo.SetDocumentMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE, pageTitle);
 	newPage.pagePtr.SetPtr(bitmapPtr);
 
 	if (position < 0){

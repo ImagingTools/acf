@@ -54,9 +54,16 @@ public:
 	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentCreated();
+
 private:
 	I_REF(ifile::IFilePersistence, m_bitmapPersistenceCompPtr);
 	I_ATTR(int, m_operationModeAttrPtr);
+
+	QString m_defaultSuffix;
+	QString m_defaultPageSuffix;
 };
 
 

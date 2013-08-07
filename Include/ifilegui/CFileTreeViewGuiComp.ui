@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>349</width>
+    <width>493</width>
     <height>437</height>
    </rect>
   </property>
@@ -52,7 +52,7 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="iqtgui.qrc">:/Icons/Luppe</pixmap>
+              <pixmap resource="../iqtgui/iqtgui.qrc">:/Icons/Luppe</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -84,7 +84,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="iqtgui.qrc">
+              <iconset resource="../iqtgui/iqtgui.qrc">
                <normaloff>:/Icons/Clear</normaloff>:/Icons/Clear</iconset>
              </property>
              <property name="iconSize">
@@ -120,7 +120,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="iqtgui.qrc">
+              <iconset resource="../iqtgui/iqtgui.qrc">
                <normaloff>:/Icons/Down</normaloff>:/Icons/Down</iconset>
              </property>
             </widget>
@@ -134,7 +134,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="iqtgui.qrc">
+              <iconset resource="../iqtgui/iqtgui.qrc">
                <normaloff>:/Icons/Up</normaloff>:/Icons/Up</iconset>
              </property>
             </widget>
@@ -190,7 +190,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="iqtgui.qrc">
+        <iconset resource="../iqtgui/iqtgui.qrc">
          <normaloff>:/Icons/Reload.svg</normaloff>:/Icons/Reload.svg</iconset>
        </property>
        <property name="shortcut">
@@ -238,7 +238,40 @@
   </layout>
  </widget>
  <resources>
-  <include location="iqtgui.qrc"/>
+  <include location="../iqtgui/iqtgui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>ExpandAll</sender>
+   <signal>clicked()</signal>
+   <receiver>FileList</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>287</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CollapseAll</sender>
+   <signal>clicked()</signal>
+   <receiver>FileList</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>445</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
