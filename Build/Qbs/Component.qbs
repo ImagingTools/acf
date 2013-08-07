@@ -4,7 +4,6 @@ Project{
 	name: "ACF-Component"
 
 	references: [
-		"../../Impl/AcfLoc/Qbs/AcfLoc.qbs",
 		"../../Impl/BasePck/Qbs/BasePck.qbs",
 		"../../Impl/BitmapPck/Qbs/BitmapPck.qbs",
 		"../../Impl/QtPck/Qbs/QtPck.qbs",

@@ -4,6 +4,7 @@ Project{
 	name: "ACF-Static"
 
 	references: [
+		"../../Impl/AcfLoc/Qbs/AcfLoc.qbs",
 		"../../Include/istd/Qbs/istd.qbs",
 		"../../Include/iser/Qbs/iser.qbs",
 		"../../Include/ilog/Qbs/ilog.qbs",

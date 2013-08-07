@@ -4,5 +4,16 @@ import "../../../Config/Qbs/StaticProduct.qbs" as StaticProduct
 StaticProduct{
 	name: "AcfLoc"
 
-	files: ["../*.ts", "../*.qrc"]
+	Group{
+		name: "translations"
+		files: ["../*.ts"]
+	}
+
+	Group{
+		name: "Resources"
+		files: ["../*.ts", "../*.qrc"]
+		fileTags: ["qm"]
+	}
+
+	Depends{ name: "Qt.core" }
 }
