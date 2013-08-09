@@ -78,6 +78,10 @@ bool CBitmapDocument::CopyFrom(const istd::IChangeable& object, CompatibilityMod
 			if (!pagePtr->CopyFrom(*sourcePagePtr)){
 				return false;
 			}
+
+			if (!m_documentPages[pageIndex].pageMetaInfo.CopyFrom(sourcePtr->m_documentPages.at(pageIndex).pageMetaInfo)){
+				return false;
+			}
 		}
 
 		return true;

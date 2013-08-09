@@ -50,19 +50,17 @@ bool CStandardDocumentMetaInfo::SetDocumentMetaInfo(int metaInfoType, const QVar
 {
 	MetaInfoTypes registeredTypes = GetSupportedMetaInfoTypes();
 
-	if (registeredTypes.contains(metaInfoType)){
-		if (m_infosMap[metaInfoType] != metaInfo){
-			istd::CChangeNotifier changePtr(this, CF_METAINFO | CF_MODEL);
-
-			m_infosMap[metaInfoType] = metaInfo;
-		}
-
-		return true;
+	if (!registeredTypes.contains(metaInfoType)){
+		qDebug("Meta info type is not supported by this implementation. You should re-implement GetSupportedMetaInfoTypes method for adding user specific meta info types");
 	}
 
-	qDebug("Meta info type is not supported by this implementation. You should re-implement GetSupportedMetaInfoTypes method for adding user specific meta info types");
+	if (m_infosMap[metaInfoType] != metaInfo){
+		istd::CChangeNotifier changePtr(this, CF_METAINFO | CF_MODEL);
 
-	return false;
+		m_infosMap[metaInfoType] = metaInfo;
+	}
+
+	return true;
 }
 
 
@@ -213,6 +211,18 @@ bool CStandardDocumentMetaInfo::IsEqual(const IChangeable& object) const
 	const CStandardDocumentMetaInfo* infoPtr = dynamic_cast<const CStandardDocumentMetaInfo*>(&object);
 	if (infoPtr != NULL){
 		return (m_infosMap == infoPtr->m_infosMap);
+	}
+
+	return false;
+}
+
+
+bool CStandardDocumentMetaInfo::CopyFrom(const IChangeable& object, CompatibilityMode /*mode = CM_WITHOUT_REFS*/)
+{
+	const CStandardDocumentMetaInfo* infoPtr = dynamic_cast<const CStandardDocumentMetaInfo*>(&object);
+	if (infoPtr != NULL){
+		m_infosMap = infoPtr->m_infosMap;
+		return true;
 	}
 
 	return false;
