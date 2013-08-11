@@ -1749,7 +1749,7 @@ QByteArray CRegistryCodeSaverComp::GetIdValueLiteral(const QByteArray& text) con
 		else if (c == '\"'){
 			retVal += "\\\"";
 		}
-		else if ((c >= 128) || (c < 32)){
+		else if ((c >= 127) || (c < 32)){
 			retVal += "\\x";
 			retVal += hexCiphers[(c >> 4) & 15];
 			retVal += hexCiphers[c & 15];

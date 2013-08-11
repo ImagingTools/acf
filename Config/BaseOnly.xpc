@@ -32,10 +32,10 @@
   </PackageDirs>
   <PackageFiles count="3">
     <FilePath>
-      ../Bin/$(ConfigurationName)/BasePck.arp
+      ../Bin/$(ConfigurationDir)BasePck.arp
     </FilePath>
     <FilePath>
-      ../Bin/$(ConfigurationName)/QtPck.arp
+      ../Bin/$(ConfigurationDir)QtPck.arp
     </FilePath>
     <FilePath>
       ../Partitura/AcfVoce.arp

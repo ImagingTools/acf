@@ -98,37 +98,16 @@ QString CSystem::FindVariableValue(const QString& varName)
 {
 	if (varName == "ConfigurationName"){
 #ifndef QT_NO_DEBUG
-	#ifdef _MSC_VER
-		#if _MSC_VER >= 1600
-			return "DebugVC10";
-		#elif _MSC_VER >= 1500
-			return "DebugVC9";
-		#elif _MSC_VER >= 1400
-			return "DebugVC8";
-		#elif _MSC_VER >= 1300
-			return "DebugVC7";
-		#else
-			return "DebugVC";
-		#endif
-	#else // _MSC_VER
-		return "DebugQMake";
-	#endif // _MSC_VER
-#else // !QT_NO_DEBUG
-	#ifdef _MSC_VER
-		#if _MSC_VER >= 1600
-			return "ReleaseVC10";
-		#elif _MSC_VER >= 1500
-			return "ReleaseVC9";
-		#elif _MSC_VER >= 1400
-			return "ReleaseVC8";
-		#elif _MSC_VER >= 1300
-			return "ReleaseVC7";
-		#else
-			return "ReleaseVC";
-		#endif
-	#else // _MSC_VER
-		return "ReleaseQMake";
-	#endif // _MSC_VER
+		return "Debug" + FindVariableValue("CompilerName");
+#else // QT_NO_DEBUG
+		return "Release" + FindVariableValue("CompilerName");
+#endif // !QT_NO_DEBUG
+	}
+	if (varName == "ConfigurationDir"){
+#ifndef I_QBS
+		return FindVariableValue("ConfigurationName") + "/";
+#else // I_QBS
+		return "";
 #endif // !QT_NO_DEBUG
 	}
 	else if (varName == "CompilerName"){
@@ -147,6 +126,9 @@ QString CSystem::FindVariableValue(const QString& varName)
 #else // _MSC_VER
 		return "QMake";
 #endif // _MSC_VER
+	}
+	else if (varName == "."){
+		return QDir::currentPath();
 	}
 
 	EnvironmentVariables environmentVariables = GetEnvironmentVariables();

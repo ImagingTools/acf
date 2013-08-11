@@ -1,9 +1,11 @@
 import qbs.base 1.0
 import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
 
-ApplicationProduct
-{
+ApplicationProduct{
 	name: "Acf"
+
+	type: ["application", "acfTool"]
+	consoleApplication: true
 
 	files: ["../*.cpp"]
 

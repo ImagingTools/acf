@@ -28,15 +28,18 @@
   </AcfHeader>
   <ConfigFiles count="0">
   </ConfigFiles>
-  <PackageDirs count="4">
+  <PackageDirs count="5">
     <Dir>
-      ../Bin/$(ConfigurationName)
+      $(.)
+    </Dir>
+    <Dir>
+      ../Bin/$(ConfigurationDir)
     </Dir>
     <Dir>
       ../Partitura
     </Dir>
     <Dir>
-      ../Bin/$(ConfigurationName)/Tutorial
+      ../Bin/$(ConfigurationDir)Tutorial
     </Dir>
     <Dir>
       ../Docs/Tutorial/Partitura

@@ -46,14 +46,10 @@ Module{
 		fileTags: ["xtracf"]
 	}
 
-	FileTagger{
-		pattern: "*Pck.arp"
-		fileTags: ["acf-components"]
-	}
-
 	Rule{
 		id: arxCompiler
 		inputs: ["arx"]
+		explicitlyDependsOn: ["acfComponent", "acfTool"]
 
 		Artifact{
 			fileName: product.name + '/Generated/C' + input.baseName + '.cpp'

@@ -2,7 +2,11 @@
 
 
 // Qt includes
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QTabWidget>
+#else
 #include <QtGui/QTabWidget>
+#endif
 
 
 namespace iqtgui
