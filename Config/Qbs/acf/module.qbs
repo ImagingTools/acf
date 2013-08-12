@@ -49,7 +49,9 @@ Module{
 	Rule{
 		id: arxCompiler
 		inputs: ["arx"]
-		explicitlyDependsOn: ["acfComponent", "acfTool"]
+		auxiliaryInputs: ["dynamiclibrary", "application"]
+		usings: ["dynamiclibrary", "application"]
+		explicitlyDependsOn: ["acfTool", "acfComponent"]
 
 		Artifact{
 			fileName: product.name + '/Generated/C' + input.baseName + '.cpp'
@@ -62,10 +64,10 @@ Module{
 
 		prepare:{
 			var cmd = new Command(product.buildDirectory + '/Bin/' + product.moduleProperty("cpp", "executablePrefix") + 'Arxc' + product.moduleProperty("cpp", "executableSuffix"), [
-						input.fileName,
+						inputs.arx[0].fileName,
 						'-config', product.moduleProperty("acf", "acfConfigurationFile"),
 						'-o', outputs.cpp[0].fileName]);
-			cmd.description = 'arxc ' + FileInfo.fileName(input.fileName)
+			cmd.description = 'arxc ' + FileInfo.fileName(inputs.arx[0].fileName)
 			cmd.highlight = 'codegen';
 			cmd.workingDirectory = product.buildDirectory + '/Bin/';
 
