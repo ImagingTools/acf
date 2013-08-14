@@ -15,6 +15,5 @@ StaticProduct{
 		fileTags: ["qrc_generated"]
 	}
 
-	Depends{ name: "acf" }
 	Qt.core.qmFilesDir: Qt.core.generatedFilesDir
 }

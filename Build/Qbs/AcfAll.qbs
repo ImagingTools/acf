@@ -4,10 +4,13 @@ Project{
 	name: "AcfAll"
 	id: acfCore
 
-	property path acfDir: "../../"
-	property path acfConfigDir: "../../Config/Qbs/"
-
 	moduleSearchPaths: ["../../Config/Qbs"]
+
+	Properties{
+		condition: true
+		Depends{ name: "acf" }
+		acf.projectRoot: "../../"
+	}
 
 	Project{
 		name: "ACF-Static"

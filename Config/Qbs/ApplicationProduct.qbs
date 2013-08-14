@@ -4,6 +4,7 @@ import qbs.base 1.0
 Application{
 	destinationDirectory: "Bin"
 
+	Depends{ name: "acf" }
 	Depends{ name: "Qt.core" }
 	Depends{ name: "cpp" }
 

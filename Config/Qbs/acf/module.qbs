@@ -1,11 +1,15 @@
 import qbs.base 1.0
-import qbs.FileInfo
+import qbs.TextFile
+import "fileinfo.js" as FileInfo
 
 Module{
 	name: "acf"
 
 	Depends{ name: "Qt.core" }
 	Depends{ name: "cpp" }
+
+	// root of the whole project
+	property path projectRoot
 
 	property string COMPILER_NAME: "Qbs"
 
@@ -136,6 +140,66 @@ Module{
 			commands.push(copyCmd);
 			commands.push(rccCmd);
 			return commands;
+		}
+	}
+
+	Rule{
+		id: acfShareGenerator
+		multiplex: true
+		inputs: ["cpp", "c", "objcpp", "objc"]
+
+		Artifact{
+			fileName: "share/qbs/modules/" + product.name + '.qbs'
+			fileTags: ["acf_share"]
+		}
+		prepare:{
+			var cmd = new JavaScriptCommand();
+			cmd.description = "generating shared module " + product.name;
+			cmd.highlight = "codegen";
+			cmd.sourceCode = function(){
+				var outputFilePath = output.fileName;
+
+				var pkginfo = new TextFile(outputFilePath, TextFile.WriteOnly);
+				pkginfo.write("import qbs 1.0\n");
+				pkginfo.write("\n");
+				pkginfo.write("Module{\n");
+				pkginfo.write("	Depends{ name: 'cpp' }\n");
+
+				if (product.type.contains("staticlibrary")){
+					var libraryFileName = product.moduleProperty("cpp", "staticLibraryPrefix") + product.targetName + product.moduleProperty("cpp", "staticLibrarySuffix");
+					pkginfo.write("	cpp.staticLibraries: '../../../" + product.destinationDirectory + "/" + libraryFileName + "'\n");
+				}
+
+				var includePaths = product.moduleProperties("cpp", "includePaths");
+
+				var outputDir = FileInfo.path(outputFilePath);
+
+				var projectRoot = product.moduleProperty("acf", "projectRoot");
+				if (projectRoot !== undefined && !FileInfo.isAbsolutePath(projectRoot)){
+					projectRoot = FileInfo.joinPaths(product.sourceDirectory, projectRoot);
+				}
+
+				var correctedPathsMap = {};
+				for (i in includePaths){
+					var includePath = includePaths[i];
+					if (		FileInfo.isSubpath(product.buildDirectory, includePath) ||
+								(projectRoot !== undefined && FileInfo.isSubpath(projectRoot, includePath))){
+						correctedPathsMap[FileInfo.relativePath(outputDir, includePath)] = true;
+					}
+				}
+
+				var isFirst = true;
+				pkginfo.write("	cpp.includePaths: [");
+				for (var path in correctedPathsMap){
+					pkginfo.write((isFirst? "\n		'": ",\n		'") + path + "'");
+					isFirst = false;
+				}
+				pkginfo.write("\n	]\n");
+
+				pkginfo.write("}\n");
+				pkginfo.close();
+			}
+			return cmd;
 		}
 	}
 }
