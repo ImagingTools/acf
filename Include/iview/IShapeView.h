@@ -111,12 +111,12 @@ public:
 	/**
 		Called when shape in layer get focus.
 	*/
-	virtual void OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr) = 0;
+	virtual void OnLayerShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr) = 0;
 
 	/**
 		Called when shape in layer loose focus.
 	*/
-	virtual void OnShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr) = 0;
+	virtual void OnLayerShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr) = 0;
 	
 	/**
 		Inform that layer was invalidated.

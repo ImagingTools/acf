@@ -85,7 +85,7 @@ private:
 		virtual bool SetOptionEnabled(int index, bool isEnabled = true);
 		virtual bool RemoveOption(int index);
 		virtual bool InsertOption(
-			QString& optionName,
+			const QString& optionName,
 			const QByteArray& optionId,
 			const QString& optionDescription = QString(), 
 			int index = -1);

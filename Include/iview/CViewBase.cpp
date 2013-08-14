@@ -399,7 +399,7 @@ ISelectableLayer* CViewBase::GetFocusedLayerPtr() const
 }
 
 
-void CViewBase::OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr)
+void CViewBase::OnLayerShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr)
 {
 	Q_ASSERT(layerPtr != NULL);
 
@@ -411,7 +411,7 @@ void CViewBase::OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* la
 }
 
 
-void CViewBase::OnShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr)
+void CViewBase::OnLayerShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr)
 {
 	Q_ASSERT(layerPtr != NULL);
 

@@ -204,7 +204,7 @@ bool CContainerGuiBase::TabModel::RemoveOption(int /*index*/)
 
 
 bool CContainerGuiBase::TabModel::InsertOption(
-	QString& /*optionName*/,
+	const QString& /*optionName*/,
 	const QByteArray& /*optionId*/,
 	const QString& /*optionDescription*/, 
 	int /*index*/)

@@ -123,8 +123,8 @@ public:
 	virtual IViewLayer& GetLayer(int index) const;
 	virtual bool ConnectShape(IShape* shapePtr);
 	virtual ISelectableLayer* GetFocusedLayerPtr() const;
-	virtual void OnShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
-	virtual void OnShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
+	virtual void OnLayerShapeFocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
+	virtual void OnLayerShapeDefocused(IInteractiveShape* shapePtr, ISelectableLayer* layerPtr);
 	virtual void OnLayerInvalidated(const IViewLayer& layer, const i2d::CRect& prevArea, const i2d::CRect& newArea);
 
 	// reimplemented (iview::ISelectable)

@@ -71,15 +71,14 @@ private Q_SLOTS:
 	void OnUpdateDocumentList();
 
 private:
-	/**
-		Maximal length of a document file path.
-	*/
-	static const int MAX_DOCUMENT_PATH_LENGTH = 1024;
-
-	/**
-		Maximal number of document, which can be opened from the shell.
-	*/
 	enum{
+		/**
+			Maximal length of a document file path.
+		*/
+		MAX_DOCUMENT_PATH_LENGTH = 1024,
+		/**
+			Maximal number of document, which can be opened from the shell.
+		*/
 		MAX_DOCUMENTS_COUNT = 100
 	};
 
