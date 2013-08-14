@@ -8,13 +8,13 @@ StaticProduct{
 
 	Depends{ name: "iview" }
 	Depends{ name: "i2d" }
-	Depends{ name: "Qt.gui" }
 	Depends{ name: "Qt.widgets" }
+	Depends{ name: "Qt.gui" }
 
 	Export{
 		Depends{ name: "iview" }
 		Depends{ name: "i2d" }
-		Depends{ name: "Qt.gui" }
 		Depends{ name: "Qt.widgets" }
+		Depends{ name: "Qt.gui" }
 	}
 }

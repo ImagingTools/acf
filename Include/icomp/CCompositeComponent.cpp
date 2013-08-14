@@ -181,7 +181,7 @@ void* CCompositeComponent::GetInterface(const istd::CClassInfo& interfaceType, c
 {
 	const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(GetComponentContext());
 	if (contextPtr == NULL){
-		qCritical("Composite component dosn't use corresponding context");
+		qCritical("Composite component doesn't use corresponding context");
 
 		return NULL;
 	}
