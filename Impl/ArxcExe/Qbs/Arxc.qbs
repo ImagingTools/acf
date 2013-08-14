@@ -1,16 +1,32 @@
 import qbs.base 1.0
 import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
 
-ApplicationProduct{
-	name: "Arxc"
+Project{
+	StaticLibrary{
+		name: "_Arxc"
 
-	type: ["application", "acfTool"]
-	consoleApplication: true
+		files: ["empty.cpp"]
 
-	files: ["../*.cpp"]
+		Depends{ name: "QtPck" }
+		Depends{ name: "BasePck" }
+		Depends{ name: "FilePck" }
+		Depends{ name: "PackagePck" }
+	}
 
-	Depends{ name: "QtPck" }
-	Depends{ name: "BasePck" }
-	Depends{ name: "FilePck" }
-	Depends{ name: "PackagePck" }
+	ApplicationProduct{
+		name: "Arxc"
+
+		files: ["../*.cpp"]
+
+		cpp.includePaths: "../.."
+
+		Depends{ name: "_Arxc" }
+
+		Depends{ name: "ifile" }
+		Depends{ name: "iqt" }
+		Depends{ name: "ibase" }
+		Depends{ name: "ipackage" }
+
+		consoleApplication: true
+	}
 }

@@ -4,8 +4,6 @@ import qbs.base 1.0
 DynamicLibrary{
 	destinationDirectory: "Bin"
 
-	type: ["dynamiclibrary", "acfComponent"]
-
 	Depends{ name: "Qt.core" }
 	Depends{ name: "cpp" }
 	Depends{ name: "ipackage" }

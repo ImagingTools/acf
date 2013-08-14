@@ -49,9 +49,7 @@ Module{
 	Rule{
 		id: arxCompiler
 		inputs: ["arx"]
-		auxiliaryInputs: ["dynamiclibrary", "application"]
-		usings: ["dynamiclibrary", "application"]
-		explicitlyDependsOn: ["acfTool", "acfComponent"]
+		usings: ["application", "dynamiclibrary"]
 
 		Artifact{
 			fileName: product.name + '/Generated/C' + input.baseName + '.cpp'
@@ -59,7 +57,7 @@ Module{
 		}
 		Artifact{
 			fileName: product.name + '/Generated/C' + input.baseName + '.h'
-			fileTags: ["hpp"]
+			fileTags: ["hpp", "c++_pch"]
 		}
 
 		prepare:{
