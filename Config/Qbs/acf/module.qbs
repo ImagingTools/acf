@@ -159,7 +159,7 @@ Module{
 		inputs: ["cpp", "c", "objcpp", "objc"]
 
 		Artifact{
-			fileName: "share/qbs/modules/" + product.name + '.qbs'
+			fileName: "share/qbs/modules/" + product.name + "/" + product.name + ".qbs"
 			fileTags: ["acf_share"]
 		}
 		prepare:{
@@ -177,7 +177,7 @@ Module{
 
 				if (product.type.contains("staticlibrary")){
 					var libraryFileName = product.moduleProperty("cpp", "staticLibraryPrefix") + product.targetName + product.moduleProperty("cpp", "staticLibrarySuffix");
-					pkginfo.write("	cpp.staticLibraries: '../../../" + product.destinationDirectory + "/" + libraryFileName + "'\n");
+					pkginfo.write("	cpp.staticLibraries: '../../../../" + product.destinationDirectory + "/" + libraryFileName + "'\n");
 				}
 
 				var includePaths = product.moduleProperties("cpp", "includePaths");
