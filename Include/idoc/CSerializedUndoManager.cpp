@@ -5,6 +5,7 @@
 #include "istd/TChangeNotifier.h"
 #include "iser/CMemoryReadArchive.h"
 #include "icomp/CComponentBase.h"
+#include "i2d/IObject2d.h"
 
 
 namespace idoc
@@ -150,14 +151,16 @@ void CSerializedUndoManager::BeforeUpdate(imod::IModel* modelPtr, int updateFlag
 {
 	BaseClass::BeforeUpdate(modelPtr, updateFlags, updateParamsPtr);
 
-	if (((updateFlags & istd::IChangeable::CF_NO_UNDO) == 0) && !m_beginStateArchivePtr.IsValid()){
+	if (	((updateFlags & istd::IChangeable::CF_NO_UNDO) == 0) 
+			&& ((updateFlags & i2d::IObject2d::CF_OBJECT_END_TRANSFORM) == 0) 
+			&& !m_beginStateArchivePtr.IsValid()){
 		iser::ISerializable* objectPtr = GetObjectPtr();
 		if (objectPtr != NULL){
 			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
 
 			if (		archivePtr.IsValid() &&
 						objectPtr->Serialize(*archivePtr) &&
-						(m_undoList.isEmpty() || *archivePtr != *m_undoList.back())){
+						(m_undoList.isEmpty() || *archivePtr != *m_undoList.back() || (updateFlags & i2d::IObject2d::CF_OBJECT_START_TRANSFORM))){
 				m_beginStateArchivePtr.TakeOver(archivePtr);
 			}
 		}
@@ -169,17 +172,21 @@ void CSerializedUndoManager::AfterUpdate(imod::IModel* modelPtr, int updateFlags
 {
 	istd::CChangeNotifier selfNotifierPtr(NULL);
 
-	if (((updateFlags & istd::IChangeable::CF_NO_UNDO) == 0) && m_beginStateArchivePtr.IsValid()){
+	if (	((updateFlags & istd::IChangeable::CF_NO_UNDO) == 0) 
+			&& ((updateFlags & i2d::IObject2d::CF_OBJECT_START_TRANSFORM) == 0) 
+			&& m_beginStateArchivePtr.IsValid()){
 		iser::ISerializable* objectPtr = GetObjectPtr();
 		if (objectPtr != NULL){
 			UndoArchivePtr archivePtr(new iser::CMemoryWriteArchive());
 
-			if (objectPtr->Serialize(*archivePtr) && (*archivePtr != *m_beginStateArchivePtr)){
-				selfNotifierPtr.SetPtr(this);
+			if (objectPtr->Serialize(*archivePtr)){
+				if (*archivePtr != *m_beginStateArchivePtr){
+					selfNotifierPtr.SetPtr(this);
 
-				m_undoList.push_back(UndoArchivePtr());
-				m_undoList.back().TakeOver(m_beginStateArchivePtr);
-				m_redoList.clear();
+					m_undoList.push_back(UndoArchivePtr());
+					m_undoList.back().TakeOver(m_beginStateArchivePtr);
+					m_redoList.clear();
+				}
 			}
 		}
 

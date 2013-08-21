@@ -6,8 +6,6 @@
 
 
 // ACF includes
-#include "istd/IChangeable.h"
-#include "istd/TChangeNotifier.h"
 #include "iqt/iqt.h"
 
 #include "iview/ISelectable.h"
@@ -64,8 +62,18 @@ void CInteractiveShapeBase::SetSelected(bool selectFlag)
 
 // reimplemented (iview::IMouseActionObserver)
 
-bool CInteractiveShapeBase::OnMouseButton(istd::CIndex2d /*position*/, Qt::MouseButton /*buttonType*/, bool /*downFlag*/)
+bool CInteractiveShapeBase::OnMouseButton(istd::CIndex2d /*position*/, Qt::MouseButton buttonType, bool downFlag)
 {
+	i2d::CObject2dBase* objectPtr = dynamic_cast<i2d::CObject2dBase*>(GetModelPtr());
+	if (objectPtr != NULL && buttonType == Qt::LeftButton){
+		if (downFlag){
+			objectPtr->StartTransform();
+		} 
+		else {
+			objectPtr->FinishTransform();
+		}
+	}
+
 	return false;
 }
 
@@ -122,9 +130,13 @@ void CInteractiveShapeBase::EndModelChanges()
 
 void CInteractiveShapeBase::UpdateModelChanges()
 {
-	istd::IChangeable* objectPtr = dynamic_cast<istd::IChangeable*>(GetModelPtr());
+	i2d::CObject2dBase* objectPtr = dynamic_cast<i2d::CObject2dBase*>(GetModelPtr());
+	int flags = istd::IChangeable::CF_MODEL;
+	if (!objectPtr->IsUndoAllowed()){
+		flags |= istd::IChangeable::CF_NO_UNDO;
+	}
 
-	istd::CChangeNotifier changePtr(objectPtr, istd::IChangeable::CF_MODEL);
+	istd::CChangeNotifier changePtr(objectPtr, flags);
 }
 
 

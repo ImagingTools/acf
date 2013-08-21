@@ -96,6 +96,8 @@ bool CAnnulusShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton butto
 {
 	Q_ASSERT(IsDisplayConnected());
 
+	ShapeBaseClass::OnMouseButton(position, buttonType, downFlag);
+
 	const i2d::CAnnulus* annulusPtr = dynamic_cast<const i2d::CAnnulus*>(GetModelPtr());
 	if (annulusPtr != NULL){
 		if (downFlag && IsEditableRadius()){

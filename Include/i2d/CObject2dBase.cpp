@@ -1,18 +1,45 @@
 #include "i2d/CObject2dBase.h"
 
 
+#include "istd/TChangeNotifier.h"
+
+
 namespace i2d
 {
 
 
 CObject2dBase::CObject2dBase()
+:	m_isUndoAllowed(true)
 {
 }
 
 
 CObject2dBase::CObject2dBase(const CObject2dBase& object2d)
-:	m_calibrationPtr(object2d.m_calibrationPtr)
+:	m_calibrationPtr(object2d.m_calibrationPtr),
+	m_isUndoAllowed(true)
 {
+}
+
+
+void CObject2dBase::StartTransform()
+{
+	istd::CChangeNotifier changePtr(this, i2d::IObject2d::CF_OBJECT_START_TRANSFORM);
+
+	m_isUndoAllowed = false;
+}
+
+
+void CObject2dBase::FinishTransform()
+{
+	m_isUndoAllowed = true;
+
+	istd::CChangeNotifier changePtr(this, i2d::IObject2d::CF_OBJECT_END_TRANSFORM);
+}
+
+
+bool CObject2dBase::IsUndoAllowed() const
+{
+	return m_isUndoAllowed;
 }
 
 

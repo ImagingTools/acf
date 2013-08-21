@@ -78,9 +78,11 @@ void CPinShape::Draw(QPainter& drawContext) const
 
 // reimplemented (iview::IMouseActionObserver)
 
-bool CPinShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton /*buttonType*/, bool downFlag)
+bool CPinShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonType, bool downFlag)
 {
 	Q_ASSERT(IsDisplayConnected());
+
+	BaseClass::OnMouseButton(position, buttonType, downFlag);
 
 	if (!IsEditablePosition()){
 		EndModelChanges();
