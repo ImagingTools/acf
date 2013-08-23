@@ -4,7 +4,7 @@ import qbs.base 1.0
 DynamicLibrary{
 	type: ["dynamiclibrary", "acf_share", "acfComponent"]
 
-	destinationDirectory: "Bin"
+	destinationDirectory: "Bin/" + acf.compilerDir
 
 	Depends{ name: "ipackage" }
 	Depends{ name: "acf" }

@@ -35,11 +35,19 @@ function relativePath(base, rel)
     var rell  = rel.split('/');
     var i;
     for (i = basel.length; i-- >= 0;) {
-        if (basel[i] === '.' || basel[i] === '')
+        if (basel[i] === '.')
+            basel.splice(i, 1);
+    }
+    for (i = basel.length; i-- >= 1;) {
+        if (basel[i] === '')
             basel.splice(i, 1);
     }
     for (i = rell.length; i-- >= 0;) {
-        if (rell[i] === '.' || rell[i] === '')
+        if (rell[i] === '.')
+            rell.splice(i, 1);
+    }
+    for (i = rell.length; i-- >= 1;) {
+        if (rell[i] === '')
             rell.splice(i, 1);
     }
 
@@ -50,7 +58,9 @@ function relativePath(base, rel)
     var j = i;
     var r = [];
 
-    if (i > 0){
+    var useAbsolutePath = (i == 0) && (rell.length > 0) && (rell[0] == "" || (rell[0].search(":") >= 0));
+
+    if (!useAbsolutePath){
         for (; i < basel.length; i++)
             r.push('..');
     }
@@ -122,4 +132,15 @@ function joinPaths()
     var joinedPaths = paths.join('/');
 
     return joinedPaths.replace(removeDoubleSlashesPattern, "/")
+}
+
+function getGeneratedPath()
+{
+    var outputDir = product.moduleProperty("acf", "generatedOutputDir");
+    if (outputDir == null){
+        return "GeneratedFiles/" + product.name;
+    }
+    else{
+        return outputDir;
+    }
 }

@@ -4,7 +4,7 @@ import qbs.base 1.0
 Application{
 	type: ["application", "acf_share"]
 
-	destinationDirectory: "Bin"
+	destinationDirectory: "Bin/" + acf.compilerDir
 
 	Depends{ name: "acf" }
 	Depends{ name: "Qt.core" }

@@ -46,10 +46,12 @@ Module{
 	}
 
 	property string compilerDir: compileMode + compilerName
+	property string generatedOutputDir								// Path where stuff will be generated if undefined "GeneratedPath/" + product.name will be taken
 	property path acfConfigurationFile								// ACF configuration file ARX compiler
 	property path trConfigurationFile: acfConfigurationFile			// ACF configuration file for xtracf transformations
 	property path trRegFile											// ACF registry file for xtracf transformations
-	property pathList xpcPackageDirs								// Extra directories placed into generated XPC file
+	property stringList trOutputType								// ACF transformation output tags
+	property stringList xpcPackageDirs								// Extra directories placed into generated XPC file
 
 	FileTagger{
 		pattern: "*.arx"
@@ -77,11 +79,11 @@ Module{
 		usings: ["application", "dynamiclibrary", "xpc"]
 
 		Artifact{
-			fileName: "GeneratedFiles/" + product.name + "/C" + input.baseName + ".cpp"
+			fileName: FileInfo.getGeneratedPath() + "/C" + input.baseName + ".cpp"
 			fileTags: ["cpp"]
 		}
 		Artifact{
-			fileName: "GeneratedFiles/" + product.name + "/C" + input.baseName + ".h"
+			fileName: FileInfo.getGeneratedPath() + "/C" + input.baseName + ".h"
 			fileTags: ["hpp", "c++_pch"]
 		}
 
@@ -89,7 +91,7 @@ Module{
 			// get the ACF binary directory
 			var acfBinDirectory = product.moduleProperty("Arxc", "acfBinDirectory");
 			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory + '/Bin';
+				acfBinDirectory = product.buildDirectory + '/Bin/' + product.moduleProperty("acf", "compilerDir");
 			}
 
 			// get the ACF configuration file
@@ -130,14 +132,15 @@ Module{
 		inputs: ["xtracf"]
 
 		Artifact{
-			fileName: "GeneratedFiles/" + product.name + "/" + input.completeBaseName
+			fileName: FileInfo.getGeneratedPath() + "/" + input.completeBaseName
+			fileTags: { return product.moduleProperty("acf", "trOutputType"); }
 		}
 
 		prepare:{
 			// get the ACF binary directory
 			var acfBinDirectory = product.moduleProperty("Arxc", "acfBinDirectory");
 			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory + '/Bin';
+				acfBinDirectory = product.buildDirectory + '/Bin/' + compilerDir;
 			}
 
 			// get the ACF configuration file
@@ -181,7 +184,7 @@ Module{
 		explicitlyDependsOn: ["qm"]
 
 		Artifact{
-			fileName: "GeneratedFiles/" + product.name + "/qrc_" + input.completeBaseName + ".cpp"
+			fileName: FileInfo.getGeneratedPath() + "/qrc_" + input.completeBaseName + ".cpp"
 			fileTags: ["cpp"]
 		}
 		prepare:{
@@ -360,7 +363,7 @@ Module{
 						configsList.push(FileInfo.relativePath(outputDir, dependencyFilePath));
 					}
 					else if (dependency.type.contains("xpc")){
-						configsList.push("../" + dependency.destinationDirectory + "/" + dependency.name + ".xpc");
+						configsList.push(FileInfo.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".xpc"));
 					}
 				}
 
@@ -388,7 +391,7 @@ Module{
 							packagesList.push(FileInfo.relativePath(outputDir, dependencyFilePath));
 						}
 						else{
-							packagesList.push("../" + dependency.destinationDirectory + "/" + dependency.name + ".arp");
+							packagesList.push(FileInfo.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".arp"));
 						}
 					}
 				}
