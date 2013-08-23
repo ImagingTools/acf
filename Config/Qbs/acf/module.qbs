@@ -86,11 +86,13 @@ Module{
 		}
 
 		prepare:{
-			var arxcDirectory = product.moduleProperty("Arxc", "acfBinDirectory");
-			if (arxcDirectory == null){
-				arxcDirectory = product.buildDirectory + '/Bin';
+			// get the ACF binary directory
+			var acfBinDirectory = product.moduleProperty("Arxc", "acfBinDirectory");
+			if (acfBinDirectory == null){
+				acfBinDirectory = product.buildDirectory + '/Bin';
 			}
 
+			// get the ACF configuration file
 			var acfConfigurationFile = product.moduleProperty("acf", "acfConfigurationFile");
 			if (acfConfigurationFile == null){
 				var dependencies = product.dependencies;
@@ -106,17 +108,18 @@ Module{
 				}
 			}
 
+			// if there is no configuration - error
 			if (acfConfigurationFile == null){
 				return null;
 			}
 
-			var cmd = new Command(arxcDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
+			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
 						inputs.arx[0].fileName,
 						'-config', acfConfigurationFile,
 						'-o', outputs.cpp[0].fileName]);
 			cmd.description = 'arxc ' + FileInfo.fileName(inputs.arx[0].fileName)
 			cmd.highlight = 'codegen';
-			cmd.workingDirectory = arxcDirectory;
+			cmd.workingDirectory = acfBinDirectory;
 
 			return cmd;
 		}
@@ -131,19 +134,41 @@ Module{
 		}
 
 		prepare:{
-			var arxcDirectory = product.moduleProperty("Arxc", "acfBinDirectory");
-			if (arxcDirectory == null){
-				arxcDirectory = product.buildDirectory + '/Bin';
+			// get the ACF binary directory
+			var acfBinDirectory = product.moduleProperty("Arxc", "acfBinDirectory");
+			if (acfBinDirectory == null){
+				acfBinDirectory = product.buildDirectory + '/Bin';
 			}
 
-			var cmd = new Command(arxcDirectory + '/' + product.moduleProperty("cpp", "executablePrefix") + 'Acf' + product.moduleProperty("cpp", "executableSuffix"), [
+			// get the ACF configuration file
+			var acfConfigurationFile = product.moduleProperty("acf", "trConfigurationFile");
+			if (acfConfigurationFile == null){
+				var dependencies = product.dependencies;
+				for (var dependencyIndex in dependencies) {
+					var dependency = dependencies[dependencyIndex];
+					var dependencyFilePath = product.moduleProperty(dependency.name, "xpcFilePath");
+					if (dependencyFilePath != null){
+						acfConfigurationFile = dependencyFilePath;
+					}
+					else if (dependency.type.contains("xpc")){
+						acfConfigurationFile = product.buildDirectory + "/" + dependency.destinationDirectory + "/" + dependency.name + ".xpc";
+					}
+				}
+			}
+
+			// if there is no configuration - error
+			if (acfConfigurationFile == null){
+				return null;
+			}
+
+			var cmd = new Command(acfBinDirectory + '/' + product.moduleProperty("cpp", "executablePrefix") + 'Acf' + product.moduleProperty("cpp", "executableSuffix"), [
 						product.moduleProperty("acf", "trRegFile").fileName,
-						'-config', product.moduleProperty("acf", "trConfigurationFile").fileName,
+						'-config', acfConfigurationFile,
 						'-input', input.fileName,
 						'-o', output.fileName]);
 			cmd.description = 'acf transformation ' + FileInfo.fileName(input.fileName)
 			cmd.highlight = 'codegen';
-			cmd.workingDirectory = arxcDirectory;
+			cmd.workingDirectory = acfBinDirectory;
 
 			return cmd;
 		}
