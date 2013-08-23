@@ -9,7 +9,7 @@
 // Tutorial includes
 #include "IAb.h"
 
-#include "GeneratedFiles/CAbGuiComp/ui_CAbGuiComp.h"
+#include "GeneratedFiles/ModelObserver/ui_CAbGuiComp.h"
 
 
 /**
