@@ -235,7 +235,7 @@
 					>
 					<Tool
 						Name="QT Resources"
-						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\GeneratedFiles\Acf_en_US.qm;..\GeneratedFiles\Acf_de_DE.qm;..\GeneratedFiles\Acf_ru_RU.qm;..\GeneratedFiles\Acf_pl_PL.qm"
+						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\..\GeneratedFiles\AcfLoc\Acf_en_US.qm;..\..\GeneratedFiles\AcfLoc\Acf_de_DE.qm;..\..\GeneratedFiles\AcfLoc\Acf_ru_RU.qm;..\..\GeneratedFiles\AcfLoc\Acf_pl_PL.qm"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -243,7 +243,7 @@
 					>
 					<Tool
 						Name="QT Resources"
-						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\GeneratedFiles\Acf_en_US.qm;..\GeneratedFiles\Acf_de_DE.qm;..\GeneratedFiles\Acf_ru_RU.qm;..\GeneratedFiles\Acf_pl_PL.qm"
+						AdditionalDependencies="$(QTDIR)\bin\rcc.exe;..\..\GeneratedFiles\AcfLoc\Acf_en_US.qm;..\..\GeneratedFiles\AcfLoc\Acf_de_DE.qm;..\..\GeneratedFiles\AcfLoc\Acf_ru_RU.qm;..\..\GeneratedFiles\AcfLoc\Acf_pl_PL.qm"
 					/>
 				</FileConfiguration>
 			</File>
