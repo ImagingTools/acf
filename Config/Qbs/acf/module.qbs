@@ -24,6 +24,10 @@ Module{
 		compilerName: "OSX"
 	}
 	Properties{
+		condition: qbs.toolchain.contains("mingw")
+		compilerName: "MinGW"
+	}
+	Properties{
 		condition: qbs.toolchain.contains("msvc") && (cpp.toolchainInstallPath.search(/Studio 8/i) >= 0 || cpp.toolchainInstallPath.search(/2005/i) >= 0)
 		compilerName: "VC8"
 	}
