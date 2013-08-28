@@ -62,7 +62,7 @@ bool CSettingsContainerGuiComp::CreateMainGui(QSize iconSize)
 }
 
 
-int CSettingsContainerGuiComp::CreatePageGui(const QString& name, QSize /*iconSize*/, iqtgui::IGuiObject* guiPtr)
+int CSettingsContainerGuiComp::CreatePageGui(const QString& name, QSize iconSize, iqtgui::IGuiObject* guiPtr)
 {
 	if (guiPtr == NULL || m_stackedWidgetPtr == NULL || m_menuListPtr == NULL){
 		return -1;
@@ -72,7 +72,13 @@ int CSettingsContainerGuiComp::CreatePageGui(const QString& name, QSize /*iconSi
 		return -1;
 	}
 
-	m_menuListPtr->addItem(new QListWidgetItem(name));
+	QListWidgetItem* itemPtr = new QListWidgetItem(name);
+	m_menuListPtr->addItem(itemPtr);
+
+	if (m_fixedHeightAttrPtr.IsValid()){
+		int height = qMax(iconSize.height(), *m_fixedHeightAttrPtr);
+		itemPtr->setSizeHint(QSize(itemPtr->sizeHint().width(), height));
+	}
 
 	return m_stackedWidgetPtr->addWidget(guiPtr->GetWidget());
 }

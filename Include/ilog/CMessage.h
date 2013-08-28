@@ -54,6 +54,8 @@ public:
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
 	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
+	static QByteArray GetMessageTypeId();
+
 protected:
 	istd::IInformationProvider::InformationCategory m_category;
 	int m_id;

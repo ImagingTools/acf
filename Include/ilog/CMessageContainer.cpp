@@ -101,12 +101,12 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 
 			iser::IObject* messageObjectPtr = const_cast<iser::IObject*>(dynamic_cast<const iser::IObject*>(messagePtr.GetPtr()));
 			if (messageObjectPtr != NULL){
-				QByteArray messageTypeId  = messageObjectPtr->GetFactoryId();
-				retVal = retVal && archive.BeginTag(messageTypeIdTag);
-				retVal = retVal && archive.Process(messageTypeId);
-				retVal = retVal && archive.EndTag(messageTypeIdTag);
+				QByteArray messageTypeId = messageObjectPtr->GetFactoryId();
+				if (knownMessageTypes.indexOf(messageTypeId) >= 0){
+					retVal = retVal && archive.BeginTag(messageTypeIdTag);
+					retVal = retVal && archive.Process(messageTypeId);
+					retVal = retVal && archive.EndTag(messageTypeIdTag);
 
-				if (archive.IsStoring()){
 					retVal = retVal && archive.BeginTag(messageTag);
 					retVal = retVal && messageObjectPtr->Serialize(archive);
 					retVal = retVal && archive.EndTag(messageTag);
@@ -341,7 +341,7 @@ CMessageContainer::MessageFactory& CMessageContainer::GetMessageFactory()
 }
 
 
-I_REGISTER_MESSAGE_TYPE(CMessage, "DefaultMessage");
+I_REGISTER_MESSAGE_TYPE(CMessage, CMessage::GetMessageTypeId());
 
 
 } // namespace ilog
