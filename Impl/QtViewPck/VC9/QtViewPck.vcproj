@@ -58,7 +58,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="QtGui4.lib QtXml4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;"
+				AdditionalLibraryDirectories=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -124,8 +124,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib"
 				OutputFile="$(OutDir)\$(ProjectName).arp"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
 				SubSystem="1"
 			/>
