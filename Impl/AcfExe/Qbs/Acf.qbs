@@ -2,7 +2,8 @@ import qbs.base 1.0
 import "../../../Config/Qbs/ApplicationProduct.qbs" as ApplicationProduct
 
 ApplicationProduct{
-	name: "Acf"
+	name: "AcfExe"
+	targetName: "Acf"
 
 	consoleApplication: true
 
