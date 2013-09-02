@@ -28,8 +28,8 @@ public:
 				const iser::IVersionInfo* versionInfoPtr = NULL);
 
 	// reimplemented (iser::IArchive)
-    using BaseClass::Process;
-    virtual bool BeginTag(const iser::CArchiveTag& tag);
+	using BaseClass::Process;
+	virtual bool BeginTag(const iser::CArchiveTag& tag);
 	virtual bool BeginMultiTag(const iser::CArchiveTag& tag, const iser::CArchiveTag& subTag, int& count);
 	virtual bool EndTag(const iser::CArchiveTag& tag);
 	virtual bool Process(QByteArray& value);

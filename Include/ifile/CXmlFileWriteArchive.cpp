@@ -25,7 +25,7 @@ CXmlFileWriteArchive::CXmlFileWriteArchive(
 	}
 	else{
 #if QT_VERSION >= 0x040700
-        m_stream.setStatus(QTextStream::WriteFailed);
+		m_stream.setStatus(QTextStream::WriteFailed);
 #endif
 	}
 }
