@@ -8,6 +8,8 @@ Module{
 	Depends{ name: "Qt.core" }
 	Depends{ name: "cpp" }
 
+	readonly property string qtBinPath: Qt.core.binPath
+
 	// root of the whole project
 	property path projectRoot
 
@@ -199,21 +201,16 @@ Module{
 			var tempResourceDir = product.buildDirectory + "/GeneratedFiles/";
 
 			var copyCmd;
-			var rccCmd;
 			if (product.moduleProperty("qbs", "targetOS").contains("windows")){
 				copyCmd = new Command('xcopy', ['/Y', FileInfo.toWindowsSeparators(input.fileName), FileInfo.toWindowsSeparators(tempResourceDir)]);
-				rccCmd = new Command('rcc',
-							[tempResourceDir + FileInfo.fileName(input.fileName),
-							'-name', FileInfo.completeBaseName(input.fileName),
-							'-o', output.fileName]);
 			}
 			else{
 				copyCmd = new Command('cp', [input.fileName, tempResourceDir]);
-				rccCmd = new Command('rcc',
-							[tempResourceDir + FileInfo.fileName(input.fileName),
-							'-name', FileInfo.completeBaseName(input.fileName),
-							'-o', output.fileName]);
 			}
+			var rccCmd = new Command(product.moduleProperty(product.moduleName, "qtBinPath") + "/rcc", [
+						tempResourceDir + FileInfo.fileName(input.fileName),
+						"-name", FileInfo.completeBaseName(input.fileName),
+						"-o", output.fileName]);
 
 			copyCmd.description = 'copy to generated ' + FileInfo.fileName(input.fileName);
 			copyCmd.highlight = 'codegen';
