@@ -1,4 +1,3 @@
-
 #include "iqt2d/CMultiBitmapViewComp.h"
 
 
@@ -7,6 +6,7 @@
 #include <QtWidgets/QGridLayout>
 #else
 #include <QtGui/QGridLayout>
+#include <QtGui/QApplication>
 #endif
 
 // ACF includes
@@ -57,16 +57,7 @@ void CMultiBitmapViewComp::OnModelChanged(int modelId, int /*changeFlags*/, istd
 	}
 
 	// view index is equal to the modelId
-	int index = modelId;
-
-	if (!IsGuiCreated() || index < 0 || index >= m_views.GetCount()){
-		return;
-	}
-
-	istd::IInformationProvider::InformationCategory viewResultCategory = m_informationProvidersCompPtr[index]->GetInformationCategory();
-
-	CSingleView* viewPtr = m_views.GetAt(index);
-	viewPtr->SetInspectionResult(viewResultCategory);
+	UpdateInspectionCategory(modelId);
 }
 
 
@@ -74,6 +65,8 @@ void CMultiBitmapViewComp::OnModelChanged(int modelId, int /*changeFlags*/, istd
 
 void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 {
+	EnsureViewsCreated();
+
 	iimg::IMultiBitmapProvider* objectPtr = GetObjectPtr();
 	if (objectPtr == NULL){
 		return;
@@ -82,27 +75,25 @@ void CMultiBitmapViewComp::UpdateGui(int updateFlags)
 	int bitmapsCount = objectPtr->GetBitmapsCount();
 	int viewsCount = m_views.GetCount();
 
-	if (bitmapsCount != viewsCount){
-		EnsureViewsCreated();
-	}
-
-	viewsCount = m_views.GetCount();
-
 	int usedViewsCount = qMin(viewsCount, bitmapsCount);
 
 	for (int viewIndex = 0; viewIndex < usedViewsCount; viewIndex++){
 		CSingleView* viewPtr = m_views.GetAt(viewIndex);
-
 		viewPtr->UpdateImage(objectPtr->GetBitmap(viewIndex));
 	}
 
-	if (m_optionsListCompPtr.IsValid()){
-		usedViewsCount = qMin(viewsCount, m_optionsListCompPtr->GetOptionsCount());
+	if (m_dynamicTitles){
+		for (int viewIndex = 0; viewIndex < viewsCount; viewIndex++){
+			QString title(GetTitleByIndex(viewIndex));
 
-		for (int viewIndex = 0; viewIndex < usedViewsCount; viewIndex++){
 			CSingleView* viewPtr = m_views.GetAt(viewIndex);
+			viewPtr->setTitle(title.isEmpty() ? " " : title);
+		}
+	}
 
-			viewPtr->setTitle(m_optionsListCompPtr->GetOptionName(viewIndex));
+	if (*m_showStatusBackgroundAttrPtr || *m_showStatusLabelAttrPtr){
+		for (int viewIndex = 0; viewIndex < viewsCount; viewIndex++){
+			UpdateInspectionCategory(viewIndex);
 		}
 	}
 
@@ -137,9 +128,7 @@ void CMultiBitmapViewComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	if (m_generalInformationModelCompPtr.IsValid() && m_generalInformationProviderCompPtr.IsValid()){
-		RegisterModel(m_generalInformationModelCompPtr.GetPtr(), GeneralStatusModelId);
-	}
+	m_dynamicTitles = (*m_showStatusLabelAttrPtr && !m_viewLabelPrefixesAttrPtr.IsValid());
 }
 
 
@@ -147,11 +136,11 @@ void CMultiBitmapViewComp::OnGuiCreated()
 
 void CMultiBitmapViewComp::OnComponentDestroyed()
 {
+	UnregisterAllModels();
+
 	while (!m_views.IsEmpty()){
 		m_views.PopAt(0);
 	}
-
-	UnregisterAllModels();
 
 	BaseClass::OnComponentDestroyed();
 }
@@ -161,10 +150,6 @@ void CMultiBitmapViewComp::OnComponentDestroyed()
 
 void CMultiBitmapViewComp::EnsureViewsCreated()
 {
-	m_columnCount = 0;
-	m_rowCount = 0;
-	m_views.Reset();
-
 	iimg::IMultiBitmapProvider* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
 	if (objectPtr == NULL){
@@ -172,6 +157,18 @@ void CMultiBitmapViewComp::EnsureViewsCreated()
 	}
 
 	int totalViewsCount = objectPtr->GetBitmapsCount();
+	if (m_views.GetCount() == totalViewsCount){
+		return;
+	}
+
+	// recreate everything
+	UnregisterAllModels();
+
+	if (m_generalInformationModelCompPtr.IsValid() && m_generalInformationProviderCompPtr.IsValid()){
+		RegisterModel(m_generalInformationModelCompPtr.GetPtr(), GeneralStatusModelId);
+	}
+
+	ResetAllViews();
 
 	m_columnCount = m_horizontalViewsAttrPtr.IsValid() ? qMax(0, *m_horizontalViewsAttrPtr) : 0;
 	m_rowCount = m_verticalViewsAttrPtr.IsValid() ? qMax(0, *m_verticalViewsAttrPtr) : 0;
@@ -194,7 +191,9 @@ void CMultiBitmapViewComp::EnsureViewsCreated()
 		}
 	}
 
-	QColor backgroundColor = m_viewBackgroundColorAttrPtr.IsValid() ?  QColor(QString(*m_viewBackgroundColorAttrPtr)) : Qt::transparent;
+	QColor backgroundColor = m_viewBackgroundColorAttrPtr.IsValid() ? 
+				QColor(QString(*m_viewBackgroundColorAttrPtr)) : 
+				Qt::transparent;
 
 	QWidget* widgetPtr = GetQtWidget();
 	QLayout* existingLayoutPtr = widgetPtr->layout();
@@ -209,19 +208,7 @@ void CMultiBitmapViewComp::EnsureViewsCreated()
 	int viewIndex = 0;
 	for (int row = 0; row < m_rowCount && viewIndex < totalViewsCount; row++){
 		for (int col = 0; col < m_columnCount && viewIndex < totalViewsCount; col++){
-			QString title;
-
-			if (m_viewLabelPrefixesAttrPtr.IsValid()){
-				if (m_viewLabelPrefixesAttrPtr.GetCount() == 1){
-					title = QString("%1 %2").arg(m_viewLabelPrefixesAttrPtr[0]).arg(viewIndex + 1);
-				}
-				else if (viewIndex < m_viewLabelPrefixesAttrPtr.GetCount()){
-					title = m_viewLabelPrefixesAttrPtr[viewIndex];
-				}
-			}
-			else if (viewIndex < m_informationProvidersCompPtr.GetCount()){
-				title = m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
-			}
+			QString title = GetTitleByIndex(viewIndex);
 
 			CSingleView* viewPtr = CreateView(widgetPtr, viewIndex, title);
 			layoutPtr->addWidget(viewPtr, row, col);
@@ -235,14 +222,70 @@ void CMultiBitmapViewComp::EnsureViewsCreated()
 				imod::IModel* modelPtr = m_informationModelsCompPtr[viewIndex];
 				Q_ASSERT(modelPtr != NULL);
 
-				RegisterModel(modelPtr, viewIndex);
+				if (!modelPtr->IsAttached(this)){
+					RegisterModel(modelPtr, viewIndex);
+				}
 			}
 
-			viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr);
+			OnViewCreated(viewIndex, viewPtr);
 
 			viewIndex++;
 		}
 	}
+}
+
+
+QString CMultiBitmapViewComp::GetTitleByIndex(int viewIndex) const
+{
+	if (m_viewLabelPrefixesAttrPtr.IsValid()){
+		if (m_viewLabelPrefixesAttrPtr.GetCount() == 1){
+			return QString("%1 %2").arg(m_viewLabelPrefixesAttrPtr[0]).arg(viewIndex + 1);
+		}
+		else if (viewIndex < m_viewLabelPrefixesAttrPtr.GetCount()){
+			return m_viewLabelPrefixesAttrPtr[viewIndex];
+		}
+	}
+
+	if (m_optionsListCompPtr.IsValid()){
+		if (viewIndex < m_optionsListCompPtr->GetOptionsCount()){
+			return m_optionsListCompPtr->GetOptionName(viewIndex);
+		}
+	}
+
+	if (m_informationProvidersCompPtr.IsValid()){
+		if (viewIndex < m_informationProvidersCompPtr.GetCount()){
+			return m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
+		}
+	}
+
+	return "";
+}
+
+
+void CMultiBitmapViewComp::UpdateInspectionCategory(int index)
+{
+	if (!IsGuiCreated() || index < 0 || index >= m_views.GetCount() || !m_informationProvidersCompPtr.IsValid()){
+		return;
+	}
+
+	istd::IInformationProvider::InformationCategory viewResultCategory = m_informationProvidersCompPtr[index]->GetInformationCategory();
+
+	CSingleView* viewPtr = m_views.GetAt(index);
+	viewPtr->SetInspectionResult(viewResultCategory);
+}
+
+
+void CMultiBitmapViewComp::ResetAllViews()
+{
+	m_columnCount = 0;
+	m_rowCount = 0;
+	m_views.Reset();
+}
+
+
+void CMultiBitmapViewComp::OnViewCreated(int /*index*/, CSingleView* viewPtr)
+{
+	viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr);
 }
 
 
