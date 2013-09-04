@@ -164,11 +164,9 @@ void CMultiBitmapViewComp::EnsureViewsCreated()
 	// recreate everything
 	UnregisterAllModels();
 
-	if (m_generalInformationModelCompPtr.IsValid() && m_generalInformationProviderCompPtr.IsValid()){
-		RegisterModel(m_generalInformationModelCompPtr.GetPtr(), GeneralStatusModelId);
-	}
-
 	ResetAllViews();
+
+	ConnectModels();
 
 	m_columnCount = m_horizontalViewsAttrPtr.IsValid() ? qMax(0, *m_horizontalViewsAttrPtr) : 0;
 	m_rowCount = m_verticalViewsAttrPtr.IsValid() ? qMax(0, *m_verticalViewsAttrPtr) : 0;
@@ -253,7 +251,10 @@ QString CMultiBitmapViewComp::GetTitleByIndex(int viewIndex) const
 	}
 
 	if (m_informationProvidersCompPtr.IsValid()){
-		if (viewIndex < m_informationProvidersCompPtr.GetCount()){
+		if (m_informationProvidersCompPtr.GetCount() == 1){
+			return m_informationProvidersCompPtr[0]->GetInformationSource();
+		}
+		else if (viewIndex < m_informationProvidersCompPtr.GetCount()){
 			return m_informationProvidersCompPtr[viewIndex]->GetInformationSource();
 		}
 	}
@@ -268,7 +269,13 @@ void CMultiBitmapViewComp::UpdateInspectionCategory(int index)
 		return;
 	}
 
-	istd::IInformationProvider::InformationCategory viewResultCategory = m_informationProvidersCompPtr[index]->GetInformationCategory();
+	istd::IInformationProvider::InformationCategory viewResultCategory = istd::IInformationProvider::IC_NONE;
+	if (m_informationProvidersCompPtr.GetCount() == 1){
+		viewResultCategory = m_informationProvidersCompPtr[0]->GetInformationCategory();
+	}
+	else if (index < m_informationProvidersCompPtr.GetCount()){
+		viewResultCategory = m_informationProvidersCompPtr[index]->GetInformationCategory();
+	}
 
 	CSingleView* viewPtr = m_views.GetAt(index);
 	viewPtr->SetInspectionResult(viewResultCategory);
@@ -280,6 +287,14 @@ void CMultiBitmapViewComp::ResetAllViews()
 	m_columnCount = 0;
 	m_rowCount = 0;
 	m_views.Reset();
+}
+
+
+void CMultiBitmapViewComp::ConnectModels()
+{
+	if (m_generalInformationModelCompPtr.IsValid() && m_generalInformationProviderCompPtr.IsValid()){
+		RegisterModel(m_generalInformationModelCompPtr.GetPtr(), GeneralStatusModelId);
+	}
 }
 
 

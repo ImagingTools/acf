@@ -104,11 +104,14 @@ protected:
 		bool m_showStatusBackground;
 	};
 
+	istd::TPointerVector<CSingleView> m_views;
+
 	virtual CSingleView* CreateView(QWidget* parentPtr, int id = -1, const QString& title = "");
 	virtual void EnsureViewsCreated();
 	virtual QString GetTitleByIndex(int index) const;
 	virtual void UpdateInspectionCategory(int index);
 	virtual void ResetAllViews();
+	virtual void ConnectModels();
 	virtual void OnViewCreated(int index, CSingleView* viewPtr);
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
@@ -146,8 +149,6 @@ private:
 	int m_columnCount;
 	int m_viewCount;
 	bool m_dynamicTitles;
-
-	istd::TPointerVector<CSingleView> m_views;
 };
 
 
