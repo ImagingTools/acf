@@ -69,7 +69,7 @@ public:
 		Insert layer to view.
 		\param	layerPtr	pointer to inserted layer.
 		\param	index		index of inserted layer. If equals -1,
-							layer will be inserted after layst existing layer.
+							layer will be inserted after last existing layer.
 		\param	layerType	used to set standard layers. \sa iview::IShapeView::LayerType
 		\return	index of this layer.
 	*/
@@ -80,7 +80,13 @@ public:
 		\return	layer index, or -1 if not found.
 	*/
 	virtual int GetLayerIndex(const IViewLayer& layer) const = 0;
-	
+
+	/**
+		Get index of layer by type.
+		\return	layer index, or -1 if not found.
+	*/
+	virtual int GetLayerIndex(int layerType) const = 0;
+
 	/**
 		Remove layer from view.
 	*/

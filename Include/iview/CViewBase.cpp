@@ -310,6 +310,25 @@ int CViewBase::GetLayerIndex(const IViewLayer& layer) const
 }
 
 
+int CViewBase::GetLayerIndex(int layerType) const
+{
+	switch (layerType){
+		case iview::IViewLayer::LT_ACTIVE:
+			return GetActiveLayerIndex();
+
+		case iview::IViewLayer::LT_INACTIVE:
+			return GetInactiveLayerIndex();
+
+		case iview::IViewLayer::LT_BACKGROUND:
+			return GetBackgroundLayerIndex();
+
+		default:;
+	}
+
+	return -1;
+}
+
+
 void CViewBase::RemoveLayer(int index)
 {
 	Layers::iterator iter = m_layers.begin() + index;
