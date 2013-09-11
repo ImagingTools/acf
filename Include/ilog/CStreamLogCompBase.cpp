@@ -68,13 +68,45 @@ void CStreamLogCompBase::WriteMessageToStream(const istd::IInformationProvider& 
 
 QString CStreamLogCompBase::GenerateMessageText(const istd::IInformationProvider& message) const
 {
-	QString messageText = message.GetInformationDescription();
+	QString messageText;
 
-	if (m_useTimeStampAttrPtr.IsValid() && *m_useTimeStampAttrPtr){
-		QString messageTimeStamp = message.GetInformationTimeStamp().toString();
+	QString categoryCode;
+	if (*m_useCategoryAttrPtr){
+		switch (message.GetInformationCategory()){
+		case istd::IInformationProvider::IC_WARNING:
+			messageText += "warning: ";
+			categoryCode = "W";
+			break;
 
-		messageText = QString("[%1] %2").arg(messageTimeStamp).arg(messageText);
+		case istd::IInformationProvider::IC_ERROR:
+			messageText += "error: ";
+			categoryCode = "E";
+			break;
+
+		case istd::IInformationProvider::IC_CRITICAL:
+			messageText += "fatal error: ";
+			categoryCode = "E!";
+			break;
+
+		default:
+			categoryCode = "I";
+			break;
+		}
 	}
+
+	if (*m_useCodeAttrPtr){
+		QString codeText = QString::number(message.GetInformationId());
+
+		messageText += categoryCode + codeText + ": ";
+	}
+
+	if (*m_useTimeStampAttrPtr){
+		QString timeStampText = message.GetInformationTimeStamp().toString();
+
+		messageText += "[" + timeStampText + "] ";
+	}
+
+	messageText += message.GetInformationDescription();
 
 	return messageText;
 }

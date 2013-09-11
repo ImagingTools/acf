@@ -24,7 +24,9 @@ public:
 	I_BEGIN_BASE_COMPONENT(CStreamLogCompBase);
 		I_ASSIGN(m_minPriorityAttrPtr, "MinCategory", "Minimal category of message to print it out:\n *1-Information\n *2-Warning\n *3-Error\n *4-Critical", true, 0);
 		I_ASSIGN(m_isDotEnabledAttrPtr, "ShowDots", "If it's true, dot will be shown for each ignored message", true, false);
-		I_ASSIGN(m_useTimeStampAttrPtr, "UseTimeStamp", "Use time stamp for the messsages", false, true);
+		I_ASSIGN(m_useCategoryAttrPtr, "UseCategory", "Use error category for the messsages (e.g warning or error)", true, true);
+		I_ASSIGN(m_useCodeAttrPtr, "UseCode", "Use error code for the messsages", true, true);
+		I_ASSIGN(m_useTimeStampAttrPtr, "UseTimeStamp", "Use time stamp for the messsages", true, false);
 	I_END_COMPONENT;
 
 	CStreamLogCompBase();
@@ -65,6 +67,8 @@ protected:
 private:
 	I_ATTR(int, m_minPriorityAttrPtr);
 	I_ATTR(bool, m_isDotEnabledAttrPtr);
+	I_ATTR(bool, m_useCategoryAttrPtr);
+	I_ATTR(bool, m_useCodeAttrPtr);
 	I_ATTR(bool, m_useTimeStampAttrPtr);
 
 	bool m_isLastDotShown;
