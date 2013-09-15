@@ -261,6 +261,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CHierarchicalHeaderView.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CIconProviderComp.cpp"
 				>
 			</File>
@@ -470,6 +474,10 @@
 			</File>
 			<File
 				RelativePath="..\CHierarchicalCommand.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CHierarchicalHeaderView.h"
 				>
 			</File>
 			<File
