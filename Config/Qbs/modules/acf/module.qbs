@@ -56,6 +56,8 @@ Module{
 	}
 
 	property string compilerDir: compileMode + compilerName
+	property string binSubdir: 'Bin/' + compilerDir
+	property string libSubdir: 'Lib/' + compilerDir
 	property string generatedOutputDir								// Path where stuff will be generated if undefined "GeneratedPath/" + product.name will be taken
 	property path acfConfigurationFile								// ACF configuration file ARX compiler
 	property path trConfigurationFile: acfConfigurationFile			// ACF configuration file for xtracf transformations
@@ -99,9 +101,9 @@ Module{
 
 		prepare:{
 			// get the ACF binary directory
-            var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
+			var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
 			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory + '/Bin/' + product.moduleProperty("acf", "compilerDir");
+				acfBinDirectory = product.buildDirectory + '/' + product.moduleProperty("acf", "binSubdir");
 			}
 
 			// get the ACF configuration file
@@ -125,7 +127,7 @@ Module{
 				throw new Error("no ACF configuration specified (using dependency or acf.acfConfigurationFile)");
 			}
 
-            var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
+			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
 						inputs.arx[0].fileName,
 						'-config', acfConfigurationFile,
 						'-o', outputs.cpp[0].fileName]);
@@ -148,9 +150,9 @@ Module{
 
 		prepare:{
 			// get the ACF binary directory
-            var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
+			var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
 			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory + '/Bin/' + compilerDir;
+				acfBinDirectory = product.buildDirectory + '/' + binSubdir;
 			}
 
 			// get the ACF configuration file

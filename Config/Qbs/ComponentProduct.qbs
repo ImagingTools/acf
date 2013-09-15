@@ -4,7 +4,7 @@ import qbs.base 1.0
 DynamicLibrary{
 	type: ["dynamiclibrary", "acf_share", "acfComponent"]
 
-	destinationDirectory: "Bin/" + acf.compilerDir
+	destinationDirectory: acf.binSubdir
 
 	Depends{ name: "ipackage" }
 	Depends{ name: "acf" }
@@ -30,6 +30,6 @@ DynamicLibrary{
 	Group{
 		fileTagsFilter: ["dynamiclibrary"]
 		qbs.install: true
-		qbs.installDir: "Bin/" + acf.compilerDir
+		qbs.installDir: acf.binSubdir
 	}
 }
