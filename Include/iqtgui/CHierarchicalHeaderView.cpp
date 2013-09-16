@@ -337,9 +337,9 @@ void CHierarchicalHeaderView::SetBackgroundBrush(QStyleOptionHeader& opt, const 
 
 
 QSize CHierarchicalHeaderView::GetCellSize(
-			   const QModelIndex& childIndex,
-			   const QHeaderView* headerViewPtr,
-			   QStyleOptionHeader styleOptions) const
+			const QModelIndex& childIndex,
+			const QHeaderView* headerViewPtr,
+			QStyleOptionHeader styleOptions) const
 {
 	QSize res;
 	QVariant variant(childIndex.data(Qt::SizeHintRole));
@@ -368,10 +368,10 @@ QSize CHierarchicalHeaderView::GetCellSize(
 
 
 int	CHierarchicalHeaderView::GetCurrentCellWidth(
-					 const QModelIndex& searchedIndex,
-					 const QModelIndex& childIndex,
-					 int sectionIndex,
-					 const QHeaderView* headerViewPtr) const
+			const QModelIndex& searchedIndex,
+			const QModelIndex& childIndex,
+			int sectionIndex,
+			const QHeaderView* headerViewPtr) const
 {
 	QModelIndexList childsList(GetChilds(searchedIndex));
 	if (childsList.empty()){

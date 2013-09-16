@@ -12,10 +12,6 @@ namespace iqtgui
 
 /**
 	Hierarchical header view for QTableView.
-	Header data is described by QAbstractItemModel.
-	Table model's function "data" should return pointer to QAbstractItemModel, representing header structure,
-	for horizontal header it uses HorizontalHeaderDataRole, for vertical - VerticalHeaderDataRole.
-	If header's model function "data" with Qt::UserRole return valid QVariant, text in header cell is rotated.
 */
 class CHierarchicalHeaderView: public QHeaderView
 {
@@ -49,9 +45,9 @@ private:
 	QStyleOptionHeader GetStyleOptionForCell(int logicalIndex) const;
 	QModelIndex GetChildIndex(int sectionIndex) const;
 	QSize GetCellSize(
-			   const QModelIndex& childIndex,
-			   const QHeaderView* headerViewPtr,
-			   QStyleOptionHeader styleOptions) const;
+				const QModelIndex& childIndex,
+				const QHeaderView* headerViewPtr,
+				QStyleOptionHeader styleOptions) const;
 	void PaintHorizontalSection(
 				QPainter *painter,
 				const QRect& sectionRect,
