@@ -4,7 +4,11 @@
 // Qt includes
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QPainter>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QStyleOptionHeader>
+#else
 #include <QtGui/QStyleOptionHeader>
+#endif
 
 
 namespace iqtgui
@@ -53,7 +57,7 @@ void CHierarchicalHeaderView::paintSection(
 			else{
 				PaintVerticalSection(painter, rect, logicalIndex, this, GetStyleOptionForCell(logicalIndex), childIndex);
 			}
-			
+
 			return;
 		}
 	}
@@ -70,11 +74,11 @@ QSize CHierarchicalHeaderView::sectionSizeFromContents(int logicalIndex) const
 
 		if (currentChildIndex.isValid()){
 			QStyleOptionHeader styleOption(GetStyleOptionForCell(logicalIndex));
-			
+
 			QSize cellSize(GetCellSize(currentChildIndex, this, styleOption));
-			
+
 			currentChildIndex = currentChildIndex.parent();
-			
+
 			while(currentChildIndex.isValid()){
 				if (orientation() == Qt::Horizontal){
 					cellSize.rheight() += GetCellSize(currentChildIndex, this, styleOption).height();
@@ -161,7 +165,11 @@ QStyleOptionHeader CHierarchicalHeaderView::GetStyleOptionForCell(int sectionInd
 
 	QItemSelectionModel* selectionModelPtr = selectionModel();
 
+#if QT_VERSION >= 0x050000	// TODO: find out what is equivalent of QHeaderView::isClickable for Qt 5?
+	if (sectionsClickable()){
+#else
 	if (isClickable()){
+#endif
 		if (highlightSections() && (selectionModelPtr != NULL)){
 			if (orientation() == Qt::Horizontal){
 				if (selectionModelPtr->columnIntersectsSelection(sectionIndex, rootIndex())){
@@ -232,7 +240,7 @@ QModelIndexList CHierarchicalHeaderView::GetParentIndexes(QModelIndex index) con
 	QModelIndexList indexes;
 	while(index.isValid()){
 		indexes.push_front(index);
-	
+
 		index = index.parent();
 	}
 
@@ -320,16 +328,24 @@ QModelIndexList CHierarchicalHeaderView::GetChilds(const QModelIndex& searchedIn
 void CHierarchicalHeaderView::SetForegroundBrush(QStyleOptionHeader& opt, const QModelIndex& index) const
 {
 	QVariant foregroundBrush = index.data(Qt::ForegroundRole);
-	if (qVariantCanConvert<QBrush>(foregroundBrush))
+#if QT_VERSION >= 0x050000	// TODO: find out what is equivalent of QHeaderView::isClickable for Qt 5?
+	if (foregroundBrush.canConvert(QMetaType::QBrush)){
+#else
+	if (qVariantCanConvert<QBrush>(foregroundBrush)){
+#endif
 		opt.palette.setBrush(QPalette::ButtonText, qvariant_cast<QBrush>(foregroundBrush));
+	}
 }
 
 
 void CHierarchicalHeaderView::SetBackgroundBrush(QStyleOptionHeader& opt, const QModelIndex& index) const
 {
 	QVariant backgroundBrush = index.data(Qt::BackgroundRole);
-	if (qVariantCanConvert<QBrush>(backgroundBrush))
-	{
+#if QT_VERSION >= 0x050000	// TODO: find out what is equivalent of QHeaderView::isClickable for Qt 5?
+	if (backgroundBrush.canConvert(QMetaType::QBrush)){
+#else
+	if (qVariantCanConvert<QBrush>(backgroundBrush)){
+#endif
 		opt.palette.setBrush(QPalette::Button, qvariant_cast<QBrush>(backgroundBrush));
 		opt.palette.setBrush(QPalette::Window, qvariant_cast<QBrush>(backgroundBrush));
 	}
@@ -347,7 +363,11 @@ QSize CHierarchicalHeaderView::GetCellSize(
 		res=qvariant_cast<QSize>(variant);
 	QFont fnt(headerViewPtr->font());
 	QVariant var(childIndex.data(Qt::FontRole));
+#if QT_VERSION >= 0x050000	// TODO: find out what is equivalent of QHeaderView::isClickable for Qt 5?
+	if (var.isValid() && var.canConvert(QMetaType::QFont)){
+#else
 	if (var.isValid() && qVariantCanConvert<QFont>(var)){
+#endif
 		fnt = qvariant_cast<QFont>(var);
 	}
 
@@ -399,10 +419,10 @@ int	CHierarchicalHeaderView::GetCurrentCellLeft(
 	QModelIndexList childsList(GetChilds(searchedIndex));
 	if (!childsList.empty()){
 		int n = childsList.indexOf(childIndex);
-		
+
 		int firstChildSectionIndex = sectionIndex - n;
 		--n;
-		
+
 		for (; n>=0; --n){
 			left -= headerViewPtr->sectionSize(firstChildSectionIndex+n);
 		}
@@ -474,7 +494,7 @@ void CHierarchicalHeaderView::PaintHorizontalSection(
 
 	for (int i = 0; i < indexes.size(); ++i){
 		QStyleOptionHeader realStyleOptions(styleOptions);
-		
+
 		if (		i < indexes.size() - 1 &&
 					(realStyleOptions.state.testFlag(QStyle::State_Sunken) || realStyleOptions.state.testFlag(QStyle::State_On))){
 			QStyle::State t(QStyle::State_Sunken | QStyle::State_On);
