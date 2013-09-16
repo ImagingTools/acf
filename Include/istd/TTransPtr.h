@@ -22,7 +22,7 @@ class TTransPtr
 public:
 	/**
 		Constructor overtaking the pointer.
-		\param	pointer	pointer to overtake - WARNING: After this operation this pointer is invalid!
+		\param	pointer	pointer to overtake - \em warning: After this operation this pointer is invalid!
 	*/
 	TTransPtr(const TTransPtr& pointer);
 	~TTransPtr();

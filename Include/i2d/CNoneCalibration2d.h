@@ -10,7 +10,6 @@ namespace i2d
 {
 
 
-// TODO: Redesign it to ACF calibration concept.
 /**
 	Identity calibration, no transformation will be done.
 */

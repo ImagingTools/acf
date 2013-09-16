@@ -9,8 +9,6 @@ namespace iview
 {
 
 
-// TODO: Redesign it to ACF transformation concept.
-
 /**
 	Shape object for none calibration.
 	You need this shape to visualize grid without calibration on the shape view.
