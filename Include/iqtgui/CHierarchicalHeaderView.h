@@ -1,4 +1,4 @@
-	#ifndef iqtgui_CHierarchicalHeaderView_included
+#ifndef iqtgui_CHierarchicalHeaderView_included
 #define iqtgui_CHierarchicalHeaderView_included
 
 
