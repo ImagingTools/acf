@@ -15,5 +15,5 @@ StaticProduct{
 		fileTags: ["qrc_generated"]
 	}
 
-	Qt.core.qmFilesDir: Qt.core.generatedFilesDir
+    Qt.core.qmFilesDir: 'GeneratedFiles/' + product.name
 }
