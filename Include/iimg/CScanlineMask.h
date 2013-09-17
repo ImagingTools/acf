@@ -29,7 +29,7 @@ class CScanlineMask:
 {
 public:
 	typedef QList<istd::CIntRanges> RangesContainer;
-	typedef QVector<const istd::CIntRanges*> Scanlines;
+	typedef QVector<int> Scanlines;	// Index of container element for each scan line, negative value for empty element
 
 	CScanlineMask();
 

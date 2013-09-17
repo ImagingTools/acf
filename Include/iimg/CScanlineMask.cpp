@@ -18,6 +18,7 @@ namespace iimg
 // public methods
 
 CScanlineMask::CScanlineMask()
+:	m_isBoundingBoxValid(false)
 {
 }
 
@@ -41,7 +42,7 @@ void CScanlineMask::ResetScanlines(const istd::CIntRange& verticalRange)
 	m_scanlines.resize(linesCount);
 
 	for (int i = 0; i < linesCount; ++i){
-		m_scanlines[i] = NULL;
+		m_scanlines[i] = -1;
 	}
 
 	m_isBoundingBoxValid = false;
@@ -53,7 +54,12 @@ const istd::CIntRanges* CScanlineMask::GetPixelRanges(int lineIndex) const
 	int rangeIndex = lineIndex - m_firstLinePos;
 
 	if ((rangeIndex >= 0) && (rangeIndex < int(m_scanlines.size()))){
-		return m_scanlines[rangeIndex];
+		int containerIndex = m_scanlines[rangeIndex];
+		if (containerIndex >= 0){
+			Q_ASSERT(containerIndex < m_rangesContainer.size());
+
+			return &m_rangesContainer[containerIndex];
+		}
 	}
 
 	return NULL;
@@ -126,10 +132,7 @@ void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 #endif
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		m_rangesContainer.push_back(istd::CIntRanges());
-		istd::CIntRanges& rangeList = m_rangesContainer.back();
-
-		m_scanlines[lineIndex] =  NULL;
+		m_scanlines[lineIndex] = -1;
 
 		double y = (lineIndex + m_firstLinePos - center.GetY());
 		double radiusDiff2 = radius2 - y * y;
@@ -150,10 +153,13 @@ void CScanlineMask::CreateFromCircle(const i2d::CCircle& circle, const i2d::CRec
 			}
 
 			if (left < right){
+				m_rangesContainer.push_back(istd::CIntRanges());
+				istd::CIntRanges& rangeList = m_rangesContainer.back();
+
 				rangeList.InsertSwitchPoint(left);
 				rangeList.InsertSwitchPoint(right);
 
-				m_scanlines[lineIndex] = &rangeList;
+				m_scanlines[lineIndex] = m_rangesContainer.size() - 1;
 			}
 		}
 	}
@@ -183,7 +189,7 @@ void CScanlineMask::CreateFromRectangle(const i2d::CRectangle& rect, const i2d::
 
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		m_scanlines[lineIndex] = &rangeList;	// set all lines to the same range
+		m_scanlines[lineIndex] = 0;	// set all lines to the same range
 	}
 }
 
@@ -220,15 +226,14 @@ void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 #endif
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		m_rangesContainer.push_back(istd::CIntRanges());
-		istd::CIntRanges& rangeList = m_rangesContainer.back();
+		istd::CIntRanges rangeList;
 
 		double y = (lineIndex + m_firstLinePos - centerY);
 
 		double outputRadiusDiff2 = outerRadius2 - y * y;
 
 		if (outputRadiusDiff2 < 0){
-			m_scanlines[lineIndex] =  NULL;
+			m_scanlines[lineIndex] = -1;
 
 			continue;
 		}
@@ -266,10 +271,12 @@ void CScanlineMask::CreateFromAnnulus(const i2d::CAnnulus& annulus, const i2d::C
 		}
 
 		if (!rangeList.IsEmpty()){
-			m_scanlines[lineIndex] = &rangeList;
+			m_rangesContainer.push_back(rangeList);
+
+			m_scanlines[lineIndex] = m_rangesContainer.size() - 1;
 		}
 		else{
-			m_scanlines[lineIndex] =  NULL;
+			m_scanlines[lineIndex] = -1;
 		}
 	}
 }
@@ -350,8 +357,7 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 #endif
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		m_rangesContainer.push_back(istd::CIntRanges());
-		istd::CIntRanges& rangeList = m_rangesContainer.back();
+		istd::CIntRanges rangeList = m_rangesContainer.back();
 
 		const std::set<int>& lineList = scanVector.at(lineIndex);
 		Q_ASSERT((lineList.size() % 2) == 0);	// pair number of points should be calculated
@@ -381,10 +387,12 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 		}
 
 		if (!rangeList.IsEmpty()){
-			m_scanlines[lineIndex] = &rangeList;
+			m_rangesContainer.push_back(rangeList);
+
+			m_scanlines[lineIndex] = m_rangesContainer.size();
 		}
 		else{
-			m_scanlines[lineIndex] =  NULL;
+			m_scanlines[lineIndex] =  -1;
 		}
 	}
 }
@@ -446,37 +454,44 @@ void CScanlineMask::GetUnion(const CScanlineMask& mask, CScanlineMask& result) c
 
 		int lineIndex = y - m_firstLinePos;
 		if ((lineIndex >= 0) && (lineIndex < m_scanlines.size())){
-			rangesPtr = m_scanlines[lineIndex];
+			int containerIndex = m_scanlines[lineIndex];
+			if (containerIndex >= 0){
+				Q_ASSERT(containerIndex < m_rangesContainer.size());
+
+				rangesPtr = &m_rangesContainer[containerIndex];
+			}
 		}
 
 		int maskLineIndex = y - mask.m_firstLinePos;
 		if ((maskLineIndex >= 0) && (maskLineIndex < mask.m_scanlines.size())){
-			maskRangesPtr = mask.m_scanlines[lineIndex];
+			int containerIndex = mask.m_scanlines[lineIndex];
+			if (containerIndex >= 0){
+				Q_ASSERT(containerIndex < mask.m_rangesContainer.size());
+
+				maskRangesPtr = &mask.m_rangesContainer[containerIndex];
+			}
 		}
 
+		istd::CIntRanges resultRanges;
 		if (rangesPtr != NULL){
-			result.m_rangesContainer.push_back(istd::CIntRanges());
-			istd::CIntRanges& unionRanges = result.m_rangesContainer.back();
-
 			if (maskRangesPtr != NULL){
-				rangesPtr->GetUnion(*maskRangesPtr, unionRanges);
+				rangesPtr->GetUnion(*maskRangesPtr, resultRanges);
 			}
 			else{
-				unionRanges = *rangesPtr;
+				resultRanges = *rangesPtr;
 			}
-
-			result.m_scanlines[resultLineIndex] = &unionRanges;
 		}
 		else if (maskRangesPtr != NULL){
-			result.m_rangesContainer.push_back(istd::CIntRanges());
-			istd::CIntRanges& unionRanges = result.m_rangesContainer.back();
+			resultRanges = *maskRangesPtr;
+		}
 
-			unionRanges = *maskRangesPtr;
+		if (!resultRanges.IsEmpty()){
+			result.m_rangesContainer.push_back(resultRanges);
 
-			result.m_scanlines[resultLineIndex] = &unionRanges;
+			result.m_scanlines[resultLineIndex] = result.m_rangesContainer.size() - 1;
 		}
 		else{
-			result.m_scanlines[resultLineIndex] = NULL;
+			result.m_scanlines[resultLineIndex] = -1;
 		}
 	}
 }
@@ -505,7 +520,7 @@ void CScanlineMask::GetIntersection(const CScanlineMask& mask, CScanlineMask& re
 	result.m_firstLinePos = qMax(m_firstLinePos, mask.m_firstLinePos);
 	int endLineY = qMin(m_firstLinePos + m_scanlines.size(), mask.m_firstLinePos + mask.m_scanlines.size());
 
-	if (endLineY >= result.m_firstLinePos){
+	if (result.m_firstLinePos >= endLineY){
 		result.ResetImage();
 
 		return;
@@ -514,30 +529,32 @@ void CScanlineMask::GetIntersection(const CScanlineMask& mask, CScanlineMask& re
 	result.m_scanlines.resize(endLineY - m_firstLinePos);
 
 	for (int resultLineIndex = 0; resultLineIndex < result.m_scanlines.size(); ++resultLineIndex){
-		int y = resultLineIndex + result.m_firstLinePos;
+		int y = result.m_firstLinePos + resultLineIndex;
+
+		istd::CIntRanges resultRanges;
 
 		int lineIndex = y - m_firstLinePos;
 		int maskLineIndex = y - mask.m_firstLinePos;
 		if (		(lineIndex >= 0) && (lineIndex < m_scanlines.size()) &&
 					(maskLineIndex >= 0) && (maskLineIndex < mask.m_scanlines.size())){
-			const istd::CIntRanges* rangesPtr = m_scanlines[lineIndex];
-			const istd::CIntRanges* maskRangesPtr = mask.m_scanlines[lineIndex];
+			int containerIndex = m_scanlines[lineIndex];
+			int maskContainerIndex = mask.m_scanlines[lineIndex];
 
-			istd::CIntRanges resultRanges;
-			rangesPtr->GetIntersection(*maskRangesPtr, resultRanges);
+			if ((containerIndex >= 0) && (maskContainerIndex >= 0)){
+				const istd::CIntRanges& ranges = m_rangesContainer[containerIndex];
+				const istd::CIntRanges& maskRange = mask.m_rangesContainer[maskContainerIndex];
 
-			if (!resultRanges.IsEmpty()){
-				result.m_rangesContainer.push_back(resultRanges);
-				istd::CIntRanges& intersectedRanges = result.m_rangesContainer.back();
-
-				result.m_scanlines[y - result.m_firstLinePos] = &intersectedRanges;
-			}
-			else{
-				result.m_scanlines[y - result.m_firstLinePos] = NULL;
+				ranges.GetIntersection(maskRange, resultRanges);
 			}
 		}
+
+		if (!resultRanges.IsEmpty()){
+			result.m_rangesContainer.push_back(resultRanges);
+
+			result.m_scanlines[resultLineIndex] = result.m_rangesContainer.size() - 1;
+		}
 		else{
-			result.m_scanlines[y - result.m_firstLinePos] = NULL;
+			result.m_scanlines[resultLineIndex] = -1;
 		}
 	}
 }
@@ -611,10 +628,12 @@ i2d::CRectangle CScanlineMask::GetBoundingBox() const
 		istd::CIntRange rangeX = istd::CIntRange::GetInvalid();
 
 		for (int i = 0; i < m_scanlines.size(); ++i){
-			const istd::CIntRanges* scanLinePtr = m_scanlines[i];
+			int containerIndex = m_scanlines[i];
 
-			if (scanLinePtr != NULL){
-				const istd::CIntRanges::SwitchPoints& points = scanLinePtr->GetSwitchPoints();
+			if (containerIndex >= 0){
+				const istd::CIntRanges scanLine = m_rangesContainer[containerIndex];
+
+				const istd::CIntRanges::SwitchPoints& points = scanLine.GetSwitchPoints();
 
 				if (!points.empty()){
 					int minX = *points.begin();
@@ -686,9 +705,12 @@ icmm::CVarColor CScanlineMask::GetColorAt(const istd::CIndex2d& position) const
 {
 	int scanLine = position.GetY() - m_firstLinePos;
 	if ((scanLine >= 0) && (scanLine < m_scanlines.size())){
-		const istd::CIntRanges* rangesPtr = m_scanlines[scanLine];
-		if (rangesPtr != NULL){
-			if (rangesPtr->IsInside(position.GetX())){
+		int containerIndex = m_scanlines[scanLine];
+
+		if (containerIndex >= 0){
+			const istd::CIntRanges& scanLine = m_rangesContainer[containerIndex];
+
+			if (scanLine.IsInside(position.GetX())){
 				return icmm::CVarColor(1, 1);
 			}
 		}
@@ -708,84 +730,95 @@ bool CScanlineMask::SetColorAt(const istd::CIndex2d& /*position*/, const icmm::C
 
 bool CScanlineMask::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag minYTag("MinY", "Minimal Y");
-	static iser::CArchiveTag maxYTag("MaxY", "Maximal Y (exclusive)");
-	static iser::CArchiveTag scanlinesTag("Scanelines", "List of mask scan lines");
+	static iser::CArchiveTag firstLineTag("FirstLine", "First line (top position)");
+	static iser::CArchiveTag lineContainerTag("LineContainer", "Container of scan lines");
 	static iser::CArchiveTag scanLineTag("Line", "Single scan line");
+	static iser::CArchiveTag containerIndicesTag("ContainerIndices", "List of container indices for each line");
+	static iser::CArchiveTag indexTag("Index", "Container index");
 
 	bool retVal = true;
 
+	retVal = retVal && archive.BeginTag(firstLineTag);
+	retVal = retVal && archive.Process(m_firstLinePos);
+	retVal = retVal && archive.EndTag(firstLineTag);
+
 	if (archive.IsStoring()){
-		int minY = m_firstLinePos;
+		int containerSize = m_rangesContainer.size();
 
-		retVal = retVal && archive.BeginTag(minYTag);
-		retVal = retVal && archive.Process(minY);
-		retVal = retVal && archive.EndTag(minYTag);
-
-		int scanLinesCount = m_scanlines.size();
-
-		istd::CIntRanges emptyRanges;
-
-		retVal = retVal && archive.BeginMultiTag(scanlinesTag, scanLineTag, scanLinesCount);
-		for (		Scanlines::ConstIterator lineIter = m_scanlines.constBegin();
-					lineIter != m_scanlines.constEnd();
+		retVal = retVal && archive.BeginMultiTag(lineContainerTag, scanLineTag, containerSize);
+		for (		RangesContainer::Iterator lineIter = m_rangesContainer.begin();
+					lineIter != m_rangesContainer.end();
 					++lineIter){
+			istd::CIntRanges& scanLine = *lineIter;
+
 			retVal = retVal && archive.BeginTag(scanLineTag);
-
-			const istd::CIntRanges* rangesPtr = *lineIter;
-			if (rangesPtr != NULL){
-				retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeIntRanges(archive, *const_cast<istd::CIntRanges*>(rangesPtr));
-			}
-			else{
-				retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeIntRanges(archive, emptyRanges);
-			}
-
+			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeIntRanges(archive, scanLine);
 			retVal = retVal && archive.EndTag(scanLineTag);
 		}
+
+		retVal = retVal && archive.EndTag(lineContainerTag);
+
+		int indicesCount = m_scanlines.size();
+
+		retVal = retVal && archive.BeginMultiTag(containerIndicesTag, indexTag, indicesCount);
+		for (		Scanlines::ConstIterator indexIter = m_scanlines.constBegin();
+					indexIter != m_scanlines.constEnd();
+					++indexIter){
+			int containerIndex = *indexIter;
+
+			retVal = retVal && archive.BeginTag(indexTag);
+			retVal = retVal && archive.Process(containerIndex);
+			retVal = retVal && archive.EndTag(indexTag);
+		}
+
+		retVal = retVal && archive.EndTag(containerIndicesTag);
 	}
 	else{
-		int minY = 0;
-
-		retVal = retVal && archive.BeginTag(minYTag);
-		retVal = retVal && archive.Process(minY);
-		retVal = retVal && archive.EndTag(minYTag);
-
+		m_isBoundingBoxValid = false;
 		m_rangesContainer.clear();
 		m_scanlines.clear();
 
-		int scanLinesCount = 0;
+		int containerSize = 0;
 
-		retVal = retVal && archive.BeginMultiTag(scanlinesTag, scanLineTag, scanLinesCount);
-
-		if (!retVal || (scanLinesCount < 0)){
+		retVal = retVal && archive.BeginMultiTag(lineContainerTag, scanLineTag, containerSize);
+		if (!retVal){
 			return false;
 		}
 
-		m_scanlines.resize(scanLinesCount);
+		for (int containerIndex = 0; containerIndex < containerSize; ++containerIndex){
+			m_rangesContainer.push_back(istd::CIntRanges());
+			istd::CIntRanges& scanLine = m_rangesContainer.last();
 
-		for (int lineIndex = 0; lineIndex < scanLinesCount; ++lineIndex){
 			retVal = retVal && archive.BeginTag(scanLineTag);
+			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeIntRanges(archive, scanLine);
+			retVal = retVal && archive.EndTag(scanLineTag);
+		}
 
-			istd::CIntRanges ranges;
-			retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeIntRanges(archive, ranges);
+		retVal = retVal && archive.EndTag(lineContainerTag);
 
-			if (!retVal){
-				CScanlineMask::ResetImage();
+		int indicesCount = 0;
 
+		retVal = retVal && archive.BeginMultiTag(containerIndicesTag, indexTag, indicesCount);
+		if (!retVal){
+			return false;
+		}
+
+		m_scanlines.resize(indicesCount);
+		for (int lineIndex = 0; lineIndex < indicesCount; ++lineIndex){
+			int containerIndex = -1;
+			retVal = retVal && archive.BeginTag(indexTag);
+			retVal = retVal && archive.Process(containerIndex);
+			retVal = retVal && archive.EndTag(indexTag);
+
+			if (containerIndex >= containerSize){
+				ResetImage();
 				return false;
 			}
 
-			if (!ranges.IsEmpty()){
-				m_rangesContainer.push_back(ranges);
-
-				m_scanlines[lineIndex] = &m_rangesContainer.back();
-			}
-			else{
-				m_scanlines[lineIndex] = NULL;
-			}
-
-			retVal = retVal && archive.EndTag(scanLineTag);
+			m_scanlines[lineIndex] = containerIndex;
 		}
+
+		retVal = retVal && archive.EndTag(containerIndicesTag);
 	}
 
 	return retVal;
