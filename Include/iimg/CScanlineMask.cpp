@@ -357,7 +357,7 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 #endif
 
 	for (int lineIndex = 0; lineIndex < linesCount; lineIndex++){
-		istd::CIntRanges rangeList = m_rangesContainer.back();
+		istd::CIntRanges rangeList;
 
 		const std::set<int>& lineList = scanVector.at(lineIndex);
 		Q_ASSERT((lineList.size() % 2) == 0);	// pair number of points should be calculated
@@ -389,7 +389,7 @@ void CScanlineMask::CreateFromPolygon(const i2d::CPolygon& polygon, const i2d::C
 		if (!rangeList.IsEmpty()){
 			m_rangesContainer.push_back(rangeList);
 
-			m_scanlines[lineIndex] = m_rangesContainer.size();
+			m_scanlines[lineIndex] = m_rangesContainer.size() - 1;
 		}
 		else{
 			m_scanlines[lineIndex] =  -1;
