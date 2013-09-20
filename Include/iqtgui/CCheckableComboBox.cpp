@@ -145,7 +145,6 @@ QWidget* CCheckableComboBox::CCheckBoxDelegate::createEditor(QWidget *parent, co
 }
 
 
-
 void CCheckableComboBox::CCheckBoxDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
 	QCheckBox* editorPtr = dynamic_cast<QCheckBox*>(editor);
