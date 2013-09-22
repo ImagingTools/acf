@@ -103,7 +103,7 @@ Module{
 			// get the ACF binary directory
 			var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
 			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory + '/' + product.moduleProperty("acf", "targetBinSubdir");
+				acfBinDirectory = product.buildDirectory;
 			}
 
 			// get the ACF configuration file
@@ -150,9 +150,9 @@ Module{
 
 		prepare:{
 			// get the ACF binary directory
-			var acfBinDirectory = product.moduleProperty("ArxcExe", "acfBinDirectory");
+			var acfBinDirectory = product.moduleProperty("AcfExe", "acfBinDirectory");
 			if (acfBinDirectory == null){
-				acfBinDirectory = product.buildDirectory + '/' + targetBinSubdir;
+				acfBinDirectory = product.buildDirectory;
 			}
 
 			// get the ACF configuration file
