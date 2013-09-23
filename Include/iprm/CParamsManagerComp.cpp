@@ -593,9 +593,11 @@ bool CParamsManagerComp::ParamSet::IsNameFixed() const
 
 // reimplemented (iser::ISerializable)
 
-bool CParamsManagerComp::ParamSet::Serialize(iser::IArchive& /*archive*/)
+bool CParamsManagerComp::ParamSet::Serialize(iser::IArchive& archive)
 {
-	return false;
+	Q_ASSERT(paramSetPtr.IsValid());
+
+	return paramSetPtr->Serialize(archive);
 }
 
 
