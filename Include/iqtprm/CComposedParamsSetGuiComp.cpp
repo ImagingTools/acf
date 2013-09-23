@@ -301,10 +301,12 @@ void CComposedParamsSetGuiComp::OnGuiModelAttached()
 
 			imod::IObserver* observerPtr = m_observersCompPtr[i];
 
-			if ((parameterModelPtr != NULL) && (observerPtr != NULL) && parameterModelPtr->AttachObserver(observerPtr)){
-				imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
-				if (editorPtr != NULL){
-					m_connectedEditorsMap[editorPtr] = false;
+			if ((parameterModelPtr != NULL) && (observerPtr != NULL) && !parameterModelPtr->IsAttached(observerPtr)){
+				if (parameterModelPtr->AttachObserver(observerPtr)){
+					imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
+					if (editorPtr != NULL){
+						m_connectedEditorsMap[editorPtr] = false;
+					}
 				}
 			}
 		}
