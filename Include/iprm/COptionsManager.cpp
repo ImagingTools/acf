@@ -132,7 +132,7 @@ bool COptionsManager::IsOptionEnabled(int index) const
 
 // reimplemented (iprm::IOptionsManager)
 
-int COptionsManager::GetIndexOperationFlags(int /*index*/) const
+int COptionsManager::GetOptionOperationFlags(int /*index*/) const
 {
 	return OOF_SUPPORT_INSERT | OOF_SUPPORT_DELETE;
 }

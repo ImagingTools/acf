@@ -5,7 +5,7 @@
 #include "istd/TChangeNotifier.h"
 #include "istd/CChangeDelegator.h"
 #include "iprm/IParamsSet.h"
-#include "iprm/IOptionsList.h"
+#include "iprm/IOptionsManager.h"
 #include "iqtgui/CItemDelegate.h"
 #include "iqtgui/CWidgetUpdateBlocker.h"
 #include "iview/IShapeView.h"
@@ -196,6 +196,11 @@ void CParamsManagerGuiCompBase::on_ParamsTree_itemChanged(QTreeWidgetItem* item,
 			// if not set: restore old name
 			item->setText(0, objectPtr->GetParamsSetName(setIndex));
 		}
+
+		iprm::IOptionsManager* optionsManagerPtr = dynamic_cast<iprm::IOptionsManager*>(objectPtr);
+		if ((optionsManagerPtr != NULL) && (item->flags() & Qt::ItemIsUserCheckable)){
+			optionsManagerPtr->SetOptionEnabled(setIndex, item->checkState(0));
+		}
 	}
 }
 
@@ -340,9 +345,12 @@ void CParamsManagerGuiCompBase::UpdateTree()
 	if (objectPtr != NULL){
 		int setsCount = objectPtr->GetParamsSetsCount();
 
+		const iprm::IOptionsList* paramsListPtr = NULL;
 		iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 		if (selectionPtr != NULL){
 			selectedIndex = selectionPtr->GetSelectedOptionIndex();
+		
+			paramsListPtr = selectionPtr->GetSelectionConstraints(); 
 		}
 
 		for (int paramSetIndex = 0; paramSetIndex < setsCount; ++paramSetIndex){
@@ -353,12 +361,19 @@ void CParamsManagerGuiCompBase::UpdateTree()
 				itemFlags |= Qt::ItemIsEditable;
 			}
 
+			if (*m_allowEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IParamsManager::MF_SUPPORT_ENABLING) != 0){
+				itemFlags |= Qt::ItemIsUserCheckable;
+			}
+
 			QString name = objectPtr->GetParamsSetName(paramSetIndex);
 			QTreeWidgetItem* paramsSetItemPtr = new QTreeWidgetItem();
-			paramsSetItemPtr->setText(0, name);
-			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);
 			paramsSetItemPtr->setFlags(itemFlags);
 
+			paramsSetItemPtr->setText(0, name);
+			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);
+			if (*m_allowEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IParamsManager::MF_SUPPORT_ENABLING) != 0){
+				paramsSetItemPtr->setCheckState(0, paramsListPtr->IsOptionEnabled(paramSetIndex) ? Qt::Checked : Qt::Unchecked);
+			}
 			
 			iprm::IParamsSet* paramsSetPtr = objectPtr->GetParamsSet(paramSetIndex);
 			if (paramsSetPtr != NULL){

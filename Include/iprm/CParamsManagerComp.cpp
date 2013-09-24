@@ -80,7 +80,7 @@ int CParamsManagerComp::GetIndexOperationFlags(int index) const
 	int retVal = 0;
 
 	if (m_paramSetsFactPtr.IsValid()){
-		retVal |= MF_SUPPORT_INSERT | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME;
+		retVal |= MF_SUPPORT_INSERT | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME | MF_SUPPORT_ENABLING;
 
 		if (!m_paramSets.isEmpty() && (index < CParamsManagerComp::GetParamsSetsCount())){
 			retVal |= MF_SUPPORT_DELETE;
@@ -92,7 +92,7 @@ int CParamsManagerComp::GetIndexOperationFlags(int index) const
 
 	if (index >= 0){
 		if (index < m_fixedParamSetsCompPtr.GetCount()){
-			retVal &= ~(MF_SUPPORT_INSERT | MF_SUPPORT_DELETE | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME);
+			retVal &= ~(MF_SUPPORT_INSERT | MF_SUPPORT_DELETE | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME | MF_SUPPORT_ENABLING);
 		}
 	}
 
@@ -313,6 +313,7 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag paramsSetListTag("ParamsSetList", "List of parameter set");
 	static iser::CArchiveTag paramsSetTag("ParamsSet", "Single parameter set", true);
 	static iser::CArchiveTag nameTag("Name", "Name of set");
+	static iser::CArchiveTag enabledTag("Enabled", "Is parameter set enabled");
 	static iser::CArchiveTag valueTag("Value", "Value of set", true);
 
 	bool retVal = true;
@@ -357,6 +358,31 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 		}
 		retVal = retVal && archive.EndTag(nameTag);
 
+		if (isStoring){
+			bool isEnabled = IsOptionEnabled(i);
+
+			retVal = retVal && archive.BeginTag(enabledTag);
+			retVal = retVal && archive.Process(isEnabled);
+			retVal = retVal && archive.EndTag(enabledTag);
+		}
+		else{
+			quint32 version = 0;
+			archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
+
+			if (version > 3181){
+				bool isEnabled = true;
+
+				retVal = retVal && archive.BeginTag(enabledTag);
+				retVal = retVal && archive.Process(isEnabled);
+				retVal = retVal && archive.EndTag(enabledTag);
+				if (!retVal){
+					return false;
+				}
+
+				SetOptionEnabled(i, isEnabled);
+			}
+		}
+
 		retVal = retVal && archive.BeginTag(valueTag);
 		retVal = retVal && paramsSetPtr->Serialize(archive);
 		retVal = retVal && archive.EndTag(valueTag);
@@ -374,6 +400,67 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 	Q_ASSERT(m_selectedIndex < CParamsManagerComp::GetParamsSetsCount());
 
 	return retVal;
+}
+
+
+// reimplemented (iprm::IOptionsManager)
+
+int CParamsManagerComp::GetOptionOperationFlags(int index) const
+{
+	return GetIndexOperationFlags(index);
+}
+
+
+bool CParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
+{
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
+	if (index < fixedSetsCount){
+		return false;
+	}
+
+	if (m_paramSets[index - fixedSetsCount]->isEnabled != isEnabled){
+		istd::CChangeNotifier notifier(this, CF_MODEL);
+
+		m_paramSets[index - fixedSetsCount]->isEnabled = isEnabled;
+	}
+
+	return true;
+}
+
+
+bool CParamsManagerComp::RemoveOption(int index)
+{
+	return RemoveParamsSet(index);
+}
+
+
+bool CParamsManagerComp::InsertOption(
+			const QString& /*optionName*/,
+			const QByteArray& /*optionId*/,
+			const QString& /*optionDescription*/,
+			int /*index*/)
+{
+	return false;
+}
+
+
+bool CParamsManagerComp::SwapOptions(int index1, int index2)
+{
+	return SwapParamsSet(index1, index2);
+}
+
+
+bool CParamsManagerComp::SetOptionName(int optionIndex, const QString& optionName)
+{
+	return SetParamsSetName(optionIndex, optionName);
+}
+
+
+bool CParamsManagerComp::SetOptionDescription(int /*optionIndex*/, const QString& /*optionDescription*/)
+{
+	return false;
 }
 
 
@@ -409,9 +496,16 @@ QByteArray CParamsManagerComp::GetOptionId(int index) const
 }
 
 
-bool CParamsManagerComp::IsOptionEnabled(int /*index*/) const
+bool CParamsManagerComp::IsOptionEnabled(int index) const
 {
-	return true;
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+	if (index < fixedSetsCount){
+		return true;
+	}
+
+	return m_paramSets[index - fixedSetsCount]->isEnabled;
 }
 
 

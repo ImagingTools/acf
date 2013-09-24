@@ -63,7 +63,7 @@ public:
 						To check if first element can be renamed call it with index value 0.
 						To check if you can insert at the last position please use index value equal to current options count.
 	*/
-	virtual int GetIndexOperationFlags(int index = -1) const = 0;
+	virtual int GetOptionOperationFlags(int index = -1) const = 0;
 
 	/**
 		Enables a given option. Only enabled options can be selected.

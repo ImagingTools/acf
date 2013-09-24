@@ -277,6 +277,7 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 	static iser::CArchiveTag paramsSetTag("ParamsSet", "Single parameter set", true);
 	static iser::CArchiveTag typeIdTag("TypeId", "Type id of factory of parameter set");
 	static iser::CArchiveTag nameTag("Name", "Name of set");	
+	static iser::CArchiveTag enabledTag("Enabled", "Is parameter set enabled");
 	static iser::CArchiveTag valueTag("Value", "Value of set", true);
 
 	bool retVal = true;
@@ -354,6 +355,31 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 		}
 		retVal = retVal && archive.EndTag(nameTag);	
 
+		if (isStoring){
+			bool isEnabled = IsOptionEnabled(i);
+
+			retVal = retVal && archive.BeginTag(enabledTag);
+			retVal = retVal && archive.Process(isEnabled);
+			retVal = retVal && archive.EndTag(enabledTag);
+		}
+		else{
+			quint32 version = 0;
+			archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
+
+			if (version > 3181){
+				bool isEnabled = true;
+
+				retVal = retVal && archive.BeginTag(enabledTag);
+				retVal = retVal && archive.Process(isEnabled);
+				retVal = retVal && archive.EndTag(enabledTag);
+				if (!retVal){
+					return false;
+				}
+
+				SetOptionEnabled(i, isEnabled);
+			}
+		}
+
 		if (!isStoring && !EnsureParamExist(typeId, i, name)){
 			return false;
 		}
@@ -387,6 +413,66 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 	}
 
 	return retVal;
+}
+
+// reimplemented (iprm::IOptionsManager)
+
+int CMultiParamsManagerComp::GetOptionOperationFlags(int index) const
+{
+	return GetIndexOperationFlags(index);
+}
+
+
+bool CMultiParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
+{
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
+	if (index < fixedSetsCount){
+		return false;
+	}
+
+	if (m_paramSets[index - fixedSetsCount].isEnabled != isEnabled){
+		istd::CChangeNotifier notifier(this, CF_MODEL);
+
+		m_paramSets[index - fixedSetsCount].isEnabled = isEnabled;
+	}
+
+	return true;
+}
+
+
+bool CMultiParamsManagerComp::RemoveOption(int index)
+{
+	return RemoveParamsSet(index);
+}
+
+
+bool CMultiParamsManagerComp::InsertOption(
+			const QString& /*optionName*/,
+			const QByteArray& /*optionId*/,
+			const QString& /*optionDescription*/,
+			int /*index*/)
+{
+	return false;
+}
+
+
+bool CMultiParamsManagerComp::SwapOptions(int index1, int index2)
+{
+	return SwapParamsSet(index1, index2);
+}
+
+
+bool CMultiParamsManagerComp::SetOptionName(int optionIndex, const QString& optionName)
+{
+	return SetParamsSetName(optionIndex, optionName);
+}
+
+
+bool CMultiParamsManagerComp::SetOptionDescription(int /*optionIndex*/, const QString& /*optionDescription*/)
+{
+	return false;
 }
 
 

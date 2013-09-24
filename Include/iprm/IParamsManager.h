@@ -34,22 +34,31 @@ public:
 			Active if number of parameters is fixed.
 		*/
 		MF_COUNT_FIXED = 1,
+
 		/**
 			Active if rename of parameters is supported.
 		*/
 		MF_SUPPORT_RENAME = 2,
+
 		/**
 			Active if insert of parameters is possible.
 		*/
 		MF_SUPPORT_INSERT = 4,
+
 		/**
 			Active if delete of parameters is possible.
 		*/
 		MF_SUPPORT_DELETE = 8,
+
 		/**
 			Active if swap of parameters with the other one is possible.
 		*/
-		MF_SUPPORT_SWAP = 16
+		MF_SUPPORT_SWAP = 16,
+
+		/**
+			Active if enabling/disabling of the parameters is possible.
+		*/
+		MF_SUPPORT_ENABLING = 32
 	};
 
 	/**
