@@ -22,12 +22,14 @@ StaticLibrary{
 	}
 
 	Group{
+		condition: acf.installIncludes == true
 		fileTagsFilter: ["hpp"]
 		qbs.install: true
 		qbs.installDir: "Include/GeneratedFiles/" + product.name
 	}
 
 	Group{
+		condition: acf.installProject === undefined || acf.installProject == acf.projectName
 		fileTagsFilter: ["staticlibrary"]
 		qbs.install: true
 		qbs.installDir: acf.targetLibSubdir

@@ -12,6 +12,7 @@ Module{
 
 	// root of the whole project
 	property path projectRoot
+	property path projectName
 
 	readonly property string acfRootDir: FileInfo.joinPaths(path, "/../../..")
 	property string compilerName
@@ -55,6 +56,8 @@ Module{
 		compileMode: "Release"
 	}
 
+	property bool installIncludes: false							// if enabled the includes will be installed
+	property string installProject									// if set, only single project will be installed
 	property string compilerDir: compileMode + compilerName
 	property string targetBinSubdir: 'Bin/' + compilerDir
 	property string targetLibSubdir: 'Lib/' + compilerDir

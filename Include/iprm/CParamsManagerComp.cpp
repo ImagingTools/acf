@@ -358,29 +358,26 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 		}
 		retVal = retVal && archive.EndTag(nameTag);
 
+		bool isEnabled = true;
 		if (isStoring){
-			bool isEnabled = IsOptionEnabled(i);
+			isEnabled = IsOptionEnabled(i);
+		}
+
+		quint32 version = 0;
+		if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) ||
+					(version > 3185)){
+			bool isEnabled = true;
 
 			retVal = retVal && archive.BeginTag(enabledTag);
 			retVal = retVal && archive.Process(isEnabled);
 			retVal = retVal && archive.EndTag(enabledTag);
-		}
-		else{
-			quint32 version = 0;
-			archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
-
-			if (version > 3181){
-				bool isEnabled = true;
-
-				retVal = retVal && archive.BeginTag(enabledTag);
-				retVal = retVal && archive.Process(isEnabled);
-				retVal = retVal && archive.EndTag(enabledTag);
-				if (!retVal){
-					return false;
-				}
-
-				SetOptionEnabled(i, isEnabled);
+			if (!retVal){
+				return false;
 			}
+		}
+
+		if (!isStoring){
+			SetOptionEnabled(i, isEnabled);
 		}
 
 		retVal = retVal && archive.BeginTag(valueTag);
