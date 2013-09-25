@@ -36,7 +36,7 @@ void COptionsManager::ResetOptions()
 
 int COptionsManager::GetOptionsFlags() const
 {
-	return SCF_SUPPORT_UNIQUE_ID | SCF_SUPPORT_DISABLED;
+	return SCF_SUPPORT_UNIQUE_ID | SFC_DISABLE_ALLOWED;
 }
 
 

@@ -55,7 +55,7 @@ public:
 		/**
 			Active if it is possible to get the disabled option.
 		*/
-		OOF_SUPPORT_DISABLED = 32,
+		OOF_DISABLE_ALLOWED = 32,
 
 		/**
 			Active if enabling and disabling of the parameters is possible.
@@ -73,7 +73,7 @@ public:
 						To check if first element can be renamed call it with index value 0.
 						To check if you can insert at the last position please use index value equal to current options count.
 	*/
-	virtual int GetOptionOperationFlags(int index = -1) const = 0;
+	virtual int GetOptionOperationFlags(int index = -1) const = 0;	// TODO: Merge this with iprm::IOptionsList::GetOptionsFlags()
 
 	/**
 		Enables a given option. Only enabled options can be selected.

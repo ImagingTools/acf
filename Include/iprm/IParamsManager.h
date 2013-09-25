@@ -58,7 +58,7 @@ public:
 		/**
 			Active if it is possible to get the disabled option.
 		*/
-		MF_SUPPORT_DISABLED = 32,
+		MF_DISABLE_ALLOWED = 32,
 	};
 
 	/**

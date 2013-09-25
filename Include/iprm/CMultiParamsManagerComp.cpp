@@ -30,9 +30,9 @@ int CMultiParamsManagerComp::GetIndexOperationFlags(int index) const
 			retVal |= MF_SUPPORT_INSERT | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME;
 			
 			if (*m_allowDisabledAttrPtr){
-				retVal |= MF_SUPPORT_DISABLED;
+				retVal |= MF_DISABLE_ALLOWED;
 				
-				if (*m_allowEnablingAttrPtr){
+				if (*m_supportEnablingAttrPtr){
 					retVal |= OOF_SUPPORT_ENABLING;
 				}
 			}
@@ -419,7 +419,7 @@ bool CMultiParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
 	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
 	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
-	if ((index < fixedSetsCount) || !*m_allowDisabledAttrPtr || !*m_allowEnablingAttrPtr){
+	if ((index < fixedSetsCount) || !*m_allowDisabledAttrPtr || !*m_supportEnablingAttrPtr){
 		return false;
 	}
 
@@ -471,7 +471,7 @@ bool CMultiParamsManagerComp::SetOptionDescription(int /*optionIndex*/, const QS
 
 int CMultiParamsManagerComp::GetOptionsFlags() const
 {
-	return SCF_NONE;
+	return GetIndexOperationFlags(-1);
 }
 
 

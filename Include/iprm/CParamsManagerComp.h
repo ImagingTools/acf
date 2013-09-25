@@ -47,7 +47,7 @@ public:
 		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet");
 		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
 		I_ASSIGN(m_allowDisabledAttrPtr, "AllowDisabled", "Control if disabled parameters are supported", true, false);
-		I_ASSIGN(m_allowEnablingAttrPtr, "AllowEnabling", "Control if enabling or disabling of parameters is allowed (works only if disabled parameters are supported)", true, true);
+		I_ASSIGN(m_supportEnablingAttrPtr, "SupportEnabling", "Control if enabling or disabling of parameters is allowed (works only if disabled parameters are supported)", true, true);
 	I_END_COMPONENT;
 
 	CParamsManagerComp();
@@ -111,7 +111,7 @@ private:
 	I_FACT(IParamsSet, m_paramSetsFactPtr);
 	I_ATTR(bool, m_serializeSelectionAttrPtr);
 	I_ATTR(bool, m_allowDisabledAttrPtr);
-	I_ATTR(bool, m_allowEnablingAttrPtr);
+	I_ATTR(bool, m_supportEnablingAttrPtr);
 
 	class ParamSet:
 				public CMultiModelBridgeBase,

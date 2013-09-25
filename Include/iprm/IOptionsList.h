@@ -48,12 +48,12 @@ public:
 		/**
 			If set, every option must have an unique ID.
 		*/
-		SCF_SUPPORT_UNIQUE_ID = 1 << 0,
+		SCF_SUPPORT_UNIQUE_ID = 256,
 
 		/**
 			If set, some options can be disabled.
 		*/
-		SCF_SUPPORT_DISABLED = 1 << 1
+		SFC_DISABLE_ALLOWED = 32
 	};
 
 	/**

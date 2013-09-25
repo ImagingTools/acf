@@ -300,7 +300,7 @@ bool CMultiPageGuiCompBase::PageModel::SetSelectedOptionIndex(int index)
 
 int CMultiPageGuiCompBase::PageModel::GetOptionsFlags() const
 {
-	return SCF_SUPPORT_DISABLED | SCF_SUPPORT_UNIQUE_ID;
+	return SFC_DISABLE_ALLOWED | SCF_SUPPORT_UNIQUE_ID;
 }
 
 
