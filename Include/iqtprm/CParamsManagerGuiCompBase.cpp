@@ -361,7 +361,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 				itemFlags |= Qt::ItemIsEditable;
 			}
 
-			if (*m_allowEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IParamsManager::MF_SUPPORT_ENABLING) != 0){
+			if (*m_allowEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IOptionsManager::OOF_SUPPORT_ENABLING) != 0){
 				itemFlags |= Qt::ItemIsUserCheckable;
 			}
 
@@ -371,7 +371,7 @@ void CParamsManagerGuiCompBase::UpdateTree()
 
 			paramsSetItemPtr->setText(0, name);
 			paramsSetItemPtr->setData(0, Qt::UserRole, paramSetIndex);
-			if (*m_allowEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IParamsManager::MF_SUPPORT_ENABLING) != 0){
+			if (*m_allowEnablingAttrPtr && (paramsListPtr != NULL) && (flags & iprm::IOptionsManager::OOF_SUPPORT_ENABLING) != 0){
 				paramsSetItemPtr->setCheckState(0, paramsListPtr->IsOptionEnabled(paramSetIndex) ? Qt::Checked : Qt::Unchecked);
 			}
 			

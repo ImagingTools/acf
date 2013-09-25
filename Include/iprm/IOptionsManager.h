@@ -50,7 +50,17 @@ public:
 		/**
 			Active if swap of parameters with the other one is possible.
 		*/
-		OOF_SUPPORT_SWAP = 16
+		OOF_SUPPORT_SWAP = 16,
+
+		/**
+			Active if it is possible to get the disabled option.
+		*/
+		OOF_SUPPORT_DISABLED = 32,
+
+		/**
+			Active if enabling and disabling of the parameters is possible.
+		*/
+		OOF_SUPPORT_ENABLING = 64
 	};
 
 

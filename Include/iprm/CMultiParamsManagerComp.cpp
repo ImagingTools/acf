@@ -21,23 +21,29 @@ CMultiParamsManagerComp::CMultiParamsManagerComp()
 
 int CMultiParamsManagerComp::GetIndexOperationFlags(int index) const
 {
+	Q_ASSERT(index < GetParamsSetsCount());
+
 	int retVal = 0;
 
-	if (m_paramSetsFactoriesPtr.IsValid()){
-		retVal |= MF_SUPPORT_INSERT | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME;
+	if (m_paramSetsFactoriesPtr.GetCount() > 0){
+		if ((index < 0) || (index > m_fixedParamSetsCompPtr.GetCount())){
+			retVal |= MF_SUPPORT_INSERT | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME;
+			
+			if (*m_allowDisabledAttrPtr){
+				retVal |= MF_SUPPORT_DISABLED;
+				
+				if (*m_allowEnablingAttrPtr){
+					retVal |= OOF_SUPPORT_ENABLING;
+				}
+			}
 
-		if (!m_paramSets.isEmpty() && (index < CMultiParamsManagerComp::GetParamsSetsCount())){
-			retVal |= MF_SUPPORT_DELETE;
+			if (!m_paramSets.isEmpty()){
+				retVal |= MF_SUPPORT_DELETE;
+			}
 		}
 	}
 	else{
 		retVal |= MF_COUNT_FIXED;
-	}
-
-	if (index >= 0){
-		if (index < m_fixedParamSetsCompPtr.GetCount()){
-			retVal &= ~(MF_SUPPORT_INSERT | MF_SUPPORT_DELETE | MF_SUPPORT_SWAP | MF_SUPPORT_RENAME);
-		}
 	}
 
 	return retVal;
@@ -413,7 +419,7 @@ bool CMultiParamsManagerComp::SetOptionEnabled(int index, bool isEnabled)
 	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
 
 	int fixedSetsCount = m_fixedSetNamesAttrPtr.GetCount();
-	if (index < fixedSetsCount){
+	if ((index < fixedSetsCount) || !*m_allowDisabledAttrPtr || !*m_allowEnablingAttrPtr){
 		return false;
 	}
 
@@ -487,9 +493,16 @@ QString CMultiParamsManagerComp::GetOptionDescription(int /*index*/) const
 }
 
 
-bool CMultiParamsManagerComp::IsOptionEnabled(int /*index*/) const
+bool CMultiParamsManagerComp::IsOptionEnabled(int index) const
 {
-	return true;
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+	if (!*m_allowDisabledAttrPtr || (index < fixedSetsCount)){
+		return true;
+	}
+
+	return m_paramSets[index - fixedSetsCount].isEnabled;
 }
 
 

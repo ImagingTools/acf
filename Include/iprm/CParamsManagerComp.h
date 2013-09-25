@@ -45,6 +45,9 @@ public:
 		I_ASSIGN(m_elementIndexParamId, "ElementIndexParamId", "ID of index of returned parameter set in manager list", false, "Index");
 		I_ASSIGN(m_elementNameParamId, "ElementNameParamId", "ID of the name of returned parameter set in manager list", false, "Name");
 		I_ASSIGN(m_paramSetsFactPtr, "ParamsSetFactory", "Factory of variable parameter set", false, "ParamsSet");
+		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
+		I_ASSIGN(m_allowDisabledAttrPtr, "AllowDisabled", "Control if disabled parameters are supported", true, false);
+		I_ASSIGN(m_allowEnablingAttrPtr, "AllowEnabling", "Control if enabling or disabling of parameters is allowed (works only if disabled parameters are supported)", true, true);
 	I_END_COMPONENT;
 
 	CParamsManagerComp();
@@ -106,6 +109,9 @@ private:
 	I_ATTR(QByteArray, m_elementIndexParamId);
 	I_ATTR(QByteArray, m_elementNameParamId);
 	I_FACT(IParamsSet, m_paramSetsFactPtr);
+	I_ATTR(bool, m_serializeSelectionAttrPtr);
+	I_ATTR(bool, m_allowDisabledAttrPtr);
+	I_ATTR(bool, m_allowEnablingAttrPtr);
 
 	class ParamSet:
 				public CMultiModelBridgeBase,
