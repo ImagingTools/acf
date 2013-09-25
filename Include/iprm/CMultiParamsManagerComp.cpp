@@ -106,8 +106,8 @@ int CMultiParamsManagerComp::InsertParamsSet(int typeIndex, int index)
 	ParamSet paramSet;
 	
 	paramSet.paramSetPtr.SetPtr(newParamsSetPtr);
-	paramSet.name = defaultSetName;
 	paramSet.typeId = info.id;
+	paramSet.name = defaultSetName;
 
 	imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 	if (modelPtr != NULL){
@@ -171,8 +171,9 @@ bool CMultiParamsManagerComp::SwapParamsSet(int index1, int index2)
 	ParamSet& paramsSet2 = m_paramSets[index2 - fixedParamsCount];
 
 	paramsSet1.paramSetPtr.Swap(paramsSet2.paramSetPtr);
-	qSwap(paramsSet1.name, paramsSet2.name);
 	qSwap(paramsSet1.typeId, paramsSet2.typeId);
+	qSwap(paramsSet1.name, paramsSet2.name);
+	qSwap(paramsSet1.isEnabled, paramsSet2.isEnabled);
 
 	Q_ASSERT(paramsSet1.paramSetPtr->GetFactoryId() == paramsSet1.typeId);
 	Q_ASSERT(paramsSet2.paramSetPtr->GetFactoryId() == paramsSet2.typeId);
@@ -338,50 +339,34 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 		retVal = retVal && archive.EndTag(typeIdTag);
 
-		retVal = retVal && archive.BeginTag(nameTag);
-		
 		QString name;
+		bool isEnabled = true;
 
 		if (isStoring){
 			name = GetParamsSetName(i);
+			isEnabled = IsOptionEnabled(i);
+		}
 
-			retVal = retVal && archive.Process(name);
-		}
-		else{
-			retVal = retVal && archive.Process(name);
-			if (!retVal){
-				return false;
-			}			
-		}
+		retVal = retVal && archive.BeginTag(nameTag);
+		retVal = retVal && archive.Process(name);
 		retVal = retVal && archive.EndTag(nameTag);	
 
-		if (isStoring){
-			bool isEnabled = IsOptionEnabled(i);
-
+		quint32 version = 0;
+		if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) ||
+					(version > 3186)){
 			retVal = retVal && archive.BeginTag(enabledTag);
 			retVal = retVal && archive.Process(isEnabled);
 			retVal = retVal && archive.EndTag(enabledTag);
 		}
-		else{
-			quint32 version = 0;
-			archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version);
 
-			if (version > 3181){
-				bool isEnabled = true;
+		if (!isStoring){
+			if (!retVal){
+				return false;
+			}			
 
-				retVal = retVal && archive.BeginTag(enabledTag);
-				retVal = retVal && archive.Process(isEnabled);
-				retVal = retVal && archive.EndTag(enabledTag);
-				if (!retVal){
-					return false;
-				}
-
-				SetOptionEnabled(i, isEnabled);
+			if (!EnsureParamExist(i, typeId, name, isEnabled)){
+				return false;
 			}
-		}
-
-		if (!isStoring && !EnsureParamExist(typeId, i, name)){
-			return false;
 		}
 
 		IParamsSet* paramsSetPtr = GetParamsSet(i);
@@ -516,6 +501,110 @@ QByteArray CMultiParamsManagerComp::GetOptionId(int index) const
 
 // protected methods
 
+bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& typeId, const QString& name, bool isEnabled)
+{
+	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
+
+	int paramSetsIndex = index - fixedParamsCount;
+	if (paramSetsIndex < 0){
+		return true;
+	}
+
+	if (typeId.isEmpty()){
+		return false;
+	}
+
+	if (paramSetsIndex < m_paramSets.size()){
+		ParamSet& paramSet = m_paramSets[paramSetsIndex];
+
+		istd::CChangeNotifier notifier(NULL, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
+
+		if (typeId != paramSet.typeId){
+			QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
+			if (typeListIter == m_typeInfoList.typeIdToIndexMap.constEnd()){
+				return false;
+			}
+
+			int typeListIndex = typeListIter.value();
+			Q_ASSERT(typeListIndex >= 0);
+			Q_ASSERT(typeListIndex < m_typeInfoList.typeInfos.size());
+
+			const TypeInfo& typeInfo = m_typeInfoList.typeInfos[typeListIndex];
+			Q_ASSERT(typeInfo.id == typeId);
+			Q_ASSERT(typeInfo.factoryIndex >= 0);
+			Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
+
+			IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
+			if (newParamsSetPtr == NULL){
+				return false;
+			}
+
+			Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
+
+			notifier.SetPtr(this);
+
+			paramSet.typeId = typeId;
+
+			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+			if (modelPtr != NULL){
+				modelPtr->AttachObserver(this);
+			}
+		}
+
+		if (name != paramSet.name){
+			notifier.SetPtr(this);
+
+			paramSet.name = name;
+		}
+
+		if (isEnabled != paramSet.isEnabled){
+			notifier.SetPtr(this);
+
+			paramSet.isEnabled = isEnabled;
+		}
+	}
+	else{
+		QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
+		if (typeListIter == m_typeInfoList.typeIdToIndexMap.constEnd()){
+			return false;
+		}
+
+		int typeListIndex = typeListIter.value();
+		Q_ASSERT(typeListIndex >= 0);
+		Q_ASSERT(typeListIndex < m_typeInfoList.typeInfos.size());
+
+		const TypeInfo& typeInfo = m_typeInfoList.typeInfos[typeListIndex];
+		Q_ASSERT(typeInfo.factoryIndex >= 0);
+		Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
+
+		IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
+		if (newParamsSetPtr == NULL){
+			return false;
+		}
+		
+		Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
+
+		istd::CChangeNotifier notifier(this, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
+
+		ParamSet paramSet;
+
+		paramSet.paramSetPtr.SetPtr(newParamsSetPtr);
+		paramSet.typeId = typeId;
+		paramSet.name = name;
+		paramSet.isEnabled = isEnabled;
+
+		m_paramSets.push_back(paramSet);
+
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
+		if (modelPtr != NULL){
+			modelPtr->AttachObserver(this);
+		}
+	}
+
+	return true;
+}
+
+
 // reimplemented (icomp::CComponentBase)
 
 void CMultiParamsManagerComp::OnComponentCreated()
@@ -542,6 +631,7 @@ void CMultiParamsManagerComp::OnComponentCreated()
 				typeInfo.factoryIndex = factoryIndex;
 				typeInfo.id = factoryId;
 				typeInfo.name = factoryId;
+
 				if (factoryIndex < m_factoryNameNameAttrPtr.GetCount()){
 					typeInfo.name = m_factoryNameNameAttrPtr[factoryIndex];
 				}
@@ -577,102 +667,7 @@ void CMultiParamsManagerComp::OnComponentDestroyed()
 }
 
 
-bool CMultiParamsManagerComp::EnsureParamExist(const QByteArray& typeId, int index, const QString& name)
-{
-	int fixedParamsCount = m_fixedParamSetsCompPtr.GetCount();
-
-	int paramSetsIndex = index - fixedParamsCount;
-	if (paramSetsIndex < 0){
-		return true;
-	}
-
-	if (typeId.isEmpty()){
-		return false;
-	}
-
-	if (paramSetsIndex < m_paramSets.size()){
-		ParamSet& paramSet = m_paramSets[paramSetsIndex];
-
-		istd::CChangeNotifier notifier(NULL, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
-
-		if (name != paramSet.name){
-			notifier.SetPtr(this);
-
-			paramSet.name = name;
-		}
-
-		if (typeId != paramSet.typeId){
-			QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
-			if (typeListIter == m_typeInfoList.typeIdToIndexMap.constEnd()){
-				return false;
-			}
-
-			int typeListIndex = typeListIter.value();
-			Q_ASSERT(typeListIndex >= 0);
-			Q_ASSERT(typeListIndex < m_typeInfoList.typeInfos.size());
-
-			const TypeInfo& typeInfo = m_typeInfoList.typeInfos[typeListIndex];
-			Q_ASSERT(typeInfo.id == typeId);
-			Q_ASSERT(typeInfo.factoryIndex >= 0);
-			Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
-
-			IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
-			if (newParamsSetPtr == NULL){
-				return false;
-			}
-
-			Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
-
-			notifier.SetPtr(this);
-
-			paramSet.typeId = typeId;
-
-			imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
-			if (modelPtr != NULL){
-				modelPtr->AttachObserver(this);
-			}
-		}
-	}
-	else{
-		QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);
-		if (typeListIter == m_typeInfoList.typeIdToIndexMap.constEnd()){
-			return false;
-		}
-
-		int typeListIndex = typeListIter.value();
-		Q_ASSERT(typeListIndex >= 0);
-		Q_ASSERT(typeListIndex < m_typeInfoList.typeInfos.size());
-
-		const TypeInfo& typeInfo = m_typeInfoList.typeInfos[typeListIndex];
-		Q_ASSERT(typeInfo.factoryIndex >= 0);
-		Q_ASSERT(typeInfo.factoryIndex < m_paramSetsFactoriesPtr.GetCount());
-
-		IParamsSet* newParamsSetPtr = m_paramSetsFactoriesPtr.CreateInstance(typeInfo.factoryIndex);
-		if (newParamsSetPtr == NULL){
-			return false;
-		}
-		
-		Q_ASSERT(newParamsSetPtr->GetFactoryId() == typeInfo.id);
-
-		istd::CChangeNotifier notifier(this, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
-
-		ParamSet paramSet;
-
-		paramSet.paramSetPtr.SetPtr(newParamsSetPtr);
-		paramSet.name = name;
-		paramSet.typeId = typeId;
-
-		m_paramSets.push_back(paramSet);
-
-		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
-		if (modelPtr != NULL){
-			modelPtr->AttachObserver(this);
-		}
-	}
-
-	return true;
-}
-
+// private methods
 
 void CMultiParamsManagerComp::EnsureParamsSetModelDetached(iprm::IParamsSet* paramsSetPtr) const
 {
@@ -680,6 +675,19 @@ void CMultiParamsManagerComp::EnsureParamsSetModelDetached(iprm::IParamsSet* par
 	if (modelPtr != NULL){
 		modelPtr->DetachAllObservers();				
 	}
+}
+
+
+int CMultiParamsManagerComp::FindParamSetIndex(const QString& name) const
+{
+	int paramsCount = m_paramSets.size();
+	for (int i = 0; i < paramsCount; ++i){
+		if (m_paramSets.at(i).name == name){
+			return i;
+		}
+	}
+
+	return -1;
 }
 
 
@@ -737,18 +745,11 @@ bool CMultiParamsManagerComp::TypeInfoList::IsOptionEnabled(int /*index*/) const
 	return true;
 }
 
-// private methods
+// public methods of embedded class ParamSet
 
-int CMultiParamsManagerComp::FindParamSetIndex(const QString& name) const
+CMultiParamsManagerComp::ParamSet::ParamSet()
+:	isEnabled(true)
 {
-	int paramsCount = m_paramSets.size();
-	for (int i = 0; i < paramsCount; ++i){
-		if (m_paramSets.at(i).name == name){
-			return i;
-		}
-	}
-
-	return -1;
 }
 
 

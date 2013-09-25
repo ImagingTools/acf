@@ -113,31 +113,33 @@ protected:
 		QMap<QByteArray, int> typeIdToIndexMap;
 	};
 
+	/**
+		Ensure some parameter exist, has correct type and attributes. 
+		\param	index		position in list of parameters.
+		\param	typeid		ID of parameter type.
+		\param	name		name of parameter (attribute).
+		\param	isEnabled	enebling status of parameter (attribute).
+		\return			\c true if element exists (was present or could be created).
+	*/
+	bool EnsureParamExist(int index, const QByteArray& typeId, const QString& name, bool isEnabled);
+
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-	/**
-		Ensure some parameter exist and has correct type. 
-		\param	index	position in list of parameters.
-		\param	typeid	ID of parameter type.
-		\return			\c true - de-serialization was successful or \c false - no de-serialization was possible.
-	*/
-	bool EnsureParamExist(const QByteArray& typeId, int index, const QString& name);
-
 private:
 	void EnsureParamsSetModelDetached(iprm::IParamsSet* paramsSetPtr) const;
+	int FindParamSetIndex(const QString& name) const;
 
-private:
 	struct ParamSet
 	{
+		ParamSet();
+
 		istd::TSmartPtr<IParamsSet> paramSetPtr;
-		QString name;
 		QByteArray typeId;
+		QString name;
 		bool isEnabled;
 	};
-
-	int FindParamSetIndex(const QString& name) const;
 
 	typedef QList<ParamSet> ParamSets;
 

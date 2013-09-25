@@ -205,6 +205,7 @@ bool CParamsManagerComp::SwapParamsSet(int index1, int index2)
 
 	paramsSet1.paramSetPtr.Swap(paramsSet2.paramSetPtr);
 	qSwap(paramsSet1.name, paramsSet2.name);
+	qSwap(paramsSet1.isEnabled, paramsSet2.isEnabled);
 
 	istd::CChangeNotifier notifier1(&paramsSet1);
 	istd::CChangeNotifier notifier2(&paramsSet2);
@@ -573,6 +574,7 @@ int CParamsManagerComp::FindParamSetIndex(const QString& name) const
 // public methods of embedded class
 
 CParamsManagerComp::ParamSet::ParamSet()
+:	isEnabled(true)
 {
 	parentPtr = NULL;
 }
