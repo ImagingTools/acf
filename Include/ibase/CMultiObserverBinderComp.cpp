@@ -6,9 +6,10 @@ namespace ibase
 
 
 CMultiObserverBinderComp::CMultiObserverBinderComp()
-:	m_attachedModelPtr(NULL)
+	:m_attachedModelPtr(NULL)
 {
 }
+
 
 
 // public methods
@@ -117,6 +118,28 @@ void CMultiObserverBinderComp::SetReadOnly(bool state)
 		if (editorPtr != NULL){
 			editorPtr->SetReadOnly(state);
 		}
+	}
+}
+
+
+// protected methods
+
+// reimplemented (icomp::CComponentBase)
+
+void CMultiObserverBinderComp::OnComponentDestroyed()
+{
+	EnsureModelDetached();
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
+// private methods
+
+void CMultiObserverBinderComp::EnsureModelDetached()
+{
+	if ((m_attachedModelPtr != NULL) && m_attachedModelPtr->IsAttached(this)){
+		m_attachedModelPtr->DetachObserver(this);
 	}
 }
 

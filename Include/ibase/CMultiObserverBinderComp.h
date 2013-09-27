@@ -44,6 +44,13 @@ public:
 	virtual bool IsReadOnly() const;
 	virtual void SetReadOnly(bool state);
 
+protected:
+	// reimplemented (icomp::CComponentBase)
+	virtual void OnComponentDestroyed();
+
+private:
+	void EnsureModelDetached();
+
 private:
 	I_MULTIREF(imod::IModelEditor, m_modelEditorsCompPtr);
 	I_MULTIREF(imod::IObserver, m_observersCompPtr);
