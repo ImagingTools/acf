@@ -53,36 +53,121 @@ public:
 	*/
 	void Reset();
 
+	/**
+		Get value of left boundary.
+	*/
 	double GetLeft() const;
+	/**
+		Set value of left boundary.
+	*/
 	void SetLeft(double left);
+	/**
+		Get value of top boundary.
+	*/
 	double GetTop() const;
+	/**
+		Set value of top boundary.
+	*/
 	void SetTop(double top);
+	/**
+		Get value of right boundary.
+	*/
 	double GetRight() const;
+	/**
+		Set value of right boundary.
+	*/
 	void SetRight(double right);
+	/**
+		Get value of bottom boundary.
+	*/
 	double GetBottom() const;
+	/**
+		Set value of bottom boundary.
+	*/
 	void SetBottom(double bottom);
 
+	/**
+		Get values of horizontal boundaries.
+	*/
 	const istd::CRange& GetHorizontalRange() const;
+	/**
+		Get values of horizontal boundaries as reference.
+		Please use update notificators (like istd::CChangeNotifier) to be sure that obervers will be updated correctly.
+	*/
 	istd::CRange& GetHorizontalRangeRef();
+	/**
+		Set values of horizontal boundaries.
+	*/
 	void SetHorizontalRange(const istd::CRange& range);
 
+	/**
+		Get values of vertical boundaries.
+	*/
 	const istd::CRange& GetVerticalRange() const;
+	/**
+		Get values of vertical boundaries as reference.
+		Please use update notificators (like istd::CChangeNotifier) to be sure that obervers will be updated correctly.
+	*/
 	istd::CRange& GetVerticalRangeRef();
+	/**
+		Set values of vertical boundaries.
+	*/
 	void SetVerticalRange(const istd::CRange& range);
 
+	/**
+		Get left-top point of this rectangle.
+	*/
 	CVector2d GetLeftTop() const;
+	/**
+		Set left-top point of this rectangle.
+	*/
 	void SetTopLeft(const CVector2d& topLeft);
+	/**
+		Get right-top point of this rectangle.
+	*/
 	CVector2d GetRightTop() const;
+	/**
+		Set right-top point of this rectangle.
+	*/
 	void SetTopRight(const CVector2d& topRight);
+	/**
+		Get left-bottom point of this rectangle.
+	*/
 	CVector2d GetLeftBottom() const;
+	/**
+		Set left-bottom point of this rectangle.
+	*/
 	void SetBottomLeft(const CVector2d& bottomLeft);
+	/**
+		Get right-bottom point of this rectangle.
+	*/
 	CVector2d GetRightBottom() const;
+	/**
+		Set right-bottom point of this rectangle.
+	*/
 	void SetBottomRight(const CVector2d& bottomRight);
 
+	/**
+		Check if some point is contained in this rectangle.
+	*/
 	bool Contains(const CVector2d& point) const;
+	/**
+		Check if some point is contained in this rectangle.
+	*/
 	bool Contains(const istd::CIndex2d& point) const;
+	/**
+		Check if some rectangle is fully contained in this rectangle.
+		The calibration will be ignored.
+	*/
 	bool Contains(const CRectangle& rect) const;
+
+	/**
+		Get width of this rectangle.
+	*/
 	double GetWidth() const;
+	/**
+		Get height of this rectangle.
+	*/
 	double GetHeight() const;
 
 	/**
@@ -116,14 +201,48 @@ public:
 	*/
 	void Intersect(const CRectangle& rectangle);
 
+	/**
+		Get union of two rectangles.
+		Union of rectangles is the smallest rectangle containing both.
+		The calibration will be ignored.
+	*/
 	CRectangle GetUnion(const CRectangle& rect) const;
+	/**
+		Set this rectangle to union of two rectangles.
+		The calibration will be ignored.
+	*/
 	void Unite(const CRectangle& rect);
 
+	/**
+		Get union of this rectangle and point.
+		This is the smallest rectangle containing both elements.
+	*/
 	CRectangle GetUnion(const i2d::CVector2d& position) const;
+	/**
+		Set this rectangle to union of rectangle and point.
+		This union is the smallest rectangle containing both elements.
+	*/
 	void Unite(const i2d::CVector2d& position);
 
+	/**
+		Get expanded rectangle (simple sum of boundary values).
+	*/
 	CRectangle GetExpanded(const CRectangle& rect) const;
+	/**
+		Expand rectangle.
+		This expanded rectangle is simple sum of boundary values.
+	*/
 	void Expand(const CRectangle& rect);
+
+	/**
+		Get distance from nearest point of this rectangle to specified position.
+	*/
+	double GetDistance(const CVector2d& position) const;
+
+	/**
+		Get maximal distance from points of this rectangle to specified position.
+	*/
+	double GetMaxDistance(const CVector2d& position) const;
 
 	/**
 		Get the nearest point in the rectangle for the some given point.

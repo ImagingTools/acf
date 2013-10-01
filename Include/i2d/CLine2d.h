@@ -115,6 +115,11 @@ public:
 	double GetDistance(const CVector2d& position) const;
 
 	/**
+		Get maximal distance from points of this line to specified position.
+	*/
+	double GetMaxDistance(const CVector2d& position) const;
+
+	/**
 		Get distance from nearest point of extended line to specified position.
 		As extended line are mean mathematical lines going over specified line points.
 	*/
@@ -140,6 +145,12 @@ public:
 		Get quadratic distance between line points.
 	*/
 	double GetLength2() const;
+
+	/**
+		Get direction angle of this line.
+		It will be returned in radians conform to \c i2d::CVector::GetAngle().
+	*/
+	double GetDirectionAngle() const;
 
 	/**
 		Get part of line intersecting specified rectangle.
@@ -177,8 +188,6 @@ public:
 	double GetCutAlpha(const CLine2d& line) const;
 
 	double GetCastAlpha(const i2d::CVector2d& point) const;
-
-	bool CutDisk(const i2d::CVector2d& center, double radius) const;
 
 	/**
 		Get projection position 'alpha value' and orthogonal distance to line.
@@ -350,32 +359,6 @@ inline double CLine2d::GetCastAlpha(const i2d::CVector2d& point) const
 
 	double dotProduct = delta.GetDotProduct(deltaToPoint);
 	return dotProduct / delta.GetLength2();
-}
-
-
-inline bool CLine2d::CutDisk(const i2d::CVector2d& center, double radius) const
-{
-	const i2d::CVector2d& delta = GetDiffVector();
-	const i2d::CVector2d& deltaToCenter = m_point1 - center;
-
-	double a = delta.GetLength2();
-	if (a < I_BIG_EPSILON * I_BIG_EPSILON){
-		return (m_point1.GetDistance2(center) <= radius * radius);
-	}
-	double b = delta.GetDotProduct(deltaToCenter);
-	double c = deltaToCenter.GetLength2() - radius * radius;
-
-	double D = b * b - a * c;
-	if (D >= 0){
-		double sqrtD = ::sqrt(D);
-
-		double alpha1 = (-b - sqrtD) / a;
-		double alpha2 = (-b + sqrtD) / a;
-		if ((alpha1 < 1) && (alpha2 > 0)){
-			return true;
-		}
-	}
-	return false;
 }
 
 

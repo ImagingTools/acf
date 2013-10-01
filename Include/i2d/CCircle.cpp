@@ -50,6 +50,127 @@ bool CCircle::operator!=(const CCircle& ref) const
 }
 
 
+bool CCircle::IsIntersectedBy(const CCircle& circle, bool isFilled) const
+{
+	double distance2 = m_position.GetDistance2(circle.m_position);
+	double radiusSum = m_radius + circle.m_radius;
+
+	if (!isFilled){
+		double radiusDiff = qFabs(m_radius - circle.m_radius);
+
+		if (distance2 < (radiusDiff * radiusDiff)){
+			return false;
+
+		}
+	}
+
+	return distance2 < (radiusSum * radiusSum);
+}
+
+
+bool CCircle::IsIntersectedBy(const CLine2d& line, bool isFilled) const
+{
+	const i2d::CVector2d& lineDiff = line.GetDiffVector();
+	const i2d::CVector2d& point1ToCenter = line.GetPoint1() - m_position;
+
+	bool isPoint1Inside = point1ToCenter.GetLength2() <= m_radius * m_radius;
+	if (isPoint1Inside && isFilled){
+		return true;
+	}
+
+	bool isPoint2Inside = m_position.GetDistance2(line.GetPoint2()) <= m_radius * m_radius;
+	if (isPoint2Inside && isFilled){
+		return true;
+	}
+
+	if (isPoint1Inside != isPoint2Inside){	// one is inside, the other is outside -> intersects
+		return true;
+	}
+
+	double a = lineDiff.GetLength2();
+	double b = lineDiff.GetDotProduct(point1ToCenter);
+	double c = point1ToCenter.GetLength2() - m_radius * m_radius;
+
+	double D = b * b - a * c;
+	if (D >= 0){
+		double sqrtD = qSqrt(D);
+
+		double alpha1a = (-b - sqrtD);
+		double alpha2a = (-b + sqrtD);
+		if (((alpha1a <= a) && (alpha1a >= 0)) || ((alpha2a <= a) && (alpha2a >= 0))){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+int CCircle::GetIntersectionAlphas(const CLine2d& line, double result[2]) const
+{
+	int retVal = 0;
+
+	const i2d::CVector2d& lineDiff = line.GetDiffVector();
+	const i2d::CVector2d& point1ToCenter = line.GetPoint1() - m_position;
+
+	double a = lineDiff.GetLength2();
+	double b = lineDiff.GetDotProduct(point1ToCenter);
+	double c = point1ToCenter.GetLength2() - m_radius * m_radius;
+
+	double D = b * b - a * c;
+	if (D >= 0){
+		double sqrtD = qSqrt(D);
+
+		if (D < I_BIG_EPSILON * I_BIG_EPSILON){
+			double alphaa = -b;
+
+			if ((alphaa >= 0) && (alphaa <= a)){
+				if (a > I_BIG_EPSILON * I_BIG_EPSILON){
+					result[retVal++] = alphaa / a;
+				}
+				else{
+					result[retVal++] = 0.5;
+				}
+			}
+		}
+		else{
+			double alpha1a = (-b - sqrtD);
+			double alpha2a = (-b + sqrtD);
+			if ((alpha1a <= a) && (alpha2a >= 0)){
+				if (a > I_BIG_EPSILON * I_BIG_EPSILON){
+					if (alpha1a >= 0){
+						result[retVal++] = alpha1a / a;
+					}
+
+					if (alpha2a <= a){
+						result[retVal++] = alpha2a / a;
+					}
+				}
+				else{
+					result[retVal++] = 0.5;
+				}
+			}
+		}
+	}
+
+	return retVal;
+}
+
+
+int CCircle::GetIntersectionPoints(const CLine2d& line, i2d::CVector2d& result1, i2d::CVector2d& result2) const
+{
+	double alphas[2] = {0, 0};
+	int retVal = GetIntersectionAlphas(line, alphas);
+	if (retVal >= 1){
+		result1 = line.GetPositionFromAlpha(alphas[0]);
+		if (retVal >= 2){
+			result2 = line.GetPositionFromAlpha(alphas[1]);
+		}
+	}
+	return retVal;
+}
+
+
 // reimplemented (i2d::IObject2d)
 
 CRectangle CCircle::GetBoundingBox() const

@@ -119,6 +119,8 @@ public:
 	CVector2d& operator/=(double scalar);
 
 	operator QPointF() const;
+
+	static const CVector2d& GetZero();
 };
 
 
@@ -288,8 +290,17 @@ inline CVector2d::operator QPointF() const
 }
 
 
+// static methods
+
+inline const CVector2d& CVector2d::GetZero()
+{
+	return reinterpret_cast<const CVector2d&>(BaseClass::GetZero());
+}
+
+
 } // namespace i2d
 
 
 #endif // !i2d_CVector2d_included
+
 

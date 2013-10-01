@@ -387,6 +387,70 @@ void CRectangle::Expand(const CRectangle& rect)
 }
 
 
+double CRectangle::GetDistance(const CVector2d& position) const
+{
+	// Search block order:
+	//
+	//     1   2   3
+	//       x---x
+	//     4 | 5 | 6
+	//       x---x
+	//     7   8   9
+
+	if (position.GetY() < m_verticalRange.GetMinValue()){
+		if (position.GetX() < m_horizontalRange.GetMinValue()){
+			// Block 1
+			return position.GetDistance(GetLeftTop());
+		}
+		else if (position.GetX() <= m_horizontalRange.GetMaxValue()){
+			// Block 2
+			return m_verticalRange.GetMinValue() - position.GetY();
+		}
+		else{
+			// Block 3
+			return position.GetDistance(GetRightTop());
+		}
+	}
+	else if (position.GetY() <= m_verticalRange.GetMaxValue()){
+		if (position.GetX() < m_horizontalRange.GetMinValue()){
+			// Block 4
+			return m_horizontalRange.GetMinValue() - position.GetX();
+		}
+		else if (position.GetX() <= m_horizontalRange.GetMaxValue()){
+			// point is inside, Block 5
+			return 0;
+		}
+		else{
+			// Block 6
+			return position.GetX() - m_horizontalRange.GetMaxValue();
+		}
+	}
+	else{
+		if (position.GetX() < m_horizontalRange.GetMinValue()){
+			// Block 7
+			return position.GetDistance(GetLeftBottom());
+		}
+		else if (position.GetX() <= m_horizontalRange.GetMaxValue()){
+			// Block 8
+			return position.GetY() - m_verticalRange.GetMaxValue();
+		}
+		else{
+			// Block 9
+			return position.GetDistance(GetRightBottom());
+		}
+	}
+}
+
+
+double CRectangle::GetMaxDistance(const CVector2d& position) const
+{
+	double maxDistanceTop2 = qMax(position.GetDistance2(GetLeftTop()), position.GetDistance2(GetRightTop()));
+	double maxDistanceBottom2 = qMax(position.GetDistance2(GetLeftBottom()), position.GetDistance2(GetRightBottom()));
+
+	return qSqrt(qMax(maxDistanceTop2, maxDistanceBottom2));
+}
+
+
 CVector2d CRectangle::GetNearestPointTo(const CVector2d& point) const
 {
 	return CVector2d(m_horizontalRange.GetNearestInside(point.GetX()), m_verticalRange.GetNearestInside(point.GetY()));

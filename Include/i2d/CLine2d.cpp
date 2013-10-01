@@ -179,6 +179,20 @@ double CLine2d::GetDistance(const CVector2d& position) const
 }
 
 
+double CLine2d::GetMaxDistance(const CVector2d& position) const
+{
+	double point1Dist2 = m_point1.GetDistance2(position);
+	double point2Dist2 = m_point2.GetDistance2(position);
+
+	if (point1Dist2 > point2Dist2){
+		return qSqrt(point1Dist2);
+	}
+	else{
+		return qSqrt(point2Dist2);
+	}
+}
+
+
 double CLine2d::GetExtendedDistance(const CVector2d& position) const
 {
 	CVector2d diff = GetDiffVector();
@@ -205,6 +219,12 @@ double CLine2d::GetLength() const
 double CLine2d::GetLength2() const
 {
 	return GetDiffVector().GetLength2();
+}
+
+
+double CLine2d::GetDirectionAngle() const
+{
+	return GetDiffVector().GetAngle();
 }
 
 

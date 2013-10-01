@@ -87,11 +87,6 @@ private:
 	explicit CDirection2d(double radian);
 
 	/**
-		The direction in radian.
-	*/
-	double m_direction;
-
-	/**
 		Checks the objects invariant. This is for assertion annotation
 		\return		true if all object invariants are valid
 	*/
@@ -101,6 +96,11 @@ private:
 		Normalize internal angle to the range [-PI, +PI]
 	*/
 	static double Normalize(double radian);
+
+	/**
+		The direction in radian.
+	*/
+	double m_direction;
 };
 
 
