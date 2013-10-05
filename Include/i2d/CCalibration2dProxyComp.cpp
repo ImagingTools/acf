@@ -235,13 +235,21 @@ void CCalibration2dProxyComp::EnsureWorkingCalibrationUpdated() const
 
 		const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
 		if (calibrationPtr != NULL){
-			m_workingCalibrationPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+			m_workingCalibrationPtr.SetCastedOrRemove(calibrationPtr->CloneMe(), true);
 		}
 		else{
-			m_workingCalibrationPtr.Reset();
+			m_workingCalibrationPtr.SetPtr(&s_defaultTransform, false);
 		}
 	}
 }
+
+
+// private static attributes
+
+i2d::CAffineTransformation2d CCalibration2dProxyComp::s_defaultTransform(
+			i2d::CAffine2d(i2d::CMatrix2d(1, 0, 0, 1)));
+
+
 
 
 } // namespace i2d
