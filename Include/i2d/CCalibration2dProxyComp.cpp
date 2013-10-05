@@ -7,6 +7,11 @@ namespace i2d
 
 // public methods
 
+CCalibration2dProxyComp::CCalibration2dProxyComp()
+	:m_isCalibrationCalculated(false)
+{
+}
+
 // reimplemented (ICalibration2d)
 
 const imath::IUnitInfo* CCalibration2dProxyComp::GetArgumentUnitInfo() const
@@ -180,6 +185,17 @@ bool CCalibration2dProxyComp::Serialize(iser::IArchive& /*archive*/)
 }
 
 
+// reimplemented (imod::IObserver)
+
+void CCalibration2dProxyComp::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
+{
+	m_isCalibrationCalculated = false;
+
+	BaseClass2::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+}
+
+
+
 // protected methods
 
 // reimplemented (icomp::CComponentBase)
@@ -206,11 +222,25 @@ void CCalibration2dProxyComp::OnComponentDestroyed()
 
 const ICalibration2d* CCalibration2dProxyComp::GetCalibrationPtr() const
 {
-	if (m_calibrationProviderCompPtr.IsValid()){
-		return m_calibrationProviderCompPtr->GetCalibration();
-	}
+	EnsureWorkingCalibrationUpdated();
 
-	return NULL;
+	return m_workingCalibrationPtr.GetPtr();
+}
+
+
+void CCalibration2dProxyComp::EnsureWorkingCalibrationUpdated() const
+{
+	if (!m_isCalibrationCalculated && m_calibrationProviderCompPtr.IsValid()){
+		m_isCalibrationCalculated = true;
+
+		const i2d::ICalibration2d* calibrationPtr = m_calibrationProviderCompPtr->GetCalibration();
+		if (calibrationPtr != NULL){
+			m_workingCalibrationPtr.SetCastedOrRemove(calibrationPtr->CloneMe());
+		}
+		else{
+			m_workingCalibrationPtr.Reset();
+		}
+	}
 }
 
 

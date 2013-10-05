@@ -26,6 +26,7 @@ class CCalibration2dProxyComp:
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
+	typedef imod::CMultiModelBridgeBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CCalibration2dProxyComp);
 		I_REGISTER_INTERFACE(ICalibration2d);
@@ -35,6 +36,8 @@ public:
 	I_END_COMPONENT;
 
 public:
+	CCalibration2dProxyComp();
+
 	// reimplemented (ICalibration2d)
 	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const;
 	virtual const imath::IUnitInfo* GetResultUnitInfo() const;
@@ -75,6 +78,9 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
+	// reimplemented (imod::IObserver)
+	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+
 protected:
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();
@@ -82,10 +88,15 @@ protected:
 
 private:
 	const ICalibration2d* GetCalibrationPtr() const;
+	
+	void EnsureWorkingCalibrationUpdated() const;
 
 private:
 	I_REF(ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_calibrationProviderModelCompPtr);
+
+	mutable istd::TDelPtr<i2d::ICalibration2d> m_workingCalibrationPtr;
+	mutable bool m_isCalibrationCalculated;
 };
 
 
