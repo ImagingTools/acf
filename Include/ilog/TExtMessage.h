@@ -4,17 +4,6 @@
 
 // ACF includes
 #include "imod/TModelWrap.h"
-#include "i2d/IObject2d.h"
-#include "i2d/CCircle.h"
-#include "i2d/CLine2d.h"
-#include "i2d/CPosition2d.h"
-#include "i2d/CAnnulus.h"
-#include "i2d/CAnnulusSegment.h"
-#include "i2d/CPolyline.h"
-#include "i2d/CTubePolyline.h"
-#include "ilog/CMessageContainer.h"
-
-// QSF includes
 #include "ilog/CMessage.h"
 
 
