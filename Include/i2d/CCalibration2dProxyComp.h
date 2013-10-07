@@ -79,7 +79,7 @@ public:
 	virtual bool Serialize(iser::IArchive& archive);
 
 	// reimplemented (imod::IObserver)
-	virtual void AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
 
 protected:
 	// reimplemented (icomp::CComponentBase)
