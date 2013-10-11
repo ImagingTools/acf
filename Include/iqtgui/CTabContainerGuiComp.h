@@ -25,7 +25,7 @@ public:
 		I_ASSIGN(m_cornerGuiCompPtr, "CornerWidget", "Optional corner widget", false, "CornerWidget");
 		I_ASSIGN(m_useTriangularTabsAttrPtr, "UseTriangularTabs", "Using triangular tab form", true, false);
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
-		I_ASSIGN(m_useDocumentModeAttrPtr, "UseDocumentMode", "If enabledm, the tab widget will be switched into the document mode", true, false);
+		I_ASSIGN(m_useDocumentModeAttrPtr, "UseDocumentMode", "If enabled, the tab widget will be switched into the document mode", true, false);
 	I_END_COMPONENT;
 
 protected:

@@ -50,45 +50,49 @@ void CSelectableCommandsProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolym
 			ibase::ICommand::CF_GLOBAL_MENU | 
 			ibase::ICommand::CF_EXCLUSIVE | 
 			ibase::ICommand::CF_ONOFF;
+
+		if (m_showInToolBarAttrPtr.IsValid() && *m_showInToolBarAttrPtr){
+			commandFlags |= ibase::ICommand::CF_TOOLBAR;
+		}
+
 		if (optionsCount > 0){
 			m_commandsList.setVisible(true);
 
-			if (m_noSelectionCommandAttrPtr.IsValid())
-			{
-				iqtgui::CHierarchicalCommand* resetAoiCommandPtr = new iqtgui::CHierarchicalCommand(
+			if (m_noSelectionCommandAttrPtr.IsValid()){
+				iqtgui::CHierarchicalCommand* resetCommandPtr = new iqtgui::CHierarchicalCommand(
 					*m_noSelectionCommandAttrPtr,
 					100,
 					commandFlags);
 
-				connect(resetAoiCommandPtr, SIGNAL(triggered()), this, SLOT(OnCommandActivated()));
-				resetAoiCommandPtr->setData(iprm::ISelectionParam::NO_SELECTION);
-				resetAoiCommandPtr->setChecked(currentSelection == -1);
+				connect(resetCommandPtr, SIGNAL(triggered()), this, SLOT(OnCommandActivated()));
+				resetCommandPtr->setData(iprm::ISelectionParam::NO_SELECTION);
+				resetCommandPtr->setChecked(currentSelection == -1);
 
-				m_commandsList.InsertChild(resetAoiCommandPtr, true, 0);
+				m_commandsList.InsertChild(resetCommandPtr, true, 0);
 			}
 		}
 
 		for (int optionIndex = 0; optionIndex < optionsCount; optionIndex++){
 			QString commandName = selectionConstrainsPtr->GetOptionName(optionIndex);
 
-			iqtgui::CHierarchicalCommand* aoiCommandPtr = new iqtgui::CHierarchicalCommand(
+			iqtgui::CHierarchicalCommand* commandPtr = new iqtgui::CHierarchicalCommand(
 				commandName,
 				100,
 				commandFlags);
 
-			aoiCommandPtr->setData(optionIndex);
+			commandPtr->setData(optionIndex);
 
-			connect(aoiCommandPtr, SIGNAL(triggered()), this, SLOT(OnCommandActivated()));
+			connect(commandPtr, SIGNAL(triggered()), this, SLOT(OnCommandActivated()));
 
-			aoiCommandPtr->setChecked(currentSelection == optionIndex);
-			aoiCommandPtr->setCheckable(true);
+			commandPtr->setChecked(currentSelection == optionIndex);
+			commandPtr->setCheckable(true);
 
-			m_commandsList.InsertChild(aoiCommandPtr, true, optionIndex + indexOffset);				
+			m_commandsList.InsertChild(commandPtr, true, optionIndex + indexOffset);				
 		}
 
 		if (m_actionIconsProviderCompPtr.IsValid()){
-			int aoiCommandsCount = qMin(m_commandsList.GetChildsCount(), m_actionIconsProviderCompPtr->GetIconCount());
-			for (int commandIndex = 0; commandIndex < aoiCommandsCount; commandIndex++){
+			int commandsCount = qMin(m_commandsList.GetChildsCount(), m_actionIconsProviderCompPtr->GetIconCount());
+			for (int commandIndex = 0; commandIndex < commandsCount; commandIndex++){
 				iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<iqtgui::CHierarchicalCommand*>(m_commandsList.GetChild(commandIndex));
 				Q_ASSERT(commandPtr != NULL);
 

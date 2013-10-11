@@ -40,6 +40,7 @@ public:
 		I_ASSIGN(m_menuNameAttrPtr, "MenuName", "Name of the menu for the action group", true, "MenuName");
 		I_ASSIGN(m_menuDescriptionAttrPtr, "MenuDescription", "Description for the action group", true, "MenuDescription");
 		I_ASSIGN(m_rootMenuNameAttrPtr, "RootMenu", "Name of the root command", true, "RootMenu");
+		I_ASSIGN(m_showInToolBarAttrPtr, "ShowInToolBar", "If enabled, the action will be shown in the application's tool bar", false, false);
 	I_END_COMPONENT;
 
 	CSelectableCommandsProviderComp();
@@ -66,6 +67,7 @@ protected:
 	I_ATTR(QString, m_menuNameAttrPtr);
 	I_ATTR(QString, m_menuDescriptionAttrPtr);
 	I_ATTR(QString, m_rootMenuNameAttrPtr);
+	I_ATTR(bool, m_showInToolBarAttrPtr);
 
 	iqtgui::CHierarchicalCommand m_rootMenuCommand;
 	iqtgui::CHierarchicalCommand m_mainMenuCommand;
