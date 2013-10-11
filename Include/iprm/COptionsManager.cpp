@@ -32,6 +32,34 @@ void COptionsManager::ResetOptions()
 }
 
 
+int COptionsManager::GetOptionIndexById(const QByteArray& optionId) const
+{
+	int optionsCount = COptionsManager::GetOptionsCount();
+
+	for (int optionIndex = 0; optionIndex < optionsCount; ++optionIndex){
+		if (COptionsManager::GetOptionId(optionIndex) == optionId){
+			return optionIndex;
+		}
+	}
+
+	return -1;
+}
+
+
+int COptionsManager::GetOptionIndexByName(const QString& optionName) const
+{
+	int optionsCount = COptionsManager::GetOptionsCount();
+
+	for (int optionIndex = 0; optionIndex < optionsCount; ++optionIndex){
+		if (COptionsManager::GetOptionName(optionIndex) == optionName){
+			return optionIndex;
+		}
+	}
+
+	return -1;
+}
+
+
 // reimplemented (iprm::IOptionsList)
 
 int COptionsManager::GetOptionsFlags() const

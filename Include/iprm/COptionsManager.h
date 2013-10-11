@@ -37,6 +37,19 @@ public:
 	*/
 	virtual void ResetOptions();
 
+	/**
+		Get the index for the given option ID.
+		\return found option index, or a negative value if the option with the requested ID was not found.
+	*/
+	int GetOptionIndexById(const QByteArray& optionId) const;
+
+	/**
+		Get the index for the given option name.
+		\return found option index, or a negative value if the option with the requested name was not found.
+		\note If the container contains more options with the same name, the first found option index will be returned.
+	*/
+	int GetOptionIndexByName(const QString& optionName) const;
+
 	// reimplemented (iprm::IOptionsList)
 	virtual int GetOptionsFlags() const;
 	virtual int GetOptionsCount() const;
