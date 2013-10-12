@@ -63,6 +63,7 @@ int CStackWidgetDelegate::InsertPage(
 
 	QWidget* panelPtr = new QWidget(stackedWidgetPtr);
 	QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
+	panelLayoutPtr->setMargin(0);
 	panelLayoutPtr->addWidget(pageWidgetPtr);
 
 	return stackedWidgetPtr->insertWidget(pageIndex, panelPtr);
