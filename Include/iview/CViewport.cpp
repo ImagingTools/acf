@@ -174,7 +174,7 @@ bool CViewport::OnMouseMove(istd::CIndex2d position)
 			const imath::IUnitInfo* logicalUnitInfoPtr = calibrationPtr->GetArgumentUnitInfo();
 
 			QString textX = QString::number(logPosition.GetX(), 'f', 2);
-			QString textY = QString::number(logPosition.GetX(), 'f', 2);
+			QString textY = QString::number(logPosition.GetY(), 'f', 2);
 			QString logicalUnitName = (logicalUnitInfoPtr != NULL)?
 						logicalUnitInfoPtr->GetUnitName():
 						tr("mm");
