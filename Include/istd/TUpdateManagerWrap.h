@@ -48,6 +48,8 @@ TUpdateManagerWrap<BaseClass>::TUpdateManagerWrap()
 template <class BaseClass>
 void TUpdateManagerWrap<BaseClass>::BeginChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
+	Q_ASSERT(m_changeCounter >= 0);
+
 	if (m_changeCounter++ == 0){
 		BaseClass::BeginChanges(changeFlags, changeParamsPtr);
 		m_cumulatedFlags = changeFlags;
@@ -61,6 +63,8 @@ void TUpdateManagerWrap<BaseClass>::BeginChanges(int changeFlags, istd::IPolymor
 template <class BaseClass>
 void TUpdateManagerWrap<BaseClass>::EndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
 {
+	Q_ASSERT(m_changeCounter > 0);
+
 	if (--m_changeCounter == 0){
 		m_cumulatedFlags |= changeFlags;
 
