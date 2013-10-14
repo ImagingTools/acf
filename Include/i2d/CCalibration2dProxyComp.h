@@ -3,12 +3,10 @@
 
 
 // ACF includes
-#include "istd/TOptDelPtr.h"
 #include "icomp/CComponentBase.h"
 #include "imod/CMultiModelBridgeBase.h"
 #include "i2d/ICalibration2d.h"
 #include "i2d/ICalibrationProvider.h"
-#include "i2d/CAffineTransformation2d.h"
 
 
 namespace i2d
@@ -26,17 +24,13 @@ class CCalibration2dProxyComp:
 {
 public:
 	typedef icomp::CComponentBase BaseClass;
-	typedef imod::CMultiModelBridgeBase BaseClass2;
 
 	I_BEGIN_COMPONENT(CCalibration2dProxyComp);
 		I_REGISTER_INTERFACE(ICalibration2d);
 		I_REGISTER_INTERFACE(istd::IChangeable);
 		I_ASSIGN(m_calibrationProviderCompPtr, "CalibrationProvider", "Provider of a 2D calibration", true, "CalibrationProvider");
-		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, false);
+		I_ASSIGN_TO(m_calibrationProviderModelCompPtr, m_calibrationProviderCompPtr, true);
 	I_END_COMPONENT;
-
-public:
-	CCalibration2dProxyComp();
 
 	// reimplemented (ICalibration2d)
 	virtual const imath::IUnitInfo* GetArgumentUnitInfo() const;
@@ -78,8 +72,8 @@ public:
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
 
-	// reimplemented (imod::IObserver)
-	virtual void BeforeUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr);
+	// reimplemented (istd::IChangeable)
+	virtual IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 protected:
 	// reimplemented (icomp::CComponentBase)
@@ -88,17 +82,10 @@ protected:
 
 private:
 	const ICalibration2d* GetCalibrationPtr() const;
-	
-	void EnsureWorkingCalibrationUpdated() const;
 
 private:
 	I_REF(ICalibrationProvider, m_calibrationProviderCompPtr);
 	I_REF(imod::IModel, m_calibrationProviderModelCompPtr);
-
-	mutable istd::TOptDelPtr<i2d::ICalibration2d> m_workingCalibrationPtr;
-	mutable bool m_isCalibrationValid;
-
-	static i2d::CAffineTransformation2d s_defaultTransform;
 };
 
 
