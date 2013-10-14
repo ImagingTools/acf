@@ -117,15 +117,15 @@ bool CInteractiveShapeBase::IsDraggable() const
 
 void CInteractiveShapeBase::BeginDrag(const istd::CIndex2d& position)
 {
-	istd::IChangeable* objectPtr = dynamic_cast<istd::IChangeable*>(GetModelPtr());
-	m_changeNotifier.SetPtr(objectPtr);
-
 	BeginLogDrag(GetLogPosition(position));
 }
 
 
 void CInteractiveShapeBase::SetDragPosition(const istd::CIndex2d& position)
 {
+	istd::IChangeable* objectPtr = dynamic_cast<istd::IChangeable*>(GetModelPtr());
+	m_changeNotifier.SetPtr(objectPtr);
+
 	SetLogDragPosition(GetLogPosition(position));
 
 	Invalidate(CS_CONSOLE);
