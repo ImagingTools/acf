@@ -312,6 +312,8 @@ void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 	}
 
 	m_showOtherWindows.setVisible(m_showOtherWindows.GetChildsCount() > 0);
+
+	CSimpleMainWindowGuiComp::UpdateMenuActions();
 }
 
 
