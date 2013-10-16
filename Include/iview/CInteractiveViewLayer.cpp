@@ -328,13 +328,10 @@ void CInteractiveViewLayer::OnShapeSelected(IInteractiveShape& shape, bool state
 	if (state){
 		ShapeMap::iterator iter = m_shapes.find(&shape);
 		if (iter != m_shapes.end()){
-			i2d::CRect newBoundingBox = shape.GetBoundingBox();
 			i2d::CRect prevBoundingBox = iter.value();
 
 			m_shapes.erase(iter);
-			m_activeShapes[&shape] = newBoundingBox;
-
-			OnAreaInvalidated(prevBoundingBox, newBoundingBox);
+			m_activeShapes[&shape] = prevBoundingBox;
 		}
 		else{
 			I_CRITICAL();
@@ -346,13 +343,10 @@ void CInteractiveViewLayer::OnShapeSelected(IInteractiveShape& shape, bool state
 			if (m_focusedShapePtr == &shape){
 				OnShapeDefocused(&shape);
 			}
-			i2d::CRect newBoundingBox = shape.GetBoundingBox();
 			i2d::CRect prevBoundingBox = iter.value();
 
 			m_activeShapes.erase(iter);
-			m_shapes[&shape] = newBoundingBox;
-
-			OnAreaInvalidated(prevBoundingBox, newBoundingBox);
+			m_shapes[&shape] = prevBoundingBox;
 		}
 		else{
 			I_CRITICAL();

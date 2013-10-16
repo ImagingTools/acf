@@ -51,8 +51,8 @@ void CInteractiveShapeBase::SetSelected(bool selectFlag)
 	if (m_isSelected != selectFlag){
 		m_isSelected = selectFlag;
 
-		InvalidateBoundingBox();
-
+		Invalidate(CS_CONSOLE);
+	
 		ISelectable* observerPtr = dynamic_cast<ISelectable*>(GetDisplayPtr());
 		if (observerPtr != NULL){
 			observerPtr->OnShapeSelected(*this, selectFlag);
