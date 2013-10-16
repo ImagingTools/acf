@@ -205,10 +205,10 @@ void CViewLayer::OnAreaInvalidated(const i2d::CRect& prevArea, const i2d::CRect&
 		Q_ASSERT(!m_isBoundingBoxValid || m_boundingBox.IsInside(prevArea));
 
 		if (prevArea.IsEmpty() || (
-						(m_boundingBox.GetLeft() < prevArea.GetLeft()) &&
-						(m_boundingBox.GetRight() > prevArea.GetRight()) &&
-						(m_boundingBox.GetTop() < prevArea.GetTop()) &&
-						(m_boundingBox.GetBottom() > prevArea.GetBottom()))){
+						(m_boundingBox.GetLeft() <= prevArea.GetLeft()) &&
+						(m_boundingBox.GetRight() >= prevArea.GetRight()) &&
+						(m_boundingBox.GetTop() <= prevArea.GetTop()) &&
+						(m_boundingBox.GetBottom() >= prevArea.GetBottom()))){
 			m_boundingBox.Union(newArea);
 		}
 		else{

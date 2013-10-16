@@ -394,6 +394,7 @@ bool CViewBase::ConnectShape(IShape* shapePtr)
 		case IViewLayer::LT_BACKGROUND:
 			layerIndex = m_backgroundLayerIndex;
 			break;
+
 		default:
 			return false;
 	}
