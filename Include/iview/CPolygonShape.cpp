@@ -33,110 +33,110 @@ bool CPolygonShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton butto
 {
 	Q_ASSERT(IsDisplayConnected());
 
-	ShapeBaseClass::OnMouseButton(position, buttonType, downFlag);
+	if (!ShapeBaseClass::OnMouseButton(position, buttonType, downFlag) && IsEditablePosition()){
+		imod::IModel* modelPtr = GetModelPtr();
+		i2d::CPolygon* polygonPtr = dynamic_cast<i2d::CPolygon*>(modelPtr);
+		if (polygonPtr != NULL){
+			if (downFlag){
+				const IColorSchema& colorSchema = GetColorSchema();
 
-	imod::IModel* modelPtr = GetModelPtr();
-	i2d::CPolygon* polygonPtr = dynamic_cast<i2d::CPolygon*>(modelPtr);
-	if (polygonPtr != NULL){
-		if (downFlag){
-			const IColorSchema& colorSchema = GetColorSchema();
+				int nodesCount = polygonPtr->GetNodesCount();
+				int editMode = GetEditMode();
 
-			int nodesCount = polygonPtr->GetNodesCount();
-			int editMode = GetEditMode();
+				switch (editMode){
+				case ISelectable::EM_NONE:
+					if (IsSelected() && BaseClass::OnMouseButton(position, buttonType, downFlag)){
+						return true;
+					}
+					break;
 
-			switch (editMode){
-			case ISelectable::EM_NONE:
-				if (IsSelected() && BaseClass::OnMouseButton(position, buttonType, downFlag)){
-					return true;
-				}
-				break;
+				case ISelectable::EM_MOVE:
+					{
+						const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE);
 
-			case ISelectable::EM_MOVE:
-				{
-					const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_MOVE);
+						for (int i = nodesCount - 1; i >= 0; --i){
+							const i2d::CVector2d& cp = polygonPtr->GetNode(i);
+							istd::CIndex2d sp = GetScreenPosition(cp).ToIndex2d();
 
-					for (int i = nodesCount - 1; i >= 0; --i){
-						const i2d::CVector2d& cp = polygonPtr->GetNode(i);
-						istd::CIndex2d sp = GetScreenPosition(cp).ToIndex2d();
+							if (tickerBox.IsInside(sp - position)){
+								m_referencePosition = cp - GetLogPosition(position);
+								m_referenceIndex = i;
 
-						if (tickerBox.IsInside(sp - position)){
-							m_referencePosition = cp - GetLogPosition(position);
-							m_referenceIndex = i;
+								BeginModelChanges();
 
-							BeginModelChanges();
-
-							return true;
+								return true;
+							}
 						}
 					}
-				}
-				break;
+					break;
 
-			case ISelectable::EM_ADD:
-				{
-					i2d::CVector2d cpLast;
-					cpLast = GetSegmentMiddle(nodesCount - 1);
-					istd::CIndex2d spLast = GetScreenPosition(cpLast).ToIndex2d();
+				case ISelectable::EM_ADD:
+					{
+						i2d::CVector2d cpLast;
+						cpLast = GetSegmentMiddle(nodesCount - 1);
+						istd::CIndex2d spLast = GetScreenPosition(cpLast).ToIndex2d();
 
-					const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_INSERT);
+						const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_INSERT);
 
-					if (tickerBox.IsInside(position - spLast)){
-						BeginModelChanges();
-
-						istd::CChangeNotifier notifier(polygonPtr);
-
-						if (polygonPtr->InsertNode(cpLast)){
-							m_referencePosition = cpLast - GetLogPosition(position);
-							m_referenceIndex = nodesCount;
-
-							UpdateModelChanges();
-							return true;
-						}
-					}
-					for (int i = nodesCount - 2; i >= 0; --i){
-						i2d::CVector2d middle = GetSegmentMiddle(i);
-						istd::CIndex2d sp = GetScreenPosition(middle).ToIndex2d();
-						if (tickerBox.IsInside(position - sp)){
+						if (tickerBox.IsInside(position - spLast)){
 							BeginModelChanges();
 
 							istd::CChangeNotifier notifier(polygonPtr);
 
-							if (polygonPtr->InsertNode(i + 1, middle)){
-								m_referencePosition = middle - GetLogPosition(position);
-								m_referenceIndex = i + 1;
+							if (polygonPtr->InsertNode(cpLast)){
+								m_referencePosition = cpLast - GetLogPosition(position);
+								m_referenceIndex = nodesCount;
 
 								UpdateModelChanges();
 								return true;
 							}
 						}
-					}
-				}
-				break;
+						for (int i = nodesCount - 2; i >= 0; --i){
+							i2d::CVector2d middle = GetSegmentMiddle(i);
+							istd::CIndex2d sp = GetScreenPosition(middle).ToIndex2d();
+							if (tickerBox.IsInside(position - sp)){
+								BeginModelChanges();
 
-			case ISelectable::EM_REMOVE:
-				if (nodesCount > 2){
-					const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_DELETE);
+								istd::CChangeNotifier notifier(polygonPtr);
 
-					for (int i = nodesCount - 1; i >= 0; --i){
-						const i2d::CVector2d& cp = polygonPtr->GetNode(i);
-						istd::CIndex2d sp = GetScreenPosition(cp).ToIndex2d();
-						if (tickerBox.IsInside(position - sp)){
-							BeginModelChanges();
+								if (polygonPtr->InsertNode(i + 1, middle)){
+									m_referencePosition = middle - GetLogPosition(position);
+									m_referenceIndex = i + 1;
 
-							istd::CChangeNotifier notifier(polygonPtr);
-
-							polygonPtr->RemoveNode(i);
-
-							EndModelChanges();
-							return true;
+									UpdateModelChanges();
+									return true;
+								}
+							}
 						}
 					}
+					break;
+
+				case ISelectable::EM_REMOVE:
+					if (nodesCount > 2){
+						const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IColorSchema::TT_DELETE);
+
+						for (int i = nodesCount - 1; i >= 0; --i){
+							const i2d::CVector2d& cp = polygonPtr->GetNode(i);
+							istd::CIndex2d sp = GetScreenPosition(cp).ToIndex2d();
+							if (tickerBox.IsInside(position - sp)){
+								BeginModelChanges();
+
+								istd::CChangeNotifier notifier(polygonPtr);
+
+								polygonPtr->RemoveNode(i);
+
+								EndModelChanges();
+								return true;
+							}
+						}
+					}
+					break;
 				}
-				break;
 			}
 		}
-	}
 
-	EndModelChanges();
+		EndModelChanges();
+	}
 
 	return false;
 }
@@ -203,13 +203,15 @@ void CPolygonShape::Draw(QPainter& drawContext) const
 			drawContext.save();
 			drawContext.setBrush(colorSchema.GetBrush(IColorSchema::SB_TICKER));
 
-			if (IsSelected()){
-				DrawSelectionElements(drawContext);
-			}
-			else{
-				if (m_isFirstVisible && (nodesCount > 0)){
-					sp = GetScreenPosition(polygonPtr->GetNode(0)).ToIndex2d();
-					colorSchema.DrawTicker(drawContext, sp, IColorSchema::TT_INACTIVE);
+			if (IsEditablePosition()){
+				if (IsSelected()){
+					DrawSelectionElements(drawContext);
+				}
+				else{
+					if (m_isFirstVisible && (nodesCount > 0)){
+						sp = GetScreenPosition(polygonPtr->GetNode(0)).ToIndex2d();
+						colorSchema.DrawTicker(drawContext, sp, IColorSchema::TT_INACTIVE);
+					}
 				}
 			}
 
@@ -235,63 +237,65 @@ bool CPolygonShape::OnAttached(imod::IModel* modelPtr)
 ITouchable::TouchState CPolygonShape::IsTouched(istd::CIndex2d position) const
 {
 	const i2d::CPolygon* polygonPtr = dynamic_cast<const i2d::CPolygon*>(GetModelPtr());
-	if (IsDisplayConnected() && (polygonPtr != NULL)){
-		const IColorSchema& colorSchema = GetColorSchema();
-
-		int nodesCount = polygonPtr->GetNodesCount();
-
+	if (polygonPtr != NULL){
 		int editMode = GetEditMode();
 
-		switch (editMode){
-		case ISelectable::EM_NONE:
-			if (IsSelected()){
-				EnsureValidNodes();
-				if (BaseClass::IsTickerTouched(position)){
-					return TS_TICKER;
-				}
+		if (IsEditablePosition()){
+			const IColorSchema& colorSchema = GetColorSchema();
 
-				if (BaseClass::IsParallTouched(m_castTransform, position)){
-					bool isEditablePosition = IsEditablePosition();
-					return isEditablePosition? TS_DRAGGABLE: TS_INACTIVE;
-				}
-			}
-			break;
+			int nodesCount = polygonPtr->GetNodesCount();
 
-		case ISelectable::EM_MOVE:
-			{
-				const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_MOVE: IColorSchema::TT_INACTIVE);
-				for (int i = 0; i < nodesCount; i++){
-					istd::CIndex2d sp = GetScreenPosition(polygonPtr->GetNode(i)).ToIndex2d();
-					if (tickerBox.IsInside(position - sp)){
+			switch (editMode){
+			case ISelectable::EM_NONE:
+				if (IsSelected()){
+					EnsureValidNodes();
+					if (BaseClass::IsTickerTouched(position)){
 						return TS_TICKER;
 					}
-				}
-			}
-			break;
 
-		case ISelectable::EM_REMOVE:
-			{
-				const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_DELETE: IColorSchema::TT_INACTIVE);
-				for (int i = 0; i < nodesCount; i++){
-					istd::CIndex2d sp = GetScreenPosition(polygonPtr->GetNode(i)).ToIndex2d();
-					if (tickerBox.IsInside(position - sp)){
-						return TS_TICKER;
+					if (BaseClass::IsParallTouched(m_castTransform, position)){
+						bool isEditablePosition = IsEditablePosition();
+						return isEditablePosition? TS_DRAGGABLE: TS_INACTIVE;
 					}
 				}
-			}
-			break;
+				break;
 
-		case ISelectable::EM_ADD:
-			{
-				const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_INSERT: IColorSchema::TT_INACTIVE);
-				for (int i = 0; i < nodesCount; i++){
-					istd::CIndex2d sp = GetScreenPosition(GetSegmentMiddle(i)).ToIndex2d();
-					if (tickerBox.IsInside(position - sp)){
-						return TS_TICKER;
+			case ISelectable::EM_MOVE:
+				{
+					const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_MOVE: IColorSchema::TT_INACTIVE);
+					for (int i = 0; i < nodesCount; i++){
+						istd::CIndex2d sp = GetScreenPosition(polygonPtr->GetNode(i)).ToIndex2d();
+						if (tickerBox.IsInside(position - sp)){
+							return TS_TICKER;
+						}
 					}
 				}
+				break;
+
+			case ISelectable::EM_REMOVE:
+				{
+					const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_DELETE: IColorSchema::TT_INACTIVE);
+					for (int i = 0; i < nodesCount; i++){
+						istd::CIndex2d sp = GetScreenPosition(polygonPtr->GetNode(i)).ToIndex2d();
+						if (tickerBox.IsInside(position - sp)){
+							return TS_TICKER;
+						}
+					}
+				}
+				break;
+
+			case ISelectable::EM_ADD:
+				{
+					const i2d::CRect& tickerBox = colorSchema.GetTickerBox(IsSelected()? IColorSchema::TT_INSERT: IColorSchema::TT_INACTIVE);
+					for (int i = 0; i < nodesCount; i++){
+						istd::CIndex2d sp = GetScreenPosition(GetSegmentMiddle(i)).ToIndex2d();
+						if (tickerBox.IsInside(position - sp)){
+							return TS_TICKER;
+						}
+					}
+				}
+				break;
 			}
-			break;
 		}
 
 		if (IsCurveTouched(position)){
