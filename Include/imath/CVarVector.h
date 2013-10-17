@@ -47,6 +47,11 @@ public:
 	CVarVector(const TVector<Size, double>& vector);
 
 	/**
+		Get \c true, if the element ist is empty.
+	*/
+	bool IsEmpty() const;
+
+	/**
 		Get number of elements.
 	*/
 	int GetElementsCount() const;
@@ -58,19 +63,19 @@ public:
 	bool SetElementsCount(int count, double value = 0);
 
 	/**
-		Get element at specified i.
+		Get element at specified index.
 	*/
-	double GetElement(int i) const;
+	double GetElement(int index) const;
 
 	/**
-		Get reference to element at specified i.
+		Get reference to element at specified index.
 	*/
-	double& GetElementRef(int i);
+	double& GetElementRef(int index);
 
 	/**
-		Set element at specified i.
+		Set element at specified index.
 	*/
-	void SetElement(int i, double value);
+	void SetElement(int index, double value);
 
 	/**
 		Set size to zero.
@@ -145,6 +150,7 @@ public:
 		Return euclidian length square.
 	*/
 	double GetLength2() const;
+
 	/**
 		Return euclidian length.
 	*/
@@ -241,6 +247,12 @@ inline CVarVector::CVarVector(const CVarVector& vector)
 
 
 // inline methods
+
+inline bool CVarVector::IsEmpty() const
+{
+	return m_elements.isEmpty();
+}
+
 
 inline int CVarVector::GetElementsCount() const
 {
