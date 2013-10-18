@@ -3,7 +3,7 @@
 
 // ACF includes
 #include "istd/TChangeNotifier.h"
-
+#include "istd/TDelPtr.h"
 #include "iser/CArchiveTag.h"
 
 
@@ -43,6 +43,45 @@ bool CLabel::Serialize(iser::IArchive& archive)
 	retVal = retVal && archive.EndTag(textTag);
 
 	return retVal;
+}
+
+
+// reimplemented (istd::IChangeable)
+
+int CLabel::GetSupportedOperations() const
+{
+	return SO_COPY | SO_CLONE;
+}
+
+
+bool CLabel::CopyFrom(const IChangeable& object, CompatibilityMode mode)
+{
+	const CLabel* labelPtr = dynamic_cast<const CLabel*>(&object);
+
+	if (labelPtr != NULL){
+		istd::CChangeNotifier notifier(this);
+		
+		SetPosition(labelPtr->GetPosition());
+		SetText(labelPtr->GetText());
+
+		CObject2dBase::CopyFrom(object, mode);
+
+		return true;
+	}	
+
+	return false;
+}
+
+
+istd::IChangeable* CLabel::CloneMe(CompatibilityMode mode) const 
+{
+	istd::TDelPtr<CLabel> clonePtr(new CLabel);
+
+	if (clonePtr->CopyFrom(*this, mode)){
+		return clonePtr.PopPtr();
+	}
+
+	return NULL;
 }
 
 
