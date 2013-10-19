@@ -7,6 +7,7 @@
 #include <icomp/CComponentBase.h>
 #include <ibase/ICommandsProvider.h>
 #include <ifile/IFilePersistence.h>
+#include <ifile/IFilePersistenceInfo.h>
 #include <idoc/IDocumentManager.h>
 #include <iqtgui/CHierarchicalCommand.h>
 
@@ -31,6 +32,7 @@ public:
 	I_BEGIN_COMPONENT(CDocumentImportExportCommandComp);
 		I_REGISTER_INTERFACE(ibase::ICommandsProvider);
 		I_ASSIGN(m_documentPersistenceCompPtr, "DocumentPersistence", "File persistence for the actual document type", true, "DocumentPersistence"); 
+		I_ASSIGN_TO(m_documentPersistenceInfoCompPtr, m_documentPersistenceCompPtr, true);
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Manager of the documents in the MDI workspace", true, "DocumentManager");
 		I_ASSIGN_TO(m_documentManagerModelCompPtr, m_documentManagerCompPtr, true);
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of the document type used by MDI workspace", true, "Default");
@@ -51,14 +53,14 @@ protected:
 	virtual void OnComponentCreated();
 	virtual void OnComponentDestroyed();
 
-private Q_SLOTS:
+protected Q_SLOTS:
 	virtual void OnImport();
 	virtual void OnExport();
 
-private:
-	void UpdateCommands();
+protected:
+	virtual void UpdateCommands();
 
-private:
+protected:
 	iqtgui::CHierarchicalCommand m_rootCommands;
 	iqtgui::CHierarchicalCommand m_fileCommands;
 	iqtgui::CHierarchicalCommand m_importCommand;
@@ -67,6 +69,7 @@ private:
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(imod::IModel, m_documentManagerModelCompPtr);
 	I_REF(ifile::IFilePersistence, m_documentPersistenceCompPtr);
+	I_REF(ifile::IFilePersistenceInfo, m_documentPersistenceInfoCompPtr);
 	I_ATTR(QByteArray, m_documentTypeIdAttrPtr);
 	I_ATTR(QString, m_importCommandNameAttrPtr);
 	I_ATTR(QString, m_exportCommandNameAttrPtr);
