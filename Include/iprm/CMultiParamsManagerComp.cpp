@@ -291,6 +291,8 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 	bool isStoring = archive.IsStoring();
 
+	istd::CChangeNotifier notifier(isStoring? NULL: this);
+
 	// Delete all dynamically created parameter sets:
 	if (!isStoring){
 		int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
@@ -308,8 +310,6 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 
 	int paramsCount = GetParamsSetsCount();
 	retVal = retVal && archive.BeginMultiTag(paramsSetListTag, paramsSetTag, paramsCount);
-
-	istd::CChangeNotifier notifier(isStoring? NULL: this);
 
 	if (!isStoring && !retVal){
 		return false;
@@ -530,7 +530,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 	if (paramSetsIndex < m_paramSets.size()){
 		ParamSet& paramSet = m_paramSets[paramSetsIndex];
 
-		istd::CChangeNotifier notifier(NULL, CF_MODEL | CF_OPTIONS_CHANGED | CF_MODEL);	
+		istd::CChangeNotifier notifier(NULL, CF_OPTIONS_CHANGED | CF_MODEL);
 
 		if (typeId != paramSet.typeId){
 			QMap<QByteArray, int>::ConstIterator typeListIter = m_typeInfoList.typeIdToIndexMap.constFind(typeId);

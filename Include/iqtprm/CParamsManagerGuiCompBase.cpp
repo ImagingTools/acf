@@ -31,11 +31,11 @@ void CParamsManagerGuiCompBase::AddItemsToScene(iqt2d::IViewProvider* providerPt
 {
 	Q_ASSERT(providerPtr != NULL);
 
+	m_connectedSceneFlags[providerPtr] = flags;
+
 	iqt2d::IViewExtender* extenderPtr = GetCurrentViewExtenderPtr();
 	if (extenderPtr != NULL){
 		extenderPtr->AddItemsToScene(providerPtr, flags);
-
-		m_connectedSceneFlags[providerPtr] = flags;
 	}
 }
 
@@ -47,9 +47,9 @@ void CParamsManagerGuiCompBase::RemoveItemsFromScene(iqt2d::IViewProvider* provi
 	iqt2d::IViewExtender* extenderPtr = GetCurrentViewExtenderPtr();
 	if (extenderPtr != NULL){
 		extenderPtr->RemoveItemsFromScene(providerPtr);
-
-		m_connectedSceneFlags.remove(providerPtr);
 	}
+
+	m_connectedSceneFlags.remove(providerPtr);
 }
 
 
@@ -630,13 +630,19 @@ void CParamsManagerGuiCompBase::UpdateGui(int updateFlags)
 {
 	Q_ASSERT(IsGuiCreated());
 
-	if (((updateFlags & CF_INIT_EDITOR) == 0) && (updateFlags & istd::IChangeable::CF_DELEGATED)){
+	bool forceUpdate =
+				((updateFlags & iprm::IOptionsList::CF_OPTIONS_CHANGED) != 0) ||
+				((updateFlags & iprm::IParamsManager::CF_SET_INSERTED) != 0) ||
+				((updateFlags & iprm::IParamsManager::CF_SET_REMOVED) != 0);
+
+	if (!forceUpdate && ((updateFlags & CF_INIT_EDITOR) == 0) && (updateFlags & istd::IChangeable::CF_DELEGATED)){
 		return;
 	}
 
 	if (*m_comboBoxViewAttrPtr){
 		UpdateComboBox();
-	} else {
+	}
+	else{
 		UpdateTree();
 	}
 }
@@ -685,11 +691,11 @@ void CParamsManagerGuiCompBase::BeforeUpdate(imod::IModel* modelPtr, int updateF
 
 void CParamsManagerGuiCompBase::AfterUpdate(imod::IModel* modelPtr, int updateFlags, istd::IPolymorphic* updateParamsPtr)
 {
+	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
+
 	if ((updateFlags & iprm::ISelectionParam::CF_SELECTION_CHANGED) != 0){
 		AttachCurrentExtender();
 	}
-
-	BaseClass::AfterUpdate(modelPtr, updateFlags, updateParamsPtr);
 }
 
 
