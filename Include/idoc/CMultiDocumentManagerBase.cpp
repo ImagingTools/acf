@@ -459,7 +459,7 @@ void CMultiDocumentManagerBase::CloseCurrentView(bool beQuiet, bool* ignoredPtr)
 void CMultiDocumentManagerBase::SetActiveView(istd::IPolymorphic* viewPtr)
 {
 	if (m_activeViewPtr != viewPtr){
-		istd::CChangeNotifier changePtr(this, CF_VIEW_ACTIVATION_CHANGED | CF_MODEL);
+		istd::CChangeNotifier notifier(this, CF_VIEW_ACTIVATION_CHANGED | CF_MODEL);
 
 		m_activeViewPtr = viewPtr;
 	}
@@ -514,8 +514,6 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 	IDocumentTemplate::Ids documentIds = documentTemplatePtr->GetDocumentTypeIdsForFile(filePath);
 
 	if (!documentIds.isEmpty()){
-		istd::CChangeNotifier changePtr(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED | CF_MODEL);
-
 		documentTypeId = documentIds.front();
 		istd::TDelPtr<SingleDocumentData> infoPtr(CreateDocument(documentTypeId, createView, viewTypeId));
 		if (infoPtr.IsValid()){
@@ -524,6 +522,7 @@ istd::IChangeable* CMultiDocumentManagerBase::OpenDocument(
 			infoPtr->filePath = filePath;
 			infoPtr->documentTypeId = documentTypeId;
 
+			istd::CChangeNotifier notifier(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED | CF_MODEL);
 			istd::CChangeNotifier documentNotifier(infoPtr->documentPtr.GetPtr(), istd::IChangeable::CF_NO_UNDO);
 
 			ifile::IFilePersistence* loaderPtr = documentTemplatePtr->GetFileLoader(documentTypeId);
@@ -682,7 +681,7 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 {
 	Q_ASSERT(infoPtr != NULL);
 
-	istd::CChangeNotifier changePtr(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED | CF_MODEL);
+	istd::CChangeNotifier notifier(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED | CF_MODEL);
 
 	m_documentInfos.PushBack(infoPtr);
 

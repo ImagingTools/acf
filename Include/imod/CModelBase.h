@@ -105,6 +105,7 @@ private:
 		NS_SENDING_AFTER
 	};
 	NotifyState m_notifyState;
+	int m_notifyFlags;
 };
 
 
