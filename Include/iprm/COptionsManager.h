@@ -78,6 +78,7 @@ private:
 	struct OptionInfo
 	{
 		OptionInfo()
+			:isEnabled(true)
 		{
 		}
 
