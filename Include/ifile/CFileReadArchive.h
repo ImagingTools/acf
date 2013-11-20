@@ -62,6 +62,9 @@ protected:
 				QString& message,
 				QString& messageSource) const;
 
+	// reimplemented (iser::CArchiveBase)
+	virtual int GetMaxStringLength() const;
+
 private:
 	QFile m_file;
 

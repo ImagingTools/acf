@@ -43,9 +43,10 @@ public:
 	virtual bool Process(QString& value);
 
 protected:
-	enum{
-		MaxStringLength = 100000
-	};
+	/**
+		Get maximal allowed string size.
+	*/
+	virtual int GetMaxStringLength() const;
 };
 
 
