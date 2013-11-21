@@ -453,6 +453,19 @@ void CSingleDocumentManagerBase::EnsureViewRemoved()
 	}
 }
 
+
+QString CSingleDocumentManagerBase::GetCurrentDocumentFilePath() const
+{
+	return m_filePath;
+}
+
+
+bool CSingleDocumentManagerBase::HasDocumentPendingChanges() const
+{
+	return m_isDirty;
+}
+
+
 bool CSingleDocumentManagerBase::SerializeOpenDocument(iser::IArchive& archive) 
 {
 	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties");

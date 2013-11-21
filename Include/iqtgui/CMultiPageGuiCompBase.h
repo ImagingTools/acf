@@ -42,6 +42,7 @@ public:
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size for page icons", false, 16);
 		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout", true, false);
 		I_ASSIGN(m_useSameStretchingFactorAttrPtr, "UseSameStretchingFactor", "Set the same stretching factor for all widgets. Only for group box mode", false, false);
+		I_ASSIGN(m_insertSpacerAttrPtr, "InsertSpacer", "If enabled, insert spacer after the last page widget", false, false);
 	I_END_COMPONENT;
 
 	CMultiPageGuiCompBase();
@@ -145,7 +146,6 @@ protected:
 	I_MULTIATTR(QString, m_pageNamesAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
-//	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(bool, m_useSameStretchingFactorAttrPtr);
 	I_ATTR(bool, m_insertSpacerAttrPtr);
 

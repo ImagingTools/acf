@@ -6,9 +6,13 @@
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QApplication>
 #else
 #include <QtGui/QMessageBox>
 #include <QtGui/QVBoxLayout>
+#include <QtGui/QMainWindow>
+#include <QtGui/QApplication>
 #endif
 
 // ACF includes
@@ -63,16 +67,16 @@ void CSingleDocumentWorkspaceGuiComp::OnTryClose(bool* ignoredPtr)
 void CSingleDocumentWorkspaceGuiComp::UpdateTitle()
 {
 	QString titleName = tr("<no name>");
-/*
+
+	QString documentFilePath = GetCurrentDocumentFilePath();
+
 	int documentsCount = GetDocumentsCount();
 	if (documentsCount > 0){
-		const SingleDocumentData& info = GetSingleDocumentData(0);
-
-		if (!info.filePath.IsEmpty()){
-			titleName = QFileInfo(info.filePath)).fileName();
+		if (!documentFilePath.isEmpty()){
+			titleName = QFileInfo(documentFilePath).fileName();
 		}
 
-		if (info.isDirty){
+		if (HasDocumentPendingChanges()){
 			titleName += " *";
 		}
 	}
@@ -80,9 +84,15 @@ void CSingleDocumentWorkspaceGuiComp::UpdateTitle()
 	QWidget* widgetPtr = GetQtWidget();
 	if (widgetPtr != NULL){
 		widgetPtr->setWindowTitle(titleName);
+
+		QList<QWidget*> widgets = QApplication::allWidgets();
+		for (QList<QWidget*>::Iterator widgetIter = widgets.begin(); widgetIter != widgets.end(); ++widgetIter){
+			QMainWindow* mainWindowPtr = qobject_cast<QMainWindow*>(*widgetIter);
+			if (mainWindowPtr != NULL){
+				mainWindowPtr->setWindowTitle(m_applicationName + QString(" - [%1]").arg(titleName));
+			}
+		}
 	}
-*/
-	// TODO: implement setting of document title for CSingleDocumentWorkspaceGuiComp
 }
 
 

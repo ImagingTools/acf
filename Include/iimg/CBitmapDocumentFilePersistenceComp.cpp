@@ -92,10 +92,11 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(istd::IChangeable& data, co
 
 		if (bitmapPtr == NULL || pageFileName.isEmpty()){
 			retVal = false;
-		} else {
-			int loadState = m_bitmapPersistenceCompPtr->LoadFromFile(
-				*bitmapPtr, 
-				fileInfo.absolutePath() + "/" + pageFileName);
+		}
+		else{
+			QString bitmapFilePath = fileInfo.absolutePath() + "/" + pageFileName;
+
+			int loadState = m_bitmapPersistenceCompPtr->LoadFromFile(*bitmapPtr, bitmapFilePath);
 
 			retVal = retVal && (loadState == ifile::IFilePersistence::OS_OK);
 		}
@@ -272,9 +273,6 @@ bool CBitmapDocumentFilePersistenceComp::SerializePageMetaInfo(iimg::CBitmapDocu
 
 	return retVal;
 }
-
-
-
 
 
 } // namespace iimg

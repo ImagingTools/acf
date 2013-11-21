@@ -5,8 +5,10 @@
 #include <QtCore/QtGlobal>
 #include <QtCore/QVariant>
 #if QT_VERSION >= 0x050000
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QVBoxLayout>
 #else
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QVBoxLayout>
 #endif
 
@@ -133,6 +135,7 @@ QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
 	CMultiPageWidget* widgetPtr = new CMultiPageWidget(
 				parentPtr,
 				GetDesignType(),
+				*m_insertSpacerAttrPtr ? CMultiPageWidget::LF_COMPACT : CMultiPageWidget::LF_NONE,
 				*m_useHorizontalLayoutAttrPtr ? Qt::Horizontal : Qt::Vertical);
 
 	if (m_iconSizeAttrPtr.IsValid()){

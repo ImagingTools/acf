@@ -13,7 +13,6 @@
 
 // ACF includes
 #include "idoc/IDocumentManager.h"
-
 #include "ifilegui/CFileDialogLoaderComp.h"
 
 
@@ -133,6 +132,7 @@ QStringList TQtDocumentManagerWrap<Base, Gui>::CreateFileDialogFilters(const QBy
 
 	return filters;
 }
+
 
 template <class Base, class Gui>
 void TQtDocumentManagerWrap<Base, Gui>::UpdateLastDirectory(const QString& filePath) const

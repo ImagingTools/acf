@@ -83,7 +83,6 @@ int CSimpleGuiContainerDelegate::InsertPage(
 	QWidget* panelPtr = pageTitle.isEmpty() ? new QWidget(&containerWidget) : new QGroupBox(pageTitle, &containerWidget);
 	panelPtr->setObjectName(QString("Page %1").arg(pageIndex));
 	QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
-	panelLayoutPtr->setMargin(0);
 	panelLayoutPtr->addWidget(pageWidgetPtr);
 
 	containerLayoutPtr->addWidget(panelPtr);

@@ -2,7 +2,7 @@
 
 
 // Qt includes
-#include <QStringList>
+#include <QtCore/QStringList>
 
 // ACF includes
 #include "istd/IInformationProvider.h"
@@ -35,7 +35,7 @@ bool CTextFileLogStreamerComp::IsOperationSupported(
 		return false;
 	}
 
-	return		(dynamic_cast<const ilog::IMessageContainer*>(dataObjectPtr) != NULL) &&
+	return (dynamic_cast<const ilog::IMessageContainer*>(dataObjectPtr) != NULL) &&
 		((flags & QF_SAVE) != 0) &&
 		((flags & QF_FILE) != 0);
 }

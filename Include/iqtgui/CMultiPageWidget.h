@@ -68,15 +68,22 @@ public:
 		DT_USER = 1024
 	};
 
+	enum LayoutFlags
+	{
+		LF_NONE,
+		LF_COMPACT
+	};
+
 	/**
 		Construct the multi page widget.
 		\param designMode Specify the type of the underlying page container widget. \sa DesignType
 		\param useHorizontalLayout	If set, the container will try
 	*/
 	CMultiPageWidget(
-		QWidget* parentWidgetPtr = NULL,
-		int designMode = DT_SIMPLE,
-		Qt::Orientation orientation = Qt::Vertical);
+				QWidget* parentWidgetPtr = NULL,
+				int designMode = DT_SIMPLE,
+				int layoutFlags = LF_NONE,
+				Qt::Orientation orientation = Qt::Vertical);
 
 	/**
 		Get page container widget.
@@ -233,6 +240,8 @@ private:
 	istd::TDelPtr<QWidget> m_guiContainerPtr;
 
 	int m_designMode;
+
+	int m_layoutFlags;
 
 	Qt::Orientation m_orientation;
 

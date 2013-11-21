@@ -76,6 +76,9 @@ protected:
 	bool NewDocument(const QByteArray& documentTypeId, bool createView, const QByteArray& viewTypeId);
 	void EnsureViewRemoved();
 
+	QString GetCurrentDocumentFilePath() const;
+	bool HasDocumentPendingChanges() const;
+
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
 

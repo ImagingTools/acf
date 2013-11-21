@@ -34,9 +34,10 @@ namespace iqtgui
 
 // public methods
 
-CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, Qt::Orientation orientation)
+CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, int layoutFlags, Qt::Orientation orientation)
 	:BaseClass(parentWidgetPtr),
 	m_designMode(designMode),
+	m_layoutFlags(layoutFlags),
 	m_orientation(orientation)
 {
 	// Register default delegates:
@@ -317,6 +318,13 @@ bool CMultiPageWidget::CreateContainerGui()
 
 	if (!m_pageIconSize.isNull() && m_pageIconSize.isValid() && !m_pageIconSize.isEmpty()){
 		delegatePtr->SetPageIconSize(*m_guiContainerPtr.GetPtr(), m_pageIconSize);
+	}
+
+	if (m_layoutFlags == LF_COMPACT){
+		QBoxLayout* boxLayoutPtr = dynamic_cast<QBoxLayout*>(layoutPtr);
+		if (boxLayoutPtr != NULL){
+			boxLayoutPtr->insertStretch(-1);
+		}
 	}
 
 	return (m_guiContainerPtr != NULL);

@@ -61,7 +61,6 @@ public:
 protected:
 	/**
 		Update titles of views or all views of specified document.
-		\param	optional document object, if you want to update only views of single document.
 	*/
 	void UpdateTitle();
 

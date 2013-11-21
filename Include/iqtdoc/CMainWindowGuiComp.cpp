@@ -37,9 +37,9 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 :	m_activeUndoManager(*this),
 	m_activeViewPtr(NULL),
 	m_activeDocumentPtr(NULL),
-	m_newCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
-	m_openCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
-	m_saveCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
+	m_newCommand("", 31, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
+	m_openCommand("", 32, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
+	m_saveCommand("", 33, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
 	m_undoCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
 	m_redoCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR),
 	m_fullScreenCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
@@ -83,11 +83,15 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 			SetupNewCommand();
 
 			m_fileCommand.SetPriority(30);
+
 			m_openCommand.SetGroupId(GI_DOCUMENT);
 			m_fileCommand.InsertChild(&m_openCommand, false);
+
 			m_saveCommand.SetGroupId(GI_DOCUMENT);
 			m_fileCommand.InsertChild(&m_saveCommand, false);
+
 			m_saveAsCommand.SetGroupId(GI_DOCUMENT);
+			m_saveAsCommand.SetPriority(34);
 			m_fileCommand.InsertChild(&m_saveAsCommand, false);
 
 			const idoc::IDocumentManager* managerPtr = GetObjectPtr();
