@@ -144,35 +144,37 @@ bool CBinaryReadArchiveBase::Process(QByteArray& value)
 
 	bool retVal = Process(stringLength);
 
-	if (retVal){
-		if (stringLength > 0) {
-			if (stringLength > GetMaxStringLength()){
-				if (IsLogConsumed()){
-					SendLogMessage(
-								istd::IInformationProvider::IC_ERROR,
-								MI_STRING_TOO_LONG,
-								QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
-								"iser::CBinaryReadArchiveBase",
-								istd::IInformationProvider::ITF_SYSTEM);
-				}
+	if (!retVal){
+		return false;
+	}
 
-				return false;
+	if (stringLength > 0) {
+		if (stringLength > GetMaxStringLength()){
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::IInformationProvider::IC_ERROR,
+							MI_STRING_TOO_LONG,
+							QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
+							"iser::CBinaryReadArchiveBase",
+							istd::IInformationProvider::ITF_SYSTEM);
 			}
 
-			QVarLengthArray<char> buffer(stringLength);
-
-			retVal = ProcessData(buffer.data(), stringLength * int(sizeof(char)));	
-
-			if (retVal){
-				value = QByteArray(buffer.constData(), stringLength);
-			}
+			return false;
 		}
-		else {
-			// just clear the string
-			value.clear();
+
+		QVarLengthArray<char> buffer(stringLength);
+
+		retVal = ProcessData(buffer.data(), stringLength * int(sizeof(char)));	
+
+		if (retVal){
+			value = QByteArray(buffer.constData(), stringLength);
 		}
 	}
-	
+	else{
+		// just clear the string
+		value.clear();
+	}
+
 	return retVal;
 }
 
@@ -183,33 +185,35 @@ bool CBinaryReadArchiveBase::Process(QString& value)
 
 	bool retVal = Process(stringLength);
 
-	if (retVal){
-		if (stringLength > 0) {
-			if (stringLength > GetMaxStringLength()){
-				if (IsLogConsumed()){
-					SendLogMessage(
-								istd::IInformationProvider::IC_ERROR,
-								MI_STRING_TOO_LONG,
-								QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
-								"iser::CBinaryReadArchiveBase",
-								istd::IInformationProvider::ITF_SYSTEM);
-				}
+	if (!retVal){
+		return false;
+	}
 
-				return false;
+	if (stringLength > 0) {
+		if (stringLength > GetMaxStringLength()){
+			if (IsLogConsumed()){
+				SendLogMessage(
+							istd::IInformationProvider::IC_ERROR,
+							MI_STRING_TOO_LONG,
+							QString("Read string size is ") + QString("%1").arg(stringLength) + " and it is longer than maximum size",
+							"iser::CBinaryReadArchiveBase",
+							istd::IInformationProvider::ITF_SYSTEM);
 			}
 
-			QVarLengthArray<QChar> buffer(stringLength);
-
-			retVal = ProcessData(buffer.data(), stringLength * int(sizeof(QChar)));	
-
-			if (retVal){
-				value = QString(buffer.constData(), stringLength);
-			}
+			return false;
 		}
-		else {
-			// just clear the string
-			value.clear();
+
+		QVarLengthArray<QChar> buffer(stringLength);
+
+		retVal = ProcessData(buffer.data(), stringLength * int(sizeof(QChar)));	
+
+		if (retVal){
+			value = QString(buffer.constData(), stringLength);
 		}
+	}
+	else{
+		// just clear the string
+		value.clear();
 	}
 
 	return retVal;
