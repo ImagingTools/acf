@@ -72,7 +72,12 @@ idoc::IUndoManager* CSingleDocumentTemplateComp::CreateUndoManager(const QByteAr
 {
 	if (IsDocumentTypeSupported(documentTypeId)){
 		iser::ISerializable* serializablePtr = CompCastPtr<iser::ISerializable>(documentPtr);
-		imod::IModel* modelPtr = CompCastPtr<imod::IModel>(documentPtr);
+
+		imod::IModel* modelPtr = dynamic_cast<imod::IModel*>(serializablePtr);
+		if (modelPtr == NULL){
+			modelPtr = CompCastPtr<imod::IModel>(documentPtr);
+		}
+
 		if ((serializablePtr != NULL) && (modelPtr != NULL)){
 			istd::TDelPtr< idoc::IUndoManager > undoManagerModelPtr(m_undoManagerCompFact.CreateInstance());
 			if (undoManagerModelPtr.IsValid()){
