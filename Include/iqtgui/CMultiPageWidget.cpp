@@ -34,10 +34,10 @@ namespace iqtgui
 
 // public methods
 
-CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, int layoutFlags, Qt::Orientation orientation)
+CMultiPageWidget::CMultiPageWidget(QWidget* parentWidgetPtr, int designMode, int containerGuiFlags, Qt::Orientation orientation)
 	:BaseClass(parentWidgetPtr),
 	m_designMode(designMode),
-	m_layoutFlags(layoutFlags),
+	m_containerGuiFlags(containerGuiFlags),
 	m_orientation(orientation)
 {
 	// Register default delegates:
@@ -309,9 +309,10 @@ bool CMultiPageWidget::CreateContainerGui()
 	}
 
 	layoutPtr->setMargin(0);
-	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 
-	m_guiContainerPtr.SetPtr(delegatePtr->CreateContainerWidget(this, m_orientation));
+	m_guiContainerPtr.SetPtr(delegatePtr->CreateContainerWidget(this, m_containerGuiFlags, m_orientation));
+	m_guiContainerPtr->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
 	layoutPtr->addWidget(m_guiContainerPtr.GetPtr());
 
 	delegatePtr->ConnectPageIndexListener(*m_guiContainerPtr.GetPtr(), this, SLOT(OnPageIndexChanged(int)));
@@ -320,7 +321,20 @@ bool CMultiPageWidget::CreateContainerGui()
 		delegatePtr->SetPageIconSize(*m_guiContainerPtr.GetPtr(), m_pageIconSize);
 	}
 
-	if (m_layoutFlags == LF_COMPACT){
+	if (m_containerGuiFlags & IMultiPageWidgetDelegate::CGF_COMPACT){
+		switch (m_orientation){
+			case Qt::Vertical:
+				m_guiContainerPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+				break;
+
+			case Qt::Horizontal:
+				m_guiContainerPtr->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+				break;
+
+			default:
+				break;
+		}
+		
 		QBoxLayout* boxLayoutPtr = dynamic_cast<QBoxLayout*>(layoutPtr);
 		if (boxLayoutPtr != NULL){
 			boxLayoutPtr->insertStretch(-1);

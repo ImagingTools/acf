@@ -132,10 +132,18 @@ void CMultiPageGuiCompBase::UpdateVisualElements()
 
 QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
 {
+	bool insertSpacer = m_insertSpacerAttrPtr.IsValid() ? *m_insertSpacerAttrPtr : false;
+
+	int containerGuiFlags = insertSpacer ? IMultiPageWidgetDelegate::CGF_COMPACT : IMultiPageWidgetDelegate::CGF_NONE;
+
+	if (m_useSameStretchingFactorAttrPtr.IsValid() && *m_useSameStretchingFactorAttrPtr){
+		containerGuiFlags |= IMultiPageWidgetDelegate::CGF_UNIFORM_SIZES;
+	}
+
 	CMultiPageWidget* widgetPtr = new CMultiPageWidget(
 				parentPtr,
 				GetDesignType(),
-				*m_insertSpacerAttrPtr ? CMultiPageWidget::LF_COMPACT : CMultiPageWidget::LF_NONE,
+				containerGuiFlags,
 				*m_useHorizontalLayoutAttrPtr ? Qt::Horizontal : Qt::Vertical);
 
 	if (m_iconSizeAttrPtr.IsValid()){

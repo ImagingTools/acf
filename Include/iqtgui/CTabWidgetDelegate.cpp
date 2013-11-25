@@ -19,10 +19,9 @@ namespace iqtgui
 
 // reimplemented (IMultiPageWidgetDelegate)
 
-CTabWidgetDelegate::CTabWidgetDelegate(QTabWidget::TabPosition tabPosition, bool useDocumentMode, bool useCompactPageMode)
+CTabWidgetDelegate::CTabWidgetDelegate(QTabWidget::TabPosition tabPosition, bool useDocumentMode)
 	:m_tabPosition(tabPosition),
-	m_useDocumentMode(useDocumentMode),
-	m_useCompactPageMode(useCompactPageMode)
+	m_useDocumentMode(useDocumentMode)
 {
 }
 
@@ -47,13 +46,15 @@ void CTabWidgetDelegate::SetDocumentModeEnabled(QWidget& containerWidget, bool i
 
 // reimplemented (IMultiPageWidgetDelegate)
 
-QWidget* CTabWidgetDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int /*orientation*/)
+QWidget* CTabWidgetDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int containerGuiFlags,int /*orientation*/)
 {
 	QTabWidget* tabWidgetPtr = new QTabWidget(parentWidgetPtr);
 
 	// Setup tab widget:
 	tabWidgetPtr->setTabPosition(m_tabPosition);
 	tabWidgetPtr->setDocumentMode(m_useDocumentMode);
+
+	m_containerGuiFlags = containerGuiFlags;
 
 	return tabWidgetPtr;
 }
@@ -119,7 +120,7 @@ int CTabWidgetDelegate::InsertPage(
 
 	panelLayoutPtr->addWidget(pageWidgetPtr);
 
-	if (m_useCompactPageMode){
+	if (m_containerGuiFlags & CGF_COMPACT){
 		// Add a spacer on the bottom the tab page:
 		QSpacerItem* spacerPtr = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 		panelLayoutPtr->addItem(spacerPtr);

@@ -23,7 +23,7 @@ namespace iqtgui
 
 // reimplemented (IMultiPageWidgetDelegate)
 
-QWidget* CSplitterDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int orientation)
+QWidget* CSplitterDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int /*containerGuiFlags*/, int orientation)
 {	
 	QSplitter* splitterPtr = new QSplitter(parentWidgetPtr);
 
@@ -62,6 +62,10 @@ int CSplitterDelegate::InsertPage(
 	QWidget* panelPtr = pageTitle.isEmpty() ? new QWidget(splitterPtr) : new QGroupBox(pageTitle, splitterPtr);
 	QLayout* panelLayoutPtr = new QVBoxLayout(panelPtr);
 	panelLayoutPtr->addWidget(pageWidgetPtr);
+
+	if (pageTitle.isEmpty()){
+		panelLayoutPtr->setMargin(0);
+	}
 
 	splitterPtr->insertWidget(pageIndex, panelPtr);
 

@@ -21,7 +21,7 @@ namespace iqtgui
 
 // reimplemented (IMultiPageWidgetDelegate)
 
-QWidget* CToolBoxDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int /*orientation*/)
+QWidget* CToolBoxDelegate::CreateContainerWidget(QWidget* parentWidgetPtr, int /*containerGuiFlags*/, int /*orientation*/)
 {	
 	QToolBox* toolBoxPtr = new QToolBox(parentWidgetPtr);
 

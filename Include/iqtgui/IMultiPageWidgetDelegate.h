@@ -59,9 +59,33 @@ public:
 	};
 
 	/**
+		Flags for specifying the visual behavior of the page widgets in the UI-container.
+	*/
+	enum ContainerGuiFlags
+	{
+		/**
+			Default behavior of the UI container.
+		*/
+		CGF_NONE = 0,
+
+		/**
+			If set, the container will try to preserve the same size of the page widgets.
+		*/
+		CGF_UNIFORM_SIZES = 1,
+
+		/**
+			If set, the container will try to minimize the size of the page content.
+		*/
+		CGF_COMPACT = 2
+	};
+
+	/**
 		Create container for the page widgets.
 	*/
-	virtual QWidget* CreateContainerWidget(QWidget* parentWidgetPtr, int orientation = Qt::Horizontal) = 0;
+	virtual QWidget* CreateContainerWidget(
+				QWidget* parentWidgetPtr,
+				int containerGuiFlags = CGF_NONE,
+				int orientation = Qt::Horizontal) = 0;
 
 	/**
 		Connect object, which will be notified about changing of the current selected page index.

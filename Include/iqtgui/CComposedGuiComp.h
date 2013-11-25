@@ -13,12 +13,9 @@
 #endif
 
 // ACF includes
-#include "ifile/IFilePersistence.h"
-
 #include "iprm/IParamsSet.h"
-
-#include "iqtgui/TGuiComponentBase.h"
 #include "iqtgui/TRestorableGuiWrap.h"
+#include "iqtgui/CMultiPageGuiCompBase.h"
 
 
 namespace iqtgui
@@ -34,36 +31,33 @@ namespace iqtgui
 	3. Vertical or horizontal placing of component in a splitted view\n
 	4. Tool box\n
 	5. Tab widget\n
+	6. Stacked widget
 */
 class CComposedGuiComp:
-			public iqtgui::TRestorableGuiWrap<
-						iqtgui::TGuiComponentBase<QWidget> >
+			public iqtgui::TRestorableGuiWrap<CMultiPageGuiCompBase>
 {
 public:
-	typedef iqtgui::TRestorableGuiWrap<
-				iqtgui::TGuiComponentBase<QWidget> > BaseClass;
+	typedef iqtgui::TRestorableGuiWrap<CMultiPageGuiCompBase> BaseClass;
 
 	I_BEGIN_COMPONENT(CComposedGuiComp);
 		I_ASSIGN_MULTI_0(m_guisCompPtr, "Guis", "List of GUI's", true);
-		I_ASSIGN_MULTI_0(m_namesAttrPtr, "Names", "List of of gui names", false);
-		I_ASSIGN(m_useHorizontalLayoutAttrPtr, "UseHorizontalLayout", "Use horizontal layout", true, false);
-		I_ASSIGN(m_insertSpacerAttrPtr, "InsertSpacer", "If enabled, spacer will be added to fill whole available area", true, false);
-		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - Simple (Group Box)\n* 1 - Tool Box\n* 2 - Tab Bar\n* 3 - Splitter", true, false);
+		I_ASSIGN(m_designTypeAttrPtr, "DesignType", "Type of design:\n* 0 - Simple (Group Box)\n* 1 - Tool Box\n* 2 - Tab Bar\n* 3 - Splitter\n* 4 - Stacked", true, false);
 		I_ASSIGN(m_settingsKeyAttrPtr, "SettingsKey", "Key for saving/restoring of the layout information in the registry", false, "SettingsKey");
 		I_ASSIGN(m_tabOrientationAttrPtr, "TabBarOrientation", "Orientation of the tab bar for tab design\n 0 - North\n 1 - South\n 2 - West\n 3 - East", true, 0);
 		I_ASSIGN(m_flatViewAttrPtr, "FlatView", "Tries to apply flat view to the design if possible (Group Box: without frame; Tab Bar: triangular tabs; Slider: transparent grip)", true, false);
-		I_ASSIGN(m_useSameStretchingFactorAttrPtr, "UseSameStretchingFactor", "Set the same stretching factor for all widgets. Only for group box mode", false, false);
 	I_END_COMPONENT;
-
-	CComposedGuiComp();
 
 	// reimplemented (TRestorableGuiWrap)
 	virtual void OnRestoreSettings(const QSettings& settings);
 	virtual void OnSaveSettings(QSettings& settings) const;
 
+	// reimplemented (iqtgui::CMultiPageGuiCompBase)
+	virtual int GetPagesCount() const;
+	virtual iqtgui::IGuiObject* GetPageGuiComponent(int pageIndex) const;
+	virtual int GetDesignType() const;
+
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();
-	virtual void OnGuiDestroyed();
 
 private:
 	/**
@@ -73,16 +67,10 @@ private:
 
 private:
 	I_MULTIREF(iqtgui::IGuiObject, m_guisCompPtr);
-	I_MULTIATTR(QString, m_namesAttrPtr);
-	I_ATTR(bool, m_useHorizontalLayoutAttrPtr);
-	I_ATTR(bool, m_insertSpacerAttrPtr);
 	I_ATTR(int, m_designTypeAttrPtr);
 	I_ATTR(QString, m_settingsKeyAttrPtr);
 	I_ATTR(int, m_tabOrientationAttrPtr);
 	I_ATTR(bool, m_flatViewAttrPtr);
-	I_ATTR(bool, m_useSameStretchingFactorAttrPtr);
-
-	QSplitter* m_splitterPtr;
 };
 
 

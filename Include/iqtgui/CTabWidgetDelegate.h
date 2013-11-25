@@ -26,18 +26,20 @@ class CTabWidgetDelegate: virtual public IMultiPageWidgetDelegate
 public:
 	CTabWidgetDelegate(
 				QTabWidget::TabPosition tabPosition = QTabWidget::North,
-				bool useDocumentMode = false,
-				bool useCompactPageMode = false);
+				bool useDocumentMode = false);
 
 	void SetTabPosition(QWidget& containerWidget, QTabWidget::TabPosition tabPosition);
 	void SetDocumentModeEnabled(QWidget& containerWidget, bool isDocumentModeEnabled = true);
 
 	// reimplemented (IMultiPageWidgetDelegate)
-	virtual QWidget* CreateContainerWidget(QWidget* parentWidgetPtr, int orientation = Qt::Horizontal);
+	virtual QWidget* CreateContainerWidget(
+				QWidget* parentWidgetPtr,
+				int containerGuiFlags = CGF_NONE,
+				int orientation = Qt::Horizontal);
 	virtual bool ConnectPageIndexListener(
-		QWidget& containerWidget,
-		QObject* receiverPtr,
-		const char* receiverSlotName);
+				QWidget& containerWidget,
+				QObject* receiverPtr,
+				const char* receiverSlotName);
 	virtual bool SetPageHeaderPosition(QWidget& containerWidget, PageHeaderPosition pageHeaderPosition);
 	virtual int InsertPage(
 		QWidget& containerWidget,
@@ -65,7 +67,8 @@ public:
 private:
 	QTabWidget::TabPosition m_tabPosition;
 	bool m_useDocumentMode;
-	bool m_useCompactPageMode;
+
+	int m_containerGuiFlags;
 };
 
 
