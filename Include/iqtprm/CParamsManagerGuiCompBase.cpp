@@ -473,6 +473,12 @@ void CParamsManagerGuiCompBase::UpdateParamsView(int selectedIndex)
 				m_lastObserverPtr = paramsSetObserverPtr;
 
 				paramsFrameVisible = true;
+
+				bool setReadOnly = ((objectPtr->GetIndexOperationFlags(selectedIndex) & iprm::IParamsManager::MF_SUPPORT_EDIT) == 0);
+				imod::IModelEditor* modelEditorPtr = CompCastPtr<imod::IModelEditor>(paramsSetObserverPtr);
+				if (modelEditorPtr != NULL){
+					modelEditorPtr->SetReadOnly(setReadOnly);
+				}
 			}
 		}
 
