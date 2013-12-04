@@ -35,6 +35,8 @@ public:
 		I_REGISTER_INTERFACE(iqtgui::IMainWindowComponent);
 		I_ASSIGN_MULTI_0(m_statusBarWidgetsCompPtr, "StatusBarWidgets", "Widgets to place into the status bar of the application", true);
 		I_ASSIGN(m_associatedDocumentTypeId, "AssociatedDocumentTypeId", "ID of the associated document type ID", false, "Default");
+		I_ASSIGN(m_isSizeGripEnabledAttrPtr, "EnableSizeGrip", "if enabled, the size grip will be created", true, true);
+		I_ASSIGN(m_suppressWidgetFrameAttrPtr, "SuppressWidgetFrame", "if enabled, the frame around status bar widgets will be hidden", true, false);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IMainWindowComponent)
@@ -46,6 +48,8 @@ public:
 private:
 	I_MULTIREF(iqtgui::IGuiObject, m_statusBarWidgetsCompPtr);
 	I_ATTR(QByteArray, m_associatedDocumentTypeId);
+	I_ATTR(bool, m_isSizeGripEnabledAttrPtr);
+	I_ATTR(bool, m_suppressWidgetFrameAttrPtr);
 };
 
 

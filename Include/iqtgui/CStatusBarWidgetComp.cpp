@@ -24,6 +24,12 @@ bool CStatusBarWidgetComp::AddToMainWindow(QMainWindow& mainWindow)
 		QStatusBar* statusBar = mainWindow.statusBar();
 		Q_ASSERT(statusBar != NULL);
 
+		statusBar->setSizeGripEnabled(*m_isSizeGripEnabledAttrPtr);
+
+		if (*m_suppressWidgetFrameAttrPtr){
+			statusBar->setStyleSheet("QStatusBar::item { border: 0px solid transparent }");
+		}
+
 		int widgetsCount = m_statusBarWidgetsCompPtr.GetCount();
 
 		for (int widgetIndex = 0; widgetIndex < widgetsCount; widgetIndex++){
