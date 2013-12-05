@@ -50,6 +50,12 @@ public:
 	*/
 	const AttributeValueType& operator[](int index) const;
 
+	/**
+		Find attribute value.
+		\return Index of the found element, or -1 if no value was found.
+	*/
+	int FindValue(const AttributeValueType& value) const;
+
 protected:
 	bool InitInternal(
 				const IComponent* ownerPtr,
@@ -108,6 +114,17 @@ const typename TMultiAttributeMemberBase<Attribute>::AttributeValueType& TMultiA
 	Q_ASSERT(m_attributePtr->GetValuesCount() == GetCount());
 
 	return m_attributePtr->GetValueAt(index);
+}
+
+
+template <typename Attribute>
+int TMultiAttributeMemberBase<Attribute>::FindValue(const AttributeValueType& value) const
+{
+	if (m_attributePtr != NULL){
+		return m_attributePtr->FindValue(value);
+	}
+
+	return -1;
 }
 
 

@@ -5,7 +5,6 @@
 // Qt includes
 #include <QtGui/QTextTableCell>
 
-
 // ACF includes
 #include "ilog/IMessageContainer.h"
 #include "ilog/CMessage.h"
@@ -18,14 +17,17 @@ namespace iloggui
 
 
 class CTextLogGuiComp:
-	public iqtgui::TDesignerGuiObserverCompBase<Ui::CTextLogGuiComp, ilog::IMessageContainer>
+	public iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CTextLogGuiComp, ilog::IMessageContainer>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::TDesignerGuiObserverCompBase<Ui::CTextLogGuiComp, ilog::IMessageContainer> BaseClass;
+	typedef iqtgui::TDesignerGuiObserverCompBase<
+				Ui::CTextLogGuiComp, ilog::IMessageContainer> BaseClass;
 
 	I_BEGIN_COMPONENT(CTextLogGuiComp);
+		I_ASSIGN_MULTI_0(m_ignoreIdsListAttrPtr, "IgnoreIdsList", "List if message IDs to be ignored", false);
 	I_END_COMPONENT;
 
 protected:
@@ -51,6 +53,11 @@ private:
 
 	QTextTableFormat m_tableFormat;
 	QTextTableCellFormat m_okCellFormat;
+
+	/**
+		List of message IDs to be ignored.
+	*/
+	I_MULTIATTR(int, m_ignoreIdsListAttrPtr);
 };
 
 

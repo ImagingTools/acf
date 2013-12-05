@@ -52,6 +52,7 @@ public:
 	virtual void SetValueAt(int index, const Value& value);
 	virtual void InsertValue(const Value& value);
 	virtual void Reset();
+	virtual int FindValue(const Value& value) const;
 
 	// reimplemented (iser::IObject)
 	QByteArray GetFactoryId() const;
@@ -66,9 +67,14 @@ protected:
 	struct Wrap
 	{
 		Value value;
-	};
-	QVector<Wrap> m_values;
 
+		bool operator == (const Wrap& object) const
+		{
+			return (object.value == value);
+		}
+	};
+
+	QVector<Wrap> m_values;
 };
 
 
@@ -141,6 +147,16 @@ template <typename Value>
 void TMultiAttribute<Value>::Reset()
 {
 	m_values.clear();
+}
+
+
+template <typename Value>
+int TMultiAttribute<Value>::FindValue(const Value& value) const
+{
+	Wrap valueWrap;
+	valueWrap.value = value;
+
+	return m_values.indexOf(valueWrap);
 }
 
 
