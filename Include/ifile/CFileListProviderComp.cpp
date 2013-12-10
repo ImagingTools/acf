@@ -26,14 +26,6 @@ const QFileInfoList& CFileListProviderComp::GetFileList() const
 }
 
 
-// reimplemented (ibase::IQtItemModelProvider)
-
-const QAbstractItemModel* CFileListProviderComp::GetItemModel() const
-{
-	return &m_itemModel;
-}
-
-
 // protected methods
 
 bool CFileListProviderComp::CreateFileList(
@@ -140,11 +132,6 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 	istd::CChangeNotifier notifier(this);
 
 	m_fileList.clear();
-	m_itemModel.clear();
-
-	m_itemModel.setColumnCount(2);
-	m_itemModel.setHorizontalHeaderItem(0, new QStandardItem(tr("File")));
-	m_itemModel.setHorizontalHeaderItem(1, new QStandardItem(tr("Modification time")));
 
 	if (m_dirParamCompPtr.IsValid()){
 		QStringList filters;
@@ -177,24 +164,6 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 					filters,
 					QDir::Name | QDir::IgnoreCase,
 					m_fileList);
-
-
-		m_itemModel.setRowCount(m_fileList.count());
-		QFileIconProvider fileIconProvider;
-		for (int fileIndex = 0; fileIndex < m_fileList.count(); fileIndex++){
-			const QFileInfo& fileInfo = m_fileList[fileIndex];
-			QIcon fileIcon = fileIconProvider.icon(fileInfo);
-
-			QStandardItem* fileItemPtr = new QStandardItem(fileInfo.absoluteFilePath());
-			fileItemPtr->setEditable(false);
-			fileItemPtr->setIcon(fileIcon);
-
-			QStandardItem* fileTimeItemPtr = new QStandardItem(fileInfo.lastModified().toString());
-			fileTimeItemPtr->setEditable(false);
-
-			m_itemModel.setItem(fileIndex, 0, fileItemPtr);
-			m_itemModel.setItem(fileIndex, 1, fileTimeItemPtr);
-		}
 	}
 }
 
