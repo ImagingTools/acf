@@ -142,6 +142,15 @@ bool CMessage::Serialize(iser::IArchive& archive)
 	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, m_timeStamp);
 	retVal = retVal && archive.EndTag(timeStampTag);
 
+	quint32 version = 0;
+	if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) ||
+				(version > 3264)){
+		static iser::CArchiveTag idTag("ID", "ID of the message");
+		retVal = retVal && archive.BeginTag(idTag);
+		retVal = retVal && archive.Process(m_id);
+		retVal = retVal && archive.EndTag(idTag);
+	}
+
 	return retVal;
 }
 

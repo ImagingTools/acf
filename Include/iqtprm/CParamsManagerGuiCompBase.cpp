@@ -730,12 +730,12 @@ void CParamsManagerGuiCompBase::DetachCurrentExtender()
 	iqt2d::IViewExtender* extenderPtr = GetCurrentViewExtenderPtr();
 	if (extenderPtr != NULL){
 		for (		ConnectedSceneFlags::const_iterator sceneIter = m_connectedSceneFlags.begin();
-			sceneIter != m_connectedSceneFlags.end();
-			++sceneIter){
-				iqt2d::IViewProvider* providerPtr = sceneIter.key();
-				Q_ASSERT(providerPtr != NULL);
+					sceneIter != m_connectedSceneFlags.end();
+					++sceneIter){
+			iqt2d::IViewProvider* providerPtr = sceneIter.key();
+			Q_ASSERT(providerPtr != NULL);
 
-				extenderPtr->RemoveItemsFromScene(providerPtr);
+			extenderPtr->RemoveItemsFromScene(providerPtr);
 		}
 	}
 }
