@@ -64,7 +64,8 @@ void CXmlDocumentInfoBase::DecodeXml(const QByteArray& xmlText, QByteArray& text
 				}
 			}
 			else{
-				actPos = ampPos;
+				text += "&";
+				actPos = ampPos + 1;
 			}
 		}
 		else{
@@ -133,7 +134,8 @@ void CXmlDocumentInfoBase::DecodeXml(const QByteArray& xmlText, QString& text)
 				}
 			}
 			else{
-				actPos = ampPos;
+				text += "&";
+				actPos = ampPos + 1;
 			}
 		}
 		else{
