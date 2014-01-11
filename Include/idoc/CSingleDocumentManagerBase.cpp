@@ -258,8 +258,12 @@ bool CSingleDocumentManagerBase::SaveDirtyDocuments(bool beQuiet, bool* ignoredP
 
 	if (m_documentPtr.IsValid()){
 		if (m_isDirty){
-			if (!beQuiet || QueryDocumentSave(ignoredPtr)){
-				SaveDocument(-1, false);
+			if (!beQuiet){
+				if (QueryDocumentSave(ignoredPtr)){
+					if (!SaveDocument(-1, false) && (ignoredPtr != NULL)){
+						*ignoredPtr = true;	// Cannot save, set cancel
+					}
+				}
 
 				if ((ignoredPtr != NULL) && *ignoredPtr){
 					return false;
