@@ -9,7 +9,6 @@ namespace iqtprm
 {
 
 
-	
 // protected methods
 
 // reimplemented (CMultiParamsManagerGuiCompBase)
@@ -111,7 +110,7 @@ void CMultiParamsManagerGuiComp::OnGuiCreated()
 			pageLayoutPtr->setMargin(0);
 
 			if (guiPtr->CreateGui(stackPage)){
-				m_parameterEditorStack->insertWidget(editorIndex + 1, stackPage);
+				m_parameterEditorStack->insertWidget(editorIndex, stackPage);
 
 				m_widgetToGuiMap[stackPage] = guiPtr;
 
@@ -136,7 +135,7 @@ void CMultiParamsManagerGuiComp::OnGuiDestroyed()
 {
 	int pagesCount = m_parameterEditorStack->count();
 
-	for (int pageIndex = 1; pageIndex < pagesCount; pageIndex++){
+	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
 		QWidget* pagePtr = m_parameterEditorStack->widget(pageIndex);
 
 		WidgetGuiMap::iterator foundGuiIter = m_widgetToGuiMap.find(pagePtr);
