@@ -227,10 +227,7 @@ bool CPolygon::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	if (polygonPtr != NULL){		
 		istd::CChangeNotifier notifier(this);
 
-		int sourceNodesCount = polygonPtr->GetNodesCount();
-		for (int nodesIndex = 0; nodesIndex < sourceNodesCount; nodesIndex++){		
-			InsertNode(polygonPtr->GetNode(nodesIndex));
-		}
+		m_nodes = polygonPtr->m_nodes;
 
 		CObject2dBase::CopyFrom(object, mode);
 
