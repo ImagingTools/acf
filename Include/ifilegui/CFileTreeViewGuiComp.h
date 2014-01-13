@@ -20,12 +20,9 @@
 #include "ifile/IFileNameParam.h"
 #include "ifile/IFileTypeInfo.h"
 #include "ifile/CFileNameParamComp.h"
-
 #include "ibase/IQtItemModelProvider.h"
 #include "imod/CMultiModelDispatcherBase.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 #include "GeneratedFiles/ifilegui/ui_CFileTreeViewGuiComp.h"
 
 
@@ -59,7 +56,8 @@ public:
 		I_ASSIGN(m_noEmptyDirsAttrPtr, "NoEmptyFolders", "Recursively skip folder which containing no files", true, true);
 	I_END_COMPONENT;
 
-	enum DataRoles{
+	enum DataRoles
+	{
 		DR_PATH = Qt::UserRole + 1,
 		DR_ISDIR
 	};
@@ -96,24 +94,24 @@ private:
 		So you can do a separate filtering of files and directories.
 	*/
 	bool CreateFileList(const QDir& root,
-		const QStringList& nameFilters,
-		QDir::SortFlags sortSpec,
-		QStandardItem* parentItemPtr);
+				const QStringList& nameFilters,
+				QDir::SortFlags sortSpec,
+				QStandardItem* parentItemPtr);
 
 	/**
 		Several filters can be applied to the QDir object before call of this function.
 	*/
 	bool CreateDirectoryList(
-		const QDir& root,
-		const QStringList& nameFilters,
-		QDir::SortFlags sortSpec,
-		QStandardItem* parentItemPtr);
+				const QDir& root,
+				const QStringList& nameFilters,
+				QDir::SortFlags sortSpec,
+				QStandardItem* parentItemPtr);
 
 	void EnumerateDirectory(
-		const QDir& root,
-		const QStringList& nameFilters,
-		QDir::SortFlags sortSpec,
-		QStandardItem* parentItemPtr);
+				const QDir& root,
+				const QStringList& nameFilters,
+				QDir::SortFlags sortSpec,
+				QStandardItem* parentItemPtr);
 
 private:
 	class CurrentFile: public ifile::CFileNameParamComp
