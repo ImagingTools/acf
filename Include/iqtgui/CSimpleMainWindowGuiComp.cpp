@@ -83,7 +83,29 @@ void CSimpleMainWindowGuiComp::UpdateMenuActions()
 void CSimpleMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow)
 {
 	if (m_standardToolBarPtr.IsValid()){
-		mainWindow.addToolBar(Qt::TopToolBarArea, m_standardToolBarPtr.GetPtr());
+		Qt::ToolBarArea toolBarArea = Qt::TopToolBarArea;
+		if (m_toolBarAreaAttrPtr.IsValid()){
+			switch (*m_toolBarAreaAttrPtr){
+				case 0:
+					toolBarArea = Qt::LeftToolBarArea;
+					break;
+
+				case 1:
+					toolBarArea = Qt::RightToolBarArea;
+					break;
+				case 2:
+					toolBarArea = Qt::TopToolBarArea;
+					break;
+
+				case 3:
+					toolBarArea = Qt::BottomToolBarArea;
+					break;
+				default:
+					break;
+			}
+		}
+
+		mainWindow.addToolBar(toolBarArea, m_standardToolBarPtr.GetPtr());
 
 		m_toolBarsList.PushBack(m_standardToolBarPtr.GetPtr(), false);
 	}
@@ -98,7 +120,6 @@ void CSimpleMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow
 			AddMainComponent(mainWindowComponentPtr);
 		}
 	}
-
 }
 
 
@@ -151,6 +172,7 @@ void CSimpleMainWindowGuiComp::CreateDefaultToolBar()
 		QMainWindow* mainWindowPtr = GetQtWidget();
 		if (mainWindowPtr != NULL){
 			m_standardToolBarPtr.SetPtr(new QToolBar(mainWindowPtr));
+
 			m_standardToolBarPtr->setWindowTitle(tr("Standard"));
 			m_standardToolBarPtr->setObjectName("StandardToolBar");
 			m_standardToolBarPtr->toggleViewAction()->setVisible(false);

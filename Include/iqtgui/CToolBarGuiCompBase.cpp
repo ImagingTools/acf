@@ -34,35 +34,53 @@ bool CToolBarGuiCompBase::AddToMainWindow(QMainWindow& mainWindow)
 		return false;
 	}
 
-	Qt::ToolBarArea area = Qt::AllToolBarAreas;
-	int dockArea = Qt::TopToolBarArea;
+	Qt::ToolBarArea toolBarArea = Qt::TopToolBarArea;
+	if (m_toolBarAreaAttrPtr.IsValid()){
+		switch (*m_toolBarAreaAttrPtr){
+			case 0:
+				toolBarArea = Qt::LeftToolBarArea;
+				break;
 
-	if (m_dockAreaAttrPtr.IsValid()){
-		dockArea = *m_dockAreaAttrPtr;
-	}
+			case 1:
+				toolBarArea = Qt::RightToolBarArea;
+				break;
+			case 2:
+				toolBarArea = Qt::TopToolBarArea;
+				break;
 
-	switch (dockArea){
-		case 0:
-			area = Qt::LeftToolBarArea;
-			break;
-
-		case 1:
-			area = Qt::RightToolBarArea;
-			break;
-		case 2:
-			area = Qt::TopToolBarArea;
-			break;
-
-		case 3:
-			area = Qt::BottomToolBarArea;
-			break;
+			case 3:
+				toolBarArea = Qt::BottomToolBarArea;
+				break;
+			default:
+				break;
+		}
 	}
 
 	QToolBar* toolBarPtr = GetQtWidget();
 	Q_ASSERT(toolBarPtr != NULL);
 	if (toolBarPtr != NULL){
 		toolBarPtr->setIconSize(mainWindow.iconSize());
-		mainWindow.addToolBar(area, toolBarPtr);
+
+		toolBarPtr->setOrientation(*m_useVerticalOrientationAttrPtr ? Qt::Vertical : Qt::Horizontal);
+		toolBarPtr->setFloatable(false);
+		toolBarPtr->setMovable(false);
+
+		switch (*m_dockFeaturesAttrPtr){
+			case DF_MOVEABLE:
+				toolBarPtr->setFloatable(true);
+				break;
+			case DF_FLOATABLE:
+				toolBarPtr->setMovable(true);
+				break;
+			default:
+				break;
+		}
+
+		if (m_allowedDockAreasAttrPtr.IsValid()){
+			toolBarPtr->setAllowedAreas(Qt::ToolBarArea(*m_allowedDockAreasAttrPtr));
+		}
+
+		mainWindow.addToolBar(toolBarArea, toolBarPtr);
 
 		return true;
 	}

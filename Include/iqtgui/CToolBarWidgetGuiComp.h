@@ -16,7 +16,8 @@ namespace iqtgui
 class CToolBarWidgetGuiComp: public CToolBarGuiCompBase
 {
 public:
-	typedef CToolBarGuiCompBase BaseClass; 
+	typedef CToolBarGuiCompBase BaseClass;
+
 	
 	I_BEGIN_COMPONENT(CToolBarWidgetGuiComp);
 		I_REGISTER_INTERFACE(iqtgui::IMainWindowComponent);
