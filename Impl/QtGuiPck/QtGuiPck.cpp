@@ -103,6 +103,11 @@ I_EXPORT_COMPONENT(
 			"Application File Persistence Format Import Export");
 
 I_EXPORT_COMPONENT(
+			ExternalOpenDocumentCommand,
+			"Menu command for opening of the document in an external application",
+			"Application File Persistence Export");
+
+I_EXPORT_COMPONENT(
 			AboutGui,
 			"About GUI for the application",
 			"Help About Widget" IM_TAG("Application"));

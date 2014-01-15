@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          2934
+          3265
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          920
+          1070
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264194
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -37,7 +37,7 @@
       </Version>
     </VersionInfos>
   </AcfHeader>
-  <PositionMap count="10">
+  <PositionMap count="13">
     <Element>
       <ComponentName>
         Application
@@ -57,10 +57,24 @@
         DocumentLoader
       </ComponentName>
       <X>
-        150
+        1075
       </X>
       <X>
-        600
+        675
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        NotepadPath
+      </ComponentName>
+      <X>
+        1075
+      </X>
+      <X>
+        50
       </X>
       <Note>
         
@@ -71,10 +85,10 @@
         MainWindow
       </ComponentName>
       <X>
-        600
+        575
       </X>
       <X>
-        350
+        300
       </X>
       <Note>
         
@@ -99,10 +113,10 @@
         DocumentTemplate
       </ComponentName>
       <X>
-        600
+        575
       </X>
       <X>
-        600
+        550
       </X>
       <Note>
         
@@ -113,10 +127,10 @@
         ViewFactory
       </ComponentName>
       <X>
-        925
+        350
       </X>
       <X>
-        600
+        550
       </X>
       <Note>
         
@@ -127,10 +141,24 @@
         ApplicationInfo
       </ComponentName>
       <X>
-        350
+        125
       </X>
       <X>
-        475
+        225
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Notepad
+      </ComponentName>
+      <X>
+        850
+      </X>
+      <X>
+        175
       </X>
       <Note>
         
@@ -141,10 +169,24 @@
         Info
       </ComponentName>
       <X>
-        125
+        100
       </X>
       <X>
-        350
+        450
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        TempDocumentPath
+      </ComponentName>
+      <X>
+        850
+      </X>
+      <X>
+        50
       </X>
       <Note>
         
@@ -155,10 +197,10 @@
         Workspace
       </ComponentName>
       <X>
-        625
+        850
       </X>
       <X>
-        475
+        400
       </X>
       <Note>
         
@@ -169,10 +211,10 @@
         DocumentFactory
       </ComponentName>
       <X>
-        600
+        400
       </X>
       <X>
-        725
+        425
       </X>
       <Note>
         

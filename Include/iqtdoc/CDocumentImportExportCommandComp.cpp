@@ -50,8 +50,7 @@ void CDocumentImportExportCommandComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (m_documentManagerModelCompPtr.IsValid())
-	{
+	if (m_documentManagerModelCompPtr.IsValid()){
 		m_documentManagerModelCompPtr->AttachObserver(this);
 	}
 
@@ -74,25 +73,19 @@ void CDocumentImportExportCommandComp::OnComponentDestroyed()
 
 void CDocumentImportExportCommandComp::OnImport()
 {
-	if (m_documentPersistenceCompPtr.IsValid() && m_documentManagerCompPtr.IsValid())
-	{
+	if (m_documentPersistenceCompPtr.IsValid() && m_documentManagerCompPtr.IsValid()){
 		istd::IChangeable* documentPtr = NULL;
 
-		if (m_documentManagerCompPtr->InsertNewDocument(*m_documentTypeIdAttrPtr, false, "", &documentPtr))
-		{
+		if (m_documentManagerCompPtr->InsertNewDocument(*m_documentTypeIdAttrPtr, false, "", &documentPtr)){
 			Q_ASSERT(documentPtr != NULL);
 
-			if (m_documentPersistenceCompPtr->LoadFromFile(*documentPtr) == ifile::IFilePersistence::OS_OK)
-			{
+			if (m_documentPersistenceCompPtr->LoadFromFile(*documentPtr) == ifile::IFilePersistence::OS_OK){
 				m_documentManagerCompPtr->AddViewToDocument(*documentPtr);
 			}
-			else
-			{
+			else{
 				int documentsCount = m_documentManagerCompPtr->GetDocumentsCount();
-				for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex)
-				{
-					if (&m_documentManagerCompPtr->GetDocumentFromIndex(documentIndex) == documentPtr)
-					{
+				for (int documentIndex = 0; documentIndex < documentsCount; ++documentIndex){
+					if (&m_documentManagerCompPtr->GetDocumentFromIndex(documentIndex) == documentPtr){
 						m_documentManagerCompPtr->CloseDocument(documentIndex, true);
 					}
 				}
@@ -104,14 +97,11 @@ void CDocumentImportExportCommandComp::OnImport()
 
 void CDocumentImportExportCommandComp::OnExport()
 {
-	if (m_documentPersistenceCompPtr.IsValid() && m_documentManagerCompPtr.IsValid())
-	{
+	if (m_documentPersistenceCompPtr.IsValid() && m_documentManagerCompPtr.IsValid()){
 		istd::IPolymorphic* activeViewPtr = m_documentManagerCompPtr->GetActiveView();
-		if (activeViewPtr != NULL)
-		{
+		if (activeViewPtr != NULL){
 			istd::IChangeable* documentPtr = m_documentManagerCompPtr->GetDocumentFromView(*activeViewPtr);
-			if (documentPtr != NULL)
-			{
+			if (documentPtr != NULL){
 				m_documentPersistenceCompPtr->SaveToFile(*documentPtr);
 			}
 		}
@@ -119,22 +109,19 @@ void CDocumentImportExportCommandComp::OnExport()
 }
 
 
-// private methods
+// protected methods
 
 void CDocumentImportExportCommandComp::UpdateCommands()
 {
 	m_exportCommand.SetEnabled(false);
 
 	const idoc::IDocumentManager* objectPtr = GetObjectPtr();
-	if (objectPtr != NULL)
-	{
+	if (objectPtr != NULL){
 		istd::IPolymorphic* activeViewPtr = objectPtr->GetActiveView();
-		if (activeViewPtr != NULL)
-		{
+		if (activeViewPtr != NULL){
 			idoc::IDocumentManager::DocumentInfo documentInfo;
 			istd::IChangeable* documentPtr = objectPtr->GetDocumentFromView(*activeViewPtr, &documentInfo);
-			if (documentPtr != NULL && documentInfo.documentTypeId == *m_documentTypeIdAttrPtr)
-			{
+			if (documentPtr != NULL && documentInfo.documentTypeId == *m_documentTypeIdAttrPtr){
 				m_exportCommand.SetEnabled(true);
 			}
 		}

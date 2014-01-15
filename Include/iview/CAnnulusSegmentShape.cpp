@@ -6,11 +6,8 @@
 
 // ACF includes
 #include "imod/IModel.h"
-
 #include "i2d/CAnnulusSegment.h"
-
 #include "iqt/iqt.h"
-
 #include "iview/IColorSchema.h"
 #include "iview/CScreenTransform.h"
 

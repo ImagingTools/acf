@@ -184,6 +184,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExternalOpenDocumentCommandComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CHtmlHelpGuiComp.cpp"
 				>
 			</File>
@@ -231,6 +235,10 @@
 			</File>
 			<File
 				RelativePath="..\CExtendedDocumentTemplateComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExternalOpenDocumentCommandComp.h"
 				>
 			</File>
 			<File
@@ -284,6 +292,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\GeneratedFiles\iqtdoc\moc_CExternalOpenDocumentCommandComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\GeneratedFiles\iqtdoc\moc_CMainWindowGuiComp.cpp"
 				>
 			</File>
@@ -305,6 +317,10 @@
 			</File>
 			<File
 				RelativePath="..\CDocumentMetaInfoEditorComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CExternalOpenDocumentCommandComp.moc"
 				>
 			</File>
 			<File
