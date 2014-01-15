@@ -373,7 +373,7 @@ void CAnnulusSegmentShape::DrawArea(
 			i2d::CVector2d realCenter,
 			i2d::CVector2d center,
 			double realMinRadius,
-			double realMaxRadius,
+			double /*realMaxRadius*/,
 			int minRadius,
 			int maxRadius,
 			double startAngle,

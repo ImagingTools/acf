@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3055
+          3265
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          982
+          1070
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -615,7 +615,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="15">
+        <AttributeInfoMap count="20">
           <AttributeInfo>
             <Id>
               AboutDialog
@@ -729,6 +729,22 @@
           </AttributeInfo>
           <AttributeInfo>
             <Id>
+              IsMenuVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              IsMenuVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
               IsNestingEnabled
             </Id>
             <Type>
@@ -768,6 +784,22 @@
             </Type>
             <ExportId>
               IsTabbedDockAllowed
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              IsToolbarVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              IsToolbarVisible
             </ExportId>
             <Data>
               <IsEnabled>
@@ -843,6 +875,54 @@
               <Value>
                 SettingsProvider
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              StyleSheet
+            </Id>
+            <Type>
+              String
+            </Type>
+            <ExportId>
+              StyleSheet
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ToolBarArea
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              ToolBarArea
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              ToolBarDockFeatures
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              ToolBarDockFeatures
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>

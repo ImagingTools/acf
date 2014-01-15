@@ -180,6 +180,9 @@ void CSimpleMainWindowGuiComp::CreateDefaultToolBar()
 			if (m_useIconTextAttrPtr.IsValid() && m_useIconTextAttrPtr->GetValue()){
 				m_standardToolBarPtr->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 			}
+
+			m_standardToolBarPtr->setFloatable(*m_toolBarDockFeaturesAttrPtr & DF_FLOATABLE);
+			m_standardToolBarPtr->setMovable(*m_toolBarDockFeaturesAttrPtr & DF_MOVEABLE);
 		}
 	}
 }
