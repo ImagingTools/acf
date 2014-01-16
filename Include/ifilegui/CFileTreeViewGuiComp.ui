@@ -273,5 +273,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>FilterClearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FilterText</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>9</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>311</x>
+     <y>9</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
