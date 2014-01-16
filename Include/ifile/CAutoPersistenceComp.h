@@ -72,6 +72,9 @@ private Q_SLOTS:
 	void OnTimeout();
 
 private:
+	void EnsureTimerConnected();
+
+private:
 	I_REF(istd::IChangeable, m_objectCompPtr);
 	I_REF(iser::ISerializable, m_serializeableObjectCompPtr);
 	I_REF(imod::IModel, m_objectModelCompPtr);
