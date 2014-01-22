@@ -615,7 +615,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="20">
+        <AttributeInfoMap count="22">
           <AttributeInfo>
             <Id>
               AboutDialog
@@ -840,6 +840,38 @@
               <Value>
                 10
               </Value>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              OpenCommandVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              OpenCommandVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              SaveCommandVisible
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              SaveCommandVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
             </Data>
           </AttributeInfo>
           <AttributeInfo>
