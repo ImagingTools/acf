@@ -84,15 +84,22 @@ bool CMainWindowGuiComp::OnAttached(imod::IModel* modelPtr)
 
 			m_fileCommand.SetPriority(30);
 
-			m_openCommand.SetGroupId(GI_DOCUMENT);
-			m_fileCommand.InsertChild(&m_openCommand, false);
+			bool showOpenCommand = m_isOpenCommandVisibleAttrPtr.IsValid() ? *m_isOpenCommandVisibleAttrPtr : true;
+			if (showOpenCommand){
+				m_openCommand.SetGroupId(GI_DOCUMENT);
+				m_fileCommand.InsertChild(&m_openCommand, false);
+			}
 
-			m_saveCommand.SetGroupId(GI_DOCUMENT);
-			m_fileCommand.InsertChild(&m_saveCommand, false);
+			bool showSaveCommand = m_isSaveCommandVisibleAttrPtr.IsValid() ? *m_isSaveCommandVisibleAttrPtr: true;
+			if (showSaveCommand){
+				m_saveCommand.SetGroupId(GI_DOCUMENT);
 
-			m_saveAsCommand.SetGroupId(GI_DOCUMENT);
-			m_saveAsCommand.SetPriority(34);
-			m_fileCommand.InsertChild(&m_saveAsCommand, false);
+				m_saveAsCommand.SetGroupId(GI_DOCUMENT);
+				m_saveAsCommand.SetPriority(34);
+
+				m_fileCommand.InsertChild(&m_saveCommand, false);
+				m_fileCommand.InsertChild(&m_saveAsCommand, false);
+			}
 
 			const idoc::IDocumentManager* managerPtr = GetObjectPtr();
 			if (managerPtr != NULL){

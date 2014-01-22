@@ -49,6 +49,8 @@ public:
 		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
 		I_ASSIGN(m_isOpenContainingFolderVisibleAttrPtr, "IsOpenContainingFolderVisible", "If true, operation Tools/Open Containing Folder will be visible", true, false);
 		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list for one document type", true, 10);
+		I_ASSIGN(m_isOpenCommandVisibleAttrPtr, "OpenCommandVisible", "If enabled the open document command will be shown", false, true);
+		I_ASSIGN(m_isSaveCommandVisibleAttrPtr, "SaveCommandVisible", "If enabled the save document commands will be shown", false, true);
 	I_END_COMPONENT;
 
 	enum GroupId
@@ -221,6 +223,8 @@ private:
 	I_ATTR(bool, m_isCopyPathVisibleAttrPtr);
 	I_ATTR(bool, m_isOpenContainingFolderVisibleAttrPtr);
 	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
+	I_ATTR(bool, m_isOpenCommandVisibleAttrPtr);
+	I_ATTR(bool, m_isSaveCommandVisibleAttrPtr);
 
 	QByteArray m_beforeFullScreenGeometry;
 	QByteArray m_beforeFullScreenState;
