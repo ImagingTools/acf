@@ -3,9 +3,7 @@
 
 
 // ACF includes
-
 #include "iprm/IEnableableParam.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 
 #include "GeneratedFiles/iqtprm/ui_CEnableableParamGuiComp.h"
@@ -27,11 +25,11 @@ public:
 				iprm::IEnableableParam> BaseClass;
 
 	I_BEGIN_COMPONENT(CEnableableParamGuiComp);
-		I_ASSIGN(m_enableableLabelAttrPtr, "Label", "Label for the enable/disable control", false, "");		
+		I_ASSIGN(m_enableableLabelAttrPtr, "Label", "Label for the enable/disable control", false, "");
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual void OnGuiCreated();	
+	virtual void OnGuiCreated();
 	virtual void OnGuiRetranslate();
 
 	// reimplemented (imod::IModelEditor)
@@ -45,7 +43,7 @@ protected Q_SLOTS:
 	void on_EnableableCheck_stateChanged(int state);
 
 private:
-	I_ATTR(QString, m_enableableLabelAttrPtr);	
+	I_ATTR(QString, m_enableableLabelAttrPtr);
 };
 
 

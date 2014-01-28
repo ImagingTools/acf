@@ -1,5 +1,5 @@
 import qbs.base 1.0
-import "../../../Config/Qbs/AcfStaticLibrary.qbs" as AcfStaticLibrary
+import AcfStaticLibrary as AcfStaticLibrary
 
 AcfStaticLibrary{
 }

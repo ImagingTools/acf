@@ -7,7 +7,11 @@
 #include <QtCore/QMutex>
 #include <QtCore/QVector>
 #include <QtGui/QIcon>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QMessageBox>
+#else
 #include <QtGui/QMessageBox>
+#endif
 
 // ACF includes
 #include "icomp/CComponentBase.h"

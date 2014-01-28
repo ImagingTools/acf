@@ -1,5 +1,5 @@
 import qbs.base 1.0
-import "../../../Config/Qbs/AcfStaticLibrary.qbs" as AcfStaticLibrary
+import AcfStaticLibrary as AcfStaticLibrary
 
 AcfStaticLibrary{
 	name: "AcfLoc"
@@ -15,5 +15,5 @@ AcfStaticLibrary{
 		fileTags: ["qrc_generated"]
 	}
 
-    Qt.core.qmFilesDir: 'GeneratedFiles/' + product.name
+	Qt.core.qmFilesDir: 'GeneratedFiles/' + product.name
 }

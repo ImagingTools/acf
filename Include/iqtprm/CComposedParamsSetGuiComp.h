@@ -3,20 +3,16 @@
 
 
 // Qt includes
+#include <QtCore/QString>
 #include <QtCore/QSet>
 
 // ACF includes
-#include <QtCore/QString>
-
 #include "ifile/IFilePersistence.h"
-
 #include "iprm/IParamsSet.h"
-
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-
 #include "iqt2d/IViewExtender.h"
-
 #include "iqtprm/iqtprm.h"
+
 #include "GeneratedFiles/iqtprm/ui_CComposedParamsSetGuiComp.h"
 
 
@@ -105,7 +101,7 @@ private:
 
 	typedef QMap<iqt2d::IViewProvider*, int> ConnectedSceneFlags; // maps connected scene provider to connection flags
 	ConnectedSceneFlags m_connectedSceneFlags;
-	
+
 	/**
 		A container that depends on \c DesignType, i.e. QWidget, QToolBox or QTabWidget
 	*/

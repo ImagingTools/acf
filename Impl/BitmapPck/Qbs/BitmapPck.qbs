@@ -1,5 +1,5 @@
 import qbs.base 1.0
-import "../../../Config/Qbs/AcfPackage.qbs" as AcfPackage
+import AcfPackage as AcfPackage
 
 AcfPackage{
 	name: "BitmapPck"

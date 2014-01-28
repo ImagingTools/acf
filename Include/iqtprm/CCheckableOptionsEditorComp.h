@@ -5,6 +5,7 @@
 // ACF includes
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
 #include "iprm/IOptionsManager.h"
+
 #include "GeneratedFiles/iqtprm/ui_CCheckableOptionsEditorComp.h"
 
 
