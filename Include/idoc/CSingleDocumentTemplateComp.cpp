@@ -9,7 +9,7 @@
 
 
 namespace idoc
-{		
+{
 
 
 // public methods
@@ -27,9 +27,13 @@ ifile::IFilePersistence* CSingleDocumentTemplateComp::GetFileLoader(const QByteA
 }
 
 
-istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(const QByteArray& documentTypeId) const
+istd::IChangeable* CSingleDocumentTemplateComp::CreateDocument(QByteArray& documentTypeId, bool initialize) const
 {
 	if (m_documentCompFact.IsValid() && IsDocumentTypeSupported(documentTypeId)){
+		if (documentTypeId.isEmpty()){
+			documentTypeId = BaseClass2::GetDocumentTypeId();
+		}
+
 		return m_documentCompFact.CreateInstance();
 	}
 

@@ -156,17 +156,28 @@ ifile::IFilePersistence* CCompositeDocumentTemplateComp::GetFileLoader(const QBy
 }
 
 
-istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(const QByteArray& documentTypeId) const
+istd::IChangeable* CCompositeDocumentTemplateComp::CreateDocument(QByteArray& documentTypeId, bool initialize) const
 {
-	IdToTemplateMap::ConstIterator iter = m_idToTemplateMap.constFind(documentTypeId);
-	if (iter != m_idToTemplateMap.constEnd()){
-		Q_ASSERT(iter.value() != NULL);
+	if (documentTypeId.isEmpty()){
+		IdToTemplateMap::ConstIterator iter = m_idToTemplateMap.constBegin();
+		if (iter != m_idToTemplateMap.constEnd()){
+			Q_ASSERT(iter.value() != NULL);
 
-		return iter.value()->CreateDocument(documentTypeId);
+			documentTypeId = iter.key();
+
+			return iter.value()->CreateDocument(documentTypeId, initialize);
+		}
 	}
 	else{
-		return NULL;
+		IdToTemplateMap::ConstIterator iter = m_idToTemplateMap.constFind(documentTypeId);
+		if (iter != m_idToTemplateMap.constEnd()){
+			Q_ASSERT(iter.value() != NULL);
+
+			return iter.value()->CreateDocument(documentTypeId, initialize);
+		}
 	}
+
+	return NULL;
 }
 
 

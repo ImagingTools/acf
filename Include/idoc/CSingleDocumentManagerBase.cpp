@@ -129,8 +129,8 @@ QByteArray CSingleDocumentManagerBase::GetDocumentTypeId(const istd::IChangeable
 
 
 bool CSingleDocumentManagerBase::InsertNewDocument(
-			const QByteArray& documentTypeId, 
-			bool createView, 
+			const QByteArray& documentTypeId,
+			bool createView,
 			const QByteArray& viewTypeId,
 			istd::IChangeable** newDocumentPtr)
 {
@@ -148,7 +148,7 @@ bool CSingleDocumentManagerBase::InsertNewDocument(
 		return true;
 	}
 
-	if (NewDocument(documentTypeId, createView, viewTypeId)){
+	if (NewDocument(documentTypeId, createView, viewTypeId, true)){
 		if (newDocumentPtr != NULL){
 			*newDocumentPtr = m_documentPtr.GetPtr();
 		}
@@ -337,7 +337,7 @@ bool CSingleDocumentManagerBase::OpenDocument(
 					m_viewPtr.SetPtr(viewPtr);
 
 					OnViewRegistered(viewPtr);
-					
+
 					m_viewTypeId = viewTypeId;
 				}
 			}
@@ -347,7 +347,7 @@ bool CSingleDocumentManagerBase::OpenDocument(
 
 		return true;
 	}
-	
+
 	bool isCloseIgnored = false;
 
 	CloseDocument(-1, false, &isCloseIgnored);
@@ -365,7 +365,7 @@ bool CSingleDocumentManagerBase::OpenDocument(
 
 		istd::CChangeNotifier changePtr(this, CF_DOCUMENT_COUNT_CHANGED | CF_DOCUMENT_CREATED | CF_MODEL);
 
-		if (NewDocument(documentTypeId, createView, viewTypeId)){
+		if (NewDocument(documentTypeId, createView, viewTypeId, false)){
 			Q_ASSERT(m_documentPtr.IsValid());
 
 			istd::CChangeNotifier documentNotifier(m_documentPtr.GetPtr(), istd::IChangeable::CF_NO_UNDO);
@@ -380,7 +380,7 @@ bool CSingleDocumentManagerBase::OpenDocument(
 
 				if (m_undoManagerPtr.IsValid()){
 					m_undoManagerPtr->ResetUndo();
-	
+
 					m_undoManagerPtr->StoreDocumentState();
 				}
 
@@ -394,14 +394,17 @@ bool CSingleDocumentManagerBase::OpenDocument(
 
 
 bool CSingleDocumentManagerBase::NewDocument(
-			const QByteArray& documentTypeId, 
-			bool createView, 
-			const QByteArray& viewTypeId)
+			const QByteArray& documentTypeId,
+			bool createView,
+			const QByteArray& viewTypeId,
+			bool initialize)
 {
 	const IDocumentTemplate* documentTemplatePtr = GetDocumentTemplate();
 
 	if (documentTemplatePtr != NULL){
-		istd::TDelPtr<istd::IChangeable> documentPtr(documentTemplatePtr->CreateDocument(documentTypeId));
+		QByteArray realDocumentTypeId = documentTypeId;
+
+		istd::TDelPtr<istd::IChangeable> documentPtr(documentTemplatePtr->CreateDocument(realDocumentTypeId, initialize));
 
 		if (documentPtr.IsValid()){
 			istd::IPolymorphic* viewPtr = NULL;
@@ -410,7 +413,7 @@ bool CSingleDocumentManagerBase::NewDocument(
 
 			if (createView){
 				viewPtr = documentTemplatePtr->CreateView(
-							documentTypeId,
+							realDocumentTypeId,
 							documentPtr.GetPtr(),
 							viewTypeId);
 				if (viewPtr == NULL){
@@ -425,14 +428,14 @@ bool CSingleDocumentManagerBase::NewDocument(
 			}
 
 			m_documentPtr.TakeOver(documentPtr);
-			m_undoManagerPtr.SetPtr(documentTemplatePtr->CreateUndoManager(documentTypeId, m_documentPtr.GetPtr()));
+			m_undoManagerPtr.SetPtr(documentTemplatePtr->CreateUndoManager(realDocumentTypeId, m_documentPtr.GetPtr()));
 
 			imod::IModel* documentModelPtr = CompCastPtr<imod::IModel>(m_documentPtr.GetPtr());
 			if (documentModelPtr != NULL){
 				documentModelPtr->AttachObserver(this);
 			}
 
-			m_documentTypeId = documentTypeId;
+			m_documentTypeId = realDocumentTypeId;
 
 			m_isDirty = false;
 
@@ -472,7 +475,7 @@ bool CSingleDocumentManagerBase::HasDocumentPendingChanges() const
 }
 
 
-bool CSingleDocumentManagerBase::SerializeOpenDocument(iser::IArchive& archive) 
+bool CSingleDocumentManagerBase::SerializeOpenDocument(iser::IArchive& archive)
 {
 	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties");
 	static iser::CArchiveTag filePathTag("FilePath", "File path");
@@ -492,7 +495,7 @@ bool CSingleDocumentManagerBase::SerializeOpenDocument(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginTag(viewTypeIdTag);
 		retVal = retVal && archive.Process(m_viewTypeId);
-		retVal = retVal && archive.EndTag(viewTypeIdTag);		
+		retVal = retVal && archive.EndTag(viewTypeIdTag);
 	}
 	else{
 		QString filePath;
@@ -509,7 +512,7 @@ bool CSingleDocumentManagerBase::SerializeOpenDocument(iser::IArchive& archive)
 
 		retVal = retVal && archive.BeginTag(viewTypeIdTag);
 		retVal = retVal && archive.Process(viewTypeId);
-		retVal = retVal && archive.EndTag(viewTypeIdTag);		
+		retVal = retVal && archive.EndTag(viewTypeIdTag);
 
 		if (retVal && !filePath.isEmpty()){
 			retVal = retVal & OpenDocument(filePath, true, viewTypeId, documentTypeId);

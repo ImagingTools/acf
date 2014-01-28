@@ -10,7 +10,7 @@
 
 
 namespace idoc
-{		
+{
 
 
 class CSingleDocumentTemplateComp: public icomp::CComponentBase, public CSingleDocumentTemplateBase
@@ -18,7 +18,7 @@ class CSingleDocumentTemplateComp: public icomp::CComponentBase, public CSingleD
 public:
 	typedef icomp::CComponentBase BaseClass;
 	typedef CSingleDocumentTemplateBase BaseClass2;
-	
+
 	I_BEGIN_COMPONENT(CSingleDocumentTemplateComp);
 		I_REGISTER_INTERFACE(idoc::IDocumentTemplate);
 		I_ASSIGN(m_documentTypeIdAttrPtr, "DocumentTypeId", "ID of supported document", true, "Default");
@@ -36,7 +36,7 @@ public:
 
 	// reimplemented (idoc::IDocumentTemplate)
 	virtual ifile::IFilePersistence* GetFileLoader(const QByteArray& documentTypeId) const;
-	virtual istd::IChangeable* CreateDocument(const QByteArray& documentTypeId) const;
+	virtual istd::IChangeable* CreateDocument(QByteArray& documentTypeId, bool initialize = true) const;
 	virtual istd::IPolymorphic* CreateView(
 				const QByteArray& documentTypeId,
 				istd::IChangeable* documentPtr,

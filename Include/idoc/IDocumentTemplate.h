@@ -45,9 +45,12 @@ public:
 
 	/**
 		Creates a document instance for document type \c documentTypeId.
-		\param	documentTypeId	ID of document type.
+		\param	documentTypeId	ID of document type, can be empty for default document.
+								If document type is undefined (empty), this field will be used to return ID of used type.
+		\param	initialize		If true, document should be filled with initial data (operation new),
+								otherwise initialization is not needed (e.g. for document loading - filling of data will be done by loader).
 	*/
-	virtual istd::IChangeable* CreateDocument(const QByteArray& documentTypeId) const = 0;
+	virtual istd::IChangeable* CreateDocument(QByteArray& documentTypeId, bool initialize = true) const = 0;
 
 	/**
 		Creates a view instance for document \c document of type \c viewTypeId.
