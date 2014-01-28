@@ -72,6 +72,15 @@ void CSystemLocationComp::OnComponentCreated()
 		case SL_EXECUTABLE_FILE:
 			m_storagePath = QCoreApplication::applicationFilePath(); 
 			break;
+
+		case SL_EXECUTABLE_CONTENT:
+			m_storagePath = QCoreApplication::applicationDirPath();
+			if (m_storagePath.contains(".app/Content/MacOS")){
+				m_storagePath += "../../";
+			}
+			break;
+		default:
+			break;
 	}
 }
 
