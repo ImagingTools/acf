@@ -72,6 +72,5 @@ Project{
 		Depends{ name: "QtGuiPck" }
 		Depends{ name: "QtViewPck" }
 		Depends{ name: "PackagePck" }
-		Depends{ name: "acf" }
 	}
 }
