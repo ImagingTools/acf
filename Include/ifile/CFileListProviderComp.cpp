@@ -26,7 +26,7 @@ const QFileInfoList& CFileListProviderComp::GetFileList() const
 }
 
 
-// protected methods
+// private methods
 
 bool CFileListProviderComp::CreateFileList(
 			const QDir& root,
@@ -34,7 +34,7 @@ bool CFileListProviderComp::CreateFileList(
 			int maxRecursionDepth,
 			const QStringList& nameFilters,
 			QDir::SortFlags sortSpec,
-			QFileInfoList& fileList)
+			QFileInfoList& fileList) const
 {
 	QFileInfoList directories;
 	if (!CreateDirectoryList(root, minRecursionDepth, maxRecursionDepth, directories)){
@@ -71,7 +71,7 @@ bool CFileListProviderComp::CreateDirectoryList(
 			const QDir& root,
 			int minRecursionDepth,
 			int maxRecursionDepth,
-			QFileInfoList& directoryList)
+			QFileInfoList& directoryList) const
 {
 	Q_ASSERT(minRecursionDepth >= 0);
 
@@ -83,6 +83,8 @@ bool CFileListProviderComp::CreateDirectoryList(
 
 	QFileInfo fileInfo(rootPath);
 	if (!fileInfo.isDir()){
+		SendErrorMessage(0, QString(tr("Specified path '%1' is not a directory")).arg(root.absolutePath()));
+
 		return false;
 	}
 
@@ -98,7 +100,7 @@ void CFileListProviderComp::EnumerateDirectory(
 			const QDir& root,
 			int minRecursionDepth,
 			int maxRecursionDepth,
-			QFileInfoList& directories)
+			QFileInfoList& directories) const
 {
 	if (minRecursionDepth <= 0){
 		QString rootPath = root.absolutePath();
@@ -137,7 +139,14 @@ void CFileListProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*
 		QStringList filters;
 
 		m_directoryWatcher.removePaths(m_directoryWatcher.directories());
-		m_directoryWatcher.addPath(m_dirParamCompPtr->GetPath());
+
+		QFileInfo watchingPathInfo(m_dirParamCompPtr->GetPath());
+		if (watchingPathInfo.exists()){
+			m_directoryWatcher.addPath(m_dirParamCompPtr->GetPath());		
+		}
+		else{
+			SendWarningMessage(0, QString(tr("Specified path '%1' is not exist")).arg(m_dirParamCompPtr->GetPath()));		
+		}
 
 		if (m_fileTypeInfoCompPtr.IsValid()){
 			QStringList extensions;

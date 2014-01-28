@@ -10,7 +10,7 @@
 // ACF includes
 #include "imod/IModel.h"
 #include "imod/CSingleModelObserverBase.h"
-#include "icomp/CComponentBase.h"
+#include "ilog/TLoggerCompWrap.h"
 #include "ifile/IFileListProvider.h"
 #include "ifile/IFileNameParam.h"
 #include "ifile/IFileTypeInfo.h"
@@ -25,13 +25,13 @@ namespace ifile
 */
 class CFileListProviderComp:
 			public QObject,
-			public icomp::CComponentBase,
+			public ilog::CLoggerComponentBase,
 			virtual public ifile::IFileListProvider,
 			protected imod::CSingleModelObserverBase
 {
 	Q_OBJECT
 public:
-	typedef icomp::CComponentBase BaseClass;
+	typedef ilog::CLoggerComponentBase BaseClass;
 
 	I_BEGIN_COMPONENT(CFileListProviderComp);
 		I_REGISTER_INTERFACE(istd::IChangeable);
@@ -66,28 +66,28 @@ private:
 		\param	minRecursionDepth	minimal recursion depth.
 		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
 	*/
-	static bool CreateFileList(const QDir& root,
+	bool CreateFileList(const QDir& root,
 				int minRecursionDepth,
 				int maxRecursionDepth,
 				const QStringList& nameFilters,
 				QDir::SortFlags sortSpec,
-				QFileInfoList& fileList);
+				QFileInfoList& fileList) const;
 
 	/**
 		Several filters can be applied to the QDir object before call of this function.
 		\param	minRecursionDepth	minimal recursion depth. If it is 0, root will be included.
 		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
 	*/
-	static bool CreateDirectoryList(const QDir& root,
+	bool CreateDirectoryList(const QDir& root,
 				int minRecursionDepth,
 				int maxRecursionDepth,
-				QFileInfoList& directoryList);
+				QFileInfoList& directoryList) const;
 
-	static void EnumerateDirectory(
+	void EnumerateDirectory(
 				const QDir& root,
 				int minRecursionDepth,
 				int maxRecursionDepth,
-				QFileInfoList& directoryList);
+				QFileInfoList& directoryList) const;
 
 private:
 	I_REF(ifile::IFileNameParam, m_dirParamCompPtr);
