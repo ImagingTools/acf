@@ -125,11 +125,13 @@ Interface* TMultiReferenceMember<Interface>::operator[](int index) const
 {
 	Q_ASSERT(index >= 0);
 
-	EnsureInitialized();
+	if (EnsureInitialized()){
+		Q_ASSERT(index < int(m_components.size()));
 
-	Q_ASSERT(index < int(m_components.size()));
+		return m_components[index];
+	}
 
-	return m_components[index];
+	return NULL;
 }
 
 
