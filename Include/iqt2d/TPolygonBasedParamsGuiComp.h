@@ -140,16 +140,21 @@ void TPolygonBasedParamsGuiComp<PolygonBasedShape, PolygonBasedModel>::UpdateMod
 	i2d::CPolygon* objectPtr = GetObjectPtr();
 	Q_ASSERT(objectPtr != NULL);
 
-	istd::CChangeNotifier changePtr(objectPtr);
-
 	int count = NodeParamsTable->rowCount();
-	objectPtr->Clear();
+
+	i2d::CPolygon polygon;
 
 	for (int i = 0; i < count; i++){
 		double x = NodeParamsTable->item(i, CI_X)->text().toDouble();
 		double y = NodeParamsTable->item(i, CI_Y)->text().toDouble();
 
-		objectPtr->InsertNode(i2d::CVector2d(x, y));
+		polygon.InsertNode(i2d::CVector2d(x, y));
+	}
+
+	if (!objectPtr->IsEqual(polygon)){
+		istd::CChangeNotifier changePtr(objectPtr);
+
+		objectPtr->CopyFrom(polygon);
 	}
 }
 
