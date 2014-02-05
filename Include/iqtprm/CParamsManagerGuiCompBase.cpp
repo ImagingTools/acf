@@ -625,7 +625,6 @@ void CParamsManagerGuiCompBase::OnGuiModelAttached()
 	UpDownButtonsFrame->setVisible(areUpDownButtonsNeeded);
 
 	ButtonsFrame->setVisible(areAddRemoveButtonsNeeded && areUpDownButtonsNeeded);
-	ParamsTree->setItemDelegate(new iqtgui::CItemDelegate(20, this));
 }
 
 
