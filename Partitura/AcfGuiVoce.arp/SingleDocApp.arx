@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3265
+          3291
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1070
+          1077
         </Number>
         <Description>
           ACF-Solutions
@@ -1265,7 +1265,7 @@
   </ElementsList>
   <EmbeddedRegistriesList count="0">
   </EmbeddedRegistriesList>
-  <ExportedInterfaces count="4">
+  <ExportedInterfaces count="2">
     <Interface>
       <InterfaceId>
         ibase::IApplication
@@ -1280,22 +1280,6 @@
       </InterfaceId>
       <ComponentId>
         ApplicationInfo
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        idoc::IDocumentManager
-      </InterfaceId>
-      <ComponentId>
-        Workspace
-      </ComponentId>
-    </Interface>
-    <Interface>
-      <InterfaceId>
-        imod::IModel
-      </InterfaceId>
-      <ComponentId>
-        Workspace
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
