@@ -88,11 +88,6 @@ I_EXPORT_COMPONENT(
 			"Composed Combine Tab Widget Slaves" IM_TAG("Composition"));
 
 I_EXPORT_COMPONENT(
-			SettingsContainerGui,
-			"Stacked container for Qt widgets with switching buttons (typically for settings dialogs)",
-			"Composed Combine Button Stacked Widget Slaves" IM_TAG("Composition"));
-
-I_EXPORT_COMPONENT(
 			SingletonDocApplication,
 			"General singleton application",
 			"Application Singleton Process" IM_TAG("Application"));
