@@ -26,15 +26,21 @@ namespace iqtgui
 
 // public methods
 
+QWidget* CComposedGuiComp::GetPageContainerWidget() const
+{
+	CMultiPageWidget* widgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+
+	return widgetPtr->GetContainerWidgetPtr();
+}
+
+
 // reimplemented (TRestorableGuiWrap)
 
 void CComposedGuiComp::OnRestoreSettings(const QSettings& settings)
 {
 	Q_ASSERT(IsGuiCreated());
 
-	CMultiPageWidget* widgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
-
-	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(widgetPtr->GetContainerWidgetPtr());
+	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(GetPageContainerWidget());
 	if (splitterPtr != NULL){
 		// preserve overriding of splitter orientation:
 		Qt::Orientation splitterOrientation = splitterPtr->orientation();
@@ -52,9 +58,7 @@ void CComposedGuiComp::OnSaveSettings(QSettings& settings) const
 {
 	Q_ASSERT(IsGuiCreated());
 
-	CMultiPageWidget* widgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
-
-	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(widgetPtr->GetContainerWidgetPtr());
+	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(GetPageContainerWidget());
 	if (splitterPtr != NULL){
 		QByteArray splitterState = splitterPtr->saveState();
 
@@ -94,12 +98,9 @@ void CComposedGuiComp::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	CMultiPageWidget* widgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
-	Q_ASSERT(widgetPtr != NULL);
-
 	bool isFlat = *m_flatViewAttrPtr;
 
-	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(widgetPtr->GetContainerWidgetPtr());
+	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(GetPageContainerWidget());
 	if (tabWidgetPtr != NULL){
 		if (isFlat){
 			tabWidgetPtr->setTabShape(QTabWidget::Triangular);
@@ -109,12 +110,12 @@ void CComposedGuiComp::OnGuiCreated()
 	}
 
 	// TODO: possible remove it!
-	QToolBox* toolBoxPtr = dynamic_cast<QToolBox*>(widgetPtr->GetContainerWidgetPtr());
+	QToolBox* toolBoxPtr = dynamic_cast<QToolBox*>(GetPageContainerWidget());
 	if (toolBoxPtr != NULL){
-		widgetPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+		toolBoxPtr->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
 	}
 
-	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(widgetPtr->GetContainerWidgetPtr());
+	QSplitter* splitterPtr = dynamic_cast<QSplitter*>(GetPageContainerWidget());
 	if (splitterPtr != NULL){
 		if (isFlat){
 			splitterPtr->setOpaqueResize(false);

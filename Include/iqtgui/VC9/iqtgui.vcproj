@@ -698,6 +698,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CMultiPageGuiCompBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CMultiPageWidget.cpp"
 				>
 			</File>
@@ -815,6 +819,10 @@
 			</File>
 			<File
 				RelativePath="..\CImagePropertyGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiPageGuiCompBase.moc"
 				>
 			</File>
 			<File

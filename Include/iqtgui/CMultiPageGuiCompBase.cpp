@@ -91,6 +91,24 @@ bool CMultiPageGuiCompBase::CreatePage(int guiIndex)
 }
 
 
+void CMultiPageGuiCompBase::RemovePage(int pageIndex)
+{
+	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	Q_ASSERT(multiPageWidgetPtr != NULL);
+
+	multiPageWidgetPtr->RemovePage(pageIndex);
+}
+
+
+void CMultiPageGuiCompBase::SetCurrentPage(int pageIndex)
+{
+	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	Q_ASSERT(multiPageWidgetPtr != NULL);
+
+	multiPageWidgetPtr->SetCurrentPage(pageIndex);
+}
+
+
 void CMultiPageGuiCompBase::UpdateVisualElements()
 {
 	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
@@ -128,6 +146,17 @@ void CMultiPageGuiCompBase::UpdateVisualElements()
 }
 
 
+void CMultiPageGuiCompBase::CreatePages()
+{
+	int pagesCount = GetPagesCount();
+	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
+		CreatePage(pageIndex);
+	}
+
+	UpdateVisualElements();
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
@@ -150,6 +179,8 @@ QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
 		widgetPtr->SetPageIconSize(QSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr));
 	}
 
+	connect(widgetPtr, SIGNAL(EmitPageIndexChanged(int)), this, SLOT(OnPageChanged(int pageIndex)));
+
 	m_currentPageIndex = widgetPtr->GetCurrentPage();
 
 	return widgetPtr;
@@ -162,12 +193,7 @@ void CMultiPageGuiCompBase::OnGuiCreated()
 {
 	BaseClass::OnGuiCreated();
 
-	int pagesCount = GetPagesCount();
-	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
-		CreatePage(pageIndex);
-	}
-
-	UpdateVisualElements();
+	CreatePages();
 }
 
 
@@ -238,6 +264,14 @@ void CMultiPageGuiCompBase::OnModelChanged(int /*modelId*/, int /*changeFlags*/,
 	if (IsGuiCreated()){
 		UpdateVisualElements();
 	}
+}
+
+
+// protected slots
+
+void CMultiPageGuiCompBase::OnPageChanged(int pageIndex)
+{
+	m_currentPageIndex = pageIndex;
 }
 
 

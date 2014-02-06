@@ -23,6 +23,7 @@ class CMultiPageGuiCompBase:
 			public iqtgui::CGuiComponentBase,
 			protected imod::CMultiModelDispatcherBase
 {
+	Q_OBJECT
 public:
 	typedef iqtgui::CGuiComponentBase BaseClass;
 	typedef imod::CMultiModelDispatcherBase BaseClass2;
@@ -64,7 +65,6 @@ protected:
 	*/
 	virtual int GetDesignType() const = 0;
 
-protected:
 	/**
 		Add a new page to the widget container.
 	*/
@@ -73,17 +73,32 @@ protected:
 	/**
 		Get the name corresponding to a page GUI element.
 	*/
-	QString GetPageGuiName(const iqtgui::IGuiObject& pageGui) const;
+	virtual QString GetPageGuiName(const iqtgui::IGuiObject& pageGui) const;
 
 	/**
 		Create a page in the page container widget.
 	*/
-	bool CreatePage(int guiIndex);
+	virtual bool CreatePage(int guiIndex);
+
+	/**
+		Remove a page from the container widget.
+	*/
+	virtual void RemovePage(int pageIndex);
+
+	/**
+		Set current page.
+	*/
+	virtual void SetCurrentPage(int pageIndex);
 
 	/**
 		Update visual status of the page elements.
 	*/
-	void UpdateVisualElements();
+	virtual void UpdateVisualElements();
+
+	/**
+		Create all container pages.
+	*/
+	virtual void CreatePages();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
@@ -98,6 +113,9 @@ protected:
 
 	// reimplemented (imod::CMultiModelDispatcherBase)
 	virtual void OnModelChanged(int modelId, int changeFlags, istd::IPolymorphic* updateParamsPtr);
+
+protected Q_SLOTS:
+	virtual void OnPageChanged(int pageIndex);
 
 private:
 	class PageModel:
