@@ -59,6 +59,9 @@ protected:
 private Q_SLOTS:
 	void OnCommandActivated();
 
+private:
+	void BuildCommands();
+
 protected:
 	I_REF(iprm::ISelectionParam, m_commandSelectionCompPtr);
 	I_REF(imod::IModel, m_commandSelectionModelCompPtr);

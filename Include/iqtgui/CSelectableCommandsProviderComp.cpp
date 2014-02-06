@@ -29,7 +29,65 @@ const ibase::IHierarchicalCommand* CSelectableCommandsProviderComp::GetCommands(
 
 // reimpemented (imod::CSingleModelObserverBase)
 
-void CSelectableCommandsProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
+void CSelectableCommandsProviderComp::OnUpdate(int updateFlags, istd::IPolymorphic* /*updateParamsPtr*/)
+{
+	int relevantFlags = iprm::IOptionsList::CF_OPTIONS_CHANGED | iprm::IOptionsList::CF_OPTION_RENAMED;
+	if ((updateFlags & relevantFlags) == 0){
+		return;
+	}
+
+	BuildCommands();
+}
+
+
+// reimpemented (icomp::IComponent)
+
+void CSelectableCommandsProviderComp::OnComponentCreated()
+{
+	BaseClass::OnComponentCreated();
+
+	if (m_commandSelectionModelCompPtr.IsValid()){
+		m_commandSelectionModelCompPtr->AttachObserver(this);
+	}
+
+	BuildCommands();
+
+	m_mainMenuCommand.SetName(*m_rootMenuNameAttrPtr);
+	m_commandsList.SetVisuals(*m_menuNameAttrPtr, *m_menuNameAttrPtr, *m_menuDescriptionAttrPtr);
+
+	m_rootMenuCommand.InsertChild(&m_mainMenuCommand);
+	m_mainMenuCommand.InsertChild(&m_commandsList);
+}
+
+
+void CSelectableCommandsProviderComp::OnComponentDestroyed()
+{
+	EnsureModelDetached();
+
+	BaseClass::OnComponentDestroyed();
+}
+
+
+// private slots
+
+void CSelectableCommandsProviderComp::OnCommandActivated()
+{
+	QAction* actionPtr = dynamic_cast<QAction*>(sender());
+	Q_ASSERT(actionPtr != NULL);
+
+	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
+	Q_ASSERT(selectionPtr != NULL);
+
+	int optionIndex = actionPtr->data().toInt();
+	Q_ASSERT(optionIndex < selectionPtr->GetSelectionConstraints()->GetOptionsCount());
+
+	selectionPtr->SetSelectedOptionIndex(optionIndex);
+}
+
+
+// private methods
+
+void CSelectableCommandsProviderComp::BuildCommands()
 {
 	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
 	Q_ASSERT(selectionPtr != NULL);
@@ -100,49 +158,6 @@ void CSelectableCommandsProviderComp::OnUpdate(int /*updateFlags*/, istd::IPolym
 			}
 		}
 	}
-}
-
-
-// reimpemented (icomp::IComponent)
-
-void CSelectableCommandsProviderComp::OnComponentCreated()
-{
-	BaseClass::OnComponentCreated();
-
-	if (m_commandSelectionModelCompPtr.IsValid()){
-		m_commandSelectionModelCompPtr->AttachObserver(this);
-	}
-
-	m_mainMenuCommand.SetName(*m_rootMenuNameAttrPtr);
-	m_commandsList.SetVisuals(*m_menuNameAttrPtr, *m_menuNameAttrPtr, *m_menuDescriptionAttrPtr);
-
-	m_rootMenuCommand.InsertChild(&m_mainMenuCommand);
-	m_mainMenuCommand.InsertChild(&m_commandsList);
-}
-
-
-void CSelectableCommandsProviderComp::OnComponentDestroyed()
-{
-	EnsureModelDetached();
-
-	BaseClass::OnComponentDestroyed();
-}
-
-
-// private slots
-
-void CSelectableCommandsProviderComp::OnCommandActivated()
-{
-	QAction* actionPtr = dynamic_cast<QAction*>(sender());
-	Q_ASSERT(actionPtr != NULL);
-
-	iprm::ISelectionParam* selectionPtr = GetObjectPtr();
-	Q_ASSERT(selectionPtr != NULL);
-
-	int optionIndex = actionPtr->data().toInt();
-	Q_ASSERT(optionIndex < selectionPtr->GetSelectionConstraints()->GetOptionsCount());
-
-	selectionPtr->SetSelectedOptionIndex(optionIndex);
 }
 
 

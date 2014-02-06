@@ -120,6 +120,9 @@ void CDockWidgetGuiComp::OnGuiCreated()
 		dockWidgetPtr->setWindowTitle(*m_dockTitleAttrPtr);
 		dockWidgetPtr->setObjectName(*m_dockTitleAttrPtr);
 	}
+	else{
+		dockWidgetPtr->setTitleBarWidget(new QWidget(dockWidgetPtr));
+	}
 
 	istd::TDelPtr<QWidget> containerWidgetPtr(new QWidget(NULL));
 	QVBoxLayout* layoutPtr = new QVBoxLayout(containerWidgetPtr.GetPtr());
