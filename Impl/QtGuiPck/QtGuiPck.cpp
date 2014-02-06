@@ -272,6 +272,11 @@ I_EXPORT_COMPONENT(
 			"Allows to manage different types of parameter sets",
 			"Model Observer Parameters Set Manager");
 
+I_EXPORT_COMPONENT(
+			ExtComposedParamsSetGui,
+			"Allow to edit set of parameter using generic UI",
+			"Model Observer Parameter Set" IM_TAG("Editor Composition"));
+
 // FileGuiPck
 
 I_EXPORT_COMPONENT(

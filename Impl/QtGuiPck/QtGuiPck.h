@@ -39,6 +39,7 @@
 #include "ifilegui/CFilePreviewGuiComp.h"
 #include "ifilegui/CFileListProviderGuiComp.h"
 
+// ParamGuiPck
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
 #include "iqtprm/CVariableParamGuiComp.h"
@@ -54,7 +55,9 @@
 #include "iqtprm/CMultiParamsManagerGuiComp.h"
 #include "iqtprm/COptionsListEditorGuiComp.h"
 #include "iqtprm/CCheckableOptionsEditorComp.h"
+#include "iqtprm/CExtComposedParamsSetGuiComp.h"
 
+// DocumentGuiPck
 #include "iqtdoc/CMainWindowGuiComp.h"
 #include "iqtdoc/CSingleDocumentWorkspaceGuiComp.h"
 #include "iqtdoc/CMultiDocumentWorkspaceGuiComp.h"
@@ -127,6 +130,7 @@ typedef iqtprm::CCheckableOptionsEditorComp CheckableOptionsEditor;
 typedef iqtprm::CEnableableParamGuiComp EnableableParamGui;
 typedef iqtprm::CButtonBasedSelectionParamGuiComp ButtonBasedSelectionEditor;
 typedef iqtprm::CMultiParamsManagerGuiComp MultiParamsManagerGui;
+typedef iqtprm::CExtComposedParamsSetGuiComp ExtComposedParamsSetGui;
 
 typedef iqtdoc::CMainWindowGuiComp MainWindowGui;
 typedef icomp::TModelCompWrap<iqtdoc::CSingleDocumentWorkspaceGuiComp> SingleDocWorkspaceGui;

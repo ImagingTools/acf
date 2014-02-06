@@ -184,6 +184,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtComposedParamsSetGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamGuiComp.cpp"
 				>
 			</File>
@@ -251,6 +255,10 @@
 			</File>
 			<File
 				RelativePath="..\CEnableableParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtComposedParamsSetGuiComp.h"
 				>
 			</File>
 			<File
