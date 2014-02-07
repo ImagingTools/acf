@@ -44,6 +44,7 @@ public:
 		I_ASSIGN(m_titleAttrPtr, "Title", "Tool bar title", false, "");
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of the icon used in the tool bar", false, 32);
 		I_ASSIGN(m_associatedDocumentTypeId, "AssociatedDocumentTypeId", "ID of the associated document type ID", false, "Default");
+		I_ASSIGN(m_buttonStyleAttrPtr, "ButtonStyle", "Button style used by the tool bar\n0 - Only display the icon\n1 - Only display the text\n2 - The text appears beside the icon\n3 - The text appears under the icon\n4 - Follow the system style", true, Qt::ToolButtonIconOnly);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IMainWindowComponent)
@@ -64,6 +65,7 @@ private:
 	I_ATTR(QString, m_titleAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
 	I_ATTR(QByteArray, m_associatedDocumentTypeId);
+	I_ATTR(int, m_buttonStyleAttrPtr);
 };
 
 
