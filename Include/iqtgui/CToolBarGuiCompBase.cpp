@@ -65,8 +65,6 @@ bool CToolBarGuiCompBase::AddToMainWindow(QMainWindow& mainWindow)
 		toolBarPtr->setFloatable(false);
 		toolBarPtr->setMovable(false);
 
-		toolBarPtr->setToolButtonStyle(Qt::ToolButtonStyle(*m_buttonStyleAttrPtr));
-
 		switch (*m_dockFeaturesAttrPtr){
 			case DF_MOVEABLE:
 				toolBarPtr->setFloatable(true);
@@ -148,6 +146,8 @@ void CToolBarGuiCompBase::OnGuiCreated()
 	if (m_iconSizeAttrPtr.IsValid()){
 		widgetPtr->setIconSize(QSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr));
 	}
+
+	widgetPtr->setToolButtonStyle(Qt::ToolButtonStyle(*m_buttonStyleAttrPtr));
 }
 
 
