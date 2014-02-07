@@ -36,6 +36,7 @@ public:
 		I_ASSIGN(m_styleSheetAttrPtr, "StyleSheet", "Style sheet for the GUI", false, "");
 		I_ASSIGN(m_iconPathAttrPtr, "IconPath", "file path for the application icon", true, ":/Icons/AcfLogo.svg");
 		I_ASSIGN(m_titleFormatAttrPtr, "TitleFormat", "Describe format of title bar, tags:\n\t$(CompanyName) - name of company\n\t$(ProductName) - product name\n\t$(AppName) - application name\n\t$(AppSubName) - application sub name\n\t$(AppType) - type of application\n\t$(Version) - main application version", true, "$(AppName)");
+		I_ASSIGN(m_useMenuIconsOnMacAttrPtr, "UseMenuIconsOnMac", "If enabled, the menu icons will be used in the application's menu bar on Mac OS", true, true);
 	I_END_COMPONENT;
 
 	// reimplemented (ibase::IApplication)
@@ -60,6 +61,7 @@ private:
 	I_ATTR(QString, m_styleSheetAttrPtr);
 	I_ATTR(QString, m_iconPathAttrPtr);
 	I_ATTR(QString, m_titleFormatAttrPtr);
+	I_ATTR(bool, m_useMenuIconsOnMacAttrPtr);
 
 	bool m_useSplashScreen;
 	istd::CGeneralTimeStamp m_splashScreenTimer;

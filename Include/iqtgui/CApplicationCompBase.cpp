@@ -42,6 +42,9 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 			return false;
 		}
 
+#ifdef Q_OS_MACX
+		qt_mac_set_menubar_icons(*m_useMenuIconsOnMacAttrPtr);
+#endif
 		if (IsComponentActive()){
 			InitializeComponentApplication();
 		}
