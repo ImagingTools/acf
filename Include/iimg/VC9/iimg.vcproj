@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLayerBitmap.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CReflectedBitmapBase.cpp"
 				>
 			</File>
@@ -237,6 +241,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CMultiLayerBitmap.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CReflectedBitmapBase.h"
 				>
 			</File>
@@ -258,6 +266,10 @@
 			</File>
 			<File
 				RelativePath="..\IMultiBitmapProvider.h"
+				>
+			</File>
+			<File
+				RelativePath="..\IMultiLayerBitmap.h"
 				>
 			</File>
 			<File
