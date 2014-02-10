@@ -62,6 +62,7 @@ typedef iimg::CBitmapDocumentFilePersistenceComp BitmapDocumentLoader;
 typedef icomp::TModelCompWrap<
 			icomp::TMakeComponentWrap<
 						iimg::CMultiLayerBitmap,
+						iimg::IMultiLayerBitmap,
 						iimg::IMultiBitmapProvider,
 						idoc::IMultiPageDocument,
 						iser::ISerializable> > MultiLayerBitmap;
