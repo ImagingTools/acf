@@ -1,5 +1,4 @@
 #include "iimg/CMultiLayerBitmap.h"
-#include "iimg/CBitmap.h"
 
 
 // ACF includes
@@ -11,6 +10,23 @@ namespace iimg
 
 
 // reimplemented (iimg::IMultiLayerBitmap)
+
+iimg::IBitmap* CMultiLayerBitmap::InsertBitmap(
+	iimg::IBitmap::PixelFormat pixelFormat, 
+	const istd::CIndex2d& size)
+{
+	imod::TModelWrap<iimg::CGeneralBitmap>* resultPtr = new imod::TModelWrap<iimg::CGeneralBitmap>();
+	if (!resultPtr->CreateBitmap(pixelFormat, size)){
+		delete resultPtr;
+
+		return NULL;
+	}
+
+	m_bitmaps.PushBack(resultPtr);
+
+	return resultPtr;
+}
+
 
 iimg::IBitmap* CMultiLayerBitmap::InsertBitmap(
 			iimg::IBitmap::PixelFormat pixelFormat, 

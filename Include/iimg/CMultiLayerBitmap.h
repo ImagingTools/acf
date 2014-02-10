@@ -23,6 +23,9 @@ public:
 	virtual void Reset();
 	virtual iimg::IBitmap* InsertBitmap(
 		iimg::IBitmap::PixelFormat pixelFormat,
+		const istd::CIndex2d& size);
+	virtual iimg::IBitmap* InsertBitmap(
+		iimg::IBitmap::PixelFormat pixelFormat,
 		const istd::CIndex2d& size,
 		void* dataPtr,
 		bool releaseFlag,
