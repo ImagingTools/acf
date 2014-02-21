@@ -314,23 +314,55 @@ bool CMessageContainer::CopyFrom(const istd::IChangeable& object, CompatibilityM
 
 	istd::CChangeNotifier changePtr(this, CF_MODEL | CF_RESET | CF_MESSAGE_ADDED);
 
-	const CMessageContainer* sourcePtr = dynamic_cast<const CMessageContainer*>(&object);
-	if (sourcePtr != NULL){
-		int sourceMessageCount = sourcePtr->m_messages.count();
-		for (int messageIndex = 0; messageIndex < sourceMessageCount; messageIndex++){
-			const MessagePtr& sourceMessage = sourcePtr->m_messages[messageIndex];
-			Q_ASSERT(sourceMessage.IsValid());
+	switch (mode){
+		case CM_STRICT:
+		case CM_WITHOUT_REFS:
+		{
+			const CMessageContainer* sourcePtr = dynamic_cast<const CMessageContainer*>(&object);
+			if (sourcePtr != NULL){
+				int sourceMessageCount = sourcePtr->m_messages.count();
+				for (int messageIndex = 0; messageIndex < sourceMessageCount; messageIndex++){
+					const MessagePtr& sourceMessage = sourcePtr->m_messages[messageIndex];
+					Q_ASSERT(sourceMessage.IsValid());
 
-			istd::TDelPtr<istd::IInformationProvider> newMessagePtr;
-			newMessagePtr.SetCastedOrRemove<istd::IChangeable>(sourceMessage->CloneMe(mode));
+					istd::TDelPtr<istd::IInformationProvider> newMessagePtr;
+					newMessagePtr.SetCastedOrRemove<istd::IChangeable>(sourceMessage->CloneMe(mode));
 
-			MessagePtr messagePtr(newMessagePtr.PopPtr());
-			if (messagePtr.IsValid()){
-				m_messages.push_back(messagePtr);
+					MessagePtr messagePtr(newMessagePtr.PopPtr());
+					if (messagePtr.IsValid()){
+						m_messages.push_back(messagePtr);
+					}
+				}
+
+				return true;
 			}
 		}
+		break;
 
-		return true;
+		case CM_WITH_REFS:
+		case CM_CONVERT:
+		{
+			const IMessageContainer* sourcePtr = dynamic_cast<const IMessageContainer*>(&object);
+			if (sourcePtr != NULL){
+				Messages messages = sourcePtr->GetMessages();
+				int sourceMessageCount = messages.count();
+				for (int messageIndex = 0; messageIndex < sourceMessageCount; messageIndex++){
+					const MessagePtr& sourceMessage = messages[messageIndex];
+					Q_ASSERT(sourceMessage.IsValid());
+
+					istd::TDelPtr<istd::IInformationProvider> newMessagePtr;
+					newMessagePtr.SetCastedOrRemove<istd::IChangeable>(sourceMessage->CloneMe(mode));
+
+					MessagePtr messagePtr(newMessagePtr.PopPtr());
+					if (messagePtr.IsValid()){
+						m_messages.push_back(messagePtr);
+					}
+				}
+
+				return true;
+			}
+		}
+		break;
 	}
 
 	return false;
