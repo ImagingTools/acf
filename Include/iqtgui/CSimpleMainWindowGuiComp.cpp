@@ -481,35 +481,48 @@ void CSimpleMainWindowGuiComp::OnRetranslate()
 
 bool CSimpleMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	if (eventPtr->type() == QEvent::HideToParent){
-		QString objectName = sourcePtr->objectName();
+	bool isVisible = true;
+	switch (eventPtr->type()){
+		case QEvent::Hide:
+			isVisible = false;
+			break;
 
-		if (!objectName.isEmpty()){
-			for (		MainComponentVisibilityMap::Iterator iter = m_mainComponentVisibilityMap.begin();
-						iter != m_mainComponentVisibilityMap.end();
-						++iter){
-				IMainWindowComponent* mainWindowComponentPtr = iter.key();
-				Q_ASSERT(mainWindowComponentPtr != NULL);
+		case QEvent::Show:
+			isVisible = true;
+			break;
 
-				if (mainWindowComponentPtr->GetTitle() == objectName){
-					*iter = false;
-				}
+		default:
+			return BaseClass::eventFilter(sourcePtr, eventPtr);
 
-				for (int i = 0; i < m_showOtherWindows.GetChildsCount(); ++i){
-					CHierarchicalCommand* commandPtr = dynamic_cast<CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
-					Q_ASSERT(commandPtr != NULL);
+	}
 
-					QString commandName = commandPtr->GetName();
+	QString objectName = sourcePtr->objectName();
+	if (!objectName.isEmpty()){
+		for (		MainComponentVisibilityMap::Iterator iter = m_mainComponentVisibilityMap.begin();
+					iter != m_mainComponentVisibilityMap.end();
+					++iter){
+			IMainWindowComponent* mainWindowComponentPtr = iter.key();
+			Q_ASSERT(mainWindowComponentPtr != NULL);
 
-					if (commandName == objectName){
-						iqt::CSignalBlocker block(commandPtr);
+			if (mainWindowComponentPtr->GetTitle() == objectName){
+				*iter = isVisible;
+			}
 
-						commandPtr->setChecked(false);
-					}
+			for (int i = 0; i < m_showOtherWindows.GetChildsCount(); ++i){
+				CHierarchicalCommand* commandPtr = dynamic_cast<CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
+				Q_ASSERT(commandPtr != NULL);
+
+				QString commandName = commandPtr->GetName();
+
+				if (commandName == objectName){
+					iqt::CSignalBlocker block(commandPtr);
+
+					commandPtr->setChecked(isVisible);
 				}
 			}
 		}
 	}
+
 
 	return BaseClass::eventFilter(sourcePtr, eventPtr);
 }
