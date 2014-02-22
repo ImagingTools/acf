@@ -104,6 +104,8 @@ QtViewPck.file = ../../Impl/QtViewPck/QMake/QtViewPck.pro
 SUBDIRS += PackagePck
 PackagePck.file = ../../Impl/PackagePck/QMake/PackagePck.pro
 
+SUBDIRS += FileGuiPck
+FileGuiPck.file = ../../Impl/FileGuiPck/QMake/FileGuiPck.pro
 
 #Tool
 
