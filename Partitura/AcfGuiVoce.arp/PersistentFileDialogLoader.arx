@@ -43,7 +43,7 @@
         FileDialogLoader
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FileDialogLoader

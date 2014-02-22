@@ -150,7 +150,7 @@
         FileExplorerGui
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FileSystemExplorerGui
@@ -278,7 +278,7 @@
         PreviewGui
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FilePreviewGui

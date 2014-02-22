@@ -30,14 +30,6 @@
 #include "iqtgui/CTableBasedModelEditorComp.h"
 #include "iqtgui/CStatusGuiComp.h"
 
-// FileGuiPck
-#include "ifilegui/CFileTreeViewGuiComp.h"
-#include "ifilegui/CFileSystemExplorerGuiComp.h"
-#include "ifilegui/CFilePersistenceGuiComp.h"
-#include "ifilegui/CFileDialogLoaderComp.h"
-#include "ifilegui/CFilePreviewGuiComp.h"
-#include "ifilegui/CFileListProviderGuiComp.h"
-
 // ParamGuiPck
 #include "iqtprm/CFileNameParamGuiComp.h"
 #include "iqtprm/CComposedParamsSetGuiComp.h"
@@ -106,12 +98,6 @@ typedef iqtgui::CStatusGuiComp StatusGui;
 typedef iqtdoc::CSingletonDocApplicationComp SingletonDocApplication;
 typedef iqtdoc::CDocumentImportExportCommandComp DocumentImportExportCommand;
 typedef iqtdoc::CExternalOpenDocumentCommandComp ExternalOpenDocumentCommand;
-typedef ifilegui::CFileTreeViewGuiComp FileTreeViewGui;
-typedef ifilegui::CFileSystemExplorerGuiComp FileSystemExplorerGui;
-typedef ifilegui::CFilePersistenceGuiComp FilePersistenceGui;
-typedef ifilegui::CFileDialogLoaderComp FileDialogLoader;
-typedef ifilegui::CFilePreviewGuiComp FilePreviewGui;
-typedef ifilegui::CFileListProviderGuiComp FileListProviderGui;
 
 typedef iqtprm::CComposedParamsSetGuiComp ComposedParamsSetGui;
 typedef iqtprm::CVariableParamGuiComp VariableParamGui;

@@ -285,7 +285,7 @@
         FilePreviewGui
       </Id>
       <PackageId>
-        QtGuiPck
+        FileGuiPck
       </PackageId>
       <ComponentId>
         FilePreviewGui
