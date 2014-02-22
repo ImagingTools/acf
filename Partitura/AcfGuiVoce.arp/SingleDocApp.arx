@@ -1283,7 +1283,15 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="2">
+  <ExportedComponents count="3">
+    <Component>
+      <ExportedId>
+        RuntimeStatus
+      </ExportedId>
+      <ComponentId>
+        App/RuntimeStatus
+      </ComponentId>
+    </Component>
     <Component>
       <ExportedId>
         SettingsProvider
