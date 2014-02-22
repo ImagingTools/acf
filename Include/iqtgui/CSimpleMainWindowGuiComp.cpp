@@ -310,7 +310,7 @@ void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 
 	for (int i = 0; i < m_mainWindowComponentsCompPtr.GetCount(); ++i){
 		iqtgui::IMainWindowComponent* mainWindowComponentPtr = m_mainWindowComponentsCompPtr[i];
-		if (mainWindowComponentPtr != NULL){
+		if ((mainWindowComponentPtr != NULL) && ((mainWindowComponentPtr->GetFlags() & iqtgui::IMainWindowComponent::WCF_PERMANENT) == 0)){
 			iqtgui::IGuiObject* guiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
 			if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
 				QWidget* widgetPtr = guiPtr->GetWidget();
