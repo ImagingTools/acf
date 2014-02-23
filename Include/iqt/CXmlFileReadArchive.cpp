@@ -257,9 +257,9 @@ bool CXmlFileReadArchive::Process(double& value)
 
 bool CXmlFileReadArchive::Process(QByteArray& value)
 {
-	QString text = PullTextNode();
+	QByteArray text = PullTextNode().toUtf8();
 
-	value = text.toLocal8Bit();
+	DecodeXml(text, value);
 
 	return true;
 }
@@ -267,9 +267,9 @@ bool CXmlFileReadArchive::Process(QByteArray& value)
 
 bool CXmlFileReadArchive::Process(QString& value)
 {
-	QString text = PullTextNode();
+	QByteArray text = PullTextNode().toUtf8();
 
-	value = text;
+	DecodeXml(text, value);
 
 	return !m_currentNode.isNull();
 }

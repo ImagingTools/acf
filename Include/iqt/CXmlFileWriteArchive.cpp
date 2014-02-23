@@ -189,13 +189,19 @@ bool CXmlFileWriteArchive::Process(double& value)
 
 bool CXmlFileWriteArchive::Process(QByteArray& value)
 {
-	return PushTextNode(value);
+	QByteArray xmlText;
+	EncodeXml(value, xmlText);
+
+	return PushTextNode(xmlText);
 }
 
 
 bool CXmlFileWriteArchive::Process(QString& value)
 {
-	return PushTextNode(value);
+	QByteArray xmlText;
+	EncodeXml(value, xmlText);
+
+	return PushTextNode(xmlText);
 }
 
 
