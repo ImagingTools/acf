@@ -44,7 +44,7 @@ Project{
 			"../../Impl/FilePck/Qbs/FilePck.qbs",
 			"../../Impl/QtGuiPck/Qbs/QtGuiPck.qbs",
 			"../../Impl/QtViewPck/Qbs/QtViewPck.qbs",
-			"../../Impl/PackagePck/Qbs/PackagePck.qbs"
+			"../../Impl/PackagePck/Qbs/PackagePck.qbs",
 			"../../Impl/FileGuiPck/Qbs/FileGuiPck.qbs"
 		]
 	}
