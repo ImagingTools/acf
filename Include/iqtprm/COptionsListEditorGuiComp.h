@@ -56,7 +56,6 @@ protected:
 	void UpdateActions();
 	void UpdateTree();
 	int GetSelectedIndex() const;
-	void EnsureParamsGuiDetached();
 	void EnsureSelectedIndexUpdated() const;
 	QByteArray GetSelectedParamsSetTypeId() const;
 
@@ -75,8 +74,6 @@ private:
 	I_ATTR(bool, m_showListHeaderAttrPtr);
 	I_MULTIATTR(QString, m_headerListAttrPtr);
 
-	imod::IModel* m_lastConnectedModelPtr;
-	imod::IObserver* m_lastObserverPtr;
 	QMenu m_startVariableMenus;
 
 	mutable int m_lastSelectedIndex;

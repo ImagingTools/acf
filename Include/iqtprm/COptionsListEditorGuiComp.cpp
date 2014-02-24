@@ -21,8 +21,7 @@ namespace iqtprm
 // public methods
 
 COptionsListEditorGuiComp::COptionsListEditorGuiComp()
-	:m_lastConnectedModelPtr(NULL),
-	m_lastSelectedIndex(-1)
+	:m_lastSelectedIndex(-1)
 {
 }
 
@@ -205,12 +204,18 @@ void COptionsListEditorGuiComp::UpdateTree()
 
 		for (int paramSetIndex = 0; paramSetIndex < setsCount; ++paramSetIndex){
 
-			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+			Qt::ItemFlags itemFlags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+
+			int operationFlags = objectPtr->GetOptionOperationFlags(paramSetIndex);
+			if (operationFlags & iprm::IOptionsManager::OOF_SUPPORT_RENAME){
+				itemFlags |= Qt::ItemIsEditable;
+			}
 
 			QString name = objectPtr->GetOptionName(paramSetIndex);
 			QString description = objectPtr->GetOptionDescription(paramSetIndex);
 			QTreeWidgetItem* paramsSetItemPtr = new QTreeWidgetItem();
 			paramsSetItemPtr->setText(0, name);
+
 			if (*m_showDescriptionAttrPtr){
 				paramsSetItemPtr->setText(1, description);
 			}
@@ -241,19 +246,6 @@ int COptionsListEditorGuiComp::GetSelectedIndex() const
 	}
 
 	return retVal;
-}
-
-
-void COptionsListEditorGuiComp::EnsureParamsGuiDetached()
-{
-	if ((m_lastObserverPtr != NULL) && (m_lastConnectedModelPtr != NULL)){
-		if (m_lastObserverPtr->IsModelAttached(m_lastConnectedModelPtr)){
-			m_lastConnectedModelPtr->DetachObserver(m_lastObserverPtr);
-		}
-	}
-
-	m_lastConnectedModelPtr = NULL;
-	m_lastObserverPtr = NULL;
 }
 
 
@@ -290,8 +282,6 @@ void COptionsListEditorGuiComp::OnGuiModelAttached()
 
 void COptionsListEditorGuiComp::OnGuiModelDetached()
 {
-	EnsureParamsGuiDetached();
-
 	ParamsTree->setVisible(false);
 
 	AddRemoveButtonsFrame->setVisible(false);
