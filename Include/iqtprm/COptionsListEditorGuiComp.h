@@ -24,14 +24,14 @@ namespace iqtprm
 
 class COptionsListEditorGuiComp: public iqtgui::TDesignerGuiObserverCompBase<
 			Ui::COptionsListEditorGuiComp,
-			iprm::IOptionsManager>
+			iprm::IOptionsList>
 {
 	Q_OBJECT
 
 public:
 	typedef iqtgui::TDesignerGuiObserverCompBase<
 				Ui::COptionsListEditorGuiComp,
-				iprm::IOptionsManager> BaseClass;
+				iprm::IOptionsList> BaseClass;
 
 	I_BEGIN_COMPONENT(COptionsListEditorGuiComp);
 		I_ASSIGN(m_allowAddRemoveAttrPtr, "AllowAddRemove", "If it is false, 'Add' and 'Remove' buttons will be always hidden", true, true);
