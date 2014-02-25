@@ -168,10 +168,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmapDocument.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CBitmapDocumentFilePersistenceComp.cpp"
 				>
 			</File>
@@ -192,7 +188,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiLayerBitmap.cpp"
+				RelativePath="..\CMultiPageBitmapBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiPageBitmapComp.cpp"
 				>
 			</File>
 			<File
@@ -217,10 +217,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CBitmapDocument.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CBitmapDocumentFilePersistenceComp.h"
 				>
 			</File>
@@ -241,7 +237,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiLayerBitmap.h"
+				RelativePath="..\CMultiPageBitmapBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CMultiPageBitmapComp.h"
 				>
 			</File>
 			<File
@@ -273,11 +273,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\IMultiPageBitmapController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\IQImageProvider.h"
 				>
 			</File>
 			<File
 				RelativePath="..\IRasterImage.h"
+				>
+			</File>
+			<File
+				RelativePath="..\TMultiPageBitmap.h"
 				>
 			</File>
 			<File

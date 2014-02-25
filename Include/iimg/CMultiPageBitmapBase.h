@@ -1,5 +1,5 @@
-#ifndef iimg_CBitmapDocument_included
-#define iimg_CBitmapDocument_included
+#ifndef iimg_CMultiPageBitmapBase_included
+#define iimg_CMultiPageBitmapBase_included
 
 
 // ACF includes
@@ -7,7 +7,7 @@
 #include "idoc/TMultiPageDocumentWrap.h"
 #include "idoc/CStandardDocumentMetaInfo.h"
 #include "iimg/IMultiBitmapProvider.h"
-#include "iimg/CBitmap.h"
+#include "iimg/IMultiPageBitmapController.h"
 
 
 namespace iimg
@@ -17,13 +17,13 @@ namespace iimg
 /**
 	Definition of a multi-page bitmap document.
 */
-class CBitmapDocument:
+class CMultiPageBitmapBase:
 			public idoc::CMultiPageDocumentBase,
-			virtual public iimg::IMultiBitmapProvider
+			virtual public IMultiBitmapProvider,
+			virtual public IMultiPageBitmapController
 {
 public:
 	typedef idoc::CMultiPageDocumentBase BaseClass;
-	typedef imod::TModelWrap<CBitmap> Bitmap;
 
 	enum
 	{
@@ -41,15 +41,30 @@ public:
 	virtual int GetBitmapsCount() const;
 	virtual const iimg::IBitmap* GetBitmap(int bitmapIndex) const;
 
+	// reimplemented (iimg::IMultiPageBitmapController)
+	virtual void Reset();
+	virtual iimg::IBitmap* InsertBitmap(
+		iimg::IBitmap::PixelFormat pixelFormat,
+		const istd::CIndex2d& size);
+	virtual iimg::IBitmap* InsertBitmap(
+		iimg::IBitmap::PixelFormat pixelFormat,
+		const istd::CIndex2d& size,
+		void* dataPtr,
+		bool releaseFlag,
+		int linesDifference = 0);
+	virtual void RemoveBitmap(int index);
+
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
+
+protected:
+	virtual IBitmap* CreateBitmap() const = 0;
 };
 
 
 } // namespace iimg
 
 
-#endif // !iimg_CBitmapDocument_included
+#endif // !iimg_CMultiPageBitmapBase_included
 
 

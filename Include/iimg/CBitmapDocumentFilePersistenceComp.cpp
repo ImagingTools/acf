@@ -27,7 +27,7 @@ bool CBitmapDocumentFilePersistenceComp::IsOperationSupported(
 	int flags,
 	bool /*beQuiet*/) const
 {
-	if (dataObjectPtr != NULL && dynamic_cast<const iimg::CBitmapDocument*>(dataObjectPtr) == NULL){
+	if (dataObjectPtr != NULL && dynamic_cast<const iimg::CMultiPageBitmapBase*>(dataObjectPtr) == NULL){
 		return false;
 	}
 
@@ -53,7 +53,7 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(istd::IChangeable& data, co
 		return OS_FAILED;
 	}
 
-	iimg::CBitmapDocument* docPtr = dynamic_cast<iimg::CBitmapDocument*>(&data);
+	iimg::CMultiPageBitmapBase* docPtr = dynamic_cast<iimg::CMultiPageBitmapBase*>(&data);
 	if (docPtr == NULL){
 		return OS_FAILED;
 	}
@@ -119,7 +119,7 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(const istd::IChangeable& data
 		return OS_FAILED;
 	}
 
-	const iimg::CBitmapDocument* docPtr = dynamic_cast<const iimg::CBitmapDocument*>(&data);
+	const iimg::CMultiPageBitmapBase* docPtr = dynamic_cast<const iimg::CMultiPageBitmapBase*>(&data);
 	if (docPtr == NULL){
 		return OS_FAILED;
 	}
@@ -147,7 +147,7 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(const istd::IChangeable& data
 	bool retVal = true;
 	
 	// Serialize meta info:
-	retVal = retVal && SerializeDocumentMetaInfo(const_cast<iimg::CBitmapDocument&>(*docPtr), archive);
+	retVal = retVal && SerializeDocumentMetaInfo(const_cast<iimg::CMultiPageBitmapBase&>(*docPtr), archive);
 
 	// Serialize document pages:
 	static iser::CArchiveTag pagesTag("Pages", "Container of the document pages");
@@ -184,7 +184,7 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(const istd::IChangeable& data
 		}
 
 		// write page meta info
-		retVal = retVal && SerializePageMetaInfo(const_cast<iimg::CBitmapDocument&>(*docPtr), pageIndex, archive);
+		retVal = retVal && SerializePageMetaInfo(const_cast<iimg::CMultiPageBitmapBase&>(*docPtr), pageIndex, archive);
 	}
 
 	retVal = retVal && archive.EndTag(pagesTag);
@@ -241,7 +241,7 @@ void CBitmapDocumentFilePersistenceComp::OnComponentCreated()
 
 // protected methods
 
-bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CBitmapDocument& document, iser::IArchive& archive) const
+bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CMultiPageBitmapBase& document, iser::IArchive& archive) const
 {
 	bool retVal = true;
 
@@ -257,7 +257,7 @@ bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CBitmap
 }
 
 
-bool CBitmapDocumentFilePersistenceComp::SerializePageMetaInfo(iimg::CBitmapDocument& document, int pageIndex, iser::IArchive& archive) const
+bool CBitmapDocumentFilePersistenceComp::SerializePageMetaInfo(iimg::CMultiPageBitmapBase& document, int pageIndex, iser::IArchive& archive) const
 {
 	bool retVal = true;
 

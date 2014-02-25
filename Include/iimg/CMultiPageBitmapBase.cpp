@@ -1,4 +1,4 @@
-#include "iimg/CBitmapDocument.h"
+#include "iimg/CMultiPageBitmapBase.h"
 
 
 namespace iimg
@@ -9,7 +9,7 @@ namespace iimg
 
 // reimplemented (idoc::IMultiPageDocument)
 
-istd::IChangeable* CBitmapDocument::InsertPage(
+istd::IChangeable* CMultiPageBitmapBase::InsertPage(
 			const QString& pageTitle,
 			const QSizeF& /*pageSize*/,
 			int position)
@@ -18,7 +18,7 @@ istd::IChangeable* CBitmapDocument::InsertPage(
 
 	Page newPage;
 
-	Bitmap* bitmapPtr = new Bitmap;
+	IBitmap* bitmapPtr = CreateBitmap();
 
 	newPage.pageMetaInfo.SetDocumentMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE, pageTitle);
 	newPage.pagePtr.SetPtr(bitmapPtr);
@@ -38,29 +38,76 @@ istd::IChangeable* CBitmapDocument::InsertPage(
 
 // reimplemented (iimg::IMultiBitmapProvider)
 
-const iprm::IOptionsList* CBitmapDocument::GetBitmapListInfo() const
+const iprm::IOptionsList* CMultiPageBitmapBase::GetBitmapListInfo() const
 {
 	return this;
 }
 
 
-int CBitmapDocument::GetBitmapsCount() const
+int CMultiPageBitmapBase::GetBitmapsCount() const
 {
 	return GetPagesCount();
 }
 
 
-const iimg::IBitmap* CBitmapDocument::GetBitmap(int bitmapIndex) const
+const iimg::IBitmap* CMultiPageBitmapBase::GetBitmap(int bitmapIndex) const
 {
 	return dynamic_cast<const iimg::IBitmap*>(m_documentPages.at(bitmapIndex).pagePtr.GetPtr());
 }
 
 
+// reimplemented (iimg::IMultiPageBitmapController)
+
+void CMultiPageBitmapBase::Reset()
+{
+	ResetPages();
+}
+
+
+iimg::IBitmap* CMultiPageBitmapBase::InsertBitmap(
+			iimg::IBitmap::PixelFormat pixelFormat, 
+			const istd::CIndex2d& size)
+{
+	iimg::IBitmap* pagePtr = dynamic_cast<iimg::IBitmap*>(InsertPage());
+	if (!pagePtr->CreateBitmap(pixelFormat, size)){
+		RemovePage(GetPagesCount() - 1);
+
+		return NULL;
+	}
+
+	return pagePtr;
+}
+
+
+iimg::IBitmap* CMultiPageBitmapBase::InsertBitmap(
+			iimg::IBitmap::PixelFormat pixelFormat, 
+			const istd::CIndex2d& size, 
+			void* dataPtr, 
+			bool releaseFlag, 
+			int linesDifference /*= 0*/)
+{
+	iimg::IBitmap* pagePtr = dynamic_cast<iimg::IBitmap*>(InsertPage());
+	if (!pagePtr->CreateBitmap(pixelFormat, size, dataPtr, releaseFlag, linesDifference)){
+		RemovePage(GetPagesCount() - 1);
+
+		return NULL;
+	}
+
+	return pagePtr;
+}
+
+
+void CMultiPageBitmapBase::RemoveBitmap(int index)
+{
+	RemovePage(index);
+}
+
+
 // reimplemented (istd::IChangeable)
 
-bool CBitmapDocument::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
+bool CMultiPageBitmapBase::CopyFrom(const istd::IChangeable& object, CompatibilityMode /*mode*/)
 {
-	const CBitmapDocument* sourcePtr = dynamic_cast<const CBitmapDocument*>(&object);
+	const CMultiPageBitmapBase* sourcePtr = dynamic_cast<const CMultiPageBitmapBase*>(&object);
 	if (sourcePtr != NULL){
 		istd::CChangeNotifier changePtr(this);
 
@@ -92,17 +139,6 @@ bool CBitmapDocument::CopyFrom(const istd::IChangeable& object, CompatibilityMod
 	}
 
 	return false;
-}
-
-
-istd::IChangeable* CBitmapDocument::CloneMe(CompatibilityMode mode) const
-{
-	istd::TDelPtr<CBitmapDocument> clonedPtr(new CBitmapDocument);
-	if (clonedPtr->CopyFrom(*this, mode)){
-		return clonedPtr.PopPtr();
-	}
-
-	return NULL;
 }
 
 

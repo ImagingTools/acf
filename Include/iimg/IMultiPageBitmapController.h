@@ -1,16 +1,16 @@
-#ifndef iimg_IMultiLayerBitmap_included
-#define iimg_IMultiLayerBitmap_included
+#ifndef iimg_IMultiPageBitmapController_included
+#define iimg_IMultiPageBitmapController_included
 
 
 // ACF includes
-#include "iimg/IMultiBitmapProvider.h"
+#include "istd/IPolymorphic.h"
 
 
 namespace iimg
 {
 
 
-class IMultiLayerBitmap: virtual public iimg::IMultiBitmapProvider
+class IMultiPageBitmapController: virtual public istd::IPolymorphic
 {
 public:
 	virtual void Reset() = 0;
@@ -30,6 +30,6 @@ public:
 } // namespace iimg
 
 
-#endif // iimg_IMultiLayerBitmap_included
+#endif // iimg_IMultiPageBitmapController_included
 
 

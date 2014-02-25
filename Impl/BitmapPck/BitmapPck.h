@@ -9,10 +9,9 @@
 #include "iimg/CBitmapSurface.h"
 #include "iimg/CBitmapLoaderComp.h"
 #include "iimg/CGeneralBitmap.h"
-#include "iimg/CBitmapDocument.h"
+#include "iimg/CMultiPageBitmapComp.h"
 #include "iimg/CComposedBitmapProviderComp.h"
 #include "iimg/CBitmapDocumentFilePersistenceComp.h"
-#include "iimg/CMultiLayerBitmap.h"
 
 
 /**
@@ -48,24 +47,11 @@ typedef icomp::TModelCompWrap<
 
 typedef iimg::CBitmapLoaderComp BitmapLoader;
 
-typedef icomp::TModelCompWrap<
-			icomp::TMakeComponentWrap<
-						iimg::CBitmapDocument,
-						idoc::IMultiPageDocument,
-						iprm::IOptionsList,
-						iser::ISerializable> > BitmapDocument;
+typedef icomp::TModelCompWrap<iimg::CMultiPageBitmapComp> MultiPageBitmap;
 
 typedef icomp::TModelCompWrap<iimg::CComposedBitmapProviderComp> ComposedBitmapProvider;
 
 typedef iimg::CBitmapDocumentFilePersistenceComp BitmapDocumentLoader;
-
-typedef icomp::TModelCompWrap<
-			icomp::TMakeComponentWrap<
-						iimg::CMultiLayerBitmap,
-						iimg::IMultiLayerBitmap,
-						iimg::IMultiBitmapProvider,
-						idoc::IMultiPageDocument,
-						iser::ISerializable> > MultiLayerBitmap;
 
 
 } // namespace BitmapPck

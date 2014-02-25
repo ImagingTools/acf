@@ -34,7 +34,7 @@ I_EXPORT_COMPONENT(
 			IM_TAG("Image File Loader"));
 
 I_EXPORT_COMPONENT(
-			BitmapDocument,
+			MultiPageBitmap,
 			"Multi-page bitmap document",
 			IM_TAG("Image Bitmap Document Pages Page"));
 
@@ -47,11 +47,6 @@ I_EXPORT_COMPONENT(
 			BitmapDocumentLoader,
 			"Multi bitmap serializer",
 			"Bitmap Multi Loader File Serializer" IM_CATEGORY(I_DATA_PERSISTENCE) IM_TAG("Bitmap Loader"));
-
-I_EXPORT_COMPONENT(
-			MultiLayerBitmap,
-			"Layered bitmap",
-			IM_TAG("Image Bitmap Multi Layer"));
 
 
 } // namespace BitmapPck
