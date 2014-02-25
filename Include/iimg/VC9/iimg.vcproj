@@ -269,10 +269,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\IMultiLayerBitmap.h"
-				>
-			</File>
-			<File
 				RelativePath="..\IMultiPageBitmapController.h"
 				>
 			</File>

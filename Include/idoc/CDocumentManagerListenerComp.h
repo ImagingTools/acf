@@ -2,11 +2,10 @@
 #define idoc_CDocumentManagerListenerComp_included
 
 
+// ACF includes
 #include "imod/IModelSelection.h"
 #include "imod/TSingleModelObserverBase.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "idoc/IDocumentManager.h"
 
 

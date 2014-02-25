@@ -2,10 +2,9 @@
 #define iimg_CReflectedBitmapBase_included
 
 
+// ACF includes
 #include "istd/TCachedUpdateManagerWrap.h"
-
 #include "iimg/CGeneralBitmap.h"
-
 #include "iimg/IQImageProvider.h"
 
 

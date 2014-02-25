@@ -8,11 +8,8 @@
 
 // ACF includes
 #include "istd/TDelPtr.h"
-
 #include "iser/IArchive.h"
-
 #include "imod/CSingleModelObserverBase.h"
-
 #include "idoc/CTmplBasedDocumentManagerBase.h"
 
 

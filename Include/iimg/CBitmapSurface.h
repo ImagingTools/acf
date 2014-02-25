@@ -2,11 +2,9 @@
 #define iimg_CBitmapSurface_included
 
 
-
+// ACF includes
 #include "istd/TChangeDelegator.h"
-
 #include "imath/CSampledFunction2d.h"
-
 #include "iimg/CBitmap.h"
 
 

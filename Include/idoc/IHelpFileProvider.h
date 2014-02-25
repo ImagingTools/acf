@@ -5,10 +5,7 @@
 // Qt includes
 #include <QtCore/QString>
 
-
 // ACF includes
-#include "istd/IPolymorphic.h"
-
 #include "idoc/IHelpInfoProvider.h"
 
 
