@@ -369,6 +369,11 @@ void CParamsManagerGuiCompBase::UpdateTree()
 				itemFlags |= Qt::ItemIsUserCheckable;
 			}
 
+			// for inactive items, no operations are allowed
+			if (flags & iprm::IParamsManager::MF_INACTIVE){
+				itemFlags = 0;
+			}
+
 			QString name = objectPtr->GetParamsSetName(paramSetIndex);
 			QTreeWidgetItem* paramsSetItemPtr = new QTreeWidgetItem();
 			paramsSetItemPtr->setFlags(itemFlags);

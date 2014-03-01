@@ -63,7 +63,12 @@ public:
 		/**
 			Active if it is possible to edit parameter values.
 		*/
-		MF_SUPPORT_EDIT = 64
+		MF_SUPPORT_EDIT = 64,
+
+		/**
+			Option is inactive (i.e. cannot be activated or selected) 
+		*/
+		MF_INACTIVE = 128
 	};
 
 	/**
