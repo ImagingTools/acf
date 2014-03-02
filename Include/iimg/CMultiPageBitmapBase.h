@@ -54,10 +54,8 @@ public:
 		int linesDifference = 0);
 	virtual void RemoveBitmap(int index);
 
-	// reimplemented (istd::IChangeable)
-	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
-
 protected:
+	// abstract methods
 	virtual IBitmap* CreateBitmap() const = 0;
 };
 
