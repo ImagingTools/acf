@@ -10,6 +10,7 @@
 #include "iimg/CBitmapLoaderComp.h"
 #include "ifile/CXmlFileReadArchive.h"
 #include "ifile/CXmlFileWriteArchive.h"
+#include "idoc/CStandardDocumentMetaInfo.h"
 
 
 #define DOCUMENT_SUFFIX "mbd"
@@ -90,8 +91,10 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(istd::IChangeable& data, co
 		retVal = retVal && archive.Process(pageFileName);
 		retVal = retVal && archive.EndTag(pageFileTag);
 
-		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(docPtr->InsertPage(pageFileName));
+		idoc::CStandardDocumentMetaInfo pageMetaInfo;
+		pageMetaInfo.SetDocumentMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE, pageFileName);
 
+		iimg::IBitmap* bitmapPtr = dynamic_cast<iimg::IBitmap*>(docPtr->InsertPage(&pageMetaInfo));
 		if (bitmapPtr == NULL || pageFileName.isEmpty()){
 			retVal = false;
 		}
@@ -247,11 +250,11 @@ bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CMultiP
 {
 	bool retVal = true;
 
-	iser::ISerializable* metaInfoSerializablePtr = dynamic_cast<iser::ISerializable*>(const_cast<idoc::IDocumentMetaInfo*>(&document.GetDocumentMetaInfo()));
-	if (metaInfoSerializablePtr != NULL){
+	idoc::CStandardDocumentMetaInfo* metaInfoPtr = dynamic_cast<idoc::CStandardDocumentMetaInfo*>(const_cast<idoc::IDocumentMetaInfo*>(&document.GetDocumentMetaInfo()));
+	if (metaInfoPtr != NULL){
 		static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document");
 		retVal = retVal && archive.BeginTag(metaInfoTag);
-		retVal = retVal && metaInfoSerializablePtr->Serialize(archive);
+		retVal = retVal && metaInfoPtr->idoc::CStandardDocumentMetaInfo::Serialize(archive);
 		retVal = retVal && archive.EndTag(metaInfoTag);
 	}
 

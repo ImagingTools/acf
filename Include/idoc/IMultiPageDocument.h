@@ -10,6 +10,12 @@
 #include <istd/IChangeable.h>
 
 
+namespace iprm
+{
+	class IParamsSet;
+}
+
+
 namespace idoc
 {
 
@@ -52,8 +58,8 @@ public:
 		\return	The method returns the object, which represents the contents of the page.
 	*/
 	virtual istd::IChangeable* InsertPage(
-				const QString& pageTitle = QString(),
-				const QSizeF& pageSize = QSizeF(),
+				const idoc::IDocumentMetaInfo* pageMetaInfoPtr = NULL,
+				const iprm::IParamsSet* pageParameterPtr = NULL,
 				int position = -1) = 0;
 
 	/**

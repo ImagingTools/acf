@@ -32,8 +32,8 @@ public:
 
 	// reimplemented (idoc::IMultiPageDocument)
 	virtual istd::IChangeable* InsertPage(
-		const QString& pageTitle = QString(),
-		const QSizeF& pageSize = QSizeF(),
+		const idoc::IDocumentMetaInfo* pageMetaInfoPtr = NULL,
+		const iprm::IParamsSet* pageParameterPtr = NULL,
 		int position = -1);
 
 	// reimplemented (iimg::IMultiBitmapProvider)

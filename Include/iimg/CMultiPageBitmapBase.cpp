@@ -10,8 +10,8 @@ namespace iimg
 // reimplemented (idoc::IMultiPageDocument)
 
 istd::IChangeable* CMultiPageBitmapBase::InsertPage(
-			const QString& pageTitle,
-			const QSizeF& /*pageSize*/,
+			const idoc::IDocumentMetaInfo* pageMetaInfoPtr,
+			const iprm::IParamsSet* /*pageParameterPtr*/,
 			int position)
 {
 	istd::CChangeNotifier changePtr(this);
@@ -20,7 +20,10 @@ istd::IChangeable* CMultiPageBitmapBase::InsertPage(
 
 	IBitmap* bitmapPtr = CreateBitmap();
 
-	newPage.pageMetaInfo.SetDocumentMetaInfo(idoc::IDocumentMetaInfo::MIT_TITLE, pageTitle);
+	if (pageMetaInfoPtr != NULL){
+		newPage.pageMetaInfo.CopyFrom(*pageMetaInfoPtr);
+	}
+
 	newPage.pagePtr.SetPtr(bitmapPtr);
 
 	if (position < 0){
