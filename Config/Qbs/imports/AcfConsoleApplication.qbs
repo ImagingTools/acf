@@ -2,10 +2,9 @@
 // Standard settings for an ACF application
 
 Application{
-	type: [
-		qbs.targetOS.contains("darwin")? "applicationbundle": "application",
-		"acf_share"
-	]
+	type: ["application", "acf_share"]
+
+	consoleApplication: true
 
 	Depends{ name: "acf" }
 	Depends{ name: "Qt.core" }

@@ -49,6 +49,8 @@ bool CGuiApplicationComp::InitializeApplication(int argc, char** argv)
 {
 #if QT_VERSION > 0x050000
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+	qputenv("QT_HIDPI_AWARE", "1");
+	qputenv("QT_HIGHDPI_AWARE", "1");
 #endif
 
 #if defined(Q_OS_MACX) && (QT_VERSION >= 0x040000) && (QT_VERSION < 0x050000)

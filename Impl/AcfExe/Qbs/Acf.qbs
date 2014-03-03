@@ -1,13 +1,9 @@
 import qbs.base 1.0
-import AcfApplication as AcfApplication
+import AcfConsoleApplication as AcfConsoleApplication
 
-AcfApplication{
+AcfConsoleApplication{
 	name: "AcfExe"
 	targetName: "Acf"
-
-	consoleApplication: true
-
-	type: ["application", "acfTool"]
 
 	files: ["../*.cpp"]
 

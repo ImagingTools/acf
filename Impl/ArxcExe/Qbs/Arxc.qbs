@@ -1,5 +1,5 @@
 import qbs.base 1.0
-import AcfApplication as AcfApplication
+import AcfConsoleApplication as AcfConsoleApplication
 
 Project{
 	StaticLibrary{
@@ -13,11 +13,9 @@ Project{
 		Depends{ name: "PackagePck" }
 	}
 
-	AcfApplication{
+    AcfConsoleApplication{
         name: "ArxcExe"
         targetName: "Arxc"
-
-		consoleApplication: true
 
 		files: ["../*.cpp"]
 
