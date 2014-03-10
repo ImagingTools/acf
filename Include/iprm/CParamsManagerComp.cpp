@@ -33,7 +33,7 @@ bool CParamsManagerComp::SetSetsCount(int count)
 
 		while (m_paramSets.size() > (count - fixedSetsCount)){
 			ParamSetPtr& paramsPtr = m_paramSets.back();
-			imod::IModel* paramModelPtr = dynamic_cast<imod::IModel*>(paramsPtr.GetPtr());
+			imod::IModel* paramModelPtr = dynamic_cast<imod::IModel*>(paramsPtr->paramSetPtr.GetPtr());
 			if (paramModelPtr != NULL){
 				paramModelPtr->DetachAllObservers();
 			}
@@ -335,6 +335,10 @@ bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 		if (*m_serializeSelectionAttrPtr){
 			m_selectedIndex = selectedIndex;
 		}
+	}
+
+	if (m_selectedIndex >= CParamsManagerComp::GetParamsSetsCount()){
+		m_selectedIndex = -1;
 	}
 
 	return retVal;
