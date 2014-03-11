@@ -370,7 +370,7 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 	if (fullScreenMode != m_isFullScreenMode){
 		m_isFullScreenMode = fullScreenMode;
 
-		if(m_isFullScreenMode){
+		if (m_isFullScreenMode){
 			m_horizontalScrollbarPtr->setVisible(false);
 			m_verticalScrollbarPtr->setVisible(false);
 
@@ -385,12 +385,12 @@ void CConsoleGui::SetFullScreenMode(bool fullScreenMode)
 			m_viewPtr->Update();
 		}
 		else{
+			m_viewWidget->showNormal();
+
 			m_viewWidget->setParent(this);
 			layout()->addWidget(m_viewWidget);
 
-			showNormal();
-
-			if(m_isViewMaximized){
+			if (m_isViewMaximized){
 				showMaximized();
 			}
 

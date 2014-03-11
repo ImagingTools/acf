@@ -22,17 +22,23 @@ namespace iqtgui
 // public methods
 
 CSimpleMainWindowGuiComp::CSimpleMainWindowGuiComp()
-	:m_commandsObserver(*this),
+:	m_commandsObserver(*this),
 	m_menuCommands("Global"),
 	m_showToolBarsCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
 	m_showOtherWindows("", 300),
+#if !defined(Q_OS_MAC)
 	m_fullScreenCommand("", 100, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_ONOFF),
+#endif
 	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR)
 {
+#if !defined(Q_OS_MAC)
 	m_fullScreenCommand.setShortcut(Qt::Key_F11);
+#endif
 
 	connect(&m_showToolBarsCommand, SIGNAL(triggered()), this, SLOT(OnShowToolbars()));
+#if !defined(Q_OS_MAC)
 	connect(&m_fullScreenCommand, SIGNAL(triggered()), this, SLOT(OnFullScreen()));
+#endif
 	connect(&m_settingsCommand, SIGNAL(triggered()), this, SLOT(OnSettings()));
 	connect(&m_aboutCommand, SIGNAL(triggered()), this, SLOT(OnAbout()));
 
@@ -258,7 +264,9 @@ void CSimpleMainWindowGuiComp::UpdateViewCommands(iqtgui::CHierarchicalCommand& 
 		viewCommand.InsertChild(&m_showToolBarsCommand, false);
 	}
 
+#if !defined(Q_OS_MAC)
 	viewCommand.InsertChild(&m_fullScreenCommand, false);
+#endif
 
 	viewCommand.InsertChild(&m_showOtherWindows, false);
 }
@@ -478,7 +486,9 @@ void CSimpleMainWindowGuiComp::OnRetranslate()
 	
 	// View commands
 	m_showToolBarsCommand.SetVisuals(tr("&Show Toolbars"), tr("Show Toolbars"), tr("Show and hide toolbars"));
+#if !defined(Q_OS_MAC)
 	m_fullScreenCommand.SetVisuals(tr("&Full Screen"), tr("Full Screen"), tr("Turn full screen mode on/off"));
+#endif
 	m_showOtherWindows.SetVisuals(tr("Other Windows"), tr("Other Windows"), tr("Show additional windows"));
 
 	// Tools commands

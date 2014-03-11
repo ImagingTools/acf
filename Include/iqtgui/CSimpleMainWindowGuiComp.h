@@ -153,7 +153,9 @@ private:
 	// view menu group
 	iqtgui::CHierarchicalCommand m_showToolBarsCommand;
 	iqtgui::CHierarchicalCommand m_showOtherWindows;
+#if !defined(Q_OS_MAC)
 	iqtgui::CHierarchicalCommand m_fullScreenCommand;
+#endif
 
 	// tools menu group
 	iqtgui::CHierarchicalCommand m_settingsCommand;
