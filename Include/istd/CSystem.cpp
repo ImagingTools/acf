@@ -110,7 +110,11 @@ QString CSystem::FindVariableValue(const QString& varName)
 #ifdef __MINGW32__
 	return "MinGW";
 #elif defined(_MSC_VER)
-	#if _MSC_VER >= 1600
+	#if _MSC_VER >= 1800
+		return "VC13";
+	#elif _MSC_VER >= 1700
+		return "VC12";
+	#elif _MSC_VER >= 1600
 		return "VC10";
 	#elif _MSC_VER >= 1500
 		return "VC9";
