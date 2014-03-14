@@ -209,6 +209,10 @@ void COptionsListEditorGuiComp::UpdateList()
 			optionItemPtr->setData(Qt::UserRole, optionIndex);
 			optionItemPtr->setFlags(itemFlags);
 
+			if (m_iconSizeAttrPtr.IsValid()){
+				optionItemPtr->setSizeHint(QSize(optionItemPtr->sizeHint().width(), *m_iconSizeAttrPtr + 2));
+			}
+
 			OptionsList->addItem(optionItemPtr);
 
 			if (itemFlags == Qt::ItemIsSelectable){
@@ -302,6 +306,7 @@ void COptionsListEditorGuiComp::OnGuiCreated()
 
 	if (m_iconSizeAttrPtr.IsValid()){
 		OptionsList->setIconSize(QSize(*m_iconSizeAttrPtr, *m_iconSizeAttrPtr));
+		OptionsList->setUniformItemSizes(true);
 	}
 
 	UpdateActions();
