@@ -16,10 +16,10 @@ class ICieColorValuesProvider: virtual public istd::IChangeable
 {
 public:
 	typedef QVector<icmm::CLab> LabValues;
-	typedef QVector<icmm::CVarColor> XyzValues;
+	typedef QVector<imath::CVarVector> XyzValues;
 
-	virtual const LabValues& GetLabValues() const = 0;
-	virtual const XyzValues& GetXyzValues() const = 0;
+	virtual LabValues GetLabValues() const = 0;
+	virtual XyzValues GetXyzValues() const = 0;
 };
 
 
