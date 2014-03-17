@@ -5,7 +5,9 @@
 namespace istd
 {
 
-
+/**
+	Enumeration for reflecting the state of ACF's SVN repository.
+*/
 enum RepositoryState
 {
 	RS_ORIGINAL_VERSION =  $WCREV$,
