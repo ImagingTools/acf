@@ -88,6 +88,10 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 
 		TryShowSplashScreen();
 
+		if (m_allowApplicationCloseModelCompPtr.IsValid()){
+			m_allowApplicationCloseModelCompPtr->AttachObserver(this);
+		}
+
 		if (m_mainGuiCompPtr.IsValid()){
 			if (m_frameSpaceSizeAttrPtr.IsValid()){
 				m_mainWidgetPtr.SetPtr(new QWidget());
@@ -172,10 +176,6 @@ void CGuiApplicationComp::OnUpdate(int /*updateFlags*/, istd::IPolymorphic* /*up
 void CGuiApplicationComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
-
-	if (m_allowApplicationCloseModelCompPtr.IsValid()){
-		m_allowApplicationCloseModelCompPtr->AttachObserver(this);
-	}
 }
 
 
