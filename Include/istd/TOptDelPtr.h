@@ -2,6 +2,7 @@
 #define istd_TOptDelPtr_included
 
 
+// ACF includes
 #include "istd/TPointerBase.h"
 
 
@@ -10,7 +11,9 @@ namespace istd
 
 
 /**
-	Pointer wrapper providing automatic deleting pointed object during destruction.
+	Pointer wrapper providing activatable deleting pointed object during destruction.
+		
+	\ingroup Main
 */
 template <class Type, bool DelArray = false>
 class TOptDelPtr: public TPointerBase<Type>

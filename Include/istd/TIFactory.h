@@ -2,6 +2,7 @@
 #define istd_TIFactory_included
 
 
+// ACF includes
 #include "istd/IFactoryInfo.h"
 
 
@@ -10,7 +11,7 @@ namespace istd
 
 
 /**
-	Common interface for a factory implementation.	
+	Generic interface for a factory implementation.	
 */
 template <class Interface>
 class TIFactory: virtual public IFactoryInfo  
