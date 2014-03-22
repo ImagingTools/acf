@@ -13,6 +13,9 @@ namespace istd
 {
 
 
+/**
+	Base implementation for operations on composed ID objects.
+*/
 class CIdManipBase
 {
 public:
