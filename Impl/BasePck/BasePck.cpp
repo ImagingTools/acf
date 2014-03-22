@@ -164,11 +164,6 @@ I_EXPORT_COMPONENT(
 			"Composite Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document Composition"));
 
 I_EXPORT_COMPONENT(
-			DocumentManagerListener,
-			"Document workspace controller",
-			"Model Proxy Composite Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document"));
-
-I_EXPORT_COMPONENT(
 			SelectedDocModelBinder,
 			"Connect model with observer if document is active",
 			"Multiple Model Observer Composite Template MVC" IM_CATEGORY(I_APPLICATION_LOGIC) IM_TAG("Document"));

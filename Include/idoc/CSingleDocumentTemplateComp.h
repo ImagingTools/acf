@@ -13,6 +13,9 @@ namespace idoc
 {
 
 
+/**
+	Document template component supported only one type of the provided document.
+*/
 class CSingleDocumentTemplateComp: public icomp::CComponentBase, public CSingleDocumentTemplateBase
 {
 public:

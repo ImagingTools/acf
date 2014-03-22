@@ -5,9 +5,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool", "Tool", "{BD453625-8704-4950-B34F-0DD8FBAA26FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Static", "Static", "{9D9563E7-6D8C-4B82-8CE3-009EB344A8A6}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Include\ACF.h = ..\..\Include\ACF.h
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{5F07D327-3A37-4AF0-9421-C959033C93F9}"
 EndProject

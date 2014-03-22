@@ -11,6 +11,9 @@ namespace idoc
 {
 
 
+/**
+	Persistence component for the files contains plain text.
+*/
 class CTextFileLoaderComp: public icomp::CComponentBase, public ifile::IFilePersistence
 {
 public:

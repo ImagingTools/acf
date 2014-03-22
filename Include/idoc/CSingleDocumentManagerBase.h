@@ -17,6 +17,9 @@ namespace idoc
 {
 
 
+/**
+	Basic implementation of a template-based single document manager.
+*/
 class CSingleDocumentManagerBase:
 			public idoc::CTmplBasedDocumentManagerBase,
 			protected imod::CSingleModelObserverBase

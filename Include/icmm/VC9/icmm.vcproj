@@ -277,10 +277,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\ICieColorValuesProvider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\icmm.h"
 				>
 			</File>

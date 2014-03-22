@@ -19,7 +19,9 @@ namespace idoc
 
 
 /**
-	Document template creating and controling views and models.
+	Common interface for a document template.
+	
+	Document template provides all necessary functionality for creating and controling data model of a document, its persistence and its representation (view).
 */
 class IDocumentTemplate: virtual public IDocumentTypesInfo
 {
