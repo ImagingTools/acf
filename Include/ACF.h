@@ -19,7 +19,7 @@ by Skype to ACF_infoline for further information about the ACF.
 More theoretical considerations about the component-based development can be found at the following location:
 http://en.wikipedia.org/wiki/Component-based_software_engineering
 
-\section Basics
+\section HowItWorks How it works
 The main idea behind ACF is to see each software product as a composition of components with clearly defined interfaces. Interface is also the only way for communication between components. The usual steps to implement a component are:
 
 - A C++ interface must be defined.
@@ -59,7 +59,7 @@ Below are some of the main features of ACF:
 
 /**
 	\defgroup DataModel Data model
-	Several basic interfaces and implementation for abstract definition of the data model.
+	Basic interfaces and implementations for abstract definition of the data model.
 	
 	The most important interface for a general data model definition is istd::IChangeable.
 	This is a common interface for describing of objects which change their state during the run time of the application.
@@ -69,6 +69,9 @@ Below are some of the main features of ACF:
 	class CPerson: virtual public istd::IChangeable
 	{
 	public:
+		CPerson(const QString& firstName = QString(), const QString& lastName = QString());
+		CPerson(const CPerson& person);
+
 		QString GetFirstName() const;
 		void SetFirstName(const QString& firstName);
 		QString GetLastName() const;
@@ -112,7 +115,7 @@ Below are some of the main features of ACF:
 	}
 	\endcode
 
-	In order to guarantee that the transaction block is always consistent, you could also use a helper class - istd::CChangeNotifier:
+	To ensure that the transaction block is always consistent, you could also use a helper class - istd::CChangeNotifier:
 
 	\code
 	QString CPerson::SetFirstName(const QString& firstName)
@@ -126,6 +129,69 @@ Below are some of the main features of ACF:
 	\endcode
 
 	istd::CChangeNotifier calls BeginChanges in its constructor and EndChanges in the destructor.
+
+	\section DelegatingOfChanges Delegating of changes
+	Let us consider also the following situation - the data object of class CPerson could "live" in any container class (eg. in a database).
+	In this case we want the container implentation will also notice about the changes of the CPerson instance.
+	What we have to do is to extend our CPerson implementation as following:
+
+	\code
+	class CPerson: public istd::TChangeDelegator<istd::IChangeable>
+	\endcode
+
+	Then our container class can be defined as:
+	\code
+	class CPersonDatabase: virtual public istd::IChangeable
+	{
+	public:
+		int GetPersonsCount() const
+		{
+			return m_persons.count();
+		}
+
+		const CPerson& GetPerson(int personIndex) const
+		{
+			return m_persons[personIndex];
+		}
+
+		CPerson& AddNewPerson(const QString& firstName, const QString& lastName);
+
+	protected:
+		// reimplemented (istd::IChangeable)
+		virtual void OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+
+	private:
+		QVector<CPerson> m_persons;
+	};
+
+	CPerson& CPersonDatabase::AddNewPerson(const QString& firstName, const QString& lastName)
+	{
+		CPerson person(firstName, lastName);
+
+		m_persons.push_back(person);
+
+		// Register the container as change notification target:
+		m_persons.back().SetSlavePtr(this);
+
+		return m_persons.back();
+	}
+	\endcode
+
+	Now we can catch the changes of person instances in the implementation of the method OnEndChanges():
+
+	\code
+	// reimplemented (istd::IChangeable)
+
+	void CPersonDatabase::OnEndChanges(int changeFlags, istd::IPolymorphic* changeParamsPtr)
+	{
+		if (changeFlags & CF_DELEGATED){
+			qDebug("Some person data have been changed");
+		}
+	}
+	\endcode
+	
+	In this section we have considered situations in which a decision that a data model would delegate its changes has been made in the design phase.
+	For situations where this is not the case, we must rely on other mechanisms. These are described in the \ref ModelObserver Section.
 
 	\ingroup ACF
 */

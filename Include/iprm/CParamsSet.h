@@ -6,12 +6,9 @@
 #include <QtCore/QMap>
 
 // ACF includes
-#include "istd/TChangeDelegator.h"
 #include "istd/TOptDelPtr.h"
 #include "istd/TPointerVector.h"
-
 #include "imod/CMultiModelBridgeBase.h"
-
 #include "iprm/IParamsSet.h"
 
 
