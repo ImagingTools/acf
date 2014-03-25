@@ -26,11 +26,12 @@ namespace iloggui
 // public methods
 
 CLogGuiComp::CLogGuiComp()
-:	m_infoAction(NULL),
-	m_warningAction(NULL),
-	m_errorAction(NULL),
-	m_clearAction(NULL),
-	m_exportAction(NULL),
+:	m_infoActionPtr(NULL),
+	m_warningActionPtr(NULL),
+	m_errorActionPtr(NULL),
+	m_clearActionPtr(NULL),
+	m_exportActionPtr(NULL),
+	m_diagnosticModeActionPtr(NULL),
 	m_currentMessageMode(MM_ALL),
 	m_statusCategory(istd::IInformationProvider::IC_NONE)
 {
@@ -129,11 +130,17 @@ QString CLogGuiComp::GetCategoryText(int category) const
 // reimplemented (ilog::IMessageConsumer)
 
 bool CLogGuiComp::IsMessageSupported(
-			int /*messageCategory*/,
+			int messageCategory,
 			int /*messageId*/,
 			const istd::IInformationProvider* /*messagePtr*/) const
 {
-	return true;
+	switch (messageCategory){
+	case istd::IInformationProvider::IC_NONE:
+		return *m_allowDiagnosticMessagesAttrPtr && (m_diagnosticModeActionPtr != NULL) && m_diagnosticModeActionPtr->isChecked();
+
+	default:
+		return true;
+	}
 }
 
 
@@ -161,7 +168,7 @@ void CLogGuiComp::OnGuiCreated()
 	LogView->setItemDelegate(itemDelegate);
 	LogView->header()->hide();
 
-	if (m_showLogDescriptionAttrPtr.IsValid() && *m_showLogDescriptionAttrPtr){
+	if (*m_showLogDescriptionAttrPtr){
 		LogView->header()->show();
 	}
 
@@ -182,53 +189,63 @@ void CLogGuiComp::OnGuiCreated()
 	actionGroup->setExclusive(true);
 
 	static QIcon infoIcon(":/Icons/Info.svg");
-	m_infoAction = new QAction(infoIcon, tr("Info"), ToolBarFrame);
-	m_infoAction->setCheckable(true);
-	m_infoAction->setData(MM_INFO);
-	connect(m_infoAction, SIGNAL(toggled(bool)), this, SLOT(OnMessageModeChanged()), Qt::QueuedConnection);
-	actionGroup->addAction(m_infoAction);
+	m_infoActionPtr = new QAction(infoIcon, tr("Info"), ToolBarFrame);
+	m_infoActionPtr->setCheckable(true);
+	m_infoActionPtr->setData(MM_INFO);
+	connect(m_infoActionPtr, SIGNAL(toggled(bool)), this, SLOT(OnMessageModeChanged()), Qt::QueuedConnection);
+	actionGroup->addAction(m_infoActionPtr);
 	if (*m_defaultModeAttrPtr == 0){
-		m_infoAction->setChecked(true);
+		m_infoActionPtr->setChecked(true);
 	}
 
 	static QIcon warningIcon(":/Icons/Warning.svg");
-	m_warningAction = new QAction(warningIcon, tr("Warning"), ToolBarFrame);
-	m_warningAction->setCheckable(true);
-	m_warningAction->setData(MM_WARNING);
-	connect(m_warningAction, SIGNAL(toggled(bool)), this, SLOT(OnMessageModeChanged()), Qt::QueuedConnection);
-	actionGroup->addAction(m_warningAction);
+	m_warningActionPtr = new QAction(warningIcon, tr("Warning"), ToolBarFrame);
+	m_warningActionPtr->setCheckable(true);
+	m_warningActionPtr->setData(MM_WARNING);
+	connect(m_warningActionPtr, SIGNAL(toggled(bool)), this, SLOT(OnMessageModeChanged()), Qt::QueuedConnection);
+	actionGroup->addAction(m_warningActionPtr);
 	if (*m_defaultModeAttrPtr == 1){
-		m_warningAction->setChecked(true);
+		m_warningActionPtr->setChecked(true);
 	}
 
 	static QIcon errorIcon(":/Icons/Error.svg");
-	m_errorAction = new QAction(errorIcon, tr("Error"), ToolBarFrame);
-	m_errorAction->setCheckable(true);
-	m_errorAction->setData(MM_ERROR);
-	connect(m_errorAction, SIGNAL(toggled(bool)), this, SLOT(OnMessageModeChanged()), Qt::QueuedConnection);
-	actionGroup->addAction(m_errorAction);
+	m_errorActionPtr = new QAction(errorIcon, tr("Error"), ToolBarFrame);
+	m_errorActionPtr->setCheckable(true);
+	m_errorActionPtr->setData(MM_ERROR);
+	connect(m_errorActionPtr, SIGNAL(toggled(bool)), this, SLOT(OnMessageModeChanged()), Qt::QueuedConnection);
+	actionGroup->addAction(m_errorActionPtr);
 	if (*m_defaultModeAttrPtr == 2){
-		m_errorAction->setChecked(true);
+		m_errorActionPtr->setChecked(true);
 	}
 
 	static QIcon clearIcon(":/Icons/Clear");
-	m_clearAction = new QAction(clearIcon, tr("Clear"), ToolBarFrame);
-	connect(m_clearAction, SIGNAL(triggered()), this, SLOT(OnClearAction()), Qt::QueuedConnection);
+	m_clearActionPtr = new QAction(clearIcon, tr("Clear"), ToolBarFrame);
+	connect(m_clearActionPtr, SIGNAL(triggered()), this, SLOT(OnClearAction()), Qt::QueuedConnection);
 
 	toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 	toolBar->setIconSize(QSize(16, 16));
-	toolBar->addAction(m_infoAction);
-	toolBar->addAction(m_warningAction);
-	toolBar->addAction(m_errorAction);
-	toolBar->addAction(m_clearAction);
-	toolBar->insertSeparator(m_clearAction);
+	toolBar->addAction(m_infoActionPtr);
+	toolBar->addAction(m_warningActionPtr);
+	toolBar->addAction(m_errorActionPtr);
+	toolBar->addAction(m_clearActionPtr);
+	toolBar->insertSeparator(m_clearActionPtr);
 
-	static QIcon exportIcon(":/Icons/DocumentExport.svg");
 	if (m_fileLoaderCompPtr.IsValid()){
-		m_exportAction = new QAction(exportIcon, tr("Export..."), ToolBarFrame);
-		connect(m_exportAction, SIGNAL(triggered()), this, SLOT(OnExportAction()), Qt::QueuedConnection);
-		toolBar->addAction(m_exportAction);
-		toolBar->insertSeparator(m_exportAction);
+		static QIcon exportIcon(":/Icons/DocumentExport.svg");
+
+		m_exportActionPtr = new QAction(exportIcon, tr("Export..."), ToolBarFrame);
+		connect(m_exportActionPtr, SIGNAL(triggered()), this, SLOT(OnExportAction()), Qt::QueuedConnection);
+		toolBar->addAction(m_exportActionPtr);
+		toolBar->insertSeparator(m_exportActionPtr);
+	}
+
+	if (*m_allowDiagnosticMessagesAttrPtr){
+		static QIcon diagnosticModeIcon(":/Icons/Diagnostics");
+
+		m_diagnosticModeActionPtr = new QAction(diagnosticModeIcon, tr("Diagnostic Mode"), ToolBarFrame);
+		m_diagnosticModeActionPtr->setCheckable(true);
+		toolBar->addAction(m_diagnosticModeActionPtr);
+		toolBar->insertSeparator(m_diagnosticModeActionPtr);
 	}
 
 	connect(&m_removeMessagesTimer, SIGNAL(timeout()), this, SLOT(OnRemoveMessagesTimer()));
@@ -340,7 +357,7 @@ void CLogGuiComp::OnAddMessage(const MessagePtr& messagePtr)
 
 void CLogGuiComp::OnMessageModeChanged()
 {
-	QAction* actionPtr = dynamic_cast<QAction*> (sender());
+	QAction* actionPtr = dynamic_cast<QAction*>(sender());
 	if (actionPtr != NULL){
 		m_currentMessageMode = actionPtr->data().toInt();
 	}

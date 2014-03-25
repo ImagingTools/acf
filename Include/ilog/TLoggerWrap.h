@@ -305,10 +305,10 @@ bool TLoggerWrap<Base>::SendCriticalMessageOnce(
 
 template <class Base>
 bool TLoggerWrap<Base>::IsLogConsumed(
-			const istd::IInformationProvider::InformationCategory* /*categoryPtr*/,
+			const istd::IInformationProvider::InformationCategory* categoryPtr,
 			const int* /*flagsPtr*/) const
 {
-	return (m_logPtr != NULL);
+	return (m_logPtr != NULL) && ((categoryPtr == NULL) || m_logPtr->IsMessageSupported(*categoryPtr));
 }
 
 

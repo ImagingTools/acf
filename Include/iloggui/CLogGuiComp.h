@@ -38,13 +38,14 @@ public:
 	I_BEGIN_COMPONENT(CLogGuiComp);
 		I_REGISTER_INTERFACE(ilog::IMessageConsumer);
 		I_ASSIGN(m_fileLoaderCompPtr, "Exporter", "File loader used for log export", false, "Exporter");
-		I_ASSIGN(m_maxMessagesCountAttrPtr, "MaxMessageCount", "Maximal number of messages supported by the log", true, 1000);
-		I_ASSIGN(m_defaultModeAttrPtr, "DefaultMode", "Default display mode,\n 0 - info,\n 1 - warning,\n 2 - error", true, 0);
-		I_ASSIGN(m_showLogDescriptionAttrPtr, "ShowLogDescription", "Sets the log tables description visible", false, false);
-		I_ASSIGN(m_showMessageTextFilterAttrPtr, "ShowMessageTextFilter", "If enabled, the text filter for the messages will be shown", true, true);
-		I_ASSIGN(m_logTimeFormatAttrPtr, "TimeFormat", "Format of the date/time used for displaing message's time stamp", true, "");
 		I_ASSIGN(m_slaveMessageConsumerCompPtr, "SlaveMessageConsumer", "Slave message consumer", false, "SlaveMessageConsumer");
 		I_ASSIGN_TO(m_slaveMessageContainerCompPtr, m_slaveMessageConsumerCompPtr, false);
+		I_ASSIGN(m_allowDiagnosticMessagesAttrPtr, "AllowDiagnosticMessages", "If enabled the collecting of diagnostic messages and display of corresponding GUI elements is allowed", true, false);
+		I_ASSIGN(m_maxMessagesCountAttrPtr, "MaxMessageCount", "Maximal number of messages supported by the log", true, 1000);
+		I_ASSIGN(m_defaultModeAttrPtr, "DefaultMode", "Default display mode,\n 0 - info,\n 1 - warning,\n 2 - error", true, 0);
+		I_ASSIGN(m_showLogDescriptionAttrPtr, "ShowLogDescription", "Sets the log tables description visible", true, false);
+		I_ASSIGN(m_showMessageTextFilterAttrPtr, "ShowMessageTextFilter", "If enabled, the text filter for the messages will be shown", true, true);
+		I_ASSIGN(m_logTimeFormatAttrPtr, "TimeFormat", "Format of the date/time used for displaing message's time stamp", true, "");
 	I_END_COMPONENT;
 
 	CLogGuiComp();
@@ -60,7 +61,7 @@ protected:
 
 	enum MessageMode
 	{
-		MM_INFO = istd::IInformationProvider::IC_INFO,
+		MM_INFO = istd::IInformationProvider::IC_NONE,
 		MM_WARNING = istd::IInformationProvider::IC_WARNING,
 		MM_ERROR = istd::IInformationProvider::IC_ERROR,
 		MM_ALL = istd::IInformationProvider::IC_CRITICAL
@@ -121,16 +122,18 @@ Q_SIGNALS:
 	void EmitAddMessage(const MessagePtr& messagePtr);
 
 protected:
-	QAction* m_infoAction;
-	QAction* m_warningAction;
-	QAction* m_errorAction;
-	QAction* m_clearAction;
-	QAction* m_exportAction;
+	QAction* m_infoActionPtr;
+	QAction* m_warningActionPtr;
+	QAction* m_errorActionPtr;
+	QAction* m_clearActionPtr;
+	QAction* m_exportActionPtr;
+	QAction* m_diagnosticModeActionPtr;
 
 private:
 	I_REF(ifile::IFilePersistence, m_fileLoaderCompPtr);
 	I_REF(ilog::IMessageConsumer, m_slaveMessageConsumerCompPtr);
 	I_REF(ilog::IHierarchicalMessageContainer, m_slaveMessageContainerCompPtr);
+	I_ATTR(bool, m_allowDiagnosticMessagesAttrPtr);
 	I_ATTR(int, m_defaultModeAttrPtr);
 	I_ATTR(int, m_maxMessagesCountAttrPtr);
 	I_ATTR(bool, m_showLogDescriptionAttrPtr);

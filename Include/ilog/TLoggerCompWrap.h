@@ -61,7 +61,9 @@ private:
 template <class Base>
 bool TLoggerCompWrap<Base>::IsVerboseEnabled() const
 {
-	return *m_verboseEnabledAttrPtr;
+	static const istd::IInformationProvider::InformationCategory categoryNone = istd::IInformationProvider::IC_NONE;
+
+	return *m_verboseEnabledAttrPtr && BaseClass::IsLogConsumed(&categoryNone);
 }
 
 
@@ -69,7 +71,7 @@ template <class Base>
 void TLoggerCompWrap<Base>::SendVerboseMessage(const QString& message, const QString& messageSource) const
 {
 	if (*m_verboseEnabledAttrPtr){
-		BaseClass::SendInfoMessage(0, message, messageSource);
+		BaseClass::SendLogMessage(istd::IInformationProvider::IC_NONE, 0, message, messageSource);
 	}
 }
 
