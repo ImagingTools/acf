@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3012
+          3319
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          890
+          1081
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -152,7 +152,23 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="8">
+        <AttributeInfoMap count="9">
+          <AttributeInfo>
+            <Id>
+              AllowDiagnosticMessages
+            </Id>
+            <Type>
+              Boolean
+            </Type>
+            <ExportId>
+              AllowDiagnosticMessages
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
           <AttributeInfo>
             <Id>
               DefaultMode
