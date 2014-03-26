@@ -25,10 +25,25 @@ public:
 	*/
 	enum InformationCategory
 	{
+		/**
+			Information is unimportant, for example can be used for diagnostic.
+		*/
 		IC_NONE,
+		/**
+			Normal information level.
+		*/
 		IC_INFO,
+		/**
+			Information about warning, processing could be done.
+		*/
 		IC_WARNING,
+		/**
+			Information about error, processing could not be done correctly.
+		*/
 		IC_ERROR,
+		/**
+			Information about critical error - unnormal state of system, should never be returned.
+		*/
 		IC_CRITICAL
 	};
 
