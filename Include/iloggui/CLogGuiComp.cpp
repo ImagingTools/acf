@@ -146,7 +146,9 @@ bool CLogGuiComp::IsMessageSupported(
 
 void CLogGuiComp::AddMessage(const MessagePtr& messagePtr)
 {
-	Q_EMIT EmitAddMessage(messagePtr);
+	if (messagePtr.IsValid() && IsMessageSupported(messagePtr->GetInformationCategory())){
+		Q_EMIT EmitAddMessage(messagePtr);
+	}
 }
 
 
