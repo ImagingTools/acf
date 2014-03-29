@@ -9,7 +9,14 @@
 namespace iimg
 {
 
+	
+/**
+	A generic pixel conversion.
 
+	\tparam	SourcePixel	Type of the source pixel.
+	\tparam	DestPixel  	Type of the destination pixel.
+	\tparam	DestPixel  	Type of the destination pixel.
+*/
 template <typename SourcePixel, typename DestPixel, typename CalcPixel = DestPixel>
 class TPixelConversion
 {
@@ -18,8 +25,17 @@ public:
 	typedef DestPixel DestPixelType;
 	typedef CalcPixel CalcPixelType;
 
+
+	/**
+		Default constructor.
+	*/
 	TPixelConversion();
 
+	/**
+		 Casting operator.
+		
+		\return	The result of the pixel conversion.
+	*/
 	DestPixel operator()(const SourcePixel& pixel) const;
 
 	CalcPixel GetCalc(const SourcePixel& pixel) const;

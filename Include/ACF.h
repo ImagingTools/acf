@@ -70,7 +70,7 @@ http://ilena.org/redmine/projects/acf/wiki/ModelObserver-Tutorial
 
 	\section BasicMotivation Motivation
 	A fundamental problem in the implementation of complex software applications is ensuring a clean separation between the data model, business logic (controller) and data presentation (GUI).
-	Such a separation allows for a high degree of reusability of source code. 
+	Such a separation allows a high degree of reusability of source code. 
 
 	\section DataModelOverview Overview
 	The most important interface for a general data model definition is istd::IChangeable.
@@ -215,6 +215,11 @@ http://ilena.org/redmine/projects/acf/wiki/ModelObserver-Tutorial
 	\defgroup ModelObserver Model/Observer concept
 	The main use-case of this concept is to get information on the observer side about changes of the data.
 	It can be used e.g. to realize GUI update if related data model changes.
+
+	\section ModelObserverExternalLinks External Links
+	http://en.wikipedia.org/wiki/Observer_pattern
+
+	http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
 
 	\sa DataModel
 

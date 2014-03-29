@@ -9,20 +9,51 @@
 namespace iimg
 {
 
-
+	
+/**
+	Interface of a controller for handling multi-page bitmaps.
+*/
 class IMultiPageBitmapController: virtual public istd::IPolymorphic
 {
 public:
+	/**
+		Remove all bitmap pages.
+	*/
 	virtual void Reset() = 0;
+
+
+	/**
+		Inserts a new bitmap.
+		\param	pixelFormat	The pixel format.
+		\param	size	   	The size.
+		\return	null if it fails, else a pointer to the inserted bitmap.
+	*/
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
 				const istd::CIndex2d& size) = 0;
+
+	/**
+		Inserts a new bitmap.
+		
+		\param	pixelFormat	   	The pixel format.
+		\param	size		   	The size.
+		\param [in,out]	dataPtr	If non-null, the bitmap data pointer.
+		\param	releaseFlag	   	Memory controlling flag.
+		\param	linesDifference	(Optional) The distance between adjacent lines in bytes.
+		
+		\return	null if it fails, else a pointer to the inserted bitmap.
+	*/
 	virtual iimg::IBitmap* InsertBitmap(
 				iimg::IBitmap::PixelFormat pixelFormat,
 				const istd::CIndex2d& size,
 				void* dataPtr,
 				bool releaseFlag,
 				int linesDifference = 0) = 0;
+
+	/**
+		Removes the bitmap at the given index.
+		\param	index Index of the bitmap page.
+	*/
 	virtual void RemoveBitmap(int index) = 0;
 };
 
