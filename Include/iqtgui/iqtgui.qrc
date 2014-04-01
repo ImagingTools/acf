@@ -14,7 +14,6 @@
         <file alias="Error">Resources/Icons/Error.svg</file>
         <file alias="Warning">Resources/Icons/Warning.svg</file>
         <file alias="Log">Resources/Icons/Log.png</file>
-        <file alias="SnapImage">Resources/Icons/SnapImage.png</file>
         <file alias="AcfLogo">Resources/Icons/AcfLogo.svg</file>
         <file alias="New">Resources/Icons/document_128.png</file>
         <file alias="Open">Resources/Icons/Open.svg</file>
@@ -41,12 +40,9 @@
         <file alias="Pause">Resources/Icons/Pause.svg</file>
         <file alias="Sandglass">Resources/Icons/sandglass_128.png</file>
         <file alias="TrashEmpty">Resources/Icons/trash_128.png</file>
-        <file alias="Up">Resources/Icons/up_128.png</file>
-        <file alias="Down">Resources/Icons/down_128.png</file>
         <file alias="User">Resources/Icons/user_128.png</file>
         <file alias="Document">Resources/Icons/window_128.png</file>
         <file alias="Wizard">Resources/Icons/wizard_128.png</file>
-        <file alias="Internet">Resources/Icons/world_128.png</file>
         <file alias="Edit">Resources/Icons/write_128.png</file>
         <file alias="StateUnknown">Resources/Icons/StateUnknown.svg</file>
         <file alias="StateOk">Resources/Icons/StateOk.svg</file>
