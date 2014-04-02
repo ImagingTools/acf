@@ -65,16 +65,8 @@ bool CToolBarGuiCompBase::AddToMainWindow(QMainWindow& mainWindow)
 		toolBarPtr->setFloatable(false);
 		toolBarPtr->setMovable(false);
 
-		switch (*m_dockFeaturesAttrPtr){
-			case DF_MOVEABLE:
-				toolBarPtr->setFloatable(true);
-				break;
-			case DF_FLOATABLE:
-				toolBarPtr->setMovable(true);
-				break;
-			default:
-				break;
-		}
+		toolBarPtr->setFloatable((*m_dockFeaturesAttrPtr & IMainWindowComponent::WCF_FLOATABLE) != 0);
+		toolBarPtr->setMovable((*m_dockFeaturesAttrPtr & IMainWindowComponent::WCF_MOVEABLE) != 0);
 
 		if (m_allowedDockAreasAttrPtr.IsValid()){
 			toolBarPtr->setAllowedAreas(Qt::ToolBarArea(*m_allowedDockAreasAttrPtr));
@@ -121,11 +113,7 @@ QString CToolBarGuiCompBase::GetTitle() const
 
 int CToolBarGuiCompBase::GetFlags() const
 {
-	if (*m_dockFeaturesAttrPtr == DF_PERMANENT){
-		return WCF_PERMANENT;
-	}
-
-	return WCF_NONE;
+	return *m_dockFeaturesAttrPtr & (WCF_MOVEABLE | WCF_FLOATABLE);
 }
 
 

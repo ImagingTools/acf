@@ -47,7 +47,7 @@ public:
 		I_ASSIGN(m_isMenuVisibleAttrPtr, "IsMenuVisible", "If true, menu bar will be visible", true, true);
 		I_ASSIGN(m_isToolbarVisibleAttrPtr, "IsToolbarVisible", "If true, tool bar will be visible", true, true);
 		I_ASSIGN(m_toolBarAreaAttrPtr, "ToolBarArea", "Specify the area where the standard toolbar will be placed\n 0 - left\n 1 - right\n 2 - top\n 3 - bottom", false, 0);
-		I_ASSIGN(m_toolBarDockFeaturesAttrPtr, "ToolBarDockFeatures", "Specify the dock features for the standard tool bar\nIt is combination of options:\n1 - moveable\n 2 - floatable", true, IMainWindowComponent::DF_MOVEABLE | IMainWindowComponent::DF_FLOATABLE);
+		I_ASSIGN(m_toolBarDockFeaturesAttrPtr, "ToolBarDockFeatures", "Specify the dock features for the standard tool bar\nIt is combination of options:\n2 - moveable\n4 - floatable", true, IMainWindowComponent::WCF_MOVEABLE | IMainWindowComponent::WCF_FLOATABLE);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of icons using in the main window", false, 16);
 		I_ASSIGN(m_useIconTextAttrPtr, "UseIconText", "Enable text under the tool bar icons", false, false);
 	I_END_COMPONENT;

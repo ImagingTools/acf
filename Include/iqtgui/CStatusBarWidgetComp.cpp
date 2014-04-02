@@ -105,7 +105,7 @@ QString CStatusBarWidgetComp::GetTitle() const
 
 int CStatusBarWidgetComp::GetFlags() const
 {
-	return WCF_PERMANENT;
+	return WCF_NONE;
 }
 
 

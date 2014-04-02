@@ -89,9 +89,9 @@ void CSimpleMainWindowGuiComp::UpdateMenuActions()
 
 	if (m_standardToolBarPtr.IsValid()){
 		m_standardToolBarPtr->clear();
-		
+
 		CCommandTools::SetupToolbar(m_menuCommands, *m_standardToolBarPtr);
-		
+
 		m_standardToolBarPtr->setVisible(true);
 	}
 }
@@ -198,8 +198,8 @@ void CSimpleMainWindowGuiComp::CreateDefaultToolBar()
 				m_standardToolBarPtr->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 			}
 
-			m_standardToolBarPtr->setFloatable(*m_toolBarDockFeaturesAttrPtr & IMainWindowComponent::DF_FLOATABLE);
-			m_standardToolBarPtr->setMovable(*m_toolBarDockFeaturesAttrPtr & IMainWindowComponent::DF_MOVEABLE);
+			m_standardToolBarPtr->setFloatable((*m_toolBarDockFeaturesAttrPtr & IMainWindowComponent::WCF_FLOATABLE) != 0);
+			m_standardToolBarPtr->setMovable((*m_toolBarDockFeaturesAttrPtr & IMainWindowComponent::WCF_MOVEABLE) != 0);
 		}
 	}
 }
@@ -244,7 +244,7 @@ void CSimpleMainWindowGuiComp::UpdateFixedCommands(iqtgui::CHierarchicalCommand&
 	}
 
 
-	UpdateToolsCommands(m_toolsCommand); 
+	UpdateToolsCommands(m_toolsCommand);
 	if (m_toolsCommand.GetChildsCount() > 0){
 		fixedCommands.InsertChild(&m_toolsCommand, false);
 	}
@@ -335,18 +335,12 @@ void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 			iqtgui::IGuiObject* guiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
 			if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
 				QWidget* widgetPtr = guiPtr->GetWidget();
-				QWidget* parentPtr = widgetPtr->parentWidget();
-				bool isVisibleToParent = false;
-				if (parentPtr != NULL){
-					isVisibleToParent = widgetPtr->isVisibleTo(parentPtr);
-				}
-
-				bool isPermanent = (mainWindowComponentPtr->GetFlags() & iqtgui::IMainWindowComponent::WCF_PERMANENT);
-				if (isPermanent){
-					isVisibleToParent = true;
-				}
-
 				widgetPtr->installEventFilter(this);
+
+				QWidget* parentPtr = widgetPtr->parentWidget();
+				bool isPermanent = ((mainWindowComponentPtr->GetFlags() & iqtgui::IMainWindowComponent::WCF_CLOSABLE) == 0);
+
+				bool isVisibleToParent = (parentPtr != NULL)? widgetPtr->isVisibleTo(parentPtr) || isPermanent: isPermanent;
 
 				m_mainComponentVisibilityMap[mainWindowComponentPtr] = isVisibleToParent;
 
@@ -396,7 +390,7 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 
 	if (m_iconSizeAttrPtr.IsValid() && m_iconSizeAttrPtr->GetValue() != 0){
 		mainWindowPtr->setIconSize(QSize(m_iconSizeAttrPtr->GetValue(), m_iconSizeAttrPtr->GetValue()));
-	}	
+	}
 
 	int dockOptions = 0;
 
@@ -483,7 +477,7 @@ void CSimpleMainWindowGuiComp::OnRetranslate()
 	m_viewCommand.SetName(tr("&View"));
 	m_toolsCommand.SetName(tr("&Tools"));
 	m_helpCommand.SetName(tr("&Help"));
-	
+
 	// View commands
 	m_showToolBarsCommand.SetVisuals(tr("&Show Toolbars"), tr("Show Toolbars"), tr("Show and hide toolbars"));
 #if !defined(Q_OS_MAC)
@@ -643,7 +637,7 @@ CSimpleMainWindowGuiComp::CommandsObserver::CommandsObserver(CSimpleMainWindowGu
 :	m_parent(parent)
 {
 }
-		
+
 
 // protected methods of embedded class ActiveUndoManager
 

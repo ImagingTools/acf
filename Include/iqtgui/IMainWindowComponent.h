@@ -20,24 +20,25 @@ namespace iqtgui
 class IMainWindowComponent: virtual public istd::IPolymorphic
 {
 public:
-	enum DockFeatures
-	{
-		DF_PERMANENT = 0,
-		DF_MOVEABLE = 1,
-		DF_FLOATABLE = 2
-	};
-
 	/**
 		Flags describing behaviour of the main window component.
 	*/
-	enum MainWindowComponentFlags
+	enum WindowComponentFlags
 	{
-		WCF_NONE = 0x0,
+		WCF_NONE = 0,
 
 		/**
-			Window component is permanent shown and cannot be closed by user.
+			Element can be closed.
 		*/
-		WCF_PERMANENT = 0x1
+		WCF_CLOSABLE = 1,
+		/**
+			Element can be moved.
+		*/
+		WCF_MOVEABLE = 2,
+		/**
+			Element can be float from the main window to be standalone window.
+		*/
+		WCF_FLOATABLE = 4
 	};
 
 	/**
@@ -64,7 +65,7 @@ public:
 
 	/**
 		Get properties of of the window component.
-		\sa MainWindowComponentFlags
+		\sa WindowComponentFlags
 	*/
 	virtual int GetFlags() const = 0;
 };
