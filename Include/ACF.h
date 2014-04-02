@@ -339,8 +339,6 @@ http://ilena.org/redmine/projects/acf/wiki/ModelObserver-Tutorial
 	runtime environment over ACF tool or compiled to C++ code using ARXC compiler.
 	Additionally you can use component simulation to use components as "normal" classes.
 
-	\section Expectation
-
 	\ingroup AcfCore
 */
 
@@ -407,3 +405,5 @@ http://ilena.org/redmine/projects/acf/wiki/ModelObserver-Tutorial
 
 
 #endif // !ACF_included
+
+
