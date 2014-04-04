@@ -1,14 +1,13 @@
 	import qbs.base 1.0
 // Standard settings for an ACF application
 
-Application{
+CppApplication{
 	type: ["application", "acf_share"]
 
 	consoleApplication: true
 
 	Depends{ name: "acf" }
 	Depends{ name: "Qt.core" }
-	Depends{ name: "cpp" }
 
 	Properties{
 		condition: qbs.toolchain.contains("gcc") || qbs.toolchain.contains("clang")
