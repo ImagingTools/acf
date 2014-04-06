@@ -245,7 +245,7 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 		if (isStoring){
 			int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
 			if (i < fixedSetsCount){
-				const iprm::IParamsSet* fixedSetPtr = m_fixedParamSetsCompPtr[i - fixedSetsCount];
+				const iprm::IParamsSet* fixedSetPtr = m_fixedParamSetsCompPtr[i];
 				if (fixedSetPtr != NULL){
 					typeId = fixedSetPtr->GetFactoryId();
 				}
