@@ -25,7 +25,7 @@ public:
 	/**
 		Inserts a new bitmap.
 		\param	pixelFormat	The pixel format.
-		\param	size	   	The size.
+		\param	size	Size of the page bitmap.
 		\return	null if it fails, else a pointer to the inserted bitmap.
 	*/
 	virtual iimg::IBitmap* InsertBitmap(
@@ -36,7 +36,7 @@ public:
 		Inserts a new bitmap.
 		
 		\param	pixelFormat	   	The pixel format.
-		\param	size		   	The size.
+		\param	size		   	The size of the page bitmap.
 		\param [in,out]	dataPtr	If non-null, the bitmap data pointer.
 		\param	releaseFlag	   	Memory controlling flag.
 		\param	linesDifference	(Optional) The distance between adjacent lines in bytes.

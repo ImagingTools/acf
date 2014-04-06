@@ -2,10 +2,9 @@
 #define iprm_CSelectionConstraintsComp_included
 
 
+// ACF includes
 #include "iser/ISerializable.h"
-
 #include "icomp/CComponentBase.h"
-
 #include "iprm/IOptionsList.h"
 
 
@@ -28,6 +27,7 @@ public:
 		I_REGISTER_INTERFACE(iprm::IOptionsList);
 		I_ASSIGN_MULTI_0(m_optionNamesAttrPtr, "OptionNames", "Names of selectable options", true);
 		I_ASSIGN_MULTI_0(m_optionDescriptionsAttrPtr, "OptionDescriptions", "Descriptions of selectable options", true);
+		I_ASSIGN_MULTI_0(m_optionIdsAttrPtr, "OptionIds", "List of option IDs", true);
 	I_END_COMPONENT;
 
 	// reimplemented (iprm::IOptionsList)
@@ -41,6 +41,7 @@ public:
 private:
 	I_MULTIATTR(QString, m_optionNamesAttrPtr);
 	I_MULTIATTR(QString, m_optionDescriptionsAttrPtr);
+	I_MULTIATTR(QByteArray, m_optionIdsAttrPtr);
 };
 
 

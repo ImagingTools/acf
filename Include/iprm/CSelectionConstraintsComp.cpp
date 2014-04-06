@@ -42,8 +42,14 @@ QString CSelectionConstraintsComp::GetOptionDescription(int index) const
 }
 
 
-QByteArray CSelectionConstraintsComp::GetOptionId(int /*index*/) const
+QByteArray CSelectionConstraintsComp::GetOptionId(int index) const
 {
+	Q_ASSERT(index >= 0);
+
+	if (index < m_optionIdsAttrPtr.GetCount()){
+		return m_optionIdsAttrPtr[index];
+	}
+
 	return QByteArray();
 }
 

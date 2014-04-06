@@ -36,6 +36,7 @@ public:
 
 	I_BEGIN_COMPONENT(CExtComposedParamsSetGuiComp);
 		I_REGISTER_INTERFACE(iqt2d::IViewExtender);
+		I_REGISTER_INTERFACE(imod::IModelEditor);
 		I_ASSIGN_MULTI_0(m_editorsCompPtr, "Editors", "List of GUI's for parameters edition", true);
 		I_ASSIGN_TO(m_observersCompPtr, m_editorsCompPtr, true);
 		I_ASSIGN_TO(m_extendersCompPtr, m_editorsCompPtr, false);
