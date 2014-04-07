@@ -5,7 +5,6 @@
 // Qt includes
 #include <QtCore/QFileSystemWatcher>
 #include <QtCore/QDir>
-#include <QtGui/QStandardItemModel>
 
 // ACF includes
 #include "imod/IModel.h"
@@ -47,6 +46,30 @@ public:
 	// reimplemented (ifile::IFileListProvider)
 	virtual const QFileInfoList& GetFileList() const;
 
+	/**
+		Creates the list of files in a root directory \c root.
+		Several filters can be applied to the \c root before call of this function.
+		So you can do a separate filtering of files and directories.
+		\param	minRecursionDepth	minimal recursion depth.
+		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
+	*/
+	static bool CreateFileList(const QDir& root,
+				int minRecursionDepth,
+				int maxRecursionDepth,
+				const QStringList& nameFilters,
+				QDir::SortFlags sortSpec,
+				QFileInfoList& fileList,
+				istd::ILogger* loggerPtr = NULL);
+	/**
+		Several filters can be applied to the QDir object before call of this function.
+		\param	minRecursionDepth	minimal recursion depth. If it is 0, root will be included.
+		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
+	*/
+	static bool CreateDirectoryList(const QDir& root,
+				int minRecursionDepth,
+				int maxRecursionDepth,
+				QFileInfoList& directoryList,
+				istd::ILogger* loggerPtr = NULL);
 protected:
 	// reimplemented (imod::CSingleModelObserverBase)
 	virtual void OnUpdate(int updateFlags, istd::IPolymorphic* updateParamsPtr);
@@ -59,35 +82,11 @@ private Q_SLOTS:
 	void OnDirectoryContentChanged(const QString& directoryPath);
 
 private:
-	/**
-		Creates the list of files in a root directory \c root.
-		Several filters can be applied to the \c root before call of this function.
-		So you can do a separate filtering of files and directories.
-		\param	minRecursionDepth	minimal recursion depth.
-		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
-	*/
-	bool CreateFileList(const QDir& root,
-				int minRecursionDepth,
-				int maxRecursionDepth,
-				const QStringList& nameFilters,
-				QDir::SortFlags sortSpec,
-				QFileInfoList& fileList) const;
-
-	/**
-		Several filters can be applied to the QDir object before call of this function.
-		\param	minRecursionDepth	minimal recursion depth. If it is 0, root will be included.
-		\param	maxRecursionDepth	maximal recursion depth, if negative no depth is specified.
-	*/
-	bool CreateDirectoryList(const QDir& root,
-				int minRecursionDepth,
-				int maxRecursionDepth,
-				QFileInfoList& directoryList) const;
-
-	void EnumerateDirectory(
+	static void EnumerateDirectory(
 				const QDir& root,
 				int minRecursionDepth,
 				int maxRecursionDepth,
-				QFileInfoList& directoryList) const;
+				QFileInfoList& directoryList);
 
 private:
 	I_REF(ifile::IFileNameParam, m_dirParamCompPtr);
