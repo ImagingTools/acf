@@ -258,6 +258,16 @@ bool CBitmapBase::Serialize(iser::IArchive& archive)
 }
 
 
+// reimplemented (istd::IChangeable)
+
+bool CBitmapBase::ResetData(CompatibilityMode /*mode*/)
+{
+	ResetImage();
+
+	return true;
+}
+
+
 } // namespace iimg
 
 

@@ -38,6 +38,9 @@ public:
 
 	// reimplemented (iser::ISerializable)
 	virtual bool Serialize(iser::IArchive& archive);
+
+	// reimplemented (istd::IChangeable)
+	virtual bool ResetData(CompatibilityMode mode = CM_WITHOUT_REFS);
 };
 
 
