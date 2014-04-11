@@ -226,7 +226,22 @@ int CBitmap::GetComponentsCount() const
 {
 	switch (m_image.format()){
 	case QImage::Format_Indexed8:
+	case QImage::Format_Mono:
+	case QImage::Format_MonoLSB:
 		return 1;
+
+	case QImage::Format_RGB16:
+	case QImage::Format_RGB555:
+	case QImage::Format_RGB444:
+	case QImage::Format_ARGB4444_Premultiplied:
+		return 2;
+
+	case QImage::Format_ARGB8565_Premultiplied:
+	case QImage::Format_RGB666:
+	case QImage::Format_ARGB6666_Premultiplied:
+	case QImage::Format_RGB888:
+	case QImage::Format_ARGB8555_Premultiplied:
+		return 3;
 
 	case QImage::Format_RGB32:
 	case QImage::Format_ARGB32:
@@ -326,6 +341,16 @@ QImage::Format CBitmap::CalcQtFormat(PixelFormat pixelFormat) const
 		case PF_GRAY:
 			return QImage::Format_Indexed8;
 
+		case PF_MONO:
+			return QImage::Format_Mono;
+
+		// just pixel mapped formats
+		case PF_GRAY16:
+			return QImage::Format_RGB16;
+
+		case PF_GRAY32:
+			return QImage::Format_ARGB32;
+
 		default:
 			return QImage::Format_Invalid;
 	}
@@ -344,6 +369,16 @@ iimg::IBitmap::PixelFormat CBitmap::CalcFromQtFormat(QImage::Format imageFormat)
 
 	case QImage::Format_Indexed8:
 		return PF_GRAY;
+
+	case QImage::Format_Mono:
+		return PF_MONO;
+
+	// just pixel mapped formats
+	case QImage::Format_RGB16:
+	case QImage::Format_RGB555:
+	case QImage::Format_RGB444:
+	case QImage::Format_ARGB4444_Premultiplied:
+		return PF_GRAY16;
 
 	default:
 		return PF_UNKNOWN;
