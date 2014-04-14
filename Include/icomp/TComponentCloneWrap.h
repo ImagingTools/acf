@@ -3,9 +3,10 @@
 
 
 #include "icomp/IComponent.h"
-#include "icomp/ICompositeComponent.h"
 #include "icomp/CInterfaceManipBase.h"
 #include "icomp/CComponentContext.h"
+#include "icomp/CCompositeComponent.h"
+#include "icomp/CCompositeComponentContext.h"
 
 
 namespace icomp
@@ -28,11 +29,35 @@ istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe(istd::IChangeable::Co
 {
 	const CComponentContext* contextPtr = dynamic_cast<const CComponentContext*>(BaseClass::GetComponentContext());
 	if (contextPtr != NULL){
+		QByteArray contextId = contextPtr->GetContextId();
+
 		const ICompositeComponent* parentComponentPtr = BaseClass::GetParentComponent();
 		if (parentComponentPtr != NULL){
+			// we have to check if our owner has a parent composite component.
+			// In this case we have to factorize not our component, but the complete parent composite component:
+			const CCompositeComponent* parentCompositeComponentPtr = dynamic_cast<const CCompositeComponent*>(parentComponentPtr->GetParentComponent());
+			if (parentCompositeComponentPtr != NULL){
+				const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(parentCompositeComponentPtr->GetComponentContext());
+
+				const IRegistry& registry = contextPtr->GetRegistry();
+				IRegistry::Ids elementIds = registry.GetElementIds();
+
+				for (IRegistry::Ids::ConstIterator elemIter = elementIds.constBegin(); elemIter != elementIds.constEnd(); ++elemIter){
+					const icomp::ICompositeComponent* subComponentPtr = dynamic_cast<const icomp::ICompositeComponent*>(parentCompositeComponentPtr->GetSubcomponent(*elemIter));
+					if (subComponentPtr != NULL){
+						if (subComponentPtr->GetSubcomponent(contextId) != NULL){
+							contextId = *elemIter;
+
+							parentComponentPtr = parentCompositeComponentPtr;
+							break;
+						}
+					}
+				}
+			}
+
 			istd::TDelPtr<istd::IChangeable> clonedPtr;
 
-			clonedPtr.SetCastedOrRemove(ExtractInterface<istd::IChangeable>(parentComponentPtr->CreateSubcomponent(contextPtr->GetContextId())));
+			clonedPtr.SetCastedOrRemove(ExtractInterface<istd::IChangeable>(parentComponentPtr->CreateSubcomponent(contextId)));
 
 			if (clonedPtr.IsValid()){
 				if (clonedPtr->CopyFrom(*this, mode)){
