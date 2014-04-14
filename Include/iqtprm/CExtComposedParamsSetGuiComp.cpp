@@ -34,10 +34,7 @@ namespace iqtprm
 {
 
 
-CExtComposedParamsSetGuiComp::CExtComposedParamsSetGuiComp()
-{
-}
-
+// public methods
 
 // reimplemented (imod::IModelEditor)
 
@@ -83,6 +80,25 @@ void CExtComposedParamsSetGuiComp::UpdateEditor(int updateFlags)
 
 				editorPtr->UpdateEditor(updateFlags);
 			}
+		}
+	}
+}
+
+
+void CExtComposedParamsSetGuiComp::SetReadOnly(bool state)
+{
+	int editorsCount = m_editorsCompPtr.GetCount();
+	for (int i = 0; i < editorsCount; ++i){
+		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(i);
+		if ((guiPtr == NULL) || !guiPtr->IsGuiCreated()){
+			continue;
+		}
+
+		imod::IModelEditor* editorPtr = m_editorsCompPtr[i];
+		if (m_connectedEditorsMap.contains(editorPtr)){
+			Q_ASSERT(editorPtr != NULL); // only not NULL editors are stored in m_connectedEditorsMap
+
+			editorPtr->SetReadOnly(state);
 		}
 	}
 }
