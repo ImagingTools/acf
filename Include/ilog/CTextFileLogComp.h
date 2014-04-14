@@ -36,8 +36,7 @@ public:
 
 protected:
 	// reimplemented (CStreamLogCompBase)
-	virtual void WriteText(const QString& text);
-	virtual void NewLine();
+	virtual void WriteText(const QString& text, istd::IInformationProvider::InformationCategory category);
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

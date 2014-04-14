@@ -15,8 +15,16 @@ namespace ilog
 // public methods
 
 CStreamLogCompBase::CStreamLogCompBase()
-:	m_isLastDotShown(false)
+:	m_isLastDotShown(false),
+	m_lastDotCategory(istd::IInformationProvider::IC_NONE),
+	m_worseCategory(istd::IInformationProvider::IC_NONE)
 {
+}
+
+
+istd::IInformationProvider::InformationCategory CStreamLogCompBase::GetWorseCategory() const
+{
+	return m_worseCategory;
 }
 
 
@@ -34,9 +42,10 @@ bool CStreamLogCompBase::IsMessageSupported(
 void CStreamLogCompBase::AddMessage(const MessagePtr& messagePtr)
 {
 	if (messagePtr.IsValid()){
-		if (messagePtr->GetInformationCategory() >= *m_minPriorityAttrPtr){
+		istd::IInformationProvider::InformationCategory category = messagePtr->GetInformationCategory();
+		if (category >= *m_minPriorityAttrPtr){
 			if (m_isLastDotShown){
-				NewLine();
+				WriteText("\n", m_lastDotCategory);
 
 				m_isLastDotShown = false;
 			}
@@ -44,9 +53,14 @@ void CStreamLogCompBase::AddMessage(const MessagePtr& messagePtr)
 			WriteMessageToStream(*messagePtr);
 		}
 		else if (*m_isDotEnabledAttrPtr){
-			WriteText(".");
+			WriteText(".", category);
 
 			m_isLastDotShown = true;
+			m_lastDotCategory = category;
+		}
+
+		if (category > m_worseCategory){
+			m_worseCategory = category;
 		}
 
 		BaseClass::AddMessage(messagePtr);
@@ -60,9 +74,7 @@ void CStreamLogCompBase::WriteMessageToStream(const istd::IInformationProvider& 
 {
 	QString messageText = GenerateMessageText(message);
 	
-	WriteText(messageText);
-
-	NewLine();
+	WriteText(messageText + "/n", message.GetInformationCategory());
 }
 
 
@@ -119,10 +131,12 @@ void CStreamLogCompBase::OnComponentDestroyed()
 	BaseClass::OnComponentDestroyed();
 
 	if (m_isLastDotShown){
-		NewLine();
+		WriteText("\n", m_lastDotCategory);
 
 		m_isLastDotShown = false;
 	}
+
+	m_worseCategory = istd::IInformationProvider::IC_NONE;
 }
 
 

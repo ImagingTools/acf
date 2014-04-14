@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 	if ((workingMode == 0) && outputFilePath.isEmpty()){
 		std::cout << "Output file was not specified!" << std::endl;
 
-		return -1;
+		return 1;
 	}
 
 	icomp::TSimComponentWrap<BasePck::ApplicationInfo> applicationInfo;
@@ -142,13 +142,18 @@ int main(int argc, char *argv[])
 	if (registryLoaderComp.LoadFromFile(registryComp, inputFilePath) != ifile::IFilePersistence::OS_OK){
 		std::cout << "Cannot read input registry file '" << inputFilePath.toLocal8Bit().constData() << "'" << std::endl;
 
-		return -2;
+		return 2;
 	}
 
 	if (codeSaverComp.SaveToFile(registryComp, outputFilePath) != ifile::IFilePersistence::OS_OK){
 		std::cout << "Cannot write output file(s) '" << outputFilePath.toLocal8Bit().constData() << "'" << std::endl;
 
-		return -3;
+		return 3;
+	}
+
+	if (log.GetWorseCategory() >= istd::IInformationProvider::IC_ERROR){
+		// there are errors
+		return 4;
 	}
 
 	return 0;

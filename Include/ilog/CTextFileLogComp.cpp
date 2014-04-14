@@ -24,19 +24,10 @@ CTextFileLogComp:: CTextFileLogComp()
 
 // reimplemented (CStreamLogCompBase)
 
-void CTextFileLogComp::WriteText(const QString& text)
+void CTextFileLogComp::WriteText(const QString& text, istd::IInformationProvider::InformationCategory /*category*/)
 {
 	if (m_outputFile.isOpen()){
 		m_outputFileStream << text;
-		m_outputFileStream.flush();
-	}
-}
-
-
-void CTextFileLogComp::NewLine()
-{
-	if (m_outputFile.isOpen()){
-		m_outputFileStream << "\n";
 		m_outputFileStream.flush();
 	}
 }

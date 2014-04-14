@@ -16,15 +16,14 @@ namespace ilog
 
 // reimplemented (CStreamLogCompBase)
 
-void CConsoleLogComp::WriteText(const QString& text)
+void CConsoleLogComp::WriteText(const QString& text, istd::IInformationProvider::InformationCategory category)
 {
-	std::wcout << text.toLocal8Bit().constData();
-}
-
-
-void CConsoleLogComp::NewLine()
-{
-	std::wcout << std::endl;
+	if (category >= istd::IInformationProvider::IC_ERROR){
+		std::wcerr << text.toLocal8Bit().constData();
+	}
+	else{
+		std::wcout << text.toLocal8Bit().constData();
+	}
 }
 
 

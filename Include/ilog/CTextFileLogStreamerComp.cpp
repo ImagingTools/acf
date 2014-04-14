@@ -105,19 +105,10 @@ QString CTextFileLogStreamerComp::GetTypeDescription(const QString* /*extensionP
 
 // reimplemented (CStreamLogCompBase)
 
-void CTextFileLogStreamerComp::WriteText(const QString& text)
+void CTextFileLogStreamerComp::WriteText(const QString& text, istd::IInformationProvider::InformationCategory /*category*/)
 {
 	if (m_outputFile.isOpen()){
 		m_outputFileStream << text;
-		m_outputFileStream.flush();
-	}
-}
-
-
-void CTextFileLogStreamerComp::NewLine()
-{
-	if (m_outputFile.isOpen()){
-		m_outputFileStream << "\n";
 		m_outputFileStream.flush();
 	}
 }
