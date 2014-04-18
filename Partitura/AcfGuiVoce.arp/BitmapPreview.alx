@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3012
+          3389
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          890
+          1087
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264192
+          264197
         </Number>
         <Description>
           Qt Framework
@@ -54,13 +54,13 @@
     </Element>
     <Element>
       <ComponentName>
-        ImageView
+        FilePreviewGui
       </ComponentName>
       <X>
-        250
+        575
       </X>
       <X>
-        400
+        75
       </X>
       <Note>
         
@@ -68,10 +68,10 @@
     </Element>
     <Element>
       <ComponentName>
-        ObjectPreviewGui
+        ImageView
       </ComponentName>
       <X>
-        575
+        250
       </X>
       <X>
         400
