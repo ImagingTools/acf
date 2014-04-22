@@ -243,7 +243,6 @@ void CSimpleMainWindowGuiComp::UpdateFixedCommands(iqtgui::CHierarchicalCommand&
 		fixedCommands.InsertChild(&m_viewCommand, false);
 	}
 
-
 	UpdateToolsCommands(m_toolsCommand);
 	if (m_toolsCommand.GetChildsCount() > 0){
 		fixedCommands.InsertChild(&m_toolsCommand, false);
