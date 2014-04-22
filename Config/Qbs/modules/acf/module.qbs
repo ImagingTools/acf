@@ -141,7 +141,7 @@ Module{
 						'-o', outputs.cpp[0].fileName]);
 			cmd.description = 'arxc ' + FileInfo.fileName(inputs.arx[0].fileName)
 			cmd.highlight = 'codegen';
-			cmd.workingDirectory = acfBinDirectory;
+			cmd.workingDirectory = product.moduleProperty("Qt.core", "binPath");
 
 			return cmd;
 		}
