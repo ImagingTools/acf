@@ -70,7 +70,7 @@
 ### while importing or adding files and directories.
 # global-ignores = *.o *.lo *.la #*# .*.rej *.rej .*~ *~ .#* .DS_Store
 
-global-ignores = *.suo *.ncb *.pch *.idb *.pdb *.obj *.lib *.exe *.exe.manifest *.embed.manifest* *.intermediate.manifest* *.dll *.dll.manifest *.arp *.bsc *.exp *.ilk Debug* Release* debug release VC8 VC10 *.vspsc *.vssscc *.vspscc generatedfiles generated Generated GeneratedFiles *.user Thumbs.db build *.dep *.rsp ._* *.pbxuser *.perspectivev3 Makefile* qtc-gdbmacros object_script.* *.mode* *.qm ui_*.h moc_*.cpp qrc_*.cpp *.o *.d *-build-* *.cache *-Debug.htm *-Release.htm *.vcxproj.filters *-build
+global-ignores = *.suo *.ncb *.pch *.idb *.pdb *.obj *.lib *.exe *.exe.manifest *.embed.manifest* *.intermediate.manifest* *.dll *.dll.manifest *.arp *.bsc *.exp *.ilk Debug* Release* debug release VC8 VC10 *.vspsc *.vssscc *.vspscc generatedfiles generated Generated GeneratedFiles *.user Thumbs.db build *.dep *.rsp ._* *.pbxuser *.perspectivev3 Makefile* qtc-gdbmacros object_script.* *.mode* *.qm ui_*.h moc_*.cpp qrc_*.cpp *.o *.d *-build-* *.cache *-Debug.htm *-Release.htm *.vcxproj.filters *-build *.DS_Store
 
 ### Set log-encoding to the default encoding for log messages
 # log-encoding = latin1
