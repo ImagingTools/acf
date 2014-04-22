@@ -73,19 +73,6 @@ int CGuiApplicationComp::Execute(int argc, char** argv)
 	if (BaseClass::InitializeApplication(argc, argv)){
 		m_runtimeStatus.SetRuntimeStatus(ibase::IRuntimeStatusProvider::RS_STARTING);
 
-		QByteArray appStyle;
-
-		// parse arguments:
-		for (int index = 1; index < argc; index++){
-			QByteArray arg = argv[index];
-			if (arg == "-style"){
-				if (index+1 < argc){
-					appStyle = argv[index+1];
-				}
-			}
-		}
-		QApplication::setStyle(appStyle);
-
 		TryShowSplashScreen();
 
 		if (m_allowApplicationCloseModelCompPtr.IsValid()){

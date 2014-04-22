@@ -28,13 +28,36 @@ namespace iqtgui
 
 bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 {
+	QByteArray appStyle;
+	QString styleSheetFile;
+	if (m_styleSheetAttrPtr.IsValid()){
+		styleSheetFile = *m_styleSheetAttrPtr;
+	}
+
 	m_applicationArguments.clear();
 
+	// parse arguments:
 	for (int argIndex = 0; argIndex < argc; argIndex++){
+		QByteArray arg = argv[argIndex];
+
+		if (argIndex + 1 < argc){	// two argument parameters
+			if (arg == "-style"){
+				appStyle = argv[++argIndex];
+				continue;
+			}
+
+			if (arg == "-stylesheet"){
+				styleSheetFile = QString::fromLocal8Bit(argv[++argIndex]);
+				continue;
+			}
+		}
+
 		m_applicationArguments << QString::fromLocal8Bit(argv[argIndex]);
 
 		qDebug(argv[argIndex]);
 	}
+
+	QApplication::setStyle(appStyle);
 
 	if (!m_applicationPtr.IsValid()){
 		m_applicationPtr.SetPtr(new QApplication(argc, argv));
@@ -56,6 +79,13 @@ bool CApplicationCompBase::InitializeApplication(int argc, char** argv)
 
 		if (rootComponentPtr != NULL){
 			rootComponentPtr->EnsureAutoInitComponentsCreated();
+		}
+
+		// set up style sheet
+		if (!styleSheetFile.isEmpty()){
+			if (!iqtgui::SetStyleSheet(*m_applicationPtr, styleSheetFile)){
+				qDebug("Style sheet file could not be set: %s", styleSheetFile.toLocal8Bit().constData());
+			}
 		}
 	}
 
@@ -162,13 +192,6 @@ void CApplicationCompBase::InitializeComponentApplication()
 
 	// set up palette
 	m_applicationPtr->setPalette(QApplication::style()->standardPalette());
-
-	// set up style sheet
-	if (m_styleSheetAttrPtr.IsValid()){
-		if (!iqtgui::SetStyleSheet(*m_applicationPtr, *m_styleSheetAttrPtr)){
-			qDebug("Style sheet file could not be set: %s", (*m_styleSheetAttrPtr).toLocal8Bit().constData());
-		}
-	}
 }
 
 
