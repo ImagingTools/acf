@@ -197,10 +197,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCheckableComboBox.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CCommandsBinderComp.cpp"
 				>
 			</File>
@@ -229,14 +225,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CDoubleRangeSpinEdit.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CExtLineEdit.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CFreeWidgetGuiComp.cpp"
 				>
 			</File>
@@ -257,10 +245,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHierarchicalHeaderView.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CIconProviderComp.cpp"
 				>
 			</File>
@@ -270,10 +254,6 @@
 			</File>
 			<File
 				RelativePath="..\CImagePropertyGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CItemDelegate.cpp"
 				>
 			</File>
 			<File
@@ -289,10 +269,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiPageWidget.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CProgressManagerGuiComp.cpp"
 				>
 			</File>
@@ -301,23 +277,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSimpleGuiContainerDelegate.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CSplashScreenGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CSplitterDelegate.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CStackWidgetDelegate.cpp"
 				>
 			</File>
 			<File
@@ -337,27 +301,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTabWidgetDelegate.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CTextElider.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\CToolBarGuiCompBase.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\CToolBarWidgetGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CToolBoxDelegate.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CTreeWidgetFilter.cpp"
 				>
 			</File>
 			<File
@@ -376,10 +324,6 @@
 			</File>
 			<File
 				RelativePath="..\CApplicationCompBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CCheckableComboBox.h"
 				>
 			</File>
 			<File
@@ -408,14 +352,6 @@
 			</File>
 			<File
 				RelativePath="..\CDockWidgetGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CDoubleRangeSpinEdit.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CExtLineEdit.h"
 				>
 			</File>
 			<File
@@ -461,10 +397,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CHierarchicalHeaderView.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CIconProviderComp.h"
 				>
 			</File>
@@ -474,10 +406,6 @@
 			</File>
 			<File
 				RelativePath="..\CImagePropertyGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CItemDelegate.h"
 				>
 			</File>
 			<File
@@ -493,10 +421,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CMultiPageWidget.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CProgressManagerGuiComp.h"
 				>
 			</File>
@@ -505,23 +429,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CSimpleGuiContainerDelegate.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CSimpleMainWindowGuiComp.h"
 				>
 			</File>
 			<File
 				RelativePath="..\CSplashScreenGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CSplitterDelegate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CStackWidgetDelegate.h"
 				>
 			</File>
 			<File
@@ -541,14 +453,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CTabWidgetDelegate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CTextElider.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CToolBarGuiCompBase.h"
 				>
 			</File>
@@ -557,19 +461,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CToolBoxDelegate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CTreeWidgetFilter.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CVersionInfoGuiComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CWidgetUpdateBlocker.h"
 				>
 			</File>
 			<File
@@ -594,10 +486,6 @@
 			</File>
 			<File
 				RelativePath="..\IMainWindowComponent.h"
-				>
-			</File>
-			<File
-				RelativePath="..\IMultiPageWidgetDelegate.h"
 				>
 			</File>
 			<File
@@ -658,23 +546,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CCheckableComboBox.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CDialogGuiComp.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CDockWidgetGuiComp.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CDoubleRangeSpinEdit.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CExtLineEdit.cpp"
 				>
 			</File>
 			<File
@@ -691,10 +567,6 @@
 			</File>
 			<File
 				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CMultiPageGuiCompBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\GeneratedFiles\iqtgui\moc_CMultiPageWidget.cpp"
 				>
 			</File>
 			<File
@@ -718,15 +590,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\GeneratedFiles\iqtgui\ui_CDoubleRangeSpinEdit.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\GeneratedFiles\iqtgui\ui_CImagePropertiesFrameComp.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\GeneratedFiles\iqtgui\ui_CNumpadGui.h"
 				>
 			</File>
 			<File
@@ -743,10 +607,6 @@
 			>
 			<File
 				RelativePath="..\CAboutWidgetGuiComp.ui"
-				>
-			</File>
-			<File
-				RelativePath="..\CDoubleRangeSpinEdit.ui"
 				>
 			</File>
 			<File
@@ -778,23 +638,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CCheckableComboBox.moc"
-				>
-			</File>
-			<File
 				RelativePath="..\CDialogGuiComp.moc"
 				>
 			</File>
 			<File
 				RelativePath="..\CDockWidgetGuiComp.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CDoubleRangeSpinEdit.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CExtLineEdit.moc"
 				>
 			</File>
 			<File
@@ -811,10 +659,6 @@
 			</File>
 			<File
 				RelativePath="..\CMultiPageGuiCompBase.moc"
-				>
-			</File>
-			<File
-				RelativePath="..\CMultiPageWidget.moc"
 				>
 			</File>
 			<File

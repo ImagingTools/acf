@@ -114,7 +114,7 @@ void CFileSystemExplorerGuiComp::OnGuiCreated()
 	FilterFrame->setVisible(*m_showUserFilterAttrPtr);
 	QLayout* filterLayoutPtr = FilterFrame->layout();
 	if (filterLayoutPtr != NULL){
-		m_filterEdit = new iqtgui::CExtLineEdit(tr("Enter text to filter file items"), 2, FilterFrame);
+		m_filterEdit = new iwidgets::CExtLineEdit(tr("Enter text to filter file items"), 2, FilterFrame);
 
 		// add "clear" button:
 		QToolButton* clearButton = new QToolButton(m_filterEdit);

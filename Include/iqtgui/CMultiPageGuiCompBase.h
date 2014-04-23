@@ -13,7 +13,7 @@
 #include "iprm/COptionsManager.h"
 #include "iqtgui/IMultiVisualStatusProvider.h"
 #include "iqtgui/CGuiComponentBase.h"
-#include "iqtgui/CMultiPageWidget.h"
+#include "iwidgets/CMultiPageWidget.h"
 
 namespace iqtgui
 {

@@ -23,7 +23,7 @@
 // ACF includes
 #include "istd/TChangeNotifier.h"
 
-#include "iqtgui/CWidgetUpdateBlocker.h"
+#include "iwidgets/CWidgetUpdateBlocker.h"
 
 #include "iview/IInteractiveShape.h"
 #include "iview/CInteractiveShapeBase.h"
@@ -371,8 +371,8 @@ void CConsoleGui::UpdateZoomInOutState()
 
 void CConsoleGui::UpdateScrollbarsValues()
 {
-	iqtgui::CWidgetUpdateBlocker hScrollBlocker(m_horizontalScrollbarPtr);
-	iqtgui::CWidgetUpdateBlocker vScrollBlocker(m_verticalScrollbarPtr);
+	iwidgets::CWidgetUpdateBlocker hScrollBlocker(m_horizontalScrollbarPtr);
+	iwidgets::CWidgetUpdateBlocker vScrollBlocker(m_verticalScrollbarPtr);
 
 	i2d::CRect bbox = m_viewPtr->GetBoundingBox();
 	i2d::CRect clientRect = m_viewPtr->GetClientRect();
@@ -582,8 +582,8 @@ void CConsoleGui::UpdateButtonsState()
 
 void CConsoleGui::UpdateComponentsPosition()
 {
-	iqtgui::CWidgetUpdateBlocker frameBlocker(this);
-	iqtgui::CWidgetUpdateBlocker viewBlocker(m_viewPtr);
+	iwidgets::CWidgetUpdateBlocker frameBlocker(this);
+	iwidgets::CWidgetUpdateBlocker viewBlocker(m_viewPtr);
 
 	// scroll bars
 	if(m_isFullScreenMode){

@@ -34,7 +34,7 @@ iqtgui::IGuiObject* CTabContainerGuiComp::GetPageGuiComponent(int pageIndex) con
 
 int CTabContainerGuiComp::GetDesignType() const
 {
-	return CMultiPageWidget::DT_TAB_WIDGET;
+	return iwidgets::CMultiPageWidget::DT_TAB_WIDGET;
 }
 
 
@@ -46,7 +46,7 @@ void CTabContainerGuiComp::OnGuiCreated()
 
 	BaseClass::OnGuiCreated();
 
-	CMultiPageWidget* widgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* widgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(widgetPtr != NULL);
 
 	QTabWidget* tabWidgetPtr = dynamic_cast<QTabWidget*>(widgetPtr->GetContainerWidgetPtr());

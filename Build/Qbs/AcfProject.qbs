@@ -23,6 +23,7 @@ Project{
 			"../../Include/ibase/Qbs/ibase.qbs",
 			"../../Include/iqt/Qbs/iqt.qbs",
 			"../../Include/ifile/Qbs/ifile.qbs",
+			"../../Include/iqtgui/Qbs/iwidgets.qbs",
 			"../../Include/iqt2d/Qbs/iqt2d.qbs",
 			"../../Include/iview/Qbs/iview.qbs",
 			"../../Include/iqtdoc/Qbs/iqtdoc.qbs",

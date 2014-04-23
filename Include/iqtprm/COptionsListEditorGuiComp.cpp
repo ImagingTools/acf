@@ -11,8 +11,8 @@
 #include "iprm/IOptionsList.h"
 #include "iprm/ISelectionParam.h"
 #include "iqtgui/IMultiVisualStatusProvider.h"
-#include "iqtgui/CItemDelegate.h"
-#include "iqtgui/CWidgetUpdateBlocker.h"
+#include "iwidgets/CItemDelegate.h"
+#include "iwidgets/CWidgetUpdateBlocker.h"
 
 
 namespace iqtprm

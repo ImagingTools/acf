@@ -31,7 +31,7 @@ int CMultiPageGuiCompBase::AddPageToContainerWidget(
 			iqtgui::IGuiObject& pageGui,
 			const QString& pageTitle)
 {
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(multiPageWidgetPtr != NULL);
 	QWidget* pageContainerPtr = new QWidget(multiPageWidgetPtr);
 	QVBoxLayout* pageContainerLayoutPtr = new QVBoxLayout(pageContainerPtr);
@@ -98,7 +98,7 @@ void CMultiPageGuiCompBase::RemovePage(int pageIndex)
 	int guiIndex = m_pageToGuiIndexMap[pageIndex];
 	UnregisterModel(guiIndex);
 
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(multiPageWidgetPtr != NULL);
 
 	multiPageWidgetPtr->RemovePage(pageIndex);
@@ -107,7 +107,7 @@ void CMultiPageGuiCompBase::RemovePage(int pageIndex)
 
 void CMultiPageGuiCompBase::SetCurrentPage(int pageIndex)
 {
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(multiPageWidgetPtr != NULL);
 
 	multiPageWidgetPtr->SetCurrentPage(pageIndex);
@@ -116,7 +116,7 @@ void CMultiPageGuiCompBase::SetCurrentPage(int pageIndex)
 
 void CMultiPageGuiCompBase::UpdateVisualElements()
 {
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(multiPageWidgetPtr != NULL);
 
 	int visualProvidersCount = m_slaveWidgetsVisualCompPtr.GetCount();
@@ -175,13 +175,13 @@ QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
 {
 	bool insertSpacer = m_insertSpacerAttrPtr.IsValid() ? *m_insertSpacerAttrPtr : false;
 
-	int containerGuiFlags = insertSpacer ? IMultiPageWidgetDelegate::CGF_COMPACT : IMultiPageWidgetDelegate::CGF_NONE;
+	int containerGuiFlags = insertSpacer ? iwidgets::IMultiPageWidgetDelegate::CGF_COMPACT : iwidgets::IMultiPageWidgetDelegate::CGF_NONE;
 
 	if (m_useSameStretchingFactorAttrPtr.IsValid() && *m_useSameStretchingFactorAttrPtr){
-		containerGuiFlags |= IMultiPageWidgetDelegate::CGF_UNIFORM_SIZES;
+		containerGuiFlags |= iwidgets::IMultiPageWidgetDelegate::CGF_UNIFORM_SIZES;
 	}
 
-	CMultiPageWidget* widgetPtr = new CMultiPageWidget(
+	iwidgets::CMultiPageWidget* widgetPtr = new iwidgets::CMultiPageWidget(
 				parentPtr,
 				GetDesignType(),
 				containerGuiFlags,
@@ -223,7 +223,7 @@ void CMultiPageGuiCompBase::OnGuiDestroyed()
 		}
 	}
 
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 	Q_ASSERT(multiPageWidgetPtr != NULL);
 
 	multiPageWidgetPtr->ResetPages();
@@ -327,7 +327,7 @@ void CMultiPageGuiCompBase::PageModel::UpdatePageState()
 {
 	Q_ASSERT(m_parentPtr != NULL);
 
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(m_parentPtr->GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(m_parentPtr->GetWidget());
 
 	int activatorsCount = qMin(m_parentPtr->m_pageActivatorsCompPtr.GetCount(), m_parentPtr->GetPagesCount());
 	for (int i = 0; i < activatorsCount; ++i){
@@ -346,7 +346,7 @@ bool CMultiPageGuiCompBase::PageModel::SetSelectedOptionIndex(int index)
 {
 	Q_ASSERT(m_parentPtr != NULL);
 
-	CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<CMultiPageWidget*>(m_parentPtr->GetWidget());
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(m_parentPtr->GetWidget());
 	if ((multiPageWidgetPtr != NULL) && BaseClass::SetSelectedOptionIndex(index)){
 		return multiPageWidgetPtr->SetCurrentPage(index);
 	}

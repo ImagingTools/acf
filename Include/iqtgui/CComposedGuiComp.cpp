@@ -28,7 +28,7 @@ namespace iqtgui
 
 QWidget* CComposedGuiComp::GetPageContainerWidget() const
 {
-	CMultiPageWidget* widgetPtr = dynamic_cast<CMultiPageWidget*>(GetWidget());
+	iwidgets::CMultiPageWidget* widgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
 
 	return widgetPtr->GetContainerWidgetPtr();
 }

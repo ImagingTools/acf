@@ -6,8 +6,8 @@
 #include "istd/CChangeDelegator.h"
 #include "iprm/IParamsSet.h"
 #include "iprm/IOptionsManager.h"
-#include "iqtgui/CItemDelegate.h"
-#include "iqtgui/CWidgetUpdateBlocker.h"
+#include "iwidgets/CItemDelegate.h"
+#include "iwidgets/CWidgetUpdateBlocker.h"
 #include "iview/IShapeView.h"
 #include "iqt2d/IViewProvider.h"
 
@@ -469,7 +469,7 @@ void CParamsManagerGuiCompBase::UpdateParamsView(int selectedIndex)
 	}
 
 	if (modelPtr != m_lastConnectedModelPtr){
-		iqtgui::CWidgetUpdateBlocker blocker(ParamsFrame);
+		iwidgets::CWidgetUpdateBlocker blocker(ParamsFrame);
 
 		EnsureParamsGuiDetached();
 

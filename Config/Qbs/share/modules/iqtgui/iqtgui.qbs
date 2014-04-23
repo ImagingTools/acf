@@ -9,6 +9,7 @@ Module{
 	Depends{ name: 'ilog' }
 	Depends{ name: 'istd' }
 	Depends{ name: 'iqt' }
+	Depends{ name: 'iwidgets' }
 	Depends{ name: 'icomp' }
 	Depends{ name: 'i2d' }
 	Depends{ name: 'acf' }

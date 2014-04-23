@@ -21,7 +21,7 @@
 #include "ifile/IFileNameParam.h"
 
 #include "iqtgui/TDesignerGuiObserverCompBase.h"
-#include "iqtgui/CExtLineEdit.h"
+#include "iwidgets/CExtLineEdit.h"
 
 #include "GeneratedFiles/ifilegui/ui_CFileSystemExplorerGuiComp.h"
 
@@ -95,7 +95,7 @@ private:
 		virtual QIcon icon(const QFileInfo& fileInfo) const;
 	};
 
-	iqtgui::CExtLineEdit* m_filterEdit;
+	iwidgets::CExtLineEdit* m_filterEdit;
 
 	FileIconProvider m_fileIconProvider;
 
