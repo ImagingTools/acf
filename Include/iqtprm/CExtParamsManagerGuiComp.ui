@@ -231,9 +231,12 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>ElementTypeSelector</tabstop>
   <tabstop>AddButton</tabstop>
+  <tabstop>ConfigureButton</tabstop>
   <tabstop>CloneButton</tabstop>
   <tabstop>EditButton</tabstop>
+  <tabstop>RemoveButton</tabstop>
   <tabstop>ElementList</tabstop>
  </tabstops>
  <resources>
