@@ -273,6 +273,11 @@ I_EXPORT_COMPONENT(
 			"Model Observer Parameter Set" IM_TAG("Editor Composition"));
 
 I_EXPORT_COMPONENT(
+			ExtParamsManagerGui,
+			"Advanced parameter manager UI",
+			"Model Observer Parameter Set" IM_TAG("Editor Composition"));
+
+I_EXPORT_COMPONENT(
 			MessageBoxBasedLog,
 			"Logging component use a dialog for message visualization",
 			"Message Log Dialog");

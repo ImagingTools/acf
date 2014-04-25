@@ -188,6 +188,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CExtParamsManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\CFileNameParamGuiComp.cpp"
 				>
 			</File>
@@ -259,6 +263,10 @@
 			</File>
 			<File
 				RelativePath="..\CExtComposedParamsSetGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtParamsManagerGuiComp.h"
 				>
 			</File>
 			<File
@@ -336,6 +344,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\GeneratedFiles\iqtprm\moc_CExtParamsManagerGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\GeneratedFiles\iqtprm\moc_CFileNameParamGuiComp.cpp"
 				>
 			</File>
@@ -388,7 +400,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\GeneratedFiles\iqtprm\ui_CElementEditorGui.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\GeneratedFiles\iqtprm\ui_CEnableableParamGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\GeneratedFiles\iqtprm\ui_CExtParamsManagerGuiComp.h"
 				>
 			</File>
 			<File
@@ -444,7 +464,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CElementEditorGui.ui"
+				>
+			</File>
+			<File
 				RelativePath="..\CEnableableParamGuiComp.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtParamsManagerGuiComp.ui"
 				>
 			</File>
 			<File
@@ -501,6 +529,10 @@
 			</File>
 			<File
 				RelativePath="..\CEnableableParamGuiComp.moc"
+				>
+			</File>
+			<File
+				RelativePath="..\CExtParamsManagerGuiComp.moc"
 				>
 			</File>
 			<File
