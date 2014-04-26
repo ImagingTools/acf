@@ -8,7 +8,6 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
-
 #include "iqtgui/iqtgui.h"
 
 

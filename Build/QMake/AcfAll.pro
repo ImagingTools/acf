@@ -62,6 +62,9 @@ iview.file = ../../Include/iview/QMake/iview.pro
 SUBDIRS += iqtdoc
 iqtdoc.file = ../../Include/iqtdoc/QMake/iqtdoc.pro
 
+SUBDIRS += iwidgets
+iwidgets.file = ../../Include/iwidgets/QMake/iwidgets.pro
+
 SUBDIRS += iqtgui
 iqtgui.file = ../../Include/iqtgui/QMake/iqtgui.pro
 
