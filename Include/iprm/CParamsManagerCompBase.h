@@ -43,6 +43,7 @@ public:
 		I_ASSIGN_MULTI_0(m_fixedParamSetsCompPtr, "FixedParamSets", "List of references to fixed parameter set", false);
 		I_ASSIGN_MULTI_0(m_fixedSetNamesAttrPtr, "FixedSetNames", "List of fixed parameter names", false);
 		I_ASSIGN_MULTI_0(m_fixedSetDescriptionsAttrPtr, "FixedSetDescriptions", "List of fixed parameter descriptions", false);
+		I_ASSIGN_MULTI_0(m_fixedSetIdsAttrPtr, "FixedSetIds", "List of fixed parameter IDs", false);
 		I_ASSIGN(m_defaultSetNameAttrPtr, "DefaultSetName", "Default name of parameter set. Use %1 to insert automatic enumeration", true, "<noname>");
 		I_ASSIGN(m_serializeSelectionAttrPtr, "SerializeSelection", "If enabled, the current parameter set selection will be serialized", true, true);
 		I_ASSIGN(m_allowDisabledAttrPtr, "AllowDisabled", "Control if disabled parameters are supported", true, false);
@@ -98,6 +99,7 @@ protected:
 	I_MULTIREF(IParamsSet, m_fixedParamSetsCompPtr);
 	I_MULTIATTR(QString, m_fixedSetNamesAttrPtr);
 	I_MULTIATTR(QString, m_fixedSetDescriptionsAttrPtr);
+	I_MULTIATTR(QByteArray, m_fixedSetIdsAttrPtr);
 	I_ATTR(QString, m_defaultSetNameAttrPtr);
 	I_ATTR(bool, m_serializeSelectionAttrPtr);
 	I_ATTR(bool, m_allowDisabledAttrPtr);

@@ -251,6 +251,20 @@ bool CMultiParamsManagerComp::IsOptionEnabled(int index) const
 
 QByteArray CMultiParamsManagerComp::GetOptionId(int index) const
 {
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+	if (index < fixedSetsCount){
+		int idsCount = m_fixedSetIdsAttrPtr.GetCount();
+
+		if (index < idsCount){
+			return m_fixedSetIdsAttrPtr[index];
+		}
+		else{
+			return QByteArray();
+		}
+	}
+
 	return GetParamsSetName(index).toLocal8Bit();
 }
 
@@ -350,7 +364,8 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		paramsSetPtr->typeId = newParamsSetPtr->GetFactoryId();
 		paramsSetPtr->parentPtr = this;
 
-		m_paramSets.push_back(paramsSetPtr);
+		m_paramSets.push_back(ParamSetPtr());
+		m_paramSets.back().TakeOver(paramsSetPtr);
 
 		imod::IModel* paramsModelPtr = dynamic_cast<imod::IModel*>(newParamsSetPtr);
 		if (paramsModelPtr != NULL){

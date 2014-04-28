@@ -273,6 +273,20 @@ QString CParamsManagerComp::GetOptionDescription(int index) const
 
 QByteArray CParamsManagerComp::GetOptionId(int index) const
 {
+	Q_ASSERT((index >= 0) && (index < GetParamsSetsCount()));
+
+	int fixedSetsCount = m_fixedParamSetsCompPtr.GetCount();
+	if (index < fixedSetsCount){
+		int idsCount = m_fixedSetIdsAttrPtr.GetCount();
+
+		if (index < idsCount){
+			return m_fixedSetIdsAttrPtr[index];
+		}
+		else{
+			return QByteArray();
+		}
+	}
+
 	return GetParamsSetName(index).toLocal8Bit();
 }
 
