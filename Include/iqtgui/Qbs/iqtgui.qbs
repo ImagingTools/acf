@@ -8,6 +8,7 @@ AcfStaticLibrary{
 	files: ["../*.h", "../*.cpp", "../*.ui", "../*.qrc"]
 
 	Depends{ name: "iqt" }
+	Depends{ name: "iwidgets" }
 	Depends{ name: "iprm" }
 	Depends{ name: "ibase" }
 	Depends{ name: "icomp" }
@@ -16,6 +17,7 @@ AcfStaticLibrary{
 
 	Export{
 		Depends{ name: "iqt" }
+		Depends{ name: "iwidgets" }
 		Depends{ name: "iprm" }
 		Depends{ name: "ibase" }
 		Depends{ name: "icomp" }
