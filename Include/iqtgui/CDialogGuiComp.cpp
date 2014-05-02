@@ -19,6 +19,12 @@ namespace iqtgui
 
 // public methods
 
+CDialogGuiComp::CDialogGuiComp()
+{
+	m_commandsProvider.SetParent(this);
+}
+
+
 // reimplemented (iqtgui::IDialog)
 
 int CDialogGuiComp::ExecuteDialog(IGuiObject* parentPtr)

@@ -44,6 +44,8 @@ public:
 		I_ASSIGN(m_isModalAttrPtr, "IsModal", "Modality of the dialog", true, true);
 	I_END_COMPONENT;
 
+	CDialogGuiComp();
+
 	// reimplemented (iqtgui::IDialog)
 	virtual int ExecuteDialog(IGuiObject* parentPtr);
 
