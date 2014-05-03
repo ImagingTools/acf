@@ -359,7 +359,7 @@ bool CMultiParamsManagerComp::EnsureParamExist(int index, const QByteArray& type
 		ParamSetPtr paramsSetPtr(new imod::TModelWrap<ParamSet>());
 
 		paramsSetPtr->paramSetPtr.SetPtr(newParamsSetPtr);
-		paramsSetPtr->name = CalculateNewDefaultName();
+		paramsSetPtr->name = name.isEmpty() ? CalculateNewDefaultName() : name;
 		paramsSetPtr->isEnabled = isEnabled;
 		paramsSetPtr->typeId = newParamsSetPtr->GetFactoryId();
 		paramsSetPtr->parentPtr = this;
