@@ -33,23 +33,27 @@ istd::IChangeable* TComponentCloneWrap<BaseClass>::CloneMe(istd::IChangeable::Co
 
 		const ICompositeComponent* parentComponentPtr = BaseClass::GetParentComponent();
 		if (parentComponentPtr != NULL){
-			// we have to check if our owner has a parent composite component.
-			// In this case we have to factorize not our component, but the complete parent composite component:
-			const CCompositeComponent* parentCompositeComponentPtr = dynamic_cast<const CCompositeComponent*>(parentComponentPtr->GetParentComponent());
-			if (parentCompositeComponentPtr != NULL){
-				const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(parentCompositeComponentPtr->GetComponentContext());
+			if ((mode == CM_WITH_REFS) || (mode == CM_CONVERT)){
+				// we have to check if our owner has a parent composite component.
+				// In this case we have to factorize not our component, but the complete parent composite component:
+				const CCompositeComponent* parentCompositeComponentPtr = dynamic_cast<const CCompositeComponent*>(parentComponentPtr->GetParentComponent());
+				if (parentCompositeComponentPtr != NULL){
+					const CCompositeComponentContext* contextPtr = dynamic_cast<const CCompositeComponentContext*>(parentCompositeComponentPtr->GetComponentContext());
 
-				const IRegistry& registry = contextPtr->GetRegistry();
-				IRegistry::Ids elementIds = registry.GetElementIds();
+					const IRegistry& registry = contextPtr->GetRegistry();
+					IRegistry::Ids elementIds = registry.GetElementIds();
 
-				for (IRegistry::Ids::ConstIterator elemIter = elementIds.constBegin(); elemIter != elementIds.constEnd(); ++elemIter){
-					const icomp::ICompositeComponent* subComponentPtr = dynamic_cast<const icomp::ICompositeComponent*>(parentCompositeComponentPtr->GetSubcomponent(*elemIter));
-					if (subComponentPtr != NULL){
-						if (subComponentPtr->GetSubcomponent(contextId) != NULL){
-							contextId = *elemIter;
+					for (IRegistry::Ids::ConstIterator elemIter = elementIds.constBegin(); elemIter != elementIds.constEnd(); ++elemIter){
+						const icomp::ICompositeComponent* subComponentPtr = dynamic_cast<const icomp::ICompositeComponent*>(parentCompositeComponentPtr->GetSubcomponent(*elemIter));
+						if (subComponentPtr != NULL){
+							const icomp::IComponent* sourceComponentPtr = subComponentPtr->GetSubcomponent(contextId);
+							bool isCompostite = (dynamic_cast<const icomp::ICompositeComponent*>(sourceComponentPtr) != NULL);
+							if (isCompostite && (sourceComponentPtr != NULL)){
+								contextId = *elemIter;
 
-							parentComponentPtr = parentCompositeComponentPtr;
-							break;
+								parentComponentPtr = parentCompositeComponentPtr;
+								break;
+							}
 						}
 					}
 				}
