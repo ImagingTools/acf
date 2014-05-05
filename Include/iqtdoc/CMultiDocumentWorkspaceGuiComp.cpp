@@ -434,6 +434,7 @@ bool CMultiDocumentWorkspaceGuiComp::QueryDocumentSave(const SingleDocumentData&
 	QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No;
 
 	if (ignoredPtr != NULL){
+		*ignoredPtr = false;
 		buttons |= QMessageBox::Cancel;
 	}
 
