@@ -304,7 +304,7 @@ void CMultiBitmapViewComp::ConnectModels()
 
 void CMultiBitmapViewComp::OnViewCreated(int /*index*/, CSingleView* viewPtr)
 {
-	viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr);
+	viewPtr->Init(*m_showStatusLabelAttrPtr, *m_showStatusBackgroundAttrPtr, *m_verticalViewLayoutAttrPtr);
 }
 
 
@@ -363,7 +363,7 @@ void CMultiBitmapViewComp::CSingleView::UpdateImage(const iimg::IBitmap* bitmapP
 }
 
 
-void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusLabel, bool hasStatusBackground)
+void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusLabel, bool hasStatusBackground, bool useVerticalLayout)
 {
 	m_showStatusLabel = hasStatusLabel;
 	m_showStatusBackground = hasStatusBackground;
@@ -374,7 +374,7 @@ void CMultiBitmapViewComp::CSingleView::Init(bool hasStatusLabel, bool hasStatus
 	}
 
 	// create default layout
-	QVBoxLayout* viewLayoutPtr = new QVBoxLayout;
+	QBoxLayout* viewLayoutPtr = useVerticalLayout ? (QBoxLayout*)new QVBoxLayout : (QBoxLayout*)new QHBoxLayout;
 	setLayout(viewLayoutPtr);
 
 	// add console

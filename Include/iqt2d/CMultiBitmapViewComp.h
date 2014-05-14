@@ -51,6 +51,7 @@ public:
 	I_BEGIN_COMPONENT(CMultiBitmapViewComp);
 		I_ASSIGN(m_horizontalViewsAttrPtr, "HorizontalViewsCount", "Number of horizontal views", false, 1);
 		I_ASSIGN(m_verticalViewsAttrPtr, "VerticalViewsCount", "Number of vertical views", false, 1);
+		I_ASSIGN(m_verticalViewLayoutAttrPtr, "UseVerticalLayout", "Layout of the single view", true, true);
 
 		I_ASSIGN_MULTI_0(m_viewExtendersCompPtr, "ViewExtenders", "View extenders", false);
 		
@@ -83,7 +84,7 @@ protected:
 		void SetBackgroundColor(const QColor& color);
 
 		// called once at initialization stage, at this moment the model should be connected already.
-		virtual void Init(bool hasStatusLabel, bool hasStatusBackground);
+		virtual void Init(bool hasStatusLabel, bool hasStatusBackground, bool useVerticalLayout);
 		virtual void SetInspectionResult(int result);
 
 		// reimplemented (iqt2d::IViewProvider)
@@ -130,6 +131,7 @@ protected:
 protected:
 	I_ATTR(int, m_horizontalViewsAttrPtr);
 	I_ATTR(int, m_verticalViewsAttrPtr);
+	I_ATTR(bool, m_verticalViewLayoutAttrPtr);
 
 	I_REF(istd::IInformationProvider, m_generalInformationProviderCompPtr);
 	I_REF(imod::IModel, m_generalInformationModelCompPtr);
