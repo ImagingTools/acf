@@ -169,6 +169,27 @@ void CMultiPageGuiCompBase::CreatePages()
 }
 
 
+void CMultiPageGuiCompBase::ResetPages()
+{
+	m_pageToGuiIndexMap.clear();
+
+	UnregisterAllModels();
+
+	int pagesCount = GetPagesCount();
+	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
+		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(pageIndex);
+		if (guiPtr != NULL){
+			guiPtr->DestroyGui();
+		}
+	}
+
+	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
+	Q_ASSERT(multiPageWidgetPtr != NULL);
+
+	multiPageWidgetPtr->ResetPages();
+}
+
+
 // reimplemented (iqtgui::CGuiComponentBase)
 
 QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
@@ -211,22 +232,7 @@ void CMultiPageGuiCompBase::OnGuiCreated()
 
 void CMultiPageGuiCompBase::OnGuiDestroyed()
 {
-	m_pageToGuiIndexMap.clear();
-
-	UnregisterAllModels();
-
-	int pagesCount = GetPagesCount();
-	for (int pageIndex = 0; pageIndex < pagesCount; pageIndex++){
-		iqtgui::IGuiObject* guiPtr = GetPageGuiComponent(pageIndex);
-		if (guiPtr != NULL){
-			guiPtr->DestroyGui();
-		}
-	}
-
-	iwidgets::CMultiPageWidget* multiPageWidgetPtr = dynamic_cast<iwidgets::CMultiPageWidget*>(GetWidget());
-	Q_ASSERT(multiPageWidgetPtr != NULL);
-
-	multiPageWidgetPtr->ResetPages();
+	ResetPages();
 
 	BaseClass::OnGuiDestroyed();
 }
