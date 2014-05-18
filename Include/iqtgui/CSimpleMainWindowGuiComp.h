@@ -15,6 +15,7 @@
 // ACF includes
 #include "imod/CMultiModelDispatcherBase.h"
 #include "ibase/ICommandsProvider.h"
+#include "iprm/IOptionsManager.h"
 #include "iqtgui/IMainWindowComponent.h"
 #include "iqtgui/IDialog.h"
 #include "iqtgui/TGuiComponentBase.h"
@@ -26,17 +27,13 @@ namespace iqtgui
 {
 
 
-class CSimpleMainWindowGuiComp:
-			public iqtgui::TRestorableGuiWrap<
-						iqtgui::TGuiComponentBase<QMainWindow> >
+// Base class as work-around of static variable limit in ACF macros
+class CSimpleMainWindowGuiCompBase: public iqtgui::TRestorableGuiWrap< iqtgui::TGuiComponentBase<QMainWindow> >
 {
-	Q_OBJECT
-
 public:
-	typedef iqtgui::TRestorableGuiWrap<
-					iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
+	typedef iqtgui::TRestorableGuiWrap< iqtgui::TGuiComponentBase<QMainWindow> > BaseClass;
 
-	I_BEGIN_COMPONENT(CSimpleMainWindowGuiComp);
+	I_BEGIN_BASE_COMPONENT(CSimpleMainWindowGuiCompBase);
 		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Main widget", true, "Workspace");
 		I_ASSIGN_TO(m_workspaceCommandsCompPtr, m_workspaceCompPtr, false);
 		I_ASSIGN(m_aboutDialogCompPtr, "AboutDialog", "Gui displayed if 'About' action is triggered", false, "AboutDialog");
@@ -51,6 +48,39 @@ public:
 		I_ASSIGN(m_toolBarDockFeaturesAttrPtr, "ToolBarDockFeatures", "Specify the dock features for the standard tool bar\nIt is combination of options:\n2 - moveable\n4 - floatable", true, IMainWindowComponent::WCF_MOVEABLE | IMainWindowComponent::WCF_FLOATABLE);
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of icons using in the main window", false, 16);
 		I_ASSIGN(m_useIconTextAttrPtr, "UseIconText", "Enable text under the tool bar icons", false, false);
+	I_END_COMPONENT;
+
+protected:
+	I_REF(iqtgui::IGuiObject, m_workspaceCompPtr);
+	I_REF(ibase::ICommandsProvider, m_workspaceCommandsCompPtr);
+	I_MULTIREF(ibase::ICommandsProvider, m_mainWindowCommandsCompPtr);
+	I_REF(iqtgui::IDialog, m_aboutDialogCompPtr);
+	I_REF(iqtgui::IDialog, m_settingsDialogCompPtr);
+	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsCompPtr);
+	I_ATTR(bool, m_isNestingEnabledAttrPtr);
+	I_ATTR(bool, m_isAllowTabbedDockAttrPtr);
+	I_ATTR(bool, m_isMenuVisibleAttrPtr);
+	I_ATTR(bool, m_isToolbarVisibleAttrPtr);
+	I_ATTR(int, m_toolBarAreaAttrPtr);
+	I_ATTR(int, m_toolBarDockFeaturesAttrPtr);
+	I_ATTR(int, m_iconSizeAttrPtr);
+	I_ATTR(bool, m_useIconTextAttrPtr);
+};
+
+
+class CSimpleMainWindowGuiComp: public CSimpleMainWindowGuiCompBase
+{
+	Q_OBJECT
+
+public:
+	typedef CSimpleMainWindowGuiCompBase BaseClass;
+
+	I_BEGIN_COMPONENT(CSimpleMainWindowGuiComp);
+		I_REGISTER_SUBELEMENT(VisibleWindowsManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, iprm::IOptionsManager, GetVisibleWindowsManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, iprm::IOptionsList, GetVisibleWindowsManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, imod::IModel, GetVisibleWindowsManager);
+		I_REGISTER_SUBELEMENT_INTERFACE(VisibleWindowsManager, istd::IChangeable, GetVisibleWindowsManager);
 	I_END_COMPONENT;
 
 	enum GroupId
@@ -106,7 +136,7 @@ protected Q_SLOTS:
 	void OnSettings();
 	void OnShowOtherCommandTriggered(bool enabled);
 
-private:
+protected:
 	class CommandsObserver: public imod::CMultiModelDispatcherBase
 	{
 	public:
@@ -121,29 +151,50 @@ private:
 		CSimpleMainWindowGuiComp& m_parent;
 	};
 
-protected:
 	CommandsObserver m_commandsObserver;
 
 	typedef QMap<iqtgui::IMainWindowComponent*, bool > MainComponentVisibilityMap;
 
 	MainComponentVisibilityMap m_mainComponentVisibilityMap;
 
-	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsCompPtr);
-
 private:
-	I_REF(iqtgui::IGuiObject, m_workspaceCompPtr);
-	I_REF(ibase::ICommandsProvider, m_workspaceCommandsCompPtr);
-	I_MULTIREF(ibase::ICommandsProvider, m_mainWindowCommandsCompPtr);
-	I_REF(iqtgui::IDialog, m_aboutDialogCompPtr);
-	I_REF(iqtgui::IDialog, m_settingsDialogCompPtr);
-	I_ATTR(bool, m_isNestingEnabledAttrPtr);
-	I_ATTR(bool, m_isAllowTabbedDockAttrPtr);
-	I_ATTR(bool, m_isMenuVisibleAttrPtr);
-	I_ATTR(bool, m_isToolbarVisibleAttrPtr);
-	I_ATTR(int, m_toolBarAreaAttrPtr);
-	I_ATTR(int, m_toolBarDockFeaturesAttrPtr);
-	I_ATTR(int, m_iconSizeAttrPtr);
-	I_ATTR(bool, m_useIconTextAttrPtr);
+	class VisibleWindowsManager: public iprm::IOptionsManager
+	{
+	public:
+		VisibleWindowsManager();
+
+		void SetParent(CSimpleMainWindowGuiComp* parentPtr);
+
+		// reimplemented (iprm::IOptionsManager)
+		virtual int GetOptionOperationFlags(int index = -1) const;
+		virtual bool SetOptionEnabled(int index, bool isEnabled = true);
+		virtual bool RemoveOption(int index);
+		virtual bool InsertOption(
+					const QString& optionName,
+					const QByteArray& optionId,
+					const QString& optionDescription = QString(),
+					int index = -1);
+		virtual bool SwapOptions(int index1, int index2);
+		virtual bool SetOptionName(int optionIndex, const QString& optionName);
+		virtual bool SetOptionDescription(int optionIndex, const QString& optionDescription);
+
+		// reimplemented (iprm::IOptionsList)
+		virtual int GetOptionsFlags() const;
+		virtual int GetOptionsCount() const;
+		virtual QString GetOptionName(int index) const;
+		virtual QString GetOptionDescription(int index) const;
+		virtual QByteArray GetOptionId(int index) const;
+		virtual bool IsOptionEnabled(int index) const;
+
+	private:
+		CSimpleMainWindowGuiComp* m_parentPtr;
+	};
+
+	template <class InterfaceType>
+	static InterfaceType* GetVisibleWindowsManager(CSimpleMainWindowGuiComp& parent)
+	{
+		return &parent.m_visibleWindowsManager;
+	}
 
 	istd::TDelPtr<QMenuBar> m_menuBarPtr;
 	istd::TDelPtr<QToolBar> m_standardToolBarPtr;
@@ -173,6 +224,8 @@ private:
 
 	QByteArray m_beforeFullScreenGeometry;
 	QByteArray m_beforeFullScreenState;
+
+	imod::TModelWrap<VisibleWindowsManager> m_visibleWindowsManager;
 };
 
 

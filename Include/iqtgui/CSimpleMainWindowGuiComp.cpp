@@ -31,18 +31,18 @@ CSimpleMainWindowGuiComp::CSimpleMainWindowGuiComp()
 #endif
 	m_settingsCommand("", 200, ibase::ICommand::CF_GLOBAL_MENU | ibase::ICommand::CF_TOOLBAR)
 {
-#if !defined(Q_OS_MAC)
-	m_fullScreenCommand.setShortcut(Qt::Key_F11);
-#endif
+	m_visibleWindowsManager.SetParent(this);
 
 	connect(&m_showToolBarsCommand, SIGNAL(triggered()), this, SLOT(OnShowToolbars()));
-#if !defined(Q_OS_MAC)
-	connect(&m_fullScreenCommand, SIGNAL(triggered()), this, SLOT(OnFullScreen()));
-#endif
 	connect(&m_settingsCommand, SIGNAL(triggered()), this, SLOT(OnSettings()));
 	connect(&m_aboutCommand, SIGNAL(triggered()), this, SLOT(OnAbout()));
 
 	m_showOtherWindows.SetGroupId(0x320);
+
+#if !defined(Q_OS_MAC)
+	m_fullScreenCommand.setShortcut(Qt::Key_F11);
+	connect(&m_fullScreenCommand, SIGNAL(triggered()), this, SLOT(OnFullScreen()));
+#endif
 }
 
 
@@ -654,6 +654,140 @@ CSimpleMainWindowGuiComp::CommandsObserver::CommandsObserver(CSimpleMainWindowGu
 void CSimpleMainWindowGuiComp::CommandsObserver::OnModelChanged(int /*modelId*/, int /*changeFlags*/, istd::IPolymorphic* /*updateParamsPtr*/)
 {
 	m_parent.UpdateMenuActions();
+}
+
+
+// protected methods of embedded class VisibleWindowsManager
+
+CSimpleMainWindowGuiComp::VisibleWindowsManager::VisibleWindowsManager()
+{
+	m_parentPtr = NULL;
+}
+
+void CSimpleMainWindowGuiComp::VisibleWindowsManager::SetParent(CSimpleMainWindowGuiComp* parentPtr)
+{
+	m_parentPtr = parentPtr;
+}
+
+// reimplemented (iprm::IOptionsManager)
+
+int CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionOperationFlags(int /*index*/) const
+{
+	return OOF_COUNT_FIXED | OOF_DISABLE_ALLOWED | OOF_SUPPORT_ENABLING;
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::SetOptionEnabled(int index, bool isEnabled)
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	ibase::ICommand* commandPtr = m_parentPtr->m_showOtherWindows.GetChild(index);
+	if (commandPtr != NULL){
+		return commandPtr->SetEnabled(isEnabled);
+	}
+
+	return false;
+}
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::RemoveOption(int /*index*/)
+{
+	return false;
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::InsertOption(
+			const QString& /*optionName*/,
+			const QByteArray& /*optionId*/,
+			const QString& /*optionDescription*/,
+			int /*index*/)
+{
+	return false;
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::SwapOptions(int /*index1*/, int /*index2*/)
+{
+	return false;
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::SetOptionName(int /*optionIndex*/, const QString& /*optionName*/)
+{
+	return false;
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::SetOptionDescription(int /*optionIndex*/, const QString& /*optionDescription*/)
+{
+	return false;
+}
+
+
+// reimplemented (iprm::IOptionsList)
+
+int CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionsFlags() const
+{
+	return SFC_DISABLE_ALLOWED;
+}
+
+
+int CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionsCount() const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	return m_parentPtr->m_showOtherWindows.GetChildsCount();
+}
+
+
+QString CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionName(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	const ibase::ICommand* commandPtr = m_parentPtr->m_showOtherWindows.GetChild(index);
+	if (commandPtr != NULL){
+		return commandPtr->GetName();
+	}
+
+	return "";
+}
+
+
+QString CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionDescription(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	const QAction* actionPtr = dynamic_cast<const QAction*>(m_parentPtr->m_showOtherWindows.GetChild(index));
+	if (actionPtr != NULL){
+		return actionPtr->statusTip();
+	}
+
+	return "";
+}
+
+
+QByteArray CSimpleMainWindowGuiComp::VisibleWindowsManager::GetOptionId(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	const ibase::ICommand* commandPtr = m_parentPtr->m_showOtherWindows.GetChild(index);
+	if (commandPtr != NULL){
+		return commandPtr->GetName().toAscii();
+	}
+
+	return "";
+}
+
+
+bool CSimpleMainWindowGuiComp::VisibleWindowsManager::IsOptionEnabled(int index) const
+{
+	Q_ASSERT(m_parentPtr != NULL);
+
+	const ibase::ICommand* commandPtr = m_parentPtr->m_showOtherWindows.GetChild(index);
+	if (commandPtr != NULL){
+		return commandPtr->IsEnabled();
+	}
+
+	return false;
 }
 
 

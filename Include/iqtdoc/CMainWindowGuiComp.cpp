@@ -341,23 +341,23 @@ void CMainWindowGuiComp::UpdateUndoMenu()
 void CMainWindowGuiComp::UpdateMainWindowComponentsVisibility()
 {
 	if (m_documentManagerCompPtr.IsValid() && (m_activeDocumentPtr != NULL)){
+		QByteArray activeDocumentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
+
 		for (int i = 0; i < m_mainWindowComponentsCompPtr.GetCount(); ++i){
 			iqtgui::IMainWindowComponent* mainWindowComponentPtr = m_mainWindowComponentsCompPtr[i];
 			if (mainWindowComponentPtr != NULL){
-				QByteArray activeDocumentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
-
-				iqtgui::IGuiObject* guiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-				if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
+				iqtgui::IGuiObject* componentGuiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
+				if ((componentGuiPtr != NULL) && componentGuiPtr->IsGuiCreated()){
 					QByteArray associatedTypeId = mainWindowComponentPtr->GetAssociatedDocumentTypeId();
 
-					bool hideComponent = !associatedTypeId.isEmpty() && (associatedTypeId != activeDocumentTypeId);
-					if (!hideComponent){
-						hideComponent = !m_mainComponentVisibilityMap[mainWindowComponentPtr];
-					}
+					bool isComponentVisible =
+								(associatedTypeId.isEmpty() || (associatedTypeId == activeDocumentTypeId)) &&
+								m_mainComponentVisibilityMap[mainWindowComponentPtr];
 
-					Q_ASSERT(guiPtr->GetWidget() != NULL);
+					QWidget* componentWidgetPtr = componentGuiPtr->GetWidget();
+					Q_ASSERT(componentWidgetPtr != NULL);
 
-					guiPtr->GetWidget()->setHidden(hideComponent);
+					componentWidgetPtr->setVisible(isComponentVisible);
 				}
 			}
 		}
