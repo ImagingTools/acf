@@ -241,10 +241,10 @@ QString CMultiBitmapViewComp::GetTitleByIndex(int viewIndex) const
 {
 	if (m_viewLabelPrefixesAttrPtr.IsValid()){
 		if (m_viewLabelPrefixesAttrPtr.GetCount() == 1){
-			return QString("%1 %2").arg(m_viewLabelPrefixesAttrPtr[0]).arg(viewIndex + 1);
+			return m_viewLabelPrefixesAttrPtr[0].arg(viewIndex + 1);
 		}
 		else if (viewIndex < m_viewLabelPrefixesAttrPtr.GetCount()){
-			return m_viewLabelPrefixesAttrPtr[viewIndex];
+			return m_viewLabelPrefixesAttrPtr[viewIndex].arg(viewIndex + 1);
 		}
 	}
 
