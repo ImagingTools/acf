@@ -41,6 +41,18 @@ public:
 	typedef imod::TSingleModelObserverBase<idoc::IDocumentManager> BaseClass2;
 
 	I_BEGIN_COMPONENT(CMainWindowGuiComp);
+		I_REGISTER_SUBELEMENT(FileCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, ibase::IHierarchicalCommand, GetFileCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, ibase::ICommand, GetFileCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, iprm::INameParam, GetFileCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, iprm::IEnableableParam, GetFileCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, istd::IChangeable, GetFileCommands);
+		I_REGISTER_SUBELEMENT(EditCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, ibase::IHierarchicalCommand, GetEditCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, ibase::ICommand, GetEditCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, iprm::INameParam, GetEditCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, iprm::IEnableableParam, GetEditCommands);
+		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, istd::IChangeable, GetEditCommands);
 		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
 		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
 		I_ASSIGN_TO(m_documentManagerModelCompPtr, m_documentManagerCompPtr, true);
@@ -185,6 +197,18 @@ private:
 	private:
 		CMainWindowGuiComp& m_parent;
 	};
+
+	template <class InterfaceType>
+	static InterfaceType* GetFileCommands(CMainWindowGuiComp& parent)
+	{
+		return &parent.m_fileCommand;
+	}
+
+	template <class InterfaceType>
+	static InterfaceType* GetEditCommands(CMainWindowGuiComp& parent)
+	{
+		return &parent.m_editCommand;
+	}
 
 	ActiveUndoManager m_activeUndoManager;
 

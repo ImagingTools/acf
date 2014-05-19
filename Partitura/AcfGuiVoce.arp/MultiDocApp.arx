@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3265
+          3479
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1070
+          1137
         </Number>
         <Description>
           ACF-Solutions
@@ -1350,13 +1350,29 @@
       </ComponentId>
     </Interface>
   </ExportedInterfaces>
-  <ExportedComponents count="4">
+  <ExportedComponents count="7">
     <Component>
       <ExportedId>
         DocumentSelection
       </ExportedId>
       <ComponentId>
         Workspace/DocumentSelection
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        EditCommands
+      </ExportedId>
+      <ComponentId>
+        MainGui/EditCommands
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        FileCommands
+      </ExportedId>
+      <ComponentId>
+        MainGui/FileCommands
       </ComponentId>
     </Component>
     <Component>
@@ -1373,6 +1389,14 @@
       </ExportedId>
       <ComponentId>
         SettingsProvider
+      </ComponentId>
+    </Component>
+    <Component>
+      <ExportedId>
+        VisibleWindowsManager
+      </ExportedId>
+      <ComponentId>
+        MainGui/VisibleWindowsManager
       </ComponentId>
     </Component>
     <Component>

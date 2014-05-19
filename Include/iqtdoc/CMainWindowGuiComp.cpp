@@ -51,6 +51,9 @@ CMainWindowGuiComp::CMainWindowGuiComp()
 	m_undoCommand.setShortcut(Qt::CTRL + Qt::Key_Z);
 	m_redoCommand.setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_Z);
 
+	m_undoCommand.setVisible(false);
+	m_redoCommand.setVisible(false);
+
 	connect(&m_newCommand, SIGNAL(triggered()), this, SLOT(OnNew()));
 	connect(&m_openCommand, SIGNAL(triggered()), this, SLOT(OnOpen()));
 	connect(&m_saveCommand, SIGNAL(triggered()), this, SLOT(OnSave()));
