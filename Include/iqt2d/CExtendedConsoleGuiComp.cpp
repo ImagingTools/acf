@@ -20,10 +20,14 @@ void CExtendedConsoleGuiComp::OnGuiCreated()
 	if (m_toolBarCompPtr.IsValid()){
 		m_toolBarCompPtr->CreateGui(CommandsFrame);
 	}
+	else
+		CommandsFrame->hide();
 
 	if (m_statusInfoGuiCompPtr.IsValid()){
 		m_statusInfoGuiCompPtr->CreateGui(InfoFrame);
 	}
+	else
+		InfoFrame->hide();
 }
 
 

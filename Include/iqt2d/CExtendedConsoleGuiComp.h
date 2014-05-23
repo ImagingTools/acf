@@ -21,8 +21,8 @@ public:
 	
 	I_BEGIN_COMPONENT(CExtendedConsoleGuiComp);
 		I_ASSIGN(m_viewProviderGuiCompPtr, "ViewProvider", "Provider of the 2D-View", true, "ViewProvider");
-		I_ASSIGN(m_toolBarCompPtr, "ToolBar", "Tool bar showing the commands of the view provider", true, "ToolBar");
-		I_ASSIGN(m_statusInfoGuiCompPtr, "StatusInfoGui", "UI for status information of the 2D-console", true, "StatusInfoGui");
+		I_ASSIGN(m_toolBarCompPtr, "ToolBar", "Tool bar showing the commands of the view provider", false, "ToolBar");
+		I_ASSIGN(m_statusInfoGuiCompPtr, "StatusInfoGui", "UI for status information of the 2D-console", false, "StatusInfoGui");
 	I_END_COMPONENT;
 
 protected:
