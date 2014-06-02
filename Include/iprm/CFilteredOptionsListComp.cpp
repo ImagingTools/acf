@@ -9,7 +9,7 @@ namespace iprm
 
 int CFilteredOptionsListComp::GetOptionsFlags() const
 {
-	if (!m_inputOptionsCompPtr.IsValid()){
+	if (m_inputOptionsCompPtr.IsValid()){
 		return m_inputOptionsCompPtr->GetOptionsFlags();
 	}
 
