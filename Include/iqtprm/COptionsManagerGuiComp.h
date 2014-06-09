@@ -105,6 +105,8 @@ private:
 	*/
 	bool m_isEditingFlag;
 	istd::TDelPtr<QLabel> m_selectorLabelPtr;
+
+	bool m_isUpdateBlocked;
 };
 
 
