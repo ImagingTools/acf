@@ -33,8 +33,6 @@
 #include "iqt2d/CArcParamsGuiComp.h"
 
 
-
-
 /**
 	Qt scene visualization package.
 */

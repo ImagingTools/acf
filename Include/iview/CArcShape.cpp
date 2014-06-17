@@ -126,7 +126,7 @@ bool CArcShape::OnMouseButton(istd::CIndex2d position, Qt::MouseButton buttonTyp
 
 				return true;
 			}
-			else if (tickerBox.IsInside(position - endTicker.ToIndex2d())) {
+			else if (tickerBox.IsInside(position - endTicker.ToIndex2d())){
 				m_editMode = EM_ANGLEWIDTH;
 
 				BeginTickerDrag();

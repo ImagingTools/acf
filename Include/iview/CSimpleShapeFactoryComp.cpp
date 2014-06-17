@@ -136,7 +136,7 @@ CInteractiveShapeBase* CSimpleShapeFactoryComp::CreateShapeInstance(const i2d::I
 	}
 
 	const i2d::CArc* arcPtr = dynamic_cast<const i2d::CArc*>(&object);
-	if (arcPtr != NULL) {
+	if (arcPtr != NULL){
 		iview::CArcShape* objectShapePtr = new iview::CArcShape();
 
 		return objectShapePtr;

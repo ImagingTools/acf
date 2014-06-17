@@ -390,6 +390,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\GeneratedFiles\iqt2d\moc_CArcParamsGuiComp.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\GeneratedFiles\iqt2d\moc_CCircleParamsGuiComp.cpp"
 				>
 			</File>
@@ -435,6 +439,10 @@
 			</File>
 			<File
 				RelativePath="..\..\GeneratedFiles\iqt2d\ui_CAnnulusSegmentParamsGuiComp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\GeneratedFiles\iqt2d\ui_CArcParamsGuiComp.h"
 				>
 			</File>
 			<File

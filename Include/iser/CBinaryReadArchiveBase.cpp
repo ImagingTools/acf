@@ -148,7 +148,7 @@ bool CBinaryReadArchiveBase::Process(QByteArray& value)
 		return false;
 	}
 
-	if (stringLength > 0) {
+	if (stringLength > 0){
 		if (stringLength > GetMaxStringLength()){
 			if (IsLogConsumed()){
 				SendLogMessage(
@@ -189,7 +189,7 @@ bool CBinaryReadArchiveBase::Process(QString& value)
 		return false;
 	}
 
-	if (stringLength > 0) {
+	if (stringLength > 0){
 		if (stringLength > GetMaxStringLength()){
 			if (IsLogConsumed()){
 				SendLogMessage(

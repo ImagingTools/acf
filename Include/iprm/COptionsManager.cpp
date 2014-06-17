@@ -165,11 +165,11 @@ int COptionsManager::GetOptionOperationFlags(int index) const
 	int retVal = OOF_SUPPORT_INSERT;
 
 	int fixedOptionsCount = 0;
-	if (m_slaveSelectionConstraintsPtr != NULL) {
+	if (m_slaveSelectionConstraintsPtr != NULL){
 		fixedOptionsCount = m_slaveSelectionConstraintsPtr->GetOptionsCount();
 	}
 
-	if (index >= fixedOptionsCount) {
+	if (index >= fixedOptionsCount){
 		retVal = retVal | OOF_SUPPORT_DELETE | OOF_SUPPORT_RENAME;
 	}
 	return retVal;
