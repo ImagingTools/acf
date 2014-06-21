@@ -13,7 +13,7 @@ namespace istd
 	Help wrapper class supporting of cached parts.
 */
 template <class Base>
-class TCachedUpdateManagerWrap: public Base
+class TCachedUpdateManagerWrap: virtual public Base
 {
 public:
 	typedef Base BaseClass;
