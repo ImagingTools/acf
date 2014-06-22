@@ -299,8 +299,8 @@ Module{
 					var correctedPathsMap = {};
 					for (i in includePaths){
 						var includePath = includePaths[i];
-						if (		FileInfo.isSubpath(product.buildDirectory, includePath) ||
-									(projectRoot !== undefined && FileInfo.isSubpath(projectRoot, includePath))){
+                        if (		AcfService.isSubpath(product.buildDirectory, includePath) ||
+                                    (projectRoot !== undefined && AcfService.isSubpath(projectRoot, includePath))){
 							correctedPathsMap[FileInfo.relativePath(outputDir, includePath)] = true;
 						}
 					}
