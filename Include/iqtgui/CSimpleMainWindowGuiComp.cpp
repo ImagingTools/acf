@@ -280,12 +280,6 @@ void CSimpleMainWindowGuiComp::UpdateToolsCommands(iqtgui::CHierarchicalCommand&
 	if (m_settingsDialogCompPtr.IsValid()){
 		m_settingsCommand.SetGroupId(GI_SETTINGS);
 		toolsCommand.InsertChild(&m_settingsCommand, false);
-
-		imod::IModel* settingsDialogCommandModelPtr = CompCastPtr<imod::IModel>(m_settingsDialogCompPtr.GetPtr());
-		if (settingsDialogCommandModelPtr != NULL){
-			static istd::IChangeable::ChangeSet commandsChangeSet(ibase::ICommandsProvider::CF_COMMANDS);
-			m_commandsObserver.RegisterModel(settingsDialogCommandModelPtr, MI_PREFERENCE_COMMAND, commandsChangeSet);
-		}
 	}
 }
 
@@ -433,21 +427,15 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 
 	SetupMainWindowComponents(*mainWindowPtr);
 
-	if (m_workspaceCommandsCompPtr.IsValid()){
-		imod::IModel* modelPtr = CompCastPtr<imod::IModel>(m_workspaceCommandsCompPtr.GetPtr());
-		if (modelPtr != NULL){
-			m_commandsObserver.RegisterModel(modelPtr, 0, commandsChangeSet);
-		}
+	if (m_workspaceCommandsModelCompPtr.IsValid()){
+		m_commandsObserver.RegisterModel(m_workspaceCommandsModelCompPtr.GetPtr(), 0, commandsChangeSet);
 	}
 
-	if (m_mainWindowCommandsCompPtr.IsValid()){
-		int commandsProviderCount = m_mainWindowCommandsCompPtr.GetCount();
-
-		for (int index = 0; index < commandsProviderCount; index++){
-			imod::IModel* modelPtr = CompCastPtr<imod::IModel>(m_mainWindowCommandsCompPtr[index]);
-			if (modelPtr != NULL){
-				m_commandsObserver.RegisterModel(modelPtr, index + 1, commandsChangeSet);
-			}
+	int commandsProviderCount = m_mainWindowCommandsModelCompPtr.GetCount();
+	for (int index = 0; index < commandsProviderCount; index++){
+		imod::IModel* modelPtr = m_mainWindowCommandsModelCompPtr[index];
+		if (modelPtr != NULL){
+			m_commandsObserver.RegisterModel(modelPtr, index + 1, commandsChangeSet);
 		}
 	}
 }

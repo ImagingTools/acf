@@ -36,10 +36,12 @@ public:
 	I_BEGIN_BASE_COMPONENT(CSimpleMainWindowGuiCompBase);
 		I_ASSIGN(m_workspaceCompPtr, "Workspace", "Main widget", true, "Workspace");
 		I_ASSIGN_TO(m_workspaceCommandsCompPtr, m_workspaceCompPtr, false);
+		I_ASSIGN_TO(m_workspaceCommandsModelCompPtr, m_workspaceCompPtr, false);
 		I_ASSIGN(m_aboutDialogCompPtr, "AboutDialog", "Gui displayed if 'About' action is triggered", false, "AboutDialog");
 		I_ASSIGN(m_settingsDialogCompPtr, "SettingsDialog", "Dialog window displayed if 'Settings' action is triggered", false, "SettingsDialog");
 		I_ASSIGN_MULTI_0(m_mainWindowComponentsCompPtr, "MainWindowComponents", "Additional GUI components", false);
 		I_ASSIGN_TO(m_mainWindowCommandsCompPtr, m_mainWindowComponentsCompPtr, false);
+		I_ASSIGN_TO(m_mainWindowCommandsModelCompPtr, m_mainWindowComponentsCompPtr, false);
 		I_ASSIGN(m_isNestingEnabledAttrPtr, "IsNestingEnabled", "If true, docking nesting is enabled,\nmore than one docking widget is allowed on the same size", true, false);
 		I_ASSIGN(m_isAllowTabbedDockAttrPtr, "IsTabbedDockAllowed", "If true, stacking docking windows on each other is enabled", true, false);
 		I_ASSIGN(m_isMenuVisibleAttrPtr, "IsMenuVisible", "If true, menu bar will be visible", true, true);
@@ -53,7 +55,9 @@ public:
 protected:
 	I_REF(iqtgui::IGuiObject, m_workspaceCompPtr);
 	I_REF(ibase::ICommandsProvider, m_workspaceCommandsCompPtr);
+	I_REF(imod::IModel, m_workspaceCommandsModelCompPtr);
 	I_MULTIREF(ibase::ICommandsProvider, m_mainWindowCommandsCompPtr);
+	I_MULTIREF(imod::IModel, m_mainWindowCommandsModelCompPtr);
 	I_REF(iqtgui::IDialog, m_aboutDialogCompPtr);
 	I_REF(iqtgui::IDialog, m_settingsDialogCompPtr);
 	I_MULTIREF(iqtgui::IMainWindowComponent, m_mainWindowComponentsCompPtr);
