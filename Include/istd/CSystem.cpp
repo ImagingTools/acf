@@ -273,7 +273,11 @@ bool CSystem::FileCopy(const QString& source, const QString& result, bool overWr
 	{
 		if (overWrite)
 		{
-			QFile::remove(resultFile.absoluteFilePath());
+			if (!QFile::remove(resultFile.absoluteFilePath())){
+				qDebug(qPrintable(QString("File '%1' could not be overwritten").arg(resultFile.absoluteFilePath())));
+
+				return false;
+			}
 		}
 		else
 		{
