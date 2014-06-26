@@ -16,7 +16,7 @@
 		PrecompiledHeaderFile="$(IntDir)/$(ProjectName).pch"
 		ProgramDataBaseFileName="$(IntDir)\$(ProjectName).pdb"
 		WarningLevel="4"
-		DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702"
+		DisableSpecificWarnings="4250;4355;4505;4510;4511;4512;4127;4702;4481"
 	/>
 	<Tool
 		Name="VCManifestTool"
