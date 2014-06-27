@@ -13,8 +13,8 @@ namespace ifile
 // public methods
 
 CFileSystemInfoProviderComp::CFileSystemInfoProviderComp()
-:   m_sleepInterval(0),
-    m_threadTerminationRequested(false)
+:	m_sleepInterval(0),
+	m_threadTerminationRequested(false)
 {
 	qRegisterMetaType<DriveInfos>("DriveInfos");
 }
