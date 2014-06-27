@@ -51,12 +51,21 @@ protected:
 		Called before each change.
 		\return	true, if some notification was done.
 	*/
-	virtual bool NotifyBeforeChange(const istd::IChangeable::ChangeSet& changeSet, bool isGroup);
+	void NotifyBeforeChange(const istd::IChangeable::ChangeSet& changeSet, bool isGroup);
 	/**
 		Called after each change.
 		\return	true, if end notification was done.
 	*/
-	virtual bool NotifyAfterChange();
+	void NotifyAfterChange();
+
+	/**
+		Called before global changes will be started.
+	*/
+	virtual void OnBeginGlobalChanges() = 0;
+	/**
+		Called after global changes are finished.
+	*/
+	virtual void OnEndGlobalChanges(const istd::IChangeable::ChangeSet& changeSet) = 0;
 
 private:
 	CModelBase(const CModelBase& modelBase);
@@ -102,7 +111,8 @@ private:
 	typedef QMap<IObserver*, ObserverInfo> ObserversMap;
 	ObserversMap m_observers;
 
-	int m_changesCounter;
+	int m_blockCounter;
+	bool m_isDuringChanges;
 	istd::IChangeable::ChangeSet m_cumulatedChangeIds;
 };
 

@@ -10,7 +10,8 @@ namespace imod
 
 
 CModelBase::CModelBase()
-:	m_changesCounter(0)
+:	m_blockCounter(0),
+	m_isDuringChanges(false)
 {
 }
 
@@ -51,7 +52,7 @@ bool CModelBase::AttachObserver(IObserver* observerPtr)
 		info.state = AS_ATTACHED;
 
 		// If the model already sent a notification about the begin of the transaction, do it also for the newly connected observer:
-		if ((m_changesCounter > 0) && m_cumulatedChangeIds.ContainsAny(info.mask)){
+		if (m_isDuringChanges && m_cumulatedChangeIds.ContainsAny(info.mask)){
 			observerPtr->BeforeUpdate(this);
 
 			info.state = AS_ATTACHED_UPDATING;
@@ -93,7 +94,7 @@ void CModelBase::DetachObserver(IObserver* observerPtr)
 		
 		info.state = AS_DETACHED;
 
-		if (m_changesCounter <= 0){
+		if (m_cumulatedChangeIds.IsEmpty()){
 			m_observers.erase(findIter);
 		}
 
@@ -123,7 +124,7 @@ void CModelBase::DetachAllObservers()
 		}
 	}
 
-	if (m_changesCounter <= 0){
+	if (m_cumulatedChangeIds.IsEmpty()){
 		m_observers.clear();
 	}
 }
@@ -143,44 +144,59 @@ bool CModelBase::IsAttached(const IObserver* observerPtr) const
 
 // protected methods
 
-bool CModelBase::NotifyBeforeChange(const istd::IChangeable::ChangeSet& changeSet, bool isGroup)
+void CModelBase::NotifyBeforeChange(const istd::IChangeable::ChangeSet& changeSet, bool isGroup)
 {
-	bool retVal = m_cumulatedChangeIds.IsEmpty() && !changeSet.IsEmpty();
+	Q_ASSERT(m_blockCounter >= 0);
+	Q_ASSERT((m_blockCounter > 0) || m_cumulatedChangeIds.IsEmpty());
+	Q_ASSERT((m_blockCounter > 0) || !m_isDuringChanges);
 
-	m_changesCounter++;
-	m_cumulatedChangeIds += changeSet;
+	m_blockCounter++;
 
 	if (changeSet.IsEmpty()){
-		return false;
+		return;
 	}
 
-	if (!isGroup){
-		for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
-			ObserverInfo& info = iter.value();
+	m_cumulatedChangeIds += changeSet;
 
-			if ((info.state == AS_ATTACHED) && m_cumulatedChangeIds.ContainsAny(info.mask)){
-				info.state = AS_ATTACHED_UPDATING;
+	if (isGroup){
+		return;
+	}
 
-				IObserver* observerPtr = iter.key();
+	bool isFirstChange = !m_isDuringChanges;
+	m_isDuringChanges = true;
 
-				observerPtr->BeforeUpdate(this);
+	for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
+		ObserverInfo& info = iter.value();
 
-				retVal = true;
-			}
+		if ((info.state == AS_ATTACHED) && m_cumulatedChangeIds.ContainsAny(info.mask)){
+			info.state = AS_ATTACHED_UPDATING;
+
+			IObserver* observerPtr = iter.key();
+
+			observerPtr->BeforeUpdate(this);
 		}
 	}
 
-	return retVal;
+	if (isFirstChange){
+		OnBeginGlobalChanges();
+	}
 }
 
 
-bool CModelBase::NotifyAfterChange()
+void CModelBase::NotifyAfterChange()
 {
-	Q_ASSERT(m_changesCounter > 0);
+	Q_ASSERT(m_blockCounter > 0);
 
-	bool retVal = false;
+	// check if we are at end of outer change block
+	if (--m_blockCounter > 0){
+		return;	// no, it is not outer change block, nothing to do
+	}
 
-	if (--m_changesCounter <= 0){
+	if (m_isDuringChanges){	// if there were some global changes...
+		m_isDuringChanges = false;
+
+		OnEndGlobalChanges(m_cumulatedChangeIds);
+
 		for (ObserversMap::Iterator iter = m_observers.begin(); iter != m_observers.end(); ++iter){
 			ObserverInfo& info = iter.value();
 
@@ -190,17 +206,13 @@ bool CModelBase::NotifyAfterChange()
 				info.state = AS_ATTACHED;
 
 				observerPtr->AfterUpdate(this, m_cumulatedChangeIds);
-
-				retVal = true;
 			}
 		}
-
-		m_cumulatedChangeIds.Reset();
-		
-		CleanupObserverState();
 	}
 
-	return retVal;
+	m_cumulatedChangeIds.Reset();	// we leave the outer block with clean state
+
+	CleanupObserverState();
 }
 
 

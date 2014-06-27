@@ -36,6 +36,11 @@ public:
 	virtual void EndChanges(const istd::IChangeable::ChangeSet& changeSet);
 	virtual void BeginChangeGroup(const istd::IChangeable::ChangeSet& changeSet);
 	virtual void EndChangeGroup(const istd::IChangeable::ChangeSet& changeSet);
+
+protected:
+	// reimplemented (imod::CModelBase)
+	virtual void OnBeginGlobalChanges();
+	virtual void OnEndGlobalChanges(const istd::IChangeable::ChangeSet& changeSet);
 };
 
 
@@ -75,18 +80,14 @@ istd::IChangeable* TModelWrap<Base>::CloneMe(istd::IChangeable::CompatibilityMod
 template <class Base>
 void TModelWrap<Base>::BeginChanges(const istd::IChangeable::ChangeSet& changeSet)
 {
-	if (BaseClass2::NotifyBeforeChange(changeSet, false)){
-		BaseClass::BeginChanges(BaseClass2::GetCumulatedChanges());
-	}
+	BaseClass2::NotifyBeforeChange(changeSet, false);
 }
 
 
 template <class Base>
 void TModelWrap<Base>::EndChanges(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	if (BaseClass2::NotifyAfterChange()){
-		BaseClass::EndChanges(BaseClass2::GetCumulatedChanges());
-	}
+	BaseClass2::NotifyAfterChange();
 }
 
 
@@ -100,9 +101,25 @@ void TModelWrap<Base>::BeginChangeGroup(const istd::IChangeable::ChangeSet& chan
 template <class Base>
 void TModelWrap<Base>::EndChangeGroup(const istd::IChangeable::ChangeSet& /*changeSet*/)
 {
-	if (BaseClass2::NotifyAfterChange()){
-		BaseClass::OnEndChanges(BaseClass2::GetCumulatedChanges());
-	}
+	BaseClass2::NotifyAfterChange();
+}
+
+
+// protected methods
+
+// reimplemented (imod::CModelBase)
+
+template <class Base>
+void TModelWrap<Base>::OnBeginGlobalChanges()
+{
+	BaseClass::OnBeginChanges();
+}
+
+
+template <class Base>
+void TModelWrap<Base>::OnEndGlobalChanges(const istd::IChangeable::ChangeSet& changeSet)
+{
+	BaseClass::OnEndChanges(changeSet);
 }
 
 
