@@ -301,7 +301,7 @@ Module{
 						var includePath = includePaths[i];
                         if (		AcfService.isSubpath(product.buildDirectory, includePath) ||
                                     (projectRoot !== undefined && AcfService.isSubpath(projectRoot, includePath))){
-							correctedPathsMap[FileInfo.relativePath(outputDir, includePath)] = true;
+							correctedPathsMap[AcfService.relativePath(outputDir, includePath)] = true;
 						}
 					}
 
@@ -369,17 +369,17 @@ Module{
 
 				for (var inputIndex in inputs.xpc_file){
 					var inputProduct = inputs.xpc_file[inputIndex];
-					configsList.push(FileInfo.relativePath(outputDir, inputProduct.filePath));
+					configsList.push(AcfService.relativePath(outputDir, inputProduct.filePath));
 				}
 
 				for (var dependencyIndex in dependencies){
 					var dependency = dependencies[dependencyIndex];
 					var dependencyFilePath = product.moduleProperty(dependency.name, "xpcFilePath");
 					if (dependencyFilePath != null){
-						configsList.push(FileInfo.relativePath(outputDir, dependencyFilePath));
+						configsList.push(AcfService.relativePath(outputDir, dependencyFilePath));
 					}
 					else if (dependency.type.contains("xpc")){
-						configsList.push(FileInfo.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".xpc"));
+						configsList.push(AcfService.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".xpc"));
 					}
 				}
 
@@ -396,7 +396,7 @@ Module{
 
 				for (var inputIndex in inputs.acfComponent) {
 					var inputProduct = inputs.acfComponent[inputIndex];
-					packagesList.push(FileInfo.relativePath(outputDir, inputProduct.filePath));
+					packagesList.push(AcfService.relativePath(outputDir, inputProduct.filePath));
 				}
 
 				for (var dependencyIndex in dependencies) {
@@ -404,10 +404,10 @@ Module{
 					if (dependency.type.contains("acfComponent")){
 						var dependencyFilePath = product.moduleProperty(dependency.name, "componentFilePath");
 						if (dependencyFilePath != null){
-							packagesList.push(FileInfo.relativePath(outputDir, dependencyFilePath));
+							packagesList.push(AcfService.relativePath(outputDir, dependencyFilePath));
 						}
 						else{
-							packagesList.push(FileInfo.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".arp"));
+							packagesList.push(AcfService.relativePath(product.destinationDirectory, dependency.destinationDirectory + "/" + dependency.name + ".arp"));
 						}
 					}
 				}
