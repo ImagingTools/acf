@@ -1,5 +1,5 @@
 import qbs.base 1.0
-import "AcfService.js" as AcfService
+import "../modules/acf/AcfService.js" as AcfService
 
 // Standard settings for an ACF application
 
