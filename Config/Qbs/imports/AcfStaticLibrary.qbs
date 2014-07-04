@@ -1,4 +1,6 @@
 import qbs.base 1.0
+import "AcfService.js" as AcfService
+
 // Standard settings for an ACF static library
 
 StaticLibrary{
@@ -28,13 +30,13 @@ StaticLibrary{
 		condition: acf.installIncludes == true
 		fileTagsFilter: ["hpp"]
 		qbs.install: true
-		qbs.installDir: "Include/GeneratedFiles/" + product.name
+		qbs.installDir: AcfService.getTargetPath(product, project, "Include/GeneratedFiles/" + product.name)
 	}
 
 	Group{
-		condition: (acf.installProject === undefined || acf.installProject == project.projectName) && (acf.targetLibSubdir !== undefined)
+		condition: (acf.targetLibSubdir !== undefined)
 		fileTagsFilter: ["staticlibrary"]
 		qbs.install: true
-		qbs.installDir: acf.targetLibSubdir
+		qbs.installDir: AcfService.getTargetPath(product, project, acf.targetLibSubdir)
 	}
 }

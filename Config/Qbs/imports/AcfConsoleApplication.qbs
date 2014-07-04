@@ -1,4 +1,6 @@
-	import qbs.base 1.0
+import qbs.base 1.0
+import "AcfService.js" as AcfService
+
 // Standard settings for an ACF application
 
 CppApplication{
@@ -17,9 +19,8 @@ CppApplication{
 	cpp.defines: ['I_QBS']
 
 	Group{
-		condition: acf.installProject === undefined || acf.installProject == project.projectName
 		fileTagsFilter: ["application"]
 		qbs.install: true
-		qbs.installDir: acf.targetBinSubdir
+		qbs.installDir: AcfService.getTargetPath(product, project, acf.targetBinSubdir)
 	}
 }

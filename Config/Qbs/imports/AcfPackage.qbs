@@ -1,4 +1,6 @@
 import qbs.base 1.0
+import "AcfService.js" as AcfService
+
 // Standard settings for an ACF package project
 
 DynamicLibrary{
@@ -29,9 +31,9 @@ DynamicLibrary{
 	}
 
 	Group{
-		condition: (acf.installProject === undefined || acf.installProject == project.projectName) && (acf.targetPckSubdir !== undefined)
+		condition: (acf.targetPckSubdir !== undefined)
 		fileTagsFilter: ["dynamiclibrary"]
 		qbs.install: true
-		qbs.installDir: acf.targetPckSubdir
+		qbs.installDir: AcfService.getTargetPath(product, project, acf.targetPckSubdir)
 	}
 }

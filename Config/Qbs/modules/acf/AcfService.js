@@ -9,6 +9,17 @@ function getGeneratedPath(product)
     }
 }
 
+function getTargetPath(product, project, subDir)
+{
+    var useSubdir = product.moduleProperty("acf", "installProjectSubdirs");
+    if (useSubdir && project.projectSubDir !== undefined) {
+        return project.projectSubDir + "/" + subDir;
+    }
+    else {
+        return subDir;
+    }
+}
+
 function isSubpath(base, rel)
 {
     var basel = base.split('/');
