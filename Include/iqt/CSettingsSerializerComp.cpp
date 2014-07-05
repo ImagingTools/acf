@@ -2,6 +2,7 @@
 
 
 // ACF includes
+#include "istd/CSystem.h"
 #include "iqt/CSettingsReadArchive.h"
 #include "iqt/CSettingsWriteArchive.h"
 
@@ -47,7 +48,11 @@ int CSettingsSerializerComp::LoadFromFile(
 
 			QSettings::Scope scope = m_scopeAttrPtr.IsValid() ? QSettings::Scope(*m_scopeAttrPtr) : QSettings::UserScope;
 
-			CSettingsReadArchive archive(companyName, applicationName, *m_rootKeyAttrPtr, scope);
+			CSettingsReadArchive archive(
+						companyName,
+						applicationName,
+						istd::CSystem::GetEnrolledPath(*m_rootKeyAttrPtr, false),
+						scope);
 
 			if (serializeblePtr->Serialize(archive)){
 				return OS_OK;
@@ -81,7 +86,7 @@ int CSettingsSerializerComp::SaveToFile(
 			CSettingsWriteArchive archive(
 						companyName,
 						applicationName,
-						*m_rootKeyAttrPtr,
+						istd::CSystem::GetEnrolledPath(*m_rootKeyAttrPtr, false),
 						scope,
 						&m_applicationInfoCompPtr->GetVersionInfo());
 
