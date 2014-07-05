@@ -53,6 +53,7 @@ Module{
 	property bool installIncludes: false							// if enabled the includes will be installed
 	property bool installProjectSubdirs: false							// if enabled the installed files will be placed in project subdirs
 	property string compilerDir: compileMode + compilerName
+	property string compilerDirExt: (Qt.core.versionMajor > 4)? compilerDir + "_Qt" + Qt.core.versionMajor: compilerDir
 	property string targetBinSubdir: ""
 	property string targetPckSubdir
 	property string targetLibSubdir
