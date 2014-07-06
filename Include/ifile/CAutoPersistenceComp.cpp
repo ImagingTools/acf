@@ -70,7 +70,11 @@ void CAutoPersistenceComp::StoreObject(const istd::IChangeable& object) const
 			filePath = m_filePathCompPtr->GetPath();
 		}
 
+		LockFile();
+
 		m_fileLoaderCompPtr->SaveToFile(object, filePath);
+
+		UnlockFile();
 	}
 }
 
@@ -81,17 +85,13 @@ void CAutoPersistenceComp::OnComponentCreated()
 {
 	BaseClass::OnComponentCreated();
 
-	if (*m_restoreOnBeginAttrPtr){
-		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){
-			QString filePath;
-			if (m_filePathCompPtr.IsValid()){
-				filePath = m_filePathCompPtr->GetPath();
-			}
+	QString filePath;
+	if (m_filePathCompPtr.IsValid()){
+		filePath = m_filePathCompPtr->GetPath();
+	}
 
-			if (*m_reloadOnFileChangeAttrPtr){
-				m_fileWatcher.addPath(filePath);
-			}
-			
+	if (*m_restoreOnBeginAttrPtr){
+		if (m_fileLoaderCompPtr.IsValid() && m_objectCompPtr.IsValid()){			
 			if (m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, filePath) == ifile::IFilePersistence::OS_OK)
 			{
 				m_wasLoadingSuceeded = true;
@@ -111,8 +111,11 @@ void CAutoPersistenceComp::OnComponentCreated()
 	}
 
 	if (*m_reloadOnFileChangeAttrPtr){
+		m_fileWatcher.addPath(filePath);
+
 		connect(&m_fileWatcher, SIGNAL(fileChanged(const QString&)), this, SLOT(OnFileContentsChanged(const QString&)));
 	}
+
 
 	EnsureTimerConnected();
 }
@@ -236,23 +239,31 @@ void CAutoPersistenceComp::OnFileContentsChanged(const QString& path)
 
 	QString tempFileName = tempPath + "/" + QUuid::createUuid().toString() + "_" + QFileInfo(path).fileName();
 
-	if (QFile::copy(path, tempFileName)){
-		m_wasLoadingSuceeded = false;
+	if (LockFile()){
+		if (QFile::copy(path, tempFileName)){
+			UnlockFile();
 
-		m_isReloading = true;
+			m_wasLoadingSuceeded = false;
 
-		if (m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, tempFileName) == ifile::IFilePersistence::OS_OK)
-		{
-			m_wasLoadingSuceeded = true;
+			m_isReloading = true;
+
+			if (m_fileLoaderCompPtr->LoadFromFile(*m_objectCompPtr, tempFileName) == ifile::IFilePersistence::OS_OK)
+			{
+				m_wasLoadingSuceeded = true;
+			}
+			else
+			{
+				qDebug(qPrintable("File could not be loaded"));
+			}
+
+			QFile::remove(tempFileName);
+
+			m_isReloading = false;
+
+			
+			m_fileWatcher.removePaths(m_fileWatcher.files());
+			m_fileWatcher.addPath(path);
 		}
-
-		QFile::remove(tempFileName);
-
-		m_isReloading = false;
-
-		
-		m_fileWatcher.removePaths(m_fileWatcher.files());
-		m_fileWatcher.addPath(path);
 	}
 }
 
@@ -268,6 +279,44 @@ void CAutoPersistenceComp::EnsureTimerConnected()
 			m_storingTimer.start(*m_storeIntervalAttrPtr * 1000);
 		}
 	}
+}
+
+
+bool CAutoPersistenceComp::LockFile() const
+{
+	QString filePath;
+	if (m_filePathCompPtr.IsValid()){
+		filePath = m_filePathCompPtr->GetPath();
+	}
+
+	QFileInfo fileInfo(filePath);
+	if (!fileInfo.exists()){
+		return false;
+	}
+
+	filePath += ".lock";
+
+#if QT_VERSION >= 0x050000
+	if (!m_lockFilePtr.IsValid()){
+		m_lockFilePtr = new QLockFile(filePath);
+	}
+
+	Q_ASSERT(m_lockFilePtr.IsValid());
+
+	return m_lockFilePtr->lock();
+#endif
+
+	return true;
+}
+
+
+void CAutoPersistenceComp::UnlockFile() const
+{
+#if QT_VERSION >= 0x050000
+	if (m_lockFilePtr.IsValid()){
+		m_lockFilePtr->unlock();
+	}
+#endif
 }
 
 
