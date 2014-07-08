@@ -16,7 +16,7 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalDependencies="qtmain.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib Qt5Xmld.lib Qt5Networkd.lib"
+		AdditionalDependencies="qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib Qt5Svgd.lib Qt5Xmld.lib Qt5Networkd.lib"
 		AdditionalLibraryDirectories="$(QTDIR)/lib"
 		GenerateDebugInformation="true"
 	/>
