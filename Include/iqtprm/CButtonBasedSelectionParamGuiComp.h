@@ -69,6 +69,7 @@ private:
 
 	void CreateButtons(const iprm::ISelectionParam* paramPtr, SelectionInfo* parentSelectionInfoPtr, int& totalButtons);
 	QAbstractButton* CreateButton(QWidget* parentPtr, const QString& description);
+	void DestroyButtons();
 
 private:
 	I_REF(iqtgui::IIconProvider, m_iconProviderCompPtr);
