@@ -230,7 +230,8 @@ inline bool CFastColor::operator==(const CFastColor& vector) const
 	}
 
 	for (int i = 0; i < elementsCount; ++i){
-		if (qAbs(operator[](i) - vector[i]) > I_BIG_EPSILON){
+		if (		(operator[](i) > vector[i] + I_BIG_EPSILON) ||
+					(operator[](i) < vector[i] - I_BIG_EPSILON)){
 			return false;
 		}
 	}
