@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3481
+          3542
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1129
+          1156
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264197
+          328449
         </Number>
         <Description>
           Qt Framework
@@ -410,7 +410,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="15">
+        <AttributeInfoMap count="17">
           <AttributeInfo>
             <Id>
               AboutDialog
@@ -420,6 +420,38 @@
             </Type>
             <ExportId>
               AboutDialog
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FixedHeight
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              FixedHeight
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              FixedWidth
+            </Id>
+            <Type>
+              Integer
+            </Type>
+            <ExportId>
+              FixedWidth
             </ExportId>
             <Data>
               <IsEnabled>

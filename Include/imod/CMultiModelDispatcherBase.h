@@ -36,7 +36,7 @@ public:
 		\param modelId	Logical model ID for possible event filtering in the notification callback.
 		\param relefantFlags	The notification will only be triggered if the value of \c relevantFlags matches the model change flags.
 	*/
-	bool RegisterModel(IModel* modelPtr, int modelId = 0, const istd::IChangeable::ChangeSet& relevantFlags = istd::IChangeable::GetAnyChange());
+	bool RegisterModel(IModel* modelPtr, int modelId = 0, const istd::IChangeable::ChangeSet& relevantFlags = istd::IChangeable::GetAllChanges());
 	
 	/**
 		Unregister the data model object.

@@ -191,7 +191,7 @@ void CSelectionParamGuiComp::OnRadioButtonSelectionChanged(bool isSelected)
 			UpdateBlocker updateBlocker(this);
 
 			for (int selectionIndex = 0; selectionIndex < m_radioButtons.GetCount(); selectionIndex++){
-				if (senderPtr == m_radioButtons.GetAt(selectionIndex)->GetRadionButton()){
+				if (senderPtr == m_radioButtons.GetAt(selectionIndex)->GetRadioButton()){
 					needUpdateGui = !objectPtr->SetSelectedOptionIndex(selectionIndex);
 
 					break;
@@ -205,6 +205,16 @@ void CSelectionParamGuiComp::OnRadioButtonSelectionChanged(bool isSelected)
 		else{
 			UpdateDescriptionFrame();
 		}
+	}
+}
+
+
+void CSelectionParamGuiComp::OnResetButtonClicked()
+{
+	iprm::ISelectionParam* objectPtr = GetObjectPtr();
+	Q_ASSERT(objectPtr != NULL);
+	if (objectPtr != NULL){
+		objectPtr->SetSelectedOptionIndex(-1);
 	}
 }
 
@@ -319,7 +329,7 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 		if (constraintsPtr != NULL){
 			int optionsCount = constraintsPtr->GetOptionsCount();
 			int selectedIndex = selectionPtr->GetSelectedOptionIndex();
-			bool isOptionEnabled = constraintsPtr->IsOptionEnabled(selectedIndex);
+			bool isOptionEnabled = (selectedIndex >= 0 && constraintsPtr->IsOptionEnabled(selectedIndex)) || (selectedIndex < 0);
 
 			QButtonGroup* groupPtr = new QButtonGroup;
 			m_radioButtonGroups.PushBack(groupPtr);
@@ -341,10 +351,18 @@ void CSelectionParamGuiComp::UpdateRadioButtonView()
 
 				radioButtonWidget->setEnabled(isOptionEnabled);
 				if (selectedIndex == i){
-					selectedButtonPtr = radioButtonWidget->GetRadionButton();
+					selectedButtonPtr = radioButtonWidget->GetRadioButton();
 				}
 
-				QObject::connect(radioButtonWidget->GetRadionButton(), SIGNAL(toggled(bool)), this, SLOT(OnRadioButtonSelectionChanged(bool)));
+				QObject::connect(radioButtonWidget->GetRadioButton(), SIGNAL(toggled(bool)), this, SLOT(OnRadioButtonSelectionChanged(bool)));
+			}
+
+			if (*m_noSelectionAllowedAttrPtr){
+				m_resetButtonWidget = new QPushButton(tr("Reset"));
+				m_resetButtonWidget->setToolTip("Reset current selection");
+				buttonLayoutPtr->addWidget(m_resetButtonWidget);
+
+				QObject::connect(m_resetButtonWidget, SIGNAL(clicked()), this, SLOT(OnResetButtonClicked()));
 			}
 
 			QSizePolicy::Policy vPolicy = useVerticalLayout ? QSizePolicy::Expanding : QSizePolicy::Preferred;
@@ -577,7 +595,7 @@ CSelectionParamGuiComp::RadioButtonWidget::RadioButtonWidget(
 }
 
 
-QRadioButton* CSelectionParamGuiComp::RadioButtonWidget::GetRadionButton() const
+QRadioButton* CSelectionParamGuiComp::RadioButtonWidget::GetRadioButton() const
 {
 	return m_radioButtonPtr;
 }

@@ -7,7 +7,7 @@
           0
         </Id>
         <Number>
-          3481
+          3542
         </Number>
         <Description>
           ACF
@@ -18,7 +18,7 @@
           1
         </Id>
         <Number>
-          1129
+          1156
         </Number>
         <Description>
           ACF-Solutions
@@ -29,7 +29,7 @@
           1023
         </Id>
         <Number>
-          264197
+          328449
         </Number>
         <Description>
           Qt Framework
@@ -38,20 +38,6 @@
     </VersionInfos>
   </AcfHeader>
   <PositionMap count="4">
-    <Element>
-      <ComponentName>
-        GuiApplication
-      </ComponentName>
-      <X>
-        575
-      </X>
-      <X>
-        225
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
     <Element>
       <ComponentName>
         SettingsProvider
@@ -68,10 +54,24 @@
     </Element>
     <Element>
       <ComponentName>
-        ApplicationInfo
+        MainGui
       </ComponentName>
       <X>
-        925
+        575
+      </X>
+      <X>
+        400
+      </X>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        GuiApplication
+      </ComponentName>
+      <X>
+        575
       </X>
       <X>
         225
@@ -82,13 +82,13 @@
     </Element>
     <Element>
       <ComponentName>
-        MainGui
+        ApplicationInfo
       </ComponentName>
       <X>
-        575
+        925
       </X>
       <X>
-        400
+        225
       </X>
       <Note>
         
