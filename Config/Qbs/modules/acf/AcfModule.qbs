@@ -50,13 +50,33 @@ Module{
 		compileMode: "Release"
 	}
 
-	property bool installIncludes: false							// if enabled the includes will be installed
+	property string targetBinSubdir: ""
+	PropertyOptions{
+		name: "targetBinSubdir"
+		description: "provide installation root of executable files"
+	}
+
+	property string targetPckSubdir
+	PropertyOptions{
+		name: "targetPckSubdir"
+		description: "if defined provide installation root of ACF package files"
+	}
+
+	property string targetLibSubdir
+	PropertyOptions{
+		name: "targetLibSubdir"
+		description: "if defined provide installation root of library files"
+	}
+
+	property string targetGeneratedSubdir
+	PropertyOptions{
+		name: "targetGeneratedSubdir"
+		description: "if defined provide installation root of generated include files"
+	}
+
 	property bool installProjectSubdirs: false							// if enabled the installed files will be placed in project subdirs
 	property string compilerDir: compileMode + compilerName
 	property string compilerDirExt: (Qt.core.versionMajor > 4)? compilerDir + "_Qt" + Qt.core.versionMajor: compilerDir
-	property string targetBinSubdir: ""
-	property string targetPckSubdir
-	property string targetLibSubdir
 	property string generatedOutputDir								// Path where stuff will be generated, if undefined "GeneratedPath/" + product.name will be taken
 	property path acfConfigurationFile								// ACF configuration file ARX compiler
 	property path trConfigurationFile: acfConfigurationFile			// ACF configuration file for xtracf transformations

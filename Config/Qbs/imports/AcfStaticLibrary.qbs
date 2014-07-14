@@ -27,10 +27,10 @@ StaticLibrary{
 	}
 
 	Group{
-		condition: acf.installIncludes == true
+		condition: (acf.targetGeneratedSubdir !== undefined)
 		fileTagsFilter: ["hpp"]
 		qbs.install: true
-		qbs.installDir: AcfService.getTargetPath(product, project, "Include/GeneratedFiles/" + product.name)
+		qbs.installDir: AcfService.getTargetPath(product, project, acf.targetGeneratedSubdir + "/GeneratedFiles/" + product.name)
 	}
 
 	Group{
