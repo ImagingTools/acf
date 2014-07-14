@@ -116,6 +116,7 @@ protected:
 protected Q_SLOTS:
 	void OnSelectionChanged(int index);
 	void OnRadioButtonSelectionChanged(bool isSelected);
+	void OnResetButtonClicked();
 
 private:
 	void UpdateComboBoxesView();
@@ -151,7 +152,7 @@ private:
 					QButtonGroup* buttonGroupPtr,
 					QWidget& parentFrame);
 
-		QRadioButton* GetRadionButton() const;
+		QRadioButton* GetRadioButton() const;
 
 	private:
 		QRadioButton* m_radioButtonPtr;
@@ -163,6 +164,7 @@ private:
 	istd::TPointerVector<RadioButtonWidget> m_radioButtons;
 	istd::TPointerVector<QButtonGroup> m_radioButtonGroups;
 	istd::TDelPtr<QFrame> m_radioButtonFramePtr;
+	QPushButton* m_resetButtonWidget;
 };
 
 
