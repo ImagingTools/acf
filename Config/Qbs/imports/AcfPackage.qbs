@@ -31,7 +31,7 @@ DynamicLibrary{
 	}
 
 	Group{
-		condition: (acf.targetPckSubdir !== undefined)
+		condition: (acf.targetPckSubdir !== undefined) && (project.acfInstallSubDir !== undefined)
 		fileTagsFilter: ["dynamiclibrary"]
 		qbs.install: true
 		qbs.installDir: AcfService.getTargetPath(product, project, acf.targetPckSubdir)

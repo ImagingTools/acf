@@ -13,8 +13,8 @@ function getTargetPath(product, project, subDir)
 {
     var retVal = "";
 
-    if (project.projectSubDir != null) {
-        retVal += project.projectSubDir;
+    if (project.acfInstallSubDir != null) {
+        retVal += project.acfInstallSubDir;
     }
 
     if (subDir != null && subDir != "") {

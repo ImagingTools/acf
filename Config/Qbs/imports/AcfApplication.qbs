@@ -22,6 +22,7 @@ CppApplication{
 	cpp.defines: ['I_QBS']
 
 	Group{
+		condition: (project.acfInstallSubDir !== undefined)
 		fileTagsFilter: ["application"]
 		qbs.install: true
 		qbs.installDir: AcfService.getTargetPath(product, project, acf.targetBinSubdir)
