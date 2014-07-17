@@ -281,6 +281,7 @@ bool CQuadrangle::Serialize(iser::IArchive& archive)
 
 	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(firstDiagonalTag);
 	retVal = retVal && m_firstDiagonal.Serialize(archive);

@@ -49,7 +49,7 @@ AcfModule{
 
 			// if there is no configuration - error
 			if (acfConfigurationFile == null){
-				throw new Error("no ACF configuration specified (using dependency or acf.acfConfigurationFile)");
+				throw new Error("No ACF configuration specified (using dependency or acf.acfConfigurationFile) in " + product.name);
 			}
 
 			var cmd = new Command(acfBinDirectory + "/" + product.moduleProperty("cpp", "executablePrefix") + "Arxc" + product.moduleProperty("cpp", "executableSuffix"), [
@@ -98,7 +98,7 @@ AcfModule{
 
 			// if there is no configuration - error
 			if (acfConfigurationFile == null){
-				throw new Error("no ACF configuration specified (using dependency or acf.acfConfigurationFile)");
+				throw new Error("no ACF configuration specified (using dependency or acf.acfConfigurationFile) in " + product.name);
 			}
 
 			var cmd = new Command(acfBinDirectory + '/' + product.moduleProperty("cpp", "executablePrefix") + 'Acf' + product.moduleProperty("cpp", "executableSuffix"), [
@@ -335,7 +335,7 @@ AcfModule{
 
 				pkginfo.write("	<PackageDirs count=\"0\">\n");
 				for (var packageDirIndex in packageDirsList) {
-					var packageDirPath = packageDirsList[packageDirIndex];
+					var packageDirPath = AcfService.relativePath(outputDir, packageDirsList[packageDirIndex]);
 					pkginfo.write("		<Dir>\n");
 					pkginfo.write("			" + packageDirPath + "\n");
 					pkginfo.write("		</Dir>\n");

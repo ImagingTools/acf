@@ -67,6 +67,9 @@ private:
 	istd::TDelPtr<QApplication> m_applicationPtr;
 
 	QStringList m_applicationArguments;
+
+	QByteArray m_appStyle;
+	QString m_styleSheetFile;
 };
 
 

@@ -41,15 +41,13 @@ int main(int argc, char *argv[])
 
 	icomp::TSimComponentsFactory<TutorialPck::TextEditor> viewFactoryComp;
 
-	icomp::TSimComponentWrap<BasePck::BinaryFileSerializer> serializerComp;
-	serializerComp.InsertMultiAttr("FileExtensions", QString("bin"));
-	serializerComp.InsertMultiAttr("TypeDescriptions", QString("Binary text files"));
-	serializerComp.InitComponent();
+	icomp::TSimComponentWrap<BasePck::TextFileLoader> loaderComp;
+	loaderComp.InitComponent();
 
 	icomp::TSimComponentWrap<QtPck::ExtendedDocumentTemplate> documentTemplateComp;
 	documentTemplateComp.SetFactory("DocumentFactory", &modelFactoryComp);
 	documentTemplateComp.SetFactory("ViewFactory", &viewFactoryComp);
-	documentTemplateComp.SetRef("DocumentLoader", &serializerComp);
+	documentTemplateComp.SetRef("DocumentLoader", &loaderComp);
 	documentTemplateComp.SetBoolAttr("IsEditSupported", true);
 	documentTemplateComp.SetBoolAttr("IsNewSupported", true);
 	documentTemplateComp.InitComponent();

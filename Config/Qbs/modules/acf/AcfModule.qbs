@@ -74,7 +74,6 @@ Module{
 		description: "if defined provide installation root of generated include files"
 	}
 
-	property bool installProjectSubdirs: false							// if enabled the installed files will be placed in project subdirs
 	property string compilerDir: compileMode + compilerName
 	property string compilerAndQtDir: (Qt.core.versionMajor != 5)? compilerDir + "_Qt" + Qt.core.versionMajor: compilerDir
 	property string generatedOutputDir								// Path where stuff will be generated, if undefined "GeneratedPath/" + product.name will be taken

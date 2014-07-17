@@ -3,8 +3,14 @@
 
 
 // Qt includes
-#include <QtGui/QPrinter>
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QTextEdit>
+#include <QtPrintSupport/QPrinter>
+#else
 #include <QtGui/QTextEdit>
+#include <QtGui/QPrinter>
+#endif
 
 #include "imod/TSingleModelObserverBase.h"
 

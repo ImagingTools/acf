@@ -1,11 +1,15 @@
-// ACF includes
-#include "icomp/TSimComponentWrap.h"
-#include "icomp/TSimComponentsFactory.h"
+// Qt includes
+#include <QtCore/QtGlobal>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QApplication>
+#else
+#include <QtGui/QLabel>
+#include <QtGui/QApplication>
+#endif
 
-// ACF package includes
-#include "BasePck/BasePck.h"
-#include "QtPck/QtPck.h"
-#include "QtGuiPck/QtGuiPck.h"
+// ACF includes
+#include "iwidgets/CMultiPageWidget.h"
 
 
 int main(int argc, char *argv[])
@@ -14,11 +18,11 @@ int main(int argc, char *argv[])
 
 	QApplication app(argc, argv);
 
-	iqtgui::CMultiPageWidget emptyContainer;
+	iwidgets::CMultiPageWidget emptyContainer;
 	emptyContainer.setWindowTitle("Empty container");
 	emptyContainer.showMaximized();
 
-	iqtgui::CMultiPageWidget tabContainer(NULL, iqtgui::CMultiPageWidget::DT_TAB_WIDGET);
+	iwidgets::CMultiPageWidget tabContainer(NULL, iwidgets::CMultiPageWidget::DT_TAB_WIDGET);
 	tabContainer.setWindowTitle("Tab container");
 
 	QLabel page1("Page 1");

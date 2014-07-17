@@ -11,13 +11,29 @@ function getGeneratedPath(product)
 
 function getTargetPath(product, project, subDir)
 {
-    var useSubdir = product.moduleProperty("acf", "installProjectSubdirs");
-    if (useSubdir && project.projectSubDir !== undefined) {
-        return project.projectSubDir + "/" + subDir;
+    var retVal = "";
+
+    if (project.projectSubDir != null) {
+        retVal += project.projectSubDir;
     }
-    else {
-        return subDir;
+
+    if (subDir != null && subDir != "") {
+        if (retVal != "") {
+            retVal += "/";
+        }
+
+        retVal += subDir;
     }
+
+    if (project.projectSufixDir != null) {
+        if (retVal != "") {
+            retVal += "/";
+        }
+
+        retVal += project.projectSufixDir;
+    }
+
+    return retVal;
 }
 
 function isSubpath(base, rel)

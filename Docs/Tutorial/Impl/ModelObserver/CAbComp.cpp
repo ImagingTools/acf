@@ -41,7 +41,9 @@ bool CAbComp::SetA(int a)
 	// If new value of A differs from the old,
 	// set the new value and fire notification about this change:
 	if (m_a != a){
-		istd::CChangeNotifier changeNotifier(this, CF_A_CHANGED);
+		static ChangeSet changeSet(CF_A_CHANGED);
+		istd::CChangeNotifier changeNotifier(this, changeSet);
+		Q_UNUSED(changeNotifier);
 
 		m_a = a;
 	}
@@ -61,7 +63,9 @@ void CAbComp::SetB(const QByteArray& b)
 	// If new value of B differs from the old,
 	// set the new value and fire notification about this change:
 	if (m_b != b){
-		istd::CChangeNotifier changeNotifier(this, CF_B_CHANGED);
+		static ChangeSet changeSet(CF_B_CHANGED);
+		istd::CChangeNotifier changeNotifier(this, changeSet);
+		Q_UNUSED(changeNotifier);
 
 		m_b = b;
 	}
@@ -80,6 +84,9 @@ const istd::CRange& CAbComp::GetARange() const
 
 bool CAbComp::Serialize(iser::IArchive& archive)
 {
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
+
 	// Copy current A value to a  temporary variable:
 	int a = m_a;
 

@@ -150,7 +150,7 @@ const IComponentStaticInfo& CSimComponentContextBase::GetStaticInfo() const
 
 const IComponentContext* CSimComponentContextBase::GetParentContext() const
 {
-	return this;
+	return NULL;
 }
 
 

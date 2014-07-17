@@ -22,8 +22,8 @@ public:
 	I_BEGIN_COMPONENT(CTextFileLoaderComp);
 		I_REGISTER_INTERFACE(ifile::IFileTypeInfo);
 		I_REGISTER_INTERFACE(ifile::IFilePersistence);
-		I_ASSIGN_MULTI_1(m_fileExtensionsAttrPtr, "FileExtensions", "List of possible file extensions", false, "txt");
-		I_ASSIGN_MULTI_1(m_typeDescriptionsAttrPtr, "TypeDescriptions", "List of descriptions for each extension", false, "Text file");
+		I_ASSIGN_MULTI_1(m_fileExtensionsAttrPtr, "FileExtensions", "List of possible file extensions", true, "txt");
+		I_ASSIGN_MULTI_1(m_typeDescriptionsAttrPtr, "TypeDescriptions", "List of descriptions for each extension", true, "Text file");
 	I_END_COMPONENT;
 
 	// reimplemented (ifile::IFilePersistence)
