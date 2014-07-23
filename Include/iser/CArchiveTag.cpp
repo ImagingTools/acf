@@ -5,6 +5,12 @@ namespace iser
 {
 
 
+CArchiveTag::CArchiveTag()
+:	m_parentPtr(NULL)
+{
+}
+
+
 CArchiveTag::CArchiveTag(
 			const QByteArray& id,
 			const QByteArray& comment,

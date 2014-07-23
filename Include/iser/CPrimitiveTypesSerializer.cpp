@@ -192,10 +192,10 @@ bool CPrimitiveTypesSerializer::SerializeIntRanges(iser::IArchive& archive, istd
 
 bool CPrimitiveTypesSerializer::SerializeDateTime(iser::IArchive& archive, QDateTime& dateTime)
 {
-	const QString TimeFormat("yyyy-MM-dd hh-mm-ss zzz");
+	const static QString timeFormat("yyyy-MM-dd hh-mm-ss zzz");
 
 	if (archive.IsStoring()){
-		QString dateTimeString = dateTime.toString(TimeFormat);
+		QString dateTimeString = dateTime.toString(timeFormat);
 
 		return archive.Process(dateTimeString);
 	}
@@ -203,7 +203,7 @@ bool CPrimitiveTypesSerializer::SerializeDateTime(iser::IArchive& archive, QDate
 		QString dateTimeString;
 
 		if (archive.Process(dateTimeString)){
-			dateTime = QDateTime::fromString(dateTimeString, TimeFormat);
+			dateTime = QDateTime::fromString(dateTimeString, timeFormat);
 
 			return true;
 		}

@@ -24,6 +24,9 @@ class IArchive;
 class CArchiveTag
 {
 public:
+	/**
+		Describe type of tag.
+	*/
 	enum TagType
 	{
 		/**
@@ -31,19 +34,29 @@ public:
 		*/
 		TT_UNKNOWN,
 		/**
-			Normal tag, not being leaf or multiple.
+			Normal tag used for grouping of tags or processed elements.
+			It should be outputted to serialized stream.
 		*/
 		TT_GROUP,
 		/**
-			Multiple tag containing variable number of childs (tags). All childs must be the same type.
+			Multiple tag containing variable number of child tags.
+			All childs must be the same type.
 		*/
 		TT_MULTIPLE,
 		/**
-			Leaf tag, some leaf specific optimizations can be enabled.
+			Leaf tag, it can contain only one primitive element.
+			Single group can contain only one leaf tag with the same name.
+			Depending on implementation some leaf specific optimizations can be enabled (e.g. using of attributes for XML documents).
 		*/
-		TT_LEAF
+		TT_LEAF,
+		/**
+			Weak group tag, will be not outputted.
+			It is designed only to create logical group.
+		*/
+		TT_WEAK
 	};
 
+	CArchiveTag();
 	/**
 		Constructor with parameter initialization.
 		\param	id					ID of this tag.
