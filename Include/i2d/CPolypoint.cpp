@@ -167,17 +167,16 @@ istd::IChangeable* CPolypoint::CloneMe(CompatibilityMode mode) const
 
 bool CPolypoint::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag polypointTag("Polypoint", "Polypoint");
-	static iser::CArchiveTag vectorTag("V", "Vector");
+	static iser::CArchiveTag polypointTag("Polypoint", "Polypoint", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag vectorTag("V", "Vector", iser::CArchiveTag::TT_GROUP, &polypointTag);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	int pointsCount = m_points.size();
 	bool retVal = true;
 
 	retVal = retVal && archive.BeginMultiTag(polypointTag, vectorTag, pointsCount);
-
 	if (!archive.IsStoring() && retVal){
 		m_points.resize(pointsCount);
 	}

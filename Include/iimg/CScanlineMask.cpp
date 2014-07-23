@@ -730,11 +730,11 @@ bool CScanlineMask::SetColorAt(const istd::CIndex2d& /*position*/, const icmm::C
 
 bool CScanlineMask::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag firstLineTag("FirstLine", "First line (top position)");
-	static iser::CArchiveTag lineContainerTag("LineContainer", "Container of scan lines");
-	static iser::CArchiveTag scanLineTag("Line", "Single scan line");
-	static iser::CArchiveTag containerIndicesTag("ContainerIndices", "List of container indices for each line");
-	static iser::CArchiveTag indexTag("Index", "Container index");
+	static iser::CArchiveTag firstLineTag("FirstLine", "First line (top position)", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag lineContainerTag("LineContainer", "Container of scan lines", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag scanLineTag("Line", "Single scan line", iser::CArchiveTag::TT_GROUP, &lineContainerTag);
+	static iser::CArchiveTag containerIndicesTag("ContainerIndices", "List of container indices for each line", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag indexTag("Index", "Container index", iser::CArchiveTag::TT_LEAF, &containerIndicesTag);
 
 	bool retVal = true;
 

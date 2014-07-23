@@ -401,11 +401,11 @@ bool TFulcrumGridFunctionBase<Argument, Result, Fulcrums>::Serialize(iser::IArch
 {
 	bool retVal = true;
 
-	iser::CArchiveTag gridTag("Grid", "Description of fulcrums grid");
-	iser::CArchiveTag positionsTag("Positions", "List of positions at single axis of fulcrum grid");
-	iser::CArchiveTag positionTag("Position", "Single layer position");
-	iser::CArchiveTag fulcrumsTag("Fulcrums", "List of fulcrums");
-	iser::CArchiveTag fulcrumTag("Fulcrum", "Single fulcrum");
+	iser::CArchiveTag gridTag("Grid", "Description of fulcrums grid", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag positionsTag("Positions", "List of positions at single axis of fulcrum grid", iser::CArchiveTag::TT_MULTIPLE, &gridTag);
+	iser::CArchiveTag positionTag("Position", "Single layer position", iser::CArchiveTag::TT_LEAF, &positionsTag);
+	iser::CArchiveTag fulcrumsTag("Fulcrums", "List of fulcrums", iser::CArchiveTag::TT_GROUP);
+	iser::CArchiveTag fulcrumTag("Fulcrum", "Single fulcrum", iser::CArchiveTag::TT_GROUP, &fulcrumsTag);
 
 	bool isStoring = archive.IsStoring();
 

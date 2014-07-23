@@ -31,14 +31,15 @@ void CPackageStaticInfo::Reset()
 
 bool CPackageStaticInfo::SerializeMeta(iser::IArchive& archive)
 {
+	static iser::CArchiveTag descriptionTag("Description", "Human readable description", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag keywordsTag("Keywords", "Human readable keywords", iser::CArchiveTag::TT_LEAF);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag descriptionTag("Description", "Human readable description");
 	retVal = retVal && archive.BeginTag(descriptionTag);
 	retVal = retVal && archive.Process(m_description);
 	retVal = retVal && archive.EndTag(descriptionTag);
 
-	static iser::CArchiveTag keywordsTag("Keywords", "Human readable keywords");
 	retVal = retVal && archive.BeginTag(keywordsTag);
 	retVal = retVal && archive.Process(m_keywords);
 	retVal = retVal && archive.EndTag(keywordsTag);

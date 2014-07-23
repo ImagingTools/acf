@@ -111,8 +111,8 @@ ISelectionParam* CSelectionParam::GetSubselection(int index) const
 
 bool CSelectionParam::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index");
-	static iser::CArchiveTag selectedOptionIdTag("OptionId", "Selected option identifier");
+	static iser::CArchiveTag selectedOptionIndexTag("Index", "Selected option index", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag selectedOptionIdTag("OptionId", "Selected option identifier", iser::CArchiveTag::TT_LEAF);
 
 	bool isStoring = archive.IsStoring();
 

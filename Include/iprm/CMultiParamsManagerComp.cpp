@@ -23,19 +23,20 @@ const IOptionsList* CMultiParamsManagerComp::GetParamsTypeConstraints() const
 
 bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag paramsSetListTag("ParamsSetList", "List of parameter set");
-	static iser::CArchiveTag paramsSetTag("ParamsSet", "Single parameter set", true);
-	static iser::CArchiveTag typeIdTag("TypeId", "Type id of factory of parameter set");
-	static iser::CArchiveTag nameTag("Name", "Name of set");	
-	static iser::CArchiveTag enabledTag("Enabled", "Is parameter set enabled");
-	static iser::CArchiveTag valueTag("Value", "Value of set", true);
+	static iser::CArchiveTag paramsSetListTag("ParamsSetList", "List of parameter set", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag paramsSetTag("ParamsSet", "Single parameter set", iser::CArchiveTag::TT_GROUP, &paramsSetListTag, true);
+	static iser::CArchiveTag typeIdTag("TypeId", "Type id of factory of parameter set", iser::CArchiveTag::TT_LEAF, &paramsSetTag);
+	static iser::CArchiveTag nameTag("Name", "Name of set", iser::CArchiveTag::TT_LEAF, &paramsSetTag);
+	static iser::CArchiveTag enabledTag("Enabled", "Is parameter set enabled", iser::CArchiveTag::TT_LEAF, &paramsSetTag);
+	static iser::CArchiveTag valueTag("Value", "Value of set", iser::CArchiveTag::TT_GROUP, &paramsSetTag, true);
+	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index", iser::CArchiveTag::TT_LEAF);
 
 	bool retVal = true;
 
 	bool isStoring = archive.IsStoring();
 
-	static ChangeSet changeSet(CF_ALL_DATA, CF_OPTIONS_CHANGED);
-	istd::CChangeNotifier notifier(isStoring? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(isStoring? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	// Delete all dynamically created parameter sets:
 	if (!isStoring){
@@ -138,7 +139,6 @@ bool CMultiParamsManagerComp::Serialize(iser::IArchive& archive)
 		selectedIndex = m_selectedIndex;
 	}
 
-	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index");
 	retVal = retVal && archive.BeginTag(selectedIndexTag);
 	retVal = retVal && archive.Process(selectedIndex);
 	retVal = retVal && archive.EndTag(selectedIndexTag);

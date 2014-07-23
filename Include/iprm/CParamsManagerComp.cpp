@@ -83,11 +83,11 @@ const IOptionsList* CParamsManagerComp::GetParamsTypeConstraints() const
 
 bool CParamsManagerComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag paramsSetListTag("ParamsSetList", "List of parameter set");
-	static iser::CArchiveTag paramsSetTag("ParamsSet", "Single parameter set", true);
-	static iser::CArchiveTag nameTag("Name", "Name of set");
-	static iser::CArchiveTag enabledTag("Enabled", "Is parameter set enabled");
-	static iser::CArchiveTag valueTag("Value", "Value of set", true);
+	static iser::CArchiveTag paramsSetListTag("ParamsSetList", "List of parameter set", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag paramsSetTag("ParamsSet", "Single parameter set", iser::CArchiveTag::TT_GROUP, &paramsSetListTag, true);
+	static iser::CArchiveTag nameTag("Name", "Name of set", iser::CArchiveTag::TT_LEAF, &paramsSetTag);
+	static iser::CArchiveTag enabledTag("Enabled", "Is parameter set enabled", iser::CArchiveTag::TT_LEAF, &paramsSetTag);
+	static iser::CArchiveTag valueTag("Value", "Value of set", iser::CArchiveTag::TT_GROUP, &paramsSetTag, true);
 
 	bool retVal = true;
 

@@ -116,8 +116,8 @@ bool CFastColor::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components");
-	static iser::CArchiveTag componentTag("Component", "Single component");
+	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag componentTag("Component", "Single component", iser::CArchiveTag::TT_LEAF, &colorComponentsTag);
 
 	int elementsCount = GetElementsCount();
 

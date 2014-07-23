@@ -46,6 +46,10 @@ bool CBitmapDocumentFilePersistenceComp::IsOperationSupported(
 }
 
 
+static iser::CArchiveTag pagesTag("Pages", "Container of the document pages", iser::CArchiveTag::TT_MULTIPLE);
+static iser::CArchiveTag pageFileTag("PageFile", "Single document page", iser::CArchiveTag::TT_LEAF, &pagesTag);
+
+
 int CBitmapDocumentFilePersistenceComp::LoadFromFile(
 			istd::IChangeable& data,
 			const QString& filePath,
@@ -79,9 +83,6 @@ int CBitmapDocumentFilePersistenceComp::LoadFromFile(
 	retVal = retVal && SerializeDocumentMetaInfo(*docPtr, archive);
 
 	// Serialize document pages:
-	static iser::CArchiveTag pagesTag("Pages", "Container of the document pages");
-	static iser::CArchiveTag pageFileTag("PageFile", "Single document page");
-
 	int pagesCount = docPtr->GetPagesCount();
 
 	retVal = retVal && archive.BeginMultiTag(pagesTag, pageFileTag, pagesCount);
@@ -161,9 +162,6 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(
 	retVal = retVal && SerializeDocumentMetaInfo(const_cast<iimg::CMultiPageBitmapBase&>(*docPtr), archive);
 
 	// Serialize document pages:
-	static iser::CArchiveTag pagesTag("Pages", "Container of the document pages");
-	static iser::CArchiveTag pageFileTag("PageFile", "Single document page");
-
 	int pagesCount = docPtr->GetPagesCount();
 
 	retVal = retVal && archive.BeginMultiTag(pagesTag, pageFileTag, pagesCount);
@@ -258,7 +256,7 @@ bool CBitmapDocumentFilePersistenceComp::SerializeDocumentMetaInfo(iimg::CMultiP
 
 	idoc::CStandardDocumentMetaInfo* metaInfoPtr = dynamic_cast<idoc::CStandardDocumentMetaInfo*>(const_cast<idoc::IDocumentMetaInfo*>(&document.GetDocumentMetaInfo()));
 	if (metaInfoPtr != NULL){
-		static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document");
+		static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document", iser::CArchiveTag::TT_GROUP);
 		retVal = retVal && archive.BeginTag(metaInfoTag);
 		retVal = retVal && metaInfoPtr->idoc::CStandardDocumentMetaInfo::Serialize(archive);
 		retVal = retVal && archive.EndTag(metaInfoTag);
@@ -276,7 +274,7 @@ bool CBitmapDocumentFilePersistenceComp::SerializePageMetaInfo(iimg::CMultiPageB
 		const_cast<idoc::IDocumentMetaInfo*>(document.GetPageMetaInfo(pageIndex))
 		);
 	if (metaInfoSerializablePtr != NULL){
-		static iser::CArchiveTag pageMetaInfoTag("PageMetaInfo", "Single document page meta information");
+		static iser::CArchiveTag pageMetaInfoTag("PageMetaInfo", "Single document page meta information", iser::CArchiveTag::TT_GROUP);
 		retVal = retVal && archive.BeginTag(pageMetaInfoTag);
 		retVal = retVal && metaInfoSerializablePtr->Serialize(archive);
 		retVal = retVal && archive.EndTag(pageMetaInfoTag);

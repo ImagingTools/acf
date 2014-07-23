@@ -276,11 +276,10 @@ istd::IChangeable* CQuadrangle::CloneMe(CompatibilityMode mode) const
 
 bool CQuadrangle::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag firstDiagonalTag("FirstDiagonal", "FirstDiagonal");
-	static iser::CArchiveTag secondDiagonalTag("SecondDiagonal", "SecondDiagonal");
+	static iser::CArchiveTag firstDiagonalTag("FirstDiagonal", "FirstDiagonal", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag secondDiagonalTag("SecondDiagonal", "SecondDiagonal", iser::CArchiveTag::TT_GROUP);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
 	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(firstDiagonalTag);

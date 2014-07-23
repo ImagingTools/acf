@@ -84,6 +84,9 @@ const istd::CRange& CAbComp::GetARange() const
 
 bool CAbComp::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag aTag("A", "Value of A", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag bTag("B", "Value of B", iser::CArchiveTag::TT_LEAF);
+
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
 	Q_UNUSED(notifier);
 
@@ -91,13 +94,11 @@ bool CAbComp::Serialize(iser::IArchive& archive)
 	int a = m_a;
 
 	// Process value copy of A
-	static iser::CArchiveTag aTag("A", "Value of A");
 	bool retVal = archive.BeginTag(aTag);
 	retVal = retVal && archive.Process(a);
 	retVal = retVal && archive.EndTag(aTag);
 
 	// Process value of B
-	static iser::CArchiveTag bTag("B", "Value of B");
 	retVal = retVal && archive.BeginTag(bTag);
 	retVal = retVal && archive.Process(m_b);
 	retVal = retVal && archive.EndTag(bTag);

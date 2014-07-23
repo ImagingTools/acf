@@ -355,12 +355,12 @@ bool COptionsManager::SetOptionDescription(int index, const QString& optionDescr
 
 bool COptionsManager::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag optionsTag("Options", "List of dynamic options");
-	static iser::CArchiveTag optionTag("OptionInfo", "Meta-information about an option");
-	static iser::CArchiveTag optionNameTag("Name", "Name of the option");
-	static iser::CArchiveTag optionDescriptionTag("Description", "Description of the option");
-	static iser::CArchiveTag optionIdTag("ID", "ID of the option");
-	static iser::CArchiveTag enabledTag("Enabled", "Is option enabled");
+	static iser::CArchiveTag optionsTag("Options", "List of dynamic options", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag optionTag("OptionInfo", "Meta-information about an option", iser::CArchiveTag::TT_GROUP, &optionsTag);
+	static iser::CArchiveTag optionNameTag("Name", "Name of the option", iser::CArchiveTag::TT_LEAF, &optionTag);
+	static iser::CArchiveTag optionDescriptionTag("Description", "Description of the option", iser::CArchiveTag::TT_LEAF, &optionTag);
+	static iser::CArchiveTag optionIdTag("ID", "ID of the option", iser::CArchiveTag::TT_LEAF, &optionTag);
+	static iser::CArchiveTag enabledTag("Enabled", "Is option enabled", iser::CArchiveTag::TT_LEAF, &optionTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -383,6 +383,8 @@ bool COptionsManager::Serialize(iser::IArchive& archive)
 			option = m_options[optionIndex];
 		}
 
+		retVal = retVal && archive.BeginTag(optionTag);
+
 		retVal = retVal && archive.BeginTag(optionNameTag);
 		retVal = retVal && archive.Process(option.optionName);
 		retVal = retVal && archive.EndTag(optionNameTag);
@@ -398,6 +400,8 @@ bool COptionsManager::Serialize(iser::IArchive& archive)
 		retVal = retVal && archive.BeginTag(enabledTag);
 		retVal = retVal && archive.Process(option.isEnabled);
 		retVal = retVal && archive.EndTag(enabledTag);
+
+		retVal = retVal && archive.EndTag(optionTag);
 
 		if (!isStoring && retVal){
 			m_options.push_back(option);

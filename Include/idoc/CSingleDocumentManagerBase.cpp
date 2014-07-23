@@ -540,10 +540,10 @@ bool CSingleDocumentManagerBase::HasDocumentPendingChanges() const
 
 bool CSingleDocumentManagerBase::SerializeOpenDocument(iser::IArchive& archive)
 {
-	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties");
-	static iser::CArchiveTag filePathTag("FilePath", "File path");
-	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID");
-	static iser::CArchiveTag viewTypeIdTag("ViewTypeId", "View type ID");
+	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag filePathTag("FilePath", "File path", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
+	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
+	static iser::CArchiveTag viewTypeIdTag("ViewTypeId", "View type ID", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
 
 	bool retVal = archive.BeginTag(openDocumentTag);
 

@@ -366,11 +366,11 @@ void TComposedColor<Size>::GetNormalized(TComposedColor<Size>& result) const
 template <int Size>
 bool TComposedColor<Size>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components");
-	static iser::CArchiveTag componentTag("Component", "Single component");
+	static iser::CArchiveTag colorComponentsTag("ColorComponents", "List of color components", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag componentTag("Component", "Single component", iser::CArchiveTag::TT_LEAF, &colorComponentsTag);
 
-	static ChangeSet changeSet(CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

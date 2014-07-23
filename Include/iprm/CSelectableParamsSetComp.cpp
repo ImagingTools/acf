@@ -149,8 +149,8 @@ void CSelectableParamsSetComp::AfterUpdate(imod::IModel* modelPtr, const istd::I
 
 bool CSelectableParamsSetComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index");
-	static iser::CArchiveTag paramsManagerTag("Parameters", "All parameters");
+	static iser::CArchiveTag selectedIndexTag("Selected", "Selected index", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag paramsManagerTag("Parameters", "All parameters", iser::CArchiveTag::TT_GROUP);
 
 	bool isStoring = archive.IsStoring();
 

@@ -139,12 +139,13 @@ bool CStandardDocumentMetaInfo::IsMetaInfoWritable(int metaInfoType) const
 
 bool CStandardDocumentMetaInfo::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag metaInfoMapTag("MetaInfoMap", "Mapping between meta info and its type");
-	static iser::CArchiveTag metaInfoTag("MetaInfo", "Single meta information");
-	static iser::CArchiveTag typeTag("Type", "Type of the meta information");
-	static iser::CArchiveTag valueTag("Value", "Value of the meta information");
+	static iser::CArchiveTag metaInfoMapTag("MetaInfoMap", "Mapping between meta info and its type", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag metaInfoTag("MetaInfo", "Single meta information", iser::CArchiveTag::TT_GROUP, &metaInfoMapTag);
+	static iser::CArchiveTag typeTag("Type", "Type of the meta information", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
+	static iser::CArchiveTag valueTag("Value", "Value of the meta information", iser::CArchiveTag::TT_LEAF, &metaInfoTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

@@ -148,22 +148,22 @@ bool TVersionInfoSerializer<VersionInfo>::WriteVersion(const VersionInfo* versio
 }
 
 template<class VersionInfo>
-CArchiveTag TVersionInfoSerializer<VersionInfo>::s_headerTag("AcfHeader", "Header of ACF archive");
+CArchiveTag TVersionInfoSerializer<VersionInfo>::s_headerTag("AcfHeader", "Header of ACF archive", iser::CArchiveTag::TT_GROUP);
 
 template<class VersionInfo>
-CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionInfosTag("VersionInfos", "List of version infos");
+CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionInfosTag("VersionInfos", "List of version infos", iser::CArchiveTag::TT_MULTIPLE, &TVersionInfoSerializer<VersionInfo>::s_headerTag);
 
 template<class VersionInfo>
-CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionInfoTag("Version", "Version info");
+CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionInfoTag("Version", "Version info", iser::CArchiveTag::TT_GROUP, &TVersionInfoSerializer<VersionInfo>::s_versionInfosTag);
 
 template<class VersionInfo>
-CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionIdTag("Id", "Version ID");
+CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionIdTag("Id", "Version ID", iser::CArchiveTag::TT_LEAF, &TVersionInfoSerializer<VersionInfo>::s_versionInfoTag);
 
 template<class VersionInfo>
-CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionNumberTag("Number", "Version number");
+CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionNumberTag("Number", "Version number", iser::CArchiveTag::TT_LEAF, &TVersionInfoSerializer<VersionInfo>::s_versionInfoTag);
 
 template<class VersionInfo>
-CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionDescriptionTag("Description", "Version description");
+CArchiveTag TVersionInfoSerializer<VersionInfo>::s_versionDescriptionTag("Description", "Version description", iser::CArchiveTag::TT_LEAF, &TVersionInfoSerializer<VersionInfo>::s_versionInfoTag);
 
 
 } // namespace iser

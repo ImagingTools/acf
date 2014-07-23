@@ -711,11 +711,11 @@ istd::IChangeable* CLine2d::CloneMe(CompatibilityMode mode) const
 
 bool CLine2d::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag beginPointTag("BeginPoint", "BeginPoint");
-	static iser::CArchiveTag endPointTag("EndPoint", "EndPoint");
+	static iser::CArchiveTag beginPointTag("BeginPoint", "First point of line", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag endPointTag("EndPoint", "Second point of line", iser::CArchiveTag::TT_GROUP);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(beginPointTag);
 	retVal = retVal && m_point1.Serialize(archive);

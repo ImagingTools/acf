@@ -18,19 +18,22 @@ namespace icomp
 
 bool CXpcModel::Serialize(iser::IArchive& archive)
 {
-	iser::CArchiveTag configFilesTag("ConfigFiles", "List of included config files", true);
-	iser::CArchiveTag packageDirsTag("PackageDirs", "List of package directories", true);
-	iser::CArchiveTag dirPathTag("Dir", "List of package directories", true);
-	iser::CArchiveTag packageFilesTag("PackageFiles", "List of package files", true);
-	iser::CArchiveTag registryFilesTag("RegistryFiles", "List of registry files", true);
-	iser::CArchiveTag filePathTag("FilePath", "Path of single file", true);
+	iser::CArchiveTag configFilesTag("ConfigFiles", "List of included config files", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag configFilePathTag("FilePath", "Path of single configuration file", iser::CArchiveTag::TT_LEAF, &configFilesTag);
+	iser::CArchiveTag packageDirsTag("PackageDirs", "List of package directories", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag dirPathTag("Dir", "List of package directories", iser::CArchiveTag::TT_LEAF, &packageDirsTag);
+	iser::CArchiveTag packageFilesTag("PackageFiles", "List of package files", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag packageFilePathTag("FilePath", "Path of single package file", iser::CArchiveTag::TT_LEAF, &packageFilesTag);
+	iser::CArchiveTag registryFilesTag("RegistryFiles", "List of registry files", iser::CArchiveTag::TT_MULTIPLE);
+	iser::CArchiveTag registryFilePathTag("FilePath", "Path of single registry file", iser::CArchiveTag::TT_LEAF, &registryFilesTag);
 
 	bool retVal = true;
 
 	int configFilesCount = 0;
 	bool isStoring = archive.IsStoring();
 
-	istd::CChangeNotifier notifier(isStoring? NULL: this);
+	istd::CChangeNotifier notifier(isStoring? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	if (!isStoring){
 		m_confFiles.clear();
@@ -41,14 +44,14 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 	else{
 		configFilesCount = m_confFiles.size();
 	}
-	retVal = retVal && archive.BeginMultiTag(configFilesTag, filePathTag, configFilesCount);
+	retVal = retVal && archive.BeginMultiTag(configFilesTag, configFilePathTag, configFilesCount);
 
 	if (!retVal){
 		return false;
 	}
 
 	for (int i = 0; i < configFilesCount; ++i){
-		retVal = retVal && archive.BeginTag(filePathTag);
+		retVal = retVal && archive.BeginTag(configFilePathTag);
 		QString filePath;
 		if (isStoring){
 			filePath = m_confFiles[i];
@@ -58,7 +61,7 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 			m_confFiles.push_back(filePath);
 		}
 
-		retVal = retVal && archive.EndTag(filePathTag);
+		retVal = retVal && archive.EndTag(configFilePathTag);
 	}
 
 	retVal = retVal && archive.EndTag(configFilesTag);
@@ -95,14 +98,14 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 		filesCount = m_packages.size();
 	}
 
-	retVal = retVal && archive.BeginMultiTag(packageFilesTag, filePathTag, filesCount);
+	retVal = retVal && archive.BeginMultiTag(packageFilesTag, packageFilePathTag, filesCount);
 
 	if (!retVal){
 		return false;
 	}
 
 	for (int i = 0; i < filesCount; ++i){
-		retVal = retVal && archive.BeginTag(filePathTag);
+		retVal = retVal && archive.BeginTag(packageFilePathTag);
 		QString filePath;
 		if (isStoring){
 			filePath = m_packages[i];
@@ -114,15 +117,15 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 			}
 		}
 
-		retVal = retVal && archive.EndTag(filePathTag);
+		retVal = retVal && archive.EndTag(packageFilePathTag);
 	}
 
 	retVal = retVal && archive.EndTag(packageFilesTag);
 
 	//Checking version of configuration file for registry files support
-	quint32 versionNumber = 0;
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 
+	quint32 versionNumber = 0;
 	if (!versionInfo.GetVersionNumber(0, versionNumber) || (versionNumber > 2473)){
 		//List of registry files is available
 
@@ -131,14 +134,14 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 			registryFilesCount = m_registryFiles.size();
 		}
 
-		retVal = retVal && archive.BeginMultiTag(registryFilesTag, filePathTag, registryFilesCount);
+		retVal = retVal && archive.BeginMultiTag(registryFilesTag, registryFilePathTag, registryFilesCount);
 
 		if (!retVal){
 			return false;
 		}
 
 		for (int i = 0; i < registryFilesCount; ++i){
-			retVal = retVal && archive.BeginTag(filePathTag);
+			retVal = retVal && archive.BeginTag(registryFilePathTag);
 			QString filePath;
 			if (isStoring){
 				filePath = m_registryFiles[i];
@@ -148,7 +151,7 @@ bool CXpcModel::Serialize(iser::IArchive& archive)
 				m_registryFiles.push_back(filePath);
 			}
 
-			retVal = retVal && archive.EndTag(filePathTag);
+			retVal = retVal && archive.EndTag(registryFilePathTag);
 		}
 
 		retVal = retVal && archive.EndTag(registryFilesTag);

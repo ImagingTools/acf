@@ -668,13 +668,13 @@ istd::IChangeable* CRectangle::CloneMe(CompatibilityMode mode) const
 
 bool CRectangle::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag topTag("Top", "Rectangle top edge position");
-	static iser::CArchiveTag bottomTag("Bottom", "Rectangle bottom edge position");
-	static iser::CArchiveTag leftTag("Left", "Rectangle left edge position");
-	static iser::CArchiveTag rightTag("Right", "Rectangle right edge position");
+	static iser::CArchiveTag topTag("Top", "Rectangle top edge position", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag bottomTag("Bottom", "Rectangle bottom edge position", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag leftTag("Left", "Rectangle left edge position", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag rightTag("Right", "Rectangle right edge position", iser::CArchiveTag::TT_LEAF);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	double& top = m_verticalRange.GetMinValueRef();
 	double& bottom = m_verticalRange.GetMaxValueRef();

@@ -251,30 +251,21 @@ istd::IChangeable* CAnnulus::CloneMe(CompatibilityMode mode) const
 
 bool CAnnulus::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag innerRadiusTag("InnerRadius", "Inner radius");
-	static iser::CArchiveTag outerRadiusTag("OuterRadius", "Outer radius");
+	static iser::CArchiveTag innerRadiusTag("InnerRadius", "Inner radius", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag outerRadiusTag("OuterRadius", "Outer radius", iser::CArchiveTag::TT_LEAF);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
-	double innerRadius = m_radiusRange.GetMinValue();
-	double outerRadius = m_radiusRange.GetMaxValue();
-
 	retVal = retVal && archive.BeginTag(innerRadiusTag);
-	retVal = retVal && archive.Process(innerRadius);
+	retVal = retVal && archive.Process(m_radiusRange.GetMinValueRef());
 	retVal = retVal && archive.EndTag(innerRadiusTag);
 
 	retVal = retVal && archive.BeginTag(outerRadiusTag);
-	retVal = retVal && archive.Process(outerRadius);
+	retVal = retVal && archive.Process(m_radiusRange.GetMaxValueRef());
 	retVal = retVal && archive.EndTag(outerRadiusTag);
-
-	if (!archive.IsStoring()){
-		istd::CChangeNotifier changePtr(this);
-
-		m_radiusRange = istd::CRange(innerRadius, outerRadius);
-	}
 
 	return retVal;
 }

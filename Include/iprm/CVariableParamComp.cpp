@@ -74,7 +74,8 @@ bool CVariableParamComp::AssignTypeId(const QByteArray& typeId)
 
 bool CVariableParamComp::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag paramTypeIdTag("TypeId", "Paramter type ID used to create specified type object");
+	static iser::CArchiveTag paramTypeIdTag("TypeId", "Paramter type ID used to create specified type object", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag parameterTag("Parameter", "Paramter object depending on type ID", iser::CArchiveTag::TT_GROUP);
 
 	bool isStoring = archive.IsStoring();
 
@@ -96,7 +97,6 @@ bool CVariableParamComp::Serialize(iser::IArchive& archive)
 	}
 
 	if (m_paramPtr.IsValid()){
-		static iser::CArchiveTag parameterTag("Parameter", "Paramter object depending on type ID");
 		retVal = retVal && archive.BeginTag(parameterTag);
 		retVal = retVal && m_paramPtr->Serialize(archive);
 		retVal = retVal && archive.EndTag(parameterTag);

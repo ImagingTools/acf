@@ -24,15 +24,37 @@ class IArchive;
 class CArchiveTag
 {
 public:
+	enum TagType
+	{
+		/**
+			Unknown type of tag.
+		*/
+		TT_UNKNOWN,
+		/**
+			Normal tag, not being leaf or multiple.
+		*/
+		TT_GROUP,
+		/**
+			Multiple tag containing variable number of childs (tags). All childs must be the same type.
+		*/
+		TT_MULTIPLE,
+		/**
+			Leaf tag, some leaf specific optimizations can be enabled.
+		*/
+		TT_LEAF
+	};
+
 	/**
 		Constructor with parameter initialization.
 		\param	id					ID of this tag.
 		\param	comment				human readable and are used for diagnostic.
 		\param	isTagSkippingUsed	true if it is needed to support tag skipping for this tag.
 	*/
-	CArchiveTag(	const QByteArray& id,
-					const QByteArray& comment,
-					bool isTagSkippingUsed = false);
+	CArchiveTag(const QByteArray& id,
+				const QByteArray& comment,
+				TagType tagType = TT_UNKNOWN,
+				CArchiveTag* parentPtr = NULL,
+				bool isTagSkippingUsed = false);
 
 	/**
 		Get ID of this tag.
@@ -49,6 +71,17 @@ public:
 		Comments are human readable and are used for diagnostic.
 	*/
 	const QByteArray& GetComment() const;
+
+	/**
+		Get type of this tag.
+	*/
+	TagType GetTagType() const;
+
+	/**
+		Get tag beeing parent of this.
+	*/
+	CArchiveTag* GetParentTag() const;
+
 	/**
 		Check if it is needed to support tag skipping for this tag.
 	*/
@@ -59,6 +92,9 @@ private:
 	quint32 m_binaryId;
 
 	QByteArray m_comment;
+
+	TagType m_tagType;
+	CArchiveTag* m_parentPtr;
 
 	bool m_isTagSkippingUsed;
 };
@@ -75,8 +111,6 @@ inline bool CArchiveTag::IsTagSkippingUsed() const
 } // namespace iser
 
 
-
 #endif // !iser_CArchiveTag_included
-
 
 

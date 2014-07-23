@@ -203,7 +203,7 @@ istd::IChangeable* CPosition2d::CloneMe(CompatibilityMode mode) const
 
 bool CPosition2d::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag centerTag("Center", "Center position");
+	static iser::CArchiveTag centerTag("Center", "Center position", iser::CArchiveTag::TT_GROUP);
 
 	static ChangeSet changeSet(CF_OBJECT_POSITION);
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);

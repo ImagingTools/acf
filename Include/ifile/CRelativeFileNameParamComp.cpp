@@ -64,7 +64,7 @@ bool CRelativeFileNameParamComp::Serialize(iser::IArchive& archive)
 		documentPath = fileArchiveInfoPtr->GetCurrentFilePath();
 	}
 
-	static iser::CArchiveTag pathTag("Path", "File path");
+	static iser::CArchiveTag pathTag("Path", "File path", iser::CArchiveTag::TT_LEAF);
 
 	if (archive.IsStoring()){
 		QString filePath = GetPath();

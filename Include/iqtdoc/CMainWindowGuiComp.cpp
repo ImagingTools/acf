@@ -383,11 +383,11 @@ bool CMainWindowGuiComp::SerializeRecentFileList(iser::IArchive& archive)
 {
 	int documentTypeIdsCount = m_recentFilesMap.size();
 
-	static iser::CArchiveTag documentGroupsTag("DocumentGroups", "List of document ID's");
-	static iser::CArchiveTag groupTag("Group", "Group of documents with the same ID");
-	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID");
-	static iser::CArchiveTag fileListTag("FileList", "List of recent files");
-	static iser::CArchiveTag filePathTag("FilePath", "File path");
+	static iser::CArchiveTag documentGroupsTag("DocumentGroups", "List of document ID's", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag groupTag("Group", "Group of documents with the same ID", iser::CArchiveTag::TT_GROUP, &documentGroupsTag);
+	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID", iser::CArchiveTag::TT_LEAF, &groupTag);
+	static iser::CArchiveTag fileListTag("FileList", "List of recent files", iser::CArchiveTag::TT_MULTIPLE, &groupTag);
+	static iser::CArchiveTag filePathTag("FilePath", "File path", iser::CArchiveTag::TT_LEAF, &fileListTag);
 
 	bool retVal = archive.BeginMultiTag(documentGroupsTag, groupTag, documentTypeIdsCount);
 

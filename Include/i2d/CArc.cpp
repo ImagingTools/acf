@@ -239,18 +239,18 @@ istd::IChangeable* CArc::CloneMe(CompatibilityMode mode) const
 
 bool CArc::Serialize(iser::IArchive& archive)
 {
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	static iser::CArchiveTag startAngleTag("StartAngle", "Start angle", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag endAngleTag("EndAngle", "End angle", iser::CArchiveTag::TT_LEAF);
 
-	bool retVal = true;
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
-	retVal = retVal && BaseClass::Serialize(archive);
+	bool retVal = BaseClass::Serialize(archive);
 
-	static iser::CArchiveTag startAngleTag("StartAngle", "Start angle");
 	retVal = retVal && archive.BeginTag(startAngleTag);
 	retVal = retVal && archive.Process(m_startAngle);
 	retVal = retVal && archive.EndTag(startAngleTag);
 
-	static iser::CArchiveTag endAngleTag("EndAngle", "End angle");
 	retVal = retVal && archive.BeginTag(endAngleTag);
 	retVal = retVal && archive.Process(m_endAngle);
 	retVal = retVal && archive.EndTag(endAngleTag);

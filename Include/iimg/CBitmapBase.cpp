@@ -190,11 +190,13 @@ bool CBitmapBase::SetColorAt(const istd::CIndex2d& position, const icmm::CVarCol
 
 bool CBitmapBase::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag headerTag("BitmapHeader", "Header of bitmap");
-	static iser::CArchiveTag sizeTag("Size", "Size of bitmap");
-	static iser::CArchiveTag sizeXTag("X", "Bitmap width");
-	static iser::CArchiveTag sizeYTag("Y", "Bitmap height");
-	static iser::CArchiveTag pixelFormatTag("PixelFormat", "Pixel format");
+	static iser::CArchiveTag headerTag("BitmapHeader", "Header of bitmap", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag sizeTag("Size", "Size of bitmap", iser::CArchiveTag::TT_GROUP, &headerTag);
+	static iser::CArchiveTag sizeXTag("X", "Bitmap width", iser::CArchiveTag::TT_LEAF, &sizeTag);
+	static iser::CArchiveTag sizeYTag("Y", "Bitmap height", iser::CArchiveTag::TT_LEAF, &sizeTag);
+	static iser::CArchiveTag pixelFormatTag("PixelFormat", "Pixel format", iser::CArchiveTag::TT_LEAF, &headerTag);
+	static iser::CArchiveTag dataTag("BitmapData", "Bitmap data section", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag lineTag("Line", "Single bitmap line", iser::CArchiveTag::TT_GROUP, &dataTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -238,7 +240,6 @@ bool CBitmapBase::Serialize(iser::IArchive& archive)
 		}
 	}
 
-	static iser::CArchiveTag dataTag("BitmapData", "Bitmap data section");
 	retVal = retVal && archive.BeginTag(dataTag);
 
 	int lineBytesCount = GetLineBytesCount();
@@ -246,7 +247,6 @@ bool CBitmapBase::Serialize(iser::IArchive& archive)
 	for (int lineIndex = 0; lineIndex < size.GetY(); ++lineIndex){
 		void* linePtr = GetLinePtr(lineIndex);
 
-		static iser::CArchiveTag lineTag("Line", "Single bitmap line");
 		retVal = retVal && archive.BeginTag(lineTag);
 		retVal = retVal && archive.ProcessData(linePtr, lineBytesCount);
 		retVal = retVal && archive.EndTag(lineTag);

@@ -43,7 +43,7 @@ CArchiveBase::CArchiveBase(const CArchiveBase&)
 
 // static attributes
 
-CArchiveTag CArchiveBase::s_acfRootTag("Acf", "Root tag of ACF");
+CArchiveTag CArchiveBase::s_acfRootTag("Acf", "Root tag of ACF", iser::CArchiveTag::TT_GROUP);
 
 
 } // namespace iser

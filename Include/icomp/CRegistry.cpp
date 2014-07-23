@@ -408,6 +408,9 @@ void CRegistry::SetKeywords(const QString& keywords)
 
 bool CRegistry::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag descriptionTag("Description", "Human readable description", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag keywordsTag("Keywords", "Human readable keywords", iser::CArchiveTag::TT_LEAF);
+
 	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 	quint32 frameworkVersion = 0;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
@@ -422,19 +425,17 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 	retVal = retVal && SerializeExportedComponents(archive);
 
 	if (frameworkVersion >= 807){
-		static iser::CArchiveTag descriptionTag("Description", "Human readable description");
 		retVal = retVal && archive.BeginTag(descriptionTag);
 		retVal = retVal && archive.Process(m_description);
 		retVal = retVal && archive.EndTag(descriptionTag);
 
-		static iser::CArchiveTag keywordsTag("Keywords", "Human readable keywords");
 		retVal = retVal && archive.BeginTag(keywordsTag);
 		retVal = retVal && archive.Process(m_keywords);
 		retVal = retVal && archive.EndTag(keywordsTag);
 
 		// TODO: remove it when back compatibility to specified versions range will be no more important
 		if (frameworkVersion >= 1422 && frameworkVersion < 1431){
-			static iser::CArchiveTag categoryTag("Category", "Logical category of the registry");
+			static iser::CArchiveTag categoryTag("Category", "Logical category of the registry", iser::CArchiveTag::TT_LEAF);
 			retVal = retVal && archive.BeginTag(categoryTag);
 			int dummy;
 			retVal = retVal && archive.Process(dummy);
@@ -485,11 +486,11 @@ IRegistryElement* CRegistry::CreateRegistryElement(
 
 bool CRegistry::SerializeComponents(iser::IArchive& archive)
 {
-	static iser::CArchiveTag elementsListTag("ElementsList", "List of registry elements");
-	static iser::CArchiveTag elementTag("Element", "Description of single element");
-	static iser::CArchiveTag elementIdTag("Id", "ID of element in registry");
-	static iser::CArchiveTag dataTag("Data", "Data of single element", true);
-	static iser::CArchiveTag isEnabledTag("IsEnabled", "It is true if this element is valid");
+	static iser::CArchiveTag elementsListTag("ElementsList", "List of registry elements", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag elementTag("Element", "Description of single element", iser::CArchiveTag::TT_GROUP, &elementsListTag);
+	static iser::CArchiveTag elementIdTag("Id", "ID of element in registry", iser::CArchiveTag::TT_LEAF, &elementTag);
+	static iser::CArchiveTag dataTag("Data", "Data of single element", iser::CArchiveTag::TT_GROUP, &elementTag, true);
+	static iser::CArchiveTag isEnabledTag("IsEnabled", "It is true if this element is valid", iser::CArchiveTag::TT_LEAF, &dataTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -585,10 +586,10 @@ bool CRegistry::SerializeComponents(iser::IArchive& archive)
 
 bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 {
-	static iser::CArchiveTag registriesListTag("EmbeddedRegistriesList", "List of embedded registries");
-	static iser::CArchiveTag registryTag("EmbeddedRegistry", "Description of single embedded registry");
-	static iser::CArchiveTag registryIdTag("Id", "ID of embedded registry");
-	static iser::CArchiveTag dataTag("Data", "Data of single embedded registry");
+	static iser::CArchiveTag registriesListTag("EmbeddedRegistriesList", "List of embedded registries", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag registryTag("EmbeddedRegistry", "Description of single embedded registry", iser::CArchiveTag::TT_GROUP, &registriesListTag);
+	static iser::CArchiveTag registryIdTag("Id", "ID of embedded registry", iser::CArchiveTag::TT_LEAF, &registryTag);
+	static iser::CArchiveTag dataTag("Data", "Data of single embedded registry", iser::CArchiveTag::TT_GROUP, &registryTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -661,10 +662,10 @@ bool CRegistry::SerializeEmbeddedRegistries(iser::IArchive& archive)
 
 bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 {
-	static iser::CArchiveTag exportedInterfacesTag("ExportedInterfaces", "List of exported interfaces");
-	static iser::CArchiveTag interfaceTag("Interface", "Single exported interface");
-	static iser::CArchiveTag interfaceIdTag("InterfaceId", "ID of exported interface");
-	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry implementing exported interface");
+	static iser::CArchiveTag exportedInterfacesTag("ExportedInterfaces", "List of exported interfaces", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag interfaceTag("Interface", "Single exported interface", iser::CArchiveTag::TT_GROUP, &exportedInterfacesTag);
+	static iser::CArchiveTag interfaceIdTag("InterfaceId", "ID of exported interface", iser::CArchiveTag::TT_LEAF, &interfaceTag);
+	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry implementing exported interface", iser::CArchiveTag::TT_LEAF, &interfaceTag);
 
 	bool isStoring = archive.IsStoring();
 
@@ -722,10 +723,10 @@ bool CRegistry::SerializeExportedInterfaces(iser::IArchive& archive)
 
 bool CRegistry::SerializeExportedComponents(iser::IArchive& archive)
 {
-	static iser::CArchiveTag exportedComponentsTag("ExportedComponents", "List of exported components");
-	static iser::CArchiveTag componentTag("Component", "Exported component info");
-	static iser::CArchiveTag exportedIdTag("ExportedId", "Exported component ID");
-	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry");
+	static iser::CArchiveTag exportedComponentsTag("ExportedComponents", "List of exported components", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag componentTag("Component", "Exported component info", iser::CArchiveTag::TT_GROUP, &exportedComponentsTag);
+	static iser::CArchiveTag exportedIdTag("ExportedId", "Exported component ID", iser::CArchiveTag::TT_LEAF, &componentTag);
+	static iser::CArchiveTag componentIdTag("ComponentId", "ID of component in registry", iser::CArchiveTag::TT_LEAF, &componentTag);
 
 	bool isStoring = archive.IsStoring();
 

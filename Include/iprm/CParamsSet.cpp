@@ -157,10 +157,10 @@ bool CParamsSet::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag paramsSetTag("ParamsSet", "List of parameters");
-	static iser::CArchiveTag parameterTag("Parameter", "Single parameter", true);
-	static iser::CArchiveTag parameterIdTag("Id", "ID of parameter");
-	static iser::CArchiveTag parameterValueTag("Value", "Value of parameter");
+	static iser::CArchiveTag paramsSetTag("ParamsSet", "List of parameters", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag parameterTag("Parameter", "Single parameter", iser::CArchiveTag::TT_GROUP, &paramsSetTag, true);
+	static iser::CArchiveTag parameterIdTag("Id", "ID of parameter", iser::CArchiveTag::TT_LEAF, &parameterTag);
+	static iser::CArchiveTag parameterValueTag("Value", "Value of parameter", iser::CArchiveTag::TT_GROUP, &parameterTag);
 
 	if (archive.IsStoring()){
 		int paramsCount = m_params.GetCount();

@@ -91,14 +91,12 @@ istd::IChangeable* COrientedCircle::CloneMe(CompatibilityMode mode) const
 
 bool COrientedCircle::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag orientatedOutsideTag("IsOrientedOutside", "Flag if this circle is oriented inside or outside");
+	static iser::CArchiveTag orientatedOutsideTag("IsOrientedOutside", "Flag if this circle is oriented inside or outside", iser::CArchiveTag::TT_LEAF);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
-	bool retVal = true;
-
-	retVal = retVal && BaseClass::Serialize(archive);
+	bool retVal = BaseClass::Serialize(archive);
 
 	retVal = retVal && archive.BeginTag(orientatedOutsideTag);
 	retVal = retVal && archive.Process(m_orientedOutside);

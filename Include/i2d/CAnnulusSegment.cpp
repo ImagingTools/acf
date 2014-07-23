@@ -151,34 +151,29 @@ istd::IChangeable* CAnnulusSegment::CloneMe(CompatibilityMode mode) const
 
 bool CAnnulusSegment::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag beginAngleTag("BeginAngle", "Start angle of the segment");
-	static iser::CArchiveTag endAngleTag("EndAngle", "End angle of the segment");
+	static iser::CArchiveTag beginAngleTag("BeginAngle", "Start angle of the segment", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag endAngleTag("EndAngle", "End angle of the segment", iser::CArchiveTag::TT_LEAF);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
-	if (archive.IsStoring()){
-		double beginAngle = GetBeginAngle();
-		double endAngle = GetEndAngle();
+	const iser::IVersionInfo& versionInfo = archive.GetVersionInfo();
 
-		retVal = retVal && archive.Process(beginAngle);
-		retVal = retVal && archive.Process(endAngle);
+	quint32 versionNumber = 0;
+	if (!versionInfo.GetVersionNumber(1, versionNumber) || (versionNumber > 1177)){
+		retVal = retVal && archive.BeginTag(beginAngleTag);
+		retVal = retVal && archive.Process(m_angleRange.GetMinValueRef());
+		retVal = retVal && archive.EndTag(beginAngleTag);
+
+		retVal = retVal && archive.BeginTag(endAngleTag);
+		retVal = retVal && archive.Process(m_angleRange.GetMaxValueRef());
+		retVal = retVal && archive.EndTag(endAngleTag);
 	}
 	else{
-		double beginAngle = 0;
-		double endAngle = 0;
-
-		retVal = retVal && archive.Process(beginAngle);
-		retVal = retVal && archive.Process(endAngle);
-
-		if (!retVal){
-			return false;
-		}
-
-		SetBeginAngle(beginAngle);
-		SetEndAngle(endAngle);
+		retVal = retVal && archive.Process(m_angleRange.GetMinValueRef());
+		retVal = retVal && archive.Process(m_angleRange.GetMaxValueRef());
 	}
 
 	return retVal;

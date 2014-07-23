@@ -85,15 +85,16 @@ bool CSize::IsNull() const
 
 bool CSize::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag widthTag("Width", "Width", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag heightTag("Height", "Height", iser::CArchiveTag::TT_LEAF);
+
 	int width = GetX();
 	int height = GetY();
 
-	static iser::CArchiveTag widthTag("Width", "Width");
 	bool retVal = archive.BeginTag(widthTag);
 	retVal = retVal && archive.Process(width);
 	retVal = retVal && archive.EndTag(widthTag);
 
-	static iser::CArchiveTag heightTag("Height", "Height");
 	retVal = retVal && archive.BeginTag(heightTag);
 	retVal = retVal && archive.Process(height);
 	retVal = retVal && archive.EndTag(heightTag);

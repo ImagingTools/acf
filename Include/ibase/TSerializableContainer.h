@@ -43,10 +43,11 @@ protected:
 template <typename ItemClass>
 bool TSerializableContainer<ItemClass>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag itemsTag("Items", "List of items");
-	static iser::CArchiveTag itemTag("Item", "Item");
+	static iser::CArchiveTag itemsTag("Items", "List of items", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag itemTag("Item", "Item", iser::CArchiveTag::TT_GROUP, &itemsTag);
 
 	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	int itemCount = int(BaseClass::m_items.size());
 

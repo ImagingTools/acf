@@ -40,9 +40,10 @@ bool CNameParam::IsNameFixed() const
 
 bool CNameParam::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag nameTag("Name", "Object name");
+	static iser::CArchiveTag nameTag("Name", "Object name", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier changePtr(archive.IsStoring()? NULL: this);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	Q_UNUSED(notifier);
 
 	bool retVal = archive.BeginTag(nameTag);
 	retVal = retVal && archive.Process(m_name);

@@ -188,16 +188,16 @@ bool TMultiPageDocumentWrap<Base>::IsOptionEnabled(int /*index*/) const
 template <class Base>
 bool TMultiPageDocumentWrap<Base>::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag pagesTag("Pages", "Container of the document pages", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag pageTag("Page", "Single document page", iser::CArchiveTag::TT_GROUP, &pagesTag);
+
 	// Serialize meta info:
-	static iser::CArchiveTag metaInfoTag("MetaInfo", "Meta information about the document");
 	bool retVal = archive.BeginTag(metaInfoTag);
 	retVal = retVal && BaseClass2::Serialize(archive);
 	retVal = retVal && archive.EndTag(metaInfoTag);
 
 	// Serialize document pages:
-	static iser::CArchiveTag pagesTag("Pages", "Container of the document pages");
-	static iser::CArchiveTag pageTag("Page", "Single document page");
-
 	int pagesCount = m_documentPages.count();
 
 	retVal = retVal && archive.BeginMultiTag(pagesTag, pageTag, pagesCount);
@@ -273,12 +273,12 @@ bool TMultiPageDocumentWrap<Base>::CopyFrom(const istd::IChangeable& object, Com
 template <class Base>
 bool TMultiPageDocumentWrap<Base>::SerializePage(iser::IArchive& archive, Page& pageItem)
 {
-	static iser::CArchiveTag pageTitleTag("PageTitle", "Title of the page");
+	static iser::CArchiveTag pageTitleTag("PageTitle", "Title of the page", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag pageContentTag("PageContent", "The contents of the page", iser::CArchiveTag::TT_GROUP);
+
 	bool retVal = archive.BeginTag(pageTitleTag);
 	retVal = retVal && pageItem.pageMetaInfo.Serialize(archive);
 	retVal = retVal && archive.EndTag(pageTitleTag);
-
-	static iser::CArchiveTag pageContentTag("PageContent", "The contents of the page");
 
 	iser::ISerializable* serializablePagePtr = dynamic_cast<iser::ISerializable*>(pageItem.pagePtr.GetPtr());
 	if (serializablePagePtr != NULL){

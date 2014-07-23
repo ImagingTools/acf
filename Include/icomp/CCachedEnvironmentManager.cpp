@@ -72,13 +72,13 @@ const icomp::IRegistry* CCachedEnvironmentManager::GetRegistry(
 
 bool CCachedEnvironmentManager::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag packagesTag("Packages", "Set of known packages");
-	static iser::CArchiveTag packageTag("Package", "Single package description");
-	static iser::CArchiveTag packageIdTag("PackageId", "Name of package");
-	static iser::CArchiveTag componentsTag("Components", "List of components");
-	static iser::CArchiveTag componentTag("Component", "Single component description");
-	static iser::CArchiveTag componentIdTag("ComponentId", "Name of component");
-	static iser::CArchiveTag registryDataTag("Registry", "Registry data");
+	static iser::CArchiveTag packagesTag("Packages", "Set of known packages", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag packageTag("Package", "Single package description", iser::CArchiveTag::TT_GROUP, &packagesTag);
+	static iser::CArchiveTag packageIdTag("PackageId", "Name of package", iser::CArchiveTag::TT_LEAF, &packageTag);
+	static iser::CArchiveTag componentsTag("Components", "List of components", iser::CArchiveTag::TT_MULTIPLE, &packageTag);
+	static iser::CArchiveTag componentTag("Component", "Single component description", iser::CArchiveTag::TT_GROUP, &componentsTag);
+	static iser::CArchiveTag componentIdTag("ComponentId", "Name of component", iser::CArchiveTag::TT_LEAF, &componentTag);
+	static iser::CArchiveTag registryDataTag("Registry", "Registry data", iser::CArchiveTag::TT_GROUP, &componentTag);
 
 	bool retVal = true;
 

@@ -886,8 +886,8 @@ bool TMatrix<Width, Height, Element>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag sizeTag("Size", "Size of matrix");
-	static iser::CArchiveTag cellsTag("Cells", "Values of matrix cells");
+	static iser::CArchiveTag sizeTag("Size", "Size of matrix", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag cellsTag("Cells", "Values of matrix cells", iser::CArchiveTag::TT_GROUP);
 
 	retVal = retVal && archive.BeginTag(sizeTag);
 	if (archive.IsStoring()){

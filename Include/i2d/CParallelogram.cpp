@@ -149,10 +149,10 @@ istd::IChangeable* CParallelogram::CloneMe(CompatibilityMode mode) const
 
 bool CParallelogram::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag transformTag("Transform", "Transformation used in parallelogram");
+	static iser::CArchiveTag transformTag("Transform", "Transformation used in parallelogram", iser::CArchiveTag::TT_GROUP);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

@@ -115,9 +115,14 @@ QByteArray CMessage::GetFactoryId() const
 
 bool CMessage::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag categoryTag("Category", "Message category");
+	static iser::CArchiveTag categoryTag("Category", "Message category", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag textTag("Text", "Message text", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag sourceTag("Source", "Message source", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag timeStampTag("Timestamp", "Message time stamp", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag idTag("ID", "ID of the message", iser::CArchiveTag::TT_LEAF);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool isStoring = archive.IsStoring();
 
@@ -131,17 +136,14 @@ bool CMessage::Serialize(iser::IArchive& archive)
 		m_category = istd::IInformationProvider::InformationCategory(category);
 	}
 
-	static iser::CArchiveTag textTag("Text", "Message text");
 	retVal = retVal && archive.BeginTag(textTag);
 	retVal = retVal && archive.Process(m_text);
 	retVal = retVal && archive.EndTag(textTag);
 
-	static iser::CArchiveTag sourceTag("Source", "Message source");
 	retVal = retVal && archive.BeginTag(sourceTag);
 	retVal = retVal && archive.Process(m_source);
 	retVal = retVal && archive.EndTag(sourceTag);
 
-	static iser::CArchiveTag timeStampTag("Timestamp", "Message time stamp");
 	retVal = retVal && archive.BeginTag(timeStampTag);
 	retVal = retVal && iser::CPrimitiveTypesSerializer::SerializeDateTime(archive, m_timeStamp);
 	retVal = retVal && archive.EndTag(timeStampTag);
@@ -149,7 +151,6 @@ bool CMessage::Serialize(iser::IArchive& archive)
 	quint32 version = 0;
 	if (		!archive.GetVersionInfo().GetVersionNumber(iser::IVersionInfo::AcfVersionId, version) ||
 				(version > 3264)){
-		static iser::CArchiveTag idTag("ID", "ID of the message");
 		retVal = retVal && archive.BeginTag(idTag);
 		retVal = retVal && archive.Process(m_id);
 		retVal = retVal && archive.EndTag(idTag);

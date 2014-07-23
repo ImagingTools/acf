@@ -164,10 +164,12 @@ void TFactorisableContainer<InterfaceClass>::RegisterItemFactory(istd::TIFactory
 template <class InterfaceClass>
 bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag itemsTag("Items", "List of items");
-	static iser::CArchiveTag itemTag("Item", "Item");
+	static iser::CArchiveTag itemsTag("Items", "List of items", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag itemTag("Item", "Item", iser::CArchiveTag::TT_GROUP, &itemsTag);
+	static iser::CArchiveTag keyTag("ItemKey", "Factory key of the item", iser::CArchiveTag::TT_LEAF, &itemTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	if (!archive.IsStoring()){
 		this->Reset();
@@ -181,14 +183,14 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 	}
 
 	for (int index = 0; index < itemCount; index++){
+		retVal = retVal && archive.BeginTag(itemTag);
+
 		ItemClass item;
 		QByteArray itemKey;
 
 		if (archive.IsStoring()){
 			itemKey = BaseClass::GetAt(index).second;
 		}
-
-		static iser::CArchiveTag keyTag("ItemKey", "Factory key of the item");
 
 		retVal = retVal && archive.BeginTag(keyTag);
 		retVal = retVal && archive.Process(itemKey);
@@ -209,8 +211,8 @@ bool TFactorisableContainer<InterfaceClass>::Serialize(iser::IArchive& archive)
 
 		ItemClass& containerItem = BaseClass::GetAt(index);
 
-		retVal = retVal && archive.BeginTag(itemTag);
 		retVal = retVal && SerializeItem(containerItem, archive);
+
 		retVal = retVal && archive.EndTag(itemTag);
 	}
 

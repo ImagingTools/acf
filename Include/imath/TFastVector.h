@@ -773,8 +773,8 @@ bool TFastVector<MaxSize, Element>::Serialize(iser::IArchive& archive)
 {
 	bool retVal = true;
 
-	static iser::CArchiveTag elementsTag("Elements", "List of vector element");
-	static iser::CArchiveTag elementTag("Element", "Single vector element");
+	static iser::CArchiveTag elementsTag("Elements", "List of vector element", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag elementTag("Element", "Single vector element", iser::CArchiveTag::TT_LEAF, &elementsTag);
 
 	retVal = retVal && archive.BeginMultiTag(elementsTag, elementTag, m_elementsCount);
 

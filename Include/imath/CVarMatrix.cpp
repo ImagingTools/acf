@@ -486,8 +486,8 @@ void CVarMatrix::GetRowVector(int rowIndex, CVarVector& result)
 
 bool CVarMatrix::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag sizeTag("Size", "Size of matrix");
-	static iser::CArchiveTag cellsTag("Cells", "Values of matrix cells");
+	static iser::CArchiveTag sizeTag("Size", "Size of matrix", iser::CArchiveTag::TT_GROUP);
+	static iser::CArchiveTag cellsTag("Cells", "Values of matrix cells", iser::CArchiveTag::TT_GROUP);
 
 	bool retVal = true;
 

@@ -175,16 +175,17 @@ bool CRegistryElement::RemoveAttribute(const QByteArray& attributeId)
 
 bool CRegistryElement::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag flagsTag("Flags", "Flags of registry element");
-	static iser::CArchiveTag attributeInfosTag("AttributeInfoMap", "List of attribute infos");
-	static iser::CArchiveTag attributeInfoTag("AttributeInfo", "Attribute info", true);
-	static iser::CArchiveTag attributeIdTag("Id", "Attribute ID");
-	static iser::CArchiveTag attributeTypeTag("Type", "Type of attribute");
-	static iser::CArchiveTag exportIdTag("ExportId", "ID used for export");
-	static iser::CArchiveTag dataTag("Data", "ID used for export", true);
-	static iser::CArchiveTag isEnabledTag("IsEnabled", "Is attribute enabled");
+	static iser::CArchiveTag flagsTag("Flags", "Flags of registry element", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag attributeInfosTag("AttributeInfoMap", "List of attribute infos", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag attributeInfoTag("AttributeInfo", "Attribute info", iser::CArchiveTag::TT_GROUP, &attributeInfosTag, true);
+	static iser::CArchiveTag attributeIdTag("Id", "Attribute ID", iser::CArchiveTag::TT_LEAF, &attributeInfoTag);
+	static iser::CArchiveTag attributeTypeTag("Type", "Type of attribute", iser::CArchiveTag::TT_LEAF, &attributeInfoTag);
+	static iser::CArchiveTag exportIdTag("ExportId", "ID used for export", iser::CArchiveTag::TT_LEAF, &attributeInfoTag);
+	static iser::CArchiveTag dataTag("Data", "ID used for export", iser::CArchiveTag::TT_GROUP, &attributeInfoTag, true);
+	static iser::CArchiveTag isEnabledTag("IsEnabled", "Is attribute enabled", iser::CArchiveTag::TT_LEAF, &dataTag);
 
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = true;
 

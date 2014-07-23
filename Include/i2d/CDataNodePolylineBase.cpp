@@ -15,18 +15,23 @@ namespace i2d
 
 bool CDataNodePolylineBase::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag nodesDataTag("UserData", "User data stored in the nodes of polyline");
-	static iser::CArchiveTag nodeDataTag("Node", "Data stored in the polyline node");
+	static iser::CArchiveTag nodesDataTag("UserData", "User data stored in the nodes of polyline", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag nodeDataTag("Node", "Data stored in the polyline node", iser::CArchiveTag::TT_GROUP, &nodesDataTag);
 
-	static ChangeSet changeSet(CF_OBJECT_POSITION, CF_ALL_DATA);
-	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, changeSet);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
+	Q_UNUSED(notifier);
 
 	bool retVal = BaseClass::Serialize(archive);
 
 	// static attributes
 	if (retVal){
 		int nodesCount = GetNodesCount();
-		retVal = retVal && archive.BeginTag(nodesDataTag);
+		retVal = retVal && archive.BeginMultiTag(nodesDataTag, nodeDataTag, nodesCount);
+
+		if (!archive.IsStoring()){
+			SetNodesCount(nodesCount);
+		}
+
 		for (int nodeIndex = 0; nodeIndex < nodesCount; ++nodeIndex){
 			iser::ISerializable& nodeData = GetNodeDataRef(nodeIndex);
 

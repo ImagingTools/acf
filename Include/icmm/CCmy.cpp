@@ -12,19 +12,20 @@ namespace icmm
 
 bool CCmy::Serialize(iser::IArchive& archive)
 {
+	static iser::CArchiveTag cyanTag("Cyan", "Cyan component", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag magentaTag("Magenta", "Magenta component", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag yellowTag("Yellow", "Yellow component", iser::CArchiveTag::TT_LEAF);
+
 	bool retVal = true;
 
-	static iser::CArchiveTag cyanTag("Cyan", "Cyan component");
 	retVal = retVal && archive.BeginTag(cyanTag);
 	retVal = retVal && archive.Process(GetElementRef(CI_CYAN));
 	retVal = retVal && archive.EndTag(cyanTag);
 
-	static iser::CArchiveTag magentaTag("Magenta", "Magenta component");
 	retVal = retVal && archive.BeginTag(magentaTag);
 	retVal = retVal && archive.Process(GetElementRef(CI_MAGENTA));
 	retVal = retVal && archive.EndTag(magentaTag);
 
-	static iser::CArchiveTag yellowTag("Yellow", "Yellow component");
 	retVal = retVal && archive.BeginTag(yellowTag);
 	retVal = retVal && archive.Process(GetElementRef(CI_YELLOW));
 	retVal = retVal && archive.EndTag(yellowTag);

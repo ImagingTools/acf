@@ -129,8 +129,8 @@ bool CVarVector::GetNormalized(CVarVector& result, double length) const
 
 bool CVarVector::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag elementsTag("Elements", "List of vector element");
-	static iser::CArchiveTag elementTag("Element", "Single vector element");
+	static iser::CArchiveTag elementsTag("Elements", "List of vector element", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag elementTag("Element", "Single vector element", iser::CArchiveTag::TT_LEAF, &elementsTag);
 
 	bool isStoring = archive.IsStoring();
 

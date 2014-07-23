@@ -51,7 +51,7 @@ bool CEnableableParam::SetEnabled(bool isEnabled)
 
 bool CEnableableParam::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag enabledTag("IsEnabled", "Object enabled state");
+	static iser::CArchiveTag enabledTag("IsEnabled", "Object enabled state", iser::CArchiveTag::TT_LEAF);
 
 	bool isStoring = archive.IsStoring();
 

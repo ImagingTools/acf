@@ -16,8 +16,8 @@ namespace iser
 
 bool CPrimitiveTypesSerializer::SerializeRange(iser::IArchive& archive, istd::CRange& range)
 {
-	static iser::CArchiveTag minValueTag("MinValue", "Minimal range value");
-	static iser::CArchiveTag maxValueTag("MaxValue", "Maximal range value");
+	static iser::CArchiveTag minValueTag("MinValue", "Minimal range value", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag maxValueTag("MaxValue", "Maximal range value", iser::CArchiveTag::TT_LEAF);
 
 	bool retVal = true;
 
@@ -35,8 +35,8 @@ bool CPrimitiveTypesSerializer::SerializeRange(iser::IArchive& archive, istd::CR
 
 bool CPrimitiveTypesSerializer::SerializeIntRange(iser::IArchive& archive, istd::CIntRange& range)
 {
-	static iser::CArchiveTag minValueTag("MinValue", "Minimal range value");
-	static iser::CArchiveTag maxValueTag("MaxValue", "Maximal range value");
+	static iser::CArchiveTag minValueTag("MinValue", "Minimal range value", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag maxValueTag("MaxValue", "Maximal range value", iser::CArchiveTag::TT_LEAF);
 
 	bool retVal = true;
 
@@ -54,9 +54,9 @@ bool CPrimitiveTypesSerializer::SerializeIntRange(iser::IArchive& archive, istd:
 
 bool CPrimitiveTypesSerializer::SerializeRanges(iser::IArchive& archive, istd::CRanges& ranges)
 {
-	static iser::CArchiveTag beginStateTag("BeginState", "Begin state");
-	static iser::CArchiveTag switchPointsTag("SwitchPoints", "List of switch point positions");
-	static iser::CArchiveTag positionTag("Position", "Switch point position");
+	static iser::CArchiveTag beginStateTag("BeginState", "Begin state", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag switchPointsTag("SwitchPoints", "List of switch point positions", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag positionTag("Position", "Switch point position", iser::CArchiveTag::TT_LEAF, &switchPointsTag);
 
 	bool retVal = true;
 
@@ -123,9 +123,9 @@ bool CPrimitiveTypesSerializer::SerializeRanges(iser::IArchive& archive, istd::C
 
 bool CPrimitiveTypesSerializer::SerializeIntRanges(iser::IArchive& archive, istd::CIntRanges& ranges)
 {
-	static iser::CArchiveTag beginStateTag("BeginState", "Begin state");
-	static iser::CArchiveTag switchPointsTag("SwitchPoints", "List of switch point positions");
-	static iser::CArchiveTag positionTag("Position", "Switch point position");
+	static iser::CArchiveTag beginStateTag("BeginState", "Begin state", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag switchPointsTag("SwitchPoints", "List of switch point positions", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag positionTag("Position", "Switch point position", iser::CArchiveTag::TT_LEAF, &switchPointsTag);
 
 	bool retVal = true;
 
@@ -215,15 +215,16 @@ bool CPrimitiveTypesSerializer::SerializeDateTime(iser::IArchive& archive, QDate
 
 bool CPrimitiveTypesSerializer::SerializeQPointF(iser::IArchive& archive, QPointF& point)
 {
+	static iser::CArchiveTag xTag("X", "Horizontal position", iser::CArchiveTag::TT_LEAF);
+	static iser::CArchiveTag yTag("Y", "Vertical position", iser::CArchiveTag::TT_LEAF);
+
 	float x = point.x();
 	float y = point.y();
 
-	static iser::CArchiveTag xTag("X", "Horizontal position");
 	bool retVal = archive.BeginTag(xTag);
 	retVal = retVal && archive.Process(x);
 	retVal = retVal && archive.EndTag(xTag);
 
-	static iser::CArchiveTag yTag("Y", "Vertical position");
 	retVal = retVal && archive.BeginTag(yTag);
 	retVal = retVal && archive.Process(y);
 	retVal = retVal && archive.EndTag(yTag);

@@ -174,8 +174,8 @@ QByteArray TMultiAttribute<Value>::GetFactoryId() const
 template <typename Value>
 bool TMultiAttribute<Value>::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag valuesTag("Values", "List of attribute values");
-	static iser::CArchiveTag valueTag("Value", "Single Value");
+	static iser::CArchiveTag valuesTag("Values", "List of attribute values", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag valueTag("Value", "Single Value", iser::CArchiveTag::TT_LEAF, &valuesTag);
 
 	bool isStoring = archive.IsStoring();
 

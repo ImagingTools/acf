@@ -767,15 +767,15 @@ bool CMultiDocumentManagerBase::RegisterDocument(SingleDocumentData* infoPtr)
 
 bool CMultiDocumentManagerBase::SerializeOpenDocumentList(iser::IArchive& archive)
 {
-	static iser::CArchiveTag openDocumentsListTag("OpenDocumentsList", "List of open documents ");
-	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties");
-	static iser::CArchiveTag filePathTag("FilePath", "File path");
-	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID");
+	static iser::CArchiveTag openDocumentsListTag("OpenDocumentsList", "List of open documents", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag openDocumentTag("OpenDocument", "Single document properties", iser::CArchiveTag::TT_GROUP, &openDocumentsListTag);
+	static iser::CArchiveTag filePathTag("FilePath", "File path", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
+	static iser::CArchiveTag documentTypeIdTag("DocumentTypeId", "Document Type ID", iser::CArchiveTag::TT_LEAF, &openDocumentTag);
 
-	static iser::CArchiveTag viewListTag("ViewList", "View list");
-	static iser::CArchiveTag viewTag("View", "View");
-	static iser::CArchiveTag viewTypeIdTag("ViewTypeId", "View type ID");
-	static iser::CArchiveTag viewIsActiveTag("ViewIsActive", "Active view");
+	static iser::CArchiveTag viewListTag("ViewList", "View list", iser::CArchiveTag::TT_MULTIPLE, &openDocumentTag);
+	static iser::CArchiveTag viewTag("View", "View", iser::CArchiveTag::TT_GROUP, &viewListTag);
+	static iser::CArchiveTag viewTypeIdTag("ViewTypeId", "View type ID", iser::CArchiveTag::TT_LEAF, &viewTag);
+	static iser::CArchiveTag viewIsActiveTag("ViewIsActive", "Active view", iser::CArchiveTag::TT_LEAF, &viewTag);
 
 	int documentsCount = GetDocumentsCount();
 

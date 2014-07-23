@@ -64,9 +64,9 @@ void CMessageContainer::SetMaxMessageCount(int maxMessageCount)
 
 bool CMessageContainer::Serialize(iser::IArchive& archive)
 {
-	static iser::CArchiveTag messagesTag("Messages", "List of messages");
-	static iser::CArchiveTag messageTag("Message", "Message");
-	static iser::CArchiveTag messageTypeIdTag("TypeId", "ID of the message type");
+	static iser::CArchiveTag messagesTag("Messages", "List of messages", iser::CArchiveTag::TT_MULTIPLE);
+	static iser::CArchiveTag messageTag("Message", "Message", iser::CArchiveTag::TT_GROUP, &messagesTag);
+	static iser::CArchiveTag messageTypeIdTag("TypeId", "ID of the message type", iser::CArchiveTag::TT_LEAF, &messageTag);
 
 	istd::IFactoryInfo::KeyList knownMessageTypes = GetMessageFactory().GetFactoryKeys();
 
@@ -110,12 +110,14 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 			if (messageObjectPtr != NULL){
 				QByteArray messageTypeId = messageObjectPtr->GetFactoryId();
 				if (knownMessageTypes.indexOf(messageTypeId) >= 0){
+					retVal = retVal && archive.BeginTag(messageTag);
+
 					retVal = retVal && archive.BeginTag(messageTypeIdTag);
 					retVal = retVal && archive.Process(messageTypeId);
 					retVal = retVal && archive.EndTag(messageTypeIdTag);
 
-					retVal = retVal && archive.BeginTag(messageTag);
 					retVal = retVal && messageObjectPtr->Serialize(archive);
+
 					retVal = retVal && archive.EndTag(messageTag);
 				}
 			}
@@ -125,6 +127,8 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 		m_messages.clear();
 
 		for (int messageIndex = 0; messageIndex < messageCount; ++messageIndex){
+			retVal = retVal && archive.BeginTag(messageTag);
+
 			QByteArray messageTypeId;
 			retVal = retVal && archive.BeginTag(messageTypeIdTag);
 			retVal = retVal && archive.Process(messageTypeId);
@@ -135,9 +139,7 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 					istd::TDelPtr<iser::IObject> objectPtr(GetMessageFactory().CreateInstance(messageTypeId));
 
 					if (objectPtr.IsValid()){
-						retVal = retVal && archive.BeginTag(messageTag);
 						retVal = retVal && objectPtr->Serialize(archive);
-						retVal = retVal && archive.EndTag(messageTag);
 
 						if (retVal){
 							istd::IInformationProvider* infoPtr = dynamic_cast<istd::IInformationProvider*>(objectPtr.GetPtr());
@@ -153,6 +155,8 @@ bool CMessageContainer::Serialize(iser::IArchive& archive)
 					qDebug("Message type: '%s' not supported", qPrintable(messageTypeId));
 				}
 			}
+
+			retVal = retVal && archive.EndTag(messageTag);
 		}
 	}
 
