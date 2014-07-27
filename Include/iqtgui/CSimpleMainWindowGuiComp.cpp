@@ -500,17 +500,16 @@ bool CSimpleMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
 	bool isVisible = true;
 	switch (eventPtr->type()){
-		case QEvent::Hide:
-			isVisible = false;
-			break;
+	case QEvent::Hide:
+		isVisible = false;
+		break;
 
-		case QEvent::Show:
-			isVisible = true;
-			break;
+	case QEvent::Show:
+		isVisible = true;
+		break;
 
-		default:
-			return BaseClass::eventFilter(sourcePtr, eventPtr);
-
+	default:
+		return BaseClass::eventFilter(sourcePtr, eventPtr);
 	}
 
 	QString objectName = sourcePtr->objectName();
