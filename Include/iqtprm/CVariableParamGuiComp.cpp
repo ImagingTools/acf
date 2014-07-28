@@ -3,14 +3,10 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-
 #include "imod/IModel.h"
 #include "imod/IObserver.h"
-
 #include "iqt/CSignalBlocker.h"
-
 #include "iview/IShapeView.h"
-
 #include "iqt2d/IViewProvider.h"
 
 
@@ -202,10 +198,6 @@ void CVariableParamGuiComp::UpdateGui(const istd::IChangeable::ChangeSet& change
 			editorPtr->UpdateEditor(changeSet);
 		}
 	}
-
-	if (IsGuiCreated()){
-		TypeSelectorCB->setVisible(m_currentTypeIndex < 0);
-	}
 }
 
 
@@ -260,6 +252,8 @@ void CVariableParamGuiComp::on_TypeSelectorCB_currentIndexChanged(int index)
 	istd::CChangeNotifier notifier(variableParamPtr);
 
 	if ((index >= 0) && (index < m_typeIdsAttrPtr.GetCount())){
+		DetachCurrentType();
+
 		variableParamPtr->AssignTypeId(m_typeIdsAttrPtr[index].toLocal8Bit());
 	}
 }
