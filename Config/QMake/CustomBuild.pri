@@ -10,18 +10,6 @@ else{
 }
 
 
-# custom build for Subversion Transformations
-
-win*{
-	svnTransformation.name = SVN-Rev-Transformation
-	svnTransformation.CONFIG += target_predeps
-	svnTransformation.output = ${QMAKE_FILE_IN_PATH}/../GeneratedFiles/$(QMAKE_TARGET)/${QMAKE_FILE_BASE}
-	svnTransformation.commands = SubWCRev.exe $${SVNTR_REPOSITORY} ${QMAKE_FILE_NAME} $${SVNTR_DESTINATION}/${QMAKE_FILE_BASE}
-	svnTransformation.input = SVNTR_FILES
-	QMAKE_EXTRA_COMPILERS += svnTransformation
-}
-
-
 # custom build for ACF Registry Compiler (Arxc)
 
 arxCompiler.name = ARX-Compiler

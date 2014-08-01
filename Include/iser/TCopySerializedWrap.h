@@ -17,6 +17,11 @@ namespace iser
 	\ingroup Persistence
 */
 extern bool CopyByArchive(const istd::IChangeable& object, istd::IChangeable& result);
+/**
+	Compare two objects using coparision of serialized streams.
+
+	\ingroup Persistence
+*/
 extern bool CompareByArchive(const istd::IChangeable& object1, const istd::IChangeable& object2);
 /// @endcond
 
@@ -29,7 +34,7 @@ public:
 
 	// pseudo-reimplemented (istd::IChangeable)
 	virtual int GetSupportedOperations() const;
-	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = BaseClass::CM_WITHOUT_REFS);
+	virtual bool CopyFrom(const istd::IChangeable& object, istd::IChangeable::CompatibilityMode mode = istd::IChangeable::CM_WITHOUT_REFS);
 	virtual bool IsEqual(const istd::IChangeable& object) const;
 };
 
