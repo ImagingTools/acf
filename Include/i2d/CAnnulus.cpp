@@ -3,10 +3,8 @@
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
-
 #include "i2d/CAffine2d.h"
 #include "i2d/CRectangle.h"
-
 #include "iser/IArchive.h"
 #include "iser/CArchiveTag.h"
 #include "istd/TDelPtr.h"

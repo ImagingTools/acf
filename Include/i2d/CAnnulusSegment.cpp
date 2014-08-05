@@ -14,6 +14,8 @@ namespace i2d
 {
 
 
+// public methods
+
 CAnnulusSegment::CAnnulusSegment()
 {
 }
@@ -120,11 +122,9 @@ bool CAnnulusSegment::CopyFrom(const IChangeable& object, CompatibilityMode mode
 	if (annulusSegmentPtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
-		SetPosition(annulusSegmentPtr->GetPosition());
-		SetInnerRadius(annulusSegmentPtr->GetInnerRadius());
-		SetOuterRadius(annulusSegmentPtr->GetOuterRadius());
-		SetBeginAngle(annulusSegmentPtr->GetBeginAngle());
-		SetEndAngle(annulusSegmentPtr->GetEndAngle());
+		m_position = annulusSegmentPtr->m_position;
+		m_radiusRange = annulusSegmentPtr->m_radiusRange;
+		m_angleRange = annulusSegmentPtr->m_angleRange;
 
 		CObject2dBase::CopyFrom(object, mode);
 
