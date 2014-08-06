@@ -220,9 +220,8 @@ bool CAnnulus::CopyFrom(const IChangeable& object, CompatibilityMode mode)
 	if (annulusPtr != NULL){
 		istd::CChangeNotifier notifier(this);
 
-		SetPosition(annulusPtr->GetPosition());
-		SetInnerRadius(annulusPtr->GetInnerRadius());
-		SetOuterRadius(annulusPtr->GetOuterRadius());
+		m_position = annulusPtr->m_position;
+		m_radiusRange = annulusPtr->m_radiusRange;
 
 		CObject2dBase::CopyFrom(object, mode);
 
