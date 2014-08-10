@@ -74,6 +74,7 @@ CVector2d CArc::GetPositionFromAlpha(double alpha) const
 	double angle = m_startAngle + ((m_endAngle - m_startAngle) * alpha);
 	i2d::CVector2d line;
 	line.Init(imath::GetRadianFromDegree(angle), m_radius);
+	line.SetY(-line.GetY());
 	line = line.GetTranslated(GetCenter());
 
 	return line;
@@ -85,8 +86,8 @@ CVector2d CArc::GetPositionFromAlpha(double alpha) const
 CRectangle CArc::GetBoundingBox() const
 {
 	return CRectangle(
-		m_position.GetX() - m_radius, 
-		m_position.GetY() - m_radius, 
+		m_position.GetX() - m_radius,
+		m_position.GetY() - m_radius,
 		2 * m_radius, 
 		2 * m_radius); 
 }
