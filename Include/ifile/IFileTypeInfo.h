@@ -7,6 +7,7 @@
 
 // ACF includes
 #include "istd/IPolymorphic.h"
+#include "istd/IChangeable.h"
 
 
 namespace ifile
@@ -52,11 +53,13 @@ public:
 
 	/**
 		Get file extensions supported by this loader
-		\param	result		list of extensions, e.g. {"txt", "doc"}.
-		\param	flags		set of flags \sa QueryFlags.
-		\param	doAppend	if true, list of extensions should be appended to existing list.
+		\param	result			list of extensions, e.g. {"txt", "doc"}.
+		\param	dataObjectPtr	optional pointer to data object for which all possible extensions are requested.
+								It can be NULL if any object is meant.
+		\param	flags			set of flags \sa QueryFlags.
+		\param	doAppend		if true, list of extensions should be appended to existing list.
 	*/
-	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const = 0;
+	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const = 0;
 
 	/**
 		Get description of object type associated with single extension.

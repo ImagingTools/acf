@@ -204,7 +204,7 @@ int CBitmapDocumentFilePersistenceComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CBitmapDocumentFilePersistenceComp::GetFileExtensions(QStringList& result, int /*flags*/, bool doAppend) const
+bool CBitmapDocumentFilePersistenceComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -241,7 +241,7 @@ void CBitmapDocumentFilePersistenceComp::OnComponentCreated()
 
 	if (m_bitmapPersistenceCompPtr.IsValid()){
 		QStringList bitmapSuffixes;
-		if (m_bitmapPersistenceCompPtr->GetFileExtensions(bitmapSuffixes, ifile::IFileTypeInfo::QF_FILE)){
+		if (m_bitmapPersistenceCompPtr->GetFileExtensions(bitmapSuffixes, NULL, ifile::IFileTypeInfo::QF_FILE)){
 			m_defaultPageSuffix = bitmapSuffixes.first();
 		}
 	}

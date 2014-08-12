@@ -18,6 +18,8 @@ CModelBase::CModelBase()
 
 CModelBase::~CModelBase()
 {
+	m_cumulatedChangeIds += istd::IChangeable::CF_DESTROYING;
+
 	DetachAllObservers();
 }
 

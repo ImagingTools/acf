@@ -24,7 +24,7 @@ public:
 	typedef TGuiComponentBase<WidgetType> BaseClass;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
+	virtual QWidget* CreateQtWidget(QWidget* parentPtr);
 
 protected:
 	// reimplemented (iqtgui::CGuiComponentBase)
@@ -37,11 +37,11 @@ protected:
 // reimplemented (iqtgui::CGuiComponentBase)
 
 template <class UI, class WidgetType>
-QWidget* TDesignerGuiCompBase<UI, WidgetType>::InitWidgetToParent(QWidget* parentPtr)
+QWidget* TDesignerGuiCompBase<UI, WidgetType>::CreateQtWidget(QWidget* parentPtr)
 {
 	Q_ASSERT(!BaseClass::IsGuiCreated());
 
-	QWidget* widgetPtr = BaseClass::InitWidgetToParent(parentPtr);
+	QWidget* widgetPtr = BaseClass::CreateQtWidget(parentPtr);
 
 	WidgetType* concreteWidgetPtr = dynamic_cast<WidgetType*>(widgetPtr);
 	Q_ASSERT(concreteWidgetPtr != NULL);

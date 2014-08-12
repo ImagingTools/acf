@@ -79,7 +79,7 @@ int CComposedFilePersistenceComp::SaveToFile(const istd::IChangeable& data, cons
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CComposedFilePersistenceComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CComposedFilePersistenceComp::GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -91,7 +91,7 @@ bool CComposedFilePersistenceComp::GetFileExtensions(QStringList& result, int fl
 	for (int i = 0; i < slavesCount; ++i){
 		ifile::IFilePersistence* loaderPtr = m_slaveLoadersCompPtr[i];
 		if (loaderPtr != NULL){
-			retVal = loaderPtr->GetFileExtensions(result, flags, true) | retVal;
+			retVal = loaderPtr->GetFileExtensions(result, dataObjectPtr, flags, true) | retVal;
 		}
 	}
 

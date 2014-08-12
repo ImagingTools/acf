@@ -32,7 +32,7 @@ public:
 	virtual WidgetType* GetQtWidget() const;
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
+	virtual QWidget* CreateQtWidget(QWidget* parentPtr);
 };
 
 
@@ -54,7 +54,7 @@ WidgetType* TGuiComponentBase<WidgetType>::GetQtWidget() const
 // reimplemented (iqtgui::CGuiComponentBase)
 
 template <class WidgetType>
-QWidget* TGuiComponentBase<WidgetType>::InitWidgetToParent(QWidget* parentPtr)
+QWidget* TGuiComponentBase<WidgetType>::CreateQtWidget(QWidget* parentPtr)
 {
 	Q_ASSERT(!IsGuiCreated());
 

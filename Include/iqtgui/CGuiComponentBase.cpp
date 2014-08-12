@@ -38,7 +38,7 @@ bool CGuiComponentBase::IsGuiCreated() const
 bool CGuiComponentBase::CreateGui(QWidget* parentPtr)
 {
 	if (m_widgetPtr == NULL){
-		m_widgetPtr = InitWidgetToParent(parentPtr);
+		m_widgetPtr = CreateQtWidget(parentPtr);
 
 		QByteArray componentId;
 		QByteArray widgetId;

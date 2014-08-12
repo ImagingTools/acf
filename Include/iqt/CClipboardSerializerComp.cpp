@@ -122,7 +122,7 @@ int CClipboardSerializerComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CClipboardSerializerComp::GetFileExtensions(QStringList& /*result*/, int /*flags*/, bool /*doAppend*/) const
+bool CClipboardSerializerComp::GetFileExtensions(QStringList& /*result*/, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool /*doAppend*/) const
 {
 	return false;
 }

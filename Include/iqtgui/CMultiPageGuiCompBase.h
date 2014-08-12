@@ -107,7 +107,7 @@ protected:
 	virtual void ResetPages();
 
 	// reimplemented (iqtgui::CGuiComponentBase)
-	virtual QWidget* InitWidgetToParent(QWidget* parentPtr);
+	virtual QWidget* CreateQtWidget(QWidget* parentPtr);
 
 	// reimplemented (iqtgui::CGuiComponentBase)
 	virtual void OnGuiCreated();

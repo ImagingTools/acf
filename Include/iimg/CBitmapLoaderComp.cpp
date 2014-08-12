@@ -38,7 +38,7 @@ bool CBitmapLoaderComp::IsOperationSupported(
 		QFileInfo info(*filePathPtr);
 
 		QStringList extensions;
-		if (GetFileExtensions(extensions, flags)){
+		if (GetFileExtensions(extensions, dataObjectPtr, flags)){
 			QStringList extensionsList = (extensions);
 
 			if (!extensionsList.contains(info.suffix(), Qt::CaseInsensitive)){
@@ -149,7 +149,7 @@ int CBitmapLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CBitmapLoaderComp::GetFileExtensions(QStringList& result, int /*flags*/, bool doAppend) const
+bool CBitmapLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

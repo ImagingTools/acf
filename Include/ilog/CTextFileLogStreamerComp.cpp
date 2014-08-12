@@ -35,9 +35,9 @@ bool CTextFileLogStreamerComp::IsOperationSupported(
 		return false;
 	}
 
-	return (dynamic_cast<const ilog::IMessageContainer*>(dataObjectPtr) != NULL) &&
-		((flags & QF_SAVE) != 0) &&
-		((flags & QF_FILE) != 0);
+	return		(dynamic_cast<const ilog::IMessageContainer*>(dataObjectPtr) != NULL) &&
+				((flags & QF_SAVE) != 0) &&
+				((flags & QF_FILE) != 0);
 }
 
 
@@ -83,7 +83,7 @@ int CTextFileLogStreamerComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CTextFileLogStreamerComp::GetFileExtensions(QStringList& result, int /*flags*/, bool doAppend) const
+bool CTextFileLogStreamerComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

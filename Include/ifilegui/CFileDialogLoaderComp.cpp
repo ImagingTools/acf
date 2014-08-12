@@ -25,7 +25,7 @@ bool CFileDialogLoaderComp::IsOperationSupported(
 			bool beQuiet) const
 {
 	if (filePathPtr != NULL && !filePathPtr->isEmpty()){
-		const ifile::IFilePersistence* loaderPtr = GetLoaderFor(*filePathPtr, -1, flags, beQuiet);
+		const ifile::IFilePersistence* loaderPtr = GetLoaderFor(dataObjectPtr, *filePathPtr, -1, flags, beQuiet);
 		if (loaderPtr != NULL){
 			return loaderPtr->IsOperationSupported(dataObjectPtr, filePathPtr, flags, beQuiet);
 		}
@@ -57,12 +57,12 @@ int CFileDialogLoaderComp::LoadFromFile(
 			ibase::IProgressManager* /*progressManagerPtr*/) const
 {
 	int selectionIndex = -1;
-	QString openFileName = GetFileName(filePath, false, selectionIndex);
+	QString openFileName = GetFileName(data, filePath, false, selectionIndex);
 	if (openFileName.isEmpty()){
 		return OS_CANCELED;
 	}
 
-	ifile::IFilePersistence* loaderPtr = GetLoaderFor(openFileName, selectionIndex, QF_LOAD, false);
+	ifile::IFilePersistence* loaderPtr = GetLoaderFor(&data, openFileName, selectionIndex, QF_LOAD, false);
 	if (loaderPtr != NULL){
 		return loaderPtr->LoadFromFile(data, openFileName);
 	}
@@ -78,12 +78,12 @@ int CFileDialogLoaderComp::SaveToFile(
 {
 	int selectionIndex = -1;
 
-	QString saveFileName = GetFileName(filePath, true, selectionIndex);
+	QString saveFileName = GetFileName(data, filePath, true, selectionIndex);
 	if (saveFileName.isEmpty()){
 		return OS_CANCELED;
 	}
 
-	ifile::IFilePersistence* loaderPtr = GetLoaderFor(saveFileName, selectionIndex, QF_SAVE, false);
+	ifile::IFilePersistence* loaderPtr = GetLoaderFor(&data, saveFileName, selectionIndex, QF_SAVE, false);
 	if (loaderPtr != NULL){
 		return loaderPtr->SaveToFile(data, saveFileName);
 	}
@@ -94,7 +94,7 @@ int CFileDialogLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CFileDialogLoaderComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CFileDialogLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();
@@ -104,7 +104,7 @@ bool CFileDialogLoaderComp::GetFileExtensions(QStringList& result, int flags, bo
 	for (int i = 0; i < loadersCount; i++){
 		const ifile::IFilePersistence* loaderPtr = m_loadersCompPtr[i];
 		if (loaderPtr != NULL){
-			loaderPtr->GetFileExtensions(result, flags, true);
+			loaderPtr->GetFileExtensions(result, dataObjectPtr, flags, true);
 		}
 	}
 
@@ -142,10 +142,10 @@ QString CFileDialogLoaderComp::GetLastFilePath(OperationType operationType, Path
 
 // static methods
 
-void CFileDialogLoaderComp::AppendLoaderFilterList(const ifile::IFileTypeInfo& fileTypeInfo, int flags, QStringList& allExt, QStringList& result)
+void CFileDialogLoaderComp::AppendLoaderFilterList(const ifile::IFileTypeInfo& fileTypeInfo, const istd::IChangeable* dataObjectPtr, int flags, QStringList& allExt, QStringList& result)
 {
 	QStringList docExtensions;
-	if (!fileTypeInfo.GetFileExtensions(docExtensions, flags)){
+	if (!fileTypeInfo.GetFileExtensions(docExtensions, dataObjectPtr, flags)){
 		return;
 	}
 
@@ -192,7 +192,7 @@ QString CFileDialogLoaderComp::GetPathForType(const QFileInfo& fileInfo, PathTyp
 }
 
 
-QString CFileDialogLoaderComp::GetFileName(const QString& filePath, bool isSaving, int& selectionIndex) const
+QString CFileDialogLoaderComp::GetFileName(const istd::IChangeable& data, const QString& filePath, bool isSaving, int& selectionIndex) const
 {
 	selectionIndex = -1;
 
@@ -205,7 +205,7 @@ QString CFileDialogLoaderComp::GetFileName(const QString& filePath, bool isSavin
 		for (int i = 0; i < loadersCount; ++i){
 			ifile::IFilePersistence* loaderPtr = m_loadersCompPtr[i];
 			if (loaderPtr != NULL){
-				AppendLoaderFilterList(*loaderPtr, isSaving? QF_SAVE: QF_LOAD, allExt, filterList);
+				AppendLoaderFilterList(*loaderPtr, &data, isSaving? QF_SAVE: QF_LOAD, allExt, filterList);
 			}
 		}
 
@@ -298,7 +298,7 @@ QString CFileDialogLoaderComp::GetFileName(const QString& filePath, bool isSavin
 }
 
 
-ifile::IFilePersistence* CFileDialogLoaderComp::GetLoaderFor(const QString& filePath, int selectionIndex, int flags, bool beQuiet) const
+ifile::IFilePersistence* CFileDialogLoaderComp::GetLoaderFor(const istd::IChangeable* dataObjectPtr, const QString& filePath, int selectionIndex, int flags, bool beQuiet) const
 {
 	ifile::IFilePersistence* retVal = NULL;
 
@@ -312,7 +312,7 @@ ifile::IFilePersistence* CFileDialogLoaderComp::GetLoaderFor(const QString& file
 		if (loaderPtr != NULL){
 			QStringList allExt;
 			QStringList filters;
-			AppendLoaderFilterList(*loaderPtr, flags, allExt, filters);
+			AppendLoaderFilterList(*loaderPtr, dataObjectPtr, flags, allExt, filters);
 
 			if (allExt.contains(fileExtension)){
 				if ((selectionIndex < 0) || ((selectionIndex >= filtersSum) && (selectionIndex < filtersSum + filters.size()))){

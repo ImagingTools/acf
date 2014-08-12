@@ -207,7 +207,7 @@ void CMultiDocumentWorkspaceGuiComp::OnViewsCountChanged()
 
 // reimplemented (idoc::CMultiDocumentManagerBase)
 
-istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenDocument(
+istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenSingleDocument(
 			const QString& filePath,
 			bool createView,
 			const QByteArray& viewTypeId,
@@ -225,7 +225,7 @@ istd::IChangeable* CMultiDocumentWorkspaceGuiComp::OpenDocument(
 		createView = false;
 	}
 
-	return BaseClass::OpenDocument(filePath, createView, viewTypeId, documentTypeId, beQuiet, ignoredPtr);
+	return BaseClass::OpenSingleDocument(filePath, createView, viewTypeId, documentTypeId, beQuiet, ignoredPtr);
 }
 
 
@@ -380,7 +380,7 @@ QStringList CMultiDocumentWorkspaceGuiComp::GetOpenFilePaths(const QByteArray* d
 }
 
 
-void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPtr)
+void CMultiDocumentWorkspaceGuiComp::OnViewRegistered(istd::IPolymorphic* viewPtr, const SingleDocumentData& /*documentData*/)
 {
 	iqtgui::IGuiObject* guiObjectPtr = CompCastPtr<iqtgui::IGuiObject>(viewPtr);
 	QMdiArea* workspacePtr = GetQtWidget();
@@ -468,11 +468,13 @@ void CMultiDocumentWorkspaceGuiComp::OnGuiCreated()
 	for (int docIndex = 0; docIndex < documentsCount; ++docIndex){
 		int viewsCount = GetViewsCount(docIndex);
 
+		SingleDocumentData& info = GetSingleDocumentData(docIndex);
+
 		for (int viewIndex = 0; viewIndex < viewsCount; ++viewIndex){
 			istd::IPolymorphic* viewPtr = GetViewFromIndex(docIndex, viewIndex);
 			Q_ASSERT(viewPtr != NULL);
 
-			OnViewRegistered(viewPtr);
+			OnViewRegistered(viewPtr, info);
 		}
 	}
 

@@ -29,7 +29,7 @@ QStringList CFileSystemExplorerGuiComp::GetDefaultFilters() const
 
 	if (m_filterInfoCompPtr.IsValid()){
 		QStringList extensions;
-		if (m_filterInfoCompPtr->GetFileExtensions(extensions, ifile::IFileTypeInfo::QF_LOAD | ifile::IFileTypeInfo::QF_FILE)){
+		if (m_filterInfoCompPtr->GetFileExtensions(extensions, NULL, ifile::IFileTypeInfo::QF_LOAD | ifile::IFileTypeInfo::QF_FILE)){
 			for (		QStringList::const_iterator iter = extensions.begin();
 						iter != extensions.end();
 						++iter){

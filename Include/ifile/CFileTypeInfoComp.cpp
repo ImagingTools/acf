@@ -11,7 +11,7 @@ namespace ifile
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CFileTypeInfoComp::GetFileExtensions(QStringList& result, int /*flags*/, bool doAppend) const
+bool CFileTypeInfoComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
 {
 	if (m_fileExtensionsAttrPtr.IsValid()){
 		if (!doAppend){

@@ -192,7 +192,7 @@ void CMultiPageGuiCompBase::ResetPages()
 
 // reimplemented (iqtgui::CGuiComponentBase)
 
-QWidget* CMultiPageGuiCompBase::InitWidgetToParent(QWidget* parentPtr)
+QWidget* CMultiPageGuiCompBase::CreateQtWidget(QWidget* parentPtr)
 {
 	bool insertSpacer = m_insertSpacerAttrPtr.IsValid() ? *m_insertSpacerAttrPtr : false;
 

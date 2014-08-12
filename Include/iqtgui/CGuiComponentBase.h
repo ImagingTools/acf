@@ -130,7 +130,7 @@ protected:
 	/**
 		Create slave widget object.
 	*/
-	virtual QWidget* InitWidgetToParent(QWidget* parentPtr) = 0;
+	virtual QWidget* CreateQtWidget(QWidget* parentPtr) = 0;
 
 	// attributes
 	imod::TModelWrap<VisualStatus> m_visualStatus;

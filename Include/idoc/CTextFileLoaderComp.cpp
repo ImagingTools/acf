@@ -95,7 +95,7 @@ int CTextFileLoaderComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CTextFileLoaderComp::GetFileExtensions(QStringList& result, int /*flags*/, bool doAppend) const
+bool CTextFileLoaderComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int /*flags*/, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

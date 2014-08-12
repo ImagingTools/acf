@@ -70,7 +70,7 @@ protected:
 		\param	documentTypeId	output parameter returning loaded ducument type ID.
 		\return	instance of created document or NULL if error is occured.
 	*/
-	virtual bool OpenDocument(
+	virtual bool OpenSingleDocument(
 				const QString& filePath,
 				bool createView,
 				const QByteArray& viewTypeId,
@@ -121,7 +121,7 @@ protected:
 	/**
 		Gets save file name.
 	*/
-	virtual QString GetSaveFilePath(const QByteArray& documentTypeId, const QString& currentFilePath) const = 0;
+	virtual QString GetSaveFilePath(const QByteArray& documentTypeId, const istd::IChangeable* dataObjectPtr, const QString& currentFilePath) const = 0;
 
 	/**
 		Query user if this document can be closed.

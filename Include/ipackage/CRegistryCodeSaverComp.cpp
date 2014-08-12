@@ -129,7 +129,7 @@ int CRegistryCodeSaverComp::SaveToFile(
 
 // reimplemented (ifile::IFileTypeInfo)
 
-bool CRegistryCodeSaverComp::GetFileExtensions(QStringList& result, int flags, bool doAppend) const
+bool CRegistryCodeSaverComp::GetFileExtensions(QStringList& result, const istd::IChangeable* /*dataObjectPtr*/, int flags, bool doAppend) const
 {
 	if (!doAppend){
 		result.clear();

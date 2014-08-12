@@ -63,7 +63,7 @@ public:
 				ibase::IProgressManager* progressManagerPtr = NULL) const;
 
 	// reimplemented (ifile::IFileTypeInfo)
-	virtual bool GetFileExtensions(QStringList& result, int flags = -1, bool doAppend = false) const;
+	virtual bool GetFileExtensions(QStringList& result, const istd::IChangeable* dataObjectPtr = NULL, int flags = -1, bool doAppend = false) const;
 	virtual QString GetTypeDescription(const QString* extensionPtr = NULL) const;
 
 	// reimplemented (ifile::IFilePersistenceInfo)
@@ -77,13 +77,13 @@ public:
 		\param	result	input/output list of filters with description separated with next line character.
 		\return			number of filters.
 	*/
-	static void AppendLoaderFilterList(const ifile::IFileTypeInfo& fileTypeInfo, int flags, QStringList& allExt, QStringList& result);
+	static void AppendLoaderFilterList(const ifile::IFileTypeInfo& fileTypeInfo, const istd::IChangeable* dataObjectPtr, int flags, QStringList& allExt, QStringList& result);
 
 protected:
 	QString GetPathForType(const QFileInfo& fileInfo, PathType pathType) const;
-	virtual QString GetFileName(const QString& filePath, bool isSaving, int& selectionIndex) const;
+	virtual QString GetFileName(const istd::IChangeable& data, const QString& filePath, bool isSaving, int& selectionIndex) const;
 
-	ifile::IFilePersistence* GetLoaderFor(const QString& filePath, int selectionIndex, int flags, bool beQuiet) const;
+	ifile::IFilePersistence* GetLoaderFor(const istd::IChangeable* dataObjectPtr, const QString& filePath, int selectionIndex, int flags, bool beQuiet) const;
 
 	// reimplemented (icomp::CComponentBase)
 	virtual void OnComponentCreated();

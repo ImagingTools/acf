@@ -102,6 +102,10 @@ public:
 		*/
 		CF_ANY,
 		/**
+			Change flag indicate that model is during destruction.
+		*/
+		CF_DESTROYING,
+		/**
 			Change flag indicate that this change was delegated (is indirect) for example from aggregated object.
 		*/
 		CF_DELEGATED,

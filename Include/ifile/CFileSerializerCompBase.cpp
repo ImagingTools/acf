@@ -48,7 +48,7 @@ bool CFileSerializerCompBase::IsOperationSupported(
 		}
 
 		QStringList fileExtensions;
-		if (GetFileExtensions(fileExtensions)){
+		if (GetFileExtensions(fileExtensions, dataObjectPtr, flags)){
 			int extensionsCount = int(fileExtensions.size());
 			for (int i = 0; i < extensionsCount; ++i){
 				const QString& extension = fileExtensions[i];

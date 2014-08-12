@@ -186,6 +186,7 @@ void CFileNameParamGuiComp::on_BrowseButton_clicked()
 				QStringList allExt;
 				ifilegui::CFileDialogLoaderComp::AppendLoaderFilterList(
 							*m_fileTypeInfoPtr,
+							NULL,
 							0,
 							allExt,
 							filterList);

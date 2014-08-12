@@ -148,6 +148,7 @@ public:
 		\param	createView			if true, view will be automatically created.
 		\param	viewTypeId			ID of view type, if it will be created.
 		\param	loadedMapPtr		optional list of loaded files and its document type ID's.
+		\param	beQuiet			if true, no user interaction will be done.
 		\param	ignoredPtr			optional return flag indicating that opening was aborted by user.
 	*/
 	virtual bool OpenDocument(
@@ -164,6 +165,8 @@ public:
 		Save document.
 		\param	documentIndex	optional index of document to save, if negative then current active document will be saved.
 		\param	requestFileName	if true, file name will be always requested by user.
+		\param	savedMapPtr		optional list of files will be extended with currently saved file.
+		\param	beQuiet			if true, no user interaction will be done.
 		\param	ignoredPtr		optional return flag indicating that saving was aborted by user.
 	*/
 	virtual bool SaveDocument(

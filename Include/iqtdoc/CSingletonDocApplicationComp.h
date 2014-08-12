@@ -99,6 +99,8 @@ private:
 	bool m_isAlreadyRunning;
 	QTimer m_documentUpdateTimer;
 
+	bool m_isApplicationInitialized;
+
 	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
 	I_REF(ibase::IRuntimeStatusProvider, m_runtimeStatusProviderCompPtr);
 	I_REF(imod::IModel, m_runtimeStatusProviderModelCompPtr);
