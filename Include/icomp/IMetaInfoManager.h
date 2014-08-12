@@ -19,7 +19,7 @@ public:
 	{
 		CTF_REAL = 1 << IComponentStaticInfo::CT_REAL,
 		CTF_COMPOSITE = 1 << IComponentStaticInfo::CT_COMPOSITE,
-		CTF_ALL = CTF_REAL | CTF_COMPOSITE
+		CTF_ALL = -1
 	};
 
 	typedef QSet<CComponentAddress> ComponentAddresses;
@@ -42,7 +42,6 @@ public:
 		\return	static info of the package or NULL, if no package for specified ID was found.
 	*/
 	virtual const IComponentStaticInfo* GetPackageMetaInfo(const QByteArray& packageId) const = 0;
-
 };
 
 
