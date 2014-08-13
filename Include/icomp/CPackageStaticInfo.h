@@ -39,9 +39,11 @@ public:
 	*/
 	virtual void RegisterEmbeddedComponentInfo(const QByteArray& embeddedId, const IComponentStaticInfo* componentInfoPtr);
 
-	// reimplemented (icomp::IComponentStaticInfo)
-	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
+	// reimplemented (icomp::IElementStaticInfo)
 	virtual Ids GetMetaIds(int metaGroupId) const;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
+
+	// reimplemented (icomp::IComponentStaticInfo)
 	virtual const QString& GetDescription() const;
 	virtual const QString& GetKeywords() const;
 

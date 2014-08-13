@@ -59,8 +59,8 @@ public:
 	virtual const IAttributeStaticInfo* GetAttributeInfo(const QByteArray& attributeId) const;
 
 	//	reimplemented (icomp::IElementStaticInfo)
-	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
+	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 
 private:
 	const IRealComponentStaticInfo* m_baseComponentPtr;

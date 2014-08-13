@@ -34,8 +34,8 @@ public:
 	void RegisterEmbeddedComponent(const QByteArray& componentId);
 
 	//	reimplemented (icomp::IComponentStaticInfo)
-	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
+	virtual const IComponentStaticInfo* GetEmbeddedComponentInfo(const QByteArray& embeddedId) const;
 
 private:
 	struct ComponentInfo

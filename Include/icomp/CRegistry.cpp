@@ -415,7 +415,7 @@ bool CRegistry::Serialize(iser::IArchive& archive)
 	quint32 frameworkVersion = 0;
 	versionInfo.GetVersionNumber(iser::IVersionInfo::AcfVersionId, frameworkVersion);
 
-	istd::CChangeNotifier changePtr(archive.IsStoring()? NULL: this);
+	istd::CChangeNotifier notifier(archive.IsStoring()? NULL: this, GetAllChanges());
 
 	bool retVal = true;
 

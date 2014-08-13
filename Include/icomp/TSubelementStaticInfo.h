@@ -36,8 +36,8 @@ public:
 	virtual void RegisterInterfaceExtractor(const QByteArray& interfaceName, InterfaceExtractorPtr extractorPtr);
 
 	//	reimplemented (icomp::IElementStaticInfo)
-	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
+	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 
 	//	reimplemented (icomp::IComponentInterfaceExtractor)
 	virtual void* GetComponentInterface(
@@ -84,13 +84,6 @@ void TSubelementStaticInfo<ComponentType>::RegisterInterfaceExtractor(const QByt
 //	reimplemented (icomp::IElementStaticInfo)
 
 template <class ComponentType>
-const IElementStaticInfo* TSubelementStaticInfo<ComponentType>::GetSubelementInfo(const QByteArray& /*subcomponentId*/) const
-{
-	return NULL;
-}
-
-
-template <class ComponentType>
 IElementStaticInfo::Ids TSubelementStaticInfo<ComponentType>::GetMetaIds(int metaGroupId) const
 {
 	Ids retVal;
@@ -104,6 +97,13 @@ IElementStaticInfo::Ids TSubelementStaticInfo<ComponentType>::GetMetaIds(int met
 	}
 
 	return retVal;
+}
+
+
+template <class ComponentType>
+const IElementStaticInfo* TSubelementStaticInfo<ComponentType>::GetSubelementInfo(const QByteArray& /*subcomponentId*/) const
+{
+	return NULL;
 }
 
 

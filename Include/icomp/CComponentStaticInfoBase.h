@@ -25,8 +25,8 @@ public:
 	virtual const QString& GetKeywords() const;
 
 	//	reimplemented (icomp::IElementStaticInfo)
-	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 	virtual Ids GetMetaIds(int metaGroupId) const;
+	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const;
 };
 
 

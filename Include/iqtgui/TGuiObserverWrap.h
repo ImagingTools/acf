@@ -337,7 +337,7 @@ void TGuiObserverWrap<Gui, Observer>::AfterUpdate(imod::IModel* modelPtr, const 
 
 	Observer::AfterUpdate(modelPtr, changeSet);
 
-	if (!Gui::IsGuiCreated() || changeSet.Contains(istd::IChangeable::CF_DESTROYING)){
+	if (!Gui::IsGuiCreated() || changeSet.ContainsExplicit(istd::IChangeable::CF_DESTROYING)){
 		return;
 	}
 

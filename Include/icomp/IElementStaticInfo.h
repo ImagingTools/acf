@@ -41,17 +41,17 @@ public:
 	typedef QSet<QByteArray> Ids;
 
 	/**
+		Get list of meta IDs associated with some meta key.
+		\sa MetaGroupId
+	*/
+	virtual Ids GetMetaIds(int metaGroupId) const = 0;
+
+	/**
 		Return number of interfaces for specific slot.
 		\param	subcomponentId	ID of subcomponent.
 								\sa	GetMetaIds() and MGI_SUBELEMENTS.
 	*/
 	virtual const IElementStaticInfo* GetSubelementInfo(const QByteArray& subcomponentId) const = 0;
-
-	/**
-		Get list of meta IDs associated with some meta key.
-		\sa MetaGroupId
-	*/
-	virtual Ids GetMetaIds(int metaGroupId) const = 0;
 };
 
 

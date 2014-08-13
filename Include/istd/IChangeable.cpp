@@ -137,6 +137,12 @@ bool IChangeable::ChangeSet::Contains(int changeId) const
 }
 
 
+bool IChangeable::ChangeSet::ContainsExplicit(int changeId) const
+{
+	return m_ids.contains(changeId);
+}
+
+
 bool IChangeable::ChangeSet::ContainsAny(const ChangeSet& changeSet) const
 {
 	if (m_ids.contains(CF_ALL_DATA) && !changeSet.m_ids.isEmpty()){

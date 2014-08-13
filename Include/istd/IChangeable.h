@@ -51,9 +51,14 @@ public:
 		*/
 		bool IsEmpty() const;
 		/**
-			Check if there is specific change in the set.
+			Check if there is specific change flag in the set.
 		*/
 		bool Contains(int changeId) const;
+		/**
+			Check if there is specific change flag in the set explicit set by user.
+			There are some control flags, used to indicate that all changes were done. The functionality of this flags will be omitted by this check.
+		*/
+		bool ContainsExplicit(int changeId) const;
 		/**
 			Check if any of IDs is changed.
 		*/

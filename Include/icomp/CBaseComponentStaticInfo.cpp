@@ -114,21 +114,6 @@ const IAttributeStaticInfo* CBaseComponentStaticInfo::GetAttributeInfo(const QBy
 
 //	reimplemented (icomp::IElementStaticInfo)
 
-const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const QByteArray& subcomponentId) const
-{
-	SubelementInfos::ConstIterator foundIter = m_subelementInfos.constFind(subcomponentId);
-	if (foundIter != m_subelementInfos.constEnd()){
-		return foundIter.value();
-	}
-	else if (m_baseComponentPtr != NULL){
-		return m_baseComponentPtr->GetSubelementInfo(subcomponentId);
-	}
-	else{
-		return NULL;
-	}
-}
-
-
 IElementStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) const
 {
 	Ids retVal;
@@ -160,6 +145,21 @@ IElementStaticInfo::Ids CBaseComponentStaticInfo::GetMetaIds(int metaGroupId) co
 	}
 
 	return retVal;
+}
+
+
+const IElementStaticInfo* CBaseComponentStaticInfo::GetSubelementInfo(const QByteArray& subcomponentId) const
+{
+	SubelementInfos::ConstIterator foundIter = m_subelementInfos.constFind(subcomponentId);
+	if (foundIter != m_subelementInfos.constEnd()){
+		return foundIter.value();
+	}
+	else if (m_baseComponentPtr != NULL){
+		return m_baseComponentPtr->GetSubelementInfo(subcomponentId);
+	}
+	else{
+		return NULL;
+	}
 }
 
 
