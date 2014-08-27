@@ -37,13 +37,11 @@ public:
 		I_ASSIGN(m_dockFeaturesAttrPtr, "DockFeatures", "Specify the dock features for this widget\nIt is combination of options:\n0 - permanent\n1 - closable\n 2 - moveable\n 4 - floatable\n 8 - vertical title", true, WCF_CLOSABLE | WCF_MOVEABLE | WCF_FLOATABLE);
 		I_ASSIGN(m_allowedDockAreasAttrPtr, "AllowedDockAreas", "Specify the allowed dock areas\nIt is combination of options:\n 1 - left\n 2 - right\n 4 - top\n 8 - bottom", false, 0);
 		I_ASSIGN(m_dockTitleAttrPtr, "DockTitle", "Specify the dock title ", false, "DockTitle");
-		I_ASSIGN(m_associatedDocumentTypeId, "AssociatedDocumentTypeId", "ID of the associated document type ID", false, "Default");
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IMainWindowComponent)
 	virtual bool AddToMainWindow(QMainWindow& mainWindow);
 	virtual bool RemoveFromMainWindow(QMainWindow& mainWindow);
-	virtual QByteArray GetAssociatedDocumentTypeId() const;
 	virtual QString GetTitle() const;
 	virtual int GetFlags() const;
 
@@ -59,7 +57,6 @@ private:
 	I_ATTR(int, m_dockFeaturesAttrPtr);
 	I_ATTR(int, m_allowedDockAreasAttrPtr);
 	I_ATTR(QString, m_dockTitleAttrPtr);
-	I_ATTR(QByteArray, m_associatedDocumentTypeId);
 };
 
 

@@ -245,6 +245,7 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 
 	static ChangeSet changeSet(CF_MESSAGE_ADDED);
 	istd::CChangeNotifier notifier(this, changeSet);
+	Q_UNUSED(notifier);
 
 	m_messages.push_front(messagePtr);
 
@@ -258,7 +259,9 @@ void CMessageContainer::AddMessage(const IMessageConsumer::MessagePtr& messagePt
 			Q_ASSERT(!m_messages.isEmpty());
 			const IMessageConsumer::MessagePtr& messageToRemovePtr = m_messages.back();
 
-			notifier.AppendChangeId(CF_MESSAGE_REMOVED);
+			static ChangeSet removeChangeSet(CF_MESSAGE_ADDED);
+			istd::CChangeNotifier removeNotifier(this, removeChangeSet);
+			Q_UNUSED(removeNotifier);
 
 			int removeCategory = messageToRemovePtr->GetInformationCategory();
 			if (removeCategory >= m_worstCategory){

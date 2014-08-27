@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3556
+          3588
         </Number>
         <Description>
           ACF
@@ -29,10 +18,21 @@
           1
         </Id>
         <Number>
-          1163
+          1188
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264197
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -45,9 +45,9 @@
       <X>
         375
       </X>
-      <X>
+      <Y>
         275
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -59,51 +59,9 @@
       <X>
         925
       </X>
-      <X>
+      <Y>
         700
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        Workspace
-      </ComponentName>
-      <X>
-        200
-      </X>
-      <X>
-        425
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        SplashScreen
-      </ComponentName>
-      <X>
-        1025
-      </X>
-      <X>
-        150
-      </X>
-      <Note>
-        
-      </Note>
-    </Element>
-    <Element>
-      <ComponentName>
-        App
-      </ComponentName>
-      <X>
-        650
-      </X>
-      <X>
-        150
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -115,9 +73,9 @@
       <X>
         200
       </X>
-      <X>
+      <Y>
         700
-      </X>
+      </Y>
       <Note>
         
       </Note>
@@ -129,9 +87,23 @@
       <X>
         925
       </X>
-      <X>
+      <Y>
         425
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        App
+      </ComponentName>
+      <X>
+        650
       </X>
+      <Y>
+        150
+      </Y>
       <Note>
         
       </Note>
@@ -143,9 +115,37 @@
       <X>
         650
       </X>
-      <X>
+      <Y>
         575
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        Workspace
+      </ComponentName>
+      <X>
+        200
       </X>
+      <Y>
+        425
+      </Y>
+      <Note>
+        
+      </Note>
+    </Element>
+    <Element>
+      <ComponentName>
+        SplashScreen
+      </ComponentName>
+      <X>
+        1025
+      </X>
+      <Y>
+        150
+      </Y>
       <Note>
         
       </Note>

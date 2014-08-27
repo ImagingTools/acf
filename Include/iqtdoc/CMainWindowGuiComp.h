@@ -27,17 +27,53 @@ namespace iqtdoc
 {
 
 
+// Base class as work-around of static variable limit in ACF macros
+class CMainWindowGuiCompBase:
+			public iqtgui::CSimpleMainWindowGuiComp
+{
+public:
+	typedef iqtgui::CSimpleMainWindowGuiComp BaseClass;
+
+	I_BEGIN_BASE_COMPONENT(CMainWindowGuiCompBase);
+		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
+		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
+		I_ASSIGN_TO(m_documentManagerModelCompPtr, m_documentManagerCompPtr, true);
+		I_ASSIGN_TO(m_documentManagerCommandsCompPtr, m_documentManagerCompPtr, false);
+		I_ASSIGN(m_applicationCompPtr, "Application", "Access to the application's command line", true, "Application");
+		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
+		I_ASSIGN(m_isOpenContainingFolderVisibleAttrPtr, "IsOpenContainingFolderVisible", "If true, operation Tools/Open Containing Folder will be visible", true, false);
+		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list for one document type", true, 10);
+		I_ASSIGN(m_isOpenCommandVisibleAttrPtr, "OpenCommandVisible", "If enabled the open document command will be shown", false, true);
+		I_ASSIGN(m_isSaveCommandVisibleAttrPtr, "SaveCommandVisible", "If enabled the save document commands will be shown", false, true);
+		I_ASSIGN_MULTI_0(m_mainWindowCompTypeIdsAttrPtr, "MainWindowCompTypeIds", "Set of document type IDs (comma seperated) to enable main window component, empty string enables component independly from document selection", true);
+	I_END_COMPONENT;
+
+protected:
+	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
+	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
+	I_REF(imod::IModel, m_documentManagerModelCompPtr);
+	I_REF(ibase::ICommandsProvider, m_documentManagerCommandsCompPtr);
+	I_REF(ibase::IApplication, m_applicationCompPtr);
+	I_ATTR(bool, m_isCopyPathVisibleAttrPtr);
+	I_ATTR(bool, m_isOpenContainingFolderVisibleAttrPtr);
+	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
+	I_ATTR(bool, m_isOpenCommandVisibleAttrPtr);
+	I_ATTR(bool, m_isSaveCommandVisibleAttrPtr);
+	I_MULTIATTR(QByteArray, m_mainWindowCompTypeIdsAttrPtr);
+};
+
+
 /**
 	Standard main window component for any document based application.
 */
 class CMainWindowGuiComp:
-			public iqtgui::CSimpleMainWindowGuiComp,
+			public CMainWindowGuiCompBase,
 			protected imod::TSingleModelObserverBase<idoc::IDocumentManager>
 {
 	Q_OBJECT
 
 public:
-	typedef iqtgui::CSimpleMainWindowGuiComp BaseClass;
+	typedef CMainWindowGuiCompBase BaseClass;
 	typedef imod::TSingleModelObserverBase<idoc::IDocumentManager> BaseClass2;
 
 	I_BEGIN_COMPONENT(CMainWindowGuiComp);
@@ -53,16 +89,6 @@ public:
 		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, iprm::INameParam, GetEditCommands);
 		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, iprm::IEnableableParam, GetEditCommands);
 		I_REGISTER_SUBELEMENT_INTERFACE(FileCommands, istd::IChangeable, GetEditCommands);
-		I_ASSIGN(m_applicationInfoCompPtr, "ApplicationInfo", "Application info", true, "ApplicationInfo");
-		I_ASSIGN(m_documentManagerCompPtr, "DocumentManager", "Document manager", true, "DocumentManager");
-		I_ASSIGN_TO(m_documentManagerModelCompPtr, m_documentManagerCompPtr, true);
-		I_ASSIGN_TO(m_documentManagerCommandsCompPtr, m_documentManagerCompPtr, false);
-		I_ASSIGN(m_applicationCompPtr, "Application", "Access to the application's command line", true, "Application");
-		I_ASSIGN(m_isCopyPathVisibleAttrPtr, "IsCopyPathVisible", "If true, operation Tools/CopyDocumentPath will be visible", true, false);
-		I_ASSIGN(m_isOpenContainingFolderVisibleAttrPtr, "IsOpenContainingFolderVisible", "If true, operation Tools/Open Containing Folder will be visible", true, false);
-		I_ASSIGN(m_maxRecentFilesCountAttrPtr, "MaxRecentFiles", "Maximal size of recent file list for one document type", true, 10);
-		I_ASSIGN(m_isOpenCommandVisibleAttrPtr, "OpenCommandVisible", "If enabled the open document command will be shown", false, true);
-		I_ASSIGN(m_isSaveCommandVisibleAttrPtr, "SaveCommandVisible", "If enabled the save document commands will be shown", false, true);
 	I_END_COMPONENT;
 
 	enum GroupId
@@ -97,7 +123,6 @@ protected:
 	void SetupNewCommand();
 	bool HasDocumentTemplate() const;
 	void UpdateUndoMenu();
-	void UpdateMainWindowComponentsVisibility();
 
 	void OnNewDocument(const QByteArray& documentTypeId);
 
@@ -108,6 +133,8 @@ protected:
 	*/
 	virtual void UpdateRecentFileList(const idoc::IDocumentManager::FileToTypeMap& fileToTypeMap);
 	virtual void RemoveFromRecentFileList(const QString& filePath);
+
+	virtual bool IsMainWindowActive(int index) const;
 
 	// reimplemented (iqtgui::CSimpleMainWindowGuiComp)
 	virtual void UpdateFixedCommands(iqtgui::CHierarchicalCommand& fixedCommands);
@@ -238,17 +265,6 @@ private:
 	typedef istd::TDelPtr<iqtgui::CHierarchicalCommand> RecentGroupCommandPtr;
 	typedef QMap<QByteArray, RecentGroupCommandPtr> RecentFilesMap;
 	RecentFilesMap m_recentFilesMap;
-
-	I_REF(ibase::IApplicationInfo, m_applicationInfoCompPtr);
-	I_REF(idoc::IDocumentManager, m_documentManagerCompPtr);
-	I_REF(imod::IModel, m_documentManagerModelCompPtr);
-	I_REF(ibase::ICommandsProvider, m_documentManagerCommandsCompPtr);
-	I_REF(ibase::IApplication, m_applicationCompPtr);
-	I_ATTR(bool, m_isCopyPathVisibleAttrPtr);
-	I_ATTR(bool, m_isOpenContainingFolderVisibleAttrPtr);
-	I_ATTR(int, m_maxRecentFilesCountAttrPtr);
-	I_ATTR(bool, m_isOpenCommandVisibleAttrPtr);
-	I_ATTR(bool, m_isSaveCommandVisibleAttrPtr);
 };
 
 

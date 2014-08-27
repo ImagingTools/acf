@@ -87,18 +87,6 @@ bool CToolBarGuiCompBase::RemoveFromMainWindow(QMainWindow& /*mainWindow*/)
 }
 
 
-QByteArray CToolBarGuiCompBase::GetAssociatedDocumentTypeId() const
-{
-	static QByteArray emptyId;
-
-	if (m_associatedDocumentTypeId.IsValid()){
-		return *m_associatedDocumentTypeId;
-	}
-
-	return emptyId;
-}
-
-
 QString CToolBarGuiCompBase::GetTitle() const
 {
 	static QString emptyTitle;

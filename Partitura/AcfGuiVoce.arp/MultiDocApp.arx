@@ -4,21 +4,10 @@
     <VersionInfos count="3">
       <Version>
         <Id>
-          1023
-        </Id>
-        <Number>
-          328449
-        </Number>
-        <Description>
-          Qt Framework
-        </Description>
-      </Version>
-      <Version>
-        <Id>
           0
         </Id>
         <Number>
-          3556
+          3588
         </Number>
         <Description>
           ACF
@@ -29,10 +18,21 @@
           1
         </Id>
         <Number>
-          1163
+          1188
         </Number>
         <Description>
           ACF-Solutions
+        </Description>
+      </Version>
+      <Version>
+        <Id>
+          1023
+        </Id>
+        <Number>
+          264197
+        </Number>
+        <Description>
+          Qt Framework
         </Description>
       </Version>
     </VersionInfos>
@@ -615,7 +615,7 @@
         <Flags>
           0
         </Flags>
-        <AttributeInfoMap count="22">
+        <AttributeInfoMap count="23">
           <AttributeInfo>
             <Id>
               AboutDialog
@@ -797,6 +797,22 @@
             </Type>
             <ExportId>
               IsToolbarVisible
+            </ExportId>
+            <Data>
+              <IsEnabled>
+                false
+              </IsEnabled>
+            </Data>
+          </AttributeInfo>
+          <AttributeInfo>
+            <Id>
+              MainWindowCompTypeIds
+            </Id>
+            <Type>
+              Id[]
+            </Type>
+            <ExportId>
+              MainWindowCompTypeIds
             </ExportId>
             <Data>
               <IsEnabled>

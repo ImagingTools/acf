@@ -196,7 +196,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_USER_ATTR(attrType, member)\
 	typedef icomp::TAttributeMember< attrType > member##_Type;\
 	typedef icomp::TAttributeMember< attrType >::AttributeType member##_AttrType;\
-	icomp::TAttributeMember< attrType > member;
+	icomp::TAttributeMember< attrType > member
 
 /**
 	Declare simple single attribute member.
@@ -218,7 +218,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_USER_MULTIATTR(attrType, member)\
 	typedef icomp::TMultiAttributeMember< attrType > member##_Type;\
 	typedef icomp::TMultiAttributeMember< attrType >::AttributeType member##_AttrType;\
-	icomp::TMultiAttributeMember< attrType > member;
+	icomp::TMultiAttributeMember< attrType > member
 
 /**
 	Declare simple multiple attribute member.
@@ -242,7 +242,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_REF(interfaceType, member)\
 	typedef icomp::TReferenceMember<interfaceType> member##_Type;\
 	typedef icomp::TReferenceMember<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TReferenceMember<interfaceType> member;
+	icomp::TReferenceMember<interfaceType> member
 
 /**
 	Declare single reference to another component with \c interfaceType as template argument.
@@ -250,7 +250,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_TREF(interfaceType, member)\
 	typedef icomp::TReferenceMember<interfaceType> member##_Type;\
 	typedef typename icomp::TReferenceMember<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TReferenceMember<interfaceType> member;
+	icomp::TReferenceMember<interfaceType> member
 
 /**
 	Declare multiple reference to another component with \c interfaceType as template argument.
@@ -258,7 +258,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_TMULTIREF(interfaceType, member)\
 	typedef icomp::TMultiReferenceMember<interfaceType> member##_Type;\
 	typedef typename icomp::TMultiReferenceMember<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TMultiReferenceMember<interfaceType> member;
+	icomp::TMultiReferenceMember<interfaceType> member
 
 
 /**
@@ -269,7 +269,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_MULTIREF(interfaceType, member)\
 	typedef icomp::TMultiReferenceMember<interfaceType> member##_Type;\
 	typedef icomp::TMultiReferenceMember<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TMultiReferenceMember<interfaceType> member;
+	icomp::TMultiReferenceMember<interfaceType> member
 
 /**
 	Declare single factory of components.
@@ -284,7 +284,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_TFACT(interfaceType, member)\
 	typedef icomp::TFactoryMember<interfaceType> member##_Type;\
 	typedef typename icomp::TFactoryMember<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TFactoryMember<interfaceType> member;
+	icomp::TFactoryMember<interfaceType> member
 /**
 	Declare multiple factories of components.
 
@@ -293,7 +293,7 @@ inline bool CComponentBase::IsComponentActive() const
 #define I_MULTIFACT(interfaceType, member)\
 	typedef icomp::TMultiFactoryMember<interfaceType> member##_Type;\
 	typedef icomp::TMultiFactoryMember<interfaceType>::AttributeType member##_AttrType;\
-	icomp::TMultiFactoryMember<interfaceType> member;
+	icomp::TMultiFactoryMember<interfaceType> member
 
 /**
 	Used to assign value for single parameter (attribute, reference or factory).

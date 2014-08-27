@@ -10,7 +10,6 @@
 #include <QtGui/QStatusBar>
 #endif
 
-
 // ACF includes
 #include "iqt/CSignalBlocker.h"
 
@@ -134,27 +133,52 @@ void CSimpleMainWindowGuiComp::SetupMainWindowComponents(QMainWindow& mainWindow
 	for (int componentIndex = 0; componentIndex < m_mainWindowComponentsCompPtr.GetCount(); componentIndex++){
 		iqtgui::IMainWindowComponent* mainWindowComponentPtr =  m_mainWindowComponentsCompPtr[componentIndex];
 		if (mainWindowComponentPtr != NULL){
-			AddMainComponent(mainWindowComponentPtr);
+			AddMainComponent(componentIndex, mainWindowComponentPtr);
 		}
 	}
 }
 
 
-void CSimpleMainWindowGuiComp::AddMainComponent(iqtgui::IMainWindowComponent* componentPtr)
+void CSimpleMainWindowGuiComp::AddMainComponent(int componentIndex, iqtgui::IMainWindowComponent* componentPtr)
 {
+	Q_ASSERT(IsGuiCreated());
+
 	QMainWindow* mainWindowPtr = GetQtWidget();
-	if (mainWindowPtr != NULL){
-		componentPtr->AddToMainWindow(*mainWindowPtr);
+	Q_ASSERT(mainWindowPtr != NULL);
 
-		iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(componentPtr);
-		if (guiPtr != NULL){
-			QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
-			if (toolBarComponentPtr != NULL){
-				m_toolBarsList.PushBack(toolBarComponentPtr, false);
+	componentPtr->AddToMainWindow(*mainWindowPtr);
 
-				if (m_standardToolBarPtr.IsValid()){
-					toolBarComponentPtr->setToolButtonStyle(m_standardToolBarPtr->toolButtonStyle());
-				}
+	iqtgui::IGuiObject* guiPtr =  dynamic_cast<iqtgui::IGuiObject*>(componentPtr);
+	if (guiPtr != NULL){
+		if (guiPtr->IsGuiCreated()){
+			QWidget* widgetPtr = guiPtr->GetWidget();
+			widgetPtr->installEventFilter(this);
+
+			QWidget* parentPtr = widgetPtr->parentWidget();
+			bool isPermanent = ((componentPtr->GetFlags() & iqtgui::IMainWindowComponent::WCF_CLOSABLE) == 0);
+
+			bool isVisibleToParent = (parentPtr != NULL)? widgetPtr->isVisibleTo(parentPtr) || isPermanent: isPermanent;
+
+			if (!isPermanent){
+				iqtgui::CHierarchicalCommand* commandPtr = new iqtgui::CHierarchicalCommand(componentPtr->GetTitle());
+				commandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_ONOFF | iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
+				commandPtr->setChecked(isVisibleToParent);
+
+				m_showOtherWindows.InsertChild(commandPtr, true);
+				int commandIndex = m_showOtherWindows.GetChildsCount() - 1; // last command index
+
+				m_commandIndexToMainCompMap[commandIndex] = componentIndex;
+
+				connect(commandPtr, SIGNAL(toggled(bool)), this, SLOT(OnShowOtherCommandTriggered(bool)));
+			}
+		}
+
+		QToolBar* toolBarComponentPtr = dynamic_cast<QToolBar*>(guiPtr->GetWidget());
+		if (toolBarComponentPtr != NULL){
+			m_toolBarsList.PushBack(toolBarComponentPtr, false);
+
+			if (m_standardToolBarPtr.IsValid()){
+				toolBarComponentPtr->setToolButtonStyle(m_standardToolBarPtr->toolButtonStyle());
 			}
 		}
 	}
@@ -231,6 +255,8 @@ void CSimpleMainWindowGuiComp::SetupMenu()
 	m_menuCommands.InsertChild(&m_fixedCommands, false);
 
 	UpdateFixedCommands(m_fixedCommands);
+
+	UpdateMenuActions();
 }
 
 
@@ -316,6 +342,51 @@ void CSimpleMainWindowGuiComp::AppendMenuActions(iqtgui::CHierarchicalCommand& m
 }
 
 
+void CSimpleMainWindowGuiComp::UpdateMainWindowComponentsVisibility()
+{
+	int visibleCommandsCount = 0;
+
+	int commandsCount = m_showOtherWindows.GetChildsCount();
+	for (int i = 0; i < commandsCount; ++i){
+		Q_ASSERT(m_commandIndexToMainCompMap.contains(i));
+
+		QAction* commandActionPtr = dynamic_cast<QAction*>(m_showOtherWindows.GetChild(i));
+		Q_ASSERT(commandActionPtr != NULL);
+
+		bool isWindowVisible = commandActionPtr->isChecked();
+
+		int componentIndex = m_commandIndexToMainCompMap[i];
+
+		bool isWindowActive = IsMainWindowActive(componentIndex);
+
+		iqtgui::IMainWindowComponent* mainWindowComponentPtr = m_mainWindowComponentsCompPtr[componentIndex];
+		Q_ASSERT (mainWindowComponentPtr != NULL);
+
+		iqtgui::IGuiObject* componentGuiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
+		if ((componentGuiPtr != NULL) && componentGuiPtr->IsGuiCreated()){
+			QWidget* componentWidgetPtr = componentGuiPtr->GetWidget();
+			Q_ASSERT(componentWidgetPtr != NULL);
+
+			componentWidgetPtr->setVisible(isWindowVisible && isWindowActive);
+		}
+
+		commandActionPtr->setVisible(isWindowActive);
+
+		if (isWindowActive){
+			++visibleCommandsCount;
+		}
+	}
+
+	m_showOtherWindows.setVisible(visibleCommandsCount > 0);
+}
+
+
+bool CSimpleMainWindowGuiComp::IsMainWindowActive(int index) const
+{
+	return true;
+}
+
+
 // reimplemented (TRestorableGuiWrap)
 
 void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
@@ -330,37 +401,18 @@ void CSimpleMainWindowGuiComp::OnRestoreSettings(const QSettings& settings)
 	mainWindowPtr->restoreState(windowState);
 	mainWindowPtr->restoreGeometry(windowGeometry);
 
-	for (int i = 0; i < m_mainWindowComponentsCompPtr.GetCount(); ++i){
-		iqtgui::IMainWindowComponent* mainWindowComponentPtr = m_mainWindowComponentsCompPtr[i];
-		if (mainWindowComponentPtr != NULL){
-			iqtgui::IGuiObject* guiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-			if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
-				QWidget* widgetPtr = guiPtr->GetWidget();
-				widgetPtr->installEventFilter(this);
+	int otherWindowsCount = m_showOtherWindows.GetChildsCount();
+	for (int i = 0; i < otherWindowsCount; ++i){
+		iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<iqtgui::CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
+		Q_ASSERT(commandPtr != NULL);
 
-				QWidget* parentPtr = widgetPtr->parentWidget();
-				bool isPermanent = ((mainWindowComponentPtr->GetFlags() & iqtgui::IMainWindowComponent::WCF_CLOSABLE) == 0);
+		iqt::CSignalBlocker commandBlocker(commandPtr);
+		Q_UNUSED(commandBlocker);
 
-				bool isVisibleToParent = (parentPtr != NULL)? widgetPtr->isVisibleTo(parentPtr) || isPermanent: isPermanent;
-
-				m_mainComponentVisibilityMap[mainWindowComponentPtr] = isVisibleToParent;
-
-				if (!isPermanent){
-					iqtgui::CHierarchicalCommand* commandPtr = new iqtgui::CHierarchicalCommand(mainWindowComponentPtr->GetTitle());
-					commandPtr->SetStaticFlags(iqtgui::CHierarchicalCommand::CF_ONOFF | iqtgui::CHierarchicalCommand::CF_GLOBAL_MENU);
-					commandPtr->setChecked(isVisibleToParent);
-
-					m_showOtherWindows.InsertChild(commandPtr, true);
-
-					connect(commandPtr, SIGNAL(toggled(bool)), this, SLOT(OnShowOtherCommandTriggered(bool)));
-				}
-			}
-		}
+		commandPtr->setChecked(settings.value("OtherWindows/" + commandPtr->GetName(), true).toBool());
 	}
 
-	m_showOtherWindows.setVisible(m_showOtherWindows.GetChildsCount() > 0);
-
-	CSimpleMainWindowGuiComp::UpdateMenuActions();
+	UpdateMainWindowComponentsVisibility();
 }
 
 
@@ -375,6 +427,14 @@ void CSimpleMainWindowGuiComp::OnSaveSettings(QSettings& settings) const
 
 	settings.setValue("MainWindow/State", windowState);
 	settings.setValue("MainWindow/Geometry", windowGeometry);
+
+	int otherWindowsCount = m_showOtherWindows.GetChildsCount();
+	for (int i = 0; i < otherWindowsCount; ++i){
+		const iqtgui::CHierarchicalCommand* commandPtr = dynamic_cast<const iqtgui::CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
+		Q_ASSERT(commandPtr != NULL);
+
+		settings.setValue("OtherWindows/" + commandPtr->GetName(), commandPtr->isChecked());
+	}
 }
 
 
@@ -421,11 +481,9 @@ void CSimpleMainWindowGuiComp::OnGuiCreated()
 
 	CreateDefaultToolBar();
 
-	SetupMenu();
-
-	UpdateMenuActions();
-
 	SetupMainWindowComponents(*mainWindowPtr);
+
+	SetupMenu();
 
 	if (m_workspaceCommandsModelCompPtr.IsValid()){
 		m_commandsObserver.RegisterModel(m_workspaceCommandsModelCompPtr.GetPtr(), 0, commandsChangeSet);
@@ -498,32 +556,9 @@ void CSimpleMainWindowGuiComp::OnRetranslate()
 
 bool CSimpleMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 {
-	bool isVisible = true;
-	switch (eventPtr->type()){
-	case QEvent::Hide:
-		isVisible = false;
-		break;
-
-	case QEvent::Show:
-		isVisible = true;
-		break;
-
-	default:
-		return BaseClass::eventFilter(sourcePtr, eventPtr);
-	}
-
-	QString objectName = sourcePtr->objectName();
-	if (!objectName.isEmpty()){
-		for (		MainComponentVisibilityMap::Iterator iter = m_mainComponentVisibilityMap.begin();
-					iter != m_mainComponentVisibilityMap.end();
-					++iter){
-			IMainWindowComponent* mainWindowComponentPtr = iter.key();
-			Q_ASSERT(mainWindowComponentPtr != NULL);
-
-			if (mainWindowComponentPtr->GetTitle() == objectName){
-				*iter = isVisible;
-			}
-
+	if (eventPtr->type() == QEvent::Close){
+		QString objectName = sourcePtr->objectName();
+		if (!objectName.isEmpty()){
 			for (int i = 0; i < m_showOtherWindows.GetChildsCount(); ++i){
 				CHierarchicalCommand* commandPtr = dynamic_cast<CHierarchicalCommand*>(m_showOtherWindows.GetChild(i));
 				Q_ASSERT(commandPtr != NULL);
@@ -531,14 +566,14 @@ bool CSimpleMainWindowGuiComp::eventFilter(QObject* sourcePtr, QEvent* eventPtr)
 				QString commandName = commandPtr->GetName();
 
 				if (commandName == objectName){
-					iqt::CSignalBlocker block(commandPtr);
+					iqt::CSignalBlocker blocker(commandPtr);
+					Q_UNUSED(blocker);
 
-					commandPtr->setChecked(isVisible);
+					commandPtr->setChecked(false);
 				}
 			}
 		}
 	}
-
 
 	return BaseClass::eventFilter(sourcePtr, eventPtr);
 }
@@ -602,30 +637,9 @@ void CSimpleMainWindowGuiComp::OnSettings()
 }
 
 
-void CSimpleMainWindowGuiComp::OnShowOtherCommandTriggered(bool enabled)
+void CSimpleMainWindowGuiComp::OnShowOtherCommandTriggered(bool /*enabled*/)
 {
-	QAction* actionPtr = dynamic_cast<QAction*>(sender());
-	Q_ASSERT(actionPtr != NULL);
-
-	QString actionName = actionPtr->text();
-
-	for (		MainComponentVisibilityMap::Iterator iter = m_mainComponentVisibilityMap.begin();
-				iter != m_mainComponentVisibilityMap.end();
-				++iter){
-		IMainWindowComponent* mainWindowComponentPtr = iter.key();
-		Q_ASSERT(mainWindowComponentPtr != NULL);
-
-		if (mainWindowComponentPtr->GetTitle() == actionName){
-			*iter = enabled;
-
-			iqtgui::IGuiObject* guiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-			if ((guiPtr != NULL) && guiPtr->IsGuiCreated()){
-				Q_ASSERT(guiPtr->GetWidget() != NULL);
-
-				guiPtr->GetWidget()->setVisible(enabled);
-			}
-		}
-	}
+	UpdateMainWindowComponentsVisibility();
 }
 
 

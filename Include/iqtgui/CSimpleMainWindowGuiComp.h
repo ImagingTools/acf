@@ -107,7 +107,7 @@ protected:
 
 	virtual void SetupMainWindowComponents(QMainWindow& mainWindow);
 
-	virtual void AddMainComponent(iqtgui::IMainWindowComponent* componentPtr);
+	virtual void AddMainComponent(int componentIndex, iqtgui::IMainWindowComponent* componentPtr);
 	virtual void RemoveMainComponent(iqtgui::IMainWindowComponent* componentPtr);
 
 	virtual void CreateMenuBar();
@@ -120,6 +120,11 @@ protected:
 	virtual void UpdateToolsCommands(iqtgui::CHierarchicalCommand& toolsCommand);
 	virtual void UpdateHelpCommands(iqtgui::CHierarchicalCommand& helpCommand);
 	virtual void AppendMenuActions(iqtgui::CHierarchicalCommand& menuCommands);
+	/**
+		Set main window visible or invisible, depending on menu commands.
+	*/
+	virtual void UpdateMainWindowComponentsVisibility();
+	virtual bool IsMainWindowActive(int index) const;
 
 	// reimplemented (TRestorableGuiWrap)
 	virtual void OnRestoreSettings(const QSettings& settings);
@@ -156,10 +161,6 @@ protected:
 	};
 
 	CommandsObserver m_commandsObserver;
-
-	typedef QMap<iqtgui::IMainWindowComponent*, bool > MainComponentVisibilityMap;
-
-	MainComponentVisibilityMap m_mainComponentVisibilityMap;
 
 private:
 	class VisibleWindowsManager: public iprm::IOptionsManager
@@ -230,6 +231,10 @@ private:
 	QByteArray m_beforeFullScreenState;
 
 	imod::TModelWrap<VisibleWindowsManager> m_visibleWindowsManager;
+
+	typedef QMap<int, int> IndexToIndexMap;
+
+	IndexToIndexMap m_commandIndexToMainCompMap;
 };
 
 

@@ -30,16 +30,6 @@ public:
 	~CChangeNotifier();
 
 	/**
-		It allows to append new set of changes to the notification.
-	*/
-	void AppendChangeId(int changeId);
-
-	/**
-		It allows to append new set of changes to the notification.
-	*/
-	void AppendChangeIds(const IChangeable::ChangeSet& changeSet);
-
-	/**
 		Check if this pointer is valid.
 		It will be invalid after \c Reset() and \c Abort() only.
 	*/

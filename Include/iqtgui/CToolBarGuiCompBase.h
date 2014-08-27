@@ -37,14 +37,12 @@ public:
 		I_ASSIGN(m_allowedDockAreasAttrPtr, "AllowedDockAreas", "Specify the allowed dock areas\nIt is combination of options:\n 1 - left\n 2 - right\n 4 - top\n 8 - bottom", false, 0);
 		I_ASSIGN(m_titleAttrPtr, "Title", "Tool bar title", false, "");
 		I_ASSIGN(m_iconSizeAttrPtr, "IconSize", "Size of the icon used in the tool bar", false, 32);
-		I_ASSIGN(m_associatedDocumentTypeId, "AssociatedDocumentTypeId", "ID of the associated document type ID", false, "Default");
 		I_ASSIGN(m_buttonStyleAttrPtr, "ButtonStyle", "Button style used by the tool bar\n0 - Only display the icon\n1 - Only display the text\n2 - The text appears beside the icon\n3 - The text appears under the icon\n4 - Follow the system style", true, Qt::ToolButtonIconOnly);
 	I_END_COMPONENT;
 
 	// reimplemented (iqtgui::IMainWindowComponent)
 	virtual bool AddToMainWindow(QMainWindow& mainWindow);
 	virtual bool RemoveFromMainWindow(QMainWindow& mainWindow);
-	virtual QByteArray GetAssociatedDocumentTypeId() const;
 	virtual QString GetTitle() const;
 	virtual int GetFlags() const;
 
@@ -59,7 +57,6 @@ private:
 	I_ATTR(int, m_allowedDockAreasAttrPtr);
 	I_ATTR(QString, m_titleAttrPtr);
 	I_ATTR(int, m_iconSizeAttrPtr);
-	I_ATTR(QByteArray, m_associatedDocumentTypeId);
 	I_ATTR(int, m_buttonStyleAttrPtr);
 };
 

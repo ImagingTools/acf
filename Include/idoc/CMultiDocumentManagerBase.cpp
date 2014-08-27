@@ -443,13 +443,13 @@ bool CMultiDocumentManagerBase::CloseDocument(int documentIndex, bool beQuiet, b
 		viewIter = infoPtr->views.erase(viewIter);
 	}
 
-	static ChangeSet changeSet(CF_DOCUMENT_REMOVED, CF_DOCUMENT_COUNT_CHANGED);
-	istd::CChangeNotifier notifier(this, changeSet);
-
-	// If last document was closed, force view activation update:
+	ChangeSet changeSet(CF_DOCUMENT_REMOVED, CF_DOCUMENT_COUNT_CHANGED);
 	if (m_documentInfos.GetCount() == 1){
-		notifier.AppendChangeId(CF_VIEW_ACTIVATION_CHANGED);
+		// If last document was closed, force view activation update:
+		changeSet += CF_VIEW_ACTIVATION_CHANGED;
 	}
+	istd::CChangeNotifier notifier(this, changeSet);
+	Q_UNUSED(notifier);
 
 	m_documentInfos.RemoveAt(documentIndex);
 

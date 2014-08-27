@@ -23,6 +23,7 @@
 #include "ibase/ICommandsProvider.h"
 #include "iqt/CSettingsWriteArchive.h"
 #include "iqt/CSettingsReadArchive.h"
+#include "iqt/CSignalBlocker.h"
 
 
 namespace iqtdoc
@@ -341,33 +342,6 @@ void CMainWindowGuiComp::UpdateUndoMenu()
 }
 
 
-void CMainWindowGuiComp::UpdateMainWindowComponentsVisibility()
-{
-	if (m_documentManagerCompPtr.IsValid() && (m_activeDocumentPtr != NULL)){
-		QByteArray activeDocumentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
-
-		for (int i = 0; i < m_mainWindowComponentsCompPtr.GetCount(); ++i){
-			iqtgui::IMainWindowComponent* mainWindowComponentPtr = m_mainWindowComponentsCompPtr[i];
-			if (mainWindowComponentPtr != NULL){
-				iqtgui::IGuiObject* componentGuiPtr = dynamic_cast<iqtgui::IGuiObject*>(mainWindowComponentPtr);
-				if ((componentGuiPtr != NULL) && componentGuiPtr->IsGuiCreated()){
-					QByteArray associatedTypeId = mainWindowComponentPtr->GetAssociatedDocumentTypeId();
-
-					bool isComponentVisible =
-								(associatedTypeId.isEmpty() || (associatedTypeId == activeDocumentTypeId)) &&
-								m_mainComponentVisibilityMap[mainWindowComponentPtr];
-
-					QWidget* componentWidgetPtr = componentGuiPtr->GetWidget();
-					Q_ASSERT(componentWidgetPtr != NULL);
-
-					componentWidgetPtr->setVisible(isComponentVisible);
-				}
-			}
-		}
-	}
-}
-
-
 void CMainWindowGuiComp::OnNewDocument(const QByteArray& documentFactoryId)
 {
 	if (m_documentManagerCompPtr.IsValid()){
@@ -543,6 +517,25 @@ void CMainWindowGuiComp::RemoveFromRecentFileList(const QString& filePath)
 			}
 		}
 	}
+}
+
+
+bool CMainWindowGuiComp::IsMainWindowActive(int index) const
+{
+	Q_ASSERT(index >= 0);
+
+	if (index >= m_mainWindowCompTypeIdsAttrPtr.GetCount()){
+		return true;
+	}
+
+	QByteArray activeDocumentTypeId;
+	if (m_activeDocumentPtr != NULL && m_documentManagerCompPtr.IsValid()){
+		activeDocumentTypeId = m_documentManagerCompPtr->GetDocumentTypeId(*m_activeDocumentPtr);
+	}
+
+	QList<QByteArray> associatedTypeIds = m_mainWindowCompTypeIdsAttrPtr[index].split(',');
+
+	return (associatedTypeIds.isEmpty() || (associatedTypeIds.contains(activeDocumentTypeId)));
 }
 
 
