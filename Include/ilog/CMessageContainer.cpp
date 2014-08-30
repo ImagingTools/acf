@@ -15,6 +15,8 @@ namespace ilog
 {
 
 
+// public methods
+
 CMessageContainer::CMessageContainer()
 :	m_slaveConsumerPtr(NULL),
 	m_maxMessagesCount(-1),
@@ -377,6 +379,17 @@ bool CMessageContainer::CopyFrom(const istd::IChangeable& object, CompatibilityM
 	return false;
 }
 
+
+istd::IChangeable* CMessageContainer::CloneMe(CompatibilityMode mode) const
+{
+	istd::TDelPtr<CMessageContainer> clonePtr(new CMessageContainer);
+
+	if (clonePtr->CopyFrom(*this, mode)){
+		return clonePtr.PopPtr();
+	}
+
+	return NULL;
+}
 
 // private static methods
 

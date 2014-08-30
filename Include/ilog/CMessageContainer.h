@@ -87,6 +87,7 @@ public:
 
 	// reimplemented (istd::IChangeable)
 	virtual bool CopyFrom(const istd::IChangeable& object, CompatibilityMode mode = CM_WITHOUT_REFS);
+	virtual istd::IChangeable* CloneMe(CompatibilityMode mode = CM_WITHOUT_REFS) const;
 
 private:
 	typedef istd::TComposedFactory<iser::IObject> MessageFactory;
@@ -103,7 +104,6 @@ private:
 	ilog::IMessageConsumer* m_slaveConsumerPtr;
 	int m_maxMessagesCount;
 	int m_worstCategory;
-
 };
 
 
@@ -130,8 +130,6 @@ bool CMessageContainer::RegisterMessageType(const QByteArray& messageTypeId)
 	ilog::CMessageContainer::RegisterMessageType<messageType>(messageTypeId);\
 }\
 } s_defaultMessageTypesRegistrator_##messageType;
-
-
 
 
 } // namespace ilog
