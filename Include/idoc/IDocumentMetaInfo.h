@@ -75,11 +75,11 @@ public:
 	typedef QSet<int> MetaInfoTypes;
 
 	/**
-		Get list of supported meta info types.
-		\param	allowReadOnly	if enabled read only types will be also listed out, if this flag is false only the writable types will be returned.
+		Get list of contained meta info types.
+		\param	allowReadOnly	if enabled, read only types will be also listed out, if this flag is false only the writable types will be returned.
 								\sa IsMetaInfoWritable.
 	*/
-	virtual MetaInfoTypes GetSupportedMetaInfoTypes(bool allowReadOnly = true) const = 0;
+	virtual MetaInfoTypes GetMetaInfoTypes(bool allowReadOnly = true) const = 0;
 
 	/**
 		Get document's meta info.

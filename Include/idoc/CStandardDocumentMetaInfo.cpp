@@ -19,18 +19,9 @@ namespace idoc
 
 // reimplemented (idoc::IDocumentMetaInfo)
 
-CStandardDocumentMetaInfo::MetaInfoTypes CStandardDocumentMetaInfo::GetSupportedMetaInfoTypes(bool /*allowReadOnly*/) const
+CStandardDocumentMetaInfo::MetaInfoTypes CStandardDocumentMetaInfo::GetMetaInfoTypes(bool /*allowReadOnly*/) const
 {
-	MetaInfoTypes retVal;
-
-	retVal.insert(MIT_TITLE);
-	retVal.insert(MIT_AUTHOR);
-	retVal.insert(MIT_CREATOR);
-	retVal.insert(MIT_DESCRIPTION);
-	retVal.insert(MIT_CREATION_TIME);
-	retVal.insert(MIT_MODIFICATION_TIME);
-
-	return retVal;
+	return m_infosMap.keys().toSet();
 }
 
 
@@ -48,12 +39,6 @@ QVariant CStandardDocumentMetaInfo::GetMetaInfo(int metaInfoType) const
 
 bool CStandardDocumentMetaInfo::SetMetaInfo(int metaInfoType, const QVariant& metaInfo)
 {
-	MetaInfoTypes registeredTypes = GetSupportedMetaInfoTypes();
-
-	if (!registeredTypes.contains(metaInfoType)){
-		qDebug("Meta info type is not supported by this implementation. You should re-implement GetSupportedMetaInfoTypes method for adding user specific meta info types");
-	}
-
 	if (m_infosMap[metaInfoType] != metaInfo){
 		static ChangeSet changeSet(CF_METAINFO);
 		istd::CChangeNotifier changePtr(this, changeSet);

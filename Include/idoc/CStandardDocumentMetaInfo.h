@@ -15,7 +15,7 @@ namespace idoc
 
 
 /**
-	Simple implementation of a text document model.
+	Implementation of the basic document's meta information.
 */
 class CStandardDocumentMetaInfo:
 			virtual public IDocumentMetaInfo,
@@ -23,7 +23,7 @@ class CStandardDocumentMetaInfo:
 {
 public:
 	// reimplemented (idoc::IDocumentMetaInfo)
-	virtual MetaInfoTypes GetSupportedMetaInfoTypes(bool allowReadOnly = true) const;
+	virtual MetaInfoTypes GetMetaInfoTypes(bool allowReadOnly = true) const;
 	virtual QVariant GetMetaInfo(int metaInfoType) const;
 	virtual bool SetMetaInfo(int metaInfoType, const QVariant& metaInfo);
 	virtual QString GetMetaInfoName(int metaInfoType) const;

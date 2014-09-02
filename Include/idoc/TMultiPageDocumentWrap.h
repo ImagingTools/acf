@@ -3,7 +3,7 @@
 
 
 // Qt includes
-#include <QtCore/QVector>
+#include <QtCore/QList>
 
 // ACF includes
 #include "istd/CChangeNotifier.h"
@@ -68,7 +68,7 @@ protected:
 	virtual bool SerializePage(iser::IArchive& archive, Page& pageItem);
 
 protected:
-	typedef QVector<Page> Pages;
+	typedef QList<Page> Pages;
 
 	Pages m_documentPages;
 };
@@ -123,7 +123,7 @@ bool TMultiPageDocumentWrap<Base>::RemovePage(int pageIndex)
 
 	istd::CChangeNotifier changePtr(this);
 
-	m_documentPages.remove(pageIndex);
+	m_documentPages.removeAt(pageIndex);
 
 	return true;
 }

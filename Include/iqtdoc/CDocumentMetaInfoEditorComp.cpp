@@ -34,7 +34,7 @@ void CDocumentMetaInfoEditorComp::OnGuiModelAttached()
 
 	idoc::IDocumentMetaInfo* objectPtr = GetObjectPtr();
 	if (objectPtr != NULL){
-		MetaInfoTypes types = objectPtr->GetSupportedMetaInfoTypes();
+		MetaInfoTypes types = objectPtr->GetMetaInfoTypes();
 
 		for (		MetaInfoTypes::ConstIterator index = types.constBegin();
 					index != types.constEnd();
