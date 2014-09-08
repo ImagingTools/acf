@@ -102,7 +102,7 @@ int CTranslationManagerComp::GetCurrentLanguageIndex() const
 const QTranslator* CTranslationManagerComp::GetLanguageTranslator(int languageIndex) const
 {
 	Q_ASSERT(languageIndex >= 0);
-	Q_ASSERT(languageIndex < languageIndex);
+	Q_ASSERT(languageIndex < m_translatorsList.GetCount());
 
 	return m_translatorsList.GetAt(languageIndex);
 }
